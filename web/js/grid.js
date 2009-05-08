@@ -130,6 +130,7 @@
 
   function ActualizarObjetosGrids(grid)
   {
+  	ActualizarInputs();
     var codigo = "objs_montos_"+grid+" = $$('.g_"+grid+"_m input')";
     eval(codigo);
     codigo = "objs_filas_"+grid+" = $$('."+grid+"f');";
@@ -165,7 +166,7 @@
 
 
   function ActualizarSaldosGrid(grid,totales)
-  {
+  {  
     // Objetos tipo Monto del Grid
     var codigo = "var objs_montos = objs_montos_"+grid+""
     try{eval(codigo);}catch(e){}
@@ -173,13 +174,13 @@
     // Filas del Grid
     var codigo = "var objs_filas = objs_filas_"+grid+""
     try{eval(codigo);}catch(e){}
-
+	
     if(objs_montos!=null && objs_filas!=null){
 
       if(objs_montos.size()>0 && objs_filas.size()>0){
 
         // Objetos Tipo Monto por Fila
-        var objXfila = objs_montos.size() / objs_filas.size();
+        var objXfila = (parseInt(objs_montos.size() / objs_filas.size())-1);
 
         // Arreglo de totales
         var acumtotales = new Array(objXfila);
@@ -187,31 +188,49 @@
         for(u=0;u<objXfila;u++) acumtotales[u] = 0;
 
         var columna = 0;
-
+		var idc = '';
+		var  sw = true;
         // Ciclo para recorrer todos los objetos tipo monto del Grid
         objs_montos.each(function(elemento) {
+		  auxid = elemento.id.split('_').size();		  
+		  if((auxid)>=3){
          //var cal=toFloat2(elemento.value);
          //$(elemento).value=format(cal.toFixed(2),'.',',','.');
-          // ACUMULAR LOS CAMPOS DEL GRID y PROBAR CODIGO
-          valor = FloatVEtoFloat(elemento.value);
-          acumtotales[columna] += valor;
-          columna++;
-          if(columna==(objXfila)) columna=0;
-        });
+          // ACUMULAR LOS CAMPOS DEL GRID y PROBAR CODIGO		  
+          //valor = FloatVEtoFloat($(elemento.id).value);
+          //acumtotales[columna] += valor;
+          //columna++;
+          //if(columna==(objXfila)) columna=0;		  
+		  if(sw){
+		  	  idc = elemento.id;		  	 
+			  actualizartotales(idc,totales[columna]);			  
+			  columna++;		  
+			  if(columna==(objXfila)){
+			  	columna=0; sw=false;
+			  }	
+		    }		  	
+		  }		  
+        });		
 
-        totales.each(function(elemento,index){
-          try{
+        /*totales.each(function(elemento,index){
+          try{		  	
             if(elemento!='' && $(elemento))
               $(elemento).value = FloattoFloatVE(acumtotales[index]);
           }catch(e){}
-        })
-      }
+        })*/
+      }	  
     }
+	
   }
 
-  function EliminarFilaGrid(grid,fila)
-  {
+  function EliminarFilaGrid(grid,fila,totales)
+  {	
+    var aux = totales.split(',');	
+	var campototales = "'"+aux[0]+"'";
+	for(g=1;g<aux.size();g++)	
+		campototales = campototales+","+ "'"+aux[g]+"'";
 
+	eval('var ArrTotales = new Array('+campototales+');');
     var idFila = $(grid+"x"+fila+"id");
     var eliminados = $(grid+"_idborrado");
     var filasAEliminar = $$('.'+grid+'f'+fila);
@@ -231,6 +250,8 @@
     }else{
       if(filasAEliminar) {
         filasAEliminar[0].remove();
+		ActualizarObjetosGrids(grid);
+        ActualizarSaldosGrid(grid,ArrTotales);
       }
     }
   }
