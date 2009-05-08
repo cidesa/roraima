@@ -8,6 +8,8 @@ nomina:
       Cambiar Contraseña:
         modulo: autenticacion.php
         modulo_dev: autenticacion_dev.php
+      Históricos de Conceptos:
+        absoluta: reportes/reportes/nomina
       default:
         modulo: nomina.php
         modulo_dev: nomina_dev.php
@@ -114,6 +116,7 @@ nomina:
       Asignación Modalidad Pago Cesta Ticket a Empl por Nómina:      ModalidadCestaTicketEmpleados
       Asignación de Categorias por Empleados:                        AsignarCategoriasConceptosxEmpleado
       Asignar  Partidas a un Concepto por Nomina:                    nomcodprenom
+      Asignacion de Partidas a Conceptos:                            asignarpartidasconceptos
     Movimientos de Nómina:
       Movimientos Por Concepto:                                      NomNomMovNomCon
       Movimientos Por Concepto y Cargos:                             NomNomMovNomConCar
@@ -134,7 +137,7 @@ nomina:
       Prestamos:                                                     NomPerPrestamos
       Movimientos de Prestamos:                                      NomPerHisPre
     Históricos:
-      Históricos de Conceptos:                                       nomhiscon
+      Históricos de Conceptos:                                       nprhiscon.php
     Reportes:
       Definiciones Específicas:
         Tipos Nóminas:                                           NPRNOMINA.php
