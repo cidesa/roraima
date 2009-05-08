@@ -1578,7 +1578,7 @@ public static function CargarDatosGrid(&$form,$obj,$arreglo = false)
         $j++;
         }
         $objetos[] = $clase;
-      }elseif ( (trim($form->getRequestParameter($id))=="") && ( (trim($form->getRequestParameter($cajchk1)!="")) || (trim($form->getRequestParameter($cajchk2)!="")) || (trim($form->getRequestParameter($cajchk3,'')!="") && trim($form->getRequestParameter($cajchk3,'')!="0,00")) || (trim($form->getRequestParameter($cajchk4,'')!="" && trim($form->getRequestParameter($cajchk4,'')!="0,00"))) || (trim($form->getRequestParameter($cajchk5,'')!="" && trim($form->getRequestParameter($cajchk5,'')!="0,00"))) ) ) { //nuevo
+      }elseif ( (trim($form->getRequestParameter($id))=="") && ( (trim($form->getRequestParameter($cajchk1)!="")) || (trim($form->getRequestParameter($cajchk2)!="") && trim($form->getRequestParameter($cajchk2)!="0,00")) || (trim($form->getRequestParameter($cajchk3,'')!="") && trim($form->getRequestParameter($cajchk3,'')!="0,00")) || (trim($form->getRequestParameter($cajchk4,'')!="" && trim($form->getRequestParameter($cajchk4,'')!="0,00"))) || (trim($form->getRequestParameter($cajchk5,'')!="" && trim($form->getRequestParameter($cajchk5,'')!="0,00"))) ) ) { //nuevo
       //print 'nuevo--';
         if(!$arreglo){
           eval('$clase = new '.$tabla.'();');
