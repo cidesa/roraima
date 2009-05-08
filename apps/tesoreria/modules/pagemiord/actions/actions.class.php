@@ -2237,11 +2237,17 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
           }
           else
           {
-            if ($resul->getTipcau()!="O/PE")
-            {
-             $this->msg="El Comprobante no será eliminado, ya que se perdió la asociación con Contabilidad";
-             return sfView::SUCCESS;
-            }
+          	  $cri= new Criteria();
+              $dato= OpdefempPeer::doSelectOne($cri);
+              if ($dato)
+              {
+              	if ($resul->getTipcau()!=$dato->getOrdret())
+                {
+             	 $this->msg="El Comprobante no será eliminado, ya que se perdió la asociación con Contabilidad";
+             	 return sfView::SUCCESS;
+                }
+              }
+
           }
          OrdendePago::eliminarOPP($numord);
          if (checkdate(intval($fecha_aux[1]),intval($fecha_aux[0]),intval($fecha_aux[2])))
