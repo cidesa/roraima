@@ -728,7 +728,7 @@ COMMENT ON TABLE "tsbloqban" IS '';
 --30/04/2008 Añadir campo tipmov a Opordche para poder buscar exactamente el movimiento asociado al cheque en la tabla TSMOVLIB
 ALTER TABLE "opordche"
   ADD COLUMN "tipmov" VARCHAR(4);
-
+  
 -----------------------------------------------------------------------------
 -- atciudadano
 -----------------------------------------------------------------------------
@@ -816,7 +816,13 @@ ALTER TABLE "atpresupuesto" ADD CONSTRAINT "atpresupuesto_FK_6" FOREIGN KEY ("at
 
 ALTER TABLE "atpresupuesto" ADD CONSTRAINT "atpresupuesto_FK_7" FOREIGN KEY ("atprovee6") REFERENCES "atprovee" ("id");
 
+--08/05/2009
+ALTER TABLE "npliquidacion_det" ADD COLUMN "dias" INTEGER;
 
 --07/05/2009
 ALTER TABLE "opdefemp"
   ADD COLUMN "ordret" VARCHAR(4);
+
+
+
+
