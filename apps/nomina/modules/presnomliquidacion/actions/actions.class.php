@@ -7,7 +7,7 @@
  * @subpackage presnomliquidacion
  * @author     Your name here
  * @version    SVN: $Id: actions.class.php 2288 2006-10-02 15:22:13Z fabien $
- */
+ */ 
 class presnomliquidacionActions extends autopresnomliquidacionActions
 {
 
@@ -19,19 +19,24 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
   }
   
   
-  public function configGridAsigDeduc($codemp="",$codnom="",$categoria="")
+  public function configGridAsigDeduc($codemp="",$codnom="",$categoria="",$fecegr="",$ultimosueldo="",$estaliquidado=false)
   {	
     $perasig=array();
-    $perdeduc=array();    
+    $perdeduc=array();
     $arr=array();
-    $sql="select 1 as orden,
+	$totarr=0;
+	
+	if(!$estaliquidado)
+	{	
+    	$sql="select 1 as orden,
 			SUM(A.DIAART108) as DIAS,
 			SUM(A.VALART108) AS MONTO,
 			(case when B.PERDES=B.PERDES then 'PRESTACIONES SOCIALES ' else 'PRESTACIONES SOCIALES '||B.PERDES||' - '||B.PERHAS end ) AS DESCRIPCION,
 			B.CODPAR AS PARTIDA 
 			From NPIMPPRESOC A,NPDEFPRELIQ B 
 			where 
-			(A.TIPO IS NULL) AND 
+			--(A.TIPO IS NULL) AND 
+			a.tipo='' and
 			A.codemp='$codemp' AND 
 			A.DIAART108>0 AND A.SALTOT>0 AND 
 			B.CODNOM='$codnom' AND 
@@ -48,9 +53,9 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 			'APORTES DEPOSITADOS EN FIDEICOMISO ' AS DESCRIPCION,
 			B.CODPAR AS PARTIDA 
 			From NPIMPPRESOC A,NPDEFPRELIQ B,
-			(Select MAX(FECFIN) as FECHAFIN FROM NPIMPPRESOC WHERE TIPO IS NULL AND codemp='$codemp') C 
+			(Select MAX(FECFIN) as FECHAFIN FROM NPIMPPRESOC WHERE tipo='' AND codemp='$codemp') C 
 			where  
-			A.TIPO IS NULL AND 
+			A.tipo='' AND 
 			A.FECFIN=C.FECHAFIN AND 
 			A.codemp='$codemp' AND 
 			B.CODNOM='$codnom' AND 
@@ -65,7 +70,7 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 			B.CODPAR AS PARTIDA 
 			From NPIMPPRESOC A,NPDEFPRELIQ B 
 			where 
-			A.TIPO IS NOT NULL AND 
+			A.TIPO='' AND 
 			A.codemp='$codemp' AND 
 			B.CODNOM='$codnom' AND 
 			B.CODCON='002' AND 
@@ -118,7 +123,7 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 			A.PERFIN<=B.PERHAS 
 			
 			UNION All 
-			SELECT 2 as orden,
+			SELECT 1 as orden,
 			SUM(0) as DIAS, 
 			SUM(A.MONANT)*-1 AS MONTO,
 			CASE WHEN SUM(A.MONANT)>0 THEN 'ANTICIPO DE PRESTACIONES SOCIALES EN FECHA ' ELSE 'PAGO RETROACTIVO EN FECHA ' END||TO_CHAR(A.FECANT,'DD/MM/YYYY') AS DESCRIPCION,
@@ -132,55 +137,109 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 			TO_CHAR(A.FECANT,'YYYY')<=B.PERHAS 
 			GROUP BY A.FECANT,B.CODPAR 
 			ORDER BY orden,DESCRIPCION DESC";
-			
-      if (H::BuscarDatos($sql,$arr))
-      {
-        $i=0;
-        $cont=0;
-        while ($cont<count($arr))
-        {
-		  if ((H::tofloat($arr[$cont]['monto']))>0)
-		  {		  	
-	           $perasig[$i]['conceptopres']=$arr[$cont]['descripcion'];		  	
-			   $perasig[$i]['monto']=H::FormatoMonto($arr[$cont]['monto']);
-			   $perasig[$i]['codigo']=$categoria."-".$arr[$cont]['partida'];
-			   $c = new Criteria();
-			   $c->add(CpdeftitPeer::CODPRE,$categoria."-".$arr[$cont]['partida']);
-			   $rs = CpdeftitPeer::doSelectone($c);
-			   if($rs)
-				   $perasig[$i]['descripcion']=$rs->getNompre();
-			   else
-			   	   $perasig[$i]['descripcion']='<!titulo presupuestario no existe!>';
-			   $perasig[$i]['conceptotip']='AUT';
-			   $perasig[$i]['dias']=$arr[$cont]['dias'];
-			   $perasig[$i]['id']=9;
-		  }else
-		  {
-		  	   $perdeduc[$i]['conceptopres']=$arr[$cont]['descripcion'];		  	
-			   $perdeduc[$i]['monto']=H::FormatoMonto($arr[$cont]['monto']*-1);
-			   $perdeduc[$i]['codigo']=$categoria."-".$arr[$cont]['partida'];
-			   $c = new Criteria();
-			   $c->add(CpdeftitPeer::CODPRE,$categoria."-".$arr[$cont]['partida']);
-			   if($rs)
-				   $perdeduc[$i]['descripcion']=$rs->getNompre();
-			   else
-			   	   $perdeduc[$i]['descripcion']='<!titulo presupuestario no existe!>';
-			   $perdeduc[$i]['descripcion']=$rs->getNompre();
-			   $perdeduc[$i]['conceptotip']='AUT';
-			   $perdeduc[$i]['dias']=$arr[$cont]['dias'];
-			   $perdeduc[$i]['id']=9;		  	
-		  }
-		  $cont++;
-		  $i++;
-		}
-	}
 
+
+	      if (H::BuscarDatos($sql,$arr))
+	      {
+	        $i=0;
+			$j=0;
+			$cont=0;
+			$totarr=count($arr); 
+			$aguinaldos = PrestacionesSociales::AguinaldosFracionados($codnom,$codemp,$fecegr,$ultimosueldo,$totarr,$estaliquidado);
+	
+	        while ($cont<count($arr))
+	        {
+			  if ((H::tofloat($arr[$cont]['monto']))>0)
+			  {		  	
+		           $perasig[$i]['concepto']=$arr[$cont]['descripcion'];		  	
+				   $perasig[$i]['monto']=H::FormatoMonto($arr[$cont]['monto']);
+				   $perasig[$i]['codpre']=$categoria."-".$arr[$cont]['partida'];
+				   $c = new Criteria();
+				   $c->add(CpdeftitPeer::CODPRE,$categoria."-".$arr[$cont]['partida']);
+				   $rs = CpdeftitPeer::doSelectone($c);
+				   if($rs)
+					   $perasig[$i]['descripcion']=$rs->getNompre();
+				   else
+				   	   $perasig[$i]['descripcion']='<!titulo presupuestario no existe!>';
+				   $perasig[$i]['codcon']='AUT';
+				   $perasig[$i]['dias']=$arr[$cont]['dias'];
+				   $perasig[$i]['id']=9;
+				   $i++;
+			  }else
+			  {
+			  	   $perdeduc[$j]['concepto']=$arr[$cont]['descripcion'];		  	
+				   $perdeduc[$j]['monto']=H::FormatoMonto($arr[$cont]['monto']*-1);
+				   $perdeduc[$j]['codpre']=$categoria."-".$arr[$cont]['partida'];
+				   $c = new Criteria();
+				   $c->add(CpdeftitPeer::CODPRE,$categoria."-".$arr[$cont]['partida']);
+				   $rs = CpdeftitPeer::doSelectone($c);
+				   if($rs)
+					   $perdeduc[$j]['descripcion']=$rs->getNompre();
+				   else
+				   	   $perdeduc[$j]['descripcion']='<!titulo presupuestario no existe!>';
+				   $perdeduc[$j]['codcon']='AUT';
+				   $perdeduc[$j]['dias']=$arr[$cont]['dias'];
+				   $perdeduc[$j]['id']=9;		  	
+				   $j++;
+			  }
+			  $cont++;		  
+			}
+			
+		  }
+	}else
+	{ #ESTA LIQUIDADO
+	  $sql="select * from npliquidacion_det where codemp='$codemp' order by numreg,concepto desc";
+	  if (H::BuscarDatos($sql,$arr))
+      {
+      	
+        $i=0;
+		$j=0;
+		$cont=0;
+		while ($cont<count($arr))
+	        {
+			  if ($arr[$cont]['asided']=='A')
+			  {		  	
+		           $perasig[$i]['concepto']=$arr[$cont]['concepto'];		  	
+				   $perasig[$i]['monto']=H::FormatoMonto($arr[$cont]['monto']);
+				   $perasig[$i]['codpre']=$arr[$cont]['codpre'];
+				   $c = new Criteria();
+				   $c->add(CpdeftitPeer::CODPRE,$arr[$cont]['codpre']);
+				   $rs = CpdeftitPeer::doSelectone($c);
+				   if($rs)
+					   $perasig[$i]['descripcion']=$rs->getNompre();
+				   else
+				   	   $perasig[$i]['descripcion']='<!titulo presupuestario no existe!>';
+				   $perasig[$i]['codcon']=$arr[$cont]['codcon'];;
+				   $perasig[$i]['dias']=$arr[$cont]['dias'];
+				   $perasig[$i]['id']=9;
+				   $i++;
+			  }else
+			  {
+			  	   $perdeduc[$j]['concepto']=$arr[$cont]['concepto'];		  	
+				   $perdeduc[$j]['monto']=H::FormatoMonto($arr[$cont]['monto']);
+				   $perdeduc[$j]['codpre']=$arr[$cont]['codpre'];
+				   $c = new Criteria();
+				   $c->add(CpdeftitPeer::CODPRE,$arr[$cont]['codpre']);
+				   $rs = CpdeftitPeer::doSelectone($c);
+				   if($rs)
+					   $perdeduc[$j]['descripcion']=$rs->getNompre();
+				   else
+				   	   $perdeduc[$j]['descripcion']='<!titulo presupuestario no existe!>';
+				   $perdeduc[$j]['codcon']=$arr[$cont]['codcon'];
+				   $perdeduc[$j]['dias']=$arr[$cont]['dias'];
+				   $perdeduc[$j]['id']=9;		  	
+				   $j++;
+			  }
+			  $cont++;		  
+			}
+	  }
+	}
 
 	//Grid Asignaciones	
     $opciones = new OpcionesGrid();
 	
     $opciones->setEliminar(true);
-    $opciones->setTabla('Npliquidacion_det');
+    $opciones->setTabla('NpliquidacionDet');
     $opciones->setAnchoGrid(900);
     $opciones->setAncho(900);
     $opciones->setFilas(1);
@@ -193,8 +252,9 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
     $col1->setEsGrabable(true);
     $col1->setAlineacionObjeto(Columna::CENTRO);
     $col1->setAlineacionContenido(Columna::CENTRO);
+	$col1->setCatalogo('npdefcpt','sf_admin_edit_form',array('codcon' => 5,'nomcon' => 1), 'Npdefcpt_nomdefespguarde');
     $col1->setHTML('type="text" size="60" readonly="true"');
-    $col1->setNombreCampo('conceptopres');
+    $col1->setNombreCampo('concepto');
 
     $col2 = new Columna('Monto');
     $col2->setTipo(Columna::MONTO);
@@ -202,7 +262,8 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 	$col2->setEsnumerico(true);
     $col2->setAlineacionObjeto(Columna::CENTRO);
     $col2->setAlineacionContenido(Columna::CENTRO);
-    $col2->setHTML('type="text" size="25" readonly="true"');
+	$col2->setHTML('type="text" size="25"');
+	$col2->setEsTotal(true,'total_asi');
     $col2->setNombreCampo('monto');
 
     $col3 = new Columna('Codigo Presupuestario');
@@ -210,23 +271,24 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
     $col3->setEsGrabable(true);
     $col3->setAlineacionObjeto(Columna::CENTRO);
     $col3->setAlineacionContenido(Columna::CENTRO);
-    $col3->setNombreCampo('codigo');
+    $col3->setNombreCampo('codpre');
+	$col3->setCatalogo('cpasiini','sf_admin_edit_form',array('codpre' => 3,'nompre' => 4), 'Cpasiini_Pagemiord');
     $col3->setHTML('type="text" size="40" readonly="true"');
 
     $col4 = new Columna('Descripcion');
     $col4->setTipo(Columna::TEXTO);
-    $col4->setEsGrabable(false);
+    $col4->setEsGrabable(true);
     $col4->setAlineacionObjeto(Columna::CENTRO);
     $col4->setAlineacionContenido(Columna::CENTRO);
     $col4->setNombreCampo('descripcion');
-    $col4->setHTML('type="text" size="60" readonly="true"');
+    $col4->setHTML('type="text" size="60" readonly="true" ');
 
     $col5 = new Columna('Concepto');
     $col5->setTipo(Columna::TEXTO);
     $col5->setEsGrabable(true);
     $col5->setAlineacionObjeto(Columna::CENTRO);
     $col5->setAlineacionContenido(Columna::CENTRO);
-    $col5->setNombreCampo('conceptotip');
+    $col5->setNombreCampo('codcon');
     $col5->setHTML('type="text" size="10" readonly="true"');
 
     $col6 = new Columna('Dias');
@@ -236,7 +298,7 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
     $col6->setAlineacionObjeto(Columna::CENTRO);
     $col6->setNombreCampo('dias');
     $col6->setEsNumerico(true);
-    $col6->setHTML('type="text" size="10" readonly="true"');
+    $col6->setHTML('type="text" size="10" ');
 
 
     $opciones->addColumna($col1);
@@ -265,8 +327,9 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
     $col1->setEsGrabable(true);
     $col1->setAlineacionObjeto(Columna::CENTRO);
     $col1->setAlineacionContenido(Columna::CENTRO);
+	$col1->setCatalogo('npdefcpt','sf_admin_edit_form',array('codcon' => 5,'nomcon' => 1), 'Npdefcpt_nomdefespguarde');
     $col1->setHTML('type="text" size="60" readonly="true"');
-    $col1->setNombreCampo('conceptopres');
+    $col1->setNombreCampo('concepto');
 
     $col2 = new Columna('Monto');
     $col2->setTipo(Columna::MONTO);
@@ -274,7 +337,8 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 	$col2->setEsnumerico(true);
     $col2->setAlineacionObjeto(Columna::CENTRO);
     $col2->setAlineacionContenido(Columna::CENTRO);
-    $col2->setHTML('type="text" size="25" readonly="true"');
+	$col2->setHTML('type="text" size="25"');
+    $col2->setEsTotal(true,'total_ded');
     $col2->setNombreCampo('monto');
 
     $col3 = new Columna('Codigo Presupuestario');
@@ -282,12 +346,13 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
     $col3->setEsGrabable(true);
     $col3->setAlineacionObjeto(Columna::CENTRO);
     $col3->setAlineacionContenido(Columna::CENTRO);
-    $col3->setNombreCampo('codigo');
+    $col3->setNombreCampo('codpre');
+	$col3->setCatalogo('cpasiini','sf_admin_edit_form',array('codpre' => 3,'nompre' => 4), 'Cpasiini_Pagemiord');
     $col3->setHTML('type="text" size="40" readonly="true"');
 
     $col4 = new Columna('Descripcion');
     $col4->setTipo(Columna::TEXTO);
-    $col4->setEsGrabable(false);
+    $col4->setEsGrabable(true);
     $col4->setAlineacionObjeto(Columna::CENTRO);
     $col4->setAlineacionContenido(Columna::CENTRO);
     $col4->setNombreCampo('descripcion');
@@ -298,7 +363,7 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
     $col5->setEsGrabable(true);
     $col5->setAlineacionObjeto(Columna::CENTRO);
     $col5->setAlineacionContenido(Columna::CENTRO);
-    $col5->setNombreCampo('conceptotip');
+    $col5->setNombreCampo('codcon');
     $col5->setHTML('type="text" size="10" readonly="true"');
 
     $col6 = new Columna('Dias');
@@ -308,7 +373,7 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
     $col6->setAlineacionObjeto(Columna::CENTRO);
     $col6->setNombreCampo('dias');
     $col6->setEsNumerico(true);
-    $col6->setHTML('type="text" size="10" readonly="true"');
+    $col6->setHTML('type="text" size="10" ');
 
 
     $opciones->addColumna($col1);
@@ -320,8 +385,6 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 	
     $this->Objdeduc = $opciones->getConfig($perdeduc);
     $this->npliquidacion_det->setObjdeduc($this->Objdeduc);
-
-
   }  
 
 public function configGrid($codemp="")
@@ -329,7 +392,7 @@ public function configGrid($codemp="")
     $per=array();	
     if ($codemp!="")
     {				
-      $arr=array();
+      $arr=array();	  
       $sql="select * from NPLIQVACACION WHERE CODEMP='$codemp' ORDER BY DESDE desc";
       if (H::BuscarDatos($sql,$arr))
       {
@@ -351,7 +414,6 @@ public function configGrid($codemp="")
 
            $monto=($per[$i]['diadis']*($arr[$cont]['salnor']/30))+($per[$i]['diasbono']*($arr[$cont]['salint']/30));
 
-
            $per[$i]['monto']=number_format($monto,2,',','.');
            $per[$i]['id']=9;
            $i++;
@@ -368,7 +430,7 @@ public function configGrid($codemp="")
     $opciones->setTabla('Npvacliquidacion');
     $opciones->setAnchoGrid(800);
     $opciones->setAncho(600);
-    $opciones->setFilas(0);
+    $opciones->setFilas(1);
     $opciones->setName('c');
     $opciones->setTitulo('Vacaciones por Disfrutar');
     $opciones->setHTMLTotalFilas(' ');
@@ -420,7 +482,8 @@ public function configGrid($codemp="")
     $col6->setAlineacionObjeto(Columna::IZQUIERDA);
     $col6->setNombreCampo('monto');
     $col6->setEsNumerico(true);
-    $col6->setHTML('type="text" size="10" readonly="true"');
+    $col6->setHTML('type="text" size="10" readonly="true" ');
+	$col6->setEsTotal(true,'total_vac');
 
 
     $opciones->addColumna($col1);
@@ -447,146 +510,195 @@ public function configGrid($codemp="")
       case '1':
         $codemp=$codigo;
 		$this->npliquidacion_det = $this->getNpliquidacionDetOrCreate();
-		/**VERIFICAMOS SI EXISTEN PERSONAS QUE SE PUEDAN LIQUIDAR*/
-		$sql= "Select * from NPLiquidacion a, npasiempcont c where a.CEDULA=c.codemp and a.CEDULA='$codemp'";			
+		$sql= "Select * from nphojint where codemp='$codemp'";			
+		if (H::BuscarDatos($sql,$rss))
+		{			
+			/**VERIFICAMOS SI EXISTEN PERSONAS QUE SE PUEDAN LIQUIDAR*/
+			$sql= "Select * from NPLiquidacion a, npasiempcont c where a.CEDULA=c.codemp and a.CEDULA='$codemp'";			
 
-		if (H::BuscarDatos($sql,$rs))
-		{
-			$fecha="";
-		  	$sql0= "select to_char(max(FecNom),'dd/mm/yyyy') as Fecha from NPHisCon where CodEmp='$codemp'";
-			if (H::BuscarDatos($sql0,$rs0))
-		    {
-		    	$fecha=$rs0[0]["fecha"];     	
-		    }	
-			$categoria="";
-			$codnom="";
-		  	$sql1 = "select * from NPHisCon where CodEmp='$codemp' and FecNom=To_Date('$fecha','dd/mm/yyyy')";
-			if (H::BuscarDatos($sql1,$rs1))
-		    {
-		    	$categoria=$rs1[0]["codcat"];
-			   	$codnom=$rs1[0]["codnom"];
-			}
-			/**VERIFICAMOS SI EXISTEN PERSONAS QUE LIQUIDACION CALCULADA*/
-			$sql2="Select * from NPLIQUIDACION_DET where CodEmp='$codigo'";
-			if (H::BuscarDatos($sql2,$rs2))
-		       	$estaliquidado=true;		    	
-			else	
-				$estaliquidado=false;
-			
-
-			/**MOSTRAMOS GRID DE VACACIONES DISFRUTADAS*/			
-			$this->configGrid($codemp);
-			/**ASIGNAMOS VALORES DE  FECHAS Y TIEMPO DE SERVICIO*/	
-			$fecing=date('d/m/Y',strtotime($rs[0]["fechaingreso"]));
-			$feccor=date('d/m/Y',strtotime($rs[0]["fechacorte"]));
-			$fecegr=date('d/m/Y',strtotime($rs[0]["fechaegreso"]));
-			$anoact=$rs[0]["anoactual"];
-			$mesact=$rs[0]["mesactual"];
-			$diaact=$rs[0]["diasactual"];
-			$anoant=$rs[0]["anoanterior"];
-			$mesant=$rs[0]["mesanterior"];
-			$diaant=$rs[0]["diasanterior"];
-			$anoefec=$rs[0]["anoefectivo"];
-			$mesefec=$rs[0]["mesefectivo"];
-			$diaefec=$rs[0]["diasefectivo"];
-			/**ASIGNAMOS VALORES DE SUELDOS*/			
-			#Ultimo sueldo del empleado
-			$antiguedad = H::DateDiff("yyyy", $fecing, date("Y-m-d"));
-			$sql= "Select coalesce(sum(MonAsi),0) as ultsue from NPSALINT where CodEmp='$codemp' and 
-					FECFINCON = (SELECT MAX(FECFINCON) FROM NPSALINT where CodEmp='$codemp' and 
-					FECFINCON<= to_date('$fecegr','yyyy-mm-dd'))";
 			if (H::BuscarDatos($sql,$rs))
-			   $ultimosueldo = $rs[0]["ultsue"];
-			else
-			   $ultimosueldo = 0.00;
-			   
-			#Salario integral del empleado   
-			$sql =  "Select SalTot from NPImpPreSoc where CodEmp='$codemp' and FECFIN = (SELECT MAX(FECFIN) FROM 
-			NPImpPreSoc where CodEmp='$codemp' And Tipo Is Null and FECFIN<= to_date('$fecegr','yyyy-mm-dd'))";
-			if (H::BuscarDatos($sql,$rs))
-				$salariointegral=$rs[0]["saltot"];
-			else
-				$salariointegral= 0.00;
-				
-			#Sueldo al 31/12/1996
-			$sql = "Select coalesce(sum(MonAsi),0)  as sue311296 from NPSALINT where CodEmp='$codemp' and  
-			FECFINCON= to_date('31/12/1996','dd/mm/yyyy') ";
-			if (H::BuscarDatos($sql,$rs))
-				$sue311296=$rs[0]["sue311296"];
-			else
-				$sue311296= 0.00;
-				
-			#Sueldo al 30/06/1997	
-			$sql =  "Select coalesce(sum(MonAsi),0)  as sue180697 from NPSALINT where CodEmp='$codemp' and 
-			FECFINCON= to_date('30/06/1997','dd/mm/yyyy') ";
-			if (H::BuscarDatos($sql,$rs))
-				$sue180697=$rs[0]["sue180697"];
-			else
-				$sue180697= 0.00;
-			$this->codemp=$codemp;
-			$this->codnom=$codnom;
-			$this->categoria=$categoria;	
-
-			/**CALCULO DE ASIGNACIONES Y DEDUCCIONES*/			
-			if(!$estaliquidado)
 			{
-				$this->configGridAsigDeduc($codemp,$codnom,$categoria);
-				$this->getUser()->setAttribute('objasig',$this->npliquidacion_det->getObjasig());				
-				$this->getUser()->setAttribute('objdeduc',$this->npliquidacion_det->getObjdeduc());
-				$js.="toAjaxUpdater('divgridasig',2,getUrlModulo()+'ajax','2');
-					  toAjaxUpdater('divgriddeduc',3,getUrlModulo()+'ajax','3');
-	    		     ";
+				$fecha="";
+			  	$sql0= "select to_char(max(FecNom),'dd/mm/yyyy') as Fecha from NPHisCon where CodEmp='$codemp'";
+				if (H::BuscarDatos($sql0,$rs0))
+			    {
+			    	$fecha=$rs0[0]["fecha"];     	
+			    }	
+				$categoria="";
+				$codnom="";			
+				$nomemp="";
+			  	$sql1 = "select * from NPHisCon where CodEmp='$codemp' and FecNom=To_Date('$fecha','dd/mm/yyyy')";
+				if (H::BuscarDatos($sql1,$rs1))
+			    {
+			    	$categoria=$rs1[0]["codcat"];
+				   	$codnom=$rs1[0]["codnom"];
+					$nomemp=$rs1[0]["nomemp"];;
+				}
+				/**VERIFICAMOS SI EXISTEN PERSONAS CON LIQUIDACION CALCULADA*/
+				$sql2="Select * from NPLIQUIDACION_DET where CodEmp='$codigo'";
+				if (H::BuscarDatos($sql2,$rs2))
+				{
+					$numord=$rs2[0]['numord'];
+					$estaliquidado=true;
+				}		       			    	
+				else
+				{   $numord='';
+					$estaliquidado=false;
+				}					
+				
+				/**ASIGNAMOS VALORES DE  FECHAS Y TIEMPO DE SERVICIO*/
+				$fechae=date('Y-m-d');
+					if(strtotime($rs[0]["fechaegreso"]))
+						$fechae = $rs[0]["fechaegreso"];
+				$fecing=date('d/m/Y',strtotime($rs[0]["fechaingreso"]));
+				$feccor=date('d/m/Y',strtotime($rs[0]["fechacorte"]));
+				$fecegr=date('d/m/Y',strtotime($rs[0]["fechaegreso"]));
+				$anoact=$rs[0]["anoactual"];
+				$mesact=$rs[0]["mesactual"];
+				$diaact=$rs[0]["diasactual"];
+				$anoant=$rs[0]["anoanterior"];
+				$mesant=$rs[0]["mesanterior"];
+				$diaant=$rs[0]["diasanterior"];
+				$anoefec=$rs[0]["anoefectivo"];
+				$mesefec=$rs[0]["mesefectivo"];
+				$diaefec=$rs[0]["diasefectivo"];
+				/**ASIGNAMOS VALORES DE SUELDOS*/			
+				#Ultimo sueldo del empleado
+				$antiguedad = H::DateDiff("yyyy", $fecing, date("Y-m-d"));
+				$sql= "Select coalesce(sum(MonAsi),0) as ultsue from NPSALINT where CodEmp='$codemp' and 
+						FECFINCON = (SELECT MAX(FECFINCON) FROM NPSALINT where CodEmp='$codemp' and 
+						FECFINCON<= to_date('$fecegr','dd/mm/yyyy'))";
+	
+				if (H::BuscarDatos($sql,$rs))
+				   $ultimosueldo = $rs[0]["ultsue"];
+				else
+				   $ultimosueldo = 0.00;
+				   
+				#Salario integral del empleado   
+				$sql =  "Select SalTot from NPImpPreSoc where CodEmp='$codemp' and FECFIN = (SELECT MAX(FECFIN) FROM 
+				NPImpPreSoc where CodEmp='$codemp' And Tipo Is Null and FECFIN<= to_date('$fecegr','dd/mm/yyyy'))";
+				if (H::BuscarDatos($sql,$rs))
+					$salariointegral=$rs[0]["saltot"];
+				else
+					$salariointegral= 0.00;
+					
+				#Sueldo al 31/12/1996
+				$sql = "Select coalesce(sum(MonAsi),0)  as sue311296 from NPSALINT where CodEmp='$codemp' and  
+				FECFINCON= to_date('31/12/1996','dd/mm/yyyy') ";
+				if (H::BuscarDatos($sql,$rs))
+					$sue311296=$rs[0]["sue311296"];
+				else
+					$sue311296= 0.00;
+					
+				#Sueldo al 30/06/1997	
+				$sql =  "Select coalesce(sum(MonAsi),0)  as sue180697 from NPSALINT where CodEmp='$codemp' and 
+				FECFINCON= to_date('30/06/1997','dd/mm/yyyy') ";
+				if (H::BuscarDatos($sql,$rs))
+					$sue180697=$rs[0]["sue180697"];
+				else
+					$sue180697= 0.00;
+				$this->codemp=$codemp;
+				$this->getUser()->setAttribute('codemppre',$this->codemp);
+				$this->codnom=$codnom;
+				$this->getUser()->setAttribute('categoriapre',$this->categoria);
+				$this->categoria=$categoria;	
+			
+				/**MOSTRAMOS GRID DE VACACIONES POR DISFRUTADAR*/			
+				$this->configGrid($codemp);
+				$this->getUser()->setAttribute('objvaca',$this->npliquidacion_det->getObjvaca());
+				$this->objvaca = $this->getUser()->getAttribute('objvaca');
+	
+				/**CALCULO DE ASIGNACIONES Y DEDUCCIONES*/			
+				if(!$estaliquidado)
+				{
+					# NO TIENE LIQUIDACIONES CALCULADAS				
+					$this->configGridAsigDeduc($codemp,$codnom,$categoria,$fechae,$ultimosueldo,$estaliquidado);
+					$this->getUser()->setAttribute('objasig',$this->npliquidacion_det->getObjasig());
+					$this->getUser()->setAttribute('objdeduc',$this->npliquidacion_det->getObjdeduc());
+					$js.="toAjaxUpdater('divgridasig',2,getUrlModulo()+'ajax','2');
+						  toAjaxUpdater('divgriddeduc',3,getUrlModulo()+'ajax','3');
+		    		     ";
+				}else
+				{
+					# TIENE LIQUIDACIONES CALCULADAS
+					if($numord<>'')
+					{
+						$js.="alert('Liquidacion Pagada con la Orden de Pago Nro: $numord');";
+						$js.="$('save').hide();";
+					}						
+					else
+					    $js.="alert('Liquidacion Realizada');";						
+					$this->configGridAsigDeduc($codemp,$codnom,$categoria,$fechae,$ultimosueldo,$estaliquidado);
+					$this->getUser()->setAttribute('objasig',$this->npliquidacion_det->getObjasig());
+					$this->getUser()->setAttribute('objdeduc',$this->npliquidacion_det->getObjdeduc());
+					$js.="toAjaxUpdater('divgridasig',2,getUrlModulo()+'ajax','2');
+						  toAjaxUpdater('divgriddeduc',3,getUrlModulo()+'ajax','3');";
+					
+				}			
+	        	$output = '[["npliquidacion_det_fecing","'.$fecing.'",""],["npliquidacion_det_feccor","'.$feccor.'",""],["npliquidacion_det_fecegr","'.$fecegr.'",""],'.
+					  '["npliquidacion_det_diaefe","'.$diaefec.'",""],["npliquidacion_det_mesefe","'.$mesefec.'",""],["npliquidacion_det_anoefe","'.$anoefec.'",""],'.
+					  '["npliquidacion_det_diarn","'.$diaact.'",""],["npliquidacion_det_mesrn","'.$mesact.'",""],["npliquidacion_det_anorn","'.$anoact.'",""],'.
+					  '["npliquidacion_det_diara","'.$diaant.'",""],["npliquidacion_det_mesra","'.$mesant.'",""],["npliquidacion_det_anora","'.$anoant.'",""],'.
+	  				  '["npliquidacion_det_sue311296","'.H::FormatoMonto($sue311296).'",""],["npliquidacion_det_sue180697","'.H::FormatoMonto($sue180697).'",""],["npliquidacion_det_ultimosueldo","'.H::FormatoMonto($ultimosueldo).'",""],'.
+				      '["npliquidacion_det_nomemp","'.$nomemp.'",""],["javascript","'.$js.'",""]]';			
 			}else
 			{
-				$this->configGridAsigDeduc();					
-			}			
+				$js.="alert('Esta Persona no tiene calculada prestaciones');";
+				$js.="$('npliquidacion_det_codemp').focus();";
+				$this->configGrid();
+				$this->objvaca = $this->npliquidacion_det->getObjvaca();
+				$output = '[["npliquidacion_det_codemp","",""],["npliquidaciondet_nomemp","",""],["javascript","'.$js.'",""]]';			
+			}
 		}else
 		{
-			$js="Esta Persona no tiene calculada prestaciones";
-			$fecha="";
-			$categoria="";
-			$codnom="";
-			$fecing="";
-			$feccor="";
-			$fecegr="";
-			$anoact="";
-			$mesact="";
-			$diaact="";
-			$anoant="";
-			$mesant="";
-			$diaant="";
-			$anoefec="";
-			$mesefec="";
-			$diaefec="";
-			$sue311296=0.00;
-			$sue180697=0.00;
-			$ultimosueldo=0.00;
-			$this->configGrid();		
-		}	
-        $this->cond=1;
-        $output = '[["npliquidacion_det_fecing","'.$fecing.'",""],["npliquidacion_det_feccor","'.$feccor.'",""],["npliquidacion_det_fecegr","'.$fecegr.'",""],'.
-				  '["npliquidacion_det_diaefe","'.$diaefec.'",""],["npliquidacion_det_mesefe","'.$mesefec.'",""],["npliquidacion_det_anoefe","'.$anoefec.'",""],'.
-				  '["npliquidacion_det_diarn","'.$diaact.'",""],["npliquidacion_det_mesrn","'.$mesact.'",""],["npliquidacion_det_anorn","'.$anoact.'",""],'.
-				  '["npliquidacion_det_diara","'.$diaant.'",""],["npliquidacion_det_mesra","'.$mesant.'",""],["npliquidacion_det_anora","'.$anoant.'",""],'.
-  				  '["npliquidacion_det_sue311296","'.$sue311296.'",""],["npliquidacion_det_sue180697","'.$sue180697.'",""],["npliquidacion_det_ultimosueldo","'.$ultimosueldo.'",""],'.
-			      '["javascript","'.$js.'",""]]';
+			$js.="alert('No existe la Persona');";
+			$js.="$('npliquidacion_det_codemp').focus();";
+			$this->configGrid();
+			$this->objvaca = $this->npliquidacion_det->getObjvaca();	
+			$output = '[["npliquidaciondet_codemp","",""],["npliquidaciondet_nomemp","",""],["javascript","'.$js.'",""]]';
+			
+		}
+		$this->cond=1;	        
         break;
 	  case '2':
 		$this->cond=2;
 		$this->objasig = $this->getUser()->getAttribute('objasig');		
 		$c = count($this->objasig["datos"]);
-		$js.="for(i=0;i<$c;i++){\$('ax_'+i+'_0').hide();if(\$('ax_'+i+'_4').value=='<!titulo presupuestario no existe!>'){\$('ax_'+i+'_4').readOnly=false}} ";
-		$output = '[["javascript","'.$js.'",""],["","",""],["","",""]]';
-	  
-	    break;
-		
+		$js.="for(i=0;i<$c;i++)
+			  {
+			  	if($('ax_'+i+'_5').value=='AUT')
+			    {
+			       \$('ax_'+i+'_0').hide();
+				   \$('popup_a_'+i+'_1').hide();
+				   if(\$('ax_'+i+'_4').value!='<!titulo presupuestario no existe!>')
+				     \$('popup_a_'+i+'_3').hide();
+				   for(j=0;j<=6;j++)
+				   {
+				   	  $('ax_'+i+'_'+j).readOnly=true;  
+				   }
+				}
+			  }";
+		$output = '[["javascript","'.$js.'",""],["","",""],["","",""]]';	  
+	    break;		
 	  case '3':
 		$this->cond=3;
 		$this->objdeduc = $this->getUser()->getAttribute('objdeduc');
-		$c = count($this->objasig["datos"]);
-		$js.="for(i=0;i<$c;i++){\$('bx_'+i+'_0').hide();if(\$('bx_'+i+'_4').value=='<!titulo presupuestario no existe!>'){\$('bx_'+i+'_4').readOnly=false;}} ";
-		$output = '[["javascript","'.$js.'",""],["","",""],["","",""]]';
-	  
+		$c = count($this->objdeduc["datos"]);
+		$js.="for(i=0;i<$c;i++)
+			  {
+			  	if($('bx_'+i+'_5').value=='AUT')
+			    {
+			       \$('bx_'+i+'_0').hide();
+				   \$('popup_b_'+i+'_1').hide();
+				   if(\$('bx_'+i+'_4').value!='<!titulo presupuestario no existe!>')
+				     \$('popup_b_'+i+'_3').hide();
+				   for(j=0;j<=6;j++)
+				   {
+				   	  $('bx_'+i+'_'+j).readOnly=true;  
+				   }
+				}
+			  }";
+		$output = '[["javascript","'.$js.'",""],["","",""],["","",""]]';	  
 	    break;	  		
       default:
         $output = '[["","",""],["","",""],["","",""]]';
@@ -615,21 +727,105 @@ public function configGrid($codemp="")
 
     if($this->getRequest()->getMethod() == sfRequest::POST){
 
-      // $this->configGrid();
-      // $grid = Herramientas::CargarDatosGrid($this,$this->obj);
+	  $this->npliquidacion_det = $this->getNpliquidacionDetOrCreate();
+      $this->updateNpliquidacionDetFromRequest();
+	          
+	  $c =new  Criteria();
+	  $c->Add(NpliquidacionDetPeer::CODEMP,$this->npliquidacion_det->getCodemp());		  
+	  $per = NpliquidacionDetPeer::doSelectone($c);
+	  if($per)
+	  if($per->getNumord()<>'')
+	  {
+	  	$this->coderr=460;
+	    return false;
+	  }
+			  
+	  $this->configGridAsigDeduc();	   
+	  $grida=Herramientas::CargarDatosGridv2($this,$this->Objasig,true);
+	  $gridd=Herramientas::CargarDatosGridv2($this,$this->Objdeduc,true);	  
 
-      // Aqui van los llamados a los métodos de las clases del
-      // negocio para validar los datos.
-      // Los resultados de cada llamado deben ser analizados por ejemplo:
+      #GRID ASIGNACIONES
+      $x=$grida[0];
+      $i=0;
+      if (count($x)>0)
+      {
+	      while ($i<count($x))
+	      {
+	       if ($x[$i]['concepto']=="")
+	       {
+	       	$this->coderr=450;
+	       	return false;
+	       }
+	       if ($x[$i]['monto']<0)
+	       {
+	       	$this->coderr=451;
+	       	return false;
+	       }
+	       if ($x[$i]['codpre']=="")
+	       {
+	       	$this->coderr=452;
+	       	return false;
+	       }
+		   if ($x[$i]['codcon']=="")
+	       {
+	       	$this->coderr=453;
+	       	return false;
+	       }
+		   if ($x[$i]['dias']=="")
+	       {
+	       	$this->coderr=454;
+	       	return false;
+	       }
+		   
+	       $i++;
+	      }
+      }
+      else
+      {
+        $this->coderr=411;
+        return false;
+      }
+	  #GRID DEDUCCIONES
+	  $x=$gridd[0];
+      $i=0;
+	  if (count($x)>0)
+      {
+	      while ($i<count($x))
+	      {
+	       if ($x[$i]['concepto']=="")
+	       {
+	       	$this->coderr=455;
+	       	return false;
+	       }
+	       if ($x[$i]['monto']<0)
+	       {
+	       	$this->coderr=456;
+	       	return false;
+	       }
+	       if ($x[$i]['codpre']=="")
+	       {
+	       	$this->coderr=457;
+	       	return false;
+	       }
+		   if ($x[$i]['codcon']=="")
+	       {
+	       	$this->coderr=458;
+	       	return false;
+	       }
+		   if ($x[$i]['dias']=="")
+	       {
+	       	$this->coderr=459;
+	       	return false;
+	       }
 
-      // $resp = Compras::validarAlmajuoc($this->caajuoc,$grid);
-
-       //$resp=Herramientas::ValidarCodigo($valor,$this->tstipmov,$campo);
-
-      // al final $resp es analizada en base al código que retorna
-      // Todas las funciones de validación y procesos del negocio
-      // deben retornar códigos >= -1. Estos código serám buscados en
-      // el archivo errors.yml en la función handleErrorEdit()
+	       $i++;
+	      }
+      }
+      else
+      {
+        $this->coderr=411;
+        return false;
+      }
 
       if($this->coderr!=-1){
         return false;
@@ -648,17 +844,32 @@ public function configGrid($codemp="")
    */
   public function updateError()
   {
-    //$this->configGrid();
-
-    //$grid = Herramientas::CargarDatosGrid($this,$this->obj);
-
-    //$this->configGrid($grid[0],$grid[1]);
+    /*$codnom = $this->getUser()->getAttribute('codemppre');
+	$categoria = $this->getUser()->getAttribute('categoriapre');
+	$aux = split("/",$this->npliquidacion_det->getFecegr());
+	$fecegr = $aux[1].''.$aux[0].''.$aux[2];
+  	$this->configGrid($this->npliquidacion_det->getCodemp());
+	$this->configGridAsigDeduc($this->npliquidacion_det->getCodemp(),$codnom,$categoria,$fecegr,$this->npliquidacion_det->getUltimosueldo(),false);
+	*/
+	$this->npliquidacion_det = $this->getNpliquidacionDetOrCreate();
+    $this->updateNpliquidacionDetFromRequest();
+	
+	$this->configGrid();
+	$this->configGridAsigDeduc();
+    $gridv=Herramientas::CargarDatosGridv2($this,$this->obj1,true);
+	$grida=Herramientas::CargarDatosGridv2($this,$this->Objasig,true);
+	$gridd=Herramientas::CargarDatosGridv2($this,$this->Objdeduc,true);
 
   }
 
-  public function saving($clasemodelo)
+
+  public function saving($npliquidacion_det)
   {
-    return parent::saving($clasemodelo);
+  	$grida=Herramientas::CargarDatosGridv2($this,$this->Objasig,true);
+	$gridd=Herramientas::CargarDatosGridv2($this,$this->Objdeduc,true);
+    $this->coderr = PrestacionesSociales::salvar_liquidacion($npliquidacion_det,$grida,$gridd);
+	
+    return $this->coderr;
   }
 
   public function deleting($clasemodelo)
@@ -670,5 +881,6 @@ public function configGrid($codemp="")
   {
   	$this->redirect('presnomliquidacion/edit');
   }
+
 
 }

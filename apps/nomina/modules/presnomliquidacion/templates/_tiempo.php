@@ -11,7 +11,7 @@
   <?php endif; }?>
 
   <?php $value = object_input_tag($npliquidacion_det, 'getDiaefe', array (
-  'disabled' => true,
+  'readonly' => true,
   'size' => 3,
   'maxlength' => 4,
   'control_name' => 'npliquidacion_det[diaefe]',
@@ -28,7 +28,7 @@
   <?php endif; }?>
 
   <?php $value = object_input_tag($npliquidacion_det, 'getMesefe', array (
-  'disabled' => true,
+  'readonly' => true,
   'size' => 3,
   'maxlength' => 4,
   'control_name' => 'npliquidacion_det[mesefe]',
@@ -45,7 +45,7 @@
   <?php endif; }?>
 
   <?php $value = object_input_tag($npliquidacion_det, 'getAnoefe', array (
-  'disabled' => true,
+  'readonly' => true,
   'size' => 3,
   'maxlength' => 4,
   'control_name' => 'npliquidacion_det[anoefe]',
@@ -69,7 +69,7 @@
   <?php endif; }?>
 
   <?php $value = object_input_tag($npliquidacion_det, 'getDiarn', array (
-  'disabled' => true,
+  'readonly' => true,
   'size' => 3,
   'maxlength' => 4,
   'control_name' => 'npliquidacion_det[diarn]',
@@ -86,7 +86,7 @@
   <?php endif; }?>
 
   <?php $value = object_input_tag($npliquidacion_det, 'getMesrn', array (
-  'disabled' => true,
+  'readonly' => true,
   'size' => 3,
   'maxlength' => 4,
   'control_name' => 'npliquidacion_det[mesrn]',
@@ -104,7 +104,7 @@
   <?php endif; }?>
 
   <?php $value = object_input_tag($npliquidacion_det, 'getAnorn', array (
-  'disabled' => true,
+  'readonly' => true,
   'size' => 3,
   'maxlength' => 4,
   'control_name' => 'npliquidacion_det[anorn]',
@@ -119,7 +119,7 @@
 
 <div class="divlado">
 <fieldset Style="width:290px">
-<legend>Tiempo Nuevo Regimen</legend>
+<legend>Tiempo Regimen Viejo</legend>
 <div class="divlado form-row">
   <?php if($labels['npliquidacion_det{diara}']!='.:') { ?>
   <?php echo label_for('npliquidacion_det[diara]', __($labels['npliquidacion_det{diara}' ]), 'class="required" Style="text-align:left; width:25px"') ?>
@@ -129,7 +129,7 @@
   <?php endif; }?>
 
   <?php $value = object_input_tag($npliquidacion_det, 'getDiara', array (
-  'disabled' => true,
+  'readonly' => true,
   'size' => 3,
   'maxlength' => 4,
   'control_name' => 'npliquidacion_det[diara]',
@@ -146,7 +146,7 @@
   <?php endif; }?>
 
   <?php $value = object_input_tag($npliquidacion_det, 'getMesra', array (
-  'disabled' => true,
+  'readonly' => true,
   'size' => 3,
   'maxlength' => 4,
   'control_name' => 'npliquidacion_det[mesra]',
@@ -164,7 +164,7 @@
   <?php endif; }?>
 
   <?php $value = object_input_tag($npliquidacion_det, 'getAnora', array (
-  'disabled' => true,
+  'readonly' => true,
   'size' => 3,
   'maxlength' => 4,
   'control_name' => 'npliquidacion_det[anora]',

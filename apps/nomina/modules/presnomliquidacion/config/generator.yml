@@ -5,7 +5,7 @@ generator:
     theme:            cidesaGenerator
 
     fields:
-      display: [sue311296, sue180697, ultimosueldo, fecing, feccor, fecegr, diaefe, mesefe, anoefe, diarn, mesrn, anorn, diara, mesra, anora]
+      display: [nomemp, sue311296, sue180697, ultimosueldo, fecing, feccor, fecegr, diaefe, mesefe, anoefe, diarn, mesrn, anorn, diara, mesra, anora]
       codemp:
         name: Código Empleado
         msj_error: El numero del expediente es necesario
@@ -69,6 +69,6 @@ generator:
         Datos Generales de la Liquidacion de Prestaciones: [ _salarios, _fechas, _tiempo, _vacaciones]
         Asignaciones/Deducciones para la Liquidacion de Prestaciones: [_asignaciones, _deducciones]
       actions:
-        _list:        ~
+        _create:        ~
         _save:        ~
         _delete:      ~

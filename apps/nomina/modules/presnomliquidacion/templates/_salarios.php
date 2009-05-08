@@ -10,7 +10,7 @@
   <?php endif; }?>
 
   <?php $value = object_input_tag($npliquidacion_det, 'getSue311296', array (
-  'disabled' => true,
+  'readonly' => true,
   'control_name' => 'npliquidacion_det[sue311296]',
 )); echo $value ? $value : '&nbsp;' ?>
     <?php if($labels['npliquidacion_det{sue311296}']!='.:') { ?>
@@ -27,7 +27,7 @@
   <?php endif; }?>
 
   <?php $value = object_input_tag($npliquidacion_det, 'getSue180697', array (
-  'disabled' => true,
+  'readonly' => true,
   'control_name' => 'npliquidacion_det[sue180697]',
 )); echo $value ? $value : '&nbsp;' ?>
     <?php if($labels['npliquidacion_det{sue180697}']!='.:') { ?>
@@ -44,7 +44,7 @@
   <?php endif; }?>
 
   <?php $value = object_input_tag($npliquidacion_det, 'getUltimosueldo', array (
-  'disabled' => true,
+  'readonly' => true,
   'control_name' => 'npliquidacion_det[ultimosueldo]',
 )); echo $value ? $value : '&nbsp;' ?>
     <?php if($labels['npliquidacion_det{ultimosueldo}']!='.:') { ?>
@@ -53,3 +53,7 @@
   <br><br>
 </div>
 </fieldset>
+<script language="JavaScript">
+if($('npliquidacion_det_codemp').value!='')
+	$('npliquidacion_det_codemp').readOnly=true;		
+</script>
