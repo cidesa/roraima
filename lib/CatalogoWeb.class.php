@@ -472,8 +472,18 @@ class CatalogoWeb extends BaseCatalogoWeb {
   }
 
   public function Tsdefban_Tesmovemiche() {
+
     $this->c = new Criteria();
-    //   $this->c->addAscendingOrderByColumn(TsdefbanPeer::NUMCUE);
+    $q= new  Criteria();
+    $result=OpdefempPeer::doSelectOne($q);
+    if ($result)
+    {
+      if ($result->getManbloqban()=='S')
+      {
+        $bus="numcue not in (select numcue from tsbloqban)";
+        $this->c->add(TsdefbanPeer::NUMCUE,$bus,Criteria::CUSTOM);
+      }
+    }
 
     $this->columnas = array (
       TsdefbanPeer :: NUMCUE => 'Número de Cuenta',
@@ -4805,8 +4815,7 @@ public function Tsmovlib_tesmovdeglib2()
            $this->c->add(CadetcotPeer::PRIORI,1);
            $this->c->addJoin(CacotizaPeer::REFCOT,CadetcotPeer::REFCOT);
            $this->c->addJoin(CaproveePeer::CODPRO,CacotizaPeer::CODPRO);
-           $this->c->setDistinct();
-
+        $this->c->setDistinct();
            $this->columnas = array (
         CaproveePeer::RIFPRO => 'Rif',
         CaproveePeer::NOMPRO => 'Descripción',
@@ -5115,6 +5124,15 @@ A.CODREDE"
     );
   }
 
+    public function Tsmotanu_Pagemiord() {
+    $this->c = new Criteria();
+
+      $this->columnas = array (
+      TsmotanuPeer :: CODMOTANU => 'Codigo',
+      TsmotanuPeer :: DESMOTANU => 'Descripcion'
+    );
+
+  }
 
   public function Cpcompro_PreAjuste($params= array())
   {
@@ -5189,6 +5207,65 @@ A.CODREDE"
     );
   }
 
+/////CATASTRO ////////
+
+
+  public function Catreginm_Catregper()
+  {
+    $this->c = new Criteria();
+    $this->c->addAscendingOrderByColumn(CatregperPeer::CEDRIF);
+
+    $this->columnas = array (
+      CatregperPeer :: CEDRIF => 'C.I.',
+      CatregperPeer :: PRINOM => 'Nombre',
+      CatregperPeer :: PRIAPE => 'Apellido',
+      CatregperPeer :: NOMPER => 'Razon Social',
+
+
+    );
+  }
+
+  public function Catreginm_Catcarcon($params='')
+  {
+    $this->c = new Criteria();
+    $this->c->add(CatcarconPeer::TIPO,$params[0]);
+    $this->c->addAscendingOrderByColumn(CatcarconPeer::NOMCARCON);
+
+    $this->columnas = array (
+      CatcarconPeer :: NOMCARCON => 'Descripción'
+    );
+  }
+
+
+  public function Catdefdivbarurb_Catdivgeo($params='')
+  {
+    $this->c = new Criteria();
+    //$this->c->add(CatcarconPeer::TIPO,$params[0]);
+  $this->sql = "length(coddivgeo) = '14'";
+    $this->c->add(CatdivgeoPeer::CODDIVGEO, $this->sql, Criteria :: CUSTOM);
+    $this->c->addAscendingOrderByColumn(CatdivgeoPeer::CODDIVGEO);
+
+    $this->columnas = array (
+      CatdivgeoPeer::CODDIVGEO => 'Codigo',
+      CatdivgeoPeer::DESDIVGEO => 'Descripcion'
+    );
+  }
+
+
+  public function Catdefcatman_Cattramo($params='')
+  {
+    $this->c = new Criteria();
+    $this->c->add(CattramoPeer::CATTIPVIA_ID,$params[0]);
+    $this->c->add(CattramoPeer::CATDIVGEO_ID,$params[1]);
+    $this->c->addJoin(CattramoPeer::CATDIVGEO_ID,CatdivgeoPeer::ID);
+    $this->c->addAscendingOrderByColumn(CattramoPeer::CATDIVGEO_ID);
+
+    $this->columnas = array (
+
+      CattramoPeer::NOMTRAMO => 'Descripcion'
+    );
+  }
+
   public function Atprovee_Aciprovee($params='')
   {
   	$this->c = new Criteria();
@@ -5201,6 +5278,21 @@ A.CODREDE"
   }
 
 
+
+
+//////////////////////
+
+
+  public function Asignarpartidasconceptos_Nppartidas() {
+
+    $this->c = new Criteria();
+    $this->c->addAscendingOrderByColumn(NppartidasPeer :: CODPAR);
+
+    $this->columnas = array (
+      NppartidasPeer :: CODPAR => 'Código',
+      NppartidasPeer :: NOMPAR => 'Descripción'
+    );
+  }
 
 }
 
