@@ -526,7 +526,7 @@ class Factura {
 	{
       if ($arrasientos[$i]["0"]==$codcta && $arrasientos[$i]["2"]==$debcre)
       {
-      	$arrasientos[$i]["3"]=(H::convnume($arrasientos[$i]["3"]) + $monasi);
+      	$arrasientos[$i]["3"]=$arrasientos[$i]["3"] + $monasi;
       	$busasi=true;
       	return $busasi;
       }
