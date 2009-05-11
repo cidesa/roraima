@@ -364,6 +364,9 @@
 529:
   cod: 529
   msj: La Fecha no se encuentra de un Perido Contable Abierto.
+530:
+  cod: 530
+  msj: La Fecha de Devolución debe ser menor a la Fecha de Registro.
 3:
   cod: 3
   msj: La contraseña es diferente.

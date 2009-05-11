@@ -32,12 +32,6 @@ class pagemiordActions extends autopagemiordActions
      // $grid1 = Herramientas::CargarDatosGrid($this,$this->obj2);
       if ($this->opordpag->getId()=="")
       {
-      	if (Tesoreria::validaPeriodoCerrado($this->getRequestParameter('opordpag[fecemi]'))==true)
-      	{
-          $this->coderror6=529;
-          return false;
-      	}
-
         if ($this->opordpag->getTipcau()!=$this->ordpagnom && $this->opordpag->getTipcau()!=$this->ordpagapo && $this->opordpag->getTipcau()!=$this->ordpagliq && $this->opordpag->getTipcau()!=$this->ordpagfid)
         {
           $this->configGridApliret();
@@ -49,6 +43,11 @@ class pagemiordActions extends autopagemiordActions
             return false;
           }
         }
+        if (Tesoreria::validaPeriodoCerrado($this->getRequestParameter('opordpag[fecemi]'))==true)
+      	{
+          $this->coderror6=529;
+          return false;
+      	}
 
         if (self::validarGeneraComprobante())
       {
@@ -1888,10 +1887,17 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
       {
         $msj="alert('La Fecha de Anulacion no puede ser menor a la fecha de la Orden de Pago'); $('opordpag_fecanu').value=''";
       }
-      else
+      else{$msj="";}
+
+      if ($msj=="")
       {
-        $msj="";
+        if (Tesoreria::validaPeriodoCerrado($this->getRequestParameter('codigo'))==true)
+        {
+          $msj="alert('La Fecha no se encuentra de un Perido Contable Abierto.'); $('opordpag_fecanu').value='';";
+        }
+        else { $msj=""; }
       }
+
     }
     else
     {
@@ -2178,10 +2184,17 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
     $desanu=$this->getRequestParameter('desanu');
     $compadic=$this->getRequestParameter('compadic');
     $this->msg='';
+    $this->msg2='';
     $fecha_aux=split("/",$fecanu);
     $dateFormat = new sfDateFormat('es_VE');
     $fec = $dateFormat->format($fecanu, 'i', $dateFormat->getInputPattern('d'));
 
+    if (Tesoreria::validaPeriodoCerrado($fecanu)==true)
+    {
+      $this->msg2="La Fecha no se encuentra de un Perido Contable Abierto.";
+      return sfView::SUCCESS;
+    }
+    else {
     $c= new Criteria();
     $c->add(OpordpagPeer::NUMORD,$numord);
     $resul= OpordpagPeer::doSelectOne($c);
@@ -2274,6 +2287,7 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
         $this->msg="La Orden ya fue Pagada en el Módulo de Bancos";
         return sfView::SUCCESS;
       }
+    }
     }
     return sfView::SUCCESS;
   }

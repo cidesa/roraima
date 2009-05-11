@@ -1,9 +1,9 @@
 methods:
   post:
    - "bndisinm{codmue}"
-   - "bndisinm{mondisinm}"
-   - "bndisinm{fecdevdis}"
    - "bndisinm{fecdisinm}"
+   - "bndisinm{fecdevdis}"
+   - "bndisinm{mondisinm}"
 
 names:
   bndisinm{codmue}:
@@ -11,17 +11,18 @@ names:
     required_msg: El Código no puede estar en Blanco.
     validators: CidesaExistValidator
 
-  bndisinm{mondisinm}:
-    required:  No
-    validators: MyNumberValidator
+  bndisinm{fecdisinm}:
+    required:  Yes
+    required_msg: La Fecha de Registro de Disposición de Inmuebles no puede estar en Blanco.
+    validators: FechaValidator
 
   bndisinm{fecdevdis}:
     required:  No
     validators: FechaValidator
 
-  bndisinm{fecdisinm}:
+  bndisinm{mondisinm}:
     required:  No
-    validators: FechaValidator
+    validators: MyNumberValidator
 
 MyNumberValidator:
     class: CidesaStringValidator

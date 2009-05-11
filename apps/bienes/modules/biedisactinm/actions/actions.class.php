@@ -10,7 +10,7 @@
  */
 class biedisactinmActions extends autobiedisactinmActions
 {
-  private static $coderror=-1;
+  private static $coderror1=-1;
 
   public function CargarTipos()
   {
@@ -233,6 +233,33 @@ public function setVars()
     $this->setVars();
     $this->labels = $this->getLabels();
 
+    if($this->getRequest()->getMethod() == sfRequest::POST)
+    {
+      if($this->coderror1!=-1)
+      {
+      	if($this->coderror1==529)
+      	{
+      	  $err = Herramientas::obtenerMensajeError($this->coderror1);
+          $this->getRequest()->setError('bndisinm{fecdisinm}',$err);
+      	}
+      	if($this->coderror1==521)
+      	{
+      	  $err = Herramientas::obtenerMensajeError($this->coderror1);
+          $this->getRequest()->setError('bndisinm{fecdisinm}',$err);
+      	}
+      	if($this->coderror1==530)
+      	{
+      	  $err = Herramientas::obtenerMensajeError($this->coderror1);
+          $this->getRequest()->setError('bndisinm{fecdevdis}',$err);
+      	}
+        if($this->coderror1==508)
+      	{
+      	  $err = Herramientas::obtenerMensajeError($this->coderror1);
+          $this->getRequest()->setError('',$err);
+      	}
+      }
+    }
+
     return sfView::SUCCESS;
   }
 
@@ -390,5 +417,54 @@ public function setVars()
     return Inmuebles::EliminarBiedisactinm($bndisinm);
   }
 
+  public function validateEdit()
+  {
+    if($this->getRequest()->getMethod() == sfRequest::POST)
+    {
+      $this->bndisinm = $this->getBndisinmOrCreate();
+      try{ $this->updateBndisinmFromRequest();}catch(Exception $ex){}
+
+      if ($this->getRequestParameter('bndisinm[fecdisinm]')!="")
+      {
+      if (Tesoreria::validaPeriodoCerrado($this->getRequestParameter('bndisinm[fecdisinm]'))==true)
+  	  {
+        $this->coderror1=529;
+        return false;
+  	  }
+
+      if (Tesoreria::validarFechaPerContable($this->getRequestParameter('bndisinm[fecdisinm]')))
+      {
+	    $this->coderror1=521;
+	    return false;
+	  }
+       if ($this->getRequestParameter('bndisinm[fecdevdis]')!="")
+       {
+		if (Tesoreria::validarFechaMayorMenor($this->getRequestParameter('bndisinm[fecdisinm]'),$this->getRequestParameter('bndisinm[fecdevdis]'),'>'))
+		{
+		  $this->coderror1=530;
+		  return false;
+		}
+       }
+      }
+
+	      if (self::validarGeneraComprobante())
+	      {
+		    $this->coderror1=508;
+		    return false;
+		  }
+
+      return true;
+    }else return true;
+  }
+
+  public function validarGeneraComprobante()
+  {
+    $form="sf_admin/biedisactinm/confincomgen";
+    $grabo=$this->getUser()->getAttribute('grabo',null,$form.'0');
+
+    if ($grabo=='')
+    { return true;}
+    else { return false;}
+  }
 
 }

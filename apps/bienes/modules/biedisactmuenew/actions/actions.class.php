@@ -11,6 +11,7 @@
 class biedisactmuenewActions extends autobiedisactmuenewActions
 {
    private static $coderror=-1;
+   public  $coderror1=-1;
 
   public function CargarTipos()
   {
@@ -405,12 +406,87 @@ public function handleErrorEdit()
 
     $this->labels = $this->getLabels();
 
+    if($this->getRequest()->getMethod() == sfRequest::POST)
+    {
+      if($this->coderror1!=-1)
+      {
+      	if($this->coderror1==529)
+      	{
+      	  $err = Herramientas::obtenerMensajeError($this->coderror1);
+          $this->getRequest()->setError('bndismue{fecdismue}',$err);
+      	}
+      	if($this->coderror1==521)
+      	{
+      	  $err = Herramientas::obtenerMensajeError($this->coderror1);
+          $this->getRequest()->setError('bndismue{fecdismue}',$err);
+      	}
+      	if($this->coderror1==530)
+      	{
+      	  $err = Herramientas::obtenerMensajeError($this->coderror1);
+          $this->getRequest()->setError('bndismue{fecdevdis}',$err);
+      	}
+        if($this->coderror1==508)
+      	{
+      	  $err = Herramientas::obtenerMensajeError($this->coderror1);
+          $this->getRequest()->setError('',$err);
+      	}
+      }
+    }
+
     return sfView::SUCCESS;
   }
 
   protected function deleteBndismue($bndismue)
   {
     return Muebles::EliminarBiedisactmuenew($bndismue);
+  }
+
+  public function validateEdit()
+  {
+    if($this->getRequest()->getMethod() == sfRequest::POST)
+    {
+      $this->bndismue = $this->getBndismueOrCreate();
+      try{ $this->updateBndismueFromRequest();}catch(Exception $ex){}
+      if ($this->getRequestParameter('bndismue[fecdismue]')!="")
+      {
+      if (Tesoreria::validaPeriodoCerrado($this->getRequestParameter('bndismue[fecdismue]'))==true)
+  	  {
+        $this->coderror1=529;
+        return false;
+  	  }
+
+      if (Tesoreria::validarFechaPerContable($this->getRequestParameter('bndismue[fecdismue]')))
+      {
+	    $this->coderror1=521;
+	    return false;
+	  }
+       if ($this->getRequestParameter('bndismue[fecdevdis]')!=""){
+		if (Tesoreria::validarFechaMayorMenor($this->getRequestParameter('bndismue[fecdismue]'),$this->getRequestParameter('bndismue[fecdevdis]'),'>'))
+		{
+		  $this->coderror1=530;
+		  return false;
+		}
+       }
+      }
+
+	      if (self::validarGeneraComprobante())
+	      {
+		    $this->coderror1=508;
+		    return false;
+		  }
+
+      return true;
+    }else return true;
+  }
+
+  public function validarGeneraComprobante()
+  {
+    $form="sf_admin/biedisactmuenew/confincomgen";
+    $grabo=$this->getUser()->getAttribute('grabo',null,$form.'0');
+
+    if ($grabo=='')
+    { return true;}
+    else { return false;}
   }
 
 }

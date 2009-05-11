@@ -13,6 +13,8 @@ class almordcomActions extends autoalmordcomActions
 
   public  $coderror1=-1;
   public  $coderror2=-1;
+  public  $coderror3=-1;
+  public  $coderror4=-1;
 
   public function validateEdit()
   {
@@ -23,6 +25,31 @@ class almordcomActions extends autoalmordcomActions
     {
       if ($this->getRequestParameter('id')=="")
       {
+        if ($this->getRequestParameter('caordcom[genctaord]')=='S')
+        {
+
+        $grid_detalle=Herramientas::CargarDatosGrid($this,$this->obj,true);//0
+        $grid_entregas=Herramientas::CargarDatosGrid($this,$this->obj_entregas,true);//0
+        $grid_detalle_detallado=$grid_detalle[0];
+
+        $grid_resumen=Herramientas::CargarDatosGrid($this,$this->obj_resumen,true);//0
+
+         $grabocom=$this->getUser()->getAttribute('grabo',null,$this->getUser()->getAttribute('formulario'));
+
+          if ($grabocom=='')
+	      {
+			$this->coderror4=508;
+			return false;
+		  }
+
+		  if (Tesoreria::validaPeriodoCerrado($this->getRequestParameter('caordcom[fecord]'))==true)
+	      {
+	        $this->coderror3=529;
+	        return false;
+	      }
+        }
+
+
         if (!Herramientas::validarPeriodoPresuesto($this->getRequestParameter('caordcom[fecord]')))
         {
           $this->coderror1=151;
@@ -34,13 +61,7 @@ class almordcomActions extends autoalmordcomActions
             $this->coderror1=150;
             return false;
         }
-        $grid_detalle=Herramientas::CargarDatosGrid($this,$this->obj,true);//0
-        $grid_entregas=Herramientas::CargarDatosGrid($this,$this->obj_entregas,true);//0
-        //$grid_recargos=Herramientas::CargarDatosGrid($this,$this->obj_recargos,true);//0
-        //$grid_recargos_detalle=$grid_recargos[0];
-        $grid_detalle_detallado=$grid_detalle[0];
-
-        $grid_resumen=Herramientas::CargarDatosGrid($this,$this->obj_resumen,true);//0
+       
         Orden_compra::armarArregloTotalesRecargo($this->caordcom, $grid_detalle_detallado,&$grid_recargos_detalle);
         $i=0;
         $hay_disponibilidad=false;
@@ -139,6 +160,16 @@ class almordcomActions extends autoalmordcomActions
                $this->getRequest()->setError('',$err);
 
         }
+        if($this->coderror3!=-1)
+		 {
+		   $err3 = Herramientas::obtenerMensajeError($this->coderror3);
+		   $this->getRequest()->setError('caordcom{fecord}',$err3);
+		 }
+		 if($this->coderror4!=-1)
+		 {
+		   $err3 = Herramientas::obtenerMensajeError($this->coderror4);
+		   $this->getRequest()->setError('',$err3);
+		 }
       }
       return sfView::SUCCESS;
     }
@@ -2162,12 +2193,20 @@ class almordcomActions extends autoalmordcomActions
     $fecord=$this->getRequestParameter('fecord');//1
     $descripcion=$this->getRequestParameter('valor');//2
     $fecanu=$this->getRequestParameter('fecha');//3
+    $fecanuvalidar=$this->getRequestParameter('fecha');//3
 
         $dateFormat = new sfDateFormat('es_VE');
         $fecord = $dateFormat->format($fecord, 'i', $dateFormat->getInputPattern('d'));
         $fecanu = $dateFormat->format($fecanu, 'i', $dateFormat->getInputPattern('d'));
         $this->msgerr="";
         $this->btn="";
+
+    if (Tesoreria::validaPeriodoCerrado($fecanuvalidar)==true)
+    {
+      $this->msgerr=Herramientas::obtenerMensajeError('529');
+      $this->btn="S";
+    }
+    else {
 
         if (strtotime($fecanu) < strtotime($fecord))
         {
@@ -2192,6 +2231,7 @@ class almordcomActions extends autoalmordcomActions
         else
           $this->msgerr=Herramientas::obtenerMensajeError('169');
         }//else Fecha Correcta
+    }
   }
 
   public function executeCombosnc()

@@ -12,7 +12,7 @@ generator:
       codmot: { name: Motivo}
       desmot: { name: Descripción}
       fecdismue: { name: Fecha}
-      fecdevdis: { name: Fecha DevoluASción}
+      fecdevdis: { name: Fecha Devolución}
       mondismue: { name: Monto}
       vidutil: { name: Vida Útil}
       detdismue: { name: Detalle}

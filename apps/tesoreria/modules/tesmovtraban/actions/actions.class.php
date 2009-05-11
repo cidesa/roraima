@@ -363,6 +363,13 @@ $this->Bitacora('Guardo');
   	$numcom=$this->getRequestParameter('numcom');
     if($numcom=='********') $numcom='########';
     $this->mensaje="";
+    $this->mensaje2="";
+    if (Tesoreria::validaPeriodoCerrado($fecanu)==true)
+   {
+     $coderror=529;
+     $this->mensaje2 = Herramientas::obtenerMensajeError($coderror);
+   }
+   else  {
     //verificar si el movimiento segun libro asociado a la transferencia no esta conciliado
      $c= new Criteria();
    	 $c->add(TsmovlibPeer::NUMCUE,$ctaori);
@@ -408,6 +415,7 @@ $this->Bitacora('Guardo');
 	      Tesoreria::reversarComprobante($comprobante,$fecanu);
   	     }
     }// if ( $this->mensaje=="")
+   }
   }
 
   public function executeDelete()
