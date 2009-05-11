@@ -22,6 +22,7 @@ formulacion:
       Definición de Empresa:                                  ForDefEmp
       Niveles Presupuestarios:                                PreNivPreFor.php
       Definiciones Generales:                                 ForDefGen
+      Definición de Cargos Formulados:                        Forcargos
       Ubicación Geografica:
         Estados:                                              ForDefEst
         Municipios:                                           ForDefMun
