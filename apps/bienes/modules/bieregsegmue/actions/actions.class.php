@@ -241,6 +241,11 @@ protected function updateBnsegmueFromRequest()
 
     try {
 
+      $c= new Criteria();
+      $c->add(BncobsegmuePeer::CODMUE,$this->bnsegmue->getCodmue());
+      $c->add(BncobsegmuePeer::CODACT,$this->bnsegmue->getCodact());
+      $c->add(BncobsegmuePeer::NROSEGMUE,$this->bnsegmue->getNrosegmue());
+      BncobsegmuePeer::doDelete($c);
       parent::deleteBnsegmue($Bnsegmue);
 
       if(is_array($coderr)){
