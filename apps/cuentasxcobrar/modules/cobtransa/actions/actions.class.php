@@ -312,6 +312,11 @@ class cobtransaActions extends autocobtransaActions
 		      else
 		      {
 		        $msj="";
+		        if (Tesoreria::validaPeriodoCerrado($this->getRequestParameter('codigo'))==true)
+		        {
+		          $msj="alert('La Fecha no se encuentra de un Perido Contable Abierto.'); $('cobtransa_fecanu').value=''; $('cobtransa_fecanu').focus(); ";
+		        }
+		        else { $msj=""; }
 		      }
 		    }
 		    else
@@ -346,6 +351,15 @@ class cobtransaActions extends autocobtransaActions
       $this->configGrid();
       $gridfor=Herramientas::CargarDatosGridv2($this,$this->objformapagos);
       $gridpag = Herramientas::CargarDatosGridv2($this,$this->objdocumentos);
+
+      if ($this->getRequestParameter('cobtransa[fectra]')!="")
+      {
+	      if (Tesoreria::validaPeriodoCerrado($this->getRequestParameter('cobtransa[fectra]'))==true)
+	  	  {
+	        $this->coderr=529;
+	        return false;
+	  	  }
+      }
 
       if ($this->cobtransa->getTottra()<=0)
       {
@@ -555,6 +569,13 @@ class cobtransaActions extends autocobtransaActions
     $fecanu=$this->getRequestParameter('fecanu');
     $desanu=$this->getRequestParameter('desanu');
     $this->msg='';
+    $this->mensaje2="";
+    if (Tesoreria::validaPeriodoCerrado($fecanu)==true)
+   {
+     $coderror=529;
+     $this->mensaje2 = Herramientas::obtenerMensajeError($coderror);
+     return sfView::SUCCESS;
+   }else {
     $fecha_aux=split("/",$fecanu);
     $dateFormat = new sfDateFormat('es_VE');
     $fec = $dateFormat->format($fecanu, 'i', $dateFormat->getInputPattern('d'));
@@ -591,6 +612,7 @@ class cobtransaActions extends autocobtransaActions
         return sfView::SUCCESS;
       }
     }
+   }
     return sfView::SUCCESS;
   }
 

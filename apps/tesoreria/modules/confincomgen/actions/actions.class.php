@@ -13,6 +13,7 @@ class confincomgenActions extends autoconfincomgenActions
  public  $error=-1;
  public  $coderror1=-1;
  public  $coderror2=-1;
+ public  $coderror3=-1;
 
   public function executeEdit()
   {
@@ -521,6 +522,11 @@ $this->Bitacora('Guardo');
        $err2 = Herramientas::obtenerMensajeError($this->coderror2);
        $this->getRequest()->setError('',$err2);
       }
+      if($this->coderror3!=-1)
+      {
+       $err2 = Herramientas::obtenerMensajeError($this->coderror3);
+       $this->getRequest()->setError('',$err2);
+      }
     }
     return sfView::SUCCESS;
   }
@@ -531,6 +537,12 @@ $this->Bitacora('Guardo');
     {
       $this->contabc = $this->getContabcOrCreate();
       $this->updateContabcFromRequest();
+
+      if (Tesoreria::validaPeriodoCerrado($this->getRequestParameter('contabc[feccom]'))==true)
+      {
+        $this->coderror3=529;
+        return false;
+      }
 
       if ($this->getRequestParameter('debito')!=$this->getRequestParameter('credito'))
       {

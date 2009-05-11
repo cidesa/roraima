@@ -167,7 +167,12 @@ echo $value ? $value : '&nbsp;'
 	'size' => 10,
 	'maxlength' => 10,
 	'onkeyup' => "javascript: mascara(this,'/',patron,true)",
-
+	'onBlur'=> remote_function(array(
+        'url'      => 'fafactur/ajax',
+        'complete' => 'AjaxJSON(request, json)',
+        'condition' => "$('fafactur_fecfac').value != '' && $('id').value == ''",
+        'with' => "'ajax=17&codigo='+this.value"
+        ))
 ),date('Y-m-d'));
 echo $value ? $value : '&nbsp;'
 ?>

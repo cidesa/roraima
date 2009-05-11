@@ -1,22 +1,23 @@
 methods:
   post:
    - "bndismue{codmue}"
-   - "bndismue{mondismue}"
    - "bndismue{fecdismue}"
+   - "bndismue{mondismue}"
+
 names:
   bndismue{codmue}:
     required:  Yes
     required_msg: El Código no puede estar en Blanco.
     validators: CidesaExistValidator
 
+  bndismue{fecdismue}:
+    required:  Yes
+    required_msg: La Fecha de Registro de Disposición de Muebles no puede estar en Blanco.
+    validators: FechaValidator
+
   bndismue{mondismue}:
     required:  No
     validators: MyNumberValidator
-
-  bndismue{fecdismue}:
-    required:  No
-    validators: FechaValidator
-
 
 MyNumberValidator:
     class: CidesaStringValidator

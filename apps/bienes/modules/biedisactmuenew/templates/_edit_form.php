@@ -125,7 +125,14 @@
 
 </div>
 <br>
- <strong>Fecha</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<table>
+<tr>
+<th>
+<?php echo label_for('bndismue[fecdismue]', __($labels['bndismue{fecdismue}']), 'class=required') ?>
+  <div class="content<?php if ($sf_request->hasError('bndismue{fecdismue}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('bndismue{fecdismue}')): ?>
+    <?php echo form_error('bndismue{fecdismue}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
 
   <?php $value = object_input_date_tag($bndismue, 'getFecdismue', array (
   'rich' => true,
@@ -135,9 +142,16 @@
   'maxlength' => 10,
   'onkeyup' => "javascript: mascara(this,'/',patron,true)",
 )); echo $value ? $value : '&nbsp;' ?>
-&nbsp;&nbsp;&nbsp;
+</th>
+<th>
+</th>
+<th>
+<?php echo label_for('bndismue[fecdevdis]', __($labels['bndismue{fecdevdis}']), 'class=required') ?>
+  <div class="content<?php if ($sf_request->hasError('bndismue{fecdevdis}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('bndismue{fecdevdis}')): ?>
+    <?php echo form_error('bndismue{fecdevdis}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
 
-<strong>Fecha Devoluci&oacute;n</strong>&nbsp;&nbsp;&nbsp;&nbsp;
 <?php $value = object_input_date_tag($bndismue, 'getFecdevdis', array (
   'rich' => true,
   'calendar_button_img' => '/sf/sf_admin/images/date.png',
@@ -146,14 +160,23 @@
   'maxlength' => 10,
   'onkeyup' => "javascript: mascara(this,'/',patron,true)",
 )); echo $value ? $value : '&nbsp;' ?>
-&nbsp;&nbsp;&nbsp;
-<strong>Monto</strong>&nbsp;
+</th>
+<th>
+</th>
+<th>
+<?php echo label_for('bndismue[mondismue]', __($labels['bndismue{mondismue}']), 'class=required') ?>
+  <div class="content<?php if ($sf_request->hasError('bndismue{mondismue}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('bndismue{mondismue}')): ?>
+    <?php echo form_error('bndismue{mondismue}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
 <?php $value = object_input_tag($bndismue, array('getMondismue',true), array (
   'size' => 10,
   'control_name' => 'bndismue[mondismue]',
   'onBlur' => "javascript:event.keyCode=13;return entermontootro(event,this.id)",
 )); echo $value ? $value : '&nbsp;' ?>
-&nbsp;&nbsp;&nbsp;
+</th>
+</tr>
+</table>
 <br>
 <br>
  <div align="center"> <?php echo label_for('bndismue[detdismue]', __($labels['bndismue{detdismue}']), 'class="required" ') ?></div>

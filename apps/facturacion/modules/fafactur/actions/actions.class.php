@@ -540,6 +540,11 @@ class fafacturActions extends autofafacturActions {
 						$msj = "alert_('La Fecha de Anulaci&oacute;n no puede ser menor a la fecha de la Factura'); $('fafactur_fecanu').value=''";
 					} else {
 						$msj = "";
+				        if (Tesoreria::validaPeriodoCerrado($this->getRequestParameter('codigo'))==true)
+				        {
+				          $msj="alert('La Fecha no se encuentra de un Perido Contable Abierto.'); $('fafactur_fecanu').value=''; $('fafactur_fecanu').focus(); ";
+				        }
+				        else { $msj=""; }
 					}
 				} else {
 					$msj = "";
@@ -738,6 +743,15 @@ class fafacturActions extends autofafacturActions {
                 $output = '[["","",""],["","",""],["","",""]]';
 				$this->getResponse()->setHttpHeader("X-JSON", '(' . $output . ')');
 			    break;
+            case '17':
+                if (Tesoreria::validaPeriodoCerrado($this->getRequestParameter('codigo'))==true)
+		        {
+		          $msj="alert('La Fecha no se encuentra de un Perido Contable Abierto.'); $('fafactur_fecfac').value=''; $('fafactur_fecfac').focus();";
+		        }else { $msj=""; }
+		        $output = '[["javascript","'.$msj.'",""],["","",""],["","",""]]';
+				$this->getResponse()->setHttpHeader("X-JSON", '(' . $output . ')');
+				return sfView :: HEADER_ONLY;
+             break;
 			default :
 				$output = '[["","",""],["","",""],["","",""]]';
 				$this->getResponse()->setHttpHeader("X-JSON", '(' . $output . ')');
@@ -914,6 +928,13 @@ class fafacturActions extends autofafacturActions {
 		$dateFormat = new sfDateFormat('es_VE');
 		$fec = $dateFormat->format($fecanu, 'i', $dateFormat->getInputPattern('d'));
 		$this->msg = "";
+		$this->mensaje2="";
+	    if (Tesoreria::validaPeriodoCerrado($fecanu)==true)
+	   {
+	     $coderror=529;
+	     $this->mensaje2 = Herramientas::obtenerMensajeError($coderror);
+	     return sfView::SUCCESS;
+	   }else {
 		$c = new Criteria();
 		$c->add(FafacturPeer :: REFFAC, $reffac);
 		$resul = FafacturPeer :: doSelectOne($c);
@@ -953,6 +974,7 @@ class fafacturActions extends autofafacturActions {
 			Factura :: anularCxC($resul->getReffac(), $fec, $motanu);
 			Factura :: devolverArticulosExist($resul->getReffac());
 		}
+	   }
 		return sfView :: SUCCESS;
 	}
 

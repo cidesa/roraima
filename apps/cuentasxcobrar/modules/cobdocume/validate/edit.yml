@@ -26,7 +26,7 @@ names:
 
   cobdocume{fecven}:
     required:  Yes
-    required_msg: La fecha de Emisión no puede estar en Blanco
+    required_msg: La fecha de Vencimiento no puede estar en Blanco
     validators: FechaValidator
 
   cobdocume{desdoc}:
