@@ -5294,6 +5294,18 @@ A.CODREDE"
     );
   }
 
+  public function Npguarde_nphojint() {
+
+    $this->c = new Criteria();
+    $this->c->addAscendingOrderByColumn(NpguardePeer :: CODCON);
+
+    $this->columnas = array (
+      NpguardePeer :: CODCON => 'Código',
+      NpguardePeer :: NOMGUA => 'Descripción'
+    );
+  }
+
+
 }
 
 ?>

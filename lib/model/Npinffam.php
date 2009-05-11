@@ -21,4 +21,10 @@ class Npinffam extends BaseNpinffam
 				$this->edafamact=$result[0]['edad'];
       }
    }
+
+
+   public function getNomgua()
+    {
+      return Herramientas::getX('codcon','Npguarde','nomgua',self::getCodgua());
+    }
 }

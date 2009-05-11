@@ -162,12 +162,11 @@ class nomhojintActions extends autonomhojintActions
   {
     $c = new Criteria();
     $lista_guarde = NpguardePeer::doSelect($c);
-
     $guarderia = array();
 
     foreach($lista_guarde as $obj_guarde)
     {
-      $guarderia += array($obj_guarde->getCodcon() => $obj_guarde->getNomgua());
+      $guarderia += array($obj_guarde->getId() => $obj_guarde->getNomgua());
     }
     return $guarderia;
   }
@@ -1127,11 +1126,19 @@ $this->Bitacora('Guardo');
     $col9->setHTML('type="text" size="25"');
 
     $col10 = new Columna('Guarderia');
-    $col10->setTipo(Columna::COMBO);
+    $col10->setTipo(Columna::TEXTO);
     $col10->setEsGrabable(true);
+    $col10->setAlineacionObjeto(Columna::CENTRO);
+    $col10->setAlineacionContenido(Columna::CENTRO);
     $col10->setNombreCampo('codgua');
-    $col10->setCombo(self::cargarGuarderia());
-    $col10->setHTML(' ');
+    $col10->setCatalogo('Npguarde','sf_admin_edit_form',array('codcon' => 10, 'nomgua' => 11),'Npguarde_nphojint');
+    $col10->setHTML('type="text" size="6"');
+
+    $col13 = new Columna('Descripcion');
+    $col13->setTipo(Columna::TEXTO);
+    $col13->setEsGrabable(false);
+    $col13->setNombreCampo('nomgua');
+    $col13->setHTML('type="text" size="25"');
 
     $col12 = new Columna('Valor Guarderia');
     $col12->setTipo(Columna::MONTO);
@@ -1155,8 +1162,10 @@ $this->Bitacora('Guardo');
     $opciones->addColumna($col8);
     $opciones->addColumna($col9);
     $opciones->addColumna($col10);
+    $opciones->addColumna($col13);
     $opciones->addColumna($col12);
     $opciones->addColumna($col11);
+
 
     $this->obj5 = $opciones->getConfig($per);
   }
