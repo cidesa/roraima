@@ -82,38 +82,48 @@ presupuesto:
         Documentos Causado:                                   precatcau.php
         Documentos Pago:                                      precatpag.php
         Documentos Ajuste:                                    precataju.php
-        Tipo de Financiamiento:                              precattipfin.php
-        Artículo de Ley:                                     precatartley.php
+        aaaa:                             precatartley2.php
+        Listado de Tipos de Financiamiento:                              precattipfin.php
+
+      Formatos:
+        PreCompromisos:                                       cprprecompromiso.php
+        Compromisos:                                          cprcompromiso.php
+        Causado:                                              cprcausado.php
+        Pagado:                                               cprpagado.php
       Movimientos:
-        Certificacion Presupuestaria:                         precerpre.php
+        #Certificacion Presupuestaria:                         precerpre.php
         Precompromisos:                                       preprc.php
         Compromisos:                                          precom.php
         Causados:                                             precau.php
         Pagados:                                              prepag.php
-        Traslados:                                            pretra.php
+        Traslados:                                            pretra2.php
         Ajustes:                                              preaju.php
-        Créditos Adicionales/Disminuciones (Por Aprobación):  PRERADIDIS.php
-        Rectificaciones del Presupuesto:                      prerectificaciones.php
-        Créditos Adicionales (Según Oficio):                  precreadi_oficio.php
-        Créditos Adicionales (Según Decreto):                 precreadi_decreto.php
+        Créditos Adicionales/Disminuciones (Por Aprobación):  preadidispre.php
+
       Ejecución Presupuestaria:
         Asignación Inicial Consolidado:                       prerasiini.php
         Disponibilidad Presupuestaria:                        predispre.php
         Disponibilidad Presupuestaria Resumida:               predispreres.php
         Ejecución del Presupuesto:                            preejepre.php
-        Gasto Ejecutado por Part. y Genericas (BCV):          pregasejepar.php
         Resumen General de la Ejec. Presup. por Partidas:     preresgenejepar.php
-        Maestro de Presupuesto:                               premaepre.php
-        Ejecución Presupuestaria (PreCompromisos):            predisper.php
-        Ejecución Presupuestaria por Partidas:                predispar.php
+        Ejecución Presupuestaria por Especifica:              predispar.php
+        Ejecución Presupuestaria por Especifica(Pre-Compromiso):predisparprc.php
         Detalle de Compromisos:                               predetcom.php
         Detalle de Causados:                                  predetcau.php
-        Registro de la Ejec. Finan. del Presup. de gastos:    precoddetofi.php
         Relación Diaria de Compromisos:                       PRERELDIACOM.php
-        Disponibilidad Financiera:                            predisfin.php
-        Disponibilidad Negativa:                              predisneg.php
         Consolidado de Ejecución por Movimientos:             preconeje.php
-        Ejecución Presupuestaria Coordinado (Dispon. Compr.): predispercoo_discom.php
+      Instructivo 8:
+        Resumen de Inversiones:                               oceestres.php
+        Cuenta Ahorro/Inversión/Financiamiento:               oceestres.php
+        Estado de Resultados:                                 oceestres.php
+        Balance General:                                      oceestres.php
+        Presupuesto de Caja:                                  oceestres.php
+        Consolidado de Ejecución Trimestral de Ingresos Financieros: predisparfiningramo.php
+        Consolidado de Ejecución Financiera Trimestral de Proyectos y Acciones Centralizadas por Partidas: predisparfinnivpar.php
+        Ejecución Trimestral de Ingreso y Fuentes Financieras:      predisparfining.php
+        Ejecución Trimestral de Gastos y Aplicaciones Financieras:  predisparfin.php
+        Recursos Humanos Clasificados por Tipos de Cargo:     oce2106.php
+        Comentario Sobre la Situación del Ente:               onapre0801.php
         #Asignación Inicial:                                  preasiinires.php
         #Compromisos por Beneficiario:                        precomben.php
         #Precompromisos afectados por otros Movimientos:      preprcotrosmov.php

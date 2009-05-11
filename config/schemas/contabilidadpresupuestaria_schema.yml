@@ -303,7 +303,7 @@ propel:
       type: VARCHAR
       size: 1
     coraep:
-      type: VARCHAR
+      type: INTEGER
       size: 8
     gencom:
       type: VARCHAR
