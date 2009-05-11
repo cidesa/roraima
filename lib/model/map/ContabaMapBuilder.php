@@ -130,6 +130,8 @@ class ContabaMapBuilder {
 
 		$tMap->addColumn('BTNELICOMANU', 'Btnelicomanu', 'boolean', CreoleTypes::BOOLEAN, false, null);
 
+		$tMap->addColumn('BTNMODCOM', 'Btnmodcom', 'boolean', CreoleTypes::BOOLEAN, false, null);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

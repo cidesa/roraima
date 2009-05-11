@@ -201,6 +201,10 @@ abstract class BaseContaba extends BaseObject  implements Persistent {
 
 
 	
+	protected $btnmodcom = true;
+
+
+	
 	protected $id;
 
 	
@@ -575,6 +579,13 @@ abstract class BaseContaba extends BaseObject  implements Persistent {
   {
 
     return $this->btnelicomanu;
+
+  }
+  
+  public function getBtnmodcom()
+  {
+
+    return $this->btnmodcom;
 
   }
   
@@ -1079,6 +1090,16 @@ abstract class BaseContaba extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setBtnmodcom($v)
+	{
+
+    if ($this->btnmodcom !== $v || $v === true) {
+        $this->btnmodcom = $v;
+        $this->modifiedColumns[] = ContabaPeer::BTNMODCOM;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -1189,7 +1210,9 @@ abstract class BaseContaba extends BaseObject  implements Persistent {
 
       $this->btnelicomanu = $rs->getBoolean($startcol + 47);
 
-      $this->id = $rs->getInt($startcol + 48);
+      $this->btnmodcom = $rs->getBoolean($startcol + 48);
+
+      $this->id = $rs->getInt($startcol + 49);
 
       $this->resetModified();
 
@@ -1197,7 +1220,7 @@ abstract class BaseContaba extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 49; 
+            return $startcol + 50; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Contaba object", $e);
     }
@@ -1489,6 +1512,9 @@ abstract class BaseContaba extends BaseObject  implements Persistent {
 				return $this->getBtnelicomanu();
 				break;
 			case 48:
+				return $this->getBtnmodcom();
+				break;
+			case 49:
 				return $this->getId();
 				break;
 			default:
@@ -1549,7 +1575,8 @@ abstract class BaseContaba extends BaseObject  implements Persistent {
 			$keys[45] => $this->getUnidad(),
 			$keys[46] => $this->getCorcomp(),
 			$keys[47] => $this->getBtnelicomanu(),
-			$keys[48] => $this->getId(),
+			$keys[48] => $this->getBtnmodcom(),
+			$keys[49] => $this->getId(),
 		);
 		return $result;
 	}
@@ -1710,6 +1737,9 @@ abstract class BaseContaba extends BaseObject  implements Persistent {
 				$this->setBtnelicomanu($value);
 				break;
 			case 48:
+				$this->setBtnmodcom($value);
+				break;
+			case 49:
 				$this->setId($value);
 				break;
 		} 	}
@@ -1767,7 +1797,8 @@ abstract class BaseContaba extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[45], $arr)) $this->setUnidad($arr[$keys[45]]);
 		if (array_key_exists($keys[46], $arr)) $this->setCorcomp($arr[$keys[46]]);
 		if (array_key_exists($keys[47], $arr)) $this->setBtnelicomanu($arr[$keys[47]]);
-		if (array_key_exists($keys[48], $arr)) $this->setId($arr[$keys[48]]);
+		if (array_key_exists($keys[48], $arr)) $this->setBtnmodcom($arr[$keys[48]]);
+		if (array_key_exists($keys[49], $arr)) $this->setId($arr[$keys[49]]);
 	}
 
 	
@@ -1823,6 +1854,7 @@ abstract class BaseContaba extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(ContabaPeer::UNIDAD)) $criteria->add(ContabaPeer::UNIDAD, $this->unidad);
 		if ($this->isColumnModified(ContabaPeer::CORCOMP)) $criteria->add(ContabaPeer::CORCOMP, $this->corcomp);
 		if ($this->isColumnModified(ContabaPeer::BTNELICOMANU)) $criteria->add(ContabaPeer::BTNELICOMANU, $this->btnelicomanu);
+		if ($this->isColumnModified(ContabaPeer::BTNMODCOM)) $criteria->add(ContabaPeer::BTNMODCOM, $this->btnmodcom);
 		if ($this->isColumnModified(ContabaPeer::ID)) $criteria->add(ContabaPeer::ID, $this->id);
 
 		return $criteria;
@@ -1949,6 +1981,8 @@ abstract class BaseContaba extends BaseObject  implements Persistent {
 		$copyObj->setCorcomp($this->corcomp);
 
 		$copyObj->setBtnelicomanu($this->btnelicomanu);
+
+		$copyObj->setBtnmodcom($this->btnmodcom);
 
 
 		$copyObj->setNew(true);

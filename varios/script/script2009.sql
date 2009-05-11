@@ -816,19 +816,24 @@ ALTER TABLE "atpresupuesto" ADD CONSTRAINT "atpresupuesto_FK_6" FOREIGN KEY ("at
 
 ALTER TABLE "atpresupuesto" ADD CONSTRAINT "atpresupuesto_FK_7" FOREIGN KEY ("atprovee6") REFERENCES "atprovee" ("id");
 
---08/05/2009
-ALTER TABLE "npliquidacion_det" ADD COLUMN "dias" INTEGER;
-
 --07/05/2009
 ALTER TABLE "opdefemp"
   ADD COLUMN "ordret" VARCHAR(4);
+
+--08/05/2009
+ALTER TABLE "npliquidacion_det" ADD COLUMN "dias" INTEGER;
+
+--08/05/2009
+--Se cambio los atributos de los campos a integer
+alter table cpdefniv alter column coraep type integer;
+
+--08/05/2009
+--nueva pantalla de contabilidad
+alter table contaba add column btnmodcom boolean default (true);
+
 
 --11/05/2009
 alter table bncobsegmue alter column nrosegmue type  varchar(20);
 alter table bnsegmue alter column nrosegmue type  varchar(20);
 alter table bncobseginm alter column nrosegmue type  varchar(20);
 alter table bnseginm alter column nroseginm type  varchar(20);
-
-
-
-
