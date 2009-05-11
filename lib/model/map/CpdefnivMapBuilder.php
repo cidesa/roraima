@@ -62,7 +62,7 @@ class CpdefnivMapBuilder {
 
 		$tMap->addColumn('STAPRC', 'Staprc', 'string', CreoleTypes::VARCHAR, false, 1);
 
-		$tMap->addColumn('CORAEP', 'Coraep', 'string', CreoleTypes::VARCHAR, false, 8);
+		$tMap->addColumn('CORAEP', 'Coraep', 'int', CreoleTypes::INTEGER, false, 8);
 
 		$tMap->addColumn('GENCOM', 'Gencom', 'string', CreoleTypes::VARCHAR, false, 1);
 

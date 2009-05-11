@@ -317,7 +317,7 @@ abstract class BaseCpdefniv extends BaseObject  implements Persistent {
   public function getCoraep()
   {
 
-    return trim($this->coraep);
+    return $this->coraep;
 
   }
   
@@ -915,7 +915,7 @@ abstract class BaseCpdefniv extends BaseObject  implements Persistent {
 
       $this->staprc = $rs->getString($startcol + 13);
 
-      $this->coraep = $rs->getString($startcol + 14);
+      $this->coraep = $rs->getInt($startcol + 14);
 
       $this->gencom = $rs->getString($startcol + 15);
 
