@@ -151,6 +151,9 @@ propel:
     btnelicomanu:    #Boton de Eliminar comprobantes anulados
       type: BOOLEAN
       default: false
+    btnmodcom:    #Boton que permite Modificar los Comprobante generado por otros modulos
+      type: BOOLEAN
+      default: true
     id:
       type: INTEGER
       required: true
