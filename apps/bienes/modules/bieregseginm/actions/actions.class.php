@@ -358,4 +358,17 @@ class bieregseginmActions extends autobieregseginmActions
 
   }
 
+  protected function deleteBnseginm($bnseginm)
+  {
+
+  	  $c= new Criteria();
+      $c->add(BncobseginmPeer::CODINM,$this->bnseginm->getCodmue());
+      $c->add(BncobseginmPeer::CODACT,$this->bnseginm->getCodact());
+      $c->add(BncobseginmPeer::NROSEGMUE,$this->bnseginm->getNroseginm());
+      BncobseginmPeer::doDelete($c);
+
+      $bnseginm->delete();
+  }
+
+
 }
