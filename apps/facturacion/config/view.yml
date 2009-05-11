@@ -11,7 +11,7 @@ default:
 
   stylesheets:    [main]
 
-  javascripts:    [ %SF_PROTOTYPE_WEB_DIR%/js/prototype, %SF_PROTOTYPE_WEB_DIR%/js/scriptaculous, tools, ajax ]
+  javascripts:    [ %SF_PROTOTYPE_WEB_DIR%/js/prototype, %SF_PROTOTYPE_WEB_DIR%/js/scriptaculous, tools, ajax, observer ]
 #  javascripts:    [%SF_PROTOTYPE_WEB_DIR%/js/prototype, %SF_PROTOTYPE_WEB_DIR%/js/scriptaculous, ext/adapter/ext/ext-base, ext/adapter/prototype/ext-prototype-adapter, ext/ext-all, gridext.js]
 
 #ext/adapter/ext/ext-base, ext/adapter/prototype/ext-prototype-adapter, ext/ext-all
