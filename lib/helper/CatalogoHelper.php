@@ -20,7 +20,7 @@ function Catalogo($objeto,$ajaxindex, $oit=array(),$metodo,$clase,$uri_params = 
   //sin perder lib.model.clase
   
   if (count($name)>3){   $name = strtolower($name[3]);  }else{   $name = strtolower($name[2]); }
-  if($name='npliquidaciondet') $name = 'npliquidacion_det';
+  if($name=='npliquidaciondet') $name = 'npliquidacion_det';
 
 
   //Validaciones para el tamano de los campos
