@@ -540,8 +540,8 @@ function Totalrecargo(e,id)
 
 			if (ctiprgo=='M')
 			{
-			  //cmonrgo=cmonrgotab;
-			  cmonrgo=cmonrgo
+			  cmonrgo=cmonrgotab;
+			  //cmonrgo=cmonrgo
 			}
 			else if (ctiprgo=='P')
 			{
@@ -842,8 +842,8 @@ function salvarmontorecargos()
 
 		if (ctiprgo=='M')
 		{
-		 // cmonrgo=cmonrgotab;
-		    cmonrgo=cmonrgo;
+		  cmonrgo=cmonrgotab;
+		 //   cmonrgo=cmonrgo;
 		}
 		else if (ctiprgo=='P')
 		{
