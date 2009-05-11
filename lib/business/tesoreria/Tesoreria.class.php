@@ -652,8 +652,8 @@ class Tesoreria {
       $tsmov = new Tsmovlib();
       $tsmov->setNumcue($objeto->getCtades());
       $tsmov->setReflib($objeto->getReftra());
-      $refpag = self::Buscar_Correlativo_Pago();
-      $tsmov->setRefpag($objeto->getRefpag());
+      //$refpag = self::Buscar_Correlativo_Pago();
+      //$tsmov->setRefpag($objeto->getRefpag());
       $tsmov->setTipmov($tipmovdesd);
       $tsmov->setFeclib($objeto->getFectra());
       $tsmov->setFecing($objeto->getFectra());
@@ -672,12 +672,12 @@ class Tesoreria {
       $tsmov->setStacon('N');
       $tsmov->save();
 
-      $c = new Criteria();
+     /* $c = new Criteria();
 	  $datos = CpdefnivPeer::doSelectOne($c);
 	  if ($datos){
 	  	$datos->setCorpag((string)$refpag);
 	   	$datos->save();
-	  }
+	  }*/
     }
   }
 
@@ -693,7 +693,7 @@ class Tesoreria {
       $tsmov2 = new Tsmovlib();
       $tsmov2->setNumcue($objeto->getCtaori());
       $tsmov2->setReflib($objeto->getReftra());
-      $refpag = self::Buscar_Correlativo_Pago();
+      //$refpag = self::Buscar_Correlativo_Pago();
       $tsmov2->setNumcom($objeto->getNumcom());
       $tsmov2->setFeclib($objeto->getFectra());
       $tsmov2->setFecing($objeto->getFectra());
@@ -712,12 +712,12 @@ class Tesoreria {
       $tsmov2->setStacon('N');
       $tsmov2->save();
 
-       $c = new Criteria();
+      /* $c = new Criteria();
 	   $datos = CpdefnivPeer::doSelectOne($c);
 	   if ($datos){
 	   	 $datos->setCorpag((string)$refpag);
 	   	 $datos->save();
-	   }
+	   }*/
     }
   }
 
