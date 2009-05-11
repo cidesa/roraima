@@ -728,7 +728,7 @@ COMMENT ON TABLE "tsbloqban" IS '';
 --30/04/2008 Añadir campo tipmov a Opordche para poder buscar exactamente el movimiento asociado al cheque en la tabla TSMOVLIB
 ALTER TABLE "opordche"
   ADD COLUMN "tipmov" VARCHAR(4);
-  
+
 -----------------------------------------------------------------------------
 -- atciudadano
 -----------------------------------------------------------------------------
@@ -822,6 +822,12 @@ ALTER TABLE "npliquidacion_det" ADD COLUMN "dias" INTEGER;
 --07/05/2009
 ALTER TABLE "opdefemp"
   ADD COLUMN "ordret" VARCHAR(4);
+
+--11/05/2009
+alter table bncobsegmue alter column nrosegmue type  varchar(20);
+alter table bnsegmue alter column nrosegmue type  varchar(20);
+alter table bncobseginm alter column nrosegmue type  varchar(20);
+alter table bnseginm alter column nroseginm type  varchar(20);
 
 
 
