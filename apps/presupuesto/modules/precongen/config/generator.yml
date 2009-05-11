@@ -4,6 +4,7 @@ generator:
     model_class:      Cpdefniv
     theme:            cidesaGenerator
     fields:
+      coraep:    {name: AEP}
       corprc:    {name: Precompromiso}
       corcom:    {name: Compromiso}
       corcau:    {name: Causado}
@@ -19,7 +20,7 @@ generator:
     edit:
       title: Configuracion Generales
       display:
-        Correlativos:  [corprc, corcom, corcau, corpag, corsoltra, cortrasla, corsoladidis, coradidis, coraju]
+        Correlativos:  [coraep, corprc, corcom, corcau, corpag, corsoltra, cortrasla, corsoladidis, coradidis, coraju]
         Generales:  [btnanu, btneli]
 
       actions:
