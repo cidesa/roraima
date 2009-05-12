@@ -2392,10 +2392,15 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
               }
               else
               {
-                  if ($data->getTipcau()!='O/PE')
-                  {
-                    return $this->msj="El Comprobante no puede ser Eliminado, ya que se perdio la asociacion con Contabilidad";
-                  }
+                  $cri= new Criteria();
+	              $datos= OpdefempPeer::doSelectOne($cri);
+	              if ($datos)
+	              {
+	              	if ($data->getTipcau()!=$datos->getOrdret())
+	                {
+	             	 return $this->msj="El Comprobante no puede ser Eliminado, ya que se perdio la asociacion con Contabilidad";
+	                }
+	              }
               }
 
               Herramientas::EliminarRegistro('Opdetord','Numord',$data->getNumord());
@@ -2431,10 +2436,15 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
     $this->formulario=array();
     $this->i="";
     $i=0;
+    $tiporet="";
+    $cri= new Criteria();
+    $dato= OpdefempPeer::doSelectOne($cri);
+    if ($dato) $tiporet=$dato->getOrdret();
     while ($i<count($conret))
     {
       $f[$i]=$this->form.$i;
-      $this->getUser()->setAttribute('tipo',$this->opordpag->getTipcau(),$f[$i]);
+      if ($tiporet=="") $tiporet=$this->opordpag->getTipcau();
+      $this->getUser()->setAttribute('tipo',$tiporet,$f[$i]);
       $desord=$this->opordpag->getNumord().' - '.$conret[$i]['destip'];
       $this->getUser()->setAttribute('concepto',$desord,$f[$i]);
       $this->getUser()->setAttribute('tiporet',$conret[$i]['codtip'],$f[$i]);
