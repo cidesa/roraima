@@ -100,7 +100,19 @@ class OpdefempMapBuilder {
 
 		$tMap->addColumn('CODCATCAJCHI', 'Codcatcajchi', 'string', CreoleTypes::VARCHAR, false, 32);
 
+		$tMap->addColumn('GENCOMALC', 'Gencomalc', 'string', CreoleTypes::VARCHAR, false, 1);
+
+		$tMap->addColumn('REQAPRORD', 'Reqaprord', 'string', CreoleTypes::VARCHAR, false, 1);
+
+		$tMap->addColumn('ORDCOMPTOT', 'Ordcomptot', 'string', CreoleTypes::VARCHAR, false, 1);
+
+		$tMap->addColumn('ORDMOTANU', 'Ordmotanu', 'string', CreoleTypes::VARCHAR, false, 1);
+
+		$tMap->addColumn('MANBLOQBAN', 'Manbloqban', 'string', CreoleTypes::VARCHAR, false, 1);
+
 		$tMap->addColumn('ORDRET', 'Ordret', 'string', CreoleTypes::VARCHAR, true, 4);
+
+		$tMap->addColumn('ORDCONPRE', 'Ordconpre', 'boolean', CreoleTypes::BOOLEAN, false, null);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 

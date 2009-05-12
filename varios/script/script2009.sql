@@ -839,6 +839,11 @@ alter table bnsegmue alter column nrosegmue type  varchar(20);
 alter table bncobseginm alter column nrosegmue type  varchar(20);
 alter table bnseginm alter column nroseginm type  varchar(20);
 
+--12/02/2009
+-- Configuracion del prefijo en los comprobantes contables
+alter table opdefemp add column ordconpre boolean default (false);  --orden contable prefijo
+
 --11/05/2009 Modificaciones de Caja Chica
 ALTER TABLE "tsdetsal"
   ADD COLUMN "codcat" VARCHAR(50);
+

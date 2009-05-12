@@ -226,11 +226,11 @@ $this->Bitacora('Guardo');
     }
     if ($this->getUser()->hasCredential('M'))
     {
-    if (isset($opdefemp['nomtiprencajchi']))
-    {
-      $this->opdefemp->setNomtiprencajchi($opdefemp['nomtiprencajchi']);
+    	if (isset($opdefemp['nomtiprencajchi']))
+    	{
+      		$this->opdefemp->setNomtiprencajchi($opdefemp['nomtiprencajchi']);
+    	}
     }
-      }
     if (isset($opdefemp['numinicajchi']))
     {
       $this->opdefemp->setNuminicajchi($opdefemp['numinicajchi']);
@@ -255,6 +255,7 @@ $this->Bitacora('Guardo');
     {
       $this->opdefemp->setOrdret($opdefemp['ordret']);
     }
+    $this->opdefemp->setOrdconpre(isset($opdefemp['ordconpre']) ? $opdefemp['ordconpre'] : 0);
   }
 
   protected function saveOpdefemp($opdefemp)

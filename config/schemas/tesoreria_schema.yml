@@ -466,10 +466,28 @@ propel:
     codcatcajchi:
       type: VARCHAR
       size: 32
+    gencomalc:
+      type: VARCHAR
+      size: 1
+    reqaprord:
+      type: VARCHAR
+      size: 1
+    ordcomptot:
+      type: VARCHAR
+      size: 1
+    ordmotanu:
+      type: VARCHAR
+      size: 1
+    manbloqban:
+      type: VARCHAR
+      size: 1
     ordret:
       type: VARCHAR
       size: 4
       required: true
+    ordconpre:
+      type: BOOLEAN
+      default: false
     id:
       type: INTEGER
       required: true
@@ -893,6 +911,18 @@ propel:
     expsigecof:
       type: VARCHAR
       size: 8
+    aprobadoord:
+      type: VARCHAR
+      size: 1
+    codmotanu:
+      type: VARCHAR
+      size: 4
+    usuanu:
+      type: VARCHAR
+      size: 250
+    aprobadotes:
+      type: VARCHAR
+      size: 1
     id:
       type: INTEGER
       required: true
@@ -2226,6 +2256,42 @@ propel:
     stasal:
       type: VARCHAR
       size: 1
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  tsrelasiord:
+    #_attributes:
+      #idMethod: native
+    ctagasxpag:
+      type: VARCHAR
+      size: 32
+    ctaordxpag:
+      type: VARCHAR
+      size: 32
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  tsmotanu:
+    #_attributes:
+      #idMethod: native
+    codmotanu:
+      type: VARCHAR
+      size: 4
+    desmotanu:
+      type: VARCHAR
+      size: 250
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  tsbloqban:
+    #_attributes:
+      #idMethod: native
+    numcue:
+      type: VARCHAR
+      size: 20
     id:
       type: INTEGER
       required: true
