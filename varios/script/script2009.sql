@@ -825,7 +825,8 @@ ALTER TABLE "npliquidacion_det" ADD COLUMN "dias" INTEGER;
 
 --08/05/2009
 --Se cambio los atributos de los campos a integer
-alter table cpdefniv alter column coraep type integer;
+-- Se tiene que crear la funcion pc_chartoint, que esta en la carpeta de triggers
+alter table cpdefniv alter column coraep type integer USING pc_chartoint(coraep);
 
 --08/05/2009
 --nueva pantalla de contabilidad
@@ -837,7 +838,6 @@ alter table bncobsegmue alter column nrosegmue type  varchar(20);
 alter table bnsegmue alter column nrosegmue type  varchar(20);
 alter table bncobseginm alter column nrosegmue type  varchar(20);
 alter table bnseginm alter column nroseginm type  varchar(20);
-
 
 --11/05/2009 Modificaciones de Caja Chica
 ALTER TABLE "tsdetsal"
