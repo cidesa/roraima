@@ -358,11 +358,13 @@
 		var opci = fecini + fecfin + opcion;
 
 		if (dato4=='0')
-			opci = opci + 'O'+'0';
+			opci = opci + 'O';
 		if (dato4!='0')
 		{
+          if ($('mesper').value=='P')
 		    opci = opci + $('mesper').value+dato4;
-
+          else
+		    opci = opci + dato4;
 		 }
 
         var condicion = $('cajaux2').value;

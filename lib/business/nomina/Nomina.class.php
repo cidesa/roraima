@@ -2146,10 +2146,38 @@ class Nomina {
               }
             } else // no son fechas
               {
-              $numero = floatval(substr($token, 25));
-              if (substr($token, 24, 1) == 'M') // MES
+
+              if (substr($token, 24, 1) == 'P') // Periodo
               {
-				//////////////////
+                 $numero = floatval(substr($token, 25));
+                 $criterio="select min(fecnom) as minfec,max(fecnom) as maxfec from (select distinct fecnom from nphiscon where codnom='" . substr($token, 1, 3) . "' order by fecnom desc limit " . $numero . ") a ";
+                 if (Herramientas :: BuscarDatos($criterio, &$resultados)) {
+                 if (!empty($resultados[0]["minfec"]) && !empty($resultados[0]["maxfec"]))
+                 {
+                   $criterio = "Select coalesce(avg(monto),0) as monto from nphiscon where  codnom='" . substr($token, 1, 3) . "'
+                                          and codemp='" . $empleado . "'  and codcon='" . substr($token, 4, 3) . "' and ";
+                   $criterio2 = " fecnom>=TO_DATE('" . $resultados[0]["minfec"] . "','yyyy-mm-dd') and
+                                          fecnom<=TO_DATE('" . $resultados[0]["maxfec"] . "','yyyy-mm-dd') ";
+
+                   if (Herramientas :: BuscarDatos($criterio . $criterio2, & $tabla)) {
+                   if (!empty ($tabla[0]["monto"]))
+                    {$aux = $tabla[0]["monto"];}
+                   else
+                     { $aux = 0; }
+                   }
+                   else
+                     { $aux = 0; }
+                 }
+                 else
+                  { $aux = 0; }
+                 $valor = $aux;
+              }
+
+              }//if (substr($token, 24, 1) == 'P') // MES
+              else //meses
+              {
+				$numero = floatval(substr($token, 24));
+			    //////////////////
                 $resta="-".$numero;
                 $sql="select add_months('" . $fecnom . "',-1) as mesfin, add_months('" . $fecnom . "',".$resta.") as mesini from empresa";
                 Herramientas :: BuscarDatos($sql, &$resulfechas);
@@ -2173,32 +2201,7 @@ class Nomina {
                 }
                 $valor = $aux;
               }
-              }//if (substr($token, 24, 1) == 'M') // MES
-              else
-              {
-                 $criterio="select min(fecnom) as minfec,max(fecnom) as maxfec from (select distinct fecnom from nphiscon where codnom='" . substr($token, 1, 3) . "' order by fecnom desc limit " . $numero . ") a ";
-                 if (Herramientas :: BuscarDatos($criterio, &$resultados)) {
-                 if (!empty($resultados[0]["minfec"]) && !empty($resultados[0]["maxfec"]))
-                 {
-                   $criterio = "Select coalesce(avg(monto),0) as monto from nphiscon where  codnom='" . substr($token, 1, 3) . "'
-                                          and codemp='" . $empleado . "'  and codcon='" . substr($token, 4, 3) . "' and ";
-                   $criterio2 = " fecnom>=TO_DATE('" . $resultados[0]["minfec"] . "','yyyy-mm-dd') and
-                                          fecnom<=TO_DATE('" . $resultados[0]["maxfec"] . "','yyyy-mm-dd') ";
-
-                   if (Herramientas :: BuscarDatos($criterio . $criterio2, & $tabla)) {
-                   if (!empty ($tabla[0]["monto"]))
-                    {$aux = $tabla[0]["monto"];}
-                   else
-                     { $aux = 0; }
-                   }
-                   else
-                     { $aux = 0; }
-                 }
-                 else
-                  { $aux = 0; }
-                 $valor = $aux;
-              }
-              }//else if (substr($token, 24, 1) == 'M') // MES
+             }//else  // MES
             }
           } // fin PROMEDIO
           elseif (substr($token, 23, 1) == 'S') // SUM
@@ -2224,9 +2227,36 @@ class Nomina {
               }
             } else // no son fechas
             {
-              $numero = floatval(substr($token, 25));
-              if (substr($token, 24, 1) == 'M') // MES
+              if (substr($token, 24, 1) == 'P') // PERIODO
               {
+              	 $numero = floatval(substr($token, 25));
+                 $criterio="select min(fecnom) as minfec,max(fecnom) as maxfec from (select distinct fecnom from nphiscon where codnom='" . substr($token, 1, 3) . "' order by fecnom desc limit " . $numero . ") a ";
+                 if (Herramientas :: BuscarDatos($criterio, &$resultados)) {
+                 if (!empty($resultados[0]["minfec"]) && !empty($resultados[0]["maxfec"]))
+                 {
+                   $criterio = "Select coalesce(SUM(monto),0) as monto from nphiscon where  codnom='" . substr($token, 1, 3) . "'
+                                          and codemp='" . $empleado . "'  and codcon='" . substr($token, 4, 3) . "' and ";
+                   $criterio2 = " fecnom>=TO_DATE('" . $resultados[0]["minfec"] . "','yyyy-mm-dd') and
+                                          fecnom<=TO_DATE('" . $resultados[0]["maxfec"] . "','yyyy-mm-dd') ";
+
+                   if (Herramientas :: BuscarDatos($criterio . $criterio2, & $tabla)) {
+                   if (!empty ($tabla[0]["monto"]))
+                    {$aux = $tabla[0]["monto"];}
+                   else
+                     { $aux = 0; }
+                   }
+                   else
+                     { $aux = 0; }
+                 }
+                 else
+                  { $aux = 0; }
+                 $valor = $aux;
+              }
+             }//if (substr($token, 24, 1) == 'P') // PERIODO
+              else  //meses
+              {
+              	print "<br> Cod. emp,: ". $empleado;
+                $numero = floatval(substr($token, 24));
                 //////////////////
                 $resta="-".$numero;
                 $sql="select add_months('" . $fecnom . "',-1) as mesfin, add_months('" . $fecnom . "',".$resta.") as mesini from empresa";
@@ -2250,34 +2280,10 @@ class Nomina {
                   $aux = $tabla[0]["monto"];
                 }
                 $valor = $aux;
-              }
-             }//if (substr($token, 24, 1) == 'M') // MES
-              else
-              {
-                 $criterio="select min(fecnom) as minfec,max(fecnom) as maxfec from (select distinct fecnom from nphiscon where codnom='" . substr($token, 1, 3) . "' order by fecnom desc limit " . $numero . ") a ";
-                 if (Herramientas :: BuscarDatos($criterio, &$resultados)) {
-                 if (!empty($resultados[0]["minfec"]) && !empty($resultados[0]["maxfec"]))
-                 {
-                   $criterio = "Select coalesce(SUM(monto),0) as monto from nphiscon where  codnom='" . substr($token, 1, 3) . "'
-                                          and codemp='" . $empleado . "'  and codcon='" . substr($token, 4, 3) . "' and ";
-                   $criterio2 = " fecnom>=TO_DATE('" . $resultados[0]["minfec"] . "','yyyy-mm-dd') and
-                                          fecnom<=TO_DATE('" . $resultados[0]["maxfec"] . "','yyyy-mm-dd') ";
-
-                   if (Herramientas :: BuscarDatos($criterio . $criterio2, & $tabla)) {
-                   if (!empty ($tabla[0]["monto"]))
-                    {$aux = $tabla[0]["monto"];}
-                   else
-                     { $aux = 0; }
-                   }
-                   else
-                     { $aux = 0; }
-                 }
-                 else
-                  { $aux = 0; }
-                 $valor = $aux;
-              }
-              }//else if (substr($token, 24, 1) == 'M') // MES
-            }
+               }
+               print "<br> Valor: ". $valor;
+              }//else // MES
+            } // no son fechas
           } // fin SUM
           elseif (substr($token, 23, 1) == 'M') // MAX
           {
@@ -2300,9 +2306,36 @@ class Nomina {
               }
             } else // no son fechas
             {
-             $numero = floatval(substr($token, 25));
-             if (substr($token, 24, 1) == 'M') // MES
+
+             if (substr($token, 24, 1) == 'P') // PERIODO
              {
+             	 $numero = floatval(substr($token, 25));
+                 $criterio="select min(fecnom) as minfec,max(fecnom) as maxfec from (select distinct fecnom from nphiscon where codnom='" . substr($token, 1, 3) . "' order by fecnom desc limit " . $numero . ") a ";
+                 if (Herramientas :: BuscarDatos($criterio, &$resultados)) {
+                 if (!empty($resultados[0]["minfec"]) && !empty($resultados[0]["maxfec"]))
+                 {
+                   $criterio = "Select max(monto) as monto  from nphiscon where  codnom='" . substr($token, 1, 3) . "'
+                                          and codemp='" . $empleado . "'  and codcon='" . substr($token, 4, 3) . "' and ";
+                   $criterio2 = " fecnom>=TO_DATE('" . $resultados[0]["minfec"] . "','yyyy-mm-dd') and
+                                          fecnom<=TO_DATE('" . $resultados[0]["maxfec"] . "','yyyy-mm-dd') ";
+
+                   if (Herramientas :: BuscarDatos($criterio . $criterio2, & $tabla)) {
+                   if (!empty ($tabla[0]["monto"]))
+                    {$aux = $tabla[0]["monto"];}
+                   else
+                     { $aux = 0; }
+                   }
+                   else
+                     { $aux = 0; }
+                 }
+                 else
+                  { $aux = 0; }
+                 $valor = $aux;
+              }
+             }//if (substr($token, 24, 1) == 'P') //PERIODO
+            else
+              {
+              	$numero = floatval(substr($token, 24));
                 //////////////////
                 $resta="-".$numero;
                 $sql="select add_months('" . $fecnom . "',-1) as mesfin, add_months('" . $fecnom . "',".$resta.") as mesini from empresa";
@@ -2327,32 +2360,8 @@ class Nomina {
                 }
                 $valor = $aux;
               }
-             }//if (substr($token, 24, 1) == 'M') // MES
-            else
-              {
-                 $criterio="select min(fecnom) as minfec,max(fecnom) as maxfec from (select distinct fecnom from nphiscon where codnom='" . substr($token, 1, 3) . "' order by fecnom desc limit " . $numero . ") a ";
-                 if (Herramientas :: BuscarDatos($criterio, &$resultados)) {
-                 if (!empty($resultados[0]["minfec"]) && !empty($resultados[0]["maxfec"]))
-                 {
-                   $criterio = "Select max(monto) as monto  from nphiscon where  codnom='" . substr($token, 1, 3) . "'
-                                          and codemp='" . $empleado . "'  and codcon='" . substr($token, 4, 3) . "' and ";
-                   $criterio2 = " fecnom>=TO_DATE('" . $resultados[0]["minfec"] . "','yyyy-mm-dd') and
-                                          fecnom<=TO_DATE('" . $resultados[0]["maxfec"] . "','yyyy-mm-dd') ";
 
-                   if (Herramientas :: BuscarDatos($criterio . $criterio2, & $tabla)) {
-                   if (!empty ($tabla[0]["monto"]))
-                    {$aux = $tabla[0]["monto"];}
-                   else
-                     { $aux = 0; }
-                   }
-                   else
-                     { $aux = 0; }
-                 }
-                 else
-                  { $aux = 0; }
-                 $valor = $aux;
-              }
-              }//else if (substr($token, 24, 1) == 'M') // MES
+              }//else  // MES
             }
           } // fin MAX
           elseif (substr($token, 23, 1) == 'N') // MIN
@@ -2376,9 +2385,36 @@ class Nomina {
               }
             } else // no son fechas
             {
-             $numero = floatval(substr($token, 25));
-             if (substr($token, 24, 1) == 'M') // MES
+
+             if (substr($token, 24, 1) == 'P') // PERIODO
              {
+                 $numero = floatval(substr($token, 25));
+                 $criterio="select min(fecnom) as minfec,max(fecnom) as maxfec from (select distinct fecnom from nphiscon where codnom='" . substr($token, 1, 3) . "' order by fecnom desc limit " . $numero . ") a ";
+                 if (Herramientas :: BuscarDatos($criterio, &$resultados)) {
+                 if (!empty($resultados[0]["minfec"]) && !empty($resultados[0]["maxfec"]))
+                 {
+                   $criterio = "Select min(monto) as monto  from nphiscon where  codnom='" . substr($token, 1, 3) . "'
+                                          and codemp='" . $empleado . "'  and codcon='" . substr($token, 4, 3) . "' and ";
+                   $criterio2 = " fecnom>=TO_DATE('" . $resultados[0]["minfec"] . "','yyyy-mm-dd') and
+                                          fecnom<=TO_DATE('" . $resultados[0]["maxfec"] . "','yyyy-mm-dd') ";
+
+                   if (Herramientas :: BuscarDatos($criterio . $criterio2, & $tabla)) {
+                   if (!empty ($tabla[0]["monto"]))
+                    {$aux = $tabla[0]["monto"];}
+                   else
+                     { $aux = 0; }
+                   }
+                   else
+                     { $aux = 0; }
+                 }
+                 else
+                  { $aux = 0; }
+                 $valor = $aux;
+              }
+             }//if (substr($token, 24, 1) == 'P') // PERIODO
+             else  //meses
+              {
+              	$numero = floatval(substr($token, 24));
                 //////////////////
                 $resta="-".$numero;
                 $sql="select add_months('" . $fecnom . "',-1) as mesfin, add_months('" . $fecnom . "',".$resta.") as mesini from empresa";
@@ -2403,32 +2439,7 @@ class Nomina {
                 }
                 $valor = $aux;
               }
-             }//if (substr($token, 24, 1) == 'M') // MES
-             else
-              {
-                 $criterio="select min(fecnom) as minfec,max(fecnom) as maxfec from (select distinct fecnom from nphiscon where codnom='" . substr($token, 1, 3) . "' order by fecnom desc limit " . $numero . ") a ";
-                 if (Herramientas :: BuscarDatos($criterio, &$resultados)) {
-                 if (!empty($resultados[0]["minfec"]) && !empty($resultados[0]["maxfec"]))
-                 {
-                   $criterio = "Select min(monto) as monto  from nphiscon where  codnom='" . substr($token, 1, 3) . "'
-                                          and codemp='" . $empleado . "'  and codcon='" . substr($token, 4, 3) . "' and ";
-                   $criterio2 = " fecnom>=TO_DATE('" . $resultados[0]["minfec"] . "','yyyy-mm-dd') and
-                                          fecnom<=TO_DATE('" . $resultados[0]["maxfec"] . "','yyyy-mm-dd') ";
-
-                   if (Herramientas :: BuscarDatos($criterio . $criterio2, & $tabla)) {
-                   if (!empty ($tabla[0]["monto"]))
-                    {$aux = $tabla[0]["monto"];}
-                   else
-                     { $aux = 0; }
-                   }
-                   else
-                     { $aux = 0; }
-                 }
-                 else
-                  { $aux = 0; }
-                 $valor = $aux;
-              }
-              }//else if (substr($token, 24, 1) == 'M') // MES
+             }//else MES
             }//else no son fechas
           } // fin MIN
         } // FIN DEL "H"
@@ -3470,9 +3481,36 @@ class Nomina {
               }
             } else // no son fechas
             {
-              $numero = floatval(substr($campo, 25));
-              if (substr($campo, 24, 1) == 'M') // MES
+
+              if (substr($campo, 24, 1) == 'P') // PERIODO
               {
+              	 $numero = floatval(substr($campo, 25));
+                 $criterio="select min(fecnom) as minfec,max(fecnom) as maxfec from (select distinct fecnom from nphiscon where codnom='" . substr($campo, 1, 3) . "' order by fecnom desc limit " . $numero . ") a ";
+                 if (Herramientas :: BuscarDatos($criterio, &$resultados)) {
+                 if (!empty($resultados[0]["minfec"]) && !empty($resultados[0]["maxfec"]))
+                 {
+                   $criterio = "Select coalesce(avg(monto),0) as monto from nphiscon where  codnom='" . substr($campo, 1, 3) . "'
+                                          and codemp='" . $empleado . "'  and codcon='" . substr($campo, 4, 3) . "' and ";
+                   $criterio2 = " fecnom>=TO_DATE('" . $resultados[0]["minfec"] . "','yyyy-mm-dd') and
+                                          fecnom<=TO_DATE('" . $resultados[0]["maxfec"] . "','yyyy-mm-dd') ";
+
+                   if (Herramientas :: BuscarDatos($criterio . $criterio2, & $tabla)) {
+                   if (!empty ($tabla[0]["monto"]))
+                    {$aux = $tabla[0]["monto"];}
+                   else
+                     { $aux = 0; }
+                   }
+                   else
+                     { $aux = 0; }
+                 }
+                 else
+                  { $aux = 0; }
+                 return $aux;
+               }
+              }//if (substr($campo, 24, 1) == 'M') // MES
+              else //meses
+              {
+                $numero = floatval(substr($campo, 24));
                 //////////////////
                 $resta="-".$numero;
                 $sql="select add_months('" . $fecnom . "',-1) as mesfin, add_months('" . $fecnom . "',".$resta.") as mesini from empresa";
@@ -3498,32 +3536,7 @@ class Nomina {
                  }
                  return $aux;
                  }//if (Herramientas :: BuscarDatos($criterio . $criterio2, & $tabla))
-              }//if (substr($campo, 24, 1) == 'M') // MES
-              else
-              {
-                 $criterio="select min(fecnom) as minfec,max(fecnom) as maxfec from (select distinct fecnom from nphiscon where codnom='" . substr($campo, 1, 3) . "' order by fecnom desc limit " . $numero . ") a ";
-                 if (Herramientas :: BuscarDatos($criterio, &$resultados)) {
-                 if (!empty($resultados[0]["minfec"]) && !empty($resultados[0]["maxfec"]))
-                 {
-                   $criterio = "Select coalesce(avg(monto),0) as monto from nphiscon where  codnom='" . substr($campo, 1, 3) . "'
-                                          and codemp='" . $empleado . "'  and codcon='" . substr($campo, 4, 3) . "' and ";
-                   $criterio2 = " fecnom>=TO_DATE('" . $resultados[0]["minfec"] . "','yyyy-mm-dd') and
-                                          fecnom<=TO_DATE('" . $resultados[0]["maxfec"] . "','yyyy-mm-dd') ";
-
-                   if (Herramientas :: BuscarDatos($criterio . $criterio2, & $tabla)) {
-                   if (!empty ($tabla[0]["monto"]))
-                    {$aux = $tabla[0]["monto"];}
-                   else
-                     { $aux = 0; }
-                   }
-                   else
-                     { $aux = 0; }
-                 }
-                 else
-                  { $aux = 0; }
-                 return $aux;
-               }
-              }//else if (substr($campo, 24, 1) == 'M') // MES
+              }//else // MES
             }//else no son fechas
           } // fin PROMEDIO
           elseif (substr($campo, 23, 1) == 'S') // SUM
@@ -3547,36 +3560,9 @@ class Nomina {
               }
             } else // no son fechas
             {
-             $numero = floatval(substr($campo, 25));
-             if (substr($campo, 24, 1) == 'M') // MES
+             if (substr($campo, 24, 1) == 'P') // PERIODO
              {
-                //////////////////
-                $resta="-".$numero;
-                $sql="select add_months('" . $fecnom . "',-1) as mesfin, add_months('" . $fecnom . "',".$resta.") as mesini from empresa";
-                Herramientas :: BuscarDatos($sql, &$resulfechas);
-                $auxmesini=$resulfechas[0]["mesini"];
-                $auxmesfin=$resulfechas[0]["mesfin"];
-                $auxfecini= split('-', $auxmesini);
-                $fecini = $auxfecini[0] . '-' . $auxfecini[1] . '-01';
-                $sql="select last_day('" . $auxmesfin . "') as fecfin from empresa";
-                Herramientas :: BuscarDatos($sql, &$resulfecfin);
-                $fecfin=$resulfecfin[0]["fecfin"];
-				//////////////////////
-                $criterio = "Select sum(monto) as monto from nphiscon where  codnom='" . substr($campo, 1, 3) . "'
-                                          and codemp='" . $empleado . "'  and codcon='" . substr($campo, 4, 3) . "' and ";
-                $criterio2 = " TO_DATE(TO_CHAR(fecnom,'DD/MM/YYYY'),'DD/MM/YYYY')>=TO_DATE('" . $fecini . "','DD/MM/YYYY') and
-                                          TO_DATE(TO_CHAR(fecnom,'DD/MM/YYYY'),'DD/MM/YYYY')<=TO_DATE('" . $fecfin . "','DD/MM/YYYY') ";
-              if (Herramientas :: BuscarDatos($criterio . $criterio2, & $tabla)) {
-                if (empty ($tabla[0]["monto"])) {
-                  $aux = $tabla[0]["monto"];
-                } else {
-                  $aux = 0;
-                }
-                return $aux;
-              }
-             }//if (substr($campo, 24, 1) == 'M') // MES
-              else
-              {
+             	 $numero = floatval(substr($campo, 25));
                  $criterio="select min(fecnom) as minfec,max(fecnom) as maxfec from (select distinct fecnom from nphiscon where codnom='" . substr($campo, 1, 3) . "' order by fecnom desc limit " . $numero . ") a ";
                  if (Herramientas :: BuscarDatos($criterio, &$resultados)) {
                  if (!empty($resultados[0]["minfec"]) && !empty($resultados[0]["maxfec"]))
@@ -3599,7 +3585,38 @@ class Nomina {
                   { $aux = 0; }
                  return $aux;
                }
-              }//else if (substr($campo, 24, 1) == 'M') // MES
+
+             }//if (substr($campo, 24, 1) == 'P') // PERIODO
+             else
+              { print "<br> Cod. emp,: (evaluacampo) ". $empleado;
+             	$numero = floatval(substr($campo, 24));
+                //////////////////
+                $resta="-".$numero;
+                $sql="select add_months('" . $fecnom . "',-1) as mesfin, add_months('" . $fecnom . "',".$resta.") as mesini from empresa";
+                Herramientas :: BuscarDatos($sql, &$resulfechas);
+                $auxmesini=$resulfechas[0]["mesini"];
+                $auxmesfin=$resulfechas[0]["mesfin"];
+                $auxfecini= split('-', $auxmesini);
+                $fecini = $auxfecini[0] . '-' . $auxfecini[1] . '-01';
+                $sql="select last_day('" . $auxmesfin . "') as fecfin from empresa";
+                Herramientas :: BuscarDatos($sql, &$resulfecfin);
+                $fecfin=$resulfecfin[0]["fecfin"];
+				//////////////////////
+                $criterio = "Select sum(monto) as monto from nphiscon where  codnom='" . substr($campo, 1, 3) . "'
+                                          and codemp='" . $empleado . "'  and codcon='" . substr($campo, 4, 3) . "' and ";
+                $criterio2 = " TO_DATE(TO_CHAR(fecnom,'DD/MM/YYYY'),'DD/MM/YYYY')>=TO_DATE('" . $fecini . "','DD/MM/YYYY') and
+                                          TO_DATE(TO_CHAR(fecnom,'DD/MM/YYYY'),'DD/MM/YYYY')<=TO_DATE('" . $fecfin . "','DD/MM/YYYY') ";
+              if (Herramientas :: BuscarDatos($criterio . $criterio2, & $tabla)) {
+                if (empty ($tabla[0]["monto"])) {
+                  $aux = $tabla[0]["monto"];
+                } else {
+                  $aux = 0;
+                }
+                print "<br> valor: (evaluacampo)". $aux;
+                return $aux;
+              }
+
+              }//else// MES
             }
           } // fin SUM
           elseif (substr($campo, 23, 1) == 'M') // MAX
@@ -3623,9 +3640,37 @@ class Nomina {
               }
             } else // no son fechas
             {
-             $numero = floatval(substr($campo, 25));
-             if (substr($campo, 24, 1) == 'M') // MES
+
+             if (substr($campo, 24, 1) == 'P') // PERIODO
              {
+             	 $numero = floatval(substr($campo, 25));
+                 $criterio="select min(fecnom) as minfec,max(fecnom) as maxfec from (select distinct fecnom from nphiscon where codnom='" . substr($campo, 1, 3) . "' order by fecnom desc limit " . $numero . ") a ";
+                 if (Herramientas :: BuscarDatos($criterio, &$resultados)) {
+                 if (!empty($resultados[0]["minfec"]) && !empty($resultados[0]["maxfec"]))
+                 {
+                   $criterio = "Select coalesce(max(monto),0) as monto from nphiscon where  codnom='" . substr($campo, 1, 3) . "'
+                                          and codemp='" . $empleado . "'  and codcon='" . substr($campo, 4, 3) . "' and ";
+                   $criterio2 = " fecnom>=TO_DATE('" . $resultados[0]["minfec"] . "','yyyy-mm-dd') and
+                                          fecnom<=TO_DATE('" . $resultados[0]["maxfec"] . "','yyyy-mm-dd') ";
+
+                   if (Herramientas :: BuscarDatos($criterio . $criterio2, & $tabla)) {
+                   if (!empty ($tabla[0]["monto"]))
+                    {$aux = $tabla[0]["monto"];}
+                   else
+                     { $aux = 0; }
+                   }
+                   else
+                     { $aux = 0; }
+                 }
+                 else
+                  { $aux = 0; }
+                 return $aux;
+               }
+
+             }//if (substr($campo, 24, 1) == 'P') // PERIODO
+              else
+              {
+				$numero = floatval(substr($campo, 24));
                 //////////////////
                 $resta="-".$numero;
                 $sql="select add_months('" . $fecnom . "',-1) as mesfin, add_months('" . $fecnom . "',".$resta.") as mesini from empresa";
@@ -3650,32 +3695,7 @@ class Nomina {
                 }
                 return $aux;
               }
-             }//if (substr($campo, 24, 1) == 'M') // MES
-              else
-              {
-                 $criterio="select min(fecnom) as minfec,max(fecnom) as maxfec from (select distinct fecnom from nphiscon where codnom='" . substr($campo, 1, 3) . "' order by fecnom desc limit " . $numero . ") a ";
-                 if (Herramientas :: BuscarDatos($criterio, &$resultados)) {
-                 if (!empty($resultados[0]["minfec"]) && !empty($resultados[0]["maxfec"]))
-                 {
-                   $criterio = "Select coalesce(max(monto),0) as monto from nphiscon where  codnom='" . substr($campo, 1, 3) . "'
-                                          and codemp='" . $empleado . "'  and codcon='" . substr($campo, 4, 3) . "' and ";
-                   $criterio2 = " fecnom>=TO_DATE('" . $resultados[0]["minfec"] . "','yyyy-mm-dd') and
-                                          fecnom<=TO_DATE('" . $resultados[0]["maxfec"] . "','yyyy-mm-dd') ";
-
-                   if (Herramientas :: BuscarDatos($criterio . $criterio2, & $tabla)) {
-                   if (!empty ($tabla[0]["monto"]))
-                    {$aux = $tabla[0]["monto"];}
-                   else
-                     { $aux = 0; }
-                   }
-                   else
-                     { $aux = 0; }
-                 }
-                 else
-                  { $aux = 0; }
-                 return $aux;
-               }
-              }//else if (substr($campo, 24, 1) == 'M') // MES
+             }//else // MES
             }
           } // fin MAX
           elseif (substr($campo, 23, 1) == 'N') // MIN
@@ -3699,9 +3719,36 @@ class Nomina {
               }
             } else // no son fechas
             {
-             $numero = floatval(substr($campo, 25));
-             if (substr($campo, 24, 1) == 'M') // MES
+
+             if (substr($campo, 24, 1) == 'P') // PERIODO
              {
+                 $numero = floatval(substr($campo, 25));
+                 $criterio="select min(fecnom) as minfec,max(fecnom) as maxfec from (select distinct fecnom from nphiscon where codnom='" . substr($campo, 1, 3) . "' order by fecnom desc limit " . $numero . ") a ";
+                 if (Herramientas :: BuscarDatos($criterio, &$resultados)) {
+                 if (!empty($resultados[0]["minfec"]) && !empty($resultados[0]["maxfec"]))
+                 {
+                   $criterio = "Select coalesce(min(monto),0) as monto from nphiscon where  codnom='" . substr($campo, 1, 3) . "'
+                                          and codemp='" . $empleado . "'  and codcon='" . substr($campo, 4, 3) . "' and ";
+                   $criterio2 = " fecnom>=TO_DATE('" . $resultados[0]["minfec"] . "','yyyy-mm-dd') and
+                                          fecnom<=TO_DATE('" . $resultados[0]["maxfec"] . "','yyyy-mm-dd') ";
+
+                   if (Herramientas :: BuscarDatos($criterio . $criterio2, & $tabla)) {
+                   if (!empty ($tabla[0]["monto"]))
+                    {$aux = $tabla[0]["monto"];}
+                   else
+                     { $aux = 0; }
+                   }
+                   else
+                     { $aux = 0; }
+                 }
+                 else
+                  { $aux = 0; }
+                 return $aux;
+               }
+             }//if (substr($campo, 24, 1) == 'M') // MES
+             else
+              {
+              	$numero = floatval(substr($campo, 24));
                 //////////////////
                 $resta="-".$numero;
                 $sql="select add_months('" . $fecnom . "',-1) as mesfin, add_months('" . $fecnom . "',".$resta.") as mesini from empresa";
@@ -3726,32 +3773,7 @@ class Nomina {
                 }
                 return $aux;
               }
-             }//if (substr($campo, 24, 1) == 'M') // MES
-             else
-              {
-                 $criterio="select min(fecnom) as minfec,max(fecnom) as maxfec from (select distinct fecnom from nphiscon where codnom='" . substr($campo, 1, 3) . "' order by fecnom desc limit " . $numero . ") a ";
-                 if (Herramientas :: BuscarDatos($criterio, &$resultados)) {
-                 if (!empty($resultados[0]["minfec"]) && !empty($resultados[0]["maxfec"]))
-                 {
-                   $criterio = "Select coalesce(min(monto),0) as monto from nphiscon where  codnom='" . substr($campo, 1, 3) . "'
-                                          and codemp='" . $empleado . "'  and codcon='" . substr($campo, 4, 3) . "' and ";
-                   $criterio2 = " fecnom>=TO_DATE('" . $resultados[0]["minfec"] . "','yyyy-mm-dd') and
-                                          fecnom<=TO_DATE('" . $resultados[0]["maxfec"] . "','yyyy-mm-dd') ";
-
-                   if (Herramientas :: BuscarDatos($criterio . $criterio2, & $tabla)) {
-                   if (!empty ($tabla[0]["monto"]))
-                    {$aux = $tabla[0]["monto"];}
-                   else
-                     { $aux = 0; }
-                   }
-                   else
-                     { $aux = 0; }
-                 }
-                 else
-                  { $aux = 0; }
-                 return $aux;
-               }
-              }//else if (substr($campo, 24, 1) == 'M') // MES
+             }//else // MES
             }
           } // fin MIN
         } // FIN DEL "H"
