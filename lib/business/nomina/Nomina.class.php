@@ -2255,8 +2255,7 @@ class Nomina {
              }//if (substr($token, 24, 1) == 'P') // PERIODO
               else  //meses
               {
-              	print "<br> Cod. emp,: ". $empleado;
-                $numero = floatval(substr($token, 24));
+              	$numero = floatval(substr($token, 24));
                 //////////////////
                 $resta="-".$numero;
                 $sql="select add_months('" . $fecnom . "',-1) as mesfin, add_months('" . $fecnom . "',".$resta.") as mesini from empresa";
@@ -2281,7 +2280,6 @@ class Nomina {
                 }
                 $valor = $aux;
                }
-               print "<br> Valor: ". $valor;
               }//else // MES
             } // no son fechas
           } // fin SUM
@@ -3588,7 +3586,7 @@ class Nomina {
 
              }//if (substr($campo, 24, 1) == 'P') // PERIODO
              else
-              { print "<br> Cod. emp,: (evaluacampo) ". $empleado;
+              {
              	$numero = floatval(substr($campo, 24));
                 //////////////////
                 $resta="-".$numero;
@@ -3612,8 +3610,7 @@ class Nomina {
                 } else {
                   $aux = 0;
                 }
-                print "<br> valor: (evaluacampo)". $aux;
-                return $aux;
+               return $aux;
               }
 
               }//else// MES
@@ -4934,7 +4931,7 @@ class Nomina {
         $arreglo[$i]["perfin"] = $anohasta;
 
         $sql = "SELECT A.ANTAPVAC FROM NPBONOCONT A, NPASIEMPCONT B WHERE A.CODTIPCON=B.CODTIPCON AND B.CODEMP='" . $codemp . "' AND TO_DATE(" . $anohasta . ",'YYYY') BETWEEN TO_DATE(ANOVIG,'YYYY') AND TO_DATE(ANOVIGHAS,'YYYY')";
-     
+
         $resp = Herramientas :: BuscarDatos($sql, & $per);
 
         $antiguedadAP = '';
