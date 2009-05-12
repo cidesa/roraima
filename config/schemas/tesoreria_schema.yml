@@ -2207,6 +2207,10 @@ propel:
       type: VARCHAR
       size: 20
       required: true
+    codcat:
+      type: VARCHAR
+      size: 50
+      required: true
     monsal:
       type: NUMERIC
       size: 14

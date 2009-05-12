@@ -2,7 +2,7 @@ opciones:                  # Opciones generales
   eliminar:                true
   tabla:                   tsdetsal
   anchogrid:               900
-  ancho:                   800
+  ancho:                   900
   filas:                   25
   titulo:                  ' '
   htmltotalfilas:          ' '
@@ -18,13 +18,19 @@ opciones:                  # Opciones generales
   nombrecampo:             desart
   html:                    [size="40", readonly=true]
 3:       # Columna 3
+  titulo:                  Cód. Categoria
+  tipo:                    t
+  nombrecampo:             codcat
+  esgrabable:              true
+  html:                    [size="20"]
+4:       # Columna 4
   titulo:                  Monto
   tipo:                    m
   esgrabable:              true
   nombrecampo:             monsal
   esnumerico:              true
   html:                    [size="10"]
-4:        # Columna 4
+5:        # Columna 5
   titulo:                  IVA
   tipo:                    m
   esgrabable:              true
@@ -32,7 +38,7 @@ opciones:                  # Opciones generales
   esnumerico:              true
   oculta:                  true
   html:                    [size="10"]
-5:        # Columna 5
+6:        # Columna 6
   titulo:                  Monto Total
   tipo:                    m
   esgrabable:              true
@@ -40,7 +46,7 @@ opciones:                  # Opciones generales
   oculta:                  true
   esnumerico:              true
   html:                    [size="10", readonly=true]
-6:       # Columna 6
+7:       # Columna 7
   titulo:                  Código Partida
   tipo:                    t
   nombrecampo:             codpar
