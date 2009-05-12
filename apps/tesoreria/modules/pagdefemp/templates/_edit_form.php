@@ -475,7 +475,44 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 
+
+
 <br><br>
+ <table width="35%">
+  <tr>
+    <th align="left">
+<fieldset id="sf_fieldset_none" class="">
+   <legend><?php echo __('Orden de Pago') ?></legend>
+    <div class="form-row" width="100%">
+      <table width="100%">
+      <th width="10%"></th>
+      <th>
+          <?php echo label_for('opdefemp[ordconpre]', __($labels['opdefemp{ordconpre}']), 'class="required" style="width: 200px"') ?>
+          <div class="content<?php if ($sf_request->hasError('opdefemp{ordconpre}')): ?> form-error<?php endif; ?>">
+          <?php if ($sf_request->hasError('opdefemp{ordconpre}')): ?>
+            <?php echo form_error('opdefemp{ordconpre}', array('class' => 'form-error-msg')) ?>
+          <?php endif; ?>
+
+          <?php $value = object_checkbox_tag($opdefemp, 'getOrdconpre', array (
+          'control_name' => 'opdefemp[ordconpre]',
+        )); echo $value ? $value : '&nbsp;' ?>
+
+            </div>
+      </th>
+      </tr>
+
+      </table>
+    </div>
+ </fieldset>
+</th>
+<th>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</th>
+</tr>
+</table>
+
+<br> <br>
+
 <table>
  <tr>
   <th>

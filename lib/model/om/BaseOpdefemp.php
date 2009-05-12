@@ -141,7 +141,31 @@ abstract class BaseOpdefemp extends BaseObject  implements Persistent {
 
 
 	
+	protected $gencomalc;
+
+
+	
+	protected $reqaprord;
+
+
+	
+	protected $ordcomptot;
+
+
+	
+	protected $ordmotanu;
+
+
+	
+	protected $manbloqban;
+
+
+	
 	protected $ordret;
+
+
+	
+	protected $ordconpre = false;
 
 
 	
@@ -389,10 +413,52 @@ abstract class BaseOpdefemp extends BaseObject  implements Persistent {
 
   }
   
+  public function getGencomalc()
+  {
+
+    return trim($this->gencomalc);
+
+  }
+  
+  public function getReqaprord()
+  {
+
+    return trim($this->reqaprord);
+
+  }
+  
+  public function getOrdcomptot()
+  {
+
+    return trim($this->ordcomptot);
+
+  }
+  
+  public function getOrdmotanu()
+  {
+
+    return trim($this->ordmotanu);
+
+  }
+  
+  public function getManbloqban()
+  {
+
+    return trim($this->manbloqban);
+
+  }
+  
   public function getOrdret()
   {
 
     return trim($this->ordret);
+
+  }
+  
+  public function getOrdconpre()
+  {
+
+    return $this->ordconpre;
 
   }
   
@@ -733,12 +799,72 @@ abstract class BaseOpdefemp extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setGencomalc($v)
+	{
+
+    if ($this->gencomalc !== $v) {
+        $this->gencomalc = $v;
+        $this->modifiedColumns[] = OpdefempPeer::GENCOMALC;
+      }
+  
+	} 
+	
+	public function setReqaprord($v)
+	{
+
+    if ($this->reqaprord !== $v) {
+        $this->reqaprord = $v;
+        $this->modifiedColumns[] = OpdefempPeer::REQAPRORD;
+      }
+  
+	} 
+	
+	public function setOrdcomptot($v)
+	{
+
+    if ($this->ordcomptot !== $v) {
+        $this->ordcomptot = $v;
+        $this->modifiedColumns[] = OpdefempPeer::ORDCOMPTOT;
+      }
+  
+	} 
+	
+	public function setOrdmotanu($v)
+	{
+
+    if ($this->ordmotanu !== $v) {
+        $this->ordmotanu = $v;
+        $this->modifiedColumns[] = OpdefempPeer::ORDMOTANU;
+      }
+  
+	} 
+	
+	public function setManbloqban($v)
+	{
+
+    if ($this->manbloqban !== $v) {
+        $this->manbloqban = $v;
+        $this->modifiedColumns[] = OpdefempPeer::MANBLOQBAN;
+      }
+  
+	} 
+	
 	public function setOrdret($v)
 	{
 
     if ($this->ordret !== $v) {
         $this->ordret = $v;
         $this->modifiedColumns[] = OpdefempPeer::ORDRET;
+      }
+  
+	} 
+	
+	public function setOrdconpre($v)
+	{
+
+    if ($this->ordconpre !== $v || $v === false) {
+        $this->ordconpre = $v;
+        $this->modifiedColumns[] = OpdefempPeer::ORDCONPRE;
       }
   
 	} 
@@ -823,9 +949,21 @@ abstract class BaseOpdefemp extends BaseObject  implements Persistent {
 
       $this->codcatcajchi = $rs->getString($startcol + 32);
 
-      $this->ordret = $rs->getString($startcol + 33);
+      $this->gencomalc = $rs->getString($startcol + 33);
 
-      $this->id = $rs->getInt($startcol + 34);
+      $this->reqaprord = $rs->getString($startcol + 34);
+
+      $this->ordcomptot = $rs->getString($startcol + 35);
+
+      $this->ordmotanu = $rs->getString($startcol + 36);
+
+      $this->manbloqban = $rs->getString($startcol + 37);
+
+      $this->ordret = $rs->getString($startcol + 38);
+
+      $this->ordconpre = $rs->getBoolean($startcol + 39);
+
+      $this->id = $rs->getInt($startcol + 40);
 
       $this->resetModified();
 
@@ -833,7 +971,7 @@ abstract class BaseOpdefemp extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 35; 
+            return $startcol + 41; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Opdefemp object", $e);
     }
@@ -1080,9 +1218,27 @@ abstract class BaseOpdefemp extends BaseObject  implements Persistent {
 				return $this->getCodcatcajchi();
 				break;
 			case 33:
-				return $this->getOrdret();
+				return $this->getGencomalc();
 				break;
 			case 34:
+				return $this->getReqaprord();
+				break;
+			case 35:
+				return $this->getOrdcomptot();
+				break;
+			case 36:
+				return $this->getOrdmotanu();
+				break;
+			case 37:
+				return $this->getManbloqban();
+				break;
+			case 38:
+				return $this->getOrdret();
+				break;
+			case 39:
+				return $this->getOrdconpre();
+				break;
+			case 40:
 				return $this->getId();
 				break;
 			default:
@@ -1128,8 +1284,14 @@ abstract class BaseOpdefemp extends BaseObject  implements Persistent {
 			$keys[30] => $this->getNuminicajchi(),
 			$keys[31] => $this->getCedrifcajchi(),
 			$keys[32] => $this->getCodcatcajchi(),
-			$keys[33] => $this->getOrdret(),
-			$keys[34] => $this->getId(),
+			$keys[33] => $this->getGencomalc(),
+			$keys[34] => $this->getReqaprord(),
+			$keys[35] => $this->getOrdcomptot(),
+			$keys[36] => $this->getOrdmotanu(),
+			$keys[37] => $this->getManbloqban(),
+			$keys[38] => $this->getOrdret(),
+			$keys[39] => $this->getOrdconpre(),
+			$keys[40] => $this->getId(),
 		);
 		return $result;
 	}
@@ -1245,9 +1407,27 @@ abstract class BaseOpdefemp extends BaseObject  implements Persistent {
 				$this->setCodcatcajchi($value);
 				break;
 			case 33:
-				$this->setOrdret($value);
+				$this->setGencomalc($value);
 				break;
 			case 34:
+				$this->setReqaprord($value);
+				break;
+			case 35:
+				$this->setOrdcomptot($value);
+				break;
+			case 36:
+				$this->setOrdmotanu($value);
+				break;
+			case 37:
+				$this->setManbloqban($value);
+				break;
+			case 38:
+				$this->setOrdret($value);
+				break;
+			case 39:
+				$this->setOrdconpre($value);
+				break;
+			case 40:
 				$this->setId($value);
 				break;
 		} 	}
@@ -1290,8 +1470,14 @@ abstract class BaseOpdefemp extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[30], $arr)) $this->setNuminicajchi($arr[$keys[30]]);
 		if (array_key_exists($keys[31], $arr)) $this->setCedrifcajchi($arr[$keys[31]]);
 		if (array_key_exists($keys[32], $arr)) $this->setCodcatcajchi($arr[$keys[32]]);
-		if (array_key_exists($keys[33], $arr)) $this->setOrdret($arr[$keys[33]]);
-		if (array_key_exists($keys[34], $arr)) $this->setId($arr[$keys[34]]);
+		if (array_key_exists($keys[33], $arr)) $this->setGencomalc($arr[$keys[33]]);
+		if (array_key_exists($keys[34], $arr)) $this->setReqaprord($arr[$keys[34]]);
+		if (array_key_exists($keys[35], $arr)) $this->setOrdcomptot($arr[$keys[35]]);
+		if (array_key_exists($keys[36], $arr)) $this->setOrdmotanu($arr[$keys[36]]);
+		if (array_key_exists($keys[37], $arr)) $this->setManbloqban($arr[$keys[37]]);
+		if (array_key_exists($keys[38], $arr)) $this->setOrdret($arr[$keys[38]]);
+		if (array_key_exists($keys[39], $arr)) $this->setOrdconpre($arr[$keys[39]]);
+		if (array_key_exists($keys[40], $arr)) $this->setId($arr[$keys[40]]);
 	}
 
 	
@@ -1332,7 +1518,13 @@ abstract class BaseOpdefemp extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(OpdefempPeer::NUMINICAJCHI)) $criteria->add(OpdefempPeer::NUMINICAJCHI, $this->numinicajchi);
 		if ($this->isColumnModified(OpdefempPeer::CEDRIFCAJCHI)) $criteria->add(OpdefempPeer::CEDRIFCAJCHI, $this->cedrifcajchi);
 		if ($this->isColumnModified(OpdefempPeer::CODCATCAJCHI)) $criteria->add(OpdefempPeer::CODCATCAJCHI, $this->codcatcajchi);
+		if ($this->isColumnModified(OpdefempPeer::GENCOMALC)) $criteria->add(OpdefempPeer::GENCOMALC, $this->gencomalc);
+		if ($this->isColumnModified(OpdefempPeer::REQAPRORD)) $criteria->add(OpdefempPeer::REQAPRORD, $this->reqaprord);
+		if ($this->isColumnModified(OpdefempPeer::ORDCOMPTOT)) $criteria->add(OpdefempPeer::ORDCOMPTOT, $this->ordcomptot);
+		if ($this->isColumnModified(OpdefempPeer::ORDMOTANU)) $criteria->add(OpdefempPeer::ORDMOTANU, $this->ordmotanu);
+		if ($this->isColumnModified(OpdefempPeer::MANBLOQBAN)) $criteria->add(OpdefempPeer::MANBLOQBAN, $this->manbloqban);
 		if ($this->isColumnModified(OpdefempPeer::ORDRET)) $criteria->add(OpdefempPeer::ORDRET, $this->ordret);
+		if ($this->isColumnModified(OpdefempPeer::ORDCONPRE)) $criteria->add(OpdefempPeer::ORDCONPRE, $this->ordconpre);
 		if ($this->isColumnModified(OpdefempPeer::ID)) $criteria->add(OpdefempPeer::ID, $this->id);
 
 		return $criteria;
@@ -1430,7 +1622,19 @@ abstract class BaseOpdefemp extends BaseObject  implements Persistent {
 
 		$copyObj->setCodcatcajchi($this->codcatcajchi);
 
+		$copyObj->setGencomalc($this->gencomalc);
+
+		$copyObj->setReqaprord($this->reqaprord);
+
+		$copyObj->setOrdcomptot($this->ordcomptot);
+
+		$copyObj->setOrdmotanu($this->ordmotanu);
+
+		$copyObj->setManbloqban($this->manbloqban);
+
 		$copyObj->setOrdret($this->ordret);
+
+		$copyObj->setOrdconpre($this->ordconpre);
 
 
 		$copyObj->setNew(true);

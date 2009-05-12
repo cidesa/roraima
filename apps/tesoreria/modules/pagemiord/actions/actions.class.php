@@ -343,6 +343,14 @@ $this->Bitacora('Guardo');
 
           //Tesoreria::Salvarconfincomgen($numcom,$reftra,$feccom,$descom,$debito,$credito);
           //Tesoreria::Salvar_asientosconfincomgen($numcom,$reftra,$feccom,$grid,$this->getUser()->getAttribute('grabar',null,$formulario[$i]));
+
+          //Verificamos el formato del correlativo,
+ 		  //ya que es parametrizable
+	      $c = new Criteria();
+    	  $c->add(OpdefempPeer::CODEMP,'001');
+    	  $per = OpdefempPeer::doSelectOne($c);
+
+    	  $numcom = H::iif($per->getOrdconpre()=='t','OP'.substr($numcom = Comprobante::Buscar_Correlativo(),2,strlen($numcom)),$numcom);
           $numcom = Comprobante::SalvarComprobante($numcom,$reftra,$feccom,$descom,$debito,$credito,$grid,$this->getUser()->getAttribute('grabar',null,$formulario[$i]));
           $opordpag->setNumcom($numcom);
           $numerocomp = $numcom;

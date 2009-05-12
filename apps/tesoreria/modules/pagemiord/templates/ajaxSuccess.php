@@ -121,7 +121,7 @@
 'readonly'=> true,
 'onkeyup' => "javascript: mascara(this,'/',patron,true)",
 )) ?></th>
-<th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th>
+<th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th><th>&nbsp;</th>
 <th>
   <?php echo link_to_function(image_tag('/images/Save.png'), "salva('ref')") ?>
 </th>

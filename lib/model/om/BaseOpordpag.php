@@ -213,6 +213,22 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 
 
 	
+	protected $aprobadoord;
+
+
+	
+	protected $codmotanu;
+
+
+	
+	protected $usuanu;
+
+
+	
+	protected $aprobadotes;
+
+
+	
 	protected $id;
 
 	
@@ -790,6 +806,34 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
   {
 
     return trim($this->expsigecof);
+
+  }
+  
+  public function getAprobadoord()
+  {
+
+    return trim($this->aprobadoord);
+
+  }
+  
+  public function getCodmotanu()
+  {
+
+    return trim($this->codmotanu);
+
+  }
+  
+  public function getUsuanu()
+  {
+
+    return trim($this->usuanu);
+
+  }
+  
+  public function getAprobadotes()
+  {
+
+    return trim($this->aprobadotes);
 
   }
   
@@ -1408,6 +1452,46 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setAprobadoord($v)
+	{
+
+    if ($this->aprobadoord !== $v) {
+        $this->aprobadoord = $v;
+        $this->modifiedColumns[] = OpordpagPeer::APROBADOORD;
+      }
+  
+	} 
+	
+	public function setCodmotanu($v)
+	{
+
+    if ($this->codmotanu !== $v) {
+        $this->codmotanu = $v;
+        $this->modifiedColumns[] = OpordpagPeer::CODMOTANU;
+      }
+  
+	} 
+	
+	public function setUsuanu($v)
+	{
+
+    if ($this->usuanu !== $v) {
+        $this->usuanu = $v;
+        $this->modifiedColumns[] = OpordpagPeer::USUANU;
+      }
+  
+	} 
+	
+	public function setAprobadotes($v)
+	{
+
+    if ($this->aprobadotes !== $v) {
+        $this->aprobadotes = $v;
+        $this->modifiedColumns[] = OpordpagPeer::APROBADOTES;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -1524,7 +1608,15 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 
       $this->expsigecof = $rs->getString($startcol + 50);
 
-      $this->id = $rs->getInt($startcol + 51);
+      $this->aprobadoord = $rs->getString($startcol + 51);
+
+      $this->codmotanu = $rs->getString($startcol + 52);
+
+      $this->usuanu = $rs->getString($startcol + 53);
+
+      $this->aprobadotes = $rs->getString($startcol + 54);
+
+      $this->id = $rs->getInt($startcol + 55);
 
       $this->resetModified();
 
@@ -1532,7 +1624,7 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 52; 
+            return $startcol + 56; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Opordpag object", $e);
     }
@@ -1833,6 +1925,18 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 				return $this->getExpsigecof();
 				break;
 			case 51:
+				return $this->getAprobadoord();
+				break;
+			case 52:
+				return $this->getCodmotanu();
+				break;
+			case 53:
+				return $this->getUsuanu();
+				break;
+			case 54:
+				return $this->getAprobadotes();
+				break;
+			case 55:
 				return $this->getId();
 				break;
 			default:
@@ -1896,7 +2000,11 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 			$keys[48] => $this->getNumsigecof(),
 			$keys[49] => $this->getFecsigecof(),
 			$keys[50] => $this->getExpsigecof(),
-			$keys[51] => $this->getId(),
+			$keys[51] => $this->getAprobadoord(),
+			$keys[52] => $this->getCodmotanu(),
+			$keys[53] => $this->getUsuanu(),
+			$keys[54] => $this->getAprobadotes(),
+			$keys[55] => $this->getId(),
 		);
 		return $result;
 	}
@@ -2066,6 +2174,18 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 				$this->setExpsigecof($value);
 				break;
 			case 51:
+				$this->setAprobadoord($value);
+				break;
+			case 52:
+				$this->setCodmotanu($value);
+				break;
+			case 53:
+				$this->setUsuanu($value);
+				break;
+			case 54:
+				$this->setAprobadotes($value);
+				break;
+			case 55:
 				$this->setId($value);
 				break;
 		} 	}
@@ -2126,7 +2246,11 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[48], $arr)) $this->setNumsigecof($arr[$keys[48]]);
 		if (array_key_exists($keys[49], $arr)) $this->setFecsigecof($arr[$keys[49]]);
 		if (array_key_exists($keys[50], $arr)) $this->setExpsigecof($arr[$keys[50]]);
-		if (array_key_exists($keys[51], $arr)) $this->setId($arr[$keys[51]]);
+		if (array_key_exists($keys[51], $arr)) $this->setAprobadoord($arr[$keys[51]]);
+		if (array_key_exists($keys[52], $arr)) $this->setCodmotanu($arr[$keys[52]]);
+		if (array_key_exists($keys[53], $arr)) $this->setUsuanu($arr[$keys[53]]);
+		if (array_key_exists($keys[54], $arr)) $this->setAprobadotes($arr[$keys[54]]);
+		if (array_key_exists($keys[55], $arr)) $this->setId($arr[$keys[55]]);
 	}
 
 	
@@ -2185,6 +2309,10 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(OpordpagPeer::NUMSIGECOF)) $criteria->add(OpordpagPeer::NUMSIGECOF, $this->numsigecof);
 		if ($this->isColumnModified(OpordpagPeer::FECSIGECOF)) $criteria->add(OpordpagPeer::FECSIGECOF, $this->fecsigecof);
 		if ($this->isColumnModified(OpordpagPeer::EXPSIGECOF)) $criteria->add(OpordpagPeer::EXPSIGECOF, $this->expsigecof);
+		if ($this->isColumnModified(OpordpagPeer::APROBADOORD)) $criteria->add(OpordpagPeer::APROBADOORD, $this->aprobadoord);
+		if ($this->isColumnModified(OpordpagPeer::CODMOTANU)) $criteria->add(OpordpagPeer::CODMOTANU, $this->codmotanu);
+		if ($this->isColumnModified(OpordpagPeer::USUANU)) $criteria->add(OpordpagPeer::USUANU, $this->usuanu);
+		if ($this->isColumnModified(OpordpagPeer::APROBADOTES)) $criteria->add(OpordpagPeer::APROBADOTES, $this->aprobadotes);
 		if ($this->isColumnModified(OpordpagPeer::ID)) $criteria->add(OpordpagPeer::ID, $this->id);
 
 		return $criteria;
@@ -2317,6 +2445,14 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 		$copyObj->setFecsigecof($this->fecsigecof);
 
 		$copyObj->setExpsigecof($this->expsigecof);
+
+		$copyObj->setAprobadoord($this->aprobadoord);
+
+		$copyObj->setCodmotanu($this->codmotanu);
+
+		$copyObj->setUsuanu($this->usuanu);
+
+		$copyObj->setAprobadotes($this->aprobadotes);
 
 
 		$copyObj->setNew(true);
