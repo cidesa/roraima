@@ -13,7 +13,7 @@ abstract class BaseTsdetsalPeer {
 	const CLASS_DEFAULT = 'lib.model.Tsdetsal';
 
 	
-	const NUM_COLUMNS = 7;
+	const NUM_COLUMNS = 8;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -24,6 +24,9 @@ abstract class BaseTsdetsalPeer {
 
 	
 	const CODART = 'tsdetsal.CODART';
+
+	
+	const CODCAT = 'tsdetsal.CODCAT';
 
 	
 	const MONSAL = 'tsdetsal.MONSAL';
@@ -46,18 +49,18 @@ abstract class BaseTsdetsalPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Refsal', 'Codart', 'Monsal', 'Monrec', 'Totsal', 'Stasal', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (TsdetsalPeer::REFSAL, TsdetsalPeer::CODART, TsdetsalPeer::MONSAL, TsdetsalPeer::MONREC, TsdetsalPeer::TOTSAL, TsdetsalPeer::STASAL, TsdetsalPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('refsal', 'codart', 'monsal', 'monrec', 'totsal', 'stasal', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
+		BasePeer::TYPE_PHPNAME => array ('Refsal', 'Codart', 'Codcat', 'Monsal', 'Monrec', 'Totsal', 'Stasal', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (TsdetsalPeer::REFSAL, TsdetsalPeer::CODART, TsdetsalPeer::CODCAT, TsdetsalPeer::MONSAL, TsdetsalPeer::MONREC, TsdetsalPeer::TOTSAL, TsdetsalPeer::STASAL, TsdetsalPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('refsal', 'codart', 'codcat', 'monsal', 'monrec', 'totsal', 'stasal', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Refsal' => 0, 'Codart' => 1, 'Monsal' => 2, 'Monrec' => 3, 'Totsal' => 4, 'Stasal' => 5, 'Id' => 6, ),
-		BasePeer::TYPE_COLNAME => array (TsdetsalPeer::REFSAL => 0, TsdetsalPeer::CODART => 1, TsdetsalPeer::MONSAL => 2, TsdetsalPeer::MONREC => 3, TsdetsalPeer::TOTSAL => 4, TsdetsalPeer::STASAL => 5, TsdetsalPeer::ID => 6, ),
-		BasePeer::TYPE_FIELDNAME => array ('refsal' => 0, 'codart' => 1, 'monsal' => 2, 'monrec' => 3, 'totsal' => 4, 'stasal' => 5, 'id' => 6, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
+		BasePeer::TYPE_PHPNAME => array ('Refsal' => 0, 'Codart' => 1, 'Codcat' => 2, 'Monsal' => 3, 'Monrec' => 4, 'Totsal' => 5, 'Stasal' => 6, 'Id' => 7, ),
+		BasePeer::TYPE_COLNAME => array (TsdetsalPeer::REFSAL => 0, TsdetsalPeer::CODART => 1, TsdetsalPeer::CODCAT => 2, TsdetsalPeer::MONSAL => 3, TsdetsalPeer::MONREC => 4, TsdetsalPeer::TOTSAL => 5, TsdetsalPeer::STASAL => 6, TsdetsalPeer::ID => 7, ),
+		BasePeer::TYPE_FIELDNAME => array ('refsal' => 0, 'codart' => 1, 'codcat' => 2, 'monsal' => 3, 'monrec' => 4, 'totsal' => 5, 'stasal' => 6, 'id' => 7, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
 	);
 
 	
@@ -114,6 +117,8 @@ abstract class BaseTsdetsalPeer {
 		$criteria->addSelectColumn(TsdetsalPeer::REFSAL);
 
 		$criteria->addSelectColumn(TsdetsalPeer::CODART);
+
+		$criteria->addSelectColumn(TsdetsalPeer::CODCAT);
 
 		$criteria->addSelectColumn(TsdetsalPeer::MONSAL);
 

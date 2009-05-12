@@ -8,9 +8,9 @@ function totalizarMonto(e)
     var i=0;
     while (i<am)
     {
-      var id1="ax"+"_"+i+"_3";
-      var id2="ax"+"_"+i+"_4";
-      var id3="ax"+"_"+i+"_5";
+      var id1="ax"+"_"+i+"_4";
+      var id2="ax"+"_"+i+"_5";
+      var id3="ax"+"_"+i+"_6";
 
       var nid1=toFloat(id1);
       var nid2=toFloat(id2);
@@ -129,7 +129,7 @@ function totalizarMonto(e)
     var col=parseInt(aux[2]);
 
     var coldes=col+1;
-    var colmonto=col+2;
+    var colmonto=col+3;
     var colpar=col+6;
 
     var descripcion=name+"_"+fil+"_"+coldes;
@@ -259,10 +259,31 @@ function totalizarMonto(e)
     var monto="ax_"+i+"_2";
     var nmonto=toFloat(monto);
 
-    total =  total +nmonto;
+    total =  total + nmonto;
     $(monto).value=format(nmonto.toFixed(2),'.',',','.');
 
   	i++;
   }
   $('opordpag_monord').value=format(total.toFixed(2),'.',',','.');
+ }
+
+ function ajaxcategoria(e,id)
+ {
+    var aux = id.split("_");
+    var name=aux[0];
+    var fil=parseInt(aux[1]);
+    var col=parseInt(aux[2]);
+
+    var colpar=col+4;
+     var parti=name+"_"+fil+"_"+colpar;
+     var partida=$(parti).value;
+    var cod=$(id).value;
+
+    if (e.keyCode==13 || e.keyCode==9)
+    {
+      if ($(id).value!="")
+      {
+        new Ajax.Request(getUrlModuloAjax(), {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=4&partida='+partida+'&cajtexcom='+id+'&codigo='+cod})
+      }
+    }
  }

@@ -17,6 +17,10 @@ abstract class BaseTsdetsal extends BaseObject  implements Persistent {
 
 
 	
+	protected $codcat;
+
+
+	
 	protected $monsal;
 
 
@@ -53,6 +57,13 @@ abstract class BaseTsdetsal extends BaseObject  implements Persistent {
   {
 
     return trim($this->codart);
+
+  }
+  
+  public function getCodcat()
+  {
+
+    return trim($this->codcat);
 
   }
   
@@ -110,6 +121,16 @@ abstract class BaseTsdetsal extends BaseObject  implements Persistent {
     if ($this->codart !== $v) {
         $this->codart = $v;
         $this->modifiedColumns[] = TsdetsalPeer::CODART;
+      }
+  
+	} 
+	
+	public function setCodcat($v)
+	{
+
+    if ($this->codcat !== $v) {
+        $this->codcat = $v;
+        $this->modifiedColumns[] = TsdetsalPeer::CODCAT;
       }
   
 	} 
@@ -172,15 +193,17 @@ abstract class BaseTsdetsal extends BaseObject  implements Persistent {
 
       $this->codart = $rs->getString($startcol + 1);
 
-      $this->monsal = $rs->getFloat($startcol + 2);
+      $this->codcat = $rs->getString($startcol + 2);
 
-      $this->monrec = $rs->getFloat($startcol + 3);
+      $this->monsal = $rs->getFloat($startcol + 3);
 
-      $this->totsal = $rs->getFloat($startcol + 4);
+      $this->monrec = $rs->getFloat($startcol + 4);
 
-      $this->stasal = $rs->getString($startcol + 5);
+      $this->totsal = $rs->getFloat($startcol + 5);
 
-      $this->id = $rs->getInt($startcol + 6);
+      $this->stasal = $rs->getString($startcol + 6);
+
+      $this->id = $rs->getInt($startcol + 7);
 
       $this->resetModified();
 
@@ -188,7 +211,7 @@ abstract class BaseTsdetsal extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 7; 
+            return $startcol + 8; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Tsdetsal object", $e);
     }
@@ -342,18 +365,21 @@ abstract class BaseTsdetsal extends BaseObject  implements Persistent {
 				return $this->getCodart();
 				break;
 			case 2:
-				return $this->getMonsal();
+				return $this->getCodcat();
 				break;
 			case 3:
-				return $this->getMonrec();
+				return $this->getMonsal();
 				break;
 			case 4:
-				return $this->getTotsal();
+				return $this->getMonrec();
 				break;
 			case 5:
-				return $this->getStasal();
+				return $this->getTotsal();
 				break;
 			case 6:
+				return $this->getStasal();
+				break;
+			case 7:
 				return $this->getId();
 				break;
 			default:
@@ -368,11 +394,12 @@ abstract class BaseTsdetsal extends BaseObject  implements Persistent {
 		$result = array(
 			$keys[0] => $this->getRefsal(),
 			$keys[1] => $this->getCodart(),
-			$keys[2] => $this->getMonsal(),
-			$keys[3] => $this->getMonrec(),
-			$keys[4] => $this->getTotsal(),
-			$keys[5] => $this->getStasal(),
-			$keys[6] => $this->getId(),
+			$keys[2] => $this->getCodcat(),
+			$keys[3] => $this->getMonsal(),
+			$keys[4] => $this->getMonrec(),
+			$keys[5] => $this->getTotsal(),
+			$keys[6] => $this->getStasal(),
+			$keys[7] => $this->getId(),
 		);
 		return $result;
 	}
@@ -395,18 +422,21 @@ abstract class BaseTsdetsal extends BaseObject  implements Persistent {
 				$this->setCodart($value);
 				break;
 			case 2:
-				$this->setMonsal($value);
+				$this->setCodcat($value);
 				break;
 			case 3:
-				$this->setMonrec($value);
+				$this->setMonsal($value);
 				break;
 			case 4:
-				$this->setTotsal($value);
+				$this->setMonrec($value);
 				break;
 			case 5:
-				$this->setStasal($value);
+				$this->setTotsal($value);
 				break;
 			case 6:
+				$this->setStasal($value);
+				break;
+			case 7:
 				$this->setId($value);
 				break;
 		} 	}
@@ -418,11 +448,12 @@ abstract class BaseTsdetsal extends BaseObject  implements Persistent {
 
 		if (array_key_exists($keys[0], $arr)) $this->setRefsal($arr[$keys[0]]);
 		if (array_key_exists($keys[1], $arr)) $this->setCodart($arr[$keys[1]]);
-		if (array_key_exists($keys[2], $arr)) $this->setMonsal($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setMonrec($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setTotsal($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setStasal($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setId($arr[$keys[6]]);
+		if (array_key_exists($keys[2], $arr)) $this->setCodcat($arr[$keys[2]]);
+		if (array_key_exists($keys[3], $arr)) $this->setMonsal($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setMonrec($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setTotsal($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setStasal($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setId($arr[$keys[7]]);
 	}
 
 	
@@ -432,6 +463,7 @@ abstract class BaseTsdetsal extends BaseObject  implements Persistent {
 
 		if ($this->isColumnModified(TsdetsalPeer::REFSAL)) $criteria->add(TsdetsalPeer::REFSAL, $this->refsal);
 		if ($this->isColumnModified(TsdetsalPeer::CODART)) $criteria->add(TsdetsalPeer::CODART, $this->codart);
+		if ($this->isColumnModified(TsdetsalPeer::CODCAT)) $criteria->add(TsdetsalPeer::CODCAT, $this->codcat);
 		if ($this->isColumnModified(TsdetsalPeer::MONSAL)) $criteria->add(TsdetsalPeer::MONSAL, $this->monsal);
 		if ($this->isColumnModified(TsdetsalPeer::MONREC)) $criteria->add(TsdetsalPeer::MONREC, $this->monrec);
 		if ($this->isColumnModified(TsdetsalPeer::TOTSAL)) $criteria->add(TsdetsalPeer::TOTSAL, $this->totsal);
@@ -470,6 +502,8 @@ abstract class BaseTsdetsal extends BaseObject  implements Persistent {
 		$copyObj->setRefsal($this->refsal);
 
 		$copyObj->setCodart($this->codart);
+
+		$copyObj->setCodcat($this->codcat);
 
 		$copyObj->setMonsal($this->monsal);
 

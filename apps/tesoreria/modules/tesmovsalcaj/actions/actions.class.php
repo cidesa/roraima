@@ -30,27 +30,35 @@ class tesmovsalcajActions extends autotesmovsalcajActions
 
   	$mascara=$this->mascaraarticulo;
   	$lonarti=$this->lonart;
-
+    $mascaracategoria=$this->mascaracategoria;
+    $loncat=$this->loncat;
     $this->columnas = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/tesmovsalcaj/'.sfConfig::get('sf_app_module_config_dir_name').'/grid_tsdetsal');
 
     if ($refsal=='')
     {
       $obj= array('codart' => 1, 'desart' => 2);
       $params= array('param1' => $lonarti, 'val2');
-      $this->columnas[1][0]->setHTML('type="text" size="17" maxlength="'.chr(39).$lonarti.chr(39).'" onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascara.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;} perderfocus(event,this.id,6);" onBlur="javascript:event.keyCode=13; ajaxarticulos(event,this.id);"');
+
+      $obj2= array('codcat' => 3);
+      $params2= array('param1' => $loncat);
+
+      $this->columnas[1][0]->setHTML('type="text" size="17" maxlength="'.chr(39).$lonarti.chr(39).'" onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascara.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;} perderfocus(event,this.id,7);" onBlur="javascript:event.keyCode=13; ajaxarticulos(event,this.id);"');
       $this->columnas[1][0]->setCatalogo('caregart','sf_admin_edit_form',$obj,'Caregart_Fapedido',$params);
-      $this->columnas[1][2]->setHTML(' size="10" onKeyPress=totalizarMonto(event);');
+      $this->columnas[1][2]->setHTML('type="text" size="17" maxlength="'.chr(39).$loncat.chr(39).'" onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascaracategoria.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;} perderfocus(event,this.id,7);" onBlur="javascript:event.keyCode=13; ajaxcategoria(event,this.id);"');
+      $this->columnas[1][2]->setCatalogo('npcatpre','sf_admin_edit_form',$obj2,'Npcatpre_Almsolegr',$params2);
       $this->columnas[1][3]->setHTML(' size="10" onKeyPress=totalizarMonto(event);');
-      $this->columnas[1][2]->setEsTotal(true,'tssalcaj_monsal');
+      $this->columnas[1][4]->setHTML(' size="10" onKeyPress=totalizarMonto(event);');
+      $this->columnas[1][3]->setEsTotal(true,'tssalcaj_monsal');
     }
     else
     {
       $this->columnas[0]->setEliminar(false);
       $this->columnas[0]->setFilas(0);
       $this->columnas[1][0]->setHTML('type="text" size="17" readonly=true; ');
-      $this->columnas[1][2]->setHTML(' size="10" readonly=true; ');
+      $this->columnas[1][2]->setHTML('type="text" size="17" readonly=true; ');
       $this->columnas[1][3]->setHTML(' size="10" readonly=true; ');
-      $this->columnas[1][2]->setEsTotal(true,'tssalcaj_monsal');
+      $this->columnas[1][4]->setHTML(' size="10" readonly=true; ');
+      $this->columnas[1][3]->setEsTotal(true,'tssalcaj_monsal');
     }
 
     $this->obj =$this->columnas[0]->getConfig($detalle);
@@ -134,6 +142,29 @@ class tesmovsalcajActions extends autotesmovsalcajActions
         }
         $output = '[["'.$cajtexmos.'","'.$dato1.'",""],["'.$monto.'","'.$dato2.'",""],["'.$partida.'","'.$dato3.'",""],["javascript","'.$javascript.'",""]]';
         break;
+      case '4':
+       $cajtexcom= $this->getRequestParameter('cajtexcom');
+       $javascript="";
+       $q= new Criteria();
+       $q->add(NpcatprePeer::CODCAT,$this->getRequestParameter('codigo'));
+       $data= NpcatprePeer::doSelectOne($q);
+       if (!$data)
+       {
+       	$javascript="alert('La Categoria no Existe'); $('$cajtexcom').value=''; $('$cajtexcom').focus();";
+       }
+       else
+       {
+         $codpre=$this->getRequestParameter('codigo').'-'.$this->getRequestParameter('partida');
+         $r= new Criteria();
+         $r->add(CpdeftitPeer::CODPRE,$codpre);
+         $reg= CpdeftitPeer::doSelectOne($r);
+         if(!$reg)
+         {
+         	$javascript="alert('La Código Presupuestario formado por la Categoria y la Partida del articulo no existe --> $codpre'); $('$cajtexcom').value=''; $('$cajtexcom').focus();";
+         }
+       }
+        $output = '[["javascript","'.$javascript.'",""],["","",""],["","",""]]';
+       break;
       default:
         break;
         $output = '[["","",""],["","",""],["","",""]]';
@@ -185,6 +216,8 @@ class tesmovsalcajActions extends autotesmovsalcajActions
   	}
     $this->mascaraarticulo = Herramientas::getMascaraArticulo();
     $this->lonart=strlen($this->mascaraarticulo);
+    $this->mascaracategoria = Herramientas::getObtener_FormatoCategoria();
+    $this->loncat=strlen($this->mascaracategoria);
   }
 
   protected function saving($tssalcaj)

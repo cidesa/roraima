@@ -52,7 +52,7 @@ class tesrencajchiActions extends autotesrencajchiActions
     if ($fecha=='') $fecha=date('d/m/Y');
     if ($numord=='')
     {
-      $sql = "Select '".$codcat."'||'-'||B.CodPar as codpre,Sum(A.MonSal) as moncau, '' as id From TSDetSal A,CARegArt B Where A.RefSal In (Select C.RefSal From TSSalCaj C Where C.FecSal<=TO_DATE('".$fecha."','dd/mm/yyyy') And C.StaSal='P') And A.CodArt=B.CodArt Group By B.CodPar";
+      $sql = "Select A.Codcat||'-'||B.CodPar as codpre,Sum(A.MonSal) as moncau, '' as id From TSDetSal A,CARegArt B Where A.RefSal In (Select C.RefSal From TSSalCaj C Where C.FecSal<=TO_DATE('".$fecha."','dd/mm/yyyy') And C.StaSal='P') And A.CodArt=B.CodArt Group By A.Codcat,B.CodPar";
     Herramientas :: BuscarDatos($sql, & $reg);
     $detalle=$reg;
     }
@@ -137,7 +137,11 @@ class tesrencajchiActions extends autotesrencajchiActions
           }
           else
           {
-            $msj="";
+	        if (Tesoreria::validaPeriodoCerrado($this->getRequestParameter('codigo'))==true)
+	        {
+	          $msj="alert('La Fecha no se encuentra de un Perido Contable Abierto.'); $('opordpag_fecanu').value='';";
+	        }
+	        else { $msj=""; }
           }
         }
         else
