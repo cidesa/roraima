@@ -146,7 +146,7 @@ class vachistoricoActions extends autovachistoricoActions
 	     if (trim($x)!="")
 	     {
 	     	$js.="$('$cajtexcom').value='';";
-		 	$js.="alert('Codigo de Contrato ya Registrado');";
+		 	$js.="alert('Empleado con vacaciones ya registradas consulte la lista para modificaciones');";
 		 	$js.="$('$cajtexcom').focus();";
 		 	$this->configGrid();
 	     	$output = '[["'.$cajtexnom.'","'.$nombre.'",""],["'.$cajtexfec.'","'.$fechaing.'",""],["'.$cajadias.'","",""],["javascript","'.$js.'",""]]';
