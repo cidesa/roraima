@@ -269,6 +269,59 @@ $this->Bitacora('Guardo');
       $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
       return sfView::HEADER_ONLY;
     }
+
+    elseif ($this->getRequestParameter('ajax')=='7')
+    {
+       $reccalformat=0;
+       $codart=$this->getRequestParameter('codart');
+       $reqart=$this->getRequestParameter('reqart');
+       $cosact=$this->getRequestParameter('cosact');
+
+       $monrecargo=0;
+
+       $cri = new Criteria();
+       $cri->add(CaartsolPeer::REQART,$reqart);
+       $cri->add(CaartsolPeer::CODART,$codart);
+       $cri->addAscendingOrderByColumn(CaartsolPeer::CODCAT);
+       $reg = CaartsolPeer::doSelect($cri);
+       foreach ($reg as $solegr)
+	   {
+             $c= new Criteria();
+			 $c->add(CadisrgoPeer::REQART,$reqart);
+			 $c->add(CadisrgoPeer::CODART,$solegr->getCodart());
+			 $c->add(CadisrgoPeer::CODCAT,$solegr->getCodcat());
+			 $c->add(CadisrgoPeer::TIPDOC,'SAE');
+			 $result=CadisrgoPeer::doSelect($c);
+			 if ($result)
+			 {
+		        foreach ($result as $datos)
+		        {
+		           $monrgopor=$datos->getMonrgoc();
+		           if ($datos->getTiprgo()=='M')
+				   {
+				     $recargo= $monrgopor;
+				   }
+				   else if ($datos->getTiprgo()=='P')
+				   {
+				   	 $monbase = $solegr->getCanreq()*$cosact;
+				     $recargo = (($monbase*$monrgopor)/100);
+				   }
+				   else
+				   {
+				      $recargo=0;
+				   }
+                   $monrecargo=$monrecargo+$recargo;
+		        }// foreach ($result as $datos)
+			 }//if ($result)
+	   }//	 foreach ($reg as $solegr)
+       $monrecargoformat=number_format($monrecargo,2,',','.');
+      // $colmonrec="cacotiza_monrec";
+       $colmonrec=$this->getRequestParameter('colrecart');
+       $output = '[["'.$colmonrec.'","'.$monrecargoformat.'",""]]';
+       $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+       return sfView::HEADER_ONLY;
+    }
+
   }
 
   protected function getCacotizaOrCreate($id = 'id')
@@ -288,7 +341,7 @@ $this->Bitacora('Guardo');
     else  //Modificacion
     {
       $cacotiza = CacotizaPeer::retrieveByPk($this->getRequestParameter($id));
-      $this->configGrid($cacotiza->getRefcot(),1);
+      $this->configGrid($cacotiza->getRefcot(),3);
 
 
       $this->forward404Unless($cacotiza);
@@ -321,7 +374,7 @@ $this->Bitacora('Guardo');
 
   public function configGrid($codigo=' ', $referencia=' ')
   {
-    if ($referencia==1){ //cotizacion directa
+    if ($referencia==1 or $referencia==3){ //cotizacion directa
       $c = new Criteria();
       $c->add(CadetcotPeer::REFCOT,$codigo);
    //   $c->addAscendingOrderByColumn(CadetcotPeer::CODART);
@@ -331,8 +384,10 @@ $this->Bitacora('Guardo');
 
 	  $param='Caartsol';
 
-      $sql="Select 9 as id, a.codart, b.desart, a.costo, sum(a.canreq) as canreq,  sum(a.mondes) as mondes, sum(a.canreq * a.costo ) as totdet, now() as fecentreg " .
-	  		"from Caartsol a, Caregart b  where a.codart=b.codart and reqart='".$codigo."' group by a.codart,b.desart,a.costo";
+      $sql="Select 9 as id, a.codart, b.desart, a.costo, sum(a.canreq) as canreq,  sum(a.mondes) as mondes, sum(a.canreq * a.costo ) as totdet, " .
+      		"now() as fecentreg, (select sum(monrgo) from cadisrgo c where c.reqart='".$codigo."' and c.codart=a.codart) as recargo " .
+	  		"from Caartsol a, Caregart b  " .
+	  		"where a.codart=b.codart and reqart='".$codigo."' group by a.codart,b.desart,a.costo";
 	  $resp = Herramientas::BuscarDatos($sql,&$per);
 
     }else{
@@ -375,7 +430,7 @@ $this->Bitacora('Guardo');
     { $col1->setHTML('type="text" size="15"');
       $col1->setCatalogo('Caregart','sf_admin_edit_form',$obj,'Caregart_Almcotiza',$params);
     }
-    else if ($referencia==2 || $referencia==4)
+    else if ($referencia==2 || $referencia==3)
     { $col1->setHTML('type="text" size="15" readonly="true"');}
     else { $col1->setHTML('type="text" size="15" readonly="true"');}
     $col1->setJScript('onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascaraarticulo.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}"');
@@ -410,11 +465,12 @@ $this->Bitacora('Guardo');
     $col4->setTitulo('Costo');
     $col4->setEsGrabable(true);
     $col4->setNombreCampo('costo');
-    if ($referencia==1 || $referencia==2 || $referencia==4)
+    if ($referencia==1 || $referencia==2 || $referencia==3)
     { $col4->setHTML('type="text" size="12"');}
     else
     { $col4->setHTML('type="text" size="12" readonly="true"');}
     $col4->setJScript('onkeyPress="entermonto(event,this.id); costocacotiza(event,this.id)"');
+
 
     $col5 = clone $col4;
     $col5->setTitulo('Descuento');
@@ -440,6 +496,15 @@ $this->Bitacora('Guardo');
     $col7->setHTML('');
     //$col7->setVacia(true);
 
+    $col8= clone $col4;
+    $col8->setTitulo('recargos');
+    $col8->setEsGrabable(true);
+    $col8->setNombreCampo('recargo');
+    $col8->setJScript(' ');
+    $col8->setHTML('type="text" size=15');
+    $col8->setOculta(true);
+    $col8->setEsTotal(true,'cacotiza_monrec');
+
     $opciones->addColumna($col1);
     $opciones->addColumna($col2);
     $opciones->addColumna($col3);
@@ -447,6 +512,7 @@ $this->Bitacora('Guardo');
     $opciones->addColumna($col5);
     $opciones->addColumna($col6);
     $opciones->addColumna($col7);
+    $opciones->addColumna($col8);
 
     $this->obj = $opciones->getConfig($per);
 
