@@ -2255,7 +2255,7 @@ class Nomina {
              }//if (substr($token, 24, 1) == 'P') // PERIODO
               else  //meses
               {
-              	$numero = floatval(substr($token, 24));
+                $numero = floatval(substr($token, 24));
                 //////////////////
                 $resta="-".$numero;
                 $sql="select add_months('" . $fecnom . "',-1) as mesfin, add_months('" . $fecnom . "',".$resta.") as mesini from empresa";
@@ -2279,7 +2279,7 @@ class Nomina {
                   $aux = $tabla[0]["monto"];
                 }
                 $valor = $aux;
-               }
+               }              
               }//else // MES
             } // no son fechas
           } // fin SUM
@@ -3586,7 +3586,7 @@ class Nomina {
 
              }//if (substr($campo, 24, 1) == 'P') // PERIODO
              else
-              {
+              { 
              	$numero = floatval(substr($campo, 24));
                 //////////////////
                 $resta="-".$numero;
@@ -3610,7 +3610,7 @@ class Nomina {
                 } else {
                   $aux = 0;
                 }
-               return $aux;
+                return $aux;
               }
 
               }//else// MES
@@ -4921,7 +4921,21 @@ class Nomina {
       }
       $anoing = $anodesde;
       $anohasta = $anodesde +1;
-      $anofin = (int) $anohoy;
+	  
+	  if($meshoy>=$mes)
+	  {
+	  	if($meshoy>$mes)
+	  	  $anofin = ((int)$anohoy);
+		elseif($diahoy>=$dia)	
+		  $anofin = (int) $anohoy;
+		else
+		  $anofin = ((int)$anohoy)-1;    
+	  }      	
+	  else
+	  {
+		  $anofin = ((int)$anohoy)-1;
+	  }
+	   
 
       $i = 0;
 
@@ -4930,7 +4944,7 @@ class Nomina {
         $arreglo[$i]["perini"] = $anodesde;
         $arreglo[$i]["perfin"] = $anohasta;
 
-        $sql = "SELECT A.ANTAPVAC FROM NPBONOCONT A, NPASIEMPCONT B WHERE A.CODTIPCON=B.CODTIPCON AND B.CODEMP='" . $codemp . "' AND TO_DATE(" . $anohasta . ",'YYYY') BETWEEN TO_DATE(ANOVIG,'YYYY') AND TO_DATE(ANOVIGHAS,'YYYY')";
+        $sql = "SELECT A.ANTAPVAC FROM NPBONOCONT A, NPASIEMPCONT B WHERE A.CODTIPCON=B.CODTIPCON AND B.CODEMP='" . $codemp . "' AND '" . $anohasta . "' BETWEEN TO_CHAR(ANOVIG,'YYYY') AND TO_CHAR(ANOVIGHAS,'YYYY')";
 
         $resp = Herramientas :: BuscarDatos($sql, & $per);
 
@@ -5199,9 +5213,23 @@ class Nomina {
     else
       $sqlnom = "and a.codnom='$nomina'";
     //and TO_NUMBER(TO_CHAR(b.fecing,'YYYY'),'9999') >= ".$perini."'
-    $sql = "Select  distinct a.codnom, a.codemp, b.nomemp, a.id, TO_CHAR(b.fecing,'YYYY')
+	if($perini == (date('Y') - 1))
+	{
+		$sql = "Select  distinct a.codnom, a.codemp, b.nomemp, a.id, TO_CHAR(b.fecing,'YYYY')
           from Npasicaremp a,Nphojint b, npasiempcont c
-          where  TO_NUMBER(TO_CHAR(b.fecing,'YYYY'),'9999')<='$perini' and  a.codemp=c.codemp and a.codnom=c.codnom and a.codemp=b.codemp and a.status='V' $sqlnom order by a.codemp";
+          where  TO_NUMBER(TO_CHAR(b.fecing,'YYYY'),'9999')<='$perini' and  
+		  (case when (to_char(date(now()),'mm')>to_char(fecing,'mm')) then 'SI'
+			when (to_char(date(now()),'mm')=to_char(fecing,'mm')) then (case when (to_char(date(now()),'dd')>=to_char(fecing,'mm')) then 'SI' else 'NO' end)  
+			else 'NO' end )='SI' and  
+		  a.codemp=c.codemp and a.codnom=c.codnom and a.codemp=b.codemp and a.status='V' $sqlnom order by a.codemp";		
+	}
+	else{
+		$sql = "Select  distinct a.codnom, a.codemp, b.nomemp, a.id, TO_CHAR(b.fecing,'YYYY')
+          from Npasicaremp a,Nphojint b, npasiempcont c
+          where  TO_NUMBER(TO_CHAR(b.fecing,'YYYY'),'9999')<='$perini' and  a.codemp=c.codemp and a.codnom=c.codnom and a.codemp=b.codemp and a.status='V' $sqlnom order by a.codemp";	
+	}
+    
+	  
     $arremp = array ();
     Herramientas :: BuscarDatos($sql, & $arremp1);
 
@@ -5547,7 +5575,7 @@ class Nomina {
                 A.codnom='" . $nomina . "'
                 And B.Ano Between " . ($anohasta -1) . " and " . $anofin . "
                 And " . $anofin . "-B.ano between A.rangodesde and A.rangohasta
-                And C.PERINI=B.ANO
+                And C.PERINI=B.ANO::varchar
                 And C.CODEMP='" . $codemp . "'
 
               ) as subconsulta
@@ -6401,7 +6429,9 @@ class Nomina {
     return -1;
   }
 
-   public static function salvarNpsalintind($npsalint, $grid) {
+  public static function salvarNpsalintind($npsalint, $grid) {
+
+
 
     $x = $grid[0];
 
@@ -6418,37 +6448,58 @@ class Nomina {
 
     //Herramientas::PrintR($x);
     $j = 0;
-    $montoasiref=-1;
     $monasi=0;
+    $valmon=0;
+    $valmonaux=0;
+    $monasicomp0=0;
+    $monasicomp1=0;
+    $monasicomp2=0;
+    $monasicomp3=0;
+    $monasicomp4=0;
+    $monasicomp5=0;
+    $monasicomp6=0;
+    $monasicomp7=0;
+    $monasicomp8=0;
+    $monasicomp9=0;
+    $monasicomp10=0;
+    $monasicomp11=0;
+    $monasicomp12=0;
+    $monasicomp13=0;
+    $monasicomp14=0;
     while ($j < count($x)) {
       $h = 0;
-      while ($h < count($arr_codasi)) {
 
-      /*  if($montoasiref!=$x[$j][$arr_codasi[$h]["codasi"]] && $x[$j][$arr_codasi[$h]["codasi"]]!=0)
+      while ($h < count($arr_codasi)) {
+       eval('$valmon=$monasicomp'.$h.';');
+       if($valmon!=$x[$j][$arr_codasi[$h]["codasi"]] && $x[$j][$arr_codasi[$h]["codasi"]]!=0)
         {
-          $monasi=$x[$j][$arr_codasi[$h]["codasi"]];
-        }*/
+          eval('$monasi'.$h.'=$x[$j][$arr_codasi[$h]["codasi"]];');
+        }
+        else
+        {
+          eval('$monasi'.$h.'=$monasicomp'.$h.';');
+        }
         $npsalint = new Npsalint();
         $npsalint->setCodemp($codemp);
         $npsalint->setCodasi($arr_codasi[$h]["codasi"]);
-        $npsalint->setMonasi($x[$j][$arr_codasi[$h]["codasi"]]);
-        //$npsalint->setMonasi($monasi);
+        //$npsalint->setMonasi($x[$j][$arr_codasi[$h]["codasi"]]);
         $fecinicon = $x[$j]["fecinicon"];
         $fecfincon = $x[$j]["fecfincon"];
         $npsalint->setFecinicon($fecinicon);
         $npsalint->setFecfincon($fecfincon);
         $npsalint->setCodcon($codcon);
-        $npsalint->save();
-        //print "<br> A grabar, codemp ".$codemp." Cod Asi ".$arr_codasi[$h]["codasi"]. " Monasi ".$x[$j][$arr_codasi[$h]["codasi"]];
-        //print "<br> A grabar, fecinicon ".$fecinicon." fecfincon ".$fecfincon;
-        $montoasiref=$x[$j][$arr_codasi[$h]["codasi"]];
+        eval('$npsalint->setMonasi($monasi'.$h.');');
+	    $npsalint->save();
+
+        #eval('$valmonaux=$x[$j][$arr_codasi[$h]["codasi"]];');
+        if ($x[$j][$arr_codasi[$h]["codasi"]]!=0)
+        	eval('$monasicomp'.$h.'=$x[$j][$arr_codasi[$h]["codasi"]];');
         $h++;
       }
       $j++;
     }
     return -1;
   }
-
 
   public static function validarNomcamnomcar($npasicaremp, $codnom, $codcar, $codcat, $feccam) {
 
