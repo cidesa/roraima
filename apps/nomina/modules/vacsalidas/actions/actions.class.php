@@ -351,8 +351,16 @@ $this->Bitacora('Guardo');
       {
         $this->npvacsalidas = $this->getNpvacsalidasOrCreate();
         $this->updateNpvacsalidasFromRequest();
+		
 
-        self::$coderror=Nomina::validarVacsalidas($this->npvacsalidas);
+		if($this->npvacsalidas->getDiasdisfrutar()<='0')
+		{
+			self::$coderror = 461;
+		}else
+		{
+			self::$coderror=Nomina::validarVacsalidas($this->npvacsalidas);	
+		}
+        
 
         if (self::$coderror<>-1)
         {

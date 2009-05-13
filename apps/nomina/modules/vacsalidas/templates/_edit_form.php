@@ -85,6 +85,7 @@
   'date_format' => 'dd/MM/yyyy',
   'maxlength' => 10,
   'size' => 10,
+  'readonly' => $npvacsalidas->getId() ? true : false, 
   'onkeyup' => "javascript: mascara(this,'/',patron,true)"/*,
   'onchange'=> remote_function(array(
   'update'   => 'grid',
@@ -112,6 +113,7 @@
   'control_name' => 'npvacsalidas[fecdes]',
   'maxlength' => 10,
   'size' => 10,
+  'readonly' => $npvacsalidas->getId() ? true : false,
   'onkeyup' => "javascript: mascara(this,'/',patron,true)",
   'date_format' => 'dd/MM/yyyy',
   'onBlur'=> remote_function(array(
@@ -150,6 +152,7 @@
   <?php $value = object_input_tag($npvacsalidas, 'getDiasdisfrutar', array (
   'value' => $npvacsalidas->getId()!='' ? $npvacsalidas->getDiasdisfrutar() : '0' ,
   'size' => 7,
+  'readonly' => $npvacsalidas->getId() ? true : false,
   'control_name' => 'npvacsalidas[diasdisfrutar]',
   'onBlur'=> remote_function(array(
   'update'   => 'grid',
@@ -205,3 +208,13 @@ echo grid_tag($obj);
 )) ?><?php endif; ?>
  </li>
   </ul>
+ <script language="JavaScript">
+ 	if('<?php echo $npvacsalidas->getId(); ?>'!='')
+	{
+		$('trigger_npvacsalidas_fecvac').hide();
+		$('trigger_npvacsalidas_fecdes').hide();
+		$('trigger_npvacsalidas_fechas').hide();
+	}
+	
+ </script> 
+  
