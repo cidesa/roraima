@@ -658,6 +658,9 @@
 460:
   cod: 460
   msj: Liquidaciones ya pagadas no se pueden modificar   
+461:  
+  cod: 461
+  msj: Los dias a disfrutar no pueden menor o igual a cero.
 ###############OBRAS################
 1000:
     cod: 1000
