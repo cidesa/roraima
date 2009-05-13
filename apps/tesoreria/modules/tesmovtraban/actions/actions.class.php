@@ -214,6 +214,8 @@ $this->Bitacora('Guardo');
 
    $contaba = ContabaPeer::doSelectOne(new Criteria());
    $saldo=0;
+   $dateFormat = new sfDateFormat('es_VE');
+   $fectra = $dateFormat->format($fectra, 'i', $dateFormat->getInputPattern('d'));
    if(!Tesoreria::chequear_disponibilidad_financiera($this->getRequestParameter('codigo'),$montra,$contaba->getFecini(),$fectra,$saldo)) $error= ',["javascript","alert(\'No Existe Disponibilidad Financiera para esta cuenta.\')",""]';
 
 	 $output = '[["' . $cajtexmos . '","' . $dato . '",""],["' . $cajtexcom . '","' . $dato2 . '"]'.$error.']';

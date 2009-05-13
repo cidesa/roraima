@@ -538,6 +538,8 @@ $this->Bitacora('Guardo');
         if($tstipmov->getDebcre()=='C'){
           $contaba = ContabaPeer::doSelectOne(new Criteria());
           $saldo=0;
+   		  $dateFormat = new sfDateFormat('es_VE');
+   		  $feclib = $dateFormat->format($feclib, 'i', $dateFormat->getInputPattern('d'));
           if(!Tesoreria::chequear_disponibilidad_financiera($numcue,$monmov,$contaba->getFecini(),$feclib,$saldo)){
             $coderr = 195;
             $output = '[["javascript","alert(\''.H::obtenerMensajeError($coderr).'\')",""],["tsmovlib_monmov","0,00",""]]';
