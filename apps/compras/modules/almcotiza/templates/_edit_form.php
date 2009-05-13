@@ -12,6 +12,8 @@
 <?php echo javascript_include_tag('dFilter','Linktoapp','compras/almcotiza','ajax','tools','observe') ?>
 <?php use_helper('Javascript', 'tabs', 'Grid') ?>
 <?php echo input_hidden_tag('fila2', $numreg) ?>
+<?php echo input_hidden_tag('montorecargo', $cacotiza->getMonrec(true)) ?>
+
 <fieldset id="sf_fieldset_none" class="">
 <legend><?php echo __('Cotización')?></legend>
 <div class="form-row">
@@ -406,6 +408,7 @@ if (id)
 	$('trigger_cacotiza_feccot').hide();
 	$$('.botoncat')[0].disabled=true;
 	$$('.botoncat')[1].disabled=true;
+	$('cacotiza_monrec').value=$('montorecargo').value
 }
 
 
