@@ -235,6 +235,7 @@
     var eliminados = $(grid+"_idborrado");
     var filasAEliminar = $$('.'+grid+'f'+fila);
 
+    if(idFila){
     if(idFila.value!=""){
       if(eliminados.value==""){
         eliminados.value = idFila.value;
@@ -249,6 +250,14 @@
       }
     }else{
       if(filasAEliminar) {
+        filasAEliminar[0].remove();
+		ActualizarObjetosGrids(grid);
+        ActualizarSaldosGrid(grid,ArrTotales);
+      }
+    }
+    }
+    else{
+    if(filasAEliminar) {
         filasAEliminar[0].remove();
 		ActualizarObjetosGrids(grid);
         ActualizarSaldosGrid(grid,ArrTotales);

@@ -89,11 +89,12 @@ class fafacturActions extends autofafacturActions {
 		  $this->columnas[1][2]->setCatalogo('caregart', 'sf_admin_edit_form', $obj, 'Caregart_Fapedido', $params);
 		  $this->columnas[1][6]->setHTML('size="10" onKeyPress=cansol(event,this.id);');
 		}
+		$this->columnas[0]->setEliminar(true,'montoTotal()');
         $this->columnas[1][0]->setHTML('onClick="marcardesc(this.id)"');
 		$this->columnas[1][9]->setCombo(FaartpvpPeer :: getPrecios());
 		$this->columnas[1][9]->setHTML('onChange=Precio3(this.id);');
 		$this->columnas[1][10]->setHTML('size="10" readonly=true onKeyPress=Precio2(event,this.id);');
-		$this->columnas[1][11]->setHTML(' size="10" onKeyPress=montorecargo(event,this.id);');
+		$this->columnas[1][11]->setHTML(' size="10" readonly=true onKeyPress=montorecargo(event,this.id);');
 		$this->columnas[1][11]->setEsTotal(true, 'fafactur_totmonrgo');
 		$this->columnas[1][12]->setEsTotal(true, 'fafactur_tottotart');
 
@@ -613,7 +614,7 @@ class fafacturActions extends autofafacturActions {
 							$blanco2 = "";
 						}
 
-						$desart = $dato->getDesart();
+						$desart = htmlspecialchars($dato->getDesart());
 						$unimed = $dato->getUnimed();
 						$cantidad = number_format($dato->getDistot(), 2, ',', '.');
 						$cant_entregada = $this->getRequestParameter('canent');

@@ -2,7 +2,7 @@ opciones:                  # Opciones generales
   eliminar:                true
   tabla:                   faartfac
   anchogrid:               900
-  ancho:                   1300
+  ancho:                   1400
   filas:                   25
   titulo:                  ' '
   htmltotalfilas:          ' '
@@ -27,9 +27,9 @@ opciones:                  # Opciones generales
   html:                    [size="20"]
 4:       # Columna 4
   titulo:                  Descripción
-  tipo:                    t
+  tipo:                    a
   nombrecampo:             desart
-  html:                    [size="20", readonly=true ]
+  html:                    [size="30x1", readonly=true ]
 5:       # Columna 5
   titulo:                  Unidad Medida
   tipo:                    t
@@ -131,7 +131,7 @@ opciones:                  # Opciones generales
   esgrabable:              true
   nombrecampo:             mondes
   esnumerico:              true
-  html:                    [size="10"]
+  html:                    [size="10" readonly=true]
 19:     # Columna 19
   titulo:                  R
   tipo:                    t

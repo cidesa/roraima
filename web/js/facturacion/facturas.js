@@ -897,6 +897,9 @@
     var regart=totalregistros('ax',3,25);
     var colum=determinarReferenciaDoc($('fafactur_tipref').value);
     var fil=0;
+    var totmonrec=0;
+    var tottotal=0;
+
     while (fil<regart)
     {
       var precio="ax_"+fil+"_10";
@@ -918,7 +921,10 @@
 
        var ncant= toFloat(cant);
        var nmonrec= toFloat(montrec);
+       var ntotart= toFloat(totart);
         montot= montot + ((nprecio * ncant) +  nmonrec);
+        totmonrec= totmonrec+ nmonrec;
+        tottotal=tottotal + ntotart;
       }
      fil++;
     }
@@ -952,7 +958,7 @@
     var ntotmonrgo=toFloat('fafactur_totmonrgo');
     var ntottotart=toFloat('fafactur_tottotart');
 
-    var cal= ntottotart - ntotmonrgo
+    var cal= tottotal - totmonrec
     $('fafactur_monto').value=format(cal.toFixed(2),'.',',','.');
     $('fafactur_monrgo').value= format(ntotmonrgo.toFixed(2),'.',',','.');
     $('fafactur_monres').value=format(montot.toFixed(2),'.',',','.');
