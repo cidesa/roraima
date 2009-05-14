@@ -1131,7 +1131,7 @@ function grid_tag_v2($obj,$objelim = array())
       $tagf .= '<td class="grid_fila" align="center" height="15"><input readonly=true style="border:none" class="imagenborrar" name="'.$name.'x_'.$i.'?'.'_0" id="'.$name.'x_'.$i.'?'.'_0" size="1" ';
       $tagf .= ' onClick="';
       $tagf .= "EliminarFilaGrid('$name',$i".'?'.",'$campostotales');";
-      $tagf .= '" '.$jseliminar.' ></td>';
+      $tagf .= $jseliminar.'" ></td>';
     }
 
     $j=0;

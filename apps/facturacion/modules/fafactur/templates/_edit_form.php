@@ -805,6 +805,7 @@ if (consul!="")
      if (valor!='')
      { valor=valor.pad(8, '0',0);}
      $('fafactur_reffac').value=valor;
+     $('fafactur_fecfac').focus();
    }
  }
 
