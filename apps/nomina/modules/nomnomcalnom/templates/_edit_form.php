@@ -45,6 +45,7 @@
 	'onBlur'=> remote_function(array(
 			  'url'      => 'nomnomcalnom/ajax',
 			  'complete' => 'AjaxJSON(request, json), validarNomina()',
+			  'condition' => "$('npnomina_codnom').value != ''",
   			  'with' => "'ajax=1&codigo='+this.value",
 			  ))),
      array('use_style' => 'true' )
