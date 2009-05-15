@@ -25,13 +25,12 @@ class almordcomActions extends autoalmordcomActions
     {
       if ($this->getRequestParameter('id')=="")
       {
-        if ($this->getRequestParameter('caordcom[genctaord]')=='S')
-        {
-
-        $grid_detalle=Herramientas::CargarDatosGrid($this,$this->obj,true);//0
+      	$grid_detalle=Herramientas::CargarDatosGrid($this,$this->obj,true);//0
         $grid_entregas=Herramientas::CargarDatosGrid($this,$this->obj_entregas,true);//0
         $grid_detalle_detallado=$grid_detalle[0];
 
+        if ($this->getRequestParameter('caordcom[genctaord]')=='S')
+        {
         $grid_resumen=Herramientas::CargarDatosGrid($this,$this->obj_resumen,true);//0
 
          $grabocom=$this->getUser()->getAttribute('grabo',null,$this->getUser()->getAttribute('formulario'));
@@ -61,7 +60,7 @@ class almordcomActions extends autoalmordcomActions
             $this->coderror1=150;
             return false;
         }
-       
+
         Orden_compra::armarArregloTotalesRecargo($this->caordcom, $grid_detalle_detallado,&$grid_recargos_detalle);
         $i=0;
         $hay_disponibilidad=false;
