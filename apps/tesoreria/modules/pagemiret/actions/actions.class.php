@@ -45,6 +45,7 @@ class pagemiretActions extends autopagemiretActions
      $this->getUser()->setAttribute('formulario',$this->getRequestParameter('formulario'));
      $this->formulario=$this->getRequestParameter('formulario');
      $this->tipo=$this->getUser()->getAttribute('tipo',null,$this->getUser()->getAttribute('formulario'));
+     $this->nomext   = Herramientas::getX('TIPCAU','Cpdoccau','Nomext',$this->tipo);
      $this->concepto = $this->getUser()->getAttribute('concepto',null,$this->getUser()->getAttribute('formulario'));
      $this->tiporet = $this->getUser()->getAttribute('tiporet',null,$this->getUser()->getAttribute('formulario'));
     }
@@ -299,7 +300,7 @@ $this->Bitacora('Guardo');
     	if(!isset($date[0])) $date[0] = 0;
     	if(!isset($date[1])) $date[1] = 0;
     	if(!isset($date[2])) $date[2] = 0;
-      
+
     	$sqlfecdes = " AND A.FECEMI >= '$date[2]-$date[1]-$date[0]'";
     }else{
     	$sqlfecdes = "";
@@ -337,7 +338,7 @@ $this->Bitacora('Guardo');
     $opciones->setEliminar(false);
     $opciones->setTabla('Opretord');
     $opciones->setAnchoGrid(700);
-    $opciones->setAncho(850);    
+    $opciones->setAncho(850);
     $opciones->setTitulo('');
     $opciones->setFilas(0);
     $opciones->setHTMLTotalFilas(' ');

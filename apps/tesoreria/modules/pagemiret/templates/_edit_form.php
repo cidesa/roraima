@@ -427,12 +427,12 @@ function totalmarcadas(id)
    {
    	$('opordpag_numord').value='########';
     $('opordpag_tipcau').value='<?php echo $tipo?>';
+    $('opordpag_nomext').value='<?php echo $nomext?>';
     $('opordpag_desord').value='<?php echo $concepto?>';
     $('opordpag_codtip').value='<?php echo $tiporet?>';
 
    	$('opordpag_numord').readOnly=true;
    	$('opordpag_fecemi').readOnly=true;
-   	$('opordpag_tipcau').focus();
    	$('opordpag_codtip').focus();
    	$('opordpag_cedrif').focus();
    }
