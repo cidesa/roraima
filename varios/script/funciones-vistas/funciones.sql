@@ -1008,10 +1008,9 @@ $BODY$
 ALTER FUNCTION add_months(date, numeric) OWNER TO postgres;
 
 
-
-CREATE OR REPLACE FUNCTION calculopres(codigo character varying, fecha character varying, capitalizacion bpchar)
-  RETURNS SETOF regprestaciones AS
-$BODY$
+create or replace function calculopres(codigo varchar,fecha varchar,capitalizacion char) 
+returns setof REGPRESTACIONES as
+$body$
 DECLARE
 recordSalida REGPRESTACIONES%ROWTYPE;
 capital numeric;
@@ -1115,7 +1114,7 @@ COALESCE((CASE WHEN A.ANNOANTIG>0 THEN
                 AND FECFIN <= TO_DATE('''||fecha||''',''DD/MM/YYYY''))
        WHEN (A.MESANTIG=6 AND A.DIAANTIG=0) OR
             A.MESANTIG<6
-       THEN 15-(SELECT SUM(5)
+       THEN 15-(SELECT COALESCE(SUM(5),0)
                 FROM NPPRESTACIONES
                 WHERE CODEMP='''||codigo||'''
                 AND FECFIN <= TO_DATE('''||fecha||''',''DD/MM/YYYY'')) END) END)*
@@ -1224,9 +1223,8 @@ return;
 
 
 END;
-$BODY$
-  LANGUAGE 'plpgsql' VOLATILE;
-ALTER FUNCTION calculopres(character varying, character varying, bpchar) OWNER TO postgres;
+$body$
+LANGUAGE 'plpgsql' VOLATILE CALLED ON NULL INPUT SECURITY INVOKER;
 
 
 
