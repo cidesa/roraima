@@ -622,7 +622,8 @@ class Cheques
             // GridBd1.TextMatrix(I, 9) = Format(OPORDPAG!MonRet, "##.00")
           }//if ($x[$j]->getMonret() > 0)
 
-          $Monto =  $x[$j]->getMontotaltotal();
+          //$Monto =  $x[$j]->getMontotaltotal(); LUIS NO SE PARA QUE PUSO ESTA LINEA; SE DAÑO LO DE PAGOS PARCIALES
+           $Monto =  $x[$j]->getMontotalGrid();
 
           if ($x[$j]->getMondes() > 0 )
           {
