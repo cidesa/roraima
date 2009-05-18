@@ -203,11 +203,12 @@ class alminvfisActions extends autoalminvfisActions
 
 					$ci = new Criteria();
 					$ci->add(CaregartPeer::TIPO,'A');
-				    $ci->add(CaregartPeer::CODART, CaregartPeer::CODART." between '{$artdesde}' AND '{$arthasta}' AND length(codart) >= '".$this->longitudarticulo."'", Criteria::CUSTOM);
+					$ci->addJoin(CaregartPeer::CODART, CaartalmPeer::CODART);
+					$ci->add(CaartalmPeer::CODALM,$codalm);
+				    $ci->add(CaregartPeer::CODART, CaregartPeer::CODART." between '{$artdesde}' AND '{$arthasta}' AND length(caregart.codart) >= '".$this->longitudarticulo."'", Criteria::CUSTOM);
 					$ci->addAscendingOrderByColumn(CaregartPeer::CODART);
 
 					$per = CaregartPeer::doSelect($ci);
-
 					$this->param="Caregart";
 				}
 
