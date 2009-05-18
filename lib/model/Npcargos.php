@@ -14,4 +14,14 @@ class Npcargos extends BaseNpcargos
 		return Herramientas::getX('codtipcar','Nptipcar','destipcar',self::getCodtip());
 	}
 
+	public function getCodcarnew()
+	{
+		return self::getCodcar();
+	}
+
+	public function getNomcarnew()
+	{
+		return self::getNomcar();
+	}
+
 }
