@@ -67,8 +67,8 @@ ProveedorValidator:
     class: CidesaExistValidator
     param:
         class:    Caprovee
-        column:   codpro
-        unique_error:   El Código de la Contratistas de Bienes o Servicio y Cooperativas no existe.
+        column:   rifpro
+        unique_error:   El Rif de la Contratistas de Bienes o Servicio y Cooperativas no existe.
 
 TipoValidator:
     class: CidesaExistValidator
