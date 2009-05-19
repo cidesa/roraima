@@ -235,6 +235,12 @@ $this->Bitacora('Guardo');
     $this->preExecute();
     $this->nphojint = $this->getNphojintOrCreate();
     $this->updateNphojintFromRequest();
+    $grid5  = Herramientas::CargarDatosGrid($this,$this->obj);
+    $grid2 = Herramientas::CargarDatosGrid($this,$this->obj2);
+    $grid3 = Herramientas::CargarDatosGrid($this,$this->obj3);
+    $grid4 = Herramientas::CargarDatosGrid($this,$this->obj4);
+    $grid = Herramientas::CargarDatosGrid($this,$this->obj5);
+
     $this->setVars();
 
     $this->labels = $this->getLabels();
