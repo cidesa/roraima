@@ -54,7 +54,7 @@ class pagdefempActions extends autopagdefempActions
    }
    else  if ($this->getRequestParameter('ajax')=='5')
    {
-    $dato=CpdoccauPeer::getNombre($this->getRequestParameter('codigo'));
+    $dato=TstipmovPeer::getDestip($this->getRequestParameter('codigo'));
     $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
    }
    else  if ($this->getRequestParameter('ajax')=='6')
