@@ -311,13 +311,12 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
 
               $this->ajax = $this->getRequestParameter('ajax');
               $this->salario= $this->getRequestParameter('salario');
-
+              $salario = H::iif($this->salario=='true','P','U');
 
               if ($this->getRequestParameter('codemp') != "" and $this->getRequestParameter('feccor') != "" and $this->getRequestParameter('capita') != "")
               {
-                $this->configGrid($this->getRequestParameter('codemp'), $this->getRequestParameter('feccor'), $this->getRequestParameter('capita'));
+                $this->configGrid($this->getRequestParameter('codemp'), $this->getRequestParameter('feccor'), $this->getRequestParameter('capita'), $salario);
                 $output = '[["diaserrn","'.$this->antdias.'",""],["messerrn","'.$this->antmeses.'",""],["anoserrn","'.$this->antannos.'",""],["totcapitalact","'.H::Formatomonto($this->capitalact).'",""]]';
-
 
 
                 $this->getResponse()->setHttpHeader("X-JSON", '(' . $output . ')');
@@ -594,7 +593,7 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
   }
 
 
-  public function configGrid($codemp = '', $fecha= '', $capital= '')
+  public function configGrid($codemp = '', $fecha= '', $capital= '', $salario= '')
   {
   	if($this->salario=="true")
   		$cadena="round(monpres,2)";
@@ -608,7 +607,7 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
       case when dias=5 then round(monpres,2) else $cadena end  as monpres, tasa,
       round(monint,2) as monint, round(intacu,2) as intacu, round(monant,2) as monant,
       round(monadeint,2) as monadeint, round(monto,2) as monto
-              from calculopres('$codemp','$fecha','$capital') order by fecini1";
+              from calculopres('$codemp','$fecha','$capital','$salario') order by fecini1";
 
 
     Herramientas :: BuscarDatos($sql, & $result);
