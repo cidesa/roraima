@@ -224,13 +224,13 @@ class Tesoreria {
 
   }
 
-  public static function hacer_Conciliables($nro, $mes, $ano, $fechas) {
+	public static function hacer_Conciliables($nro, $mes, $ano, $fechas) {
     $sql = "Select A.RefLib as reflib, B.RefBan as refban, A.FecLib as feclib, B.FecBan as fecban,
             A.TipMov as tipmov1, B.TipMov as tipmov2, A.DesLib as deslib, B.DesBan as desban,
             A.MonMov as monmov1, B.MonMov as monmov2
                    From TsMovLib A, TsMovBan B
                   Where A.RefLib = B.RefBan And
-                    A.MonMov = B.MonMov And
+                    A.MonMov = B.MonMov And A.tipmov=b.tipmov and
                     A.NumCue = '" . $nro . "' And
             B.NumCue = '" . $nro . "' And
                      A.FecLib <= To_Date('" . $fechas . "','DD/MM/YYYY') And
@@ -283,17 +283,18 @@ class Tesoreria {
     }
   }
 
-  public static function hacer_Libro_No_Banco($nro, $mes, $ano, $fechas) {
+   public static function hacer_Libro_No_Banco($nro, $mes, $ano, $fechas) {
     $sql = "Select reflib,tipmov,feclib,deslib,monmov From TsMovLib
                   Where NumCue = '" . $nro . "' And
                     FecLib<= To_Date('" . $fechas . "','DD/MM/YYYY') And Status = 'C' And StaCon='N' ";
+
     if (Herramientas :: BuscarDatos($sql, & $result)) {
       foreach ($result as $tsmovlib) {
         $sql2 = "SELECT REFBAN From TSMOVBAN
                          WHERE NUMCUE= '" . $nro . "' And
                             RefBan ='" . $tsmovlib["reflib"] . "' And
                             FecBan <= To_Date('" . $fechas . "','DD/MM/YYYY')";
-        if (Herramientas :: BuscarDatos($sql2, & $result2)) {
+        if  (!Herramientas :: BuscarDatos($sql2, & $result2)) {
           $tsconcil = new Tsconcil();
           $tsconcil->setNumcue($nro);
           $tsconcil->setMescon($mes);
