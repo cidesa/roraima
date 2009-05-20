@@ -509,7 +509,7 @@ function enternumero(e,id)
         return tira;
         }
       }
-
+      return '';
     }
 
 
