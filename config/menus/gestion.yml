@@ -1,0 +1,46 @@
+gestion:
+  opciones:
+    activo: true #true/false
+    descripcion: Módulo de Control de Gestión
+    imagen: almacen.gif
+    nombre: Control de Gestión
+    urls:
+      default:
+        modulo: compras.php
+      Compras:
+        absoluta: reportes/reportes/compras
+      Contabilidad:
+        absoluta: reportes/reportes/contabilidad
+      Nomina:
+        absoluta: reportes/reportes/nomina
+      Presupuesto:
+        absoluta: reportes/reportes/presupuesto
+      Tesoreria:
+        absoluta: reportes/reportes/tesoreria
+      Bienes:
+        absoluta: reportes/reportes/bienes
+    imagenes:
+      default: OperatorClass.png
+  menu:
+    Compras:
+        Recepciones y Diferencias:                            carrcpord.php
+        Despachos y Diferencias:                              carreqdph.php
+        Resumen de Movimientos:                               CARMOVART.php
+        Inventario Físico Valorado:                           carinvfis.php
+        Relación Inventario Almacén:                          carrelinvalm.php
+    Contabilidad:
+        Balance General:                                        ConBalGen.php
+        Estado de Resultados:                                   ConEdoRes.php
+    Nomina:
+        Resumen de Conceptos por Nomina:                        nprresconnom.php
+    Presupuesto:
+        Ejecución Presupuestaria (PreCompromisos):            predisper.php
+        Ejecución Presupuestaria por Partidas:                predispar.php
+        Ejecución Presupuestaria por Proyectos:               predisprog.php
+    Tesoreria:
+        Listado de Ordenes de Pago:                           oprordpag.php
+        Listado de Ordenes de Pago Detallada:                 oprdetord.php
+        Disponibilidad Bancaria:                              tsrdisban.php
+    Bienes:
+        Disposición Activos Muebles:                           BNRDISBIEMUE.php
+        Disposición Activos Inmuebles:                         BNRDISBIEINM.php
