@@ -31,7 +31,7 @@ class Factura {
 
     self::generarAsientos(&$fafactur,$grid1,$grid2,$grid3,$grid4,&$arrasientos,&$pos);
 
-    self::grabarComprobanteMaestro($fafactur,$arrasientos,&$pos);
+    self::grabarComprobanteMaestro(&$fafactur,$arrasientos,&$pos);
 
     self::grabarFactura($fafactur,$grid1,$grid2,$grid3,$grid4,$tipocaja);
 
@@ -303,7 +303,7 @@ class Factura {
   	$salactual=H::convnume($fafactur->getTottotart()) - H::convnume($fafactur->getMondesc());
   	$numcomord="FA".substr($fafactur->getReffac(),2,6);
   	$correl=OrdendePago::Buscar_Correlativo();
-  	$fafactur->setNumcom($correl);
+  	//$fafactur->setNumcom($correl);
   	$arrasientos=array();
   	$pos=0;
     $col=self::determinarReferenciaDoc($fafactur->getTipref());
@@ -535,7 +535,7 @@ class Factura {
 	return $busasi;
   }
 
-  public static function grabarComprobanteMaestro($fafactur,$arrasientos,&$pos)
+  public static function grabarComprobanteMaestro(&$fafactur,$arrasientos,&$pos)
   {
     $reftra="FA".substr($fafactur->getReffac(),2,6);
     $correl3=OrdendePago::Buscar_Correlativo();
@@ -548,6 +548,8 @@ class Factura {
     $contabc->setTipcom(null);
     $contabc->setMoncom($fafactur->getMonfac());
     $contabc->save();
+
+    $fafactur->setNumcom($correl3);
 
     self::grabarComprobanteDetalle($fafactur,$correl3,$arrasientos,&$pos);
   }
