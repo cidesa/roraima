@@ -40,7 +40,7 @@
   'control_name' => 'fordefparegr[codparegr]',
   'readonly'  =>  $fordefparegr->getId()!='' ? true : false ,
   'maxlength' => $lonmaspar,
-  'onBlur' => "javascript:cadena=rayitas(this.value);document.getElementById('fordefparegr_codparegr').value=cadena;",
+  'onKeyPress' => "cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}",
   'onKeyDown' => "javascript:return dFilter (event.keyCode, this,'$mascarapartida')",
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
