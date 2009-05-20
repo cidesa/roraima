@@ -152,7 +152,7 @@
 } ?></div></fieldset></th>
     <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
     <th><fieldset id="sf_fieldset_none" class="">
-    <legend><?php echo _('Sexo')?></legend>
+    <legend><?php echo __('Sexo')?></legend>
   <div class="form-row">
 <? if ($nphojint->getSexemp()=='M')  {
   ?><?php echo radiobutton_tag('nphojint[sexemp]', 'M', true)        ."   Masculino".'&nbsp;&nbsp;';
@@ -165,7 +165,7 @@
 } ?></div></fieldset></th>
     <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
     <th><fieldset id="sf_fieldset_none" class="">
-    <legend><?php echo _('Profesional')?></legend>
+    <legend><?php echo __('Profesional')?></legend>
   <div class="form-row">
 <? if ($nphojint->getProfes()=='S')  {
   ?><?php echo radiobutton_tag('nphojint[profes]', 'S', true)        ."   Si".'&nbsp;&nbsp;';
