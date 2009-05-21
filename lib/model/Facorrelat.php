@@ -10,6 +10,9 @@
 class Facorrelat extends BaseFacorrelat
 {
 	public $obj = array();
+	protected $ctadev="";
+	protected $ctavco="";
+	protected $apliclades="";
 
    	public function getNomemp()
 	{
@@ -74,6 +77,53 @@ class Facorrelat extends BaseFacorrelat
 	public function getDessnc()
 	{
 	  return Herramientas::getX('CODEMP','Cadefart','Dessnc','001');
+	}
+
+	public function getCtadev()
+	{
+	  return Herramientas::getX('CODEMP','Cadefart','Ctadev','001');
+	}
+
+	public function getDesctadev()
+	{
+	  return Herramientas::getX('CODCTA','Contabb','Descta',self::getCtadev());
+	}
+
+	public function getCtavco()
+	{
+	  return Herramientas::getX('CODEMP','Cadefart','Ctavco','001');
+	}
+
+	public function getDesctavco()
+	{
+	  return Herramientas::getX('CODCTA','Contabb','Descta',self::getCtavco());
+	}
+
+	public function getApliclades()
+	{
+	  $valor = Herramientas::getX('CODEMP','Cadefart','Apliclades','001');
+	  if ($valor == "S")
+	  	return 1;
+	  else
+	  	return 0;
+	}
+
+	public function getGeneraop()
+	{
+	  $valor = Herramientas::getX('CODEMP','Cadefart','Generaop','001');
+	  if ($valor == "S")
+	  	return 1;
+	  else
+	  	return 0;
+	}
+
+	public function getGeneracom()
+	{
+	  $valor = Herramientas::getX('CODEMP','Cadefart','Generacom','001');
+	  if ($valor == "S")
+	  	return 1;
+	  else
+	  	return 0;
 	}
 
 	public function getAsiparrec()
