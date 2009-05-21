@@ -28,6 +28,7 @@ class almprocomartActions extends autoalmprocomartActions
 	    {
 	      $arreglo->delete();
 	    }
+	    $this->SalvarBitacora($this->getRequestParameter('id') ,'Elimino');
     }
     catch (PropelException $e)
     {

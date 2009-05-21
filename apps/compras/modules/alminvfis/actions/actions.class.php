@@ -489,10 +489,12 @@ $this->Bitacora('Guardo');
     $c->add(CainvfisPeer::FECINV,$this->getRequestParameter('id'));
 	$c->add(CainvfisPeer::CODALM,$this->getRequestParameter('codalm'));
     $datos=CainvfisPeer::doSelect($c);
+    $id=0;
     try
     {
 	    foreach ($datos as $arreglo)
 	    {
+        $id=$arreglo->getId();
 	    $cri=new Criteria();
 	    $cri->add(CainvfisubiPeer::CODART,$arreglo->getCodart());
         $cri->add(CainvfisubiPeer::CODALM,$arreglo->getCodalm());
@@ -500,6 +502,7 @@ $this->Bitacora('Guardo');
         CainvfisubiPeer::doDelete($cri);
 	    $arreglo->delete();
 	    }
+	    $this->SalvarBitacora($id ,'Elimino');
     }
     catch (PropelException $e)
     {

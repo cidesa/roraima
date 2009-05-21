@@ -156,6 +156,7 @@ $this->Bitacora('Guardo');
 	    {
 	      Herramientas::EliminarRegistro('Caalmubi','Codubi',$this->cadefubi->getCodubi());
 	      $this->deleteCadefubi($this->cadefubi);
+	      $this->Bitacora('Elimino');
 	    }
 	    catch (PropelException $e)
 	    {

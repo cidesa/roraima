@@ -36,6 +36,7 @@ class nomdefesppaiActions extends autonomdefesppaiActions
     if (!$dato)
     {
       $this->deleteNppais($this->nppais);
+      $this->Bitacora('Elimino');
     }
     else
     {

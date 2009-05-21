@@ -96,6 +96,7 @@ $this->Bitacora('Guardo');
       if (!Nomina::Buscar_CodigoHijo($this->npestorg->getCodniv()))
      {
        $this->deleteNpestorg($this->npestorg);
+       $this->Bitacora('Elimino');
      }
      else
      {

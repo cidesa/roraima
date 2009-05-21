@@ -978,6 +978,7 @@ $this->Bitacora('Guardo');
     Herramientas::EliminarRegistro('Ocretcon','Codcon',$this->ocregcon->getCodcon());
     Obras::eliminarCompromiso($this->ocregcon->getRefcon());
     $this->deleteOcregcon($this->ocregcon);
+    $this->Bitacora('Elimino');
 
     return $this->redirect('oycdescon/list');
   }

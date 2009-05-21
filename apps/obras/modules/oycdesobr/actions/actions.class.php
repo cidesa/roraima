@@ -599,6 +599,7 @@ $this->Bitacora('Guardo');
     	$this->setFlash('notice','La Obra no puede ser eliminada, ya que tienen registros Asociados');
         return $this->redirect('oycdesobr/edit?id='.$id);
     }
+    $this->Bitacora('Elimino');
 
 
     return $this->redirect('oycdesobr/list');

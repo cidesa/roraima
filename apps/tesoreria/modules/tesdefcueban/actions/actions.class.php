@@ -630,6 +630,7 @@ $this->Bitacora('Guardo');
       if (!$dato2)
       {
       	$this->deleteTsdefban($this->tsdefban);
+      	$this->Bitacora('Elimino');
       }
       else
       {

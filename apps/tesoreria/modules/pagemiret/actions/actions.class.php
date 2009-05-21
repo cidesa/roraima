@@ -55,6 +55,7 @@ class pagemiretActions extends autopagemiretActions
      $this->tipo='';
      $this->concepto='';
      $this->tiporet='';
+     $this->nomext   = '';
     }
 
     if ($this->getRequest()->getMethod() == sfRequest::POST)

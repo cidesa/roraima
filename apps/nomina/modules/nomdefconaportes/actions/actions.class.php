@@ -243,6 +243,7 @@ public function executeAutocomplete()
     try
     {
       $this->deleteNpcontipaporet($this->npcontipaporet);
+      $this->Bitacora('Elimino');
     }
     catch (PropelException $e)
     {

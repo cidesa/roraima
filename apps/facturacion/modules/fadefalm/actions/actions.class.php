@@ -86,6 +86,7 @@ class fadefalmActions extends autofadefalmActions
 	    {
 	      Herramientas::EliminarRegistro('Caalmubi','Codalm',$this->cadefalm->getCodalm());
 	      $this->deleteCadefalm($this->cadefalm);
+	      $this->Bitacora('Elimino');
 	    }
 	    catch (PropelException $e)
 	    {

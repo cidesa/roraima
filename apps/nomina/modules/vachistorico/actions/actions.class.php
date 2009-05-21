@@ -317,6 +317,7 @@ $this->Bitacora('Guardo');
 	$rs = NpvacdisfrutePeer::doDelete($c);
 	if($rs)
 	{
+		$this->SalvarBitacora($this->getRequestParameter('id') ,'Elimino');
 		$this->setFlash('notice','Registro Eliminado exitosamente');
 	}else
 	{

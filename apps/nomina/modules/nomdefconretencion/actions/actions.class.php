@@ -234,6 +234,7 @@ protected function saveNpcontipaporet($npcontipaporet)
     try
     {
       $this->deleteNpcontipaporet($this->npcontipaporet);
+      $this->Bitacora('Elimino');
     }
     catch (PropelException $e)
     {

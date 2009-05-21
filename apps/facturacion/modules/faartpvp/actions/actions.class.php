@@ -214,6 +214,7 @@ $this->Bitacora('Guardo');
     	{
            $faartpvp->delete();
     	}
+    	$this->SalvarBitacora($this->getRequestParameter('id') ,'Elimino');
     }
     }
     catch (PropelException $e)

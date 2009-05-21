@@ -104,6 +104,7 @@ $this->Bitacora('Guardo');
     try
     {
       $this->deleteOcperval($this->ocperval);
+	  $this->Bitacora('Elimino');
     }
     catch (PropelException $e)
     {

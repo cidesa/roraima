@@ -3120,6 +3120,7 @@ $this->Bitacora('Guardo');
     OcretvalPeer::doDelete($a);
 
     $this->deleteOcregval($this->ocregval);
+    $this->Bitacora('Elimino');
 
     return $this->redirect('oycval/list');
   }

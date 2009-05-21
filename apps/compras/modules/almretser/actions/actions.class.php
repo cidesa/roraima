@@ -211,6 +211,7 @@ $this->Bitacora('Guardo');
     	{
            $caretser->delete();
     	}
+    	$this->SalvarBitacora($this->getRequestParameter('id') ,'Elimino');
     }
     }
     catch (PropelException $e)

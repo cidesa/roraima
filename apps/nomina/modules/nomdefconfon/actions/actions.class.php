@@ -255,6 +255,7 @@ public function executeDelete()
     try
     {
       $this->deleteNpconfon($this->npconfon);
+      $this->Bitacora('Elimino');
     }
     catch (PropelException $e)
     {

@@ -24,12 +24,12 @@ class tesdefrengasActions extends autotesdefrengasActions
   		$this->redirect('tesdefrengas/edit');
   	}
   }
-  
-   
+
+
   public function executeEdit()
   {
      $this->tsdefrengas = $this->getTsdefrengasOrCreate();
-     $this->mascara = Herramientas::ObtenerFormato('Contaba','Forcta');    
+     $this->mascara = Herramientas::ObtenerFormato('Contaba','Forcta');
      $this->loncta=strlen($this->mascara);
 
     if ($this->getRequest()->getMethod() == sfRequest::POST)
@@ -59,7 +59,7 @@ $this->Bitacora('Guardo');
       $this->labels = $this->getLabels();
     }
   }
-  
+
   public function executeDelete()
   {
     $this->tsdefrengas = TsdefrengasPeer::retrieveByPk($this->getRequestParameter('id'));
@@ -68,6 +68,7 @@ $this->Bitacora('Guardo');
     try
     {
       $this->deleteTsdefrengas($this->tsdefrengas);
+      $this->Bitacora('Elimino');
     }
     catch (PropelException $e)
     {
@@ -77,12 +78,12 @@ $this->Bitacora('Guardo');
 
     return $this->redirect('tesdefrengas/edit');
   }
-  
+
   protected function updateTsdefrengasFromRequest()
   {
     $tsdefrengas = $this->getRequestParameter('tsdefrengas');
     $this->mascara = Herramientas::ObtenerFormato('Contaba','Forcta');
-    $this->loncta=strlen($this->mascara);    
+    $this->loncta=strlen($this->mascara);
 
     if (isset($tsdefrengas['pagrepcaj']))
     {
@@ -117,26 +118,26 @@ $this->Bitacora('Guardo');
        $resul=CpdoccauPeer::doSelect($c);
        if ($resul)
        { $ext='';}else{ $ext='N';}
-	   $dato=CpdoccauPeer::getNombre($this->getRequestParameter('codigo'));	  			 
-       $output = '[["'.$cajtexmos.'","'.$dato.'",""],["extra","'.$ext.'",""]]';		 			 	    
-	 } 
+	   $dato=CpdoccauPeer::getNombre($this->getRequestParameter('codigo'));
+       $output = '[["'.$cajtexmos.'","'.$dato.'",""],["extra","'.$ext.'",""]]';
+	 }
 	 else  if ($this->getRequestParameter('ajax')=='2')
 	 {
 	   $dato=ContabbPeer::getDescta($this->getRequestParameter('codigo'));
 	   $dato2=ContabbPeer::getCargab($this->getRequestParameter('codigo'));
 	   if ($dato2=='C')
-	   { $carg='';}else{ $carg='N';}	  			 
-       $output = '[["'.$cajtexmos.'","'.$dato.'",""],["cargable","'.$carg.'",""]]';		 			 	    
-	 } 	    
+	   { $carg='';}else{ $carg='N';}
+       $output = '[["'.$cajtexmos.'","'.$dato.'",""],["cargable","'.$carg.'",""]]';
+	 }
      else  if ($this->getRequestParameter('ajax')=='4')
 	 {
 	   $dato=TstipmovPeer::getMovimiento($this->getRequestParameter('codigo'));
 	   $dato2=TstipmovPeer::getDebcre($this->getRequestParameter('codigo'));
 	   if ($dato2!='D')
-	   { $deb='N';}else { $deb='';}	  	  			 
-       $output = '[["'.$cajtexmos.'","'.$dato.'",""],["nodeb","'.$deb.'",""]]';		 			 	    
-	 }	    
-  	 $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')'); 
+	   { $deb='N';}else { $deb='';}
+       $output = '[["'.$cajtexmos.'","'.$dato.'",""],["nodeb","'.$deb.'",""]]';
+	 }
+  	 $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
 	 return sfView::HEADER_ONLY;
   }
 }

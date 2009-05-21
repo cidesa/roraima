@@ -36,6 +36,7 @@ class ingdefpaiActions extends autoingdefpaiActions
     if (!$reg)
     {
       $this->deleteInpais($this->Inpais);
+      $this->Bitacora('Elimino');
     }
     else
     {

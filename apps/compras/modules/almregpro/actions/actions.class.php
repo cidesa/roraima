@@ -592,6 +592,7 @@ public function executeAjax()
       try
       {
         $this->deleteCaprovee($this->caprovee);
+        $this->Bitacora('Elimino');
       }
       catch (PropelException $e)
       {

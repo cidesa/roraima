@@ -109,6 +109,7 @@ $this->Bitacora('Guardo');
     if (!$reg)
     {
       $this->deleteOcestado($this->ocestado);
+      $this->Bitacora('Elimino');
     }
     else
     {

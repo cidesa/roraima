@@ -35,6 +35,7 @@ class oycdefdivpaiActions extends autooycdefdivpaiActions
     if (!$reg)
     {
       $this->deleteOcpais($this->ocpais);
+      $this->Bitacora('Elimino');
     }
     else
     {

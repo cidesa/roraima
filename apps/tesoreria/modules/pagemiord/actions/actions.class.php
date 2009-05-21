@@ -2400,7 +2400,7 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
               }
               else
               {
-                  $cri= new Criteria();
+	              $cri= new Criteria();
 	              $datos= OpdefempPeer::doSelectOne($cri);
 	              if ($datos)
 	              {
@@ -2409,6 +2409,7 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
 	             	 return $this->msj="El Comprobante no puede ser Eliminado, ya que se perdio la asociacion con Contabilidad";
 	                }
 	              }
+
               }
 
               Herramientas::EliminarRegistro('Opdetord','Numord',$data->getNumord());
@@ -2422,8 +2423,9 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
 
               $sql2="Update Npordfid set numord='' where numord='".$numord."'";
               Herramientas::insertarRegistros($sql2);
-
+              $ideeli=$data->getId();
               $data->delete();
+  	          $this->SalvarBitacora($ideeli ,'Elimino');
 
             }else { return $this->msj="La Orden no fue eliminada";}
             }else { return $this->msj="La Orden ya fue pagada en el Módulo de Bancos";}

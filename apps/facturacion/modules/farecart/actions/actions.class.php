@@ -116,6 +116,7 @@ class farecartActions extends autofarecartActions
     	{
            $farecart->delete();
     	}
+    	$this->SalvarBitacora($this->getRequestParameter('id') ,'Elimino');
     }
     }
     catch (PropelException $e)

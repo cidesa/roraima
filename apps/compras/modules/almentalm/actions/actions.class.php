@@ -98,6 +98,7 @@ $this->Bitacora('Guardo');
     	try
 	    {
 	      $this->deleteCaentalm($this->caentalm);
+	      $this->Bitacora('Elimino');
 	    }
 	    catch (PropelException $e)
 	    {

@@ -351,16 +351,16 @@ $this->Bitacora('Guardo');
       {
         $this->npvacsalidas = $this->getNpvacsalidasOrCreate();
         $this->updateNpvacsalidasFromRequest();
-		
+
 
 		if($this->npvacsalidas->getDiasdisfrutar()<='0')
 		{
 			self::$coderror = 461;
 		}else
 		{
-			self::$coderror=Nomina::validarVacsalidas($this->npvacsalidas);	
+			self::$coderror=Nomina::validarVacsalidas($this->npvacsalidas);
 		}
-        
+
 
         if (self::$coderror<>-1)
         {
@@ -431,11 +431,7 @@ $this->Bitacora('Guardo');
 	  NpvacsalidasDetPeer::doDelete($c2);
 
 	  $this->deleteNpvacsalidas($this->npvacsalidas);
-
-
-
-
-
+      $this->Bitacora('Elimino');
     }
     catch (PropelException $e)
     {

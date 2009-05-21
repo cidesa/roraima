@@ -194,7 +194,7 @@ $this->Bitacora('Guardo');
             $output = '[["'.$cajtexmos.'","'.$dato.'",""], ["cargable","'.$dato2.'",""]]';
       }
    else if ($this->getRequestParameter('ajax')=='2')
-      {        
+      {
         $dato=OptipbenPeer::getDestipben($this->getRequestParameter('codigo'));
         $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$cajtexcom.'","3","c"]]';
       }
@@ -222,6 +222,7 @@ $this->Bitacora('Guardo');
     if (!$dato)
     {
       $this->deleteOpbenefi($this->opbenefi);
+      $this->Bitacora('Elimino');
     }
     else
     {

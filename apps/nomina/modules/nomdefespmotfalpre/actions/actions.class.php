@@ -56,6 +56,7 @@ $this->Bitacora('Guardo');
     if (!$dato)
     {
       $this->deleteNpmotfal($this->npmotfal);
+      $this->Bitacora('Elimino');
     }
     else
     {

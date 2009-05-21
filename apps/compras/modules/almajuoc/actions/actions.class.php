@@ -253,8 +253,9 @@ $this->Bitacora('Guardo');
 
       // Modificar la siguiente línea para llamar al método
       // correcto en la clase del negocio
-      $coderr = Compras::eliminarAlmajuoc($caajuoc);
 
+      $coderr = Compras::eliminarAlmajuoc($caajuoc);
+      $this->SalvarBitacora($caajuoc->getId() ,'Elimino');
       if($coderr!=-1)
       {
         $err = Herramientas::obtenerMensajeError($coderr);

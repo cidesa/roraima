@@ -635,6 +635,7 @@ public function executeAjax()
       {
         //$this->deleteFacliente($this->facliente);
         Cliente::eliminarFacliente($this->facliente);
+        $this->Bitacora('Elimino');
       }
       catch (PropelException $e)
       {

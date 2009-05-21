@@ -134,6 +134,7 @@ $this->Bitacora('Guardo');
     if (!$result)
     {
       $this->deleteOcparroq($this->ocparroq);
+      $this->Bitacora('Elimino');
     }
     else
     {

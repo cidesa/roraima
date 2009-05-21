@@ -161,6 +161,7 @@ $this->Bitacora('Guardo');
       if (!$dato2)
       {
       	$this->deleteNpnomina($this->npnomina);
+      	$this->Bitacora('Elimino');
       }
       else
       {

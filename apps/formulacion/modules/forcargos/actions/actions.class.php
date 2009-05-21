@@ -273,6 +273,7 @@ protected function saveForcargos($forcargos)
       if (!$dato)
       {
        $this->deleteForcargos($this->forcargos);
+       $this->Bitacora('Elimino');
       }
       else
       {

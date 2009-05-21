@@ -75,6 +75,7 @@ class almcotizaActions extends autoalmcotizaActions
 		else
 		{
             $this->deleteCacotiza($this->cacotiza);
+            $this->Bitacora('Elimino');
 		}
     }
     catch (PropelException $e)
