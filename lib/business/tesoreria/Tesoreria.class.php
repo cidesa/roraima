@@ -438,10 +438,10 @@ class Tesoreria {
     //ANULANDO MOVIMIENTOS SEGUN LIBROS
     $c = new Criteria();
     $c->add(TsmovlibPeer :: NUMCUE, $nro);
-    $c->add(TsmovlibPeer :: TIPMOV, 'ANUC', Criteria :: NOT_EQUAL);
-    $c->add(TsmovlibPeer :: TIPMOV, 'ANUD', Criteria :: NOT_EQUAL);
-    $c->add(TsmovlibPeer :: TIPMOV, 'CAN', Criteria :: NOT_EQUAL);
+    $sql = "Tsmovlib.tipmov<>'ANUC'  AND Tsmovlib.tipmov<>'ANUD' AND Tsmovlib.tipmov<>'CAN'";
+    $c->add(TsmovlibPeer :: TIPMOV, $sql, Criteria :: CUSTOM);
     $result = TsmovlibPeer :: doSelect($c);
+
     if ($result)
     {
     foreach ($result as $tsmovlib) {
@@ -453,10 +453,10 @@ class Tesoreria {
     //ANULANDO MOVIMIENTOS SEGUN BANCOS
     $c = new Criteria();
     $c->add(TsmovbanPeer :: NUMCUE, $nro);
-    $c->add(TsmovbanPeer :: TIPMOV, 'ANUC', Criteria :: NOT_EQUAL);
-    $c->add(TsmovbanPeer :: TIPMOV, 'ANUD', Criteria :: NOT_EQUAL);
-    $c->add(TsmovbanPeer :: TIPMOV, 'CAN', Criteria :: NOT_EQUAL);
+    $sql = "Tsmovban.tipmov<>'ANUC'  AND Tsmovban.tipmov<>'ANUD' AND Tsmovban.tipmov<>'CAN'";
+    $c->add(TsmovbanPeer :: TIPMOV, $sql, Criteria :: CUSTOM);
     $result = TsmovbanPeer :: doSelect($c);
+
     if ($result)
     {
     foreach ($result as $tsmovban) {
