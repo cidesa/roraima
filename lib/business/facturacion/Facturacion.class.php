@@ -1082,6 +1082,38 @@ public static function entregas($nroped)
 /*******************************Fin Edición de precios **********************************************/
 
 /*******************************Definición de Artículos (Correlativos)**********************************************/
+	public static function salvarCuentas($ctadev, $ctavco, $generaop, $generacom, $apliclades){
+		if ($generaop == 1)
+			$generaop = 'S';
+		else
+			$generaop = 'N';
+		if ($generacom == 1)
+			$generacom = 'S';
+		else
+			$generacom = 'N';
+		if ($apliclades == 1)
+			$apliclades = 'S';
+		else
+			$apliclades = 'N';
+		try{
+			$c = new Criteria();
+			$c->add(CadefartPeer::CODEMP,'001');
+			$reg = CadefartPeer::doSelectone($c);
+			if ($reg){
+				$reg->setCtadev($ctadev);
+				$reg->setCtavco($ctavco);
+				$reg->setGeneraop($generaop);
+				$reg->setGeneracom($generacom);
+				$reg->setApliclades($apliclades);
+				$reg->save();
+			}
+			return -1;
+		}
+		catch (Exception $ex){
+			return 0;
+		}
+	}
+
     public static function salvarFacorrelat($fadefcaj, $grid)
     {
         if (self :: Grabar_Fadefcaj($fadefcaj) != -1) {

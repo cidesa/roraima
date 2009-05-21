@@ -16,7 +16,7 @@ generator:
       desubi: { name: Descripción , params: maxlength=30 }
       generaop: { name: Generar Orden de Pago al Momento de la Recepción }
       generacom: { name: Generar Comprobantes contables al momento de la Recepcion y el Despacho }
-      asiparrec: { name: Imputacón del Recargo }
+      asiparrec: { name: Asignar una partida Presupuestaria al Recargo cuando se genere una Orden de Compra }
       corpre: { name: Presupuesto, validate: CorrelValidator, msj_error: Debe insertar el correlativo de presupuesto }
       corped: { name: Pedido }
       corfac: { name: Factura }
@@ -33,10 +33,15 @@ generator:
       dessnc:    { name: Descripción}
       numlot:    { name: Número de Lote }
       codcat:    { name: Código de Categoría }
+      ctadev:	 { name: Código }
+      desctadev: { name: Nombre}
+      ctavco:	 { name: Código}
+      desctavco: { name: Nombre}
+      apliclades:{ name: Aplicar clave para Descuento}
 
     edit:
       title:         Definición de Artículos
-      display:        [codemp, nomemp, diremp, tlfemp, lonart, rupart, forart, desart, forubi, desubi, generaop, generacom, asiparrec, corpre, corped, corfac, cornot, cordph, cordev, coraju, prcasopre, prcreqapr, comasopre, comreqapr, almcorre, forsnc, dessnc, numlot, codcat]
+      display:        [codemp, nomemp, diremp, tlfemp, lonart, rupart, forart, desart, forubi, desubi, generaop, generacom, asiparrec, corpre, corped, corfac, cornot, cordph, cordev, coraju, prcasopre, prcreqapr, comasopre, comreqapr, almcorre, forsnc, dessnc, numlot, codcat, ctadev, desctadev, ctavco, desctavco, apliclades]
       fields:
         generaop:  {type: checkbox_tag}
         generacom: {type: checkbox_tag}

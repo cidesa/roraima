@@ -18,7 +18,7 @@ array()) ?></h1>
 
 <div id="sf_admin_content">
 <?php include_partial('fadefart/edit_messages', array('facorrelat' => $facorrelat, 'labels' => $labels)) ?>
-<?php include_partial('fadefart/edit_form', array('facorrelat' => $facorrelat, 'labels' => $labels, 'esta' => $esta, 'esta1' => $esta1, 'esta2' => $esta2, 'obj' => $obj)) ?>
+<?php include_partial('fadefart/edit_form', array('facorrelat' => $facorrelat, 'labels' => $labels, 'esta' => $esta, 'esta1' => $esta1, 'esta2' => $esta2, 'obj' => $obj, 'longpre' => $longpre, 'longcon'=> $longcon, 'mascarapresupuestaria' => $mascarapresupuestaria, 'mascaracontabilidad' => $mascaracontabilidad)) ?>
 </div>
 
 <div id="sf_admin_footer">

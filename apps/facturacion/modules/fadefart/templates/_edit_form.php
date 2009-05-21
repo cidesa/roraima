@@ -422,20 +422,155 @@ if ($facorrelat->getAsiparrec()=='P')  {
   </div>
 </div>
 
+<?php tabPageOpenClose("tp1", "tabPage7", 'Cuentas Contables Asociadas');?>
+<fieldset id="sf_fieldset_none" class="">
+<legend><?php echo __('Devolución de Ventas') ?></legend>
+<div class="form-row">
+<?php echo label_for('facorrelat[ctadev]', __($labels['facorrelat{ctadev}']), 'class="required" ') ?>
+<div class="content<?php if ($sf_request->hasError('facorrelat{ctadev}')): ?> form-error<?php endif; ?>">
+<?php if ($sf_request->hasError('facorrelat{ctadev}')): ?> <?php echo form_error('facorrelat{ctadev}', array('class' => 'form-error-msg')) ?>
+<?php endif; ?>
+
+ <?php $value = object_input_tag($facorrelat, 'getCtadev', array (
+  'size' => 32,
+  'control_name' => 'facorrelat[ctadev]',
+  'maxlength' => $longcon,
+  'onKeyDown' => "javascript:return dFilter (event.keyCode, this,'$mascaracontabilidad')",
+  'onBlur'=> remote_function(array(
+			  'url'      => 'fadefart/ajax',
+			  'complete' => 'AjaxJSON(request, json)',
+			  'condition' => "$('facorrelat_ctadev').value != ''",
+  			  'with' => "'ajax=1&cajtexcom=facorrelat_ctadev&cajtexmos=facorrelat_desctadev&codigo='+this.value"
+			  )),
+)); echo $value ? $value : '&nbsp;' ?>
+&nbsp;&nbsp;
+
+<?php
+ echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Contabb_Fadefart/clase/Contabb/frame/sf_admin_edit_form/obj1/facorrelat_ctadev/obj2/facorrelat_desctadev/campo1/codcta/campo2/descta')
+
+?>
+
+ </div>
+
+<br>
+
+  <?php echo label_for('facorrelat[desctadev]', __($labels['facorrelat{desctadev}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('facorrelat{desctadev}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('facorrelat{desctadev}')): ?>
+    <?php echo form_error('facorrelat{desctadev}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($facorrelat, 'getDesctadev', array (
+  'size' => 80,
+  'disabled' => true,
+  'control_name' => 'facorrelat[desctadev]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+</div>
+</fieldset>
+
+<fieldset id="sf_fieldset_none" class="">
+<legend><?php echo __('Ventas a Contado') ?></legend>
+<div class="form-row">
+<?php echo label_for('facorrelat[ctavco]', __($labels['facorrelat{ctavco}']), 'class="required"') ?>
+<div class="content<?php if ($sf_request->hasError('facorrelat{ctavco}')): ?> form-error<?php endif; ?>">
+<?php if ($sf_request->hasError('facorrelat{ctavco}')): ?> <?php echo form_error('facorrelat{ctavco}', array('class' => 'form-error-msg')) ?>
+<?php endif; ?>
+
+ <?php $value = object_input_tag($facorrelat, 'getCtavco', array (
+  'size' => 32,
+  'control_name' => 'facorrelat[ctavco]',
+  'maxlength' => $longcon,
+  'onKeyDown' => "javascript:return dFilter (event.keyCode, this,'$mascaracontabilidad')",
+  'onBlur'=> remote_function(array(
+			  'url'      => 'fadefart/ajax',
+			  'complete' => 'AjaxJSON(request, json)',
+			  'condition' => "$('facorrelat_ctavco').value != ''",
+  			  'with' => "'ajax=2&cajtexcom=facorrelat_ctavco&cajtexmos=facorrelat_desctavco&codigo='+this.value"
+			  )),
+)); echo $value ? $value : '&nbsp;' ?>
+&nbsp;&nbsp;
+ <?php
+  echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Contabb_Fadefart/clase/Contabb/frame/sf_admin_edit_form/obj1/facorrelat_ctavco/obj2/facorrelat_desctavco/campo1/codcta/campo2/descta')
+
+ ?>
+</div>
+
+<br>
+
+  <?php echo label_for('facorrelat[desctavco]', __($labels['facorrelat{desctavco}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('facorrelat{desctavco}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('facorrelat{desctavco}')): ?>
+    <?php echo form_error('facorrelat{desctavco}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($facorrelat, 'getDesctavco', array (
+  'size' => 80,
+  'disabled' => true,
+  'control_name' => 'facorrelat[desctavco]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+</div>
+</fieldset>
+
+<div class="form-row" width="100%">
+  <table width="100%">
+  <tr>
+  <th>
+      <?php echo label_for('facorrelat[apliclades]', __($labels['facorrelat{apliclades}']), 'class="" style="width: 300px"') ?>
+      <div class="content<?php if ($sf_request->hasError('facorrelat{apliclades}')): ?> form-error<?php endif; ?>">
+      <?php if ($sf_request->hasError('facorrelat{apliclades}')): ?>
+        <?php echo form_error('facorrelat{apliclades}', array('class' => 'form-error-msg')) ?>
+      <?php endif; ?>
+
+      <?php $value = object_checkbox_tag($facorrelat, 'getApliclades', array (
+      'control_name' => 'facorrelat[apliclades]',
+        'onClick' => 'apliclades()',
+    )); echo $value ? $value : '&nbsp;' ?>
+        </div>
+  </th>
+  </tr>
+
+  <tr>
+  <th>
+      <?php echo label_for('facorrelat[generaop]', __($labels['facorrelat{generaop}']), 'class="" style="width: 300px"') ?>
+      <div class="content<?php if ($sf_request->hasError('facorrelat{generaop}')): ?> form-error<?php endif; ?>">
+      <?php if ($sf_request->hasError('facorrelat{generaop}')): ?>
+        <?php echo form_error('facorrelat{generaop}', array('class' => 'form-error-msg')) ?>
+      <?php endif; ?>
+
+      <?php $value = object_checkbox_tag($facorrelat, 'getGeneraop', array (
+      'control_name' => 'facorrelat[generaop]',
+        'onClick' => 'generaop()',
+    )); echo $value ? $value : '&nbsp;' ?>
+        </div>
+  </th>
+  </tr>
+
+  <tr>
+  <th>
+      <?php echo label_for('facorrelat[generacom]', __($labels['facorrelat{generacom}']), 'class="" style="width: 300px"') ?>
+      <div class="content<?php if ($sf_request->hasError('facorrelat{generacom}')): ?> form-error<?php endif; ?>">
+      <?php if ($sf_request->hasError('facorrelat{generacom}')): ?>
+        <?php echo form_error('facorrelat{generacom}', array('class' => 'form-error-msg')) ?>
+      <?php endif; ?>
+
+      <?php $value = object_checkbox_tag($facorrelat, 'getGeneracom', array (
+      'control_name' => 'facorrelat[generacom]',
+        'onClick' => 'generacom()',
+    )); echo $value ? $value : '&nbsp;' ?>
+        </div>
+  </th>
+  </tr>
+
+  </table>
+  </div>
+
 <?php tabInit();?>
 <?php include_partial('edit_actions', array('facorrelat' => $facorrelat)) ?>
 
 </form>
 
-<ul class="sf_admin_actions">
-      <li class="float-left"><?php if ($facorrelat->getId()): ?>
-<?php echo button_to(__('delete'), 'fadefart/delete?id='.$facorrelat->getId(), array (
-  'post' => true,
-  'confirm' => __('Are you sure?'),
-  'class' => 'sf_admin_action_delete',
-)) ?><?php endif; ?>
-</li>
-  </ul>
 
 <script type="text/javascript">
   function colocar(e,id)
@@ -656,19 +791,35 @@ if ($facorrelat->getAsiparrec()=='P')  {
   }
 
 
-  function prcreqapr()
+  function apliclades()
   {
-    if (!$('facorrelat_prcasopre').checked)
+    if (!$('facorrelat_apliclades').checked)
     {
-        $('facorrelat_prcreqapr').checked=false;
+        $('facorrelat_apliclades').checked=false;
     }
   }
 
-  function comreqapr()
+  function generaop()
   {
-    if (!$('facorrelat_comasopre').checked)
+    if (!$('facorrelat_generaop').checked)
     {
-        $('facorrelat_comreqapr').checked=false;
+        $('facorrelat_generaop').checked=false;
+    }
+  }
+
+  function generacom()
+  {
+    if (!$('facorrelat_generacom').checked)
+    {
+        $('facorrelat_generacom').checked=false;
+    }
+  }
+
+  function asiparrec()
+  {
+    if (!$('facorrelat_asiparrec').checked)
+    {
+        $('facorrelat_asiparrec').checked=false;
     }
   }
 

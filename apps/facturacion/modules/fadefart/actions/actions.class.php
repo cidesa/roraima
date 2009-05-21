@@ -37,9 +37,8 @@ class fadefartActions extends autofadefartActions
 	      if ($this->saveFadefart($this->facorrelat)==-1)
 		  {
 		      $this->setFlash('notice', 'Your modifications have been saved');
-$this->Bitacora('Guardo');
 
-              //$this->facorrelat->setId(Herramientas::getX_vacio('codart','faartpvp','id',$this->faartpvp->getCodart()));
+              $this->Bitacora('Guardo');
 
 		      if ($this->getRequestParameter('save_and_add'))
 		      {
@@ -57,7 +56,10 @@ $this->Bitacora('Guardo');
 		   else
 		    {
 	          $this->labels = $this->getLabels();
-	          return sfView::SUCCESS;
+	          $err = Herramientas::obtenerMensajeError($this->coderror);
+       	      $this->getRequest()->setError('',$err);
+              return sfView::SUCCESS;
+
 	        }
 	    }
 	    else
@@ -100,7 +102,7 @@ $this->Bitacora('Guardo');
 		$col1->setHTML('type="text" size="40" readonly="true"');
 
 		$col2 = new Columna('Correlativo');
-		$col2->setTipo(Columna::TEXTO);		//$c->addJoin(FadefcajPeer::ID,FacorcajPeer::FADEFCAJ_ID);
+		$col2->setTipo(Columna::TEXTO);
 		$col2->setNombreCampo('corcaj');
 		$col2->setEsNumerico(false);
 		$col2->setEsGrabable(true);
@@ -116,69 +118,35 @@ $this->Bitacora('Guardo');
 
   }
 
-  public function executeAjax()
-  {
+   public function executeAjax()
+	{
+	 $cajtexmos=$this->getRequestParameter('cajtexmos');
+     $cajtexcom=$this->getRequestParameter('cajtexcom');
+	  if ($this->getRequestParameter('ajax')=='1')
+	    {
+        	$dato=ContabbPeer::getDescta($this->getRequestParameter('codigo'));
+            $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
 
-    $codigo = $this->getRequestParameter('codigo','');
-    // Esta variable ajax debe ser usada en cada llamado para identificar
-    // que objeto hace el llamado y por consiguiente ejecutar el código necesario
-    $ajax = $this->getRequestParameter('ajax','');
+	    }
+	    else  if ($this->getRequestParameter('ajax')=='2')
+	    {
+        	$dato=ContabbPeer::getDescta($this->getRequestParameter('codigo'));
+            $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
+	    }
 
-    // Se debe enviar en la petición ajax desde el cliente los datos que necesitemos
-    // para generar el código de retorno, esto porque en un llamado Ajax no se devuelven
-    // los datos de los objetos de la vista como pasa en un submit normal.
+        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+        return sfView::HEADER_ONLY;
 
-    switch ($ajax){
-      case '1':
-        // La variable $output es usada para retornar datos en formato de arreglo para actualizar
-        // objetos en la vista. mas informacion en
-        // http://201.210.211.26:8080/www/wiki/index.php/Agregar_Ajax_para_buscar_una_descripcion
-        $output = '[["","",""],["","",""],["","",""]]';
-        break;
-      default:
-        $output = '[["","",""],["","",""],["","",""]]';
-    }
-
-    // Instruccion para escribir en la cabecera los datos a enviar a la vista
-    $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
-
-    // Si solo se va usar ajax para actualziar datos en objetos ya existentes se debe
-    // mantener habilitar esta instrucción
-    return sfView::HEADER_ONLY;
-
-    // Si por el contrario se quiere reemplazar un div en la vista, se debe deshabilitar
-    // por supuesto tomando en cuenta que debe existir el archivo ajaxSuccess.php en la carpeta templates.
-
-  }
+	}
 
 
-  public function validateEdit()
+/*  public function validateEdit()
   {
     $this->coderr =-1;
 
-    // Se deben llamar a las funciones necesarias para cargar los
-    // datos de la vista que serán usados en las funciones de validación.
-    // Por ejemplo:
-
     if($this->getRequest()->getMethod() == sfRequest::POST){
 
-      // $this->configGrid();
-      // $grid = Herramientas::CargarDatosGrid($this,$this->obj);
-
-      // Aqui van los llamados a los métodos de las clases del
-      // negocio para validar los datos.
-      // Los resultados de cada llamado deben ser analizados por ejemplo:
-
-      // $resp = Compras::validarAlmajuoc($this->caajuoc,$grid);
-
-       //$resp=Herramientas::ValidarCodigo($valor,$this->tstipmov,$campo);
-
-      // al final $resp es analizada en base al código que retorna
-      // Todas las funciones de validación y procesos del negocio
-      // deben retornar códigos >= -1. Estos código serám buscados en
-      // el archivo errors.yml en la función handleErrorEdit()
    	   $this->configGrid();
-
        $grid=Herramientas::CargarDatosGrid($this,$this->obj);
 
       if($this->coderr!=-1){
@@ -186,8 +154,6 @@ $this->Bitacora('Guardo');
       } else return true;
 
     }else return true;
-
-
 
   }
 
@@ -200,13 +166,16 @@ $this->Bitacora('Guardo');
    	$this->configGrid();
 
     $this->labels = $this->getLabels();
+    if($this->getRequest()->getMethod() == sfRequest::POST)
+        {
 	if($this->coderror!=-1)
       {
        $err = Herramientas::obtenerMensajeError($this->coderror);
        $this->getRequest()->setError('',$err);
       }
+        }
     return sfView::SUCCESS;
-  }
+  }*/
 
 
   /**
@@ -227,31 +196,30 @@ $this->Bitacora('Guardo');
   protected function saveFadefart($fadefcaj)
   {
   	$lote = Facturacion::salvarNumlot($this->getRequestParameter('facorrelat[numlot]'));
-    if($lote!=-1){
+    /*if($lote!=-1){
       $this->coderror = $lote;
-      $err = Herramientas::obtenerMensajeError($this->coderror);
-      $this->getRequest()->setError('',$err);
-    }
+      return $this->coderror;
+    }*/
   	$codcat = Facturacion::salvarCodcat($this->getRequestParameter('facorrelat[codcat]'));
-    if($codcat!=-1){
+   /* if($codcat!=-1){
       $this->coderror = $codcat;
-      $err = Herramientas::obtenerMensajeError($this->coderror);
-      $this->getRequest()->setError('',$err);
+      return $this->coderror;
+    }*/
+    $resp= Facturacion::salvarCuentas($this->getRequestParameter('facorrelat[ctadev]'),$this->getRequestParameter('facorrelat[ctavco]'),$this->getRequestParameter('facorrelat[generaop]'),$this->getRequestParameter('facorrelat[generacom]'),$this->getRequestParameter('facorrelat[apliclades]'));
+    if($resp!=-1){
+      $this->coderror = $resp;
+      return $this->coderror;
     }
+
     $grid=Herramientas::CargarDatosGrid($this,$this->obj);
     $resp=Facturacion::salvarFacorrelat($fadefcaj,$grid);
     if($resp!=-1){
       $this->coderror = $resp;
-      $err = Herramientas::obtenerMensajeError($this->coderror);
-      $this->getRequest()->setError('',$err);
+      return $this->coderror;
     }
+    return -1;
   }
 
-
-  public function deleting($clasemodelo)
-  {
-    return parent::deleting($clasemodelo);
-  }
 
   public function setVars()
   {
@@ -272,6 +240,11 @@ $this->Bitacora('Guardo');
     if ($data)
     { $this->esta2='1';}
     else { $this->esta2='0';}
+
+	  $this->mascarapresupuestaria = Herramientas::Obtener_FormatoPresupuesto();
+	  $this->longpre=strlen($this->mascarapresupuestaria);
+	  $this->mascaracontabilidad = Herramientas::ObtenerFormato('Contaba','Forcta');
+	  $this->longcon=strlen($this->mascaracontabilidad);
 
   }
 
