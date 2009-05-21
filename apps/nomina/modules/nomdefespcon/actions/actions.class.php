@@ -132,6 +132,7 @@ $this->Bitacora('Guardo');
     if (!$dato)
     {
       $this->deleteNpdefcpt($this->npdefcpt);
+      $this->Bitacora('Elimino');
     }
     else
     {

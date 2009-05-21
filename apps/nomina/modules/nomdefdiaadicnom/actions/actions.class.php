@@ -199,6 +199,7 @@ $this->Bitacora('Guardo');
     try
     {
       $this->deleteNpdiaadicnom($this->npdiaadicnom);
+      $this->Bitacora('Elimino');
     }
     catch (PropelException $e)
     {

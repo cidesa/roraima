@@ -175,6 +175,7 @@ $this->Bitacora('Guardo');
     try
     {
       $this->deleteNpconaho($this->npconaho);
+      $this->Bitacora('Elimino');
     }
     catch (PropelException $e)
     {

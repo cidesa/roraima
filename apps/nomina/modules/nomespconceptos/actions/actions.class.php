@@ -242,6 +242,7 @@ $this->Bitacora('Guardo');
       $c->add(NpnomespconnomtipPeer::CODNOMESP,$this->npnomespnomtip->getCodnomesp());
       $c->add(NpnomespconnomtipPeer::CODNOM,$this->npnomespnomtip->getCodnom());
       $per = NpnomespconnomtipPeer::doDelete($c);
+      $this->Bitacora('Elimino');
     }
     catch (PropelException $e)
     {

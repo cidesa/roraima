@@ -67,6 +67,7 @@ $this->Bitacora('Guardo');
     try
     {
       $this->deleteBndefcon($this->bndefcon);
+      $this->Bitacora('Elimino');
     }
     catch (PropelException $e)
     {

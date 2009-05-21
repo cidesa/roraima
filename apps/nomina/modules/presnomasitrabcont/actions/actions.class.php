@@ -436,6 +436,7 @@ protected function saveNpasiempcont($npasiempcont)
 	$rs = NpasiempcontPeer::doDelete($c);
 	if($rs)
 	{
+		$this->Bitacora('Elimino');
 		$this->setFlash('notice','Registro Eliminado exitosamente');
 	}else
 	{

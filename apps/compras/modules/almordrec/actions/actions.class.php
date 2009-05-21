@@ -727,6 +727,7 @@ $this->Bitacora('Guardo');
     {
      if ($this->deleteCarcpart($this->carcpart))
      {
+     	$this->Bitacora('Elimino');
      	return $this->redirect('almordrec/list');
      }
      else

@@ -365,7 +365,7 @@ public function executeAjax()
     	$this->setFlash('notice','No se puede eliminar esta contratista, existen registros Asociados');
         return $this->redirect('oycregpro/edit?id='.$id);
     }
-
+	$this->Bitacora('Elimino');
     return $this->redirect('oycregpro/list');
   }
 

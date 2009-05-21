@@ -868,6 +868,7 @@ $this->Bitacora('Guardo');
     $feccomadi=$this->getRequestParameter('feccomadi');
     $compadic=$this->getRequestParameter('compadic');
     $this->msg='';
+    $ideeli=0;
     $mes = substr($feclib,3,2);
     $ano = substr($feclib,6,4);
 
@@ -935,22 +936,29 @@ $this->Bitacora('Guardo');
             $c->add(TsmovlibPeer::NUMCUE,$numcue);
             $c->add(TsmovlibPeer::REFLIB,$reflib);
             $c->add(TsmovlibPeer::TIPMOV,$tipmov);
+            $crieli=TsmovlibPeer::doSelectOne($c);
+            if ($crieli) $ideeli=$crieli->getId();
             TsmovlibPeer::doDelete($c);
 
             Tesoreria::actualiza_Bancos('E',$debcre,$numcue,$monmov);
             Tesoreria::anular_Eliminar('E',$numcomadi,$feccomadi,$compadic,$feccom,$numcom,$numcom,$feclib);
+            $this->SalvarBitacora($ideeli ,'Elimino');
             }
             else
             {
               if ($tsmovlib[0]["tipmov"]=='ANUC')
               {
-                $c = new Criteria();
+
+              $c = new Criteria();
               $c->add(TsmovlibPeer::NUMCUE,$numcue);
               $c->add(TsmovlibPeer::REFLIB,$reflib);
               $c->add(TsmovlibPeer::TIPMOV,$tipmov);
+              $crieli=TsmovlibPeer::doSelectOne($c);
+              if ($crieli) $ideeli=$crieli->getId();
               TsmovlibPeer::doDelete($c);
 
               Tesoreria::anular_Eliminar('E',$numcomadi,$feccomadi,$compadic,$feccom,$numcom,$numcom,$feclib);
+              $this->SalvarBitacora($ideeli ,'Elimino');
               }
               else
               {

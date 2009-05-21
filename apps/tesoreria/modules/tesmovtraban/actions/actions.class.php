@@ -488,6 +488,7 @@ $this->Bitacora('Guardo');
 
 	    $reg1->delete();
       }
+      $this->Bitacora('Elimino');
     }
     else
     {

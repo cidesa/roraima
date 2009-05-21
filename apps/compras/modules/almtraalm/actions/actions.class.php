@@ -387,6 +387,7 @@ $this->Bitacora('Guardo');
       }
       else
       {
+      	 $this->Bitacora('Elimino');
       	 return $this->redirect('almtraalm/list');
       }
     }

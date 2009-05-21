@@ -119,6 +119,7 @@ $this->Bitacora('Guardo');
     try
     {
       $this->deleteNpdefmov($this->npdefmov);
+      $this->Bitacora('Elimino');
     }
     catch (PropelException $e)
     {

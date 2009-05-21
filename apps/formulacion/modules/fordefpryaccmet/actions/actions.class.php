@@ -174,6 +174,7 @@ $this->Bitacora('Guardo');
     try
     {
       $this->deleteFordefpryaccmet($this->fordefpryaccmet);
+      $this->Bitacora('Elimino');
     }
     catch (PropelException $e)
     {

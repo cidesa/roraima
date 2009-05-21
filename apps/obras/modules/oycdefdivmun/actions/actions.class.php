@@ -87,6 +87,7 @@ $this->Bitacora('Guardo');
     if (!$reg)
     {
       $this->deleteOcmunici($this->ocmunici);
+      $this->Bitacora('Elimino');
     }
     else
     {

@@ -272,6 +272,7 @@ $this->Bitacora('Guardo');
     	{
            $faproalt->delete();
     	}
+    	$this->SalvarBitacora($this->getRequestParameter('id') ,'Elimino');
     }
     }
     catch (PropelException $e)

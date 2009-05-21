@@ -271,6 +271,7 @@ protected function saveNpcargos($npcargos)
       if (!$dato)
       {
        $this->deleteNpcargos($this->npcargos);
+       $this->Bitacora('Elimino');
       }
       else
       {

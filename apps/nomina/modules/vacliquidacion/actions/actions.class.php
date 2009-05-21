@@ -434,6 +434,7 @@ class vacliquidacionActions extends autovacliquidacionActions
        	 $c = new Criteria();
 		 $c->add(NpvacliquidacionPeer::CODEMP,$this->nphojint->getCodemp());
 		 NpvacliquidacionPeer::doDelete($c);
+		 $this->Bitacora('Elimino');
     }
     catch (PropelException $e)
     {

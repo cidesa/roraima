@@ -581,6 +581,7 @@ $this->Bitacora('Guardo');
         Herramientas::EliminarRegistro('Caartalmubi','Codart',$this->caregart->getCodart());
           Herramientas::EliminarRegistro('Caartalm','Codart',$this->caregart->getCodart());
         $this->deleteCaregart($this->caregart);
+        $this->Bitacora('Elimino');
       }
       catch (PropelException $e)
       {

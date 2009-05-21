@@ -373,7 +373,7 @@ $this->Bitacora('Guardo');
           $resultado->save();
       	}
       	$this->deleteOcregact($this->ocregact);
-
+		$this->Bitacora('Elimino');
       }
     }
     return $this->redirect('oycregact/list');

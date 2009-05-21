@@ -154,6 +154,7 @@ $this->Bitacora('Guardo');
     if (!$reg)
     {
       $this->deleteOcciudad($this->occiudad);
+      $this->Bitacora('Elimino');
     }
     else
     {

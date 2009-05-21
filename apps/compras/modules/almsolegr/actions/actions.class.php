@@ -275,15 +275,16 @@ $this->Bitacora('Guardo');
     $this->casolart = CasolartPeer::retrieveByPk($this->getRequestParameter('id'));
     $this->forward404Unless($this->casolart);
 
-    //try
-    //{
+    try
+    {
       $this->deleteCasolart($this->casolart);
-    /*}
+      $this->Bitacora('Elimino');
+    }
     catch (PropelException $e)
     {
       $this->getRequest()->setError('delete', 'Could not delete the selected Casolart. Make sure it does not have any associated items.');
       return $this->forward('almsolegr', 'list');
-    }*/
+    }
 
     return $this->redirect('almsolegr/list');
   }

@@ -9,7 +9,7 @@
  * @version    SVN: $Id: actions.class.php 2288 2006-10-02 15:22:13Z fabien $
  */
 class tesdeftipcueActions extends autotesdeftipcueActions
-{ 
+{
     public function executeDelete()
   {
     $this->tstipcue = TstipcuePeer::retrieveByPk($this->getRequestParameter('id'));
@@ -21,19 +21,19 @@ class tesdeftipcueActions extends autotesdeftipcueActions
     if (!$dato)
     { $this->deleteTstipcue($this->tstipcue);}
     else {
-    	
-        $this->setFlash('notice','El tipo de Cuenta no puede ser eliminado, porque esta asociado a un banco');       
-      return $this->redirect('tesdeftipcue/edit?id='.$id); 	
-    }  
 
+        $this->setFlash('notice','El tipo de Cuenta no puede ser eliminado, porque esta asociado a un banco');
+      return $this->redirect('tesdeftipcue/edit?id='.$id);
+    }
+    $this->Bitacora('Elimino');
     return $this->redirect('tesdeftipcue/list');
   }
-  
-  
+
+
   public function executeEdit()
   {
-    $this->tstipcue = $this->getTstipcueOrCreate();     
-    
+    $this->tstipcue = $this->getTstipcueOrCreate();
+
     if ($this->getRequest()->getMethod() == sfRequest::POST)
     {
       $this->updateTstipcueFromRequest();
@@ -41,7 +41,7 @@ class tesdeftipcueActions extends autotesdeftipcueActions
       $this->saveTstipcue($this->tstipcue);
 
        $this->tstipcue->setId(Herramientas::getX_vacio('codtip','tstipcue','id',$this->tstipcue->getCodtip()));
-       
+
       $this->setFlash('notice', 'Your modifications have been saved');
 $this->Bitacora('Guardo');
 
@@ -63,7 +63,7 @@ $this->Bitacora('Guardo');
       $this->labels = $this->getLabels();
     }
   }
-  
+
   protected function updateTstipcueFromRequest()
   {
     $tstipcue = $this->getRequestParameter('tstipcue');

@@ -64,6 +64,7 @@ $this->Bitacora('Guardo');
      	 try
 	    {
 	      $this->deleteTstipren($this->tstipren);
+	      $this->Bitacora('Elimino');
 	    }
 	    catch (PropelException $e)
 	    {

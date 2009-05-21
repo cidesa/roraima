@@ -433,6 +433,7 @@ class presnomregsalintindActions extends autopresnomregsalintindActions
       $c = new Criteria();
       $c->add(NpsalintPeer::CODEMP,$this->npsalint->getCodemp());
       $rs = NpsalintPeer::doDelete($c);
+      $this->Bitacora('Elimino');
     }
     catch (PropelException $e)
     {

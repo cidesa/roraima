@@ -19,7 +19,7 @@ class tesdeftipmovActions extends autotesdeftipmovActions
       $this->updateTstipmovFromRequest();
 
       $this->saveTstipmov($this->tstipmov);
-      
+
       $this->tstipmov->setId(Herramientas::getX_vacio('codtip','tstipmov','id',$this->tstipmov->getCodtip()));
 
       $this->setFlash('notice', 'Your modifications have been saved');
@@ -43,7 +43,7 @@ $this->Bitacora('Guardo');
       $this->labels = $this->getLabels();
     }
   }
-	
+
   public function executeDelete()
   {
     $this->tstipmov = TstipmovPeer::retrieveByPk($this->getRequestParameter('id'));
@@ -54,24 +54,25 @@ $this->Bitacora('Guardo');
     $c->add(TsmovlibPeer::TIPMOV,$this->tstipmov->getCodtip());
     $dato=TsmovlibPeer::doSelect($c);
     if (!$dato)
-    { 
+    {
       $c= new Criteria();
       $c->add(TsmovbanPeer::TIPMOV,$this->tstipmov->getCodtip());
       $dato2=TsmovbanPeer::doSelect($c);
       if (!$dato2)
       {
       	$this->deleteTstipmov($this->tstipmov);
+      	$this->Bitacora('Elimino');
       }
       else
       {
-      	$this->setFlash('notice','El Movimiento no puede ser eliminado, porque hay Movimientos de Bancos asociados a este');       
+      	$this->setFlash('notice','El Movimiento no puede ser eliminado, porque hay Movimientos de Bancos asociados a este');
       return $this->redirect('tesdeftipmov/edit?id='.$id);
-      }    
+      }
     }
     else
     {
-      $this->setFlash('notice','El Movimiento no puede ser eliminado, porque hay Movimientos de Libros asociados a este');       
-      return $this->redirect('tesdeftipmov/edit?id='.$id); 	
+      $this->setFlash('notice','El Movimiento no puede ser eliminado, porque hay Movimientos de Libros asociados a este');
+      return $this->redirect('tesdeftipmov/edit?id='.$id);
     }
     return $this->redirect('tesdeftipmov/list');
   }

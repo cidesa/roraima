@@ -64,6 +64,7 @@ class almtiprecproActions extends autoalmtiprecproActions
       if (!$datos)
      {
       $this->deleteCatiprec($this->catiprec);
+      $this->Bitacora('Elimino');
      }
      else
      {

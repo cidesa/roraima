@@ -339,6 +339,7 @@ public function executeAjax()
       $c->add(NpconasiPeer::CODASI,$this->npasipre->getCodasi());
       NpconasiPeer::doDelete($c);
       $this->deleteNpasipre($this->npasipre);
+      $this->Bitacora('Elimino');
     }
     catch (PropelException $e)
     {

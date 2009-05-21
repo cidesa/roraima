@@ -164,6 +164,7 @@ $this->Bitacora('Guardo');
       if (!$reg)
       {
       	 $this->deleteOcsector($this->ocsector);
+      	 $this->Bitacora('Elimino');
       }
       else
       {

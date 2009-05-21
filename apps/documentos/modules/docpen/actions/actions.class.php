@@ -150,7 +150,12 @@ $this->Bitacora('Guardo');
         $this->getRequest()->setError('',$err);
         $this->handleErrorEdit();
 
-      }else return $this->redirect('docpen/list');
+      }else
+      {
+      	$this->Bitacora('Elimino');
+      	return $this->redirect('docpen/list');
+      }
+
 
     } catch (Exception $ex) {
 

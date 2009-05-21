@@ -239,6 +239,7 @@ protected function updateNpdiaextFromRequest()
     try
     {
       $this->deleteNpdiaext($this->npdiaext);
+      $this->Bitacora('Elimino');
     }
     catch (PropelException $e)
     {

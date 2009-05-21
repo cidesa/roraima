@@ -274,6 +274,7 @@ $this->Bitacora('Guardo');
     	{
            $farecart->delete();
     	}
+    	$this->SalvarBitacora($this->getRequestParameter('id') ,'Elimino');
     }
     }
     catch (PropelException $e)

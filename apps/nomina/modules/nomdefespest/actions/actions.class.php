@@ -98,6 +98,7 @@ $this->Bitacora('Guardo');
     if (!$dato)
     {
       $this->deleteNpestado($this->npestado);
+      $this->Bitacora('Elimino');
     }
     else
     {
