@@ -292,6 +292,7 @@ class OrdendePago
    {
      $orden->setCtapag($cuentaporpagarrendicion);
    }
+
    $orden->save();
    Comprobante::ActualizarReferenciaComprobante($numerocomp,$orden->getNumord());
 
@@ -1891,7 +1892,8 @@ class OrdendePago
       if (checkdate(intval($fecha_aux[1]),intval($fecha_aux[0]),intval($fecha_aux[2])))
       { $contabc->setFeccom($fec);}
       else { $contabc->setFeccom(date('Y-m-d'));}
-      $contabc->setDescom($desc);
+      //$contabc->setDescom($desc);
+      $contabc->setDescom($resul->getDescom());
       $contabc->setStacom('D');
       $contabc->setTipcom(null);
       $contabc->setReftra($resul->getReftra());
