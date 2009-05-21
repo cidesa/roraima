@@ -1665,7 +1665,7 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
       $destipos=$destipo;
       $dato=htmlspecialchars(OpbenefiPeer::getDato($elrif,'Nomben'));
       $dato1=OpbenefiPeer::getDato($elrif,'Codcta');
-      $dato2=OpbenefiPeer::getDato2($dato1,'Descta');
+      $dato2=htmlspecialchars(OpbenefiPeer::getDato2($dato1,'Descta'));
       if ($msj=='')
       {
         $this->configGridRefere(str_pad($this->getRequestParameter('codigo'),8,'0',STR_PAD_LEFT));
@@ -1683,8 +1683,8 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
         $destipos=$destipo;
         $dato=htmlspecialchars(OpbenefiPeer::getDato($elrif,'Nomben'));
         $dato1=OpbenefiPeer::getDato($elrif,'Codcta');
-        $dato2=OpbenefiPeer::getDato2($dato1,'Descta');
-        $dato3=FortipfinPeer::getDesfin($financiamiento);
+        $dato2=htmlspecialchars(OpbenefiPeer::getDato2($dato1,'Descta'));
+        $dato3=htmlspecialchars(FortipfinPeer::getDesfin($financiamiento));
 
         if ($msj=='')
         {
