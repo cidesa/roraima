@@ -1256,9 +1256,9 @@ class Compras {
 
     if ($caartord->getCanord()<>0)
     {
-        $caartord->setDtoart($caartord->getCantot() * round($caartord->getDtoart() / $caartord->getCanord(), 2));
-        $caartord->setRgoart($caartord->getCantot() * round($caartord->getRgoart() / $caartord->getCanord(), 2));
-        $caartord->setTotart($caartord->getCantot() * round($caartord->getTotart() / $caartord->getCanord(), 2));
+        $caartord->setDtoart(round($caartord->getCantot() * ($caartord->getDtoart() / $caartord->getCanord()),2));
+        $caartord->setRgoart(round($caartord->getCantot() * ($caartord->getRgoart() / $caartord->getCanord()),2));
+        $caartord->setTotart(round($caartord->getCantot() * ($caartord->getTotart() / $caartord->getCanord()),2));
     }
     else
         {
