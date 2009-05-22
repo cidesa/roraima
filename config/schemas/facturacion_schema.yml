@@ -1600,3 +1600,22 @@ propel:
       type: INTEGER
       required: true
       autoIncrement: true
+  fanotcre:
+    reffac:
+      type: VARCHAR
+      size: 8
+      required: true
+    correl:
+      type: VARCHAR
+      size: 8
+    fecnot:
+      type: DATE
+      required: true
+    monto:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
