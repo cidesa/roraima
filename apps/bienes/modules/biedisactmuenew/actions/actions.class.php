@@ -469,11 +469,11 @@ public function handleErrorEdit()
        }
       }
 
-	      if (self::validarGeneraComprobante())
+	    /*  if (self::validarGeneraComprobante())
 	      {
 		    $this->coderror1=508;
 		    return false;
-		  }
+		  }*/
 
       return true;
     }else return true;
