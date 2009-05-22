@@ -116,6 +116,9 @@ echo $value ? $value : '&nbsp;'
 
 <div id="FormaPrinc" style="display:none">
 <ul class="sf_admin_actions">
+<li class="float-left">
+<strong><font color="#CC0000" size="3" face="Verdana, Arial, Helvetica, sans-serif"> <? print $fafactur->getEstatus();?></font></strong>
+</li>
 <li>
 <input id="cerrar" type="button" name="Submit2" value="Cerrar Caja" class="sf_admin_action_delete" onclick="cerrar2();"/>
 </li>
@@ -753,7 +756,7 @@ echo $value ? $value : '&nbsp;'
 
 <ul class="sf_admin_actions">
 <li class="float-rigth">
-<?php if ($fafactur->getId()) {?>
+<?php if ($fafactur->getId() && $fafactur->getStatus()!='N') {?>
   <input type="button" name="Submit" value="Anular" class="sf_admin_action_delete" onclick="javascript:anular();" />
 <?php }?>
 </li>

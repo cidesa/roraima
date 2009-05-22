@@ -20,10 +20,20 @@ class fafacturActions extends autofafacturActions {
 			if ($reg) {
 				$correl = str_pad($reg->getCorcaj(), 8, '0', STR_PAD_LEFT);
 				$this->fafactur->setReffac($correl);
-				//$this->fafactur->setTipo($reg->getTipo());
+			
 			}
 	        }
 		}
+		if($this->fafactur->getId())
+	    {
+    	  if ($this->fafactur->getStatus()=='N')
+          {
+          	if ($this->fafactur->getFecanu()!='')
+           	$eti="ANULADA EL ".date('d/m/Y',strtotime($this->fafactur->getFecanu()));
+           	else $eti="ANULADA ";
+          	$this->fafactur->setEstatus($eti);
+          }
+	    }
 		$c = new Criteria();
 		$dato = CadefartPeer :: doSelectOne($c);
 		if ($dato) {
@@ -984,9 +994,9 @@ class fafacturActions extends autofafacturActions {
 		Herramientas :: EliminarRegistro('Fargoart', 'Refdoc', $fafactur->getReffac());
 		Herramientas :: EliminarRegistro('Fadescart', 'Refdoc', $fafactur->getReffac());
 		Herramientas :: EliminarRegistro('Faforpag', 'Reffac', $fafactur->getReffac());
-		Herramientas :: EliminarRegistro('Cobrecdoc', 'Refdoc', $fafactur->getReffac());
-		Herramientas :: EliminarRegistro('Cobdesdoc', 'Refdoc', $fafactur->getReffac());
-		Herramientas :: EliminarRegistro('Cobdocume', 'Refdoc', $fafactur->getReffac());
+		Herramientas :: EliminarRegistro('Cobrecdoc', 'Refdoc', str_pad($fafactur->getReffac(),10,'0',STR_PAD_LEFT));
+		Herramientas :: EliminarRegistro('Cobdesdoc', 'Refdoc', str_pad($fafactur->getReffac(),10,'0',STR_PAD_LEFT));
+		Herramientas :: EliminarRegistro('Cobdocume', 'Refdoc', str_pad($fafactur->getReffac(),10,'0',STR_PAD_LEFT));
 
 		$c = new Criteria();
 		$c->add(CiimpingPeer :: REFING, $fafactur->getReffac());

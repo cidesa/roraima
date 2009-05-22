@@ -131,5 +131,4 @@ class Facorrelat extends BaseFacorrelat
 	  return Herramientas::getX('CODEMP','Cadefart','Asiparrec','001');
 	}
 
-
 }

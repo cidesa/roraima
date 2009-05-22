@@ -1248,6 +1248,7 @@ class Factura {
       {
       	$contabc->setNumcom("RO".substr($numcom,2,6));
       }
+      $contabc->setReftra($datos->getReftra());
       $contabc->setFeccom($fecanu);
       $contabc->setDescom($datos->getDescom());
       $contabc->setStacom('D');
@@ -1302,7 +1303,7 @@ class Factura {
   {
     $facnotcre= new Fanotcre();
     $facnotcre->setReffac($reffac);
-    $corre="".substr(self::generarCodInt("Fanotcre","correl"),0,8);
+    $corre=substr(self::generarCodInt("Fanotcre","correl"),2,8);
     $facnotcre->setCorrel($corre);
     $facnotcre->setFecnot($fecanu);
     $facnotcre->setMonto($monto);
@@ -1340,7 +1341,7 @@ class Factura {
   public static function anularCxC($reffac,$fecanu,$motanu)
   {
     $c= new Criteria();
-    $c->add(CobdocumePeer::REFFAC,$reffac);
+    $c->add(CobdocumePeer::REFDOC,$reffac);
     $resul= CobdocumePeer::doSelectOne($c);
     if ($resul)
     {
