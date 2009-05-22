@@ -22,6 +22,31 @@ COMMENT ON TABLE "catdivgeo" IS '';
 
 
 -----------------------------------------------------------------------------
+-- catbarurb
+-----------------------------------------------------------------------------
+
+DROP TABLE IF EXISTS "catbarurb" CASCADE;
+
+DROP SEQUENCE IF EXISTS "catbarurb_seq";
+
+CREATE SEQUENCE "catbarurb_seq";
+
+
+CREATE TABLE "catbarurb"
+(
+  "catdivgeo_id" INTEGER,
+  "nombarurb" VARCHAR(50),
+  "alibarurb" VARCHAR(50),
+  "id" INTEGER  NOT NULL DEFAULT nextval('catbarurb_seq'::regclass),
+  PRIMARY KEY ("id")
+);
+
+COMMENT ON TABLE "catbarurb" IS '';
+
+
+ALTER TABLE "catbarurb" ADD CONSTRAINT "catbarurb_FK_1" FOREIGN KEY ("catdivgeo_id") REFERENCES "catdivgeo" ("id");
+
+-----------------------------------------------------------------------------
 -- catcarcon
 -----------------------------------------------------------------------------
 
@@ -37,13 +62,39 @@ CREATE TABLE "catcarcon"
   "tipo" VARCHAR(2)  NOT NULL,
   "nomcarcon" VARCHAR(100)  NOT NULL,
   "id" INTEGER  NOT NULL DEFAULT nextval('catcarcon_seq'::regclass),
-  "cancar" NUMERIC(4,2)  NOT NULL,
-  "metare" NUMERIC(12,2)  NOT NULL,
   PRIMARY KEY ("id")
 );
 
 COMMENT ON TABLE "catcarcon" IS '';
 
+
+-----------------------------------------------------------------------------
+-- catcarconinm
+-----------------------------------------------------------------------------
+
+DROP TABLE IF EXISTS "catcarconinm" CASCADE;
+
+DROP SEQUENCE IF EXISTS "catcarconinm_seq";
+
+CREATE SEQUENCE "catcarconinm_seq";
+
+
+CREATE TABLE "catcarconinm"
+(
+  "catreginm_id" INTEGER,
+  "catcarcon_id" INTEGER,
+  "cancar" NUMERIC(4,2)  NOT NULL,
+  "metare" NUMERIC(12,2)  NOT NULL,
+  "id" INTEGER  NOT NULL DEFAULT nextval('catcarconinm_seq'::regclass),
+  PRIMARY KEY ("id")
+);
+
+COMMENT ON TABLE "catcarconinm" IS '';
+
+
+ALTER TABLE "catcarconinm" ADD CONSTRAINT "catcarconinm_FK_1" FOREIGN KEY ("catreginm_id") REFERENCES "catreginm" ("id");
+
+ALTER TABLE "catcarconinm" ADD CONSTRAINT "catcarconinm_FK_2" FOREIGN KEY ("catcarcon_id") REFERENCES "catcarcon" ("id");
 
 -----------------------------------------------------------------------------
 -- catcarinm
@@ -89,137 +140,6 @@ COMMENT ON TABLE "catcarter" IS '';
 
 
 -----------------------------------------------------------------------------
--- catbarurb
------------------------------------------------------------------------------
-
-DROP TABLE IF EXISTS "catbarurb" CASCADE;
-
-DROP SEQUENCE IF EXISTS "catbarurb_seq";
-
-CREATE SEQUENCE "catbarurb_seq";
-
-
-CREATE TABLE "catbarurb"
-(
-  "catdivgeo_id" INTEGER,
-  "nombarurb" VARCHAR(50),
-  "alibarurb" VARCHAR(50),
-  "id" INTEGER  NOT NULL DEFAULT nextval('catbarurb_seq'::regclass),
-  PRIMARY KEY ("id")
-);
-
-COMMENT ON TABLE "catbarurb" IS '';
-
-
-ALTER TABLE "catbarurb" ADD CONSTRAINT "catbarurb_FK_1" FOREIGN KEY ("catdivgeo_id") REFERENCES "catdivgeo" ("id");
-
------------------------------------------------------------------------------
--- catreginm
------------------------------------------------------------------------------
-
-DROP TABLE IF EXISTS "catreginm" CASCADE;
-
-DROP SEQUENCE IF EXISTS "catreginm_seq";
-
-CREATE SEQUENCE "catreginm_seq";
-
-
-CREATE TABLE "catreginm"
-(
-  "catsubprc_id" INTEGER,
-  "catprc_id" INTEGER,
-  "catman_id" INTEGER,
-  "catsec_id" INTEGER,
-  "catpar_id" INTEGER,
-  "catmun_id" INTEGER,
-  "catciu_id" INTEGER,
-  "catest_id" INTEGER,
-  "catbarurb_id" INTEGER,
-  "cattramofro_id" INTEGER,
-  "cattramolat_id" INTEGER,
-  "cattramolat2_id" INTEGER,
-  "catcodpos_id" INTEGER,
-  "cattipviv_id" INTEGER,
-  "catconinm_id" INTEGER,
-  "catusoesp_id" INTEGER,
-  "catconsoc_id" INTEGER,
-  "catrut_id" INTEGER,
-  "catcarterinm_id" INTEGER,
-  "catproter_id" INTEGER,
-  "coddivgeo" VARCHAR(40),
-  "nrocas" VARCHAR(30),
-  "fecreg" DATE,
-  "dirinm" VARCHAR(254),
-  "nivinm" VARCHAR(8),
-  "unihab" VARCHAR(8),
-  "edicas" VARCHAR(25),
-  "pisinm" VARCHAR(2),
-  "numinm" VARCHAR(4),
-  "ubigex" VARCHAR(10),
-  "ubigey" VARCHAR(10),
-  "ubigez" VARCHAR(10),
-  "numhab" VARCHAR(3),
-  "numper" VARCHAR(3),
-  "numsan" VARCHAR(3),
-  "numtom" VARCHAR(3),
-  "arever" VARCHAR(3),
-  "loccom" VARCHAR(3),
-  "locind" VARCHAR(3),
-  "captan" VARCHAR(10),
-  "cappis" VARCHAR(10),
-  "trapis" VARCHAR(1),
-  "numtel" VARCHAR(15),
-  "nomarccro" VARCHAR(254),
-  "oficom" VARCHAR(3),
-  "fotinm" VARCHAR(100),
-  "id" INTEGER  NOT NULL DEFAULT nextval('catreginm_seq'::regclass),
-  PRIMARY KEY ("id")
-);
-
-COMMENT ON TABLE "catreginm" IS '';
-
-
-ALTER TABLE "catreginm" ADD CONSTRAINT "catreginm_FK_1" FOREIGN KEY ("catsubprc_id") REFERENCES "catsubprc" ("id");
-
-ALTER TABLE "catreginm" ADD CONSTRAINT "catreginm_FK_2" FOREIGN KEY ("catprc_id") REFERENCES "catprc" ("id");
-
-ALTER TABLE "catreginm" ADD CONSTRAINT "catreginm_FK_3" FOREIGN KEY ("catman_id") REFERENCES "catman" ("id");
-
-ALTER TABLE "catreginm" ADD CONSTRAINT "catreginm_FK_4" FOREIGN KEY ("catsec_id") REFERENCES "catsec" ("id");
-
-ALTER TABLE "catreginm" ADD CONSTRAINT "catreginm_FK_5" FOREIGN KEY ("catpar_id") REFERENCES "catpar" ("id");
-
-ALTER TABLE "catreginm" ADD CONSTRAINT "catreginm_FK_6" FOREIGN KEY ("catmun_id") REFERENCES "catmun" ("id");
-
-ALTER TABLE "catreginm" ADD CONSTRAINT "catreginm_FK_7" FOREIGN KEY ("catciu_id") REFERENCES "catciu" ("id");
-
-ALTER TABLE "catreginm" ADD CONSTRAINT "catreginm_FK_8" FOREIGN KEY ("catest_id") REFERENCES "catest" ("id");
-
-ALTER TABLE "catreginm" ADD CONSTRAINT "catreginm_FK_9" FOREIGN KEY ("catbarurb_id") REFERENCES "catbarurb" ("id");
-
-ALTER TABLE "catreginm" ADD CONSTRAINT "catreginm_FK_10" FOREIGN KEY ("cattramofro_id") REFERENCES "cattramo" ("id");
-
-ALTER TABLE "catreginm" ADD CONSTRAINT "catreginm_FK_11" FOREIGN KEY ("cattramolat_id") REFERENCES "cattramo" ("id");
-
-ALTER TABLE "catreginm" ADD CONSTRAINT "catreginm_FK_12" FOREIGN KEY ("cattramolat2_id") REFERENCES "cattramo" ("id");
-
-ALTER TABLE "catreginm" ADD CONSTRAINT "catreginm_FK_13" FOREIGN KEY ("catcodpos_id") REFERENCES "catcodpos" ("id");
-
-ALTER TABLE "catreginm" ADD CONSTRAINT "catreginm_FK_14" FOREIGN KEY ("cattipviv_id") REFERENCES "cattipviv" ("id");
-
-ALTER TABLE "catreginm" ADD CONSTRAINT "catreginm_FK_15" FOREIGN KEY ("catconinm_id") REFERENCES "catconinm" ("id");
-
-ALTER TABLE "catreginm" ADD CONSTRAINT "catreginm_FK_16" FOREIGN KEY ("catusoesp_id") REFERENCES "catusoesp" ("id");
-
-ALTER TABLE "catreginm" ADD CONSTRAINT "catreginm_FK_17" FOREIGN KEY ("catconsoc_id") REFERENCES "catconsoc" ("id");
-
-ALTER TABLE "catreginm" ADD CONSTRAINT "catreginm_FK_18" FOREIGN KEY ("catrut_id") REFERENCES "catrut" ("id");
-
-ALTER TABLE "catreginm" ADD CONSTRAINT "catreginm_FK_19" FOREIGN KEY ("catcarterinm_id") REFERENCES "catcarterinm" ("id");
-
-ALTER TABLE "catreginm" ADD CONSTRAINT "catreginm_FK_20" FOREIGN KEY ("catproter_id") REFERENCES "catproter" ("id");
-
------------------------------------------------------------------------------
 -- catcarterinm
 -----------------------------------------------------------------------------
 
@@ -237,8 +157,6 @@ CREATE TABLE "catcarterinm"
   "dimensiones" VARCHAR,
   "valor" INTEGER,
   "id" INTEGER  NOT NULL DEFAULT nextval('catcarterinm_seq'::regclass),
-  "nomciu" VARCHAR(50),
-  "aliciu" VARCHAR(50),
   PRIMARY KEY ("id")
 );
 
@@ -248,6 +166,31 @@ COMMENT ON TABLE "catcarterinm" IS '';
 ALTER TABLE "catcarterinm" ADD CONSTRAINT "catcarterinm_FK_1" FOREIGN KEY ("catreginm_id") REFERENCES "catreginm" ("id");
 
 ALTER TABLE "catcarterinm" ADD CONSTRAINT "catcarterinm_FK_2" FOREIGN KEY ("catcarter_id") REFERENCES "catcarter" ("id");
+
+-----------------------------------------------------------------------------
+-- catciu
+-----------------------------------------------------------------------------
+
+DROP TABLE IF EXISTS "catciu" CASCADE;
+
+DROP SEQUENCE IF EXISTS "catciu_seq";
+
+CREATE SEQUENCE "catciu_seq";
+
+
+CREATE TABLE "catciu"
+(
+  "id" INTEGER  NOT NULL DEFAULT nextval('catciu_seq'::regclass),
+  "catest_id" INTEGER  NOT NULL,
+  "nomciu" VARCHAR(50),
+  "aliciu" VARCHAR(50),
+  PRIMARY KEY ("id")
+);
+
+COMMENT ON TABLE "catciu" IS '';
+
+
+ALTER TABLE "catciu" ADD CONSTRAINT "catciu_FK_1" FOREIGN KEY ("catest_id") REFERENCES "catest" ("id") ON UPDATE RESTRICT ON DELETE RESTRICT;
 
 -----------------------------------------------------------------------------
 -- catcodpos
@@ -376,29 +319,6 @@ COMMENT ON TABLE "catest" IS '';
 
 
 -----------------------------------------------------------------------------
--- catciu
------------------------------------------------------------------------------
-
-DROP TABLE IF EXISTS "catciu" CASCADE;
-
-DROP SEQUENCE IF EXISTS "catciu_seq";
-
-CREATE SEQUENCE "catciu_seq";
-
-
-CREATE TABLE "catciu"
-(
-  "id" INTEGER  NOT NULL DEFAULT nextval('catciu_seq'::regclass),
-  "catest_id" INTEGER  NOT NULL,
-  PRIMARY KEY ("id")
-);
-
-COMMENT ON TABLE "catciu" IS '';
-
-
-ALTER TABLE "catciu" ADD CONSTRAINT "catciu_FK_1" FOREIGN KEY ("catest_id") REFERENCES "catest" ("id") ON UPDATE RESTRICT ON DELETE RESTRICT;
-
------------------------------------------------------------------------------
 -- catinmcar
 -----------------------------------------------------------------------------
 
@@ -437,11 +357,7 @@ CREATE SEQUENCE "catman_seq";
 CREATE TABLE "catman"
 (
   "id" INTEGER  NOT NULL DEFAULT nextval('catman_seq'::regclass),
-  "catsec_id" INTEGER,
-  "catpar_id" INTEGER,
-  "catmun_id" INTEGER,
-  "catciu_id" INTEGER,
-  "catest_id" INTEGER,
+  "catdivgeo_id" INTEGER,
   "nomman" VARCHAR(50),
   "aliman" VARCHAR(50),
   "tiplinnor" VARCHAR(1),
@@ -458,23 +374,15 @@ CREATE TABLE "catman"
 COMMENT ON TABLE "catman" IS '';
 
 
-ALTER TABLE "catman" ADD CONSTRAINT "catman_FK_1" FOREIGN KEY ("catsec_id") REFERENCES "catsec" ("id");
+ALTER TABLE "catman" ADD CONSTRAINT "catman_FK_1" FOREIGN KEY ("catdivgeo_id") REFERENCES "catdivgeo" ("id");
 
-ALTER TABLE "catman" ADD CONSTRAINT "catman_FK_2" FOREIGN KEY ("catpar_id") REFERENCES "catpar" ("id");
+ALTER TABLE "catman" ADD CONSTRAINT "catman_FK_2" FOREIGN KEY ("cattramonor_id") REFERENCES "cattramo" ("id");
 
-ALTER TABLE "catman" ADD CONSTRAINT "catman_FK_3" FOREIGN KEY ("catmun_id") REFERENCES "catmun" ("id");
+ALTER TABLE "catman" ADD CONSTRAINT "catman_FK_3" FOREIGN KEY ("cattramosur_id") REFERENCES "cattramo" ("id");
 
-ALTER TABLE "catman" ADD CONSTRAINT "catman_FK_4" FOREIGN KEY ("catciu_id") REFERENCES "catciu" ("id");
+ALTER TABLE "catman" ADD CONSTRAINT "catman_FK_4" FOREIGN KEY ("cattramoest_id") REFERENCES "cattramo" ("id");
 
-ALTER TABLE "catman" ADD CONSTRAINT "catman_FK_5" FOREIGN KEY ("catest_id") REFERENCES "catest" ("id");
-
-ALTER TABLE "catman" ADD CONSTRAINT "catman_FK_6" FOREIGN KEY ("cattramonor_id") REFERENCES "cattramo" ("id");
-
-ALTER TABLE "catman" ADD CONSTRAINT "catman_FK_7" FOREIGN KEY ("cattramosur_id") REFERENCES "cattramo" ("id");
-
-ALTER TABLE "catman" ADD CONSTRAINT "catman_FK_8" FOREIGN KEY ("cattramoest_id") REFERENCES "cattramo" ("id");
-
-ALTER TABLE "catman" ADD CONSTRAINT "catman_FK_9" FOREIGN KEY ("cattramooes_id") REFERENCES "cattramo" ("id");
+ALTER TABLE "catman" ADD CONSTRAINT "catman_FK_5" FOREIGN KEY ("cattramooes_id") REFERENCES "cattramo" ("id");
 
 -----------------------------------------------------------------------------
 -- catmun
@@ -643,71 +551,110 @@ COMMENT ON TABLE "catproter" IS '';
 
 
 -----------------------------------------------------------------------------
--- cattramo
+-- catreginm
 -----------------------------------------------------------------------------
 
-DROP TABLE IF EXISTS "cattramo" CASCADE;
+DROP TABLE IF EXISTS "catreginm" CASCADE;
 
-DROP SEQUENCE IF EXISTS "cattramo_seq";
+DROP SEQUENCE IF EXISTS "catreginm_seq";
 
-CREATE SEQUENCE "cattramo_seq";
+CREATE SEQUENCE "catreginm_seq";
 
 
-CREATE TABLE "cattramo"
+CREATE TABLE "catreginm"
 (
-  "id" INTEGER  NOT NULL DEFAULT nextval('cattramo_seq'::regclass),
+  "catsubprc_id" INTEGER,
+  "catprc_id" INTEGER,
+  "catman_id" INTEGER,
   "catsec_id" INTEGER,
   "catpar_id" INTEGER,
   "catmun_id" INTEGER,
   "catciu_id" INTEGER,
   "catest_id" INTEGER,
-  "nomtramo" VARCHAR(50),
-  "alitramo" VARCHAR(50),
-  "cattipvia_id" INTEGER,
-  "catsenvia_id" INTEGER,
-  "catdirvia_id" INTEGER,
+  "catbarurb_id" INTEGER,
+  "cattramofro_id" INTEGER,
+  "cattramolat_id" INTEGER,
+  "cattramolat2_id" INTEGER,
+  "catcodpos_id" INTEGER,
+  "cattipviv_id" INTEGER,
+  "catconinm_id" INTEGER,
+  "catusoesp_id" INTEGER,
+  "catconsoc_id" INTEGER,
+  "catrut_id" INTEGER,
+  "catcarterinm_id" INTEGER,
+  "catproter_id" INTEGER,
+  "coddivgeo" VARCHAR(40),
+  "nrocas" VARCHAR(30),
+  "fecreg" DATE,
+  "dirinm" VARCHAR(254),
+  "nivinm" VARCHAR(8),
+  "unihab" VARCHAR(8),
+  "edicas" VARCHAR(25),
+  "pisinm" VARCHAR(2),
+  "numinm" VARCHAR(4),
+  "ubigex" VARCHAR(10),
+  "ubigey" VARCHAR(10),
+  "ubigez" VARCHAR(10),
+  "numhab" VARCHAR(3),
+  "numper" VARCHAR(3),
+  "numsan" VARCHAR(3),
+  "numtom" VARCHAR(3),
+  "arever" VARCHAR(3),
+  "loccom" VARCHAR(3),
+  "locind" VARCHAR(3),
+  "captan" VARCHAR(10),
+  "cappis" VARCHAR(10),
+  "trapis" VARCHAR(1),
+  "numtel" VARCHAR(15),
+  "nomarccro" VARCHAR(254),
+  "oficom" VARCHAR(3),
+  "fotinm" VARCHAR(100),
+  "id" INTEGER  NOT NULL DEFAULT nextval('catreginm_seq'::regclass),
   PRIMARY KEY ("id")
 );
 
-COMMENT ON TABLE "cattramo" IS '';
+COMMENT ON TABLE "catreginm" IS '';
 
 
-ALTER TABLE "cattramo" ADD CONSTRAINT "cattramo_FK_1" FOREIGN KEY ("catsec_id") REFERENCES "catsec" ("id");
+ALTER TABLE "catreginm" ADD CONSTRAINT "catreginm_FK_1" FOREIGN KEY ("catsubprc_id") REFERENCES "catsubprc" ("id");
 
-ALTER TABLE "cattramo" ADD CONSTRAINT "cattramo_FK_2" FOREIGN KEY ("catpar_id") REFERENCES "catpar" ("id");
+ALTER TABLE "catreginm" ADD CONSTRAINT "catreginm_FK_2" FOREIGN KEY ("catprc_id") REFERENCES "catprc" ("id");
 
-ALTER TABLE "cattramo" ADD CONSTRAINT "cattramo_FK_3" FOREIGN KEY ("catmun_id") REFERENCES "catmun" ("id");
+ALTER TABLE "catreginm" ADD CONSTRAINT "catreginm_FK_3" FOREIGN KEY ("catman_id") REFERENCES "catman" ("id");
 
-ALTER TABLE "cattramo" ADD CONSTRAINT "cattramo_FK_4" FOREIGN KEY ("catciu_id") REFERENCES "catciu" ("id");
+ALTER TABLE "catreginm" ADD CONSTRAINT "catreginm_FK_4" FOREIGN KEY ("catsec_id") REFERENCES "catsec" ("id");
 
-ALTER TABLE "cattramo" ADD CONSTRAINT "cattramo_FK_5" FOREIGN KEY ("catest_id") REFERENCES "catest" ("id");
+ALTER TABLE "catreginm" ADD CONSTRAINT "catreginm_FK_5" FOREIGN KEY ("catpar_id") REFERENCES "catpar" ("id");
 
-ALTER TABLE "cattramo" ADD CONSTRAINT "cattramo_FK_6" FOREIGN KEY ("cattipvia_id") REFERENCES "cattipvia" ("id");
+ALTER TABLE "catreginm" ADD CONSTRAINT "catreginm_FK_6" FOREIGN KEY ("catmun_id") REFERENCES "catmun" ("id");
 
-ALTER TABLE "cattramo" ADD CONSTRAINT "cattramo_FK_7" FOREIGN KEY ("catsenvia_id") REFERENCES "catsenvia" ("id");
+ALTER TABLE "catreginm" ADD CONSTRAINT "catreginm_FK_7" FOREIGN KEY ("catciu_id") REFERENCES "catciu" ("id");
 
-ALTER TABLE "cattramo" ADD CONSTRAINT "cattramo_FK_8" FOREIGN KEY ("catdirvia_id") REFERENCES "catdirvia" ("id");
+ALTER TABLE "catreginm" ADD CONSTRAINT "catreginm_FK_8" FOREIGN KEY ("catest_id") REFERENCES "catest" ("id");
 
------------------------------------------------------------------------------
--- catusoesp
------------------------------------------------------------------------------
+ALTER TABLE "catreginm" ADD CONSTRAINT "catreginm_FK_9" FOREIGN KEY ("catbarurb_id") REFERENCES "catbarurb" ("id");
 
-DROP TABLE IF EXISTS "catusoesp" CASCADE;
+ALTER TABLE "catreginm" ADD CONSTRAINT "catreginm_FK_10" FOREIGN KEY ("cattramofro_id") REFERENCES "cattramo" ("id");
 
-DROP SEQUENCE IF EXISTS "catusoesp_seq";
+ALTER TABLE "catreginm" ADD CONSTRAINT "catreginm_FK_11" FOREIGN KEY ("cattramolat_id") REFERENCES "cattramo" ("id");
 
-CREATE SEQUENCE "catusoesp_seq";
+ALTER TABLE "catreginm" ADD CONSTRAINT "catreginm_FK_12" FOREIGN KEY ("cattramolat2_id") REFERENCES "cattramo" ("id");
 
+ALTER TABLE "catreginm" ADD CONSTRAINT "catreginm_FK_13" FOREIGN KEY ("catcodpos_id") REFERENCES "catcodpos" ("id");
 
-CREATE TABLE "catusoesp"
-(
-  "desuso" VARCHAR(100)  NOT NULL,
-  "id" INTEGER  NOT NULL DEFAULT nextval('catusoesp_seq'::regclass),
-  PRIMARY KEY ("id")
-);
+ALTER TABLE "catreginm" ADD CONSTRAINT "catreginm_FK_14" FOREIGN KEY ("cattipviv_id") REFERENCES "cattipviv" ("id");
 
-COMMENT ON TABLE "catusoesp" IS '';
+ALTER TABLE "catreginm" ADD CONSTRAINT "catreginm_FK_15" FOREIGN KEY ("catconinm_id") REFERENCES "catconinm" ("id");
 
+ALTER TABLE "catreginm" ADD CONSTRAINT "catreginm_FK_16" FOREIGN KEY ("catusoesp_id") REFERENCES "catusoesp" ("id");
+
+ALTER TABLE "catreginm" ADD CONSTRAINT "catreginm_FK_17" FOREIGN KEY ("catconsoc_id") REFERENCES "catconsoc" ("id");
+
+ALTER TABLE "catreginm" ADD CONSTRAINT "catreginm_FK_18" FOREIGN KEY ("catrut_id") REFERENCES "catrut" ("id");
+
+ALTER TABLE "catreginm" ADD CONSTRAINT "catreginm_FK_19" FOREIGN KEY ("catcarterinm_id") REFERENCES "catcarterinm" ("id");
+
+ALTER TABLE "catreginm" ADD CONSTRAINT "catreginm_FK_20" FOREIGN KEY ("catproter_id") REFERENCES "catproter" ("id");
 
 -----------------------------------------------------------------------------
 -- catregper
@@ -726,7 +673,7 @@ CREATE TABLE "catregper"
   "catsec_id" INTEGER,
   "catpar_id" INTEGER,
   "catmun_id" INTEGER,
-  "catciu_id" INTEGER,
+  "catdivgeo_id" INTEGER,
   "catest_id" INTEGER,
   "cattramofro_id" INTEGER,
   "cattramolat_id" INTEGER,
@@ -767,7 +714,7 @@ ALTER TABLE "catregper" ADD CONSTRAINT "catregper_FK_3" FOREIGN KEY ("catpar_id"
 
 ALTER TABLE "catregper" ADD CONSTRAINT "catregper_FK_4" FOREIGN KEY ("catmun_id") REFERENCES "catmun" ("id");
 
-ALTER TABLE "catregper" ADD CONSTRAINT "catregper_FK_5" FOREIGN KEY ("catciu_id") REFERENCES "catciu" ("id");
+ALTER TABLE "catregper" ADD CONSTRAINT "catregper_FK_5" FOREIGN KEY ("catdivgeo_id") REFERENCES "catdivgeo" ("id");
 
 ALTER TABLE "catregper" ADD CONSTRAINT "catregper_FK_6" FOREIGN KEY ("catest_id") REFERENCES "catest" ("id");
 
@@ -941,27 +888,56 @@ COMMENT ON TABLE "cattipviv" IS '';
 
 
 -----------------------------------------------------------------------------
--- catcarconinm
+-- cattramo
 -----------------------------------------------------------------------------
 
-DROP TABLE IF EXISTS "catcarconinm" CASCADE;
+DROP TABLE IF EXISTS "cattramo" CASCADE;
 
-DROP SEQUENCE IF EXISTS "catcarconinm_seq";
+DROP SEQUENCE IF EXISTS "cattramo_seq";
 
-CREATE SEQUENCE "catcarconinm_seq";
+CREATE SEQUENCE "cattramo_seq";
 
 
-CREATE TABLE "catcarconinm"
+CREATE TABLE "cattramo"
 (
-  "catreginm_id" INTEGER,
-  "catcarcon_id" INTEGER,
-  "id" INTEGER  NOT NULL DEFAULT nextval('catcarconinm_seq'::regclass),
+  "id" INTEGER  NOT NULL DEFAULT nextval('cattramo_seq'::regclass),
+  "catdivgeo_id" INTEGER,
+  "nomtramo" VARCHAR(50)  NOT NULL,
+  "alitramo" VARCHAR(50),
+  "cattipvia_id" INTEGER,
+  "catsenvia_id" INTEGER,
+  "catdirvia_id" INTEGER,
   PRIMARY KEY ("id")
 );
 
-COMMENT ON TABLE "catcarconinm" IS '';
+COMMENT ON TABLE "cattramo" IS '';
 
 
-ALTER TABLE "catcarconinm" ADD CONSTRAINT "catcarconinm_FK_1" FOREIGN KEY ("catreginm_id") REFERENCES "catreginm" ("id");
+ALTER TABLE "cattramo" ADD CONSTRAINT "cattramo_FK_1" FOREIGN KEY ("catdivgeo_id") REFERENCES "catdivgeo" ("id");
 
-ALTER TABLE "catcarconinm" ADD CONSTRAINT "catcarconinm_FK_2" FOREIGN KEY ("catcarcon_id") REFERENCES "catcarcon" ("id");
+ALTER TABLE "cattramo" ADD CONSTRAINT "cattramo_FK_2" FOREIGN KEY ("cattipvia_id") REFERENCES "cattipvia" ("id");
+
+ALTER TABLE "cattramo" ADD CONSTRAINT "cattramo_FK_3" FOREIGN KEY ("catsenvia_id") REFERENCES "catsenvia" ("id");
+
+ALTER TABLE "cattramo" ADD CONSTRAINT "cattramo_FK_4" FOREIGN KEY ("catdirvia_id") REFERENCES "catdirvia" ("id");
+
+-----------------------------------------------------------------------------
+-- catusoesp
+-----------------------------------------------------------------------------
+
+DROP TABLE IF EXISTS "catusoesp" CASCADE;
+
+DROP SEQUENCE IF EXISTS "catusoesp_seq";
+
+CREATE SEQUENCE "catusoesp_seq";
+
+
+CREATE TABLE "catusoesp"
+(
+  "desuso" VARCHAR(100)  NOT NULL,
+  "id" INTEGER  NOT NULL DEFAULT nextval('catusoesp_seq'::regclass),
+  PRIMARY KEY ("id")
+);
+
+COMMENT ON TABLE "catusoesp" IS '';
+
