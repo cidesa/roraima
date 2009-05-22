@@ -1,0 +1,43 @@
+catastro:
+  opciones:
+    activo: true #true/false
+    descripcion: Módulo de Catastro
+    imagen: catastro.gif
+    nombre: Catastro
+    urls:
+      default:
+        modulo: catastro.php
+        modulo_dev: catastro_dev.php
+      Reportes:
+        absoluta: reportes/reportes/catastro
+    imagenes:
+      default: OperatorClass.png
+  menu:
+    Definiciones Especificas:
+      Vialidad:
+        Direccion de la Vialidad:                 catdefdirvia
+        Sentido de la Vialidad:                   catdefsenvia
+        Tipo de Vialidad:                         catdeftipvia
+      Division Territorial:
+        #Pais:                                     catdefdivpai
+        Est-Ciu-Mun-Parr-Sec:                      catdefdivgeo
+        Barrio/Urbanizaciones:                     catdefdivbarurb
+        Tramo:                                     catdeftramo
+        Manzana:                                   catdefman
+      Inmuebles:
+        Condicion del Inmueble:                 catdefconinm
+        #Caracteristicas del Inmueble:           catcarinm
+        Caracteristicas de la Construccion:     catcarcon
+        Caracteristicas del Terreno:            catcarter
+        Condicion Socio-Economica:              catconsoc
+        Codigo Postal:                          catdefcodpos
+        Tipo de Vivienda:                       catdeftipviv
+        Uso Especifico:                         catdefusoesp
+        Propiedad del Terreno:                  catdefproter
+    Registro:
+      Personas/Propietarios:                               catregper
+      Cedula Catastral:                         catreginm
+#      Avaluo:                                   ddd
+#      Avaluo y Revision del Croquis:            dddd
+#      Entrevista:
+#        Condicion de la Entrevista:               catconent
