@@ -675,9 +675,8 @@ ALTER TABLE tsconcil DROP CONSTRAINT itsconcil;
 ALTER TABLE tsconcil ADD CONSTRAINT itsconcil PRIMARY KEY (numcue, mescon, anocon, refere, movlib, movban);
 
 -- Campos que no fueron incluidos al 23-04-09
-ALTER TABLE cpdefniv ADD COLUMN btneli boolean;
-
-ALTER TABLE cpdefniv ADD COLUMN btnanu boolean;
+alter table cpdefniv add column btneli boolean DEFAULT true;
+alter table cpdefniv add column btnanu boolean DEFAULT true;
 
 
 --24-04-09-  Correlativo de los comprobantes
