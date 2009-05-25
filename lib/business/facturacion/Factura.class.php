@@ -1152,7 +1152,7 @@ class Factura {
           $cobdesdoc->setCoddes($x[$j]->getCoddesc());
           $cobdesdoc->setFecdes($fafactur->Fecfac());
           $cobdesdoc->setMondes($x[$j]->getMondesc());
-          $cobdesdoc-save();
+          $cobdesdoc->save();
         }
       	$j++;
       }
