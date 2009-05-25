@@ -59,7 +59,9 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 			A.FECFIN=C.FECHAFIN AND 
 			A.codemp='$codemp' AND 
 			B.CODNOM='$codnom' AND 
-			B.CODCON='000' 
+			B.CODCON='000' and
+			to_char(fecini,'yyyy')>=perdes and
+			to_char(fecfin,'yyyy')<=perhas
 			GROUP BY B.CODPAR 
 			
 			Union All 

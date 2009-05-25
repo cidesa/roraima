@@ -33,5 +33,5 @@ echo grid_tag_v2($objdeduc); ?>
 </div>
 <?php }?>
 <script language="JavaScript">
-	$('total_liq').value = number_format(FloatVEtoFloat($('total_vac').value) + FloatVEtoFloat($('total_asi').value) + FloatVEtoFloat($('total_ded').value),"2",",",".");		
+	$('total_liq').value = number_format(FloatVEtoFloat($('total_vac').value) + FloatVEtoFloat($('total_asi').value) - FloatVEtoFloat($('total_ded').value),"2",",",".");		
 </script>

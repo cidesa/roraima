@@ -46,5 +46,5 @@ for(i=0;i< (c-1) ;i++)
 	<?php } ?>	 	
  }
  $('total_ded').value = number_format(acuval,2,',','.'); 	
- 	$('total_liq').value = number_format(FloatVEtoFloat($('total_vac').value) + FloatVEtoFloat($('total_asi').value) + FloatVEtoFloat($('total_ded').value),"2",",",".");		
+ 	$('total_liq').value = number_format(FloatVEtoFloat($('total_vac').value) + FloatVEtoFloat($('total_asi').value) - FloatVEtoFloat($('total_ded').value),"2",",",".");		
 </script>
