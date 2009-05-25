@@ -1,4 +1,4 @@
- set search_path to "SIMA002";
+set search_path to "SIMA002";
 
 CREATE OR REPLACE FUNCTION instr(character varying, character varying, integer, integer)
   RETURNS integer AS
@@ -1031,13 +1031,13 @@ ELSE
    0
 END)::NUMERIC AS MONDIAPRO,
 A.DIAS::INTEGER,A.MONPRES+((CASE WHEN A.DIAS<>5 THEN
-                     (CASE WHEN '''||salpro||'''=''P'' THEN
+                     (CASE WHEN '''||salpro||'''=''P'' THEN 
                   	(SELECT ROUND(AVG(MONDIA),2) FROM NPPRESTACIONES
                    	WHERE CODEMP='''||codigo||'''
                    	AND ID<=A.ID
                    	AND ID>=A.ID-11)
                      ELSE
-                        A.MONDIA
+                        A.MONDIA  
                      END)
                  ELSE
                    0
@@ -1059,55 +1059,65 @@ A.FECING::DATE,A.FECINI::DATE,A.FECFIN::DATE,
  ELSE A.SALNOR END)::NUMERIC AS MONTO,
 (CASE WHEN A.ALICUOCON<>0 THEN A.MONDIA
  ELSE ROUND(A.SALNOR/30,2) END)::NUMERIC AS MONDIA,0::NUMERIC AS MONDIAPRO,
-(CASE WHEN A.ANNOANTIG>0 THEN
-      (CASE WHEN (A.MESANTIG=6 AND A.DIAANTIG>0) OR A.MESANTIG>6
-       THEN 60-(SELECT SUM(5)
+COALESCE((CASE WHEN A.ANNOANTIG>0 THEN
+      (CASE WHEN (A.MESANTIG=6 AND A.DIAANTIG>0) OR A.MESANTIG>6 
+       THEN 60-(SELECT COALESCE(SUM(5),0)
                 FROM NPPRESTACIONES
                 WHERE CODEMP='''||codigo||'''
                 AND FECINI >= (CASE WHEN TO_DATE(TO_CHAR(FECING,''DD/MM/'')||
                                                  SUBSTR('''||fecha||''',7),''DD/MM/YYYY'')<=
                                          TO_DATE('''||fecha||''',''DD/MM/YYYY'')
-                               THEN TO_DATE(TO_CHAR(FECING,''DD/MM/'')||
-                                            SUBSTR('''||fecha||''',7),''DD/MM/YYYY'')
+                               THEN (CASE WHEN TO_CHAR(FECING,''MM'')=SUBSTR('''||fecha||''',4,2)
+                                     THEN
+                                          TO_DATE(TO_CHAR(FECING,''DD/MM/'')||
+                                          TO_CHAR(TO_NUMBER(SUBSTR('''||fecha||''',7),''9999'')-1,''9999''),''DD/MM/YYYY'')
+                                     ELSE TO_DATE(TO_CHAR(FECING,''DD/MM/'')||
+                                          SUBSTR('''||fecha||''',7),''DD/MM/YYYY'')
+                                     END)
                                ELSE TO_DATE(TO_CHAR(FECING,''DD/MM/'')||
                                             TO_CHAR(TO_NUMBER(SUBSTR('''||fecha||''',7),''9999'')-1,''9999''),''DD/MM/YYYY'')
                                END)
                 AND FECFIN <= TO_DATE('''||fecha||''',''DD/MM/YYYY''))
        ELSE 0 END)
- ELSE (CASE WHEN (A.MESANTIG=6 AND A.DIAANTIG>0) OR A.MESANTIG>6
-       THEN 45-(SELECT SUM(5)
+ ELSE (CASE WHEN (A.MESANTIG=6 AND A.DIAANTIG>0) OR A.MESANTIG>6 
+       THEN 45-(SELECT COALESCE(SUM(5),0)
                 FROM NPPRESTACIONES
                 WHERE CODEMP='''||codigo||'''
                 AND FECFIN <= TO_DATE('''||fecha||''',''DD/MM/YYYY''))
        WHEN (A.MESANTIG=6 AND A.DIAANTIG=0) OR
             A.MESANTIG<6
-       THEN 15-(SELECT SUM(5)
+       THEN 15-(SELECT COALESCE(SUM(5),0)
                 FROM NPPRESTACIONES
                 WHERE CODEMP='''||codigo||'''
-                AND FECFIN <= TO_DATE('''||fecha||''',''DD/MM/YYYY'')) END) END)::INTEGER AS DIAS,
+                AND FECFIN <= TO_DATE('''||fecha||''',''DD/MM/YYYY'')) END) END),0)::INTEGER AS DIAS,
  (CASE WHEN A.ANNOANTIG>0 THEN
       (CASE WHEN (A.MESANTIG=6 AND A.DIAANTIG>0) OR A.MESANTIG>6
-       THEN 60-(SELECT SUM(5)
+       THEN 60-(SELECT COALESCE(SUM(5),0)
                 FROM NPPRESTACIONES
                 WHERE CODEMP='''||codigo||'''
                 AND FECINI >= (CASE WHEN TO_DATE(TO_CHAR(FECING,''DD/MM/'')||
                                                  SUBSTR('''||fecha||''',7),''DD/MM/YYYY'')<=
                                          TO_DATE('''||fecha||''',''DD/MM/YYYY'')
-                               THEN TO_DATE(TO_CHAR(FECING,''DD/MM/'')||
-                                            SUBSTR('''||fecha||''',7),''DD/MM/YYYY'')
+                               THEN (CASE WHEN TO_CHAR(FECING,''MM'')=SUBSTR('''||fecha||''',4,2)
+                                     THEN
+                                          TO_DATE(TO_CHAR(FECING,''DD/MM/'')||
+                                          TO_CHAR(TO_NUMBER(SUBSTR('''||fecha||''',7),''9999'')-1,''9999''),''DD/MM/YYYY'')
+                                     ELSE TO_DATE(TO_CHAR(FECING,''DD/MM/'')||
+                                          SUBSTR('''||fecha||''',7),''DD/MM/YYYY'')
+                                     END)
                                ELSE TO_DATE(TO_CHAR(FECING,''DD/MM/'')||
                                             TO_CHAR(TO_NUMBER(SUBSTR('''||fecha||''',7),''9999'')-1,''9999''),''DD/MM/YYYY'')
                                END)
                 AND FECFIN <= TO_DATE('''||fecha||''',''DD/MM/YYYY''))
        ELSE 0 END)
  ELSE (CASE WHEN (A.MESANTIG=6 AND A.DIAANTIG>0) OR A.MESANTIG>6
-       THEN 45-(SELECT SUM(5)
+       THEN 45-(SELECT COALESCE(SUM(5),0)
                 FROM NPPRESTACIONES
                 WHERE CODEMP='''||codigo||'''
                 AND FECFIN <= TO_DATE('''||fecha||''',''DD/MM/YYYY''))
        WHEN (A.MESANTIG=6 AND A.DIAANTIG=0) OR
             A.MESANTIG<6
-       THEN 15-(SELECT SUM(5)
+       THEN 15-(SELECT COALESCE(SUM(5),0)
                 FROM NPPRESTACIONES
                 WHERE CODEMP='''||codigo||'''
                 AND FECFIN <= TO_DATE('''||fecha||''',''DD/MM/YYYY'')) END) END)*
@@ -1128,7 +1138,7 @@ UNION ALL
 SELECT A.CODEMP::VARCHAR,A.NOMEMP::VARCHAR,A.CODTIPCON::VARCHAR,
 A.FECING::DATE,A.FECINI::DATE,A.FECFIN::DATE,
 A.MONTO::NUMERIC,A.MONDIA::NUMERIC,
-(SELECT ROUND(AVG(MONDIA),2) FROM NPPRESTACIONES
+COALESCE((SELECT ROUND(AVG(MONDIA),2) FROM NPPRESTACIONES
  WHERE CODEMP='''||codigo||'''
  AND FECINI > (CASE WHEN TO_DATE(TO_CHAR(FECING,''DD/MM/'')||
                                   SUBSTR('''||fecha||''',7),''DD/MM/YYYY'')<=
@@ -1138,14 +1148,14 @@ A.MONTO::NUMERIC,A.MONDIA::NUMERIC,
                 ELSE TO_DATE(TO_CHAR(FECING,''DD/MM/'')||
                              TO_CHAR(TO_NUMBER(SUBSTR('''||fecha||''',7),''9999'')-1,''9999''),''DD/MM/YYYY'')
                 END)
-AND FECFIN <= TO_DATE('''||fecha||''',''DD/MM/YYYY''))::NUMERIC AS MONDIAPRO,
+AND FECFIN <= TO_DATE('''||fecha||''',''DD/MM/YYYY'')),0)::NUMERIC AS MONDIAPRO,
 (CASE WHEN (A.ANNOANTIG>=1 AND A.MESANTIG=6 AND A.DIAANTIG>0) OR
            (A.ANNOANTIG>=1 AND A.MESANTIG>6) THEN
      A.ANNOANTIG*2
  ELSE
     0
  END)::INTEGER AS DIAS,
-(CASE WHEN '''||salpro||'''=''P'' THEN
+COALESCE((CASE WHEN '''||salpro||'''=''P'' THEN
 	(SELECT ROUND(AVG(MONDIA),2) FROM NPPRESTACIONES
  	WHERE CODEMP='''||codigo||'''
  	AND FECINI > (CASE WHEN TO_DATE(TO_CHAR(FECING,''DD/MM/'')||
@@ -1163,7 +1173,7 @@ ELSE A.MONDIA END) *
      A.ANNOANTIG*2
  ELSE
     0
- END)::NUMERIC  AS MONPRES,
+ END),0)::NUMERIC  AS MONPRES,
 0::NUMERIC AS MONANT,
 A.ID+2::INTEGER AS ID,''AJUSTE DIAS ADICIONALES NO DEPOSITADOS''::VARCHAR AS TIPO,
 0::NUMERIC AS CAPITAL,0::NUMERIC AS CAPITALACT,
@@ -1220,6 +1230,7 @@ return;
 END;
 $body$
 LANGUAGE 'plpgsql' VOLATILE CALLED ON NULL INPUT SECURITY INVOKER;
+
 
 
 
