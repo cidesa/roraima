@@ -22,6 +22,8 @@
 
       eval($info);
       //$dat .= "'".$infoget."'";
+
+      $infoget=eregi_replace("[\n|\r|\n\r]", "", $infoget);
       $dat .= "'".htmlspecialchars($infoget)."'";
       $k++;
 
