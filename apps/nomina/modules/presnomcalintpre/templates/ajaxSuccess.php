@@ -18,11 +18,6 @@ elseif ($vargrid=='id3')
 
 */
 if ($obj){
-	//$registro=$obj['datos'];
-	//$cont=count($registro);
-	//H::printR($registro[22]);
-	//echo $registro[0]['mondia'];
-
 //	array_pop($registro);  ///Borra la Ultima Posicion
 //  array_pop($registro);  ///Borra la Ultima Posicion
 //end($f);
@@ -30,10 +25,6 @@ if ($obj){
 	echo grid_tag($obj);
 
 ?>
-<script>
-//	$('diaserrn').value = '5';
-</script>
-
 <table>
    <tr>
     <th><?php echo label_for('Totales', __('TOTALES'), 'class="required" ') ?></th>

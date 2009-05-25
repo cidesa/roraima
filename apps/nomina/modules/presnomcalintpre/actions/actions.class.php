@@ -215,7 +215,7 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
     $this->aux2 = 'no';
 
     if ($this->getRequestParameter('ajax') == '1') {
-
+      $this->getUser()->getAttributeHolder()->remove('calculado');
       $this->vargrid = 'id1';
       if ($this->getRequestParameter('codemp') != "") {
         //VERIFICAMOS TRABAJADOR
@@ -308,7 +308,6 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
 
         } elseif ($this->getRequestParameter('ajax') == '5') //Autor: Jesus Lobaton
               {
-
               $this->ajax = $this->getRequestParameter('ajax');
               $this->salario= $this->getRequestParameter('salario');
               $salario = H::iif($this->salario=='true','P','U');
@@ -317,8 +316,7 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
               {
                 $this->configGrid($this->getRequestParameter('codemp'), $this->getRequestParameter('feccor'), $this->getRequestParameter('capita'), $salario);
                 $output = '[["diaserrn","'.$this->antdias.'",""],["messerrn","'.$this->antmeses.'",""],["anoserrn","'.$this->antannos.'",""],["totcapitalact","'.H::Formatomonto($this->capitalact).'",""]]';
-
-
+				$this->getUser()->setAttribute('calculado','SI');
                 $this->getResponse()->setHttpHeader("X-JSON", '(' . $output . ')');
               }
 
@@ -339,6 +337,53 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
     //}//if ($this->getRequestParameter('codemp')!=""
 
   }
+
+
+    public function validateEdit()
+    {
+      $this->coderr=-1;
+      if($this->getRequest()->getMethod() == sfRequest::POST)
+      {
+          $calculado = $this->getUser()->getAttribute('calculado');
+		  if ($calculado!='SI')
+		  {
+		    if (SF_ENVIRONMENT == 'dev') {
+		      $this->ent = '_dev';
+		    } else {
+		      $this->ent = '';
+		    }
+		  	$this->capitalizacion = Constantes :: Capitalizacion();
+	        $this->configGrid();
+	        $this->configGridRA();
+	        $this->configGridIntereses();
+		  	$this->coderr=462;
+   	        return false;
+
+		  }
+      }
+      return true;
+  }
+
+
+  public function handleErrorEdit()
+  {
+    $this->params=array();
+    $this->preExecute();
+    $this->nppresoc = $this->getNppresocOrCreate();
+    $this->updateNppresocFromRequest();
+
+    $this->labels = $this->getLabels();
+
+    if($this->getRequest()->getMethod() == sfRequest::POST)
+    {
+      if($this->coderr!=-1){
+        $err = Herramientas::obtenerMensajeError($this->coderr);
+        $this->getRequest()->setError('',$err);
+      }
+    }
+    return sfView::SUCCESS;
+  }
+
 
   public function configGrid_bueno($codemp = '', $fecha= '', $capital= '')
   {
@@ -600,7 +645,7 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
   	else
   		$cadena="round((mondia*(dias)),2)";
 
-    $sql = "select ' ' as id, TO_CHAR(fecfin,'MM') as mesactual, antmeses, antdias, antannos, codtipcon, tipo,
+     $sql = "select ' ' as id, TO_CHAR(fecfin,'MM') as mesactual, antmeses, antdias, antannos, codtipcon, tipo,
       to_char(fecini,'dd/mm/yyyy') as fecini, fecini as fecini1, to_char(fecfin,'dd/mm/yyyy') as fecfin,
       round(tasa,2) as tasa, round(mondia,2) as mondia, dias, round(mondiapro,2) as mondiapro,
       round(capital,2) as capital, round(capitalact,2) as capitalact,
@@ -608,7 +653,6 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
       round(monint,2) as monint, round(intacu,2) as intacu, round(monant,2) as monant,
       round(monadeint,2) as monadeint, round(monto,2) as monto
               from calculopres('$codemp','$fecha','$capital','$salario') order by fecini1";
-
 
     Herramientas :: BuscarDatos($sql, & $result);
 
@@ -1170,11 +1214,13 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
     //$this->configGridIntereses();
 
     if ($this->getRequest()->getMethod() == sfRequest :: POST) {
-
+      $calculado = $this->getUser()->getAttribute('calculado');
       $this->updateNppresocFromRequest();
 
-        $this->configGrid($this->nppresoc->getCodemp(),adodb_date("d/m/Y", strtotime($this->nppresoc->getFeccor())), $this->nppresoc->getCapitalizacion());
-
+////$this->getUser()->getAttributeHolder()->remove('calculado');
+      if ($calculado=='SI'){
+      	$this->configGrid($this->nppresoc->getCodemp(),adodb_date("d/m/Y",strtotime($this->nppresoc->getFeccor())), $this->nppresoc->getCapitalizacion(),$this->nppresoc->getSalario());
+      }
       $this->saveNppresoc($this->nppresoc);
 
       $this->setFlash('notice', 'Your modifications have been saved');
@@ -1191,7 +1237,7 @@ $this->Bitacora('Guardo');
           return $this->redirect('presnomcalintpre/create');
         }
     } else {
-      $this->configGrid();
+        $this->configGrid();
         $this->configGridRA();
         $this->configGridIntereses();
 
@@ -1208,16 +1254,16 @@ $this->Bitacora('Guardo');
     $c->addAscendingOrderByColumn(NpimppresocPeer :: TIPO);
     $per = NpimppresocPeer :: doSelect($c);
 
-    $sql="select
+ /*   $sql="select
         (case
         when tipo = 'P' then 'AJUSTE DIAS ADICIONALES NO DEPOSITADOS'
         when tipo = 'A' then 'AJUSTE DIAS NO DEPOSITADOS' end)
         as  tipo,
         * from Npimppresoc where codemp='$codigo' and tipo<>'T' or tipo is null  ";
 
-  //  Herramientas :: BuscarDatos($sql, & $result);
-  //    $per = $result;
-
+      Herramientas :: BuscarDatos($sql, & $result);
+      $per = $result;
+*/
     $this->tfil = count($per);
 
       if ($per)
@@ -1667,7 +1713,6 @@ $this->Bitacora('Guardo');
 
   protected function saveNppresoc($nppresoc) {
     $coderr = -1;
-
     // habilitar la siguiente línea si se usa grid
     $grid = Herramientas :: CargarDatosGrid($this, $this->obj);
 
@@ -1806,6 +1851,14 @@ $this->Bitacora('Guardo');
     if (isset($nppresoc['codcon']))
     {
       $this->nppresoc->setCodcon($nppresoc['codcon']);
+    }
+    if (isset($nppresoc['salario']))
+    {
+      $this->nppresoc->setSalario($nppresoc['salario']);
+    }
+    if (isset($nppresoc['intereses']))
+    {
+      $this->nppresoc->setIntereses($nppresoc['intereses']);
     }
 
     $this->nppresoc->setCapitalizacion($this->getRequestParameter('capitalizacion'));

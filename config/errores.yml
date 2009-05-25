@@ -654,13 +654,16 @@
   msj: No puede haber un registro con el Tipo de Concepto en blanco  en el grid Deducciones
 459:
   cod: 459
-  msj: No puede haber un registro con el Numero de Dias en blanco en el grid Deducciones 
+  msj: No puede haber un registro con el Numero de Dias en blanco en el grid Deducciones
 460:
   cod: 460
-  msj: Liquidaciones ya pagadas no se pueden modificar   
-461:  
+  msj: Liquidaciones ya pagadas no se pueden modificar
+461:
   cod: 461
   msj: Los dias a disfrutar no pueden menor o igual a cero.
+462:
+  cod: 462
+  msj: No se puede Guardar sin Calcular su Prestaciones
 ###############OBRAS################
 1000:
     cod: 1000
