@@ -18,6 +18,8 @@ generator:
       diaser: { name: Dias }
       messer: { name: Meses }
       anoser: { name: Años }
+      salario: { name: salario }
+      interes: { name: interes }
     list:
       title:          Cálculo de Prestaciones Sociales
       filters:        [codemp, feccor]
@@ -26,6 +28,6 @@ generator:
 
     edit:
       title:          Cálculo de Prestaciones Sociales
-      display:        [codemp, cedemp, nomemp, fecing, feccalpres, destipcon, mesinicio, feccor, diatra, mestra, anotra, diaser, messer, anoser, codcon]
+      display:        [codemp, cedemp, nomemp, fecing, feccalpres, destipcon, mesinicio, feccor, diatra, mestra, anotra, diaser, messer, anoser, codcon, salario, interes]
       actions:
         _save:        ~

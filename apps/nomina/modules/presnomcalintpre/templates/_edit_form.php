@@ -464,11 +464,11 @@ if ($nppresoc->getId()!='')
 <legend><? echo __('Tipo de Interes para el Cálculo')?></legend>
 <div class="form-row">
 
-  <?php echo  radiobutton_tag('interes', 'S', true)." Simple"  ?>
+  <?php echo  radiobutton_tag('nppresoc[interes]', 'S', true)." Simple"  ?>
   &nbsp;&nbsp;
-  <?php echo  radiobutton_tag('interes', 'C', false)." Compuesto"?>
+  <?php echo  radiobutton_tag('nppresoc[interes]', 'C', false)." Compuesto"?>
   &nbsp;&nbsp;
-  <?php echo  radiobutton_tag('interes', 'M', false)." Matemática Financiera"?>
+  <?php echo  radiobutton_tag('nppresoc[interes]', 'M', false)." Matemática Financiera"?>
 
 </div>
 </fieldset>
@@ -477,13 +477,10 @@ if ($nppresoc->getId()!='')
 <fieldset>
 <legend><? echo __('Salario Dias Adicionales de Antiguedad')?></legend>
 <div class="form-row">
-
-  <?php
-  //'id'=>'salario',
-  echo  radiobutton_tag('salario', 'P', true,array( 'id'=>'salario'))." Promedio del Año"  ?>
+  <?php  echo  radiobutton_tag('nppresoc[salario]', 'P', true)." Promedio del Año"
+    ?>
   &nbsp;&nbsp;
-  <?php echo  radiobutton_tag('salario', 'U', false,array('id'=>'salario'))." Ultimo Salario Devengado"?>
-
+  <?php echo  radiobutton_tag('nppresoc[salario]', 'U', false)." Ultimo Salario Devengado"?>
 </div>
 </fieldset>
 </th>
@@ -509,7 +506,7 @@ if ($nppresoc->getId()!='')
 		   'url'      => 'presnomcalintpre/ajax',
 		   'script'   => true,
 		   'complete' => 'AjaxJSON(request, json)',
-		   'with' => "'ajax=5&codemp='+$('nppresoc_codemp').value+'&feccor='+$('nppresoc_feccor').value+'&salario='+$('salario').checked+'&fecing='+$('nppresoc_fecing').value+'&capita='+$('capitalizacion').value"
+		   'with' => "'ajax=5&codemp='+$('nppresoc_codemp').value+'&feccor='+$('nppresoc_feccor').value+'&salario='+$('nppresoc_salario_P').checked+'&fecing='+$('nppresoc_fecing').value+'&capita='+$('capitalizacion').value"
 )) ?></li>
 </ul>
 
@@ -529,19 +526,6 @@ if ($nppresoc->getId()!='')
 
 
 <script language="JavaScript" type="text/javascript">
-  function push1()
-  {
-  	$('salario_P').checked=true;
-  	$('salario_U').checked=false;
-  }
-
-  function push2()
-  {
-  	$('salario_P').checked=false;
-  	$('salario_U').checked=true;
-  }
-
-
   function llamaroculta()
   {
   	var tot = $('totfil').value;

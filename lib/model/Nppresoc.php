@@ -10,6 +10,8 @@
 class Nppresoc extends BaseNppresoc
 {
 	protected $capitalizacion='';
+	protected $salario='';
+	protected $interes='';
 
 
   public function getNomemp()
@@ -72,3 +74,4 @@ class Nppresoc extends BaseNppresoc
   }
 
 }
+
