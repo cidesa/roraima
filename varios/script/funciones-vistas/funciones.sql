@@ -1,4 +1,4 @@
-set search_path to "SIMA002";
+ set search_path to "SIMA002";
 
 CREATE OR REPLACE FUNCTION instr(character varying, character varying, integer, integer)
   RETURNS integer AS
