@@ -369,7 +369,7 @@ if ($cadefart->getAsiparrec()=='P')  {
     </div>
 
 <br>
-
+<br>
   <?php echo label_for('cadefart[corcot2]', __($labels['cadefart{corcot2}']), 'class="required" style="width: 160px"') ?>
   <div class="content<?php if ($sf_request->hasError('cadefart{corcot2}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('cadefart{corcot2}')): ?>
@@ -532,7 +532,7 @@ if ($cadefart->getAsiparrec()=='P')  {
 </div>
 </fieldset>
 
-<?php tabPageOpenClose("tp1", "tabPage5", 'Requiere Aprobación');?>
+<?php tabPageOpenClose("tp1", "tabPage5", 'Aprobación');?>
 <fieldset id="sf_fieldset_none" class="">
 <div class="form-row">
   <?php echo label_for('cadefart[reqreqapr]', __($labels['cadefart{reqreqapr}']), 'class="required" style="width: 360px"') ?>
