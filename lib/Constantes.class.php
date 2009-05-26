@@ -187,7 +187,7 @@ public static function PagoDoble()
     'MESF' => 'MESF   Retorna el Mes de una Fecha', 'ANOF' => 'ANOF   Retorna el Año de una Fecha', 'CATRAB' => 'CATRAB   Cumpleaños del Trabajador', 'NHIJ' => 'NHIJ   Nº De Hijos', 'SC' => 'SC   Sueldo + Compensación', 'SCAR' => 'SCAR   Sueldo del Cargo', 'DBV' => 'DBV   Días de Bono Vacacional',
     'PV' => 'PV   Períodos Vacacionales a Disfrutar', 'PHIJO' => 'PHIJO Monto Prima Hijo', 'NHIJO' => 'NHIJO Hijos Menores a Edad Suministrada', 'PPROF' => 'PPROF Monto Prima Profesionalizacion', 'PROFE' => 'PROFE Profesion activa del Empleado', 'PCARG' => 'PCARG Monto Cargo Colateral', 'CGUAR' => 'CGUAR Monto Por Guardería', 'ACUC' => 'ACUC  Acumulador de Conceptos por Empleado',
     'STAB' => 'STAB   Sueldo según Escala', 'CTAB' => 'CTAB   Compensación según Escala', 'MCES' => 'MCES   Monto de Cesta Tickets', 'ADIC' => 'ADIC   Dias Adicionales Prestacion Antiguedad','DHAB' => 'DHAB   Días Habiles del Período','DHABM' => 'DHABM   Días Habiles del Mes','CARG' => 'CARG   Cargo Actual del Empleado','NHMENEDA' => 'NHMENEDA   Numero de hijos Mayores Menores a una edad',
-    'NHMAYEDA' => 'NHMAYEDA   Numero de hijos Mayores a una edad','SIMESANT' => 'SIMESANT   FIDEICOMISO', 'SIANOANT' => 'SIANOANT   Suma Conceptos Salario Integral', 'DNLAB' => 'DNLAB   Días No Laborados' );
+    'NHMAYEDA' => 'NHMAYEDA   Numero de hijos Mayores a una edad','SIMESANT' => 'Salario Integral Mes Anterior', 'SIANOANT' => 'SIANOANT   Suma Conceptos Salario Integral Año Anterior', 'DNLAB' => 'DNLAB   Días No Laborados' );
   }
 
 
