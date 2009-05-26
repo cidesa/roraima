@@ -376,7 +376,7 @@
       }
       else
       {
-       if (($(id1).value==codpre) && (ref[q+1]=referencia))
+       if (($(id1).value==codpre) && (ref[q+1]==referencia))
        { enc=true;}
       }
       q++;
