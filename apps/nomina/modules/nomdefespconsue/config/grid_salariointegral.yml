@@ -1,0 +1,34 @@
+opciones:                  # Opciones generales
+  name:                    b
+  eliminar:                true
+  tabla:                   npconsalint
+  ancho:				   900
+  anchogrid:               900
+  filas:                   1
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Tipo de Nómina
+  tipo:                    t
+  nombrecampo:             codnom
+  esgrabable:			   true
+  html:                    [size=5 maxlength=3]
+  catalogo:                [npnomina, sf_admin_edit_form, {Codnom: 1, Nomnom: 2}, Npnomina_Presnomtipcon ]
+2:       # Columna 2
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             nomnom
+  esgrabable:			   false
+  html:                    [size=25 disabled=true]
+3:       # Columna 3
+  titulo:                  Código de Concepto
+  tipo:                    t
+  nombrecampo:             codcon
+  esgrabable:			   true
+  html:                    [size=5 maxlength=3]
+4:       # Columna 4
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             nomcon
+  esgrabable:			   false
+  html:                    [size=25 disabled=true]

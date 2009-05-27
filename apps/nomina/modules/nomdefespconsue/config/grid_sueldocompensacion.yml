@@ -1,0 +1,47 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                false
+  tabla:                   npasiconsue
+  ancho:				   980
+  anchogrid:               900
+  filas:                   0
+  titulo:                  'Nóminas'
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Nómina
+  tipo:                    t
+  nombrecampo:             codnom
+  esgrabable:			   true
+  html:                    [size=5 readonly=true]
+2:       # Columna 2
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             nomnom
+  esgrabable:			   false
+  html:                    [size=25 disabled=true]
+3:       # Columna 3
+  titulo:                  Sueldo
+  tipo:                    t
+  nombrecampo:             codcon
+  esgrabable:			   true
+  html:                    [size=5 maxlength=3]
+  catalogo:                [npdefcpt, sf_admin_edit_form, {Codcon: 3, Nomcon: 4}, Npconceto_Nomdefesptippre ]
+4:       # Columna 4
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             nomcon
+  esgrabable:			   false
+  html:                    [size=25 disabled=true]
+5:       # Columna 5
+  titulo:                  Compensación
+  tipo:                    t
+  nombrecampo:             codcom
+  esgrabable:			   true
+  html:                    [size=5 maxlength=3]
+  catalogo:                [npdefcpt, sf_admin_edit_form, {Codcon: 5, Nomcon: 6}, Npconceto_Nomdefesptippre ]
+6:       # Columna 6
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             nomcon2
+  esgrabable:			   false
+  html:                    [size=25 disabled=true]

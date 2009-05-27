@@ -6802,5 +6802,198 @@ class Nomina {
     }
     return -1;
   }
+
+  public static function salvarConceptosReportes($npasiconsue,$grid1,$grid2,$grid3,$grid4,$grid5,$grid6)
+  {
+    self::grabarSueldoCompensacion($grid1);
+    self::grabarSalarioIntegral($grid2);
+    self::grabarSueldoReportes($grid3);
+    self::grabarARC($grid4);
+    self::grabarCASEP($npasiconsue,$grid5);
+    self::grabarConstancia($grid6);
+  }
+
+  public static function grabarSueldoCompensacion($grid1)
+  {
+  	//Grabamos Datos de Sueldo y Compensación
+
+     $t= new Criteria();
+     $data=NpasiconsuePeer::doSelect($t); //Borramos los Datos Viejos para Grabar los Nuevos
+     if ($data)
+     {
+     	foreach ($data as $objdata)
+     	{
+     		$objdata->delete();
+     	}
+     }
+
+     $x=$grid1[0];
+     $j=0;
+     if (count($x)>0)
+     {
+      while ($j<count($x))
+      {
+        if ($x[$j]["codnom"]!="" && $x[$j]["codcon"]!="" && $x[$j]["codcom"]!="")
+        {
+          $npasiconsue= new Npasiconsue();
+          $npasiconsue->setCodnom($x[$j]["codnom"]);
+          $npasiconsue->setCodcon($x[$j]["codcon"]);
+          $npasiconsue->setCodcom($x[$j]["codcom"]);
+          $npasiconsue->save();
+        }
+      	$j++;
+      }
+     }
+    /////////////////////////////////////////
+  }
+
+  public static function grabarSalarioIntegral($grid2)
+  {
+  	//Grabamos el Salario Integral
+    $x=$grid2[0];
+    $j=0;
+    while ($j<count($x))
+    {
+      if ($x[$j]->getCodnom()!='' && $x[$j]->getCodcon()!='')
+      {
+        $x[$j]->save();
+      }
+      $j++;
+    }
+
+    $z=$grid2[1];
+    $j=0;
+    if (!empty($z[$j]))
+    {
+      while ($j<count($z))
+      {
+        $z[$j]->delete();
+        $j++;
+      }
+    }
+    //////////////////////////////
+  }
+
+  public static function grabarSueldoReportes($grid3)
+  {
+  	//Grabamos el grid Sueldo Reportes
+    $x=$grid3[0];
+    $j=0;
+    while ($j<count($x))
+    {
+      if ($x[$j]->getCodnom()!='' && $x[$j]->getCodcon()!='')
+      {
+        $x[$j]->save();
+      }
+      $j++;
+    }
+
+    $z=$grid3[1];
+    $j=0;
+    if (!empty($z[$j]))
+    {
+      while ($j<count($z))
+      {
+        $z[$j]->delete();
+        $j++;
+      }
+    }
+    //////////////////////////////
+  }
+
+  public static function grabarARC($grid4)
+  {
+  	//Grabamos el grid ARC
+    $x=$grid4[0];
+    $j=0;
+    while ($j<count($x))
+    {
+      if ($x[$j]->getCodnom()!='' && $x[$j]->getCodcon()!='')
+      {
+        $x[$j]->save();
+      }
+      $j++;
+    }
+
+    $z=$grid4[1];
+    $j=0;
+    if (!empty($z[$j]))
+    {
+      while ($j<count($z))
+      {
+        $z[$j]->delete();
+        $j++;
+      }
+    }
+    //////////////////////////////
+  }
+
+  public static function grabarCASEP($npasiconsue,$grid5)
+  {
+  	//Grabamos el grid de CASEP
+    $x=$grid5[0];
+    $j=0;
+    while ($j<count($x))
+    {
+      if ($x[$j]->getCodnom()!='' && $x[$j]->getCodcon()!='')
+      {
+      	$x[$j]->setTipo($npasiconsue->getTippres());
+        $x[$j]->save();
+      }
+      $j++;
+    }
+
+    $z=$grid5[1];
+    $j=0;
+    if (!empty($z[$j]))
+    {
+      while ($j<count($z))
+      {
+        $z[$j]->delete();
+        $j++;
+      }
+    }
+    //////////////////////////////
+  }
+
+  public static function grabarConstancia($grid6)
+  {
+  	//Grabamos Grid de Constancia de Trabajo
+    $x=$grid6[0];
+    $j=0;
+    while ($j<count($x))
+    {
+      if ($x[$j]->getCodnom()!='' && $x[$j]->getCodcon()!='')
+      {
+        $x[$j]->save();
+      }
+      $j++;
+    }
+
+    $z=$grid6[1];
+    $j=0;
+    if (!empty($z[$j]))
+    {
+      while ($j<count($z))
+      {
+        $z[$j]->delete();
+        $j++;
+      }
+    }
+    //////////////////////////////
+  }
+
+  public static function getPrestamo()
+  {
+    $c= new Criteria();
+    $c->addAscendingOrderByColumn(NpdefconcasepPeer::TIPO);
+    $reg=NpdefconcasepPeer::doSelectOne($c);
+    if ($reg)
+    {
+    	$dato=$reg->getTipo();
+    }else $dato='';
+    return $dato;
+  }
+
 } // fin clase
 ?>
