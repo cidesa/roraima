@@ -272,7 +272,7 @@
   'maxlength' => 8,
   'readonly' => $tsmovtra->getId()!='' ? true : false ,
   'control_name' => 'tsmovtra[numcom]',
-  'onBlur'  => "javascript:event.keyCode=13; enter(event,this.value,this.id);",
+  //'onBlur'  => "javascript:event.keyCode=13; enter(event,this.value,this.id);",
 )); echo $value ? $value : '&nbsp;' ?></div>
 </th>
 <th>
@@ -332,6 +332,18 @@
 </fieldset>
 
 <script type="text/javascript">
+var id='<?php echo $tsmovtra->getId()?>';
+    if (id=="")
+    {
+		var confcorcom='<?php echo $sf_user->getAttribute('confcorcom')?>';
+		 if (confcorcom=='S')
+		 {
+		 	$('tsmovtra_numcom').value='########';
+		 	$('tsmovtra_numcom').readOnly=true;
+		 }
+    }
+
+
 deshabilitarbotones();
 function llenar_reftra(e)
 {
@@ -380,8 +392,13 @@ function llenar_desnumcom(e)
  {
    if (e.keyCode==13 || e.keyCode==9)
    {
+   	var confcorcom='<?php echo $sf_user->getAttribute('confcorcom')?>';
     valor=valor.pad(8, '0',0);
     $('tsmovtra_reftra').value=valor;
+    if (confcorcom=='N')
+    {
+      $('tsmovtra_numcom').value=$('tsmovtra_reftra').value;
+    }
    }
  }
 

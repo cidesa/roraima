@@ -20,10 +20,7 @@ class tesmovtrabanActions extends autotesmovtrabanActions {
            if ($this->tsmovtra->getFecanu()!="")
            { $this->etiqueta="ANULADA EL ".date('d/m/Y',strtotime($this->tsmovtra->getFecanu()));}
            else { $this->etiqueta="ANULADA";}
-       } else {
-      $cadcorcomcont = "########";
-   	  $this->tsmovtra->setNumcom($cadcorcomcont);
-     }
+       }
 
 		if ($this->getRequest()->getMethod() == sfRequest :: POST) {
 			$this->updateTsmovtraFromRequest();
@@ -170,9 +167,6 @@ $this->Bitacora('Guardo');
 				$this->getUser()->getAttributeHolder()->remove('credito');
 				// guardo el grid
         $numcom = Comprobante::SalvarComprobante($numcom,$reftra,$feccom,$descom,$debito,$credito,$grid,$guardar);
-
-				//Tesoreria :: Salvarconfincomgen($numcom, $reftra, $feccom, $descom, $debito, $credito);
-				//Tesoreria :: Salvar_asientosconfincomgen($numcom, $reftra, $feccom, $grid, $guardar);
 			}
       $tsmovtra->setNumcom($numcom);
       $tsmovtra->save();

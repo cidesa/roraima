@@ -341,16 +341,15 @@ $this->Bitacora('Guardo');
           $this->getUser()->getAttributeHolder()->remove('credito',$formulario[$i]);
           $this->getUser()->getAttributeHolder()->remove('grid',$formulario[$i]);
 
-          //Tesoreria::Salvarconfincomgen($numcom,$reftra,$feccom,$descom,$debito,$credito);
-          //Tesoreria::Salvar_asientosconfincomgen($numcom,$reftra,$feccom,$grid,$this->getUser()->getAttribute('grabar',null,$formulario[$i]));
-
           //Verificamos el formato del correlativo,
  		  //ya que es parametrizable
 	      $c = new Criteria();
     	  $c->add(OpdefempPeer::CODEMP,'001');
     	  $per = OpdefempPeer::doSelectOne($c);
-
-    	  $numcom = H::iif($per->getOrdconpre()=='t','OP'.substr($numcom = Comprobante::Buscar_Correlativo(),2,strlen($numcom)),$numcom);
+           if ($this->getUser()->getAttribute('confcorcom')=='N')
+           {  }
+           else
+           {  $numcom = H::iif($per->getOrdconpre()=='t','OP'.substr($numcom = Comprobante::Buscar_Correlativo(),2,strlen($numcom)),$numcom); }
           $numcom = Comprobante::SalvarComprobante($numcom,$reftra,$feccom,$descom,$debito,$credito,$grid,$this->getUser()->getAttribute('grabar',null,$formulario[$i]));
           $opordpag->setNumcom($numcom);
           $numerocomp = $numcom;
@@ -2308,15 +2307,27 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
     $coduni=$this->getRequestParameter('coduni');
     $this->msg='';
 
-  //  $numero="OP".substr($numord,2,6);
-   $numero2="PR".substr($numord,2,6);
+   if ($this->getUser()->getAttribute('confcorcom')=='N')
+   { $numero2="PR".substr($numord,2,6);}
+   else
+   {
+   	$reftra="PR".substr($numord,2,6);
+   	$t= new Criteria();
+   	$t->add(ContabcPeer::REFTRA,$reftra);
+   	$resul= ContabcPeer::doSelectOne();
+   	if ($resul)
+   	{
+      $numero2=$resul->getNumcom();
+    }
+    else { $numero2=""; }
+   }
+
   $c= new Criteria();
   $c->add(OpordpagPeer::NUMORD,$numord);
   $data= OpordpagPeer::doSelectOne($c);
   if ($data)
   {
-  $numero=$data->getNumcom();
-     //$numero2=$data->getNumcomord();
+    $numero=$data->getNumcom();
   }
 
     //Verificar si la orden de pago es de retencion, si es asi se puede eliminar sin verificar los comprobantes contables
