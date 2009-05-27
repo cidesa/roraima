@@ -1,59 +1,38 @@
 <?php
 
 
-abstract class BaseNptipconPeer {
+abstract class BaseNpdiaantperPeer {
 
 	
 	const DATABASE_NAME = 'propel';
 
 	
-	const TABLE_NAME = 'nptipcon';
+	const TABLE_NAME = 'npdiaantper';
 
 	
-	const CLASS_DEFAULT = 'lib.model.Nptipcon';
+	const CLASS_DEFAULT = 'lib.model.Npdiaantper';
 
 	
-	const NUM_COLUMNS = 12;
+	const NUM_COLUMNS = 5;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
 
 
 	
-	const CODTIPCON = 'nptipcon.CODTIPCON';
+	const CODCON = 'npdiaantper.CODCON';
 
 	
-	const DESTIPCON = 'nptipcon.DESTIPCON';
+	const FECDES = 'npdiaantper.FECDES';
 
 	
-	const FREPAGCON = 'nptipcon.FREPAGCON';
+	const FECHAS = 'npdiaantper.FECHAS';
 
 	
-	const ALICUOCON = 'nptipcon.ALICUOCON';
+	const NUMDIA = 'npdiaantper.NUMDIA';
 
 	
-	const DIABONFINANO = 'nptipcon.DIABONFINANO';
-
-	
-	const DIABONVAC = 'nptipcon.DIABONVAC';
-
-	
-	const FECINIREG = 'nptipcon.FECINIREG';
-
-	
-	const ART146 = 'nptipcon.ART146';
-
-	
-	const DIAANO = 'nptipcon.DIAANO';
-
-	
-	const FID = 'nptipcon.FID';
-
-	
-	const FECDES = 'nptipcon.FECDES';
-
-	
-	const ID = 'nptipcon.ID';
+	const ID = 'npdiaantper.ID';
 
 	
 	private static $phpNameMap = null;
@@ -61,31 +40,31 @@ abstract class BaseNptipconPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codtipcon', 'Destipcon', 'Frepagcon', 'Alicuocon', 'Diabonfinano', 'Diabonvac', 'Fecinireg', 'Art146', 'Diaano', 'Fid', 'Fecdes', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (NptipconPeer::CODTIPCON, NptipconPeer::DESTIPCON, NptipconPeer::FREPAGCON, NptipconPeer::ALICUOCON, NptipconPeer::DIABONFINANO, NptipconPeer::DIABONVAC, NptipconPeer::FECINIREG, NptipconPeer::ART146, NptipconPeer::DIAANO, NptipconPeer::FID, NptipconPeer::FECDES, NptipconPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codtipcon', 'destipcon', 'frepagcon', 'alicuocon', 'diabonfinano', 'diabonvac', 'fecinireg', 'art146', 'diaano', 'fid', 'fecdes', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
+		BasePeer::TYPE_PHPNAME => array ('Codcon', 'Fecdes', 'Fechas', 'Numdia', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (NpdiaantperPeer::CODCON, NpdiaantperPeer::FECDES, NpdiaantperPeer::FECHAS, NpdiaantperPeer::NUMDIA, NpdiaantperPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codcon', 'fecdes', 'fechas', 'numdia', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codtipcon' => 0, 'Destipcon' => 1, 'Frepagcon' => 2, 'Alicuocon' => 3, 'Diabonfinano' => 4, 'Diabonvac' => 5, 'Fecinireg' => 6, 'Art146' => 7, 'Diaano' => 8, 'Fid' => 9, 'Fecdes' => 10, 'Id' => 11, ),
-		BasePeer::TYPE_COLNAME => array (NptipconPeer::CODTIPCON => 0, NptipconPeer::DESTIPCON => 1, NptipconPeer::FREPAGCON => 2, NptipconPeer::ALICUOCON => 3, NptipconPeer::DIABONFINANO => 4, NptipconPeer::DIABONVAC => 5, NptipconPeer::FECINIREG => 6, NptipconPeer::ART146 => 7, NptipconPeer::DIAANO => 8, NptipconPeer::FID => 9, NptipconPeer::FECDES => 10, NptipconPeer::ID => 11, ),
-		BasePeer::TYPE_FIELDNAME => array ('codtipcon' => 0, 'destipcon' => 1, 'frepagcon' => 2, 'alicuocon' => 3, 'diabonfinano' => 4, 'diabonvac' => 5, 'fecinireg' => 6, 'art146' => 7, 'diaano' => 8, 'fid' => 9, 'fecdes' => 10, 'id' => 11, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
+		BasePeer::TYPE_PHPNAME => array ('Codcon' => 0, 'Fecdes' => 1, 'Fechas' => 2, 'Numdia' => 3, 'Id' => 4, ),
+		BasePeer::TYPE_COLNAME => array (NpdiaantperPeer::CODCON => 0, NpdiaantperPeer::FECDES => 1, NpdiaantperPeer::FECHAS => 2, NpdiaantperPeer::NUMDIA => 3, NpdiaantperPeer::ID => 4, ),
+		BasePeer::TYPE_FIELDNAME => array ('codcon' => 0, 'fecdes' => 1, 'fechas' => 2, 'numdia' => 3, 'id' => 4, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
 	);
 
 	
 	public static function getMapBuilder()
 	{
-		include_once 'lib/model/map/NptipconMapBuilder.php';
-		return BasePeer::getMapBuilder('lib.model.map.NptipconMapBuilder');
+		include_once 'lib/model/map/NpdiaantperMapBuilder.php';
+		return BasePeer::getMapBuilder('lib.model.map.NpdiaantperMapBuilder');
 	}
 	
 	public static function getPhpNameMap()
 	{
 		if (self::$phpNameMap === null) {
-			$map = NptipconPeer::getTableMap();
+			$map = NpdiaantperPeer::getTableMap();
 			$columns = $map->getColumns();
 			$nameMap = array();
 			foreach ($columns as $column) {
@@ -119,41 +98,27 @@ abstract class BaseNptipconPeer {
 	
 	public static function alias($alias, $column)
 	{
-		return str_replace(NptipconPeer::TABLE_NAME.'.', $alias.'.', $column);
+		return str_replace(NpdiaantperPeer::TABLE_NAME.'.', $alias.'.', $column);
 	}
 
 	
 	public static function addSelectColumns(Criteria $criteria)
 	{
 
-		$criteria->addSelectColumn(NptipconPeer::CODTIPCON);
+		$criteria->addSelectColumn(NpdiaantperPeer::CODCON);
 
-		$criteria->addSelectColumn(NptipconPeer::DESTIPCON);
+		$criteria->addSelectColumn(NpdiaantperPeer::FECDES);
 
-		$criteria->addSelectColumn(NptipconPeer::FREPAGCON);
+		$criteria->addSelectColumn(NpdiaantperPeer::FECHAS);
 
-		$criteria->addSelectColumn(NptipconPeer::ALICUOCON);
+		$criteria->addSelectColumn(NpdiaantperPeer::NUMDIA);
 
-		$criteria->addSelectColumn(NptipconPeer::DIABONFINANO);
-
-		$criteria->addSelectColumn(NptipconPeer::DIABONVAC);
-
-		$criteria->addSelectColumn(NptipconPeer::FECINIREG);
-
-		$criteria->addSelectColumn(NptipconPeer::ART146);
-
-		$criteria->addSelectColumn(NptipconPeer::DIAANO);
-
-		$criteria->addSelectColumn(NptipconPeer::FID);
-
-		$criteria->addSelectColumn(NptipconPeer::FECDES);
-
-		$criteria->addSelectColumn(NptipconPeer::ID);
+		$criteria->addSelectColumn(NpdiaantperPeer::ID);
 
 	}
 
-	const COUNT = 'COUNT(nptipcon.ID)';
-	const COUNT_DISTINCT = 'COUNT(DISTINCT nptipcon.ID)';
+	const COUNT = 'COUNT(npdiaantper.ID)';
+	const COUNT_DISTINCT = 'COUNT(DISTINCT npdiaantper.ID)';
 
 	
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
@@ -162,9 +127,9 @@ abstract class BaseNptipconPeer {
 
 				$criteria->clearSelectColumns()->clearOrderByColumns();
 		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(NptipconPeer::COUNT_DISTINCT);
+			$criteria->addSelectColumn(NpdiaantperPeer::COUNT_DISTINCT);
 		} else {
-			$criteria->addSelectColumn(NptipconPeer::COUNT);
+			$criteria->addSelectColumn(NpdiaantperPeer::COUNT);
 		}
 
 				foreach($criteria->getGroupByColumns() as $column)
@@ -172,7 +137,7 @@ abstract class BaseNptipconPeer {
 			$criteria->addSelectColumn($column);
 		}
 
-		$rs = NptipconPeer::doSelectRS($criteria, $con);
+		$rs = NpdiaantperPeer::doSelectRS($criteria, $con);
 		if ($rs->next()) {
 			return $rs->getInt(1);
 		} else {
@@ -184,7 +149,7 @@ abstract class BaseNptipconPeer {
 	{
 		$critcopy = clone $criteria;
 		$critcopy->setLimit(1);
-		$objects = NptipconPeer::doSelect($critcopy, $con);
+		$objects = NpdiaantperPeer::doSelect($critcopy, $con);
 		if ($objects) {
 			return $objects[0];
 		}
@@ -193,7 +158,7 @@ abstract class BaseNptipconPeer {
 	
 	public static function doSelect(Criteria $criteria, $con = null)
 	{
-		return NptipconPeer::populateObjects(NptipconPeer::doSelectRS($criteria, $con));
+		return NpdiaantperPeer::populateObjects(NpdiaantperPeer::doSelectRS($criteria, $con));
 	}
 	
 	public static function doSelectRS(Criteria $criteria, $con = null)
@@ -204,7 +169,7 @@ abstract class BaseNptipconPeer {
 
 		if (!$criteria->getSelectColumns()) {
 			$criteria = clone $criteria;
-			NptipconPeer::addSelectColumns($criteria);
+			NpdiaantperPeer::addSelectColumns($criteria);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -216,7 +181,7 @@ abstract class BaseNptipconPeer {
 	{
 		$results = array();
 	
-				$cls = NptipconPeer::getOMClass();
+				$cls = NpdiaantperPeer::getOMClass();
 		$cls = Propel::import($cls);
 				while($rs->next()) {
 		
@@ -236,7 +201,7 @@ abstract class BaseNptipconPeer {
 	
 	public static function getOMClass()
 	{
-		return NptipconPeer::CLASS_DEFAULT;
+		return NpdiaantperPeer::CLASS_DEFAULT;
 	}
 
 	
@@ -250,7 +215,7 @@ abstract class BaseNptipconPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
-		$criteria->remove(NptipconPeer::ID); 
+		$criteria->remove(NpdiaantperPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 
@@ -277,8 +242,8 @@ abstract class BaseNptipconPeer {
 
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; 
-			$comparison = $criteria->getComparison(NptipconPeer::ID);
-			$selectCriteria->add(NptipconPeer::ID, $criteria->remove(NptipconPeer::ID), $comparison);
+			$comparison = $criteria->getComparison(NpdiaantperPeer::ID);
+			$selectCriteria->add(NpdiaantperPeer::ID, $criteria->remove(NpdiaantperPeer::ID), $comparison);
 
 		} else { 			$criteria = $values->buildCriteria(); 			$selectCriteria = $values->buildPkeyCriteria(); 		}
 
@@ -295,7 +260,7 @@ abstract class BaseNptipconPeer {
 		}
 		$affectedRows = 0; 		try {
 									$con->begin();
-			$affectedRows += BasePeer::doDeleteAll(NptipconPeer::TABLE_NAME, $con);
+			$affectedRows += BasePeer::doDeleteAll(NpdiaantperPeer::TABLE_NAME, $con);
 			$con->commit();
 			return $affectedRows;
 		} catch (PropelException $e) {
@@ -308,16 +273,16 @@ abstract class BaseNptipconPeer {
 	 public static function doDelete($values, $con = null)
 	 {
 		if ($con === null) {
-			$con = Propel::getConnection(NptipconPeer::DATABASE_NAME);
+			$con = Propel::getConnection(NpdiaantperPeer::DATABASE_NAME);
 		}
 
 		if ($values instanceof Criteria) {
-			$criteria = clone $values; 		} elseif ($values instanceof Nptipcon) {
+			$criteria = clone $values; 		} elseif ($values instanceof Npdiaantper) {
 
 			$criteria = $values->buildPkeyCriteria();
 		} else {
 						$criteria = new Criteria(self::DATABASE_NAME);
-			$criteria->add(NptipconPeer::ID, (array) $values, Criteria::IN);
+			$criteria->add(NpdiaantperPeer::ID, (array) $values, Criteria::IN);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -336,13 +301,13 @@ abstract class BaseNptipconPeer {
 	}
 
 	
-	public static function doValidate(Nptipcon $obj, $cols = null)
+	public static function doValidate(Npdiaantper $obj, $cols = null)
 	{
 		$columns = array();
 
 		if ($cols) {
-			$dbMap = Propel::getDatabaseMap(NptipconPeer::DATABASE_NAME);
-			$tableMap = $dbMap->getTable(NptipconPeer::TABLE_NAME);
+			$dbMap = Propel::getDatabaseMap(NpdiaantperPeer::DATABASE_NAME);
+			$tableMap = $dbMap->getTable(NpdiaantperPeer::TABLE_NAME);
 
 			if (! is_array($cols)) {
 				$cols = array($cols);
@@ -358,11 +323,11 @@ abstract class BaseNptipconPeer {
 
 		}
 
-		$res =  BasePeer::doValidate(NptipconPeer::DATABASE_NAME, NptipconPeer::TABLE_NAME, $columns);
+		$res =  BasePeer::doValidate(NpdiaantperPeer::DATABASE_NAME, NpdiaantperPeer::TABLE_NAME, $columns);
     if ($res !== true) {
         $request = sfContext::getInstance()->getRequest();
         foreach ($res as $failed) {
-            $col = NptipconPeer::translateFieldname($failed->getColumn(), BasePeer::TYPE_COLNAME, BasePeer::TYPE_PHPNAME);
+            $col = NpdiaantperPeer::translateFieldname($failed->getColumn(), BasePeer::TYPE_COLNAME, BasePeer::TYPE_PHPNAME);
             $request->setError($col, $failed->getMessage());
         }
     }
@@ -377,12 +342,12 @@ abstract class BaseNptipconPeer {
 			$con = Propel::getConnection(self::DATABASE_NAME);
 		}
 
-		$criteria = new Criteria(NptipconPeer::DATABASE_NAME);
+		$criteria = new Criteria(NpdiaantperPeer::DATABASE_NAME);
 
-		$criteria->add(NptipconPeer::ID, $pk);
+		$criteria->add(NpdiaantperPeer::ID, $pk);
 
 
-		$v = NptipconPeer::doSelect($criteria, $con);
+		$v = NpdiaantperPeer::doSelect($criteria, $con);
 
 		return !empty($v) > 0 ? $v[0] : null;
 	}
@@ -399,8 +364,8 @@ abstract class BaseNptipconPeer {
 			$objs = array();
 		} else {
 			$criteria = new Criteria();
-			$criteria->add(NptipconPeer::ID, $pks, Criteria::IN);
-			$objs = NptipconPeer::doSelect($criteria, $con);
+			$criteria->add(NpdiaantperPeer::ID, $pks, Criteria::IN);
+			$objs = NpdiaantperPeer::doSelect($criteria, $con);
 		}
 		return $objs;
 	}
@@ -408,11 +373,11 @@ abstract class BaseNptipconPeer {
 } 
 if (Propel::isInit()) {
 			try {
-		BaseNptipconPeer::getMapBuilder();
+		BaseNpdiaantperPeer::getMapBuilder();
 	} catch (Exception $e) {
 		Propel::log('Could not initialize Peer: ' . $e->getMessage(), Propel::LOG_ERR);
 	}
 } else {
-			require_once 'lib/model/map/NptipconMapBuilder.php';
-	Propel::registerMapBuilder('lib.model.map.NptipconMapBuilder');
+			require_once 'lib/model/map/NpdiaantperMapBuilder.php';
+	Propel::registerMapBuilder('lib.model.map.NpdiaantperMapBuilder');
 }

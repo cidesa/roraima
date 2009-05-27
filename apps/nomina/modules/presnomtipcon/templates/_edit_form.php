@@ -90,7 +90,42 @@ else
 <input type="button" name="Submit" value="Ver Alicuota" onclick="$('div_alicuota').toggle();" />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <input type="button" name="Submit" value="Ver Nomina" onclick="$('div_nomina').toggle();" />
-	</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" name="Submit" value="Ver Intereses" onclick="$('div_intereses').toggle();" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" name="Submit" value="Ver Dias por Antiguedad Regimen Antiguo" onclick="$('div_antiguedad').toggle();" />
+	</div>	
+<br>
+ <?php echo label_for('nptipcon[fid]', __($labels['nptipcon{fid}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('nptipcon{fid}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('nptipcon{fid}')): ?>
+    <?php echo form_error('nptipcon{fid}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php  $value = object_checkbox_tag($nptipcon, 'getFid', array (
+    'control_name' => 'nptipcon[fid]',
+	'onclick' => "$('divfechafid').toggle();probar();"
+	)).""; echo $value ? $value : '&nbsp;' ?>
+    </div>	
+<br>	
+<div id="divfechafid" style="display:none">	
+<br>
+<?php echo label_for('nptipcon[fecdes]', __($labels['nptipcon{fecdes}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('nptipcon{fecdes}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('nptipcon{fecdes}')): ?>
+    <?php echo form_error('nptipcon{fecdes}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_date_tag($nptipcon, 'getFecdes', array (
+  'rich' => true,
+  'calendar_button_img' => '/sf/sf_admin/images/date.png',
+  'control_name' => 'nptipcon[fecdes]',
+  'date_format' => 'dd/MM/yyyy',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+</div>
+<br>	
+
 </div>
 
 <div id="div_alicuota" class="form-row" style="display:none">
@@ -126,6 +161,20 @@ else
 		echo grid_tag($obj_nomina);
 ?>
 </div>
+<br>
+<br>
+<div id="div_intereses" class="form-row" style="display:none">
+<?
+	echo grid_tag_v2($obj_intereses);
+?>
+</div>
+<br>
+<br>
+<div id="div_antiguedad" class="form-row" style="display:none">
+<?
+	echo grid_tag_v2($obj_antiguedad);
+?>
+</div>
 </fieldset>
 
 <?php include_partial('edit_actions', array('nptipcon' => $nptipcon)) ?>
@@ -141,3 +190,9 @@ else
 )) ?><?php endif; ?>
 </li>
   </ul>
+<script>	
+	if($('nptipcon_fid').checked)
+		$('divfechafid').show();
+	else
+		$('divfechafid').hide();
+</script>

@@ -45,6 +45,14 @@ abstract class BaseNptipcon extends BaseObject  implements Persistent {
 
 
 	
+	protected $fid;
+
+
+	
+	protected $fecdes;
+
+
+	
 	protected $id;
 
 	
@@ -136,6 +144,35 @@ abstract class BaseNptipcon extends BaseObject  implements Persistent {
     else return $this->diaano;
 
   }
+  
+  public function getFid()
+  {
+
+    return trim($this->fid);
+
+  }
+  
+  public function getFecdes($format = 'Y-m-d')
+  {
+
+    if ($this->fecdes === null || $this->fecdes === '') {
+      return null;
+    } elseif (!is_int($this->fecdes)) {
+            $ts = adodb_strtotime($this->fecdes);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecdes] as date/time value: " . var_export($this->fecdes, true));
+      }
+    } else {
+      $ts = $this->fecdes;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
   
   public function getId()
   {
@@ -241,6 +278,33 @@ abstract class BaseNptipcon extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setFid($v)
+	{
+
+    if ($this->fid !== $v) {
+        $this->fid = $v;
+        $this->modifiedColumns[] = NptipconPeer::FID;
+      }
+  
+	} 
+	
+	public function setFecdes($v)
+	{
+
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecdes] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecdes !== $ts) {
+      $this->fecdes = $ts;
+      $this->modifiedColumns[] = NptipconPeer::FECDES;
+    }
+
+	} 
+	
 	public function setId($v)
 	{
 
@@ -273,7 +337,11 @@ abstract class BaseNptipcon extends BaseObject  implements Persistent {
 
       $this->diaano = $rs->getFloat($startcol + 8);
 
-      $this->id = $rs->getInt($startcol + 9);
+      $this->fid = $rs->getString($startcol + 9);
+
+      $this->fecdes = $rs->getDate($startcol + 10, null);
+
+      $this->id = $rs->getInt($startcol + 11);
 
       $this->resetModified();
 
@@ -281,7 +349,7 @@ abstract class BaseNptipcon extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 10; 
+            return $startcol + 12; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Nptipcon object", $e);
     }
@@ -456,6 +524,12 @@ abstract class BaseNptipcon extends BaseObject  implements Persistent {
 				return $this->getDiaano();
 				break;
 			case 9:
+				return $this->getFid();
+				break;
+			case 10:
+				return $this->getFecdes();
+				break;
+			case 11:
 				return $this->getId();
 				break;
 			default:
@@ -477,7 +551,9 @@ abstract class BaseNptipcon extends BaseObject  implements Persistent {
 			$keys[6] => $this->getFecinireg(),
 			$keys[7] => $this->getArt146(),
 			$keys[8] => $this->getDiaano(),
-			$keys[9] => $this->getId(),
+			$keys[9] => $this->getFid(),
+			$keys[10] => $this->getFecdes(),
+			$keys[11] => $this->getId(),
 		);
 		return $result;
 	}
@@ -521,6 +597,12 @@ abstract class BaseNptipcon extends BaseObject  implements Persistent {
 				$this->setDiaano($value);
 				break;
 			case 9:
+				$this->setFid($value);
+				break;
+			case 10:
+				$this->setFecdes($value);
+				break;
+			case 11:
 				$this->setId($value);
 				break;
 		} 	}
@@ -539,7 +621,9 @@ abstract class BaseNptipcon extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[6], $arr)) $this->setFecinireg($arr[$keys[6]]);
 		if (array_key_exists($keys[7], $arr)) $this->setArt146($arr[$keys[7]]);
 		if (array_key_exists($keys[8], $arr)) $this->setDiaano($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setId($arr[$keys[9]]);
+		if (array_key_exists($keys[9], $arr)) $this->setFid($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setFecdes($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setId($arr[$keys[11]]);
 	}
 
 	
@@ -556,6 +640,8 @@ abstract class BaseNptipcon extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(NptipconPeer::FECINIREG)) $criteria->add(NptipconPeer::FECINIREG, $this->fecinireg);
 		if ($this->isColumnModified(NptipconPeer::ART146)) $criteria->add(NptipconPeer::ART146, $this->art146);
 		if ($this->isColumnModified(NptipconPeer::DIAANO)) $criteria->add(NptipconPeer::DIAANO, $this->diaano);
+		if ($this->isColumnModified(NptipconPeer::FID)) $criteria->add(NptipconPeer::FID, $this->fid);
+		if ($this->isColumnModified(NptipconPeer::FECDES)) $criteria->add(NptipconPeer::FECDES, $this->fecdes);
 		if ($this->isColumnModified(NptipconPeer::ID)) $criteria->add(NptipconPeer::ID, $this->id);
 
 		return $criteria;
@@ -604,6 +690,10 @@ abstract class BaseNptipcon extends BaseObject  implements Persistent {
 		$copyObj->setArt146($this->art146);
 
 		$copyObj->setDiaano($this->diaano);
+
+		$copyObj->setFid($this->fid);
+
+		$copyObj->setFecdes($this->fecdes);
 
 
 		$copyObj->setNew(true);

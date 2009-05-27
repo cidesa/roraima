@@ -433,4 +433,24 @@ public static function PagoDoble()
     return array('T' => 'Tipo', 'F' => 'Forma', 'D' => 'Dimensiones', 'S' => 'Servicios');
   }
 
+  public static function ListaFcsollic()
+  {
+    return array('S' => 'Si', 'N' => 'No');
+  }
+
+  public static function TipoBono()
+  {
+   return array('N' => 'NINGUNO', 'V' => 'VACACIONAL', 'F' => 'FIN DE AÑO', 'P' => 'PRIMA ANTIGUEDAD');
+  }
+
+  public static function TipoPrestamo()
+  {
+   return array('CORTO' => 'CORTO', 'VIVIENDA' => 'VIVIENDA', 'HIPOTECARIO' => 'HIPOTECARIO', 'MEDIANO' => 'MEDIANO', 'COMERCIAL' => 'COMERCIAL', 'OTRO' => 'OTRO');
+  }
+  
+  public static function Tipo_Intereses()
+  {
+   return array('P' => 'Promedio', 'A' => 'Activas', 'S' => 'Pasivas');
+  }
+  
 }

@@ -17,7 +17,7 @@ array()) ?></h1>
 
 <div id="sf_admin_content">
 <?php include_partial('presnomtipcon/edit_messages', array('nptipcon' => $nptipcon, 'labels' => $labels)) ?>
-<?php include_partial('presnomtipcon/edit_form', array('nptipcon' => $nptipcon, 'labels' => $labels, 'obj' => $obj, 'obj_nomina' => $obj_nomina, 'listaFrecuenciaPago' => $listaFrecuenciaPago)) ?>
+<?php include_partial('presnomtipcon/edit_form', array('nptipcon' => $nptipcon, 'labels' => $labels, 'obj' => $obj, 'obj_nomina' => $obj_nomina, 'listaFrecuenciaPago' => $listaFrecuenciaPago, 'obj_intereses' => $obj_intereses, 'obj_antiguedad' => $obj_antiguedad )) ?>
 </div>
 
 <div id="sf_admin_footer">
