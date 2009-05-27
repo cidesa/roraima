@@ -210,7 +210,7 @@
         'condition' => "$('tsmovlib_monmov').value != '0,00' && $('id').value == ''",
           'with' => "'ajax=5&cajtexmos=tsmovlib_monmov&monmov='+this.value+'&numcue='+$('tsmovlib_numcue').value+'&tipmov='+$('tsmovlib_tipmov').value+'&feclib='+$('tsmovlib_feclib').value",
 
-        )),  
+        )),
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
     </th>
@@ -251,7 +251,7 @@
 
   <?php $value = object_input_tag($tsmovlib, 'getNumcom', array (
   'size' => 20,
-  'readonly'  =>  $tsmovlib->getId()!='' ? true : false ,
+  'readonly'  =>  ($tsmovlib->getId()!='' || $gencorrel=='S') ? true : false ,
   'control_name' => 'tsmovlib[numcom]',
   'onBlur' => "javascript:event.keyCode=13; enter(event,this.value,this.id);",
 )); echo $value ? $value : '&nbsp;' ?>
@@ -336,7 +336,7 @@ function deshabilitarbotones()
 
   function anular()
   {
-    if (confirm('¿Desea Anular el Movimiento Segun Libros?')) {    
+    if (confirm('¿Desea Anular el Movimiento Segun Libros?')) {
       var numcue=document.getElementById('tsmovlib_numcue').value;
       var reflib=document.getElementById('tsmovlib_reflib').value;
       var refpag=document.getElementById('refpag').value;

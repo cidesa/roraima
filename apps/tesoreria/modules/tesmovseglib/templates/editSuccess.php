@@ -22,6 +22,7 @@ array()) ?></h1>
 'ctaeje'=>$ctaeje,'desctaeje'=>$desctaeje,'ctaingdif'=>$ctaingdif,'desctaingdif'=>$desctaingdif,
 'ctaing'=>$ctaing,'desctaing'=>$desctaing,
 'anular'=>$anular,
+'gencorrel'=>$gencorrel,
 )) ?>
 </div>
 

@@ -74,7 +74,7 @@ class tesmovseglibActions extends autotesmovseglibActions
     $this->preExecute();
     $this->tsmovlib = $this->getTsmovlibOrCreate();
     try{ $this->updateTsmovlibFromRequest();}catch(Exception $ex){}
-
+    $this->gencorrel=$this->getUser()->getAttribute('confcorcom','S');
     $this->labels = $this->getLabels();
 
     if($this->coderror1!=-1)
@@ -164,7 +164,6 @@ class tesmovseglibActions extends autotesmovseglibActions
   public function executeEdit()
   {
     $this->tsmovlib = $this->getTsmovlibOrCreate();
-
     ///////////////////////////////////
     /* CHEQUEO PARA VER SI PUEDE O NO ANU/ELIMINAR */
 
@@ -177,6 +176,7 @@ class tesmovseglibActions extends autotesmovseglibActions
     {
       $this->anular='N';
     }
+     $this->gencorrel=$this->getUser()->getAttribute('confcorcom','S');
     ////////////////////////////////////
     /* activate form */
 
@@ -286,7 +286,8 @@ class tesmovseglibActions extends autotesmovseglibActions
       $this->eti='';
       $this->color='';
 
-      $cadcorcomcont = "########";
+	  $cadcorcomcont="";
+      if ($this->gencorrel=='S')  $cadcorcomcont = "########";
    	  $this->tsmovlib->setNumcom($cadcorcomcont);
     }
 
@@ -538,8 +539,8 @@ $this->Bitacora('Guardo');
         if($tstipmov->getDebcre()=='C'){
           $contaba = ContabaPeer::doSelectOne(new Criteria());
           $saldo=0;
-   		  $dateFormat = new sfDateFormat('es_VE');
-   		  $feclib = $dateFormat->format($feclib, 'i', $dateFormat->getInputPattern('d'));
+      	  $dateFormat = new sfDateFormat('es_VE');
+          $feclib = $dateFormat->format($feclib, 'i', $dateFormat->getInputPattern('d'));
           if(!Tesoreria::chequear_disponibilidad_financiera($numcue,$monmov,$contaba->getFecini(),$feclib,$saldo)){
             $coderr = 195;
             $output = '[["javascript","alert(\''.H::obtenerMensajeError($coderr).'\')",""],["tsmovlib_monmov","0,00",""]]';
