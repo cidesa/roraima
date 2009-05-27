@@ -398,7 +398,6 @@ class OrdendePago
     {
       if ($orden->getNumord()=='########')
       {
-        /*
         $encontrado=false;
         while (!$encontrado)
         {
@@ -415,18 +414,21 @@ class OrdendePago
           }
         }
         $numeroorden=str_pad($r, 8, '0', STR_PAD_LEFT);
-        */
-        $numeroorden = '########';
+
       }
       else
       {
         $numeroorden=str_replace('#','0',$orden->getNumord());
       }
     }
+    $numeroorden2="OP".substr($numeroorden,2,6);
+    $confcorcom=sfContext::getInstance()->getUser()->getAttribute('confcorcom');
+    if ($confcorcom=='N')
+    {
+      $numerocomprob= $numeroorden2;
+    }else $numerocomprob= '########';
 
-    $numerocomprob= '########';
-    //$numerocomprob= self::Buscar_Correlativo();
-    $reftra = $numeroorden;
+    $reftra = $numeroorden2;
     $cuentaporpagarrendicion="";
     $codigocuenta="";
     $tipo="";
@@ -712,8 +714,12 @@ class OrdendePago
         $numeroorden=str_replace('#','0',$orden->getNumord());
       }
     }
+    $confcorcom=sfContext::getInstance()->getUser()->getAttribute('confcorcom');
+    if ($confcorcom=='N')
+    {
+      $numerocomprob="PR".substr($numeroorden,2,6);
+    }else $numerocomprob= '########';
 
-    $numerocomprob=self::Buscar_Correlativo();
     $reftra="PR".substr($numeroorden,2,6);
 
     $b = new Criteria();
