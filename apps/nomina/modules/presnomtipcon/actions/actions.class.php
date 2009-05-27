@@ -121,22 +121,22 @@ class presnomtipconActions extends autopresnomtipconActions
 	$r=0;
 	while ($r<count($z))
     {
-      if($z[$r]->getFecdes())
+      if(!$z[$r]->getFecdes())
 	  {
 	  	$this->coderror1= 463;
 	  	break;
 	  }	  	
-      if($z[$r]->getFechas())
+      if(!$z[$r]->getFechas())
 	  {
 	  	$this->coderror1= 463;
 	  	break;
 	  }
-	  if($z[$r]->getTiptas())
+	  if(!$z[$r]->getTiptas())
 	  {
 	  	$this->coderror1= 463;
 	  	break;
 	  }
-		
+	  $r++;	
 	}
 	
 	$this->configGrid_antiguedad();	
@@ -145,22 +145,22 @@ class presnomtipconActions extends autopresnomtipconActions
 	$r=0;
 	while ($r<count($y))
     {
-      if($y[$r]->getFecdes())
+      if(!$y[$r]->getFecdes())
 	  {
 	  	$this->coderror1= 464;
 	  	break;
 	  }	  	
-      if($y[$r]->getFechas())
+      if(!$y[$r]->getFechas())
 	  {
 	  	$this->coderror1= 464;
 	  	break;
 	  }
-	  if($y[$r]->getNumdia())
+	  if(!$y[$r]->getNumdia())
 	  {
 	  	$this->coderror1= 464;
 	  	break;
 	  }
-		
+	  $r++;
 	}
 
 	  
