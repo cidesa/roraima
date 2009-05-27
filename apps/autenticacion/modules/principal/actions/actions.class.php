@@ -23,7 +23,7 @@ class principalActions extends sfActions
     $confyml = sfYaml::load($configuracion);
 
 	if(is_array($confyml)){
-		H::printr($confyml);
+	//	H::printr($confyml);
 	  if(array_key_exists('comprobantes',$confyml)) $this->getUser()->setAttribute('confcorcom', H::iif(($confyml["comprobantes"]["confcorcom"])=='S','S','N'));
 	  else $this->getUser()->setAttribute('confcorcom', 'S');
 	}
