@@ -16,13 +16,20 @@ class presnomtipconActions extends autopresnomtipconActions
   public function validateEdit()
   {
  	$this->nptipcon = $this->getNptipconOrCreate();
-    $this->updateNptipconFromRequest();
+    $this->updateNptipconFromRequest($alic,$a146,$fid);
     if($this->getRequest()->getMethod() == sfRequest::POST)
-    {   $this->configGrid_nomina();
+    {
+    	if($fid=='S' && $this->nptipcon->getFecdes()=='' ){
+    		$this->coderror1=465;
+			return false;
+    	}
+			
+		
+		$this->configGrid_nomina();	
         $grid_detalle=Herramientas::CargarDatosGrid($this,$this->obj_nomina,true);//0
         $grid_nomina=$grid_detalle[0];
-        $this->configGrid();
-        $grid = Herramientas::CargarDatosGrid($this,$this->obj);
+        $this->configGrid();		
+        $grid = Herramientas::CargarDatosGrid($this,$this->obj,true);
         if(empty( $grid[0]))
 			$this->coderror1=436;
         if(empty( $grid_nomina))
@@ -50,18 +57,16 @@ class presnomtipconActions extends autopresnomtipconActions
       $x=$grid[0];
 	  $j=0;
 	  $s=0;
-
 	  while ($s<count($x)){
-
-	  $desde=$x[$s]->getDesde();
-	  $hasta=$x[$s]->getHasta();
+	  $desde=$x[$s]['desde'];#->getDesde();
+	  $hasta=$x[$s]['hasta'];#->getHasta();
      if ($desde >= $hasta)
        {
        	$this->coderror1=180;
 		       	return false;
 		       	break;
 
-       } else if ($x[$s]->getAnovig() > $x[$s]->getAnovighas())
+       } else if ($x[$s]['anovig'] > $x[$s]['anovighas']) #->getAnovig() > $x[$s]->getAnovighas())
        {
        	$this->coderror1=181;
 		       	return false;
@@ -70,7 +75,8 @@ class presnomtipconActions extends autopresnomtipconActions
        } else
        $s++;
 	  }
-	  $grid_detalle=Herramientas::CargarDatosGrid($this,$this->obj_nomina);
+
+	  $grid_detalle=Herramientas::CargarDatosGrid($this,$this->obj_nomina,true);
 	  $x= $grid_detalle[0];
 	  $j=0;
 	  $s=0;
@@ -78,7 +84,7 @@ class presnomtipconActions extends autopresnomtipconActions
 	  $encontrado=false;
 
      while ($s<count($x) and !$encontrado){
-     	$cp= $x[$s]->getCodnom();
+     	$cp= $x[$s]['codnom'];#->getCodnom();
         $j=0;
 
 	  while ($j<count($x))
@@ -91,7 +97,7 @@ class presnomtipconActions extends autopresnomtipconActions
         break;}
        else{
 
-        $v= $x[$a]->getCodnom();
+        $v= $x[$a]['codnom'];#->getCodnom();
   	  if ($cp == $v )
 	   {
 	   	 $this->coderror1= 427;
@@ -108,6 +114,56 @@ class presnomtipconActions extends autopresnomtipconActions
 		$j++;
 	  }}
 	  $s++;}
+	  
+	$this->configGrid_intereses();	
+    $grid_int=Herramientas::CargarDatosGridv2($this,$this->obj_intereses);//0
+    $z=$grid_int[0]; 
+	$r=0;
+	while ($r<count($z))
+    {
+      if($z[$r]->getFecdes())
+	  {
+	  	$this->coderror1= 463;
+	  	break;
+	  }	  	
+      if($z[$r]->getFechas())
+	  {
+	  	$this->coderror1= 463;
+	  	break;
+	  }
+	  if($z[$r]->getTiptas())
+	  {
+	  	$this->coderror1= 463;
+	  	break;
+	  }
+		
+	}
+	
+	$this->configGrid_antiguedad();	
+    $grid_ant=Herramientas::CargarDatosGridv2($this,$this->obj_antiguedad);//0
+    $y=$grid_ant[0]; 
+	$r=0;
+	while ($r<count($y))
+    {
+      if($y[$r]->getFecdes())
+	  {
+	  	$this->coderror1= 464;
+	  	break;
+	  }	  	
+      if($y[$r]->getFechas())
+	  {
+	  	$this->coderror1= 464;
+	  	break;
+	  }
+	  if($y[$r]->getNumdia())
+	  {
+	  	$this->coderror1= 464;
+	  	break;
+	  }
+		
+	}
+
+	  
 
     }else return false;
 //print $this->coderror1; exit;
@@ -154,6 +210,8 @@ class presnomtipconActions extends autopresnomtipconActions
 				$this->setVars();
 				$this->configGrid($this->getRequestParameter('nptipcon[codtipcon]'));
 				$this->configGrid_nomina($this->getRequestParameter('nptipcon[codtipcon]'));
+				$this->configGrid_intereses($this->getRequestParameter('nptipcon[codtipcon]'));
+				$this->configGrid_antiguedad($this->getRequestParameter('nptipcon[codtipcon]'));
 	    }
 	    else
 	    {
@@ -161,6 +219,8 @@ class presnomtipconActions extends autopresnomtipconActions
 				$this->setVars();
 				$this->configGrid($nptipcon->getCodtipcon());
 				$this->configGrid_nomina($nptipcon->getCodtipcon());
+				$this->configGrid_intereses($nptipcon->getCodtipcon());
+				$this->configGrid_antiguedad($nptipcon->getCodtipcon());
 	      $this->forward404Unless($nptipcon);
 	    }
 
@@ -281,6 +341,119 @@ class presnomtipconActions extends autopresnomtipconActions
 		$this->obj = $opciones->getConfig($per);
 
 	}
+	
+	public function configGrid_intereses($var='')
+	{
+		$c = new Criteria();
+		$c->add(NpintconPeer::CODCON,$var);
+		$per = NpintconPeer::doSelect($c);
+		if (count($per)>0)
+			$filas_arreglo=0;
+		else
+			$filas_arreglo=1;
+
+
+		// Se crea el objeto principal de la clase OpcionesGrid
+		$opciones = new OpcionesGrid();
+		// Se configuran las opciones globales del Grid
+		$opciones->setEliminar(true);
+		$opciones->setFilas(1);
+		$opciones->setTabla('Npintcon');
+		$opciones->setName('c');
+		$opciones->setAncho(700);
+		$opciones->setAnchoGrid(800);
+		$opciones->setTitulo('Intereses');
+		$opciones->setHTMLTotalFilas(' ');
+
+		$col1 = new Columna('Fecha Desde');
+		$col1->setNombreCampo('fecdes');
+		$col1->setTipo(Columna::FECHA);
+		$col1->setVacia(true);
+		$col1->setHTML(' ');
+		$col1->setEsGrabable(true);
+
+		$col2 = new Columna('Fecha Hasta');
+		$col2->setNombreCampo('fechas');
+		$col2->setTipo(Columna::FECHA);
+		$col2->setVacia(true);
+		$col2->setHTML(' ');
+		$col2->setEsGrabable(true);
+
+		$col3 = new Columna('Tipo Tasa');
+		$col3->setTipo(Columna::COMBO);
+		$col3->setCombo(Constantes::Tipo_Intereses());
+		$col3->setEsGrabable(true);
+		$col3->setAlineacionObjeto(Columna::CENTRO);
+		$col3->setAlineacionContenido(Columna::CENTRO);
+		$col3->setNombreCampo('tiptas');
+		$col3->setHTML(' ');
+
+
+		// Se guardan las columnas en el objetos de opciones
+		$opciones->addColumna($col1);
+		$opciones->addColumna($col2);
+		$opciones->addColumna($col3);
+
+		// Ee genera el arreglo de opciones necesario para generar el grid
+		$this->obj_intereses = $opciones->getConfig($per);
+
+	}
+	
+	public function configGrid_antiguedad($var='')
+	{
+		$c = new Criteria();
+		$c->add(NpdiaantperPeer::CODCON,$var);
+		$per = NpdiaantperPeer::doSelect($c);
+		if (count($per)>0)
+			$filas_arreglo=0;
+		else
+			$filas_arreglo=1;
+
+
+		// Se crea el objeto principal de la clase OpcionesGrid
+		$opciones = new OpcionesGrid();
+		// Se configuran las opciones globales del Grid
+		$opciones->setEliminar(true);
+		$opciones->setFilas(1);
+		$opciones->setTabla('Npdiaantper');
+		$opciones->setName('d');
+		$opciones->setAncho(700);
+		$opciones->setAnchoGrid(800);
+		$opciones->setTitulo('Dias por Antiguedad Regimen Antiguo');
+		$opciones->setHTMLTotalFilas(' ');
+
+		$col1 = new Columna('Fecha Desde');
+		$col1->setNombreCampo('fecdes');
+		$col1->setTipo(Columna::FECHA);
+		$col1->setVacia(true);
+		$col1->setHTML(' ');
+		$col1->setEsGrabable(true);
+
+		$col2 = new Columna('Fecha Hasta');
+		$col2->setNombreCampo('fechas');
+		$col2->setTipo(Columna::FECHA);
+		$col2->setVacia(true);
+		$col2->setHTML(' ');
+		$col2->setEsGrabable(true);
+
+		$col3 = new Columna('Nro. Dias');
+		$col3->setTipo(Columna::TEXTO);
+		$col3->setEsGrabable(true);
+		$col3->setAlineacionObjeto(Columna::CENTRO);
+		$col3->setAlineacionContenido(Columna::CENTRO);
+		$col3->setNombreCampo('numdia');
+		$col3->setHTML('type="text" size="10"');
+
+
+		// Se guardan las columnas en el objetos de opciones
+		$opciones->addColumna($col1);
+		$opciones->addColumna($col2);
+		$opciones->addColumna($col3);
+
+		// Ee genera el arreglo de opciones necesario para generar el grid
+		$this->obj_antiguedad = $opciones->getConfig($per);
+
+	}
 
 	public function configGrid_nomina($var='')
 	{
@@ -333,13 +506,15 @@ class presnomtipconActions extends autopresnomtipconActions
 
 	protected function saveNptipcon($nptipcon)
 	{
-		$alic = ''; $a146 = '';
-		$this->updateNptipconFromRequest($alic,$a146);
+		$alic = ''; $a146 = ''; $fid = '';
+		$this->updateNptipconFromRequest($alic,$a146,$fid);
 
 		//<!-----------------------------Grid Arreglos---------------------->
 		$grid_alicuota_arreglos=Herramientas::CargarDatosGrid($this,$this->obj,true);//0
 		$grid_nomina_arreglos=Herramientas::CargarDatosGrid($this,$this->obj_nomina,true);//1
-		$arreglo_arreglo = array($grid_alicuota_arreglos,$grid_nomina_arreglos,$alic,$a146);
+		$grid_intereses_arreglos=Herramientas::CargarDatosGridv2($this,$this->obj_intereses);//2
+		$grid_antiguedad_arreglos=Herramientas::CargarDatosGridv2($this,$this->obj_antiguedad);//3
+		$arreglo_arreglo = array($grid_alicuota_arreglos,$grid_nomina_arreglos,$grid_intereses_arreglos,$grid_antiguedad_arreglos,$alic,$a146,$fid);
 		//<!-----------------------------funciones clase Orden de Compra---------------------->
 		if (Nomina::Salvar_presnomtipcon($nptipcon,$arreglo_arreglo,&$coderror))
 		{
@@ -363,6 +538,15 @@ class presnomtipconActions extends autopresnomtipconActions
 		$p = new Criteria();
 		$p->add(NpasinomcontPeer::CODTIPCON,$var);
 		$arreglo = NpasinomcontPeer::doDelete($p);
+		
+		$p = new Criteria();
+		$p->add(NpintconPeer::CODCON,$var);
+		$arreglo = NpintconPeer::doDelete($p);
+		
+		$p = new Criteria();
+		$p->add(NpdiaantperPeer::CODCON,$var);
+		$arreglo = NpdiaantperPeer::doDelete($p);
+		
 		$nptipcon->delete();
 
   }
@@ -414,7 +598,7 @@ class presnomtipconActions extends autopresnomtipconActions
 	 }
 
   }
-    protected function updateNptipconFromRequest(&$alic = '',&$a146 = '')
+    protected function updateNptipconFromRequest(&$alic = '',&$a146 = '', &$fid = '')
   {
     $nptipcon = $this->getRequestParameter('nptipcon');
 
@@ -465,6 +649,39 @@ class presnomtipconActions extends autopresnomtipconActions
     if (isset($nptipcon['alicuocon']))
     { $alic = 'S';
       $this->nptipcon->setAlicuocon(1);
+    }
+	if (isset($nptipcon['fid']))
+    {
+      $fid = 'S';    	 
+      $this->nptipcon->setFid(1);
+    }
+	if (isset($nptipcon['fecdes']))
+    {
+      if ($nptipcon['fecdes'])
+      {
+        try
+        {
+          $dateFormat = new sfDateFormat($this->getUser()->getCulture());
+                              if (!is_array($nptipcon['fecdes']))
+          {
+            $value = $dateFormat->format($nptipcon['fecdes'], 'i', $dateFormat->getInputPattern('d'));
+          }
+          else
+          {
+            $value_array = $nptipcon['fecdes'];
+            $value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+          }
+          $this->nptipcon->setFecdes($value);
+        }
+        catch (sfException $e)
+        {
+          // not a date
+        }
+      }
+      else
+      {
+        $this->nptipcon->setFecdes(null);
+      }
     }
   }
 

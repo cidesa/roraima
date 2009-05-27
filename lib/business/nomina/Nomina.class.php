@@ -2279,7 +2279,7 @@ class Nomina {
                   $aux = $tabla[0]["monto"];
                 }
                 $valor = $aux;
-               }              
+               }
               }//else // MES
             } // no son fechas
           } // fin SUM
@@ -3586,7 +3586,7 @@ class Nomina {
 
              }//if (substr($campo, 24, 1) == 'P') // PERIODO
              else
-              { 
+              {
              	$numero = floatval(substr($campo, 24));
                 //////////////////
                 $resta="-".$numero;
@@ -4921,21 +4921,21 @@ class Nomina {
       }
       $anoing = $anodesde;
       $anohasta = $anodesde +1;
-	  
+
 	  if($meshoy>=$mes)
 	  {
 	  	if($meshoy>$mes)
 	  	  $anofin = ((int)$anohoy);
-		elseif($diahoy>=$dia)	
+		elseif($diahoy>=$dia)
 		  $anofin = (int) $anohoy;
 		else
-		  $anofin = ((int)$anohoy)-1;    
-	  }      	
+		  $anofin = ((int)$anohoy)-1;
+	  }
 	  else
 	  {
 		  $anofin = ((int)$anohoy)-1;
 	  }
-	   
+
 
       $i = 0;
 
@@ -5023,14 +5023,15 @@ class Nomina {
   /*
   *   Tipos de Contratos Colectivos
   */
-  public static function salvar_presnomtipcon($nptipcon, $arreglo_arreglo, & $coderror) {
+  public static function salvar_presnomtipcon($nptipcon, $arreglo_arreglo, & $coderror) {  	
     $grid_alicuota_arreglos = $arreglo_arreglo[0][0];
     $grid_nomina = $arreglo_arreglo[1][0];
-    $alic = $arreglo_arreglo[2];
-    $a146 = $arreglo_arreglo[3];
+	$grid_intereses = $arreglo_arreglo[2];
+	$grid_antiguedad = $arreglo_arreglo[3];
+    $alic = $arreglo_arreglo[4];
+    $a146 = $arreglo_arreglo[5];
+	$fid = $arreglo_arreglo[6];
 
-    //H::PrintR($nptipcon);exit;
-    //print $nptipcon->getAlicuocon(); exit;
     $c = new Criteria();
     if ($nptipcon->getCodtipcon() != '') {
       if ($alic == 'S')
@@ -5042,6 +5043,11 @@ class Nomina {
         $nptipcon->setArt146(1);
       else
         $nptipcon->setArt146(0);
+	  
+	  if ($fid == 'S')
+        $nptipcon->setFid(1);
+      else
+        $nptipcon->setFid(0);	
 
       if (count($grid_nomina) > 0) {
         $sql1 = "delete from Npasinomcont where codtipcon='" . $nptipcon->getCodtipcon() . "'";
@@ -5080,11 +5086,43 @@ class Nomina {
             $npbonocont_new->setAntapvac('S');
           else
             $npbonocont_new->setAntapvac('N');
-
+			
           $npbonocont_new->save();
           $i++;
         }
       }
+	    #GRID Intereses
+	    $x = $grid_intereses[0];
+	    $j = 0;
+	    while ($j < count($x)) {
+	      $x[$j]->setCodcon($nptipcon->getCodcon());
+	      $x[$j]->save();
+	      $j++;
+	    }
+		$z = $grid_intereses[1];
+		$j = 0;
+		if (!empty ($z[$j])) {
+		  while ($j < count($z)) {
+		    $z[$j]->delete();
+		    $j++;
+		  }		
+		}   
+	    #GRID ANTIGUEDAD
+	    $x = $grid_antiguedad[0];
+	    $j = 0;
+	    while ($j < count($x)) {
+	      $x[$j]->setCodcon($nptipcon->getCodcon());
+	      $x[$j]->save();
+	      $j++;
+	    }
+		$z = $grid_antiguedad[1];
+		$j = 0;
+		if (!empty ($z[$j])) {
+		  while ($j < count($z)) {
+		    $z[$j]->delete();
+		    $j++;
+		  }		
+		}
       $nptipcon->save();
     }
     return true;
@@ -5228,8 +5266,8 @@ class Nomina {
           from Npasicaremp a,Nphojint b, npasiempcont c
           where  TO_NUMBER(TO_CHAR(b.fecing,'YYYY'),'9999')<='$perini' and  a.codemp=c.codemp and a.codnom=c.codnom and a.codemp=b.codemp and a.status='V' $sqlnom order by a.codemp";	
 	}
-    
-	  
+
+
     $arremp = array ();
     Herramientas :: BuscarDatos($sql, & $arremp1);
 

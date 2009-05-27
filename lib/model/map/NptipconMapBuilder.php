@@ -52,6 +52,10 @@ class NptipconMapBuilder {
 
 		$tMap->addColumn('DIAANO', 'Diaano', 'double', CreoleTypes::NUMERIC, false, 3);
 
+		$tMap->addColumn('FID', 'Fid', 'string', CreoleTypes::VARCHAR, false, 1);
+
+		$tMap->addColumn('FECDES', 'Fecdes', 'int', CreoleTypes::DATE, false, null);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

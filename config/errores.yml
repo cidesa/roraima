@@ -664,6 +664,15 @@
 462:
   cod: 462
   msj: No se puede Guardar sin Calcular su Prestaciones
+463:
+  cod: 463
+  msj: Faltan datos en el Grid Intereses
+464:
+  cod: 464
+  msj: Faltan datos en el Grid Antiguedad
+465:
+  cod: 465
+  msj: Si selecciona Fideicomiso debe ingresar la fecha desde  
 ###############OBRAS################
 1000:
     cod: 1000
@@ -990,7 +999,6 @@
 701:
   cod: 701
   msj: Código y Año ya Existe, Intente con otro.
-
 702:
   cod: 702
   msj: Id no Encontrado, fallo al borrar Detalle.
