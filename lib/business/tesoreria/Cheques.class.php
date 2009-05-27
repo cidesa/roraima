@@ -55,9 +55,9 @@ class Cheques
       $tsmovlib->setStacon("N");
       $tsmovlib->setFecing(date("Y-m-d"));
       $tsmovlib->save();
-      
+
       Comprobante::ActualizarReferenciaComprobante($Comprobante,$numche);
-      
+
     }
     else
     {
@@ -1058,7 +1058,15 @@ class Cheques
                                              $operacion,&$arrcompro)
   {
    //$Comprob=$numcomcon;
-   $Comprob = "########";
+   //$Comprob = "########";
+
+    $confcorcom=sfContext::getInstance()->getUser()->getAttribute('confcorcom');
+    if ($confcorcom=='N')
+    {
+    	 $Comprob=$numcomcon;
+    }else $Comprob = "########";
+
+
    if (true)
    {
       $ctas="";$movs="";$montos="";$desc="";
