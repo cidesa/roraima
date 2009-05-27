@@ -1853,14 +1853,23 @@ class Nomina {
       break;
 
       case "SIANOANT" :
-          $criterio = "Select coalesce(SUM(Monto),0) as campo from npHISCON A,NPCONSALINT B,NPNOMINA C where  A.CODCON=B.CODCON  and a.codemp='" . $empleado . "' AND  a.codNOM='" . $nomina . "' and  b.codNOM='" . $nomina . "' and a.codnom=c.codnom and a.codnom=b.codnom and A.FECNOM>=add_months(c.profec,-13) and A.FECNOM<=add_months(c.profec,-1) ";
-          if (Herramientas :: BuscarDatos($criterio, & $tabla)) {
-             $valor = $tabla[0]["campo"];
-          }
-          else
-          {
-            $valor = 0;
-          }
+         // $criterio = "Select coalesce(SUM(Monto),0) as campo from npHISCON A,NPCONSALINT B,NPNOMINA C where  A.CODCON=B.CODCON  and a.codemp='" . $empleado . "' AND  a.codNOM='" . $nomina . "' and  b.codNOM='" . $nomina . "' and a.codnom=c.codnom and a.codnom=b.codnom and A.FECNOM>=add_months(c.profec,-13) and A.FECNOM<=add_months(c.profec,-1) ";
+		$criterio = "Select coalesce(SUM(A.Monto),0) as campo from npHISCON A,NPCONSALINT B,NPNOMINA C where  A.CODCON=B.CODCON  and a.codemp='" . $empleado . "' AND  a.codNOM='" . $nomina . "' and  b.codNOM='" . $nomina . "' and a.codnom=c.codnom and a.codnom=b.codnom and A.FECNOM>=add_months(c.profec,-12)";
+		if (Herramientas :: BuscarDatos($criterio, & $tabla)) {
+           $valor = $tabla[0]["campo"];
+        }
+        else
+        {
+          $valor = 0;
+        }
+        $criterio = "Select coalesce(SUM(a.saldo),0) as campo from npnomcal A,NPCONSALINT B,NPNOMINA C where  A.CODCON=B.CODCON  and a.codemp='" . $empleado . "' AND  a.codNOM='" . $nomina . "' and  b.codNOM='" . $nomina . "' and a.codnom=c.codnom and a.codnom=b.codnom ";
+        if (Herramientas :: BuscarDatos($criterio, & $tabla)) {
+           $valor = $valor+$tabla[0]["campo"];
+        }
+        else
+        {
+          $valor = $valor + 0;
+        }
       break;
 
       default :
@@ -3144,14 +3153,23 @@ class Nomina {
       break;
 
       case "SIANOANT" :
-          $criterio = "Select coalesce(SUM(Monto),0) as campo from npHISCON A,NPCONSALINT B,NPNOMINA C where  A.CODCON=B.CODCON  and a.codemp='" . $empleado . "' AND  a.codNOM='" . $nomina . "' and  b.codNOM='" . $nomina . "' and a.codnom=c.codnom and a.codnom=b.codnom and A.FECNOM>=add_months(c.profec,-13) and A.FECNOM<=add_months(c.profec,-1) ";
-          if (Herramientas :: BuscarDatos($criterio, & $tabla)) {
-             $valor = $tabla[0]["campo"];
-          }
-          else
-          {
-            $valor = 0;
-          }
+         // $criterio = "Select coalesce(SUM(Monto),0) as campo from npHISCON A,NPCONSALINT B,NPNOMINA C where  A.CODCON=B.CODCON  and a.codemp='" . $empleado . "' AND  a.codNOM='" . $nomina . "' and  b.codNOM='" . $nomina . "' and a.codnom=c.codnom and a.codnom=b.codnom and A.FECNOM>=add_months(c.profec,-13) and A.FECNOM<=add_months(c.profec,-1) ";
+		$criterio = "Select coalesce(SUM(A.Monto),0) as campo from npHISCON A,NPCONSALINT B,NPNOMINA C where  A.CODCON=B.CODCON  and a.codemp='" . $empleado . "' AND  a.codNOM='" . $nomina . "' and  b.codNOM='" . $nomina . "' and a.codnom=c.codnom and a.codnom=b.codnom and A.FECNOM>=add_months(c.profec,-12)";
+		if (Herramientas :: BuscarDatos($criterio, & $tabla)) {
+           $valor = $tabla[0]["campo"];
+        }
+        else
+        {
+          $valor = 0;
+        }
+        $criterio = "Select coalesce(SUM(a.saldo),0) as campo from npnomcal A,NPCONSALINT B,NPNOMINA C where  A.CODCON=B.CODCON  and a.codemp='" . $empleado . "' AND  a.codNOM='" . $nomina . "' and  b.codNOM='" . $nomina . "' and a.codnom=c.codnom and a.codnom=b.codnom ";
+        if (Herramientas :: BuscarDatos($criterio, & $tabla)) {
+           $valor = $valor+$tabla[0]["campo"];
+        }
+        else
+        {
+          $valor = $valor + 0;
+        }
       break;
 
       default :
@@ -5023,7 +5041,7 @@ class Nomina {
   /*
   *   Tipos de Contratos Colectivos
   */
-  public static function salvar_presnomtipcon($nptipcon, $arreglo_arreglo, & $coderror) {  	
+  public static function salvar_presnomtipcon($nptipcon, $arreglo_arreglo, & $coderror) {
     $grid_alicuota_arreglos = $arreglo_arreglo[0][0];
     $grid_nomina = $arreglo_arreglo[1][0];
 	$grid_intereses = $arreglo_arreglo[2];
@@ -5043,11 +5061,11 @@ class Nomina {
         $nptipcon->setArt146(1);
       else
         $nptipcon->setArt146(0);
-	  
+
 	  if ($fid == 'S')
         $nptipcon->setFid(1);
       else
-        $nptipcon->setFid(0);	
+        $nptipcon->setFid(0);
 
       if (count($grid_nomina) > 0) {
         $sql1 = "delete from Npasinomcont where codtipcon='" . $nptipcon->getCodtipcon() . "'";
@@ -5086,7 +5104,7 @@ class Nomina {
             $npbonocont_new->setAntapvac('S');
           else
             $npbonocont_new->setAntapvac('N');
-			
+
           $npbonocont_new->save();
           $i++;
         }
@@ -5105,8 +5123,8 @@ class Nomina {
 		  while ($j < count($z)) {
 		    $z[$j]->delete();
 		    $j++;
-		  }		
-		}   
+		  }
+		}
 	    #GRID ANTIGUEDAD
 	    $x = $grid_antiguedad[0];
 	    $j = 0;
@@ -5121,7 +5139,7 @@ class Nomina {
 		  while ($j < count($z)) {
 		    $z[$j]->delete();
 		    $j++;
-		  }		
+		  }
 		}
       $nptipcon->save();
     }
@@ -5255,16 +5273,16 @@ class Nomina {
 	{
 		$sql = "Select  distinct a.codnom, a.codemp, b.nomemp, a.id, TO_CHAR(b.fecing,'YYYY')
           from Npasicaremp a,Nphojint b, npasiempcont c
-          where  TO_NUMBER(TO_CHAR(b.fecing,'YYYY'),'9999')<='$perini' and  
+          where  TO_NUMBER(TO_CHAR(b.fecing,'YYYY'),'9999')<='$perini' and
 		  (case when (to_char(date(now()),'mm')>to_char(fecing,'mm')) then 'SI'
-			when (to_char(date(now()),'mm')=to_char(fecing,'mm')) then (case when (to_char(date(now()),'dd')>=to_char(fecing,'mm')) then 'SI' else 'NO' end)  
-			else 'NO' end )='SI' and  
-		  a.codemp=c.codemp and a.codnom=c.codnom and a.codemp=b.codemp and a.status='V' $sqlnom order by a.codemp";		
+			when (to_char(date(now()),'mm')=to_char(fecing,'mm')) then (case when (to_char(date(now()),'dd')>=to_char(fecing,'mm')) then 'SI' else 'NO' end)
+			else 'NO' end )='SI' and
+		  a.codemp=c.codemp and a.codnom=c.codnom and a.codemp=b.codemp and a.status='V' $sqlnom order by a.codemp";
 	}
 	else{
 		$sql = "Select  distinct a.codnom, a.codemp, b.nomemp, a.id, TO_CHAR(b.fecing,'YYYY')
           from Npasicaremp a,Nphojint b, npasiempcont c
-          where  TO_NUMBER(TO_CHAR(b.fecing,'YYYY'),'9999')<='$perini' and  a.codemp=c.codemp and a.codnom=c.codnom and a.codemp=b.codemp and a.status='V' $sqlnom order by a.codemp";	
+          where  TO_NUMBER(TO_CHAR(b.fecing,'YYYY'),'9999')<='$perini' and  a.codemp=c.codemp and a.codnom=c.codnom and a.codemp=b.codemp and a.status='V' $sqlnom order by a.codemp";
 	}
 
 
