@@ -31,6 +31,7 @@
   'maxlength' => 8,
   'size' => 20,
   'control_name' => 'contabc[numcom]',
+  'readonly'  =>  $gencorrel=='S' ? true : false ,
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 
@@ -47,6 +48,7 @@
   'control_name' => 'contabc[reftra]',
   'onKeypress' => 'llenar_codigo(event)',
   'onBlur' => 'llenar2(event)',
+  'readOnly' => 'true',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 

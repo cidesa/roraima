@@ -14,6 +14,7 @@ class confincomgenActions extends autoconfincomgenActions
  public  $coderror1=-1;
  public  $coderror2=-1;
  public  $coderror3=-1;
+ public  $coderror4=-1;
 
   public function executeEdit()
   {
@@ -446,6 +447,7 @@ $this->Bitacora('Guardo');
     $this->destra = '';
     $this->monto = '';
     $this->formulario='';
+    $this->gencorrel=$this->getUser()->getAttribute('confcorcom','S');
   }
 
 
@@ -527,6 +529,11 @@ $this->Bitacora('Guardo');
        $err2 = Herramientas::obtenerMensajeError($this->coderror3);
        $this->getRequest()->setError('',$err2);
       }
+      if($this->coderror4!=-1)
+      {
+       $err4 = Herramientas::obtenerMensajeError($this->coderror4);
+       $this->getRequest()->setError('contabc{numcom}',$err4);
+      }
     }
     return sfView::SUCCESS;
   }
@@ -537,6 +544,16 @@ $this->Bitacora('Guardo');
     {
       $this->contabc = $this->getContabcOrCreate();
       $this->updateContabcFromRequest();
+
+      //validar q el numcom no exista en CONTABC
+      $c= new Criteria();
+      $c->add(ContabcPeer::NUMCOM,$this->getRequestParameter('contabc[numcom]'));
+      $datos = ContabcPeer::doSelectOne($c);
+      if ($datos)
+      {
+ 		$this->coderror4=196;
+        return false;
+      }
 
       if (Tesoreria::validaPeriodoCerrado($this->getRequestParameter('contabc[feccom]'))==true)
       {
