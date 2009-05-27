@@ -5305,7 +5305,16 @@ A.CODREDE"
     );
   }
 
+    public function Npdefcpt_Nomdefespconsue($params) {
+      $this->c = new Criteria();
+      $this->c->add(NpasiconnomPeer :: CODNOM, $params[0]);
+      $this->c->addJoin(NpdefcptPeer :: CODCON, NpasiconnomPeer :: CODCON);
 
+      $this->columnas = array (
+        NpdefcptPeer :: CODCON => 'Código',
+        NpdefcptPeer :: NOMCON => 'Descripción'
+    );
+  }
 }
 
 ?>
