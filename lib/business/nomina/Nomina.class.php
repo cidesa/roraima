@@ -5113,7 +5113,7 @@ class Nomina {
 	    $x = $grid_intereses[0];
 	    $j = 0;
 	    while ($j < count($x)) {
-	      $x[$j]->setCodcon($nptipcon->getCodcon());
+	      $x[$j]->setCodcon($nptipcon->getCodtipcon());
 	      $x[$j]->save();
 	      $j++;
 	    }
@@ -5129,7 +5129,7 @@ class Nomina {
 	    $x = $grid_antiguedad[0];
 	    $j = 0;
 	    while ($j < count($x)) {
-	      $x[$j]->setCodcon($nptipcon->getCodcon());
+	      $x[$j]->setCodcon($nptipcon->getCodtipcon());
 	      $x[$j]->save();
 	      $j++;
 	    }
