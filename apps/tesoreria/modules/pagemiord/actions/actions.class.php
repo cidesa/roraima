@@ -2314,7 +2314,7 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
    	$reftra="PR".substr($numord,2,6);
    	$t= new Criteria();
    	$t->add(ContabcPeer::REFTRA,$reftra);
-   	$resul= ContabcPeer::doSelectOne();
+   	$resul= ContabcPeer::doSelectOne($t);
    	if ($resul)
    	{
       $numero2=$resul->getNumcom();
