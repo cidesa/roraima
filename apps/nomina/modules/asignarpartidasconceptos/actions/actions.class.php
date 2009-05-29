@@ -47,13 +47,15 @@ class asignarpartidasconceptosActions extends autoasignarpartidasconceptosAction
      $sql = "Select Distinct npasicaremp.codnom,
            npasicaremp.codcar, npasiconemp.codcon, npasiparcon.codpar, '9' as id, npasiparcon.id as borrar
         From
-          npasicaremp  right outer JOIN npasiparcon on (npasicaremp.codnom=npasiparcon.codnom and npasicaremp.codcar=npasiparcon.codcar and npasiparcon.codcon='$codcon'),
+          npasicaremp  LEFT outer JOIN npasiparcon on (npasicaremp.codnom=npasiparcon.codnom and npasicaremp.codcar=npasiparcon.codcar and npasiparcon.codcon='$codcon'),
           npasiconemp
         Where
           npasicaremp.codcar=npasiconemp.codcar and
           npasiconemp.codcon='$codcon'
         Order By
           npasicaremp.codnom, npasicaremp.codcar, npasiconemp.codcon,  npasiparcon.codpar";
+
+    //echo $sql;
     $new_array = array();
 
     if (H::BuscarDatos($sql,&$registro))
