@@ -23,6 +23,8 @@ class oycdesconActions extends autooycdesconActions
       catch (Exception $ex){}
       $this->configGridPartidas($this->ocregcon->getCodobr(),$this->ocregcon->getId());
       $grid = Herramientas::CargarDatosGrid($this,$this->obj);
+      $grid = Herramientas::CargarDatosGrid($this,$this->obj3);
+
       $anno=substr($this->ocregcon->getFeccon(),0,4);
       $monto=$this->ocregcon->getMoncon();
   	  if (!Obras::chequearDisponibilidadPresupuesto($this->ocregcon->getCodpre(),$anno,$grid,'1',$monto,&$mondis))
@@ -66,8 +68,8 @@ class oycdesconActions extends autooycdesconActions
 
       if ($this->saveOcregcon($this->ocregcon)==-1)
       {
-      $this->setFlash('notice', 'Your modifications have been saved');
-$this->Bitacora('Guardo');
+       $this->setFlash('notice', 'Your modifications have been saved');
+       $this->Bitacora('Guardo');
 
       if ($this->getRequestParameter('save_and_add'))
       {
@@ -105,8 +107,8 @@ $this->Bitacora('Guardo');
     $opciones = new OpcionesGrid();
     $opciones->setEliminar(true);
     $opciones->setTabla('Ocingrescon');
-    $opciones->setAncho(600);
-    $opciones->setAnchoGrid(600);
+    $opciones->setAncho(700);
+    $opciones->setAnchoGrid(700);
     $opciones->setName('b');
     $opciones->setFilas(10);
     $opciones->setTitulo('Ingenieros Residentes');
@@ -441,6 +443,14 @@ $this->Bitacora('Guardo');
   protected function updateOcregconFromRequest()
   {
     $ocregcon = $this->getRequestParameter('ocregcon');
+    $this->setVars();
+    $this->tipeje=Constantes::comboTiposEjecucion();
+
+  	 $this->configGridIngRes($ocregcon['codcon']);
+  	 $this->configGridPartidas($ocregcon['codobr'],'');
+  	 $this->configGridRetenciones($ocregcon['codcon']);
+  	 $this->configGridOfertas($ocregcon['codcon']);
+
 
     if (isset($ocregcon['codcon']))
     {
@@ -1156,6 +1166,7 @@ $this->Bitacora('Guardo');
       }
      else  if ($this->getRequestParameter('ajax')=='3')
      {
+       $feclici="";
        $c= new Criteria();
        $c->add(OcadjobrPeer::CODOBR,$this->getRequestParameter('obra'));
        $c->add(OcadjobrPeer::STATUS,1);
@@ -1207,6 +1218,7 @@ $this->Bitacora('Guardo');
        {
        	$c = new Criteria;
         $c->add(OcproperPeer::CODPRO,$this->getRequestParameter('codpro'));
+        $c->add(OcdefperPeer::CEDPER,$this->getRequestParameter('codigo'));
         $c->addJoin(OcdefperPeer::CEDPER, OcproperPeer::CEDPER);
         $c->addJoin(OcdefperPeer::CODTIPCAR, OcdefempPeer::CODINGRES);
         $c->addJoin(OcdefperPeer::CODTIPCAR, OctipcarPeer::CODTIPCAR);
@@ -1224,6 +1236,7 @@ $this->Bitacora('Guardo');
          {
            $c = new Criteria;
            $c->add(OcproperPeer::CODPRO,$this->getRequestParameter('codpro'));
+           $c->add(OcdefperPeer::CEDPER,$this->getRequestParameter('codigo'));
            $c->addJoin(OcdefperPeer::CEDPER, OcproperPeer::CEDPER);
            $c->addJoin(OcdefperPeer::CODTIPCAR, OctipcarPeer::CODTIPCAR);
            $resultado= OcdefperPeer::doSelectOne($c);
@@ -1414,10 +1427,11 @@ $this->Bitacora('Guardo');
        $msj=$this->getRequestParameter('msj');
        $signo=$this->getRequestParameter('signo');
        $limpia=$this->getRequestParameter('blanco');
+       $javascript="";
 
       if (!Tesoreria::validarFechaMayorMenor($fec1,$fec2,$signo))
       {
-       $javascript="alert_('$signo'); $('$limpia').value='';";
+       $javascript="alert_('$msj'); $('$limpia').value=''; $('$limpia').focus();";
       }
       $output = '[["javascript","'.$javascript.'",""]]';
   	  $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');

@@ -4,7 +4,7 @@ generator:
     model_class:      Ocestado
     theme:            default
     fields:
-      codedo:       { name: Código Estado }
+      codedo:       { name: Código Estado, params: size=5 maxlength=4 }
       codpai:       { name: Código Paìs }
       nomedo:       { name: Nombre Estado}
       nompai:       { name: Nombre País}

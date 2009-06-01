@@ -9,7 +9,7 @@
 )) ?>
 
 <?php echo object_input_hidden_tag($ocinscon, 'getId') ?>
-<?php echo javascript_include_tag('dFilter','ajax','tools','observe') ?>
+<?php echo javascript_include_tag('dFilter','ajax','tools','observe','obras/ofertas') ?>
 <fieldset id="sf_fieldset_none" class="">
 <legend><?php echo __('Datos del Contrato')?></legend>
 <div class="form-row">
@@ -82,6 +82,37 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 <br>
+<?php echo label_for('ocinscon[codtipins]', __($labels['ocinscon{codtipins}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('ocinscon{codtipins}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('ocinscon{codtipins}')): ?>
+    <?php echo form_error('ocinscon{codtipins}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php echo input_auto_complete_tag('ocinscon[codtipins]', $ocinscon->getCodtipins(),
+    'oycinscon/autocomplete?ajax=2', array('autocomplete' => 'off',
+	'maxlength' => 4,
+    'size' => 10,
+    'readonly'  =>  $ocinscon->getId()!='' ? true : false ,
+    'onBlur'=> remote_function(array(
+    'url'      => 'oycinscon/ajax',
+    'complete' => 'AjaxJSON(request, json)',
+    'condition' => "$('ocinscon_codtipins').value != '' && $('id').value == ''",
+    'with' => "'ajax=5&cajtexmos=ocinscon_destipins&cajtexcom=ocinscon_codtipins&codigo='+this.value"
+    ))),
+     array('use_style' => 'true')
+  )
+?>
+
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Octipins_Oycdefemp/clase/Octipins/frame/sf_admin_edit_form/obj1/ocinscon_codtipins/obj2/ocinscon_destipins/campo1/codtipins/campo2/destipins','','','botoncat')?>
+
+  <?php $value = object_input_tag($ocinscon, 'getDestipins', array (
+  'disabled' => true,
+  'size' => 60,
+  'control_name' => 'ocinscon[destipins]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+
+<br>
   <?php echo label_for('ocinscon[numins]', __($labels['ocinscon{numins}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('ocinscon{numins}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('ocinscon{numins}')): ?>
@@ -90,6 +121,7 @@
 
   <?php $value = object_input_tag($ocinscon, 'getNumins', array (
   'size' => 20,
+  'readonly'  =>  $ocinscon->getId()!='' ? true : false ,
   'control_name' => 'ocinscon[numins]',
   'onBlur'  => "javascript: valor=this.value; valor=valor.pad(3, '0',0);document.getElementById('ocinscon_numins').value=valor; verificar();",
 )); echo $value ? $value : '&nbsp;' ?>
@@ -108,9 +140,16 @@
   <?php $value = object_input_date_tag($ocinscon, 'getFeccom', array (
   'rich' => true,
   'maxlength' => 10,
+  'readonly'  =>  $ocinscon->getId()!='' ? true : false ,
   'calendar_button_img' => '/sf/sf_admin/images/date.png',
   'control_name' => 'ocinscon[feccom]',
   'onkeyup' => "javascript: mascara(this,'/',patron,true)",
+  'onBlur'=> remote_function(array(
+        'url'      => 'oycinscon/ajax',
+        'complete' => 'AjaxJSON(request, json)',
+        'condition' => "$('id').value == ''",
+        'with' => "'ajax=3&numcon='+$('ocinscon_codcon').value+'&codigo='+this.value"
+        ))
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </th>
@@ -127,9 +166,16 @@
   <?php $value = object_input_date_tag($ocinscon, 'getFecter', array (
   'rich' => true,
   'maxlength' => 10,
+  'readonly'  =>  $ocinscon->getId()!='' ? true : false ,
   'calendar_button_img' => '/sf/sf_admin/images/date.png',
   'control_name' => 'ocinscon[fecter]',
   'onkeyup' => "javascript: mascara(this,'/',patron,true)",
+  'onBlur'=> remote_function(array(
+        'url'      => 'oycinscon/ajax',
+        'complete' => 'AjaxJSON(request, json)',
+        'condition' => "$('id').value == ''",
+        'with' => "'ajax=4&fecini='+$('ocinscon_feccom').value+'&codigo='+this.value"
+        ))
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </th>
@@ -145,6 +191,7 @@
 
   <?php $value = object_input_tag($ocinscon, array('getPortietra',true), array (
   'size' => 7,
+  'readonly' => true,
   'control_name' => 'ocinscon[portietra]',
   'onBlur' => "javascript:event.keyCode=13; return entermontootro(event, this.id)",
 )); echo $value ? $value : '&nbsp;' ?>
@@ -174,8 +221,21 @@
 </li>
   </ul>
 <script language="JavaScript" type="text/javascript">
+   var nuevo='<?php echo $ocinscon->getId();?>';
+   if (nuevo!="")
+   {
+     actualizarsaldos();
+     $$('.botoncat')[0].disabled=true;
+     $$('.botoncat')[1].disabled=true;
+     $('trigger_ocinscon_feccom').hide();
+     $('trigger_ocinscon_fecter').hide();
+
+   }
+
   function verificar()
   {
+  	if (nuevo=="")
+  	{
   	if ($('ocinscon_codcon').value!="")
   	{
   	if ($('ocinscon_stacon').value!='E')
@@ -189,5 +249,6 @@
     	alert('Debe introducir el Código de Contrato');
   	    $('ocinscon_numins').value="";
     }
+  	}
   }
 </script>

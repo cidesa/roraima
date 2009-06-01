@@ -3504,14 +3504,15 @@ $this->c= new Criteria();
   public function Ocdefpar_Oycinscon($param) {
     $this->c = new Criteria();
     $this->c->add(OcparconPeer :: CODCON, $param[0]);
-    $this->c->addJoin(OcdefparPeer :: CODPAR, OcparconPeer :: CODPAR);
+    $this->c->addJoin(OcparconPeer :: CODPAR,OcdefparPeer :: CODPAR);
     $this->c->addJoin(OcdefparPeer :: CODUNI, OcunidadPeer :: CODUNI);
 
     $this->columnas = array (
       OcdefparPeer :: CODPAR => 'Código Partida',
       OcdefparPeer :: DESPAR => 'Descripción',
       OcunidadPeer :: ABRUNI => 'Unidad',
-      OcparconPeer :: CANCON => 'Cant. Contrada'
+      OcparconPeer :: CANCON => 'Cant. Contrada',
+      OcparconPeer :: CODCON => 'N° de Contrato'
     );
   }
 
@@ -5276,6 +5277,17 @@ A.CODREDE"
     );
 
   }
+
+   public function Octipins_Oycdefemp() {
+    $this->c = new Criteria();
+
+      $this->columnas = array (
+      OctipinsPeer :: CODTIPINS => 'Codigo',
+      OctipinsPeer :: DESTIPINS => 'Descripcion'
+    );
+
+  }
+
 
 
 

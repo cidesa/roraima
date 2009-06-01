@@ -42,4 +42,10 @@ class Ocinscon extends BaseOcinscon
 
   }
 
+    public function getDestipins(){
+
+    return Herramientas::getX('Codtipins','Octipins','Destipins',self::getCodtipins());
+
+  }
+
 }

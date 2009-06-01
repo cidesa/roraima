@@ -22,7 +22,8 @@ class oycregactActions extends autooycregactActions
       $this->saveOcregact($this->ocregact);
 
       $this->setFlash('notice', 'Your modifications have been saved');
-$this->Bitacora('Guardo');
+
+      $this->Bitacora('Guardo');
 
       if ($this->getRequestParameter('save_and_add'))
       {
@@ -240,6 +241,7 @@ $this->Bitacora('Guardo');
 		$output = '[["javascript","'.$javascript.'",""]]';
         break;
       case '5':
+      $dato="";
         $c= new Criteria();
         $c->add(NphojintPeer::CEDEMP,$codigo);
         $reg=NphojintPeer::doSelectOne($c);
@@ -314,7 +316,7 @@ $this->Bitacora('Guardo');
 
   protected function saveOcregact($ocregact)
   {
-    $ocregact->save();
+
     $c= new Criteria();
     $c->add(OcasiactPeer::CODCON,$ocregact->getCodcon());
     $c->add(OcasiactPeer::CODTIPACT,$ocregact->getCodtipact());
@@ -327,7 +329,9 @@ $this->Bitacora('Guardo');
        $ocasiact->setNumofi($ocregact->getNumofi());
        $ocasiact->setObsact($ocregact->getObsact());
        $ocasiact->setFecact($ocregact->getFecact());
-       $ocasiact->save();
+       $ocasiact->save(); //Graba Detalle de la acta
+
+       $ocregact->save(); //Graba los datos de la acta
 
     }
     Obras::actualizarFechas($ocregact);

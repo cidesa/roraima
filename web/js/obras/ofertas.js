@@ -1,3 +1,4 @@
+// Registro de Obras
   function ajaxpartida(e,id)
   {
    var aux = id.split("_");
@@ -133,7 +134,7 @@
     $('ocregobr_ivaobr').focus();
    }
  }
-
+//Registro de Contratistas
 
   function ajaxrecaudo(e,id)
   {
@@ -179,7 +180,7 @@
     }
    }
   }
-
+//Registro de Contrato
   function calcular_contratro()
   {
        var moncon=toFloat('ocregcon_moncon');
@@ -192,7 +193,7 @@
        $('ocregcon_monful').value=format(total.toFixed(2),'.',',','.');
 
   }
-
+//Registro de Inspecciones
   function ajaxpartidains(e,id)
   {
    var aux = id.split("_");
@@ -203,17 +204,19 @@
    var coldes=col+1;
    var coluni=col+2;
    var colcon=col+3;
+   var colcont=col+6;
    var descripcion=name+"_"+fil+"_"+coldes;
    var unidad=name+"_"+fil+"_"+coluni;
    var cancon=name+"_"+fil+"_"+colcon;
+   var numcont=name+"_"+fil+"_"+colcont;
    var cod=$(id).value;
    var contrato=$('ocinscon_codcon').value;
 
    if (e.keyCode==13 || e.keyCode==9)
    {
-    if ($(id).value!="")
+    if ($(id).value!="" && $('id').value=="")
     {
-     new Ajax.Request('/obras_dev.php/oycinscon/ajax', {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=2&cajtexmos='+descripcion+'&cajtexcom='+id+'&unidad='+unidad+'&cancon='+cancon+'&contrato='+contrato+'&codigo='+cod})
+     new Ajax.Request('/obras_dev.php/oycinscon/ajax', {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=2&cajtexmos='+descripcion+'&cajtexcom='+id+'&unidad='+unidad+'&cancon='+cancon+'&contrato='+contrato+'&numcont='+numcont+'&codigo='+cod})
     }
    }
   }
@@ -239,7 +242,7 @@
        }
    }
   }
-
+//Registro de Obras
 
   function ajaxinsobr(e,id)
   {
@@ -260,6 +263,7 @@
     }
    }
   }
+//Registro del Contrato
 
   function cargarpartidas()
   {
@@ -469,8 +473,8 @@
 	   {
          if ($('ocregcon_feccon').value!='')
          {
-	       var msjes='La Fecha de la Licitaci&oacute;n es Inv&aacute;lida debe ser menor a la Fecha de Contrataci&oacute;n';
-	       new Ajax.Request('/obras_dev.php/oycdescon/ajax', {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=12&fecha1='+fec+'&signo='+signo+'&msj='+msjes+'&blanco=ocregobr_feclic&fecha2='+fec1})
+	       var msjes='La Fecha de la Licitacion es Invalida debe ser menor a la Fecha de Contratacion';
+	       new Ajax.Request('/obras_dev.php/oycdescon/ajax', {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=12&fecha1='+fec+'&signo='+signo+'&msj='+msjes+'&blanco=ocregcon_feclic&fecha2='+fec1})
          }
 	   }
      }
@@ -497,13 +501,13 @@
 	   else if ($('ocregcon_feclic').value!='')
        {
 	       var signo='>';
-	       var msjes='La Fecha de Otorg. Buena Pro Inv&aacute;lida debe ser mayor a la Fecha de Licitaci&oacute;n';
+	       var msjes='La Fecha de Otorg. Buena Pro Invalida debe ser mayor a la Fecha de Licitacion';
 	       new Ajax.Request('/obras_dev.php/oycdescon/ajax', {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=12&fecha1='+fec1+'&signo='+signo+'&msj='+msjes+'&blanco=ocregcon_fecbuepro&fecha2='+fec})
        }
        else  if ($('ocregcon_feccon').value!='')
        {
          var signo='<';
-	     var msjes='La Fecha de Otorg. Buena Pro Inv&aacute;lida debe ser menor a la Fecha de Contrataci&oacute;n';
+	     var msjes='La Fecha de Otorg. Buena Pro Invalida debe ser menor a la Fecha de Contratacion';
 	     new Ajax.Request('/obras_dev.php/oycdescon/ajax', {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=12&fecha1='+fec1+'&signo='+signo+'&msj='+msjes+'&blanco=ocregcon_fecbuepro&fecha2='+fec2})
        }
 	 }
@@ -530,15 +534,14 @@
 	   else if ($('ocregcon_feclic').value!='')
        {
 	       var signo='>';
-	       var msjes='La Fecha de Contrataci&oacute;n Inv&aacute;lida debe ser mayor a la Fecha de Licitaci&oacute;n';
-	       new Ajax.Request('/obras_dev.php/oycdescon/ajax', {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=12&fecha1='+fec2+'&signo='+signo+'&msj='+msjes+'&blanco=ocregobr_feccon&fecha2='+fec})
+	       var msjes='La Fecha de Contratacion Invalida debe ser mayor a la Fecha de Licitacion';
+	       new Ajax.Request('/obras_dev.php/oycdescon/ajax', {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=12&fecha1='+fec2+'&signo='+signo+'&msj='+msjes+'&blanco=ocregcon_feccon&fecha2='+fec})
        }
        else  if ($('ocregcon_fecbuepro').value!='')
        {
            var signo='>';
-	       var msjes='La Fecha de Contrataci&oacute;n Inv&aacute;lida debe ser mayor a la Fecha de Otorg. Buena Pro';
-	       new Ajax.Request('/obras_dev.php/oycdescon/ajax', {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=12&fecha1='+fec2+'&signo='+signo+'&msj='+msjes+'&blanco=ocregobr_feccon&fecha2='+fec1})
-
+	       var msjes='La Fecha de Contratacion Invalida debe ser mayor a la Fecha de Otorg. Buena Pro';
+	       new Ajax.Request('/obras_dev.php/oycdescon/ajax', {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=12&fecha1='+fec2+'&signo='+signo+'&msj='+msjes+'&blanco=ocregcon_feccon&fecha2='+fec1})
        }
        else
        {
@@ -682,26 +685,26 @@
 	   else if ($('ocregcon_feclic').value!='')
        {
 	       var signo='>';
-	       var msjes='La Fecha de Terminaci&oacute;n Inv&aacute;lida debe ser mayor a la Fecha de Licitaci&oacute;n';
-	       new Ajax.Request('/obras_dev.php/oycdescon/ajax', {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=12&fecha1='+fec4+'&signo='+signo+'&msj='+msjes+'&blanco=ocregobr_fecfin&fecha2='+fec})
+	       var msjes='La Fecha de Terminacion Invalida debe ser mayor a la Fecha de Licitacion';
+	       new Ajax.Request('/obras_dev.php/oycdescon/ajax', {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=12&fecha1='+fec4+'&signo='+signo+'&msj='+msjes+'&blanco=ocregcon_fecfin&fecha2='+fec})
        }
        else  if ($('ocregcon_fecbuepro').value!='')
        {
 	       var signo='>';
-	       var msjes='La Fecha de Terminaci&oacute;n Inv&aacute;lida debe ser mayor a la Fecha de Otorg. Buena Pro';
-	       new Ajax.Request('/obras_dev.php/oycdescon/ajax', {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=12&fecha1='+fec4+'&signo='+signo+'&msj='+msjes+'&blanco=ocregobr_fecfin&fecha2='+fec1})
+	       var msjes='La Fecha de Terminacion Invalida debe ser mayor a la Fecha de Otorg. Buena Pro';
+	       new Ajax.Request('/obras_dev.php/oycdescon/ajax', {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=12&fecha1='+fec4+'&signo='+signo+'&msj='+msjes+'&blanco=ocregcon_fecfin&fecha2='+fec1})
        }
        else  if ($('ocregcon_feccon').value!='')
        {
  	       var signo='>';
-	       var msjes='La Fecha de Terminaci&oacute;n Inv&aacute;lida debe ser mayor a la Fecha de Contrataci&oacute;n';
-	       new Ajax.Request('/obras_dev.php/oycdescon/ajax', {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=12&fecha1='+fec4+'&signo='+signo+'&msj='+msjes+'&blanco=ocregobr_fecfin&fecha2='+fec3})
+	       var msjes='La Fecha de Terminacion Invalida debe ser mayor a la Fecha de Contratacion';
+	       new Ajax.Request('/obras_dev.php/oycdescon/ajax', {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=12&fecha1='+fec4+'&signo='+signo+'&msj='+msjes+'&blanco=ocregcon_fecfin&fecha2='+fec3})
        }
        else  if ($('ocregcon_fecini').value!='')
        {
          var signo='>';
-	     var msjes='La Fecha de Terminaci&oacute;n Inv&aacute;lida debe ser mayor a la Fecha de Inicio';
-	     new Ajax.Request('/obras_dev.php/oycdescon/ajax', {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=12&fecha1='+fec4+'&signo='+signo+'&msj='+msjes+'&blanco=ocregobr_fecfin&fecha2='+fec2})
+	     var msjes='La Fecha de Terminacion Invalida debe ser mayor a la Fecha de Inicio';
+	     new Ajax.Request('/obras_dev.php/oycdescon/ajax', {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=12&fecha1='+fec4+'&signo='+signo+'&msj='+msjes+'&blanco=ocregcon_fecfin&fecha2='+fec2})
        }
 	 }
   }
@@ -1252,6 +1255,7 @@
      new Ajax.Request('/obras_dev.php/oycdescon/ajax', {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=15&contrato='+cont+'&partida='+partida})
   }
 
+//Adjudicacion de Obras
   function validaradj()
   {
     if ($('ocadjobr_codprogan').value=='')
@@ -1261,6 +1265,7 @@
     }
   }
 
+//Valuaciones
   function totalizar()
   {
     var num1=toFloat('ocregval_subtot');
@@ -1269,4 +1274,653 @@
     var calculo= num1 +num2;
 
     $('ocregval_totiva').value=format(calculo.toFixed(2),'.',',','.');
+  }
+
+
+  function calcularprecio(e,id)
+ {
+  if (e.keyCode==13 || e.keyCode==9)
+  {
+   var aux = id.split("_");
+   var name=aux[0];
+   var fil=aux[1];
+   var col=parseInt(aux[2]);
+
+   var colcanfin=col-1;
+   var coltotal=col+1;
+
+   var canfin=name+"_"+fil+"_"+colcanfin;
+   var camtotal=name+"_"+fil+"_"+coltotal;
+
+   var num1=toFloat(id);
+   var ncanfin=toFloat(canfin);
+   var nmoncon=toFloat('ocregval_moncon');
+   var ntotiva=toFloat('ocregval_totiva');
+
+   if ($(id).value!="")
+   {
+       if (!validarnumero(id))
+	   {
+	    alert_('Dato Inv&aacute;lido');
+	    $(id).value="0,00";
+	    $(camtotal).value="0,00";
+	   }
+	   else
+	   {
+         if (num1>0)
+         {
+           $(id).value=format(num1.toFixed(2),'.',',','.');
+           caltotal= ncanfin * num1;
+           $(camtotal).value=format(caltotal.toFixed(2),'.',',','.');
+           total_partidas();
+           if (nmoncon >= ntotiva)
+           {
+            if ($('id').value!="")
+            {
+              var totreg=parseInt($('ocregval_filasret').value);
+                  var l=0;
+				  while (l<totreg)
+				  {
+                   var codigo="bx"+"_"+l+"_1";
+                   var stamon="bx"+"_"+l+"_8";
+                   var porcentaje="bx"+"_"+l+"_3";
+                   var baseimp="bx"+"_"+l+"_4";
+                   var monto="bx"+"_"+l+"_9";
+                   var nbase=toFloat(baseimp);
+                   var nporcen=toFloat(porcentaje);
+                   if ($(codigo).value!="" && $(monto).value!="0,00")
+                   {
+                    //lost_focus de la columna 3
+                    if ($(porcentaje).value!="")
+                    {
+                       if (!validarnumero(porcentaje))
+					   {
+					    alert_('Dato Inv&aacute;lido');
+					    $(porcentaje).value="0,00";
+					   }
+					   else
+					   {
+                         if (!verificar_porret())
+                         {
+                           alert('La Suma de la Columna debe ser menor que 100%');
+                           $(porcentaje).value="0,00";
+                         }
+                         else
+                         {
+                           ntotsiniva=toFloat('ocregval_totsiniva');
+                           if ($('ocregval_totsiniva').value!="")
+                           {
+                             if ($('ocregval_totsiniva').value!="0,00")
+                             {
+                               if ($(stamon).value=='N')
+                               {
+                                 var nmonper=toFloat('ocregval_monper');
+                                  var cal1= ((nmonper*nbase)/100);
+                                  var cal2= ((cal1*nporcen)/100);
+                                  $(monto).value=format(cal2.toFixed(2),'.',',','.');
+                               }
+                               else
+                               {
+                                 if ($('valret').value!=$('ocregval_codtipval').value)
+                                 {
+                                   var ntotiva=toFloat('ocregval_totiva');
+                                   var cal1= ((ntotiva*nbase)/100);
+                                   var cal2= ((cal1*nporcen)/100);
+                                   $(monto).value=format(cal2.toFixed(2),'.',',','.');
+                                   $('ocregval_monfia').value=$(monto).value;
+                                 }
+                               }
+
+                               if (!verificar_fianzas())
+                               {
+                                 alert('La suma de las fianzas no puede ser mayor al monto del contrato');
+                                 $(porcentaje).value="0,00";
+                                 $(monto).value="0,00";
+                               }
+                             }
+                           }
+                           else
+                           {
+                             alert('No existe registro del monto del contrato');
+                             $(monto).value="0,00";
+                           }
+                         }
+					   }
+                    }
+                    // Fin lost_focus 3
+                     calcular_total_deducciones();
+                   }
+				   l++;
+				  }
+            }
+            calcular_variaciones();
+           }
+         }
+         else{
+          alert_('El Dato de ser mayor que cero');
+          $(id).value="0,00";
+          $(camtotal).value="0,00";
+         }
+	   }
+	   total_partidas();
+   }
+  }
+ }
+
+ function cantidadFinal(e,id)
+ {
+  if (e.keyCode==13 || e.keyCode==9)
+  {
+   var aux = id.split("_");
+   var name=aux[0];
+   var fil=aux[1];
+   var col=parseInt(aux[2]);
+
+   var colcancon=col-2;
+   var colcanval=col-1;
+   var colcost=col+1;
+   var coltotal=col+2;
+
+   var cantcon=name+"_"+fil+"_"+colcancon;
+   var cantval=name+"_"+fil+"_"+colcanval;
+   var camcosto=name+"_"+fil+"_"+colcost;
+   var camtotal=name+"_"+fil+"_"+coltotal;
+
+   var num1=toFloat(id);
+   var ncantcon=toFloat(cantcon);
+   var ncantval=toFloat(cantval);
+   var ncamcosto=toFloat(camcosto);
+
+  if ($('valpar').value==$('ocregval_codtipval').value || $('valfinal').value==$('ocregval_codtipval').value)
+  {
+   if ($(id).value!="")
+   {
+       if (!validarnumero(id))
+	   {
+	    alert_('Dato Inv&aacute;lido');
+	    $(id).value="0,00";
+	    $(camtotal).value="0,00";
+	   }
+	   else
+	   {
+         if (num1>=0)
+         {
+            if (ncantcon>0)
+            {
+              var multiplica=num1*ncamcosto;
+              $(camtotal).value=format(multiplica.toFixed(2),'.',',','.');
+              total_partidas();
+              var nmoncon=toFloat('ocregval_moncon');
+              var ntotiva=toFloat('ocregval_totiva');
+              if (nmoncon>=ntotiva)
+              {
+                if ($('valfinal').value!=$('ocregval_codtipval').value && nmoncon==ntotiva)
+                {
+                  alert_('No debe valuar la Totalidad del Contrato en una Valuaci&oacute;n Parcial');
+                  $(id).value="0,00";
+            	  $(camtotal).value="0,00";
+            	  $(id).focus();
+                }
+                else
+                {
+                  var totreg=parseInt($('ocregval_filasret').value);
+                  var l=0;
+				  while (l<totreg)
+				  {
+                   var codigo="bx"+"_"+l+"_1";
+                   var stamon="bx"+"_"+l+"_8";
+                   var porcentaje="bx"+"_"+l+"_3";
+                   var baseimp="bx"+"_"+l+"_4";
+                   var monto="bx"+"_"+l+"_9";
+                   var nbase=toFloat(baseimp);
+                   var nporcen=toFloat(porcentaje);
+                   if ($(codigo).value!="" && $(monto).value!="0,00")
+                   {
+                    //lost_focus de la columna 3
+                    if ($(porcentaje).value!="")
+                    {
+                       if (!validarnumero(porcentaje))
+					   {
+					    alert_('Dato Inv&aacute;lido');
+					    $(porcentaje).value="0,00";
+					   }
+					   else
+					   {
+                         if (!verificar_porret())
+                         {
+                           alert('La Suma de la Columna debe ser menor que 100%');
+                           $(porcentaje).value="0,00";
+                         }
+                         else
+                         {
+                           ntotsiniva=toFloat('ocregval_totsiniva');
+                           if ($('ocregval_totsiniva').value!="")
+                           {
+                             if ($('ocregval_totsiniva').value!="0,00")
+                             {
+                               if ($(stamon).value=='N')
+                               {
+                                 var nmonper=toFloat('ocregval_monper');
+                                  var cal1= ((nmonper*nbase)/100);
+                                  var cal2= ((cal1*nporcen)/100);
+                                  $(monto).value=format(cal2.toFixed(2),'.',',','.');
+                               }
+                               else
+                               {
+                                 if ($('valret').value!=$('ocregval_codtipval').value)
+                                 {
+                                   var ntotiva=toFloat('ocregval_totiva');
+                                   var cal1= ((ntotiva*nbase)/100);
+                                   var cal2= ((cal1*nporcen)/100);
+                                   $(monto).value=format(cal2.toFixed(2),'.',',','.');
+                                   $('ocregval_monfia').value=$(monto).value;
+                                 }
+                               }
+
+                               if (!verificar_fianzas())
+                               {
+                                 alert('La suma de las fianzas no puede ser mayor al monto del contrato');
+                                 $(porcentaje).value="0,00";
+                                 $(monto).value="0,00";
+                               }
+                             }
+                           }
+                           else
+                           {
+                             alert('No existe registro del monto del contrato');
+                             $(monto).value="0,00";
+                           }
+                         }
+					   }
+                    }
+                    // Fin lost_focus 3
+                     calcular_total_deducciones();
+                   }
+				   l++;
+				  }
+                 calcular_variaciones();
+                }
+
+              }
+              else
+              {
+                alert('El Monto Valuado excede el Monto Original del Contrato');
+                $(id).value="0,00";
+         	    $(camtotal).value="0,00";
+                $(id).focus();
+              }
+            }
+         }
+         else{
+          alert_('El Dato de ser mayor o igual a cero');
+          $(id).value="0,00";
+          $(camtotal).value="0,00";
+          $(id).focus();
+         }
+	   }
+	 }
+   }
+  }
+ }
+
+ function verificar_porret()
+ {
+   var tot_porcen=0;
+
+   var totreg=parseInt($('ocregval_filasret').value);
+   var l=0;
+   while (l<totreg)
+   {
+     var monto="bx"+"_"+l+"_3";
+
+     var nmonto=toFloat(monto);
+     tot_porcen= tot_porcen + nmonto;
+    l++;
+   }
+
+   if (tot_porcen>100)
+   {
+     porcentaje_ret=false;
+   }
+   else
+   {
+       porcentaje_ret=true;
+   }
+
+   return porcentaje_ret;
+ }
+
+ function verificar_fianzas()
+ {
+   var monto_fianza=0;
+   var verifica_fianza=true;
+
+   var totreg=parseInt($('ocregval_filasret').value);
+   var l=0;
+   while (l<totreg)
+   {
+     var codigo="bx"+"_"+l+"_1";
+     var monto="bx"+"_"+l+"_3";
+
+     var nmonto=toFloat(monto);
+     if ($(codigo).value!="")
+     {
+       monto_fianza= monto_fianza + nmonto;
+     }
+    l++;
+   }
+
+   ntotsiniva=toFloat('ocregval_totsiniva');
+
+   if (monto_fianza>ntotsiniva)
+   {
+     verifica_fianza=false;
+   }
+
+   return verifica_fianza;
+ }
+
+ function calcular_total_deducciones()
+ {
+   var montotdeduc=0;
+   var monacumdeduc=0;
+   var totreg=parseInt($('ocregval_filasret').value);
+   var l=0;
+  while (l<totreg)
+  {
+    var codigo="bx"+"_"+l+"_1";
+    var stamon="bx"+"_"+l+"_8";
+    var porcentaje="bx"+"_"+l+"_3";
+    var baseimp="bx"+"_"+l+"_4";
+    var monto="bx"+"_"+l+"_9";
+    var nbase=toFloat(baseimp);
+    var nporcen=toFloat(porcentaje);
+     //lost_focus de la columna 3
+     if ($(porcentaje).value!="")
+     {
+        if (!validarnumero(porcentaje))
+	   {
+	    alert_('Dato Inv&aacute;lido');
+	    $(porcentaje).value="0,00";
+	   }
+	   else
+	   {
+          if (!verificar_porret())
+          {
+            alert('La Suma de la Columna debe ser menor que 100%');
+            $(porcentaje).value="0,00";
+          }
+          else
+          {
+            ntotsiniva=toFloat('ocregval_totsiniva');
+            if ($('ocregval_totsiniva').value!="")
+            {
+              if ($('ocregval_totsiniva').value!="0,00")
+              {
+                if ($(stamon).value=='N')
+                {
+                  var nmonper=toFloat('ocregval_monper');
+                   var cal1= ((nmonper*nbase)/100);
+                   var cal2= ((cal1*nporcen)/100);
+                   $(monto).value=format(cal2.toFixed(2),'.',',','.');
+                }
+                else
+                {
+                  if ($('valret').value!=$('ocregval_codtipval').value)
+                  {
+                    var ntotiva=toFloat('ocregval_totiva');
+                    var cal1= ((ntotiva*nbase)/100);
+                    var cal2= ((cal1*nporcen)/100);
+                    $(monto).value=format(cal2.toFixed(2),'.',',','.');
+                    $('ocregval_monfia').value=$(monto).value;
+                  }
+                }
+
+                if (!verificar_fianzas())
+                {
+                  alert('La suma de las fianzas no puede ser mayor al monto del contrato');
+                  $(porcentaje).value="0,00";
+                  $(monto).value="0,00";
+                }
+              }
+             }
+             else
+             {
+               alert('No existe registro del monto del contrato');
+               $(monto).value="0,00";
+             }
+           }
+         }
+        }
+        nmontos=toFloat(monto);
+        // Fin lost_focus 3
+        if ($(stamon).value=='N')
+        {
+          montotdeduc= montotdeduc + nmontos;
+        }
+
+        monacumdeduc= monacumdeduc + nmontos;
+
+   l++;
+  }
+
+  $('ocregval_totded').value=format(montotdeduc.toFixed(2),'.',',','.');
+  $('ocregval_salliq').value=format(monacumdeduc.toFixed(2),'.',',','.');
+ }
+
+
+ function calcular_variaciones()
+ {
+   $('ocregval_monaumtot').value=0;
+   $('ocregval_mondistot').value=0;
+   $('ocregval_monexttotal').value=0;
+   var monaumtot=0;
+   var mondistot=0;
+   var monexttotal=0;
+
+    var totpar=parseInt($('ocregval_filaspar').value);
+    var i=0;
+    while (i<totpar)
+    {
+      var mondism=0;
+      var monaum=0;
+      var monext=0;
+      var mondisprec=0;
+      var monaumprec=0;
+
+     var codpar="ax"+"_"+i+"_1";
+     var canfinal="ax"+"_"+i+"_6";
+     var cancosto="ax"+"_"+i+"_7";
+     var stotal="ax"+"_"+i+"_8";
+
+     var ncanfinal=toFloat(canfinal);
+     var nstotal=toFloat(stotal);
+     var ncancosto=toFloat(cancosto);
+
+     new Ajax.Request('/obras_dev.php/oycval/ajax', {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json), total_partidas();}, parameters:'ajax=10&partida='+$(codpar).value+'&canfinal='+$(canfinal).value+'&total='+$(stotal).value+'&poriva='+$('ocregval_poriva').value+'&costo='+$(cancosto).value+'&monaumtot='+$('ocregval_monaumtot').value+'&mondistot='+$('ocregval_mondistot').value+'&monexttotal='+$('ocregval_monexttotal').value+'&obra='+$('ocregval_codobr').value})
+
+     i++;
+    }
+  }
+
+  function total_partidas()
+  {
+    var montototalpartidas=0;
+    var porcen_acumulado=0;
+    var montototalacumpartidas=0;
+    var suma_columnas=0;
+    var iva_acum=0;
+    var nporiva=toFloat('ocregval_poriva');
+    var nmoncon=toFloat('ocregval_moncon');
+
+    var totpar=parseInt($('ocregval_filaspar').value);
+    var i=0;
+    while (i<totpar)
+    {
+      var canval="ax"+"_"+i+"_5";
+      var canfin="ax"+"_"+i+"_6";
+      var costo="ax"+"_"+i+"_7";
+      var stotal="ax"+"_"+i+"_8";
+
+      var ncanval=toFloat(canval);
+      var ncanfin=toFloat(canfin);
+      var nstotal=toFloat(stotal);
+      var ncosto=toFloat(costo);
+
+      //falta pero no se utiliza este codigo en ninguna parte
+
+      if ($(stotal).value!="")
+      {
+        if ($('valant').value!=$('ocregval_codtipval').value && $('valret').value!=$('ocregval_codtipval').value && $('id').value=="")
+        {
+          suma_columnas= ncanval + ncanfin;
+          montototalacumpartidas= montototalacumpartidas + (suma_columnas * ncosto);
+        }
+        else
+        {
+          suma_columnas=0;
+          montototalacumpartidas=0;
+        }
+        montototalpartidas= montototalpartidas + nstotal;
+      }
+     i++;
+    }
+
+    switch ($('ocregval_codtipval').value)
+    {
+      case ($('valpar').value):
+       var caliva=((montototalacumpartidas*nporiva)/100);
+       iva_acum= format(caliva.toFixed(2),'.',',','.');
+       montototalacumpartidas= montototalacumpartidas + caliva;
+       if (nmoncon >= montototalacumpartidas)
+       {
+         if (nmoncon == montototalacumpartidas)
+         {
+           alert_('No debe valuarse la totalidad del contrato en una Valuaci&oacute;n Parcial');
+           break;
+         }
+         calcular_total_valuacion(montototalpartidas);
+         calcular_amortizacion();
+         calcular_total_contrato();
+         calcular_total_deducciones();
+         calcular_monto_pagar();
+         total_val_presentadas();
+       }
+       else
+       {
+         alert('No debe excederse el Monto del Contrato');
+       }
+       break;
+      case ($('valfinal').value):
+       var caliva=((montototalpartidas*nporiva)/100);
+       iva_acum= format(caliva.toFixed(2),'.',',','.');
+       montototalacumpartidas= montototalpartidas + caliva;
+       if (nmoncon >= montototalacumpartidas)
+       {
+         calcular_total_valuacion(montototalpartidas);
+         calcular_amortizacion();
+         calcular_total_contrato();
+         calcular_total_deducciones();
+         calcular_monto_pagar();
+         total_val_presentadas();
+       }
+       else
+       {
+         alert('No debe excederse el Monto del Contrato');
+       }
+       break;
+       default:
+         calcular_total_valuacion(montototalpartidas);
+         calcular_amortizacion();
+         calcular_total_contrato();
+         calcular_total_deducciones();
+         calcular_monto_pagar();
+         total_val_presentadas();
+        break;
+    }
+  }
+
+  function calcular_total_valuacion(montototalpartidas)
+  {
+    var nporant=toFloat('ocregval_porant');
+    var nporiva=toFloat('ocregval_poriva');
+    var ngasree=toFloat('ocregval_gasree');
+    switch ($('ocregval_codtipval').value)
+    {
+      case ($('valant').value):
+      case ($('valret').value):
+        var porcen_ant=((montototalpartidas*nporant)/100);
+        var calmon=porcen_ant + ngasree;
+        $('ocregval_subtot').value=format(calmon.toFixed(2),'.',',','.');
+        var nsubtot=toFloat('ocregval_subtot');
+        var calculoiva= (nsubtot*nporiva)/100;
+        $('ocregval_moniva').value=format(calculoiva.toFixed(2),'.',',','.');
+        var nmoniva=toFloat('ocregval_moniva');
+        var calculototiva= nsubtot + nmoniva;
+        $('ocregval_totiva').value=format(calculototiva.toFixed(2),'.',',','.');
+        $('ocregval_totsiniva').value=$('ocregval_subtot').value;
+       break;
+      case ($('valpar').value):
+      case ($('valfinal').value):
+      case ($('valrec').value):
+        var calmon=montototalpartidas + ngasree;
+        $('ocregval_subtot').value=format(calmon.toFixed(2),'.',',','.');
+        var nsubtot=toFloat('ocregval_subtot');
+        var calculoiva= (nsubtot*nporiva)/100;
+        $('ocregval_moniva').value=format(calculoiva.toFixed(2),'.',',','.');
+        var nmoniva=toFloat('ocregval_moniva');
+        var calculototiva= nsubtot + nmoniva;
+        $('ocregval_totiva').value=format(calculototiva.toFixed(2),'.',',','.');
+        $('ocregval_totsiniva').value=$('ocregval_subtot').value;
+       break;
+    }
+  }
+
+  function calcular_total_contrato()
+  {
+    var nmoncon=toFloat('ocregval_moncon');
+    var naumobr=toFloat('ocregval_aumobr');
+    var ndisobr=toFloat('ocregval_disobr');
+    var nobrext=toFloat('ocregval_obrext');
+
+    var montotcon= nmoncon + naumobr - ndisobr + nobrext;
+
+    $('ocregval_monful').value=format(montotcon.toFixed(2),'.',',','.');
+    $('ocregval_montotcon').value=format(montotcon.toFixed(2),'.',',','.');
+  }
+
+  function calcular_monto_pagar()
+  {
+    var monto_previo=0;
+    var ntotsiniva=toFloat('ocregval_totsiniva');
+    var namortant=toFloat('ocregval_amortant');
+    var nmonfia=toFloat('ocregval_monfia');
+    var ntotded=toFloat('ocregval_totded');
+    var nvalpag=toFloat('ocregval_valpag');
+
+    var subtotalret= ntotsiniva - namortant - nmonfia;
+    $('ocregval_monper').value=format(subtotalret.toFixed(2),'.',',','.');
+    var nmonper=toFloat('ocregval_monper');
+    switch ($('ocregval_codtipval').value)
+    {
+      case ($('valfinal').value):
+        monto_previo= nmonper - ntotded;
+        var montotpagar= nmonper - nvalpag;
+        $('ocregval_monpag').value=format(montotpagar.toFixed(2),'.',',','.');
+       break;
+      default:
+        var montotpagar= nmonper - ntotded;
+        $('ocregval_monpag').value=format(montotpagar.toFixed(2),'.',',','.');
+       break;
+    }
+  }
+
+  function calcular_amortizacion()
+  {
+    new Ajax.Request('/obras_dev.php/oycval/ajax', {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=11&codcon='+$('ocregval_codcon').value+'&tipval='+$('ocregval_codtipval').value+'&valant='+$('valant').value+'&porant='+$('ocregval_porant').value+'&idval='+$('id').value+'&totiva='+$('ocregval_totiva').value})
+  }
+
+  function total_val_presentadas()
+  {
+    new Ajax.Request('/obras_dev.php/oycval/ajax', {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=12&codcon='+$('ocregval_codcon').value+'&monper='+$('ocregval_monper').value+'&valpag='+$('ocregval_valpag').value+'&poriva='+$('ocregval_poriva').value+'&tipval='+$('ocregval_codtipval').value+'&monful='+$('ocregval_monful').value+'&idval='+$('id').value+'&montotcon='+$('ocregval_montotcon').value})
   }

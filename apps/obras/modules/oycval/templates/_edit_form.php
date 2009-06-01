@@ -13,11 +13,20 @@
 <?php echo input_hidden_tag('ivaante', $ivaant) ?>
 <?php echo input_hidden_tag('valfinal', $val_fin) ?>
 <?php echo input_hidden_tag('valant', $val_ant) ?>
+<?php echo input_hidden_tag('valpar', $val_par) ?>
+<?php echo input_hidden_tag('valret', $val_ret) ?>
+<?php echo input_hidden_tag('valrec', $val_rec) ?>
 <?php echo input_hidden_tag('ocregval[tieneant]', $ocregval->getTieneant()) ?>
 <?php echo input_hidden_tag('ocregval[montotoferacum]', $ocregval->getMontotoferacum()) ?>
 <?php echo input_hidden_tag('ocregval[montotparacum]', $ocregval->getMontotparacum()) ?>
 <?php echo input_hidden_tag('ocregval[monperiva]', $ocregval->getMonperiva()) ?>
 <?php echo input_hidden_tag('ocregval[codtipcon]', $ocregval->getCodtipcon()) ?>
+<?php echo input_hidden_tag('ocregval[filaspar]', $ocregval->getFilaspar()) ?>
+<?php echo input_hidden_tag('ocregval[filasofer]', $ocregval->getFilasofer()) ?>
+<?php echo input_hidden_tag('ocregval[filasret]', $ocregval->getFilasret()) ?>
+<?php echo input_hidden_tag('ocregval[monaumtot]', $ocregval->getMonaumtot()) ?>
+<?php echo input_hidden_tag('ocregval[mondistot]', $ocregval->getMondistot()) ?>
+<?php echo input_hidden_tag('ocregval[monexttotal]', $ocregval->getMonexttotal()) ?>
 <fieldset id="sf_fieldset_none" class="">
 <div class="form-row">
 <table>
@@ -169,39 +178,13 @@
 </fieldset>
 </div>
 
-<div id="porcentaje" style="display:none">
-<fieldset id="sf_fieldset_none" class="">
-<legend><?php echo __('Porcentajes')?></legend>
-<div class="form-row">
-<?php echo label_for('ocregval[poriva]', __($labels['ocregval{poriva}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('ocregval{poriva}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('ocregval{poriva}')): ?>
-    <?php echo form_error('ocregval{poriva}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($ocregval, array('getPoriva',true), array (
-  'size' => 7,
-  'control_name' => 'ocregval[poriva]',
-  'onBlur' => "javascript: validar1(event, this.id, '1');",
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
+</th>
+</tr>
+</table>
 <br>
-  <?php echo label_for('ocregval[porant]', __($labels['ocregval{porant}']), 'class="required" id="label19"') ?>
-  <div class="content<?php if ($sf_request->hasError('ocregval{porant}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('ocregval{porant}')): ?>
-    <?php echo form_error('ocregval{porant}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($ocregval, array('getPorant',true), array (
-  'size' => 7,
-  'control_name' => 'ocregval[porant]',
-  'onBlur' => "javascript:validar1(event, this.id, '2');",
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
-</fieldset>
-</div>
-<br>
+<table>
+<tr>
+<th>
   <?php echo label_for('ocregval[fecreg]', __($labels['ocregval{fecreg}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('ocregval{fecreg}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('ocregval{fecreg}')): ?>
@@ -216,6 +199,50 @@
   'onkeyup' => "javascript: mascara(this,'/',patron,true)",
 ),date('Y-m-d')); echo $value ? $value : '&nbsp;' ?>
     </div>
+</th>
+<th>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</th>
+<th>
+<div id="porcentaje" style="display:none">
+<fieldset id="sf_fieldset_none" class="">
+<legend><?php echo __('Porcentajes')?></legend>
+<div class="form-row">
+<table>
+<tr><th>
+<?php echo label_for('ocregval[poriva]', __($labels['ocregval{poriva}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('ocregval{poriva}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('ocregval{poriva}')): ?>
+    <?php echo form_error('ocregval{poriva}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($ocregval, array('getPoriva',true), array (
+  'size' => 7,
+  'control_name' => 'ocregval[poriva]',
+  'onBlur' => "javascript: validar1(event, this.id, '1');",
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+</th><th>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</th><th>
+  <?php echo label_for('ocregval[porant]', __($labels['ocregval{porant}']), 'class="required" id="label19"') ?>
+  <div class="content<?php if ($sf_request->hasError('ocregval{porant}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('ocregval{porant}')): ?>
+    <?php echo form_error('ocregval{porant}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($ocregval, array('getPorant',true), array (
+  'size' => 7,
+  'control_name' => 'ocregval[porant]',
+  'onBlur' => "javascript:validar1(event, this.id, '2');",
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+</th></tr></table>
+</div>
+</fieldset>
+</div>
 </th>
 </tr>
 </table>
@@ -232,7 +259,7 @@
     <?php echo form_error('ocregval{moncon}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_input_tag($ocregval, 'getMoncon', array (
+  <?php $value = object_input_tag($ocregval, array('getMoncon',true), array (
   'size' => 7,
   'readonly' => true,
   'control_name' => 'ocregval[moncon]',
@@ -376,7 +403,7 @@
     <?php echo form_error('ocregval{totiva}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_input_tag($ocregval, 'getTotiva', array (
+  <?php $value = object_input_tag($ocregval, array('getTotiva',true), array (
   'readonly' => true,
   'size' => 7,
   'control_name' => 'ocregval[totiva]',
@@ -397,8 +424,8 @@
     <?php echo form_error('ocregval{totsiniva}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_input_tag($ocregval, 'getTotsiniva', array (
-  'disabled' => true,
+  <?php $value = object_input_tag($ocregval, array('getTotsiniva',true), array (
+  'readonly' => true,
   'size' => 7,
   'control_name' => 'ocregval[totsiniva]',
 )); echo $value ? $value : '&nbsp;' ?>
@@ -410,8 +437,8 @@
     <?php echo form_error('ocregval{amortant}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_input_tag($ocregval, 'getAmortant', array (
-  'disabled' => true,
+  <?php $value = object_input_tag($ocregval, array('getAmortant',true), array (
+  'readonly' => true,
   'size' => 7,
   'control_name' => 'ocregval[amortant]',
 )); echo $value ? $value : '&nbsp;' ?>
@@ -507,7 +534,7 @@
     <?php echo form_error('ocregval{valpag}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_input_tag($ocregval, 'getValpag', array (
+  <?php $value = object_input_tag($ocregval, array('getValpag',true), array (
   'readonly' => true,
   'size' => 7,
   'control_name' => 'ocregval[valpag]',
@@ -552,7 +579,7 @@
     <?php echo form_error('ocregval{montotcon}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_input_tag($ocregval, 'getMontotcon', array (
+  <?php $value = object_input_tag($ocregval, array('getMontotcon',true), array (
   'readonly' => true,
   'size' => 7,
   'control_name' => 'ocregval[montotcon]',
@@ -611,8 +638,8 @@
     <?php echo form_error('ocregval{monantic}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_input_tag($ocregval, 'getMonantic', array (
-  'disabled' => true,
+  <?php $value = object_input_tag($ocregval, array('getMonantic',true), array (
+  'readonly' => true,
   'size' => 7,
   'control_name' => 'ocregval[monantic]',
 )); echo $value ? $value : '&nbsp;' ?>
@@ -637,8 +664,8 @@
     <?php echo form_error('ocregval{salantic}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_input_tag($ocregval, 'getSalantic', array (
-  'disabled' => true,
+  <?php $value = object_input_tag($ocregval, array('getSalantic',true), array (
+  'readonly' => true,
   'size' => 7,
   'control_name' => 'ocregval[salantic]',
 )); echo $value ? $value : '&nbsp;' ?>
@@ -727,7 +754,7 @@ if (nuevo!='')
  switch (tipoval)
  {
  	case val_ant:
- 	  $('label16').innerHTML = 'IVA ( '+$('poriva').value+' % )';
+ 	  $('label16').innerHTML = 'IVA ( '+$('ocregval_poriva').value+' % )';
  	  $('label41').innerHTML = 'Anticipo ( '+$('ocregval_porant').value+' % )';
  	 break;
  	case val_ret:
@@ -743,18 +770,9 @@ if (nuevo!='')
       $('label41').innerHTML = 'Total con Iva';
      break;
  }
+ totalizar();
 
 }
-
-
-
-
-
-
-
-
-
-
 
  function validar1(e,id, ind)
  {

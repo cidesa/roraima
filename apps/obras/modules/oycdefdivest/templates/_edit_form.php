@@ -36,7 +36,7 @@
 
     <?php $value = object_input_tag($ocestado, 'getCodedo', array (
     'size' => 5,
-    'maxlegth' => 4,
+    'maxlength' => 4,
     'control_name' => 'ocestado[codedo]',
     'onBlur'  => "javascript: valor=this.value; valor=valor.pad(4, '0',0);document.getElementById('ocestado_codedo').value=valor;document.getElementById('ocestado_codedo').disabled=false;",
     )); echo $value ? $value : '&nbsp;' ?>

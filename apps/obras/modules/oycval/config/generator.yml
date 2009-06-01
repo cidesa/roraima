@@ -63,8 +63,3 @@ generator:
         _save:        ~
         _delete:      ~
         _create:      ~
-        anular:
-          name:  Anular
-          action:  anular
-          only_for:  edit
-          params:  class=sf_admin_action_delete post=true confirm=Realmente desea Anular la Valuación?

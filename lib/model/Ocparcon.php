@@ -10,6 +10,8 @@
 class Ocparcon extends BaseOcparcon
 {
   private $cantidad='0,00';
+  protected $despar="";
+  protected $coduni="";
 
   public function getDespar()
   {

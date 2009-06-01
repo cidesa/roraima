@@ -20,4 +20,9 @@ class Ocreglic extends BaseOcreglic
   {
     return Herramientas::getX('CODFIN','Fortipfin','nomext',self::getCodfin());
   }
+
+  public function getDesclacomp()
+  {
+    return Herramientas::getX('codclacomp','Occlacomp','desclacomp',self::getCodclacomp());
+  }
 }
