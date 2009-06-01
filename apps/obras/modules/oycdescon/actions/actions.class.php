@@ -960,11 +960,11 @@ class oycdesconActions extends autooycdesconActions
     $this->forward404Unless($this->ocregcon);
 
     $c = new Criteria();
-    $c->addJoin(OcpreobrPeer::CODOBR,Ocregcon::CODOBR);
-    $c->addJoin(Ocregcon::CODCON,OcparconPeer::CODCON);
-    $c->addJoin(Ocregcon::CODPAR,OcparconPeer::CODPAR);
+    $c->addJoin(OcpreobrPeer::CODOBR,OcregconPeer::CODOBR);
+    $c->addJoin(OcregconPeer::CODCON,OcparconPeer::CODCON);
+    $c->addJoin(OcregconPeer::CODPAR,OcparconPeer::CODPAR);
     $c->add(OcpreobrPeer::CODOBR,$this->ocregcon->getCodobr());
-    $c->add(Ocregcon::CODCON,$this->ocregcon->getCodcon());
+    $c->add(OcregconPeer::CODCON,$this->ocregcon->getCodcon());
     $result= OcpreobrPeer::doSelect($c);
     if ($result)
     {
