@@ -1080,7 +1080,9 @@ class oycdesconActions extends autooycdesconActions
        	$codigo=$this->getRequestParameter('codigo');
        	switch ($codigo)
        	{
-          case ($this->con_ins || $this->con_sup || $this->con_pro):
+          case $this->con_ins:
+          case $this->con_sup:
+          case $this->con_pro:
             $javascript="$('oferta2').show(); $('oferta').show(); $('partida').hide(); $('grid_a').innerHTML='<legend id=grid_a >Personal Contratado</legend>'; $('tab1').innerHTML='<a id=tab1 href=#>Oferta de Servicio</a>';";
           break;
           default:
