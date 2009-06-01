@@ -18,7 +18,30 @@ class Ocregval extends BaseOcregval
   protected $salantic='0,00';
   protected $tieneant='';
   protected $codtipcon="";
+  protected $filaspar=0;
+  protected $filasofer=0;
+  protected $filasret=0;
+  protected $monaumtot=0;
+  protected $mondistot=0;
+  protected $monexttotal=0;
 
+   public function hydrate(ResultSet $rs, $startcol = 1)
+   {
+      parent::hydrate($rs, $startcol);
+      if (self::getMoncon()!=0)
+      {
+    	$totcon=number_format(self::getMoncon(),2,',','.');
+      }else $totcon='0,00';
+
+      $this->montotcon= $totcon;
+
+      if (self::getSubtot()!=0)
+	  {
+		$siniva=number_format(self::getSubtot(),2,',','.');
+	  }else $siniva='0,00';
+
+	  $this->totsiniva=$siniva;
+   }
 
   public function getCodobr(){
 
@@ -53,7 +76,7 @@ class Ocregval extends BaseOcregval
   public function getMoncon(){
     if (self::getCodobr())
     {
-      $var=Herramientas::getX('Codobr','Ocregobr','Monobr',self::getCodobr());
+      $var=number_format(Herramientas::getX('Codobr','Ocregobr','Monobr',self::getCodobr()),2,',','.');
     }else { $var='0,00';}
 
     return $var;
@@ -66,7 +89,7 @@ class Ocregval extends BaseOcregval
 
   }
 
-  public function getTotsiniva()
+ /* public function getTotsiniva()
   {
     if (self::getSubtot()!=0)
     {
@@ -80,10 +103,10 @@ class Ocregval extends BaseOcregval
   {
     if (self::getMoncon()!=0)
     {
-    	$stotcon=number_format(self::getMoncon(),2,',','.');
+    	$totcon=number_format(self::getMoncon(),2,',','.');
     }else $totcon='0,00';
 
     return $totcon;
-  }
+  }*/
 }
 

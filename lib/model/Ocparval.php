@@ -42,7 +42,7 @@ class Ocparval extends BaseOcparval
   	$resul= OcparconPeer::doSelectOne($c);
   	if ($resul)
     {
-  	  $cantcont=$result->getCancon();
+  	  $cantcont=$resul->getCancon();
     }else $cantcont='0,00';
 
     return $cantcont;

@@ -4,7 +4,7 @@
 ?>
 <?php if (!$ocreglic->getId() || ($ocreglic->getCodclacom()==''))
 { ?>
-<?php echo Catalogo($ocreglic,2,array(
+<?php echo Catalogo($ocreglic,3,array(
   'getprincipal' => 'getCodclacomp',
   'getsecundario' => 'getDesclacomp',
   'campoprincipal' => 'codclacomp',

@@ -18,7 +18,15 @@ class Ocparins extends BaseOcparins
 
   public function getCancon(){
 
-    return Herramientas::getX('codpar','ocparcon','cancon',self::getCodpar());
+    $e= new Criteria();
+    $e->add(OcparconPeer::CODCON,self::getCodcon());
+    $e->add(OcparconPeer::CODPAR,self::getCodpar());
+    $dato= OcparconPeer::doSelectOne($e);
+    if ($dato)
+    {
+    	$cantidad=$dato->getCancon();
+    }else { $cantidad=0;}
+    return $cantidad;
 
   }
 

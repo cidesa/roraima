@@ -101,10 +101,12 @@ public static function salvarLicitacion($ocreglic, $grid)
 
   $z=$grid[1];
   $j=0;
+  if (!empty($z[$j])) {
   while ($j<count($z))
   {
     $z[$j]->delete();
     $j++;
+  }
   }
 }
 
@@ -180,10 +182,12 @@ public static function salvarLicitacion($ocreglic, $grid)
 
     $z=$grid1[1];
     $j=0;
+    if (!empty($z[$j])) {
     while ($j<count($z))
     {
       $z[$j]->delete();
       $j++;
+    }
     }
  }
 
@@ -224,10 +228,12 @@ public static function salvarLicitacion($ocreglic, $grid)
 
     $z=$grid2[1];
     $j=0;
+    if (!empty($z[$j])) {
     while ($j<count($z))
     {
       $z[$j]->delete();
       $j++;
+    }
     }
  }
 
@@ -652,9 +658,9 @@ public static function salvarLicitacion($ocreglic, $grid)
 
   public static function grabarPartidasIns($ocinscon,$grid)
   {
-    $c= new Criteria();
+    /*$c= new Criteria();
  	$c->add(OcparinsPeer::CODCON,$ocinscon->getCodcon());
- 	OcparinsPeer::doDelete($c);
+ 	OcparinsPeer::doDelete($c);*/
 
  	$x=$grid[0];
     $j=0;
@@ -671,10 +677,12 @@ public static function salvarLicitacion($ocreglic, $grid)
 
     $z=$grid[1];
     $j=0;
+    if (!empty($z[$j])) {
     while ($j<count($z))
     {
       $z[$j]->delete();
       $j++;
+    }
     }
   }
 
@@ -1471,6 +1479,7 @@ public static function salvarLicitacion($ocreglic, $grid)
 
  public static function salvarOycval($ocregval,$grid1,$grid2,$grid3,$grid4,$nuevo)
  {
+   $ocregval->setStaval('E');
    $ocregval->save();
    self::actualizarContrato($ocregval);
    self::grabarDeduccionesVal($ocregval,$grid1);
@@ -1503,7 +1512,8 @@ public static function salvarLicitacion($ocreglic, $grid)
     $codtipcon=Herramientas::getX('CODCON','Ocregcon','tipcon',$ocregval->getCodcon());
     switch($ocregval->getCodtipval())
     {
-	  case ($val_par || $val_fin):
+      case $val_par:
+      case $val_fin:
 	     switch($codtipcon)
          {
            case ($con_ins || $con_sup || $con_pro):
@@ -1553,7 +1563,7 @@ public static function salvarLicitacion($ocreglic, $grid)
      if ($x[$j]["codtip"]!="" && $porret>0)
      {
        $ocretval= new Ocretval();
-       $$ocretval->setCodcon($ocregval->getCodcon());
+       $ocretval->setCodcon($ocregval->getCodcon());
        $ocretval->setCodtipval($ocregval->getCodtipval());
        $ocretval->setNumval($ocregval->getNumval());
        $ocretval->setCodtip($x[$j]["codtip"]);
@@ -1583,10 +1593,12 @@ public static function salvarLicitacion($ocreglic, $grid)
 
     $z=$grid2[1];
     $j=0;
+    if (!empty($z[$j])) {
     while ($j<count($z))
     {
       $z[$j]->delete();
       $j++;
+    }
     }
   }
 
@@ -1637,7 +1649,7 @@ public static function salvarLicitacion($ocreglic, $grid)
        $ocofeserval->setCodtippro($x[$j]["codtippro"]);
        $ocofeserval->setNivpro($x[$j]["nivpro"]);
        $ocofeserval->setExppro($x[$j]["exppro"]);
-       $ocofeserval->setCantidad($x[$j]["canval"]);
+       $ocofeserval->setCantidad($x[$j]["cantidad"]);
        $ocofeserval->save();
      }
      $j++;
@@ -1659,7 +1671,7 @@ public static function salvarLicitacion($ocreglic, $grid)
 	        $reg= OcofeserPeer::doSelectOne($a);
 	        if ($reg)
 	        {
-	          $reg->setCanval($reg->getCanval() + (H::convnume($x[$j]["canval"])));
+	          $reg->setCanval($reg->getCanval() + (H::convnume($x[$j]["cantidad"])));
 	          $reg->save();
 	        }
           }
@@ -1682,7 +1694,7 @@ public static function salvarLicitacion($ocreglic, $grid)
 	        $reg= OcofeserPeer::doSelectOne($a);
 	        if ($reg)
 	        {
-	          $reg->setCanhorfin($reg->getCanhorfin() + (H::convnume($x[$j]["canval"])));
+	          $reg->setCanhorfin($reg->getCanhorfin() + (H::convnume($x[$j]["cantidad"])));
 	          $reg->save();
 	        }
           }
@@ -1698,7 +1710,7 @@ public static function salvarLicitacion($ocreglic, $grid)
   	$c->add(OcparvalPeer::CODCON,$ocregval->getCodcon());
   	$c->add(OcparvalPeer::NUMVAL,$ocregval->getNumval());
   	$c->add(OcparvalPeer::CODTIPVAL,$ocregval->getCodtipval());
-  	$dat= OcparvalPeer::doSeletc($c);
+  	$dat= OcparvalPeer::doSelect($c);
   	if ($dat)
   	{
       foreach ($dat as $objeto)
@@ -1755,7 +1767,7 @@ public static function salvarLicitacion($ocreglic, $grid)
       $ocparval->setCodtipval($ocregval->getCodtipval());
       $ocparval->setNumval($ocregval->getNumval());
       $ocparval->setCodpar($x[$j]["codpar"]);
-      $ocparval->setCantidad($x[$j]["canval"]);
+      $ocparval->setCantidad($x[$j]["cantidad"]);
       $ocparval->save();
      }
      $j++;
@@ -1776,7 +1788,7 @@ public static function salvarLicitacion($ocreglic, $grid)
 	         $reg= OcparconPeer::doSelectOne($c);
 	         if ($reg)
 	         {
-	     	  $reg->setCanval($reg->getCanval() + (H::convnume($x[$l]["canval"])));
+	     	  $reg->setCanval($reg->getCanval() + (H::convnume($x[$l]["cantidad"])));
 	     	  $reg->save();
 	         }
 	       }
@@ -1795,8 +1807,8 @@ public static function salvarLicitacion($ocreglic, $grid)
 		     $reg= OcpreobrPeer::doSelectOne($c);
 		     if ($reg)
 		     {
-		     	$reg->setCanconfin($x[$l]["canval"]);
-		     	$reg->setCosunifin($x[$l]["cantidad"]);
+		     	$reg->setCanconfin($x[$l]["cantidad"]);
+		     	$reg->setCosunifin($x[$l]["cosuni"]);
 		     	$reg->save();
 		     }
 		   }
@@ -1823,8 +1835,8 @@ public static function salvarLicitacion($ocreglic, $grid)
 		     	  $reg->setCancon($reg->getCancon());
 		     	  $reg->setCosuni($reg->getCosuni());
 		     	  $reg->setAdipar('N');
-		     	  $reg->setCanconfin($reg->getCanconfin + (H::convnume($x[$l]["canval"])));
-		     	  $reg->setCosunifin($x[$l]["cantidad"]);
+		     	  $reg->setCanconfin($reg->getCanconfin + (H::convnume($x[$l]["cantidad"])));
+		     	  $reg->setCosunifin($x[$l]["cosuni"]);
 		     	  $reg->save();
 		     	}
                 else
@@ -1835,8 +1847,8 @@ public static function salvarLicitacion($ocreglic, $grid)
 		     	  $reg->setCancon(0);
 		     	  $reg->setCosuni(Herramientas::getX('CODPAR','Ocdefpar','cosuni',$x[$l]["codpar"]));
 		     	  $reg->setAdipar('S');
-		     	  $reg->setCanconfin($reg->getCanconfin + (H::convnume($x[$l]["canval"])));
-		     	  $reg->setCosunifin($x[$l]["cantidad"]);
+		     	  $reg->setCanconfin($reg->getCanconfin + (H::convnume($x[$l]["cantidad"])));
+		     	  $reg->setCosunifin($x[$l]["cosuni"]);
 		     	  $reg->save();
                 }
 		     }
@@ -1849,8 +1861,8 @@ public static function salvarLicitacion($ocreglic, $grid)
 		     	$reg->setCancon(0);
 		     	$reg->setCosuni(Herramientas::getX('CODPAR','Ocdefpar','cosuni',$x[$l]["codpar"]));
 		     	$reg->setAdipar('S');
-		     	$reg->setCanconfin($reg->getCanconfin + (H::convnume($x[$l]["canval"])));
-		     	$reg->setCosunifin($x[$l]["cantidad"]);
+		     	$reg->setCanconfin($reg->getCanconfin + (H::convnume($x[$l]["cantidad"])));
+		     	$reg->setCosunifin($x[$l]["cosuni"]);
 		     	$reg->save();
 		     }
 		   }
@@ -2176,6 +2188,7 @@ public static function salvarLicitacion($ocreglic, $grid)
              $montot=0*$cosuni;
              $arreglopar[$j-1]["montot"]=number_format($montot,2,',','.');
              self::totalPartidas($arreglopar,&$arregloret,&$arreglomontos,$codcon,$tipval,$val_ant,$val_par,$val_ret,$val_fin,$val_rec,$poriva,$porant,$montotcon,$aumobr,$disobr,$obrext,$monper,$valpag,$gasretot,&$msj,&$montotparacum);
+	         H::PrintR($arreglomontos);
 	       break;
 	      case ($val_fin):
              $arreglopar[$j-1]["canval"]=number_format($obj->getCanval(),2,',','.');
@@ -2313,7 +2326,6 @@ public static function salvarLicitacion($ocreglic, $grid)
          }else { break;}
        break;
     }
-
     $arreglomontos=array();
     $arreglomontos[0]["subtot"]=$subtot;
     $arreglomontos[0]["moniva"]=$moniva;
@@ -2341,15 +2353,18 @@ public static function salvarLicitacion($ocreglic, $grid)
    {
    	switch($tipval)
     {
-      case ($val_ant || $val_ret):
+      case $val_ant:
+      case $val_ret:
         $porcentaje_anticipo= (($montotpar * $porant)/100);
-        $subtot= $porcentaje_anticipo + $gasretot;
+        $subtot= $porcentaje_anticipo + H::convnume($gasretot);
         $moniva= (($subtot * $poriva)/100);
         $totiva= ($subtot + $moniva);
         $totsiniva=$subtot;
        break;
-      case ($val_par || $val_fin || $val_rec):
-        $subtot= $montotpar + $gasretot;
+      case $val_par:
+      case $val_fin:
+      case $val_rec:
+        $subtot= $montotpar + H::convnume($gasretot);
         $moniva= (($subtot * $poriva)/100);
         $totiva= ($subtot + $moniva);
         $totsiniva=$subtot;
@@ -2379,11 +2394,11 @@ public static function salvarLicitacion($ocreglic, $grid)
        $monantic=$todoamortizado;
        switch($tipval)
        {
-	      case ($val_fin):
+	      case $val_fin:
 	        $monant=$todoamortizado;
 	        $amortant=$todoamortizado;
 	       break;
-	      case ($val_par):
+	      case $val_par:
 	        $monant=(($totiva*$porant)/100);
             if ($monant<=$todoamortizado)
             {
@@ -2454,7 +2469,7 @@ public static function salvarLicitacion($ocreglic, $grid)
     $monper=$subtotret;
     switch($tipval)
     {
-      case ($val_fin):
+      case $val_fin:
         $monprev=$monper - $totded;
         $montotpag= $monper - $valpag;
         $monpag=$montotpag;
@@ -2479,7 +2494,8 @@ public static function salvarLicitacion($ocreglic, $grid)
      {
        switch($tipval)
        {
-	      case ($val_ant || $val_par):
+	      case $val_ant:
+	      case $val_par:
             if ($monconiva>0)
             {
               //$monval=$result[0]["suma"] + $monconiva;
@@ -2535,8 +2551,17 @@ public static function salvarLicitacion($ocreglic, $grid)
          if ($val_ant==$tipval)
          {
           $despar=$reg->getDespar();
-          $desuni=$reg->getDesuni();
-          $cosuni=$reg->getCosuni();
+          $abruni=H::getX('coduni','Ocunidad','abruni',$reg->getCoduni());
+          $desuni=$abruni;
+          $k= new Criteria();
+          $k->add(OcpreobrPeer::CODPAR,$codpar);
+          $k->add(OcpreobrPeer::CODOBR,$codobr);
+          $dat=OcpreobrPeer::doSelectOne($k);
+          if ($dat)
+          {
+            $cosuni=$dat->getCosuni();
+          }else{
+          $cosuni=$reg->getCosuni();}
          }
          else
          {
@@ -2547,8 +2572,17 @@ public static function salvarLicitacion($ocreglic, $grid)
            if ($rega)
            {
              $despar=$rega->getDespar();
-             $desuni=$rega->getDesuni();
-             $cosuni=$rega->getCosuni();
+             $abruni=H::getX('coduni','Ocunidad','abruni',$rega->getCoduni());
+             $desuni=$abruni;
+              $k= new Criteria();
+              $k->add(OcpreobrPeer::CODPAR,$codpar);
+	          $k->add(OcpreobrPeer::CODOBR,$codobr);
+	          $dat=OcpreobrPeer::doSelectOne($k);
+	          if ($dat)
+	          {
+	            $cosuni=$dat->getCosuni();
+	          }else{
+	          $cosuni=$reg->getCosuni();}
            }
          }
        }
@@ -2567,7 +2601,8 @@ public static function salvarLicitacion($ocreglic, $grid)
            if ($rega)
            {
              $despar=$rega->getDespar();
-             $desuni=$rega->getDesuni();
+             $abruni=H::getX('coduni','Ocunidad','abruni',$rega->getCoduni());
+             $desuni=$abruni;
              $cosuni=$rega->getCosuni();
            }
          }
@@ -2716,11 +2751,7 @@ public static function salvarLicitacion($ocreglic, $grid)
         $arregloret[$j-1]["id"]="9";
         $j++;
       }
-
-
-
       self::calcularTotalDeducciones(&$arregloret,$arreglomontos[0]["totsiniva"],$arreglomontos[0]["monper"],$arreglomontos[0]["totiva"],$val_ret,$tipval,&$arreglomontos[0]["monfia"],&$arreglomontos[0]["totded"],&$arreglomontos[0]["retacu"],&$msj1);
-      //H::PrintR($arregloret); exit;
     }
   }
 
@@ -2783,11 +2814,13 @@ public static function salvarLicitacion($ocreglic, $grid)
         $arreglooferta[$j-1]["cantidad"]="0,00";
         switch($tipval)
         {
-	      case ($val_ant || $val_ret):
+	      case $val_ant:
+	      case$val_ret:
 	        $monto= $obj->getCanhor()* (H::convnume($arreglooferta[$j-1]["valhor"]));
 	        $arreglooferta[$j-1]["montot"]=number_format($monto,2,',','.');
 	       break;
-	      case ($val_par || $val_fin):
+	      case $val_par:
+	      case$val_fin:
 	        $monto= (H::convnume($arreglooferta[$j-1]["canfin"])) * (H::convnume($arreglooferta[$j-1]["valhor"]));
 	        $arreglooferta[$j-1]["montot"]=number_format($monto,2,',','.');
 	       break;
@@ -2892,7 +2925,8 @@ public static function salvarLicitacion($ocreglic, $grid)
   {
     switch($tipval)
     {
-      case ($val_ant || $val_par):
+      case $val_ant:
+      case $val_par:
         $gasreeacum=0;
         $sql="select coalesce(sum(gasree),0) as sumatotal from OCREGVAL where codcon='".$codcon."' and staval<>'N' and staval<>'T'";
         if (Herramientas::BuscarDatos($sql, & $result))
@@ -3083,7 +3117,7 @@ public static function salvarLicitacion($ocreglic, $grid)
     $c->add(OcregvalPeer::STAVAL,'N',Criteria::NOT_EQUAL);
     $c->add(OcregvalPeer::CODCON,$codcon);
     $c->add(OcregvalPeer::CODTIPVAL,$tipval);
-    $regi= OcregvalPeer::doSelect($c);
+    $regi= OcregvalPeer::doSelectOne($c);
     if ($regi)
     {
       switch($regi->getCodtipval())
@@ -3207,7 +3241,8 @@ public static function salvarLicitacion($ocreglic, $grid)
     $gasree_tra=H::getX('codcon','Ocregcon','gasree',$codcon);
     switch($tipval)
     {
-      case ($val_ant || $val_par):
+      case $val_ant:
+      case $val_par:
         $gasreeacum=0;
         $sql="select coalesce(sum(gasree),0) as sumatotal from OCREGVAL where codcon='".$codcon."' and staval<>'N' and staval<>'T'";
         if (Herramientas::BuscarDatos($sql, & $result))
@@ -3221,7 +3256,7 @@ public static function salvarLicitacion($ocreglic, $grid)
         }
        break;
       case $val_fin:
-                $gasreeacum=0;
+        $gasreeacum=0;
         $sql="select coalesce(sum(gasree),0) as sumatotal from OCREGVAL where codcon='".$codcon."' and staval<>'N' and staval<>'T'";
         if (Herramientas::BuscarDatos($sql, & $result))
         {

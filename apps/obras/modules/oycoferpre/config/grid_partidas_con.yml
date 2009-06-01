@@ -2,8 +2,8 @@ opciones:                  # Opciones generales
   name:                    a
   eliminar:                false
   tabla:                   ocoferpre
-  ancho:				   650
-  anchogrid:               650
+  ancho:				   700
+  anchogrid:               700
   filas:                   0
   titulo:                  ' '
   htmltotalfilas:          ' '

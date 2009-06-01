@@ -2,7 +2,7 @@ opciones:                  # Opciones generales
   name:                    a
   eliminar:                true
   tabla:                   ocemppar
-  ancho:				   750
+  ancho:				   1200
   anchogrid:               700
   filas:                   1
   titulo:                  ' '

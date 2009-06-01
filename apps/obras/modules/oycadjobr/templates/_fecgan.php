@@ -15,9 +15,10 @@
 )); echo $value ? $value : '&nbsp;' ?>
 
 <script language="JavaScript" type="text/javascript">
-   var reg='<?php echo $ocadjobr->getId(); ?>';
+   var reg='<?php echo $ocadjobr->getCodprogan(); ?>';
    if (reg!='')
    {
+   	$('ocadjobr_fecgan').readOnly=true;
    	   $('trigger_ocadjobr_fecgan').hide();
    }
 </script>

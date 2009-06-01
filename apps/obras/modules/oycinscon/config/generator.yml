@@ -10,11 +10,12 @@ generator:
       desobr:      { name: Nombre}
       codpro:      { name: Contratista}
       nompro:      { name: Nombre }
+      codtipins:   { name: Tipo }
       numins:      { name: Num. Inspección}
       feccom:      { name: Fecha Inicio}
       fecter:      { name: Fecha Fin}
       porobreje:   { name: % Obra Ejecutada}
-      portietra:   { name: % Tiempo Transc.}
+      portietra:   { name: % Tiempo Transcurrido}
     list:
       title:          Inspecciones
       filters:		  [Codcon, numins]
@@ -26,7 +27,7 @@ generator:
         _delete:      ~
     edit:
       title:          Edición de Inspecciones
-      display:        [codcon, descon, codobr, desobr, codpro, nompro, numins, feccom, fecter, portietra]
+      display:        [codcon, descon, codobr, desobr, codpro, nompro, codtipins, numins, feccom, fecter, portietra]
       actions:
         _list:        ~
         _save:        ~

@@ -276,7 +276,6 @@ class oycdesobrActions extends autooycdesobrActions
     if ($this->getRequest()->getMethod() == sfRequest::POST)
     {
       $this->updateOcregobrFromRequest();
-      $this->saveOcregobr($this->ocregobr);
 
       if ($this->saveOcregobr($this->ocregobr)==-1)
       {
