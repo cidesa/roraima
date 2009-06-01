@@ -261,7 +261,9 @@
 195:
   cod: 195
   msj: No Existe Disponibilidad Financiera en la cuenta de banco
-
+196:
+  cod: 196
+  msj: El número de comprobante ya existe. Imposible guardar el comprobante !
 ################### NOMINA ####################
 400:
   cod: 400
