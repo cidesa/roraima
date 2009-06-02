@@ -622,45 +622,41 @@
 	   }
 	   else if ($('ocregcon_feclic').value!='')
        {
-           if (compareDate2(fec, fec2)==1)
-	       {
-             alert_('La Fecha de Inicio Inv&aacute;lida debe ser mayor a la Fecha de Licitaci&oacute;n');
-  	         $('ocregcon_fecini').value='';
-  	         $('ocregcon_fecini').focus();
-	       }
+           var signo='>';
+	       var msjes='La Fecha de Inicio debe ser mayor a la Fecha de Licitacion';
+	       new Ajax.Request('/obras_dev.php/oycdescon/ajax', {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=12&fecha1='+fec2+'&signo='+signo+'&msj='+msjes+'&blanco=ocregobr_fecini&fecha2='+fec})
+
        }
        else  if ($('ocregcon_fecbuepro').value!='')
        {
-          if (compareDate2(fec1, fec2)==1)
-	      {
-             alert_('La Fecha de Inicio Inv&aacute;lida debe ser menor a la Fecha de Otorg. Buena Pro');
-  	         $('ocregcon_fecini').value='';
-  	         $('ocregcon_fecini').focus();
-	      }
+           var signo='<';
+	       var msjes='La Fecha de Inicio debe ser menor a la Fecha de Otorg. Buena Pro';
+	       new Ajax.Request('/obras_dev.php/oycdescon/ajax', {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=12&fecha1='+fec2+'&signo='+signo+'&msj='+msjes+'&blanco=ocregobr_fecini&fecha2='+fec1})
        }
        else  if ($('ocregcon_feccon').value!='')
        {
-          if (compareDate2(fec3, fec2)==1)
-	      {
-             alert_('La Fecha de Inicio Inv&aacute;lida debe ser menor a la Fecha de Contrataci&oacute;n');
-  	         $('ocregcon_fecini').value='';
-  	         $('ocregcon_fecini').focus();
-	      }
-	      else
-	      {
-            if ($('ocregcon_tieejecon').value!='' && $('ocregcon_tieejecon').value!=0)
-           {
-             calcular_total_dias();
-           }
-           else
-           {
-             alert_('Debe introducir un tiempo de ejecuci&oacute;n del contrato distinto de cero');
-             $('ocregcon_fecini').value='';
-  	         $('ocregcon_fecini').focus();
-           }
-	      }
+           var signo='<';
+	       var msjes='La Fecha de Inicio debe ser menor a la Fecha de Contratacion';
+	       new Ajax.Request('/obras_dev.php/oycdescon/ajax', {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json), otra();}, parameters:'ajax=12&fecha1='+fec2+'&signo='+signo+'&msj='+msjes+'&blanco=ocregobr_fecini&fecha2='+fec3})
        }
 	 }
+  }
+
+  function otra()
+  {
+    if ($('javascript').value=='')
+    {
+      if ($('ocregcon_tieejecon').value!='' && $('ocregcon_tieejecon').value!=0)
+      {
+        calcular_total_dias();
+      }
+      else
+      {
+        alert_('Debe introducir un tiempo de ejecuci&oacute;n del contrato distinto de cero');
+        $('ocregcon_fecini').value='';
+       $('ocregcon_fecini').focus();
+      }
+    }
   }
 
   function lostfocus_fecfinal()
