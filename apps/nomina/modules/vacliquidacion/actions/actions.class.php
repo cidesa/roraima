@@ -97,6 +97,8 @@ class vacliquidacionActions extends autovacliquidacionActions
     }
     if ($this->getRequestParameter('ajax')=='2')
     {
+       $cajultsue = H::convnume($cajultsue);
+	   $cajsuenor = H::convnume($cajsuenor);
        $c=new Criteria();
        $c->add(NphojintPeer::CODEMP,$cajcodemp);
        $datos=NphojintPeer::doSelectOne($c);
@@ -141,7 +143,7 @@ class vacliquidacionActions extends autovacliquidacionActions
           {
            $per[$i]['perini']=$arr[$cont]['desde'];
            $per[$i]['perfin']=$arr[$cont]['hasta'];
-           if ($arr[$cont]['fracciondia']>0)
+           if ($arr[$cont]['fraccion']=='SI')
            		$per[$i]['diadis']=H::tofloat($arr[$cont]['fracciondia']);
            else
            		$per[$i]['diadis']=H::tofloat($arr[$cont]['corresponde']-$arr[$cont]['disfrutados']);
@@ -175,7 +177,7 @@ class vacliquidacionActions extends autovacliquidacionActions
          {
            $perHis[$cont]['perini']=$arr[$cont]['desde'];
            $perHis[$cont]['perfin']=$arr[$cont]['hasta'];
-           if ($arr[$cont]['fracciondia']>0)
+           if ($arr[$cont]['fraccion']=='SI')
            		$perHis[$cont]['diadis']=H::tofloat($arr[$cont]['fracciondia']);
            else
            		$perHis[$cont]['diadis']=H::tofloat($arr[$cont]['corresponde']);
@@ -343,8 +345,8 @@ class vacliquidacionActions extends autovacliquidacionActions
       $nphojint = new Nphojint();
       if($_POST)
       {
-       $sal1=$_POST['nphojint_suenor'];
-       $sal2=$_POST['nphojint_ultsue'];
+       $sal1=H::convnume($_POST['nphojint_suenor']);
+       $sal2=H::convnume($_POST['nphojint_ultsue']);
       }else
       {
       	$sal1=0;
@@ -372,7 +374,6 @@ class vacliquidacionActions extends autovacliquidacionActions
   }
    protected function saveNphojint($nphojint)
   {
-
     $grid=Herramientas::CargarDatosGrid($this,$this->objVac,true);//0
     V::salvarnpvacliquidacion($nphojint,$grid,$this->ultsue,$this->suenor);
   }
