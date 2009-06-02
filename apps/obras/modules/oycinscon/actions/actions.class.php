@@ -306,6 +306,7 @@ $this->Bitacora('Guardo');
       case '2':
         $c= new Criteria();
         $c->add(OcparconPeer::CODCON,$this->getRequestParameter('contrato'));
+        $c->add(OcparconPeer::CODPAR,$this->getRequestParameter('codigo'));
         $c->addJoin(OcdefparPeer::CODPAR,OcparconPeer::CODPAR);
         $c->addJoin(OcdefparPeer::CODUNI,OcunidadPeer::CODUNI);
         $reg=OcdefparPeer::doSelectOne($c);
