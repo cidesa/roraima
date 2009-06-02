@@ -217,6 +217,14 @@ abstract class BaseBnregmue extends BaseObject  implements Persistent {
 
 
 	
+	protected $codresuso;
+
+
+	
+	protected $codrespat;
+
+
+	
 	protected $id;
 
 	
@@ -703,6 +711,20 @@ abstract class BaseBnregmue extends BaseObject  implements Persistent {
   {
 
     return trim($this->stainm);
+
+  }
+  
+  public function getCodresuso()
+  {
+
+    return trim($this->codresuso);
+
+  }
+  
+  public function getCodrespat()
+  {
+
+    return trim($this->codrespat);
 
   }
   
@@ -1282,6 +1304,26 @@ abstract class BaseBnregmue extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setCodresuso($v)
+	{
+
+    if ($this->codresuso !== $v) {
+        $this->codresuso = $v;
+        $this->modifiedColumns[] = BnregmuePeer::CODRESUSO;
+      }
+  
+	} 
+	
+	public function setCodrespat($v)
+	{
+
+    if ($this->codrespat !== $v) {
+        $this->codrespat = $v;
+        $this->modifiedColumns[] = BnregmuePeer::CODRESPAT;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -1400,7 +1442,11 @@ abstract class BaseBnregmue extends BaseObject  implements Persistent {
 
       $this->stainm = $rs->getString($startcol + 51);
 
-      $this->id = $rs->getInt($startcol + 52);
+      $this->codresuso = $rs->getString($startcol + 52);
+
+      $this->codrespat = $rs->getString($startcol + 53);
+
+      $this->id = $rs->getInt($startcol + 54);
 
       $this->resetModified();
 
@@ -1408,7 +1454,7 @@ abstract class BaseBnregmue extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 53; 
+            return $startcol + 55; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Bnregmue object", $e);
     }
@@ -1712,6 +1758,12 @@ abstract class BaseBnregmue extends BaseObject  implements Persistent {
 				return $this->getStainm();
 				break;
 			case 52:
+				return $this->getCodresuso();
+				break;
+			case 53:
+				return $this->getCodrespat();
+				break;
+			case 54:
 				return $this->getId();
 				break;
 			default:
@@ -1776,7 +1828,9 @@ abstract class BaseBnregmue extends BaseObject  implements Persistent {
 			$keys[49] => $this->getDimviduti(),
 			$keys[50] => $this->getStasem(),
 			$keys[51] => $this->getStainm(),
-			$keys[52] => $this->getId(),
+			$keys[52] => $this->getCodresuso(),
+			$keys[53] => $this->getCodrespat(),
+			$keys[54] => $this->getId(),
 		);
 		return $result;
 	}
@@ -1949,6 +2003,12 @@ abstract class BaseBnregmue extends BaseObject  implements Persistent {
 				$this->setStainm($value);
 				break;
 			case 52:
+				$this->setCodresuso($value);
+				break;
+			case 53:
+				$this->setCodrespat($value);
+				break;
+			case 54:
 				$this->setId($value);
 				break;
 		} 	}
@@ -2010,7 +2070,9 @@ abstract class BaseBnregmue extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[49], $arr)) $this->setDimviduti($arr[$keys[49]]);
 		if (array_key_exists($keys[50], $arr)) $this->setStasem($arr[$keys[50]]);
 		if (array_key_exists($keys[51], $arr)) $this->setStainm($arr[$keys[51]]);
-		if (array_key_exists($keys[52], $arr)) $this->setId($arr[$keys[52]]);
+		if (array_key_exists($keys[52], $arr)) $this->setCodresuso($arr[$keys[52]]);
+		if (array_key_exists($keys[53], $arr)) $this->setCodrespat($arr[$keys[53]]);
+		if (array_key_exists($keys[54], $arr)) $this->setId($arr[$keys[54]]);
 	}
 
 	
@@ -2070,6 +2132,8 @@ abstract class BaseBnregmue extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(BnregmuePeer::DIMVIDUTI)) $criteria->add(BnregmuePeer::DIMVIDUTI, $this->dimviduti);
 		if ($this->isColumnModified(BnregmuePeer::STASEM)) $criteria->add(BnregmuePeer::STASEM, $this->stasem);
 		if ($this->isColumnModified(BnregmuePeer::STAINM)) $criteria->add(BnregmuePeer::STAINM, $this->stainm);
+		if ($this->isColumnModified(BnregmuePeer::CODRESUSO)) $criteria->add(BnregmuePeer::CODRESUSO, $this->codresuso);
+		if ($this->isColumnModified(BnregmuePeer::CODRESPAT)) $criteria->add(BnregmuePeer::CODRESPAT, $this->codrespat);
 		if ($this->isColumnModified(BnregmuePeer::ID)) $criteria->add(BnregmuePeer::ID, $this->id);
 
 		return $criteria;
@@ -2204,6 +2268,10 @@ abstract class BaseBnregmue extends BaseObject  implements Persistent {
 		$copyObj->setStasem($this->stasem);
 
 		$copyObj->setStainm($this->stainm);
+
+		$copyObj->setCodresuso($this->codresuso);
+
+		$copyObj->setCodrespat($this->codrespat);
 
 
 		$copyObj->setNew(true);

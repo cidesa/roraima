@@ -25,6 +25,10 @@ abstract class BaseBnubibie extends BaseObject  implements Persistent {
 
 
 	
+	protected $codubiadm;
+
+
+	
 	protected $id;
 
 	
@@ -59,6 +63,13 @@ abstract class BaseBnubibie extends BaseObject  implements Persistent {
   {
 
     return trim($this->dirubi);
+
+  }
+  
+  public function getCodubiadm()
+  {
+
+    return trim($this->codubiadm);
 
   }
   
@@ -109,6 +120,16 @@ abstract class BaseBnubibie extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setCodubiadm($v)
+	{
+
+    if ($this->codubiadm !== $v) {
+        $this->codubiadm = $v;
+        $this->modifiedColumns[] = BnubibiePeer::CODUBIADM;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -131,7 +152,9 @@ abstract class BaseBnubibie extends BaseObject  implements Persistent {
 
       $this->dirubi = $rs->getString($startcol + 3);
 
-      $this->id = $rs->getInt($startcol + 4);
+      $this->codubiadm = $rs->getString($startcol + 4);
+
+      $this->id = $rs->getInt($startcol + 5);
 
       $this->resetModified();
 
@@ -139,7 +162,7 @@ abstract class BaseBnubibie extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 5; 
+            return $startcol + 6; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Bnubibie object", $e);
     }
@@ -299,6 +322,9 @@ abstract class BaseBnubibie extends BaseObject  implements Persistent {
 				return $this->getDirubi();
 				break;
 			case 4:
+				return $this->getCodubiadm();
+				break;
+			case 5:
 				return $this->getId();
 				break;
 			default:
@@ -315,7 +341,8 @@ abstract class BaseBnubibie extends BaseObject  implements Persistent {
 			$keys[1] => $this->getDesubi(),
 			$keys[2] => $this->getStacod(),
 			$keys[3] => $this->getDirubi(),
-			$keys[4] => $this->getId(),
+			$keys[4] => $this->getCodubiadm(),
+			$keys[5] => $this->getId(),
 		);
 		return $result;
 	}
@@ -344,6 +371,9 @@ abstract class BaseBnubibie extends BaseObject  implements Persistent {
 				$this->setDirubi($value);
 				break;
 			case 4:
+				$this->setCodubiadm($value);
+				break;
+			case 5:
 				$this->setId($value);
 				break;
 		} 	}
@@ -357,7 +387,8 @@ abstract class BaseBnubibie extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[1], $arr)) $this->setDesubi($arr[$keys[1]]);
 		if (array_key_exists($keys[2], $arr)) $this->setStacod($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setDirubi($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setId($arr[$keys[4]]);
+		if (array_key_exists($keys[4], $arr)) $this->setCodubiadm($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setId($arr[$keys[5]]);
 	}
 
 	
@@ -369,6 +400,7 @@ abstract class BaseBnubibie extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(BnubibiePeer::DESUBI)) $criteria->add(BnubibiePeer::DESUBI, $this->desubi);
 		if ($this->isColumnModified(BnubibiePeer::STACOD)) $criteria->add(BnubibiePeer::STACOD, $this->stacod);
 		if ($this->isColumnModified(BnubibiePeer::DIRUBI)) $criteria->add(BnubibiePeer::DIRUBI, $this->dirubi);
+		if ($this->isColumnModified(BnubibiePeer::CODUBIADM)) $criteria->add(BnubibiePeer::CODUBIADM, $this->codubiadm);
 		if ($this->isColumnModified(BnubibiePeer::ID)) $criteria->add(BnubibiePeer::ID, $this->id);
 
 		return $criteria;
@@ -407,6 +439,8 @@ abstract class BaseBnubibie extends BaseObject  implements Persistent {
 		$copyObj->setStacod($this->stacod);
 
 		$copyObj->setDirubi($this->dirubi);
+
+		$copyObj->setCodubiadm($this->codubiadm);
 
 
 		$copyObj->setNew(true);

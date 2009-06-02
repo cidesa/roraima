@@ -42,6 +42,8 @@ class BnubibieMapBuilder {
 
 		$tMap->addColumn('DIRUBI', 'Dirubi', 'string', CreoleTypes::VARCHAR, false, 500);
 
+		$tMap->addColumn('CODUBIADM', 'Codubiadm', 'string', CreoleTypes::VARCHAR, true, 30);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

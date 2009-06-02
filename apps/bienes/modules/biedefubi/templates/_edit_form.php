@@ -7,14 +7,14 @@
   'name'      => 'sf_admin_edit_form',
   'multipart' => true,
 )) ?>
-<?php use_helper('Javascript') ?>
-<?php echo javascript_include_tag('dFilter','tools','observe') ?>
+<?php use_helper('Javascript','Catalogo') ?>
+<?php echo javascript_include_tag('dFilter','tools','observe','ajax') ?>
 
 <?php echo object_input_hidden_tag($bnubibie, 'getId') ?>
 
 <fieldset id="sf_fieldset_none" class="">
 <div class="form-row">
-  <?php echo label_for('bnubibie[codubi]', __($labels['bnubibie{codubi}']), 'class="required" ') ?>
+  <?php echo label_for('bnubibie[codubi]', __($labels['bnubibie{codubi}']), 'class="required" Style="width:200px"') ?>
   <div class="content<?php if ($sf_request->hasError('bnubibie{codubi}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('bnubibie{codubi}')): ?>
     <?php echo form_error('bnubibie{codubi}', array('class' => 'form-error-msg')) ?>
@@ -30,7 +30,7 @@
 
 </div>
 <br>
-  <?php echo label_for('bnubibie[desubi]', __($labels['bnubibie{desubi}']), 'class="required" ') ?>
+  <?php echo label_for('bnubibie[desubi]', __($labels['bnubibie{desubi}']),'class="required" Style="width:200px"') ?>
   <div class="content<?php if ($sf_request->hasError('bnubibie{desubi}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('bnubibie{desubi}')): ?>
     <?php echo form_error('bnubibie{desubi}', array('class' => 'form-error-msg')) ?>
@@ -43,7 +43,7 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 <br>
-  <?php echo label_for('bnubibie[dirubi]', __($labels['bnubibie{dirubi}']), 'class="required" ') ?>
+  <?php echo label_for('bnubibie[dirubi]', __($labels['bnubibie{dirubi}']), 'class="required" Style="width:200px"') ?>
   <div class="content<?php if ($sf_request->hasError('bnubibie{dirubi}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('bnubibie{dirubi}')): ?>
     <?php echo form_error('bnubibie{dirubi}', array('class' => 'form-error-msg')) ?>
@@ -55,8 +55,16 @@
   'maxlength' => 500,
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
+<br>
+  <?php echo label_for('bnubibie[codubiadm]', __($labels['bnubibie{codubiadm}']), 'class="required" Style="width:200px"') ?>
+  <?php echo Catalogo($bnubibie,1,array(
+  'getprincipal' => 'getCodubiadm',
+  'getsecundario' => 'getDesubiadm',
+  'campoprincipal' => 'codubiadm',
+  'camposecundario' => 'desubiadm',
+  'campobase' => 'id_codubiadm',
+  ), 'Bnubica_Almordcom', 'Bnubica', ''); ?>
 </div>
-
 </fieldset>
 
 <?php include_partial('edit_actions', array('bnubibie' => $bnubibie)) ?>

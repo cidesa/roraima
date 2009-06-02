@@ -37,6 +37,16 @@ class Bnregmue extends BaseBnregmue
     $des = $this->getValini()+ $this->getValadi();
     return $des;
   }
+
+  public function getNomrespat()
+  {
+  	 return Herramientas::getX('CODEMP','Nphojint','Nomemp',self::getCodrespat());
+  }
+
+  public function getNomresuso()
+  {
+  	 return Herramientas::getX('CODEMP','Nphojint','Nomemp',self::getCodresuso());
+  }
 }
 
 

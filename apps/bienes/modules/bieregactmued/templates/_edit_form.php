@@ -7,7 +7,7 @@
   'name'      => 'sf_admin_edit_form',
   'multipart' => true,
 )) ?>
-<?php use_helper('Javascript','PopUp','Grid','Date','SubmitClick','tabs') ?>
+<?php use_helper('Javascript','PopUp','Grid','Date','SubmitClick','tabs', 'Catalogo') ?>
 <?php echo javascript_include_tag('dFilter','bienes/bieregactmued','ajax','tools','observe') ?>
 <?php echo object_input_hidden_tag($bnregmue, 'getId') ?>
 <?php echo object_input_hidden_tag($bnregmue, 'getStamue') ?>
@@ -237,6 +237,32 @@
 <strong><? echo 'Actual = '?></strong>
 &nbsp;
 <?php echo input_tag('vidaAct',$bnregmue->getVidutiactual(),'disabled=true,size=10')?>
+</div>
+</fielset>
+</div>
+<div class="form-row">
+<fieldset id="sf_fieldset_none" class="">
+<legend><? echo __('Responsables')?> </legend>
+<div class="form-row">
+  <?php echo label_for('bnregmue[codrespat]', __($labels['bnregmue{codrespat}']), 'class="required" Style="width:200px"') ?>
+   <div class="contentform-error">
+  <?php echo Catalogo($bnregmue,5,array(
+  'getprincipal' => 'getCodrespat',
+  'getsecundario' => 'getNomrespat',
+  'campoprincipal' => 'codrespat',
+  'camposecundario' => 'nomrespat',
+  'campobase' => 'id_codrespat',
+  ), 'Nphojint_Almdespser', 'Nphojint', ''); ?>
+  </div>
+  <br>
+    <?php echo label_for('bnregmue[codresuso]', __($labels['bnregmue{codresuso}']), 'class="required" Style="width:200px"') ?>
+  <?php echo Catalogo($bnregmue,5,array(
+  'getprincipal' => 'getCodresuso',
+  'getsecundario' => 'getNomresuso',
+  'campoprincipal' => 'codresuso',
+  'camposecundario' => 'nomresuso',
+  'campobase' => 'id_codresuso',
+  ), 'Nphojint_Almdespser', 'Nphojint', ''); ?>
 </div>
 </fielset>
 </div>

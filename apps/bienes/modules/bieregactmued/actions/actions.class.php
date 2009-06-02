@@ -82,6 +82,33 @@ class bieregactmuedActions extends autobieregactmuedActions
     $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
     return sfView::HEADER_ONLY;
    }
+   elseif ($this->getRequestParameter('ajax')=='5')
+   {
+   	$output = '[["","",""],["",""]]';
+    $cajtexmos=$this->getRequestParameter('cajtexmos');
+    $codigo=$this->getRequestParameter('codigo');
+    if ($codigo!="")
+    {
+	    $c= new Criteria();
+	    $c->add(NphojintPeer::CODEMP,$codigo);
+	    $result=NphojintPeer::doSelectOne($c);
+	    if ($result)
+	    {
+	      $dato=$result->getNomemp();
+	      $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
+	    }
+	    else
+	    {
+	      if ($cajtexmos=="bnregmue_nomrespat") $cajita="bnregmue_codrespat"; else $cajita="bnregmue_codresuso";
+	      $javascript="alert('El código del empleado no existe...');$('$cajita').value=''";
+	      $dato="";
+	      $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""]]';
+	    }
+    }
+
+     $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+     return sfView::HEADER_ONLY;
+   }
   }
 
 
@@ -464,6 +491,14 @@ class bieregactmuedActions extends autobieregactmuedActions
     if (isset($bnregmue['stainm']))
     {
       $this->bnregmue->setStainm(trim($bnregmue['stainm']));
+    }
+    if (isset($bnregmue['codrespat']))
+    {
+      $this->bnregmue->setCodrespat($bnregmue['codrespat']);
+    }
+    if (isset($bnregmue['codresuso']))
+    {
+      $this->bnregmue->setCodresuso($bnregmue['codresuso']);
     }
   }
 
