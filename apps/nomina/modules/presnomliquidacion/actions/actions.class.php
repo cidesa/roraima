@@ -59,7 +59,7 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 			A.FECFIN=C.FECHAFIN AND 
 			A.codemp='$codemp' AND 
 			B.CODNOM='$codnom' AND 
-			B.CODCON='000' and
+			B.CODCON='000' AND
 			to_char(fecini,'yyyy')>=perdes and
 			to_char(fecfin,'yyyy')<=perhas
 			GROUP BY B.CODPAR 
@@ -407,7 +407,7 @@ public function configGrid($codemp="")
           {
            $per[$i]['perini']=$arr[$cont]['desde'];
            $per[$i]['perfin']=$arr[$cont]['hasta'];
-           if ($arr[$cont]['fracciondia']>0)
+           if ($arr[$cont]['fraccion']=='SI')
            		$per[$i]['diadis']=H::tofloat($arr[$cont]['fracciondia']);
            else
            		$per[$i]['diadis']=H::tofloat($arr[$cont]['corresponde']-$arr[$cont]['disfrutados']);
@@ -534,7 +534,14 @@ public function configGrid($codemp="")
 			    {
 			    	$categoria=$rs1[0]["codcat"];
 				   	$codnom=$rs1[0]["codnom"];
-					$nomemp=$rs1[0]["nomemp"];;
+					$nomemp=$rs1[0]["nomemp"];					
+					if($nomemp==''){
+						$sql11 = "select nomemp from nphojint where CodEmp='$codemp'";
+						if (H::BuscarDatos($sql11,$rs11))
+					       $nomemp=$rs11[0]["nomemp"];
+					}
+					
+					
 				}
 				/**VERIFICAMOS SI EXISTEN PERSONAS CON LIQUIDACION CALCULADA*/
 				$sql2="Select * from NPLIQUIDACION_DET where CodEmp='$codigo'";
