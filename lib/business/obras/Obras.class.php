@@ -911,7 +911,7 @@ public static function salvarLicitacion($ocreglic, $grid)
   	  }
   }
 
-  public static function arregloFinFisCon($obra,$contrato,&$arreglofis)
+  public static function arregloFinFisCon($obra,$contrato,&$arreglofiscon)
   {
   	$arreglofiscon=array();
   	$c= new Criteria();
@@ -968,7 +968,7 @@ public static function salvarLicitacion($ocreglic, $grid)
       	  	$k=count($arreglofiscon)+1;
             $arreglofiscon[$k-1]["codpar"]=$obj->getCodpar();
             $arreglofiscon[$k-1]["despar"]=Herramientas::getX('CODPAR','Ocdefpar','despar',$obj->getCodpar());
-            $arreglofiscon[$k-1]["canobr"]=number_format($obj->getCanobr(),2,',','.');
+            $arreglofiscon[$k-1]["canobr"]=number_format($obj->getCancon(),2,',','.');
             $arreglofiscon[$k-1]["caneje"]=number_format($obj->getCanval(),2,',','.');
             $arreglofiscon[$k-1]["porrep"]="0,00";
             $calculo2=((100/Herramientas::convnume($arreglofiscon[$k-1]["canobr"]))*Herramientas::convnume($arreglofiscon[$k-1]["caneje"]));
@@ -1896,7 +1896,8 @@ public static function salvarLicitacion($ocreglic, $grid)
   {
   	$c= new Criteria();
     $reg= OcdefempPeer::doSelectOne($c);
-
+    if ($reg)
+    {
     $c= new Criteria();
     $c->add(OcregconPeer::CODCON,$ocregact->getCodcon());
     $data= OcregconPeer::doSelectOne($c);
@@ -1920,6 +1921,7 @@ public static function salvarLicitacion($ocreglic, $grid)
        break;
     }
     $data->save();
+    }
   }
 
   public static function actualizarStatus($ocregact)
