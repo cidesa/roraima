@@ -138,6 +138,10 @@ class BnregmueMapBuilder {
 
 		$tMap->addColumn('STAINM', 'Stainm', 'string', CreoleTypes::VARCHAR, false, 1);
 
+		$tMap->addColumn('CODRESUSO', 'Codresuso', 'string', CreoleTypes::VARCHAR, false, 30);
+
+		$tMap->addColumn('CODRESPAT', 'Codrespat', 'string', CreoleTypes::VARCHAR, false, 30);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

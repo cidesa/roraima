@@ -8,6 +8,7 @@ generator:
       codubi: {name: Código, params: maxlength=32}
       desubi: {name: Descripción, params: maxlength=250}
       dirubi: {name: Dirección, params: maxlength=500}
+      codubiadm: {name: Cod. Ubicación Administrativa}
 
     list:
       title:          Definición de Ubicación
@@ -20,7 +21,7 @@ generator:
       sort: codubi
     edit:
       title:          Edición de Ubicación
-      display:        [codubi, desubi, dirubi]
+      display:        [codubi, desubi, dirubi, codubiadm]
       actions:
          _list:     ~
          _save:     ~

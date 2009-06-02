@@ -13,7 +13,7 @@ abstract class BaseBnubibiePeer {
 	const CLASS_DEFAULT = 'lib.model.Bnubibie';
 
 	
-	const NUM_COLUMNS = 5;
+	const NUM_COLUMNS = 6;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -32,6 +32,9 @@ abstract class BaseBnubibiePeer {
 	const DIRUBI = 'bnubibie.DIRUBI';
 
 	
+	const CODUBIADM = 'bnubibie.CODUBIADM';
+
+	
 	const ID = 'bnubibie.ID';
 
 	
@@ -40,18 +43,18 @@ abstract class BaseBnubibiePeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codubi', 'Desubi', 'Stacod', 'Dirubi', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (BnubibiePeer::CODUBI, BnubibiePeer::DESUBI, BnubibiePeer::STACOD, BnubibiePeer::DIRUBI, BnubibiePeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codubi', 'desubi', 'stacod', 'dirubi', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
+		BasePeer::TYPE_PHPNAME => array ('Codubi', 'Desubi', 'Stacod', 'Dirubi', 'Codubiadm', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (BnubibiePeer::CODUBI, BnubibiePeer::DESUBI, BnubibiePeer::STACOD, BnubibiePeer::DIRUBI, BnubibiePeer::CODUBIADM, BnubibiePeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codubi', 'desubi', 'stacod', 'dirubi', 'codubiadm', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codubi' => 0, 'Desubi' => 1, 'Stacod' => 2, 'Dirubi' => 3, 'Id' => 4, ),
-		BasePeer::TYPE_COLNAME => array (BnubibiePeer::CODUBI => 0, BnubibiePeer::DESUBI => 1, BnubibiePeer::STACOD => 2, BnubibiePeer::DIRUBI => 3, BnubibiePeer::ID => 4, ),
-		BasePeer::TYPE_FIELDNAME => array ('codubi' => 0, 'desubi' => 1, 'stacod' => 2, 'dirubi' => 3, 'id' => 4, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
+		BasePeer::TYPE_PHPNAME => array ('Codubi' => 0, 'Desubi' => 1, 'Stacod' => 2, 'Dirubi' => 3, 'Codubiadm' => 4, 'Id' => 5, ),
+		BasePeer::TYPE_COLNAME => array (BnubibiePeer::CODUBI => 0, BnubibiePeer::DESUBI => 1, BnubibiePeer::STACOD => 2, BnubibiePeer::DIRUBI => 3, BnubibiePeer::CODUBIADM => 4, BnubibiePeer::ID => 5, ),
+		BasePeer::TYPE_FIELDNAME => array ('codubi' => 0, 'desubi' => 1, 'stacod' => 2, 'dirubi' => 3, 'codubiadm' => 4, 'id' => 5, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
 	);
 
 	
@@ -112,6 +115,8 @@ abstract class BaseBnubibiePeer {
 		$criteria->addSelectColumn(BnubibiePeer::STACOD);
 
 		$criteria->addSelectColumn(BnubibiePeer::DIRUBI);
+
+		$criteria->addSelectColumn(BnubibiePeer::CODUBIADM);
 
 		$criteria->addSelectColumn(BnubibiePeer::ID);
 

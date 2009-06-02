@@ -21,4 +21,14 @@ class Bnubica extends BaseBnubica
   {
     $this->genera = $val;
   }
+
+  public function getCodubiadm()
+  {
+  	return self::getCodubi();
+  }
+
+  public function getDesubiadm()
+  {
+  	return self::getDesubi();
+  }
 }

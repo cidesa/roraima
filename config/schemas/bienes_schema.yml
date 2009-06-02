@@ -996,6 +996,12 @@ propel:
     stainm:
       type: VARCHAR
       size: 1
+    codresuso:
+      type: VARCHAR
+      size: 30
+    codrespat:
+      type: VARCHAR
+      size: 30
     id:
       type: INTEGER
       required: true
@@ -1270,6 +1276,10 @@ propel:
     dirubi:
       type: VARCHAR
       size: 500
+    codubiadm:
+      type: VARCHAR
+      size: 30
+      required: true
     id:
       type: INTEGER
       required: true

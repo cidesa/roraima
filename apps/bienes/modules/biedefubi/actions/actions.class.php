@@ -39,7 +39,38 @@ class biedefubiActions extends autobiedefubiActions
     {
       $this->bnubibie->setDirubi($bnubibie['dirubi']);
     }
+    if (isset($bnubibie['codubiadm']))
+    {
+      $this->bnubibie->setCodubiadm($bnubibie['codubiadm']);
+    }
+
   }
 
+  public function executeAjax()
+  {
+   if ($this->getRequestParameter('ajax')=='1')
+   {
+    $cajtexmos=$this->getRequestParameter('cajtexmos');
+    $codigo=$this->getRequestParameter('codigo');
+    $c= new Criteria();
+    $c->add(BnubicaPeer::CODUBI,$codigo);
+    $result=BnubicaPeer::doSelectOne($c);
+    if ($result)
+    {
+      $dato=$result->getDesubi();
+      $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
+    }
+    else
+    {
+      $javascript="alert('El código no existe...');";
+      $dato="";
+      $output = '[["javascript","'.$javascript.'",""],["'.$cajtexmos.'","'.$dato.'",""]]';
+    }
+
+
+     $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+     return sfView::HEADER_ONLY;
+   }
+  }
 
 }

@@ -154,4 +154,24 @@ class Nphojint extends BaseNphojint
     {
       $this->incapacidades = $val;
     }
+
+    public function getCodrespat()
+    {
+    	return self::getCodemp();
+    }
+
+    public function getNomrespat()
+    {
+    	return self::getNomemp();
+    }
+
+    public function getCodresuso()
+    {
+    	return self::getCodemp();
+    }
+
+    public function getNomresuso()
+    {
+    	return self::getNomemp();
+    }
 }
