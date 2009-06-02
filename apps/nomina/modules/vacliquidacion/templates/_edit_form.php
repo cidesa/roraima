@@ -87,12 +87,13 @@
 <strong>Ultimo Sueldo:</strong>&nbsp;
   <?php echo input_tag('nphojint_ultsue',$suenor, array (
   'size' => 13,
+  'readonly'  =>  $nphojint->getId()!='' ? true : false ,  
   'name' => 'nphojint_ultsue',
   'maxlength' => 15,
   'onBlur'=> remote_function(array(
 			  'update'=> 'grid',
 			  'url'      => 'vacliquidacion/ajax',
-			  'complete' => 'AjaxJSON(request, json);$("nphojint_fecing").focus()',
+			  'complete' => 'AjaxJSON(request, json);$("nphojint_fecing").focus();formatearcajita("nphojint_ultsue");',
 			  'condition' => "$('nphojint_codemp').value != '' && $('id').value == ''",
   			  'with' => "'ajax=2&cajcodemp='+$(nphojint_codemp).value+'&cajultsue='+this.value+'&cajsuenor='+$(nphojint_suenor).value"
 			  ))
@@ -101,12 +102,13 @@
 <strong>Salario Integral:</strong>&nbsp;
   <?php echo input_tag('nphojint_suenor',$ultsue, array (
   'size' => 13,
+  'readonly'  =>  $nphojint->getId()!='' ? true : false ,  
   'name' => 'nphojint_suenor',
   'maxlength' => 15,
   'onBlur'=> remote_function(array(
 			  'update'=> 'grid',
 			  'url'      => 'vacliquidacion/ajax',
-			  'complete' => 'AjaxJSON(request, json);$("nphojint_fecing").focus()',
+			  'complete' => 'AjaxJSON(request, json);$("nphojint_fecing").focus();formatearcajita("nphojint_suenor");',
 			  'condition' => "$('nphojint_codemp').value != '' && $('id').value == ''",
   			  'with' => "'ajax=2&cajcodemp='+$(nphojint_codemp).value+'&cajultsue='+$(nphojint_ultsue).value+'&cajsuenor='+this.value"
 			  ))
@@ -144,6 +146,31 @@
   var id="";
   var id='<?php echo $nphojint->getId()?>';
   actualiza(id);
+
+  function formatearcajita(id)
+  {
+  	if (ValidarNumeroV2(id)==true)
+    {
+      if(ValidarNumeroV2Float(id))
+        elnum = FloattoFloatVE($(id).value);
+      else
+        if(ValidarNumeroV2VE(id))
+        {
+          elnum = FloatVEtoFloat($(id).value);
+          elnum = FloattoFloatVE(elnum);
+        }
+        else{elnum = '0,00';}
+      $(id).value = elnum;     
+      return true;
+    }
+    else
+    {
+      $(id).value='0,00';
+      $(id).focus();
+      $(id).select();
+      return false;
+    }
+  }
 
   function actualiza(id)
   {
