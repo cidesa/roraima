@@ -997,10 +997,12 @@ class oycvalActions extends autooycvalActions
 	                   case $this->val_ant:
 	                     switch($codtipcon)
                          {
-                           case ($this->con_ins || $this->con_sup || $this->con_pro):
+                           case $this->con_ins:
+                           case $this->con_sup:
+                           case $this->con_pro:
                              $this->otro='S';
                              $javascript=$javascript."$('gastosree').show(); $('tab1').innerHTML='<a id=tab1 href=#>Oferta de Servicio</a>'; $('oferta').show(); $('partida').hide(); ";
-                             Obras::datosOfertaContrato($codcon,$tipval,$this->val_ant,$this->val_par,$this->val_ret,$this->val_fin,$this->val_rec,$poriva,$porant,$idval,$gasretot,$data->getMoncon(),$aumobr,$disobr,$obrext,$monper,$valpag,&$arreglooferta,&$arregloofertaret,&$arreglomontos,&$msj,&$montotoferacum);
+                             Obras::datosOfertaContrato($codcon,$tipval,$this->val_ant,$this->val_par,$this->val_ret,$this->val_fin,$this->val_rec,$poriva,$porant,$idval,$gasretot,$data->getMoncon(),$aumobr,$disobr,$obrext,$monper,$valpag,&$arreglooferta,&$arregloret,&$arreglomontos,&$msj,&$montotoferacum);
                              if ($msj=="")
                              {
                              	$this->configGridOfertas('','','','',$arreglooferta);
@@ -1048,13 +1050,16 @@ class oycvalActions extends autooycvalActions
                          	$arreglomontos[0]["retacu"]=0;
                          }
 	                    break;
-	                   case ($this->val_par || $this->val_fin):
+	                   case $this->val_par:
+	                   case $this->val_fin:
 	                      switch($codtipcon)
                           {
-                           case ($this->con_ins || $this->con_sup || $this->con_pro):
+                           case $this->con_ins:
+                           case $this->con_sup:
+                           case $this->con_pro:
                              $this->otro='S';
                              $javascript=$javascript."$('gastosree').show(); $('tab1').innerHTML='<a id=tab1 href=#>Oferta de Servicio</a>'; $('oferta').show(); $('partida').hide(); ";
-                             Obras::datosOfertaContrato($codcon,$tipval,$this->val_ant,$this->val_par,$this->val_ret,$this->val_fin,$this->val_rec,$poriva,$porant,$idval,$gasretot,$data->getMoncon(),$aumobr,$disobr,$obrext,$monper,$valpag,&$arreglooferta,&$arregloofertaret,&$arreglomontos,&$msj,&$montotoferacum);
+                             Obras::datosOfertaContrato($codcon,$tipval,$this->val_ant,$this->val_par,$this->val_ret,$this->val_fin,$this->val_rec,$poriva,$porant,$idval,$gasretot,$data->getMoncon(),$aumobr,$disobr,$obrext,$monper,$valpag,&$arreglooferta,&$arregloret,&$arreglomontos,&$msj,&$montotoferacum);
                              if ($msj=="")
                              {
                              	$this->configGridOfertas('','','','',$arreglooferta);
@@ -1094,13 +1099,15 @@ class oycvalActions extends autooycvalActions
                           }
                         break;
 
-                       case ($this->val_ret):
+                       case $this->val_ret:
                          switch($codtipcon)
                           {
-                           case ($this->con_ins || $this->con_sup || $this->con_pro):
+                           case $this->con_ins:
+                           case $this->con_sup:
+                           case $this->con_pro:
                              $this->otro='S';
                              $javascript=$javascript."$('gastosree').show(); $('tab1').innerHTML='<a id=tab1 href=#>Oferta de Servicio</a>'; $('oferta').show(); $('partida').hide(); ";
-                             Obras::datosOfertaContrato($codcon,$tipval,$this->val_ant,$this->val_par,$this->val_ret,$this->val_fin,$this->val_rec,$poriva,$porant,$idval,$gasretot,$data->getMoncon(),$aumobr,$disobr,$obrext,$monper,$valpag,&$arreglooferta,&$arregloofertaret,&$arreglomontos,&$msj,&$montotoferacum);
+                             Obras::datosOfertaContrato($codcon,$tipval,$this->val_ant,$this->val_par,$this->val_ret,$this->val_fin,$this->val_rec,$poriva,$porant,$idval,$gasretot,$data->getMoncon(),$aumobr,$disobr,$obrext,$monper,$valpag,&$arreglooferta,&$arregloret,&$arreglomontos,&$msj,&$montotoferacum);
                              if ($msj=="")
                              {
                              	$this->configGridOfertas('','','','',$arreglooferta);
@@ -1138,11 +1145,15 @@ class oycvalActions extends autooycvalActions
                            $javascript=$javascript."alert('$msj1'); ";
                           }
                         break;
-                       case ($this->val_rec):
+                       case $this->val_rec:
                          switch($codtipcon)
                           {
-                           case ($this->con_ins || $this->con_sup || $this->con_pro):
+                           case $this->con_ins:
+                           case $this->con_sup:
+                           case $this->con_pro:
                             $this->otro='S';
+                            $arregloret=array();
+                            $arreglomontos=array();
                             break;
                            default:
                             $this->otro='N';
@@ -1214,7 +1225,9 @@ class oycvalActions extends autooycvalActions
 	              case $this->val_par:  //Valuacion Parcial
                     switch($data->getTipcon())
 	                {
-	                   case ($this->con_ins || $this->con_sup || $this->con_pro):
+	                   case $this->con_ins:
+	                   case $this->con_sup:
+	                   case $this->con_pro:
 	                     $javascript="$('porcentaje').hide();";
 		                 //Datos Parciales
 		                 $codcon=$data->getCodcon();
@@ -1242,10 +1255,12 @@ class oycvalActions extends autooycvalActions
 		                   case $this->val_ant:
 		                     switch($codtipcon)
 	                         {
-	                           case ($this->con_ins || $this->con_sup || $this->con_pro):
+	                           case $this->con_ins:
+	                           case $this->con_sup:
+	                           case $this->con_pro:
 	                             $this->otro='S';
 	                             $javascript=$javascript."$('gastosree').show(); $('tab1').innerHTML='<a id=tab1 href=#>Oferta de Servicio</a>'; $('oferta').show(); $('partida').hide(); ";
-	                             Obras::datosOfertaContrato($codcon,$tipval,$this->val_ant,$this->val_par,$this->val_ret,$this->val_fin,$this->val_rec,$poriva,$porant,$idval,$gasretot,$data->getMoncon(),$aumobr,$disobr,$obrext,$monper,$valpag,&$arreglooferta,&$arregloofertaret,&$arreglomontos,&$msj,&$montotoferacum);
+	                             Obras::datosOfertaContrato($codcon,$tipval,$this->val_ant,$this->val_par,$this->val_ret,$this->val_fin,$this->val_rec,$poriva,$porant,$idval,$gasretot,$data->getMoncon(),$aumobr,$disobr,$obrext,$monper,$valpag,&$arreglooferta,&$arregloret,&$arreglomontos,&$msj,&$montotoferacum);
 	                             if ($msj=="")
 	                             {
 	                             	$this->configGridOfertas('','','','',$arreglooferta);
@@ -1294,13 +1309,16 @@ class oycvalActions extends autooycvalActions
 	                         	$arreglomontos[0]["retacu"]=0;
 	                         }
 		                    break;
-		                   case ($this->val_par || $this->val_fin):
+		                   case $this->val_par:
+		                   case $this->val_fin:
 		                      switch($codtipcon)
 	                          {
-	                           case ($this->con_ins || $this->con_sup || $this->con_pro):
+	                           case $this->con_ins:
+	                           case $this->con_sup:
+	                           case $this->con_pro:
 	                             $this->otro='S';
 	                             $javascript=$javascript."$('gastosree').show(); $('tab1').innerHTML='<a id=tab1 href=#>Oferta de Servicio</a>'; $('oferta').show(); $('partida').hide(); ";
-	                             Obras::datosOfertaContrato($codcon,$tipval,$this->val_ant,$this->val_par,$this->val_ret,$this->val_fin,$this->val_rec,$poriva,$porant,$idval,$gasretot,$data->getMoncon(),$aumobr,$disobr,$obrext,$monper,$valpag,&$arreglooferta,&$arregloofertaret,&$arreglomontos,&$msj,&$montotoferacum);
+	                             Obras::datosOfertaContrato($codcon,$tipval,$this->val_ant,$this->val_par,$this->val_ret,$this->val_fin,$this->val_rec,$poriva,$porant,$idval,$gasretot,$data->getMoncon(),$aumobr,$disobr,$obrext,$monper,$valpag,&$arreglooferta,&$arregloret,&$arreglomontos,&$msj,&$montotoferacum);
 	                             if ($msj=="")
 	                             {
 	                             	$this->configGridOfertas('','','','',$arreglooferta);
@@ -1339,14 +1357,15 @@ class oycvalActions extends autooycvalActions
 	                           $javascript=$javascript."alert('$msj1'); ";
 	                          }
 	                        break;
-
-	                       case ($this->val_ret):
+	                       case $this->val_ret:
 	                         switch($codtipcon)
 	                          {
-	                           case ($this->con_ins || $this->con_sup || $this->con_pro):
+	                           case $this->con_ins:
+	                           case $this->con_sup:
+	                           case $this->con_pro:
 	                             $this->otro='S';
 	                             $javascript=$javascript."$('gastosree').show(); $('tab1').innerHTML='<a id=tab1 href=#>Oferta de Servicio</a>'; $('oferta').show(); $('partida').hide(); ";
-	                             Obras::datosOfertaContrato($codcon,$tipval,$this->val_ant,$this->val_par,$this->val_ret,$this->val_fin,$this->val_rec,$poriva,$porant,$idval,$gasretot,$data->getMoncon(),$aumobr,$disobr,$obrext,$monper,$valpag,&$arreglooferta,&$arregloofertaret,&$arreglomontos,&$msj,&$montotoferacum);
+	                             Obras::datosOfertaContrato($codcon,$tipval,$this->val_ant,$this->val_par,$this->val_ret,$this->val_fin,$this->val_rec,$poriva,$porant,$idval,$gasretot,$data->getMoncon(),$aumobr,$disobr,$obrext,$monper,$valpag,&$arreglooferta,&$arregloret,&$arreglomontos,&$msj,&$montotoferacum);
 	                             if ($msj=="")
 	                             {
 	                             	$this->configGridOfertas('','','','',$arreglooferta);
@@ -1384,11 +1403,15 @@ class oycvalActions extends autooycvalActions
 	                           $javascript=$javascript."alert('$msj1'); ";
 	                          }
 	                        break;
-	                       case ($this->val_rec):
+	                       case $this->val_rec:
 	                         switch($codtipcon)
 	                          {
-	                           case ($this->con_ins || $this->con_sup || $this->con_pro):
+	                           case $this->con_ins:
+	                           case $this->con_sup:
+	                           case $this->con_pro:
 	                            $this->otro='S';
+	                            $arregloret=array();
+	                            $arreglomontos=array();
 	                            break;
 	                           default:
 	                            $this->otro='N';
@@ -1476,10 +1499,12 @@ class oycvalActions extends autooycvalActions
 			                   case $this->val_ant:
 			                     switch($codtipcon)
 		                         {
-		                           case ($this->con_ins || $this->con_sup || $this->con_pro):
+		                           case $this->con_ins:
+		                           case $this->con_sup:
+		                           case $this->con_pro:
 		                             $this->otro='S';
 		                             $javascript=$javascript."$('gastosree').show(); $('tab1').innerHTML='<a id=tab1 href=#>Oferta de Servicio</a>'; $('oferta').show(); $('partida').hide(); ";
-		                             Obras::datosOfertaContrato($codcon,$tipval,$this->val_ant,$this->val_par,$this->val_ret,$this->val_fin,$this->val_rec,$poriva,$porant,$idval,$gasretot,$data->getMoncon(),$aumobr,$disobr,$obrext,$monper,$valpag,&$arreglooferta,&$arregloofertaret,&$arreglomontos,&$msj,&$montotoferacum);
+		                             Obras::datosOfertaContrato($codcon,$tipval,$this->val_ant,$this->val_par,$this->val_ret,$this->val_fin,$this->val_rec,$poriva,$porant,$idval,$gasretot,$data->getMoncon(),$aumobr,$disobr,$obrext,$monper,$valpag,&$arreglooferta,&$arregloret,&$arreglomontos,&$msj,&$montotoferacum);
 		                             if ($msj=="")
 		                             {
 		                             	$this->configGridOfertas('','','','',$arreglooferta);
@@ -1528,13 +1553,16 @@ class oycvalActions extends autooycvalActions
 		                         	$$arreglomontos[0]["retacu"]=0;
 		                         }
 			                    break;
-			                   case ($this->val_par || $this->val_fin):
+			                   case $this->val_par:
+			                   case $this->val_fin:
 			                      switch($codtipcon)
 		                          {
-		                           case ($this->con_ins || $this->con_sup || $this->con_pro):
+		                           case $this->con_ins:
+		                           case $this->con_sup:
+		                           case $this->con_pro:
 		                             $this->otro='S';
 		                             $javascript=$javascript."$('gastosree').show(); $('tab1').innerHTML='<a id=tab1 href=#>Oferta de Servicio</a>'; $('oferta').show(); $('partida').hide(); ";
-		                             Obras::datosOfertaContrato($codcon,$tipval,$this->val_ant,$this->val_par,$this->val_ret,$this->val_fin,$this->val_rec,$poriva,$porant,$idval,$gasretot,$data->getMoncon(),$aumobr,$disobr,$obrext,$monper,$valpag,&$arreglooferta,&$arregloofertaret,&$arreglomontos,&$msj,&$montotoferacum);
+		                             Obras::datosOfertaContrato($codcon,$tipval,$this->val_ant,$this->val_par,$this->val_ret,$this->val_fin,$this->val_rec,$poriva,$porant,$idval,$gasretot,$data->getMoncon(),$aumobr,$disobr,$obrext,$monper,$valpag,&$arreglooferta,&$arregloret,&$arreglomontos,&$msj,&$montotoferacum);
 		                             if ($msj=="")
 		                             {
 		                             	$this->configGridOfertas('','','','',$arreglooferta);
@@ -1573,14 +1601,15 @@ class oycvalActions extends autooycvalActions
 		                           $javascript=$javascript."alert('$msj1'); ";
 		                          }
 		                        break;
-
-		                       case ($this->val_ret):
+		                       case $this->val_ret:
 		                         switch($codtipcon)
 		                          {
-		                           case ($this->con_ins || $this->con_sup || $this->con_pro):
+		                           case $this->con_ins:
+		                           case $this->con_sup:
+		                           case $this->con_pro:
 		                             $this->otro='S';
 		                             $javascript=$javascript."$('gastosree').show(); $('tab1').innerHTML='<a id=tab1 href=#>Oferta de Servicio</a>'; $('oferta').show(); $('partida').hide(); ";
-		                             Obras::datosOfertaContrato($codcon,$tipval,$this->val_ant,$this->val_par,$this->val_ret,$this->val_fin,$this->val_rec,$poriva,$porant,$idval,$gasretot,$data->getMoncon(),$aumobr,$disobr,$obrext,$monper,$valpag,&$arreglooferta,&$arregloofertaret,&$arreglomontos,&$msj,&$montotoferacum);
+		                             Obras::datosOfertaContrato($codcon,$tipval,$this->val_ant,$this->val_par,$this->val_ret,$this->val_fin,$this->val_rec,$poriva,$porant,$idval,$gasretot,$data->getMoncon(),$aumobr,$disobr,$obrext,$monper,$valpag,&$arreglooferta,&$arregloret,&$arreglomontos,&$msj,&$montotoferacum);
 		                             if ($msj=="")
 		                             {
 		                             	$this->configGridOfertas('','','','',$arreglooferta);
@@ -1618,11 +1647,15 @@ class oycvalActions extends autooycvalActions
 		                           $javascript=$javascript."alert('$msj1'); ";
 		                          }
 		                        break;
-		                       case ($this->val_rec):
+		                       case $this->val_rec:
 		                         switch($codtipcon)
 		                          {
-		                           case ($this->con_ins || $this->con_sup || $this->con_pro):
+		                           case $this->con_ins:
+		                           case $this->con_sup:
+		                           case $this->con_pro:
 		                            $this->otro='S';
+		                            $arregloret=array();
+		                            $arreglomontos=array();
 		                            break;
 		                           default:
 		                            $this->otro='N';
@@ -1715,10 +1748,12 @@ class oycvalActions extends autooycvalActions
 	                   case $this->val_ant:
 	                     switch($codtipcon)
                          {
-                           case ($this->con_ins || $this->con_sup || $this->con_pro):
+                           case $this->con_ins:
+                           case $this->con_sup:
+                           case $this->con_pro:
                              $this->otro='S';
                              $javascript=$javascript."$('gastosree').show(); $('tab1').innerHTML='<a id=tab1 href=#>Oferta de Servicio</a>'; $('oferta').show(); $('partida').hide(); ";
-                             Obras::datosOfertaContrato($codcon,$tipval,$this->val_ant,$this->val_par,$this->val_ret,$this->val_fin,$this->val_rec,$poriva,$porant,$idval,$gasretot,$data->getMoncon(),$aumobr,$disobr,$obrext,$monper,$valpag,&$arreglooferta,&$arregloofertaret,&$arreglomontos,&$msj,&$montotoferacum);
+                             Obras::datosOfertaContrato($codcon,$tipval,$this->val_ant,$this->val_par,$this->val_ret,$this->val_fin,$this->val_rec,$poriva,$porant,$idval,$gasretot,$data->getMoncon(),$aumobr,$disobr,$obrext,$monper,$valpag,&$arreglooferta,&$arregloret,&$arreglomontos,&$msj,&$montotoferacum);
                              if ($msj=="")
                              {
                              	$this->configGridOfertas('','','','',$arreglooferta);
@@ -1767,13 +1802,16 @@ class oycvalActions extends autooycvalActions
                          	$arreglomontos[0]["retacu"]=0;
                          }
 	                    break;
-	                   case ($this->val_par || $this->val_fin):
+	                   case $this->val_par:
+	                   case $this->val_fin:
 	                      switch($codtipcon)
                           {
-                           case ($this->con_ins || $this->con_sup || $this->con_pro):
+                           case $this->con_ins:
+                           case $this->con_sup:
+                           case $this->con_pro:
                              $this->otro='S';
                              $javascript=$javascript."$('gastosree').show(); $('tab1').innerHTML='<a id=tab1 href=#>Oferta de Servicio</a>'; $('oferta').show(); $('partida').hide(); ";
-                             Obras::datosOfertaContrato($codcon,$tipval,$this->val_ant,$this->val_par,$this->val_ret,$this->val_fin,$this->val_rec,$poriva,$porant,$idval,$gasretot,$data->getMoncon(),$aumobr,$disobr,$obrext,$monper,$valpag,&$arreglooferta,&$arregloofertaret,&$arreglomontos,&$msj,&$montotoferacum);
+                             Obras::datosOfertaContrato($codcon,$tipval,$this->val_ant,$this->val_par,$this->val_ret,$this->val_fin,$this->val_rec,$poriva,$porant,$idval,$gasretot,$data->getMoncon(),$aumobr,$disobr,$obrext,$monper,$valpag,&$arreglooferta,&$arregloret,&$arreglomontos,&$msj,&$montotoferacum);
                              if ($msj=="")
                              {
                              	$this->configGridOfertas('','','','',$arreglooferta);
@@ -1812,14 +1850,15 @@ class oycvalActions extends autooycvalActions
                            $javascript=$javascript."alert('$msj1'); ";
                           }
                         break;
-
-                       case ($this->val_ret):
+                       case $this->val_ret:
                          switch($codtipcon)
                           {
-                           case ($this->con_ins || $this->con_sup || $this->con_pro):
+                           case $this->con_ins:
+                           case $this->con_sup:
+                           case $this->con_pro:
                              $this->otro='S';
                              $javascript=$javascript."$('gastosree').show(); $('tab1').innerHTML='<a id=tab1 href=#>Oferta de Servicio</a>'; $('oferta').show(); $('partida').hide(); ";
-                             Obras::datosOfertaContrato($codcon,$tipval,$this->val_ant,$this->val_par,$this->val_ret,$this->val_fin,$this->val_rec,$poriva,$porant,$idval,$gasretot,$data->getMoncon(),$aumobr,$disobr,$obrext,$monper,$valpag,&$arreglooferta,&$arregloofertaret,&$arreglomontos,&$msj,&$montotoferacum);
+                             Obras::datosOfertaContrato($codcon,$tipval,$this->val_ant,$this->val_par,$this->val_ret,$this->val_fin,$this->val_rec,$poriva,$porant,$idval,$gasretot,$data->getMoncon(),$aumobr,$disobr,$obrext,$monper,$valpag,&$arreglooferta,&$arregloret,&$arreglomontos,&$msj,&$montotoferacum);
                              if ($msj=="")
                              {
                              	$this->configGridOfertas('','','','',$arreglooferta);
@@ -1857,11 +1896,15 @@ class oycvalActions extends autooycvalActions
                            $javascript=$javascript."alert('$msj1'); ";
                           }
                         break;
-                       case ($this->val_rec):
+                       case $this->val_rec:
                          switch($codtipcon)
                           {
-                           case ($this->con_ins || $this->con_sup || $this->con_pro):
+                           case $this->con_ins:
+                           case $this->con_sup:
+                           case $this->con_pro:
                             $this->otro='S';
+                            $arregloret=array();
+                            $arreglomontos=array();
                             break;
                            default:
                             $this->otro='N';
@@ -1947,10 +1990,12 @@ class oycvalActions extends autooycvalActions
 	                   case $this->val_ant:
 	                     switch($codtipcon)
                          {
-                           case ($this->con_ins || $this->con_sup || $this->con_pro):
+                           case $this->con_ins:
+                           case $this->con_sup:
+                           case $this->con_pro:
                              $this->otro='S';
                              $javascript=$javascript."$('gastosree').show(); $('tab1').innerHTML='<a id=tab1 href=#>Oferta de Servicio</a>'; $('oferta').show(); $('partida').hide(); ";
-                             Obras::datosOfertaContrato($codcon,$tipval,$this->val_ant,$this->val_par,$this->val_ret,$this->val_fin,$this->val_rec,$poriva,$porant,$idval,$gasretot,$data->getMoncon(),$aumobr,$disobr,$obrext,$monper,$valpag,&$arreglooferta,&$arregloofertaret,&$arreglomontos,&$msj,&$montotoferacum);
+                             Obras::datosOfertaContrato($codcon,$tipval,$this->val_ant,$this->val_par,$this->val_ret,$this->val_fin,$this->val_rec,$poriva,$porant,$idval,$gasretot,$data->getMoncon(),$aumobr,$disobr,$obrext,$monper,$valpag,&$arreglooferta,&$arregloret,&$arreglomontos,&$msj,&$montotoferacum);
                              if ($msj=="")
                              {
                              	$this->configGridOfertas('','','','',$arreglooferta);
@@ -1999,13 +2044,16 @@ class oycvalActions extends autooycvalActions
                          	$arreglomontos[0]["retacu"]=0;
                          }
 	                    break;
-	                   case ($this->val_par || $this->val_fin):
+	                   case $this->val_par:
+	                   case $this->val_fin:
 	                      switch($codtipcon)
                           {
-                           case ($this->con_ins || $this->con_sup || $this->con_pro):
+                           case $this->con_ins:
+                           case $this->con_sup:
+                           case $this->con_pro:
                              $this->otro='S';
                              $javascript=$javascript."$('gastosree').show(); $('tab1').innerHTML='<a id=tab1 href=#>Oferta de Servicio</a>'; $('oferta').show(); $('partida').hide(); ";
-                             Obras::datosOfertaContrato($codcon,$tipval,$this->val_ant,$this->val_par,$this->val_ret,$this->val_fin,$this->val_rec,$poriva,$porant,$idval,$gasretot,$data->getMoncon(),$aumobr,$disobr,$obrext,$monper,$valpag,&$arreglooferta,&$arregloofertaret,&$arreglomontos,&$msj,&$montotoferacum);
+                             Obras::datosOfertaContrato($codcon,$tipval,$this->val_ant,$this->val_par,$this->val_ret,$this->val_fin,$this->val_rec,$poriva,$porant,$idval,$gasretot,$data->getMoncon(),$aumobr,$disobr,$obrext,$monper,$valpag,&$arreglooferta,&$arregloret,&$arreglomontos,&$msj,&$montotoferacum);
                              if ($msj=="")
                              {
                              	$this->configGridOfertas('','','','',$arreglooferta);
@@ -2044,14 +2092,15 @@ class oycvalActions extends autooycvalActions
                            $javascript=$javascript."alert('$msj1'); ";
                           }
                         break;
-
-                       case ($this->val_ret):
+                       case $this->val_ret:
                          switch($codtipcon)
                           {
-                           case ($this->con_ins || $this->con_sup || $this->con_pro):
+                           case $this->con_ins:
+                           case $this->con_sup:
+                           case $this->con_pro:
                              $this->otro='S';
                              $javascript=$javascript."$('gastosree').show(); $('tab1').innerHTML='<a id=tab1 href=#>Oferta de Servicio</a>'; $('oferta').show(); $('partida').hide(); ";
-                             Obras::datosOfertaContrato($codcon,$tipval,$this->val_ant,$this->val_par,$this->val_ret,$this->val_fin,$this->val_rec,$poriva,$porant,$idval,$gasretot,$data->getMoncon(),$aumobr,$disobr,$obrext,$monper,$valpag,&$arreglooferta,&$arregloofertaret,&$arreglomontos,&$msj,&$montotoferacum);
+                             Obras::datosOfertaContrato($codcon,$tipval,$this->val_ant,$this->val_par,$this->val_ret,$this->val_fin,$this->val_rec,$poriva,$porant,$idval,$gasretot,$data->getMoncon(),$aumobr,$disobr,$obrext,$monper,$valpag,&$arreglooferta,&$arregloret,&$arreglomontos,&$msj,&$montotoferacum);
                              if ($msj=="")
                              {
                              	$this->configGridOfertas('','','','',$arreglooferta);
@@ -2089,11 +2138,15 @@ class oycvalActions extends autooycvalActions
                            $javascript=$javascript."alert('$msj1'); ";
                           }
                         break;
-                       case ($this->val_rec):
+                       case $this->val_rec:
                          switch($codtipcon)
                           {
-                           case ($this->con_ins || $this->con_sup || $this->con_pro):
+                           case $this->con_ins:
+                           case $this->con_sup:
+                           case $this->con_pro:
                             $this->otro='S';
+                            $arregloret=array();
+                            $arreglomontos=array();
                             break;
                            default:
                             $this->otro='N';
@@ -2175,10 +2228,12 @@ class oycvalActions extends autooycvalActions
 	                   case $this->val_ant:
 	                     switch($codtipcon)
                          {
-                           case ($this->con_ins || $this->con_sup || $this->con_pro):
+                           case $this->con_ins:
+                           case $this->con_sup:
+                           case $this->con_pro:
                              $this->otro='S';
                              $javascript=$javascript."$('gastosree').show(); $('tab1').innerHTML='<a id=tab1 href=#>Oferta de Servicio</a>'; $('oferta').show(); $('partida').hide(); ";
-                             Obras::datosOfertaContrato($codcon,$tipval,$this->val_ant,$this->val_par,$this->val_ret,$this->val_fin,$this->val_rec,$poriva,$porant,$idval,$gasretot,$data->getMoncon(),$aumobr,$disobr,$obrext,$monper,$valpag,&$arreglooferta,&$arregloofertaret,&$arreglomontos,&$msj,&$montotoferacum);
+                             Obras::datosOfertaContrato($codcon,$tipval,$this->val_ant,$this->val_par,$this->val_ret,$this->val_fin,$this->val_rec,$poriva,$porant,$idval,$gasretot,$data->getMoncon(),$aumobr,$disobr,$obrext,$monper,$valpag,&$arreglooferta,&$arregloret,&$arreglomontos,&$msj,&$montotoferacum);
                              if ($msj=="")
                              {
                              	$this->configGridOfertas('','','','',$arreglooferta);
@@ -2227,13 +2282,16 @@ class oycvalActions extends autooycvalActions
                          	$arreglomontos[0]["retacu"]=0;
                          }
 	                    break;
-	                   case ($this->val_par || $this->val_fin):
+	                   case $this->val_par:
+	                   case $this->val_fin:
 	                      switch($codtipcon)
                           {
-                           case ($this->con_ins || $this->con_sup || $this->con_pro):
+                           case $this->con_ins:
+                           case $this->con_sup:
+                           case $this->con_pro:
                              $this->otro='S';
                              $javascript=$javascript."$('gastosree').show(); $('tab1').innerHTML='<a id=tab1 href=#>Oferta de Servicio</a>'; $('oferta').show(); $('partida').hide(); ";
-                             Obras::datosOfertaContrato($codcon,$tipval,$this->val_ant,$this->val_par,$this->val_ret,$this->val_fin,$this->val_rec,$poriva,$porant,$idval,$gasretot,$data->getMoncon(),$aumobr,$disobr,$obrext,$monper,$valpag,&$arreglooferta,&$arregloofertaret,&$arreglomontos,&$msj,&$montotoferacum);
+                             Obras::datosOfertaContrato($codcon,$tipval,$this->val_ant,$this->val_par,$this->val_ret,$this->val_fin,$this->val_rec,$poriva,$porant,$idval,$gasretot,$data->getMoncon(),$aumobr,$disobr,$obrext,$monper,$valpag,&$arreglooferta,&$arregloret,&$arreglomontos,&$msj,&$montotoferacum);
                              if ($msj=="")
                              {
                              	$this->configGridOfertas('','','','',$arreglooferta);
@@ -2272,14 +2330,15 @@ class oycvalActions extends autooycvalActions
                            $javascript=$javascript."alert('$msj1'); ";
                           }
                         break;
-
-                       case ($this->val_ret):
+                       case $this->val_ret:
                          switch($codtipcon)
                           {
-                           case ($this->con_ins || $this->con_sup || $this->con_pro):
+                           case $this->con_ins:
+                           case $this->con_sup:
+                           case $this->con_pro:
                              $this->otro='S';
                              $javascript=$javascript."$('gastosree').show(); $('tab1').innerHTML='<a id=tab1 href=#>Oferta de Servicio</a>'; $('oferta').show(); $('partida').hide(); ";
-                             Obras::datosOfertaContrato($codcon,$tipval,$this->val_ant,$this->val_par,$this->val_ret,$this->val_fin,$this->val_rec,$poriva,$porant,$idval,$gasretot,$data->getMoncon(),$aumobr,$disobr,$obrext,$monper,$valpag,&$arreglooferta,&$arregloofertaret,&$arreglomontos,&$msj,&$montotoferacum);
+                             Obras::datosOfertaContrato($codcon,$tipval,$this->val_ant,$this->val_par,$this->val_ret,$this->val_fin,$this->val_rec,$poriva,$porant,$idval,$gasretot,$data->getMoncon(),$aumobr,$disobr,$obrext,$monper,$valpag,&$arreglooferta,&$arregloret,&$arreglomontos,&$msj,&$montotoferacum);
                              if ($msj=="")
                              {
                              	$this->configGridOfertas('','','','',$arreglooferta);
@@ -2317,11 +2376,15 @@ class oycvalActions extends autooycvalActions
                            $javascript=$javascript."alert('$msj1'); ";
                           }
                         break;
-                       case ($this->val_rec):
+                       case $this->val_rec:
                          switch($codtipcon)
                           {
-                           case ($this->con_ins || $this->con_sup || $this->con_pro):
+                           case $this->con_ins:
+                           case $this->con_sup:
+                           case $this->con_pro:
                             $this->otro='S';
+                            $arregloret=array();
+                            $arreglomontos=array();
                             break;
                            default:
                             $this->otro='N';
