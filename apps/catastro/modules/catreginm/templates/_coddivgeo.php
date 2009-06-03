@@ -13,7 +13,7 @@ EST-MUN-CIU-PAR-SEC
   'getsecundario' => 'getDesdivgeo',
   'campoprincipal' => 'coddivgeo',
   'camposecundario' => 'desdivgeo',
-  'tamanoprincipal' => '14',
+  'tamanoprincipal' => '15',
   'campobase' => 'id',
   ), 'Catdefdivbarurb_Catdivgeo', 'catdivgeo');
 

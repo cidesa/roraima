@@ -13,7 +13,7 @@ abstract class BaseCatreginmPeer {
 	const CLASS_DEFAULT = 'lib.model.catastro.Catreginm';
 
 	
-	const NUM_COLUMNS = 47;
+	const NUM_COLUMNS = 51;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -158,6 +158,18 @@ abstract class BaseCatreginmPeer {
 	const FOTINM = 'catreginm.FOTINM';
 
 	
+	const LINESTE = 'catreginm.LINESTE';
+
+	
+	const LINNOR = 'catreginm.LINNOR';
+
+	
+	const LINOES = 'catreginm.LINOES';
+
+	
+	const LINSUR = 'catreginm.LINSUR';
+
+	
 	const ID = 'catreginm.ID';
 
 	
@@ -166,18 +178,18 @@ abstract class BaseCatreginmPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('CatsubprcId', 'CatprcId', 'CatmanId', 'CatsecId', 'CatparId', 'CatmunId', 'CatciuId', 'CatestId', 'CatbarurbId', 'CattramofroId', 'CattramolatId', 'Cattramolat2Id', 'CatcodposId', 'CattipvivId', 'CatconinmId', 'CatusoespId', 'CatconsocId', 'CatrutId', 'CatcarterinmId', 'CatproterId', 'Coddivgeo', 'Nrocas', 'Fecreg', 'Dirinm', 'Nivinm', 'Unihab', 'Edicas', 'Pisinm', 'Numinm', 'Ubigex', 'Ubigey', 'Ubigez', 'Numhab', 'Numper', 'Numsan', 'Numtom', 'Arever', 'Loccom', 'Locind', 'Captan', 'Cappis', 'Trapis', 'Numtel', 'Nomarccro', 'Oficom', 'Fotinm', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (CatreginmPeer::CATSUBPRC_ID, CatreginmPeer::CATPRC_ID, CatreginmPeer::CATMAN_ID, CatreginmPeer::CATSEC_ID, CatreginmPeer::CATPAR_ID, CatreginmPeer::CATMUN_ID, CatreginmPeer::CATCIU_ID, CatreginmPeer::CATEST_ID, CatreginmPeer::CATBARURB_ID, CatreginmPeer::CATTRAMOFRO_ID, CatreginmPeer::CATTRAMOLAT_ID, CatreginmPeer::CATTRAMOLAT2_ID, CatreginmPeer::CATCODPOS_ID, CatreginmPeer::CATTIPVIV_ID, CatreginmPeer::CATCONINM_ID, CatreginmPeer::CATUSOESP_ID, CatreginmPeer::CATCONSOC_ID, CatreginmPeer::CATRUT_ID, CatreginmPeer::CATCARTERINM_ID, CatreginmPeer::CATPROTER_ID, CatreginmPeer::CODDIVGEO, CatreginmPeer::NROCAS, CatreginmPeer::FECREG, CatreginmPeer::DIRINM, CatreginmPeer::NIVINM, CatreginmPeer::UNIHAB, CatreginmPeer::EDICAS, CatreginmPeer::PISINM, CatreginmPeer::NUMINM, CatreginmPeer::UBIGEX, CatreginmPeer::UBIGEY, CatreginmPeer::UBIGEZ, CatreginmPeer::NUMHAB, CatreginmPeer::NUMPER, CatreginmPeer::NUMSAN, CatreginmPeer::NUMTOM, CatreginmPeer::AREVER, CatreginmPeer::LOCCOM, CatreginmPeer::LOCIND, CatreginmPeer::CAPTAN, CatreginmPeer::CAPPIS, CatreginmPeer::TRAPIS, CatreginmPeer::NUMTEL, CatreginmPeer::NOMARCCRO, CatreginmPeer::OFICOM, CatreginmPeer::FOTINM, CatreginmPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('catsubprc_id', 'catprc_id', 'catman_id', 'catsec_id', 'catpar_id', 'catmun_id', 'catciu_id', 'catest_id', 'catbarurb_id', 'cattramofro_id', 'cattramolat_id', 'cattramolat2_id', 'catcodpos_id', 'cattipviv_id', 'catconinm_id', 'catusoesp_id', 'catconsoc_id', 'catrut_id', 'catcarterinm_id', 'catproter_id', 'coddivgeo', 'nrocas', 'fecreg', 'dirinm', 'nivinm', 'unihab', 'edicas', 'pisinm', 'numinm', 'ubigex', 'ubigey', 'ubigez', 'numhab', 'numper', 'numsan', 'numtom', 'arever', 'loccom', 'locind', 'captan', 'cappis', 'trapis', 'numtel', 'nomarccro', 'oficom', 'fotinm', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, )
+		BasePeer::TYPE_PHPNAME => array ('CatsubprcId', 'CatprcId', 'CatmanId', 'CatsecId', 'CatparId', 'CatmunId', 'CatciuId', 'CatestId', 'CatbarurbId', 'CattramofroId', 'CattramolatId', 'Cattramolat2Id', 'CatcodposId', 'CattipvivId', 'CatconinmId', 'CatusoespId', 'CatconsocId', 'CatrutId', 'CatcarterinmId', 'CatproterId', 'Coddivgeo', 'Nrocas', 'Fecreg', 'Dirinm', 'Nivinm', 'Unihab', 'Edicas', 'Pisinm', 'Numinm', 'Ubigex', 'Ubigey', 'Ubigez', 'Numhab', 'Numper', 'Numsan', 'Numtom', 'Arever', 'Loccom', 'Locind', 'Captan', 'Cappis', 'Trapis', 'Numtel', 'Nomarccro', 'Oficom', 'Fotinm', 'Lineste', 'Linnor', 'Linoes', 'Linsur', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (CatreginmPeer::CATSUBPRC_ID, CatreginmPeer::CATPRC_ID, CatreginmPeer::CATMAN_ID, CatreginmPeer::CATSEC_ID, CatreginmPeer::CATPAR_ID, CatreginmPeer::CATMUN_ID, CatreginmPeer::CATCIU_ID, CatreginmPeer::CATEST_ID, CatreginmPeer::CATBARURB_ID, CatreginmPeer::CATTRAMOFRO_ID, CatreginmPeer::CATTRAMOLAT_ID, CatreginmPeer::CATTRAMOLAT2_ID, CatreginmPeer::CATCODPOS_ID, CatreginmPeer::CATTIPVIV_ID, CatreginmPeer::CATCONINM_ID, CatreginmPeer::CATUSOESP_ID, CatreginmPeer::CATCONSOC_ID, CatreginmPeer::CATRUT_ID, CatreginmPeer::CATCARTERINM_ID, CatreginmPeer::CATPROTER_ID, CatreginmPeer::CODDIVGEO, CatreginmPeer::NROCAS, CatreginmPeer::FECREG, CatreginmPeer::DIRINM, CatreginmPeer::NIVINM, CatreginmPeer::UNIHAB, CatreginmPeer::EDICAS, CatreginmPeer::PISINM, CatreginmPeer::NUMINM, CatreginmPeer::UBIGEX, CatreginmPeer::UBIGEY, CatreginmPeer::UBIGEZ, CatreginmPeer::NUMHAB, CatreginmPeer::NUMPER, CatreginmPeer::NUMSAN, CatreginmPeer::NUMTOM, CatreginmPeer::AREVER, CatreginmPeer::LOCCOM, CatreginmPeer::LOCIND, CatreginmPeer::CAPTAN, CatreginmPeer::CAPPIS, CatreginmPeer::TRAPIS, CatreginmPeer::NUMTEL, CatreginmPeer::NOMARCCRO, CatreginmPeer::OFICOM, CatreginmPeer::FOTINM, CatreginmPeer::LINESTE, CatreginmPeer::LINNOR, CatreginmPeer::LINOES, CatreginmPeer::LINSUR, CatreginmPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('catsubprc_id', 'catprc_id', 'catman_id', 'catsec_id', 'catpar_id', 'catmun_id', 'catciu_id', 'catest_id', 'catbarurb_id', 'cattramofro_id', 'cattramolat_id', 'cattramolat2_id', 'catcodpos_id', 'cattipviv_id', 'catconinm_id', 'catusoesp_id', 'catconsoc_id', 'catrut_id', 'catcarterinm_id', 'catproter_id', 'coddivgeo', 'nrocas', 'fecreg', 'dirinm', 'nivinm', 'unihab', 'edicas', 'pisinm', 'numinm', 'ubigex', 'ubigey', 'ubigez', 'numhab', 'numper', 'numsan', 'numtom', 'arever', 'loccom', 'locind', 'captan', 'cappis', 'trapis', 'numtel', 'nomarccro', 'oficom', 'fotinm', 'lineste', 'linnor', 'linoes', 'linsur', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('CatsubprcId' => 0, 'CatprcId' => 1, 'CatmanId' => 2, 'CatsecId' => 3, 'CatparId' => 4, 'CatmunId' => 5, 'CatciuId' => 6, 'CatestId' => 7, 'CatbarurbId' => 8, 'CattramofroId' => 9, 'CattramolatId' => 10, 'Cattramolat2Id' => 11, 'CatcodposId' => 12, 'CattipvivId' => 13, 'CatconinmId' => 14, 'CatusoespId' => 15, 'CatconsocId' => 16, 'CatrutId' => 17, 'CatcarterinmId' => 18, 'CatproterId' => 19, 'Coddivgeo' => 20, 'Nrocas' => 21, 'Fecreg' => 22, 'Dirinm' => 23, 'Nivinm' => 24, 'Unihab' => 25, 'Edicas' => 26, 'Pisinm' => 27, 'Numinm' => 28, 'Ubigex' => 29, 'Ubigey' => 30, 'Ubigez' => 31, 'Numhab' => 32, 'Numper' => 33, 'Numsan' => 34, 'Numtom' => 35, 'Arever' => 36, 'Loccom' => 37, 'Locind' => 38, 'Captan' => 39, 'Cappis' => 40, 'Trapis' => 41, 'Numtel' => 42, 'Nomarccro' => 43, 'Oficom' => 44, 'Fotinm' => 45, 'Id' => 46, ),
-		BasePeer::TYPE_COLNAME => array (CatreginmPeer::CATSUBPRC_ID => 0, CatreginmPeer::CATPRC_ID => 1, CatreginmPeer::CATMAN_ID => 2, CatreginmPeer::CATSEC_ID => 3, CatreginmPeer::CATPAR_ID => 4, CatreginmPeer::CATMUN_ID => 5, CatreginmPeer::CATCIU_ID => 6, CatreginmPeer::CATEST_ID => 7, CatreginmPeer::CATBARURB_ID => 8, CatreginmPeer::CATTRAMOFRO_ID => 9, CatreginmPeer::CATTRAMOLAT_ID => 10, CatreginmPeer::CATTRAMOLAT2_ID => 11, CatreginmPeer::CATCODPOS_ID => 12, CatreginmPeer::CATTIPVIV_ID => 13, CatreginmPeer::CATCONINM_ID => 14, CatreginmPeer::CATUSOESP_ID => 15, CatreginmPeer::CATCONSOC_ID => 16, CatreginmPeer::CATRUT_ID => 17, CatreginmPeer::CATCARTERINM_ID => 18, CatreginmPeer::CATPROTER_ID => 19, CatreginmPeer::CODDIVGEO => 20, CatreginmPeer::NROCAS => 21, CatreginmPeer::FECREG => 22, CatreginmPeer::DIRINM => 23, CatreginmPeer::NIVINM => 24, CatreginmPeer::UNIHAB => 25, CatreginmPeer::EDICAS => 26, CatreginmPeer::PISINM => 27, CatreginmPeer::NUMINM => 28, CatreginmPeer::UBIGEX => 29, CatreginmPeer::UBIGEY => 30, CatreginmPeer::UBIGEZ => 31, CatreginmPeer::NUMHAB => 32, CatreginmPeer::NUMPER => 33, CatreginmPeer::NUMSAN => 34, CatreginmPeer::NUMTOM => 35, CatreginmPeer::AREVER => 36, CatreginmPeer::LOCCOM => 37, CatreginmPeer::LOCIND => 38, CatreginmPeer::CAPTAN => 39, CatreginmPeer::CAPPIS => 40, CatreginmPeer::TRAPIS => 41, CatreginmPeer::NUMTEL => 42, CatreginmPeer::NOMARCCRO => 43, CatreginmPeer::OFICOM => 44, CatreginmPeer::FOTINM => 45, CatreginmPeer::ID => 46, ),
-		BasePeer::TYPE_FIELDNAME => array ('catsubprc_id' => 0, 'catprc_id' => 1, 'catman_id' => 2, 'catsec_id' => 3, 'catpar_id' => 4, 'catmun_id' => 5, 'catciu_id' => 6, 'catest_id' => 7, 'catbarurb_id' => 8, 'cattramofro_id' => 9, 'cattramolat_id' => 10, 'cattramolat2_id' => 11, 'catcodpos_id' => 12, 'cattipviv_id' => 13, 'catconinm_id' => 14, 'catusoesp_id' => 15, 'catconsoc_id' => 16, 'catrut_id' => 17, 'catcarterinm_id' => 18, 'catproter_id' => 19, 'coddivgeo' => 20, 'nrocas' => 21, 'fecreg' => 22, 'dirinm' => 23, 'nivinm' => 24, 'unihab' => 25, 'edicas' => 26, 'pisinm' => 27, 'numinm' => 28, 'ubigex' => 29, 'ubigey' => 30, 'ubigez' => 31, 'numhab' => 32, 'numper' => 33, 'numsan' => 34, 'numtom' => 35, 'arever' => 36, 'loccom' => 37, 'locind' => 38, 'captan' => 39, 'cappis' => 40, 'trapis' => 41, 'numtel' => 42, 'nomarccro' => 43, 'oficom' => 44, 'fotinm' => 45, 'id' => 46, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, )
+		BasePeer::TYPE_PHPNAME => array ('CatsubprcId' => 0, 'CatprcId' => 1, 'CatmanId' => 2, 'CatsecId' => 3, 'CatparId' => 4, 'CatmunId' => 5, 'CatciuId' => 6, 'CatestId' => 7, 'CatbarurbId' => 8, 'CattramofroId' => 9, 'CattramolatId' => 10, 'Cattramolat2Id' => 11, 'CatcodposId' => 12, 'CattipvivId' => 13, 'CatconinmId' => 14, 'CatusoespId' => 15, 'CatconsocId' => 16, 'CatrutId' => 17, 'CatcarterinmId' => 18, 'CatproterId' => 19, 'Coddivgeo' => 20, 'Nrocas' => 21, 'Fecreg' => 22, 'Dirinm' => 23, 'Nivinm' => 24, 'Unihab' => 25, 'Edicas' => 26, 'Pisinm' => 27, 'Numinm' => 28, 'Ubigex' => 29, 'Ubigey' => 30, 'Ubigez' => 31, 'Numhab' => 32, 'Numper' => 33, 'Numsan' => 34, 'Numtom' => 35, 'Arever' => 36, 'Loccom' => 37, 'Locind' => 38, 'Captan' => 39, 'Cappis' => 40, 'Trapis' => 41, 'Numtel' => 42, 'Nomarccro' => 43, 'Oficom' => 44, 'Fotinm' => 45, 'Lineste' => 46, 'Linnor' => 47, 'Linoes' => 48, 'Linsur' => 49, 'Id' => 50, ),
+		BasePeer::TYPE_COLNAME => array (CatreginmPeer::CATSUBPRC_ID => 0, CatreginmPeer::CATPRC_ID => 1, CatreginmPeer::CATMAN_ID => 2, CatreginmPeer::CATSEC_ID => 3, CatreginmPeer::CATPAR_ID => 4, CatreginmPeer::CATMUN_ID => 5, CatreginmPeer::CATCIU_ID => 6, CatreginmPeer::CATEST_ID => 7, CatreginmPeer::CATBARURB_ID => 8, CatreginmPeer::CATTRAMOFRO_ID => 9, CatreginmPeer::CATTRAMOLAT_ID => 10, CatreginmPeer::CATTRAMOLAT2_ID => 11, CatreginmPeer::CATCODPOS_ID => 12, CatreginmPeer::CATTIPVIV_ID => 13, CatreginmPeer::CATCONINM_ID => 14, CatreginmPeer::CATUSOESP_ID => 15, CatreginmPeer::CATCONSOC_ID => 16, CatreginmPeer::CATRUT_ID => 17, CatreginmPeer::CATCARTERINM_ID => 18, CatreginmPeer::CATPROTER_ID => 19, CatreginmPeer::CODDIVGEO => 20, CatreginmPeer::NROCAS => 21, CatreginmPeer::FECREG => 22, CatreginmPeer::DIRINM => 23, CatreginmPeer::NIVINM => 24, CatreginmPeer::UNIHAB => 25, CatreginmPeer::EDICAS => 26, CatreginmPeer::PISINM => 27, CatreginmPeer::NUMINM => 28, CatreginmPeer::UBIGEX => 29, CatreginmPeer::UBIGEY => 30, CatreginmPeer::UBIGEZ => 31, CatreginmPeer::NUMHAB => 32, CatreginmPeer::NUMPER => 33, CatreginmPeer::NUMSAN => 34, CatreginmPeer::NUMTOM => 35, CatreginmPeer::AREVER => 36, CatreginmPeer::LOCCOM => 37, CatreginmPeer::LOCIND => 38, CatreginmPeer::CAPTAN => 39, CatreginmPeer::CAPPIS => 40, CatreginmPeer::TRAPIS => 41, CatreginmPeer::NUMTEL => 42, CatreginmPeer::NOMARCCRO => 43, CatreginmPeer::OFICOM => 44, CatreginmPeer::FOTINM => 45, CatreginmPeer::LINESTE => 46, CatreginmPeer::LINNOR => 47, CatreginmPeer::LINOES => 48, CatreginmPeer::LINSUR => 49, CatreginmPeer::ID => 50, ),
+		BasePeer::TYPE_FIELDNAME => array ('catsubprc_id' => 0, 'catprc_id' => 1, 'catman_id' => 2, 'catsec_id' => 3, 'catpar_id' => 4, 'catmun_id' => 5, 'catciu_id' => 6, 'catest_id' => 7, 'catbarurb_id' => 8, 'cattramofro_id' => 9, 'cattramolat_id' => 10, 'cattramolat2_id' => 11, 'catcodpos_id' => 12, 'cattipviv_id' => 13, 'catconinm_id' => 14, 'catusoesp_id' => 15, 'catconsoc_id' => 16, 'catrut_id' => 17, 'catcarterinm_id' => 18, 'catproter_id' => 19, 'coddivgeo' => 20, 'nrocas' => 21, 'fecreg' => 22, 'dirinm' => 23, 'nivinm' => 24, 'unihab' => 25, 'edicas' => 26, 'pisinm' => 27, 'numinm' => 28, 'ubigex' => 29, 'ubigey' => 30, 'ubigez' => 31, 'numhab' => 32, 'numper' => 33, 'numsan' => 34, 'numtom' => 35, 'arever' => 36, 'loccom' => 37, 'locind' => 38, 'captan' => 39, 'cappis' => 40, 'trapis' => 41, 'numtel' => 42, 'nomarccro' => 43, 'oficom' => 44, 'fotinm' => 45, 'lineste' => 46, 'linnor' => 47, 'linoes' => 48, 'linsur' => 49, 'id' => 50, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, )
 	);
 
 	
@@ -322,6 +334,14 @@ abstract class BaseCatreginmPeer {
 		$criteria->addSelectColumn(CatreginmPeer::OFICOM);
 
 		$criteria->addSelectColumn(CatreginmPeer::FOTINM);
+
+		$criteria->addSelectColumn(CatreginmPeer::LINESTE);
+
+		$criteria->addSelectColumn(CatreginmPeer::LINNOR);
+
+		$criteria->addSelectColumn(CatreginmPeer::LINOES);
+
+		$criteria->addSelectColumn(CatreginmPeer::LINSUR);
 
 		$criteria->addSelectColumn(CatreginmPeer::ID);
 

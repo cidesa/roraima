@@ -126,6 +126,14 @@ class CatreginmMapBuilder {
 
 		$tMap->addColumn('FOTINM', 'Fotinm', 'string', CreoleTypes::VARCHAR, false, 100);
 
+		$tMap->addColumn('LINESTE', 'Lineste', 'string', CreoleTypes::VARCHAR, false, 1000);
+
+		$tMap->addColumn('LINNOR', 'Linnor', 'string', CreoleTypes::VARCHAR, false, 1000);
+
+		$tMap->addColumn('LINOES', 'Linoes', 'string', CreoleTypes::VARCHAR, false, 1000);
+
+		$tMap->addColumn('LINSUR', 'Linsur', 'string', CreoleTypes::VARCHAR, false, 1000);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

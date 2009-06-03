@@ -657,6 +657,18 @@ propel:
     fotinm:
       type: VARCHAR
       size: 100
+    lineste:            #Linderos Este
+      type: VARCHAR
+      size: 1000
+    linnor:            #Linderos Norte
+      type: VARCHAR
+      size: 1000
+    linoes:            #Linderos Oeste
+      type: VARCHAR
+      size: 1000
+    linsur:            #Linderos Sur
+      type: VARCHAR
+      size: 1000
     id:
       type: INTEGER
       required: true

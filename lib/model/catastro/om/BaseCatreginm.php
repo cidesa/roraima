@@ -193,6 +193,22 @@ abstract class BaseCatreginm extends BaseObject  implements Persistent {
 
 
 	
+	protected $lineste;
+
+
+	
+	protected $linnor;
+
+
+	
+	protected $linoes;
+
+
+	
+	protected $linsur;
+
+
+	
 	protected $id;
 
 	
@@ -614,6 +630,34 @@ abstract class BaseCatreginm extends BaseObject  implements Persistent {
   {
 
     return trim($this->fotinm);
+
+  }
+  
+  public function getLineste()
+  {
+
+    return trim($this->lineste);
+
+  }
+  
+  public function getLinnor()
+  {
+
+    return trim($this->linnor);
+
+  }
+  
+  public function getLinoes()
+  {
+
+    return trim($this->linoes);
+
+  }
+  
+  public function getLinsur()
+  {
+
+    return trim($this->linsur);
 
   }
   
@@ -1171,6 +1215,46 @@ abstract class BaseCatreginm extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setLineste($v)
+	{
+
+    if ($this->lineste !== $v) {
+        $this->lineste = $v;
+        $this->modifiedColumns[] = CatreginmPeer::LINESTE;
+      }
+  
+	} 
+	
+	public function setLinnor($v)
+	{
+
+    if ($this->linnor !== $v) {
+        $this->linnor = $v;
+        $this->modifiedColumns[] = CatreginmPeer::LINNOR;
+      }
+  
+	} 
+	
+	public function setLinoes($v)
+	{
+
+    if ($this->linoes !== $v) {
+        $this->linoes = $v;
+        $this->modifiedColumns[] = CatreginmPeer::LINOES;
+      }
+  
+	} 
+	
+	public function setLinsur($v)
+	{
+
+    if ($this->linsur !== $v) {
+        $this->linsur = $v;
+        $this->modifiedColumns[] = CatreginmPeer::LINSUR;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -1277,7 +1361,15 @@ abstract class BaseCatreginm extends BaseObject  implements Persistent {
 
       $this->fotinm = $rs->getString($startcol + 45);
 
-      $this->id = $rs->getInt($startcol + 46);
+      $this->lineste = $rs->getString($startcol + 46);
+
+      $this->linnor = $rs->getString($startcol + 47);
+
+      $this->linoes = $rs->getString($startcol + 48);
+
+      $this->linsur = $rs->getString($startcol + 49);
+
+      $this->id = $rs->getInt($startcol + 50);
 
       $this->resetModified();
 
@@ -1285,7 +1377,7 @@ abstract class BaseCatreginm extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 47; 
+            return $startcol + 51; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Catreginm object", $e);
     }
@@ -1883,6 +1975,18 @@ abstract class BaseCatreginm extends BaseObject  implements Persistent {
 				return $this->getFotinm();
 				break;
 			case 46:
+				return $this->getLineste();
+				break;
+			case 47:
+				return $this->getLinnor();
+				break;
+			case 48:
+				return $this->getLinoes();
+				break;
+			case 49:
+				return $this->getLinsur();
+				break;
+			case 50:
 				return $this->getId();
 				break;
 			default:
@@ -1941,7 +2045,11 @@ abstract class BaseCatreginm extends BaseObject  implements Persistent {
 			$keys[43] => $this->getNomarccro(),
 			$keys[44] => $this->getOficom(),
 			$keys[45] => $this->getFotinm(),
-			$keys[46] => $this->getId(),
+			$keys[46] => $this->getLineste(),
+			$keys[47] => $this->getLinnor(),
+			$keys[48] => $this->getLinoes(),
+			$keys[49] => $this->getLinsur(),
+			$keys[50] => $this->getId(),
 		);
 		return $result;
 	}
@@ -2096,6 +2204,18 @@ abstract class BaseCatreginm extends BaseObject  implements Persistent {
 				$this->setFotinm($value);
 				break;
 			case 46:
+				$this->setLineste($value);
+				break;
+			case 47:
+				$this->setLinnor($value);
+				break;
+			case 48:
+				$this->setLinoes($value);
+				break;
+			case 49:
+				$this->setLinsur($value);
+				break;
+			case 50:
 				$this->setId($value);
 				break;
 		} 	}
@@ -2151,7 +2271,11 @@ abstract class BaseCatreginm extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[43], $arr)) $this->setNomarccro($arr[$keys[43]]);
 		if (array_key_exists($keys[44], $arr)) $this->setOficom($arr[$keys[44]]);
 		if (array_key_exists($keys[45], $arr)) $this->setFotinm($arr[$keys[45]]);
-		if (array_key_exists($keys[46], $arr)) $this->setId($arr[$keys[46]]);
+		if (array_key_exists($keys[46], $arr)) $this->setLineste($arr[$keys[46]]);
+		if (array_key_exists($keys[47], $arr)) $this->setLinnor($arr[$keys[47]]);
+		if (array_key_exists($keys[48], $arr)) $this->setLinoes($arr[$keys[48]]);
+		if (array_key_exists($keys[49], $arr)) $this->setLinsur($arr[$keys[49]]);
+		if (array_key_exists($keys[50], $arr)) $this->setId($arr[$keys[50]]);
 	}
 
 	
@@ -2205,6 +2329,10 @@ abstract class BaseCatreginm extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CatreginmPeer::NOMARCCRO)) $criteria->add(CatreginmPeer::NOMARCCRO, $this->nomarccro);
 		if ($this->isColumnModified(CatreginmPeer::OFICOM)) $criteria->add(CatreginmPeer::OFICOM, $this->oficom);
 		if ($this->isColumnModified(CatreginmPeer::FOTINM)) $criteria->add(CatreginmPeer::FOTINM, $this->fotinm);
+		if ($this->isColumnModified(CatreginmPeer::LINESTE)) $criteria->add(CatreginmPeer::LINESTE, $this->lineste);
+		if ($this->isColumnModified(CatreginmPeer::LINNOR)) $criteria->add(CatreginmPeer::LINNOR, $this->linnor);
+		if ($this->isColumnModified(CatreginmPeer::LINOES)) $criteria->add(CatreginmPeer::LINOES, $this->linoes);
+		if ($this->isColumnModified(CatreginmPeer::LINSUR)) $criteria->add(CatreginmPeer::LINSUR, $this->linsur);
 		if ($this->isColumnModified(CatreginmPeer::ID)) $criteria->add(CatreginmPeer::ID, $this->id);
 
 		return $criteria;
@@ -2327,6 +2455,14 @@ abstract class BaseCatreginm extends BaseObject  implements Persistent {
 		$copyObj->setOficom($this->oficom);
 
 		$copyObj->setFotinm($this->fotinm);
+
+		$copyObj->setLineste($this->lineste);
+
+		$copyObj->setLinnor($this->linnor);
+
+		$copyObj->setLinoes($this->linoes);
+
+		$copyObj->setLinsur($this->linsur);
 
 
 		if ($deepCopy) {
