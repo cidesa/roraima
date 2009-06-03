@@ -1,0 +1,20 @@
+methods:
+  post:
+   - "catreginm{coddivgeo}"
+   - "catreginm{fecreg}"
+   - "catreginm{nrocas}"
+
+names:
+  catreginm{coddivgeo}:
+    required:  Yes
+    required_msg: El Codigo de la Division Geografica no puedo estar en Blanco
+#    validators: [String1aValidator ]
+
+  catreginm{fecreg}:
+    required:  Yes
+    required_msg: La Fecha no puedo estar en Blanco
+
+  catreginm{nrocas}:
+    required:  Yes
+    required_msg: El Numero Catastral no puedo estar en Blanco
+

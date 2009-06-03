@@ -1,0 +1,13 @@
+methods:
+  post:
+   - "catcarcon{nomcarcon}"
+   - "catcarcon{tipo}"
+
+names:
+  catcarcon{tipo}:
+    required:  Yes
+    required_msg: El Tipo no puede estar en Blanco
+
+  catcarcon{nomcarcon}:
+    required:  Yes
+    required_msg: La Descripcion no puede estar en Blanco

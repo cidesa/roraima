@@ -1,0 +1,38 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Cattramo
+    theme:            cidesaGenerator
+    fields:
+      coddivgeo:    { name: Codigo, params: size=32}
+      catdivgeo:    { name: Division Geografico, params: size=32}
+      catdivgeo_id:     { name: Division Geografica, params: size=32}
+      nomtramo:         { name: Tramo, params: size=50 maxlength=50}
+      alitramo:         { name: Alias, params: size=50 maxlength=50}
+      cattipvia_id:        { name: Tipo, params: include_custom= "Seleccione", help: Coloque la Localidad}
+      catsenvia_id:        { name: Sentido, params: include_custom= "Seleccione", help: Coloque la Localidad}
+      catdirvia_id:        { name: Direccion, params: include_custom= "Seleccione", help: Coloque la Localidad}
+
+    list:
+      title:     Definicion Tramo (Calles, Avenidas, Veredas, etc)
+      display:   [ =coddivgeo, catdivgeo, nomtramo]
+      fields:
+        catdivgeo_id: { name: Division Geografico, params: size=32}
+        nomtramo:    { name: Descripcion, params: size=15}
+      filters:   [ nomtramo, cattipvia_id, catsenvia_id, catdirvia_id]
+      max_per_page: 10
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+
+
+    edit:
+      title:     Definicion Tramo (Calles, Avenidas, Veredas, etc)
+      display:
+        NONE:     [ _catdivgeo_id, nomtramo, alitramo]
+        Vialidad: [ cattipvia_id, catsenvia_id, catdirvia_id]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

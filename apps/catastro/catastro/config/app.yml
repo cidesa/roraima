@@ -1,0 +1,5 @@
+all:
+   .apps:
+     autenticacion:    autenticacion
+     ayuda:            ayudas
+     this:             catastro      #cambiar en cada app

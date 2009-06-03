@@ -1,0 +1,986 @@
+---
+propel:
+  _attributes:
+    package: lib.model.catastro
+  catdivgeo:            #division geografica
+    _attributes:
+      idMethod: native
+    coddivgeo:
+      type: VARCHAR
+      size: 50
+      required: true
+    desdivgeo:
+      type: VARCHAR
+      size: 100
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+  catbarurb:
+    _attributes:
+      idMethod: native
+    catdivgeo_id:
+      type: INTEGER
+      foreignTable: catdivgeo
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    nombarurb:
+      type: VARCHAR
+      size: 50
+    alibarurb:
+      type: VARCHAR
+      size: 50
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+  catcarcon:
+    _attributes:
+      idMethod: native
+    tipo:
+      type: VARCHAR
+      size: 2
+      required: true
+    nomcarcon:
+      type: VARCHAR
+      size: 100
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+  catcarconinm:
+    _attributes:
+      idMethod: native
+    catreginm_id:
+      type: INTEGER
+      foreignTable: catreginm
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    catcarcon_id:
+      type: INTEGER
+      foreignTable: catcarcon
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    cancar:
+      type: NUMERIC
+      size: 4
+      scale: 2
+      required: true
+    metare:
+      type: NUMERIC
+      size: 12
+      scale: 2
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+  catcarinm:
+    _attributes:
+      idMethod: native
+    descar:
+      type: VARCHAR
+      size: 100
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+  catcarter:
+    _attributes:
+      idMethod: native
+    tertip:
+      type: VARCHAR
+      size: 2
+    dester:
+      type: VARCHAR
+      size: 100
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+  catcarterinm:
+    _attributes:
+      idMethod: native
+    catreginm_id:
+      type: INTEGER
+      foreignTable: catreginm
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    catcarter_id:
+      type: INTEGER
+      foreignTable: catcarter
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    dimensiones:
+      type: VARCHAR
+    valor:
+      type: INTEGER
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+  catciu:
+    _attributes:
+      idMethod: native
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    catest_id:
+      type: INTEGER
+      required: true
+      foreignTable: catest
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    nomciu:
+      type: VARCHAR
+      size: 50
+    aliciu:
+      type: VARCHAR
+      size: 50
+  catcodpos:
+    _attributes:
+      idMethod: native
+    despos:
+      type: VARCHAR
+      size: 100
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+  catconent:
+    _attributes:
+      idMethod: native
+    descon:
+      type: VARCHAR
+      size: 100
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+  catconinm:
+    _attributes:
+      idMethod: native
+    desconinm:
+      type: VARCHAR
+      size: 100
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+  catconsoc:
+    _attributes:
+      idMethod: native
+    desconsoc:
+      type: VARCHAR
+      size: 100
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+  catdirvia:
+    _attributes:
+      idMethod: native
+    desdir:
+      type: VARCHAR
+      size: 100
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+  catest:
+    _attributes:
+      idMethod: native
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nomest:
+      type: VARCHAR
+      size: 50
+  catinmcar:
+    _attributes:
+      idMethod: native
+    catcarinm_id:
+      type: INTEGER
+      foreignTable: catcarinm
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    cancar:
+      type: NUMERIC
+      size: 4
+      scale: 2
+      required: true
+    metare:
+      type: NUMERIC
+      size: 12
+      scale: 2
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+  catman:
+    _attributes:
+      idMethod: native
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    catdivgeo_id:
+      type: INTEGER
+      foreignTable: catdivgeo
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    nomman:
+      type: VARCHAR
+      size: 50
+    aliman:
+      type: VARCHAR
+      size: 50
+    tiplinnor:
+      type: VARCHAR
+      size: 1
+    cattramonor_id:
+      type: INTEGER
+      foreignTable: cattramo
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    tiplinsur:
+      type: VARCHAR
+      size: 1
+    cattramosur_id:
+      type: INTEGER
+      foreignTable: cattramo
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    tiplinest:
+      type: VARCHAR
+      size: 1
+    cattramoest_id:
+      type: INTEGER
+      foreignTable: cattramo
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    tiplinoes:
+      type: VARCHAR
+      size: 1
+    cattramooes_id:
+      type: INTEGER
+      foreignTable: cattramo
+      foreignReference: id
+      onDelete:
+      onUpdate:
+  catmun:
+    _attributes:
+      idMethod: native
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    catciu_id:
+      type: INTEGER
+      foreignTable: catciu
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    catest_id:
+      type: INTEGER
+      foreignTable: catest
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    nommun:
+      type: VARCHAR
+      size: 50
+    alimun:
+      type: VARCHAR
+      size: 50
+  catpai:
+    _attributes:
+      idMethod: native
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nompai:
+      type: VARCHAR
+      size: 50
+  catpar:
+    _attributes:
+      idMethod: native
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    catmun_id:
+      type: INTEGER
+      foreignTable: catmun
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    catciu_id:
+      type: INTEGER
+      foreignTable: catciu
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    catest_id:
+      type: INTEGER
+      foreignTable: catest
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    nompar:
+      type: VARCHAR
+      size: 50
+    alipar:
+      type: VARCHAR
+      size: 50
+  catperinm:
+    _attributes:
+      idMethod: native
+    catreginm_id:
+      type: INTEGER
+      foreignTable: catreginm
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    catregper_id:
+      type: INTEGER
+      foreignTable: catregper
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    conocu:
+      type: VARCHAR
+      size: 2
+      required: true
+    tipper:
+      type: VARCHAR
+      size: 3
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+  catprc:
+    _attributes:
+      idMethod: native
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    catsec_id:
+      type: INTEGER
+      foreignTable: catsec
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    catpar_id:
+      type: INTEGER
+      foreignTable: catpar
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    catmun_id:
+      type: INTEGER
+      foreignTable: catmun
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    catciu_id:
+      type: INTEGER
+      foreignTable: catciu
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    catest_id:
+      type: INTEGER
+      foreignTable: catest
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    nomprc:
+      type: VARCHAR
+      size: 50
+    aliprc:
+      type: VARCHAR
+      size: 50
+  catproter:
+    _attributes:
+      idMethod: native
+    descatproter:
+      type: VARCHAR
+      size: 100
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+  catreginm:
+    _attributes:
+      idMethod: native
+    catsubprc_id:
+      type: INTEGER
+      foreignTable: catsubprc
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    catprc_id:
+      type: INTEGER
+      foreignTable: catprc
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    catman_id:    #manzana
+      type: INTEGER
+      foreignTable: catman
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    catsec_id:          #sector
+      type: INTEGER
+      foreignTable: catsec
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    catpar_id:           #parroquia
+      type: INTEGER
+      foreignTable: catpar
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    catmun_id:           #municipio
+      type: INTEGER
+      foreignTable: catmun
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    catciu_id:            #ciudad
+      type: INTEGER
+      foreignTable: catciu
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    catest_id:             #estados
+      type: INTEGER
+      foreignTable: catest
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    catbarurb_id:          #urbanizacion
+      type: INTEGER
+      foreignTable: catbarurb
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    cattramofro_id:
+      type: INTEGER
+      foreignTable: cattramo
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    cattramolat_id:
+      type: INTEGER
+      foreignTable: cattramo
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    cattramolat2_id:
+      type: INTEGER
+      foreignTable: cattramo
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    catcodpos_id:            #codigo postal
+      type: INTEGER
+      foreignTable: catcodpos
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    cattipviv_id:             #tipo de vivienda
+      type: INTEGER
+      foreignTable: cattipviv
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    catconinm_id:              #condicion del inmueble
+      type: INTEGER
+      foreignTable: catconinm
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    catusoesp_id:              #uso especifico
+      type: INTEGER
+      foreignTable: catusoesp
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    catconsoc_id:               #condicion socio economica
+      type: INTEGER
+      foreignTable: catconsoc
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    catrut_id:
+      type: INTEGER
+      foreignTable: catrut
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    catcarterinm_id:           #caract del Terreno
+      type: INTEGER
+      foreignTable: catcarterinm
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    catproter_id:
+      type: INTEGER
+      foreignTable: catproter
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    coddivgeo:      # division geografica
+      type: VARCHAR
+      size: 40
+    nrocas:                   #nro registro
+      type: VARCHAR
+      size: 30
+    fecreg:
+      type: DATE
+    dirinm:                   #direccion concatenada
+      type: VARCHAR
+      size: 254
+    nivinm:                   #toma - NO LO USE
+      type: VARCHAR
+      size: 8
+    unihab:                   #unidad Inmobiliaria = NO LO USE
+      type: VARCHAR
+      size: 8
+    edicas:           #edif/casa
+      type: VARCHAR
+      size: 25
+    pisinm:           #piso
+      type: VARCHAR
+      size: 2
+    numinm:          #numero
+      type: VARCHAR
+      size: 4
+    ubigex:          #UTM-X
+      type: VARCHAR
+      size: 10
+    ubigey:          #UTM-Y
+      type: VARCHAR
+      size: 10
+    ubigez:          #UTM-Z
+      type: VARCHAR
+      size: 10
+    numhab:               #num de habitaciones
+      type: VARCHAR
+      size: 3
+    numper:               #numero de personas
+      type: VARCHAR
+      size: 3
+    numsan:               #num de sanitarios
+      type: VARCHAR
+      size: 3
+    numtom:               #num de tomas
+      type: VARCHAR
+      size: 3
+    arever:               #num areas verdes
+      type: VARCHAR
+      size: 3
+    loccom:               #locales comerciales
+      type: VARCHAR
+      size: 3
+    locind:               #locales industriales
+      type: VARCHAR
+      size: 3
+    captan:               #tanques
+      type: VARCHAR
+      size: 10
+    cappis:               #capacidad piscina
+      type: VARCHAR
+      size: 10
+    trapis:               #tomas de tipo
+      type: VARCHAR
+      size: 1
+    numtel:
+      type: VARCHAR
+      size: 15
+    nomarccro:
+      type: VARCHAR
+      size: 254
+    oficom:
+      type: VARCHAR
+      size: 3
+    fotinm:
+      type: VARCHAR
+      size: 100
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+  catregper:
+    _attributes:
+      idMethod: native
+    catbarurb_id:          #urbanizacion
+      type: INTEGER
+      foreignTable: catbarurb
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    catsec_id:             #sector
+      type: INTEGER
+      foreignTable: catsec
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    catpar_id:
+      type: INTEGER
+      foreignTable: catpar
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    catmun_id:                #municipio
+      type: INTEGER
+      foreignTable: catmun
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    catdivgeo_id:
+      type: INTEGER
+      foreignTable: catdivgeo
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    catest_id:                   #estado
+      type: INTEGER
+      foreignTable: catest
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    cattramofro_id:
+      type: INTEGER
+      foreignTable: cattramo
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    cattramolat_id:
+      type: INTEGER
+      foreignTable: cattramo
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    cattramolat2_id:
+      type: INTEGER
+      foreignTable: cattramo
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    catcodpos_id:
+      type: INTEGER
+      foreignTable: catcodpos
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    cedrif:         #cedula
+      type: VARCHAR
+      size: 15
+      required: true
+    fecper:         #fecha constitucion
+      type: DATE
+      required: true
+    nomper:         #razon social
+      type: VARCHAR
+      size: 80
+    prinom:         #primer nombre
+      type: VARCHAR
+      size: 20
+    segnom:         #primer nombre
+      type: VARCHAR
+      size: 20
+    priape:         #primer apellido
+      type: VARCHAR
+      size: 20
+    segape:         #segundo apellido
+      type: VARCHAR
+      size: 20
+    relemp:         #Relacion/Instituto
+      type: VARCHAR
+      size: 3
+    nacper:          #nacionalidad
+      type: VARCHAR
+      size: 1
+    tipper:           #persona
+      type: VARCHAR
+      size: 1
+    telper:           #telefono
+      type: VARCHAR
+      size: 15
+    faxper:
+      type: VARCHAR
+      size: 15
+    apaposper:          #apartado postal
+      type: VARCHAR
+      size: 10
+    emaper:
+      type: VARCHAR
+      size: 50
+    dirper:
+      type: VARCHAR
+      size: 254
+    edicas:              #nombre edificio/casa
+      type: VARCHAR
+      size: 10
+    pishab:                 #piso habitacion
+      type: VARCHAR
+      size: 10
+    numhab:                 #numero habitacion
+      type: VARCHAR
+      size: 10
+    codofi:
+      type: VARCHAR
+      size: 3
+    staper:
+      type: VARCHAR
+      size: 1
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+  catrut:
+    _attributes:
+      idMethod: native
+    desrut:
+      type: VARCHAR
+      size: 100
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+  catsec:
+    _attributes:
+      idMethod: native
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    catpar_id:
+      type: INTEGER
+      foreignTable: catpar
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    catmun_id:
+      type: INTEGER
+      foreignTable: catmun
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    catciu_id:
+      type: INTEGER
+      foreignTable: catciu
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    catest_id:
+      type: INTEGER
+      foreignTable: catest
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    nomsec:
+      type: VARCHAR
+      size: 50
+    alisec:
+      type: VARCHAR
+      size: 50
+  catsenvia:
+    _attributes:
+      idMethod: native
+    dessen:
+      type: VARCHAR
+      size: 100
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+  catsubprc:
+    _attributes:
+      idMethod: native
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    catprc_id:
+      type: INTEGER
+      foreignTable: catprc
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    catman_id:
+      type: INTEGER
+      foreignTable: catman
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    catsec_id:
+      type: INTEGER
+      foreignTable: catsec
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    catpar_id:
+      type: INTEGER
+      foreignTable: catpar
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    catmun_id:
+      type: INTEGER
+      foreignTable: catmun
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    catciu_id:
+      type: INTEGER
+      foreignTable: catciu
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    catest_id:
+      type: INTEGER
+      foreignTable: catest
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    nomsubprc:
+      type: VARCHAR
+      size: 50
+    alisubprc:
+      type: VARCHAR
+      size: 50
+  cattipvia:
+    _attributes:
+      idMethod: native
+    desvia:
+      type: VARCHAR
+      size: 100
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+  cattipviv:
+    _attributes:
+      idMethod: native
+    destipviv:
+      type: VARCHAR
+      size: 100
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+  cattramo:
+    _attributes:
+      idMethod: native
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    catdivgeo_id:
+      type: INTEGER
+      foreignTable: catdivgeo
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    nomtramo:
+      type: VARCHAR
+      size: 50
+      required: true
+    alitramo:
+      type: VARCHAR
+      size: 50
+    cattipvia_id:    #CALLE , AVENIDA
+      type: INTEGER
+      foreignTable: cattipvia
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    catsenvia_id:    #SUR-ESTE NOR-ESTE
+      type: INTEGER
+      foreignTable: catsenvia
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    catdirvia_id:   #DOBLE SENTIDO UN SENTIDO
+      type: INTEGER
+      foreignTable: catdirvia
+      foreignReference: id
+      onDelete:
+      onUpdate:
+  catusoesp:
+    _attributes:
+      idMethod: native
+    desuso:
+      type: VARCHAR
+      size: 100
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true

@@ -1,0 +1,28 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Catsenvia
+    theme:            cidesaGenerator
+
+    fields:
+      dessen:    { name: Descripcion, params: size=40}
+
+    list:
+      title:     Definicion de Sentido de la Vialidad
+      display:   [ =dessen]
+      fields:
+        dessen:    { name: Descripcion, params: size=15}
+      sort:      dessen
+      filters:   [ dessen]
+      max_per_page: 10
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+
+    edit:
+      title: Edicion de Sentido de la Vialidad
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

@@ -1,0 +1,50 @@
+opciones:                  # Opciones generales
+  name:                    personal
+  eliminar:                true
+  tabla:                   catperinm
+  anchogrid:               850
+  ancho:                   820
+  filas:                   1
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  C.I./RIF
+  tipo:                    t
+  nombrecampo:             cedrif
+  esgrabable:              true
+  html:                    [size="10"]
+#  catalogo:                [catregper, sf_admin_edit_form, {cedrif: nomper: 2}, Catreginm_Catregper]
+  catalogo:                [catregper, sf_admin_edit_form, {cedrif: 1, prinom: 2, priape: 3, nomper: 4, id: 6}, Catreginm_Catregper]
+2:       # Columna 2
+  titulo:                  Nombre
+  tipo:                    t
+  esgrabable:              false
+  nombrecampo:             prinom
+  html:                    [size="20", readonly=true ]
+3:       # Columna 3
+  titulo:                  Apellido
+  tipo:                    t
+  esgrabable:              false
+  nombrecampo:             priape
+  html:                    [size="20", readonly=true ]
+
+4:       # Columna 4
+  titulo:                  Razon Social
+  tipo:                    t
+  esgrabable:              false
+  nombrecampo:             nomper
+  html:                    [size="20", readonly=true ]
+
+5:       # Columna 5
+  titulo:                  Condicion Ocupacion
+  tipo:                    c
+  nombrecampo:             conocu
+  esgrabable:              true
+  html:                    []
+
+6:       # Columna 6
+  titulo:                  catregper_id
+  tipo:                    t
+  nombrecampo:             catregper_id
+  esgrabable:              true
+  oculta:                  true

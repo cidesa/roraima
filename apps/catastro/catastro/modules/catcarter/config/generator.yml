@@ -1,0 +1,30 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Catcarter
+    theme:            cidesaGenerator
+
+    fields:
+      tertip:    { name: Tipo }
+      dester:    { name: Descripcion, params: size=40}
+
+    list:
+      title:     Definicion de Caracteristica del Terreno
+      display:   [ =tertip, dester]
+      fields:
+        dester:    { name: Descripcion, params: size=15}
+      sort:      tertip
+      filters:   [ tertip, dester]
+      max_per_page: 10
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+
+    edit:
+      title: Edicion de Caracteristica del Terreno
+      display:    [ _tertip, dester]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~
