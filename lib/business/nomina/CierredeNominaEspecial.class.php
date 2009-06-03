@@ -154,8 +154,18 @@ class CierredeNominaEspecial
 	   	 $dato1= NpasiparconPeer::doSelectOne($a);
 	   	 if ($dato1)
 	   	 { $partida=$dato1->getCodpar();}
-	   	 else { $partida=$dato->getCodpar();}
-
+	   	 //else { $partida=$dato->getCodpar();}
+         else
+	   	 {
+	         $cri= new Criteria();
+		   	 $cri->add(NpasicodprePeer::CODNOM,$npnomcal->getCodnom());
+		   	 $cri->add(NpasicodprePeer::CODCON,$npnomcal->getCodcon());
+		   	 $resul= NpasicodprePeer::doSelectOne($cri);
+		   	 if ($resul)
+		   	 { $partida=$resul->getCodpre();}
+		   	 else
+		   	   { $partida=$dato->getCodpar();}
+	   	 }//else if $dato1
 
         /*  integracion con presupuesto*/
 	   	 $p= new Criteria();
