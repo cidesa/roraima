@@ -1,0 +1,44 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Catman
+    theme:            cidesaGenerator
+    fields:
+      coddivgeo:    { name: Codigo, params: size=32}
+      catdivgeo:    { name: Division Geografico, params: size=32}
+      catdivgeo_id:     { name: Division Geografica, params: size=32}
+      nomman:         { name: Manzana, params: size=50 maxlength=50}
+      aliman:         { name: Alias, params: size=50 maxlength=50}
+
+      tiplinnor:    { name: Norte, params: include_custom= "Seleccione"}
+      cattramonor_id:{ name: Tipo}
+      tiplinsur:    { name: Sur, params: include_custom= "Seleccione"}
+      cattramosur_id:        { name: Tipo}
+      tiplinest:    { name: Este, params: include_custom= "Seleccione"}
+      cattramoest_id:        { name: Tipo}
+      tiplinoes:    { name: Oeste, params: include_custom= "Seleccione"}
+      cattramooes_id:        { name: Tipo}
+
+    list:
+      title:     Definicion de la Manzana
+      display:   [ =coddivgeo, catdivgeo, nomtramo]
+      fields:
+        catdivgeo_id: { name: Division Geografico, params: size=32}
+        nomtramo:    { name: Descripcion, params: size=15}
+      filters:   [ nomtramo, cattipvia_id, catsenvia_id, catdirvia_id]
+      max_per_page: 10
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+
+
+    edit:
+      title:     Definicion de la Manzana
+      display:
+        NONE:     [ _catdivgeo_id, nomman, aliman]
+        Linderos de la Manzana: [ _tiplinnor, _cattramonor_id, _tiplinsur, _cattramosur_id, _tiplinest, _cattramoest_id, _tiplinoes, _cattramooes_id]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

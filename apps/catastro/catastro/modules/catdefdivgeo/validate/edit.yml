@@ -1,0 +1,25 @@
+methods:
+  post:
+   - "catdivgeo{coddivgeo}"
+   - "catdivgeo{desdivgeo}"
+
+names:
+  catdivgeo{coddivgeo}:
+    required:  Yes
+    required_msg: Codigo no puedo estar en Blanco
+    validators: [Validator_coddivgeo ]
+
+  catdivgeo{desdivgeo}:
+    required:  Yes
+    required_msg: La Descripcion no puede estar en Blanco
+
+Validator_coddivgeo:
+  class: sfPropelUniqueValidator
+  param:
+    class:        Catdivgeo
+    column:       coddivgeo
+    unique_error: El Codigo ya Existe intente con otro
+    min:       1
+    min_error: El Codigo no puede tener menos de 1 caracteres
+    max:       40
+    max_error: El Codigo no puede pasar mas de 15 caracteres

@@ -1,0 +1,45 @@
+opciones:                  # Opciones generales
+  name:                    construccion
+  eliminar:                true
+  tabla:                   catcarconinm
+  anchogrid:               850
+  ancho:                   810
+  filas:                   1
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Tipo
+  tipo:                    c
+  nombrecampo:             tipocons
+  esgrabable:              true
+  html:                    []
+2:       # Columna 2
+  titulo:                  Codigo/Caract
+  tipo:                    t
+  nombrecampo:             catcarcon_id
+  esgrabable:              true
+  html:                    [size="10"]
+3:       # Columna 3
+  titulo:                  Descripcion
+  tipo:                    t
+  esgrabable:              false
+  nombrecampo:             nomcarcon
+  html:                    [size="20", readonly=true ]
+4:       # Columna 4
+  titulo:                  Cantidad
+  tipo:                    t
+  nombrecampo:             cancar
+  esgrabable:              true
+  html:                    [size=10 onBlur=CalculoConstruccion(this.id)]
+5:       # Columna 5
+  titulo:                  Valor (m2)
+  tipo:                    t
+  nombrecampo:             metare
+  esgrabable:              true
+  html:                    [size=10 onBlur=CalculoConstruccion(this.id)]
+5:       # Columna 5
+  titulo:                  Total (m2)
+  tipo:                    t
+  nombrecampo:             total
+  esgrabable:              false
+  html:                    [size=10 readonly=true]

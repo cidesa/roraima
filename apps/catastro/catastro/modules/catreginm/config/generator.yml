@@ -1,0 +1,156 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Catreginm
+    theme:            cidesaGenerator
+
+    fields:
+      coddivgeo:           { name: Ubicacion Geografica, params: size=30 maxlength=30, help: Coloque el Numero Catastral}
+      nrocas:              { name: Codigo Catastral, params: size=30 maxlength=30, help: Coloque el Numero Catastral}
+      fecreg:              { name: Fecha Registro, params: date_format='dd/MM/yyyy' size=10 maxlength=10, validate: Vfecha, msj_error: La fecha del Registro, help: Coloque la Fecha de Nacimiento o Constitucion, validate: Vfecha, msj_error: La fecha del Registro }
+      #catciu_id:           { name: Localidad, params: include_custom= "Seleccione", help: Coloque la Localidad}
+      catbarurb_id:        { name: Urb/Barrio, help: Coloque la Urbanizacion/Barrio}
+      cattramofro_id:      { name: Av./Call./Vrd., help: Coloque la Av./Call./Vrd.}
+      cattramolat_id:      { name: (Entre) Av./Call./Vrd., help: Coloque la Av./Call./Vrd.}
+      cattramolat2_id:     { name: (Y) Av./Call./Vrd., help: Coloque la Av./Call./Vrd.}
+      edicas:              { name: Edificio/Casa, params: size=25 maxlength=25, help: Coloque El Nombre del Edificio o Casa}
+      pisinm:              { name: Numero/Piso, params: size=2 maxlength=2, help: Coloque el Numero de Piso del Edificio o Casa}
+      numinm:              { name: Numero, params: size=4 maxlength=4, help: Coloque el Numero del Edificio o Casa}
+      ubigex:              { name: Ubicacion Geografica X (UTM), params: size=10 maxlength=10, help: Coloque Ubicacion Geografica X  del Inmueble}
+      ubigey:              { name: Ubicacion Geografica Y (UTM), params: size=10 maxlength=10, help: Coloque Ubicacion Geografica Y  del Inmueble}
+      ubigez:              { name: Ubicacion Geografica Z (UTM), params: size=10 maxlength=10, help: Coloque Ubicacion Geografica Z  del Inmueble}
+      dirinm:              { name: Direccion Complementaria, type: textarea_tag, params: size=70x3 maxlength=254}
+
+      catcodpos_id:
+        name: Codigo Postal
+        params: include_custom= "Seleccione"
+        help: Seleccione El Codigo Postal
+
+
+      cattipviv_id:
+        name: Tipo de Vivienda
+        params: include_custom= "Seleccione"
+        help: Seleccione Tipo de Vivienda del Inmueble
+
+      catconinm_id:
+        name: Condicion
+        params: include_custom= "Seleccione"
+        help: Seleccione la Condicion del Inmueble
+
+      catusoesp_id:
+        name: Uso Especifico
+        params: include_custom= "Seleccione"
+        help: Seleccione Uso Especifico del Inmueble
+
+      catconsoc_id:
+        name: Condicion Socio Economica
+        params: include_custom= "Seleccione"
+        help: Seleccione Condicion Socio Economica del Inmueble
+
+      catrut_id:
+        name: Ruta
+        params: include_custom= "Seleccione"
+        help: Seleccione una Ruta del Inmueble
+
+      catproter_id:
+        name: Propiedad del Terreno
+        params: include_custom= "Seleccione"
+        help: Seleccione una Propiedad del Terreno
+
+      numper:
+        name: N. de Habitantes
+        params: size=3 maxlenght= 3
+        help: Coloque el Numero de Habitantes que vive en el Inmueble
+
+      numhab:
+        name: N. de Habitaciones
+        params: size=3 maxlenght= 3
+        help: Coloque el Numero de Habitaciones del Inmueble
+
+      numsan:
+        name: N. de Sanitarios
+        params: size=3 maxlenght= 3
+        help: Coloque Numero de Sanitarios del Inmueble
+
+      arever:
+        name: N. Areas Verdes (Mt2)
+        params: size=3 maxlenght= 3
+        help: Coloque Numero de Areas Verdes del Inmueble
+
+      loccom:
+        name: N. de Loc. Comerciales
+        params: size=3 maxlenght= 3
+        help: Coloque Numero de Locales Comerciales del Inmueble
+
+      locind:
+        name: N. de Loc. Industriales
+        params: size=3 maxlenght= 3
+        help: Coloque Numero de Locales Industriales del Inmueble
+
+      captan:
+        name: Tanques (Mts3)
+        params: size=3 maxlenght= 3
+        help: Coloque la Capacidad del Tanques del Inmueble
+
+      cappis:
+        name: Cap.Piscinas(Mts3)
+        params: size=3 maxlenght= 3
+        help: Coloque la Capacidad de la Picina del Inmueble
+
+      trapis:
+        name: Tomas de Tipo
+
+
+      gridpersonas:
+        name: .
+
+      construccion:
+        name: .
+
+      grid:
+        name: .
+
+      terreno:
+        name: .
+
+      fotinm:
+        name: Imagen
+        help: Tamaño de la foto 90x100 (jpg, gif o png)
+        type: admin_input_file_tag
+        upload_dir: fotos
+        params: include_link = fotos include_remove=true
+
+      ocupantes:
+        name: .
+
+    list:
+      title: Registro de Cedula Catastral
+      display:      [=nrocas, fecreg]
+      fields:
+        nrocas:              { name: Codigo Catastral, params: size=15 maxlength=30}
+        fecreg:
+          params: date_format='dd/MM/yyyy'
+      filters:      [nrocas, fecreg]
+      max_per_page: 10
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+
+    edit:
+      title: Edicion Registro de Cedula Catastral
+      display:
+        "Datos Generales":  [ _coddivgeo, nrocas, fecreg]
+        #"Ubicacion Territorial":  [fecreg]
+        "Ocupantes: Propietario/ Inquilino/ Administrador":              [ _ocupantes]
+        "Direccion Inmueble":  [ catbarurb_id, cattramofro_id, cattramolat_id, cattramolat2_id, edicas, pisinm, numinm, catcodpos_id, ubigex, ubigey, ubigez, dirinm]
+        "Datos del Inmueble":  [ cattipviv_id, catconinm_id, catusoesp_id, catconsoc_id, catrut_id, numper, numhab, numsan, arever, locind, captan, _trapis]
+        "Caracteristica de la Construccion":    [ _construccion]
+        "Caracteristica del Terreno":    [ _terreno]
+        "Croquis":    [ fotinm]
+
+
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

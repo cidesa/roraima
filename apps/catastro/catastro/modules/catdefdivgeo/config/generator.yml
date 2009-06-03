@@ -1,0 +1,31 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Catdivgeo
+    theme:            cidesaGenerator
+
+    fields:
+      coddivgeo:    { name: Codigo, params: size=40}
+      desdivgeo:    { name: Descripcion, params: size=40}
+
+    list:
+      title:     Definicion de Division Geografica
+      fields:
+        coddivgeo:    { name: Codigo, params: size=15}
+        desdivgeo:    { name: Descripcion, params: size=15}
+      display:   [ =coddivgeo, desdivgeo]
+      sort:      coddivgeo
+      filters:   [ coddivgeo, desdivgeo]
+      max_per_page: 10
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+
+    edit:
+      title: Edicion de Division Geografica
+      display:  [ _coddivgeo, desdivgeo]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

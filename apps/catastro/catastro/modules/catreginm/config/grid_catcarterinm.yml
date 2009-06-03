@@ -1,0 +1,33 @@
+opciones:                  # Opciones generales
+  name:                    terreno
+  eliminar:                true
+  tabla:                   catcarterinm
+  anchogrid:               550
+  ancho:                   500
+  filas:                   1
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Caracteristica
+  tipo:                    c
+  nombrecampo:             catcarter_id
+  esgrabable:              true
+  html:                    []
+2:       # Columna 2
+  titulo:                  Dimensiones
+  tipo:                    m
+  nombrecampo:             dimensiones
+  esgrabable:              true
+#  html:                    [size=10 onBlur=CalculoTerreno(this.id)]
+5:       # Columna 5
+  titulo:                  Valor (m2)
+  tipo:                    t
+  nombrecampo:             valor
+  esgrabable:              true
+  html:                    [size=10 onBlur=CalculoTerreno(this.id)]
+5:       # Columna 5
+  titulo:                  Total (m2)
+  tipo:                    t
+  nombrecampo:             total
+  esgrabable:              false
+  html:                    [size=10 readonly=true]

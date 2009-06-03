@@ -1,0 +1,28 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Catusoesp
+    theme:            cidesaGenerator
+
+    fields:
+      desuso:    { name: Descripcion, params: size=40}
+
+    list:
+      title:     Definicion de Uso Especifico
+      display:   [ =desuso]
+      fields:
+        desuso:    { name: Descripcion, params: size=15}
+      sort:      desuso
+      filters:   [ desuso]
+      max_per_page: 10
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+
+    edit:
+      title: Edicion de Uso Especifico
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~
