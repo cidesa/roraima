@@ -20,7 +20,7 @@ catastro:
         Tipo de Vialidad:                         catdeftipvia
       Division Territorial:
         #Pais:                                     catdefdivpai
-        Est-Ciu-Mun-Parr-Sec:                      catdefdivgeo
+        Est-Mun-Ciu-Parr-Sec:                      catdefdivgeo
         Barrio/Urbanizaciones:                     catdefdivbarurb
         Tramo:                                     catdeftramo
         Manzana:                                   catdefman
@@ -41,3 +41,19 @@ catastro:
 #      Avaluo y Revision del Croquis:            dddd
 #      Entrevista:
 #        Condicion de la Entrevista:               catconent
+    Reportes:
+      Definiciones Específicas:
+      Listado de Sentidos de Vialidad:                      catdefsenvia.php
+      Listado de Tipos de Vialidad:                         catdeftipvia.php
+      Listado de Condiciones de Inmuebles:                  catdefconinm.php
+      Listado de Vialidad:                                  catdefdirvia.php
+      Division Territorial:                                 catdefdivgeo.php
+      Listado de Codigos postales:                          catdefcodpos.php
+      Listado de Condicion Socio-Economica:                 catdefconsoc.php
+      Listado de Propiedad del Terreno:                     catdefproter.php
+      Listado de Tipos de Viviendas:                        catdeftipviv.php
+      Listado de Uso Especifico:                            catdefusoesp.php
+      Listado de Personas:                                  catdefconsoc.php
+      Listado Detallado de Personas:                        catlstdetper.php
+      Caracteristica de la Construccion:                    catdefcarcon.php
+      Caracteristica del Terreno:                           catdefcarter.php

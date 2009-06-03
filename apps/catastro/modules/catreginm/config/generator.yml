@@ -123,6 +123,19 @@ generator:
       ocupantes:
         name: .
 
+      lineste:
+        name: Este
+        params: size=73
+      linnor:
+        name: Norte
+        params: size=73
+      linoes:
+        name: Oeste
+        params: size=73
+      linsur:
+        name: Sur
+        params: size=73
+
     list:
       title: Registro de Cedula Catastral
       display:      [=nrocas, fecreg]
@@ -143,6 +156,7 @@ generator:
         #"Ubicacion Territorial":  [fecreg]
         "Ocupantes: Propietario/ Inquilino/ Administrador":              [ _ocupantes]
         "Direccion Inmueble":  [ catbarurb_id, cattramofro_id, cattramolat_id, cattramolat2_id, edicas, pisinm, numinm, catcodpos_id, ubigex, ubigey, ubigez, dirinm]
+        "Linderos":            [ lineste, linoes, linnor, linsur]
         "Datos del Inmueble":  [ cattipviv_id, catconinm_id, catusoesp_id, catconsoc_id, catrut_id, numper, numhab, numsan, arever, locind, captan, _trapis]
         "Caracteristica de la Construccion":    [ _construccion]
         "Caracteristica del Terreno":    [ _terreno]
