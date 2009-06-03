@@ -14,19 +14,19 @@ opciones:                  # Opciones generales
   esgrabable:              true
   html:                    []
 2:       # Columna 2
-  titulo:                  Dimensiones
+  titulo:                  Cantidad
   tipo:                    m
   nombrecampo:             dimensiones
   esgrabable:              true
 #  html:                    [size=10 onBlur=CalculoTerreno(this.id)]
 5:       # Columna 5
-  titulo:                  Valor (m2)
+  titulo:                  Valor Unitario
   tipo:                    t
   nombrecampo:             valor
   esgrabable:              true
   html:                    [size=10 onBlur=CalculoTerreno(this.id)]
 5:       # Columna 5
-  titulo:                  Total (m2)
+  titulo:                  Total
   tipo:                    t
   nombrecampo:             total
   esgrabable:              false
