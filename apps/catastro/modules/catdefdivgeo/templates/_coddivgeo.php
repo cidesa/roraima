@@ -1,9 +1,9 @@
 <?
-$longpar = 40;
-$mascaradivgeo='##-##-##';
+$longpar = 19;
+$mascaradivgeo='##-##-##-##-##-####';
 ?>
 
-EST-CIU-MUN-PAR-SEC-
+EST-MUN-CIU-PAR-SEC-XXXX
 <br>
   <?php $value = object_input_tag($catdivgeo, 'getCoddivgeo', array (
   'size' => 20,
