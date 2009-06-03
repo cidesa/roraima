@@ -26,6 +26,8 @@ class Articulos
    */
     public static function Grabar_Articulo($articulo,$grid)
     {
+      // si el articulo es nuevo se iguala distot a exitot
+      if($articulo->getId()=='') $articulo->setDistot($articulo->getExitot());      
       //Se graba el Artículo
       $articulo->save();
       // Se graban los almacenes del articulo
