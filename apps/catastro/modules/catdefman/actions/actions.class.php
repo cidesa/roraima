@@ -223,9 +223,9 @@ class catdefmanActions extends autocatdefmanActions
 
   public function saving($clasemodelo)
   {
-  	echo $clasemodelo->getCattramonorId()."55";
-  	H::printR($clasemodelo);
-  	exit();
+  	//echo $clasemodelo->getCattramonorId()."55";
+  //	H::printR($clasemodelo);
+  //	exit();
     return parent::saving($clasemodelo);
   }
 
