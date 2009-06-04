@@ -143,18 +143,18 @@ protected function getNpdefpreliqOrCreate($id = 'id')
     $opciones->setHTMLTotalFilas(' ');
 
     $col1 = new Columna('Período Desde');
-    $col1->setTipo(Columna::FECHA);
+    $col1->setTipo(Columna::TEXTO);
     $col1->setEsGrabable(true);
     $col1->setVacia(true);
     $col1->setNombreCampo('perdes');
-    $col1->setHTML('type="text" size="10" readonly=false');
+    $col1->setHTML('type="text" size="10" readonly=false maxlength="4" ');
 
     $col2 = new Columna('Período Hasta');
-    $col2->setTipo(Columna::FECHA);
+    $col2->setTipo(Columna::TEXTO);
     $col2->setEsGrabable(true);
     $col2->setVacia(true);
     $col2->setNombreCampo('perhas');
-    $col2->setHTML('type="text" size="10" readonly=false');
+    $col2->setHTML('type="text" size="10" readonly=false maxlength="4"');
 
     $obja=array('codpar'=> 3, 'nompar' => 4);
     $col3 = new Columna('Codigo De Partida');

@@ -652,8 +652,8 @@ public static function Grabar_grid_Presnomdefpre($codigo,$concepto,$grid)
            	        $npdefpreliq= new npdefpreliq();
 		            $npdefpreliq->setCodnom($codigo);
 		            $npdefpreliq->setCodcon($concepto);
-		            $npdefpreliq->setPerdes(substr($v->getPerdes(),0,4));
-		            $npdefpreliq->setPerhas(substr($v->getPerhas(),0,4));
+		            $npdefpreliq->setPerdes($v->getPerdes());
+		            $npdefpreliq->setPerhas($v->getPerhas());
 		            $npdefpreliq->setCodpar($v->getCodpar());
 		            $npdefpreliq->save();
                 }
@@ -878,7 +878,16 @@ public static function Validar_Npdefpreliq_datos($grid)
                	     	$val=413;
                	     	break;
                	     }
-
+					if (intval($dato1) <= 1500 ||  intval($dato1) >= 3000)
+               	     { // print 'entre';exit;
+               	     	$val=413;
+               	     	break;
+               	     } 
+					if (intval($dato2) <= 1500 ||  intval($dato2) >= 3000)
+               	     { // print 'entre';exit;
+               	     	$val=413;
+               	     	break;
+               	     }  
                	   	}//$j++;
 
                	} //foreach ($y as $m)
