@@ -313,5 +313,11 @@
 </form>
 
 <ul class="sf_admin_actions">
-
+      <li class="float-left"><?php if ($ocregact->getId()): ?>
+<?php echo button_to(__('delete'), 'oycregact/delete?id='.$ocregact->getId(), array (
+  'post' => true,
+  'confirm' => __('Are you sure?'),
+  'class' => 'sf_admin_action_delete',
+)) ?><?php endif; ?>
+</li>
   </ul>
