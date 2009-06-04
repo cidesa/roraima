@@ -67,6 +67,11 @@ class pagdefempActions extends autopagdefempActions
     $dato=NpcatprePeer::getCategoria($this->getRequestParameter('codigo'));
     $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
    }
+   else  if ($this->getRequestParameter('ajax')=='8')
+   {
+    $dato=CpdoccauPeer::getNombre($this->getRequestParameter('codigo'));
+    $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
+   }
    $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
    return sfView::HEADER_ONLY;
   }
