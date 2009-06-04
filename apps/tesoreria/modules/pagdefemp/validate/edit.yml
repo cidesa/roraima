@@ -155,8 +155,8 @@ ExistValidator_tipcajchi:
 ExistValidator_tiprencajchi:
     class: CidesaExistValidator
     param:
-        class:        Tstipmov
-        column:       codtip
+        class:        Cpdoccau
+        column:       tipcau
         unique_error: El Tipo de Movimiento de Rendición de Caja Chica no Existe.
 
 ExistValidator_cedrifcajchi:

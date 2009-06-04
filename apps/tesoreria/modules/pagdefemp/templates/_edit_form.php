@@ -698,7 +698,7 @@
         'complete' => 'AjaxJSON(request, json)',
         'condition' => "$('opdefemp_tiprencajchi').value != ''",
         'script' => true,
-        'with' => "'ajax=5&cajtexmos=opdefemp_nomtiprencajchi&codigo='+this.value"
+        'with' => "'ajax=8&cajtexmos=opdefemp_nomtiprencajchi&codigo='+this.value"
         ))),
      array('use_style' => 'true',)
   )

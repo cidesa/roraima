@@ -64,7 +64,7 @@ class Opdefemp extends BaseOpdefemp
 
     public function getNomtiprencajchi()
 	{
-		return Herramientas::getX('codtip','Tstipmov','destip',self::getTiprencajchi());
+		return Herramientas::getX('tipcau','Cpdoccau','nomext',self::getTiprencajchi());
 	}
 
 	 public function getNomben()
