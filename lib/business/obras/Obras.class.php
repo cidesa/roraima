@@ -1274,7 +1274,14 @@ public static function salvarLicitacion($ocreglic, $grid)
   {
       $c= new Criteria();
       $c->add(CpimpcomPeer::REFCOM,$referencia);
-      CpimpcomPeer::doDelete($c);
+      $result=CpimpcomPeer::doSelect($c);
+      if ($result)
+      {
+      	foreach ($result as $obj)
+      	{
+      		$obj->delete();
+      	}
+      }
 
       $c= new Criteria();
       $c->add(CpcomproPeer::REFCOM,$referencia);
