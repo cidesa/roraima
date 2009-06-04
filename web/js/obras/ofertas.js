@@ -114,15 +114,13 @@
    l++;
    }
 
-
+   $('ocregobr_subtot').value=format(acumulador.toFixed(2),'.',',','.');
    var numiva=toFloat('ocregobr_ivaobr');
    if (numiva>0)
    {
      var totiva=((acumulador*numiva)/100);
      $('ocregobr_moniva').value=format(totiva.toFixed(2),'.',',','.');
      var numiva2=toFloat('ocregobr_moniva');
-     var cal= acumulador - numiva2;
-     $('ocregobr_subtot').value=format(cal.toFixed(2),'.',',','.');
      var subtotal=toFloat('ocregobr_subtot');
      var calcular=  subtotal + numiva2;
 
