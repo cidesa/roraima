@@ -357,26 +357,41 @@ class oycregactActions extends autooycregactActions
     {
       $c= new Criteria();
       $c->add(OcasiactPeer::CODCON,$this->ocregact->getCodcon());
-      $reg= OcasiactPeer::doSelectOne($c);
-      if (!$reg)
+      $reg= OcasiactPeer::doSelect($c);
+      if ($reg)
       {
-      	$c= new Criteria();
-      	$c->add(OcregconPeer::CODCON,$this->ocregact->getCodcon());
-      	$resultado= OcregconPeer::doSelectOne($c);
-      	if ($resultado)
+      	if (count($reg)==1)
       	{
-          $resultado->setStacon('A');
-          $resultado->save();
-      	}
-      	$c= new Criteria();
-      	$c->add(OcregobrPeer::CODOBR,$this->ocregact->getCodobr());
-      	$resultado= OcregobrPeer::doSelectOne($c);
-      	if ($resultado)
+	      	$c= new Criteria();
+	      	$c->add(OcregconPeer::CODCON,$this->ocregact->getCodcon());
+	      	$resultado= OcregconPeer::doSelectOne($c);
+	      	if ($resultado)
+	      	{
+	          $resultado->setStacon('A');
+	          $resultado->save();
+	      	}
+	      	$c= new Criteria();
+	      	$c->add(OcregobrPeer::CODOBR,$this->ocregact->getCodobr());
+	      	$resultado= OcregobrPeer::doSelectOne($c);
+	      	if ($resultado)
+	      	{
+	          $resultado->setStaobr('A');
+	          $resultado->save();
+	      	}
+	      	$reg->delete();
+	      	$this->deleteOcregact($this->ocregact);
+      	}else
       	{
-          $resultado->setStaobr('A');
-          $resultado->save();
+      	  $sql="select max(id) as idb from ocasiact";
+          if (Herramientas::BuscarDatos($sql,&$datos))
+          {
+            $acteli= $datos[0]['idb'];
+            $c= new Criteria();
+		    $c->add(OcasiactPeer::ID,$acteli);
+		    OcasiactPeer::doDelete($c);
+          }
       	}
-      	$this->deleteOcregact($this->ocregact);
+
 		$this->Bitacora('Elimino');
       }
     }
