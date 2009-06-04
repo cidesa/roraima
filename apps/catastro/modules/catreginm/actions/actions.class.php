@@ -113,16 +113,16 @@ class catreginmActions extends autocatreginmActions
        $this->catreginm  =  $this->getCatreginmOrCreate();
       //	 $this->editing();
 
-      // if (($this->coderr=Herramientas::ValidarGrid(Herramientas::CargarDatosGridv2($this,$this->objC)))!=-1){ return false; }
-      // if (($this->coderr=Herramientas::ValidarGrid(Herramientas::CargarDatosGridv2($this,$this->objT)))!=-1){ return false; }
-      // if (($this->coderr=Herramientas::ValidarGrid(Herramientas::CargarDatosGridv2($this,$this->objP)))!=-1){ return false; }
+       if (($this->coderr=Herramientas::ValidarGrid(Herramientas::CargarDatosGridv2($this,$this->objC)))!=-1){ return false; }
+       if (($this->coderr=Herramientas::ValidarGrid(Herramientas::CargarDatosGridv2($this,$this->objT)))!=-1){ return false; }
+       if (($this->coderr=Herramientas::ValidarGrid(Herramientas::CargarDatosGridv2($this,$this->objP)))!=-1){ return false; }
 
-        return true;
-    /*
+
+
       if($this->coderr!=-1){
         return false;
       } else return true;
-*/
+
     }else return true;
   }
 

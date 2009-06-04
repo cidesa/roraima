@@ -5,11 +5,11 @@ class Inmuebles {
   public static function SalvarCatreginm($clasemodelo, $gridpersonas, $gridconstruccion, $gridterreno)
   {
 	try{
-
+  	$clasemodelo->save();
   	if (self::GrabarPersonas($clasemodelo, $gridpersonas)!=-1) return 0;
   	if (self::GrabarConstruccion($clasemodelo, $gridconstruccion)!=-1) return 0;
   	if (self::GrabarTerreno($clasemodelo, $gridterreno)!=-1) return 0;
-  	$clasemodelo->save();
+
   	return -1;
   /*  $c = new Criteria();
     $lista = CatcarconPeer::doSelect($c);
@@ -26,7 +26,7 @@ exit();
 */
 
 	} catch (Exception $ex){
-			echo $ex;exit();
+			//echo $ex;exit();
 		 return 0;
 	}
 
@@ -55,6 +55,7 @@ exit();
 	  }
 		return -1;
 	} catch (Exception $ex){
+		//echo $ex;exit();
 		 return 0;
 	}
 
@@ -84,6 +85,7 @@ exit();
 	  }
 		return -1;
 	} catch (Exception $ex){
+		//echo $ex;exit();
 		 return 0;
 	}
 
@@ -114,6 +116,7 @@ exit();
 
 		return -1;
 	} catch (Exception $ex){
+		//echo $ex;exit();
 		 return 0;
 	}
 

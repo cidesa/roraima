@@ -13,7 +13,6 @@ opciones:                  # Opciones generales
   nombrecampo:             cedrif
   esgrabable:              true
   html:                    [size="10"]
-#  catalogo:                [catregper, sf_admin_edit_form, {cedrif: nomper: 2}, Catreginm_Catregper]
   catalogo:                [catregper, sf_admin_edit_form, {cedrif: 1, prinom: 2, priape: 3, nomper: 4, id: 6}, Catreginm_Catregper]
 2:       # Columna 2
   titulo:                  Nombre

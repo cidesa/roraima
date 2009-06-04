@@ -13,7 +13,6 @@ class Catreginm extends BaseCatreginm
 	protected $objpersonas     = array();
 	protected $objconstruccion = array();
 	//protected $coddivgeo = '';
-	//protected $jesus = '';
 
 	public function getDesdivgeo()
 	{
