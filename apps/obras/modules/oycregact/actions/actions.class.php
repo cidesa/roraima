@@ -267,7 +267,7 @@ class oycregactActions extends autooycregactActions
        $reg = OcasiactPeer::doSelect($c);
 
        $opciones = new OpcionesGrid();
-       $opciones->setEliminar(true);
+       $opciones->setEliminar(false);
        $opciones->setTabla('Ocasiact');
        $opciones->setAncho(800);
        $opciones->setAnchoGrid(800);
