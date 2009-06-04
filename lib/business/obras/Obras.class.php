@@ -1394,10 +1394,9 @@ public static function salvarLicitacion($ocreglic, $grid)
      {
        self :: montoTotal($gridnuevo, &$montototal1);
        $montoiva=(($montototal1*$resul->getIvaobr())/100);
-       $subtotal=$montototal1-$montoiva;
-       $resul->setMonobr($montototal1);
+       $resul->setMonobr($montototal1 + $montoiva);
        $resul->setMoniva($montoiva);
-       $resul->setSubtot($subtotal);
+       $resul->setSubtot($montototal1);
        $resul->save();
      }
      self::actualizaPrecompromiso($obra);
