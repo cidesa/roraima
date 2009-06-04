@@ -242,7 +242,7 @@ public static function salvarLicitacion($ocreglic, $grid)
  	$c= new Criteria();
  	$c->add(OcregconPeer::CODOBR,$ocregobr->getCodobr());
  	$reg=OcregconPeer::doSelectOne($c);
- 	if ($reg)
+ 	if (!$reg)
  	{
  	  Herramientas::EliminarRegistro('Ocpreobr','Codobr',$ocregobr->getCodobr());
  	  Herramientas::EliminarRegistro('Ocinginsobr','Codobr',$ocregobr->getCodobr());
