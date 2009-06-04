@@ -14,7 +14,7 @@ class Catcarconinm extends BaseCatcarconinm
 
   public function getTotal()
   {
-	return self::getCancar() * self::getMetare();
+	return H::FormatoMonto(self::getCancar() * self::getMetare());
   }
 
 
@@ -26,8 +26,6 @@ class Catcarconinm extends BaseCatcarconinm
 
   public function getTipocons()
   {
-    //return Herramientas::getX('id','catcarcon','Nomcarcon',self::getCatcarconid());
-    //return Constantes::ListaCaractConst();
     $c = new Criteria();
     $lista = CatcarconPeer::doSelect($c);
     $modulos = array();
@@ -36,8 +34,7 @@ class Catcarconinm extends BaseCatcarconinm
     {
     	$modulos += array($arr->getTipo() => $arr->getTipo());
     }
-return $modulos;
-    //return getCatcarcon_id()
+	return $modulos;
   }
 
 
