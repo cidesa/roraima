@@ -281,7 +281,10 @@ public static function salvarLicitacion($ocreglic, $grid)
   public static function salvarOycregpro($caprovee,$grid1,$grid2,$grid3)
   {
     $caprovee->save();
-    self::grabarEspecialidad($caprovee);
+    if (!$caprovee->getId())
+    {
+      self::grabarEspecialidad($caprovee);
+    }
     self::grabarRecaudos($caprovee,$grid1);
     self::grabarPersonal($caprovee,$grid2);
     self::grabarEquipos($caprovee,$grid3);
