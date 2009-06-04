@@ -25,7 +25,7 @@
    costototal=(num2*num1);
 
    //$(total).value=format(costototal.toFixed(2),'.',',','.');
-   $(total).value=costototal;
+   $(total).value=FloattoFloatVE(costototal);
 
 //   totalizargrid();
 
@@ -38,9 +38,9 @@
    var fil=aux[1];
    var col=parseInt(aux[2]);
 
-   var dimen  = name+"_"+fil+"_"+2;
-   var valor = name+"_"+fil+"_"+3;
-   var total = name+"_"+fil+"_"+4;
+   var dimen  = name+"_"+fil+"_"+4;
+   var valor = name+"_"+fil+"_"+5;
+   var total = name+"_"+fil+"_"+6;
 
    var num1=toFloat(dimen);
    var num2=toFloat(valor);
@@ -58,7 +58,7 @@
    costototal=(num2*num1);
 
    //$(total).value=format(costototal.toFixed(2),'.',',','.');
-   $(total).value=costototal;
+   $(total).value=FloattoFloatVE(costototal);
 
 //   totalizargrid();
 

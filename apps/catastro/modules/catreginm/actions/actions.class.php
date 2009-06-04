@@ -43,12 +43,12 @@ class catreginmActions extends autocatreginmActions
      $per = CatcarterinmPeer::doSelect($c);
 
      $this->columnas = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/catreginm/'.sfConfig::get('sf_app_module_config_dir_name').'/grid_catcarterinm');
-     $this->columnas[1][0]->setCombo(Catcarterinm::CargarTerrenos());
+     //$this->columnas[1][0]->setCombo(Catcarterinm::CargarTerrenos());
+     $this->columnas[1][0]->setCombo(Constantes::ListaCaractTierra());
+     $this->columnas[1][1]->setCatalogo('catcarter','sf_admin_edit_form', array('id'=>'2' ,'dester'=>'3'), 'Catreginm_Catcarter', array( 'param1'=>"'+getCeldav2(this.id,-1)+'" ) );
      //echo $this->columnas[1][0]->getCatcarterid();
-     //exit();
 
      //$this->columnas[1][0]->setCombo(Catcarterinm::CargarTerrenos());
-//H::printr($this->columnas);
      $this->objT = $this->columnas[0]->getConfig($per);
 
      $this->catreginm->setObjterreno($this->objT);
@@ -111,13 +111,15 @@ class catreginmActions extends autocatreginmActions
 
     if($this->getRequest()->getMethod() == sfRequest::POST){
        $this->catreginm  =  $this->getCatreginmOrCreate();
-      //	 $this->editing();
 
-       if (($this->coderr=Herramientas::ValidarGrid(Herramientas::CargarDatosGridv2($this,$this->objC)))!=-1){ return false; }
-       if (($this->coderr=Herramientas::ValidarGrid(Herramientas::CargarDatosGridv2($this,$this->objT)))!=-1){ return false; }
-       if (($this->coderr=Herramientas::ValidarGrid(Herramientas::CargarDatosGridv2($this,$this->objP)))!=-1){ return false; }
+    /*$this->configGridC();
+    $this->configGridP();
+    $this->configGridT();
+       if (($this->coderr=Herramientas::ValidarGrid(Herramientas::CargarDatosGridv2($this,$this->catreginm->getObjconstruccion)))!=-1){ return false; }
+       if (($this->coderr=Herramientas::ValidarGrid(Herramientas::CargarDatosGridv2($this,$this->catreginm->getObjterreno)))!=-1){ return false; }
+       if (($this->coderr=Herramientas::ValidarGrid(Herramientas::CargarDatosGridv2($this,$this->catreginm->getObjpersonas)))!=-1){ return false; }
 
-
+*/
 
       if($this->coderr!=-1){
         return false;

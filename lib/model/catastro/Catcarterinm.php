@@ -9,10 +9,12 @@
  */
 class Catcarterinm extends BaseCatcarterinm
 {
+	protected $total;
+	protected $tipoterr;
 
   public function getTotal()
   {
-	return self::getDimensiones() * self::getValor();
+  	return H::FormatoMonto(self::getDimensiones() * self::getValor());
   }
 
 
@@ -29,4 +31,23 @@ class Catcarterinm extends BaseCatcarterinm
     return $modulos;
   }
 
+
+  public function getTipoterr()
+  {
+    $c = new Criteria();
+    $lista = CatcarterPeer::doSelect($c);
+    $modulos = array();
+
+    foreach($lista as $arr)
+    {
+    	$modulos += array($arr->getTertip() => $arr->getTertip());
+    }
+	return $modulos;
+  }
+
+
+  public function getDester()
+  {
+    return Herramientas::getX('id','catcarter','dester',self::getCatcarterid());
+  }
 }

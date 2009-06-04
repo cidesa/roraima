@@ -27,19 +27,19 @@ opciones:                  # Opciones generales
   html:                    [size="20", readonly=true ]
 4:       # Columna 4
   titulo:                  Cantidad
-  tipo:                    t
+  tipo:                    m
   nombrecampo:             cancar
   esgrabable:              true
   html:                    [size=10 onBlur=CalculoConstruccion(this.id)]
 5:       # Columna 5
   titulo:                  Valor (m2)
-  tipo:                    t
+  tipo:                    m
   nombrecampo:             metare
   esgrabable:              true
   html:                    [size=10 onBlur=CalculoConstruccion(this.id)]
 5:       # Columna 5
   titulo:                  Total (m2)
-  tipo:                    t
+  tipo:                    m
   nombrecampo:             total
   esgrabable:              false
   html:                    [size=10 readonly=true]
