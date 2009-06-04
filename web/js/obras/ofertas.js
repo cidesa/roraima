@@ -407,13 +407,12 @@
     {
       var totacon=toFloat('ocregcon_totales');
       var num2=toFloat('ocregcon_poriva');
+      $('ocregcon_subtot').value=format(totacon.toFixed(2),'.',',','.');
       var cal=((totacon*num2)/100);
       $('ocregcon_moniva').value=format(cal.toFixed(2),'.',',','.');
       var num3=toFloat('ocregcon_moniva');
-      var num4= totacon - num3;
-       $('ocregcon_subtot').value=format(num4.toFixed(2),'.',',','.');
-      var num1=toFloat('ocregcon_subtot');
-      var calculo=num1+num3;
+
+      var calculo=totacon + num3;
       $('ocregcon_totcon').value=format(calculo.toFixed(2),'.',',','.');
       $('ocregcon_moncon').value=format(calculo.toFixed(2),'.',',','.');
 
