@@ -25,7 +25,6 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
     $perdeduc=array();
     $arr=array();
 	$totarr=0;
-	
 	if(!$estaliquidado)
 	{	
     	$sql="select 1 as orden,
@@ -148,7 +147,7 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 			$cont=0;
 			$totarr=count($arr); 
 			$aguinaldos = PrestacionesSociales::AguinaldosFracionados($codnom,$codemp,$fecegr,$ultimosueldo,$totarr,$estaliquidado);
-	
+			$arr = array_merge($arr,$aguinaldos);
 	        while ($cont<count($arr))
 	        {
 			  if ((H::tofloat($arr[$cont]['monto']))>0)
