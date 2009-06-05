@@ -170,6 +170,20 @@ class nomhojintActions extends autonomhojintActions
     }
     return $guarderia;
   }
+  
+  public function CargarNivel()
+  {
+    $c = new Criteria();
+    $lista_niv = NpniveduPeer::doSelect($c);
+
+    $nivl = array();
+
+    foreach($lista_niv as $obj_niv)
+    {
+      $nivl += array($obj_niv->getCodniv() => $obj_niv->getDesniv());
+    }
+    return $nivl;
+  }
 
 
   public function executeEdit()
@@ -180,6 +194,7 @@ class nomhojintActions extends autonomhojintActions
     $this->funciones_combos();
     $this->funciones_combos2();
     $this->listaestatus= $this->cargarSituacion();
+	$this->listanivelestudio= $this->cargarNivel();
     $this->listaformapago= Constantes::ListaFormaPago();
     $this->bancos = $this->CargarBancos();
     $this->listatipocuenta= Constantes::ListaTipoCuenta();
@@ -309,6 +324,7 @@ $this->Bitacora('Guardo');
     $this->funciones_combos();
     $this->funciones_combos2();
     $this->listaestatus= $this->cargarSituacion();
+	$this->listanivelestudio= $this->cargarNivel();
     $this->listaformapago= Constantes::ListaFormaPago();
     $this->bancos = $this->CargarBancos();
     $this->listatipocuenta= Constantes::ListaTipoCuenta();
@@ -751,6 +767,10 @@ $this->Bitacora('Guardo');
     if (isset($nphojint['profes']))
     {
       $this->nphojint->setProfes($nphojint['profes']);
+    }
+	if (isset($nphojint['codnivedu']))
+    {
+      $this->nphojint->setCodnivedu($nphojint['codnivedu']);
     }
     $this->nphojint->setIncapacidades($this->getRequestParameter('associated_incapacidades'));
   }
@@ -1209,6 +1229,7 @@ $this->Bitacora('Guardo');
       'nphojint{nacemp}' => 'Nacionalidad',
       'nphojint{sexemp}' => 'Sexo',
       'nphojint{codniv}' => 'Nivel Organizacional',
+      'nphojint{codnivedu}' => 'Nivel Estudio',
       'nphojint{fotemp}' => 'Foto',
       'nphojint{lugnac}' => 'Lugar de Nacimiento',
       'nphojint{fecnac}' => 'Fecha de Nacimiento',

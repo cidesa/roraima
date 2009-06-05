@@ -882,6 +882,15 @@ echo grid_tag($obj3);
 <?php tabPageOpenClose("tp1", "tabPage7", 'Información Curricular');?>
 <fieldset id="sf_fieldset_none" class="">
 <div class="form-row">
+<?php echo label_for('nphojint[codnivedu]', __($labels['nphojint{codnivedu}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('nphojint{codnivedu}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('nphojint{codnivedu}')): ?>
+    <?php echo form_error('nphojint{codnivedu}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php echo select_tag('nphojint[codnivedu]', options_for_select($listanivelestudio,$nphojint->getCodnivedu(),'include_custom=Seleccione Uno')) ?>
+    </div>	
+<br>	
 <?
 echo grid_tag($obj4);
 ?>
