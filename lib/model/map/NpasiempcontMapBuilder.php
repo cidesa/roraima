@@ -44,6 +44,10 @@ class NpasiempcontMapBuilder {
 
 		$tMap->addColumn('FECCAL', 'Feccal', 'int', CreoleTypes::DATE, true, null);
 
+		$tMap->addColumn('FECDES', 'Fecdes', 'int', CreoleTypes::DATE, true, null);
+
+		$tMap->addColumn('FECHAS', 'Fechas', 'int', CreoleTypes::DATE, true, null);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 
