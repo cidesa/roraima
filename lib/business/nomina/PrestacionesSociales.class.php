@@ -1041,7 +1041,7 @@ End Function*/
   }
 
   public static function AguinaldosFracionados($codnom,$codemp,$fecegr,$ultimosueldo,$totarr,$estaliquidado)
-  {  	  
+  {
 	   if (!$estaliquidado && $totarr>0)
 	   {  #NO ESTA LIQUIDADO
 	   	  #Primero verificamos cuantos meses cumplidos trabajados tiene el trabajador en el año 
@@ -1052,7 +1052,7 @@ End Function*/
 		   	$meses = $result[0]['meses'];
 		  else
 		 	$meses = 0;
-		  
+
 		  #BUSCAMOS SI COBRÓ UTILIDADES EN EL PERÍODO
           $sqluti = "Select * from NPHisCon where CodEmp='$codemp' and CodCon in (Select CodConUti from NPVacDefGen) and TO_CHAR(FecNom,'YYYY')='$anoegr'";
 		  if (!Herramientas::BuscarDatos($sqluti,&$result))
@@ -1065,7 +1065,7 @@ End Function*/
 				#YA NO SE CALCULA LA PARTE DE INCIDENCIA
 				$montoinc = 0;
 				$montoinc = $montoinc * $montouti;
-				
+
 				if($utilinc)
 				{
 					$sql = "Select coalesce(max(saltot),0) as Monto from NPImpPresoc where CodEmp='$codemp' And Tipo='P'";
@@ -1086,11 +1086,11 @@ End Function*/
 					$partida = $result[0]['codpar'];
 				else
 				    $partida='';	
-				$arr=$arrasi[$totarr]['orden'] = '5';
-				$arr=$arrasi[$totarr]['dias'] = $diasuti;
-				$arr=$arrasi[$totarr]['monto'] = $montouti + $montoinc;
-				$arr=$arrasi[$totarr]['descripcion'] = 'AGUINALDOS FRACCIONADOS';				
-				$arr=$arrasi[$totarr]['partida'] = $partida;
+				$arr[$totarr]['orden'] = '5';
+				$arr[$totarr]['dias'] = $diasuti;
+				$arr[$totarr]['monto'] = $montouti + $montoinc;
+				$arr[$totarr]['descripcion'] = 'AGUINALDOS FRACCIONADOS';				
+				$arr[$totarr]['partida'] = $partida;
 			}else
 			{
 				#NO SE LE PAGA NADA
@@ -1101,6 +1101,7 @@ End Function*/
 		  	if($meses>=1)
 			{
 				PrestacionesSociales::TraerAlicuota($codemp,'01/01/'.$anoegr,$fecegrf,&$ialiuti,&$ialibono,&$icalinc,&$utilinc);
+
 				$montouti = ($ialiuti-19) / 12;
 				$montouti = $montouti * (12 - $meses);
 				#YA NO SE CALCULA LA PARTE DE INCIDENCIA
@@ -1122,12 +1123,11 @@ End Function*/
 					$partida = $result[0]['codpar'];
 				else
 				    $partida='';	
-				$arr=$arrasi[$totarr]['orden'] = '5';
-				$arr=$arrasi[$totarr]['dias'] = '0';
-				$arr=$arrasi[$totarr]['monto'] = ($montouti + $montoinc)*(-1);
-				$arr=$arrasi[$totarr]['descripcion'] = 'AGUINALDOS FRACCIONADOS';				
-				$arr=$arrasi[$totarr]['partida'] = $partida;
-				
+				$arr[$totarr]['orden'] = '5';
+				$arr[$totarr]['dias'] = '0';
+				$arr[$totarr]['monto'] = ($montouti + $montoinc)*(-1);
+				$arr[$totarr]['descripcion'] = 'AGUINALDOS FRACCIONADOS';				
+				$arr[$totarr]['partida'] = $partida;				
 			}else
 			{
 				PrestacionesSociales::TraerAlicuota($codemp,'01/01/'.$anoegr,$fecegrf,&$ialiuti,&$ialibono,&$icalinc,&$utilinc);
@@ -1142,11 +1142,11 @@ End Function*/
 					$partida = $result[0]['codpar'];
 				else
 				    $partida='';	
-				$arr=$arrasi[$totarr]['orden'] = '5';
-				$arr=$arrasi[$totarr]['dias'] = '0';
-				$arr=$arrasi[$totarr]['monto'] = ($montouti + $montoinc)*(-1);
-				$arr=$arrasi[$totarr]['descripcion'] = 'AGUINALDOS FRACCIONADOS';				
-				$arr=$arrasi[$totarr]['partida'] = $partida;
+				$arr[$totarr]['orden'] = '5';
+				$arr[$totarr]['dias'] = '0';
+				$arr[$totarr]['monto'] = ($montouti + $montoinc)*(-1);
+				$arr[$totarr]['descripcion'] = 'AGUINALDOS FRACCIONADOS';				
+				$arr[$totarr]['partida'] = $partida;
 			}	
 		  } 
 		  
@@ -1156,6 +1156,7 @@ End Function*/
 	   	 #YA ESTA LIQUIDADO
 	   	 #SE CALCULO AL PRINCIPIO	   	 
 	   } 
+	   return $arr;
   }
   
   public static function TraerAlicuota($codemp,$fechaini,$fechafin,&$ialiuti,&$ialibono,&$icalinc,&$utilinc)
@@ -1166,12 +1167,12 @@ End Function*/
 	else
 		$contrato = '001';
 	
-	$sql = "select ((select fecing from nphojint where codemp='$codemp')-to_date('$fechaini','dd/mm/yyyy'))::numeric/365 as anoser;";
+	$sql = "select (to_date('$fechaini','dd/mm/yyyy')-(select fecing from nphojint where codemp='$codemp'))::numeric/365 as anoser;";
 	if (Herramientas::BuscarDatos($sql,&$result))
 		$anoser = $result[0]['anoser'];		
 	else
 		$anoser=0;		
-	
+		
 	$sql = "select * from npbonocont 
 	       where 
 		    anovig<= to_date('$fechaini','dd/mm/yyyy') and 
