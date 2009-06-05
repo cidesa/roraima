@@ -6988,6 +6988,59 @@ class Nomina {
     }else $dato='';
     return $dato;
   }
+  
+  public static function Grabar_grid_nomdefespprimas($grid1,$grid2,$grid3)
+  {
+  	//Grabamos Grid Prima por Hijo
+    $x=$grid1[0];
+    $j=0;
+	if(count($x)>0)
+    while ($j<count($x))
+    { 
+	  $x[$j]->save();     
+	  $j++;
+    }
+    $z=$grid1[1];
+    $j=0;
+    if (!empty($z[$j]))
+    {
+      while ($j<count($z))
+      {
+        $z[$j]->delete();
+        $j++;
+      }
+    }
+	//Grabamos Grid Prima Profesionalizacion
+    $x=$grid2[0];
+    $j=0;
+	if(count($x)>0)
+    while ($j<count($x))
+    { 
+	  $x[$j]->save();     
+	  $j++;
+    }
+    $z=$grid2[1];
+    $j=0;
+    if (!empty($z[$j]))
+    {
+      while ($j<count($z))
+      {
+        $z[$j]->delete();
+        $j++;
+      }
+    }
+	//Grabamos Grid Prima Cargo colateral
+    $x=$grid3[0];
+    $j=0;
+	if(count($x)>0)
+    while ($j<count($x))
+    { 
+	  $x[$j]->save();     
+	  $j++;
+    }
+    //////////////////////////////
+	return -1;
+  }
 
 } // fin clase
 ?>
