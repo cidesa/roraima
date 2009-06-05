@@ -12,6 +12,7 @@ generator:
       nacemp: { name: Nacionalidad}
       sexemp: { name: Sexo}
       codniv: { name: Nivel Organizacional}
+      codnivedu: { name: Nivel Estudio}
       fotemp: { name: Foto}
       fotemp:
         help: Tamaño de la foto 90x100 (jpg, gif o png)
@@ -93,7 +94,7 @@ generator:
       sort: codemp
     edit:
       title:          Edición de Datos Personales
-      display:       [=codemp, nomemp, cedemp, edociv, numcon, nacemp, sexemp, codniv, _fotemp, fotemp, lugnac, fecnac, edaemp, obsgen, dirhab, codpai, codest, codciu, telhab, telotr, celemp, dirotr, codpa2, codes2, codci2, telha2, telot2, emaemp, codpos, fecing, fecret, fecrei, obsemp, staemp, codtippag, codban, numcue, tipcue, fecadmpub, numsso, numpolseg, feccotsso, anoadmpub, tiefid, talcam, talpan, talcal, grusan, codregpai, codregest, codregciu, grulab, gruotr, traslado, traotr, numexp, detexp, derzur, tipviv, vivotr, forten, tenotr, sercon, temporal, incapacidades, situac, profes]
+      display:       [=codemp, nomemp, cedemp, edociv, numcon, nacemp, sexemp, codniv, _fotemp, fotemp, lugnac, fecnac, edaemp, obsgen, dirhab, codpai, codest, codciu, telhab, telotr, celemp, dirotr, codpa2, codes2, codci2, telha2, telot2, emaemp, codpos, fecing, fecret, fecrei, obsemp, staemp, codtippag, codban, numcue, tipcue, fecadmpub, numsso, numpolseg, feccotsso, anoadmpub, tiefid, talcam, talpan, talcal, grusan, codregpai, codregest, codregciu, grulab, gruotr, traslado, traotr, numexp, detexp, derzur, tipviv, vivotr, forten, tenotr, sercon, temporal, incapacidades, situac, profes, codnivedu]
       fields:
         fecnac: { params: date_format='dd/MM/yy' }
         fecing: { params: date_format='dd/MM/yy' }
