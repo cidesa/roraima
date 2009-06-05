@@ -1060,7 +1060,7 @@ End Function*/
 		  	if($meses>=1)
 			{
 				PrestacionesSociales::TraerAlicuota($codemp,'01/01/'.$anoegr,$fecegrf,&$ialiuti,&$ialibono,&$icalinc,&$utilinc);
-				$montouti = ($ialiuti-19) / 12;
+				$montouti = ($ialiuti) / 12;
 				$montouti = $montouti * $meses;
 				#YA NO SE CALCULA LA PARTE DE INCIDENCIA
 				$montoinc = 0;
@@ -1102,7 +1102,7 @@ End Function*/
 			{
 				PrestacionesSociales::TraerAlicuota($codemp,'01/01/'.$anoegr,$fecegrf,&$ialiuti,&$ialibono,&$icalinc,&$utilinc);
 
-				$montouti = ($ialiuti-19) / 12;
+				$montouti = ($ialiuti) / 12;
 				$montouti = $montouti * (12 - $meses);
 				#YA NO SE CALCULA LA PARTE DE INCIDENCIA
 				$montoinc = 0;
