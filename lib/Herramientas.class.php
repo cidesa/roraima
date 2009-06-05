@@ -1218,7 +1218,11 @@ public static function CargarDatosGrid(&$form,$obj,$arreglo = false)
   {
     $json = '[';
     foreach($arra as $key => $value){
-      $json .= '["'.$key.'","'.$value.'",""], ';
+      if(is_array($value)){
+        foreach($value as $k => $v){
+          $json .= '["'.$key.'_'.$k.'","'.$value.'",""], ';
+        }
+      }else $json .= '["'.$key.'","'.$value.'",""], ';
     }
     return $json .= '["","",""]]';
   }
