@@ -675,6 +675,15 @@
 465:
   cod: 465
   msj: Si selecciona Fideicomiso debe ingresar la fecha desde  
+466:
+  cod: 466
+  msj: Grid Prima por  Hijos Incompleto, faltan datos
+467:
+  cod: 467
+  msj: Grid Prima Profesionalización Incompleto, faltan datos  
+468:
+  cod: 468
+  msj: Grid Prima Cargo Calateral Incompleto, faltan datos    
 ###############OBRAS################
 1000:
     cod: 1000
