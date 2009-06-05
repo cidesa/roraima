@@ -631,6 +631,14 @@ propel:
       type: DATE
       required: true
       ##primaryKey: true
+    fecdes:
+      type: DATE
+      required: true
+      ##primaryKey: true
+    fechas:
+      type: DATE
+      required: true
+      ##primaryKey: true            
     id:
       type: INTEGER
       required: true
@@ -3584,6 +3592,9 @@ propel:
     profes:
       type: VARCHAR
       size: 1
+    codnivedu:
+      type: VARCHAR
+      size: 4      
     id:
       type: INTEGER
       required: true
@@ -5808,6 +5819,10 @@ propel:
     diaano:
       type: NUMERIC
       size: 3
+    fid:
+      type: VARCHAR
+      size: 1  
+    fecdes: DATE  
     id:
       type: INTEGER
       required: true
@@ -6596,3 +6611,99 @@ propel:
       type: INTEGER
       required: true
       autoIncrement: true
+  npintcon:
+    #_attributes:
+      #idMethod: native
+    codcon:
+      type: VARCHAR
+      size: 3
+      required: true
+      ##primaryKey: true
+    fecdes:
+      type: DATE
+    fechas:
+      type: DATE
+    tiptas:
+      type: VARCHAR
+      size: 1  
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true      
+  npdiaantper:
+    #_attributes:
+      #idMethod: native
+    codcon:
+      type: VARCHAR
+      size: 3
+      required: true
+      ##primaryKey: true
+    fecdes:
+      type: DATE
+    fechas:
+      type: DATE
+    numdia:
+      type: INTEGER
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true            
+  npprimashijos:
+    #_attributes:
+      #idMethod: native
+    parfam:
+      type: VARCHAR
+      size: 4
+      required: true
+      ##primaryKey: true
+    edaddes:
+      type: NUMERIC
+      size: 2
+      scale: 0
+    edadhas:
+      type: NUMERIC
+      size: 2
+      scale: 0
+    monto:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    estudios:
+      type: VARCHAR  
+      size: 1
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true                  
+  npprimaprofes:
+    #_attributes:
+      #idMethod: native
+    grado:
+      type: NUMERIC
+      size: 2
+      scale: 0
+    prima:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true                        
+  npcargoscol:
+    #_attributes:
+      #idMethod: native
+    codcarcol:
+      type: VARCHAR
+      size: 16
+    descarcol:
+      type: VARCHAR
+      size: 100
+    prima:
+      type: NUMERIC
+      size: 14
+      scale: 2      
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true                              
