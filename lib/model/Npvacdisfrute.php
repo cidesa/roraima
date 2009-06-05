@@ -9,6 +9,9 @@
  */
 class Npvacdisfrute extends BaseNpvacdisfrute
 {
+	protected $obj=array();
+	protected $codnom="";	
+	
 	public function getNomemp()
 	{
 		$c = new Criteria();

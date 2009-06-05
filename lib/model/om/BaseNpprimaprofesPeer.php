@@ -1,47 +1,32 @@
 <?php
 
 
-abstract class BaseNpasiempcontPeer {
+abstract class BaseNpprimaprofesPeer {
 
 	
 	const DATABASE_NAME = 'propel';
 
 	
-	const TABLE_NAME = 'npasiempcont';
+	const TABLE_NAME = 'npprimaprofes';
 
 	
-	const CLASS_DEFAULT = 'lib.model.Npasiempcont';
+	const CLASS_DEFAULT = 'lib.model.Npprimaprofes';
 
 	
-	const NUM_COLUMNS = 8;
+	const NUM_COLUMNS = 3;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
 
 
 	
-	const CODTIPCON = 'npasiempcont.CODTIPCON';
+	const GRADO = 'npprimaprofes.GRADO';
 
 	
-	const CODNOM = 'npasiempcont.CODNOM';
+	const PRIMA = 'npprimaprofes.PRIMA';
 
 	
-	const CODEMP = 'npasiempcont.CODEMP';
-
-	
-	const NOMEMP = 'npasiempcont.NOMEMP';
-
-	
-	const FECCAL = 'npasiempcont.FECCAL';
-
-	
-	const FECDES = 'npasiempcont.FECDES';
-
-	
-	const FECHAS = 'npasiempcont.FECHAS';
-
-	
-	const ID = 'npasiempcont.ID';
+	const ID = 'npprimaprofes.ID';
 
 	
 	private static $phpNameMap = null;
@@ -49,31 +34,31 @@ abstract class BaseNpasiempcontPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codtipcon', 'Codnom', 'Codemp', 'Nomemp', 'Feccal', 'Fecdes', 'Fechas', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (NpasiempcontPeer::CODTIPCON, NpasiempcontPeer::CODNOM, NpasiempcontPeer::CODEMP, NpasiempcontPeer::NOMEMP, NpasiempcontPeer::FECCAL, NpasiempcontPeer::FECDES, NpasiempcontPeer::FECHAS, NpasiempcontPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codtipcon', 'codnom', 'codemp', 'nomemp', 'feccal', 'fecdes', 'fechas', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
+		BasePeer::TYPE_PHPNAME => array ('Grado', 'Prima', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (NpprimaprofesPeer::GRADO, NpprimaprofesPeer::PRIMA, NpprimaprofesPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('grado', 'prima', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codtipcon' => 0, 'Codnom' => 1, 'Codemp' => 2, 'Nomemp' => 3, 'Feccal' => 4, 'Fecdes' => 5, 'Fechas' => 6, 'Id' => 7, ),
-		BasePeer::TYPE_COLNAME => array (NpasiempcontPeer::CODTIPCON => 0, NpasiempcontPeer::CODNOM => 1, NpasiempcontPeer::CODEMP => 2, NpasiempcontPeer::NOMEMP => 3, NpasiempcontPeer::FECCAL => 4, NpasiempcontPeer::FECDES => 5, NpasiempcontPeer::FECHAS => 6, NpasiempcontPeer::ID => 7, ),
-		BasePeer::TYPE_FIELDNAME => array ('codtipcon' => 0, 'codnom' => 1, 'codemp' => 2, 'nomemp' => 3, 'feccal' => 4, 'fecdes' => 5, 'fechas' => 6, 'id' => 7, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
+		BasePeer::TYPE_PHPNAME => array ('Grado' => 0, 'Prima' => 1, 'Id' => 2, ),
+		BasePeer::TYPE_COLNAME => array (NpprimaprofesPeer::GRADO => 0, NpprimaprofesPeer::PRIMA => 1, NpprimaprofesPeer::ID => 2, ),
+		BasePeer::TYPE_FIELDNAME => array ('grado' => 0, 'prima' => 1, 'id' => 2, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, )
 	);
 
 	
 	public static function getMapBuilder()
 	{
-		include_once 'lib/model/map/NpasiempcontMapBuilder.php';
-		return BasePeer::getMapBuilder('lib.model.map.NpasiempcontMapBuilder');
+		include_once 'lib/model/map/NpprimaprofesMapBuilder.php';
+		return BasePeer::getMapBuilder('lib.model.map.NpprimaprofesMapBuilder');
 	}
 	
 	public static function getPhpNameMap()
 	{
 		if (self::$phpNameMap === null) {
-			$map = NpasiempcontPeer::getTableMap();
+			$map = NpprimaprofesPeer::getTableMap();
 			$columns = $map->getColumns();
 			$nameMap = array();
 			foreach ($columns as $column) {
@@ -107,33 +92,23 @@ abstract class BaseNpasiempcontPeer {
 	
 	public static function alias($alias, $column)
 	{
-		return str_replace(NpasiempcontPeer::TABLE_NAME.'.', $alias.'.', $column);
+		return str_replace(NpprimaprofesPeer::TABLE_NAME.'.', $alias.'.', $column);
 	}
 
 	
 	public static function addSelectColumns(Criteria $criteria)
 	{
 
-		$criteria->addSelectColumn(NpasiempcontPeer::CODTIPCON);
+		$criteria->addSelectColumn(NpprimaprofesPeer::GRADO);
 
-		$criteria->addSelectColumn(NpasiempcontPeer::CODNOM);
+		$criteria->addSelectColumn(NpprimaprofesPeer::PRIMA);
 
-		$criteria->addSelectColumn(NpasiempcontPeer::CODEMP);
-
-		$criteria->addSelectColumn(NpasiempcontPeer::NOMEMP);
-
-		$criteria->addSelectColumn(NpasiempcontPeer::FECCAL);
-
-		$criteria->addSelectColumn(NpasiempcontPeer::FECDES);
-
-		$criteria->addSelectColumn(NpasiempcontPeer::FECHAS);
-
-		$criteria->addSelectColumn(NpasiempcontPeer::ID);
+		$criteria->addSelectColumn(NpprimaprofesPeer::ID);
 
 	}
 
-	const COUNT = 'COUNT(npasiempcont.ID)';
-	const COUNT_DISTINCT = 'COUNT(DISTINCT npasiempcont.ID)';
+	const COUNT = 'COUNT(npprimaprofes.ID)';
+	const COUNT_DISTINCT = 'COUNT(DISTINCT npprimaprofes.ID)';
 
 	
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
@@ -142,9 +117,9 @@ abstract class BaseNpasiempcontPeer {
 
 				$criteria->clearSelectColumns()->clearOrderByColumns();
 		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(NpasiempcontPeer::COUNT_DISTINCT);
+			$criteria->addSelectColumn(NpprimaprofesPeer::COUNT_DISTINCT);
 		} else {
-			$criteria->addSelectColumn(NpasiempcontPeer::COUNT);
+			$criteria->addSelectColumn(NpprimaprofesPeer::COUNT);
 		}
 
 				foreach($criteria->getGroupByColumns() as $column)
@@ -152,7 +127,7 @@ abstract class BaseNpasiempcontPeer {
 			$criteria->addSelectColumn($column);
 		}
 
-		$rs = NpasiempcontPeer::doSelectRS($criteria, $con);
+		$rs = NpprimaprofesPeer::doSelectRS($criteria, $con);
 		if ($rs->next()) {
 			return $rs->getInt(1);
 		} else {
@@ -164,7 +139,7 @@ abstract class BaseNpasiempcontPeer {
 	{
 		$critcopy = clone $criteria;
 		$critcopy->setLimit(1);
-		$objects = NpasiempcontPeer::doSelect($critcopy, $con);
+		$objects = NpprimaprofesPeer::doSelect($critcopy, $con);
 		if ($objects) {
 			return $objects[0];
 		}
@@ -173,7 +148,7 @@ abstract class BaseNpasiempcontPeer {
 	
 	public static function doSelect(Criteria $criteria, $con = null)
 	{
-		return NpasiempcontPeer::populateObjects(NpasiempcontPeer::doSelectRS($criteria, $con));
+		return NpprimaprofesPeer::populateObjects(NpprimaprofesPeer::doSelectRS($criteria, $con));
 	}
 	
 	public static function doSelectRS(Criteria $criteria, $con = null)
@@ -184,7 +159,7 @@ abstract class BaseNpasiempcontPeer {
 
 		if (!$criteria->getSelectColumns()) {
 			$criteria = clone $criteria;
-			NpasiempcontPeer::addSelectColumns($criteria);
+			NpprimaprofesPeer::addSelectColumns($criteria);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -196,7 +171,7 @@ abstract class BaseNpasiempcontPeer {
 	{
 		$results = array();
 	
-				$cls = NpasiempcontPeer::getOMClass();
+				$cls = NpprimaprofesPeer::getOMClass();
 		$cls = Propel::import($cls);
 				while($rs->next()) {
 		
@@ -216,7 +191,7 @@ abstract class BaseNpasiempcontPeer {
 	
 	public static function getOMClass()
 	{
-		return NpasiempcontPeer::CLASS_DEFAULT;
+		return NpprimaprofesPeer::CLASS_DEFAULT;
 	}
 
 	
@@ -230,7 +205,7 @@ abstract class BaseNpasiempcontPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
-		$criteria->remove(NpasiempcontPeer::ID); 
+		$criteria->remove(NpprimaprofesPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 
@@ -257,8 +232,8 @@ abstract class BaseNpasiempcontPeer {
 
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; 
-			$comparison = $criteria->getComparison(NpasiempcontPeer::ID);
-			$selectCriteria->add(NpasiempcontPeer::ID, $criteria->remove(NpasiempcontPeer::ID), $comparison);
+			$comparison = $criteria->getComparison(NpprimaprofesPeer::ID);
+			$selectCriteria->add(NpprimaprofesPeer::ID, $criteria->remove(NpprimaprofesPeer::ID), $comparison);
 
 		} else { 			$criteria = $values->buildCriteria(); 			$selectCriteria = $values->buildPkeyCriteria(); 		}
 
@@ -275,7 +250,7 @@ abstract class BaseNpasiempcontPeer {
 		}
 		$affectedRows = 0; 		try {
 									$con->begin();
-			$affectedRows += BasePeer::doDeleteAll(NpasiempcontPeer::TABLE_NAME, $con);
+			$affectedRows += BasePeer::doDeleteAll(NpprimaprofesPeer::TABLE_NAME, $con);
 			$con->commit();
 			return $affectedRows;
 		} catch (PropelException $e) {
@@ -288,16 +263,16 @@ abstract class BaseNpasiempcontPeer {
 	 public static function doDelete($values, $con = null)
 	 {
 		if ($con === null) {
-			$con = Propel::getConnection(NpasiempcontPeer::DATABASE_NAME);
+			$con = Propel::getConnection(NpprimaprofesPeer::DATABASE_NAME);
 		}
 
 		if ($values instanceof Criteria) {
-			$criteria = clone $values; 		} elseif ($values instanceof Npasiempcont) {
+			$criteria = clone $values; 		} elseif ($values instanceof Npprimaprofes) {
 
 			$criteria = $values->buildPkeyCriteria();
 		} else {
 						$criteria = new Criteria(self::DATABASE_NAME);
-			$criteria->add(NpasiempcontPeer::ID, (array) $values, Criteria::IN);
+			$criteria->add(NpprimaprofesPeer::ID, (array) $values, Criteria::IN);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -316,13 +291,13 @@ abstract class BaseNpasiempcontPeer {
 	}
 
 	
-	public static function doValidate(Npasiempcont $obj, $cols = null)
+	public static function doValidate(Npprimaprofes $obj, $cols = null)
 	{
 		$columns = array();
 
 		if ($cols) {
-			$dbMap = Propel::getDatabaseMap(NpasiempcontPeer::DATABASE_NAME);
-			$tableMap = $dbMap->getTable(NpasiempcontPeer::TABLE_NAME);
+			$dbMap = Propel::getDatabaseMap(NpprimaprofesPeer::DATABASE_NAME);
+			$tableMap = $dbMap->getTable(NpprimaprofesPeer::TABLE_NAME);
 
 			if (! is_array($cols)) {
 				$cols = array($cols);
@@ -338,11 +313,11 @@ abstract class BaseNpasiempcontPeer {
 
 		}
 
-		$res =  BasePeer::doValidate(NpasiempcontPeer::DATABASE_NAME, NpasiempcontPeer::TABLE_NAME, $columns);
+		$res =  BasePeer::doValidate(NpprimaprofesPeer::DATABASE_NAME, NpprimaprofesPeer::TABLE_NAME, $columns);
     if ($res !== true) {
         $request = sfContext::getInstance()->getRequest();
         foreach ($res as $failed) {
-            $col = NpasiempcontPeer::translateFieldname($failed->getColumn(), BasePeer::TYPE_COLNAME, BasePeer::TYPE_PHPNAME);
+            $col = NpprimaprofesPeer::translateFieldname($failed->getColumn(), BasePeer::TYPE_COLNAME, BasePeer::TYPE_PHPNAME);
             $request->setError($col, $failed->getMessage());
         }
     }
@@ -357,12 +332,12 @@ abstract class BaseNpasiempcontPeer {
 			$con = Propel::getConnection(self::DATABASE_NAME);
 		}
 
-		$criteria = new Criteria(NpasiempcontPeer::DATABASE_NAME);
+		$criteria = new Criteria(NpprimaprofesPeer::DATABASE_NAME);
 
-		$criteria->add(NpasiempcontPeer::ID, $pk);
+		$criteria->add(NpprimaprofesPeer::ID, $pk);
 
 
-		$v = NpasiempcontPeer::doSelect($criteria, $con);
+		$v = NpprimaprofesPeer::doSelect($criteria, $con);
 
 		return !empty($v) > 0 ? $v[0] : null;
 	}
@@ -379,8 +354,8 @@ abstract class BaseNpasiempcontPeer {
 			$objs = array();
 		} else {
 			$criteria = new Criteria();
-			$criteria->add(NpasiempcontPeer::ID, $pks, Criteria::IN);
-			$objs = NpasiempcontPeer::doSelect($criteria, $con);
+			$criteria->add(NpprimaprofesPeer::ID, $pks, Criteria::IN);
+			$objs = NpprimaprofesPeer::doSelect($criteria, $con);
 		}
 		return $objs;
 	}
@@ -388,11 +363,11 @@ abstract class BaseNpasiempcontPeer {
 } 
 if (Propel::isInit()) {
 			try {
-		BaseNpasiempcontPeer::getMapBuilder();
+		BaseNpprimaprofesPeer::getMapBuilder();
 	} catch (Exception $e) {
 		Propel::log('Could not initialize Peer: ' . $e->getMessage(), Propel::LOG_ERR);
 	}
 } else {
-			require_once 'lib/model/map/NpasiempcontMapBuilder.php';
-	Propel::registerMapBuilder('lib.model.map.NpasiempcontMapBuilder');
+			require_once 'lib/model/map/NpprimaprofesMapBuilder.php';
+	Propel::registerMapBuilder('lib.model.map.NpprimaprofesMapBuilder');
 }

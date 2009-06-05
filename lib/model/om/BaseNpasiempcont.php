@@ -29,6 +29,14 @@ abstract class BaseNpasiempcont extends BaseObject  implements Persistent {
 
 
 	
+	protected $fecdes;
+
+
+	
+	protected $fechas;
+
+
+	
 	protected $id;
 
 	
@@ -77,6 +85,50 @@ abstract class BaseNpasiempcont extends BaseObject  implements Persistent {
       }
     } else {
       $ts = $this->feccal;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getFecdes($format = 'Y-m-d')
+  {
+
+    if ($this->fecdes === null || $this->fecdes === '') {
+      return null;
+    } elseif (!is_int($this->fecdes)) {
+            $ts = adodb_strtotime($this->fecdes);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecdes] as date/time value: " . var_export($this->fecdes, true));
+      }
+    } else {
+      $ts = $this->fecdes;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getFechas($format = 'Y-m-d')
+  {
+
+    if ($this->fechas === null || $this->fechas === '') {
+      return null;
+    } elseif (!is_int($this->fechas)) {
+            $ts = adodb_strtotime($this->fechas);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fechas] as date/time value: " . var_export($this->fechas, true));
+      }
+    } else {
+      $ts = $this->fechas;
     }
     if ($format === null) {
       return $ts;
@@ -152,6 +204,40 @@ abstract class BaseNpasiempcont extends BaseObject  implements Persistent {
 
 	} 
 	
+	public function setFecdes($v)
+	{
+
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecdes] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecdes !== $ts) {
+      $this->fecdes = $ts;
+      $this->modifiedColumns[] = NpasiempcontPeer::FECDES;
+    }
+
+	} 
+	
+	public function setFechas($v)
+	{
+
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fechas] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fechas !== $ts) {
+      $this->fechas = $ts;
+      $this->modifiedColumns[] = NpasiempcontPeer::FECHAS;
+    }
+
+	} 
+	
 	public function setId($v)
 	{
 
@@ -176,7 +262,11 @@ abstract class BaseNpasiempcont extends BaseObject  implements Persistent {
 
       $this->feccal = $rs->getDate($startcol + 4, null);
 
-      $this->id = $rs->getInt($startcol + 5);
+      $this->fecdes = $rs->getDate($startcol + 5, null);
+
+      $this->fechas = $rs->getDate($startcol + 6, null);
+
+      $this->id = $rs->getInt($startcol + 7);
 
       $this->resetModified();
 
@@ -184,7 +274,7 @@ abstract class BaseNpasiempcont extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 6; 
+            return $startcol + 8; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Npasiempcont object", $e);
     }
@@ -347,6 +437,12 @@ abstract class BaseNpasiempcont extends BaseObject  implements Persistent {
 				return $this->getFeccal();
 				break;
 			case 5:
+				return $this->getFecdes();
+				break;
+			case 6:
+				return $this->getFechas();
+				break;
+			case 7:
 				return $this->getId();
 				break;
 			default:
@@ -364,7 +460,9 @@ abstract class BaseNpasiempcont extends BaseObject  implements Persistent {
 			$keys[2] => $this->getCodemp(),
 			$keys[3] => $this->getNomemp(),
 			$keys[4] => $this->getFeccal(),
-			$keys[5] => $this->getId(),
+			$keys[5] => $this->getFecdes(),
+			$keys[6] => $this->getFechas(),
+			$keys[7] => $this->getId(),
 		);
 		return $result;
 	}
@@ -396,6 +494,12 @@ abstract class BaseNpasiempcont extends BaseObject  implements Persistent {
 				$this->setFeccal($value);
 				break;
 			case 5:
+				$this->setFecdes($value);
+				break;
+			case 6:
+				$this->setFechas($value);
+				break;
+			case 7:
 				$this->setId($value);
 				break;
 		} 	}
@@ -410,7 +514,9 @@ abstract class BaseNpasiempcont extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[2], $arr)) $this->setCodemp($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setNomemp($arr[$keys[3]]);
 		if (array_key_exists($keys[4], $arr)) $this->setFeccal($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setId($arr[$keys[5]]);
+		if (array_key_exists($keys[5], $arr)) $this->setFecdes($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setFechas($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setId($arr[$keys[7]]);
 	}
 
 	
@@ -423,6 +529,8 @@ abstract class BaseNpasiempcont extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(NpasiempcontPeer::CODEMP)) $criteria->add(NpasiempcontPeer::CODEMP, $this->codemp);
 		if ($this->isColumnModified(NpasiempcontPeer::NOMEMP)) $criteria->add(NpasiempcontPeer::NOMEMP, $this->nomemp);
 		if ($this->isColumnModified(NpasiempcontPeer::FECCAL)) $criteria->add(NpasiempcontPeer::FECCAL, $this->feccal);
+		if ($this->isColumnModified(NpasiempcontPeer::FECDES)) $criteria->add(NpasiempcontPeer::FECDES, $this->fecdes);
+		if ($this->isColumnModified(NpasiempcontPeer::FECHAS)) $criteria->add(NpasiempcontPeer::FECHAS, $this->fechas);
 		if ($this->isColumnModified(NpasiempcontPeer::ID)) $criteria->add(NpasiempcontPeer::ID, $this->id);
 
 		return $criteria;
@@ -463,6 +571,10 @@ abstract class BaseNpasiempcont extends BaseObject  implements Persistent {
 		$copyObj->setNomemp($this->nomemp);
 
 		$copyObj->setFeccal($this->feccal);
+
+		$copyObj->setFecdes($this->fecdes);
+
+		$copyObj->setFechas($this->fechas);
 
 
 		$copyObj->setNew(true);

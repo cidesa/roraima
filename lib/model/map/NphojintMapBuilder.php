@@ -198,6 +198,8 @@ class NphojintMapBuilder {
 
 		$tMap->addColumn('PROFES', 'Profes', 'string', CreoleTypes::VARCHAR, false, 1);
 
+		$tMap->addColumn('CODNIVEDU', 'Codnivedu', 'string', CreoleTypes::VARCHAR, false, 4);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 
