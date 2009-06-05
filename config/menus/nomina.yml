@@ -24,7 +24,9 @@ nomina:
       Tipos Nóminas:                                                 NomDefEspTipNom
       Conceptos:                                                     NomDefEspCon
       Niveles Organizacionales:                                      NomDefEspNivOrg
+      Niveles de Estudio:                                            NomDefEspNivEdu
       Cargos:                                                        NomDefEspCar
+      Cargos Colaterales:                                            NomDefEspCargosCol      
       Definición de Conceptos Variables:                             NomDefEspMovPer
       Variables:                                                     NomDefEspVar
       Bancos:                                                        NomDefEspBan
@@ -33,6 +35,7 @@ nomina:
       Tipos de Parientes:                                            NomDefEspPar
       Guarderías:                                                    NomDefEspGuarde
       Tipos de Gastos:                                               NomDefTipGas
+      Tipo de Cargos:                                                NomTipCar      
       Motivos de Faltas y/o Permisos:                                NomDefEspMotFalPre
       Situacion del Empleado:                                        nomdefespsitemp
       Definición de Condición Contractual:                           NomDefEspGruLab
@@ -40,6 +43,7 @@ nomina:
       Conceptos para el Salario Integral:                            NomConceptosSalarioIntegral
       Conceptos para el Sueldo:                                      NomConceptosSueldo
       Conceptos para las Primas:                                     NomConceptosPrimas
+      Parametros Especiales para el Calculo de las Primas:            NomDefEspPrimas
       Conceptos de Compensación por Nómina:                          NomConceptosCompensacion
       Conceptos de Ahorro Habitacional:                              NomDefConAho
       Conceptos para el Fondo de Jubilación y Pensiones:             NomDefConFon
@@ -90,6 +94,7 @@ nomina:
       Tabla para los Días Feriados:                                  VacDiaFer
       Registro de Vacaciones Disfrutadas:                            VacHistorico
       Registro de Vacaciones Disfrutadas en Lote:                    VacHistorico_Lote
+      Registro de Vacaciones Colectivas:                             Vaccolecti      
       Registro de Solicitud de Vacaciones:                           VacSALIDAS
       #Registro y Control de Vacaciones:                             VacRegSalVac
       Liquidación de Vacaciones Por Egreso:                          VacLiquidacion
