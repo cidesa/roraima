@@ -3847,8 +3847,8 @@ public function Tsmovlib_tesmovdeglib2()
       if($params) $this->c->add(NpasicarnomPeer::CODNOM,$params[0]);
 
       $this->columnas = array (
-        NpcargosPeer :: NOMCAR => 'Cargo',
         NpcargosPeer :: CODCAR => 'Código',
+        NpcargosPeer :: NOMCAR => 'Cargo',
         NpcargosPeer :: SUECAR => 'Sueldo',
         NpcargosPeer :: GRAOCP => 'Grado',
       );
@@ -5262,7 +5262,6 @@ A.CODREDE"
     $this->c->addAscendingOrderByColumn(CattramoPeer::CATDIVGEO_ID);
 
     $this->columnas = array (
-
       CattramoPeer::NOMTRAMO => 'Descripcion'
     );
   }
@@ -5306,6 +5305,30 @@ A.CODREDE"
     );
   }
 
+  public function Facpicsollic_Rifcon()
+  {
+    $this->c = new Criteria();
+    $this->c->add(FcconrepPeer::REPCON,'C');
+    $this->columnas = array (
+      FcconrepPeer :: RIFCON => 'Código',
+      FcconrepPeer :: NOMCON => 'Descripción',
+    );
+
+  }
+
+  public function Facpicsollic_Rifrep()
+  {
+    $this->c = new Criteria();
+    $this->c->add(FcconrepPeer::REPCON,'R');
+    $this->columnas = array (
+      FcconrepPeer :: RIFCON => 'Código',
+      FcconrepPeer :: NOMCON => 'Descripción',
+    );
+
+  }
+
+
+
   public function Npguarde_nphojint() {
 
     $this->c = new Criteria();
@@ -5317,6 +5340,37 @@ A.CODREDE"
     );
   }
 
+  public function Fcreginm_Facpicsollic()
+  {
+    $this->c = new Criteria();
+    $this->c->addAscendingOrderByColumn(FcreginmPeer :: CODCATINM);
+    $this->columnas = array (
+      FcreginmPeer :: CODCATINM => 'Código',
+      FcreginmPeer :: NOMCON => 'Descripción'
+    );
+  }
+
+
+  public function Fcreginm_Fcusoinm()
+  {
+    $this->c = new Criteria();
+    $this->c->addAscendingOrderByColumn(FcusoinmPeer :: CODUSOINM);
+    $this->columnas = array (
+      FcusoinmPeer :: CODUSOINM => 'Código',
+      FcusoinmPeer :: NOMUSOINM => 'Descripción'
+    );
+  }
+
+  public function Fcreginm_Fcsitjurinm()
+  {
+    $this->c = new Criteria();
+    $this->c->addAscendingOrderByColumn(FcsitjurinmPeer :: CODSITINM);
+    $this->columnas = array (
+      FcsitjurinmPeer :: CODSITINM => 'Código',
+      FcsitjurinmPeer :: NOMSITINM => 'Descripción'
+    );
+  }
+
     public function Npdefcpt_Nomdefespconsue($params) {
       $this->c = new Criteria();
       $this->c->add(NpasiconnomPeer :: CODNOM, $params[0]);
@@ -5325,6 +5379,64 @@ A.CODREDE"
       $this->columnas = array (
         NpdefcptPeer :: CODCON => 'Código',
         NpdefcptPeer :: NOMCON => 'Descripción'
+    );
+  }
+
+  public function Almregpro_Carecaud($params = array ())
+  {
+    $this->c= new Criteria();
+    $this->c->add(CarecaudPeer :: CODTIPREC, $params[0]);
+    $this->c->addAscendingOrderByColumn(CarecaudPeer::CODREC);
+
+    $this->columnas = array (
+        CarecaudPeer::CODREC=> 'Código',
+        CarecaudPeer::DESREC => 'Descripción'
+    );
+  }
+
+  public function Almregpro_Catiprec($params = array ()) //no borrar
+  {
+    $this->c= new Criteria();
+    $this->c->addAscendingOrderByColumn(CatiprecPeer::CODTIPREC);
+
+    $this->columnas = array (
+        CatiprecPeer::CODTIPREC=> 'Código',
+        CatiprecPeer::DESTIPREC => 'Descripción'
+    );
+  }
+
+  public function Almregpro_Caramart($params = array ())
+  {
+    $this->c= new Criteria();
+    $this->c->addAscendingOrderByColumn(CaramartPeer::RAMART);
+
+    $this->columnas = array (
+        CaramartPeer::RAMART=> 'Código',
+        CaramartPeer::NOMRAM => 'Descripción'
+    );
+  }
+
+  public function Almregpro_Optipret($params = array ())
+  {
+    $this->c= new Criteria();
+    $this->c->addAscendingOrderByColumn(OptipretPeer::CODTIP);
+
+    $this->columnas = array (
+        OptipretPeer::CODTIP=> 'Código',
+        OptipretPeer::DESTIP => 'Descripción',
+        OptipretPeer::PORRET => 'Porcentaje',
+        OptipretPeer::BASIMP => 'Base'
+    );
+  }
+
+  public function Catreginm_Catcarter($params='')
+  {
+    $this->c = new Criteria();
+    $this->c->add(CatcarterPeer::TERTIP,$params[0]);
+    $this->c->addAscendingOrderByColumn(CatcarterPeer::DESTER);
+
+    $this->columnas = array (
+      CatcarterPeer :: DESTER => 'Descripción'
     );
   }
 }
