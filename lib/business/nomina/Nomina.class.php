@@ -4298,8 +4298,11 @@ class Nomina {
           $npcomocp_new = new Npcomocp();
           $npcomocp_new->setCodtipcar($npcomocp->getCodtipcar());
           $npcomocp_new->setFecdes($npcomocp->getFecdes());
-          $npcomocp_new->setPascar($grid[$i]['pascar']);
           $npcomocp_new->setGracar($grid[$i]['gracar']);
+		  if($grid[$i]['pascar']=='')
+          	$npcomocp_new->setPascar('001');
+		  else	
+		    $npcomocp_new->setPascar($grid[$i]['pascar']);
           if ($grid[$i]['suecar'] > 0) {
             $npcomocp_new->setSuecar($grid[$i]['suecar']);
           } else {
