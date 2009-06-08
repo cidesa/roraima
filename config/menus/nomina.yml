@@ -69,6 +69,7 @@ nomina:
       #Nominas a Formular:                                           ForNomFor
       #Formulas de Conceptos:                                        ForCalCon
       Tipo de Dedicación:                                            NomTipDed
+      Tipo de Categoria:                                             NomTipCat      
       #Asignación de Conceptos a Cargos:                             ForAsoConCar
       Tabla de Sueldos por Grado y Paso:                             NomComOCP
       Asignación de Cargos y Conceptos a Empleados:                  NomAsiCarConNom
