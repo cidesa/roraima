@@ -151,3 +151,8 @@ COMMENT ON TABLE "tsbloqban" IS '';
 ------
 ALTER TABLE "opdefemp"
   ADD COLUMN "ordret" VARCHAR(4);
+  
+--CARLOS RAMIREZ  
+alter table npasicaremp
+  add column codtipded  varchar(4),
+  add column codtipcat varchar(20);    
