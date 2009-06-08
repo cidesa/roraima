@@ -256,11 +256,31 @@ $this->Bitacora('Guardo');
     {
       $this->opdefemp->setNomcat($opdefemp['nomcat']);
     }
+    if (isset($opdefemp['gencomalc']))
+    {
+      $this->opdefemp->setGencomalc($opdefemp['gencomalc']);
+    }
+    if (isset($opdefemp['reqaprord']))
+    {
+      $this->opdefemp->setReqaprord($opdefemp['reqaprord']);
+    }
+    if (isset($opdefemp['ordcomptot']))
+    {
+      $this->opdefemp->setOrdcomptot($opdefemp['ordcomptot']);
+    }
+    if (isset($opdefemp['ordmotanu']))
+    {
+      $this->opdefemp->setOrdmotanu($opdefemp['ordmotanu']);
+    }
+    if (isset($opdefemp['manbloqban']))
+    {
+      $this->opdefemp->setManbloqban($opdefemp['manbloqban']);
+    }
     if (isset($opdefemp['ordret']))
     {
       $this->opdefemp->setOrdret($opdefemp['ordret']);
     }
-    $this->opdefemp->setOrdconpre(isset($opdefemp['ordconpre']) ? $opdefemp['ordconpre'] : 0);
+	$this->opdefemp->setOrdconpre(isset($opdefemp['ordconpre']) ? $opdefemp['ordconpre'] : 0);
   }
 
   protected function saveOpdefemp($opdefemp)
@@ -284,6 +304,23 @@ $this->Bitacora('Guardo');
     if ($opdefemp->getEmichepag()=='1')
     { $opdefemp->setEmichepag('S');}
     else {$opdefemp->setEmichepag(null);}
+    if ($opdefemp->getGencomalc()=='1')
+    { $opdefemp->setGencomalc('S');}
+    else {$opdefemp->setGencomalc(null);}
+    if ($opdefemp->getReqaprord()=='1')
+    { $opdefemp->setReqaprord('S');}
+    else {$opdefemp->setReqaprord(null);}
+    if ($opdefemp->getOrdcomptot()=='1')
+    { $opdefemp->setOrdcomptot('S');}
+    else {$opdefemp->setOrdcomptot(null);}
+    if ($opdefemp->getOrdmotanu()=='1')
+    { $opdefemp->setOrdmotanu('S');}
+    else {$opdefemp->setOrdmotanu(null);}
+
+    if ($opdefemp->getManbloqban()=='1')
+    { $opdefemp->setManbloqban('S');}
+    else {$opdefemp->setManbloqban(null);}
+
     $opdefemp->save();
 
   }

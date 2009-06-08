@@ -25,14 +25,14 @@ class almordcomActions extends autoalmordcomActions
     {
       if ($this->getRequestParameter('id')=="")
       {
-      	$grid_detalle=Herramientas::CargarDatosGrid($this,$this->obj,true);//0
+        $grid_detalle=Herramientas::CargarDatosGrid($this,$this->obj,true);//0
         $grid_entregas=Herramientas::CargarDatosGrid($this,$this->obj_entregas,true);//0
         $grid_detalle_detallado=$grid_detalle[0];
 
-        if ($this->getRequestParameter('caordcom[genctaord]')=='S')
-        {
         $grid_resumen=Herramientas::CargarDatosGrid($this,$this->obj_resumen,true);//0
 
+        if ($this->getRequestParameter('caordcom[genctaord]')=='S')
+        {
          $grabocom=$this->getUser()->getAttribute('grabo',null,$this->getUser()->getAttribute('formulario'));
 
           if ($grabocom=='')
@@ -318,195 +318,64 @@ class almordcomActions extends autoalmordcomActions
 
   public function executeAjaxcomprobante()
   {
-      //elimino las sessiones
-      $this->getUser()->getAttributeHolder()->remove('reftra');
-      $this->getUser()->getAttributeHolder()->remove('grabar');
-      $this->getUser()->getAttributeHolder()->remove('fectra');
-      $this->getUser()->getAttributeHolder()->remove('destra');
-      $this->getUser()->getAttributeHolder()->remove('ctas');
-      $this->getUser()->getAttributeHolder()->remove('tipmov');
-      $this->getUser()->getAttributeHolder()->remove('mov');
-      $this->getUser()->getAttributeHolder()->remove('montos');
+    $this->caordcom = $this->getCaordcomOrCreate();
+    $this->updateCaordcomFromRequest();
+    $this->i="";
+    $this->msjuno="";
+    $this->formulario=array();
+    $referencia=$this->getUser()->getAttribute('referencia');
+    $total=0;
+    $detalle=Herramientas::CargarDatosGrid($this,$this->obj,true);
 
-    if (Herramientas::getVerCorrelativo('ordcom','cadefart',&$r))
+    $x=$detalle[0];
+    $j=0;
+    while ($j<count($x))
     {
-      if (trim($this->getRequestParameter('reftra'))=='--------')
-      {
-        $ordcom=str_pad($r, 8, '0', STR_PAD_LEFT);
-        $ordcom=Herramientas::getBuscar_correlativo($ordcom,'cadefart','ordcom','caordcom','ordcom');
-      }
-      else
-      {
-        $ordcom=str_replace('#','0',$caordcom->getOrdcom());
-        $ordcom=str_pad($caordcom->getOrdcom(), 8, '0', STR_PAD_LEFT);
-        $ordcom=Herramientas::getBuscar_correlativo($ordcom,'cadefart','ordcom','caordcom','ordcom');
-      }
+      if ($referencia==0)
+  	  $mont=$x[$j]["totart"];
+  	  else $mont=$x[$j]["montot"];
+
+      $total= $total + $mont;
+  	  $j++;
     }
-    $tiporec = Herramientas::getX_vacio('rifpro','caprovee','tipo',trim($this->getRequestParameter('rifpro')));
-
-    if (trim($this->getRequestParameter('tipord'))=='C')
-      $numerocomprob='OC'.substr(trim($ordcom), 2, 6);
-    elseif(trim($this->getRequestParameter('tipord'))=='S')
-      $numerocomprob='OS'.substr(trim($ordcom), 2, 6);
-    else
-      $numerocomprob='OC'.substr(trim($ordcom), 2, 6);
 
 
-    //asigno sesssiones
-      $this->getUser()->setAttribute('reftra', $numerocomprob,trim($this->getRequestParameter('formulario')));
-        $this->getUser()->setAttribute('grabar', 'N',trim($this->getRequestParameter('formulario')));
-        $this->getUser()->setAttribute('fectra', trim($this->getRequestParameter('fectra')),trim($this->getRequestParameter('formulario')));
-        $this->getUser()->setAttribute('destra', trim($this->getRequestParameter('destra')),trim($this->getRequestParameter('formulario')));
-    $this->getUser()->setAttribute('tipmov', trim($this->getRequestParameter('tipmov')),trim($this->getRequestParameter('formulario')));
-      $afectaproyecto=false;
-
-        if (trim($this->getRequestParameter('tippro'))!='')
-        {
-          $result=array();
-          $sql = "Select ctaord,ctaper from catippro where Codpro='".trim($this->getRequestParameter('tippro'))."'";
-        if (Herramientas::BuscarDatos($sql,&$result))
-        {
-              if (($result[0]['ctaord']!='')and($result[0]['ctaper']!=''))
-              {
-                $ctaproyord = $result[0]['ctaord'];
-            $ctaproyper = $result[0]['ctaper'];
-              $afectaproyecto=true;
-              }
-              else
-                $msg='Proyecto de codigo:'.$this->getRequestParameter('tippro').' no tiene cuentas asociadas';
-        }
-        }
-
-        if ($afectaproyecto)
-        {
-          $result1=array();
-          $sql1 = "SELECT codcta,descta FROM contabb WHERE codcta ='".trim($ctaproyord)."'";
-        if (Herramientas::BuscarDatos($sql1,&$result1))
-        {
-              $codcta = $result1[0]['codcta'];
-          $desc_ctas = $result1[0]['descta'];
-        }
-        else
-          $msg='El Proyecto '.$this->getRequestParameter('tippro').' no tiene una Cuenta de Orden válida asociada';
-
-        $result2=array();
-          $sql2 = "SELECT codcta,descta FROM contabb WHERE codcta ='".trim($ctaproyper)."'";
-        if (Herramientas::BuscarDatos($sql2,&$result2))
-        {
-              $codcta = $codcta.'_'.$result2[0]['codcta'];
-          $desc_ctas = $desc_ctas.'_'.$result2[0]['descta'];
-        }
-        else
-          $msg='El Proyecto '.$this->getRequestParameter('tippro').' no tiene una Cuenta de Percontra válida asociada';
-
-        $this->getUser()->setAttribute('ctas', $codcta, trim($this->getRequestParameter('formulario')));
-        $this->getUser()->setAttribute('desctas', $desc_ctas, trim($this->getRequestParameter('formulario')));
-        $this->getUser()->setAttribute('mov', 'C_D', trim($this->getRequestParameter('formulario')));
-        $this->getUser()->setAttribute('montos', trim($this->getRequestParameter('monto')).'_'.trim($this->getRequestParameter('monto')), trim($this->getRequestParameter('formulario')));
-        }
+    $c= new Criteria();
+    $reg= OpdefempPeer::doSelectOne($c);
+    if ($reg)
+    {
+      if ($reg->getGencomalc()=='S')
+      {
+        Orden_compra::generarComprobante($this->caordcom,$detalle,$referencia,$total,&$msjuno,&$comprobante);
+      }
       else
       {
-        $result3=array();
-          $sql3 = "select codord,codordadi,codordadi,codperconadi,codpercon from OPBenefi where CedRif='".trim($this->getRequestParameter('rifpro'))."'";
-        if (Herramientas::BuscarDatos($sql3,&$result3))
-        {
-            if (trim($this->getRequestParameter('tipord'))!='S')
-            {
-              if ($tiporec!='C') // si es proveedor
-              {
-                if (trim($result3[0]['codord'])!='')
-                  $codigocuenta=$result3[0]['codord'];
-                else
-                  $codigocuenta='';
-              }
-              else // si es contratoista
-              {
-                if (trim($result3[0]['codordadi'])!='')
-                  $codigocuenta=$result3[0]['codordadi'];
-                else
-                  $codigocuenta='';
-              }
-            }
-            else
-            {
-                if ($tiporec!='C') // si es proveedor
-                {
-                  if (trim($result3[0]['codordadi'])!='')
-                    $codigocuenta=$result3[0]['codordadi'];
-                  else
-                    $codigocuenta='';
-                }
-                else // si es contratoista
-                {
-                  if (trim($result3[0]['codord'])!='')
-                    $codigocuenta=$result3[0]['codord'];
-                  else
-                    $codigocuenta='';
-                }
-            }
-
-              $result4=array();
-              $sql4 = "SELECT codcta,descta FROM CONTABB WHERE codcta ='".trim($codigocuenta)."'";
-            if (Herramientas::BuscarDatos($sql4,&$result4))
-            {
-                  $codcta = $result4[0]['codcta'];
-              $desc_ctas = $result4[0]['descta'];
-            }
-            else
-              $msg='El Beneficiario " + DatosOrd(2).Text + " no tiene una Cuenta de Orden válida asociada';
-
-
-            if (trim($this->getRequestParameter('tipord'))!='S')
-            {
-              if ($tiporec!='C') // si es proveedor
-              {
-                if (trim($result3[0]['codpercon'])!='')
-                  $codigocuenta=$result3[0]['codpercon'];
-                else
-                  $codigocuenta='';
-              }
-              else // si es contratoista
-              {
-                if (trim($result3[0]['codperconadi'])!='')
-                  $codigocuenta=$result3[0]['codperconadi'];
-                else
-                  $codigocuenta='';
-              }
-            }
-            else
-            {
-              if ($tiporec!='C') // si es proveedor
-              {
-                if (trim($result3[0]['codperconadi'])!='')
-                  $codigocuenta=$result3[0]['codperconadi'];
-                else
-                  $codigocuenta='';
-              }
-              else // si es contratoista
-              {
-                if (trim($result3[0]['codpercon'])!='')
-                  $codigocuenta=$result3[0]['codpercon'];
-                else
-                  $codigocuenta='';
-              }
-            }
-              $result5=array();
-              $sql5 = "SELECT codcta,descta FROM CONTABB WHERE codcta ='".trim($codigocuenta)."'";
-            if (Herramientas::BuscarDatos($sql5,&$result5))
-            {
-                  $codcta = $codcta.'_'.$result5[0]['codcta'];
-              $desc_ctas = $desc_ctas.'_'.$result5[0]['descta'];
-            }
-            else
-              $msg='El Beneficiario " + DatosOrd(2).Text + " no tiene una Cuenta de Percontra válida asociada';
-
-          $this->getUser()->setAttribute('ctas', $codcta, trim($this->getRequestParameter('formulario')));
-          $this->getUser()->setAttribute('desctas', $desc_ctas, trim($this->getRequestParameter('formulario')));
-          $this->getUser()->setAttribute('mov', 'C_D', trim($this->getRequestParameter('formulario')));
-          $this->getUser()->setAttribute('montos', trim($this->getRequestParameter('monto')).'_'.trim($this->getRequestParameter('monto')), trim($this->getRequestParameter('formulario')));
-        }
+      	Orden_compra::generarComprobanteOrden($this->caordcom,$total,&$msjuno,&$comprobante);
       }
-    return sfView::HEADER_ONLY;
+
+      if ($msjuno=="")
+      {
+	      $form="sf_admin/almordcom/confincomgen";
+	      $i=0;
+	      $f[$i]=$form.$i;
+	      $this->getUser()->setAttribute('grabar',$comprobante[0]->getGrabar(),$f[$i]);
+	      $this->getUser()->setAttribute('reftra',$comprobante[0]->getReftra(),$f[$i]);
+	      $this->getUser()->setAttribute('numcomp',$comprobante[0]->getNumcom(),$f[$i]);
+	      $this->getUser()->setAttribute('fectra',$comprobante[0]->getFectra(),$f[$i]);
+	      $this->getUser()->setAttribute('destra',$comprobante[0]->getDestra(),$f[$i]);
+	      $this->getUser()->setAttribute('ctas', $comprobante[0]->getCtas(),$f[$i]);
+	      $this->getUser()->setAttribute('desctas', $comprobante[0]->getDesc(),$f[$i]);
+	      $this->getUser()->setAttribute('tipmov', '');
+	      $this->getUser()->setAttribute('mov', $comprobante[0]->getMov(),$f[$i]);
+	      $this->getUser()->setAttribute('montos', $comprobante[0]->getMontos(),$f[$i]);
+	      $this->i=0;
+	      $this->formulario=$f;
+     }
+     else
+     {
+     	$this->msjuno=$msjuno;
+     }
+    }
   }
 
 
@@ -716,11 +585,11 @@ class almordcomActions extends autoalmordcomActions
       $campo_col6='Canaju';//tabla Caartord
       $campo_col8='Cantot';//tabla Caartord
       $campo_col9='Preart';//tabla Caartord
-      $campo_col10='Dtoart';//tabla Caartord
-      $campo_col11='Rgoart';//tabla Caartord
-      $campo_col12='Totart';//tabla Caartord
-      $campo_col13='Unimed';//tabla Caartord
-      $campo_col14='Codpre';//tabla Caartord
+      $campo_col11='Dtoart';//tabla Caartord
+      $campo_col12='Rgoart';//tabla Caartord
+      $campo_col13='Totart';//tabla Caartord
+      $campo_col14='Unimed';//tabla Caartord
+      $campo_col15='Codpre';//tabla Caartord
       $this->getUser()->setAttribute('referencia', '0');
       if (Herramientas::getX_vacio('ordcom','Caartord','ordcom',$ordcom)!='')
         $filas_arreglo=0;
@@ -736,11 +605,11 @@ class almordcomActions extends autoalmordcomActions
       $campo_col6='Canaju';//tabla Caartsol
       $campo_col8='Canreq';//tabla Caartsol
       $campo_col9='Costo';//tabla Caartsol
-      $campo_col10='Mondes';//tabla Caartsol
-      $campo_col11='Monrgo';//tabla Caartsol
-      $campo_col12='Montot';//tabla Caartsol
-      $campo_col13='Unimed';//tabla Caartsol
-      $campo_col14='Codpre';//tabla Caartsol
+      $campo_col11='Mondes';//tabla Caartsol
+      $campo_col12='Monrgo';//tabla Caartsol
+      $campo_col13='Montot';//tabla Caartsol
+      $campo_col14='Unimed';//tabla Caartsol
+      $campo_col15='Codpre';//tabla Caartsol
       $this->getUser()->setAttribute('referencia', '1');
       $filas_arreglo=0;
     }
@@ -819,9 +688,7 @@ class almordcomActions extends autoalmordcomActions
     $col5->setEsNumerico(true);
     if ($referencia==0 and $filas_arreglo>0) $col5->setHTML('type="text" size="10"');
     if ($referencia==1 or $filas_arreglo==0) $col5->setHTML('type="text" size="10" readonly=true');
-    //if ($referencia==0) $col5->setJScript('onKeypress="entermonto(event,this.id); if (verificar_datos(this.id)){actualizo_cod_presupuestario(this.id);actualizar_total_grid_detalle_datos(event,this.id);actualizar_grid_dependientes();actualizar_check_para_recargo();actualizar_sumatoria_detallada_orden();actualizar_sumatoria_recargo_mas_orden();verifica_presupuesto(event,this.id);}"');
     if ($referencia==0 and $filas_arreglo>0) $col5->setJScript('onKeypress="entermonto(event,this.id); if (verificar_datos(this.id)){actualizar_total_grid_detalle_datos(event,this.id,"N");recalcularecargos(event,this.id);actualizar_grid_dependientes();verifica_presupuesto(event,this.id);}"');
-    //if ($referencia==1) $col5->setJScript('onKeypress="entermonto(event,this.id);actualizar_sumatoria_total_cuando_esta_referida();actualizar_grid_dependientes()"');
 
     $col6 = clone $col5;
     $col6->setTitulo('Cant. Ajustada');
@@ -843,81 +710,85 @@ class almordcomActions extends autoalmordcomActions
     $col9->setTitulo('Costo');
     $col9->setHTML('type="text" size="10"');
     $col9->setNombreCampo($campo_col9);
-      $col9->setJScript('onKeypress="entermonto(event,this.id); actualizar_total_grid_detalle_datos(event,this.id,"N");recalcularecargos(event,this.id);actualizar_grid_dependientes();verifica_presupuesto(event,this.id);"');
+    $col9->setJScript('onKeypress="entermonto(event,this.id); actualizar_total_grid_detalle_datos(event,this.id,"N");recalcularecargos(event,this.id);actualizar_grid_dependientes();verifica_presupuesto(event,this.id);"');
 
     $col10 = clone $col6;
-    $col10->setTitulo('Descuento');
-    $col10->setNombreCampo($campo_col10);
-    $col10->setHTML('type="text" size="10"');
-    //if ($referencia==0) $col10->setJScript('onKeypress="entermonto(event,this.id);actualizar_total_grid_detalle_datos(this.id);actualizar_grid_dependientes();actualizar_check_para_recargo();actualizar_sumatoria_detallada_orden();actualizar_sumatoria_recargo_mas_orden()"');
-    //if ($referencia==0) $col10->setJScript('onKeypress="entermonto(event,this.id);actualizar_grid_dependientes();actualizar_check_para_recargo();actualizar_sumatoria_detallada_orden();actualizar_sumatoria_recargo_mas_orden()"');
-    if ($referencia==0 and $filas_arreglo>0) $col10->setJScript('onKeypress="entermonto(event,this.id); actualizar_total_grid_detalle_datos(event,this.id,"S");actualizar_grid_dependientes();verifica_presupuesto(event,this.id);"');
-    if ($referencia==1) $col10->setJScript('onKeypress="entermonto(event,this.id);actualizar_sumatoria_total_cuando_esta_referida();actualizar_grid_dependientes()"');
-    $col10->setEsTotal(true,'sumatoria_descuentos');
+    $col10->setTitulo('Cant x Costo');
+    $col10->setNombreCampo('cancost');
+    $col10->setHTML('type="text" size="10" readonly=true');
+    $col10->setEsTotal(true,'caordcom_totorden');
 
     $col11 = clone $col6;
-    $col11->setTitulo('Monto Recargo');
+    $col11->setTitulo('Descuento');
     $col11->setNombreCampo($campo_col11);
-    if ($referencia==0) $col11->setHTML('type="text" size="10" readonly=true');
+    $col11->setHTML('type="text" size="10"');
+    if ($referencia==0 and $filas_arreglo>0) $col11->setJScript('onKeypress="entermonto(event,this.id); actualizar_total_grid_detalle_datos(event,this.id,"S");actualizar_grid_dependientes();verifica_presupuesto(event,this.id);"');
+    if ($referencia==1) $col11->setJScript('onKeypress="entermonto(event,this.id);actualizar_sumatoria_total_cuando_esta_referida();actualizar_grid_dependientes()"');
+    $col11->setEsTotal(true,'sumatoria_descuentos');
 
     $col12 = clone $col6;
-    $col12->setTitulo('Total');
+    $col12->setTitulo('Monto Recargo');
     $col12->setNombreCampo($campo_col12);
-    $col12->setHTML('type="text" size="10" readonly=true');
-    $col12->setEsTotal(true,'caordcom_monord');
+    if ($referencia==0) $col12->setHTML('type="text" size="10" readonly=true');
+    $col12->setEsTotal(true,'caordcom_totrecargo');
 
-    $col13 = new Columna('Unidad Medida');
-    $col13->setTipo(Columna::TEXTO);
-    $col13->setEsGrabable(true);
-    $col13->setAlineacionObjeto(Columna::CENTRO);
-    $col13->setAlineacionContenido(Columna::CENTRO);
+    $col13 = clone $col6;
+    $col13->setTitulo('Total');
     $col13->setNombreCampo($campo_col13);
-    $col13->setHTML('type="text" size="10"');
+    $col13->setHTML('type="text" size="10" readonly=true');
+    $col13->setEsTotal(true,'caordcom_monord');
 
-    $col14 = new Columna('Codigo Presupuestario');
-    $col14->setEsGrabable(true);
+    $col14 = new Columna('Unidad Medida');
     $col14->setTipo(Columna::TEXTO);
+    $col14->setEsGrabable(true);
     $col14->setAlineacionObjeto(Columna::CENTRO);
     $col14->setAlineacionContenido(Columna::CENTRO);
     $col14->setNombreCampo($campo_col14);
-    if ($referencia==0) $col14->setHTML('type="text" size="32"');
-    if ($referencia==1) $col14->setHTML('type="text" size="32" readonly=true');
-    if ($referencia==0) $col14->setAjax('almordcom',5,14);
+    $col14->setHTML('type="text" size="10"');
 
-    $col15 = new Columna('Codigo Partida');
-    $col15->setTipo(Columna::TEXTO);
+    $col15 = new Columna('Codigo Presupuestario');
     $col15->setEsGrabable(true);
-    $col15->setOculta(true);
+    $col15->setTipo(Columna::TEXTO);
     $col15->setAlineacionObjeto(Columna::CENTRO);
     $col15->setAlineacionContenido(Columna::CENTRO);
-    $col15->setNombreCampo('Codpar');
-    $col15->setHTML('type="text" size="20"');
+    $col15->setNombreCampo($campo_col15);
+    if ($referencia==0) $col15->setHTML('type="text" size="32"');
+    if ($referencia==1) $col15->setHTML('type="text" size="32" readonly=true');
+    if ($referencia==0) $col15->setAjax('almordcom',5,15);
 
-      $col16 = new Columna('Recargos');
-      $col16->setTipo(Columna::TEXTO);
-      $col16->setEsGrabable(false);
-      $col16->setAlineacionObjeto(Columna::CENTRO);
-      $col16->setAlineacionContenido(Columna::CENTRO);
-      $col16->setNombreCampo('anadir');
-      $col16->setHTML('type="text" size="1" style="border:none" class="imagenalmacen"');
-      $col16->setJScript('onClick="mostrargridrecargos(this.id)"');
+    $col16 = new Columna('Codigo Partida');
+    $col16->setTipo(Columna::TEXTO);
+    $col16->setEsGrabable(true);
+    $col16->setOculta(true);
+    $col16->setAlineacionObjeto(Columna::CENTRO);
+    $col16->setAlineacionContenido(Columna::CENTRO);
+    $col16->setNombreCampo('Codpar');
+    $col16->setHTML('type="text" size="20"');
 
+	$col17 = new Columna('Recargos');
+	$col17->setTipo(Columna::TEXTO);
+	$col17->setEsGrabable(false);
+	$col17->setAlineacionObjeto(Columna::CENTRO);
+	$col17->setAlineacionContenido(Columna::CENTRO);
+	$col17->setNombreCampo('anadir');
+	$col17->setHTML('type="text" size="1" style="border:none" class="imagenalmacen"');
+	$col17->setJScript('onClick="mostrargridrecargos(this.id)"');
 
-      $col17 = new Columna('cadena_datos_recargo');
-        $col17->setTipo(Columna::TEXTO);
-        $col17->setEsGrabable(true);
-        $col17->setAlineacionObjeto(Columna::IZQUIERDA);
-        $col17->setAlineacionContenido(Columna::IZQUIERDA);
-        $col17->setNombreCampo('datosrecargo');
-        $col17->setOculta(true);
-
-    $col18 = new Columna('Nombre Partida');
+    $col18 = new Columna('cadena_datos_recargo');
     $col18->setTipo(Columna::TEXTO);
+    $col18->setEsGrabable(true);
+    $col18->setAlineacionObjeto(Columna::IZQUIERDA);
+    $col18->setAlineacionContenido(Columna::IZQUIERDA);
+    $col18->setNombreCampo('datosrecargo');
     $col18->setOculta(true);
-    $col18->setAlineacionObjeto(Columna::CENTRO);
-    $col18->setAlineacionContenido(Columna::CENTRO);
-    $col18->setNombreCampo('nompar');
-    $col18->setHTML('type="text" size="20"');
+
+    $col19 = new Columna('Nombre Partida');
+    $col19->setTipo(Columna::TEXTO);
+    $col19->setOculta(true);
+    $col19->setAlineacionObjeto(Columna::CENTRO);
+    $col19->setAlineacionContenido(Columna::CENTRO);
+    $col19->setNombreCampo('nompar');
+    $col19->setHTML('type="text" size="20"');
 
     // Se guardan las columnas en el objetos de opciones
     $opciones->addColumna($col1);
@@ -937,6 +808,7 @@ class almordcomActions extends autoalmordcomActions
     $opciones->addColumna($col15);
     $opciones->addColumna($col16);
     $opciones->addColumna($col17);
+    $opciones->addColumna($col18);
 
 
     // Ee genera el arreglo de opciones necesario para generar el grid
@@ -1023,63 +895,69 @@ class almordcomActions extends autoalmordcomActions
     $col9->setNombreCampo('Costo');
 
     $col10 = clone $col6;
-    $col10->setTitulo('Descuento');
-    $col10->setNombreCampo('Mondes');
-    $col10->setJScript('onKeypress="entermonto(event,this.id);actualizar_sumatoria_total_cuando_esta_referida();actualizar_grid_dependientes()"');
-    $col10->setEsTotal(true,'sumatoria_descuentos');
+    $col10->setTitulo('Cant x Costo');
+    $col10->setNombreCampo('cancost');
+    $col10->setHTML('type="text" size="10" readonly=true');
+    $col10->setEsTotal(true,'caordcom_totorden');
 
     $col11 = clone $col6;
-    $col11->setTitulo('Monto Recargo');
-    $col11->setNombreCampo('Monrgo');
+    $col11->setTitulo('Descuento');
+    $col11->setNombreCampo('Mondes');
+    $col11->setJScript('onKeypress="entermonto(event,this.id);actualizar_sumatoria_total_cuando_esta_referida();actualizar_grid_dependientes()"');
+    $col11->setEsTotal(true,'sumatoria_descuentos');
 
     $col12 = clone $col6;
-    $col12->setTitulo('Total');
-    $col12->setNombreCampo('Montot');
-    $col12->setJScript('onKeypress="entermonto(event,this.id);actualizar_sumatoria_total_cuando_esta_referida();actualizar_grid_dependientes()"');
-    $col12->setEsTotal(true,'caordcom_monord');
+    $col12->setTitulo('Monto Recargo');
+    $col12->setNombreCampo('Monrgo');
+    $col12->setEsTotal(true,'caordcom_totrecargo');
 
-    $col13 = new Columna('Unidad Medida');
-    $col13->setTipo(Columna::TEXTO);
-    $col13->setEsGrabable(true);
-    $col13->setAlineacionObjeto(Columna::CENTRO);
-    $col13->setAlineacionContenido(Columna::CENTRO);
-    $col13->setNombreCampo('Unimed');
-    $col13->setHTML('type="text" size="10"');
+    $col13 = clone $col6;
+    $col13->setTitulo('Total');
+    $col13->setNombreCampo('Montot');
+    $col13->setJScript('onKeypress="entermonto(event,this.id);actualizar_sumatoria_total_cuando_esta_referida();actualizar_grid_dependientes()"');
+    $col13->setEsTotal(true,'caordcom_monord');
 
-    $col14 = new Columna('Codigo Presupuestario');
-    $col14->setEsGrabable(true);
+    $col14 = new Columna('Unidad Medida');
     $col14->setTipo(Columna::TEXTO);
+    $col14->setEsGrabable(true);
     $col14->setAlineacionObjeto(Columna::CENTRO);
     $col14->setAlineacionContenido(Columna::CENTRO);
-    $col14->setNombreCampo('Codpre');
-    $col14->setHTML('type="text" size="32" readonly=true');
+    $col14->setNombreCampo('Unimed');
+    $col14->setHTML('type="text" size="10"');
 
-    $col15 = new Columna('Codigo Partida');
-    $col15->setTipo(Columna::TEXTO);
+    $col15 = new Columna('Codigo Presupuestario');
     $col15->setEsGrabable(true);
-    $col15->setOculta(true);
+    $col15->setTipo(Columna::TEXTO);
     $col15->setAlineacionObjeto(Columna::CENTRO);
     $col15->setAlineacionContenido(Columna::CENTRO);
-    $col15->setNombreCampo('Codpar');
-    $col15->setHTML('type="text" size="20"');
+    $col15->setNombreCampo('Codpre');
+    $col15->setHTML('type="text" size="32" readonly=true');
 
-      $col16 = new Columna('Recargos');
-      $col16->setTipo(Columna::TEXTO);
-      $col16->setEsGrabable(false);
-      $col16->setAlineacionObjeto(Columna::CENTRO);
-      $col16->setAlineacionContenido(Columna::CENTRO);
-      $col16->setNombreCampo('anadir');
-      $col16->setHTML('type="text" size="1" style="border:none" class="imagenalmacen"');
-      $col16->setJScript('onClick="mostrargridrecargos(this.id)"');
+    $col16 = new Columna('Codigo Partida');
+    $col16->setTipo(Columna::TEXTO);
+    $col16->setEsGrabable(true);
+    $col16->setOculta(true);
+    $col16->setAlineacionObjeto(Columna::CENTRO);
+    $col16->setAlineacionContenido(Columna::CENTRO);
+    $col16->setNombreCampo('Codpar');
+    $col16->setHTML('type="text" size="20"');
 
+    $col17 = new Columna('Recargos');
+    $col17->setTipo(Columna::TEXTO);
+    $col17->setEsGrabable(false);
+    $col17->setAlineacionObjeto(Columna::CENTRO);
+    $col17->setAlineacionContenido(Columna::CENTRO);
+    $col17->setNombreCampo('anadir');
+    $col17->setHTML('type="text" size="1" style="border:none" class="imagenalmacen"');
+    $col17->setJScript('onClick="mostrargridrecargos(this.id)"');
 
-      $col17 = new Columna('cadena_datos_recargo');
-        $col17->setTipo(Columna::TEXTO);
-        $col17->setEsGrabable(true);
-        $col17->setAlineacionObjeto(Columna::IZQUIERDA);
-        $col17->setAlineacionContenido(Columna::IZQUIERDA);
-        $col17->setNombreCampo('datosrecargo');
-        $col17->setOculta(true);
+    $col18 = new Columna('cadena_datos_recargo');
+    $col18->setTipo(Columna::TEXTO);
+    $col18->setEsGrabable(true);
+    $col18->setAlineacionObjeto(Columna::IZQUIERDA);
+    $col18->setAlineacionContenido(Columna::IZQUIERDA);
+    $col18->setNombreCampo('datosrecargo');
+    $col18->setOculta(true);
 
     // Se guardan las columnas en el objetos de opciones
     $opciones->addColumna($col1);
@@ -1099,6 +977,7 @@ class almordcomActions extends autoalmordcomActions
     $opciones->addColumna($col15);
     $opciones->addColumna($col16);
     $opciones->addColumna($col17);
+    $opciones->addColumna($col18);
 
 
     // Ee genera el arreglo de opciones necesario para generar el grid
@@ -1653,34 +1532,29 @@ class almordcomActions extends autoalmordcomActions
       if ($this->getUser()->getAttribute('grabo',null,$this->getUser()->getAttribute('formulario'))=='S')
       {
           $numcom=$this->getUser()->getAttribute('contabc[numcom]',null,$this->getUser()->getAttribute('formulario'));
+          $reftra=$this->getUser()->getAttribute('contabc[reftra]',null,$this->getUser()->getAttribute('formulario'));
           $feccom=$this->getUser()->getAttribute('contabc[feccom]',null,$this->getUser()->getAttribute('formulario'));
           $descom=$this->getUser()->getAttribute('contabc[descom]',null,$this->getUser()->getAttribute('formulario'));
           $debito=$this->getUser()->getAttribute('debito',null,$this->getUser()->getAttribute('formulario'));
           $credito=$this->getUser()->getAttribute('credito',null,$this->getUser()->getAttribute('formulario'));
           $grid=$this->getUser()->getAttribute('grid',null,$this->getUser()->getAttribute('formulario'));
 
-          $this->getUser()->getAttributeHolder()->remove('contabc[numcom]');
-          $this->getUser()->getAttributeHolder()->remove('contabc[feccom]');
-          $this->getUser()->getAttributeHolder()->remove('contabc[descom]');
-          $this->getUser()->getAttributeHolder()->remove('debito');
-          $this->getUser()->getAttributeHolder()->remove('credito');
-          $this->getUser()->getAttributeHolder()->remove('grid');
+          $this->getUser()->getAttributeHolder()->remove('contabc[numcom]',$this->getUser()->getAttribute('formulario'));
+          $this->getUser()->getAttributeHolder()->remove('contabc[reftra]',$this->getUser()->getAttribute('formulario'));
+          $this->getUser()->getAttributeHolder()->remove('contabc[feccom]',$this->getUser()->getAttribute('formulario'));
+          $this->getUser()->getAttributeHolder()->remove('contabc[descom]',$this->getUser()->getAttribute('formulario'));
+          $this->getUser()->getAttributeHolder()->remove('debito',$this->getUser()->getAttribute('formulario'));
+          $this->getUser()->getAttributeHolder()->remove('credito',$this->getUser()->getAttribute('formulario'));
+          $this->getUser()->getAttributeHolder()->remove('grid',$this->getUser()->getAttribute('formulario'));
 
-          $reftra = $caordcom->getOrdcom();
+          $numcom = Comprobante::SalvarComprobante($numcom,$reftra,$feccom,$descom,$debito,$credito,$grid,$this->getUser()->getAttribute('grabar',null,$this->getUser()->getAttribute('formulario')));
+          $this->getUser()->getAttributeHolder()->remove('grabo',$this->getUser()->getAttribute('formulario'));
 
-          Tesoreria::Salvarconfincomgen($numcom,$feccom,$descom,$debito,$credito);
-          Tesoreria::Salvar_asientosconfincomgen($numcom,$feccom,$grid,$this->getUser()->getAttribute('grabar',null,$this->getUser()->getAttribute('formulario')));
-          $numcom = Comprobante::SalvarComprobante($numcom,$reftra,$feccom,$descom,$debito,$credito,$grid,$this->getUser()->getAttribute('grabar',null,$formulario[$i]));
-          //$caordcom->setNumcom($numcom);
-          //$caordcom->save();
-
-          //Tesoreria::Salvarconfincomgen($numcom,$feccom,$descom,$debito,$credito);
-          //Tesoreria::Salvar_asientosconfincomgen($numcom,$feccom,$grid,$this->getUser()->getAttribute('grabar',null,$this->getUser()->getAttribute('formulario')));
       }
       return $coderror;
   }//  if (Orden_compra::Salvar($caordcom,$arreglo_arreglo,$arreglo_objetos,$arreglo_campos))
   else
-    return $coderror;
+     return $coderror;
 }
 //<--------------------------------------------------------------------------------------------------------------------------------------------------->
 
@@ -1951,6 +1825,14 @@ class almordcomActions extends autoalmordcomActions
       {
         $this->caordcom->setExpsigecof(trim($caordcom['expsigecof']));
       }
+      if (isset($caordcom['totrecargo']))
+    {
+      $this->caordcom->setTotrecargo($caordcom['totrecargo']);
+    }
+    if (isset($caordcom['totorden']))
+    {
+      $this->caordcom->setTotorden($caordcom['totorden']);
+    }
   }
 
   public function AfectaProyecto()
@@ -2194,11 +2076,11 @@ class almordcomActions extends autoalmordcomActions
     $fecanu=$this->getRequestParameter('fecha');//3
     $fecanuvalidar=$this->getRequestParameter('fecha');//3
 
-        $dateFormat = new sfDateFormat('es_VE');
-        $fecord = $dateFormat->format($fecord, 'i', $dateFormat->getInputPattern('d'));
-        $fecanu = $dateFormat->format($fecanu, 'i', $dateFormat->getInputPattern('d'));
-        $this->msgerr="";
-        $this->btn="";
+    $dateFormat = new sfDateFormat('es_VE');
+    $fecord = $dateFormat->format($fecord, 'i', $dateFormat->getInputPattern('d'));
+    $fecanu = $dateFormat->format($fecanu, 'i', $dateFormat->getInputPattern('d'));
+    $this->msgerr="";
+    $this->btn="";
 
     if (Tesoreria::validaPeriodoCerrado($fecanuvalidar)==true)
     {
@@ -2485,5 +2367,4 @@ class almordcomActions extends autoalmordcomActions
       $output = '[["","",""]]';
       $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
     }
-
 }

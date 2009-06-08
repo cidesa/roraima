@@ -30,6 +30,9 @@
 <input id="mensaje_proveedor" name="mensaje_proveedor"  type="hidden">
 <input id="codforent_dos" name="codforent_dos" type="hidden">
 <?php echo input_hidden_tag('caordcom[partrec]', $caordcom->getPartrec()) ?>
+<?php echo input_hidden_tag('caordcom[genctaord]', $caordcom->getGenctaord()) ?>
+<?php echo input_hidden_tag('caordcom[gencomalc]', $caordcom->getGencomalc()) ?>
+
 <input id="codigo_presupuestario_sin_disponibilidad" name="codigo_presupuestario_sin_disponibilidad" type="hidden">
 <script language="JavaScript" type="text/javascript">
     entrar();
@@ -289,16 +292,14 @@ else
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-<? if ($caordcom->getId()=='') { ?>
+<? if ($caordcom->getId()=='' && ($caordcom->getGenctaord()=='S' || $caordcom->getGencomalc()=='S')) { ?>
 <?php echo submit_to_remote('Submit2', 'Generar Comprobante', array(
-         'disabled' => true,
-    'update'   => 'comp',
-         'before'   => 'var variable=document.getElementById("caordcom_ordcom").value;i=0;while (i<8){ variable=variable.replace("#","-");i++;}',
+         'update'   => 'comp',
          'url'      => 'almordcom/ajaxcomprobante',
          'script'   => true,
-         'complete' => 'CatalogoGrid2()',
-      'with' => "'formulario=sf_admin/almordcom/confincomgen'+'&reftra='+variable+'&monto='+document.getElementById('caordcom_monord').value+'&fectra='+document.getElementById('caordcom_fecord').value+'&tipmov=X'+'&destra='+document.getElementById('caordcom_desord').value+'&tippro='+document.getElementById('caordcom_tippro').value+'&rifpro='+document.getElementById('caordcom_rifpro').value+'&tipord='+document.getElementById('caordcom_tipord').value")) ?>
-<? } ?>
+         'submit' => 'sf_admin_edit_form',
+         )) ?>
+<? } ?> <div id="comp"></div>
 <? if (($caordcom->getId()!='') and ($aprobacion=='S')) { ?>
 &nbsp;&nbsp;&nbsp;&nbsp;
 <?php echo submit_to_remote('Submit2', 'Generar Compromiso', array(
@@ -393,6 +394,38 @@ echo grid_tag($obj_recargos);
 <div id="grid">
 <?php echo grid_tag($obj);?>
 </div>
+<table>
+    <tr>
+    <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+      <th><?php echo label_for('Totales', __('TOTALES'), 'class="required" ') ?></th>
+      <th>&nbsp;&nbsp;</th>
+      <th>
+      <?php echo label_for('caordcom[totrecargo]', __($labels['caordcom{totrecargo}']), 'class="required"') ?>
+		<div class="content<?php if ($sf_request->hasError('caordcom{totrecargo}')): ?> form-error<?php endif; ?>">
+		<?php if ($sf_request->hasError('caordcom{totrecargo}')): ?> <?php echo form_error('caordcom{totrecargo}', array('class' => 'form-error-msg')) ?>
+		<?php endif; ?>
+
+      <?php $value = object_input_tag($caordcom, array('getTotrecargo',true), array (
+    'size' => 15,
+    'readonly' => true,
+    'class' => 'grid_txtright',
+    'control_name' => 'caordcom[totrecargo]',
+  )); echo $value ? $value : '&nbsp;' ?></th>
+      <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+      <th>
+        <?php echo label_for('caordcom[totorden]', __($labels['caordcom{totorden}']), 'class="required"') ?>
+		<div class="content<?php if ($sf_request->hasError('caordcom{totorden}')): ?> form-error<?php endif; ?>">
+		<?php if ($sf_request->hasError('caordcom{totorden}')): ?> <?php echo form_error('caordcom{totorden}', array('class' => 'form-error-msg')) ?>
+		<?php endif; ?>
+
+       <?php $value = object_input_tag($caordcom, array('getTotorden',true), array (
+    'size' => 15,
+    'readonly' => true,
+    'class' => 'grid_txtright',
+    'control_name' => 'caordcom[totorden]',
+  )); echo $value ? $value : '&nbsp;' ?></th>
+   </tr>
+  </table>
 <div id="div_recargo">
 </div>
 </div>
@@ -844,6 +877,11 @@ echo grid_tag($obj_recargos);
 
 
 <script type="text/javascript">
+nuevo='<?php echo $caordcom->getId() ?>';
+if (nuevo!="")
+{
+	actualizarsaldos();
+}
  // if ($('caordcom_refsol').value=='') $('div_solicitud').hide();
    if ($('id').value=='' ||  $('caordcom_refsol').value=='')  $('div_solicitud').hide();
    var idordcom=$('id').value;
@@ -863,6 +901,11 @@ function enter(e,valor)
      $('caordcom_ordcom').value=valor;
    }
  }
+
+   function comprobante(formulario)
+  {
+      window.open('/tesoreria_dev.php/confincomgen/edit/?formulario='+formulario,formulario,'menubar=no,toolbar=no,scrollbars=yes,width=1200,height=800,resizable=yes,left=1000,top=80');
+  }
 
  function Mostrar_orden_preimpresa()
   {

@@ -35,7 +35,7 @@
   {
     var motivo='Motivo de la Anulacion';
     var fecha= $('caordcom_fecord').value;
-  if(confirm('¿Estas Seguro?'))
+  if(confirm('�Estas Seguro?'))
   {
     var valor = prompt('Desea Anular Orden con fecha: '+$('caordcom_fecord').value+' de C&oacute;digo:',motivo);
     var fecha = prompt('Desea Anular Orden con fecha:',fecha);
@@ -50,7 +50,7 @@
         }
         else
         {
-          alert_('Fecha de Anulacion Invalida');
+          alert_('Fecha de Anulaci&oacute;n Inv&aacute;lida');
         }
       }
     }
@@ -85,7 +85,6 @@
           if ($('caordcom_refsol')!="")
             {
               new Ajax.Updater('grid', '/compras_dev.php/almordcom/grid_parcial', {asynchronous:true, evalScripts:true, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=1&refsol='+document.getElementById('caordcom_refsol').value+'&rifpro='+document.getElementById('caordcom_rifpro').value+'&parcial='+document.getElementById('parcial').value});
-              //new Ajax.Updater('div_recargo', '/compras_dev.php/almordcom/grid_recargos', {asynchronous:true, evalScripts:true, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=1&cajtexmos=caordcom_nompro&cancotpril=cancotpril&cajtexcom=caordcom_rifpro&cajtexcom=caordcom_rifpro&cajtexcom=caordcom_rifpro&numfilas=numero_filas_recargos&codconpag_codigo=codconpag_dos&codforent_codigo=codforent_dos&codconpag=caordcom_codconpag&codforent=caordcom_codforent&codconpag_des=caordcom_desconpag&codforent_des=caordcom_desforent&codigo_provee=codigo_proveedor&msg=mensaje_proveedor&refsol='+document.getElementById('caordcom_refsol').value+'&parcial='+document.getElementById('parcial').value+'&codigo='+document.getElementById('caordcom_rifpro').value});
             }
           }
           else
@@ -94,7 +93,6 @@
           if ($('caordcom_refsol')!="")
             {
               new Ajax.Updater('grid', '/compras_dev.php/almordcom/grid', {asynchronous:true, evalScripts:true, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=1&referencia=1&filas_orden=numero_filas_orden&ordcom='+document.getElementById('caordcom_refsol').value});
-              //new Ajax.Updater('div_recargo', '/compras_dev.php/almordcom/grid_recargos', {asynchronous:true, evalScripts:true, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=1&cajtexmos=caordcom_nompro&cancotpril=cancotpril&cajtexcom=caordcom_rifpro&cajtexcom=caordcom_rifpro&cajtexcom=caordcom_rifpro&numfilas=numero_filas_recargos&codconpag_codigo=codconpag_dos&codforent_codigo=codforent_dos&codconpag=caordcom_codconpag&codforent=caordcom_codforent&codconpag_des=caordcom_desconpag&codforent_des=caordcom_desforent&codigo_provee=codigo_proveedor&msg=mensaje_proveedor&refsol='+document.getElementById('caordcom_refsol').value+'&parcial='+document.getElementById('parcial').value+'&codigo='+document.getElementById('caordcom_rifpro').value});
             }
 
           }
@@ -210,11 +208,11 @@
      fila=i[1];
       var fecha=$('caordcom_fecord').value;
         var bandera="codigo_presupuestario_sin_disponibilidad";
-        var fila_monto= "ax_"+fila+"_12";
+        var fila_monto= "ax_"+fila+"_13";
         var fila_monto=toFloat(fila_monto);
         monto=format(fila_monto.toFixed(2),'.',',','.');
 
-        var fila_codigo_presupuestario= "ax_"+fila+"_14";
+        var fila_codigo_presupuestario= "ax_"+fila+"_15";
     var codigo=$(fila_codigo_presupuestario).value;
 
       if (e.keyCode==13 || e.keyCode==9)
@@ -242,7 +240,7 @@
    {
       i=id.split('_');
       fila=i[1];
-      var codigo_presupuestario= "ax_"+fila+"_14";
+      var codigo_presupuestario= "ax_"+fila+"_15";
       var codigo=$(codigo_presupuestario).value;
       if (e.keyCode==13 || e.keyCode==9)
       {
@@ -262,9 +260,9 @@
     var col=parseInt(aux[2]);
 
     var descripcion=name+"_"+fil+"_"+3;
-    var unidad=name+"_"+fil+"_"+13;
+    var unidad=name+"_"+fil+"_"+14;
     var costo=name+"_"+fil+"_"+9;
-    var partida=name+"_"+fil+"_"+15;
+    var partida=name+"_"+fil+"_"+16;
     var cod=$(id).value;
 
     if (e.keyCode==13 || e.keyCode==9)
@@ -297,9 +295,9 @@
      }
      if (contador_repetido>1)
      {
-       var unidad_art = "ax_"+i+"_13";
-       var partida_art = "ax_"+i+"_15";
-       var codigo_pre = "ax_"+i+"_14";
+       var unidad_art = "ax_"+i+"_14";
+       var partida_art = "ax_"+i+"_16";
+       var codigo_pre = "ax_"+i+"_15";
        var coduni_art = "ax_"+i+"_4";
        var nombre_art = "ax_"+i+"_3";
        var codigo_art= "ax_"+i+"_2";
@@ -325,14 +323,24 @@
   {
      f=0;
      montotal=0;
+     montotal2=0;
+     montotal3=0;
      while (f < $('numero_filas_orden').value)
       {
-             var col_fila_codigo_datos = "ax_"+f+"_12";
+             var col_fila_cancost = "ax_"+f+"_10";
+             var col_fila_rec = "ax_"+f+"_12";
+             var col_fila_codigo_datos = "ax_"+f+"_13";
              var num=toFloat(col_fila_codigo_datos);
+             var num1=toFloat(col_fila_cancost);
+             var num2=toFloat(col_fila_rec);
              montotal = montotal + num;
+             montotal2 = montotal2 + num1;
+             montotal3 = montotal2 + num2;
            f++;
       }
          $('caordcom_monord').value=format(montotal.toFixed(2),'.',',','.');
+         $('caordcom_totorden').value=format(montotal2.toFixed(2),'.',',','.');
+         $('caordcom_totrecargo').value=format(montotal3.toFixed(2),'.',',','.');
   }
 
 
@@ -346,8 +354,8 @@
         fil=i[1];
         var col_fila_codigo_art = "ax_"+fil+"_2";
         var col_fila_unidad_art = "ax_"+fil+"_4";
-        var col_fila_partida_art = "ax_"+fil+"_15";
-        var col_fila_codigo_pre = "ax_"+fil+"_14";
+        var col_fila_partida_art = "ax_"+fil+"_16";
+        var col_fila_codigo_pre = "ax_"+fil+"_15";
         valor_cat_unidad=$(col_fila_unidad_art).value + '-' + $(col_fila_partida_art).value;
         valor_cat_unidad=valor_cat_unidad.replace('--','-');
         valor_cat_unidad=valor_cat_unidad.replace('--','-');
@@ -367,7 +375,7 @@
     f=0;
       while (f < $('numero_filas_orden').value)
         {
-          var col_fila_descuento_en_cero = "ax_"+f+"_10";
+          var col_fila_descuento_en_cero = "ax_"+f+"_11";
           cero=0;
              $(col_fila_descuento_en_cero).value=format(cero.toFixed(2),'.',',','.');
             f++;
@@ -378,7 +386,7 @@
   function imprimo_calculo_descuento_por_tipo(e,monto_descuento_procesado)
   {
    //imprimo calculo del descuento
-    var fila_descuento = "ax_"+e+"_10";
+    var fila_descuento = "ax_"+e+"_11";
 
      var monto_descuento=parseFloat(monto_descuento_procesado);
 
@@ -395,7 +403,7 @@
 
         var fila_cantidad = "ax_"+j+"_5";
         var fila_costo = "ax_"+j+"_9";
-        var fila_descuento = "ax_"+j+"_10";
+        var fila_descuento = "ax_"+j+"_11";
         cantidad_art_total=0;
         descuento_art_total=0;
         costo_art_total=0;
@@ -440,9 +448,10 @@
         var fila_canaju="ax"+"_"+fil+"_6";
         var fila_canrec="ax"+"_"+fil+"_7";
         var fila_costo = "ax_"+fil+"_9";
-        var fila_descuento = "ax_"+fil+"_10";
-        var fila_recargo = "ax_"+fil+"_11";
-        var fila_total_monto_por_cantidad = "ax_"+fil+"_12";
+        var fila_descuento = "ax_"+fil+"_11";
+        var fila_recargo = "ax_"+fil+"_12";
+        var fila_total_costo_cantidad = "ax_"+fil+"_10";
+        var fila_total_monto_por_cantidad = "ax_"+fil+"_13";
 
         var valcanord=toFloat(fila_canord);
         var valcanaju=toFloat(fila_canaju);
@@ -462,7 +471,9 @@
 
 
         var cantot=valcanord-valcanaju-valcanrec;
+        total_cantidad_costo=(cantot*costo_art_total);
         total_cantidad_por_monto=(cantot*costo_art_total)+recargo_art_total-descuento_art_total;
+        $(fila_total_costo_cantidad).value=format(total_cantidad_costo.toFixed(2),'.',',','.');
         $(fila_total_monto_por_cantidad).value=format(total_cantidad_por_monto.toFixed(2),'.',',','.');
       }
     }
@@ -489,8 +500,8 @@
               c2++;
             }
 
-             var col_fila_cantidad_recargo_grid_a = "ax_"+f+"_11";
-             var col_fila_cantidad_total_grid_a = "ax_"+f+"_12";
+             var col_fila_cantidad_recargo_grid_a = "ax_"+f+"_12";
+             var col_fila_cantidad_total_grid_a = "ax_"+f+"_13";
 
              var col_fila_cantidad_recargo_grid_b = "bx_"+f+"_9";
              var col_fila_cantidad_total_grid_b = "bx_"+f+"_10";
@@ -549,18 +560,29 @@
   {
     i=0;
     total_monto_orden_pago=0;
+    total_cost_cant=0;
+    total_recargo=0;
     while (i < $('numero_filas_orden').value)
     {
         col_fila_art_1 = "ax_"+i+"_2";
         col_fila_art_2 = "ax_"+(i+1)+"_2";
         if($(col_fila_art_1).value=="" && $(col_fila_art_1).value=="") break;
 
-        var fila_grid_detalle= "ax_"+i+"_12";
+        var fila_grid_recargo= "ax_"+i+"_12";
+        var fila_grid_detalle= "ax_"+i+"_13";
+        var fila_grid_cost_cant= "ax_"+i+"_10";
         var monto_por_fila=toFloat(fila_grid_detalle);
+        var cant_cost=toFloat(fila_grid_cost_cant);
+        var tot_recargo=toFloat(fila_grid_recargo);
+
+        total_cost_cant= total_cost_cant + cant_cost;
+        total_recargo= total_recargo + tot_recargo;
         total_monto_orden_pago = total_monto_orden_pago + monto_por_fila;
       i++;
     }
     $('sumatoria_detalle_orden').value=total_monto_orden_pago;
+    $('caordcom_totorden').value=format(total_cost_cant.toFixed(2),'.',',','.');
+    $('caordcom_totrecargo').value=format(tot_recargo.toFixed(2),'.',',','.');
   }
 
   function actualizar_sumatoria_recargo_mas_orden()
@@ -637,7 +659,7 @@
       {
         var fila_cantidad = "ax_"+i+"_5";
         var fila_costo = "ax_"+i+"_9";
-        var fila_descuento = "ax_"+i+"_10";
+        var fila_descuento = "ax_"+i+"_11";
         var fila_check= "ax_"+i+"_1";
         cantidad_art_total=0;
         costo_art_total=0;
@@ -697,9 +719,9 @@
       {
          var fila_cantidad= "ax_"+i+"_5";
          var fila_costo= "ax_"+i+"_9";
-         var fila_descuento= "ax_"+i+"_10";
-         var fila_recargo_grid_detalle_orden= "ax_"+i+"_11";
-         var fila_grid_detalle_orden_total= "ax_"+i+"_12";
+         var fila_descuento= "ax_"+i+"_11";
+         var fila_recargo_grid_detalle_orden= "ax_"+i+"_12";
+         var fila_grid_detalle_orden_total= "ax_"+i+"_13";
          var fila_recargo_grid_detalle_orden_resumen= "bx_"+i+"_9";
               var fila_check= "ax_"+i+"_1";
               total_cantidad=0;
@@ -745,6 +767,8 @@
      i=0;
      //operaciones de suma y resta y multiplicacion en el grid detalle orden
      total_cantidad_por_monto=0;
+     total_cantidad_costo=0;
+     total_rec=0;
      while (i < $('numero_filas_orden').value)
       {
         col_fila_art_1 = "ax_"+i+"_2";
@@ -754,9 +778,10 @@
 
         var fila_cantidad = "ax_"+i+"_5";
         var fila_costo = "ax_"+i+"_9";
-        var fila_descuento = "ax_"+i+"_10";
-        var fila_recargo = "ax_"+i+"_11";
-        var fila_total_monto_por_cantidad = "ax_"+i+"_12";
+        var fila_cancost = "ax_"+i+"_10";
+        var fila_descuento = "ax_"+i+"_11";
+        var fila_recargo = "ax_"+i+"_12";
+        var fila_total_monto_por_cantidad = "ax_"+i+"_13";
 
       var cantidad_art_total=toFloat(fila_cantidad);
       var costo_art_total=toFloat(fila_costo);
@@ -765,11 +790,14 @@
          //descuento_art= calculo_descuento_por_tipo(i);
       var descuento_art_total=toFloat(fila_descuento);
       var recargo_art_total=toFloat(fila_recargo);
-
+         total_rec= total_rec + recargo_art_total;
+         total_cantidad_costo= total_cantidad_costo + (cantidad_art_total*costo_art_total);
          total_cantidad_por_monto = total_cantidad_por_monto + (cantidad_art_total*costo_art_total)+recargo_art_total-descuento_art_total;
          i++;
       }
          $('caordcom_monord').value=format(total_cantidad_por_monto.toFixed(2),'.',',','.');
+         $('caordcom_totorden').value=format(total_cantidad_costo.toFixed(2),'.',',','.');
+         $('caordcom_totrecargo').value=format(total_rec.toFixed(2),'.',',','.');
     }
 
   function verificar_datos(id)
@@ -785,7 +813,7 @@
     var categoria=name+"_"+fil+"_"+colcat;
     if ($(categoria).value=='')
     {
-     alert('Debe introducir el Código de la Unidad');
+     alert_('Debe introducir el C&oacute;digo de la Unidad');
      $(id).value='';
      $(id).value='0,00';
      return false;
@@ -849,7 +877,7 @@
       var canord=name+"_"+fil+"_5";
         var canaju=name+"_"+fil+"_6";
         var canrec=name+"_"+fil+"_7";
-        var candes=name+"_"+fil+"_10";
+        var candes=name+"_"+fil+"_11";
       var costos=name+"_"+fil+"_9";
 
       var valcanord=toFloat(canord);
@@ -900,14 +928,14 @@ function salvarmontorecargos()
 
 
   var mifila=$('actualfila').value;
-  var infrecargos="ax"+"_"+mifila+"_17";
+  var infrecargos="ax"+"_"+mifila+"_18";
   var canord="ax"+"_"+mifila+"_5";
   var canaju="ax"+"_"+mifila+"_6";
   var canrec="ax"+"_"+mifila+"_7";
   var costos="ax"+"_"+mifila+"_9";
-  var descto="ax"+"_"+mifila+"_10";
-  var recargo="ax"+"_"+mifila+"_11";
-  var total="ax"+"_"+mifila+"_12";
+  var descto="ax"+"_"+mifila+"_11";
+  var recargo="ax"+"_"+mifila+"_12";
+  var total="ax"+"_"+mifila+"_13";
 
 
   $(infrecargos).value=cadena;
@@ -936,7 +964,7 @@ function salvarmontorecargos()
  function distribuirRecargosenGrid()
  {
     var j=$('actualfila').value;
-    var haydist="ax"+"_"+j+"_17";
+    var haydist="ax"+"_"+j+"_18";
     if ($(haydist).value!="")
       {
         var distrib=$(haydist).value;
@@ -983,7 +1011,7 @@ function salvarmontorecargos()
 
  function marcarTodo()
   {
-   var infrecargos="ax"+"_0_17";
+   var infrecargos="ax"+"_0_18";
    var distrib=$(infrecargos).value;
    var articulo="ax"+"_0_2";
    var valorarticulo=$(articulo).value;
@@ -1003,10 +1031,10 @@ function salvarmontorecargos()
         var canaju="ax"+"_"+fil+"_6";
       var canrec="ax"+"_"+fil+"_7";
        var cost="ax"+"_"+fil+"_9";
-       var dest="ax"+"_"+fil+"_10";
-       var recargo="ax"+"_"+fil+"_11";
-       var total="ax"+"_"+fil+"_12";
-       var haydistribucion="ax"+"_"+fil+"_17";
+       var dest="ax"+"_"+fil+"_11";
+       var recargo="ax"+"_"+fil+"_12";
+       var total="ax"+"_"+fil+"_13";
+       var haydistribucion="ax"+"_"+fil+"_18";
 
         var valcanord=toFloat(canord);
         var valcanaju=toFloat(canaju);
@@ -1087,10 +1115,10 @@ function salvarmontorecargos()
         var canaju="ax"+"_"+fil+"_6";
       var canrec="ax"+"_"+fil+"_7";
        var cost="ax"+"_"+fil+"_9";
-       var dest="ax"+"_"+fil+"_10";
-       var recargo="ax"+"_"+fil+"_11";
-       var total="ax"+"_"+fil+"_12";
-       var haydistribucion="ax"+"_"+fil+"_17";
+       var dest="ax"+"_"+fil+"_11";
+       var recargo="ax"+"_"+fil+"_12";
+       var total="ax"+"_"+fil+"_13";
+       var haydistribucion="ax"+"_"+fil+"_18";
 
         var valcanord=toFloat(canord);
         var valcanaju=toFloat(canaju);
@@ -1135,10 +1163,10 @@ function salvarmontorecargos()
         var canaju="ax"+"_"+fil+"_6";
       var canrec="ax"+"_"+fil+"_7";
        var cost="ax"+"_"+fil+"_9";
-       var dest="ax"+"_"+fil+"_10";
-       var recargo="ax"+"_"+fil+"_11";
-       var total="ax"+"_"+fil+"_12";
-       var haydistribucion="ax"+"_"+fil+"_17";
+       var dest="ax"+"_"+fil+"_11";
+       var recargo="ax"+"_"+fil+"_12";
+       var total="ax"+"_"+fil+"_13";
+       var haydistribucion="ax"+"_"+fil+"_18";
 
         var valcanord=toFloat(canord);
         var valcanaju=toFloat(canaju);
@@ -1200,10 +1228,10 @@ function salvarmontorecargos()
         var canaju="ax"+"_"+fil+"_6";
       var canrec="ax"+"_"+fil+"_7";
        var cost="ax"+"_"+fil+"_9";
-       var dest="ax"+"_"+fil+"_10";
-       var recargo="ax"+"_"+fil+"_11";
-       var total="ax"+"_"+fil+"_12";
-       var infrecargos="ax"+"_"+fil+"_17";
+       var dest="ax"+"_"+fil+"_11";
+       var recargo="ax"+"_"+fil+"_12";
+       var total="ax"+"_"+fil+"_13";
+       var infrecargos="ax"+"_"+fil+"_18";
 
         var valcanord=toFloat(canord);
         var valcanaju=toFloat(canaju);
@@ -1219,7 +1247,7 @@ function salvarmontorecargos()
 
         if ($(id1).checked==true)
         {
-      var haydist="ax"+"_"+fil+"_17";
+      var haydist="ax"+"_"+fil+"_18";
       if ($(haydist).value!="")
       {
       var distrib=$(haydist).value;
@@ -1296,9 +1324,9 @@ function salvarmontorecargos()
             var col_fila_codart = "ax_"+f+"_2";
             if ($(col_fila_codart).value!="")
             {
-             var col_fila_codpar = "ax_"+f+"_15";
-             var col_fila_monto = "ax_"+f+"_12";
-             var col_fila_montorec = "ax_"+f+"_11";
+             var col_fila_codpar = "ax_"+f+"_16";
+             var col_fila_monto = "ax_"+f+"_13";
+             var col_fila_montorec = "ax_"+f+"_12";
 
              var ncol_fila_monto=toFloat(col_fila_monto);
              var ncol_fila_montorec=toFloat(col_fila_montorec);
@@ -1356,8 +1384,8 @@ function salvarmontorecargos()
             var col_fila_codart = "ax_"+f+"_2";
             if ($(col_fila_codart).value!="")
             {
-             var col_fila_rec = "ax_"+f+"_17";
-             var col_fila_monto = "ax_"+f+"_12";
+             var col_fila_rec = "ax_"+f+"_18";
+             var col_fila_monto = "ax_"+f+"_13";
 	         var distrib=$(col_fila_rec).value;
 	         if (distrib!="")
 	         {

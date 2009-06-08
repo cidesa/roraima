@@ -33,6 +33,7 @@ class Caartord extends BaseCaartord
  protected $codubi="";
  protected $nomubi="";
  protected $nomalm="";
+ protected $cancost="0,00";
 
   public function hydrate(ResultSet $rs, $startcol = 1)
    {
@@ -40,6 +41,8 @@ class Caartord extends BaseCaartord
       $this->canrecgri= self::getCanord() - self::getCanaju() - self::getCanrec();
       $this->canfal=0.0;
       $this->montot = ($this->canrecgri * self::getPreart()) -  self::getDtoart() +  self::getRgoart();
+      $calculo= self::getCanord() * self::getPreart();
+      $this->cancost=number_format($calculo,2,',','.');
       $this->datosrecargo="";
       $c= new Criteria();
 	  $c->add(CadisrgoPeer::REQART,self::getOrdcom());
@@ -405,7 +408,7 @@ class Caartord extends BaseCaartord
     return $val;
 
   }
-  
+
   public function getCanord($val=false)
   {
 
@@ -421,8 +424,8 @@ class Caartord extends BaseCaartord
         $this->canord = Herramientas::toFloat($v,3);
         $this->modifiedColumns[] = CaartordPeer::CANORD;
       }
-  
-	} 
+
+	}
 
 
 

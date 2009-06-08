@@ -18,6 +18,7 @@ class Caartsol extends BaseCaartsol
   protected $codigopre="";
   protected $desartsol="";
   protected $datosrecargo="";
+  protected $cancost="0,00";
 
    public function hydrate(ResultSet $rs, $startcol = 1)
    {
@@ -28,6 +29,8 @@ class Caartsol extends BaseCaartsol
       else
       	$this->desartsol =Herramientas::getX('CODART','Caregart','Desart',self::getCodart());
     //Cargar en el campo datosrecargo del Grid Recargos, los recargo por artículo de la tabla Cadisrgo
+     $calculo= self::getCanreq() * self::getCosto();
+     $this->cancost=number_format($calculo,2,',','.');
      $this->datosrecargo="";
      $c= new Criteria();
 	 $c->add(CadisrgoPeer::REQART,self::getReqart());

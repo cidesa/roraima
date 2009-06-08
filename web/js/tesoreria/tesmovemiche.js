@@ -24,7 +24,7 @@ function CatalogoGrid()
        document.getElementById(idtot).value=format(neto.toFixed(2),'.',',','.');
 
        new Ajax.Request('/'+getScriptname()+'/tesmovemiche/ajax', {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=6&fecemi='+$('tscheemi_fecemi').value+'&numcue='+$('tscheemi_numcue').value+'&canord='+$('tscheemi_montotpagnap').value+'&obj=tscheemi_montotpagnap&obj1=tscheemi_totnetpagnap'})
-        
+
        }
       else
      {
@@ -33,7 +33,7 @@ function CatalogoGrid()
       document.getElementById(id).focus();
       document.getElementById(id).select();
       }
-      
+
    }
    } //end function
 
@@ -85,8 +85,8 @@ function CatalogoGrid()
 
     function push()
     {
-       document.sf_admin_edit_form.tipopago[1].checked=false;
-       document.sf_admin_edit_form.tipopago[0].checked=true;
+      $('tscheemi_tippagordpag_C').checked=false;
+      $('tscheemi_tippagordpag_S').checked=true;
     }
 
 
@@ -151,8 +151,8 @@ function CatalogoGrid()
     var fil=aux[1];
     var col=parseInt(aux[2]);
     var codpre=name+"_"+fil+"_1";
-    var canord=name+"_"+fil+"_3";    
-    
+    var canord=name+"_"+fil+"_3";
+
     entermonto_b(event,id);
     if(event.keyCode==13) new Ajax.Request('/'+getScriptname()+'/tesmovemiche/ajax', {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=6&fecemi='+$('tscheemi_fecemi').value+'&numcue='+$('tscheemi_numcue').value+'&canord='+$(canord).value+'&obj='+canord+'&obj1=tscheemi_totnetpagdir&tipord=ordpagdir&codpre='+$(codpre).value});
     return true;

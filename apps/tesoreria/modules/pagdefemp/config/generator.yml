@@ -37,22 +37,29 @@ generator:
       cedrifcajchi:  { name: Beneficiario}
       nomben:  { name: Beneficiario}
       codcatcajchi:  { name: Código Categoría}
-      ordconpre:  { name: Colocar el Prefijo OP en el Comprobante}
       nomcat:  { name: Nombre}
+      gencomalc:  { name: Genera Comprobantes a Institutos Gubernamentales}
+      reqaprord:  { name: Requiere Aprobación}
+      ordcomptot:  { name: Refiere a Compromiso  Total}
+      ordmotanu:  { name: Solicita Motivo de Anulación}
+      ordconpre:  { name: Colocar el Prefijo OP en el Comprobante}
+      manbloqban:  { name: Maneja Bloqueos de Cuentas Bancarias}
       ordret:    { name: Retenciones  }
     list:
       title:          Definición de Empresa
       display:        [=codemp, nomemp, diremp]
       filters:        [codemp]
       sort:           codemp
-      max_per_page:   1
+      max_per_page:   10
     edit:
       title:          Definición de Empresa
-      display:        [codemp, nomemp, diremp, ctapag, nomctapag, ctades, nomctades, numini, forubi, ordnom, ordobr, tipeje, ordliq, ordfid, ordval, unitri, genctaord, gencomadi, gencaubon, vercomret, genordret, emichepag, cuecajchi, nomcuecajchi, tipcajchi, nomtipcajchi, monapecajchi, porrepcajchi, tiprencajchi, nomtiprencajchi, numinicajchi, cedrifcajchi, nomben, codcatcajchi, nomcat, ordret, ordconpre]
+      display:        [codemp, nomemp, diremp, ctapag, nomctapag, ctades, nomctades, numini, forubi, ordnom, ordobr, tipeje, ordliq, ordfid, ordval, unitri, genctaord, gencomadi, gencaubon, vercomret, genordret, emichepag, cuecajchi, nomcuecajchi, tipcajchi, nomtipcajchi, monapecajchi, porrepcajchi, tiprencajchi, nomtiprencajchi, numinicajchi, cedrifcajchi, nomben, codcatcajchi, nomcat, gencomalc, reqaprord, ordcomptot, ordmotanu, manbloqban, ordret, ordconpre]
       fields:
         genctaord:  {type: checkbox_tag}
         gencomadi: {type: checkbox_tag}
         vercomret: {type: checkbox_tag}
         gencaubon: {type: checkbox_tag}
+        gencomalc: {type: checkbox_tag}
+        manbloqban: {type: checkbox_tag}
       actions:
         _save:        ~

@@ -44,7 +44,7 @@ alter table npasiempcont
     add column fecdes date,
     add column fechas date,
     add column status varchar(1);
-    
+
 --CARLOS RAMIREZ
 CREATE SEQUENCE "nptipcat_seq";
 
@@ -60,4 +60,94 @@ ALTER TABLE nptipcat OWNER TO postgres;
 alter table npcomocp
   alter column gracar type varchar(20),
   alter column pascar type varchar(20);
-    
+
+
+
+
+-----------Cambios matriz Barcelona
+--06/04/2009 Matriz de Compras Barcelona Generar Comprobante en la orden de Compra para alcaldias
+ALTER TABLE "opdefemp"
+  ADD COLUMN "gencomalc" varchar(1);
+
+
+-----------------------------------------------------------------------------
+-- tsrelasiord para la orden de pago y cheque
+-----------------------------------------------------------------------------
+
+
+CREATE SEQUENCE "tsrelasiord_seq";
+
+
+CREATE TABLE "tsrelasiord"
+(
+  "ctagasxpag" VARCHAR(32),
+  "ctaordxpag" VARCHAR(32),
+  "id" INTEGER  NOT NULL DEFAULT nextval('tsrelasiord_seq'::regclass),
+  PRIMARY KEY ("id")
+);
+
+COMMENT ON TABLE "tsrelasiord" IS '';
+
+--22/04/2009  Campo para la configuracion del código del artículo generado con correlativo
+ALTER TABLE "cadefart"
+  ADD COLUMN "gencorart" varchar(1);
+
+--23/04/2009  Campo para la configuracion de la aprobacion de la Orden de Pago, motivo de anulacion
+ALTER TABLE "opdefemp"
+  ADD COLUMN "reqaprord" varchar(1),
+  ADD COLUMN "ordcomptot" varchar(1),
+  ADD COLUMN "ordmotanu" varchar(1);
+
+--23/04/2009
+ALTER TABLE "opordpag"
+  ADD COLUMN "codmotanu" varchar(4),
+  ADD COLUMN "usuanu" varchar(250);
+
+-----------------------------------------------------------------------------
+-- tsmotanu para la anúlacion de la orden de pago
+-----------------------------------------------------------------------------
+
+CREATE SEQUENCE "tsmotanu_seq";
+
+
+CREATE TABLE "tsmotanu"
+(
+  "codmotanu" VARCHAR(4),
+  "desmotanu" VARCHAR(250),
+  "id" INTEGER  NOT NULL DEFAULT nextval('tsmotanu_seq'::regclass),
+  PRIMARY KEY ("id")
+);
+
+COMMENT ON TABLE "tsmotanu" IS '';
+
+
+
+--28/04/2008 Cambios para las aprobaciones(parametrizable) de ordenes en Ordenamiento y Tesoreria (Matriz Barcelona)
+ALTER TABLE "opordpag"
+  ADD COLUMN "aprobadoord" varchar(1),
+  ADD COLUMN "aprobadotes" VARCHAR(1);
+
+--28/04/2008 Para la configuracion de Maneja o No Bloqueo de Cuentas (Concurrencia entre usuarios)(Matriz Barcelona)
+ALTER TABLE "opdefemp"
+  ADD COLUMN "manbloqban" varchar(1);
+
+-- Configuracion del prefijo en los comprobantes contables
+alter table opdefemp add column ordconpre boolean default (false);  --orden contable prefijo
+-----------------------------------------------------------------------------
+-- tsbloqban
+-----------------------------------------------------------------------------
+
+CREATE SEQUENCE "tsbloqban_seq";
+
+
+CREATE TABLE "tsbloqban"
+(
+  "numcue" VARCHAR(20),
+  "id" INTEGER  NOT NULL DEFAULT nextval('tsbloqban_seq'::regclass),
+  PRIMARY KEY ("id")
+);
+
+COMMENT ON TABLE "tsbloqban" IS '';
+------
+ALTER TABLE "opdefemp"
+  ADD COLUMN "ordret" VARCHAR(4);

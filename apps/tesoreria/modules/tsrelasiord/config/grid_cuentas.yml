@@ -1,0 +1,30 @@
+opciones:                  # Opciones generales
+  eliminar:                true
+  tabla:                   tsrelasiord
+  anchogrid:               1050
+  ancho:                   1050
+  filas:                   30
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Cuenta de Gastos x Pagar
+  tipo:                    t
+  nombrecampo:             ctagasxpag
+  esgrabable:              true
+  html:                    [size="20"]
+2:       # Columna 2
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             descta
+  html:                    [size="40", readonly=true]
+3:       # Columna 3
+  titulo:                  Cuenta de Orden x Pagar
+  tipo:                    t
+  nombrecampo:             ctaordxpag
+  esgrabable:              true
+  html:                    [size="20"]
+4:       # Columna 4
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             descta2
+  html:                    [size="40", readonly=true]

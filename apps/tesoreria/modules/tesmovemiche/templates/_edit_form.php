@@ -16,6 +16,7 @@
 <?php echo input_hidden_tag('tscheemi[operacion]', $tscheemi->getOperacion() ) ?>
 <?php echo input_hidden_tag('totalcomprobantes', '') ?>
 <?php echo input_hidden_tag('tipdocact',  $tscheemi->getTipdoc()) ?>
+<?php echo input_hidden_tag('tscheemi[bloqueado]',  $tscheemi->getBloqueado()) ?>
 <div id="sf_admin_container">
 <fieldset id="sf_fieldset_none" class="">
 <legend><? echo __('Datos del Cheque')?></legend>
@@ -61,7 +62,7 @@
         'url'      => 'tesmovemiche/ajax',
         'complete' => 'AjaxJSON(request, json)',
         'condition' => "$('tscheemi_numcue').value != ''",
-          'with' => "'ajax=3&cajtexmos=tscheemi_nomcue&cajtexcom=tscheemi_numcue&codigo='+this.value+'&tipdoc='+$('tscheemi_tipdoc').value"
+          'with' => "'ajax=3&cajtexmos=tscheemi_nomcue&cajtexcom=tscheemi_numcue&bloq='+$('tscheemi_bloqueado').value+'&codigo='+this.value+'&tipdoc='+$('tscheemi_tipdoc').value"
         ))),
      array('use_style' => 'true')
   )

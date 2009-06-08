@@ -666,15 +666,6 @@
 462:
   cod: 462
   msj: No se puede Guardar sin Calcular su Prestaciones
-463:
-  cod: 463
-  msj: Faltan datos en el Grid Intereses
-464:
-  cod: 464
-  msj: Faltan datos en el Grid Antiguedad
-465:
-  cod: 465
-  msj: Si selecciona Fideicomiso debe ingresar la fecha desde
 466:
   cod: 466
   msj: Grid Prima por  Hijos Incompleto, faltan datos
@@ -742,7 +733,21 @@
 1018:
     cod: 1018
     msj: Debe Introducir un monto mayor que cero en la deducción.
-
+1019:
+    cod: 1019
+    msj: Debe Introducir el al menos una Partida para esta Inspeccion
+1020:
+    cod: 1020
+    msj: Tipee la Cantidad Inspeccionada de la Partida mayor a cero.
+1021:
+    cod: 1021
+    msj: El Número de Inspección ya existe para ese Contrato.
+1022:
+    cod: 1022
+    msj: Debe tener al menos una empresa participante
+1023:
+    cod: 1023
+    msj: El Monto Total debe ser mayor a cero
 ###############FACTURACION################
 1100:
     cod: 1100
@@ -1013,6 +1018,18 @@
 702:
   cod: 702
   msj: Id no Encontrado, fallo al borrar Detalle.
+703:
+  cod: 703
+  msj: Complete todos los campos de Autorización.
+704:
+  cod: 704
+  msj: Complete todos los campos de Negación de Licencia.
+705:
+  cod: 705
+  msj: Complete todos los campos de la Suspención de la Licencia.
+706:
+  cod: 706
+  msj: Complete todos los campos de la Cancelación de la Licencia.
 
 ############Cuentas x Cobrar#########
 1800:
@@ -1030,6 +1047,7 @@
 1804:
   cod: 1804
   msj:  No se puede eliminar debido a que el Movimiento según Libro esta conciliado o el Comprobante esta actualizado.
+
 ############ Catastro #########
 8881:
   cod: 8881

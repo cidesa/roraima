@@ -34,6 +34,11 @@ tesoreria:
       Definición del IVA para Agentes de Retención:           PagRetIva
       Definición de Cuentas Contab. para Rendición de Gastos: TesDefRenGas
       Definición de Reportes de Comprobantes de Retención:    PagRepRet
+      Relación de Cuentas para los Asientos de Órdenes Aprobadas:      tsrelasiord
+      Motivos de Anulación:                                   tesmotanu
+      Aprobación de Órdenes de Pago(Módulo de Ordenamiento):  tesaprord
+      Aprobación de Órdenes de Pago(Módulo de Tesoreria):     tesaprordtes
+      Desbloquear Cuentas Bancarias:                          tesdesbloqban
     Ordenamiento de Pago:
       Ordenes de Pago:                                        PagEmiOrd
       Fondos a Terceros:                                      PagEmiRet

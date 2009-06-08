@@ -2722,5 +2722,152 @@ class OrdendePago
     }
     return true;
   }
+
+  public static function grabarComprobanteAlc($orden,&$mensaje,&$msjuno,&$msjdos,&$arrcompro)
+  {
+    $mensaje="";
+    $numeroorden="";
+    if (Herramientas::getVerCorrelativo('numini','opdefemp',&$r))
+    {
+      if ($orden->getNumord()=='########')
+      {
+        $encontrado=false;
+        while (!$encontrado)
+        {
+          $numero=str_pad($r, 8, '0', STR_PAD_LEFT);
+
+          $sql="select numord from opordpag where numord='".$numero."'";
+          if (Herramientas::BuscarDatos($sql,&$result))
+          {
+            $r=$r+1;
+          }
+          else
+          {
+            $encontrado=true;
+          }
+        }
+        $numeroorden2=str_pad($r, 8, '0', STR_PAD_LEFT);
+
+      }
+      else
+      {
+        $numeroorden2=str_replace('#','0',$orden->getNumord());
+      }
+    }
+    $numeroorden3="OP".substr($numeroorden2,2,6);
+    $confcorcom=sfContext::getInstance()->getUser()->getAttribute('confcorcom');
+    if ($confcorcom=='N')
+    {
+      $numerocomprob= $numeroorden3;
+    }else $numerocomprob= '########';
+
+    $reftra = $numeroorden3;
+    $codigocuenta="";
+    $tipo="";
+    $des="";
+    $monto="";
+    $codigocuentas="";
+    $tipo1="";
+    $desc="";
+    $monto1="";
+    $codigocuenta2="";
+    $tipo2="";
+    $des2="";
+    $monto2="";
+    $cuentas="";
+    $tipos="";
+    $montos="";
+    $descr="";
+    $msjuno="";
+    $msjdos="";
+
+    $cuenta=$orden->getCtapag();
+    $monord=$orden->getMonord();
+    if ($monord>0)
+    {
+      $codigocuenta=$cuenta;
+      $tipo='D';
+      $des="";
+      $mon=$orden->getMonord();
+      $monto=$mon;
+    }
+
+    $c= new Criteria();
+    $c->add(TsrelasiordPeer::CTAGASXPAG,$orden->getCtapag());
+    $reg= TsrelasiordPeer::doSelectOne($c);
+    if ($reg)
+    {
+      $v= new Criteria();
+      $v->add(ContabbPeer::CODCTA,$reg->getCtaordxpag());
+      $dato= ContabbPeer::doSelectOne($v);
+      if ($dato)
+      {
+        $codigocuenta2=$dato->getCodcta();
+        $tipo2='C';
+        $des2="";
+        $mont=$orden->getMonord();
+        $monto2=$mont;
+      }else { $msjuno='El Código Contable asociado a Cuenta de Gastos por Pagar no es válido';  return true;}
+    }else { $msjuno='El Código Contable asociado al Beneficiario no posee Relacion para Asientos de Ordenes'; return true;}
+
+    $cuentas=$codigocuenta2.'_'.$codigocuenta;
+    $tipos=$tipo2.'_'.$tipo;
+    $descr=$des2.'_'.$des;
+    $montos=$monto2.'_'.$monto;
+
+    $clscommpro=new Comprobante();
+    $clscommpro->setGrabar("N");
+    $clscommpro->setNumcom($numerocomprob);
+    $clscommpro->setReftra($reftra);
+    $clscommpro->setFectra(date("d/m/Y",strtotime($orden->getFecemi())));
+    $clscommpro->setDestra($orden->getDesord());
+    $clscommpro->setCtas($cuentas);
+    $clscommpro->setDesc($descr);
+    $clscommpro->setMov($tipos);
+    $clscommpro->setMontos($montos);
+    $arrcompro[]=$clscommpro;
+
+    return true;
+  }
+
+  public static function aprobarOrdenes($opordpag,$grid)
+  {
+    $x=$grid[0];
+    $j=0;
+    while ($j<count($x))
+    {
+      if ($x[$j]->getAprobadoord()=="1")
+      {
+        $x[$j]->setAprobadoord('A');
+      }
+      else
+      {
+      	$x[$j]->setAprobadoord(null);
+      }
+
+      $x[$j]->save();
+      $j++;
+    }
+  }
+
+  public static function aprobarOrdenesTes($opordpag,$grid)
+  {
+    $x=$grid[0];
+    $j=0;
+    while ($j<count($x))
+    {
+      if ($x[$j]->getAprobadotes()=="1")
+      {
+        $x[$j]->setAprobadotes('A');
+      }
+      else
+      {
+      	$x[$j]->setAprobadotes(null);
+      }
+      $x[$j]->save();
+      $j++;
+    }
+  }
+
 }
 ?>
