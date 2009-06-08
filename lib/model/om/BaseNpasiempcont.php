@@ -37,6 +37,10 @@ abstract class BaseNpasiempcont extends BaseObject  implements Persistent {
 
 
 	
+	protected $status;
+
+
+	
 	protected $id;
 
 	
@@ -140,6 +144,13 @@ abstract class BaseNpasiempcont extends BaseObject  implements Persistent {
   }
 
   
+  public function getStatus()
+  {
+
+    return trim($this->status);
+
+  }
+  
   public function getId()
   {
 
@@ -238,6 +249,16 @@ abstract class BaseNpasiempcont extends BaseObject  implements Persistent {
 
 	} 
 	
+	public function setStatus($v)
+	{
+
+    if ($this->status !== $v) {
+        $this->status = $v;
+        $this->modifiedColumns[] = NpasiempcontPeer::STATUS;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -266,7 +287,9 @@ abstract class BaseNpasiempcont extends BaseObject  implements Persistent {
 
       $this->fechas = $rs->getDate($startcol + 6, null);
 
-      $this->id = $rs->getInt($startcol + 7);
+      $this->status = $rs->getString($startcol + 7);
+
+      $this->id = $rs->getInt($startcol + 8);
 
       $this->resetModified();
 
@@ -274,7 +297,7 @@ abstract class BaseNpasiempcont extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 8; 
+            return $startcol + 9; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Npasiempcont object", $e);
     }
@@ -443,6 +466,9 @@ abstract class BaseNpasiempcont extends BaseObject  implements Persistent {
 				return $this->getFechas();
 				break;
 			case 7:
+				return $this->getStatus();
+				break;
+			case 8:
 				return $this->getId();
 				break;
 			default:
@@ -462,7 +488,8 @@ abstract class BaseNpasiempcont extends BaseObject  implements Persistent {
 			$keys[4] => $this->getFeccal(),
 			$keys[5] => $this->getFecdes(),
 			$keys[6] => $this->getFechas(),
-			$keys[7] => $this->getId(),
+			$keys[7] => $this->getStatus(),
+			$keys[8] => $this->getId(),
 		);
 		return $result;
 	}
@@ -500,6 +527,9 @@ abstract class BaseNpasiempcont extends BaseObject  implements Persistent {
 				$this->setFechas($value);
 				break;
 			case 7:
+				$this->setStatus($value);
+				break;
+			case 8:
 				$this->setId($value);
 				break;
 		} 	}
@@ -516,7 +546,8 @@ abstract class BaseNpasiempcont extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[4], $arr)) $this->setFeccal($arr[$keys[4]]);
 		if (array_key_exists($keys[5], $arr)) $this->setFecdes($arr[$keys[5]]);
 		if (array_key_exists($keys[6], $arr)) $this->setFechas($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setId($arr[$keys[7]]);
+		if (array_key_exists($keys[7], $arr)) $this->setStatus($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setId($arr[$keys[8]]);
 	}
 
 	
@@ -531,6 +562,7 @@ abstract class BaseNpasiempcont extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(NpasiempcontPeer::FECCAL)) $criteria->add(NpasiempcontPeer::FECCAL, $this->feccal);
 		if ($this->isColumnModified(NpasiempcontPeer::FECDES)) $criteria->add(NpasiempcontPeer::FECDES, $this->fecdes);
 		if ($this->isColumnModified(NpasiempcontPeer::FECHAS)) $criteria->add(NpasiempcontPeer::FECHAS, $this->fechas);
+		if ($this->isColumnModified(NpasiempcontPeer::STATUS)) $criteria->add(NpasiempcontPeer::STATUS, $this->status);
 		if ($this->isColumnModified(NpasiempcontPeer::ID)) $criteria->add(NpasiempcontPeer::ID, $this->id);
 
 		return $criteria;
@@ -575,6 +607,8 @@ abstract class BaseNpasiempcont extends BaseObject  implements Persistent {
 		$copyObj->setFecdes($this->fecdes);
 
 		$copyObj->setFechas($this->fechas);
+
+		$copyObj->setStatus($this->status);
 
 
 		$copyObj->setNew(true);

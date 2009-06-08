@@ -48,6 +48,8 @@ class NpasiempcontMapBuilder {
 
 		$tMap->addColumn('FECHAS', 'Fechas', 'int', CreoleTypes::DATE, true, null);
 
+		$tMap->addColumn('STATUS', 'Status', 'string', CreoleTypes::VARCHAR, true, 1);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 
