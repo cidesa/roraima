@@ -197,7 +197,7 @@
 			{
 				var cod1 = $('cajaux').value;
 				var cod2 = $('idlabel').value;
-				if (cod1=="NHMENEDA" || cod1=="NHMAYEDA")
+				if (cod1=="NHMENEDA" || cod1=="NHMAYEDA"|| cod1=="SIMESDAD")
 				    var cod = cod1+cod2;
   			    else
 					var cod = cod1+"("+cod2+")";
@@ -668,6 +668,29 @@
 					$('cajaux2').value='';
 					$('histoculto').show();
 					return true;
+		     	}else if(cod=='SIMESDAD')
+		     	{
+		     	    $('grid1').hide();
+					$('idfunciones').disabled=true;
+					$('idempleados').disabled=true;
+					$('idmovimientos').disabled=true;
+					$('idhistoricos').disabled=true;
+					$('idvariables').disabled=true;
+					$('idconceptos').disabled=true;
+					$('idlabel2').hide();
+					$('cajoculabel').value='';
+					$('idlabel2').value='';
+					$('histoculto').hide();
+					$('idlabel').show();
+
+					$('label1').innerHTML = "Introduzca una edad valida para la funcion    "+cod+":    ";
+					$('textooculto1').show();
+					$('idlabel').value='';
+					$('cajaux').value=cod;
+					$('idlabel').readOnly=false;
+					$('idlabel').focus();
+					return true;
+
 		     	}else
 		     	{
 		     	  return false;
