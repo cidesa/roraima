@@ -27,9 +27,35 @@ class Articulos
     public static function Grabar_Articulo($articulo,$grid)
     {
       // si el articulo es nuevo se iguala distot a exitot
-      if($articulo->getId()=='') $articulo->setDistot($articulo->getExitot());      
-      //Se graba el Artículo
-      $articulo->save();
+      if($articulo->getId()=='') $articulo->setDistot($articulo->getExitot());
+      //Se graba el Artículo      
+      if ($articulo->getGencorart()!="S")
+      { //$articulo->save();
+      }
+      else {
+        if (substr($articulo->getCodart(),-1,1)=='#')
+        {
+	      $mascaraarticulo=Herramientas::ObtenerFormato('Cadefart','Forart');
+	      $longmas=strlen($mascaraarticulo);
+	      $lonpadre=strlen($articulo->getCodart());
+	      $padre=substr($articulo->getCodart(),0,strlen($articulo->getCodart())-2);
+	      $lonultniv=strlen(substr($mascaraarticulo,strlen($padre) +1,$longmas));
+	      $sql="select max(substring(codart,".$lonpadre.",length(codart))) as ultimo from caregart where codart like ('%".$padre."%') and
+	      length(codart)='".$longmas."' and tipo='".$articulo->getTipo()."' ";
+	      if (Herramientas::BuscarDatos($sql,&$result))
+	      {
+	        $r= $result[0]["ultimo"] + 1;
+	        $codart=$padre."-".str_pad($r, $lonultniv, '0', STR_PAD_LEFT);
+	      }
+	      else{
+	      	$r=1;
+	      	$codart=$padre."-".str_pad($r, $lonultniv, '0', STR_PAD_LEFT);
+	      }
+	       $articulo->setCodart($codart);
+	       $articulo->save();
+      }
+      else $articulo->save();
+      }
       // Se graban los almacenes del articulo
       self::Grabar_ArticulosAlmacen($articulo,$grid);
     }
@@ -1050,6 +1076,10 @@ public static function Grabar_DetallesRetenciones($caretser,$grid)
     if ($articulo->getComreqapr()=='1')
      { $articulo->setComreqapr('S');}
      else {$articulo->setComreqapr(null);}
+
+    if ($articulo->getGencorart()=='1')
+     { $articulo->setGencorart('S');}
+     else {$articulo->setGencorart(null);}
 
      $articulo->setReqreqapr(H::iif($articulo->getReqreqapr()=='1','S',null));
 

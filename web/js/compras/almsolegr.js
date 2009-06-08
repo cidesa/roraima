@@ -540,8 +540,8 @@ function Totalrecargo(e,id)
 
 			if (ctiprgo=='M')
 			{
-			  cmonrgo=cmonrgotab;
-			  //cmonrgo=cmonrgo
+			  //cmonrgo=cmonrgotab;
+			  cmonrgo=cmonrgotab
 			}
 			else if (ctiprgo=='P')
 			{

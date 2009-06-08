@@ -33,7 +33,7 @@ generator:
         _delete:      ~
     edit:
       title:          Emisión de Pagos
-      display:        [tipdoc, destip, numche, numcue, nomcue, cedrif, nomben, fecemi, monche, tippagordpag, descriordpag, montotordpag, montotcompro, montotprecom, conceppagnap, montotpagnap, mondtopagnap, condtopagnap, totnetpagnap, conceppagdir, totnetpagdir, mondtopagdir, condtopagdir, operacion, nombensus]
+      display:        [tipdoc, destip, numche, numcue, nomcue, cedrif, nomben, fecemi, monche, tippagordpag, descriordpag, montotordpag, montotcompro, montotprecom, conceppagnap, montotpagnap, mondtopagnap, condtopagnap, totnetpagnap, conceppagdir, totnetpagdir, mondtopagdir, condtopagdir, operacion, bloqueado, nombensus]
       actions:
         _save:         ~
         _create:       ~

@@ -447,10 +447,15 @@ public static function PagoDoble()
   {
    return array('CORTO' => 'CORTO', 'VIVIENDA' => 'VIVIENDA', 'HIPOTECARIO' => 'HIPOTECARIO', 'MEDIANO' => 'MEDIANO', 'COMERCIAL' => 'COMERCIAL', 'OTRO' => 'OTRO');
   }
-  
+
   public static function Tipo_Intereses()
   {
    return array('P' => 'Promedio', 'A' => 'Activas', 'S' => 'Pasivas');
   }
-  
+
+  public static function Contacto_Proveedor()
+  {
+   return array('R' => 'Representante Legal', 'A' => 'Apoderado', 'C' => 'Contacto');
+  }
+
 }

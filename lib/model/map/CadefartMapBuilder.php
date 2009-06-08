@@ -120,6 +120,8 @@ class CadefartMapBuilder {
 
 		$tMap->addColumn('SOLREQAPR', 'Solreqapr', 'string', CreoleTypes::VARCHAR, false, 1);
 
+		$tMap->addColumn('GENCORART', 'Gencorart', 'string', CreoleTypes::VARCHAR, false, 1);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

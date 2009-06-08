@@ -172,6 +172,18 @@
 </div>
 
 <br><br>
+
+  <?php echo label_for('opdefemp[gencomalc]', __($labels['opdefemp{gencomalc}']), 'class="required" Style="width:200px"') ?>
+  <div class="content<?php if ($sf_request->hasError('opdefemp{gencomalc}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('opdefemp{gencomalc}')): ?>
+    <?php echo form_error('opdefemp{gencomalc}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_checkbox_tag($opdefemp, 'getGencomalc', array (
+  'control_name' => 'opdefemp[gencomalc]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+<br><br>
 </div>
 </fieldset>
  </th>
@@ -450,6 +462,19 @@
 
 <br>
 
+  <?php echo label_for('opdefemp[manbloqban]', __($labels['opdefemp{manbloqban}']), 'class="required" style="width:350px"') ?>
+  <div class="content<?php if ($sf_request->hasError('opdefemp{manbloqban}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('opdefemp{manbloqban}')): ?>
+    <?php echo form_error('opdefemp{manbloqban}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <?php $value = object_checkbox_tag($opdefemp, 'getManbloqban', array (
+  'control_name' => 'opdefemp[manbloqban]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+
+<br>
+
   <?php echo label_for('opdefemp[genordret]', __($labels['opdefemp{genordret}']), 'class="required" style="width:350px"') ?>
   <div class="content<?php if ($sf_request->hasError('opdefemp{genordret}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('opdefemp{genordret}')): ?>
@@ -475,8 +500,6 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 
-
-
 <br><br>
  <table width="35%">
   <tr>
@@ -485,6 +508,54 @@
    <legend><?php echo __('Orden de Pago') ?></legend>
     <div class="form-row" width="100%">
       <table width="100%">
+      <tr>
+      <th width="10%"></th>
+      <th>
+          <?php echo label_for('opdefemp[reqaprord]', __($labels['opdefemp{reqaprord}']), 'class="required" style="width: 200px"') ?>
+          <div class="content<?php if ($sf_request->hasError('opdefemp{reqaprord}')): ?> form-error<?php endif; ?>">
+          <?php if ($sf_request->hasError('opdefemp{reqaprord}')): ?>
+            <?php echo form_error('opdefemp{reqaprord}', array('class' => 'form-error-msg')) ?>
+          <?php endif; ?>
+
+          <?php $value = object_checkbox_tag($opdefemp, 'getReqaprord', array (
+          'control_name' => 'opdefemp[reqaprord]',
+        )); echo $value ? $value : '&nbsp;' ?>
+            </div>
+      </th>
+      </tr>
+
+      <tr>
+      <th width="10%"></th>
+      <th>
+          <?php echo label_for('opdefemp[ordcomptot]', __($labels['opdefemp{ordcomptot}']), 'class="required" style="width: 200px"') ?>
+          <div class="content<?php if ($sf_request->hasError('opdefemp{ordcomptot}')): ?> form-error<?php endif; ?>">
+          <?php if ($sf_request->hasError('opdefemp{ordcomptot}')): ?>
+            <?php echo form_error('opdefemp{ordcomptot}', array('class' => 'form-error-msg')) ?>
+          <?php endif; ?>
+
+          <?php $value = object_checkbox_tag($opdefemp, 'getOrdcomptot', array (
+          'control_name' => 'opdefemp[ordcomptot]',
+        )); echo $value ? $value : '&nbsp;' ?>
+            </div>
+      </th>
+      </tr>
+
+      <tr>
+      <th width="10%"></th>
+      <th>
+          <?php echo label_for('opdefemp[ordmotanu]', __($labels['opdefemp{ordmotanu}']), 'class="required" style="width: 200px"') ?>
+          <div class="content<?php if ($sf_request->hasError('opdefemp{ordmotanu}')): ?> form-error<?php endif; ?>">
+          <?php if ($sf_request->hasError('opdefemp{ordmotanu}')): ?>
+            <?php echo form_error('opdefemp{ordmotanu}', array('class' => 'form-error-msg')) ?>
+          <?php endif; ?>
+
+          <?php $value = object_checkbox_tag($opdefemp, 'getOrdmotanu', array (
+          'control_name' => 'opdefemp[ordmotanu]',
+        )); echo $value ? $value : '&nbsp;' ?>
+            </div>
+      </th>
+      </tr>
+
       <th width="10%"></th>
       <th>
           <?php echo label_for('opdefemp[ordconpre]', __($labels['opdefemp{ordconpre}']), 'class="required" style="width: 200px"') ?>

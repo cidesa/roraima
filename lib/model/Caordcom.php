@@ -14,6 +14,11 @@ class Caordcom extends BaseCaordcom
     private $codforent ='';
     protected $codigoproveedor='';
     protected $reptipcom='';
+    protected $genctaord=null;
+    protected $totrecargo="0,00";
+    protected $totorden="0,00";
+    protected $genctaalc="";
+
 
     public function getReptipcom()
     {
@@ -149,6 +154,29 @@ class Caordcom extends BaseCaordcom
       $refiere = Herramientas::getX('tipcom','CPdoccom','afedis',self::getDoccom());
       if($refiere=='R') return true;
       else return false;
+    }
+
+
+    public function getGenctaord()
+    {
+      $d= new Criteria();
+      $data=OpdefempPeer::doSelectOne($d);
+      if ($data)
+      {
+      	$si=$data->getGenctaord();
+      }else $si=null;
+      return $si;
+    }
+
+    public function getGencomalc()
+    {
+      $d= new Criteria();
+      $data=OpdefempPeer::doSelectOne($d);
+      if ($data)
+      {
+      	$si=$data->getGencomalc();
+      }else $si=null;
+      return $si;
     }
 
 }

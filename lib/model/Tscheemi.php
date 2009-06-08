@@ -31,6 +31,7 @@ class Tscheemi extends BaseTscheemi
 	protected $operacion="";
 	protected $caducado="";
 	protected $faldat="";
+	protected $bloqueado="";
 
     public function getNomben()
 	{
@@ -113,7 +114,7 @@ class Tscheemi extends BaseTscheemi
   {
   	return Herramientas::getX('NUMCUE','Tsdefban','Nomcue',$this->getNumcue());
   }
-  
+
   public function getEscheque()
   {
     return Herramientas::getX('CODTIP','Tstipmov','escheque',$this->getTipdoc());

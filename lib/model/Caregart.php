@@ -10,6 +10,7 @@
 class Caregart extends BaseCaregart
 {
   protected $ubicacion = '';
+  protected $gencorart="";
 
 public function getNomram($val=false)
 	{
@@ -33,4 +34,15 @@ public function getNompar()
 	{
 		return Herramientas::getX('CODPAR','Nppartidas','Nompar',self::getCodpar());
 	}
+
+	public function getGencorart()
+    {
+      $d= new Criteria();
+      $data=CadefartPeer::doSelectOne($d);
+      if ($data)
+      {
+      	$si=$data->getGencorart();
+      }else $si=null;
+      return $si;
+    }
 }

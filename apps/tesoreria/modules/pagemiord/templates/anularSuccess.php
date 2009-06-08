@@ -37,7 +37,34 @@
     </div>
 
 <br>
+<div id="motivo" style="display:none">
+<?php echo label_for('opordpag[codmotanu]', __('Motivo'), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('opordpag{codmotanu}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('opordpag{codmotanu}')): ?>
+    <?php echo form_error('opordpag{codmotanu}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
 
+   <?php echo input_auto_complete_tag('opordpag[codmotanu]', $opordpag->getCodmotanu(),
+    'pagemiord/autocomplete?ajax=7',  array('autocomplete' => 'off','maxlength' => 4, 'size' => 10,
+    'onBlur'=> remote_function(array(
+        'url'      => 'pagemiord/ajax',
+        'condition' => "$('opordpag_codmotanu').value != ''",
+        'complete' => 'AjaxJSON(request, json)',
+          'with' => "'ajax=22&cajtexmos=opordpag_desmotanu&cajtexcom=opordpag_codmotanu&codigo='+this.value"
+        ))),
+     array('use_style' => 'true')
+  )
+?>
+  <?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Tsmotanu_Pagemiord/clase/Tsmotanu/frame/sf_admin_edit_form/obj1/opordpag_codmotanu/obj2/opordpag_desmotanu/campo1/codmotanu/campo2/desmotanu','','','botoncat')?></th>
+&nbsp;
+  <?php $value = object_input_tag($opordpag, 'getDesmotanu', array (
+  'disabled' => true,
+  'size' => 50,
+  'control_name' => 'opordpag[desmotanu]',
+)); echo $value ? $value : '&nbsp;' ?> </div>
+
+<br>
+</div>
   <?php echo label_for('opordpag[desanu]', __('Descripción'), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('opordpag{desanu}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('opordpag{desanu}')): ?>
@@ -86,17 +113,22 @@
 </div>
 <script type="text/javascript">
 $('opordpag_numord').value=$('refer').value;
-
+  var tiene='<? print $tienemot; ?>';
+  if (tiene=='S')
+  {
+  	$('motivo').show();
+  }
 function salvar()
 {
   var id='<? print $opordpag->getId(); ?>';
   var numord=$('numord').value;
   var desanu=$('opordpag_desanu').value;
   var fecanu=$('opordpag_fecanu').value;
+  var motanu=$('opordpag_codmotanu').value;
   var compadic=$('compadic').value;
 
   f=document.sf_admin_edit_form;
-  f.action='salvaranu?id='+id+'&desanu='+desanu+'&numord='+numord+'&fecanu='+fecanu+'&compadic='+compadic;
+  f.action='salvaranu?id='+id+'&desanu='+desanu+'&numord='+numord+'&fecanu='+fecanu+'&codmotanu='+motanu+'&compadic='+compadic;
   f.submit();
 }
 

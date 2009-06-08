@@ -539,6 +539,19 @@ class Cheques
       $tscheeminew->setCedrec(null);
       $tscheeminew->setNomrec(null);
       $tscheeminew->save();
+
+      // Para desbloquear la cuenta Bancaria
+      $q= new  Criteria();
+  	  $result=OpdefempPeer::doSelectOne($q);
+  	  if ($result)
+  	  {
+		  if ($result->getManbloqban()=='S')
+		  {
+             $t= new Criteria();
+             $t->add(TsbloqbanPeer::NUMCUE,$tscheemi->getNumcue());
+             TsbloqbanPeer::doDelete($t);
+		  }
+      }
     }
   }
 
@@ -677,9 +690,22 @@ class Cheques
 
             if ($gencom=="S")
             {
-                self::Genera_Comprobante($numche,$tscheemi,$grid,$OrdenDePago,$tippag,$DescOp,$DesCtaDeb,
+               $c= new Criteria();
+			   $reg= OpdefempPeer::doSelectOne($c);
+			   if ($reg)
+			   {
+			     if ($reg->getGencomalc()=='S')
+			     {
+			       self::grabarComprobanteAlc($tscheemi,$grid,$DescOp,$tippag,$MontDcto,$Monto,$CtaPag,&$msjuno,&$arrcompro);
+			     }
+			     else
+			     {
+                    self::Genera_Comprobante($numche,$tscheemi,$grid,$OrdenDePago,$tippag,$DescOp,$DesCtaDeb,
                                          $DesCtaCre,$CtaPag,$CtaDcto,$MontDcto,$DescOp,$Monto,$MontRet,
 										 "ordpag",&$arrcompro);
+			     }
+			   }
+
                 $concom++;
             }
             else
@@ -822,9 +848,21 @@ class Cheques
 
        if ($gencom=="S")
        {
-           self::Genera_Comprobante($numche,$tscheemi,$grid,"",$tippag,$DescOp,$DesCtaDeb,
+               $c= new Criteria();
+			   $reg= OpdefempPeer::doSelectOne($c);
+			   if ($reg)
+			   {
+			     if ($reg->getGencomalc()=='S')
+			     {
+			       self::grabarComprobanteAlc($tscheemi,$grid,$DescOp,$tippag,$MontDcto,$Monto,$CtaPag,&$msjuno,&$arrcompro);
+			     }
+			     else
+			     {
+                  self::Genera_Comprobante($numche,$tscheemi,$grid,"",$tippag,$DescOp,$DesCtaDeb,
                                     $DesCtaCre,$CtaPag,$CtaDcto,$MontDcto,$DescOp,$Monto,$MontRet,"ordpag",
                                     &$arrcompro);
+			     }
+			   }
            $concom++;
        }
        else //if ($gencom=="S")
@@ -882,8 +920,20 @@ class Cheques
      {
        if ($gencom=="S")
        {
-           self::Genera_Comprobante($numche,$tscheemi,$grid,"","S",$DescOp,$DesCtaDeb,
+           $c= new Criteria();
+		   $reg= OpdefempPeer::doSelectOne($c);
+		   if ($reg)
+		   {
+		     if ($reg->getGencomalc()=='S')
+		     {
+		       self::grabarComprobanteAlc($tscheemi,$grid,$DescOp,"S",0,$MontOP,$ctapag,&$msjuno,&$arrcompro);
+		     }
+		     else
+		     {
+                self::Genera_Comprobante($numche,$tscheemi,$grid,"","S",$DescOp,$DesCtaDeb,
                                     $desctacre,$ctapag,"",0,"",$MontOP,0,"compro",&$arrcompro);
+		     }
+		    }
        }
        else //if ($gencom=="S")
        {
@@ -934,8 +984,20 @@ class Cheques
       {
         if ($gencom=="S")
         {
-           self::Genera_Comprobante($numche,$tscheemi,$grid,"","S",$DescOp,$DesCtaDeb,
+           $c= new Criteria();
+		   $reg= OpdefempPeer::doSelectOne($c);
+		   if ($reg)
+		   {
+		     if ($reg->getGencomalc()=='S')
+		     {
+		       self::grabarComprobanteAlc($tscheemi,$grid,$DescOp,"S",0,$MontOP,$ctapag,&$msjuno,&$arrcompro);
+		     }
+		     else
+		     {
+               self::Genera_Comprobante($numche,$tscheemi,$grid,"","S",$DescOp,$DesCtaDeb,
                                              $desctacre,$ctapag,"",0,"",$MontOP,0,"precom",&$arrcompro);
+		     }
+		   }
         }
         else
         {
@@ -988,9 +1050,21 @@ class Cheques
         {
 
            $total=$MontOP-Herramientas::convnume($MontDcto);
+           $c= new Criteria();
+		   $reg= OpdefempPeer::doSelectOne($c);
+		   if ($reg)
+		   {
+		     if ($reg->getGencomalc()=='S')
+		     {
+		       self::grabarComprobanteAlc($tscheemi,$grid,$DescOp,"S",Herramientas::convnume($MontDcto),$total,$ctapag,&$msjuno,&$arrcompro);
+		     }
+		     else
+		     {
            self::Genera_Comprobante($numche,$tscheemi,$grid,"","S",$DescOp,$DesCtaDeb,
                                     $desctacre,$CtaPag,$CuentaDes,Herramientas::convnume($MontDcto),$condto,
                                     $total,0,"pagdir",&$arrcompro);
+		     }
+		   }
         }
         else
         {
@@ -1030,9 +1104,21 @@ class Cheques
       if ($gencom=="S")
         {
            $total=Herramientas::convnume($MontOP)-Herramientas::convnume($MontDcto);
-           self::Genera_Comprobante($numche,$tscheemi,$grid,"","S",$DescOp,$DesCtaDeb,
+          $c= new Criteria();
+		   $reg= OpdefempPeer::doSelectOne($c);
+		   if ($reg)
+		   {
+		     if ($reg->getGencomalc()=='S')
+		     {
+		       self::grabarComprobanteAlc($tscheemi,$grid,$DescOp,"S",Herramientas::convnume($MontDcto),$total,$ctapag,&$msjuno,&$arrcompro);
+		     }
+		     else
+		     {
+               self::Genera_Comprobante($numche,$tscheemi,$grid,"","S",$DescOp,$DesCtaDeb,
                                     $desctacre,$ctapag,$CtaDcto,Herramientas::convnume($MontDcto),$condpnrn,
                                     $total,0,"pagnopre",&$arrcompro);
+		     }
+		   }
         }
         else
         {
@@ -1058,13 +1144,13 @@ class Cheques
                                              $operacion,&$arrcompro)
   {
    //$Comprob=$numcomcon;
-   //$Comprob = "########";
-
     $confcorcom=sfContext::getInstance()->getUser()->getAttribute('confcorcom');
     if ($confcorcom=='N')
     {
     	 $Comprob=$numcomcon;
     }else $Comprob = "########";
+
+
 
 
    if (true)
@@ -1259,6 +1345,128 @@ class Cheques
      $i++;
     }
     return $validardisponibilidad;
+  }
+
+  public static function grabarComprobanteAlc($tscheemi,$grid,$DescOp,$tippag,$MontDcto,$Monto,$CtaPag,&$msjuno,&$arrcompro)
+  {
+    $mensaje="";
+    $numerocomprob= '########';
+    $reftra = str_pad($tscheemi->getNumche(),8,"0",STR_PAD_LEFT);
+    $codigocuenta="";
+    $tipo="";
+    $des="";
+    $monto="";
+    $codigocuentas="";
+    $tipo1="";
+    $desc="";
+    $monto1="";
+    $codigocuenta2="";
+    $tipo2="";
+    $des2="";
+    $monto2="";
+    $cuentas="";
+    $tipos="";
+    $montos="";
+    $descr="";
+    $msjuno="";
+    $msjdos="";
+    $mont=0;
+
+     if ($tippag=='S') //Pago Simple
+     {
+     	$mont=$Monto+$MontDcto;
+     }
+     else if ($tippag=='C')//pagos compuestos
+     {
+        $x=$grid[0];
+        $j=0;
+        while ($j<count($x))
+        {
+          if ($x[$j]->getCheck()=="1")
+          {
+             $mont= $mont + ($x[$j]->getMontotalGrid()+$x[$j]->getMondes());
+          }
+          $j++;
+        }
+     }
+
+    $c= new Criteria();
+    $c->add(TsrelasiordPeer::CTAGASXPAG,$CtaPag);
+    $reg= TsrelasiordPeer::doSelectOne($c);
+    if ($reg)
+    {
+      $v= new Criteria();
+      $v->add(ContabbPeer::CODCTA,$reg->getCtaordxpag());
+      $dato= ContabbPeer::doSelectOne($v);
+      if ($dato)
+      {
+        $codigocuenta=$dato->getCodcta();
+        $tipo='D';
+        $des="";
+        $monto=$mont;
+      }else {
+      	 $mensaje="El Código Contable asociado a Cuenta de Gastos por Pagar no es válido";
+        $clscommpro=new Comprobante();
+        $clscommpro->setError("S");
+        $clscommpro->setMsgerr($mensaje);
+        $arrcompro[]=$clscommpro;
+
+        return true;}
+    }else {
+    	$mensaje="El Código Contable asociado al Beneficiario ".$CtaPag." no posee Relacion para Asientos de Ordenes";
+        $clscommpro=new Comprobante();
+        $clscommpro->setError("S");
+        $clscommpro->setMsgerr($mensaje);
+        $arrcompro[]=$clscommpro;
+
+        return true;}
+
+   $b= new Criteria();
+   $b->add(TsdefbanPeer::NUMCUE,$tscheemi->getNumcue());
+   $reg1= TsdefbanPeer::doSelectOne($b);
+   if ($reg1)
+   {
+   	 $cuenta=$reg1->getCodcta();
+   }else $cuenta='';
+
+    $x= new Criteria();
+    $x->add(ContabbPeer::CODCTA,$cuenta);
+    $reg2= ContabbPeer::doSelectOne($x);
+    if ($reg2)
+    {
+       $codigocuenta2=$cuenta;
+	   $tipo2='C';
+	   $des2="";
+	   $monto2=$mont;
+    }else {
+    	$mensaje="El Código Contable asociado a la Cuenta Bancaria no es válido";
+        $clscommpro=new Comprobante();
+        $clscommpro->setError("S");
+        $clscommpro->setMsgerr($mensaje);
+        $arrcompro[]=$clscommpro;
+
+    	return true;}
+
+
+    $cuentas=$codigocuenta2.'_'.$codigocuenta;
+    $tipos=$tipo2.'_'.$tipo;
+    $descr=$des2.'_'.$des;
+    $montos=$monto2.'_'.$monto;
+
+    $clscommpro=new Comprobante();
+    $clscommpro->setGrabar("N");
+    $clscommpro->setNumcom($numerocomprob);
+    $clscommpro->setReftra($reftra);
+    $clscommpro->setFectra(date("d/m/Y",strtotime($tscheemi->getFecemi())));
+    $clscommpro->setDestra($DescOp);
+    $clscommpro->setCtas($cuentas);
+    $clscommpro->setDesc($descr);
+    $clscommpro->setMov($tipos);
+    $clscommpro->setMontos($montos);
+    $clscommpro->setError("N");
+    $arrcompro[]=$clscommpro;
+
+    return true;
   }
 }
 ?>

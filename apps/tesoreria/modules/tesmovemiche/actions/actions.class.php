@@ -205,6 +205,10 @@ $this->Bitacora('Guardo');
     {
       $this->tscheemi->setOperacion($tscheemi['operacion']);
     }
+    if (isset($tscheemi['bloqueado']))
+    {
+      $this->tscheemi->setBloqueado($tscheemi['bloqueado']);
+    }
     if (isset($tscheemi['nombensus']))
     {
       $this->tscheemi->setNombensus($tscheemi['nombensus']);
@@ -259,9 +263,96 @@ $this->Bitacora('Guardo');
 
       else if ($this->getRequestParameter('ajax')=='3')//NRO CUENTA BANCARIA
       {
+      	$javascript="";
+      	$bloqueado=$this->getRequestParameter('bloq');
           if (trim($this->getRequestParameter('codigo'))!='')
           {
-              $dato=TsdefbanPeer::getNomcue($this->getRequestParameter('codigo'));
+          	$q= new  Criteria();
+          	$result=OpdefempPeer::doSelectOne($q);
+          	if ($result)
+          	{
+              if ($result->getManbloqban()=='S')
+              {
+                  $t= new Criteria();
+                  $t->add(TsbloqbanPeer::NUMCUE,$this->getRequestParameter('codigo'));
+                  $resultado=TsbloqbanPeer::doSelectOne($t);
+                  if (!$resultado)
+                  {
+                     if ($bloqueado=="")
+                     {
+                      $dato=TsdefbanPeer::getNomcue($this->getRequestParameter('codigo'));
+		              $numche=TsdefbanPeer::getNumche($this->getRequestParameter('codigo'));
+		              $numche=str_pad($numche,8,"0",STR_PAD_LEFT);
+		              $c = new Criteria();
+		              $c->add(TstipmovPeer::CODTIP,strtoupper($this->getRequestParameter('tipdoc')));
+		              $tipmov = TstipmovPeer::doSelectOne($c);
+		              if ($tipmov)
+		              {if($tipmov->getEscheque()==false) $numche=''; }
+
+                      //Para Bloquear la cuenta mientras este usuario la esta usando al grabar se desbloquea
+		              $tsbloqban= new Tsbloqban();
+		              $tsbloqban->setNumcue($this->getRequestParameter('codigo'));
+		              $tsbloqban->save(); ////////////////////
+		              $bloqueado=$this->getRequestParameter('codigo');
+                     }
+                     else
+                     {
+                        $t1= new Criteria();
+                        $t1->add(TsbloqbanPeer::NUMCUE,$bloqueado);
+                        TsbloqbanPeer::doDelete($t1);
+
+                        $dato=TsdefbanPeer::getNomcue($this->getRequestParameter('codigo'));
+		                $numche=TsdefbanPeer::getNumche($this->getRequestParameter('codigo'));
+		                $numche=str_pad($numche,8,"0",STR_PAD_LEFT);
+		                $c = new Criteria();
+		                $c->add(TstipmovPeer::CODTIP,strtoupper($this->getRequestParameter('tipdoc')));
+		                $tipmov = TstipmovPeer::doSelectOne($c);
+		                if ($tipmov)
+		                {if($tipmov->getEscheque()==false) $numche=''; }
+
+                        //Para Bloquear la cuenta mientras este usuario la esta usando al grabar se desbloquea
+		                $tsbloqban= new Tsbloqban();
+		                $tsbloqban->setNumcue($this->getRequestParameter('codigo'));
+		                $tsbloqban->save(); ////////////////////
+
+                     }
+                  }
+                  else
+                  {
+                  	if ($bloqueado!=$this->getRequestParameter('codigo'))
+                  	{
+                  	 $numche='';
+                  	 $dato="";
+                  	 $javascript="alert('La Cuenta Bancaria se encuentra Bloqueada'); $('$cajtexcom').value='';";
+                  	}
+                  	else
+                  	{
+                  		$dato=TsdefbanPeer::getNomcue($this->getRequestParameter('codigo'));
+		                $numche=TsdefbanPeer::getNumche($this->getRequestParameter('codigo'));
+		                $numche=str_pad($numche,8,"0",STR_PAD_LEFT);
+		                $c = new Criteria();
+		                $c->add(TstipmovPeer::CODTIP,strtoupper($this->getRequestParameter('tipdoc')));
+		                $tipmov = TstipmovPeer::doSelectOne($c);
+		                if ($tipmov)
+		                {if($tipmov->getEscheque()==false) $numche=''; }
+                  	}
+                  }
+
+              }else
+              {
+	              $dato=TsdefbanPeer::getNomcue($this->getRequestParameter('codigo'));
+	              $numche=TsdefbanPeer::getNumche($this->getRequestParameter('codigo'));
+	              $numche=str_pad($numche,8,"0",STR_PAD_LEFT);
+	              $c = new Criteria();
+	              $c->add(TstipmovPeer::CODTIP,strtoupper($this->getRequestParameter('tipdoc')));
+	              $tipmov = TstipmovPeer::doSelectOne($c);
+	              if ($tipmov)
+	              {if($tipmov->getEscheque()==false) $numche=''; }
+              }
+          	}
+          	else
+          	{
+          	  $dato=TsdefbanPeer::getNomcue($this->getRequestParameter('codigo'));
               $numche=TsdefbanPeer::getNumche($this->getRequestParameter('codigo'));
               $numche=str_pad($numche,8,"0",STR_PAD_LEFT);
               $c = new Criteria();
@@ -269,8 +360,9 @@ $this->Bitacora('Guardo');
               $tipmov = TstipmovPeer::doSelectOne($c);
               if ($tipmov)
               {if($tipmov->getEscheque()==false) $numche=''; }
+          	}
 
-              $output = '[["'.$cajtexmos.'","'.$dato.'",""],["tscheemi_numche","'.$numche.'",""]]';
+              $output = '[["'.$cajtexmos.'","'.$dato.'",""],["tscheemi_numche","'.$numche.'",""],["tscheemi_bloqueado","'.$bloqueado.'",""],["javascript","'.$javascript.'",""]]';
               $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
               return sfView::HEADER_ONLY;
           }//if ($this->getRequestParameter('codigo')!='')
@@ -493,6 +585,9 @@ $this->Bitacora('Guardo');
             $this->msgerr=$comprobante[0]->getMsgerr();
             $this->i="";
             $this->formulario=array();
+
+            $output = '[["totalcomprobantes","'.$concom.'",""]]';
+            $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
          }
          else
          {
@@ -567,6 +662,18 @@ $this->Bitacora('Guardo');
         $c = new Criteria();
         if (trim($cedrif)!="") { $c->add(OpordpagPeer::CEDRIF,$cedrif);};
         if (trim($fecemi)!="") { $c->add(OpordpagPeer::FECEMI,$fecemi,Criteria::LESS_EQUAL);}
+
+        //////////////SE  agrego para el caso que las ordenes requieran aprobacion//////////////
+        $e= new Criteria();
+        $ooo= OpdefempPeer::doSelectOne($e);
+        if ($ooo)
+        {
+          if ($ooo->getReqaprord()=='S')
+          {
+          	$c->add(OpordpagPeer::APROBADOTES,'A');
+          }
+        }//////////////////////
+
         $c->add(OpordpagPeer::STATUS,"N");
         $per = OpordpagPeer::doSelect($c);
         if (!$per)

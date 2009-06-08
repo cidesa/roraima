@@ -170,7 +170,7 @@ class almreqActions extends autoalmreqActions
 	$opciones->setTabla('Caartreq');
 	$opciones->setAnchoGrid(1120);
     $opciones->setAncho(1120);
-	$opciones->setFilas(250);
+	$opciones->setFilas(50);
 	$opciones->setTitulo('Detalle de la Orden de Requisición');
 	$opciones->setHTMLTotalFilas(' ');
 

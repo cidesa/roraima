@@ -38,7 +38,7 @@ generator:
       gencorart:  { name: Se genera correlativo en el Código del Artículo}
     edit:
       title:         Definición de Artículos
-      display:        [codemp, nomemp, diremp, tlfemp, lonart, rupart, forart, desart, forubi, desubi, generaop, generacom, asiparrec, corcom, correc2, correq2, cordes2, corser, corsol, corcot2, prcasopre, prcreqapr, comasopre, comreqapr, almcorre, forsnc, dessnc, reqreqapr, solreqapr, corent, corsal]
+      display:        [codemp, nomemp, diremp, tlfemp, lonart, rupart, forart, desart, forubi, desubi, generaop, generacom, asiparrec, corcom, correc2, correq2, cordes2, corser, corsol, corcot2, prcasopre, prcreqapr, comasopre, comreqapr, almcorre, forsnc, dessnc, reqreqapr, solreqapr, corent, corsal, gencorart]
       fields:
         generaop:  {type: checkbox_tag}
         generacom: {type: checkbox_tag}
@@ -46,6 +46,7 @@ generator:
         prcreqapr: {type: checkbox_tag}
         comasopre: {type: checkbox_tag}
         comreqapr: {type: checkbox_tag}
+        gencorart: {type: checkbox_tag}
       actions:
         _save:        ~
 

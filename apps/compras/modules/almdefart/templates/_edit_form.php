@@ -98,6 +98,20 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
     </th>
+     <th>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </th>
+    <th>
+     <?php echo label_for('cadefart[gencorart]', __($labels['cadefart{gencorart}']), 'class="required" style="width: 200px"') ?>
+      <div class="content<?php if ($sf_request->hasError('cadefart{gencorart}')): ?> form-error<?php endif; ?>">
+      <?php if ($sf_request->hasError('cadefart{gencorart}')): ?>
+        <?php echo form_error('cadefart{gencorart}', array('class' => 'form-error-msg')) ?>
+      <?php endif; ?>
+
+      <?php $value = object_checkbox_tag($cadefart, 'getGencorart', array (
+      'control_name' => 'cadefart[gencorart]',
+    )); echo $value ? $value : '&nbsp;' ?>
+    </th>
    </tr>
   </table>
 

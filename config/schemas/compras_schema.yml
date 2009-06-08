@@ -1774,6 +1774,9 @@ propel:
     codtipemp:
       type: VARCHAR
       size: 4
+    ramgen:
+      type: VARCHAR
+      size: 1000
     id:
       type: integer
       required: true
@@ -1955,6 +1958,9 @@ propel:
       type: VARCHAR
       size: 1
     solreqapr:
+      type: VARCHAR
+      size: 1
+    gencorart:
       type: VARCHAR
       size: 1
     id:
@@ -2446,3 +2452,46 @@ propel:
       type: INTEGER
       required: true
       autoIncrement: true
+  caconpro:
+    codpro:
+      type: VARCHAR
+      size: 15
+      required: true
+    cedcon:
+      type: VARCHAR
+      size: 15
+      required: true
+    nomcon:
+      type: VARCHAR
+      size: 250
+    dircon:
+      type: VARCHAR
+      size: 250
+    telcon:
+      type: VARCHAR
+      size: 30
+    emacon:
+      type: VARCHAR
+      size: 100
+    relcon:
+      type: VARCHAR
+      size: 2
+    id:
+      type: integer
+      required: true
+      primaryKey: true
+      autoincrement: true
+  carampro:
+    codpro:
+      type: VARCHAR
+      size: 15
+      required: true
+    ramart:
+      type: VARCHAR
+      size: 6
+      required: true
+    id:
+      type: integer
+      required: true
+      primaryKey: true
+      autoincrement: true

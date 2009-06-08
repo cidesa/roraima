@@ -107,9 +107,30 @@ class pagemiordActions extends autopagemiordActions
        switch ($this->opordpag->getStatus()) {
          case 'A':
            $this->color='#CC0000';
-           if ($this->opordpag->getFecanu()!="")
-           { $this->eti="ANULADA EL ".date('d/m/Y',strtotime($this->opordpag->getFecanu()));}
-           else { $this->eti="ANULADA";}
+           $c = new Criteria();
+           $c->add(UsuariosPeer::LOGUSE,$this->opordpag->getUsuanu());
+           $objUsuario = UsuariosPeer::doSelectOne($c);
+           if ($objUsuario)
+           {
+           	$nombre=$objUsuario->getNomuse();
+           }else $nombre="";
+
+            $q= new Criteria();
+			$regi= OpdefempPeer::doSelectOne($q);
+			if ($regi)
+			{
+			  $tmot=$regi->getOrdmotanu();
+			}else $tmot="";
+			if ($tmot=='S')
+			{
+               if ($this->opordpag->getFecanu()!="")
+	           { $this->eti="ANULADA EL ".date('d/m/Y',strtotime($this->opordpag->getFecanu()))." por el usuario ".$nombre;}
+	           else { $this->eti="ANULADA por el usuario".$nombre;}
+			}else {
+	           if ($this->opordpag->getFecanu()!="")
+	           { $this->eti="ANULADA EL ".date('d/m/Y',strtotime($this->opordpag->getFecanu()));}
+	           else { $this->eti="ANULADA";}
+			}
            break;
          case 'E':
            $this->color='#CC0000';
@@ -1123,7 +1144,15 @@ $this->Bitacora('Guardo');
     $col5 = clone $col2;
     $col5->setTitulo('Monto por Causar');
     $col5->setNombreCampo('montrue');
-    $col5->setHTML('type="text" size="15" maxlength="21"');
+    $q= new Criteria();
+    $regi= OpdefempPeer::doSelectOne($q);
+    if ($regi)
+    {
+      $cautot=$regi->getOrdcomptot();
+    }else $cautot="";
+    if ($cautot=='S')
+    {$col5->setHTML('type="text" size="15" maxlength="21" readonly=true');}
+    else { $col5->setHTML('type="text" size="15" maxlength="21"'); }
     $col5->setJScript('onKeypress="entermonto_c(event,this.id); calculo(event,this.id);"');
     $col5->setEsTotal(true,'totalcau');
 
@@ -1197,7 +1226,15 @@ $this->Bitacora('Guardo');
     $col5 = clone $col2;
     $col5->setTitulo('Monto por Causar');
     $col5->setNombreCampo('acausar');
-    $col5->setHTML('type="text" size="15" maxlength="21"');
+     $q= new Criteria();
+    $regi= OpdefempPeer::doSelectOne($q);
+    if ($regi)
+    {
+      $cautot=$regi->getOrdcomptot();
+    }else $cautot="";
+    if ($cautot=='S')
+    {$col5->setHTML('type="text" size="15" maxlength="21" readonly=true');}
+    else { $col5->setHTML('type="text" size="15" maxlength="21"'); }
     $col5->setJScript('onKeypress=" entermonto_c(event,this.id); calculo(event,this.id);"');
     $col5->setEsTotal(true,'totalcau');
 
@@ -1892,7 +1929,7 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
     {
       if ($fecha<$data->getFecemi())
       {
-        $msj="alert('La Fecha de Anulacion no puede ser menor a la fecha de la Orden de Pago'); $('opordpag_fecanu').value=''";
+        $msj="alert('La Fecha de Anulacion no puede ser menor a la fecha de la Orden de Pago'); $('opordpag_fecanu').value='';";
       }
       else{$msj="";}
 
@@ -1957,6 +1994,20 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
     $this->div='OPVA';
     OrdendePago::ArregloValuacion($this->getRequestParameter('refcom'),$this->getRequestParameter('montoval'),$this->getRequestParameter('opordpag_referencias'),&$arreglodet);
     $this->configGridConsulta('','OPVA',$arreglodet);
+  }
+  else if ($this->getRequestParameter('ajax')=='22')
+  {
+  	$javascript="";
+  	$c= new Criteria();
+  	$c->add(TsmotanuPeer::CODMOTANU,$this->getRequestParameter('codigo'));
+  	$reg= TsmotanuPeer::doSelectOne($c);
+  	if ($reg)
+  	{
+       $dato=$reg->getDesmotanu();
+  	}else $javascript="alert('El Motivo de Anulación no Existe'); $('$cajtexcom').value=''; ";
+    $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""]]';
+    $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+    return sfView::HEADER_ONLY;
   }
 
  }
@@ -2048,7 +2099,19 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
 
      if ($mensaje1=="" && $msj1=="" && $msj2=="" && $msjtres=="")
      {
-      $x=OrdendePago::grabarComprobante($this->opordpag,$detalle,&$cuentaporpagarrendicion,&$mensajeuno,&$msjuno,&$msjdos,&$comprobante);
+       $c= new Criteria();
+       $reg= OpdefempPeer::doSelectOne($c);
+       if ($reg)
+       {
+         if ($reg->getGencomalc()=='S')
+         {
+          $x=OrdendePago::grabarComprobanteAlc($this->opordpag,&$mensajeuno,&$msjuno,&$msjdos,&$comprobante);
+         }
+         else
+         {
+            $x=OrdendePago::grabarComprobante($this->opordpag,$detalle,&$cuentaporpagarrendicion,&$mensajeuno,&$msjuno,&$msjdos,&$comprobante);
+         }
+       }
       $concom=$concom + 1;
 
       if ($mensajeuno=="" && $msjuno=="" && $msjdos=="")
@@ -2117,6 +2180,10 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
         $this->tags=Herramientas::autocompleteAjax('REFCOM','Cpcompro','Refcom',$this->getRequestParameter('refere'));
       }
     }
+    else  if ($this->getRequestParameter('ajax')=='7')
+    {
+      $this->tags=Herramientas::autocompleteAjax('CODMOTANU','Tsmotanu','Codmotanu',$this->getRequestParameter('opordpag[codmotanu]'));
+    }
   }
 
   public function setVars()
@@ -2173,6 +2240,13 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
    $numord=$this->getRequestParameter('numord');
    $fecemi=$this->getRequestParameter('fecemi');
    $this->compadic=$this->getRequestParameter('compadic');
+   $q= new Criteria();
+    $regi= OpdefempPeer::doSelectOne($q);
+    if ($regi)
+    {
+      $this->tienemot=$regi->getOrdmotanu();
+    }else $this->tienemot="";
+
 
    $dateFormat = new sfDateFormat('es_VE');
    $fec = $dateFormat->format($fecemi, 'i', $dateFormat->getInputPattern('d'));
@@ -2189,6 +2263,7 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
     $numord=$this->getRequestParameter('numord');
     $fecanu=$this->getRequestParameter('fecanu');
     $desanu=$this->getRequestParameter('desanu');
+    $codmotanu=$this->getRequestParameter('codmotanu');
     $compadic=$this->getRequestParameter('compadic');
     $this->msg='';
     $this->msg2='';
@@ -2272,7 +2347,9 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
          OrdendePago::eliminarOPP($numord);
          if (checkdate(intval($fecha_aux[1]),intval($fecha_aux[0]),intval($fecha_aux[2])))
          { $resul->setFecanu($fec);}
+         $resul->setCodmotanu($codmotanu);
          $resul->setDesanu($desanu);
+         $resul->setUsuanu($this->getUser()->getAttribute('loguse'));
          $resul->setStatus('A');
          $resul->save();
 

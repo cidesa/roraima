@@ -200,6 +200,10 @@ $this->Bitacora('Guardo');
     {
       $this->cadefart->setSolreqapr($cadefart['solreqapr']);
     }
+    if (isset($cadefart['gencorart']))
+    {
+      $this->cadefart->setGencorart($cadefart['gencorart']);
+    }
 
   }
 

@@ -471,32 +471,58 @@ $this->Bitacora('Guardo');
         $longmas=strlen($this->mascaraarticulo = Herramientas::ObtenerFormato('Cadefart','Forart'));
         $lonart=strlen($this->getRequestParameter('codigo'));
 
-        $articulo= New Caregart();
-        $articulo->setCodart($this->getRequestParameter('codigo'));
-        $articulo->setTipo($tipo);
-        $hayerr=Articulos::validarCodart($articulo,"N");
-        if ($hayerr!=-1)
+        $a= new Criteria();
+        $result= CadefartPeer::doSelectOne($a);
+        if ($result)
         {
-          $menserr = Herramientas::obtenerMensajeError($hayerr);
-          $menserr=H::cambiarAcentosaHtml($menserr);
-          $javascript="alert('".$menserr."');$('caregart_codart').value='';habilitartodo();$('caregart_codart').focus()";
-        }
-        else
-        {
-          $javascript="";
-          if ($lonart<$longmas)
-          {
-            $javascript="deshabil();";
-            $deshabilitar='S';
-          }
-          else
-          {
-            $javascript="habilitartodo();";
-            $deshabilitar='N';
-          }
-      }
+          $genera=$result->getGencorart();
+        }else $genera="";
+
+
+	        $articulo= New Caregart();
+	        $articulo->setCodart($this->getRequestParameter('codigo'));
+	        $articulo->setTipo($tipo);
+	        $hayerr=Articulos::validarCodart($articulo,"N");
+	        if ($hayerr!=-1)
+	        {
+	          $menserr = Herramientas::obtenerMensajeError($hayerr);
+	          $menserr=H::cambiarAcentosaHtml($menserr);
+	          $javascript="alert('".$menserr."');$('caregart_codart').value='';habilitartodo();$('caregart_codart').focus()";
+	        }
+	        else
+	        {
+	          $javascript="";
+	          if ($genera!="S")
+              {
+		          if ($lonart<$longmas)
+		          {
+		            $javascript="deshabil();";
+		            $deshabilitar='S';
+		          }
+		          else
+		          {
+		            $javascript="habilitartodo();";
+		            $deshabilitar='N';
+		          }
+	         }
+		     else
+		     {
+		     	Herramientas::formarCodigoPadre($this->getRequestParameter('codigo'),&$nivelcodigo,&$ultimo,$this->mascaraarticulo);
+		     	  if ($ultimo=="")
+		          {
+		            $javascript="deshabil();";
+		            $deshabilitar='S';
+		          }
+		          else
+		          {
+		            $javascript="habilitartodo();";
+		            $deshabilitar='N';
+		          }
+		     }
+	        }
+
           $output = '[["javascript","'.$javascript.'",""],["'.$cajtexmos.'","'.$deshabilitar.'",""]]';
-            $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+          $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
           return sfView::HEADER_ONLY;
       }//else  if ($this->getRequestParameter('ajax')=='4')
       else  if ($this->getRequestParameter('ajax')=='5')

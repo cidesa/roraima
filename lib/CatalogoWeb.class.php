@@ -5416,6 +5416,7 @@ A.CODREDE"
     );
   }
 
+
   public function Almregpro_Optipret($params = array ())
   {
     $this->c= new Criteria();
@@ -5439,6 +5440,7 @@ A.CODREDE"
       CatcarterPeer :: DESTER => 'Descripción'
     );
   }
+
 }
 
 ?>

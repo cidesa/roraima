@@ -381,6 +381,11 @@ class Orden_compra
                   else
                       $grid['costo'] = "0.00";
 
+                  if ($result[$i]['canreq']>0 && $result[$i]['costo']>0)
+                      $grid['cancost'] = $result[$i]['canreq'] * $result[$i]['costo'];
+                  else
+                      $grid['cancost'] = "0.00";
+
                   if ($result[$i]['mondes']>0)
                       $grid['mondes'] = $result[$i]['mondes'];
                   else
@@ -876,17 +881,17 @@ class Orden_compra
     //print $referencia;
     if ($referencia==0) // para saber de que tabla me lo estoy trayendo
     {
-      $campo11='rgoart';//tabla Caartord
-      $campo10='dtoart';//tabla Caartord
+      $campo12='rgoart';//tabla Caartord
+      $campo11='dtoart';//tabla Caartord
       $campo9='preart';//tabla Caartord
-      $campo12='totart';//tabla Caartord
+      $campo13='totart';//tabla Caartord
     }
     else
     {
-      $campo11='monrgo';//tabla Caartsol
-      $campo10='dondes';//tabla Caartsol
+      $campo12='monrgo';//tabla Caartsol
+      $campo11='dondes';//tabla Caartsol
       $campo9='costo';//tabla Caartsol
-      $campo12='montot';//tabla Caartsol
+      $campo13='montot';//tabla Caartsol
     }
     $mitotal = 0;
     $codigo_presupuestario='';
@@ -901,15 +906,15 @@ class Orden_compra
             if (str_replace("'","",$grid_detalle_orden_arreglos[$fila]['codpre'])==str_replace("'","",$grid_detalle_orden_arreglos[$j]['codpre']))
             {
               if ($tiporec=='C')
-                $elmonto=str_replace("'","",$grid_detalle_orden_arreglos[$j][$campo12]);
+                $elmonto=str_replace("'","",$grid_detalle_orden_arreglos[$j][$campo13]);
               else
-                $elmonto=($grid_detalle_orden_arreglos[$j][$campo12]-$grid_detalle_orden_arreglos[$j][$campo11]);
+                $elmonto=($grid_detalle_orden_arreglos[$j][$campo13]-$grid_detalle_orden_arreglos[$j][$campo12]);
               $mitotal=$mitotal+$elmonto;
             }
               $j++;
           }
         if ($caordcom->getId()!='')
-           $mitotal = $mitotal - $grid_detalle_orden_arreglos[$fila][$campo10];
+           $mitotal = $mitotal - $grid_detalle_orden_arreglos[$fila][$campo11];
 
         if ($grid_detalle_orden_arreglos[$fila]['codpre']!='')
         {
@@ -1442,14 +1447,14 @@ class Orden_compra
     else
     {
       $c= new Criteria();
-          $c->add(CaordcomPeer::ORDCOM,$caordcom->getOrdcom());
-          $caordcom_mod= CaordcomPeer::doSelectOne($c);
-          if (count($caordcom_mod)>0)
-          {
-            $caordcom_mod->setDesord($caordcom->getDesord());
-            $caordcom_mod->setNotord($caordcom->getNotord());
-            $caordcom_mod->save();
-          }
+      $c->add(CaordcomPeer::ORDCOM,$caordcom->getOrdcom());
+      $caordcom_mod= CaordcomPeer::doSelectOne($c);
+      if (count($caordcom_mod)>0)
+      {
+        $caordcom_mod->setDesord($caordcom->getDesord());
+        $caordcom_mod->setNotord($caordcom->getNotord());
+        $caordcom_mod->save();
+      }
       return false;
     }
   }
@@ -2334,6 +2339,359 @@ class Orden_compra
         }
      }
     return $cadena;
+ }
+
+ public static function generarComprobante($caordcom,$grid,$referencia,$total,&$msjuno,&$arrcompro)
+ {
+ 	$codigocuenta="";
+    $tipo="";
+    $des="";
+    $monto="";
+    $codigocuentas="";
+    $tipo1="";
+    $desc="";
+    $monto1="";
+    $codigocuenta2="";
+    $tipo2="";
+    $des2="";
+    $monto2="";
+    $cuentas="";
+    $tipos="";
+    $montos="";
+    $descr="";
+    $msjuno="";
+
+    $numerocomprob= '########';
+    if (($caordcom->getTipord()=='S') || ($caordcom->getTipord()=='T'))
+      $tipord='corser';
+    else
+      $tipord='corcom';
+
+    if (Herramientas::getVerCorrelativo($tipord,'cacorrel',&$r))
+    {
+      if ($caordcom->getOrdcom()=='########')
+      {
+        $encontrado=false;
+        while (!$encontrado)
+        {
+          $numero=str_pad($r, 8, '0', STR_PAD_LEFT);
+          if (($caordcom->getTipord()=='S') || ($caordcom->getTipord()=='T'))
+            $numero='OS'.(substr($numero,2,strlen($numero)));
+          else
+            $numero='OC'.(substr($numero,2,strlen($numero)));
+          $sql="select ordcom from caordcom where ordcom='".$numero."'";
+          if (Herramientas::BuscarDatos($sql,&$result))
+          {
+            $r=$r+1;
+          }
+          else
+          {
+            $encontrado=true;
+           }
+        }//while (!$encontrado)
+       $reftra=str_pad($r, 8, '0', STR_PAD_LEFT);
+      }
+      else
+      {
+        $reftra=str_replace('#','0',$caordcom->getOrdcom());
+        $reftra=str_pad($reftra, 8, '0', STR_PAD_LEFT);
+      }
+    }
+
+    if (($caordcom->getTipord()=='S') || ($caordcom->getTipord()=='T'))
+      $reftra='OS'.substr($reftra, 2, 6);
+    else
+      $reftra='OC'.substr($reftra, 2, 6);
+
+      $x=$grid[0];
+      $j=0;
+      while ($j<count($x))
+      {
+      	$codpre=$x[$j]["codcat"]."-".$x[$j]["codpar"];
+        $c= new Criteria();
+        $c->add(CpdeftitPeer::CODPRE,$codpre);
+        $regis = CpdeftitPeer::doSelectOne($c);
+        if ($regis)
+        {
+          if($regis->getCodcta()!='')
+          {
+            $cuenta=$regis->getCodcta();
+          }else {$cuenta='';}
+
+          $b= new Criteria();
+          $b->add(ContabbPeer::CODCTA,$cuenta);
+          $regis2 = ContabbPeer::doSelectOne($b);
+          if ($regis2)
+          {
+          	if ($referencia==0)
+          	$mont=$x[$j]["totart"];
+          	else $mont=$x[$j]["montot"];
+
+            if ($mont>0)
+            {
+	            $codigocuenta=$regis2->getCodcta();
+	            $tipo='D';
+	            $des="";
+	            $monto=$mont;
+            }
+          }else {
+          	$msjuno='El Código Presupuestario no tiene asociado Codigo Contable válido'; return true;}
+        }
+         if ($j==0)
+         {
+           $codigocuentas=$codigocuenta;
+           $desc=$des;
+           $tipo1=$tipo;
+           $monto1=$monto;
+         }
+         else
+         {
+          $codigocuentas=$codigocuentas.'_'.$codigocuenta;
+          $desc=$desc.'_'.$des;
+          $tipo1=$tipo1.'_'.$tipo;
+          $monto1=$monto1.'_'.$monto;
+          }
+
+        $j++;
+      }
+
+      $catpro=H::getX('rifpro','Caprovee','codcta',$caordcom->getRifpro());
+      $codigocuenta2=$catpro;
+      $tipo2='C';
+      $des2="";
+      $b=$total;
+      $monto2=$b;
+
+      $cuentas=$codigocuenta2.'_'.$codigocuentas;
+      $descr=$des2.'_'.$desc;
+      $tipos=$tipo2.'_'.$tipo1;
+      $montos=$monto2.'_'.$monto1;
+
+      $clscommpro=new Comprobante();
+      $clscommpro->setGrabar("N");
+      $clscommpro->setNumcom($numerocomprob);
+      $clscommpro->setReftra($reftra);
+      $clscommpro->setFectra(date("d/m/Y",strtotime($caordcom->getFecord())));
+      $clscommpro->setDestra($caordcom->getDesord());
+      $clscommpro->setCtas($cuentas);
+      $clscommpro->setDesc($descr);
+      $clscommpro->setMov($tipos);
+      $clscommpro->setMontos($montos);
+      $arrcompro[]=$clscommpro;
+
+      return true;
+ }
+
+ public static function generarComprobanteOrden($caordcom,$total,&$msjuno,&$arrcompro)
+ {
+    $msjuno="";
+    $numerocomprob= '########'; $codigocuenta=""; $codigocuenta2="";
+    $tipo2=""; $tipo=""; $des2=""; $des=""; $monto2=""; $monto="";
+
+    if (($caordcom->getTipord()=='S') || ($caordcom->getTipord()=='T'))
+      $tipord='corser';
+    else
+      $tipord='corcom';
+
+    if (Herramientas::getVerCorrelativo($tipord,'cacorrel',&$r))
+    {
+      if ($caordcom->getOrdcom()=='########')
+      {
+        $encontrado=false;
+        while (!$encontrado)
+        {
+          $numero=str_pad($r, 8, '0', STR_PAD_LEFT);
+          if (($caordcom->getTipord()=='S') || ($caordcom->getTipord()=='T'))
+            $numero='OS'.(substr($numero,2,strlen($numero)));
+          else
+            $numero='OC'.(substr($numero,2,strlen($numero)));
+          $sql="select ordcom from caordcom where ordcom='".$numero."'";
+          if (Herramientas::BuscarDatos($sql,&$result))
+          {
+            $r=$r+1;
+          }
+          else
+          {
+            $encontrado=true;
+           }
+        }//while (!$encontrado)
+       $reftra=str_pad($r, 8, '0', STR_PAD_LEFT);
+      }
+      else
+      {
+        $reftra=str_replace('#','0',$caordcom->getOrdcom());
+        $reftra=str_pad($reftra, 8, '0', STR_PAD_LEFT);
+      }
+    }
+
+    if (($caordcom->getTipord()=='S') || ($caordcom->getTipord()=='T'))
+      $reftra='OS'.substr($reftra, 2, 6);
+    else
+      $reftra='OC'.substr($reftra, 2, 6);
+
+   $afectaproyecto=false;
+   $tipprovee=H::getX('rifpro','Caprovee','tipo',$caordcom->getRifpro());
+   $c= new Criteria();
+   $c->add(CatipproPeer::CODPRO,$caordcom->getTippro());
+   $reg= CatipproPeer::doSelectOne($c);
+   if ($reg)
+   {
+   	 if ($reg->getCtaord()!="" && $reg->getCtaper()!="")
+   	 {
+   	   $ctaproyord=$reg->getCtaord();
+   	   $ctaproyper=$reg->getCtaper();
+   	   $afectaproyecto=true;
+   	 }
+   	 else
+     {
+   	  $afectaproyecto=false;
+     }
+   }
+
+   if ($afectaproyecto==true)
+   {
+   	  $b= new Criteria();
+   	  $b->add(ContabbPeer::CODCTA,$ctaproyord);
+   	  $registro= ContabbPeer::doSelectOne($b);
+   	  if ($registro)
+   	  {
+        $codigocuenta=$registro->getCodcta();
+        $tipo='D';
+        $des="";
+        $monto=$total;
+   	  }else { $msjuno='El Proyecto "'.$caordcom->getTippro().'" no tiene una Cuenta de Orden válida asociada'; return true;}
+
+   	  $d= new Criteria();
+   	  $d->add(ContabbPeer::CODCTA,$ctaproyper);
+   	  $registro= ContabbPeer::doSelectOne($d);
+   	  if ($registro)
+   	  {
+        $codigocuenta2=$registro->getCodcta();
+        $tipo2='C';
+        $des2="";
+        $monto2=$total;
+
+   	  }else { $msjuno='El Proyecto "'.$caordcom->getTippro().'" no tiene una Cuenta de Percontra válida asociada'; return true;}
+   }
+   else
+   {
+     $b= new Criteria();
+     $b->add(OpbenefiPeer::CEDRIF,$caordcom->getRifpro());
+     $reg= OpbenefiPeer::doSelectOne($b);
+     if ($reg)
+     {
+       if ($caordcom->getTipord()!="S") //Orden de Compra
+       {
+       	 if ($tipprovee!="C") //Proveedor
+       	 {
+       	 	if (!is_null($reg->getCodord()))
+       	 	{
+       	 	  $cuenta=$reg->getCodord();
+       	 	}else $cuenta='';
+       	 }
+       	 else //contratista
+       	 {
+           if (!is_null($reg->getCodordadi()))
+       	 	{
+       	 	  $cuenta=$reg->getCodordadi();
+       	 	}else $cuenta='';
+       	 }
+       }
+       else  //Orden de Servicio u otra
+       {
+         if ($tipprovee!="C") //Proveedor
+       	 {
+       	 	if (!is_null($reg->getCodordadi()))
+       	 	{
+       	 	  $cuenta=$reg->getCodordadi();
+       	 	}else $cuenta='';
+       	 }
+       	 else //contratista
+       	 {
+           if (!is_null($reg->getCodord()))
+       	 	{
+       	 	  $cuenta=$reg->getCodord();
+       	 	}else $cuenta='';
+       	 }
+       }
+
+      $b= new Criteria();
+   	  $b->add(ContabbPeer::CODCTA,$cuenta);
+   	  $registro= ContabbPeer::doSelectOne($b);
+   	  if ($registro)
+   	  {
+        $codigocuenta=$registro->getCodcta();
+        $tipo='D';
+        $des="";
+        $monto=$total;
+   	  }else { $msjuno='El Beneficiario "'.$caordcom->getRifpro().'" no tiene una Cuenta de Orden válida asociada'; return true;}
+
+      if ($caordcom->getTipord()!="S") //Orden de Compra
+      {
+       	 if ($tipprovee!="C") //Proveedor
+       	 {
+       	 	if (!is_null($reg->getCodpercon()))
+       	 	{
+       	 	  $cuenta2=$reg->getCodpercon();
+       	 	}else $cuenta2='';
+       	 }
+       	 else //contratista
+       	 {
+           if (!is_null($reg->getCodperconadi()))
+       	 	{
+       	 	  $cuenta2=$reg->getCodperconadi();
+       	 	}else $cuenta2='';
+       	 }
+       }
+       else  //Orden de Servicio u otra
+       {
+         if ($tipprovee!="C") //Proveedor
+       	 {
+       	 	if (!is_null($reg->getCodperconadi()))
+       	 	{
+       	 	  $cuenta2=$reg->getCodperconadi();
+       	 	}else $cuenta2='';
+       	 }
+       	 else //contratista
+       	 {
+           if (!is_null($reg->getCodpercon()))
+       	 	{
+       	 	  $cuenta2=$reg->getCodpercon();
+       	 	}else $cuenta2='';
+       	 }
+       }
+
+      $d= new Criteria();
+   	  $d->add(ContabbPeer::CODCTA,$cuenta2);
+   	  $registro= ContabbPeer::doSelectOne($d);
+   	  if ($registro)
+   	  {
+        $codigocuenta2=$registro->getCodcta();
+        $tipo2='C';
+        $des2="";
+        $monto2=$total;
+   	  }else { $msjuno='El Beneficiario "'.$caordcom->getRifpro().'" no tiene una Cuenta Percontra válida asociada'; return true;}
+     }
+   }
+
+    $cuentas=$codigocuenta2.'_'.$codigocuenta;
+    $tipos=$tipo2.'_'.$tipo;
+    $descr=$des2.'_'.$des;
+    $montos=$monto2.'_'.$monto;
+
+    $clscommpro=new Comprobante();
+    $clscommpro->setGrabar("N");
+    $clscommpro->setNumcom($numerocomprob);
+    $clscommpro->setReftra($reftra);
+    $clscommpro->setFectra(date("d/m/Y",strtotime($caordcom->getFecord())));
+    $clscommpro->setDestra($caordcom->getDesord());
+    $clscommpro->setCtas($cuentas);
+    $clscommpro->setDesc($descr);
+    $clscommpro->setMov($tipos);
+    $clscommpro->setMontos($montos);
+    $arrcompro[]=$clscommpro;
+
+    return true;
  }
 
 }// fin

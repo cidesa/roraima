@@ -1397,14 +1397,14 @@ class Tesoreria {
     $fec2 = $dateFormat->format($fecha2, 'i', $dateFormat->getInputPattern('d'));
     if ($mayormenor=='>')
     {
-    if ($fec1 > $fec2)
-  {
-    return true;
-  }
-  else
-  {
-    return false;
-  }
+	  if ($fec1 > $fec2)
+	  {
+	    return true;
+	  }
+	  else
+	  {
+	    return false;
+	  }
     }
     else if ($mayormenor=='<')
     {
@@ -1506,8 +1506,7 @@ class Tesoreria {
    	else return "00000000";
    }
 
-
-   public static function chequear_disponibilidad_financiera($banco='',$monto=0, $fechad='',$fechah='',&$saldo)
+  public static function chequear_disponibilidad_financiera($banco='',$monto=0, $fechad='',$fechah='',&$saldo)
   {
     $saldo = Tesoreria::Monto_disponible_financiero($banco,$fechad,$fechah);
     $saldo=round($saldo,2);
