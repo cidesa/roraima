@@ -1042,6 +1042,7 @@ End Function*/
 
   public static function AguinaldosFracionados($codnom,$codemp,$fecegr,$ultimosueldo,$totarr,$estaliquidado)
   {
+  	   $arr=array();
 	   if (!$estaliquidado && $totarr>0)
 	   {  #NO ESTA LIQUIDADO
 	   	  #Primero verificamos cuantos meses cumplidos trabajados tiene el trabajador en el año 
