@@ -13,7 +13,7 @@ abstract class BaseNpasiempcontPeer {
 	const CLASS_DEFAULT = 'lib.model.Npasiempcont';
 
 	
-	const NUM_COLUMNS = 8;
+	const NUM_COLUMNS = 9;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -41,6 +41,9 @@ abstract class BaseNpasiempcontPeer {
 	const FECHAS = 'npasiempcont.FECHAS';
 
 	
+	const STATUS = 'npasiempcont.STATUS';
+
+	
 	const ID = 'npasiempcont.ID';
 
 	
@@ -49,18 +52,18 @@ abstract class BaseNpasiempcontPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codtipcon', 'Codnom', 'Codemp', 'Nomemp', 'Feccal', 'Fecdes', 'Fechas', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (NpasiempcontPeer::CODTIPCON, NpasiempcontPeer::CODNOM, NpasiempcontPeer::CODEMP, NpasiempcontPeer::NOMEMP, NpasiempcontPeer::FECCAL, NpasiempcontPeer::FECDES, NpasiempcontPeer::FECHAS, NpasiempcontPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codtipcon', 'codnom', 'codemp', 'nomemp', 'feccal', 'fecdes', 'fechas', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
+		BasePeer::TYPE_PHPNAME => array ('Codtipcon', 'Codnom', 'Codemp', 'Nomemp', 'Feccal', 'Fecdes', 'Fechas', 'Status', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (NpasiempcontPeer::CODTIPCON, NpasiempcontPeer::CODNOM, NpasiempcontPeer::CODEMP, NpasiempcontPeer::NOMEMP, NpasiempcontPeer::FECCAL, NpasiempcontPeer::FECDES, NpasiempcontPeer::FECHAS, NpasiempcontPeer::STATUS, NpasiempcontPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codtipcon', 'codnom', 'codemp', 'nomemp', 'feccal', 'fecdes', 'fechas', 'status', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codtipcon' => 0, 'Codnom' => 1, 'Codemp' => 2, 'Nomemp' => 3, 'Feccal' => 4, 'Fecdes' => 5, 'Fechas' => 6, 'Id' => 7, ),
-		BasePeer::TYPE_COLNAME => array (NpasiempcontPeer::CODTIPCON => 0, NpasiempcontPeer::CODNOM => 1, NpasiempcontPeer::CODEMP => 2, NpasiempcontPeer::NOMEMP => 3, NpasiempcontPeer::FECCAL => 4, NpasiempcontPeer::FECDES => 5, NpasiempcontPeer::FECHAS => 6, NpasiempcontPeer::ID => 7, ),
-		BasePeer::TYPE_FIELDNAME => array ('codtipcon' => 0, 'codnom' => 1, 'codemp' => 2, 'nomemp' => 3, 'feccal' => 4, 'fecdes' => 5, 'fechas' => 6, 'id' => 7, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
+		BasePeer::TYPE_PHPNAME => array ('Codtipcon' => 0, 'Codnom' => 1, 'Codemp' => 2, 'Nomemp' => 3, 'Feccal' => 4, 'Fecdes' => 5, 'Fechas' => 6, 'Status' => 7, 'Id' => 8, ),
+		BasePeer::TYPE_COLNAME => array (NpasiempcontPeer::CODTIPCON => 0, NpasiempcontPeer::CODNOM => 1, NpasiempcontPeer::CODEMP => 2, NpasiempcontPeer::NOMEMP => 3, NpasiempcontPeer::FECCAL => 4, NpasiempcontPeer::FECDES => 5, NpasiempcontPeer::FECHAS => 6, NpasiempcontPeer::STATUS => 7, NpasiempcontPeer::ID => 8, ),
+		BasePeer::TYPE_FIELDNAME => array ('codtipcon' => 0, 'codnom' => 1, 'codemp' => 2, 'nomemp' => 3, 'feccal' => 4, 'fecdes' => 5, 'fechas' => 6, 'status' => 7, 'id' => 8, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
 	);
 
 	
@@ -127,6 +130,8 @@ abstract class BaseNpasiempcontPeer {
 		$criteria->addSelectColumn(NpasiempcontPeer::FECDES);
 
 		$criteria->addSelectColumn(NpasiempcontPeer::FECHAS);
+
+		$criteria->addSelectColumn(NpasiempcontPeer::STATUS);
 
 		$criteria->addSelectColumn(NpasiempcontPeer::ID);
 

@@ -142,12 +142,44 @@ public static function Grabar_grid_Npasiempcont($grid,$npasiempcont_new)
 		  {
 		  	    if($x[$i]["check"]=='1')
 		  	    {
+		  	    	if($x[$i]["status"]=='')
+					{   $status='A';
+						$c = new Criteria();
+						$c->add(NpasiempcontPeer::CODEMP,$x[$i]["codemp"]);
+						$c->add(NpasiempcontPeer::CODTIPCON,$x[$i]["codtipcon2"]);
+						$per = NpasiempcontPeer::doselectOne($c);
+						if($per)
+						{
+							$npasiempcont2 = NpasiempcontPeer::retrieveByPk($per->getId());
+							$sql="select to_char((to_date('".$x[$i]["fecdes"]."','yyyy-mm-dd')-1),'yyyy-mm-dd') as fecha;";
+							$resp = Herramientas::BuscarDatos($sql,&$r);
+							if($resp)
+								$npasiempcont2->setFechas($r[0]['fecha']);					
+							else
+								$npasiempcont2->setFechas($x[$i]["fecdes"]);
+					    	$npasiempcont2->setStatus('I');			
+							$npasiempcont2->save();
+						}	
+					}else
+					{						
+						if($x[$i]["codtipcon2"]=='')
+						{
+							$status='A';
+						}else
+						{
+							$status=$x[$i]["status"];
+						}
+					}
+					
 		  	    	$npasiempcont = new Npasiempcont();
 				    $npasiempcont->setCodtipcon($npasiempcont_new->getCodtipcon());
 				    $npasiempcont->setCodnom($x[$i]["codnom"]);
 				    $npasiempcont->setCodemp($x[$i]["codemp"]);
 				    $npasiempcont->setNomemp($x[$i]["nomemp"]);
 				    $npasiempcont->setFeccal($x[$i]["feccal"]);
+					$npasiempcont->setFecdes($x[$i]["fecdes"]);
+				    $npasiempcont->setFechas($x[$i]["fechas"]);					
+				    $npasiempcont->setStatus($status);	
 				    $npasiempcont->save();
 		  	    }
 	            $i++;
@@ -404,6 +436,20 @@ public static function Validar_Datos_Npasiempcont($grid)
                     	   $val =411;
                     	   break;
                     }
+				  if($y[$j]["check"]=='1')
+				  {
+				  	if ($y[$j]["fecdes"]==' ')
+	                    {
+	                    	   $val =411;
+	                    	   break;
+	                    }
+					if ($y[$j]["fechas"]==' ')
+	                    {
+	                    	   $val =411;
+	                    	   break;
+	                    }		
+				   }	
+				  
                    	$dato1=$y[$j]["codemp"];
                	   	$k=0;
                	   	foreach ($z as $n)
