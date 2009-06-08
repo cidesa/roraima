@@ -65,6 +65,31 @@
 <div class="form-row">
 <table>
  <tr>
+ <th>
+ <fieldset id="sf_fieldset_none" class="">
+    <legend><strong><?php echo  __('Tipo de Persona:') ?></strong></legend>
+    <div class="form-row">
+   <?
+if ($caprovee->getNitpro()=='J')  {
+  ?><?php echo radiobutton_tag('caprovee[nitpro]', 'J', true, array('onClick' => 'colocaletra(this.value);'))."Jurídica".'<br> <br>';
+      echo radiobutton_tag('caprovee[nitpro]', 'N', false, array('onClick' => 'colocaletra(this.value);'))."Natural".'<br> <br>';
+      echo radiobutton_tag('caprovee[nitpro]', 'G', false, array('onClick' => 'colocaletra(this.value);'))."Gubernamental".'<br> <br>';  ?>
+
+<? }else if ($caprovee->getNitpro()=='N'){?>
+  <?php echo radiobutton_tag('caprovee[nitpro]', 'J', false, array('onClick' => 'colocaletra(this.value);'))."Jurídica".'<br> <br>';
+  echo radiobutton_tag('caprovee[nitpro]', 'N', true, array('onClick' => 'colocaletra(this.value);'))."Natural".'<br> <br>';
+  echo radiobutton_tag('caprovee[nitpro]', 'G', false, array('onClick' => 'colocaletra(this.value);'))."Gubernamental".'<br> <br>';?>
+
+<? } else { ?>
+    <?php echo radiobutton_tag('caprovee[nitpro]', 'J', false, array('onClick' => 'colocaletra(this.value);'))."Jurídica".'<br> <br>';
+    echo radiobutton_tag('caprovee[nitpro]', 'N', false, array('onClick' => 'colocaletra(this.value);'))."Natural".'<br> <br>';
+  echo radiobutton_tag('caprovee[nitpro]', 'G', false, array('onClick' => 'colocaletra(this.value);'))."Gubernamental".'<br> <br>';  ?>
+  <? } ?>
+ </div> </fieldset>
+ </th>
+   <th>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </th>
   <th>
   <?php echo label_for('caprovee[rifpro]', __($labels['caprovee{rifpro}']), 'class="required" ') ?>
   <div
@@ -80,21 +105,6 @@
     'onBlur'  => "javascript: validarRif(this.id)",
   )); echo $value ? $value : '&nbsp;' ?>
     </div>
-  </th>
-  <th>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  </th>
-  <th>
-  <?php echo label_for('caprovee[nitpro]', __($labels['caprovee{nitpro}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('caprovee{nitpro}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('caprovee{nitpro}')): ?> <?php echo form_error('caprovee{nitpro}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($caprovee, 'getNitpro', array (
-    'size' => 15,
-     'maxlength' => 15,
-    'control_name' => 'caprovee[nitpro]',
-  )); echo $value ? $value : '&nbsp;' ?></div>
   </th>
  </tr>
 </table>
