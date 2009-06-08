@@ -315,7 +315,7 @@ class nomdefespprimasActions extends autonomdefespprimasActions
 		  }
 		  $r++;
 		}
-    }else return false;
+    }else return true;
 //print $this->coderr; exit;
    if ($this->coderr== -1)
      return true;
