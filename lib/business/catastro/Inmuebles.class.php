@@ -6,9 +6,9 @@ class Inmuebles {
   {
 	try{
   	$clasemodelo->save();
-  	if (self::GrabarPersonas($clasemodelo, $gridpersonas)!=-1) return 0;
-  	if (self::GrabarConstruccion($clasemodelo, $gridconstruccion)!=-1) return 0;
-  	if (self::GrabarTerreno($clasemodelo, $gridterreno)!=-1) return 0;
+  	if (self::GrabarPersonas($clasemodelo, $gridpersonas)!=-1) return 8881;
+  	if (self::GrabarConstruccion($clasemodelo, $gridconstruccion)!=-1) return 8882;
+  	if (self::GrabarTerreno($clasemodelo, $gridterreno)!=-1) return 8883;
 
   	return -1;
   /*  $c = new Criteria();
@@ -85,7 +85,7 @@ exit();
 	  }
 		return -1;
 	} catch (Exception $ex){
-		//echo $ex;exit();
+		echo $ex;exit();
 		 return 0;
 	}
 

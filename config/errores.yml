@@ -674,16 +674,16 @@
   msj: Faltan datos en el Grid Antiguedad
 465:
   cod: 465
-  msj: Si selecciona Fideicomiso debe ingresar la fecha desde  
+  msj: Si selecciona Fideicomiso debe ingresar la fecha desde
 466:
   cod: 466
   msj: Grid Prima por  Hijos Incompleto, faltan datos
 467:
   cod: 467
-  msj: Grid Prima Profesionalización Incompleto, faltan datos  
+  msj: Grid Prima Profesionalización Incompleto, faltan datos
 468:
   cod: 468
-  msj: Grid Prima Cargo Calateral Incompleto, faltan datos    
+  msj: Grid Prima Cargo Calateral Incompleto, faltan datos
 ###############OBRAS################
 1000:
     cod: 1000
@@ -1030,3 +1030,13 @@
 1804:
   cod: 1804
   msj:  No se puede eliminar debido a que el Movimiento según Libro esta conciliado o el Comprobante esta actualizado.
+############ Catastro #########
+8881:
+  cod: 8881
+  msj:  Error al Grabar las Personas
+8882:
+  cod: 8882
+  msj:  Error al Grabar las Construcciones
+8883:
+  cod: 8883
+  msj:  Error al Grabar los Terrenos

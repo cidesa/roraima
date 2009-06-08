@@ -25,15 +25,11 @@ abstract class BaseCatman extends BaseObject  implements Persistent {
 
 
 	
-	protected $tiplinnor;
-
-
-	
 	protected $cattramonor_id;
 
 
 	
-	protected $tiplinsur;
+	protected $tiplinnor_id;
 
 
 	
@@ -41,7 +37,7 @@ abstract class BaseCatman extends BaseObject  implements Persistent {
 
 
 	
-	protected $tiplinest;
+	protected $tiplinsur_id;
 
 
 	
@@ -49,11 +45,15 @@ abstract class BaseCatman extends BaseObject  implements Persistent {
 
 
 	
-	protected $tiplinoes;
+	protected $tiplinest_id;
 
 
 	
 	protected $cattramooes_id;
+
+
+	
+	protected $tiplinoes_id;
 
 	
 	protected $aCatdivgeo;
@@ -62,13 +62,25 @@ abstract class BaseCatman extends BaseObject  implements Persistent {
 	protected $aCattramoRelatedByCattramonorId;
 
 	
+	protected $aCattipviaRelatedByTiplinnorId;
+
+	
 	protected $aCattramoRelatedByCattramosurId;
+
+	
+	protected $aCattipviaRelatedByTiplinsurId;
 
 	
 	protected $aCattramoRelatedByCattramoestId;
 
 	
+	protected $aCattipviaRelatedByTiplinestId;
+
+	
 	protected $aCattramoRelatedByCattramooesId;
+
+	
+	protected $aCattipviaRelatedByTiplinoesId;
 
 	
 	protected $collCatreginms;
@@ -117,13 +129,6 @@ abstract class BaseCatman extends BaseObject  implements Persistent {
 
   }
   
-  public function getTiplinnor()
-  {
-
-    return trim($this->tiplinnor);
-
-  }
-  
   public function getCattramonorId()
   {
 
@@ -131,10 +136,10 @@ abstract class BaseCatman extends BaseObject  implements Persistent {
 
   }
   
-  public function getTiplinsur()
+  public function getTiplinnorId()
   {
 
-    return trim($this->tiplinsur);
+    return $this->tiplinnor_id;
 
   }
   
@@ -145,10 +150,10 @@ abstract class BaseCatman extends BaseObject  implements Persistent {
 
   }
   
-  public function getTiplinest()
+  public function getTiplinsurId()
   {
 
-    return trim($this->tiplinest);
+    return $this->tiplinsur_id;
 
   }
   
@@ -159,10 +164,10 @@ abstract class BaseCatman extends BaseObject  implements Persistent {
 
   }
   
-  public function getTiplinoes()
+  public function getTiplinestId()
   {
 
-    return trim($this->tiplinoes);
+    return $this->tiplinest_id;
 
   }
   
@@ -170,6 +175,13 @@ abstract class BaseCatman extends BaseObject  implements Persistent {
   {
 
     return $this->cattramooes_id;
+
+  }
+  
+  public function getTiplinoesId()
+  {
+
+    return $this->tiplinoes_id;
 
   }
 	
@@ -217,16 +229,6 @@ abstract class BaseCatman extends BaseObject  implements Persistent {
   
 	} 
 	
-	public function setTiplinnor($v)
-	{
-
-    if ($this->tiplinnor !== $v) {
-        $this->tiplinnor = $v;
-        $this->modifiedColumns[] = CatmanPeer::TIPLINNOR;
-      }
-  
-	} 
-	
 	public function setCattramonorId($v)
 	{
 
@@ -241,14 +243,18 @@ abstract class BaseCatman extends BaseObject  implements Persistent {
 
 	} 
 	
-	public function setTiplinsur($v)
+	public function setTiplinnorId($v)
 	{
 
-    if ($this->tiplinsur !== $v) {
-        $this->tiplinsur = $v;
-        $this->modifiedColumns[] = CatmanPeer::TIPLINSUR;
+    if ($this->tiplinnor_id !== $v) {
+        $this->tiplinnor_id = $v;
+        $this->modifiedColumns[] = CatmanPeer::TIPLINNOR_ID;
       }
   
+		if ($this->aCattipviaRelatedByTiplinnorId !== null && $this->aCattipviaRelatedByTiplinnorId->getId() !== $v) {
+			$this->aCattipviaRelatedByTiplinnorId = null;
+		}
+
 	} 
 	
 	public function setCattramosurId($v)
@@ -265,14 +271,18 @@ abstract class BaseCatman extends BaseObject  implements Persistent {
 
 	} 
 	
-	public function setTiplinest($v)
+	public function setTiplinsurId($v)
 	{
 
-    if ($this->tiplinest !== $v) {
-        $this->tiplinest = $v;
-        $this->modifiedColumns[] = CatmanPeer::TIPLINEST;
+    if ($this->tiplinsur_id !== $v) {
+        $this->tiplinsur_id = $v;
+        $this->modifiedColumns[] = CatmanPeer::TIPLINSUR_ID;
       }
   
+		if ($this->aCattipviaRelatedByTiplinsurId !== null && $this->aCattipviaRelatedByTiplinsurId->getId() !== $v) {
+			$this->aCattipviaRelatedByTiplinsurId = null;
+		}
+
 	} 
 	
 	public function setCattramoestId($v)
@@ -289,14 +299,18 @@ abstract class BaseCatman extends BaseObject  implements Persistent {
 
 	} 
 	
-	public function setTiplinoes($v)
+	public function setTiplinestId($v)
 	{
 
-    if ($this->tiplinoes !== $v) {
-        $this->tiplinoes = $v;
-        $this->modifiedColumns[] = CatmanPeer::TIPLINOES;
+    if ($this->tiplinest_id !== $v) {
+        $this->tiplinest_id = $v;
+        $this->modifiedColumns[] = CatmanPeer::TIPLINEST_ID;
       }
   
+		if ($this->aCattipviaRelatedByTiplinestId !== null && $this->aCattipviaRelatedByTiplinestId->getId() !== $v) {
+			$this->aCattipviaRelatedByTiplinestId = null;
+		}
+
 	} 
 	
 	public function setCattramooesId($v)
@@ -309,6 +323,20 @@ abstract class BaseCatman extends BaseObject  implements Persistent {
   
 		if ($this->aCattramoRelatedByCattramooesId !== null && $this->aCattramoRelatedByCattramooesId->getId() !== $v) {
 			$this->aCattramoRelatedByCattramooesId = null;
+		}
+
+	} 
+	
+	public function setTiplinoesId($v)
+	{
+
+    if ($this->tiplinoes_id !== $v) {
+        $this->tiplinoes_id = $v;
+        $this->modifiedColumns[] = CatmanPeer::TIPLINOES_ID;
+      }
+  
+		if ($this->aCattipviaRelatedByTiplinoesId !== null && $this->aCattipviaRelatedByTiplinoesId->getId() !== $v) {
+			$this->aCattipviaRelatedByTiplinoesId = null;
 		}
 
 	} 
@@ -325,21 +353,21 @@ abstract class BaseCatman extends BaseObject  implements Persistent {
 
       $this->aliman = $rs->getString($startcol + 3);
 
-      $this->tiplinnor = $rs->getString($startcol + 4);
+      $this->cattramonor_id = $rs->getInt($startcol + 4);
 
-      $this->cattramonor_id = $rs->getInt($startcol + 5);
+      $this->tiplinnor_id = $rs->getInt($startcol + 5);
 
-      $this->tiplinsur = $rs->getString($startcol + 6);
+      $this->cattramosur_id = $rs->getInt($startcol + 6);
 
-      $this->cattramosur_id = $rs->getInt($startcol + 7);
+      $this->tiplinsur_id = $rs->getInt($startcol + 7);
 
-      $this->tiplinest = $rs->getString($startcol + 8);
+      $this->cattramoest_id = $rs->getInt($startcol + 8);
 
-      $this->cattramoest_id = $rs->getInt($startcol + 9);
+      $this->tiplinest_id = $rs->getInt($startcol + 9);
 
-      $this->tiplinoes = $rs->getString($startcol + 10);
+      $this->cattramooes_id = $rs->getInt($startcol + 10);
 
-      $this->cattramooes_id = $rs->getInt($startcol + 11);
+      $this->tiplinoes_id = $rs->getInt($startcol + 11);
 
       $this->resetModified();
 
@@ -439,11 +467,25 @@ abstract class BaseCatman extends BaseObject  implements Persistent {
 				$this->setCattramoRelatedByCattramonorId($this->aCattramoRelatedByCattramonorId);
 			}
 
+			if ($this->aCattipviaRelatedByTiplinnorId !== null) {
+				if ($this->aCattipviaRelatedByTiplinnorId->isModified()) {
+					$affectedRows += $this->aCattipviaRelatedByTiplinnorId->save($con);
+				}
+				$this->setCattipviaRelatedByTiplinnorId($this->aCattipviaRelatedByTiplinnorId);
+			}
+
 			if ($this->aCattramoRelatedByCattramosurId !== null) {
 				if ($this->aCattramoRelatedByCattramosurId->isModified()) {
 					$affectedRows += $this->aCattramoRelatedByCattramosurId->save($con);
 				}
 				$this->setCattramoRelatedByCattramosurId($this->aCattramoRelatedByCattramosurId);
+			}
+
+			if ($this->aCattipviaRelatedByTiplinsurId !== null) {
+				if ($this->aCattipviaRelatedByTiplinsurId->isModified()) {
+					$affectedRows += $this->aCattipviaRelatedByTiplinsurId->save($con);
+				}
+				$this->setCattipviaRelatedByTiplinsurId($this->aCattipviaRelatedByTiplinsurId);
 			}
 
 			if ($this->aCattramoRelatedByCattramoestId !== null) {
@@ -453,11 +495,25 @@ abstract class BaseCatman extends BaseObject  implements Persistent {
 				$this->setCattramoRelatedByCattramoestId($this->aCattramoRelatedByCattramoestId);
 			}
 
+			if ($this->aCattipviaRelatedByTiplinestId !== null) {
+				if ($this->aCattipviaRelatedByTiplinestId->isModified()) {
+					$affectedRows += $this->aCattipviaRelatedByTiplinestId->save($con);
+				}
+				$this->setCattipviaRelatedByTiplinestId($this->aCattipviaRelatedByTiplinestId);
+			}
+
 			if ($this->aCattramoRelatedByCattramooesId !== null) {
 				if ($this->aCattramoRelatedByCattramooesId->isModified()) {
 					$affectedRows += $this->aCattramoRelatedByCattramooesId->save($con);
 				}
 				$this->setCattramoRelatedByCattramooesId($this->aCattramoRelatedByCattramooesId);
+			}
+
+			if ($this->aCattipviaRelatedByTiplinoesId !== null) {
+				if ($this->aCattipviaRelatedByTiplinoesId->isModified()) {
+					$affectedRows += $this->aCattipviaRelatedByTiplinoesId->save($con);
+				}
+				$this->setCattipviaRelatedByTiplinoesId($this->aCattipviaRelatedByTiplinoesId);
 			}
 
 
@@ -537,9 +593,21 @@ abstract class BaseCatman extends BaseObject  implements Persistent {
 				}
 			}
 
+			if ($this->aCattipviaRelatedByTiplinnorId !== null) {
+				if (!$this->aCattipviaRelatedByTiplinnorId->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aCattipviaRelatedByTiplinnorId->getValidationFailures());
+				}
+			}
+
 			if ($this->aCattramoRelatedByCattramosurId !== null) {
 				if (!$this->aCattramoRelatedByCattramosurId->validate($columns)) {
 					$failureMap = array_merge($failureMap, $this->aCattramoRelatedByCattramosurId->getValidationFailures());
+				}
+			}
+
+			if ($this->aCattipviaRelatedByTiplinsurId !== null) {
+				if (!$this->aCattipviaRelatedByTiplinsurId->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aCattipviaRelatedByTiplinsurId->getValidationFailures());
 				}
 			}
 
@@ -549,9 +617,21 @@ abstract class BaseCatman extends BaseObject  implements Persistent {
 				}
 			}
 
+			if ($this->aCattipviaRelatedByTiplinestId !== null) {
+				if (!$this->aCattipviaRelatedByTiplinestId->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aCattipviaRelatedByTiplinestId->getValidationFailures());
+				}
+			}
+
 			if ($this->aCattramoRelatedByCattramooesId !== null) {
 				if (!$this->aCattramoRelatedByCattramooesId->validate($columns)) {
 					$failureMap = array_merge($failureMap, $this->aCattramoRelatedByCattramooesId->getValidationFailures());
+				}
+			}
+
+			if ($this->aCattipviaRelatedByTiplinoesId !== null) {
+				if (!$this->aCattipviaRelatedByTiplinoesId->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aCattipviaRelatedByTiplinoesId->getValidationFailures());
 				}
 			}
 
@@ -608,28 +688,28 @@ abstract class BaseCatman extends BaseObject  implements Persistent {
 				return $this->getAliman();
 				break;
 			case 4:
-				return $this->getTiplinnor();
-				break;
-			case 5:
 				return $this->getCattramonorId();
 				break;
-			case 6:
-				return $this->getTiplinsur();
+			case 5:
+				return $this->getTiplinnorId();
 				break;
-			case 7:
+			case 6:
 				return $this->getCattramosurId();
 				break;
-			case 8:
-				return $this->getTiplinest();
+			case 7:
+				return $this->getTiplinsurId();
 				break;
-			case 9:
+			case 8:
 				return $this->getCattramoestId();
 				break;
+			case 9:
+				return $this->getTiplinestId();
+				break;
 			case 10:
-				return $this->getTiplinoes();
+				return $this->getCattramooesId();
 				break;
 			case 11:
-				return $this->getCattramooesId();
+				return $this->getTiplinoesId();
 				break;
 			default:
 				return null;
@@ -645,14 +725,14 @@ abstract class BaseCatman extends BaseObject  implements Persistent {
 			$keys[1] => $this->getCatdivgeoId(),
 			$keys[2] => $this->getNomman(),
 			$keys[3] => $this->getAliman(),
-			$keys[4] => $this->getTiplinnor(),
-			$keys[5] => $this->getCattramonorId(),
-			$keys[6] => $this->getTiplinsur(),
-			$keys[7] => $this->getCattramosurId(),
-			$keys[8] => $this->getTiplinest(),
-			$keys[9] => $this->getCattramoestId(),
-			$keys[10] => $this->getTiplinoes(),
-			$keys[11] => $this->getCattramooesId(),
+			$keys[4] => $this->getCattramonorId(),
+			$keys[5] => $this->getTiplinnorId(),
+			$keys[6] => $this->getCattramosurId(),
+			$keys[7] => $this->getTiplinsurId(),
+			$keys[8] => $this->getCattramoestId(),
+			$keys[9] => $this->getTiplinestId(),
+			$keys[10] => $this->getCattramooesId(),
+			$keys[11] => $this->getTiplinoesId(),
 		);
 		return $result;
 	}
@@ -681,28 +761,28 @@ abstract class BaseCatman extends BaseObject  implements Persistent {
 				$this->setAliman($value);
 				break;
 			case 4:
-				$this->setTiplinnor($value);
-				break;
-			case 5:
 				$this->setCattramonorId($value);
 				break;
-			case 6:
-				$this->setTiplinsur($value);
+			case 5:
+				$this->setTiplinnorId($value);
 				break;
-			case 7:
+			case 6:
 				$this->setCattramosurId($value);
 				break;
-			case 8:
-				$this->setTiplinest($value);
+			case 7:
+				$this->setTiplinsurId($value);
 				break;
-			case 9:
+			case 8:
 				$this->setCattramoestId($value);
 				break;
+			case 9:
+				$this->setTiplinestId($value);
+				break;
 			case 10:
-				$this->setTiplinoes($value);
+				$this->setCattramooesId($value);
 				break;
 			case 11:
-				$this->setCattramooesId($value);
+				$this->setTiplinoesId($value);
 				break;
 		} 	}
 
@@ -715,14 +795,14 @@ abstract class BaseCatman extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[1], $arr)) $this->setCatdivgeoId($arr[$keys[1]]);
 		if (array_key_exists($keys[2], $arr)) $this->setNomman($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setAliman($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setTiplinnor($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setCattramonorId($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setTiplinsur($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setCattramosurId($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setTiplinest($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setCattramoestId($arr[$keys[9]]);
-		if (array_key_exists($keys[10], $arr)) $this->setTiplinoes($arr[$keys[10]]);
-		if (array_key_exists($keys[11], $arr)) $this->setCattramooesId($arr[$keys[11]]);
+		if (array_key_exists($keys[4], $arr)) $this->setCattramonorId($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setTiplinnorId($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setCattramosurId($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setTiplinsurId($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setCattramoestId($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setTiplinestId($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setCattramooesId($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setTiplinoesId($arr[$keys[11]]);
 	}
 
 	
@@ -734,14 +814,14 @@ abstract class BaseCatman extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CatmanPeer::CATDIVGEO_ID)) $criteria->add(CatmanPeer::CATDIVGEO_ID, $this->catdivgeo_id);
 		if ($this->isColumnModified(CatmanPeer::NOMMAN)) $criteria->add(CatmanPeer::NOMMAN, $this->nomman);
 		if ($this->isColumnModified(CatmanPeer::ALIMAN)) $criteria->add(CatmanPeer::ALIMAN, $this->aliman);
-		if ($this->isColumnModified(CatmanPeer::TIPLINNOR)) $criteria->add(CatmanPeer::TIPLINNOR, $this->tiplinnor);
 		if ($this->isColumnModified(CatmanPeer::CATTRAMONOR_ID)) $criteria->add(CatmanPeer::CATTRAMONOR_ID, $this->cattramonor_id);
-		if ($this->isColumnModified(CatmanPeer::TIPLINSUR)) $criteria->add(CatmanPeer::TIPLINSUR, $this->tiplinsur);
+		if ($this->isColumnModified(CatmanPeer::TIPLINNOR_ID)) $criteria->add(CatmanPeer::TIPLINNOR_ID, $this->tiplinnor_id);
 		if ($this->isColumnModified(CatmanPeer::CATTRAMOSUR_ID)) $criteria->add(CatmanPeer::CATTRAMOSUR_ID, $this->cattramosur_id);
-		if ($this->isColumnModified(CatmanPeer::TIPLINEST)) $criteria->add(CatmanPeer::TIPLINEST, $this->tiplinest);
+		if ($this->isColumnModified(CatmanPeer::TIPLINSUR_ID)) $criteria->add(CatmanPeer::TIPLINSUR_ID, $this->tiplinsur_id);
 		if ($this->isColumnModified(CatmanPeer::CATTRAMOEST_ID)) $criteria->add(CatmanPeer::CATTRAMOEST_ID, $this->cattramoest_id);
-		if ($this->isColumnModified(CatmanPeer::TIPLINOES)) $criteria->add(CatmanPeer::TIPLINOES, $this->tiplinoes);
+		if ($this->isColumnModified(CatmanPeer::TIPLINEST_ID)) $criteria->add(CatmanPeer::TIPLINEST_ID, $this->tiplinest_id);
 		if ($this->isColumnModified(CatmanPeer::CATTRAMOOES_ID)) $criteria->add(CatmanPeer::CATTRAMOOES_ID, $this->cattramooes_id);
+		if ($this->isColumnModified(CatmanPeer::TIPLINOES_ID)) $criteria->add(CatmanPeer::TIPLINOES_ID, $this->tiplinoes_id);
 
 		return $criteria;
 	}
@@ -778,21 +858,21 @@ abstract class BaseCatman extends BaseObject  implements Persistent {
 
 		$copyObj->setAliman($this->aliman);
 
-		$copyObj->setTiplinnor($this->tiplinnor);
-
 		$copyObj->setCattramonorId($this->cattramonor_id);
 
-		$copyObj->setTiplinsur($this->tiplinsur);
+		$copyObj->setTiplinnorId($this->tiplinnor_id);
 
 		$copyObj->setCattramosurId($this->cattramosur_id);
 
-		$copyObj->setTiplinest($this->tiplinest);
+		$copyObj->setTiplinsurId($this->tiplinsur_id);
 
 		$copyObj->setCattramoestId($this->cattramoest_id);
 
-		$copyObj->setTiplinoes($this->tiplinoes);
+		$copyObj->setTiplinestId($this->tiplinest_id);
 
 		$copyObj->setCattramooesId($this->cattramooes_id);
+
+		$copyObj->setTiplinoesId($this->tiplinoes_id);
 
 
 		if ($deepCopy) {
@@ -890,6 +970,35 @@ abstract class BaseCatman extends BaseObject  implements Persistent {
 	}
 
 	
+	public function setCattipviaRelatedByTiplinnorId($v)
+	{
+
+
+		if ($v === null) {
+			$this->setTiplinnorId(NULL);
+		} else {
+			$this->setTiplinnorId($v->getId());
+		}
+
+
+		$this->aCattipviaRelatedByTiplinnorId = $v;
+	}
+
+
+	
+	public function getCattipviaRelatedByTiplinnorId($con = null)
+	{
+		if ($this->aCattipviaRelatedByTiplinnorId === null && ($this->tiplinnor_id !== null)) {
+						include_once 'lib/model/catastro/om/BaseCattipviaPeer.php';
+
+			$this->aCattipviaRelatedByTiplinnorId = CattipviaPeer::retrieveByPK($this->tiplinnor_id, $con);
+
+			
+		}
+		return $this->aCattipviaRelatedByTiplinnorId;
+	}
+
+	
 	public function setCattramoRelatedByCattramosurId($v)
 	{
 
@@ -916,6 +1025,35 @@ abstract class BaseCatman extends BaseObject  implements Persistent {
 			
 		}
 		return $this->aCattramoRelatedByCattramosurId;
+	}
+
+	
+	public function setCattipviaRelatedByTiplinsurId($v)
+	{
+
+
+		if ($v === null) {
+			$this->setTiplinsurId(NULL);
+		} else {
+			$this->setTiplinsurId($v->getId());
+		}
+
+
+		$this->aCattipviaRelatedByTiplinsurId = $v;
+	}
+
+
+	
+	public function getCattipviaRelatedByTiplinsurId($con = null)
+	{
+		if ($this->aCattipviaRelatedByTiplinsurId === null && ($this->tiplinsur_id !== null)) {
+						include_once 'lib/model/catastro/om/BaseCattipviaPeer.php';
+
+			$this->aCattipviaRelatedByTiplinsurId = CattipviaPeer::retrieveByPK($this->tiplinsur_id, $con);
+
+			
+		}
+		return $this->aCattipviaRelatedByTiplinsurId;
 	}
 
 	
@@ -948,6 +1086,35 @@ abstract class BaseCatman extends BaseObject  implements Persistent {
 	}
 
 	
+	public function setCattipviaRelatedByTiplinestId($v)
+	{
+
+
+		if ($v === null) {
+			$this->setTiplinestId(NULL);
+		} else {
+			$this->setTiplinestId($v->getId());
+		}
+
+
+		$this->aCattipviaRelatedByTiplinestId = $v;
+	}
+
+
+	
+	public function getCattipviaRelatedByTiplinestId($con = null)
+	{
+		if ($this->aCattipviaRelatedByTiplinestId === null && ($this->tiplinest_id !== null)) {
+						include_once 'lib/model/catastro/om/BaseCattipviaPeer.php';
+
+			$this->aCattipviaRelatedByTiplinestId = CattipviaPeer::retrieveByPK($this->tiplinest_id, $con);
+
+			
+		}
+		return $this->aCattipviaRelatedByTiplinestId;
+	}
+
+	
 	public function setCattramoRelatedByCattramooesId($v)
 	{
 
@@ -974,6 +1141,35 @@ abstract class BaseCatman extends BaseObject  implements Persistent {
 			
 		}
 		return $this->aCattramoRelatedByCattramooesId;
+	}
+
+	
+	public function setCattipviaRelatedByTiplinoesId($v)
+	{
+
+
+		if ($v === null) {
+			$this->setTiplinoesId(NULL);
+		} else {
+			$this->setTiplinoesId($v->getId());
+		}
+
+
+		$this->aCattipviaRelatedByTiplinoesId = $v;
+	}
+
+
+	
+	public function getCattipviaRelatedByTiplinoesId($con = null)
+	{
+		if ($this->aCattipviaRelatedByTiplinoesId === null && ($this->tiplinoes_id !== null)) {
+						include_once 'lib/model/catastro/om/BaseCattipviaPeer.php';
+
+			$this->aCattipviaRelatedByTiplinoesId = CattipviaPeer::retrieveByPK($this->tiplinoes_id, $con);
+
+			
+		}
+		return $this->aCattipviaRelatedByTiplinoesId;
 	}
 
 	

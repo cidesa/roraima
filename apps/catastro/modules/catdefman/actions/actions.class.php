@@ -11,17 +11,24 @@
 class catdefmanActions extends autocatdefmanActions
 {
 
-  public function executeCombo()
+  public function executeCombo($codigo='')
   {
 	if ($this->getRequestParameter('opcion')=='1')
 	{
 		 $codigo    = $this->getRequestParameter('codigo');
-		 $catdivgeo = $this->getRequestParameter('catdivgeo');
+		 $catdivgeo = $this->getRequestParameter('catdivgeo',$codigo);
 
 		$tablas=array('cattramo');//areglo de los joins de las tablas
 		$filtros_tablas=array('cattipvia_id','catdivgeo_id');//arreglo donde mando los filtros de las clases
 		$filtros_variales=array($codigo, $catdivgeo);//arreglo donde mando los parametros de la funcion
 		$campos_retornados=array('id','nomtramo');// arreglos donde me traigo el nombre y el codigo
+
+		$tablas=array('Cattipvia');//areglo de los joins de las tablas
+		$filtros_tablas=array('');//arreglo donde mando los filtros de las clases
+		$filtros_variales=array('');//arreglo donde mando los parametros de la funcion
+		$campos_retornados=array('id','desvia');// arreglos donde me traigo el nombre y el codigo
+
+
 		$this->tipo= H::Cargarcombo($tablas,$filtros_tablas,$filtros_variales,$campos_retornados);
 		$this->lindero='N';
 
@@ -33,6 +40,12 @@ class catdefmanActions extends autocatdefmanActions
 		$filtros_tablas=array('cattipvia_id','catdivgeo_id');//arreglo donde mando los filtros de las clases
 		$filtros_variales=array($codigo, $catdivgeo);//arreglo donde mando los parametros de la funcion
 		$campos_retornados=array('id','nomtramo');// arreglos donde me traigo el nombre y el codigo
+
+		$tablas=array('Cattipvia');//areglo de los joins de las tablas
+		$filtros_tablas=array('');//arreglo donde mando los filtros de las clases
+		$filtros_variales=array('');//arreglo donde mando los parametros de la funcion
+		$campos_retornados=array('id','desvia');// arreglos donde me traigo el nombre y el codigo
+
 		$this->tipo= H::Cargarcombo($tablas,$filtros_tablas,$filtros_variales,$campos_retornados);
 		$this->lindero='S';
 
@@ -44,6 +57,12 @@ class catdefmanActions extends autocatdefmanActions
 		$filtros_tablas=array('cattipvia_id','catdivgeo_id');//arreglo donde mando los filtros de las clases
 		$filtros_variales=array($codigo, $catdivgeo);//arreglo donde mando los parametros de la funcion
 		$campos_retornados=array('id','nomtramo');// arreglos donde me traigo el nombre y el codigo
+
+		$tablas=array('Cattipvia');//areglo de los joins de las tablas
+		$filtros_tablas=array('');//arreglo donde mando los filtros de las clases
+		$filtros_variales=array('');//arreglo donde mando los parametros de la funcion
+		$campos_retornados=array('id','desvia');// arreglos donde me traigo el nombre y el codigo
+
 		$this->tipo= H::Cargarcombo($tablas,$filtros_tablas,$filtros_variales,$campos_retornados);
 		$this->lindero='E';
 
@@ -55,6 +74,12 @@ class catdefmanActions extends autocatdefmanActions
 		$filtros_tablas=array('cattipvia_id','catdivgeo_id');//arreglo donde mando los filtros de las clases
 		$filtros_variales=array($codigo, $catdivgeo);//arreglo donde mando los parametros de la funcion
 		$campos_retornados=array('id','nomtramo');// arreglos donde me traigo el nombre y el codigo
+
+		$tablas=array('Cattipvia');//areglo de los joins de las tablas
+		$filtros_tablas=array('');//arreglo donde mando los filtros de las clases
+		$filtros_variales=array('');//arreglo donde mando los parametros de la funcion
+		$campos_retornados=array('id','desvia');// arreglos donde me traigo el nombre y el codigo
+
 		$this->tipo= H::Cargarcombo($tablas,$filtros_tablas,$filtros_variales,$campos_retornados);
 		$this->lindero='O';
 
@@ -137,7 +162,8 @@ class catdefmanActions extends autocatdefmanActions
   public function executeAjax()
   {
 
-    $codigo = $this->getRequestParameter('codigo','');
+     $this->codigo = $this->getRequestParameter('codigo','');
+     //$this->id1 = $this->getRequestParameter('id','');
     // Esta variable ajax debe ser usada en cada llamado para identificar
     // que objeto hace el llamado y por consiguiente ejecutar el código necesario
     $ajax = $this->getRequestParameter('ajax','');
@@ -148,9 +174,10 @@ class catdefmanActions extends autocatdefmanActions
 
     switch ($ajax){
       case '1':
-        // La variable $output es usada para retornar datos en formato de arreglo para actualizar
-        // objetos en la vista. mas informacion en
-        // http://201.210.211.26:8080/www/wiki/index.php/Agregar_Ajax_para_buscar_una_descripcion
+        $this->catman = $this->getCatmanOrCreate();
+        $this->updateCatmanFromRequest();
+        $this->labels = $this->getLabels();
+        $this->params=array();
         $output = '[["","",""],["","",""],["","",""]]';
         break;
       default:
@@ -162,7 +189,7 @@ class catdefmanActions extends autocatdefmanActions
 
     // Si solo se va usar ajax para actualziar datos en objetos ya existentes se debe
     // mantener habilitar esta instrucción
-    return sfView::HEADER_ONLY;
+    //return sfView::HEADER_ONLY;
 
     // Si por el contrario se quiere reemplazar un div en la vista, se debe deshabilitar
     // por supuesto tomando en cuenta que debe existir el archivo ajaxSuccess.php en la carpeta templates.
@@ -224,8 +251,8 @@ class catdefmanActions extends autocatdefmanActions
   public function saving($clasemodelo)
   {
   	//echo $clasemodelo->getCattramonorId()."55";
-  //	H::printR($clasemodelo);
-  //	exit();
+  	//H::printR($clasemodelo);
+  	//exit();
     return parent::saving($clasemodelo);
   }
 

@@ -83,7 +83,7 @@ CREATE TABLE "catcarconinm"
 (
   "catreginm_id" INTEGER,
   "catcarcon_id" INTEGER,
-  "cancar" NUMERIC(4,2)  NOT NULL,
+  "cancar" NUMERIC(6,2)  NOT NULL,
   "metare" NUMERIC(12,2)  NOT NULL,
   "id" INTEGER  NOT NULL DEFAULT nextval('catcarconinm_seq'::regclass),
   PRIMARY KEY ("id")
@@ -360,14 +360,14 @@ CREATE TABLE "catman"
   "catdivgeo_id" INTEGER,
   "nomman" VARCHAR(50),
   "aliman" VARCHAR(50),
-  "tiplinnor" VARCHAR(1),
   "cattramonor_id" INTEGER,
-  "tiplinsur" VARCHAR(1),
+  "tiplinnor_id" INTEGER,
   "cattramosur_id" INTEGER,
-  "tiplinest" VARCHAR(1),
+  "tiplinsur_id" INTEGER,
   "cattramoest_id" INTEGER,
-  "tiplinoes" VARCHAR(1),
+  "tiplinest_id" INTEGER,
   "cattramooes_id" INTEGER,
+  "tiplinoes_id" INTEGER,
   PRIMARY KEY ("id")
 );
 
@@ -378,11 +378,19 @@ ALTER TABLE "catman" ADD CONSTRAINT "catman_FK_1" FOREIGN KEY ("catdivgeo_id") R
 
 ALTER TABLE "catman" ADD CONSTRAINT "catman_FK_2" FOREIGN KEY ("cattramonor_id") REFERENCES "cattramo" ("id");
 
-ALTER TABLE "catman" ADD CONSTRAINT "catman_FK_3" FOREIGN KEY ("cattramosur_id") REFERENCES "cattramo" ("id");
+ALTER TABLE "catman" ADD CONSTRAINT "catman_FK_3" FOREIGN KEY ("tiplinnor_id") REFERENCES "cattipvia" ("id");
 
-ALTER TABLE "catman" ADD CONSTRAINT "catman_FK_4" FOREIGN KEY ("cattramoest_id") REFERENCES "cattramo" ("id");
+ALTER TABLE "catman" ADD CONSTRAINT "catman_FK_4" FOREIGN KEY ("cattramosur_id") REFERENCES "cattramo" ("id");
 
-ALTER TABLE "catman" ADD CONSTRAINT "catman_FK_5" FOREIGN KEY ("cattramooes_id") REFERENCES "cattramo" ("id");
+ALTER TABLE "catman" ADD CONSTRAINT "catman_FK_5" FOREIGN KEY ("tiplinsur_id") REFERENCES "cattipvia" ("id");
+
+ALTER TABLE "catman" ADD CONSTRAINT "catman_FK_6" FOREIGN KEY ("cattramoest_id") REFERENCES "cattramo" ("id");
+
+ALTER TABLE "catman" ADD CONSTRAINT "catman_FK_7" FOREIGN KEY ("tiplinest_id") REFERENCES "cattipvia" ("id");
+
+ALTER TABLE "catman" ADD CONSTRAINT "catman_FK_8" FOREIGN KEY ("cattramooes_id") REFERENCES "cattramo" ("id");
+
+ALTER TABLE "catman" ADD CONSTRAINT "catman_FK_9" FOREIGN KEY ("tiplinoes_id") REFERENCES "cattipvia" ("id");
 
 -----------------------------------------------------------------------------
 -- catmun
@@ -609,6 +617,10 @@ CREATE TABLE "catreginm"
   "nomarccro" VARCHAR(254),
   "oficom" VARCHAR(3),
   "fotinm" VARCHAR(100),
+  "lineste" VARCHAR(1000),
+  "linnor" VARCHAR(1000),
+  "linoes" VARCHAR(1000),
+  "linsur" VARCHAR(1000),
   "id" INTEGER  NOT NULL DEFAULT nextval('catreginm_seq'::regclass),
   PRIMARY KEY ("id")
 );

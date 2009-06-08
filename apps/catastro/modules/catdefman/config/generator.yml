@@ -4,20 +4,21 @@ generator:
     model_class:      Catman
     theme:            cidesaGenerator
     fields:
-      coddivgeo:    { name: Codigo, params: size=32}
-      catdivgeo:    { name: Division Geografico, params: size=32}
-      catdivgeo_id:     { name: Division Geografica, params: size=32}
+      coddivgeo:      { name: Codigo, params: size=32}
+      catdivgeo:      { name: Division Geografico, params: size=32}
+      catdivgeo_id:   { name: Division Geografica, params: size=32}
       nomman:         { name: Manzana, params: size=50 maxlength=50}
       aliman:         { name: Alias, params: size=50 maxlength=50}
 
-      tiplinnor:    { name: Norte, params: include_custom= "Seleccione"}
-      cattramonor_id:{ name: Tipo}
-      tiplinsur:    { name: Sur, params: include_custom= "Seleccione"}
-      cattramosur_id:        { name: Tipo}
-      tiplinest:    { name: Este, params: include_custom= "Seleccione"}
-      cattramoest_id:        { name: Tipo}
-      tiplinoes:    { name: Oeste, params: include_custom= "Seleccione"}
-      cattramooes_id:        { name: Tipo}
+      cattramonor_id: { name: Norte, params: include_custom= "Seleccione"}
+      tiplinnor_id:      { name: Tipo}
+      cattramosur_id: { name: Sur, params: include_custom= "Seleccione"}
+      tiplinsur_id:      { name: Tipo}
+      cattramoest_id: { name: Este, params: include_custom= "Seleccione"}
+      tiplinest_id:      { name: Tipo}
+      cattramooes_id: { name: Oeste, params: include_custom= "Seleccione"}
+      tiplinoes_id:      { name: Tipo}
+      linderos:      { name: .}
 
     list:
       title:     Definicion de la Manzana
@@ -36,7 +37,10 @@ generator:
       title:     Definicion de la Manzana
       display:
         NONE:     [ _catdivgeo_id, nomman, aliman]
-        Linderos de la Manzana: [ _tiplinnor, _cattramonor_id, _tiplinsur, _cattramosur_id, _tiplinest, _cattramoest_id, _tiplinoes, _cattramooes_id]
+        #Linderos de la Manzana: [_linderos]
+        #[ _cattramonor_id, _tiplinnor, _cattramosur_id, _tiplinsur, _cattramoest_id, _tiplinest, _cattramooes_id, _tiplinoes]
+        #Linderos de la Manzana: [ _cattramonor_id, tiplinnor_id, cattramosur_id, tiplinsur_id, cattramoest_id, tiplinest_id, cattramooes_id, tiplinoes_id]
+        Linderos de la Manzana: [ _linderos]
       actions:
         _list:        ~
         _save:        ~

@@ -1070,6 +1070,146 @@ abstract class BaseCattramo extends BaseObject  implements Persistent {
 		return $this->collCatmansRelatedByCattramonorId;
 	}
 
+
+	
+	public function getCatmansRelatedByCattramonorIdJoinCattipviaRelatedByTiplinnorId($criteria = null, $con = null)
+	{
+				include_once 'lib/model/catastro/om/BaseCatmanPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCatmansRelatedByCattramonorId === null) {
+			if ($this->isNew()) {
+				$this->collCatmansRelatedByCattramonorId = array();
+			} else {
+
+				$criteria->add(CatmanPeer::CATTRAMONOR_ID, $this->getId());
+
+				$this->collCatmansRelatedByCattramonorId = CatmanPeer::doSelectJoinCattipviaRelatedByTiplinnorId($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(CatmanPeer::CATTRAMONOR_ID, $this->getId());
+
+			if (!isset($this->lastCatmanRelatedByCattramonorIdCriteria) || !$this->lastCatmanRelatedByCattramonorIdCriteria->equals($criteria)) {
+				$this->collCatmansRelatedByCattramonorId = CatmanPeer::doSelectJoinCattipviaRelatedByTiplinnorId($criteria, $con);
+			}
+		}
+		$this->lastCatmanRelatedByCattramonorIdCriteria = $criteria;
+
+		return $this->collCatmansRelatedByCattramonorId;
+	}
+
+
+	
+	public function getCatmansRelatedByCattramonorIdJoinCattipviaRelatedByTiplinsurId($criteria = null, $con = null)
+	{
+				include_once 'lib/model/catastro/om/BaseCatmanPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCatmansRelatedByCattramonorId === null) {
+			if ($this->isNew()) {
+				$this->collCatmansRelatedByCattramonorId = array();
+			} else {
+
+				$criteria->add(CatmanPeer::CATTRAMONOR_ID, $this->getId());
+
+				$this->collCatmansRelatedByCattramonorId = CatmanPeer::doSelectJoinCattipviaRelatedByTiplinsurId($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(CatmanPeer::CATTRAMONOR_ID, $this->getId());
+
+			if (!isset($this->lastCatmanRelatedByCattramonorIdCriteria) || !$this->lastCatmanRelatedByCattramonorIdCriteria->equals($criteria)) {
+				$this->collCatmansRelatedByCattramonorId = CatmanPeer::doSelectJoinCattipviaRelatedByTiplinsurId($criteria, $con);
+			}
+		}
+		$this->lastCatmanRelatedByCattramonorIdCriteria = $criteria;
+
+		return $this->collCatmansRelatedByCattramonorId;
+	}
+
+
+	
+	public function getCatmansRelatedByCattramonorIdJoinCattipviaRelatedByTiplinestId($criteria = null, $con = null)
+	{
+				include_once 'lib/model/catastro/om/BaseCatmanPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCatmansRelatedByCattramonorId === null) {
+			if ($this->isNew()) {
+				$this->collCatmansRelatedByCattramonorId = array();
+			} else {
+
+				$criteria->add(CatmanPeer::CATTRAMONOR_ID, $this->getId());
+
+				$this->collCatmansRelatedByCattramonorId = CatmanPeer::doSelectJoinCattipviaRelatedByTiplinestId($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(CatmanPeer::CATTRAMONOR_ID, $this->getId());
+
+			if (!isset($this->lastCatmanRelatedByCattramonorIdCriteria) || !$this->lastCatmanRelatedByCattramonorIdCriteria->equals($criteria)) {
+				$this->collCatmansRelatedByCattramonorId = CatmanPeer::doSelectJoinCattipviaRelatedByTiplinestId($criteria, $con);
+			}
+		}
+		$this->lastCatmanRelatedByCattramonorIdCriteria = $criteria;
+
+		return $this->collCatmansRelatedByCattramonorId;
+	}
+
+
+	
+	public function getCatmansRelatedByCattramonorIdJoinCattipviaRelatedByTiplinoesId($criteria = null, $con = null)
+	{
+				include_once 'lib/model/catastro/om/BaseCatmanPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCatmansRelatedByCattramonorId === null) {
+			if ($this->isNew()) {
+				$this->collCatmansRelatedByCattramonorId = array();
+			} else {
+
+				$criteria->add(CatmanPeer::CATTRAMONOR_ID, $this->getId());
+
+				$this->collCatmansRelatedByCattramonorId = CatmanPeer::doSelectJoinCattipviaRelatedByTiplinoesId($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(CatmanPeer::CATTRAMONOR_ID, $this->getId());
+
+			if (!isset($this->lastCatmanRelatedByCattramonorIdCriteria) || !$this->lastCatmanRelatedByCattramonorIdCriteria->equals($criteria)) {
+				$this->collCatmansRelatedByCattramonorId = CatmanPeer::doSelectJoinCattipviaRelatedByTiplinoesId($criteria, $con);
+			}
+		}
+		$this->lastCatmanRelatedByCattramonorIdCriteria = $criteria;
+
+		return $this->collCatmansRelatedByCattramonorId;
+	}
+
 	
 	public function initCatmansRelatedByCattramosurId()
 	{
@@ -1168,6 +1308,146 @@ abstract class BaseCattramo extends BaseObject  implements Persistent {
 
 			if (!isset($this->lastCatmanRelatedByCattramosurIdCriteria) || !$this->lastCatmanRelatedByCattramosurIdCriteria->equals($criteria)) {
 				$this->collCatmansRelatedByCattramosurId = CatmanPeer::doSelectJoinCatdivgeo($criteria, $con);
+			}
+		}
+		$this->lastCatmanRelatedByCattramosurIdCriteria = $criteria;
+
+		return $this->collCatmansRelatedByCattramosurId;
+	}
+
+
+	
+	public function getCatmansRelatedByCattramosurIdJoinCattipviaRelatedByTiplinnorId($criteria = null, $con = null)
+	{
+				include_once 'lib/model/catastro/om/BaseCatmanPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCatmansRelatedByCattramosurId === null) {
+			if ($this->isNew()) {
+				$this->collCatmansRelatedByCattramosurId = array();
+			} else {
+
+				$criteria->add(CatmanPeer::CATTRAMOSUR_ID, $this->getId());
+
+				$this->collCatmansRelatedByCattramosurId = CatmanPeer::doSelectJoinCattipviaRelatedByTiplinnorId($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(CatmanPeer::CATTRAMOSUR_ID, $this->getId());
+
+			if (!isset($this->lastCatmanRelatedByCattramosurIdCriteria) || !$this->lastCatmanRelatedByCattramosurIdCriteria->equals($criteria)) {
+				$this->collCatmansRelatedByCattramosurId = CatmanPeer::doSelectJoinCattipviaRelatedByTiplinnorId($criteria, $con);
+			}
+		}
+		$this->lastCatmanRelatedByCattramosurIdCriteria = $criteria;
+
+		return $this->collCatmansRelatedByCattramosurId;
+	}
+
+
+	
+	public function getCatmansRelatedByCattramosurIdJoinCattipviaRelatedByTiplinsurId($criteria = null, $con = null)
+	{
+				include_once 'lib/model/catastro/om/BaseCatmanPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCatmansRelatedByCattramosurId === null) {
+			if ($this->isNew()) {
+				$this->collCatmansRelatedByCattramosurId = array();
+			} else {
+
+				$criteria->add(CatmanPeer::CATTRAMOSUR_ID, $this->getId());
+
+				$this->collCatmansRelatedByCattramosurId = CatmanPeer::doSelectJoinCattipviaRelatedByTiplinsurId($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(CatmanPeer::CATTRAMOSUR_ID, $this->getId());
+
+			if (!isset($this->lastCatmanRelatedByCattramosurIdCriteria) || !$this->lastCatmanRelatedByCattramosurIdCriteria->equals($criteria)) {
+				$this->collCatmansRelatedByCattramosurId = CatmanPeer::doSelectJoinCattipviaRelatedByTiplinsurId($criteria, $con);
+			}
+		}
+		$this->lastCatmanRelatedByCattramosurIdCriteria = $criteria;
+
+		return $this->collCatmansRelatedByCattramosurId;
+	}
+
+
+	
+	public function getCatmansRelatedByCattramosurIdJoinCattipviaRelatedByTiplinestId($criteria = null, $con = null)
+	{
+				include_once 'lib/model/catastro/om/BaseCatmanPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCatmansRelatedByCattramosurId === null) {
+			if ($this->isNew()) {
+				$this->collCatmansRelatedByCattramosurId = array();
+			} else {
+
+				$criteria->add(CatmanPeer::CATTRAMOSUR_ID, $this->getId());
+
+				$this->collCatmansRelatedByCattramosurId = CatmanPeer::doSelectJoinCattipviaRelatedByTiplinestId($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(CatmanPeer::CATTRAMOSUR_ID, $this->getId());
+
+			if (!isset($this->lastCatmanRelatedByCattramosurIdCriteria) || !$this->lastCatmanRelatedByCattramosurIdCriteria->equals($criteria)) {
+				$this->collCatmansRelatedByCattramosurId = CatmanPeer::doSelectJoinCattipviaRelatedByTiplinestId($criteria, $con);
+			}
+		}
+		$this->lastCatmanRelatedByCattramosurIdCriteria = $criteria;
+
+		return $this->collCatmansRelatedByCattramosurId;
+	}
+
+
+	
+	public function getCatmansRelatedByCattramosurIdJoinCattipviaRelatedByTiplinoesId($criteria = null, $con = null)
+	{
+				include_once 'lib/model/catastro/om/BaseCatmanPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCatmansRelatedByCattramosurId === null) {
+			if ($this->isNew()) {
+				$this->collCatmansRelatedByCattramosurId = array();
+			} else {
+
+				$criteria->add(CatmanPeer::CATTRAMOSUR_ID, $this->getId());
+
+				$this->collCatmansRelatedByCattramosurId = CatmanPeer::doSelectJoinCattipviaRelatedByTiplinoesId($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(CatmanPeer::CATTRAMOSUR_ID, $this->getId());
+
+			if (!isset($this->lastCatmanRelatedByCattramosurIdCriteria) || !$this->lastCatmanRelatedByCattramosurIdCriteria->equals($criteria)) {
+				$this->collCatmansRelatedByCattramosurId = CatmanPeer::doSelectJoinCattipviaRelatedByTiplinoesId($criteria, $con);
 			}
 		}
 		$this->lastCatmanRelatedByCattramosurIdCriteria = $criteria;
@@ -1280,6 +1560,146 @@ abstract class BaseCattramo extends BaseObject  implements Persistent {
 		return $this->collCatmansRelatedByCattramoestId;
 	}
 
+
+	
+	public function getCatmansRelatedByCattramoestIdJoinCattipviaRelatedByTiplinnorId($criteria = null, $con = null)
+	{
+				include_once 'lib/model/catastro/om/BaseCatmanPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCatmansRelatedByCattramoestId === null) {
+			if ($this->isNew()) {
+				$this->collCatmansRelatedByCattramoestId = array();
+			} else {
+
+				$criteria->add(CatmanPeer::CATTRAMOEST_ID, $this->getId());
+
+				$this->collCatmansRelatedByCattramoestId = CatmanPeer::doSelectJoinCattipviaRelatedByTiplinnorId($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(CatmanPeer::CATTRAMOEST_ID, $this->getId());
+
+			if (!isset($this->lastCatmanRelatedByCattramoestIdCriteria) || !$this->lastCatmanRelatedByCattramoestIdCriteria->equals($criteria)) {
+				$this->collCatmansRelatedByCattramoestId = CatmanPeer::doSelectJoinCattipviaRelatedByTiplinnorId($criteria, $con);
+			}
+		}
+		$this->lastCatmanRelatedByCattramoestIdCriteria = $criteria;
+
+		return $this->collCatmansRelatedByCattramoestId;
+	}
+
+
+	
+	public function getCatmansRelatedByCattramoestIdJoinCattipviaRelatedByTiplinsurId($criteria = null, $con = null)
+	{
+				include_once 'lib/model/catastro/om/BaseCatmanPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCatmansRelatedByCattramoestId === null) {
+			if ($this->isNew()) {
+				$this->collCatmansRelatedByCattramoestId = array();
+			} else {
+
+				$criteria->add(CatmanPeer::CATTRAMOEST_ID, $this->getId());
+
+				$this->collCatmansRelatedByCattramoestId = CatmanPeer::doSelectJoinCattipviaRelatedByTiplinsurId($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(CatmanPeer::CATTRAMOEST_ID, $this->getId());
+
+			if (!isset($this->lastCatmanRelatedByCattramoestIdCriteria) || !$this->lastCatmanRelatedByCattramoestIdCriteria->equals($criteria)) {
+				$this->collCatmansRelatedByCattramoestId = CatmanPeer::doSelectJoinCattipviaRelatedByTiplinsurId($criteria, $con);
+			}
+		}
+		$this->lastCatmanRelatedByCattramoestIdCriteria = $criteria;
+
+		return $this->collCatmansRelatedByCattramoestId;
+	}
+
+
+	
+	public function getCatmansRelatedByCattramoestIdJoinCattipviaRelatedByTiplinestId($criteria = null, $con = null)
+	{
+				include_once 'lib/model/catastro/om/BaseCatmanPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCatmansRelatedByCattramoestId === null) {
+			if ($this->isNew()) {
+				$this->collCatmansRelatedByCattramoestId = array();
+			} else {
+
+				$criteria->add(CatmanPeer::CATTRAMOEST_ID, $this->getId());
+
+				$this->collCatmansRelatedByCattramoestId = CatmanPeer::doSelectJoinCattipviaRelatedByTiplinestId($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(CatmanPeer::CATTRAMOEST_ID, $this->getId());
+
+			if (!isset($this->lastCatmanRelatedByCattramoestIdCriteria) || !$this->lastCatmanRelatedByCattramoestIdCriteria->equals($criteria)) {
+				$this->collCatmansRelatedByCattramoestId = CatmanPeer::doSelectJoinCattipviaRelatedByTiplinestId($criteria, $con);
+			}
+		}
+		$this->lastCatmanRelatedByCattramoestIdCriteria = $criteria;
+
+		return $this->collCatmansRelatedByCattramoestId;
+	}
+
+
+	
+	public function getCatmansRelatedByCattramoestIdJoinCattipviaRelatedByTiplinoesId($criteria = null, $con = null)
+	{
+				include_once 'lib/model/catastro/om/BaseCatmanPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCatmansRelatedByCattramoestId === null) {
+			if ($this->isNew()) {
+				$this->collCatmansRelatedByCattramoestId = array();
+			} else {
+
+				$criteria->add(CatmanPeer::CATTRAMOEST_ID, $this->getId());
+
+				$this->collCatmansRelatedByCattramoestId = CatmanPeer::doSelectJoinCattipviaRelatedByTiplinoesId($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(CatmanPeer::CATTRAMOEST_ID, $this->getId());
+
+			if (!isset($this->lastCatmanRelatedByCattramoestIdCriteria) || !$this->lastCatmanRelatedByCattramoestIdCriteria->equals($criteria)) {
+				$this->collCatmansRelatedByCattramoestId = CatmanPeer::doSelectJoinCattipviaRelatedByTiplinoesId($criteria, $con);
+			}
+		}
+		$this->lastCatmanRelatedByCattramoestIdCriteria = $criteria;
+
+		return $this->collCatmansRelatedByCattramoestId;
+	}
+
 	
 	public function initCatmansRelatedByCattramooesId()
 	{
@@ -1378,6 +1798,146 @@ abstract class BaseCattramo extends BaseObject  implements Persistent {
 
 			if (!isset($this->lastCatmanRelatedByCattramooesIdCriteria) || !$this->lastCatmanRelatedByCattramooesIdCriteria->equals($criteria)) {
 				$this->collCatmansRelatedByCattramooesId = CatmanPeer::doSelectJoinCatdivgeo($criteria, $con);
+			}
+		}
+		$this->lastCatmanRelatedByCattramooesIdCriteria = $criteria;
+
+		return $this->collCatmansRelatedByCattramooesId;
+	}
+
+
+	
+	public function getCatmansRelatedByCattramooesIdJoinCattipviaRelatedByTiplinnorId($criteria = null, $con = null)
+	{
+				include_once 'lib/model/catastro/om/BaseCatmanPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCatmansRelatedByCattramooesId === null) {
+			if ($this->isNew()) {
+				$this->collCatmansRelatedByCattramooesId = array();
+			} else {
+
+				$criteria->add(CatmanPeer::CATTRAMOOES_ID, $this->getId());
+
+				$this->collCatmansRelatedByCattramooesId = CatmanPeer::doSelectJoinCattipviaRelatedByTiplinnorId($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(CatmanPeer::CATTRAMOOES_ID, $this->getId());
+
+			if (!isset($this->lastCatmanRelatedByCattramooesIdCriteria) || !$this->lastCatmanRelatedByCattramooesIdCriteria->equals($criteria)) {
+				$this->collCatmansRelatedByCattramooesId = CatmanPeer::doSelectJoinCattipviaRelatedByTiplinnorId($criteria, $con);
+			}
+		}
+		$this->lastCatmanRelatedByCattramooesIdCriteria = $criteria;
+
+		return $this->collCatmansRelatedByCattramooesId;
+	}
+
+
+	
+	public function getCatmansRelatedByCattramooesIdJoinCattipviaRelatedByTiplinsurId($criteria = null, $con = null)
+	{
+				include_once 'lib/model/catastro/om/BaseCatmanPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCatmansRelatedByCattramooesId === null) {
+			if ($this->isNew()) {
+				$this->collCatmansRelatedByCattramooesId = array();
+			} else {
+
+				$criteria->add(CatmanPeer::CATTRAMOOES_ID, $this->getId());
+
+				$this->collCatmansRelatedByCattramooesId = CatmanPeer::doSelectJoinCattipviaRelatedByTiplinsurId($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(CatmanPeer::CATTRAMOOES_ID, $this->getId());
+
+			if (!isset($this->lastCatmanRelatedByCattramooesIdCriteria) || !$this->lastCatmanRelatedByCattramooesIdCriteria->equals($criteria)) {
+				$this->collCatmansRelatedByCattramooesId = CatmanPeer::doSelectJoinCattipviaRelatedByTiplinsurId($criteria, $con);
+			}
+		}
+		$this->lastCatmanRelatedByCattramooesIdCriteria = $criteria;
+
+		return $this->collCatmansRelatedByCattramooesId;
+	}
+
+
+	
+	public function getCatmansRelatedByCattramooesIdJoinCattipviaRelatedByTiplinestId($criteria = null, $con = null)
+	{
+				include_once 'lib/model/catastro/om/BaseCatmanPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCatmansRelatedByCattramooesId === null) {
+			if ($this->isNew()) {
+				$this->collCatmansRelatedByCattramooesId = array();
+			} else {
+
+				$criteria->add(CatmanPeer::CATTRAMOOES_ID, $this->getId());
+
+				$this->collCatmansRelatedByCattramooesId = CatmanPeer::doSelectJoinCattipviaRelatedByTiplinestId($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(CatmanPeer::CATTRAMOOES_ID, $this->getId());
+
+			if (!isset($this->lastCatmanRelatedByCattramooesIdCriteria) || !$this->lastCatmanRelatedByCattramooesIdCriteria->equals($criteria)) {
+				$this->collCatmansRelatedByCattramooesId = CatmanPeer::doSelectJoinCattipviaRelatedByTiplinestId($criteria, $con);
+			}
+		}
+		$this->lastCatmanRelatedByCattramooesIdCriteria = $criteria;
+
+		return $this->collCatmansRelatedByCattramooesId;
+	}
+
+
+	
+	public function getCatmansRelatedByCattramooesIdJoinCattipviaRelatedByTiplinoesId($criteria = null, $con = null)
+	{
+				include_once 'lib/model/catastro/om/BaseCatmanPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCatmansRelatedByCattramooesId === null) {
+			if ($this->isNew()) {
+				$this->collCatmansRelatedByCattramooesId = array();
+			} else {
+
+				$criteria->add(CatmanPeer::CATTRAMOOES_ID, $this->getId());
+
+				$this->collCatmansRelatedByCattramooesId = CatmanPeer::doSelectJoinCattipviaRelatedByTiplinoesId($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(CatmanPeer::CATTRAMOOES_ID, $this->getId());
+
+			if (!isset($this->lastCatmanRelatedByCattramooesIdCriteria) || !$this->lastCatmanRelatedByCattramooesIdCriteria->equals($criteria)) {
+				$this->collCatmansRelatedByCattramooesId = CatmanPeer::doSelectJoinCattipviaRelatedByTiplinoesId($criteria, $con);
 			}
 		}
 		$this->lastCatmanRelatedByCattramooesIdCriteria = $criteria;

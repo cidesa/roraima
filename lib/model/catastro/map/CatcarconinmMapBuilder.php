@@ -38,7 +38,7 @@ class CatcarconinmMapBuilder {
 
 		$tMap->addForeignKey('CATCARCON_ID', 'CatcarconId', 'int', CreoleTypes::INTEGER, 'catcarcon', 'ID', false, null);
 
-		$tMap->addColumn('CANCAR', 'Cancar', 'double', CreoleTypes::NUMERIC, true, 4);
+		$tMap->addColumn('CANCAR', 'Cancar', 'double', CreoleTypes::NUMERIC, true, 6);
 
 		$tMap->addColumn('METARE', 'Metare', 'double', CreoleTypes::NUMERIC, true, 12);
 

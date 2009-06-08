@@ -42,21 +42,21 @@ class CatmanMapBuilder {
 
 		$tMap->addColumn('ALIMAN', 'Aliman', 'string', CreoleTypes::VARCHAR, false, 50);
 
-		$tMap->addColumn('TIPLINNOR', 'Tiplinnor', 'string', CreoleTypes::VARCHAR, false, 1);
-
 		$tMap->addForeignKey('CATTRAMONOR_ID', 'CattramonorId', 'int', CreoleTypes::INTEGER, 'cattramo', 'ID', false, null);
 
-		$tMap->addColumn('TIPLINSUR', 'Tiplinsur', 'string', CreoleTypes::VARCHAR, false, 1);
+		$tMap->addForeignKey('TIPLINNOR_ID', 'TiplinnorId', 'int', CreoleTypes::INTEGER, 'cattipvia', 'ID', false, null);
 
 		$tMap->addForeignKey('CATTRAMOSUR_ID', 'CattramosurId', 'int', CreoleTypes::INTEGER, 'cattramo', 'ID', false, null);
 
-		$tMap->addColumn('TIPLINEST', 'Tiplinest', 'string', CreoleTypes::VARCHAR, false, 1);
+		$tMap->addForeignKey('TIPLINSUR_ID', 'TiplinsurId', 'int', CreoleTypes::INTEGER, 'cattipvia', 'ID', false, null);
 
 		$tMap->addForeignKey('CATTRAMOEST_ID', 'CattramoestId', 'int', CreoleTypes::INTEGER, 'cattramo', 'ID', false, null);
 
-		$tMap->addColumn('TIPLINOES', 'Tiplinoes', 'string', CreoleTypes::VARCHAR, false, 1);
+		$tMap->addForeignKey('TIPLINEST_ID', 'TiplinestId', 'int', CreoleTypes::INTEGER, 'cattipvia', 'ID', false, null);
 
 		$tMap->addForeignKey('CATTRAMOOES_ID', 'CattramooesId', 'int', CreoleTypes::INTEGER, 'cattramo', 'ID', false, null);
+
+		$tMap->addForeignKey('TIPLINOES_ID', 'TiplinoesId', 'int', CreoleTypes::INTEGER, 'cattipvia', 'ID', false, null);
 
 	} 
 } 

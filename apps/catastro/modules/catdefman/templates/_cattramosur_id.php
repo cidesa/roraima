@@ -1,12 +1,9 @@
-<?php use_helper('Object', 'Validation', 'ObjectAdmin', 'I18N', 'Date', 'Catalogo') ?>
 
-<div id='divTipoSur'>
-<?php
-$tipo=array();
-	echo
-	select_tag('catman[cattramosurId]', options_for_select(
-	$tipo,
-	$catman->getTiplinsur(),'include_custom=Seleccione Uno')
-	);
-?>
+<div id="linderos">
+  <?php $value = object_select_tag($catman, 'getCattramosurId', array (
+  'related_class' => 'Cattramo',
+  'control_name' => 'catman[cattramosur_id]',
+  'include_custom' => 'Seleccione',
+  'include_blank' => true,
+)); echo $value ? $value : '&nbsp;' ?>
 </div>
