@@ -10,16 +10,16 @@ generator:
       codtipcar: { name: Cod. Tipo Cargo, params: maxlength=3 }
       fecdes:    { name: Vigencia, params: date_format='dd/MM/yyyy'}
     list:
-      title:          Compensación de cargos OCP
+      title:          Tablas de Sueldos por Tipo de Cargos
       filters:        [codtipcar, fecdes]
-      display:        [=codtipcar, gracar]
+      display:        [=codtipcar, fecdes]
       object_actions:
         _edit:        ~
         _delete:      ~
       max_per_page:  8
       codtipcar:    ordcom
     edit:
-      title:          Compensación de cargos OCP
+      title:          Edicion de Tablas de Sueldos por Tipo de Cargos
       display:        [codtipcar, pascar, fecdes, ]
       actions:
         _list:         ~

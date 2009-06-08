@@ -1,0 +1,27 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Nptipcat
+    theme:            cidesaGenerator
+    fields:
+      codtipcat:    { name: Código }
+      destipcat:    { name: Categoria, params: maxlength=100 }
+
+
+    list:
+      title:          Lista de Categorias
+      filters:        [codtipcat, destipcat]
+      display:        [=codtipcat, destipcat]      
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+    edit:
+      title:          Edicion de Categoria
+      display:        [codtipcat, destipcat]
+      fields:
+        codtipcat:
+          params:     maxlength=4,size=5 onBlur  = "$(this.id).value=$(this.id).value.pad(4,'0',0)"
+      actions:
+        _list:         ~
+        _save:         ~

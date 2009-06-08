@@ -8,7 +8,7 @@
 
 <div id="sf_admin_container">
 
-<h1><?php echo __('Compensación de cargos OCP',
+<h1><?php echo __('Edicion de Tablas de Sueldos por Tipo de Cargos',
 array()) ?></h1>
 
 <div id="sf_admin_header">
