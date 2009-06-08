@@ -35,6 +35,7 @@ generator:
       fecsol:     { name: Fecha }
       refdoc:     { name: Orden de Pago }
       priayu:     { name: Prioridad de Atención }
+      atpriayu_id:     { name: Prioridad de Atención, params: include_blank=false }
     list:
       title:          Solicitud de Ayudas
       display:        [=id, =nombre, desayu]
@@ -49,7 +50,7 @@ generator:
       display:
         Expediente:   [ _expediente, fecsol ]
         Solicitante:  [_atbenefi, _atsolici]
-        Prioridad:    [_priayu]
+        Prioridad:    [atpriayu_id]
 #        Proveedor:    [_caprovee_id]
         Ayuda:        [attipayu_id, _atrubros_id, desayu]
         Detalle de Recaudos: [_detallerecaudos]
