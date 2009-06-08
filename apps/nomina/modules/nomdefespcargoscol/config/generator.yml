@@ -1,0 +1,28 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Npcargoscol
+    theme:            cidesaGenerator
+    fields:
+      codcarcol:      { name: Código Cargo Colateral}
+      descarcol:      { name: Descripcion }       
+      
+
+    list:
+      title:        Listado de Cargo Colateral
+      display:        [=codcarcol, descarcol]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [codcarcol, descarcol]
+      max_per_page:   10
+      sort:           codcarcol
+    edit:
+      title:          Edicion de Cargos Colaterales
+      fields:
+        codcarcol:
+          params:     maxlength = 16 size = 20 onBlur  = "$(this.id).value=$(this.id).value.pad(16,'0',0)"
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
