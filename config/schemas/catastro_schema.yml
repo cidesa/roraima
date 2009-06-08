@@ -71,7 +71,7 @@ propel:
       onUpdate:
     cancar:
       type: NUMERIC
-      size: 4
+      size: 6
       scale: 2
       required: true
     metare:
@@ -270,39 +270,51 @@ propel:
     aliman:
       type: VARCHAR
       size: 50
-    tiplinnor:
-      type: VARCHAR
-      size: 1
     cattramonor_id:
       type: INTEGER
       foreignTable: cattramo
       foreignReference: id
       onDelete:
       onUpdate:
-    tiplinsur:
-      type: VARCHAR
-      size: 1
+    tiplinnor_id:
+      type: INTEGER
+      foreignTable: cattipvia
+      foreignReference: id
+      onDelete:
+      onUpdate:
     cattramosur_id:
       type: INTEGER
       foreignTable: cattramo
       foreignReference: id
       onDelete:
       onUpdate:
-    tiplinest:
-      type: VARCHAR
-      size: 1
+    tiplinsur_id:
+      type: INTEGER
+      foreignTable: cattipvia
+      foreignReference: id
+      onDelete:
+      onUpdate:
     cattramoest_id:
       type: INTEGER
       foreignTable: cattramo
       foreignReference: id
       onDelete:
       onUpdate:
-    tiplinoes:
-      type: VARCHAR
-      size: 1
+    tiplinest_id:
+      type: INTEGER
+      foreignTable: cattipvia
+      foreignReference: id
+      onDelete:
+      onUpdate:
     cattramooes_id:
       type: INTEGER
       foreignTable: cattramo
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    tiplinoes_id:
+      type: INTEGER
+      foreignTable: cattipvia
       foreignReference: id
       onDelete:
       onUpdate:
