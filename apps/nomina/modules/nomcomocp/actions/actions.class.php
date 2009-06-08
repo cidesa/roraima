@@ -15,7 +15,19 @@ class nomcomocpActions extends autonomcomocpActions
 
 
   public function executeEdit()
-  {
+  {  	
+  	$varemp = $this->getUser()->getAttribute('configemp');
+	  if(is_array($varemp))
+	    if(array_key_exists('aplicacion',$varemp))
+	  	  if(array_key_exists('nomina',$varemp['aplicacion']))
+		   if(array_key_exists('modulos',$varemp['aplicacion']['nomina']))
+		     if(array_key_exists('nomcomocp',$varemp['aplicacion']['nomina']['modulos']))
+			 {
+			 	if(array_key_exists('varforma',$varemp['aplicacion']['nomina']['modulos']['nomcomocp']))
+				   $this->getUser()->setAttribute('varforma',$varemp['aplicacion']['nomina']['modulos']['nomcomocp']['varforma'],'nomcomocp');									   
+				if(array_key_exists('codtipcar',$varemp['aplicacion']['nomina']['modulos']['nomcomocp']))		 		 
+					$this->getUser()->setAttribute('codtipcar',$varemp['aplicacion']['nomina']['modulos']['nomcomocp']['codtipcar'],'nomcomocp');	  		      									   
+			 }
     $this->npcomocp = $this->getNpcomocpOrCreate();
 
     if ($this->getRequest()->getMethod() == sfRequest::POST)
@@ -51,8 +63,9 @@ $this->Bitacora('Guardo');
     $c->add(NpcomocpPeer::FECDES,$this->npcomocp->getFecdes());
     $c->addDescendingOrderByColumn(NpcomocpPeer::PASCAR);
     $rs = NpcomocpPeer::doSelectOne($c);
-    $this->maxpas = $rs->getPascar();
-    }
+    $this->maxpas = $rs->getPascar();	
+    
+	}
 
 
     //$sql = 'select max(pascar) from npcomocp where codtipcar = '.$this->npcomocp->getPascar().' and fecdes = '.$this->npcomocp->getFecdes();
@@ -107,10 +120,36 @@ $this->Bitacora('Guardo');
       $this->npcomocp->set($npcomocp['']);
     }
   }
+  
+  public function cargar_categoria()
+  {
+  	$c = new Criteria();
+	$per = NptipcatPeer::doSelect($c);
+	$arr = array();
+	foreach($per as $r)
+	{
+		$arr += array($r->getCodtipcat() => $r->getDestipcat());
+	}
+	return $arr;
+  }
 
+  public function cargar_dedicacion()
+  {
+  	$c = new Criteria();
+	$per = NptipdedPeer::doSelect($c);
+	$arr = array();
+	foreach($per as $r)
+	{
+		$arr += array($r->getCodtip() => $r->getDestip());
+	}
+	return $arr;
+  }
 
   public function configGrid($codtipcar='',$fecdes='',$pascar='')
   {
+  	$varforma = $this->getUser()->getAttribute('varforma','','nomcomocp');
+	$tipcar = $this->getUser()->getAttribute('codtipcar','','nomcomocp');
+
     $result=array();
     if ($fecdes=='') $fecdes=date('Y-m-d');
     if ($codtipcar=='') $codtipcar='0';
@@ -127,9 +166,7 @@ $this->Bitacora('Guardo');
     $c->addAscendingOrderByColumn(NpcomocpPeer::GRACAR);
     $per = NpcomocpPeer::doSelect($c);
     $filas_arreglo=100;
-    //print $codigo;
-
-
+	
     // Se crea el objeto principal de la clase OpcionesGrid
     $opciones = new OpcionesGrid();
     // Se configuran las opciones globales del Grid
@@ -138,36 +175,72 @@ $this->Bitacora('Guardo');
     $opciones->setTabla('Npcomocp');
     $opciones->setName('a');
     $opciones->setAncho(800);
-    $opciones->setAnchoGrid(800);
-    $opciones->setTitulo('Cargos');
-    $opciones->setHTMLTotalFilas(' ');
-
+    $opciones->setAnchoGrid(800);	
+	if($varforma=='S')	
+	{
+	  if($tipcar==$codtipcar)	  
+	  	$opciones->setTitulo('Categoria y Dedicacion');
+	  else
+	  	$opciones->setTitulo('Nivel');
+	}	
+	else	
+		$opciones->setTitulo('Cargo');	
+    $opciones->setHTMLTotalFilas(' ');	
+	
     // Se generan las columnas
-    $col1 = new Columna('Grado');
-    $col1->setTipo(Columna::TEXTO);
-    $col1->setEsGrabable(true);
-    $col1->setAlineacionObjeto(Columna::CENTRO);
-    $col1->setAlineacionContenido(Columna::CENTRO);
-    $col1->setNombreCampo('gracar');
-    $col1->setHTML('type="text" size="5" maxlength="3"');
-
-    $col2 = new Columna('Paso');
-    $col2->setTipo(Columna::TEXTO);
-    $col2->setEsGrabable(true);
-    $col2->setAlineacionObjeto(Columna::IZQUIERDA);
-    $col2->setAlineacionContenido(Columna::IZQUIERDA);
-    $col2->setNombreCampo('pascar');
-        $col2->setEsNumerico(true);
-    $col2->setHTML('type="text" size="5" readonly="readonly"');
-
+	if($tipcar==$codtipcar)
+	{
+		$col1 = new Columna('Categoria');	
+	    $col1->setTipo(Columna::COMBO);
+		$col1->setCombo($this->cargar_categoria());
+	    $col1->setEsGrabable(true);
+	    $col1->setAlineacionObjeto(Columna::CENTRO);
+	    $col1->setAlineacionContenido(Columna::CENTRO);
+	    $col1->setNombreCampo('gracar');
+	    $col1->setHTML('type="text" ');	
+		
+		$col2 = new Columna('Dedicacion');
+	    $col2->setTipo(Columna::COMBO);
+		$col2->setCombo($this->cargar_dedicacion());
+	    $col2->setEsGrabable(true);
+	    $col2->setAlineacionObjeto(Columna::IZQUIERDA);
+	    $col2->setAlineacionContenido(Columna::IZQUIERDA);
+	    $col2->setNombreCampo('pascar');
+	    $col2->setEsNumerico(true);
+	    $col2->setHTML('type="text" ');
+	}else
+	{
+		if($varforma=='S')
+	    	$col1 = new Columna('Nivel');
+		else
+		 	$col1 = new Columna('Grado');	
+	    $col1->setTipo(Columna::TEXTO);
+	    $col1->setEsGrabable(true);
+	    $col1->setAlineacionObjeto(Columna::CENTRO);
+	    $col1->setAlineacionContenido(Columna::CENTRO);
+	    $col1->setNombreCampo('gracar');
+	    $col1->setHTML('type="text" size="5" maxlength="3"');	
+		
+		$col2 = new Columna('Paso');
+	    $col2->setTipo(Columna::TEXTO);
+		if($varforma=='S')
+			$col2->setOculta(true);
+	    $col2->setEsGrabable(true);
+	    $col2->setAlineacionObjeto(Columna::IZQUIERDA);
+	    $col2->setAlineacionContenido(Columna::IZQUIERDA);
+	    $col2->setNombreCampo('pascar');
+	    $col2->setEsNumerico(true);
+	    $col2->setHTML('type="text" size="5" readonly="readonly"');
+	}
+	
     $col3 = new Columna('Sueldo');
     $col3->setTipo(Columna::MONTO);
     $col3->setEsGrabable(true);
     $col3->setAlineacionObjeto(Columna::IZQUIERDA);
     $col3->setAlineacionContenido(Columna::IZQUIERDA);
     $col3->setNombreCampo('suecar');
-        $col3->setEsNumerico(true);
-            $col3->setJScript('onBlur = "javascript:event.keyCode=13;return entermontootro(event,this.id);actualizar_grid_sueldos(this.id)"');
+    $col3->setEsNumerico(true);
+    $col3->setJScript('onBlur = "javascript:event.keyCode=13;return entermontootro(event,this.id);actualizar_grid_sueldos(this.id)"');
     $col3->setHTML('type="text" size="10"');
 
 
@@ -241,12 +314,14 @@ $this->Bitacora('Guardo');
   {
    $cajtexmos=$this->getRequestParameter('cajtexmos');
    $cajtexcom=$this->getRequestParameter('cajtexcom');
+   
    if ($this->getRequestParameter('ajax')=='1')
    {
      $dato=NptipcarPeer::getNomtip(trim($this->getRequestParameter('codigo')));
-     $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
+	 $this->configGrid($this->getRequestParameter('codigo'));
+     $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';	 
      $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
-     return sfView::HEADER_ONLY;
+     #return sfView::HEADER_ONLY;
    }
   }
 
@@ -283,5 +358,56 @@ $this->Bitacora('Guardo');
     $this->pager->setCriteria($c);
     $this->pager->setPage($this->getRequestParameter('page', 1));
     $this->pager->init();
+  }
+  
+    public function validateEdit()
+  {
+  	$this->maxpas = '';
+    $this->coderr =-1;
+    $this->npcomocp = $this->getNpcomocpOrCreate();
+	$this->updateNpcomocpFromRequest();
+    if($this->getRequest()->getMethod() == sfRequest::POST)
+    {    			
+		$this->configGrid();	
+	    $grid=Herramientas::CargarDatosGrid($this,$this->obj,true);//0
+	    $x=$grid[0];
+		$r=0;
+		if(count($x)>0)
+		while ($r<count($x))
+	    {
+	      if($x[$r]['gracar']=='')	
+		  {
+		  	$this->coderr= 411;
+		  	break;
+		  }
+		  if($x[$r]['suecar']==0)	
+		  {
+		  	$this->coderr= 411;
+		  	break;
+		  }
+		  $r++;
+		}
+	  return true;
+    }else return false;
+//print $this->coderr; exit;
+   if ($this->coderr== -1)
+     return true;
+     else
+     return false;
+  }
+
+  /**
+   * Función para actualziar el grid en el post si ocurre un error
+   * Se pueden colocar aqui los grids adicionales
+   *
+   */
+  public function updateError()
+  {
+  	$this->nptipcat = $this->getNpcomocpOrCreate();
+    $this->updateNpcomocpFromRequest();
+	$this->maxpas = '';
+ 	$this->configGrid();		
+	$grid = Herramientas::CargarDatosGrid($this,$this->obj,true);
+
   }
 }

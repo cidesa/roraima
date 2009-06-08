@@ -27,7 +27,7 @@
   'control_name' => 'npcomocp[codtipcar]',
   'maxlength' => 5,
   'onBlur'=> remote_function(array(
-        'update'   => 'ajax',
+        'update'   => 'grid',
         'url'      => 'nomcomocp/ajax',
         'complete' => 'AjaxJSON(request, json)',
         'script' => true,
@@ -44,7 +44,7 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
-
+<?php if($sf_user->getAttribute('varforma','','nomcomocp')!='S'){?>
 <div class="form-row">
   <?php echo label_for('npcomocp[pascar]', __($labels['npcomocp{pascar}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('npcomocp{pascar}')): ?> form-error<?php endif; ?>">
@@ -52,7 +52,7 @@
     <?php echo form_error('npcomocp{pascar}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-<? if ($npcomocp->getId()==''){?>
+<?php if ($npcomocp->getId()==''){ ?>
 <?php $value = object_input_tag($npcomocp, 'getPascar', array (
 'size' => 8,
 'maxlength' => 4,
@@ -68,7 +68,7 @@
 
     </div>
 </div>
-
+<?php }?>
 <div class="form-row">
   <?php echo label_for('npcomocp[fecdes]', __($labels['npcomocp{fecdes}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('npcomocp{fecdes}')): ?> form-error<?php endif; ?>">
@@ -84,7 +84,7 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
-
+<?php if($sf_user->getAttribute('varforma','','nomcomocp')!='S'){?>
 <div class="form-row">
     <?php echo "Ninguno ".radiobutton_tag('incremento_paso', 'p', 'true', array('onClick'=> "bloquear_incremento();")) ?>
     <?php echo "Por Porcentaje ".radiobutton_tag('incremento_paso', 'm', 'false', array('onClick'=> "desbloquear_incremento();")) ?>
@@ -100,7 +100,7 @@
 )); echo $value ? $value : '&nbsp;' ?>
 </div>
 
-
+<?php } ?>
 <div id="grid" class="form-row">
 <?
 echo grid_tag($obj);

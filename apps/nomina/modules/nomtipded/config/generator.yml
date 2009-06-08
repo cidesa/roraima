@@ -18,6 +18,9 @@ generator:
     edit:
       title:          Edición de Tipo de Dedicación
       display:        [codtip, destip ]
+      fields:
+        codtip: 
+          params:     maxlength=4,size=5 onBlur  = "$(this.id).value=$(this.id).value.pad(4,'0',0)"
       actions:
         _list:        ~
         _save:        ~
