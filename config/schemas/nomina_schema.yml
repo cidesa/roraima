@@ -6712,3 +6712,19 @@ propel:
       type: INTEGER
       required: true
       autoIncrement: true                              
+  nptipcat:
+    #_attributes:
+      #idMethod: native
+    codtipcat:
+      type: VARCHAR
+      size: 4
+      required: true
+      ##primaryKey: true
+    destipcat:
+      type: VARCHAR
+      size: 100
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true      
