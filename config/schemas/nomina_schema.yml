@@ -639,6 +639,11 @@ propel:
       type: DATE
       required: true
       ##primaryKey: true            
+    status:
+      type: VARCHAR
+      size: 1
+      required: true
+      ##primaryKey: true                  
     id:
       type: INTEGER
       required: true
