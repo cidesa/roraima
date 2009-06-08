@@ -8,7 +8,7 @@ names:
   atestsoceco{atayudas_id}:
     required:  Yes
     required_msg: Debe seleccionar el expediente al cual va a realizar el estudio
-    validators: MyStringValidator1, ExistValidator
+    validators: MyStringValidator1, ExistValidator, UniqueValidator
 
 #  atestsoceco{anasoceco}:
 #    required:  Yes
@@ -85,3 +85,11 @@ ExistValidator:
         class:        atayudas
         column:       id
         unique_error: El Nro de Expediente debe existir.
+        
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Atestsoceco
+        column:   atayudas_id
+        unique_error:   Ya existe un informe de visita domiciliaria para este expediente.
+        

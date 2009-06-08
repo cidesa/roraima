@@ -492,7 +492,7 @@ abstract class BaseAcunidad extends BaseObject  implements Persistent {
 	
 	public function getDfatendocdetsRelatedByIdAcunidadOri($criteria = null, $con = null)
 	{
-				include_once 'lib/model/om/BaseDfatendocdetPeer.php';
+				include_once 'lib/model/documentos/om/BaseDfatendocdetPeer.php';
 		if ($criteria === null) {
 			$criteria = new Criteria();
 		}
@@ -530,7 +530,7 @@ abstract class BaseAcunidad extends BaseObject  implements Persistent {
 	
 	public function countDfatendocdetsRelatedByIdAcunidadOri($criteria = null, $distinct = false, $con = null)
 	{
-				include_once 'lib/model/om/BaseDfatendocdetPeer.php';
+				include_once 'lib/model/documentos/om/BaseDfatendocdetPeer.php';
 		if ($criteria === null) {
 			$criteria = new Criteria();
 		}
@@ -555,7 +555,7 @@ abstract class BaseAcunidad extends BaseObject  implements Persistent {
 	
 	public function getDfatendocdetsRelatedByIdAcunidadOriJoinDfatendoc($criteria = null, $con = null)
 	{
-				include_once 'lib/model/om/BaseDfatendocdetPeer.php';
+				include_once 'lib/model/documentos/om/BaseDfatendocdetPeer.php';
 		if ($criteria === null) {
 			$criteria = new Criteria();
 		}
@@ -590,7 +590,7 @@ abstract class BaseAcunidad extends BaseObject  implements Persistent {
 	
 	public function getDfatendocdetsRelatedByIdAcunidadOriJoinUsuarios($criteria = null, $con = null)
 	{
-				include_once 'lib/model/om/BaseDfatendocdetPeer.php';
+				include_once 'lib/model/documentos/om/BaseDfatendocdetPeer.php';
 		if ($criteria === null) {
 			$criteria = new Criteria();
 		}
@@ -625,7 +625,7 @@ abstract class BaseAcunidad extends BaseObject  implements Persistent {
 	
 	public function getDfatendocdetsRelatedByIdAcunidadOriJoinDfrutadoc($criteria = null, $con = null)
 	{
-				include_once 'lib/model/om/BaseDfatendocdetPeer.php';
+				include_once 'lib/model/documentos/om/BaseDfatendocdetPeer.php';
 		if ($criteria === null) {
 			$criteria = new Criteria();
 		}
@@ -660,7 +660,7 @@ abstract class BaseAcunidad extends BaseObject  implements Persistent {
 	
 	public function getDfatendocdetsRelatedByIdAcunidadOriJoinDfmedtra($criteria = null, $con = null)
 	{
-				include_once 'lib/model/om/BaseDfatendocdetPeer.php';
+				include_once 'lib/model/documentos/om/BaseDfatendocdetPeer.php';
 		if ($criteria === null) {
 			$criteria = new Criteria();
 		}
@@ -702,7 +702,7 @@ abstract class BaseAcunidad extends BaseObject  implements Persistent {
 	
 	public function getDfatendocdetsRelatedByIdAcunidadDes($criteria = null, $con = null)
 	{
-				include_once 'lib/model/om/BaseDfatendocdetPeer.php';
+				include_once 'lib/model/documentos/om/BaseDfatendocdetPeer.php';
 		if ($criteria === null) {
 			$criteria = new Criteria();
 		}
@@ -740,7 +740,7 @@ abstract class BaseAcunidad extends BaseObject  implements Persistent {
 	
 	public function countDfatendocdetsRelatedByIdAcunidadDes($criteria = null, $distinct = false, $con = null)
 	{
-				include_once 'lib/model/om/BaseDfatendocdetPeer.php';
+				include_once 'lib/model/documentos/om/BaseDfatendocdetPeer.php';
 		if ($criteria === null) {
 			$criteria = new Criteria();
 		}
@@ -765,7 +765,7 @@ abstract class BaseAcunidad extends BaseObject  implements Persistent {
 	
 	public function getDfatendocdetsRelatedByIdAcunidadDesJoinDfatendoc($criteria = null, $con = null)
 	{
-				include_once 'lib/model/om/BaseDfatendocdetPeer.php';
+				include_once 'lib/model/documentos/om/BaseDfatendocdetPeer.php';
 		if ($criteria === null) {
 			$criteria = new Criteria();
 		}
@@ -800,7 +800,7 @@ abstract class BaseAcunidad extends BaseObject  implements Persistent {
 	
 	public function getDfatendocdetsRelatedByIdAcunidadDesJoinUsuarios($criteria = null, $con = null)
 	{
-				include_once 'lib/model/om/BaseDfatendocdetPeer.php';
+				include_once 'lib/model/documentos/om/BaseDfatendocdetPeer.php';
 		if ($criteria === null) {
 			$criteria = new Criteria();
 		}
@@ -835,7 +835,7 @@ abstract class BaseAcunidad extends BaseObject  implements Persistent {
 	
 	public function getDfatendocdetsRelatedByIdAcunidadDesJoinDfrutadoc($criteria = null, $con = null)
 	{
-				include_once 'lib/model/om/BaseDfatendocdetPeer.php';
+				include_once 'lib/model/documentos/om/BaseDfatendocdetPeer.php';
 		if ($criteria === null) {
 			$criteria = new Criteria();
 		}
@@ -870,7 +870,7 @@ abstract class BaseAcunidad extends BaseObject  implements Persistent {
 	
 	public function getDfatendocdetsRelatedByIdAcunidadDesJoinDfmedtra($criteria = null, $con = null)
 	{
-				include_once 'lib/model/om/BaseDfatendocdetPeer.php';
+				include_once 'lib/model/documentos/om/BaseDfatendocdetPeer.php';
 		if ($criteria === null) {
 			$criteria = new Criteria();
 		}
@@ -912,7 +912,7 @@ abstract class BaseAcunidad extends BaseObject  implements Persistent {
 	
 	public function getDfrutadocs($criteria = null, $con = null)
 	{
-				include_once 'lib/model/om/BaseDfrutadocPeer.php';
+				include_once 'lib/model/documentos/om/BaseDfrutadocPeer.php';
 		if ($criteria === null) {
 			$criteria = new Criteria();
 		}
@@ -950,7 +950,7 @@ abstract class BaseAcunidad extends BaseObject  implements Persistent {
 	
 	public function countDfrutadocs($criteria = null, $distinct = false, $con = null)
 	{
-				include_once 'lib/model/om/BaseDfrutadocPeer.php';
+				include_once 'lib/model/documentos/om/BaseDfrutadocPeer.php';
 		if ($criteria === null) {
 			$criteria = new Criteria();
 		}
@@ -975,7 +975,7 @@ abstract class BaseAcunidad extends BaseObject  implements Persistent {
 	
 	public function getDfrutadocsJoinDftabtip($criteria = null, $con = null)
 	{
-				include_once 'lib/model/om/BaseDfrutadocPeer.php';
+				include_once 'lib/model/documentos/om/BaseDfrutadocPeer.php';
 		if ($criteria === null) {
 			$criteria = new Criteria();
 		}

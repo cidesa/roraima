@@ -1,6 +1,6 @@
 ---
 sima_user:
-  _attributes: { noXsd: false, defaultIdMethod: native, package: lib.model }
+  _attributes: { noXsd: false, defaultIdMethod: native, package: lib.model.sima_user }
   apli_user:
     codapl:
       type: VARCHAR
