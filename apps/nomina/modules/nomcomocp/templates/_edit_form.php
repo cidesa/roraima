@@ -30,7 +30,7 @@
         'update'   => 'grid',
         'url'      => 'nomcomocp/ajax',
         'complete' => 'AjaxJSON(request, json)',
-        'script' => true,
+	    'condition' => "$('npcomocp_codtipcar').value != '' && $('id').value == ''",
         'with' => "'ajax=1&cajtexcom=npcomocp_codtipcar&cajtexmos=npcomocp_destipcar&codigo='+this.value"
         ))
 )); echo $value ? $value : '&nbsp;' ?>
@@ -41,6 +41,7 @@
   <?php $value = object_input_tag($npcomocp, 'getDestipcar', array (
   'size' => 40,
   'control_name' => 'npcomocp[destipcar]',
+  'readonly' => 'true'
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>

@@ -15,7 +15,7 @@ class nomcomocpActions extends autonomcomocpActions
 
 
   public function executeEdit()
-  {  	
+  {  
   	$varemp = $this->getUser()->getAttribute('configemp');
 	  if(is_array($varemp))
 	    if(array_key_exists('aplicacion',$varemp))
@@ -317,9 +317,23 @@ $this->Bitacora('Guardo');
    
    if ($this->getRequestParameter('ajax')=='1')
    {
-     $dato=NptipcarPeer::getNomtip(trim($this->getRequestParameter('codigo')));
-	 $this->configGrid($this->getRequestParameter('codigo'));
-     $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';	 
+   	 $js='';
+	 $dato='';
+	 $c = new Criteria();
+	 $c->add(NpcomocpPeer::CODTIPCAR,$this->getRequestParameter('codigo'));
+	 $d=NpcomocpPeer::doSelect($c);
+	 if($d)
+	 {
+	 	$js.="$('npcomocp_codtipcar').value='';";		
+	 	$js.="alert('Tipo de Cargo ya registrado');";
+		$js.="$('npcomocp_codtipcar').focus();";
+		$this->configGrid();
+	 }else
+	 {
+	 	$dato=NptipcarPeer::getNomtip(trim($this->getRequestParameter('codigo')));
+	 	$this->configGrid($this->getRequestParameter('codigo'));	
+	 }     
+     $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$js.'",""]]';	 
      $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
      #return sfView::HEADER_ONLY;
    }
@@ -388,7 +402,7 @@ $this->Bitacora('Guardo');
 		  $r++;
 		}
 	  return true;
-    }else return false;
+    }else return true;
 //print $this->coderr; exit;
    if ($this->coderr== -1)
      return true;
