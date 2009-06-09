@@ -505,7 +505,7 @@ public function configGrid($codemp="")
     $ajax = $this->getRequestParameter('ajax','');	
 	$this->cond=0;
 	$js="";
-
+	$delemp="";
 
     switch ($ajax){
       case '1':
@@ -634,8 +634,11 @@ public function configGrid($codemp="")
 						$js.="alert('Liquidacion Pagada con la Orden de Pago Nro: $numord');";
 						$js.="$('save').hide();";
 					}						
-					else
-					    $js.="alert('Liquidacion Realizada');";						
+					else{
+						$js.="alert('Liquidacion Realizada');";						
+						$delemp=$codemp;
+					}
+					    
 					$this->configGridAsigDeduc($codemp,$codnom,$categoria,$fechae,$ultimosueldo,$estaliquidado);
 					$this->getUser()->setAttribute('objasig',$this->npliquidacion_det->getObjasig());
 					$this->getUser()->setAttribute('objdeduc',$this->npliquidacion_det->getObjdeduc());
@@ -666,7 +669,8 @@ public function configGrid($codemp="")
 			$output = '[["npliquidaciondet_codemp","",""],["npliquidaciondet_nomemp","",""],["javascript","'.$js.'",""]]';
 			
 		}
-		$this->cond=1;	        
+		$this->cond=1;
+		$this->getUser()->setAttribute('delemp',$delemp);	        
         break;
 	  case '2':
 		$this->cond=2;
@@ -880,9 +884,14 @@ public function configGrid($codemp="")
     return $this->coderr;
   }
 
-  public function deleting($clasemodelo)
+  public function executeDelete()
   {
-    return parent::deleting($clasemodelo);
+  	
+  	$codemp = $this->getRequestParameter('codemp');
+	$c = new Criteria();
+	$c->add(NpliquidacionDetPeer::CODEMP,$codemp);
+	NpliquidacionDetPeer::doDelete($c);
+    return $this->forward('presnomliquidacion', 'list');
   }
 
   public function executeList()
