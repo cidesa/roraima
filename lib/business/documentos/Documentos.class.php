@@ -412,7 +412,7 @@ class Documentos
             $dfatendoc->save();
           }
 
-          $dfatendocdet[count($dfatendocdet)-1]->setFecate(date("Y-m-d H:m:s"));
+          $dfatendocdet[count($dfatendocdet)-1]->setFecate(time("Y-m-d H:m:s"));
           $dfatendocdet[count($dfatendocdet)-1]->setIdDfmedtra($dfatendocdet_in->getIdDfmedtra());
           $dfatendocdet[count($dfatendocdet)-1]->setDesate($dfatendocdet_in->getDesate());
           $dfatendocdet[count($dfatendocdet)-1]->setDiaent($dfatendocdet_in->getDiaent());
@@ -429,8 +429,8 @@ class Documentos
             $nuevo_dfatendocdet->setDiaent(0);
             $nuevo_dfatendocdet->setTotdia(0);
             $nuevo_dfatendocdet->setIdDfmedtra(0);
-            $nuevo_dfatendocdet->setFecrec(date("Y-m-d H:m:s"));
-            $nuevo_dfatendocdet->setFecate(date("Y-m-d H:m:s",0));
+            $nuevo_dfatendocdet->setFecrec(time("Y-m-d H:m:s"));
+            $nuevo_dfatendocdet->setFecate(time("Y-m-d H:m:s",0));
 
             $nuevo_dfatendocdet->setIdAcunidadOri($dfatendocdet[count($dfatendocdet)-1]->getIdAcunidadDes());
             $nuevo_dfatendocdet->setIdAcunidadDes($dfrutasdocs[count($dfatendocdet)]->getIdAcunidad());
@@ -506,6 +506,30 @@ class Documentos
   public static function add_days($my_date,$numdays) {
     $date_t = strtotime($my_date.' UTC');
     return gmdate('Y-m-d',$date_t + ($numdays*86400));
+  }
+
+  public static function salvarObservacion($usuario,$id,$desobs)
+  {
+    if($id!='' && $desobs!=''){
+
+      $c = new Criteria();
+      $c->addJoin(DfatendocdetPeer::ID_DFRUTADOC, DfrutadocPeer::ID);
+      $c->add(DfatendocdetPeer::ID_DFATENDOC, $id);
+      $c->addDescendingOrderByColumn(DfrutadocPeer::RUTDOC);
+      $dfatendocdet = DfatendocdetPeer::doSelectOne($c);
+
+      $dfatendocobs = new Dfatendocobs();
+      $dfatendocobs->setDesobs($desobs);
+      $dfatendocobs->setIdUsuario($usuario);
+      $dfatendocobs->setIdDfatendocdet($dfatendocdet->getId());
+      $dfatendocobs->setFecobs(time("Y-m-d H:m:s"));
+      $dfatendocobs->save();
+      return -1;
+      
+    }else return 0;
+    
+    
+    
   }
 
 }

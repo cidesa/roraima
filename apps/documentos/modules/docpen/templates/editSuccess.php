@@ -30,6 +30,16 @@ array()) ?></h1>
     'url'     => 'docpendet/list?dfatendoc='.$dfatendoc->getId(),
   ))
 ) ?>
+<br></br>
+<br></br>
+<br></br>
+<div id="observaciones"></div>
+<?php echo javascript_tag(
+  remote_function(array(
+    'update'  => 'observaciones',
+    'url'     => 'docobs/list?dfatendoc='.$dfatendoc->getId(),
+  ))
+) ?>
 
 <div id="sf_admin_footer">
 <?php include_partial('docpen/edit_footer', array('dfatendoc' => $dfatendoc)) ?>

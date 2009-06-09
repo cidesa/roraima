@@ -45,5 +45,20 @@ class Dfatendocdet extends BaseDfatendocdet
     else $this->diadoc = 99;
 
   }
+  
+  public function getFecate($format = 'Y-m-d H:i:s')
+  {
+    $fecate = parent::getFecate($format);
+    if($fecate=='1969-12-31 20:00:00') return null;
+    else return $fecate;
+  }
+
+  public function getFecrec($format = 'Y-m-d H:i:s')
+  {
+    $fecrec = parent::getFecrec($format);
+    if($fecrec=='1969-12-31 20:00:00') return null;
+    else return $fecrec;
+  }
+
 
 }

@@ -13,6 +13,10 @@ class Usuarios extends BaseUsuarios
   protected $password = '';
   protected $repassword = '';
 
+  public function __toString()
+  {
+    return $this->nomuse;
+  }
 
   public function getNomuni(){
 
