@@ -38,6 +38,8 @@ class AtayudasMapBuilder {
 
 		$tMap->addForeignKey('REFDOC', 'Refdoc', 'int', CreoleTypes::INTEGER, 'caordcom', 'ID', false, null);
 
+		$tMap->addColumn('PARENTESCO', 'Parentesco', 'int', CreoleTypes::INTEGER, false, null);
+
 		$tMap->addColumn('PRIAYU', 'Priayu', 'int', CreoleTypes::INTEGER, true, null);
 
 		$tMap->addForeignKey('ATPRIAYU_ID', 'AtpriayuId', 'int', CreoleTypes::INTEGER, 'atpriayu', 'ID', false, null);

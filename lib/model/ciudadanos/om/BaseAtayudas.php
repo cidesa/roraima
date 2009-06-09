@@ -17,6 +17,10 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 
 
 	
+	protected $parentesco;
+
+
+	
 	protected $priayu;
 
 
@@ -231,6 +235,13 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
   {
 
     return $this->refdoc;
+
+  }
+  
+  public function getParentesco()
+  {
+
+    return $this->parentesco;
 
   }
   
@@ -564,6 +575,16 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 			$this->aCaordcom = null;
 		}
 
+	} 
+	
+	public function setParentesco($v)
+	{
+
+    if ($this->parentesco !== $v) {
+        $this->parentesco = $v;
+        $this->modifiedColumns[] = AtayudasPeer::PARENTESCO;
+      }
+  
 	} 
 	
 	public function setPriayu($v)
@@ -975,71 +996,73 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 
       $this->refdoc = $rs->getInt($startcol + 1);
 
-      $this->priayu = $rs->getInt($startcol + 2);
+      $this->parentesco = $rs->getInt($startcol + 2);
 
-      $this->atpriayu_id = $rs->getInt($startcol + 3);
+      $this->priayu = $rs->getInt($startcol + 3);
 
-      $this->atsolici = $rs->getInt($startcol + 4);
+      $this->atpriayu_id = $rs->getInt($startcol + 4);
 
-      $this->atbenefi = $rs->getInt($startcol + 5);
+      $this->atsolici = $rs->getInt($startcol + 5);
 
-      $this->attipayu_id = $rs->getInt($startcol + 6);
+      $this->atbenefi = $rs->getInt($startcol + 6);
 
-      $this->atrubros_id = $rs->getInt($startcol + 7);
+      $this->attipayu_id = $rs->getInt($startcol + 7);
 
-      $this->atestayu_id = $rs->getInt($startcol + 8);
+      $this->atrubros_id = $rs->getInt($startcol + 8);
 
-      $this->attrasoc_id = $rs->getInt($startcol + 9);
+      $this->atestayu_id = $rs->getInt($startcol + 9);
 
-      $this->atprovee_id = $rs->getInt($startcol + 10);
+      $this->attrasoc_id = $rs->getInt($startcol + 10);
 
-      $this->proayu = $rs->getString($startcol + 11);
+      $this->atprovee_id = $rs->getInt($startcol + 11);
 
-      $this->nroofi = $rs->getString($startcol + 12);
+      $this->proayu = $rs->getString($startcol + 12);
 
-      $this->desayu = $rs->getString($startcol + 13);
+      $this->nroofi = $rs->getString($startcol + 13);
 
-      $this->motayu = $rs->getString($startcol + 14);
+      $this->desayu = $rs->getString($startcol + 14);
 
-      $this->created_at = $rs->getTimestamp($startcol + 15, null);
+      $this->motayu = $rs->getString($startcol + 15);
 
-      $this->updated_at = $rs->getTimestamp($startcol + 16, null);
+      $this->created_at = $rs->getTimestamp($startcol + 16, null);
 
-      $this->usucre = $rs->getString($startcol + 17);
+      $this->updated_at = $rs->getTimestamp($startcol + 17, null);
 
-      $this->usumod = $rs->getString($startcol + 18);
+      $this->usucre = $rs->getString($startcol + 18);
 
-      $this->codpre = $rs->getString($startcol + 19);
+      $this->usumod = $rs->getString($startcol + 19);
 
-      $this->detayu = $rs->getString($startcol + 20);
+      $this->codpre = $rs->getString($startcol + 20);
 
-      $this->monayu = $rs->getFloat($startcol + 21);
+      $this->detayu = $rs->getString($startcol + 21);
 
-      $this->monapr = $rs->getFloat($startcol + 22);
+      $this->monayu = $rs->getFloat($startcol + 22);
 
-      $this->atmedico_id = $rs->getInt($startcol + 23);
+      $this->monapr = $rs->getFloat($startcol + 23);
 
-      $this->respat = $rs->getString($startcol + 24);
+      $this->atmedico_id = $rs->getInt($startcol + 24);
 
-      $this->infmed = $rs->getString($startcol + 25);
+      $this->respat = $rs->getString($startcol + 25);
 
-      $this->obsmed = $rs->getString($startcol + 26);
+      $this->infmed = $rs->getString($startcol + 26);
 
-      $this->fecdiasoc = $rs->getDate($startcol + 27, null);
+      $this->obsmed = $rs->getString($startcol + 27);
 
-      $this->usudiasoc = $rs->getString($startcol + 28);
+      $this->fecdiasoc = $rs->getDate($startcol + 28, null);
 
-      $this->resdiasoc = $rs->getString($startcol + 29);
+      $this->usudiasoc = $rs->getString($startcol + 29);
 
-      $this->fecvisdoc = $rs->getDate($startcol + 30, null);
+      $this->resdiasoc = $rs->getString($startcol + 30);
 
-      $this->usuvisdoc = $rs->getString($startcol + 31);
+      $this->fecvisdoc = $rs->getDate($startcol + 31, null);
 
-      $this->resvisdoc = $rs->getString($startcol + 32);
+      $this->usuvisdoc = $rs->getString($startcol + 32);
 
-      $this->fecsol = $rs->getDate($startcol + 33, null);
+      $this->resvisdoc = $rs->getString($startcol + 33);
 
-      $this->id = $rs->getInt($startcol + 34);
+      $this->fecsol = $rs->getDate($startcol + 34, null);
+
+      $this->id = $rs->getInt($startcol + 35);
 
       $this->resetModified();
 
@@ -1047,7 +1070,7 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 35; 
+            return $startcol + 36; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Atayudas object", $e);
     }
@@ -1441,102 +1464,105 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 				return $this->getRefdoc();
 				break;
 			case 2:
-				return $this->getPriayu();
+				return $this->getParentesco();
 				break;
 			case 3:
-				return $this->getAtpriayuId();
+				return $this->getPriayu();
 				break;
 			case 4:
-				return $this->getAtsolici();
+				return $this->getAtpriayuId();
 				break;
 			case 5:
-				return $this->getAtbenefi();
+				return $this->getAtsolici();
 				break;
 			case 6:
-				return $this->getAttipayuId();
+				return $this->getAtbenefi();
 				break;
 			case 7:
-				return $this->getAtrubrosId();
+				return $this->getAttipayuId();
 				break;
 			case 8:
-				return $this->getAtestayuId();
+				return $this->getAtrubrosId();
 				break;
 			case 9:
-				return $this->getAttrasocId();
+				return $this->getAtestayuId();
 				break;
 			case 10:
-				return $this->getAtproveeId();
+				return $this->getAttrasocId();
 				break;
 			case 11:
-				return $this->getProayu();
+				return $this->getAtproveeId();
 				break;
 			case 12:
-				return $this->getNroofi();
+				return $this->getProayu();
 				break;
 			case 13:
-				return $this->getDesayu();
+				return $this->getNroofi();
 				break;
 			case 14:
-				return $this->getMotayu();
+				return $this->getDesayu();
 				break;
 			case 15:
-				return $this->getCreatedAt();
+				return $this->getMotayu();
 				break;
 			case 16:
-				return $this->getUpdatedAt();
+				return $this->getCreatedAt();
 				break;
 			case 17:
-				return $this->getUsucre();
+				return $this->getUpdatedAt();
 				break;
 			case 18:
-				return $this->getUsumod();
+				return $this->getUsucre();
 				break;
 			case 19:
-				return $this->getCodpre();
+				return $this->getUsumod();
 				break;
 			case 20:
-				return $this->getDetayu();
+				return $this->getCodpre();
 				break;
 			case 21:
-				return $this->getMonayu();
+				return $this->getDetayu();
 				break;
 			case 22:
-				return $this->getMonapr();
+				return $this->getMonayu();
 				break;
 			case 23:
-				return $this->getAtmedicoId();
+				return $this->getMonapr();
 				break;
 			case 24:
-				return $this->getRespat();
+				return $this->getAtmedicoId();
 				break;
 			case 25:
-				return $this->getInfmed();
+				return $this->getRespat();
 				break;
 			case 26:
-				return $this->getObsmed();
+				return $this->getInfmed();
 				break;
 			case 27:
-				return $this->getFecdiasoc();
+				return $this->getObsmed();
 				break;
 			case 28:
-				return $this->getUsudiasoc();
+				return $this->getFecdiasoc();
 				break;
 			case 29:
-				return $this->getResdiasoc();
+				return $this->getUsudiasoc();
 				break;
 			case 30:
-				return $this->getFecvisdoc();
+				return $this->getResdiasoc();
 				break;
 			case 31:
-				return $this->getUsuvisdoc();
+				return $this->getFecvisdoc();
 				break;
 			case 32:
-				return $this->getResvisdoc();
+				return $this->getUsuvisdoc();
 				break;
 			case 33:
-				return $this->getFecsol();
+				return $this->getResvisdoc();
 				break;
 			case 34:
+				return $this->getFecsol();
+				break;
+			case 35:
 				return $this->getId();
 				break;
 			default:
@@ -1551,39 +1577,40 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 		$result = array(
 			$keys[0] => $this->getNroexp(),
 			$keys[1] => $this->getRefdoc(),
-			$keys[2] => $this->getPriayu(),
-			$keys[3] => $this->getAtpriayuId(),
-			$keys[4] => $this->getAtsolici(),
-			$keys[5] => $this->getAtbenefi(),
-			$keys[6] => $this->getAttipayuId(),
-			$keys[7] => $this->getAtrubrosId(),
-			$keys[8] => $this->getAtestayuId(),
-			$keys[9] => $this->getAttrasocId(),
-			$keys[10] => $this->getAtproveeId(),
-			$keys[11] => $this->getProayu(),
-			$keys[12] => $this->getNroofi(),
-			$keys[13] => $this->getDesayu(),
-			$keys[14] => $this->getMotayu(),
-			$keys[15] => $this->getCreatedAt(),
-			$keys[16] => $this->getUpdatedAt(),
-			$keys[17] => $this->getUsucre(),
-			$keys[18] => $this->getUsumod(),
-			$keys[19] => $this->getCodpre(),
-			$keys[20] => $this->getDetayu(),
-			$keys[21] => $this->getMonayu(),
-			$keys[22] => $this->getMonapr(),
-			$keys[23] => $this->getAtmedicoId(),
-			$keys[24] => $this->getRespat(),
-			$keys[25] => $this->getInfmed(),
-			$keys[26] => $this->getObsmed(),
-			$keys[27] => $this->getFecdiasoc(),
-			$keys[28] => $this->getUsudiasoc(),
-			$keys[29] => $this->getResdiasoc(),
-			$keys[30] => $this->getFecvisdoc(),
-			$keys[31] => $this->getUsuvisdoc(),
-			$keys[32] => $this->getResvisdoc(),
-			$keys[33] => $this->getFecsol(),
-			$keys[34] => $this->getId(),
+			$keys[2] => $this->getParentesco(),
+			$keys[3] => $this->getPriayu(),
+			$keys[4] => $this->getAtpriayuId(),
+			$keys[5] => $this->getAtsolici(),
+			$keys[6] => $this->getAtbenefi(),
+			$keys[7] => $this->getAttipayuId(),
+			$keys[8] => $this->getAtrubrosId(),
+			$keys[9] => $this->getAtestayuId(),
+			$keys[10] => $this->getAttrasocId(),
+			$keys[11] => $this->getAtproveeId(),
+			$keys[12] => $this->getProayu(),
+			$keys[13] => $this->getNroofi(),
+			$keys[14] => $this->getDesayu(),
+			$keys[15] => $this->getMotayu(),
+			$keys[16] => $this->getCreatedAt(),
+			$keys[17] => $this->getUpdatedAt(),
+			$keys[18] => $this->getUsucre(),
+			$keys[19] => $this->getUsumod(),
+			$keys[20] => $this->getCodpre(),
+			$keys[21] => $this->getDetayu(),
+			$keys[22] => $this->getMonayu(),
+			$keys[23] => $this->getMonapr(),
+			$keys[24] => $this->getAtmedicoId(),
+			$keys[25] => $this->getRespat(),
+			$keys[26] => $this->getInfmed(),
+			$keys[27] => $this->getObsmed(),
+			$keys[28] => $this->getFecdiasoc(),
+			$keys[29] => $this->getUsudiasoc(),
+			$keys[30] => $this->getResdiasoc(),
+			$keys[31] => $this->getFecvisdoc(),
+			$keys[32] => $this->getUsuvisdoc(),
+			$keys[33] => $this->getResvisdoc(),
+			$keys[34] => $this->getFecsol(),
+			$keys[35] => $this->getId(),
 		);
 		return $result;
 	}
@@ -1606,102 +1633,105 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 				$this->setRefdoc($value);
 				break;
 			case 2:
-				$this->setPriayu($value);
+				$this->setParentesco($value);
 				break;
 			case 3:
-				$this->setAtpriayuId($value);
+				$this->setPriayu($value);
 				break;
 			case 4:
-				$this->setAtsolici($value);
+				$this->setAtpriayuId($value);
 				break;
 			case 5:
-				$this->setAtbenefi($value);
+				$this->setAtsolici($value);
 				break;
 			case 6:
-				$this->setAttipayuId($value);
+				$this->setAtbenefi($value);
 				break;
 			case 7:
-				$this->setAtrubrosId($value);
+				$this->setAttipayuId($value);
 				break;
 			case 8:
-				$this->setAtestayuId($value);
+				$this->setAtrubrosId($value);
 				break;
 			case 9:
-				$this->setAttrasocId($value);
+				$this->setAtestayuId($value);
 				break;
 			case 10:
-				$this->setAtproveeId($value);
+				$this->setAttrasocId($value);
 				break;
 			case 11:
-				$this->setProayu($value);
+				$this->setAtproveeId($value);
 				break;
 			case 12:
-				$this->setNroofi($value);
+				$this->setProayu($value);
 				break;
 			case 13:
-				$this->setDesayu($value);
+				$this->setNroofi($value);
 				break;
 			case 14:
-				$this->setMotayu($value);
+				$this->setDesayu($value);
 				break;
 			case 15:
-				$this->setCreatedAt($value);
+				$this->setMotayu($value);
 				break;
 			case 16:
-				$this->setUpdatedAt($value);
+				$this->setCreatedAt($value);
 				break;
 			case 17:
-				$this->setUsucre($value);
+				$this->setUpdatedAt($value);
 				break;
 			case 18:
-				$this->setUsumod($value);
+				$this->setUsucre($value);
 				break;
 			case 19:
-				$this->setCodpre($value);
+				$this->setUsumod($value);
 				break;
 			case 20:
-				$this->setDetayu($value);
+				$this->setCodpre($value);
 				break;
 			case 21:
-				$this->setMonayu($value);
+				$this->setDetayu($value);
 				break;
 			case 22:
-				$this->setMonapr($value);
+				$this->setMonayu($value);
 				break;
 			case 23:
-				$this->setAtmedicoId($value);
+				$this->setMonapr($value);
 				break;
 			case 24:
-				$this->setRespat($value);
+				$this->setAtmedicoId($value);
 				break;
 			case 25:
-				$this->setInfmed($value);
+				$this->setRespat($value);
 				break;
 			case 26:
-				$this->setObsmed($value);
+				$this->setInfmed($value);
 				break;
 			case 27:
-				$this->setFecdiasoc($value);
+				$this->setObsmed($value);
 				break;
 			case 28:
-				$this->setUsudiasoc($value);
+				$this->setFecdiasoc($value);
 				break;
 			case 29:
-				$this->setResdiasoc($value);
+				$this->setUsudiasoc($value);
 				break;
 			case 30:
-				$this->setFecvisdoc($value);
+				$this->setResdiasoc($value);
 				break;
 			case 31:
-				$this->setUsuvisdoc($value);
+				$this->setFecvisdoc($value);
 				break;
 			case 32:
-				$this->setResvisdoc($value);
+				$this->setUsuvisdoc($value);
 				break;
 			case 33:
-				$this->setFecsol($value);
+				$this->setResvisdoc($value);
 				break;
 			case 34:
+				$this->setFecsol($value);
+				break;
+			case 35:
 				$this->setId($value);
 				break;
 		} 	}
@@ -1713,39 +1743,40 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 
 		if (array_key_exists($keys[0], $arr)) $this->setNroexp($arr[$keys[0]]);
 		if (array_key_exists($keys[1], $arr)) $this->setRefdoc($arr[$keys[1]]);
-		if (array_key_exists($keys[2], $arr)) $this->setPriayu($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setAtpriayuId($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setAtsolici($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setAtbenefi($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setAttipayuId($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setAtrubrosId($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setAtestayuId($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setAttrasocId($arr[$keys[9]]);
-		if (array_key_exists($keys[10], $arr)) $this->setAtproveeId($arr[$keys[10]]);
-		if (array_key_exists($keys[11], $arr)) $this->setProayu($arr[$keys[11]]);
-		if (array_key_exists($keys[12], $arr)) $this->setNroofi($arr[$keys[12]]);
-		if (array_key_exists($keys[13], $arr)) $this->setDesayu($arr[$keys[13]]);
-		if (array_key_exists($keys[14], $arr)) $this->setMotayu($arr[$keys[14]]);
-		if (array_key_exists($keys[15], $arr)) $this->setCreatedAt($arr[$keys[15]]);
-		if (array_key_exists($keys[16], $arr)) $this->setUpdatedAt($arr[$keys[16]]);
-		if (array_key_exists($keys[17], $arr)) $this->setUsucre($arr[$keys[17]]);
-		if (array_key_exists($keys[18], $arr)) $this->setUsumod($arr[$keys[18]]);
-		if (array_key_exists($keys[19], $arr)) $this->setCodpre($arr[$keys[19]]);
-		if (array_key_exists($keys[20], $arr)) $this->setDetayu($arr[$keys[20]]);
-		if (array_key_exists($keys[21], $arr)) $this->setMonayu($arr[$keys[21]]);
-		if (array_key_exists($keys[22], $arr)) $this->setMonapr($arr[$keys[22]]);
-		if (array_key_exists($keys[23], $arr)) $this->setAtmedicoId($arr[$keys[23]]);
-		if (array_key_exists($keys[24], $arr)) $this->setRespat($arr[$keys[24]]);
-		if (array_key_exists($keys[25], $arr)) $this->setInfmed($arr[$keys[25]]);
-		if (array_key_exists($keys[26], $arr)) $this->setObsmed($arr[$keys[26]]);
-		if (array_key_exists($keys[27], $arr)) $this->setFecdiasoc($arr[$keys[27]]);
-		if (array_key_exists($keys[28], $arr)) $this->setUsudiasoc($arr[$keys[28]]);
-		if (array_key_exists($keys[29], $arr)) $this->setResdiasoc($arr[$keys[29]]);
-		if (array_key_exists($keys[30], $arr)) $this->setFecvisdoc($arr[$keys[30]]);
-		if (array_key_exists($keys[31], $arr)) $this->setUsuvisdoc($arr[$keys[31]]);
-		if (array_key_exists($keys[32], $arr)) $this->setResvisdoc($arr[$keys[32]]);
-		if (array_key_exists($keys[33], $arr)) $this->setFecsol($arr[$keys[33]]);
-		if (array_key_exists($keys[34], $arr)) $this->setId($arr[$keys[34]]);
+		if (array_key_exists($keys[2], $arr)) $this->setParentesco($arr[$keys[2]]);
+		if (array_key_exists($keys[3], $arr)) $this->setPriayu($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setAtpriayuId($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setAtsolici($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setAtbenefi($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setAttipayuId($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setAtrubrosId($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setAtestayuId($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setAttrasocId($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setAtproveeId($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setProayu($arr[$keys[12]]);
+		if (array_key_exists($keys[13], $arr)) $this->setNroofi($arr[$keys[13]]);
+		if (array_key_exists($keys[14], $arr)) $this->setDesayu($arr[$keys[14]]);
+		if (array_key_exists($keys[15], $arr)) $this->setMotayu($arr[$keys[15]]);
+		if (array_key_exists($keys[16], $arr)) $this->setCreatedAt($arr[$keys[16]]);
+		if (array_key_exists($keys[17], $arr)) $this->setUpdatedAt($arr[$keys[17]]);
+		if (array_key_exists($keys[18], $arr)) $this->setUsucre($arr[$keys[18]]);
+		if (array_key_exists($keys[19], $arr)) $this->setUsumod($arr[$keys[19]]);
+		if (array_key_exists($keys[20], $arr)) $this->setCodpre($arr[$keys[20]]);
+		if (array_key_exists($keys[21], $arr)) $this->setDetayu($arr[$keys[21]]);
+		if (array_key_exists($keys[22], $arr)) $this->setMonayu($arr[$keys[22]]);
+		if (array_key_exists($keys[23], $arr)) $this->setMonapr($arr[$keys[23]]);
+		if (array_key_exists($keys[24], $arr)) $this->setAtmedicoId($arr[$keys[24]]);
+		if (array_key_exists($keys[25], $arr)) $this->setRespat($arr[$keys[25]]);
+		if (array_key_exists($keys[26], $arr)) $this->setInfmed($arr[$keys[26]]);
+		if (array_key_exists($keys[27], $arr)) $this->setObsmed($arr[$keys[27]]);
+		if (array_key_exists($keys[28], $arr)) $this->setFecdiasoc($arr[$keys[28]]);
+		if (array_key_exists($keys[29], $arr)) $this->setUsudiasoc($arr[$keys[29]]);
+		if (array_key_exists($keys[30], $arr)) $this->setResdiasoc($arr[$keys[30]]);
+		if (array_key_exists($keys[31], $arr)) $this->setFecvisdoc($arr[$keys[31]]);
+		if (array_key_exists($keys[32], $arr)) $this->setUsuvisdoc($arr[$keys[32]]);
+		if (array_key_exists($keys[33], $arr)) $this->setResvisdoc($arr[$keys[33]]);
+		if (array_key_exists($keys[34], $arr)) $this->setFecsol($arr[$keys[34]]);
+		if (array_key_exists($keys[35], $arr)) $this->setId($arr[$keys[35]]);
 	}
 
 	
@@ -1755,6 +1786,7 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 
 		if ($this->isColumnModified(AtayudasPeer::NROEXP)) $criteria->add(AtayudasPeer::NROEXP, $this->nroexp);
 		if ($this->isColumnModified(AtayudasPeer::REFDOC)) $criteria->add(AtayudasPeer::REFDOC, $this->refdoc);
+		if ($this->isColumnModified(AtayudasPeer::PARENTESCO)) $criteria->add(AtayudasPeer::PARENTESCO, $this->parentesco);
 		if ($this->isColumnModified(AtayudasPeer::PRIAYU)) $criteria->add(AtayudasPeer::PRIAYU, $this->priayu);
 		if ($this->isColumnModified(AtayudasPeer::ATPRIAYU_ID)) $criteria->add(AtayudasPeer::ATPRIAYU_ID, $this->atpriayu_id);
 		if ($this->isColumnModified(AtayudasPeer::ATSOLICI)) $criteria->add(AtayudasPeer::ATSOLICI, $this->atsolici);
@@ -1821,6 +1853,8 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 		$copyObj->setNroexp($this->nroexp);
 
 		$copyObj->setRefdoc($this->refdoc);
+
+		$copyObj->setParentesco($this->parentesco);
 
 		$copyObj->setPriayu($this->priayu);
 

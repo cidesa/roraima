@@ -460,6 +460,8 @@ propel:
       type: INTEGER
       foreignTable: caordcom
       foreignReference: id
+    parentesco:
+      type: INTEGER    
     priayu:
       type: INTEGER
       required: true
