@@ -62,55 +62,40 @@ class Fcdefins extends BaseFcdefins
     }
 
 
-
-	public function getNomfue_apu()
-    {
-  		return Herramientas::getX('CODFUE','FCFuePre','Nomfue',self::getCodapu());
-    }
-
-	public function getCodfue_apu()
-    {
-  		return self::getCodapu();
-    }
-
-	public function getNomfue_esp()
-    {
-  		return Herramientas::getX('CODFUE','FCFuePre','Nomfue',self::getCodesp());
-    }
-
 	public function getCodfue_esp()
     {
   		return self::getCodesp();
     }
 
-	public function getNomfue_inm()
-    {
-  		return Herramientas::getX('CODFUE','FCFuePre','Nomfue',self::getCodinm());
-    }
+	public function getDescripcioncodpic()
+	{
+  		return Herramientas::getX('CODFUE','Fcfuepre','Nomfue',self::getCodpic());
+	}
 
-	public function getCodfue_inm()
-    {
-  		return self::getCodinm();
-    }
+	public function getDescripcioncodveh()
+	{
+  		return Herramientas::getX('CODFUE','Fcfuepre','Nomfue',self::getCodveh());
+	}
 
-	public function getNomfue_pro()
-    {
-  		return Herramientas::getX('CODFUE','FCFuePre','Nomfue',self::getCodpro());
-    }
+	public function getDescripcioncodinm()
+	{
+  		return Herramientas::getX('CODFUE','Fcfuepre','Nomfue',self::getCodinm());
+	}
 
-	public function getCodfue_pro()
-    {
-  		return self::getCodpro();
-    }
+	public function getDescripcioncodpro()
+	{
+  		return Herramientas::getX('CODFUE','Fcfuepre','Nomfue',self::getCodpro());
+	}
 
-	public function getNomfue_veh()
-    {
-  		return Herramientas::getX('CODFUE','FCFuePre','Nomfue',self::getCodveh());
-    }
+	public function getDescripcioncodesp()
+	{
+  		return Herramientas::getX('CODFUE','Fcfuepre','Nomfue',self::getCodesp());
+	}
 
-	public function getCodfue_veh()
-    {
-  		return self::getCodveh();
-    }
+	public function getDescripcioncodapu()
+	{
+  		return Herramientas::getX('CODFUE','Fcfuepre','Nomfue',self::getCodapu());
+	}
+
 
 }

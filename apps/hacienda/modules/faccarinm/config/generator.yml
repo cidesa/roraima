@@ -10,7 +10,7 @@ generator:
       stacarinm:  { name: Usa M2, params: size=10 maxlength=1 }
 
     list:
-      title:     Definición de Uso de Inmuebles
+      title:     Definición de Caracteristica de Inmuebles
       display:   [=codcarinm, nomcarinm]
       sort:      nomcarinm
       filters:   [codcarinm, nomcarinm]
@@ -25,7 +25,7 @@ generator:
 
 
     edit:
-      title: Edición de Uso de Inmuebles
+      title: Edición de Caracteristica de Inmuebles
       display:
         "Datos Generales": [ _codcarinm, nomcarinm, _stacarinm]
       actions:

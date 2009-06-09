@@ -4,7 +4,7 @@ opciones:                  # Opciones generales
   tabla:                   Fcvalinm
   ancho:                   400
   anchogrid:               750
-  filas:                   6
+  filas:                   1
   titulo:                  ' '
   htmltotalfilas:          ' '
 

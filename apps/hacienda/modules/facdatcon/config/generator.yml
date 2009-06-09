@@ -17,7 +17,7 @@ generator:
       codmun:  { name: Municipio , params: size=6 maxlength=4}
       codedo:  { name: Estado , params: size=6 maxlength=4}
       codpai:  { name: Pais , params: size=6 maxlength=4}
-      ciucon:  { name: C.I./R.I.F, params: size=13 maxlength=30}
+      #ciucon:  { name: Ciudad, params: size=13 maxlength=30}
       cpocon:  { name: Código Postal, params: size=22 maxlength=6}
       apocon:  { name: Cod. Apartado Postal , params: size=40 maxlength=20}
       urlcon:  { name: URL , params: size=40 maxlength=50}
@@ -54,7 +54,7 @@ generator:
         "Datos Generales":   [ cedcon, rifcon, nomcon ]
         "Nacionalidad":   [ _naccon ]
         "Tipo":   [ _tipcon ]
-        "Datos Personales":   [ dircon, _codpar, ciucon, cpocon, apocon, telcon, emacon, faxcon, urlcon ]
+        "Datos Personales":   [ dircon, _codpar, cpocon, apocon, telcon, emacon, faxcon, urlcon ]
         "Recaudos Consignados":   [ _grid ]
       actions:
         _list:        ~

@@ -4,9 +4,9 @@
 
  echo Catalogo($fcdefins,1,array(
   'getprincipal' => 'getCodfue_esp',
-  'getsecundario' => 'getNomfue_esp',
+  'getsecundario' => 'getDescripcioncodesp',
   //cajitas abajo
-  'campoprincipal' => 'codesp',
-  'camposecundario' => 'nomfue',
-  'campobase' => 'codfue'
+  'campoprincipal' => 'codfue_esp',
+  'camposecundario' => 'descripcioncodesp',
+  'campobase' => 'id'
   ), 'Facdefespins_fcdefins', 'fcfuepre'); ?>

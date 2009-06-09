@@ -10,5 +10,6 @@
 class Fctipapu extends BaseFctipapu
 {
 	protected $grid= array();
+	protected $mascara="";
 }
 

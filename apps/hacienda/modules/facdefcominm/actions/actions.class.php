@@ -18,6 +18,28 @@ class FacDefComInmActions extends autoFacDefComInmActions
 
   }
 
+  public function validateEdit()
+  {
+    $this->coderr =-1;
+    $this->fccominm = $this->getFccominmOrCreate();
+    $this->updateFccominmFromRequest();
+
+    if($this->getRequest()->getMethod() == sfRequest::POST)
+    {
+      if ($this->getRequestParameter('id')=="")
+      {
+        $result=array();
+        $sql = "SELECT anovig FROM fccominm WHERE anovig ='".$this->getRequestParameter('fccominm[anovig]')."' and codcom='".$this->getRequestParameter('fccominm[codcom]')."'";
+        if (Herramientas::BuscarDatos($sql,&$result))
+        {
+          $this->coderr=701;
+          return false;
+        }
+      }
+     }
+     return true;
+  }
+
   public function configGrid($reg = array(),$regelim = array())
   {
     $this->regelim = $regelim;
@@ -114,43 +136,6 @@ class FacDefComInmActions extends autoFacDefComInmActions
 
     // Si por el contrario se quiere reemplazar un div en la vista, se debe deshabilitar
     // por supuesto tomando en cuenta que debe existir el archivo ajaxSuccess.php en la carpeta templates.
-
-  }
-
-
-  public function validateEdit()
-  {
-    $this->coderr =-1;
-
-    // Se deben llamar a las funciones necesarias para cargar los
-    // datos de la vista que serán usados en las funciones de validación.
-    // Por ejemplo:
-
-    if($this->getRequest()->getMethod() == sfRequest::POST){
-
-      // $this->configGrid();
-      // $grid = Herramientas::CargarDatosGrid($this,$this->obj);
-
-      // Aqui van los llamados a los métodos de las clases del
-      // negocio para validar los datos.
-      // Los resultados de cada llamado deben ser analizados por ejemplo:
-
-      // $resp = Compras::validarAlmajuoc($this->caajuoc,$grid);
-
-       //$resp=Herramientas::ValidarCodigo($valor,$this->tstipmov,$campo);
-
-      // al final $resp es analizada en base al código que retorna
-      // Todas las funciones de validación y procesos del negocio
-      // deben retornar códigos >= -1. Estos código serám buscados en
-      // el archivo errors.yml en la función handleErrorEdit()
-
-      if($this->coderr!=-1){
-        return false;
-      } else return true;
-
-    }else return true;
-
-
 
   }
 

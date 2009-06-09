@@ -16,7 +16,7 @@ generator:
       parpro:  { name: Formula, params: size=40 maxlength=300 }
       grid:  { name: . }
     list:
-      title:     Clasificador de Apuestas Licitas
+      title:     Clasificador de Propaganda Comercial
       display:   [=tippro, anovig, destip]
       sort:      destip
       filters:   [tippro, anovig, destip]
@@ -31,9 +31,9 @@ generator:
         _edit:        ~
         _delete:      ~
     edit:
-      title: Clasificador de Apuestas Licitas
+      title: Clasificador de Propaganda Comercial
       display:
-        "Datos Generales": [ _tippro, _anovig, destip, unipar, _frepar, parpro, _grid ]
+        "Datos Generales": [ _tippro, anovig, destip, unipar, _frepar, _grid, _parpro ]
       actions:
         _list:        ~
         _save:        ~

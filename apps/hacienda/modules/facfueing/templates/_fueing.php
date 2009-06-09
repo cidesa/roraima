@@ -3,10 +3,10 @@
 <?php
 
  echo Catalogo($fcfuepre,1,array(
-  'getprincipal' => 'getCodrede',
+  'getprincipal' => 'getFueing',
   'getsecundario' => 'getDesrede',
   //cajitas abajo
   'campoprincipal' => 'fueing',
   'camposecundario' => 'desrede',
   'campobase' => 'id'
-  ), 'Facfueing_Fueing', 'fcrecdes'); ?>
+  ), 'Facfueing_Ingrec', 'contabb'); ?>

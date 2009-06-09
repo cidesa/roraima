@@ -1,68 +1,85 @@
 generator:
-  class:              sfPropelAdminGenerator
+  class:              cidesaPropelAdminGenerator
   param:
     model_class:      Fcreginm
-    theme:            default
+    theme:            cidesaGenerator
     fields:
-      nroinm:      {  name: Nro. Inscripción } 
-      codcatfis:   {  name: Código }
-      nomcatfis:   {  name: Nombre }
-      coduso:      {  name: Código }
-      nomuso:      {  name: Nombre }            # Campo Externo FCUsoInm => Nombre Representante
-      codcarinm:   {  name: Código }
-      nomcarinm:   {  name: Nombre }            # Campo Externo FCCarInm => Nombre
-      codsitinm:   {  name: Código }
-      nomsitinm:   {  name: Nombre }            # Campo Externo FCSitJurInm => Nombre
-      rifcon:      {  name: C.I. / RIF }
-      rifrep:      {  name: C.I. / RIF }
-      rifconant:   {  name: C.I. / RIF }        # Campo Externo FCTraInm.
-      nomcon:      {  name: Nombre } 
-      dircon:      {  name: Dirección }
-      fecpag:      {  name: Fecha Último Pago }
-      feccal:      {  name: Fecha Último Avalúo }
-      fecreg:      {  name: Fecha }
-      nomrep:      {  name: Nombre }            # Campo Externo FCConRep => Nombre Representante
-      dirrep:      {  name: Dirección }         # Campo Externo FCConRep => Nombre Representante
-      naccon:      {  name: Nacionalidad }      # Campo Externo FCConRep => Nombre Representante
-      tipcon:      {  name: Tipo  }             # Campo Externo FCConRep => Nombre Representante
-      dirinm:      {  name: Dirección }
-      linnor:      {  name: Norte }
-      linsur:      {  name: Sur }
-      linest:      {  name: Este }
-      linoes:      {  name: Oeste }
-      mtrter:      {  name: M2 }
-      mtrcon:      {  name: M2 }
-      bster:       {  name: Bs }
-      bscon:       {  name: Bs }
-      rifrep:      {  name: C.I. / RIF }
-      funrec:      {  name: Funcionario Receptor }
-      estinm:      {  name: Estado }
-      codcatinm:   {  name: Código }
-      nomconant:   {  name: Nombre }
-      dirconant:   {  name: Dirección }
-      valinm:      {  name: Precio }
-      codtip:      {  name: Código }
-      codzon:      {  name: Código }
-      destip:      {  name: Descripción }
-      deszon:      {  name: Descripción }
-      anual:       {  name: Bs. /M2 Anual Contrucción }
-      folio:       {  name: Fólio }
-      tomo:        {  name: Tomo }
-      numdoc:      {  name: Número }
-      fecdoc:      {  name: Fecha }
-      anualt:      {  name: Bs. /M2 Anual Terreno }
-      nacrep:      {  name: Nacionalidad }
-      tiprep:      {  name: Tipo }
+      nroinm:  { name: Número de Inscripción, params: size=22 maxlength=20 }
+      nomcon:  { name: Nombre, params: size=22 maxlength=20 }
+      rifcon:  { name: C.I. / RIF., params: size=22 maxlength=20 }
+      rifrep:  { name: C.I. / RIF. Representante, params: size=22 maxlength=20 }
+      nacconcon:  { name: Nacionalidad,  params: size=1 maxlength=1 readonly=false }
+      tipconcon:  { name: Tipo de Persona, params: size=1 maxlength=1 readonly=false }
+      nacconrep:  { name: Nacionalidad,  params: size=1 maxlength=1 readonly=false }
+      tipconrep:  { name: Tipo de Persona,  params: size=1 maxlength=1 readonly=false }
+      fcconreprifcon:  { name: C.I. / RIF., params: size=16 maxlength=14 readonly=false }
+      fcconrepdircon:  { name: Dirección, params: size=50 maxlength=255 readonly=false }
+      fcconrepnomcon:  { name: Nombre, params: size=50 maxlength=255 readonly=false }
+      codcatfis:  { name: Catrasto con Fines Fiscales, params: size=32 maxlength=30 }
+      codcatinm:  { name: Código Catrastal de Inmueble, params: size=5 maxlength=3 }
+      codcarinm:  { name: Código Características, params: size=5 maxlength=3 readonly=false }
+      grid:  { name: . , params: size=17 maxlength=15 }
+      desestinm:  { name: Código Características, params: size=5 maxlength=3 readonly=false }
+      anoava:  { name: Año Avaluo, params: size=5 maxlength=3 readonly=false }
+      codzon:  { name: Zona, params: size=5 maxlength=3 readonly=false }
+      mtrter:  { name: M2 Terreno, params: size=10 }
+      bster:  { name: Bolivares Terreno, params: size=10 }
+      mtrcon:  { name: M2 Construcción, params: size=10 }
+      bscon:  { name: Bolivares Metro Construcción, params: size=10 }
+      fecpag:  { name: Fecha Ultimo Pago, type: input_date_tag, params: date_format='dd/MM/yyyy' }
+      feccal:  { name: Fecha Ultimo Avalúo, type: input_date_tag, params: date_format='dd/MM/yyyy' }
+      total_avaluo:  { name: Total Avalúo, params: size=10 }
+      aveinm:  { name: Avenidas,  params: size=1 maxlength=1 }
+      nrociv:  { name: Nro. Civico,  params: size=1 maxlength=1 }
+      urbinm:  { name: Urbanizaciòn,  params: size=1 maxlength=1 }
+      tipope:  { name: Tipo Operación,  params: size=1 maxlength=1 }
+      prodoc:  { name: Protocolo,  params: size=1 maxlength=1 }
+      linnordoc:  { name: Lindero Norte,  params: size=50 maxlength=250 }
+      linsurdoc:  { name: Lindero Sur,  params: size=50 maxlength=250 }
+      linestdoc:  { name: Lindero Este,  params: size=50 maxlength=250 }
+      lindesdoc:  { name: Lindero Oeste,  params: size=50 maxlength=250 }
+      tipope:  { name: Tipo Operación,  params: size=1 maxlength=1 }
+      fecdoc:  { name: Fecha de Inicio, params: date_format='dd/MM/yyyy' }
+      valinm:  { name: Precio,  params: size=10 }
+      folio:  { name: Folio,  params: size=10 }
+      numdoc:  { name: Numero,  params: size=10 }
+      tomo:  { name: Tomo,  params: size=10 }
+      tridoc:  { name: Trimestre,  params: size=10 }
+      aredoc:  { name: Area,  params: size=10 }
+      dirinm:  { name: Dirección,  params: size=50 maxlength=250 }
+      linnor:  { name: Lindero Norte,  params: size=50 maxlength=250 }
+      linsur:  { name: Lindero Sur,  params: size=50 maxlength=250 }
+      linest:  { name: Lindero Este,  params: size=50 maxlength=250 }
+      linoes:  { name: Lindero Oeste,  params: size=50 maxlength=250 }
+      codsitinm:  { name: Codigo Situación Juridica,  params: size=50 maxlength=250 }
+      coduso:  { name: Codigo Uso de Inmueble,  params: size=50 maxlength=250 }
     list:
-      title:          Registro de Inmuebles
-      display:        [=nroinm, fecreg, rifcon, nomcon, rifrep, nomrep ]     
+      title:     Registro de Inmuebles
+      display:   [ =nroinm, =rifcon, nomcon]
+      sort:      nomcon
+      filters:   [nroinm, fecsol, nomcon]
+      fields:
+        nomcon:
+          params: size=10
+        fecsol:
+          params: size=10
+      max_per_page: 5
       object_actions:
         _edit:        ~
-        _delete:      ~      
-      filters:        [nroinm, fecreg, rifcon, nomcon, rifrep, nomrep ] 
-      max_per_page:   5
+        _delete:      ~
+      sort:  nroinm
     edit:
-      title:          Edición de Registro de Inmuebles
-      display:       [nroinm, fecreg, rifcon, nomcon, dircon, naccon, tipcon, rifrep, nomrep, dirrep, nacrep, tiprep, codcatfis, nomcatfis, codcatinm, codzon, deszon, codtip, destip, codcarinm, nomcarinm, anual, anualt ]
-
-#  coduso, nomuso, codsitinm, nomsitinm, rifconant, fecpag, feccal, naccon, tipcon, dirinm, linnor, linsur, linest, linoes, mtrter, mtrcon, bster, bscon, funrec, estinm, nomconant, dirconant, valinm, folio, tomo, numdoc, fecdoc      
+      title:          Edición Registro de Inmuebles
+      display:
+        "Datos Contribuyentes":  [ _rifcon, _nacconcon, _tipconcon  ]
+        "Datos del Representante Legal":  [ _rifrep, _nacconrep, _tipconrep ]
+        "Datos del Dueño Anterior":  [ fcconreprifcon, fcconrepnomcon, fcconrepdircon ]
+        "Catastro Uso":  [ _codcatfis, _codcatinm, _codcarinm ]
+        "Avaluo":  [ anoava, _codzon, _grid, mtrter, bster, mtrcon, bscon, total_avaluo, fecpag, feccal ]
+        "Datos Actuales del Inmueble":  [ aveinm, nrociv, urbinm, dirinm, tipope, linnor, linsur, linest, linoes, _codsitinm, _coduso ]
+        "Datos Actuales Segun Documento del Inmueble":  [ tipope, prodoc, fecdoc, valinm, folio, numdoc, tomo, tridoc, aredoc, linnordoc, linsurdoc, linestdoc, lindesdoc ]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

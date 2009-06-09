@@ -7,5 +7,6 @@
   'getsecundario' => 'getNomfue',
   'campoprincipal' => 'fueing',
   'camposecundario' => 'nomfue',
-  'campobase' => 'codfue'
+  'campobase' => 'id'
   ), 'Facdefsol_fcfuepre', 'fcfuepre'); ?>
+

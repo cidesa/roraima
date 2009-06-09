@@ -4,7 +4,7 @@ opciones:                  # Opciones generales
   tabla:                   Fcdefdetsol
   ancho:                   700
   anchogrid:               750
-  filas:                   4
+  filas:                   1
   titulo:                  ' '
   htmltotalfilas:          ' '
 1:       # Columna 1
@@ -28,7 +28,7 @@ opciones:                  # Opciones generales
   esgrabable:			   true
   html:                    []
 
-3:       # Columna 4
+4:       # Columna 4
   titulo:                  Mostrar
   tipo:                    c
   nombrecampo:             imprim

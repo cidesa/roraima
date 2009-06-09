@@ -9,9 +9,5 @@
  */
 class Fcactcom extends BaseFcactcom
 {
-	public function getFormatopre()
-    {
-    	$valor= (Herramientas::getX('codemp','Fcdefins','foract',"001"));
-    	return $valor;
-    }
+	protected $mascara="";
 }

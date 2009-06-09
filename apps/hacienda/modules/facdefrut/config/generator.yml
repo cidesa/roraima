@@ -8,7 +8,7 @@ generator:
       codrut:	{ name: Código, params: size=10 maxlength=6}
       desrut:	{ name: Descripcion, params: size=40 maxlength=119}
     list:
-      title:     Definición Tipos de Licencias
+      title:     Definición Tipos de Rutas
       display:   [=codrut, desrut]
       sort:      desrut
       filters:   [codrut, desrut]
@@ -21,7 +21,7 @@ generator:
         _delete:      ~
       sort:  codrut
     edit:
-      title:          Edición Tipos de Licencias
+      title:          Edición Tipos de Rutas
       display:
         "Datos Generales":   [ _codrut, desrut ]
       actions:

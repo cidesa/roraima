@@ -56,11 +56,16 @@ hacienda:
         Pais:                                                 oycdefdivpai
         Estado:                                               oycdefdivest
         Ciudad:                                               oycdefdivciu
-    Atención al Contribuyente:
-      Registro de Contribuyente:                            facdatcon
+    Desarrolladas:
+      Atención al Contribuyente:
+        Registro de Contribuyente:                            facdatcon
+      Licencia de Actividades Economicas:
+        Solicitud:                                            facpicsollic
+        Otorgamiento:                                         facpiclic
+        Inmuebles Urbanos:                                    facinmreg
+    Por Desarrollar:
       Registro de Cajeros:                                  fcajero
       Licencia de Actividades Economicas:
-        Solicitud:                                          facpicsollic
       Inmuebles Urbanos:                                    facinmreg
       Estado de Cuenta Integral:                            facestcueint
         #Estado de Cuenta por Referencia:                     facestcueintref
@@ -78,13 +83,38 @@ hacienda:
       #Actualizacion de Deudas:                             facactdeuret
       Generar Comprobante Contable:                         facingresos
     Reportes:
-      Catálogo de Fuentes Ingresos:                           inrfueing
-      Alfabético de Contribuyentes:                           inralfcon
-      Listado de Proveedores:                                 carprovee2
-      Recaudos:                                               carrecaud
-      Planilla de Liquidacion:                                inrplaliq
-      Listado de Liquidaciones:                               inrlisliq
-      Listado de Liquidacion por Contribuyente:               inrlisliqcont
-      Planilla de Reintegro:                                  inrplarei
+      Definición de Actividades Comerciales:                fcactecon
+      Definición de Caracteristicas de Inmuebles:           fccarinm
+      Catálogo de Catastro Con Fines Fiscales:              fccatfis
+      Definición de Muebles Urbanos:                        fccominm
+      Catálogo de Contribuyentes:                           fcconrep
+      Catálogo de Códigos Catastrales:                      fcdefnca
+      Edición de Rango en Bs. para el Pago de Impuesto:     fcdefpgi
+      Catálogo de Descuento:                                fcdescto
+      Catálogos de Tabla de Depreciación:                   fcdprinm
+      Catálogo de Multas en Declaración:                    fcmuldec
+      Catálogo de Recargos:                                 fcreccarg
+      Definición de Tipo de Rutas:                          fcrutas
+      Situaciones Juridicas de Inmuebles:                   fcsitjuri
+      Tasas de Intereses Bancarios:                         fctasban
+      Catálogo Clasificador de Apuestas Licitas:            fctipapu
+      Catálogo Clasificador de Espectaculos Publicos:       fctipesp
+      Definición de Tipos de Inmuebles:                     fctipinm
+      Tipos de Licencias:                                   fctiplic
+      Tipos de Pagos:                                       fctippag
+      Catálogo Clasificador de Propaganda Comercial:        fctippro
+      Definición de Uso de Inmuebles:                       fcusoinm
+      Catálogo Clasificador de Vehiculos:                   fcusoveh
+      Catálogos de Inmuebles Urbanos:                       fcvalinm
+      Definición de Tipo de Solvencias:                     fdeftipsol
+    Por Aprobar y Desarrollar:
+      Catálogo de Fuentes Ingresos:                         inrfueing
+      Alfabético de Contribuyentes:                         inralfcon
+      Listado de Proveedores:                               carprovee2
+      Recaudos:                                             carrecaud
+      Planilla de Liquidacion:                              inrplaliq
+      Listado de Liquidaciones:                             inrlisliq
+      Listado de Liquidacion por Contribuyente:             inrlisliqcont
+      Planilla de Reintegro:                                inrplarei
     Mantenimiento:
       Cambiar Contraseña:                                     cambiopasswd

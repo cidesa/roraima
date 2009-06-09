@@ -2,6 +2,8 @@ methods:
   post:
    - "fctipapu{tipapu}"
    - "fctipapu{destip}"
+   - "fctipapu{unipar}"
+   - "fctipapu{anovig}"
 
 names:
   fctipapu{tipapu}:
@@ -13,9 +15,30 @@ names:
     required:  Yes
     required_msg: La Descripción es un campo requerido
 
+  fctipapu{anovig}:
+    required:  Yes
+    required_msg: Año es un campo requerido
+
+
+  fctipapu{unipar}:
+    required:  Yes
+    required_msg: El Monto no puedo estar en Blanco
+    validators: MyNumberValidator_unipar
+
 Validator_tipapu:
     class: sfPropelUniqueValidator
     param:
         class:        Fctipapu
         column:       tipapu
         unique_error: El registro ya Existe intente con otro.
+
+MyNumberValidator_unipar:
+    class: sfNumberValidator
+    param:
+        type:         decimal
+        type_error:   Por favor, Introduzca Números Decimales
+        nan_error:    Por Favor, introduzca un Número Decimal
+        min:          0.0
+        min_error:    El valor tiene que ser mayor que cero
+        max:          500.0
+        max_error:    El valor debe contener maximo 9999999999.99

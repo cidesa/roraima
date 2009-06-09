@@ -11,11 +11,121 @@
 class FacdesliqActions extends autoFacdesliqActions
 {
 
+  protected function updateFcdefdescFromRequest()
+  {
+    $fcdefdesc = $this->getRequestParameter('fcdefdesc');
+
+    if (isset($fcdefdesc['coddes']))
+    {
+      $this->fcdefdesc->setCoddes($fcdefdesc['coddes']);
+    }
+    if (isset($fcdefdesc['nomdes']))
+    {
+      $this->fcdefdesc->setNomdes($fcdefdesc['nomdes']);
+    }
+    if (isset($fcdefdesc['tipo']))
+    {
+      $this->fcdefdesc->setTipo($fcdefdesc['tipo']);
+    }
+
+    if (isset($fcdefdesc['auto'])) $this->fcdefdesc->setAuto("S");
+    else  $this->fcdefdesc->setAuto("N");
+
+    if (isset($fcdefdesc['limita'])) $this->fcdefdesc->setLimita("S");
+    else  $this->fcdefdesc->setLimita("N");
+
+    if (isset($fcdefdesc['anoact'])) $this->fcdefdesc->setAnoact("S");
+    else  $this->fcdefdesc->setAnoact("N");
+
+    if (isset($fcdefdesc['modo']))
+    {
+      $this->fcdefdesc->setModo($fcdefdesc['modo']);
+    }
+    if (isset($fcdefdesc['grid']))
+    {
+      $this->fcdefdesc->setGrid($fcdefdesc['grid']);
+    }
+    if (isset($fcdefdesc['gridb']))
+    {
+      $this->fcdefdesc->setGridb($fcdefdesc['gridb']);
+    }
+
+    if (isset($fcdefdesc['coddes']))
+    {
+      $this->fcdefdesc->setCoddes($fcdefdesc['coddes']);
+    }
+    if (isset($fcdefdesc['nomdes']))
+    {
+      $this->fcdefdesc->setNomdes($fcdefdesc['nomdes']);
+    }
+    if (isset($fcdefdesc['codfue']))
+    {
+      $this->fcdefdesc->setCodfue($fcdefdesc['codfue']);
+    }
+    if (isset($fcdefdesc['tipo']))
+    {
+      $this->fcdefdesc->setTipo($fcdefdesc['tipo']);
+    }
+    if (isset($fcdefdesc['modo']))
+    {
+      $this->fcdefdesc->setModo($fcdefdesc['modo']);
+    }
+
+    if (isset($fcdefdesc['coddes']))
+    {
+      $this->fcdefdesc->setCoddes($fcdefdesc['coddes']);
+    }
+    if (isset($fcdefdesc['nomdes']))
+    {
+      $this->fcdefdesc->setNomdes($fcdefdesc['nomdes']);
+    }
+    if (isset($fcdefdesc['codfue']))
+    {
+      $this->fcdefdesc->setCodfue($fcdefdesc['codfue']);
+    }
+    if (isset($fcdefdesc['tipo']))
+    {
+      $this->fcdefdesc->setTipo($fcdefdesc['tipo']);
+    }
+    if (isset($fcdefdesc['modo']))
+    {
+      $this->fcdefdesc->setModo($fcdefdesc['modo']);
+    }
+  }
+
+
   // Para incluir funcionalidades al executeEdit()
   public function editing()
   {
-		$this->configGrid();
-		$this->configGridb();
+	  $this->configGrid();
+      $this->configGridb();
+	  if ($this->fcdefdesc->getAuto()=="N")
+      {
+        $this->fcdefdesc->setAuto("");
+      }
+	  if ($this->fcdefdesc->getLimita()=="N")
+      {
+        $this->fcdefdesc->setLimita("");
+      }
+	  if ($this->fcdefdesc->getAnoact()=="N")
+      {
+        $this->fcdefdesc->setAnoact("");
+      }
+  }
+
+  public function deleting($fcdefdesc)
+  {
+   if ($fcdefdesc->getId()!="")
+   {
+	$c = new Criteria();
+	$c->add(FcrangosdesPeer::CODDES,$fcdefdesc->getCoddes());
+	FcrangosdesPeer::doDelete($c);
+	$c = new Criteria();
+	$c->add(FcdefrecdesPeer::CODDES,$fcdefdesc->getCoddes());
+	FcdefrecdesPeer::doDelete($c);
+    $fcdefdesc->delete();
+    return -1;
+   }
   }
 
   public function configGrid($reg = array(),$regelim = array())
@@ -136,11 +246,6 @@ class FacdesliqActions extends autoFacdesliqActions
     Hacienda::salvar_grid_DefDesc($fcdefdesc, $grid);
 	Hacienda::salvar_grid_Fcdefrecdes($fcdefdesc, $gridb);
     return -1;
-  }
-
-  public function deleting($clasemodelo)
-  {
-    return parent::deleting($clasemodelo);
   }
 
 

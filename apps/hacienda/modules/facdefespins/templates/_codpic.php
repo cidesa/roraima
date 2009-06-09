@@ -3,10 +3,12 @@
 <?php
 
  echo Catalogo($fcdefins,1,array(
+ //campos de la la tabla a consultar se colocan en la clase principal
   'getprincipal' => 'getCodfue',
-  'getsecundario' => 'getNomfue',
-  //cajitas abajo
+  'getsecundario' => 'getDescripcioncodpic',
+ //campos de la la tabla a consultar se colocan en la clase del catalogo
   'campoprincipal' => 'codpic',
-  'camposecundario' => 'nomfue',
-  'campobase' => 'codfue'
+  'camposecundario' => 'descripcioncodpic',
+  'campobase' => 'id'
   ), 'Facdefespins_fcdefins', 'fcfuepre'); ?>
+

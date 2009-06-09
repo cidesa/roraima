@@ -20,6 +20,18 @@ class FacdefdprinmActions extends autoFacdefdprinmActions
 		$this->configGrid();
   }
 
+  public function deleting($fcdprinm)
+  {
+   if ($fcdprinm->getId()!="")
+   {
+	$c = new Criteria();
+	$c->add(FcdprinmPeer::ANOVIG,$fcdprinm->getAnovig());
+	FcdprinmPeer::doDelete($c);
+    $fcdprinm->delete();
+    return -1;
+   }
+  }
+
   public function configGrid($anovig='', $reg = array(),$regelim = array())
   {
     $c = new Criteria();
@@ -130,10 +142,6 @@ class FacdefdprinmActions extends autoFacdefdprinmActions
 	return -1;
   }
 
-  public function deleting($clasemodelo)
-  {
-    return parent::deleting($clasemodelo);
-  }
 
 
 }

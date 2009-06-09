@@ -5,7 +5,7 @@ generator:
     theme:            cidesaGenerator
 
     fields:
-      tipesp:  { name: Código de Uso, params: size=6 maxlength=4 }
+      tipesp:  { name: Código de Uso, params: size=12 maxlength=10 }
       anovig:  { name: Año de Vigencia del Uso, params: size=5 maxlength=4 }
       destip:  { name: Descripcion , params: size=80 maxlength=250 }
       pormon:  { name: Monto del Aforo, params: size=3 maxlength=1 }
@@ -13,7 +13,7 @@ generator:
       statip:  { name: Edad Límite, params: size=3 maxlength=1 }
       unipar:  { name: Fracción U.T, params: size=40 maxlength=50 }
       frepar:  { name: Frecuencia, params: size=10  }
-      paresp:  { name: Formula, params: size=40 maxlength=300 }
+      paresp:  { name: Formula, params: size=80 maxlength=300 }
       exoesp:  { name: Exonerado, params: size=3 maxlength=1 }
       grid:  { name: . }
     list:
@@ -34,7 +34,7 @@ generator:
     edit:
       title: Clasificador de Espectaculos Públicos
       display:
-        "Datos Generales": [ _tipesp, _anovig, destip, unipar, _frepar, parpro, _grid ]
+        "Datos Generales": [ _tipesp, anovig, destip, _exoesp, unipar, _frepar, _grid, _paresp ]
       actions:
         _list:        ~
         _save:        ~

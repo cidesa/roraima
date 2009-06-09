@@ -169,15 +169,7 @@ class FacdefesptippagActions extends autoFacdefesptippagActions
 
   }
 
-  public function saving($clasemodelo)
-  {
-    return parent::saving($clasemodelo);
-  }
 
-  public function deleting($clasemodelo)
-  {
-    return parent::deleting($clasemodelo);
-  }
 
 
 }

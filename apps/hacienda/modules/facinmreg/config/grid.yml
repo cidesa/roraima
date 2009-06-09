@@ -1,0 +1,76 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                true
+  tabla:                   fcdetinm
+  ancho:                   800
+  anchogrid:               800
+  filas:                   1
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+
+1:       # Columna 1
+  titulo:                  Código
+  tipo:                    t
+  nombrecampo:             codtip
+  esgrabable:			   true
+  html:                    [size="15", readonly=true]
+2:       # Columna 2
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             destip
+  esgrabable:			   true
+  html:                    [size="20", readonly=true]
+3:       # Columna 3
+  titulo:                  Año de Construcción
+  tipo:                    c
+  nombrecampo:             anocon
+  esgrabable:			   true
+  html:                    []
+4:       # Columna 4
+  titulo:                  Bs./M2 Terreno Anual
+  tipo:                    t
+  nombrecampo:             valter
+  esgrabable:			   true
+  html:                    [size="10", readonly=true]
+5:       # Columna 5
+  titulo:                  Bs./M2 Construcción Anual
+  tipo:                    t
+  nombrecampo:             valcon
+  esgrabable:			   true
+  html:                    [size="10", readonly=true]
+6:       # Columna 6
+  titulo:                  M2 Terreno
+  tipo:                    t
+  nombrecampo:             mtrter
+  esgrabable:			   true
+  html:                    [size="10", readonly=true]
+8:       # Columna 8
+  titulo:                  Bs./M2 Terreno
+  tipo:                    t
+  nombrecampo:             valter
+  esgrabable:			   true
+  html:                    [size="10", readonly=true]
+9:       # Columna 9
+  titulo:                  M2 Contrucción
+  tipo:                    t
+  nombrecampo:             mtrcon
+  esgrabable:			   true
+  html:                    [size="10", readonly=true]
+10:       # Columna 10
+  titulo:                  Bs./M2 Construcción
+  tipo:                    t
+  nombrecampo:             porexo
+  esgrabable:			   true
+  html:                    [size="10", readonly=true]
+11:       # Columna 11
+  titulo:                  Depreciación
+  tipo:                    t
+  nombrecampo:             anual
+  esgrabable:			   true
+  html:                    [size="10", readonly=true]
+12:       # Columna 12
+  titulo:                  Total Bs./MS Constrción
+  tipo:                    t
+  nombrecampo:             valntr
+  esgrabable:			   true
+  html:                    [size="10", readonly=true]

@@ -4,19 +4,19 @@ opciones:                  # Opciones generales
   tabla:                   fcrangosdes
   ancho:                   400
   anchogrid:               600
-  filas:                   6
+  filas:                   2
   titulo:                  ' '
   htmltotalfilas:          ' '
 1:       # Columna 1
-  titulo:                  Desde
+  titulo:                  Dìas Desde
   tipo:                    t
   nombrecampo:             diasdesde
   esgrabable:			   true
-  html:                    []
+  html:                    [onClick=Sumar_dias(this.id)]
 
 2:       # Columna 2
-  titulo:                  Hasta
-  tipo:                    m
+  titulo:                  Dìas Hasta
+  tipo:                    t
   nombrecampo:             diashasta
   esgrabable:			   true
   html:                    []

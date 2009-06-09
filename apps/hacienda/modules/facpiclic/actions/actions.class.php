@@ -1,80 +1,1133 @@
 <?php
 
 /**
- * facpiclic actions.
+ * Facpiclic actions.
  *
  * @package    siga
- * @subpackage facpiclic
+ * @subpackage Facpiclic
  * @author     Your name here
  * @version    SVN: $Id: actions.class.php 2288 2006-10-02 15:22:13Z fabien $
  */
-class facpiclicActions extends autofacpiclicActions
+class FacpiclicActions extends autoFacpiclicActions
 {
-	public function configGrid()
-	{
+  public function editing()
+  {
+        $this->setVars();
+		$this->fcsollic->setMascara($this->mascara);
+		$this->configGrid();
+  }
 
-		/*$c = new Criteria();
-		 $c->add(CaartalmPeer::CODART,str_pad($this->caregart->getCodart(),20,' '));
-		 $per = CaartalmPeer::doSelect($c);*/
-		$per = array();
-			
-		$filas=17;
-		$cabeza="Actividades Comerciales";
-		$eliminar=true;
-		$titulos=array("Código","Descripción","Ingresos Brutos","Exonerable","Exonerada","Exoneración");
-		$ancho="900";
-		$alignf=array('center','center','center','center','center','center');
-		$alignt=array('center','center','center','center','center','center');
-		$campos=array('Codcon','Codtipact','Numofi','Fecact','Numofi','Fecact');
-		$catalogos=array('','','','','','');// por todas las columnas, si no tiene, se coloca vacio
-		$ajax=array('2-x2-x1','','3-x4-x3','','3-x4-x3',''); //parametro-cajitamostrar-autocompletar
-		$tipos=array('t','t','t','t','t','t'); //texto, monto, fecha --solo de los campos a grabar, no de todo el grid
-		$montos=array("5","6","7","8","7","8");
-		$totales=array("", "", "ocregact_exitot", "", "ocregact_exitot", "");
-		$mascaraubicacion=$this->mascaraubicacion;
-		$html=array('type="text" size="25" disabled=true','type="text" size="25" disabled=true','type="text" size="25" disabled=true','type="text" size="25" disabled=true','type="text" size="25" disabled=true','type="text" size="25" disabled=true');
-		$js=array('','','onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascaraubicacion.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}"','','onKeypress="entermonto(event,this.id)"','onKeypress="entermonto(event,this.id)"','onKeypress="entermonto(event,this.id)"','onKeypress="entermonto(event,this.id)"');
-		$grabar=array("1","3","5","6","7","8");
-		$filatotal='';
+  public function setVars()
+  {
+    $this->mascara = Hacienda::Cargar_mascara();
+  }
 
 
-		$this->obj=array('cabeza'=>$cabeza, 'filas'=>$filas, 'eliminar'=>$eliminar, 'titulos'=>$titulos,
-		'ancho'=>$ancho, 'alignf'=>$alignf, 'alignt'=>$alignt, 'campos'=>$campos, 'catalogos' => $catalogos,
-		'ajax' => $ajax, 'tipos' => $tipos, 'montos'=>$montos, 'filatotal' => $filatotal, 'totales'=>$totales,
-		'html'=>$html, 'js'=>$js, 'datos'=> $per, 'grabar'=>$grabar, 'tabla' => 'Caartalm');
-		//////////////////////
+  public function configGrid($reg = array(),$regelim = array())
+  {
+    $c = new Criteria();
+    $c->add(FcactpicPeer::NUMDOC,$this->fcsollic->getNumsol());
+    $per = FcactpicPeer::doSelect($c);
+    $this->columnas = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/facpicsollic/'.sfConfig::get('sf_app_module_config_dir_name').'/grid');
+    $this->columnas[1][0]->setCatalogo('Fcactcom','sf_admin_edit_form', array('codact'=>'1','desact'=>'2'), 'Facpicsollic_Fcactcom');
+	$this->columnas[1][2]->setCombo(Constantes::ListaFcsollic());
+    $this->grid = $this->columnas[0]->getConfig($per);
+    $this->fcsollic->setGrid($this->grid);
+  }
 
-	}
-	public function executeEdit()
-	{
-		$this->fcsollic = $this->getFcsollicOrCreate();
-        $this->configGrid();
+  public function executeAjax()
+  {
+    $codigo = $this->getRequestParameter('codigo','');
+	$javascript = "";
+    $ajax   = $this->getRequestParameter('ajax','');
+    switch ($ajax){
+      case '1':
+	    $nomcon="";
+	    $dircon="";
+	    $correlativo="";
+          $numero = $this->getRequestParameter('numero','');
+	      $c= new Criteria();
+          $c->addDescendingOrderByColumn(FcmodlicPeer::REFMOD);
+	      //$c->add(FcmodlicPeer::NUMSOL,trim($numero));
+	      $countreg = FcmodlicPeer::doSelectOne($c);
+	      if (count($countreg)>0)
+	      {
+			$correlativo=str_pad(trim($countreg->getRefmod()+1),12,'0',STR_PAD_LEFT);
+	      }
+	      else
+	      	$correlativo=str_pad(1,12,'0',STR_PAD_LEFT);
+          $fecha = date("d/m/Y");
+	      $c= new Criteria();
+	      $c->add(FcconrepPeer::RIFCON,trim($codigo));
+	      $fcconrep2 = FcconrepPeer::doSelectOne($c);
+	      if (count($fcconrep2)>0)
+	      {
+  	      	  $javascript = $javascript . "$('autorizacion').show();";
+	          $nomcon=$fcconrep2->getNomcon();
+	          $dircon=$fcconrep2->getDircon();
+	          if ($fcconrep2->getNaccon()=='V')
+	          {
+	          	$javascript = $javascript . "$('fcsollic_nacconcon_V').checked=true; ";
+	          }
+	          else
+	          {
+	          	$javascript = $javascript . "$('fcsollic_nacconcon_E').checked=true; ";
+	          }
+	          if ($fcconrep2->getTipcon()=='N')
+	          {
+	          	$javascript = $javascript . "$('fcsollic_tipconcon_N').checked=true; ";
+	          }
+	          else
+	          {
+	          	$javascript = $javascript . "$('fcsollic_tipconcon_J').checked=true; ";
+	          }
+	      }
+	      else
+	      {
+   	      	$javascript = $javascript . "alert('El Contribuyente no Existe, incluya todos sus Datos Basicos');";
+	      	$javascript = $javascript . "$('autorizacion').show();";
+	      	$javascript = $javascript . "document.getElementById('fcsollic_nomcon').removeAttribute('readonly',1);";
+	      }
 
-		if ($this->getRequest()->getMethod() == sfRequest::POST)
-		{
-			$this->updateFcsollicFromRequest();
+          $output = '[["fcsollic_licmodificada","I",""],["fcsollic_nomcon","'.$nomcon.'",""],["fcsollic_dircon","'.$dircon.'",""],["fcsollic_idlic","'.$correlativo.'",""],["fcsollic_fechlic","'.$fecha.'",""],["javascript","' . $javascript . '",""]]';
+        break;
+      case '2':
+	    $nomcon="";
+	    $dircon="";
+	    $correlativo="";
+          $numero = $this->getRequestParameter('numero','');
+	      $c= new Criteria();
+          $c->addDescendingOrderByColumn(FcmodlicPeer::REFMOD);
+	      //$c->add(FcmodlicPeer::NUMSOL,trim($numero));
+	      $countreg = FcmodlicPeer::doSelectOne($c);
+	      if (count($countreg)>0)
+	      {
+			$correlativo=str_pad(trim($countreg->getRefmod()+1),12,'0',STR_PAD_LEFT);
+	      }
+	      else
+	      	$correlativo=str_pad(1,12,'0',STR_PAD_LEFT);
+          $fecha = date("d/m/Y");
+	      $c= new Criteria();
+	      $c->add(FcconrepPeer::RIFCON,trim($codigo));
+	      $fcconrep2 = FcconrepPeer::doSelectOne($c);
+	      if (count($fcconrep2)>0)
+	      {
+  	      	  $javascript = $javascript . "$('autorizacion').show();";
+	          $nomcon=$fcconrep2->getNomcon();
+	          $dircon=$fcconrep2->getDircon();
+	          if ($fcconrep2->getNaccon()=='V')
+	          {
+	          	$javascript = $javascript . "$('fcsollic_nacconrep_V').checked=true; ";
+	          }
+	          else
+	          {
+	          	$javascript = $javascript . "$('fcsollic_nacconrep_E').checked=true; ";
+	          }
+	          if ($fcconrep2->getTipcon()=='N')
+	          {
+				$javascript = $javascript . "$('fcsollic_tipconrep_N').checked=true; ";
+	          }
+	          else
+	          {
+	          	$javascript = $javascript . "$('fcsollic_tipconrep_J').checked=true; ";
+	          }
+	      }
+	      else
+	      {
+  	      	$javascript = $javascript . "alert('El representante no Existe, incluya todos sus Datos Basicos');";
+      	    $javascript = $javascript . "$('autorizacion').show();";
+	      	$javascript = $javascript . "document.getElementById('fcsollic_nomconrep').removeAttribute('readonly',1);";
+	      }
+          $output = '[["fcsollic_licmodificada","I",""],["fcsollic_nomconrep","'.$nomcon.'",""],["fcsollic_dirconrep","'.$dircon.'",""],["fcsollic_idlic","'.$correlativo.'",""],["fcsollic_fechlic","'.$fecha.'",""],["javascript","' . $javascript . '",""]]';
+        break;
 
-			$this->saveFcsollic($this->fcsollic);
+      case '3':
+        $codcatinm = $this->getRequestParameter('codcatinm','');
+        $catcon = "";
+        $descatcon = "";
+        $fecha = date("d/m/Y");
+	    $correlativo="";
+          $numero = $this->getRequestParameter('numero','');
+	      $c= new Criteria();
+          $c->addDescendingOrderByColumn(FcmodlicPeer::REFMOD);
+	      //$c->add(FcmodlicPeer::NUMSOL,trim($numero));
+	      $countreg = FcmodlicPeer::doSelectOne($c);
+	      if (count($countreg)>0)
+	      {
+			$correlativo=str_pad(trim($countreg->getRefmod()+1),12,'0',STR_PAD_LEFT);
+	      }
+	      else
+	      	$correlativo=str_pad(1,12,'0',STR_PAD_LEFT);
+	      $c= new Criteria();
+	      $c->add(FcreginmPeer::CODCATINM,trim($codcatinm));
+	      $countreg = FcreginmPeer::doSelectOne($c);
+	      if (count($countreg)>0)
+	      {
+	      	  $catcon=$countreg->getCodcatinm();
+	      	  $descatcon=$countreg->getNomcon();
+	      }
+	      else
+	      {
+               $javascript = $javascript . "alert('Categoria de Catastro no Existe.');";
+	      }
+      	  $javascript = $javascript . "$('autorizacion').show();";
+          $output = '[["fcsollic_licmodificada","I",""],["fcsollic_catcon","'.$catcon.'",""],["fcsollic_desubicat","'.$descatcon.'",""],["fcsollic_idlic","'.$correlativo.'",""],["fcsollic_fechlic","'.$fecha.'",""],["javascript","' . $javascript . '",""]]';
+      break;
 
-			$this->setFlash('notice', 'Your modifications have been saved');
-$this->Bitacora('Guardo');
+      case '4':
+          $fecha = date("d/m/Y");
+	      $correlativo="";
+          $numero = $this->getRequestParameter('numero','');
+	      $c= new Criteria();
+          $c->addDescendingOrderByColumn(FcmodlicPeer::REFMOD);
+	      //$c->add(FcmodlicPeer::NUMSOL,trim($numero));
+	      $countreg = FcmodlicPeer::doSelectOne($c);
+	      if (count($countreg)>0)
+	      {
+			$correlativo=str_pad(trim($countreg->getRefmod()+1),12,'0',STR_PAD_LEFT);
+	      }
+	      else
+	      	$correlativo=str_pad(1,12,'0',STR_PAD_LEFT);
+      	  $javascript = $javascript . "$('autorizacion').show();";
+          $output = '[["fcsollic_licmodificada","I",""],["fcsollic_idlic","'.$correlativo.'",""],["fcsollic_fechlic","'.$fecha.'",""],["javascript","' . $javascript . '",""]]';
+      break;
 
-			if ($this->getRequestParameter('save_and_add'))
-			{
-				return $this->redirect('Facpiclic/create');
-			}
-			else if ($this->getRequestParameter('save_and_list'))
-			{
-				return $this->redirect('Facpiclic/list');
-			}
-			else
+
+      case '5':
+	    $correlativo="";
+          $numero = $this->getRequestParameter('numero','');
+	      $c= new Criteria();
+          $c->addDescendingOrderByColumn(FcsolnegPeer::NUMNEG);
+	      $countreg = FcsolnegPeer::doSelectOne($c);
+	      if (count($countreg)>0)
+	      {
+			$correlativo=str_pad(trim($countreg->getNumneg()+1),10,'0',STR_PAD_LEFT);
+	      }
+	      else
+	      	$correlativo=str_pad(1,10,'0',STR_PAD_LEFT);
+      	  $javascript = $javascript . "$('autorizacion').show();";
+          $output = '[["fcsollic_licnegada","I",""],["fcsollic_numneg","'.$correlativo.'",""],["javascript","' . $javascript . '",""]]';
+      break;
+
+      case '6':
+        $estilo='';
+        $javascript = $javascript . "alert('Se Reactivara la Licencia.');";
+      	$javascript = $javascript . "$('suspencion').hide();$('reactivar').show();$('renovar').hide();$('suspender').hide();$('cancelar').hide();";
+        $output = '[["fcsollic_operacion","A",""],["javascript","' . $javascript . '",""]]';
+      break;
+
+      case '7':
+        $estilo='';
+        $javascript = $javascript . "alert('Se Renovara la Licencia.');";
+      	$javascript = $javascript . "$('suspencion').hide();$('reactivar').hide();$('renovar').show();$('suspender').hide();$('cancelar').hide();";
+        $output = '[["fcsollic_operacion","R",""],["javascript","' . $javascript . '",""]]';
+      break;
+
+      case '8':
+	    $correlativo="";
+        $fecha = date("d/m/Y");
+          $numero = $this->getRequestParameter('numero','');
+	      $c= new Criteria();
+          $c->addDescendingOrderByColumn(FcsuscanPeer::NUMSUS);
+	      $countreg = FcsuscanPeer::doSelectOne($c);
+	      if (count($countreg)>0)
+	      {
+			$correlativo=str_pad(trim($countreg->getNumsus()+1),10,'0',STR_PAD_LEFT);
+	      }
+	      else
+	      	$correlativo=str_pad(1,10,'0',STR_PAD_LEFT);
+        $javascript = $javascript . "alert('Se Suspendera la Licencia.');";
+      	$javascript = $javascript . "$('suspencion').show();$('reactivar').hide();$('renovar').hide();$('suspender').show();$('cancelar').hide();";
+        $output = '[["fcsollic_operacion","S",""],["fcsollic_fecsus","'.$fecha.'",""],["fcsollic_numsus","'.$correlativo.'",""],["javascript","' . $javascript . '",""]]';
+      break;
+
+      case '9':
+        $fecha = date("d/m/Y");
+	    $correlativo="";
+          $numero = $this->getRequestParameter('numero','');
+	      $c= new Criteria();
+          $c->addDescendingOrderByColumn(FcsuscanPeer::NUMSUS);
+	      $countreg = FcsuscanPeer::doSelectOne($c);
+	      if (count($countreg)>0)
+	      {
+			$correlativo=str_pad(trim($countreg->getNumsus()+1),10,'0',STR_PAD_LEFT);
+	      }
+	      else
+	      	$correlativo=str_pad(1,10,'0',STR_PAD_LEFT);
+        $javascript = $javascript . "alert('Se Cancelara la Licencia.');";
+      	$javascript = $javascript . "$('suspencion').show();$('reactivar').hide();$('renovar').hide();$('suspender').hide();$('cancelar').show();";
+        $output = '[["fcsollic_operacion","C",""],["fcsollic_fecsus","'.$fecha.'",""],["fcsollic_numsus","'.$correlativo.'",""],["javascript","' . $javascript . '",""]]';
+      break;
+      default:
+        $output = '[["","",""],["","",""],["","",""]]';
+        break;
+    }
+    $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+    return sfView::HEADER_ONLY;
+  }
+
+   public function validateEdit()
+  {
+    $this->coderr =-1;
+
+    $this->fcsollic = $this->getFcsollicOrCreate();
+    $this->updateFcsollicFromRequest();
+    if($this->getRequest()->getMethod() == sfRequest::POST)
+    {
+      if ($this->getRequestParameter('fcsollic[funsus]')=="" and $this->getRequestParameter('fcsollic[operacion]')=="S")
       {
-        return $this->redirect('Facpiclic/edit?id='.$this->fcsollic->getId());
+          $this->coderr=705;
+          return false;
+      }
+      if ($this->getRequestParameter('fcsollic[funsus]')=="" and $this->getRequestParameter('fcsollic[operacion]')=="C")
+      {
+          $this->coderr=706;
+          return false;
+      }
+     }
+     return true;
+  }
+
+
+  /**
+   * Función para actualziar el grid en el post si ocurre un error
+   * Se pueden colocar aqui los grids adicionales
+   *
+   */
+  public function updateError()
+  {
+    $this->configGrid();
+    $grid = Herramientas::CargarDatosGrid($this,$this->grid);
+    $this->configGrid($grid[0],$grid[1]);
+  }
+
+  public function saving($fcsollic)
+  {
+  	//exit(H::printR($fcsollic));
+	if ($fcsollic->getOperacion()!='')
+	{
+		if ($fcsollic->getOperacion()=='A') Hacienda::Grabar_Reactivar($fcsollic);
+		elseif ($fcsollic->getOperacion()=='R') Hacienda::Grabar_Renovar($fcsollic);
+		elseif ($fcsollic->getOperacion()=='S') Hacienda::Grabar_Facpiclic_Suspencion_Cancelacion($fcsollic);
+		elseif ($fcsollic->getOperacion()=='C') Hacienda::Grabar_Facpiclic_Suspencion_Cancelacion($fcsollic);
+	}
+    $fcsollic->save();
+    $grid = Herramientas::CargarDatosGridv2($this,$this->grid);
+    Hacienda::salvar_grid_Fcsollic($fcsollic, $grid);
+    Hacienda::Grabar_Facpiclic($fcsollic);
+    return -1;
+  }
+
+  public function deleting($clasemodelo)
+  {
+    return parent::deleting($clasemodelo);
+  }
+
+
+
+  protected function updateFcsollicFromRequest()
+  {
+    $fcsollic = $this->getRequestParameter('fcsollic');
+
+    if (isset($fcsollic['numsol']))
+    {
+      $this->fcsollic->setNumsol($fcsollic['numsol']);
+    }
+    if (isset($fcsollic['numlic']))
+    {
+      $this->fcsollic->setNumlic($fcsollic['numlic']);
+    }
+    if (isset($fcsollic['fecsol']))
+    {
+      if ($fcsollic['fecsol'])
+      {
+        try
+        {
+          $dateFormat = new sfDateFormat($this->getUser()->getCulture());
+                              if (!is_array($fcsollic['fecsol']))
+          {
+            $value = $dateFormat->format($fcsollic['fecsol'], 'i', $dateFormat->getInputPattern('d'));
+          }
+          else
+          {
+            $value_array = $fcsollic['fecsol'];
+            $value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+          }
+          $this->fcsollic->setFecsol($value);
+        }
+        catch (sfException $e)
+        {
+          // not a date
+        }
+      }
+      else
+      {
+        $this->fcsollic->setFecsol(null);
       }
     }
-    else
+    if (isset($fcsollic['estado']))
     {
-      $this->labels = $this->getLabels();
+      $this->fcsollic->setEstado($fcsollic['estado']);
     }
-  }	
+    if (isset($fcsollic['operaciones']))
+    {
+      $this->fcsollic->setOperaciones($fcsollic['operaciones']);
+    }
+    if (isset($fcsollic['rifcon']))
+    {
+      $this->fcsollic->setRifcon($fcsollic['rifcon']);
+    }
+    if (isset($fcsollic['dircon']))
+    {
+      $this->fcsollic->setDircon($fcsollic['dircon']);
+    }
+    if (isset($fcsollic['nacconcon']))
+    {
+      $this->fcsollic->setNacconcon($fcsollic['nacconcon']);
+    }
+    if (isset($fcsollic['tipconcon']))
+    {
+      $this->fcsollic->setTipconcon($fcsollic['tipconcon']);
+    }
+    if (isset($fcsollic['rifrep']))
+    {
+      $this->fcsollic->setRifrep($fcsollic['rifrep']);
+    }
+    if (isset($fcsollic['dirconrep']))
+    {
+      $this->fcsollic->setDirconrep($fcsollic['dirconrep']);
+    }
+    if (isset($fcsollic['nacconrep']))
+    {
+      $this->fcsollic->setNacconrep($fcsollic['nacconrep']);
+    }
+    if (isset($fcsollic['tipconrep']))
+    {
+      $this->fcsollic->setTipconrep($fcsollic['tipconrep']);
+    }
+    if (isset($fcsollic['codtiplic']))
+    {
+      $this->fcsollic->setCodtiplic($fcsollic['codtiplic']);
+    }
+
+    if (isset($fcsollic['tomo']))
+    {
+      $this->fcsollic->setTomo($fcsollic['tomo']);
+    }
+    if (isset($fcsollic['numero']))
+    {
+      $this->fcsollic->setNumero($fcsollic['numero']);
+    }
+    if (isset($fcsollic['folio']))
+    {
+      $this->fcsollic->setFolio($fcsollic['folio']);
+    }
+    if (isset($fcsollic['implic']))
+    {
+      $this->fcsollic->setImplic($fcsollic['implic']);
+    }
+    if (isset($fcsollic['fecapr']))
+    {
+      if ($fcsollic['fecapr'])
+      {
+        try
+        {
+          $dateFormat = new sfDateFormat($this->getUser()->getCulture());
+                              if (!is_array($fcsollic['fecapr']))
+          {
+            $value = $dateFormat->format($fcsollic['fecapr'], 'i', $dateFormat->getInputPattern('d'));
+          }
+          else
+          {
+            $value_array = $fcsollic['fecapr'];
+            $value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+          }
+          $this->fcsollic->setFecapr($value);
+        }
+        catch (sfException $e)
+        {
+          // not a date
+        }
+      }
+      else
+      {
+        $this->fcsollic->setFecapr(null);
+      }
+    }
+    if (isset($fcsollic['fecven']))
+    {
+      if ($fcsollic['fecven'])
+      {
+        try
+        {
+          $dateFormat = new sfDateFormat($this->getUser()->getCulture());
+                              if (!is_array($fcsollic['fecven']))
+          {
+            $value = $dateFormat->format($fcsollic['fecven'], 'i', $dateFormat->getInputPattern('d'));
+          }
+          else
+          {
+            $value_array = $fcsollic['fecven'];
+            $value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+          }
+          $this->fcsollic->setFecven($value);
+        }
+        catch (sfException $e)
+        {
+          // not a date
+        }
+      }
+      else
+      {
+        $this->fcsollic->setFecven(null);
+      }
+    }
+    if (isset($fcsollic['fecinilic']))
+    {
+      if ($fcsollic['fecinilic'])
+      {
+        try
+        {
+          $dateFormat = new sfDateFormat($this->getUser()->getCulture());
+                              if (!is_array($fcsollic['fecinilic']))
+          {
+            $value = $dateFormat->format($fcsollic['fecinilic'], 'i', $dateFormat->getInputPattern('d'));
+          }
+          else
+          {
+            $value_array = $fcsollic['fecinilic'];
+            $value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+          }
+          $this->fcsollic->setFecinilic($value);
+        }
+        catch (sfException $e)
+        {
+          // not a date
+        }
+      }
+      else
+      {
+        $this->fcsollic->setFecinilic(null);
+      }
+    }
+    if (isset($fcsollic['grid']))
+    {
+      $this->fcsollic->setGrid($fcsollic['grid']);
+    }
+
+    if (isset($fcsollic['numsol']))
+    {
+      $this->fcsollic->setNumsol($fcsollic['numsol']);
+    }
+    if (isset($fcsollic['numlic']))
+    {
+      $this->fcsollic->setNumlic($fcsollic['numlic']);
+    }
+    if (isset($fcsollic['fecsol']))
+    {
+      if ($fcsollic['fecsol'])
+      {
+        try
+        {
+          $dateFormat = new sfDateFormat($this->getUser()->getCulture());
+                              if (!is_array($fcsollic['fecsol']))
+          {
+            $value = $dateFormat->format($fcsollic['fecsol'], 'i', $dateFormat->getInputPattern('d'));
+          }
+          else
+          {
+            $value_array = $fcsollic['fecsol'];
+            $value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+          }
+          $this->fcsollic->setFecsol($value);
+        }
+        catch (sfException $e)
+        {
+          // not a date
+        }
+      }
+      else
+      {
+        $this->fcsollic->setFecsol(null);
+      }
+    }
+    if (isset($fcsollic['feclic']))
+    {
+      if ($fcsollic['feclic'])
+      {
+        try
+        {
+          $dateFormat = new sfDateFormat($this->getUser()->getCulture());
+                              if (!is_array($fcsollic['feclic']))
+          {
+            $value = $dateFormat->format($fcsollic['feclic'], 'i', $dateFormat->getInputPattern('d'));
+          }
+          else
+          {
+            $value_array = $fcsollic['feclic'];
+            $value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+          }
+          $this->fcsollic->setFeclic($value);
+        }
+        catch (sfException $e)
+        {
+          // not a date
+        }
+      }
+      else
+      {
+        $this->fcsollic->setFeclic(null);
+      }
+    }
+    if (isset($fcsollic['rifcon']))
+    {
+      $this->fcsollic->setRifcon($fcsollic['rifcon']);
+    }
+    if (isset($fcsollic['catcon']))
+    {
+      $this->fcsollic->setCatcon($fcsollic['catcon']);
+    }
+    if (isset($fcsollic['rifrep']))
+    {
+      $this->fcsollic->setRifrep($fcsollic['rifrep']);
+    }
+    if (isset($fcsollic['nomneg']))
+    {
+      $this->fcsollic->setNomneg($fcsollic['nomneg']);
+    }
+    if (isset($fcsollic['tipinm']))
+    {
+      $this->fcsollic->setTipinm($fcsollic['tipinm']);
+    }
+    if (isset($fcsollic['tipest']))
+    {
+      $this->fcsollic->setTipest($fcsollic['tipest']);
+    }
+    if (isset($fcsollic['dirpri']))
+    {
+      $this->fcsollic->setDirpri($fcsollic['dirpri']);
+    }
+    if (isset($fcsollic['codrut']))
+    {
+      $this->fcsollic->setCodrut($fcsollic['codrut']);
+    }
+    if (isset($fcsollic['capsoc']))
+    {
+      $this->fcsollic->setCapsoc($fcsollic['capsoc']);
+    }
+    if (isset($fcsollic['horini']))
+    {
+      if ($fcsollic['horini'])
+      {
+        try
+        {
+          $dateFormat = new sfDateFormat($this->getUser()->getCulture());
+                              if (!is_array($fcsollic['horini']))
+          {
+            $value = $dateFormat->format($fcsollic['horini'], 'i', $dateFormat->getInputPattern('d'));
+          }
+          else
+          {
+            $value_array = $fcsollic['horini'];
+            $value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+          }
+          $this->fcsollic->setHorini($value);
+        }
+        catch (sfException $e)
+        {
+          // not a date
+        }
+      }
+      else
+      {
+        $this->fcsollic->setHorini(null);
+      }
+    }
+    if (isset($fcsollic['horcie']))
+    {
+      if ($fcsollic['horcie'])
+      {
+        try
+        {
+          $dateFormat = new sfDateFormat($this->getUser()->getCulture());
+                              if (!is_array($fcsollic['horcie']))
+          {
+            $value = $dateFormat->format($fcsollic['horcie'], 'i', $dateFormat->getInputPattern('d'));
+          }
+          else
+          {
+            $value_array = $fcsollic['horcie'];
+            $value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+          }
+          $this->fcsollic->setHorcie($value);
+        }
+        catch (sfException $e)
+        {
+          // not a date
+        }
+      }
+      else
+      {
+        $this->fcsollic->setHorcie(null);
+      }
+    }
+    if (isset($fcsollic['fecini']))
+    {
+      if ($fcsollic['fecini'])
+      {
+        try
+        {
+          $dateFormat = new sfDateFormat($this->getUser()->getCulture());
+                              if (!is_array($fcsollic['fecini']))
+          {
+            $value = $dateFormat->format($fcsollic['fecini'], 'i', $dateFormat->getInputPattern('d'));
+          }
+          else
+          {
+            $value_array = $fcsollic['fecini'];
+            $value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+          }
+          $this->fcsollic->setFecini($value);
+        }
+        catch (sfException $e)
+        {
+          // not a date
+        }
+      }
+      else
+      {
+        $this->fcsollic->setFecini(null);
+      }
+    }
+    if (isset($fcsollic['fecfin']))
+    {
+      if ($fcsollic['fecfin'])
+      {
+        try
+        {
+          $dateFormat = new sfDateFormat($this->getUser()->getCulture());
+                              if (!is_array($fcsollic['fecfin']))
+          {
+            $value = $dateFormat->format($fcsollic['fecfin'], 'i', $dateFormat->getInputPattern('d'));
+          }
+          else
+          {
+            $value_array = $fcsollic['fecfin'];
+            $value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+          }
+          $this->fcsollic->setFecfin($value);
+        }
+        catch (sfException $e)
+        {
+          // not a date
+        }
+      }
+      else
+      {
+        $this->fcsollic->setFecfin(null);
+      }
+    }
+    if (isset($fcsollic['discli']))
+    {
+      $this->fcsollic->setDiscli($fcsollic['discli']);
+    }
+    if (isset($fcsollic['disbar']))
+    {
+      $this->fcsollic->setDisbar($fcsollic['disbar']);
+    }
+    if (isset($fcsollic['disdis']))
+    {
+      $this->fcsollic->setDisdis($fcsollic['disdis']);
+    }
+    if (isset($fcsollic['disins']))
+    {
+      $this->fcsollic->setDisins($fcsollic['disins']);
+    }
+    if (isset($fcsollic['disfun']))
+    {
+      $this->fcsollic->setDisfun($fcsollic['disfun']);
+    }
+    if (isset($fcsollic['disest']))
+    {
+      $this->fcsollic->setDisest($fcsollic['disest']);
+    }
+    if (isset($fcsollic['funres']))
+    {
+      $this->fcsollic->setFunres($fcsollic['funres']);
+    }
+    if (isset($fcsollic['funrel']))
+    {
+      $this->fcsollic->setFunrel($fcsollic['funrel']);
+    }
+    if (isset($fcsollic['fecres']))
+    {
+      if ($fcsollic['fecres'])
+      {
+        try
+        {
+          $dateFormat = new sfDateFormat($this->getUser()->getCulture());
+                              if (!is_array($fcsollic['fecres']))
+          {
+            $value = $dateFormat->format($fcsollic['fecres'], 'i', $dateFormat->getInputPattern('d'));
+          }
+          else
+          {
+            $value_array = $fcsollic['fecres'];
+            $value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+          }
+          $this->fcsollic->setFecres($value);
+        }
+        catch (sfException $e)
+        {
+          // not a date
+        }
+      }
+      else
+      {
+        $this->fcsollic->setFecres(null);
+      }
+    }
+    if (isset($fcsollic['fecapr']))
+    {
+      if ($fcsollic['fecapr'])
+      {
+        try
+        {
+          $dateFormat = new sfDateFormat($this->getUser()->getCulture());
+                              if (!is_array($fcsollic['fecapr']))
+          {
+            $value = $dateFormat->format($fcsollic['fecapr'], 'i', $dateFormat->getInputPattern('d'));
+          }
+          else
+          {
+            $value_array = $fcsollic['fecapr'];
+            $value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+          }
+          $this->fcsollic->setFecapr($value);
+        }
+        catch (sfException $e)
+        {
+          // not a date
+        }
+      }
+      else
+      {
+        $this->fcsollic->setFecapr(null);
+      }
+    }
+    if (isset($fcsollic['fecven']))
+    {
+      if ($fcsollic['fecven'])
+      {
+        try
+        {
+          $dateFormat = new sfDateFormat($this->getUser()->getCulture());
+                              if (!is_array($fcsollic['fecven']))
+          {
+            $value = $dateFormat->format($fcsollic['fecven'], 'i', $dateFormat->getInputPattern('d'));
+          }
+          else
+          {
+            $value_array = $fcsollic['fecven'];
+            $value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+          }
+          $this->fcsollic->setFecven($value);
+        }
+        catch (sfException $e)
+        {
+          // not a date
+        }
+      }
+      else
+      {
+        $this->fcsollic->setFecven(null);
+      }
+    }
+    if (isset($fcsollic['tomo']))
+    {
+      $this->fcsollic->setTomo($fcsollic['tomo']);
+    }
+    if (isset($fcsollic['folio']))
+    {
+      $this->fcsollic->setFolio($fcsollic['folio']);
+    }
+    if (isset($fcsollic['numero']))
+    {
+      $this->fcsollic->setNumero($fcsollic['numero']);
+    }
+    if (isset($fcsollic['taslic']))
+    {
+      $this->fcsollic->setTaslic($fcsollic['taslic']);
+    }
+    if (isset($fcsollic['deuanl']))
+    {
+      $this->fcsollic->setDeuanl($fcsollic['deuanl']);
+    }
+    if (isset($fcsollic['deuacl']))
+    {
+      $this->fcsollic->setDeuacl($fcsollic['deuacl']);
+    }
+    if (isset($fcsollic['implic']))
+    {
+      $this->fcsollic->setImplic($fcsollic['implic']);
+    }
+    if (isset($fcsollic['deuanp']))
+    {
+      $this->fcsollic->setDeuanp($fcsollic['deuanp']);
+    }
+    if (isset($fcsollic['deuacp']))
+    {
+      $this->fcsollic->setDeuacp($fcsollic['deuacp']);
+    }
+    if (isset($fcsollic['stasol']))
+    {
+      $this->fcsollic->setStasol($fcsollic['stasol']);
+    }
+    if (isset($fcsollic['stalic']))
+    {
+      $this->fcsollic->setStalic($fcsollic['stalic']);
+    }
+    if (isset($fcsollic['stadec']))
+    {
+      $this->fcsollic->setStadec($fcsollic['stadec']);
+    }
+    if (isset($fcsollic['staliq']))
+    {
+      $this->fcsollic->setStaliq($fcsollic['staliq']);
+    }
+    if (isset($fcsollic['nomcon']))
+    {
+      $this->fcsollic->setNomcon($fcsollic['nomcon']);
+    }
+    if (isset($fcsollic['dircon']))
+    {
+      $this->fcsollic->setDircon($fcsollic['dircon']);
+    }
+    if (isset($fcsollic['tipo']))
+    {
+      $this->fcsollic->setTipo($fcsollic['tipo']);
+    }
+    if (isset($fcsollic['estser']))
+    {
+      $this->fcsollic->setEstser($fcsollic['estser']);
+    }
+    if (isset($fcsollic['telneg']))
+    {
+      $this->fcsollic->setTelneg($fcsollic['telneg']);
+    }
+    if (isset($fcsollic['clacon']))
+    {
+      $this->fcsollic->setClacon($fcsollic['clacon']);
+    }
+    if (isset($fcsollic['capact']))
+    {
+      $this->fcsollic->setCapact($fcsollic['capact']);
+    }
+    if (isset($fcsollic['numsol1']))
+    {
+      $this->fcsollic->setNumsol1($fcsollic['numsol1']);
+    }
+    if (isset($fcsollic['numlic1']))
+    {
+      $this->fcsollic->setNumlic1($fcsollic['numlic1']);
+    }
+    if (isset($fcsollic['horainie']))
+    {
+      if ($fcsollic['horainie'])
+      {
+        try
+        {
+          $dateFormat = new sfDateFormat($this->getUser()->getCulture());
+                              if (!is_array($fcsollic['horainie']))
+          {
+            $value = $dateFormat->format($fcsollic['horainie'], 'i', $dateFormat->getInputPattern('d'));
+          }
+          else
+          {
+            $value_array = $fcsollic['horainie'];
+            $value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+          }
+          $this->fcsollic->setHorainie($value);
+        }
+        catch (sfException $e)
+        {
+          // not a date
+        }
+      }
+      else
+      {
+        $this->fcsollic->setHorainie(null);
+      }
+    }
+    if (isset($fcsollic['horaciee']))
+    {
+      if ($fcsollic['horaciee'])
+      {
+        try
+        {
+          $dateFormat = new sfDateFormat($this->getUser()->getCulture());
+                              if (!is_array($fcsollic['horaciee']))
+          {
+            $value = $dateFormat->format($fcsollic['horaciee'], 'i', $dateFormat->getInputPattern('d'));
+          }
+          else
+          {
+            $value_array = $fcsollic['horaciee'];
+            $value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+          }
+          $this->fcsollic->setHoraciee($value);
+        }
+        catch (sfException $e)
+        {
+          // not a date
+        }
+      }
+      else
+      {
+        $this->fcsollic->setHoraciee(null);
+      }
+    }
+    if (isset($fcsollic['unitri']))
+    {
+      $this->fcsollic->setUnitri($fcsollic['unitri']);
+    }
+    if (isset($fcsollic['tipsol']))
+    {
+      $this->fcsollic->setTipsol($fcsollic['tipsol']);
+    }
+    if (isset($fcsollic['unitrialc']))
+    {
+      $this->fcsollic->setUnitrialc($fcsollic['unitrialc']);
+    }
+    if (isset($fcsollic['unitriotr']))
+    {
+      $this->fcsollic->setUnitriotr($fcsollic['unitriotr']);
+    }
+    if (isset($fcsollic['licant']))
+    {
+      $this->fcsollic->setLicant($fcsollic['licant']);
+    }
+    if (isset($fcsollic['dueant']))
+    {
+      $this->fcsollic->setDueant($fcsollic['dueant']);
+    }
+    if (isset($fcsollic['dirant']))
+    {
+      $this->fcsollic->setDirant($fcsollic['dirant']);
+    }
+    if (isset($fcsollic['impext']))
+    {
+      $this->fcsollic->setImpext($fcsollic['impext']);
+    }
+    if (isset($fcsollic['imptotal']))
+    {
+      $this->fcsollic->setImptotal($fcsollic['imptotal']);
+    }
+    if (isset($fcsollic['codact']))
+    {
+      $this->fcsollic->setCodact($fcsollic['codact']);
+    }
+    if (isset($fcsollic['codtiplic']))
+    {
+      $this->fcsollic->setCodtiplic($fcsollic['codtiplic']);
+    }
+    if (isset($fcsollic['fecinilic']))
+    {
+      if ($fcsollic['fecinilic'])
+      {
+        try
+        {
+          $dateFormat = new sfDateFormat($this->getUser()->getCulture());
+                              if (!is_array($fcsollic['fecinilic']))
+          {
+            $value = $dateFormat->format($fcsollic['fecinilic'], 'i', $dateFormat->getInputPattern('d'));
+          }
+          else
+          {
+            $value_array = $fcsollic['fecinilic'];
+            $value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+          }
+          $this->fcsollic->setFecinilic($value);
+        }
+        catch (sfException $e)
+        {
+          // not a date
+        }
+      }
+      else
+      {
+        $this->fcsollic->setFecinilic(null);
+      }
+    }
+
+    if (isset($fcsollic['operacion']))
+    {
+      $this->fcsollic->setOperacion($fcsollic['operacion']);
+    }
+
+    if (isset($fcsollic['numsus']))
+    {
+      $this->fcsollic->setNumsus($fcsollic['numsus']);
+    }
+
+    if (isset($fcsollic['fecsus']))
+    {
+      if ($fcsollic['fecsus'])
+      {
+        try
+        {
+          $dateFormat = new sfDateFormat($this->getUser()->getCulture());
+                              if (!is_array($fcsollic['fecsus']))
+          {
+            $value = $dateFormat->format($fcsollic['fecsus'], 'i', $dateFormat->getInputPattern('d'));
+          }
+          else
+          {
+            $value_array = $fcsollic['fecsus'];
+            $value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+          }
+          $this->fcsollic->setFecsus($value);
+        }
+        catch (sfException $e)
+        {
+          // not a date
+        }
+      }
+      else
+      {
+        $this->fcsollic->set.Fecsus(null);
+      }
+    }
+
+    if (isset($fcsollic['motsus']))
+    {
+      $this->fcsollic->setMotsus($fcsollic['motsus']);
+    }
+
+    if (isset($fcsollic['solsus']))
+    {
+      $this->fcsollic->setSolsus($fcsollic['solsus']);
+    }
+
+    if (isset($fcsollic['folsus']))
+    {
+      $this->fcsollic->setFolsus($fcsollic['folsus']);
+    }
+
+    if (isset($fcsollic['actsus']))
+    {
+      $this->fcsollic->setActsus($fcsollic['actsus']);
+    }
+
+    if (isset($fcsollic['resolsus']))
+    {
+      $this->fcsollic->setResolsus($fcsollic['resolsus']);
+    }
+
+    if (isset($fcsollic['funsus']))
+    {
+      $this->fcsollic->setFunsus($fcsollic['funsus']);
+    }
+  }
+
 }

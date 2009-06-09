@@ -41,22 +41,27 @@ class FacranpaginmActions extends autoFacranpaginmActions
 
   public function executeDelete()
   {
-   	$id=Herramientas::getX_vacio('codzon','Fcvalinm','id',trim($this->getRequestParameter('codzon')));
-    $this->fcvalinm = FcvalinmPeer::retrieveByPk($id);
-    $this->forward404Unless($this->fcvalinm);
+    $id=Herramientas::getX_vacio('codzon','Fcvalinm','id',trim($this->getRequestParameter('codzon')));
+    /* $this->fcvalinm = FcvalinmPeer::retrieveByPk($this->getRequestParameter('id'));
+    exit("hhhhhhhhhh ".$this->fcvalinm->getId());*/
+    //print $this->getRequestParameter('codzon')."///".$this->fcvalinm->getId();
+    /*$this->forward404Unless($this->fcvalinm);*/
 
     try
     {
-      $this->deleteFcvalinm($this->fcvalinm);
-      $id= $this->fcvalinm->getId();
+      $c = new Criteria();
+      $c->add(FcvalinmPeer::CODZON,$this->getRequestParameter('codzon'));
+      FcvalinmPeer::doDelete($c);
+      //$id= $this->fcvalinm->getId();
       $this->SalvarBitacora($id ,'Elimino');
+
     }
     catch (PropelException $e)
     {
-    	exit($e);
       $this->getRequest()->setError('delete', 'No se puede eliminar porque tiene registros asociados.');
       return $this->forward('facranpaginm', 'list');
     }
+    return $this->forward('facranpaginm', 'list');
    }
 
   protected function getFcvalinmOrCreate($id = 'id', $codzon = 'codzon')
@@ -85,6 +90,18 @@ class FacranpaginmActions extends autoFacranpaginmActions
   public function editing()
   {
 		$this->configGrid();
+  }
+
+  public function deleting($fcvalinm)
+  {
+   if ($fcvalinm->getId()!="")
+   {
+	$c = new Criteria();
+	$c->add(FcvalinmPeer::CODZON,$fcvalinm->getCodzon());
+	FcvalinmPeer::doDelete($c);
+    $fcvalinm->delete();
+    return -1;
+   }
   }
 
  public function configGrid($reg = array(),$regelim = array())
@@ -233,12 +250,6 @@ class FacranpaginmActions extends autoFacranpaginmActions
     return -1;
   }
 
-  public function deleting($fcvalinm)
-  {
-         $c= new Criteria();
-         $c->add(FcvalinmPeer::CODZON,$fcvalinm->getCodzon());
-         FcvalinmPeer::doDelete($c);
-  }
 
 
   public function executeEdit()
