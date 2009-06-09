@@ -11,6 +11,19 @@
 class docpenActions extends autodocpenActions
 {
 
+  public function executeObservacion()
+  {
+    //$this->dfatendoc = $this->getDfatendocOrCreate();
+    //$this->updateDfatendocFromRequest();
+    $id = $this->getRequestParameter('id', '');
+    $desate = $this->getRequestParameter('desate', '');
+    $error = Documentos::salvarObservacion($this->getUser()->getAttribute('usuario_id', ''),$id,$desate);
+    if($error!=-1) $this->setFlash('error', 'Your modifications have been saved');
+    else $this->getRequest()->setError('','No se pudo guardar la Observación, hacen falta datos');
+    $this->redirect('docpen/edit?id='.$id);
+    
+  }
+
   public function executePendientes()
   {
     $this->resultado = Documentos::getDocPendientes($this->getUser()->getAttribute('usuario_id', ''));
@@ -148,7 +161,9 @@ $this->Bitacora('Guardo');
 
         $err = Herramientas::obtenerMensajeError($coderr);
         $this->getRequest()->setError('',$err);
-        $this->handleErrorEdit();
+        //$this->handleErrorEdit();
+        //return $this->forward('docpen', 'edit');
+        return $this->reload('/edit?id='.$this->dfatendoc->getId());
 
       }else
       {

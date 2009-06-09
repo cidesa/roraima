@@ -67,12 +67,10 @@ propel:
       required: true
     id_acunidad_ori:
       type: INTEGER
-      required: true
       foreignTable: acunidad
       foreignReference: id
     id_acunidad_des:
       type: INTEGER
-      required: true
       foreignTable: acunidad
       foreignReference: id
     id_dfrutadoc:
@@ -179,4 +177,40 @@ propel:
   dfdiafer:
     diafer:
       type: DATE
+    id:
+  usuarios:
+    loguse:
+      type: VARCHAR
+      size: 50
+      required: true
+    nomuse:
+      type: VARCHAR
+      size: 250
+      required: true
+    apluse:
+      type: VARCHAR
+      size: 3
+      required: true
+    numemp:
+      type: VARCHAR
+      size: 12
+    pasuse:
+      type: VARCHAR
+      size: 10
+      required: true
+    diremp:
+      type: VARCHAR
+      size: 250
+    telemp:
+      type: VARCHAR
+      size: 50
+    cedemp:
+      type: VARCHAR
+      size: 10
+    numuni:
+      type: VARCHAR
+      size: 4
+    codcat:
+      type: VARCHAR
+      size: 16
     id:

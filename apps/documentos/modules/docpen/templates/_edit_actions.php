@@ -5,12 +5,10 @@
 <ul class="sf_admin_actions">
   <li><?php echo button_to(__('list'), 'docpen/list?id='.$dfatendoc->getId(), array (
   'class' => 'sf_admin_action_list',
-)) ?></li>
-  <li><?php echo button_to(__('Observación'),'', array (
-  'name' => 'observacion',
-  'form' => 'sf_admin_edit_form',
-  'class' => 'sf_admin_action_save',
-)) ?></li>
+)) ?>
+  <li>
+    <input type="button" onclick="if (confirm('¿Desea agregar una observación?')) { return document.location.href='/documentos_dev.php/docpen/observacion/id/5/desate/'+$('dfatendocdet_desate').value;} else return false;" value="Observación" class="sf_admin_action_save" form="sf_admin_edit_form" name="observacion"/>
+  </li>
   <li><?php echo submit_tag_click_confirm(__('Atender'), array (
   'confirm' => __('¿Desea atender este documento?'),
   'name' => 'save',
