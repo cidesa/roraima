@@ -49,7 +49,7 @@ generator:
       title:          Edición de Solicitud de Ayuda
       display:
         Expediente:   [ _expediente, fecsol ]
-        Solicitante:  [_atbenefi, _atsolici]
+        Solicitante:  [_atbenefi, _atsolici, _parentesco]
         Prioridad:    [atpriayu_id]
 #        Proveedor:    [_caprovee_id]
         Ayuda:        [attipayu_id, _atrubros_id, desayu]

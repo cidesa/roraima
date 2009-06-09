@@ -64,7 +64,7 @@ generator:
       display:
         Expediente:   [ _expediente, fecsol ]
         Estatus:      [atestayu_id]
-        Solicitante:  [_atsolici, _atbenefi]
+        Solicitante:  [_atsolici, _atbenefi, _parentesco]
         Prioridad:    [atpriayu_id]
         Procedencia:  [proayu, nroofi ]
         Proveedor:    [_caprovee_id]

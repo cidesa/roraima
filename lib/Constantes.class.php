@@ -464,5 +464,9 @@ public static function PagoDoble()
     return Array('O' => 'Cooperativa', 'P' => 'Particular', 'C' => 'Consejo Comunal', 'E' => 'Empresa', 'G' => 'Organismo del Estado', 'O' => 'Otros');
   }
 
+  public static function Parentescos()
+  {
+   return array(0 => 'Hijo', 2 => 'Hija', 3 => 'Padre', 4 => 'Madre', 5 => 'Hermano(a)', 6 => 'Conyuge', 7 => 'Titular Masculino', 8 => 'Titular Femenino');
+  }
 
 }
