@@ -13,7 +13,7 @@ generator:
       valcom:	{ name: Valor Bs./Mt2, params: size=40 maxlength=119}
     list:
       title:     Definición Complementos de Inmuebles:
-      display:   [ =codcom, descom]
+      display:   [ =codcom, descom, anovig]
       sort:      descom
       filters:   [codcom, descom]
       fields:
@@ -27,7 +27,7 @@ generator:
     edit:
       title:          Edición Complementos de Inmuebles
       display:
-        "Datos Generales":   [ anovig, _codcom, descom,  valcom ]
+        "Datos Generales":   [ _codcom, anovig, descom,  valcom ]
         "Afecta":   [ _afeinm]
         "Exonerable":   [ _opecom ]
       actions:

@@ -38,8 +38,11 @@ class Hacienda
       $j=0;
       while ($j<count($x))
       {
-		$x[$j]->setCoddes($fcdefdesc->getCoddes());
-        $x[$j]->save();
+        if ($x[$j]->getDiashasta()!="")
+        {
+	  	  $x[$j]->setCoddes($fcdefdesc->getCoddes());
+          $x[$j]->save();
+        }
 		$j++;
       }
       $z=$grid[1];
@@ -95,8 +98,11 @@ class Hacienda
       $j=0;
       while ($j<count($x))
       {
-		$x[$j]->setCodrec($fcdefrecint->getCodrec());
-        $x[$j]->save();
+        if ($x[$j]->getDiashasta()!="")
+        {
+		  $x[$j]->setCodrec($fcdefrecint->getCodrec());
+          $x[$j]->save();
+        }
 		$j++;
       }
       $z=$grid[1];
@@ -133,8 +139,11 @@ class Hacienda
       $j=0;
       while ($j<count($x))
       {
-		$x[$j]->setCodmul($fcmultas->getCodmul());
-        $x[$j]->save();
+        if ($x[$j]->getDiashasta()!="")
+        {
+		  $x[$j]->setCodmul($fcmultas->getCodmul());
+          $x[$j]->save();
+        }
 		$j++;
       }
       $z=$grid[1];
@@ -208,7 +217,7 @@ class Hacienda
       $j=0;
       while ($j<count($x))
       {
-		$x[$j]->setTipapu($fctippro->getTipapu());
+		$x[$j]->setTippro($fctippro->getTippro());
         $x[$j]->save();
 		$j++;
       }
@@ -310,13 +319,14 @@ class Hacienda
         {
          	$formatostring= $result[0]['nomabr1'];
 			$formatopre=str_pad("",$result[0]['tamano1'],'#',STR_PAD_LEFT);
-        	$hasta=($result[0]['nivinm']*3)-6;
-        	for ($i=1;$i<=$hasta;$i++)
-        	{
-		      $formatostring = $formatostring."-".$result[0][$campos[$i + 8]];
-		      $formatopre = $formatopre."-".str_pad("",$result[0][$campos[$i + 9]], "#",STR_PAD_LEFT);
-			  $i=$i+3;
+		    $valor=$result[0]['numniv'];
+	        for ($i=1;$i<=((($valor+1)*3)-6);$i++)
+	        {
+		       $formatostring = $formatostring."-".$result[0][$campos[$i + 8]];
+		       $formatopre = $formatopre."-".str_pad("",$result[0][$campos[$i + 9]], "#",STR_PAD_LEFT);
+			   $i=$i+2;
 			}
+
             return $formatopre;
         }
         else return "El Formato de los catastros no existe";
@@ -359,5 +369,214 @@ class Hacienda
 	    }
 	    return $arreglo;
     }
+
+    public static function Grabar_Anteriores($fcsollic)
+    {
+       $fcmodlic_new = new Fcmodlic();
+       $fcmodlic_new->setRefmod($fcsollic->getIdlic());
+       $fcmodlic_new->setFecmod($fcsollic->getFechlic());
+       $fcmodlic_new->setMotmod($fcsollic->getComnlic());
+       $fcmodlic_new->setNumsol($fcsollic->getNumsol());
+       $fcmodlic_new->setNumlic($fcsollic->getNumsol());
+       $fcmodlic_new->setFecsol($fcsollic->getFecsol());
+       $fcmodlic_new->setFeclic($fcsollic->getFecsol());
+       $fcmodlic_new->setRifcon($fcsollic->getRifcon());
+       $fcmodlic_new->setNomcon($fcsollic->getNomcon());
+       $fcmodlic_new->setDircon($fcsollic->getDircon());
+       $fcmodlic_new->setRifrep($fcsollic->getRifrep());
+       $fcmodlic_new->setNomneg($fcsollic->getNomneg());
+       $fcmodlic_new->setTipinm($fcsollic->getTipinm());
+       $fcmodlic_new->setTipest($fcsollic->getTipest());
+       $fcmodlic_new->setCatcon($fcsollic->getCatcon());
+       $fcmodlic_new->setDirpri($fcsollic->getDirpri());
+       $fcmodlic_new->setCodrut($fcsollic->getCodrut());
+       $fcmodlic_new->setCapsoc($fcsollic->getCapsoc());
+	   if ($fcsollic->getHorini()!='') $fcmodlic_new->setHorini($fcsollic->getHorini());
+       else $fcmodlic_new->setHorini("08:00:00 AM");
+	   if ($fcsollic->getHorcie()!='') $fcmodlic_new->setHorcie($fcsollic->getHorcie());
+	   else $fcmodlic_new->setHorcie("06:00:00 PM");
+       $fcmodlic_new->setFecini($fcsollic->getFecini());
+       $fcmodlic_new->setFecfin($fcsollic->getFecfin());
+       $fcmodlic_new->setDiscli($fcsollic->getDiscli());
+       $fcmodlic_new->setDisbar($fcsollic->getDisbar());
+       $fcmodlic_new->setDisdis($fcsollic->getDisdis());
+       $fcmodlic_new->setDisins($fcsollic->getDisins());
+       $fcmodlic_new->setDisfun($fcsollic->getDisfun());
+       $fcmodlic_new->setDisest($fcsollic->getDisest());
+       $fcmodlic_new->setFunres($fcsollic->getFunres());
+       $fcmodlic_new->setFecres($fcsollic->getFecres());
+       $fcmodlic_new->setTaslic(0);
+       $fcmodlic_new->setDeuacl(0);
+       $fcmodlic_new->setImplic(0);
+       $fcmodlic_new->setDeuacp(0);
+       if ($fcsollic->getId()=='')
+       {
+	       $fcmodlic_new->setStasol("P");
+	       $fcmodlic_new->setStalic("V");
+	       $fcmodlic_new->setStadec("N");
+	       $fcmodlic_new->setStaliq("N");
+       }
+       $fcmodlic_new->save();
+       return true;
+    }
+
+
+    public static function Salvarneg($fcsollic)
+    {
+       $correlativo="";
+       $c= new Criteria();
+       $c->add(FcsollicPeer::NUMSOL,$fcsollic->getNumsol());
+       $fcsollic_up = FcsollicPeer::doSelectOne($c);
+       if (count($fcsollic_up)>0)
+       {
+              $fcsollic_up->setStasol("N");
+              $fcsollic_up->save();
+       }
+	   $c= new Criteria();
+       $c->addDescendingOrderByColumn(FcsolnegPeer::NUMNEG);
+       $reg = FcsolnegPeer::doSelectOne($c);
+       if (count($reg)>0)
+		$correlativo=str_pad(trim($reg->getNumneg()+1),10,'0',STR_PAD_LEFT);
+       else
+      	$correlativo=str_pad(1,10,'0',STR_PAD_LEFT);
+       $fcsolneg_new = new Fcsolneg();
+       $fcsolneg_new->setNumsol($fcsollic->getNumsol());
+       $fcsolneg_new->setNumneg($correlativo);
+       $fcsolneg_new->setResolu($fcsollic->getResolu());
+       $fcsolneg_new->setFunneg($fcsollic->getFunneg());
+       $fcsolneg_new->setTomon($fcsollic->getTomon());
+       $fcsolneg_new->setNumeron($fcsollic->getNumeron());
+       $fcsolneg_new->setFolion($fcsollic->getFolion());
+       $fcsolneg_new->setMotneg($fcsollic->getMotneg());
+       $fcsolneg_new->setFecneg($fcsollic->getFecneg());
+       $fcsolneg_new->save();
+       return true;
+    }
+
+    public static function salvar_grid_Fcsollic($fcsollic, $grid)
+    {
+	  $x=$grid[0];
+      $j=0;
+      while ($j<count($x))
+      {
+		$x[$j]->setNumsol($fcsollic->getNumsol());
+        $x[$j]->save();
+		$j++;
+      }
+      $z=$grid[1];
+      $j=0;
+      while ($j<count($z))
+      {
+        $z[$j]->delete();
+        $j++;
+      }
+    }
+
+    public static function Listlic()
+    {
+	    $c = new Criteria();
+	    $lista = FctiplicPeer::doSelect($c);
+	    $modulos = array();
+	    foreach($lista as $arr)
+	    {
+	      $modulos += array($arr->getCodtiplic() => $arr->getDestiplic());
+	    }
+	    return $modulos;
+    }
+
+    public static function Grabar_Facpiclic($fcsollic)
+    {
+       $c= new Criteria();
+       $c->add(FcsollicPeer::NUMSOL,$fcsollic->getNumsol());
+       $fcsollic_up = FcsollicPeer::doSelectOne($c);
+       if (count($fcsollic_up)>0)
+       {
+              $fcsollic_up->setImplic($fcsollic->getImplic());
+              $fcsollic_up->setTomo($fcsollic->getTomo());
+              $fcsollic_up->setFolio($fcsollic->getFolio());
+              $fcsollic_up->setNumero($fcsollic->getNumero());
+              $fcsollic_up->setFecapr($fcsollic->getFecapr());
+              $fcsollic_up->setFecven($fcsollic->getFecven());
+              $fcsollic_up->setFecinilic($fcsollic->getFecinilic());
+              $fcsollic_up->setStasol("A");
+              $fcsollic_up->setNumlic($fcsollic->getNumlic());
+              $fcsollic_up->setFunrel($fcsollic->getFunrel());
+              $fcsollic_up->setCodtiplic($fcsollic->getCodtiplic());
+              $fcsollic_up->save();
+	    }
+       return true;
+    }
+
+    public static function Grabar_Facpiclic_Suspencion_Cancelacion($fcsollic)
+    {
+       $correlativo="";
+       $c= new Criteria();
+       $c->add(FcsollicPeer::NUMSOL,$fcsollic->getNumsol());
+       $fcsollic_up = FcsollicPeer::doSelectOne($c);
+       if (count($fcsollic_up)>0)
+       {
+           /*ACTUALIZAMOS FCSOLLIC*/
+           $fcsollic_up->setStalic($fcsollic->getOperacion());
+           $fcsollic_up->save();
+           /*FIN ACTUALIZAR */
+           $c= new Criteria();
+           $c->addDescendingOrderByColumn(FcsuscanPeer::NUMSUS);
+	       $reg = FcsuscanPeer::doSelectOne($c);
+	       if (count($reg)>0) $correlativo=str_pad(trim($reg->getNumsus()+1),10,'0',STR_PAD_LEFT);
+	       else	$correlativo=str_pad(1,10,'0',STR_PAD_LEFT);
+	       $fcsuscan_new = new Fcsuscan();
+	       $fcsuscan_new->setNumsus($correlativo);
+	       $fcsuscan_new->setNumsol($fcsollic->getNumsol());
+	       $fcsuscan_new->setNumlic($fcsollic->getNumlic());
+	       $fcsuscan_new->setFunsus($fcsollic->getFunsus());
+	       $fcsuscan_new->setTomo($fcsollic->getSolsus());
+	       $fcsuscan_new->setNumero($fcsollic->getActsus());
+	       $fcsuscan_new->setFolio($fcsollic->getFolsus());
+	       $fcsuscan_new->setResolu($fcsollic->getResolsus());
+	       $fcsuscan_new->setMotsus($fcsollic->getMotsus());
+	       $fcsuscan_new->setFecsus($fcsollic->getFecsus());
+	       $fcsuscan_new->setEstlic($fcsollic->getOperacion());
+	       $fcsuscan_new->save();
+	    }
+       return true;
+    }
+
+
+    public static function Grabar_Reactivar($fcsollic)
+    {
+       $c= new Criteria();
+       $c->add(FcsollicPeer::NUMLIC,$fcsollic->getNumlic());
+       $fcsollic_up = FcsollicPeer::doSelectOne($c);
+       if (count($fcsollic_up)>0)
+       {
+           $fcsollic_up->setStalic("V");
+           $fcsollic_up->save();
+	    }
+       return true;
+    }
+
+    public static function Grabar_Renovar($fcsollic)
+    {
+       $c= new Criteria();
+       $c->add(FcsollicPeer::NUMLIC,$fcsollic->getNumlic());
+       $fcsollic_up = FcsollicPeer::doSelectOne($c);
+       if (count($fcsollic_up)>0)
+       {
+           $fcsollic_up->setStalic("V");
+           $fcsollic_up->setFecini("01/01/".date("Y"));
+           $fcsollic_up->setFecfin("31/12/".date("Y"));
+           $fcsollic_up->setFecapr($fcsollic_up->getFecapr());
+           $fcsollic_up->setFecven($fcsollic_up->getFecven());
+           $fcsollic_up->save();
+	       $fcrenlic_new = new Fcrenlic();
+	       $fcrenlic_new->setNumlic($fcsollic->getNumlic());
+	       $fcrenlic_new->setFecven($fcsollic->getFecven());
+	       $fcrenlic_new->setFecren(date("d/m/Y"));
+	       $fcrenlic_new->save();
+	    }
+       return true;
+    }
+
+
 }
 ?>

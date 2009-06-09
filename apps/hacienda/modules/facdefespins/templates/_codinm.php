@@ -3,10 +3,11 @@
 <?php
 
  echo Catalogo($fcdefins,1,array(
-  'getprincipal' => 'getCodfue_inm',
-  'getsecundario' => 'getNomfue_inm',
+  'getprincipal' => 'getCodinm',
+  'getsecundario' => 'getDescripcioncodinm',
   //cajitas abajo
   'campoprincipal' => 'codinm',
-  'camposecundario' => 'nomfue',
+  'camposecundario' => 'descripcioncodinm',
   'campobase' => 'codfue'
   ), 'Facdefespins_fcdefins', 'fcfuepre'); ?>
+

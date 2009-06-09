@@ -8,8 +8,8 @@ generator:
       coduso:  { name: Código de Uso, params: size=20 maxlength=16 }
       desuso:  { name: Descripcion, params: size=40 maxlength=240 }
       anovig:  { name: Año de Vigencia del Uso , params: size=5 maxlength=4 }
-      monafo:  { name: Monto del Aforo, params: size=10 maxlength=1 }
-      porali:  { name: Alícuota (X/1000), params: size=10 maxlength=1 }
+      monafo:  { name: Monto del Aforo, params: size=10 maxlength=10 }
+      porali:  { name: Alícuota (X/1000), params: size=10 maxlength=10 }
       anolim:  { name: Edad Límite para Empezar a Pagar el Aforo (1-99), params: size=10 maxlength=4 }
     list:
       title:     Clasificador de Vehículos
@@ -29,7 +29,8 @@ generator:
     edit:
       title: Clasificador de Vehículos
       display:
-        "Datos Generales": [ _coduso, _anovig, desuso, monafo, porali, anolim ]
+        "Datos Generales": [ _coduso, anovig, desuso, monafo, porali, anolim ]
+      hide: [ mascara ]
       actions:
         _list:        ~
         _save:        ~

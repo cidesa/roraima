@@ -9,7 +9,7 @@ generator:
       codtip:    { name: Código, params: size=10 maxlength=3}
       destip:    { name: . , params: size=40 maxlength=150 }
       valmtr:    { name: Valor del M2 (Bs.) , params: size=10 }
-      valfis:    { name: Valor Fiscal M2, params: size=10 }
+      valfis:    { name: Valor Fiscal M2, params: size=10 readonly=true }
       alitip:    { name: Automatico, params: size=10 }
       anual:     { name: Solo aplicables a deudas del Año actual, params: size=10 }
       alitipt:   { name: Modo , params: size=10 }
@@ -19,9 +19,9 @@ generator:
       grid:      { name: . }
     list:
       title:     Definición Inmuebles Urbanos  - Cuadro de Especificaciones para Cálculo de Impuestos
-      display:   [=codzon, deszon]
+      display:   [=codzon, anovig, deszon]
       sort:      deszon
-      filters:   [codzon, deszon]
+      filters:   [codzon, anovig, deszon]
       fields:
         deszon:
           params: size=10
@@ -33,7 +33,7 @@ generator:
     edit:
       title:          Edición de Inmuebles Urbanos  - Cuadro de Especificaciones para Cálculo de Impuestos
       display:
-        "Datos Generales":   [ codzon, deszon, _anovig, _valmtr, _porvalfis, valfis ]
+        "Datos Generales":   [ codzon, deszon, anovig, _valmtr, _porvalfis, valfis ]
         "Asociación de Recaudos":   [ _grid ]
       actions:
         _list:        ~

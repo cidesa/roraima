@@ -9,8 +9,5 @@
  */
 class Fcusoveh extends BaseFcusoveh
 {
-	public function getFormatopre()
-    {
-    	return Herramientas::getX_vacio('codemp','fcdefins','forveh','001');
-    }
+	protected $mascara="";
 }

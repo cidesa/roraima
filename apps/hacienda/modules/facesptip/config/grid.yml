@@ -4,7 +4,7 @@ opciones:                  # Opciones generales
   tabla:                   Fctipespdet
   ancho:                   400
   anchogrid:               600
-  filas:                   6
+  filas:                   1
   titulo:                  ' '
   htmltotalfilas:          ' '
 1:       # Columna 1
@@ -19,11 +19,11 @@ opciones:                  # Opciones generales
   tipo:                    m
   nombrecampo:             valor
   esgrabable:			   true
-  html:                    []
+  html:                    [onBlur=establecertipo(this.id)]
 
 3:       # Columna 3
   titulo:                  Tipo de Variable
   tipo:                    t
   nombrecampo:             tipo
   esgrabable:			   true
-  html:                    []
+  html:                    [readonly=true]

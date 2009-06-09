@@ -22,6 +22,22 @@ class FacmultasActions extends autoFacmultasActions
 
   }
 
+
+  public function deleting($fcmultas)
+  {
+   if ($fcmultas->getId()!="")
+   {
+	$c = new Criteria();
+	$c->add(FcrangosmulPeer::CODMUL,$fcmultas->getCodmul());
+	FcrangosmulPeer::doDelete($c);
+	$c = new Criteria();
+	$c->add(FcfuentesmulPeer::CODMUL,$fcmultas->getCodmul());
+	FcfuentesmulPeer::doDelete($c);
+    $fcmultas->delete();
+    return -1;
+   }
+  }
+
   public function configGrid($reg = array(),$regelim = array())
   {
     $c = new Criteria();
@@ -116,6 +132,9 @@ class FacmultasActions extends autoFacmultasActions
 
   }
 
+
+
+
   /**
    * Función para actualziar el grid en el post si ocurre un error
    * Se pueden colocar aqui los grids adicionales
@@ -142,10 +161,6 @@ class FacmultasActions extends autoFacmultasActions
     return -1;
   }
 
-  public function deleting($clasemodelo)
-  {
-    return parent::deleting($clasemodelo);
-  }
 
 
 }

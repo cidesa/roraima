@@ -4,7 +4,7 @@ opciones:                  # Opciones generales
   tabla:                   fcfuentesrec
   ancho:                   900
   anchogrid:               900
-  filas:                   6
+  filas:                   1
   titulo:                  ' '
   htmltotalfilas:          ' '
 1:       # Columna 1

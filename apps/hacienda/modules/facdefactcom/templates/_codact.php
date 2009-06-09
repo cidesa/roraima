@@ -1,7 +1,7 @@
 <?php use_helper('Object', 'Validation', 'ObjectAdmin', 'I18N', 'Date', 'Catalogo') ?>
   <?php
-  $var=$fcactcom->getFormatopre();
-  $lon=strlen(trim($fcactcom->getFormatopre()));
+  $var=$fcactcom->getMascara();
+  $lon=strlen(trim($fcactcom->getMascara()));
   $value = object_input_tag($fcactcom, 'getCodact', array (
   'size' => $lon+2,
   'maxlength' => $lon,

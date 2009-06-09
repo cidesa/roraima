@@ -10,6 +10,7 @@
 class Fctipsol extends BaseFctipsol
 {
 	protected $grid= array();
+
   public function getNomfueing()
   {
   	return Herramientas::getX('CODFUE','FCFuePre','Nomfue',self::getFueing());
@@ -19,6 +20,7 @@ class Fctipsol extends BaseFctipsol
   {
 	  	return Herramientas::getX('CODFUE','fcfuepre','Nomfue',self::getFueing());
   }
+
   public function getNomfue()
   {
   	return Herramientas::getX('CODFUE','FCFuePre','Nomfue',self::getFueing());

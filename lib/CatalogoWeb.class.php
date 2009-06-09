@@ -5351,6 +5351,68 @@ A.CODREDE"
   }
 
 
+  public function Fcreginm_Fccatfis()
+  {
+    $sql = "Select Max(length(rtrim(codcatfis))) as maximo from Fccatfis";
+    $result = array ();
+    if (Herramientas::BuscarDatos($sql,&$result))
+    {
+	    if (Herramientas::BuscarDatos($sql,&$result))
+	   		$longitud = $result[0]["maximo"];
+	   	else
+	   		$longitud = 0;
+	    $this->c = new Criteria();
+	    $this->sql = "length(Codcatfis) = '" . $longitud . "'";
+	    $this->c->add(FccatfisPeer :: CODCATFIS, $this->sql, Criteria :: CUSTOM);
+	    $this->columnas = array (
+	      FccatfisPeer :: CODCATFIS => 'Código',
+	      FccatfisPeer :: NOMCATFIS => 'Descripción'
+	    );
+    }
+  }
+  public function Fcreginm_Fccarinm()
+  {
+    $this->c = new Criteria();
+    $this->c->addAscendingOrderByColumn(FccarinmPeer :: CODCARINM);
+    $this->columnas = array (
+      FccarinmPeer :: CODCARINM => 'Código',
+      FccarinmPeer :: NOMCARINM => 'Descripción'
+    );
+  }
+  public function Fcreginm_Fcestinm()
+  {
+    $this->c = new Criteria();
+    $this->c->addAscendingOrderByColumn(FcestinmPeer :: CODESTINM);
+    $this->columnas = array (
+      FcestinmPeer :: CODESTINM => 'Código',
+      FcestinmPeer :: DESESTINM => 'Descripción'
+    );
+  }
+
+  public function Fcreginm_Fcvalinm() {
+    $this->c = new Criteria();
+    $this->c->addSelectColumn(FcvalinmPeer::CODZON);
+    $this->c->addSelectColumn(FcvalinmPeer::DESZON);
+    $this->c->addSelectColumn("'' as CODTIP");
+    $this->c->addSelectColumn("'' as DESTIP");
+    $this->c->addSelectColumn("'' as VALMTR");
+    $this->c->addSelectColumn("'' as VALFIS");
+    $this->c->addSelectColumn("'' as ALITIP");
+    $this->c->addSelectColumn("'' as ANUAL");
+    $this->c->addSelectColumn("'' as ALITIPT");
+    $this->c->addSelectColumn("'' as ANUALT");
+    $this->c->addSelectColumn("'' as ANOVIG");
+    $this->c->addSelectColumn("'' as PORVALFIS");
+    $this->c->addSelectColumn("'' as ID");
+    $this->c->addGroupByColumn(FcvalinmPeer::CODZON);
+    $this->c->addGroupByColumn(FcvalinmPeer::DESZON);
+    $this->columnas = array (
+      FcvalinmPeer :: CODZON => 'Código',
+      FcvalinmPeer :: DESZON => 'Descripción',
+    );
+  }
+
+
   public function Fcreginm_Fcusoinm()
   {
     $this->c = new Criteria();

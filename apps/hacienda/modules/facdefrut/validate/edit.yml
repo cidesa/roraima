@@ -6,7 +6,15 @@ names:
   fcrutas{codrut}:
     required:  Yes
     required_msg: Código es un campo requerido
+    validators: Validator_codrut
 
   fcrutas{desrut}:
     required:  Yes
     required_msg: La Descripción es un campo requerido
+
+Validator_codrut:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Fcrutas
+        column:       codrut
+        unique_error: El registro ya Existe intente con otro.

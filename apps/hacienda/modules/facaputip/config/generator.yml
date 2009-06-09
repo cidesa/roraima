@@ -34,7 +34,7 @@ generator:
     edit:
       title: Clasificador de Apuestas Licitas
       display:
-        "Datos Generales": [ _tipapu, _anovig, destip, unipar, _frepar, parapu, _grid ]
+        "Datos Generales": [ _tipapu, anovig, destip, unipar, _exoapu, _frepar, _grid, _parapu ]
       actions:
         _list:        ~
         _save:        ~

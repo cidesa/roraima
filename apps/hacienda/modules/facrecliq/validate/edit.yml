@@ -2,6 +2,7 @@ methods:
   post:
    - "fcdefrecint{codrec}"
    - "fcdefrecint{nomrec}"
+   - "fcdefrecint{modo}"
 
 names:
   fcdefrecint{codrec}:
@@ -12,6 +13,10 @@ names:
   fcdefrecint{nomrec}:
     required:  Yes
     required_msg: La Descripción es un campo requerido
+
+  fcdefrecint{modo}:
+    required:  Yes
+    required_msg: Modos de Calculo es un campo requerido
 
 
 Validator_codrec:

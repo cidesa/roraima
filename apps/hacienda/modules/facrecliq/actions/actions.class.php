@@ -23,6 +23,21 @@ class facrecliqActions extends autofacrecliqActions
 
   }
 
+  public function deleting($fcdefrecint)
+  {
+   if ($fcdefrecint->getId()!="")
+   {
+	$c = new Criteria();
+	$c->add(FcrangosrecPeer::CODREC,$fcdefrecint->getCodrec());
+	FcrangosrecPeer::doDelete($c);
+	$c = new Criteria();
+	$c->add(FcfuentesrecPeer::CODREC,$fcdefrecint->getCodrec());
+	FcfuentesrecPeer::doDelete($c);
+    $fcdefrecint->delete();
+    return -1;
+   }
+  }
+
   public function configGrid($reg = array(),$regelim = array())
   {
     $c = new Criteria();
@@ -135,9 +150,12 @@ class facrecliqActions extends autofacrecliqActions
   public function saving($fcdefdesc)
   {
     $fcdefdesc->save();
-    $grid = Herramientas::CargarDatosGridv2($this,$this->grid);
+    if ($fcdefdesc->getModo()!="T")
+    {
+        $grid = Herramientas::CargarDatosGridv2($this,$this->grid);
+        Hacienda::salvar_grid_Fcdefrecint($fcdefdesc, $grid);
+    }
     $gridb = Herramientas::CargarDatosGridv2($this,$this->gridb);
-    Hacienda::salvar_grid_Fcdefrecint($fcdefdesc, $grid);
 	Hacienda::salvar_gridb_Fcdefrecint($fcdefdesc, $gridb);
     return -1;
   }
@@ -234,11 +252,5 @@ class facrecliqActions extends autofacrecliqActions
     }
 
   }
-
-  public function deleting($clasemodelo)
-  {
-    return parent::deleting($clasemodelo);
-  }
-
 
 }

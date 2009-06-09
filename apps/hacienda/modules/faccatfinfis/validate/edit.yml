@@ -19,3 +19,4 @@ Validator_codcatfis:
         class:        Fccatfis
         column:       codcatfis
         unique_error: El registro ya Existe intente con otro.
+

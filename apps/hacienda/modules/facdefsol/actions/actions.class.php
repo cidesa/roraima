@@ -260,11 +260,8 @@ class FacdefsolActions extends autoFacdefsolActions
    */
   public function updateError()
   {
-    //echo "ddddddddd";
     $this->configGrid();
     $grid = Herramientas::CargarDatosGridv2($this,$this->grid);
-
-    //H::printR($grid);
     $this->configGrid($grid[0],$grid[1]);
   }
 
@@ -276,10 +273,30 @@ class FacdefsolActions extends autoFacdefsolActions
     return -1;
   }
 
-  public function deleting($clasemodelo)
+  /*protected function deleteCaordcom($caordcom)
   {
-    return parent::deleting($clasemodelo);
-  }
+      $id=$this->getRequestParameter('id');
+    if (!Orden_compra::Eliminar($caordcom,&$coderror))
+      {
+          if($coderror!=-1)
+        {
+            $err = Herramientas::obtenerMensajeError($coderror);
+          $this->getRequest()->setError('delete', $err);
+          return $this->forward('almordcom', 'list');
+        }
+      }
+  }*/
 
+  public function deleting($fctipsol)
+  {
+   if ($fctipsol->getId()!="")
+   {
+	$c = new Criteria();
+	$c->add(FcdefdetsolPeer::CODSOL,$fctipsol->getCodtip());
+	FcdefdetsolPeer::doDelete($c);
+    $fctipsol->delete();
+    return -1;
+   }
+  }
 
 }

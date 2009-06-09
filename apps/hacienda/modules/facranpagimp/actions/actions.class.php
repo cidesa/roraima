@@ -11,6 +11,10 @@
 class FacRanPagImpActions extends autoFacRanPagImpActions
 {
 
+  public function executeIndex()
+  {
+    return $this->forward('facranpagimp', 'edit');
+  }
   // Para incluir funcionalidades al executeEdit()
   public function editing()
   {

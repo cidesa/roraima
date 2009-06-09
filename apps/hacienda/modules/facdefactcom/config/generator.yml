@@ -21,7 +21,7 @@ generator:
 
     list:
       title:     Definición Actividades Comerciales:
-      display:   [ =codact, desact]
+      display:   [ =codact, anoact, desact]
       sort:      desact
       filters:   [codact, desact]
       fields:
@@ -37,7 +37,7 @@ generator:
       display:
         "Datos Generales":   [ anoact, _codact, desact, _minofac, afoact, mintri ]
         "Exonerable":   [ _exoner ]
-        "Evento":   [ _exento ]
+        "Exento":   [ _exento ]
         "Rebajas":   [ _rebaja, porreb ]
       actions:
         _list:        ~

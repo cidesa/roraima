@@ -15,11 +15,12 @@ class FacdefactcomActions extends autoFacdefactcomActions
  public function editing()
   {
 		$this->setVars();
+		$this->fcactcom->setMascara($this->mascara);
   }
 
   public function setVars()
   {
-    $this->mascarapresupuesto = trim(Herramientas::getX('foract','Fcdefins','codpro',"001"));
+    $this->mascara = trim(Herramientas::getX('codemp','Fcdefins','foract','001'));
   }
 
 

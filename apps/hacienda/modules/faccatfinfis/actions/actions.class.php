@@ -15,11 +15,12 @@ class FaccatfinfisActions extends autoFaccatfinfisActions
   public function editing()
   {
 		$this->setVars();
+		$this->fccatfis->setMascara($this->mascara);
   }
 
   public function setVars()
   {
-    $this->mascarapresupuesto = Hacienda::Cargar_mascara();
+    $this->mascara = Hacienda::Cargar_mascara();
 
   }
 

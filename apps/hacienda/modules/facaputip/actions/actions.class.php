@@ -13,8 +13,48 @@ class FacaputipActions extends autoFacaputipActions
 
   public function editing()
   {
-		$this->configGrid();
+	  $this->configGrid();
+	  if ($this->fctipapu->getExoapu()=="N")
+      {
+        $this->fctipapu->setExoapu("");
+      }
+
   }
+
+  public function validateEdit()
+  {
+    $this->coderr =-1;
+    $this->fctipapu = $this->getFctipapuOrCreate();
+    $this->updateFctipapuFromRequest();
+
+    if($this->getRequest()->getMethod() == sfRequest::POST)
+    {
+      if ($this->getRequestParameter('id')=="")
+      {
+        $result=array();
+        $sql = "SELECT anovig FROM fctipapu WHERE anovig ='".$this->getRequestParameter('fctipapu[anovig]')."' and tipapu='".$this->getRequestParameter('fctipapu[coduso]')."'";
+        if (Herramientas::BuscarDatos($sql,&$result))
+        {
+          $this->coderr=701;
+          return false;
+        }
+      }
+     }
+     return true;
+  }
+
+  public function deleting($fctipapu)
+  {
+   if ($fctipapu->getId()!="")
+   {
+	$c = new Criteria();
+	$c->add(FctipapudetPeer::TIPAPU,$fctipapu->getTipapu());
+	FctipapudetPeer::doDelete($c);
+    $fctipapu->delete();
+    return -1;
+   }
+  }
+
 
   public function configGrid($reg = array(),$regelim = array())
   {
@@ -28,26 +68,81 @@ class FacaputipActions extends autoFacaputipActions
 
   public function executeAjax()
   {
+    $filas = array ();
+    $simbolosrepetidos = array ("++","*+","/+","--","-+","*-","**","*/","//","/*","/-","+*","+/");
+    $errorenformula=false;
+    $formula = array ();
+    $error="";
+    $codigo = strtoupper($this->getRequestParameter('fctipapu[parapu]'));
+    $fctipapu = $this->getRequestParameter('fctipapu');
+	$this->fctipapu = $this->getFctipapuOrCreate();
+	$this->getRequestParameter('ajax','');
+    $this->updateFctipapuFromRequest();
+	$this->configGrid();
+	$grid = Herramientas::CargarDatosGridv2($this,$this->obj);
 
-    $codigo = $this->getRequestParameter('codigo','');
-    // Esta variable ajax debe ser usada en cada llamado para identificar
-    // que objeto hace el llamado y por consiguiente ejecutar el código necesario
-    $ajax = $this->getRequestParameter('ajax','');
-
-    // Se debe enviar en la petición ajax desde el cliente los datos que necesitemos
-    // para generar el código de retorno, esto porque en un llamado Ajax no se devuelven
-    // los datos de los objetos de la vista como pasa en un submit normal.
-
-    switch ($ajax){
-      case '1':
-        // La variable $output es usada para retornar datos en formato de arreglo para actualizar
-        // objetos en la vista. mas informacion en
-        // http://201.210.211.26:8080/www/wiki/index.php/Agregar_Ajax_para_buscar_una_descripcion
-        $output = '[["","",""],["","",""],["","",""]]';
-        break;
-      default:
-        $output = '[["","",""],["","",""],["","",""]]';
+	//valido que las variables del grid esten en la formula
+	$x=$grid[0];
+    $j=0;
+    while ($j<count($x))
+    {
+        if ($x[$j]->getTipvar()!="")
+        {
+           $filas[]=$x[$j]->getTipvar();
+        }
+	 $j++;
     }
+    $cadena_modificada= str_replace("+","_",strtoupper($codigo));
+    $cadena_modificada=str_replace("*","_",$cadena_modificada);
+    $cadena_modificada=str_replace("-","_",$cadena_modificada);
+    $cadena_modificada=str_replace("/","_",$cadena_modificada);
+    $formula=explode("_", $cadena_modificada);
+    $formula_sin_vacios = array_values(array_diff($formula, array('')));
+    $j=0;
+    while ($j<count($formula_sin_vacios))
+    {
+	   if (in_array($formula_sin_vacios[$j],$filas)) $errorenformula=false;
+	   else
+       {
+	     $errorenformula=true;
+	     break;
+       }
+	 $j++;
+    }
+    if ($errorenformula) $error="Variable  Desconocida, Verifique";
+    else
+    {
+	    //Valido si hay signos repetidos
+	   $x=0;
+	   while ($x<=strlen($codigo))
+	   {
+	     $simbolo=substr($codigo,$x,2);
+		 if (in_array($simbolo,$simbolosrepetidos))
+	     {
+			 $errorenformula=true;
+		     break;
+	     }
+		 else $errorenformula=false;
+	     $x++;
+	   }
+	   if ($errorenformula) $error="Signos Repetidos, Verifique";
+	   else
+       {
+       	   //verifico si la cadena tiene solonumeros y letras
+		   $buscarcaracter= str_replace("+","",strtoupper($codigo));
+		   $buscarcaracter= str_replace("-","",strtoupper($buscarcaracter));
+		   $buscarcaracter= str_replace("*","",strtoupper($buscarcaracter));
+		   $buscarcaracter= str_replace("/","",strtoupper($buscarcaracter));
+		   if (ereg("^[a-zA-Z0-9_]+$",$buscarcaracter)) $errorenformula=false;
+		   else $errorenformula=true;
+		   if ($errorenformula) $error="Caracter no permitido en formula, Verifique";
+	   }
+    }
+    $javascript="alert('".$error."');";
+    if ($errorenformula)
+       $output = '[["javascript","'.$javascript.'",""],["","",""],["","",""]]';
+    else
+       $output = '[["","",""],["","",""],["","",""]]';
 
     // Instruccion para escribir en la cabecera los datos a enviar a la vista
     $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
@@ -58,43 +153,6 @@ class FacaputipActions extends autoFacaputipActions
 
     // Si por el contrario se quiere reemplazar un div en la vista, se debe deshabilitar
     // por supuesto tomando en cuenta que debe existir el archivo ajaxSuccess.php en la carpeta templates.
-
-  }
-
-
-  public function validateEdit()
-  {
-    $this->coderr =-1;
-
-    // Se deben llamar a las funciones necesarias para cargar los
-    // datos de la vista que serán usados en las funciones de validación.
-    // Por ejemplo:
-
-    if($this->getRequest()->getMethod() == sfRequest::POST){
-
-      // $this->configGrid();
-      // $grid = Herramientas::CargarDatosGrid($this,$this->obj);
-
-      // Aqui van los llamados a los métodos de las clases del
-      // negocio para validar los datos.
-      // Los resultados de cada llamado deben ser analizados por ejemplo:
-
-      // $resp = Compras::validarAlmajuoc($this->caajuoc,$grid);
-
-       //$resp=Herramientas::ValidarCodigo($valor,$this->tstipmov,$campo);
-
-      // al final $resp es analizada en base al código que retorna
-      // Todas las funciones de validación y procesos del negocio
-      // deben retornar códigos >= -1. Estos código serám buscados en
-      // el archivo errors.yml en la función handleErrorEdit()
-
-      if($this->coderr!=-1){
-        return false;
-      } else return true;
-
-    }else return true;
-
-
 
   }
 
@@ -118,10 +176,126 @@ class FacaputipActions extends autoFacaputipActions
 	return -1;
   }
 
-  public function deleting($clasemodelo)
+  protected function updateFctipapuFromRequest()
   {
-    return parent::deleting($clasemodelo);
+    $fctipapu = $this->getRequestParameter('fctipapu');
+
+    if (isset($fctipapu['tipapu']))
+    {
+      $this->fctipapu->setTipapu($fctipapu['tipapu']);
+    }
+    if (isset($fctipapu['anovig']))
+    {
+      $this->fctipapu->setAnovig($fctipapu['anovig']);
+    }
+    if (isset($fctipapu['destip']))
+    {
+      $this->fctipapu->setDestip($fctipapu['destip']);
+    }
+    if (isset($fctipapu['unipar']))
+    {
+      $this->fctipapu->setUnipar($fctipapu['unipar']);
+    }
+    if (isset($fctipapu['frepar']))
+    {
+      $this->fctipapu->setFrepar($fctipapu['frepar']);
+    }
+    if (isset($fctipapu['parapu']))
+    {
+      $this->fctipapu->setParapu($fctipapu['parapu']);
+    }
+    if (isset($fctipapu['grid']))
+    {
+      $this->fctipapu->setGrid($fctipapu['grid']);
+    }
+
+    if (isset($fctipapu['tipapu']))
+    {
+      $this->fctipapu->setTipapu($fctipapu['tipapu']);
+    }
+    if (isset($fctipapu['anovig']))
+    {
+      $this->fctipapu->setAnovig($fctipapu['anovig']);
+    }
+    if (isset($fctipapu['destip']))
+    {
+      $this->fctipapu->setDestip($fctipapu['destip']);
+    }
+    if (isset($fctipapu['pormon']))
+    {
+      $this->fctipapu->setPormon($fctipapu['pormon']);
+    }
+    if (isset($fctipapu['alimon']))
+    {
+      $this->fctipapu->setAlimon($fctipapu['alimon']);
+    }
+    if (isset($fctipapu['statip']))
+    {
+      $this->fctipapu->setStatip($fctipapu['statip']);
+    }
+    if (isset($fctipapu['unipar']))
+    {
+      $this->fctipapu->setUnipar($fctipapu['unipar']);
+    }
+    if (isset($fctipapu['frepar']))
+    {
+      $this->fctipapu->setFrepar($fctipapu['frepar']);
+    }
+    if (isset($fctipapu['parapu']))
+    {
+      $this->fctipapu->setParapu($fctipapu['parapu']);
+    }
+    if (isset($fctipapu['exoapu']))
+    {
+      $this->fctipapu->setExoapu($fctipapu['exoapu']);
+    }
+
+    if (isset($fctipapu['tipapu']))
+    {
+      $this->fctipapu->setTipapu($fctipapu['tipapu']);
+    }
+    if (isset($fctipapu['anovig']))
+    {
+      $this->fctipapu->setAnovig($fctipapu['anovig']);
+    }
+    if (isset($fctipapu['destip']))
+    {
+      $this->fctipapu->setDestip($fctipapu['destip']);
+    }
+
+    $this->fctipapu->setPormon("P");
+
+    if (isset($fctipapu['alimon']))
+    {
+      $this->fctipapu->setAlimon($fctipapu['alimon']);
+    }
+    if (isset($fctipapu['statip']))
+    {
+      $this->fctipapu->setStatip($fctipapu['statip']);
+    }
+    if (isset($fctipapu['unipar']))
+    {
+      $this->fctipapu->setUnipar($fctipapu['unipar']);
+    }
+    if (isset($fctipapu['frepar']))
+    {
+      $this->fctipapu->setFrepar($fctipapu['frepar']);
+    }
+    if (isset($fctipapu['parapu']))
+    {
+      $this->fctipapu->setParapu($fctipapu['parapu']);
+    }
+    if (isset($fctipapu['exoapu']))
+    {
+      $this->fctipapu->setExoapu("S");
+    }
+    else
+    {
+      $this->fctipapu->setExoapu("N");
+    }
+
   }
+
 
 
 }

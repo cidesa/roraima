@@ -17,6 +17,19 @@ class FacdatconActions extends autoFacdatconActions
 		$this->configGrid();
   }
 
+
+  public function deleting($fcconrep)
+  {
+   if ($fcconrep->getId()!="")
+   {
+	$c = new Criteria();
+	$c->add(FcrecconPeer::RIFCON,$fcconrep->getRifcon());
+	FcrecconPeer::doDelete($c);
+    $fcconrep->delete();
+    return -1;
+   }
+  }
+
   public function configGrid($reg = array(),$regelim = array())
   {
     $c = new Criteria();
@@ -121,11 +134,416 @@ class FacdatconActions extends autoFacdatconActions
     return -1;
   }
 
-
-  public function deleting($clasemodelo)
+ protected function updateFcconrepFromRequest()
   {
-    return parent::deleting($clasemodelo);
+    $fcconrep = $this->getRequestParameter('fcconrep');
+
+    if (isset($fcconrep['cedcon']))
+    {
+      $this->fcconrep->setCedcon($fcconrep['cedcon']);
+    }
+    if (isset($fcconrep['rifcon']))
+    {
+      $this->fcconrep->setRifcon($fcconrep['rifcon']);
+    }
+    if (isset($fcconrep['nomcon']))
+    {
+      $this->fcconrep->setNomcon($fcconrep['nomcon']);
+    }
+    if (isset($fcconrep['naccon']))
+    {
+      $this->fcconrep->setNaccon($fcconrep['naccon']);
+    }
+    if (isset($fcconrep['tipcon']))
+    {
+      $this->fcconrep->setTipcon($fcconrep['tipcon']);
+    }
+    if (isset($fcconrep['dircon']))
+    {
+      $this->fcconrep->setDircon($fcconrep['dircon']);
+    }
+    if (isset($fcconrep['codpar']))
+    {
+      $this->fcconrep->setCodpar($fcconrep['codpar']);
+    }
+    if (isset($fcconrep['ciucon']))
+    {
+      $this->fcconrep->setCiucon($fcconrep['ciucon']);
+    }
+    if (isset($fcconrep['cpocon']))
+    {
+      $this->fcconrep->setCpocon($fcconrep['cpocon']);
+    }
+    if (isset($fcconrep['apocon']))
+    {
+      $this->fcconrep->setApocon($fcconrep['apocon']);
+    }
+    if (isset($fcconrep['telcon']))
+    {
+      $this->fcconrep->setTelcon($fcconrep['telcon']);
+    }
+    if (isset($fcconrep['emacon']))
+    {
+      $this->fcconrep->setEmacon($fcconrep['emacon']);
+    }
+    if (isset($fcconrep['faxcon']))
+    {
+      $this->fcconrep->setFaxcon($fcconrep['faxcon']);
+    }
+    if (isset($fcconrep['urlcon']))
+    {
+      $this->fcconrep->setUrlcon($fcconrep['urlcon']);
+    }
+    if (isset($fcconrep['grid']))
+    {
+      $this->fcconrep->setGrid($fcconrep['grid']);
+    }
+
+    if (isset($fcconrep['cedcon']))
+    {
+      $this->fcconrep->setCedcon($fcconrep['cedcon']);
+    }
+    if (isset($fcconrep['rifcon']))
+    {
+      $this->fcconrep->setRifcon($fcconrep['rifcon']);
+    }
+    if (isset($fcconrep['nomcon']))
+    {
+      $this->fcconrep->setNomcon($fcconrep['nomcon']);
+    }
+    if (isset($fcconrep['repcon']))
+    {
+      $this->fcconrep->setRepcon($fcconrep['repcon']);
+    }
+    if (isset($fcconrep['dircon']))
+    {
+      $this->fcconrep->setDircon($fcconrep['dircon']);
+    }
+    if (isset($fcconrep['telcon']))
+    {
+      $this->fcconrep->setTelcon($fcconrep['telcon']);
+    }
+    if (isset($fcconrep['emacon']))
+    {
+      $this->fcconrep->setEmacon($fcconrep['emacon']);
+    }
+    if (isset($fcconrep['codsec']))
+    {
+      $this->fcconrep->setCodsec($fcconrep['codsec']);
+    }
+    if (isset($fcconrep['codpar']))
+    {
+      $this->fcconrep->setCodpar($fcconrep['codpar']);
+    }
+    if (isset($fcconrep['nitcon']))
+    {
+      $this->fcconrep->setNitcon($fcconrep['nitcon']);
+    }
+    if (isset($fcconrep['codmun']))
+    {
+      $this->fcconrep->setCodmun($fcconrep['codmun']);
+    }
+    if (isset($fcconrep['codedo']))
+    {
+      $this->fcconrep->setCodedo($fcconrep['codedo']);
+    }
+    if (isset($fcconrep['codpai']))
+    {
+      $this->fcconrep->setCodpai($fcconrep['codpai']);
+    }
+    if (isset($fcconrep['ciucon']))
+    {
+      $this->fcconrep->setCiucon($fcconrep['ciucon']);
+    }
+    if (isset($fcconrep['cpocon']))
+    {
+      $this->fcconrep->setCpocon($fcconrep['cpocon']);
+    }
+    if (isset($fcconrep['apocon']))
+    {
+      $this->fcconrep->setApocon($fcconrep['apocon']);
+    }
+    if (isset($fcconrep['urlcon']))
+    {
+      $this->fcconrep->setUrlcon($fcconrep['urlcon']);
+    }
+    if (isset($fcconrep['naccon']))
+    {
+      $this->fcconrep->setNaccon($fcconrep['naccon']);
+    }
+    if (isset($fcconrep['tipcon']))
+    {
+      $this->fcconrep->setTipcon($fcconrep['tipcon']);
+    }
+    if (isset($fcconrep['faxcon']))
+    {
+      $this->fcconrep->setFaxcon($fcconrep['faxcon']);
+    }
+    if (isset($fcconrep['clacon']))
+    {
+      $this->fcconrep->setClacon($fcconrep['clacon']);
+    }
+    if (isset($fcconrep['fecdescon']))
+    {
+      if ($fcconrep['fecdescon'])
+      {
+        try
+        {
+          $dateFormat = new sfDateFormat($this->getUser()->getCulture());
+                              if (!is_array($fcconrep['fecdescon']))
+          {
+            $value = $dateFormat->format($fcconrep['fecdescon'], 'i', $dateFormat->getInputPattern('d'));
+          }
+          else
+          {
+            $value_array = $fcconrep['fecdescon'];
+            $value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+          }
+          $this->fcconrep->setFecdescon($value);
+        }
+        catch (sfException $e)
+        {
+          // not a date
+        }
+      }
+      else
+      {
+        $this->fcconrep->setFecdescon(null);
+      }
+    }
+    if (isset($fcconrep['fecactcon']))
+    {
+      if ($fcconrep['fecactcon'])
+      {
+        try
+        {
+          $dateFormat = new sfDateFormat($this->getUser()->getCulture());
+                              if (!is_array($fcconrep['fecactcon']))
+          {
+            $value = $dateFormat->format($fcconrep['fecactcon'], 'i', $dateFormat->getInputPattern('d'));
+          }
+          else
+          {
+            $value_array = $fcconrep['fecactcon'];
+            $value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+          }
+          $this->fcconrep->setFecactcon($value);
+        }
+        catch (sfException $e)
+        {
+          // not a date
+        }
+      }
+      else
+      {
+        $this->fcconrep->setFecactcon(null);
+      }
+    }
+    if (isset($fcconrep['stacon']))
+    {
+      $this->fcconrep->setStacon($fcconrep['stacon']);
+    }
+    if (isset($fcconrep['origen']))
+    {
+      $this->fcconrep->setOrigen($fcconrep['origen']);
+    }
+    if (isset($fcconrep['nomneg']))
+    {
+      $this->fcconrep->setNomneg($fcconrep['nomneg']);
+    }
+    if (isset($fcconrep['reccon']))
+    {
+      $this->fcconrep->setReccon($fcconrep['reccon']);
+    }
+    if (isset($fcconrep['tem']))
+    {
+      $this->fcconrep->setTem($fcconrep['tem']);
+    }
+
+    if (isset($fcconrep['cedcon']))
+    {
+      $this->fcconrep->setCedcon($fcconrep['cedcon']);
+    }
+    if (isset($fcconrep['rifcon']))
+    {
+      $this->fcconrep->setRifcon($fcconrep['rifcon']);
+    }
+    if (isset($fcconrep['nomcon']))
+    {
+      $this->fcconrep->setNomcon($fcconrep['nomcon']);
+    }
+    if (isset($fcconrep['repcon']))
+    {
+      $this->fcconrep->setRepcon($fcconrep['repcon']);
+    }
+    if (isset($fcconrep['dircon']))
+    {
+      $this->fcconrep->setDircon($fcconrep['dircon']);
+    }
+    if (isset($fcconrep['telcon']))
+    {
+      $this->fcconrep->setTelcon($fcconrep['telcon']);
+    }
+    if (isset($fcconrep['emacon']))
+    {
+      $this->fcconrep->setEmacon($fcconrep['emacon']);
+    }
+    if (isset($fcconrep['codsec']))
+    {
+      $this->fcconrep->setCodsec($fcconrep['codsec']);
+    }
+    if (isset($fcconrep['codpar']))
+    {
+      $this->fcconrep->setCodpar($fcconrep['codpar']);
+    }
+    if (isset($fcconrep['nitcon']))
+    {
+      $this->fcconrep->setNitcon($fcconrep['nitcon']);
+    }
+    if (isset($fcconrep['codmun']))
+    {
+      $this->fcconrep->setCodmun($fcconrep['codmun']);
+    }
+    if (isset($fcconrep['codedo']))
+    {
+      $this->fcconrep->setCodedo($fcconrep['codedo']);
+    }
+    if (isset($fcconrep['codpai']))
+    {
+      $this->fcconrep->setCodpai($fcconrep['codpai']);
+    }
+    if (isset($fcconrep['ciucon']))
+    {
+      $this->fcconrep->setCiucon($fcconrep['ciucon']);
+    }
+    if (isset($fcconrep['cpocon']))
+    {
+      $this->fcconrep->setCpocon($fcconrep['cpocon']);
+    }
+    if (isset($fcconrep['apocon']))
+    {
+      $this->fcconrep->setApocon($fcconrep['apocon']);
+    }
+    if (isset($fcconrep['urlcon']))
+    {
+      $this->fcconrep->setUrlcon($fcconrep['urlcon']);
+    }
+    if (isset($fcconrep['naccon']))
+    {
+      $this->fcconrep->setNaccon($fcconrep['naccon']);
+    }
+    if (isset($fcconrep['tipcon']))
+    {
+      $this->fcconrep->setTipcon($fcconrep['tipcon']);
+    }
+    if (isset($fcconrep['faxcon']))
+    {
+      $this->fcconrep->setFaxcon($fcconrep['faxcon']);
+    }
+    if (isset($fcconrep['clacon']))
+    {
+      $this->fcconrep->setClacon($fcconrep['clacon']);
+    }
+    if (isset($fcconrep['fecdescon']))
+    {
+      if ($fcconrep['fecdescon'])
+      {
+        try
+        {
+          $dateFormat = new sfDateFormat($this->getUser()->getCulture());
+                              if (!is_array($fcconrep['fecdescon']))
+          {
+            $value = $dateFormat->format($fcconrep['fecdescon'], 'i', $dateFormat->getInputPattern('d'));
+          }
+          else
+          {
+            $value_array = $fcconrep['fecdescon'];
+            $value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+          }
+          $this->fcconrep->setFecdescon($value);
+        }
+        catch (sfException $e)
+        {
+          // not a date
+        }
+      }
+      else
+      {
+        $this->fcconrep->setFecdescon(null);
+      }
+    }
+    if (isset($fcconrep['fecactcon']))
+    {
+      if ($fcconrep['fecactcon'])
+      {
+        try
+        {
+          $dateFormat = new sfDateFormat($this->getUser()->getCulture());
+                              if (!is_array($fcconrep['fecactcon']))
+          {
+            $value = $dateFormat->format($fcconrep['fecactcon'], 'i', $dateFormat->getInputPattern('d'));
+          }
+          else
+          {
+            $value_array = $fcconrep['fecactcon'];
+            $value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+          }
+          $this->fcconrep->setFecactcon($value);
+        }
+        catch (sfException $e)
+        {
+          // not a date
+        }
+      }
+      else
+      {
+        $this->fcconrep->setFecactcon(null);
+      }
+    }
+    if (isset($fcconrep['stacon']))
+    {
+      $this->fcconrep->setStacon($fcconrep['stacon']);
+    }
+    if (isset($fcconrep['origen']))
+    {
+      $this->fcconrep->setOrigen($fcconrep['origen']);
+    }
+    if (isset($fcconrep['nomneg']))
+    {
+      $this->fcconrep->setNomneg($fcconrep['nomneg']);
+    }
+    if (isset($fcconrep['reccon']))
+    {
+      $this->fcconrep->setReccon($fcconrep['reccon']);
+    }
+    if (isset($fcconrep['tem']))
+    {
+      $this->fcconrep->setTem($fcconrep['tem']);
+    }
+
+    $sectores = explode("-", $fcconrep['codpar1']);
+
+    if (isset($sectores[0]))
+    {
+      $this->fcconrep->setCodpar($sectores[0]);
+    }
+    if (isset($sectores[1]))
+    {
+      $this->fcconrep->setCodmun($sectores[1]);
+    }
+    if (isset($sectores[2]))
+    {
+      $this->fcconrep->setCodedo($sectores[2]);
+    }
+    if (isset($sectores[3]))
+    {
+      $this->fcconrep->setCodpai($sectores[3]);
+    }
+
+
+
   }
+
 
 
 }

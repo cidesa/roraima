@@ -10,7 +10,7 @@ names:
   fcconrep{cedcon}:
     required:  Yes
     required_msg: Código es un campo requerido
-    validators: Validator_tipapu
+    validators: Validator_cedcon
 
   fcconrep{rifcon}:
     required:  Yes
@@ -24,17 +24,16 @@ names:
   fcconrep{dircon}:
     required:  Yes
     required_msg: Direción es un campo requerido
-    validators: Validator_tipapu
 
   fcconrep{telcon}:
     required:  Yes
     required_msg: Teléfono es un campo requerido
 
-Validator_tipapu:
+Validator_cedcon:
     class: sfPropelUniqueValidator
     param:
         class:        Fcconrep
-        column:       tipapu
+        column:       cedcon
         unique_error: El registro ya Existe intente con otro.
 
 Validator_rifcon:

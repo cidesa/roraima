@@ -471,7 +471,7 @@ propel:
       type: VARCHAR
       size: 3
       required: true
-      foreignTable: fcdeffun
+      #foreignTable: fcdeffun
       foreignReference: codfun
       onDelete:
       onUpdate:
@@ -479,7 +479,7 @@ propel:
       type: VARCHAR
       size: 3
       required: true
-      foreignTable: fcdefentext
+      #foreignTable: fcdefentext
       foreignReference: codentext
       onDelete:
       onUpdate:
@@ -487,7 +487,7 @@ propel:
       type: VARCHAR
       size: 3
       required: true
-      foreignTable: fcdeftipdoc
+      #foreignTable: fcdeftipdoc
       foreignReference: codtipdoc
       onDelete:
       onUpdate:
@@ -503,7 +503,7 @@ propel:
     codubifis:
       type: VARCHAR
       size: 16
-      foreignTable: fcdefubifis
+      #foreignTable: fcdefubifis
       foreignReference: codubifis
       onDelete:
       onUpdate:
@@ -514,7 +514,7 @@ propel:
     codubimag:
       type: VARCHAR
       size: 16
-      foreignTable: fcdefubimag
+      #foreignTable: fcdefubimag
       foreignReference: codubimag
       onDelete:
       onUpdate:
@@ -538,7 +538,7 @@ propel:
       type: VARCHAR
       size: 3
       required: true
-      foreignTable: fcdeffun
+      #foreignTable: fcdeffun
       foreignReference: codfun
       onDelete:
       onUpdate:
@@ -546,7 +546,7 @@ propel:
       type: VARCHAR
       size: 3
       required: true
-      foreignTable: fcdefentext
+      #foreignTable: fcdefentext
       foreignReference: codentext
       onDelete:
       onUpdate:
@@ -554,7 +554,7 @@ propel:
       type: VARCHAR
       size: 3
       required: true
-      foreignTable: fcdeftipdoc
+      #foreignTable: fcdeftipdoc
       foreignReference: codtipdoc
       onDelete:
       onUpdate:
@@ -568,7 +568,7 @@ propel:
     codubifis:
       type: VARCHAR
       size: 16
-      foreignTable: fcdefubifis
+      #foreignTable: fcdefubifis
       foreignReference: codubifis
       onDelete:
       onUpdate:
@@ -579,7 +579,7 @@ propel:
     codubimag:
       type: VARCHAR
       size: 16
-      foreignTable: fcdefubimag
+      #foreignTable: fcdefubimag
       foreignReference: codubimag
       onDelete:
       onUpdate:
@@ -1748,7 +1748,7 @@ propel:
       type: VARCHAR
       size: 3
       required: true
-      foreignTable: fcdefuniadm
+      #foreignTable: fcdefuniadm
       foreignReference: coduniadm
       onDelete:
       onUpdate:
@@ -2293,7 +2293,7 @@ propel:
       size: 10
       required: true
       #primaryKey: true
-      foreignTable: fcpagos
+      #foreignTable: fcpagos
       foreignReference: numpag
       onDelete:
       onUpdate:
@@ -2310,7 +2310,7 @@ propel:
       type: VARCHAR
       size: 3
       required: true
-      foreignTable: fctippag
+      #foreignTable: fctippag
       foreignReference: tippag
       onDelete: CASCADE
       onUpdate:
@@ -2640,7 +2640,7 @@ propel:
       size: 4
       required: true
       #primaryKey: true
-      foreignTable: fcpais
+      #foreignTable: fcpais
       foreignReference: codpai
       onDelete:
       onUpdate:
@@ -3290,7 +3290,7 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      foreignTable: fcesppub
+      #foreignTable: fcesppub
       foreignReference: nrocon
       onDelete: CASCADE
       onUpdate:
@@ -3716,7 +3716,7 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      foreignTable: fcprolic
+      #foreignTable: fcprolic
       foreignReference: nrocon
       onDelete: CASCADE
       onUpdate:
@@ -3904,7 +3904,7 @@ propel:
       size: 4
       required: true
       #primaryKey: true
-      foreignTable: fcestado
+      #foreignTable: fcestado
       foreignReference: codpai
       onDelete:
       onUpdate:
@@ -4146,7 +4146,7 @@ propel:
       size: 4
       required: true
       #primaryKey: true
-      foreignTable: fcmunici
+      #foreignTable: fcmunici
       foreignReference: codpai
       onDelete:
       onUpdate:
@@ -4447,7 +4447,7 @@ propel:
       size: 4
       required: true
       #primaryKey: true
-      foreignTable: fcdefdesc
+      #foreignTable: fcdefdesc
       foreignReference: coddes
       onDelete:
       onUpdate:
@@ -5314,7 +5314,7 @@ propel:
       size: 3
       required: true
       #primaryKey: true
-      foreignTable: fccobrad
+      #foreignTable: fccobrad
       foreignReference: codcob
       onDelete: CASCADE
       onUpdate:
@@ -5323,7 +5323,7 @@ propel:
       size: 6
       required: true
       #primaryKey: true
-      foreignTable: fcrutas
+      #foreignTable: fcrutas
       foreignReference: codrut
       onDelete:
       onUpdate:
@@ -5788,7 +5788,7 @@ propel:
       type: VARCHAR
       size: 2
       required: true
-      foreignTable: fctipsol
+      #foreignTable: fctipsol
       foreignReference: codtip
       onDelete:
       onUpdate:

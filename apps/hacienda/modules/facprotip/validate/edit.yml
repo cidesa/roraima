@@ -2,20 +2,35 @@ methods:
   post:
    - "fctippro{tippro}"
    - "fctippro{destip}"
+   - "fctippro{unipar}"
+   - "fctippro{anovig}"
 
 names:
   fctippro{tippro}:
     required:  Yes
     required_msg: Código es un campo requerido
-    validators: Validator_tippro
 
   fctippro{destip}:
     required:  Yes
     required_msg: La Descripción es un campo requerido
 
-Validator_tippro:
-    class: sfPropelUniqueValidator
+  fctippro{anovig}:
+    required:  Yes
+    required_msg: Año es un campo requerido
+
+  fctippro{unipar}:
+    required:  Yes
+    required_msg: El Monto no puedo estar en Blanco
+    validators: MyNumberValidator_unipar
+
+
+MyNumberValidator_unipar:
+    class: sfNumberValidator
     param:
-        class:        Fctippro
-        column:       tippro
-        unique_error: El registro ya Existe intente con otro.
+        type:         decimal
+        type_error:   Por favor, Introduzca Números Decimales
+        nan_error:    Por Favor, introduzca un Número Decimal
+        min:          0.0
+        min_error:    El valor tiene que ser mayor que cero
+        max:          500.0
+        max_error:    El valor debe contener maximo 9999999999.99

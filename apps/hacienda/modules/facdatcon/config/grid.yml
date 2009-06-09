@@ -4,7 +4,7 @@ opciones:                  # Opciones generales
   tabla:                   fcreccon
   ancho:                   500
   anchogrid:               600
-  filas:                   6
+  filas:                   1
   titulo:                  ' '
   htmltotalfilas:          ' '
 1:       # Columna 1

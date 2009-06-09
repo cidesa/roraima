@@ -9,9 +9,5 @@
  */
 class Fccatfis extends BaseFccatfis
 {
-	public function getFormatopre()
-    {
-    	$valor= Hacienda::Cargar_mascara();
-    	return $valor;
-    }
+	protected $mascara="";
 }
