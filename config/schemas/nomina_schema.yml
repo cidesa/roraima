@@ -1,5 +1,5 @@
 propel:
-  _attributes: { noXsd: false, defaultIdMethod: native, package: lib.model }
+  _attributes: { noXsd: false, defaultIdMethod: native, package: lib.model.nomina }
   npaccadm:
     #_attributes:
       #idMethod: native
@@ -180,6 +180,16 @@ propel:
     paso:
       type: VARCHAR
       size: 3
+    codtipded:
+      type: VARCHAR
+      size: 4
+      ##required: true
+      ##primaryKey: true
+    codtipcat:
+      type: VARCHAR
+      size: 4
+      ##required: true
+      ##primaryKey: true            
     id:
       type: INTEGER
       required: true
