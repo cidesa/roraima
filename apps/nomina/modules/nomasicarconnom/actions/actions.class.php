@@ -50,6 +50,34 @@ class nomasicarconnomActions extends autonomasicarconnomActions
 
     return $frecuencia;
   }
+  
+  public function CargarDedicacion()
+  {
+    $c = new Criteria();
+    $lista_ded = NptipdedPeer::doSelect($c);
+
+    $dedl = array();
+
+    foreach($lista_ded as $obj_ded)
+    {
+      $dedl += array($obj_ded->getCodtip() => $obj_ded->getDestip());
+    }
+    return $dedl;
+  }
+  public function CargarCategoria()
+  {
+    $c = new Criteria();
+    $lista_cat = NptipcatPeer::doSelect($c);
+
+    $catl = array();
+
+    foreach($lista_cat as $obj_cat)
+    {
+      $catl += array($obj_cat->getCodtipcat() => $obj_cat->getDestipcat());
+    }
+    return $catl;
+  }
+  
   public function validateEdit()
   {
     if($this->getRequest()->getMethod() == sfRequest::POST)
@@ -85,7 +113,7 @@ class nomasicarconnomActions extends autonomasicarconnomActions
   {
     $grid=Herramientas::CargarDatosGrid($this,$this->obj,true);
     $arreglo=array($grid);
-
+	
     $this->coderror = Nomina::salvarNomasicarconnom($npasicaremp,$arreglo);
 
     if($this->coderror!=-1)
@@ -119,6 +147,7 @@ class nomasicarconnomActions extends autonomasicarconnomActions
       }
      else if ($this->getRequestParameter('ajax')=='3')
       { $this->div='S';
+	    $js="";
         $c = new Criteria();
         $c->add(NpcargosPeer::CODCAR,$this->getRequestParameter('codigo'));
         $c->addJoin(NpcargosPeer::CODCAR,NpasicarnomPeer::CODCAR);
@@ -130,8 +159,12 @@ class nomasicarconnomActions extends autonomasicarconnomActions
           $dato=Constantes::REGVACIO;
           $cod = '';
         }
+		if($this->getUser()->getAttribute('codcar','','nomasicarconnom')==$this->getRequestParameter('codigo'))
+			$js.="$('gridcatded').show()";
+		else
+			$js.="$('gridcatded').hide()";	
 
-        $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$cajtexcom.'","'.$cod.'",""]]';
+        $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$cajtexcom.'","'.$cod.'",""],["javascript","'.$js.'",""]]';
         $this->configGrid($this->getRequestParameter('codemp'),$this->getRequestParameter('codnom'),$this->getRequestParameter('codigo'),$this->getRequestParameter('frecuen'));
         $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
 
@@ -323,7 +356,22 @@ public function executeAutocomplete()
 
  public function executeEdit()
   {
+  	$varemp = $this->getUser()->getAttribute('configemp');
+	  if(is_array($varemp))
+	    if(array_key_exists('aplicacion',$varemp))
+	  	  if(array_key_exists('nomina',$varemp['aplicacion']))
+		   if(array_key_exists('modulos',$varemp['aplicacion']['nomina']))
+		     if(array_key_exists('nomasicarconnom',$varemp['aplicacion']['nomina']['modulos']))
+			 {
+			 	if(array_key_exists('varforma',$varemp['aplicacion']['nomina']['modulos']['nomasicarconnom']))
+				   $this->getUser()->setAttribute('varforma',$varemp['aplicacion']['nomina']['modulos']['nomasicarconnom']['varforma'],'nomasicarconnom');									   
+				if(array_key_exists('codcar',$varemp['aplicacion']['nomina']['modulos']['nomasicarconnom']))		 		 
+					$this->getUser()->setAttribute('codcar',$varemp['aplicacion']['nomina']['modulos']['nomasicarconnom']['codcar'],'nomasicarconnom');	  		      									   
+			 }
+  
     $this->npasicaremp = $this->getNpasicarempOrCreate();
+	$this->listadedicacion= $this->cargardedicacion();
+	$this->listacategoria= $this->cargarcategoria();
     $this->formato= Herramientas::getMascaraCategoria();
     $this->lonfor=strlen($this->formato);
     $this->tipos=self::CargarTipoGasto();
@@ -440,6 +488,14 @@ public function executeAutocomplete()
     {
       $this->npasicaremp->setNomcat($npasicaremp['nomcat']);
     }
+	if (isset($npasicaremp['codtipded']))
+    {
+      $this->npasicaremp->setCodtipded($npasicaremp['codtipded']);
+    }
+	if (isset($npasicaremp['codtipcat']))
+    {
+      $this->npasicaremp->setCodtipcat($npasicaremp['codtipcat']);
+    }
   }
 
   public function CargarTipoGasto()
@@ -505,6 +561,8 @@ public function executeAutocomplete()
 	$this->formato= Herramientas::getMascaraCategoria();
 	$this->lonfor=strlen($this->formato);
 	$this->tipos=self::CargarTipoGasto();
+	$this->listadedicacion= $this->cargardedicacion();
+	$this->listacategoria= $this->cargarcategoria();
     $this->updateNpasicarempFromRequest();
     $this->labels = $this->getLabels();
     if($this->getRequest()->getMethod() == sfRequest::POST)

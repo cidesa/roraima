@@ -31,6 +31,7 @@
   'onBlur'=> remote_function(array(
         'url'      => 'nomasicarconnom/ajax',
         'complete' => 'AjaxJSON(request, json)',
+		'condition' => "$(this.id).value!='' && $('id').value=='' ",
           'with' => "'ajax=1&cajtexmos=npasicaremp_nomemp&cajtexcom=npasicaremp_codemp&codigo='+this.value"
         ))),
      array('use_style' => 'true')
@@ -70,6 +71,7 @@
    'onBlur'=> remote_function(array(
         'url'      => 'nomasicarconnom/ajax',
         'complete' => 'AjaxJSON(request, json)',
+		'condition' => "$(this.id).value!='' && $('id').value=='' ",
           'with' => "'ajax=2&cajtexmos=npasicaremp_nomnom&cajtexcom=npasicaremp_codnom&codigo='+this.value"
         ))),
      array('use_style' => 'true')
@@ -109,6 +111,7 @@
   		'update'  => 'divGrid',
         'url'      => 'nomasicarconnom/ajax',
         'complete' => 'AjaxJSON(request, json)',
+		'condition' => "$(this.id).value!='' && $('id').value=='' ",
           'with' => "'ajax=3&cajtexmos=npasicaremp_nomcar&cajtexcom=npasicaremp_codcar&codemp='+$('npasicaremp_codemp').value+'&codnom='+$('npasicaremp_codnom').value+'&frecuen='+$('frecuencal').value+'&codigo='+this.value"
         ))),
      array('use_style' => 'true')
@@ -129,7 +132,7 @@
 </table>
 </div>
 
-
+<?php if($sf_user->getAttribute('varforma','','nomasicarconnom')!='S') {?>
 <div class="form-row">
 <?php echo label_for('npasicaremp[paso]', __($labels['npasicaremp{paso}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('npasicaremp{paso}')): ?> form-error<?php endif; ?>">
@@ -145,6 +148,32 @@
 )); echo $value ? $value : '&nbsp;' ?>
  </div>
 </div>
+<?php }else{ ?>
+<?php if($sf_user->getAttribute('codcar','','nomasicarconnom')==$npasicaremp->getCodcar() && $sf_user->getAttribute('codcar','','nomasicarconnom')!='') {?>	
+	<div class="form-row" id="gridcatded">
+<?php }else{?>		
+ 	<div class="form-row" id="gridcatded" style="display:none">
+<?php }?>
+  <?php echo label_for('npasicaremp[codtipded]', __($labels['npasicaremp{codtipded}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('npasicaremp{codtipded}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npasicaremp{codtipded}')): ?>
+    <?php echo form_error('npasicaremp{codtipded}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php echo select_tag('npasicaremp[codtipded]', options_for_select($listadedicacion,$npasicaremp->getCodtipded(),'include_custom=Seleccione Uno')) ?>
+    </div>
+<br>
+  <?php echo label_for('npasicaremp[codtipcat]', __($labels['npasicaremp{codtipcat}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('npasicaremp{codtipcat}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npasicaremp{codtipcat}')): ?>
+    <?php echo form_error('npasicaremp{codtipcat}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php echo select_tag('npasicaremp[codtipcat]', options_for_select($listacategoria,$npasicaremp->getCodtipcat(),'include_custom=Seleccione Uno')) ?>
+    </div>
+</div>
+	
+<?php } ?>
 </fieldset>
 
 
@@ -205,6 +234,7 @@
   'onBlur'=> remote_function(array(
         'url'      => 'nomasicarconnom/ajax',
         'complete' => 'AjaxJSON(request, json)',
+		'condition' => "$(this.id).value!='' && $('id').value=='' ",
           'with' => "'ajax=6&cajtexmos=npasicaremp_nomcat&cajtexcom=npasicaremp_codcat&codigo='+this.value",
         ))
 )); echo $value ? $value : '&nbsp;' ?>
