@@ -31,6 +31,23 @@ echo grid_tag_v2($objdeduc); ?>
   <?php echo input_tag('total_liq', '0,00', array (
   'readonly' => true)); ?> 
 </div>
+<?php echo form_tag('presnomliquidacion/save', array(
+  'id'        => 'sf_admin_edit_form',
+  'name'      => 'sf_admin_edit_form',
+  'multipart' => true,
+)) ?>
+</form>
+<ul class="sf_admin_actions">
+      <li class="float-left">
+<?php if($sf_user->getAttribute('delemp')!='') { ?>      	
+<?php echo button_to(__('delete'), 'presnomliquidacion/delete?codemp='.$sf_user->getAttribute('delemp'), array (
+  'post' => true,
+  'confirm' => __('Are you sure?'),
+  'class' => 'sf_admin_action_delete',
+)) ?>
+<?php } ?>
+</li>
+  </ul>  
 <?php }?>
 <script language="JavaScript">
 	$('total_liq').value = number_format(FloatVEtoFloat($('total_vac').value) + FloatVEtoFloat($('total_asi').value) - FloatVEtoFloat($('total_ded').value),"2",",",".");		
