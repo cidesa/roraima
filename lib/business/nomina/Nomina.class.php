@@ -3953,6 +3953,8 @@ class Nomina {
       $r->setNomcar($registro->getNomcar());
       $r->setNomnom($registro->getNomnom());
       $r->setNomcat($registro->getNomcat());
+	  $r->setCodtipded($registro->getCodtipded());
+	  $r->setCodtipcat($registro->getCodtipcat());
       $r->setUnieje(null);
       $r->setSueldo($sueldo);
       $r->setStatus('V');
@@ -3990,6 +3992,8 @@ class Nomina {
       $npasicaremp->setNomcar($registro->getNomcar());
       $npasicaremp->setNomnom($registro->getNomnom());
       $npasicaremp->setNomcat($registro->getNomcat());
+	  $npasicaremp->setCodtipded($registro->getCodtipded());
+	  $npasicaremp->setCodtipcat($registro->getCodtipcat());
       $npasicaremp->setUnieje(null);
       $npasicaremp->setSueldo($sueldo);
       $npasicaremp->setStatus('V');
