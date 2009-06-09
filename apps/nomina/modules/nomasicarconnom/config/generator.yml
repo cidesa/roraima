@@ -16,6 +16,8 @@ generator:
       despaso:  { name: Descripción Paso }
       fecasi:   { name: Fecha de Asignación, params: date_format='dd/MM/yyyy'}
       codtipgas:{ name: Tipo de Gasto, params: maxlength=3 }
+      codtipded:{ name: Dedicacion }
+      codtipcat:{ name: Categoria del Profesor }
       destipgas:{ name: Tipo de Gasto }
 
     list:
@@ -27,7 +29,7 @@ generator:
       max_per_page:  8
     edit:
       title:          Asignación de Cargos y Conceptos a Empleados
-      display:        [codemp, nomemp, codnom, nomnom, codcar, nomcar, paso, despaso, fecasi, codtipgas, destipgas, codcat, nomcat]
+      display:        [codemp, nomemp, codnom, nomnom, codcar, nomcar, paso, despaso, fecasi, codtipgas, destipgas, codcat, nomcat, codtipded, codtipcat]
       actions:
         _list:          ~
         _save:          ~

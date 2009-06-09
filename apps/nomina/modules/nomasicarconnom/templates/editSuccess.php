@@ -17,7 +17,7 @@ array()) ?></h1>
 
 <div id="sf_admin_content">
 <?php include_partial('nomasicarconnom/edit_messages', array('npasicaremp' => $npasicaremp, 'labels' => $labels)) ?>
-<?php include_partial('nomasicarconnom/edit_form', array('npasicaremp' => $npasicaremp, 'obj' => $obj, 'tipos' => $tipos, 'formato' => $formato, 'lonfor' => $lonfor, 'labels' => $labels)) ?>
+<?php include_partial('nomasicarconnom/edit_form', array('npasicaremp' => $npasicaremp, 'obj' => $obj, 'tipos' => $tipos, 'formato' => $formato, 'lonfor' => $lonfor, 'labels' => $labels, 'listadedicacion' => $listadedicacion, 'listacategoria' => $listacategoria)) ?>
 </div>
 
 <div id="sf_admin_footer">
