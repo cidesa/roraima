@@ -8,5 +8,5 @@
 ?>
 <?php use_helper('Object', 'ObjectAdmin', 'I18N') ?>
 
-<?php echo select_tag('atciudadano[tipo]', options_for_select(AtsoliciPeer::getTipos(),$atciudadano->getTipo_())); ?>
+<?php echo select_tag('atciudadano[tipo]', options_for_select(Constantes::TipoOrganizaciones(),$atciudadano->getTipo_())); ?>
 

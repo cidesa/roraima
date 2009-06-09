@@ -457,5 +457,12 @@ public static function PagoDoble()
   {
    return array('R' => 'Representante Legal', 'A' => 'Apoderado', 'C' => 'Contacto');
   }
+  
+    //Cooperativa, Particular, Consejo Comunal, Empresa, Organismo del Estado, Otros
+  public static function TipoOrganizaciones()
+  {
+    return Array('O' => 'Cooperativa', 'P' => 'Particular', 'C' => 'Consejo Comunal', 'E' => 'Empresa', 'G' => 'Organismo del Estado', 'O' => 'Otros');
+  }
+
 
 }
