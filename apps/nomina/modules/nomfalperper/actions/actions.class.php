@@ -18,7 +18,12 @@ class nomfalperperActions extends autonomfalperperActions
 
 	public function executeEdit()
 	{
-	    $this->nphojint = $this->getNphojintOrCreate();
+		$this->codigoemp = $this->getRequestParameter('codigoemp');
+	    $this->nphojint = $this->getNphojintOrCreate();		
+		if($this->codigoemp!='')		
+			if($this->nphojint->getCodemp()=='')
+		 		 $this->nphojint->setCodemp($this->codigoemp);
+		
 
 	    $this->pagerNpfalper = NpfalperPeer::getPagerByCodemp($this->nphojint->getCodemp(),$this->getRequestParameter('page',1));
 
