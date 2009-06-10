@@ -231,3 +231,12 @@ div.divlado {
 background:transparent url(/images/add.png) no-repeat scroll 3px 2px;
 border-right:4px solid #73B65A !important;
 }
+
+#sf_admin_header {
+  margin-right:270px;
+}
+
+#sf_admin_header input {
+  float:right;
+  font-size:15px !important;;
+}

@@ -6,4 +6,23 @@
         'popup' => array('Cargar Estado del Formulario', 'width=300,height=50,left=150,top=50,resizable=no') ) ); ?]
 <?php endif; ?>
 
+<?php $report = $this->getParameterValue('edit.report', array()); ?>
 
+<?php if(count($report)>0): ?>
+<?php if($report['url']!=''): ?>
+
+[?php if($<?php echo $this->getSingularName() ?>->getId()!=''): ?]
+
+[?php $params = ''; ?]
+<?php foreach($report['params'] as $valor => $campo) { ?>
+  [?php $params .= '<?php echo $valor ?>='.$<?php echo $this->getSingularName() ?>->get<?php echo ucfirst($campo); ?>().'&' ?]
+<?php } ?>
+
+[?php echo button_to(	'Imprimir', 'http://'.$sf_request->getHost().'/'.$sf_user->getAttribute('reportes_web').'/<?php echo $report['url']; ?>&'.$params, array(
+        'popup' => array('Reportes', 'dependent=1,toolbar=0,directories=0,status=0,menubar=0,scrollbars=1,resizable=1,width=800,height=600') ) ); ?]
+[?php endif; ?]
+<?php endif; ?>
+<?php endif; ?>
+<br>
+<br>
+<br>
