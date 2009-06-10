@@ -508,6 +508,7 @@
 
 <?php tabPageOpenClose("tp1", "tabPage3", 'Ingresos');?>
 <fieldset id="sf_fieldset_none" class="">
+<?php echo button_to_popup('Ver Historial de Permisos',cross_app_link_to('nomina','/nomfalperper/edit/codigoemp/'.$nphojint->getCodemp()),'','','','1000','800')?>				
 <div class="form-row">
 <fieldset id="sf_fieldset_none" class="">
 <legend><?php echo __('Fechas') ?></legend>
