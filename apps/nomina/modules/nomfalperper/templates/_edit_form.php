@@ -28,6 +28,7 @@
         'update'   => 'grid',
         'url'      => 'nomfalperper/grid',
         'complete' => 'AjaxJSON(request, json)',
+		'condition' => "$(this.id).value!=''",
         'script' => true,
         'with' => "'ajax=1&cajtexmos=nphojint_nomemp&codigo='+this.value"
         ))
@@ -72,3 +73,11 @@ echo grid_tag($obj);
 //)) ?><?php endif; ?>
 </li>
   </ul>
+<script language="JavaScript">
+	if($('nphojint_codemp').value!='')
+	{
+		$('nphojint_codemp').focus();
+		$('nphojint_nomemp').focus();
+	}
+	
+</script>  
