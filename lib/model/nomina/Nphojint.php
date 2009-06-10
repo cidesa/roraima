@@ -9,8 +9,11 @@
  */
 class Nphojint extends BaseNphojint
 {
+  protected $prinom="";
+  protected $segnom="";
+  protected $priape="";
+  protected $segape="";	
   protected $check=false;
-
   private $incapacidades ='';
   protected $ultsue="0.00";
   protected $edaact=0;
@@ -174,4 +177,85 @@ class Nphojint extends BaseNphojint
     {
     	return self::getNomemp();
     }
+	public function getPrinom()
+    {
+    	if(strrpos(self::getNomemp(),','))
+		{
+			$aux=split(',',self::getNomemp());
+			if(count($aux)==2)
+			{
+				$auxnom=split(' ',trim($aux[1]));
+				return $auxnom[0];
+			}else
+			{
+				$auxnom=split(' ',self::getNomemp());
+				return  count($auxnom)==2 ? $auxnom[1] : (count($auxnom)>2 ? $auxnom[2] : ' ');	
+			}
+		}else
+		{
+			$auxnom=split(' ',self::getNomemp());
+			return  count($auxnom)==2 ? $auxnom[1] : (count($auxnom)>2 ? $auxnom[2] : ' ');	
+		}		    	
+    }
+	public function getSegnom()
+    {
+    	if(strrpos(self::getNomemp(),','))
+		{
+			$aux=split(',',self::getNomemp());
+			if(count($aux)==2)
+			{
+				$auxnom=split(' ',trim($aux[1]));
+				return count($auxnom)>1 ? $auxnom[1] : ' ';
+			}else
+			{
+				$auxnom=split(' ',self::getNomemp());
+				return  count($auxnom)>3 ? $auxnom[3] : ' ';	
+			}
+		}else
+		{
+			$auxnom=split(' ',self::getNomemp());
+			return  count($auxnom)>3 ? $auxnom[3] : ' ';
+		}
+    }
+	public function getPriape()
+    {
+    	if(strrpos(self::getNomemp(),','))
+		{
+			$aux=split(',',self::getNomemp());
+			if(count($aux)==2)
+			{
+				$auxnom=split(' ',trim($aux[0]));
+				return $auxnom[0];
+			}else
+			{
+				$auxnom=split(' ',self::getNomemp());
+				return  count($auxnom)==2 ? $auxnom[0] : (count($auxnom)>2 ? $auxnom[0] : ' ');	
+			}
+		}else
+		{
+			$auxnom=split(' ',self::getNomemp());
+			return  count($auxnom)==2 ? $auxnom[0] : (count($auxnom)>2 ? $auxnom[0] : ' ');	
+		}
+    }
+	public function getSegape()
+    {
+    	if(strrpos(self::getNomemp(),','))
+		{
+			$aux=split(',',self::getNomemp());
+			if(count($aux)==2)
+			{
+				$auxnom=split(' ',trim($aux[0]));
+				return count($auxnom)>1 ? $auxnom[1] : ' ';
+			}else
+			{
+				$auxnom=split(' ',self::getNomemp());
+				return  count($auxnom)>2 ? $auxnom[1] : ' ';	
+			}
+		}else
+		{
+			$auxnom=split(' ',self::getNomemp());
+			return  count($auxnom)>2 ? $auxnom[1] : ' ';
+		}
+    }
+	
 }

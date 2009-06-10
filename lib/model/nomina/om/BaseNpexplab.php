@@ -53,6 +53,10 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
 
 
 	
+	protected $montopres;
+
+
+	
 	protected $id;
 
 	
@@ -168,6 +172,14 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
   {
 
     return trim($this->tiporg);
+
+  }
+  
+  public function getMontopres($val=false)
+  {
+
+    if($val) return number_format($this->montopres,2,',','.');
+    else return $this->montopres;
 
   }
   
@@ -302,6 +314,16 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setMontopres($v)
+	{
+
+    if ($this->montopres !== $v) {
+        $this->montopres = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpexplabPeer::MONTOPRES;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -338,7 +360,9 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
 
       $this->tiporg = $rs->getString($startcol + 10);
 
-      $this->id = $rs->getInt($startcol + 11);
+      $this->montopres = $rs->getFloat($startcol + 11);
+
+      $this->id = $rs->getInt($startcol + 12);
 
       $this->resetModified();
 
@@ -346,7 +370,7 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 12; 
+            return $startcol + 13; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Npexplab object", $e);
     }
@@ -527,6 +551,9 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
 				return $this->getTiporg();
 				break;
 			case 11:
+				return $this->getMontopres();
+				break;
+			case 12:
 				return $this->getId();
 				break;
 			default:
@@ -550,7 +577,8 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
 			$keys[8] => $this->getCompobt(),
 			$keys[9] => $this->getDurexp(),
 			$keys[10] => $this->getTiporg(),
-			$keys[11] => $this->getId(),
+			$keys[11] => $this->getMontopres(),
+			$keys[12] => $this->getId(),
 		);
 		return $result;
 	}
@@ -600,6 +628,9 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
 				$this->setTiporg($value);
 				break;
 			case 11:
+				$this->setMontopres($value);
+				break;
+			case 12:
 				$this->setId($value);
 				break;
 		} 	}
@@ -620,7 +651,8 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[8], $arr)) $this->setCompobt($arr[$keys[8]]);
 		if (array_key_exists($keys[9], $arr)) $this->setDurexp($arr[$keys[9]]);
 		if (array_key_exists($keys[10], $arr)) $this->setTiporg($arr[$keys[10]]);
-		if (array_key_exists($keys[11], $arr)) $this->setId($arr[$keys[11]]);
+		if (array_key_exists($keys[11], $arr)) $this->setMontopres($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setId($arr[$keys[12]]);
 	}
 
 	
@@ -639,6 +671,7 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(NpexplabPeer::COMPOBT)) $criteria->add(NpexplabPeer::COMPOBT, $this->compobt);
 		if ($this->isColumnModified(NpexplabPeer::DUREXP)) $criteria->add(NpexplabPeer::DUREXP, $this->durexp);
 		if ($this->isColumnModified(NpexplabPeer::TIPORG)) $criteria->add(NpexplabPeer::TIPORG, $this->tiporg);
+		if ($this->isColumnModified(NpexplabPeer::MONTOPRES)) $criteria->add(NpexplabPeer::MONTOPRES, $this->montopres);
 		if ($this->isColumnModified(NpexplabPeer::ID)) $criteria->add(NpexplabPeer::ID, $this->id);
 
 		return $criteria;
@@ -691,6 +724,8 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
 		$copyObj->setDurexp($this->durexp);
 
 		$copyObj->setTiporg($this->tiporg);
+
+		$copyObj->setMontopres($this->montopres);
 
 
 		$copyObj->setNew(true);
