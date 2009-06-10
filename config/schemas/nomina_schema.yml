@@ -2704,6 +2704,10 @@ propel:
     tiporg:
       type: VARCHAR
       size: 30
+    montopres:
+      type: NUMERIC
+      size: 14
+      scale: 2      
     id:
       type: INTEGER
       required: true
