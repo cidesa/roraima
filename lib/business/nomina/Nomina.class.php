@@ -1007,6 +1007,11 @@ class Nomina {
       $token = "NHMENEDA";
     }
 
+    if (Herramientas :: StringPos($token, "SIMESDAD", 0) != -1) {
+      $parametro = substr($token, 8, strlen($token));
+      $token = "SIMESDAD";
+    }
+
     if (Herramientas :: StringPos($token, "CTAF", 0) != -1) {
       $parametro = substr($token, 4, strlen($token) - 4);
       $fecha = substr($parametro, 2, 2) . "/" . substr($parametro, 0, 2) . "/" . substr($parametro, 4, 4);
@@ -1206,6 +1211,12 @@ class Nomina {
     if (Herramientas :: StringPos($token, "NHMENEDA", 0) != -1) {
       $parametro = substr($token, 8, strlen($token));
       $token = "NHMENEDA";
+    }
+
+   if (Herramientas :: StringPos($token, "SIMESDAD", 0) != -1) {
+      $parametro = substr($token, 8, strlen($token));
+
+      $token = "SIMESDAD";
     }
 
     if (Herramientas :: StringPos($token, "CTAF", 0) != -1) {
@@ -1872,6 +1883,38 @@ class Nomina {
         }
       break;
 
+     case "SIMESDAD" :
+       /*  $criterio = "Select coalesce(SUM(Monto),0) as campo from npHISCON A,NPCONSALINT B,NPNOMINA C where  A.CODCON=B.CODCON  and a.codemp='" . $empleado . "' AND  a.codNOM='" . $nomina . "' and  b.codNOM='" . $nomina . "'  and a.codcar='" . $cargo . "' and a.codnom=c.codnom and a.codnom=b.codnom and TO_CHAR(A.FECNOM,'MM')=LPAD(TRIM(to_char(to_number(to_char(c.profec,'MM'),'99')-1,'99')),2,'0') AND TO_CHAR(A.FECNOM,'YYYY')=TO_CHAR(C.PROFEC,'YYYY') ";
+          if (Herramientas :: BuscarDatos($criterio, & $tabla)) {
+             $valor = $tabla[0]["campo"];
+          }
+          else
+          {
+            $valor = 0;
+          }*/
+        $nromes=$parametro;
+        $criterio = "Select coalesce(SUM(a.Monto),0) as campo from npHISCON A,NPCONSALINT B,NPNOMINA C where  A.CODCON=B.CODCON  and a.codemp='" . $empleado . "' AND  a.codNOM='" . $nomina . "' and  b.codNOM='" . $nomina . "' and a.codnom=c.codnom and a.codnom=b.codnom and TO_CHAR(A.FECNOM,'MM-yyyy')=LPAD(TRIM(to_char(to_number(to_char(c.profec,'MM'),'99')-" . $nromes . ",'99')),2,'0')  ";
+        if (Herramientas :: BuscarDatos($criterio, & $tabla)) {
+           $valor = $tabla[0]["campo"];
+        }
+        else
+        {
+          $valor = 0;
+        }
+
+      break;
+
+     case "ADIAS" :
+
+          $sql = "select to_date('" . $fecnom . "','yyyy-mm-dd')-to_date('" . $fechaing . "','yyyy-mm-dd') as dias from empresa";
+          if (Herramientas :: BuscarDatos($sql, & $resdias)) {
+            $valor = $resdias[0]["dias"];
+           } else
+          $valor = 0;
+
+        break;
+
+
       default :
         $aux = 0;
 
@@ -2535,6 +2578,11 @@ class Nomina {
       $campo = "NHMENEDA";
     }
 
+    if (Herramientas :: StringPos($campo, "SIMESDAD", 0) != -1) {
+      $parametro = substr($campo, 8, strlen($campo));
+
+      $campo = "SIMESDAD";
+    }
     if (Herramientas :: StringPos($campo, "CTAF", 0) != -1) {
 
       $parametro = substr($campo, 4, strlen($campo) - 4);
@@ -3171,6 +3219,28 @@ class Nomina {
           $valor = $valor + 0;
         }
       break;
+
+     case "SIMESDAD" :
+        $nromes=$parametro;
+        $criterio = "Select coalesce(SUM(a.Monto),0) as campo from npHISCON A,NPCONSALINT B,NPNOMINA C where  A.CODCON=B.CODCON  and a.codemp='" . $empleado . "' AND  a.codNOM='" . $nomina . "' and  b.codNOM='" . $nomina . "' and a.codnom=c.codnom and a.codnom=b.codnom and TO_CHAR(A.FECNOM,'MM-yyyy')=LPAD(TRIM(to_char(to_number(to_char(c.profec,'MM'),'99')-" . $nromes . ",'99')),2,'0')  ";
+        if (Herramientas :: BuscarDatos($criterio, & $tabla)) {
+           $valor = $tabla[0]["campo"];
+        }
+        else
+        {
+          $valor = 0;
+        }
+
+      break;
+
+     case "ADIAS" :
+          $sql = "select to_date('" . $fecnom . "','yyyy-mm-dd')-to_date('" . $fechaing . "','yyyy-mm-dd') as dias from empresa";
+          if (Herramientas :: BuscarDatos($sql, & $resdias)) {
+            $valor = $resdias[0]["dias"];
+           } else
+          $valor = 0;
+        break;
+
 
       default :
         /////// FFRAC
@@ -4302,10 +4372,10 @@ class Nomina {
           $npcomocp_new = new Npcomocp();
           $npcomocp_new->setCodtipcar($npcomocp->getCodtipcar());
           $npcomocp_new->setFecdes($npcomocp->getFecdes());
-          $npcomocp_new->setGracar($grid[$i]['gracar']);
+		  $npcomocp_new->setGracar($grid[$i]['gracar']);
 		  if($grid[$i]['pascar']=='')
           	$npcomocp_new->setPascar('001');
-		  else	
+		  else
 		    $npcomocp_new->setPascar($grid[$i]['pascar']);
           if ($grid[$i]['suecar'] > 0) {
             $npcomocp_new->setSuecar($grid[$i]['suecar']);
@@ -6492,7 +6562,7 @@ class Nomina {
     return -1;
   }
 
-   public static function salvarNpsalintind($npsalint, $grid) {
+ public static function salvarNpsalintind($npsalint, $grid) {
 
     $x = $grid[0];
 
@@ -6539,6 +6609,7 @@ class Nomina {
     }
     return -1;
   }
+
 
   public static function validarNomcamnomcar($npasicaremp, $codnom, $codcar, $codcat, $feccam) {
 
@@ -6995,7 +7066,7 @@ class Nomina {
     }else $dato='';
     return $dato;
   }
-  
+
   public static function Grabar_grid_nomdefespprimas($grid1,$grid2,$grid3)
   {
   	//Grabamos Grid Prima por Hijo
@@ -7003,8 +7074,8 @@ class Nomina {
     $j=0;
 	if(count($x)>0)
     while ($j<count($x))
-    { 
-	  $x[$j]->save();     
+    {
+	  $x[$j]->save();
 	  $j++;
     }
     $z=$grid1[1];
@@ -7022,8 +7093,8 @@ class Nomina {
     $j=0;
 	if(count($x)>0)
     while ($j<count($x))
-    { 
-	  $x[$j]->save();     
+    {
+	  $x[$j]->save();
 	  $j++;
     }
     $z=$grid2[1];
@@ -7041,8 +7112,8 @@ class Nomina {
     $j=0;
 	if(count($x)>0)
     while ($j<count($x))
-    { 
-	  $x[$j]->save();     
+    {
+	  $x[$j]->save();
 	  $j++;
     }
     //////////////////////////////
