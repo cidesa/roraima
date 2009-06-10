@@ -348,10 +348,24 @@ $this->Bitacora('Guardo');
     {
       $this->nphojint->setCodemp($nphojint['codemp']);
     }
-    if (isset($nphojint['nomemp']))
-    {
-      $this->nphojint->setNomemp($nphojint['nomemp']);
-    }
+	if (isset($nphojint['prinom']) && isset($nphojint['priape']))
+	{
+		$segnom='';
+		$segape='';		
+		$nombres='';
+		$apellidos='';
+		if (isset($nphojint['segnom']))
+	    {
+	      $segnom=$nphojint['segnom'];	      
+	    }
+		if (isset($nphojint['segape']))
+	    {
+	      $segape=$nphojint['segape'];	      
+	    }
+		$nombres=implode(' ',array(trim($nphojint['prinom']),trim($segnom)));
+		$apellidos=implode(' ',array(trim($nphojint['priape']),trim($segape)));
+		$this->nphojint->setNomemp(implode(', ',array($apellidos,$nombres)));	
+	}    
     if (isset($nphojint['cedemp']))
     {
       $this->nphojint->setCedemp($nphojint['cedemp']);
@@ -936,6 +950,7 @@ $this->Bitacora('Guardo');
     $opciones->setEliminar(true);
     $opciones->setTabla('Npexplab');
     $opciones->setAnchoGrid(1000);
+	$opciones->setAncho(1200);
     $opciones->setName('c');
     $opciones->setTitulo('Fuera de la Empresa');
     $opciones->setHTMLTotalFilas(' ');
@@ -946,6 +961,7 @@ $this->Bitacora('Guardo');
     $col1->setAlineacionObjeto(Columna::CENTRO);
     $col1->setAlineacionContenido(Columna::CENTRO);
     $col1->setNombreCampo('nomemp');
+	$col1->setHTML('type="text" size="30"');
 
     $col2 = new Columna('Descripción del Cargo');
     $col2->setTipo(Columna::TEXTO);
@@ -953,7 +969,7 @@ $this->Bitacora('Guardo');
     $col2->setAlineacionContenido(Columna::IZQUIERDA);
     $col2->setEsGrabable(true);
     $col2->setNombreCampo('descar');
-    $col2->setHTML('type="text" size="25"');
+    $col2->setHTML('type="text" size="30"');
 
 
     $col3 = new Columna('Fecha de Inicio');
@@ -985,6 +1001,16 @@ $this->Bitacora('Guardo');
     $col6->setNombreCampo('tiporg');
     $col6->setCombo(Constantes::listaTiporg());
     $col6->setHTML(' ');
+	
+	$col7 = new Columna('Monto Prestaciones');
+    $col7->setTipo(Columna::MONTO);
+    $col7->setEsGrabable(true);
+    $col7->setAlineacionContenido(Columna::IZQUIERDA);
+    $col7->setAlineacionObjeto(Columna::IZQUIERDA);
+    $col7->setNombreCampo('montopres');
+    $col7->setEsNumerico(true);
+    $col7->setHTML('type="text" size="10"');
+    $col7->setJScript('onBlur = "javascript:event.keyCode=13;return entermontootro(event,this.id)"');
 
     $opciones->addColumna($col1);
     $opciones->addColumna($col2);
@@ -992,6 +1018,7 @@ $this->Bitacora('Guardo');
     $opciones->addColumna($col4);
     $opciones->addColumna($col5);
     $opciones->addColumna($col6);
+	$opciones->addColumna($col7);
 
     $this->obj3 = $opciones->getConfig($per);
   }
@@ -1287,6 +1314,10 @@ $this->Bitacora('Guardo');
       'nphojint{temporal}' => 'Temporal',
       'nphojint{situac}' => 'Situacion',
       'nphojint{profes}' => 'Profesional',
+	  'nphojint{prinom}' => 'Primer Nombre:',
+      'nphojint{segnom}' => 'Segundo Nombre:',
+      'nphojint{priape}' => 'Primer Apellido:',
+      'nphojint{segape}' => 'Segundo Apellido:',
     );
   }
 }

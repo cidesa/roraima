@@ -42,9 +42,8 @@
 
 <? } ?>
 
-    </div></th>
-   <th>&nbsp;&nbsp;</th>
-   <th> <?php echo label_for('nphojint[nomemp]', __($labels['nphojint{nomemp}']), 'class="required" style="width:150px"') ?>
+    </div></th>   	
+   <th style="display:none"> <?php echo label_for('nphojint[nomemp]', __($labels['nphojint{nomemp}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('nphojint{nomemp}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('nphojint{nomemp}')): ?>
     <?php echo form_error('nphojint{nomemp}', array('class' => 'form-error-msg')) ?>
@@ -55,7 +54,82 @@
   'maxlength' => 100,
   'control_name' => 'nphojint[nomemp]',
 )); echo $value ? $value : '&nbsp;' ?>
-    </div></th>
+    </div></th>	
+  </tr>
+  <tr>
+  	<th>&nbsp</th>
+  </tr>
+  <tr>
+  	<th>
+  		
+		  <?php echo label_for('nphojint[prinom]', __($labels['nphojint{prinom}']), 'class="required"') ?>
+		  <div class="content<?php if ($sf_request->hasError('nphojint{prinom}')): ?> form-error<?php endif; ?>">
+		  <?php if ($sf_request->hasError('nphojint{prinom}')): ?>
+		    <?php echo form_error('nphojint{prinom}', array('class' => 'form-error-msg')) ?>
+		  <?php endif; ?>
+		
+		  <?php $value = object_input_tag($nphojint, 'getPrinom', array (
+		  'size' => 25,
+  		  'maxlength' => 25,
+		  'control_name' => 'nphojint[prinom]',
+		)); echo $value ? $value : '&nbsp;' ?>
+		    </div>
+		
+  	</th>
+	<th>
+		
+		  <?php echo label_for('nphojint[segnom]', __($labels['nphojint{segnom}']), 'class="required"') ?>
+		  <div class="content<?php if ($sf_request->hasError('nphojint{segnom}')): ?> form-error<?php endif; ?>">
+		  <?php if ($sf_request->hasError('nphojint{segnom}')): ?>
+		    <?php echo form_error('nphojint{segnom}', array('class' => 'form-error-msg')) ?>
+		  <?php endif; ?>
+		
+		  <?php $value = object_input_tag($nphojint, 'getSegnom', array (
+		  'size' => 25,
+  		  'maxlength' => 25,
+		  'control_name' => 'nphojint[segnom]',
+		)); echo $value ? $value : '&nbsp;' ?>
+		    </div>
+		
+	</th>
+  </tr>
+  <tr>
+  	<th></th>
+  </tr>  	
+  <tr>
+  	<th>
+  		
+		  <?php echo label_for('nphojint[priape]', __($labels['nphojint{priape}']), 'class="required"') ?>
+		  <div class="content<?php if ($sf_request->hasError('nphojint{priape}')): ?> form-error<?php endif; ?>">
+		  <?php if ($sf_request->hasError('nphojint{priape}')): ?>
+		    <?php echo form_error('nphojint{priape}', array('class' => 'form-error-msg')) ?>
+		  <?php endif; ?>
+		
+		  <?php $value = object_input_tag($nphojint, 'getPriape', array (
+		  'size' => 25,
+  		  'maxlength' => 25,
+		  'control_name' => 'nphojint[priape]',
+		)); echo $value ? $value : '&nbsp;' ?>
+		    </div>
+		
+  	</th>
+	<th>
+		
+		  <?php echo label_for('nphojint[segape]', __($labels['nphojint{segape}']), 'class="required"') ?>
+		  <div class="content<?php if ($sf_request->hasError('nphojint{segape}')): ?> form-error<?php endif; ?>">
+		  <?php if ($sf_request->hasError('nphojint{segape}')): ?>
+		    <?php echo form_error('nphojint{segape}', array('class' => 'form-error-msg')) ?>
+		  <?php endif; ?>
+		
+		  <?php $value = object_input_tag($nphojint, 'getSegape', array (
+		  'size' => 25,
+  		  'maxlength' => 25,
+		  'control_name' => 'nphojint[segape]',
+		)); echo $value ? $value : '&nbsp;' ?>
+		    </div>
+		
+		
+	</th>
   </tr>
   </table>
 </div>
