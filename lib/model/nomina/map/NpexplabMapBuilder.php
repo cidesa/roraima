@@ -56,6 +56,8 @@ class NpexplabMapBuilder {
 
 		$tMap->addColumn('TIPORG', 'Tiporg', 'string', CreoleTypes::VARCHAR, false, 30);
 
+		$tMap->addColumn('MONTOPRES', 'Montopres', 'double', CreoleTypes::NUMERIC, false, 14);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 
