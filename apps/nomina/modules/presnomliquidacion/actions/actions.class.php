@@ -891,6 +891,7 @@ public function configGrid($codemp="")
 	$c = new Criteria();
 	$c->add(NpliquidacionDetPeer::CODEMP,$codemp);
 	NpliquidacionDetPeer::doDelete($c);
+	$this->getUser()->getAttributeHolder()->remove('delemp');
     return $this->forward('presnomliquidacion', 'list');
   }
 
