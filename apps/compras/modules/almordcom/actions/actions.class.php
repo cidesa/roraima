@@ -1327,21 +1327,47 @@ class almordcomActions extends autoalmordcomActions
 
   }
 
-  public function configGrid_ResumenPartidas($ordcom='')
+   public function configGrid_ResumenPartidas($ordcom='')
   {
-    $sql="select 9 as id, '' as nompar,  a.codpar, sum((a.totart-a.rgoart)) as totart from caartord a
+  	$escodpre='N';
+    $sql="select 9 as id, '' as nompar,  a.codpar, sum((a.totart-a.rgoart)) as totart, 'N' as recargo from caartord a
           where a.ordcom='".$ordcom."'  group by  a.codpar,a.totart,a.rgoart
           union
-          select 9 as id, '' as nompar, c.codpre,sum(b.monrgo) as totart from cargosol b, carecarg c
+          select 9 as id, '' as nompar, c.codpre,sum(b.monrgo) as totart, 'S' as recargo from cargosol b, carecarg c
           where reqart='".$ordcom."' and b.codrgo=c.codrgo group by c.codpre";
     $resp = Herramientas::BuscarDatos($sql,&$reg);
 
+     //verificar si la imputacion presupuestaria asociada al recargo es una partida o un codigo presupuestario
+     $c= new Criteria();
+     $cadefart_search = CadefartPeer::doSelectOne($c);
+     if ($cadefart_search)
+     {
+          if ($cadefart_search->getAsiparrec()=='P')  $escodpre="S";
+     }
+     //obtener partida para el caso que la imputacion presupuestaria del recargo este asociada a un codigo presupuestario
+     if ($escodpre=="S")
+     {
+		 $res=array();
+	     $misql = "Select rupcat, ruppar From CpDefNiv";
+	     $i=1;
+	     if (Herramientas::BuscarDatos($misql,&$res))
+	     {
+	       $categoria = $res[0]['rupcat'];
+	       $partidas = $res[0]['ruppar'];
+	     }
+     }// if ($escodpre=="S")
     $i=0;
     while ($i<count($reg))
     {
+      if ($reg[$i]["recargo"]=="S"  and $escodpre=="S")
+             $reg[$i]["codpar"] = substr($reg[$i]["codpar"], $categoria+2);
+
       $reg[$i]["nompar"]=NppartidasPeer::getNompar($reg[$i]["codpar"]);
-      $i++;
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    $i++;
     }
+
 
     $c = new Criteria();
     // Se crea el objeto principal de la clase OpcionesGrid
