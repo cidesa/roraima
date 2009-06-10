@@ -89,7 +89,7 @@ generator:
 
     list:
       title:          Registro de Presupuestos
-      display:        [=atayudas_id, nomsolben]
+      display:        [=nroexp, nomsolben]
       object_actions:
         _edit:        ~
         _delete:      ~
@@ -101,6 +101,9 @@ generator:
         Datos de Expediente/Solicitud: [_expediente]
         Presupuesto Consignado: [atprovee1, monto1, atprovee2, monto2, atprovee3, monto3]
         Presupuesto por OGAS: [atprovee4, monto4, atprovee5, monto5, atprovee6, monto6]
+      report:
+        url:         ciudadanos/r.php?m=ciudadanos&r=atplatra.php
+        params:      { numexpdes: nroexp, numexphas: nroexp }
       actions:
         _list:        ~
         _save:        ~

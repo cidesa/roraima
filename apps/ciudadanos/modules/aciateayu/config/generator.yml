@@ -81,6 +81,9 @@ generator:
         Monto Total solicitado: [monayu]
         Monto Total aprobado: [monapr]        
         Información del Gasto: [_refdoc]
+      report:
+        url:         ciudadanos/r.php?m=ciudadanos&r=atfichareg.php
+        params:      { numexpdes: nroexp, numexphas: nroexp }
       actions:
         _list:        ~
         _save:        ~
