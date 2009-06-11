@@ -392,7 +392,7 @@ $this->Bitacora('Guardo');
       	$resul=OpordpagPeer::doSelectOne($c);
       	$fecemi = $this->getRequestParameter('tscheemi_fecemi');
       	if ($resul)
-      	{ $dato=$resul->getDesord();}else{ $dato="";}
+      	{ $dato=htmlspecialchars($resul->getDesord());}else{ $dato="";}
       	//print strtotime($resul->getFecemi()).'----'.strtotime($fecemi);
       	$dateFormat = new sfDateFormat('es_VE');
         $fecemi = $dateFormat->format($fecemi, 'i', $dateFormat->getInputPattern('d'));
@@ -774,9 +774,10 @@ $this->Bitacora('Guardo');
 
     $col10 = new Columna('descripcion');
     $col10->setTipo(Columna::TEXTO);
-    $col10->setNombreCampo('desord');
+    $col10->setNombreCampo('desorden');
     $col10->setOculta(true);
     $col10->setEsGrabable(true);
+    $col10->setHTML('type="text" size=100" ');
 
 	$col11 = new Columna('cedula');
 	$col11->setTipo(Columna::TEXTO);

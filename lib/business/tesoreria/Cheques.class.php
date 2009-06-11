@@ -618,7 +618,7 @@ class Cheques
           $x[$j]->setNumche($numche);
           $x[$j]->setCtaban($tscheemi->getNumcue());
 
-          $DescOp=$x[$j]->getDesord();
+          $DescOp=$x[$j]->getDesorden();
           $DesCtaDeb = "PAG.ORD. ". $x[$j]->getNumord();
           $DesCtaCre = $x[$j]->getNomben();
           $NumOrden = $x[$j]->getNumord();
@@ -777,7 +777,7 @@ class Cheques
           if (trim($despag)!= "")
             $DescOp = $despag;
           else
-            $DescOp = $x[$j]->getDesord();
+            $DescOp = $x[$j]->getDesorden();
 
           $DesCtaDeb=$DescOp;
           $DesCtaCre = $x[$j]->getNomben();
