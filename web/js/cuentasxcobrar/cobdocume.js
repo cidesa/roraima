@@ -265,14 +265,16 @@ function recargos(id)
    {
     var coldoc="cx_"+l+"_1";
     var colmonrec="cx_"+l+"_3";
-    var num1=toFloat(colmonrec);
-
+    if ($(colmonrec))
+    {
     if ($(colmonrec).value!="")
     {
+      var num1=toFloat(colmonrec);
       if ($(colmonrec).value!='0,00' && $(coldoc).value==documento)
       {
         mon_recargo= mon_recargo + num1;
       }
+    }
     }
     l++;
    }
@@ -358,14 +360,17 @@ function recargos(id)
    {
     var coldoc="dx_"+l+"_1";
     var colmondes="dx_"+l+"_3";
-    var num1=toFloat(colmondes);
 
+    if ($(colmondes))
+    {
     if ($(colmondes).value!="")
     {
+      var num1=toFloat(colmondes);
       if ($(colmondes).value!='0,00' && $(coldoc).value==documento)
       {
         mon_descuento= mon_descuento + num1;
       }
+    }
     }
     l++;
    }
