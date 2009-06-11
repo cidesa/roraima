@@ -281,7 +281,7 @@ function recargos(id)
      $('cx_0_1').value=documento;
    }
 
-    recargo_fila= recargo_fila + mon_recargo;
+    var recargo_fila= recargo_fila + mon_recargo;
 
     return  recargo_fila;
  }
@@ -629,4 +629,18 @@ function recargos(id)
       alert('Tipee el Tipo de Movimiento');
       $('cobtransa_codtip').focus();
     }
+  }
+
+  function colocadoc(id)
+  {
+    var aux = id.split("_");
+    var name=aux[0];
+    var fil=aux[1];
+    var col=parseInt(aux[2]);
+
+    var colmonto=col+4;
+    var monto=name+"_"+fil+"_"+colmonto;
+
+    $(id).value=$('cobtransa_docfil').value;
+    $(monto).value=$('cobtransa_orifil').value;
   }
