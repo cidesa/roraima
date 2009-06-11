@@ -243,7 +243,17 @@ $this->Bitacora('Guardo');
 	{
 	$c = new Criteria();
 	$c->add(CaartsolPeer::REQART,$reqart);
+	$c->addAscendingOrderByColumn(CaartsolPeer::CODART);
 	$articulos = CaartsolPeer::doSelect($c);
+
+
+/*
+ 	$c->add(CaartsolPeer::REQART,$reqart);
+	$c->addJoin(CacotizaPeer::REFSOL,CaartsolPeer::REQART);
+	$c->addJoin(CadetcotPeer::REFCOT,CacotizaPeer::REFCOT);
+	$sql = "(cadetcot.priori='0' or cadetcot.priori isnull)";
+    $c->add(CadetcotPeer::PRIORI, $sql, Criteria :: CUSTOM);
+ */
 
 
 	$tipos = array();
@@ -251,7 +261,7 @@ $this->Bitacora('Guardo');
 
 	foreach($articulos as $art)
 	{
-	 $sql="select a.* from cadetcot a, cacotiza b where a.refcot=b.refcot  and b.refsol= '".$reqart."' and a.codart='".$art->getCodart()."' and not(a.priori) isnull";
+	 $sql="select a.* from cadetcot a, cacotiza b where a.refcot=b.refcot  and b.refsol= '".$reqart."' and a.codart='".$art->getCodart()."' and ( not(a.priori) isnull and a.priori<>0)";
 	 if (!Herramientas::BuscarDatos($sql,&$result))
      {
 	  $tipos += array($art->getCodart() => $art->getCodart()." - ".$art->getDesartsol());
@@ -362,6 +372,7 @@ $this->Bitacora('Guardo');
 	 $reqart=$this->getRequestParameter('reqart');
 	 $c = new Criteria();
 	 $c->add(CaartsolPeer::REQART,$reqart);
+	 $c->addAscendingOrderByColumn(CaartsolPeer::CODART);
 	 $articulos = CaartsolPeer::doSelect($c);
 
 	 $tipos = array();
