@@ -125,6 +125,7 @@ class cobtransaActions extends autocobtransaActions
     $this->columnas[1][1]->setHTML('readonly=true;');
   }else
   {*/
+    $this->columnas[1][0]->setHTML('size=10 readonly=true onBlur=colocadoc(this.id);');
     $this->columnas[1][1]->setCombo($this->cobtransa->getRecargos());
     $this->columnas[1][1]->setHTML('onChange=recargos(this.id);');
     $this->columnas[1][2]->setHTML('size=10 onKeyPress=montorecarg(event,this.id);');
@@ -156,6 +157,7 @@ class cobtransaActions extends autocobtransaActions
     $this->columnas[1][1]->setHTML('readonly=true;');
    }else
    {*/
+    $this->columnas[1][0]->setHTML('size=10 readonly=true onBlur=colocadoc(this.id);');
     $this->columnas[1][1]->setCombo($this->cobtransa->getDescuentos());
     $this->columnas[1][1]->setHTML('onChange=descuentos(this.id);');
     $this->columnas[1][2]->setHTML('size=10 onKeyPress=montodescuentos(event,this.id);');
@@ -240,13 +242,13 @@ class cobtransaActions extends autocobtransaActions
             {
              $valmonrec=(($result->getMonrgo()*$monori)/100);
              $montorec=number_format($valmonrec,2,',','.');
-             $javascript="sumar_recargos('$documento');";
+             //$javascript="sumar_recargos('$documento');";
             }
             else
             {
               $valmonrec=$result->getMonrgo();
               $montorec=number_format($valmonrec,2,',','.');
-              $javascript="sumar_recargos('$documento');";
+              //$javascript="sumar_recargos('$documento');";
             }
           }
           else
@@ -278,13 +280,13 @@ class cobtransaActions extends autocobtransaActions
             {
      	      $valmondes=(($result->getMondesc()*$monori)/100);
      	      $mondesc=number_format($valmondes,2,',','.');
-     	      $javascript="sumar_descuentos('$documento');";
+     	      //$javascript="sumar_descuentos('$documento');";
             }
             else
             {
               $valmondes=$result->getMondesc();
      	      $mondesc=number_format($valmondes,2,',','.');
-     	      $javascript="sumar_descuentos('$documento');";
+     	      //$javascript="sumar_descuentos('$documento');";
             }
           }
           else
