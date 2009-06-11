@@ -21,9 +21,9 @@ class CierredeNomina
  public static function Consulta2($codigo,$fec)
  {
  	$c= new Criteria();
- 	$c->add(NpcienomPeer::CODNOM,$codigo);
- 	$c->add(NpcienomPeer::FECNOM,$fec);
- 	$resultado= NpcienomPeer::doSelect($c);
+ 	$c->add(NphisconPeer::CODNOM,$codigo);
+ 	$c->add(NphisconPeer::FECNOM,$fec);
+ 	$resultado= NphisconPeer::doSelectOne($c);
  	if ($resultado)
  	{ return true;}else {return false;}
  }
