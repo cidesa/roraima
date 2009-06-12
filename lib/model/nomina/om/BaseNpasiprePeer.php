@@ -13,7 +13,7 @@ abstract class BaseNpasiprePeer {
 	const CLASS_DEFAULT = 'lib.model.nomina.Npasipre';
 
 	
-	const NUM_COLUMNS = 4;
+	const NUM_COLUMNS = 5;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -29,6 +29,9 @@ abstract class BaseNpasiprePeer {
 	const DESASI = 'npasipre.DESASI';
 
 	
+	const TIPASI = 'npasipre.TIPASI';
+
+	
 	const ID = 'npasipre.ID';
 
 	
@@ -37,18 +40,18 @@ abstract class BaseNpasiprePeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codcon', 'Codasi', 'Desasi', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (NpasiprePeer::CODCON, NpasiprePeer::CODASI, NpasiprePeer::DESASI, NpasiprePeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codcon', 'codasi', 'desasi', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
+		BasePeer::TYPE_PHPNAME => array ('Codcon', 'Codasi', 'Desasi', 'Tipasi', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (NpasiprePeer::CODCON, NpasiprePeer::CODASI, NpasiprePeer::DESASI, NpasiprePeer::TIPASI, NpasiprePeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codcon', 'codasi', 'desasi', 'tipasi', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codcon' => 0, 'Codasi' => 1, 'Desasi' => 2, 'Id' => 3, ),
-		BasePeer::TYPE_COLNAME => array (NpasiprePeer::CODCON => 0, NpasiprePeer::CODASI => 1, NpasiprePeer::DESASI => 2, NpasiprePeer::ID => 3, ),
-		BasePeer::TYPE_FIELDNAME => array ('codcon' => 0, 'codasi' => 1, 'desasi' => 2, 'id' => 3, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
+		BasePeer::TYPE_PHPNAME => array ('Codcon' => 0, 'Codasi' => 1, 'Desasi' => 2, 'Tipasi' => 3, 'Id' => 4, ),
+		BasePeer::TYPE_COLNAME => array (NpasiprePeer::CODCON => 0, NpasiprePeer::CODASI => 1, NpasiprePeer::DESASI => 2, NpasiprePeer::TIPASI => 3, NpasiprePeer::ID => 4, ),
+		BasePeer::TYPE_FIELDNAME => array ('codcon' => 0, 'codasi' => 1, 'desasi' => 2, 'tipasi' => 3, 'id' => 4, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
 	);
 
 	
@@ -107,6 +110,8 @@ abstract class BaseNpasiprePeer {
 		$criteria->addSelectColumn(NpasiprePeer::CODASI);
 
 		$criteria->addSelectColumn(NpasiprePeer::DESASI);
+
+		$criteria->addSelectColumn(NpasiprePeer::TIPASI);
 
 		$criteria->addSelectColumn(NpasiprePeer::ID);
 

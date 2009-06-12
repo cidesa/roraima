@@ -21,6 +21,10 @@ abstract class BaseNpasipre extends BaseObject  implements Persistent {
 
 
 	
+	protected $tipasi;
+
+
+	
 	protected $id;
 
 	
@@ -48,6 +52,13 @@ abstract class BaseNpasipre extends BaseObject  implements Persistent {
   {
 
     return trim($this->desasi);
+
+  }
+  
+  public function getTipasi()
+  {
+
+    return trim($this->tipasi);
 
   }
   
@@ -88,6 +99,16 @@ abstract class BaseNpasipre extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setTipasi($v)
+	{
+
+    if ($this->tipasi !== $v) {
+        $this->tipasi = $v;
+        $this->modifiedColumns[] = NpasiprePeer::TIPASI;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -108,7 +129,9 @@ abstract class BaseNpasipre extends BaseObject  implements Persistent {
 
       $this->desasi = $rs->getString($startcol + 2);
 
-      $this->id = $rs->getInt($startcol + 3);
+      $this->tipasi = $rs->getString($startcol + 3);
+
+      $this->id = $rs->getInt($startcol + 4);
 
       $this->resetModified();
 
@@ -116,7 +139,7 @@ abstract class BaseNpasipre extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 4; 
+            return $startcol + 5; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Npasipre object", $e);
     }
@@ -273,6 +296,9 @@ abstract class BaseNpasipre extends BaseObject  implements Persistent {
 				return $this->getDesasi();
 				break;
 			case 3:
+				return $this->getTipasi();
+				break;
+			case 4:
 				return $this->getId();
 				break;
 			default:
@@ -288,7 +314,8 @@ abstract class BaseNpasipre extends BaseObject  implements Persistent {
 			$keys[0] => $this->getCodcon(),
 			$keys[1] => $this->getCodasi(),
 			$keys[2] => $this->getDesasi(),
-			$keys[3] => $this->getId(),
+			$keys[3] => $this->getTipasi(),
+			$keys[4] => $this->getId(),
 		);
 		return $result;
 	}
@@ -314,6 +341,9 @@ abstract class BaseNpasipre extends BaseObject  implements Persistent {
 				$this->setDesasi($value);
 				break;
 			case 3:
+				$this->setTipasi($value);
+				break;
+			case 4:
 				$this->setId($value);
 				break;
 		} 	}
@@ -326,7 +356,8 @@ abstract class BaseNpasipre extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[0], $arr)) $this->setCodcon($arr[$keys[0]]);
 		if (array_key_exists($keys[1], $arr)) $this->setCodasi($arr[$keys[1]]);
 		if (array_key_exists($keys[2], $arr)) $this->setDesasi($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setId($arr[$keys[3]]);
+		if (array_key_exists($keys[3], $arr)) $this->setTipasi($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setId($arr[$keys[4]]);
 	}
 
 	
@@ -337,6 +368,7 @@ abstract class BaseNpasipre extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(NpasiprePeer::CODCON)) $criteria->add(NpasiprePeer::CODCON, $this->codcon);
 		if ($this->isColumnModified(NpasiprePeer::CODASI)) $criteria->add(NpasiprePeer::CODASI, $this->codasi);
 		if ($this->isColumnModified(NpasiprePeer::DESASI)) $criteria->add(NpasiprePeer::DESASI, $this->desasi);
+		if ($this->isColumnModified(NpasiprePeer::TIPASI)) $criteria->add(NpasiprePeer::TIPASI, $this->tipasi);
 		if ($this->isColumnModified(NpasiprePeer::ID)) $criteria->add(NpasiprePeer::ID, $this->id);
 
 		return $criteria;
@@ -373,6 +405,8 @@ abstract class BaseNpasipre extends BaseObject  implements Persistent {
 		$copyObj->setCodasi($this->codasi);
 
 		$copyObj->setDesasi($this->desasi);
+
+		$copyObj->setTipasi($this->tipasi);
 
 
 		$copyObj->setNew(true);

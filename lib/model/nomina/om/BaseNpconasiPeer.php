@@ -13,7 +13,7 @@ abstract class BaseNpconasiPeer {
 	const CLASS_DEFAULT = 'lib.model.nomina.Npconasi';
 
 	
-	const NUM_COLUMNS = 4;
+	const NUM_COLUMNS = 6;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -29,6 +29,12 @@ abstract class BaseNpconasiPeer {
 	const CODCPT = 'npconasi.CODCPT';
 
 	
+	const AFEALIBV = 'npconasi.AFEALIBV';
+
+	
+	const AFEALIBF = 'npconasi.AFEALIBF';
+
+	
 	const ID = 'npconasi.ID';
 
 	
@@ -37,18 +43,18 @@ abstract class BaseNpconasiPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codcon', 'Codasi', 'Codcpt', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (NpconasiPeer::CODCON, NpconasiPeer::CODASI, NpconasiPeer::CODCPT, NpconasiPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codcon', 'codasi', 'codcpt', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
+		BasePeer::TYPE_PHPNAME => array ('Codcon', 'Codasi', 'Codcpt', 'Afealibv', 'Afealibf', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (NpconasiPeer::CODCON, NpconasiPeer::CODASI, NpconasiPeer::CODCPT, NpconasiPeer::AFEALIBV, NpconasiPeer::AFEALIBF, NpconasiPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codcon', 'codasi', 'codcpt', 'afealibv', 'afealibf', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codcon' => 0, 'Codasi' => 1, 'Codcpt' => 2, 'Id' => 3, ),
-		BasePeer::TYPE_COLNAME => array (NpconasiPeer::CODCON => 0, NpconasiPeer::CODASI => 1, NpconasiPeer::CODCPT => 2, NpconasiPeer::ID => 3, ),
-		BasePeer::TYPE_FIELDNAME => array ('codcon' => 0, 'codasi' => 1, 'codcpt' => 2, 'id' => 3, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
+		BasePeer::TYPE_PHPNAME => array ('Codcon' => 0, 'Codasi' => 1, 'Codcpt' => 2, 'Afealibv' => 3, 'Afealibf' => 4, 'Id' => 5, ),
+		BasePeer::TYPE_COLNAME => array (NpconasiPeer::CODCON => 0, NpconasiPeer::CODASI => 1, NpconasiPeer::CODCPT => 2, NpconasiPeer::AFEALIBV => 3, NpconasiPeer::AFEALIBF => 4, NpconasiPeer::ID => 5, ),
+		BasePeer::TYPE_FIELDNAME => array ('codcon' => 0, 'codasi' => 1, 'codcpt' => 2, 'afealibv' => 3, 'afealibf' => 4, 'id' => 5, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
 	);
 
 	
@@ -107,6 +113,10 @@ abstract class BaseNpconasiPeer {
 		$criteria->addSelectColumn(NpconasiPeer::CODASI);
 
 		$criteria->addSelectColumn(NpconasiPeer::CODCPT);
+
+		$criteria->addSelectColumn(NpconasiPeer::AFEALIBV);
+
+		$criteria->addSelectColumn(NpconasiPeer::AFEALIBF);
 
 		$criteria->addSelectColumn(NpconasiPeer::ID);
 

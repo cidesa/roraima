@@ -40,6 +40,10 @@ class NpconasiMapBuilder {
 
 		$tMap->addColumn('CODCPT', 'Codcpt', 'string', CreoleTypes::VARCHAR, false, 3);
 
+		$tMap->addColumn('AFEALIBV', 'Afealibv', 'string', CreoleTypes::VARCHAR, false, 1);
+
+		$tMap->addColumn('AFEALIBF', 'Afealibf', 'string', CreoleTypes::VARCHAR, false, 1);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

@@ -40,6 +40,8 @@ class NpasipreMapBuilder {
 
 		$tMap->addColumn('DESASI', 'Desasi', 'string', CreoleTypes::VARCHAR, true, 50);
 
+		$tMap->addColumn('TIPASI', 'Tipasi', 'string', CreoleTypes::VARCHAR, true, 1);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 
