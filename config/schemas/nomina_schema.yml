@@ -692,6 +692,10 @@ propel:
       type: VARCHAR
       size: 50
       required: true
+    tipasi:
+      type: VARCHAR
+      size: 1
+      required: true      
     id:
       type: INTEGER
       required: true
@@ -1545,6 +1549,12 @@ propel:
     codcpt:
       type: VARCHAR
       size: 3
+    afealibv:
+      type: VARCHAR
+      size: 1
+    afealibf:
+      type: VARCHAR
+      size: 1            
     id:
       type: INTEGER
       required: true
