@@ -29,6 +29,9 @@ class presnomasitrabcontActions extends autopresnomasitrabcontActions
     $c->addSelectColumn("'' AS CODEMP");
     $c->addSelectColumn("'' AS NOMEMP");
     $c->addSelectColumn("'yyyy/mm/dd' AS FECCAL");
+	$c->addSelectColumn("'yyyy/mm/dd' AS FECDES");
+	$c->addSelectColumn("'yyyy/mm/dd' AS FECDES");
+	$c->addSelectColumn("'' AS STATUS");
     $c->addSelectColumn("max(ID) AS ID");
     $c->addGroupByColumn(NpasiempcontPeer::CODTIPCON);
 
@@ -183,17 +186,27 @@ public function configGrid($codigo='')
   {
     //print $codigo;
     //$sql ="Select a.CODTIPCON,a.CODNOM,a.CODEMP,a.NOMEMP,a.FECCAL,b.NOMNOM, 9 as id  From NPNOMINA b,NPASIEMPCONT a Where a.CODNOM=b.Codnom and  CODTIPCON = '".$codigo."' order by codemp";
-	$sql="select '1' as check,z.CODTIPCON,z.CodEmp,z.Nomemp,z.fecing as feccal,z.codnom,z.nomnom, 9 as id from
-						(select  a.codemp,c.codtipcon,a.codnom,d.nomemp,d.fecing,b.nomnom from npasicaremp a, npasinomcont c, npnomina b, nphojint d
+	$sql="select DISTINCT '1' as check,'1' as check1,z.CODTIPCON,z.CodEmp,z.Nomemp,z.fecing as feccal,
+						coalesce(x.fecdes,z.fecasi) as fecdes,
+						coalesce(x.fechas,(select max(anovighas) from npbonocont where codtipcon=z.codtipcon)) as fechas,
+						'' as codtipcon2,
+						x.status,
+						z.codnom,z.nomnom, 9 as id from
+						(select  a.codemp,c.codtipcon,a.codnom,d.nomemp,d.fecing,a.fecasi,b.nomnom from npasicaremp a, npasinomcont c, npnomina b, nphojint d
 						where  c.codnom=a.codnom and a.codnom=b.codnom and a.codemp=d.codemp) z
 						left outer join npasiempcont x on (z.codemp=x.codemp and z.codtipcon=x.codtipcon)
 						where x.codtipcon is not null and z.codtipcon='".$codigo."'
 		  union all
-		  select '0' as check,z.CODTIPCON,z.CodEmp,z.Nomemp,z.fecing as feccal,z.codnom,z.nomnom, 9 as id from
-						(select  a.codemp,c.codtipcon,a.codnom,d.nomemp,d.fecing,b.nomnom from npasicaremp a, npasinomcont c, npnomina b, nphojint d
+		  select DISTINCT '0' as check,'0' as check1,z.CODTIPCON,z.CodEmp,z.Nomemp,z.fecing as feccal,
+		  				coalesce(x.fecdes,z.fecasi) as fecdes,
+						coalesce(x.fechas,(select max(anovighas) from npbonocont where codtipcon=z.codtipcon)) as fechas,
+						(select codtipcon from npasiempcont where codtipcon<>z.codtipcon and codemp=z.codemp and status='A') as codtipcon2,
+						x.status,
+						z.codnom,z.nomnom, 9 as id from
+						(select  a.codemp,c.codtipcon,a.codnom,d.nomemp,d.fecing,a.fecasi,b.nomnom from npasicaremp a, npasinomcont c, npnomina b, nphojint d
 						where  c.codnom=a.codnom and a.codnom=b.codnom and a.codemp=d.codemp) z
 						left outer join npasiempcont x on (z.codemp=x.codemp and z.codtipcon=x.codtipcon)
-						where x.codtipcon is null and z.codtipcon='".$codigo."'";
+						where x.codtipcon is null and z.codtipcon='".$codigo."' order by check1 desc, codemp";
 
     $resp = Herramientas::BuscarDatos($sql,&$per);
 	$this->totfil=count($per);
@@ -203,7 +216,8 @@ public function configGrid($codigo='')
     $opciones->setFilas(0);
     $opciones->setTabla('Npasiempcont');
     $opciones->setName('a');
-    $opciones->setAnchoGrid(900);
+	$opciones->setAncho(1190);
+    $opciones->setAnchoGrid(1190);
     $opciones->setTitulo('');
     $opciones->setHTMLTotalFilas(' ');
 
@@ -220,7 +234,7 @@ public function configGrid($codigo='')
     $col1->setAlineacionContenido(Columna::IZQUIERDA);
     $col1->setEsGrabable(true);
     $col1->setNombreCampo('codnom');
-    $col1->setHTML('type="text" size="10" readonly=true');
+    $col1->setHTML('type="text" size="5" readonly=true');
 
     $col2 = new Columna('Tipo De Nomina');
     $col2->setTipo(Columna::TEXTO);
@@ -253,13 +267,52 @@ public function configGrid($codigo='')
     $col5->setAlineacionContenido(Columna::CENTRO);
     $col5->setNombreCampo('feccal');
     $col5->setHTML('type="text" size="10" readonly=true');
+	
+	$col6 = new Columna('Fecha Desde');
+    $col6->setTipo(Columna::FECHA);
+    $col6->setEsGrabable(true);
+    $col6->setAlineacionObjeto(Columna::CENTRO);
+    $col6->setAlineacionContenido(Columna::CENTRO);
+    $col6->setNombreCampo('fecdes');
+    $col6->setHTML('type="text" size="20"');
+	
+	$col7 = new Columna('Fecha Hasta');
+    $col7->setTipo(Columna::FECHA);
+    $col7->setEsGrabable(true);
+    $col7->setAlineacionObjeto(Columna::CENTRO);
+    $col7->setAlineacionContenido(Columna::CENTRO);
+    $col7->setNombreCampo('fechas');
+    $col7->setHTML('type="text" size="20" ');
 
+	$col8 = new Columna(' ');
+    $col8->setTipo(Columna::TEXTO);
+	$col8->setOculta(true);
+	$col8->setEsGrabable(true);
+    $col8->setAlineacionObjeto(Columna::CENTRO);
+    $col8->setAlineacionContenido(Columna::CENTRO);
+    $col8->setNombreCampo('codtipcon2');
+    $col8->setHTML('type="text" size="20"');	
+	
+	$col9 = new Columna(' ');
+    $col9->setTipo(Columna::TEXTO);
+	$col9->setOculta(true);
+	$col9->setEsGrabable(true);
+    $col9->setAlineacionObjeto(Columna::CENTRO);
+    $col9->setAlineacionContenido(Columna::CENTRO);
+    $col9->setNombreCampo('status');
+    $col9->setHTML('type="text" size="20"');	
+	
 	$opciones->addColumna($col0);
     $opciones->addColumna($col1);
     $opciones->addColumna($col2);
     $opciones->addColumna($col3);
     $opciones->addColumna($col4);
     $opciones->addColumna($col5);
+	$opciones->addColumna($col6);
+    $opciones->addColumna($col7);
+	$opciones->addColumna($col8);
+	$opciones->addColumna($col9);
+
     $this->obj = $opciones->getConfig($per);
 	//print "<pre>";
     //print_r ($this->obj);
@@ -336,6 +389,7 @@ public function executeAjax()
 
  public function validateEdit()
     {
+      $this->mensaje="";	
       if($this->getRequest()->getMethod() == sfRequest::POST)
       {
         $this->npasiempcont = $this->getNpasiempcontOrCreate();
@@ -430,20 +484,7 @@ protected function saveNpasiempcont($npasiempcont)
   }
   public function executeDelete()
   {
-    $obj = NpasiempcontPeer::retrieveByPk($this->getRequestParameter('id'));
-    $c = new Criteria();
-	$c->add(NpasiempcontPeer::CODTIPCON,$obj->getCodtipcon());
-	$rs = NpasiempcontPeer::doDelete($c);
-	if($rs)
-	{
-		$this->Bitacora('Elimino');
-		$this->setFlash('notice','Registro Eliminado exitosamente');
-	}else
-	{
-
-	}
-    return $this->redirect('presnomasitrabcont/edit');
-
+        return $this->redirect('presnomasitrabcont/list');
   }
 
 }
