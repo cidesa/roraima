@@ -311,10 +311,14 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
               $this->ajax = $this->getRequestParameter('ajax');
               $this->salario= $this->getRequestParameter('salario');
               $salario = H::iif($this->salario=='true','P','U');
-
+			  if($this->getRequestParameter('anno')=='true')
+			      $anno='365';
+			  else
+			      $anno='360';
+				  	  
               if ($this->getRequestParameter('codemp') != "" and $this->getRequestParameter('feccor') != "" and $this->getRequestParameter('capita') != "")
               {
-                $this->configGrid($this->getRequestParameter('codemp'), $this->getRequestParameter('feccor'), $this->getRequestParameter('capita'), $salario);
+                $this->configGrid($this->getRequestParameter('codemp'), $this->getRequestParameter('feccor'), $this->getRequestParameter('capita'), $salario,$anno);
                 $output = '[["diaserrn","'.$this->antdias.'",""],["messerrn","'.$this->antmeses.'",""],["anoserrn","'.$this->antannos.'",""],["totcapitalact","'.H::Formatomonto($this->capitalact).'",""]]';
 				$this->getUser()->setAttribute('calculado','SI');
                 $this->getResponse()->setHttpHeader("X-JSON", '(' . $output . ')');
@@ -638,8 +642,8 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
   }
 
 
-  public function configGrid($codemp = '', $fecha= '', $capital= '', $salario= '')
-  {
+  public function configGrid($codemp = '', $fecha= '', $capital= '', $salario= '',$anno= '')
+  { 
   	if($this->salario=="true")
   		$cadena="round(monpres,2)";
   	else
