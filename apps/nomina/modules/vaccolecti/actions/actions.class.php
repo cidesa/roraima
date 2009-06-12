@@ -150,8 +150,8 @@ public function comboAnos()
 		$col5->setAlineacionObjeto(Columna::CENTRO);
 		$col5->setAlineacionContenido(Columna::CENTRO);
 		$col5->setNombreCampo('diaspdisfrutar');
-		$col5->setJScript('onBlur="javascript:event.keyCode=13; enternumero(event,this.id);"');
-		$col5->setHTML('type="text" size="10" ');
+		#$col5->setJScript('onBlur="javascript:event.keyCode=13; enternumero(event,this.id);"');
+		$col5->setHTML('type="text" size="10" readonly= true');
 
 		// Se guardan las columnas en el objetos de opciones
 		$opciones->addColumna($col0);
