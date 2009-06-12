@@ -21,6 +21,14 @@ abstract class BaseNpconasi extends BaseObject  implements Persistent {
 
 
 	
+	protected $afealibv;
+
+
+	
+	protected $afealibf;
+
+
+	
 	protected $id;
 
 	
@@ -48,6 +56,20 @@ abstract class BaseNpconasi extends BaseObject  implements Persistent {
   {
 
     return trim($this->codcpt);
+
+  }
+  
+  public function getAfealibv()
+  {
+
+    return trim($this->afealibv);
+
+  }
+  
+  public function getAfealibf()
+  {
+
+    return trim($this->afealibf);
 
   }
   
@@ -88,6 +110,26 @@ abstract class BaseNpconasi extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setAfealibv($v)
+	{
+
+    if ($this->afealibv !== $v) {
+        $this->afealibv = $v;
+        $this->modifiedColumns[] = NpconasiPeer::AFEALIBV;
+      }
+  
+	} 
+	
+	public function setAfealibf($v)
+	{
+
+    if ($this->afealibf !== $v) {
+        $this->afealibf = $v;
+        $this->modifiedColumns[] = NpconasiPeer::AFEALIBF;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -108,7 +150,11 @@ abstract class BaseNpconasi extends BaseObject  implements Persistent {
 
       $this->codcpt = $rs->getString($startcol + 2);
 
-      $this->id = $rs->getInt($startcol + 3);
+      $this->afealibv = $rs->getString($startcol + 3);
+
+      $this->afealibf = $rs->getString($startcol + 4);
+
+      $this->id = $rs->getInt($startcol + 5);
 
       $this->resetModified();
 
@@ -116,7 +162,7 @@ abstract class BaseNpconasi extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 4; 
+            return $startcol + 6; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Npconasi object", $e);
     }
@@ -273,6 +319,12 @@ abstract class BaseNpconasi extends BaseObject  implements Persistent {
 				return $this->getCodcpt();
 				break;
 			case 3:
+				return $this->getAfealibv();
+				break;
+			case 4:
+				return $this->getAfealibf();
+				break;
+			case 5:
 				return $this->getId();
 				break;
 			default:
@@ -288,7 +340,9 @@ abstract class BaseNpconasi extends BaseObject  implements Persistent {
 			$keys[0] => $this->getCodcon(),
 			$keys[1] => $this->getCodasi(),
 			$keys[2] => $this->getCodcpt(),
-			$keys[3] => $this->getId(),
+			$keys[3] => $this->getAfealibv(),
+			$keys[4] => $this->getAfealibf(),
+			$keys[5] => $this->getId(),
 		);
 		return $result;
 	}
@@ -314,6 +368,12 @@ abstract class BaseNpconasi extends BaseObject  implements Persistent {
 				$this->setCodcpt($value);
 				break;
 			case 3:
+				$this->setAfealibv($value);
+				break;
+			case 4:
+				$this->setAfealibf($value);
+				break;
+			case 5:
 				$this->setId($value);
 				break;
 		} 	}
@@ -326,7 +386,9 @@ abstract class BaseNpconasi extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[0], $arr)) $this->setCodcon($arr[$keys[0]]);
 		if (array_key_exists($keys[1], $arr)) $this->setCodasi($arr[$keys[1]]);
 		if (array_key_exists($keys[2], $arr)) $this->setCodcpt($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setId($arr[$keys[3]]);
+		if (array_key_exists($keys[3], $arr)) $this->setAfealibv($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setAfealibf($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setId($arr[$keys[5]]);
 	}
 
 	
@@ -337,6 +399,8 @@ abstract class BaseNpconasi extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(NpconasiPeer::CODCON)) $criteria->add(NpconasiPeer::CODCON, $this->codcon);
 		if ($this->isColumnModified(NpconasiPeer::CODASI)) $criteria->add(NpconasiPeer::CODASI, $this->codasi);
 		if ($this->isColumnModified(NpconasiPeer::CODCPT)) $criteria->add(NpconasiPeer::CODCPT, $this->codcpt);
+		if ($this->isColumnModified(NpconasiPeer::AFEALIBV)) $criteria->add(NpconasiPeer::AFEALIBV, $this->afealibv);
+		if ($this->isColumnModified(NpconasiPeer::AFEALIBF)) $criteria->add(NpconasiPeer::AFEALIBF, $this->afealibf);
 		if ($this->isColumnModified(NpconasiPeer::ID)) $criteria->add(NpconasiPeer::ID, $this->id);
 
 		return $criteria;
@@ -373,6 +437,10 @@ abstract class BaseNpconasi extends BaseObject  implements Persistent {
 		$copyObj->setCodasi($this->codasi);
 
 		$copyObj->setCodcpt($this->codcpt);
+
+		$copyObj->setAfealibv($this->afealibv);
+
+		$copyObj->setAfealibf($this->afealibf);
 
 
 		$copyObj->setNew(true);
