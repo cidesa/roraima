@@ -12,8 +12,7 @@ CREATE TABLE npprimashijos
   monto numeric(14,2),
   estudios character varying(1),
   id INTEGER  NOT NULL DEFAULT nextval('npprimashijos_seq'::regclass)
-)
-WITH (OIDS=FALSE);
+);
 ALTER TABLE npprimashijos OWNER TO postgres;
 
 CREATE SEQUENCE npprimaprofes_seq;
