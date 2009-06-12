@@ -30,7 +30,7 @@ class Articulos
       if($articulo->getId()=='') $articulo->setDistot($articulo->getExitot());
       //Se graba el Artículo      
       if ($articulo->getGencorart()!="S")
-      { //$articulo->save();
+      { $articulo->save();
       }
       else {
         if (substr($articulo->getCodart(),-1,1)=='#')
