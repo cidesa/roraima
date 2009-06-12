@@ -468,5 +468,10 @@ public static function PagoDoble()
   {
    return array(0 => 'Hijo', 2 => 'Hija', 3 => 'Padre', 4 => 'Madre', 5 => 'Hermano(a)', 6 => 'Conyuge', 7 => 'Titular Masculino', 8 => 'Titular Femenino');
   }
+  
+  public static function Tipo_Asignaciones()
+  {
+   return array('S' => 'Sueldo', 'V' => 'Bono Vacacional', 'F' => 'Bono Fin de Año');
+  }
 
 }
