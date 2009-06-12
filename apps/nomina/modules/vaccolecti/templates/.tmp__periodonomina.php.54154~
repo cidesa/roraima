@@ -1,0 +1,96 @@
+<?php use_helper('Object', 'ObjectAdmin', 'I18N', 'Grid') ?>
+<?php  
+$arranos=$params['arranos'];
+$arranom=$params['arranom'];
+?>
+<?php echo label_for('npvacdisfrute[perini]', __($labels['npvacdisfrute{perini}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('npvacdisfrute{perini}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npvacdisfrute{perini}')): ?>
+    <?php echo form_error('npvacdisfrute{perini}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+<?php $perini = date('Y') - 1;
+      $perfin = date('Y');
+ if ($npvacdisfrute->getPerini()=='')
+ {
+ $var=$perini;
+ $var2=$perfin;
+ }
+ else
+ {
+ $var=$npvacdisfrute->getPerini();
+ $var2=$npvacdisfrute->getPerfin();
+ }
+ ?>
+
+<?php echo select_tag('npvacdisfrute[perini]', options_for_select($arranos,$var),array(
+    'onChange'=> remote_function(array(
+    'update'   => 'gridvacaciones',
+    'url'      => 'vaccolecti/ajax',
+    'complete' => 'AjaxJSON(request, json)',
+    'with' => "'ajax=1&perini='+this.value+'&cajaperfin=npvacdisfrute_perfin&nomina='+$(npvacdisfrute_codnom).value",
+  ))));?>
+
+&nbsp; &nbsp; &nbsp; &nbsp;
+<strong><?php echo __($labels['npvacdisfrute{perfin}'])?></strong>
+<?php $value = object_input_tag($npvacdisfrute, 'getPerfin', array (
+'value' => $var2,
+'size' => 7,
+'control_name' => 'npvacdisfrute[perfin]',
+'disabled' => true,
+)); echo $value ? $value : '&nbsp;' ?>
+&nbsp; &nbsp; &nbsp; &nbsp;
+<strong><?php echo __($labels['npvacdisfrute{codnom}'])?></strong>
+<?php echo select_tag('npvacdisfrute_codnom', options_for_select($arranom,$var),array(
+    'onChange'=> remote_function(array(
+    'update'   => 'gridvacaciones',
+    'url'      => 'vaccolecti/ajax',
+    'complete' => 'AjaxJSON(request, json)',
+    'with' => "'ajax=1&perini='+$(npvacdisfrute_perini).value+'&cajaperfin=npvacdisfrute_perfin&nomina='+this.value",
+  ))));?>
+    </div>
+
+     <script type="text/javascript">
+
+function calcular_dias(id)
+{
+	var adisfrutar = $(id).value;
+	var aux = id.split("_");
+
+   	var name=aux[0];
+   	var fila=aux[1];
+   	var col=parseInt(aux[2]);
+
+      var coldes=col+1;
+      var disfrutados  = name+"_"+fila+"_"+coldes;
+
+      var coldes=col+2;
+      var pordisfrutar = name+"_"+fila+"_"+coldes;
+
+	$(pordisfrutar).value = parseInt(adisfrutar) - parseInt($(disfrutados).value);
+
+
+}
+
+function calcular_dias2(id)
+{
+	var disfrutados = $(id).value;
+	var aux = id.split("_");
+
+   	var name=aux[0];
+   	var fila=aux[1];
+   	var col=parseInt(aux[2]);
+
+      var coldes=col-1;
+      var adisfrutar  = name+"_"+fila+"_"+coldes;
+
+      var coldes=col+1;
+      var pordisfrutar = name+"_"+fila+"_"+coldes;
+
+	$(pordisfrutar).value = parseInt($(adisfrutar).value) - parseInt(disfrutados);
+
+
+}
+
+
+  </script>
