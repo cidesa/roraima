@@ -333,6 +333,260 @@ class Vacaciones {
 
 
   }
+  
+    public static function cargarDatosNpvacsalidas($nomina, & $diaslaborales) {
+	 
+	  $diaslaborables = array ();
+
+      $sql2 = "Select " .
+      "(CASE a.lunes WHEN 'S' THEN '2' ELSE a.lunes END) as LUNES, " .
+      "(CASE a.martes WHEN 'S' THEN '3' ELSE a.martes END) as MARTES, " .
+      "(CASE a.miercoles WHEN 'S' THEN '4' ELSE a.miercoles END) as MIERCOLES, " .
+      "(CASE a.jueves WHEN 'S' THEN '5' ELSE a.jueves END) as JUEVES, " .
+      "(CASE a.viernes WHEN 'S' THEN '6' ELSE a.viernes END) as VIERNES, " .
+      "(CASE a.sabado WHEN 'S' THEN '7' ELSE a.sabado END) as SABADO, " .
+      "(CASE a.domingo WHEN 'S' THEN '1' ELSE a.domingo END) as DOMINGO " .
+      "From NPVACJORLAB A " .
+      "Where A.CODNOM='$nomina'";
+
+      Herramientas :: BuscarDatos($sql2, & $arr2);
+
+      if ($arr2) {
+
+        if ($arr2[0]['lunes'] == "2")
+          $diaslaborales[0] = "S";
+        else
+          $diaslaborales[0] = "N";
+
+        if ($arr2[0]['martes'] == "3")
+          $diaslaborales[1] = "S";
+        else
+          $diaslaborales[1] = "N";
+
+        if ($arr2[0]['miercoles'] == "4")
+          $diaslaborales[2] = "S";
+        else
+          $diaslaborales[2] = "N";
+
+        if ($arr2[0]['jueves'] == "5")
+          $diaslaborales[3] = "S";
+        else
+          $diaslaborales[3] = "N";
+
+        if ($arr2[0]['viernes'] == "6")
+          $diaslaborales[4] = "S";
+        else
+          $diaslaborales[4] = "N";
+
+        if ($arr2[0]['sabado'] == "7")
+          $diaslaborales[5] = "S";
+        else
+          $diaslaborales[5] = "N";
+
+        if ($arr2[0]['domingo'] == "1")
+          $diaslaborales[6] = "S";
+        else
+          $diaslaborales[6] = "N";
+
+      }     
+	}
+  
+    public static function calcularFecharegreso($diasvac, $fechadesde, $nomina) {
+    $diad = substr($fechadesde, 0, 2);
+    $mesd = substr($fechadesde, 3, 2);
+    $anod = substr($fechadesde, 6, 8);
+
+    $fechad = $anod . '-' . $mesd . '-' . $diad;
+
+    $valor = Herramientas :: dateAdd('d', 1, $fechad, '-');
+
+    if ($diasvac <> 0) {
+      $i = 0;
+      $jornada = false;
+      V :: cargarDatosNpvacsalidas($nomina,& $diaslaborales);
+      while ($i <= $diasvac) {
+        $valor = Herramientas :: dateAdd('d', 1, $valor, '+');
+
+        if (Nomina :: diaLaboral($valor, $jornada, $diaslaborales)) {
+          $anoing = substr($valor, 0, 4);
+          $mes = substr($valor, 5, 2);
+          $dia = substr($valor, 8, 2);
+
+          $sql = "Select  * FROM  NPVACDIAFER WHERE DIA='" . (int) $dia . "' AND MES='" . (int) $mes . "'";
+          Herramientas :: BuscarDatos($sql, & $arr);
+
+          if (!$arr) {
+            $i++;
+            if ($i >= ($diasvac -2))
+              $jornada = true;
+
+          }
+        }
+      }
+
+     // $valor = Herramientas :: dateAdd('d', 1, $valor, '+');
+    /*  if (!self :: diaLaboral($valor, $jornada, $diaslaborales))
+        $valor = Herramientas :: dateAdd('d', 1, $valor, '+');*/
+
+      #while (!Nomina :: diaLaboral($valor, $jornada, $diaslaborales))
+      #{
+        #$valor = Herramientas :: dateAdd('d', 1, $valor, '+');
+      #}// end while
+
+      $fechahasta = $valor;
+    } else {
+      $fechahasta = $fechad;
+      $fechahasta = Herramientas :: dateAdd('d', 1, $fechahasta, '+');
+    }
+
+    $anoh = substr($fechahasta, 0, 4);
+    $mesh = substr($fechahasta, 5, 2);
+    $diah = substr($fechahasta, 8, 2);
+
+    $fechahas = $diah . '/' . $mesh . '/' . $anoh;
+
+    return $fechahas;
+
+  }
+  
+  public static function cargar_vac_periodo_colectiva($perini, $nomina,$numdia) {
+  	
+    if (empty($perini))
+      $perini = (intval(date('Y')) - 1);
+	$perfin = $perini + 1;  
+
+    if ($nomina == '')
+      $sqlnom = "";
+    else
+      $sqlnom = "and a.codnom='$nomina'";
+    //and TO_NUMBER(TO_CHAR(b.fecing,'YYYY'),'9999') >= ".$perini."'
+
+	if($perini == (intval(date('Y')) - 1))
+	{
+		$sql = "Select  distinct '1' as check,a.codnom, a.codemp, b.nomemp, a.id, TO_CHAR(b.fecing,'YYYY')
+          from Npasicaremp a,Nphojint b, npasiempcont c
+          where  TO_NUMBER(TO_CHAR(b.fecing,'YYYY'),'9999')<='$perfin' and
+		  /*(case when (to_char(date(now()),'mm')>to_char(fecing,'mm')) then 'SI'
+			when (to_char(date(now()),'mm')=to_char(fecing,'mm')) then (case when (to_char(date(now()),'dd')>=to_char(fecing,'mm')) then 'SI' else 'NO' end)
+			else 'NO' end )='SI' and*/
+		  a.codemp=c.codemp and a.codnom=c.codnom and a.codemp=b.codemp and a.status='V' $sqlnom order by a.codemp";
+	}
+	else{
+		$sql = "Select  distinct '1' as check,a.codnom, a.codemp, b.nomemp, a.id, TO_CHAR(b.fecing,'YYYY')
+          from Npasicaremp a,Nphojint b, npasiempcont c
+          where  TO_NUMBER(TO_CHAR(b.fecing,'YYYY'),'9999')<='$perfin' and  
+		  a.codemp=c.codemp and a.codnom=c.codnom and a.codemp=b.codemp and a.status='V' $sqlnom order by a.codemp";
+	}
+
+
+    $arremp = array ();
+    Herramientas :: BuscarDatos($sql, & $arremp1);
+
+    $perfin = $perini +1;
+	if($arremp1){
+		$i = 0;
+	    foreach ($arremp1 as $a) {
+	
+	      $arremp[$i]['id'] = 9;
+	      $arremp[$i]['codemp'] = $a['codemp'];
+	      $arremp[$i]['nomemp'] = $a['nomemp'];
+	
+	      if ($a['codnom'])
+	        $nomina = $a['codnom'];
+	      else {
+	        $c2 = new Criteria();
+	        $c2->add(NphisconPeer :: CODEMP, $a['codemp']);
+	        $c2->addDescendingOrderByColumn(NphisconPeer :: FECNOM);
+	        $objNphiscon = NphisconPeer :: doSelectOne($c2);
+	
+	        if ($objNphiscon)
+	          $nomina = $objNphiscon->getCodnom();
+	      }
+	
+	      $sql2 = "select * from  NPVacDisfrute where CodEmp='" . $a['codemp'] .
+	      "' and PerIni='" . $perini .
+	      "' and PerFin='" . $perfin . "'";
+	
+	      Herramientas :: BuscarDatos($sql2, & $arremp2);
+	
+	      if ($arremp2) {
+	        $arremp[$i]["diasdisfutar"] = $arremp2[0]['diasdisfutar'];
+	        $arremp[$i]["diasdisfrutados"] = $arremp2[0]['diasdisfrutados'];
+	      } else {
+	        $sql3 = "select FecIng from  nphojint where CodEmp='" . $a['codemp'] . "'";
+	        Herramientas :: BuscarDatos($sql3, & $arremp3);
+	
+	        if ($arremp3) {
+	          $fechaingr = $arremp3[0]['fecing'];
+	          $anodesde = Herramientas :: obtenerDiaMesOAno($fechaingr, 'Y-m-d', 'Y');
+	          //self::obtenerAno($fechaingr,&$dia,&$mes,&$anodesde);
+	
+	          $antiguedad = $perini - $anodesde;
+	
+	        } else {
+	          $antiguedad = 0;
+	        }    
+			
+			if($antiguedad<=0)
+			{
+				$arremp[$i]["diasdisfutar"] = 0;
+		        $arremp[$i]["diasdisfrutados"] = 0;				
+			}else
+			{
+				$sql4 = "Select diadis from NPvacdiadis where Rangohasta>= " . $antiguedad .
+		        " and codnom = '" . $nomina . "'  order by rangodesde";
+		
+		        Herramientas :: BuscarDatos($sql4, & $arremp4);
+				if ($arremp4) {
+		          $arremp[$i]["diasdisfutar"] = $arremp4[0]['diadis'];
+		          $arremp[$i]["diasdisfrutados"] = 0;
+		        } else {
+		          $arremp[$i]["diasdisfutar"] = 0;
+		          $arremp[$i]["diasdisfrutados"] = 0;
+		        }	
+			}
+	
+	        
+	
+	      }
+		  if($numdia=='' || $numdia=='0')
+	      	$arremp[$i]["diaspdisfrutar"] = $arremp[$i]["diasdisfutar"] - $arremp[$i]["diasdisfrutados"];
+		  else	
+		    $arremp[$i]["diaspdisfrutar"] = $numdia;
+	      $arremp[$i]["diasdisfutar"] = Herramientas :: ToFloat($arremp[$i]["diasdisfutar"]);
+	      $arremp[$i]["diasdisfrutados"] = Herramientas :: ToFloat($arremp[$i]["diasdisfrutados"]);
+	      $arremp[$i]["diaspdisfrutar"] = Herramientas :: ToFloat($arremp[$i]["diaspdisfrutar"]);
+	      $i++;
+	
+	    }
+		
+	}
+    
+    return $arremp;
+
+  }
+  
+  public static function salvar_vaccolecti($grid,$clase)
+  {
+	 $grid0=$grid[0];
+	 foreach($grid0  as $reg)
+	 {
+	 	  if($reg['check']=='1')
+		  {
+		  	  $objNpvacsalidas = new Npvacsalidas();		  
+			  $objNpvacsalidas->setFecvac($clase->getFecvac());		  
+			  $objNpvacsalidas->setObserva($clase->getObserva());
+			  $objNpvacsalidas->setFecdes($clase->getFecdes());
+			  $objNpvacsalidas->setFechas($clase->getFechas());
+			  $objNpvacsalidas->setCodemp($reg['codemp']);
+			  $objNpvacsalidas->setDiasdisfrutar($reg['diaspdisfrutar']);		  
+			  $objNpvacsalidas->save();
+		  }
+		 	  
+	 }
+
+
+  }
 
 
 }
