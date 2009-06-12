@@ -184,10 +184,10 @@ echo input_auto_complete_tag('nppresoc[codemp]', $nppresoc->getCodemp(),
 <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </th>
 <th>
-<!--
-<?php echo "Año (365/366)"."&nbsp;&nbsp;" . radiobutton_tag('anno', '1', false) ?>
-  <?php echo "&nbsp;&nbsp;&nbsp;". "Año 360 " . radiobutton_tag('anno', '2', true)?>
--->
+
+<?php echo "Año (365/366)"."&nbsp;&nbsp;" . radiobutton_tag('anno', '365', false) ?>
+  <?php echo "&nbsp;&nbsp;&nbsp;". "Año 360 " . radiobutton_tag('anno', '360', true)?>
+
 </th>
 <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </th>
@@ -506,7 +506,7 @@ if ($nppresoc->getId()!='')
 		   'url'      => 'presnomcalintpre/ajax',
 		   'script'   => true,
 		   'complete' => 'AjaxJSON(request, json)',
-		   'with' => "'ajax=5&codemp='+$('nppresoc_codemp').value+'&feccor='+$('nppresoc_feccor').value+'&salario='+$('nppresoc_salario_P').checked+'&fecing='+$('nppresoc_fecing').value+'&capita='+$('capitalizacion').value"
+		   'with' => "'ajax=5&codemp='+$('nppresoc_codemp').value+'&feccor='+$('nppresoc_feccor').value+'&salario='+$('nppresoc_salario_P').checked+'&fecing='+$('nppresoc_fecing').value+'&capita='+$('capitalizacion').value+'&anno='+$('anno_365').checked"
 )) ?></li>
 </ul>
 
