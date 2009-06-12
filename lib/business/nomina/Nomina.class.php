@@ -6444,7 +6444,7 @@ class Nomina {
     $c->add(NpconasiPeer :: CODCON, $obj->getCodcon());
     $c->add(NpconasiPeer :: CODASI, $obj->getCodasi());
     $npfalper_del = NpconasiPeer :: doDelete($c);
-    if ($obj->getId() == '') {
+
       $c2 = new Criteria();
       $c->add(NpasiprePeer :: CODCON, $obj->getCodcon());
       $c->add(NpasiprePeer :: CODASI, $obj->getCodasi());
@@ -6454,8 +6454,9 @@ class Nomina {
       $npasipre->setCodcon($obj->getCodcon());
       $npasipre->setCodasi($obj->getCodasi());
       $npasipre->setDesasi($obj->getDesasi());
+	  $npasipre->setTipasi($obj->getTipasi());
       $npasipre->save();
-    }
+
 
     $grid = $grid_detalle[0];
     $i = 0;
@@ -6464,7 +6465,15 @@ class Nomina {
         $npconasi= new Npconasi();
         $npconasi->setCodcon($obj->getCodcon());
         $npconasi->setCodasi($obj->getCodasi());
-        $npconasi->setCodcpt($grid[$i]['codcon']);
+        $npconasi->setCodcpt($grid[$i]['codcpt']);
+		if($grid[$i]['afealibv']=='')
+			$npconasi->setAfealibv('N');
+		else
+			$npconasi->setAfealibv('S');
+		if($grid[$i]['afealibf']=='')	
+			$npconasi->setAfealibf('N');
+		else
+			$npconasi->setAfealibf('S');	
         $npconasi->save();
         $i++;
       }
