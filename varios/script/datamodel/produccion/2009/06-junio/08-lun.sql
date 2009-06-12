@@ -23,8 +23,7 @@ CREATE TABLE npprimaprofes
   grado numeric(2),
   prima numeric(14,2),
   id INTEGER  NOT NULL DEFAULT nextval('npprimaprofes_seq'::regclass)
-)
-WITH (OIDS=FALSE);
+);
 ALTER TABLE npprimaprofes OWNER TO postgres;
 
 CREATE SEQUENCE npcargoscol_seq;
@@ -35,8 +34,7 @@ CREATE TABLE npcargoscol
   descarcol varchar(100),
   prima numeric(14,2),
   id INTEGER  NOT NULL DEFAULT nextval('npcargoscol_seq'::regclass)
-)
-WITH (OIDS=FALSE);
+);
 ALTER TABLE npcargoscol OWNER TO postgres;
 
 --CARLOS RAMIREZ
@@ -53,8 +51,7 @@ CREATE TABLE nptipcat
   codtipcat character varying(4) NOT NULL,
   destipcat character varying(100) NOT NULL,
   id integer NOT NULL DEFAULT nextval('nptipcat_seq'::regclass)
-)
-WITH (OIDS=FALSE);
+);
 ALTER TABLE nptipcat OWNER TO postgres;
 
 alter table npcomocp
@@ -151,8 +148,8 @@ COMMENT ON TABLE "tsbloqban" IS '';
 ------
 ALTER TABLE "opdefemp"
   ADD COLUMN "ordret" VARCHAR(4);
-  
---CARLOS RAMIREZ  
+
+--CARLOS RAMIREZ
 alter table npasicaremp
   add column codtipded  varchar(4),
-  add column codtipcat varchar(20);    
+  add column codtipcat varchar(20);
