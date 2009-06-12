@@ -8,6 +8,8 @@ generator:
       nomcon: { name: Nombre Tip. Contrato}
       codasi: { name: Codigo de Grupo, params: maxlength=3}
       desasi: { name: Descripcion}
+      tipasi: { name: Tipo de Asignacion}
+      
     list:
       title:          Registro de Tipo de Asignaciones
       filters:        [codcon, codasi, desasi]

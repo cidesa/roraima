@@ -17,6 +17,7 @@ class presnomasiconpreActions extends autopresnomasiconpreActions
   {
     $this->npasipre= $this->getNpasipreOrCreate();
     $this->updateNpasipreFromRequest();
+	$this->arrtipasi = Constantes::Tipo_Asignaciones();
     if($this->getRequest()->getMethod() == sfRequest::POST)
     {
     $this->configGrid($this->npasipre->getCodcon(),$this->npasipre->getCodasi());
@@ -30,7 +31,7 @@ class presnomasiconpreActions extends autopresnomasiconpreActions
     if(count($x)>0)
     {
    		while ($s<count($x) and !$encontrado){
-      $cp= $x[$s]->getCodcon();
+      $cp= $x[$s]->getCodcpt();
         $j=0;
 
 	    while ($j<count($x))
@@ -43,7 +44,7 @@ class presnomasiconpreActions extends autopresnomasiconpreActions
 	        break;}
 	       else{
 
-	        $v= $x[$a]->getCodcon();
+	        $v= $x[$a]->getCodcpt();
 	      if ($cp == $v )
 	    {
 	        $this->coderror1= 428;
@@ -58,14 +59,14 @@ class presnomasiconpreActions extends autopresnomasiconpreActions
 	        }
 
 	    $j++;
-	    }}
+	    }}		
 	    $s++;}
     }else
     	$this->coderror1= 437;
 
 
 
-    }else return false;
+    }else return true;
 
    if ($this->coderror1== -1)
      return true;
@@ -105,15 +106,15 @@ public function configGrid($codcon='',$codasi='')
     $c = new Criteria();
     $c->add(NpconasiPeer::CODCON,$codcon);
     $c->add(NpconasiPeer::CODASI,$codasi);
-    $c->addJoin(NpconasiPeer::CODCPT,NpdefcptPeer::CODCON);
-    $c->addDescendingOrderByColumn(NpdefcptPeer::CODCON);
-    $per = NpdefcptPeer::doSelect($c);
+    $c->addAscendingOrderByColumn(NpconasiPeer::CODCPT);
+    $per = NpconasiPeer::doSelect($c);
 
     $opciones = new OpcionesGrid();
-    //$opciones->setEliminar(true);
-    $opciones->setTabla('npdefcpt');
+    $opciones->setEliminar(true);
+    $opciones->setTabla('npconasi');
     $opciones->setFilas(50);
-    $opciones->setAnchoGrid(500);
+    $opciones->setAnchoGrid(800);
+	$opciones->setAncho(800);
     $opciones->setTitulo('');
     $opciones->setHTMLTotalFilas(' ');
 
@@ -124,18 +125,41 @@ public function configGrid($codcon='',$codasi='')
     $col1->setEsGrabable(true);
     $col1->setAlineacionObjeto(Columna::CENTRO);
     $col1->setAlineacionContenido(Columna::CENTRO);
-    $col1->setNombreCampo('codcon');
+    $col1->setNombreCampo('codcpt');
     $col1->setCatalogo('npdefcpt','sf_admin_edit_form',array('codcon' => 1, 'nomcon' => 2),'Npdefcpt_Presnomasiconpre_codnom',$params);
     $col1->setAjax('presnomasiconpre',3,2);
+	
     $col2 =new Columna('Descripción');
     $col2->setTipo(Columna::TEXTO);
     $col2->setAlineacionObjeto(Columna::IZQUIERDA);
     $col2->setAlineacionContenido(Columna::IZQUIERDA);
-    $col2->setNombreCampo('NomCon');
-    $col2->setHTML('type="text" size="25" disabled=true');
+    $col2->setNombreCampo('nomCon');
+    $col2->setHTML('type="text" size="50" disabled=true');
+	
+	$col3 =new Columna('Afecta Alicuota Bono Vacacional');
+    $col3->setTipo(Columna::CHECK);
+	$col3->setEsGrabable(true);
+	#$col3->setCombo(array('N'=>'NO','S'=>'SI'));
+    $col3->setAlineacionObjeto(Columna::IZQUIERDA);
+    $col3->setAlineacionContenido(Columna::IZQUIERDA);
+    $col3->setNombreCampo('afealibv');
+    $col3->setHTML(' size="10"');
+    
+	
+	$col4 =new Columna('Afecta Alicuota Bono Fin de Año');
+	$col4->setTipo(Columna::CHECK);
+	$col4->setEsGrabable(true);
+	#$col4->setCombo(array('N'=>'NO','S'=>'SI'));
+    $col4->setAlineacionObjeto(Columna::IZQUIERDA);
+    $col4->setAlineacionContenido(Columna::IZQUIERDA);
+    $col4->setNombreCampo('afealibf');
+	$col4->setHTML(' size="10" ');
+    
 
     $opciones->addColumna($col1);
     $opciones->addColumna($col2);
+	$opciones->addColumna($col3);
+    $opciones->addColumna($col4);
 
     $this->obj = $opciones->getConfig($per);
 
@@ -145,6 +169,7 @@ public function configGrid($codcon='',$codasi='')
   {
     $this->npasipre = $this->getNpasipreOrCreate();
     $this->configGrid($this->npasipre->getCodcon(),$this->npasipre->getCodasi());
+	$this->arrtipasi = Constantes::Tipo_Asignaciones();	
 
     if ($this->getRequest()->getMethod() == sfRequest::POST)
     {
@@ -165,7 +190,7 @@ $this->Bitacora('Guardo');
       }
       else
       {
-        return $this->redirect('presnomasiconpre/edit?id='.$this->npasipre->getId());
+        return $this->redirect('presnomasiconpre/edit');
       }
     }
     else
@@ -179,6 +204,8 @@ $this->Bitacora('Guardo');
 
     $grid=Herramientas::CargarDatosGrid($this,$this->obj,true);//2
     Nomina::salvarpresnomasicompre($npasipre,$grid);
+	
+	return -1;
 
   }
 
@@ -295,6 +322,10 @@ public function executeAjax()
     if (isset($npasipre['desasi']))
     {
       $this->npasipre->setDesasi($npasipre['desasi']);
+    }
+	if (isset($npasipre['tipasi']))
+    {
+      $this->npasipre->setTipasi($npasipre['tipasi']);
     }
   }
  protected function getNpasipreOrCreate($id = 'id')
