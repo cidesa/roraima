@@ -675,6 +675,12 @@
 468:
   cod: 468
   msj: Grid Prima Cargo Calateral Incompleto, faltan datos
+469:
+  cod: 469
+  msj: La fecha de Solicitud no puede ser mayor que la fecha de Salida
+470:
+  cod: 470
+  msj: Grid no puede estar en blanco
 ###############OBRAS################
 1000:
     cod: 1000
