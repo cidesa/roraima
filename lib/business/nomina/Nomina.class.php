@@ -1904,16 +1904,41 @@ class Nomina {
 
       break;
 
-     case "ADIAS" :
+     case "AAPMESES" :
+        if (strrpos($fecnom, "/")) {
+          $fecaux = split("/", $fecnom);
+          $hastaaux = $fecaux[2] . '-' . $fecaux[1] . '-' . $fecaux[0];
+        } else {
+          $hastaaux = $fecnom;
+        }
 
-          $sql = "select to_date('" . $fecnom . "','yyyy-mm-dd')-to_date('" . $fechaing . "','yyyy-mm-dd') as dias from empresa";
-          if (Herramientas :: BuscarDatos($sql, & $resdias)) {
-            $valor = $resdias[0]["dias"];
-           } else
+        $sql = "select antpub('M','" . $empleado . "','" . $hastaaux . "','S') as aap from empresa;";
+        if (Herramientas :: BuscarDatos($sql, & $tabla)) {
+          if ($tabla[0]["aap"] != null && $tabla[0]["aap"] != '') {
+            $valor = $tabla[0]["aap"];
+          } else
+            $valor = 0;
+        } else
           $valor = 0;
-
         break;
 
+     case "AAPDIAS" :
+        if (strrpos($fecnom, "/")) {
+          $fecaux = split("/", $fecnom);
+          $hastaaux = $fecaux[2] . '-' . $fecaux[1] . '-' . $fecaux[0];
+        } else {
+          $hastaaux = $fecnom;
+        }
+
+        $sql = "select antpub('D','" . $empleado . "','" . $hastaaux . "','S') as aap from empresa;";
+        if (Herramientas :: BuscarDatos($sql, & $tabla)) {
+          if ($tabla[0]["aap"] != null && $tabla[0]["aap"] != '') {
+            $valor = $tabla[0]["aap"];
+          } else
+            $valor = 0;
+        } else
+          $valor = 0;
+        break;
 
       default :
         $aux = 0;
@@ -3233,14 +3258,47 @@ class Nomina {
 
       break;
 
-     case "ADIAS" :
-          $sql = "select to_date('" . $fecnom . "','yyyy-mm-dd')-to_date('" . $fechaing . "','yyyy-mm-dd') as dias from empresa";
-          if (Herramientas :: BuscarDatos($sql, & $resdias)) {
-            $valor = $resdias[0]["dias"];
-           } else
+      case "AAPMESES" :
+
+        if (strrpos($hasta, "/")) {
+          $fecaux = split("/", $hasta);
+          $hastaaux = $fecaux[2] . '-' . $fecaux[1] . '-' . $fecaux[0];
+        } else {
+          $hastaaux = $hasta;
+        }
+
+        $sql = "select antpub('M','" . $empleado . "','" . $hastaaux . "','S') as aap from empresa;";
+        if (Herramientas :: BuscarDatos($sql, & $tabla)) {
+          if ($tabla[0]["aap"] != null && $tabla[0]["aap"] != '') {
+            $valor = $tabla[0]["aap"];
+          } else
+            $valor = 0;
+        } else
           $valor = 0;
+
+        return $valor;
         break;
 
+
+      case "AAPDIAS" :
+        if (strrpos($hasta, "/")) {
+          $fecaux = split("/", $hasta);
+          $hastaaux = $fecaux[2] . '-' . $fecaux[1] . '-' . $fecaux[0];
+        } else {
+          $hastaaux = $hasta;
+        }
+
+        $sql = "select antpub('D','" . $empleado . "','" . $hastaaux . "','S') as aap from empresa;";
+        if (Herramientas :: BuscarDatos($sql, & $tabla)) {
+          if ($tabla[0]["aap"] != null && $tabla[0]["aap"] != '') {
+            $valor = $tabla[0]["aap"];
+          } else
+            $valor = 0;
+        } else
+          $valor = 0;
+
+        return $valor;
+        break;
 
       default :
         /////// FFRAC
