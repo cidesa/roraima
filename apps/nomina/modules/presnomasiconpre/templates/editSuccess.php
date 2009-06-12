@@ -17,7 +17,7 @@ array()) ?></h1>
 
 <div id="sf_admin_content">
 <?php include_partial('presnomasiconpre/edit_messages', array('npasipre' => $npasipre, 'labels' => $labels)) ?>
-<?php include_partial('presnomasiconpre/edit_form', array('npasipre' => $npasipre, 'labels' => $labels, 'obj' => $obj)) ?>
+<?php include_partial('presnomasiconpre/edit_form', array('npasipre' => $npasipre, 'labels' => $labels, 'obj' => $obj, 'arrtipasi' => $arrtipasi)) ?>
 </div>
 
 <div id="sf_admin_footer">

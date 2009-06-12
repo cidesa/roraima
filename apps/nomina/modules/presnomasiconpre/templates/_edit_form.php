@@ -86,6 +86,16 @@
 
 ?>
     </div>
+	
+  <?php echo label_for('npasipre[tipasi]', __($labels['npasipre{tipasi}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('npasipre{tipasi}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npasipre{tipasi}')): ?>
+    <?php echo form_error('npasipre{tipasi}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+  
+  <?php echo select_tag('npasipre[tipasi]', options_for_select($arrtipasi,$npasipre->getTipasi()),array(
+	    ));?> 	
+    </div>	
 </div>
 </fieldset>
 
