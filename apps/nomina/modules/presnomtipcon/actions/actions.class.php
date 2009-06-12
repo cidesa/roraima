@@ -304,7 +304,6 @@ class presnomtipconActions extends autopresnomtipconActions
 	    $col7->setAlineacionContenido(Columna::DERECHA);
 	    $col7->setEsGrabable(true);
 	    $col7->setNombreCampo('Calinc');
-	    $col7->setOculta(true);
 	    $col7->setHTML(' ');
 
 		$col8 = new Columna('Antiguedad A.P.');
