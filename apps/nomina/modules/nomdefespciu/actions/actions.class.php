@@ -100,12 +100,14 @@ $this->Bitacora('Guardo');
       case '2':
         $dato="";
 		$c= new Criteria();
+
         $c->add(NpestadoPeer::CODPAI,$this->getRequestParameter('pais'));
         $c->add(NpestadoPeer::CODEDO,$this->getRequestParameter('codigo'));
         $datos= NpestadoPeer::doSelectOne($c);
         if ($datos)
         {
-         $dato=NpestadoPeer::getNomedo($this->getRequestParameter('codigo'));
+         $dato=$datos->getNomedo();
+         //$dato=NpestadoPeer::getNomedo($this->getRequestParameter('codigo'));
          $existe='S';
         }
         else

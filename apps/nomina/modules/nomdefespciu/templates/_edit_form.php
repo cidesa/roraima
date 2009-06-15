@@ -15,7 +15,7 @@
 <div class="form-row">
 
 <fieldset id="sf_fieldset_none" class="">
-<legend><?php echo __('Estado')?></legend>
+<legend><h2><?php echo __('Estado')?></h2></legend>
 <div class="form-row">
   <?php echo label_for('npciudad[codpai]', __($labels['npciudad{codpai}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('npciudad{codpai}')): ?> form-error<?php endif; ?>">
@@ -61,7 +61,7 @@
 
 
 <fieldset id="sf_fieldset_none" class="">
-<legend><?php echo __('Municipio')?></legend>
+<legend><h2><?php echo __('Municipio')?></h2></legend>
 <div class="form-row">
   <?php echo label_for('npciudad[codedo]', __($labels['npciudad{codedo}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('npciudad{codedo}')): ?> form-error<?php endif; ?>">
@@ -106,7 +106,7 @@
 <br>
 
 <fieldset id="sf_fieldset_none" class="">
-<legend><?php echo __('Parroquia')?></legend>
+<legend><h2><?php echo __('Parroquia')?></h2></legend>
 <div class="form-row">
   <?php echo label_for('npciudad[codciu]', __($labels['npciudad{codciu}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('npciudad{codciu}')): ?> form-error<?php endif; ?>">
