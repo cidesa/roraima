@@ -6619,7 +6619,14 @@ class Nomina {
         $npsalint->setMonasi($x[$j][$arr_codasi[$h]["codasi"]]);
         $npsalint->setFecinicon($fechaini);
         $npsalint->setFecfincon($fechafin);
-        $npsalint->setCodcon($cod);
+		$r = new Criteria();
+		$r->add(NpasiempcontPeer::CODEMP,$x[$j]["codemp"]);
+		$r->add(NpasiempcontPeer::STATUS,'A');
+		$per2 = NpasiempcontPeer::doSelectOne($r);
+		if($per2)
+			$npsalint->setCodcon($per2->getCodtipcon());	
+		else
+			$npsalint->setCodcon($cod);		
         $npsalint->save();
         //print "<br> A grabar, codemp ".$x[$j]["codemp"]." Cod Asi ".$arr_codasi[$h]["codasi"]. " Monasi ".$x[$j][$arr_codasi[$h]["codasi"]];
         $h++;
@@ -6631,9 +6638,18 @@ class Nomina {
 
  public static function salvarNpsalintind($npsalint, $grid) {
 
-    $x = $grid[0];
 
-    $codcon = $npsalint->getCodcon();
+
+    $x = $grid[0];
+	$r = new Criteria();
+	$r->add(NpasiempcontPeer::CODEMP,$npsalint->getCodemp());
+	$r->add(NpasiempcontPeer::STATUS,'A');
+	$per2 = NpasiempcontPeer::doSelectOne($r);
+	if($per2)
+		$codcon = $per2->getCodtipcon();	
+	else
+		$codcon = $npsalint->getCodcon();
+		    
     $codemp = $npsalint->getCodemp();
     $arr_codasi = array ();
     $sqlCodAsi = "Select codasi  from Npasipre where codcon='$codcon'";
