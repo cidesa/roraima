@@ -38,9 +38,9 @@ class presnomintfecrefActions extends autopresnomintfecrefActions
 	  	  $pro= $this->npintfecref->getTasintpro();
   	  	  $act= $this->npintfecref->getTasintact();
   	  	  $pas= $this->npintfecref->getTasintpas();
-	  	   if (($pro == null) or ($act == null) or ($pas == null) )
+	  	   if (($pro == null) and ($act == null) and ($pas == null) )
 	  	   {
-	  	   self::$coderror= 432;
+	  	   self::$coderror= 432; 
 
 	  	   }
 	  	}
@@ -68,7 +68,7 @@ class presnomintfecrefActions extends autopresnomintfecrefActions
 
 	  $err = Herramientas::obtenerMensajeError(self::$coderror);
 
-	  $this->getRequest()->setError('npintfecref{feciniref}',$err);
+	  $this->getRequest()->setError('',$err);
 	  //$this->getRequest()->setError('npintfecref{fecfinref}',$err);
         }
        return sfView::SUCCESS;
