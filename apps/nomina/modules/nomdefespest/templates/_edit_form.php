@@ -12,10 +12,7 @@
 <?php echo javascript_include_tag('tools','dFilter','ajax') ?>
 
 <fieldset id="sf_fieldset_none" class="">
-<div class="form-row">
-
-<fieldset id="sf_fieldset_none" class="">
-<legend><?php echo __('Estado')?></legend>
+<legend><h2><?php echo __('Estado')?></h2></legend>
 <div class="form-row">
   <?php echo label_for('npestado[codpai]', __($labels['npestado{codpai}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('npestado{codpai}')): ?> form-error<?php endif; ?>">
@@ -60,7 +57,7 @@
 <br>
 
 <fieldset id="sf_fieldset_none" class="">
-<legend><?php echo __('Municipio')?></legend>
+<legend><h2><?php echo __('Municipio')?></h2></legend>
 <div class="form-row">
   <?php echo label_for('npestado[codedo]', __($labels['npestado{codedo}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('npestado{codedo}')): ?> form-error<?php endif; ?>">
@@ -91,8 +88,6 @@
   'control_name' => 'npestado[nomedo]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
-</div>
-</fieldset>
 </div>
 </fieldset>
 
