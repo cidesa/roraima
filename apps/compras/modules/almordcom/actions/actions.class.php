@@ -221,7 +221,6 @@ class almordcomActions extends autoalmordcomActions
           $this->configGrid_Recargos($this->getRequestParameter('caordcom[refsol]'),$this->getRequestParameter('caordcom[rifpro]'));
         else
           $this->configGrid_Recargos($this->getRequestParameter('caordcom[ordcom]'),'0');*/
-
         $this->configGridRecargo();
         $this->configGrid_Resumen($this->getRequestParameter('caordcom[ordcom]'));
         $this->configGrid_ResumenPartidas($this->getRequestParameter('caordcom[ordcom]'));
@@ -729,7 +728,15 @@ class almordcomActions extends autoalmordcomActions
     $col12 = clone $col6;
     $col12->setTitulo('Monto Recargo');
     $col12->setNombreCampo($campo_col12);
-    if ($referencia==0) $col12->setHTML('type="text" size="10" readonly=true');
+    if ($referencia==0)
+    {
+      if ($this->deshabmonrec=='S')
+      {
+      	$col12->setHTML('type="text" size="10"');
+      }else {
+      	$col12->setHTML('type="text" size="10" readonly=true');
+      }
+    }
     $col12->setEsTotal(true,'caordcom_totrecargo');
 
     $col13 = clone $col6;
@@ -1190,7 +1197,12 @@ class almordcomActions extends autoalmordcomActions
     $col3->setAlineacionObjeto(Columna::DERECHA);
     $col3->setNombreCampo('recargototal');
     $col3->setEsNumerico(true);
+    if ($this->deshabmonrec=='S')
+    {
+    	$col3->setHTML('type="text" size="10"');
+    }else {
     $col3->setHTML('type="text" size="10" readonly=true');
+    }
     //$col3->setJScript('onKeypress="entermonto_r(event,this.id);actualizar_calculo_grid_recargo_por_fila();"');
     $col3->setEsTotal(true,'sumatoria_recargos');
 
@@ -1498,6 +1510,18 @@ class almordcomActions extends autoalmordcomActions
   {
     $this->mascaraarticulo = Herramientas::getMascaraArticulo();
     $this->formatocategoria = Herramientas::getObtener_FormatoCategoria();
+    $this->deshabmonrec="";
+    $varemp = $this->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('compras',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
+	     if(array_key_exists('almordcom',$varemp['aplicacion']['compras']['modulos']))
+	       if(array_key_exists('deshabilmonrec',$varemp['aplicacion']['compras']['modulos']['almordcom']))
+	       {
+	       	$this->deshabmonrec=$varemp['aplicacion']['compras']['modulos']['almordcom']['deshabilmonrec'];
+	       }
+
   }
 
   public function executeAutocomplete()
@@ -2006,6 +2030,7 @@ class almordcomActions extends autoalmordcomActions
   {
   if ($this->getRequestParameter('ajax')=='1')
   {
+  	$this->setVars();
     $cajtexmos=$this->getRequestParameter('cajtexmos');
     $numfilas=$this->getRequestParameter('numfilas');
     $parcial=$this->getRequestParameter('parcial');
@@ -2267,7 +2292,12 @@ class almordcomActions extends autoalmordcomActions
        $col5->setNombreCampo('monrgo');
        $col5->setEsNumerico(true);
        $col5->setHTML('type="text" size="25"');
-       $col5->setJScript('readOnly=true; onKeyPress="javascript:if (event.keyCode==13 || event.keyCode==9) {actualizarsaldos_r();} "');
+       if ($this->deshabmonrec=='S')
+       {
+       $col5->setJScript('onKeyPress="javascript:if (event.keyCode==13 || event.keyCode==9) {actualizarsaldos_r();} "');
+       }else {
+       	$col5->setJScript('readOnly=true; onKeyPress="javascript:if (event.keyCode==13 || event.keyCode==9) {actualizarsaldos_r();} "');
+       }
        $col5->setEsTotal(true,'totrecar');
 
        $col6 = new Columna('Partida');
@@ -2347,7 +2377,12 @@ class almordcomActions extends autoalmordcomActions
         $col5->setAlineacionObjeto(Columna::DERECHA);
         $col5->setNombreCampo('monrgo');
         $col5->setEsNumerico(true);
-        $col5->setHTML('type="text" size="25" readonly="true"');
+        if ($this->deshabmonrec=='S')
+        {
+          $col5->setHTML('type="text" size="25" ');
+        }else {
+          $col5->setHTML('type="text" size="25" readonly="true"');
+        }
         $col5->setJScript('onKeypress="entermonto_b(event,this.id);"');
         $col5->setEsTotal(true,'totrecar');
 
@@ -2377,6 +2412,7 @@ class almordcomActions extends autoalmordcomActions
       $nuevo=$this->getRequestParameter('nuevo');
       $refsol=$this->getRequestParameter('refsol');
       $ordcom=$this->getRequestParameter('ordcom');
+      $this->setVars();
 
 
       if ($nuevo=='S')
