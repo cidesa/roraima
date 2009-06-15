@@ -117,7 +117,7 @@ $this->Bitacora('Guardo');
     switch ($ajax){
       case '1':
         $dato=NppaisPeer::getNompai($this->getRequestParameter('codigo'));
-        $output = '[["'.$cajtexmos.'","'.$dato.'"]]';
+        $output = '[["'.$cajtexmos.'","'.$dato.'"],["npestado_codpai","4","c"]]';
         break;
       default:
         $output = '[["","",""],["","",""],["","",""]]';
@@ -143,11 +143,11 @@ protected function updateNpestadoFromRequest()
 
     if (isset($npestado['codpai']))
     {
-    $this->npestado->setCodpai(str_pad($npestado['codpai'], 4, '0', STR_PAD_LEFT));
+      $this->npestado->setCodpai(str_pad($npestado['codpai'], 4, '0', STR_PAD_LEFT));
     }
     if (isset($npestado['codedo']))
     {
-      $this->npestado->setCodedo($npestado['codedo']);
+      $this->npestado->setCodedo(str_pad($npestado['codedo'], 4, '0', STR_PAD_LEFT));
     }
     if (isset($npestado['nomedo']))
     {
