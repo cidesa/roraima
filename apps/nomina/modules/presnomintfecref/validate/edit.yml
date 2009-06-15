@@ -18,18 +18,18 @@ names:
     validators: lastDay
 
   npintfecref{tasintact}:
-    required:  Yes
-    required_msg: La Fecha no puede estar en Blanco
+    required:  No
+    required_msg: Tasa de Interes Activa no puede estar en blanco
     validators: MyNumberValidator
 
   npintfecref{tasintpas}:
-    required:  Yes
-    required_msg: La Fecha no puede estar en Blanco
+    required:  No
+    required_msg: Tasa de Interes Pasiva no puede estar en blanco
     validators: MyNumberValidator
 
   npintfecref{tasintpro}:
-    required:  Yes
-    required_msg: La Fecha no puede estar en Blanco
+    required:  No
+    required_msg: Tasa de Interes Promedio no puede estar en blanco
     validators: MyNumberValidator
 
 firstDay:
