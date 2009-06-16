@@ -683,7 +683,7 @@
 					$('histoculto').hide();
 					$('idlabel').show();
 
-					$('label1').innerHTML = "Introduzca una edad valida para la funcion    "+cod+":    ";
+					$('label1').innerHTML = "Introduzca la cantidad de meses hacia atras para la funcion "+cod+":    ";
 					$('textooculto1').show();
 					$('idlabel').value='';
 					$('cajaux').value=cod;
