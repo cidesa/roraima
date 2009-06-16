@@ -75,6 +75,10 @@ propel:
       size: 14
       scale: 2
       required: true
+    observacion:
+      type: VARCHAR
+      size: 100
+      ##primaryKey: true      
     id:
       type: INTEGER
       required: true
@@ -189,7 +193,7 @@ propel:
       type: VARCHAR
       size: 4
       ##required: true
-      ##primaryKey: true            
+      ##primaryKey: true
     id:
       type: INTEGER
       required: true
@@ -648,12 +652,12 @@ propel:
     fechas:
       type: DATE
       required: true
-      ##primaryKey: true            
+      ##primaryKey: true
     status:
       type: VARCHAR
       size: 1
       required: true
-      ##primaryKey: true                  
+      ##primaryKey: true
     id:
       type: INTEGER
       required: true
@@ -695,7 +699,7 @@ propel:
     tipasi:
       type: VARCHAR
       size: 1
-      required: true      
+      required: true
     id:
       type: INTEGER
       required: true
@@ -1090,11 +1094,11 @@ propel:
     canhom:
       type: NUMERIC
       size: 6
-      scale: 0            
+      scale: 0
     canmuj:
       type: NUMERIC
       size: 6
-      scale: 0                        
+      scale: 0
     id:
       type: INTEGER
       required: true
@@ -1554,7 +1558,7 @@ propel:
       size: 1
     afealibf:
       type: VARCHAR
-      size: 1            
+      size: 1
     id:
       type: INTEGER
       required: true
@@ -2717,7 +2721,7 @@ propel:
     montopres:
       type: NUMERIC
       size: 14
-      scale: 2      
+      scale: 2
     id:
       type: INTEGER
       required: true
@@ -5850,8 +5854,8 @@ propel:
       size: 3
     fid:
       type: VARCHAR
-      size: 1  
-    fecdes: DATE  
+      size: 1
+    fecdes: DATE
     id:
       type: INTEGER
       required: true
@@ -6654,11 +6658,11 @@ propel:
       type: DATE
     tiptas:
       type: VARCHAR
-      size: 1  
+      size: 1
     id:
       type: INTEGER
       required: true
-      autoIncrement: true      
+      autoIncrement: true
   npdiaantper:
     #_attributes:
       #idMethod: native
@@ -6676,7 +6680,7 @@ propel:
     id:
       type: INTEGER
       required: true
-      autoIncrement: true            
+      autoIncrement: true
   npprimashijos:
     #_attributes:
       #idMethod: native
@@ -6698,12 +6702,12 @@ propel:
       size: 14
       scale: 2
     estudios:
-      type: VARCHAR  
+      type: VARCHAR
       size: 1
     id:
       type: INTEGER
       required: true
-      autoIncrement: true                  
+      autoIncrement: true
   npprimaprofes:
     #_attributes:
       #idMethod: native
@@ -6718,7 +6722,7 @@ propel:
     id:
       type: INTEGER
       required: true
-      autoIncrement: true                        
+      autoIncrement: true
   npcargoscol:
     #_attributes:
       #idMethod: native
@@ -6731,11 +6735,11 @@ propel:
     prima:
       type: NUMERIC
       size: 14
-      scale: 2      
+      scale: 2
     id:
       type: INTEGER
       required: true
-      autoIncrement: true                              
+      autoIncrement: true
   nptipcat:
     #_attributes:
       #idMethod: native
@@ -6751,4 +6755,4 @@ propel:
     id:
       type: INTEGER
       required: true
-      autoIncrement: true      
+      autoIncrement: true
