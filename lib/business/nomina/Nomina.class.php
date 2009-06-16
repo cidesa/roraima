@@ -1892,8 +1892,8 @@ class Nomina {
           {
             $valor = 0;
           }*/
-        $nromes=$parametro;
-        $criterio = "Select coalesce(SUM(a.Monto),0) as campo from npHISCON A,NPCONSALINT B,NPNOMINA C where  A.CODCON=B.CODCON  and a.codemp='" . $empleado . "' AND  a.codNOM='" . $nomina . "' and  b.codNOM='" . $nomina . "' and a.codnom=c.codnom and a.codnom=b.codnom and TO_CHAR(A.FECNOM,'MM-yyyy')=LPAD(TRIM(to_char(to_number(to_char(c.profec,'MM'),'99')-" . $nromes . ",'99')),2,'0')  ";
+        $nromes=intval($parametro);
+        $criterio = "Select coalesce(SUM(a.Monto),0) as campo from npHISCON A,NPCONSALINT B,NPNOMINA C where  A.CODCON=B.CODCON  and a.codemp='" . $empleado . "' AND  a.codNOM='" . $nomina . "' and  b.codNOM='" . $nomina . "' and a.codnom=c.codnom and a.codnom=b.codnom and TO_CHAR(A.FECNOM,'MM-yyyy')=(LPAD(TRIM(to_char(to_number(to_char(c.profec,'MM'),'99')-$nromes,'99')),2,'0')||'-'||TO_CHAR(c.profec,'yyyy'))  ";
         if (Herramientas :: BuscarDatos($criterio, & $tabla)) {
            $valor = $tabla[0]["campo"];
         }
@@ -3246,8 +3246,8 @@ class Nomina {
       break;
 
      case "SIMESDAD" :
-        $nromes=$parametro;
-        $criterio = "Select coalesce(SUM(a.Monto),0) as campo from npHISCON A,NPCONSALINT B,NPNOMINA C where  A.CODCON=B.CODCON  and a.codemp='" . $empleado . "' AND  a.codNOM='" . $nomina . "' and  b.codNOM='" . $nomina . "' and a.codnom=c.codnom and a.codnom=b.codnom and TO_CHAR(A.FECNOM,'MM-yyyy')=LPAD(TRIM(to_char(to_number(to_char(c.profec,'MM'),'99')-" . $nromes . ",'99')),2,'0')  ";
+        $nromes=intval($parametro);
+        $criterio = "Select coalesce(SUM(a.Monto),0) as campo from npHISCON A,NPCONSALINT B,NPNOMINA C where  A.CODCON=B.CODCON  and a.codemp='" . $empleado . "' AND  a.codNOM='" . $nomina . "' and  b.codNOM='" . $nomina . "' and a.codnom=c.codnom and a.codnom=b.codnom and TO_CHAR(A.FECNOM,'MM-yyyy')=(LPAD(TRIM(to_char(to_number(to_char(c.profec,'MM'),'99')-$nromes,'99')),2,'0')||'-'||TO_CHAR(c.profec,'yyyy')) ";
         if (Herramientas :: BuscarDatos($criterio, & $tabla)) {
            $valor = $tabla[0]["campo"];
         }
@@ -6470,10 +6470,10 @@ class Nomina {
 			$npconasi->setAfealibv('N');
 		else
 			$npconasi->setAfealibv('S');
-		if($grid[$i]['afealibf']=='')	
+		if($grid[$i]['afealibf']=='')
 			$npconasi->setAfealibf('N');
 		else
-			$npconasi->setAfealibf('S');	
+			$npconasi->setAfealibf('S');
         $npconasi->save();
         $i++;
       }
@@ -6624,9 +6624,9 @@ class Nomina {
 		$r->add(NpasiempcontPeer::STATUS,'A');
 		$per2 = NpasiempcontPeer::doSelectOne($r);
 		if($per2)
-			$npsalint->setCodcon($per2->getCodtipcon());	
+			$npsalint->setCodcon($per2->getCodtipcon());
 		else
-			$npsalint->setCodcon($cod);		
+			$npsalint->setCodcon($cod);
         $npsalint->save();
         //print "<br> A grabar, codemp ".$x[$j]["codemp"]." Cod Asi ".$arr_codasi[$h]["codasi"]. " Monasi ".$x[$j][$arr_codasi[$h]["codasi"]];
         $h++;
@@ -6646,10 +6646,10 @@ class Nomina {
 	$r->add(NpasiempcontPeer::STATUS,'A');
 	$per2 = NpasiempcontPeer::doSelectOne($r);
 	if($per2)
-		$codcon = $per2->getCodtipcon();	
+		$codcon = $per2->getCodtipcon();
 	else
 		$codcon = $npsalint->getCodcon();
-		    
+
     $codemp = $npsalint->getCodemp();
     $arr_codasi = array ();
     $sqlCodAsi = "Select codasi  from Npasipre where codcon='$codcon'";
