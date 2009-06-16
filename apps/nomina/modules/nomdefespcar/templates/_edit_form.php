@@ -15,7 +15,7 @@
 <fieldset id="sf_fieldset_none" class="">
 <div class="form-row">
 <fieldset id="sf_fieldset_none" class="">
-<legend><?php echo __('Cargo')?></legend>
+<legend><h2><?php echo __('Cargo')?></h2></legend>
 <div class="form-row">
   <?php echo label_for('npcargos[codcar]', __($labels['npcargos{codcar}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('npcargos{codcar}')): ?> form-error<?php endif; ?>">
@@ -59,6 +59,7 @@
     'nomdefespcar/autocomplete?ajax=1',  array(
     'autocomplete' => 'off',
     'maxlength' => 3,
+    'size' => 3,
     'onBlur'=> remote_function(array(
         'url'      => 'nomdefespcar/ajax',
         'complete' => 'AjaxJSON(request, json)',
@@ -71,7 +72,7 @@
 &nbsp;
 <?php $value = object_input_tag($npcargos, 'getNomtip', array (
   'readonly' => true,
-  'size'=> 50,
+  'size'=> 66,
   'control_name' => 'npcargos[nomtip]',
 )); echo $value ? $value : '&nbsp;' ?>
 
@@ -86,7 +87,7 @@
   <?php endif; ?>
 
 <?php echo input_auto_complete_tag('npcargos[graocp]', $npcargos->getGraocp(),
-    'nomdefespcar/autocomplete?ajax=2',  array('autocomplete' => 'off','maxlength' => 3,
+    'nomdefespcar/autocomplete?ajax=2',  array('autocomplete' => 'off','maxlength' => 3, 'size' => 3,
   'onBlur'=> remote_function(array(
         'url'      => 'nomdefespcar/ajax',
         'complete' => 'AjaxJSON(request, json)',
@@ -94,14 +95,14 @@
         ))),
      array('use_style' => 'true')
   )
-?> &nbsp;&nbsp;&nbsp;
+?> &nbsp;&nbsp;
 <?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo')."/metodo/Npcargos_nomdefespcar/clase/Npcomocp/frame/sf_admin_edit_form/obj1/npcargos_graocp/obj2/npcargos_suecar/campo1/gracar/campo2/suecar/param1/'+$('npcargos_codtip').value+'")?>
 
     </div>
 
 <br>
 
-<table>
+<table cellpadding="0" cellspacing="0">
 	<tr>
 		<td>
 			<?php echo label_for('npcargos[suecar]', __($labels['npcargos{suecar}']), 'class="required" ') ?>
@@ -109,7 +110,7 @@
 			  <?php if ($sf_request->hasError('npcargos{suecar}')): ?>
 			    <?php echo form_error('npcargos{suecar}', array('class' => 'form-error-msg')) ?>
 			  <?php endif; ?>
-			
+
 			  <?php $value = object_input_tag($npcargos, array('getSuecar',true), array (
 			  'size' => 7,
 			  'maxlength' => 21,
@@ -124,7 +125,7 @@
 			  <?php if ($sf_request->hasError('npcargos{comcar}')): ?>
 			    <?php echo form_error('npcargos{comcar}', array('class' => 'form-error-msg')) ?>
 			  <?php endif; ?>
-			
+
 			  <?php $value = object_input_tag($npcargos, array('getComcar',true), array (
 			  'size' => 7,
 			  'maxlength' => 21,
@@ -139,7 +140,7 @@
 			  <?php if ($sf_request->hasError('npcargos{pricar}')): ?>
 			    <?php echo form_error('npcargos{pricar}', array('class' => 'form-error-msg')) ?>
 			  <?php endif; ?>
-			
+
 			  <?php $value = object_input_tag($npcargos, array('getPricar',true), array (
 			  'size' => 7,
 			  'maxlength' => 21,
@@ -148,7 +149,7 @@
 			)); echo $value ? $value : '&nbsp;' ?>
 			    </div>
 		</td>
-	</tr>	
+	</tr>
 	<tr>
 		<td>
 			<?php echo label_for('npcargos[canmuj]', __($labels['npcargos{canmuj}']), 'class="required" ') ?>
@@ -156,7 +157,7 @@
 			  <?php if ($sf_request->hasError('npcargos{canmuj}')): ?>
 			    <?php echo form_error('npcargos{canmuj}', array('class' => 'form-error-msg')) ?>
 			  <?php endif; ?>
-			
+
 			  <?php $value = object_input_tag($npcargos, array('getCanmuj',true), array (
 			  'size' => 7,
 			  'maxlength' => 21,
@@ -168,16 +169,46 @@
 			  <?php if ($sf_request->hasError('npcargos{canhom}')): ?>
 			    <?php echo form_error('npcargos{canhom}', array('class' => 'form-error-msg')) ?>
 			  <?php endif; ?>
-			
+
 			  <?php $value = object_input_tag($npcargos, array('getCanhom',true), array (
 			  'size' => 7,
 			  'maxlength' => 21,
-			  'control_name' => 'npcargos[canhom]', 
-			)); echo $value ? $value : '&nbsp;'?> 
-		</td>			
+			  'control_name' => 'npcargos[canhom]',
+			)); echo $value ? $value : '&nbsp;'?>
+		</td>
 	</tr>
+
+	<tr>
+		<td>
+			<?php echo label_for('npcargos[carvan]', __($labels['npcargos{carvan}']), 'class="required" ') ?>
+			  <div class="content<?php if ($sf_request->hasError('npcargos{carvan}')): ?> form-error<?php endif; ?>">
+			  <?php if ($sf_request->hasError('npcargos{carvan}')): ?>
+			    <?php echo form_error('npcargos{carvan}', array('class' => 'form-error-msg')) ?>
+			  <?php endif; ?>
+
+			  <?php $value = object_input_tag($npcargos, array('getCarvan',true), array (
+			  'size' => 6,
+			  'maxlength' => 6,
+			  'control_name' => 'npcargos[carvan]',
+			)); echo $value ? $value : '&nbsp;' ?>
+		</td>
+		<td><?php echo label_for('npcargos[carasi]', __($labels['npcargos{carasi}']), 'class="required" ') ?>
+			  <div class="content<?php if ($sf_request->hasError('npcargos{carasi}')): ?> form-error<?php endif; ?>">
+			  <?php if ($sf_request->hasError('npcargos{carasi}')): ?>
+			    <?php echo form_error('npcargos{carasi}', array('class' => 'form-error-msg')) ?>
+			  <?php endif; ?>
+
+			  <?php $value = object_input_tag($npcargos, array('getCarasi',true), array (
+			  'size' => 6,
+			  'maxlength' => 6,
+			  'disabled' => "true",
+			  'control_name' => 'npcargos[carasi]',
+			)); echo $value ? $value : '&nbsp;'?>
+		</td>
+	</tr>
+
 </table>
-  
+
 
 
 <br>
@@ -195,7 +226,7 @@
 </th>
 <th>
 <fieldset id="sf_fieldset_none" class="">
-<legend><?php echo __('Puntuación Mínima para optar por el Cargo')?></legend>
+<legend><h2><?php echo __('Puntuación Mínima para optar por el Cargo')?></h2></legend>
 <div class="form-row" align="center">
   <?php $value = object_input_tag($npcargos, array('getPunmin',true), array (
   'size' => 15,
@@ -210,7 +241,7 @@
 </th>
 <th>
 <fieldset id="sf_fieldset_none" class="">
-<legend><?php echo __('Categoría del Cargo')?></legend>
+<legend><h2><?php echo __('Categoría del Cargo')?></h2></legend>
 <div class="form-row" align="center">
 <?php  if($npcargos->getStacar()=='O') $val = true; else $val=false; ?>
   <?php echo "Empleado ".radiobutton_tag('npcargos[stacar]', 'E', !$val).'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'?>
