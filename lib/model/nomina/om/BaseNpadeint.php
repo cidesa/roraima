@@ -25,6 +25,10 @@ abstract class BaseNpadeint extends BaseObject  implements Persistent {
 
 
 	
+	protected $observacion;
+
+
+	
 	protected $id;
 
 	
@@ -75,6 +79,13 @@ abstract class BaseNpadeint extends BaseObject  implements Persistent {
 
     if($val) return number_format($this->monade,2,',','.');
     else return $this->monade;
+
+  }
+  
+  public function getObservacion()
+  {
+
+    return trim($this->observacion);
 
   }
   
@@ -132,6 +143,16 @@ abstract class BaseNpadeint extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setObservacion($v)
+	{
+
+    if ($this->observacion !== $v) {
+        $this->observacion = $v;
+        $this->modifiedColumns[] = NpadeintPeer::OBSERVACION;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -154,7 +175,9 @@ abstract class BaseNpadeint extends BaseObject  implements Persistent {
 
       $this->monade = $rs->getFloat($startcol + 3);
 
-      $this->id = $rs->getInt($startcol + 4);
+      $this->observacion = $rs->getString($startcol + 4);
+
+      $this->id = $rs->getInt($startcol + 5);
 
       $this->resetModified();
 
@@ -162,7 +185,7 @@ abstract class BaseNpadeint extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 5; 
+            return $startcol + 6; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Npadeint object", $e);
     }
@@ -322,6 +345,9 @@ abstract class BaseNpadeint extends BaseObject  implements Persistent {
 				return $this->getMonade();
 				break;
 			case 4:
+				return $this->getObservacion();
+				break;
+			case 5:
 				return $this->getId();
 				break;
 			default:
@@ -338,7 +364,8 @@ abstract class BaseNpadeint extends BaseObject  implements Persistent {
 			$keys[1] => $this->getCodemp(),
 			$keys[2] => $this->getFecade(),
 			$keys[3] => $this->getMonade(),
-			$keys[4] => $this->getId(),
+			$keys[4] => $this->getObservacion(),
+			$keys[5] => $this->getId(),
 		);
 		return $result;
 	}
@@ -367,6 +394,9 @@ abstract class BaseNpadeint extends BaseObject  implements Persistent {
 				$this->setMonade($value);
 				break;
 			case 4:
+				$this->setObservacion($value);
+				break;
+			case 5:
 				$this->setId($value);
 				break;
 		} 	}
@@ -380,7 +410,8 @@ abstract class BaseNpadeint extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[1], $arr)) $this->setCodemp($arr[$keys[1]]);
 		if (array_key_exists($keys[2], $arr)) $this->setFecade($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setMonade($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setId($arr[$keys[4]]);
+		if (array_key_exists($keys[4], $arr)) $this->setObservacion($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setId($arr[$keys[5]]);
 	}
 
 	
@@ -392,6 +423,7 @@ abstract class BaseNpadeint extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(NpadeintPeer::CODEMP)) $criteria->add(NpadeintPeer::CODEMP, $this->codemp);
 		if ($this->isColumnModified(NpadeintPeer::FECADE)) $criteria->add(NpadeintPeer::FECADE, $this->fecade);
 		if ($this->isColumnModified(NpadeintPeer::MONADE)) $criteria->add(NpadeintPeer::MONADE, $this->monade);
+		if ($this->isColumnModified(NpadeintPeer::OBSERVACION)) $criteria->add(NpadeintPeer::OBSERVACION, $this->observacion);
 		if ($this->isColumnModified(NpadeintPeer::ID)) $criteria->add(NpadeintPeer::ID, $this->id);
 
 		return $criteria;
@@ -430,6 +462,8 @@ abstract class BaseNpadeint extends BaseObject  implements Persistent {
 		$copyObj->setFecade($this->fecade);
 
 		$copyObj->setMonade($this->monade);
+
+		$copyObj->setObservacion($this->observacion);
 
 
 		$copyObj->setNew(true);

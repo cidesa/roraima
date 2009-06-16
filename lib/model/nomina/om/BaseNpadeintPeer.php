@@ -13,7 +13,7 @@ abstract class BaseNpadeintPeer {
 	const CLASS_DEFAULT = 'lib.model.nomina.Npadeint';
 
 	
-	const NUM_COLUMNS = 5;
+	const NUM_COLUMNS = 6;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -32,6 +32,9 @@ abstract class BaseNpadeintPeer {
 	const MONADE = 'npadeint.MONADE';
 
 	
+	const OBSERVACION = 'npadeint.OBSERVACION';
+
+	
 	const ID = 'npadeint.ID';
 
 	
@@ -40,18 +43,18 @@ abstract class BaseNpadeintPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codcon', 'Codemp', 'Fecade', 'Monade', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (NpadeintPeer::CODCON, NpadeintPeer::CODEMP, NpadeintPeer::FECADE, NpadeintPeer::MONADE, NpadeintPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codcon', 'codemp', 'fecade', 'monade', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
+		BasePeer::TYPE_PHPNAME => array ('Codcon', 'Codemp', 'Fecade', 'Monade', 'Observacion', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (NpadeintPeer::CODCON, NpadeintPeer::CODEMP, NpadeintPeer::FECADE, NpadeintPeer::MONADE, NpadeintPeer::OBSERVACION, NpadeintPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codcon', 'codemp', 'fecade', 'monade', 'observacion', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codcon' => 0, 'Codemp' => 1, 'Fecade' => 2, 'Monade' => 3, 'Id' => 4, ),
-		BasePeer::TYPE_COLNAME => array (NpadeintPeer::CODCON => 0, NpadeintPeer::CODEMP => 1, NpadeintPeer::FECADE => 2, NpadeintPeer::MONADE => 3, NpadeintPeer::ID => 4, ),
-		BasePeer::TYPE_FIELDNAME => array ('codcon' => 0, 'codemp' => 1, 'fecade' => 2, 'monade' => 3, 'id' => 4, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
+		BasePeer::TYPE_PHPNAME => array ('Codcon' => 0, 'Codemp' => 1, 'Fecade' => 2, 'Monade' => 3, 'Observacion' => 4, 'Id' => 5, ),
+		BasePeer::TYPE_COLNAME => array (NpadeintPeer::CODCON => 0, NpadeintPeer::CODEMP => 1, NpadeintPeer::FECADE => 2, NpadeintPeer::MONADE => 3, NpadeintPeer::OBSERVACION => 4, NpadeintPeer::ID => 5, ),
+		BasePeer::TYPE_FIELDNAME => array ('codcon' => 0, 'codemp' => 1, 'fecade' => 2, 'monade' => 3, 'observacion' => 4, 'id' => 5, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
 	);
 
 	
@@ -112,6 +115,8 @@ abstract class BaseNpadeintPeer {
 		$criteria->addSelectColumn(NpadeintPeer::FECADE);
 
 		$criteria->addSelectColumn(NpadeintPeer::MONADE);
+
+		$criteria->addSelectColumn(NpadeintPeer::OBSERVACION);
 
 		$criteria->addSelectColumn(NpadeintPeer::ID);
 

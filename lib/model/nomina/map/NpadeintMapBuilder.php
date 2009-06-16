@@ -42,6 +42,8 @@ class NpadeintMapBuilder {
 
 		$tMap->addColumn('MONADE', 'Monade', 'double', CreoleTypes::NUMERIC, true, 14);
 
+		$tMap->addColumn('OBSERVACION', 'Observacion', 'string', CreoleTypes::VARCHAR, false, 100);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 
