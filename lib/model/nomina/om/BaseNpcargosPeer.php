@@ -13,7 +13,7 @@ abstract class BaseNpcargosPeer {
 	const CLASS_DEFAULT = 'lib.model.nomina.Npcargos';
 
 	
-	const NUM_COLUMNS = 14;
+	const NUM_COLUMNS = 15;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -59,6 +59,9 @@ abstract class BaseNpcargosPeer {
 	const CANMUJ = 'npcargos.CANMUJ';
 
 	
+	const CARVAN = 'npcargos.CARVAN';
+
+	
 	const ID = 'npcargos.ID';
 
 	
@@ -67,18 +70,18 @@ abstract class BaseNpcargosPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codcar', 'Nomcar', 'Suecar', 'Stacar', 'Codocp', 'Punmin', 'Graocp', 'Comcar', 'Pasocp', 'Codtip', 'Pricar', 'Canhom', 'Canmuj', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (NpcargosPeer::CODCAR, NpcargosPeer::NOMCAR, NpcargosPeer::SUECAR, NpcargosPeer::STACAR, NpcargosPeer::CODOCP, NpcargosPeer::PUNMIN, NpcargosPeer::GRAOCP, NpcargosPeer::COMCAR, NpcargosPeer::PASOCP, NpcargosPeer::CODTIP, NpcargosPeer::PRICAR, NpcargosPeer::CANHOM, NpcargosPeer::CANMUJ, NpcargosPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codcar', 'nomcar', 'suecar', 'stacar', 'codocp', 'punmin', 'graocp', 'comcar', 'pasocp', 'codtip', 'pricar', 'canhom', 'canmuj', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, )
+		BasePeer::TYPE_PHPNAME => array ('Codcar', 'Nomcar', 'Suecar', 'Stacar', 'Codocp', 'Punmin', 'Graocp', 'Comcar', 'Pasocp', 'Codtip', 'Pricar', 'Canhom', 'Canmuj', 'Carvan', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (NpcargosPeer::CODCAR, NpcargosPeer::NOMCAR, NpcargosPeer::SUECAR, NpcargosPeer::STACAR, NpcargosPeer::CODOCP, NpcargosPeer::PUNMIN, NpcargosPeer::GRAOCP, NpcargosPeer::COMCAR, NpcargosPeer::PASOCP, NpcargosPeer::CODTIP, NpcargosPeer::PRICAR, NpcargosPeer::CANHOM, NpcargosPeer::CANMUJ, NpcargosPeer::CARVAN, NpcargosPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codcar', 'nomcar', 'suecar', 'stacar', 'codocp', 'punmin', 'graocp', 'comcar', 'pasocp', 'codtip', 'pricar', 'canhom', 'canmuj', 'carvan', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codcar' => 0, 'Nomcar' => 1, 'Suecar' => 2, 'Stacar' => 3, 'Codocp' => 4, 'Punmin' => 5, 'Graocp' => 6, 'Comcar' => 7, 'Pasocp' => 8, 'Codtip' => 9, 'Pricar' => 10, 'Canhom' => 11, 'Canmuj' => 12, 'Id' => 13, ),
-		BasePeer::TYPE_COLNAME => array (NpcargosPeer::CODCAR => 0, NpcargosPeer::NOMCAR => 1, NpcargosPeer::SUECAR => 2, NpcargosPeer::STACAR => 3, NpcargosPeer::CODOCP => 4, NpcargosPeer::PUNMIN => 5, NpcargosPeer::GRAOCP => 6, NpcargosPeer::COMCAR => 7, NpcargosPeer::PASOCP => 8, NpcargosPeer::CODTIP => 9, NpcargosPeer::PRICAR => 10, NpcargosPeer::CANHOM => 11, NpcargosPeer::CANMUJ => 12, NpcargosPeer::ID => 13, ),
-		BasePeer::TYPE_FIELDNAME => array ('codcar' => 0, 'nomcar' => 1, 'suecar' => 2, 'stacar' => 3, 'codocp' => 4, 'punmin' => 5, 'graocp' => 6, 'comcar' => 7, 'pasocp' => 8, 'codtip' => 9, 'pricar' => 10, 'canhom' => 11, 'canmuj' => 12, 'id' => 13, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, )
+		BasePeer::TYPE_PHPNAME => array ('Codcar' => 0, 'Nomcar' => 1, 'Suecar' => 2, 'Stacar' => 3, 'Codocp' => 4, 'Punmin' => 5, 'Graocp' => 6, 'Comcar' => 7, 'Pasocp' => 8, 'Codtip' => 9, 'Pricar' => 10, 'Canhom' => 11, 'Canmuj' => 12, 'Carvan' => 13, 'Id' => 14, ),
+		BasePeer::TYPE_COLNAME => array (NpcargosPeer::CODCAR => 0, NpcargosPeer::NOMCAR => 1, NpcargosPeer::SUECAR => 2, NpcargosPeer::STACAR => 3, NpcargosPeer::CODOCP => 4, NpcargosPeer::PUNMIN => 5, NpcargosPeer::GRAOCP => 6, NpcargosPeer::COMCAR => 7, NpcargosPeer::PASOCP => 8, NpcargosPeer::CODTIP => 9, NpcargosPeer::PRICAR => 10, NpcargosPeer::CANHOM => 11, NpcargosPeer::CANMUJ => 12, NpcargosPeer::CARVAN => 13, NpcargosPeer::ID => 14, ),
+		BasePeer::TYPE_FIELDNAME => array ('codcar' => 0, 'nomcar' => 1, 'suecar' => 2, 'stacar' => 3, 'codocp' => 4, 'punmin' => 5, 'graocp' => 6, 'comcar' => 7, 'pasocp' => 8, 'codtip' => 9, 'pricar' => 10, 'canhom' => 11, 'canmuj' => 12, 'carvan' => 13, 'id' => 14, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, )
 	);
 
 	
@@ -157,6 +160,8 @@ abstract class BaseNpcargosPeer {
 		$criteria->addSelectColumn(NpcargosPeer::CANHOM);
 
 		$criteria->addSelectColumn(NpcargosPeer::CANMUJ);
+
+		$criteria->addSelectColumn(NpcargosPeer::CARVAN);
 
 		$criteria->addSelectColumn(NpcargosPeer::ID);
 

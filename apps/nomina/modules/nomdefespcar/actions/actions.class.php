@@ -50,7 +50,7 @@ $this->Bitacora('Guardo');
 	  	  if(array_key_exists('nomina',$varemp['aplicacion']))
 		   if(array_key_exists('modulos',$varemp['aplicacion']['nomina']))
 		     if(array_key_exists('nomdefespcar',$varemp['aplicacion']['nomina']['modulos']))
-		       if(array_key_exists('graocp',$varemp['aplicacion']['nomina']['modulos']['nomdefespcar']))		 		 
+		       if(array_key_exists('graocp',$varemp['aplicacion']['nomina']['modulos']['nomdefespcar']))
 	  		     $this->labels['npcargos{graocp}'] = $varemp['aplicacion']['nomina']['modulos']['nomdefespcar']['graocp'];
 
     }
@@ -109,6 +109,11 @@ $this->Bitacora('Guardo');
     {
       $this->npcargos->setCanhom($npcargos['canhom']);
     }
+	if (isset($npcargos['carvan']))
+    {
+      $this->npcargos->setCarvan($npcargos['carvan']);
+    }
+
   }
 
 
@@ -221,7 +226,8 @@ protected function saveNpcargos($npcargos)
     $opciones = new OpcionesGrid();
     $opciones->setEliminar(true);
     $opciones->setTabla('Nppercar');
-    $opciones->setAnchoGrid(700);
+    $opciones->setAnchoGrid(600);
+    $opciones->setAncho(600);
     $opciones->setTitulo('');
     $opciones->setFilas(10);
     $opciones->setHTMLTotalFilas(' ');

@@ -1099,6 +1099,9 @@ propel:
       type: NUMERIC
       size: 6
       scale: 0
+    carvan:          #cargos vacantes
+      type: INTEGER
+      size: 4
     id:
       type: INTEGER
       required: true

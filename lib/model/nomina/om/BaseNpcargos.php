@@ -61,6 +61,10 @@ abstract class BaseNpcargos extends BaseObject  implements Persistent {
 
 
 	
+	protected $carvan;
+
+
+	
 	protected $id;
 
 	
@@ -170,6 +174,13 @@ abstract class BaseNpcargos extends BaseObject  implements Persistent {
 
     if($val) return number_format($this->canmuj,2,',','.');
     else return $this->canmuj;
+
+  }
+  
+  public function getCarvan()
+  {
+
+    return $this->carvan;
 
   }
   
@@ -310,6 +321,16 @@ abstract class BaseNpcargos extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setCarvan($v)
+	{
+
+    if ($this->carvan !== $v) {
+        $this->carvan = $v;
+        $this->modifiedColumns[] = NpcargosPeer::CARVAN;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -350,7 +371,9 @@ abstract class BaseNpcargos extends BaseObject  implements Persistent {
 
       $this->canmuj = $rs->getFloat($startcol + 12);
 
-      $this->id = $rs->getInt($startcol + 13);
+      $this->carvan = $rs->getInt($startcol + 13);
+
+      $this->id = $rs->getInt($startcol + 14);
 
       $this->resetModified();
 
@@ -358,7 +381,7 @@ abstract class BaseNpcargos extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 14; 
+            return $startcol + 15; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Npcargos object", $e);
     }
@@ -561,6 +584,9 @@ abstract class BaseNpcargos extends BaseObject  implements Persistent {
 				return $this->getCanmuj();
 				break;
 			case 13:
+				return $this->getCarvan();
+				break;
+			case 14:
 				return $this->getId();
 				break;
 			default:
@@ -586,7 +612,8 @@ abstract class BaseNpcargos extends BaseObject  implements Persistent {
 			$keys[10] => $this->getPricar(),
 			$keys[11] => $this->getCanhom(),
 			$keys[12] => $this->getCanmuj(),
-			$keys[13] => $this->getId(),
+			$keys[13] => $this->getCarvan(),
+			$keys[14] => $this->getId(),
 		);
 		return $result;
 	}
@@ -642,6 +669,9 @@ abstract class BaseNpcargos extends BaseObject  implements Persistent {
 				$this->setCanmuj($value);
 				break;
 			case 13:
+				$this->setCarvan($value);
+				break;
+			case 14:
 				$this->setId($value);
 				break;
 		} 	}
@@ -664,7 +694,8 @@ abstract class BaseNpcargos extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[10], $arr)) $this->setPricar($arr[$keys[10]]);
 		if (array_key_exists($keys[11], $arr)) $this->setCanhom($arr[$keys[11]]);
 		if (array_key_exists($keys[12], $arr)) $this->setCanmuj($arr[$keys[12]]);
-		if (array_key_exists($keys[13], $arr)) $this->setId($arr[$keys[13]]);
+		if (array_key_exists($keys[13], $arr)) $this->setCarvan($arr[$keys[13]]);
+		if (array_key_exists($keys[14], $arr)) $this->setId($arr[$keys[14]]);
 	}
 
 	
@@ -685,6 +716,7 @@ abstract class BaseNpcargos extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(NpcargosPeer::PRICAR)) $criteria->add(NpcargosPeer::PRICAR, $this->pricar);
 		if ($this->isColumnModified(NpcargosPeer::CANHOM)) $criteria->add(NpcargosPeer::CANHOM, $this->canhom);
 		if ($this->isColumnModified(NpcargosPeer::CANMUJ)) $criteria->add(NpcargosPeer::CANMUJ, $this->canmuj);
+		if ($this->isColumnModified(NpcargosPeer::CARVAN)) $criteria->add(NpcargosPeer::CARVAN, $this->carvan);
 		if ($this->isColumnModified(NpcargosPeer::ID)) $criteria->add(NpcargosPeer::ID, $this->id);
 
 		return $criteria;
@@ -741,6 +773,8 @@ abstract class BaseNpcargos extends BaseObject  implements Persistent {
 		$copyObj->setCanhom($this->canhom);
 
 		$copyObj->setCanmuj($this->canmuj);
+
+		$copyObj->setCarvan($this->carvan);
 
 
 		if ($deepCopy) {
