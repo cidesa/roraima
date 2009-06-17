@@ -197,7 +197,7 @@
 			{
 				var cod1 = $('cajaux').value;
 				var cod2 = $('idlabel').value;
-				if (cod1=="NHMENEDA" || cod1=="NHMAYEDA"|| cod1=="SIMESDAD")
+				if (cod1=="NHMENEDA" || cod1=="NHMAYEDA"|| cod1=="SIMESDAD"|| cod1=='SHORAS' || cod1=='SDIAS' || cod1=='FECDIAS'|| cod1=='FECMES'|| cod1=='FECANNOS')
 				    var cod = cod1+cod2;
   			    else
 					var cod = cod1+"("+cod2+")";
@@ -564,7 +564,7 @@
    function validandoParametros(cod)
    {
 
-		     	if (cod=='FINT' || cod=='FFRAC')
+		     	if (cod=='FINT' || cod=='FFRAC' || cod=='SHORAS' || cod=='SDIAS')
 		     	{
 					$('grid1').hide();
 					$('idfunciones').disabled=true;
@@ -573,16 +573,29 @@
 					$('idhistoricos').disabled=false;
 					$('idvariables').disabled=false;
 					$('idconceptos').disabled=false;
+					if (cod=='SHORAS' || cod=='SDIAS')
+					{
+					  $('idhistoricos').disabled=true;
+					  $('idvariables').disabled=true;
+					}
 					$('idlabel2').hide();
 					$('idlabel2').value='';
 					$('histoculto').hide();
 					$('idlabel').show();
 
-					$('label1').innerHTML = "Escoja el campo al que desea aplicarle la funcion   "+cod+":    ";
+                    if (cod=='SHORAS' || cod=='SDIAS')
+                    {
+                         $('label1').innerHTML = "Escoja el campo al que desea aplicarle la funcion   "+cod+"; coloque cero(0)  si desea el sueldo del cargo:";
+                         $('idlabel').readOnly=false;
+                    }
+                    else
+                     {
+                         $('label1').innerHTML = "Escoja el campo al que desea aplicarle la funcion   "+cod+":    ";
+                          $('idlabel').readOnly=true;
+                      }
 					$('textooculto1').show();
 					$('cajoculabel').value='';
 					$('cajaux').value=cod;
-					$('idlabel').readOnly=true;
 					return true;
 		     	}else if (cod=='STAB' || cod=='CTAB')
 		     	{
@@ -690,8 +703,28 @@
 					$('idlabel').readOnly=false;
 					$('idlabel').focus();
 					return true;
-
-		     	}else
+		     	}
+		     	else if (cod=='FECDIAS'|| cod=='FECMES'|| cod=='FECANNOS')
+		     	{
+					$('grid1').hide();
+					$('idfunciones').disabled=true;
+					$('idempleados').disabled=false;
+					$('idmovimientos').disabled=true;
+					$('idhistoricos').disabled=true;
+					$('idvariables').disabled=true;
+					$('idconceptos').disabled=true;
+					$('idlabel2').hide();
+					$('idlabel2').value='';
+					$('histoculto').hide();
+					$('idlabel').show();
+                    $('label1').innerHTML = "Escoja el campo FECHA al que desea aplicarle la funcion   "+cod+":    ";
+                    $('idlabel').readOnly=true;
+					$('textooculto1').show();
+					$('cajoculabel').value='';
+					$('cajaux').value=cod;
+					return true;
+		     	}
+		     	else
 		     	{
 		     	  return false;
 		     	}
