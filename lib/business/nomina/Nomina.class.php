@@ -1,5 +1,6 @@
 <?php
 class Nomina {
+
   public static function salvarNomdefespcon($concepto) {
     $concepto->save();
 
@@ -1012,6 +1013,29 @@ class Nomina {
       $token = "SIMESDAD";
     }
 
+    if (Herramientas :: StringPos($token, "SHORAS", 0) != -1) {
+      $parametro = substr($token, 6, strlen($token));
+      $token = "SHORAS";
+    }
+
+    if (Herramientas :: StringPos($token, "SDIAS", 0) != -1) {
+      $parametro = substr($token, 5, strlen($token));
+      $token = "SDIAS";
+    }
+    if (Herramientas :: StringPos($token, "FECDIAS", 0) != -1) {
+      $parametro = substr($token, 7, strlen($token));
+      $token = "FECDIAS";
+    }
+    if (Herramientas :: StringPos($token, "FECMES", 0) != -1) {
+      $parametro = substr($token, 6, strlen($token));
+      $token = "FECMES";
+    }
+    if (Herramientas :: StringPos($token, "FECANNOS", 0) != -1) {
+      $parametro = substr($token, 8, strlen($token));
+      $token = "FECANNOS";
+    }
+
+
     if (Herramientas :: StringPos($token, "CTAF", 0) != -1) {
       $parametro = substr($token, 4, strlen($token) - 4);
       $fecha = substr($parametro, 2, 2) . "/" . substr($parametro, 0, 2) . "/" . substr($parametro, 4, 4);
@@ -1217,6 +1241,31 @@ class Nomina {
       $parametro = substr($token, 8, strlen($token));
 
       $token = "SIMESDAD";
+    }
+
+    if (Herramientas :: StringPos($token, "SHORAS", 0) != -1) {
+      $parametro = substr($token, 6, strlen($token));
+
+      $token = "SHORAS";
+    }
+
+    if (Herramientas :: StringPos($token, "SDIAS", 0) != -1) {
+      $parametro = substr($token, 5, strlen($token));
+
+      $token = "SDIAS";
+    }
+
+    if (Herramientas :: StringPos($token, "FECDIAS", 0) != -1) {
+      $parametro = substr($token, 7, strlen($token));
+      $token = "FECDIAS";
+    }
+    if (Herramientas :: StringPos($token, "FECMES", 0) != -1) {
+      $parametro = substr($token, 6, strlen($token));
+      $token = "FECMES";
+    }
+    if (Herramientas :: StringPos($token, "FECANNOS", 0) != -1) {
+      $parametro = substr($token, 8, strlen($token));
+      $token = "FECANNOS";
     }
 
     if (Herramientas :: StringPos($token, "CTAF", 0) != -1) {
@@ -1863,10 +1912,10 @@ class Nomina {
 
       break;
 
-      case "SIANOANT" :
+      case "SIANOANT" ://nueva por Leobardo
          // $criterio = "Select coalesce(SUM(Monto),0) as campo from npHISCON A,NPCONSALINT B,NPNOMINA C where  A.CODCON=B.CODCON  and a.codemp='" . $empleado . "' AND  a.codNOM='" . $nomina . "' and  b.codNOM='" . $nomina . "' and a.codnom=c.codnom and a.codnom=b.codnom and A.FECNOM>=add_months(c.profec,-13) and A.FECNOM<=add_months(c.profec,-1) ";
-		$criterio = "Select coalesce(SUM(A.Monto),0) as campo from npHISCON A,NPCONSALINT B,NPNOMINA C where  A.CODCON=B.CODCON  and a.codemp='" . $empleado . "' AND  a.codNOM='" . $nomina . "' and  b.codNOM='" . $nomina . "' and a.codnom=c.codnom and a.codnom=b.codnom and A.FECNOM>=add_months(c.profec,-12)";
-		if (Herramientas :: BuscarDatos($criterio, & $tabla)) {
+        $criterio = "Select coalesce(AVG(A.Monto),0) as campo from npHISCON A,NPCONSALINT B,NPNOMINA C where  A.CODCON=B.CODCON  and a.codemp='" . $empleado . "' AND  a.codNOM='" . $nomina . "' and  b.codNOM='" . $nomina . "' and a.codnom=c.codnom and a.codnom=b.codnom and A.FECNOM>=add_months(c.profec,-12)";
+        if (Herramientas :: BuscarDatos($criterio, & $tabla)) {
            $valor = $tabla[0]["campo"];
         }
         else
@@ -1875,7 +1924,7 @@ class Nomina {
         }
         $criterio = "Select coalesce(SUM(a.saldo),0) as campo from npnomcal A,NPCONSALINT B,NPNOMINA C where  A.CODCON=B.CODCON  and a.codemp='" . $empleado . "' AND  a.codNOM='" . $nomina . "' and  b.codNOM='" . $nomina . "' and a.codnom=c.codnom and a.codnom=b.codnom ";
         if (Herramientas :: BuscarDatos($criterio, & $tabla)) {
-           $valor = $valor+$tabla[0]["campo"];
+           $valor = ($valor+$tabla[0]["campo"])/2;
         }
         else
         {
@@ -1901,6 +1950,53 @@ class Nomina {
         {
           $valor = 0;
         }
+
+      break;
+
+
+     case "SDIAS" :
+      if ($parametro=="0")
+        $sueldo=0;
+      else
+        $sueldo= self::ObtenervalorMovimientoConceptoVariable($parametro,$empleado,$cargo,$fecnom,$nomina);
+
+
+        if ($sueldo==0)
+        {
+           $criterio = "Select suecar as campo from npcargos where  codcar='" . $cargo . "'";
+           if (Herramientas :: BuscarDatos($criterio, & $tabla))
+           {
+             $sueldo = $tabla[0]["campo"];
+           }
+        }
+
+        if ($sueldo>0)
+             $valor=floatval($sueldo)/30;
+         else
+             $valor=0;
+
+      break;
+
+
+     case "SHORAS" :
+      if ($parametro=="0")
+        $sueldo=0;
+      else
+        $sueldo= self::ObtenervalorMovimientoConceptoVariable($parametro,$empleado,$cargo,$fecnom,$nomina);
+
+        if ($sueldo==0)
+        {
+           $criterio = "Select suecar as campo from npcargos where  codcar='" . $cargo . "'";
+           if (Herramientas :: BuscarDatos($criterio, & $tabla))
+           {
+             $sueldo = $tabla[0]["campo"];
+           }
+        }
+
+        if ($sueldo>0)
+             $valor=(floatval($sueldo)/30)/8;
+         else
+             $valor=0;
 
       break;
 
@@ -1938,6 +2034,112 @@ class Nomina {
             $valor = 0;
         } else
           $valor = 0;
+        break;
+
+      case "NHIJEST" :
+        $aux="%HIJ%";
+          $codhijo="001";
+          $criterio = "SELECT tippar FROM nptippar WHERE  upper(despar) like '". $aux . "'";
+          if (Herramientas :: BuscarDatos($criterio, &$reg))
+          {
+                  $codhijo=$reg[0]["tippar"];
+          }
+        $sql = "Select coalesce(COUNT(*),0) as cuantos from NPInfFam where  CodEmp='" . $empleado . "' and parfam='". $codhijo ."' and  ocupac='E'";
+        if (Herramientas :: BuscarDatos($sql, & $tabla)) {
+          $valor = $tabla[0]["cuantos"];
+        } else {
+          $valor = 0;
+        }
+        break;
+
+      case "FECDIAS":
+          $mifecha="";
+          $valor = 0;
+          $criterio = "Select * from nphojint where codemp='" . $empleado . "'";
+          if (Herramientas :: BuscarDatos($criterio, & $datosper)) {
+            $aux = intval(substr($parametro, 1, 2));
+            foreach ($datosper as $dat) {
+              $i = 0;
+              foreach ($dat as $d => $key) {
+                if ($i == $aux) {
+                  $mifecha= $key;
+                }
+                $i = $i +1;
+              }
+            }//foreach ($datosper as $dat)
+            $fec_aux = split("-", $mifecha);
+            if (count($fec_aux)>1)
+            {
+	            if (checkdate(intval($fec_aux[1]), intval($fec_aux[2]), intval($fec_aux[0])) )
+	            {
+	              $valor=$fec_aux[2];
+	            }
+            }
+          }
+      break;
+
+      case "FECMES":
+          $mifecha="";
+          $valor = 0;
+          $criterio = "Select * from nphojint where codemp='" . $empleado . "'";
+          if (Herramientas :: BuscarDatos($criterio, & $datosper)) {
+            $aux = intval(substr($parametro, 1, 2));
+            foreach ($datosper as $dat) {
+              $i = 0;
+              foreach ($dat as $d => $key) {
+                if ($i == $aux) {
+                  $mifecha= $key;
+                }
+                $i = $i +1;
+              }
+            }//foreach ($datosper as $dat)
+            $fec_aux = split("-", $mifecha);
+            if (count($fec_aux)>1)
+            {
+	            if (checkdate(intval($fec_aux[1]), intval($fec_aux[2]), intval($fec_aux[0])) )
+	            {
+	              $valor=$fec_aux[1];
+	            }
+            }
+          }
+      break;
+
+      case "FECANNOS":
+          $mifecha="";
+          $valor = 0;
+          $criterio = "Select * from nphojint where codemp='" . $empleado . "'";
+          if (Herramientas :: BuscarDatos($criterio, & $datosper)) {
+            $aux = intval(substr($parametro, 1, 2));
+            foreach ($datosper as $dat) {
+              $i = 0;
+              foreach ($dat as $d => $key) {
+                if ($i == $aux) {
+                  $mifecha= $key;
+                }
+                $i = $i +1;
+              }
+            }//foreach ($datosper as $dat)
+            $fec_aux = split("-", $mifecha);
+            if (count($fec_aux)>1)
+            {
+            	if (checkdate(intval($fec_aux[1]), intval($fec_aux[2]), intval($fec_aux[0])) )
+            	{
+              	 $valor=$fec_aux[0];
+            	}
+            }
+          }
+      break;
+
+      case "CATRABMES" :
+        $valor = 0;
+        $hasta_mod = split('/', $fecnom);
+        //$desde_mod = split('/', $desde);
+        if (intval(date('m', strtotime($fechaing))) == intval(date('m', strtotime($hasta_mod[1] . '/' . $hasta_mod[0] . '/' . $hasta_mod[2]))))
+        {
+           $valor = 1;
+        }
+
+        return $valor;
         break;
 
       default :
@@ -2608,6 +2810,33 @@ class Nomina {
 
       $campo = "SIMESDAD";
     }
+
+
+    if (Herramientas :: StringPos($campo, "SHORAS", 0) != -1) {
+      $parametro = substr($campo, 6, strlen($campo));
+
+      $campo = "SHORAS";
+    }
+
+    if (Herramientas :: StringPos($campo, "SDIAS", 0) != -1) {
+      $parametro = substr($campo, 5, strlen($campo));
+
+      $campo = "SDIAS";
+    }
+
+    if (Herramientas :: StringPos($campo, "FECDIAS", 0) != -1) {
+      $parametro = substr($campo, 7, strlen($campo));
+      $campo = "FECDIAS";
+    }
+    if (Herramientas :: StringPos($campo, "FECMES", 0) != -1) {
+      $parametro = substr($campo, 6, strlen($campo));
+      $campo = "FECMES";
+    }
+    if (Herramientas :: StringPos($campo, "FECANNOS", 0) != -1) {
+      $parametro = substr($campo, 8, strlen($campo));
+      $campo = "FECANNOS";
+    }
+
     if (Herramientas :: StringPos($campo, "CTAF", 0) != -1) {
 
       $parametro = substr($campo, 4, strlen($campo) - 4);
@@ -2644,6 +2873,7 @@ class Nomina {
         if (Herramientas :: BuscarDatos($criterio, & $tabla)) {
           return $tabla[0]["campo"];
         }
+
         break;
       case "TAF" :
         $criterio = "Select coalesce(SUM(a.saldo),0) as campo from npNomCal A,NPDEFCPT B where  A.CODCON=B.CODCON AND  a.codnom='" . $nomina . "' and a.codemp='" . $empleado . "' and a.codcar='" . $cargo . "' AND b.OPECON='A' AND b.IMPCPT='S' ";
@@ -3225,10 +3455,10 @@ class Nomina {
 
       break;
 
-      case "SIANOANT" :
+	  case "SIANOANT" : //Nueva por Leobardo
          // $criterio = "Select coalesce(SUM(Monto),0) as campo from npHISCON A,NPCONSALINT B,NPNOMINA C where  A.CODCON=B.CODCON  and a.codemp='" . $empleado . "' AND  a.codNOM='" . $nomina . "' and  b.codNOM='" . $nomina . "' and a.codnom=c.codnom and a.codnom=b.codnom and A.FECNOM>=add_months(c.profec,-13) and A.FECNOM<=add_months(c.profec,-1) ";
-		$criterio = "Select coalesce(SUM(A.Monto),0) as campo from npHISCON A,NPCONSALINT B,NPNOMINA C where  A.CODCON=B.CODCON  and a.codemp='" . $empleado . "' AND  a.codNOM='" . $nomina . "' and  b.codNOM='" . $nomina . "' and a.codnom=c.codnom and a.codnom=b.codnom and A.FECNOM>=add_months(c.profec,-12)";
-		if (Herramientas :: BuscarDatos($criterio, & $tabla)) {
+        $criterio = "Select coalesce(AVG(A.Monto),0) as campo from npHISCON A,NPCONSALINT B,NPNOMINA C where  A.CODCON=B.CODCON  and a.codemp='" . $empleado . "' AND  a.codNOM='" . $nomina . "' and  b.codNOM='" . $nomina . "' and a.codnom=c.codnom and a.codnom=b.codnom and A.FECNOM>=add_months(c.profec,-12)";
+        if (Herramientas :: BuscarDatos($criterio, & $tabla)) {
            $valor = $tabla[0]["campo"];
         }
         else
@@ -3237,7 +3467,7 @@ class Nomina {
         }
         $criterio = "Select coalesce(SUM(a.saldo),0) as campo from npnomcal A,NPCONSALINT B,NPNOMINA C where  A.CODCON=B.CODCON  and a.codemp='" . $empleado . "' AND  a.codNOM='" . $nomina . "' and  b.codNOM='" . $nomina . "' and a.codnom=c.codnom and a.codnom=b.codnom ";
         if (Herramientas :: BuscarDatos($criterio, & $tabla)) {
-           $valor = $valor+$tabla[0]["campo"];
+           $valor = ($valor+$tabla[0]["campo"])/2;
         }
         else
         {
@@ -3258,7 +3488,52 @@ class Nomina {
 
       break;
 
-      case "AAPMESES" :
+      case "SDIAS":
+      if ($parametro=="0")
+        $sueldo=0;
+      else
+        $sueldo= self::ObtenervalorMovimientoConceptoVariable($parametro,$empleado,$cargo,$fecnom,$nomina);
+
+        if ($sueldo==0)
+        {
+           $criterio = "Select suecar as campo from npcargos where  codcar='" . $cargo . "'";
+           if (Herramientas :: BuscarDatos($criterio, & $tabla))
+           {
+             $sueldo = $tabla[0]["campo"];
+           }
+        }
+
+        if ($sueldo>0)
+             $valor=floatval($sueldo)/30;
+         else
+             $valor=0;
+
+      break;
+
+
+     case "SHORAS":
+ 	  if ($parametro=="0")
+        $sueldo=0;
+      else
+        $sueldo= self::ObtenervalorMovimientoConceptoVariable($parametro,$empleado,$cargo,$fecnom,$nomina);
+
+
+        if ($sueldo==0)
+        {
+           $criterio = "Select suecar as campo from npcargos where  codcar='" . $cargo . "'";
+           if (Herramientas :: BuscarDatos($criterio, & $tabla))
+           {
+             $sueldo = $tabla[0]["campo"];
+           }
+        }
+
+        if ($sueldo>0)
+             $valor=(floatval($sueldo)/30)/8;
+         else
+             $valor=0;
+      break;
+
+      case "AAPMESES":
 
         if (strrpos($hasta, "/")) {
           $fecaux = split("/", $hasta);
@@ -3296,6 +3571,113 @@ class Nomina {
             $valor = 0;
         } else
           $valor = 0;
+
+        return $valor;
+        break;
+
+      case "NHIJEST" :
+          $aux="%HIJ%";
+          $codhijo="001";
+          $criterio = "SELECT tippar FROM nptippar WHERE  upper(despar) like '". $aux . "'";
+          if (Herramientas :: BuscarDatos($criterio, &$reg))
+          {
+                  $codhijo=$reg[0]["tippar"];
+          }
+
+         $sql = "Select coalesce(COUNT(*),0) as cuantos from NPInfFam where  CodEmp='" . $empleado . "' and parfam='". $codhijo ."' and  ocupac='E'";
+         if (Herramientas :: BuscarDatos($sql, & $tabla)) {
+          $valor = $tabla[0]["cuantos"];
+         } else {
+          $valor = 0;
+         }
+         break;
+
+      case "FECDIAS":
+          $mifecha="";
+          $valor = 0;
+          $criterio = "Select * from nphojint where codemp='" . $empleado . "'";
+          if (Herramientas :: BuscarDatos($criterio, & $datosper)) {
+            $aux = intval(substr($parametro, 1, 2));
+            foreach ($datosper as $dat) {
+              $i = 0;
+              foreach ($dat as $d => $key) {
+                if ($i == $aux) {
+                  $mifecha= $key;
+                }
+                $i = $i +1;
+              }
+            }//foreach ($datosper as $dat)
+           $fec_aux = split("-", $mifecha);
+           if (count($fec_aux)>1)
+           {
+            if (checkdate(intval($fec_aux[1]), intval($fec_aux[2]), intval($fec_aux[0])) )
+            {
+              $valor=$fec_aux[2];
+            }
+           }
+          }
+      break;
+
+      case "FECMES":
+          $mifecha="";
+          $valor = 0;
+          $criterio = "Select * from nphojint where codemp='" . $empleado . "'";
+          if (Herramientas :: BuscarDatos($criterio, & $datosper)) {
+            $aux = intval(substr($parametro, 1, 2));
+            foreach ($datosper as $dat) {
+              $i = 0;
+              foreach ($dat as $d => $key) {
+                if ($i == $aux) {
+                  $mifecha= $key;
+                }
+                $i = $i +1;
+              }
+            }//foreach ($datosper as $dat)
+            $fec_aux = split("-", $mifecha);
+            if (count($fec_aux)>1)
+            {
+	            if (checkdate(intval($fec_aux[1]), intval($fec_aux[2]), intval($fec_aux[0])) )
+	            {
+	              $valor=$fec_aux[1];
+	            }
+            }
+          }
+      break;
+
+      case "FECANNOS":
+          $mifecha="";
+          $valor = 0;
+          $criterio = "Select * from nphojint where codemp='" . $empleado . "'";
+          if (Herramientas :: BuscarDatos($criterio, & $datosper)) {
+            $aux = intval(substr($parametro, 1, 2));
+            foreach ($datosper as $dat) {
+              $i = 0;
+              foreach ($dat as $d => $key) {
+                if ($i == $aux) {
+                  $mifecha= $key;
+                }
+                $i = $i +1;
+              }
+            }//foreach ($datosper as $dat)
+            $fec_aux = split("-", $mifecha);
+            if (count($fec_aux)>1)
+            {
+	            if (checkdate(intval($fec_aux[1]), intval($fec_aux[2]), intval($fec_aux[0])) )
+	            {
+	              $valor=$fec_aux[0];
+	            }
+            }
+          }
+      break;
+
+      case "CATRABMES" :
+        $valor = 0;
+        $hasta_mod = split('/', $hasta);
+        $desde_mod = split('/', $desde);
+        if (intval(date('m', strtotime($fechaing))) == intval(date('m', strtotime($hasta_mod[1] . '/' . $hasta_mod[0] . '/' . $hasta_mod[2]))))
+        {
+           $valor = 1;
+        }
 
         return $valor;
         break;
@@ -6636,7 +7018,7 @@ class Nomina {
     return -1;
   }
 
- public static function salvarNpsalintind($npsalint, $grid) {
+public static function salvarNpsalintind($npsalint, $grid) {
 
 
 
@@ -7203,5 +7585,245 @@ class Nomina {
 	return -1;
   }
 
+
+  public static function ObtenervalorMovimientoConceptoVariable($token,$empleado,$cargo,$fecnom,$nomina)
+  {
+  	 $valor=0;
+  	 if (substr($token, 0, 1) == 'M') // M
+        {
+          if (substr($token, 7, 1) == 'S') {
+            $criterio = "Select Sum(cantidad) as cantidads,Sum(monto) as montos, Sum(Acumulado) as acumulados
+                              from npasiconemp where activo='S' and codemp='" . $empleado . "' and codcon='" . substr($token, 4, 3) . "' ";
+            if (Herramientas :: BuscarDatos($criterio, & $tabla)) {
+              if (substr($token, 8, 1) == 'C') {
+                $sql = "Select * from nptippre where codcon='" . substr($token, 4, 3) . "' ";
+                if (Herramientas :: BuscarDatos($sql, & $tablaprestamo)) {
+                  if (floatval($tabla[0]["acumulados"]) - floatval($tabla[0]["cantidads"]) <= 0) {
+                    $aux = $tabla[0]["acumulados"];
+                  } else {
+                    $aux = $tabla[0]["cantidads"];
+                  }
+                } else {
+                  $aux = $tabla[0]["cantidads"];
+                }
+              } else {
+                $aux = $tabla[0]["montos"];
+              } // tipo c o m
+              $valor = $aux;
+            }
+          } // movconvar 7 1
+          else {
+            $criterio = "Select cantidad,monto,acumulado from npasiconemp where activo='S' and codemp='" . $empleado . "' and codcar='" . $cargo . "' and codcon='" . substr($token, 4, 3) . "' ";
+            if (Herramientas :: BuscarDatos($criterio, & $tabla)) {
+              if (substr($token, 7, 1) == 'C') {
+                $sql = "Select * from nptippre where codcon='" . substr($token, 4, 3) . "' ";
+                if (Herramientas :: BuscarDatos($sql, & $tablaprestamo)) {
+                  if (floatval($tabla[0]["acumulado"]) - floatval($tabla[0]["cantidad"]) <= 0) {
+                    $aux = $tabla[0]["acumulado"];
+                  } else {
+                    $aux = $tabla[0]["cantidad"];
+                  }
+                } else {
+                  $aux = $tabla[0]["cantidad"];
+                }
+              } else {
+                $aux = $tabla[0]["monto"];
+              } // tipo c o m
+              $valor = $aux;
+            } // tabla
+          } // fin else movconbar 7 1
+        }
+        //TODO:Cambiar al strrpos()
+
+        elseif (Herramientas :: StringPos($token, "FECN", 0) != -1) //(Herramientas::instr($campo,'FECN',0,1) )
+        {
+          $valor = $fecnom;
+        }
+        elseif (substr($token, 0, 1) == 'E') {
+          $criterio = "Select * from nphojint where codemp='" . $empleado . "'";
+          if (Herramientas :: BuscarDatos($criterio, & $datosper)) {
+            $aux = intval(substr($token, 1, 2));
+            foreach ($datosper as $dat) {
+              $i = 0;
+              foreach ($dat as $d => $key) {
+                if ($i == $aux) {
+                  $valor = $key;
+                }
+                $i = $i +1;
+              }
+            }
+            $valor = 'EEEEEEEEEEEEE';
+            //$valor=$datosper[0][$aux];
+          }
+        }
+        elseif (substr($token, 0, 1) == 'V') { //PRIMER CAMBIO
+          $valor = 0.00;
+          $criterio = "Select * from npdefvar where  codnom='" . $nomina . "' and codvar='" . substr($token, 1, 3) . "' ";
+          if (Herramientas :: BuscarDatos($criterio, & $tabla)) {
+            $aux = intval(substr($token, 4, 1));
+            $aux = 'valor' . $aux;
+            foreach ($tabla as $dat) {
+              foreach ($dat as $d => $key) {
+                if ($d == $aux) {
+                  $valor = $key;
+                }
+              }
+            }
+            //$valor=$tabla[0][$aux];
+          }
+        }
+        elseif (substr($token, 0, 1) == 'C') {
+          $criterio = "Select a.saldo as saldo,a.acumulado as acumulado,b.opecon as opecon
+                        from npNomCal a,Npdefcpt b
+                        where  a.codnom='" . $nomina . "' and a.codemp='" . $empleado . "'
+                        and a.codcar='" . $cargo . "' and a.codcon='" . substr($token, 1, 3) . "'
+                        and a.codcon = b.codcon ";
+          //print $criterio;exit;
+          if (Herramientas :: BuscarDatos($criterio, & $tabla)) {
+            if (substr($token, 4, 1) == 'S') {
+              if (empty ($tabla[0]["saldo"])) {
+                $aux = 0;
+              } else {
+                $aux = $tabla[0]["saldo"];
+              }
+            } else {
+              if (empty ($tabla[0]["acumulado"])) {
+                $aux = 0;
+              } else {
+                $aux = $tabla[0]["acumulado"];
+              }
+            }
+            $valor = $aux;
+          }
+        }
+    return $valor;
+  }
+
+
+
+  public static function aa($cireging,$numero,$registro=array())
+  {
+    $mensaje="";
+    $numeroorden="";
+    $r='';
+
+    $numerocomprob=Comprobante::Buscar_Correlativo();
+    $reftra=$numero;
+
+    $codigocuenta = "";
+    $tipo  = "";
+    $des   = "";
+    $monto = "";
+
+    $codigocuentas = "";
+    $tipo1  = "";
+    $desc   = "";
+    $monto1 = "";
+
+    $codigocuenta2 = "";
+    $tipo2  ="";
+    $des2   ="";
+    $monto2 ="";
+
+    $cuentas= "";
+    $tipos  = "";
+    $montos ="";
+    $descr  ="";
+
+    $msjuno = "";
+    $msjdos = "";
+
+    $c = new Criteria();
+    $x = $grid[0];
+    $j = 0;
+
+          $sql="select B.CODCTA as CODCTA,B.DESCTA as DESCTA,A.SALACT as SALACT
+		          FROM
+			          CONTABB1 A,CONTABB B
+		          WHERE
+			         A.CODCTA=B.CODCTA AND
+		          	 A.CODCTA LIKE '".trim($GLOBALS["egresos"])."%' and
+		          	 A.PEREJE='".trim($GLOBALS["ultimoperiodo"])."' AND
+		          	 A.SALACT<>0 AND
+		          	 B.CARGAB='C'
+		          ORDER BY
+		          	B.CODCTA";
+
+		if (H::BuscarDatos($sql,&$dato))
+		{
+			$sql = "SELECT SUM(coalesce(A.SALACT,0)) as total FROM CONTABB1 A,CONTABB B
+	                	WHERE A.CODCTA=B.CODCTA AND
+	                	A.CODCTA LIKE '".trim($GLOBALS["egresos"])."%' AND
+	                	A.PEREJE='".trim($GLOBALS["ultimoperiodo"])."' AND B.CARGAB='C'";
+
+			if (H::BuscarDatos($sql,&$dato2))
+			{
+				$totegr = abs($dato[0]["total"]);
+			}
+
+           $codigocuentas = $registro["resultado"];
+           $desc          = $registro["descta"];
+           $tipo1         = 'D';
+           $monto1        = $totegr;
+
+		}
+exit();
+         if ($j==0)
+         {
+           $codigocuentas=$codigocuenta;
+           $desc=$des;
+           $tipo1=$tipo;
+           $monto1=$monto;
+         }
+         else
+         {
+           $codigocuentas=$codigocuentas.'_'.$codigocuenta;
+           $desc=$desc.'_'.$des;
+           $tipo1=$tipo1.'_'.$tipo;
+           $monto1=$monto1.'_'.$monto;
+          }
+
+
+    //Obtener cta asociada al banco
+        $codigocuenta2=$cireging->getCtaban();
+        $b1= new Criteria();
+        $b1->add(TsdefbanPeer::NUMCUE,$codigocuenta2);
+        $regis3 = TsdefbanPeer::doSelectOne($b1);
+          $codigo = $regis3->getCodcta();
+
+        //Obtener la descripcion del codigo de cuenta
+        $b2= new Criteria();
+        $b2->add(ContabbPeer::CODCTA,$codigo);
+        $regis4  = ContabbPeer::doSelectOne($b2);
+          $nomcta = $regis4->getDescta();
+          $tipo2  = 'D';
+          $des2   = $regis4->getDescta();
+          $monto2 = $cireging->getMontot();
+
+      $cuentas=$codigo.'_'.$codigocuentas;
+      $descr=$des2.'_'.$desc;
+      $tipos=$tipo2.'_'.$tipo1;
+      $montos=$monto2.'_'.$monto1;
+
+      $clscommpro=new Comprobante();
+      $clscommpro->setGrabar("N");
+      $clscommpro->setNumcom($numerocomprob);
+      $clscommpro->setReftra($reftra);
+      $clscommpro->setFectra(date("d/m/Y",strtotime($cireging->getFecing())));
+      $clscommpro->setDestra($cireging->getDesing());
+      $clscommpro->setCtas($cuentas);
+      $clscommpro->setDesc($descr);
+      $clscommpro->setMov($tipos);
+      $clscommpro->setMontos($montos);
+      $arrcompro[]=$clscommpro;
+
+  return true;
+  }
+
+
 } // fin clase
+
+
+
+
 ?>

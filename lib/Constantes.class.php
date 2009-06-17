@@ -187,7 +187,8 @@ public static function PagoDoble()
     'MESF' => 'MESF   Retorna el Mes de una Fecha', 'ANOF' => 'ANOF   Retorna el Año de una Fecha', 'CATRAB' => 'CATRAB   Cumpleaños del Trabajador', 'NHIJ' => 'NHIJ   Nº De Hijos', 'SC' => 'SC   Sueldo + Compensación', 'SCAR' => 'SCAR   Sueldo del Cargo', 'DBV' => 'DBV   Días de Bono Vacacional',
     'PV' => 'PV   Períodos Vacacionales a Disfrutar', 'PHIJO' => 'PHIJO Monto Prima Hijo', 'NHIJO' => 'NHIJO Hijos Menores a Edad Suministrada', 'PPROF' => 'PPROF Monto Prima Profesionalizacion', 'PROFE' => 'PROFE Profesion activa del Empleado', 'PCARG' => 'PCARG Monto Cargo Colateral', 'CGUAR' => 'CGUAR Monto Por Guardería', 'ACUC' => 'ACUC  Acumulador de Conceptos por Empleado',
     'STAB' => 'STAB   Sueldo según Escala', 'CTAB' => 'CTAB   Compensación según Escala', 'MCES' => 'MCES   Monto de Cesta Tickets', 'ADIC' => 'ADIC   Dias Adicionales Prestacion Antiguedad','DHAB' => 'DHAB   Días Habiles del Período','DHABM' => 'DHABM   Días Habiles del Mes','CARG' => 'CARG   Cargo Actual del Empleado','NHMENEDA' => 'NHMENEDA   Numero de hijos Mayores Menores a una edad',
-    'NHMAYEDA' => 'NHMAYEDA   Numero de hijos Mayores a una edad','SIMESANT' => 'SIMESANT Salario Integral Mes Anterior', 'SIMESDAD' => 'SIMESDAD Salario Integral Mes Dado', 'SIANOANT' => 'SIANOANT   Sum. Conc. Sal. Integral Año Anterior', 'DNLAB' => 'DNLAB   Días No Laborados', 'AAPMESES' => 'AAPMESES   Antiguedad en la Administración en Meses', 'AAPDIAS' => 'AAPDIAS   Antiguedad en la Administración Pública Días' );
+    'NHMAYEDA' => 'NHMAYEDA   Numero de hijos Mayores a una edad','SIMESANT' => 'SIMESANT Salario Integral Mes Anterior', 'SIMESDAD' => 'SIMESDAD Salario Integral Mes Dado', 'SIANOANT' => 'SIANOANT   Sum. Conc. Sal. Integral Año Anterior', 'DNLAB' => 'DNLAB   Días No Laborados', 'AAPMESES' => 'AAPMESES   Antiguedad en la Administración en Meses', 'AAPDIAS' => 'AAPDIAS   Antiguedad en la Administración Pública Días',
+    'SDIAS' => 'SDIAS   Sueldo en Días', 'SHORAS' => 'SHORAS   Sueldo en Horas', 'NHIJEST' => 'NHIJEST   Nº De Hijos Estudiantes', 'FECDIAS' => 'FECDIAS   Fecha en Días', 'FECMES' => 'FECMES   Fecha en Meses','FECANNOS' => 'FECANNOS   Fecha en Años', 'CATRABMES' => 'CATRABMES   Cumpleaños del Trabajador en el Mes de la Nomin' );
   }
 
 
@@ -367,7 +368,7 @@ public static function PagoDoble()
 
   public static function ListaSituacionEmpleados()
   {
-    return array('F' => 'Fijo', 'C' => 'Contratado', 'P' => 'Pasante', 'T' => 'Temporal');
+    return array('E' => 'Empleado', 'F' => 'Fijo', 'C' => 'Contratado', 'O' => 'Obrero', 'P' => 'Pasante', 'T' => 'Temporal');
   }
 
   public static function Denumper_Faccodcatfis()
@@ -468,10 +469,20 @@ public static function PagoDoble()
   {
    return array(0 => 'Hijo', 2 => 'Hija', 3 => 'Padre', 4 => 'Madre', 5 => 'Hermano(a)', 6 => 'Conyuge', 7 => 'Titular Masculino', 8 => 'Titular Femenino');
   }
-  
+
   public static function Tipo_Asignaciones()
   {
    return array('S' => 'Sueldo', 'V' => 'Bono Vacacional', 'F' => 'Bono Fin de Año');
+  }
+
+  public static function ListaEstados()
+  {
+    return array('A' => 'Activo', 'I' => 'Inactivo');
+  }
+
+  public static function ListaOcupacion()
+  {
+    return array('E' => 'Estudiante', 'T' => 'Trabajador', 'D' => 'Desempleado',);
   }
 
 }
