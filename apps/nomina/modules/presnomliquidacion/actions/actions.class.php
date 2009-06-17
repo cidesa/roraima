@@ -71,7 +71,8 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 			B.CODPAR AS PARTIDA 
 			From NPIMPPRESOC A,NPDEFPRELIQ B 
 			where 
-			A.TIPO='' AND 
+			A.TIPO<>'' AND 
+			A.SALTOT>0 AND
 			A.codemp='$codemp' AND 
 			B.CODNOM='$codnom' AND 
 			B.CODCON='002' AND 
