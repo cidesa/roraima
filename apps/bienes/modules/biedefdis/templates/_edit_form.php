@@ -25,7 +25,7 @@
 
   <?php $value = object_input_tag($bndisbie, 'getCoddis', array (
   'size' => 20,
-  'maxlength' => 10,
+  'maxlength' => 6,
   'onBlur'  => "javascript: valor=this.value; valor=valor.pad(6, '0',0);document.getElementById('bndisbie_coddis').value=valor;document.getElementById('bndisbie_coddis').disabled=false;",
   'control_name' => 'bndisbie[coddis]',
   'readonly' => $bndisbie->getId()!='' ? true : false ,

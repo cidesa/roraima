@@ -17,7 +17,7 @@ generator:
       detdisinm: { name: Detalles}
       codubiori: { name: Origen}
       desubiori: { name: Descripción}
-      codubides: { name: Ubicación}
+      codubides: { name: Destino}
       desubides: { name: Descripción}
       obsdisinm: { name: Observación}
       stadisinm: { name: Estatus[A/D]}

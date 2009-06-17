@@ -152,7 +152,7 @@ class catreginmActions extends autocatreginmActions
     $gridP = Herramientas::CargarDatosGridv2($this,$clasemodelo->getObjpersonas());
     $gridC = Herramientas::CargarDatosGridv2($this,$clasemodelo->getObjconstruccion());
     $gridT = Herramientas::CargarDatosGridv2($this,$clasemodelo->getObjterreno());
-    return Inmuebles::SalvarCatreginm($clasemodelo,$gridP,$gridC,$gridT);
+    return Inmueblescatastro::SalvarCatreginm($clasemodelo,$gridP,$gridC,$gridT);
   }
 
   public function deleting($clasemodelo)

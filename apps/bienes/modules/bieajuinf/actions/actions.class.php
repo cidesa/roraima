@@ -10,24 +10,39 @@
  */
 class bieajuinfActions extends sfActions
 {
-  /**
-   * Executes index action
-   *
-   */
+
   public function executeIndex()
   {
-    //$this->forward('default', 'module');
   }
-  public function executeList()
+
+  public function executeAjax()
   {
-    $this->forward('bieajuinf', 'index');
-  }
-  public function executeEdit()
-  {
-    $this->forward('bieajuinf', 'index');
-  }
-  public function executeCreate()
-  {
-    $this->forward('bieajuinf', 'index');
+    $cajtexmos=$this->getRequestParameter('cajtexmos');
+    $codigo= $this->getRequestParameter('codigo');
+    $ajax= $this->getRequestParameter('ajax');
+    $javascript="";
+    switch ($ajax){
+      case '1':
+        $r= new Criteria();
+        $r->addAscendingOrderByColumn(BnrevactPeer::FECREV);
+        $trajo=BnrevactPeer::doSelectOne($r);
+        if ($trajo)
+        {
+          $dato=date('d/m/Y',strtotime($trajo->getFecdev()));
+          $javascript="$('fechareval').show(); $('depcalculada').value='S'; $('fecha').value='$dato'; ";
+        }else
+        {
+          $javascript="$('fechareval').show(); ";
+        }
+        $output = '[["javascript","'.$javascript.'",""],["","",""],["","",""]]';
+        break;
+      case '2':
+       break;
+      default:
+        $output = '[["","",""],["","",""],["","",""]]';
+        break;
+    }
+    $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+    return sfView::HEADER_ONLY;
   }
 }

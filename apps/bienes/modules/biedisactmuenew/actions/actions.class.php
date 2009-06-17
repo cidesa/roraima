@@ -253,7 +253,7 @@ $this->Bitacora('Guardo');
     $this->updateBndismueFromRequest();
 
     $c = new Criteria();
-    $c->add(BndisbiePeer::CODDIS,substr($this->bndismue->getTipdismue(),0,10));
+    $c->add(BndisbiePeer::CODDIS,substr($this->bndismue->getTipdismue(),0,6));
     $bndisbie = BndisbiePeer::doSelectOne($c);
 
     if ($bndisbie){
