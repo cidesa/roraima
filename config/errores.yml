@@ -681,6 +681,12 @@
 470:
   cod: 470
   msj: Grid no puede estar en blanco
+471:
+  cod: 471
+  msj: EL Monto no Puede ser cero
+472:
+  cod: 472
+  msj: EL Monto del adelanto no Puede ser mayor que el monto de intereses acumulado
 ###############OBRAS################
 1000:
     cod: 1000
