@@ -1,0 +1,54 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Npadeint
+    theme:            cidesaGenerator
+    fields:
+      display:        [codcon, codemp, fecade, monade, observacion, codtipcon, destipcon, nomemp]
+      codcon:
+        name: Código Contrato
+        msj_error: El Numero de Contrato es necesario
+        catalogo:
+          catalogoweb: Nptipcon_Presnomasitrabcont
+          clase: Nptipcon
+          ajax: 0
+          parametros: getprincipal="getCodtipcon" getsecundario="getDestipcon" campoprincipal="codtipcon" camposecundario="destipcon" campobase = "id"           
+          #catalogoparams:
+          #ajaxparams:  
+          #divupdate: divgridvaca     
+          #id:
+      codemp:
+        name: Código Empleado
+        msj_error: Debe Ingresar el Código del empleado
+        catalogo:
+          catalogoweb: Presnomreghisadeint_Npadeint
+          clase: Npasiempcont
+          ajax: 0
+          parametros: getprincipal="getCodemp" getsecundario="getNomemp" campoprincipal="codemp" camposecundario="nomemp" campobase = "id"           
+          catalogoparams: /param1/'."'+$('npadeint_codtipcon').value+'".'                       
+      fecade: { name: Fecha Adelanto}    
+      monade: { name: Monto }
+      observacion: { name: Observación, type: textarea_tag, params: size=65x5 maxlength=1000 }
+          
+    list: 
+      title: Listado de Anticipos de Intereses de Prestaciones:
+      display: [=codcon, =codemp, fecade, observacion]
+      filters: [codcon, codemp, fecade]
+      sort:           codcon
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   10
+      actions:
+        _create:      ~       
+ 
+
+    edit:
+      title: Registro de Anticipos de Intereses de Prestaciones:
+      display:
+        Datos Empleado:  [codcon, codemp]
+        Datos Anticipo:  [fecade, monade, observacion]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
