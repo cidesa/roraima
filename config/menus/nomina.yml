@@ -110,7 +110,9 @@ nomina:
         Registro de Salario Integral por Contrato:                   presNomRegSalInt
         Registro de Salario Integral por Contrato Individual:        presNomRegSalIntInd
       Registro Histórico de Anticipos Otorgados:                     PresNomRegHisAntPre
+      Registro Histórico de Adelanto de Intereses de Prestaciones:   PresNomRegHisAdeint
       Solicitud de Anticipo Sobre Prestaciones:                      PresNomAntPre
+      Solicitud de Anticipo Sobre Intereses de Prestaciones:         PresNomAdeInt            
       Calculo de Prestaciones Sociales:                              presNomCalIntPre
       Liquidación Final de Prestaciones:                             presnomliquidacion
       #Importar Datos Prestaciones Sociales:                         ImportarPrestaciones
