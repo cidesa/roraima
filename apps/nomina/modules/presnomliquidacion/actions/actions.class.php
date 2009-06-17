@@ -37,7 +37,7 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 			--(A.TIPO IS NULL) AND 
 			a.tipo='' and
 			A.codemp='$codemp' AND 
-			A.DIAART108>0 AND A.SALTOT>0 AND 
+			A.VALART108>0 and
 			B.CODNOM='$codnom' AND 
 			B.CODCON='000' AND 
 			TO_CHAR(A.FECFIN,'YYYY')>=B.PERDES AND 
@@ -51,16 +51,21 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 			SUM(A.ANTACUM*-1) AS MONTO,
 			'APORTES DEPOSITADOS EN FIDEICOMISO ' AS DESCRIPCION,
 			B.CODPAR AS PARTIDA 
-			From NPIMPPRESOC A,NPDEFPRELIQ B,
+			From NPIMPPRESOC A,NPDEFPRELIQ B,NPTIPCON D,NPASINOMCONT E,
 			(Select MAX(FECFIN) as FECHAFIN FROM NPIMPPRESOC WHERE tipo='' AND codemp='$codemp') C 
 			where  
 			A.tipo='' AND 
+			A.VALART108>0 and
 			A.FECFIN=C.FECHAFIN AND 
 			A.codemp='$codemp' AND 
 			B.CODNOM='$codnom' AND 
 			B.CODCON='000' AND
 			to_char(fecini,'yyyy')>=perdes and
-			to_char(fecfin,'yyyy')<=perhas
+			to_char(fecfin,'yyyy')<=perhas AND
+			E.CODNOM=B.CODNOM AND
+			D.CODTIPCON=E.CODTIPCON AND
+			(D.FID='1' OR D.FID='S') AND
+			FECINI>=(CASE WHEN (D.FID='0' OR D.FID='S') THEN D.FECDES ELSE fecini END)
 			GROUP BY B.CODPAR 
 			
 			Union All 
@@ -72,7 +77,7 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 			From NPIMPPRESOC A,NPDEFPRELIQ B 
 			where 
 			A.TIPO<>'' AND 
-			A.SALTOT>0 AND
+			A.VALART108>0 AND
 			A.codemp='$codemp' AND 
 			B.CODNOM='$codnom' AND 
 			B.CODCON='002' AND 
@@ -98,7 +103,7 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 			Union All 
 			select 4 as orden,
 			A.DIASBONO as DIAS,
-			(A.ULTSUE/30*A.DIASBONO)+A.MONTOINCI AS MONTO,
+			(A.MONTOINCI/30*A.DIASBONO) AS MONTO,
 			'BONO VACACIONAL FRACCIONADO AÑO '||A.PERINI||'-'||A.PERFIN AS DESCRIPCION,
 			B.CODPAR AS PARTIDA 
 			From NPVACLIQUIDACION A,NPDEFPRELIQ B 
@@ -139,7 +144,6 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 			TO_CHAR(A.FECANT,'YYYY')<=B.PERHAS 
 			GROUP BY A.FECANT,B.CODPAR 
 			ORDER BY orden,DESCRIPCION DESC";
-
 
 	      if (H::BuscarDatos($sql,$arr))
 	      {
@@ -395,7 +399,7 @@ public function configGrid($codemp="")
     if ($codemp!="")
     {				
       $arr=array();	  
-      $sql="select * from NPLIQVACACION WHERE CODEMP='$codemp' ORDER BY DESDE desc";
+      $sql="select * from NPVACLIQUIDACION WHERE CODEMP='$codemp' ORDER BY PERINI desc";
       if (H::BuscarDatos($sql,$arr))
       {
       //  H::PrintR($arr);
@@ -403,7 +407,7 @@ public function configGrid($codemp="")
         $cont=0;
         while ($cont<count($arr))
         {
-          if ((H::tofloat($arr[$cont]['corresponde'])-H::tofloat($arr[$cont]['disfrutados']))!=0)
+          /*if ((H::tofloat($arr[$cont]['corresponde'])-H::tofloat($arr[$cont]['disfrutados']))!=0)
           {
            $per[$i]['perini']=$arr[$cont]['desde'];
            $per[$i]['perfin']=$arr[$cont]['hasta'];
@@ -419,7 +423,16 @@ public function configGrid($codemp="")
            $per[$i]['monto']=number_format($monto,2,',','.');
            $per[$i]['id']=9;
            $i++;
-          }
+          }*/ #NO BORRAR ESTE CAMBIO SE HIZO DEBIDO A QUE ESTE GRID DEBE MOSTRAR LO QUE YA ESTA GRABADO EN LA TABLA NPVACLIQUIDACION
+		  $per[$i]['perini']=$arr[$cont]['perini'];
+          $per[$i]['perfin']=$arr[$cont]['perfin'];
+   		  $per[$i]['diadis']=H::tofloat($arr[$cont]['diadis']);
+          $per[$i]['diasbono']=H::tofloat($arr[$cont]['diasbono']);
+          $per[$i]['diacan']=$per[$i]['diadis']+$per[$i]['diasbono'];
+          $monto=($per[$i]['diadis']*($arr[$cont]['ultsue']/30))+($per[$i]['diasbono']*($arr[$cont]['montoinci']/30));
+          $per[$i]['monto']=number_format($monto,2,',','.');
+          $per[$i]['id']=9;
+          $i++;
 
           $cont++;
         }//fin del while
