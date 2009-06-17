@@ -5502,6 +5502,16 @@ A.CODREDE"
       CatcarterPeer :: DESTER => 'Descripción'
     );
   }
+  
+  public function Presnomreghisadeint_Npadeint($params=array()) {
+    $this->c = new Criteria();
+	$this->c->add(NpasiempcontPeer :: CODTIPCON, $params[0]);
+	$this->c->addAscendingOrderByColumn(NpasiempcontPeer :: CODEMP);
+    $this->columnas = array (
+      NpasiempcontPeer :: CODEMP => 'Codigo',
+      NpasiempcontPeer :: NOMEMP => 'Nombre'
+    );
+  }
 
 }
 
