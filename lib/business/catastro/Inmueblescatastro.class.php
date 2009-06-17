@@ -1,6 +1,6 @@
 <?php
 
-class Inmuebles {
+class Inmueblescatastro {
 
   public static function SalvarCatreginm($clasemodelo, $gridpersonas, $gridconstruccion, $gridterreno)
   {
