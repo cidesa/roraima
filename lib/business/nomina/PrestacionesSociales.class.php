@@ -1245,7 +1245,31 @@ End Function*/
 	  
 	return -1;
   }
+  public static function validarNpreghistadeint($codemp, $fecade) {
+    // return self:: validarNpantpre($codemp);
+    $error = -1;
+    $c = new Criteria;
+    $c->add(NphojintPeer :: CODEMP, $codemp);
+    $per = NphojintPeer :: doSelectOne($c);
+
+    if (!$per) {
+      $error = 425;
+    } else {
+      $c = new Criteria;
+      $c->add(NpadeintPeer :: CODEMP, $codemp);
+      $c->add(NpadeintPeer :: FECADE, $fecade);
+      $per = NpadeintPeer :: doSelectOne($c);
+
+      if ($per) {
+        $error = 433;
+      }
+    }
+    return $error;
+  }
+
   
   }
+class PS extends PrestacionesSociales
+{}
 
 ?>
