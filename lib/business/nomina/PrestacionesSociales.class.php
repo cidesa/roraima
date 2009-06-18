@@ -1048,7 +1048,16 @@ End Function*/
 	   	  #Primero verificamos cuantos meses cumplidos trabajados tiene el trabajador en el año 
 	   	  $anoegr=date('Y',strtotime($fecegr));
 		  $fecegrf=date('d/m/Y',strtotime($fecegr));
-		  $sqlmeses = "select to_char(to_date('".$fecegrf."','dd/mm/yyyy'),'mm')::numeric -to_char(to_date('01/01/$anoegr','dd/mm/yyyy'),'mm')::numeric as meses;";	  	  
+		  #PARA CALCULAR LOS MESES DEL AÑO
+		  $mesegr=date('m',strtotime($fecegr));
+		  $mesnext=str_pad($mesegr+1,2,'0',STR_PAD_LEFT);
+		  $anoe=$anoegr;
+		  if($mesegr=='12')
+		  {
+		  	$anoe=$anoegr+1;
+			$mesnext='01';
+		  }		  	  
+		  $sqlmeses = "select case when (to_date('".$fecegrf."','dd/mm/yyyy'))=cast('$anoe-$mesnext-01' as date)-1 then (to_char(to_date('".$fecegrf."','dd/mm/yyyy'),'mm')::numeric -to_char(to_date('01/01/$anoegr','dd/mm/yyyy'),'mm')::numeric)+1 else (to_char(to_date('".$fecegrf."','dd/mm/yyyy'),'mm')::numeric -to_char(to_date('01/01/$anoegr','dd/mm/yyyy'),'mm')::numeric) end as meses";
 		  if (Herramientas::BuscarDatos($sqlmeses,&$result))
 		   	$meses = $result[0]['meses'];
 		  else
