@@ -2132,9 +2132,8 @@ class Nomina {
 
       case "CATRABMES" :
         $valor = 0;
-        $hasta_mod = split('/', $fecnom);
-        //$desde_mod = split('/', $desde);
-        if (intval(date('m', strtotime($fechaing))) == intval(date('m', strtotime($hasta_mod[1] . '/' . $hasta_mod[0] . '/' . $hasta_mod[2]))))
+
+        if (intval(date('m', strtotime($fechaing))) == intval(date('m', strtotime($fecnom))))
         {
            $valor = 1;
         }
@@ -7074,6 +7073,7 @@ public static function salvarNpsalintind($npsalint, $grid) {
     }
     return -1;
   }
+
 
 
   public static function validarNomcamnomcar($npasicaremp, $codnom, $codcar, $codcat, $feccam) {
