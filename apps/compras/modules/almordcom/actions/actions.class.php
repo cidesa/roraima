@@ -549,7 +549,7 @@ class almordcomActions extends autoalmordcomActions
         $montorgotab=CarecargPeer::getDato($this->getRequestParameter('codigo'),'monrgo');
         $monrgo=number_format(CarecargPeer::getDato($this->getRequestParameter('codigo'),'monrgo'),2,',','.');
         $tiprgo=CarecargPeer::getDato($this->getRequestParameter('codigo'),'tiprgo');
-        $reccal=SolicituddeEgresos::CalcularRecargos($tiprgo,$monrgo,$this->getRequestParameter('monart'));
+        $reccal=SolicituddeEgresos::CalcularRecargos($tiprgo,$montorgotab,$this->getRequestParameter('monart'));
         $reccalformat=number_format($reccal,2,',','.');
         $codpar=CarecargPeer::getDato($this->getRequestParameter('codigo'),'codpre');
         if ($tiprgo=='M')//Tipo recargo puntual (monto)
@@ -562,7 +562,7 @@ class almordcomActions extends autoalmordcomActions
       }
  else if ($this->getRequestParameter('ajax')=='16')//Trae la partida de cada recargo
       {
-        print $this->getRequestParameter('codigo');
+         $this->getRequestParameter('codigo');
        $partida=H::getX('CODRGO','Carecarg','Codpre',$this->getRequestParameter('codigo'));
         $output = '[["caordcom_partrec","'.$partida.'",""]]';
         $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
@@ -1339,7 +1339,7 @@ class almordcomActions extends autoalmordcomActions
 
   }
 
-   public function configGrid_ResumenPartidas($ordcom='')
+  public function configGrid_ResumenPartidas($ordcom='')
   {
   	$escodpre='N';
     $sql="select 9 as id, '' as nompar,  a.codpar, sum((a.totart-a.rgoart)) as totart, 'N' as recargo from caartord a
