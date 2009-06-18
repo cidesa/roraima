@@ -587,10 +587,10 @@ public function configGrid($codemp="")
 				/**ASIGNAMOS VALORES DE SUELDOS*/			
 				#Ultimo sueldo del empleado
 				$antiguedad = H::DateDiff("yyyy", $fecing, date("Y-m-d"));
-				$sql= "Select coalesce(sum(MonAsi),0) as ultsue from NPSALINT where CodEmp='$codemp' and 
+				$sql= "Select coalesce(sum(MonAsi),0) as ultsue from NPSALINT a, npasipre b where CodEmp='$codemp' and 
 						FECFINCON = (SELECT MAX(FECFINCON) FROM NPSALINT where CodEmp='$codemp' and 
-						FECFINCON<= to_date('$fecegr','dd/mm/yyyy'))";
-	
+						FECFINCON<= to_date('$fecegr','dd/mm/yyyy')) and a.codasi=b.codasi and b.tipasi='S'  ";
+
 				if (H::BuscarDatos($sql,$rs))
 				   $ultimosueldo = $rs[0]["ultsue"];
 				else
