@@ -472,7 +472,7 @@ public static function PagoDoble()
 
   public static function Tipo_Asignaciones()
   {
-   return array('S' => 'Sueldo', 'V' => 'Bono Vacacional', 'F' => 'Bono Fin de Año');
+   return array('S' => 'Sueldo', 'V' => 'Bono Vacacional', 'F' => 'Bono Fin de Año', 'O' => 'Otros');
   }
 
   public static function ListaEstados()
