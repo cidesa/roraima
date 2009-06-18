@@ -51,6 +51,7 @@
 
   <?php $value = object_input_tag($nphojint, 'getNomemp', array (
   'size' => 60,
+  'readonly' => true,
   'maxlength' => 100,
   'control_name' => 'nphojint[nomemp]',
 )); echo $value ? $value : '&nbsp;' ?>
