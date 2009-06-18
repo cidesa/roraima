@@ -1554,7 +1554,12 @@ class OrdendePago
         $result2= OptipretPeer::doSelectOne($b);
         if ($result2)
         {
-         $comboboxislr[$result2->getPorret()] = $col1.'_'.$result2->getDestip();
+         if ($result2->getPorret()>0)
+         {
+           $comboboxislr[$result2->getPorret()] = $col1.'_'.$result2->getDestip();
+         }else{
+         	$comboboxislr[$result2->getPorsus()] = $col1.'_'.$result2->getDestip();
+         }
         }
       }
      $j++;
