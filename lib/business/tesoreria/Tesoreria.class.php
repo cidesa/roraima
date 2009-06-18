@@ -380,14 +380,14 @@ class Tesoreria {
   }
 
   public static function hacer_No_Conciliables($nro, $mes, $ano, $fechas) {
-    $sql = "Select A.RefLib as reflib, B.RefBan as refban, A.FecLib as feclib, B.FecBan as fecban,
+	$sql = "Select A.RefLib as reflib, B.RefBan as refban, A.FecLib as feclib, B.FecBan as fecban,
           A.TipMov as movlib, B.TipMov as movban, A.DesLib as deslib, B.DesBan as desban,
           A.MonMov as monmov1, B.MonMov as monmov2
                 From TsMovLib A, TsMovBan B
                 Where
                 A.NumCue = '" . $nro . "' And
                 B.NumCue = '" . $nro . "' And
-          A.RefLib = B.RefBan And
+          A.RefLib = B.RefBan And A.TipMov=B.TipMov And
                 A.FecLib <= To_Date('" . $fechas . "','DD/MM/YYYY') And
                 B.FecBan <= To_Date('" . $fechas . "','DD/MM/YYYY') And
                 A.MonMov <> B.MonMov";
