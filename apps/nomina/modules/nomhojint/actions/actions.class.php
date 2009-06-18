@@ -17,6 +17,13 @@ class nomhojintActions extends autonomhojintActions
     $this->coderr =-1;
 
     if($this->getRequest()->getMethod() == sfRequest::POST){
+     $this->nphojint = $this->getNphojintOrCreate();
+     $this->updateNphojintFromRequest();
+
+	 if($this->nphojint->getNomemp()=='' or $this->nphojint->getNomemp()==',')
+	 {
+	 	$this->coderr=473;
+	 }  	
 
      $nphojint = $this->getRequestParameter('nphojint');
 
@@ -260,7 +267,7 @@ $this->Bitacora('Guardo');
 
     $this->labels = $this->getLabels();
     if($this->getRequest()->getMethod() == sfRequest::POST)
-    {
+    { 
       if($this->coderr!=-1){
         $err = Herramientas::obtenerMensajeError($this->coderr);
         $this->getRequest()->setError('',$err);

@@ -2,7 +2,7 @@ methods:
   post:
    - "nphojint{codemp}"
    - "nphojint{fotemp}"
-   - "nphojint{nomemp}"
+#   - "nphojint{nomemp}"
    - "nphojint{cedemp}"
    - "nphojint{codniv}"
 #   - "nphojint{lugnac}"
@@ -53,10 +53,10 @@ names:
     required_msg: El Código del Empleado no puedo estar en Blanco
     validators: UniqueValidator
 
-  nphojint{nomemp}:
-    required:  Yes
-    required_msg: Los Apellido(s) y Nombre(s) no puedo estar en Blanco
-    validators: DescripcionValidator
+#  nphojint{nomemp}:
+#    required:  Yes
+#    required_msg: Los Apellido(s) y Nombre(s) no puedo estar en Blanco
+#    validators: DescripcionValidator
 
   nphojint{cedemp}:
     required:  Yes
