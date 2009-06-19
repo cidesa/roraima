@@ -118,7 +118,7 @@ function cargardatosfor()
 
     var i=0;
     var filas=parseInt($('cobtransa_filasdet').value);
-    while (i<=filas)
+    while (i<filas)
     {
       var col6="ax_"+i+"_6";
       var col8="ax_"+i+"_8";
@@ -215,7 +215,7 @@ function cargardatosfor()
     var monpago=0;
     var i=0;
     var filas=parseInt($('cobtransa_filasfor').value);
-    while (i<=filas)
+    while (i<filas)
     {
       var col2="bx_"+i+"_2";
       var num1=toFloat(col2);
@@ -259,7 +259,7 @@ function recargos(id)
    var mon_recargo=0;
    var recargo_fila=0;
 
-   var am=totalregistros('cx',2,15);
+   var am=obtener_filas_grid('c',2);
    var l=0;
    while (l<am)
    {
@@ -354,7 +354,7 @@ function recargos(id)
    var mon_descuento=0;
    var descuento_fila=0;
 
-   var am=totalregistros('dx',2,15);
+   var am=obtener_filas_grid('d',2);
    var l=0;
    while (l<am)
    {
@@ -495,7 +495,7 @@ function recargos(id)
   {
     if (div=='R')
     {
-      var fr=totalregistros('cx',2,15);
+      var fr=(obtener_filas_grid('c',1)-1);
       var filact=fr;
       var fildoc='cx_'+filact+'_1';
       var filmonori='cx_'+filact+'_5';
@@ -505,7 +505,7 @@ function recargos(id)
     }
     else
     {
-      var fd=totalregistros('dx',2,15);
+      var fd=(obtener_filas_grid('d',1)-1);
       var filact=fd;
       var fildoc='dx_'+filact+'_1';
       var filmonori='dx_'+filact+'_5';
@@ -561,7 +561,7 @@ function recargos(id)
   {
     var i=0;
     var filas=parseInt($('cobtransa_filasfor').value);
-    while (i<=filas)
+    while (i<filas)
     {
       var monto="bx_"+i+"_2";
       var numero="bx_"+i+"_3";

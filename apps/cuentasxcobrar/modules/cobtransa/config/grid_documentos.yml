@@ -4,7 +4,7 @@ opciones:                  # Opciones generales
   tabla:                   cobdettra
   anchogrid:               1100
   ancho:                   1200
-  filas:                   1
+  filas:                   0
   titulo:                  ' '
   htmltotalfilas:          ' '
 1:
