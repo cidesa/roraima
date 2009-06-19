@@ -45,6 +45,19 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
  <br>
+   <?php echo label_for('optipret[codtipsen]', __($labels['optipret{codtipsen}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('optipret{codtipsen}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('optipret{codtipsen}')): ?>
+    <?php echo form_error('optipret{codtipsen}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($optipret, 'getCodtipsen', array (
+  'size' => 20,
+  'control_name' => 'optipret[codtipsen]',
+  'maxlength' => 3,
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+ <br>
   <?php echo label_for('optipret[consustra]', __($labels['optipret{consustra}']), 'class="required" ') ?>
    <div class="content<?php if ($sf_request->hasError('optipret{destip}')): ?> form-error<?php endif; ?>">
   <?php if($optipret->getConsustra()=='S') $val = true; else $val=false; ?>

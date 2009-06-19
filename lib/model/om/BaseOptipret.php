@@ -41,6 +41,10 @@ abstract class BaseOptipret extends BaseObject  implements Persistent {
 
 
 	
+	protected $codtipsen;
+
+
+	
 	protected $id;
 
 	
@@ -108,6 +112,13 @@ abstract class BaseOptipret extends BaseObject  implements Persistent {
 
     if($val) return number_format($this->factor,2,',','.');
     else return $this->factor;
+
+  }
+  
+  public function getCodtipsen()
+  {
+
+    return trim($this->codtipsen);
 
   }
   
@@ -198,6 +209,16 @@ abstract class BaseOptipret extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setCodtipsen($v)
+	{
+
+    if ($this->codtipsen !== $v) {
+        $this->codtipsen = $v;
+        $this->modifiedColumns[] = OptipretPeer::CODTIPSEN;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -228,7 +249,9 @@ abstract class BaseOptipret extends BaseObject  implements Persistent {
 
       $this->factor = $rs->getFloat($startcol + 7);
 
-      $this->id = $rs->getInt($startcol + 8);
+      $this->codtipsen = $rs->getString($startcol + 8);
+
+      $this->id = $rs->getInt($startcol + 9);
 
       $this->resetModified();
 
@@ -236,7 +259,7 @@ abstract class BaseOptipret extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 9; 
+            return $startcol + 10; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Optipret object", $e);
     }
@@ -408,6 +431,9 @@ abstract class BaseOptipret extends BaseObject  implements Persistent {
 				return $this->getFactor();
 				break;
 			case 8:
+				return $this->getCodtipsen();
+				break;
+			case 9:
 				return $this->getId();
 				break;
 			default:
@@ -428,7 +454,8 @@ abstract class BaseOptipret extends BaseObject  implements Persistent {
 			$keys[5] => $this->getUnitri(),
 			$keys[6] => $this->getPorsus(),
 			$keys[7] => $this->getFactor(),
-			$keys[8] => $this->getId(),
+			$keys[8] => $this->getCodtipsen(),
+			$keys[9] => $this->getId(),
 		);
 		return $result;
 	}
@@ -469,6 +496,9 @@ abstract class BaseOptipret extends BaseObject  implements Persistent {
 				$this->setFactor($value);
 				break;
 			case 8:
+				$this->setCodtipsen($value);
+				break;
+			case 9:
 				$this->setId($value);
 				break;
 		} 	}
@@ -486,7 +516,8 @@ abstract class BaseOptipret extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[5], $arr)) $this->setUnitri($arr[$keys[5]]);
 		if (array_key_exists($keys[6], $arr)) $this->setPorsus($arr[$keys[6]]);
 		if (array_key_exists($keys[7], $arr)) $this->setFactor($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setId($arr[$keys[8]]);
+		if (array_key_exists($keys[8], $arr)) $this->setCodtipsen($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setId($arr[$keys[9]]);
 	}
 
 	
@@ -502,6 +533,7 @@ abstract class BaseOptipret extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(OptipretPeer::UNITRI)) $criteria->add(OptipretPeer::UNITRI, $this->unitri);
 		if ($this->isColumnModified(OptipretPeer::PORSUS)) $criteria->add(OptipretPeer::PORSUS, $this->porsus);
 		if ($this->isColumnModified(OptipretPeer::FACTOR)) $criteria->add(OptipretPeer::FACTOR, $this->factor);
+		if ($this->isColumnModified(OptipretPeer::CODTIPSEN)) $criteria->add(OptipretPeer::CODTIPSEN, $this->codtipsen);
 		if ($this->isColumnModified(OptipretPeer::ID)) $criteria->add(OptipretPeer::ID, $this->id);
 
 		return $criteria;
@@ -548,6 +580,8 @@ abstract class BaseOptipret extends BaseObject  implements Persistent {
 		$copyObj->setPorsus($this->porsus);
 
 		$copyObj->setFactor($this->factor);
+
+		$copyObj->setCodtipsen($this->codtipsen);
 
 
 		$copyObj->setNew(true);

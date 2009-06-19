@@ -1106,6 +1106,9 @@ propel:
       type: NUMERIC
       size: 16
       scale: 6
+    codtipsen:
+      type: VARCHAR
+      size: 3
     id:
       type: INTEGER
       required: true

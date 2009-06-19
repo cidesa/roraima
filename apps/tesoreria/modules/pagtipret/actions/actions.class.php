@@ -109,6 +109,11 @@ $this->Bitacora('Guardo');
       $this->optipret->setDescta($optipret['descta']);
     }
 
+    if (isset($optipret['codtipsen']))
+    {
+      $this->optipret->setCodtipsen($optipret['codtipsen']);
+    }
+
   }
 
   public function MostrarUnidadesTributarias()
