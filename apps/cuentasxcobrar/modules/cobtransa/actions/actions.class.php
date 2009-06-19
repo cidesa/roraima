@@ -375,6 +375,12 @@ class cobtransaActions extends autocobtransaActions
         return false;
       }
 
+       if (self::validarGeneraComprobante())
+      {
+	    $this->coderr=508;
+	    return false;
+	  }
+
       $x=$gridfor[0];
       $i=0;
       if (count($x)==0)
@@ -670,6 +676,16 @@ class cobtransaActions extends autocobtransaActions
      }
       $output = '[["cobtransa_totalcomprobantes","'.$concom.'",""],["","",""]]';
       $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+  }
+
+   public function validarGeneraComprobante()
+  {
+    $form="sf_admin/cobtransa/confincomgen";
+    $grabo=$this->getUser()->getAttribute('grabo',null,$form.'0');
+
+    if ($grabo=='')
+    { return true;}
+    else { return false;}
   }
 
 }

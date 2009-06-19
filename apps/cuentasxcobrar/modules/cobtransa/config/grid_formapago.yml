@@ -4,7 +4,7 @@ opciones:                  # Opciones generales
   tabla:                   cobdetfor
   anchogrid:               800
   ancho:                   1000
-  filas:                   1
+  filas:                   0
   titulo:                  ' '
   htmltotalfilas:          ' '
 1:       # Columna 1

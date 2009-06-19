@@ -4,7 +4,7 @@ opciones:                  # Opciones generales
   tabla:                   cobdestra
   ancho:				   300
   anchogrid:               600
-  filas:                   15
+  filas:                   1
   titulo:                  ' '
   htmltotalfilas:          ' '
 1:
