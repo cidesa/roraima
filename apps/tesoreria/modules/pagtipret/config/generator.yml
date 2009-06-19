@@ -4,9 +4,9 @@ generator:
     model_class:      Optipret
     theme:            default
     fields:
-      codtip: { name: Codigo , params: maxlength=3}
-      destip: { name: Descripcion, params: maxlength=250}
-      codcon: { name: Codigo Contable, params: maxlength=32}
+      codtip: { name: Código , params: maxlength=3}
+      destip: { name: Descripción, params: maxlength=250}
+      codcon: { name: Código Contable, params: maxlength=32}
       basimp: { name: Base Imponible}
       porret: { name: Porcentaje a Retener}
       unitri: { name: Unidades Tributarias}
@@ -14,6 +14,7 @@ generator:
       factor: { name: Factor}
       descta: { name: Descripción}
       consustra: { name: Maneja Sustraendo}
+      codtipsen: { name: Codificación SENIAT , params: maxlength=3}
     list:
       title:          Tipos de Retenciones
       filters:        [codtip, destip]
@@ -25,7 +26,7 @@ generator:
         _delete:      ~
     edit:
       title:          Tipos de Retenciones
-      display:        [codtip, destip, codcon, basimp, porret, unitri, porsus, factor, descta, consustra]
+      display:        [codtip, destip, codcon, basimp, porret, unitri, porsus, factor, descta, consustra, codtipsen]
       actions:
         _list:        ~
         _save:        ~
