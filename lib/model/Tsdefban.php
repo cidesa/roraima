@@ -9,6 +9,13 @@
  */
 class Tsdefban extends BaseTsdefban
 {
+	protected $fechades = '';
+	protected $fechahas = '';
+	protected $gripmovban = '';
+	protected $gripmovlib = '';
+	protected $gripdesmovlib = '';
+	protected $gripdesmovban = '';
+
     public function getDestip()
   {
     return Herramientas::getX('CODTIP','Tstipcue','Destip',self::getTipcue());

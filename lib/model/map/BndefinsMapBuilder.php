@@ -70,6 +70,8 @@ class BndefinsMapBuilder {
 
 		$tMap->addColumn('CODDES', 'Coddes', 'string', CreoleTypes::VARCHAR, false, 2);
 
+		$tMap->addColumn('CODINC', 'Codinc', 'string', CreoleTypes::VARCHAR, false, 2);
+
 		$tMap->addColumn('PORREV', 'Porrev', 'string', CreoleTypes::VARCHAR, false, 5);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
