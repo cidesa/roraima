@@ -4,27 +4,8 @@ set search_path to "SIMA002";
 
 -- DROP VIEW "SIMA002".npanos;
 
-CREATE OR REPLACE VIEW npanos AS
-(SELECT 1972::numeric + to_number(cppereje.pereje::text, '99'::text) AS ano
-   FROM cppereje
-UNION all
-
- SELECT 1984::numeric + to_number(cppereje.pereje::text, '99'::text) AS ano
-   FROM cppereje
-
-UNION
- SELECT 1996::numeric + to_number(cppereje.pereje::text, '99'::text) AS ano
-   FROM cppereje
-
-UNION
-SELECT DISTINCT to_number(to_char(npsalint.fecinicon::timestamp with time zone, 'YYYY'::text), '9999'::text) AS ano
-   FROM npsalint
-
-UNION
- SELECT max(to_number(to_char(npsalint.fecinicon::timestamp with time zone, 'YYYY'::text), '9999'::text)) + 1::numeric AS ano
-   FROM npsalint);
-
-ALTER TABLE npanos OWNER TO postgres;
+CREATE OR REPLACE VIEW NPANOS AS
+(select ano::numeric from generate_series(1970,to_number(to_char(now(),'yyyy'),'9999')::integer+1) as ano);
 
 
 
@@ -219,16 +200,15 @@ COALESCE((CASE WHEN (SELECT SUM(MONASI)
 			   END) END) AS CODTIPCON,
 B.ID
 FROM NPHOJINT A,
-(SELECT
- to_date(substr(to_char(B.fecdes,'dd/mm/yyyy'),1,6)||a.ano,'dd/mm/yyyy')::date as fecini,
- LAST_DAY(to_date(substr(to_char(B.fecdes,'dd/mm/yyyy'),1,6)||a.ano,'dd/mm/yyyy')::date) as fecfin,
- (SELECT
-  Count(*)
-  FROM NPANOS X,CPPEREJE Y
-  WHERE to_date(substr(to_char(Y.fecdes,'dd/mm/yyyy'),1,6)||X.ano,'dd/mm/yyyy')::date<
-  to_date(substr(to_char(B.fecdes,'dd/mm/yyyy'),1,6)||a.ano,'dd/mm/yyyy')::date) AS ID
- FROM NPANOS A,CPPEREJE B
- ORDER BY A.ano,B.fecdes,B.fechas) B
+  (select 
+   add_months((select to_date('01/01/'||to_char(min(ano),'9999'),'dd/mm/yyyy') from npanos),id-1) as fecini,
+   last_day(add_months((select to_date('01/01/'||to_char(min(ano),'9999'),'dd/mm/yyyy') from npanos),id-1)) as fecfin,
+   id
+   from generate_series(1,(SELECT count(*)
+			   FROM npanos a, 
+			  (select '01/'||lpad(trim(to_char(fecdes,'99')),2,'0') as fecdes 
+			  from generate_series(1,12) as fecdes) b)) as id
+   order by id) B 
  WHERE  B.FECFIN>=(CASE WHEN TO_CHAR(A.FECING,'DD')>'01' THEN ADD_MONTHS(A.FECING,4)
                   ELSE ADD_MONTHS(A.FECING,4)-1 END)
  AND B.FECFIN<=NOW()) A LEFT OUTER JOIN
@@ -242,6 +222,7 @@ FROM NPHOJINT A,
 WHERE A.CODTIPCON=C.CODTIPCON
 AND A.FECINI>=C.FECINIREG)
 ORDER BY A.CODEMP,A.FECFIN,A.ID
+
 
 
 
