@@ -2402,7 +2402,7 @@ class Nomina {
         }
         elseif (substr($token, 0, 1) == 'H') // historicos
         {
-
+		  if($especial=='NO') $esp='N'; else $esp='S';
           if (substr($token, 23, 1) == 'P') // PROMEDIO
             {
             $fec1 = substr($token, 9, 2) . '/' . substr($token, 7, 2) . '/' . substr($token, 11, 4);
@@ -2428,7 +2428,7 @@ class Nomina {
               if (substr($token, 24, 1) == 'P') // Periodo
               {
                  $numero = floatval(substr($token, 25));
-                 $criterio="select min(fecnom) as minfec,max(fecnom) as maxfec from (select distinct fecnom from nphiscon where codnom='" . substr($token, 1, 3) . "' order by fecnom desc limit " . $numero . ") a ";
+                 $criterio="select min(fecnom) as minfec,max(fecnom) as maxfec from (select distinct fecnom from nphiscon where codnom='" . substr($token, 1, 3) . "' and codemp='" . $empleado . "' and especial='$esp' order by fecnom desc limit " . $numero . ") a ";
                  if (Herramientas :: BuscarDatos($criterio, &$resultados)) {
                  if (!empty($resultados[0]["minfec"]) && !empty($resultados[0]["maxfec"]))
                  {
@@ -2508,7 +2508,7 @@ class Nomina {
               if (substr($token, 24, 1) == 'P') // PERIODO
               {
               	 $numero = floatval(substr($token, 25));
-                 $criterio="select min(fecnom) as minfec,max(fecnom) as maxfec from (select distinct fecnom from nphiscon where codnom='" . substr($token, 1, 3) . "' order by fecnom desc limit " . $numero . ") a ";
+                 $criterio="select min(fecnom) as minfec,max(fecnom) as maxfec from (select distinct fecnom from nphiscon where codnom='" . substr($token, 1, 3) . "' and codemp='" . $empleado . "' and especial='$esp' order by fecnom desc limit " . $numero . ") a ";
                  if (Herramientas :: BuscarDatos($criterio, &$resultados)) {
                  if (!empty($resultados[0]["minfec"]) && !empty($resultados[0]["maxfec"]))
                  {
@@ -2586,7 +2586,7 @@ class Nomina {
              if (substr($token, 24, 1) == 'P') // PERIODO
              {
              	 $numero = floatval(substr($token, 25));
-                 $criterio="select min(fecnom) as minfec,max(fecnom) as maxfec from (select distinct fecnom from nphiscon where codnom='" . substr($token, 1, 3) . "' order by fecnom desc limit " . $numero . ") a ";
+                 $criterio="select min(fecnom) as minfec,max(fecnom) as maxfec from (select distinct fecnom from nphiscon where codnom='" . substr($token, 1, 3) . "' and codemp='" . $empleado . "' and especial='$esp' order by fecnom desc limit " . $numero . ") a ";
                  if (Herramientas :: BuscarDatos($criterio, &$resultados)) {
                  if (!empty($resultados[0]["minfec"]) && !empty($resultados[0]["maxfec"]))
                  {
@@ -2665,7 +2665,7 @@ class Nomina {
              if (substr($token, 24, 1) == 'P') // PERIODO
              {
                  $numero = floatval(substr($token, 25));
-                 $criterio="select min(fecnom) as minfec,max(fecnom) as maxfec from (select distinct fecnom from nphiscon where codnom='" . substr($token, 1, 3) . "' order by fecnom desc limit " . $numero . ") a ";
+                 $criterio="select min(fecnom) as minfec,max(fecnom) as maxfec from (select distinct fecnom from nphiscon where codnom='" . substr($token, 1, 3) . "' and codemp='" . $empleado . "' and especial='$esp' order by fecnom desc limit " . $numero . ") a ";
                  if (Herramientas :: BuscarDatos($criterio, &$resultados)) {
                  if (!empty($resultados[0]["minfec"]) && !empty($resultados[0]["maxfec"]))
                  {
