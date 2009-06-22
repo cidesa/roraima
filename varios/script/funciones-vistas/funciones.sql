@@ -125,7 +125,7 @@ $BODY$
 ALTER FUNCTION instr2(character varying, character varying, integer) OWNER TO postgres;
 
 
-CREATE OR REPLACE FUNCTION "SIMA002".obtener_ejecucion(codigopre bpchar, perdes bpchar, perhas bpchar, anno bpchar, tipo bpchar)
+CREATE OR REPLACE FUNCTION obtener_ejecucion(codigopre bpchar, perdes bpchar, perhas bpchar, anno bpchar, tipo bpchar)
   RETURNS numeric AS
 $BODY$
 DECLARE
@@ -492,7 +492,7 @@ END IF;
 END;
 $BODY$
   LANGUAGE 'plpgsql' VOLATILE;
-ALTER FUNCTION "SIMA002".obtener_ejecucion(bpchar, bpchar, bpchar, bpchar, bpchar) OWNER TO postgres;
+ALTER FUNCTION obtener_ejecucion(bpchar, bpchar, bpchar, bpchar, bpchar) OWNER TO postgres;
 
 
 CREATE OR REPLACE FUNCTION partidaconcepto(concepto character varying, nomina character varying, cargo character varying)
@@ -511,7 +511,7 @@ $BODY$
 ALTER FUNCTION partidaconcepto(concepto character varying, nomina character varying, cargo character varying) OWNER TO postgres;
 
 
-CREATE OR REPLACE FUNCTION "SIMA002".actualizar_saldosnew(codigo_cta character varying, fecha_ini date, fecha_cie date, periodo character varying, debcre character varying, monto numeric)
+CREATE OR REPLACE FUNCTION actualizar_saldosnew(codigo_cta character varying, fecha_ini date, fecha_cie date, periodo character varying, debcre character varying, monto numeric)
   RETURNS integer AS
 $BODY$
 DECLARE
@@ -580,7 +580,7 @@ BEGIN
 END;
 $BODY$
   LANGUAGE 'plpgsql' VOLATILE;
-ALTER FUNCTION "SIMA002".actualizar_saldosnew(character varying, date, date, character varying, character varying, numeric) OWNER TO postgres;
+ALTER FUNCTION actualizar_saldosnew(character varying, date, date, character varying, character varying, numeric) OWNER TO postgres;
 
 
 CREATE OR REPLACE FUNCTION cuantotiempo(fecini date, fecfin date, frecuencia character varying, modo character varying)
@@ -792,7 +792,7 @@ ALTER FUNCTION obtener_mascara() OWNER TO postgres;
 
 
 
-CREATE OR REPLACE FUNCTION "SIMA002".obtener_periodo(fecha date)
+CREATE OR REPLACE FUNCTION obtener_periodo(fecha date)
   RETURNS character varying AS
 $BODY$
 DECLARE
@@ -818,7 +818,7 @@ BEGIN
 END;
 $BODY$
   LANGUAGE 'plpgsql' VOLATILE;
-ALTER FUNCTION "SIMA002".obtener_periodo(date) OWNER TO postgres;
+ALTER FUNCTION obtener_periodo(date) OWNER TO postgres;
 
 
 CREATE OR REPLACE FUNCTION antpub (tipo char, empleado varchar, fecha date, publica char) RETURNS integer AS
@@ -1008,17 +1008,25 @@ $BODY$
 ALTER FUNCTION add_months(date, numeric) OWNER TO postgres;
 
 
+
+
+
 CREATE OR REPLACE FUNCTION calculopres (codigo varchar, fecha varchar, capitalizacion char,salpro char) RETURNS SETOF regprestaciones AS
 $body$
 DECLARE
 recordSalida REGPRESTACIONES%ROWTYPE;
 capital numeric;
+capitalint numeric;
+capitalactint numeric;
 tasa numeric;
 interesacum numeric;
 fechareal varchar;
 fechaegreso varchar;
+fideicomiso varchar;
+fechafide date;
 BEGIN
 capital:=0;
+capitalint=0;
 interesacum:=0;
 SELECT INTO fechaegreso COALESCE(TO_CHAR(fecret,'DD/MM/YYYY'),fecha)
 FROM NPHOJINT
@@ -1228,30 +1236,80 @@ loop
   AND B.FECDES<=recordSalida.fecini
   AND B.FECHAS>=recordSalida.fecfin;
 
-
+  
+  SELECT INTO fideicomiso,fechafide fid,fecdes
+  FROM NPTIPCON
+  WHERE CODTIPCON=recordSalida.codtipcon; 
+ 
   IF tasa IS NULL THEN
      tasa:=0;
   END IF;
+
+  IF fechafide IS NULL THEN
+     fechafide:=now();
+  END IF;
+
   IF  capitalizacion='A' THEN
      IF TO_CHAR(recordSalida.fecing,'MM')=TO_CHAR(recordSalida.fecfin,'MM')
-        AND recordSalida.antannos>=1 THEN
+        AND recordSalida.antannos>=1 THEN 
         capital:=capital+recordSalida.monpres-recordSalida.monant+interesacum;
+        IF fideicomiso='0' OR fideicomiso='N' THEN
+           capitalint:=capitalint+recordSalida.monpres-recordSalida.monant+interesacum; 
+        ELSE
+           IF recordSalida.fecfin<fechafide THEN
+              capitalint:=capitalint+recordSalida.monpres-recordSalida.monant+interesacum;  
+           ELSE
+              capitalint:=capitalint+interesacum;  
+           END IF;
+        END IF;        
         interesacum:=0;
      ELSE
         capital:=capital+recordSalida.monpres-recordSalida.monant;
+        IF fideicomiso='0' OR fideicomiso='N' THEN
+           capitalint:=capitalint+recordSalida.monpres-recordSalida.monant; 
+        ELSE
+           IF recordSalida.fecfin<fechafide THEN
+              capitalint:=capitalint+recordSalida.monpres-recordSalida.monant;    
+           END IF;
+        END IF; 
      END IF;
   ELSE
      IF capitalizacion='M' THEN
         capital:=capital+recordSalida.monpres-recordSalida.monant+interesacum;
+        IF fideicomiso='0' OR fideicomiso='N' THEN
+           capitalint:=capitalint+recordSalida.monpres-recordSalida.monant+interesacum; 
+        ELSE
+           IF recordSalida.fecfin<fechafide THEN
+              capitalint:=capitalint+recordSalida.monpres-recordSalida.monant+interesacum;  
+           ELSE
+              capitalint:=capitalint+interesacum;  
+           END IF;
+        END IF; 
         interesacum:=0;
      ELSE
         capital:=capital+recordSalida.monpres-recordSalida.monant;
+        IF fideicomiso='0' OR fideicomiso='N' THEN
+           capitalint:=capitalint+recordSalida.monpres-recordSalida.monant; 
+        ELSE
+           IF recordSalida.fecfin<fechafide THEN
+              capitalint:=capitalint+recordSalida.monpres-recordSalida.monant;    
+           END IF;
+        END IF; 
      END IF;
   END IF;
   recordSalida.capital:=capital-recordSalida.monpres+recordSalida.monant;
+  IF fideicomiso='0' OR fideicomiso='N' THEN
+     capitalactint:=capitalint-recordSalida.monpres+recordSalida.monant; 
+  ELSE
+     IF recordSalida.fecfin<fechafide THEN
+        capitalactint:=capitalint-recordSalida.monpres+recordSalida.monant;    
+     ELSE 
+        capitalactint:=capitalint;
+     END IF;
+  END IF;
   recordSalida.tasa:=tasa;
   IF recordSalida.tipo='DEPOSITADOS' THEN
-     recordSalida.monint:=round((recordSalida.capital* (tasa/100) / 12 /30 * 30),2);
+     recordSalida.monint:=round((capitalactint* (tasa/100) / 12 /30 * 30),2);
   ELSE
      recordSalida.monint:=0;
   END IF;
@@ -1269,12 +1327,7 @@ $body$
 LANGUAGE 'plpgsql' VOLATILE CALLED ON NULL INPUT SECURITY INVOKER;
 
 
-
-
-
-
-
-CREATE OR REPLACE FUNCTION "SIMA002".months_between(date, date)
+CREATE OR REPLACE FUNCTION months_between(date, date)
   RETURNS integer AS
 $BODY$
 /* New function body */
@@ -1295,11 +1348,11 @@ begin
 end
 $BODY$
   LANGUAGE 'plpgsql' VOLATILE;
-ALTER FUNCTION "SIMA002".months_between(date, date) OWNER TO postgres;
+ALTER FUNCTION months_between(date, date) OWNER TO postgres;
 
 
 
-CREATE OR REPLACE FUNCTION "SIMA002".saldoctareal(tipo character varying, cta character varying, periodo character varying)
+CREATE OR REPLACE FUNCTION saldoctareal(tipo character varying, cta character varying, periodo character varying)
   RETURNS numeric AS
 $BODY$
 DECLARE
@@ -1314,14 +1367,14 @@ ANO VARCHAR(4);
 
 BEGIN
 IF tipo = 'C' THEN
-   SELECT sum(salprgper) into monto from "SIMA002".contabb1  where codcta = cta and pereje = '12';
+   SELECT sum(salprgper) into monto from contabb1  where codcta = cta and pereje = '12';
    SALDO = monto;
 
 END IF;
 
 --VERIFICAR EL CAMPO MONING SI ES EL CORRECTO
 IF tipo = 'I' THEN
-  SELECT sum(moning) into monto from "SIMA002".ciimping a where refing like cta||'%';
+  SELECT sum(moning) into monto from ciimping a where refing like cta||'%';
   SALDO = monto;
 
 END IF;
@@ -1332,7 +1385,7 @@ IF tipo = 'P' THEN
       TO_CHAR(FECCIE,'MM'),
       TO_CHAR(FECINI,'YYYY')
    FROM
-      "SIMA002".CPDEFNIV;
+      CPDEFNIV;
 
    IF periodo = '00' THEN
   FEC1 := FECHAINICIAL;
@@ -1345,8 +1398,8 @@ IF tipo = 'P' THEN
    END IF;
 
     select
-     coalesce("SIMA002".obtener_ejecucion(cta||'%',FEC1,FEC2,ANOS ,'COM'),0) into monto FROM
-    "SIMA002".empresa;
+     coalesce(obtener_ejecucion(cta||'%',FEC1,FEC2,ANOS ,'COM'),0) into monto FROM
+    empresa;
 
    SALDO = monto;
 
@@ -1356,10 +1409,10 @@ RETURN SALDO;
 END;
 $BODY$
   LANGUAGE 'plpgsql' VOLATILE;
-ALTER FUNCTION "SIMA002".saldoctareal(character varying, character varying, character varying) OWNER TO postgres;
+ALTER FUNCTION saldoctareal(character varying, character varying, character varying) OWNER TO postgres;
 
 
-CREATE OR REPLACE FUNCTION "SIMA002".saldocta(tipo character varying, cta character varying, periodo character varying)
+CREATE OR REPLACE FUNCTION saldocta(tipo character varying, cta character varying, periodo character varying)
   RETURNS numeric AS
 $BODY$
 DECLARE
@@ -1370,19 +1423,19 @@ BEGIN
 
  IF tipo = 'C' THEN
    IF periodo = '00' THEN
-  SELECT sum(salprgper) into monto from "SIMA002".contabb1  where codcta = cta;
+  SELECT sum(salprgper) into monto from contabb1  where codcta = cta;
    ELSE
-  SELECT sum(salprgper) into monto from "SIMA002".contabb1  where codcta = cta and pereje = periodo;
+  SELECT sum(salprgper) into monto from contabb1  where codcta = cta and pereje = periodo;
    END IF;
 
    SALDO = monto;
 
   ELSEIF tipo = 'I' THEN
-  SELECT sum(monasi) into monto from "SIMA002".ciasiini a where codpre like cta||'%' and perpre = periodo;
+  SELECT sum(monasi) into monto from ciasiini a where codpre like cta||'%' and perpre = periodo;
   SALDO = monto;
 
  ELSEIF tipo = 'P' THEN
-   SELECT sum(monasi) into monto from "SIMA002".cpasiini where codpre like cta||'%' and perpre = periodo;
+   SELECT sum(monasi) into monto from cpasiini where codpre like cta||'%' and perpre = periodo;
    SALDO = monto;
 
  END IF;
@@ -1393,7 +1446,7 @@ END;
 
 $BODY$
   LANGUAGE 'plpgsql' VOLATILE;
-ALTER FUNCTION "SIMA002".saldocta(character varying, character varying, character varying) OWNER TO postgres;
+ALTER FUNCTION saldocta(character varying, character varying, character varying) OWNER TO postgres;
 
 
 CREATE OR REPLACE FUNCTION diashab(codnom varchar,fecini date,fecfin date)
@@ -1438,7 +1491,7 @@ $BODY$
   LANGUAGE 'plpgsql' VOLATILE;
 
   --26/02/2009
-  CREATE OR REPLACE FUNCTION "SIMA002".reindexar(tabla text, campo text)
+  CREATE OR REPLACE FUNCTION reindexar(tabla text, campo text)
   RETURNS boolean AS
 $BODY$
 DECLARE
@@ -1466,7 +1519,7 @@ ALTER FUNCTION "SIMA002".reindexar(text, text) OWNER TO postgres;
 
 
 
-CREATE OR REPLACE FUNCTION "SIMA002".pc_chartoint(chartoconvert character varying)
+CREATE OR REPLACE FUNCTION pc_chartoint(chartoconvert character varying)
   RETURNS integer AS
 $BODY$
 SELECT CASE WHEN trim($1) SIMILAR TO '[0-9]+'
