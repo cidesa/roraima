@@ -81,6 +81,10 @@ abstract class BaseBndefins extends BaseObject  implements Persistent {
 
 
 	
+	protected $codinc;
+
+
+	
 	protected $porrev;
 
 
@@ -248,6 +252,13 @@ abstract class BaseBndefins extends BaseObject  implements Persistent {
   {
 
     return trim($this->coddes);
+
+  }
+  
+  public function getCodinc()
+  {
+
+    return trim($this->codinc);
 
   }
   
@@ -459,6 +470,16 @@ abstract class BaseBndefins extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setCodinc($v)
+	{
+
+    if ($this->codinc !== $v) {
+        $this->codinc = $v;
+        $this->modifiedColumns[] = BndefinsPeer::CODINC;
+      }
+  
+	} 
+	
 	public function setPorrev($v)
 	{
 
@@ -519,9 +540,11 @@ abstract class BaseBndefins extends BaseObject  implements Persistent {
 
       $this->coddes = $rs->getString($startcol + 17);
 
-      $this->porrev = $rs->getString($startcol + 18);
+      $this->codinc = $rs->getString($startcol + 18);
 
-      $this->id = $rs->getInt($startcol + 19);
+      $this->porrev = $rs->getString($startcol + 19);
+
+      $this->id = $rs->getInt($startcol + 20);
 
       $this->resetModified();
 
@@ -529,7 +552,7 @@ abstract class BaseBndefins extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 20; 
+            return $startcol + 21; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Bndefins object", $e);
     }
@@ -731,9 +754,12 @@ abstract class BaseBndefins extends BaseObject  implements Persistent {
 				return $this->getCoddes();
 				break;
 			case 18:
-				return $this->getPorrev();
+				return $this->getCodinc();
 				break;
 			case 19:
+				return $this->getPorrev();
+				break;
+			case 20:
 				return $this->getId();
 				break;
 			default:
@@ -764,8 +790,9 @@ abstract class BaseBndefins extends BaseObject  implements Persistent {
 			$keys[15] => $this->getFecper(),
 			$keys[16] => $this->getFeceje(),
 			$keys[17] => $this->getCoddes(),
-			$keys[18] => $this->getPorrev(),
-			$keys[19] => $this->getId(),
+			$keys[18] => $this->getCodinc(),
+			$keys[19] => $this->getPorrev(),
+			$keys[20] => $this->getId(),
 		);
 		return $result;
 	}
@@ -836,9 +863,12 @@ abstract class BaseBndefins extends BaseObject  implements Persistent {
 				$this->setCoddes($value);
 				break;
 			case 18:
-				$this->setPorrev($value);
+				$this->setCodinc($value);
 				break;
 			case 19:
+				$this->setPorrev($value);
+				break;
+			case 20:
 				$this->setId($value);
 				break;
 		} 	}
@@ -866,8 +896,9 @@ abstract class BaseBndefins extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[15], $arr)) $this->setFecper($arr[$keys[15]]);
 		if (array_key_exists($keys[16], $arr)) $this->setFeceje($arr[$keys[16]]);
 		if (array_key_exists($keys[17], $arr)) $this->setCoddes($arr[$keys[17]]);
-		if (array_key_exists($keys[18], $arr)) $this->setPorrev($arr[$keys[18]]);
-		if (array_key_exists($keys[19], $arr)) $this->setId($arr[$keys[19]]);
+		if (array_key_exists($keys[18], $arr)) $this->setCodinc($arr[$keys[18]]);
+		if (array_key_exists($keys[19], $arr)) $this->setPorrev($arr[$keys[19]]);
+		if (array_key_exists($keys[20], $arr)) $this->setId($arr[$keys[20]]);
 	}
 
 	
@@ -893,6 +924,7 @@ abstract class BaseBndefins extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(BndefinsPeer::FECPER)) $criteria->add(BndefinsPeer::FECPER, $this->fecper);
 		if ($this->isColumnModified(BndefinsPeer::FECEJE)) $criteria->add(BndefinsPeer::FECEJE, $this->feceje);
 		if ($this->isColumnModified(BndefinsPeer::CODDES)) $criteria->add(BndefinsPeer::CODDES, $this->coddes);
+		if ($this->isColumnModified(BndefinsPeer::CODINC)) $criteria->add(BndefinsPeer::CODINC, $this->codinc);
 		if ($this->isColumnModified(BndefinsPeer::PORREV)) $criteria->add(BndefinsPeer::PORREV, $this->porrev);
 		if ($this->isColumnModified(BndefinsPeer::ID)) $criteria->add(BndefinsPeer::ID, $this->id);
 
@@ -960,6 +992,8 @@ abstract class BaseBndefins extends BaseObject  implements Persistent {
 		$copyObj->setFeceje($this->feceje);
 
 		$copyObj->setCoddes($this->coddes);
+
+		$copyObj->setCodinc($this->codinc);
 
 		$copyObj->setPorrev($this->porrev);
 

@@ -19,7 +19,7 @@
 <fieldset id="sf_fieldset_none" class="">
 <div class="form-row">
 <fieldset id="sf_fieldset_none" class="">
-<legend><?echo __('Datos de la Institución') ?></legend>
+<h2><?echo __('Datos de la Institución') ?></h2>
 <div class="form-row">
 <table>
 <tr>
@@ -65,7 +65,7 @@
   <?php endif; ?>
 
   <?php $value = object_input_tag($bndefins, 'getDirins', array (
-  'size' => 121,
+  'size' => 100,
   'maxlength'=> 100,
   'control_name' => 'bndefins[dirins]',
 )); echo $value ? $value : '&nbsp;' ?>
@@ -119,7 +119,7 @@
   <?php endif; ?>
 
   <?php $value = object_input_tag($bndefins, 'getEmail', array (
-  'size' => 30,
+  'size' => 26,
   'control_name' => 'bndefins[email]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
@@ -190,7 +190,7 @@
 <table>
 <tr>
 <th><fieldset id="sf_fieldset_none" class="">
-<legend><?echo __('Código de Activo') ?></legend>
+<h2><?echo __('Código de Activo') ?></h2>
 <div class="form-row">
   <?php echo label_for('bndefins[foract]', __($labels['bndefins{foract}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('bndefins{foract}')): ?> form-error<?php endif; ?>">
@@ -226,7 +226,7 @@
 </th>
 <th>
 <fieldset id="sf_fieldset_none" class="">
-<legend><?echo __('Código de  Ubicación') ?></legend>
+<h2><?echo __('Código de  Ubicación') ?></h2>
 
 <div class="form-row">
   <?php echo label_for('bndefins[forubi]', __($labels['bndefins{forubi}']), 'class="required" ') ?>
@@ -264,7 +264,7 @@
 <tr>
 <th>
 <fieldset id="sf_fieldset_none" class="">
-<legend><?echo __('Fechas') ?></legend>
+<h2><?echo __('Fechas') ?></h2>
 
 <div class="form-row">
   <?php echo label_for('bndefins[fecper]', __($labels['bndefins{fecper}']), 'class="required" ') ?>
@@ -275,6 +275,7 @@
 
   <?php $value = object_input_date_tag($bndefins, 'getFecper', array (
   'rich' => true,
+  'size' => 10,
   'calendar_button_img' => '/sf/sf_admin/images/date.png',
   'control_name' => 'bndefins[fecper]',
   'onkeyup' => "javascript: mascara(this,'/',patron,true)",
@@ -289,6 +290,7 @@
 
   <?php $value = object_input_date_tag($bndefins, 'getFeceje', array (
   'rich' => true,
+  'size' => 10,
   'calendar_button_img' => '/sf/sf_admin/images/date.png',
   'control_name' => 'bndefins[feceje]',
    'onkeyup' => "javascript: mascara(this,'/',patron,true)",
@@ -302,9 +304,25 @@
 <th>
 </fieldset>
 <fieldset id="sf_fieldset_none" class="">
-<legend><?echo __('Desincorporación') ?></legend>
+<h2><?echo __('Movimientos') ?></h2>
 <br>
 <div class="form-row">
+
+  <?php echo label_for('bndefins[codinc]', __($labels['bndefins{codinc}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('bndefins{codinc}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('bndefins{codinc}')): ?>
+    <?php echo form_error('bndefins{codinc}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($bndefins, 'getCodinc', array (
+  'size' => 3,
+  'maxlength'=>2,
+  'control_name' => 'bndefins[codinc]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+
+<br>
+
   <?php echo label_for('bndefins[coddes]', __($labels['bndefins{coddes}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('bndefins{coddes}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('bndefins{coddes}')): ?>
@@ -312,13 +330,11 @@
   <?php endif; ?>
 
   <?php $value = object_input_tag($bndefins, 'getCoddes', array (
-  'size' => 5,
+  'size' => 3,
   'maxlength'=>2,
   'control_name' => 'bndefins[coddes]',
 )); echo $value ? $value : '&nbsp;' ?>
-    </div>
-<br>
-<br>
+
 </div>
 </th>
 <th>
@@ -327,7 +343,7 @@
 <th>
 </fieldset>
 <fieldset id="sf_fieldset_none" class="">
-<legend><?echo __('Porcentaje Revalor') ?></legend>
+<h2><?echo __('Porcentaje Revalor') ?></h2>
 <br>
 <div class="form-row">
   <?php echo label_for('bndefins[porrev]', __($labels['bndefins{porrev}']), 'class="required" ') ?>

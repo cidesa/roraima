@@ -193,6 +193,11 @@ class biedefempActions extends autobiedefempActions
     {
       $this->bndefins->setCorrsem($bndefins['corrsem']);
     }
+
+    if (isset($bndefins['codinc']))
+    {
+      $this->bndefins->setCodinc($bndefins['codinc']);
+    }
   }
 
 }
