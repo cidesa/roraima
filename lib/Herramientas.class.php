@@ -2078,6 +2078,22 @@ public static function obtenerDiaMesOAno($fecha,$formato,$dmoa)
     }
       return -1;
   }
+  
+    public static function ObtenerMesenLetras($mes)
+  {
+  			if($mes=='01')  return $mes='Enero';
+			if($mes=='02')  return $mes='Febrero';
+			if($mes=='03')  return $mes='Marzo';
+			if($mes=='04')  return $mes='Abril';
+			if($mes=='05')  return $mes='Mayo';
+			if($mes=='06')	return $mes='Junio';
+			if($mes=='07')  return $mes='Julio';
+			if($mes=='08')	return $mes='Agosto';
+			if($mes=='09')  return $mes='Septiembre';
+			if($mes=='10')	return $mes='Octubre';
+			if($mes=='11')  return $mes='Noviembre';
+			if($mes=='12')  return $mes='Diciembre';
+  }
 }
 
 class H extends Herramientas
