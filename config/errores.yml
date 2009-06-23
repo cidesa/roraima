@@ -689,7 +689,11 @@
   msj: EL Monto del adelanto no Puede ser mayor que el monto de intereses acumulado
 473:
   cod: 473
-  msj: Los Apellido(s) y Nombre(s) no puedo estar en Blanco  
+  msj: Los Apellido(s) y Nombre(s) no puedo estar en Blanco
+474:
+  cod: 474
+  msj: Nose pudo borrar el Registro
+    
 ###############OBRAS################
 1000:
     cod: 1000
