@@ -71,6 +71,7 @@ $this->Bitacora('Guardo');
 		$opciones->setTabla('Tsrepret');
 		$opciones->setAnchoGrid(800);
 		$opciones->setTitulo('Tipo de Retención');
+		$opciones->setFilas(50);
 		$opciones->setHTMLTotalFilas(' ');
 
 		$col1 = new Columna('Código');
