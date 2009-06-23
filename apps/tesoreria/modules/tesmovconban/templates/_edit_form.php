@@ -13,7 +13,7 @@
 
 <?php echo object_input_hidden_tag($tsconcil, 'getId') ?>
 <fieldset id="sf_fieldset_none" class="">
-<legend><?php echo __('Datos de la Conciliación')?></legend>
+<h2><?php echo __('Datos de la Conciliación')?></h2>
 <div class="form-row">
   <?php echo label_for('labelnrocuenta', __('Numero de Cuenta'), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('nrocuenta')): ?> form-error<?php endif; ?>">
@@ -88,16 +88,11 @@
     </div>
 
 
-<div align="center">
-<table>
-  <tr>
-    <th width="95px"></th>
-    <th><input type="button" value="Hacer" onClick="hacer()"></th>
-    <th><input type="button" value="Anular" onClick="anular()"></th>
-  </tr>
-</table>
+<ul  class="sf_admin_actions"  align="center">
+	<input type="button" value="Hacer" onClick="hacer()">
+	<input type="button" value="Anular" onClick="anular()">
+</ul>
 
-</div>
 </fieldset>
 
 <?php include_partial('edit_actions', array('tsconcil' => $tsconcil)) ?>
