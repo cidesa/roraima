@@ -1275,6 +1275,51 @@ End Function*/
     }
     return $error;
   }
+  
+  public static function salvar_nppernom($clase,$grid) {
+
+    $error = -1;
+    if($clase->getId()=='')
+	{
+		foreach($grid[0] as $x)
+		{
+			$nppernom = new Nppernom();
+			$nppernom->setCodnom($clase->getCodnom());
+			$nppernom->setAnno($clase->getAnno());
+			$nppernom->setMes($x['mes']);
+			$nppernom->setFecini($x['fecini']);
+			$nppernom->setFecfin($x['fecfin']);
+			$nppernom->save();
+		}	
+	}else
+	{
+		$c = new Criteria;
+	    $c->add(NppernomPeer :: CODNOM, $clase->getCodnom());	
+		$c->addAscendingOrderByColumn(NppernomPeer::MES);
+	    $per = NppernomPeer :: doSelect($c);		
+		if($per)
+		{
+			foreach($per as $x)
+			{				
+			    foreach($grid[0] as $r)
+				{
+					if($x->getMes()==$r['mes'])
+					{
+						$x->setFecini($r['fecini']);
+						$x->setFecfin($r['fecfin']);
+						$x->save();
+					}	
+				}
+			}	
+		}
+				
+	}
+    
+   
+
+	
+    return $error;
+  }
 
   
   }
