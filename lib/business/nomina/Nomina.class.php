@@ -1913,7 +1913,7 @@ class Nomina {
       break;
 
       case "SIANOANT" ://nueva por Leobardo
-         // $criterio = "Select coalesce(SUM(Monto),0) as campo from npHISCON A,NPCONSALINT B,NPNOMINA C where  A.CODCON=B.CODCON  and a.codemp='" . $empleado . "' AND  a.codNOM='" . $nomina . "' and  b.codNOM='" . $nomina . "' and a.codnom=c.codnom and a.codnom=b.codnom and A.FECNOM>=add_months(c.profec,-13) and A.FECNOM<=add_months(c.profec,-1) ";
+ /*        // $criterio = "Select coalesce(SUM(Monto),0) as campo from npHISCON A,NPCONSALINT B,NPNOMINA C where  A.CODCON=B.CODCON  and a.codemp='" . $empleado . "' AND  a.codNOM='" . $nomina . "' and  b.codNOM='" . $nomina . "' and a.codnom=c.codnom and a.codnom=b.codnom and A.FECNOM>=add_months(c.profec,-13) and A.FECNOM<=add_months(c.profec,-1) ";
         $criterio = "Select coalesce(AVG(A.Monto),0) as campo from npHISCON A,NPCONSALINT B,NPNOMINA C where  A.CODCON=B.CODCON  and a.codemp='" . $empleado . "' AND  a.codNOM='" . $nomina . "' and  b.codNOM='" . $nomina . "' and a.codnom=c.codnom and a.codnom=b.codnom and A.FECNOM>=add_months(c.profec,-12)";
         if (Herramientas :: BuscarDatos($criterio, & $tabla)) {
            $valor = $tabla[0]["campo"];
@@ -1929,6 +1929,34 @@ class Nomina {
         else
         {
           $valor = $valor + 0;
+        }*/
+
+        $criterio ="SELECT AVG(ELMONTO) as campo FROM (Select SUM(MONTO) AS ELMONTO,FECNOM FROM(Select SUM(MONTO) AS MONTO,TO_CHAR(FECNOM,'YYYY/MM') AS FECNOM
+					from npHISCON A,Npdiaadicnom B,NPNOMINA C
+					where  A.CODCON=B.CODCON
+					and a.codemp='" . $empleado . "'
+					AND  a.codNOM='" . $nomina . "'
+					And  b.codNOM='" . $nomina . "'
+					And a.codnom=c.codnom
+					And a.codnom=b.codnom
+					And A.FECNOM>=add_months(c.profec+1,-12)
+					GROUP BY
+					TO_CHAR(FECNOM,'YYYY/MM')
+					UNION ALL
+					Select coalesce(SUM(a.saldo),0) as MONTO,TO_CHAR(FECNOM,'YYYY/MM') AS FECNOM from npnomcal A,Npdiaadicnom B,NPNOMINA C
+					where  A.CODCON=B.CODCON  and a.codemp='" . $empleado . "'
+					AND  a.codNOM='" . $nomina . "'  and  b.codNOM='" . $nomina . "'
+					and a.codnom=c.codnom and a.codnom=b.codnom
+					group by TO_CHAR(FECNOM,'YYYY/MM')
+					) LATABLA1 GROUP BY FECNOM order by fecnom
+					) LATABLA2";
+
+		if (Herramientas :: BuscarDatos($criterio, & $tabla)) {
+           $valor = $tabla[0]["campo"];
+        }
+        else
+        {
+          $valor = 0;
         }
       break;
 
@@ -3455,8 +3483,7 @@ class Nomina {
       break;
 
 	  case "SIANOANT" : //Nueva por Leobardo
-         // $criterio = "Select coalesce(SUM(Monto),0) as campo from npHISCON A,NPCONSALINT B,NPNOMINA C where  A.CODCON=B.CODCON  and a.codemp='" . $empleado . "' AND  a.codNOM='" . $nomina . "' and  b.codNOM='" . $nomina . "' and a.codnom=c.codnom and a.codnom=b.codnom and A.FECNOM>=add_months(c.profec,-13) and A.FECNOM<=add_months(c.profec,-1) ";
-        $criterio = "Select coalesce(AVG(A.Monto),0) as campo from npHISCON A,NPCONSALINT B,NPNOMINA C where  A.CODCON=B.CODCON  and a.codemp='" . $empleado . "' AND  a.codNOM='" . $nomina . "' and  b.codNOM='" . $nomina . "' and a.codnom=c.codnom and a.codnom=b.codnom and A.FECNOM>=add_months(c.profec,-12)";
+       /*$criterio = "Select coalesce(AVG(A.Monto),0) as campo from npHISCON A,NPCONSALINT B,NPNOMINA C where  A.CODCON=B.CODCON  and a.codemp='" . $empleado . "' AND  a.codNOM='" . $nomina . "' and  b.codNOM='" . $nomina . "' and a.codnom=c.codnom and a.codnom=b.codnom and A.FECNOM>=add_months(c.profec,-12)";
         if (Herramientas :: BuscarDatos($criterio, & $tabla)) {
            $valor = $tabla[0]["campo"];
         }
@@ -3471,7 +3498,34 @@ class Nomina {
         else
         {
           $valor = $valor + 0;
+        }*/
+        $criterio ="SELECT AVG(ELMONTO) as campo FROM (Select SUM(MONTO) AS ELMONTO,FECNOM FROM(Select SUM(MONTO) AS MONTO,TO_CHAR(FECNOM,'YYYY/MM') AS FECNOM
+					from npHISCON A,Npdiaadicnom B,NPNOMINA C
+					where  A.CODCON=B.CODCON
+					and a.codemp='" . $empleado . "'
+					AND  a.codNOM='" . $nomina . "'
+					And  b.codNOM='" . $nomina . "'
+					And a.codnom=c.codnom
+					And a.codnom=b.codnom
+					And A.FECNOM>=add_months(c.profec+1,-12)
+					GROUP BY
+					TO_CHAR(FECNOM,'YYYY/MM')
+					UNION ALL
+					Select coalesce(SUM(a.saldo),0) as MONTO,TO_CHAR(FECNOM,'YYYY/MM') AS FECNOM from npnomcal A,Npdiaadicnom B,NPNOMINA C
+					where  A.CODCON=B.CODCON  and a.codemp='" . $empleado . "'
+					AND  a.codNOM='" . $nomina . "'  and  b.codNOM='" . $nomina . "'
+					and a.codnom=c.codnom and a.codnom=b.codnom
+					group by TO_CHAR(FECNOM,'YYYY/MM')
+					) LATABLA1 GROUP BY FECNOM order by fecnom
+					) LATABLA2";
+        if (Herramientas :: BuscarDatos($criterio, & $tabla)) {
+           $valor = $tabla[0]["campo"];
         }
+        else
+        {
+          $valor = 0;
+        }
+
       break;
 
      case "SIMESDAD" :
