@@ -53,8 +53,7 @@ nomina:
       Definición de Concepto de Cesta Tickets:                       NomDefEspCesTic
       Tipos de Retiros:                                              NomDefTipRet
       Definición de Conceptos para Dias Adicionales:                 NomDefDiaAdicNom
-      Conceptos para el ISLR:                                        NomDefEspISLR
-      Definiciones Especiales para Prestaciones:                     NomDefEspParPre
+      Conceptos para el ISLR:                                        NomDefEspISLR      
       Definición de Retenciones y Aportes:
         Retenciones y Aportes:                                       NomDefAportes
         Conceptos para Aportes:                                      NomDefConAportes
@@ -105,6 +104,8 @@ nomina:
         Tipos de Contratos Colectivos:                               PresNomTipCon
         Registro de Tipos de Asignaciones:                           presNomAsiConPre
         Definición Presupuestaria de Liquidación:                    presNomDefPre
+        Definiciones Especiales para Prestaciones:                   NomDefEspParPre
+        Definición de Periodos por Meses:                            presNomSemMes
       Registros Útiles para el Cálculo de Prestaciones Sociales:
         Asignación de Trab. para Prestaciones Por Contr. Colect:     presNomAsiTrabCont
         Registro de Tasas de Interes Periodicas:                     presNomIntFecRef
