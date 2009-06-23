@@ -25,7 +25,7 @@ generator:
       motdismue: { name: No se}
     list:
       title:          Disposición de Muebles
-      filters:        [codact, codmue, desmue, fecdismue, stadismue]
+      filters:        [codact, codmue, desmue, fecdismue, stadismue, nrodismue]
       display:        [=codact, codmue, desmue, stadismue]
       fields:
         fecdismue: { params: date_format='dd/MM/yy' }
