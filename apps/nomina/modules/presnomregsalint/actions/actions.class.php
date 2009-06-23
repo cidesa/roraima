@@ -131,14 +131,19 @@ $this->Bitacora('Guardo');
 
 
 		        $sql="SELECT SUM(CASE WHEN C.OPECON='A' THEN A.MONTO ELSE A.MONTO*-1 END) as monto, B.CODASI as codasi
-						FROM NPHISCON A,NPCONASI B,NPDEFCPT C,NPASINOMCONT D
+						FROM NPHISCON A left outer join nppernom e on 
+						(
+						  a.codnom=e.codnom and e.mes=to_char(TO_DATE('$fecini','DD/MM/YYYY'),'mm') and 
+						 e.anno=to_char(TO_DATE('$fecini','DD/MM/YYYY'),'yyyy')::numeric
+						),NPCONASI B,NPDEFCPT C,NPASINOMCONT D
 						WHERE A.CODEMP='$cod'
-						AND TO_CHAR(FECNOM,'MM/YYYY')='$this->fecha'
+						AND a.FecNom  >= (case when e.fecini is not null then e.fecini else  TO_DATE('$fecini','DD/MM/YYYY') end) 
+						AND a.FecNom  <= (case when e.fecfin is not null then e.fecfin else  TO_DATE('$fecfin','DD/MM/YYYY') end) 
 						AND B.CODCON='$con'
 						AND D.CODTIPCON=B.CODCON
 						AND A.CODCON=B.CODCPT
 						AND A.CODCON=C.CODCON GROUP BY B.CODASI order by codasi";
-
+ 
 			     H::BuscarDatos($sql,$data);
 			     if ($data)
 			     {
