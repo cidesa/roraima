@@ -6759,3 +6759,21 @@ propel:
       type: INTEGER
       required: true
       autoIncrement: true
+  npdefespparpre:
+    #_attributes:
+      #idMethod: native
+    codnom:
+      type: VARCHAR
+      size: 3
+      required: true
+      ##primaryKey: true
+    numdiames:
+      type: INTEGER
+      required: true
+    numdiamaxano:
+      type: INTEGER
+      required: true  
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true      
