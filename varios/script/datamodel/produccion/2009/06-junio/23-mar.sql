@@ -19,3 +19,11 @@ CREATE TABLE  nppernom(
    id integer NOT NULL DEFAULT nextval('nppernom_seq'::regclass)
 
 
+--Bienes
+alter table BNUBIBIE
+  add column codubiadm VARCHAR(30);
+
+
+alter table BNREGMUE
+  add column codresuso VARCHAR(10),
+  add column codrespat VARCHAR(10);
