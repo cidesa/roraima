@@ -111,14 +111,18 @@ class presnomregsalintindActions extends autopresnomregsalintindActions
                $per[] = $arr_data;
 		    }//if ($con){
 			else
-			{
-		        $data=array();
-
+			{				
+				$data=array();	
 		        $sql="SELECT SUM(CASE WHEN C.OPECON='A' THEN A.MONTO ELSE A.MONTO*-1 END) as monto, B.CODASI as codasi
-						FROM NPHISCON A,NPCONASI B,NPDEFCPT C,NPASINOMCONT D
+						FROM NPHISCON A left outer join nppernom e on 
+						(
+						 a.codnom=e.codnom and e.mes=to_char(TO_DATE('$fechainifor','DD/MM/YYYY'),'mm') and 
+						 e.anno=to_char(TO_DATE('$fechainifor','DD/MM/YYYY'),'yyyy')::numeric
+						)
+						,NPCONASI B,NPDEFCPT C,NPASINOMCONT D
 						WHERE A.CODEMP='$this->codemp'
-						AND a.FecNom  >= TO_DATE('$fechainifor','DD/MM/YYYY')
-						AND a.FecNom  <= TO_DATE('$fechafinfor','DD/MM/YYYY')
+						AND a.FecNom  >= (case when e.fecini is not null then e.fecini else  TO_DATE('$fechainifor','DD/MM/YYYY') end) 
+						AND a.FecNom  <= (case when e.fecfin is not null then e.fecfin else  TO_DATE('$fechafinfor','DD/MM/YYYY') end) 
 						AND A.CODNOM=D.CODNOM
 						AND D.CODTIPCON=B.CODCON
 						AND A.CODCON=B.CODCPT
