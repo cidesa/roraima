@@ -6777,3 +6777,30 @@ propel:
       type: INTEGER
       required: true
       autoIncrement: true      
+  nppernom:
+    #_attributes:
+      #idMethod: native
+    codnom:
+      type: VARCHAR
+      size: 3
+      required: true
+      ##primaryKey: true
+    anno:
+      type: INTEGER
+      required: true
+    mes:
+      type: VARCHAR
+      size: 2
+      required: true  
+    fecini:
+      type: DATE
+      required: true
+      ##primaryKey: true
+    fecfin:
+      type: DATE
+      required: true
+      ##primaryKey: true      
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true            
