@@ -21,7 +21,7 @@
 <?php echo object_input_hidden_tag($bndismue, 'getIdrefer') ?>
 
 <fieldset id="sf_fieldset_none" class="">
-<legend>Datos</legend>
+<h2>Datos</h2>
 <div class="form-row">
 <table>
 <tr>
@@ -34,6 +34,7 @@
 
   <?php $value = object_input_tag($bndismue, 'getCodact', array (
   'size' => 15,
+  'readonly'  =>  $bndismue->getId()!='' ? true : false ,
   'control_name' => 'bndismue[codact]',
   'maxlength' => strlen($mascaracatalogo),
   'onKeypress' => "javascript:return dFilter (event.keyCode, this,'$mascaracatalogo')",
@@ -58,6 +59,7 @@
 
  <?php $value = object_input_tag($bndismue, 'getCodmue', array (
   'size' => 15,
+  'readonly'  =>  $bndismue->getId()!='' ? true : false ,
   'control_name' => 'bndismue[codmue]',
   'onBlur'=> remote_function(array(
   'url'      => 'biedisactmuenew/ajax',
@@ -81,7 +83,7 @@
 </fieldset>
 <br>
 <fieldset id="sf_fieldset_none" class="">
-<legend>Transacci&oacute;n</legend>
+<h2>Transacci&oacute;n</h2>
 <div class="form-row">
   <?php echo label_for('bndismue[nrodismue]', __($labels['bndismue{nrodismue}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('bndismue{nrodismue}')): ?> form-error<?php endif; ?>">
@@ -91,12 +93,13 @@
 
   <?php $value = object_input_tag($bndismue, 'getNrodismue', array (
   'size' => 15,
+  'readonly'  =>  $bndismue->getId()!='' ? true : false ,
   'control_name' => 'bndismue[nrodismue]',
   'onBlur'  => "javascript: valor=this.value; valor=valor.pad(10, '0',0);document.getElementById('bndismue_nrodismue').value=valor;document.getElementById('bndismue_nrodismue').disabled=false;",
   )); echo $value ? $value : '&nbsp;' ?>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <strong>Tipo</strong>&nbsp;&nbsp;&nbsp;
-<?php echo select_tag('bndismue[tipdismue]', options_for_select($tipos,$bndismue->getTipdismue())); ?>
+<?php echo select_tag('bndismue[tipdismue]', options_for_select($tipos,$bndismue->getTipdismue()), array('disabled'  =>  $bndismue->getId()!='' ? true : false )); ?>
 </div>
 <br>
   <?php echo label_for('bndismue[codmot]', __($labels['bndismue{codmot}']), 'class="required" ') ?>
@@ -107,10 +110,12 @@
 
   <?php $value = object_input_tag($bndismue, 'getCodmot', array (
   'size' => 7 ,
+  'readonly'  =>  $bndismue->getId()!='' ? true : false ,
   'control_name' => 'bndismue[codmot]',
   'onBlur'=> remote_function(array(
   'url'      => 'biedisactmuenew/ajax',
   'complete' => 'AjaxJSON(request, json)',
+  'condition' => "$('bndismue_codmot').value != '' && $('id').value == '' ",
   'with' => "'ajax=2&cajtexmos=bndismue_desmot&cajtexcom=bndismue_codmot&codigo='+this.value",
      )),
 )); echo $value ? $value : '&nbsp;' ?>
@@ -135,7 +140,9 @@
   <?php endif; ?>
 
   <?php $value = object_input_date_tag($bndismue, 'getFecdismue', array (
+  'size' => 11,
   'rich' => true,
+  'readonly'  =>  $bndismue->getId()!='' ? true : false ,
   'calendar_button_img' => '/sf/sf_admin/images/date.png',
   'control_name' => 'bndismue[fecdismue]',
   'date_format' => 'dd/MM/yyyy',
@@ -154,6 +161,7 @@
 
 <?php $value = object_input_date_tag($bndismue, 'getFecdevdis', array (
   'rich' => true,
+  'readonly'  =>  $bndismue->getId()!='' ? true : false ,
   'calendar_button_img' => '/sf/sf_admin/images/date.png',
   'control_name' => 'bndismue[fecdevdis]',
   'date_format' => 'dd/MM/yyyy',
@@ -171,6 +179,7 @@
   <?php endif; ?>
 <?php $value = object_input_tag($bndismue, array('getMondismue',true), array (
   'size' => 10,
+  'readonly'  =>  $bndismue->getId()!='' ? true : false ,
   'control_name' => 'bndismue[mondismue]',
   'onBlur' => "javascript:event.keyCode=13;return entermontootro(event,this.id)",
 )); echo $value ? $value : '&nbsp;' ?>
@@ -194,7 +203,7 @@
 </fieldset>
 <br>
 <fieldset id="sf_fieldset_none" class="">
-<legend>Ubicaci&oacute;n</legend>
+<h2>Ubicaci&oacute;n</h2>
 <div class="form-row" >
   <?php echo label_for('bndismue[codubiori]', __($labels['bndismue{codubiori}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('bndismue{codubiori}')): ?> form-error<?php endif; ?>">
@@ -205,10 +214,12 @@
   <?php $value = object_input_tag($bndismue, 'getCodubiori', array (
   'size' => strlen($mascaraformatoubi),
   'maxlength' => strlen($mascaraformatoubi),
+  'readonly'  =>  $bndismue->getId()!='' ? true : false ,
   'control_name' => 'bndismue[codubiori]',
   'onKeyPress' => "javascript:return dFilter (event.keyCode, this,'$mascaraformatoubi')",
   'onBlur'=> remote_function(array(
   'url'      => 'biedisactmuenew/ajax',
+  'condition' => "$('bndismue_codubiori').value != '' && $('id').value == '' ",
   'complete' => 'AjaxJSON(request, json)',
   'with' => "'ajax=3&cajtexmos=bndismue_desubiori&codigo='+this.value",
         )),
@@ -236,12 +247,14 @@
 
   <?php $value = object_input_tag($bndismue, 'getCodubides', array (
   'size' => strlen($mascaraformatoubi),
+  'readonly'  =>  $bndismue->getId()!='' ? true : false ,
   'maxlength' => strlen($mascaraformatoubi),
   'control_name' => 'bndismue[codubides]',
   'onKeyPress' => "javascript:return dFilter (event.keyCode, this,'$mascaraformatoubi')",
   'onBlur'=> remote_function(array(
         'url'      => 'biedisactmuenew/ajax',
         'complete' => 'AjaxJSON(request, json)',
+        'condition' => "$('bndismue_codubides').value != '' && $('id').value == '' ",
           'with' => "'ajax=3&cajtexmos=bndismue_desubides&codigo='+this.value",
         )),
 )); echo $value ? $value : '&nbsp;' ?>
