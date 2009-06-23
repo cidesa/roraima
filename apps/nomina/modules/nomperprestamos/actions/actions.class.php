@@ -15,9 +15,10 @@ class nomperprestamosActions extends autonomperprestamosActions
    public function configGrid()
    {
       $c = new Criteria();
-      $sql = "Select Distinct(A.CodEmp) as codemp,B.NomEmp as nomemp,sum(A.Monto) as monto,sum(A.Cantidad) as cantidad," .
-      		"Sum(A.Acumulado) as acumulado, a.id as id  From NPAsiConEmp A,NpHojInt B,npasicaremp c " .
-      		"where a.codcar=c.codcar and A.CodEmp=B.CodEmp  and A.CodCon='" . $this->nptippre->getCodcon() . "' and B.StaEmp = 'A' Group by a.id,a.Codemp,B.NomEmp Order By A.CodEmp";
+
+  	  $sql = "Select Distinct(A.CodEmp) as codemp,B.NomEmp as nomemp,sum(A.Monto) as monto,sum(A.Cantidad) as cantidad," .
+			"Sum(A.Acumulado) as acumulado, a.id as id From NPAsiConEmp A,NpHojInt B,npasicaremp c " .
+			"where a.codcar=c.codcar and a.codemp=c.codemp and A.CodEmp=B.CodEmp and A.CodCon='" . $this->nptippre->getCodcon() . "' and B.StaEmp = 'A' Group by a.id,a.Codemp,B.NomEmp Order By A.CodEmp";
 
       $resp = Herramientas::BuscarDatos($sql,&$per);
 
