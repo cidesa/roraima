@@ -54,6 +54,7 @@ nomina:
       Tipos de Retiros:                                              NomDefTipRet
       Definición de Conceptos para Dias Adicionales:                 NomDefDiaAdicNom
       Conceptos para el ISLR:                                        NomDefEspISLR
+      Definiciones Especiales para Prestaciones:                     NomDefEspParPre
       Definición de Retenciones y Aportes:
         Retenciones y Aportes:                                       NomDefAportes
         Conceptos para Aportes:                                      NomDefConAportes
