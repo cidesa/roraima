@@ -1,0 +1,37 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Nppernom
+    theme:            cidesaGenerator
+    fields:
+      codnom:
+        name:  Nómina
+        msj_error: Debe Ingresar la Nomina
+        catalogo:
+          catalogoweb: Npnomina_nomdefespvar
+          clase: Npnomina
+          ajax: 1
+          parametros: getprincipal="getCodnom" getsecundario="getNomnom" campoprincipal="codnom" camposecundario="nomnom" campobase = "id"                          
+          divupdate: divgridper         
+      anno:           { name: Año, params: size=5 maxlength=4 readonly=true}
+      gridper:        { name: .}
+      
+    list:
+      title:          Lista de Periodos por Nómina
+      display:        [=codnom, nomnom, anno]
+      filters:        [codnom, anno]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:       5
+      sort:           codnom
+
+    edit:
+      title: Edicion de Periodos Por Nómina
+      display:
+        Datos Generales:   [codnom, anno]
+        Datos Periodos:    [_gridper]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
