@@ -28,6 +28,7 @@
 <?php echo input_hidden_tag('opordpag[totalcomprobantes]', $opordpag->getTotalcomprobantes()) ?>
 <?php echo input_hidden_tag('opordpag[cuentarendicion]', $opordpag->getCuentarendicion()) ?>
 <?php echo input_hidden_tag('opordpag[totfonter]', $opordpag->getTotfonter()) ?>
+<?php echo input_hidden_tag('opordpag[datosnomina]', $opordpag->getDatosnomina()) ?>
 <table width="100%">
   <tr>
     <th><strong><font color="<? print $color;?>" size="2" face="Verdana, Arial, Helvetica, sans-serif"> <? print $eti;?></font></strong></th>

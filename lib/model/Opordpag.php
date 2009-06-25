@@ -30,6 +30,7 @@ class Opordpag extends BaseOpordpag
   protected $codcat="";
   protected $genctaord="";
   protected $filasord=0;
+  protected $datosnomina="";
 
 
    public function afterHydrate()
