@@ -44,6 +44,10 @@ group by substr(a.codpre,1,b.longitud::integer),a.id);
 
 
 
+                                                                     
+                                                                     
+                                                                     
+                                             
 CREATE OR REPLACE VIEW NPPRESTACIONES AS
 (SELECT A.CODEMP,A.NOMEMP,A.FECING,A.FECINI,A.FECFIN,
 A.MONTO,A.SALNOR,
@@ -211,7 +215,7 @@ FROM NPHOJINT A,
    order by id) B 
  WHERE  B.FECFIN>=(CASE WHEN TO_CHAR(A.FECING,'DD')>'01' THEN ADD_MONTHS(A.FECING,4)
                   ELSE ADD_MONTHS(A.FECING,4)-1 END)
- AND B.FECFIN<=NOW()) A LEFT OUTER JOIN
+ AND B.FECFIN<=(SELECT COALESCE(MAX(FECFINCON),NOW()) FROM NPSALINT WHERE CODEMP=A.CODEMP)) A LEFT OUTER JOIN
                        (SELECT ANOVIG,ANOVIGHAS,CODTIPCON,MAX(ANTAP) AS ANTAP,
                         MAX(ANTAPVAC) AS ANTAPVAC
                         FROM NPBONOCONT B
@@ -222,8 +226,6 @@ FROM NPHOJINT A,
 WHERE A.CODTIPCON=C.CODTIPCON
 AND A.FECINI>=C.FECINIREG)
 ORDER BY A.CODEMP,A.FECFIN,A.ID
-
-
 
 
 
