@@ -388,19 +388,21 @@ $this->Bitacora('Guardo');
      $retenc=Herramientas::CargarDatosGrid($this,$this->obj6,true);
      OrdendePago::salvarPagemiord($opordpag,$detalle,$factura,$retenc,$opordpag->getReferencias(),$opordpag->getCuentarendicion(),$numerocomp);
 
-     if ($opordpag->getTipcau()==$this->getRequestParameter('opnomina'))
+     if ($opordpag->getTipcau()==$this->ordpagnom)
      {
-       $sql="DELETE FROM NPCIENOM WHERE CODNOM='".$this->getRequestParameter('tipnom')."' And CODTIPGAS='".$this->getRequestParameter('gasto')."' And CODBAN='".$this->getRequestParameter('banco')."' And (ASIDED='A' OR ASIDED='D') And FECNOM=TO_DATE('".$this->getRequestParameter('fechanomina')."','YYYY-MM-DD')";
+       $aux=split('_',$opordpag->getDatosnomina());
+       //$sql="DELETE FROM NPCIENOM WHERE CODNOM='".$this->getRequestParameter('tipnom')."' And CODTIPGAS='".$this->getRequestParameter('gasto')."' And CODBAN='".$this->getRequestParameter('banco')."' And (ASIDED='A' OR ASIDED='D') And FECNOM=TO_DATE('".$this->getRequestParameter('fechanomina')."','YYYY-MM-DD')";
+       $sql="DELETE FROM NPCIENOM WHERE CODNOM='".$aux[0]."' And CODTIPGAS='".$aux[1]."' And CODBAN='".$aux[2]."' And (ASIDED='A' OR ASIDED='D') And FECNOM=TO_DATE('".$aux[3]."','YYYY-MM-DD')";
        Herramientas::insertarRegistros($sql);
      }
-
-     if ($opordpag->getTipcau()==$this->getRequestParameter('opaporte'))
+     //aportes
+     if ($opordpag->getTipcau()==$this->ordpagapo)
      {
       $sql="DELETE FROM NPCIENOM WHERE  CODCON='".$this->getRequestParameter('codigoaporte')."' And CodTipGas='".$this->getRequestParameter('gasto2')."' AND FECNOM=TO_DATE('".$this->getRequestParameter('fecnom')."','YYYY-MM-DD')";
       Herramientas::insertarRegistros($sql);
      }
-
-     if ($opordpag->getTipcau()==$this->getRequestParameter('opliquidacion'))
+    //liquidacion
+     if ($opordpag->getTipcau()==$this->ordpagliq)
      {
       if ($this->getRequestParameter('codigoemp')!="")
       {
@@ -408,8 +410,8 @@ $this->Bitacora('Guardo');
         Herramientas::insertarRegistros($sql);
       }
      }
-
-     if ($opordpag->getTipcau()==$this->getRequestParameter('opfideicomiso'))
+     //fideicomiso
+     if ($opordpag->getTipcau()==$this->ordpagfid)
      {
        if ($this->getRequestParameter('lanomina')!="" && $this->getRequestParameter('lafecha')!="")
        {
@@ -597,7 +599,10 @@ $this->Bitacora('Guardo');
     {
       $this->opordpag->setExpsigecof($opordpag['expsigecof']);
     }
-
+    if (isset($opordpag['datosnomina']))
+    {
+      $this->opordpag->setDatosnomina($opordpag['datosnomina']);
+    }
   }
 
   protected function getOpordpagOrCreate($id = 'id')
@@ -1824,6 +1829,7 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
   else if ($this->getRequestParameter('ajax')=='11')
   {
     $this->div='OPNN';
+    $datosnomina=$this->getRequestParameter('tipnom')."_".$this->getRequestParameter('gasto')."_".$this->getRequestParameter('banco')."_".$this->getRequestParameter('fecha');
     OrdendePago::ArregloNomina($this->getRequestParameter('tipnom'),$this->getRequestParameter('banco'),$this->getRequestParameter('gasto'),$this->getRequestParameter('fecha'),$this->getRequestParameter('opordpag_referencias'),&$arreglodet,&$arregloret,&$dato);
 
     $this->divu=$this->getRequestParameter('divu');
@@ -1837,7 +1843,7 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
     }
     $this->configGridRetenciones($arregloret);}
 
-    $output = '[["opordpag_cedrif","'.$dato.'",""]]';
+    $output = '[["opordpag_cedrif","'.$dato.'",""],["opordpag_datosnomina","'.$datosnomina.'",""]]';
     $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
   }
   else if ($this->getRequestParameter('ajax')=='12')
