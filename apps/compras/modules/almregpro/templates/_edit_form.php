@@ -96,13 +96,14 @@ if ($caprovee->getNitpro()=='J')  {
     class="content<?php if ($sf_request->hasError('caprovee{rifpro}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('caprovee{rifpro}')): ?> <?php echo form_error('caprovee{rifpro}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
-
+<?php $mascara2='#-########-#'?>
    <?php $value = object_input_tag($caprovee, 'getRifpro', array (
     'size' => 15,
-    'maxlength' => 15,
+    'maxlength' => 12,
     'readonly'  =>  $caprovee->getId()!='' ? true : false ,
     'control_name' => 'caprovee[rifpro]',
-    'onBlur'  => "javascript: validarRif(this.id)",
+    'onKeyPress' => "javascript:return dFilter (event.keyCode, this,'$mascara2')",
+    //'onBlur'  => "javascript: validarRif(this.id)",
   )); echo $value ? $value : '&nbsp;' ?>
     </div>
   </th>
@@ -928,6 +929,11 @@ function seguirvalidarRif()
     $('caprovee_rifpro').value='';
     $('caprovee_rifpro').focus();
   }
+}
+
+function colocaletra(valor)
+{
+  $('caprovee_rifpro').value=valor;
 }
 
 
