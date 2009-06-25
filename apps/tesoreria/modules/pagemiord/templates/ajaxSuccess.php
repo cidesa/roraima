@@ -40,7 +40,7 @@
   <?php $liqu .= input_hidden_tag('empleado', '') ?><?php $liqu .= input_hidden_tag('cedula', '') ?>
   <? $sql="select distinct(c.nomemp) as empleado, a.codemp as codigo, c.cedemp as cedula
            from NPLIQUIDACION_DET a left outer join NPHOJINT c on a.codemp=c.codemp
-           where  coalesce(a.numord,' ')=' ' order by empleado;";
+           where  coalesce(a.numord,'')='' order by empleado;";
   $url=cross_app_link_to('herramientas','catalogobuscar').'/space/catalogo1/objs/codigoemp-empleado-cedula/campos/codigo-empleado-cedula'; ?>
   <?php $liqu .=  '&nbsp;&nbsp;&nbsp;'.button_to_popup('...',$url,$sql,'catalogo1')?>
 
