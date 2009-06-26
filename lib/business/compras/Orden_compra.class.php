@@ -1424,6 +1424,14 @@ class Orden_compra
               $caordcom_new->setJustif($caordcom->getJustif());
               $caordcom_new->setRefprc($caordcom->getRefprc());
               $caordcom_new->setCoduni($caordcom->getCoduni());
+              $caordcom_new->setCodmedcom($caordcom->getCodmedcom());
+              $caordcom_new->setCodprocom($caordcom->getCodprocom());
+              $caordcom_new->setCodpai($caordcom->getCodpai());
+              $caordcom_new->setCodedo($caordcom->getCodedo());
+              $caordcom_new->setCodmun($caordcom->getCodmun());
+              $caordcom_new->setAplart($caordcom->getAplart());
+              $caordcom_new->setAplart6($caordcom->getAplart6());
+
               $caordcom_new->setNumsigecof($caordcom->getNumsigecof());
               $caordcom_new->setFecsigecof($caordcom->getFecsigecof());
               $caordcom_new->setExpsigecof($caordcom->getExpsigecof());
@@ -1451,9 +1459,19 @@ class Orden_compra
       $caordcom_mod= CaordcomPeer::doSelectOne($c);
       if (count($caordcom_mod)>0)
       {
-        $caordcom_mod->setDesord($caordcom->getDesord());
-        $caordcom_mod->setNotord($caordcom->getNotord());
-        $caordcom_mod->save();
+		  $caordcom_mod->setCodmedcom($caordcom->getCodmedcom());
+		  $caordcom_mod->setCodprocom($caordcom->getCodprocom());
+		  $caordcom_mod->setCodpai($caordcom->getCodpai());
+		  $caordcom_mod->setCodedo($caordcom->getCodedo());
+		  $caordcom_mod->setCodmun($caordcom->getCodmun());
+		  $caordcom_mod->setAplart($caordcom->getAplart());
+		  $caordcom_mod->setAplart6($caordcom->getAplart6());
+		  $caordcom_mod->setNumsigecof($caordcom->getNumsigecof());
+		  $caordcom_mod->setFecsigecof($caordcom->getFecsigecof());
+		  $caordcom_mod->setExpsigecof($caordcom->getExpsigecof());
+          $caordcom_mod->setDesord($caordcom->getDesord());
+          $caordcom_mod->setNotord($caordcom->getNotord());
+          $caordcom_mod->save();
       }
       return false;
     }
