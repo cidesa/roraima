@@ -11,6 +11,9 @@ compras:
       default:
         modulo: compras.php
         modulo_dev: compras_dev.php
+      División Territorial:
+        modulo: obras.php
+        modulo_dev: obras_dev.php
       Reportes:
         absoluta: reportes/reportes/compras
     imagenes:
@@ -30,6 +33,10 @@ compras:
       Definición de Tipo de Proyecto:                         almtippro
       Definición de Ubicaciones:                              AlmDefUbi
       Ramos de Artículos:                                     AlmRamArt
+      División Territorial:
+        Pais:                                                 oycdefdivpai
+        Estado:                                               oycdefdivest
+        Municipio:                                            oycdefdivmun
     Artículos:
       Definición de Artículos:                                AlmDefArt
       Registro de Artículos y+o Servicios:                    AlmRegArt
