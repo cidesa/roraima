@@ -25,6 +25,14 @@ abstract class BaseNpasipre extends BaseObject  implements Persistent {
 
 
 	
+	protected $afealibv;
+
+
+	
+	protected $afealibf;
+
+
+	
 	protected $id;
 
 	
@@ -59,6 +67,20 @@ abstract class BaseNpasipre extends BaseObject  implements Persistent {
   {
 
     return trim($this->tipasi);
+
+  }
+  
+  public function getAfealibv()
+  {
+
+    return trim($this->afealibv);
+
+  }
+  
+  public function getAfealibf()
+  {
+
+    return trim($this->afealibf);
 
   }
   
@@ -109,6 +131,26 @@ abstract class BaseNpasipre extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setAfealibv($v)
+	{
+
+    if ($this->afealibv !== $v) {
+        $this->afealibv = $v;
+        $this->modifiedColumns[] = NpasiprePeer::AFEALIBV;
+      }
+  
+	} 
+	
+	public function setAfealibf($v)
+	{
+
+    if ($this->afealibf !== $v) {
+        $this->afealibf = $v;
+        $this->modifiedColumns[] = NpasiprePeer::AFEALIBF;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -131,7 +173,11 @@ abstract class BaseNpasipre extends BaseObject  implements Persistent {
 
       $this->tipasi = $rs->getString($startcol + 3);
 
-      $this->id = $rs->getInt($startcol + 4);
+      $this->afealibv = $rs->getString($startcol + 4);
+
+      $this->afealibf = $rs->getString($startcol + 5);
+
+      $this->id = $rs->getInt($startcol + 6);
 
       $this->resetModified();
 
@@ -139,7 +185,7 @@ abstract class BaseNpasipre extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 5; 
+            return $startcol + 7; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Npasipre object", $e);
     }
@@ -299,6 +345,12 @@ abstract class BaseNpasipre extends BaseObject  implements Persistent {
 				return $this->getTipasi();
 				break;
 			case 4:
+				return $this->getAfealibv();
+				break;
+			case 5:
+				return $this->getAfealibf();
+				break;
+			case 6:
 				return $this->getId();
 				break;
 			default:
@@ -315,7 +367,9 @@ abstract class BaseNpasipre extends BaseObject  implements Persistent {
 			$keys[1] => $this->getCodasi(),
 			$keys[2] => $this->getDesasi(),
 			$keys[3] => $this->getTipasi(),
-			$keys[4] => $this->getId(),
+			$keys[4] => $this->getAfealibv(),
+			$keys[5] => $this->getAfealibf(),
+			$keys[6] => $this->getId(),
 		);
 		return $result;
 	}
@@ -344,6 +398,12 @@ abstract class BaseNpasipre extends BaseObject  implements Persistent {
 				$this->setTipasi($value);
 				break;
 			case 4:
+				$this->setAfealibv($value);
+				break;
+			case 5:
+				$this->setAfealibf($value);
+				break;
+			case 6:
 				$this->setId($value);
 				break;
 		} 	}
@@ -357,7 +417,9 @@ abstract class BaseNpasipre extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[1], $arr)) $this->setCodasi($arr[$keys[1]]);
 		if (array_key_exists($keys[2], $arr)) $this->setDesasi($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setTipasi($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setId($arr[$keys[4]]);
+		if (array_key_exists($keys[4], $arr)) $this->setAfealibv($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setAfealibf($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setId($arr[$keys[6]]);
 	}
 
 	
@@ -369,6 +431,8 @@ abstract class BaseNpasipre extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(NpasiprePeer::CODASI)) $criteria->add(NpasiprePeer::CODASI, $this->codasi);
 		if ($this->isColumnModified(NpasiprePeer::DESASI)) $criteria->add(NpasiprePeer::DESASI, $this->desasi);
 		if ($this->isColumnModified(NpasiprePeer::TIPASI)) $criteria->add(NpasiprePeer::TIPASI, $this->tipasi);
+		if ($this->isColumnModified(NpasiprePeer::AFEALIBV)) $criteria->add(NpasiprePeer::AFEALIBV, $this->afealibv);
+		if ($this->isColumnModified(NpasiprePeer::AFEALIBF)) $criteria->add(NpasiprePeer::AFEALIBF, $this->afealibf);
 		if ($this->isColumnModified(NpasiprePeer::ID)) $criteria->add(NpasiprePeer::ID, $this->id);
 
 		return $criteria;
@@ -407,6 +471,10 @@ abstract class BaseNpasipre extends BaseObject  implements Persistent {
 		$copyObj->setDesasi($this->desasi);
 
 		$copyObj->setTipasi($this->tipasi);
+
+		$copyObj->setAfealibv($this->afealibv);
+
+		$copyObj->setAfealibf($this->afealibf);
 
 
 		$copyObj->setNew(true);
