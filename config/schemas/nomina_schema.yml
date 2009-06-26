@@ -700,6 +700,12 @@ propel:
       type: VARCHAR
       size: 1
       required: true
+    afealibv:
+      type: VARCHAR
+      size: 1
+    afealibf:
+      type: VARCHAR
+      size: 1    
     id:
       type: INTEGER
       required: true
