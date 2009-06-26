@@ -33,18 +33,19 @@ generator:
       fecsigecof: { name: Fecha}
       expsigecof: { name: Expediente}
       nombensus: { name: Cesionario Autorizado}
+      codconcepto: { name: Concepto de Pago}
 
     list:
       title:          Ordenes de Pago
       display:        [=numord, fecemi, tipcau, desord, nomext, monord, cedrif, nomben]
-      filters:        [numord, fecemi, tipcau, cedrif, nomben]
+      filters:        [numord, fecemi, tipcau, cedrif, nomben, status]
       max_per_page:   5
       sort:  numord
       object_actions:
         _edit:        ~
     edit:
       title:          Edición de la Orden de Pago
-      display:        [=numord, fecemi, tipcau, nomext, desord, cedrif, nomben, codctasec, ctapag, descta, coduni, desubi, tipfin, nomext2, obsord, monord, mondes, monret, numcom, feccom, status, idrefer, fecanu, desanu, referencias, documento, afectapre, totalcomprobantes, cuentarendicion, vacio, presiono, numsigecof, fecsigecof, expsigecof, nombensus]
+      display:        [=numord, fecemi, tipcau, nomext, desord, cedrif, nomben, codctasec, ctapag, descta, coduni, desubi, tipfin, nomext2, obsord, monord, mondes, monret, numcom, feccom, status, idrefer, fecanu, desanu, referencias, documento, afectapre, totalcomprobantes, cuentarendicion, vacio, presiono, numsigecof, fecsigecof, expsigecof, nombensus, codconcepto, observe]
       actions:
         _list:        ~
         _save:        ~

@@ -339,18 +339,18 @@ class almordcomActions extends autoalmordcomActions
     }
 
 
-    $c= new Criteria();
-    $reg= OpdefempPeer::doSelectOne($c);
-    if ($reg)
-    {
-      if ($reg->getGencomalc()=='S')
-      {
+   $c= new Criteria();
+   $reg= OpdefempPeer::doSelectOne($c);
+   if ($reg)
+   {
+      /* if ($reg->getGencomalc()=='S')
+       {
         Orden_compra::generarComprobante($this->caordcom,$detalle,$referencia,$total,&$msjuno,&$comprobante);
-      }
-      else
-      {
+       }
+       else
+       {*/
       	Orden_compra::generarComprobanteOrden($this->caordcom,$total,&$msjuno,&$comprobante);
-      }
+      //}
 
       if ($msjuno=="")
       {

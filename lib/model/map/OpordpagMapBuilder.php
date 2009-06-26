@@ -144,6 +144,14 @@ class OpordpagMapBuilder {
 
 		$tMap->addColumn('APROBADOTES', 'Aprobadotes', 'string', CreoleTypes::VARCHAR, false, 1);
 
+		$tMap->addColumn('FECRET', 'Fecret', 'int', CreoleTypes::DATE, true, null);
+
+		$tMap->addColumn('NUMCUE', 'Numcue', 'string', CreoleTypes::VARCHAR, false, 20);
+
+		$tMap->addColumn('NUMCOMAPR', 'Numcomapr', 'string', CreoleTypes::VARCHAR, false, 8);
+
+		$tMap->addColumn('CODCONCEPTO', 'Codconcepto', 'string', CreoleTypes::VARCHAR, false, 4);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

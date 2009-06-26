@@ -92,5 +92,4 @@ class Tsdefban extends BaseTsdefban
     else
        return 8;
   }
-
  }

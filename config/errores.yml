@@ -369,6 +369,12 @@
 530:
   cod: 530
   msj: La Fecha de Devolución debe ser menor a la Fecha de Registro.
+531:
+  cod: 531
+  msj: No se puede salvar sin introducir las Retenciones
+532:
+  cod: 532
+  msj: El Proveedor ya tiene asociado ese mismo N° de Factura en una Orden anterior.
 3:
   cod: 3
   msj: La contraseña es diferente.

@@ -26,6 +26,7 @@ tesoreria:
       Tipos de Monedas:                                       TesDefTipMon
       Tipos de Retenciones:                                   PagTipRet
       Tipos de Financiamiento:                                PreTipFin
+      Conceptos de Pago:                                      tesconpag
       Bancos:                                                 TesDefCueBan
       Tipo de Beneficiario:                                   PagTipBen
       Beneficiarios:                                          PagBenfic

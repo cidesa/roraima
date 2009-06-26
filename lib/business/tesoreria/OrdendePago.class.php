@@ -2728,43 +2728,27 @@ class OrdendePago
     return true;
   }
 
-  public static function grabarComprobanteAlc($orden,&$mensaje,&$msjuno,&$msjdos,&$arrcompro)
+  public static function grabarComprobanteAlc($numord,&$msjuno,&$arrcompro)
   {
-    $mensaje="";
     $numeroorden="";
-    if (Herramientas::getVerCorrelativo('numini','opdefemp',&$r))
-    {
-      if ($orden->getNumord()=='########')
-      {
-        $encontrado=false;
-        while (!$encontrado)
-        {
-          $numero=str_pad($r, 8, '0', STR_PAD_LEFT);
 
-          $sql="select numord from opordpag where numord='".$numero."'";
-          if (Herramientas::BuscarDatos($sql,&$result))
-          {
-            $r=$r+1;
-          }
-          else
-          {
-            $encontrado=true;
-          }
-        }
-        $numeroorden2=str_pad($r, 8, '0', STR_PAD_LEFT);
-
-      }
-      else
-      {
-        $numeroorden2=str_replace('#','0',$orden->getNumord());
-      }
-    }
-    $numeroorden3="OP".substr($numeroorden2,2,6);
+    $numeroorden3="OP".substr($numord,2,6);
     $confcorcom=sfContext::getInstance()->getUser()->getAttribute('confcorcom');
     if ($confcorcom=='N')
     {
       $numerocomprob= $numeroorden3;
     }else $numerocomprob= '########';
+
+    $t= new Criteria();
+    $t->add(OpordpagPeer::NUMORD,$numord);
+    $data= OpordpagPeer::doSelectOne($t);
+    if ($data)
+    {
+      $ctapago=$data->getCtapag();
+      $monorden=$data->getMonord();
+      $desord= $data->getDesord();
+      $fecha=$data->getFecemi();
+    }
 
     $reftra = $numeroorden3;
     $codigocuenta="";
@@ -2784,21 +2768,20 @@ class OrdendePago
     $montos="";
     $descr="";
     $msjuno="";
-    $msjdos="";
 
-    $cuenta=$orden->getCtapag();
-    $monord=$orden->getMonord();
+    $cuenta=$ctapago;
+    $monord=$monorden;
     if ($monord>0)
     {
       $codigocuenta=$cuenta;
       $tipo='D';
       $des="";
-      $mon=$orden->getMonord();
+      $mon=$monorden;
       $monto=$mon;
     }
 
     $c= new Criteria();
-    $c->add(TsrelasiordPeer::CTAGASXPAG,$orden->getCtapag());
+    $c->add(TsrelasiordPeer::CTAGASXPAG,$ctapago);
     $reg= TsrelasiordPeer::doSelectOne($c);
     if ($reg)
     {
@@ -2810,7 +2793,7 @@ class OrdendePago
         $codigocuenta2=$dato->getCodcta();
         $tipo2='C';
         $des2="";
-        $mont=$orden->getMonord();
+        $mont=$monorden;
         $monto2=$mont;
       }else { $msjuno='El Código Contable asociado a Cuenta de Gastos por Pagar no es válido';  return true;}
     }else { $msjuno='El Código Contable asociado al Beneficiario no posee Relacion para Asientos de Ordenes'; return true;}
@@ -2824,8 +2807,8 @@ class OrdendePago
     $clscommpro->setGrabar("N");
     $clscommpro->setNumcom($numerocomprob);
     $clscommpro->setReftra($reftra);
-    $clscommpro->setFectra(date("d/m/Y",strtotime($orden->getFecemi())));
-    $clscommpro->setDestra($orden->getDesord());
+    $clscommpro->setFectra(date("d/m/Y",strtotime($fecha)));
+    $clscommpro->setDestra($desord);
     $clscommpro->setCtas($cuentas);
     $clscommpro->setDesc($descr);
     $clscommpro->setMov($tipos);
@@ -2855,15 +2838,22 @@ class OrdendePago
     }
   }
 
-  public static function aprobarOrdenesTes($opordpag,$grid)
+  public static function aprobarOrdenesTes($opordpag,$grid,$numcomprob,$numorden)
   {
     $x=$grid[0];
     $j=0;
+    $numcom=split('/',$numcomprob);
+    $numord=split('/',$numorden);
     while ($j<count($x))
     {
       if ($x[$j]->getAprobadotes()=="1")
       {
         $x[$j]->setAprobadotes('A');
+        $orden1="OP".substr($x[$j]->getNumord(),2,6);
+        if ($orden1==$numord[$j+1])
+        {
+          $x[$j]->setNumcomapr($numcom[$j+1]);
+        }
       }
       else
       {

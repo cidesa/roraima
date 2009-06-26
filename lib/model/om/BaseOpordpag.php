@@ -229,6 +229,22 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 
 
 	
+	protected $fecret;
+
+
+	
+	protected $numcue;
+
+
+	
+	protected $numcomapr;
+
+
+	
+	protected $codconcepto;
+
+
+	
 	protected $id;
 
 	
@@ -834,6 +850,49 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
   {
 
     return trim($this->aprobadotes);
+
+  }
+  
+  public function getFecret($format = 'Y-m-d')
+  {
+
+    if ($this->fecret === null || $this->fecret === '') {
+      return null;
+    } elseif (!is_int($this->fecret)) {
+            $ts = adodb_strtotime($this->fecret);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecret] as date/time value: " . var_export($this->fecret, true));
+      }
+    } else {
+      $ts = $this->fecret;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getNumcue()
+  {
+
+    return trim($this->numcue);
+
+  }
+  
+  public function getNumcomapr()
+  {
+
+    return trim($this->numcomapr);
+
+  }
+  
+  public function getCodconcepto()
+  {
+
+    return trim($this->codconcepto);
 
   }
   
@@ -1492,6 +1551,53 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setFecret($v)
+	{
+
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecret] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecret !== $ts) {
+      $this->fecret = $ts;
+      $this->modifiedColumns[] = OpordpagPeer::FECRET;
+    }
+
+	} 
+	
+	public function setNumcue($v)
+	{
+
+    if ($this->numcue !== $v) {
+        $this->numcue = $v;
+        $this->modifiedColumns[] = OpordpagPeer::NUMCUE;
+      }
+  
+	} 
+	
+	public function setNumcomapr($v)
+	{
+
+    if ($this->numcomapr !== $v) {
+        $this->numcomapr = $v;
+        $this->modifiedColumns[] = OpordpagPeer::NUMCOMAPR;
+      }
+  
+	} 
+	
+	public function setCodconcepto($v)
+	{
+
+    if ($this->codconcepto !== $v) {
+        $this->codconcepto = $v;
+        $this->modifiedColumns[] = OpordpagPeer::CODCONCEPTO;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -1616,7 +1722,15 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 
       $this->aprobadotes = $rs->getString($startcol + 54);
 
-      $this->id = $rs->getInt($startcol + 55);
+      $this->fecret = $rs->getDate($startcol + 55, null);
+
+      $this->numcue = $rs->getString($startcol + 56);
+
+      $this->numcomapr = $rs->getString($startcol + 57);
+
+      $this->codconcepto = $rs->getString($startcol + 58);
+
+      $this->id = $rs->getInt($startcol + 59);
 
       $this->resetModified();
 
@@ -1624,7 +1738,7 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 56; 
+            return $startcol + 60; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Opordpag object", $e);
     }
@@ -1937,6 +2051,18 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 				return $this->getAprobadotes();
 				break;
 			case 55:
+				return $this->getFecret();
+				break;
+			case 56:
+				return $this->getNumcue();
+				break;
+			case 57:
+				return $this->getNumcomapr();
+				break;
+			case 58:
+				return $this->getCodconcepto();
+				break;
+			case 59:
 				return $this->getId();
 				break;
 			default:
@@ -2004,7 +2130,11 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 			$keys[52] => $this->getCodmotanu(),
 			$keys[53] => $this->getUsuanu(),
 			$keys[54] => $this->getAprobadotes(),
-			$keys[55] => $this->getId(),
+			$keys[55] => $this->getFecret(),
+			$keys[56] => $this->getNumcue(),
+			$keys[57] => $this->getNumcomapr(),
+			$keys[58] => $this->getCodconcepto(),
+			$keys[59] => $this->getId(),
 		);
 		return $result;
 	}
@@ -2186,6 +2316,18 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 				$this->setAprobadotes($value);
 				break;
 			case 55:
+				$this->setFecret($value);
+				break;
+			case 56:
+				$this->setNumcue($value);
+				break;
+			case 57:
+				$this->setNumcomapr($value);
+				break;
+			case 58:
+				$this->setCodconcepto($value);
+				break;
+			case 59:
 				$this->setId($value);
 				break;
 		} 	}
@@ -2250,7 +2392,11 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[52], $arr)) $this->setCodmotanu($arr[$keys[52]]);
 		if (array_key_exists($keys[53], $arr)) $this->setUsuanu($arr[$keys[53]]);
 		if (array_key_exists($keys[54], $arr)) $this->setAprobadotes($arr[$keys[54]]);
-		if (array_key_exists($keys[55], $arr)) $this->setId($arr[$keys[55]]);
+		if (array_key_exists($keys[55], $arr)) $this->setFecret($arr[$keys[55]]);
+		if (array_key_exists($keys[56], $arr)) $this->setNumcue($arr[$keys[56]]);
+		if (array_key_exists($keys[57], $arr)) $this->setNumcomapr($arr[$keys[57]]);
+		if (array_key_exists($keys[58], $arr)) $this->setCodconcepto($arr[$keys[58]]);
+		if (array_key_exists($keys[59], $arr)) $this->setId($arr[$keys[59]]);
 	}
 
 	
@@ -2313,6 +2459,10 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(OpordpagPeer::CODMOTANU)) $criteria->add(OpordpagPeer::CODMOTANU, $this->codmotanu);
 		if ($this->isColumnModified(OpordpagPeer::USUANU)) $criteria->add(OpordpagPeer::USUANU, $this->usuanu);
 		if ($this->isColumnModified(OpordpagPeer::APROBADOTES)) $criteria->add(OpordpagPeer::APROBADOTES, $this->aprobadotes);
+		if ($this->isColumnModified(OpordpagPeer::FECRET)) $criteria->add(OpordpagPeer::FECRET, $this->fecret);
+		if ($this->isColumnModified(OpordpagPeer::NUMCUE)) $criteria->add(OpordpagPeer::NUMCUE, $this->numcue);
+		if ($this->isColumnModified(OpordpagPeer::NUMCOMAPR)) $criteria->add(OpordpagPeer::NUMCOMAPR, $this->numcomapr);
+		if ($this->isColumnModified(OpordpagPeer::CODCONCEPTO)) $criteria->add(OpordpagPeer::CODCONCEPTO, $this->codconcepto);
 		if ($this->isColumnModified(OpordpagPeer::ID)) $criteria->add(OpordpagPeer::ID, $this->id);
 
 		return $criteria;
@@ -2453,6 +2603,14 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 		$copyObj->setUsuanu($this->usuanu);
 
 		$copyObj->setAprobadotes($this->aprobadotes);
+
+		$copyObj->setFecret($this->fecret);
+
+		$copyObj->setNumcue($this->numcue);
+
+		$copyObj->setNumcomapr($this->numcomapr);
+
+		$copyObj->setCodconcepto($this->codconcepto);
 
 
 		$copyObj->setNew(true);

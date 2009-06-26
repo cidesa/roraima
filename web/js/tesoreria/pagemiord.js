@@ -233,10 +233,28 @@
     var fil=parseInt(aux[1]);
     var col=parseInt(aux[2]);
 
-    var num1=toFloat('totalcau');
-    var num2=toFloat('opordpag_monord');
-    var calcu=num1+num2;
-    $('total').value=format(calcu.toFixed(2),'.',',','.');
+    var colcomprc=col-3;
+    var colcausa=col-1;
+    var comprc=name+"_"+fil+"_"+colcomprc;
+    var causa=name+"_"+fil+"_"+colcausa;
+
+    var num3=toFloat(comprc);
+    var num4=toFloat(causa);
+    var num5=toFloat(id);
+    var calculo= num3 - num4;
+
+    if (num5>calculo)
+    {
+      alert('El Monto a causar no puede ser mayor al compromiso');
+      $(id).value="0,00";
+    }
+    else
+    {
+	    var num1=toFloat('totalcau');
+	    var num2=toFloat('opordpag_monord');
+	    var calcu=num1+num2;
+	    $('total').value=format(calcu.toFixed(2),'.',',','.');
+    }
    }
   }
 

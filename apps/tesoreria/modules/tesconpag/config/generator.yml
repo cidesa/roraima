@@ -1,0 +1,25 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Opconpag
+    theme:            cidesaGenerator
+    fields:
+      codconcepto: { name: Código , params: maxlength=4}
+      nomconcepto: { name: Descripción, params: maxlength=250}
+    list:
+      title:          Conceptos de Pago
+      filters:        [codconcepto, nomconcepto]
+      display:        [=codconcepto, nomconcepto]
+      max_per_page:	  5
+      sort: codconcepto
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+    edit:
+      title:          Edición de Conceptos de Pagos
+      display:        [codconcepto, nomconcepto]
+      actions:
+        _list:        ~
+        _save:        ~
+        _create:      ~
+        _delete:      ~
