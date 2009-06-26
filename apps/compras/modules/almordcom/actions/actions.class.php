@@ -550,7 +550,7 @@ class almordcomActions extends autoalmordcomActions
         $monrgo=number_format(CarecargPeer::getDato($this->getRequestParameter('codigo'),'monrgo'),2,',','.');
         $tiprgo=CarecargPeer::getDato($this->getRequestParameter('codigo'),'tiprgo');
         $reccal=SolicituddeEgresos::CalcularRecargos($tiprgo,$montorgotab,$this->getRequestParameter('monart'));
-        $reccalformat=number_format($reccal,2,',','.');
+        $reccalformat=$reccal;//number_format($reccal,2,',','.');
         $codpar=CarecargPeer::getDato($this->getRequestParameter('codigo'),'codpre');
         if ($tiprgo=='M')//Tipo recargo puntual (monto)
             $javascript="$('".$this->getRequestParameter('moncal')."').readOnly=false;actualizarsaldos_r();";
@@ -1883,6 +1883,35 @@ class almordcomActions extends autoalmordcomActions
     {
       $this->caordcom->setTotorden($caordcom['totorden']);
     }
+    if (isset($caordcom['codmedcom']))
+    {
+      $this->caordcom->setCodmedcom($caordcom['codmedcom']);
+    }
+    if (isset($caordcom['codprocom']))
+    {
+      $this->caordcom->setCodprocom($caordcom['codprocom']);
+    }
+    if (isset($caordcom['codpai']))
+    {
+      $this->caordcom->setCodpai($caordcom['codpai']);
+    }
+    if (isset($caordcom['codedo']))
+    {
+      $this->caordcom->setCodedo($caordcom['codedo']);
+    }
+    if (isset($caordcom['codmun']))
+    {
+      $this->caordcom->setCodmun($caordcom['codmun']);
+    }
+    if (isset($caordcom['aplart']))
+    {
+      $this->caordcom->setAplart($caordcom['aplart']);
+    }
+    if (isset($caordcom['aplart6']))
+    {
+      $this->caordcom->setAplart6($caordcom['aplart6']);
+    }
+
   }
 
   public function AfectaProyecto()

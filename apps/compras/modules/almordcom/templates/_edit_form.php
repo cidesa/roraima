@@ -668,8 +668,8 @@ echo grid_tag($obj_recargos);
     <?php echo form_error('caordcom{codmedcom}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php echo select_tag('caordcom[codmedcom]', objects_for_select(CamedcomPeer::doSelect(new Criteria()),'getCodmedcom','getDesmedcom',$var,'include_custom=Seleccione')) ?>
-    </div>
+  <?php echo select_tag('caordcom[codmedcom]', objects_for_select(CamedcomPeer::doSelect(new Criteria()),'getCodmedcom','getDesmedcom',$caordcom->getCodmedcom(),'include_custom=Seleccione')) ?>
+  </div>
    </th>
    <th>
    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -681,7 +681,7 @@ echo grid_tag($obj_recargos);
     <?php echo form_error('caordcom{codprocom}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php echo select_tag('caordcom[codprocom]', objects_for_select(NpmunicipiosPeer::doSelect(new Criteria()),'getCodprocom','getDesprocom',$var,'include_custom=Seleccione')) ?>
+  <?php echo select_tag('caordcom[codprocom]', objects_for_select(CaprocomPeer::doSelect(new Criteria()),'getCodprocom','getDesprocom',$caordcom->getCodprocom(),'include_custom=Seleccione')) ?>
     </div>
    </th>
   </tr>
@@ -760,7 +760,7 @@ echo grid_tag($obj_recargos);
     $v=false;
   }
 ?> <?php echo "Si ".radiobutton_tag('caordcom[aplart]', 'S', $v) ?>&nbsp;
-<?php echo "No ".radiobutton_tag('caordcom[aplart]', 'N', !$v2) ?>&nbsp;
+<?php echo "No ".radiobutton_tag('caordcom[aplart]', 'N', !$v) ?>&nbsp;
 <div class="sf_admin_edit_help"><?php echo __('Seleccione una Opción') ?></div>
     </div>
 </div>
@@ -785,7 +785,7 @@ echo grid_tag($obj_recargos);
     $v=false;
   }
 ?> <?php echo "Si ".radiobutton_tag('caordcom[aplart6]', 'S', $v) ?>&nbsp;
-<?php echo "No ".radiobutton_tag('caordcom[aplart6]', 'N', !$v2) ?>&nbsp;
+<?php echo "No ".radiobutton_tag('caordcom[aplart6]', 'N', !$v) ?>&nbsp;
 <div class="sf_admin_edit_help"><?php echo __('Seleccione una Opción') ?></div>
     </div>
 </div>
