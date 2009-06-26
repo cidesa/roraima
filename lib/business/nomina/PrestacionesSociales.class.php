@@ -1076,7 +1076,7 @@ End Function*/
 				$montoinc = 0;
 				$montoinc = $montoinc * $montouti;
 
-				if($utilinc)
+				/*if($utilinc)
 				{
 					$sql = "Select coalesce(max(saltot),0) as Monto from NPImpPresoc where CodEmp='$codemp' And Tipo='P'";
 					if (Herramientas::BuscarDatos($sql,&$result))
@@ -1086,10 +1086,10 @@ End Function*/
 					}else
 					    $diasuti = 0;
 				}else
-				{
+				{*/
 					$montouti = $montouti * ($ultimosueldo/30);
 					$diasuti = 0;
-				}
+				//}
 				#ARREGLO DEL GRID
 			    $sql = "Select * from NPDefPreLiq where CODNOM='$codnom' AND CodCon='005' and PerDes<='$anoegr' and PerHas>='$anoegr'";
 				if (Herramientas::BuscarDatos($sql,&$result))
