@@ -48,15 +48,14 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 			Union All 
 			select 1 as orden, 
 			SUM(0) as DIAS,
-			SUM(A.ANTACUM*-1) AS MONTO,
+			SUM(A.VALART108)*-1 AS MONTO,
 			'APORTES DEPOSITADOS EN FIDEICOMISO ' AS DESCRIPCION,
 			B.CODPAR AS PARTIDA 
 			From NPIMPPRESOC A,NPDEFPRELIQ B,NPTIPCON D,NPASINOMCONT E,
 			(Select MAX(FECFIN) as FECHAFIN FROM NPIMPPRESOC WHERE tipo='' AND codemp='$codemp') C 
 			where  
 			A.tipo='' AND 
-			--A.VALART108>0 and
-			A.FECFIN=C.FECHAFIN AND 
+			A.VALART108>0 and
 			A.codemp='$codemp' AND 
 			B.CODNOM='$codnom' AND 
 			B.CODCON='000' AND
@@ -65,7 +64,7 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 			E.CODNOM=B.CODNOM AND
 			D.CODTIPCON=E.CODTIPCON AND
 			(D.FID='1' OR D.FID='S') AND
-			FECINI>=(CASE WHEN (D.FID='0' OR D.FID='S') THEN D.FECDES ELSE fecini END)
+			FECINI>=(CASE WHEN (D.FID='1' OR D.FID='S') THEN D.FECDES ELSE fecini END)
 			GROUP BY B.CODPAR 
 			
 			Union All 
