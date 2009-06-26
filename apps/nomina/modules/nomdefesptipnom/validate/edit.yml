@@ -3,7 +3,6 @@ methods:
    - "npnomina{codnom}"
    - "npnomina{nomnom}"
    - "npnomina{ultfec}"
-   - "npnomina{profec}"
    - "npnomina{numsem}"
 
 names:
@@ -20,11 +19,6 @@ names:
   npnomina{ultfec}:
     required:  Yes
     required_msg: La Fecha Desde no puede estar en Blanco
-    validators: FechaValidator
-
-  npnomina{profec}:
-    required:  Yes
-    required_msg: La Fecha Hasta no puede estar en Blanco
     validators: FechaValidator
 
   npnomina{numsem}:
