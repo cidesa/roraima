@@ -44,6 +44,8 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 			TO_CHAR(A.FECFIN,'YYYY')<=B.PERHAS 
 			GROUP BY 
 			(case when B.PERDES=B.PERDES then 'PRESTACIONES SOCIALES 'else 'PRESTACIONES SOCIALES '||B.PERDES||' - '||B.PERHAS end),B.CODPAR  
+			HAVING
+			SUM(A.VALART108)<>0
 			
 			Union All 
 			select 1 as orden, 
@@ -66,6 +68,8 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 			(D.FID='1' OR D.FID='S') AND
 			FECINI>=(CASE WHEN (D.FID='1' OR D.FID='S') THEN D.FECDES ELSE fecini END)
 			GROUP BY B.CODPAR 
+			HAVING
+			SUM(A.VALART108)<>0
 			
 			Union All 
 			select 2 as orden, 
@@ -83,6 +87,8 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 			TO_CHAR(A.FECFIN,'YYYY')>=B.PERDES AND 
 			TO_CHAR(A.FECFIN,'YYYY')<=B.PERHAS 
 			Group By B.CODPAR 
+			HAVING
+			SUM(A.VALART108)<>0
 			
 			Union All 
 			SELECT 3 as orden,
@@ -98,6 +104,8 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 			TO_CHAR(A.FECFIN,'YYYY')>=B.PERDES AND 
 			TO_CHAR(A.FECFIN,'YYYY')<=B.PERHAS 
 			GROUP BY (case when B.PERDES=B.PERHAS then 'INTERESES SOBRE PREST. SOCIALES ART. 108 '||B.PERDES else 'INTERESES SOBRE PREST. SOCIALES ART. 108 '||B.PERDES||' - '||B.PERHAS end ),B.CODPAR 
+			HAVING
+			SUM(A.INTDEV)<>0
 			
 			Union All 
 			select 4 as orden,
@@ -112,7 +120,9 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 			B.CODNOM='$codnom' AND
 			B.CODCON='004' AND 
 			A.PERFIN>=B.PERDES AND 
-			A.PERFIN<=B.PERHAS 
+			A.PERFIN<=B.PERHAS AND
+			(A.MONTOINCI/30*A.DIASBONO)<>0
+			
 			
 			Union ALL 
 			select 5 as orden,
@@ -126,7 +136,8 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 			B.CODNOM='$codnom' AND 
 			B.CODCON='003' AND 
 			A.PERFIN>=B.PERDES AND 
-			A.PERFIN<=B.PERHAS 
+			A.PERFIN<=B.PERHAS AND
+			(A.ULTSUE/30*A.DIADIS)<>0
 			
 			UNION All 
 			SELECT 1 as orden,
@@ -141,7 +152,9 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 			B.CODCON='000' AND 
 			TO_CHAR(A.FECANT,'YYYY')>=B.PERDES AND 
 			TO_CHAR(A.FECANT,'YYYY')<=B.PERHAS 
-			GROUP BY A.FECANT,B.CODPAR 
+			GROUP BY A.FECANT,B.CODPAR
+			HAVING
+			SUM(A.MONANT)<>0 
 			ORDER BY orden,DESCRIPCION DESC";
 
 	      if (H::BuscarDatos($sql,$arr))
