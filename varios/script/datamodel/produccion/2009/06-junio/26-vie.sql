@@ -31,3 +31,8 @@ COMMENT ON TABLE "opconpag" IS 'Tabla que almacena los Conceptos de Pagos para l
 
 ALTER TABLE "tsdefban"
   ADD COLUMN "endosable" varchar(1);
+  
+  --CARLOS RAMIREZ
+ALTER TABLE npasipre
+  ADD COLUMN afealibv varchar(1),
+  ADD COLUMN afealibf varchar(1);
