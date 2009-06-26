@@ -96,6 +96,37 @@
   <?php echo select_tag('npasipre[tipasi]', options_for_select($arrtipasi,$npasipre->getTipasi()),array(
 	    ));?> 	
     </div>	
+<br>
+<table>
+	<tr>
+		<th>
+			<?php echo label_for('npasipre[afealibv]', __($labels['npasipre{afealibv}']), 'class="required"') ?>
+			  <div class="content<?php if ($sf_request->hasError('npasipre{afealibv}')): ?> form-error<?php endif; ?>">
+			  <?php if ($sf_request->hasError('npasipre{afealibv}')): ?>
+			    <?php echo form_error('npasipre{afealibv}', array('class' => 'form-error-msg')) ?>
+			  <?php endif; ?>
+			
+			  <?php  $value = object_checkbox_tag($npasipre, 'getAfealibv', array (
+			    'control_name' => 'npasipre[afealibv]'
+				)).""; echo $value ? $value : '&nbsp;' ?>
+			    </div>			
+		</th>
+		<th>&nbsp;&nbsp;&nbsp;</th>
+		<th>
+			<?php echo label_for('npasipre[afealibf]', __($labels['npasipre{afealibf}']), 'class="required"') ?>
+			  <div class="content<?php if ($sf_request->hasError('npasipre{afealibf}')): ?> form-error<?php endif; ?>">
+			  <?php if ($sf_request->hasError('npasipre{afealibf}')): ?>
+			    <?php echo form_error('npasipre{afealibf}', array('class' => 'form-error-msg')) ?>
+			  <?php endif; ?>
+			
+			  <?php  $value = object_checkbox_tag($npasipre, 'getAfealibf', array (
+			    'control_name' => 'npasipre[afealibf]'
+				)).""; echo $value ? $value : '&nbsp;' ?>
+			    </div>				
+		</th>
+	</tr>
+</table>	
+
 </div>
 </fieldset>
 

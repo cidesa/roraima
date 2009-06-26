@@ -327,6 +327,14 @@ public function executeAjax()
     {
       $this->npasipre->setTipasi($npasipre['tipasi']);
     }
+	if (isset($npasipre['afealibv']))
+    {
+      $this->npasipre->setAfealibv('S');
+    }
+	if (isset($npasipre['afealibf']))
+    {
+      $this->npasipre->setAfealibf('S');
+    }
   }
  protected function getNpasipreOrCreate($id = 'id')
   {

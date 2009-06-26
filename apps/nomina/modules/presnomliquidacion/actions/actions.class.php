@@ -19,7 +19,7 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
   }
   
   
-  public function configGridAsigDeduc($codemp="",$codnom="",$categoria="",$fecegr="",$ultimosueldo="",$estaliquidado=false)
+  public function configGridAsigDeduc($codemp="",$codnom="",$categoria="",$fecegr="",$ultimosueldo="",$salariointegral="",$estaliquidado=false)
   {	
     $perasig=array();
     $perdeduc=array();
@@ -163,7 +163,7 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 			$j=0;
 			$cont=0;
 			$totarr=count($arr); 
-			$aguinaldos = PrestacionesSociales::AguinaldosFracionados($codnom,$codemp,$fecegr,$ultimosueldo,$totarr,$estaliquidado);
+			$aguinaldos = PrestacionesSociales::AguinaldosFracionados($codnom,$codemp,$fecegr,$salariointegral,$totarr,$estaliquidado);
 			$arr = array_merge($arr,$aguinaldos);
 	        while ($cont<count($arr))
 	        {
@@ -609,12 +609,90 @@ public function configGrid($codemp="")
 				   $ultimosueldo = 0.00;
 				   
 				#Salario integral del empleado   
-				$sql =  "Select SalTot from NPImpPreSoc where CodEmp='$codemp' and FECFIN = (SELECT MAX(FECFIN) FROM 
-				NPImpPreSoc where CodEmp='$codemp' And Tipo Is Null and FECFIN<= to_date('$fecegr','dd/mm/yyyy'))";
+				$sql="select a.codtipcon, a.calinc from npasiempcont b, npbonocont a 
+						where status='A' and codemp='$codemp' and a.codtipcon=b.codtipcon and
+						fecdes>=anovig and 
+						fecdes<=anovighas AND
+						fechas>=anovig and 
+						fechas<=anovighas";
 				if (H::BuscarDatos($sql,$rs))
-					$salariointegral=$rs[0]["saltot"];
+				{
+					$codtipcon=$rs[0]['codtipcon'];
+					$calinci=$rs[0]['calinc'];
+				}				   
 				else
-					$salariointegral= 0.00;
+				{
+					$codtipcon='';
+					$calinci='';
+				}
+				   
+				if($calinci=='S')
+				{
+					$sql =  "select 
+							coalesce((select sum(monto) from npasipre a, npconasi b, nphiscon c 
+							where a.codasi=b.codasi and a.codcon=b.codcon and b.codcpt=c.codcon and tipasi='S' 
+							and a.codcon='$codtipcon' and codemp='$codemp' and  
+							TO_CHAR(fecnom,'MM/YYYY')=TO_CHAR((SELECT MAX(FECFIN) FROM NPIMPPRESOC WHERE CODEMP='$codemp' AND VALART108>0 AND TIPO=''),'mm/yyyy')
+							),0) 
+							+
+							((coalesce((select sum(monto) from npasipre a, npconasi b, nphiscon c 
+							where a.codasi=b.codasi and a.codcon=b.codcon and b.codcpt=c.codcon and b.afealibv='S' 
+							and a.codcon='$codtipcon' and codemp='$codemp' and  
+							TO_CHAR(fecnom,'MM/YYYY')=TO_CHAR((SELECT MAX(FECFIN) FROM NPIMPPRESOC WHERE CODEMP='$codemp' AND VALART108>0 AND TIPO=''),'mm/yyyy')
+							),0)/30)* (z.diavac/12))
+							+
+							((coalesce((select sum(monto) from npasipre a, npconasi b, nphiscon c 
+							where a.codasi=b.codasi and a.codcon=b.codcon and b.codcpt=c.codcon and b.afealibf='S' 
+							and a.codcon='$codtipcon' and codemp='$codemp' and  
+							TO_CHAR(fecnom,'MM/YYYY')=TO_CHAR((SELECT MAX(FECFIN) FROM NPIMPPRESOC WHERE CODEMP='$codemp' AND VALART108>0 AND TIPO=''),'mm/yyyy')
+							),0)/30)* (z.diauti/12)) as monto
+							from npbonocont z
+							where z.codtipcon='$codtipcon' and 
+							anovig<=(SELECT MAX(FECFIN) FROM NPIMPPRESOC WHERE CODEMP='$codemp' AND VALART108>0 AND TIPO='') and
+							anovighas>=(SELECT MAX(FECFIN) FROM NPIMPPRESOC WHERE CODEMP='$codemp' AND VALART108>0 AND TIPO='')
+							";	
+							if (H::BuscarDatos($sql,$rs))
+							    if($rs[0]["monto"]!=0)
+									$salariointegral=$rs[0]["monto"];
+								else{
+									
+									$sql="select 
+										coalesce((select sum(monasi) from npasipre a, npsalint c 
+										where  a.codasi=c.codasi and tipasi='S' 
+										and a.codcon='$codtipcon' and c.codemp='$codemp' and  
+										TO_CHAR(fecinicon,'MM/YYYY')=TO_CHAR((SELECT MAX(FECFIN) FROM NPIMPPRESOC WHERE CODEMP='$codemp' AND VALART108>0 AND TIPO=''),'mm/yyyy')
+										),0)
+										+
+										((coalesce((select sum(monasi) from npasipre a, npsalint c
+										where a.codasi=c.codasi and  afealibv='S' 
+										and a.codcon='$codtipcon' and codemp='$codemp' and  
+										TO_CHAR(fecinicon,'MM/YYYY')=TO_CHAR((SELECT MAX(FECFIN) FROM NPIMPPRESOC WHERE CODEMP='$codemp' AND VALART108>0 AND TIPO=''),'mm/yyyy')
+										),0)/30)* (z.diavac/12))
+										+
+										((coalesce((select sum(monasi) from npasipre a, npsalint c
+										where a.codasi=c.codasi and  afealibf='S' 
+										and a.codcon='$codtipcon' and codemp='$codemp' and  
+										TO_CHAR(fecinicon,'MM/YYYY')=TO_CHAR((SELECT MAX(FECFIN) FROM NPIMPPRESOC WHERE CODEMP='$codemp' AND VALART108>0 AND TIPO=''),'mm/yyyy')
+										),0)/30)* (z.diauti/12)) as monto
+										from npbonocont z
+										where z.codtipcon='$codtipcon' and 
+										anovig<=(SELECT MAX(FECFIN) FROM NPIMPPRESOC WHERE CODEMP='$codemp' AND VALART108>0 AND TIPO='') and
+										anovighas>=(SELECT MAX(FECFIN) FROM NPIMPPRESOC WHERE CODEMP='$codemp' AND VALART108>0 AND TIPO='')
+										";
+									if (H::BuscarDatos($sql,$rs))
+										$salariointegral=$rs[0]["monto"];
+									else	
+										$salariointegral= 0.00;
+									
+								}	
+							else
+								$salariointegral= 0.00;
+				}else
+				{
+					$salariointegral=$ultimosueldo;
+				}
+				
+				
 					
 				#Sueldo al 31/12/1996
 				$sql = "Select coalesce(sum(MonAsi),0)  as sue311296 from NPSALINT where CodEmp='$codemp' and  
@@ -646,7 +724,7 @@ public function configGrid($codemp="")
 				if(!$estaliquidado)
 				{
 					# NO TIENE LIQUIDACIONES CALCULADAS				
-					$this->configGridAsigDeduc($codemp,$codnom,$categoria,$fechae,$ultimosueldo,$estaliquidado);
+					$this->configGridAsigDeduc($codemp,$codnom,$categoria,$fechae,$ultimosueldo,$salariointegral,$estaliquidado);
 					$this->getUser()->setAttribute('objasig',$this->npliquidacion_det->getObjasig());
 					$this->getUser()->setAttribute('objdeduc',$this->npliquidacion_det->getObjdeduc());
 					$js.="toAjaxUpdater('divgridasig',2,getUrlModulo()+'ajax','2');
@@ -665,7 +743,7 @@ public function configGrid($codemp="")
 						$delemp=$codemp;
 					}
 					    
-					$this->configGridAsigDeduc($codemp,$codnom,$categoria,$fechae,$ultimosueldo,$estaliquidado);
+					$this->configGridAsigDeduc($codemp,$codnom,$categoria,$fechae,$ultimosueldo,$salariointegral,$estaliquidado);
 					$this->getUser()->setAttribute('objasig',$this->npliquidacion_det->getObjasig());
 					$this->getUser()->setAttribute('objdeduc',$this->npliquidacion_det->getObjdeduc());
 					$js.="toAjaxUpdater('divgridasig',2,getUrlModulo()+'ajax','2');
@@ -676,7 +754,8 @@ public function configGrid($codemp="")
 					  '["npliquidacion_det_diaefe","'.$diaefec.'",""],["npliquidacion_det_mesefe","'.$mesefec.'",""],["npliquidacion_det_anoefe","'.$anoefec.'",""],'.
 					  '["npliquidacion_det_diarn","'.$diaact.'",""],["npliquidacion_det_mesrn","'.$mesact.'",""],["npliquidacion_det_anorn","'.$anoact.'",""],'.
 					  '["npliquidacion_det_diara","'.$diaant.'",""],["npliquidacion_det_mesra","'.$mesant.'",""],["npliquidacion_det_anora","'.$anoant.'",""],'.
-	  				  '["npliquidacion_det_sue311296","'.H::FormatoMonto($sue311296).'",""],["npliquidacion_det_sue180697","'.H::FormatoMonto($sue180697).'",""],["npliquidacion_det_ultimosueldo","'.H::FormatoMonto($ultimosueldo).'",""],'.
+	  				  '["npliquidacion_det_sue311296","'.H::FormatoMonto($sue311296).'",""],["npliquidacion_det_sue180697","'.H::FormatoMonto($sue180697).'",""],'.
+					  '["npliquidacion_det_ultimosueldo","'.H::FormatoMonto($ultimosueldo).'",""],["npliquidacion_det_salarioint","'.H::FormatoMonto($salariointegral).'",""],'.
 				      '["npliquidacion_det_nomemp","'.$nomemp.'",""],["javascript","'.$js.'",""]]';			
 			}else
 			{
