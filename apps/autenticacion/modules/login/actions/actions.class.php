@@ -94,6 +94,7 @@ class loginActions extends sfActions
       $user->setAttribute('error','Usuario Sin Autenticar');
       $this->logMessage(Constantes::Autenticacion.'Usuario Sesion Cerrada = '.$usu.' Schema = '.$user->getAttribute('schema'), 'info');
     }
+    session_unset();
 
   }
 
