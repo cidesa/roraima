@@ -41,6 +41,7 @@
   'size' => 50,
   'control_name' => 'catipsal[destipsal]',
   'maxlength' => 50,
+  'onKeyUp'=>"javascript:cadena=this.value;cadena=cadena.toUpperCase();this.value=cadena;",
 )); echo $value ? $value : '&nbsp;' ?>
   </div>
 </div>

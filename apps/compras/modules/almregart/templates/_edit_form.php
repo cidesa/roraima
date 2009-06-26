@@ -116,6 +116,7 @@
   'size' => '80x5',
   'control_name' => 'caregart[desart]',
   'maxlength' => 1500,
+  'onKeyUp'=>"javascript:cadena=this.value;cadena=cadena.toUpperCase();this.value=cadena;",
 )); echo $value ? $value : '&nbsp;' ?>
    </div>
 

@@ -41,7 +41,7 @@
   'size' => '80x5',
   'maxlength' => 100,
   'control_name' => 'carecaud[desrec]',
-  'onkeyup' => "javascript:return ismaxlength(this)",
+  'onKeyUp'=>"javascript:cadena=this.value;cadena=cadena.toUpperCase();this.value=cadena;",
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 

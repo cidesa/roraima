@@ -38,6 +38,7 @@
 'size' => 80,
 'maxlength' => 250,
 'control_name' => 'camotfal[desfal]',
+'onKeyUp'=>"javascript:cadena=this.value;cadena=cadena.toUpperCase();this.value=cadena;",
 )); echo $value ? $value : '&nbsp;' ?>
   </div>
 <br>

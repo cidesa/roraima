@@ -38,6 +38,7 @@
   'size' => 80,
   'maxlength' => 255,
   'control_name' => 'caforent[desforent]',
+  'onKeyUp'=>"javascript:cadena=this.value;cadena=cadena.toUpperCase();this.value=cadena;",
 )); echo $value ? $value : '&nbsp;' ?>
 </div>
 </div>
