@@ -9,6 +9,8 @@ generator:
       codasi: { name: Codigo de Grupo, params: maxlength=3}
       desasi: { name: Descripcion}
       tipasi: { name: Tipo de Asignacion}
+      afealibv: { name: Afecta Alicuota de Bono Vacacional}
+      afealibf: { name: Afecta Alicuota de Bono Fin de Año}
       
     list:
       title:          Registro de Tipo de Asignaciones

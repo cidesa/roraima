@@ -5,7 +5,7 @@ generator:
     theme:            cidesaGenerator
 
     fields:
-      display: [nomemp, sue311296, sue180697, ultimosueldo, fecing, feccor, fecegr, diaefe, mesefe, anoefe, diarn, mesrn, anorn, diara, mesra, anora]
+      display: [nomemp, sue311296, sue180697, ultimosueldo, salarioint, fecing, feccor, fecegr, diaefe, mesefe, anoefe, diarn, mesrn, anorn, diara, mesra, anora]
       codemp:
         name: Código Empleado
         msj_error: El numero del expediente es necesario
@@ -23,7 +23,9 @@ generator:
       sue180697:
         name: Al 18/06/1997
       ultimosueldo:
-        name: A la Fecha de Egreso
+        name: Salario Normal A la Fecha de Egreso
+      salarioint:
+        name: Salario Integral A la Fecha de Egreso  
       salarios:
         name: .
       fecing:
