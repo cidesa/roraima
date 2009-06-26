@@ -18,7 +18,7 @@ function Catalogo($objeto,$ajaxindex, $oit=array(),$metodo,$clase,$uri_params = 
   $name = explode('.',$name);
   //Para que funcione con lib.model.catastro.clase
   //sin perder lib.model.clase
-  
+
   if (count($name)>3){   $name = strtolower($name[3]);  }else{   $name = strtolower($name[2]); }
   if($name=='npliquidaciondet') $name = 'npliquidacion_det';
 
@@ -65,7 +65,7 @@ function Catalogo($objeto,$ajaxindex, $oit=array(),$metodo,$clase,$uri_params = 
   'size' => $oit['tamanoprincipal'],
   'control_name' => $name.'['.strtolower($oit['campoprincipal']).']',
   'onBlur'=> remote_function(array(
-   'update' => $div,   
+   'update' => $div,
    'script' => true,
    'url'      => sfContext::getInstance()->getModuleName().'/catalogo',
    'complete' => 'AjaxJSON(request, json)',
@@ -83,7 +83,7 @@ if ($div==''){
   'size' => $oit['tamanoprincipal'],
   'control_name' => $name.'['.strtolower($oit['campoprincipal']).']',
   'onBlur'=> remote_function(array(
-   'url'      => sfContext::getInstance()->getModuleName().'/ajax',   
+   'url'      => sfContext::getInstance()->getModuleName().'/ajax',
    'script' => true,
    'complete' => 'AjaxJSON(request, json)',
    'condition' => "$('".$name.'_'.strtolower($oit['campoprincipal'])."').value != ''",
@@ -142,7 +142,7 @@ if ($div==''){
   'size' => $oit['tamanoprincipal'],
   'control_name' => $name.'['.strtolower($oit['campoprincipal']).']',
   'onBlur'=> remote_function(array(
-   'url'      => sfContext::getInstance()->getModuleName().'/ajax',   
+   'url'      => sfContext::getInstance()->getModuleName().'/ajax',
    'script' => true,
    'complete' => 'AjaxJSON(request, json)',
    'condition' => "$('".$name.'_'.strtolower($oit['campoprincipal'])."').value != ''",
@@ -154,7 +154,7 @@ else {
   'size' => $oit['tamanoprincipal'],
   'control_name' => $name.'['.strtolower($oit['campoprincipal']).']',
   'onBlur'=> remote_function(array(
-   'update' => $div,      
+   'update' => $div,
    'script' => true,
    'url'      => sfContext::getInstance()->getModuleName().'/ajax',
    'complete' => 'AjaxJSON(request, json)',
