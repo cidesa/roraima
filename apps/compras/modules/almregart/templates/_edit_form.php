@@ -84,9 +84,20 @@
   'size' => 20,
   'maxlength' => $longcont,
   'control_name' => 'caregart[codcta]',
-  'onBlur' => "javascript:cadena=rayitas(this.value);document.getElementById('caregart_codcta').value=cadena; var aux=$('caregart_codcta').value; aux2=aux.split('-'); if (aux2[0]=='' || $('caregart_codcta').value=='undefined'){ $('caregart_codcta').value='';}",
-  'onKeyDown' => "javascript:return dFilter (event.keyCode, this,'$mascaracontabilidad')",
+  //'onBlur' => "javascript:cadena=rayitas(this.value);document.getElementById('caregart_codcta').value=cadena; var aux=$('caregart_codcta').value; aux2=aux.split('-'); if (aux2[0]=='' || $('caregart_codcta').value=='undefined'){ $('caregart_codcta').value='';}",
+  //'onKeyDown' => "javascript:return dFilter (event.keyCode, this,'$mascaracontabilidad')",
+  'onKeyPress' =>  "javascript:return dFilter (event.keyCode, this,'$mascaracontabilidad')",
+  'onBlur'=> remote_function(array(
+        'url'      => 'almregart/ajax',
+        'complete' => 'AjaxJSON(request, json)',
+        'condition' => "$('caregart_codcta').value != ''",
+        'script' => true,
+         'with' => "'ajax=8&codigo='+this.value"
+        ))
 )); echo $value ? $value : '&nbsp;' ?>
+
+
+
 &nbsp;</div></th>
 <th>
 <?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Contabb_Almregart/clase/Contabb/frame/sf_admin_edit_form/obj1/caregart_codcta','','','botoncat')?></th>
@@ -266,7 +277,7 @@
     <?php echo form_error('caregart{codartsnc}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_input_tag($caregart, 'getCodartsnc', array (
+  <?php  $value = object_input_tag($caregart, 'getCodartsnc', array (
   'size' => 15,
   'control_name' => 'caregart[codartsnc]',
   'maxlength' => $longcatsnc,

@@ -283,13 +283,14 @@ $this->Bitacora('Guardo');
       $col4 = clone $col3;
       $col4->setTitulo('Exi. Máxima');
       $col4->setNombreCampo('Eximax');
+      $col4->setJScript('onKeypress="if (event.keyCode==13 || event.keyCode==9) verificamontos(event, this.id)"');
 
       /*$col7 = clone $col5;
       $col7->setTitulo('Exi. Actual');
       $col7->setNombreCampo('Exiact');
       $col7->setEsTotal(true,'caregart_exitot');
 */
-      $col5 = clone $col3;
+      $col5 = clone $col4;
       $col5->setTitulo('Reorden');
       $col5->setNombreCampo('Ptoreo');
 
@@ -305,7 +306,7 @@ $this->Bitacora('Guardo');
     $col7->setAlineacionObjeto(Columna::CENTRO);
     $col7->setAlineacionContenido(Columna::CENTRO);
     $col7->setNombreCampo('anadir');
-    $col7->setHTML('type="text" size="1" style="border:none" class="imagenalmacen"');
+    $col7->setHTML('type="text" size="1" style="border:none" class="imagenalmacen" readonly=true');
     $col7->setJScript('onClick="mostrar(this.id)"');
 
       $col8 = new Columna('cadena_datos_ubicacion');
@@ -440,17 +441,42 @@ $this->Bitacora('Guardo');
      $cajtexcom=$this->getRequestParameter('cajtexcom');
     if ($this->getRequestParameter('ajax')=='1')
       {
-        $dato=CaramartPeer::getDesramo($this->getRequestParameter('codigo'));
-            $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$cajtexcom.'","6","c"]]';
-            $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
-          return sfView::HEADER_ONLY;
+        $c=new Criteria();
+        $c->add(CaramartPeer::RAMART,str_pad($this->getRequestParameter('codigo'), 6 , '0','STR_PAD_LEFT'));
+        $datos=CaramartPeer::doSelectOne($c);
+        if ($datos)
+        {
+           $nomram=$datos->getNomram();
+           $output = '[["'.$cajtexmos.'","'.$nomram.'",""],["'.$cajtexcom.'","6","c"]]';
+        }
+        else
+        {
+         $javascript="alert('El Código del ramo no existe');$('caregart_ramart').value='';";
+         $output = '[["javascript","'.$javascript.'",""],["'.$cajtexmos.'","",""]]';
+        }
+
+        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+        return sfView::HEADER_ONLY;
       }
       else  if ($this->getRequestParameter('ajax')=='2')
       {
-        $dato=CadefalmPeer::getDesalmacen($this->getRequestParameter('codigo'));
-            $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$cajtexcom.'","6","c"]]';
-            $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
-          return sfView::HEADER_ONLY;
+        $c=new Criteria();
+        $c->add(CadefalmPeer::CODALM,str_pad($this->getRequestParameter('codigo'), 6 , '0','STR_PAD_LEFT'));
+        $datos=CadefalmPeer::doSelectOne($c);
+        if ($datos)
+        {
+           $nombre=$datos->getNomalm();
+           $output = '[["'.$cajtexmos.'","'.$nombre.'",""],["'.$cajtexcom.'","6","c"]]';
+        }
+        else
+        {
+         $javascript="alert('El Código del Almacen no existe');";
+         $output = '[["javascript","'.$javascript.'",""],["'.$cajtexmos.'","",""],["'.$cajtexcom.'","",""]]';
+        }
+
+        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+        return sfView::HEADER_ONLY;
+
       }
      else  if ($this->getRequestParameter('ajax')=='3')
       {
@@ -461,83 +487,97 @@ $this->Bitacora('Guardo');
       }
       else  if ($this->getRequestParameter('ajax')=='4')
       {
-        $tipo="";
-        $deshabilitar="";
-        if ($this->getRequestParameter('tipart')=='true')
-          $tipo="A";
-         else if ($this->getRequestParameter('tipser')=='true')
-             $tipo="S";
-
-        $longmas=strlen($this->mascaraarticulo = Herramientas::ObtenerFormato('Cadefart','Forart'));
-        $lonart=strlen($this->getRequestParameter('codigo'));
-
-        $a= new Criteria();
-        $result= CadefartPeer::doSelectOne($a);
-        if ($result)
+        $deshabilitar='N';
+        $javascript="";
+        //primero verificamos que el articulo no exista en la BD antes de hacer el resto de las validaciones
+        $c= new Criteria();
+    	$c->add(CaregartPeer::CODART,$this->getRequestParameter('codigo'));
+    	$exisart=CaregartPeer::doSelectOne($c);
+        if ($exisart)
         {
-          $genera=$result->getGencorart();
-        }else $genera="";
+			$javascript="alert('El Codigo del Articulo ya existe. Por Favor, Cambielo por otro');$('caregart_codart').value='';$('caregart_codart').focus()";
+			$output = '[["javascript","'.$javascript.'",""],["'.$cajtexmos.'","'.$deshabilitar.'",""],["caregart_codcta","",""],["caregart_codpar","",""],["caregart_ramart","",""],["caregart_nompar","",""],["caregart_nomram","",""]]';
+        }
+        else
+        {
+		        $tipo="";
+		        if ($this->getRequestParameter('tipart')=='true')
+		          $tipo="A";
+		         else if ($this->getRequestParameter('tipser')=='true')
+		             $tipo="S";
+
+		        $longmas=strlen($this->mascaraarticulo = Herramientas::ObtenerFormato('Cadefart','Forart'));
+		        $lonart=strlen($this->getRequestParameter('codigo'));
+
+		        $a= new Criteria();
+		        $result= CadefartPeer::doSelectOne($a);
+		        if ($result)
+		        {
+		          $genera=$result->getGencorart();
+		        }else $genera="";
 
 
-	        $articulo= New Caregart();
-	        $articulo->setCodart($this->getRequestParameter('codigo'));
-	        $articulo->setTipo($tipo);
-	        $hayerr=Articulos::validarCodart($articulo,"N");
-	        if ($hayerr!=-1)
-	        {
-	          $menserr = Herramientas::obtenerMensajeError($hayerr);
-	          $menserr=H::cambiarAcentosaHtml($menserr);
-	          $javascript="alert('".$menserr."');$('caregart_codart').value='';habilitartodo();$('caregart_codart').focus()";
-	        }
-	        else
-	        {
-	          $javascript="";
-	          if ($genera!="S")
-              {
-		          if ($lonart<$longmas)
+			        $articulo= New Caregart();
+			        $articulo->setCodart($this->getRequestParameter('codigo'));
+			        $articulo->setTipo($tipo);
+			        $arrdatos=array();
+			        $hayerr=Articulos::validarCodart($articulo,"N",&$arrdatos);
+			        if ($hayerr!=-1)
+			        {
+			          $menserr = Herramientas::obtenerMensajeError($hayerr);
+			          $menserr=H::cambiarAcentosaHtml($menserr);
+			          $javascript="alert('".$menserr."');$('caregart_codart').value='';$('caregart_codart').focus()";
+			        }
+
+		          //si el articulo a introducir no es un padre, o sea es un hijo, tiene q traer los valores de cta contable, cod. partida y ramo del padre
+		          if (count($arrdatos)>0)
 		          {
-		            $javascript="deshabil();";
-		            $deshabilitar='S';
+		            if ($arrdatos["ramart"]!="") $desram=CaramartPeer::getDesramo($arrdatos["ramart"]); else $desram="";
+		            if ($arrdatos["codpar"]!="") $despar=NppartidasPeer::getNompar($arrdatos["codpar"]); else $despar="";
+		            $output = '[["javascript","'.$javascript.'",""],["'.$cajtexmos.'","'.$deshabilitar.'",""],["caregart_codcta","'.$arrdatos["codcta"].'",""],["caregart_codpar","'.$arrdatos["codpar"].'",""],["caregart_ramart","'.$arrdatos["ramart"].'",""],["caregart_nompar","'.$despar.'",""],["caregart_nomram","'.$desram.'",""]]';
 		          }
 		          else
-		          {
-		            $javascript="habilitartodo();";
-		            $deshabilitar='N';
-		          }
-	         }
-		     else
-		     {
-		     	Herramientas::formarCodigoPadre($this->getRequestParameter('codigo'),&$nivelcodigo,&$ultimo,$this->mascaraarticulo);
-		     	  if ($ultimo=="")
-		          {
-		            $javascript="deshabil();";
-		            $deshabilitar='S';
-		          }
-		          else
-		          {
-		            $javascript="habilitartodo();";
-		            $deshabilitar='N';
-		          }
-		     }
-	        }
+		          	$output = '[["javascript","'.$javascript.'",""],["'.$cajtexmos.'","'.$deshabilitar.'",""],["caregart_codcta","",""],["caregart_codpar","",""],["caregart_ramart","",""],["caregart_nompar","",""],["caregart_nomram","",""]]';
+		 }// else if ($exisart)
 
-          $output = '[["javascript","'.$javascript.'",""],["'.$cajtexmos.'","'.$deshabilitar.'",""]]';
           $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
           return sfView::HEADER_ONLY;
       }//else  if ($this->getRequestParameter('ajax')=='4')
       else  if ($this->getRequestParameter('ajax')=='5')
       {
-            $dato=NppartidasPeer::getNompar($this->getRequestParameter('codigo'));
-            $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
-            $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
-          return sfView::HEADER_ONLY;
+      	$c=new Criteria();
+        $c->add(NppartidasPeer::CODPAR,$this->getRequestParameter('codigo'));
+        $datos=NppartidasPeer::doSelectOne($c);
+        if ($datos)
+        {
+           $nombre=$datos->getNompar();
+           $output = '[["'.$cajtexmos.'","'.$nombre.'",""]]';
+        }
+        else
+        {
+         $javascript="alert('La partida no existe');$('caregart_codpar').value='';";
+         $output = '[["javascript","'.$javascript.'",""],["'.$cajtexmos.'","",""]]';
+        }
+        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+        return sfView::HEADER_ONLY;
       }
       else  if ($this->getRequestParameter('ajax')=='6')
       {
-            $dato=CacatsncPeer::getDessnc($this->getRequestParameter('codigo'));
-            $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
-            $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
-          return sfView::HEADER_ONLY;
+      	$c=new Criteria();
+        $c->add(CacatsncPeer::CODSNC,$this->getRequestParameter('codigo'));
+        $datos=CacatsncPeer::doSelectOne($c);
+        if ($datos)
+        {
+           $nombre=$datos->getDessnc();
+           $output = '[["'.$cajtexmos.'","'.$nombre.'",""]]';
+        }
+        else
+        {
+         $javascript="alert('Código no existe');$('caregart_codartsnc').value='';";
+         $output = '[["javascript","'.$javascript.'",""],["'.$cajtexmos.'","",""]]';
+        }
+        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+        return sfView::HEADER_ONLY;
       }
   else  if ($this->getRequestParameter('ajax')=='7')
     {
@@ -552,6 +592,20 @@ $this->Bitacora('Guardo');
       //si total filas es igual a cero quiere decir que el almacen no tiene ubicaciones asociadas
       if ($totalfilas==0) return sfView::HEADER_ONLY;
     }
+    else  if ($this->getRequestParameter('ajax')=='8')
+      {
+            $javascript="";
+            $c=new Criteria();
+            $c->add(ContabbPeer::CODCTA,$this->getRequestParameter('codigo'));
+            $datos=ContabbPeer::doSelectOne($c);
+            if (!$datos)
+            {
+             $javascript="alert('El Código de la Cuenta Contable no existe');$('caregart_codcta').value='';";
+            }
+            $output = '[["javascript","'.$javascript.'",""]]';
+            $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+            return sfView::HEADER_ONLY;
+      }
   }
 
   public function executeAutocomplete()
