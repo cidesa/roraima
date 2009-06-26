@@ -67,7 +67,7 @@ names:
 
   caregart{fecult}:
     required:  No
-    validators: FechaValidator
+    validators: FechaValidator, FechaValidator1
 
   caregart{codpar}:
     required:  No
@@ -170,3 +170,11 @@ MyNumberValidator:
         min_error:    El valor tiene que ser mayor que cero
         max:          999999999999.99
         max_error:    El valor debe contener maximo 999.999.999.999,99
+
+FechaValidator1:
+    class:         CidesaDateNow
+    param:
+        compare: 'now'
+        compare_error: Esta Fecha no puede ser mayor a la Fecha Actual
+        operator: '<'
+        date_error:  Fecha Inválida

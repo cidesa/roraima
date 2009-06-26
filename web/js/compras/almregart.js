@@ -122,3 +122,48 @@ function distribuirExistencia()
  		$('caregart_codart').readOnly=true;
  	}
  }
+
+
+ function verificamontos(e, id)
+{
+  	var aux = id.split("_");
+    var name=aux[0];
+    var fil=parseInt(aux[1]);
+    var colact=parseInt(aux[2]);
+
+
+     var coleximin=name+"_"+fil+"_3";
+     var coleximax=name+"_"+fil+"_4";
+     var colptoreo=name+"_"+fil+"_5";
+
+	 var numeximin=toFloat(coleximin);
+	 var numeximax=toFloat(coleximax);
+	 var numptoreo=toFloat(colptoreo);
+
+     if (colact==4)//Existencia Maxima
+     {
+       if (numeximax<numeximin)
+         {
+           alert('La existencia maxima debe ser mayor a la existencia minima');
+           $(coleximax).value="0,00";
+           $(colptoreo).value="0,00";
+           $(coleximax).focus();
+           $(coleximax).select();
+           return false;
+         }
+     }
+     else // pto de reorden
+     {
+       if (numptoreo<numeximin || numptoreo>numeximax)
+       {
+           alert('El punto de reorden debe estar entre la existencia maxima y la mimima');
+           $(colptoreo).value="0,00"
+           $(colptoreo).focus();
+           $(colptoreo).select();
+           return false;
+       }
+     }
+
+    entermonto(e,id)
+
+}

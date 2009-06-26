@@ -182,7 +182,7 @@ class Articulos
    * @return void
    */
 
-  public static function validarCodart($articulo,$valgrid="S")
+  public static function validarCodart($articulo,$valgrid="S",$datos=array())
   {
 
          $codart=$articulo->getCodart();
@@ -205,6 +205,12 @@ class Articulos
       {
     if ($nivelcodigo == 0)
             return 100;
+      }
+      else//existen datos
+      {
+      	$datos["codcta"]=$caregart->getCodcta();
+      	$datos["codpar"]=$caregart->getCodpar();
+      	$datos["ramart"]=$caregart->getRamart();
       }
      //validacion partida este informado si el articulo/servicio es de ultimo nivel
      $cant=0;
