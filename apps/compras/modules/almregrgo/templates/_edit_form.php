@@ -45,6 +45,7 @@
   'size' => 50,
   'maxlength' => 100,
   'control_name' => 'carecarg[nomrgo]',
+  'onKeyUp'=>"javascript:cadena=this.value;cadena=cadena.toUpperCase();this.value=cadena;",
 )); echo $value ? $value : '&nbsp;' ?></div>
 
 <br>
