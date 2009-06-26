@@ -17,24 +17,24 @@ opciones:                  # Opciones generales
   titulo:                  Referencia
   tipo:                    t
   nombrecampo:             refcom
-  html:                    [size="10" ]
+  html:                    [size="10" readonly="true"]
   esgrabable:              true
 3:       # Columna 3
   titulo:                  Descripcion
   tipo:                    a
   nombrecampo:             descom
-  html:                    [size="40x2" ]
+  html:                    [size="40x2" readonly="true"]
   esgrabable:              false
 4:       # Columna 4
   titulo:                  Fecha
   tipo:                    f
   nombrecampo:             feccom
-  html:                    [size="10"]
+  html:                    [size="10" readonly="true"]
   esgrabable:              false
 5:       # Columna 5
   titulo:                  Monto
   tipo:                    m
   nombrecampo:             moncom
-  html:                    [size="10" ]
+  html:                    [size="10" readonly="true"]
   esgrabable:              false
 
