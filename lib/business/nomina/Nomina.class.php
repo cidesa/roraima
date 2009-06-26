@@ -6890,6 +6890,14 @@ class Nomina {
       $npasipre->setCodasi($obj->getCodasi());
       $npasipre->setDesasi($obj->getDesasi());
 	  $npasipre->setTipasi($obj->getTipasi());
+	  if($obj->getAfealibv()=='')
+			$npasipre->setAfealibv('N');
+		else
+			$npasipre->setAfealibv('S');
+	  if($obj->getAfealibf()=='')
+			$npasipre->setAfealibf('N');
+		else
+			$npasipre->setAfealibf('S');
       $npasipre->save();
 
 
