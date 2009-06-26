@@ -63,6 +63,14 @@
     </div>
     </div>
 
+   <div class="form-row">
+    <label for="filters_status"><?php echo __('Estatus:') ?></label>
+    <div class="content">
+    <?php echo input_tag('filters[status]', isset($filters['status']) ? $filters['status'] : null, array (
+  'size' => 1,
+)) ?>
+    </div>
+    </div>
 
       </fieldset>
 

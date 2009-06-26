@@ -104,7 +104,7 @@
        'url'      => 'pagemiord/ajax',
        'script'   => true,
        'complete' => 'AjaxJSON(request, json),actualizarsaldos(), mensajes();',
-       'with' => "'ajax=6&codigo='+this.value+'&fecha='+$('fecha').value+'&arreglo='+$('opordpag_referencias').value+'&indice='+$('indref').value+'&tipcau='+$('opordpag_tipcau').value+'&fecha2='+$('opordpag_fecemi').value+'&causado='+$('total').value"
+       'with' => "'ajax=6&codigo='+this.value+'&fecha='+$('fecha').value+'&arreglo='+$('opordpag_referencias').value+'&indice='+$('indref').value+'&tipcau='+$('opordpag_tipcau').value+'&fecha2='+$('opordpag_fecemi').value+'&observe='+$('opordpag_observe').value+'&causado='+$('total').value"
         ))),array('use_style' => 'true', 'with' => "'tipcau='+$('opordpag_tipcau').value")
   )  ?></th>
 <th>

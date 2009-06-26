@@ -292,7 +292,7 @@ else
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-<? if ($caordcom->getId()=='' && ($caordcom->getGenctaord()=='S' || $caordcom->getGencomalc()=='S')) { ?>
+<? if ($caordcom->getId()=='' && ($caordcom->getGenctaord()=='S')) { ?>
 <?php echo submit_to_remote('Submit2', 'Generar Comprobante', array(
          'update'   => 'comp',
          'url'      => 'almordcom/ajaxcomprobante',

@@ -6,9 +6,9 @@ generator:
     fields:
       grid: { name: . }
     edit:
-      title:          Aprobación de Órdenes de Pago
+      title:          Recepción de Órdenes Aprobadas
       display:
-        "Órdenes de Pago": [_grid]
-      hide:  [filasord]
+        "Órdenes de Pago": [_grid, _comprobante]
+      hide:  [filasord, totalcomprobantes]
       actions:
         _save:        ~

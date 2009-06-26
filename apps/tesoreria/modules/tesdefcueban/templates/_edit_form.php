@@ -461,6 +461,9 @@
 <fieldset>
 <legend><? echo __('Manejo de Chequeras') ?></legend>
 <div class="form-row">
+<table>
+<tr>
+<th>
   <?php echo label_for('tsdefban[cantdig]', __($labels['tsdefban{cantdig}']), 'class="required" Style="width:250px"') ?>
   <div class="content<?php if ($sf_request->hasError('tsdefban{cantdig}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('tsdefban{cantdig}')): ?>
@@ -474,7 +477,24 @@
   'control_name' => 'tsdefban[cantdig]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
+</th>
+<th>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</th>
+<th>
+  <?php echo label_for('tsdefban[endosable]', __($labels['tsdefban{endosable}']), 'class="required" Style="width:20px"') ?>
+  <div class="content<?php if ($sf_request->hasError('tsdefban{endosable}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('tsdefban{endosable}')): ?>
+    <?php echo form_error('tsdefban{endosable}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
 
+  <?php if($tsdefban->getEndosable()=='S') $val = true; else $val=false; ?>
+  <?php echo "Si ".radiobutton_tag('tsdefban[endosable]', 'S', $val) ?>&nbsp;
+  <?php echo "No ".radiobutton_tag('tsdefban[endosable]', 'N', !$val) ?>
+    </div>
+</th>
+</tr>
+</table>
 <br>
 <?php echo grid_tag($obj);?>
 

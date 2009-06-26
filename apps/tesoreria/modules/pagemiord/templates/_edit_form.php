@@ -29,6 +29,7 @@
 <?php echo input_hidden_tag('opordpag[cuentarendicion]', $opordpag->getCuentarendicion()) ?>
 <?php echo input_hidden_tag('opordpag[totfonter]', $opordpag->getTotfonter()) ?>
 <?php echo input_hidden_tag('opordpag[datosnomina]', $opordpag->getDatosnomina()) ?>
+<?php echo input_hidden_tag('opordpag[observe]', $opordpag->getObserve()) ?>
 <table width="100%">
   <tr>
     <th><strong><font color="<? print $color;?>" size="2" face="Verdana, Arial, Helvetica, sans-serif"> <? print $eti;?></font></strong></th>
@@ -269,7 +270,8 @@
 <br>
 
  <table>
-   <tr>
+ <tr>
+ <tr>
     <th><?php echo label_for('opordpag[tipfin]', __($labels['opordpag{tipfin}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('opordpag{tipfin}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('opordpag{tipfin}')): ?>
@@ -294,6 +296,33 @@
   'disabled' => true,
   'size' => 60,
   'control_name' => 'opordpag[nomext2]',
+)); echo $value ? $value : '&nbsp;' ?></th>
+ </tr>
+   <tr>
+    <th><?php echo label_for('opordpag[codconcepto]', __($labels['opordpag{codconcepto}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('opordpag{codconcepto}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('opordpag{codconcepto}')): ?>
+    <?php echo form_error('opordpag{codconcepto}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+   <?php echo input_auto_complete_tag('opordpag[codconcepto]', $opordpag->getCodconcepto(),
+    'pagemiord/autocomplete?ajax=3',  array('autocomplete' => 'off','maxlength' => 4,
+    'readonly'  =>  $opordpag->getId()!='' ? true : false ,
+    'onBlur'=> remote_function(array(
+        'url'      => 'pagemiord/ajax',
+        'condition' => "$('opordpag_codconcepto').value != ''",
+        'complete' => 'AjaxJSON(request, json)',
+          'with' => "'ajax=23&cajtexmos=opordpag_nomconcepto&cajtexcom=opordpag_codconcepto&codigo='+this.value"
+        ))),
+     array('use_style' => 'true')
+  )
+?></div></th>
+    <th>
+    <?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Opconpag_Pagemiord/clase/Opconpag/frame/sf_admin_edit_form/obj1/opordpag_codconcepto/obj2/opordpag_nomconcepto/campo1/codconcepto/campo2/nomconcepto','','','botoncat')?></th>
+    <th> <?php $value = object_input_tag($opordpag, 'getNomconcepto', array (
+  'disabled' => true,
+  'size' => 60,
+  'control_name' => 'opordpag[nomconcepto]',
 )); echo $value ? $value : '&nbsp;' ?></th>
 <th>
 <? if ($opordpag->getId()=='') { ?>

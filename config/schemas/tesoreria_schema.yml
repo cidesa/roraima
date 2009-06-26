@@ -923,6 +923,12 @@ propel:
     aprobadotes:
       type: VARCHAR
       size: 1
+    numcomapr:
+      type: VARCHAR
+      size: 8
+    codconcepto:
+      type: VARCHAR
+      size: 4
     id:
       type: INTEGER
       required: true
@@ -1523,6 +1529,9 @@ propel:
     cantdig:
       type: NUMERIC
       size: 2
+    endosable:
+      type: VARCHAR
+      size: 1
     id:
       type: INTEGER
       required: true
@@ -2295,6 +2304,19 @@ propel:
     numcue:
       type: VARCHAR
       size: 20
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  opconpag:
+    #_attributes:
+      #idMethod: native
+    codconcepto:
+      type: VARCHAR
+      size: 4
+    nomconcepto:
+      type: VARCHAR
+      size: 250
     id:
       type: INTEGER
       required: true

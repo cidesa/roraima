@@ -416,6 +416,10 @@ $this->Bitacora('Guardo');
     {
       $this->tsdefban->setCantdig($tsdefban['cantdig']);
     }
+    if (isset($tsdefban['endosable']))
+    {
+      $this->tsdefban->setEndosable($tsdefban['endosable']);
+    }
 
   }
    public function setVars()

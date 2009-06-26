@@ -33,6 +33,7 @@ generator:
       cantdig:    { name: Cant. de Digitos Significativos del N° Cheque }
       destip:     { name: Tipo de Cuenta}
       destipren:  { name: Tipo de Rendimiento}
+      endosable:  { name: Endosable}
     list:
       title:         Definición de Bancos
       display:       [=numcue, nomcue, tipcue, codcta, fecreg, fecven]

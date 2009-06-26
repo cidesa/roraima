@@ -100,6 +100,8 @@ class TsdefbanMapBuilder {
 
 		$tMap->addColumn('CANTDIG', 'Cantdig', 'double', CreoleTypes::NUMERIC, false, 2);
 
+		$tMap->addColumn('ENDOSABLE', 'Endosable', 'string', CreoleTypes::VARCHAR, false, 1);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

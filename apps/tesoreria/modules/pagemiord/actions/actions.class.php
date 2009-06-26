@@ -54,6 +54,39 @@ class pagemiordActions extends autopagemiordActions
     $this->coderror4=508;
     return false;
     }
+    $this->configGridFactura();
+    $factura=Herramientas::CargarDatosGrid($this,$this->obj2,true);
+    $cedrif=$this->getRequestParameter('opordpag[cedrif]');
+    $l= new Criteria();
+    $l->add(OpordpagPeer::CEDRIF,$cedrif);
+    $benefi= OpordpagPeer::doSelect($l);
+    if ($benefi)
+    {
+      foreach ($benefi as $provee)
+      {
+      	$y= new Criteria();
+      	$y->add(OpfacturPeer::NUMORD,$provee->getNumord());
+      	$resul= OpfacturPeer::doSelect($y);
+      	if ($resul)
+      	{
+           foreach ($resul as $factur)
+           {
+           	 $t=0;
+		     $u=$factura[0];
+		     while ($t<count($u))
+		     {
+               if ($factur->getNumfac()==$u[$t]["numfac"])
+               {
+               	$this->coderror4=532;
+                return false;
+               	break;
+               }
+		       $t++;
+		     }
+           }
+      	}
+      }
+    }
 
       if ($this->getRequestParameter('opordpag[afectapre]')==1)
       {
@@ -92,6 +125,49 @@ class pagemiordActions extends autopagemiordActions
         }
       }
        }
+      }else
+      {
+      	$o= new Criteria();
+	    $o->add(OpfacturPeer::NUMORD,$this->opordpag->getNumord());
+	    $data= OpfacturPeer::doSelect($o);
+	    if (!$data)
+	    {
+	      	$this->configGridFactura();
+		    $factura=Herramientas::CargarDatosGrid($this,$this->obj2,true);
+		    $cedrif=$this->opordpag->getCedrif();
+
+		    $l= new Criteria();
+		    $l->add(OpordpagPeer::NUMORD,$this->opordpag->getNumord(),Criteria::NOT_EQUAL);
+		    $l->add(OpordpagPeer::CEDRIF,$cedrif);
+		    $benefi= OpordpagPeer::doSelect($l);
+		    if ($benefi)
+		    {
+		      foreach ($benefi as $provee)
+		      {
+		      	$y= new Criteria();
+		      	$y->add(OpfacturPeer::NUMORD,$provee->getNumord());
+		      	$resul= OpfacturPeer::doSelect($y);
+		      	if ($resul)
+		      	{
+		           foreach ($resul as $factur)
+		           {
+		           	 $t=0;
+				     $u=$factura[0];
+				     while ($t<count($u))
+				     {
+		               if ($factur->getNumfac()==$u[$t]["numfac"])
+		               {
+		               	$this->coderror4=532;
+		                return false;
+		               	break;
+		               }
+				       $t++;
+				     }
+		           }
+		      	}
+		      }
+		    }
+	    }
       }
       return true;
     }else return true;
@@ -602,6 +678,10 @@ $this->Bitacora('Guardo');
     if (isset($opordpag['datosnomina']))
     {
       $this->opordpag->setDatosnomina($opordpag['datosnomina']);
+    }
+    if (isset($opordpag['codconcepto']))
+    {
+      $this->opordpag->setCodconcepto($opordpag['codconcepto']);
     }
   }
 
@@ -1711,8 +1791,13 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
       {
         $this->configGridRefere(str_pad($this->getRequestParameter('codigo'),8,'0',STR_PAD_LEFT));
       }else {$this->configGridRefere();}
-
-      $output = '[["fecha","'.$fechas.'",""],["descripcion","'.$descripcions.'",""],["tipo","'.$tipos.'",""],["destipo","'.$destipos.'",""],["fila","'.$this->numfila.'",""],["mensaje","'.$msj.'",""],["ajaxs","6",""],["opordpag_desord","'.$descripcion2.'",""],["opordpag_cedrif","'.$elrif.'",""],["opordpag_nomben","'.$dato.'",""],["opordpag_ctapag","'.$dato1.'",""],["opordpag_descta","'.$dato2.'",""]]';
+      if ($this->getRequestParameter('observe')=="")
+      {
+        $output = '[["fecha","'.$fechas.'",""],["descripcion","'.$descripcions.'",""],["tipo","'.$tipos.'",""],["destipo","'.$destipos.'",""],["fila","'.$this->numfila.'",""],["mensaje","'.$msj.'",""],["ajaxs","6",""],["opordpag_desord","'.$descripcion2.'",""],["opordpag_cedrif","'.$elrif.'",""],["opordpag_nomben","'.$dato.'",""],["opordpag_ctapag","'.$dato1.'",""],["opordpag_descta","'.$dato2.'",""],["opordpag_observe","N",""]]';
+      }else
+      {
+      	$output = '[["fecha","'.$fechas.'",""],["descripcion","'.$descripcions.'",""],["tipo","'.$tipos.'",""],["destipo","'.$destipos.'",""],["fila","'.$this->numfila.'",""],["mensaje","'.$msj.'",""],["ajaxs","6",""],["opordpag_observe","N",""]]';
+      }
       $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
      }else if ($this->docrefiere=='C')
      {
@@ -1731,8 +1816,12 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
         {
          $this->configGridRefere2(str_pad($this->getRequestParameter('codigo'),8,'0',STR_PAD_LEFT));
         }else {$this->configGridRefere2();}
-
-        $output = '[["fecha","'.$fechas.'",""],["descripcion","'.$descripcions.'",""],["tipo","'.$tipos.'",""],["destipo","'.$destipos.'",""],["fila","'.$this->numfila.'",""],["mensaje","'.$msj.'",""],["ajaxs","6",""],["opordpag_desord","'.$descripcion2.'",""],["opordpag_cedrif","'.$elrif.'",""],["opordpag_nomben","'.$dato.'",""],["opordpag_ctapag","'.$dato1.'",""],["opordpag_descta","'.$dato2.'",""],["opordpag_tipfin","'.$financiamiento.'",""],["opordpag_nomext2","'.$dato3.'",""]]';
+        if ($this->getRequestParameter('observe')=="")
+        {
+         $output = '[["fecha","'.$fechas.'",""],["descripcion","'.$descripcions.'",""],["tipo","'.$tipos.'",""],["destipo","'.$destipos.'",""],["fila","'.$this->numfila.'",""],["mensaje","'.$msj.'",""],["ajaxs","6",""],["opordpag_desord","'.$descripcion2.'",""],["opordpag_cedrif","'.$elrif.'",""],["opordpag_nomben","'.$dato.'",""],["opordpag_ctapag","'.$dato1.'",""],["opordpag_descta","'.$dato2.'",""],["opordpag_tipfin","'.$financiamiento.'",""],["opordpag_nomext2","'.$dato3.'",""],["opordpag_observe","N",""]]';
+        }else{
+         $output = '[["fecha","'.$fechas.'",""],["descripcion","'.$descripcions.'",""],["tipo","'.$tipos.'",""],["destipo","'.$destipos.'",""],["fila","'.$this->numfila.'",""],["mensaje","'.$msj.'",""],["ajaxs","6",""],["opordpag_observe","N",""]]';
+        }
         $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
      }
   }
@@ -2015,6 +2104,20 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
     $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
     return sfView::HEADER_ONLY;
   }
+  else if ($this->getRequestParameter('ajax')=='23')
+  {
+  	$javascript="";
+  	$c= new Criteria();
+  	$c->add(OpconpagPeer::CODCONCEPTO,$this->getRequestParameter('codigo'));
+  	$reg= OpconpagPeer::doSelectOne($c);
+  	if ($reg)
+  	{
+       $dato=$reg->getNomconcepto();
+  	}else $javascript="alert('El Concepto de Pago no Existe'); $('$cajtexcom').value=''; ";
+    $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""]]';
+    $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+    return sfView::HEADER_ONLY;
+  }
 
  }
 
@@ -2109,14 +2212,14 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
        $reg= OpdefempPeer::doSelectOne($c);
        if ($reg)
        {
-         if ($reg->getGencomalc()=='S')
+         /*if ($reg->getGencomalc()=='S')
          {
           $x=OrdendePago::grabarComprobanteAlc($this->opordpag,&$mensajeuno,&$msjuno,&$msjdos,&$comprobante);
          }
          else
-         {
+         {*/
             $x=OrdendePago::grabarComprobante($this->opordpag,$detalle,&$cuentaporpagarrendicion,&$mensajeuno,&$msjuno,&$msjdos,&$comprobante);
-         }
+         //}
        }
       $concom=$concom + 1;
 
@@ -2165,6 +2268,10 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
   if ($this->getRequestParameter('ajax')=='2')
   {
     $this->tags=Herramientas::autocompleteAjax('CEDRIF','Opbenefi','Cedrif',$this->getRequestParameter('opordpag[cedrif]'));
+  }
+  else  if ($this->getRequestParameter('ajax')=='3')
+  {
+    $this->tags=Herramientas::autocompleteAjax('CODCONCEPTO','Opconpag','Codconcepto',$this->getRequestParameter('opordpag[codconcepto]'));
   }
   else  if ($this->getRequestParameter('ajax')=='4')
   {

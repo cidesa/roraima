@@ -5513,6 +5513,16 @@ A.CODREDE"
     );
   }
 
+  public function Opconpag_Pagemiord()
+  {
+  	$this->c = new Criteria();
+
+    $this->columnas = array (
+      OpconpagPeer :: CODCONCEPTO => 'Concepto de Pago',
+      OpconpagPeer :: NOMCONCEPTO => 'Descripcion'
+    );
+  }
+
 }
 
 ?>

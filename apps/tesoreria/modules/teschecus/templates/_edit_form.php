@@ -274,6 +274,7 @@ $val3, array('onClick' => 'push3();')); ?></div>
 <?php if (!$block) { ?>
 	  <?php $value = object_input_tag($tscheemi, 'getCodent', array (
 	  'size' => 80,
+	  'readonly' => true,
 	  'control_name' => 'tscheemi[codent]',
 	  'maxlength' => 80,
 	)); echo $value ? $value : '&nbsp;' ?>
