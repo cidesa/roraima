@@ -9,10 +9,10 @@
 )) ?>
 
 <?php echo object_input_hidden_tag($npnomina, 'getId') ?>
-<?php echo javascript_include_tag('dFilter', 'ajax', 'tools', 'observe') ?>
+<?php echo javascript_include_tag('ajax', 'tools', 'observe', 'dFilter') ?>
 
 <fieldset id="sf_fieldset_none" class="">
-<legend><?php echo __('Datos del Tipo de Nómina') ?></legend>
+<h2><?php echo __('Datos del Tipo de Nómina') ?></h2>
 <div class="form-row">
   <table>
     <tr>
@@ -28,16 +28,33 @@
   'maxlength' => 3,
   'readonly'  =>  $npnomina->getId()!='' ? true : false ,
   'onKeyPress' => "javascript:cadena=this.value;cadena=cadena.toUpperCase();document.getElementById('npnomina_codnom').value=cadena",
+  'onBlur'  => "javascript: valor=this.value; valor=valor.pad(3, '0',0);$('npnomina_codnom').value=valor;",
 )); echo $value ? $value : '&nbsp;' ?>
     </div></th><th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-    <th><?php echo label_for('npnomina[frecal]', __($labels['npnomina{frecal}']), 'class="required" Style="width:140px"') ?>
+    <th>
+    <?php echo label_for('npnomina[frecal]', __($labels['npnomina{frecal}']), 'class="required" Style="width:140px"') ?>
   <div class="content<?php if ($sf_request->hasError('npnomina{frecal}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('npnomina{frecal}')): ?>
     <?php echo form_error('npnomina{frecal}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php echo select_tag('npnomina[frecal]', options_for_select($listafrecpag,$npnomina->getFrecal())) ?>
-  </div></th>
+<?php
+	echo
+	select_tag('npnomina[frecal]', options_for_select(
+	$listafrecpag,
+	$npnomina->getFrecal(),'include_custom=Seleccione Uno'),
+	array( 'onChange'=> remote_function(array(
+		'script'   => true,
+		'url'      => 'nomdefesptipnom/ajax?ajax=1',
+		'condition' => "$('npnomina_ultfec').value != ''",
+		'complete' => 'AjaxJSON(request, json)',
+		'with' => "'codigo='+this.value+'&ultfec='+$('npnomina_ultfec').value"
+		)))
+	);
+?>
+
+  </div>
+  </th>
     </tr>
   </table>
 
@@ -59,7 +76,7 @@
 <br>
 
 <fieldset id="sf_fieldset_none" class="">
-<legend><?php echo __('Fechas de Procesamiento') ?></legend>
+<h2><?php echo __('Fechas de Procesamiento') ?></h2>
 <div class="form-row">
   <table>
     <tr>
@@ -72,26 +89,45 @@
   <?php $value = object_input_date_tag($npnomina, 'getUltfec', array (
   'rich' => true,
   'maxlength' => 10,
+  'size' => 10,
   'calendar_button_img' => '/sf/sf_admin/images/date.png',
   'control_name' => 'npnomina[ultfec]',
   'date_format' => 'dd/MM/yy',
   'maxlength' => 10,
-  'onkeyup' => "javascript: mascara(this,'/',patron,true)"
+  'onkeyup' => "javascript: mascara(this,'/',patron,true)",
+   'onChange'=> remote_function(array(
+        'url'      => 'nomdefesptipnom/ajax?ajax=1',
+        'complete' => 'AjaxJSON(request, json)',
+        'condition' => "$('npnomina_ultfec').value != ''",
+        'with' => "'codigo='+$('npnomina_frecal').value+'&ultfec='+this.value"
+        ))
 )); echo $value ? $value : '&nbsp;' ?>
-    </div></th><th><?php echo label_for('npnomina[profec]', __($labels['npnomina{profec}']), 'class="required" ') ?>
+
+    </div></th><th>
+    <?php echo label_for('npnomina[profec]', __($labels['npnomina{profec}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('npnomina{profec}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('npnomina{profec}')): ?>
     <?php echo form_error('npnomina{profec}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_input_date_tag($npnomina, 'getProfec', array (
-  'rich' => true,
-  'maxlength' => 10,
-  'calendar_button_img' => '/sf/sf_admin/images/date.png',
-  'control_name' => 'npnomina[profec]',
-  'date_format' => 'dd/MM/yy',
-  'onkeyup' => "javascript: mascara(this,'/',patron,true)"
-)); echo $value ? $value : '&nbsp;' ?>
+    <div id="divProfec">
+	  <?php
+	  /*$value = object_input_tag($npnomina, 'getProfec', array (
+	  	'maxlength' => 10,
+	  	'size' => 10,
+	  	'readonly' => true,
+	  	'control_name' => 'npnomina[profec]',
+		)); echo $value ? $value : '&nbsp;' */ ?>
+
+	  <?php $value = object_input_tag($npnomina, 'getProfec_', array (
+	  	'maxlength' => 10,
+	  	'size' => 10,
+	  	'readonly' => true,
+	  	'control_name' => 'npnomina[profec_]',
+		)); echo $value ? $value : '&nbsp;' ?>
+
+	</div>
+
     </div></th><th>  <?php echo label_for('npnomina[numsem]', __($labels['npnomina{numsem}']), 'class=required') ?>
   <div class="content<?php if ($sf_request->hasError('npnomina{numsem}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('npnomina{numsem}')): ?>
@@ -99,8 +135,9 @@
   <?php endif; ?>
 
   <?php $value = object_input_tag($npnomina, 'getNumsem', array (
-  'size' => 7,
+  'size' => 2,
   'maxlength' => 2,
+  'readonly' => true,
   'control_name' => 'npnomina[numsem]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div></th>

@@ -53,6 +53,7 @@ $this->Bitacora('Guardo');
     $this->listafrecpag = Constantes::ListaFrecuenciaPago();
 		$this->listagenordpag = Constantes::ListaGeneraOrdenPago();
 
+
     if (isset($npnomina['codnom']))
     {
       $this->npnomina->setCodnom(str_pad($npnomina['codnom'], 3, '0', STR_PAD_LEFT));
@@ -93,22 +94,27 @@ $this->Bitacora('Guardo');
         $this->npnomina->setUltfec(null);
       }
     }
-    if (isset($npnomina['profec']))
+    if (isset($npnomina['profec_']))
     {
-      if ($npnomina['profec'])
+      if ($npnomina['profec_'])
       {
         try
         {
           $dateFormat = new sfDateFormat($this->getUser()->getCulture());
-                              if (!is_array($npnomina['profec']))
+          if (!is_array($npnomina['profec_']))
           {
-            $value = $dateFormat->format($npnomina['profec'], 'i', $dateFormat->getInputPattern('d'));
+          	//echo  $npnomina['profec'].'-------- ';
+          	//$value = substr($npnomina['profec'],8,2) .'-'.substr($npnomina['profec'],5,2) .'-'.substr($npnomina['profec'],0,4);
+            $value = $dateFormat->format($npnomina['profec_'], 'i', $dateFormat->getInputPattern('d'));
           }
           else
           {
-            $value_array = $npnomina['profec'];
+            $value_array = $npnomina['profec_'];
             $value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
           }
+
+//          echo $value;
+
           $this->npnomina->setProfec($value);
         }
         catch (sfException $e)
@@ -175,5 +181,59 @@ $this->Bitacora('Guardo');
       return $this->redirect('nomdefesptipnom/edit?id='.$id);
     }
     return $this->redirect('nomdefesptipnom/list');
+  }
+
+
+  public function executeAjax()
+  {
+    $this->codigo = $this->getRequestParameter('codigo','');
+    $this->ultfec = $this->getRequestParameter('ultfec','');
+    $ajax = $this->getRequestParameter('ajax','');
+
+    switch ($ajax){
+      case '1':
+ 		if ($this->codigo == 'S'){
+ 			$sql="select to_char((to_date('$this->ultfec','dd/mm/yyyy')+6),'dd/mm/yyyy') as fecha";
+
+ 		}else if ($this->codigo == 'M'){
+			$sql="select to_char((to_date('$this->ultfec','dd/mm/yyyy')+30),'dd/mm/yyyy') as fecha";
+
+ 		}else if ($this->codigo == 'A'){
+			$sql="select to_char((to_date('$this->ultfec','dd/mm/yyyy')+30),'dd/mm/yyyy') as fecha";
+
+ 		}else if ($this->codigo == 'Q'){
+			$sql="select to_char((to_date('$this->ultfec','dd/mm/yyyy')+14),'dd/mm/yyyy') as fecha";
+ 		}
+
+		if (H::BuscarDatos($sql,&$output))
+		{
+			$profec=$output[0]['fecha'];
+		}
+		$sql = "SELECT extract(week from (to_date('$profec','dd/mm/yyyy'))::date) as fecha";
+		if (H::BuscarDatos($sql,&$output))
+		{
+			$numsem=$output[0]['fecha'];
+		}
+
+        $output = '[["npnomina_numsem","'.$numsem.'",""], ["npnomina_profec_","'.$profec.'",""]]';
+
+        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+        return sfView::HEADER_ONLY;
+
+        break;
+      default:
+        $output = '[["","",""],["","",""],["","",""]]';
+    }
+
+    // Instruccion para escribir en la cabecera los datos a enviar a la vista
+    $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+
+    // Si solo se va usar ajax para actualziar datos en objetos ya existentes se debe
+    // mantener habilitar esta instrucción
+    return sfView::HEADER_ONLY;
+
+    // Si por el contrario se quiere reemplazar un div en la vista, se debe deshabilitar
+    // por supuesto tomando en cuenta que debe existir el archivo ajaxSuccess.php en la carpeta templates.
+
   }
 }
