@@ -781,8 +781,8 @@ function grid_tag_v2($obj,$objelim = array())
   $ajaxcolumna= $obj["ajaxcolumna"];
   $ajaxgrid   = $obj["ajaxgrid"];
   $ajaxadicionales = $obj["ajaxadicionales"];
-  
-  $modulo = sfContext::getInstance()->getModuleName();  
+
+  $modulo = sfContext::getInstance()->getModuleName();
 
   if(sfContext::getInstance()->getRequest()->getMethod() == sfRequest::POST && sfContext::getInstance()->getRequest()->isXmlHttpRequest()==false){
 
@@ -869,7 +869,7 @@ function grid_tag_v2($obj,$objelim = array())
   }
 
   $tagb =  '</tr></thead>';
-  
+
    ///////////////////////////////////
   // Generar el Arreglo de Totales para el boton eliminar//
   ///////////////////////////////////
@@ -1119,8 +1119,8 @@ function grid_tag_v2($obj,$objelim = array())
   ////////////////////////
   // Resto de las Filas //
   ////////////////////////
-  
-  //print_r($tiposobj);
+
+  //print($jseliminar);
   $tagciclo3='';
   $catobj = '';
   $y = $filas;
@@ -1354,7 +1354,7 @@ function grid_tag_v2($obj,$objelim = array())
 
   if(!$aj && !$ac) $acum = 'false';
   else $acum = 'true';
-  
+
   ///////////////////////////////////////
   // JavaScripts de variables del Grid //
   ///////////////////////////////////////
