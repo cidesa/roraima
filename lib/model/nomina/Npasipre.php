@@ -13,5 +13,21 @@ class Npasipre extends BaseNpasipre
   {
   	  return Herramientas::getX('codtipcon','Nptipcon','Destipcon',self::getCodcon());
   }
+  
+  public function getAfealibv()
+  {
+  	if ($this->afealibv=='N' || $this->afealibv=='')
+	  return 0;  	
+  	else
+  	    return 1;
+  }
+  
+  public function getAfealibf()
+  {
+  	if ($this->afealibf=='N' || $this->afealibf=='')
+	  return 0;  	
+  	else
+  	    return 1;
+  }
 
 }

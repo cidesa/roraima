@@ -13,6 +13,7 @@ class NpliquidacionDet extends BaseNpliquidacionDet
 	protected $sue311296="0,00";
 	protected $sue180697="0,00";
 	protected $ultimosueldo="0,00";
+	protected $salarioint="0,00";
 	protected $fecing="";
 	protected $feccor="";
 	protected $fecegr="";
