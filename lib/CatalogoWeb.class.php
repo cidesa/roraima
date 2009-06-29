@@ -3200,6 +3200,34 @@ $this->c= new Criteria();
     );
   }
 
+  public function Cpasiini_Presoladidis($params = array ())
+  {
+
+  /*	sql='select a.codpre as codigo, a.nompre as descripcion, mondis as Disponible ' .
+  		'From ' .
+  			'cpasiini a, CPDEFTIT b ' .
+  		'Where ' .
+  			'upper(a.nompre) like upper(¿%¿) and  ' .
+  			'a.codpre=b.codpre and ' .
+  			'a.perpre=¿00¿ and ' .
+  			'a.monasi>=0  ' .
+  		'order by ' .
+  			'a.codpre';
+*/
+    $this->c= new Criteria();
+    $this->c->addJoin(CpasiiniPeer :: CODPRE,CpdeftitPeer :: CODPRE);
+    $this->c->add(CpasiiniPeer :: PERPRE, '00');
+    $this->c->add(CpasiiniPeer :: MONASI, '0', Criteria::GREATER_EQUAL);
+
+    $this->c->addAscendingOrderByColumn(CpasiiniPeer::CODPRE);
+
+    $this->columnas = array (
+        CpasiiniPeer::CODPRE => 'Código Presupuestario',
+        CpasiiniPeer::NOMPRE => 'Descripción',
+        CpasiiniPeer::MONDIS => 'Disponible',
+    );
+  }
+
   //////////////////////////////////////////// ////////////////////////////////////////////
 
   ////////////////// CONTABILIDAD FINANCIERA ///////////////////
@@ -5502,7 +5530,7 @@ A.CODREDE"
       CatcarterPeer :: DESTER => 'Descripción'
     );
   }
-  
+
   public function Presnomreghisadeint_Npadeint($params=array()) {
     $this->c = new Criteria();
 	$this->c->add(NpasiempcontPeer :: CODTIPCON, $params[0]);
