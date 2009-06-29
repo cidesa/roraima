@@ -115,7 +115,7 @@ nomina:
       Registro Histórico de Adelanto de Intereses de Prestaciones:   PresNomRegHisAdeint
       Solicitud de Anticipo Sobre Prestaciones:                      PresNomAntPre
       Solicitud de Anticipo Sobre Intereses de Prestaciones:         PresNomAdeInt            
-      Calculo de Prestaciones Sociales:                              presNomCalIntPre
+      Cálculo de Antiguedad:                                         presNomCalIntPre
       Liquidación Final de Prestaciones:                             presnomliquidacion
       #Importar Datos Prestaciones Sociales:                         ImportarPrestaciones
     Asignaciones Generales para el Cálculo de Nómina:
