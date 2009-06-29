@@ -10,10 +10,12 @@
 class Cppagos extends BaseCppagos
 {
 	protected $reflib = '';
+	protected $numcue = '';
 
 
   public function afterHydrate(){
     $this->reflib = Herramientas::getX('refpag','tsmovlib','reflib',self::getRefpag());
+    $this->numcue = Herramientas::getX('refpag','tsmovlib','numcue',self::getRefpag());
 
   }
 

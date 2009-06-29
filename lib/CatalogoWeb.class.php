@@ -301,13 +301,16 @@ class CatalogoWeb extends BaseCatalogoWeb {
     }
 
     $this->c->add(CpcomproPeer :: STACOM, 'N', Criteria :: NOT_EQUAL);
+    $this->c->addJoin(CpcomproPeer::CEDRIF, CaproveePeer :: RIFPRO);
     //   $this->c->addAscendingOrderByColumn(CpcomproPeer::REFCOM);
 
     $this->columnas = array (
       CpcomproPeer :: TIPCOM => 'Tipo',
       CpcomproPeer :: REFCOM => 'Referencia',
       CpcomproPeer :: FECCOM => 'Fecha',
-      CpcomproPeer :: DESCOM => 'Descripción'
+      CpcomproPeer :: DESCOM => 'Descripción',
+      CpcomproPeer :: CEDRIF => 'Ced/Rif Beneficiario',
+      CaproveePeer :: NOMPRO => 'Nombre Beneficiario',
     );
   }
 
