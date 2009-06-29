@@ -12,6 +12,11 @@ class Nppresoc extends BaseNppresoc
 	protected $capitalizacion='';
 	protected $salario='';
 	protected $interes='';
+	protected $codniv='';
+	protected $desniv='';
+	protected $codcar='';
+	protected $nomcar='';
+	
 
 
   public function getNomemp()
@@ -71,7 +76,7 @@ class Nppresoc extends BaseNppresoc
   public function getAnoserra()
   {
    	return Herramientas::getX_vacio('CODEMP','Nppresocant','anoser',self::getCodemp());
-  }
+  }  
 
 }
 
