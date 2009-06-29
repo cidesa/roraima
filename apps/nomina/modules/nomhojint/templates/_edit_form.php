@@ -42,7 +42,7 @@
 
 <? } ?>
 
-    </div></th>   	
+    </div></th>
    <th style="display:none"> <?php echo label_for('nphojint[nomemp]', __($labels['nphojint{nomemp}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('nphojint{nomemp}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('nphojint{nomemp}')): ?>
@@ -55,81 +55,81 @@
   'maxlength' => 100,
   'control_name' => 'nphojint[nomemp]',
 )); echo $value ? $value : '&nbsp;' ?>
-    </div></th>	
+    </div></th>
   </tr>
   <tr>
   	<th>&nbsp</th>
   </tr>
   <tr>
   	<th>
-  		
+
 		  <?php echo label_for('nphojint[prinom]', __($labels['nphojint{prinom}']), 'class="required"') ?>
 		  <div class="content<?php if ($sf_request->hasError('nphojint{prinom}')): ?> form-error<?php endif; ?>">
 		  <?php if ($sf_request->hasError('nphojint{prinom}')): ?>
 		    <?php echo form_error('nphojint{prinom}', array('class' => 'form-error-msg')) ?>
 		  <?php endif; ?>
-		
+
 		  <?php $value = object_input_tag($nphojint, 'getPrinom', array (
 		  'size' => 25,
   		  'maxlength' => 25,
 		  'control_name' => 'nphojint[prinom]',
 		)); echo $value ? $value : '&nbsp;' ?>
 		    </div>
-		
+
   	</th>
 	<th>
-		
+
 		  <?php echo label_for('nphojint[segnom]', __($labels['nphojint{segnom}']), 'class="required"') ?>
 		  <div class="content<?php if ($sf_request->hasError('nphojint{segnom}')): ?> form-error<?php endif; ?>">
 		  <?php if ($sf_request->hasError('nphojint{segnom}')): ?>
 		    <?php echo form_error('nphojint{segnom}', array('class' => 'form-error-msg')) ?>
 		  <?php endif; ?>
-		
+
 		  <?php $value = object_input_tag($nphojint, 'getSegnom', array (
 		  'size' => 25,
   		  'maxlength' => 25,
 		  'control_name' => 'nphojint[segnom]',
 		)); echo $value ? $value : '&nbsp;' ?>
 		    </div>
-		
+
 	</th>
   </tr>
   <tr>
   	<th></th>
-  </tr>  	
+  </tr>
   <tr>
   	<th>
-  		
+
 		  <?php echo label_for('nphojint[priape]', __($labels['nphojint{priape}']), 'class="required"') ?>
 		  <div class="content<?php if ($sf_request->hasError('nphojint{priape}')): ?> form-error<?php endif; ?>">
 		  <?php if ($sf_request->hasError('nphojint{priape}')): ?>
 		    <?php echo form_error('nphojint{priape}', array('class' => 'form-error-msg')) ?>
 		  <?php endif; ?>
-		
+
 		  <?php $value = object_input_tag($nphojint, 'getPriape', array (
 		  'size' => 25,
   		  'maxlength' => 25,
 		  'control_name' => 'nphojint[priape]',
 		)); echo $value ? $value : '&nbsp;' ?>
 		    </div>
-		
+
   	</th>
 	<th>
-		
+
 		  <?php echo label_for('nphojint[segape]', __($labels['nphojint{segape}']), 'class="required"') ?>
 		  <div class="content<?php if ($sf_request->hasError('nphojint{segape}')): ?> form-error<?php endif; ?>">
 		  <?php if ($sf_request->hasError('nphojint{segape}')): ?>
 		    <?php echo form_error('nphojint{segape}', array('class' => 'form-error-msg')) ?>
 		  <?php endif; ?>
-		
+
 		  <?php $value = object_input_tag($nphojint, 'getSegape', array (
 		  'size' => 25,
   		  'maxlength' => 25,
 		  'control_name' => 'nphojint[segape]',
 		)); echo $value ? $value : '&nbsp;' ?>
 		    </div>
-		
-		
+
+
 	</th>
   </tr>
   </table>
@@ -215,7 +215,7 @@
    <tr>
     <th>
     <fieldset id="sf_fieldset_none" class="">
-    <legend><?php echo __('Nacionalidad')?></legend>
+    <h2><?php echo __('Nacionalidad')?></h2>
   <div class="form-row">
 <? if ($nphojint->getNacemp()=='E')  {
   ?><?php echo radiobutton_tag('nphojint[nacemp]', 'V', false)        ."Venezolano(a)".'&nbsp;&nbsp;';
@@ -227,7 +227,7 @@
 } ?></div></fieldset></th>
     <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
     <th><fieldset id="sf_fieldset_none" class="">
-    <legend><?php echo __('Sexo')?></legend>
+    <h2><?php echo __('Sexo')?></h2>
   <div class="form-row">
 <? if ($nphojint->getSexemp()=='M')  {
   ?><?php echo radiobutton_tag('nphojint[sexemp]', 'M', true)        ."   Masculino".'&nbsp;&nbsp;';
@@ -240,14 +240,14 @@
 } ?></div></fieldset></th>
     <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
     <th><fieldset id="sf_fieldset_none" class="">
-    <legend><?php echo __('Profesional')?></legend>
+    <legend><h2><?php echo __('Profesional').'&nbsp;&nbsp;'.'&nbsp;&nbsp;'.'&nbsp;&nbsp;'?></h2></legend>
   <div class="form-row">
 <? if ($nphojint->getProfes()=='S')  {
-  ?><?php echo radiobutton_tag('nphojint[profes]', 'S', true)        ."   Si".'&nbsp;&nbsp;';
+  ?><?php echo radiobutton_tag('nphojint[profes]', 'S', true)        ."   Si".'&nbsp;&nbsp;'.'&nbsp;&nbsp;'.'&nbsp;&nbsp;';
       echo radiobutton_tag('nphojint[profes]', 'N', false)."     No";?>
     <?
 }else{
-  echo radiobutton_tag('nphojint[profes]', 'S', false)        ."Si".'&nbsp;&nbsp;';
+  echo radiobutton_tag('nphojint[profes]', 'S', false)        ." Si".'&nbsp;&nbsp;'.'&nbsp;&nbsp;'.'&nbsp;&nbsp;';
   echo radiobutton_tag('nphojint[profes]', 'N', true)."   No";
 
 } ?></div></fieldset></th>
@@ -268,7 +268,8 @@
   'size' => 20,
   'maxlength' => $lonnivel,
   'control_name' => 'nphojint[codniv]',
-  'onKeyPress' => "javascript:cadena=rayaenter(event,this.value); nivel(event);",
+  'onKeyPress' => "javascript:cadena=rayaenter(event,this.value);",
+  'onBlur' => "nivel(event);",
   'onKeyDown' => "javascript:return dFilter (event.keyCode, this,'$mascaranivel')",
 
 )); echo $value ? $value : '&nbsp;' ?></th>
@@ -301,11 +302,12 @@
   <?php $value = object_input_date_tag($nphojint, 'getFecnac', array (
   'rich' => true,
   'maxlength' => 10,
+  'size' => 10,
   'calendar_button_img' => '/sf/sf_admin/images/date.png',
   'control_name' => 'nphojint[fecnac]',
   'date_format' => 'dd/MM/yy',
   'onkeyup' => "javascript: mascara(this,'/',patron,true)",
-  'onBlur'=> remote_function(array(
+  'onChange'=> remote_function(array(
         'url'      => 'nomhojint/ajax',
         'complete' => 'AjaxJSON(request, json)',
           'with' => "'ajax=1&cajtexmos=nphojint_edaemp&codigo='+this.value"
@@ -320,7 +322,7 @@
   <?php endif; ?>
 
   <?php $value = object_input_tag($nphojint, 'getEdaact', array (
-  'size' => 7,
+  'size' => 3,
   'readonly' => true,
   'control_name' => 'nphojint[edaemp]',
 )); echo $value ? $value : '&nbsp;' ?></th>
@@ -336,11 +338,26 @@
   <?php endif; ?>
 
   <?php $value = object_textarea_tag($nphojint, 'getObsgen', array (
-  'size' => '80x5',
+  'size' => '80x3',
   'maxlength' => 1000,
   'control_name' => 'nphojint[obsgen]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
+
+<br>
+
+ <?php echo label_for('nphojint[ubifis]', __($labels['nphojint{ubifis}']), 'class="required" style="width: 150px"') ?>
+  <div class="content<?php if ($sf_request->hasError('nphojint{ubifis}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('nphojint{ubifis}')): ?>
+    <?php echo form_error('nphojint{ubifis}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_textarea_tag($nphojint, 'getUbifis', array (
+  'size' => '80x2',
+  'maxlength' => 100,
+  'control_name' => 'nphojint[ubifis]',
+)); echo $value ? $value : '&nbsp;' ?>
+
 </div>
 </fieldset>
 
@@ -457,7 +474,7 @@
 <br>
 
 <fieldset id="sf_fieldset_none" class="">
-<legend><?php echo __('Otra Ubicación')?></legend>
+<legend><h2><?php echo __('Otra Ubicación')?></h2></legend>
 <div class="form-row">
  <?php echo label_for('nphojint[dirotr]', __($labels['nphojint{dirotr}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('nphojint{dirotr}')): ?> form-error<?php endif; ?>">
@@ -583,10 +600,10 @@
 
 <?php tabPageOpenClose("tp1", "tabPage3", 'Ingresos');?>
 <fieldset id="sf_fieldset_none" class="">
-<?php echo button_to_popup('Ver Historial de Permisos',cross_app_link_to('nomina','/nomfalperper/edit/codigoemp/'.$nphojint->getCodemp()),'','','','1000','800')?>				
+<?php echo button_to_popup('Ver Historial de Permisos',cross_app_link_to('nomina','/nomfalperper/edit/codigoemp/'.$nphojint->getCodemp()),'','','','1000','800')?>
 <div class="form-row">
 <fieldset id="sf_fieldset_none" class="">
-<legend><?php echo __('Fechas') ?></legend>
+<legend><h2><?php echo __('Fechas') ?></h2></legend>
 <div class="form-row">
 <?php if ($nphojint->getId()=='')
   {?>
@@ -601,6 +618,7 @@
   <?php $value = object_input_date_tag($nphojint, 'getFecing', array (
   'rich' => true,
   'maxlength' => 10,
+  'size' => 10,
   'calendar_button_img' => '/sf/sf_admin/images/date.png',
   'control_name' => 'nphojint[fecing]',
   'date_format' => 'dd/MM/yy',
@@ -618,6 +636,7 @@
   'rich' => true,
   'readonly' =>true,
   'maxlength' => 10,
+  'size' => 10,
   'calendar_button_img' => '/sf/sf_admin/images/date.png',
   'control_name' => 'nphojint[fecret]',
   'date_format' => 'dd/MM/yy',
@@ -654,6 +673,7 @@
   <?php $value = object_input_date_tag($nphojint, 'getFecrei', array (
   'rich' => true,
   'maxlength' => 10,
+  'size' => 10,
   'calendar_button_img' => '/sf/sf_admin/images/date.png',
   'control_name' => 'nphojint[fecrei]',
   'date_format' => 'dd/MM/yy',
@@ -673,6 +693,7 @@
   'rich' => true,
   'readonly' => true,
   'maxlength' => 10,
+  'size' => 10,
   'calendar_button_img' => '/sf/sf_admin/images/date.png',
   'control_name' => 'nphojint[fecing]',
   'date_format' => 'dd/MM/yy',
@@ -725,6 +746,7 @@
   'rich' => true,
   'readonly' => true,
   'maxlength' => 10,
+  'size' => 10,
   'calendar_button_img' => '/sf/sf_admin/images/date.png',
   'control_name' => 'nphojint[fecrei]',
   'date_format' => 'dd/MM/yy',
@@ -735,6 +757,7 @@
 <?php $value = object_input_date_tag($nphojint, 'getFecrei', array (
   'rich' => true,
   'maxlength' => 10,
+  'size' => 10,
   'calendar_button_img' => '/sf/sf_admin/images/date.png',
   'control_name' => 'nphojint[fecrei]',
   'date_format' => 'dd/MM/yy',
@@ -757,7 +780,7 @@ echo grid_tag($obj);
 <br>
 
 <fieldset id="sf_fieldset_none" class="">
-<legend><?php echo __('Otros Datos') ?></legend>
+<legend><h2><?php echo __('Otros Datos') ?></h2></legend>
 <div class="form-row">
 <?php echo label_for('nphojint[staemp]', __($labels['nphojint{staemp}']), 'class="required" style="width: 150px"') ?>
   <div class="content<?php if ($sf_request->hasError('nphojint{staemp}')): ?> form-error<?php endif; ?>">
@@ -835,6 +858,24 @@ echo grid_tag($obj);
 <?php tabPageOpenClose("tp1", "tabPage5", 'Información Admón. Pública');?>
 <fieldset id="sf_fieldset_none" class="">
 <div class="form-row">
+
+<br>
+
+ <?php echo label_for('nphojint[codempant]', __($labels['nphojint{codempant}']), 'class="required" style="width: 150px"') ?>
+  <div class="content<?php if ($sf_request->hasError('nphojint{codempant}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('nphojint{codempant}')): ?>
+    <?php echo form_error('nphojint{codempant}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($nphojint, 'getCodempant', array (
+  'size' => 16,
+  'maxlength' => 16,
+  'control_name' => 'nphojint[codempant]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+
+<br>
+
  <?php echo label_for('nphojint[fecadmpub]', __($labels['nphojint{fecadmpub}']), 'class="required" style="width: 150px"') ?>
   <div class="content<?php if ($sf_request->hasError('nphojint{fecadmpub}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('nphojint{fecadmpub}')): ?>
@@ -844,6 +885,7 @@ echo grid_tag($obj);
   <?php $value = object_input_date_tag($nphojint, 'getFecadmpub', array (
   'rich' => true,
   'maxlength' => 10,
+  'size' => 10,
   'calendar_button_img' => '/sf/sf_admin/images/date.png',
   'control_name' => 'nphojint[fecadmpub]',
   'date_format' => 'dd/MM/yy',
@@ -892,6 +934,7 @@ echo grid_tag($obj);
   <?php $value = object_input_date_tag($nphojint, 'getFeccotsso', array (
   'rich' => true,
   'maxlength' => 10,
+  'size' => 10,
   'calendar_button_img' => '/sf/sf_admin/images/date.png',
   'control_name' => 'nphojint[feccotsso]',
   'date_format' => 'dd/MM/yy',
@@ -921,14 +964,14 @@ echo grid_tag($obj);
 <tr>
 <th>
 <fieldset id="sf_fieldset_none" class="">
-<legend><?php echo __('Tiene Fideicomiso')?></legend>
+<legend><h2><?php echo __('Tiene Fideicomiso')?></h2></legend>
 <div class="form-row">
 <? if ($nphojint->getTiefid()=='S')  {
-  ?><?php echo radiobutton_tag('nphojint[tiefid]', 'S', true)        ."Si".'&nbsp;&nbsp;';
+  ?><?php echo radiobutton_tag('nphojint[tiefid]', 'S', true)        ." Si".'&nbsp;&nbsp;';
       echo radiobutton_tag('nphojint[tiefid]', 'N', false)."   No";?> <?
 
 }else{
-  echo radiobutton_tag('nphojint[tiefid]', 'S', false)        ."Si".'&nbsp;&nbsp;';
+  echo radiobutton_tag('nphojint[tiefid]', 'S', false)        ." Si".'&nbsp;&nbsp;';
   echo radiobutton_tag('nphojint[tiefid]', 'N', true)."   No";
 
 } ?>
@@ -965,8 +1008,8 @@ echo grid_tag($obj3);
   <?php endif; ?>
 
   <?php echo select_tag('nphojint[codnivedu]', options_for_select($listanivelestudio,$nphojint->getCodnivedu(),'include_custom=Seleccione Uno')) ?>
-    </div>	
-<br>	
+    </div>
+<br>
 <?
 echo grid_tag($obj4);
 ?>
@@ -1036,7 +1079,7 @@ echo grid_tag($obj5);
 <br>
 
 <fieldset id="sf_fieldset_none" class="">
-<legend><?php echo __('Ubicación Laboral')?></legend>
+<legend><h2><?php echo __('Ubicación Laboral')?></h2></legend>
 <div class="form-row">
   <table>
    <tr>
@@ -1092,7 +1135,7 @@ echo grid_tag($obj5);
    <tr>
     <th>
      <fieldset id="sf_fieldset_none" class="">
-     <legend><?php echo __('Condición Contractual')?></legend>
+     <legend><h2><?php echo __('Condición Contractual')?></h2></legend>
       <div class="form-row">
       <?php echo label_for('nphojint[grulab]', __($labels['nphojint{grulab}']), 'class="required" ') ?>
       <div class="content<?php if ($sf_request->hasError('nphojint{grulab}')): ?> form-error<?php endif; ?>">
@@ -1125,7 +1168,7 @@ echo grid_tag($obj5);
     </th>
     <th>
      <fieldset id="sf_fieldset_none" class="">
-     <legend><?php echo __('Forma de Traslado al Trabajo')?></legend>
+     <legend><h2><?php echo __('Forma de Traslado al Trabajo')?></h2></legend>
       <div class="form-row">
        <?php echo label_for('nphojint[traslado]', __($labels['nphojint{traslado}']), 'class="required" ') ?>
        <div class="content<?php if ($sf_request->hasError('nphojint{traslado}')): ?> form-error<?php endif; ?>">
@@ -1162,7 +1205,7 @@ echo grid_tag($obj5);
    <tr>
     <th>
      <fieldset id="sf_fieldset_none" class="">
-     <legend><?php echo __('Número de Expediente')?></legend>
+     <legend><h2><?php echo __('Número de Expediente')?></h2></legend>
       <div class="form-row">
        <table>
         <tr>
@@ -1220,7 +1263,7 @@ echo grid_tag($obj5);
 <fieldset id="sf_fieldset_none" class="">
 <div class="form-row">
 <fieldset id="sf_fieldset_none" class="">
-<legend><?php echo __('Tipo de Vivienda')?></legend>
+<legend><h2><?php echo __('Tipo de Vivienda')?></h2></legend>
 <div class="form-row">
 <?php echo label_for('nphojint[tipviv]', __($labels['nphojint{tipviv}']), 'class="required" style="width: 120px"') ?>
   <div class="content<?php if ($sf_request->hasError('nphojint{tipviv}')): ?> form-error<?php endif; ?>">
@@ -1249,7 +1292,7 @@ echo grid_tag($obj5);
 <br>
 
 <fieldset id="sf_fieldset_none" class="">
-<legend><?php echo __('Forma de Tenencia')?></legend>
+<legend><h2><?php echo __('Forma de Tenencia')?></h2></legend>
 <div class="form-row">
 <?php echo label_for('nphojint[forten]', __($labels['nphojint{forten}']), 'class="required" style="width: 120px"') ?>
   <div class="content<?php if ($sf_request->hasError('nphojint{forten}')): ?> form-error<?php endif; ?>">
@@ -1280,7 +1323,7 @@ echo grid_tag($obj5);
 <br>
 
 <fieldset id="sf_fieldset_none" class="">
-<legend><?php echo __('Servicios de la Comunidad donde Vive')?></legend>
+<legend><h2><?php echo __('Servicios de la Comunidad donde Vive')?></h2></legend>
 <div class="form-row">
 <? $arr= array(); if ($nphojint->getSercon()!="") {$arr=split('-',$nphojint->getSercon());}?>
 <?php echo select_tag('arreglo', options_for_select($listaservicios,$arr,''),array('multiple' => true, 'size' => 4)) ?>
@@ -1365,14 +1408,10 @@ function reingreso(e,id)
 function nivel(e)
 {
   var longitud='<?php echo $lonnivel?>';
-  if (e.keyCode==13 || e.keyCode==9)
+  if (($('nphojint_codniv').value.length < longitud) && ($('nphojint_codniv').value!=''))
   {
-  $('nphojint_codniv').value=cadena;
-
-  if ($('nphojint_codniv').value.length < longitud)
-  {
+    $('nphojint_codniv').values = '';
     alert('El nivel organizacional no es de ultimo Nivel');
-  }
   }
 }
 

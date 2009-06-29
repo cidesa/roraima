@@ -23,7 +23,7 @@ class nomhojintActions extends autonomhojintActions
 	 if($this->nphojint->getNomemp()=='' or $this->nphojint->getNomemp()==',')
 	 {
 	 	$this->coderr=473;
-	 }  	
+	 }
 
      $nphojint = $this->getRequestParameter('nphojint');
 
@@ -102,6 +102,7 @@ class nomhojintActions extends autonomhojintActions
 
   public function CargarParroquia($codpais,$codestado)
   {
+  	//echo $codpais." - ".$codestado;
     $tablas=array('npciudad');//areglo de los joins de las tablas
     $filtros_tablas=array('codpai','codedo');//arreglo donde mando los filtros de las clases
     $filtros_variales=array($codpais,$codestado);//arreglo donde mando los parametros de la funcion
@@ -177,7 +178,7 @@ class nomhojintActions extends autonomhojintActions
     }
     return $guarderia;
   }
-  
+
   public function CargarNivel()
   {
     $c = new Criteria();
@@ -267,7 +268,7 @@ $this->Bitacora('Guardo');
 
     $this->labels = $this->getLabels();
     if($this->getRequest()->getMethod() == sfRequest::POST)
-    { 
+    {
       if($this->coderr!=-1){
         $err = Herramientas::obtenerMensajeError($this->coderr);
         $this->getRequest()->setError('',$err);
@@ -358,21 +359,21 @@ $this->Bitacora('Guardo');
 	if (isset($nphojint['prinom']) && isset($nphojint['priape']))
 	{
 		$segnom='';
-		$segape='';		
+		$segape='';
 		$nombres='';
 		$apellidos='';
 		if (isset($nphojint['segnom']))
 	    {
-	      $segnom=$nphojint['segnom'];	      
+	      $segnom=$nphojint['segnom'];
 	    }
 		if (isset($nphojint['segape']))
 	    {
-	      $segape=$nphojint['segape'];	      
+	      $segape=$nphojint['segape'];
 	    }
 		$nombres=implode(' ',array(trim($nphojint['prinom']),trim($segnom)));
 		$apellidos=implode(' ',array(trim($nphojint['priape']),trim($segape)));
-		$this->nphojint->setNomemp(implode(', ',array($apellidos,$nombres)));	
-	}    
+		$this->nphojint->setNomemp(implode(', ',array($apellidos,$nombres)));
+	}
     if (isset($nphojint['cedemp']))
     {
       $this->nphojint->setCedemp($nphojint['cedemp']);
@@ -794,6 +795,15 @@ $this->Bitacora('Guardo');
       $this->nphojint->setCodnivedu($nphojint['codnivedu']);
     }
     $this->nphojint->setIncapacidades($this->getRequestParameter('associated_incapacidades'));
+
+	if (isset($nphojint['ubifis']))
+    {
+      $this->nphojint->setUbifis($nphojint['ubifis']);
+
+    }	if (isset($nphojint['codempant']))
+    {
+      $this->nphojint->setCodempant($nphojint['codempant']);
+    }
   }
 
   protected function getNphojintOrCreate($id = 'id')
@@ -843,6 +853,7 @@ $this->Bitacora('Guardo');
     $opciones->setEliminar(false);
     $opciones->setTabla('Nphiineg');
     $opciones->setAnchoGrid(500);
+    $opciones->setAncho(500);
     $opciones->setFilas(15);
     $opciones->setTitulo('Historial de Ingresos y Egresos');
     $opciones->setHTMLTotalFilas(' ');
@@ -1008,7 +1019,7 @@ $this->Bitacora('Guardo');
     $col6->setNombreCampo('tiporg');
     $col6->setCombo(Constantes::listaTiporg());
     $col6->setHTML(' ');
-	
+
 	$col7 = new Columna('Monto Prestaciones');
     $col7->setTipo(Columna::MONTO);
     $col7->setEsGrabable(true);
@@ -1153,7 +1164,7 @@ $this->Bitacora('Guardo');
     $col5 = clone $col1;
     $col5->setTitulo('Edad');
     $col5->setNombreCampo('edafamact');
-    $col5->setHTML('type="text" size="10"');
+    $col5->setHTML('type="text" size="10" readonly="true"');
 
     $col6 = new Columna('Parentesco');
     $col6->setTipo(Columna::COMBO);
@@ -1169,12 +1180,19 @@ $this->Bitacora('Guardo');
     $col7->setCombo(Constantes::ListaEstadoCivil());
     $col7->setHTML(' ');
 
+    $col14 = new Columna('Ocupacion');
+    $col14->setTipo(Columna::COMBO);
+    $col14->setEsGrabable(true);
+    $col14->setNombreCampo('ocupac');
+    $col14->setCombo(Constantes::ListaOcupacion());
+    $col14->setHTML(' ');
+
     $col8 = new Columna('Grado de Instrucción');
     $col8->setTipo(Columna::TEXTO);
     $col8->setAlineacionObjeto(Columna::IZQUIERDA);
     $col8->setAlineacionContenido(Columna::IZQUIERDA);
     $col8->setEsGrabable(true);
-    $col8->setNombreCampo('grains');
+    $col8->setNombreCampo('nivins');
     $col8->setHTML('type="text" size="25"');
 
     $col9 = new Columna('Trabajo u/o Oficio/Lugar de Trabajo');
@@ -1219,12 +1237,14 @@ $this->Bitacora('Guardo');
     $opciones->addColumna($col5);
     $opciones->addColumna($col6);
     $opciones->addColumna($col7);
+    $opciones->addColumna($col14);
     $opciones->addColumna($col8);
     $opciones->addColumna($col9);
     $opciones->addColumna($col10);
     $opciones->addColumna($col13);
     $opciones->addColumna($col12);
     $opciones->addColumna($col11);
+
 
 
     $this->obj5 = $opciones->getConfig($per);
@@ -1255,76 +1275,81 @@ $this->Bitacora('Guardo');
   protected function getLabels()
   {
     return array(
-      'nphojint{codemp}' => 'No. Empleado',
-      'nphojint{nomemp}' => 'Apellido(s) y Nombre(s)',
-      'nphojint{cedemp}' => 'C.I.',
-      'nphojint{edociv}' => 'Estado Civil',
-      'nphojint{numcon}' => 'No. Contrato',
-      'nphojint{nacemp}' => 'Nacionalidad',
-      'nphojint{sexemp}' => 'Sexo',
-      'nphojint{codniv}' => 'Nivel Organizacional',
-      'nphojint{codnivedu}' => 'Nivel Estudio',
-      'nphojint{fotemp}' => 'Foto',
-      'nphojint{lugnac}' => 'Lugar de Nacimiento',
-      'nphojint{fecnac}' => 'Fecha de Nacimiento',
-      'nphojint{edaemp}' => 'Edad',
-      'nphojint{obsgen}' => 'Observaciones',
-      'nphojint{dirhab}' => 'Dirección',
-      'nphojint{codpai}' => 'Estado',
-      'nphojint{codest}' => 'Municipio',
-      'nphojint{codciu}' => 'Parroquia',
-      'nphojint{telhab}' => 'Tlf. Hab',
-      'nphojint{telotr}' => 'Otro Tlf.',
-      'nphojint{celemp}' => 'Celular',
-      'nphojint{dirotr}' => 'Dirección',
-      'nphojint{codpa2}' => 'Estado',
-      'nphojint{codes2}' => 'Municipio',
-      'nphojint{codci2}' => 'Parroquia',
-      'nphojint{telha2}' => 'Teléfono',
-      'nphojint{telot2}' => 'Otro Tlf.',
-      'nphojint{emaemp}' => 'Email',
-      'nphojint{codpos}' => 'Código Postal',
-      'nphojint{fecing}' => 'Ingreso',
-      'nphojint{fecret}' => 'Egreso',
-      'nphojint{fecrei}' => 'Reingreso',
-      'nphojint{obsemp}' => 'Motivo de Egreso',
-      'nphojint{staemp}' => 'Estatus del Empleado',
-      'nphojint{codtippag}' => 'Forma de Pago',
-      'nphojint{codban}' => 'Banco',
-      'nphojint{numcue}' => 'Número de Cuenta',
-      'nphojint{tipcue}' => 'Tipo de Cuenta',
-      'nphojint{fecadmpub}' => 'Fecha en la Administración Pública',
-      'nphojint{numsso}' => 'Número de S.S.O',
-      'nphojint{numpolseg}' => 'Número dde Póliza de Seguro',
-      'nphojint{feccotsso}' => 'Fecha de Cotización de S.S.O',
-      'nphojint{anoadmpub}' => 'Años de Continuidad en la Administración Pública',
-      'nphojint{tiefid}' => 'Fideicomiso',
-      'nphojint{talcam}' => 'Talla Camisa',
-      'nphojint{talpan}' => 'Talla Pantalón',
-      'nphojint{talcal}' => 'No. de Calzado',
-      'nphojint{grusan}' => 'Grupo Sanguineo',
-      'nphojint{codregpai}' => 'Estado',
-      'nphojint{codregest}' => 'Municipio',
-      'nphojint{codregciu}' => 'Parroquia',
-      'nphojint{grulab}' => 'Grupo Laboral',
-      'nphojint{gruotr}' => 'Descripción',
-      'nphojint{traslado}' => 'Forma de Translado',
-      'nphojint{traotr}' => 'Descripción',
-      'nphojint{numexp}' => 'Número',
-      'nphojint{detexp}' => 'Contenido',
-      'nphojint{derzur}' => 'DerechoZurdo',
-      'nphojint{tipviv}' => 'Tipo de Vivienda',
-      'nphojint{vivotr}' => 'Descripción',
-      'nphojint{forten}' => 'Forma de Tenencia',
-      'nphojint{tenotr}' => 'Descripción',
-      'nphojint{sercon}' => 'Servicios',
-      'nphojint{temporal}' => 'Temporal',
-      'nphojint{situac}' => 'Situacion',
-      'nphojint{profes}' => 'Profesional',
+      'nphojint{codemp}' => 'No. Empleado:',
+      'nphojint{nomemp}' => 'Apellido(s) y Nombre(s):',
+      'nphojint{cedemp}' => 'C.I.:',
+      'nphojint{edociv}' => 'Estado Civil:',
+      'nphojint{numcon}' => 'No. Contrato:',
+      'nphojint{nacemp}' => 'Nacionalidad:',
+      'nphojint{sexemp}' => 'Sexo:',
+      'nphojint{codniv}' => 'Nivel Organizacional:',
+      'nphojint{codnivedu}' => 'Nivel Estudio:',
+      'nphojint{fotemp}' => 'Foto:',
+      'nphojint{lugnac}' => 'Lugar de Nacimiento:',
+      'nphojint{fecnac}' => 'Fecha de Nacimiento:',
+      'nphojint{edaemp}' => 'Edad:',
+      'nphojint{obsgen}' => 'Observaciones:',
+      'nphojint{dirhab}' => 'Dirección:',
+      'nphojint{codpai}' => 'Estado:',
+      'nphojint{codest}' => 'Municipio:',
+      'nphojint{codciu}' => 'Parroquia:',
+      'nphojint{telhab}' => 'Tlf. Hab:',
+      'nphojint{telotr}' => 'Otro Tlf.:',
+      'nphojint{celemp}' => 'Celular:',
+      'nphojint{dirotr}' => 'Dirección:',
+      'nphojint{codpa2}' => 'Estado:',
+      'nphojint{codes2}' => 'Municipio:',
+      'nphojint{codci2}' => 'Parroquia:',
+      'nphojint{telha2}' => 'Teléfono:',
+      'nphojint{telot2}' => 'Otro Tlf.:',
+      'nphojint{emaemp}' => 'Email:',
+      'nphojint{codpos}' => 'Código Postal:',
+      'nphojint{fecing}' => 'Ingreso:',
+      'nphojint{fecret}' => 'Egreso:',
+      'nphojint{fecrei}' => 'Reingreso:',
+      'nphojint{obsemp}' => 'Motivo de Egreso:',
+      'nphojint{staemp}' => 'Estatus del Empleado:',
+      'nphojint{codtippag}' => 'Forma de Pago:',
+      'nphojint{codban}' => 'Banco:',
+      'nphojint{numcue}' => 'Número de Cuenta:',
+      'nphojint{tipcue}' => 'Tipo de Cuenta:',
+      'nphojint{fecadmpub}' => 'Fecha en la Administración Pública:',
+      'nphojint{numsso}' => 'Número de S.S.O:',
+      'nphojint{numpolseg}' => 'Número dde Póliza de Seguro:',
+      'nphojint{feccotsso}' => 'Fecha de Cotización de S.S.O:',
+      'nphojint{anoadmpub}' => 'Años de Continuidad en la Administración Pública:',
+      'nphojint{tiefid}' => 'Fideicomiso:',
+      'nphojint{talcam}' => 'Talla Camisa:',
+      'nphojint{talpan}' => 'Talla Pantalón:',
+      'nphojint{talcal}' => 'No. de Calzado:',
+      'nphojint{grusan}' => 'Grupo Sanguineo:',
+      'nphojint{codregpai}' => 'Estado:',
+      'nphojint{codregest}' => 'Municipio:',
+      'nphojint{codregciu}' => 'Parroquia:',
+      'nphojint{grulab}' => 'Grupo Laboral:',
+      'nphojint{gruotr}' => 'Descripción:',
+      'nphojint{traslado}' => 'Forma de Translado:',
+      'nphojint{traotr}' => 'Descripción:',
+      'nphojint{numexp}' => 'Número:',
+      'nphojint{detexp}' => 'Contenido:',
+      'nphojint{derzur}' => 'DerechoZurdo:',
+      'nphojint{tipviv}' => 'Tipo de Vivienda:',
+      'nphojint{vivotr}' => 'Descripción:',
+      'nphojint{forten}' => 'Forma de Tenencia:',
+      'nphojint{tenotr}' => 'Descripción:',
+      'nphojint{sercon}' => 'Servicios:',
+      'nphojint{temporal}' => 'Temporal:',
+      'nphojint{situac}' => 'Situacion:',
+      'nphojint{profes}' => 'Profesional:',
 	  'nphojint{prinom}' => 'Primer Nombre:',
       'nphojint{segnom}' => 'Segundo Nombre:',
       'nphojint{priape}' => 'Primer Apellido:',
       'nphojint{segape}' => 'Segundo Apellido:',
+      'nphojint{ubifis}' => 'Ubicacion Fisica:',
+      'nphojint{codempant}' => 'No. Empleado Anterior:',
+
+
+
     );
   }
 }
