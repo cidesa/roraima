@@ -495,7 +495,7 @@ $this->Bitacora('Guardo');
     	$exisart=CaregartPeer::doSelectOne($c);
         if ($exisart)
         {
-			$javascript="alert('El Codigo del Articulo ya existe. Por Favor, Cambielo por otro');$('caregart_codart').value='';$('caregart_codart').focus()";
+			$javascript="alert('El Codigo del Articulo/Servicio ya existe. Por Favor, Cambielo por otro');$('caregart_codart').value='';$('caregart_codart').focus()";
 			$output = '[["javascript","'.$javascript.'",""],["'.$cajtexmos.'","'.$deshabilitar.'",""],["caregart_codcta","",""],["caregart_codpar","",""],["caregart_ramart","",""],["caregart_nompar","",""],["caregart_nomram","",""]]';
         }
         else
