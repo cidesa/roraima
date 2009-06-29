@@ -229,6 +229,10 @@ ORDER BY A.CODEMP,A.FECFIN,A.ID
 
 
 
+                                                                     
+                                                                     
+                                                                     
+                                             
 CREATE OR REPLACE VIEW NPLIQVACACION AS
 (SELECT
 (CASE WHEN SUM(A.HIST)=0 THEN 'NO' ELSE 'SI' END) AS HISTORICO,SUM(A.ANTIGUEDAD) AS ANTIGUEDAD,
@@ -251,7 +255,7 @@ ROUND((CASE WHEN
                     TO_DATE(TO_CHAR(A.FECING,'DD/MM/')||TO_CHAR(TO_NUMBER(TO_CHAR(A.FECRET,'YYYY'),'9999')-1,'YYYY'),'DD/MM/YYYY')
                     ELSE
                     TO_DATE(TO_CHAR(A.FECING,'DD/MM/')||TO_CHAR(A.FECRET,'YYYY'),'DD/MM/YYYY')
-                    END),A.FECRET,'CM','0')<= A.NUMDIAMAZANO THEN 
+                    END),A.FECRET,'CM','0')<= A.NUMDIAMAXANO THEN 
        (CASE WHEN COALESCE(A.NUMDIAMES,0)=0 THEN ((CASE WHEN SUM(A.HIST)=0 THEN SUM(A.CORRESPONDE) ELSE SUM(A.CORRESPONDEHIS) END)/12) ELSE A.NUMDIAMES END)*
       cuantotiempo((CASE WHEN
                     TO_DATE(TO_CHAR(A.FECING,'DD/MM/')||TO_CHAR(A.FECRET,'YYYY'),'DD/MM/YYYY')>A.FECRET
@@ -380,6 +384,7 @@ FROM  (Select 0 AS HIST,
 	      group by w.CodEmp) D on A.CodEmp=D.CodEmp
 GROUP BY A.DESDE,A.HASTA,A.CODEMP,A.FECRET,A.FECING,A.CodTipCon,A.NumDiaMes,A.NumDiaMaxAno
 ORDER BY A.CODEMP,A.DESDE)
+
 
 
 --VISTA NPLIQUIDACION
