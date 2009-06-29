@@ -50,10 +50,10 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 			Union All 
 			select 1 as orden, 
 			SUM(0) as DIAS,
-			SUM(A.VALART108)*-1 AS MONTO,
+			(SUM(A.VALART108)*-1)-(SUM(A.ADEANT)*-1) AS MONTO,
 			'APORTES DEPOSITADOS EN FIDEICOMISO ' AS DESCRIPCION,
 			B.CODPAR AS PARTIDA 
-			From NPIMPPRESOC A,NPDEFPRELIQ B,NPTIPCON D,NPASINOMCONT E,
+			From NPIMPPRESOC A,NPDEFPRELIQ B,NPTIPCON D,NPASIEMPCONT E,--NPASINOMCONT E,
 			(Select MAX(FECFIN) as FECHAFIN FROM NPIMPPRESOC WHERE tipo='' AND codemp='$codemp') C 
 			where  
 			A.tipo='' AND 
@@ -63,8 +63,12 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 			B.CODCON='000' AND
 			to_char(fecini,'yyyy')>=perdes and
 			to_char(fecfin,'yyyy')<=perhas AND
-			E.CODNOM=B.CODNOM AND
+			A.CODEMP=E.CODEMP AND
 			D.CODTIPCON=E.CODTIPCON AND
+			FECFIN>=E.FECDES AND
+			FECFIN<=E.FECHAS AND
+			--E.CODNOM=B.CODNOM AND
+			--D.CODTIPCON=E.CODTIPCON AND
 			(D.FID='1' OR D.FID='S') AND
 			FECINI>=(CASE WHEN (D.FID='1' OR D.FID='S') THEN D.FECDES ELSE fecini END)
 			GROUP BY B.CODPAR 
@@ -156,7 +160,7 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 			HAVING
 			SUM(A.MONANT)<>0 
 			ORDER BY orden,DESCRIPCION DESC";
-
+#print "<pre>".$sql;
 	      if (H::BuscarDatos($sql,$arr))
 	      {
 	        $i=0;
