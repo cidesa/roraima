@@ -8,7 +8,7 @@
 
 <div id="sf_admin_container">
 
-<h1><?php echo __('Cálculo de Prestaciones Sociales',
+<h1><?php echo __('Cálculo de Antiguedad',
 array()) ?></h1>
 
 <div id="sf_admin_header">

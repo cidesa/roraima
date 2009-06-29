@@ -20,14 +20,19 @@ generator:
       anoser: { name: Años }
       salario: { name: salario }
       interes: { name: interes }
+      codniv: { name: Nivel }
+      desniv: { name: Descripcion del Nivel }
+      codcar: { name: Cargo }
+      nomcar: { name: Nombre del Cargo }
+      
     list:
-      title:          Cálculo de Prestaciones Sociales
+      title:          Cálculo de Antiguedad
       filters:        [codemp, feccor]
       display:        [=codemp, cedemp, nomemp, fecing]
       max_per_page:	  10
 
     edit:
-      title:          Cálculo de Prestaciones Sociales
-      display:        [codemp, cedemp, nomemp, fecing, feccalpres, destipcon, mesinicio, feccor, diatra, mestra, anotra, diaser, messer, anoser, codcon, salario, interes]
+      title:          Cálculo de Antiguedad
+      display:        [codemp, cedemp, nomemp, fecing, feccalpres, destipcon, mesinicio, feccor, diatra, mestra, anotra, diaser, messer, anoser, codcon, salario, interes, codniv, desniv, codcar, nomcar]
       actions:
         _save:        ~

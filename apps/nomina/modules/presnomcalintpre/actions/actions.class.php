@@ -244,6 +244,21 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
         $nomemp = NphojintPeer :: getNomemp($this->getRequestParameter('codemp'));
         $cedemp = NphojintPeer :: getCedemp($this->getRequestParameter('codemp'));
         $fecing = NphojintPeer :: getFecing($this->getRequestParameter('codemp'));
+		$c = new Criteria();
+		$c->add(NphojintPeer::CODEMP,$this->getRequestParameter('codemp'));
+		$per = NphojintPeer::doSelectOne($c);
+		$codniv = $per->getCodNiv();
+		$c = new Criteria();
+		$c->add(NpasicarempPeer::CODEMP,$this->getRequestParameter('codemp'));
+		$c->add(NpasicarempPeer::STATUS,'V');
+		$per = NpasicarempPeer::doSelectOne($c);
+		$codcar = $per->getCodcar();
+		$nomcar = $per->getNomcar();
+		$c = new Criteria();
+		$c->add(NpestorgPeer::CODNIV,$codniv);
+		$per = NpestorgPeer::doSelectOne($c);
+		$desniv = $per->getDesniv();
+		
         $destipcon  = $this->tipcon; //NptipconPeer::getDestipcon($this->tipcon);
         $feccalpres = adodb_date("d/m/Y", strtotime($this->feccalculo));
         $feccor     = adodb_date("d/m/Y", strtotime($this->feccor));
@@ -260,7 +275,8 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
                     ["diaserrn","' . $this->diasserv . '",""],["messerrn","' . $this->mesesserv . '",""],["anoserrn","' . $this->anosserv . '",""],
                     ["nppresoc_diatra","' . $this->diastrab . '",""],["nppresoc_mestra","' . $this->mesestrab . '",""],["nppresoc_anotra","' . $this->anostrab . '",""],
                     ["control","' . $this->control . '",""],["totfil","' . $this->tfil . '",""],["totfil2","' . $this->tfil2 . '",""],["totfil3","' . $this->tfil3 . '",""],
-                    ["totcapitalact","' . H::FormatoMonto($this->capitalact) . '",""]]';
+                    ["totcapitalact","' . H::FormatoMonto($this->capitalact) . '",""],["nppresoc_codniv","'.$codniv.'",""],["nppresoc_desniv","'.$desniv.'",""],
+					["nppresoc_codcar","'.$codcar.'",""],["nppresoc_nomcar","'.$nomcar.'",""]]';
 
 
         $this->getResponse()->setHttpHeader("X-JSON", '(' . $output . ')');
