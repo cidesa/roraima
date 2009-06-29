@@ -176,5 +176,5 @@ FechaValidator1:
     param:
         compare: 'now'
         compare_error: Esta Fecha no puede ser mayor a la Fecha Actual
-        operator: '<'
+        operator: '<='
         date_error:  Fecha Inválida
