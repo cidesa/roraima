@@ -244,7 +244,15 @@ ROUND((CASE WHEN
             TO_NUMBER(TO_CHAR(A.FECRET,'YYYY'),'9999')-1
             ELSE 
             TO_NUMBER(TO_CHAR(A.FECRET,'YYYY'),'9999') END)<TO_NUMBER(A.HASTA,'9999')
- THEN ((CASE WHEN SUM(A.HIST)=0 THEN SUM(A.CORRESPONDE) ELSE SUM(A.CORRESPONDEHIS) END)/12)*
+ THEN (CASE WHEN (CASE WHEN COALESCE(A.NUMDIAMES,0)=0 THEN ((CASE WHEN SUM(A.HIST)=0 THEN SUM(A.CORRESPONDE) ELSE SUM(A.CORRESPONDEHIS) END)/12) ELSE A.NUMDIAMES END)*
+      cuantotiempo((CASE WHEN
+                    TO_DATE(TO_CHAR(A.FECING,'DD/MM/')||TO_CHAR(A.FECRET,'YYYY'),'DD/MM/YYYY')>A.FECRET
+                    THEN
+                    TO_DATE(TO_CHAR(A.FECING,'DD/MM/')||TO_CHAR(TO_NUMBER(TO_CHAR(A.FECRET,'YYYY'),'9999')-1,'YYYY'),'DD/MM/YYYY')
+                    ELSE
+                    TO_DATE(TO_CHAR(A.FECING,'DD/MM/')||TO_CHAR(A.FECRET,'YYYY'),'DD/MM/YYYY')
+                    END),A.FECRET,'CM','0')<= A.NUMDIAMAZANO THEN 
+       (CASE WHEN COALESCE(A.NUMDIAMES,0)=0 THEN ((CASE WHEN SUM(A.HIST)=0 THEN SUM(A.CORRESPONDE) ELSE SUM(A.CORRESPONDEHIS) END)/12) ELSE A.NUMDIAMES END)*
       cuantotiempo((CASE WHEN
                     TO_DATE(TO_CHAR(A.FECING,'DD/MM/')||TO_CHAR(A.FECRET,'YYYY'),'DD/MM/YYYY')>A.FECRET
                     THEN
@@ -252,6 +260,7 @@ ROUND((CASE WHEN
                     ELSE
                     TO_DATE(TO_CHAR(A.FECING,'DD/MM/')||TO_CHAR(A.FECRET,'YYYY'),'DD/MM/YYYY')
                     END),A.FECRET,'CM','0')
+       ELSE A.NUMDIAMAXANO END)
  ELSE 0  END),2) AS FRACCIONDIA,
 ROUND((CASE WHEN 
          (CASE WHEN TO_DATE(TO_CHAR(A.FECRET,'DD/MM/')||TO_CHAR(A.FECING,'YYYY'),'DD/MM/YYYY')<=A.FECING THEN   
@@ -262,7 +271,7 @@ ROUND((CASE WHEN
             TO_NUMBER(TO_CHAR(A.FECRET,'YYYY'),'9999')-1
             ELSE 
             TO_NUMBER(TO_CHAR(A.FECRET,'YYYY'),'9999') END)<TO_NUMBER(A.HASTA,'9999')
- THEN MAX(COALESCE(B.DIAVAC,0)/12)*
+ THEN (CASE WHEN COALESCE(A.NUMDIAMES,0)=0 THEN MAX(COALESCE(B.DIAVAC,0)/12) ELSE 0 END)*
       cuantotiempo((CASE WHEN
                     TO_DATE(TO_CHAR(A.FECING,'DD/MM/')||TO_CHAR(A.FECRET,'YYYY'),'DD/MM/YYYY')>A.FECRET
                     THEN
@@ -282,9 +291,12 @@ ROUND((CASE WHEN
             TO_NUMBER(TO_CHAR(A.FECRET,'YYYY'),'9999') END)<TO_NUMBER(A.HASTA,'9999')
  THEN 'SI'
  ELSE 'NO'  END) as Fraccion,
-A.CodTipCon,AVG(C.MonAsi) as SalNor,
-(CASE WHEN MAX(COALESCE(B.CalInc,'N'))='N' THEN AVG(C.MonAsi)
- ELSE AVG(C.MonAsi)*ROUND((MAX(COALESCE(B.DIAVAC,0))+MAX(COALESCE(B.DIAUTI,0))+360)/30,4)/12 END) AS SalInt
+A.CodTipCon,(Case When Coalesce(AVG(D.MonHis),0)=0 then AVG(C.MonAsi) else AVG(D.MonHis) end) as SalNor,
+(CASE WHEN MAX(COALESCE(B.CalInc,'N'))='N' THEN (Case When Coalesce(AVG(D.MonHis),0)=0 then AVG(C.MonAsi) else AVG(D.MonHis) end)
+ ELSE (Case When Coalesce(AVG(D.MonHis),0)=0 then AVG(C.MonAsi) else AVG(D.MonHis) end)+
+      ((Case When Coalesce(AVG(D.MonHisBV),0)=0 then AVG(C.MonAsi) else AVG(D.MonHisBV) end)/30)*ROUND(MAX(COALESCE(B.DIAVAC,0)/12),2)+
+      ((Case When Coalesce(AVG(D.MonHisBF),0)=0 then AVG(C.MonAsi) else AVG(D.MonHisBF) end)/30)*ROUND(MAX(COALESCE(B.DIAUTI,0)/12),2) END) AS SalInt,
+A.NumDiaMes,A.NumDiaMaxAno
 FROM  (Select 0 AS HIST,
               antpub('A',C.CODEMP,to_date(TO_CHAR(C.FECRET,'DD/MM/')||((TO_NUMBER(TO_CHAR(C.FecIng,'YYYY'),'9999')+1)+((TO_NUMBER(TO_CHAR(C.FecRet,'YYYY'),'9999')+1)-B.Ano)-1)::VARCHAR,'dd/mm/yyyy'),'S')::NUMERIC AS Antiguedad,
               (CASE WHEN TO_DATE(TO_CHAR(C.FECRET,'DD/MM/')||TO_CHAR(C.FECING,'YYYY'),'DD/MM/YYYY')<=C.FECING THEN
@@ -294,15 +306,23 @@ FROM  (Select 0 AS HIST,
                 ((TO_NUMBER(TO_CHAR(C.FecIng,'YYYY'),'9999')+1)+((TO_NUMBER(TO_CHAR(C.FecRet,'YYYY'),'9999')+1)-B.Ano)-2)::VARCHAR
               ELSE
               ((TO_NUMBER(TO_CHAR(C.FecIng,'YYYY'),'9999')+1)+((TO_NUMBER(TO_CHAR(C.FecRet,'YYYY'),'9999')+1)-B.Ano)-1)::VARCHAR END) as Hasta,0 as Disfrutados,
-              A.DIADIS as CORRESPONDE,0 as CORRESPONDEHIS,C.CodEmp,C.FecRet,C.FecIng,D.CodTipCon
-       from NPvacdiadis A,NPAnos B,NPHojInt C,NPASINOMCONT D
-       Where A.codnom=COALESCE((SELECT MAX(CODNOM) FROM NPHISCON                       
-                                WHERE CODEMP=C.CODEMP
-                                AND FECNOM=(SELECT MAX(FECNOM) FROM NPHISCON WHERE CODEMP=C.CODEMP
-                                AND TO_CHAR(FECNOM,'YYYY')=TO_CHAR((TO_NUMBER(TO_CHAR(C.FecIng,'YYYY'),'9999')+1)+((TO_NUMBER(TO_CHAR(C.FecRet,'YYYY'),'9999')+1)-B.Ano)-1,'9999'))),                       COALESCE((SELECT MAX(CODNOM) FROM NPHISCON
+              A.DIADIS as CORRESPONDE,0 as CORRESPONDEHIS,C.CodEmp,C.FecRet,C.FecIng,D.CodTipCon,F.NumDiaMes,F.NumDiaMaxAno
+       from NPvacdiadis A left outer join NPDefEspParPre F on A.CodNom=F.CodNom,NPAnos B,NPHojInt C,NPASINOMCONT D
+       Where A.codnom=COALESCE((SELECT CODNOM FROM NPASIEMPCONT WHERE CODEMP=C.CODEMP
+                       AND FECDES<=TO_DATE(TO_CHAR(C.FECING,'DD/MM/')||
+                       (CASE WHEN TO_DATE(TO_CHAR(C.FECRET,'DD/MM/')||TO_CHAR(C.FECING,'YYYY'),'DD/MM/YYYY')<=C.FECING 
+ THEN ((TO_NUMBER(TO_CHAR(C.FecIng,'YYYY'),'9999')+1)+((TO_NUMBER(TO_CHAR(C.FecRet,'YYYY'),'9999')+1)-B.Ano)-2)::VARCHAR
+ ELSE ((TO_NUMBER(TO_CHAR(C.FecIng,'YYYY'),'9999')+1)+((TO_NUMBER(TO_CHAR(C.FecRet,'YYYY'),'9999')+1)-B.Ano)-1)::VARCHAR END),'DD/MM/YYYY')
+                       AND FECHAS>=TO_DATE(TO_CHAR(C.FECING,'DD/MM/')||
+                       (CASE WHEN TO_DATE(TO_CHAR(C.FECRET,'DD/MM/')||TO_CHAR(C.FECING,'YYYY'),'DD/MM/YYYY')<=C.FECING 
+ THEN ((TO_NUMBER(TO_CHAR(C.FecIng,'YYYY'),'9999')+1)+((TO_NUMBER(TO_CHAR(C.FecRet,'YYYY'),'9999')+1)-B.Ano)-2)::VARCHAR
+ ELSE ((TO_NUMBER(TO_CHAR(C.FecIng,'YYYY'),'9999')+1)+((TO_NUMBER(TO_CHAR(C.FecRet,'YYYY'),'9999')+1)-B.Ano)-1)::VARCHAR END),'DD/MM/YYYY')),
+                       (SELECT MAX(CODNOM) FROM NPHISCON                       
                        WHERE CODEMP=C.CODEMP
-                       AND FECNOM=(SELECT MAX(FECNOM) FROM NPHISCON WHERE CODEMP=C.CODEMP)),
-                       (SELECT MAX(CODNOM) FROM NPASIEMPCONT WHERE CODEMP=C.CODEMP)))
+                       AND FECNOM=(SELECT MAX(FECNOM) FROM NPHISCON WHERE CODEMP=C.CODEMP
+                       AND TO_CHAR(FECNOM,'YYYY')=TO_CHAR((TO_NUMBER(TO_CHAR(C.FecIng,'YYYY'),'9999')+1)+((TO_NUMBER(TO_CHAR(C.FecRet,'YYYY'),'9999')+1)-B.Ano)-1,'9999'))), 
+                       COALESCE((SELECT MAX(CODNOM) FROM NPHISCON WHERE CODEMP=C.CODEMP
+                       AND FECNOM=(SELECT MAX(FECNOM) FROM NPHISCON WHERE CODEMP=C.CODEMP))))
              And B.Ano Between TO_NUMBER(TO_CHAR(C.FecIng,'YYYY'),'9999') 
                        and (CASE WHEN TO_DATE(TO_CHAR(C.FECRET,'DD/MM/')||TO_CHAR(C.FECING,'YYYY'),'DD/MM/YYYY')>C.FECING THEN TO_NUMBER(TO_CHAR(C.FecRet,'YYYY'),'9999')
                             ELSE TO_NUMBER(TO_CHAR(C.FecRet,'YYYY'),'9999')-1 END)
@@ -313,16 +333,18 @@ FROM  (Select 0 AS HIST,
        UNION ALL
        Select 1 AS HIST, 0 AS Antiguedad,C.PERINI as Desde,C.PERFIN as Hasta,
               C.DIASDISFRUTADOS as Disfrutados,
-              0 as CORRESPONDE,C.diasdisfutar AS CORRESPONDEHIS,D.CodEmp,D.FecRet,D.FecIng,E.CodTipCon
-       from NPvacdiadis A,NPAnos B,Npvacdisfrute C,NPHojInt D,NPAsiNomCont E
-       Where A.codnom=COALESCE((SELECT MAX(CODNOM) FROM NPHISCON
+              0 as CORRESPONDE,C.diasdisfutar AS CORRESPONDEHIS,D.CodEmp,D.FecRet,D.FecIng,E.CodTipCon,F.NumDiaMes,F.NumDiaMaxAno
+       from NPvacdiadis A left outer join NPDefEspParPre F on A.CodNom=F.CodNom,NPAnos B,Npvacdisfrute C,NPHojInt D,NPAsiNomCont E
+       Where A.codnom=COALESCE((SELECT CODNOM FROM NPASIEMPCONT WHERE CODEMP=C.CODEMP
+                       AND FECDES<=TO_DATE(TO_CHAR(D.FECING,'DD/MM/')||C.PERFIN,'DD/MM/YYYY')
+                       AND FECHAS>=TO_DATE(TO_CHAR(D.FECING,'DD/MM/')||C.PERFIN,'DD/MM/YYYY')),
+                       (SELECT MAX(CODNOM) FROM NPHISCON
                        WHERE CODEMP=C.CODEMP
                        AND FECNOM=(SELECT MAX(FECNOM) FROM NPHISCON WHERE CODEMP=C.CODEMP
                        AND TO_CHAR(FECNOM,'YYYY')=TO_CHAR((TO_NUMBER(TO_CHAR(D.FecIng,'YYYY'),'9999')+1)+((TO_NUMBER(TO_CHAR(D.FecRet,'YYYY'),'9999')+1)-B.Ano)-1,'9999'))),
                        COALESCE((SELECT MAX(CODNOM) FROM NPHISCON
                        WHERE CODEMP=C.CODEMP
-                       AND FECNOM=(SELECT MAX(FECNOM) FROM NPHISCON WHERE CODEMP=C.CODEMP)),
-                       (SELECT MAX(CODNOM) FROM NPASIEMPCONT WHERE CODEMP=C.CODEMP)))
+                       AND FECNOM=(SELECT MAX(FECNOM) FROM NPHISCON WHERE CODEMP=C.CODEMP))))
              And B.Ano Between TO_NUMBER(TO_CHAR(D.FecIng,'YYYY'),'9999') and (TO_NUMBER(TO_CHAR(D.FecRet,'YYYY'),'9999')+1)
              And (TO_NUMBER(TO_CHAR(D.FecRet,'YYYY'),'9999')+1)-B.ano between A.rangodesde and A.rangohasta
              And C.PERINI=B.ANO::VARCHAR And D.FecRet is Not NUll And C.CODEMP=D.CodEmp
@@ -334,12 +356,29 @@ FROM  (Select 0 AS HIST,
                   ELSE
                       TO_DATE(TO_CHAR(A.FecIng,'DD/MM/')||A.Hasta::VARCHAR,'DD/MM/YYYY') 
                   END)  
-             BETWEEN B.AnoVig and B.AnoVigHas left outer join NPSalInt C on A.CodEmp=C.CodEmp
-             And A.CodTipCon=C.CodCon
-             And C.CodAsi='001'
-             And C.FecFinCon=(Select max(X.FecFinCon) from NPSalInt X,NPHojInt Y where X.CodEmp=C.CodEmp and X.CodEmp=Y.CodEmp
-                              and X.FecFinCon<=(CASE WHEN last_day(Y.FecRet)-Y.FecRet<=1 then last_day(Y.FecRet) ELSE Y.FecRet End))
-GROUP BY A.DESDE,A.HASTA,A.CODEMP,A.FECRET,A.FECING,A.CodTipCon
+             BETWEEN B.AnoVig and B.AnoVigHas left outer join 
+             (Select w.CodEmp,Sum((CASE WHEN v.TipAsi='S' then w.MONASI else 0 end)) as MONASI,
+	      Sum((CASE WHEN v.AfeAliBV='S' then w.MONASI else 0 end)) as MONBV,
+	      Sum((CASE WHEN v.AfeAliBF='S' then w.MONASI else 0 end)) as MONBF 
+              from NPSalInt w, NPAsiPre v 
+              where w.CodCon=(Select CodTipCon from NPAsiEmpCont where CodEmp=w.CodEmp and Status='A')
+              And to_char(w.FecFinCon,'mm/yyyy')=(Select to_char(MAX(FecFin),'mm/yyyy') From NPImpPreSoc where CodEmp=w.CodEmp and ValArt108>0 and Tipo='')
+              And v.CodCon=w.CodCon AND w.CodAsi=v.CodAsi
+              group by w.CodEmp) C on A.CodEmp=C.CodEmp left outer join
+             (Select w.CodEmp,SUM((CASE WHEN v.TipAsi='S' THEN w.Monto ELSE 0 END)) as MonHis,
+	      SUM((CASE WHEN t.AfeAliBV='S' THEN w.Monto ELSE 0 END)) as MonHisBV, 
+	      SUM((CASE WHEN t.AfeAliBF='S' THEN w.Monto ELSE 0 END)) as MonHisBF 
+	      from NPHisCon w,NPAsiPre v,NPConAsi t,NPAsiNomCont r
+	      where to_char(w.FecNom,'mm/yyyy')=(Select to_char(MAX(FecFin),'mm/yyyy') From NPImpPreSoc where CodEmp=w.CodEmp and ValArt108>0 and Tipo='')
+	      And v.CodCon=(Select CodTipCon from NPAsiEmpCont where CodEmp=w.CodEmp and Status='A')
+	      and v.TipAsi='S'
+	      and v.CodCon=t.CodCon
+	      and v.CodAsi=t.CodAsi
+	      And r.CodTipCon=v.CodCon
+	      And w.CodNom=r.CodNom
+	      AND w.CodCon=t.CodCpt
+	      group by w.CodEmp) D on A.CodEmp=D.CodEmp
+GROUP BY A.DESDE,A.HASTA,A.CODEMP,A.FECRET,A.FECING,A.CodTipCon,A.NumDiaMes,A.NumDiaMaxAno
 ORDER BY A.CODEMP,A.DESDE)
 
 
