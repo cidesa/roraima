@@ -64,13 +64,13 @@
 
   if ($caregart->getId()=='') //Es una Articulo o Servicio Nuevo
   {
-       echo radiobutton_tag('caregart[tipo]', 'A', $valor1, array('id'=>'caregart_tipo_A', 'onClick' => "javascript:deshart();",))        ."Artículo".'&nbsp;&nbsp;';
-       echo "<br>".radiobutton_tag('caregart[tipo]', 'S', !$valor1, array('id'=>'caregart_tipo_S', 'onClick' => "javascript:deshabil();",))."   Servicio";
+       echo radiobutton_tag('caregart[tipo]', 'A', $valor1, array('id'=>'caregart_tipo_A'))        ."Artículo".'&nbsp;&nbsp;';
+       echo "<br>".radiobutton_tag('caregart[tipo]', 'S', !$valor1, array('id'=>'caregart_tipo_S'))."   Servicio";
   }
   else //Aqui es modo Consulta  o Edicion
   {
-      echo radiobutton_tag('caregart[tipo]', 'A', $valor1, array('id'=>'caregart_tipo_A', 'disabled'=> true))        ."Artículo".'&nbsp;&nbsp;';
-      echo "<br>".radiobutton_tag('caregart[tipo]', 'S', !$valor1, array('id'=>'caregart_tipo_S', 'disabled'=> true))."   Servicio";
+      echo radiobutton_tag('caregart[tipo]', 'A', $valor1, array('id'=>'caregart_tipo_A'))        ."Artículo".'&nbsp;&nbsp;';
+      echo "<br>".radiobutton_tag('caregart[tipo]', 'S', !$valor1, array('id'=>'caregart_tipo_S'))."   Servicio";
   }
 ?></th>
   <th>&nbsp; &nbsp;&nbsp;</th>
@@ -377,14 +377,7 @@
 echo grid_tag($obj);
 ?>
 
-<?
-if ( ($caregart->getId()!='') and $caregart->getTipo()=='S') //ES UN SERVICIO
-    {
-      echo javascript_tag("
-                    javascript:disableAllObjetos(a=new Array('caregart_codart','caregart_desart'),true);
-        ");
-    }
-?>
+
 </form>
 
 <?php include_partial('edit_actions', array('caregart' => $caregart)) ?>
