@@ -814,7 +814,7 @@ function grid_tag_v2($obj,$objelim = array())
   // Inicio Grid //
   /////////////////
   $tag = ' <fieldset id="sf_fieldset_none" class="">
-  <legend>'.$cabeza.'</legend>
+  <h2>'.$cabeza.'</h2>
   <div class="form-row">
   <div class="gridout" style="width:'.$anchogrid.'px !important;" id="gridout">
   <table border="0" cellpad="0" cellspace="0" class="sf_admin_list" width="100%">
