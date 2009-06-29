@@ -166,8 +166,18 @@ class presnomregsalintindActions extends autopresnomregsalintindActions
 	      	H::BuscarDatos($sql,$arrfechafin);
 	      	$fechafin= $arrfechafin[0]['last_day'];
           	$fechafinfor=date("d/m/Y",strtotime($fechafin));
-
-   	        $fechaactual=date("Y-m-d");
+			$fechaactual=date("Y-m-d");
+			
+			$sqlfec="select max(fecnom) as fecmax from nphiscon where codemp='$this->codemp' and codnom='$this->nomina' and especial='N'";
+			H::BuscarDatos($sqlfec,$datafec);
+			if($datafec)
+				$fechamaxnphiscon = $datafec[0]['fecmax'];
+			else
+				$fechamaxnphiscon = date("Y-m-d");
+			
+			if(strtotime($fechamaxnphiscon)>strtotime($fechaactual))	
+				$fechaactual=$fechamaxnphiscon;			
+			
    	        if (strtotime($fechafin)>strtotime($fechaactual))
    	        {
   	           $continuar=false;
