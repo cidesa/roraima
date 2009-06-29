@@ -150,10 +150,79 @@ echo input_auto_complete_tag('nppresoc[codemp]', $nppresoc->getCodemp(),
 
   <?php $value = object_input_tag($nppresoc, 'getMesinicio', array (
   'size' => 3,
+  'align'=> 'left',
   'control_name' => 'nppresoc[mesinicio]',
 )); echo $value ? $value : '&nbsp;' ?>
 </div>
 </th>
+</tr>
+</table>
+<table>
+<tr>
+	<th>
+	  <?php echo label_for('nppresoc[codniv]', __($labels['nppresoc{codniv}']), 'class="required" style="width:80px" ') ?>
+	  <div class="content<?php if ($sf_request->hasError('nppresoc{codniv}')): ?> form-error<?php endif; ?>">
+	  <?php if ($sf_request->hasError('nppresoc{codniv}')): ?>
+	    <?php echo form_error('nppresoc{codniv}', array('class' => 'form-error-msg')) ?>
+	  <?php endif; ?>
+	
+	  <?php $value = object_input_tag($nppresoc, 'getCodniv', array (
+	  'size' => 20,
+	  'readonly'=>true,
+	  'control_name' => 'nppresoc[codniv]',
+	  'style' => "border-style:none;",
+	)); echo $value ? $value : '&nbsp;' ?>
+	</th>	
+	<th>
+		&nbsp;&nbsp;
+	</th>
+	<th>
+		<?php echo label_for('nppresoc[desniv]', __($labels['nppresoc{desniv}']), 'class="required" style="width:80px" ') ?>
+	  <div class="content<?php if ($sf_request->hasError('nppresoc{desniv}')): ?> form-error<?php endif; ?>">
+	  <?php if ($sf_request->hasError('nppresoc{desniv}')): ?>
+	    <?php echo form_error('nppresoc{desniv}', array('class' => 'form-error-msg')) ?>
+	  <?php endif; ?>
+	
+	  <?php $value = object_input_tag($nppresoc, 'getDesniv', array (
+	  'size' => 80,
+	  'readonly'=>true,
+	  'control_name' => 'nppresoc[desniv]',
+	  'style' => "border-style:none;",
+	)); echo $value ? $value : '&nbsp;' ?>
+	</th>
+</tr>
+<tr>
+	<th>
+	  <?php echo label_for('nppresoc[codcar]', __($labels['nppresoc{codcar}']), 'class="required" style="width:80px" ') ?>
+	  <div class="content<?php if ($sf_request->hasError('nppresoc{codcar}')): ?> form-error<?php endif; ?>">
+	  <?php if ($sf_request->hasError('nppresoc{codcar}')): ?>
+	    <?php echo form_error('nppresoc{codcar}', array('class' => 'form-error-msg')) ?>
+	  <?php endif; ?>
+	
+	  <?php $value = object_input_tag($nppresoc, 'getCodcar', array (
+	  'size' => 20,
+	  'readonly'=>true,
+	  'control_name' => 'nppresoc[codcar]',
+	  'style' => "border-style:none;",
+	)); echo $value ? $value : '&nbsp;' ?>
+	</th>	
+	<th>
+		&nbsp;&nbsp;
+	</th>
+	<th>
+		<?php echo label_for('nppresoc[nomcar]', __($labels['nppresoc{nomcar}']), 'class="required" style="width:80px" ') ?>
+	  <div class="content<?php if ($sf_request->hasError('nppresoc{nomcar}')): ?> form-error<?php endif; ?>">
+	  <?php if ($sf_request->hasError('nppresoc{nomcar}')): ?>
+	    <?php echo form_error('nppresoc{nomcar}', array('class' => 'form-error-msg')) ?>
+	  <?php endif; ?>
+	
+	  <?php $value = object_input_tag($nppresoc, 'getNomcar', array (
+	  'size' => 80,
+	  'readonly'=>true,
+	  'control_name' => 'nppresoc[nomcar]',
+	  'style' => "border-style:none;",
+	)); echo $value ? $value : '&nbsp;' ?>
+	</th>
 </tr>
 </table>
 </div>
