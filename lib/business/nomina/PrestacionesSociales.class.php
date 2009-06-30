@@ -937,7 +937,7 @@ End Function*/
       $x[$j]->setIntacum($x[$j]->getIntacu());
       $x[$j]->setAdeant($x[$j]->getMonant());
       $x[$j]->setAdepre($x[$j]->getMonadeint());
-      $x[$j]->setSaltot($x2[0]+$x2[3]);  //getTotintacu + getTotmonant
+      $x[$j]->setSaltot($x[$j]->getMondia());  //getTotintacu + getTotmonant
       $x[$j]->setRegpre('N');
      // $x[$j]->settipo('');
 
