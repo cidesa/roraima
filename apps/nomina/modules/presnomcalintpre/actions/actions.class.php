@@ -1368,14 +1368,7 @@ $this->Bitacora('Guardo');
     $col7->setAlineacionObjeto(Columna :: CENTRO);
     $col7->setAlineacionContenido(Columna :: CENTRO);
     $col7->setNombreCampo('saltot');
-    $col7->setHTML('type="text" size="10" maxlength="10"  readonly=true');
-
-    $col8 = new Columna('Total Diario');
-    $col8->setTipo(Columna :: MONTO);
-    $col8->setAlineacionObjeto(Columna :: CENTRO);
-    $col8->setAlineacionContenido(Columna :: CENTRO);
-    $col8->setNombreCampo('saltot');
-    $col8->setHTML('type="text" size="10" maxlength="10"  readonly=true');
+    $col7->setHTML('type="text" size="10" maxlength="10"  readonly=true');  
 
     $col9 = new Columna('Dias Art. 108');
     $col9->setTipo(Columna :: MONTO);
@@ -1475,7 +1468,7 @@ $this->Bitacora('Guardo');
     $opciones->addColumna($col5);
     $opciones->addColumna($col6);
     $opciones->addColumna($col7);
-    $opciones->addColumna($col8);
+    #$opciones->addColumna($col8);
     $opciones->addColumna($col9);
     $opciones->addColumna($col10);
     $opciones->addColumna($col11);
