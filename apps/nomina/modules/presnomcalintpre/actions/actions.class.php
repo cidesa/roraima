@@ -163,7 +163,9 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
 
     //VERIFICA EL REGIMEN PARA EL CALCULO N->nuevo V->viejo
     if ($rsnppresoc[0]["regpre"] == 'N') {
-      $this->total[0] = $rsnppresoc[0]["monpre"];
+    	$this->total=array();
+    	$monto = $rsnppresoc[0]["monpre"];
+        $this->total[] = $monto;
 
       // Se calcula el tiempo dentro de la empresa
       $sqlantpub = "SELECT
@@ -182,6 +184,8 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
       $this->diasservra = $rsnppresoc[0]["diaser"];
       $this->mesesservra = $rsnppresoc[0]["messer"];
       $this->anosservra = $rsnppresoc[0]["anoser"];
+	  $this->total=array();
+      $monto = $rsnppresoc[0]["monpre"];
       $this->total[1] = $rsnppresoc[0]["monpre"];
       $this->antacu = $rsnppresoc[0]["antacu"];
       $this->antpre = $rsnppresoc[0]["adepre"] + $rsnppresoc[0]["adeint"];
