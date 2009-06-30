@@ -30,7 +30,7 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
     	$sql="select 1 as orden,
 			SUM(A.DIAART108) as DIAS,
 			SUM(A.VALART108) AS MONTO,
-			(case when B.PERDES=B.PERDES then 'PRESTACIONES SOCIALES ' else 'PRESTACIONES SOCIALES '||B.PERDES||' - '||B.PERHAS end ) AS DESCRIPCION,
+			(case when B.PERDES=B.PERDES then 'PRESTACIONES DE ANTIGUEDAD ' else 'PRESTACIONES DE ANTIGUEDAD '||B.PERDES||' - '||B.PERHAS end ) AS DESCRIPCION,
 			B.CODPAR AS PARTIDA 
 			From NPIMPPRESOC A,NPDEFPRELIQ B 
 			where 
@@ -43,7 +43,7 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 			TO_CHAR(A.FECFIN,'YYYY')>=B.PERDES AND 
 			TO_CHAR(A.FECFIN,'YYYY')<=B.PERHAS 
 			GROUP BY 
-			(case when B.PERDES=B.PERDES then 'PRESTACIONES SOCIALES 'else 'PRESTACIONES SOCIALES '||B.PERDES||' - '||B.PERHAS end),B.CODPAR  
+			(case when B.PERDES=B.PERDES then 'PRESTACIONES DE ANTIGUEDAD 'else 'PRESTACIONES DE ANTIGUEDAD '||B.PERDES||' - '||B.PERHAS end),B.CODPAR  
 			HAVING
 			SUM(A.VALART108)<>0
 			
