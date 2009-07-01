@@ -178,7 +178,7 @@ FechaValidatorNowRet:
     param:
         compare: 'now'
         compare_error: Ingresos- Esta Fecha no puede ser mayor a la Fecha Actual
-        operator: '>'
+        operator: '<='
         date_error:  Fecha Inválida
 
 FechaValidatorNowRei:
@@ -186,7 +186,7 @@ FechaValidatorNowRei:
     param:
         compare: 'now'
         compare_error: Ingresos- Esta Fecha no puede ser mayor a la Fecha Actual
-        operator: '>'
+        operator: '<='
         date_error:  Fecha Inválida
 
 FechaValidatorNowAdmpub:
@@ -194,7 +194,7 @@ FechaValidatorNowAdmpub:
     param:
         compare: 'now'
         compare_error: Admon Publica- Esta Fecha no puede ser mayor a la Fecha Actual
-        operator: '>='
+        operator: '<'
         date_error:  Fecha Inválida
 
 
@@ -203,7 +203,7 @@ FechaValidatorNowIng:
   param:
     compare: 'now'
     compare_error: Ingresos- Esta Fecha no puede ser mayor a la Fecha Actual
-    operator: '>'
+    operator: '<='
     date_error:  Fecha Inválida
 
 FechaValidatorNowNac:
@@ -211,7 +211,7 @@ FechaValidatorNowNac:
     param:
         compare: 'now'
         compare_error: Datos Personales- Esta Fecha no puede ser mayor a la Fecha Actual
-        operator: '>='
+        operator: '<='
         date_error:  Fecha Inválida
 
 FechaValidatorNowCotsso:
@@ -219,6 +219,6 @@ FechaValidatorNowCotsso:
     param:
         compare: 'now'
         compare_error: Admon Publica- Esta Fecha no puede ser mayor a la Fecha Actual
-        operator: '>='
+        operator: '<'
         date_error:  Fecha Inválida
 
