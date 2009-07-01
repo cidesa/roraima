@@ -158,7 +158,7 @@ var fechacie = new Date(anocie,mescie,diacie);
    }
 
   if (concat>$('cidefniv_rupcat').value){
-    alert_('El N&uacute;mero de Rupruras para la Categor&iacute;a ya est&aacute; satisfecho');
+    alert_('El N&uacute;mero de Rupturas para la Categor&iacute;a ya est&aacute; satisfecho');
     var fila=concat-1+conpar;
     id="ax_"+fila+"_1";
     $(id).value='';
