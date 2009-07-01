@@ -972,8 +972,9 @@ public function configGrid($codemp="")
       }
       else
       {
-        $this->coderr=411;
-        return false;
+      	#solicitado por edgar
+        #$this->coderr=411;
+        #return false;
       }
 
       if($this->coderr!=-1){
