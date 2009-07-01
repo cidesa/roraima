@@ -18,7 +18,6 @@ class nomhojintActions extends autonomhojintActions
 
     if($this->getRequest()->getMethod() == sfRequest::POST){
      $this->nphojint = $this->getNphojintOrCreate();
-     $this->updateNphojintFromRequest();
 
 	 if($this->nphojint->getNomemp()=='' or $this->nphojint->getNomemp()==',')
 	 {
