@@ -699,7 +699,9 @@
 474:
   cod: 474
   msj: Nose pudo borrar el Registro
-    
+475:
+  cod: 475
+  msj: Debe introducir la Descripción del Cargo.
 ###############OBRAS################
 1000:
     cod: 1000
