@@ -267,7 +267,7 @@ class Nomina {
     $z = $grid3[0];
     $j = 0;
     while ($j < count($z)) {
-      if ($z[$j]->getCodcar() != "") {
+      if ($z[$j]->getCodcar() != "" && $z[$j]->getDescar() != "") {
         $z[$j]->setCodemp($codigo);
         $z[$j]->setStacar('D');
         $z[$j]->save();
@@ -290,7 +290,7 @@ class Nomina {
     $f = $grid4[0];
     $j = 0;
     while ($j < count($f)) {
-      if ($f[$j]->getNomemp() != "") {
+      if ($f[$j]->getNomemp() != "" && $f[$j]->getDescar() != "") {
         $f[$j]->setCodemp($codigo);
         $f[$j]->setStacar('F');
         $f[$j]->save();
