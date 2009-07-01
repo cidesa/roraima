@@ -575,6 +575,24 @@ public function executeAjax()
 
   public function setVars()
   {
+    $this->mascararif='##############';
+    $tienemascararif="";
+  	$varemp = $this->getUser()->getAttribute('configemp');
+  	$this->corcodpro = '';
+  	if(is_array($varemp))
+	if(array_key_exists('aplicacion',$varemp))
+		if(array_key_exists('compras',$varemp['aplicacion']))
+			if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
+				if(array_key_exists('almregpro',$varemp['aplicacion']['compras']['modulos']))
+				{
+					if(array_key_exists('corcodpro',$varemp['aplicacion']['compras']['modulos']['almregpro']))
+						$this->corcodpro = $varemp['aplicacion']['compras']['modulos']['almregpro']['corcodpro'];
+					if(array_key_exists('mascararif',$varemp['aplicacion']['compras']['modulos']['almregpro']))
+						$tienemascararif = $varemp['aplicacion']['compras']['modulos']['almregpro']['mascararif'];
+				}
+
+
+     if ($tienemascararif=="S") $this->mascararif='#-########-#';
       $this->mascara = Herramientas::ObtenerFormato('Contaba','Forcta');
       $this->loncta=strlen($this->mascara);
       $this->c=null;

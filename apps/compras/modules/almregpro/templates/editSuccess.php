@@ -17,7 +17,7 @@ array()) ?></h1>
 
 <div id="sf_admin_content">
 <?php include_partial('almregpro/edit_messages', array('caprovee' => $caprovee, 'labels' => $labels)) ?>
-<?php include_partial('almregpro/edit_form', array('caprovee' => $caprovee, 'encontrado' => $encontrado, 'mascara' => $mascara, 'loncta' => $loncta, 'labels' => $labels, 'c' => $c, 'ent' => $ent)) ?>
+<?php include_partial('almregpro/edit_form', array('caprovee' => $caprovee, 'encontrado' => $encontrado, 'mascara' => $mascara, 'loncta' => $loncta, 'labels' => $labels, 'c' => $c, 'ent' => $ent, 'mascararif' => $mascararif)) ?>
 </div>
 
 <div id="sf_admin_footer">
