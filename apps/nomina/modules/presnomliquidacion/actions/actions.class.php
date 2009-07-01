@@ -162,7 +162,7 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 			ORDER BY orden,DESCRIPCION DESC";
 #print "<pre>".$sql;
 	      if (H::BuscarDatos($sql,$arr))
-	      {
+	      {	      	
 	        $i=0;
 			$j=0;
 			$cont=0;
@@ -571,6 +571,34 @@ public function configGrid($codemp="")
 					}
 					
 					
+				}else{
+					$sql1 = "select * from NPAsiCarEmp where CodEmp='$codemp' and fecasi=(Select max(fecasi) from npasicaremp where codemp='$codemp')";
+					if (H::BuscarDatos($sql1,$rs1))
+			    	{
+			    		$categoria=$rs1[0]["codcat"];
+				   		$codnom=$rs1[0]["codnom"];
+						$nomemp=$rs1[0]["nomemp"];					
+						if($nomemp==''){
+							$sql11 = "select nomemp from nphojint where CodEmp='$codemp'";
+							if (H::BuscarDatos($sql11,$rs11))
+					       		$nomemp=$rs11[0]["nomemp"];
+							}
+					
+					
+					}else{
+						$sql1 = "select * from NPAsiEmpCont where CodEmp='$codemp' and Status='A'";
+						if (H::BuscarDatos($sql1,$rs1))
+			    		{
+			    			$categoria='';
+				   			$codnom=$rs1[0]["codnom"];
+							$nomemp='';					
+							if($nomemp==''){
+								$sql11 = "select nomemp from nphojint where CodEmp='$codemp'";
+								if (H::BuscarDatos($sql11,$rs11))
+					       			$nomemp=$rs11[0]["nomemp"];
+								}					
+						}
+					}
 				}
 				/**VERIFICAMOS SI EXISTEN PERSONAS CON LIQUIDACION CALCULADA*/
 				$sql2="Select * from NPLIQUIDACION_DET where CodEmp='$codigo'";
