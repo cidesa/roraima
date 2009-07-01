@@ -18,10 +18,14 @@ class nomhojintActions extends autonomhojintActions
 
     if($this->getRequest()->getMethod() == sfRequest::POST){
      $this->nphojint = $this->getNphojintOrCreate();
-
+      $this->configGrid2();
+      $this->configGrid3();
+      $grid3=Herramientas::CargarDatosGrid($this,$this->obj2);
+      $grid4=Herramientas::CargarDatosGrid($this,$this->obj3);
 	 if($this->nphojint->getNomemp()=='' or $this->nphojint->getNomemp()==',')
 	 {
 	 	$this->coderr=473;
+	 	return false;
 	 }
 
      $nphojint = $this->getRequestParameter('nphojint');
@@ -29,17 +33,50 @@ class nomhojintActions extends autonomhojintActions
       if  ($nphojint['codtippag']=="01")
       {
       	if ($nphojint['codban']=="" or $nphojint['numcue']=="" or $nphojint['tipcue']=="")
+      	{
       	 $this->coderr=449;
+      	 return false;
+      	}
+
       }
 
-      if($this->coderr!=-1){
+      if (count($grid3[0])>0)
+      {
+        $i=0;
+        $x=$grid3[0];
+        while ($i<count($x))
+        {
+          if ($x[$i]->getCodcar()=="" || $x[$i]->getDescar()=="")
+          {
+          	$this->coderr=475;
+          	return false;
+          	break;
+          }
+        $i++;
+        }
+      }
+
+      if (count($grid4[0])>0)
+      {
+        $l=0;
+        $y=$grid4[0];
+        while ($l<count($y))
+        {
+          if ($y[$l]->getNomemp()=="" || $y[$l]->getDescar()=="")
+          {
+          	$this->coderr=475;
+          	return false;
+          	break;
+          }
+        $l++;
+        }
+      }
+
+           if($this->coderr!=-1){
         return false;
       } else return true;
 
     }else return true;
-
-
-
   }
 
 
@@ -908,7 +945,7 @@ $this->Bitacora('Guardo');
     $col1->setAlineacionContenido(Columna::CENTRO);
     $col1->setNombreCampo('codcar');
     $col1->setCatalogo('npcargos','sf_admin_edit_form',array('codcar' => 1,'nomcar' => 2, 'suecar' => 5, 'comcar' => 6),'Npcargos_Nomhojint');
-    $col1->setAjax('nphojint',2,2);
+    $col1->setJScript('onBlur="javascript:event.keyCode=13; ajaxexplab(event,this.id);"');
 
     $col2 = new Columna('Descripción del Cargo');
     $col2->setTipo(Columna::TEXTO);
@@ -1252,10 +1289,27 @@ $this->Bitacora('Guardo');
   public function executeAjax()
   {
     $cajtexmos=$this->getRequestParameter('cajtexmos');
+    $cajtexcom=$this->getRequestParameter('cajtexcom');
+    $javascript="";
   if ($this->getRequestParameter('ajax')=='1')
   {
     $edad=Nomina::obtenerEdad($this->getRequestParameter('codigo'));
       $output = '[["'.$cajtexmos.'","'.$edad.'",""]]';
+  }else if ($this->getRequestParameter('ajax')=='2')
+  {
+  	$r= new Criteria();
+  	$r->add(NpcargosPeer::CODCAR,$this->getRequestParameter('codigo'));
+  	$datos= NpcargosPeer::doSelectOne($r);
+  	if ($datos)
+  	{
+      $dato=$datos->getNomcar();
+      $dato2=number_format($datos->getSuecar(),2,',','.');
+      $dato3=$datos->getComcar();
+  	}else
+  	{  $dato=""; $dato2="0,00"; $dato3="0,00";
+  		$javascript="alert('El cargo no existe'); $('$cajtexcom').value=''; ";
+  	}
+  	$output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$this->getRequestParameter('suecar').'","'.$dato2.'",""],["'.$this->getRequestParameter('comcar').'","'.$dato3.'",""],["javascript","'.$javascript.'",""]]';
   }
 
   $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');

@@ -1435,6 +1435,30 @@ function nivel(e)
   }
   }
 
+   function ajaxexplab(e,id)
+ {
+   var aux = id.split("_");
+    var name=aux[0];
+    var fil=parseInt(aux[1]);
+    var col=parseInt(aux[2]);
+
+    var coldes=col+1;
+    var colsuec=col+4;
+    var colcom=col+5;
+    var descrip=name+"_"+fil+"_"+coldes;
+    var suecar=name+"_"+fil+"_"+colsuec;
+    var comcar=name+"_"+fil+"_"+colcom;
+    var cod=$(id).value;
+
+    if (e.keyCode==13 || e.keyCode==9)
+    {
+    if ($(id).value!='')
+    {
+      new Ajax.Request(getUrlModuloAjax(), {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=2&cajtexmos='+descrip+'&cajtexcom='+id+'&suecar='+suecar+'&comcar='+comcar+'&codigo='+cod})
+    }
+  }
+  }
+
  function activar_check(id)
 {
 
