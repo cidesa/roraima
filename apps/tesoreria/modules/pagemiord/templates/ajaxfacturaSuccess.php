@@ -37,10 +37,13 @@ else
 	$('divFac').show();
 	$('botonfac').hide();
 	var totalfac="bx"+"_0_9";
-   	$(totalfac).value=$('opordpag_monord').value;
    	actualizarsaldos_b();
    	var am=totalregistros('ex',1,10);
     var cm=totalregistros('bx',2,30);
+    if (cm==0)
+    {
+      $(totalfac).value=$('opordpag_monord').value;
+    }
     var filas=parseInt($('numgridret').value);
    	var bm=totalregistros('dx',2,filas);
     if (($('id').value=="" && am==0 && cm==0) || ($('id').value!='' && bm==0 && cm==0))
