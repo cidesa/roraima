@@ -3,7 +3,7 @@
  * This file is part of the symfony package.
  * (c) 2004-2006 Fabien Potencier <fabien.potencier@symfony-project.com>
  * (c) 2004-2006 Sean Kerr.
- * 
+ *
  * For the full copyright and license information, please  view the LICENSE
  * file that was distributed with this source code.
  */
@@ -31,11 +31,12 @@ class CidesaDateNow extends sfValidator
    */
   public function execute(&$value, &$error)
   {
-  	$culture = $this->getContext()->getUser()->getCulture();  
-  
+  	$culture = $this->getContext()->getUser()->getCulture();
+
     // Validate the given date
-    
-    $value1 = $value; 
+
+    //$value1 = $value;
+    $value1 = $this->getValidDate($value, $culture);
     if (!$value1)
     {
       $error = $this->getParameterHolder()->get('date_error');
@@ -51,16 +52,16 @@ class CidesaDateNow extends sfValidator
     {
       $compareValue = $this->getContext()->getRequest()->getParameter($compareDate);
       $operator = $this->getParameterHolder()->get('operator');
-      
+
       //This is added
-      if($compareDate == "now") 
-          $value2 = date('d/m/Y');
+      if($compareDate == "now")
+         $value2 = $this->getValidDate(date('d/m/Y'),$culture);
       else
       //Untill here
           $value2 = $this->getValidDate($compareValue,$culture);
-
       // If the check date is valid, compare it. Otherwise  ignore the comparison
-      
+
+
       if ($value2)
       {
         $valid = false;
@@ -74,9 +75,14 @@ class CidesaDateNow extends sfValidator
             break;
           case '==':
             $valid = $value1 == $value2;
-            break;          
+            break;
           case '<=':
+
+//echo $value1."<br>";
+//echo $value2."<br>";
             $valid = $value1 <= $value2;
+
+            //exit();
             break;
           case '<':
             $valid = $value1 <  $value2;
@@ -93,6 +99,8 @@ class CidesaDateNow extends sfValidator
           return false;
         }
       }
+
+
     }
 
     return true;
@@ -100,16 +108,16 @@ class CidesaDateNow extends sfValidator
 
   /**
    * Converts the given date into a Unix timestamp.
-   * 
+   *
    * Returns null if the date is invalid
-   * 
+   *
    * @param $value    Date to convert
    * @param $culture  Language culture to use
    */
  protected function getValidDate($value, $culture)
   {
-    $result = sfI18N::getDateForCulture($value, $culture);      
-    list($d, $m, $y) = $result;    
+    $result = sfI18N::getDateForCulture($value, $culture);
+    list($d, $m, $y) = $result;
 
     // Make sure the date is a valid gregorian calendar date also
     if ($result === null || !checkdate($m, $d, $y))
