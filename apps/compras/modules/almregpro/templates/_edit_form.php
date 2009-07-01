@@ -29,7 +29,7 @@
 
   <?php $value = object_input_tag($caprovee, 'getCodpro', array (
   'size' => 15,
-  'maxlength' => 15,
+  'maxlength' => 10,
   'readonly'  =>  $caprovee->getId()!='' ? true : false ,
   'control_name' => 'caprovee[codpro]',
   'onBlur'  => "javascript: valor=this.value; if ($('caprovee_codpro').value!='') valor=valor.pad(8, '0',0);document.getElementById('caprovee_codpro').value=valor;document.getElementById('caprovee_codpro').disabled=false;validarExistencia(this.id);",
@@ -102,7 +102,7 @@ if ($caprovee->getNitpro()=='J')  {
     'maxlength' => 12,
     'readonly'  =>  $caprovee->getId()!='' ? true : false ,
     'control_name' => 'caprovee[rifpro]',
-    'onKeyPress' => "javascript:return dFilter (event.keyCode, this,'$mascara2')",
+    'onKeyPress' => "javascript:return dFilter (event.keyCode, this,'$mascararif')",
     //'onBlur'  => "javascript: validarRif(this.id)",
   )); echo $value ? $value : '&nbsp;' ?>
     </div>
