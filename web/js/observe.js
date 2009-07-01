@@ -21,7 +21,7 @@
     });
 
 
-    if(arreglo && inicio) {
+    if(arreglo & inicio) {
       try{arreglo.first().focus();}catch(e){}
       inicio=false;
     }
@@ -57,19 +57,19 @@
           {
             arreglo[indice+i].focus();
             try{arreglo[indice+i].select();}catch(e){}
-            salir=true;				
+            salir=true;
           }else {
             i++;
           }
         }catch(e){
-		  if(arreglo[indice])	
+		  if(arreglo[indice])
 		  if(!arreglo[indice].disabled && !arreglo[indice].readOnly)
 		  {
 		  	arreglo[indice].blur();
 	        arreglo[indice].focus();
-	        //try{arreglo[indice].select();}catch(e){}	        
+	        //try{arreglo[indice].select();}catch(e){}
 		  }
-		  salir=true;	          
+		  salir=true;
         }
       }
       /*
