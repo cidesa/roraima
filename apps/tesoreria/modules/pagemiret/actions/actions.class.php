@@ -332,14 +332,14 @@ $this->Bitacora('Guardo');
     	$emichepag = "";
     }
 
-    $SQL="SELECT 1 as check, A.NUMORD as numord,A.FECEMI as fecemi,B.CODPRE as codpre,B.MONRET as monret, 9 as id FROM OPORDPAG A,OPRETORD B".$sqltabla." WHERE A.NUMORD = B.NUMORD AND B.CODTIP = '".$codigo."' AND B.NUMRET = 'NOASIGNA' ".$sqlche.$sqlfecdes.$sqlfechas;
+    $SQL="SELECT 1 as check, A.NUMORD as numord,A.FECEMI as fecemi,B.CODPRE as codpre,B.MONRET as monret, nomben as nomben, 9 as id FROM OPORDPAG A,OPRETORD B".$sqltabla." WHERE A.NUMORD = B.NUMORD AND B.CODTIP = '".$codigo."' AND B.NUMRET = 'NOASIGNA' ".$sqlche.$sqlfecdes.$sqlfechas ." order by a.fecemi, a.numord";
 
     $resp = Herramientas::BuscarDatos($SQL,&$all);
     $opciones = new OpcionesGrid();
     $opciones->setEliminar(false);
     $opciones->setTabla('Opretord');
-    $opciones->setAnchoGrid(700);
-    $opciones->setAncho(850);
+    $opciones->setAnchoGrid(750);
+    $opciones->setAncho(800);
     $opciones->setTitulo('');
     $opciones->setFilas(0);
     $opciones->setHTMLTotalFilas(' ');
@@ -358,7 +358,7 @@ $this->Bitacora('Guardo');
     $col2->setAlineacionObjeto(Columna::IZQUIERDA);
     $col2->setAlineacionContenido(Columna::IZQUIERDA);
     $col2->setNombreCampo('numord');
-    $col2->setHTML('type="text" size="15" readonly=true');
+    $col2->setHTML('type="text" size="10" readonly=true');
 
     $col3 = new Columna('Fecha');
   	$col3->setTipo(Columna::FECHA);
@@ -368,29 +368,38 @@ $this->Bitacora('Guardo');
 	$col3->setAlineacionContenido(Columna::CENTRO);
 	$col3->setHTML('type="text" size="10" readonly=true');
 
-    $col4 = new Columna('Código Presupuestario');
+    $col4 = new Columna('Beneficiario');
     $col4->setTipo(Columna::TEXTO);
     $col4->setEsGrabable(true);
-    $col4->setAlineacionObjeto(Columna::CENTRO);
-    $col4->setAlineacionContenido(Columna::CENTRO);
-    $col4->setNombreCampo('codpre');
-    $col4->setHTML('type="text" size="30" readonly=true');
+    $col4->setAlineacionObjeto(Columna::IZQUIERDA);
+    $col4->setAlineacionContenido(Columna::IZQUIERDA);
+    $col4->setNombreCampo('nomben');
+    $col4->setHTML('type="text" size="25" readonly=true');
 
-    $col5 = new Columna('Monto Retención');
-    $col5->setTipo(Columna::MONTO);
+    $col5 = new Columna('Código Presupuestario');
+    $col5->setTipo(Columna::TEXTO);
     $col5->setEsGrabable(true);
-    $col5->setAlineacionContenido(Columna::IZQUIERDA);
-    $col5->setAlineacionObjeto(Columna::IZQUIERDA);
-    $col5->setNombreCampo('monret');
-    $col5->setEsNumerico(true);
-    $col5->setHTML('type="text" size="15" readonly=true');
-    $col5->setEsTotal(true,'opordpag_monord');
+    $col5->setAlineacionObjeto(Columna::CENTRO);
+    $col5->setAlineacionContenido(Columna::CENTRO);
+    $col5->setNombreCampo('codpre');
+    $col5->setHTML('type="text" size="25" readonly=true');
+
+    $col6 = new Columna('Monto Retención');
+    $col6->setTipo(Columna::MONTO);
+    $col6->setEsGrabable(true);
+    $col6->setAlineacionContenido(Columna::IZQUIERDA);
+    $col6->setAlineacionObjeto(Columna::IZQUIERDA);
+    $col6->setNombreCampo('monret');
+    $col6->setEsNumerico(true);
+    $col6->setHTML('type="text" size="10" readonly=true');
+    $col6->setEsTotal(true,'opordpag_monord');
 
     $opciones->addColumna($col1);
     $opciones->addColumna($col2);
     $opciones->addColumna($col3);
     $opciones->addColumna($col4);
     $opciones->addColumna($col5);
+    $opciones->addColumna($col6);
 
     $this->obj = $opciones->getConfig($all);
    }

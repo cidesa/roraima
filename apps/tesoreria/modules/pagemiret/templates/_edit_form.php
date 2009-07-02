@@ -390,7 +390,7 @@ function totalmarcadas(id)
   var fil=aux[1];
   var col=parseInt(aux[2]);
 
-  var colmonto=col+4;
+  var colmonto=col+5;
   var montoret=name+"_"+fil+"_"+colmonto;
 
   var montotot=toFloat('opordpag_monord');
