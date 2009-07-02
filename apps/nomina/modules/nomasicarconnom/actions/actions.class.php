@@ -155,14 +155,20 @@ class nomasicarconnomActions extends autonomasicarconnomActions
         if($npcargos){
           $dato=$npcargos->getNomcar();
           $cod = $npcargos->getCodcar();
+		  $codtipcar=$npcargos->getCodtip();
         }else{
           $dato=Constantes::REGVACIO;
           $cod = '';
+		  $codtipcar='';
         }
-		if($this->getUser()->getAttribute('codcar','','nomasicarconnom')==$this->getRequestParameter('codigo'))
-			$js.="$('gridcatded').show()";
-		else
-			$js.="$('gridcatded').hide()";	
+		if($this->getUser()->getAttribute('codcar','','nomasicarconnom')!='')
+		{
+			if($this->getUser()->getAttribute('codcar','','nomasicarconnom')==$codtipcar)
+				$js.="$('gridcatded').show()";
+			else
+				$js.="$('gridcatded').hide()";		
+		}
+		
 
         $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$cajtexcom.'","'.$cod.'",""],["javascript","'.$js.'",""]]';
         $this->configGrid($this->getRequestParameter('codemp'),$this->getRequestParameter('codnom'),$this->getRequestParameter('codigo'),$this->getRequestParameter('frecuen'));
@@ -356,6 +362,7 @@ public function executeAutocomplete()
 
  public function executeEdit()
   {
+  	$codtipcar='';
   	$varemp = $this->getUser()->getAttribute('configemp');
 	  if(is_array($varemp))
 	    if(array_key_exists('aplicacion',$varemp))
@@ -366,7 +373,12 @@ public function executeAutocomplete()
 			 	if(array_key_exists('varforma',$varemp['aplicacion']['nomina']['modulos']['nomasicarconnom']))
 				   $this->getUser()->setAttribute('varforma',$varemp['aplicacion']['nomina']['modulos']['nomasicarconnom']['varforma'],'nomasicarconnom');									   
 				if(array_key_exists('codcar',$varemp['aplicacion']['nomina']['modulos']['nomasicarconnom']))		 		 
-					$this->getUser()->setAttribute('codcar',$varemp['aplicacion']['nomina']['modulos']['nomasicarconnom']['codcar'],'nomasicarconnom');	  		      									   
+				{
+					#LA VARIABLE QUE SE TRAE DEL YML ES EL CODTICAR
+					$this->getUser()->setAttribute('codcar',$varemp['aplicacion']['nomina']['modulos']['nomasicarconnom']['codcar'],'nomasicarconnom');	  		      									   					
+					$codtipcar=$varemp['aplicacion']['nomina']['modulos']['nomasicarconnom']['codcar'];
+				}
+						
 			 }
   
     $this->npasicaremp = $this->getNpasicarempOrCreate();
@@ -375,10 +387,42 @@ public function executeAutocomplete()
     $this->formato= Herramientas::getMascaraCategoria();
     $this->lonfor=strlen($this->formato);
     $this->tipos=self::CargarTipoGasto();
+	if($this->npasicaremp->getCodcar())	  
+	  {
+	  	$c = new Criteria();
+		$c->add(NpcargosPeer::CODCAR,$this->npasicaremp->getCodcar());
+		$perr = NpcargosPeer::doSelectOne($c);
+		if($perr)
+		{
+			if($perr->getCodtip()==$codtipcar)
+			{
+				$this->getUser()->setAttribute('codtipcar',$codtipcar,'nomasicarconnom'); 	
+			}else{
+				$this->getUser()->setAttribute('codtipcar','','nomasicarconnom');
+			}
+		}	  	
+	  }
 
     if ($this->getRequest()->getMethod() == sfRequest::POST)
     {
       $this->updateNpasicarempFromRequest();
+
+	  /*if($this->npasicaremp->getCodcar())	  
+	  {
+	  	$c = new Criteria();
+		$c->add(NpcargosPeer::CODCAR,$this->npasicaremp->getCodcar());
+		$perr = NpcargosPeer::doSelectOne($c);
+
+		if($perr)
+		{
+			if($perr->getCodtip()==$codtipcar)
+			{
+				$this->getUser()->setAttribute('codtipcar',$codtipcar,'nomasicarconnom'); 	
+			}else{
+				$this->getUser()->setAttribute('codtipcar','','nomasicarconnom');
+			}
+		}	  	
+	  }*/
 
       $this->saveNpasicaremp($this->npasicaremp);
 
