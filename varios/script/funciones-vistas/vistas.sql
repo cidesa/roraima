@@ -388,6 +388,7 @@ ORDER BY A.CODEMP,A.DESDE)
 
 
 
+
 --VISTA NPLIQUIDACION
 create or replace view npliquidacion as
 (select
