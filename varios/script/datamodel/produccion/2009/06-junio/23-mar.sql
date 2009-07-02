@@ -17,7 +17,7 @@ CREATE TABLE  nppernom(
    fecini date,
    fecfin date,
    id integer NOT NULL DEFAULT nextval('nppernom_seq'::regclass)
-
+);
 
 --Bienes
 alter table BNUBIBIE
