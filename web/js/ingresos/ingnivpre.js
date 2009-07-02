@@ -2,11 +2,14 @@
 function actualizarformato(id)//Actualiza el formato de los niveles presupuestarios
 {
    $('cidefniv_forpre').value='';
-   var fil=0;
+   var totfil = objs_filas_a.size();
+  // alert(totfil);
    var fila = true;
+   var fil=0;
    if ($F(obtenerColumnaAnterior(id))!='')
    {
-     while (fila==true)
+     //while (fila==true)
+     while (fil <= totfil)
      {
         var aux="ax_"+fil+"_2";
         if (($(aux) && ($(aux).value!='')))
@@ -27,7 +30,7 @@ function actualizarformato(id)//Actualiza el formato de los niveles presupuestar
             $('cidefniv_forpre').value=rup;
           }
         }else{
-          fila=false;
+          //fila=false;
         }
      fil++;
      }
