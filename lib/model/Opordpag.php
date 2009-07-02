@@ -63,6 +63,7 @@ class Opordpag extends BaseOpordpag
   protected $totmontislr="0,00";
   protected $datosnomina="";
   protected $observe="";
+  protected $referencias2 = '';
 
    public function afterHydrate()
    {
@@ -364,7 +365,7 @@ class Opordpag extends BaseOpordpag
 	  return $si;
 	}
 
-	public function getReferencias()
+	public function getReferencias2()
 	{
 	  $referencias="";
 	  $sql="select refere as refere from cpimpcau where refcau='".self::getNumord()."'";

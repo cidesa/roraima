@@ -274,7 +274,7 @@ class CatalogoWeb extends BaseCatalogoWeb {
 
   public function Cpprecom_Pagemiord() {
     $this->c = new Criteria();
-    $this->c->add(CpprecomPeer :: MONPRC, CpprecomPeer :: SALCAU, Criteria :: NOT_EQUAL);
+    $this->c->add(CpprecomPeer :: MONPRC, CpprecomPeer :: SALCAU, Criteria :: GREATHER_THAN);
     $this->c->add(CpprecomPeer :: STAPRC, 'N', Criteria :: NOT_EQUAL);
     //    $this->c->addAscendingOrderByColumn(CpprecomPeer::REFPRC);
 
@@ -287,8 +287,11 @@ class CatalogoWeb extends BaseCatalogoWeb {
   }
 
   public function Cpcompro_Pagemiord() {
+
+  	$this->sql = "cpcompro.moncom > ((Select Sum(MonCau) as moncau from cpimpcom where refcom=cpcompro.refcom)+(Select Sum(monaju) as monaju from cpimpcom where refcom=cpcompro.refcom))";
+
     $this->c = new Criteria();
-    $this->c->add(CpcomproPeer :: MONCOM, CpcomproPeer :: SALCAU, Criteria :: NOT_EQUAL);
+    $this->c->add(CpcomproPeer :: MONCOM, $this->sql, Criteria :: CUSTOM);  //$this->c->add(CpcomproPeer :: MONCOM, CpcomproPeer :: SALCAU, Criteria :: NOT_EQUAL);
 
     $a= new Criteria();
     $dato=CadefartPeer::doSelectOne($a);
@@ -301,7 +304,7 @@ class CatalogoWeb extends BaseCatalogoWeb {
     }
 
     $this->c->add(CpcomproPeer :: STACOM, 'N', Criteria :: NOT_EQUAL);
-    $this->c->addJoin(CpcomproPeer::CEDRIF, CaproveePeer :: RIFPRO);
+    $this->c->addJoin(CpcomproPeer::CEDRIF,  OpbenefiPeer::CEDRIF, Criteria :: LEFT_JOIN);
     //   $this->c->addAscendingOrderByColumn(CpcomproPeer::REFCOM);
 
     $this->columnas = array (
