@@ -46,9 +46,9 @@ class CpcausadMapBuilder {
 
 		$tMap->addColumn('TIPCOM', 'Tipcom', 'string', CreoleTypes::VARCHAR, false, 4);
 
-		$tMap->addColumn('DESCAU', 'Descau', 'string', CreoleTypes::VARCHAR, false, 250);
+		$tMap->addColumn('DESCAU', 'Descau', 'string', CreoleTypes::VARCHAR, false, 1000);
 
-		$tMap->addColumn('DESANU', 'Desanu', 'string', CreoleTypes::VARCHAR, false, 100);
+		$tMap->addColumn('DESANU', 'Desanu', 'string', CreoleTypes::VARCHAR, false, 1000);
 
 		$tMap->addColumn('MONCAU', 'Moncau', 'double', CreoleTypes::NUMERIC, false, 14);
 
