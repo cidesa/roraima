@@ -16,10 +16,10 @@ propel:
       size: 4
     desadi:
       type: VARCHAR
-      size: 250
+      size: 1000
     desanu:
       type: VARCHAR
-      size: 250
+      size: 1000
     adidis:
       type: VARCHAR
       size: 1
@@ -70,10 +70,10 @@ propel:
       required: true
     desaju:
       type: VARCHAR
-      size: 500
+      size: 1000
     desanu:
       type: VARCHAR
-      size: 250
+      size: 1000
     totaju:
       type: NUMERIC
       size: 14
@@ -212,10 +212,10 @@ propel:
       size: 4
     descom:
       type: VARCHAR
-      size: 250
+      size: 1000
     desanu:
       type: VARCHAR
-      size: 100
+      size: 1000
     moncom:
       type: NUMERIC
       size: 14
@@ -888,10 +888,10 @@ propel:
       size: 4
     despag:
       type: VARCHAR
-      size: 250
+      size: 1000
     desanu:
       type: VARCHAR
-      size: 100
+      size: 1000
     monpag:
       type: NUMERIC
       size: 14
@@ -932,10 +932,10 @@ propel:
       size: 4
     desprc:
       type: VARCHAR
-      size: 250
+      size: 1000
     desanu:
       type: VARCHAR
-      size: 100
+      size: 1000
     monprc:
       type: NUMERIC
       size: 14
@@ -989,10 +989,10 @@ propel:
       required: true
     destra:
       type: VARCHAR
-      size: 250
+      size: 1000
     desanu:
       type: VARCHAR
-      size: 250
+      size: 1000
     tottra:
       type: NUMERIC
       size: 14
@@ -1147,10 +1147,10 @@ propel:
       size: 4
     descau:
       type: VARCHAR
-      size: 250
+      size: 1000
     desanu:
       type: VARCHAR
-      size: 100
+      size: 1000
     moncau:
       type: NUMERIC
       size: 14
@@ -1246,10 +1246,10 @@ propel:
       size: 4
     desadi:
       type: VARCHAR
-      size: 250
+      size: 1000
     desanu:
       type: VARCHAR
-      size: 250
+      size: 1000
     fecanu:
       type: DATE
     totadi:
@@ -1398,10 +1398,10 @@ propel:
       required: true
     destra:
       type: VARCHAR
-      size: 250
+      size: 1000
     desanu:
       type: VARCHAR
-      size: 250
+      size: 1000
     tottra:
       type: NUMERIC
       size: 14

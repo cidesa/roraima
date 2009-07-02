@@ -42,9 +42,9 @@ class CpprecomMapBuilder {
 
 		$tMap->addColumn('ANOPRC', 'Anoprc', 'string', CreoleTypes::VARCHAR, false, 4);
 
-		$tMap->addColumn('DESPRC', 'Desprc', 'string', CreoleTypes::VARCHAR, false, 250);
+		$tMap->addColumn('DESPRC', 'Desprc', 'string', CreoleTypes::VARCHAR, false, 1000);
 
-		$tMap->addColumn('DESANU', 'Desanu', 'string', CreoleTypes::VARCHAR, false, 100);
+		$tMap->addColumn('DESANU', 'Desanu', 'string', CreoleTypes::VARCHAR, false, 1000);
 
 		$tMap->addColumn('MONPRC', 'Monprc', 'double', CreoleTypes::NUMERIC, false, 14);
 

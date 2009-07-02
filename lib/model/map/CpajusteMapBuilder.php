@@ -44,9 +44,9 @@ class CpajusteMapBuilder {
 
 		$tMap->addColumn('REFERE', 'Refere', 'string', CreoleTypes::VARCHAR, true, 8);
 
-		$tMap->addColumn('DESAJU', 'Desaju', 'string', CreoleTypes::VARCHAR, false, 500);
+		$tMap->addColumn('DESAJU', 'Desaju', 'string', CreoleTypes::VARCHAR, false, 1000);
 
-		$tMap->addColumn('DESANU', 'Desanu', 'string', CreoleTypes::VARCHAR, false, 250);
+		$tMap->addColumn('DESANU', 'Desanu', 'string', CreoleTypes::VARCHAR, false, 1000);
 
 		$tMap->addColumn('TOTAJU', 'Totaju', 'double', CreoleTypes::NUMERIC, false, 14);
 
