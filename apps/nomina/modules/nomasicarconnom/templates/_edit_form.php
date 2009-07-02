@@ -148,8 +148,8 @@
 )); echo $value ? $value : '&nbsp;' ?>
  </div>
 </div>
-<?php }else{ ?>
-<?php if($sf_user->getAttribute('codcar','','nomasicarconnom')==$npasicaremp->getCodcar() && $sf_user->getAttribute('codcar','','nomasicarconnom')!='') {?>	
+<?php }else{  ?>
+<?php if($sf_user->getAttribute('codcar','','nomasicarconnom')==$sf_user->getAttribute('codtipcar','','nomasicarconnom') && $sf_user->getAttribute('codcar','','nomasicarconnom')!='') {?>	
 	<div class="form-row" id="gridcatded">
 <?php }else{?>		
  	<div class="form-row" id="gridcatded" style="display:none">
