@@ -620,7 +620,7 @@ class Cheques
 
           $DescOp=$x[$j]->getDesorden();
           $DesCtaDeb = "PAG.ORD. ". $x[$j]->getNumord();
-          $DesCtaCre = $x[$j]->getNomben();
+          $DesCtaCre = $x[$j]->getNombeneficiario();
           $NumOrden = $x[$j]->getNumord();
           $TipCausad = $x[$j]->getTipcau();
 
@@ -780,7 +780,7 @@ class Cheques
             $DescOp = $x[$j]->getDesorden();
 
           $DesCtaDeb=$DescOp;
-          $DesCtaCre = $x[$j]->getNomben();
+          $DesCtaCre = $x[$j]->getNombeneficiario();
           $NumOrden = $x[$j]->getNumord();
           $TipCausad = $x[$j]->getTipcau();
           //El status ahora solo se pondr� en "I" cuando el monto total de los cheques

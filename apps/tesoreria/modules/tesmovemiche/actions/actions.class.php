@@ -726,7 +726,7 @@ $this->Bitacora('Guardo');
   $col3 = new Columna('Beneficiario');
   $col3->setTipo(Columna::TEXTO);
   $col3->setEsGrabable(true);
-  $col3->setNombreCampo('nomben');
+  $col3->setNombreCampo('nombeneficiario');
   $col3->setAlineacionObjeto(Columna::IZQUIERDA);
   $col3->setAlineacionContenido(Columna::IZQUIERDA);
   $col3->setHTML('type="text" size=45" readonly=true');
