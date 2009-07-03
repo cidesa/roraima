@@ -6809,4 +6809,37 @@ propel:
     id:
       type: INTEGER
       required: true
-      autoIncrement: true            
+      autoIncrement: true
+  npjuzgados:
+    #_attributes:
+      #idMethod: native
+    codjuz:
+      type: VARCHAR
+      size: 4
+      required: true
+      ##primaryKey: true
+    desjuz:
+      type: VARCHAR
+      size: 100
+      required: true
+    perconjuz:
+      type: VARCHAR
+      size: 100
+      required: true  
+    carperjuz:
+      type: VARCHAR
+      size: 100
+      required: true
+    dirjuz:
+      type: VARCHAR
+      size: 200
+      required: true
+      ##primaryKey: true      
+    teljuz:
+      type: VARCHAR
+      size: 100           
+      required: true   
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true      
