@@ -53,6 +53,6 @@ Validator_dirjuz:
     class: sfStringValidator
     param:
         min:       2
-        min_error: La descripción no puede tener menos de 2 caracteres
+        min_error: La Dirección no puede tener menos de 2 caracteres
         max:       200
-        max_error: La descripción no puede pasar mas de 200 caracteres
+        max_error: La Dirección no puede pasar mas de 200 caracteres
