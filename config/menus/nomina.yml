@@ -55,7 +55,8 @@ nomina:
       Definición de Conceptos para Dias Adicionales:                 NomDefDiaAdicNom
       Conceptos para el ISLR:                                        NomDefEspISLR      
       Embargos:
-        Registros de Juzgados:                                       NomDefJuz
+        Registro de Juzgados:                                        NomDefJuz
+        Registro de Beneficiarios por Embargos:                      NomDefBenEmb       
       Definición de Retenciones y Aportes:
         Retenciones y Aportes:                                       NomDefAportes
         Conceptos para Aportes:                                      NomDefConAportes
