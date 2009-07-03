@@ -286,12 +286,14 @@ class CatalogoWeb extends BaseCatalogoWeb {
     );
   }
 
-  public function Cpcompro_Pagemiord() {
+  public function Cpcompro_Pagemiord()
+  {
 
   	$this->sql = "cpcompro.moncom > ((Select Sum(MonCau) as moncau from cpimpcom where refcom=cpcompro.refcom)+(Select Sum(monaju) as monaju from cpimpcom where refcom=cpcompro.refcom))";
 
     $this->c = new Criteria();
     $this->c->add(CpcomproPeer :: MONCOM, $this->sql, Criteria :: CUSTOM);  //$this->c->add(CpcomproPeer :: MONCOM, CpcomproPeer :: SALCAU, Criteria :: NOT_EQUAL);
+
 
     $a= new Criteria();
     $dato=CadefartPeer::doSelectOne($a);
@@ -302,9 +304,8 @@ class CatalogoWeb extends BaseCatalogoWeb {
     		$this->c->add(CpcomproPeer :: APRCOM, 'S');
     	}
     }
-
+    $this->sql2="";
     $this->c->add(CpcomproPeer :: STACOM, 'N', Criteria :: NOT_EQUAL);
-    $this->c->addJoin(CpcomproPeer::CEDRIF,  OpbenefiPeer::CEDRIF, Criteria :: LEFT_JOIN);
     //   $this->c->addAscendingOrderByColumn(CpcomproPeer::REFCOM);
 
     $this->columnas = array (
@@ -313,8 +314,8 @@ class CatalogoWeb extends BaseCatalogoWeb {
       CpcomproPeer :: FECCOM => 'Fecha',
       CpcomproPeer :: DESCOM => 'Descripción',
       CpcomproPeer :: CEDRIF => 'Ced/Rif Beneficiario',
-      CaproveePeer :: NOMPRO => 'Nombre Beneficiario',
     );
+
   }
 
   /****************************************************************************************/
@@ -357,6 +358,7 @@ class CatalogoWeb extends BaseCatalogoWeb {
 
   public function Cotizaciones() {
     $this->c = new Criteria();
+    $this->c->add(CaproveePeer::ESTPRO,'A');
     $this->columnas = array (
       CaproveePeer :: RIFPRO => 'Código',
       CaproveePeer :: NOMPRO => 'Descripción',
@@ -1097,6 +1099,7 @@ class CatalogoWeb extends BaseCatalogoWeb {
   public function Caordcom_Bieregactmued() {
     $this->c = new Criteria;
     $this->c->addJoin(CaordcomPeer :: CODPRO, CaproveePeer :: CODPRO);
+    $this->c->add(CaproveePeer::ESTPRO,'A');
     //  $this->c->addAscendingOrderByColumn(CaordcomPeer::ORDCOM);
     $this->columnas = array (
       CaordcomPeer :: ORDCOM => 'Codigo',
@@ -1131,6 +1134,7 @@ class CatalogoWeb extends BaseCatalogoWeb {
 
   public function Caprovee_Bieregactmued() {
     $this->c = new Criteria();
+    $this->c->add(CaproveePeer::ESTPRO,'A');
     //   $this->c->addAscendingOrderByColumn(CaproveePeer::CODPRO);
     $this->columnas = array (
       CaproveePeer :: CODPRO => 'Código',
@@ -1510,6 +1514,7 @@ class CatalogoWeb extends BaseCatalogoWeb {
 
   public function Caprovee_Bieregactinmd() {
     $this->c = new Criteria();
+    $this->c->add(CaproveePeer::ESTPRO,'A');
     //  $this->c->addAscendingOrderByColumn(CaproveePeer::CODPRO);
     $this->columnas = array (
       CaproveePeer :: CODPRO => 'Código',
@@ -2751,6 +2756,9 @@ $this->c= new Criteria();
     $this->c->addSelectColumn("'' as REQCOM");
     $this->c->addSelectColumn("'' as TIPFIN");
     $this->c->addSelectColumn("'' as TIPREQ");
+    $this->c->addSelectColumn("'' as APRREQ");
+    $this->c->addSelectColumn("'' as USUREQ");
+    $this->c->addSelectColumn("'' as FECREQ");
     $this->c->addSelectColumn("'' as ID");
 
     $this->c->addJoin(CasolartPeer :: REQART, CaartsolPeer :: REQART);
@@ -3234,6 +3242,7 @@ $this->c= new Criteria();
     );
   }
 
+
   //////////////////////////////////////////// ////////////////////////////////////////////
 
   ////////////////// CONTABILIDAD FINANCIERA ///////////////////
@@ -3401,7 +3410,6 @@ $this->c= new Criteria();
   public function Caprovee_Oycregcon() {
     $this->c = new Criteria();
     $this->c->addJoin(CaproveePeer :: CODPRO, OcproespPeer :: CODPRO);
-
     $this->columnas = array (
       CaproveePeer :: CODPRO => 'Codigo',
       CaproveePeer :: NOMPRO => 'Nombre'
@@ -3733,7 +3741,7 @@ public function Tsmovlib_tesmovdeglib2()
   {
 
     $this->c= new Criteria();
-
+    $this->c->add(CaproveePeer::ESTPRO,'A');
     $this->columnas = array (CaproveePeer::RIFPRO => 'Rif', CaproveePeer::NOMPRO => 'Nombre', CaproveePeer::CODPRO => 'Código');
 
 
@@ -3965,6 +3973,7 @@ public function Tsmovlib_tesmovdeglib2()
 
     public function Liemppar_caprovee() {
     $this->c = new Criteria();
+    $this->c->add(CaproveePeer::ESTPRO,'A');
     $this->c->addAscendingOrderByColumn(CaproveePeer :: CODPRO);
 
     $this->columnas = array (
@@ -3977,6 +3986,7 @@ public function Tsmovlib_tesmovdeglib2()
   {
     $this->c = new Criteria();
     $this->c->add(LiempofePeer::CODLIC, $param[0]);
+    $this->c->add(CaproveePeer::ESTPRO,'A');
     $this->c->addJoin(CaproveePeer::CODPRO, LiempofePeer::CODPRO);
     $this->columnas = array (
       CaproveePeer :: CODPRO => 'Cod. Empresa',
@@ -4827,11 +4837,10 @@ public function Tsmovlib_tesmovdeglib2()
 
   public function Caprovee_Almordcom($param= array())
   {
-
-
     if (count($param)==0)
     {
       $this->c = new Criteria();
+      $this->c->add(CaproveePeer::ESTPRO,'A');
 
       $this->columnas = array (
       CaproveePeer::RIFPRO => 'Rif',
@@ -4843,29 +4852,31 @@ public function Tsmovlib_tesmovdeglib2()
     {
         $sql = "select a.refsol, a.codpro, b.priori from cacotiza a inner join cadetcot b on a.refcot=b.refcot where b.priori=1 and a.refsol='".$param[0]."'
                 group by a.refsol, a.codpro, b.priori";
-        if (Herramientas::BuscarDatos($sql,&$result))
+      if (Herramientas::BuscarDatos($sql,&$result))
       {
            $this->c = new Criteria();
            $this->c->add(CacotizaPeer::REFSOL,$param[0]);
            $this->c->add(CadetcotPeer::PRIORI,1);
+           $this->c->add(CaproveePeer::ESTPRO,'A');
            $this->c->addJoin(CacotizaPeer::REFCOT,CadetcotPeer::REFCOT);
            $this->c->addJoin(CaproveePeer::CODPRO,CacotizaPeer::CODPRO);
-        $this->c->setDistinct();
+           $this->c->setDistinct();
            $this->columnas = array (
-        CaproveePeer::RIFPRO => 'Rif',
-        CaproveePeer::NOMPRO => 'Descripción',
-        CaproveePeer::CODPRO => 'Codigo',
+   	    	 CaproveePeer::RIFPRO => 'Rif',
+        	 CaproveePeer::NOMPRO => 'Descripción',
+        	 CaproveePeer::CODPRO => 'Codigo',
         );
 
       }
       else
       {
         $this->c = new Criteria();
+		$this->c->add(CaproveePeer::ESTPRO,'A');
 
           $this->columnas = array (
-        CaproveePeer::RIFPRO => 'Rif',
-        CaproveePeer::NOMPRO => 'Descripción',
-        CaproveePeer::CODPRO => 'Codigo',
+        	CaproveePeer::RIFPRO => 'Rif',
+        	CaproveePeer::NOMPRO => 'Descripción',
+        	CaproveePeer::CODPRO => 'Codigo',
         );
       }
     }
@@ -5478,6 +5489,21 @@ A.CODREDE"
     );
   }
 
+    public function Optipret_Paggenretord($params) {
+      $this->c = new Criteria();
+      /*if ($params[0]!="")
+      {
+        $this->c->add(CaproretPeer::CODPRO, $params[0]);
+        $this->c->addJoin(OptipretPeer::CODTIP, CaproretPeer::CODRET);
+      }*/
+
+      $this->columnas = array (
+        OptipretPeer :: CODTIP => 'Código',
+        OptipretPeer :: DESTIP => 'Descripción'
+    );
+  }
+
+
   public function Almregpro_Carecaud($params = array ())
   {
     $this->c= new Criteria();
@@ -5500,7 +5526,6 @@ A.CODREDE"
         CatiprecPeer::DESTIPREC => 'Descripción'
     );
   }
-
   public function Almregpro_Caramart($params = array ())
   {
     $this->c= new Criteria();
@@ -5544,6 +5569,24 @@ A.CODREDE"
     $this->columnas = array (
       NpasiempcontPeer :: CODEMP => 'Codigo',
       NpasiempcontPeer :: NOMEMP => 'Nombre'
+    );
+  }
+
+  public function Almregpro_Cabanco(){
+    $this->c = new Criteria();
+	$this->c->addAscendingOrderByColumn(CabancoPeer :: CODBAN);
+    $this->columnas = array (
+      CabancoPeer :: CODBAN => 'Codigo',
+      CabancoPeer :: DESBAN => 'Nombre/Banco'
+    );
+  }
+
+  public function Almregpro_Tstipcue(){
+    $this->c = new Criteria();
+	$this->c->addAscendingOrderByColumn(TstipcuePeer :: CODTIP);
+    $this->columnas = array (
+      TstipcuePeer :: CODTIP => 'Codigo',
+      TstipcuePeer :: DESTIP => 'Descripcion'
     );
   }
 
