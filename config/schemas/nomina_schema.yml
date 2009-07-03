@@ -6843,3 +6843,33 @@ propel:
       type: INTEGER
       required: true
       autoIncrement: true      
+  npbenefiemb:
+    #_attributes:
+      #idMethod: native
+    cedrif:
+      type: VARCHAR
+      size: 16
+      required: true
+      ##primaryKey: true
+    nomben:
+      type: VARCHAR
+      size: 200
+      required: true
+    fecnacben:
+      type: DATE
+      required: true  
+    fecreg:
+      type: DATE
+      required: true
+    dirben:
+      type: VARCHAR
+      size: 200
+      required: true
+    telben:
+      type: VARCHAR
+      size: 100           
+      required: true   
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true            
