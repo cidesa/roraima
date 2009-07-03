@@ -64,7 +64,7 @@ class Opordpag extends BaseOpordpag
   protected $datosnomina="";
   protected $observe="";
   protected $referencias2 = '';
-
+  protected $nombeneficiario="";
    public function afterHydrate()
    {
    	  Herramientas::obtenerFormatoCategoria(&$formatopar,&$iniciopartida);
@@ -74,6 +74,7 @@ class Opordpag extends BaseOpordpag
    	  $this->partidas=$partid;
    	  $this->unidad=Herramientas::getX('CODEMP','Opdefemp','Unitri','001');
       $this->montotal= (self::getMonord()-self::getMondes()-self::getMonpag()-self::getMonret()- Cheques::ObtenerAjuste(self::getNumord()) );
+      $this->nombeneficiario=str_replace("'", "", self::getNomben());
    }
 
 

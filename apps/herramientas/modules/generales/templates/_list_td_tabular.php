@@ -5,6 +5,7 @@
 
 <?php
   $i = 0;
+  $car="'";
   foreach($columnas as $c => $nomcol)
   {
   $dat='$par="var a=new Array(';
@@ -18,7 +19,7 @@
 
       if($tipocol==5 || $tipocol==14) $info = '$infoget = $registro->get'.$keyobj.'(true);';
       elseif($tipocol==10) $info = '$infoget = $registro->get'.$keyobj.'("d/m/Y");';
-      else $info = '$infoget = $registro->get'.$keyobj.'();';
+      else $info = '$infoget = str_replace($car,"",$registro->get'.$keyobj.'());';
 
       eval($info);
       //$dat .= "'".$infoget."'";
