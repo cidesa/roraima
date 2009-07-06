@@ -4857,7 +4857,7 @@ public function Tsmovlib_tesmovdeglib2()
            $this->c = new Criteria();
            $this->c->add(CacotizaPeer::REFSOL,$param[0]);
            $this->c->add(CadetcotPeer::PRIORI,1);
-           $this->c->add(CaproveePeer::ESTPRO,'A');
+ //          $this->c->add(CaproveePeer::ESTPRO,'A');
            $this->c->addJoin(CacotizaPeer::REFCOT,CadetcotPeer::REFCOT);
            $this->c->addJoin(CaproveePeer::CODPRO,CacotizaPeer::CODPRO);
            $this->c->setDistinct();
@@ -4871,7 +4871,7 @@ public function Tsmovlib_tesmovdeglib2()
       else
       {
         $this->c = new Criteria();
-		$this->c->add(CaproveePeer::ESTPRO,'A');
+//		$this->c->add(CaproveePeer::ESTPRO,'A');
 
           $this->columnas = array (
         	CaproveePeer::RIFPRO => 'Rif',
