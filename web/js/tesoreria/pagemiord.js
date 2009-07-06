@@ -2112,11 +2112,11 @@
  {
    var tofac=toFloat('totfac');
     var totcau=toFloat('opordpag_monord');
-    if (tofac>totcau)
+   /* if (tofac>totcau)
     {
     alert('El Monto Total de la factura no puede ser Mayor al Monto Total a Causar');
     $(id).value='0,00';
-   }
+   }*/
 
  }
 
