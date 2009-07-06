@@ -2796,7 +2796,7 @@ class OrdendePago
         $mont=$monorden;
         $monto2=$mont;
       }else { $msjuno='El Código Contable asociado a Cuenta de Gastos por Pagar no es válido';  return true;}
-    }else { $msjuno='El Código Contable asociado al Beneficiario no posee Relacion para Asientos de Ordenes'; return true;}
+    }else { $msjuno='El Código Contable asociado al Beneficiario en la Orden de Pago no posee Relacion para Asientos de Ordenes'; return true;}
 
     $cuentas=$codigocuenta2.'_'.$codigocuenta;
     $tipos=$tipo2.'_'.$tipo;
