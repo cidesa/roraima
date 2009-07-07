@@ -293,7 +293,7 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
                     ["nppresoc_diatra","' . $this->diastrab . '",""],["nppresoc_mestra","' . $this->mesestrab . '",""],["nppresoc_anotra","' . $this->anostrab . '",""],
                     ["control","' . $this->control . '",""],["totfil","' . $this->tfil . '",""],["totfil2","' . $this->tfil2 . '",""],["totfil3","' . $this->tfil3 . '",""],
                     ["totcapitalact","' . H::FormatoMonto($this->capitalact) . '",""],["nppresoc_codniv","'.$codniv.'",""],["nppresoc_desniv","'.$desniv.'",""],
-					["nppresoc_codcar","'.$codcar.'",""],["nppresoc_nomcar","'.$nomcar.'",""]]';
+					["nppresoc_codcar","'.$codcar.'",""],["nppresoc_nomcar","'.$nomcar.'",""],["totintacu","' . H::FormatoMonto($this->intacu) . '",""]]';
 
 
         $this->getResponse()->setHttpHeader("X-JSON", '(' . $output . ')');
@@ -352,7 +352,8 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
               if ($this->getRequestParameter('codemp') != "" and $this->getRequestParameter('feccor') != "" and $this->getRequestParameter('capita') != "")
               {
                 $this->configGrid($this->getRequestParameter('codemp'), $this->getRequestParameter('feccor'), $this->getRequestParameter('capita'), $salario,$anno);
-                $output = '[["diaserrn","'.$this->antdias.'",""],["messerrn","'.$this->antmeses.'",""],["anoserrn","'.$this->antannos.'",""],["totcapitalact","'.H::Formatomonto($this->capitalact).'",""]]';
+				
+                $output = '[["diaserrn","'.$this->antdias.'",""],["messerrn","'.$this->antmeses.'",""],["anoserrn","'.$this->antannos.'",""],["totcapitalact","'.H::Formatomonto($this->capitalact).'",""],["totintacu","'.H::Formatomonto($this->intacu).'",""]]';
 				$this->getUser()->setAttribute('calculado','SI');
                 $this->getResponse()->setHttpHeader("X-JSON", '(' . $output . ')');
               }
@@ -704,6 +705,12 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
         $this->antmeses  = $result[$this->tfil2-1]['antmeses'];
         $this->antdias   = $result[$this->tfil2-1]['antdias'];
         $this->capitalact= $result[$this->tfil2-1]['capitalact'];
+		foreach($result as $r)
+		{
+			if($r['intacu']!=0)
+			$this->intacu= $r['intacu'];
+		}
+		
 
         // Copio los dos ultimo registro
         $this->grid_1 = $result[$this->tfil2-1];
@@ -1309,8 +1316,12 @@ $this->Bitacora('Guardo');
         //$this->antannos  = $per[$this->tfil-1]['antannos'];
         //$this->antmeses  = $per[$this->tfil-1]['antmeses'];
         //$this->antdias   = $per[$this->tfil-1]['antdias'];
-        $this->capitalact = $per[$this->tfil-1]->getAntacum();
-
+		$this->capitalact = $per[$this->tfil-1]->getAntacum();
+		foreach($per as $r)
+		{
+			if($r->getIntacum()!=0)
+			$this->intacu = $r->getIntacum();	
+		}
         // Copio los dos ultimo registro
         $this->grid_1 = $per[$this->tfil-1];
         $this->grid_2 = $per[$this->tfil-2];
