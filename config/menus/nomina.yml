@@ -56,7 +56,8 @@ nomina:
       Conceptos para el ISLR:                                        NomDefEspISLR      
       Embargos:
         Registro de Juzgados:                                        NomDefJuz
-        Registro de Beneficiarios por Embargos:                      NomDefBenEmb       
+        Registro de Beneficiarios por Embargos:                      NomDefBenEmb 
+        Registro de Embargos:                                        NomRegEmb      
       Definición de Retenciones y Aportes:
         Retenciones y Aportes:                                       NomDefAportes
         Conceptos para Aportes:                                      NomDefConAportes
