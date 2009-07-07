@@ -18,19 +18,37 @@ class nomhojintActions extends autonomhojintActions
 
     if($this->getRequest()->getMethod() == sfRequest::POST){
      $this->nphojint = $this->getNphojintOrCreate();
-	 $this->updateNphojintFromRequest();
       $this->configGrid2();
       $this->configGrid3();
       $grid3=Herramientas::CargarDatosGrid($this,$this->obj2);
-      $grid4=Herramientas::CargarDatosGrid($this,$this->obj3);
-	 if($this->nphojint->getNomemp()=='' or $this->nphojint->getNomemp()==',')
-	 {
-	 	$this->coderr=473;
-	 	return false;
-	 }
+      $grid4=Herramientas::CargarDatosGrid($this,$this->obj3); 
 
      $nphojint = $this->getRequestParameter('nphojint');
-
+     $nomemp='';
+     if (isset($nphojint['prinom']) && isset($nphojint['prinom']))
+	 {
+		$segnom='';
+		$segape='';
+		$nombres='';
+		$apellidos='';
+		if (isset($nphojint['segnom']))
+	    {
+	      $segnom=$nphojint['segnom'];
+	    }
+		if (isset($nphojint['segape']))
+	    {
+	      $segape=$nphojint['segape'];
+	    }
+		$nombres=implode(' ',array(trim($nphojint['prinom']),trim($segnom)));
+		$apellidos=implode(' ',array(trim($nphojint['priape']),trim($segape)));
+		$nomemp=(implode(', ',array($apellidos,$nombres)));
+	 }
+      if($nomemp=='' or $nomemp==',')
+	  { 
+	 	$this->coderr=473;
+	 	return false;
+	  }
+	 
       if  ($nphojint['codtippag']=="01")
       {
       	if ($nphojint['codban']=="" or $nphojint['numcue']=="" or $nphojint['tipcue']=="")
