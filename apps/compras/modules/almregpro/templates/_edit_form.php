@@ -29,7 +29,7 @@
 
   <?php $value = object_input_tag($caprovee, 'getCodpro', array (
   'size' => 15,
-  'maxlength' => 10,
+  'maxlength' => 15,
   'readonly'  =>  $caprovee->getId()!='' ? true : false ,
   'control_name' => 'caprovee[codpro]',
   'onBlur'  => "javascript: valor=this.value; if ($('caprovee_codpro').value!='') valor=valor.pad(8, '0',0);document.getElementById('caprovee_codpro').value=valor;document.getElementById('caprovee_codpro').disabled=false;validarExistencia(this.id);",
