@@ -224,6 +224,7 @@ public function executeAjax()
   {
    //Nomina::salvarpresnomreghisantpre($npantpre);
    $npantpre->save();
+   return -1;
 
   }
 
