@@ -418,15 +418,23 @@ class Compras {
    * @return void
    */
 
-  public static function salvarPrioridadCotizaciones($grid, $reqart, $actsolegr, & $error) {
+  public static function salvarPrioridadCotizaciones($grid, $reqart, $actsolegr, $casolart, & $error) {
     $gridnuevo = array ();
     $gridnuevo2 = array ();
     $gridnuevorec = array ();
-    $x = $grid[0];
-    $j = 0;
-    while ($j < count($x)) {
-      $x[$j]->save();
-      $j++;
+    if ($casolart->getPorcostart()=='1')
+    {
+      self::asignarPrioridadCostArt($reqart);
+    }else if ($casolart->getPormoncot()=='1')
+    {
+      self::asignarPrioridadMonCot($reqart);
+    }else {
+	    $x = $grid[0];
+	    $j = 0;
+	    while ($j < count($x)) {
+	      $x[$j]->save();
+	      $j++;
+	    }
     }
 
     $error = -1;
@@ -2311,6 +2319,83 @@ class Compras {
     else
     {
       return -1;
+    }
+  }
+
+  public static function asignarPrioridadCostArt($reqart)
+  {
+     $sql="select a.refcot,a.codart,a.canord,a.costo,a.totdet,b.codpro,
+        (case when a.costo>0 then a.costo else 1000000000000000000000000 end) as orden,
+        (case when a.costo=0 then null else (select count(x.*)+1
+         from cadetcot x,cacotiza y
+         where y.refsol=b.refsol
+         and x.codart=a.codart
+         and x.refcot=y.refcot
+         and y.codpro<>b.codpro
+         and (case when x.costo>0 then x.costo else 1000000000000000000000000 end)<
+             (case when a.costo>0 then a.costo else 1000000000000000000000000 end)) end) as priori
+        from cadetcot a,cacotiza b
+        where b.refsol='".$reqart ."'
+        and a.refcot=b.refcot
+        order by a.codart,(case when a.costo>0 then a.costo else 1000000000000000000000000 end)";
+
+       Herramientas::BuscarDatos($sql,&$arr);
+       $con=0;
+       $priori=0;
+       if ($arr)
+       {
+           $codartori=$arr[0]['codart'];
+           while ($con<count($arr))
+           {
+            if ($codartori==$arr[$con]['codart'])
+            {
+              $priori++;
+            }
+            else
+            {
+            $priori=1;
+            }
+            $c=new Criteria();
+            $c->add(CadetcotPeer::CODART,$arr[$con]['codart']);
+            $c->add(CadetcotPeer::REFCOT,$arr[$con]['refcot']);
+            $detcot=CadetcotPeer::doSelectOne($c);
+            if ($detcot)
+            {
+                $detcot->setPriori($priori);
+                $detcot->save();
+            }
+            $codartori=$arr[$con]['codart'];
+            $con++;
+              }//while
+       }//if ($arr)
+  }
+
+  public static function asignarPrioridadMonCot($reqart)
+  {
+      $c = new Criteria();
+      $c->add(CacotizaPeer :: REFSOL, $reqart);
+      $c->addAscendingOrderByColumn(CacotizaPeer::MONCOT);
+      $result = CacotizaPeer :: doSelect($c);
+      if ($result)
+      {
+      	$priori=1;
+      	foreach ($result as $datos)
+      	{
+	        $r= new Criteria();
+	        $r->add(CadetcotPeer::REFCOT,$datos->getRefcot());
+	        $c->addAscendingOrderByColumn(CadetcotPeer::TOTDET);
+	        $data= CadetcotPeer::doSelect($r);
+	        if ($data)
+	        {
+	          foreach ($data as $obj)
+	          {
+	          	$obj->setPriori($priori);
+	          	$obj->setJustifica(null);
+	          	$obj->save();
+	          }
+	        }
+        $priori=$priori+1;
+      }
     }
   }
 }

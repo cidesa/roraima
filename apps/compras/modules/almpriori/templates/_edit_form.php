@@ -15,6 +15,7 @@
 <div class="form-row">
 
 <fieldset id="sf_fieldset_none" class="">
+<legend><h2><?php echo _('Datos de la Solicitud de Egresos') ?></h2></legend>
 <div class="form-row">
 <table>
 <tr>
@@ -60,12 +61,69 @@
   'readonly' => true,
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
-<br>
+ </div>
+</fieldset>
 
+<fieldset id="sf_fieldset_none" class="">
+<legend><h2><?php echo _('Asignación de Prioridad General') ?></h2></legend>
+<div class="form-row">
+  <table>
+    <tr>
+   <th>
+<?php echo label_for('casolart[porcostart]', __($labels['casolart{porcostart}']), 'class="required"  Style="width:150px"') ?>
+	  <div class="content<?php if ($sf_request->hasError('casolart{porcostart}')): ?> form-error<?php endif; ?>">
+	  <?php if ($sf_request->hasError('casolart{porcostart}')): ?>
+	    <?php echo form_error('casolart{porcostart}', array('class' => 'form-error-msg')) ?>
+	  <?php endif; ?>
+
+	<?php $value = object_checkbox_tag($casolart, 'getPorcostart', array (
+	  'control_name' => 'casolart[porcostart]',
+	  'onClick' => 'desmarcar(1)'
+	)); echo $value ? $value : '&nbsp;' ?>
+   </th>
+   <th>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   </th>
+      <th>
+<?php echo label_for('casolart[pormoncot]', __($labels['casolart{pormoncot}']), 'class="required"  Style="width:150px"') ?>
+	  <div class="content<?php if ($sf_request->hasError('casolart{pormoncot}')): ?> form-error<?php endif; ?>">
+	  <?php if ($sf_request->hasError('casolart{pormoncot}')): ?>
+	    <?php echo form_error('casolart{pormoncot}', array('class' => 'form-error-msg')) ?>
+	  <?php endif; ?>
+
+	<?php $value = object_checkbox_tag($casolart, 'getPormoncot', array (
+	  'control_name' => 'casolart[pormoncot]',
+	  'onClick' => 'desmarcar(2)'
+	)); echo $value ? $value : '&nbsp;' ?>
+   </th>
+   <th>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   </th>
+      <th>
+	   <?php echo label_for('casolart[actsolegr]', __($labels['casolart{actsolegr}']), 'class="required"  Style="width:150px"') ?>
+	  <div class="content<?php if ($sf_request->hasError('casolart{actsolegr}')): ?> form-error<?php endif; ?>">
+	  <?php if ($sf_request->hasError('casolart{actsolegr}')): ?>
+	    <?php echo form_error('casolart{actsolegr}', array('class' => 'form-error-msg')) ?>
+	  <?php endif; ?>
+
+	<?php $value = object_checkbox_tag($casolart, 'getActsolegr', array (
+	  'control_name' => 'casolart[actsolegr]',
+	)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+   </th>
+
+    </tr>
+  </table>
+ </div>
+</fieldset>
+
+<fieldset id="sf_fieldset_none" class="">
+<legend><h2><?php echo _('Asignación de Prioridad Detallada') ?></h2></legend>
+<div class="form-row">
   <table>
    <tr>
    <th>
-     <?php echo label_for('casolart[articulo]', __($labels['casolart{articulo}']), 'class="required" ') ?>
+     <?php echo label_for('casolart[articulo]', __($labels['casolart{articulo}']), 'class="required"  style="width: 200px"') ?>
   <div class="content<?php if ($sf_request->hasError('casolart{articulo}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('casolart{articulo}')): ?>
     <?php echo form_error('casolart{articulo}', array('class' => 'form-error-msg')) ?>
@@ -82,45 +140,43 @@
      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
    </th>
    <th>
-   <?php echo label_for('casolart[actsolegr]', __($labels['casolart{actsolegr}']), 'class="required"  Style="width:100px"') ?>
-  <div class="content<?php if ($sf_request->hasError('casolart{actsolegr}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('casolart{actsolegr}')): ?>
-    <?php echo form_error('casolart{actsolegr}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-<?php $value = object_checkbox_tag($casolart, 'getActsolegr', array (
-  'control_name' => 'casolart[actsolegr]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-   </th>
-     <th>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-   </th>
-   <th>
+   <ul class="sf_admin_actions">
+     <li class="float-rigth">
          <?php echo submit_to_remote('genpri', 'Mostrar todos los Artículos', array(
          'url'      => 'almpriori/ajax',
 		 'update'   => 'divCombo',
          'script'   => true,
          'with'   => "'reqart='+document.getElementById('casolart_reqart').value"
-    )) ?>
+      ),array('class' => "sf_admin_action_list")) ?>
+    </li>
+   </ul>
    </th>
    </tr>
   </table>
-
- </div>
-</fieldset>
-
 <br>
 
 <div id="divGrid">
 </div>
 
- </div>
+</div>
+</fieldset>
+
+</div>
 </fieldset>
 
 <?php include_partial('edit_actions', array('casolart' => $casolart)) ?>
 
 </form>
+
+<ul class="sf_admin_actions">
+      <li class="float-left"><?php if ($casolart->getId() && $elimina=='S'): ?>
+<?php echo button_to(__('delete'), 'almpriori/delete?id='.$casolart->getId(), array (
+  'post' => true,
+  'confirm' => __('Are you sure?'),
+  'class' => 'sf_admin_action_delete',
+)) ?><?php endif; ?>
+</li>
+  </ul>
 
 <script language="JavaScript" type="text/javascript">
 
@@ -197,6 +253,13 @@
 		      }
 		 }
 	}
+
+  function desmarcar(valor)
+  {
+    if (valor==1)
+  	$('casolart_pormoncot').checked=false;
+  	else $('casolart_porcostart').checked=false;
+  }
 
 
 </script>

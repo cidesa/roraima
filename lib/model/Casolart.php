@@ -15,6 +15,9 @@ class Casolart extends BaseCasolart
   protected $modifico= '';
   protected $check= '';
   protected $obj = array();
+  protected $etiqueta="";
+  protected $porcostart='';
+  protected $pormoncot='';
 
   public function getMonreq($val=false)
   {
@@ -44,6 +47,32 @@ class Casolart extends BaseCasolart
   public function getMondes($val=false)
   {
 	return parent::getMondes(true);
+  }
+
+  public function getEtiqueta()
+  {
+  	if (self::getStareq()=='A')
+  	{
+  	  $d= new Criteria();
+  	  $d->add(CpprecomPeer::REFPRC,self::getReqart());
+  	  $resul= CpprecomPeer::doSelectOne($d);
+  	  if ($resul)
+  	  {
+  	  	$eti="SOLICITUD APROBADA";
+  	  }else
+  	  {
+  	  	$eti="SOLICITUD NO APROBADA";
+  	  }
+  	}
+  	else if (self::getStareq()=='N')
+  	{
+  	  $eti="SOLICITUD ANULADA";
+  	}
+  	else
+  	{
+  	 $eti="";
+  	}
+  	return $eti;
   }
 
 }
