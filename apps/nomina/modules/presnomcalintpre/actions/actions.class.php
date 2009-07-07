@@ -251,17 +251,30 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
 		$c = new Criteria();
 		$c->add(NphojintPeer::CODEMP,$this->getRequestParameter('codemp'));
 		$per = NphojintPeer::doSelectOne($c);
-		$codniv = $per->getCodNiv();
+		if($per)
+			$codniv = $per->getCodNiv();
+		else
+			$codniv = "";	
 		$c = new Criteria();
 		$c->add(NpasicarempPeer::CODEMP,$this->getRequestParameter('codemp'));
 		$c->add(NpasicarempPeer::STATUS,'V');
 		$per = NpasicarempPeer::doSelectOne($c);
-		$codcar = $per->getCodcar();
-		$nomcar = $per->getNomcar();
+		if($per)
+		{
+			$codcar = $per->getCodcar();
+			$nomcar = $per->getNomcar();	
+		}else
+		{
+			$codcar = "";
+			$nomcar = "";	
+		}		
 		$c = new Criteria();
 		$c->add(NpestorgPeer::CODNIV,$codniv);
 		$per = NpestorgPeer::doSelectOne($c);
-		$desniv = $per->getDesniv();
+		if($per)
+			$desniv = $per->getDesniv();
+		else	
+			$desniv = "";
 		
         $destipcon  = $this->tipcon; //NptipconPeer::getDestipcon($this->tipcon);
         $feccalpres = adodb_date("d/m/Y", strtotime($this->feccalculo));
@@ -815,7 +828,7 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
       $col12->setAlineacionContenido(Columna :: CENTRO);
       $col12->setNombreCampo('intacu'); //intacum
       $col12->setHTML('type="text" size="10" maxlength="20"  readonly=true');
-      $col12->setEsTotal(true, 'totintacu');
+      #$col12->setEsTotal(true, 'totintacu');
       $col12->setEsGrabable('true');
 
       $col13 = new Columna('Adelanto Anticipo');
@@ -1433,7 +1446,7 @@ $this->Bitacora('Guardo');
     $col17->setAlineacionObjeto(Columna :: CENTRO);
     $col17->setAlineacionContenido(Columna :: CENTRO);
     $col17->setNombreCampo('intacum');
-    $col17->setEsTotal(true, 'totintacu');
+    #$col17->setEsTotal(true, 'totintacu');
     $col17->setHTML('type="text" size="10" maxlength="10"  readonly=true');
 
     $col18 = new Columna('Adelanto Antig.');
