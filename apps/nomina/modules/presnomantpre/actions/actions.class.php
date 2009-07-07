@@ -77,20 +77,20 @@ public function executeAjax()
 
 	          			$dato="";
 	          			$cajtexmos="";
-	          			if($this->getRequestParameter('cajtexcom')=='npantpre_monto')
+	          			if($this->getRequestParameter('cajtexcom')=='npantpre_monant')
 	          			{
 	          				$valor=0.75*H::toFloat($this->getRequestParameter('cod'));
 			          		if ($valor<H::toFloat($this->getRequestParameter('codigo')))
 			          			{
 			          				$this->mensaje="Valor del Anticipo debe ser menor o igual al 75 % del Monto Total de las Prestaciones Equivalente a:  ".H::FormatoMonto($valor);
-			          			    $this->campo='npantpre_monto';
+			          			    $this->campo='npantpre_monant';
 			          			}else
 			          			{
 			          				if(($valor-$totpre)<H::toFloat($this->getRequestParameter('codigo')))
 			          				{
 
 			          					$this->mensaje="Su prestamos anteriores mas el actual da un total de ".H::formatoMonto(H::toFloat($this->getRequestParameter('codigo'))+$totpre)." y es mayor al  75%  ".H::FormatoMonto($valor);
-			          			    	$this->campo='npantpre_monto';
+			          			    	$this->campo='npantpre_monant';
 			          				}else
 			          				{
 			          					$cajtexmos='npantpre_pormon';
@@ -106,7 +106,7 @@ public function executeAjax()
 			          		if (H::toFloat($this->getRequestParameter('codigo2'))<0 || H::toFloat($this->getRequestParameter('codigo2'))>75)
 			          			{
 			          				$this->mensaje="Valor del Anticipo debe ser menor o igual al 75 % del Monto Total de las Prestaciones Equivalente a:  ".H::FormatoMonto($valor);
-			          			    $this->campo='npantpre_monto';
+			          			    $this->campo='npantpre_monant';
 			          			}else
 			          			{
 			          			  $por=round((100*$totpre)/H::toFloat($this->getRequestParameter('cod')));
@@ -118,7 +118,7 @@ public function executeAjax()
 
 			          			  }else
 			          			  {
-			          			  	$cajtexmos='npantpre_monto';
+			          			  	$cajtexmos='npantpre_monant';
 								    $dato=((H::toFloat($this->getRequestParameter('cod'))*H::toFloat($this->getRequestParameter('codigo2')))/100);
 								    $dato=H::formatoMonto($dato);
 			          			  }

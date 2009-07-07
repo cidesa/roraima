@@ -35,7 +35,7 @@
       'url'      => 'presnomantpre/ajax',
       'complete' => 'AjaxJSON(request, json)',
       'script' => true,
-      'with' => "'ajax=1&cajtexmos=npantpre_nomemp&cajtexmos1=npantpre_monant&cajtexcom=npantpre_codemp&codigo='+this.value",
+      'with' => "'ajax=1&cajtexmos=npantpre_nomemp&cajtexmos1=npantpre_monto&cajtexcom=npantpre_codemp&codigo='+this.value",
     )),
 )); echo $value ? $value : '&nbsp;' ?>
 
@@ -52,18 +52,18 @@
     </div>
 
     <br><br>
-    <?php echo label_for('npantpre[monant]', __($labels['npantpre{monant}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('npantpre{monant}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('npantpre{monant}')): ?>
-    <?php echo form_error('npantpre{monant}', array('class' => 'form-error-msg')) ?>
+    <?php echo label_for('npantpre[monto]', __($labels['npantpre{monto}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('npantpre{monto}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npantpre{monto}')): ?>
+    <?php echo form_error('npantpre{monto}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_input_tag($npantpre, array('getMonant',true), array (
+  <?php $value = object_input_tag($npantpre, array('getMonto',true), array (
   'size' => 7,
   'readonly'=> true,
   'style' => "border-style:none;",
-  'control_name' => 'npantpre[monant]',
-  'onBlur' => "javascript:event.keyCode=13;return entermontootro(event,this.id)"
+  'control_name' => 'npantpre[monto]',
+  'onBlur' => "javascript:event.keyCode=13;return entermonantotro(event,this.id)"
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
     <br><br>
@@ -96,23 +96,23 @@
 
 <br><br>
 
-  <?php echo label_for('npantpre[monto]', __($labels['npantpre{monto}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('npantpre{monto}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('npantpre{monto}')): ?>
-    <?php echo form_error('npantpre{monto}', array('class' => 'form-error-msg')) ?>
+  <?php echo label_for('npantpre[monant]', __($labels['npantpre{monant}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('npantpre{monant}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npantpre{monant}')): ?>
+    <?php echo form_error('npantpre{monant}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_input_tag($npantpre, array('getMonto',true), array (
+  <?php $value = object_input_tag($npantpre, array('getMonant',true), array (
   'size' => 7,
-  'control_name' => 'npantpre[monto]',
-  'onChange' => "javascript:event.keyCode=13;return entermontootro(event,this.id)",
+  'control_name' => 'npantpre[monant]',
+  'onChange' => "javascript:event.keyCode=13;return entermonantotro(event,this.id)",
     'onBlur'=> remote_function(array(
-      'condition' =>  "$('npantpre_monto').value != '0,00'  && $('id').value == ''",
+      'condition' =>  "$('npantpre_monant').value != '0,00'  && $('id').value == ''",
       'update'   => 'mensaje',
       'url'      => 'presnomantpre/ajax',
       'complete' => 'AjaxJSON(request, json)',
       'script' => true,
-      'with' => "'ajax=3&codemp='+$('npantpre_codemp').value+'&cajtexcom=npantpre_monto&cod='+$('npantpre_monant').value+'&codigo='+this.value+'&codigo2='+$('npantpre_pormon').value"
+      'with' => "'ajax=3&codemp='+$('npantpre_codemp').value+'&cajtexcom=npantpre_monant&cod='+$('npantpre_monto').value+'&codigo='+this.value+'&codigo2='+$('npantpre_pormon').value"
     )),
 
 )); echo $value ? $value : '&nbsp;' ?>
@@ -128,7 +128,7 @@
       'url'      => 'presnomantpre/ajax',
       'complete' => 'AjaxJSON(request, json)',
       'script' => true,
-      'with' => "'ajax=3&codemp='+$('npantpre_codemp').value+'&cajtexcom=npantpre_pormon&cod='+$('npantpre_monant').value+'&codigo='+$('npantpre_monto').value+'&codigo2='+this.value"
+      'with' => "'ajax=3&codemp='+$('npantpre_codemp').value+'&cajtexcom=npantpre_pormon&cod='+$('npantpre_monto').value+'&codigo='+$('npantpre_monant').value+'&codigo2='+this.value"
     ))
   )); ?>
 <strong>%</strong>
