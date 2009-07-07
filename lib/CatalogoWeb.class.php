@@ -5599,6 +5599,35 @@ A.CODREDE"
       OpconpagPeer :: NOMCONCEPTO => 'Descripcion'
     );
   }
+  
+  public function Npdefcpt_embargos() {
+    $this->c = new Criteria();
+	$this->c->add(NpdefcptPeer::OPECON,'D');
+    $this->c->addAscendingOrderByColumn(NpdefcptPeer::CODCON);
+    $this->columnas = array (
+      NpdefcptPeer :: CODCON => 'Código',
+      NpdefcptPeer :: NOMCON => 'Descripción'
+    );
+  }
+  
+  public function Npdefcpt_embargos2() {
+    $this->c = new Criteria();
+	$this->c->add(NpdefcptPeer::OPECON,'A');
+    $this->c->addAscendingOrderByColumn(NpdefcptPeer::CODCON);
+    $this->columnas = array (
+      NpdefcptPeer :: CODCON => 'Código',
+      NpdefcptPeer :: NOMCON => 'Descripción'
+    );
+  }
+  
+  public function Npbenefiemb_embargos() {
+    $this->c = new Criteria();
+    $this->c->addAscendingOrderByColumn(NpbenefiembPeer::CEDRIF);
+    $this->columnas = array (
+      NpbenefiembPeer :: CEDRIF => 'Cédula',
+      NpbenefiembPeer :: NOMBEN => 'Nombre'
+    );
+  }
 
 }
 
