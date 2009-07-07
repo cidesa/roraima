@@ -14,11 +14,13 @@ class almprioriActions extends autoalmprioriActions
 
   public function validateEdit()
   {
+  	$error=-1;
     if($this->getRequest()->getMethod() == sfRequest::POST){
        $this->casolart = $this->getCasolartOrCreate();
 
       $grids = Herramientas::CargarDatosGrid($this,$this->grid);
-      $error= Compras::validarAlmpriori($grids);
+      if ($this->getRequestParameter('casolart[porcostart]')!='1' && $this->getRequestParameter('casolart[pormoncot]')!='1')
+      {$error= Compras::validarAlmpriori($grids);}
       if ($error<>-1)
       {
         $this->error=$error;
@@ -53,6 +55,17 @@ class almprioriActions extends autoalmprioriActions
   {
     $this->casolart = $this->getCasolartOrCreate();
     $this->articulos=$this->CargarArticulos($this->casolart->getReqart());
+    $c= new Criteria();
+    $c->addJoin(CacotizaPeer::REFCOT,CadetcotPeer::REFCOT);
+    $c->add(CacotizaPeer::REFSOL,$this->casolart->getReqart());
+    $c->add(CadetcotPeer::PRIORI,'1');
+    $resul= CadetcotPeer::doSelect($c);
+    if ($resul)
+    {
+    	$this->elimina='S';
+    }else $this->elimina='N';
+
+
     /*$sql="select codart as codart from caartsol where reqart='".$this->casolart->getReqart()."' group by codart";
     if (Herramientas::BuscarDatos($sql,&$result))
     {
@@ -125,6 +138,15 @@ $this->Bitacora('Guardo');
   {
     $casolart = $this->getRequestParameter('casolart');
     $this->articulos=$this->CargarArticulos($this->casolart->getReqart());
+    $c= new Criteria();
+    $c->addJoin(CacotizaPeer::REFCOT,CadetcotPeer::REFCOT);
+    $c->add(CacotizaPeer::REFSOL,$this->casolart->getReqart());
+    $c->add(CadetcotPeer::PRIORI,'1');
+    $resul= CadetcotPeer::doSelect($c);
+    if ($resul)
+    {
+    	$this->elimina='S';
+    }else $this->elimina='N';
     /*$sql="select codart as codart from caartsol where reqart='".$this->casolart->getReqart()."' group by codart";
     if (Herramientas::BuscarDatos($sql,&$result))
     {
@@ -197,6 +219,14 @@ $this->Bitacora('Guardo');
     if (isset($casolart['actsolegr']))
     {
       $this->casolart->setActsolegr($casolart['actsolegr']);
+    }
+    if (isset($casolart['porcostart']))
+    {
+      $this->casolart->setPorcostart($casolart['porcostart']);
+    }
+    if (isset($casolart['pormoncot']))
+    {
+      $this->casolart->setPormoncot($casolart['pormoncot']);
     }
   }
 
@@ -355,7 +385,7 @@ $this->Bitacora('Guardo');
   protected function saveCasolart($casolart)
   {
     $grid2=Herramientas::CargarDatosGrid($this,$this->grid);
-	if (Compras::salvarPrioridadCotizaciones($grid2,$casolart->getReqart(), $casolart->getActsolegr(),&$error))
+	if (Compras::salvarPrioridadCotizaciones($grid2,$casolart->getReqart(), $casolart->getActsolegr(),$casolart,&$error))
 	{
 	  $this->coderror=$error;
       return $this->coderror;
@@ -383,6 +413,30 @@ $this->Bitacora('Guardo');
 	   $tipos += array($art->getCodart() => $art->getCodart()." - ".$art->getDesartsol());
 	 }
 	 $this->articulos= $tipos;
-
 	}
+
+	  protected function deleteCasolart($casolart)
+	  {
+         $c = new Criteria();
+	     $c->add(CacotizaPeer :: REFSOL, $casolart->getReqart());
+	     $dato= CacotizaPeer::doSelect($c);
+	     if ($dato)
+	     {
+	     	foreach ($dato as $obj0)
+	     	{
+		     	$t= new Criteria();
+		     	$t->add(CadetcotPeer::REFCOT,$obj0->getRefcot());
+		     	$resul=  CadetcotPeer::doSelect($t);
+		     	if ($resul)
+		     	{
+		     		foreach ($resul as $obj)
+		     		{
+		     			$obj->setPriori(0);
+		     			$obj->setJustifica(null);
+		     			$obj->save();
+		     		}
+		     	}
+	     	}
+	     }
+	  }
 }

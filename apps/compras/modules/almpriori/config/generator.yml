@@ -9,6 +9,8 @@ generator:
       fecreq: { name: Fecha, params: date_format='dd/MM/yyyy'}
       articulo: { name: Articulos de la Solicitud}
       actsolegr: { name: Actualizar Solicitud}
+      porcostart: { name: Por menor Costo de Artículo}
+      pormoncot: { name: Por menor Monto de la Cotización}
     list:
       title:          Asignación de Prioridad a Cotizaciones
       filters:        [reqart, fecreq]
@@ -20,9 +22,11 @@ generator:
 
     edit:
       title:          Asignación de Prioridad a Cotizaciones
-      display:       [reqart, fecreq , desreq, articulo, actsolegr]
+      display:       [reqart, fecreq , desreq, articulo, actsolegr, porcostart, pormoncot]
       fields:
         actsolegr:  {type: checkbox_tag}
+        porcostart:  {type: checkbox_tag}
+        pormoncot:  {type: checkbox_tag}
       actions:
         _list:        ~
         _save:        ~
