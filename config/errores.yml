@@ -702,6 +702,45 @@
 475:
   cod: 475
   msj: Debe introducir la Descripción del Cargo.
+476:
+  cod: 476
+  msj: Si el tipo de Distribucion es Monto Fijo, el Tipo de Calculo no puede ser Porcentual
+477:
+  cod: 477
+  msj: Si el Tipo de Cálculo es porcentual el monto embargo debe ser igual a 0
+478:
+  cod: 478
+  msj: Faltan Datos en el Grid de Conceptos
+479:
+  cod: 479
+  msj: El porcentaje no Puede tener valores negativos  
+480:
+  cod: 480
+  msj: El grid de conceptos no puede estar vacio si ha elegido tipo de cálculo Porcentual
+481:
+  cod: 481
+  msj: El grid de conceptos no debe tener datos si ha elegido el tipo de cálculo Monto fijo
+482:
+  cod: 482
+  msj: Si el Tipo de Cálculo es Monto Fijo el monto embargo no puede ser igual a 0  
+483:
+  cod: 483
+  msj: Debe Elegir un Tipo de Cálculo
+484:
+  cod: 484
+  msj: Faltan Datos en el Grid de Beneficiarios
+485:
+  cod: 485
+  msj: Hay datos Herrados en el Grid
+486:
+  cod: 486
+  msj: Debe Elegir un Tipo de Distribución 
+487:
+  cod: 487
+  msj: La distribución del Embargo entre sus Beneficiarios debe sumar 100%
+488:
+  cod: 488
+  msj: La distribución del Embargo entre sus Beneficiarios debe ser igual al Monto del Embargo
 ###############OBRAS################
 1000:
     cod: 1000
