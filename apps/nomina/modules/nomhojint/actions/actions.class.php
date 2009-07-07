@@ -18,6 +18,7 @@ class nomhojintActions extends autonomhojintActions
 
     if($this->getRequest()->getMethod() == sfRequest::POST){
      $this->nphojint = $this->getNphojintOrCreate();
+	 $this->updateNphojintFromRequest();
       $this->configGrid2();
       $this->configGrid3();
       $grid3=Herramientas::CargarDatosGrid($this,$this->obj2);
