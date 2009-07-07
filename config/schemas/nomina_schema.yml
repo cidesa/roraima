@@ -6873,3 +6873,98 @@ propel:
       type: INTEGER
       required: true
       autoIncrement: true            
+  npmaeemb:
+    #_attributes:
+      #idMethod: native
+    codemb:
+      type: VARCHAR
+      size: 4
+      required: true
+      ##primaryKey: true
+    desemb:
+      type: VARCHAR
+      size: 200
+      required: true
+    codjuz:
+      type: VARCHAR
+      size: 4
+      required: true  
+    codemp:
+      type: VARCHAR
+      size: 16
+      required: true
+    fecregemb:
+      type: DATE
+      required: true
+    codconemb:
+      type: VARCHAR
+      size: 3           
+      required: true   
+    tipdis:
+      type: VARCHAR
+      size: 1           
+      required: true  
+    tipcal:
+      type: VARCHAR
+      size: 1           
+      required: true    
+    montotemb:
+      type: NUMERIC
+      size: 14
+      scale: 2  
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true                  
+  npdetembben:
+    #_attributes:
+      #idMethod: native
+    codemb:
+      type: VARCHAR
+      size: 4
+      required: true
+      ##primaryKey: true
+    codemp:
+      type: VARCHAR
+      size: 16
+      required: true
+    cedrifben:
+      type: VARCHAR
+      size: 16
+      required: true      
+    tiprel:
+      type: VARCHAR
+      size: 3
+      required: true    
+    valemb:
+      type: NUMERIC
+      size: 14
+      scale: 2  
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true   
+  npdetembcon:
+    #_attributes:
+      #idMethod: native
+    codemb:
+      type: VARCHAR
+      size: 4
+      required: true
+      ##primaryKey: true
+    codemp:
+      type: VARCHAR
+      size: 16
+      required: true
+    codcon:
+      type: VARCHAR
+      size: 3
+      required: true    
+    porcon:
+      type: NUMERIC
+      size: 8
+      scale: 2  
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true                      
