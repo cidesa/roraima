@@ -13,6 +13,17 @@ class Npnomina extends BaseNpnomina
   protected $objconceptos=array();
 
 
+  public function getProfec_()
+  {
+  	return substr(self::getProfec(),8,2) .'/'.substr(self::getProfec(),5,2) .'/'.substr(self::getProfec(),0,4);
+  }
+
+  public function setProfec555($var)
+  {
+  	return $this->profec();
+  }
+
+
   public function getDesfrecal()
   {
   	 if (($this->getFrecal())=='Q')
