@@ -136,6 +136,9 @@ generator:
         name: Sur
         params: size=73
 
+      desdivgeo:
+        name: Descripcion
+
     list:
       title: Registro de Cedula Catastral
       display:      [=nrocas, fecreg]
@@ -152,7 +155,7 @@ generator:
     edit:
       title: Edicion Registro de Cedula Catastral
       display:
-        "Datos Generales":  [ _coddivgeo, nrocas, fecreg]
+        "Datos Generales":  [ _coddivgeo, _nrocas, fecreg]
         #"Ubicacion Territorial":  [fecreg]
         "Ocupantes: Propietario/ Inquilino/ Administrador":              [ _ocupantes]
         "Direccion Inmueble":  [ catbarurb_id, cattramofro_id, cattramolat_id, cattramolat2_id, edicas, pisinm, numinm, catcodpos_id, ubigex, ubigey, ubigez, dirinm]

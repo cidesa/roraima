@@ -1,0 +1,18 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Catnivcat
+    theme:            cidesaGenerator
+
+    fields:
+      forcodcat:    { name: Formato del Codigo Catastral, params: size=40}
+      grid:         { name: .}
+
+    list:
+      title:     Definicion de Niveles del Codigo Catastral
+
+    edit:
+      title: Edicion de Niveles del Codigo Catastral
+      display:  [ _grid, forcodcat]
+      actions:
+        _save:        ~

@@ -485,4 +485,9 @@ public static function PagoDoble()
     return array('E' => 'Estudiante', 'T' => 'Trabajador', 'D' => 'Desempleado',);
   }
 
+  public static function ListadeTipo() //Catastral
+  {
+    return array('P' => 'Pais', 'E' => 'Estado', 'M' => 'Municipios', 'C' => 'Ciudad', 'P' => 'Parroquias', 'S' => 'Sector', 'Z' => 'Cod.Catastral');
+  }
+
 }
