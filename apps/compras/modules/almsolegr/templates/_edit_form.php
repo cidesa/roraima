@@ -174,8 +174,15 @@
 <th><?php if ($casolart->getId()!="" && $precompromete=='S' && $autorizaprecom=='S') { ?>
 <?php echo button_to(__('Generar Precompromiso'), 'almsolegr/generarcompromiso?id='.$casolart->getId()) ?>
    <? }?></th>
+      <th>&nbsp;&nbsp;&nbsp;</th>
+   <th>
+     <?php if ($casolart->getId()!='') { ?>
+  <input type="button" name="Submit" value="Forma Pre-Impresa" onclick="javascript:Mostrar_orden_preimpresa();" />
+<? } ?>
+   </th>
    </tr>
   </table>
+
 </div>
 </fieldset>
 
@@ -530,6 +537,17 @@ echo grid_tag($obj3);
   	  $('casolart_fecreq').value="";
   	  $('casolart_fecreq').focus();
   	}
+  }
+
+  function Mostrar_orden_preimpresa()
+  {
+            var codreqdes=$('casolart_reqart').value;
+            var codreqhas=$('casolart_reqart').value;
+
+          var  ruta='http://'+'<?echo $this->getContext()->getRequest()->getHost();?>';
+          pagina=ruta+"/reportes/reportes/compras/r.php=?r=carsolegrpre.php&codreqdes="+codreqdes+"&codreqhas="+codreqhas;
+          window.open(pagina,1,"menubar=yes,toolbar=yes,scrollbars=yes,width=1200,height=800,resizable=yes,left=1000,top=80")
+
   }
 
 </script>

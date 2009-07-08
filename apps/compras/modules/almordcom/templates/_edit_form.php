@@ -289,7 +289,7 @@ else
     <?php echo __("Tipo Porcentaje ").radiobutton_tag('descuenta', 'p', 'true', array('onClick'=> "inizializo_descuentos();")) ?>
     <?php echo __("Tipo Monto ").radiobutton_tag('descuenta', 'm', 'false', array('onClick'=> "inizializo_descuentos();")) ?>
     <?php echo __("Tipo Total ").radiobutton_tag('descuenta', 't', 'false', array('onClick'=> "inizializo_descuentos();")) ?>
-
+<div class="sf_admin_edit_help"><?php echo __('Seleccione una Opción') ?></div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 <? if ($caordcom->getId()=='' && ($caordcom->getGenctaord()=='S')) { ?>
@@ -312,7 +312,7 @@ else
 <?php if ($caordcom->getId()!='') { ?>
   <input type="button" name="Submit" value="Forma Pre-Impresa" onclick="javascript:Mostrar_orden_preimpresa();" />
 <? } ?>
-<div class="sf_admin_edit_help"><?php echo __('Seleccione una Opción') ?></div>
+
   </div>
 <br>
 
@@ -815,9 +815,9 @@ echo grid_tag($obj_recargos);
 <?php if ($sf_request->hasError('caordcom{fecsigecof}')): ?> <?php echo form_error('caordcom{fecsigecof}', array('class' => 'form-error-msg')) ?>
 <?php endif; ?> <?php $value = object_input_date_tag($caordcom, 'getFecsigecof', array (
   'size' => 11,
-  'maxlength' => 8,  'rich' => true,
+  'maxlength' => 10,  'rich' => true,
   'readonly' => $readonly,
-  'maxlength' => 8,
+  'maxlength' => 10,
   'calendar_button_img' => '/sf/sf_admin/images/date.png',
   'control_name' => 'caordcom[fecsigecof]',
   'date_format' => 'dd/MM/yyyy',
@@ -829,7 +829,7 @@ echo grid_tag($obj_recargos);
         'with' => "'ajax=14&codigo='+this.value"
         ))
 ),date('Y-m-d')); echo $value ? $value : '&nbsp;' ?>
-<div class="sf_admin_edit_help"><?php echo __('Sleccione la Fecha en el Calendario') ?></div></div>
+<div class="sf_admin_edit_help"><?php echo __('Seleccione la Fecha en el Calendario') ?></div></div>
 </div>
 
 <div class="form-row">
