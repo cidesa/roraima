@@ -169,9 +169,9 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
 
       // Se calcula el tiempo dentro de la empresa
       $sqlantpub = "SELECT
-      antpub('A','".$this->mcodigo."',to_date('".$this->feccor."','yyyy-mm-dd'),'N') as dia,
+      antpub('D','".$this->mcodigo."',to_date('".$this->feccor."','yyyy-mm-dd'),'N') as dia,
       antpub('M','".$this->mcodigo."',to_date('".$this->feccor."','yyyy-mm-dd'),'N') as mes,
-      antpub('D','".$this->mcodigo."',to_date('".$this->feccor."','yyyy-mm-dd'),'N') as ano";
+      antpub('A','".$this->mcodigo."',to_date('".$this->feccor."','yyyy-mm-dd'),'N') as ano";
 
       if (H :: BuscarDatos($sqlantpub, &$rstemp)) {
         $this->diasserv = $rstemp[0]["dia"];
@@ -277,8 +277,8 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
 			$desniv = "";
 		
         $destipcon  = $this->tipcon; //NptipconPeer::getDestipcon($this->tipcon);
-        $feccalpres = adodb_date("d/m/Y", strtotime($this->feccalculo));
-        $feccor     = adodb_date("d/m/Y", strtotime($this->feccor));
+        $feccalpres = @adodb_date("d/m/Y", strtotime($this->feccalculo));
+        $feccor     = @adodb_date("d/m/Y", strtotime($this->feccor));
 
         //echo $feccor; exit();
         //$this->configGridConsulta($this->getRequestParameter('codemp'));
