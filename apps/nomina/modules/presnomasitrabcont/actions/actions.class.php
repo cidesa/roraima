@@ -188,7 +188,8 @@ public function configGrid($codigo='')
     //$sql ="Select a.CODTIPCON,a.CODNOM,a.CODEMP,a.NOMEMP,a.FECCAL,b.NOMNOM, 9 as id  From NPNOMINA b,NPASIEMPCONT a Where a.CODNOM=b.Codnom and  CODTIPCON = '".$codigo."' order by codemp";
 	$sql="select DISTINCT '1' as check,'1' as check1,z.CODTIPCON,z.CodEmp,z.Nomemp,z.fecing as feccal,
 						coalesce(x.fecdes,z.fecasi) as fecdes,
-						coalesce(x.fechas,(select max(anovighas) from npbonocont where codtipcon=z.codtipcon)) as fechas,
+						--coalesce(x.fechas,(select max(anovighas) from npbonocont where codtipcon=z.codtipcon)) as fechas,
+						coalesce(x.fechas,to_date('31/12/3000','dd/mm/yyyy')) as fechas,
 						'' as codtipcon2,
 						x.status,
 						z.codnom,z.nomnom, 9 as id from
@@ -199,7 +200,8 @@ public function configGrid($codigo='')
 		  union all
 		  select DISTINCT '0' as check,'0' as check1,z.CODTIPCON,z.CodEmp,z.Nomemp,z.fecing as feccal,
 		  				coalesce(x.fecdes,z.fecasi) as fecdes,
-						coalesce(x.fechas,(select max(anovighas) from npbonocont where codtipcon=z.codtipcon)) as fechas,
+						--coalesce(x.fechas,(select max(anovighas) from npbonocont where codtipcon=z.codtipcon)) as fechas,
+						coalesce(x.fechas,to_date('31/12/3000','dd/mm/yyyy')) as fechas,
 						(select codtipcon from npasiempcont where codtipcon<>z.codtipcon and codemp=z.codemp and status='A') as codtipcon2,
 						x.status,
 						z.codnom,z.nomnom, 9 as id from
