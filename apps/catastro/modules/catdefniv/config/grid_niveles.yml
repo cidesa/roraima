@@ -1,0 +1,27 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                true
+  tabla:                   catnivcat
+  anchogrid:               500
+  ancho:                   400
+  filas:                   1
+  titulo:                  'Longitud del Codigo'
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Tipo
+  tipo:                    c
+  nombrecampo:             catpar
+  esgrabable:              true
+  html:                    []
+2:       # Columna 2
+  titulo:                  Longitud
+  tipo:                    t
+  nombrecampo:             lonniv
+  esgrabable:              true
+  html:                    [size="3"]
+3:       # Columna 3
+  titulo:                  Nombre Abreviado
+  tipo:                    t
+  esgrabable:              true
+  nombrecampo:             nomabr
+  html:                    [size="20" ]

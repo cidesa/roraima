@@ -1008,3 +1008,27 @@ propel:
       required: true
       autoIncrement: true
       primaryKey: true
+  catnivcat:
+    _attributes:
+      idMethod: native
+    catpar:
+      type: VARCHAR
+      size: 1
+      required: true
+    lonniv:
+      type: VARCHAR
+      size: 3
+      required: true
+    nomabr:
+      type: VARCHAR
+      size: 10
+      required: true
+    forcodcat:
+      type: VARCHAR
+      size: 100
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
