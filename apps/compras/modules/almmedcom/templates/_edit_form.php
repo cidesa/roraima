@@ -41,6 +41,7 @@
   <?php $value = object_input_tag($camedcom, 'getDesmedcom', array (
   'size' => 80,
   'control_name' => 'camedcom[desmedcom]',
+   'onKeyUp'=>"javascript:cadena=this.value;cadena=cadena.toUpperCase();this.value=cadena;",
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
