@@ -123,6 +123,7 @@ $this->Bitacora('Guardo');
 
  public function validateEdit()
   {
+  			 $this->params=array();
   			 $this->nphispre = $this->getNphispreOrCreate();
 		  $this->updateNphispreFromRequest();
       if($this->getRequest()->getMethod() == sfRequest::POST)

@@ -43,6 +43,7 @@
   <?php $value = object_input_tag($cacatsnc, 'getDessnc', array (
   'size' => 80,
   'control_name' => 'cacatsnc[dessnc]',
+  'onKeyUp'=>"javascript:cadena=this.value;cadena=cadena.toUpperCase();this.value=cadena;",
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
