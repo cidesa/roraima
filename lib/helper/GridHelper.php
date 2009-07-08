@@ -241,7 +241,7 @@ function grid_tag($obj,$objelim = array())
 
               case 'f':
                 $marcatiempo = adodb_strtotime($datos[$i][strtolower($campo)]);
-                $get = date('Y-m-d',$marcatiempo);
+                $get = @adodb_date('Y-m-d',$marcatiempo);
                 if($get == '31-12-1969') $get = '';
                 break;
               case 'm':
@@ -1057,7 +1057,7 @@ function grid_tag_v2($obj,$objelim = array())
            case 'f':   //Fecha
              $tagw ='     <td class="grid_fila g_'.$name.'_f '.$name.'c'.$j.'" align="left" height="10">';
 
-             $tagw .= input_date_tag($name.'x_'.$i.'_'.$jmasuno, date("Y-m-d",adodb_strtotime($get)), array (
+             $tagw .= input_date_tag($name.'x_'.$i.'_'.$jmasuno, @adodb_date("Y-m-d",adodb_strtotime($get)), array (
                 'name' => 'grid'.$name.'['.$i.']['.$j.']',
                 'rich' => true,
                 'maxlength' => 10,
