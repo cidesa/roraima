@@ -248,7 +248,7 @@ class nomdefespprimasActions extends autonomdefespprimasActions
 		  	$this->coderr= 466;
 		  	break;
 		  }	  	
-	      if($x[$r]->getEdaddes()=='')
+	      if($x[$r]->getEdaddes()=='' && strlen(trim($x[$r]->getEdaddes()))==0)
 		  {
 		  	$this->coderr= 466;
 		  	break;
