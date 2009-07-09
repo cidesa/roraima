@@ -46,7 +46,7 @@ else
     }
     var filas=parseInt($('numgridret').value);
    	var bm=totalregistros('dx',2,filas);
-    if (($('id').value=="" && am==0 && cm==0) || ($('id').value!='' && bm==0 && cm==0))
+    if (($('id').value=="" && am==0 && cm==0) || ($('id').value!='' && bm==0))
     {
       var l=0;
       while(l<30)
