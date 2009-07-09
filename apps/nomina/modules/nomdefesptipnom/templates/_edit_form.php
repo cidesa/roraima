@@ -145,7 +145,7 @@
   </table>
 
 <br>
-
+<div style="display:none">
   <?php echo label_for('npnomina[ordpag]', __($labels['npnomina{ordpag}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('npnomina{ordpag}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('npnomina{ordpag}')): ?>
@@ -154,6 +154,7 @@
 
   <?php echo select_tag('npnomina[ordpag]', options_for_select($listagenordpag,$npnomina->getOrdpag())) ?>
     </div>
+</div>
 
 </div>
 </fieldset>
