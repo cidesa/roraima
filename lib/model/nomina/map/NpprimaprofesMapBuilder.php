@@ -34,7 +34,7 @@ class NpprimaprofesMapBuilder {
 
 		$tMap->setPrimaryKeyMethodInfo('npprimaprofes_SEQ');
 
-		$tMap->addColumn('GRADO', 'Grado', 'double', CreoleTypes::NUMERIC, false, 2);
+		$tMap->addColumn('GRADO', 'Grado', 'string', CreoleTypes::VARCHAR, false, 4);
 
 		$tMap->addColumn('PRIMA', 'Prima', 'double', CreoleTypes::NUMERIC, false, 14);
 

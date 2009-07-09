@@ -26,11 +26,10 @@ abstract class BaseNpprimaprofes extends BaseObject  implements Persistent {
 	protected $alreadyInValidation = false;
 
   
-  public function getGrado($val=false)
+  public function getGrado()
   {
 
-    if($val) return number_format($this->grado,2,',','.');
-    else return $this->grado;
+    return trim($this->grado);
 
   }
   
@@ -53,7 +52,7 @@ abstract class BaseNpprimaprofes extends BaseObject  implements Persistent {
 	{
 
     if ($this->grado !== $v) {
-        $this->grado = Herramientas::toFloat($v);
+        $this->grado = $v;
         $this->modifiedColumns[] = NpprimaprofesPeer::GRADO;
       }
   
@@ -83,7 +82,7 @@ abstract class BaseNpprimaprofes extends BaseObject  implements Persistent {
   {
     try {
 
-      $this->grado = $rs->getFloat($startcol + 0);
+      $this->grado = $rs->getString($startcol + 0);
 
       $this->prima = $rs->getFloat($startcol + 1);
 
