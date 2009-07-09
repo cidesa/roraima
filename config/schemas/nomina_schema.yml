@@ -6721,9 +6721,8 @@ propel:
     #_attributes:
       #idMethod: native
     grado:
-      type: NUMERIC
-      size: 2
-      scale: 0
+      type: VARCHAR
+      size: 4
     prima:
       type: NUMERIC
       size: 14
@@ -6778,11 +6777,11 @@ propel:
       required: true
     numdiamaxano:
       type: INTEGER
-      required: true  
+      required: true
     id:
       type: INTEGER
       required: true
-      autoIncrement: true      
+      autoIncrement: true
   nppernom:
     #_attributes:
       #idMethod: native
@@ -6797,7 +6796,7 @@ propel:
     mes:
       type: VARCHAR
       size: 2
-      required: true  
+      required: true
     fecini:
       type: DATE
       required: true
@@ -6805,7 +6804,7 @@ propel:
     fecfin:
       type: DATE
       required: true
-      ##primaryKey: true      
+      ##primaryKey: true
     id:
       type: INTEGER
       required: true
@@ -6825,7 +6824,7 @@ propel:
     perconjuz:
       type: VARCHAR
       size: 100
-      required: true  
+      required: true
     carperjuz:
       type: VARCHAR
       size: 100
@@ -6834,15 +6833,15 @@ propel:
       type: VARCHAR
       size: 200
       required: true
-      ##primaryKey: true      
+      ##primaryKey: true
     teljuz:
       type: VARCHAR
-      size: 100           
-      required: true   
+      size: 100
+      required: true
     id:
       type: INTEGER
       required: true
-      autoIncrement: true      
+      autoIncrement: true
   npbenefiemb:
     #_attributes:
       #idMethod: native
@@ -6857,7 +6856,7 @@ propel:
       required: true
     fecnacben:
       type: DATE
-      required: true  
+      required: true
     fecreg:
       type: DATE
       required: true
@@ -6867,12 +6866,12 @@ propel:
       required: true
     telben:
       type: VARCHAR
-      size: 100           
-      required: true   
+      size: 100
+      required: true
     id:
       type: INTEGER
       required: true
-      autoIncrement: true            
+      autoIncrement: true
   npmaeemb:
     #_attributes:
       #idMethod: native
@@ -6888,7 +6887,7 @@ propel:
     codjuz:
       type: VARCHAR
       size: 4
-      required: true  
+      required: true
     codemp:
       type: VARCHAR
       size: 16
@@ -6898,24 +6897,24 @@ propel:
       required: true
     codconemb:
       type: VARCHAR
-      size: 3           
-      required: true   
+      size: 3
+      required: true
     tipdis:
       type: VARCHAR
-      size: 1           
-      required: true  
+      size: 1
+      required: true
     tipcal:
       type: VARCHAR
-      size: 1           
-      required: true    
+      size: 1
+      required: true
     montotemb:
       type: NUMERIC
       size: 14
-      scale: 2  
+      scale: 2
     id:
       type: INTEGER
       required: true
-      autoIncrement: true                  
+      autoIncrement: true
   npdetembben:
     #_attributes:
       #idMethod: native
@@ -6931,19 +6930,19 @@ propel:
     cedrifben:
       type: VARCHAR
       size: 16
-      required: true      
+      required: true
     tiprel:
       type: VARCHAR
       size: 3
-      required: true    
+      required: true
     valemb:
       type: NUMERIC
       size: 14
-      scale: 2  
+      scale: 2
     id:
       type: INTEGER
       required: true
-      autoIncrement: true   
+      autoIncrement: true
   npdetembcon:
     #_attributes:
       #idMethod: native
@@ -6959,12 +6958,12 @@ propel:
     codcon:
       type: VARCHAR
       size: 3
-      required: true    
+      required: true
     porcon:
       type: NUMERIC
       size: 8
-      scale: 2  
+      scale: 2
     id:
       type: INTEGER
       required: true
-      autoIncrement: true                      
+      autoIncrement: true
