@@ -1482,13 +1482,12 @@ class Nomina {
       case "PHIJO" :
         //??????????????? HAY QUE MIGRARLA A POSTGRES
         $sql = "SELECT coalesce(SUM(C.MONTO),0) as elmonto
-                  FROM NPINFFAM A,NPASICAREMP B,NPPRIMASHIJOS C WHERE
-                           A.CodEmp = B.CodEmp
-                           AND A.CODEMP='" . $empleado . "'  AND B.STATUS='V'
-                           AND B.CODCAR LIKE C.FILTROCAR||'%'
+                  FROM NPINFFAM A,NPPRIMASHIJOS C WHERE
+                           A.CODEMP='" . $empleado . "'
+                           and a.parfam=c.parfam
                         AND TRUNC(Months_between(TO_DATE('" . $fecnom . "','DD/MM/YYYY'), A.FECNAC)/12)>= C.EDADDES
                            AND TRUNC(Months_between(TO_DATE('" . $fecnom . "','DD/MM/YYYY'), A.FECNAC)/12)<= C.EDADHAS
-                  AND (CASE WHEN C.ESTUDIOS='S' THEN 'S' ELSE A.ESTUDIA END)=A.ESTUDIA";
+                  AND (CASE WHEN C.ESTUDIOS='S' THEN 'E' ELSE coalesce(a.ocupac,'') END)=coalesce(a.ocupac,'')";
         if (Herramientas :: BuscarDatos($sql, & $tabla)) {
           $valor = $tabla[0]["elmonto"];
         }
@@ -1509,12 +1508,11 @@ class Nomina {
         break;
 
       case "PPROF" : // ??????????????'
-        $sql = "SELECT coalesce(PRIMA,0) as elmonto
-                  FROM NPPRIMAPROFES
-                  WHERE
-                  GRADO=(SELECT MAX(B.GRADO)
-                      FROM NPINFCUR A,NPNIVEDU B
-                      WHERE SUBSTR(A.NIVEST,1,4)=B.CODNIV AND A.CODEMP='" . $empleado . "')";
+        $sql = "SELECT sum(coalesce(A.PRIMA,0)) as elmonto
+				FROM NPPRIMAPROFES a, nphojint b
+				WHERE
+				a.GRADO=b.codnivedu and
+				b.codemp='$empleado'";
         if (Herramientas :: BuscarDatos($sql, & $tabla)) {
           $valor = $tabla[0]["elmonto"];
         }
@@ -3207,15 +3205,14 @@ class Nomina {
         }
         break;
       case "PHIJO" :
-        //??????????????? HAY QUE MIGRARLA A POSTGRES
         $sql = "SELECT coalesce(SUM(C.MONTO),0) as elmonto
-                  FROM NPINFFAM A,NPASICAREMP B,NPPRIMASHIJOS C WHERE
-                           A.CodEmp = B.CodEmp
-                           AND A.CODEMP='" . $empleado . "'   AND B.status='V'
-                           AND B.CODCAR LIKE C.FILTROCAR||'%'
+                  FROM NPINFFAM A,NPPRIMASHIJOS C WHERE
+                           A.CODEMP='" . $empleado . "'
+                           and a.parfam=c.parfam
                         AND TRUNC(Months_between(TO_DATE('" . $hasta . "','DD/MM/YYYY'), A.FECNAC)/12)>= C.EDADDES
                            AND TRUNC(Months_between(TO_DATE('" . $hasta . "','DD/MM/YYYY'), A.FECNAC)/12)<= C.EDADHAS
-                  AND (CASE WHEN C.ESTUDIOS='S' THEN 'S' ELSE A.ESTUDIA END)=A.ESTUDIA";
+                  AND (CASE WHEN C.ESTUDIOS='S' THEN 'E' ELSE coalesce(a.ocupac,'') END)=coalesce(a.ocupac,'')";
+     
         if (Herramientas :: BuscarDatos($sql, & $tabla)) {
           return $tabla[0]["elmonto"];
         }
@@ -3234,12 +3231,11 @@ class Nomina {
         }
         break;
       case "PPROF" : // ??????????
-        $sql = "SELECT coalesce(PRIMA,0) as elmonto
-                  FROM NPPRIMAPROFES
-                  WHERE
-                  GRADO=(SELECT MAX(B.GRADO)
-                      FROM NPINFCUR A,NPNIVEDU B
-                      WHERE SUBSTR(A.NIVEST,1,4)=B.CODNIV AND A.CODEMP='" . $empleado . "')";
+        $sql = "SELECT sum(coalesce(A.PRIMA,0)) as elmonto
+				FROM NPPRIMAPROFES a, nphojint b
+				WHERE
+				a.GRADO=b.codnivedu and
+				b.codemp='$empleado'";
         if (Herramientas :: BuscarDatos($sql, & $tabla)) {
           return $tabla[0]["elmonto"];
         }
