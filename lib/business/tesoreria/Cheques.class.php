@@ -670,8 +670,7 @@ class Cheques
               $monto1=$x[$j]->getMonord() - $x[$j]->getMonret() - self::ObtenerAjuste($x[$j]->getNumord());
               $monto2=$x[$j]->getMonpag() + $x[$j]->getMontotalGrid() + $x[$j]->getMondes();
 
-
-              if (H::convnume($monto1) <= H::convnume($monto2))
+              if (H::tofloat($monto1) <= H::tofloat($monto2))
               {
                 $x[$j]->setStatus("I");
                 $x[$j]->setFecpag($tscheemi->getFecemi());
@@ -829,7 +828,7 @@ class Cheques
                   $monto1=$x[$j]->getMonord() - $x[$j]->getMonret() - self::ObtenerAjuste($x[$j]->getNumord());
                   $monto2=$x[$j]->getMonpag() + $x[$j]->getMontotalGrid() + $x[$j]->getMondes();
 
-                  if (H::convnume($monto1) <= H::convnume($monto2))
+                  if (H::tofloat($monto1) <= H::tofloat($monto2))
                   {
                     $x[$j]->setStatus("I");
                     $x[$j]->setFecpag($tscheemi->getFecemi());
@@ -1049,26 +1048,26 @@ class Cheques
        if ($gencom=="S")
         {
 
-           $total=$MontOP-Herramientas::convnume($MontDcto);
+           $total=$MontOP-Herramientas::tofloat($MontDcto);
            $c= new Criteria();
 		   $reg= OpdefempPeer::doSelectOne($c);
 		   if ($reg)
 		   {
 		     if ($reg->getGencomalc()=='S')
 		     {
-		       self::grabarComprobanteAlc($tscheemi,$grid,$DescOp,"S",Herramientas::convnume($MontDcto),$total,$ctapag,&$msjuno,&$arrcompro);
+		       self::grabarComprobanteAlc($tscheemi,$grid,$DescOp,"S",Herramientas::tofloat($MontDcto),$total,$ctapag,&$msjuno,&$arrcompro);
 		     }
 		     else
 		     {
            self::Genera_Comprobante($numche,$tscheemi,$grid,"","S",$DescOp,$DesCtaDeb,
-                                    $desctacre,$CtaPag,$CuentaDes,Herramientas::convnume($MontDcto),$condto,
+                                    $desctacre,$CtaPag,$CuentaDes,Herramientas::tofloat($MontDcto),$condto,
                                     $total,0,"pagdir",&$arrcompro);
 		     }
 		   }
         }
         else
         {
-           $total=$MontOP-Herramientas::convnume($MontDcto);
+           $total=$MontOP-Herramientas::tofloat($MontDcto);
            self::Actualiza_Bancos($tscheemi,"A","C",$total,$numche);
            $refpago = self::Genera_Pagos($tscheemi,"",$tscheemi->getCedrif(),"",$DescOp,$MontOP,"D",100,$numche,$x);
            self::Genera_MovLib($tscheemi,$DescOp,$total,$numcom,$numche,$refpago);
@@ -1103,26 +1102,26 @@ class Cheques
 
       if ($gencom=="S")
         {
-           $total=Herramientas::convnume($MontOP)-Herramientas::convnume($MontDcto);
+           $total=Herramientas::tofloat($MontOP)-Herramientas::tofloat($MontDcto);
           $c= new Criteria();
 		   $reg= OpdefempPeer::doSelectOne($c);
 		   if ($reg)
 		   {
 		     if ($reg->getGencomalc()=='S')
 		     {
-		       self::grabarComprobanteAlc($tscheemi,$grid,$DescOp,"S",Herramientas::convnume($MontDcto),$total,$ctapag,&$msjuno,&$arrcompro);
+		       self::grabarComprobanteAlc($tscheemi,$grid,$DescOp,"S",Herramientas::tofloat($MontDcto),$total,$ctapag,&$msjuno,&$arrcompro);
 		     }
 		     else
 		     {
                self::Genera_Comprobante($numche,$tscheemi,$grid,"","S",$DescOp,$DesCtaDeb,
-                                    $desctacre,$ctapag,$CtaDcto,Herramientas::convnume($MontDcto),$condpnrn,
+                                    $desctacre,$ctapag,$CtaDcto,Herramientas::tofloat($MontDcto),$condpnrn,
                                     $total,0,"pagnopre",&$arrcompro);
 		     }
 		   }
         }
         else
         {
-           $total=Herramientas::convnume($MontOP)-Herramientas::convnume($MontDcto);
+           $total=Herramientas::tofloat($MontOP)-Herramientas::tofloat($MontDcto);
            self::Genera_MovLib($tscheemi,$DescOp,$total,$numcom,$numche);
            self::Actualiza_Bancos($tscheemi,"A","C",$total,$numche);
            self::Grabar_Datos($tscheemi,$total,$tscheemi->getCedrif(),$numche);
