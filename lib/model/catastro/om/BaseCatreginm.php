@@ -101,7 +101,43 @@ abstract class BaseCatreginm extends BaseObject  implements Persistent {
 
 
 	
-	protected $dirinm;
+	protected $nroinc;
+
+
+	
+	protected $asireg;
+
+
+	
+	protected $folio;
+
+
+	
+	protected $nromat;
+
+
+	
+	protected $codcatant;
+
+
+	
+	protected $fecregant;
+
+
+	
+	protected $numregant;
+
+
+	
+	protected $folioant;
+
+
+	
+	protected $triant;
+
+
+	
+	protected $proant;
 
 
 	
@@ -290,6 +326,12 @@ abstract class BaseCatreginm extends BaseObject  implements Persistent {
 	protected $lastCatperinmCriteria = null;
 
 	
+	protected $collCatusoespinms;
+
+	
+	protected $lastCatusoespinmCriteria = null;
+
+	
 	protected $alreadyInSave = false;
 
 	
@@ -472,10 +514,88 @@ abstract class BaseCatreginm extends BaseObject  implements Persistent {
   }
 
   
-  public function getDirinm()
+  public function getNroinc()
   {
 
-    return trim($this->dirinm);
+    return trim($this->nroinc);
+
+  }
+  
+  public function getAsireg()
+  {
+
+    return trim($this->asireg);
+
+  }
+  
+  public function getFolio()
+  {
+
+    return trim($this->folio);
+
+  }
+  
+  public function getNromat()
+  {
+
+    return trim($this->nromat);
+
+  }
+  
+  public function getCodcatant()
+  {
+
+    return trim($this->codcatant);
+
+  }
+  
+  public function getFecregant($format = 'Y-m-d')
+  {
+
+    if ($this->fecregant === null || $this->fecregant === '') {
+      return null;
+    } elseif (!is_int($this->fecregant)) {
+            $ts = adodb_strtotime($this->fecregant);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecregant] as date/time value: " . var_export($this->fecregant, true));
+      }
+    } else {
+      $ts = $this->fecregant;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getNumregant()
+  {
+
+    return trim($this->numregant);
+
+  }
+  
+  public function getFolioant()
+  {
+
+    return trim($this->folioant);
+
+  }
+  
+  public function getTriant()
+  {
+
+    return trim($this->triant);
+
+  }
+  
+  public function getProant()
+  {
+
+    return trim($this->proant);
 
   }
   
@@ -985,12 +1105,109 @@ abstract class BaseCatreginm extends BaseObject  implements Persistent {
 
 	} 
 	
-	public function setDirinm($v)
+	public function setNroinc($v)
 	{
 
-    if ($this->dirinm !== $v) {
-        $this->dirinm = $v;
-        $this->modifiedColumns[] = CatreginmPeer::DIRINM;
+    if ($this->nroinc !== $v) {
+        $this->nroinc = $v;
+        $this->modifiedColumns[] = CatreginmPeer::NROINC;
+      }
+  
+	} 
+	
+	public function setAsireg($v)
+	{
+
+    if ($this->asireg !== $v) {
+        $this->asireg = $v;
+        $this->modifiedColumns[] = CatreginmPeer::ASIREG;
+      }
+  
+	} 
+	
+	public function setFolio($v)
+	{
+
+    if ($this->folio !== $v) {
+        $this->folio = $v;
+        $this->modifiedColumns[] = CatreginmPeer::FOLIO;
+      }
+  
+	} 
+	
+	public function setNromat($v)
+	{
+
+    if ($this->nromat !== $v) {
+        $this->nromat = $v;
+        $this->modifiedColumns[] = CatreginmPeer::NROMAT;
+      }
+  
+	} 
+	
+	public function setCodcatant($v)
+	{
+
+    if ($this->codcatant !== $v) {
+        $this->codcatant = $v;
+        $this->modifiedColumns[] = CatreginmPeer::CODCATANT;
+      }
+  
+	} 
+	
+	public function setFecregant($v)
+	{
+
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecregant] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecregant !== $ts) {
+      $this->fecregant = $ts;
+      $this->modifiedColumns[] = CatreginmPeer::FECREGANT;
+    }
+
+	} 
+	
+	public function setNumregant($v)
+	{
+
+    if ($this->numregant !== $v) {
+        $this->numregant = $v;
+        $this->modifiedColumns[] = CatreginmPeer::NUMREGANT;
+      }
+  
+	} 
+	
+	public function setFolioant($v)
+	{
+
+    if ($this->folioant !== $v) {
+        $this->folioant = $v;
+        $this->modifiedColumns[] = CatreginmPeer::FOLIOANT;
+      }
+  
+	} 
+	
+	public function setTriant($v)
+	{
+
+    if ($this->triant !== $v) {
+        $this->triant = $v;
+        $this->modifiedColumns[] = CatreginmPeer::TRIANT;
+      }
+  
+	} 
+	
+	public function setProant($v)
+	{
+
+    if ($this->proant !== $v) {
+        $this->proant = $v;
+        $this->modifiedColumns[] = CatreginmPeer::PROANT;
       }
   
 	} 
@@ -1315,61 +1532,79 @@ abstract class BaseCatreginm extends BaseObject  implements Persistent {
 
       $this->fecreg = $rs->getDate($startcol + 22, null);
 
-      $this->dirinm = $rs->getString($startcol + 23);
+      $this->nroinc = $rs->getString($startcol + 23);
 
-      $this->nivinm = $rs->getString($startcol + 24);
+      $this->asireg = $rs->getString($startcol + 24);
 
-      $this->unihab = $rs->getString($startcol + 25);
+      $this->folio = $rs->getString($startcol + 25);
 
-      $this->edicas = $rs->getString($startcol + 26);
+      $this->nromat = $rs->getString($startcol + 26);
 
-      $this->pisinm = $rs->getString($startcol + 27);
+      $this->codcatant = $rs->getString($startcol + 27);
 
-      $this->numinm = $rs->getString($startcol + 28);
+      $this->fecregant = $rs->getDate($startcol + 28, null);
 
-      $this->ubigex = $rs->getString($startcol + 29);
+      $this->numregant = $rs->getString($startcol + 29);
 
-      $this->ubigey = $rs->getString($startcol + 30);
+      $this->folioant = $rs->getString($startcol + 30);
 
-      $this->ubigez = $rs->getString($startcol + 31);
+      $this->triant = $rs->getString($startcol + 31);
 
-      $this->numhab = $rs->getString($startcol + 32);
+      $this->proant = $rs->getString($startcol + 32);
 
-      $this->numper = $rs->getString($startcol + 33);
+      $this->nivinm = $rs->getString($startcol + 33);
 
-      $this->numsan = $rs->getString($startcol + 34);
+      $this->unihab = $rs->getString($startcol + 34);
 
-      $this->numtom = $rs->getString($startcol + 35);
+      $this->edicas = $rs->getString($startcol + 35);
 
-      $this->arever = $rs->getString($startcol + 36);
+      $this->pisinm = $rs->getString($startcol + 36);
 
-      $this->loccom = $rs->getString($startcol + 37);
+      $this->numinm = $rs->getString($startcol + 37);
 
-      $this->locind = $rs->getString($startcol + 38);
+      $this->ubigex = $rs->getString($startcol + 38);
 
-      $this->captan = $rs->getString($startcol + 39);
+      $this->ubigey = $rs->getString($startcol + 39);
 
-      $this->cappis = $rs->getString($startcol + 40);
+      $this->ubigez = $rs->getString($startcol + 40);
 
-      $this->trapis = $rs->getString($startcol + 41);
+      $this->numhab = $rs->getString($startcol + 41);
 
-      $this->numtel = $rs->getString($startcol + 42);
+      $this->numper = $rs->getString($startcol + 42);
 
-      $this->nomarccro = $rs->getString($startcol + 43);
+      $this->numsan = $rs->getString($startcol + 43);
 
-      $this->oficom = $rs->getString($startcol + 44);
+      $this->numtom = $rs->getString($startcol + 44);
 
-      $this->fotinm = $rs->getString($startcol + 45);
+      $this->arever = $rs->getString($startcol + 45);
 
-      $this->lineste = $rs->getString($startcol + 46);
+      $this->loccom = $rs->getString($startcol + 46);
 
-      $this->linnor = $rs->getString($startcol + 47);
+      $this->locind = $rs->getString($startcol + 47);
 
-      $this->linoes = $rs->getString($startcol + 48);
+      $this->captan = $rs->getString($startcol + 48);
 
-      $this->linsur = $rs->getString($startcol + 49);
+      $this->cappis = $rs->getString($startcol + 49);
 
-      $this->id = $rs->getInt($startcol + 50);
+      $this->trapis = $rs->getString($startcol + 50);
+
+      $this->numtel = $rs->getString($startcol + 51);
+
+      $this->nomarccro = $rs->getString($startcol + 52);
+
+      $this->oficom = $rs->getString($startcol + 53);
+
+      $this->fotinm = $rs->getString($startcol + 54);
+
+      $this->lineste = $rs->getString($startcol + 55);
+
+      $this->linnor = $rs->getString($startcol + 56);
+
+      $this->linoes = $rs->getString($startcol + 57);
+
+      $this->linsur = $rs->getString($startcol + 58);
+
+      $this->id = $rs->getInt($startcol + 59);
 
       $this->resetModified();
 
@@ -1377,7 +1612,7 @@ abstract class BaseCatreginm extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 51; 
+            return $startcol + 60; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Catreginm object", $e);
     }
@@ -1631,6 +1866,14 @@ abstract class BaseCatreginm extends BaseObject  implements Persistent {
 				}
 			}
 
+			if ($this->collCatusoespinms !== null) {
+				foreach($this->collCatusoespinms as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
+
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
@@ -1818,6 +2061,14 @@ abstract class BaseCatreginm extends BaseObject  implements Persistent {
 					}
 				}
 
+				if ($this->collCatusoespinms !== null) {
+					foreach($this->collCatusoespinms as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
+
 
 			$this->alreadyInValidation = false;
 		}
@@ -1906,87 +2157,114 @@ abstract class BaseCatreginm extends BaseObject  implements Persistent {
 				return $this->getFecreg();
 				break;
 			case 23:
-				return $this->getDirinm();
+				return $this->getNroinc();
 				break;
 			case 24:
-				return $this->getNivinm();
+				return $this->getAsireg();
 				break;
 			case 25:
-				return $this->getUnihab();
+				return $this->getFolio();
 				break;
 			case 26:
-				return $this->getEdicas();
+				return $this->getNromat();
 				break;
 			case 27:
-				return $this->getPisinm();
+				return $this->getCodcatant();
 				break;
 			case 28:
-				return $this->getNuminm();
+				return $this->getFecregant();
 				break;
 			case 29:
-				return $this->getUbigex();
+				return $this->getNumregant();
 				break;
 			case 30:
-				return $this->getUbigey();
+				return $this->getFolioant();
 				break;
 			case 31:
-				return $this->getUbigez();
+				return $this->getTriant();
 				break;
 			case 32:
-				return $this->getNumhab();
+				return $this->getProant();
 				break;
 			case 33:
-				return $this->getNumper();
+				return $this->getNivinm();
 				break;
 			case 34:
-				return $this->getNumsan();
+				return $this->getUnihab();
 				break;
 			case 35:
-				return $this->getNumtom();
+				return $this->getEdicas();
 				break;
 			case 36:
-				return $this->getArever();
+				return $this->getPisinm();
 				break;
 			case 37:
-				return $this->getLoccom();
+				return $this->getNuminm();
 				break;
 			case 38:
-				return $this->getLocind();
+				return $this->getUbigex();
 				break;
 			case 39:
-				return $this->getCaptan();
+				return $this->getUbigey();
 				break;
 			case 40:
-				return $this->getCappis();
+				return $this->getUbigez();
 				break;
 			case 41:
-				return $this->getTrapis();
+				return $this->getNumhab();
 				break;
 			case 42:
-				return $this->getNumtel();
+				return $this->getNumper();
 				break;
 			case 43:
-				return $this->getNomarccro();
+				return $this->getNumsan();
 				break;
 			case 44:
-				return $this->getOficom();
+				return $this->getNumtom();
 				break;
 			case 45:
-				return $this->getFotinm();
+				return $this->getArever();
 				break;
 			case 46:
-				return $this->getLineste();
+				return $this->getLoccom();
 				break;
 			case 47:
-				return $this->getLinnor();
+				return $this->getLocind();
 				break;
 			case 48:
-				return $this->getLinoes();
+				return $this->getCaptan();
 				break;
 			case 49:
-				return $this->getLinsur();
+				return $this->getCappis();
 				break;
 			case 50:
+				return $this->getTrapis();
+				break;
+			case 51:
+				return $this->getNumtel();
+				break;
+			case 52:
+				return $this->getNomarccro();
+				break;
+			case 53:
+				return $this->getOficom();
+				break;
+			case 54:
+				return $this->getFotinm();
+				break;
+			case 55:
+				return $this->getLineste();
+				break;
+			case 56:
+				return $this->getLinnor();
+				break;
+			case 57:
+				return $this->getLinoes();
+				break;
+			case 58:
+				return $this->getLinsur();
+				break;
+			case 59:
 				return $this->getId();
 				break;
 			default:
@@ -2022,34 +2300,43 @@ abstract class BaseCatreginm extends BaseObject  implements Persistent {
 			$keys[20] => $this->getCoddivgeo(),
 			$keys[21] => $this->getNrocas(),
 			$keys[22] => $this->getFecreg(),
-			$keys[23] => $this->getDirinm(),
-			$keys[24] => $this->getNivinm(),
-			$keys[25] => $this->getUnihab(),
-			$keys[26] => $this->getEdicas(),
-			$keys[27] => $this->getPisinm(),
-			$keys[28] => $this->getNuminm(),
-			$keys[29] => $this->getUbigex(),
-			$keys[30] => $this->getUbigey(),
-			$keys[31] => $this->getUbigez(),
-			$keys[32] => $this->getNumhab(),
-			$keys[33] => $this->getNumper(),
-			$keys[34] => $this->getNumsan(),
-			$keys[35] => $this->getNumtom(),
-			$keys[36] => $this->getArever(),
-			$keys[37] => $this->getLoccom(),
-			$keys[38] => $this->getLocind(),
-			$keys[39] => $this->getCaptan(),
-			$keys[40] => $this->getCappis(),
-			$keys[41] => $this->getTrapis(),
-			$keys[42] => $this->getNumtel(),
-			$keys[43] => $this->getNomarccro(),
-			$keys[44] => $this->getOficom(),
-			$keys[45] => $this->getFotinm(),
-			$keys[46] => $this->getLineste(),
-			$keys[47] => $this->getLinnor(),
-			$keys[48] => $this->getLinoes(),
-			$keys[49] => $this->getLinsur(),
-			$keys[50] => $this->getId(),
+			$keys[23] => $this->getNroinc(),
+			$keys[24] => $this->getAsireg(),
+			$keys[25] => $this->getFolio(),
+			$keys[26] => $this->getNromat(),
+			$keys[27] => $this->getCodcatant(),
+			$keys[28] => $this->getFecregant(),
+			$keys[29] => $this->getNumregant(),
+			$keys[30] => $this->getFolioant(),
+			$keys[31] => $this->getTriant(),
+			$keys[32] => $this->getProant(),
+			$keys[33] => $this->getNivinm(),
+			$keys[34] => $this->getUnihab(),
+			$keys[35] => $this->getEdicas(),
+			$keys[36] => $this->getPisinm(),
+			$keys[37] => $this->getNuminm(),
+			$keys[38] => $this->getUbigex(),
+			$keys[39] => $this->getUbigey(),
+			$keys[40] => $this->getUbigez(),
+			$keys[41] => $this->getNumhab(),
+			$keys[42] => $this->getNumper(),
+			$keys[43] => $this->getNumsan(),
+			$keys[44] => $this->getNumtom(),
+			$keys[45] => $this->getArever(),
+			$keys[46] => $this->getLoccom(),
+			$keys[47] => $this->getLocind(),
+			$keys[48] => $this->getCaptan(),
+			$keys[49] => $this->getCappis(),
+			$keys[50] => $this->getTrapis(),
+			$keys[51] => $this->getNumtel(),
+			$keys[52] => $this->getNomarccro(),
+			$keys[53] => $this->getOficom(),
+			$keys[54] => $this->getFotinm(),
+			$keys[55] => $this->getLineste(),
+			$keys[56] => $this->getLinnor(),
+			$keys[57] => $this->getLinoes(),
+			$keys[58] => $this->getLinsur(),
+			$keys[59] => $this->getId(),
 		);
 		return $result;
 	}
@@ -2135,87 +2422,114 @@ abstract class BaseCatreginm extends BaseObject  implements Persistent {
 				$this->setFecreg($value);
 				break;
 			case 23:
-				$this->setDirinm($value);
+				$this->setNroinc($value);
 				break;
 			case 24:
-				$this->setNivinm($value);
+				$this->setAsireg($value);
 				break;
 			case 25:
-				$this->setUnihab($value);
+				$this->setFolio($value);
 				break;
 			case 26:
-				$this->setEdicas($value);
+				$this->setNromat($value);
 				break;
 			case 27:
-				$this->setPisinm($value);
+				$this->setCodcatant($value);
 				break;
 			case 28:
-				$this->setNuminm($value);
+				$this->setFecregant($value);
 				break;
 			case 29:
-				$this->setUbigex($value);
+				$this->setNumregant($value);
 				break;
 			case 30:
-				$this->setUbigey($value);
+				$this->setFolioant($value);
 				break;
 			case 31:
-				$this->setUbigez($value);
+				$this->setTriant($value);
 				break;
 			case 32:
-				$this->setNumhab($value);
+				$this->setProant($value);
 				break;
 			case 33:
-				$this->setNumper($value);
+				$this->setNivinm($value);
 				break;
 			case 34:
-				$this->setNumsan($value);
+				$this->setUnihab($value);
 				break;
 			case 35:
-				$this->setNumtom($value);
+				$this->setEdicas($value);
 				break;
 			case 36:
-				$this->setArever($value);
+				$this->setPisinm($value);
 				break;
 			case 37:
-				$this->setLoccom($value);
+				$this->setNuminm($value);
 				break;
 			case 38:
-				$this->setLocind($value);
+				$this->setUbigex($value);
 				break;
 			case 39:
-				$this->setCaptan($value);
+				$this->setUbigey($value);
 				break;
 			case 40:
-				$this->setCappis($value);
+				$this->setUbigez($value);
 				break;
 			case 41:
-				$this->setTrapis($value);
+				$this->setNumhab($value);
 				break;
 			case 42:
-				$this->setNumtel($value);
+				$this->setNumper($value);
 				break;
 			case 43:
-				$this->setNomarccro($value);
+				$this->setNumsan($value);
 				break;
 			case 44:
-				$this->setOficom($value);
+				$this->setNumtom($value);
 				break;
 			case 45:
-				$this->setFotinm($value);
+				$this->setArever($value);
 				break;
 			case 46:
-				$this->setLineste($value);
+				$this->setLoccom($value);
 				break;
 			case 47:
-				$this->setLinnor($value);
+				$this->setLocind($value);
 				break;
 			case 48:
-				$this->setLinoes($value);
+				$this->setCaptan($value);
 				break;
 			case 49:
-				$this->setLinsur($value);
+				$this->setCappis($value);
 				break;
 			case 50:
+				$this->setTrapis($value);
+				break;
+			case 51:
+				$this->setNumtel($value);
+				break;
+			case 52:
+				$this->setNomarccro($value);
+				break;
+			case 53:
+				$this->setOficom($value);
+				break;
+			case 54:
+				$this->setFotinm($value);
+				break;
+			case 55:
+				$this->setLineste($value);
+				break;
+			case 56:
+				$this->setLinnor($value);
+				break;
+			case 57:
+				$this->setLinoes($value);
+				break;
+			case 58:
+				$this->setLinsur($value);
+				break;
+			case 59:
 				$this->setId($value);
 				break;
 		} 	}
@@ -2248,34 +2562,43 @@ abstract class BaseCatreginm extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[20], $arr)) $this->setCoddivgeo($arr[$keys[20]]);
 		if (array_key_exists($keys[21], $arr)) $this->setNrocas($arr[$keys[21]]);
 		if (array_key_exists($keys[22], $arr)) $this->setFecreg($arr[$keys[22]]);
-		if (array_key_exists($keys[23], $arr)) $this->setDirinm($arr[$keys[23]]);
-		if (array_key_exists($keys[24], $arr)) $this->setNivinm($arr[$keys[24]]);
-		if (array_key_exists($keys[25], $arr)) $this->setUnihab($arr[$keys[25]]);
-		if (array_key_exists($keys[26], $arr)) $this->setEdicas($arr[$keys[26]]);
-		if (array_key_exists($keys[27], $arr)) $this->setPisinm($arr[$keys[27]]);
-		if (array_key_exists($keys[28], $arr)) $this->setNuminm($arr[$keys[28]]);
-		if (array_key_exists($keys[29], $arr)) $this->setUbigex($arr[$keys[29]]);
-		if (array_key_exists($keys[30], $arr)) $this->setUbigey($arr[$keys[30]]);
-		if (array_key_exists($keys[31], $arr)) $this->setUbigez($arr[$keys[31]]);
-		if (array_key_exists($keys[32], $arr)) $this->setNumhab($arr[$keys[32]]);
-		if (array_key_exists($keys[33], $arr)) $this->setNumper($arr[$keys[33]]);
-		if (array_key_exists($keys[34], $arr)) $this->setNumsan($arr[$keys[34]]);
-		if (array_key_exists($keys[35], $arr)) $this->setNumtom($arr[$keys[35]]);
-		if (array_key_exists($keys[36], $arr)) $this->setArever($arr[$keys[36]]);
-		if (array_key_exists($keys[37], $arr)) $this->setLoccom($arr[$keys[37]]);
-		if (array_key_exists($keys[38], $arr)) $this->setLocind($arr[$keys[38]]);
-		if (array_key_exists($keys[39], $arr)) $this->setCaptan($arr[$keys[39]]);
-		if (array_key_exists($keys[40], $arr)) $this->setCappis($arr[$keys[40]]);
-		if (array_key_exists($keys[41], $arr)) $this->setTrapis($arr[$keys[41]]);
-		if (array_key_exists($keys[42], $arr)) $this->setNumtel($arr[$keys[42]]);
-		if (array_key_exists($keys[43], $arr)) $this->setNomarccro($arr[$keys[43]]);
-		if (array_key_exists($keys[44], $arr)) $this->setOficom($arr[$keys[44]]);
-		if (array_key_exists($keys[45], $arr)) $this->setFotinm($arr[$keys[45]]);
-		if (array_key_exists($keys[46], $arr)) $this->setLineste($arr[$keys[46]]);
-		if (array_key_exists($keys[47], $arr)) $this->setLinnor($arr[$keys[47]]);
-		if (array_key_exists($keys[48], $arr)) $this->setLinoes($arr[$keys[48]]);
-		if (array_key_exists($keys[49], $arr)) $this->setLinsur($arr[$keys[49]]);
-		if (array_key_exists($keys[50], $arr)) $this->setId($arr[$keys[50]]);
+		if (array_key_exists($keys[23], $arr)) $this->setNroinc($arr[$keys[23]]);
+		if (array_key_exists($keys[24], $arr)) $this->setAsireg($arr[$keys[24]]);
+		if (array_key_exists($keys[25], $arr)) $this->setFolio($arr[$keys[25]]);
+		if (array_key_exists($keys[26], $arr)) $this->setNromat($arr[$keys[26]]);
+		if (array_key_exists($keys[27], $arr)) $this->setCodcatant($arr[$keys[27]]);
+		if (array_key_exists($keys[28], $arr)) $this->setFecregant($arr[$keys[28]]);
+		if (array_key_exists($keys[29], $arr)) $this->setNumregant($arr[$keys[29]]);
+		if (array_key_exists($keys[30], $arr)) $this->setFolioant($arr[$keys[30]]);
+		if (array_key_exists($keys[31], $arr)) $this->setTriant($arr[$keys[31]]);
+		if (array_key_exists($keys[32], $arr)) $this->setProant($arr[$keys[32]]);
+		if (array_key_exists($keys[33], $arr)) $this->setNivinm($arr[$keys[33]]);
+		if (array_key_exists($keys[34], $arr)) $this->setUnihab($arr[$keys[34]]);
+		if (array_key_exists($keys[35], $arr)) $this->setEdicas($arr[$keys[35]]);
+		if (array_key_exists($keys[36], $arr)) $this->setPisinm($arr[$keys[36]]);
+		if (array_key_exists($keys[37], $arr)) $this->setNuminm($arr[$keys[37]]);
+		if (array_key_exists($keys[38], $arr)) $this->setUbigex($arr[$keys[38]]);
+		if (array_key_exists($keys[39], $arr)) $this->setUbigey($arr[$keys[39]]);
+		if (array_key_exists($keys[40], $arr)) $this->setUbigez($arr[$keys[40]]);
+		if (array_key_exists($keys[41], $arr)) $this->setNumhab($arr[$keys[41]]);
+		if (array_key_exists($keys[42], $arr)) $this->setNumper($arr[$keys[42]]);
+		if (array_key_exists($keys[43], $arr)) $this->setNumsan($arr[$keys[43]]);
+		if (array_key_exists($keys[44], $arr)) $this->setNumtom($arr[$keys[44]]);
+		if (array_key_exists($keys[45], $arr)) $this->setArever($arr[$keys[45]]);
+		if (array_key_exists($keys[46], $arr)) $this->setLoccom($arr[$keys[46]]);
+		if (array_key_exists($keys[47], $arr)) $this->setLocind($arr[$keys[47]]);
+		if (array_key_exists($keys[48], $arr)) $this->setCaptan($arr[$keys[48]]);
+		if (array_key_exists($keys[49], $arr)) $this->setCappis($arr[$keys[49]]);
+		if (array_key_exists($keys[50], $arr)) $this->setTrapis($arr[$keys[50]]);
+		if (array_key_exists($keys[51], $arr)) $this->setNumtel($arr[$keys[51]]);
+		if (array_key_exists($keys[52], $arr)) $this->setNomarccro($arr[$keys[52]]);
+		if (array_key_exists($keys[53], $arr)) $this->setOficom($arr[$keys[53]]);
+		if (array_key_exists($keys[54], $arr)) $this->setFotinm($arr[$keys[54]]);
+		if (array_key_exists($keys[55], $arr)) $this->setLineste($arr[$keys[55]]);
+		if (array_key_exists($keys[56], $arr)) $this->setLinnor($arr[$keys[56]]);
+		if (array_key_exists($keys[57], $arr)) $this->setLinoes($arr[$keys[57]]);
+		if (array_key_exists($keys[58], $arr)) $this->setLinsur($arr[$keys[58]]);
+		if (array_key_exists($keys[59], $arr)) $this->setId($arr[$keys[59]]);
 	}
 
 	
@@ -2306,7 +2629,16 @@ abstract class BaseCatreginm extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CatreginmPeer::CODDIVGEO)) $criteria->add(CatreginmPeer::CODDIVGEO, $this->coddivgeo);
 		if ($this->isColumnModified(CatreginmPeer::NROCAS)) $criteria->add(CatreginmPeer::NROCAS, $this->nrocas);
 		if ($this->isColumnModified(CatreginmPeer::FECREG)) $criteria->add(CatreginmPeer::FECREG, $this->fecreg);
-		if ($this->isColumnModified(CatreginmPeer::DIRINM)) $criteria->add(CatreginmPeer::DIRINM, $this->dirinm);
+		if ($this->isColumnModified(CatreginmPeer::NROINC)) $criteria->add(CatreginmPeer::NROINC, $this->nroinc);
+		if ($this->isColumnModified(CatreginmPeer::ASIREG)) $criteria->add(CatreginmPeer::ASIREG, $this->asireg);
+		if ($this->isColumnModified(CatreginmPeer::FOLIO)) $criteria->add(CatreginmPeer::FOLIO, $this->folio);
+		if ($this->isColumnModified(CatreginmPeer::NROMAT)) $criteria->add(CatreginmPeer::NROMAT, $this->nromat);
+		if ($this->isColumnModified(CatreginmPeer::CODCATANT)) $criteria->add(CatreginmPeer::CODCATANT, $this->codcatant);
+		if ($this->isColumnModified(CatreginmPeer::FECREGANT)) $criteria->add(CatreginmPeer::FECREGANT, $this->fecregant);
+		if ($this->isColumnModified(CatreginmPeer::NUMREGANT)) $criteria->add(CatreginmPeer::NUMREGANT, $this->numregant);
+		if ($this->isColumnModified(CatreginmPeer::FOLIOANT)) $criteria->add(CatreginmPeer::FOLIOANT, $this->folioant);
+		if ($this->isColumnModified(CatreginmPeer::TRIANT)) $criteria->add(CatreginmPeer::TRIANT, $this->triant);
+		if ($this->isColumnModified(CatreginmPeer::PROANT)) $criteria->add(CatreginmPeer::PROANT, $this->proant);
 		if ($this->isColumnModified(CatreginmPeer::NIVINM)) $criteria->add(CatreginmPeer::NIVINM, $this->nivinm);
 		if ($this->isColumnModified(CatreginmPeer::UNIHAB)) $criteria->add(CatreginmPeer::UNIHAB, $this->unihab);
 		if ($this->isColumnModified(CatreginmPeer::EDICAS)) $criteria->add(CatreginmPeer::EDICAS, $this->edicas);
@@ -2410,7 +2742,25 @@ abstract class BaseCatreginm extends BaseObject  implements Persistent {
 
 		$copyObj->setFecreg($this->fecreg);
 
-		$copyObj->setDirinm($this->dirinm);
+		$copyObj->setNroinc($this->nroinc);
+
+		$copyObj->setAsireg($this->asireg);
+
+		$copyObj->setFolio($this->folio);
+
+		$copyObj->setNromat($this->nromat);
+
+		$copyObj->setCodcatant($this->codcatant);
+
+		$copyObj->setFecregant($this->fecregant);
+
+		$copyObj->setNumregant($this->numregant);
+
+		$copyObj->setFolioant($this->folioant);
+
+		$copyObj->setTriant($this->triant);
+
+		$copyObj->setProant($this->proant);
 
 		$copyObj->setNivinm($this->nivinm);
 
@@ -2478,6 +2828,10 @@ abstract class BaseCatreginm extends BaseObject  implements Persistent {
 
 			foreach($this->getCatperinms() as $relObj) {
 				$copyObj->addCatperinm($relObj->copy($deepCopy));
+			}
+
+			foreach($this->getCatusoespinms() as $relObj) {
+				$copyObj->addCatusoespinm($relObj->copy($deepCopy));
 			}
 
 		} 
@@ -3398,6 +3752,111 @@ abstract class BaseCatreginm extends BaseObject  implements Persistent {
 		$this->lastCatperinmCriteria = $criteria;
 
 		return $this->collCatperinms;
+	}
+
+	
+	public function initCatusoespinms()
+	{
+		if ($this->collCatusoespinms === null) {
+			$this->collCatusoespinms = array();
+		}
+	}
+
+	
+	public function getCatusoespinms($criteria = null, $con = null)
+	{
+				include_once 'lib/model/catastro/om/BaseCatusoespinmPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCatusoespinms === null) {
+			if ($this->isNew()) {
+			   $this->collCatusoespinms = array();
+			} else {
+
+				$criteria->add(CatusoespinmPeer::CATREGINM_ID, $this->getId());
+
+				CatusoespinmPeer::addSelectColumns($criteria);
+				$this->collCatusoespinms = CatusoespinmPeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(CatusoespinmPeer::CATREGINM_ID, $this->getId());
+
+				CatusoespinmPeer::addSelectColumns($criteria);
+				if (!isset($this->lastCatusoespinmCriteria) || !$this->lastCatusoespinmCriteria->equals($criteria)) {
+					$this->collCatusoespinms = CatusoespinmPeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastCatusoespinmCriteria = $criteria;
+		return $this->collCatusoespinms;
+	}
+
+	
+	public function countCatusoespinms($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/catastro/om/BaseCatusoespinmPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(CatusoespinmPeer::CATREGINM_ID, $this->getId());
+
+		return CatusoespinmPeer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addCatusoespinm(Catusoespinm $l)
+	{
+		$this->collCatusoespinms[] = $l;
+		$l->setCatreginm($this);
+	}
+
+
+	
+	public function getCatusoespinmsJoinCatusoesp($criteria = null, $con = null)
+	{
+				include_once 'lib/model/catastro/om/BaseCatusoespinmPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCatusoespinms === null) {
+			if ($this->isNew()) {
+				$this->collCatusoespinms = array();
+			} else {
+
+				$criteria->add(CatusoespinmPeer::CATREGINM_ID, $this->getId());
+
+				$this->collCatusoespinms = CatusoespinmPeer::doSelectJoinCatusoesp($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(CatusoespinmPeer::CATREGINM_ID, $this->getId());
+
+			if (!isset($this->lastCatusoespinmCriteria) || !$this->lastCatusoespinmCriteria->equals($criteria)) {
+				$this->collCatusoespinms = CatusoespinmPeer::doSelectJoinCatusoesp($criteria, $con);
+			}
+		}
+		$this->lastCatusoespinmCriteria = $criteria;
+
+		return $this->collCatusoespinms;
 	}
 
 } 

@@ -8,6 +8,16 @@ generator:
       coddivgeo:           { name: Ubicacion Geografica, params: size=30 maxlength=30, help: Coloque el Numero Catastral}
       nrocas:              { name: Codigo Catastral, params: size=30 maxlength=30, help: Coloque el Numero Catastral}
       fecreg:              { name: Fecha Registro, params: date_format='dd/MM/yyyy' size=10 maxlength=10, validate: Vfecha, msj_error: La fecha del Registro, help: Coloque la Fecha de Nacimiento o Constitucion, validate: Vfecha, msj_error: La fecha del Registro }
+      nroinc:              { name: Nro de Inscripcion, params: size=30 maxlength=100, help: Coloque el Nro de la Inscripcion }
+      asireg:              { name: Asiento Registrable, params: size=30 maxlength=250, help: Coloque Asiento Registrable }
+      folio:               { name: Folio, type: textarea_tag, params: size=30x2 maxlength=1000, help: Coloque Asiento Registrable }
+      nromat:              { name: Nro de Matricula, params: size=30 maxlength=100, help: Coloque el Nro de Matricula }
+      codcatant:           { name: Codigo Catastral, params: size=30 maxlength=100, help: Coloque el Codigo Catastral}
+      fecregant:           { name: Fecha Registro, params: date_format='dd/MM/yyyy' size=10 maxlength=10, validate: Vfecha, msj_error: La fecha del Registro, help: Coloque la Fecha del Registro, validate: Vfecha, msj_error: La fecha del Registro }
+      numregant:           { name: Nro del Registro, params: size=30 maxlength=100, help: Coloque el Nro del Registro }
+      folioant:            { name: Folio, type: textarea_tag, params: size=30x2 maxlength=1000, help: Coloque el Nro del Folio }
+      triant:              { name: Trimestre, params: size=30 maxlength=250, help: Coloque el Trimestre }
+      proant:              { name: Protocolo, params: size=30 maxlength=250, help: Coloque el Protocolo }
       #catciu_id:           { name: Localidad, params: include_custom= "Seleccione", help: Coloque la Localidad}
       catbarurb_id:        { name: Urb/Barrio, help: Coloque la Urbanizacion/Barrio}
       cattramofro_id:      { name: Av./Call./Vrd., help: Coloque la Av./Call./Vrd.}
@@ -37,10 +47,10 @@ generator:
         params: include_custom= "Seleccione"
         help: Seleccione la Condicion del Inmueble
 
-      catusoesp_id:
-        name: Uso Especifico
-        params: include_custom= "Seleccione"
-        help: Seleccione Uso Especifico del Inmueble
+#      catusoesp_id:
+#        name: Uso Especifico
+#        params: include_custom= "Seleccione"
+#        help: Seleccione Uso Especifico del Inmueble
 
       catconsoc_id:
         name: Condicion Socio Economica
@@ -113,6 +123,9 @@ generator:
       terreno:
         name: .
 
+      usoespecifico:
+        name: .
+
       fotinm:
         name: Imagen
         help: Tamaño de la foto 90x100 (jpg, gif o png)
@@ -155,12 +168,14 @@ generator:
     edit:
       title: Edicion Registro de Cedula Catastral
       display:
-        "Datos Generales":  [ _coddivgeo, _nrocas, fecreg]
+        "Datos Generales":  [ _coddivgeo, _nrocas, fecreg, nroinc, asireg, nromat, folio]
+        "Registro Anterior (Viejo)":  [  codcatant, fecregant, numregant, triant, proant, folioant]
         #"Ubicacion Territorial":  [fecreg]
         "Ocupantes: Propietario/ Inquilino/ Administrador":              [ _ocupantes]
         "Direccion Inmueble":  [ catbarurb_id, cattramofro_id, cattramolat_id, cattramolat2_id, edicas, pisinm, numinm, catcodpos_id, ubigex, ubigey, ubigez, dirinm]
         "Linderos":            [ lineste, linoes, linnor, linsur]
-        "Datos del Inmueble":  [ cattipviv_id, catconinm_id, catusoesp_id, catconsoc_id, numper, numhab, numsan, arever, locind, captan, _trapis]
+        "Datos del Inmueble":  [ cattipviv_id, catconinm_id, catconsoc_id, numper, numhab, numsan, arever, locind, captan, _trapis]
+        "Caracteristica Uso Especifico del Inmueble":    [ _usoespecifico]
         "Caracteristica de la Construccion":    [ _construccion]
         "Caracteristica del Terreno":    [ _terreno]
         "Croquis":    [ fotinm]

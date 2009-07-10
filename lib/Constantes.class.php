@@ -487,7 +487,12 @@ public static function PagoDoble()
 
   public static function ListadeTipo() //Catastral
   {
-    return array('P' => 'Pais', 'E' => 'Estado', 'M' => 'Municipios', 'C' => 'Ciudad', 'P' => 'Parroquias', 'S' => 'Sector', 'Z' => 'Cod.Catastral');
+    return array('P' => 'Pais', 'E' => 'Estado', 'M' => 'Municipios', 'C' => 'Ciudad', 'P' => 'Parroquias', 'S' => 'Sector', 'B' => 'Barrio/Urb', 'T' => 'Tramo', 'MA' => 'Manzana', 'Z' => 'Cod.Catastral');
+  }
+
+  public static function ListaCaract() //Caracteristica
+  {
+    return array('T' => 'Terreno', 'C' => 'Construccion');
   }
 
 }

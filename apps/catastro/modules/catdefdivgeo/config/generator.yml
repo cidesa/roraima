@@ -9,7 +9,7 @@ generator:
       desdivgeo:    { name: Descripcion, params: size=40}
 
     list:
-      title:     Definicion de Division Geografica
+      title:     Definicion de Division Territorial
       fields:
         coddivgeo:    { name: Codigo, params: size=15}
         desdivgeo:    { name: Descripcion, params: size=15}
@@ -22,7 +22,7 @@ generator:
         _delete:      ~
 
     edit:
-      title: Edicion de Division Geografica
+      title: Edicion de Division Territorial
       display:  [ _coddivgeo, desdivgeo]
       actions:
         _list:        ~

@@ -22,6 +22,12 @@ abstract class BaseCatusoesp extends BaseObject  implements Persistent {
 	protected $lastCatreginmCriteria = null;
 
 	
+	protected $collCatusoespinms;
+
+	
+	protected $lastCatusoespinmCriteria = null;
+
+	
 	protected $alreadyInSave = false;
 
 	
@@ -172,6 +178,14 @@ abstract class BaseCatusoesp extends BaseObject  implements Persistent {
 				}
 			}
 
+			if ($this->collCatusoespinms !== null) {
+				foreach($this->collCatusoespinms as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
+
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
@@ -215,6 +229,14 @@ abstract class BaseCatusoesp extends BaseObject  implements Persistent {
 
 				if ($this->collCatreginms !== null) {
 					foreach($this->collCatreginms as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
+
+				if ($this->collCatusoespinms !== null) {
+					foreach($this->collCatusoespinms as $referrerFK) {
 						if (!$referrerFK->validate($columns)) {
 							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
 						}
@@ -334,6 +356,10 @@ abstract class BaseCatusoesp extends BaseObject  implements Persistent {
 
 			foreach($this->getCatreginms() as $relObj) {
 				$copyObj->addCatreginm($relObj->copy($deepCopy));
+			}
+
+			foreach($this->getCatusoespinms() as $relObj) {
+				$copyObj->addCatusoespinm($relObj->copy($deepCopy));
 			}
 
 		} 
@@ -1094,6 +1120,111 @@ abstract class BaseCatusoesp extends BaseObject  implements Persistent {
 		$this->lastCatreginmCriteria = $criteria;
 
 		return $this->collCatreginms;
+	}
+
+	
+	public function initCatusoespinms()
+	{
+		if ($this->collCatusoespinms === null) {
+			$this->collCatusoespinms = array();
+		}
+	}
+
+	
+	public function getCatusoespinms($criteria = null, $con = null)
+	{
+				include_once 'lib/model/catastro/om/BaseCatusoespinmPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCatusoespinms === null) {
+			if ($this->isNew()) {
+			   $this->collCatusoespinms = array();
+			} else {
+
+				$criteria->add(CatusoespinmPeer::CATUSOESP_ID, $this->getId());
+
+				CatusoespinmPeer::addSelectColumns($criteria);
+				$this->collCatusoespinms = CatusoespinmPeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(CatusoespinmPeer::CATUSOESP_ID, $this->getId());
+
+				CatusoespinmPeer::addSelectColumns($criteria);
+				if (!isset($this->lastCatusoespinmCriteria) || !$this->lastCatusoespinmCriteria->equals($criteria)) {
+					$this->collCatusoespinms = CatusoespinmPeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastCatusoespinmCriteria = $criteria;
+		return $this->collCatusoespinms;
+	}
+
+	
+	public function countCatusoespinms($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/catastro/om/BaseCatusoespinmPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(CatusoespinmPeer::CATUSOESP_ID, $this->getId());
+
+		return CatusoespinmPeer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addCatusoespinm(Catusoespinm $l)
+	{
+		$this->collCatusoespinms[] = $l;
+		$l->setCatusoesp($this);
+	}
+
+
+	
+	public function getCatusoespinmsJoinCatreginm($criteria = null, $con = null)
+	{
+				include_once 'lib/model/catastro/om/BaseCatusoespinmPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCatusoespinms === null) {
+			if ($this->isNew()) {
+				$this->collCatusoespinms = array();
+			} else {
+
+				$criteria->add(CatusoespinmPeer::CATUSOESP_ID, $this->getId());
+
+				$this->collCatusoespinms = CatusoespinmPeer::doSelectJoinCatreginm($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(CatusoespinmPeer::CATUSOESP_ID, $this->getId());
+
+			if (!isset($this->lastCatusoespinmCriteria) || !$this->lastCatusoespinmCriteria->equals($criteria)) {
+				$this->collCatusoespinms = CatusoespinmPeer::doSelectJoinCatreginm($criteria, $con);
+			}
+		}
+		$this->lastCatusoespinmCriteria = $criteria;
+
+		return $this->collCatusoespinms;
 	}
 
 } 

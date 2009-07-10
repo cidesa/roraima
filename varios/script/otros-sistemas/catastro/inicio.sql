@@ -62,4 +62,19 @@ INSERT INTO catsenvia (dessen) VALUES ('OESTE-ESTE');
 INSERT INTO catsenvia (dessen) VALUES ('NORTE-SUR');
 
 
-INSERT INTO cattipvia (desvia) VALUES ('Calle N-1');
+INSERT INTO cattipvia (desvia) VALUES ('Avenida');
+INSERT INTO cattipvia (desvia) VALUES ('Calle');
+
+INSERT INTO catusoesp (desuso) VALUES ('Residencial');
+INSERT INTO catusoesp (desuso) VALUES ('Comercial');
+INSERT INTO catusoesp (desuso) VALUES ('Industrial');
+
+INSERT INTO catconsoc (desconsoc) VALUES ('Media');
+
+
+INSERT INTO catconinm (desconinm) VALUES ('Bueno');
+INSERT INTO catconinm (desconinm) VALUES ('Habitable');
+INSERT INTO catconinm (desconinm) VALUES ('Regular');
+INSERT INTO catconinm (desconinm) VALUES ('Inhabitable');
+
+

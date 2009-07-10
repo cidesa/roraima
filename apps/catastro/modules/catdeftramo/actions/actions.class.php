@@ -14,7 +14,7 @@ class catdeftramoActions extends autocatdeftramoActions
   // Para incluir funcionalidades al executeEdit()
   public function editing()
   {
-
+	$this->setVars();
 
   }
 
@@ -84,22 +84,14 @@ class catdeftramoActions extends autocatdeftramoActions
 
   public function executeAjax()
   {
-
-    $codigo = $this->getRequestParameter('codigo','');
-    // Esta variable ajax debe ser usada en cada llamado para identificar
-    // que objeto hace el llamado y por consiguiente ejecutar el código necesario
-    $ajax = $this->getRequestParameter('ajax','');
-
-    // Se debe enviar en la petición ajax desde el cliente los datos que necesitemos
-    // para generar el código de retorno, esto porque en un llamado Ajax no se devuelven
-    // los datos de los objetos de la vista como pasa en un submit normal.
+    $codigo    = $this->getRequestParameter('codigo','');
+    $ajax      = $this->getRequestParameter('ajax','');
+    $cajtexmos = $this->getRequestParameter('cajtexmos','');
 
     switch ($ajax){
       case '1':
-        // La variable $output es usada para retornar datos en formato de arreglo para actualizar
-        // objetos en la vista. mas informacion en
-        // http://201.210.211.26:8080/www/wiki/index.php/Agregar_Ajax_para_buscar_una_descripcion
-        $output = '[["","",""],["","",""],["","",""]]';
+        $desdivgeo = Herramientas::getX('coddivgeo','catdivgeo','desdivgeo',$codigo);
+        $output = '[["'.$cajtexmos.'","'.$desdivgeo.'",""]]';
         break;
       default:
         $output = '[["","",""],["","",""],["","",""]]';
@@ -161,6 +153,7 @@ class catdeftramoActions extends autocatdeftramoActions
    */
   public function updateError()
   {
+  	$this->setVars();
     //$this->configGrid();
 
     //$grid = Herramientas::CargarDatosGrid($this,$this->obj);
@@ -179,5 +172,25 @@ class catdeftramoActions extends autocatdeftramoActions
     return parent::deleting($clasemodelo);
   }
 
+  public function setVars()
+  {
+  	$c = new Criteria();
+  	//$c->add(CatnivcatPeer::CATPAR,'Z',Criteria::ALT_NOT_EQUAL);  // !=
+  	$reg = CatnivcatPeer::doselect($c);
+
+  	foreach ($reg as $datos)
+  	{
+  		if ($datos->getCatpar()=='Z')
+  		{
+            $this->loncc = $datos->getLonniv();
+  		}else{
+  			$this->nomabr = $this->nomabr .'-'.$datos->getNomabr();
+  		}
+  	}
+  	$this->params[0] = Herramientas::getX_vacio('catpar','catnivcat','forcodcat','Z');  //Z -> Cod.Catastral
+  	$this->params[1] = strlen(substr($this->params[0],0,strlen($this->params[0])-$this->loncc-1));
+  	$this->params[2] = substr($this->nomabr,1,strlen($this->nomabr));
+  	$this->params[3] = $this->loncc;
+  }
 
 }

@@ -14,16 +14,17 @@ catastro:
       default: OperatorClass.png
   menu:
     Definiciones Especificas:
+      Niveles de Catastral:                       catdefniv
       Vialidad:
         Direccion de la Vialidad:                 catdefdirvia
         Sentido de la Vialidad:                   catdefsenvia
         Tipo de Vialidad:                         catdeftipvia
-      Division Territorial:
+      Division Territorial:                       catdefdivgeo
         #Pais:                                     catdefdivpai
-        Est-Mun-Ciu-Parr-Sec:                      catdefdivgeo
-        Barrio/Urbanizaciones:                     catdefdivbarurb
-        Tramo:                                     catdeftramo
-        Manzana:                                   catdefman
+        #Definicion:                                catdefdivgeo
+        #Barrio/Urbanizaciones:                     catdefdivbarurb
+        #Tramo:                                     catdeftramo
+        #Manzana:                                   catdefman
       Inmuebles:
         Condicion del Inmueble:                 catdefconinm
         #Caracteristicas del Inmueble:           catcarinm

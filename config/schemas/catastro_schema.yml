@@ -600,9 +600,35 @@ propel:
       size: 30
     fecreg:
       type: DATE
-    dirinm:                   #direccion concatenada
+    nroinc:                   #nro de inscripcion
       type: VARCHAR
-      size: 254
+      size: 100
+    asireg:                   #asiento registrable
+      type: VARCHAR
+      size: 250
+    folio:                   #folio
+      type: VARCHAR
+      size: 1000
+    nromat:                   #nro de matricula
+      type: VARCHAR
+      size: 100
+    codcatant:                   #codigo catastral anterior o viejo
+      type: VARCHAR
+      size: 100
+    fecregant:             #fecha del registro viejo o anterior
+      type: DATE
+    numregant:             #nro registro viejo o anterior
+      type: VARCHAR
+      size: 100
+    folioant:              #folio viejo o anterior
+      type: VARCHAR
+      size: 1000
+    triant:                #trimestre viejo o anterior
+      type: VARCHAR
+      size: 250
+    proant:                #protocolo viejo o anterior
+      type: VARCHAR
+      size: 100
     nivinm:                   #toma - NO LO USE
       type: VARCHAR
       size: 8
@@ -1027,6 +1053,31 @@ propel:
       type: VARCHAR
       size: 100
       required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+  catusoespinm:
+    _attributes:
+      idMethod: native
+    catreginm_id:
+      type: INTEGER
+      foreignTable: catreginm
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    catusoesp_id:
+      type: INTEGER
+      foreignTable: catusoesp
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    tipo:
+      type: VARCHAR
+      size: 2
+    valor:
+      type: INTEGER
     id:
       type: INTEGER
       required: true

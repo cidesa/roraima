@@ -80,7 +80,25 @@ class CatreginmMapBuilder {
 
 		$tMap->addColumn('FECREG', 'Fecreg', 'int', CreoleTypes::DATE, false, null);
 
-		$tMap->addColumn('DIRINM', 'Dirinm', 'string', CreoleTypes::VARCHAR, false, 254);
+		$tMap->addColumn('NROINC', 'Nroinc', 'string', CreoleTypes::VARCHAR, false, 100);
+
+		$tMap->addColumn('ASIREG', 'Asireg', 'string', CreoleTypes::VARCHAR, false, 250);
+
+		$tMap->addColumn('FOLIO', 'Folio', 'string', CreoleTypes::VARCHAR, false, 1000);
+
+		$tMap->addColumn('NROMAT', 'Nromat', 'string', CreoleTypes::VARCHAR, false, 100);
+
+		$tMap->addColumn('CODCATANT', 'Codcatant', 'string', CreoleTypes::VARCHAR, false, 100);
+
+		$tMap->addColumn('FECREGANT', 'Fecregant', 'int', CreoleTypes::DATE, false, null);
+
+		$tMap->addColumn('NUMREGANT', 'Numregant', 'string', CreoleTypes::VARCHAR, false, 100);
+
+		$tMap->addColumn('FOLIOANT', 'Folioant', 'string', CreoleTypes::VARCHAR, false, 1000);
+
+		$tMap->addColumn('TRIANT', 'Triant', 'string', CreoleTypes::VARCHAR, false, 250);
+
+		$tMap->addColumn('PROANT', 'Proant', 'string', CreoleTypes::VARCHAR, false, 100);
 
 		$tMap->addColumn('NIVINM', 'Nivinm', 'string', CreoleTypes::VARCHAR, false, 8);
 
