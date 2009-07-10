@@ -508,6 +508,7 @@ $this->Bitacora('Guardo');
       $this->msgerr="";
       $comprobante= array();
       $concom=1;
+      $output = '[["","",""]]';
       //verificar que los datos esten completos
       if ($this->tscheemi->getTipdoc()!="" and $this->tscheemi->getNumcue()!=""  and $this->tscheemi->getFecemi()!=""  and $this->tscheemi->getNumche()!=""  )
       {
@@ -587,7 +588,6 @@ $this->Bitacora('Guardo');
             $this->formulario=array();
 
             $output = '[["totalcomprobantes","'.$concom.'",""]]';
-            $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
          }
          else
          {
@@ -615,11 +615,12 @@ $this->Bitacora('Guardo');
             $this->formulario=$f;
 
             $output = '[["totalcomprobantes","'.$concom.'",""]]';
-            $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+
 
          }//else
-      }//if ($this->msgerr1!="")
 
+      }//if ($this->msgerr1!="")
+      $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
   }
 
   public function executeAutocomplete()
