@@ -9,9 +9,9 @@ generator:
       catdivgeo_id:     { name: Division Geografica, params: size=32}
       nomtramo:         { name: Tramo, params: size=50 maxlength=50}
       alitramo:         { name: Alias, params: size=50 maxlength=50}
-      cattipvia_id:        { name: Tipo, params: include_custom= "Seleccione", help: Coloque la Localidad}
-      catsenvia_id:        { name: Sentido, params: include_custom= "Seleccione", help: Coloque la Localidad}
-      catdirvia_id:        { name: Direccion, params: include_custom= "Seleccione", help: Coloque la Localidad}
+      cattipvia_id:        { name: Tipo, params: include_custom= "Seleccione", help: Coloque el Tipo de la Vialidad}
+      catsenvia_id:        { name: Sentido, params: include_custom= "Seleccione", help: Coloque el Sentido de la Vialidad}
+      catdirvia_id:        { name: Direccion, params: include_custom= "Seleccione", help: Coloque la Direccion de la Vialidad}
 
     list:
       title:     Definicion Tramo (Calles, Avenidas, Veredas, etc)

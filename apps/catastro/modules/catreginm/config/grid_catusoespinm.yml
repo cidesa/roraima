@@ -1,0 +1,28 @@
+opciones:                  # Opciones generales
+  name:                    usoespecifico
+  eliminar:                true
+  tabla:                   catusoespinm
+  anchogrid:               450
+  ancho:                   420
+  filas:                   1
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Tipo
+  tipo:                    c
+  nombrecampo:             tipo
+  esgrabable:              true
+  html:                    [ ]
+2:       # Columna 2
+  titulo:                  Uso Inmueble
+  tipo:                    c
+  esgrabable:              true
+  nombrecampo:             catusoesp_id
+  html:                    [ ]
+3:       # Columna 3
+  titulo:                  Valor Unitario(m2)
+  tipo:                    t
+  nombrecampo:             valor
+  esgrabable:              true
+  html:                    [size=10 ]
+

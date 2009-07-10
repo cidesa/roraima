@@ -2,19 +2,6 @@
 
 <?  echo $params[2]; ?>
 <br>
-<?php /*
-  echo Catalogo($catreginm,0,array(
-  'getprincipal' => 'getCoddivgeo',
-  'getsecundario' => 'getDesdivgeo',
-  'campoprincipal' => 'coddivgeo',
-  'camposecundario' => 'desdivgeo',
-  'tamanoprincipal' => '15',
-  'campobase' => 'id',
-  ), 'Catdefdivbarurb_Catdivgeo', 'catdivgeo');
-*/
-
-?>
-
   <?php
   $mascara=$params[0];
   $longdivgeo=$params[1];
@@ -34,7 +21,7 @@
         ))));echo $value ? $value : '&nbsp;' ;
 ?>
 
-<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Catdefdivbarurb_Catdivgeo/clase/Catdivgeo/frame/sf_admin_edit_form/obj1/catreginm_desdivgeo/obj2/catreginm_coddivgeo/campo1/desdivgeo/campo2/coddivgeo')?>
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Catdefdivbarurb_Catdivgeo/clase/Catdivgeo/frame/sf_admin_edit_form/obj1/catreginm_desdivgeo/obj2/catreginm_coddivgeo/campo1/desdivgeo/campo2/coddivgeo/param1/'.$longdivgeo)?>
 
   <?php $value = object_input_tag($catreginm, 'getDesdivgeo', array (
   'size' => 40,

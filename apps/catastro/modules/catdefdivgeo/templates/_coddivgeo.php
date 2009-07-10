@@ -1,14 +1,15 @@
-<?
-$longpar = 14;
-$mascaradivgeo='##-##-##-##-##';
-?>
+<?php use_helper('Object', 'Validation', 'ObjectAdmin', 'I18N', 'Date', 'Catalogo') ?>
 
-EST-MUN-CIU-PAR-SEC
+<?  echo $params[2]; ?>
 <br>
-  <?php $value = object_input_tag($catdivgeo, 'getCoddivgeo', array (
-  'size' => 14,
-  'maxlength' => $longpar,
+  <?php
+  $mascara    = $params[0];
+  $longdivgeo = $params[1];
+
+  $value = object_input_tag($catdivgeo, 'getCoddivgeo', array (
+  'size' => $longdivgeo,
+  'maxlength' => $longdivgeo,
   'control_name' => 'catdivgeo[coddivgeo]',
-  'onKeyPress' => "javascript:return dFilter (event.keyCode, this,'$mascaradivgeo');"
+  'onKeyDown'    => "javascript:return dFilter (event.keyCode, this,'$mascara')",
 
 )); echo $value ? $value : '&nbsp;' ?>

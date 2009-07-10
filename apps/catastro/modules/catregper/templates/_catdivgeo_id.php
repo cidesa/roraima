@@ -12,6 +12,7 @@ echo Catalogo($catregper,0,array(
   'getsecundario' => 'getDesdivgeo',
   'campoprincipal' => 'coddivgeo',
   'camposecundario' => 'desdivgeo',
+  'tamanosecundario' => '35',
   'campobase' => 'catdivgeo_id',
   ), 'Catdefdivbarurb_Catdivgeo', 'Catdivgeo','','','',1);
 

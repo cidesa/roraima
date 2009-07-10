@@ -2078,8 +2078,24 @@ public static function obtenerDiaMesOAno($fecha,$formato,$dmoa)
     }
       return -1;
   }
-  
-    public static function ObtenerMesenLetras($mes)
+
+  public static function transformarFecha($fecha)
+  {
+      $dateFormat = new sfDateFormat($this->getUser()->getCulture());
+                          if (!is_array($fecha))
+      {
+        $value = $dateFormat->format($fecha, 'i', $dateFormat->getInputPattern('d'));
+      }
+      else
+      {
+        $value_array = $fecha;
+        $value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+      }
+
+      return $value;
+  }
+
+  public static function ObtenerMesenLetras($mes)
   {
   			if($mes=='01')  return $mes='Enero';
 			if($mes=='02')  return $mes='Febrero';

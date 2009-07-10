@@ -5287,8 +5287,11 @@ A.CODREDE"
   {
     $this->c = new Criteria();
     //$this->c->add(CatcarconPeer::TIPO,$params[0]);
-  $this->sql = "length(coddivgeo) = '14'";
-    $this->c->add(CatdivgeoPeer::CODDIVGEO, $this->sql, Criteria :: CUSTOM);
+
+    if (count($params) > 1){
+    	$this->sql = "length(coddivgeo) = '$params[0]'";
+    	$this->c->add(CatdivgeoPeer::CODDIVGEO, $this->sql, Criteria :: CUSTOM);
+    }
     $this->c->addAscendingOrderByColumn(CatdivgeoPeer::CODDIVGEO);
 
     $this->columnas = array (
@@ -5296,6 +5299,7 @@ A.CODREDE"
       CatdivgeoPeer::DESDIVGEO => 'Descripcion'
     );
   }
+
 
 
   public function Catdefcatman_Cattramo($params='')
@@ -5599,7 +5603,7 @@ A.CODREDE"
       OpconpagPeer :: NOMCONCEPTO => 'Descripcion'
     );
   }
-  
+
   public function Npdefcpt_embargos() {
     $this->c = new Criteria();
 	$this->c->add(NpdefcptPeer::OPECON,'D');
@@ -5609,7 +5613,7 @@ A.CODREDE"
       NpdefcptPeer :: NOMCON => 'Descripción'
     );
   }
-  
+
   public function Npdefcpt_embargos2() {
     $this->c = new Criteria();
 	$this->c->add(NpdefcptPeer::OPECON,'A');
@@ -5619,7 +5623,7 @@ A.CODREDE"
       NpdefcptPeer :: NOMCON => 'Descripción'
     );
   }
-  
+
   public function Npbenefiemb_embargos() {
     $this->c = new Criteria();
     $this->c->addAscendingOrderByColumn(NpbenefiembPeer::CEDRIF);

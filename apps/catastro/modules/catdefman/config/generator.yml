@@ -25,8 +25,9 @@ generator:
       display:   [ =coddivgeo, catdivgeo, nomtramo]
       fields:
         catdivgeo_id: { name: Division Geografico, params: size=32}
-        nomtramo:    { name: Descripcion, params: size=15}
-      filters:   [ nomtramo, cattipvia_id, catsenvia_id, catdirvia_id]
+        nomtramo:    { name: Manzana, params: size=15}
+#      filters:   [ nomtramo, cattipvia_id, catsenvia_id, catdirvia_id]
+      filters:   [ nomtramo]
       max_per_page: 10
       object_actions:
         _edit:        ~

@@ -1,19 +1,30 @@
 <?php use_helper('Object', 'Validation', 'ObjectAdmin', 'I18N', 'Date', 'Catalogo') ?>
-<?php //echo javascript_include_tag('nomina/nomnomcalnom') ?>
+<?  echo $params[2];
 
-<?php
-//  $catparams="/param1/'+$('npnomina_codnomesp').value+'";
-//  $id="+'&codnomesp='+$('catbarurb_nombarurb').value";
+  $mascara=$params[0];
+  $longdivgeo=$params[1];
  ?>
+<br>
+  <?php
 
-<?php
-echo Catalogo($cattramo,0,array(
-  'getprincipal' => 'getCoddivgeo',
-  'getsecundario' => 'getDesdivgeo',
-  'campoprincipal' => 'coddivgeo',
-  'camposecundario' => 'desdivgeo',
-  'campobase' => 'catdivgeo_id',
-  ), 'Catdefdivbarurb_Catdivgeo', 'Catdivgeo','','','',1);
+   $value = object_input_tag($cattramo, 'getCoddivgeo', array (
+  'size'      => $longdivgeo,
+  'maxlength' => $longdivgeo,
+  'readonly'  =>  $cattramo->getId()!='' ? true : false ,
+  'control_name' => 'cattramo[coddivgeo]',
+  'onKeyDown'    => "javascript:return dFilter (event.keyCode, this,'$mascara')",
+  'onBlur'       => remote_function(array(
+        'url'    => 'catdeftramo/ajax',
+        'condition' => "$('cattramo_coddivgeo').value != '' && $('id').value == ''",
+        'complete'  => 'AjaxJSON(request, json)',
+        'with' => "'ajax=1&cajtexmos=cattramo_desdivgeo&codigo='+this.value",
+        )),
+   )); 	echo $value ? $value : '&nbsp;' ?>
 
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Catdefdivbarurb_Catdivgeo/clase/Catdivgeo/frame/sf_admin_edit_form/obj1/cattramo_desdivgeo/obj2/cattramo_coddivgeo/campo1/desdivgeo/campo2/coddivgeo/param1/'.$longdivgeo)?>
 
-?>
+  <?php $value = object_input_tag($cattramo, 'getDesdivgeo', array (
+  'size' => 40,
+  'disabled' => true,
+  'control_name' => 'cattramo[desdivgeo]',
+)); echo $value ? $value : '&nbsp;' ?>

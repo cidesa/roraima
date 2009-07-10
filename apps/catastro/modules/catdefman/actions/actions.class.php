@@ -91,7 +91,7 @@ class catdefmanActions extends autocatdefmanActions
   // Para incluir funcionalidades al executeEdit()
   public function editing()
   {
-
+	$this->setVars();
 
   }
 
@@ -161,24 +161,14 @@ class catdefmanActions extends autocatdefmanActions
 
   public function executeAjax()
   {
-
-     $this->codigo = $this->getRequestParameter('codigo','');
-     //$this->id1 = $this->getRequestParameter('id','');
-    // Esta variable ajax debe ser usada en cada llamado para identificar
-    // que objeto hace el llamado y por consiguiente ejecutar el código necesario
-    $ajax = $this->getRequestParameter('ajax','');
-
-    // Se debe enviar en la petición ajax desde el cliente los datos que necesitemos
-    // para generar el código de retorno, esto porque en un llamado Ajax no se devuelven
-    // los datos de los objetos de la vista como pasa en un submit normal.
+    $codigo    = $this->getRequestParameter('codigo','');
+    $ajax      = $this->getRequestParameter('ajax','');
+    $cajtexmos = $this->getRequestParameter('cajtexmos','');
 
     switch ($ajax){
       case '1':
-        $this->catman = $this->getCatmanOrCreate();
-        $this->updateCatmanFromRequest();
-        $this->labels = $this->getLabels();
-        $this->params=array();
-        $output = '[["","",""],["","",""],["","",""]]';
+        $desdivgeo = Herramientas::getX('coddivgeo','catdivgeo','desdivgeo',$codigo);
+        $output = '[["'.$cajtexmos.'","'.$desdivgeo.'",""]]';
         break;
       default:
         $output = '[["","",""],["","",""],["","",""]]';
@@ -189,7 +179,7 @@ class catdefmanActions extends autocatdefmanActions
 
     // Si solo se va usar ajax para actualziar datos en objetos ya existentes se debe
     // mantener habilitar esta instrucción
-    //return sfView::HEADER_ONLY;
+    return sfView::HEADER_ONLY;
 
     // Si por el contrario se quiere reemplazar un div en la vista, se debe deshabilitar
     // por supuesto tomando en cuenta que debe existir el archivo ajaxSuccess.php en la carpeta templates.
@@ -240,6 +230,7 @@ class catdefmanActions extends autocatdefmanActions
    */
   public function updateError()
   {
+  	$this->setVars();
     //$this->configGrid();
 
     //$grid = Herramientas::CargarDatosGrid($this,$this->obj);
@@ -261,5 +252,25 @@ class catdefmanActions extends autocatdefmanActions
     return parent::deleting($clasemodelo);
   }
 
+  public function setVars()
+  {
+  	$c = new Criteria();
+  	//$c->add(CatnivcatPeer::CATPAR,'Z',Criteria::ALT_NOT_EQUAL);  // !=
+  	$reg = CatnivcatPeer::doselect($c);
+
+  	foreach ($reg as $datos)
+  	{
+  		if ($datos->getCatpar()=='Z')
+  		{
+            $this->loncc = $datos->getLonniv();
+  		}else{
+  			$this->nomabr = $this->nomabr .'-'.$datos->getNomabr();
+  		}
+  	}
+  	$this->params[0] = Herramientas::getX_vacio('catpar','catnivcat','forcodcat','Z');  //Z -> Cod.Catastral
+  	$this->params[1] = strlen(substr($this->params[0],0,strlen($this->params[0])-$this->loncc-1));
+  	$this->params[2] = substr($this->nomabr,1,strlen($this->nomabr));
+  	$this->params[3] = $this->loncc;
+  }
 
 }

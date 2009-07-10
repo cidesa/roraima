@@ -1,5 +1,6 @@
 all:
    .apps:
      autenticacion:    autenticacion
+     max_per_page:     15
      ayuda:            ayudas
      this:             catastro      #cambiar en cada app

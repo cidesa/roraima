@@ -15,6 +15,7 @@ seguridad:
   menu:
     Definiciones:
       #Grupo de Usuarios:
+      Empresa:                                              datosempresa
       Usuarios:                                             usuarios
     Procesos:
       Permisologías por Usuario:                            apliuser
@@ -29,3 +30,8 @@ seguridad:
       #Accesos por Usuarios
     Mantenimiento:
       Cambiar Contraseña:                                     cambiopasswd
+    Reportes:
+      Generales:
+        Bitacora de Transacciones :                           segrbitaco.php
+        Bitacora de Transacciones por Aplicación :          segrbitapl.php
+        Bitacora de Transacciones por Usuario/Aplicación :    segrbitusu.php

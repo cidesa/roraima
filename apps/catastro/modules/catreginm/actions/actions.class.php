@@ -17,6 +17,7 @@ class catreginmActions extends autocatreginmActions
   $this->configGridP();  //Personas
   $this->configGridT();  //Terreno
   $this->configGridC();  //Construccion
+  $this->configGridU();  //Uso Especifico
   $this->setVars();
 
   }
@@ -74,6 +75,23 @@ class catreginmActions extends autocatreginmActions
      $this->objT = $this->columnas[0]->getConfig($per);
 
      $this->catreginm->setObjterreno($this->objT);
+  }
+
+
+  public function configGridU()
+  {
+     $c = new Criteria();
+     $c->add(CatusoespinmPeer::CATREGINM_ID,$this->catreginm->getId());
+     $per = CatusoespinmPeer::doSelect($c);
+
+     $this->columnas = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/catreginm/'.sfConfig::get('sf_app_module_config_dir_name').'/grid_catusoespinm');
+     $this->columnas[1][0]->setCombo(Constantes::ListaCaract());
+     $this->columnas[1][1]->setCombo(Catusoespinm::Tipocons());
+     //$this->columnas[1][1]->setCombo(Constantes::ListaCaract());
+     ///$this->columnas[1][1]->setCatalogo('catcarter','sf_admin_edit_form', array('id'=>'2' ,'dester'=>'3'), 'Catreginm_Catcarter', array( 'param1'=>"'+getCeldav2(this.id,-1)+'" ) );
+     $this->objU = $this->columnas[0]->getConfig($per);
+
+     $this->catreginm->setObjusoespec($this->objU);
   }
 
 
@@ -153,11 +171,13 @@ class catreginmActions extends autocatreginmActions
     $this->configGridC();
     $this->configGridP();
     $this->configGridT();
+    $this->configGridU();  //Uso Especifico
     $this->setVars();
 
     $grid = Herramientas::CargarDatosGridv2($this,$this->objC);
     $grid = Herramientas::CargarDatosGridv2($this,$this->objP);
     $grid = Herramientas::CargarDatosGridv2($this,$this->objT);
+    $grid = Herramientas::CargarDatosGridv2($this,$this->objU);
 
     //$this->configGrid($grid[0],$grid[1]);
 
@@ -168,7 +188,8 @@ class catreginmActions extends autocatreginmActions
     $gridP = Herramientas::CargarDatosGridv2($this,$clasemodelo->getObjpersonas());
     $gridC = Herramientas::CargarDatosGridv2($this,$clasemodelo->getObjconstruccion());
     $gridT = Herramientas::CargarDatosGridv2($this,$clasemodelo->getObjterreno());
-    return Inmueblescatastro::SalvarCatreginm($clasemodelo,$gridP,$gridC,$gridT);
+    $gridU = Herramientas::CargarDatosGridv2($this,$clasemodelo->getObjusoespec());
+    return Inmueblescatastro::SalvarCatreginm($clasemodelo,$gridP,$gridC,$gridT,$gridU);
   }
 
   public function deleting($clasemodelo)

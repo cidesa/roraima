@@ -14,92 +14,41 @@ class catdefdivgeoActions extends autocatdefdivgeoActions
   // Para incluir funcionalidades al executeEdit()
   public function editing()
   {
-
+  	$this->setVars();
 
   }
 
-  public function configGrid($reg = array(),$regelim = array())
+  public function setVars()
   {
-    $this->regelim = $regelim;
+  	$c = new Criteria();
+  	$reg = CatnivcatPeer::doselect($c);
 
-    if(!count($reg)>0)
-    {
-      // Aquí va el código para traernos los registros que contendrá el grid
-      $reg = array();
-      // Aquí va el código para generar arreglo de configuración del grid
-    $this->obj = array();
-    }
-
-    // Insertar el criterio de la busqueda de registros del Grid
-    // Por ejemplo:
-
-    // $c = new Criteria();
-    // $c->add(CaartaocPeer::AJUOC ,$this->caajuoc->getAjuoc());
-    // $reg = CaartaocPeer::doSelect($c);
-
-    // De esta forma se carga la configuración del grid de un archivo yml
-    // y se le pasa el parámetro de los registros encontrados ($reg)
-    //                                                                            /nombreformulario/
-    // $this->obj = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/formulario/'.sfConfig::get('sf_app_module_config_dir_name').'/grid_caartaoc',$reg);
-
-    // Si no se quiere cargar la configuración del grid de un .yml, sedebe hacer a pie.
-    // Por ejemplo:
-
-    /*
-    // Se crea el objeto principal de la clase OpcionesGrid
-    $opciones = new OpcionesGrid();
-    // Se configuran las opciones globales del Grid
-    $opciones->setEliminar(true);
-    $opciones->setTabla('Caartalm');
-    $opciones->setAnchoGrid(1150);
-    $opciones->setTitulo('Existencia por Almacenes');
-    $opciones->setHTMLTotalFilas(' ');
-    // Se generan las columnas
-    $col1 = new Columna('Cod. Almacen');
-    $col1->setTipo(Columna::TEXTO);
-    $col1->setEsGrabable(true);
-    $col1->setAlineacionObjeto(Columna::CENTRO);
-    $col1->setAlineacionContenido(Columna::CENTRO);
-    $col1->setNombreCampo('codalm');
-    $col1->setCatalogo('cadefalm','sf_admin_edit_form','2');
-    $col1->setAjax(2,2);
-
-    $col2 = new Columna('Descripción');
-    $col2->setTipo(Columna::TEXTO);
-    $col2->setAlineacionObjeto(Columna::IZQUIERDA);
-    $col2->setAlineacionContenido(Columna::IZQUIERDA);
-    $col2->setNombreCampo('codalm');
-    $col2->setHTML('type="text" size="25" disabled=true');
-
-    // Se guardan las columnas en el objetos de opciones
-    $opciones->addColumna($col1);
-    $opciones->addColumna($col2);
-
-    // Se genera el arreglo de opciones necesario para generar el grid
-    $this->obj = $opciones->getConfig($per);
-     */
-
-
+  	foreach ($reg as $datos)
+  	{
+  		if ($datos->getCatpar()=='Z')
+  		{
+            $this->loncc = $datos->getLonniv();
+  		}else{
+  			$this->nomabr = $this->nomabr .'-'.$datos->getNomabr();
+  		}
+  	}
+  	$this->params[0] = Herramientas::getX_vacio('catpar','catnivcat','forcodcat','Z');  //Z -> Cod.Catastral
+  	$this->params[1] = strlen(substr($this->params[0],0,strlen($this->params[0])-$this->loncc-1));
+  	$this->params[2] = substr($this->nomabr,1,strlen($this->nomabr));
+  	$this->params[3] = $this->loncc;
   }
 
   public function executeAjax()
   {
-
-    $codigo = $this->getRequestParameter('codigo','');
-    // Esta variable ajax debe ser usada en cada llamado para identificar
-    // que objeto hace el llamado y por consiguiente ejecutar el código necesario
-    $ajax = $this->getRequestParameter('ajax','');
-
-    // Se debe enviar en la petición ajax desde el cliente los datos que necesitemos
-    // para generar el código de retorno, esto porque en un llamado Ajax no se devuelven
-    // los datos de los objetos de la vista como pasa en un submit normal.
+    $codigo    = $this->getRequestParameter('codigo','');
+    $ajax      = $this->getRequestParameter('ajax','');
+    $cajtexmos = $this->getRequestParameter('cajtexmos','');
 
     switch ($ajax){
       case '1':
-        // La variable $output es usada para retornar datos en formato de arreglo para actualizar
-        // objetos en la vista. mas informacion en
-        // http://201.210.211.26:8080/www/wiki/index.php/Agregar_Ajax_para_buscar_una_descripcion
-        $output = '[["","",""],["","",""],["","",""]]';
+        $desdivgeo = Herramientas::getX('coddivgeo','catdivgeo','desdivgeo',$codigo);
+        $output = '[["'.$cajtexmos.'","'.$desdivgeo.'",""]]';
+
         break;
       default:
         $output = '[["","",""],["","",""],["","",""]]';
@@ -116,7 +65,6 @@ class catdefdivgeoActions extends autocatdefdivgeoActions
     // por supuesto tomando en cuenta que debe existir el archivo ajaxSuccess.php en la carpeta templates.
 
   }
-
 
   public function validateEdit()
   {
@@ -161,6 +109,7 @@ class catdefdivgeoActions extends autocatdefdivgeoActions
    */
   public function updateError()
   {
+  	$this->setVars();
     //$this->configGrid();
 
     //$grid = Herramientas::CargarDatosGrid($this,$this->obj);

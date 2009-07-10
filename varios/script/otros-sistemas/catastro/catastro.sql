@@ -594,7 +594,16 @@ CREATE TABLE "catreginm"
   "coddivgeo" VARCHAR(40),
   "nrocas" VARCHAR(30),
   "fecreg" DATE,
-  "dirinm" VARCHAR(254),
+  "nroinc" VARCHAR(100),
+  "asireg" VARCHAR(250),
+  "folio" VARCHAR(1000),
+  "nromat" VARCHAR(100),
+  "codcatant" VARCHAR(100),
+  "fecregant" DATE,
+  "numregant" VARCHAR(100),
+  "folioant" VARCHAR(1000),
+  "triant" VARCHAR(250),
+  "proant" VARCHAR(100),
   "nivinm" VARCHAR(8),
   "unihab" VARCHAR(8),
   "edicas" VARCHAR(25),
@@ -954,6 +963,9 @@ CREATE TABLE "catusoesp"
 COMMENT ON TABLE "catusoesp" IS '';
 
 
+-----------------------------------------------------------------------------
+-- catnivcat
+-----------------------------------------------------------------------------
 
 DROP TABLE IF EXISTS "catnivcat" CASCADE;
 
@@ -973,3 +985,32 @@ CREATE TABLE "catnivcat"
 );
 
 COMMENT ON TABLE "catnivcat" IS '';
+
+
+-----------------------------------------------------------------------------
+-- catusoespinm
+-----------------------------------------------------------------------------
+
+DROP TABLE IF EXISTS "catusoespinm" CASCADE;
+
+DROP SEQUENCE IF EXISTS "catusoespinm_seq";
+
+CREATE SEQUENCE "catusoespinm_seq";
+
+
+CREATE TABLE "catusoespinm"
+(
+  "catreginm_id" INTEGER,
+  "catusoesp_id" INTEGER,
+  "tipo" VARCHAR(2),
+  "valor" INTEGER,
+  "id" INTEGER  NOT NULL DEFAULT nextval('catusoespinm_seq'::regclass),
+  PRIMARY KEY ("id")
+);
+
+COMMENT ON TABLE "catusoespinm" IS '';
+
+
+ALTER TABLE "catusoespinm" ADD CONSTRAINT "catusoespinm_FK_1" FOREIGN KEY ("catreginm_id") REFERENCES "catreginm" ("id");
+
+ALTER TABLE "catusoespinm" ADD CONSTRAINT "catusoespinm_FK_2" FOREIGN KEY ("catusoesp_id") REFERENCES "catusoesp" ("id");
