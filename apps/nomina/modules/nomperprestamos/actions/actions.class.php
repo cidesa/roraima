@@ -18,7 +18,7 @@ class nomperprestamosActions extends autonomperprestamosActions
 
   	  $sql = "Select Distinct(A.CodEmp) as codemp,B.NomEmp as nomemp,sum(A.Monto) as monto,sum(A.Cantidad) as cantidad," .
 			"Sum(A.Acumulado) as acumulado, a.id as id From NPAsiConEmp A,NpHojInt B,npasicaremp c " .
-			"where a.codcar=c.codcar and a.codemp=c.codemp and A.CodEmp=B.CodEmp and A.CodCon='" . $this->nptippre->getCodcon() . "' and B.StaEmp = 'A' Group by a.id,a.Codemp,B.NomEmp Order By A.CodEmp";
+			"where a.codcar=c.codcar and a.codemp=c.codemp and A.CodEmp=B.CodEmp and A.CodCon='" . $this->nptippre->getCodcon() . "' and B.StaEmp = 'A' and c.status='V' Group by a.id,a.Codemp,B.NomEmp Order By A.CodEmp";
 
       $resp = Herramientas::BuscarDatos($sql,&$per);
 
