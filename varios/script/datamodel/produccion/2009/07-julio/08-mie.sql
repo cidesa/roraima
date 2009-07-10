@@ -1,4 +1,4 @@
----     Catastro
+--- ====== Catastro  =====
 DROP TABLE IF EXISTS "catnivcat" CASCADE;
 
 DROP SEQUENCE IF EXISTS "catnivcat_seq";
@@ -17,4 +17,39 @@ CREATE TABLE "catnivcat"
 );
 
 COMMENT ON TABLE "catnivcat" IS '';
---------
+
+ALTER TABLE "catreginm"
+  ADD COLUMN "nroinc" varchar(100);
+
+ALTER TABLE "catreginm"
+  ADD COLUMN "asireg" varchar(250);
+
+ALTER TABLE "catreginm"
+  ADD COLUMN "folio" varchar(1000);
+
+ALTER TABLE "catreginm"
+  ADD COLUMN "nromat" varchar(100);
+
+ALTER TABLE "catreginm"
+  ADD COLUMN "codcatant" varchar(100);
+
+ALTER TABLE "catreginm"
+  ADD COLUMN "fecregant" date;
+
+ALTER TABLE "catreginm"
+  ADD COLUMN "numregant" varchar(100);
+
+ALTER TABLE "catreginm"
+  ADD COLUMN "folioant" varchar(1000);
+
+ALTER TABLE "catreginm"
+  ADD COLUMN "triant" varchar(250);
+
+ALTER TABLE "catreginm"
+  ADD COLUMN "proant" varchar(100);
+
+ALTER TABLE "catreginm"
+  ADD COLUMN "proant" varchar(100);
+
+
+--------=======
