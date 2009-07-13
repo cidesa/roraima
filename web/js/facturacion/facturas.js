@@ -1092,7 +1092,8 @@
    while (i<am)
    {
     var codigo="cx"+"_"+i+"_1";
-
+   if ($(codigo))
+   {
     var recargo2=$(codigo).value;
 
     if (i!=fila)
@@ -1102,6 +1103,7 @@
         recargorepetido=true;
         break;
       }
+    }
     }
    i++;
    }
@@ -1680,7 +1682,8 @@
    while (i<am)
    {
     var codigo="bx"+"_"+i+"_1";
-
+    if ($(codigo))
+    {
     var descuento2=$(codigo).value;
 
     if (i!=fila)
@@ -1690,6 +1693,7 @@
         descuentorepetido=true;
         break;
       }
+    }
     }
    i++;
    }
@@ -1923,6 +1927,8 @@
     while (fil<regpag)
     {
       var monto="dx_"+fil+"_6";
+      if ($(monto))
+      {
       var nmonto= toFloat(monto);
       var nmoncan= toFloat('fafactur_moncan');
 
@@ -1930,6 +1936,7 @@
       if ($(monto).value!="")
       {
         $('fafactur_moncan').value=format(calculo.toFixed(2),'.',',','.');
+      }
       }
      fil++;
     }
@@ -2191,7 +2198,8 @@
    while (i<am)
    {
     var codigo="ax"+"_"+i+"_2";
-
+    if ($(codigo))
+    {
     var codrefe2=$(codigo).value;
 
     if (i!=fila)
@@ -2201,6 +2209,7 @@
         referenciarepetida=true;
         break;
       }
+    }
     }
    i++;
    }
