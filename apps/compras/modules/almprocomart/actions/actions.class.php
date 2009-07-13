@@ -83,15 +83,26 @@ $this->Bitacora('Guardo');
     }
     else
     {
+       $datos = $this->getRequestParameter('caprocomart');
+       $dateFormat = new sfDateFormat($this->getUser()->getCulture());
+       if ($this->getRequestParameter($fecprocom)=="")
+       	 $fecha= $dateFormat->format($datos['fecprocom'], 'i', $dateFormat->getInputPattern('d'));
+       else
+         $fecha=$this->getRequestParameter($fecprocom);
+
+       if ($this->getRequestParameter($codcat)=="")
+       	 $codcat= $datos['codcat'];
+       else
+         $codcat=$this->getRequestParameter($codcat);
        $c = new Criteria();
-  	   $c->add(CaprocomartPeer::FECPROCOM,$this->getRequestParameter($fecprocom));
-	   $c->add(CaprocomartPeer::CODCAT,$this->getRequestParameter($codcat));
+  	   $c->add(CaprocomartPeer::FECPROCOM,$fecha);
+	   $c->add(CaprocomartPeer::CODCAT,$codcat);
    	   $caprocomart = CaprocomartPeer::doSelectOne($c);
    	   if ($caprocomart)
-       		$this->configGrid($caprocomart->getFecprocom(),$caprocomart->getCodcat());
+       		$this->configGrid($fecha,$codcat);
        else
        		 $this->configGrid();
-       $this->forward404Unless($caprocomart);
+
     }
 
     return $caprocomart;
