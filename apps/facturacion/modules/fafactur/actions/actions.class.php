@@ -648,7 +648,7 @@ class fafacturActions extends autofafacturActions {
 						}
 						$javascript=$javascript." datosRecargos(); ";
 					} else {
-						$javascript = "alert('El Artículo no posee Cuenta de Venta asociada'); $('$cajtexcom').value='0,0'; ";
+						$javascript = "alert('El Artículo no posee Cuenta de Venta asociada'); $('$cajtexcom').value=''; ";
 					}
 				} else {
 					$javascript = "alert('El Código del Artículo no Existe'); $('$cajtexcom').value='';";
