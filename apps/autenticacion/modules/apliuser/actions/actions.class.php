@@ -208,8 +208,10 @@ class apliuserActions extends autoapliuserActions
       $cod = '';
     }
 
-    $dir = sfConfig::get('sf_root_dir').'/config/menus/'.strtolower($yml);
+    $dir=CIDESA_CONFIG.'/menus/'.strtolower($yml);
+    cidesaTools::exitsfile($dir) ? $dir=$dir : $dir = sfConfig::get('sf_root_dir').'/config/menus/'.strtolower($yml);
     $modulos = sfYaml::load($dir);
+
     if(is_array($modulos)){
       if($yml){
         $n = explode('.',$yml);
