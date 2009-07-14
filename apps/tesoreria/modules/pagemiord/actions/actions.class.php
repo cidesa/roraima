@@ -1781,7 +1781,9 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
       OrdendePago::datosRefere($this->getRequestParameter('codigo'),$this->getRequestParameter('fecha2'),&$fecha,&$descripcion,&$tipo,&$destipo,&$elrif,&$descripcion2,&$msj);
       $fechas=$fecha;
       $descripcions=htmlspecialchars($descripcion);
+      $descripcions=eregi_replace("[\n|\r|\n\r]", "", $descripcions);
       $descripcion2=htmlspecialchars($descripcion2);
+      $descripcion2=eregi_replace("[\n|\r|\n\r]", "", $descripcion2);
       $tipos=$tipo;
       $destipos=$destipo;
       $dato=htmlspecialchars(OpbenefiPeer::getDato($elrif,'Nomben'));
@@ -1804,7 +1806,9 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
         OrdendePago::datosRefere2($this->getRequestParameter('codigo'),$this->getRequestParameter('fecha2'),$this->getRequestParameter('arreglo'),&$fecha,&$descripcion,&$tipo,&$elrif,&$descripcion2,&$destipo,&$financiamiento,&$oppermanente,&$opper,&$msj);
         $fechas=$fecha;
         $descripcions=htmlspecialchars($descripcion);
+        $descripcions=eregi_replace("[\n|\r|\n\r]", "", $descripcions);
         $descripcion2=htmlspecialchars($descripcion2);
+        $descripcion2=eregi_replace("[\n|\r|\n\r]", "", $descripcion2);
         $tipos=$tipo;
         $destipos=$destipo;
         $dato=htmlspecialchars(OpbenefiPeer::getDato($elrif,'Nomben'));
