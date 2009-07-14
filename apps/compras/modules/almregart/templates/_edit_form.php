@@ -371,7 +371,7 @@
 ?>
 </fieldset>
 <br>
-<div id="divGrid">
+<div id="divGrid" style="display:none">
 </div>
 <?php
 echo grid_tag($obj);

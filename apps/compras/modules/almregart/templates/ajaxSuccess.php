@@ -7,7 +7,7 @@
  */
 ?>
 <?php use_helper('Object', 'Validation', 'ObjectAdmin', 'Javascript', 'Grid', 'I18N') ?>
-<div id="divGrid">
+
 <div id="periodos">
 <?
 echo grid_tag($objAlmUbi);
@@ -21,4 +21,6 @@ echo grid_tag($objAlmUbi);
 <?php echo link_to_function(image_tag('/images/salir.gif'), "salvarmontos()") ?>
 </div>
 </div>
-</div>
+<script language="JavaScript" type="text/javascript">
+actualizarsaldos_c(); distribuirExistencia();
+</script>
