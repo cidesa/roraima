@@ -585,12 +585,17 @@ $this->Bitacora('Guardo');
       $almacen=$this->getRequestParameter('almacen');
           $fila=$this->getRequestParameter('fil');
          $totalfilas=0;
+         $javascript="";
       $this->configGridAlmUbi($articulo,$almacen,$totalfilas);
 
-      $output = '[["fila","'.$fila.'",""],["totalfilas","'.$totalfilas.'",""]]';
+      if ($totalfilas!=0)
+      {
+      	$javascript="$('divGrid').show();";
+      }
+      $output = '[["javascript","'.$javascript.'",""],["fila","'.$fila.'",""],["totalfilas","'.$totalfilas.'",""]]';
       $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
       //si total filas es igual a cero quiere decir que el almacen no tiene ubicaciones asociadas
-      if ($totalfilas==0) return sfView::HEADER_ONLY;
+
     }
     else  if ($this->getRequestParameter('ajax')=='8')
       {

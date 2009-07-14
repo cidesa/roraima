@@ -13,7 +13,7 @@ function mostrar(id)
 	    var articulo=$('caregart_codart').value;
 	    var almacen=$(codalm).value;
 
-	    new Ajax.Updater('divGrid', '/compras_dev.php/almregart/ajax', {asynchronous:true, evalScripts:true, onComplete:function(request, json){AjaxJSON(request, json), actualizarsaldos_b(); distribuirExistencia(); }, parameters:'ajax=7&almacen='+almacen+'&fil='+fil+'&articulo='+articulo})
+	    new Ajax.Updater('divGrid', '/compras_dev.php/almregart/ajax', {asynchronous:true, evalScripts:true, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=7&almacen='+almacen+'&fil='+fil+'&articulo='+articulo})
 	}
 	else
 	{
