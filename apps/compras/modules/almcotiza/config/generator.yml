@@ -13,7 +13,7 @@ generator:
       rifpro:    { name: RIF de la Contratistas de Bienes o Servicio y Cooperativas, params: maxlength=15}
       nompro:    { name: Descripción}
       descot:    { name: Descripción}
-      refsol:    { name: Solicitud}
+      refsol:    { name: N° de Solicitud}
       refpro:    { name: Referencia}
       tipo:      { name: Descuenta}
       moncot:    { name: Monto Total, params: maxlength=18}
@@ -30,7 +30,7 @@ generator:
     list:
       title:          Cotizaciones
       display:        [=refcot, feccot, descot, refsol]
-      filters:		  [refcot, feccot, codpro]
+      filters:		  [refcot, feccot, refsol, codpro]
       max_per_page:	  10
       sort:    refcot
       object_actions:
