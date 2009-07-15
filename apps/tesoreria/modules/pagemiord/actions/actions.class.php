@@ -124,6 +124,13 @@ class pagemiordActions extends autopagemiordActions
           }else return true;
         }
       }
+       }else
+       {
+       	if (H::tofloat($this->getRequestParameter('opordpag[neto]'))<=0)
+      	{
+  			$this->coderror4=535;
+	        return false;
+      	}
        }
       }else
       {
@@ -2195,9 +2202,9 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
      }
      }
      else{
-     if ($this->opordpag->getCedrif()=="" || $this->opordpag->getCtapag()=="")
+     if ($this->opordpag->getCedrif()=="" || $this->opordpag->getCtapag()=="" || $this->opordpag->getNeto()<=0)
      {
-       $msjtres="No se puede Generar el Comprobante, Verique si introdujo los Datos del Beneficiario y el Código Contable, para luego generar el comprobante";
+       $msjtres="No se puede Generar el Comprobante, Verique si introdujo los Datos del Beneficiario, el Código Contable ó si el Monto Neto a Pagar es mayor a cero, para luego generar el comprobante";
      }
      }
 
