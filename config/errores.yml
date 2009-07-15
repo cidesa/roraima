@@ -381,6 +381,18 @@
 532:
   cod: 532
   msj: El Proveedor ya tiene asociado ese mismo N° de Factura en una Orden anterior.
+533:
+  cod: 533
+  msj: Debe definir el valor de la Unidad Tributaria. Tesoreria -> Empresa
+534:
+  cod: 534
+  msj: El Monto Total de la Orden sobrepasa el limite de Unidades Tributarias asociadas para el Usuario (Niveles de Aprobación).
+535:
+  cod: 535
+  msj: El Monto Neto de la Orden debe ser mayor a cero.
+536:
+  cod: 536
+  msj: El Monto Debito y Credito debe ser mayor a cero.
 3:
   cod: 3
   msj: La contraseña es diferente.
@@ -414,6 +426,10 @@
 205:
   cod: 205
   msj: No esta definido El Codigo de la Incorporacion, Verifique en el modulo de Definicion de Empresa.
+
+206:
+  cod: 206
+  msj: El Nivel de aprobación ya se encuentra registrado con ese rango.
 
 ################### FORMULACION ####################
 # Definiciones Generales (Fordefgen)
