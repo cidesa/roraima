@@ -469,6 +469,12 @@ class OrdendePago
             $des="";
             $mon=$orden->getMonord();
             $monto=$mon;
+          }else{
+          	$codigocuenta=$cuenta;
+            $tipo='D';
+            $des="";
+            $mon=$orden->getNeto();
+            $monto=$mon;
           }
         }else { $msjuno='El Código Contable de la Caja Chica asociado al Beneficiario no es válido'; return true;}
         $codigocuentapagar=$resul->getCtarepcaj();
@@ -557,7 +563,8 @@ class OrdendePago
           $codigocuenta2=$orden->getCtapag();
           $tipo2='C';
           $des2="";
-          $a=$orden->getMonord();
+           if ($orden->getAfectapre()==1) $a=$orden->getMonord();
+           else $a=$orden->getNeto();
           $monto2=$a;
         }
         $cuentas=$codigocuenta2.'_'.$codigocuentas;
@@ -635,7 +642,8 @@ class OrdendePago
         $codigocuenta2=$orden->getCtapag();
         $tipo2='C';
         $des2="";
-        $b=$orden->getMonord();
+         if ($orden->getAfectapre()==1) $b=$orden->getMonord();
+           else $b=$orden->getNeto();
         $monto2=$b;
       }
       $cuentas=$codigocuenta2.'_'.$codigocuentas;

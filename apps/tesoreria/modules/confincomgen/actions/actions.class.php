@@ -566,6 +566,13 @@ $this->Bitacora('Guardo');
       	$this->error=519;
       	return false;
       }
+
+      if ($this->getRequestParameter('debito')=='0,00' && $this->getRequestParameter('credito')=='0,00')
+      {
+      	$this->error=536;
+      	return false;
+      }
+
       $this->configGrid();
       $grid = Herramientas::CargarDatosGrid($this,$this->obj);
       if (count($grid[0])==0)
