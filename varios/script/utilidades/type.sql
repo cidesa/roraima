@@ -23,3 +23,33 @@ CREATE TYPE regprestaciones AS (
   "antmeses" NUMERIC,
   "antdias" NUMERIC
 );
+
+CREATE TYPE regprestacionesant AS (
+  "codemp" VARCHAR,
+  "nomemp" VARCHAR,
+  "codtipcon" VARCHAR,
+  "fecing" DATE,
+  "fecegr" DATE,
+  "fecini" DATE,
+  "fecfin" DATE,
+  "monto" NUMERIC,
+  "mondia" NUMERIC,
+  "diasant" NUMERIC, 
+  "monpres" NUMERIC,
+  "dias" INTEGER,
+  "monant" NUMERIC,
+  "id" INTEGER,
+  "capital" NUMERIC,
+  "capitalact" NUMERIC,
+  "tasa" NUMERIC,
+  "monint" NUMERIC,
+  "intacu" NUMERIC,
+  "monadeint" NUMERIC,
+  "totinteres" NUMERIC,
+  "antannos" NUMERIC,
+  "antmeses" NUMERIC,
+  "antdias" NUMERIC,
+  "annoini" DATE,
+  "annofin" DATE,
+  "diasanno" NUMERIC
+);
