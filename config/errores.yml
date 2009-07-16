@@ -389,10 +389,7 @@
   msj: El Monto Total de la Orden sobrepasa el limite de Unidades Tributarias asociadas para el Usuario (Niveles de Aprobación).
 535:
   cod: 535
-  msj: El Monto Neto de la Orden debe ser mayor a cero.
-536:
-  cod: 536
-  msj: El Monto Debito y Credito debe ser mayor a cero.
+  msj: La Cuenta Bancaria y El Periodo se encuentran cerrado.
 3:
   cod: 3
   msj: La contraseña es diferente.
