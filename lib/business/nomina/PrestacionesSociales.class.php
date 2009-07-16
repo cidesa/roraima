@@ -144,7 +144,7 @@ class PrestacionesSociales
 
    $AnoServicio= (int)(Herramientas::dateDiff("d",$strFecIng, $strFecFin)/365);
 
-   print "Ano servicio ". $AnoServicio. " Calculado con estas fechas, fecini ". $strFecIng. " fec fin ".$strFecFin;
+   ##print "Ano servicio ". $AnoServicio. " Calculado con estas fechas, fecini ". $strFecIng. " fec fin ".$strFecFin;
    //Colocar la fecha en el formato correcto para ejecutar el sql
 
    $strSQL = "Select antap From NPBonoCont Where ANOVIG <= TO_DATE('". Herramientas::FormatoFecha($strFecIni)."', 'DD/MM/YYYY') And ANOVIGHAS >= TO_DATE('". Herramientas::FormatoFecha($strFecFin) ."', 'DD/MM/YYYY')  And
@@ -184,7 +184,7 @@ class PrestacionesSociales
       $lblAnnosTrab = $annostot;
    }
 
-    print " D ".$iDias. " M ".$iMeses. " A ".$iAnnos;
+    #print " D ".$iDias. " M ".$iMeses. " A ".$iAnnos;
 
 
   }
@@ -197,7 +197,7 @@ class PrestacionesSociales
    $strSQL = "Select Max(FecFinCon) as Fecha, Sum(MonAsi) as Salario,CodEmp  From NPSalInt Where CodEmp = '". $codemp ."'
              and FecFinCon <= TO_DATE('". Herramientas::FormatoFecha($strFechaAl) ."','DD/MM/YYYY') Group By CodEmp,FecFinCon Order By Fecha Desc";
 
-  print $strSQL;
+  #print $strSQL;
 
   if (Herramientas::BuscarDatos($strSQL,&$result))
   {
@@ -205,7 +205,7 @@ class PrestacionesSociales
       {
          //Calcula los dias de diferencia entre las fechas
         $lDiasDif = Herramientas::dateDiff("d", $strFechaDel, $strFechaAl)+ 1;
-        print "<br> RESTA de fechas: ".$lDiasDif;
+        #print "<br> RESTA de fechas: ".$lDiasDif;
       }
   }
 
@@ -739,7 +739,7 @@ End Function*/
 		  // CalculaTiempo strFecCalculo, mskFecha
 		  // CalculaTiempo lblFecIng, mskFecha, True
 
-       	   print "Calcula tiempo " .$strFecCalculo. " fecha corte: ". $fechacorte. "resto parametros ".$strFechaIniRef. " y ". $strFechaFinRef. " y ".$dFecIng. " y ".$codemp. " y ".$codcon;
+       	   #print "Calcula tiempo " .$strFecCalculo. " fecha corte: ". $fechacorte. "resto parametros ".$strFechaIniRef. " y ". $strFechaFinRef. " y ".$dFecIng. " y ".$codemp. " y ".$codcon;
 		   self::CalculaTiempo($strFecCalculo, $fechacorte,$strFechaIniRef, $strFechaFinRef,$dFecIng,$codemp,$codcon);
            self::CalculaTiempo($fecingfor, $fechacorte,$strFechaIniRef, $strFechaFinRef,$dFecIng,$codemp,$codcon,true);
 
@@ -751,7 +751,7 @@ End Function*/
        	   {
 	         //Realiza el calculo en el nuevo regimen
 	        //$fAgregaFila =
-             print "PARAMETROS PARA CalculoPeriodoNuevoRegimen <br> ".$strFechaIniRef." ". $strFechaFinRef." ". $bDiaInicio." ".$strUltDiaMes." ".$lRow." ".$codemp;
+             #print "PARAMETROS PARA CalculoPeriodoNuevoRegimen <br> ".$strFechaIniRef." ". $strFechaFinRef." ". $bDiaInicio." ".$strUltDiaMes." ".$lRow." ".$codemp;
 
              $CuentaUltimo=1;
              $fAgregaFila=self::CalculoPeriodoNuevoRegimen($strFechaIniRef, $strFechaFinRef, $bDiaInicio, $strUltDiaMes, $lRow, $codemp);
@@ -803,20 +803,20 @@ End Function*/
 	            }
 	        }
 
-	        print "<br> Nuevo strFechaIniRef ". $strFechaIniRef;
-	        print "<Br> Nuevo strFechaFinRef ". $strFechaFinRef;
-	        print "<Br> fechacorte ". $fechacorte;
-	        print "<Br> Fecultregimen ". $strfecultreg;
+	        #print "<br> Nuevo strFechaIniRef ". $strFechaIniRef;
+	        #print "<Br> Nuevo strFechaFinRef ". $strFechaFinRef;
+	        #print "<Br> fechacorte ". $fechacorte;
+	        #print "<Br> Fecultregimen ". $strfecultreg;
 
 	     if (strtotime($fechacorte) <= strtotime($strfecultreg)) $fecultregcomp= $fechacorte; else $fecultregcomp=$strfecultreg;
 
-	     print "<br> Fecha a comparar ".$fecultregcomp;
+	     #print "<br> Fecha a comparar ".$fecultregcomp;
          if (strtotime($strFechaIniRef) <= strtotime($fecultregcomp))
          {
             if ($fAgregaFila)
             {
                $lRow = $lRow + 1;
-               print "paso por aqui";
+               #print "paso por aqui";
             }
          }
          else
@@ -824,7 +824,7 @@ End Function*/
             $fBuscar = false;
        	 }
 
-       	 print "CICLO";
+       	 #print "CICLO";
       }//while ($fBuscar)
 
       // Coloca los ajustes al final del Spread
@@ -847,8 +847,16 @@ End Function*/
 
   public static function saveNppresoc($nppresoc,$grid)
   {
-	if ((self::GrabarEncabezadoNuevoRegimen($nppresoc,$grid)) !=-1){ return 0;}
-	if ((self::GrabarDetallesNuevoRegimen($nppresoc,$grid)) !=-1){ return 0;}
+  	if($grid[4][0]=='V')
+	{
+		if ((self::GrabarEncabezadoAntiguoRegimen($nppresoc,$grid)) !=-1){ return 0;}
+		if ((self::GrabarDetallesAntiguoRegimen($nppresoc,$grid)) !=-1){ return 0;}			
+	}else
+	{
+		if ((self::GrabarEncabezadoNuevoRegimen($nppresoc,$grid)) !=-1){ return 0;}
+		if ((self::GrabarDetallesNuevoRegimen($nppresoc,$grid)) !=-1){ return 0;}			
+	}
+	
 
 	return -1;
   }
@@ -1037,6 +1045,87 @@ End Function*/
    //   !Mestra = lblMesesTrab
    //   !AnoTra = lblAnnosTrab
    //   !antacu = dblTotAntAcu (la suma de monant)
+
+  }
+  
+  public static function GrabarEncabezadoAntiguoRegimen($nppresoc,$grid)
+  {
+  	try
+  	{
+	  $c = new Criteria();
+	  $c->add(NppresocPeer::CODEMP,$nppresoc->getCodemp());
+	  $c->add(NppresocPeer::REGPRE,'V');
+	  NppresocPeer::doDelete($c);
+
+	  $x  = $grid[0];
+	  $x2 = $grid[2];
+	  $x3 = $grid[3];   //Tiempo de Servicio
+
+      $nppresoc->setCodcon($x[0]->getCodtipcon());   //!CodCon = strCodCon
+      $nppresoc->setFeccal($nppresoc->getFeccalpres());      //!FecCal = lblFecCalculo
+
+      $nppresoc->setDiaser($x3[2][0]);     //!DiaSer = lblDiasServ
+      $nppresoc->setMesser($x3[2][1]);    //!MesSer = lblMesesServ
+      $nppresoc->setAnoser($x3[2][2]);    //!AnoSer = lblAnnosServ
+
+      $nppresoc->setDiatra($x3[2][0]);     //!DiaTra = lblDiasTrab
+      $nppresoc->setMestra($x3[2][1]);    //!Mestra = lblMesesTrab
+      $nppresoc->setAnotra($x3[2][2]);    //!AnoTra = lblAnnosTrab
+
+      $nppresoc->setRegpre('V');
+      $nppresoc->setStapre('C');
+
+      //totales
+      $nppresoc->setIntacu($x2[0]);  //getTotintacu   --> !IntAcu = dblTotIntAcu
+      $nppresoc->setAdeint($x2[1]);  //getTotmonadeint --> !adeint = dblTotAdeInt
+      $nppresoc->setAntacu($x2[4]);  //getTotmonant  --> !antacu = dblTotAntAcu
+      $nppresoc->setAdepre($x2[3]);  //getTotcapitalact   --> !AdePre = dblTotAdePre
+	  $nppresoc->setMonpre(H::formatonum($x2[4])+H::Formatonum($x2[0]));  //getTotintacu + getTotmonant
+      $nppresoc->save();
+
+	return -1;
+
+	}catch (Exception $ex){
+		return 0;
+	}
+  }
+
+  public static function GrabarDetallesAntiguoRegimen($nppresoc,$grid)
+  {
+  	try{
+
+	$c = new Criteria();
+	$c->add(NpimppresocantPeer::CODEMP,$nppresoc->getCodemp());
+	NpimppresocantPeer::doDelete($c);
+
+
+    $codemp   = $nppresoc->getCodemp();
+    $fechacor = $nppresoc->getFeccor();
+    $x  = $grid[0];
+    $x2 = $grid[2];
+    $x3 = $grid[3];
+
+    $j = 0;
+    while ($j<count($x))
+    {
+      $x[$j]->setCodemp($codemp);
+      $x[$j]->setFeccor($fechacor);      
+      $x[$j]->setAntacum($x[$j]->getCapitalact());
+	  $x[$j]->setAdeant($x[$j]->getMonant());
+      $x[$j]->setIntacum($x[$j]->getIntacu());
+      $x[$j]->setRegpre('V');
+      $x[$j]->save();
+      $j++;
+    }
+
+	return -1;
+
+	}catch (Exception $ex){
+		echo $ex;
+		return 0;
+	}
+
+
 
   }
 
@@ -1314,9 +1403,6 @@ End Function*/
 		}
 				
 	}
-    
-   
-
 	
     return $error;
   }
