@@ -20,9 +20,9 @@ class tesmovsegbanActions extends autotesmovsegbanActions
       try{ $this->updateTsmovbanFromRequest();}catch(Exception $ex){}
       if ($this->tsmovban->getId()=="")
       {
-      	if (Tesoreria::validaPeriodoCerrado($this->getRequestParameter('tsmovban[fecban]'))==true)
+      	if (Tesoreria::validaPeriodoCerradoBanco($this->getRequestParameter('tsmovban[fecban]'),$this->getRequestParameter('tsmovban[numcue]'))==false)
       	{
-          $this->coderror1=529;
+          $this->coderror1=535;
           return false;
       	}
       }

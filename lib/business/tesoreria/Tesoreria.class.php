@@ -1989,6 +1989,24 @@ class Tesoreria {
     {return true;}
   }
 
+  public static function validaPeriodoCerradoBanco($fecha,$numcue='')
+  {
+    $dateFormat = new sfDateFormat('es_VE');
+    $fec = $dateFormat->format($fecha, 'i', $dateFormat->getInputPattern('d'));
+    $mes = substr($fec,5,2);
+
+    $c= new Criteria();
+    $c->add(TsconcilhisPeer::MESCON,$mes);
+    $c->add(TsconcilhisPeer::NUMCUE,$numcue);
+    $conta1=TsconcilhisPeer::doSelect($c);
+
+    if ($conta1)
+    {
+      return false;
+    }else
+    {return true;}
+  }
+
   public static function salvarRelaciones($tsrelasiord,$grid)
   {
     $x=$grid[0];

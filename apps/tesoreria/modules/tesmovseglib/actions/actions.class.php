@@ -31,6 +31,13 @@ class tesmovseglibActions extends autotesmovseglibActions
       return false;
   	}
 
+      if (Tesoreria::validaPeriodoCerradoBanco($this->getRequestParameter('tsmovlib[feclib]'),$this->getRequestParameter('tsmovlib[numcue]'))==false)
+  	{
+      $this->coderror6=535;
+      return false;
+  	}
+
+
       $c = new Criteria();
       $c->add(TstipmovPeer::CODTIP,$this->tsmovlib->getTipmov());
 

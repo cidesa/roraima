@@ -38,7 +38,7 @@
 </table>
 
 <fieldset>
-<legend><?php echo __('Datos del Movimiento')?></legend>
+<h2><?php echo __('Datos del Movimiento')?></h2>
 <div class="form-row">
   <?php echo label_for('tsmovlib[numcue]', __($labels['tsmovlib{numcue}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('tsmovlib{numcue}')): ?> form-error<?php endif; ?>">
@@ -226,6 +226,7 @@
 
  <?php $value = object_input_date_tag($tsmovlib, 'getFecing', array (
   'rich' => true,
+  'size' => '10',
   'readonly'  =>  $tsmovlib->getId()!='' ? true : false ,
   'calendar_button_img' => '/sf/sf_admin/images/date.png',
   'control_name' => 'tsmovlib[fecing]',
@@ -241,7 +242,7 @@
 
 
 <fieldset>
-<legend><?php echo __('Comprobante Contable')?></legend>
+<h2><?php echo __('Comprobante Contable')?></h2>
 <div class="form-row">
   <?php echo label_for('tsmovlib[numcom]', __($labels['tsmovlib{numcom}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('tsmovlib{numcom}')): ?> form-error<?php endif; ?>">
@@ -267,6 +268,7 @@
 
   <?php $value = object_input_date_tag($tsmovlib, 'getFeccom', array (
   'rich' => true,
+  'size' => '10',
   'readonly'  =>  $tsmovlib->getId()!='' ? true : false ,
   'calendar_button_img' => '/sf/sf_admin/images/date.png',
   'control_name' => 'tsmovlib[feccom]',
