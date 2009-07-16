@@ -47,6 +47,7 @@ generator:
       codigoproveedor: { name : codigo oculto }
       totrecargo: { name : Total Recargo }
       totorden: { name : Total Orden}
+      staord: {name: Estatus A(Activo) y N(Anulado)}
 
 
 
@@ -54,7 +55,7 @@ generator:
     list:
       title:          Ordenes de Compra
       display:        [=ordcom, desord, fecord, monord]
-      filters:        [ordcom, desord, fecord]
+      filters:        [ordcom, desord, fecord, staord]
       sort            ordcom
       object_actions:
         _edit:        ~

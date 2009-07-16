@@ -108,6 +108,11 @@
 
 	<?php $value = object_checkbox_tag($casolart, 'getActsolegr', array (
 	  'control_name' => 'casolart[actsolegr]',
+      'onBlur'=> remote_function(array(
+        'url'      => 'almpriori/ajax',
+        'complete' => 'AjaxJSON(request, json)',
+        'with' => "'ajax=1&reqart='+$('casolart_reqart').value+'&codigo='+this.value"
+        ))
 	)); echo $value ? $value : '&nbsp;' ?>
     </div>
    </th>
@@ -121,8 +126,11 @@
 <legend><h2><?php echo _('Asignación de Prioridad Detallada') ?></h2></legend>
 <div class="form-row">
   <table>
+  <tr>
+   <strong><?php echo __('Leyenda: Nº 1 es la prioridad y el Nº 2 es la segunda opción para comprar el producto.')?></strong>
    <tr>
-   <th>
+   <tr>
+    <th>
      <?php echo label_for('casolart[articulo]', __($labels['casolart{articulo}']), 'class="required"  style="width: 200px"') ?>
   <div class="content<?php if ($sf_request->hasError('casolart{articulo}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('casolart{articulo}')): ?>
@@ -148,6 +156,13 @@
          'script'   => true,
          'with'   => "'reqart='+document.getElementById('casolart_reqart').value"
       ),array('class' => "sf_admin_action_list")) ?>
+    </li>
+    <li>
+    </li>
+    <li class="float-rigth">
+     <?php if ($elimina=='S') { ?>
+  <input type="button" name="Submit" class="sf_admin_action_list" value="Forma Pre-Impresa" onclick="javascript:Mostrar_orden_preimpresa();" />
+<? } ?>
     </li>
    </ul>
    </th>
@@ -259,6 +274,16 @@
     if (valor==1)
   	$('casolart_pormoncot').checked=false;
   	else $('casolart_porcostart').checked=false;
+  }
+
+    function Mostrar_orden_preimpresa()
+  {
+      var codreqdes=$('casolart_reqart').value;
+
+      var  ruta='http://'+'<?echo $this->getContext()->getRequest()->getHost();?>';
+      pagina=ruta+"/reportes/reportes/compras/r.php=?r=carsolegr.php&codreqdes="+codreqdes;
+      window.open(pagina,1,"menubar=yes,toolbar=yes,scrollbars=yes,width=1200,height=800,resizable=yes,left=1000,top=80")
+
   }
 
 

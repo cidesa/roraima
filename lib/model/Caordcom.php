@@ -18,6 +18,7 @@ class Caordcom extends BaseCaordcom
     protected $totrecargo="0,00";
     protected $totorden="0,00";
     protected $genctaalc="";
+    private $eti="";
 
 
     public function getReptipcom()
@@ -177,6 +178,39 @@ class Caordcom extends BaseCaordcom
       	$si=$data->getGencomalc();
       }else $si=null;
       return $si;
+    }
+
+    public function getEti()
+    {
+     if (self::getId())
+     {
+     if (self::getOrdcom()!="")
+     {
+      if (self::getStaord()=='N')
+      {
+      	$si="Anulada el ".date('d/m/Y',strtotime(self::getFecanu()));
+      }else{
+        $c= new Criteria();
+        $c->add(OpdetordPeer::REFCOM,self::getOrdcom());
+        $data= OpdetordPeer::doSelectOne($c);
+        if ($data)
+        {
+          $d= new Criteria();
+          $d->add(OpordchePeer::NUMORD,$data->getNumord());
+          $reg= OpordchePeer::doSelectOne($d);
+          if ($reg)
+          {
+          	$fecha=H::getX('NUMCHE','Tscheemi','fecemi',$reg->getNumche());
+          	$si="Pagada con el N° de Cheque: ".$reg->getNumche()." el ".date('d/m/Y',strtotime($fecha));
+          }else{
+          	$si="Causada con N° de Orden ".$data->getNumord()." el ".date('d/m/Y',strtotime($data->getFecemi()));
+          }
+        }else $si="Pendiente por Causar";
+      }
+     }else { $si="";}
+     }else { $si="";}
+
+   return $si;
     }
 
 }

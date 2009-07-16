@@ -32,11 +32,17 @@
 <?php echo input_hidden_tag('caordcom[partrec]', $caordcom->getPartrec()) ?>
 <?php echo input_hidden_tag('caordcom[genctaord]', $caordcom->getGenctaord()) ?>
 <?php echo input_hidden_tag('caordcom[gencomalc]', $caordcom->getGencomalc()) ?>
+<?php echo input_hidden_tag('caordcom[eti]', $caordcom->getEti()) ?>
 
 <input id="codigo_presupuestario_sin_disponibilidad" name="codigo_presupuestario_sin_disponibilidad" type="hidden">
 <script language="JavaScript" type="text/javascript">
     entrar();
 </script>
+<table width="100%">
+  <tr>
+    <th><strong><font color="#CC0000" size="2" face="Verdana, Arial, Helvetica, sans-serif"> <? print $caordcom->getEti();?></font></strong></th>
+  </tr>
+</table>
 
 
 <fieldset id="sf_fieldset_none" class="">

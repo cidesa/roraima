@@ -177,7 +177,7 @@
       <th>&nbsp;&nbsp;&nbsp;</th>
    <th>
      <?php if ($casolart->getId()!='') { ?>
-  <input type="button" name="Submit" value="Forma Pre-Impresa" onclick="javascript:Mostrar_orden_preimpresa();" />
+  <input type="button" name="Submit" class="sf_admin_action_list" value="Forma Pre-Impresa" onclick="javascript:Mostrar_orden_preimpresa();" />
 <? } ?>
    </th>
    </tr>

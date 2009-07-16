@@ -2398,4 +2398,143 @@ class Compras {
       }
     }
   }
+
+public static function actualizacionSolicitudEgresos($reqart, $actsolegr, & $error) {
+    $gridnuevo = array ();
+    $gridnuevo2 = array ();
+    $gridnuevorec = array ();
+
+    $error = -1;
+    if ($actsolegr == '1') {
+      $c = new Criteria();
+      $c->addJoin(CacotizaPeer :: REFCOT, CadetcotPeer :: REFCOT);
+      $c->add(CacotizaPeer :: REFSOL, $reqart);
+      $c->add(CadetcotPeer :: PRIORI, '1');
+      $result = CadetcotPeer :: doSelect($c);
+      if ($result) {
+        foreach ($result as $datos) {
+          $c = new Criteria();
+          $c->add(CaartsolPeer :: REQART, $reqart);
+          $c->add(CaartsolPeer :: CODART, $datos->getCodart());
+          $resul = CaartsolPeer :: doSelect($c);
+          if ($resul) {
+          	foreach ($resul as $resul2)
+          	{
+            $indice = count($gridnuevo) + 1;
+            $gridnuevo[$indice -1][0] = $datos->getCodart();
+            $gridnuevo[$indice -1][1] = $resul2->getCanreq();
+            $costonew=$datos->getCosto();
+            if ($costonew != $resul2->getCosto()) {
+              $gridnuevo[$indice -1][2] = $costonew;
+            } else {
+              $gridnuevo[$indice -1][2] = $resul2->getCosto();
+            }
+            $monuni = ($gridnuevo[$indice -1][2] * $gridnuevo[$indice -1][1]);
+            $gridnuevo[$indice -1][3] = $datos->getMondes();
+            $gridnuevo[$indice -1][4] = $resul2->getMonrgo();
+            $gridnuevo[$indice -1][5] = $monuni -$gridnuevo[$indice -1][3];
+            $c=new Criteria();
+            $c->add(CadisrgoPeer::REQART,$reqart);
+            $reg= CadisrgoPeer::doSelect($c);
+            if ($reg) {
+              $gridnuevo[$indice -1][6] = 1;
+            } else {
+              $gridnuevo[$indice -1][6] = 0;
+            }
+            $gridnuevo[$indice -1][7] = $monuni -$gridnuevo[$indice -1][3];
+            $gridnuevo[$indice -1][8] = $resul2->getCodcat().'-'.$resul2->getCodpre();
+            $gridnuevo[$indice -1][9] = $resul2->getMonrgo();
+            $gridnuevo[$indice -1][10] = $resul2->getCodcat();
+          	}
+          }
+        }
+      }
+
+      $c = new Criteria();
+      $c->add(CadisrgoPeer :: REQART, $reqart);
+      $dat = CadisrgoPeer :: doSelect($c);
+      if ($dat) {
+        foreach ($dat as $resultado) {
+          $indice2 = count($gridnuevorec) + 1;
+          $gridnuevorec[$indice2 -1][0] = $resultado->getCodrgo();
+          $gridnuevorec[$indice2 -1][1] = $resultado->getMonrgo();
+          $gridnuevorec[$indice2 -1][2] = $resultado->getTipdoc();
+          $gridnuevorec[$indice2 -1][3] = "";
+          $gridnuevorec[$indice2 -1][4] = $resultado->getMonrgo();
+          $gridnuevorec[$indice2 -1][5] = $resultado->getCodart();
+          $gridnuevorec[$indice2 -1][6] = $resultado->getCodcat();
+        }
+      }
+      $z = 0;
+      while ($z < count($gridnuevo)) {
+        if ($gridnuevo[$z][2] != "") {
+          if (!is_numeric($gridnuevo[$z][2])) {
+            $c = new Criteria();
+            $c->addJoin(CacotizaPeer :: REFCOT, CadetcotPeer :: REFCOT);
+            $c->add(CacotizaPeer :: REFSOL, $reqart);
+            $result = CadetcotPeer :: doSelect($c);
+            if ($result) {
+              foreach ($result as $datos) {
+                $datos->setPriori(null);
+                $datos->setJustifica(null);
+                $datos->save();
+              }
+            }
+            $error = 133;
+            break;
+          } else
+            if ($gridnuevo[$z][2] < 0) {
+              $c = new Criteria();
+              $c->addJoin(CacotizaPeer :: REFCOT, CadetcotPeer :: REFCOT);
+              $c->add(CacotizaPeer :: REFSOL, $reqart);
+              $result = CadetcotPeer :: doSelect($c);
+              if ($result) {
+                foreach ($result as $datos) {
+                  $datos->setPriori(null);
+                  $datos->setJustifica(null);
+                  $datos->save();
+                }
+              }
+              $error = 134;
+              break;
+            } else {
+              if ($gridnuevo[$z][1] != "") {
+                $r = 0;
+                self :: distribuirRecargos(& $gridnuevo2, & $gridnuevo,'S',&$gridnuevorec);
+                self :: recalcularRecargos(&$gridnuevo2, &$gridnuevo, &$nopuedeaumentar, $reqart,&$gridnuevorec);
+                if ($gridnuevo[$z][5] > $gridnuevo[$z][7]) {
+                  $tiporec = Herramientas :: getX('CODEMP', 'Cadefart', 'Asiparrec', '001');
+                  if (!self :: chequearDisponibilidad($gridnuevo, $z, $tiporec, $reqart)) {
+                    $nopuedeaumentar = true;
+                  }
+                }
+
+                if ($nopuedeaumentar==true) {
+                  break;
+                }
+              }
+            }
+        }
+        $z++;
+      }
+
+      if ($nopuedeaumentar!=true) {
+        self :: actualizarSolicitud($reqart, $gridnuevo, $gridnuevo2,&$gridnuevorec);
+      } else {
+        $c = new Criteria();
+        $c->addJoin(CacotizaPeer :: REFCOT, CadetcotPeer :: REFCOT);
+        $c->add(CacotizaPeer :: REFSOL, $reqart);
+        $result = CadetcotPeer :: doSelect($c);
+        if ($result) {
+          foreach ($result as $datos) {
+            $datos->setPriori(null);
+            $datos->setJustifica(null);
+            $datos->save();
+          }
+        }
+        $error = 135;
+      }
+    }
+    return true;
+  }
 }

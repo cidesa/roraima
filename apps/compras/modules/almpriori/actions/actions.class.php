@@ -345,11 +345,18 @@ $this->Bitacora('Guardo');
     $col3->setHTML('type="text" size="5" maxlength="3"');
     $col3->setJScript('onBlur="javascript:event.keyCode=13;verificar_prioridad();"');
 
-    $col4 = clone $col1;
+    /*$col4 = clone $col1;
     $col4->setEsGrabable(true);
     $col4->setTitulo('Justificación');
     $col4->setNombreCampo('justifica');
-    $col4->setHTML('type="text" size="40"');
+    $col4->setHTML('type="text" size="40"');*/
+
+    $col4 = new Columna('Razón de Compra');
+    $col4->setTipo(Columna::COMBO);
+    $col4->setEsGrabable(true);
+    $col4->setNombreCampo('justifica');
+    $col4->setCombo(self::CargarRazon());
+    $col4->setHTML(' ');
 
     $col5 = new Columna('refcot');
     $col5->setTipo(Columna::TEXTO);
@@ -398,22 +405,49 @@ $this->Bitacora('Guardo');
   }
 
     public function executeAjax()
-	{
-	 $reqart=$this->getRequestParameter('reqart');
-	 $c = new Criteria();
-	 $c->add(CaartsolPeer::REQART,$reqart);
-	 $c->addAscendingOrderByColumn(CaartsolPeer::CODART);
-	 $articulos = CaartsolPeer::doSelect($c);
+  {
+    $codigo = $this->getRequestParameter('codigo','');
+    $ajax = $this->getRequestParameter('ajax','');
+    $cajtexcom = $this->getRequestParameter('cajtexcom','');
+    $cajtexmos = $this->getRequestParameter('cajtexmos','');
+    $javascript=""; $dato="";
 
-	 $tipos = array();
-
-
-	 foreach($articulos as $art)
-	 {
-	   $tipos += array($art->getCodart() => $art->getCodart()." - ".$art->getDesartsol());
-	 }
-	 $this->articulos= $tipos;
-	}
+    switch ($ajax){
+      case '1':
+        $reqart=$this->getRequestParameter('reqart');
+        Compras::actualizacionSolicitudEgresos($reqart, $codigo, & $error);
+        if ($error==133)
+        {
+          $javascript="alert_('La Asignación a Prioridad no Fue Grabada ya que el costo es un Dato Inválido.');";
+        }else if ($error==134)
+        {
+          $javascript="alert_('La Asignación a Prioridad no Fue Grabada ya que el Costo del Articulo debe ser mayor a cero.');";
+        }else if ($error==135)
+        {
+          $javascript="alert('La Asignación a Prioridad no Fue Grabada ya que no existe Disponibilidad Presupuestaria.');";
+        }else
+        {
+        	$javascript="alert('La Solicitud ha sido actualizada exitosamente.');";
+        }
+        $output = '[["javascript","'.$javascript.'",""],["","",""]]';
+        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+        return sfView::HEADER_ONLY;
+        break;
+      default:
+         $reqart=$this->getRequestParameter('reqart');
+		 $c = new Criteria();
+		 $c->add(CaartsolPeer::REQART,$reqart);
+		 $c->addAscendingOrderByColumn(CaartsolPeer::CODART);
+		 $articulos = CaartsolPeer::doSelect($c);
+		 $tipos = array();
+		 foreach($articulos as $art)
+		 {
+		   $tipos += array($art->getCodart() => $art->getCodart()." - ".$art->getDesartsol());
+		 }
+		 $this->articulos= $tipos;
+        break;
+    }
+  }
 
 	  protected function deleteCasolart($casolart)
 	  {
@@ -439,4 +473,19 @@ $this->Bitacora('Guardo');
 	     	}
 	     }
 	  }
+
+  public function CargarRazon()
+  {
+    $c = new Criteria();
+    $lista_raz = CarazcomPeer::doSelect($c);
+
+    $razones = array();
+
+    foreach($lista_raz as $obj_raz)
+    {
+      $razones += array($obj_raz->getCodrazcom() => $obj_raz->getDesrazcom());
+    }
+    return $razones;
+  }
+
 }

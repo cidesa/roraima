@@ -12,7 +12,7 @@
 <?php use_helper('SubmitClick') ?>
 <?php echo object_input_hidden_tag($caforent, 'getId') ?>
 
-<fieldset id="sf_fieldset_none" class=""><legend>Forma de Entrega</legend>
+<fieldset id="sf_fieldset_none" class=""><legend><?php echo __('Tiempo de Entrega')?></legend>
 
 <div class="form-row"><?php echo label_for('caforent[codforent]', __($labels['caforent{codforent}']), 'class="required" ') ?>
 <div

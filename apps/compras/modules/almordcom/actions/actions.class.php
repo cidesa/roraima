@@ -240,11 +240,11 @@ class almordcomActions extends autoalmordcomActions
         }
         $caordcom = CaordcomPeer::retrieveByPk($this->getRequestParameter($id));
         $sql = "Select fecanu from caordcom Where ordcom='".$caordcom->getOrdcom()."' and staord='N'";
-        if (Herramientas::BuscarDatos($sql,&$result))
+       /* if (Herramientas::BuscarDatos($sql,&$result))
         {
             $fec=adodb_date('d/m/Y',adodb_strtotime($result[0]['fecanu']));
             $this->setFlash('notice','Orden de Compra fue Anulada el dia '.$fec);
-        }
+        }*/
         $this->setVars();
         $this->funciones_combos($caordcom->getCodpai(),$caordcom->getCodedo(),$caordcom->getCodmun());
         $this->configGrid($caordcom->getOrdcom(),'0');
@@ -1911,6 +1911,10 @@ class almordcomActions extends autoalmordcomActions
     {
       $this->caordcom->setAplart6($caordcom['aplart6']);
     }
+    if (isset($caordcom['eti']))
+    {
+      $this->caordcom->setEti($caordcom['eti']);
+    }
 
   }
 
@@ -2107,7 +2111,7 @@ class almordcomActions extends autoalmordcomActions
           $numero_filas=count($filas);
 
         $result=array();
-      $sql = "select a.refcot as refcot,a.conpag as conpag,a.forent as forent from cacotiza a,caprovee b where refsol='".$refsol."' and b.rifpro='".$rif_encontrado."' and a.codpro=b.codpro";
+      $sql = "select a.refcot as refcot,a.conpag as conpag,a.forent as forent from cacotiza a,caprovee b where b.estpro='A' and refsol='".$refsol."' and b.rifpro='".$rif_encontrado."' and a.codpro=b.codpro";
       if (Herramientas::BuscarDatos($sql,&$result))
       {
         $codconpag_result=$result[0]['conpag'];

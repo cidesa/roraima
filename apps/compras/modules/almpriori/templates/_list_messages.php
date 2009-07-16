@@ -4,7 +4,7 @@
 ?>
 <?php if ($sf_request->getError('edit')): ?>
 <div class="form-errors">
-  <h2><?php echo __('Asignación Prioriodad No realizada') ?></h2>
+  <h2><?php echo __('Análisis de Cotizaciones No realizado') ?></h2>
   <br>
   <ul>
   &nbsp;&nbsp; <?php echo $sf_request->getError('edit') ?>
