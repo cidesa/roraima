@@ -17,7 +17,7 @@ elseif ($vargrid=='id3')
 
 
 */
-if ($obj){
+if ($varg=='a'){
 //	array_pop($registro);  ///Borra la Ultima Posicion
 //  array_pop($registro);  ///Borra la Ultima Posicion
 //end($f);
@@ -97,8 +97,29 @@ $col8->setEsTotal(true, 'totmonpres');
 
  *
  * */
+}elseif($varg=='b')
+{	
+?>
+<div id="id2">
+<?php
+  echo grid_tag($obj2);
+  echo javascript_tag("
+    var tot = obtener_filas_grid('b',1);
+  	var i=0;
+	if($('trigger_bx_'+i+'_1'))
+	{
+		while (i<tot)
+	  	{  		
+			$('trigger_bx_'+i+'_1').hide();
+	  		$('trigger_bx_'+i+'_2').hide();
+	  		i++;
+	  	}	
+	}
+  	");
+ ?>
+</div>
+<?php 
 }
-
 /*
 
 if ($aux=='si')
