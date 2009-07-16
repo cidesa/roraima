@@ -514,10 +514,57 @@ if ($nppresoc->getId()!='')
 
 
 </div>
-<?php tabPageOpenClose("tp1", "tabPage2", 'Regimen Anterior');?>
+<?php tabPageOpenClose("tp1", "tabPage2", 'Regimen Antiguo');?>
 <div id="id2">
-<? echo grid_tag($obj2); ?>
+<?php echo grid_tag($obj2); ?>
 </div>
+<table>
+   <tr>
+    <th><?php echo label_for('Totales2', __('TOTALES'), 'class="required" ') ?></th>
+
+	<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+    <th>
+    Antiguedad Acumulada
+	<?php echo input_tag('totcapitalact2', '', array(
+	'size'=> 15,
+	'class'=> 'grid_txtright',
+	'readonly'=> true,
+	)) ?>
+   </th>
+
+    <th>&nbsp;&nbsp;</th>
+    <th>
+    Interes Acumulado
+  <?php echo input_tag('totintacu2', '', array(
+	'size'=> 15,
+	'class'=> 'grid_txtright',
+	'readonly'=> true,
+	)) ?></th>
+
+
+
+	<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+    <th>
+    Adelanto Anticipo
+	<?php echo input_tag('totmonant2', '', array(
+	'size'=> 15,
+	'class'=> 'grid_txtright',
+	'readonly'=> true,
+	)) ?>
+   </th>
+
+    <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+    <th>
+    Adelanto Intereses
+    <?php echo input_tag('totmonadeint2', '', array(
+	'size'=> 15,
+	'class'=> 'grid_txtright',
+	'readonly'=> true,
+	)) ?></th>
+
+
+   </tr>
+</table>
 <?php tabPageOpenClose("tp1", "tabPage3", 'Intereses Sobre Capital');?>
 <div id="id3">
 <? echo grid_tag($obj3); ?>
@@ -592,12 +639,10 @@ if ($nppresoc->getId()!='')
 
 </form>
 
-
-
 <script language="JavaScript" type="text/javascript">
   function llamaroculta()
   {
-  	var tot = $('totfil').value;
+  	var tot = obtener_filas_grid('a',1);
   	var i=0;
   	while (i<tot)
   	{
