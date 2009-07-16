@@ -1727,7 +1727,7 @@
          $(porcentmil).value=format(porcentaje2,'.',',','.');
          var cal2=monto1XMILC();
       }
-      /*var base=toFloat(basemil);
+      var base=toFloat(basemil);
       var cal=((base*($('eltimbre').value))/calcularbi);
       if (cal==cal2)
       {
@@ -1740,9 +1740,9 @@
       else
       {
         var calfin=cal2;
-      }*/
+      }
 
-      $(montomil).value=format(cal2.toFixed(2),'.',',','.');
+      $(montomil).value=format(calfin.toFixed(2),'.',',','.');
    }
  }
 
