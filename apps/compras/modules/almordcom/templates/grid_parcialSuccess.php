@@ -8,3 +8,7 @@
   echo grid_tag($obj);
 ?>
 </form>
+
+<script language="JavaScript" type="text/javascript">
+  actualizar_grid_dependientes();
+</script>

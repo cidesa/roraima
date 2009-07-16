@@ -117,6 +117,15 @@ if ($careqart->getId()!="" &&  $autorizareq=='S' && $careqart->getAprreq()!='S')
    <? }?></div>
 
 <br>
+<ul class="sf_admin_actions">
+<li class="float-rigth">
+<?php if ($careqart->getId()!='') { ?>
+  <input type="button" name="Submit" class="sf_admin_action_list" value="Forma Pre-Impresa" onclick="javascript:Mostrar_orden_preimpresa();" />
+<? } ?>
+</li>
+</ul>
+<br>
+
 <?php echo grid_tag($obj);?>
 </div>
 </fieldset>
@@ -184,5 +193,16 @@ function calcularcosto(e,id)
 }
 
 }
+
+  function Mostrar_orden_preimpresa()
+  {
+    var codreqdes=$('careqart_reqart').value;
+    var codreqhas=$('careqart_reqart').value;
+
+    var  ruta='http://'+'<?echo $this->getContext()->getRequest()->getHost();?>';
+    pagina=ruta+"/reportes/reportes/compras/r.php=?r=carreqpre.php&codreqdes="+codreqdes+"&codreqhas="+codreqhas;
+    window.open(pagina,1,"menubar=yes,toolbar=yes,scrollbars=yes,width=1200,height=800,resizable=yes,left=1000,top=80")
+
+  }
 
 </script>

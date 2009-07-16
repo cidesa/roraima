@@ -9,7 +9,7 @@ generator:
       desforent:      { name : Descripción}
 
     list:
-      title:          Forma de Entrega
+      title:          Tiempo de Entrega
       display:        [=codforent, desforent]
       object_actions:
         _edit:        ~
@@ -24,7 +24,7 @@ generator:
       max_per_page:	  10
       sort:    codforent
     edit:
-      title:          Edición de Forma de Entrega
+      title:          Edición de Tiempo de Entrega
       display:        [codforent, desforent]
       actions:
         _list:        ~

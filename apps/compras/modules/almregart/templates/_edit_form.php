@@ -89,7 +89,7 @@
   'onKeyPress' =>  "javascript:return dFilter (event.keyCode, this,'$mascaracontabilidad')",
   'onBlur'=> remote_function(array(
         'url'      => 'almregart/ajax',
-        'complete' => 'AjaxJSON(request, json)',
+        'complete' => 'AjaxJSON(request, json), $("caregart_desart").focus()',
         'condition' => "$('caregart_codcta').value != ''",
         'script' => true,
          'with' => "'ajax=8&codigo='+this.value"

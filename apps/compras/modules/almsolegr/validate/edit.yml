@@ -18,7 +18,7 @@ names:
   casolart{fecreq}:
     required:  Yes
     required_msg: La Fecha no puedo estar en Blanco
-    validators: FechaValidator
+    validators: FechaValidator, FechaValidator1
 
   casolart{unires}:
     required:  Yes
@@ -51,8 +51,8 @@ FechaValidator1:
     class:         CidesaDateNow
     param:
         compare: 'now'
-        compare_error: La Fecha no puede ser menor a la Fecha Actual
-        operator: '>='
+        compare_error: La Fecha no puede ser mayor a la Fecha Actual
+        operator: '<='
         date_error:  Fecha Inválida
 
 DescripcionValidator:
