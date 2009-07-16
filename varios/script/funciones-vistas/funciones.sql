@@ -1529,3 +1529,166 @@ SELECT CASE WHEN trim($1) SIMILAR TO '[0-9]+'
 $BODY$
   LANGUAGE 'sql' IMMUTABLE STRICT;
 
+
+CREATE OR REPLACE FUNCTION calculopresant (codigo varchar, fecha varchar, capitalizacion char,dias numeric) RETURNS SETOF regprestacionesant AS
+$body$
+DECLARE
+recordSalida REGPRESTACIONESANT%ROWTYPE;
+capital numeric;
+tasa numeric;
+interesacum numeric;
+interesesadeu numeric;
+sueldo numeric;
+adelantoint numeric;
+annoini date;
+annofin date;
+diasanno numeric;
+ultprest numeric;
+adelantoacu numeric;
+BEGIN
+capital:=0;
+interesacum:=0;
+interesesadeu:=0;
+adelantoacu:=0;
+for recordSalida in
+EXECUTE 'SELECT A.CODEMP::VARCHAR,A.NOMEMP::VARCHAR,
+A.CODTIPCON::VARCHAR,A.FECING::DATE,COALESCE(A.FECEGR,TO_DATE('''||fecha||''',''DD/MM/YYYY''))::DATE AS FECEGR,A.FECINI::DATE,A.FECFIN::DATE,
+A.MONTO::NUMERIC AS MONTO,A.MONDIA::NUMERIC,
+COALESCE(B.NUMDIA,30)::NUMERIC AS DIASANT,
+0::NUMERIC AS MONPRES,
+(CASE WHEN '||dias||'=360 THEN 30 ELSE (A.FECFIN-A.FECINI)+1 END)::INTEGER AS DIAS,
+(SELECT COALESCE(SUM(MONANT),0) FROM NPANTPRE
+ WHERE CODEMP='''||codigo||'''
+ AND TO_CHAR(FECANT,''MM/YYYY'')=TO_CHAR(A.FECFIN,''MM/YYYY''))::NUMERIC AS MONANT,
+A.ID::INTEGER,0::NUMERIC AS CAPITAL,
+0::NUMERIC AS CAPITALACT,A.TASINT AS TASA,0::NUMERIC AS MONINT,0::NUMERIC AS INTACU,
+0::NUMERIC AS MONADEINT,0::NUMERIC AS TOTINTERES,A.ANNOANTIG::NUMERIC AS ANTANNOS,
+A.MESANTIG::NUMERIC AS ANTMESES,A.DIAANTIG::NUMERIC AS ANTDIAS,
+A.ANNOINI,A.ANNOFIN,0::NUMERIC AS DIASANNO
+FROM NPPRESREGANT A LEFT OUTER JOIN NPDIAANTPER B ON A.CODTIPCON=B.CODCON 
+                                                 AND A.FECFIN>=B.FECDES
+                                                 AND A.FECFIN<=B.FECHAS
+where A.CODEMP='''||codigo||'''
+AND A.FECFIN <= TO_DATE('''||fecha||''',''DD/MM/YYYY'')
+AND antpub(''A'',A.CODEMP,A.FECFIN,''N'')>=1
+UNION ALL
+SELECT A.CODEMP::VARCHAR,A.NOMEMP::VARCHAR,
+A.CODTIPCON::VARCHAR,A.FECING::DATE,COALESCE(A.FECEGR,TO_DATE('''||fecha||''',''DD/MM/YYYY''))::DATE AS FECEGR,
+TO_DATE(''01''||TO_CHAR(A.FECINI,''/MM/YYYY''),''DD/MM/YYYY'')::DATE AS FECINI,
+ADD_MONTHS(A.ANNOFIN,-12)::DATE AS FECFIN,
+A.MONTO::NUMERIC AS MONTO,A.MONDIA::NUMERIC,
+COALESCE(B.NUMDIA,30)::NUMERIC AS DIASANT,
+0::NUMERIC AS MONPRES,
+(CASE WHEN '||dias||'=360 THEN 30 ELSE (ADD_MONTHS(A.ANNOFIN,-12)-TO_DATE(''01''||TO_CHAR(A.FECINI,''/MM/YYYY''),''DD/MM/YYYY''))+1 END)::INTEGER AS DIAS,
+(SELECT COALESCE(SUM(MONANT),0) FROM NPANTPRE
+ WHERE CODEMP='''||codigo||'''
+ AND TO_CHAR(FECANT,''MM/YYYY'')=TO_CHAR(A.FECFIN,''MM/YYYY''))::NUMERIC AS MONANT,
+A.ID::INTEGER,0::NUMERIC AS CAPITAL,
+0::NUMERIC AS CAPITALACT,A.TASINT AS TASA,0::NUMERIC AS MONINT,0::NUMERIC AS INTACU,
+0::NUMERIC AS MONADEINT,0::NUMERIC AS TOTINTERES,A.ANNOANTIG::NUMERIC-1 AS ANTANNOS,
+11::NUMERIC AS ANTMESES,30::NUMERIC AS ANTDIAS,
+ADD_MONTHS(A.ANNOINI,-12) AS ANNOINI,ADD_MONTHS(A.ANNOFIN,-12) AS ANNOFIN,0::NUMERIC AS DIASANNO
+FROM NPPRESREGANT A LEFT OUTER JOIN NPDIAANTPER B ON A.CODTIPCON=B.CODCON 
+                                                 AND A.FECFIN>=B.FECDES
+                                                 AND A.FECFIN<=B.FECHAS
+where (CASE WHEN TO_CHAR(A.FECING,''DD'')=''01'' THEN ''01'' ELSE ''02'' END)=''02'' 
+AND A.CODEMP='''||codigo||'''
+AND A.FECINI>ADD_MONTHS(A.FECING,12)
+AND A.FECFIN <= TO_DATE('''||fecha||''',''DD/MM/YYYY'')
+AND TO_CHAR(A.FECINI,''MM'')=TO_CHAR(A.FECING,''MM'')
+AND antpub(''A'',A.CODEMP,ADD_MONTHS(A.ANNOFIN,-12),''N'')>=1
+order by FECINI,ID'
+
+loop
+  adelantoint:=0;
+  adelantoacu:=adelantoacu+recordSalida.monant;
+  SELECT INTO adelantoint COALESCE(monade,0)
+  FROM NPADEINT
+  WHERE CODEMP=recordSalida.codemp
+  AND FECADE>=recordSalida.fecini
+  AND FECADE<=recordSalida.fecfin;
+  recordSalida.monadeint:=COALESCE(adelantoint,0); 
+  IF TO_CHAR(recordSalida.fecing,'MM')=TO_CHAR(recordSalida.fecfin,'MM') AND recordSalida.fecfin<>recordSalida.annofin THEN
+     annoini:=recordSalida.annoini;
+     annofin:=recordSalida.annofin;
+     IF recordSalida.fecini>recordSalida.fecegr AND ADD_MONTHS(annoini,-12)<recordSalida.fecegr THEN
+        SELECT INTO sueldo COALESCE(monto,0)
+        FROM NPPRESREGANT
+        WHERE CODEMP=recordSalida.codemp
+        AND FECFIN=(SELECT MAX(FECFIN) FROM NPPRESREGANT WHERE CODEMP=recordSalida.codemp AND MONTO>0);
+     ELSE
+        SELECT INTO sueldo COALESCE(monto,0)
+        FROM NPPRESREGANT
+        WHERE CODEMP=recordSalida.codemp
+        AND ID=(CASE WHEN add_months(recordSalida.fecini,-12)=recordSalida.fecing THEN recordSalida.id ELSE recordSalida.id-1 END);
+     END IF;
+     
+  ELSE
+    recordSalida.annoini:=annoini;
+    recordSalida.annofin:=annofin;           
+  END IF;
+  diasanno:=dias; 
+  recordSalida.monto:=sueldo;
+  IF dias<>360 THEN 
+     IF last_day(TO_DATE('01/02/'||TO_CHAR(annoini,'YYYY'),'DD/MM/YYYY'))>=annoini AND
+        last_day(TO_DATE('01/02/'||TO_CHAR(annoini,'YYYY'),'DD/MM/YYYY'))<=annofin THEN
+        IF TO_NUMBER(TO_CHAR(last_day(TO_DATE('01/02/'||TO_CHAR(annoini,'YYYY'),'DD/MM/YYYY')),'DD'),'99')>28 THEN
+           diasanno:=366;
+        END IF;
+     ELSE
+        IF last_day(TO_DATE('01/02/'||TO_CHAR(annofin,'YYYY'),'DD/MM/YYYY'))>=annoini AND
+           last_day(TO_DATE('01/02/'||TO_CHAR(annofin,'YYYY'),'DD/MM/YYYY'))<=annofin THEN
+           IF TO_NUMBER(TO_CHAR(last_day(TO_DATE('01/02/'||TO_CHAR(annofin,'YYYY'),'DD/MM/YYYY')),'DD'),'99')>28 THEN
+              diasanno:=366;
+           END IF; 
+        END IF;
+     END IF;
+  ELSE
+     diasanno:=dias; 
+  END IF;
+  recordSalida.diasanno:=diasanno;
+  IF recordSalida.antmeses=0 AND recordSalida.antdias=0 THEN
+     recordSalida.monpres:=(sueldo/30)*(recordSalida.antannos-1)*recordSalida.diasant;
+  ELSE
+     recordSalida.monpres:=(sueldo/30)*(recordSalida.antannos)*recordSalida.diasant;  
+  END IF;
+  
+  IF recordSalida.monpres>0 THEN
+     ultprest:=recordSalida.monpres;
+  END IF;
+  
+  IF recordSalida.monpres=0 AND recordSalida.fecini>=recordSalida.fecegr THEN
+     recordSalida.monpres:=ultprest;
+  END IF;
+  recordSalida.monpres:=recordSalida.monpres-adelantoacu;
+  IF  capitalizacion='A' THEN
+     IF TO_CHAR(recordSalida.fecing,'MM')=TO_CHAR(recordSalida.fecfin,'MM') AND recordSalida.fecfin<>recordSalida.annofin
+        OR recordSalida.monant>0 THEN
+        capital:=recordSalida.monpres+interesesadeu;
+        interesacum:=0;
+     END IF;
+  ELSE
+     IF capitalizacion='M' AND recordSalida.fecfin<>recordSalida.annofin THEN
+        capital:=recordSalida.monpres+interesesadeu;
+        interesacum:=0;
+     ELSE
+        capital:=recordSalida.monpres;
+     END IF;
+  END IF;
+  recordSalida.capital:=capital;
+      
+  recordSalida.monint:=(recordSalida.capital* (recordSalida.tasa/100) / diasanno * recordsalida.dias);
+  interesacum:=interesacum+recordSalida.monint-recordSalida.monadeint;
+  interesesadeu:=interesesadeu+recordSalida.monint-recordSalida.monadeint;
+  recordSalida.totinteres:=interesesadeu; 
+  recordSalida.intacu=round(interesacum,2);
+  recordSalida.capitalact:=round(capital,2);
+  return next recordSalida;
+end loop;
+
+return;
+
+
+END;
+$body$
+LANGUAGE 'plpgsql' VOLATILE CALLED ON NULL INPUT SECURITY INVOKER;
