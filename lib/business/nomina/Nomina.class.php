@@ -3212,7 +3212,7 @@ class Nomina {
                         AND TRUNC(Months_between(TO_DATE('" . $hasta . "','DD/MM/YYYY'), A.FECNAC)/12)>= C.EDADDES
                            AND TRUNC(Months_between(TO_DATE('" . $hasta . "','DD/MM/YYYY'), A.FECNAC)/12)<= C.EDADHAS
                   AND (CASE WHEN C.ESTUDIOS='S' THEN 'E' ELSE coalesce(a.ocupac,'') END)=coalesce(a.ocupac,'')";
-     
+
         if (Herramientas :: BuscarDatos($sql, & $tabla)) {
           return $tabla[0]["elmonto"];
         }
@@ -6246,7 +6246,7 @@ class Nomina {
         //    if ($a['historico'] <> 0)
         // {
 
-        if ($fecha < $fechah) {
+        if ($fecha <= $fechah) {
           //          print 'entro <br>';
           $arreglo[$i]["id"] = 9;
           $arreglo[$i]["perini"] = $a['desde'];
