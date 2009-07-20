@@ -22,7 +22,7 @@ class tesmovsegbanActions extends autotesmovsegbanActions
       {
       	if (Tesoreria::validaPeriodoCerradoBanco($this->getRequestParameter('tsmovban[fecban]'),$this->getRequestParameter('tsmovban[numcue]'))==false)
       	{
-          $this->coderror1=535;
+          $this->coderror1=536;
           return false;
       	}
       }
