@@ -1073,7 +1073,7 @@ class Factura {
       $tsmovlib->setFeclib($fafactur->getFecfac());
       $tsmovlib->setTipmov($tipmov);
       $tsmovlib->setDeslib($descop);
-      $tsmovlib->setMonto($montop);
+      $tsmovlib->setMonmov($montop);
       $tsmovlib->setNumcom($fafactur->getNumcom());
       $tsmovlib->setStatus('C');
       $tsmovlib->setFeccom($fafactur->getFecfac());

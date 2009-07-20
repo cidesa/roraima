@@ -20,7 +20,6 @@ class fafacturActions extends autofafacturActions {
 			if ($reg) {
 				$correl = str_pad($reg->getCorcaj(), 8, '0', STR_PAD_LEFT);
 				$this->fafactur->setReffac($correl);
-			
 			}
 	        }
 		}
@@ -793,7 +792,7 @@ class fafacturActions extends autofafacturActions {
           return false;
         }
         $grid2=Herramientas::CargarDatosGridv2($this,$this->obj3);
-        if (Factura::Verificar_pago($grid2,H::convnume($this->getRequestParameter('fafactur[monfac]')),$this->getRequestParameter('fafactur[tipconpag]'))==false)
+        if (Factura::Verificar_pago($grid2,H::tofloat($this->getRequestParameter('fafactur[monfac]')),$this->getRequestParameter('fafactur[tipconpag]'))==false)
         {
           $this->coderr=1146;
           return false;
