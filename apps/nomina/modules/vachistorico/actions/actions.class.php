@@ -67,7 +67,8 @@ class vachistoricoActions extends autovachistoricoActions
     $opciones = new OpcionesGrid();
     $opciones->setEliminar(false);
     $opciones->setTabla('Npvacdisfrute');
-    $opciones->setAnchoGrid(600);
+    $opciones->setAnchoGrid(500);
+    $opciones->setAncho(500);
     $opciones->setName('a');
     $opciones->setFilas($cero);
     $opciones->setTitulo('');
