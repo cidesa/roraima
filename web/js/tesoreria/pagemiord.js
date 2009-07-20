@@ -104,6 +104,8 @@
     var cal=montos+diferencia;
     $('opordpag_monret').value=format(cal.toFixed(2),'.',',','.');
     var y=totalregistros('ax',2,50);
+    if (y!=0)
+    {
     if (($('opordpag_presiono').value=='S') && (verificarmarcas('ax',1)))
     {
       var y=verificarultimomarcado('ax',2,50,1);
@@ -126,6 +128,7 @@
     var y=y;
     var otro="ax"+"_"+y+"_4";
     $(otro).value=$(otro).value;
+    }
     $('opordpag_monret').value=$('opordpag_monret').value;
 
     if ($('opordpag_afectapre').value==1)
