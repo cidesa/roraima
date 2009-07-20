@@ -40,7 +40,7 @@ class Articulos
 	      $lonpadre=strlen($articulo->getCodart());
 	      $padre=substr($articulo->getCodart(),0,strlen($articulo->getCodart())-2);
 	      $lonultniv=strlen(substr($mascaraarticulo,strlen($padre) +1,$longmas));
-	      $sql="select max(substring(codart,".$lonpadre.",length(codart))) as ultimo from caregart where codart like ('%".$padre."%') and
+	      $sql="select max(substring(codart,".$lonpadre.",length(codart))) as ultimo from caregart where codart like ('".$padre."%') and
 	      length(codart)='".$longmas."' and tipo='".$articulo->getTipo()."' ";
 	      if (Herramientas::BuscarDatos($sql,&$result))
 	      {
