@@ -194,7 +194,7 @@ public function configGrid($codigo='')
 						x.status,
 						z.codnom,z.nomnom, 9 as id from
 						(select  a.codemp,c.codtipcon,a.codnom,d.nomemp,d.fecing,a.fecasi,b.nomnom from npasicaremp a, npasinomcont c, npnomina b, nphojint d
-						where  c.codnom=a.codnom and a.codnom=b.codnom and a.codemp=d.codemp) z
+						where  c.codnom=a.codnom and a.codnom=b.codnom and a.codemp=d.codemp and a.status='V') z
 						left outer join npasiempcont x on (z.codemp=x.codemp and z.codtipcon=x.codtipcon)
 						where x.codtipcon is not null and z.codtipcon='".$codigo."'
 		  union all
@@ -206,7 +206,7 @@ public function configGrid($codigo='')
 						x.status,
 						z.codnom,z.nomnom, 9 as id from
 						(select  a.codemp,c.codtipcon,a.codnom,d.nomemp,d.fecing,a.fecasi,b.nomnom from npasicaremp a, npasinomcont c, npnomina b, nphojint d
-						where  c.codnom=a.codnom and a.codnom=b.codnom and a.codemp=d.codemp) z
+						where  c.codnom=a.codnom and a.codnom=b.codnom and a.codemp=d.codemp and a.status='V') z
 						left outer join npasiempcont x on (z.codemp=x.codemp and z.codtipcon=x.codtipcon)
 						where x.codtipcon is null and z.codtipcon='".$codigo."' order by check1 desc, codemp";
 
