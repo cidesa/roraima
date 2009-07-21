@@ -140,10 +140,11 @@ $this->Bitacora('Guardo');
 						AND a.FecNom  >= (case when e.fecini is not null then e.fecini else  TO_DATE('$fecini','DD/MM/YYYY') end) 
 						AND a.FecNom  <= (case when e.fecfin is not null then e.fecfin else  TO_DATE('$fecfin','DD/MM/YYYY') end) 
 						AND B.CODCON='$con'
+						AND D.CODNOM=A.CODNOM
 						AND D.CODTIPCON=B.CODCON
 						AND A.CODCON=B.CODCPT
 						AND A.CODCON=C.CODCON GROUP BY B.CODASI order by codasi";
- 
+
 			     H::BuscarDatos($sql,$data);
 			     if ($data)
 			     {
