@@ -21,7 +21,7 @@ class nomhojintActions extends autonomhojintActions
       $this->configGrid2();
       $this->configGrid3();
       $grid3=Herramientas::CargarDatosGrid($this,$this->obj2);
-      $grid4=Herramientas::CargarDatosGrid($this,$this->obj3); 
+      $grid4=Herramientas::CargarDatosGrid($this,$this->obj3);
 
      $nphojint = $this->getRequestParameter('nphojint');
      $nomemp='';
@@ -44,11 +44,11 @@ class nomhojintActions extends autonomhojintActions
 		$nomemp=(implode(', ',array($apellidos,$nombres)));
 	 }
       if($nomemp=='' or $nomemp==',')
-	  { 
+	  {
 	 	$this->coderr=473;
 	 	return false;
 	  }
-	 
+
       if  ($nphojint['codtippag']=="01")
       {
       	if ($nphojint['codban']=="" or $nphojint['numcue']=="" or $nphojint['tipcue']=="")
@@ -684,6 +684,14 @@ $this->Bitacora('Guardo');
     {
       $this->nphojint->setTipcue($nphojint['tipcue']);
     }
+     if (isset($nphojint['numcueaho']))
+    {
+      $this->nphojint->setNumcueaho($nphojint['numcueaho']);
+    }
+    if (isset($nphojint['tipcueaho']))
+    {
+      $this->nphojint->setTipcueaho($nphojint['tipcueaho']);
+    }
     if (isset($nphojint['fecadmpub']))
     {
       if ($nphojint['fecadmpub'])
@@ -858,6 +866,54 @@ $this->Bitacora('Guardo');
     }	if (isset($nphojint['codempant']))
     {
       $this->nphojint->setCodempant($nphojint['codempant']);
+    }
+	if (isset($nphojint['feccoracu']))
+    {
+      if ($nphojint['feccoracu'])
+      {
+        try
+        {
+          $dateFormat = new sfDateFormat($this->getUser()->getCulture());
+                              if (!is_array($nphojint['feccoracu']))
+          {
+            $value = $dateFormat->format($nphojint['feccoracu'], 'i', $dateFormat->getInputPattern('d'));
+          }
+          else
+          {
+            $value_array = $nphojint['feccoracu'];
+            $value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+          }
+          $this->nphojint->setFeccoracu($value);
+        }
+        catch (sfException $e)
+        {
+          // not a date
+        }
+      }
+      else
+      {
+        $this->nphojint->setFeccoracu(null);
+      }
+    }
+    if (isset($nphojint['capactacu']))
+    {
+      $this->nphojint->setCapactacu($nphojint['capactacu']);
+    }
+    if (isset($nphojint['intacu']))
+    {
+      $this->nphojint->setIntacu($nphojint['intacu']);
+    }
+    if (isset($nphojint['antacu']))
+    {
+      $this->nphojint->setAntacu($nphojint['antacu']);
+    }
+    if (isset($nphojint['diaacu']))
+    {
+      $this->nphojint->setDiaacu($nphojint['diaacu']);
+    }
+    if (isset($nphojint['diaadiacu']))
+    {
+      $this->nphojint->setDiaadiacu($nphojint['diaadiacu']);
     }
   }
 
@@ -1180,9 +1236,11 @@ $this->Bitacora('Guardo');
     $opciones = new OpcionesGrid();
     $opciones->setEliminar(true);
     $opciones->setTabla('Npinffam');
-    $opciones->setAnchoGrid(1600);
+    $opciones->setAnchoGrid(1850);
+    $opciones->setAncho(1850);
     $opciones->setName('e');
     $opciones->setTitulo('');
+    $opciones->setFilas(15);
     $opciones->setHTMLTotalFilas(' ');
 
     $col1 = new Columna('C.I');
@@ -1330,6 +1388,11 @@ $this->Bitacora('Guardo');
   	}
   	$output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$this->getRequestParameter('suecar').'","'.$dato2.'",""],["'.$this->getRequestParameter('comcar').'","'.$dato3.'",""],["javascript","'.$javascript.'",""]]';
   }
+  else if ($this->getRequestParameter('ajax')=='3')
+  {
+    $annopub=Nomina::obtenerEdad($this->getRequestParameter('codigo'));
+  	$output = '[["'.$cajtexmos.'","'.$annopub.'",""]]';
+  }
 
   $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
   return sfView::HEADER_ONLY;
@@ -1383,8 +1446,10 @@ $this->Bitacora('Guardo');
       'nphojint{staemp}' => 'Estatus del Empleado:',
       'nphojint{codtippag}' => 'Forma de Pago:',
       'nphojint{codban}' => 'Banco:',
-      'nphojint{numcue}' => 'Número de Cuenta:',
+      'nphojint{numcue}' => 'Número de Cuenta Nómina:',
       'nphojint{tipcue}' => 'Tipo de Cuenta:',
+      'nphojint{numcueaho}' => 'Número de Cuenta Caja de Ahorro:',
+      'nphojint{tipcueaho}' => 'Tipo de Cuenta:',
       'nphojint{fecadmpub}' => 'Fecha en la Administración Pública:',
       'nphojint{numsso}' => 'Número de S.S.O:',
       'nphojint{numpolseg}' => 'Número dde Póliza de Seguro:',
@@ -1419,6 +1484,12 @@ $this->Bitacora('Guardo');
       'nphojint{segape}' => 'Segundo Apellido:',
       'nphojint{ubifis}' => 'Ubicacion Fisica:',
       'nphojint{codempant}' => 'No. Empleado Anterior:',
+	  'nphojint{feccoracu}' => 'Fecha de Corte Acumulado:',
+      'nphojint{capactacu}' => 'Capital Actual Acumulado:',
+      'nphojint{intacu}' => 'Interes Acumulado:',
+      'nphojint{antacu}' => 'Anticipos Acumulados:',
+      'nphojint{diaacu}' => 'Dias Acumulados:',
+      'nphojint{diaadiacu}' => 'Dias Adicionales Acumulados:',
 
 
 
