@@ -907,11 +907,12 @@ $this->Bitacora('Guardo');
             }
             if ($tsmovlib[0]["stacon"]!='C')
             {
-              if (substr($tsmovlib[0]["tipmov"],0,2)=='CH')
+              $escheque=H::getX('CODTIP','Tstipmov','Escheque',$tsmovlib[0]["tipmov"]);
+              if ($escheque==1)
               {
                 $this->msg=$this->msg.Tesoreria::anular_Eliminar_Cheque('E',$numcue,$reflib);
-                $this->msg=$this->msg.Tesoreria::anular_Eliminar_Imppag('E',$reflib,$numcue,$feclib,$refpag);
                 $this->msg=$this->msg.Tesoreria::actualiza_Orden_De_Pago($reflib,$numcue,$tipmov);
+                $this->msg=$this->msg.Tesoreria::anular_Eliminar_Imppag('E',$reflib,$numcue,$feclib,$refpag);
               }
               else
               {
@@ -920,8 +921,8 @@ $this->Bitacora('Guardo');
                 {
                   if ($tabla[0]["refier"]=='A')
                   {
-                    $this->msg=$this->msg.Tesoreria::anular_Eliminar_Imppag('E',$reflib,$numcue,$feclib,$refpag);
                     $this->msg=$this->msg.Tesoreria::actualiza_Orden_De_Pago($reflib,$numcue,$tipmov);
+                    $this->msg=$this->msg.Tesoreria::anular_Eliminar_Imppag('E',$reflib,$numcue,$feclib,$refpag);
                   }
                   else
                   {
@@ -1043,11 +1044,12 @@ $this->Bitacora('Guardo');
       {
         if (!$tsmovlib[0]["stacon"]!='C')
         {
-          if (substr($tsmovlib[0]["tipmov"],0,2)=='CH')
+          $escheque=H::getX('CODTIP','Tstipmov','Escheque',$tsmovlib[0]["tipmov"]);
+          if ($escheque==1)
           {
             $this->msg=$this->msg.Tesoreria::anular_Eliminar_Cheque('A',$numcue,$reflib);
-            $this->msg=$this->msg.Tesoreria::anular_Eliminar_Imppag('A',$reflib,$numcue,$fecanu, $refpag);
             $this->msg=$this->msg.Tesoreria::actualiza_Orden_De_Pago($reflib,$numcue,$tipmov);
+            $this->msg=$this->msg.Tesoreria::anular_Eliminar_Imppag('A',$reflib,$numcue,$fecanu, $refpag);
           }
           else
           {
@@ -1056,8 +1058,8 @@ $this->Bitacora('Guardo');
             {
               if ($tabla[0]["refier"]=='A')
               {
-                $this->msg=$this->msg.Tesoreria::anular_Eliminar_Imppag('A',$reflib,$numcue,$fecanu,$refpag);
                 $this->msg=$this->msg.Tesoreria::actualiza_Orden_De_Pago($reflib,$numcue,$tipmov);
+                $this->msg=$this->msg.Tesoreria::anular_Eliminar_Imppag('A',$reflib,$numcue,$fecanu,$refpag);
               }
               else
               {
