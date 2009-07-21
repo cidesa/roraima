@@ -78,7 +78,7 @@ propel:
     observacion:
       type: VARCHAR
       size: 100
-      ##primaryKey: true      
+      ##primaryKey: true
     id:
       type: INTEGER
       required: true
@@ -705,7 +705,7 @@ propel:
       size: 1
     afealibf:
       type: VARCHAR
-      size: 1    
+      size: 1
     id:
       type: INTEGER
       required: true
@@ -3636,7 +3636,25 @@ propel:
       size: 1
     codnivedu:
       type: VARCHAR
-      size: 4      
+      size: 4
+    feccoracu:
+      type: DATE  
+    capactacu:
+      type: NUMERIC
+      size: 14
+      scale: 2  
+    intacu:
+      type: NUMERIC
+      size: 14
+      scale: 2  
+    antacu:
+      type: NUMERIC
+      size: 14
+      scale: 2  
+    diaacu:
+      type: INTEGER
+    diaadiacu:
+      type: INTEGER   
     id:
       type: INTEGER
       required: true
@@ -4110,6 +4128,9 @@ propel:
       type: NUMERIC
       size: 2
     seghcm:
+      type: VARCHAR
+      size: 1
+    ocupac:
       type: VARCHAR
       size: 1
     id:
