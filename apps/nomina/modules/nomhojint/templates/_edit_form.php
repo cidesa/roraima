@@ -852,134 +852,143 @@ echo grid_tag($obj);
 
   <?php echo select_tag('nphojint[tipcue]', options_for_select($listatipocuenta,$nphojint->getTipcue(),'include_custom=Seleccione Uno')) ?>
     </div>
+
+<br>
+
+ <?php echo label_for('nphojint[numcueaho]', __($labels['nphojint{numcueaho}']), 'class="required" style="width: 150px"') ?>
+  <div class="content<?php if ($sf_request->hasError('nphojint{numcueaho}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('nphojint{numcueaho}')): ?>
+    <?php echo form_error('nphojint{numcueaho}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($nphojint, 'getNumcueaho', array (
+  'size' => 31,
+  'maxlength' => 31,
+  'control_name' => 'nphojint[numcueaho]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+
+<br>
+
+ <?php echo label_for('nphojint[tipcueaho]', __($labels['nphojint{tipcueaho}']), 'class="required" style="width: 150px"') ?>
+  <div class="content<?php if ($sf_request->hasError('nphojint{tipcueaho}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('nphojint{tipcueaho}')): ?>
+    <?php echo form_error('nphojint{tipcueaho}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php echo select_tag('nphojint[tipcueaho]', options_for_select($listatipocuenta,$nphojint->getTipcueaho(),'include_custom=Seleccione Uno')) ?>
+    </div>
 </div>
 </fieldset>
 
-<?php tabPageOpenClose("tp1", "tabPage5", 'Información Admón. Pública');?>
+<?php tabPageOpenClose("tp1", "tabPage5", 'Información Prestaciones Sociales(Acumulado)');?>
 <fieldset id="sf_fieldset_none" class="">
 <div class="form-row">
-
-<br>
-
- <?php echo label_for('nphojint[codempant]', __($labels['nphojint{codempant}']), 'class="required" style="width: 150px"') ?>
-  <div class="content<?php if ($sf_request->hasError('nphojint{codempant}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('nphojint{codempant}')): ?>
-    <?php echo form_error('nphojint{codempant}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($nphojint, 'getCodempant', array (
-  'size' => 16,
-  'maxlength' => 16,
-  'control_name' => 'nphojint[codempant]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-
-<br>
-
- <?php echo label_for('nphojint[fecadmpub]', __($labels['nphojint{fecadmpub}']), 'class="required" style="width: 150px"') ?>
-  <div class="content<?php if ($sf_request->hasError('nphojint{fecadmpub}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('nphojint{fecadmpub}')): ?>
-    <?php echo form_error('nphojint{fecadmpub}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_date_tag($nphojint, 'getFecadmpub', array (
-  'rich' => true,
-  'maxlength' => 10,
-  'size' => 10,
-  'calendar_button_img' => '/sf/sf_admin/images/date.png',
-  'control_name' => 'nphojint[fecadmpub]',
-  'date_format' => 'dd/MM/yy',
-  'onkeyup' => "javascript: mascara(this,'/',patron,true)",
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-
-<br>
-
- <?php echo label_for('nphojint[numsso]', __($labels['nphojint{numsso}']), 'class="required" style="width: 150px"') ?>
-  <div class="content<?php if ($sf_request->hasError('nphojint{numsso}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('nphojint{numsso}')): ?>
-    <?php echo form_error('nphojint{numsso}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($nphojint, 'getNumsso', array (
-  'size' => 31,
-  'maxlength' => 31,
-  'control_name' => 'nphojint[numsso]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-
-<br>
-
-  <?php echo label_for('nphojint[numpolseg]', __($labels['nphojint{numpolseg}']), 'class="required" style="width: 150px"') ?>
-  <div class="content<?php if ($sf_request->hasError('nphojint{numpolseg}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('nphojint{numpolseg}')): ?>
-    <?php echo form_error('nphojint{numpolseg}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($nphojint, 'getNumpolseg', array (
-  'size' => 31,
-  'maxlength' => 31,
-  'control_name' => 'nphojint[numpolseg]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-
-<br>
-
- <?php echo label_for('nphojint[feccotsso]', __($labels['nphojint{feccotsso}']), 'class="required" style="width: 150px"') ?>
-  <div class="content<?php if ($sf_request->hasError('nphojint{feccotsso}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('nphojint{feccotsso}')): ?>
-    <?php echo form_error('nphojint{feccotsso}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_date_tag($nphojint, 'getFeccotsso', array (
-  'rich' => true,
-  'maxlength' => 10,
-  'size' => 10,
-  'calendar_button_img' => '/sf/sf_admin/images/date.png',
-  'control_name' => 'nphojint[feccotsso]',
-  'date_format' => 'dd/MM/yy',
-  'onkeyup' => "javascript: mascara(this,'/',patron,true)",
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-
-<br>
-
-<?php echo label_for('nphojint[anoadmpub]', __($labels['nphojint{anoadmpub}']), 'class="required" style="width: 150px"') ?>
-  <div class="content<?php if ($sf_request->hasError('nphojint{anoadmpub}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('nphojint{anoadmpub}')): ?>
-    <?php echo form_error('nphojint{anoadmpub}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($nphojint, 'getAnoadmpub', array (
-  'size' => 7,
-  'maxlength' => 4,
-  'control_name' => 'nphojint[anoadmpub]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-
-<br>
-
 
 <table>
-<tr>
-<th>
-<fieldset id="sf_fieldset_none" class="">
-<legend><h2><?php echo __('Tiene Fideicomiso')?></h2></legend>
-<div class="form-row">
-<? if ($nphojint->getTiefid()=='S')  {
-  ?><?php echo radiobutton_tag('nphojint[tiefid]', 'S', true)        ." Si".'&nbsp;&nbsp;';
-      echo radiobutton_tag('nphojint[tiefid]', 'N', false)."   No";?> <?
-
-}else{
-  echo radiobutton_tag('nphojint[tiefid]', 'S', false)        ." Si".'&nbsp;&nbsp;';
-  echo radiobutton_tag('nphojint[tiefid]', 'N', true)."   No";
-
-} ?>
-</div>
-</fieldset>
-</th>
-</tr>
+	<tr>
+		<th>
+			  <?php echo label_for('nphojint[feccoracu]', __($labels['nphojint{feccoracu}']), 'class="required"') ?>
+				  <div class="content<?php if ($sf_request->hasError('nphojint{feccoracu}')): ?> form-error<?php endif; ?>">
+				  <?php if ($sf_request->hasError('nphojint{feccoracu}')): ?>
+				    <?php echo form_error('nphojint{feccoracu}', array('class' => 'form-error-msg')) ?>
+				  <?php endif; ?>
+				
+				  <?php $value = object_input_date_tag($nphojint, 'getFeccoracu', array (
+				  'rich' => true,
+				  'calendar_button_img' => '/sf/sf_admin/images/date.png',
+				  'control_name' => 'nphojint[feccoracu]',
+				)); echo $value ? $value : '&nbsp;' ?>
+				    </div>			
+		</th>
+		<th width="150">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+		<th><?php echo label_for('nphojint[capactacu]', __($labels['nphojint{capactacu}']), 'class="required"') ?>
+			  <div class="content<?php if ($sf_request->hasError('nphojint{capactacu}')): ?> form-error<?php endif; ?>">
+			  <?php if ($sf_request->hasError('nphojint{capactacu}')): ?>
+			    <?php echo form_error('nphojint{capactacu}', array('class' => 'form-error-msg')) ?>
+			  <?php endif; ?>
+			
+			  <?php $value = object_input_tag($nphojint, array('getCapactacu',true), array (
+			  'size' => 10,
+			  'control_name' => 'nphojint[capactacu]',
+			  'onBlur'=> "javascript:event.keyCode=13;entermontootro(event, this.id); "
+			)); echo $value ? $value : '&nbsp;' ?>
+			    </div>
+		</th>
+	</tr>
+	<tr>
+		<th>&nbsp;&nbsp;&nbsp;</th>
+	</tr>
+	<tr>
+		<th>&nbsp;&nbsp;&nbsp;</th>
+	</tr>
+	<tr>		
+		<th>
+			<?php echo label_for('nphojint[intacu]', __($labels['nphojint{intacu}']), 'class="required"') ?>
+			  <div class="content<?php if ($sf_request->hasError('nphojint{intacu}')): ?> form-error<?php endif; ?>">
+			  <?php if ($sf_request->hasError('nphojint{intacu}')): ?>
+			    <?php echo form_error('nphojint{intacu}', array('class' => 'form-error-msg')) ?>
+			  <?php endif; ?>
+			
+			  <?php $value = object_input_tag($nphojint, array('getIntacu',true), array (
+			  'size' => 10,
+			  'control_name' => 'nphojint[intacu]',
+			  'onBlur'=> "javascript:event.keyCode=13;entermontootro(event, this.id); "
+			)); echo $value ? $value : '&nbsp;' ?>
+			    </div>
+		</th>				
+        <th>&nbsp;&nbsp;&nbsp;</th>
+		<th>			
+		  <?php echo label_for('nphojint[antacu]', __($labels['nphojint{antacu}']), 'class="required"') ?>
+		  <div class="content<?php if ($sf_request->hasError('nphojint{antacu}')): ?> form-error<?php endif; ?>">
+		  <?php if ($sf_request->hasError('nphojint{antacu}')): ?>
+		    <?php echo form_error('nphojint{antacu}', array('class' => 'form-error-msg')) ?>
+		  <?php endif; ?>
+		
+		  <?php $value = object_input_tag($nphojint, array('getAntacu',true), array (
+		  'size' => 10,
+		  'control_name' => 'nphojint[antacu]',
+		  'onBlur'=> "javascript:event.keyCode=13;entermontootro(event, this.id); "
+		)); echo $value ? $value : '&nbsp;' ?>
+		    </div>
+		</th>		
+	</tr>
+	<tr>
+		<th>&nbsp;&nbsp;&nbsp;</th>
+	</tr>
+	<tr>
+		<th>&nbsp;&nbsp;&nbsp;</th>
+	</tr>
+	<tr>
+		<th><?php echo label_for('nphojint[diaacu]', __($labels['nphojint{diaacu}']), 'class="required"') ?>
+		  <div class="content<?php if ($sf_request->hasError('nphojint{diaacu}')): ?> form-error<?php endif; ?>">
+		  <?php if ($sf_request->hasError('nphojint{diaacu}')): ?>
+		    <?php echo form_error('nphojint{diaacu}', array('class' => 'form-error-msg')) ?>
+		  <?php endif; ?>
+		
+		  <?php $value = object_input_tag($nphojint, 'getDiaacu', array (
+		  'size' => 10,
+		  'control_name' => 'nphojint[diaacu]',
+		)); echo $value ? $value : '&nbsp;' ?>
+		    </div>
+		</th>
+		<th>&nbsp;&nbsp;&nbsp;</th>
+		<th>
+			<?php echo label_for('nphojint[diaadiacu]', __($labels['nphojint{diaadiacu}']), 'class="required"') ?>
+			  <div class="content<?php if ($sf_request->hasError('nphojint{diaadiacu}')): ?> form-error<?php endif; ?>">
+			  <?php if ($sf_request->hasError('nphojint{diaadiacu}')): ?>
+			    <?php echo form_error('nphojint{diaadiacu}', array('class' => 'form-error-msg')) ?>
+			  <?php endif; ?>
+			
+			  <?php $value = object_input_tag($nphojint, 'getDiaadiacu', array (
+			  'size' => 10,
+			  'control_name' => 'nphojint[diaadiacu]',
+			)); echo $value ? $value : '&nbsp;' ?>
+			    </div>
+		</th>
+	</tr>
 </table>
+
 </div>
 </fieldset>
 

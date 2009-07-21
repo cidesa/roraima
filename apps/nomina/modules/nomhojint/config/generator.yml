@@ -82,6 +82,12 @@ generator:
       segape; { name: Segundo Apellido}
       codempant: { name: No. Empleado Anterior}
       ubifis: { name: Ubicacion Fisica}
+      feccoracu: { name: Fecha de Corte Acumulado}
+      capactacu: { name: Capital Actual Acumulado}
+      intacu: { name: Interes Acumulado}
+      antacu: { name: Anticipos Acumulados}
+      diaacu: { name: Dias Acumulados}
+      diaadiacu: { name: Dias Adicionales Acumulados}
 
     list:
       title:          Datos Personales
