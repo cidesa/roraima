@@ -341,6 +341,42 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 
 
 	
+	protected $ubifis;
+
+
+	
+	protected $tipcueaho;
+
+
+	
+	protected $numcueaho;
+
+
+	
+	protected $feccoracu;
+
+
+	
+	protected $capactacu;
+
+
+	
+	protected $intacu;
+
+
+	
+	protected $antacu;
+
+
+	
+	protected $diaacu;
+
+
+	
+	protected $diaadiacu;
+
+
+	
 	protected $id;
 
 	
@@ -1058,6 +1094,87 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
   {
 
     return trim($this->codnivedu);
+
+  }
+  
+  public function getUbifis()
+  {
+
+    return trim($this->ubifis);
+
+  }
+  
+  public function getTipcueaho()
+  {
+
+    return trim($this->tipcueaho);
+
+  }
+  
+  public function getNumcueaho()
+  {
+
+    return trim($this->numcueaho);
+
+  }
+  
+  public function getFeccoracu($format = 'Y-m-d')
+  {
+
+    if ($this->feccoracu === null || $this->feccoracu === '') {
+      return null;
+    } elseif (!is_int($this->feccoracu)) {
+            $ts = adodb_strtotime($this->feccoracu);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [feccoracu] as date/time value: " . var_export($this->feccoracu, true));
+      }
+    } else {
+      $ts = $this->feccoracu;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getCapactacu($val=false)
+  {
+
+    if($val) return number_format($this->capactacu,2,',','.');
+    else return $this->capactacu;
+
+  }
+  
+  public function getIntacu($val=false)
+  {
+
+    if($val) return number_format($this->intacu,2,',','.');
+    else return $this->intacu;
+
+  }
+  
+  public function getAntacu($val=false)
+  {
+
+    if($val) return number_format($this->antacu,2,',','.');
+    else return $this->antacu;
+
+  }
+  
+  public function getDiaacu()
+  {
+
+    return $this->diaacu;
+
+  }
+  
+  public function getDiaadiacu()
+  {
+
+    return $this->diaadiacu;
 
   }
   
@@ -1954,6 +2071,103 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setUbifis($v)
+	{
+
+    if ($this->ubifis !== $v) {
+        $this->ubifis = $v;
+        $this->modifiedColumns[] = NphojintPeer::UBIFIS;
+      }
+  
+	} 
+	
+	public function setTipcueaho($v)
+	{
+
+    if ($this->tipcueaho !== $v) {
+        $this->tipcueaho = $v;
+        $this->modifiedColumns[] = NphojintPeer::TIPCUEAHO;
+      }
+  
+	} 
+	
+	public function setNumcueaho($v)
+	{
+
+    if ($this->numcueaho !== $v) {
+        $this->numcueaho = $v;
+        $this->modifiedColumns[] = NphojintPeer::NUMCUEAHO;
+      }
+  
+	} 
+	
+	public function setFeccoracu($v)
+	{
+
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [feccoracu] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->feccoracu !== $ts) {
+      $this->feccoracu = $ts;
+      $this->modifiedColumns[] = NphojintPeer::FECCORACU;
+    }
+
+	} 
+	
+	public function setCapactacu($v)
+	{
+
+    if ($this->capactacu !== $v) {
+        $this->capactacu = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NphojintPeer::CAPACTACU;
+      }
+  
+	} 
+	
+	public function setIntacu($v)
+	{
+
+    if ($this->intacu !== $v) {
+        $this->intacu = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NphojintPeer::INTACU;
+      }
+  
+	} 
+	
+	public function setAntacu($v)
+	{
+
+    if ($this->antacu !== $v) {
+        $this->antacu = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NphojintPeer::ANTACU;
+      }
+  
+	} 
+	
+	public function setDiaacu($v)
+	{
+
+    if ($this->diaacu !== $v) {
+        $this->diaacu = $v;
+        $this->modifiedColumns[] = NphojintPeer::DIAACU;
+      }
+  
+	} 
+	
+	public function setDiaadiacu($v)
+	{
+
+    if ($this->diaadiacu !== $v) {
+        $this->diaadiacu = $v;
+        $this->modifiedColumns[] = NphojintPeer::DIAADIACU;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -2134,7 +2348,25 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 
       $this->codnivedu = $rs->getString($startcol + 82);
 
-      $this->id = $rs->getInt($startcol + 83);
+      $this->ubifis = $rs->getString($startcol + 83);
+
+      $this->tipcueaho = $rs->getString($startcol + 84);
+
+      $this->numcueaho = $rs->getString($startcol + 85);
+
+      $this->feccoracu = $rs->getDate($startcol + 86, null);
+
+      $this->capactacu = $rs->getFloat($startcol + 87);
+
+      $this->intacu = $rs->getFloat($startcol + 88);
+
+      $this->antacu = $rs->getFloat($startcol + 89);
+
+      $this->diaacu = $rs->getInt($startcol + 90);
+
+      $this->diaadiacu = $rs->getInt($startcol + 91);
+
+      $this->id = $rs->getInt($startcol + 92);
 
       $this->resetModified();
 
@@ -2142,7 +2374,7 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 84; 
+            return $startcol + 93; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Nphojint object", $e);
     }
@@ -2555,6 +2787,33 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 				return $this->getCodnivedu();
 				break;
 			case 83:
+				return $this->getUbifis();
+				break;
+			case 84:
+				return $this->getTipcueaho();
+				break;
+			case 85:
+				return $this->getNumcueaho();
+				break;
+			case 86:
+				return $this->getFeccoracu();
+				break;
+			case 87:
+				return $this->getCapactacu();
+				break;
+			case 88:
+				return $this->getIntacu();
+				break;
+			case 89:
+				return $this->getAntacu();
+				break;
+			case 90:
+				return $this->getDiaacu();
+				break;
+			case 91:
+				return $this->getDiaadiacu();
+				break;
+			case 92:
 				return $this->getId();
 				break;
 			default:
@@ -2650,7 +2909,16 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 			$keys[80] => $this->getSituac(),
 			$keys[81] => $this->getProfes(),
 			$keys[82] => $this->getCodnivedu(),
-			$keys[83] => $this->getId(),
+			$keys[83] => $this->getUbifis(),
+			$keys[84] => $this->getTipcueaho(),
+			$keys[85] => $this->getNumcueaho(),
+			$keys[86] => $this->getFeccoracu(),
+			$keys[87] => $this->getCapactacu(),
+			$keys[88] => $this->getIntacu(),
+			$keys[89] => $this->getAntacu(),
+			$keys[90] => $this->getDiaacu(),
+			$keys[91] => $this->getDiaadiacu(),
+			$keys[92] => $this->getId(),
 		);
 		return $result;
 	}
@@ -2916,6 +3184,33 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 				$this->setCodnivedu($value);
 				break;
 			case 83:
+				$this->setUbifis($value);
+				break;
+			case 84:
+				$this->setTipcueaho($value);
+				break;
+			case 85:
+				$this->setNumcueaho($value);
+				break;
+			case 86:
+				$this->setFeccoracu($value);
+				break;
+			case 87:
+				$this->setCapactacu($value);
+				break;
+			case 88:
+				$this->setIntacu($value);
+				break;
+			case 89:
+				$this->setAntacu($value);
+				break;
+			case 90:
+				$this->setDiaacu($value);
+				break;
+			case 91:
+				$this->setDiaadiacu($value);
+				break;
+			case 92:
 				$this->setId($value);
 				break;
 		} 	}
@@ -3008,7 +3303,16 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[80], $arr)) $this->setSituac($arr[$keys[80]]);
 		if (array_key_exists($keys[81], $arr)) $this->setProfes($arr[$keys[81]]);
 		if (array_key_exists($keys[82], $arr)) $this->setCodnivedu($arr[$keys[82]]);
-		if (array_key_exists($keys[83], $arr)) $this->setId($arr[$keys[83]]);
+		if (array_key_exists($keys[83], $arr)) $this->setUbifis($arr[$keys[83]]);
+		if (array_key_exists($keys[84], $arr)) $this->setTipcueaho($arr[$keys[84]]);
+		if (array_key_exists($keys[85], $arr)) $this->setNumcueaho($arr[$keys[85]]);
+		if (array_key_exists($keys[86], $arr)) $this->setFeccoracu($arr[$keys[86]]);
+		if (array_key_exists($keys[87], $arr)) $this->setCapactacu($arr[$keys[87]]);
+		if (array_key_exists($keys[88], $arr)) $this->setIntacu($arr[$keys[88]]);
+		if (array_key_exists($keys[89], $arr)) $this->setAntacu($arr[$keys[89]]);
+		if (array_key_exists($keys[90], $arr)) $this->setDiaacu($arr[$keys[90]]);
+		if (array_key_exists($keys[91], $arr)) $this->setDiaadiacu($arr[$keys[91]]);
+		if (array_key_exists($keys[92], $arr)) $this->setId($arr[$keys[92]]);
 	}
 
 	
@@ -3099,6 +3403,15 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(NphojintPeer::SITUAC)) $criteria->add(NphojintPeer::SITUAC, $this->situac);
 		if ($this->isColumnModified(NphojintPeer::PROFES)) $criteria->add(NphojintPeer::PROFES, $this->profes);
 		if ($this->isColumnModified(NphojintPeer::CODNIVEDU)) $criteria->add(NphojintPeer::CODNIVEDU, $this->codnivedu);
+		if ($this->isColumnModified(NphojintPeer::UBIFIS)) $criteria->add(NphojintPeer::UBIFIS, $this->ubifis);
+		if ($this->isColumnModified(NphojintPeer::TIPCUEAHO)) $criteria->add(NphojintPeer::TIPCUEAHO, $this->tipcueaho);
+		if ($this->isColumnModified(NphojintPeer::NUMCUEAHO)) $criteria->add(NphojintPeer::NUMCUEAHO, $this->numcueaho);
+		if ($this->isColumnModified(NphojintPeer::FECCORACU)) $criteria->add(NphojintPeer::FECCORACU, $this->feccoracu);
+		if ($this->isColumnModified(NphojintPeer::CAPACTACU)) $criteria->add(NphojintPeer::CAPACTACU, $this->capactacu);
+		if ($this->isColumnModified(NphojintPeer::INTACU)) $criteria->add(NphojintPeer::INTACU, $this->intacu);
+		if ($this->isColumnModified(NphojintPeer::ANTACU)) $criteria->add(NphojintPeer::ANTACU, $this->antacu);
+		if ($this->isColumnModified(NphojintPeer::DIAACU)) $criteria->add(NphojintPeer::DIAACU, $this->diaacu);
+		if ($this->isColumnModified(NphojintPeer::DIAADIACU)) $criteria->add(NphojintPeer::DIAADIACU, $this->diaadiacu);
 		if ($this->isColumnModified(NphojintPeer::ID)) $criteria->add(NphojintPeer::ID, $this->id);
 
 		return $criteria;
@@ -3295,6 +3608,24 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 		$copyObj->setProfes($this->profes);
 
 		$copyObj->setCodnivedu($this->codnivedu);
+
+		$copyObj->setUbifis($this->ubifis);
+
+		$copyObj->setTipcueaho($this->tipcueaho);
+
+		$copyObj->setNumcueaho($this->numcueaho);
+
+		$copyObj->setFeccoracu($this->feccoracu);
+
+		$copyObj->setCapactacu($this->capactacu);
+
+		$copyObj->setIntacu($this->intacu);
+
+		$copyObj->setAntacu($this->antacu);
+
+		$copyObj->setDiaacu($this->diaacu);
+
+		$copyObj->setDiaadiacu($this->diaadiacu);
 
 
 		if ($deepCopy) {

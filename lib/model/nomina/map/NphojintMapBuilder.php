@@ -158,7 +158,7 @@ class NphojintMapBuilder {
 
 		$tMap->addColumn('NUMCUELPH', 'Numcuelph', 'string', CreoleTypes::VARCHAR, false, 31);
 
-		$tMap->addColumn('CODEMPANT', 'Codempant', 'string', CreoleTypes::VARCHAR, false, 14);
+		$tMap->addColumn('CODEMPANT', 'Codempant', 'string', CreoleTypes::VARCHAR, false, 16);
 
 		$tMap->addColumn('GRUSAN', 'Grusan', 'string', CreoleTypes::VARCHAR, false, 10);
 
@@ -199,6 +199,24 @@ class NphojintMapBuilder {
 		$tMap->addColumn('PROFES', 'Profes', 'string', CreoleTypes::VARCHAR, false, 1);
 
 		$tMap->addColumn('CODNIVEDU', 'Codnivedu', 'string', CreoleTypes::VARCHAR, false, 4);
+
+		$tMap->addColumn('UBIFIS', 'Ubifis', 'string', CreoleTypes::VARCHAR, false, 100);
+
+		$tMap->addColumn('TIPCUEAHO', 'Tipcueaho', 'string', CreoleTypes::VARCHAR, false, 20);
+
+		$tMap->addColumn('NUMCUEAHO', 'Numcueaho', 'string', CreoleTypes::VARCHAR, false, 31);
+
+		$tMap->addColumn('FECCORACU', 'Feccoracu', 'int', CreoleTypes::DATE, false, null);
+
+		$tMap->addColumn('CAPACTACU', 'Capactacu', 'double', CreoleTypes::NUMERIC, false, 14);
+
+		$tMap->addColumn('INTACU', 'Intacu', 'double', CreoleTypes::NUMERIC, false, 14);
+
+		$tMap->addColumn('ANTACU', 'Antacu', 'double', CreoleTypes::NUMERIC, false, 14);
+
+		$tMap->addColumn('DIAACU', 'Diaacu', 'int', CreoleTypes::INTEGER, false, null);
+
+		$tMap->addColumn('DIAADIACU', 'Diaadiacu', 'int', CreoleTypes::INTEGER, false, null);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
