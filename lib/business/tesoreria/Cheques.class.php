@@ -81,14 +81,16 @@ class Cheques
             $Debito = $tsdefban->getDeblib();
             $Total = $Debito + $Monto;
             $tsdefban->setDeblib($Total);
-            if (substr($tscheemi->getTipdoc(),0,2)=="CH") $tsdefban->setNumche($numche);
+            $escheque=H::getX('CODTIP','Tstipmov','Escheque',$tscheemi->getTipdoc());
+            if ($escheque==1) $tsdefban->setNumche($numche);
           }
           else if ($Accion == "E")
           {
             $Debito = $tsdefban->getDeblib();
             $Total = $Debito - $Monto;
             $tsdefban->setDeblib($Total);
-            if (substr($tscheemi->getTipdoc(),0,2)=="CH") $tsdefban->setNumche($numche);
+            $escheque=H::getX('CODTIP','Tstipmov','Escheque',$tscheemi->getTipdoc());
+            if ($escheque==1) $tsdefban->setNumche($numche);
           }
           $tsdefban->save();
          case "C":
@@ -97,7 +99,8 @@ class Cheques
              $Credito = $tsdefban->getCrelib();
              $Total = $Credito + $Monto;
              $tsdefban->setCrelib($Total);
-             if (substr($tscheemi->getTipdoc(),0,2)=="CH")
+             $escheque=H::getX('CODTIP','Tstipmov','Escheque',$tscheemi->getTipdoc());
+             if ($escheque==1)
              {
 	             $nrocheque=intval($numche);
 	             $nrocheque=$nrocheque+1;
@@ -110,7 +113,8 @@ class Cheques
              $Credito = $tsdefban->getCrelib();
              $Total = $Credito - $Monto;
              $tsdefban->setCrelib($Total);
-             if (substr($tscheemi->getTipdoc(),0,2)=="CH")
+             $escheque=H::getX('CODTIP','Tstipmov','Escheque',$tscheemi->getTipdoc());
+             if ($escheque==1)
              {
 	             $nrocheque=intval($numche);
 	             $nrocheque=$nrocheque-1;
@@ -520,7 +524,8 @@ class Cheques
 
   public static function Grabar_Datos($tscheemi,$Monto,$cedrif,$numche)
   {
-    if (substr($tscheemi->getTipdoc(),0,2)=="CH")
+    $escheque=H::getX('CODTIP','Tstipmov','Escheque',$tscheemi->getTipdoc());
+    if ($escheque==1)
     {
       $tscheeminew= new Tscheemi();
       $tscheeminew->setTipdoc($tscheemi->getTipdoc());
