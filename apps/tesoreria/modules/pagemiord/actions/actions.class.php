@@ -884,7 +884,8 @@ $this->Bitacora('Guardo');
     $opciones = new OpcionesGrid();
     $opciones->setEliminar(false);
     $opciones->setTabla('Opdetord');
-    $opciones->setAnchoGrid(900);
+    $opciones->setAnchoGrid(700);
+    $opciones->setAncho(750);
     $opciones->setFilas(0);
     $opciones->setTitulo('Imputaciones Presupuestarias');
     $opciones->setHTMLTotalFilas(' ');
@@ -1053,7 +1054,7 @@ $this->Bitacora('Guardo');
     $col11->setNombreCampo('basimp');
     $col11->setEsNumerico(true);
     $col11->setJScript('onKeypress="entermonto_b(event,this.id)"');
-    $col11->setHTML('readonly="true" size="15"');
+    $col11->setHTML('size="15"');
     $col11->setEsTotal(true,'totbas');
 
     $col12 = new Columna('Impuesto');
@@ -1064,7 +1065,7 @@ $this->Bitacora('Guardo');
     $col12->setNombreCampo('monret');
     $col12->setEsNumerico(true);
     $col12->setJScript('onKeypress="entermonto_b(event,this.id)"');
-    $col12->setHTML('readonly="true" size="15"');
+    $col12->setHTML('size="15"');
     $col12->setEsTotal(true,'totiva');
 
     $col13 = new Columna('IVA Retenido');
@@ -1075,7 +1076,7 @@ $this->Bitacora('Guardo');
     $col13->setNombreCampo('moniva');
     $col13->setEsNumerico(true);
     $col13->setJScript('onKeypress="entermonto_b(event,this.id)"');
-    $col13->setHTML('readonly="true" size="15"');
+    $col13->setHTML(' size="15"');
     $col13->setEsTotal(true,'totimp');
 
     $col14 = new Columna('1x100');
@@ -2680,3 +2681,4 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
     $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
   }
 }
+
