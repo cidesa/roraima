@@ -60,6 +60,22 @@
   'control_name' => 'npestorg[telext]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
+	
+<br>
+
+ <?php echo label_for('npestorg[email]', __($labels['npestorg{email}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('npestorg{email}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npestorg{email}')): ?>
+    <?php echo form_error('npestorg{email}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($npestorg, 'getEmail', array (
+  'size' => 40,
+  'control_name' => 'npestorg[email]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+
+	
 </div>
 </fieldset>
 

@@ -7,6 +7,7 @@ generator:
       codniv: { name: Código }
       desniv: { name: Descripción }
       telext: { name: Teléfono / Extensión }
+      email:  { name: Email}
     list:
       title:          Niveles Organizacionales
       filters:        [codniv, desniv ]
@@ -18,7 +19,7 @@ generator:
       max_per_page:   5
     edit:
       title:         Edición de Niveles Organizacionales
-      display:       [codniv, desniv, telext ]
+      display:       [codniv, desniv, telext, email]
       actions:
         _list:       ~
         _save:       ~
