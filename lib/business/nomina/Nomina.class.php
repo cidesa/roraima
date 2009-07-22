@@ -1755,17 +1755,30 @@ class Nomina {
       case "STAB" :
         $movconvar = substr($parametro, 0, 2) . "/" . substr($parametro, 2, 2) . "/" . substr($parametro, 4);
         $sql = "Select * from npasicaremp where Status='V' and CodNom='" . $nomina . "' and codemp='" . $empleado . "'";
+		
         if (Herramientas :: BuscarDatos($sql, & $tabla)) {
-          if ($token = "STAB") {
-            $sql = "Select A.* from NPCOMOCP A,NPCARGOS B WHERE B.CODCAR='" . $tabla[0]["codcar"] . "' AND A.CODTIPCAR=B.CODTIP AND A.GRACAR=B.GRAOCP AND A.PASCAR='001' AND FECDES<=TO_DATE('" . $movconvar . "','DD/MM/YYYY') ORDER BY FECDES DESC";
-          } else {
-            $sql = "Select ABS(SUM(case when a.pascar='001' then a.suecar else a.suecar*-1)) as suecar from NPCOMOCP A,NPCARGOS B WHERE B.CODCAR='" . $tabla[0]["codcar"] . "' AND A.CODTIPCAR=B.CODTIP AND A.GRACAR=B.GRAOCP AND (A.PASCAR='001' OR A.PASCAR='" . $tabla[0]["paso"] . "') AND FECDES<=TO_DATE('" . $movconvar . "','DD/MM/YYYY') ORDER BY FECDES DESC";
-          }
-          if (Herramientas :: BuscarDatos($sql, & $tablaescala)) {
-            $valor = $tablaescala[0]["suecar"];
-          } else {
-            $valor = 0;
-          }
+        
+		  if($tabla[0]['codtipded']!='' && $tabla[0]['codtipcat']!='')
+		  {
+	          $sql = "Select A.* from NPCOMOCP A, NPCARGOS B  WHERE B.CODCAR='" . $tabla[0]["codcar"] . "' AND A.CODTIPCAR=B.CODTIP AND A.GRACAR='".$tabla[0]['codtipcat']."' and A.PASCAR='".$tabla[0]['codtipded']."' AND FECDES<=TO_DATE('" . $movconvar . "','DD/MM/YYYY') ORDER BY FECDES DESC";	        
+	          if (Herramientas :: BuscarDatos($sql, & $tablaescala)) {
+	            $valor = $tablaescala[0]["suecar"];
+	          } else {
+	            $valor = 0;
+	          }					  	
+		  }else
+		  {
+	  		if ($token = "STAB") {
+	            $sql = "Select A.* from NPCOMOCP A,NPCARGOS B WHERE B.CODCAR='" . $tabla[0]["codcar"] . "' AND A.CODTIPCAR=B.CODTIP AND A.GRACAR=B.GRAOCP AND A.PASCAR='001' AND FECDES<=TO_DATE('" . $movconvar . "','DD/MM/YYYY') ORDER BY FECDES DESC";
+	          } else {
+	            $sql = "Select ABS(SUM(case when a.pascar='001' then a.suecar else a.suecar*-1)) as suecar from NPCOMOCP A,NPCARGOS B WHERE B.CODCAR='" . $tabla[0]["codcar"] . "' AND A.CODTIPCAR=B.CODTIP AND A.GRACAR=B.GRAOCP AND (A.PASCAR='001' OR A.PASCAR='" . $tabla[0]["paso"] . "') AND FECDES<=TO_DATE('" . $movconvar . "','DD/MM/YYYY') ORDER BY FECDES DESC";
+	          }
+	          if (Herramientas :: BuscarDatos($sql, & $tablaescala)) {
+	            $valor = $tablaescala[0]["suecar"];
+	          } else {
+	            $valor = 0;
+	          }
+		  }
         } else
           $valor = 0;
         break;
@@ -3331,17 +3344,29 @@ class Nomina {
       case "STAB" :
         $movconvar = substr($parametro, 0, 2) . "/" . substr($parametro, 2, 2) . "/" . substr($parametro, 4);
         $sql = "Select * from npasicaremp where Status='V' and CodNom='" . $nomina . "' and codemp='" . $empleado . "'";
+		
         if (Herramientas :: BuscarDatos($sql, & $tabla)) {
-          if ($campo = "STAB") {
-            $sql = "Select A.* from NPCOMOCP A,NPCARGOS B WHERE B.CODCAR='" . $tabla[0]["codcar"] . "' AND A.CODTIPCAR=B.CODTIP AND A.GRACAR=B.GRAOCP AND A.PASCAR='001' AND FECDES<=TO_DATE('" . $movconvar . "','DD/MM/YYYY') ORDER BY FECDES DESC";
-          } else {
-            $sql = "Select ABS(SUM(case when a.pascar='001' then a.suecar else a.suecar*-1)) as suecar from NPCOMOCP A,NPCARGOS B WHERE B.CODCAR='" . $tabla[0]["codcar"] . "' AND A.CODTIPCAR=B.CODTIP AND A.GRACAR=B.GRAOCP AND (A.PASCAR='001' OR A.PASCAR='" . $tabla[0]["paso"] . "') AND FECDES<=TO_DATE('" . $movconvar . "','DD/MM/YYYY') ORDER BY FECDES DESC";
-          }
-          if (Herramientas :: BuscarDatos($sql, & $tablaescala)) {
-            $valor = $tablaescala[0]["suecar"];
-          } else {
-            $valor = 0;
-          }
+          if($tabla[0]['codtipded']!='' && $tabla[0]['codtipcat']!='')
+		  {
+	          $sql = "Select A.* from NPCOMOCP A, NPCARGOS B  WHERE B.CODCAR='" . $tabla[0]["codcar"] . "' AND A.CODTIPCAR=B.CODTIP AND A.GRACAR='".$tabla[0]['codtipcat']."' and A.PASCAR='".$tabla[0]['codtipded']."' AND FECDES<=TO_DATE('" . $movconvar . "','DD/MM/YYYY') ORDER BY FECDES DESC";	        
+	          if (Herramientas :: BuscarDatos($sql, & $tablaescala)) {
+	            $valor = $tablaescala[0]["suecar"];
+	          } else {
+	            $valor = 0;
+	          }					  	
+		  }else
+		  {
+		  	if ($campo = "STAB") {
+	            $sql = "Select A.* from NPCOMOCP A,NPCARGOS B WHERE B.CODCAR='" . $tabla[0]["codcar"] . "' AND A.CODTIPCAR=B.CODTIP AND A.GRACAR=B.GRAOCP AND A.PASCAR='001' AND FECDES<=TO_DATE('" . $movconvar . "','DD/MM/YYYY') ORDER BY FECDES DESC";
+	          } else {
+	            $sql = "Select ABS(SUM(case when a.pascar='001' then a.suecar else a.suecar*-1)) as suecar from NPCOMOCP A,NPCARGOS B WHERE B.CODCAR='" . $tabla[0]["codcar"] . "' AND A.CODTIPCAR=B.CODTIP AND A.GRACAR=B.GRAOCP AND (A.PASCAR='001' OR A.PASCAR='" . $tabla[0]["paso"] . "') AND FECDES<=TO_DATE('" . $movconvar . "','DD/MM/YYYY') ORDER BY FECDES DESC";
+	          }
+	          if (Herramientas :: BuscarDatos($sql, & $tablaescala)) {
+	            $valor = $tablaescala[0]["suecar"];
+	         } else {
+	            $valor = 0;
+	          }	
+		  }  
         } else
           $valor = 0;
         break;
