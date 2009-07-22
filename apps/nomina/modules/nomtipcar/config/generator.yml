@@ -9,7 +9,7 @@ generator:
 
 
     list:
-      title:          Tipos de Cargos
+      title:          Tipos de Personal
       filters:        [codtipcar, destipcar]
       display:        [=codtipcar, destipcar]
       object_actions:
@@ -17,7 +17,7 @@ generator:
         _delete:      ~
       max_per_page:   5
     edit:
-      title:          Tipos de Cargos
+      title:          Tipos de Personal
       display:        [codtipcar, destipcar]
       actions:
         _list:         ~
