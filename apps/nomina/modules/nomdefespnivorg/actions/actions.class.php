@@ -65,6 +65,10 @@ $this->Bitacora('Guardo');
     {
       $this->npestorg->setTelext($npestorg['telext']);
     }
+	if (isset($npestorg['email']))
+    {
+      $this->npestorg->setEmail($npestorg['email']);
+    }
   }
 
   public function validateEdit()

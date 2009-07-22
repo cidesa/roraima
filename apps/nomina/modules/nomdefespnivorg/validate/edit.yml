@@ -2,6 +2,7 @@ methods:
   post:
    - "npestorg{codniv}"
    - "npestorg{desniv}"
+   - "npestorg{email}"
    
 names: 
   npestorg{codniv}:
@@ -13,6 +14,10 @@ names:
     required:  Yes
     required_msg: El Nombre no puede estar en Blanco
     validators: Validator_MyString     
+    
+  npestorg{email}:
+    required:  No
+    validators: EmailValidator
 
 Validator_codniv:
     class: sfPropelUniqueValidator
@@ -28,3 +33,9 @@ Validator_MyString:
         min_error: La Descripción no puede tener menos de 2 caracteres
         max:       250
         max_error: La Descripcióon no puede pasar mas de 250 caracteres
+        
+EmailValidator:
+    class: sfEmailValidator
+    param:
+        strict:       true
+        email_error:  La Dirección del Email es Inválida
