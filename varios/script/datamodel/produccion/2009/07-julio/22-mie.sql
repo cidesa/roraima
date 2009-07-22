@@ -12,3 +12,9 @@ alter column codempant type VARCHAR(16);
 ALTER TABLE "nphojint"
   ADD COLUMN "ubifis" varchar(100);
 ---
+
+--Matriz de Nómina CONACAL Desireé Martínez
+ALTER TABLE "nphojint"
+  ADD COLUMN "numcueaho" VARCHAR(31),
+    ADD COLUMN "tipcueaho" VARCHAR(20);
+--------
