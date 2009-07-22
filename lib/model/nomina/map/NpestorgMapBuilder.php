@@ -40,6 +40,8 @@ class NpestorgMapBuilder {
 
 		$tMap->addColumn('TELEXT', 'Telext', 'string', CreoleTypes::VARCHAR, false, 20);
 
+		$tMap->addColumn('EMAIL', 'Email', 'string', CreoleTypes::VARCHAR, false, 40);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

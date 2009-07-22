@@ -21,6 +21,10 @@ abstract class BaseNpestorg extends BaseObject  implements Persistent {
 
 
 	
+	protected $email;
+
+
+	
 	protected $id;
 
 	
@@ -48,6 +52,13 @@ abstract class BaseNpestorg extends BaseObject  implements Persistent {
   {
 
     return trim($this->telext);
+
+  }
+  
+  public function getEmail()
+  {
+
+    return trim($this->email);
 
   }
   
@@ -88,6 +99,16 @@ abstract class BaseNpestorg extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setEmail($v)
+	{
+
+    if ($this->email !== $v) {
+        $this->email = $v;
+        $this->modifiedColumns[] = NpestorgPeer::EMAIL;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -108,7 +129,9 @@ abstract class BaseNpestorg extends BaseObject  implements Persistent {
 
       $this->telext = $rs->getString($startcol + 2);
 
-      $this->id = $rs->getInt($startcol + 3);
+      $this->email = $rs->getString($startcol + 3);
+
+      $this->id = $rs->getInt($startcol + 4);
 
       $this->resetModified();
 
@@ -116,7 +139,7 @@ abstract class BaseNpestorg extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 4; 
+            return $startcol + 5; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Npestorg object", $e);
     }
@@ -273,6 +296,9 @@ abstract class BaseNpestorg extends BaseObject  implements Persistent {
 				return $this->getTelext();
 				break;
 			case 3:
+				return $this->getEmail();
+				break;
+			case 4:
 				return $this->getId();
 				break;
 			default:
@@ -288,7 +314,8 @@ abstract class BaseNpestorg extends BaseObject  implements Persistent {
 			$keys[0] => $this->getCodniv(),
 			$keys[1] => $this->getDesniv(),
 			$keys[2] => $this->getTelext(),
-			$keys[3] => $this->getId(),
+			$keys[3] => $this->getEmail(),
+			$keys[4] => $this->getId(),
 		);
 		return $result;
 	}
@@ -314,6 +341,9 @@ abstract class BaseNpestorg extends BaseObject  implements Persistent {
 				$this->setTelext($value);
 				break;
 			case 3:
+				$this->setEmail($value);
+				break;
+			case 4:
 				$this->setId($value);
 				break;
 		} 	}
@@ -326,7 +356,8 @@ abstract class BaseNpestorg extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[0], $arr)) $this->setCodniv($arr[$keys[0]]);
 		if (array_key_exists($keys[1], $arr)) $this->setDesniv($arr[$keys[1]]);
 		if (array_key_exists($keys[2], $arr)) $this->setTelext($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setId($arr[$keys[3]]);
+		if (array_key_exists($keys[3], $arr)) $this->setEmail($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setId($arr[$keys[4]]);
 	}
 
 	
@@ -337,6 +368,7 @@ abstract class BaseNpestorg extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(NpestorgPeer::CODNIV)) $criteria->add(NpestorgPeer::CODNIV, $this->codniv);
 		if ($this->isColumnModified(NpestorgPeer::DESNIV)) $criteria->add(NpestorgPeer::DESNIV, $this->desniv);
 		if ($this->isColumnModified(NpestorgPeer::TELEXT)) $criteria->add(NpestorgPeer::TELEXT, $this->telext);
+		if ($this->isColumnModified(NpestorgPeer::EMAIL)) $criteria->add(NpestorgPeer::EMAIL, $this->email);
 		if ($this->isColumnModified(NpestorgPeer::ID)) $criteria->add(NpestorgPeer::ID, $this->id);
 
 		return $criteria;
@@ -373,6 +405,8 @@ abstract class BaseNpestorg extends BaseObject  implements Persistent {
 		$copyObj->setDesniv($this->desniv);
 
 		$copyObj->setTelext($this->telext);
+
+		$copyObj->setEmail($this->email);
 
 
 		$copyObj->setNew(true);

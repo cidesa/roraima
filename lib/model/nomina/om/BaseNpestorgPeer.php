@@ -13,7 +13,7 @@ abstract class BaseNpestorgPeer {
 	const CLASS_DEFAULT = 'lib.model.nomina.Npestorg';
 
 	
-	const NUM_COLUMNS = 4;
+	const NUM_COLUMNS = 5;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -29,6 +29,9 @@ abstract class BaseNpestorgPeer {
 	const TELEXT = 'npestorg.TELEXT';
 
 	
+	const EMAIL = 'npestorg.EMAIL';
+
+	
 	const ID = 'npestorg.ID';
 
 	
@@ -37,18 +40,18 @@ abstract class BaseNpestorgPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codniv', 'Desniv', 'Telext', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (NpestorgPeer::CODNIV, NpestorgPeer::DESNIV, NpestorgPeer::TELEXT, NpestorgPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codniv', 'desniv', 'telext', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
+		BasePeer::TYPE_PHPNAME => array ('Codniv', 'Desniv', 'Telext', 'Email', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (NpestorgPeer::CODNIV, NpestorgPeer::DESNIV, NpestorgPeer::TELEXT, NpestorgPeer::EMAIL, NpestorgPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codniv', 'desniv', 'telext', 'email', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codniv' => 0, 'Desniv' => 1, 'Telext' => 2, 'Id' => 3, ),
-		BasePeer::TYPE_COLNAME => array (NpestorgPeer::CODNIV => 0, NpestorgPeer::DESNIV => 1, NpestorgPeer::TELEXT => 2, NpestorgPeer::ID => 3, ),
-		BasePeer::TYPE_FIELDNAME => array ('codniv' => 0, 'desniv' => 1, 'telext' => 2, 'id' => 3, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
+		BasePeer::TYPE_PHPNAME => array ('Codniv' => 0, 'Desniv' => 1, 'Telext' => 2, 'Email' => 3, 'Id' => 4, ),
+		BasePeer::TYPE_COLNAME => array (NpestorgPeer::CODNIV => 0, NpestorgPeer::DESNIV => 1, NpestorgPeer::TELEXT => 2, NpestorgPeer::EMAIL => 3, NpestorgPeer::ID => 4, ),
+		BasePeer::TYPE_FIELDNAME => array ('codniv' => 0, 'desniv' => 1, 'telext' => 2, 'email' => 3, 'id' => 4, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
 	);
 
 	
@@ -107,6 +110,8 @@ abstract class BaseNpestorgPeer {
 		$criteria->addSelectColumn(NpestorgPeer::DESNIV);
 
 		$criteria->addSelectColumn(NpestorgPeer::TELEXT);
+
+		$criteria->addSelectColumn(NpestorgPeer::EMAIL);
 
 		$criteria->addSelectColumn(NpestorgPeer::ID);
 
