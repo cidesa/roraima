@@ -642,8 +642,9 @@ class OrdendePago
         $codigocuenta2=$orden->getCtapag();
         $tipo2='C';
         $des2="";
-         if ($orden->getAfectapre()==1) $b=$orden->getMonord();
-           else $b=$orden->getNeto();
+         //if ($orden->getAfectapre()==1) $b=$orden->getMonord();
+           //else $b=$orden->getNeto();
+        $b=$orden->getMonord();
         $monto2=$b;
       }
       $cuentas=$codigocuenta2.'_'.$codigocuentas;
