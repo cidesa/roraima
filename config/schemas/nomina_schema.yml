@@ -2684,6 +2684,9 @@ propel:
     telext:
       type: VARCHAR
       size: 20
+    email:
+      type: VARCHAR
+      size: 40  
     id:
       type: INTEGER
       required: true
