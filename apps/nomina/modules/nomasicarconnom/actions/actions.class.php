@@ -590,8 +590,9 @@ public function executeAutocomplete()
     $car=$this->getRequestParameter('cargo');
     $nom=$this->getRequestParameter('nomina');
     $fec=$this->getRequestParameter('fecha');
+	$explab=$this->getRequestParameter('explab');
 
-    Nomina::eliminarNomasicarconnom($emp,$car,$nom,$fec);
+    Nomina::eliminarNomasicarconnom($emp,$car,$nom,$fec,$explab);
     $this->setFlash('notice','Registro Eliminado exitosamente');
     return $this->redirect('nomasicarconnom/edit');
 

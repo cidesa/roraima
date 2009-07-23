@@ -277,6 +277,7 @@ echo grid_tag($obj);
 <?php endif; ?>
 </li>
   </ul>
+    
 <script type="text/javascript">
   function eliminar()
   {
@@ -285,10 +286,14 @@ echo grid_tag($obj);
     var nomina=$('npasicaremp_codnom').value;
     var fecha=$('npasicaremp_fecasi').value;
     var id=$('id').value;
-
+    
     if (confirm('¿Realmente desea eliminar este cargo a este Trabajador, recuerde que se eliminaran los conceptos asignados con sus respectivos valores?'))
-    {
-      location.href='/nomina_dev.php/nomasicarconnom/eliminar?empleado='+empleado+'&cargo='+cargo+'&nomina='+nomina+'&fecha='+fecha;
+    {	  
+	  if (confirm('¿Desea Grabar en Histórico esta Información?'))		  
+        var explab='si';	
+	  else
+	    var explab='no';	  
+	  location.href=getUrlModulo()+'eliminar?empleado='+empleado+'&cargo='+cargo+'&nomina='+nomina+'&fecha='+fecha+'&explab='+explab;	
     }
   }
 
