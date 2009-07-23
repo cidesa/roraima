@@ -103,7 +103,7 @@ class nomnommovnomconActions extends autonomnommovnomconActions
 
 		$per = NpasiconempPeer::doSelect($c);
 
-		$filas_arreglo=100;
+		$filas_arreglo=150;
 		//print $codigo;
 
 
