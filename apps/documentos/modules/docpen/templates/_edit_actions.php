@@ -7,7 +7,7 @@
   'class' => 'sf_admin_action_list',
 )) ?>
   <li>
-    <input type="button" onclick="if (confirm('¿Desea agregar una observación?')) { return document.location.href='/documentos_dev.php/docpen/observacion/id/5/desate/'+$('dfatendocdet_desate').value;} else return false;" value="Observación" class="sf_admin_action_save" form="sf_admin_edit_form" name="observacion"/>
+    <input type="button" onclick="if (confirm('¿Desea agregar una observación?')) { return document.location.href='/documentos_dev.php/docpen/observacion/id/<?php echo $dfatendoc->getId() ?>/desate/'+$('dfatendocdet_desate').value;} else return false;" value="Observación" class="sf_admin_action_save" form="sf_admin_edit_form" name="observacion"/>
   </li>
   <li><?php echo submit_tag_click_confirm(__('Atender'), array (
   'confirm' => __('¿Desea atender este documento?'),

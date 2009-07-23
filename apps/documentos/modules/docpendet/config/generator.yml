@@ -23,7 +23,7 @@ generator:
       id_dfmedtra:    { name : Medio de Transporte }
     list:
       title:          Detalle Documento
-      display:        [coddoc, nomuse, desate, fecrec, fecate, dias, diadoc, diaent, fecent, nomunio, nomunid ]
+      display:        [coddoc, nomuse, desate, fecrec, fecate, dias, diadoc, _fecent, nomunio, nomunid ]
       #filters:       [coddoc ]
       max_per_page:    10
     edit:

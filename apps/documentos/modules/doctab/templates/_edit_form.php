@@ -61,6 +61,60 @@
 
 </fieldset>
 
+<fieldset>
+<div id="divvalact">
+  <?php if($labels['dftabtip{valact}']!='.:') { ?>
+  <?php echo label_for('dftabtip[valact]', __($labels['dftabtip{valact}' ]), 'class="required" Style="text-align:left; width:150px"') ?>
+  <div class="content<?php if ($sf_request->hasError('dftabtip{valact}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('dftabtip{valact}')): ?>
+    <?php echo form_error('dftabtip{valact}', array('class' => 'form-error-msg')) ?>
+  <?php endif; }?>  
+  
+   
+  
+  <?php $value = object_input_tag($dftabtip, 'getValact', array (
+  'size' => 3,
+  'control_name' => 'dftabtip[valact]',
+)); echo $value ? $value : '&nbsp;' ?>
+      
+		
+  <?php if($labels['dftabtip{valact}']!='.:') { ?>  
+  
+
+   
+  </div>
+  <?php  } ?> 
+
+</div>
+<br/>
+<div id="divvalanu">
+  <?php if($labels['dftabtip{valanu}']!='.:') { ?>
+  <?php echo label_for('dftabtip[valanu]', __($labels['dftabtip{valanu}' ]), 'class="required" Style="text-align:left; width:150px"') ?>
+  <div class="content<?php if ($sf_request->hasError('dftabtip{valanu}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('dftabtip{valanu}')): ?>
+    <?php echo form_error('dftabtip{valanu}', array('class' => 'form-error-msg')) ?>
+  <?php endif; }?>  
+  
+   
+  
+  <?php $value = object_input_tag($dftabtip, 'getValanu', array (
+  'size' => 3,
+  'control_name' => 'dftabtip[valanu]',
+)); echo $value ? $value : '&nbsp;' ?>
+      
+		
+  <?php if($labels['dftabtip{valanu}']!='.:') { ?>  
+  
+
+   
+  </div>
+  <?php  } ?> 
+
+</div>
+
+</fieldset>
+</div>
+
 <?php include_partial('edit_actions', array('dftabtip' => $dftabtip)) ?>
 
 </form>

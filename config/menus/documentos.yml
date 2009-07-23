@@ -25,6 +25,7 @@ documentos:
       Ruta de Documentos:                                   docrut
     Documentos:
       Pendientes:                                             docpen/pendientes
+      Pendientes Por Lotes:                                   docpenlot/create
     Reportes:
       Reporte de Asignación de Tablas:                        repasitab.php
       Reporte de Documentos:                                  repdoc.php

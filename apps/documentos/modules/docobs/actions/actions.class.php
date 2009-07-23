@@ -180,5 +180,26 @@ class docobsActions extends autodocobsActions
     return parent::deleting($clasemodelo);
   }
 
+  public function executeList()
+  {
+    $this->processSort();
+
+    $this->processFilters();
+
+
+    // pager
+    $this->pager = new sfPropelPager('Dfatendocobs', 10);
+    $c = new Criteria();
+    $this->addSortCriteria($c);
+    $this->addFiltersCriteria($c);
+    if($this->getRequestParameter('dfatendoc', '')!=''){
+      $c->add(DfatendocPeer::ID,$this->getRequestParameter('dfatendoc'));
+      $c->addJoin(DfatendocobsPeer::ID_DFATENDOCDET,DfatendocdetPeer::ID);
+      $c->addJoin(DfatendocdetPeer::ID_DFATENDOC,DfatendocPeer::ID);
+    } 
+    $this->pager->setCriteria($c);
+    $this->pager->setPage($this->getRequestParameter('page', 1));
+    $this->pager->init();
+  }
 
 }

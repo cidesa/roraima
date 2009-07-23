@@ -17,6 +17,8 @@ generator:
       infdoc2:     { name : Inf. Adic 2 }
       infdoc3:     { name : Inf. Adic 3 }
       infdoc4:     { name : Inf. Adic 4 }
+      valact:      { name : Valor Estado Activo }
+      valanu:      { name : Valor Estado Anulado }
     list:
       title:          Administración de Tablas
       display:        [=destipdoc, nomtab ]
@@ -27,9 +29,7 @@ generator:
         _delete:      ~
     edit:
       title:          Edición de Tablas
-      display:        [tipdoc, nomtab, vidutil, clvprm, clvfrn, mondoc, fecdoc, desdoc, stadoc, infdoc1, infdoc2, infdoc3, infdoc4 ]
+      display:        [tipdoc, nomtab, vidutil, clvprm, clvfrn, mondoc, fecdoc, desdoc, stadoc, infdoc1, infdoc2, infdoc3, infdoc4, valact, valanu ]
       actions:
         _list:        ~
         _save:        ~
-
-

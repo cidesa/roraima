@@ -2110,6 +2110,14 @@ public static function obtenerDiaMesOAno($fecha,$formato,$dmoa)
 			if($mes=='11')  return $mes='Noviembre';
 			if($mes=='12')  return $mes='Diciembre';
   }
+  
+  
+  public static function AddDaysDate($orgDate,$day){
+    $cd = strtotime($orgDate);
+    $retDAY = date('Y-m-d H:i:s', mktime(date('H',$cd),date('i',$cd),date('s',$cd),date('m',$cd),date('d',$cd)+$day,date('Y',$cd)));
+    return $retDAY;
+  }   
+  
 }
 
 class H extends Herramientas

@@ -60,6 +60,10 @@ class DftabtipMapBuilder {
 
 		$tMap->addColumn('INFDOC4', 'Infdoc4', 'string', CreoleTypes::VARCHAR, false, 100);
 
+		$tMap->addColumn('VALACT', 'Valact', 'string', CreoleTypes::VARCHAR, false, 1);
+
+		$tMap->addColumn('VALANU', 'Valanu', 'string', CreoleTypes::VARCHAR, false, 1);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

@@ -61,6 +61,14 @@ abstract class BaseDftabtip extends BaseObject  implements Persistent {
 
 
 	
+	protected $valact;
+
+
+	
+	protected $valanu;
+
+
+	
 	protected $id;
 
 	
@@ -170,6 +178,20 @@ abstract class BaseDftabtip extends BaseObject  implements Persistent {
   {
 
     return trim($this->infdoc4);
+
+  }
+  
+  public function getValact()
+  {
+
+    return trim($this->valact);
+
+  }
+  
+  public function getValanu()
+  {
+
+    return trim($this->valanu);
 
   }
   
@@ -310,6 +332,26 @@ abstract class BaseDftabtip extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setValact($v)
+	{
+
+    if ($this->valact !== $v) {
+        $this->valact = $v;
+        $this->modifiedColumns[] = DftabtipPeer::VALACT;
+      }
+  
+	} 
+	
+	public function setValanu($v)
+	{
+
+    if ($this->valanu !== $v) {
+        $this->valanu = $v;
+        $this->modifiedColumns[] = DftabtipPeer::VALANU;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -350,7 +392,11 @@ abstract class BaseDftabtip extends BaseObject  implements Persistent {
 
       $this->infdoc4 = $rs->getString($startcol + 12);
 
-      $this->id = $rs->getInt($startcol + 13);
+      $this->valact = $rs->getString($startcol + 13);
+
+      $this->valanu = $rs->getString($startcol + 14);
+
+      $this->id = $rs->getInt($startcol + 15);
 
       $this->resetModified();
 
@@ -358,7 +404,7 @@ abstract class BaseDftabtip extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 14; 
+            return $startcol + 16; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Dftabtip object", $e);
     }
@@ -577,6 +623,12 @@ abstract class BaseDftabtip extends BaseObject  implements Persistent {
 				return $this->getInfdoc4();
 				break;
 			case 13:
+				return $this->getValact();
+				break;
+			case 14:
+				return $this->getValanu();
+				break;
+			case 15:
 				return $this->getId();
 				break;
 			default:
@@ -602,7 +654,9 @@ abstract class BaseDftabtip extends BaseObject  implements Persistent {
 			$keys[10] => $this->getInfdoc2(),
 			$keys[11] => $this->getInfdoc3(),
 			$keys[12] => $this->getInfdoc4(),
-			$keys[13] => $this->getId(),
+			$keys[13] => $this->getValact(),
+			$keys[14] => $this->getValanu(),
+			$keys[15] => $this->getId(),
 		);
 		return $result;
 	}
@@ -658,6 +712,12 @@ abstract class BaseDftabtip extends BaseObject  implements Persistent {
 				$this->setInfdoc4($value);
 				break;
 			case 13:
+				$this->setValact($value);
+				break;
+			case 14:
+				$this->setValanu($value);
+				break;
+			case 15:
 				$this->setId($value);
 				break;
 		} 	}
@@ -680,7 +740,9 @@ abstract class BaseDftabtip extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[10], $arr)) $this->setInfdoc2($arr[$keys[10]]);
 		if (array_key_exists($keys[11], $arr)) $this->setInfdoc3($arr[$keys[11]]);
 		if (array_key_exists($keys[12], $arr)) $this->setInfdoc4($arr[$keys[12]]);
-		if (array_key_exists($keys[13], $arr)) $this->setId($arr[$keys[13]]);
+		if (array_key_exists($keys[13], $arr)) $this->setValact($arr[$keys[13]]);
+		if (array_key_exists($keys[14], $arr)) $this->setValanu($arr[$keys[14]]);
+		if (array_key_exists($keys[15], $arr)) $this->setId($arr[$keys[15]]);
 	}
 
 	
@@ -701,6 +763,8 @@ abstract class BaseDftabtip extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(DftabtipPeer::INFDOC2)) $criteria->add(DftabtipPeer::INFDOC2, $this->infdoc2);
 		if ($this->isColumnModified(DftabtipPeer::INFDOC3)) $criteria->add(DftabtipPeer::INFDOC3, $this->infdoc3);
 		if ($this->isColumnModified(DftabtipPeer::INFDOC4)) $criteria->add(DftabtipPeer::INFDOC4, $this->infdoc4);
+		if ($this->isColumnModified(DftabtipPeer::VALACT)) $criteria->add(DftabtipPeer::VALACT, $this->valact);
+		if ($this->isColumnModified(DftabtipPeer::VALANU)) $criteria->add(DftabtipPeer::VALANU, $this->valanu);
 		if ($this->isColumnModified(DftabtipPeer::ID)) $criteria->add(DftabtipPeer::ID, $this->id);
 
 		return $criteria;
@@ -757,6 +821,10 @@ abstract class BaseDftabtip extends BaseObject  implements Persistent {
 		$copyObj->setInfdoc3($this->infdoc3);
 
 		$copyObj->setInfdoc4($this->infdoc4);
+
+		$copyObj->setValact($this->valact);
+
+		$copyObj->setValanu($this->valanu);
 
 
 		if ($deepCopy) {
