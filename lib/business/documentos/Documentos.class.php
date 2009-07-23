@@ -259,7 +259,7 @@ class Documentos
         $infdoc4 = $tabtip->getInfdoc4();
         $infdoc4 = strtolower($infdoc4);
 
-        $sql = "SELECT rtrim($tabla.$coddoc) AS CODDOC, rtrim($tabla.$tipodoc) as TIPDOC , $tabla.$mondoc AS MONDOC, $tabla.$fecdoc AS FECDOC, rtrim($tabla.$desdoc) AS DESDOC, rtrim($tabla.$stadoc) as STADOC, rtrim($tabla.$infdoc1) as INFDOC1, rtrim($tabla.$infdoc2) as INFDOC2, rtrim($tabla.$infdoc3) as INFDOC3, rtrim($tabla.$infdoc4) as INFDOC4
+        $sql = "SELECT rtrim($tabla.$coddoc) AS CODDOC, rtrim($tabla.$tipodoc) as TIPDOC , $tabla.$mondoc AS MONDOC, $tabla.$fecdoc AS FECDOC, rtrim($tabla.$desdoc) AS DESDOC, rtrim($tabla.$stadoc) as STADOC, rtrim(".($infdoc1!='' ? "$tabla.$infdoc1" : "''").") as INFDOC1, rtrim(".($infdoc2!='' ? "$tabla.$infdoc2" : "''").") as INFDOC2, rtrim(".($infdoc3!='' ? "$tabla.$infdoc3" : "''").") as INFDOC3, rtrim(".($infdoc4!='' ? "$tabla.$infdoc4" : "''").") as INFDOC4
             FROM $tabla left OUTER JOIN DFATENDOC ON
             rtrim($tabla.$coddoc) = DFATENDOC.coddoc
             where (DFATENDOC.coddoc is NULL) AND rtrim($tabla.$tipodoc) = '$nomdoc'";

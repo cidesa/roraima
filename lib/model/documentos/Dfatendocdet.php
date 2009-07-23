@@ -15,6 +15,8 @@ class Dfatendocdet extends BaseDfatendocdet
   protected $nomunid = '';
   protected $dias = 0;
   protected $diadoc = 0;
+  protected $fecent = '';
+  protected $diaent = 0;  
 
   public function afterHydrate(){
 
@@ -43,6 +45,8 @@ class Dfatendocdet extends BaseDfatendocdet
     $dfrutadoc = $this->getDfrutadoc();
     if($dfrutadoc) $this->diadoc = $dfrutadoc->getDiadoc();
     else $this->diadoc = 99;
+    
+    $this->fecent = H::AddDaysDate($fecate, $this->diadoc);
 
   }
   
@@ -59,6 +63,27 @@ class Dfatendocdet extends BaseDfatendocdet
     if($fecrec=='1969-12-31 20:00:00') return null;
     else return $fecrec;
   }
+  
+  public function getFecent($format = 'Y-m-d H:i:s')
+  {
 
+    if ($this->fecent === null || $this->fecent === '') {
+      return null;
+    } elseif (!is_int($this->fecent)) {
+            $ts = adodb_strtotime($this->fecent);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecrec] as date/time value: " . var_export($this->fecent, true));
+      }
+    } else {
+      $ts = $this->fecent;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+  
 
 }

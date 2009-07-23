@@ -10,6 +10,8 @@
 class Dfatendoc extends BaseDfatendoc
 {
   protected $tipdoc = '';
+  protected $objitems = '';
+  protected $check = false;
 
   public function hydrate(ResultSet $rs, $startcol = 1){
     parent::hydrate($rs, $startcol);
@@ -24,7 +26,8 @@ class Dfatendoc extends BaseDfatendoc
 
     $lista = Constantes::listaEstadoDocumento();
 
-    return $lista[parent::getAnuate()];
+    if(parent::getAnuate()=="") return "";
+    else return $lista[parent::getAnuate()];
 
   }
 
@@ -33,7 +36,8 @@ class Dfatendoc extends BaseDfatendoc
 
     $lista = Constantes::listaAtencion();
 
-    return $lista[parent::getStaate()];
+    if(parent::getStaate()=="") return "";
+    else  return $lista[parent::getStaate()];
 
   }
 

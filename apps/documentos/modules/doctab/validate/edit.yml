@@ -9,10 +9,12 @@ methods:
    - "dftabtip{fecdoc}"
    - "dftabtip{desdoc}"
    - "dftabtip{stadoc}"
-   - "dftabtip{infdoc1}"
-   - "dftabtip{infdoc2}"
-   - "dftabtip{infdoc3}"
-   - "dftabtip{infdoc4}"
+#   - "dftabtip{infdoc1}"
+#   - "dftabtip{infdoc2}"
+#   - "dftabtip{infdoc3}"
+#   - "dftabtip{infdoc4}"
+   - "dftabtip{valanu}"
+   - "dftabtip{valact}"   
 
 names:
   dftabtip{tipdoc}:
@@ -51,18 +53,26 @@ names:
     required:  Yes
     required_msg: Debe seleccionar un elemento.
 
-  dftabtip{infdoc1}:
-    required:  Yes
-    required_msg: Debe seleccionar un elemento.
+#  dftabtip{infdoc1}:
+#    required:  Yes
+#    required_msg: Debe seleccionar un elemento.
 
-  dftabtip{infdoc2}:
-    required:  Yes
-    required_msg: Debe seleccionar un elemento.
+#  dftabtip{infdoc2}:
+#    required:  Yes
+#    required_msg: Debe seleccionar un elemento.
 
-  dftabtip{infdoc3}:
-    required:  Yes
-    required_msg: Debe seleccionar un elemento.
+#  dftabtip{infdoc3}:
+#    required:  Yes
+#    required_msg: Debe seleccionar un elemento.
 
-  dftabtip{infdoc4}:
+#  dftabtip{infdoc4}:
+#    required:  Yes
+#    required_msg: Debe seleccionar un elemento.
+
+  dftabtip{valact}:
     required:  Yes
-    required_msg: Debe seleccionar un elemento.
+    required_msg: Debe colocar el valor que identifica al documento como Activo.
+
+  dftabtip{valanu}:
+    required:  Yes
+    required_msg: Debe colocar el valor que identifica al documento como Anulado.

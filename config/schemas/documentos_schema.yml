@@ -173,6 +173,12 @@ propel:
     infdoc4:
       type: VARCHAR
       size: 100
+    valact:
+      type: VARCHAR
+      size: 1
+    valanu:
+      type: VARCHAR
+      size: 1
     id:
   dfdiafer:
     diafer:

@@ -44,9 +44,9 @@ class DfatendocdetMapBuilder {
 
 		$tMap->addColumn('FECATE', 'Fecate', 'int', CreoleTypes::TIMESTAMP, true, null);
 
-		$tMap->addForeignKey('ID_ACUNIDAD_ORI', 'IdAcunidadOri', 'int', CreoleTypes::INTEGER, 'acunidad', 'ID', true, null);
+		$tMap->addForeignKey('ID_ACUNIDAD_ORI', 'IdAcunidadOri', 'int', CreoleTypes::INTEGER, 'acunidad', 'ID', false, null);
 
-		$tMap->addForeignKey('ID_ACUNIDAD_DES', 'IdAcunidadDes', 'int', CreoleTypes::INTEGER, 'acunidad', 'ID', true, null);
+		$tMap->addForeignKey('ID_ACUNIDAD_DES', 'IdAcunidadDes', 'int', CreoleTypes::INTEGER, 'acunidad', 'ID', false, null);
 
 		$tMap->addForeignKey('ID_DFRUTADOC', 'IdDfrutadoc', 'int', CreoleTypes::INTEGER, 'dfrutadoc', 'ID', true, null);
 
