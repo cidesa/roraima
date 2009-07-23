@@ -32,6 +32,8 @@ class pagemiordActions extends autopagemiordActions
      // $grid1 = Herramientas::CargarDatosGrid($this,$this->obj2);
       if ($this->opordpag->getId()=="")
       {
+        $this->configGridFactura();
+        $factura=Herramientas::CargarDatosGrid($this,$this->obj2,true);
         if ($this->opordpag->getTipcau()!=$this->ordpagnom && $this->opordpag->getTipcau()!=$this->ordpagapo && $this->opordpag->getTipcau()!=$this->ordpagliq && $this->opordpag->getTipcau()!=$this->ordpagfid)
         {
           $this->configGridApliret();
@@ -54,8 +56,7 @@ class pagemiordActions extends autopagemiordActions
     $this->coderror4=508;
     return false;
     }
-    $this->configGridFactura();
-    $factura=Herramientas::CargarDatosGrid($this,$this->obj2,true);
+
     $cedrif=$this->getRequestParameter('opordpag[cedrif]');
     $l= new Criteria();
     $l->add(OpordpagPeer::CEDRIF,$cedrif);
