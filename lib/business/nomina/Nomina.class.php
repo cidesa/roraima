@@ -4648,7 +4648,7 @@ class Nomina {
     return -1;
   }
 
-  public static function eliminarNomasicarconnom($emp, $car, $nom, $fec) {
+  public static function eliminarNomasicarconnom($emp, $car, $nom, $fec,$explab=true) {
     $sql = "select monto as monto from npasiconemp where codemp='" . $emp . "' and codcar='" . $car . "'
     and codcon  in (select codcon from npconsueldo where codnom='" . $nom . "');";
     if (Herramientas :: BuscarDatos($sql, & $resul)) {
@@ -4669,8 +4669,9 @@ class Nomina {
     $c->add(NpasiconempPeer :: CODEMP, $emp);
     $c->add(NpasiconempPeer :: CODCAR, $car);
     NpasiconempPeer :: doDelete($c);
-
-    self :: grabarExperienciaLaboral($emp, $car, $nom, $fec, $sueobt, $compensacion);
+    
+	if($explab=='si')
+    	self :: grabarExperienciaLaboral($emp, $car, $nom, $fec, $sueobt, $compensacion);
 
     $c = new Criteria();
     $c->add(NpasicarempPeer :: CODEMP, $emp);
@@ -4678,25 +4679,28 @@ class Nomina {
     $c->add(NpasicarempPeer :: CODNOM, $nom);
     $result = NpasicarempPeer :: doSelectOne($c);
     if ($result) {
-      $nphisasicaremp = new Nphisasicaremp();
-      $nphisasicaremp->setCodemp($result->getCodemp());
-      $nphisasicaremp->setCodcar($result->getCodcar());
-      $nphisasicaremp->setCodnom($result->getCodnom());
-      $nphisasicaremp->setCodcat($result->getCodcat());
-      $nphisasicaremp->setFecasi($result->getFecasi());
-      $nphisasicaremp->setNomemp($result->getNomemp());
-      $nphisasicaremp->setNomcar($result->getNomcar());
-      $nphisasicaremp->setNomnom($result->getNomnom());
-      $nphisasicaremp->setNomcat($result->getNomcat());
-      $nphisasicaremp->setUnieje(null);
-      $nphisasicaremp->setSueldo($result->getSueldo());
-      $nphisasicaremp->setStatus($result->getStatus());
-      if ($result->getMontonomina() != "") {
-        $nphisasicaremp->setMontonomina($result->getMontonomina());
-      } else {
-        $nphisasicaremp->setMontonomina(0);
-      }
-      $nphisasicaremp->save();
+      if($explab=='si')
+	  {
+	  	  $nphisasicaremp = new Nphisasicaremp();
+	      $nphisasicaremp->setCodemp($result->getCodemp());
+	      $nphisasicaremp->setCodcar($result->getCodcar());
+	      $nphisasicaremp->setCodnom($result->getCodnom());
+	      $nphisasicaremp->setCodcat($result->getCodcat());
+	      $nphisasicaremp->setFecasi($result->getFecasi());
+	      $nphisasicaremp->setNomemp($result->getNomemp());
+	      $nphisasicaremp->setNomcar($result->getNomcar());
+	      $nphisasicaremp->setNomnom($result->getNomnom());
+	      $nphisasicaremp->setNomcat($result->getNomcat());
+	      $nphisasicaremp->setUnieje(null);
+	      $nphisasicaremp->setSueldo($result->getSueldo());
+	      $nphisasicaremp->setStatus($result->getStatus());
+	      if ($result->getMontonomina() != "") {
+	        $nphisasicaremp->setMontonomina($result->getMontonomina());
+	      } else {
+	        $nphisasicaremp->setMontonomina(0);
+	      }
+	      $nphisasicaremp->save();
+	  }      
     }
     $result->delete();
   }
