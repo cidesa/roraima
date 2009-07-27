@@ -48,28 +48,39 @@ class OrdendePago
      {
        Herramientas::getSalvarCorrelativo('numini','opdefemp','Referencia',$r,$msg);
      }
-     $fondos->setStatus('N');
-  $fondos->setAproba('N');
-  $fondos->setFecven($fondos->getFecemi());
-  $x=$grid[0];
-  $valor="";
-  $j=0;
-  while ($j<count($x))
-  {
-    if ($x[$j]['check']=="1")
-    {
-      $c= new Criteria();
-      $c->add(OpordpagPeer::NUMORD,$x[$j]['numord']);
-      $consulta = OpordpagPeer::doSelectOne($c);
-      if ($consulta)
+      $fondos->setStatus('N');
+	  $fondos->setAproba('N');
+	  $fondos->setFecven($fondos->getFecemi());
+	  $e= new Criteria();
+      $ooo= OpdefempPeer::doSelectOne($e);
+      if ($ooo)
       {
-        $valor= $consulta->getCoduni();
+        if ($ooo->getReqaprord()=='S')
+        {
+          $fondos->setAprobadoord('A');
+          $fondos->setAprobadotes('A');
+        }
       }
-    }
-    $j++;
-  }
-  $fondos->setCoduni($valor);
-     $fondos->save();
+
+	  $x=$grid[0];
+	  $valor="";
+	  $j=0;
+	  while ($j<count($x))
+	  {
+	    if ($x[$j]['check']=="1")
+	    {
+	      $c= new Criteria();
+	      $c->add(OpordpagPeer::NUMORD,$x[$j]['numord']);
+	      $consulta = OpordpagPeer::doSelectOne($c);
+	      if ($consulta)
+	      {
+	        $valor= $consulta->getCoduni();
+	      }
+	    }
+	    $j++;
+	  }
+	  $fondos->setCoduni($valor);
+      $fondos->save();
   }
 
   public static function afectaPresupuesto($fondos,&$refiere)
