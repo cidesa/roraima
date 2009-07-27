@@ -96,7 +96,8 @@ class nomnommovnomconActions extends autonomnommovnomconActions
 
 		$c = new Criteria();
 	 	$c->add(NpasicarempPeer::CODNOM,$codigonomina);
-		$c->add(NpasicarempPeer::STATUS,'V');
+		$c->add(NphojintPeer::STAEMP,'A');
+	 	$c->addJoin(NpasicarempPeer::CODEMP,NphojintPeer::CODEMP);
 	 	$c->addJoin(NpasiconempPeer::CODEMP,NpasicarempPeer::CODEMP);
 		$c->addJoin(NpasiconempPeer::CODCAR,NpasicarempPeer::CODCAR);
 	 	$c->add(NpasiconempPeer::CODCON,$codigoconcepto);
