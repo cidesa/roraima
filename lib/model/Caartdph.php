@@ -9,6 +9,22 @@
  */
 class Caartdph extends BaseCaartdph
 {
+	protected $cannodes=0.0;
+
+	public function hydrate(ResultSet $rs, $startcol = 1)
+   {
+      parent::hydrate($rs, $startcol);
+
+		$sql = "select cantot as cantot from faartfac where codart = '" . self::getCodart() . "' and reffac in (select reqart from cadphart where tipref = 'F' and dphart = '" . self::getDphart() . "' and stadph = 'A')";
+		if (Herramientas :: BuscarDatos($sql, & $resul)) {
+			$canfac = $resul[0]["cantot"];
+		} else {
+			$canfac = 0;
+		}
+
+      $this->cannodes=$canfac - self::getCandph() ;
+
+   }
 
 	public function getDesart()
 	{

@@ -626,7 +626,7 @@ class fadespActions extends autofadespActions {
 		               $msg=$msg.". Coloque cantidad desp. en cero (0) a este articulo si desea continuar con el despacho del resto de los articulos...";
 		        }
 			}
-		
+
 		    $output = '[["verificaexisydisp","'.$dato.'",""],["mensaje","'.$msg.'",""]]';
 		}
 		else  if ($this->getRequestParameter('ajax')=='6')//Ubicación
