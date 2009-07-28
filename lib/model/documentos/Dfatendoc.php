@@ -13,8 +13,7 @@ class Dfatendoc extends BaseDfatendoc
   protected $objitems = '';
   protected $check = false;
 
-  public function hydrate(ResultSet $rs, $startcol = 1){
-    parent::hydrate($rs, $startcol);
+  public function afterHydrate(){
 
     $dftabtip = $this->getDftabtip();
     $this->tipdoc = $dftabtip->getTipdoc();
@@ -25,9 +24,7 @@ class Dfatendoc extends BaseDfatendoc
   {
 
     $lista = Constantes::listaEstadoDocumento();
-
-    if(parent::getAnuate()=="") return "";
-    else return $lista[parent::getAnuate()];
+    return $lista[$this->anuate];
 
   }
 

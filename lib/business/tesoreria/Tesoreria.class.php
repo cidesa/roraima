@@ -898,8 +898,8 @@ class Tesoreria {
         $opordpag = OpordpagPeer :: doSelectOne($c);
         if ($opordpag) {
           $opordpag->setStatus('N');
-          $opordpag->setNumche(null);
-          $opordpag->setCtaban(null);
+          $opordpag->setNumche('');
+          $opordpag->setCtaban('');
           if ($opordpag->getMonpag() > 0) {
             $opordpag->setMonpag($opordpag->getMonpag() - (float) $opordche["monpag"]);
           } else {
@@ -915,8 +915,8 @@ class Tesoreria {
         $c->add(OpdetperPeer :: TIPMOV, $tipmov);
         $opdetper = OpdetperPeer :: doSelectOne($c);
         if ($opdetper) {
-          $opdetper->setFecpag(null);
-          $opdetper->setNumche(null);
+          $opdetper->setFecpag('');
+          $opdetper->setNumche('');
           $opdetper->save();
         }
       }
@@ -931,8 +931,8 @@ class Tesoreria {
       $res = OpordpagPeer :: doSelectOne($c);
       if ($res) {
         foreach ($res as $opordpag) {
-          $opordpag->setNumche(null);
-          $opordpag->setCtaban(null);
+          $opordpag->setNumche('');
+          $opordpag->setCtaban('');
           $opordpag->setStatus('N');
           $opordpag->save();
         }

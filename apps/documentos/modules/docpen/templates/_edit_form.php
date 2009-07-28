@@ -28,6 +28,19 @@
 </div>
 
 <div class="form-row">
+  <?php echo label_for('dfatendoc[id_dftabtip]', __($labels['dfatendoc{id_dftabtip}']), '') ?>
+  <div class="content<?php if ($sf_request->hasError('dfatendoc{id_dftabtip}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('dfatendoc{id_dftabtip}')): ?>
+    <?php echo form_error('dfatendoc{id_dftabtip}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = input_tag('dftabtip[tipdoc]',$dfatendoc->getTipdoc(), array (
+  'readonly' => true,
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+</div>
+
+<div class="form-row">
   <?php echo label_for('dfatendoc[desdoc]', __($labels['dfatendoc{desdoc}']), '') ?>
   <div class="content<?php if ($sf_request->hasError('dfatendoc{desdoc}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('dfatendoc{desdoc}')): ?>
@@ -74,19 +87,6 @@
 </div>
 
 <div class="form-row">
-  <?php echo label_for('dfatendoc[id_dftabtip]', __($labels['dfatendoc{id_dftabtip}']), '') ?>
-  <div class="content<?php if ($sf_request->hasError('dfatendoc{id_dftabtip}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('dfatendoc{id_dftabtip}')): ?>
-    <?php echo form_error('dfatendoc{id_dftabtip}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = input_tag('dftabtip[tipdoc]',$dfatendoc->getTipdoc(), array (
-  'readonly' => true,
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
-
-<div class="form-row">
   <?php echo label_for('dfatendocdet[desate]', __($labels['dfatendocdet{desate}']), 'class=required') ?>
   <div class="content<?php if ($sf_request->hasError('dfatendocdet{desate}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('dfatendocdet{desate}')): ?>
@@ -111,7 +111,6 @@
   <?php $value = object_select_tag($dfatendocdet, 'getIdDfmedtra', array (
   'related_class' => 'Dfmedtra',
   'control_name' => 'dfatendocdet[id_dfmedtra]',
-  'include_custom' => 'Seleccione...',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
@@ -126,6 +125,7 @@
   <?php $value = object_input_tag($dfatendocdet, 'getDiaent', array (
   'size' => 7,
   'control_name' => 'dfatendocdet[diaent]',
+  'value' => '0',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
