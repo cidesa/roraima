@@ -87,12 +87,6 @@ COMMENT ON TABLE "dfatendocdet" IS '';
 
 ALTER TABLE "dfatendocdet" ADD CONSTRAINT "dfatendocdet_FK_1" FOREIGN KEY ("id_dfatendoc") REFERENCES "dfatendoc" ("id");
 
-ALTER TABLE "dfatendocdet" ADD CONSTRAINT "dfatendocdet_FK_2" FOREIGN KEY ("id_usuario") REFERENCES "usuarios" ("id");
-
-ALTER TABLE "dfatendocdet" ADD CONSTRAINT "dfatendocdet_FK_3" FOREIGN KEY ("id_acunidad_ori") REFERENCES "acunidad" ("id");
-
-ALTER TABLE "dfatendocdet" ADD CONSTRAINT "dfatendocdet_FK_4" FOREIGN KEY ("id_acunidad_des") REFERENCES "acunidad" ("id");
-
 ALTER TABLE "dfatendocdet" ADD CONSTRAINT "dfatendocdet_FK_5" FOREIGN KEY ("id_dfrutadoc") REFERENCES "dfrutadoc" ("id");
 
 ALTER TABLE "dfatendocdet" ADD CONSTRAINT "dfatendocdet_FK_6" FOREIGN KEY ("id_dfmedtra") REFERENCES "dfmedtra" ("id");
@@ -122,8 +116,6 @@ COMMENT ON TABLE "dfatendocobs" IS '';
 
 
 ALTER TABLE "dfatendocobs" ADD CONSTRAINT "dfatendocobs_FK_1" FOREIGN KEY ("id_dfatendocdet") REFERENCES "dfatendocdet" ("id");
-
-ALTER TABLE "dfatendocobs" ADD CONSTRAINT "dfatendocobs_FK_2" FOREIGN KEY ("id_usuario") REFERENCES "usuarios" ("id");
 
 -----------------------------------------------------------------------------
 -- dfrutadoc
