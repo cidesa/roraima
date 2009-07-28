@@ -12,7 +12,7 @@ names:
   usuarios{cedemp}:
     required:  Yes
     required_msg: La Cédula del Usuario no puedo estar en Blanco
-    validators: MyStringValidator
+    validators: MyStringValidator, Validator_Cedemp
 
   usuarios{nomuse}:
     required:  Yes
@@ -87,8 +87,8 @@ MyStringValidator6:
     param:
         min:       3
         min_error: La Contraseña no puede tener menos de 3 caracteres
-        max:       10
-        max_error: La Contraseña no puede tener mas de 10 caracteres
+        max:       100
+        max_error: La Contraseña no puede tener mas de 100 caracteres
 
 UniqueValidator:
     class: sfPropelUniqueValidator
@@ -102,3 +102,14 @@ passwordValidator:
     param:
         check: 'usuarios[pasuse]'
         compare_error: La Contraseña es incorrecta. Por Favor, tipeela otra vez.
+
+Validator_Cedemp:
+  class: sfPropelUniqueValidator
+  param:
+    class:        Usuarios
+    column:       cedemp
+    unique_error: La Cedula ya Existe intente con otro
+    min:       1
+    min_error: El Codigo no puede tener menos de 1 caracteres
+    max:       10
+    max_error: El Codigo no puede pasar mas de 10 caracteres
