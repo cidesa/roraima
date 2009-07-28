@@ -430,7 +430,7 @@ class Documentos
             $nuevo_dfatendocdet->setTotdia(0);
             $nuevo_dfatendocdet->setIdDfmedtra(0);
             $nuevo_dfatendocdet->setFecrec(time("Y-m-d H:m:s"));
-            $nuevo_dfatendocdet->setFecate(time("Y-m-d H:m:s",0));
+            $nuevo_dfatendocdet->setFecate(0);
 
             $nuevo_dfatendocdet->setIdAcunidadOri($dfatendocdet[count($dfatendocdet)-1]->getIdAcunidadDes());
             $nuevo_dfatendocdet->setIdAcunidadDes($dfrutasdocs[count($dfatendocdet)]->getIdAcunidad());

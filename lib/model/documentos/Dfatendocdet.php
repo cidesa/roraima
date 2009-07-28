@@ -16,7 +16,6 @@ class Dfatendocdet extends BaseDfatendocdet
   protected $dias = 0;
   protected $diadoc = 0;
   protected $fecent = '';
-  protected $diaent = 0;  
 
   public function afterHydrate(){
 
@@ -46,7 +45,7 @@ class Dfatendocdet extends BaseDfatendocdet
     if($dfrutadoc) $this->diadoc = $dfrutadoc->getDiadoc();
     else $this->diadoc = 99;
     
-    $this->fecent = H::AddDaysDate($fecate, $this->diadoc);
+    $this->fecent = H::AddDaysDate($fecrec, $this->diadoc);
 
   }
   
