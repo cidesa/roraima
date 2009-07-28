@@ -6,3 +6,6 @@ modules/docpen/config/security.yml:
   class:    sfSecurityConfigHandler
 modules/docpendet/config/security.yml:
   class:    sfSecurityConfigHandler
+modules/docobs/config/security.yml:
+  class:    sfSecurityConfigHandler
+  
