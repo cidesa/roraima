@@ -252,14 +252,13 @@
 		  'control_name' => 'cadphart[mondph]',
 		),$default_value = number_format($value,2,',','.')); echo $value ? $value : '&nbsp;' ?>
 		    </div>
-		</div>
 		</th>
 	</tr>
 </table>
 
-
-</fieldset>
 </div>
+</fieldset>
+
 
 
 <div class="form-row" id="divGrid">
