@@ -29,6 +29,39 @@ class Faartfac extends BaseFaartfac
   protected $canajustada="0,00";
   protected $montot="0,00";
 
+  public $codfal = '';
+  public $costo=0.0;
+  public $cannodes=0.0;
+  public $cannodesaux=0.0;
+  public $montotdes=0.0;
+
+  protected $codalm="";
+  protected $codubi="";
+  protected $nomubi="";
+  protected $nomalm="";
+
+   public function hydrate(ResultSet $rs, $startcol = 1)
+   {
+      parent::hydrate($rs, $startcol);
+
+	   //Se suma la cantidad entregada por notas de entrega para la factura
+	   $sql = "select sum(canent) as canent from faartnot where codart = '" . self::getCodart() . "' and nronot in (select nronot from fanotent where tipref='F' and codref = '" . self::getReffac() . "' and status = 'A')";
+		if (Herramientas :: BuscarDatos($sql, & $resul)) {
+			$canent = $resul[0]["canent"];
+		} else {
+			$canent = 0;
+		}
+
+		$sql = "select sum(candph) as candph from caartdph where codart = '" . self::getCodart() . "' and dphart in (select dphart from cadphart where tipref = 'F' and reqart = '" . self::getReffac() . "' and stadph = 'A')";
+		if (Herramientas :: BuscarDatos($sql, & $resul)) {
+			$candes = $resul[0]["candph"];
+		} else {
+			$candes = 0;
+		}
+
+      $this->cannodes=self::getCantot() - ($candes + $canent);
+      $this->cannodesaux=self::getCantot() - ($candes + $canent);
+   }
 
   public function getDesart()
   {
