@@ -1982,7 +1982,8 @@
    while (i<am)
    {
     var codigo="ax"+"_"+i+"_3";
-
+    if ($(codigo))
+    {
     var articulo2=$(codigo).value;
 
     if (i!=fila)
@@ -1992,6 +1993,7 @@
         articulorepetido=true;
         break;
       }
+    }
     }
    i++;
    }

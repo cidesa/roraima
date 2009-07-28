@@ -12,6 +12,22 @@
 class Despachos
 {
 
+	public static function BuscarTotalEntregado($reffac){
+		//se suma lo entregado por notas de entrega
+		$sql="select sum(cantot) - sum(candes) as total from faartfac where reffac in (select reffac from fafactur where status = 'A' and reffac = '" . $reffac . "')";
+		if (Herramientas :: BuscarDatos($sql, & $resul)) {
+			$total = $resul[0]["total"];
+			if (($total != "")&&($total == 0)){
+				return 1;
+			}
+			else{
+				return 0;
+			}
+		} else {
+			return 0;
+		}
+	}
+
 /**
    * Función Principal para guardar datos del formulario Fadesp
    * TODO Esta función (y todas las demás de su clase) deben retornar un
@@ -28,11 +44,10 @@ class Despachos
 	    self::grabarDespachoArticulosFac($despacho,$grid);
 	    if (self::actualizarArticulos($despacho,$grid,&$msj))
 	    {
-	      	//self::actualizarArticulosRequision($despacho,$grid);
 	      	if ($despacho->getTipref() == 'P')
 	      		self::actualizarArticulosPedido($despacho,$grid);
 	      	else if ($despacho->getTipref() == 'F')
-	      		self::actualizarArticulosPedido($despacho,$grid);
+	      		self::actualizarArticulosFactura($despacho,$grid);
 	    }
     }
 
@@ -79,6 +94,7 @@ class Despachos
         $despacho->setNumcom('D'.(substr($numero,1,strlen($numero))));
       }
       //Se graba el Despacho
+      $despacho->setTipdph($despacho->getTipref());
       $despacho->save();
 
       if ($tiecorr) Herramientas::getSalvarCorrelativo('cordes','cacorrel','Despacho',$r,$msg);
@@ -103,7 +119,7 @@ class Despachos
 	    if (self::actualizarArticulos($despacho,$grid,&$msj))
 	    {
 	      	self::actualizarArticulosRequision($despacho,$grid);
-	      	self::actualizarArticulosPedido($despacho,$grid);
+//	      	self::actualizarArticulosPedido($despacho,$grid);
 	    }
     }
 
@@ -202,19 +218,18 @@ class Despachos
   	  $reg = EmpresaPeer::doSelectone($c);
 	  if ($reg)
 	  	$codcat = $reg->getCodcat();
-
-    $coddph=$despacho->getDphart();
-    $x=$grid[0];
+      $coddph=$despacho->getDphart();
+      $x=$grid[0];
       $j=0;
       while ($j<count($x))
       {
-      	if ($x[$j]->getCandes()>0)
+      	if ($x[$j]->getCandesp()>0)
 	    {
           $detalle = new Caartdph();
           $detalle->setDphart($coddph);
           $detalle->setCodart($x[$j]->getCodart());
           $detalle->setCodcat($codcat);
-          $detalle->setCandph($x[$j]->getCandes());
+          $detalle->setCandph($x[$j]->getCandesp());
           $detalle->setMontot($x[$j]->getMontotdes());
           $detalle->setPreart($x[$j]->getPreart());
           $detalle->setCodalm($x[$j]->getCodalm());
@@ -340,7 +355,7 @@ class Despachos
       $j=0;
       while ($j<count($x)) {
       $codarti=$x[$j]->getCodart();
-      $cantd=$x[$j]->getCandes();
+      $cantd=$x[$j]->getCandesp();
       if (($codarti!="") and ($cantd>0))
       {
           $c = new Criteria();
@@ -350,6 +365,34 @@ class Despachos
              if ($reqarti)
              {
                $act3=$reqarti->getCandes() + $cantd;
+               $reqarti->setCandes($act3);
+               $reqarti->save();
+             }
+        }//if (($codarti!="") and ($cantd>0))
+        $j++;
+      }
+    }
+
+    public static function actualizarArticulosFactura($despacho,$grid)
+    {
+      $requi=$despacho->getReqart();
+      $x=$grid[0];
+      $j=0;
+      while ($j<count($x)) {
+      $codarti=$x[$j]->getCodart();
+      $cantd=$x[$j]->getCandesp();
+      if (($codarti!="") and ($cantd>0))
+      {
+          $c = new Criteria();
+          $c->add(FaartfacPeer::REFFAC,$requi);
+          $c->add(FaartfacPeer::CODART,$codarti);
+          $reqarti = FaartfacPeer::doSelectOne($c);
+             if ($reqarti)
+             {
+               if (($reqarti->getCandes() != "")&&($reqarti->getCandes() >= 0))
+               		$act3=$reqarti->getCandes() + $cantd;
+               else
+               		$act3=$cantd;
                $reqarti->setCandes($act3);
                $reqarti->save();
              }
