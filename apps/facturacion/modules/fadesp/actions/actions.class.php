@@ -416,9 +416,9 @@ private $coderror =-1;
 		else{
 		  if ($tipref == 'F'){
 		      $c = new Criteria();
-		      $c->add(FaartfacPeer::REQART,$codigo);
-		      $this->sql = "Faartfac.candes < Faartfac.cantot ";
-		      $c->add(FaartfacPeer::CANREQ, $this->sql, Criteria::CUSTOM);
+		      $c->add(FaartfacPeer::REFFAC,$codigo);
+		      //$this->sql = "Faartfac.candes < Faartfac.cantot ";
+		      //$c->add(FaartfacPeer::CANTOT, $this->sql, Criteria::CUSTOM);
 		      $per = FaartfacPeer::doSelect($c);
 		  }
 		  else if ($tipref == 'P'){
@@ -431,13 +431,12 @@ private $coderror =-1;
 		  }
 		}
 
-	  if ($tipref == 'F'){
-	      //si no existen datos quiere decir que no hay articulos pendientes por despachar, la requisición ha sido despachada en su totalidad
-	      if ($codigo!="" && !$per)
-	      {
+	    if ($tipref == 'F'){
+	        if (Despachos::BuscarTotalEntregado($codigo) == 1)
+	        {
 	         $this->mensaje="La factura ". $codigo ." ya ha sido despachada en su totalidad !!";
-	      }
-	  }
+	        }
+	    }
 
 	    // Se crea el objeto principal de la clase OpcionesGrid
 	    $opciones = new OpcionesGrid();
