@@ -20,6 +20,8 @@ compras:
       default: OperatorClass.png
   menu:
     Definiciones Generales:
+      Definición Generales:                                   Almcongen
+      Definición de Banco:                                    AlmBanco
       Definición de Grupos de Recaudos:                       AlmTipRecPro
       Definición de Recaudos:                                 AlmRegRec
       Registro de Proveedores:                                AlmRegPro
