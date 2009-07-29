@@ -1132,6 +1132,7 @@ End Function*/
   public static function AguinaldosFracionados($codnom,$codemp,$fecegr,$ultimosueldo,$totarr,$estaliquidado)
   {
   	   $arr=array();
+	   $diasuti=0;
 	   if (!$estaliquidado && $totarr>0)
 	   {  #NO ESTA LIQUIDADO
 	   	  #Primero verificamos cuantos meses cumplidos trabajados tiene el trabajador en el año 
@@ -1176,8 +1177,9 @@ End Function*/
 					    $diasuti = 0;
 				}else
 				{*/
+				    $diasuti = $montouti;
 					$montouti = $montouti * ($ultimosueldo/30);
-					$diasuti = 0;
+					
 				//}
 				#ARREGLO DEL GRID
 			    $sql = "Select * from NPDefPreLiq where CODNOM='$codnom' AND CodCon='005' and PerDes<='$anoegr' and PerHas>='$anoegr'";
@@ -1211,9 +1213,13 @@ End Function*/
 				{
 					$sql = "Select coalesce(max(saltot),0) as Monto from NPImpPresoc where CodEmp='$codemp' And Tipo='P'";
 					if (Herramientas::BuscarDatos($sql,&$result))
-						$montouti = $montouti * $result[0]['monto'];				
+					{
+						$diasuti = $montouti;
+						$montouti = $montouti * $result[0]['monto'];						
+					}						
 				}else
 				{
+					$diasuti = $montouti;
 					$montouti = $montouti * ($ultimosueldo/30);
 				}
 				#ARREGLO DEL GRID
@@ -1223,7 +1229,7 @@ End Function*/
 				else
 				    $partida='';	
 				$arr[$totarr]['orden'] = '5';
-				$arr[$totarr]['dias'] = '0';
+				$arr[$totarr]['dias'] = $diasuti;
 				$arr[$totarr]['monto'] = ($montouti + $montoinc)*(-1);
 				$arr[$totarr]['descripcion'] = 'AGUINALDOS FRACCIONADOS';				
 				$arr[$totarr]['partida'] = $partida;				
@@ -1232,8 +1238,9 @@ End Function*/
 				PrestacionesSociales::TraerAlicuota($codemp,'01/01/'.$anoegr,$fecegrf,&$ialiuti,&$ialibono,&$icalinc,&$utilinc);
 				$montouti = $ialiuti / 12;
 				#YA NO SE CALCULA INCIDENCIA
-				$montoinc = 0;
+				$montoinc = 0;				
 				$montoinc = $montoinc * $montouti;
+				$diasuti = $montouti;
 				$montouti = $montouti * ($ultimosueldo/30);
 				#ARREGLO DEL GRID
 				$sql = "Select * from NPDefPreLiq where CODNOM='$codnom' AND CodCon='005' and PerDes<='$anoegr' and PerHas>='$anoegr'";
@@ -1242,7 +1249,7 @@ End Function*/
 				else
 				    $partida='';	
 				$arr[$totarr]['orden'] = '5';
-				$arr[$totarr]['dias'] = '0';
+				$arr[$totarr]['dias'] = $diasuti;
 				$arr[$totarr]['monto'] = ($montouti + $montoinc)*(-1);
 				$arr[$totarr]['descripcion'] = 'AGUINALDOS FRACCIONADOS';				
 				$arr[$totarr]['partida'] = $partida;
