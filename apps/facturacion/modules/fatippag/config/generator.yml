@@ -6,7 +6,8 @@ generator:
 
     fields:
       destippag: { name: Nombre, validate: Vstring_1_30, msj_error: Debe insertar el nombre del tipo de pago }
-
+      genmov:    { name: Genera Movimiento}
+      tipcan:    { name: Tipo de Cancelación}
     list:
       title: Tipos de Pago
       display: [=destippag]
@@ -20,7 +21,7 @@ generator:
     edit:
       title: Definición de Tipo de Pago
       display:
-        "NONE": [destippag]
+        "NONE": [destippag, _genmov, _tipcan]
       actions:
         _list:        ~
         _save:        ~

@@ -629,6 +629,33 @@ class Facturacion {
          $faartnot->setTotart($x[$j]->getMontot());
          $faartnot->save();
 
+		 $p= new Criteria();
+		 $p->add(CaregartPeer::CODART,$codarti);
+		 $resul= CaregartPeer::doSelectOne($p);
+		 if ($resul)
+		 {
+		 	$tipo=$resul->getTipo();
+           if ($resul->getTipo()=='A')
+           {
+           	 $resul->setExitot($resul->getExitot() + $x[$j]->getCandev());
+           	 $resul->setDistot($resul->getDistot() + $x[$j]->getCandev());
+           	 $resul->save();
+           }
+		 }
+
+         $t= new Criteria();
+         $t->add(CaartalmPeer::CODALM,$x[$j]->getCodalm());
+         $t->add(CaartalmPeer::CODART,$x[$j]->getCodart());
+         $result= CaartalmPeer::doSelectOne($t);
+         if ($result)
+         {
+         	if ($tipo=='A')
+         	{
+         		$result->setExiact($result->getExiact() + $x[$j]->getCandev());
+         		$result->save();
+         	}
+         }
+
 		 $sql = "select * from caartdph where dphart ='" . $fadevolu->getRefdes() . "' and codart = '" . $codarti. "'";
 		 if (Herramientas :: BuscarDatos($sql, & $resul)) {
 			if ($resul){
@@ -663,7 +690,7 @@ class Facturacion {
 
 
 /******************************* Salvar Nota de Entrega **********************************************/
-  public static function salvarFafanot($fanotent, $grid)
+  public static function salvarFafanot($fanotent, $grid,$logusu)
   {
     try {
 	  if (Herramientas::getVerCorrelativo('cornot','Facorrelat',&$r))
@@ -693,6 +720,13 @@ class Facturacion {
 
 	    }
 		$fanotent->setStatus('A');
+		if ($fanotent->getTipnot()=='O')
+		{
+			$fanotent->setAutori('S');
+			$fanotent->setFecaut(date('Y-m-d'));
+			$fanotent->setCodusu($logusu);
+
+		}
 		$fanotent->save();
 
 
@@ -744,7 +778,7 @@ class Facturacion {
 		     if ($arti)
 		     {
 		       $tipoart=$arti->getTipo();
-		       if ($tipoart='A')
+		       if ($tipoart=='A')
 		       {
 		         $act1=$arti->getExitot() - $cante;
 		         $dis1=$arti->getDistot() - $cante;
@@ -754,7 +788,7 @@ class Facturacion {
 
 		         $c = new Criteria();
 		         $c->add(CaartalmPeer::CODART,$codarti);
-		         $c->add(CaartalmPeer::CODALM,$fanotent->getCodalm());
+		         $c->add(CaartalmPeer::CODALM,$x[$j]->getCodalm());
 		         $reg = CaartalmPeer::doSelectOne($c);
 		         if ($reg)
 		         {

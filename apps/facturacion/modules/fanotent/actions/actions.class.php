@@ -165,7 +165,7 @@ $this->Bitacora('Guardo');
 
 			    $ci = new Criteria();
 			    $ci->add(FaartfacPeer::CODREF,$codigo);
-			    $reg= FaartfacPeer::doSelect($c);
+			    $reg= FaartfacPeer::doSelect($ci);
 			    if ($reg){
 			    	foreach ($reg as $datos){
 						$c = new Criteria();
@@ -206,7 +206,6 @@ $this->Bitacora('Guardo');
              	$this->fanotent = $this->getFanotentOrCreate();
 	           $this->configGridDetalle();
              }
-
 
        }
 
@@ -495,7 +494,7 @@ $this->Bitacora('Guardo');
   	if ($this->fanotent->getId() == ''){
 	  	 $this->fanotent->setReapor($this->getUser()->getAttribute('loguse',null));
 	     $grid=Herramientas::CargarDatosGridv2($this,$this->obj);
-	     $resp=Facturacion::salvarFafanot($fanotent,$grid);
+	     $resp=Facturacion::salvarFafanot($fanotent,$grid,$this->getUser()->getAttribute('loguse',null));
 	    if($resp!=-1){
 	      $this->coderror1 = $resp;
 	      $err = Herramientas::obtenerMensajeError($this->coderror);
