@@ -1,0 +1,26 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Cabanco
+    theme:            cidesaGenerator
+    fields:
+      codban:      {name: Codigo, params: size=4 maxlength=4 onBlur="this.value=this.value.pad(4, '0',0);"  }
+      desban:      {name: Descripcion, type: textarea_tag, params: size=40x2 maxlength=50   onKeyUp="javascript:cadena=this.value;cadena=cadena.toUpperCase();this.value=cadena;" }
+
+    list:
+      title:   Definicion de Banco
+      display:        [=codban, desban]
+      filters:		  [codban, desban]
+      max_per_page:	  10
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      sort:    codban
+
+    edit:
+      title:  Definicion de Banco
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~
