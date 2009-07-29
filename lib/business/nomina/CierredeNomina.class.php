@@ -77,6 +77,7 @@ class CierredeNomina
    $c= new Criteria();
    $c->add(NpnomcalPeer::CODNOM,$codnomina);
    $c->add(NpnomcalPeer::SALDO,0,Criteria::NOT_EQUAL);
+   $c->add(NpnomcalPeer::ESPECIAL,'N');
    $resultados= NpnomcalPeer::doSelect($c);
    if ($resultados)
    {
@@ -206,7 +207,7 @@ class CierredeNomina
 			     codnomesp, nomnomesp )
   		(SELECT A.CodNom,A.CodEmp,A.CodCar,A.CodCon,A.FecNom,A.Saldo,B.CodCat,C.CodPar,'',D.CodNiv,B.CODTIPGAS,C.NOMCON,A.NUMREC,A.CANTIDAD,A.FECNOMDES,A.ESPECIAL,A.FECNOMESPDES,A.FECNOMESPHAS,'',''
    FROM NPNOMCAL A,NPASICAREMP B,NPDEFCPT C,NPHOJINT D
-   WHERE A.CODNOM='".$codnomina."' AND
+   WHERE A.CODNOM='".$codnomina."' AND A.ESPECIAL='N' AND
    A.SALDO>0 AND A.CODEMP=B.CODEMP AND
    A.CODNOM=B.CODNOM AND A.CODCAR=B.CODCAR AND
    A.CODCON=C.CODCON AND A.CODEMP=D.CODEMP AND  C.ACUHIS='S' AND B.STATUS='V'  AND
@@ -220,7 +221,7 @@ class CierredeNomina
   $sql2="Insert into Nphiscon  (codnom,codemp, codcar, codcon, fecnom, monto, codcat, codpar, codescuela, codniv, codtipgas, nomcon, numrec, cantidad, fecnomdes, especial, fecnomespdes, fecnomesphas,
 			     codnomesp, nomnomesp )   (SELECT A.CodNom,A.CodEmp,A.CodCar,A.CodCon,A.FecNom,A.Saldo,E.CodCat,C.CodPar,'',D.CodNiv,B.CODTIPGAS,C.NOMCON,A.NUMREC,A.CANTIDAD,A.FECNOMDES,A.ESPECIAL,A.FECNOMESPDES,A.FECNOMESPHAS,'',''
      FROM NPNOMCAL A,NPASICAREMP B,NPDEFCPT C,NPHOJINT D,NPCONCEPTOSCATEGORIA E
-       WHERE A.CODNOM='".$codnomina."' AND
+       WHERE A.CODNOM='".$codnomina."' AND A.ESPECIAL='N' AND
        A.SALDO>0 AND A.CODEMP=B.CODEMP AND
        A.CODNOM=B.CODNOM AND A.CODCAR=B.CODCAR AND
        C.ACUHIS='S'  AND B.STATUS='V' AND A.CODCON=C.CODCON AND
@@ -233,7 +234,7 @@ class CierredeNomina
  $sql3="Insert into Nphiscon (codnom,codemp, codcar, codcon, fecnom, monto, codcat, codpar, codescuela, codniv, codtipgas, nomcon, numrec, cantidad, fecnomdes, especial, fecnomespdes, fecnomesphas,
 			     codnomesp, nomnomesp ) (SELECT A.CodNom,A.CodEmp,A.CodCar,A.CodCon,A.FecNom,A.Saldo,E.CodCat,C.CodPar,'',D.CodNiv,B.CODTIPGAS,C.NOMCON,A.NUMREC,A.CANTIDAD,A.FECNOMDES,A.ESPECIAL, A.FECNOMESPDES,A.FECNOMESPHAS,'',''
      FROM NPNOMCAL A,NPASICAREMP B,NPDEFCPT C,NPHOJINT D,NPASICATCONEMP E
-       WHERE A.CODNOM='".$codnomina."' AND
+       WHERE A.CODNOM='".$codnomina."' AND A.ESPECIAL='N' AND
        A.SALDO>0 AND A.CODEMP=B.CODEMP AND
        A.CODNOM=B.CODNOM AND A.CODCAR=B.CODCAR AND  C.ACUHIS='S' AND B.STATUS='V' AND
        A.CODCON=C.CODCON AND A.CODEMP=D.CODEMP AND A.CODCON=E.CODCON AND
