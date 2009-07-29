@@ -24,37 +24,19 @@ class Fadetpre extends BaseFadetpre
    return Herramientas::getX('CODART','Caregart','Desart',self::getCodart());
   }
 
-  public function getCanord()
-  {
-  	$val=self::getCansol();
-    return $val;
-  }
-
-  public function getCantot()
-  {
-  	$val=self::getCansol();
-    return $val;
-  }
-
-  public function getPreart()
-  {
-  	$val=self::getPrecio();
-    return $val;
-  }
-
-  public function getTotart2()
-  {
-  	$val=self::getPrecio() * self::getCansol();
-  	$valor=number_format($val, 2, ',', '.');
-    return $valor;
-  }
-
    public function afterHydrate()
   {
     if (self::getPrecio()!=0)
     {
       $this->precioe=number_format(self::getPrecio(), 2, ',', '.');
     }
+
+    $this->canord=number_format(self::getCansol(), 2, ',', '.');
+    $this->preart=number_format(self::getPrecio(), 2, ',', '.');
+    $this->cantot=number_format(self::getCansol(), 2, ',', '.');
+    $val=self::getPrecio() * self::getCansol();
+    $this->totart2=number_format($val, 2, ',', '.');
+
   }
 
 

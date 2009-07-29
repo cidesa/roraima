@@ -894,7 +894,7 @@ class Facturacion {
 		             {
 		             	if ($x[$j]->getPreart()=="0,00")
 				       {
-				         $faartped->setPreart(H::convnume($x[$j]->getPrecioe()));
+				         $faartped->setPreart(H::tofloat($x[$j]->getPrecioe()));
 				       }
 				       else
 				       {
@@ -914,8 +914,8 @@ class Facturacion {
 		             }
                      if ($fapedido->getRefped()!='')
                      {
-		              $faartped->setTotart(H::convnume($x[$j]->getTotart2()));
-                     }else $faartped->setTotart(H::convnume($x[$j]->getTotart()));
+		              $faartped->setTotart(H::tofloat($x[$j]->getTotart2()));
+                     }else $faartped->setTotart(H::tofloat($x[$j]->getTotart()));
 			         $faartped->save();
 			       }
 		        }
