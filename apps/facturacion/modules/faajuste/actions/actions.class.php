@@ -101,7 +101,7 @@ $this->Bitacora('Guardo');
 								foreach ($resul as $r){
 									$encontrado = true;
 								}
-				                $javascript = "alert('No puede hacer Ajustar un pedido facturado');";
+				                $javascript = "alert('No puede hacer Ajustar un pedido facturado'); $('faajuste_codref').value='';";
 						        $output = '[["javascript","'.$javascript.'",""]]';
 						        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
 							}
@@ -127,14 +127,14 @@ $this->Bitacora('Guardo');
 						}
 	      			}
 	      			else{
-		                $javascript = "alert('No puede hacer Ajustes sobre un Despacho Anulado');";
+		                $javascript = "alert('No puede hacer Ajustes sobre un Pedido Anulado'); $('faajuste_codref').value='';";
 				        $output = '[["javascript","'.$javascript.'",""]]';
 				        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
 	      			}
 	      		}
 	      		else
 	      		{//no existe el pedido
-	                $javascript = "alert('El número de Pedido no existe');";
+	                $javascript = "alert('El número de Pedido no existe'); $('faajuste_codref').value='';";
 			        $output = '[["javascript","'.$javascript.'",""]]';
 			        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
 			        $this->configGrid();
@@ -172,23 +172,22 @@ $this->Bitacora('Guardo');
 			            //return sfView::HEADER_ONLY;
 	      			}
 	      			else{
-		                $javascript = "alert('No puede hacer Ajustes sobre una Nota de Entrega Anulada');";
+		                $javascript = "alert('No puede hacer Ajustes sobre una Nota de Entrega Anulada'); $('faajuste_codref').value='';";
 				        $output = '[["javascript","'.$javascript.'",""]]';
 				        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
 	      			}
 	      		}
 	      		else
-	      		{//no existe el pedido
+	      		{//no existe la Nota de Entrga
 	                $javascript = "alert('El número de Nota de Entrega no existe');";
 			        $output = '[["javascript","'.$javascript.'",""]]';
 			        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
 			        $this->configGrid();
-
 	      		}
 
+            }else{
+
             }
-
-
 		}
 
 	}
@@ -331,9 +330,6 @@ $this->Bitacora('Guardo');
     $cajtexcom = $this->getRequestParameter('cajtexcom','');
     switch ($ajax){
       case '1':
-        // La variable $output es usada para retornar datos en formato de arreglo para actualizar
-        // objetos en la vista. mas informacion en
-        // http://201.210.211.26:8080/www/wiki/index.php/Agregar_Ajax_para_buscar_una_descripcion
         $output = '[["","",""],["","",""],["","",""]]';
         break;
       case '2':
@@ -345,15 +341,8 @@ $this->Bitacora('Guardo');
         $output = '[["","",""],["","",""],["","",""]]';
     }
 
-    // Instruccion para escribir en la cabecera los datos a enviar a la vista
     $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
-
-    // Si solo se va usar ajax para actualziar datos en objetos ya existentes se debe
-    // mantener habilitar esta instrucción
     return sfView::HEADER_ONLY;
-
-    // Si por el contrario se quiere reemplazar un div en la vista, se debe deshabilitar
-    // por supuesto tomando en cuenta que debe existir el archivo ajaxSuccess.php en la carpeta templates.
 
   }
 

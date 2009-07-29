@@ -3,7 +3,7 @@ methods:
    - "fafactur{reffac}"
    - "fafactur{fecfac}"
    - "fafactur{rifpro}"
-
+   - "fafactur{codconpag}"
 
 names:
   fafactur{reffac}:
@@ -20,6 +20,11 @@ names:
     required_msg: El rif de cliente no puede estar en blanco
     validators: Cliente_Validator
 
+  fafactur{codconpag}:
+    required:  Yes
+    required_msg: La Condicion de Pago no puede estar en blanco
+    validators: Condpago_Validator
+
 Validator_reffac:
     class: sfPropelUniqueValidator
     param:
@@ -33,6 +38,14 @@ Cliente_Validator:
         class:    Facliente
         column:   rifpro
         unique_error:  El Cliente no Existe.
+
+Condpago_Validator:
+    class: CidesaExistValidator
+    param:
+        class:    Faconpag
+        column:   id
+        unique_error:  La Condición de Pago no existe.
+
 
 CorrelValidator:
     class: CidesaStringValidator
