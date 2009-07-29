@@ -1,0 +1,24 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Cacorrel
+    theme:            cidesaGenerator
+    fields:
+      corcom:  { name: Orden de Compra, params: size=4 maxlength=8}
+      corser:  { name: Ordenes de Servicio, params: size=4 maxlength=8}
+      correq:  { name: Requisiciones, params: size=4 maxlength=8}
+      correc:  { name: Recepciones, params: size=4 maxlength=8}
+      cordes:  { name: Despachos, params: size=4 maxlength=8}
+      corcot:  { name: Cotizaciones, params: size=4 maxlength=8}
+      corent:  { name: Entradas de Almacén, params: size=4 maxlength=8}
+      corsal:  { name: Salidas de Almacén, params: size=4 maxlength=8}
+      corpro:  { name: Proveedor, params: size=4 maxlength=8}
+      corsol:  { name: Requisiciones por Departamento (Solicitud/Egreso), params: size=4 maxlength=8}
+      corpag:  { name: Solicitud de Pago, params: size=4 maxlength=8}
+
+    edit:
+      title: Configuración General
+      display:
+        Correlativos: [corcom, corser, correq, correc, cordes, corcot, corent, corsal, corpro, corpag, corsol]
+      actions:
+        _save:        ~
