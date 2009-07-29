@@ -141,7 +141,7 @@ $this->Bitacora('Guardo');
 				$codcli = $reg->getCodcli();
 	         }
 	         else{
-	         	$javascript = "alert('No existe la Factura de Referencia');";
+	         	$javascript = "alert('No existe la Factura de Referencia'); $('fanotent_codref').value='';";
 	         }
 
 	         $ci = new Criteria();
@@ -152,7 +152,9 @@ $this->Bitacora('Guardo');
 				$nompro = $reg->getNompro();
 				$dirpro = $reg->getDirpro();
 				$telpro = $reg->getTelpro();
-	         }
+	         }else {
+             	$codcli=""; $rifpro=""; $nompro=""; $dirpro=""; $telpro="";
+             }
        	 }
        	 else if ($tipref=="P"){
 	         $c= new Criteria();
@@ -172,29 +174,39 @@ $this->Bitacora('Guardo');
 						$c->add(FafacturPeer::STATUS,'A');
 						$datos2 = FafacturPeer::doSelect($c);
 						if ($datos2){
-							$javascript = "alert('El Pedido ya está facturado');";
+							$javascript = "alert('El Pedido ya está facturado'); $('fanotent_codref').value='';";
 							break;
 						}
 			    	}
 			    }
 	         }
 	         else{
-	         	$javascript = "alert('No existe el Pedido de Referencia');";
+	         	$javascript = "alert('No existe el Pedido de Referencia'); $('fanotent_codref').value='';";
 	         }
-
-	         $ci = new Criteria();
-	         $ci->add(FaclientePeer::CODPRO,$codcli);
-	         $reg= FaclientePeer::doSelectOne($ci);
-	         if ($reg){
-				$rifpro = $reg->getRifpro();
-				$nompro = $reg->getNompro();
-				$dirpro = $reg->getDirpro();
-				$telpro = $reg->getTelpro();
-	         }
+             if ($javascript=="")
+             {
+		         $ci = new Criteria();
+		         $ci->add(FaclientePeer::CODPRO,$codcli);
+		         $reg= FaclientePeer::doSelectOne($ci);
+		         if ($reg){
+					$rifpro = $reg->getRifpro();
+					$nompro = $reg->getNompro();
+					$dirpro = $reg->getDirpro();
+					$telpro = $reg->getTelpro();
+		         }
+             }else {
+             	$codcli=""; $rifpro=""; $nompro=""; $dirpro=""; $telpro="";
+             }
        	 }
+             if ($javascript=="")
+             {
+	           $this->fanotent = $this->getFanotentOrCreate();
+	           $this->configGridDetalle($codigo, $tipref);
+             }else{
+             	$this->fanotent = $this->getFanotentOrCreate();
+	           $this->configGridDetalle();
+             }
 
-	       $this->fanotent = $this->getFanotentOrCreate();
-	       $this->configGridDetalle($codigo, $tipref);
 
        }
 

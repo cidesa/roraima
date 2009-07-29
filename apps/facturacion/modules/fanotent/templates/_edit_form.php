@@ -407,7 +407,7 @@
   {
      $('trigger_fanotent_fecnot').hide();
 	 $$('.botoncat')[3].disabled=true;
-	 $$('.botoncat')[4].disabled=true;
+	 //$$('.botoncat')[4].disabled=true;
   }
 
   function anular()
