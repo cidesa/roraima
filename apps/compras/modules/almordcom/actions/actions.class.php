@@ -2111,7 +2111,9 @@ class almordcomActions extends autoalmordcomActions
           $numero_filas=count($filas);
 
         $result=array();
-      $sql = "select a.refcot as refcot,a.conpag as conpag,a.forent as forent from cacotiza a,caprovee b where b.estpro='A' and refsol='".$refsol."' and b.rifpro='".$rif_encontrado."' and a.codpro=b.codpro";
+        //se elimino el campo   b.estpro='A' x q esta en desarrollo y no deberia estar aqui 29-07-09
+//      $sql = "select a.refcot as refcot,a.conpag as conpag,a.forent as forent from cacotiza a,caprovee b where b.estpro='A' and refsol='".$refsol."' and b.rifpro='".$rif_encontrado."' and a.codpro=b.codpro";
+      $sql = "select a.refcot as refcot,a.conpag as conpag,a.forent as forent from cacotiza a,caprovee b where refsol='".$refsol."' and b.rifpro='".$rif_encontrado."' and a.codpro=b.codpro";
       if (Herramientas::BuscarDatos($sql,&$result))
       {
         $codconpag_result=$result[0]['conpag'];
