@@ -9,6 +9,8 @@
  */
 class Faartdev extends BaseFaartdev
 {
+  protected $codalm="";
+
   public function getDesart()
   {
    return Herramientas::getX('CODART','Caregart','Desart',self::getCodart());

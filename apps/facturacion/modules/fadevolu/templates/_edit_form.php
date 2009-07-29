@@ -64,9 +64,7 @@
 		        ))),
 		     array('use_style' => 'true')
 		  )
-		?>
-
-		    </div>
+		?>		    </div>
 		</div>
 	</th>
 	<th>
@@ -153,6 +151,7 @@
 		    </div>
 		</div>
 	</th>
+	</tr>
 </table>
 
 <br>
@@ -292,8 +291,8 @@
   </tr>
 </table>
 
-</div>
-</fieldset>
+
+
 <div class="form-row" id="divGrid">
 <!--<form name="form1" id="form1">-->
 <?
@@ -307,7 +306,6 @@ echo grid_tag($obj);
 
 <h2 class="h2" onclick="javascript: return $('divObservación').toggle();"><?php echo __('Observación') ?></h2>
 <fieldset id="sf_fieldset_observaci__n" class="">
-
 <div class="form-row" id="divObservación">
 <div id="divobsdev">
   <?php if($labels['fadevolu{obsdev}']!='.:') { ?>
@@ -324,12 +322,12 @@ echo grid_tag($obj);
   'readonly'  =>  $fadevolu->getId()!='' ? true : false ,
 )); echo $value ? $value : '&nbsp;' ?>
 
-</div>
+</div></div>
 <br/>
+
 </div>
 </fieldset>
 
-</fieldset>
 
 <?php include_partial('edit_actions', array('fadevolu' => $fadevolu)) ?>
 

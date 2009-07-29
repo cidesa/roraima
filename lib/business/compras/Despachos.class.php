@@ -270,7 +270,7 @@ class Despachos
            if ($arti)
             {
              $tipoart=$arti->getTipo();
-             if ($tipoart='A')
+             if ($tipoart=='A')
              {
                  $act1=$arti->getExitot() - $cantd;
                  $dis1=$arti->getDistot() - $cantd;
@@ -389,7 +389,7 @@ class Despachos
           $reqarti = FaartfacPeer::doSelectOne($c);
              if ($reqarti)
              {
-               if (($reqarti->getCandes() != "")&&($reqarti->getCandes() >= 0))
+               if (($reqarti->getCandes() != "") && ($reqarti->getCandes() >= 0))
                		$act3=$reqarti->getCandes() + $cantd;
                else
                		$act3=$cantd;

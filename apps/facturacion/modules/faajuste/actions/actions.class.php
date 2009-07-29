@@ -130,6 +130,7 @@ $this->Bitacora('Guardo');
 		                $javascript = "alert('No puede hacer Ajustes sobre un Pedido Anulado'); $('faajuste_codref').value='';";
 				        $output = '[["javascript","'.$javascript.'",""]]';
 				        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+				        $this->configGrid();
 	      			}
 	      		}
 	      		else
@@ -175,6 +176,7 @@ $this->Bitacora('Guardo');
 		                $javascript = "alert('No puede hacer Ajustes sobre una Nota de Entrega Anulada'); $('faajuste_codref').value='';";
 				        $output = '[["javascript","'.$javascript.'",""]]';
 				        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+				        $this->configGrid();
 	      			}
 	      		}
 	      		else
@@ -186,7 +188,40 @@ $this->Bitacora('Guardo');
 	      		}
 
             }else{
+	            $c = new Criteria();
+	      		$c->add(FafacturPeer::REFFAC,$codigo);
+	      		$datos = FafacturPeer::doSelectOne($c);
+				if ($datos){
+					if ($datos->getStatus() == 'N'){
+		               $javascript = "alert('No puede hacer Ajustes sobre una Factura Anulado'); $('faajuste_codref').value='';";
+				        $output = '[["javascript","'.$javascript.'",""]]';
+				        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+				        $this->configGrid();
+					}else{
+						$codpro = $datos->getCodcli();
+			  			$c2 = new Criteria();
+			  			$c2->add(FaclientePeer::CODPRO, $codpro);
+			  			$reg2 = FaclientePeer::doSelectOne($c2);
+			  			if ($reg2){
+							$rifpro = $reg2->getRifpro();
+							$nompro = $reg2->getNompro();
+							$dirpro = $reg2->getDirpro();
+							$telpro = $reg2->getTelpro();
 
+			  			}
+                        $this->configGridDetalle('', $this->getRequestParameter('tipaju'), $codigo);
+
+				  		$output = '[["faajuste_codpro","'.$codpro.'",""],["faajuste_rifpro","'.$rifpro.'",""],["faajuste_nompro","'.$nompro.'",""],["faajuste_dirpro","'.$dirpro.'",""],["faajuste_telpro","'.$telpro.'",""],["javascript","'.$javascript.'",""]]';
+			         	$this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+						}
+
+					}
+					else{
+		               $javascript = "alert('El número de Factura no existe'); $('faajuste_codref').value='';";
+				        $output = '[["javascript","'.$javascript.'",""]]';
+				        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+				        $this->configGrid();
+					}
             }
 		}
 
@@ -217,7 +252,7 @@ $this->Bitacora('Guardo');
 	   		}
 	   		else if ($tipaju == 'F'){
 		         $c= new Criteria();
-		         $c->add(FaartfacPeer::NRONOT,$codigo);
+		         $c->add(FaartfacPeer::REFFAC,$codigo);
 		         $reg= FaartfacPeer::doSelect($c);
 	   		}
 	   }
@@ -275,7 +310,7 @@ $this->Bitacora('Guardo');
         $col3->setAlineacionContenido(Columna::IZQUIERDA);
         $col3->setAlineacionObjeto(Columna::IZQUIERDA);
         $col3->setEsNumerico(true);
-   		$col3->setNombreCampo('cansol');
+   		$col3->setNombreCampo('canord');
         $col3->setHTML('type="text" size="10" readonly=true');
 
         $col4 = new Columna('Cant. Entregar');
@@ -284,7 +319,7 @@ $this->Bitacora('Guardo');
         $col4->setAlineacionContenido(Columna::IZQUIERDA);
         $col4->setAlineacionObjeto(Columna::IZQUIERDA);
         $col4->setEsNumerico(true);
-   		$col4->setNombreCampo('canentregar');
+   		$col4->setNombreCampo('canaju');
         $col4->setHTML('type="text" size="10" readonly=true');
         $col4->setHTML('onBlur=Cantidad(this.id);');
 		if ($nrodev != ''){

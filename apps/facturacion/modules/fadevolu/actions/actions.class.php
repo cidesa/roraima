@@ -179,7 +179,7 @@ $this->Bitacora('Guardo');
 			  		if ($codpro != ''){
 			  			$c2 = new Criteria();
 			  			$c2->add(FaclientePeer::CODPRO, $codpro);
-			  			$reg2 = FaclientePeer::doSelectOne($c);
+			  			$reg2 = FaclientePeer::doSelectOne($c2);
 			  			if ($reg2){
 							$rifpro = $reg2->getRifpro();
 							$nompro = $reg2->getNompro();
@@ -254,7 +254,7 @@ $this->Bitacora('Guardo');
         $opciones->setAnchoGrid(1400);
         $opciones->setAncho(1400);
         $opciones->setTitulo('Detalle de la Devolución');
-        $opciones->setName('b');
+        $opciones->setName('a');
         $opciones->setFilas(0);
         $opciones->setHTMLTotalFilas(' ');
 
@@ -322,6 +322,15 @@ $this->Bitacora('Guardo');
         $col6->setEsTotal(true,'fadevolu_mondev');
         //$col5->setEsTotal(true,'totalcosto');
 
+        $col7 = new Columna('Código del Almacen');
+        $col7->setTipo(Columna::TEXTO);
+        $col7->setEsGrabable(true);
+        $col7->setAlineacionObjeto(Columna::CENTRO);
+        $col7->setAlineacionContenido(Columna::CENTRO);
+        $col7->setNombreCampo('codalm');
+        $col7->setHTML('type="text" size="10" readonly=true');
+        $col7->setOculta(true);
+
         // Se guardan las columnas en el objetos de opciones
         $opciones->addColumna($col1);
         $opciones->addColumna($col2);
@@ -329,6 +338,7 @@ $this->Bitacora('Guardo');
         $opciones->addColumna($col4);
         $opciones->addColumna($col5);
         $opciones->addColumna($col6);
+        $opciones->addColumna($col7);
 	    // Ee genera el arreglo de opciones necesario para generar el grid
         $this->obj = $opciones->getConfig($reg);
 
