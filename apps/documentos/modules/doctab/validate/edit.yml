@@ -15,6 +15,7 @@ methods:
 #   - "dftabtip{infdoc4}"
    - "dftabtip{valanu}"
    - "dftabtip{valact}"   
+   - "dftabtip{fecini}"   
 
 names:
   dftabtip{tipdoc}:
@@ -76,3 +77,8 @@ names:
   dftabtip{valanu}:
     required:  Yes
     required_msg: Debe colocar el valor que identifica al documento como Anulado.
+
+  dftabtip{fecini}:
+    required:  Yes
+    required_msg: Debe colocar la fecha a partir de la cual se cargarán los documentos.
+    

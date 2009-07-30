@@ -15,11 +15,19 @@ class Dfatendocobs extends BaseDfatendocobs
   public function afterHydrate()
   {
     $usuario = UsuariosPeer::retrieveByPK($this->getIdUsuario());
-    if($usuario) $this->nomuse = $usuario->getNomuse();
-    else $this->nomuse = 'Sin Usuario';
+    if($usuario) {
+      $this->nomuse = $usuario->getNomuse();  
+
+      $acunidad = AcunidadPeer::retrieveByPK($usuario->getNumuni());
+      if($acunidad) $this->nomunid = $acunidad->getNomuni();
+      else $this->nomunid = '';
+      
+    }
+    else{
+      $this->nomuse = 'Sin Usuario';
+      $this->nomunid = '';
+    } 
     
-    $dfatendocdet = $this->getDfatendocdet();
-    if($dfatendocdet) $this->nomunid = $dfatendocdet->getNomunid();
 
   }
 }

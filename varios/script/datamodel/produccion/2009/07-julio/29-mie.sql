@@ -11,3 +11,10 @@ CREATE TABLE "cabanco"
 );
 
 COMMENT ON TABLE "cabanco" IS '';
+
+
+ALTER TABLE dftabtip ADD COLUMN fecini date;
+
+ALTER TABLE dftabtip ADD COLUMN valact VARCHAR(1);
+
+ALTER TABLE dftabtip ADD COLUMN valanu VARCHAR(1);

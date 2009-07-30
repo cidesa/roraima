@@ -64,6 +64,8 @@ class DftabtipMapBuilder {
 
 		$tMap->addColumn('VALANU', 'Valanu', 'string', CreoleTypes::VARCHAR, false, 1);
 
+		$tMap->addColumn('FECINI', 'Fecini', 'int', CreoleTypes::DATE, false, null);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

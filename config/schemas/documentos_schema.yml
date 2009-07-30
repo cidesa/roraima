@@ -179,6 +179,8 @@ propel:
     valanu:
       type: VARCHAR
       size: 1
+    fecini:
+      type: DATE
     id:
   dfdiafer:
     diafer:

@@ -52,6 +52,12 @@ class docpenActions extends autodocpenActions
   {
     $this->dfatendoc = $this->getDfatendocOrCreate();
     $this->dfatendocdet = new Dfatendocdet();
+    
+    $list = Constantes::listaEstadoDocumento();
+    if($this->dfatendoc->getAnuate()==$list[1]){
+      $this->setFlash('info', 'Información');
+      $this->getRequest()->setError('','Documento Anulado.');
+    }
 
     if ($this->getRequest()->getMethod() == sfRequest::POST)
     {
@@ -100,16 +106,19 @@ $this->Bitacora('Guardo');
   protected function updateDfatendocFromRequest()
   {
     $dfatendocdet = $this->getRequestParameter('dfatendocdet', '');
+    
+    if($dfatendocdet){
+      if($dfatendocdet['desate']) $desate = $dfatendocdet['desate'];
+      else $desate = 'Sin Comentario';
+  
+      if($dfatendocdet['diaent']) $diaent = $dfatendocdet['diaent'];
+      else $diaent = 0;
+  
+      $this->dfatendocdet->setDesate($desate);
+      $this->dfatendocdet->setDiaent($diaent);
+      $this->dfatendocdet->setIdDfmedtra($dfatendocdet['id_dfmedtra']);
+    }
 
-    if($dfatendocdet['desate']) $desate = $dfatendocdet['desate'];
-    else $desate = 'Sin Comentario';
-
-    if($dfatendocdet['diaent']) $diaent = $dfatendocdet['diaent'];
-    else $diaent = 0;
-
-    $this->dfatendocdet->setDesate($desate);
-    $this->dfatendocdet->setDiaent($diaent);
-    $this->dfatendocdet->setIdDfmedtra($dfatendocdet['id_dfmedtra']);
 
   }
 
@@ -149,7 +158,7 @@ $this->Bitacora('Guardo');
   public function executeDelete()
   {
 
-    try {
+//    try {
 
       $this->dfatendoc = DfatendocPeer::retrieveByPk($this->getRequestParameter('id'));
 
@@ -160,27 +169,27 @@ $this->Bitacora('Guardo');
       if($coderr!=-1){
 
         $err = Herramientas::obtenerMensajeError($coderr);
-        $this->getRequest()->setError('',$err);
+        $this->getRequest()->setError('delete',$err);
         //$this->handleErrorEdit();
-        //return $this->forward('docpen', 'edit');
-        return $this->reload('/edit?id='.$this->dfatendoc->getId());
+        return $this->forward('docpen', 'list');
+        //return $this->redirect('docpen/list');
 
       }else
       {
       	$this->Bitacora('Elimino');
       	return $this->redirect('docpen/list');
       }
-
-
+/*
     } catch (Exception $ex) {
 
       $coderr = 0;
       $err = Herramientas::obtenerMensajeError($coderr);
       $this->getRequest()->setError('',$err);
-
-      $this->handleErrorEdit();
+      //return $this->fordward('docpen', 'list');
+      //$this->handleErrorEdit();
 
     }
+*/
   }
 
   protected function getLabels()
