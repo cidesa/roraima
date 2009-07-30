@@ -2604,3 +2604,12 @@ function monto1XMILN()
   return montounomil;
  }
 
+ function colocarmonto(id)
+ {
+    var col=parseInt(aux[2]);
+    var totalfac="bx_0_9";
+    if (id=='x00')
+    {
+      $(totalfac).value=$('opordpag_monord').value;
+    }
+ }
