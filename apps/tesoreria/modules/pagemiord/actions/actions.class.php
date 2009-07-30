@@ -29,7 +29,6 @@ class pagemiordActions extends autopagemiordActions
       $this->opordpag = $this->getOpordpagOrCreate();
       try{ $this->updateOpordpagFromRequest();}catch(Exception $ex){}
       $this->setVars();
-     // $grid1 = Herramientas::CargarDatosGrid($this,$this->obj2);
       if ($this->opordpag->getId()=="")
       {
         $this->configGridFactura();
@@ -56,7 +55,8 @@ class pagemiordActions extends autopagemiordActions
     $this->coderror4=508;
     return false;
     }
-
+    $this->configGridFactura();
+    $factura=Herramientas::CargarDatosGrid($this,$this->obj2,true);
     $cedrif=$this->getRequestParameter('opordpag[cedrif]');
     $l= new Criteria();
     $l->add(OpordpagPeer::CEDRIF,$cedrif);
@@ -700,7 +700,13 @@ $this->Bitacora('Guardo');
       $opordpag = new Opordpag();
       $this->configGrid();
       $this->configGridApliret();
-      $this->configGridFactura();
+      $ar11=array();
+      $ar11[0]=array();
+      $ar22=array();
+      $ar22[0]=array();
+      $ar1=OrdendePago::llenarComboIva($ar11,'','','','');
+      $ar2=OrdendePago::llenarComboIslr($ar22,'','');
+      $this->configGridFactura('',$ar1,$ar2);
       $this->configGridConsulRet();
       $this->configGridRetenciones();
     }
@@ -949,7 +955,7 @@ $this->Bitacora('Guardo');
     $resp = Herramientas::BuscarDatos($sql,&$reg);
 
     $opciones = new OpcionesGrid();
-    $opciones->setEliminar(true);
+    $opciones->setEliminar(true,'colocarmonto(this.id)');
     $opciones->setTabla('Opfactur');
     $opciones->setAnchoGrid(2800);
     $opciones->setAncho(2800);
@@ -2136,19 +2142,29 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
 
   public function executeAjaxfactura()
   {
+  	$javascript="";
     if ($this->getRequestParameter('id')=="")
     {
       $this->configGridApliret();
       $retenciones=Herramientas::CargarDatosGrid($this,$this->obj5,true);
+      if ($this->getRequestParameter('opordpag[vacio]')=='')
+      {
       OrdendePago::facturar($this->getRequestParameter('opordpag[numord]'),$this->getRequestParameter('id'),$retenciones,$this->getRequestParameter('referencia2'),&$eliva,&$elislr,&$eltimbre,&$msj,&$arreglo1,&$arreglo2);
       if ($msj=='')
       { $this->div='Fac';
         $this->configGridFactura('',$arreglo1,$arreglo2);
-        $output = '[["eliva","'.$eliva.'",""],["elislr","'.$elislr.'",""],["eltimbre","'.$eltimbre.'",""],["msj","'.$msj.'",""]]';
+        $output = '[["eliva","'.$eliva.'",""],["elislr","'.$elislr.'",""],["eltimbre","'.$eltimbre.'",""],["msj","'.$msj.'",""],["opordpag_vacio","1",""]]';
         $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
       }else
       {
         $output = '[["nota","'.$msj.'",""]]';
+        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+        return sfView::HEADER_ONLY;
+      }
+      }else
+      {
+      	$javascript="";
+      	$output = '[["javascript","'.$javascript.'",""]]';
         $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
         return sfView::HEADER_ONLY;
       }
@@ -2157,6 +2173,8 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
     {
       $this->configGridConsulret($this->getRequestParameter('opordpag[numord]'));
       $retenciones=Herramientas::CargarDatosGrid($this,$this->obj3,true);
+      if ($this->getRequestParameter('opordpag[vacio]')=='')
+      {
       OrdendePago::facturar($this->getRequestParameter('opordpag[numord]'),$this->getRequestParameter('id'),$retenciones,$this->getRequestParameter('referencia2'),&$eliva,&$elislr,&$eltimbre,&$msj,&$arreglo1,&$arreglo2);
       if ($msj=='')
       { $this->div='Fac';
@@ -2166,6 +2184,14 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
       }else
       {
         $output = '[["nota","'.$msj.'",""]]';
+        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+        return sfView::HEADER_ONLY;
+      }
+      }
+      else
+      {
+      	$javascript="";
+      	$output = '[["javascript","'.$javascript.'",""]]';
         $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
         return sfView::HEADER_ONLY;
       }

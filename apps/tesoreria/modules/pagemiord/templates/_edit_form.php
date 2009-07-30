@@ -609,7 +609,7 @@ if ($('opordpag_tipcau').value!='' && ($('opordpag_tipcau').value!=$('opnomina')
 {
   $('botonret').show();
 }
-
+mostarq();
 
 $('opordpag_numord').focus();
 actualiza();
@@ -803,6 +803,15 @@ function num(e) {
    {
     $(siguiente).focus();
    }
+  }
+
+  function mostarq()
+  {
+  	if ($('opordpag_vacio').value=='1')
+  	{
+  		$('divFac').show();
+  		$('botonfac').hide();
+  	}
   }
 
   function verificar()
