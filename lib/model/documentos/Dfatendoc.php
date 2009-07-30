@@ -22,9 +22,12 @@ class Dfatendoc extends BaseDfatendoc
 
   public function getAnuate()
   {
-
+    
     $lista = Constantes::listaEstadoDocumento();
-    return $lista[$this->anuate];
+    $ret = $lista[$this->anuate];
+    
+    if($ret==$lista['1']) return "<font color=\"#FF0000\">$ret</font>";
+    else return "<font color=\"#000080\">$ret</font>";
 
   }
 

@@ -16,6 +16,9 @@
   <th id="sf_admin_list_th_desuni">
         <?php echo __('Sub Unidad') ?>
           </th>
+  <th id="sf_admin_list_th_desrut">
+        <?php echo __('Descripción') ?>
+          </th>
   <th id="sf_admin_list_th_diadoc">
           <?php if ($sf_user->getAttribute('sort', null, 'sf_admin/dfrutadoc/sort') == 'diadoc'): ?>
       <?php echo link_to(__('Días'), 'docrut/edit?sort=diadoc&type='.($sf_user->getAttribute('type', 'asc', 'sf_admin/dfrutadoc/sort') == 'asc' ? 'desc' : 'asc')) ?>

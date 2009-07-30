@@ -13,7 +13,7 @@ abstract class BaseDftabtipPeer {
 	const CLASS_DEFAULT = 'lib.model.documentos.Dftabtip';
 
 	
-	const NUM_COLUMNS = 16;
+	const NUM_COLUMNS = 17;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -65,6 +65,9 @@ abstract class BaseDftabtipPeer {
 	const VALANU = 'dftabtip.VALANU';
 
 	
+	const FECINI = 'dftabtip.FECINI';
+
+	
 	const ID = 'dftabtip.ID';
 
 	
@@ -73,18 +76,18 @@ abstract class BaseDftabtipPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Tipdoc', 'Nomtab', 'Vidutil', 'Clvprm', 'Clvfrn', 'Mondoc', 'Fecdoc', 'Desdoc', 'Stadoc', 'Infdoc1', 'Infdoc2', 'Infdoc3', 'Infdoc4', 'Valact', 'Valanu', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (DftabtipPeer::TIPDOC, DftabtipPeer::NOMTAB, DftabtipPeer::VIDUTIL, DftabtipPeer::CLVPRM, DftabtipPeer::CLVFRN, DftabtipPeer::MONDOC, DftabtipPeer::FECDOC, DftabtipPeer::DESDOC, DftabtipPeer::STADOC, DftabtipPeer::INFDOC1, DftabtipPeer::INFDOC2, DftabtipPeer::INFDOC3, DftabtipPeer::INFDOC4, DftabtipPeer::VALACT, DftabtipPeer::VALANU, DftabtipPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('tipdoc', 'nomtab', 'vidutil', 'clvprm', 'clvfrn', 'mondoc', 'fecdoc', 'desdoc', 'stadoc', 'infdoc1', 'infdoc2', 'infdoc3', 'infdoc4', 'valact', 'valanu', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, )
+		BasePeer::TYPE_PHPNAME => array ('Tipdoc', 'Nomtab', 'Vidutil', 'Clvprm', 'Clvfrn', 'Mondoc', 'Fecdoc', 'Desdoc', 'Stadoc', 'Infdoc1', 'Infdoc2', 'Infdoc3', 'Infdoc4', 'Valact', 'Valanu', 'Fecini', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (DftabtipPeer::TIPDOC, DftabtipPeer::NOMTAB, DftabtipPeer::VIDUTIL, DftabtipPeer::CLVPRM, DftabtipPeer::CLVFRN, DftabtipPeer::MONDOC, DftabtipPeer::FECDOC, DftabtipPeer::DESDOC, DftabtipPeer::STADOC, DftabtipPeer::INFDOC1, DftabtipPeer::INFDOC2, DftabtipPeer::INFDOC3, DftabtipPeer::INFDOC4, DftabtipPeer::VALACT, DftabtipPeer::VALANU, DftabtipPeer::FECINI, DftabtipPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('tipdoc', 'nomtab', 'vidutil', 'clvprm', 'clvfrn', 'mondoc', 'fecdoc', 'desdoc', 'stadoc', 'infdoc1', 'infdoc2', 'infdoc3', 'infdoc4', 'valact', 'valanu', 'fecini', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Tipdoc' => 0, 'Nomtab' => 1, 'Vidutil' => 2, 'Clvprm' => 3, 'Clvfrn' => 4, 'Mondoc' => 5, 'Fecdoc' => 6, 'Desdoc' => 7, 'Stadoc' => 8, 'Infdoc1' => 9, 'Infdoc2' => 10, 'Infdoc3' => 11, 'Infdoc4' => 12, 'Valact' => 13, 'Valanu' => 14, 'Id' => 15, ),
-		BasePeer::TYPE_COLNAME => array (DftabtipPeer::TIPDOC => 0, DftabtipPeer::NOMTAB => 1, DftabtipPeer::VIDUTIL => 2, DftabtipPeer::CLVPRM => 3, DftabtipPeer::CLVFRN => 4, DftabtipPeer::MONDOC => 5, DftabtipPeer::FECDOC => 6, DftabtipPeer::DESDOC => 7, DftabtipPeer::STADOC => 8, DftabtipPeer::INFDOC1 => 9, DftabtipPeer::INFDOC2 => 10, DftabtipPeer::INFDOC3 => 11, DftabtipPeer::INFDOC4 => 12, DftabtipPeer::VALACT => 13, DftabtipPeer::VALANU => 14, DftabtipPeer::ID => 15, ),
-		BasePeer::TYPE_FIELDNAME => array ('tipdoc' => 0, 'nomtab' => 1, 'vidutil' => 2, 'clvprm' => 3, 'clvfrn' => 4, 'mondoc' => 5, 'fecdoc' => 6, 'desdoc' => 7, 'stadoc' => 8, 'infdoc1' => 9, 'infdoc2' => 10, 'infdoc3' => 11, 'infdoc4' => 12, 'valact' => 13, 'valanu' => 14, 'id' => 15, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, )
+		BasePeer::TYPE_PHPNAME => array ('Tipdoc' => 0, 'Nomtab' => 1, 'Vidutil' => 2, 'Clvprm' => 3, 'Clvfrn' => 4, 'Mondoc' => 5, 'Fecdoc' => 6, 'Desdoc' => 7, 'Stadoc' => 8, 'Infdoc1' => 9, 'Infdoc2' => 10, 'Infdoc3' => 11, 'Infdoc4' => 12, 'Valact' => 13, 'Valanu' => 14, 'Fecini' => 15, 'Id' => 16, ),
+		BasePeer::TYPE_COLNAME => array (DftabtipPeer::TIPDOC => 0, DftabtipPeer::NOMTAB => 1, DftabtipPeer::VIDUTIL => 2, DftabtipPeer::CLVPRM => 3, DftabtipPeer::CLVFRN => 4, DftabtipPeer::MONDOC => 5, DftabtipPeer::FECDOC => 6, DftabtipPeer::DESDOC => 7, DftabtipPeer::STADOC => 8, DftabtipPeer::INFDOC1 => 9, DftabtipPeer::INFDOC2 => 10, DftabtipPeer::INFDOC3 => 11, DftabtipPeer::INFDOC4 => 12, DftabtipPeer::VALACT => 13, DftabtipPeer::VALANU => 14, DftabtipPeer::FECINI => 15, DftabtipPeer::ID => 16, ),
+		BasePeer::TYPE_FIELDNAME => array ('tipdoc' => 0, 'nomtab' => 1, 'vidutil' => 2, 'clvprm' => 3, 'clvfrn' => 4, 'mondoc' => 5, 'fecdoc' => 6, 'desdoc' => 7, 'stadoc' => 8, 'infdoc1' => 9, 'infdoc2' => 10, 'infdoc3' => 11, 'infdoc4' => 12, 'valact' => 13, 'valanu' => 14, 'fecini' => 15, 'id' => 16, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, )
 	);
 
 	
@@ -167,6 +170,8 @@ abstract class BaseDftabtipPeer {
 		$criteria->addSelectColumn(DftabtipPeer::VALACT);
 
 		$criteria->addSelectColumn(DftabtipPeer::VALANU);
+
+		$criteria->addSelectColumn(DftabtipPeer::FECINI);
 
 		$criteria->addSelectColumn(DftabtipPeer::ID);
 

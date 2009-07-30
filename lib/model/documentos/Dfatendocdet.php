@@ -13,7 +13,7 @@ class Dfatendocdet extends BaseDfatendocdet
   protected $nomuse = '';
   protected $nomunio = '';
   protected $nomunid = '';
-  protected $dias = 0;
+  protected $dias = '';
   protected $diadoc = 0;
   protected $fecent = '';
 
@@ -38,14 +38,19 @@ class Dfatendocdet extends BaseDfatendocdet
 
     $fecate = $this->getFecate();
     $fecrec = $this->getFecrec();
+    
+    if($fecate=='') $fecate=date('Y-m-d');
 
-    $this->dias =  Documentos::ContDiasFecha($fecrec,$fecate);
-
+    $dias =  Documentos::ContDiasFecha($fecrec,$fecate);
+    
     $dfrutadoc = $this->getDfrutadoc();
     if($dfrutadoc) $this->diadoc = $dfrutadoc->getDiadoc();
     else $this->diadoc = 99;
     
-    $this->fecent = H::AddDaysDate($fecrec, $this->diadoc);
+    if($dias>$this->diadoc) $this->dias = "<font color=\"#FF0000\">$dias</font>";
+    else $this->dias = "<font color=\"#000080\">$dias</font>";        
+    
+    $this->fecent = Documentos::AddDaysDate($fecrec, $this->diadoc);
 
   }
   

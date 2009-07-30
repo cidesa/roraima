@@ -78,11 +78,7 @@
     <?php echo form_error('dfatendoc{anuate}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_input_tag($dfatendoc, 'getAnuate', array (
-  'readonly' => true,
-  'size' => 7,
-  'control_name' => 'dfatendoc[anuate]',
-)); echo $value ? $value : '&nbsp;' ?>
+  <?php $value = $dfatendoc->getAnuate(); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
 

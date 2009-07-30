@@ -9,6 +9,7 @@ generator:
       staate:         { name : Estatus }
       anuate:         { name : Estado Atencion }
       estado:         { name : Documento }
+      fecdoc:         { name : Fecha Documentos, type: input_date_tag }
       id_dftabtip:    { name : Tipo Documento }
       desate:         { name : Descripción de la Atención }
       infdoc1:        { name : Inf. Adicional 1 }
@@ -18,7 +19,7 @@ generator:
       id_dfmedtra:    { name : Medio de Transporte }
     list:
       title:          Revisión de Documentos
-      display:        [=coddoc, desdoc, staate, anuate, estado, infdoc1 ]
+      display:        [=coddoc, desdoc, _fecdoc, staate, anuate, estado, infdoc1 ]
       filters:      [coddoc, desdoc, _staate ]
       max_per_page:    10
       object_actions:

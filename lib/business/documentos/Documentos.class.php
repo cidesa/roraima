@@ -262,8 +262,8 @@ class Documentos
         $sql = "SELECT rtrim($tabla.$coddoc) AS CODDOC, rtrim($tabla.$tipodoc) as TIPDOC , $tabla.$mondoc AS MONDOC, $tabla.$fecdoc AS FECDOC, rtrim($tabla.$desdoc) AS DESDOC, rtrim($tabla.$stadoc) as STADOC, rtrim(".($infdoc1!='' ? "$tabla.$infdoc1" : "''").") as INFDOC1, rtrim(".($infdoc2!='' ? "$tabla.$infdoc2" : "''").") as INFDOC2, rtrim(".($infdoc3!='' ? "$tabla.$infdoc3" : "''").") as INFDOC3, rtrim(".($infdoc4!='' ? "$tabla.$infdoc4" : "''").") as INFDOC4
             FROM $tabla left OUTER JOIN DFATENDOC ON
             rtrim($tabla.$coddoc) = DFATENDOC.coddoc
-            where (DFATENDOC.coddoc is NULL) AND rtrim($tabla.$tipodoc) = '$nomdoc'";
-
+            where (DFATENDOC.coddoc is NULL) AND rtrim($tabla.$tipodoc) = '$nomdoc' AND $tabla.$fecdoc > '".$tabtip->getFecini()."' AND $tabla.$stadoc = '".$tabtip->getValact()."'";
+//print $sql;exit;
         if(Herramientas::BuscarDatos($sql, &$regs)){
           foreach($regs as $reg){
             if($tabtip->getTipdoc() == $reg['tipdoc']){
@@ -290,8 +290,8 @@ class Documentos
               $dfatendocdet = new Dfatendocdet();
               $dfatendocdet->setIdDfatendoc($dfatendoc->getId());
               $dfatendocdet->setIdUsuario((int)$idusuario);
-              $hoy = getdate();
-              $dfatendocdet->setFecrec($hoy[0]);
+
+              $dfatendocdet->setFecrec($reg['fecdoc']);
 
               $dfatendocdet->setFecate(0);
 
@@ -308,11 +308,28 @@ class Documentos
             }
           }
         }
-
+        
+        $sql = "SELECT $tabla.$stadoc AS STADOC, DFATENDOC.ID
+            FROM $tabla INNER JOIN DFATENDOC ON rtrim($tabla.$coddoc) = DFATENDOC.coddoc
+            where $tabla.$stadoc <> DFATENDOC.ESTADO ";
+//print $sql;exit;            
+        if(Herramientas::BuscarDatos($sql, &$regs)){
+          foreach($regs as $reg){
+            $id = $reg['id'];
+            $estado = $reg['stadoc'];
+            $dfatendoc = DfatendocPeer::retrieveByPK($id);
+            if($dfatendoc){
+              if($estado == $tabtip->getValanu()){
+                $dfatendoc->setEstado($estado);
+                $dfatendoc->setAnuate(1);
+                $dfatendoc->save();
+              }
+            }
+          }
+        }
       }
       return true;
     }else return false;
-
 
   }
 
@@ -411,12 +428,15 @@ class Documentos
             $dfatendoc->setStaate(2);
             $dfatendoc->save();
           }
+          
+          $totdia = Documentos::ContDiasFecha($dfatendocdet[count($dfatendocdet)-1]->getFecrec('Y-m-d'),date("Y-m-d"));
+          $totdia = $totdia - $dfatendocdet_in->getDiaent();
 
           $dfatendocdet[count($dfatendocdet)-1]->setFecate(time("Y-m-d H:m:s"));
           $dfatendocdet[count($dfatendocdet)-1]->setIdDfmedtra($dfatendocdet_in->getIdDfmedtra());
           $dfatendocdet[count($dfatendocdet)-1]->setDesate($dfatendocdet_in->getDesate());
           $dfatendocdet[count($dfatendocdet)-1]->setDiaent($dfatendocdet_in->getDiaent());
-          $dfatendocdet[count($dfatendocdet)-1]->setTotdia(Documentos::ContDiasFecha($dfatendocdet[count($dfatendocdet)-1]->getFecrec('Y-m-d'),date("Y-m-d")));
+          $dfatendocdet[count($dfatendocdet)-1]->setTotdia($totdia);
           $dfatendocdet[count($dfatendocdet)-1]->setIdUsuario((int)$idusuario);
           $dfatendocdet[count($dfatendocdet)-1]->save();
 
@@ -505,7 +525,7 @@ class Documentos
 
   public static function add_days($my_date,$numdays) {
     $date_t = strtotime($my_date.' UTC');
-    return gmdate('Y-m-d',$date_t + ($numdays*86400));
+    return gmdate('Y-m-d H:m:s',$date_t + ($numdays*86400));
   }
 
   public static function salvarObservacion($usuario,$id,$desobs)
@@ -531,6 +551,38 @@ class Documentos
     
     
   }
+
+  public static function AddDaysDate($fechaI,$dias)
+  {
+    if($fechaI=='1969-12-31 20:00:00') return $fechaI;
+    else{
+      $diasferiados = DfdiaferPeer::doSelect(new Criteria());
+      $arraydf = array();
+      $fI = date('Y-m-d',strtotime($fechaI));
+      foreach($diasferiados as $df)
+      {
+        $arraydf[] = $df->getDiafer();
+      }
+
+      $salir=false;
+      $dialaborable=false;
+      $fecha = $fI;
+
+      for($i=1;$i<=$dias;$i++)
+      {
+        $dialaborable=false;
+        while(!$dialaborable){
+          $fecha = Documentos::add_days($fecha,1);
+          if(Documentos::isWorkDay($fecha, $arraydf)) $dialaborable=true;
+        }
+      }
+
+      return $fecha;
+
+    }
+
+  }
+
 
 }
 

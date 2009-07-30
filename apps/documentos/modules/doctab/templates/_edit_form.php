@@ -57,11 +57,10 @@
 
 <div id="divCombos" class="form-row">
 <?php include_partial('combos', array('dftabtip' => $dftabtip, 'labels' => $labels, 'campos' => $campos)) ?>
+
 </div>
 
-</fieldset>
-
-<fieldset>
+<div id="divadicional" class="form-row">
 <div id="divvalact">
   <?php if($labels['dftabtip{valact}']!='.:') { ?>
   <?php echo label_for('dftabtip[valact]', __($labels['dftabtip{valact}' ]), 'class="required" Style="text-align:left; width:150px"') ?>
@@ -111,11 +110,39 @@
   <?php  } ?> 
 
 </div>
+<br>
+<div id="divfecini">
+  <?php if($labels['dftabtip{fecini}']!='.:') { ?>
+  <?php echo label_for('dftabtip[fecini]', __($labels['dftabtip{fecini}' ]), 'class="required" Style="text-align:left; width:150px"') ?>
+  <div class="content<?php if ($sf_request->hasError('dftabtip{fecini}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('dftabtip{fecini}')): ?>
+    <?php echo form_error('dftabtip{fecini}', array('class' => 'form-error-msg')) ?>
+  <?php endif; }?>  
+  
+   
+  
+  <?php $value = object_input_date_tag($dftabtip, 'getFecini', array (
+  'rich' => true,
+  'onkeyup' => 'javascript: mascara(this,\'/\',patron,true)',
+  'calendar_button_img' => '/sf/sf_admin/images/date.png',
+  'control_name' => 'dftabtip[fecini]',
+)); echo $value ? $value : '&nbsp;' ?>
+      
+		
+  <?php if($labels['dftabtip{fecini}']!='.:') { ?>  
+  
 
-</fieldset>
+   
+  </div>
+  <?php  } ?> 
+
 </div>
+</div>
+</fieldset>
 
 <?php include_partial('edit_actions', array('dftabtip' => $dftabtip)) ?>
+
+</div>
 
 </form>
 

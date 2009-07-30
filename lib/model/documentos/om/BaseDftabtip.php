@@ -69,6 +69,10 @@ abstract class BaseDftabtip extends BaseObject  implements Persistent {
 
 
 	
+	protected $fecini;
+
+
+	
 	protected $id;
 
 	
@@ -194,6 +198,28 @@ abstract class BaseDftabtip extends BaseObject  implements Persistent {
     return trim($this->valanu);
 
   }
+  
+  public function getFecini($format = 'Y-m-d')
+  {
+
+    if ($this->fecini === null || $this->fecini === '') {
+      return null;
+    } elseif (!is_int($this->fecini)) {
+            $ts = adodb_strtotime($this->fecini);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecini] as date/time value: " . var_export($this->fecini, true));
+      }
+    } else {
+      $ts = $this->fecini;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
   
   public function getId()
   {
@@ -352,6 +378,23 @@ abstract class BaseDftabtip extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setFecini($v)
+	{
+
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecini] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecini !== $ts) {
+      $this->fecini = $ts;
+      $this->modifiedColumns[] = DftabtipPeer::FECINI;
+    }
+
+	} 
+	
 	public function setId($v)
 	{
 
@@ -396,7 +439,9 @@ abstract class BaseDftabtip extends BaseObject  implements Persistent {
 
       $this->valanu = $rs->getString($startcol + 14);
 
-      $this->id = $rs->getInt($startcol + 15);
+      $this->fecini = $rs->getDate($startcol + 15, null);
+
+      $this->id = $rs->getInt($startcol + 16);
 
       $this->resetModified();
 
@@ -404,7 +449,7 @@ abstract class BaseDftabtip extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 16; 
+            return $startcol + 17; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Dftabtip object", $e);
     }
@@ -629,6 +674,9 @@ abstract class BaseDftabtip extends BaseObject  implements Persistent {
 				return $this->getValanu();
 				break;
 			case 15:
+				return $this->getFecini();
+				break;
+			case 16:
 				return $this->getId();
 				break;
 			default:
@@ -656,7 +704,8 @@ abstract class BaseDftabtip extends BaseObject  implements Persistent {
 			$keys[12] => $this->getInfdoc4(),
 			$keys[13] => $this->getValact(),
 			$keys[14] => $this->getValanu(),
-			$keys[15] => $this->getId(),
+			$keys[15] => $this->getFecini(),
+			$keys[16] => $this->getId(),
 		);
 		return $result;
 	}
@@ -718,6 +767,9 @@ abstract class BaseDftabtip extends BaseObject  implements Persistent {
 				$this->setValanu($value);
 				break;
 			case 15:
+				$this->setFecini($value);
+				break;
+			case 16:
 				$this->setId($value);
 				break;
 		} 	}
@@ -742,7 +794,8 @@ abstract class BaseDftabtip extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[12], $arr)) $this->setInfdoc4($arr[$keys[12]]);
 		if (array_key_exists($keys[13], $arr)) $this->setValact($arr[$keys[13]]);
 		if (array_key_exists($keys[14], $arr)) $this->setValanu($arr[$keys[14]]);
-		if (array_key_exists($keys[15], $arr)) $this->setId($arr[$keys[15]]);
+		if (array_key_exists($keys[15], $arr)) $this->setFecini($arr[$keys[15]]);
+		if (array_key_exists($keys[16], $arr)) $this->setId($arr[$keys[16]]);
 	}
 
 	
@@ -765,6 +818,7 @@ abstract class BaseDftabtip extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(DftabtipPeer::INFDOC4)) $criteria->add(DftabtipPeer::INFDOC4, $this->infdoc4);
 		if ($this->isColumnModified(DftabtipPeer::VALACT)) $criteria->add(DftabtipPeer::VALACT, $this->valact);
 		if ($this->isColumnModified(DftabtipPeer::VALANU)) $criteria->add(DftabtipPeer::VALANU, $this->valanu);
+		if ($this->isColumnModified(DftabtipPeer::FECINI)) $criteria->add(DftabtipPeer::FECINI, $this->fecini);
 		if ($this->isColumnModified(DftabtipPeer::ID)) $criteria->add(DftabtipPeer::ID, $this->id);
 
 		return $criteria;
@@ -825,6 +879,8 @@ abstract class BaseDftabtip extends BaseObject  implements Persistent {
 		$copyObj->setValact($this->valact);
 
 		$copyObj->setValanu($this->valanu);
+
+		$copyObj->setFecini($this->fecini);
 
 
 		if ($deepCopy) {
