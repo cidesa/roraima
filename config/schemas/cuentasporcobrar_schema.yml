@@ -206,7 +206,7 @@ propel:
       size: 3
     desdoc:
       type: VARCHAR
-      size: 100
+      size: 1000
     mondoc:
       type: NUMERIC
       size: 14
