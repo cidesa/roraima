@@ -140,6 +140,7 @@ class cobdocumeActions extends autocobdocumeActions
             $output = '[["","",""],["","",""],["","",""]]';
             $codcli = $this->getRequestParameter('codcli','');
             $cajsaldoc = 'cobdocume_saldoc';
+            $cajrecdoc = 'cobdocume_recdoc';
             if ($codcli=="")
             {
 				$javascript="alert('Primero debe introducir el Cliente...')";
@@ -192,10 +193,11 @@ class cobdocumeActions extends autocobdocumeActions
             $colmonrec = $this->getRequestParameter('monrec','');
             $saldodocumento = H::FormatoNum($this->getRequestParameter('mondoc',0));
 	        $montorgotab=CarecargPeer::getDato($this->getRequestParameter('codigo'),'monrgo');
-	        $monrgo=number_format($montorgotab,2,',','.');
+	        $monrgo=H::FormatoNum($montorgotab);
 	        $tiprgo=CarecargPeer::getDato($codigo,'tiprgo');
-	        $reccal=SolicituddeEgresos::CalcularRecargos($tiprgo,$monrgo,$saldodocumento);
-	        $reccalformat=number_format($reccal,2,',','.');
+	       $reccal=SolicituddeEgresos::CalcularRecargos($tiprgo,$monrgo,$saldodocumento);
+
+	        $reccalformat=H::FormatoMonto($reccal);
             $output = '[["'.$colmonrec.'","'.$reccalformat.'",""]]';
            break;
           case '4':
@@ -225,7 +227,7 @@ class cobdocumeActions extends autocobdocumeActions
 	          {
 	            $dtocal=$datos->getMondesc();
 	          }
-	         $dtocalformat=number_format($dtocal,2,',','.');
+	         $dtocalformat=H::FormatoMonto($dtocal);
              $output = '[["'.$colmondto.'","'.$dtocalformat.'",""]]';
 
           break;
@@ -276,10 +278,17 @@ class cobdocumeActions extends autocobdocumeActions
   public function updateError()
   {
     $this->cobdocume= $this->getCobdocumeOrCreate();
-    try{ $this->updateCobdocumeFromRequest();}
-      catch (Exception $ex){}
-    $this->configGrid();
-    $this->configGridDto();
+    try{
+    	$this->updateCobdocumeFromRequest();
+        $this->configGrid();
+    	$this->configGridDto();
+
+    	$grid = Herramientas::CargarDatosGridv2($this,$this->objrecargos);
+    	$grid = Herramientas::CargarDatosGridv2($this,$this->objdescuentos);
+    }
+      catch (Exception $ex){
+      	return 0;
+      }
   }
 
   public function saving($cobdocume)

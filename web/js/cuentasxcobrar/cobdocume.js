@@ -8,7 +8,7 @@ function CalculaRecargos(id)
 
     var colmonrec=col+1;
     var monrec=name+"_"+fil+"_"+colmonrec;
-    var mondoc=$('cobdocume_saldoc').value;
+    var mondoc=$('cobdocume_mondoc').value;
 	toAjax(3,getUrlModulo()+'ajax',$(id).value,'ActualizarSaldosGrid("a",new Array("cobdocume_recdoc"));totalizar()','&monrec='+monrec+'&mondoc='+mondoc+'');
 }
 
