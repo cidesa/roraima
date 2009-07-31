@@ -1,1 +1,1 @@
-alter table cobdocume alter column desdoc type  varchar(1000);
+alter table cobdocume alter column desdoc type  varchar(3000);
