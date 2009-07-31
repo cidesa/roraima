@@ -16,7 +16,6 @@ generator:
       max_per_page:    5
       object_actions:
         _edit:        ~
-        _delete:      ~
       actions:
         _list:       ~
     edit:
