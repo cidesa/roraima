@@ -44,7 +44,7 @@ class CobdocumeMapBuilder {
 
 		$tMap->addColumn('ORIDOC', 'Oridoc', 'string', CreoleTypes::VARCHAR, false, 3);
 
-		$tMap->addColumn('DESDOC', 'Desdoc', 'string', CreoleTypes::VARCHAR, false, 100);
+		$tMap->addColumn('DESDOC', 'Desdoc', 'string', CreoleTypes::VARCHAR, false, 1000);
 
 		$tMap->addColumn('MONDOC', 'Mondoc', 'double', CreoleTypes::NUMERIC, false, 14);
 
