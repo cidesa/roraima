@@ -84,5 +84,8 @@ class docusuActions extends autodocusuActions
     return sfView::SUCCESS;
   }
 
-
+  public function executeDelete()
+  {
+    return $this->forward('docusu', 'list');
+  }
 }
