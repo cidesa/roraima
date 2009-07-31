@@ -52,8 +52,8 @@ else
       while(l<30)
       {
       	var basimp="bx_"+l+"_11";
-      	var monret="bx_"+l+"_12";
-      	var moniva="bx_"+l+"_13";
+		var moniva="bx_"+l+"_12";
+      	var monret="bx_"+l+"_13";      	
       	var unomil="bx_"+l+"_14";
       	var basltf="bx_"+l+"_15";
       	var porltf="bx_"+l+"_16";
