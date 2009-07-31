@@ -57,7 +57,6 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 			(Select MAX(FECFIN) as FECHAFIN FROM NPIMPPRESOC WHERE tipo='' AND codemp='$codemp') C 
 			where  
 			A.tipo='' AND 
-			A.VALART108>0 and
 			A.codemp='$codemp' AND 
 			B.CODNOM='$codnom' AND 
 			B.CODCON='000' AND
