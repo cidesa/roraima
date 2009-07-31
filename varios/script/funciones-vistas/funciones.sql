@@ -1037,7 +1037,32 @@ ELSE
    fechareal:=fecha;
 END IF;
 for recordSalida in
-EXECUTE 'SELECT A.CODEMP::VARCHAR,A.NOMEMP::VARCHAR,
+EXECUTE 'SELECT A.*,
+(CASE WHEN COALESCE(B.ANTAP,''N'')=''N'' THEN antpub(''A'',A.CODEMP,A.FECFIN,''N'')
+ELSE antpub(''A'',A.CODEMP,A.FECFIN,''S'') END) AS ANTANNOS,
+(CASE WHEN COALESCE(B.ANTAP,''N'')=''N'' THEN antpub(''M'',A.CODEMP,A.FECFIN,''N'')
+ELSE antpub(''M'',A.CODEMP,A.FECFIN,''S'') END) AS ANTMESES,
+(CASE WHEN COALESCE(B.ANTAP,''N'')=''N'' THEN antpub(''D'',A.CODEMP,A.FECFIN,''N'')
+ELSE antpub(''D'',A.CODEMP,A.FECFIN,''S'') END) AS ANTDIAS
+FROM
+(SELECT A.CODEMP,A.NOMEMP,B.CODTIPCON,A.FECING,A.FECING AS FECINI,A.FECCORACU AS FECFIN,
+COALESCE(A.CAPACTACU,0) AS MONTO,0 AS MONDIA,0 AS MONDIAPRO,COALESCE(A.DIAACU,0)+COALESCE(A.DIAADIACU,0) AS DIAS,
+COALESCE(A.CAPACTACU,0) AS MONPRES, COALESCE(A.ANTACU,0) AS MONANT,
+-100 AS ID,''CORTE AL ''||TO_CHAR(A.FECCORACU,''DD/MM/YYYY'') AS TIPO, COALESCE(A.CAPACTACU,0) AS CAPITAL,
+COALESCE(A.CAPACTACU,0) AS CAPITALACT,0 AS TASA,0 AS MONINT,COALESCE(A.INTACU,0) AS INTACU, 0 AS MONADEINT
+FROM NPHOJINT A,(SELECT * FROM NPASIEMPCONT WHERE STATUS=''A'') B 
+WHERE A.CODEMP='''||codigo||'''
+AND A.CODEMP=B.CODEMP) A LEFT OUTER JOIN 
+(SELECT ANOVIG,ANOVIGHAS,CODTIPCON,MAX(ANTAP) AS ANTAP,
+                        MAX(ANTAPVAC) AS ANTAPVAC
+                        FROM NPBONOCONT 
+                        GROUP BY ANOVIG,ANOVIGHAS,CODTIPCON) B ON
+                        A.FECING>=B.ANOVIG
+                        AND A.FECFIN<=B.ANOVIGHAS
+                        AND A.CODTIPCON=B.CODTIPCON
+WHERE 1=(CASE WHEN A.FECFIN IS NULL THEN 2 ELSE 1 END)
+UNION ALL
+SELECT A.CODEMP::VARCHAR,A.NOMEMP::VARCHAR,
 A.CODTIPCON::VARCHAR,A.FECING::DATE,A.FECINI::DATE,A.FECFIN::DATE,
 A.MONTO::NUMERIC,A.MONDIA::NUMERIC,
 (CASE WHEN A.DIAS<>5 THEN
@@ -1065,7 +1090,9 @@ A.DIAS::INTEGER,A.MONPRES+((CASE WHEN A.DIAS<>5 THEN
  AND TO_CHAR(FECANT,''MM/YYYY'')=TO_CHAR(A.FECFIN,''MM/YYYY''))::NUMERIC AS MONANT,
 A.ID::INTEGER,''DEPOSITADOS''::VARCHAR AS TIPO,0::NUMERIC AS CAPITAL,
 0::NUMERIC AS CAPITALACT,0::NUMERIC AS TASA,0::NUMERIC AS MONINT,0::NUMERIC AS INTACU,
-0::NUMERIC AS MONADEINT,A.ANNOANTIG::NUMERIC AS ANTANNOS,
+(SELECT COALESCE(SUM(MONADE),0) FROM NPADEINT
+ WHERE CODEMP='''||codigo||'''
+ AND TO_CHAR(FECADE,''MM/YYYY'')=TO_CHAR(A.FECFIN,''MM/YYYY''))::NUMERIC AS MONADEINT,A.ANNOANTIG::NUMERIC AS ANTANNOS,
 A.MESANTIG::NUMERIC AS ANTMESES,A.DIAANTIG::NUMERIC AS ANTDIAS
 FROM NPPRESTACIONES A
 where A.CODEMP='''||codigo||'''
@@ -1078,7 +1105,7 @@ A.FECING::DATE,A.FECINI::DATE,A.FECFIN::DATE,
 (CASE WHEN A.ALICUOCON<>0 THEN A.MONDIA
  ELSE ROUND(A.SALNOR/30,2) END)::NUMERIC AS MONDIA,0::NUMERIC AS MONDIAPRO,
 COALESCE((CASE WHEN A.ANNOANTIG>0 THEN
-      (CASE WHEN (A.MESANTIG=6 AND A.DIAANTIG>0) OR A.MESANTIG>6 
+      (CASE WHEN (A.MESANTIGTOT=6 AND A.DIAANTIGTOT>0) OR A.MESANTIGTOT>6 
        THEN 60-(SELECT COALESCE(SUM(5),0)
                 FROM NPPRESTACIONES
                 WHERE CODEMP='''||codigo||'''
@@ -1097,19 +1124,19 @@ COALESCE((CASE WHEN A.ANNOANTIG>0 THEN
                                END)
                 AND FECFIN <= TO_DATE('''||fechareal||''',''DD/MM/YYYY''))
        ELSE 0 END)
- ELSE (CASE WHEN (A.MESANTIG=6 AND A.DIAANTIG>0) OR A.MESANTIG>6 
+ ELSE (CASE WHEN (A.MESANTIGTOT=6 AND A.DIAANTIGTOT>0) OR A.MESANTIGTOT>6 
        THEN 45-(SELECT COALESCE(SUM(5),0)
                 FROM NPPRESTACIONES
                 WHERE CODEMP='''||codigo||'''
                 AND FECFIN <= TO_DATE('''||fechareal||''',''DD/MM/YYYY''))
-       WHEN (A.MESANTIG=6 AND A.DIAANTIG=0) OR
-            A.MESANTIG<6
+       WHEN (A.MESANTIGTOT=6 AND A.DIAANTIGTOT=0) OR
+            A.MESANTIGTOT<6
        THEN 15-(SELECT COALESCE(SUM(5),0)
                 FROM NPPRESTACIONES
                 WHERE CODEMP='''||codigo||'''
                 AND FECFIN <= TO_DATE('''||fechareal||''',''DD/MM/YYYY'')) END) END),0)::INTEGER AS DIAS,
- (CASE WHEN A.ANNOANTIG>0 THEN
-      (CASE WHEN (A.MESANTIG=6 AND A.DIAANTIG>0) OR A.MESANTIG>6
+ (CASE WHEN A.ANNOANTIGTOT>0 THEN
+      (CASE WHEN (A.MESANTIGTOT=6 AND A.DIAANTIGTOT>0) OR A.MESANTIGTOT>6
        THEN 60-(SELECT COALESCE(SUM(5),0)
                 FROM NPPRESTACIONES
                 WHERE CODEMP='''||codigo||'''
@@ -1128,13 +1155,13 @@ COALESCE((CASE WHEN A.ANNOANTIG>0 THEN
                                END)
                 AND FECFIN <= TO_DATE('''||fechareal||''',''DD/MM/YYYY''))
        ELSE 0 END)
- ELSE (CASE WHEN (A.MESANTIG=6 AND A.DIAANTIG>0) OR A.MESANTIG>6
+ ELSE (CASE WHEN (A.MESANTIGTOT=6 AND A.DIAANTIGTOT>0) OR A.MESANTIGTOT>6
        THEN 45-(SELECT COALESCE(SUM(5),0)
                 FROM NPPRESTACIONES
                 WHERE CODEMP='''||codigo||'''
                 AND FECFIN <= TO_DATE('''||fechareal||''',''DD/MM/YYYY''))
-       WHEN (A.MESANTIG=6 AND A.DIAANTIG=0) OR
-            A.MESANTIG<6
+       WHEN (A.MESANTIGTOT=6 AND A.DIAANTIGTOT=0) OR
+            A.MESANTIGTOT<6
        THEN 15-(SELECT COALESCE(SUM(5),0)
                 FROM NPPRESTACIONES
                 WHERE CODEMP='''||codigo||'''
@@ -1145,8 +1172,8 @@ COALESCE((CASE WHEN A.ANNOANTIG>0 THEN
 A.ID+1::INTEGER AS ID,''AJUSTE DIAS NO DEPOSITADOS''::VARCHAR AS TIPO,
 0::NUMERIC AS CAPITAL,0::NUMERIC AS CAPITALACT,
 0::NUMERIC AS TASA,0::NUMERIC AS MONINT,0::NUMERIC AS INTACU,
-0::NUMERIC AS MONADEINT,A.ANNOANTIG::NUMERIC AS ANTANNOS,
-A.MESANTIG::NUMERIC AS ANTMESES,A.DIAANTIG::NUMERIC AS ANTDIAS
+0::NUMERIC AS MONADEINT,A.ANNOANTIGTOT::NUMERIC AS ANTANNOS,
+A.MESANTIGTOT::NUMERIC AS ANTMESES,A.DIAANTIGTOT::NUMERIC AS ANTDIAS
 FROM NPPRESTACIONES A
 where A.CODEMP='''||codigo||'''
 AND A.ID = (SELECT MAX(ID) FROM NPPRESTACIONES
@@ -1167,9 +1194,9 @@ COALESCE((SELECT ROUND(AVG(MONDIA),2) FROM NPPRESTACIONES
                              TO_CHAR(TO_NUMBER(SUBSTR('''||fechareal||''',7),''9999'')-1,''9999''),''DD/MM/YYYY'')
                 END)
 AND FECFIN <= TO_DATE('''||fechareal||''',''DD/MM/YYYY'')),0)::NUMERIC AS MONDIAPRO,
-(CASE WHEN (A.ANNOANTIG>=1 AND A.MESANTIG=6 AND A.DIAANTIG>0) OR
-           (A.ANNOANTIG>=1 AND A.MESANTIG>6) THEN
-     A.ANNOANTIG*2
+(CASE WHEN (A.ANNOANTIGTOT>=1 AND A.MESANTIGTOT=6 AND A.DIAANTIGTOT>0) OR
+           (A.ANNOANTIGTOT>=1 AND A.MESANTIGTOT>6) THEN
+     A.ANNOANTIGTOT*2
  ELSE
     0
  END)::INTEGER AS DIAS,
@@ -1186,9 +1213,9 @@ COALESCE((CASE WHEN '''||salpro||'''=''P'' THEN
                 	END)
 	AND FECFIN <= TO_DATE('''||fechareal||''',''DD/MM/YYYY''))
 ELSE A.MONDIA END) *
-(CASE WHEN (A.ANNOANTIG>=1 AND A.MESANTIG=6 AND A.DIAANTIG>0) OR
-           (A.ANNOANTIG>=1 AND A.MESANTIG>6) THEN
-     A.ANNOANTIG*2
+(CASE WHEN (A.ANNOANTIGTOT>=1 AND A.MESANTIGTOT=6 AND A.DIAANTIGTOT>0) OR
+           (A.ANNOANTIGTOT>=1 AND A.MESANTIGTOT>6) THEN
+     A.ANNOANTIGTOT*2
  ELSE
     0
  END),0)::NUMERIC  AS MONPRES,
@@ -1196,8 +1223,8 @@ ELSE A.MONDIA END) *
 A.ID+2::INTEGER AS ID,''AJUSTE DIAS ADICIONALES NO DEPOSITADOS''::VARCHAR AS TIPO,
 0::NUMERIC AS CAPITAL,0::NUMERIC AS CAPITALACT,
 0::NUMERIC AS TASA,0::NUMERIC AS MONINT,0::NUMERIC AS INTACU,
-0::NUMERIC AS MONADEINT,A.ANNOANTIG::NUMERIC AS ANTANNOS,
-A.MESANTIG::NUMERIC AS ANTMESES,A.DIAANTIG::NUMERIC AS ANTDIAS
+0::NUMERIC AS MONADEINT,A.ANNOANTIGTOT::NUMERIC AS ANTANNOS,
+A.MESANTIGTOT::NUMERIC AS ANTMESES,A.DIAANTIGTOT::NUMERIC AS ANTDIAS
 FROM NPPRESTACIONES A
 where A.CODEMP='''||codigo||'''
 AND A.ID = (SELECT MAX(ID) FROM NPPRESTACIONES
@@ -1221,93 +1248,99 @@ AND A.FECFIN > TO_DATE('''||fechareal||''',''DD/MM/YYYY'')
 order by FECINI,ID'
 
 loop
-  --SELECT INTO tasa COALESCE(TASINTPRO,0)
-  --FROM NPINTFECREF
-  --WHERE FECINIREF<=recordSalida.fecini
-  --AND FECFINREF>=recordSalida.fecfin;
-
-  SELECT INTO tasa COALESCE((CASE WHEN B.TIPTAS='P' THEN A.TASINTPRO
-        			  WHEN B.TIPTAS='A' THEN A.TASINTACT
-        			  WHEN B.TIPTAS='S' THEN A.TASINTPAS END),0)
-  FROM NPINTFECREF A,NPINTCON B
-  WHERE A.FECINIREF<=recordSalida.fecini
-  AND A.FECFINREF>=recordSalida.fecfin
-  AND B.CODCON=recordSalida.codtipcon
-  AND B.FECDES<=recordSalida.fecini
-  AND B.FECHAS>=recordSalida.fecfin;
+  
+  IF recordSalida.tipo not like 'CORTE AL%' THEN
+  	SELECT INTO tasa COALESCE((CASE WHEN B.TIPTAS='P' THEN A.TASINTPRO
+        			  	WHEN B.TIPTAS='A' THEN A.TASINTACT
+        			  	WHEN B.TIPTAS='S' THEN A.TASINTPAS END),0)
+  	FROM NPINTFECREF A,NPINTCON B
+  	WHERE A.FECINIREF<=recordSalida.fecini
+  	AND A.FECFINREF>=recordSalida.fecfin
+  	AND B.CODCON=recordSalida.codtipcon
+  	AND B.FECDES<=recordSalida.fecini
+  	AND B.FECHAS>=recordSalida.fecfin;
 
   
-  SELECT INTO fideicomiso,fechafide fid,fecdes
-  FROM NPTIPCON
-  WHERE CODTIPCON=recordSalida.codtipcon; 
+  	SELECT INTO fideicomiso,fechafide fid,fecdes
+  	FROM NPTIPCON
+  	WHERE CODTIPCON=recordSalida.codtipcon; 
  
-  IF tasa IS NULL THEN
-     tasa:=0;
-  END IF;
+  
+	IF tasa IS NULL THEN
+	   tasa:=0;
+	END IF;
+	
+        IF fechafide IS NULL THEN
+	   fechafide:=now();
+	END IF;
 
-  IF fechafide IS NULL THEN
-     fechafide:=now();
-  END IF;
-
-  IF  capitalizacion='A' THEN
-     IF TO_CHAR(recordSalida.fecing,'MM')=TO_CHAR(recordSalida.fecfin,'MM')
-        AND recordSalida.antannos>=1 THEN 
-        capital:=capital+recordSalida.monpres-recordSalida.monant+interesacum;
-        IF fideicomiso='0' OR fideicomiso='N' THEN
-           capitalint:=capitalint+recordSalida.monpres-recordSalida.monant+interesacum; 
-        ELSE
-           IF recordSalida.fecfin<fechafide THEN
-              capitalint:=capitalint+recordSalida.monpres-recordSalida.monant+interesacum;  
-           ELSE
-              capitalint:=capitalint+interesacum;  
-           END IF;
-        END IF;        
-        interesacum:=0;
-     ELSE
-        capital:=capital+recordSalida.monpres-recordSalida.monant;
-        IF fideicomiso='0' OR fideicomiso='N' THEN
-           capitalint:=capitalint+recordSalida.monpres-recordSalida.monant; 
-        ELSE
-           IF recordSalida.fecfin<fechafide THEN
-              capitalint:=capitalint+recordSalida.monpres-recordSalida.monant;    
-           END IF;
-        END IF; 
-     END IF;
+	  IF  capitalizacion='A' THEN
+	     IF TO_CHAR(recordSalida.fecing,'MM')=TO_CHAR(recordSalida.fecfin,'MM')
+		AND recordSalida.antannos>=1 THEN 
+		capital:=capital+recordSalida.monpres-recordSalida.monant+interesacum;
+		IF fideicomiso='0' OR fideicomiso='N' THEN
+		   capitalint:=capitalint+recordSalida.monpres-recordSalida.monant+interesacum; 
+		ELSE
+		   IF recordSalida.fecfin<fechafide THEN
+		      capitalint:=capitalint+recordSalida.monpres-recordSalida.monant+interesacum;  
+		   ELSE
+		      capitalint:=capitalint+interesacum;  
+		   END IF;
+		END IF;        
+		interesacum:=0;
+	     ELSE
+		capital:=capital+recordSalida.monpres-recordSalida.monant;
+		IF fideicomiso='0' OR fideicomiso='N' THEN
+		   capitalint:=capitalint+recordSalida.monpres-recordSalida.monant; 
+		ELSE
+		   IF recordSalida.fecfin<fechafide THEN
+		      capitalint:=capitalint+recordSalida.monpres-recordSalida.monant;    
+		   END IF;
+		END IF; 
+	     END IF;
+	  ELSE
+	     IF capitalizacion='M' THEN
+		capital:=capital+recordSalida.monpres-recordSalida.monant+interesacum;
+		IF fideicomiso='0' OR fideicomiso='N' THEN
+		   capitalint:=capitalint+recordSalida.monpres-recordSalida.monant+interesacum; 
+		ELSE
+		   IF recordSalida.fecfin<fechafide THEN
+		      capitalint:=capitalint+recordSalida.monpres-recordSalida.monant+interesacum;  
+		   ELSE
+		      capitalint:=capitalint+interesacum;  
+		   END IF;
+		END IF; 
+		interesacum:=0;
+	     ELSE
+		capital:=capital+recordSalida.monpres-recordSalida.monant;
+		IF fideicomiso='0' OR fideicomiso='N' THEN
+		   capitalint:=capitalint+recordSalida.monpres-recordSalida.monant; 
+		ELSE
+		   IF recordSalida.fecfin<fechafide THEN
+		      capitalint:=capitalint+recordSalida.monpres-recordSalida.monant;    
+		   END IF;
+		END IF; 
+	     END IF;
+	  END IF;
+  	recordSalida.capital:=capital-recordSalida.monpres+recordSalida.monant;
+  	IF fideicomiso='0' OR fideicomiso='N' THEN
+     		capitalactint:=capitalint-recordSalida.monpres+recordSalida.monant; 
+  	ELSE
+     		IF recordSalida.fecfin<fechafide THEN
+        		capitalactint:=capitalint-recordSalida.monpres+recordSalida.monant;    
+     		ELSE 
+        		capitalactint:=capitalint;
+     		END IF;
+  	END IF;
+  
+     
+  	recordSalida.tasa:=tasa;
   ELSE
-     IF capitalizacion='M' THEN
-        capital:=capital+recordSalida.monpres-recordSalida.monant+interesacum;
-        IF fideicomiso='0' OR fideicomiso='N' THEN
-           capitalint:=capitalint+recordSalida.monpres-recordSalida.monant+interesacum; 
-        ELSE
-           IF recordSalida.fecfin<fechafide THEN
-              capitalint:=capitalint+recordSalida.monpres-recordSalida.monant+interesacum;  
-           ELSE
-              capitalint:=capitalint+interesacum;  
-           END IF;
-        END IF; 
-        interesacum:=0;
-     ELSE
-        capital:=capital+recordSalida.monpres-recordSalida.monant;
-        IF fideicomiso='0' OR fideicomiso='N' THEN
-           capitalint:=capitalint+recordSalida.monpres-recordSalida.monant; 
-        ELSE
-           IF recordSalida.fecfin<fechafide THEN
-              capitalint:=capitalint+recordSalida.monpres-recordSalida.monant;    
-           END IF;
-        END IF; 
-     END IF;
+        recordSalida.tasa:=0;     
+        capital:=recordSalida.capitalact;
+        capitalint:=capital;        
+        capitalactint:=capitalint; 
   END IF;
-  recordSalida.capital:=capital-recordSalida.monpres+recordSalida.monant;
-  IF fideicomiso='0' OR fideicomiso='N' THEN
-     capitalactint:=capitalint-recordSalida.monpres+recordSalida.monant; 
-  ELSE
-     IF recordSalida.fecfin<fechafide THEN
-        capitalactint:=capitalint-recordSalida.monpres+recordSalida.monant;    
-     ELSE 
-        capitalactint:=capitalint;
-     END IF;
-  END IF;
-  recordSalida.tasa:=tasa;
   IF recordSalida.tipo='DEPOSITADOS' THEN
      recordSalida.monint:=round((capitalactint* (tasa/100) / 12 /30 * 30),2);
   ELSE
@@ -1325,6 +1358,7 @@ return;
 END;
 $body$
 LANGUAGE 'plpgsql' VOLATILE CALLED ON NULL INPUT SECURITY INVOKER;
+
 
 
 CREATE OR REPLACE FUNCTION months_between(date, date)
