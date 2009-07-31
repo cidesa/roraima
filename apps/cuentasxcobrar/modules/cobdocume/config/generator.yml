@@ -11,7 +11,7 @@ generator:
       fecemi: { name: Fecha Emisión, params:  size=10 maxlength=10 onkeyup= "mascara(this,'/',patron,true)" }
       fecven: { name: Feha de Vencimiento, params: size=10 maxlength=10 onkeyup= "mascara(this,'/',patron,true)"}
       fatipmov_id: { name: Tipo de Movimiento }
-      desdoc: { name: Descripción, type: textarea_tag, params: size=80x5 maxlength=1000 onkeyup="ismaxlength(this)"}
+      desdoc: { name: Descripción, type: textarea_tag, params: size=80x5 maxlength=3000 onkeyup="ismaxlength(this)"}
       mondoc: { name: Saldo Original, params: onBlur="event.keyCode=13; formatoDecimal(event,this.id); toAjax(2,getUrlModulo()+'ajax',this.value,'','&codcli='+$('cobdocume_codcli').value+'')" }
       recdoc: { name: Recargos, params:  readonly=true }
       dscdoc: { name: Descuentos, params:  readonly=true }
