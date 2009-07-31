@@ -190,7 +190,7 @@ class cobdocumeActions extends autocobdocumeActions
             $output = '[["","",""],["","",""],["","",""]]';
             $reccalformat=0;
             $colmonrec = $this->getRequestParameter('monrec','');
-            $saldodocumento = $this->getRequestParameter('mondoc',0);
+            $saldodocumento = H::FormatoNum($this->getRequestParameter('mondoc',0));
 	        $montorgotab=CarecargPeer::getDato($this->getRequestParameter('codigo'),'monrgo');
 	        $monrgo=number_format($montorgotab,2,',','.');
 	        $tiprgo=CarecargPeer::getDato($codigo,'tiprgo');
