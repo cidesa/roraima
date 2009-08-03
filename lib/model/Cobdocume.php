@@ -44,6 +44,7 @@ class Cobdocume extends BaseCobdocume
 
 	public function getFatipmovdeb()
 	{
+		$resp=array();
 		$c=new Criteria();
 		$c->add(FatipmovPeer::DEBCRE,"D");
         $datos= FatipmovPeer::doSelect($c);
