@@ -2710,6 +2710,9 @@ $this->c= new Criteria();
     $this->c->addSelectColumn("'' as REQCOM");
     $this->c->addSelectColumn("'' as TIPFIN");
     $this->c->addSelectColumn("'' as TIPREQ");
+    $this->c->addSelectColumn("'' as APRREQ");
+    $this->c->addSelectColumn("'' as USUAPR");
+    $this->c->addSelectColumn("'1937-01-01' as FECAPR");
     $this->c->addSelectColumn("'' as ID");
 
     $this->c->addJoin(CasolartPeer :: REQART, CaartsolPeer :: REQART);
@@ -2758,7 +2761,7 @@ $this->c= new Criteria();
     $this->c->addSelectColumn("'' as TIPREQ");
     $this->c->addSelectColumn("'' as APRREQ");
     $this->c->addSelectColumn("'' as USUAPR");
-    $this->c->addSelectColumn("'' as FECAPR");
+    $this->c->addSelectColumn("'1937-01-01' as FECAPR");
     $this->c->addSelectColumn("'' as ID");
 
     $this->c->addJoin(CasolartPeer :: REQART, CaartsolPeer :: REQART);
