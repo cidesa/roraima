@@ -375,12 +375,26 @@ class cobtransaActions extends autocobtransaActions
         return false;
       }
 
-       if (self::validarGeneraComprobante())
-      {
-	    $this->coderr=508;
-	    return false;
-	  }
+	$varemp = $this->getUser()->getAttribute('configemp');
+  	$this->gencom = 'S';
+  	if(is_array($varemp))
+	if(array_key_exists('aplicacion',$varemp))
+		if(array_key_exists('cuentasxcobrar',$varemp['aplicacion']))
+			if(array_key_exists('modulos',$varemp['aplicacion']['cuentasxcobrar']))
+				if(array_key_exists('cobtransa',$varemp['aplicacion']['cuentasxcobrar']['modulos']))
+				{
 
+					if(array_key_exists('gencom',$varemp['aplicacion']['cuentasxcobrar']['modulos']['cobtransa']))
+ 						$this->gencom = $varemp['aplicacion']['cuentasxcobrar']['modulos']['cobtransa']['gencom'];
+				}
+
+     if ($this->gencom=="S"){
+	      if (self::validarGeneraComprobante())
+	      {
+		    $this->coderr=508;
+		    return false;
+		  }
+     }
       $x=$gridfor[0];
       $i=0;
       if (count($x)==0)
