@@ -55,8 +55,8 @@ Validator_desdoc:
     param:
         min:       2
         min_error: La descripción no puede tener menos de 2 caracteres
-        max:       250
-        min_error: La descripción no puede tener mas de 250 caracteres
+        max:       3000
+        min_error: La descripción no puede tener mas de 3000 caracteres
 
 FechaValidator:
     class: sfRegexValidator
