@@ -2757,8 +2757,8 @@ $this->c= new Criteria();
     $this->c->addSelectColumn("'' as TIPFIN");
     $this->c->addSelectColumn("'' as TIPREQ");
     $this->c->addSelectColumn("'' as APRREQ");
-    $this->c->addSelectColumn("'' as USUREQ");
-    $this->c->addSelectColumn("'' as FECREQ");
+    $this->c->addSelectColumn("'' as USUAPR");
+    $this->c->addSelectColumn("'' as FECAPR");
     $this->c->addSelectColumn("'' as ID");
 
     $this->c->addJoin(CasolartPeer :: REQART, CaartsolPeer :: REQART);
