@@ -49,6 +49,7 @@ class tesmovseglibActions extends autotesmovseglibActions
           $saldo=0;
           if(!Tesoreria::chequear_disponibilidad_financiera($this->tsmovlib->getNumcue(),$this->tsmovlib->getMonmov(),$contaba->getFecini(),$this->tsmovlib->getFeclib(),$saldo)){
             $this->coderror5 = 195;
+            return false;
           }
         }
       }
@@ -158,7 +159,7 @@ class tesmovseglibActions extends autotesmovseglibActions
           $i++;
         }
 
-        $this->getUser()->getAttributeHolder()->remove('grabo',$formulario[0]);
+        $this->getUser()->getAttributeHolder()->remove('grabo',$this->getUser()->getAttribute('formulario'));
         Tesoreria::salvarTesmovseglib($tsmovlib,$numcom);
         Tesoreria::actualiza_Bancos('A', $tsmovlib->getDebcre(), $tsmovlib->getNumcue(), $tsmovlib->getMonmov());
 
