@@ -60,6 +60,8 @@ class BndisinmMapBuilder {
 
 		$tMap->addColumn('STADISINM', 'Stadisinm', 'string', CreoleTypes::VARCHAR, false, 1);
 
+		$tMap->addColumn('VIDUTIL', 'Vidutil', 'double', CreoleTypes::NUMERIC, false, 4);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

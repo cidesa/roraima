@@ -61,6 +61,10 @@ abstract class BaseBndisinm extends BaseObject  implements Persistent {
 
 
 	
+	protected $vidutil;
+
+
+	
 	protected $id;
 
 	
@@ -189,6 +193,14 @@ abstract class BaseBndisinm extends BaseObject  implements Persistent {
   {
 
     return trim($this->stadisinm);
+
+  }
+  
+  public function getVidutil($val=false)
+  {
+
+    if($val) return number_format($this->vidutil,2,',','.');
+    else return $this->vidutil;
 
   }
   
@@ -343,6 +355,16 @@ abstract class BaseBndisinm extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setVidutil($v)
+	{
+
+    if ($this->vidutil !== $v) {
+        $this->vidutil = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = BndisinmPeer::VIDUTIL;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -383,7 +405,9 @@ abstract class BaseBndisinm extends BaseObject  implements Persistent {
 
       $this->stadisinm = $rs->getString($startcol + 12);
 
-      $this->id = $rs->getInt($startcol + 13);
+      $this->vidutil = $rs->getFloat($startcol + 13);
+
+      $this->id = $rs->getInt($startcol + 14);
 
       $this->resetModified();
 
@@ -391,7 +415,7 @@ abstract class BaseBndisinm extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 14; 
+            return $startcol + 15; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Bndisinm object", $e);
     }
@@ -578,6 +602,9 @@ abstract class BaseBndisinm extends BaseObject  implements Persistent {
 				return $this->getStadisinm();
 				break;
 			case 13:
+				return $this->getVidutil();
+				break;
+			case 14:
 				return $this->getId();
 				break;
 			default:
@@ -603,7 +630,8 @@ abstract class BaseBndisinm extends BaseObject  implements Persistent {
 			$keys[10] => $this->getCodubides(),
 			$keys[11] => $this->getObsdisinm(),
 			$keys[12] => $this->getStadisinm(),
-			$keys[13] => $this->getId(),
+			$keys[13] => $this->getVidutil(),
+			$keys[14] => $this->getId(),
 		);
 		return $result;
 	}
@@ -659,6 +687,9 @@ abstract class BaseBndisinm extends BaseObject  implements Persistent {
 				$this->setStadisinm($value);
 				break;
 			case 13:
+				$this->setVidutil($value);
+				break;
+			case 14:
 				$this->setId($value);
 				break;
 		} 	}
@@ -681,7 +712,8 @@ abstract class BaseBndisinm extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[10], $arr)) $this->setCodubides($arr[$keys[10]]);
 		if (array_key_exists($keys[11], $arr)) $this->setObsdisinm($arr[$keys[11]]);
 		if (array_key_exists($keys[12], $arr)) $this->setStadisinm($arr[$keys[12]]);
-		if (array_key_exists($keys[13], $arr)) $this->setId($arr[$keys[13]]);
+		if (array_key_exists($keys[13], $arr)) $this->setVidutil($arr[$keys[13]]);
+		if (array_key_exists($keys[14], $arr)) $this->setId($arr[$keys[14]]);
 	}
 
 	
@@ -702,6 +734,7 @@ abstract class BaseBndisinm extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(BndisinmPeer::CODUBIDES)) $criteria->add(BndisinmPeer::CODUBIDES, $this->codubides);
 		if ($this->isColumnModified(BndisinmPeer::OBSDISINM)) $criteria->add(BndisinmPeer::OBSDISINM, $this->obsdisinm);
 		if ($this->isColumnModified(BndisinmPeer::STADISINM)) $criteria->add(BndisinmPeer::STADISINM, $this->stadisinm);
+		if ($this->isColumnModified(BndisinmPeer::VIDUTIL)) $criteria->add(BndisinmPeer::VIDUTIL, $this->vidutil);
 		if ($this->isColumnModified(BndisinmPeer::ID)) $criteria->add(BndisinmPeer::ID, $this->id);
 
 		return $criteria;
@@ -758,6 +791,8 @@ abstract class BaseBndisinm extends BaseObject  implements Persistent {
 		$copyObj->setObsdisinm($this->obsdisinm);
 
 		$copyObj->setStadisinm($this->stadisinm);
+
+		$copyObj->setVidutil($this->vidutil);
 
 
 		$copyObj->setNew(true);
