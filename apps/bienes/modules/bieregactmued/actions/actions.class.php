@@ -12,6 +12,7 @@ class bieregactmuedActions extends autobieregactmuedActions
 {
 
   private static $coderror=-1;
+ // public static $incorporacion="1";
 
   public function executeAjax()
   {
@@ -45,7 +46,7 @@ class bieregactmuedActions extends autobieregactmuedActions
       $cajtexmos_dos=$this->getRequestParameter('cajtexmos_dos');
       $cajtexmos_tres=$this->getRequestParameter('cajtexmos_tres');
       $result=array();
-      $sql="Select a.ordcom as orden,a.codpro as proveedor, to_char(a.fecord,'dd/mm/yyyy') as fecha, b.nompro as nompro from caordcom a, caprovee b  where a.codpro=b.codpro and a.ordcom='".$this->getRequestParameter('codigo')."' order By ordcom";
+      $sql="Select a.ordcom as orden,a.codpro as proveedor, to_char(a.fecord,'dd/mm/yyyy') as fecha, b.nompro as nompro from caordcom a, caprovee b  where b.estpro='A' and a.codpro=b.codpro and a.ordcom='".$this->getRequestParameter('codigo')."' order By ordcom";
     if (Herramientas::BuscarDatos($sql,&$result))
     {
       $dato=$result[0]['orden'];
@@ -109,6 +110,22 @@ class bieregactmuedActions extends autobieregactmuedActions
      $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
      return sfView::HEADER_ONLY;
    }
+   elseif ($this->getRequestParameter('ajax')=='6')
+   {
+   	$id = $this->getRequestParameter('id');
+   	$output = '[["","",""],["",""]]';
+
+    if ($id!="")
+    {
+       $codigo = Bienes::GrabarMovimiento($id);
+       $javascript="alert('$codigo' );";
+	   $output = '[["javascript","'.$javascript.'",""]]';
+    }
+
+     $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+     return sfView::HEADER_ONLY;
+   }
+
   }
 
 
@@ -508,12 +525,43 @@ class bieregactmuedActions extends autobieregactmuedActions
     $this->lonubi= Herramientas::ObtenerFormato('Bndefins','lonubi');
     $this->foract = Herramientas::ObtenerFormato('Bndefins','foract');
     $this->lonact=Herramientas::ObtenerFormato('Bndefins','lonact');
+    $this->incorporacion='';
 
   }
 
   public function executeEdit()
   {
-    parent::executeEdit();
+    $this->bnregmue = $this->getBnregmueOrCreate();
+    $this->incorporacion = $this->getRequestParameter('incorporacion');
+
+    if ($this->getRequest()->getMethod() == sfRequest::POST)
+    {
+      $this->updateBnregmueFromRequest();
+
+      $this->saveBnregmue($this->bnregmue);
+
+      $this->setFlash('notice', 'Your modifications have been saved');
+
+    $this->Bitacora('Guardo');
+
+      if ($this->getRequestParameter('save_and_add'))
+      {
+        return $this->redirect('bieregactmued/create');
+      }
+      else if ($this->getRequestParameter('save_and_list'))
+      {
+        return $this->redirect('bieregactmued/list');
+      }
+      else
+      {
+        return $this->redirect('bieregactmued/edit?id='.$this->bnregmue->getId().'&incorporacion='.$this->incorporacion);
+
+      }
+    }
+    else
+    {
+      $this->labels = $this->getLabels();
+    }
   }
 
   protected function getBnregmueOrCreate($id = 'id')
@@ -579,4 +627,14 @@ class bieregactmuedActions extends autobieregactmuedActions
     }
 
 
+  protected function saveBnregmue($bnregmue)
+  {
+  	if ($bnregmue->getId()=='')
+  	{
+  		$this->incorporacion="S";
+  	}
+
+  	return Bienes::salvarSaveBnregmue($bnregmue);
+
+  }
 }

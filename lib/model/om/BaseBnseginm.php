@@ -426,6 +426,7 @@ abstract class BaseBnseginm extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = BnseginmPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += BnseginmPeer::doUpdate($this, $con);

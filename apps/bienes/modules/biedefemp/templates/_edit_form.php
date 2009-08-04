@@ -14,8 +14,11 @@
 <?php echo javascript_include_tag('dFilter') ?>
 <?php echo javascript_include_tag('ajax') ?>
 <?php echo javascript_include_tag('tools','observe') ?>
-
 <?php echo object_input_hidden_tag($bndefins, 'getId') ?>
+
+
+<?php tabMainJS("tp1","tabPane1", "tabPage1", 'Definicion General ');?>
+
 <fieldset id="sf_fieldset_none" class="">
 <div class="form-row">
 <fieldset id="sf_fieldset_none" class="">
@@ -368,6 +371,28 @@
 </fieldset>
 
 </fieldset>
+
+<?php tabPageOpenClose("tp1", "tabPage2", 'Correlativo');?>
+<fieldset id="sf_fieldset_none" class="">
+<div class="form-row">
+
+  <?php echo label_for('bndefins[corrmue]', __($labels['bndefins{corrmue}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('bndefins{corrmue}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('bndefins{corrmue}')): ?>
+    <?php echo form_error('bndefins{corrmue}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($bndefins,array('getCorrmue',true), array (
+  'size' => 8,
+  'maxlength'=>8,
+  'control_name' => 'bndefins[corrmue]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+
+</div>
+</fieldset>
+<?php tabInit('tp1','0');?>
+
 <?php include_partial('edit_actions', array('bndefins' => $bndefins, 'new' => $new)) ?>
 </form>
 

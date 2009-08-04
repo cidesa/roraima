@@ -11,13 +11,14 @@
 <?php echo javascript_include_tag('dFilter','bienes/bieregactmued','ajax','tools','observe') ?>
 <?php echo object_input_hidden_tag($bnregmue, 'getId') ?>
 <?php echo object_input_hidden_tag($bnregmue, 'getStamue') ?>
+<?php echo input_hidden_tag('incorporacion', $incorporacion) ?>
+
 <?php tabMainJS("tp1","tabPane1", "tabPage1", 'Registro ');?>
 <a name="registro"></a>
 <fieldset>
-<legend><? echo __('Registro') ?></legend>
 <div class="form-row">
 <fieldset id="sf_fieldset_none" class="">
-<legend><? echo __('Datos Principales') ?></legend>
+<h2><? echo __('Datos Principales') ?></h2>
 <div class="form-row">
   <?php echo label_for('bnregmue[codact]', __($labels['bnregmue{codact}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('bnregmue{codact}')): ?> form-error<?php endif; ?>">
@@ -173,7 +174,7 @@
 
 <div class="form-row">
 <fieldset id="sf_fieldset_none" class="">
-<legend><? echo __('Ubicación') ?></legend>
+<h2><? echo __('Ubicación') ?></h2>
 <div class="form-row">
   <?php echo label_for('bnregmue[codubi]', __($labels['bnregmue{codubi}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('bnregmue{codubi}')): ?> form-error<?php endif; ?>">
@@ -182,7 +183,7 @@
   <?php endif; ?>
 
   <?php $value = object_input_tag($bnregmue, 'getCodubi', array (
-  'size' => 14,
+  'size' => 3,
   'control_name' => 'bnregmue[codubi]',
   'maxlength' => $lonubi,
   'onKeyPress' => "javascript:return dFilter (event.keyCode, this,'$forubi')",
@@ -206,7 +207,7 @@
 
 <div class="form-row">
 <fieldset id="sf_fieldset_none" class="">
-<legend><? echo __('Vida Util (Meses)')?> </legend>
+<h2><? echo __('Vida Util (Meses)')?> </h2>
 <div class="form-row">
 &nbsp;
 <strong><? echo __('Original')?></strong>
@@ -242,7 +243,7 @@
 </div>
 <div class="form-row">
 <fieldset id="sf_fieldset_none" class="">
-<legend><? echo __('Responsables')?> </legend>
+<h2><? echo __('Responsables')?> </h2>
 <div class="form-row">
   <?php echo label_for('bnregmue[codrespat]', __($labels['bnregmue{codrespat}']), 'class="required" Style="width:200px"') ?>
    <div class="contentform-error">
@@ -251,6 +252,7 @@
   'getsecundario' => 'getNomrespat',
   'campoprincipal' => 'codrespat',
   'camposecundario' => 'nomrespat',
+  'tamanoprincipal' => '10',
   'campobase' => 'id_codrespat',
   ), 'Nphojint_Almdespser', 'Nphojint', ''); ?>
   </div>
@@ -261,6 +263,7 @@
   'getsecundario' => 'getNomresuso',
   'campoprincipal' => 'codresuso',
   'camposecundario' => 'nomresuso',
+  'tamanoprincipal' => '10',
   'campobase' => 'id_codresuso',
   ), 'Nphojint_Almdespser', 'Nphojint', ''); ?>
 </div>
@@ -269,14 +272,10 @@
 </fieldset>
 </fieldset>
 <?php tabPageOpenClose("tp1", "tabPage2", 'Caracteristicas del Mueble');?>
-<fieldset><legend><strong><? echo __('Condición de Pago')?></strong></legend>
-
 <a name="caracteristicas"></a>
 <fieldset>
-<legend><? echo __('Características Mueble') ?></legend>
-<div class="form-row">
-<fieldset id="sf_fieldset_none" class="">
-<legend><? echo __('Datos Generales') ?></legend>
+
+<h2><? echo __('Datos Generales') ?></h2>
 <div class="form-row">
 
 <?php echo label_for('bnregmue[marmue]', __($labels['bnregmue{marmue}']), 'class="required" ') ?>
@@ -502,8 +501,9 @@
          </div>
         </div>
     </fieldset>
-</div>
-<div class="form-row">
+
+<br>
+
   <?php echo label_for('bnregmue[detmue]','Observaciones', 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('bnregmue{detmue}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('bnregmue{detmue}')): ?>
@@ -516,16 +516,15 @@
     </div>
 </div>
 
+
 </fieldset>
-</fieldset>
-<?php tabPageOpenClose("tp1", "tabPage2", 'Costo');?>
-<fieldset><legend><strong><? echo __('Condición de Pago')?></strong></legend>
+
+<?php tabPageOpenClose("tp1", "tabPage3", 'Costo');?>
 <a name="costo"></a>
+
+
 <fieldset>
-<legend><? echo __('Costo') ?></legend>
-<div class="form-row">
-<fieldset>
-<legend><? echo __('Costo Historico') ?></legend>
+<h2><? echo __('Costo Historico') ?></h2>
 
 <div class="form-row">
 <table>
@@ -710,8 +709,6 @@
 </tr></table>
 
 
-</fieldset>
-</fieldset>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
@@ -757,5 +754,17 @@ function enter(e,valor)
      $('bnregmue_codmue').value=valor;
    }
  }
+
+var incorporacion='<?php echo $incorporacion;  ?>';
+var  id='<? echo $bnregmue->getId();?>';
+if ((incorporacion=='S'))
+{
+    if(confirm("¿Desea Incorporar este Mueble?"))
+    {
+
+      new Ajax.Request('/bienes_dev.php/bieregactmued/ajax', {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=6&id='+id})
+//new Ajax.Request('/bienes_dev.php/bieregactmued/ajax', {asynchronous:true, evalScripts:true, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=6&id='+id})s
+    }
+}
 
   </script>

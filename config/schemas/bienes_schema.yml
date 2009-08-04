@@ -246,9 +246,15 @@ propel:
     coddes:
       type: VARCHAR
       size: 2
+    codinc:
+      type: VARCHAR
+      size: 2
     porrev:
       type: VARCHAR
       size: 5
+    corrmue:
+      type: INTEGER
+      size: 8
     id:
       type: INTEGER
       required: true
@@ -449,6 +455,9 @@ propel:
     stadisinm:
       type: VARCHAR
       size: 1
+    vidutil:
+      type: NUMERIC
+      size: 4
     id:
       type: INTEGER
       required: true
@@ -1125,7 +1134,7 @@ propel:
       type: INTEGER
       required: true
       autoIncrement: true
-  bnrevact:
+  bnseginm:
     #_attributes:
       #idMethod: native
     codact:
