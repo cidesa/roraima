@@ -647,11 +647,12 @@ class Bienes
 			  	$c->add(BndisbiePeer::CODDIS,$per->getCodinc());
 			  	$per2 = BndisbiePeer::doselectone($c);
 				if ($per2){
-					$tipoinc = $per->getCodinc().'-'.$per2->getDesdis();
+					$tipoinc = $per->getCodinc().' - '.$per2->getDesdis();
 				}
 
+
 				if (H::getVerCorrelativo('corrmue','bndefins',&$output)){
-			        $ref = str_pad($output, 8, '0', STR_PAD_LEFT);
+			        $ref = str_pad($output, 10, '0', STR_PAD_LEFT);
 	          		if (H::getSalvarCorrelativo('corrmue','bndefins','Registo de Disposicion de Bienes',$output,&$msg)){
 						$c = new Bndismue();
 						$c->setCodact($clase->getCodact());
@@ -659,11 +660,11 @@ class Bienes
 						$c->setNrodismue($ref);
 						$c->setTipdismue($tipoinc);
 						$c->setFecdismue($clase->getFeccom());
-						$c->setMotdismue($clase->getValini());
+						$c->setMotdismue(Herramientas::getX('coddis','Bndisbie','desdis',$clase->getCoddis()));
 						$c->setCodubiori($clase->getCodubi());
+						$c->setMondismue($clase->getValini());
 						$c->setStadismue('A');
 						$c->save();
-
 						return 'Se Genero una Incorporacion con el numero '.$ref;
 	          		}else{ //echo $msg;
 	          		}

@@ -13,7 +13,7 @@ abstract class BaseBndisinmPeer {
 	const CLASS_DEFAULT = 'lib.model.Bndisinm';
 
 	
-	const NUM_COLUMNS = 14;
+	const NUM_COLUMNS = 15;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -59,6 +59,9 @@ abstract class BaseBndisinmPeer {
 	const STADISINM = 'bndisinm.STADISINM';
 
 	
+	const VIDUTIL = 'bndisinm.VIDUTIL';
+
+	
 	const ID = 'bndisinm.ID';
 
 	
@@ -67,18 +70,18 @@ abstract class BaseBndisinmPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codact', 'Codmue', 'Nrodisinm', 'Motdisinm', 'Tipdisinm', 'Fecdisinm', 'Fecdevdis', 'Mondisinm', 'Detdisinm', 'Codubiori', 'Codubides', 'Obsdisinm', 'Stadisinm', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (BndisinmPeer::CODACT, BndisinmPeer::CODMUE, BndisinmPeer::NRODISINM, BndisinmPeer::MOTDISINM, BndisinmPeer::TIPDISINM, BndisinmPeer::FECDISINM, BndisinmPeer::FECDEVDIS, BndisinmPeer::MONDISINM, BndisinmPeer::DETDISINM, BndisinmPeer::CODUBIORI, BndisinmPeer::CODUBIDES, BndisinmPeer::OBSDISINM, BndisinmPeer::STADISINM, BndisinmPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codact', 'codmue', 'nrodisinm', 'motdisinm', 'tipdisinm', 'fecdisinm', 'fecdevdis', 'mondisinm', 'detdisinm', 'codubiori', 'codubides', 'obsdisinm', 'stadisinm', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, )
+		BasePeer::TYPE_PHPNAME => array ('Codact', 'Codmue', 'Nrodisinm', 'Motdisinm', 'Tipdisinm', 'Fecdisinm', 'Fecdevdis', 'Mondisinm', 'Detdisinm', 'Codubiori', 'Codubides', 'Obsdisinm', 'Stadisinm', 'Vidutil', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (BndisinmPeer::CODACT, BndisinmPeer::CODMUE, BndisinmPeer::NRODISINM, BndisinmPeer::MOTDISINM, BndisinmPeer::TIPDISINM, BndisinmPeer::FECDISINM, BndisinmPeer::FECDEVDIS, BndisinmPeer::MONDISINM, BndisinmPeer::DETDISINM, BndisinmPeer::CODUBIORI, BndisinmPeer::CODUBIDES, BndisinmPeer::OBSDISINM, BndisinmPeer::STADISINM, BndisinmPeer::VIDUTIL, BndisinmPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codact', 'codmue', 'nrodisinm', 'motdisinm', 'tipdisinm', 'fecdisinm', 'fecdevdis', 'mondisinm', 'detdisinm', 'codubiori', 'codubides', 'obsdisinm', 'stadisinm', 'vidutil', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codact' => 0, 'Codmue' => 1, 'Nrodisinm' => 2, 'Motdisinm' => 3, 'Tipdisinm' => 4, 'Fecdisinm' => 5, 'Fecdevdis' => 6, 'Mondisinm' => 7, 'Detdisinm' => 8, 'Codubiori' => 9, 'Codubides' => 10, 'Obsdisinm' => 11, 'Stadisinm' => 12, 'Id' => 13, ),
-		BasePeer::TYPE_COLNAME => array (BndisinmPeer::CODACT => 0, BndisinmPeer::CODMUE => 1, BndisinmPeer::NRODISINM => 2, BndisinmPeer::MOTDISINM => 3, BndisinmPeer::TIPDISINM => 4, BndisinmPeer::FECDISINM => 5, BndisinmPeer::FECDEVDIS => 6, BndisinmPeer::MONDISINM => 7, BndisinmPeer::DETDISINM => 8, BndisinmPeer::CODUBIORI => 9, BndisinmPeer::CODUBIDES => 10, BndisinmPeer::OBSDISINM => 11, BndisinmPeer::STADISINM => 12, BndisinmPeer::ID => 13, ),
-		BasePeer::TYPE_FIELDNAME => array ('codact' => 0, 'codmue' => 1, 'nrodisinm' => 2, 'motdisinm' => 3, 'tipdisinm' => 4, 'fecdisinm' => 5, 'fecdevdis' => 6, 'mondisinm' => 7, 'detdisinm' => 8, 'codubiori' => 9, 'codubides' => 10, 'obsdisinm' => 11, 'stadisinm' => 12, 'id' => 13, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, )
+		BasePeer::TYPE_PHPNAME => array ('Codact' => 0, 'Codmue' => 1, 'Nrodisinm' => 2, 'Motdisinm' => 3, 'Tipdisinm' => 4, 'Fecdisinm' => 5, 'Fecdevdis' => 6, 'Mondisinm' => 7, 'Detdisinm' => 8, 'Codubiori' => 9, 'Codubides' => 10, 'Obsdisinm' => 11, 'Stadisinm' => 12, 'Vidutil' => 13, 'Id' => 14, ),
+		BasePeer::TYPE_COLNAME => array (BndisinmPeer::CODACT => 0, BndisinmPeer::CODMUE => 1, BndisinmPeer::NRODISINM => 2, BndisinmPeer::MOTDISINM => 3, BndisinmPeer::TIPDISINM => 4, BndisinmPeer::FECDISINM => 5, BndisinmPeer::FECDEVDIS => 6, BndisinmPeer::MONDISINM => 7, BndisinmPeer::DETDISINM => 8, BndisinmPeer::CODUBIORI => 9, BndisinmPeer::CODUBIDES => 10, BndisinmPeer::OBSDISINM => 11, BndisinmPeer::STADISINM => 12, BndisinmPeer::VIDUTIL => 13, BndisinmPeer::ID => 14, ),
+		BasePeer::TYPE_FIELDNAME => array ('codact' => 0, 'codmue' => 1, 'nrodisinm' => 2, 'motdisinm' => 3, 'tipdisinm' => 4, 'fecdisinm' => 5, 'fecdevdis' => 6, 'mondisinm' => 7, 'detdisinm' => 8, 'codubiori' => 9, 'codubides' => 10, 'obsdisinm' => 11, 'stadisinm' => 12, 'vidutil' => 13, 'id' => 14, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, )
 	);
 
 	
@@ -157,6 +160,8 @@ abstract class BaseBndisinmPeer {
 		$criteria->addSelectColumn(BndisinmPeer::OBSDISINM);
 
 		$criteria->addSelectColumn(BndisinmPeer::STADISINM);
+
+		$criteria->addSelectColumn(BndisinmPeer::VIDUTIL);
 
 		$criteria->addSelectColumn(BndisinmPeer::ID);
 
