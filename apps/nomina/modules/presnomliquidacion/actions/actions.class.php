@@ -613,11 +613,11 @@ public function configGrid($codemp="")
 				
 				/**ASIGNAMOS VALORES DE  FECHAS Y TIEMPO DE SERVICIO*/
 				$fechae=date('Y-m-d');
-					if(strtotime($rs[0]["fechaegreso"]))
-						$fechae = $rs[0]["fechaegreso"];
+					if(strtotime($rss[0]["fecret"]))
+						$fechae = $rss[0]["fecret"];
 				$fecing=date('d/m/Y',strtotime($rs[0]["fechaingreso"]));
 				$feccor=date('d/m/Y',strtotime($rs[0]["fechacorte"]));
-				$fecegr=date('d/m/Y',strtotime($rs[0]["fechaegreso"]));
+				$fecegr=date('d/m/Y',strtotime($rss[0]["fecret"]));
 				$anoact=$rs[0]["anoactual"];
 				$mesact=$rs[0]["mesactual"];
 				$diaact=$rs[0]["diasactual"];
