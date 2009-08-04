@@ -17,7 +17,7 @@ array()) ?></h1>
 
 <div id="sf_admin_content">
 <?php include_partial('bieregactmued/edit_messages', array('bnregmue' => $bnregmue, 'labels' => $labels)) ?>
-<?php include_partial('bieregactmued/edit_form', array('bnregmue' => $bnregmue, 'labels' => $labels, 'forubi' => $forubi, 'lonubi'=> $lonubi, 'foract' => $foract, 'lonact'=> $lonact)) ?>
+<?php include_partial('bieregactmued/edit_form', array('bnregmue' => $bnregmue, 'labels' => $labels, 'forubi' => $forubi, 'lonubi'=> $lonubi, 'foract' => $foract, 'lonact'=> $lonact, 'incorporacion'=> $incorporacion)) ?>
 </div>
 
 <div id="sf_admin_footer">

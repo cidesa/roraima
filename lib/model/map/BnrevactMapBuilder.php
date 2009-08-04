@@ -34,27 +34,15 @@ class BnrevactMapBuilder {
 
 		$tMap->setPrimaryKeyMethodInfo('bnrevact_SEQ');
 
-		$tMap->addColumn('CODACT', 'Codact', 'string', CreoleTypes::VARCHAR, true, 30);
+		$tMap->addColumn('FECREV', 'Fecrev', 'int', CreoleTypes::DATE, false, null);
 
-		$tMap->addColumn('CODMUE', 'Codmue', 'string', CreoleTypes::VARCHAR, true, 20);
+		$tMap->addColumn('MONMUEREV', 'Monmuerev', 'double', CreoleTypes::NUMERIC, false, 14);
 
-		$tMap->addColumn('NROSEGINM', 'Nroseginm', 'string', CreoleTypes::VARCHAR, true, 6);
+		$tMap->addColumn('MONINMREV', 'Moninmrev', 'double', CreoleTypes::NUMERIC, false, 14);
 
-		$tMap->addColumn('FECSEGINM', 'Fecseginm', 'int', CreoleTypes::DATE, false, null);
+		$tMap->addColumn('MONSEMREV', 'Monsemrev', 'double', CreoleTypes::NUMERIC, false, 14);
 
-		$tMap->addColumn('NOMSEGINM', 'Nomseginm', 'string', CreoleTypes::VARCHAR, false, 100);
-
-		$tMap->addColumn('COBSEGINM', 'Cobseginm', 'string', CreoleTypes::VARCHAR, false, 20);
-
-		$tMap->addColumn('MONSEGINM', 'Monseginm', 'double', CreoleTypes::NUMERIC, false, 14);
-
-		$tMap->addColumn('FECSEGVEN', 'Fecsegven', 'int', CreoleTypes::DATE, false, null);
-
-		$tMap->addColumn('PROSEGINM', 'Proseginm', 'string', CreoleTypes::VARCHAR, false, 100);
-
-		$tMap->addColumn('OBSSEGINM', 'Obsseginm', 'string', CreoleTypes::VARCHAR, false, 250);
-
-		$tMap->addColumn('STASEGINM', 'Staseginm', 'string', CreoleTypes::VARCHAR, false, 1);
+		$tMap->addColumn('MONIMNREV', 'Monimnrev', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 

@@ -14,7 +14,7 @@
   'name'      => 'sf_admin_edit_form',
   'multipart' => true,
 )) ?>
-<?php echo input_hidden_tag('depcalculada', '') ?>
+<?php echo input_hidden_tag('depcalculada', 'N') ?>
 <fieldset id="sf_fieldset_none" class="">
 <div class="form-row">
 <table width="75%" border="0">
@@ -40,19 +40,21 @@
 <fieldset id="sf_fieldset_none" class="">
 <div class="form-row">
 <?php echo label_for('fecha',__('Fecha de Revalorización') , 'class="required" Style="width:110px"') ?>
-<?php echo input_tag('fecha','', array(
- 'size' => 15,
+<?php echo input_date_tag('fecha','', array(
+ 'size' => 10,
+ 'maxlength' => 10,
  'rich' => true,
- 'readonly' => true,
+ 'calendar_button_img' => '/sf/sf_admin/images/date.png',
  'date_format' => 'dd/MM/yyyy',
  'onkeyup' => "javascript: mascara(this,'/',patron,true)",
+ 'onKeyPress' => "javascript:if (event.keyCode==13){return false;}",
  'onBlur'=> remote_function(array(
         'url'      => 'bieajuinf/ajax',
-        'complete' => 'AjaxJSON(request, json), validafec()',
+        'complete' => 'AjaxJSON(request, json)',
         'condition' => "$('fecha').value != ''",
         'with' => "'ajax=2&codigo='+this.value"
         ))
-),date('d/m/Y')) ?>
+),date('Y-m-d')) ?>
 </div>
 </fieldset>
 </div>
@@ -63,7 +65,7 @@
 <legend><?php echo __('API')?></legend>
 <div class="form-row">
   <div align=center>
-    <input type="button" src="/images/candado.png" name="Submit" value="Ajustar Activos" onclick="javascript:ajustar();" />
+  <button id="vela" name="Submit" type="button" onclick="javascript:ajustar();" ><img src="/images/candado.png"><?php echo __('Ajustar Activos') ?></button>
   </div>
 </div>
 </fieldset>

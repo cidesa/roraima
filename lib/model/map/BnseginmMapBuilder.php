@@ -30,7 +30,9 @@ class BnseginmMapBuilder {
 		$tMap = $this->dbMap->addTable('bnseginm');
 		$tMap->setPhpName('Bnseginm');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('bnseginm_SEQ');
 
 		$tMap->addColumn('CODACT', 'Codact', 'string', CreoleTypes::VARCHAR, true, 30);
 

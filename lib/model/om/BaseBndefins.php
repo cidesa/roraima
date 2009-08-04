@@ -89,6 +89,10 @@ abstract class BaseBndefins extends BaseObject  implements Persistent {
 
 
 	
+	protected $corrmue;
+
+
+	
 	protected $id;
 
 	
@@ -266,6 +270,13 @@ abstract class BaseBndefins extends BaseObject  implements Persistent {
   {
 
     return trim($this->porrev);
+
+  }
+  
+  public function getCorrmue()
+  {
+
+    return $this->corrmue;
 
   }
   
@@ -490,6 +501,16 @@ abstract class BaseBndefins extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setCorrmue($v)
+	{
+
+    if ($this->corrmue !== $v) {
+        $this->corrmue = $v;
+        $this->modifiedColumns[] = BndefinsPeer::CORRMUE;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -544,7 +565,9 @@ abstract class BaseBndefins extends BaseObject  implements Persistent {
 
       $this->porrev = $rs->getString($startcol + 19);
 
-      $this->id = $rs->getInt($startcol + 20);
+      $this->corrmue = $rs->getInt($startcol + 20);
+
+      $this->id = $rs->getInt($startcol + 21);
 
       $this->resetModified();
 
@@ -552,7 +575,7 @@ abstract class BaseBndefins extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 21; 
+            return $startcol + 22; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Bndefins object", $e);
     }
@@ -760,6 +783,9 @@ abstract class BaseBndefins extends BaseObject  implements Persistent {
 				return $this->getPorrev();
 				break;
 			case 20:
+				return $this->getCorrmue();
+				break;
+			case 21:
 				return $this->getId();
 				break;
 			default:
@@ -792,7 +818,8 @@ abstract class BaseBndefins extends BaseObject  implements Persistent {
 			$keys[17] => $this->getCoddes(),
 			$keys[18] => $this->getCodinc(),
 			$keys[19] => $this->getPorrev(),
-			$keys[20] => $this->getId(),
+			$keys[20] => $this->getCorrmue(),
+			$keys[21] => $this->getId(),
 		);
 		return $result;
 	}
@@ -869,6 +896,9 @@ abstract class BaseBndefins extends BaseObject  implements Persistent {
 				$this->setPorrev($value);
 				break;
 			case 20:
+				$this->setCorrmue($value);
+				break;
+			case 21:
 				$this->setId($value);
 				break;
 		} 	}
@@ -898,7 +928,8 @@ abstract class BaseBndefins extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[17], $arr)) $this->setCoddes($arr[$keys[17]]);
 		if (array_key_exists($keys[18], $arr)) $this->setCodinc($arr[$keys[18]]);
 		if (array_key_exists($keys[19], $arr)) $this->setPorrev($arr[$keys[19]]);
-		if (array_key_exists($keys[20], $arr)) $this->setId($arr[$keys[20]]);
+		if (array_key_exists($keys[20], $arr)) $this->setCorrmue($arr[$keys[20]]);
+		if (array_key_exists($keys[21], $arr)) $this->setId($arr[$keys[21]]);
 	}
 
 	
@@ -926,6 +957,7 @@ abstract class BaseBndefins extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(BndefinsPeer::CODDES)) $criteria->add(BndefinsPeer::CODDES, $this->coddes);
 		if ($this->isColumnModified(BndefinsPeer::CODINC)) $criteria->add(BndefinsPeer::CODINC, $this->codinc);
 		if ($this->isColumnModified(BndefinsPeer::PORREV)) $criteria->add(BndefinsPeer::PORREV, $this->porrev);
+		if ($this->isColumnModified(BndefinsPeer::CORRMUE)) $criteria->add(BndefinsPeer::CORRMUE, $this->corrmue);
 		if ($this->isColumnModified(BndefinsPeer::ID)) $criteria->add(BndefinsPeer::ID, $this->id);
 
 		return $criteria;
@@ -996,6 +1028,8 @@ abstract class BaseBndefins extends BaseObject  implements Persistent {
 		$copyObj->setCodinc($this->codinc);
 
 		$copyObj->setPorrev($this->porrev);
+
+		$copyObj->setCorrmue($this->corrmue);
 
 
 		$copyObj->setNew(true);
