@@ -318,8 +318,8 @@
   <?php endif; ?>
 
   <?php $value = object_input_tag($bndefins, 'getCodinc', array (
-  'size' => 3,
-  'maxlength'=>2,
+  'size' => 10,
+  'maxlength'=>10,
   'control_name' => 'bndefins[codinc]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
@@ -333,8 +333,8 @@
   <?php endif; ?>
 
   <?php $value = object_input_tag($bndefins, 'getCoddes', array (
-  'size' => 3,
-  'maxlength'=>2,
+  'size' => 10,
+  'maxlength'=>10,
   'control_name' => 'bndefins[coddes]',
 )); echo $value ? $value : '&nbsp;' ?>
 
