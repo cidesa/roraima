@@ -46,7 +46,7 @@ class bieregactmuedActions extends autobieregactmuedActions
       $cajtexmos_dos=$this->getRequestParameter('cajtexmos_dos');
       $cajtexmos_tres=$this->getRequestParameter('cajtexmos_tres');
       $result=array();
-      $sql="Select a.ordcom as orden,a.codpro as proveedor, to_char(a.fecord,'dd/mm/yyyy') as fecha, b.nompro as nompro from caordcom a, caprovee b  where b.estpro='A' and a.codpro=b.codpro and a.ordcom='".$this->getRequestParameter('codigo')."' order By ordcom";
+      $sql="Select a.ordcom as orden,a.codpro as proveedor, to_char(a.fecord,'dd/mm/yyyy') as fecha, b.nompro as nompro from caordcom a, caprovee b  where  a.codpro=b.codpro and a.ordcom='".$this->getRequestParameter('codigo')."' order By ordcom";
     if (Herramientas::BuscarDatos($sql,&$result))
     {
       $dato=$result[0]['orden'];

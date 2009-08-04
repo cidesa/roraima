@@ -183,7 +183,7 @@
   <?php endif; ?>
 
   <?php $value = object_input_tag($bnregmue, 'getCodubi', array (
-  'size' => 3,
+  'size' => $lonubi,
   'control_name' => 'bnregmue[codubi]',
   'maxlength' => $lonubi,
   'onKeyPress' => "javascript:return dFilter (event.keyCode, this,'$forubi')",
@@ -762,8 +762,8 @@ if ((incorporacion=='S'))
     if(confirm("¿Desea Incorporar este Mueble?"))
     {
 
-      new Ajax.Request('/bienes_dev.php/bieregactmued/ajax', {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=6&id='+id})
-//new Ajax.Request('/bienes_dev.php/bieregactmued/ajax', {asynchronous:true, evalScripts:true, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=6&id='+id})s
+      new Ajax.Request('/bienes.php/bieregactmued/ajax', {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=6&id='+id})
+//new Ajax.Request('/bienes.php/bieregactmued/ajax', {asynchronous:true, evalScripts:true, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=6&id='+id})s
     }
 }
 
