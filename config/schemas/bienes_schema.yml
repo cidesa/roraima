@@ -245,10 +245,10 @@ propel:
       type: DATE
     coddes:
       type: VARCHAR
-      size: 2
+      size: 10
     codinc:
       type: VARCHAR
-      size: 2
+      size: 10
     porrev:
       type: VARCHAR
       size: 5

@@ -68,9 +68,9 @@ class BndefinsMapBuilder {
 
 		$tMap->addColumn('FECEJE', 'Feceje', 'int', CreoleTypes::DATE, false, null);
 
-		$tMap->addColumn('CODDES', 'Coddes', 'string', CreoleTypes::VARCHAR, false, 2);
+		$tMap->addColumn('CODDES', 'Coddes', 'string', CreoleTypes::VARCHAR, false, 10);
 
-		$tMap->addColumn('CODINC', 'Codinc', 'string', CreoleTypes::VARCHAR, false, 2);
+		$tMap->addColumn('CODINC', 'Codinc', 'string', CreoleTypes::VARCHAR, false, 10);
 
 		$tMap->addColumn('PORREV', 'Porrev', 'string', CreoleTypes::VARCHAR, false, 5);
 

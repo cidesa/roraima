@@ -16,4 +16,7 @@ alter table BNREGMUE
   add column codresuso VARCHAR(10),
   add column codrespat VARCHAR(10);
 
+alter table bndefins alter column coddes type  varchar(10);
+alter table bndefins alter column codinc type  varchar(10);
 ---
+
