@@ -535,11 +535,12 @@ $this->Bitacora('Guardo');
       $feclib=$this->getRequestParameter('feclib');
       $monmov=H::toFloat($this->getRequestParameter('monmov'));
       $tipmov=$this->getRequestParameter('tipmov');
+      $javascript="";
       $output = '[["","",""]]';
-
+      if ($numcue!="" && $feclib!="" && $monmov>0)
+      {
       $c = new Criteria();
       $c->add(TstipmovPeer::CODTIP,$tipmov);
-
       $tstipmov = TstipmovPeer::doSelectOne($c);
 
       if($tstipmov){
@@ -553,6 +554,14 @@ $this->Bitacora('Guardo');
             $output = '[["javascript","alert(\''.H::obtenerMensajeError($coderr).'\')",""],["tsmovlib_monmov","0,00",""]]';
           }
         }
+      }
+      else {
+      	$javascript="alert('Tipo de Movimiento no existe'); $('tsmovlib_monmov').value='0,00';";
+      	$output = '[["javascript","'.$javascript.'",""]]';
+      }
+      }else{
+      	$javascript="alert('Verifique si introdujo el N° de Cuenta Bancaria, Fecha del Movimiento Valida o si el monto es mayor a cero'); $('tsmovlib_monmov').value='0,00';";
+      	$output = '[["javascript","'.$javascript.'",""]]';
       }
 
 
