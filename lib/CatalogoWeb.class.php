@@ -2019,7 +2019,8 @@ $this->c= new Criteria();
     $this->columnas = array (
       BnregmuePeer :: CODACT => 'Código Catalogo',
       BnregmuePeer :: CODMUE => 'Código Activo',
-      BnregmuePeer :: DESMUE => 'Descripción'
+      BnregmuePeer :: DESMUE => 'Descripción',
+      BnregmuePeer :: VALINI => 'Valoración Inicial'
     );
   }
 
@@ -2028,7 +2029,8 @@ $this->c= new Criteria();
     $this->columnas = array (
       BnregmuePeer :: CODMUE => 'Código Activo',
       BnregmuePeer :: CODACT => 'Código Catalogo',
-      BnregmuePeer :: DESMUE => 'Descripción'
+      BnregmuePeer :: DESMUE => 'Descripción',
+      BnregmuePeer :: VALINI => 'Valoración Inicial'
     );
   }
 

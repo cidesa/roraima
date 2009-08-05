@@ -211,6 +211,7 @@ $this->Bitacora('Guardo');
      $cajtexcom    = $this->getRequestParameter('cajtexcom');
      $cajtexubi    = $this->getRequestParameter('cajtexubi');
      $cajtexdesubi = $this->getRequestParameter('cajtexdesubi');
+     $this->setVars();
 
      if ($this->getRequestParameter('ajax')=='0')
       {
@@ -226,8 +227,9 @@ $this->Bitacora('Guardo');
 
         $codubi=Herramientas::getX('codmue','Bnregmue','codubi',$this->getRequestParameter('codigo'));
         $desubi=Herramientas::getX('codubi','Bnubibie','desubi',$codubi);
+        $valini=number_format(Herramientas::getX('codubi','Bnubibie','valini',$codubi),2,',','.');
 
-        $output = '[["'.$cajtexmos.'","'.$codact.'",""],["'.$cajtexcom.'","'.$desmue.'"],["'.$cajtexubi.'","'.$codubi.'"],["'.$cajtexdesubi.'","'.$desubi.'"]]';
+        $output = '[["'.$cajtexmos.'","'.$codact.'",""],["'.$cajtexcom.'","'.$desmue.'"],["'.$cajtexubi.'","'.$codubi.'"],["'.$cajtexdesubi.'","'.$desubi.'"],["bndismue_mondismue","'.$valini.'"]]';
 
       }
       elseif ($this->getRequestParameter('ajax')=='2')
@@ -238,8 +240,24 @@ $this->Bitacora('Guardo');
       }
     elseif ($this->getRequestParameter('ajax')=='3')
       {
-        $dato=BnubibiePeer::getDesubicacion($this->getRequestParameter('codigo'));
-        $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
+      	if (strlen($this->mascaraformatoubi)!=strlen($this->getRequestParameter('codigo')))
+      	{
+      	  $javascript="alert_('El C&oacute;digo de Ubicaci&oacute;n debe ser de &uacute;ltimo Nivel'); $('$cajtexcom').value=''; $('$cajtexcom').focus();"; $dato="";
+      	}else{
+        $dato=BnubibiePeer::getDesubicacion($this->getRequestParameter('codigo')); $javascript="";
+      	}
+        $output = '[["javascript","'.$javascript.'",""],["'.$cajtexmos.'","'.$dato.'",""]]';
+      }
+      elseif ($this->getRequestParameter('ajax')=='4')
+      {
+        if (strlen($this->mascaracatalogo)!=strlen($this->getRequestParameter('codigo')))
+      	{
+      		$javascript="alert_('El Nivel de Activo debe ser de &uacute;ltimo Nivel'); $('$cajtexcom').value=''; $('$cajtexcom').focus();";
+      	}else {
+        $javascript="";
+      	}
+
+        $output = '[["javascript","'.$javascript.'",""]]';
       }
 
         $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
