@@ -9,6 +9,10 @@ abstract class BaseNpseghcm extends BaseObject  implements Persistent {
 
 
 	
+	protected $codnom;
+
+
+	
 	protected $codcon;
 
 
@@ -37,6 +41,13 @@ abstract class BaseNpseghcm extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
+  
+  public function getCodnom()
+  {
+
+    return trim($this->codnom);
+
+  }
   
   public function getCodcon()
   {
@@ -82,6 +93,16 @@ abstract class BaseNpseghcm extends BaseObject  implements Persistent {
     return $this->id;
 
   }
+	
+	public function setCodnom($v)
+	{
+
+    if ($this->codnom !== $v) {
+        $this->codnom = $v;
+        $this->modifiedColumns[] = NpseghcmPeer::CODNOM;
+      }
+  
+	} 
 	
 	public function setCodcon($v)
 	{
@@ -147,17 +168,19 @@ abstract class BaseNpseghcm extends BaseObject  implements Persistent {
   {
     try {
 
-      $this->codcon = $rs->getString($startcol + 0);
+      $this->codnom = $rs->getString($startcol + 0);
 
-      $this->tippar = $rs->getString($startcol + 1);
+      $this->codcon = $rs->getString($startcol + 1);
 
-      $this->edaddes = $rs->getFloat($startcol + 2);
+      $this->tippar = $rs->getString($startcol + 2);
 
-      $this->edadhas = $rs->getFloat($startcol + 3);
+      $this->edaddes = $rs->getFloat($startcol + 3);
 
-      $this->monto = $rs->getFloat($startcol + 4);
+      $this->edadhas = $rs->getFloat($startcol + 4);
 
-      $this->id = $rs->getInt($startcol + 5);
+      $this->monto = $rs->getFloat($startcol + 5);
+
+      $this->id = $rs->getInt($startcol + 6);
 
       $this->resetModified();
 
@@ -165,7 +188,7 @@ abstract class BaseNpseghcm extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 6; 
+            return $startcol + 7; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Npseghcm object", $e);
     }
@@ -313,21 +336,24 @@ abstract class BaseNpseghcm extends BaseObject  implements Persistent {
 	{
 		switch($pos) {
 			case 0:
-				return $this->getCodcon();
+				return $this->getCodnom();
 				break;
 			case 1:
-				return $this->getTippar();
+				return $this->getCodcon();
 				break;
 			case 2:
-				return $this->getEdaddes();
+				return $this->getTippar();
 				break;
 			case 3:
-				return $this->getEdadhas();
+				return $this->getEdaddes();
 				break;
 			case 4:
-				return $this->getMonto();
+				return $this->getEdadhas();
 				break;
 			case 5:
+				return $this->getMonto();
+				break;
+			case 6:
 				return $this->getId();
 				break;
 			default:
@@ -340,12 +366,13 @@ abstract class BaseNpseghcm extends BaseObject  implements Persistent {
 	{
 		$keys = NpseghcmPeer::getFieldNames($keyType);
 		$result = array(
-			$keys[0] => $this->getCodcon(),
-			$keys[1] => $this->getTippar(),
-			$keys[2] => $this->getEdaddes(),
-			$keys[3] => $this->getEdadhas(),
-			$keys[4] => $this->getMonto(),
-			$keys[5] => $this->getId(),
+			$keys[0] => $this->getCodnom(),
+			$keys[1] => $this->getCodcon(),
+			$keys[2] => $this->getTippar(),
+			$keys[3] => $this->getEdaddes(),
+			$keys[4] => $this->getEdadhas(),
+			$keys[5] => $this->getMonto(),
+			$keys[6] => $this->getId(),
 		);
 		return $result;
 	}
@@ -362,21 +389,24 @@ abstract class BaseNpseghcm extends BaseObject  implements Persistent {
 	{
 		switch($pos) {
 			case 0:
-				$this->setCodcon($value);
+				$this->setCodnom($value);
 				break;
 			case 1:
-				$this->setTippar($value);
+				$this->setCodcon($value);
 				break;
 			case 2:
-				$this->setEdaddes($value);
+				$this->setTippar($value);
 				break;
 			case 3:
-				$this->setEdadhas($value);
+				$this->setEdaddes($value);
 				break;
 			case 4:
-				$this->setMonto($value);
+				$this->setEdadhas($value);
 				break;
 			case 5:
+				$this->setMonto($value);
+				break;
+			case 6:
 				$this->setId($value);
 				break;
 		} 	}
@@ -386,12 +416,13 @@ abstract class BaseNpseghcm extends BaseObject  implements Persistent {
 	{
 		$keys = NpseghcmPeer::getFieldNames($keyType);
 
-		if (array_key_exists($keys[0], $arr)) $this->setCodcon($arr[$keys[0]]);
-		if (array_key_exists($keys[1], $arr)) $this->setTippar($arr[$keys[1]]);
-		if (array_key_exists($keys[2], $arr)) $this->setEdaddes($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setEdadhas($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setMonto($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setId($arr[$keys[5]]);
+		if (array_key_exists($keys[0], $arr)) $this->setCodnom($arr[$keys[0]]);
+		if (array_key_exists($keys[1], $arr)) $this->setCodcon($arr[$keys[1]]);
+		if (array_key_exists($keys[2], $arr)) $this->setTippar($arr[$keys[2]]);
+		if (array_key_exists($keys[3], $arr)) $this->setEdaddes($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setEdadhas($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setMonto($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setId($arr[$keys[6]]);
 	}
 
 	
@@ -399,6 +430,7 @@ abstract class BaseNpseghcm extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(NpseghcmPeer::DATABASE_NAME);
 
+		if ($this->isColumnModified(NpseghcmPeer::CODNOM)) $criteria->add(NpseghcmPeer::CODNOM, $this->codnom);
 		if ($this->isColumnModified(NpseghcmPeer::CODCON)) $criteria->add(NpseghcmPeer::CODCON, $this->codcon);
 		if ($this->isColumnModified(NpseghcmPeer::TIPPAR)) $criteria->add(NpseghcmPeer::TIPPAR, $this->tippar);
 		if ($this->isColumnModified(NpseghcmPeer::EDADDES)) $criteria->add(NpseghcmPeer::EDADDES, $this->edaddes);
@@ -434,6 +466,8 @@ abstract class BaseNpseghcm extends BaseObject  implements Persistent {
 	
 	public function copyInto($copyObj, $deepCopy = false)
 	{
+
+		$copyObj->setCodnom($this->codnom);
 
 		$copyObj->setCodcon($this->codcon);
 

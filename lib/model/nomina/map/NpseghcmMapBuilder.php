@@ -34,6 +34,8 @@ class NpseghcmMapBuilder {
 
 		$tMap->setPrimaryKeyMethodInfo('npseghcm_SEQ');
 
+		$tMap->addColumn('CODNOM', 'Codnom', 'string', CreoleTypes::VARCHAR, false, 3);
+
 		$tMap->addColumn('CODCON', 'Codcon', 'string', CreoleTypes::VARCHAR, false, 3);
 
 		$tMap->addColumn('TIPPAR', 'Tippar', 'string', CreoleTypes::VARCHAR, false, 3);
