@@ -42,7 +42,7 @@ class Despachos
     {
         self::grabarDespachoFac($despacho,$grid);
 	    self::grabarDespachoArticulosFac($despacho,$grid);
-	    if (self::actualizarArticulos($despacho,$grid,&$msj))
+	    if (self::actualizarArticulosFAC($despacho,$grid,&$msj))
 	    {
 	      	if ($despacho->getTipref() == 'P')
 	      		self::actualizarArticulosPedido($despacho,$grid);
@@ -662,6 +662,68 @@ class Despachos
 **                                Miki                                   **
 **************************************************************************/
 
+ public static function actualizarArticulosFAC($despacho,$grid,&$msj)
+    {
+
+       $msj="";
+       $x=$grid[0];
+       $j=0;
+       while ($j<count($x))
+       {
+        $codarti=$x[$j]->getCodart();
+        $dart=$x[$j]->getDesart();
+        $cantd=$x[$j]->getCandesp();
+        $calmacen=$x[$j]->getCodalm();
+        $cubicacion=$x[$j]->getCodubi();
+         if (($codarti!="") and ($cantd>0))
+         {
+           $c = new Criteria();
+           $c->add(CaregartPeer::CODART,$codarti);
+           $arti = CaregartPeer::doSelectOne($c);
+           if ($arti)
+            {
+             $tipoart=$arti->getTipo();
+             if ($tipoart=='A')
+             {
+                 $act1=$arti->getExitot() - $cantd;
+                 $dis1=$arti->getDistot() - $cantd;
+                 $arti->setExitot($act1);
+                 $arti->setDistot($dis1);
+                 $arti->save();
+                 $c = new Criteria();
+                 $c->add(CaartalmubiPeer::CODART,$codarti);
+                 $c->add(CaartalmubiPeer::CODALM,$calmacen);
+                 $c->add(CaartalmubiPeer::CODUBI,$cubicacion);
+                 $alm = CaartalmubiPeer::doSelectOne($c);
+                 if ($alm)
+                 {
+		                if($alm->getExiact()>=$cantd)
+		                 {
+		                     $act2=$alm->getExiact() - $cantd;
+		                     $alm->setExiact($act2);
+		                     $alm->save();
+		                 }
+	             }// if ($alm)
+	             $c = new Criteria();
+                 $c->add(CaartalmPeer::CODART,$codarti);
+                 $c->add(CaartalmPeer::CODALM,$calmacen);
+                 $reg = CaartalmPeer::doSelectOne($c);
+                 if ($reg)
+                 {
+		                if($reg->getExiact()>=$cantd)
+		                 {
+		                     $act2=$reg->getExiact() - $cantd;
+		                     $reg->setExiact($act2);
+		                     $reg->save();
+		                 }
+	             }// if ($alm)
+	           }//   if ($tipoart='A')
+             }//if ($arti)
+          }//if (($codarti!="") and ($cantd>0))
+       $j++;
+      }//end while
+     return true;
+   }
 
 }
 
