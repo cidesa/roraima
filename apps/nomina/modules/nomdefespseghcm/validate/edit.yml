@@ -1,0 +1,31 @@
+methods:
+  post:
+   - "npseghcm{codnom}"
+   - "npseghcm{codcon}"
+
+names:
+  npseghcm{codnom}:
+    required:  Yes
+    required_msg: El Código de la Nómina no puede estar en Blanco
+    validators: Validator_codnom
+
+  npseghcm{codcon}:
+    required:  Yes
+    required_msg: El Código del Concepto no puede estar en Blanco
+    validators: Validator_codcon
+
+
+Validator_codnom:
+    class: CidesaExistValidator
+    param:
+        class:    Npnomina
+        column:   codnom
+        unique_error:   El Código de la Nómina no Existe
+        
+Validator_codcon:
+    class: CidesaExistValidator
+    param:
+        class:    npdefcpt
+        column:   codcon
+        unique_error:   El Código del Concepto no existe        
+        
