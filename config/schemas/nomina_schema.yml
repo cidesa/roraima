@@ -5652,6 +5652,9 @@ propel:
   npseghcm:
     #_attributes:
       #idMethod: native
+    codnom:
+      type: VARCHAR
+      size: 3  
     codcon:
       type: VARCHAR
       size: 3
