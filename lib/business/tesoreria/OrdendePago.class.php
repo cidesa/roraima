@@ -233,6 +233,7 @@ class OrdendePago
      {
      self::grabarFacturas($orden,$grid2);}
      self::grabarRetencion($orden,$grid3);
+     self::actualizarOrdenPag($orden,$grid3);
 
     }
     else
@@ -247,6 +248,7 @@ class OrdendePago
      {
      self::grabarFacturas($orden,$grid2);}
      self::grabarRetencion($orden,$grid3);
+     self::actualizarOrdenPag($orden,$grid3);
    }
  }
 
@@ -2620,7 +2622,7 @@ class OrdendePago
        $c->add(OpdetordPeer::NUMORD,$referencia);
        $c->add(OpdetordPeer::CODPRE,$x[$j]->getCodpre());
        $c->add(OpdetordPeer::REFCOM,$dato);
-       $result= OpdetordPeer::doSelect($c);
+       $result= OpdetordPeer::doSelectOne($c);
        if ($result)
        {
          $result->setMonret($result->getMonret()+$x[$j]->getMonret());
@@ -2881,6 +2883,59 @@ class OrdendePago
       }
       $x[$j]->save();
       $j++;
+    }
+  }
+
+public static function actualizarOrdenPag($orden,$grid3)
+  {
+    $referencia=$orden->getNumord();
+    $totalret=0;
+    $c= new Criteria();
+    $c->add(OpdetordPeer::NUMORD,$referencia);
+    $resul= OpdetordPeer::doSelect($c);
+    if ($resul)
+    {
+      foreach ($resul as $opdetord)
+      {
+        $opdetord->setMonret(0);
+        $opdetord->save();
+      }
+    }
+
+    $x=$grid3[0];
+    $j=0;
+    while ($j<count($x))
+    {
+     if ($x[$j]['codpre']!="" && H::tofloat($x[$j]['monret'])>0)
+     {
+       if ($x[$j]['refere']=="")
+       {
+         $dato='NULO';
+       }else {$dato=$x[$j]['refere'];}
+
+       $totalret= $totalret + H::tofloat($x[$j]['monret']);
+
+       $c= new Criteria();
+       $c->add(OpdetordPeer::NUMORD,$referencia);
+       $c->add(OpdetordPeer::CODPRE,$x[$j]['codpre']);
+       $c->add(OpdetordPeer::REFCOM,$dato);
+       $result= OpdetordPeer::doSelectOne($c);
+       if ($result)
+       {
+         $result->setMonret($result->getMonret()+ H::tofloat($x[$j]['monret']));
+         $result->save();
+       }
+     }
+      $j++;
+    }
+
+    $c= new Criteria();
+    $c->add(OpordpagPeer::NUMORD,$referencia);
+    $result2= OpordpagPeer::doSelectOne($c);
+    if ($result2)
+    {
+      $result2->setMonret($totalret);
+      $result2->save();
     }
   }
 
