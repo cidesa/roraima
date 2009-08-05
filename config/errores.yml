@@ -770,6 +770,18 @@
 488:
   cod: 488
   msj: La distribución del Embargo entre sus Beneficiarios debe ser igual al Monto del Embargo
+489:
+  cod: 489
+  msj: Faltan Datos en el Grid
+490:
+  cod: 490
+  msj: Hay Errores en el Grid
+491:
+  cod: 491
+  msj: La Nómina y el concepto ya fueron registrados, revise la lista
+492:
+  cod: 492
+  msj: El Concepto no Pertenece a la Nómina
 ###############OBRAS################
 1000:
     cod: 1000
