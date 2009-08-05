@@ -637,19 +637,26 @@ class Bienes
   	$c->add(BnregmuePeer::ID,$id);
   	$clase = BnregmuePeer::doselectone($c);
 
+
   	if ($clase){
-	  	$tipoinc='';
-	  	$c = new Criteria();
-	  	$per = BndefinsPeer::doselectone($c);
-	  	if ($per){
-			if ($per->getCodinc()){
+	  //	$tipoinc='';
+	  //	$c = new Criteria();
+	 // 	$per = BndefinsPeer::doselectone($c);
+	 // 	if ($per){
+	//		if ($per->getCodinc()){
+			//  	$c = new Criteria();
+			//  	$c->add(BndisbiePeer::CODDIS,$per->getCodinc());
+			//  	$per2 = BndisbiePeer::doselectone($c);
+		//		if ($per2){
+		//			$tipoinc = $per->getCodinc().' - '.$per2->getDesdis();
+		//		}
+
 			  	$c = new Criteria();
-			  	$c->add(BndisbiePeer::CODDIS,$per->getCodinc());
+			  	$c->add(BndisbiePeer::CODDIS,$clase->getCoddis());
 			  	$per2 = BndisbiePeer::doselectone($c);
 				if ($per2){
-					$tipoinc = $per->getCodinc().' - '.$per2->getDesdis();
+					$tipoinc = $per2->getCoddis().' - '.$per2->getDesdis();
 				}
-
 
 				if (H::getVerCorrelativo('corrmue','bndefins',&$output)){
 			        $ref = str_pad($output, 10, '0', STR_PAD_LEFT);
@@ -671,12 +678,12 @@ class Bienes
 				}else{
 					return 'Error al Buscar el Correlativo';
 				}
-			}else{
-				return 'No esta definido El Codigo de la Incorporacion, Verifique en el modulo de Definicion de Empresa.';
-			}
-	  	}else{
-	  		return 'No esta definido El Codigo de la Incorporacion, Verifique en el modulo de Definicion de Empresa.';
-	  	}
+	//		}else{
+		//		return 'No esta definido El Codigo de la Incorporacion, Verifique en el modulo de Definicion de Empresa.';
+			//}
+	 // 	}else{
+	 // 		return 'No esta definido El Codigo de la Incorporacion, Verifique en el modulo de Definicion de Empresa.';
+	 // 	}
   	}
   }
 
