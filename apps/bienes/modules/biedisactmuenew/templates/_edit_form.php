@@ -40,13 +40,13 @@
   'onKeypress' => "javascript:return dFilter (event.keyCode, this,'$mascaracatalogo')",
   'onBlur'=> remote_function(array(
   'url'      => 'biedisactmuenew/ajax',
-  'condition' => "$('bndismue_codact').value != '' && $('id').value == '' && $('bndismue_codmue').value != ''",
+  'condition' => "$('bndismue_codact').value != '' && $('id').value == ''",
   'complete' => 'AjaxJSON(request, json)',
-  'with' => "'ajax=1&cajtexmos=bndismue_codact&cajtexcom=bndismue_desmue&cajtexubi=bndismue_codubiori&cajtexdesubi=bndismue_desubiori&codigo='+$('bndismue_codmue').value",
+  'with' => "'ajax=4&cajtexmos=bndismue_codact&cajtexcom=bndismue_codact&cajtexubi=bndismue_codubiori&cajtexdesubi=bndismue_desubiori&codigo='+this.value",
 )),
 )); echo $value ? $value : '&nbsp;' ?>
 
-<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Bnregmue_Biedisactmuenew/clase/Bnregmue/frame/sf_admin_edit_form/obj1/bndismue_codact/obj2/bndismue_codmue/obj3/bndismue_desmue/campo1/codact/campo2/codmue/campo3/desmue/param1/')?>
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Bnregmue_Biedisactmuenew/clase/Bnregmue/frame/sf_admin_edit_form/obj1/bndismue_codact/obj2/bndismue_codmue/obj3/bndismue_desmue/obj4/bndismue_mondismue/campo1/codact/campo2/codmue/campo3/desmue/campo4/valini/param1/')?>
 </th>
 </div>
 <th></th>
@@ -69,7 +69,7 @@
         )),
 )); echo $value ? $value : '&nbsp;' ?>
 
-<?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Bnregmue_Biedisactmuenew1/clase/Bnregmue/frame/sf_admin_edit_form/obj1/bndismue_codmue/obj2/bndismue_codact/obj3/bndismue_desmue/campo1/codmue/campo2/codact/campo3/desmue/param1/')?>
+<?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Bnregmue_Biedisactmuenew1/clase/Bnregmue/frame/sf_admin_edit_form/obj1/bndismue_codmue/obj2/bndismue_codact/obj3/bndismue_desmue/obj4/bndismue_mondismue/campo1/codmue/campo2/codact/campo3/desmue/campo4/valini/param1/')?>
 </th>
 </tr>
 </table>
@@ -221,7 +221,7 @@
   'url'      => 'biedisactmuenew/ajax',
   'condition' => "$('bndismue_codubiori').value != '' && $('id').value == '' ",
   'complete' => 'AjaxJSON(request, json)',
-  'with' => "'ajax=3&cajtexmos=bndismue_desubiori&codigo='+this.value",
+  'with' => "'ajax=3&cajtexmos=bndismue_desubiori&cajtexcom=bndismue_codubiori&codigo='+this.value",
         )),
 )); echo $value ? $value : '&nbsp;' ?>
 
@@ -255,7 +255,7 @@
         'url'      => 'biedisactmuenew/ajax',
         'complete' => 'AjaxJSON(request, json)',
         'condition' => "$('bndismue_codubides').value != '' && $('id').value == '' ",
-          'with' => "'ajax=3&cajtexmos=bndismue_desubides&codigo='+this.value",
+          'with' => "'ajax=3&cajtexmos=bndismue_desubides&cajtexcom=bndismue_codubides&codigo='+this.value",
         )),
 )); echo $value ? $value : '&nbsp;' ?>
 
