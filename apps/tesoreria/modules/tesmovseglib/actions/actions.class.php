@@ -1035,7 +1035,8 @@ $this->Bitacora('Guardo');
     $fechacom=$this->getRequestParameter('fechacom');
     $numcom=$this->getRequestParameter('numcom');
     $numcom2=$this->getRequestParameter('numcom2');
-    if($numcom2=='********') $numcom2 = "########";
+    //if($numcom2=='********')
+    $numcom2 = "########";
     if($numcom=='********') $numcom = "########";
     $this->msgpercer="";
     $idmovseglib=$this->getRequestParameter('id');
@@ -1097,7 +1098,7 @@ $this->Bitacora('Guardo');
 
           // Generar Nuevo comprobante contable
           if($numcom2=='########') $numcom2=Comprobante::Buscar_Correlativo();
-          Tesoreria::anular_Eliminar('A',$numcomadi,$feccomadi,$compadic,$fechacom,$numcom,$numcom2,$fecanu,$reflib2);
+          $this->msg=$this->msg.Tesoreria::anular_Eliminar('A',$numcomadi,$feccomadi,$compadic,$fechacom,$numcom,$numcom2,$fecanu,$reflib2);
 
           // GENERAR NUEVO MOVIMIENTO SEGUN LIBRO
           $tsmovlibA= new Tsmovlib();

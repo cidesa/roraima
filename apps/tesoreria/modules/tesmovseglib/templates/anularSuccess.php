@@ -68,6 +68,7 @@
 
   <?php $value = object_input_tag($tsmovlib, 'getNumcom', array (
   'size' => 20,
+  'readonly' => true,
   'control_name' => 'tsmovlib[numcom]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>

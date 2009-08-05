@@ -981,12 +981,14 @@ class Tesoreria {
   }
 
   public static function anular_Eliminar($accion, $numcomadi, $feccomadi, $compadic, $fechacom, $numcom, $numcom2, $feclib,$reflib2='') {
+    $msj='';
     if ($accion == 'E') {
-      self :: buscar_Comprobante('E', $numcomadi, $feccomadi, $compadic, $fechacom, $numcom, $numcom2, $feclib, $reflib2);
+      $msj=self :: buscar_Comprobante('E', $numcomadi, $feccomadi, $compadic, $fechacom, $numcom, $numcom2, $feclib, $reflib2);
     }
     if ($accion == 'A') {
-      self :: buscar_Comprobante('A', $numcomadi, $feccomadi, $compadic, $fechacom, $numcom, $numcom2, $feclib, $reflib2);
+      $msj=self :: buscar_Comprobante('A', $numcomadi, $feccomadi, $compadic, $fechacom, $numcom, $numcom2, $feclib, $reflib2);
     }
+    return $msj;
   }
 
   public static function buscar_Comprobante($accion,$numcomadi,$feccomadi,$compadic,$fechacom,$numcom,$numcom2,$feclib, $reflib2='')
@@ -1040,6 +1042,7 @@ class Tesoreria {
     {
       if($numcom2=='########') $numcom2 = Comprobante::Buscar_Correlativo();
 
+      if ($numcom2!='' && $numcom2!='########' && $numcom2!='********'){
       $sql="Select descom,moncom from CONTABC where NumCom = '".$numcom."'";
       if (Herramientas::BuscarDatos($sql,&$contabc))
       {
@@ -1080,10 +1083,12 @@ class Tesoreria {
             $tcontabc1->save();
           }
         }
+      }else{
+      	return 'El Comprobante Nro. '.$numcom.' no fué anulado, y falta que se genere el comprobante INVERSO.';
       }
       else
       {
-        return 'El Comprobante Nro. '.$numcom.' no fué anulado, y falta que se genere el comprobante INVERSO.';
+        return 'El Nro. generado para el comprobante de anulación:'.$numcom2.' no es válido, y falta que se genere el comprobante INVERSO.';
       }
       /*if ($compadic=='S')
       {
@@ -1129,6 +1134,7 @@ class Tesoreria {
           }
       }*/
     }
+    return '';
   }
 
 
