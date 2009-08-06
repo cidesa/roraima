@@ -3581,7 +3581,7 @@ propel:
       size: 31
     codempant:
       type: VARCHAR
-      size: 14
+      size: 16
     grusan:
       type: VARCHAR
       size: 10
@@ -3658,6 +3658,22 @@ propel:
       type: INTEGER
     diaadiacu:
       type: INTEGER   
+    seghcm:
+      type: VARCHAR
+      size: 1
+    porseghcm:
+      type: NUMERIC
+      size: 3
+      scale: 2
+    ubifis:
+      type: VARCHAR
+      size: 100
+    tipcueaho:
+      type: VARCHAR
+      size: 20
+    numcueaho:
+      type: VARCHAR
+      size: 31
     id:
       type: INTEGER
       required: true
@@ -4133,6 +4149,10 @@ propel:
     seghcm:
       type: VARCHAR
       size: 1
+    porseghcm:
+      type: NUMERIC
+      size: 3
+      scale: 2  
     ocupac:
       type: VARCHAR
       size: 1
