@@ -235,7 +235,132 @@ public static function CalculoPorConceptos($conceptos,$codnom,$profec,$frecal,$p
 		//if (Herramientas::BuscarDatos("Select * from NPDEFCPT where CodCon='".$conceptos["codcon"]."' AND CONACT='S'",&$tnpdefcpt))
 		//{
 			if ($conceptos["codcon"]!='')
-			{
+			{				
+				#CALCULO DEL SEGURO HCM
+				$guardar=false; 
+				$sqlhcm = "Select * from NPSegHcm where codnom='".$codnom."' and CodCon='".$conceptos["codcon"]."'";
+				if (Herramientas::BuscarDatos($sqlhcm,&$rshcm))
+				{
+				  #CALCULO DEL SEGURO HCM PARA CONCEPTO DE DEDUCCION
+				  $montosegurohcm=0;
+				  $sqlhoj = "Select porseghcm from nphojint where codemp='".$codemp."' and seghcm='S'";
+				  if (Herramientas::BuscarDatos($sqlhoj,&$rshoj))
+				  { #CALCULO PARTE EMPLEADO
+				    $guardar=true;
+				  	if($sexo=='M')					
+					{
+					  $sqlhcm2="select monto from npseghcm where codnom='$codnom' and codcon='".$conceptos["codcon"]."' and
+					            tippar='000' and 
+								edaddes>=((to_date('$profec','yyyy-mm-dd')-to_date('$fechanac','yyyy-mm-dd'))/365) and
+								edadhas<=((to_date('$profec','yyyy-mm-dd')-to_date('$fechanac','yyyy-mm-dd'))/365) ";
+					  if (Herramientas::BuscarDatos($sqlhcm2,&$rshcm2))					  
+					  {
+					  	$montosegurohcm+=$rshcm2[0]['monto']-($rshcm2[0]['monto']*$rshoj[0]['porseghcm']);
+					  }							
+					}else
+					{
+					  $sqlhcm2="select monto from npseghcm where codnom='$codnom' and codcon='".$conceptos["codcon"]."' and
+					            tippar='001' and 
+								edaddes>=((to_date('$profec','yyyy-mm-dd')-to_date('$fechanac','yyyy-mm-dd'))/365) and
+								edadhas<=((to_date('$profec','yyyy-mm-dd')-to_date('$fechanac','yyyy-mm-dd'))/365) ";
+					  if (Herramientas::BuscarDatos($sqlhcm2,&$rshcm2))					  
+					  {
+					  	$montosegurohcm+=$rshcm2[0]['monto']-($rshcm2[0]['monto']*($rshoj[0]['porseghcm']/100));
+					  }	
+					}
+					#CALCULO PARTE FAMILIAR
+					$sqlhcmfam="select *,coalesce(porseghcm,0) as porseghcm from npinffam where codemp='$codemp' and seghcm='S'";
+					if (Herramientas::BuscarDatos($sqlhcmfam,&$rshcmfam))
+					{
+					  foreach($rshcmfam as $rs)
+					  {
+					  	$sqlhcmfam2="select monto from npseghcm where codnom='$codnom' and codcon='".$conceptos["codcon"]."' and
+					            tippar='".$rs['parfam']."' and 
+								edaddes>=((to_date('$profec','yyyy-mm-dd')-to_date('$fechanac','yyyy-mm-dd'))/365) and
+								edadhas<=((to_date('$profec','yyyy-mm-dd')-to_date('$fechanac','yyyy-mm-dd'))/365) ";
+					    if (Herramientas::BuscarDatos($sqlhcmfam2,&$rshcmfam2))
+						{
+						 $montosegurohcm+=$rshcmfam2[0]['monto']-($rshcmfam2[0]['monto']*($rshcmfam[0]['porseghcm']/100)); 					
+						}					  	
+					  }
+					}					
+				  }
+				  
+				}elseif(Herramientas::BuscarDatos("Select * from NPSegHcm where codnom='".$codnom."' and CodConapo='".$conceptos["codcon"]."'",&$rshcm))
+				{
+				  #CALCULO DEL SEGURO HCM PARA CONCEPTO DE APORTE
+				  $montosegurohcm=0;
+				  $sqlhoj = "Select porseghcm from nphojint where codemp='".$codemp."' and seghcm='S'";
+				  if (Herramientas::BuscarDatos($sqlhoj,&$rshoj))
+				  { #CALCULO PARTE EMPLEADO
+				    $guardar=true;
+				  	if($sexo=='M')					
+					{
+					  $sqlhcm2="select monto from npseghcm where codnom='$codnom' and codconapo='".$conceptos["codcon"]."' and
+					            tippar='000' and 
+								edaddes>=((to_date('$profec','yyyy-mm-dd')-to_date('$fechanac','yyyy-mm-dd'))/365) and
+								edadhas<=((to_date('$profec','yyyy-mm-dd')-to_date('$fechanac','yyyy-mm-dd'))/365) ";
+					  if (Herramientas::BuscarDatos($sqlhcm2,&$rshcm2))					  
+					  {
+					  	$montosegurohcm+=($rshcm2[0]['monto']*$rshoj[0]['porseghcm']);
+					  }							
+					}else
+					{
+					  $sqlhcm2="select monto from npseghcm where codnom='$codnom' and codconapo='".$conceptos["codcon"]."' and
+					            tippar='001' and 
+								edaddes>=((to_date('$profec','yyyy-mm-dd')-to_date('$fechanac','yyyy-mm-dd'))/365) and
+								edadhas<=((to_date('$profec','yyyy-mm-dd')-to_date('$fechanac','yyyy-mm-dd'))/365) ";
+					  if (Herramientas::BuscarDatos($sqlhcm2,&$rshcm2))					  
+					  {
+					  	$montosegurohcm+=($rshcm2[0]['monto']*($rshoj[0]['porseghcm']/100));
+					  }	
+					}
+					#CALCULO PARTE FAMILIAR
+					$sqlhcmfam="select *,coalesce(porseghcm,0) as porseghcm from npinffam where codemp='$codemp' and seghcm='S'";
+					if (Herramientas::BuscarDatos($sqlhcmfam,&$rshcmfam))
+					{
+					  foreach($rshcmfam as $rs)
+					  {
+					  	$sqlhcmfam2="select monto from npseghcm where codnom='$codnom' and codconapo='".$conceptos["codcon"]."' and
+					            tippar='".$rs['parfam']."' and 
+								edaddes>=((to_date('$profec','yyyy-mm-dd')-to_date('$fechanac','yyyy-mm-dd'))/365) and
+								edadhas<=((to_date('$profec','yyyy-mm-dd')-to_date('$fechanac','yyyy-mm-dd'))/365) ";
+					    if (Herramientas::BuscarDatos($sqlhcmfam2,&$rshcmfam2))
+						{
+						 $montosegurohcm+=($rshcmfam2[0]['monto']*($rshcmfam[0]['porseghcm']/100)); 					
+						}					  	
+					  }
+					}					
+				  }
+					
+				}
+				#GUARDAR APORTE SEGURO HCM
+				if($guardar)
+				{
+					$nomcal= new Npnomcal();
+					$nomcal->setCodnom($codnom);
+					$nomcal->setCodemp($codemp);
+					$nomcal->setCodcar($cargo);
+					$nomcal->setCodcon($conceptos["codcon"]);
+					$nomcal->setFrecon($conceptos["frecon"]);
+					$nomcal->setAsided($conceptos["asided"]);
+					$nomcal->setFecnom($hasta);
+					$nomcal->setFecnomdes($desde);
+					$nomcal->setFecnomesphas($hasta);
+					$nomcal->setFecnomespdes($desde);
+					$nomcal->setEspecial('N');
+					$nomcal->setNomcon($conceptos["nomcon"]);
+					$nomcal->setNomnom($nomnom);
+					$nomcal->setCantidad($conceptos["cantidad"]);
+					$nomcal->setMonto($conceptos["monto"]);
+					$nomcal->setAcucon($conceptos["acucon"]);
+					$nomcal->setAcumulado($conceptos["acumulado"]);				  
+					$nomcal->setSaldo($montosegurohcm);
+					$nomcal->save();
+				}
+				#####FIN DEL CALCULO SEGURO HCM#########
+				
+				
 				//$sql5="Select CODConVAC FROM NPVACDEFGEN where CODConVAC='".$conceptos["codcon"]."' and codnomVAC='".$codnom."' order by codconVAC";
 				//if (Herramientas::BuscarDatos("Select CODConVAC FROM NPVACDEFGEN where CODConVAC='".$conceptos["codcon"]."' and codnomVAC='".$codnom."' order by codconVAC",&$tnpdefcpt))
 				if ($conceptos["vacacion"]=='S')
