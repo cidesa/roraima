@@ -60,6 +60,10 @@ class NpinffamMapBuilder {
 
 		$tMap->addColumn('SEGHCM', 'Seghcm', 'string', CreoleTypes::VARCHAR, false, 1);
 
+		$tMap->addColumn('PORSEGHCM', 'Porseghcm', 'double', CreoleTypes::NUMERIC, false, 3);
+
+		$tMap->addColumn('OCUPAC', 'Ocupac', 'string', CreoleTypes::VARCHAR, false, 1);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

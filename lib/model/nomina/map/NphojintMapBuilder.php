@@ -200,12 +200,6 @@ class NphojintMapBuilder {
 
 		$tMap->addColumn('CODNIVEDU', 'Codnivedu', 'string', CreoleTypes::VARCHAR, false, 4);
 
-		$tMap->addColumn('UBIFIS', 'Ubifis', 'string', CreoleTypes::VARCHAR, false, 100);
-
-		$tMap->addColumn('TIPCUEAHO', 'Tipcueaho', 'string', CreoleTypes::VARCHAR, false, 20);
-
-		$tMap->addColumn('NUMCUEAHO', 'Numcueaho', 'string', CreoleTypes::VARCHAR, false, 31);
-
 		$tMap->addColumn('FECCORACU', 'Feccoracu', 'int', CreoleTypes::DATE, false, null);
 
 		$tMap->addColumn('CAPACTACU', 'Capactacu', 'double', CreoleTypes::NUMERIC, false, 14);
@@ -217,6 +211,16 @@ class NphojintMapBuilder {
 		$tMap->addColumn('DIAACU', 'Diaacu', 'int', CreoleTypes::INTEGER, false, null);
 
 		$tMap->addColumn('DIAADIACU', 'Diaadiacu', 'int', CreoleTypes::INTEGER, false, null);
+
+		$tMap->addColumn('SEGHCM', 'Seghcm', 'string', CreoleTypes::VARCHAR, false, 1);
+
+		$tMap->addColumn('PORSEGHCM', 'Porseghcm', 'double', CreoleTypes::NUMERIC, false, 3);
+
+		$tMap->addColumn('UBIFIS', 'Ubifis', 'string', CreoleTypes::VARCHAR, false, 100);
+
+		$tMap->addColumn('TIPCUEAHO', 'Tipcueaho', 'string', CreoleTypes::VARCHAR, false, 20);
+
+		$tMap->addColumn('NUMCUEAHO', 'Numcueaho', 'string', CreoleTypes::VARCHAR, false, 31);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
