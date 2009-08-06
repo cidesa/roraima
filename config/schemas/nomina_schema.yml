@@ -5678,6 +5678,9 @@ propel:
     codcon:
       type: VARCHAR
       size: 3
+    codconapo:
+      type: VARCHAR
+      size: 3  
     tippar:
       type: VARCHAR
       size: 3
