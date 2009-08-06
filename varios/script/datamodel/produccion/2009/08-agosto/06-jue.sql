@@ -9,3 +9,6 @@ alter table npinffam
 -- el numero de comprobante asociado
 ALTER TABLE "fanotent"
   ADD COLUMN "numcom" VARCHAR(8);
+  
+alter table npseghcm
+  add column codconapo varchar(3);
