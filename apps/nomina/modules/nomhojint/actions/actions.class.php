@@ -58,6 +58,19 @@ class nomhojintActions extends autonomhojintActions
       	}
 
       }
+	  if ($nphojint['seghcm']=="S")
+	  {
+	  	  if(($nphojint['porseghcm']=="" || $nphojint['porseghcm']==0))
+		  {
+		 	$this->coderr=493;
+      	 	return false; 	
+		  }elseif($nphojint['porseghcm']<0 || $nphojint['porseghcm']>100)
+		  {
+		  	$this->coderr=494;
+      	 	return false;
+		  }
+	  	 
+	  }  
 
       if (count($grid3[0])>0)
       {
@@ -853,6 +866,14 @@ $this->Bitacora('Guardo');
     {
       $this->nphojint->setProfes($nphojint['profes']);
     }
+	if (isset($nphojint['seghcm']))
+    {
+      $this->nphojint->setSeghcm($nphojint['seghcm']);
+    }
+	if (isset($nphojint['porseghcm']))
+    {
+      $this->nphojint->setPorseghcm($nphojint['porseghcm']);
+    }
 	if (isset($nphojint['codnivedu']))
     {
       $this->nphojint->setCodnivedu($nphojint['codnivedu']);
@@ -1342,6 +1363,12 @@ $this->Bitacora('Guardo');
     $col11->setEsGrabable(true);
     $col11->setNombreCampo('seghcm');
     $col11->setHTML(' ');
+	
+	$col15 = new Columna('Porcentaje Seguro HCM');
+    $col15->setTipo(Columna::MONTO);
+    $col15->setEsGrabable(true);
+    $col15->setNombreCampo('porseghcm');
+    $col15->setHTML('type="text" size="10" onBlur = "javascript:event.keyCode=13;return entermontootro(event,this.id)"');
 
     $opciones->addColumna($col1);
     $opciones->addColumna($col2);
@@ -1357,6 +1384,7 @@ $this->Bitacora('Guardo');
     $opciones->addColumna($col13);
     $opciones->addColumna($col12);
     $opciones->addColumna($col11);
+	$opciones->addColumna($col15);
 
 
 
