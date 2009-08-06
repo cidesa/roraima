@@ -13,7 +13,7 @@ abstract class BaseNpseghcmPeer {
 	const CLASS_DEFAULT = 'lib.model.nomina.Npseghcm';
 
 	
-	const NUM_COLUMNS = 7;
+	const NUM_COLUMNS = 8;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -24,6 +24,9 @@ abstract class BaseNpseghcmPeer {
 
 	
 	const CODCON = 'npseghcm.CODCON';
+
+	
+	const CODCONAPO = 'npseghcm.CODCONAPO';
 
 	
 	const TIPPAR = 'npseghcm.TIPPAR';
@@ -46,18 +49,18 @@ abstract class BaseNpseghcmPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codnom', 'Codcon', 'Tippar', 'Edaddes', 'Edadhas', 'Monto', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (NpseghcmPeer::CODNOM, NpseghcmPeer::CODCON, NpseghcmPeer::TIPPAR, NpseghcmPeer::EDADDES, NpseghcmPeer::EDADHAS, NpseghcmPeer::MONTO, NpseghcmPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codnom', 'codcon', 'tippar', 'edaddes', 'edadhas', 'monto', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
+		BasePeer::TYPE_PHPNAME => array ('Codnom', 'Codcon', 'Codconapo', 'Tippar', 'Edaddes', 'Edadhas', 'Monto', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (NpseghcmPeer::CODNOM, NpseghcmPeer::CODCON, NpseghcmPeer::CODCONAPO, NpseghcmPeer::TIPPAR, NpseghcmPeer::EDADDES, NpseghcmPeer::EDADHAS, NpseghcmPeer::MONTO, NpseghcmPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codnom', 'codcon', 'codconapo', 'tippar', 'edaddes', 'edadhas', 'monto', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codnom' => 0, 'Codcon' => 1, 'Tippar' => 2, 'Edaddes' => 3, 'Edadhas' => 4, 'Monto' => 5, 'Id' => 6, ),
-		BasePeer::TYPE_COLNAME => array (NpseghcmPeer::CODNOM => 0, NpseghcmPeer::CODCON => 1, NpseghcmPeer::TIPPAR => 2, NpseghcmPeer::EDADDES => 3, NpseghcmPeer::EDADHAS => 4, NpseghcmPeer::MONTO => 5, NpseghcmPeer::ID => 6, ),
-		BasePeer::TYPE_FIELDNAME => array ('codnom' => 0, 'codcon' => 1, 'tippar' => 2, 'edaddes' => 3, 'edadhas' => 4, 'monto' => 5, 'id' => 6, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
+		BasePeer::TYPE_PHPNAME => array ('Codnom' => 0, 'Codcon' => 1, 'Codconapo' => 2, 'Tippar' => 3, 'Edaddes' => 4, 'Edadhas' => 5, 'Monto' => 6, 'Id' => 7, ),
+		BasePeer::TYPE_COLNAME => array (NpseghcmPeer::CODNOM => 0, NpseghcmPeer::CODCON => 1, NpseghcmPeer::CODCONAPO => 2, NpseghcmPeer::TIPPAR => 3, NpseghcmPeer::EDADDES => 4, NpseghcmPeer::EDADHAS => 5, NpseghcmPeer::MONTO => 6, NpseghcmPeer::ID => 7, ),
+		BasePeer::TYPE_FIELDNAME => array ('codnom' => 0, 'codcon' => 1, 'codconapo' => 2, 'tippar' => 3, 'edaddes' => 4, 'edadhas' => 5, 'monto' => 6, 'id' => 7, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
 	);
 
 	
@@ -114,6 +117,8 @@ abstract class BaseNpseghcmPeer {
 		$criteria->addSelectColumn(NpseghcmPeer::CODNOM);
 
 		$criteria->addSelectColumn(NpseghcmPeer::CODCON);
+
+		$criteria->addSelectColumn(NpseghcmPeer::CODCONAPO);
 
 		$criteria->addSelectColumn(NpseghcmPeer::TIPPAR);
 
