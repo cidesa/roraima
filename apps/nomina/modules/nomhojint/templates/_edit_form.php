@@ -251,6 +251,39 @@
   echo radiobutton_tag('nphojint[profes]', 'N', true)."   No";
 
 } ?></div></fieldset></th>
+   <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+   <th><fieldset id="sf_fieldset_none" class="">
+   	<legend><h2><?php echo __('Seguro HCM').'&nbsp;&nbsp;'.'&nbsp;&nbsp;'.'&nbsp;&nbsp;'?></h2></legend>
+	<div class="form-row">
+<? if ($nphojint->getSeghcm()=='S')  {
+  ?><?php echo radiobutton_tag('nphojint[seghcm]', 'S', true, array('onclick'=>'porcentajehcm(this.id)'))        ."   Si".'&nbsp;&nbsp;'.'&nbsp;&nbsp;'.'&nbsp;&nbsp;';
+      echo radiobutton_tag('nphojint[seghcm]', 'N', false, array('onclick'=>'porcentajehcm(this.id)'))."     No";?>	  
+	  <?php echo __('Porcentaje:&nbsp;');
+	        $value = object_input_tag($nphojint, array('getPorseghcm',true), array (
+			'size' => 4,
+			'maxlength' => 6,
+			'class' => 'grid_txtright',
+			'onblur'=> "javascript:event.keyCode=13;return entermontootro(event,this.id)",
+			'control_name' => 'nphojint[porseghcm]',
+			)); echo $value ? $value : '&nbsp;'; ?>
+			
+    <?
+}else{
+  echo radiobutton_tag('nphojint[seghcm]', 'S', false, array('onclick'=>'porcentajehcm(this.id)'))        ." Si".'&nbsp;&nbsp;'.'&nbsp;&nbsp;'.'&nbsp;&nbsp;';
+  echo radiobutton_tag('nphojint[seghcm]', 'N', true,  array('onclick'=>'porcentajehcm(this.id)'))."   No";
+  echo '&nbsp;&nbsp;&nbsp;';
+echo  __('Porcentaje:&nbsp');
+$value = object_input_tag($nphojint, 'getPorseghcm', array (
+			'size' => 4,
+			'readonly' => true,
+			'class' => 'grid_txtright',
+			'onblur'=> "javascript:event.keyCode=13;return entermontootro(event,this.id)",
+			'maxlength' => 6,
+			'control_name' => 'nphojint[porseghcm]',
+			)); echo $value ? $value : '&nbsp;'; 
+
+} ?>		
+	</div></fieldset></th>
    </tr>
   </table>
 
@@ -1467,7 +1500,19 @@ function nivel(e)
     }
   }
   }
-
+ function porcentajehcm(id)
+ {
+ 	if($(id).value=='S')
+	{
+		$('nphojint_porseghcm').readOnly=false;
+	}
+	if($(id).value=='N')
+	{
+		$('nphojint_porseghcm').value='';
+		$('nphojint_porseghcm').readOnly=true;
+	}
+	
+ }
  function activar_check(id)
 {
 
