@@ -476,73 +476,74 @@ class Facturacion {
       $j=0;
       while ($j<count($x))
       {
-       if ( $x[$j]->getCodart()!="")
+       if ( $x[$j]->getCodart()!="" && $x[$j]->getCanaju()>0)
        {
        	 $codarti = $x[$j]->getCodart();
        	 $famovaju= new Famovaju();
          $famovaju->setRefaju($faajuste->getRefaju());
          $famovaju->setCodart($codarti);
-         $famovaju->setNumlot($numlot);
-         $famovaju->setCanord($x[$j]->getCansol());
-         $famovaju->setCanaju($x[$j]->getCanajustada());
+         if ($faajuste->getTipaju() == 'NE'){
+         $famovaju->setNumlot($numlot);}
+         $famovaju->setCanord($x[$j]->getCanord());
+         $famovaju->setCanaju($x[$j]->getCanaju());
          $famovaju->setMontot($x[$j]->getMontot());
          $famovaju->save();
+         $tipo=H::getX('CODART','Caregart','Tipo',$codarti);
+
+         if ($tipo=='A'){
 		 if ($faajuste->getTipaju() == 'NE'){
-			 $sql = "select * from faartnot where nronot ='" . $faajuste->getCodref() . "' and codart = '" . $codarti. "'";
-			 if (Herramientas :: BuscarDatos($sql, & $resul)) {
-				if ($resul){
-					foreach ($resul as $r){
-					     $c = new Criteria();
-					     $c->add(FaartnotPeer::NRONOT,$r['nronot']);
-					     $c->add(FaartnotPeer::CODART,$r['codart']);
-					     $arti = FaartnotPeer::doSelectOne($c);
-					     if ($arti){
-					         $act1=$arti->getCanaju() + $x[$j]->getCanajustada();
-					         $arti->setCanaju($act1);
-					         $arti->save();
-					     }
-					}
-				}
-			 }
+
+		 	$l= new Criteria();
+		 	$l->add(CaregartPeer::CODART,$codarti);
+		 	$data= CaregartPeer::doSelectOne($l);
+		 	if ($data)
+		 	{
+              if ($x[$j]->getCanaju() < $x[$j]->getCanord())
+              {
+              	$data->setDistot($data->getDistot() + ($x[$j]->getCanord() - $x[$j]->getCanaju()));
+              	$data->save();
+              }else{
+              	$data->setDistot($data->getDistot() - ($x[$j]->getCanaju() - $x[$j]->getCanord()));
+              	$data->save();
+              }
+		 	}
+
+		 	$p= new Criteria();
+		 	$p->add(FaartnotPeer::NRONOT,$faajuste->getCodref());
+		 	$p->add(FaartnotPeer::CODART,$codarti);
+		 	$datos= FaartnotPeer::doSelectOne($p);
+			if ($datos){
+	         $datos->setCantot($x[$j]->getCanaju());
+	         $datos->setTotart($x[$j]->getCanaju()*$x[$j]->getPreart());
+	         $datos->setCanaju($datos->getCanaju() + $x[$j]->getCanaju());
+	         $datos->save();
+			}
 		 }
 		 else if ($faajuste->getTipaju() == 'P'){
-			 $sql = "select * from faartped where nroped ='" . $faajuste->getCodref() . "' and codart = '" . $codarti. "'";
-			 if (Herramientas :: BuscarDatos($sql, & $resul)) {
-				if ($resul){
-					foreach ($resul as $r){
-
-					     $c = new Criteria();
-					     $c->add(FaartpedPeer::NROPED,$r['nroped']);
-					     $c->add(FaartpedPeer::CODART,$r['codart']);
-					     $arti = FaartpedPeer::doSelectOne($c);
-					     if ($arti){
-					         $act1=$arti->getCanaju() + $x[$j]->getCanajustada();
-					         $arti->setCanaju($act1);
-					         $arti->save();
-					     }
-					}
-				}
+			 $p= new Criteria();
+			 $p->add(FaartpedPeer::NROPED,$faajuste->getCodref());
+			 $p->add(FaartpedPeer::CODART,$codarti);
+  			 $datos= FaartpedPeer::doSelectOne($p);
+  			 if ($datos){
+               $datos->setCantot($x[$j]->getCanaju());
+	           $datos->setTotart($x[$j]->getCanaju()*$x[$j]->getPreart());
+	           $datos->setCanaju($datos->getCanaju() + $x[$j]->getCanaju());
+	           $datos->save();
 			 }
 		 }
 		 else if ($faajuste->getTipaju() == 'F'){
-			 $sql = "select * from faartfac where codref ='" . $faajuste->getCodref() . "' and codart = '" . $codarti. "'";
-			 if (Herramientas :: BuscarDatos($sql, & $resul)) {
-				if ($resul){
-					foreach ($resul as $r){
-
-					     $c = new Criteria();
-					     $c->add(FaartfacPeer::REFFAC,$r['reffac']);
-					     $c->add(FaartfacPeer::CODART,$r['codart']);
-					     $arti = FaartfacPeer::doSelectOne($c);
-					     if ($arti){
-					         $act1=$arti->getCanaju() + $x[$j]->getCanajustada();
-					         $arti->setCanaju($act1);
-					         $arti->save();
-					     }
-					}
-				}
+		 	$p= new Criteria();
+			 $p->add(FaartfacPeer::REFFAC,$faajuste->getCodref());
+			 $p->add(FaartfacPeer::CODART,$codarti);
+  			 $datos= FaartfacPeer::doSelectOne($p);
+  			 if ($datos){
+               $datos->setCantot($x[$j]->getCanaju());
+	           $datos->setTotart($x[$j]->getCanaju()*$x[$j]->getPreart());
+	           $datos->setCanaju($datos->getCanaju() + $x[$j]->getCanaju());
+	           $datos->save();
 			 }
 		 }
+        }
 
        }
        $j++;
@@ -732,6 +733,10 @@ class Facturacion {
 
 	    // Se graban los detalles del Pedido
 	    self::Grabar_DetallesNotEnt($fanotent,$grid);
+	    if (self::grabarComprobanteNotEnt(&$fanotent, $grid,&$msj2))
+	    {
+	      $fanotent->save();
+	    }
 	    Herramientas::getSalvarCorrelativo('cornot','Facorrelat','Nota de Entrega',$r,$msg);
 	  }
 
@@ -1197,6 +1202,298 @@ public static function entregas($nroped)
     }
 
   }
+
+  public static function chequearCantPedido($refped,$articulo,$ajustada,$solicitada,&$cantaju)
+  {
+  	$cantaju=0;
+  	$sument=0;
+  	$sumdev=0;
+  	$cantidad=0;
+
+  	$p= new Criteria();
+  	$p->add(FaartpedPeer::NROPED,$refped);
+  	$p->add(FaartpedPeer::CODART,$articulo);
+  	$reg= FaartpedPeer::doSelectOne($p);
+  	if ($reg){
+  	  $l= new Criteria();
+  	  $l->add(FanotentPeer::TIPREF,'P');
+  	  $l->add(FanotentPeer::CODREF,$refped);
+  	  $regi= FanotentPeer::doSelectOne($l);
+  	  if ($regi)
+  	  {
+  	  	foreach ($regi as $reg2)
+  	  	{
+	  	  	$y= new Criteria();
+	  	  	$y->add(FaartnotPeer::NRONOT,$reg2->getNronot());
+	  	  	$y->add(FaartnotPeer::CODART,$articulo);
+	  	  	$regis= FaartnotPeer::doSelectOne($y);
+	  	  	if ($regis){
+             $sument= $sument + $regis->getCantot();
+	  	  	}
+  	  	}
+  	  }
+
+  	  if ($reg->getCantot()>$sument)
+  	  {
+  	  	$cantidad= $reg->getCantot() -$reg->getCandes();
+  	  }
+
+  	  if (H::tofloat($ajustada)>$cantidad)
+  	  {
+  	  	if ((H::tofloat($ajustada)<=$sument) && (H::tofloat($ajustada)>=$reg->getCandes()))
+  	  	{
+  	  	  $cantaju=$ajustada;
+  	  	  return true;
+  	  	}else
+  	  	{
+           if ((H::tofloat($ajustada)<H::tofloat($solicitada)) && (H::tofloat($ajustada)>=$reg->getCandes()))
+           {
+           	 $cantaju= $reg->getCantot() -$reg->getCandes();
+           	 return true;
+           }else
+           {
+           	if (H::tofloat($ajustada)==H::tofloat($solicitada))
+           	{
+           		$cantaju=-2;
+           	}else{
+           	  if (H::tofloat($ajustada)<$reg->getCandes())
+           	  {
+           	  	$cantaju=-1;
+           	  }else {
+           	  	$cantaju=$solicitada;
+           	  }
+           	}
+           	return false;
+           }
+  	  	}
+  	  }else{
+        if ($sument<=H::tofloat($ajustada))
+        {
+          $cantaju=$ajustada;
+  	  	  return true;
+        }else{
+          $cantaju=-1;
+          return false;
+        }
+  	  }
+  	}else{
+  	  return false;
+  	}
+  }
+
+  public static function chequearCantNota($refnot,$articulo,$ajustada,$solicitada,$tipref,$canentart,&$cantaju,&$canent)
+  {
+    $suma=0;
+    $totped=0;
+    $cantaju=0;
+    $totdes=0;
+    $sumgrid=0;
+
+    $l= new Criteria();
+    $l->add(FanotentPeer::NRONOT,$refnot);
+    $reg= FanotentPeer::doselectOne($l);
+    if ($reg)
+    {
+      $codrefiere= $reg->getCodref();
+      $refiere= $reg->getTipref();
+      $a= new Criteria();
+      $a->add(FanotentPeer::NRONOT,$refnot,Criteria::NOT_EQUAL);
+      $a->add(FanotentPeer::CODREF,$codrefiere);
+      $a->add(FanotentPeer::TIPREF,$refiere);
+      $reg2= FanotentPeer::doselect($a);
+      if ($reg2)
+      {
+      	foreach ($reg2 as $data)
+      	{
+      	  $e= new Criteria();
+      	  $e->add(FaartnotPeer::NRONOT,$data->getNronot());
+      	  $reg3= FaartnotPeer::doSelect($e);
+      	  if ($reg3)
+      	  {
+      	  	foreach ($reg3 as $data1)
+      	  	{
+      	  	  if ($data1->getCodart()==$articulo)
+      	  	  {
+      	  	  	$suma= $suma + $data1->getCanent();
+      	  	  }
+      	  	}
+      	  }
+      	}
+      }
+      if ($tipref=='P')
+      {
+      	$t= new Criteria();
+      	$t->add(FaartpedPeer::NROPED,$codrefiere);
+      	$t->add(FaartpedPeer::CODART,$articulo);
+      	$datos= FaartpedPeer::doSelectOne($t);
+      }else if ($tipref=='NE')
+      {
+      	$t= new Criteria();
+      	$t->add(FaartnotPeer::NRONOT,$refnot);
+      	$t->add(FaartnotPeer::CODART,$articulo);
+      	$datos= FaartnotPeer::doSelectOne($t);
+      }else
+      {
+      	$t= new Criteria();
+      	$t->add(FaartfacPeer::REFFAC,$refnot);
+      	$t->add(FaartfacPeer::CODART,$articulo);
+      	$datos= FaartfacPeer::doSelectOne($t);
+      }
+      if ($datos)
+      {
+      	$totdes= $datos->getCandes();
+      	if ($tipref=='P' || $tipref=='F')
+      	  $totped= $datos->getCantot();
+      	else $totped=$datos->getCansol();
+
+      	$canrealped=$datos->getCantot();
+        $canrealdes=$datos->getCandes();
+      }
+      $sumgrid=$canentart;
+    }else {
+    	return false;
+    }
+    $cantaju=$totped - $suma - $sumgrid;
+    $canent= $totdes;
+    $canpuedoaju= $cantaju;
+    if (H::tofloat($ajustada)>($totped - $suma - $sumgrid))
+    {
+    	return false;
+    }else{
+       if ((H::tofloat($ajustada)>=$totdes) && (H::tofloat($ajustada)<=$cantaju))
+       {
+         if ($totdes!=$cantaju)
+         {
+         	return true;
+         }else return false;
+       }else return false;
+    }
+  }
+
+  public static function grabarComprobanteNotEnt(&$fanotent, $grid,&$msj2)
+  {
+    $grabarcomprobantenot=true;
+    $msj2="";
+
+	$correl=OrdendePago::Buscar_Correlativo();
+	$reftra=$fanotent->getNronot();
+    $fanotent->setNumcom($correl);
+	$contabc= new Contabc();
+	$contabc->setNumcom($correl);
+	$contabc->setReftra($reftra);
+	$contabc->setFeccom($fanotent->getFecnot());
+	$contabc->setDescom($fanotent->getDesnot());
+	$contabc->setStacom('D');
+	$contabc->setTipcom(null);
+	$contabc->setMoncom($fanotent->getMonnot());
+
+	$numasiento=0; // Generamos el asiento del Debito del articulo
+	$numasiento2=0;
+	$x=$grid[0];
+	$j=0;
+	while($j<count($x))
+	{
+	  $a= new Criteria();
+	  $a->add(CaregartPeer::CODART,$x[$j]->getCodart());
+	  $resul= CaregartPeer::doSelectOne($a);
+	  if ($resul)
+	  {
+	      $monto=$x[$j]->getTotart();
+	      if ($monto>0)
+	      {
+	        $f= new Criteria();
+	        $f->add(Contabc1Peer::NUMCOM,$correl);
+	        $f->add(Contabc1Peer::FECCOM,$fanotent->getFecnot());
+	        $f->add(Contabc1Peer::CODCTA,$resul->getCtavta());
+	        $resul2= Contabc1Peer::doSelectOne($f);
+	        if ($resul2)
+	        {
+	          $contabc->save();
+	          $resul2->setMonasi($resul2->getMonasi() + $monto);
+	          $resul2->save();
+	        }
+	        else
+	        {
+	          $k= new Criteria();
+	          $k->add(ContabbPeer::CODCTA,$resul->getCtavta());
+	          $resul2= ContabbPeer::doSelectOne($k);
+	          if ($resul2)
+	          {
+	          	$contabc->save();
+	            $numasiento= $numasiento + 1;
+	            $contabc1= new Contabc1();
+		        $contabc1->setNumcom($correl);
+		        $contabc1->setFeccom($fanotent->getFecnot());
+		        $contabc1->setCodcta($resul->getCtavta());
+		        $contabc1->setNumasi($numasiento);
+		        $contabc1->setRefasi($reftra);
+		        $contabc1->setDesasi($resul2->getDescta());
+		        $contabc1->setDebcre('D');
+		        $contabc1->setMonasi($monto);
+		        $contabc1->save();
+
+	          }
+	          else
+	          {
+	          	$msj2="El Artículo ".$x[$j]->getCodart()." no posee una Cuenta de Venta asociada válida... El comprobante de Nota de Entrega no será generado";
+	          	$grabarcomprobantenot=false;
+	          	return $grabarcomprobantenot;
+	          }
+	        }
+
+	        $f= new Criteria(); // Generamos el asiento del Credito del articulo
+	        $f->add(Contabc1Peer::NUMCOM,$correl);
+	        $f->add(Contabc1Peer::FECCOM,$fanotent->getFecnot());
+	        $f->add(Contabc1Peer::CODCTA,$resul->getCtapro());
+	        $resul2= Contabc1Peer::doSelectOne($f);
+	        if ($resul2)
+	        {
+	          $contabc->save();
+	          $resul2->setMonasi($resul2->getMonasi() + $monto);
+	          $resul2->save();
+	        }
+	        else
+	        {
+	          $k= new Criteria();
+	          $k->add(ContabbPeer::CODCTA,$resul->getCtapro());
+	          $resul2= ContabbPeer::doSelectOne($k);
+	          if ($resul2)
+	          {
+	          	$contabc->save();
+	            $numasiento2= $numasiento2 + 1;
+	            $contabc1= new Contabc1();
+		        $contabc1->setNumcom($correl);
+		        $contabc1->setFeccom($fanotent->getFecnot());
+		        $contabc1->setCodcta($resul->getCtapro());
+		        $contabc1->setNumasi($numasiento2);
+		        $contabc1->setRefasi($reftra);
+		        $contabc1->setDesasi($resul2->getDescta());
+		        $contabc1->setDebcre('C');
+		        $contabc1->setMonasi($monto);
+		        $contabc1->save();
+
+	          }
+	          else
+	          {
+	          	$msj2="El Artículo ".$x[$j]->getCodart()." no posee una Cuenta de Ingreso de Venta asociada válida... El comprobante de Nota de Entrega no será generado";
+	          	$grabarcomprobantenot=false;
+	          	return $grabarcomprobantenot;
+	          }
+	        }
+	    }
+	    else
+	    {
+	      	$msj2="El Monto del Artículo ".$x[$j]->getCodart()." debe ser mayor a cero";
+	        $grabarcomprobantenot=false;
+	        return $grabarcomprobantenot;
+	    }
+	    }
+	  	$j++;
+	  }
+
+    return $grabarcomprobantenot;
+  }
+
 
 /*******************************Fin Definición de Artículos **********************************************/
 

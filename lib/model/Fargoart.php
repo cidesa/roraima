@@ -17,12 +17,12 @@ class Fargoart extends BaseFargoart
 
   public function getNomrgo()
   {
-   return Herramientas::getX('CODRGO','Carecarg','Nomrgo',self::getCodrgo());
+   return Herramientas::getX('CODRGO','Farecarg','Nomrgo',self::getCodrgo());
   }
 
   public function getRecfij()
   {
-  	$re=Herramientas::getX('CODRGO','Carecarg','Calcul',self::getCodrgo());
+  	$re=Herramientas::getX('CODRGO','Farecarg','Calcul',self::getCodrgo());
   	if ($re=='S')
   	{
   		$valor="Si";
@@ -32,17 +32,17 @@ class Fargoart extends BaseFargoart
 
   public function getCodcta()
   {
-   return Herramientas::getX('CODRGO','Carecarg','Codcta',self::getCodrgo());
+   return Herramientas::getX('CODRGO','Farecarg','Codcta',self::getCodrgo());
   }
 
   public function getTipo()
   {
-   return Herramientas::getX('CODRGO','Carecarg','Tiprgo',self::getCodrgo());
+   return Herramientas::getX('CODRGO','Farecarg','Tiprgo',self::getCodrgo());
   }
 
   public function getMonrgo2()
   {
-   return number_format(Herramientas::getX('CODRGO','Carecarg','Monrgo',self::getCodrgo()), 2, ',', '.');
+   return number_format(Herramientas::getX('CODRGO','Farecarg','Monrgo',self::getCodrgo()), 2, ',', '.');
   }
 }
 

@@ -811,6 +811,9 @@ propel:
     autpor:
       type: VARCHAR
       size: 50
+    numcom:
+      type: VARCHAR
+      size: 8
     id:
       type: INTEGER
       required: true

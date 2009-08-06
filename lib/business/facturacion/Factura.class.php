@@ -1781,8 +1781,8 @@ class Factura {
   	if ($rgofijos=='S')
     {
       $c= new Criteria();
-      $c->add(CarecargPeer::CALCUL,'S');
-      $resul= CarecargPeer::doSelect($c);
+      $c->add(FarecargPeer::CALCUL,'S');
+      $resul= FarecargPeer::doSelect($c);
     }
     else
     {
@@ -1799,8 +1799,8 @@ class Factura {
       {
       	$fila1=$obj->getCodrgo();
       	$c= new Criteria();
-      	$c->add(CarecargPeer::CODRGO,$obj->getCodrgo());
-      	$reg= CarecargPeer::doSelectOne($c);
+      	$c->add(FarecargPeer::CODRGO,$obj->getCodrgo());
+      	$reg= FarecargPeer::doSelectOne($c);
       	if ($reg)
       	{
       	  $fila2=$reg->getNomrgo();

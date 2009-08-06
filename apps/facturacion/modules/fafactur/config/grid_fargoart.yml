@@ -13,7 +13,7 @@ opciones:                  # Opciones generales
   nombrecampo:             codrgo
   esgrabable:              true
   html:                    [size="10"]
-  catalogo:                [carecarg, sf_admin_edit_form, { Codrgo: 1, Nomrgo: 2 , Tiprgo: 6}, Carecarg_Fafactur ]
+  catalogo:                [farecarg, sf_admin_edit_form, { Codrgo: 1, Nomrgo: 2 , Tiprgo: 6}, Farecarg_Fafactur ]
 2:       # Columna 2
   titulo:                  Descripción
   tipo:                    t
