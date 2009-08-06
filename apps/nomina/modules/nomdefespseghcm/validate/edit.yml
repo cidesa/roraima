@@ -2,6 +2,7 @@ methods:
   post:
    - "npseghcm{codnom}"
    - "npseghcm{codcon}"
+   - "npseghcm{codconapo}"
 
 names:
   npseghcm{codnom}:
@@ -13,6 +14,11 @@ names:
     required:  Yes
     required_msg: El Código del Concepto no puede estar en Blanco
     validators: Validator_codcon
+
+  npseghcm{codconapo}:
+    required:  Yes
+    required_msg: El Código del Concepto no puede estar en Blanco
+    validators: Validator_codcon    
 
 
 Validator_codnom:
