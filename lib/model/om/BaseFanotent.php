@@ -77,6 +77,10 @@ abstract class BaseFanotent extends BaseObject  implements Persistent {
 
 
 	
+	protected $numcom;
+
+
+	
 	protected $id;
 
 	
@@ -248,6 +252,13 @@ abstract class BaseFanotent extends BaseObject  implements Persistent {
   {
 
     return trim($this->autpor);
+
+  }
+  
+  public function getNumcom()
+  {
+
+    return trim($this->numcom);
 
   }
   
@@ -449,6 +460,16 @@ abstract class BaseFanotent extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setNumcom($v)
+	{
+
+    if ($this->numcom !== $v) {
+        $this->numcom = $v;
+        $this->modifiedColumns[] = FanotentPeer::NUMCOM;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -497,7 +518,9 @@ abstract class BaseFanotent extends BaseObject  implements Persistent {
 
       $this->autpor = $rs->getString($startcol + 16);
 
-      $this->id = $rs->getInt($startcol + 17);
+      $this->numcom = $rs->getString($startcol + 17);
+
+      $this->id = $rs->getInt($startcol + 18);
 
       $this->resetModified();
 
@@ -505,7 +528,7 @@ abstract class BaseFanotent extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 18; 
+            return $startcol + 19; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Fanotent object", $e);
     }
@@ -704,6 +727,9 @@ abstract class BaseFanotent extends BaseObject  implements Persistent {
 				return $this->getAutpor();
 				break;
 			case 17:
+				return $this->getNumcom();
+				break;
+			case 18:
 				return $this->getId();
 				break;
 			default:
@@ -733,7 +759,8 @@ abstract class BaseFanotent extends BaseObject  implements Persistent {
 			$keys[14] => $this->getAutori(),
 			$keys[15] => $this->getFecaut(),
 			$keys[16] => $this->getAutpor(),
-			$keys[17] => $this->getId(),
+			$keys[17] => $this->getNumcom(),
+			$keys[18] => $this->getId(),
 		);
 		return $result;
 	}
@@ -801,6 +828,9 @@ abstract class BaseFanotent extends BaseObject  implements Persistent {
 				$this->setAutpor($value);
 				break;
 			case 17:
+				$this->setNumcom($value);
+				break;
+			case 18:
 				$this->setId($value);
 				break;
 		} 	}
@@ -827,7 +857,8 @@ abstract class BaseFanotent extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[14], $arr)) $this->setAutori($arr[$keys[14]]);
 		if (array_key_exists($keys[15], $arr)) $this->setFecaut($arr[$keys[15]]);
 		if (array_key_exists($keys[16], $arr)) $this->setAutpor($arr[$keys[16]]);
-		if (array_key_exists($keys[17], $arr)) $this->setId($arr[$keys[17]]);
+		if (array_key_exists($keys[17], $arr)) $this->setNumcom($arr[$keys[17]]);
+		if (array_key_exists($keys[18], $arr)) $this->setId($arr[$keys[18]]);
 	}
 
 	
@@ -852,6 +883,7 @@ abstract class BaseFanotent extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(FanotentPeer::AUTORI)) $criteria->add(FanotentPeer::AUTORI, $this->autori);
 		if ($this->isColumnModified(FanotentPeer::FECAUT)) $criteria->add(FanotentPeer::FECAUT, $this->fecaut);
 		if ($this->isColumnModified(FanotentPeer::AUTPOR)) $criteria->add(FanotentPeer::AUTPOR, $this->autpor);
+		if ($this->isColumnModified(FanotentPeer::NUMCOM)) $criteria->add(FanotentPeer::NUMCOM, $this->numcom);
 		if ($this->isColumnModified(FanotentPeer::ID)) $criteria->add(FanotentPeer::ID, $this->id);
 
 		return $criteria;
@@ -916,6 +948,8 @@ abstract class BaseFanotent extends BaseObject  implements Persistent {
 		$copyObj->setFecaut($this->fecaut);
 
 		$copyObj->setAutpor($this->autpor);
+
+		$copyObj->setNumcom($this->numcom);
 
 
 		$copyObj->setNew(true);

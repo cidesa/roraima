@@ -9,19 +9,12 @@
  */
 class Famovaju extends BaseFamovaju
 {
-  public function getCanajustada()
-  {
-    return self::getCanaju();
-  }
+  protected $numlot="";
 
   public function getDesart()
   {
    return Herramientas::getX('CODART','Caregart','Desart',self::getCodart());
   }
 
-  public function getCansol()
-  {
-    return self::getCanord();
-  }
 
 }

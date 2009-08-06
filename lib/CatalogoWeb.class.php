@@ -4615,15 +4615,15 @@ public function Tsmovlib_tesmovdeglib2()
     );
   }
 
-  public function Carecarg_Fafactur()
+  public function Farecarg_Fafactur()
   {
     $this->c = new Criteria();
 
     $this->columnas = array (
-      CarecargPeer::CODRGO => 'Código',
-      CarecargPeer::NOMRGO => 'Descripción',
-      CarecargPeer::TIPRGO => 'Tipo',
-      CarecargPeer::MONRGO => 'Monto'
+      FarecargPeer::CODRGO => 'Código',
+      FarecargPeer::NOMRGO => 'Descripción',
+      FarecargPeer::TIPRGO => 'Tipo',
+      FarecargPeer::MONRGO => 'Monto'
     );
   }
 

@@ -12,6 +12,8 @@ class Faartnot extends BaseFaartnot
 	protected $canentregar="0,00";
 	protected $canajustada="0,00";
 	protected $montot="0,00";
+	protected $canord="0,00";
+
 
   public function getDesart()
   {
@@ -23,9 +25,17 @@ class Faartnot extends BaseFaartnot
    return Herramientas::getX('CODALM','Cadefalm','Nomalm',self::getCodalm());
   }
 
-  public function getCanord()
+  /*public function getCanord()
   {
   	$val=self::getCanent() + self::getCandes();
     return $val;
+  }*/
+
+  public function afterHydrate()
+  {
+    $this->canord=number_format(self::getCanent(), 2, ',', '.');
+    $val=self::getPreart() * self::getCanent();
+    $this->montot=number_format($val, 2, ',', '.');
+
   }
 }

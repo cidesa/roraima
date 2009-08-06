@@ -23,7 +23,7 @@ generator:
       dessnc: { name: Descripción SNC}
       ctavta: { name: Cuenta Venta Contado}
       ctacos: { name: Cuenta Costo}
-      ctapro: { name: Cuenta Costo Producción}      
+      ctapro: { name: Cuenta Ingresos por Venta}
     list:
       title:          Artículos y Servicios
       filters:        [codart, desart, tipo, ramart]

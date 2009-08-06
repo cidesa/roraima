@@ -11,6 +11,7 @@ names:
   faajuste{refaju}:
     required:  Yes
     required_msg: El Número no puede estar en Blanco.
+    validators: Validator_refaju
 
   faajuste{fecaju}:
     required:  Yes
@@ -33,7 +34,12 @@ names:
     required:  No
     validators: ObservacionValidator
 
-
+Validator_refaju:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Faajuste
+        column:       refaju
+        unique_error: El registro ya Existe intente con otro.
 #FechaValidator:
 #    class:         CidesaDateNow
 #    param:

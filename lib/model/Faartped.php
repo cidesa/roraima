@@ -35,6 +35,7 @@ class Faartped extends BaseFaartped
 	protected $codubi="";
 	protected $nomubi="";
 	protected $nomalm="";
+	protected $numlot="";
 
    public function hydrate(ResultSet $rs, $startcol = 1)
    {
@@ -66,7 +67,8 @@ class Faartped extends BaseFaartped
       //$this->candes= 0.0;
       $this->cannodes=self::getCanord() - ($candes + $canent);
       $this->cannodesaux=self::getCanord() - ($candes + $canent);
-//      $this->montotdes= $montotdes + $montotent;
+      $valor=self::getPreart() * self::getCanord();
+      $this->montot=number_format($valor, 2, ',', '.');
       //$this->costo=$costodes + $costoent;
       if (self::getPreart()!=0)
       {

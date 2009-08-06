@@ -1,32 +1,31 @@
- function Cantidad(id)
+ function cantidadaju(id)
  {
-   var aux = id.split("_");
-   var name=aux[0];
-   var fil=aux[1];
-   var col=parseInt(aux[2]);
+   if (e.keyCode==13 || e.keyCode==9)
+   {
+     var aux = id.split("_");
+	 var name=aux[0];
+	 var fil=aux[1];
+	 var col=parseInt(aux[2]);
 
-   var colaju=col+1;
-   var colsol=col-1;
-   var colent=col;
-   var colprecio=col+3;
-   var coltotal=col+2;
-   var colart=col-3;
+	 var colart=col-3;
+	 var colcansol=col-1;
+     var colprecio=col+1;
+     var coltotal=col+2;
 
-   var cantaju=name+"_"+fil+"_"+colaju;
-   var cantent=name+"_"+fil+"_"+colent;
-   var precio=name+"_"+fil+"_"+colprecio;
-   var total=name+"_"+fil+"_"+coltotal;
-   var art=name+"_"+fil+"_"+colart;
-   var cantsol=name+"_"+fil+"_"+colsol;
+     var articulo=name+"_"+fil+"_"+colart;
+     var cantsol=name+"_"+fil+"_"+colcansol;
+     var precio=name+"_"+fil+"_"+colprecio;
+     var total=name+"_"+fil+"_"+coltotal;
 
-   if ($(art).value != ''){
-	   //Obtener el valor de la cantidad a entregar
-	   var num1=toFloat(id);
-	   //Obtener el valor de la cantidad solicitada
-	   var num2=toFloat(cantsol);
-	   //Obtener el valor del precio
-	   var num3=toFloat(precio);
+     var solicitida=$(cantsol).value;
+     var aajustar=$(id).value;
+     var precioart=$(precio).value;
+     var referencia=$('faajuste_refaju').value;
+     var tipref=$('faajuste_tipaju').value;
+     var articuloaju=$(articulo).value;
+     var canentart=cantidadEntregarArt(fil,articuloaju);
 
+     if ($(art).value != ''){
 	   if (!validarnumero(id))
 	   {
 	    alert_('Monto Inv&aacute;lido');
@@ -34,13 +33,9 @@
 	   }
 	   else
 	   {
-	     var ajustada = parseFloat(num1) - parseFloat(num2);
-	     $(cantaju).value=format(ajustada.toFixed(2),'.',',','.');
-	     var costototal=parseFloat(ajustada)*parseFloat(num3);
-	     $(total).value=format(costototal.toFixed(2),'.',',','.');
-	     monto_total();
+         new Ajax.Request(getUrlModuloAjax(), {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=3&cantaju='+id+'&solicit='+solicitida+'&cantsol='+cantsol+'&referencia='+referencia+'&tipref='+tipref+'&articuloaju='+articuloaju+'&mtotal='+total+'&precioart='+precioart+'&canentart='+canentart+'&codigo='+aajustar})
 	   }
-
+	 }
    }
   }
 
@@ -63,3 +58,27 @@
     }
     $('faajuste_monaju').value=format(acum.toFixed(2),'.',',','.');
   }
+
+   function cantidadEntregarArt(fil,codart)
+ {
+   var cant_entreg=0;
+   var am=totalregistros('ax',1,30);
+   var i=0;
+   while (i<am)
+   {
+    var codart="ax"+"_"+i+"_1";
+    var canaju="ax"+"_"+i+"_7";
+    var ncanaju=toFloat(canaju);
+
+     if (i!=fil)
+     {
+       if ($(codart).value==codart)
+       {
+           cant_entreg= cant_entreg + ncanaju;
+       }
+     }
+    i++;
+   }
+
+   return cant_entreg;
+ }

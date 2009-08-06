@@ -17,9 +17,7 @@
 
 <h2 class="h2" onclick="javascript: return $('divDatos del Ajuste').toggle();"><?php echo __('Datos del Ajuste') ?></h2>
 <fieldset id="sf_fieldset_datos_del_ajuste" class="">
-
 <div class="form-row" id="divDatos del Ajuste">
-
 <table>
   <tr>
     <th>
@@ -37,7 +35,6 @@
 		  'onBlur'  => "javascript:event.keyCode=13; enters(event,this.value);",
 		  'readonly'  =>  true,
 		)); echo $value ? $value : '&nbsp;' ?>
-
 		    </div>
 		</div>
 	</th>
@@ -59,14 +56,13 @@
 		  'onkeyup' => "javascript: mascara(this,'/',patron,true)",
 		  'readonly'  =>  $faajuste->getId()!='' ? true : false ,
 		 ),date('Y-m-d')); echo $value ? $value : '&nbsp;' ?>
-
 		    </div>
 		</div>
 	</th>
   </tr>
 </table>
 
-<br/>
+<br>
 
 <table>
   <tr>
@@ -82,8 +78,7 @@
              'onchange' => "habilitarefere(this.id)",
              'onFocus'  =>  $faajuste->getId()!='' ? "this.blur()" : false ,
 	       )) ?>
-
-		    </div>
+		  </div>
 		</div>
 	</th>
 	<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
@@ -107,7 +102,6 @@
 		        'script'   => true,
 		          'with' => "'ajax=1&cajtexmos=&cajtexcom=&codigo='+this.value+'&tipaju='+$('faajuste_tipaju').value"
 		        )))); echo $value ? $value : '&nbsp;' ?>
-
 		    </div>
 		</div>
 	</th>
@@ -129,7 +123,7 @@
   </tr>
 </table>
 
-<br/>
+<br>
 
 <table>
   <tr>
@@ -141,25 +135,19 @@
 		    <?php echo form_error('faajuste{rifpro}', array('class' => 'form-error-msg')) ?>
 		  <?php endif; ?>
 
-		  <?php //$value = get_partial('codcli', array('type' => 'edit', 'faajuste' => $faajuste)); echo $value ? $value : '&nbsp;' ?>
-
 			<?php $value = object_input_tag($faajuste, 'getRifpro', array (
 			  'size' => 20,
 			  'control_name' => 'faajuste[rifpro]',
 			  'readonly'  =>  true,
 			  )); echo $value ? $value : '&nbsp;' ?>
-			<th>
-			   <?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Rifcli_Fapedido/clase/Facliente/frame/sf_admin_edit_form/obj1/faajuste_rifpro/obj2/faajuste_nompro/campo1/rifpro/campo2/nompro','','','botoncat')?></th>
-			</th>
-			<th>
+             &nbsp;&nbsp;&nbsp;
+			   <?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Rifcli_Fapedido/clase/Facliente/frame/sf_admin_edit_form/obj1/faajuste_rifpro/obj2/faajuste_nompro/campo1/rifpro/campo2/nompro','','','botoncat')?>
+		    </div>
 			  <?php $value = object_input_tag($faajuste, 'getNompro', array (
 			  'size' => 70,
 			  'disabled' => true,
 			  'control_name' => 'faajuste[nompro]',
 			)); echo $value ? $value : '&nbsp;' ?>
-			</th>
-
-		    </div>
 		</div>
 	</th>
   </tr>
@@ -185,11 +173,13 @@
 		    </div>
 		</div>
 	</th>
+	</tr>
 </table>
 
-<br/>
+<br>
 
 <table>
+  <tr>
 	<th>
 		<div id="divtelpro">
 		  <?php echo label_for('faajuste[telpro]', __($labels['faajuste{telpro}' ]), 'class="required" Style="text-align:left; width:150px"') ?>
@@ -226,14 +216,13 @@
 		  'control_name' => 'faajuste[desaju]',
 		  'readonly'  =>  $faajuste->getId()!='' ? true : false ,
 		)); echo $value ? $value : '&nbsp;' ?>
-
 		    </div>
 		</div>
 	</th>
   </tr>
 </table>
 
-<br/>
+<br>
 
 <table>
   <tr>
@@ -250,7 +239,6 @@
 		  'readonly' => true,
 		  'control_name' => 'faajuste[monaju]',
 		),$default_value = number_format($value,2,',','.')); echo $value ? $value : '&nbsp;' ?>
-
 		    </div>
 		</div>
 	</th>
@@ -260,19 +248,17 @@
 </div>
 </fieldset>
 
+<fieldset>
+<div class="form-row" >
 <div class="form-row" id="divGrid">
-<!--<form name="form1" id="form1">-->
-<?
-echo grid_tag($obj);
-?>
-<!--</form>-->
+<?php echo grid_tag($obj); ?>
 </div>
-<br/>
 </div>
 </fieldset>
+
+
 <h2 class="h2" onclick="javascript: return $('divObservación').toggle();"><?php echo __('Observación') ?></h2>
 <fieldset id="sf_fieldset_observaci__n" class="">
-
 <div class="form-row" id="divObservación">
 <div id="divobsaju">
   <?php echo label_for('faajuste[obsaju]', __($labels['faajuste{obsaju}' ]), 'class="required" Style="text-align:left; width:150px"') ?>
@@ -287,12 +273,12 @@ echo grid_tag($obj);
   'control_name' => 'faajuste[obsaju]',
   'readonly'  =>  $faajuste->getId()!='' ? true : false ,
 )); echo $value ? $value : '&nbsp;' ?>
-
     </div>
 </div>
-<br/>
 </div>
 </fieldset>
+
+
 
 <?php include_partial('edit_actions', array('faajuste' => $faajuste)) ?>
 
@@ -306,7 +292,7 @@ echo grid_tag($obj);
   'class' => 'sf_admin_action_delete',
 )) ?><?php endif; ?>
 </li>
-  </ul>
+</ul>
 
 <script language="javascript">
  $$('.botoncat')[2].disabled=true; //rif

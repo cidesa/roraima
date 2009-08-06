@@ -39,6 +39,9 @@ class Faartfac extends BaseFaartfac
   protected $codubi="";
   protected $nomubi="";
   protected $nomalm="";
+  protected $canord="0,00";
+  protected $preart="0,00";
+  protected $numlot="";
 
    public function hydrate(ResultSet $rs, $startcol = 1)
    {
@@ -93,10 +96,10 @@ class Faartfac extends BaseFaartfac
    return self::getCantot();
   }
 
-  public function getPreart()
+ /* public function getPreart()
   {
    return self::getPrecio();
-  }
+  }*/
 
   public function afterHydrate()
   {
@@ -104,6 +107,10 @@ class Faartfac extends BaseFaartfac
     {
       $this->precioe=self::getPrecio();
     }
+    $this->canord=number_format(self::getCantot(), 2, ',', '.');
+    $this->preart=number_format(self::getPrecio(), 2, ',', '.');
+    $val=self::getPrecio() * self::getCantot();
+    $this->montot=number_format($val, 2, ',', '.');
   }
 
 }

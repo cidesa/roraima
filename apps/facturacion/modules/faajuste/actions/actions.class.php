@@ -240,17 +240,17 @@ $this->Bitacora('Guardo');
 
 	   if ($codigo!="")
 	   {
-	   		if ($tipaju == 'P'){
+	   		if ($tipaju == 'P'){ // Refiere a Pedido
 		         $c= new Criteria();
 		         $c->add(FaartpedPeer::NROPED,$codigo);
 		         $reg= FaartpedPeer::doSelect($c);
 	   		}
-	   		else if ($tipaju == 'NE'){
+	   		else if ($tipaju == 'NE'){ // Refiere a Nota de Entrega
 		         $c= new Criteria();
 		         $c->add(FaartnotPeer::NRONOT,$codigo);
 		         $reg= FaartnotPeer::doSelect($c);
 	   		}
-	   		else if ($tipaju == 'F'){
+	   		else {  // Refiere a Factura
 		         $c= new Criteria();
 		         $c->add(FaartfacPeer::REFFAC,$codigo);
 		         $reg= FaartfacPeer::doSelect($c);
@@ -302,7 +302,7 @@ $this->Bitacora('Guardo');
         $col2->setAlineacionObjeto(Columna::IZQUIERDA);
         $col2->setAlineacionContenido(Columna::IZQUIERDA);
         $col2->setNombreCampo('desart');
-        $col2->setHTML('type="text" size="30x1" readonly=true');
+        $col2->setHTML('type="text" size="30x2" readonly=true');
 
         $col3 = new Columna('Cant. Solicitada');
         $col3->setTipo(Columna::MONTO);
@@ -313,33 +313,30 @@ $this->Bitacora('Guardo');
    		$col3->setNombreCampo('canord');
         $col3->setHTML('type="text" size="10" readonly=true');
 
-        $col4 = new Columna('Cant. Entregar');
+        $col4 = new Columna('Cant. Ajustar');
         $col4->setTipo(Columna::MONTO);
         $col4->setEsGrabable(true);
         $col4->setAlineacionContenido(Columna::IZQUIERDA);
         $col4->setAlineacionObjeto(Columna::IZQUIERDA);
         $col4->setEsNumerico(true);
    		$col4->setNombreCampo('canaju');
-        $col4->setHTML('type="text" size="10" readonly=true');
-        $col4->setHTML('onBlur=Cantidad(this.id);');
-		if ($nrodev != ''){
-			$col4->setOculta(true);
-		}
+        $col4->setHTML('type="text" size="10"');
+        $col4->setJScript('onKeypress="cantidadaju(event,this.id)"');
 
         $col5 = clone $col3;
-        $col5->setTitulo('Cant. Ajustada');
-        $col5->setNombreCampo('canajustada');
+        $col5->setTitulo('Precio');
+        $col5->setNombreCampo('preart');
         $col5->setHTML('type="text" size="10" readonly=true');
 
         $col6 = clone $col3;
-        $col6->setTitulo('Total');
+        $col6->setTitulo('Monto Ajuste');
        	$col6->setNombreCampo('montot');
         $col6->setHTML('type="text" size="10" readonly=true');
-        $col6->setEsTotal(true,'fadevolu_mondev');
+        $col6->setEsTotal(true,'faajuste_monaju');
 
-        $col7 = clone $col3;
-        $col7->setTitulo('Costo');
-        $col7->setNombreCampo('preart');
+        $col7 = clone $col1;
+        $col7->setTitulo('Num. Lote');
+       	$col7->setNombreCampo('numlot');
         $col7->setHTML('type="text" size="10" readonly=true');
         $col7->setOculta(true);
 
@@ -351,7 +348,8 @@ $this->Bitacora('Guardo');
         $opciones->addColumna($col5);
         $opciones->addColumna($col6);
         $opciones->addColumna($col7);
-	    // Ee genera el arreglo de opciones necesario para generar el grid
+
+	    // En genera el arreglo de opciones necesario para generar el grid
         $this->obj = $opciones->getConfig($reg);
 
   }
@@ -372,8 +370,97 @@ $this->Bitacora('Guardo');
         $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$cajtexcom.'","6","c"]]';
         $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
       	return sfView::HEADER_ONLY;
+      case '3':
+        if (H::tofloat($codigo)>0)
+        {
+          $canent=0;
+          $c = new Criteria();
+		  $c->add(EmpresaPeer::CODEMP,'001');
+		  $reg = EmpresaPeer::doSelectone($c);
+		  if ($reg)
+		  	$numlot = $reg->getNumlot();
+
+          if ($this->getRequestParameter('tipref')=='P')
+          {
+             $cantival=Facturacion::chequearCantPedido($this->getRequestParameter('referencia'),$this->getRequestParameter('articuloaju'),$codigo,$this->getRequestParameter('solicit'),&$cantaju);
+          }else if ($this->getRequestParameter('tipref')=='NE'){
+             $cantival=Facturacion::chequearCantNota($this->getRequestParameter('referencia'),$this->getRequestParameter('articuloaju'),$codigo,$this->getRequestParameter('solicit'),$this->getRequestParameter('tipref'),$this->getRequestParameter('canentart'),&$cantaju,&$canent);
+          }else{
+
+          }
+          $canpuedoaju=$cantaju;
+          if ($cantival)
+          {
+           if (H::tofloat($codigo)>H::tofloat($this->getRequestParameter('solicit')))
+           {
+           	 if (H::tofloat($codigo) <= $numlot || H::getX('CODART','Caregart','Tipo',$this->getRequestParameter('articuloaju'))=='S')
+           	 {
+           	   $catajuste=$codigo;
+               $producto=H::tofloat($codigo) * H::tofloat($this->getRequestParameter('precioart'));
+               $total=number_format($producto,2,',','.');
+           	 }else{
+           	 	$javascript="alert('La cantidad del Ajuste excede la existncia del Lote');";
+           	 	$catajuste=$numlot + H::tofloat($this->getRequestParameter('solicit'));
+           	 	$producto=$catajuste * H::tofloat($this->getRequestParameter('precioart'));
+                $total=number_format($producto,2,',','.');
+           	 }
+           }
+           else
+           {
+           	 if (H::tofloat($codigo)==H::tofloat($this->getRequestParameter('solicit')))
+           	 {
+           	 	$javascript="alert('La Cantidad del Ajuste no puede ser igual a la Cantidad Solicitada');";
+           	 	$catajuste="0,00";
+           	 	$total="0,00";
+
+           	 }
+           	 else
+           	 {
+           	 	$catajuste=$codigo;
+               $producto=H::tofloat($codigo) * H::tofloat($this->getRequestParameter('precioart'));
+               $total=number_format($producto,2,',','.');
+           	 }
+           }
+          }else{
+            if ($cantaju==-1)
+            {
+              $javascript="alert('La Cantidad Ajustada es inferior a la Suma de las Notas de Entregas Emitidas para ese Pedido. Debe Ajustar Primero Las Notas de Entregas y Luego Ajustar el Pedido');";
+              $catajuste="0,00";
+           	 	$total="0,00";
+            }else{
+            	if ($cantaju==-2)
+            	{
+            		$javascript="alert('La Cantidad Ajustada no puede ser Igual a la Cantidad Solicitada la misma debe ser menor');";
+            		$catajuste="0,00";
+           	 	    $total="0,00";
+            	}else{
+            		if (($cantaju!=H::tofloat($codigo)) && ($canent!=H::tofloat($codigo)))
+            		{
+                      if ($this->getRequestParameter('tipref')=='NE'){
+                      	$javascript="alert('No puede Ajustar por esa Cantidad. La misma debe ser mayor a $canent y menor o igual a $cantaju');";
+                      	$catajuste="0,00";
+           	 	        $total="0,00";
+                      }else{
+                      	$javascript="alert('No puede Ajustar por esa Cantidad. La misma debe ser mayor o igual $canent y menor a $cantaju');";
+                      	$catajuste="0,00";
+           	 	        $total="0,00";
+                      }
+            		}else{
+            	       $catajuste=$codigo;
+                       $producto=H::tofloat($codigo) * H::tofloat($this->getRequestParameter('precioart'));
+                       $total=number_format($producto,2,',','.');
+            		}
+            	}
+            }
+          }
+
+          $javascript=$javascript."actualizarsaldos();";
+          $output = '[["javascript","'.$javascript.'",""],["'.$this->getRequestParameter('cantaju').'","'.$catajuste.'",""],["'.$this->getRequestParameter('mtotal').'","'.$total.'",""]]';
+        }
+       break;
       default:
         $output = '[["","",""],["","",""],["","",""]]';
+        break;
     }
 
     $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
@@ -387,18 +474,15 @@ $this->Bitacora('Guardo');
     if($this->getRequest()->getMethod() == sfRequest::POST)
     {
       $this->faajuste = $this->getFaajusteOrCreate();
-
       try{ $this->updateFaajusteFromRequest();}
       catch (Exception $ex){}
-	  //$this->configGrid();
-
 	  $grid=Herramientas::CargarDatosGrid($this,$this->obj);
 	  $cantconcero = 0;
 	  $x=$grid[0];
       $j=0;
       while ($j<count($x))
       {
-		if ($x[$j]->getCanentregar() == 0){
+		if ($x[$j]->getCanaju() == 0){
 			$cantconcero = $cantconcero + 1;
 		}
          $j++;

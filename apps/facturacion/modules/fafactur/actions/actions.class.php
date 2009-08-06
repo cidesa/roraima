@@ -379,8 +379,8 @@ class fafacturActions extends autofafacturActions {
 				$valmonto = $this->getRequestParameter('valmonto');
 
 				$c = new Criteria();
-				$c->add(CarecargPeer :: CODRGO, $codigo);
-				$resul = CarecargPeer :: doSelectOne($c);
+				$c->add(FarecargPeer :: CODRGO, $codigo);
+				$resul = FarecargPeer :: doSelectOne($c);
 				if ($resul) {
 					$dato = $resul->getNomrgo();
 					$dato1 = $resul->getCodcta();
