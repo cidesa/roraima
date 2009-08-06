@@ -782,6 +782,12 @@
 492:
   cod: 492
   msj: El Concepto no Pertenece a la Nómina
+493:
+  cod: 493
+  msj: Si selecciona la opción Seguro HCM debe ingresar el porcentaje
+494:
+  cod: 494
+  msj: Debe ingresar un valor entre 1 y 100 en el porcentaje del Seguro HCM
 ###############OBRAS################
 1000:
     cod: 1000
