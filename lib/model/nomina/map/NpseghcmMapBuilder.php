@@ -38,6 +38,8 @@ class NpseghcmMapBuilder {
 
 		$tMap->addColumn('CODCON', 'Codcon', 'string', CreoleTypes::VARCHAR, false, 3);
 
+		$tMap->addColumn('CODCONAPO', 'Codconapo', 'string', CreoleTypes::VARCHAR, false, 3);
+
 		$tMap->addColumn('TIPPAR', 'Tippar', 'string', CreoleTypes::VARCHAR, false, 3);
 
 		$tMap->addColumn('EDADDES', 'Edaddes', 'double', CreoleTypes::NUMERIC, false, 14);

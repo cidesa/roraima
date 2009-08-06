@@ -20,4 +20,8 @@ class Npseghcm extends BaseNpseghcm
 	{
 		return H::getX('Codcon','Npdefcpt','nomcon',$this->codcon);
 	}
+	public function getNomconapo()
+	{
+		return H::getX('Codcon','Npdefcpt','nomcon',$this->codconapo);
+	}
 }
