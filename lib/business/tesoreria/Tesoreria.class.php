@@ -1090,6 +1090,7 @@ class Tesoreria {
       }else{
       	return 'El Comprobante Nro. '.$numcom.' no fué anulado, y falta que se genere el comprobante INVERSO.';
       }
+      }
       else
       {
         return 'El Nro. generado para el comprobante de anulación:'.$numcom2.' no es válido, y falta que se genere el comprobante INVERSO.';
