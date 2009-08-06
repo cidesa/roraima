@@ -254,8 +254,24 @@ class nomdefespseghcmActions extends autonomdefespseghcmActions
 			$this->coderr= 491;
 		}
 		$c=new Criteria();
+		$c->add(NpseghcmPeer::CODNOM,$this->npseghcm->getCodnom());	
+		$c->add(NpseghcmPeer::CODCONAPO,$this->npseghcm->getCodconapo());
+		$per = NpseghcmPeer::doSelect($c);		
+		if($per)
+		{
+			$this->coderr= 491;
+		}
+		$c=new Criteria();
 		$c->add(NpasiconnomPeer::CODNOM,$this->npseghcm->getCodnom());	
 		$c->add(NpasiconnomPeer::CODCON,$this->npseghcm->getCodcon());
+		$per = NpasiconnomPeer::doSelect($c);		
+		if(!$per)
+		{
+			$this->coderr= 492;
+		}
+		$c=new Criteria();
+		$c->add(NpasiconnomPeer::CODNOM,$this->npseghcm->getCodnom());	
+		$c->add(NpasiconnomPeer::CODCON,$this->npseghcm->getCodconapo());
 		$per = NpasiconnomPeer::doSelect($c);		
 		if(!$per)
 		{
@@ -291,6 +307,7 @@ class nomdefespseghcmActions extends autonomdefespseghcmActions
 	
 	$codnom=$clasemodelo->getCodnom();
 	$codcon=$clasemodelo->getCodcon();
+	$codconapo=$clasemodelo->getCodconapo();
 
 	if(count($grid[0])>0)
 	{
@@ -298,6 +315,7 @@ class nomdefespseghcmActions extends autonomdefespseghcmActions
 		{ 
 			$res->setCodnom($codnom);
 			$res->setCodcon($codcon);
+			$res->setCodconapo($codconapo);
 			$res->save();			
 		}	
 	}	
@@ -316,9 +334,41 @@ class nomdefespseghcmActions extends autonomdefespseghcmActions
   	$c = new Criteria();
 	$c->add(NpseghcmPeer::CODNOM,$clasemodelo->getCodnom());
 	$c->add(NpseghcmPeer::CODCON,$clasemodelo->getCodcon());
+	$c->add(NpseghcmPeer::CODCONAPO,$clasemodelo->getCodconapo());
 	$per = NpseghcmPeer::doDelete($c);
 	
     return -1;#parent::deleting($clasemodelo);
+  }
+  public function executeCatalogo()
+  {
+    $codigo = $this->getRequestParameter('codigo','');
+    $clase = $this->getRequestParameter('clase','');
+    $nombre = $this->getRequestParameter('name','');
+    $campobase = $this->getRequestParameter('campobase','');
+    $campoprincipal = $this->getRequestParameter('campoprincipal','');
+    $camposecundario = $this->getRequestParameter('camposecundario','');
+	$camposecundario2 = $this->getRequestParameter('camposecundario2','');
+
+    $c = new Criteria();
+    eval('$c->add('.ucfirst(strtolower($clase)).'Peer::'.strtoupper($campoprincipal).','.chr(39).$codigo.chr(39).');');
+    eval('$peer = '.ucfirst(strtolower($clase)).'Peer::doSelectOne($c);');
+
+  if($camposecundario2!='')
+  	eval('$cajasec = "'.strtolower($nombre).'_'.strtolower($camposecundario2).'";');
+  else
+  	eval('$cajasec = "'.strtolower($nombre).'_'.strtolower($camposecundario).'";');
+	
+  eval('$cajaid = "'.strtolower($nombre).'_'.strtolower($campobase).'";');
+  if ($peer){
+  eval('$valsec = $peer->get'.H::ObtenerNombreCampo($camposecundario).'();');
+  eval('$valid = $peer->getId();');}
+  else{
+    $valsec='';
+    $valid='';
+  }
+  $output = '[["'.$cajasec.'","'.$valsec.'",""],["'.$cajaid.'","'.$valid.'",""],["","",""]]';
+    $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+    return sfView::HEADER_ONLY;
   }
 
 

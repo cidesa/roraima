@@ -11,7 +11,9 @@
 	{
 		$$('.botoncat')[0].disabled=true;
 		$$('.botoncat')[1].disabled=true;
+		$$('.botoncat')[2].disabled=true;
 		$('npseghcm_codnom').readOnly=true;
 		$('npseghcm_codcon').readOnly=true;
+		$('npseghcm_codconapo').readOnly=true;
 	}	
 </script>
