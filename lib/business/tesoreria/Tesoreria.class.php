@@ -889,40 +889,44 @@ class Tesoreria {
   }
 
   public static function actualiza_Orden_De_Pago($reflib, $numcue, $tipmov) {
+    $result=array();
     $sql = "Select numord,monpag from opordche where numche='" . $reflib . "' and codcta='".$numcue."' order by numche";
     if (Herramientas :: BuscarDatos($sql,&$result))
     {
-      foreach ($result as $opordche) {
+      $j=0;
+      while ($j<count($result))
+      {
         $c = new Criteria();
-        $c->add(OpordpagPeer :: NUMORD, $opordche["numord"]);
+        $c->add(OpordpagPeer :: NUMORD, $result[$j]["numord"]);
         $opordpag = OpordpagPeer :: doSelectOne($c);
         if ($opordpag) {
           $opordpag->setStatus('N');
-          $opordpag->setNumche('');
-          $opordpag->setCtaban('');
+          $opordpag->setNumche(null);
+          $opordpag->setCtaban(null);
           if ($opordpag->getMonpag() > 0) {
-            $opordpag->setMonpag($opordpag->getMonpag() - (float) $opordche["monpag"]);
+            $opordpag->setMonpag($opordpag->getMonpag() - $result[$j]["monpag"]);
           } else {
             $opordpag->setMonpag(0);
           }
           $opordpag->save();
         }
 
-        $c = new Criteria();
-        $c->add(OpdetperPeer :: NUMORD, $opordche["numord"]);
-        $c->add(OpdetperPeer :: NUMCHE, $reflib);
-        $c->add(OpdetperPeer :: CTABAN, $numcue);
-        $c->add(OpdetperPeer :: TIPMOV, $tipmov);
-        $opdetper = OpdetperPeer :: doSelectOne($c);
+        $c1 = new Criteria();
+        $c1->add(OpdetperPeer :: NUMORD, $result[$j]["numord"]);
+        $c1->add(OpdetperPeer :: NUMCHE, $reflib);
+        $c1->add(OpdetperPeer :: CTABAN, $numcue);
+        $c1->add(OpdetperPeer :: TIPMOV, $tipmov);
+        $opdetper = OpdetperPeer :: doSelectOne($c1);
         if ($opdetper) {
-          $opdetper->setFecpag('');
-          $opdetper->setNumche('');
+          $opdetper->setFecpag(null);
+          $opdetper->setNumche(null);
           $opdetper->save();
         }
+        $j++;
       }
-      $c = new Criteria();
-      $c->add(OpordchePeer :: NUMCHE, $reflib);
-      OpordchePeer :: doDelete($c);
+      $c2 = new Criteria();
+      $c2->add(OpordchePeer :: NUMCHE, $reflib);
+      OpordchePeer :: doDelete($c2);
 
       return '';
     } else {
@@ -931,8 +935,8 @@ class Tesoreria {
       $res = OpordpagPeer :: doSelectOne($c);
       if ($res) {
         foreach ($res as $opordpag) {
-          $opordpag->setNumche('');
-          $opordpag->setCtaban('');
+          $opordpag->setNumche(null);
+          $opordpag->setCtaban(null);
           $opordpag->setStatus('N');
           $opordpag->save();
         }
