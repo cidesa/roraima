@@ -251,21 +251,21 @@ public static function CalculoPorConceptos($conceptos,$codnom,$profec,$frecal,$p
 					{
 					  $sqlhcm2="select monto from npseghcm where codnom='$codnom' and codcon='".$conceptos["codcon"]."' and
 					            tippar='000' and 
-								edaddes>=((to_date('$profec','yyyy-mm-dd')-to_date('$fechanac','yyyy-mm-dd'))/365) and
-								edadhas<=((to_date('$profec','yyyy-mm-dd')-to_date('$fechanac','yyyy-mm-dd'))/365) ";
+								((to_date('$profec','yyyy-mm-dd')-to_date('$fechanac','yyyy-mm-dd'))/365)>=edaddes and
+								((to_date('$profec','yyyy-mm-dd')-to_date('$fechanac','yyyy-mm-dd'))/365)<=edadhas ";
 					  if (Herramientas::BuscarDatos($sqlhcm2,&$rshcm2))					  
 					  {
-					  	$montosegurohcm+=$rshcm2[0]['monto']-($rshcm2[0]['monto']*$rshoj[0]['porseghcm']);
+					  	$montosegurohcm+=abs($rshcm2[0]['monto']-($rshcm2[0]['monto']*($rshoj[0]['porseghcm']/100)));
 					  }							
 					}else
 					{
 					  $sqlhcm2="select monto from npseghcm where codnom='$codnom' and codcon='".$conceptos["codcon"]."' and
 					            tippar='001' and 
-								edaddes>=((to_date('$profec','yyyy-mm-dd')-to_date('$fechanac','yyyy-mm-dd'))/365) and
-								edadhas<=((to_date('$profec','yyyy-mm-dd')-to_date('$fechanac','yyyy-mm-dd'))/365) ";
+								((to_date('$profec','yyyy-mm-dd')-to_date('$fechanac','yyyy-mm-dd'))/365)>=edaddes and
+								((to_date('$profec','yyyy-mm-dd')-to_date('$fechanac','yyyy-mm-dd'))/365)<=edadhas ";
 					  if (Herramientas::BuscarDatos($sqlhcm2,&$rshcm2))					  
 					  {
-					  	$montosegurohcm+=$rshcm2[0]['monto']-($rshcm2[0]['monto']*($rshoj[0]['porseghcm']/100));
+					  	$montosegurohcm+=abs($rshcm2[0]['monto']-($rshcm2[0]['monto']*($rshoj[0]['porseghcm']/100)));
 					  }	
 					}
 					#CALCULO PARTE FAMILIAR
@@ -276,11 +276,11 @@ public static function CalculoPorConceptos($conceptos,$codnom,$profec,$frecal,$p
 					  {
 					  	$sqlhcmfam2="select monto from npseghcm where codnom='$codnom' and codcon='".$conceptos["codcon"]."' and
 					            tippar='".$rs['parfam']."' and 
-								edaddes>=((to_date('$profec','yyyy-mm-dd')-to_date('$fechanac','yyyy-mm-dd'))/365) and
-								edadhas<=((to_date('$profec','yyyy-mm-dd')-to_date('$fechanac','yyyy-mm-dd'))/365) ";
+								((to_date('$profec','yyyy-mm-dd')-to_date('".$rs['fecnac']."','yyyy-mm-dd'))/365)>=edaddes and
+								((to_date('$profec','yyyy-mm-dd')-to_date('".$rs['fecnac']."','yyyy-mm-dd'))/365)<=edadhas ";
 					    if (Herramientas::BuscarDatos($sqlhcmfam2,&$rshcmfam2))
 						{
-						 $montosegurohcm+=$rshcmfam2[0]['monto']-($rshcmfam2[0]['monto']*($rshcmfam[0]['porseghcm']/100)); 					
+						 $montosegurohcm+=abs($rshcmfam2[0]['monto']-($rshcmfam2[0]['monto']*($rs['porseghcm']/100))); 					
 						}					  	
 					  }
 					}					
@@ -298,18 +298,18 @@ public static function CalculoPorConceptos($conceptos,$codnom,$profec,$frecal,$p
 					{
 					  $sqlhcm2="select monto from npseghcm where codnom='$codnom' and codconapo='".$conceptos["codcon"]."' and
 					            tippar='000' and 
-								edaddes>=((to_date('$profec','yyyy-mm-dd')-to_date('$fechanac','yyyy-mm-dd'))/365) and
-								edadhas<=((to_date('$profec','yyyy-mm-dd')-to_date('$fechanac','yyyy-mm-dd'))/365) ";
+								((to_date('$profec','yyyy-mm-dd')-to_date('$fechanac','yyyy-mm-dd'))/365)>=edaddes and
+								((to_date('$profec','yyyy-mm-dd')-to_date('$fechanac','yyyy-mm-dd'))/365)<=edadhas ";
 					  if (Herramientas::BuscarDatos($sqlhcm2,&$rshcm2))					  
 					  {
-					  	$montosegurohcm+=($rshcm2[0]['monto']*$rshoj[0]['porseghcm']);
+					  	$montosegurohcm+=($rshcm2[0]['monto']*($rshoj[0]['porseghcm']/100));
 					  }							
 					}else
 					{
 					  $sqlhcm2="select monto from npseghcm where codnom='$codnom' and codconapo='".$conceptos["codcon"]."' and
 					            tippar='001' and 
-								edaddes>=((to_date('$profec','yyyy-mm-dd')-to_date('$fechanac','yyyy-mm-dd'))/365) and
-								edadhas<=((to_date('$profec','yyyy-mm-dd')-to_date('$fechanac','yyyy-mm-dd'))/365) ";
+								((to_date('$profec','yyyy-mm-dd')-to_date('$fechanac','yyyy-mm-dd'))/365)>=edaddes and
+								((to_date('$profec','yyyy-mm-dd')-to_date('$fechanac','yyyy-mm-dd'))/365)<=edadhas ";
 					  if (Herramientas::BuscarDatos($sqlhcm2,&$rshcm2))					  
 					  {
 					  	$montosegurohcm+=($rshcm2[0]['monto']*($rshoj[0]['porseghcm']/100));
@@ -323,11 +323,11 @@ public static function CalculoPorConceptos($conceptos,$codnom,$profec,$frecal,$p
 					  {
 					  	$sqlhcmfam2="select monto from npseghcm where codnom='$codnom' and codconapo='".$conceptos["codcon"]."' and
 					            tippar='".$rs['parfam']."' and 
-								edaddes>=((to_date('$profec','yyyy-mm-dd')-to_date('$fechanac','yyyy-mm-dd'))/365) and
-								edadhas<=((to_date('$profec','yyyy-mm-dd')-to_date('$fechanac','yyyy-mm-dd'))/365) ";
+								((to_date('$profec','yyyy-mm-dd')-to_date('".$rs['fecnac']."','yyyy-mm-dd'))/365)>=edaddes and
+								((to_date('$profec','yyyy-mm-dd')-to_date('".$rs['fecnac']."','yyyy-mm-dd'))/365)<=edadhas ";
 					    if (Herramientas::BuscarDatos($sqlhcmfam2,&$rshcmfam2))
 						{
-						 $montosegurohcm+=($rshcmfam2[0]['monto']*($rshcmfam[0]['porseghcm']/100)); 					
+						 $montosegurohcm+=($rshcmfam2[0]['monto']*($rs['porseghcm']/100)); 					
 						}					  	
 					  }
 					}					
