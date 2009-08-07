@@ -1485,8 +1485,8 @@ class Nomina {
                   FROM NPINFFAM A,NPPRIMASHIJOS C WHERE
                            A.CODEMP='" . $empleado . "'
                            and a.parfam=c.parfam
-                        AND TRUNC(Months_between(TO_DATE('" . $fecnom . "','DD/MM/YYYY'), A.FECNAC)/12)>= C.EDADDES
-                           AND TRUNC(Months_between(TO_DATE('" . $fecnom . "','DD/MM/YYYY'), A.FECNAC)/12)<= C.EDADHAS
+                        AND TRUNC(Months_between(TO_DATE('" . $fecnom . "','YYYY-MM-DD'), A.FECNAC)/12)>= C.EDADDES
+                           AND TRUNC(Months_between(TO_DATE('" . $fecnom . "','YYYY-MM-DD'), A.FECNAC)/12)<= C.EDADHAS
                   AND (CASE WHEN C.ESTUDIOS='S' THEN 'E' ELSE coalesce(a.ocupac,'') END)=coalesce(a.ocupac,'')";
         if (Herramientas :: BuscarDatos($sql, & $tabla)) {
           $valor = $tabla[0]["elmonto"];
