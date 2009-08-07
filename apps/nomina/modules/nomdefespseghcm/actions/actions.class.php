@@ -245,38 +245,42 @@ class nomdefespseghcmActions extends autonomdefespseghcmActions
 		{
 			$this->coderr= 489;
 		}
-		$c=new Criteria();
-		$c->add(NpseghcmPeer::CODNOM,$this->npseghcm->getCodnom());	
-		$c->add(NpseghcmPeer::CODCON,$this->npseghcm->getCodcon());
-		$per = NpseghcmPeer::doSelect($c);		
-		if($per)
+		if($this->npseghcm->getId()=='')
 		{
-			$this->coderr= 491;
+			$c=new Criteria();
+			$c->add(NpseghcmPeer::CODNOM,$this->npseghcm->getCodnom());	
+			$c->add(NpseghcmPeer::CODCON,$this->npseghcm->getCodcon());
+			$per = NpseghcmPeer::doSelect($c);		
+			if($per)
+			{
+				$this->coderr= 491;
+			}
+			$c=new Criteria();
+			$c->add(NpseghcmPeer::CODNOM,$this->npseghcm->getCodnom());	
+			$c->add(NpseghcmPeer::CODCONAPO,$this->npseghcm->getCodconapo());
+			$per = NpseghcmPeer::doSelect($c);		
+			if($per)
+			{
+				$this->coderr= 491;
+			}
+			$c=new Criteria();
+			$c->add(NpasiconnomPeer::CODNOM,$this->npseghcm->getCodnom());	
+			$c->add(NpasiconnomPeer::CODCON,$this->npseghcm->getCodcon());
+			$per = NpasiconnomPeer::doSelect($c);		
+			if(!$per)
+			{
+				$this->coderr= 492;
+			}
+			$c=new Criteria();
+			$c->add(NpasiconnomPeer::CODNOM,$this->npseghcm->getCodnom());	
+			$c->add(NpasiconnomPeer::CODCON,$this->npseghcm->getCodconapo());
+			$per = NpasiconnomPeer::doSelect($c);		
+			if(!$per)
+			{
+				$this->coderr= 492;
+			}	
 		}
-		$c=new Criteria();
-		$c->add(NpseghcmPeer::CODNOM,$this->npseghcm->getCodnom());	
-		$c->add(NpseghcmPeer::CODCONAPO,$this->npseghcm->getCodconapo());
-		$per = NpseghcmPeer::doSelect($c);		
-		if($per)
-		{
-			$this->coderr= 491;
-		}
-		$c=new Criteria();
-		$c->add(NpasiconnomPeer::CODNOM,$this->npseghcm->getCodnom());	
-		$c->add(NpasiconnomPeer::CODCON,$this->npseghcm->getCodcon());
-		$per = NpasiconnomPeer::doSelect($c);		
-		if(!$per)
-		{
-			$this->coderr= 492;
-		}
-		$c=new Criteria();
-		$c->add(NpasiconnomPeer::CODNOM,$this->npseghcm->getCodnom());	
-		$c->add(NpasiconnomPeer::CODCON,$this->npseghcm->getCodconapo());
-		$per = NpasiconnomPeer::doSelect($c);		
-		if(!$per)
-		{
-			$this->coderr= 492;
-		}
+		
 
       if($this->coderr!=-1){
         return false;
