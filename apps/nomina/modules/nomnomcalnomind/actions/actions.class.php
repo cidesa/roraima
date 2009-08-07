@@ -183,7 +183,6 @@ class nomnomcalnomindActions extends autonomnomcalnomindActions
 
             //ELIMINAR ESTA LINEA DESPUES DE LA PRUEBA
             $now = strtotime(date("Y-m-d H:i:s"));
-
             $obj=$this->getUser()->getAttribute('obj',null,'nomnomcalnomind');
             $objeto = H::CargarDatosGrid($this,$obj);
             $grid = $objeto[0];
@@ -264,11 +263,11 @@ class nomnomcalnomindActions extends autonomnomcalnomindActions
 
   public function configGrid($codnom='',$hasta='')
   {
-  $sql="Select distinct b.id,0 as check,b.cedemp,a.codemp,b.nomemp,a.codcar,b.staemp,b.fecnac,b.fecing,b.sexemp
+  $sql="Select distinct '' as id,0 as check,b.cedemp,a.codemp,replace(b.nomemp,'\'','') as nomemp,a.codcar,b.staemp,b.fecnac,b.fecing,b.sexemp
       from npasicaremp a,nphojint b, npsitemp c
       where a.codnom='".$codnom."' and a.status='V'
         and to_date(to_char(b.fecing,'dd/mm/yyyy'),'dd/mm/yyyy') < to_date('".$hasta."','dd/mm/yyyy')
-      and a.codemp=b.codemp --and a.codemp='07415254'
+      and a.codemp=b.codemp --and a.codemp='3565081'
       and b.staemp = c.codsitemp
       and c.calnom = 'S'
       and a.status = 'V'
