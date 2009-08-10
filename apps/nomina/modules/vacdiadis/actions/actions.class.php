@@ -26,6 +26,7 @@ public function executeList()
     $c->addSelectColumn("'' AS RANGOHASTA");
     $c->addSelectColumn("'' AS DIADIS");
     $c->addSelectColumn(NpvacdiadisPeer::CODNOM);
+	$c->addSelectColumn("'' AS JORNADA");
     $c->addSelectColumn("max(ID) AS ID");
 
     $c->addGroupByColumn(NpvacdiadisPeer::CODNOM);
@@ -256,11 +257,21 @@ public function configGrid($codigo='')
     $col3->setJScript('onBlur=validarEntero(this.id)');
     $col3->setNombreCampo('diadis');
     $col3->setHTML('type="text" size="5" readonly=false');
+	
+	$col4 = new Columna('Tipo Jornada');
+    $col4->setTipo(Columna::COMBO);
+	$col4->setCombo(array('H'=>'Días Hábiles', 'C'=>'Días Continuos'));
+    $col4->setEsGrabable(true);
+    $col4->setAlineacionObjeto(Columna::CENTRO);
+    $col4->setAlineacionContenido(Columna::CENTRO);
+    $col4->setNombreCampo('jornada');
+    $col4->setHTML(' ');
 
 
     $opciones->addColumna($col1);
     $opciones->addColumna($col2);
     $opciones->addColumna($col3);
+	$opciones->addColumna($col4);
     $this->obj = $opciones->getConfig($per);
  //   print "<pre>";
  //   print_r ($per);exit;
