@@ -13,5 +13,12 @@ class Npvacdiadis extends BaseNpvacdiadis
 	{
 		return Herramientas::getX('codnom','Npnomina','nomnom',self::getCodnom());
     }
+	public function getJornada()
+	{
+		if($this->jornada=='' || $this->jornada=='H')
+			return 'H';
+		else	
+			return 'C';
+    }
 
 }
