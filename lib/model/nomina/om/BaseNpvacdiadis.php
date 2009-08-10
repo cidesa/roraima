@@ -25,6 +25,10 @@ abstract class BaseNpvacdiadis extends BaseObject  implements Persistent {
 
 
 	
+	protected $jornada;
+
+
+	
 	protected $id;
 
 	
@@ -62,6 +66,13 @@ abstract class BaseNpvacdiadis extends BaseObject  implements Persistent {
   {
 
     return trim($this->codnom);
+
+  }
+  
+  public function getJornada()
+  {
+
+    return trim($this->jornada);
 
   }
   
@@ -112,6 +123,16 @@ abstract class BaseNpvacdiadis extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setJornada($v)
+	{
+
+    if ($this->jornada !== $v) {
+        $this->jornada = $v;
+        $this->modifiedColumns[] = NpvacdiadisPeer::JORNADA;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -134,7 +155,9 @@ abstract class BaseNpvacdiadis extends BaseObject  implements Persistent {
 
       $this->codnom = $rs->getString($startcol + 3);
 
-      $this->id = $rs->getInt($startcol + 4);
+      $this->jornada = $rs->getString($startcol + 4);
+
+      $this->id = $rs->getInt($startcol + 5);
 
       $this->resetModified();
 
@@ -142,7 +165,7 @@ abstract class BaseNpvacdiadis extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 5; 
+            return $startcol + 6; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Npvacdiadis object", $e);
     }
@@ -302,6 +325,9 @@ abstract class BaseNpvacdiadis extends BaseObject  implements Persistent {
 				return $this->getCodnom();
 				break;
 			case 4:
+				return $this->getJornada();
+				break;
+			case 5:
 				return $this->getId();
 				break;
 			default:
@@ -318,7 +344,8 @@ abstract class BaseNpvacdiadis extends BaseObject  implements Persistent {
 			$keys[1] => $this->getRangohasta(),
 			$keys[2] => $this->getDiadis(),
 			$keys[3] => $this->getCodnom(),
-			$keys[4] => $this->getId(),
+			$keys[4] => $this->getJornada(),
+			$keys[5] => $this->getId(),
 		);
 		return $result;
 	}
@@ -347,6 +374,9 @@ abstract class BaseNpvacdiadis extends BaseObject  implements Persistent {
 				$this->setCodnom($value);
 				break;
 			case 4:
+				$this->setJornada($value);
+				break;
+			case 5:
 				$this->setId($value);
 				break;
 		} 	}
@@ -360,7 +390,8 @@ abstract class BaseNpvacdiadis extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[1], $arr)) $this->setRangohasta($arr[$keys[1]]);
 		if (array_key_exists($keys[2], $arr)) $this->setDiadis($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setCodnom($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setId($arr[$keys[4]]);
+		if (array_key_exists($keys[4], $arr)) $this->setJornada($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setId($arr[$keys[5]]);
 	}
 
 	
@@ -372,6 +403,7 @@ abstract class BaseNpvacdiadis extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(NpvacdiadisPeer::RANGOHASTA)) $criteria->add(NpvacdiadisPeer::RANGOHASTA, $this->rangohasta);
 		if ($this->isColumnModified(NpvacdiadisPeer::DIADIS)) $criteria->add(NpvacdiadisPeer::DIADIS, $this->diadis);
 		if ($this->isColumnModified(NpvacdiadisPeer::CODNOM)) $criteria->add(NpvacdiadisPeer::CODNOM, $this->codnom);
+		if ($this->isColumnModified(NpvacdiadisPeer::JORNADA)) $criteria->add(NpvacdiadisPeer::JORNADA, $this->jornada);
 		if ($this->isColumnModified(NpvacdiadisPeer::ID)) $criteria->add(NpvacdiadisPeer::ID, $this->id);
 
 		return $criteria;
@@ -410,6 +442,8 @@ abstract class BaseNpvacdiadis extends BaseObject  implements Persistent {
 		$copyObj->setDiadis($this->diadis);
 
 		$copyObj->setCodnom($this->codnom);
+
+		$copyObj->setJornada($this->jornada);
 
 
 		$copyObj->setNew(true);

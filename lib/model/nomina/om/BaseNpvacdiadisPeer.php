@@ -13,7 +13,7 @@ abstract class BaseNpvacdiadisPeer {
 	const CLASS_DEFAULT = 'lib.model.nomina.Npvacdiadis';
 
 	
-	const NUM_COLUMNS = 5;
+	const NUM_COLUMNS = 6;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -32,6 +32,9 @@ abstract class BaseNpvacdiadisPeer {
 	const CODNOM = 'npvacdiadis.CODNOM';
 
 	
+	const JORNADA = 'npvacdiadis.JORNADA';
+
+	
 	const ID = 'npvacdiadis.ID';
 
 	
@@ -40,18 +43,18 @@ abstract class BaseNpvacdiadisPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Rangodesde', 'Rangohasta', 'Diadis', 'Codnom', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (NpvacdiadisPeer::RANGODESDE, NpvacdiadisPeer::RANGOHASTA, NpvacdiadisPeer::DIADIS, NpvacdiadisPeer::CODNOM, NpvacdiadisPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('rangodesde', 'rangohasta', 'diadis', 'codnom', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
+		BasePeer::TYPE_PHPNAME => array ('Rangodesde', 'Rangohasta', 'Diadis', 'Codnom', 'Jornada', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (NpvacdiadisPeer::RANGODESDE, NpvacdiadisPeer::RANGOHASTA, NpvacdiadisPeer::DIADIS, NpvacdiadisPeer::CODNOM, NpvacdiadisPeer::JORNADA, NpvacdiadisPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('rangodesde', 'rangohasta', 'diadis', 'codnom', 'jornada', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Rangodesde' => 0, 'Rangohasta' => 1, 'Diadis' => 2, 'Codnom' => 3, 'Id' => 4, ),
-		BasePeer::TYPE_COLNAME => array (NpvacdiadisPeer::RANGODESDE => 0, NpvacdiadisPeer::RANGOHASTA => 1, NpvacdiadisPeer::DIADIS => 2, NpvacdiadisPeer::CODNOM => 3, NpvacdiadisPeer::ID => 4, ),
-		BasePeer::TYPE_FIELDNAME => array ('rangodesde' => 0, 'rangohasta' => 1, 'diadis' => 2, 'codnom' => 3, 'id' => 4, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
+		BasePeer::TYPE_PHPNAME => array ('Rangodesde' => 0, 'Rangohasta' => 1, 'Diadis' => 2, 'Codnom' => 3, 'Jornada' => 4, 'Id' => 5, ),
+		BasePeer::TYPE_COLNAME => array (NpvacdiadisPeer::RANGODESDE => 0, NpvacdiadisPeer::RANGOHASTA => 1, NpvacdiadisPeer::DIADIS => 2, NpvacdiadisPeer::CODNOM => 3, NpvacdiadisPeer::JORNADA => 4, NpvacdiadisPeer::ID => 5, ),
+		BasePeer::TYPE_FIELDNAME => array ('rangodesde' => 0, 'rangohasta' => 1, 'diadis' => 2, 'codnom' => 3, 'jornada' => 4, 'id' => 5, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
 	);
 
 	
@@ -112,6 +115,8 @@ abstract class BaseNpvacdiadisPeer {
 		$criteria->addSelectColumn(NpvacdiadisPeer::DIADIS);
 
 		$criteria->addSelectColumn(NpvacdiadisPeer::CODNOM);
+
+		$criteria->addSelectColumn(NpvacdiadisPeer::JORNADA);
 
 		$criteria->addSelectColumn(NpvacdiadisPeer::ID);
 
