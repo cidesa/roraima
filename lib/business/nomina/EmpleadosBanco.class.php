@@ -663,6 +663,7 @@ public static function Grabar_grid_Vacdiadis($codigo,$grid)
 						            $npvacdiadis->setRangodesde($v->getRangodesde());
 						            $npvacdiadis->setRangohasta($v->getRangohasta());
 						            $npvacdiadis->setDiadis($v->getDiadis());
+									$npvacdiadis->setJornada($v->getJornada());
 						            $npvacdiadis->save();
                	                }
 		               	      	else
@@ -671,6 +672,7 @@ public static function Grabar_grid_Vacdiadis($codigo,$grid)
 						            $npvacdiadis->setRangodesde($v->getRangodesde());
 						            $npvacdiadis->setRangohasta($v->getRangohasta());
 						            $npvacdiadis->setDiadis('0');
+									$npvacdiadis->setJornada($v->getJornada());
 						            $npvacdiadis->save();
 		               	      	}
 
