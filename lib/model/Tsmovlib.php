@@ -11,6 +11,7 @@ class Tsmovlib extends BaseTsmovlib
 {
   protected $ctacon = '';
   protected $debcre = '';
+  protected $check = '';
 
 	public function getNomcue()
     {

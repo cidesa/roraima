@@ -2044,5 +2044,77 @@ class Tesoreria {
 
   }
 
+  public static function saveTesconmovban($clasemodelo,$grid)
+  {
+    $x=$grid[0];
+    $j=0;
+    while ($j<count($x))
+    {
+
+      if ($x[$j]->getCheck()=='1')
+      {
+      	$x[$j]->setStacon('C');
+      	$x[$j]->setStacon1('C');
+        $x[$j]->save();
+      }
+      $j++;
+    }
+	return -1;
+  }
+
+
+  public static function saveTesconmovlib($clasemodelo,$grid)
+  {
+    $x=$grid[0];
+    $j=0;
+    while ($j<count($x))
+    {
+
+      if ($x[$j]->getCheck()=='1')
+      {
+      	$x[$j]->setStacon('C');
+      	$x[$j]->setStacon1('C');
+        $x[$j]->save();
+      }
+      $j++;
+    }
+	return -1;
+  }
+
+  public static function saveTesdesconmovlib($clasemodelo,$grid)
+  {
+    $x=$grid[0];
+    $j=0;
+    while ($j<count($x))
+    {
+
+      if ($x[$j]->getCheck()=='1')
+      {
+      	$x[$j]->setStacon('N');
+      	$x[$j]->setStacon1('N');
+        $x[$j]->save();
+      }
+      $j++;
+    }
+	return -1;
+  }
+
+  public static function saveTesdesconmovban($clasemodelo,$grid)
+  {
+    $x=$grid[0];
+    $j=0;
+    while ($j<count($x))
+    {
+
+      if ($x[$j]->getCheck()=='1')
+      {
+      	$x[$j]->setStacon('N');
+      	$x[$j]->setStacon1('N');
+        $x[$j]->save();
+      }
+      $j++;
+    }
+	return -1;
+  }
 
 }

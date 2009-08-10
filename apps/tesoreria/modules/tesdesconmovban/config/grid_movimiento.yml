@@ -1,0 +1,45 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                false
+  tabla:                   tsmovban
+  anchogrid:               780
+  ancho:                   730
+  filas:                   0
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Selec
+  tipo:                    k
+  nombrecampo:             check
+  esgrabable:              true
+  html:                    [size="1" ]
+2:       # Columna 2
+  titulo:                  Referencia
+  tipo:                    t
+  nombrecampo:             refban
+  esgrabable:              true
+  html:                    [size="10", readonly=true ]
+3:       # Columna 3
+  titulo:                  Descripcion
+  tipo:                    a
+  nombrecampo:             desban
+  esgrabable:              false
+  html:                    [size="35x4", readonly=true ]
+4:       # Columna 4
+  titulo:                  Tipo
+  tipo:                    t
+  nombrecampo:             tipmov
+  esgrabable:              false
+  html:                    [size="3", readonly=true ]
+5:       # Columna 5
+  titulo:                  Fecha
+  tipo:                    f
+  nombrecampo:             fecban
+  esgrabable:              false
+  html:                    [size="10", readonly=true ]
+6:       # Columna 6
+  titulo:                  Monto
+  tipo:                    m
+  nombrecampo:             monmov
+  esgrabable:              false
+  html:                    [size="15", readonly=true ]
