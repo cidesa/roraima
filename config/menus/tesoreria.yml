@@ -52,6 +52,10 @@ tesoreria:
       Movimientos según Bancos Años Anteriores:               TesMovSegBanAnt
       Transferencias Bancarias:                               TesMovTraBan
       Conciliación Bancaria:                                  TesMovConBan
+      Conciliar Movimientos en Libros:                        TesConMovLib
+      Conciliar Movimientos en Bancos:                        TesConMovBan
+      DesConciliar Movimientos en Libros:                     TesDesConMovLib
+      DesConciliar Movimientos en Bancos:                     TesDesConMovBan
       Cierre de Periodo:                                      TesMovCieBan
     Caja:
       Cheques en Custodia:                                    TesCheCus

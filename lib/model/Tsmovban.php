@@ -9,6 +9,7 @@
  */
 class Tsmovban extends BaseTsmovban
 {
+	protected $check='';
 	public function getNombanco()
 	{
 		return Herramientas::getX('NumCue','tsdefban','nomcue',self::getNumcue());
