@@ -6291,6 +6291,9 @@ propel:
     codnom:
       type: VARCHAR
       size: 3
+    jornada:
+      type: VARCHAR
+      size: 1  
     id:
       type: INTEGER
       required: true
