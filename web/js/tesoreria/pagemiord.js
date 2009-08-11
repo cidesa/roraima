@@ -1681,11 +1681,11 @@
    var total=col-5;
    var imp=col-2;
 
-   var basemil=name+"_"+fil+"_"+bas;
-   var porcentmil=name+"_"+fil+"_"+porcent;
-   var montomil=name+"_"+fil+"_"+monto;
-   var totalfac=name+"_"+fil+"_"+total;
-   var impuesto=name+"_"+fil+"_"+imp;
+   var basemil=name+"_"+fil+"_15";
+   var porcentmil=name+"_"+fil+"_16";
+   var montomil=name+"_"+fil+"_17";
+   var totalfac=name+"_"+fil+"_9";
+   var impuesto=name+"_"+fil+"_12";
 
    var montotfac=toFloat(totalfac);
    var monimpuesto=toFloat(impuesto);
@@ -1695,88 +1695,113 @@
 
     var calcularbi=toFloat2(valor);
 
-   if ($('eltimbre').value==0)
-   {
-     alert('No hay Retencion de Ley de Timbre Fiscal');
-     $(id).checked=false;
-   }
-   else
-   {
-      if ($('id').value=="")
-      {
-        var baseimponible=porcentajeISLRN("1*MIL","BasImp");
-        var valor= String(baseimponible);
-        var porislr=toFloat2(valor);
 
-        var porcentaje=porcentajeISLRN("1*MIL","PorRet");
+		if ($('eltimbre').value == 0) {
+			alert('No hay Retencion de Ley de Timbre Fiscal');
+			$(id).checked = false;
+		}
+		else {
+			if ($('id').value == "") {
+				var baseimponible = porcentajeISLRN("1*MIL", "BasImp");
+				var valor = String(baseimponible);
+				var porislr = toFloat2(valor);
 
-         var calculo=((montotfac-monimpuesto)*porislr/100);
-         $(basemil).value=format(calculo.toFixed(2),'.',',','.');
-         $(basemil).disabled=false;
+				var porcentaje = porcentajeISLRN("1*MIL", "PorRet");
 
-         $(porcentmil).value=format(porcentaje,'.',',','.');
-         var cal2=monto1XMILN();
-      }
-      else
-      {
-         var baseimponible2=porcentajeISLRC("1*MIL","BasImp");
-         var valor=String(baseimponible2);
-         var porislr2=toFloat2(valor);
-         var porcentaje2=porcentajeISLRC("1*MIL","PorRet");
+                var baseiniunomil=toFloat(basemil);
+                if (baseiniunomil>0)
+                {
+                 $(basemil).value = format(baseiniunomil.toFixed(2), '.', ',', '.');
+                }else {
+				var calculo = ((montotfac - monimpuesto) * porislr / 100);
+				$(basemil).value = format(calculo.toFixed(2), '.', ',', '.');
+				}
+				$(basemil).disabled = false;
 
-         var calculo=((montotfac-monimpuesto)*porislr2/100);
-         $(basemil).value=format(calculo.toFixed(2),'.',',','.');
-         $(basemil).disabled=false;
-         $(porcentmil).value=format(porcentaje2,'.',',','.');
-         var cal2=monto1XMILC();
-      }
-      var base=toFloat(basemil);
-      var cal=((base*($('eltimbre').value))/calcularbi);
-      if (cal==cal2)
-      {
-        var calfin=cal;
-      }else if (cal2>cal)
-      {
-       var rest=cal2 - cal;
-       var calfin=cal2-rest;
-      }
-      else
-      {
-        var calfin=cal2;
-      }
+				$(porcentmil).value = format(porcentaje, '.', ',', '.');
+				var cal2 = monto1XMILN();
+			}
+			else {
+				var baseimponible2 = porcentajeISLRC("1*MIL", "BasImp");
+				var valor = String(baseimponible2);
+				var porislr2 = toFloat2(valor);
+				var porcentaje2 = porcentajeISLRC("1*MIL", "PorRet");
 
-      $(montomil).value=format(calfin.toFixed(2),'.',',','.');
-   }
+                 var baseiniunomil=toFloat(basemil);
+                if (baseiniunomil>0)
+                {
+                 $(basemil).value = format(baseiniunomil.toFixed(2), '.', ',', '.');
+                }else {
+				var calculo = ((montotfac - monimpuesto) * porislr2 / 100);
+				$(basemil).value = format(calculo.toFixed(2), '.', ',', '.');
+				}
+				$(basemil).disabled = false;
+				$(porcentmil).value = format(porcentaje2, '.', ',', '.');
+				var cal2 = monto1XMILC();
+			}
+			var base = toFloat(basemil);
+			var cal = ((base * ($('eltimbre').value)) / calcularbi);
+			if (cal == cal2) {
+				var calfin = cal;
+			}
+			else
+				if (cal2 > cal) {
+					var rest = cal2 - cal;
+					var calfin = cal2 - rest;
+				}
+				else {
+					var calfin = cal2;
+				}
+
+			$(montomil).value = format(calfin.toFixed(2), '.', ',', '.');
+		}
  }
 
   function recalunoxmil(id)
   {
-   var aux = id.split("_");
-   var name=aux[0];
-   var fil=aux[1];
-   var col=parseInt(aux[2]);
+   var am=totalregistros('ex',2,10);
+   var filas=parseInt($('numgridret').value);
+   var bm=totalregistros('dx',12,filas);
+   if (($('id').value=='' && am!=0) || ($('id').value!='' && bm!=0))
+   {
+	   var aux = id.split("_");
+	   var name=aux[0];
+	   var fil=aux[1];
+	   var col=parseInt(aux[2]);
 
-   var bas=col;
-   var porcent=col+1;
-   var monto=col+2;
-   var total=col-5;
-   var imp=col-2;
+	   var bas=col;
+	   var porcent=col+1;
+	   var monto=col+2;
+	   var total=col-5;
+	   var imp=col-2;
 
-   var basemil=name+"_"+fil+"_"+bas;
-   var porcentmil=name+"_"+fil+"_"+porcent;
-   var montomil=name+"_"+fil+"_"+monto;
-   var totalfac=name+"_"+fil+"_"+total;
-   var impuesto=name+"_"+fil+"_"+imp;
+	   var basemil=name+"_"+fil+"_"+bas;
+	   var porcentmil=name+"_"+fil+"_"+porcent;
+	   var montomil=name+"_"+fil+"_"+monto;
+	   var totalfac=name+"_"+fil+"_"+total;
+	   var impuesto=name+"_"+fil+"_"+imp;
 
-   toFloatVE(basemil);
+	   var montotfac=toFloat(totalfac);
+	   var monimpuesto=toFloat(impuesto);
+	   var montobasemil = toFloat(basemil);
+	   if ($('id').value=="")
+	   {
+  	     var porcentaje = porcentajeISLRN("1*MIL", "PorRet");
+	   }
+	   else
+	   {
+	     var porcentaje = porcentajeISLRC("1*MIL", "PorRet");
+	   }
 
-   var montotfac=toFloat(totalfac);
-   var monimpuesto=toFloat(impuesto);
-   var montobasemil = FloatVEtoFloat($(basemil).value);
-   var montoporcentmil = FloatVEtoFloat($(porcentmil).value);
+       var valor=String(porcentaje);
+       var num1=toFloat2(valor);
 
-   $(montomil).value = FloattoFloatVE(montobasemil*(montoporcentmil/100));
+	   var num2=(montobasemil*(num1/100));
 
+	   $(basemil).value = format(montobasemil.toFixed(2),'.',',','.');
+	   $(porcentmil).value = format(num1.toFixed(2),'.',',','.');
+	   $(montomil).value = format(num2.toFixed(2),'.',',','.');
+   }
   }
 
   function islr(id)
@@ -1793,12 +1818,12 @@
    var imp=col-6;
    var cod=col+4;
 
-   var baseislr=name+"_"+fil+"_"+bas;
-   var porcentislr=name+"_"+fil+"_"+porcent;
-   var montoislr=name+"_"+fil+"_"+monto;
-   var totalfac=name+"_"+fil+"_"+total;
-   var impuesto=name+"_"+fil+"_"+imp;
-   var codislr=name+"_"+fil+"_"+cod;
+   var baseislr=name+"_"+fil+"_19";
+   var porcentislr=name+"_"+fil+"_20";
+   var montoislr=name+"_"+fil+"_21";
+   var totalfac=name+"_"+fil+"_9";
+   var impuesto=name+"_"+fil+"_12";
+   var codislr=name+"_"+fil+"_22";
 
   var montotfac=toFloat(totalfac);
    if (montotfac>0)
@@ -1827,8 +1852,14 @@
         var valor2=String(porcentaje);
         var porcentajes=toFloat2(valor2);
 
+        var basiniislr=toFloat(baseislr);
+         if (basiniislr>0)
+         {
+           $(baseislr).value=format(basiniislr.toFixed(2),'.',',','.');
+         }else{
          var calculo=(((montotfac-monimpuesto)*basip)/100);
          $(baseislr).value=format(calculo.toFixed(2),'.',',','.');
+         }
          $(baseislr).disabled=false;
          $(porcentislr).value=format(porcentajes.toFixed(2),'.',',','.');
       }
@@ -1842,9 +1873,14 @@
 
         var valor2=String(porcentaje2);
         var porcentajes=toFloat2(valor2);
-
+         var basiniislr=toFloat(baseislr);
+         if (basiniislr>0)
+         {
+           $(baseislr).value=format(basiniislr.toFixed(2),'.',',','.');
+         }else{
          var calculo=(((montotfac-monimpuesto)*basip)/100);
          $(baseislr).value=format(calculo.toFixed(2),'.',',','.');
+         }
          $(baseislr).disabled=false;
          $(porcentislr).value=format(porcentajes.toFixed(2),'.',',','.');
       }
@@ -1892,12 +1928,13 @@
    var impuesto=name+"_"+fil+"_"+imp;
    var codislr=name+"_"+fil+"_"+cod;
 
-   toFloatVE(baseislr);
+   var montobaseislr = toFloat(baseislr);
+   var montoporcentislr = toFloat(porcentislr);
+   var cal=montobaseislr*(montoporcentislr/100);
 
-   var montobaseislr = FloatVEtoFloat($(baseislr).value);
-   var montoporcentislr = FloatVEtoFloat($(porcentislr).value);
+   $(id).value = format(montobaseislr.toFixed(2),'.',',','.');
 
-   $(montoislr).value = FloattoFloatVE(montobaseislr*(montoporcentislr/100));
+   $(montoislr).value = format(cal.toFixed(2),'.',',','.');
 
   }
 
@@ -2009,7 +2046,7 @@
     return calcularetiva;
   }
 
-  function totalizar(e,id)
+function totalizar(e,id)
   {
    if (e.keyCode==13 || e.keyCode==9)
    {
@@ -2059,10 +2096,19 @@
     {
       if ($(alic).value!="")
       {
+        var basiniiva=toFloat(name+"_"+fil+"_11");
+        if (basiniiva>0)
+        {
+         $(name+"_"+fil+"_11").value=format(basiniiva.toFixed(2),'.',',','.');
+        }
+        else
+        {
         var calculos=(((montotfac-monexento)/(100+alicuota))*100);
         $(name+"_"+fil+"_11").value=format(calculos.toFixed(2),'.',',','.');
+        }
 
         var baseimpo=toFloat(name+"_"+fil+"_11");
+
 
         calc=((baseimpo*alicuota)/100);
         $(name+"_"+fil+"_12").value=format(calc.toFixed(2),'.',',','.');
@@ -2088,8 +2134,16 @@
       }
       else
       {
+        var basiniiva=toFloat(name+"_"+fil+"_11");
+        if (basiniiva>0)
+        {
+         $(name+"_"+fil+"_11").value=format(basiniiva.toFixed(2),'.',',','.');
+        }
+        else
+        {
         var calculos=(((montotfac-monexento)/(100+0))*100);
         $(name+"_"+fil+"_11").value=format(calculos.toFixed(2),'.',',','.');
+        }
 
         var baseimpo=toFloat(name+"_"+fil+"_11");
 
@@ -2613,3 +2667,118 @@ function monto1XMILN()
       $(totalfac).value=$('opordpag_monord').value;
     }
  }
+
+ function totalizar2(id)
+  {
+     var aux = id.split("_");
+     var name=aux[0];
+     var fil=aux[1];
+     var col=parseInt(aux[2]);
+
+     var colum=col-1;
+     var colum2=col;
+
+    var totalfac=name+"_"+fil+"_9";
+    var exen=name+"_"+fil+"_10";
+    var alic=name+"_"+fil+"_8";
+    var retenido=name+"_"+fil+"_13";
+
+    var montotfac=toFloat(totalfac);
+    var monexento=toFloat(exen);
+    var monto=toFloat(name+"_"+fil+"_"+colum);
+    var monto2=toFloat(name+"_"+fil+"_"+colum2);
+    var alicuota=toFloat(alic);
+    cal=(monto*(-1));
+
+     if (!validarnumero(id))
+     {
+       alert('Monto Inv�lido');
+       $(id).value="0,00";
+     }
+
+     if (col==10)
+     {
+       if (monto2 > monto)
+       {
+         alert('El Monto no puede ser Mayor al Total de la factura');
+         $(name+"_"+fil+"_"+colum2).value="0,00";
+       }
+     }
+
+    if (($(name+"_"+fil+"_6").value=="03") && ($(name+"_"+fil+"_"+colum).value > 0))
+    {
+      $(name+"_"+fil+"_"+colum).value=format(cal.toFixed(2),'.',',','.');
+    }
+    var am=totalregistros('ex',2,10);
+    var filas=parseInt($('numgridret').value);
+    var bm=totalregistros('dx',12,filas);
+    if (($('id').value=='' && am!=0) || ($('id').value!='' && bm!=0))
+    {
+      if ($(alic).value!="")
+      {
+        var basiniiva=toFloat(name+"_"+fil+"_11");
+        if (basiniiva>0)
+        {
+         $(name+"_"+fil+"_11").value=format(basiniiva.toFixed(2),'.',',','.');
+        }
+        else
+        {
+        var calculos=(((montotfac-monexento)/(100+alicuota))*100);
+        $(name+"_"+fil+"_11").value=format(calculos.toFixed(2),'.',',','.');
+        }
+
+        var baseimpo=toFloat(name+"_"+fil+"_11");
+
+        calc=((baseimpo*alicuota)/100);
+        $(name+"_"+fil+"_12").value=format(calc.toFixed(2),'.',',','.');
+
+        if ($('id').value=="")
+        {
+          //num=((baseimpo*alicuota)/100);
+          num=toFloat(name+"_"+fil+"_12");
+          index=$(alic).selectedIndex;
+          var cod=$(alic).options[index].text;
+          var codigo=cod.split("_");
+          $(retenido).value= calculaRetiva(num,codigo[0]);
+        }
+        else
+        {
+         // num=((baseimpo*alicuota)/100);
+          num=toFloat(name+"_"+fil+"_12");
+          index=$(alic).selectedIndex;
+          var cod=$(alic).options[index].text;
+          var codigo=cod.split("_");
+          $(retenido).value= calculaRetivac(num,codigo[0]);
+        }
+      }
+      else
+      {
+        var basiniiva=toFloat(name+"_"+fil+"_11");
+        if (basiniiva>0)
+        {
+         $(name+"_"+fil+"_11").value=format(basiniiva.toFixed(2),'.',',','.');
+        }
+        else
+        {
+        var calculos=(((montotfac-monexento)/(100+0))*100);
+        $(name+"_"+fil+"_11").value=format(calculos.toFixed(2),'.',',','.');
+        }
+
+        var baseimpo=toFloat(name+"_"+fil+"_11");
+
+        calc=((baseimpo*0)/100);
+        $(name+"_"+fil+"_12").value=format(calc.toFixed(2),'.',',','.');
+
+        if ($('id').value=="")
+        {
+         $(retenido).value= "0,00";
+        }
+        else
+        {
+         $(retenido).value= "0,00";
+        }
+      }
+   }else{
+
+   }
+  }
