@@ -1030,6 +1030,7 @@ $this->Bitacora('Guardo');
     $col8->setNombreCampo('poriva');
     $col8->setCombo($arreglo1);
     $col8->setHTML(' ');
+    $col8->setJScript('onChange="totalizar2(this.id);"');
 
     $col9 = new Columna('Total Factura');
     $col9->setTipo(Columna::MONTO);
@@ -1060,7 +1061,7 @@ $this->Bitacora('Guardo');
     $col11->setAlineacionObjeto(Columna::DERECHA);
     $col11->setNombreCampo('basimp');
     $col11->setEsNumerico(true);
-    $col11->setJScript('onKeypress="entermonto_b(event,this.id)"');
+    $col11->setJScript('onKeypress="entermonto_b(event,this.id); totalizar(event,this.id);"');
     $col11->setHTML('size="15"');
     $col11->setEsTotal(true,'totbas');
 
