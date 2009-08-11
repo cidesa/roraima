@@ -33,7 +33,7 @@ names:
 
   tsdefban{codcta}:
     required:  Yes
-    required_msg: El Código no puedo estar en Blanco
+    required_msg: El Código Contable no puedo estar en Blanco
     validators: ExistValidator_codcta
 
   tsdefban{fecven}:
@@ -83,7 +83,7 @@ names:
 
   tsdefban{tipren}:
     required:  Yes
-    required_msg: Tipo de retención no puedo estar en Blanco
+    required_msg: El Tipo de Rendimiento no puedo estar en Blanco
     validators: ExistValidator_tipren
 
 Validator_numcue:
