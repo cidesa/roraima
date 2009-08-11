@@ -896,7 +896,11 @@ class Tesoreria {
       $j=0;
       while ($j<count($result))
       {
-        $c = new Criteria();
+
+         $sql4="update opordpag set estatus='N', numche=null, ctaban=null where numord='".$result[$j]["numord"]."'";
+         Herramientas::insertarRegistros($sql4);
+
+        /*$c = new Criteria();
         $c->add(OpordpagPeer :: NUMORD, $result[$j]["numord"]);
         $opordpag = OpordpagPeer :: doSelectOne($c);
         if ($opordpag) {
@@ -909,7 +913,7 @@ class Tesoreria {
             $opordpag->setMonpag(0);
           }
           $opordpag->save();
-        }
+        }*/
 
         $c1 = new Criteria();
         $c1->add(OpdetperPeer :: NUMORD, $result[$j]["numord"]);
@@ -930,7 +934,11 @@ class Tesoreria {
 
       return '';
     } else {
-      $c = new Criteria();
+
+    	$sql4="update opordpag set estatus='N', numche=null, ctaban=null where numche='".$reflib."'";
+         Herramientas::insertarRegistros($sql4);
+
+      /*$c = new Criteria();
       $c->add(OpordpagPeer :: NUMCHE, $reflib);
       $res = OpordpagPeer :: doSelectOne($c);
       if ($res) {
@@ -939,11 +947,11 @@ class Tesoreria {
           $opordpag->setCtaban(null);
           $opordpag->setStatus('N');
           $opordpag->save();
-        }
+        }*/
         return '';
-      } else {
+      /*} else {
         return 'La Orden de Pago no fue Actualizada';
-      }
+      }*/
     }
   }
 
