@@ -45,9 +45,9 @@ generator:
         _delete:      ~
     edit:
       title:         Edición de Bancos
-      display:       [numcue, nomcue, tipcue, destip, codcta, fecreg, fecven, fecper, fecape, renaut, porint, tipint, usocue, numche, antban, debban, creban, antlib, deblib, crelib, valche, concil, plazo, tipren, destipren, cantdig, saltotlib, saltotban, deblibdis, crelibdis]
+      display:       [numcue, nomcue, tipcue, destip, codcta, fecreg, fecven, fecper, fecape, renaut, porint, tipint, usocue, numche, antban, debban, creban, antlib, deblib, crelib, valche, concil, plazo, tipren, destipren, cantdig, saltotlib, saltotban, deblibdis, crelibdis, endosable]
       actions:
         _list:        ~
         _save:        ~
-        _create:      ~        
+        _create:      ~
         _delete:      ~
