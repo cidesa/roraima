@@ -549,6 +549,8 @@ class OrdendePago
               }
             }else { $msjuno='El Código Presupuestario no tiene asociado Codigo Contable válido'; return true;}
           }
+          if ($moncau>0)
+          {
           if ($j==0)
           {
             $codigocuentas=$codigocuenta;
@@ -562,6 +564,7 @@ class OrdendePago
           $desc=$desc.'_'.$des;
           $tipo1=$tipo1.'_'.$tipo;
           $monto1=$monto1.'_'.$monto;
+          }
           }
           $j++;
         }
@@ -606,7 +609,7 @@ class OrdendePago
           $regis2 = ContabbPeer::doSelectOne($b);
           if ($regis2)
           {
-            $moncau=$x[$j]->getMoncau();
+            $moncau=H::tofloat($x[$j]->getMoncau());
             if ($moncau>0)
             {
               if(($orden->getTipcau()==$ordpagnom) || ($orden->getTipcau()==$ordpagapo) || ($orden->getTipcau()==$ordpagliq))
@@ -626,6 +629,8 @@ class OrdendePago
             }
           }else { $msjuno='El Código Presupuestario no tiene asociado Codigo Contable válido'; return true;}
         }
+        if ($moncau>0)
+        {
          if ($j==0)
          {
            $codigocuentas=$codigocuenta;
@@ -640,6 +645,7 @@ class OrdendePago
           $tipo1=$tipo1.'_'.$tipo;
           $monto1=$monto1.'_'.$monto;
           }
+        }
 
         $j++;
       }
