@@ -243,7 +243,7 @@ class CierredeNomina
     Herramientas::insertarRegistros($sql3);
 
 //Inicialización de Conceptos
-  $sql4="update npasiconemp set monto=0, cantidad=0 where codemp||codcar||codcon in (select a.codemp ||a.codcar||b.codcon from npasicaremp a,npdefmov b,npdefcpt c where b.codnom='E01' and
+  $sql4="update npasiconemp set monto=0, cantidad=0 where codemp||codcar||codcon in (select a.codemp ||a.codcar||b.codcon from npasicaremp a,npdefmov b,npdefcpt c where b.codnom='".$codnomina."' and
   c.inimon='S' and b.codcon=c.codcon and a.codnom=b.codnom and a.status='V')";
 
  Herramientas::insertarRegistros($sql4);
