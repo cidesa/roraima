@@ -1234,6 +1234,17 @@ $this->Bitacora('Guardo');
         return false;
   	  }
 
+  	  $r= new Criteria();
+  	  $r->add(TsmovlibPeer::NUMCUE,$this->getRequestParameter('tscheemi[numcue]'));
+  	  $r->add(TsmovlibPeer::REFLIB,$this->getRequestParameter('tscheemi[numche]'));
+  	  $r->add(TsmovlibPeer::TIPMOV,$this->getRequestParameter('tscheemi[tipdoc]'));
+  	  $reg= TsmovlibPeer::doSelectOne($r);
+  	  if ($reg)
+  	  {
+  	  	$this->coderror6=538;
+        return false;
+  	  }
+
 
       $contaba = ContabaPeer::doSelectOne(new Criteria());
       $saldo=0;
