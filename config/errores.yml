@@ -270,6 +270,12 @@
 197:
   cod: 197
   msj: No se puede ajustar la Orden de Compra debido a que el compromiso ya esta causado.
+198:
+  cod: 198
+  msj: La Cuenta Contable No puede estar en Blanco.
+199:
+  cod: 199
+  msj: La Cuenta Contable No existe.
 ################### NOMINA ####################
 400:
   cod: 400
@@ -396,6 +402,9 @@
 537:
   cod: 537
   msj: La Cuenta Bancaria y El Periodo se encuentran cerrado.
+538:
+  cod: 538
+  msj: Ya existe un Movimiento según Libro con ese mismo N° de Cuenta, referencia y tipo de documento.
 3:
   cod: 3
   msj: La contraseña es diferente.

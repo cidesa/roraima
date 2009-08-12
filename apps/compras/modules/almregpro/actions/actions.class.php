@@ -20,6 +20,7 @@ class almregproActions extends autoalmregproActions
     {
     $resp=-1;
     $resp4=-1;
+    $resp2 = -1;
       if($this->getRequest()->getMethod() == sfRequest::POST)
       {
      $this->caprovee = $this->getCaproveeOrCreate();
@@ -69,6 +70,32 @@ class almregproActions extends autoalmregproActions
 
        $resp=Herramientas::ValidarCodigo($valor,$this->caprovee,$campo);
        $resp1=Herramientas::ValidarCodigo($valor1,$this->caprovee,$campo1);
+       $this->valcodcta="";
+	    $varemp = $this->getUser()->getAttribute('configemp');
+	    if ($varemp)
+		if(array_key_exists('aplicacion',$varemp))
+		 if(array_key_exists('compras',$varemp['aplicacion']))
+		   if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
+		     if(array_key_exists('almregpro',$varemp['aplicacion']['compras']['modulos']))
+		       if(array_key_exists('valcodcta',$varemp['aplicacion']['compras']['modulos']['almregpro']))
+		       {
+		       	$this->valcodcta=$varemp['aplicacion']['compras']['modulos']['almregpro']['valcodcta'];
+		       }
+		if ($this->valcodcta=='S')
+		{
+           if ($this->getRequestParameter('caprovee[codcta]')=='')
+           {
+           	$resp2=198;
+           }else{
+           	$t= new Criteria();
+           	$t->add(ContabbPeer::CODCTA,$this->getRequestParameter('caprovee[codcta]'));
+           	$data=ContabbPeer::doSelectOne($t);
+           	if (!$data)
+           	{
+           		$resp2=199;
+           	}
+           }
+		}
        //$resp2=Herramientas::ValidarCodigo($valor2,$this->caprovee,$campo2);
 
      if($resp!=-1){
@@ -79,10 +106,10 @@ class almregproActions extends autoalmregproActions
         $this->coderror = $resp1;
         return false;
       }
-//    else if($resp2!=-1){
-//        $this->coderror = $resp2;
-//        return false;
-//      }
+    else if($resp2!=-1){
+        $this->coderror = $resp2;
+        return false;
+      }
    else if($resp4!=-1){
         $this->coderror = $resp4;
         return false;
