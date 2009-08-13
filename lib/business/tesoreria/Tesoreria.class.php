@@ -897,7 +897,7 @@ class Tesoreria {
       while ($j<count($result))
       {
 
-         $sql4="update opordpag set estatus='N', numche=null, ctaban=null where numord='".$result[$j]["numord"]."'";
+         $sql4="update opordpag set status='N', numche=null, ctaban=null where numord='".$result[$j]["numord"]."'";
          Herramientas::insertarRegistros($sql4);
 
         /*$c = new Criteria();
@@ -935,7 +935,7 @@ class Tesoreria {
       return '';
     } else {
 
-    	$sql4="update opordpag set estatus='N', numche=null, ctaban=null where numche='".$reflib."'";
+    	$sql4="update opordpag set status='N', numche=null, ctaban=null where numche='".$reflib."'";
          Herramientas::insertarRegistros($sql4);
 
       /*$c = new Criteria();
