@@ -133,7 +133,7 @@ class Documentos
     $c->add(CpdocpagPeer::TIPPAG,"rtrim(".CpdocpagPeer::TIPPAG.")='".$iddoc."'",Criteria::CUSTOM);
     $reg = CpdocpagPeer::doSelectOne($c);
 
-    if($reg) return $doc->getNomext();
+    if($reg) return $reg->getNomext();
 
   }
 
