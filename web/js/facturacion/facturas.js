@@ -57,17 +57,18 @@
     var id1="ax"+"_"+i+"_1";
     var id2="ax"+"_"+i+"_2";
     var id3="ax"+"_"+i+"_3";
-
+    if ($(id1)){
     if ($(id1).value!="")
     {
       var enc=false;
       var fil2=0;
-      var am=totalregistros('bx',1,25);
+      var am=totalregistros2('bx',1,25);
       while ((fil2<am) && (enc==false))
       {
          var id4="bx"+"_"+fil2+"_1";
          var id5="bx"+"_"+fil2+"_2";
          var id6="bx"+"_"+fil2+"_3";
+         if ($(id4)){
          if ($(id4).value!="")
          {
           if ($(id4).value==$(id1).value)
@@ -79,15 +80,18 @@
            enc=true;
           }
          }
+         }
          fil2++;
       }
       if (enc==false)
       {
         ap=am;
         var id4="bx"+"_"+ap+"_1";
+        if ($(id4)){
         if ($(id4).value!="")
         {
          ap=ap+1;
+        }
         }
         var id4="bx"+"_"+ap+"_1";
         var id5="bx"+"_"+ap+"_2";
@@ -96,6 +100,7 @@
         $(id5).value=$(id2).value;
         $(id6).value=$(id3).value;
       }
+    }
     }
   	i++;
   }
@@ -109,10 +114,12 @@
     while (i<fil)
     {
      var id1="ax"+"_"+i+"_9";
+     if ($(id1)){
      if ($(id1).value!="" && validarnumero(id1))
      {
        tot=toFloat(id1);
        acum=acum + tot;
+     }
      }
      i++;
     }
@@ -309,7 +316,7 @@
      var colum=determinarReferenciaDoc($('fafactur_tipref').value);
      var mon_art=0;
 
-     var colart=totalregistros('ax',3,25);
+     var colart=totalregistros2('ax',3,25);
      var fil=0;
 	 while (fil<colart)
 	 {
@@ -318,7 +325,7 @@
       var precioe="ax_"+fil+"_11";
       var morgo="ax_"+fil+"_12";
       var cant="ax_"+fil+"_"+colum;
-
+     if ($(precio)){
       if ($(precio).value!="")
       {
         nprecio=toFloat(precio);
@@ -341,11 +348,12 @@
           mon_art=mon_art + nmorgo;
           }
       }
+      }
 	 fil++;
 	}
 
 	var tot_desc=0;
-	var regrgo=totalregistros('bx',1,10);
+	var regrgo=totalregistros2('bx',1,10);
 	var j=0;
 	while (j<regrgo)
 	{
@@ -353,6 +361,7 @@
       var tipdes="bx_"+j+"_7";
       var monto="bx_"+j+"_3";
       var montodesc="bx_"+j+"_6";
+      if ($(coddes)){
       var num1=toFloat(montodesc);
       if ($(coddes).value!="")
       {
@@ -383,9 +392,10 @@
         var num3=toFloat(monto);
         tot_desc= tot_desc + num3;
       }
+      }
      j++;
     }
-    calcularTotalDescuento();
+   calcularTotalDescuento();
   }
 
   function determinarReferenciaDoc(tipo)
@@ -410,16 +420,18 @@
 
   function marcarArtRep(fila,valor)
   {
-    var facart=totalregistros('ax',3,25);
+    var facart=totalregistros2('ax',3,25);
     var fil=0;
     var fila1="ax_"+fila+"_3";
 	while (fil<facart)
 	{
       var fila2="ax_"+fil+"_3";
       var marcar="ax_"+fil+"_1";
-      if (fila1==fila2)
+      if ($(fila2)){
+      if ($(fila1).value==$(fila2).value)
       {
         $(marcar).checked=valor;
+      }
       }
 	  fil++;
 	}
@@ -430,7 +442,7 @@
     var monto_marcados=0;
     var colum=determinarReferenciaDoc($('fafactur_tipref').value);
 
-    var colart=totalregistros('ax',3,25);
+    var colart=totalregistros2('ax',3,25);
     var fil=0;
 	while (fil<colart)
 	{
@@ -438,7 +450,7 @@
       var precio="ax_"+fil+"_10";
       var precioe="ax_"+fil+"_11";
       var cant="ax_"+fil+"_"+colum;
-
+      if ($(precio)){
       if ($(precio).value!="")
       {
         var nprecio=toFloat(precio);
@@ -455,23 +467,27 @@
           monto_marcados=monto_marcados + (nprecio*ncant);
         }
       }
+      }
 	 fil++;
 	}
 
 	if (monto_marcados>0)
 	{
 	  var totaldesc=0;
-	  coddesc="bx_0_1";
+/*	  coddesc="bx_0_1";
 	  if ($(coddesc).value!="")
-	  {
-	    var regdesc=totalregistros('bx',1,10);
+	  {*/
+	    var regdesc=totalregistros2('bx',1,10);
+	    if (regdesc>0){
 		var i=0;
 		while (i<regdesc)
 		{
 		  var mondesc="bx_"+i+"_3";
+		  if ($(mondesc)){
 		  var ndesc=toFloat(mondesc);
 
 		  totaldesc= totaldesc + ndesc;
+		  }
 		 i++;
 		}
 	  }
@@ -489,8 +505,8 @@
     var colum=determinarReferenciaDoc($('fafactur_tipref').value);
     var montoArt= montoMarcados();
 
-    var regrgo=totalregistros('cx',1,10);
-    var regart=totalregistros('ax',3,25);
+    var regrgo=totalregistros2('cx',1,10);
+    var regart=totalregistros2('ax',3,25);
 	var j=0;
 	while (j<regrgo)
 	{
@@ -498,6 +514,7 @@
       var tiprgo="cx_"+j+"_6";
       var monrgo="cx_"+j+"_4";
       var monrgo2="cx_"+j+"_7";
+     if ($(codrgo)){
       if ($(codrgo).value!="")
       {
         monArt=0;
@@ -508,7 +525,7 @@
          var cant="ax_"+fil+"_"+colum;
          var precio="ax_"+fil+"_10";
          var precioe="ax_"+fil+"_11";
-
+         if ($(precio)){
 	      if ($(precio).value!="")
 	      {
 	        var nprecio=toFloat(precio);
@@ -526,6 +543,7 @@
               montoArt= montoArt - (nprecio * ncant);
             }
 	     }
+	     }
 	     fil++;
 	    }
         var monrgoori=toFloat(monrgo2);
@@ -541,6 +559,7 @@
 	     $(monrgo).value=$(monrgo).value;
 	    }
       }
+      }
 	  j++;
 	}
 
@@ -550,15 +569,17 @@
   function calcularTotalRecargos()
   {
     var mitot=0;
-    var regrgo=totalregistros('cx',1,10);
+    var regrgo=totalregistros2('cx',1,10);
 	var j=0;
 	while (j<regrgo)
 	{
      var monrgo="cx_"+j+"_4";
+     if ($(monrgo)){
      var nmonto=toFloat(monrgo);
      if ($(monrgo).value!="")
      {
        mitot= mitot + nmonto;
+     }
      }
 	 j++;
 	}
@@ -567,43 +588,50 @@
 
   function recalcularRecargos()
   {
-    var monrgo="cx_0_4";
-
-    if ($(monrgo).value!="")
+      var regrgo=totalregistros2('cx',1,10);
+/*    var monrgo="cx_0_4";
+   if ($(monrgo)){*/
+    if (regrgo>0)
     {
-      var regart=totalregistros('ax',3,25);
+      var regart=totalregistros2('ax',3,25);
       var fil=0;
       while (fil<regart)
       {
         var montotrgo="ax_"+fil+"_12";
         var totart="ax_"+fil+"_13";
-
+        if ($(montotrgo)){
         $(montotrgo).value="0,00";
         $(totart).value="0,00";
+        }
         fil++;
       }
 
-      var regrgo=totalregistros('cx',1,10);
   	  var j=0;
 	  while (j<regrgo)
 	  {
         var codrgo="cx_"+j+"_1";
+        if ($(codrgo)){
         if ($(codrgo).value!="")
         {
          grid_recargos_lost_focus(codrgo)
           distribuirRecargos(j,"S");
         }
+        }
 	   j++;
 	  }
 	  calcularTotalRecargos();
+    //}
     }
   }
 
   function distribuirRecargos(fila,suma_resta)
   {
-    var codrgo="cx_0_1";
+      var totregrgo=totalregistros2('cx',1,10);
+/*    var codrgo="cx_0_1";
     var monuni=0;
-    if ($(codrgo).value!="")
+    if ($(codrgo)){
+    if ($(codrgo).value!="")*/
+    if (totregrgo>0)
     {
       var monTot= montoMarcados();
       var monTot2= calcularMontTot();
@@ -611,7 +639,7 @@
 
       if (monTot>0 || monTot2>0)
       {
-	     var regart=totalregistros('ax',3,25);
+	     var regart=totalregistros2('ax',3,25);
 	     var fil=0;
 	     while (fil<regart)
 	     {
@@ -625,7 +653,7 @@
 	       var codrgo="cx_"+fila+"_1";
 	       var fijovar="cx_"+fila+"_3";
 	       var monrecar="cx_"+fila+"_4";
-
+          if ($(precio)){
 	       if ($(precio).value!="")
 	       { var nprecio= toFloat(precio); }
 	       else { var nprecio= toFloat(precioe); }
@@ -650,7 +678,7 @@
 	                  var precio2="ax_"+i+"_10";
 	                  var precioe2="ax_"+i+"_11";
 	                  var cant2="ax_"+i+"_"+colum;
-
+                     if ($(precio2)){
 	                  if ($(precio2).value!="")
 	                  { var nprecio2= toFloat(precio2); }
 	                  else { nprecio2= toFloat(precioe2); }
@@ -671,6 +699,7 @@
                	          }
                	        }
                	      }
+               	      }
 	                  i++;
 	                 }
 	                 if (monTot!=0)
@@ -678,17 +707,20 @@
 	                   if ($('fafactur_mondesc').value!="")
 	                   {
                         var totaldesc=0;
-  	                    var  coddesc="bx_0_1";
+  	                   /* var  coddesc="bx_0_1";
 	                    if ($(coddesc).value!="")
-	                    {
-	                      var regdesc=totalregistros('bx',1,10);
+	                    {*/
+	                      var regdesc=totalregistros2('bx',1,10);
+	                      if (regdesc>0){
 						  var z=0;
 						  while (z<regdesc)
 						  {
 						    var mondesc="bx_"+z+"_3";
+						    if ($(mondesc)){
 						    var ndesc=toFloat(mondesc);
 
 						    totaldesc= totaldesc + ndesc;
+						    }
 						   z++;
 						  }
 						}
@@ -733,7 +765,7 @@
                   var precio2="ax_"+i+"_10";
                   var precioe2="ax_"+i+"_11";
                   var cant2="ax_"+i+"_"+colum;
-
+                  if ($(precio2)){
                   if ($(precio2).value!="")
                   { var nprecio2= toFloat(precio2); }
                   else { nprecio2= toFloat(precioe2); }
@@ -753,6 +785,7 @@
            	            encontro=true;
            	          }
            	        }
+           	      }
            	      }
                   i++;
                  }
@@ -788,6 +821,7 @@
 	           }
 	         }
 	       }
+	       }
 	       fil++;
 	     }
       }
@@ -796,7 +830,7 @@
     }
     else
     {
-       var regart=totalregistros('ax',3,25);
+       var regart=totalregistros2('ax',3,25);
        var colum=determinarReferenciaDoc($('fafactur_tipref').value);
        var j=0;
 	   while (j<regart)
@@ -807,6 +841,7 @@
 	     var montorgo="ax_"+fil+"_12";
 	     var totrgo="ax_"+fil+"_13";
 
+         if ($(precio)){
          if ($(precio).value!="")
          { var nprecio= toFloat(precio); }
          else { var nprecio= toFloat(precioe); }
@@ -819,9 +854,11 @@
            var calc=cant*precio;
            $(totrgo).value=format(calc.toFixed(2),'.',',','.');
          }
+         }
         j++;
        }
     }
+    //}
   }
 
   function calcularMontTot()
@@ -829,7 +866,7 @@
     var colum=determinarReferenciaDoc($('fafactur_tipref').value);
     var calcularmonto=0;
 
-     var regart=totalregistros('ax',3,25);
+     var regart=totalregistros2('ax',3,25);
      var fil=0;
      while (fil<regart)
      {
@@ -837,6 +874,7 @@
        var precioe="ax_"+fil+"_11";
        var cant="ax_"+fil+"_"+colum;
 
+      if ($(precio)){
        if ($(precio).value!="")
        { var nprecio= toFloat(precio); }
        else { var nprecio= toFloat(precioe); }
@@ -846,6 +884,7 @@
        if (($(precio).value!="" || $(precioe).value!="0,00") && $(cant).value!="")
        {
          calcularmonto= calcularmonto + ( nprecio * ncant);
+       }
        }
        fil++;
      }
@@ -863,7 +902,7 @@
     var colum=determinarReferenciaDoc($('fafactur_tipref').value);
     var monmarsindesc=0;
 
-    var regart=totalregistros('ax',3,25);
+    var regart=totalregistros2('ax',3,25);
      var fil=0;
      while (fil<regart)
      {
@@ -871,7 +910,7 @@
        var precio="ax_"+fil+"_10";
        var precioe="ax_"+fil+"_11";
        var cant="ax_"+fil+"_"+colum;
-
+      if ($(precio)){
        if ($(precio).value!="")
        { var nprecio= toFloat(precio); }
        else { var nprecio= toFloat(precioe); }
@@ -885,6 +924,7 @@
              monmarsindesc= monmarsindesc + (nprecio*ncant);
            }
        }
+       }
        fil++;
      }
 
@@ -894,7 +934,7 @@
   function montoTotal()
   {
     var montot=0;
-    var regart=totalregistros('ax',3,25);
+    var regart=totalregistros2('ax',3,25);
     var colum=determinarReferenciaDoc($('fafactur_tipref').value);
     var fil=0;
     var totmonrec=0;
@@ -907,6 +947,8 @@
       var cant="ax_"+fil+"_"+colum;
       var montrec="ax_"+fil+"_12";
       var totart="ax_"+fil+"_13";
+
+      if ($(precio)){
 
       if ($(totart).value!="" && (ValidarNumeroV2VE(totart)==true))
       {
@@ -926,6 +968,7 @@
         totmonrec= totmonrec+ nmonrec;
         tottotal=tottotal + ntotart;
       }
+      }
      fil++;
     }
 
@@ -936,17 +979,20 @@
       var totaldesc=0;
       if (cuantos>0)
       {
-        coddesc="bx_0_1";
+       /* coddesc="bx_0_1";
 		  if ($(coddesc).value!="")
-		  {
-		    var regdesc=totalregistros('bx',1,10);
+		  {*/
+		    var regdesc=totalregistros2('bx',1,10);
+		  if (regdesc>0){
 			var i=0;
 			while (i<regdesc)
 			{
 			  var mondesc="bx_"+i+"_3";
+			  if ($(mondesc)){
 			  var ndesc=toFloat(mondesc);
 
 			  totaldesc= totaldesc + ndesc;
+			  }
 			 i++;
 			}
 		  }
@@ -972,14 +1018,16 @@
       var indice='1';
     } else { var indice='20';}
 
-    var regart=totalregistros('ax',3,25);
+    var regart=totalregistros2('ax',3,25);
     var fil=0;
     while (fil<regart)
     {
       var campo="ax_"+fil+"_"+indice;
+      if ($(campo)){
       if ($(campo).checked==true)
       {
        marcado= marcado + 1;
+      }
       }
       fil++;
     }
@@ -998,7 +1046,7 @@
     var precios=0;
     var montota=0;
 
-    var regart=totalregistros('ax',3,25);
+    var regart=totalregistros2('ax',3,25);
     var colum=determinarReferenciaDoc($('fafactur_tipref').value);
     var fil=0;
     while (fil<regart)
@@ -1009,6 +1057,7 @@
       var montrec="ax_"+fil+"_12";
       var totart="ax_"+fil+"_13";
 
+      if ($(cant)){
       if ($(cant).value!="" && (ValidarNumeroV2VE(cant)==true))
       {
         var ncant= toFloat(cant);
@@ -1043,6 +1092,7 @@
         {
          montota= montota + ntotart;
         }
+      }
       }
       fil++;
     }
@@ -1087,7 +1137,7 @@
    var recargo=$(id).value;
 
    var recargorepetido=false;
-   var am=totalregistros('cx',1,10);
+   var am=totalregistros2('cx',1,10);
    var i=0;
    while (i<am)
    {
@@ -1159,7 +1209,7 @@
         var colum=determinarReferenciaDoc($('fafactur_tipref').value);
     if (monTot!=0)
     {
-	    var regart=totalregistros('ax',3,25);
+	    var regart=totalregistros2('ax',3,25);
 	    var i=0;
 	    while (i<regart)
 	    {
@@ -1167,6 +1217,7 @@
 	      var precio2="ax_"+i+"_10";
 	      var precioe2="ax_"+i+"_11";
 	      var cant2="ax_"+i+"_"+colum;
+	      if ($(codart)){
 
 	      if ($(precio2).value!="") { var nprecio2= toFloat(precio2); }else { nprecio2= toFloat(precioe2); }
 	      var ncant2= toFloat(cant2);
@@ -1179,6 +1230,7 @@
 	         monTot= monTot - (nprecio2 * ncant2);
 	       }
 	     }
+	     }
 	     i++;
 	    }
 	 }
@@ -1189,7 +1241,7 @@
  {
     var monTot=montoMarcados();
     var colum=determinarReferenciaDoc($('fafactur_tipref').value);
-    var regart=totalregistros('ax',3,25);
+    var regart=totalregistros2('ax',3,25);
     var i=0;
     while (i<regart)
     {
@@ -1199,6 +1251,7 @@
       var precioe2="ax_"+i+"_11";
       var cant2="ax_"+i+"_"+colum;
 
+     if ($(codart)){
       if ($(precio2).value!="") { var nprecio2= toFloat(precio2); }else { nprecio2= toFloat(precioe2); }
       var ncant2= toFloat(cant2);
 
@@ -1212,6 +1265,7 @@
            monTot= monTot - redondear((nprecio2 * ncant2),2);
           }
         }
+      }
       }
        i++;
     }
@@ -1387,7 +1441,7 @@
       if ($('recarg').visible() && $('id').value=='')
       {
         var fil=0;
-        var facart=totalregistros('ax',3,25);
+        var facart=totalregistros2('ax',3,25);
 	    while (fil<facart)
 	    {
 	     var recargo="ax_"+fil+"_12";
@@ -1397,6 +1451,7 @@
          var precioe="ax_"+fil+"_11";
 	     var cant="ax_"+fil+"_"+colum;
 
+       if ($(precio)){
 	     if ($(precio).value!="") { var col9=toFloat(precio); }else { var col9=toFloat(precioe);}
          var colcant=toFloat(cant);
 
@@ -1413,6 +1468,7 @@
 	     {
           $(check).ckecked=true;
           marcarArtRep(fil,true)
+	     }
 	     }
 	   fil++;
 	   }
@@ -1480,27 +1536,31 @@
   {
     var miTot=0;
 
-    var regart=totalregistros('ax',3,25);
+    var regart=totalregistros2('ax',3,25);
     var fil=0;
     while (fil<regart)
     {
       var montodescto="ax_"+fil+"_18";
+      if ($(montodescto)){
       $(montodescto).value="0,00";
+      }
       fil++;
     }
 
     var cuantos=marcados("D");
-    var coddesc="bx_0_1";
+    /*var coddesc="bx_0_1";
 
     if ($(coddesc).value!="")
-	{
-      var regdesc=totalregistros('bx',1,10);
+	{*/
+	var regdesc=totalregistros2('bx',1,10);
+    if (regdesc>0){
 	  var i=0;
 	  while (i<regdesc)
 	  {
 		var tipo="bx_"+i+"_7";
 		var mondescto="bx_"+i+"_3";
 		var descue="bx_"+i+"_6";
+		if ($(tipo)){
 		var nmondescto= toFloat(mondescto);
 		var ndescue= toFloat(descue);
 	    if (cuantos>0)
@@ -1514,7 +1574,7 @@
 		    var precio="ax_"+j+"_10";
 		    var precioe="ax_"+j+"_11";
 		    var montrgo="ax_"+j+"_12";
-
+           if ($(cant)){
 		    var ncant= toFloat(cant);
 		    if ($(precio).value!="")
 		    {
@@ -1553,10 +1613,12 @@
 	             }
 		      }
 		    }
+		    }
 		   j++;
 		  }
 	    }
 	     miTot= miTot + nmondescto;
+	     }
 		i++;
 	  }
     }
@@ -1582,7 +1644,7 @@
   function Proporcion(fila)
   {
     var montot=0;
-    var regart=totalregistros('ax',3,25);
+    var regart=totalregistros2('ax',3,25);
     var fil=0;
     while (fil<regart)
     {
@@ -1594,7 +1656,7 @@
       var cant2="ax_"+fila+"_7";
       var precio2="ax_"+fila+"_10";
       var precioe2="ax_"+fila+"_11";
-
+     if ($(cant)){
       var ncant= toFloat(cant);
       if ($(precio).value!="") { var nprecio= toFloat(precio); }else { var nprecio= toFloat(precioe); }
       var ncant2= toFloat(cant2);
@@ -1611,6 +1673,7 @@
            montot= montot + (ncant*nprecio);
          }
       }
+      }
       fil++;
     }
 
@@ -1623,17 +1686,19 @@
   {
     var acumulador=0;
     var diferencia=0
-    var regart=totalregistros('ax',3,25);
+    var regart=totalregistros2('ax',3,25);
     var fil=0;
     while (fil<regart)
     {
       var apldsec="ax_"+fil+"_20";
       var mondesc="ax_"+fil+"_18";
+      if ($(mondesc)){
       var nmondesc= toFloat(mondesc);
 
       if ($(apldsec).checked==true)
       {
         acumulador= acumulador + nmondesc;
+      }
       }
       fil++;
     }
@@ -1652,15 +1717,17 @@
 
   function ultimoMarcado()
   {
-    var regart=totalregistros('ax',3,25);
+    var regart=totalregistros2('ax',3,25);
     var fil=0;
     var ultimo=-1;
     while (fil<regart)
     {
       var apldsec="ax_"+fil+"_20";
+      if ($(apldsec)){
       if ($(apldsec).checked==true)
       {
         ultimo=fil;
+      }
       }
       fil++;
     }
@@ -1677,7 +1744,7 @@
    var descuento=$(id).value;
 
    var descuentorepetido=false;
-   var am=totalregistros('bx',1,10);
+   var am=totalregistros2('bx',1,10);
    var i=0;
    while (i<am)
    {
@@ -1715,7 +1782,7 @@
      {
        if ($(tipret).value!='S')
        {
-         var regart=totalregistros('ax',3,25);
+         var regart=totalregistros2('ax',3,25);
 		 var fil=0;
 		 while (fil<regart)
 		 {
@@ -1723,7 +1790,7 @@
 		   var montodesc="ax_"+fil+"_18";
 		   var montototrgo="ax_"+fil+"_12";
 		   var montototart="ax_"+fil+"_13";
-
+           if ($(montodesc)){
 		   var nmontototart= toFloat(montototart);
 		   var montototrgo= toFloat(montototrgo);
 
@@ -1732,6 +1799,7 @@
 		       var calculo= (((nmondesc * nmontototart) - montototrgo)/100);
                $(montodesc).value=format(calculo.toFixed(2),'.',',','.');
                eldescuento= eldescuento + calculo;
+		     }
 		     }
 		    fil++;
 		   }
@@ -1742,7 +1810,7 @@
        }
        else
        {
-         var regart=totalregistros('ax',3,25);
+         var regart=totalregistros2('ax',3,25);
 		 var fil=0;
 		 while (fil<regart)
 		 {
@@ -1750,7 +1818,7 @@
 		   var montodesc="ax_"+fil+"_18";
 		   var montototrgo="ax_"+fil+"_12";
 		   var montototart="ax_"+fil+"_13";
-
+           if ($(montodesc)){
 		   var nmontototart= toFloat(montototart);
 		   var montototrgo= toFloat(montototrgo);
 
@@ -1759,6 +1827,7 @@
 		       var calculo= ((nmondesc * montototrgo)/100);
                $(montodesc).value=format(calculo.toFixed(2),'.',',','.');
                eldescuento= eldescuento + calculo;
+		     }
 		     }
 		    fil++;
 		  }
@@ -1854,7 +1923,7 @@
   {
     var montot=0;
 
-    var regart=totalregistros('ax',3,25);
+    var regart=totalregistros2('ax',3,25);
     var fil=0;
     while (fil<regart)
     {
@@ -1862,7 +1931,7 @@
       var precioe="ax_"+fil+"_11";
       var cant="ax_"+fil+"_9";
       var totart="ax_"+fil+"_13";
-
+     if ($(totart)){
       if ($(totart).value!="" && (ValidarNumeroV2VE(totart)==true))
       {
        if (!ValidarNumeroV2VE(cant)) { $(cant).value="0,00";}
@@ -1870,6 +1939,7 @@
        if ($(precio).value!="") { var nprecio= toFloat(precio); }else { var nprecio= toFloat(precioe); }
        var ncant= toFloat(cant);
         montot= montot + (nprecio * cant);
+      }
       }
      fil++;
     }
@@ -1922,7 +1992,7 @@
     $('fafactur_vuelto').value="0,00";
     $('fafactur_monres').value=$('fafactur_monfac').value;
 
-    var regpag=totalregistros('dx',1,10);
+    var regpag=totalregistros2('dx',1,10);
     var fil=0;
     while (fil<regpag)
     {
@@ -1977,7 +2047,7 @@
    var articulo=$(id).value;
 
    var articulorepetido=false;
-   var am=totalregistros('ax',3,25);
+   var am=totalregistros2('ax',3,25);
    var i=0;
    while (i<am)
    {
@@ -2075,24 +2145,26 @@
  function cantidadEntregarArt(fil,codart)
  {
    var cant_entreg=0;
-   var am=totalregistros('ax',3,25);
+   var am=totalregistros2('ax',3,25);
    var i=0;
    while (i<am)
    {
-    var codart="ax"+"_"+i+"_3";
+    var codart1="ax"+"_"+i+"_3";
     var cansol="ax"+"_"+i+"_7";
     var canent="ax"+"_"+i+"_8";
+    if ($(codart1)){
     var ncanent=toFloat(canent);
 
      if (i!=fil)
      {
-       if ($(codart).value==codart)
+       if ($(codart1).value==codart)
        {
          if ($(cansol).value!="")
          {
            cant_entreg= cant_entreg + ncanent;
          }
        }
+     }
      }
     i++;
    }
@@ -2110,7 +2182,7 @@
    $(ctaprove).value=aux[0];
    $(blanco2).value=aux[2];
    $('listArt').hide();
-   var am=totalregistros('ax',3,25);
+   var am=totalregistros2('ax',3,25);
    if ($('id').value=='' && $('fafactur_tipref').value!='V')
    {
      if (fila< am)
@@ -2154,11 +2226,12 @@
 	    var codref="ex_"+fil+"_2";
 	    var desref="ex_"+fil+"_3";
 	    var fecref="ex_"+fil+"_4";
+	    if ($(chk)){
 	    if ($(chk).checked==true)
 	    {
 	     var codigoref= $(codref).value;
 	     $('fafactur_desfac').value=$('fafactur_desfac').value+$(desref).value+", ";
-	     var bc=totalregistros('ax',3,25);
+	     var bc=totalregistros2('ax',3,25);
 	     var codart="ax_0_3";
 	     if (bc>=1 &&  $(codart).value!="")
 	     {
@@ -2183,6 +2256,7 @@
 	     }
 
 	    }
+	    }
 	   fil++;
 	   }
    }
@@ -2195,7 +2269,7 @@
   function referencia_repetida(codrefe,fila)
  {
    var referenciarepetida=false;
-   var am=totalregistros('ax',3,25);
+   var am=totalregistros2('ax',3,25);
    var i=0;
    while (i<am)
    {
@@ -2261,6 +2335,7 @@
    while (i< (aux.length-1))
    {
      var aux2=aux[i].split('_');
+//     var oculid="ax"+filastot+"id";
      var check="ax"+"_"+filastot+"_1";
      var codref="ax"+"_"+filastot+"_2";
      var codart="ax"+"_"+filastot+"_3";
@@ -2284,6 +2359,7 @@
      var blanco1="ax"+"_"+filastot+"_21";
      var blanco2="ax"+"_"+filastot+"_22";
 
+   //  $(oculid).value='9';
      $(check).value=aux2[0];
      $(codref).value=aux2[1];
      $(codart).value=aux2[2];
@@ -2340,7 +2416,7 @@
    var precio=name+"_"+fil+"_"+colprec;
    var precioe=name+"_"+fil+"_"+colprec2;
 
-   var am=totalregistros('ax',3,25);
+   var am=totalregistros2('ax',3,25);
 
      if ($(precio).value!="") { var num4= toFloat(precio); }else { var num4= toFloat(precioe); }
      var num1=toFloat(id);
@@ -2403,7 +2479,7 @@
                {
                   var colum=determinarReferenciaDoc($('fafactur_tipref').value);
 
-				    var colart=totalregistros('ax',3,25);
+				    var colart=totalregistros2('ax',3,25);
 				    var fi=0;
 					while (fi<colart)
 					{
@@ -2413,12 +2489,14 @@
 				      var precios2="ax_"+fi+"_11";
 				      var cant="ax_"+fi+"_"+colum;
 
+                    if ($(precios)){
 				      if ($(precios).value!="") { var nprecio=toFloat(precios); }else {  var nprecio=toFloat(precios2);}
 				      var ncant=toFloat(cant);
 
 				     var sumtot=nprecio*ncant;
                       $(monreg).value="0,00";
                       $(totales).value=format(sumtot.toFixed(2),'.',',','.');
+                      }
 					 fi++;
 					}
                }
@@ -2453,12 +2531,14 @@
 
  function recargosm()
  {
-   var ls=totalregistros('cx',1,10);
+   var ls=totalregistros2('cx',1,10);
    var l=0;
    while (l<ls)
    {
     var id="cx_"+l+"_1";
+    if ($(id)){
     grid_recargos_lost_focus(id)
+    }
     l++;
    }
  }
@@ -2504,12 +2584,14 @@
 
    function descuentosm()
  {
-   var ls=totalregistros('bx',1,10);
+   var ls=totalregistros2('bx',1,10);
    var l=0;
    while (l<ls)
    {
     var id="bx_"+l+"_1";
+    if ($(id)){
     grid_descuento_lost_focus(id)
+    }
     l++;
    }
  }
@@ -2566,19 +2648,21 @@
 
  function distribuirexistencia(fila,dato)
  {
-   var colart=totalregistros('ax',3,25);
+   var colart=totalregistros2('ax',3,25);
    var exis2="ax_"+fila+"_6";
     var fi=0;
 	while (fi<colart)
 	{
       var exis="ax_"+fi+"_6";
       var codart="ax_"+fi+"_3";
+     if ($(codart)){
       if (fi!=fila)
       {
         if ($(codart).value==dato)
         {
          $(exis).value=$(exis2).value;
         }
+      }
       }
 	 fi++;
 	}
@@ -2710,7 +2794,7 @@
                {
                   var colum=determinarReferenciaDoc($('fafactur_tipref').value);
 
-				    var colart=totalregistros('ax',3,25);
+				    var colart=totalregistros2('ax',3,25);
 				    var fi=0;
 					while (fi<colart)
 					{
@@ -2720,12 +2804,14 @@
 				      var precios2="ax_"+fi+"_11";
 				      var cant="ax_"+fi+"_"+colum;
 
+                     if ($(precios)){
 				      if ($(precios).value!="") { var nprecio=toFloat(precios); }else{ var nprecio=toFloat(precios2); }
 				      var ncant=toFloat(cant);
 
 				      var sumtot=nprecio*ncant;
                       $(monreg).value="0,00";
                       $(totales).value=format(sumtot.toFixed(2),'.',',','.');
+                      }
 					 fi++;
 					}
                }
@@ -2819,7 +2905,7 @@
           {
             var colum=determinarReferenciaDoc($('fafactur_tipref').value);
 
-		    var colart=totalregistros('ax',3,25);
+		    var colart=totalregistros2('ax',3,25);
 		    var fi=0;
 			while (fi<colart)
 			{
@@ -2829,12 +2915,14 @@
 		      var precios2="ax_"+fi+"_11";
 		      var cant="ax_"+fi+"_"+colum;
 
+             if ($(precios)){
               if ($(precios).value!="") { nprecio=toFloat(precios); }else { var nprecio=toFloat(precios2);}
 		      var ncant=toFloat(cant);
 
 		     var sumtot=nprecio*ncant;
 	         $(monreg).value="0,00";
 	         $(totales).value=format(sumtot.toFixed(2),'.',',','.');
+	         }
 			 fi++;
 			}
           }
@@ -2910,7 +2998,7 @@
           var calmontot=calcularMontTot();
           if (calmontot>0)
           {
-		    var colart=totalregistros('ax',3,25);
+		    var colart=totalregistros2('ax',3,25);
 		    var fi=0;
 			while (fi<colart)
 			{
@@ -2920,12 +3008,14 @@
 		      var precio2="ax_"+fi+"_11";
 		      var cant="ax_"+fi+"_"+colum;
 
+             if ($(precio)){
 		      if ($(precio).value!=""){ var nprecio=toFloat(precio); }else { var nprecio=toFloat(precio2);}
 		      var ncant=toFloat(cant);
 
 		     var sumtot=nprecio*ncant;
 	         $(monreg).value="0,00";
 	         $(totales).value=format(sumtot.toFixed(2),'.',',','.');
+	         }
 			 fi++;
 			}
           }
@@ -3065,7 +3155,7 @@
    var col=parseInt(aux[2]);
 
    var colmrgo=col+2;
-   var coltotal=col+1;
+   var coltotal=col+3;
    var colprecioart=col+5;
 
    var monrgo=name+"_"+fil+"_"+colmrgo;
@@ -3105,7 +3195,7 @@
             var calmontot=calcularMontTot();
             if (calmontot>0)
             {
-		       var colart=totalregistros('ax',3,25);
+		       var colart=totalregistros2('ax',3,25);
 		       var fi=0;
 			   while (fi<colart)
 			   {
@@ -3114,13 +3204,14 @@
 		         var precio="ax_"+fi+"_10";
 		         var precio2="ax_"+fi+"_11";
 		         var cant="ax_"+fi+"_"+colum;
-
+                 if ($(precio)){
 		         if ($(precio).value!="") { var nprecio=toFloat(precio); }else { var nprecio=toFloat(precio2);}
 		         var ncant=toFloat(cant);
 
  		         var sumtot=nprecio*ncant;
 	             $(monreg).value="0,00";
 	             $(totales).value=format(sumtot.toFixed(2),'.',',','.');
+	             }
 			    fi++;
 			   }
             }
