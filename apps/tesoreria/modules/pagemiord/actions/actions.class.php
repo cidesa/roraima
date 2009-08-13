@@ -2498,6 +2498,7 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
 
           }
          OrdendePago::eliminarOPP($numord);
+         Herramientas::EliminarRegistro('Opfactur','Numord',$numord);
          if (checkdate(intval($fecha_aux[1]),intval($fecha_aux[0]),intval($fecha_aux[2])))
          { $resul->setFecanu($fec);}
          $resul->setCodmotanu($codmotanu);
