@@ -274,7 +274,7 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
     $col1->setAlineacionObjeto(Columna::CENTRO);
     $col1->setAlineacionContenido(Columna::CENTRO);
 	$col1->setCatalogo('npdefcpt','sf_admin_edit_form',array('codcon' => 5,'nomcon' => 1), 'Npdefcpt_nomdefespguarde');
-    $col1->setHTML('type="text" size="60" readonly="true"');
+    $col1->setHTML('type="text" size="60" ');
     $col1->setNombreCampo('concepto');
 
     $col2 = new Columna('Monto');
@@ -310,7 +310,7 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
     $col5->setAlineacionObjeto(Columna::CENTRO);
     $col5->setAlineacionContenido(Columna::CENTRO);
     $col5->setNombreCampo('codcon');
-    $col5->setHTML('type="text" size="10" readonly="true"');
+    $col5->setHTML('type="text" size="10" ');
 
     $col6 = new Columna('Dias');
     $col6->setTipo(Columna::TEXTO);
@@ -532,6 +532,7 @@ public function configGrid($codemp="")
   {
     $codigo = $this->getRequestParameter('codigo','');    
     $ajax = $this->getRequestParameter('ajax','');	
+	$salarioi = $this->getRequestParameter('salario','');	
 	$this->cond=0;
 	$js="";
 	$delemp="";
@@ -656,72 +657,81 @@ public function configGrid($codemp="")
 					$codtipcon='';
 					$calinci='';
 				}
-				   
-				if($calinci=='S')
+				
+				if($salarioi!='')
 				{
-					$sql =  "select 
-							coalesce((select sum(monto) from npasipre a, npconasi b, nphiscon c 
-							where a.codasi=b.codasi and a.codcon=b.codcon and b.codcpt=c.codcon and tipasi='S' 
-							and a.codcon='$codtipcon' and codemp='$codemp' and  
-							TO_CHAR(fecnom,'MM/YYYY')=TO_CHAR((SELECT MAX(FECFIN) FROM NPIMPPRESOC WHERE CODEMP='$codemp' AND VALART108>0 AND TIPO=''),'mm/yyyy')
-							),0) 
-							+
-							((coalesce((select sum(monto) from npasipre a, npconasi b, nphiscon c 
-							where a.codasi=b.codasi and a.codcon=b.codcon and b.codcpt=c.codcon and b.afealibv='S' 
-							and a.codcon='$codtipcon' and codemp='$codemp' and  
-							TO_CHAR(fecnom,'MM/YYYY')=TO_CHAR((SELECT MAX(FECFIN) FROM NPIMPPRESOC WHERE CODEMP='$codemp' AND VALART108>0 AND TIPO=''),'mm/yyyy')
-							),0)/30)* (z.diavac/12))
-							+
-							((coalesce((select sum(monto) from npasipre a, npconasi b, nphiscon c 
-							where a.codasi=b.codasi and a.codcon=b.codcon and b.codcpt=c.codcon and b.afealibf='S' 
-							and a.codcon='$codtipcon' and codemp='$codemp' and  
-							TO_CHAR(fecnom,'MM/YYYY')=TO_CHAR((SELECT MAX(FECFIN) FROM NPIMPPRESOC WHERE CODEMP='$codemp' AND VALART108>0 AND TIPO=''),'mm/yyyy')
-							),0)/30)* (z.diauti/12)) as monto
-							from npbonocont z
-							where z.codtipcon='$codtipcon' and 
-							anovig<=(SELECT MAX(FECFIN) FROM NPIMPPRESOC WHERE CODEMP='$codemp' AND VALART108>0 AND TIPO='') and
-							anovighas>=(SELECT MAX(FECFIN) FROM NPIMPPRESOC WHERE CODEMP='$codemp' AND VALART108>0 AND TIPO='')
-							";	
-							if (H::BuscarDatos($sql,$rs))
-							    if($rs[0]["monto"]!=0)
-									$salariointegral=$rs[0]["monto"];
-								else{
-									
-									$sql="select 
-										coalesce((select sum(monasi) from npasipre a, npsalint c 
-										where  a.codasi=c.codasi and tipasi='S' 
-										and a.codcon='$codtipcon' and c.codemp='$codemp' and  
-										TO_CHAR(fecinicon,'MM/YYYY')=TO_CHAR((SELECT MAX(FECFIN) FROM NPIMPPRESOC WHERE CODEMP='$codemp' AND VALART108>0 AND TIPO=''),'mm/yyyy')
-										),0)
-										+
-										((coalesce((select sum(monasi) from npasipre a, npsalint c
-										where a.codasi=c.codasi and  afealibv='S' 
-										and a.codcon='$codtipcon' and codemp='$codemp' and  
-										TO_CHAR(fecinicon,'MM/YYYY')=TO_CHAR((SELECT MAX(FECFIN) FROM NPIMPPRESOC WHERE CODEMP='$codemp' AND VALART108>0 AND TIPO=''),'mm/yyyy')
-										),0)/30)* (z.diavac/12))
-										+
-										((coalesce((select sum(monasi) from npasipre a, npsalint c
-										where a.codasi=c.codasi and  afealibf='S' 
-										and a.codcon='$codtipcon' and codemp='$codemp' and  
-										TO_CHAR(fecinicon,'MM/YYYY')=TO_CHAR((SELECT MAX(FECFIN) FROM NPIMPPRESOC WHERE CODEMP='$codemp' AND VALART108>0 AND TIPO=''),'mm/yyyy')
-										),0)/30)* (z.diauti/12)) as monto
-										from npbonocont z
-										where z.codtipcon='$codtipcon' and 
-										anovig<=(SELECT MAX(FECFIN) FROM NPIMPPRESOC WHERE CODEMP='$codemp' AND VALART108>0 AND TIPO='') and
-										anovighas>=(SELECT MAX(FECFIN) FROM NPIMPPRESOC WHERE CODEMP='$codemp' AND VALART108>0 AND TIPO='')
-										";
-									if (H::BuscarDatos($sql,$rs))
-										$salariointegral=$rs[0]["monto"];
-									else	
-										$salariointegral= 0.00;
-									
-								}	
-							else
-								$salariointegral= 0.00;
+					$salariointegral=$salarioi;
+					
 				}else
 				{
-					$salariointegral=$ultimosueldo;
+					if($calinci=='S')
+					{
+						$sql =  "select 
+								coalesce((select sum(monto) from npasipre a, npconasi b, nphiscon c 
+								where a.codasi=b.codasi and a.codcon=b.codcon and b.codcpt=c.codcon and tipasi='S' 
+								and a.codcon='$codtipcon' and codemp='$codemp' and  
+								TO_CHAR(fecnom,'MM/YYYY')=TO_CHAR((SELECT MAX(FECFIN) FROM NPIMPPRESOC WHERE CODEMP='$codemp' AND VALART108>0 AND TIPO=''),'mm/yyyy')
+								),0) 
+								+
+								((coalesce((select sum(monto) from npasipre a, npconasi b, nphiscon c 
+								where a.codasi=b.codasi and a.codcon=b.codcon and b.codcpt=c.codcon and b.afealibv='S' 
+								and a.codcon='$codtipcon' and codemp='$codemp' and  
+								TO_CHAR(fecnom,'MM/YYYY')=TO_CHAR((SELECT MAX(FECFIN) FROM NPIMPPRESOC WHERE CODEMP='$codemp' AND VALART108>0 AND TIPO=''),'mm/yyyy')
+								),0)/30)* (z.diavac/12))
+								+
+								((coalesce((select sum(monto) from npasipre a, npconasi b, nphiscon c 
+								where a.codasi=b.codasi and a.codcon=b.codcon and b.codcpt=c.codcon and b.afealibf='S' 
+								and a.codcon='$codtipcon' and codemp='$codemp' and  
+								TO_CHAR(fecnom,'MM/YYYY')=TO_CHAR((SELECT MAX(FECFIN) FROM NPIMPPRESOC WHERE CODEMP='$codemp' AND VALART108>0 AND TIPO=''),'mm/yyyy')
+								),0)/30)* (z.diauti/12)) as monto
+								from npbonocont z
+								where z.codtipcon='$codtipcon' and 
+								anovig<=(SELECT MAX(FECFIN) FROM NPIMPPRESOC WHERE CODEMP='$codemp' AND VALART108>0 AND TIPO='') and
+								anovighas>=(SELECT MAX(FECFIN) FROM NPIMPPRESOC WHERE CODEMP='$codemp' AND VALART108>0 AND TIPO='')
+								";	
+								if (H::BuscarDatos($sql,$rs))
+								    if($rs[0]["monto"]!=0)
+										$salariointegral=$rs[0]["monto"];
+									else{
+										
+										$sql="select 
+											coalesce((select sum(monasi) from npasipre a, npsalint c 
+											where  a.codasi=c.codasi and tipasi='S' 
+											and a.codcon='$codtipcon' and c.codemp='$codemp' and  
+											TO_CHAR(fecinicon,'MM/YYYY')=TO_CHAR((SELECT MAX(FECFIN) FROM NPIMPPRESOC WHERE CODEMP='$codemp' AND VALART108>0 AND TIPO=''),'mm/yyyy')
+											),0)
+											+
+											((coalesce((select sum(monasi) from npasipre a, npsalint c
+											where a.codasi=c.codasi and  afealibv='S' 
+											and a.codcon='$codtipcon' and codemp='$codemp' and  
+											TO_CHAR(fecinicon,'MM/YYYY')=TO_CHAR((SELECT MAX(FECFIN) FROM NPIMPPRESOC WHERE CODEMP='$codemp' AND VALART108>0 AND TIPO=''),'mm/yyyy')
+											),0)/30)* (z.diavac/12))
+											+
+											((coalesce((select sum(monasi) from npasipre a, npsalint c
+											where a.codasi=c.codasi and  afealibf='S' 
+											and a.codcon='$codtipcon' and codemp='$codemp' and  
+											TO_CHAR(fecinicon,'MM/YYYY')=TO_CHAR((SELECT MAX(FECFIN) FROM NPIMPPRESOC WHERE CODEMP='$codemp' AND VALART108>0 AND TIPO=''),'mm/yyyy')
+											),0)/30)* (z.diauti/12)) as monto
+											from npbonocont z
+											where z.codtipcon='$codtipcon' and 
+											anovig<=(SELECT MAX(FECFIN) FROM NPIMPPRESOC WHERE CODEMP='$codemp' AND VALART108>0 AND TIPO='') and
+											anovighas>=(SELECT MAX(FECFIN) FROM NPIMPPRESOC WHERE CODEMP='$codemp' AND VALART108>0 AND TIPO='')
+											";
+										if (H::BuscarDatos($sql,$rs))
+											$salariointegral=$rs[0]["monto"];
+										else	
+											$salariointegral= 0.00;
+										
+									}	
+								else
+									$salariointegral= 0.00;
+					}else
+					{
+						$salariointegral=$ultimosueldo;
+					}
 				}
+				   
+				
 				
 				
 					
@@ -759,18 +769,18 @@ public function configGrid($codemp="")
 					$this->getUser()->setAttribute('objasig',$this->npliquidacion_det->getObjasig());
 					$this->getUser()->setAttribute('objdeduc',$this->npliquidacion_det->getObjdeduc());
 					$js.="toAjaxUpdater('divgridasig',2,getUrlModulo()+'ajax','2');
-						  toAjaxUpdater('divgriddeduc',3,getUrlModulo()+'ajax','3');
-		    		     ";
+						  toAjaxUpdater('divgriddeduc',3,getUrlModulo()+'ajax','3');						  
+		    		     ";						 
 				}else
 				{
 					# TIENE LIQUIDACIONES CALCULADAS
 					if($numord<>'')
 					{
 						$js.="alert('Liquidacion Pagada con la Orden de Pago Nro: $numord');";
-						$js.="$('save').hide();";
+						$js.="$('save').hide();";						
 					}						
 					else{
-						$js.="alert('Liquidacion Realizada');";						
+						$js.="alert('Liquidacion Realizada');";												
 						$delemp=$codemp;
 					}
 					    
@@ -780,7 +790,8 @@ public function configGrid($codemp="")
 					$js.="toAjaxUpdater('divgridasig',2,getUrlModulo()+'ajax','2');
 						  toAjaxUpdater('divgriddeduc',3,getUrlModulo()+'ajax','3');";
 					
-				}			
+				}
+				$js.="$('npliquidacion_det_salarioint').readOnly=false;";			
 	        	$output = '[["npliquidacion_det_fecing","'.$fecing.'",""],["npliquidacion_det_feccor","'.$feccor.'",""],["npliquidacion_det_fecegr","'.$fecegr.'",""],'.
 					  '["npliquidacion_det_diaefe","'.$diaefec.'",""],["npliquidacion_det_mesefe","'.$mesefec.'",""],["npliquidacion_det_anoefe","'.$anoefec.'",""],'.
 					  '["npliquidacion_det_diarn","'.$diaact.'",""],["npliquidacion_det_mesrn","'.$mesact.'",""],["npliquidacion_det_anorn","'.$anoact.'",""],'.

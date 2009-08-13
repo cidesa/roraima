@@ -51,7 +51,7 @@
 			
 			  <?php $value = object_input_tag($npliquidacion_det, 'getUltimosueldo', array (
 			  'readonly' => true,
-			  'control_name' => 'npliquidacion_det[ultimosueldo]',
+			  'control_name' => 'npliquidacion_det[ultimosueldo]',			  
 			)); echo $value ? $value : '&nbsp;' ?>
 			    <?php if($labels['npliquidacion_det{ultimosueldo}']!='.:') { ?>
 			  </div>
@@ -68,8 +68,15 @@
 			  <?php endif; }?>
 			
 			  <?php $value = object_input_tag($npliquidacion_det, 'getSalarioint', array (
-			  'readonly' => true,
 			  'control_name' => 'npliquidacion_det[salarioint]',
+			  'readonly' => true,
+			  'onBlur'=> remote_function(array(
+			  'update'   => 'divgridvaca',
+			  'url'      => 'presnomliquidacion/ajax',
+			  'condition' => "$('npliquidacion_det_codemp').value != '' && $('id').value == ''",
+			  'complete' => 'AjaxJSON(request, json)',
+			  'with' => "'ajax=1&cajtexmos=npliquidacion_det_nomemp&codigo='+$('npliquidacion_det_codemp').value+'&salario='+this.value",
+			        )),
 			)); echo $value ? $value : '&nbsp;' ?>
 			    <?php if($labels['npliquidacion_det{salarioint}']!='.:') { ?>
 			  </div>
