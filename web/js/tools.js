@@ -1297,3 +1297,26 @@ function totalregistros(letra,posicion,filas)
 		}
 
 	}
+
+function totalregistros2(letra,posicion,filas)
+  {
+    var fil=0;
+    var total=0;
+    var noexiste=0;
+    while (fil<filas)
+    {
+      var chk=letra+"_"+fil+"_"+posicion;
+      if($(chk)){
+        if ($(chk).value!="")
+        { total=total + 1; }
+      }else{
+       noexiste=noexiste + 1;
+      }
+     fil++;
+    }
+    if (noexiste!=total)
+    {
+     total= total + noexiste;
+    }
+    return total;
+  }
