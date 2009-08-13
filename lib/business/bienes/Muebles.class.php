@@ -124,6 +124,40 @@ public static function Validar_biedisactmuenew($valor1,$valor2)
   {
     try{
       if (self::Actualizar_Mueble($clase)!= -1) return 0;
+
+       $tienecorrelativo=false;
+       if (Herramientas::getVerCorrelativo('corrmue','bndefins',&$r))
+       {
+	      if ($clase->getNrodismue()=='##########')
+	      {
+	      	$tienecorrelativo=true;
+	        $encontrado=false;
+	        while (!$encontrado)
+	        {
+	          $numero=str_pad($r, 10, '0', STR_PAD_LEFT);
+
+	          $sql="select nrodismue from bndismue where codact='".$clase->getCodact()."' and codmue='".$clase->getCodmue()."' and nrodismue='".$numero."'";
+	          if (Herramientas::BuscarDatos($sql,&$result))
+	          {
+	            $r=$r+1;
+	          }
+	          else
+	          {
+	            $encontrado=true;
+	          }
+	        }
+	        $clase->setNrodismue(str_pad($r, 10, '0', STR_PAD_LEFT));
+	      }
+	      else
+	      {
+	        $clase->setNrodismue(str_replace('#','0',$clase->getNrodismue()));
+	      }
+    }
+
+	  if ($tienecorrelativo)
+	  {
+	     Herramientas::getSalvarCorrelativo('corrmue','bndefins','Referencia',$r,&$msg);
+	  }
       $clase->save();
       return -1;
 

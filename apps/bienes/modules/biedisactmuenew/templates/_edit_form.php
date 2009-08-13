@@ -95,7 +95,8 @@
   'size' => 15,
   'readonly'  =>  $bndismue->getId()!='' ? true : false ,
   'control_name' => 'bndismue[nrodismue]',
-  'onBlur'  => "javascript: valor=this.value; valor=valor.pad(10, '0',0);document.getElementById('bndismue_nrodismue').value=valor;document.getElementById('bndismue_nrodismue').disabled=false;",
+  'onKeyPress' => "javascript:if (event.keyCode==13 || event.keyCode==9){document.getElementById('bndismue_codmot').focus();}",
+  'onBlur'  => "javascript:event.keyCode=13; enter(event,this.value);",
   )); echo $value ? $value : '&nbsp;' ?>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <strong>Tipo</strong>&nbsp;&nbsp;&nbsp;
@@ -322,6 +323,18 @@ if ($bndismue->getId()=='') { ?>
   {
     window.open('/tesoreria_dev.php/confincomgen/edit/id/'+$("idrefer").value,'...','menubar=no,toolbar=no,scrollbars=yes,width=1200,height=800,resizable=yes,left=1000,top=80');
   }
+
+ function enter(e,valor)
+ {
+   if (e.keyCode==13 || e.keyCode==9)
+   {
+     if (valor!='')
+     { valor=valor.pad(10, '0',0);}
+     else{valor=valor.pad(10, '#',0);}
+
+     $('bndismue_nrodismue').value=valor;
+   }
+ }
 </script>
 <?php include_partial('edit_actions', array('bndismue' => $bndismue)) ?>
 
