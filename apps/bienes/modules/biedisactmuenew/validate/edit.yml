@@ -1,14 +1,25 @@
 methods:
   post:
+   - "bndismue{codact}"
    - "bndismue{codmue}"
+   - "bndismue{nrodismue}"
    - "bndismue{fecdismue}"
    - "bndismue{mondismue}"
 
 names:
+  bndismue{codact}:
+    required:  Yes
+    required_msg: El Código Catálogo no puede estar en Blanco.
+
   bndismue{codmue}:
     required:  Yes
-    required_msg: El Código no puede estar en Blanco.
+    required_msg: El Código de Activo no puede estar en Blanco.
     validators: CidesaExistValidator
+
+  bndismue{nrodismue}:
+    required:  Yes
+    required_msg: El Número de Orden no puede estar en Blanco.
+    validators: Validar3a
 
   bndismue{fecdismue}:
     required:  Yes
@@ -31,6 +42,17 @@ CidesaExistValidator:
         class:    Bnregmue
         column:   codmue
         unique_error:   El Código Activo no existe. Por Favor, Cambiélo por otro.
+
+Validar3a:
+    class: UniqueValidator3
+    param:
+        class:        Bndismue
+        column:       nrodismue
+        column2:      codact
+        column3:      codmue
+        value2:       'bndismue[codact]'
+        value3:       'bndismue[codmue]'
+        unique_error:  Ya existe este N° de Orden con este Código de Catálogo y Código Mueble.
 
 FechaValidator:
     class: sfRegexValidator
