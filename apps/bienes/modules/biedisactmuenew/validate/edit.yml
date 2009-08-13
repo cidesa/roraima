@@ -19,7 +19,7 @@ names:
   bndismue{nrodismue}:
     required:  Yes
     required_msg: El Número de Orden no puede estar en Blanco.
-    validators: Validar3a
+#    validators: Validar3a
 
   bndismue{fecdismue}:
     required:  Yes
