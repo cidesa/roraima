@@ -1,10 +1,10 @@
 -- Función que se creo para el Cierre de la Nómina. Trae la partida exacta que va a guardar en Nphiscon(Históricos)
 
--- Function: "SIMA003".partidaconcepto(character varying, character varying, character varying)
+-- Function: partidaconcepto(character varying, character varying, character varying)
 
--- DROP FUNCTION "SIMA003".partidaconcepto(character varying, character varying, character varying);
+-- DROP FUNCTION partidaconcepto(character varying, character varying, character varying);
 
-CREATE OR REPLACE FUNCTION "SIMA003".partidaconcepto(concepto character varying, nomina character varying, cargo character varying)
+CREATE OR REPLACE FUNCTION partidaconcepto(concepto character varying, nomina character varying, cargo character varying)
   RETURNS character varying AS
 $BODY$
 DECLARE
@@ -17,14 +17,14 @@ RETURN lapartida;
 END;
 $BODY$
   LANGUAGE 'plpgsql' VOLATILE;
-ALTER FUNCTION "SIMA003".partidaconcepto(character varying, character varying, character varying) OWNER TO postgres;
+ALTER FUNCTION partidaconcepto(character varying, character varying, character varying) OWNER TO postgres;
 
 
--- Function: "SIMA003".categoriaemp(character varying, character varying, character varying, character varying)
+-- Function: categoriaemp(character varying, character varying, character varying, character varying)
 
--- DROP FUNCTION "SIMA003".categoriaemp(character varying, character varying, character varying, character varying);
+-- DROP FUNCTION categoriaemp(character varying, character varying, character varying, character varying);
 
-CREATE OR REPLACE FUNCTION "SIMA003".categoriaemp(nomina character varying, empleado character varying, cargo character varying, concepto character varying)
+CREATE OR REPLACE FUNCTION categoriaemp(nomina character varying, empleado character varying, cargo character varying, concepto character varying)
   RETURNS character varying AS
 $BODY$
 DECLARE
@@ -37,4 +37,4 @@ return(lacategoria);
 end;
 $BODY$
   LANGUAGE 'plpgsql' VOLATILE;
-ALTER FUNCTION "SIMA003".categoriaemp(character varying, character varying, character varying, character varying) OWNER TO postgres;
+ALTER FUNCTION categoriaemp(character varying, character varying, character varying, character varying) OWNER TO postgres;
