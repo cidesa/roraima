@@ -67,7 +67,7 @@ class cidesaObjectBuilder extends sfObjectBuilder
     if ($defaultValue !== null) {
       $script .= " || \$v === $defaultValue";
     }
-    if($col->getType() == PropelTypes::NUMERIC){
+    if($col->getType() == PropelTypes::NUMERIC || $col->getType() == PropelTypes::DOUBLE){
       $script .= ") {
         \$this->$clo = Herramientas::toFloat(\$v);
         \$this->modifiedColumns[] = ".$this->getColumnConstant($col).";
@@ -103,7 +103,7 @@ class cidesaObjectBuilder extends sfObjectBuilder
   */
   public function get$cfc(";
 
-    if($col->getType() == PropelTypes::NUMERIC){
+    if($col->getType() == PropelTypes::NUMERIC || $col->getType() == PropelTypes::DOUBLE){
       $script .= "\$val=false";}
 
     if ($col->isLazyLoad()) $script .= "\$con = null";
@@ -119,7 +119,7 @@ class cidesaObjectBuilder extends sfObjectBuilder
     }
 
 //              Código Agregado - Luis Hernández - 24/06/07
-    if($col->getType() == PropelTypes::NUMERIC){
+    if($col->getType() == PropelTypes::NUMERIC || $col->getType() == PropelTypes::DOUBLE){
       $script .= "
     if(\$val) return number_format(\$this->".$clo.",2,',','.');
     else return \$this->".$clo.";
