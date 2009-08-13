@@ -67,7 +67,7 @@ class nomnommovnomconActions extends autonomnommovnomconActions
     		}
 		if (isset($npasiconemp['codemp']))
 		{
-			$this->npasiconemp->setCodemp(str_pad($npasiconemp['codemp'], 16, " "));
+			$this->npasiconemp->setCodemp($npasiconemp['codemp']);
 		}
 		if (isset($npasiconemp['nomemp']))
 		{
@@ -96,12 +96,11 @@ class nomnommovnomconActions extends autonomnommovnomconActions
 
 		$c = new Criteria();
 	 	$c->add(NpasicarempPeer::CODNOM,$codigonomina);
+		$c->add(NpasiconempPeer::CODCON,$codigoconcepto);
 		$c->add(NphojintPeer::STAEMP,'A');
 	 	$c->addJoin(NpasicarempPeer::CODEMP,NphojintPeer::CODEMP);
 	 	$c->addJoin(NpasiconempPeer::CODEMP,NpasicarempPeer::CODEMP);
 		$c->addJoin(NpasiconempPeer::CODCAR,NpasicarempPeer::CODCAR);
-	 	$c->add(NpasiconempPeer::CODCON,$codigoconcepto);
-
 		$per = NpasiconempPeer::doSelect($c);
 
 		$filas_arreglo=150;

@@ -21,7 +21,7 @@ class nomnommovnomempActions extends autonomnommovnomempActions
 	    	else
 	    	{
 	      	$npasicaremp = NpasicarempPeer::retrieveByPk($this->getRequestParameter($id));
-	      	$this->configGrid($npasicaremp->getCodnom(),$npasicaremp->getCodcon(),$npasicaremp->getCodcar());
+	      	$this->configGrid($npasicaremp->getCodnom(),$npasicaremp->getCodemp(),$npasicaremp->getCodcar());
 
 	      	$this->forward404Unless($npasicaremp);
     		}
