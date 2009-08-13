@@ -1,15 +1,26 @@
 methods:
   post:
+   - "bndisinm{codact}"
    - "bndisinm{codmue}"
+   - "bndisinm{nrodisinm}"
    - "bndisinm{fecdisinm}"
    - "bndisinm{fecdevdis}"
    - "bndisinm{mondisinm}"
 
 names:
+  bndisinm{codact}:
+    required:  Yes
+    required_msg: El Código Catálogo no puede estar en Blanco.
+
   bndisinm{codmue}:
     required:  Yes
-    required_msg: El Código no puede estar en Blanco.
+    required_msg: El Código de Activo no puede estar en Blanco.
     validators: CidesaExistValidator
+
+  bndisinm{nrodisinm}:
+    required:  Yes
+    required_msg: El Número de Orden no puede estar en Blanco.
+    validators: Validar3a
 
   bndisinm{fecdisinm}:
     required:  Yes
@@ -29,6 +40,17 @@ MyNumberValidator:
     param:
         values:    [ '/^([0-9]*(\.*([0-9]{2,}))*\,?[0-9]+|[0-9]+\,?[0-9]*)?$/' ]
         values_error:El Campo solo puede contener valores númericos
+
+Validar3a:
+    class: UniqueValidator3
+    param:
+        class:        Bndisinm
+        column:       nrodisinm
+        column2:      codact
+        column3:      codmue
+        value2:       'bndisinm[codact]'
+        value3:       'bndisinm[codmue]'
+        unique_error:  Ya existe este N° de Orden con este Código de Catálogo y Código Activo.
 
 CidesaExistValidator:
     class: CidesaExistValidator
