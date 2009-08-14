@@ -1716,7 +1716,7 @@ class Nomina {
 
       case "AA" :
         // ????????? año bisiesto ojoooooooooo cambiar
-        $valor = intval(Herramientas :: dateDiff('d', $fechaing, $fecnom) / 366);
+        $valor = intval(Herramientas :: dateDiff('d', $fechaing, $fecnom) / 365);
         break;
 
       case "CATRAB" :
@@ -3310,7 +3310,7 @@ class Nomina {
         break;
       case "AA" :
         // ????????? año bisiesto ojoooooooooo cambiar
-        return intval(Herramientas :: dateDiff('d', $fechaing, $profec) / 366);
+        return intval(Herramientas :: dateDiff('d', $fechaing, $profec) / 365);
         break;
       case "CATRAB" :
         $valor = 0;
