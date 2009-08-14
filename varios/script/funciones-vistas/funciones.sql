@@ -508,7 +508,7 @@ RETURN lapartida;
 END;
 $BODY$
   LANGUAGE 'plpgsql' VOLATILE;
-ALTER FUNCTION partidaconcepto(concepto character varying, nomina character varying, cargo character varying) OWNER TO postgres;
+ALTER FUNCTION partidaconcepto(character varying, character varying, character varying) OWNER TO postgres;
 
 
 CREATE OR REPLACE FUNCTION actualizar_saldosnew(codigo_cta character varying, fecha_ini date, fecha_cie date, periodo character varying, debcre character varying, monto numeric)
@@ -1050,12 +1050,12 @@ COALESCE(A.CAPACTACU,0) AS MONTO,0 AS MONDIA,0 AS MONDIAPRO,COALESCE(A.DIAACU,0)
 COALESCE(A.CAPACTACU,0) AS MONPRES, COALESCE(A.ANTACU,0) AS MONANT,
 -100 AS ID,''CORTE AL ''||TO_CHAR(A.FECCORACU,''DD/MM/YYYY'') AS TIPO, COALESCE(A.CAPACTACU,0) AS CAPITAL,
 COALESCE(A.CAPACTACU,0) AS CAPITALACT,0 AS TASA,0 AS MONINT,COALESCE(A.INTACU,0) AS INTACU, 0 AS MONADEINT
-FROM NPHOJINT A,(SELECT * FROM NPASIEMPCONT WHERE STATUS=''A'') B 
+FROM NPHOJINT A,(SELECT * FROM NPASIEMPCONT WHERE STATUS=''A'') B
 WHERE A.CODEMP='''||codigo||'''
-AND A.CODEMP=B.CODEMP) A LEFT OUTER JOIN 
+AND A.CODEMP=B.CODEMP) A LEFT OUTER JOIN
 (SELECT ANOVIG,ANOVIGHAS,CODTIPCON,MAX(ANTAP) AS ANTAP,
                         MAX(ANTAPVAC) AS ANTAPVAC
-                        FROM NPBONOCONT 
+                        FROM NPBONOCONT
                         GROUP BY ANOVIG,ANOVIGHAS,CODTIPCON) B ON
                         A.FECING>=B.ANOVIG
                         AND A.FECFIN<=B.ANOVIGHAS
@@ -1074,13 +1074,13 @@ ELSE
    0
 END)::NUMERIC AS MONDIAPRO,
 A.DIAS::INTEGER,A.MONPRES+((CASE WHEN A.DIAS<>5 THEN
-                     (CASE WHEN '''||salpro||'''=''P'' THEN 
+                     (CASE WHEN '''||salpro||'''=''P'' THEN
                   	(SELECT ROUND(AVG(MONDIA),2) FROM NPPRESTACIONES
                    	WHERE CODEMP='''||codigo||'''
                    	AND ID<=A.ID
                    	AND ID>=A.ID-11)
                      ELSE
-                        A.MONDIA  
+                        A.MONDIA
                      END)
                  ELSE
                    0
@@ -1105,7 +1105,7 @@ A.FECING::DATE,A.FECINI::DATE,A.FECFIN::DATE,
 (CASE WHEN A.ALICUOCON<>0 THEN A.MONDIA
  ELSE ROUND(A.SALNOR/30,2) END)::NUMERIC AS MONDIA,0::NUMERIC AS MONDIAPRO,
 COALESCE((CASE WHEN A.ANNOANTIG>0 THEN
-      (CASE WHEN (A.MESANTIGTOT=6 AND A.DIAANTIGTOT>0) OR A.MESANTIGTOT>6 
+      (CASE WHEN (A.MESANTIGTOT=6 AND A.DIAANTIGTOT>0) OR A.MESANTIGTOT>6
        THEN 60-(SELECT COALESCE(SUM(5),0)
                 FROM NPPRESTACIONES
                 WHERE CODEMP='''||codigo||'''
@@ -1124,7 +1124,7 @@ COALESCE((CASE WHEN A.ANNOANTIG>0 THEN
                                END)
                 AND FECFIN <= TO_DATE('''||fechareal||''',''DD/MM/YYYY''))
        ELSE 0 END)
- ELSE (CASE WHEN (A.MESANTIGTOT=6 AND A.DIAANTIGTOT>0) OR A.MESANTIGTOT>6 
+ ELSE (CASE WHEN (A.MESANTIGTOT=6 AND A.DIAANTIGTOT>0) OR A.MESANTIGTOT>6
        THEN 45-(SELECT COALESCE(SUM(5),0)
                 FROM NPPRESTACIONES
                 WHERE CODEMP='''||codigo||'''
@@ -1248,7 +1248,7 @@ AND A.FECFIN > TO_DATE('''||fechareal||''',''DD/MM/YYYY'')
 order by FECINI,ID'
 
 loop
-  
+
   IF recordSalida.tipo not like 'CORTE AL%' THEN
   	SELECT INTO tasa COALESCE((CASE WHEN B.TIPTAS='P' THEN A.TASINTPRO
         			  	WHEN B.TIPTAS='A' THEN A.TASINTACT
@@ -1260,86 +1260,86 @@ loop
   	AND B.FECDES<=recordSalida.fecini
   	AND B.FECHAS>=recordSalida.fecfin;
 
-  
+
   	SELECT INTO fideicomiso,fechafide fid,fecdes
   	FROM NPTIPCON
-  	WHERE CODTIPCON=recordSalida.codtipcon; 
- 
-  
+  	WHERE CODTIPCON=recordSalida.codtipcon;
+
+
 	IF tasa IS NULL THEN
 	   tasa:=0;
 	END IF;
-	
+
         IF fechafide IS NULL THEN
 	   fechafide:=now();
 	END IF;
 
 	  IF  capitalizacion='A' THEN
 	     IF TO_CHAR(recordSalida.fecing,'MM')=TO_CHAR(recordSalida.fecfin,'MM')
-		AND recordSalida.antannos>=1 THEN 
+		AND recordSalida.antannos>=1 THEN
 		capital:=capital+recordSalida.monpres-recordSalida.monant+interesacum;
 		IF fideicomiso='0' OR fideicomiso='N' THEN
-		   capitalint:=capitalint+recordSalida.monpres-recordSalida.monant+interesacum; 
+		   capitalint:=capitalint+recordSalida.monpres-recordSalida.monant+interesacum;
 		ELSE
 		   IF recordSalida.fecfin<fechafide THEN
-		      capitalint:=capitalint+recordSalida.monpres-recordSalida.monant+interesacum;  
+		      capitalint:=capitalint+recordSalida.monpres-recordSalida.monant+interesacum;
 		   ELSE
-		      capitalint:=capitalint+interesacum;  
+		      capitalint:=capitalint+interesacum;
 		   END IF;
-		END IF;        
+		END IF;
 		interesacum:=0;
 	     ELSE
 		capital:=capital+recordSalida.monpres-recordSalida.monant;
 		IF fideicomiso='0' OR fideicomiso='N' THEN
-		   capitalint:=capitalint+recordSalida.monpres-recordSalida.monant; 
+		   capitalint:=capitalint+recordSalida.monpres-recordSalida.monant;
 		ELSE
 		   IF recordSalida.fecfin<fechafide THEN
-		      capitalint:=capitalint+recordSalida.monpres-recordSalida.monant;    
+		      capitalint:=capitalint+recordSalida.monpres-recordSalida.monant;
 		   END IF;
-		END IF; 
+		END IF;
 	     END IF;
 	  ELSE
 	     IF capitalizacion='M' THEN
 		capital:=capital+recordSalida.monpres-recordSalida.monant+interesacum;
 		IF fideicomiso='0' OR fideicomiso='N' THEN
-		   capitalint:=capitalint+recordSalida.monpres-recordSalida.monant+interesacum; 
+		   capitalint:=capitalint+recordSalida.monpres-recordSalida.monant+interesacum;
 		ELSE
 		   IF recordSalida.fecfin<fechafide THEN
-		      capitalint:=capitalint+recordSalida.monpres-recordSalida.monant+interesacum;  
+		      capitalint:=capitalint+recordSalida.monpres-recordSalida.monant+interesacum;
 		   ELSE
-		      capitalint:=capitalint+interesacum;  
+		      capitalint:=capitalint+interesacum;
 		   END IF;
-		END IF; 
+		END IF;
 		interesacum:=0;
 	     ELSE
 		capital:=capital+recordSalida.monpres-recordSalida.monant;
 		IF fideicomiso='0' OR fideicomiso='N' THEN
-		   capitalint:=capitalint+recordSalida.monpres-recordSalida.monant; 
+		   capitalint:=capitalint+recordSalida.monpres-recordSalida.monant;
 		ELSE
 		   IF recordSalida.fecfin<fechafide THEN
-		      capitalint:=capitalint+recordSalida.monpres-recordSalida.monant;    
+		      capitalint:=capitalint+recordSalida.monpres-recordSalida.monant;
 		   END IF;
-		END IF; 
+		END IF;
 	     END IF;
 	  END IF;
   	recordSalida.capital:=capital-recordSalida.monpres+recordSalida.monant;
   	IF fideicomiso='0' OR fideicomiso='N' THEN
-     		capitalactint:=capitalint-recordSalida.monpres+recordSalida.monant; 
+     		capitalactint:=capitalint-recordSalida.monpres+recordSalida.monant;
   	ELSE
      		IF recordSalida.fecfin<fechafide THEN
-        		capitalactint:=capitalint-recordSalida.monpres+recordSalida.monant;    
-     		ELSE 
+        		capitalactint:=capitalint-recordSalida.monpres+recordSalida.monant;
+     		ELSE
         		capitalactint:=capitalint;
      		END IF;
   	END IF;
-  
-     
+
+
   	recordSalida.tasa:=tasa;
   ELSE
-        recordSalida.tasa:=0;     
+        recordSalida.tasa:=0;
         capital:=recordSalida.capitalact;
-        capitalint:=capital;        
-        capitalactint:=capitalint; 
+        capitalint:=capital;
+        capitalactint:=capitalint;
   END IF;
   IF recordSalida.tipo='DEPOSITADOS' THEN
      recordSalida.monint:=round((capitalactint* (tasa/100) / 12 /30 * 30),2);
@@ -1599,7 +1599,7 @@ A.ID::INTEGER,0::NUMERIC AS CAPITAL,
 0::NUMERIC AS MONADEINT,0::NUMERIC AS TOTINTERES,A.ANNOANTIG::NUMERIC AS ANTANNOS,
 A.MESANTIG::NUMERIC AS ANTMESES,A.DIAANTIG::NUMERIC AS ANTDIAS,
 A.ANNOINI,A.ANNOFIN,0::NUMERIC AS DIASANNO
-FROM NPPRESREGANT A LEFT OUTER JOIN NPDIAANTPER B ON A.CODTIPCON=B.CODCON 
+FROM NPPRESREGANT A LEFT OUTER JOIN NPDIAANTPER B ON A.CODTIPCON=B.CODCON
                                                  AND A.FECFIN>=B.FECDES
                                                  AND A.FECFIN<=B.FECHAS
 where A.CODEMP='''||codigo||'''
@@ -1622,10 +1622,10 @@ A.ID::INTEGER,0::NUMERIC AS CAPITAL,
 0::NUMERIC AS MONADEINT,0::NUMERIC AS TOTINTERES,A.ANNOANTIG::NUMERIC-1 AS ANTANNOS,
 11::NUMERIC AS ANTMESES,30::NUMERIC AS ANTDIAS,
 ADD_MONTHS(A.ANNOINI,-12) AS ANNOINI,ADD_MONTHS(A.ANNOFIN,-12) AS ANNOFIN,0::NUMERIC AS DIASANNO
-FROM NPPRESREGANT A LEFT OUTER JOIN NPDIAANTPER B ON A.CODTIPCON=B.CODCON 
+FROM NPPRESREGANT A LEFT OUTER JOIN NPDIAANTPER B ON A.CODTIPCON=B.CODCON
                                                  AND A.FECFIN>=B.FECDES
                                                  AND A.FECFIN<=B.FECHAS
-where (CASE WHEN TO_CHAR(A.FECING,''DD'')=''01'' THEN ''01'' ELSE ''02'' END)=''02'' 
+where (CASE WHEN TO_CHAR(A.FECING,''DD'')=''01'' THEN ''01'' ELSE ''02'' END)=''02''
 AND A.CODEMP='''||codigo||'''
 AND A.FECINI>ADD_MONTHS(A.FECING,12)
 AND A.FECFIN <= TO_DATE('''||fecha||''',''DD/MM/YYYY'')
@@ -1641,7 +1641,7 @@ loop
   WHERE CODEMP=recordSalida.codemp
   AND FECADE>=recordSalida.fecini
   AND FECADE<=recordSalida.fecfin;
-  recordSalida.monadeint:=COALESCE(adelantoint,0); 
+  recordSalida.monadeint:=COALESCE(adelantoint,0);
   IF TO_CHAR(recordSalida.fecing,'MM')=TO_CHAR(recordSalida.fecfin,'MM') AND recordSalida.fecfin<>recordSalida.annofin THEN
      annoini:=recordSalida.annoini;
      annofin:=recordSalida.annofin;
@@ -1656,14 +1656,14 @@ loop
         WHERE CODEMP=recordSalida.codemp
         AND ID=(CASE WHEN add_months(recordSalida.fecini,-12)=recordSalida.fecing THEN recordSalida.id ELSE recordSalida.id-1 END);
      END IF;
-     
+
   ELSE
     recordSalida.annoini:=annoini;
-    recordSalida.annofin:=annofin;           
+    recordSalida.annofin:=annofin;
   END IF;
-  diasanno:=dias; 
+  diasanno:=dias;
   recordSalida.monto:=sueldo;
-  IF dias<>360 THEN 
+  IF dias<>360 THEN
      IF last_day(TO_DATE('01/02/'||TO_CHAR(annoini,'YYYY'),'DD/MM/YYYY'))>=annoini AND
         last_day(TO_DATE('01/02/'||TO_CHAR(annoini,'YYYY'),'DD/MM/YYYY'))<=annofin THEN
         IF TO_NUMBER(TO_CHAR(last_day(TO_DATE('01/02/'||TO_CHAR(annoini,'YYYY'),'DD/MM/YYYY')),'DD'),'99')>28 THEN
@@ -1674,23 +1674,23 @@ loop
            last_day(TO_DATE('01/02/'||TO_CHAR(annofin,'YYYY'),'DD/MM/YYYY'))<=annofin THEN
            IF TO_NUMBER(TO_CHAR(last_day(TO_DATE('01/02/'||TO_CHAR(annofin,'YYYY'),'DD/MM/YYYY')),'DD'),'99')>28 THEN
               diasanno:=366;
-           END IF; 
+           END IF;
         END IF;
      END IF;
   ELSE
-     diasanno:=dias; 
+     diasanno:=dias;
   END IF;
   recordSalida.diasanno:=diasanno;
   IF recordSalida.antmeses=0 AND recordSalida.antdias=0 THEN
      recordSalida.monpres:=(sueldo/30)*(recordSalida.antannos-1)*recordSalida.diasant;
   ELSE
-     recordSalida.monpres:=(sueldo/30)*(recordSalida.antannos)*recordSalida.diasant;  
+     recordSalida.monpres:=(sueldo/30)*(recordSalida.antannos)*recordSalida.diasant;
   END IF;
-  
+
   IF recordSalida.monpres>0 THEN
      ultprest:=recordSalida.monpres;
   END IF;
-  
+
   IF recordSalida.monpres=0 AND recordSalida.fecini>=recordSalida.fecegr THEN
      recordSalida.monpres:=ultprest;
   END IF;
@@ -1710,11 +1710,11 @@ loop
      END IF;
   END IF;
   recordSalida.capital:=capital;
-      
+
   recordSalida.monint:=(recordSalida.capital* (recordSalida.tasa/100) / diasanno * recordsalida.dias);
   interesacum:=interesacum+recordSalida.monint-recordSalida.monadeint;
   interesesadeu:=interesesadeu+recordSalida.monint-recordSalida.monadeint;
-  recordSalida.totinteres:=interesesadeu; 
+  recordSalida.totinteres:=interesesadeu;
   recordSalida.intacu=round(interesacum,2);
   recordSalida.capitalact:=round(capital,2);
   return next recordSalida;
@@ -1726,3 +1726,18 @@ return;
 END;
 $body$
 LANGUAGE 'plpgsql' VOLATILE CALLED ON NULL INPUT SECURITY INVOKER;
+
+CREATE OR REPLACE FUNCTION categoriaemp(nomina character varying, empleado character varying, cargo character varying, concepto character varying)
+  RETURNS character varying AS
+$BODY$
+DECLARE
+   lacategoria VARCHAR(32);
+BEGIN
+select  coalesce(b.codcat,a.codcat) into lacategoria
+from npasicaremp a left outer join npconceptoscategoria b
+on (b.codcon=concepto) where codnom=nomina and codemp=empleado and codcar=cargo;
+return(lacategoria);
+end;
+$BODY$
+  LANGUAGE 'plpgsql' VOLATILE;
+ALTER FUNCTION categoriaemp(character varying, character varying, character varying, character varying) OWNER TO postgres;
