@@ -30,9 +30,11 @@ class CierredeNomina
 
  public static function procesoCierre($codnomina,$fecha,&$msj)
  {
+ 	$profecha=Herramientas::getX('CODNOM','Npnomina','Profec',$codnomina);
    if (self::generarNompag($codnomina,$fecha))
    { $msj="";
      self::cierre($codnomina,$fecha);
+     self::eliminarNpnomcal($codnomina,$profecha);
    }
    else
    {
@@ -402,6 +404,15 @@ class CierredeNomina
 	 $registros->save();
    }
    unset($registros);
+ }
+
+ public static function eliminarNpnomcal($codnomina,$fecnom)
+ {
+   $c= new Criteria();
+   $c->add(NpnomcalPeer::CODNOM,$codnomina);
+   $c->add(NpnomcalPeer::FECNOM,$fecnom);
+   $c->add(NpnomcalPeer::ESPECIAL,'N');
+   NpnomcalPeer::doDelete($c);
  }
 
 
