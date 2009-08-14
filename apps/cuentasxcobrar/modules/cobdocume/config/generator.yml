@@ -20,6 +20,8 @@ generator:
       grid_recargos: { name: . }
       grid_descuentos: { name: . }
       comprobante: { name: . }
+      desanu: { name: Descripción}
+      fecanu: { name: Fecha de Anulación}
 
     list:
       title: Cobranzas-Documentos
@@ -48,3 +50,7 @@ generator:
         _save:        ~
         _delete:      ~
         _create:      ~
+        _anular:
+          name: Anular
+          only_for: edit
+          params: class="sf_admin_action_delete" onClick="anularDocumento()"

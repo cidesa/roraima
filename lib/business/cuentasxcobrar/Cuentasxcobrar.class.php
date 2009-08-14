@@ -1054,5 +1054,62 @@ class Cuentasxcobrar {
   	}
   }
 
+  public static function anularDocumento($refdoc,$fecanu,$desanu)
+  {
+  	$q= new Criteria();
+  	$q->add(CobdocumePeer::REFDOC,$refdoc);
+  	$datos= CobdocumePeer::doselectOne($q);
+  	if ($datos)
+  	{
+  	  $datos->setDesanu($desanu);
+  	  $datos->setFecanu($fecanu);
+  	  $datos->setStadoc('N');
+  	  $datos->save();
+  	}
+  }
+
+  public static function anularComprobanteDoc($numcom,$fecanu)
+  {
+     $d= new Criteria();
+     $d->add(ContabcPeer::NUMCOM,$numcom);
+     $regi= ContabcPeer::doSelectOne($d);
+     if ($regi)
+     {
+     	$numcomnew=Comprobante::Buscar_Correlativo();
+     	$contabc= new Contabc();
+     	$contabc->setNumcom($numcomnew);
+     	$contabc->setReftra("RE".substr($numcom,2,6));
+     	$contabc->setFeccom($fecanu);
+     	$contabc->setDescom($regi->getDescom());
+     	$contabc->setStacom('D');
+     	$contabc->setTipcom(null);
+     	$contabc->setMoncom($regi->getMoncom());
+        $contabc->save();
+
+         $e= new Criteria();
+	     $e->add(Contabc1Peer::NUMCOM,$numcom);
+	     $regi2= Contabc1Peer::doSelectOne($d);
+	     if ($regi2)
+	     {
+	     	foreach ($regi2 as $datos)
+	     	{
+	          	$contabc1= new Contabc1();
+		     	$contabc1->setNumcom($numcomnew);
+		     	$contabc1->setFeccom($fecanu);
+		     	$contabc1->setCodcta($datos->getCodcta());
+		     	$contabc1->setNumasi($datos->getNumasi());
+		     	$contabc1->setRefasi($datos->getRefasi());
+		     	$contabc1->setDesasi($datos->getDesasi());
+		     	if ($datos->getDebcre()=='C')
+		     	{
+		     	  $contabc1->setDebcre('D');
+		     	}
+		     	else $contabc1->setDebcre('C');
+		     	$contabc1->setMonasi($datos->getMonasi());
+		        $contabc1->save();
+	     	}
+	     }
+     }
+  }
 }
 ?>

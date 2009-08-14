@@ -649,3 +649,12 @@ function recargos(id)
     $(id).value=$('cobtransa_docfil').value;
     $(monto).value=$('cobtransa_orifil').value;
   }
+
+  function anularDocumento()
+  {
+    var refdoc=$('cobdocume_refdoc').value;
+    var fecdoc=$('cobdocume_fecemi').value;
+    var abodoc=$('cobdocume_abodoc').value;
+
+    window.open(getUrlModulo()+'anular?refdoc='+refdoc+'&abodoc='+abodoc+'&fecdoc='+fecdoc,'...','menubar=no,toolbar=no,scrollbars=yes,width=700,height=250,resizable=yes,left=400,top=120');
+  }
