@@ -187,28 +187,90 @@ $this->Bitacora('Guardo');
   public function executeAjax()
   {
     $this->codigo = $this->getRequestParameter('codigo','');
-    $this->ultfec = $this->getRequestParameter('ultfec','');
+    $this->ultfech = $this->getRequestParameter('ultfec','');
     $ajax = $this->getRequestParameter('ajax','');
-
+    $ultfec=split('/',$this->ultfech);
+    $newulfec=$ultfec[2].'-'.$ultfec[1].'-'.$ultfec[0];
     switch ($ajax){
       case '1':
- 		if ($this->codigo == 'S'){
- 			$sql="select to_char((to_date('$this->ultfec','dd/mm/yyyy')+6),'dd/mm/yyyy') as fecha";
+        switch($this->codigo)
+	     {
+		   case 'S':
+			 $intervalo='ww';
+			 $cant=1;
+	      	 break;
+		   case  'Q':
+		   	 $intervalo='d';
+			 $cant=15;
+			 $ultfec=split('/',$this->ultfech);
+			 $newulfec=$ultfec[2].'-'.$ultfec[1].'-'.$ultfec[0];
+			 $tal= $ultfec[2].'-'.$ultfec[1].'-'.'01';
+	   	     $fec2=Herramientas::dateAdd('d',13,$newulfec,'+');
+	   	     $feccompara=split('-',$fec2);
+	         $fechafin=Herramientas::dateAdd('d',1,(Herramientas::dateAdd('m',1,$tal,'+')),'-');
+	   	     if ((intval($ultfec[0])>15) && (intval($ultfec[1])==intval($feccompara[1])))
+	   	     {
+	   	     	$cant=48;
+	   	     	$newfechafin=split('-',$fechafin);
+	   	     	$profec=$newfechafin[2].'/'.$newfechafin[1].'/'.$newfechafin[0];
+	   	     }
 
- 		}else if ($this->codigo == 'M'){
-			$sql="select to_char((to_date('$this->ultfec','dd/mm/yyyy')+30),'dd/mm/yyyy') as fecha";
+	         if ((intval($ultfec[0])>15) && (intval($ultfec[1])==2))
+	   	     {
+	   	     	$cant=48;
+	   	     	$newfechafin=split('-',$fechafin);
+	   	     	$profec=$newfechafin[2].'/'.$newfechafin[1].'/'.$newfechafin[0];
+	   	     }
+			 break;
+		   case ('M' || 'A'):
+			 $intervalo='m';
+			 $cant=1;
+			 $ultfec=split('/',$this->ultfech);
+			 $newulfec=$ultfec[2].'-'.$ultfec[1].'-'.$ultfec[0];
+			 if ((intval($ultfec[1])==2) && (intval($ultfec[0])==1))
+			 {
+			   $fec2=Herramientas::dateAdd('d',28,$newulfec,'+');
+	   	       $feccompara=split('-',$fec2);
+	   	       if (intval($feccompara[1])==3)
+	   	       {
+	   	       	 $intervalo='d';
+			     $cant=28;
+	   	       }
+	   	       else
+	   	       {
+	   	       	 $intervalo='d';
+			     $cant=29;
+	   	       }
+			 }
+			 $fec3=Herramientas::dateAdd('d',1,$newulfec,'+');
+	   	     $feccompara2=split('-',$fec3);
+			 if ((intval($ultfec[1])==2) && (intval($feccompara2[1])==3))
+			 {
+			   $intervalo='d';
+			   $cant=31;
+			 }
 
- 		}else if ($this->codigo == 'A'){
-			$sql="select to_char((to_date('$this->ultfec','dd/mm/yyyy')+30),'dd/mm/yyyy') as fecha";
+			 if ((intval($ultfec[1])==4) || (intval($ultfec[1])==6) || (intval($ultfec[1])==9) || (intval($ultfec[1])==11) || (intval($ultfec[0])==30))
+			 {
+			   $intervalo='d';
+			   $cant=31;
+			 }
 
- 		}else if ($this->codigo == 'Q'){
-			$sql="select to_char((to_date('$this->ultfec','dd/mm/yyyy')+14),'dd/mm/yyyy') as fecha";
- 		}
+	         if ((intval($ultfec[1])==3) || (intval($ultfec[1])==5) || (intval($ultfec[1])==7) || (intval($ultfec[1])==10) || (intval($ultfec[1])==12) || (intval($ultfec[0])==31))
+			 {
+			   $intervalo='d';
+			   $cant=30;
+			 }
+	      	 break;
+		 }
 
-		if (H::BuscarDatos($sql,&$output))
-		{
-			$profec=$output[0]['fecha'];
-		}
+		 if ($cant!=48)
+		 {
+		 	$fechafin=Herramientas::dateAdd('d',1,(Herramientas::dateAdd($intervalo,$cant,$newulfec,'+')),'-');
+		 	$newfechafin=split('-',$fechafin);
+	   	    $profec=$newfechafin[2].'/'.$newfechafin[1].'/'.$newfechafin[0];
+		 }
+
 		$sql = "SELECT extract(week from (to_date('$profec','dd/mm/yyyy'))::date) as fecha";
 		if (H::BuscarDatos($sql,&$output))
 		{
