@@ -64,6 +64,7 @@ class CierredeNominaEspecial
    if (self::generarNompag($codnomina,$ultfec,$profec,$codnomesp))
    { $msj="";
      self::cierre($codnomina,$ultfec,$profec,$codnomesp,$numsem);
+     self::eliminarNpnomcal($codnomina,$codnomesp,$profec);
    }
    else
    {
@@ -268,7 +269,7 @@ class CierredeNominaEspecial
 		//Para Conceptos que no estan asociados a Categorias Especiales
 		$sql1 = "INSERT INTO NPHISCON (codnom,codemp, codcar, codcon, fecnom, monto, codcat, codpar, codescuela, codniv, codtipgas, nomcon, numrec, cantidad, fecnomdes, especial, fecnomespdes, fecnomesphas,
 			     codnomesp, nomnomesp, codban, nomban, cuenta_banco, nomemp, cedemp, nomcar, desniv, nomcat, numsem)
-			     (SELECT A.CodNom,A.CodEmp,A.CodCar,A.CodCon,A.FecNom,A.Saldo,B.CodCat,C.CodPar,' ',D.CodNiv,B.CODTIPGAS,C.NOMCON,A.NUMREC,
+			     (SELECT A.CodNom,A.CodEmp,A.CodCar,A.CodCon,A.FecNom,A.Saldo,categoriaemp(A.CodNom,A.CodEmp,A.CodCar,A.CodCon),partidaconcepto(A.CodCon,A.CodNom,A.CodCar),' ',D.CodNiv,B.CODTIPGAS,C.NOMCON,A.NUMREC,
 					A.CANTIDAD,A.FECNOMDES,A.ESPECIAL,A.FECNOMESPDES,A.FECNOMESPHAS,A.CODNOMESP,A.NOMNOMESP,
 					D.CODBAN,E.NOMBAN,G.CUENTA_BANCO,D.NOMEMP,D.CEDEMP,F.NOMCAR,H.DESNIV,B.NOMCAT,'".$numsem."'
 					FROM NPNOMCAL A ,NPHOJINT D left outer join NPEMPLEADOS_BANCO G on D.CODEMP=G.CODEMP AND
@@ -292,7 +293,7 @@ class CierredeNominaEspecial
 		//Para Conceptos que estan asociados a Categorias Especiales
 		$sql2 = "INSERT INTO NPHISCON (codnom,codemp, codcar, codcon, fecnom, monto, codcat, codpar, codescuela, codniv, codtipgas, nomcon, numrec, cantidad, fecnomdes, especial, fecnomespdes, fecnomesphas,
 			     codnomesp, nomnomesp, codban, nomban, cuenta_banco, nomemp, cedemp, nomcar, desniv, nomcat, numsem)
-				 (SELECT A.CodNom,A.CodEmp,A.CodCar,A.CodCon,A.FecNom,A.Saldo,E.CodCat,C.CodPar,' ',D.CodNiv,B.CODTIPGAS,C.NOMCON,A.NUMREC,
+				 (SELECT A.CodNom,A.CodEmp,A.CodCar,A.CodCon,A.FecNom,A.Saldo,categoriaemp(A.CodNom,A.CodEmp,A.CodCar,A.CodCon),partidaconcepto(A.CodCon,A.CodNom,A.CodCar),' ',D.CodNiv,B.CODTIPGAS,C.NOMCON,A.NUMREC,
 					A.CANTIDAD, A.FECNOMDES, A.ESPECIAL,A.FECNOMESPDES,A.FECNOMESPHAS,A.CODNOMESP,A.NOMNOMESP,D.CODBAN,F.NOMBAN,H.CUENTA_BANCO,
 					D.NOMEMP,D.CEDEMP,G.NOMCAR,I.DESNIV,
 					B.NOMCAT,'".$numsem."'
@@ -411,7 +412,7 @@ class CierredeNominaEspecial
 	   $registros= NpnominaPeer::doSelectOne($u);
 	   if ($registros)
 	   {
-	   	 if ($registros->getNumsem()!='Null')
+	   	 if (!is_null($registros->getNumsem()))
 	   	 {
 	   	 	$registros->setNumsem($registros->getNumsem()+1);
 	   	 }
@@ -501,6 +502,18 @@ class CierredeNominaEspecial
      	return 0;
   	}
 
+ }
+ public static function eliminarNpnomcal($codnomina,$codnomesp,$fecnom)
+ {
+   $dateFormat = new sfDateFormat('es_VE');
+   $profecha = $dateFormat->format($fecnom, 'i', $dateFormat->getInputPattern('d'));
+
+   $c= new Criteria();
+   $c->add(NpnomcalPeer::CODNOM,$codnomina);
+   $c->add(NpnomcalPeer::CODNOMESP,$codnomesp);
+   $c->add(NpnomcalPeer::FECNOM,$profecha);
+   $c->add(NpnomcalPeer::ESPECIAL,'S');
+   NpnomcalPeer::doDelete($c);
  }
 
 
