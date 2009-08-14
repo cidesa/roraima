@@ -20,6 +20,8 @@ generator:
       comprobante: { name: .}
       codtip: { name: Tipo de Movimiento}
       destip: { name: Descripción}
+      desanu: { name: Descripción}
+      fecanu: { name: Fecha Anulación}
     list:
       title:   Transacciones
       display: [=numtra, destra, fectra, codcli, nompro ]

@@ -230,9 +230,41 @@ class cobdocumeActions extends autocobdocumeActions
 	         $dtocalformat=H::FormatoMonto($dtocal);
              $output = '[["'.$colmondto.'","'.$dtocalformat.'",""]]';
 
+           break;
+          case '5':
+	        $dateFormat = new sfDateFormat('es_VE');
+		    $fecha = $dateFormat->format($this->getRequestParameter('codigo'), 'i', $dateFormat->getInputPattern('d'));
+
+		    $c= new Criteria();
+		    $c->add(CobdocumePeer::REFDOC,$this->getRequestParameter('refdoc'));
+		    $data=CobdocumePeer::doSelectOne($c);
+		    if ($data)
+		    {
+		      if ($fecha<$data->getFecemi())
+		      {
+		        $msj="alert('La Fecha de Anulacion no puede ser menor a la fecha del Documento'); $('cobdocume_fecanu').value=''; $('cobdocume_fecanu').focus();";
+		      }
+		      else
+		      {
+		        $msj="";
+		        if (Tesoreria::validaPeriodoCerrado($this->getRequestParameter('codigo'))==true)
+		        {
+		          $msj="alert('La Fecha no se encuentra de un Perido Contable Abierto.'); $('cobdocume_fecanu').value=''; $('cobdocume_fecanu').focus(); ";
+		        }
+		        else { $msj=""; }
+		      }
+		    }
+		    else
+		    {
+		      $msj="";
+		    }
+		    $output = '[["javascript","'.$msj.'",""]]';
+		    $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+		    return sfView::HEADER_ONLY;
           break;
       default:
         $output = '[["","",""],["","",""],["","",""]]';
+        break;
     }
 
     // Instruccion para escribir en la cabecera los datos a enviar a la vista
@@ -435,6 +467,81 @@ class cobdocumeActions extends autocobdocumeActions
         $this->getRequest()->setError('cobdocume{fecemi}',$err);
       }
     }
+    return sfView::SUCCESS;
+  }
+
+   public function executeAnular()
+  {
+   $refdoc=$this->getRequestParameter('refdoc');
+   $fecemi=$this->getRequestParameter('fecdoc');
+
+   $dateFormat = new sfDateFormat('es_VE');
+   $fec = $dateFormat->format($fecemi, 'i', $dateFormat->getInputPattern('d'));
+
+   $c = new Criteria();
+   $c->add(CobdocumePeer::REFDOC,$refdoc);
+   $c->add(CobdocumePeer::FECEMI,$fec);
+   $this->cobdocume = CobdocumePeer::doSelectOne($c);
+   sfView::SUCCESS;
+  }
+
+  public function executeSalvaranu()
+  {
+    $refdoc=$this->getRequestParameter('refdoc');
+    $fecanu=$this->getRequestParameter('fecanu');
+    $desanu=$this->getRequestParameter('desanu');
+    $this->msg='';
+    $this->mensaje2="";
+    if (Tesoreria::validaPeriodoCerrado($fecanu)==true)
+   {
+     $coderror=529;
+     $this->mensaje2 = Herramientas::obtenerMensajeError($coderror);
+     return sfView::SUCCESS;
+   }else {
+    $fecha_aux=split("/",$fecanu);
+    $dateFormat = new sfDateFormat('es_VE');
+    $fec = $dateFormat->format($fecanu, 'i', $dateFormat->getInputPattern('d'));
+
+    $c= new Criteria();
+    $c->add(CobdocumePeer::REFDOC,$refdoc);
+    $resul= CobdocumePeer::doSelectOne($c);
+    if ($resul)
+    {
+      if ($resul->getAbodoc()<=0){
+
+      if ($fec>=$resul->getFecemi())
+      {
+          $r= new Criteria();
+          $r->add(ContabcPeer::NUMCOM,$resul->getNumcom());
+          $r->add(ContabcPeer::FECCOM,$resul->getFeccom());
+          $datos= ContabcPeer::doSelectOne($r);
+          if ($datos)
+          {
+          	if ($datos->getStacom()=='D')
+          	{
+              Cuentasxcobrar::anularDocumento($resul->getRefdoc(),$fec,$desanu);
+              Cuentasxcobrar::anularComprobanteDoc($resul->getNumcom(),$fec);
+          	}else
+          	{
+          	   $this->msg="El Documento no se puede Anular por tener el Comprobante Actualizado";
+               return sfView::SUCCESS;
+          	}
+          }else{
+            Cuentasxcobrar::anularDocumento($resul->getRefdoc(),$fec,$desanu);
+            Cuentasxcobrar::anularComprobanteDoc($resul->getNumcom(),$fec);
+          }
+      }
+      else
+      {
+        $this->msg="El Documento no se puede Anular con una Fecha Menor a la de Emision";
+        return sfView::SUCCESS;
+      }
+      }else{
+      	$this->msg="El Documento no se puede Anular por tener un Abono";
+        return sfView::SUCCESS;
+      }
+    }
+   }
     return sfView::SUCCESS;
   }
 
