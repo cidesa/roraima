@@ -322,7 +322,7 @@ class CierredeNomina
    $registros= NpnominaPeer::doSelectOne($u);
    if ($registros)
    {
-   	 if ($registros->getNumsem()!='Null')
+   	 if (!is_null($registros->getNumsem()))
    	 {
    	 	$registros->setNumsem($registros->getNumsem()+1);
    	 }
