@@ -1716,7 +1716,12 @@ class Nomina {
 
       case "AA" :
         // ????????? año bisiesto ojoooooooooo cambiar
-        $valor = intval(Herramientas :: dateDiff('d', $fechaing, $fecnom) / 365);
+		$sql="select to_char(age(to_date('$fecnom','yyyy-mm-dd'),to_date('$fechaing','yyyy-mm-dd')),'YY') as ano";
+		if (Herramientas :: BuscarDatos($sql, & $tabla)) {
+			$valor = intval($tabla[0]['ano']);
+		}else
+        	$valor = 0;
+		return $valor;	
         break;
 
       case "CATRAB" :
@@ -3310,7 +3315,12 @@ class Nomina {
         break;
       case "AA" :
         // ????????? año bisiesto ojoooooooooo cambiar
-        return intval(Herramientas :: dateDiff('d', $fechaing, $profec) / 365);
+		$sql="select to_char(age(to_date('$profec','yyyy-mm-dd'),to_date('$fechaing','yyyy-mm-dd')),'YY') as ano";
+		if (Herramientas :: BuscarDatos($sql, & $tabla)) {
+			$valor = intval($tabla[0]['ano']);
+		}else
+        	$valor = 0;
+		return $valor;
         break;
       case "CATRAB" :
         $valor = 0;
