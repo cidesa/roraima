@@ -508,7 +508,7 @@ RETURN lapartida;
 END;
 $BODY$
   LANGUAGE 'plpgsql' VOLATILE;
-ALTER FUNCTION partidaconcepto(character varying, character varying, character varying) OWNER TO postgres;
+ALTER FUNCTION partidaconcepto(concepto character varying, nomina character varying, cargo character varying) OWNER TO postgres;
 
 
 CREATE OR REPLACE FUNCTION actualizar_saldosnew(codigo_cta character varying, fecha_ini date, fecha_cie date, periodo character varying, debcre character varying, monto numeric)
@@ -562,7 +562,7 @@ BEGIN
                 FECINI = REGISTRO.FECINI AND
                 FECCIE = REGISTRO.FECCIE AND
                 PEREJE = REGISTRO.PEREJE;
-      PERIODO_ANT := LPAD(LTRIM(TO_CHAR(TO_NUMBER(PERIODO_ANT,99)+1,'99')),2,'0');
+      PERIODO_ANT := LPAD(LTRIM(TO_CHAR(TO_NUMBER(PERIODO_ANT,'99')+1,'99')),2,'0');
       SELECT INTO SALDO_ANT SALACT
         FROM CONTABB1
        WHERE CODCTA = CODIGO_CTA AND
@@ -1726,18 +1726,3 @@ return;
 END;
 $body$
 LANGUAGE 'plpgsql' VOLATILE CALLED ON NULL INPUT SECURITY INVOKER;
-
-CREATE OR REPLACE FUNCTION categoriaemp(nomina character varying, empleado character varying, cargo character varying, concepto character varying)
-  RETURNS character varying AS
-$BODY$
-DECLARE
-   lacategoria VARCHAR(32);
-BEGIN
-select  coalesce(b.codcat,a.codcat) into lacategoria
-from npasicaremp a left outer join npconceptoscategoria b
-on (b.codcon=concepto) where codnom=nomina and codemp=empleado and codcar=cargo;
-return(lacategoria);
-end;
-$BODY$
-  LANGUAGE 'plpgsql' VOLATILE;
-ALTER FUNCTION categoriaemp(character varying, character varying, character varying, character varying) OWNER TO postgres;
