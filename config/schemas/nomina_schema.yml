@@ -2686,7 +2686,7 @@ propel:
       size: 20
     email:
       type: VARCHAR
-      size: 40  
+      size: 40
     id:
       type: INTEGER
       required: true
@@ -3398,6 +3398,11 @@ propel:
       size: 16
       required: true
       ##primaryKey: true
+    rifemp:
+      type: VARCHAR
+      size: 16
+      required: true
+      ##primaryKey: true
     nomemp:
       type: VARCHAR
       size: 100
@@ -3641,23 +3646,23 @@ propel:
       type: VARCHAR
       size: 4
     feccoracu:
-      type: DATE  
+      type: DATE
     capactacu:
       type: NUMERIC
       size: 14
-      scale: 2  
+      scale: 2
     intacu:
       type: NUMERIC
       size: 14
-      scale: 2  
+      scale: 2
     antacu:
       type: NUMERIC
       size: 14
-      scale: 2  
+      scale: 2
     diaacu:
       type: INTEGER
     diaadiacu:
-      type: INTEGER   
+      type: INTEGER
     seghcm:
       type: VARCHAR
       size: 1
@@ -4152,7 +4157,7 @@ propel:
     porseghcm:
       type: NUMERIC
       size: 3
-      scale: 2  
+      scale: 2
     ocupac:
       type: VARCHAR
       size: 1
@@ -5674,13 +5679,13 @@ propel:
       #idMethod: native
     codnom:
       type: VARCHAR
-      size: 3  
+      size: 3
     codcon:
       type: VARCHAR
       size: 3
     codconapo:
       type: VARCHAR
-      size: 3  
+      size: 3
     tippar:
       type: VARCHAR
       size: 3
@@ -6293,7 +6298,7 @@ propel:
       size: 3
     jornada:
       type: VARCHAR
-      size: 1  
+      size: 1
     id:
       type: INTEGER
       required: true

@@ -155,7 +155,25 @@
   'control_name' => 'nphojint[cedemp]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div></th>
+
     <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+
+    <th><?php echo label_for('nphojint[rifemp]', __($labels['nphojint{rifemp}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('nphojint{rifemp}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('nphojint{rifemp}')): ?>
+    <?php echo form_error('nphojint{rifemp}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($nphojint, 'getRifemp', array (
+  'size' => 16,
+  'maxlength' => 16,
+  'control_name' => 'nphojint[rifemp]',
+)); echo $value ? $value : '&nbsp;' ?>
+
+    </div></th>
+
+    <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+
     <th><?php echo label_for('nphojint[edociv]', __($labels['nphojint{edociv}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('nphojint{edociv}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('nphojint{edociv}')): ?>
@@ -257,7 +275,7 @@
 	<div class="form-row">
 <? if ($nphojint->getSeghcm()=='S')  {
   ?><?php echo radiobutton_tag('nphojint[seghcm]', 'S', true, array('onclick'=>'porcentajehcm(this.id)'))        ."   Si".'&nbsp;&nbsp;'.'&nbsp;&nbsp;'.'&nbsp;&nbsp;';
-      echo radiobutton_tag('nphojint[seghcm]', 'N', false, array('onclick'=>'porcentajehcm(this.id)'))."     No";?>	  
+      echo radiobutton_tag('nphojint[seghcm]', 'N', false, array('onclick'=>'porcentajehcm(this.id)'))."     No";?>
 	  <?php echo __('Porcentaje:&nbsp;');
 	        $value = object_input_tag($nphojint, array('getPorseghcm',true), array (
 			'size' => 4,
@@ -266,7 +284,7 @@
 			'onblur'=> "javascript:event.keyCode=13;return entermontootro(event,this.id)",
 			'control_name' => 'nphojint[porseghcm]',
 			)); echo $value ? $value : '&nbsp;'; ?>
-			
+
     <?
 }else{
   echo radiobutton_tag('nphojint[seghcm]', 'S', false, array('onclick'=>'porcentajehcm(this.id)'))        ." Si".'&nbsp;&nbsp;'.'&nbsp;&nbsp;'.'&nbsp;&nbsp;';
@@ -280,9 +298,9 @@ $value = object_input_tag($nphojint, 'getPorseghcm', array (
 			'onblur'=> "javascript:event.keyCode=13;return entermontootro(event,this.id)",
 			'maxlength' => 6,
 			'control_name' => 'nphojint[porseghcm]',
-			)); echo $value ? $value : '&nbsp;'; 
+			)); echo $value ? $value : '&nbsp;';
 
-} ?>		
+} ?>
 	</div></fieldset></th>
    </tr>
   </table>
@@ -926,13 +944,13 @@ echo grid_tag($obj);
 				  <?php if ($sf_request->hasError('nphojint{feccoracu}')): ?>
 				    <?php echo form_error('nphojint{feccoracu}', array('class' => 'form-error-msg')) ?>
 				  <?php endif; ?>
-				
+
 				  <?php $value = object_input_date_tag($nphojint, 'getFeccoracu', array (
 				  'rich' => true,
 				  'calendar_button_img' => '/sf/sf_admin/images/date.png',
 				  'control_name' => 'nphojint[feccoracu]',
 				)); echo $value ? $value : '&nbsp;' ?>
-				    </div>			
+				    </div>
 		</th>
 		<th width="150">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 		<th><?php echo label_for('nphojint[capactacu]', __($labels['nphojint{capactacu}']), 'class="required"') ?>
@@ -940,7 +958,7 @@ echo grid_tag($obj);
 			  <?php if ($sf_request->hasError('nphojint{capactacu}')): ?>
 			    <?php echo form_error('nphojint{capactacu}', array('class' => 'form-error-msg')) ?>
 			  <?php endif; ?>
-			
+
 			  <?php $value = object_input_tag($nphojint, array('getCapactacu',true), array (
 			  'size' => 10,
 			  'control_name' => 'nphojint[capactacu]',
@@ -955,36 +973,36 @@ echo grid_tag($obj);
 	<tr>
 		<th>&nbsp;&nbsp;&nbsp;</th>
 	</tr>
-	<tr>		
+	<tr>
 		<th>
 			<?php echo label_for('nphojint[intacu]', __($labels['nphojint{intacu}']), 'class="required"') ?>
 			  <div class="content<?php if ($sf_request->hasError('nphojint{intacu}')): ?> form-error<?php endif; ?>">
 			  <?php if ($sf_request->hasError('nphojint{intacu}')): ?>
 			    <?php echo form_error('nphojint{intacu}', array('class' => 'form-error-msg')) ?>
 			  <?php endif; ?>
-			
+
 			  <?php $value = object_input_tag($nphojint, array('getIntacu',true), array (
 			  'size' => 10,
 			  'control_name' => 'nphojint[intacu]',
 			  'onBlur'=> "javascript:event.keyCode=13;entermontootro(event, this.id); "
 			)); echo $value ? $value : '&nbsp;' ?>
 			    </div>
-		</th>				
+		</th>
         <th>&nbsp;&nbsp;&nbsp;</th>
-		<th>			
+		<th>
 		  <?php echo label_for('nphojint[antacu]', __($labels['nphojint{antacu}']), 'class="required"') ?>
 		  <div class="content<?php if ($sf_request->hasError('nphojint{antacu}')): ?> form-error<?php endif; ?>">
 		  <?php if ($sf_request->hasError('nphojint{antacu}')): ?>
 		    <?php echo form_error('nphojint{antacu}', array('class' => 'form-error-msg')) ?>
 		  <?php endif; ?>
-		
+
 		  <?php $value = object_input_tag($nphojint, array('getAntacu',true), array (
 		  'size' => 10,
 		  'control_name' => 'nphojint[antacu]',
 		  'onBlur'=> "javascript:event.keyCode=13;entermontootro(event, this.id); "
 		)); echo $value ? $value : '&nbsp;' ?>
 		    </div>
-		</th>		
+		</th>
 	</tr>
 	<tr>
 		<th>&nbsp;&nbsp;&nbsp;</th>
@@ -998,7 +1016,7 @@ echo grid_tag($obj);
 		  <?php if ($sf_request->hasError('nphojint{diaacu}')): ?>
 		    <?php echo form_error('nphojint{diaacu}', array('class' => 'form-error-msg')) ?>
 		  <?php endif; ?>
-		
+
 		  <?php $value = object_input_tag($nphojint, 'getDiaacu', array (
 		  'size' => 10,
 		  'control_name' => 'nphojint[diaacu]',
@@ -1012,7 +1030,7 @@ echo grid_tag($obj);
 			  <?php if ($sf_request->hasError('nphojint{diaadiacu}')): ?>
 			    <?php echo form_error('nphojint{diaadiacu}', array('class' => 'form-error-msg')) ?>
 			  <?php endif; ?>
-			
+
 			  <?php $value = object_input_tag($nphojint, 'getDiaadiacu', array (
 			  'size' => 10,
 			  'control_name' => 'nphojint[diaadiacu]',
@@ -1511,7 +1529,7 @@ function nivel(e)
 		$('nphojint_porseghcm').value='';
 		$('nphojint_porseghcm').readOnly=true;
 	}
-	
+
  }
  function activar_check(id)
 {
