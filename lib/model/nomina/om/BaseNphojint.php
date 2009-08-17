@@ -13,6 +13,10 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 
 
 	
+	protected $rifemp;
+
+
+	
 	protected $nomemp;
 
 
@@ -404,6 +408,13 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
   {
 
     return trim($this->codemp);
+
+  }
+  
+  public function getRifemp()
+  {
+
+    return trim($this->rifemp);
 
   }
   
@@ -1214,6 +1225,16 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
     if ($this->codemp !== $v) {
         $this->codemp = $v;
         $this->modifiedColumns[] = NphojintPeer::CODEMP;
+      }
+  
+	} 
+	
+	public function setRifemp($v)
+	{
+
+    if ($this->rifemp !== $v) {
+        $this->rifemp = $v;
+        $this->modifiedColumns[] = NphojintPeer::RIFEMP;
       }
   
 	} 
@@ -2227,193 +2248,195 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 
       $this->codemp = $rs->getString($startcol + 0);
 
-      $this->nomemp = $rs->getString($startcol + 1);
+      $this->rifemp = $rs->getString($startcol + 1);
 
-      $this->cedemp = $rs->getString($startcol + 2);
+      $this->nomemp = $rs->getString($startcol + 2);
 
-      $this->numcon = $rs->getString($startcol + 3);
+      $this->cedemp = $rs->getString($startcol + 3);
 
-      $this->edociv = $rs->getString($startcol + 4);
+      $this->numcon = $rs->getString($startcol + 4);
 
-      $this->nacemp = $rs->getString($startcol + 5);
+      $this->edociv = $rs->getString($startcol + 5);
 
-      $this->sexemp = $rs->getString($startcol + 6);
+      $this->nacemp = $rs->getString($startcol + 6);
 
-      $this->fecnac = $rs->getDate($startcol + 7, null);
+      $this->sexemp = $rs->getString($startcol + 7);
 
-      $this->edaemp = $rs->getFloat($startcol + 8);
+      $this->fecnac = $rs->getDate($startcol + 8, null);
 
-      $this->lugnac = $rs->getString($startcol + 9);
+      $this->edaemp = $rs->getFloat($startcol + 9);
 
-      $this->dirhab = $rs->getString($startcol + 10);
+      $this->lugnac = $rs->getString($startcol + 10);
 
-      $this->codciu = $rs->getString($startcol + 11);
+      $this->dirhab = $rs->getString($startcol + 11);
 
-      $this->telhab = $rs->getString($startcol + 12);
+      $this->codciu = $rs->getString($startcol + 12);
 
-      $this->celemp = $rs->getString($startcol + 13);
+      $this->telhab = $rs->getString($startcol + 13);
 
-      $this->emaemp = $rs->getString($startcol + 14);
+      $this->celemp = $rs->getString($startcol + 14);
 
-      $this->codpos = $rs->getString($startcol + 15);
+      $this->emaemp = $rs->getString($startcol + 15);
 
-      $this->talpan = $rs->getString($startcol + 16);
+      $this->codpos = $rs->getString($startcol + 16);
 
-      $this->talcam = $rs->getString($startcol + 17);
+      $this->talpan = $rs->getString($startcol + 17);
 
-      $this->talcal = $rs->getFloat($startcol + 18);
+      $this->talcam = $rs->getString($startcol + 18);
 
-      $this->derzur = $rs->getString($startcol + 19);
+      $this->talcal = $rs->getFloat($startcol + 19);
 
-      $this->fecing = $rs->getDate($startcol + 20, null);
+      $this->derzur = $rs->getString($startcol + 20);
 
-      $this->fecret = $rs->getDate($startcol + 21, null);
+      $this->fecing = $rs->getDate($startcol + 21, null);
 
-      $this->fecrei = $rs->getDate($startcol + 22, null);
+      $this->fecret = $rs->getDate($startcol + 22, null);
 
-      $this->fecadmpub = $rs->getDate($startcol + 23, null);
+      $this->fecrei = $rs->getDate($startcol + 23, null);
 
-      $this->staemp = $rs->getString($startcol + 24);
+      $this->fecadmpub = $rs->getDate($startcol + 24, null);
 
-      $this->fotemp = $rs->getString($startcol + 25);
+      $this->staemp = $rs->getString($startcol + 25);
 
-      $this->numsso = $rs->getString($startcol + 26);
+      $this->fotemp = $rs->getString($startcol + 26);
 
-      $this->numpolseg = $rs->getString($startcol + 27);
+      $this->numsso = $rs->getString($startcol + 27);
 
-      $this->feccotsso = $rs->getDate($startcol + 28, null);
+      $this->numpolseg = $rs->getString($startcol + 28);
 
-      $this->anoadmpub = $rs->getFloat($startcol + 29);
+      $this->feccotsso = $rs->getDate($startcol + 29, null);
 
-      $this->codtippag = $rs->getString($startcol + 30);
+      $this->anoadmpub = $rs->getFloat($startcol + 30);
 
-      $this->codban = $rs->getString($startcol + 31);
+      $this->codtippag = $rs->getString($startcol + 31);
 
-      $this->tipcue = $rs->getString($startcol + 32);
+      $this->codban = $rs->getString($startcol + 32);
 
-      $this->numcue = $rs->getString($startcol + 33);
+      $this->tipcue = $rs->getString($startcol + 33);
 
-      $this->obsemp = $rs->getString($startcol + 34);
+      $this->numcue = $rs->getString($startcol + 34);
 
-      $this->tiefid = $rs->getString($startcol + 35);
+      $this->obsemp = $rs->getString($startcol + 35);
 
-      $this->grulab = $rs->getString($startcol + 36);
+      $this->tiefid = $rs->getString($startcol + 36);
 
-      $this->gruotr = $rs->getString($startcol + 37);
+      $this->grulab = $rs->getString($startcol + 37);
 
-      $this->traslado = $rs->getString($startcol + 38);
+      $this->gruotr = $rs->getString($startcol + 38);
 
-      $this->traotr = $rs->getString($startcol + 39);
+      $this->traslado = $rs->getString($startcol + 39);
 
-      $this->tipviv = $rs->getString($startcol + 40);
+      $this->traotr = $rs->getString($startcol + 40);
 
-      $this->vivotr = $rs->getString($startcol + 41);
+      $this->tipviv = $rs->getString($startcol + 41);
 
-      $this->forten = $rs->getString($startcol + 42);
+      $this->vivotr = $rs->getString($startcol + 42);
 
-      $this->tenotr = $rs->getString($startcol + 43);
+      $this->forten = $rs->getString($startcol + 43);
 
-      $this->sercon = $rs->getString($startcol + 44);
+      $this->tenotr = $rs->getString($startcol + 44);
 
-      $this->dirotr = $rs->getString($startcol + 45);
+      $this->sercon = $rs->getString($startcol + 45);
 
-      $this->telotr = $rs->getString($startcol + 46);
+      $this->dirotr = $rs->getString($startcol + 46);
 
-      $this->codpai = $rs->getString($startcol + 47);
+      $this->telotr = $rs->getString($startcol + 47);
 
-      $this->codpa2 = $rs->getString($startcol + 48);
+      $this->codpai = $rs->getString($startcol + 48);
 
-      $this->codest = $rs->getString($startcol + 49);
+      $this->codpa2 = $rs->getString($startcol + 49);
 
-      $this->codes2 = $rs->getString($startcol + 50);
+      $this->codest = $rs->getString($startcol + 50);
 
-      $this->codci2 = $rs->getString($startcol + 51);
+      $this->codes2 = $rs->getString($startcol + 51);
 
-      $this->codrac = $rs->getString($startcol + 52);
+      $this->codci2 = $rs->getString($startcol + 52);
 
-      $this->codniv = $rs->getString($startcol + 53);
+      $this->codrac = $rs->getString($startcol + 53);
 
-      $this->telha2 = $rs->getString($startcol + 54);
+      $this->codniv = $rs->getString($startcol + 54);
 
-      $this->telot2 = $rs->getString($startcol + 55);
+      $this->telha2 = $rs->getString($startcol + 55);
 
-      $this->codprofes = $rs->getString($startcol + 56);
+      $this->telot2 = $rs->getString($startcol + 56);
 
-      $this->hcmexo = $rs->getString($startcol + 57);
+      $this->codprofes = $rs->getString($startcol + 57);
 
-      $this->codbanfid = $rs->getString($startcol + 58);
+      $this->hcmexo = $rs->getString($startcol + 58);
 
-      $this->codbanlph = $rs->getString($startcol + 59);
+      $this->codbanfid = $rs->getString($startcol + 59);
 
-      $this->numcuefid = $rs->getString($startcol + 60);
+      $this->codbanlph = $rs->getString($startcol + 60);
 
-      $this->numcuelph = $rs->getString($startcol + 61);
+      $this->numcuefid = $rs->getString($startcol + 61);
 
-      $this->codempant = $rs->getString($startcol + 62);
+      $this->numcuelph = $rs->getString($startcol + 62);
 
-      $this->grusan = $rs->getString($startcol + 63);
+      $this->codempant = $rs->getString($startcol + 63);
 
-      $this->obsgen = $rs->getString($startcol + 64);
+      $this->grusan = $rs->getString($startcol + 64);
 
-      $this->codregpai = $rs->getString($startcol + 65);
+      $this->obsgen = $rs->getString($startcol + 65);
 
-      $this->codregest = $rs->getString($startcol + 66);
+      $this->codregpai = $rs->getString($startcol + 66);
 
-      $this->codregciu = $rs->getString($startcol + 67);
+      $this->codregest = $rs->getString($startcol + 67);
 
-      $this->fecgra = $rs->getDate($startcol + 68, null);
+      $this->codregciu = $rs->getString($startcol + 68);
 
-      $this->grusangre = $rs->getString($startcol + 69);
+      $this->fecgra = $rs->getDate($startcol + 69, null);
 
-      $this->numgaceta = $rs->getString($startcol + 70);
+      $this->grusangre = $rs->getString($startcol + 70);
 
-      $this->fecgaceta = $rs->getDate($startcol + 71, null);
+      $this->numgaceta = $rs->getString($startcol + 71);
 
-      $this->diagra = $rs->getString($startcol + 72);
+      $this->fecgaceta = $rs->getDate($startcol + 72, null);
 
-      $this->mesgra = $rs->getString($startcol + 73);
+      $this->diagra = $rs->getString($startcol + 73);
 
-      $this->anogra = $rs->getString($startcol + 74);
+      $this->mesgra = $rs->getString($startcol + 74);
 
-      $this->temporal = $rs->getFloat($startcol + 75);
+      $this->anogra = $rs->getString($startcol + 75);
 
-      $this->detexp = $rs->getString($startcol + 76);
+      $this->temporal = $rs->getFloat($startcol + 76);
 
-      $this->numexp = $rs->getString($startcol + 77);
+      $this->detexp = $rs->getString($startcol + 77);
 
-      $this->modpagcestic = $rs->getString($startcol + 78);
+      $this->numexp = $rs->getString($startcol + 78);
 
-      $this->codret = $rs->getString($startcol + 79);
+      $this->modpagcestic = $rs->getString($startcol + 79);
 
-      $this->situac = $rs->getString($startcol + 80);
+      $this->codret = $rs->getString($startcol + 80);
 
-      $this->profes = $rs->getString($startcol + 81);
+      $this->situac = $rs->getString($startcol + 81);
 
-      $this->codnivedu = $rs->getString($startcol + 82);
+      $this->profes = $rs->getString($startcol + 82);
 
-      $this->feccoracu = $rs->getDate($startcol + 83, null);
+      $this->codnivedu = $rs->getString($startcol + 83);
 
-      $this->capactacu = $rs->getFloat($startcol + 84);
+      $this->feccoracu = $rs->getDate($startcol + 84, null);
 
-      $this->intacu = $rs->getFloat($startcol + 85);
+      $this->capactacu = $rs->getFloat($startcol + 85);
 
-      $this->antacu = $rs->getFloat($startcol + 86);
+      $this->intacu = $rs->getFloat($startcol + 86);
 
-      $this->diaacu = $rs->getInt($startcol + 87);
+      $this->antacu = $rs->getFloat($startcol + 87);
 
-      $this->diaadiacu = $rs->getInt($startcol + 88);
+      $this->diaacu = $rs->getInt($startcol + 88);
 
-      $this->seghcm = $rs->getString($startcol + 89);
+      $this->diaadiacu = $rs->getInt($startcol + 89);
 
-      $this->porseghcm = $rs->getFloat($startcol + 90);
+      $this->seghcm = $rs->getString($startcol + 90);
 
-      $this->ubifis = $rs->getString($startcol + 91);
+      $this->porseghcm = $rs->getFloat($startcol + 91);
 
-      $this->tipcueaho = $rs->getString($startcol + 92);
+      $this->ubifis = $rs->getString($startcol + 92);
 
-      $this->numcueaho = $rs->getString($startcol + 93);
+      $this->tipcueaho = $rs->getString($startcol + 93);
 
-      $this->id = $rs->getInt($startcol + 94);
+      $this->numcueaho = $rs->getString($startcol + 94);
+
+      $this->id = $rs->getInt($startcol + 95);
 
       $this->resetModified();
 
@@ -2421,7 +2444,7 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 95; 
+            return $startcol + 96; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Nphojint object", $e);
     }
@@ -2588,285 +2611,288 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 				return $this->getCodemp();
 				break;
 			case 1:
-				return $this->getNomemp();
+				return $this->getRifemp();
 				break;
 			case 2:
-				return $this->getCedemp();
+				return $this->getNomemp();
 				break;
 			case 3:
-				return $this->getNumcon();
+				return $this->getCedemp();
 				break;
 			case 4:
-				return $this->getEdociv();
+				return $this->getNumcon();
 				break;
 			case 5:
-				return $this->getNacemp();
+				return $this->getEdociv();
 				break;
 			case 6:
-				return $this->getSexemp();
+				return $this->getNacemp();
 				break;
 			case 7:
-				return $this->getFecnac();
+				return $this->getSexemp();
 				break;
 			case 8:
-				return $this->getEdaemp();
+				return $this->getFecnac();
 				break;
 			case 9:
-				return $this->getLugnac();
+				return $this->getEdaemp();
 				break;
 			case 10:
-				return $this->getDirhab();
+				return $this->getLugnac();
 				break;
 			case 11:
-				return $this->getCodciu();
+				return $this->getDirhab();
 				break;
 			case 12:
-				return $this->getTelhab();
+				return $this->getCodciu();
 				break;
 			case 13:
-				return $this->getCelemp();
+				return $this->getTelhab();
 				break;
 			case 14:
-				return $this->getEmaemp();
+				return $this->getCelemp();
 				break;
 			case 15:
-				return $this->getCodpos();
+				return $this->getEmaemp();
 				break;
 			case 16:
-				return $this->getTalpan();
+				return $this->getCodpos();
 				break;
 			case 17:
-				return $this->getTalcam();
+				return $this->getTalpan();
 				break;
 			case 18:
-				return $this->getTalcal();
+				return $this->getTalcam();
 				break;
 			case 19:
-				return $this->getDerzur();
+				return $this->getTalcal();
 				break;
 			case 20:
-				return $this->getFecing();
+				return $this->getDerzur();
 				break;
 			case 21:
-				return $this->getFecret();
+				return $this->getFecing();
 				break;
 			case 22:
-				return $this->getFecrei();
+				return $this->getFecret();
 				break;
 			case 23:
-				return $this->getFecadmpub();
+				return $this->getFecrei();
 				break;
 			case 24:
-				return $this->getStaemp();
+				return $this->getFecadmpub();
 				break;
 			case 25:
-				return $this->getFotemp();
+				return $this->getStaemp();
 				break;
 			case 26:
-				return $this->getNumsso();
+				return $this->getFotemp();
 				break;
 			case 27:
-				return $this->getNumpolseg();
+				return $this->getNumsso();
 				break;
 			case 28:
-				return $this->getFeccotsso();
+				return $this->getNumpolseg();
 				break;
 			case 29:
-				return $this->getAnoadmpub();
+				return $this->getFeccotsso();
 				break;
 			case 30:
-				return $this->getCodtippag();
+				return $this->getAnoadmpub();
 				break;
 			case 31:
-				return $this->getCodban();
+				return $this->getCodtippag();
 				break;
 			case 32:
-				return $this->getTipcue();
+				return $this->getCodban();
 				break;
 			case 33:
-				return $this->getNumcue();
+				return $this->getTipcue();
 				break;
 			case 34:
-				return $this->getObsemp();
+				return $this->getNumcue();
 				break;
 			case 35:
-				return $this->getTiefid();
+				return $this->getObsemp();
 				break;
 			case 36:
-				return $this->getGrulab();
+				return $this->getTiefid();
 				break;
 			case 37:
-				return $this->getGruotr();
+				return $this->getGrulab();
 				break;
 			case 38:
-				return $this->getTraslado();
+				return $this->getGruotr();
 				break;
 			case 39:
-				return $this->getTraotr();
+				return $this->getTraslado();
 				break;
 			case 40:
-				return $this->getTipviv();
+				return $this->getTraotr();
 				break;
 			case 41:
-				return $this->getVivotr();
+				return $this->getTipviv();
 				break;
 			case 42:
-				return $this->getForten();
+				return $this->getVivotr();
 				break;
 			case 43:
-				return $this->getTenotr();
+				return $this->getForten();
 				break;
 			case 44:
-				return $this->getSercon();
+				return $this->getTenotr();
 				break;
 			case 45:
-				return $this->getDirotr();
+				return $this->getSercon();
 				break;
 			case 46:
-				return $this->getTelotr();
+				return $this->getDirotr();
 				break;
 			case 47:
-				return $this->getCodpai();
+				return $this->getTelotr();
 				break;
 			case 48:
-				return $this->getCodpa2();
+				return $this->getCodpai();
 				break;
 			case 49:
-				return $this->getCodest();
+				return $this->getCodpa2();
 				break;
 			case 50:
-				return $this->getCodes2();
+				return $this->getCodest();
 				break;
 			case 51:
-				return $this->getCodci2();
+				return $this->getCodes2();
 				break;
 			case 52:
-				return $this->getCodrac();
+				return $this->getCodci2();
 				break;
 			case 53:
-				return $this->getCodniv();
+				return $this->getCodrac();
 				break;
 			case 54:
-				return $this->getTelha2();
+				return $this->getCodniv();
 				break;
 			case 55:
-				return $this->getTelot2();
+				return $this->getTelha2();
 				break;
 			case 56:
-				return $this->getCodprofes();
+				return $this->getTelot2();
 				break;
 			case 57:
-				return $this->getHcmexo();
+				return $this->getCodprofes();
 				break;
 			case 58:
-				return $this->getCodbanfid();
+				return $this->getHcmexo();
 				break;
 			case 59:
-				return $this->getCodbanlph();
+				return $this->getCodbanfid();
 				break;
 			case 60:
-				return $this->getNumcuefid();
+				return $this->getCodbanlph();
 				break;
 			case 61:
-				return $this->getNumcuelph();
+				return $this->getNumcuefid();
 				break;
 			case 62:
-				return $this->getCodempant();
+				return $this->getNumcuelph();
 				break;
 			case 63:
-				return $this->getGrusan();
+				return $this->getCodempant();
 				break;
 			case 64:
-				return $this->getObsgen();
+				return $this->getGrusan();
 				break;
 			case 65:
-				return $this->getCodregpai();
+				return $this->getObsgen();
 				break;
 			case 66:
-				return $this->getCodregest();
+				return $this->getCodregpai();
 				break;
 			case 67:
-				return $this->getCodregciu();
+				return $this->getCodregest();
 				break;
 			case 68:
-				return $this->getFecgra();
+				return $this->getCodregciu();
 				break;
 			case 69:
-				return $this->getGrusangre();
+				return $this->getFecgra();
 				break;
 			case 70:
-				return $this->getNumgaceta();
+				return $this->getGrusangre();
 				break;
 			case 71:
-				return $this->getFecgaceta();
+				return $this->getNumgaceta();
 				break;
 			case 72:
-				return $this->getDiagra();
+				return $this->getFecgaceta();
 				break;
 			case 73:
-				return $this->getMesgra();
+				return $this->getDiagra();
 				break;
 			case 74:
-				return $this->getAnogra();
+				return $this->getMesgra();
 				break;
 			case 75:
-				return $this->getTemporal();
+				return $this->getAnogra();
 				break;
 			case 76:
-				return $this->getDetexp();
+				return $this->getTemporal();
 				break;
 			case 77:
-				return $this->getNumexp();
+				return $this->getDetexp();
 				break;
 			case 78:
-				return $this->getModpagcestic();
+				return $this->getNumexp();
 				break;
 			case 79:
-				return $this->getCodret();
+				return $this->getModpagcestic();
 				break;
 			case 80:
-				return $this->getSituac();
+				return $this->getCodret();
 				break;
 			case 81:
-				return $this->getProfes();
+				return $this->getSituac();
 				break;
 			case 82:
-				return $this->getCodnivedu();
+				return $this->getProfes();
 				break;
 			case 83:
-				return $this->getFeccoracu();
+				return $this->getCodnivedu();
 				break;
 			case 84:
-				return $this->getCapactacu();
+				return $this->getFeccoracu();
 				break;
 			case 85:
-				return $this->getIntacu();
+				return $this->getCapactacu();
 				break;
 			case 86:
-				return $this->getAntacu();
+				return $this->getIntacu();
 				break;
 			case 87:
-				return $this->getDiaacu();
+				return $this->getAntacu();
 				break;
 			case 88:
-				return $this->getDiaadiacu();
+				return $this->getDiaacu();
 				break;
 			case 89:
-				return $this->getSeghcm();
+				return $this->getDiaadiacu();
 				break;
 			case 90:
-				return $this->getPorseghcm();
+				return $this->getSeghcm();
 				break;
 			case 91:
-				return $this->getUbifis();
+				return $this->getPorseghcm();
 				break;
 			case 92:
-				return $this->getTipcueaho();
+				return $this->getUbifis();
 				break;
 			case 93:
-				return $this->getNumcueaho();
+				return $this->getTipcueaho();
 				break;
 			case 94:
+				return $this->getNumcueaho();
+				break;
+			case 95:
 				return $this->getId();
 				break;
 			default:
@@ -2880,100 +2906,101 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 		$keys = NphojintPeer::getFieldNames($keyType);
 		$result = array(
 			$keys[0] => $this->getCodemp(),
-			$keys[1] => $this->getNomemp(),
-			$keys[2] => $this->getCedemp(),
-			$keys[3] => $this->getNumcon(),
-			$keys[4] => $this->getEdociv(),
-			$keys[5] => $this->getNacemp(),
-			$keys[6] => $this->getSexemp(),
-			$keys[7] => $this->getFecnac(),
-			$keys[8] => $this->getEdaemp(),
-			$keys[9] => $this->getLugnac(),
-			$keys[10] => $this->getDirhab(),
-			$keys[11] => $this->getCodciu(),
-			$keys[12] => $this->getTelhab(),
-			$keys[13] => $this->getCelemp(),
-			$keys[14] => $this->getEmaemp(),
-			$keys[15] => $this->getCodpos(),
-			$keys[16] => $this->getTalpan(),
-			$keys[17] => $this->getTalcam(),
-			$keys[18] => $this->getTalcal(),
-			$keys[19] => $this->getDerzur(),
-			$keys[20] => $this->getFecing(),
-			$keys[21] => $this->getFecret(),
-			$keys[22] => $this->getFecrei(),
-			$keys[23] => $this->getFecadmpub(),
-			$keys[24] => $this->getStaemp(),
-			$keys[25] => $this->getFotemp(),
-			$keys[26] => $this->getNumsso(),
-			$keys[27] => $this->getNumpolseg(),
-			$keys[28] => $this->getFeccotsso(),
-			$keys[29] => $this->getAnoadmpub(),
-			$keys[30] => $this->getCodtippag(),
-			$keys[31] => $this->getCodban(),
-			$keys[32] => $this->getTipcue(),
-			$keys[33] => $this->getNumcue(),
-			$keys[34] => $this->getObsemp(),
-			$keys[35] => $this->getTiefid(),
-			$keys[36] => $this->getGrulab(),
-			$keys[37] => $this->getGruotr(),
-			$keys[38] => $this->getTraslado(),
-			$keys[39] => $this->getTraotr(),
-			$keys[40] => $this->getTipviv(),
-			$keys[41] => $this->getVivotr(),
-			$keys[42] => $this->getForten(),
-			$keys[43] => $this->getTenotr(),
-			$keys[44] => $this->getSercon(),
-			$keys[45] => $this->getDirotr(),
-			$keys[46] => $this->getTelotr(),
-			$keys[47] => $this->getCodpai(),
-			$keys[48] => $this->getCodpa2(),
-			$keys[49] => $this->getCodest(),
-			$keys[50] => $this->getCodes2(),
-			$keys[51] => $this->getCodci2(),
-			$keys[52] => $this->getCodrac(),
-			$keys[53] => $this->getCodniv(),
-			$keys[54] => $this->getTelha2(),
-			$keys[55] => $this->getTelot2(),
-			$keys[56] => $this->getCodprofes(),
-			$keys[57] => $this->getHcmexo(),
-			$keys[58] => $this->getCodbanfid(),
-			$keys[59] => $this->getCodbanlph(),
-			$keys[60] => $this->getNumcuefid(),
-			$keys[61] => $this->getNumcuelph(),
-			$keys[62] => $this->getCodempant(),
-			$keys[63] => $this->getGrusan(),
-			$keys[64] => $this->getObsgen(),
-			$keys[65] => $this->getCodregpai(),
-			$keys[66] => $this->getCodregest(),
-			$keys[67] => $this->getCodregciu(),
-			$keys[68] => $this->getFecgra(),
-			$keys[69] => $this->getGrusangre(),
-			$keys[70] => $this->getNumgaceta(),
-			$keys[71] => $this->getFecgaceta(),
-			$keys[72] => $this->getDiagra(),
-			$keys[73] => $this->getMesgra(),
-			$keys[74] => $this->getAnogra(),
-			$keys[75] => $this->getTemporal(),
-			$keys[76] => $this->getDetexp(),
-			$keys[77] => $this->getNumexp(),
-			$keys[78] => $this->getModpagcestic(),
-			$keys[79] => $this->getCodret(),
-			$keys[80] => $this->getSituac(),
-			$keys[81] => $this->getProfes(),
-			$keys[82] => $this->getCodnivedu(),
-			$keys[83] => $this->getFeccoracu(),
-			$keys[84] => $this->getCapactacu(),
-			$keys[85] => $this->getIntacu(),
-			$keys[86] => $this->getAntacu(),
-			$keys[87] => $this->getDiaacu(),
-			$keys[88] => $this->getDiaadiacu(),
-			$keys[89] => $this->getSeghcm(),
-			$keys[90] => $this->getPorseghcm(),
-			$keys[91] => $this->getUbifis(),
-			$keys[92] => $this->getTipcueaho(),
-			$keys[93] => $this->getNumcueaho(),
-			$keys[94] => $this->getId(),
+			$keys[1] => $this->getRifemp(),
+			$keys[2] => $this->getNomemp(),
+			$keys[3] => $this->getCedemp(),
+			$keys[4] => $this->getNumcon(),
+			$keys[5] => $this->getEdociv(),
+			$keys[6] => $this->getNacemp(),
+			$keys[7] => $this->getSexemp(),
+			$keys[8] => $this->getFecnac(),
+			$keys[9] => $this->getEdaemp(),
+			$keys[10] => $this->getLugnac(),
+			$keys[11] => $this->getDirhab(),
+			$keys[12] => $this->getCodciu(),
+			$keys[13] => $this->getTelhab(),
+			$keys[14] => $this->getCelemp(),
+			$keys[15] => $this->getEmaemp(),
+			$keys[16] => $this->getCodpos(),
+			$keys[17] => $this->getTalpan(),
+			$keys[18] => $this->getTalcam(),
+			$keys[19] => $this->getTalcal(),
+			$keys[20] => $this->getDerzur(),
+			$keys[21] => $this->getFecing(),
+			$keys[22] => $this->getFecret(),
+			$keys[23] => $this->getFecrei(),
+			$keys[24] => $this->getFecadmpub(),
+			$keys[25] => $this->getStaemp(),
+			$keys[26] => $this->getFotemp(),
+			$keys[27] => $this->getNumsso(),
+			$keys[28] => $this->getNumpolseg(),
+			$keys[29] => $this->getFeccotsso(),
+			$keys[30] => $this->getAnoadmpub(),
+			$keys[31] => $this->getCodtippag(),
+			$keys[32] => $this->getCodban(),
+			$keys[33] => $this->getTipcue(),
+			$keys[34] => $this->getNumcue(),
+			$keys[35] => $this->getObsemp(),
+			$keys[36] => $this->getTiefid(),
+			$keys[37] => $this->getGrulab(),
+			$keys[38] => $this->getGruotr(),
+			$keys[39] => $this->getTraslado(),
+			$keys[40] => $this->getTraotr(),
+			$keys[41] => $this->getTipviv(),
+			$keys[42] => $this->getVivotr(),
+			$keys[43] => $this->getForten(),
+			$keys[44] => $this->getTenotr(),
+			$keys[45] => $this->getSercon(),
+			$keys[46] => $this->getDirotr(),
+			$keys[47] => $this->getTelotr(),
+			$keys[48] => $this->getCodpai(),
+			$keys[49] => $this->getCodpa2(),
+			$keys[50] => $this->getCodest(),
+			$keys[51] => $this->getCodes2(),
+			$keys[52] => $this->getCodci2(),
+			$keys[53] => $this->getCodrac(),
+			$keys[54] => $this->getCodniv(),
+			$keys[55] => $this->getTelha2(),
+			$keys[56] => $this->getTelot2(),
+			$keys[57] => $this->getCodprofes(),
+			$keys[58] => $this->getHcmexo(),
+			$keys[59] => $this->getCodbanfid(),
+			$keys[60] => $this->getCodbanlph(),
+			$keys[61] => $this->getNumcuefid(),
+			$keys[62] => $this->getNumcuelph(),
+			$keys[63] => $this->getCodempant(),
+			$keys[64] => $this->getGrusan(),
+			$keys[65] => $this->getObsgen(),
+			$keys[66] => $this->getCodregpai(),
+			$keys[67] => $this->getCodregest(),
+			$keys[68] => $this->getCodregciu(),
+			$keys[69] => $this->getFecgra(),
+			$keys[70] => $this->getGrusangre(),
+			$keys[71] => $this->getNumgaceta(),
+			$keys[72] => $this->getFecgaceta(),
+			$keys[73] => $this->getDiagra(),
+			$keys[74] => $this->getMesgra(),
+			$keys[75] => $this->getAnogra(),
+			$keys[76] => $this->getTemporal(),
+			$keys[77] => $this->getDetexp(),
+			$keys[78] => $this->getNumexp(),
+			$keys[79] => $this->getModpagcestic(),
+			$keys[80] => $this->getCodret(),
+			$keys[81] => $this->getSituac(),
+			$keys[82] => $this->getProfes(),
+			$keys[83] => $this->getCodnivedu(),
+			$keys[84] => $this->getFeccoracu(),
+			$keys[85] => $this->getCapactacu(),
+			$keys[86] => $this->getIntacu(),
+			$keys[87] => $this->getAntacu(),
+			$keys[88] => $this->getDiaacu(),
+			$keys[89] => $this->getDiaadiacu(),
+			$keys[90] => $this->getSeghcm(),
+			$keys[91] => $this->getPorseghcm(),
+			$keys[92] => $this->getUbifis(),
+			$keys[93] => $this->getTipcueaho(),
+			$keys[94] => $this->getNumcueaho(),
+			$keys[95] => $this->getId(),
 		);
 		return $result;
 	}
@@ -2993,285 +3020,288 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 				$this->setCodemp($value);
 				break;
 			case 1:
-				$this->setNomemp($value);
+				$this->setRifemp($value);
 				break;
 			case 2:
-				$this->setCedemp($value);
+				$this->setNomemp($value);
 				break;
 			case 3:
-				$this->setNumcon($value);
+				$this->setCedemp($value);
 				break;
 			case 4:
-				$this->setEdociv($value);
+				$this->setNumcon($value);
 				break;
 			case 5:
-				$this->setNacemp($value);
+				$this->setEdociv($value);
 				break;
 			case 6:
-				$this->setSexemp($value);
+				$this->setNacemp($value);
 				break;
 			case 7:
-				$this->setFecnac($value);
+				$this->setSexemp($value);
 				break;
 			case 8:
-				$this->setEdaemp($value);
+				$this->setFecnac($value);
 				break;
 			case 9:
-				$this->setLugnac($value);
+				$this->setEdaemp($value);
 				break;
 			case 10:
-				$this->setDirhab($value);
+				$this->setLugnac($value);
 				break;
 			case 11:
-				$this->setCodciu($value);
+				$this->setDirhab($value);
 				break;
 			case 12:
-				$this->setTelhab($value);
+				$this->setCodciu($value);
 				break;
 			case 13:
-				$this->setCelemp($value);
+				$this->setTelhab($value);
 				break;
 			case 14:
-				$this->setEmaemp($value);
+				$this->setCelemp($value);
 				break;
 			case 15:
-				$this->setCodpos($value);
+				$this->setEmaemp($value);
 				break;
 			case 16:
-				$this->setTalpan($value);
+				$this->setCodpos($value);
 				break;
 			case 17:
-				$this->setTalcam($value);
+				$this->setTalpan($value);
 				break;
 			case 18:
-				$this->setTalcal($value);
+				$this->setTalcam($value);
 				break;
 			case 19:
-				$this->setDerzur($value);
+				$this->setTalcal($value);
 				break;
 			case 20:
-				$this->setFecing($value);
+				$this->setDerzur($value);
 				break;
 			case 21:
-				$this->setFecret($value);
+				$this->setFecing($value);
 				break;
 			case 22:
-				$this->setFecrei($value);
+				$this->setFecret($value);
 				break;
 			case 23:
-				$this->setFecadmpub($value);
+				$this->setFecrei($value);
 				break;
 			case 24:
-				$this->setStaemp($value);
+				$this->setFecadmpub($value);
 				break;
 			case 25:
-				$this->setFotemp($value);
+				$this->setStaemp($value);
 				break;
 			case 26:
-				$this->setNumsso($value);
+				$this->setFotemp($value);
 				break;
 			case 27:
-				$this->setNumpolseg($value);
+				$this->setNumsso($value);
 				break;
 			case 28:
-				$this->setFeccotsso($value);
+				$this->setNumpolseg($value);
 				break;
 			case 29:
-				$this->setAnoadmpub($value);
+				$this->setFeccotsso($value);
 				break;
 			case 30:
-				$this->setCodtippag($value);
+				$this->setAnoadmpub($value);
 				break;
 			case 31:
-				$this->setCodban($value);
+				$this->setCodtippag($value);
 				break;
 			case 32:
-				$this->setTipcue($value);
+				$this->setCodban($value);
 				break;
 			case 33:
-				$this->setNumcue($value);
+				$this->setTipcue($value);
 				break;
 			case 34:
-				$this->setObsemp($value);
+				$this->setNumcue($value);
 				break;
 			case 35:
-				$this->setTiefid($value);
+				$this->setObsemp($value);
 				break;
 			case 36:
-				$this->setGrulab($value);
+				$this->setTiefid($value);
 				break;
 			case 37:
-				$this->setGruotr($value);
+				$this->setGrulab($value);
 				break;
 			case 38:
-				$this->setTraslado($value);
+				$this->setGruotr($value);
 				break;
 			case 39:
-				$this->setTraotr($value);
+				$this->setTraslado($value);
 				break;
 			case 40:
-				$this->setTipviv($value);
+				$this->setTraotr($value);
 				break;
 			case 41:
-				$this->setVivotr($value);
+				$this->setTipviv($value);
 				break;
 			case 42:
-				$this->setForten($value);
+				$this->setVivotr($value);
 				break;
 			case 43:
-				$this->setTenotr($value);
+				$this->setForten($value);
 				break;
 			case 44:
-				$this->setSercon($value);
+				$this->setTenotr($value);
 				break;
 			case 45:
-				$this->setDirotr($value);
+				$this->setSercon($value);
 				break;
 			case 46:
-				$this->setTelotr($value);
+				$this->setDirotr($value);
 				break;
 			case 47:
-				$this->setCodpai($value);
+				$this->setTelotr($value);
 				break;
 			case 48:
-				$this->setCodpa2($value);
+				$this->setCodpai($value);
 				break;
 			case 49:
-				$this->setCodest($value);
+				$this->setCodpa2($value);
 				break;
 			case 50:
-				$this->setCodes2($value);
+				$this->setCodest($value);
 				break;
 			case 51:
-				$this->setCodci2($value);
+				$this->setCodes2($value);
 				break;
 			case 52:
-				$this->setCodrac($value);
+				$this->setCodci2($value);
 				break;
 			case 53:
-				$this->setCodniv($value);
+				$this->setCodrac($value);
 				break;
 			case 54:
-				$this->setTelha2($value);
+				$this->setCodniv($value);
 				break;
 			case 55:
-				$this->setTelot2($value);
+				$this->setTelha2($value);
 				break;
 			case 56:
-				$this->setCodprofes($value);
+				$this->setTelot2($value);
 				break;
 			case 57:
-				$this->setHcmexo($value);
+				$this->setCodprofes($value);
 				break;
 			case 58:
-				$this->setCodbanfid($value);
+				$this->setHcmexo($value);
 				break;
 			case 59:
-				$this->setCodbanlph($value);
+				$this->setCodbanfid($value);
 				break;
 			case 60:
-				$this->setNumcuefid($value);
+				$this->setCodbanlph($value);
 				break;
 			case 61:
-				$this->setNumcuelph($value);
+				$this->setNumcuefid($value);
 				break;
 			case 62:
-				$this->setCodempant($value);
+				$this->setNumcuelph($value);
 				break;
 			case 63:
-				$this->setGrusan($value);
+				$this->setCodempant($value);
 				break;
 			case 64:
-				$this->setObsgen($value);
+				$this->setGrusan($value);
 				break;
 			case 65:
-				$this->setCodregpai($value);
+				$this->setObsgen($value);
 				break;
 			case 66:
-				$this->setCodregest($value);
+				$this->setCodregpai($value);
 				break;
 			case 67:
-				$this->setCodregciu($value);
+				$this->setCodregest($value);
 				break;
 			case 68:
-				$this->setFecgra($value);
+				$this->setCodregciu($value);
 				break;
 			case 69:
-				$this->setGrusangre($value);
+				$this->setFecgra($value);
 				break;
 			case 70:
-				$this->setNumgaceta($value);
+				$this->setGrusangre($value);
 				break;
 			case 71:
-				$this->setFecgaceta($value);
+				$this->setNumgaceta($value);
 				break;
 			case 72:
-				$this->setDiagra($value);
+				$this->setFecgaceta($value);
 				break;
 			case 73:
-				$this->setMesgra($value);
+				$this->setDiagra($value);
 				break;
 			case 74:
-				$this->setAnogra($value);
+				$this->setMesgra($value);
 				break;
 			case 75:
-				$this->setTemporal($value);
+				$this->setAnogra($value);
 				break;
 			case 76:
-				$this->setDetexp($value);
+				$this->setTemporal($value);
 				break;
 			case 77:
-				$this->setNumexp($value);
+				$this->setDetexp($value);
 				break;
 			case 78:
-				$this->setModpagcestic($value);
+				$this->setNumexp($value);
 				break;
 			case 79:
-				$this->setCodret($value);
+				$this->setModpagcestic($value);
 				break;
 			case 80:
-				$this->setSituac($value);
+				$this->setCodret($value);
 				break;
 			case 81:
-				$this->setProfes($value);
+				$this->setSituac($value);
 				break;
 			case 82:
-				$this->setCodnivedu($value);
+				$this->setProfes($value);
 				break;
 			case 83:
-				$this->setFeccoracu($value);
+				$this->setCodnivedu($value);
 				break;
 			case 84:
-				$this->setCapactacu($value);
+				$this->setFeccoracu($value);
 				break;
 			case 85:
-				$this->setIntacu($value);
+				$this->setCapactacu($value);
 				break;
 			case 86:
-				$this->setAntacu($value);
+				$this->setIntacu($value);
 				break;
 			case 87:
-				$this->setDiaacu($value);
+				$this->setAntacu($value);
 				break;
 			case 88:
-				$this->setDiaadiacu($value);
+				$this->setDiaacu($value);
 				break;
 			case 89:
-				$this->setSeghcm($value);
+				$this->setDiaadiacu($value);
 				break;
 			case 90:
-				$this->setPorseghcm($value);
+				$this->setSeghcm($value);
 				break;
 			case 91:
-				$this->setUbifis($value);
+				$this->setPorseghcm($value);
 				break;
 			case 92:
-				$this->setTipcueaho($value);
+				$this->setUbifis($value);
 				break;
 			case 93:
-				$this->setNumcueaho($value);
+				$this->setTipcueaho($value);
 				break;
 			case 94:
+				$this->setNumcueaho($value);
+				break;
+			case 95:
 				$this->setId($value);
 				break;
 		} 	}
@@ -3282,100 +3312,101 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 		$keys = NphojintPeer::getFieldNames($keyType);
 
 		if (array_key_exists($keys[0], $arr)) $this->setCodemp($arr[$keys[0]]);
-		if (array_key_exists($keys[1], $arr)) $this->setNomemp($arr[$keys[1]]);
-		if (array_key_exists($keys[2], $arr)) $this->setCedemp($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setNumcon($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setEdociv($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setNacemp($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setSexemp($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setFecnac($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setEdaemp($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setLugnac($arr[$keys[9]]);
-		if (array_key_exists($keys[10], $arr)) $this->setDirhab($arr[$keys[10]]);
-		if (array_key_exists($keys[11], $arr)) $this->setCodciu($arr[$keys[11]]);
-		if (array_key_exists($keys[12], $arr)) $this->setTelhab($arr[$keys[12]]);
-		if (array_key_exists($keys[13], $arr)) $this->setCelemp($arr[$keys[13]]);
-		if (array_key_exists($keys[14], $arr)) $this->setEmaemp($arr[$keys[14]]);
-		if (array_key_exists($keys[15], $arr)) $this->setCodpos($arr[$keys[15]]);
-		if (array_key_exists($keys[16], $arr)) $this->setTalpan($arr[$keys[16]]);
-		if (array_key_exists($keys[17], $arr)) $this->setTalcam($arr[$keys[17]]);
-		if (array_key_exists($keys[18], $arr)) $this->setTalcal($arr[$keys[18]]);
-		if (array_key_exists($keys[19], $arr)) $this->setDerzur($arr[$keys[19]]);
-		if (array_key_exists($keys[20], $arr)) $this->setFecing($arr[$keys[20]]);
-		if (array_key_exists($keys[21], $arr)) $this->setFecret($arr[$keys[21]]);
-		if (array_key_exists($keys[22], $arr)) $this->setFecrei($arr[$keys[22]]);
-		if (array_key_exists($keys[23], $arr)) $this->setFecadmpub($arr[$keys[23]]);
-		if (array_key_exists($keys[24], $arr)) $this->setStaemp($arr[$keys[24]]);
-		if (array_key_exists($keys[25], $arr)) $this->setFotemp($arr[$keys[25]]);
-		if (array_key_exists($keys[26], $arr)) $this->setNumsso($arr[$keys[26]]);
-		if (array_key_exists($keys[27], $arr)) $this->setNumpolseg($arr[$keys[27]]);
-		if (array_key_exists($keys[28], $arr)) $this->setFeccotsso($arr[$keys[28]]);
-		if (array_key_exists($keys[29], $arr)) $this->setAnoadmpub($arr[$keys[29]]);
-		if (array_key_exists($keys[30], $arr)) $this->setCodtippag($arr[$keys[30]]);
-		if (array_key_exists($keys[31], $arr)) $this->setCodban($arr[$keys[31]]);
-		if (array_key_exists($keys[32], $arr)) $this->setTipcue($arr[$keys[32]]);
-		if (array_key_exists($keys[33], $arr)) $this->setNumcue($arr[$keys[33]]);
-		if (array_key_exists($keys[34], $arr)) $this->setObsemp($arr[$keys[34]]);
-		if (array_key_exists($keys[35], $arr)) $this->setTiefid($arr[$keys[35]]);
-		if (array_key_exists($keys[36], $arr)) $this->setGrulab($arr[$keys[36]]);
-		if (array_key_exists($keys[37], $arr)) $this->setGruotr($arr[$keys[37]]);
-		if (array_key_exists($keys[38], $arr)) $this->setTraslado($arr[$keys[38]]);
-		if (array_key_exists($keys[39], $arr)) $this->setTraotr($arr[$keys[39]]);
-		if (array_key_exists($keys[40], $arr)) $this->setTipviv($arr[$keys[40]]);
-		if (array_key_exists($keys[41], $arr)) $this->setVivotr($arr[$keys[41]]);
-		if (array_key_exists($keys[42], $arr)) $this->setForten($arr[$keys[42]]);
-		if (array_key_exists($keys[43], $arr)) $this->setTenotr($arr[$keys[43]]);
-		if (array_key_exists($keys[44], $arr)) $this->setSercon($arr[$keys[44]]);
-		if (array_key_exists($keys[45], $arr)) $this->setDirotr($arr[$keys[45]]);
-		if (array_key_exists($keys[46], $arr)) $this->setTelotr($arr[$keys[46]]);
-		if (array_key_exists($keys[47], $arr)) $this->setCodpai($arr[$keys[47]]);
-		if (array_key_exists($keys[48], $arr)) $this->setCodpa2($arr[$keys[48]]);
-		if (array_key_exists($keys[49], $arr)) $this->setCodest($arr[$keys[49]]);
-		if (array_key_exists($keys[50], $arr)) $this->setCodes2($arr[$keys[50]]);
-		if (array_key_exists($keys[51], $arr)) $this->setCodci2($arr[$keys[51]]);
-		if (array_key_exists($keys[52], $arr)) $this->setCodrac($arr[$keys[52]]);
-		if (array_key_exists($keys[53], $arr)) $this->setCodniv($arr[$keys[53]]);
-		if (array_key_exists($keys[54], $arr)) $this->setTelha2($arr[$keys[54]]);
-		if (array_key_exists($keys[55], $arr)) $this->setTelot2($arr[$keys[55]]);
-		if (array_key_exists($keys[56], $arr)) $this->setCodprofes($arr[$keys[56]]);
-		if (array_key_exists($keys[57], $arr)) $this->setHcmexo($arr[$keys[57]]);
-		if (array_key_exists($keys[58], $arr)) $this->setCodbanfid($arr[$keys[58]]);
-		if (array_key_exists($keys[59], $arr)) $this->setCodbanlph($arr[$keys[59]]);
-		if (array_key_exists($keys[60], $arr)) $this->setNumcuefid($arr[$keys[60]]);
-		if (array_key_exists($keys[61], $arr)) $this->setNumcuelph($arr[$keys[61]]);
-		if (array_key_exists($keys[62], $arr)) $this->setCodempant($arr[$keys[62]]);
-		if (array_key_exists($keys[63], $arr)) $this->setGrusan($arr[$keys[63]]);
-		if (array_key_exists($keys[64], $arr)) $this->setObsgen($arr[$keys[64]]);
-		if (array_key_exists($keys[65], $arr)) $this->setCodregpai($arr[$keys[65]]);
-		if (array_key_exists($keys[66], $arr)) $this->setCodregest($arr[$keys[66]]);
-		if (array_key_exists($keys[67], $arr)) $this->setCodregciu($arr[$keys[67]]);
-		if (array_key_exists($keys[68], $arr)) $this->setFecgra($arr[$keys[68]]);
-		if (array_key_exists($keys[69], $arr)) $this->setGrusangre($arr[$keys[69]]);
-		if (array_key_exists($keys[70], $arr)) $this->setNumgaceta($arr[$keys[70]]);
-		if (array_key_exists($keys[71], $arr)) $this->setFecgaceta($arr[$keys[71]]);
-		if (array_key_exists($keys[72], $arr)) $this->setDiagra($arr[$keys[72]]);
-		if (array_key_exists($keys[73], $arr)) $this->setMesgra($arr[$keys[73]]);
-		if (array_key_exists($keys[74], $arr)) $this->setAnogra($arr[$keys[74]]);
-		if (array_key_exists($keys[75], $arr)) $this->setTemporal($arr[$keys[75]]);
-		if (array_key_exists($keys[76], $arr)) $this->setDetexp($arr[$keys[76]]);
-		if (array_key_exists($keys[77], $arr)) $this->setNumexp($arr[$keys[77]]);
-		if (array_key_exists($keys[78], $arr)) $this->setModpagcestic($arr[$keys[78]]);
-		if (array_key_exists($keys[79], $arr)) $this->setCodret($arr[$keys[79]]);
-		if (array_key_exists($keys[80], $arr)) $this->setSituac($arr[$keys[80]]);
-		if (array_key_exists($keys[81], $arr)) $this->setProfes($arr[$keys[81]]);
-		if (array_key_exists($keys[82], $arr)) $this->setCodnivedu($arr[$keys[82]]);
-		if (array_key_exists($keys[83], $arr)) $this->setFeccoracu($arr[$keys[83]]);
-		if (array_key_exists($keys[84], $arr)) $this->setCapactacu($arr[$keys[84]]);
-		if (array_key_exists($keys[85], $arr)) $this->setIntacu($arr[$keys[85]]);
-		if (array_key_exists($keys[86], $arr)) $this->setAntacu($arr[$keys[86]]);
-		if (array_key_exists($keys[87], $arr)) $this->setDiaacu($arr[$keys[87]]);
-		if (array_key_exists($keys[88], $arr)) $this->setDiaadiacu($arr[$keys[88]]);
-		if (array_key_exists($keys[89], $arr)) $this->setSeghcm($arr[$keys[89]]);
-		if (array_key_exists($keys[90], $arr)) $this->setPorseghcm($arr[$keys[90]]);
-		if (array_key_exists($keys[91], $arr)) $this->setUbifis($arr[$keys[91]]);
-		if (array_key_exists($keys[92], $arr)) $this->setTipcueaho($arr[$keys[92]]);
-		if (array_key_exists($keys[93], $arr)) $this->setNumcueaho($arr[$keys[93]]);
-		if (array_key_exists($keys[94], $arr)) $this->setId($arr[$keys[94]]);
+		if (array_key_exists($keys[1], $arr)) $this->setRifemp($arr[$keys[1]]);
+		if (array_key_exists($keys[2], $arr)) $this->setNomemp($arr[$keys[2]]);
+		if (array_key_exists($keys[3], $arr)) $this->setCedemp($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setNumcon($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setEdociv($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setNacemp($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setSexemp($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setFecnac($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setEdaemp($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setLugnac($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setDirhab($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setCodciu($arr[$keys[12]]);
+		if (array_key_exists($keys[13], $arr)) $this->setTelhab($arr[$keys[13]]);
+		if (array_key_exists($keys[14], $arr)) $this->setCelemp($arr[$keys[14]]);
+		if (array_key_exists($keys[15], $arr)) $this->setEmaemp($arr[$keys[15]]);
+		if (array_key_exists($keys[16], $arr)) $this->setCodpos($arr[$keys[16]]);
+		if (array_key_exists($keys[17], $arr)) $this->setTalpan($arr[$keys[17]]);
+		if (array_key_exists($keys[18], $arr)) $this->setTalcam($arr[$keys[18]]);
+		if (array_key_exists($keys[19], $arr)) $this->setTalcal($arr[$keys[19]]);
+		if (array_key_exists($keys[20], $arr)) $this->setDerzur($arr[$keys[20]]);
+		if (array_key_exists($keys[21], $arr)) $this->setFecing($arr[$keys[21]]);
+		if (array_key_exists($keys[22], $arr)) $this->setFecret($arr[$keys[22]]);
+		if (array_key_exists($keys[23], $arr)) $this->setFecrei($arr[$keys[23]]);
+		if (array_key_exists($keys[24], $arr)) $this->setFecadmpub($arr[$keys[24]]);
+		if (array_key_exists($keys[25], $arr)) $this->setStaemp($arr[$keys[25]]);
+		if (array_key_exists($keys[26], $arr)) $this->setFotemp($arr[$keys[26]]);
+		if (array_key_exists($keys[27], $arr)) $this->setNumsso($arr[$keys[27]]);
+		if (array_key_exists($keys[28], $arr)) $this->setNumpolseg($arr[$keys[28]]);
+		if (array_key_exists($keys[29], $arr)) $this->setFeccotsso($arr[$keys[29]]);
+		if (array_key_exists($keys[30], $arr)) $this->setAnoadmpub($arr[$keys[30]]);
+		if (array_key_exists($keys[31], $arr)) $this->setCodtippag($arr[$keys[31]]);
+		if (array_key_exists($keys[32], $arr)) $this->setCodban($arr[$keys[32]]);
+		if (array_key_exists($keys[33], $arr)) $this->setTipcue($arr[$keys[33]]);
+		if (array_key_exists($keys[34], $arr)) $this->setNumcue($arr[$keys[34]]);
+		if (array_key_exists($keys[35], $arr)) $this->setObsemp($arr[$keys[35]]);
+		if (array_key_exists($keys[36], $arr)) $this->setTiefid($arr[$keys[36]]);
+		if (array_key_exists($keys[37], $arr)) $this->setGrulab($arr[$keys[37]]);
+		if (array_key_exists($keys[38], $arr)) $this->setGruotr($arr[$keys[38]]);
+		if (array_key_exists($keys[39], $arr)) $this->setTraslado($arr[$keys[39]]);
+		if (array_key_exists($keys[40], $arr)) $this->setTraotr($arr[$keys[40]]);
+		if (array_key_exists($keys[41], $arr)) $this->setTipviv($arr[$keys[41]]);
+		if (array_key_exists($keys[42], $arr)) $this->setVivotr($arr[$keys[42]]);
+		if (array_key_exists($keys[43], $arr)) $this->setForten($arr[$keys[43]]);
+		if (array_key_exists($keys[44], $arr)) $this->setTenotr($arr[$keys[44]]);
+		if (array_key_exists($keys[45], $arr)) $this->setSercon($arr[$keys[45]]);
+		if (array_key_exists($keys[46], $arr)) $this->setDirotr($arr[$keys[46]]);
+		if (array_key_exists($keys[47], $arr)) $this->setTelotr($arr[$keys[47]]);
+		if (array_key_exists($keys[48], $arr)) $this->setCodpai($arr[$keys[48]]);
+		if (array_key_exists($keys[49], $arr)) $this->setCodpa2($arr[$keys[49]]);
+		if (array_key_exists($keys[50], $arr)) $this->setCodest($arr[$keys[50]]);
+		if (array_key_exists($keys[51], $arr)) $this->setCodes2($arr[$keys[51]]);
+		if (array_key_exists($keys[52], $arr)) $this->setCodci2($arr[$keys[52]]);
+		if (array_key_exists($keys[53], $arr)) $this->setCodrac($arr[$keys[53]]);
+		if (array_key_exists($keys[54], $arr)) $this->setCodniv($arr[$keys[54]]);
+		if (array_key_exists($keys[55], $arr)) $this->setTelha2($arr[$keys[55]]);
+		if (array_key_exists($keys[56], $arr)) $this->setTelot2($arr[$keys[56]]);
+		if (array_key_exists($keys[57], $arr)) $this->setCodprofes($arr[$keys[57]]);
+		if (array_key_exists($keys[58], $arr)) $this->setHcmexo($arr[$keys[58]]);
+		if (array_key_exists($keys[59], $arr)) $this->setCodbanfid($arr[$keys[59]]);
+		if (array_key_exists($keys[60], $arr)) $this->setCodbanlph($arr[$keys[60]]);
+		if (array_key_exists($keys[61], $arr)) $this->setNumcuefid($arr[$keys[61]]);
+		if (array_key_exists($keys[62], $arr)) $this->setNumcuelph($arr[$keys[62]]);
+		if (array_key_exists($keys[63], $arr)) $this->setCodempant($arr[$keys[63]]);
+		if (array_key_exists($keys[64], $arr)) $this->setGrusan($arr[$keys[64]]);
+		if (array_key_exists($keys[65], $arr)) $this->setObsgen($arr[$keys[65]]);
+		if (array_key_exists($keys[66], $arr)) $this->setCodregpai($arr[$keys[66]]);
+		if (array_key_exists($keys[67], $arr)) $this->setCodregest($arr[$keys[67]]);
+		if (array_key_exists($keys[68], $arr)) $this->setCodregciu($arr[$keys[68]]);
+		if (array_key_exists($keys[69], $arr)) $this->setFecgra($arr[$keys[69]]);
+		if (array_key_exists($keys[70], $arr)) $this->setGrusangre($arr[$keys[70]]);
+		if (array_key_exists($keys[71], $arr)) $this->setNumgaceta($arr[$keys[71]]);
+		if (array_key_exists($keys[72], $arr)) $this->setFecgaceta($arr[$keys[72]]);
+		if (array_key_exists($keys[73], $arr)) $this->setDiagra($arr[$keys[73]]);
+		if (array_key_exists($keys[74], $arr)) $this->setMesgra($arr[$keys[74]]);
+		if (array_key_exists($keys[75], $arr)) $this->setAnogra($arr[$keys[75]]);
+		if (array_key_exists($keys[76], $arr)) $this->setTemporal($arr[$keys[76]]);
+		if (array_key_exists($keys[77], $arr)) $this->setDetexp($arr[$keys[77]]);
+		if (array_key_exists($keys[78], $arr)) $this->setNumexp($arr[$keys[78]]);
+		if (array_key_exists($keys[79], $arr)) $this->setModpagcestic($arr[$keys[79]]);
+		if (array_key_exists($keys[80], $arr)) $this->setCodret($arr[$keys[80]]);
+		if (array_key_exists($keys[81], $arr)) $this->setSituac($arr[$keys[81]]);
+		if (array_key_exists($keys[82], $arr)) $this->setProfes($arr[$keys[82]]);
+		if (array_key_exists($keys[83], $arr)) $this->setCodnivedu($arr[$keys[83]]);
+		if (array_key_exists($keys[84], $arr)) $this->setFeccoracu($arr[$keys[84]]);
+		if (array_key_exists($keys[85], $arr)) $this->setCapactacu($arr[$keys[85]]);
+		if (array_key_exists($keys[86], $arr)) $this->setIntacu($arr[$keys[86]]);
+		if (array_key_exists($keys[87], $arr)) $this->setAntacu($arr[$keys[87]]);
+		if (array_key_exists($keys[88], $arr)) $this->setDiaacu($arr[$keys[88]]);
+		if (array_key_exists($keys[89], $arr)) $this->setDiaadiacu($arr[$keys[89]]);
+		if (array_key_exists($keys[90], $arr)) $this->setSeghcm($arr[$keys[90]]);
+		if (array_key_exists($keys[91], $arr)) $this->setPorseghcm($arr[$keys[91]]);
+		if (array_key_exists($keys[92], $arr)) $this->setUbifis($arr[$keys[92]]);
+		if (array_key_exists($keys[93], $arr)) $this->setTipcueaho($arr[$keys[93]]);
+		if (array_key_exists($keys[94], $arr)) $this->setNumcueaho($arr[$keys[94]]);
+		if (array_key_exists($keys[95], $arr)) $this->setId($arr[$keys[95]]);
 	}
 
 	
@@ -3384,6 +3415,7 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 		$criteria = new Criteria(NphojintPeer::DATABASE_NAME);
 
 		if ($this->isColumnModified(NphojintPeer::CODEMP)) $criteria->add(NphojintPeer::CODEMP, $this->codemp);
+		if ($this->isColumnModified(NphojintPeer::RIFEMP)) $criteria->add(NphojintPeer::RIFEMP, $this->rifemp);
 		if ($this->isColumnModified(NphojintPeer::NOMEMP)) $criteria->add(NphojintPeer::NOMEMP, $this->nomemp);
 		if ($this->isColumnModified(NphojintPeer::CEDEMP)) $criteria->add(NphojintPeer::CEDEMP, $this->cedemp);
 		if ($this->isColumnModified(NphojintPeer::NUMCON)) $criteria->add(NphojintPeer::NUMCON, $this->numcon);
@@ -3509,6 +3541,8 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 	{
 
 		$copyObj->setCodemp($this->codemp);
+
+		$copyObj->setRifemp($this->rifemp);
 
 		$copyObj->setNomemp($this->nomemp);
 

@@ -63,14 +63,14 @@ class nomhojintActions extends autonomhojintActions
 	  	  if(($nphojint['porseghcm']=="" || $nphojint['porseghcm']==0))
 		  {
 		 	$this->coderr=493;
-      	 	return false; 	
+      	 	return false;
 		  }elseif($nphojint['porseghcm']<0 || $nphojint['porseghcm']>100)
 		  {
 		  	$this->coderr=494;
       	 	return false;
 		  }
-	  	 
-	  }  
+
+	  }
 
       if (count($grid3[0])>0)
       {
@@ -445,6 +445,10 @@ $this->Bitacora('Guardo');
     if (isset($nphojint['cedemp']))
     {
       $this->nphojint->setCedemp($nphojint['cedemp']);
+    }
+    if (isset($nphojint['rifemp']))
+    {
+      $this->nphojint->setRifemp($nphojint['rifemp']);
     }
     if (isset($nphojint['edociv']))
     {
@@ -1363,7 +1367,7 @@ $this->Bitacora('Guardo');
     $col11->setEsGrabable(true);
     $col11->setNombreCampo('seghcm');
     $col11->setHTML(' ');
-	
+
 	$col15 = new Columna('Porcentaje Seguro HCM');
     $col15->setTipo(Columna::MONTO);
     $col15->setEsGrabable(true);
@@ -1441,6 +1445,7 @@ $this->Bitacora('Guardo');
       'nphojint{codemp}' => 'No. Empleado:',
       'nphojint{nomemp}' => 'Apellido(s) y Nombre(s):',
       'nphojint{cedemp}' => 'C.I.:',
+      'nphojint{rifemp}' => 'RIF:',
       'nphojint{edociv}' => 'Estado Civil:',
       'nphojint{numcon}' => 'No. Contrato:',
       'nphojint{nacemp}' => 'Nacionalidad:',
