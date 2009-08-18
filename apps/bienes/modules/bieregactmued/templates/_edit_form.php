@@ -183,7 +183,7 @@
   <?php endif; ?>
 
   <?php $value = object_input_tag($bnregmue, 'getCodubi', array (
-  'size' => 3,
+  'size' => $lonubi,
   'control_name' => 'bnregmue[codubi]',
   'maxlength' => $lonubi,
   'onKeyPress' => "javascript:return dFilter (event.keyCode, this,'$forubi')",
