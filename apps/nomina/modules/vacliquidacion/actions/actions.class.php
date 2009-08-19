@@ -97,8 +97,18 @@ class vacliquidacionActions extends autovacliquidacionActions
     }
     if ($this->getRequestParameter('ajax')=='2')
     {
-       $cajultsue = H::convnume($cajultsue);
-	   $cajsuenor = H::convnume($cajsuenor);
+       if(strpos($cajultsue,'.') && strpos($cajultsue,','))
+	    	$cajultsue = H::convnume($cajultsue);
+	   else   
+	   	 if(strpos($cajultsue,'.'))
+           $cajultsue = str_replace('.',',',$cajultsue);
+	   
+	   if(strpos($cajsuenor,'.') && strpos($cajsuenor,','))
+	   	   	$cajsuenor = H::convnume($cajsuenor);
+	   else
+	   	 if(strpos($cajsuenor,'.'))
+           $cajsuenor = str_replace('.',',',$cajsuenor);	   
+
        $c=new Criteria();
        $c->add(NphojintPeer::CODEMP,$cajcodemp);
        $datos=NphojintPeer::doSelectOne($c);
@@ -124,8 +134,8 @@ class vacliquidacionActions extends autovacliquidacionActions
 
   public function configGrid($codemp="", $nuevo="",&$ultimosueldo=0,&$ultsue=0,&$suenor=0)
   {
-    $ultimosueldo=0;
-    $this->sueldonormal=0;
+    $ultimosueldo=$suenor;
+    $this->sueldonormal=$ultsue;
     $per=array();
     $perHis=array();
     if ($nuevo=="S" and $codemp!="")
@@ -206,11 +216,11 @@ class vacliquidacionActions extends autovacliquidacionActions
 	    $c = new Criteria();
 	    $c->add(NpvacdisfrutePeer::CODEMP,$codemp);
 	    $perHis = NpvacdisfrutePeer::doSelect($c);
-	    if($per)
+	    /*if($per)
 	    	$ultimosueldo=$per[0]->getUltsue();
 	    else
 	    	$ultimosueldo=0;
-
+		*/
     }
 
 
@@ -364,7 +374,7 @@ class vacliquidacionActions extends autovacliquidacionActions
       $rs = NpvacliquidacionPeer::doSelectOne($c);
 	  $sal1=$rs->getUltsue();
       $sal2=$rs->getMontoinci();
-      $this->configGrid($nphojint->getCodemp(),"S",&$ultimosueldo,&$sal1,&$sal2);
+      $this->configGrid($nphojint->getCodemp(),"N",&$ultimosueldo,&$sal1,&$sal2);
       $this->ultsue=$ultimosueldo;
       $this->suenor=$this->sueldonormal;
       $this->forward404Unless($nphojint);
