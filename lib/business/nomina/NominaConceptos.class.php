@@ -59,18 +59,23 @@ class NominaConceptos{
 
                   $actual=$nphispre->getSalant() - $nphispre->getMonpre();
                   $monpre= -1 * $nphispre->getMonpre();
+				  $val=false;
 
 		    }else {
 
 		    	 $actual=$nphispre->getSalant() + $nphispre->getMonpre();
 		    	 $monpre=$nphispre->getMonpre();
-
+				 $val=true;
 
 		    }
 
-			$obj2->setAcumulado($actual);
-			$obj2->setCantidad($nphispre->getMoncuota());
-			$obj2->setMonto($actual);
+			$obj2->setAcumulado($actual);			
+			if($val)
+			{
+				$obj2->setCantidad($nphispre->getMoncuota());	
+				$obj2->setMonto($actual);
+			}
+				
 
 
 	    	$nphispre->setMonpre($monpre);
