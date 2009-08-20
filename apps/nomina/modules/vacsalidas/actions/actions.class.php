@@ -187,7 +187,7 @@ $this->Bitacora('Guardo');
     $opciones->setAnchoGrid(600);
     $opciones->setAncho(600);
     $opciones->setName('a');
-    $opciones->setFilas(25);
+    $opciones->setFilas(0);
     $opciones->setTitulo('');
 
     $opciones->setHTMLTotalFilas(' ');
@@ -239,6 +239,11 @@ $this->Bitacora('Guardo');
     $col6->setAlineacionObjeto(Columna::DERECHA);
     $col6->setAlineacionContenido(Columna::DERECHA);
     $col6->setHTML('type="text" size="8" readonly= true');
+	
+	$col7 = new Columna(' ');
+    $col7->setTipo(Columna::TEXTO);
+    $col7->setOculta(true);
+    $col7->setNombreCampo('jornada');
 
     $opciones->addColumna($col1);
     $opciones->addColumna($col2);
@@ -246,6 +251,7 @@ $this->Bitacora('Guardo');
     $opciones->addColumna($col4);
     $opciones->addColumna($col5);
     $opciones->addColumna($col6);
+	$opciones->addColumna($col7);
 
     $this->obj = $opciones->getConfig($per);
 
@@ -276,7 +282,6 @@ $this->Bitacora('Guardo');
     $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
 
     $this->configGrid($arreglo);
-
    }
 
    if ($this->getRequestParameter('ajax')=='2')
@@ -310,9 +315,9 @@ $this->Bitacora('Guardo');
     $diaspend=$this->getRequestParameter('diaspend');
     $fechadesde=$this->getRequestParameter('fecdesde');
     $diasvac=$this->getRequestParameter('diasvac');
+	$valfilgrid=$this->getRequestParameter('valfilgrid');
 
-
-    Nomina::cargarDatosNpvacsalidasDiasVac($fechaing, $codemp, &$diasvac, &$arreglo, &$diaspend,$fechadesde,&$fechahasta);
+    Nomina::cargarDatosNpvacsalidasDiasVac($fechaing, $codemp, &$diasvac, &$arreglo, &$diaspend,$fechadesde,&$fechahasta,$valfilgrid);
 	//$diaspend=$diaspend-$diasvac;
 
     $output = '[["'.$cajtexdiaspend.'","'.$diaspend.'",""],["'.$cajtexdiasvac.'","'.$diasvac.'",""],["'.$cajtexfechas.'","'.$fechahasta.'",""]]';
@@ -333,11 +338,12 @@ $this->Bitacora('Guardo');
     $codemp=$this->getRequestParameter('codemp');
     $fechaing=$this->getRequestParameter('fecing');
     $diaspend=$this->getRequestParameter('diaspend');
+	$valfilgrid=$this->getRequestParameter('valfilgrid');
 
 
-    $fechahasta = Nomina::calcularFechaEntrada($diasvac, $fecdes, $codemp, $fechaing);
+    $fechahasta = Nomina::calcularFechaEntrada($diasvac, $fecdes, $codemp, $fechaing,$valfilgrid);
 
-    Nomina::cargarDatosNpvacsalidasDiasVac($fechaing, $codemp, &$diasvac, &$arreglo, &$diaspend,$fecdes,&$fechahasta);
+    Nomina::cargarDatosNpvacsalidasDiasVac($fechaing, $codemp, &$diasvac, &$arreglo, &$diaspend,$fecdes,&$fechahasta,$valfilgrid);
 
     $output = '[["'.$cajtexdiaspend.'","'.$diaspend.'",""],["'.$cajtexdiasvac.'","'.$diasvac.'",""],["'.$cajtexfechas.'","'.$fechahasta.'",""]]';
     $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
