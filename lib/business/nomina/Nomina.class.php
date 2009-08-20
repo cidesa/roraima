@@ -6032,7 +6032,7 @@ class Nomina {
 
   // Inicio VacSalidas
 
-  public static function cargarDatosNpvacsalidas($codemp, $fechaing, & $arreglo, & $diaslaborales, & $fecvac, & $diaspend, $fechadesde) {
+  public static function cargarDatosNpvacsalidas($codemp, $fechaing, & $arreglo, & $diaslaborales, & $fecvac, & $diaspend, $fechadesde,$tipo='') {
 
     //$sql1 = "Select CodEmp,NomEmp,FecIng from npHOJINT where CodEmp='" .$codemp. "'";
     if(empty($fechadesde))
@@ -6070,44 +6070,56 @@ class Nomina {
 
       Herramientas :: BuscarDatos($sql2, & $arr2);
 
-      if ($arr2) {
-
-        if ($arr2[0]['lunes'] == "2")
-          $diaslaborales[0] = "S";
-        else
-          $diaslaborales[0] = "N";
-
-        if ($arr2[0]['martes'] == "3")
-          $diaslaborales[1] = "S";
-        else
-          $diaslaborales[1] = "N";
-
-        if ($arr2[0]['miercoles'] == "4")
-          $diaslaborales[2] = "S";
-        else
-          $diaslaborales[2] = "N";
-
-        if ($arr2[0]['jueves'] == "5")
-          $diaslaborales[3] = "S";
-        else
-          $diaslaborales[3] = "N";
-
-        if ($arr2[0]['viernes'] == "6")
-          $diaslaborales[4] = "S";
-        else
-          $diaslaborales[4] = "N";
-
-        if ($arr2[0]['sabado'] == "7")
-          $diaslaborales[5] = "S";
-        else
-          $diaslaborales[5] = "N";
-
-        if ($arr2[0]['domingo'] == "1")
-          $diaslaborales[6] = "S";
-        else
-          $diaslaborales[6] = "N";
-
-      }
+	  if($tipo!='C')
+	  {
+	      if ($arr2) {
+	
+	        if ($arr2[0]['lunes'] == "2")
+	          $diaslaborales[0] = "S";
+	        else
+	          $diaslaborales[0] = "N";
+	
+	        if ($arr2[0]['martes'] == "3")
+	          $diaslaborales[1] = "S";
+	        else
+	          $diaslaborales[1] = "N";
+	
+	        if ($arr2[0]['miercoles'] == "4")
+	          $diaslaborales[2] = "S";
+	        else
+	          $diaslaborales[2] = "N";
+	
+	        if ($arr2[0]['jueves'] == "5")
+	          $diaslaborales[3] = "S";
+	        else
+	          $diaslaborales[3] = "N";
+	
+	        if ($arr2[0]['viernes'] == "6")
+	          $diaslaborales[4] = "S";
+	        else
+	          $diaslaborales[4] = "N";
+	
+	        if ($arr2[0]['sabado'] == "7")
+	          $diaslaborales[5] = "S";
+	        else
+	          $diaslaborales[5] = "N";
+	
+	        if ($arr2[0]['domingo'] == "1")
+	          $diaslaborales[6] = "S";
+	        else
+	          $diaslaborales[6] = "N";
+	
+	      }
+	  }else
+	  {
+	  	$diaslaborales[0] = "S";
+		$diaslaborales[1] = "S";
+		$diaslaborales[2] = "S";
+		$diaslaborales[3] = "S";
+		$diaslaborales[4] = "S";
+		$diaslaborales[5] = "S";
+		$diaslaborales[6] = "S";	
+	  }	  
 
       $sql3 = "Select max(fecvac) from NPVACSALIDAS WHERE CODEMP='" . $codemp . "'";
       Herramientas :: BuscarDatos($sql3, & $arr3);
@@ -6203,7 +6215,8 @@ class Nomina {
               DESDE,
               HASTA,
               SUM(DISFRUTADOS) AS DISFRUTADOS,
-              (CASE WHEN (SUM(HIST)=0) THEN SUM(CORRESPONDE) ELSE SUM(CORRESPONDEHIS) END) AS CORRESPONDE
+              (CASE WHEN (SUM(HIST)=0) THEN SUM(CORRESPONDE) ELSE SUM(CORRESPONDEHIS) END) AS CORRESPONDE,
+			  jornada
               FROM
               (
                     Select
@@ -6213,7 +6226,8 @@ class Nomina {
                 ((" . ($anohasta -1) . ")+(" . $anofin . "-B.Ano)) as Hasta,
                 0 as Disfrutados,
                 A.DIADIS as CORRESPONDE,
-                0 as CORRESPONDEHIS
+                0 as CORRESPONDEHIS,
+				a.jornada
                 from NPvacdiadis A,NPAnos B
                 Where
                 A.codnom='" . $nomina . "'
@@ -6229,7 +6243,8 @@ class Nomina {
                 to_number(C.PERFIN,'9999') as Hasta,
                 C.DIASDISFRUTADOS as Disfrutados,
                 0 as CORRESPONDE,
-                C.diasdisfutar as CORRESPONDEHIS
+                C.diasdisfutar as CORRESPONDEHIS,
+				a.jornada
                 from
                 NPvacdiadis A,NPAnos B,Npvacdisfrute C
                 Where
@@ -6241,9 +6256,9 @@ class Nomina {
 
               ) as subconsulta
 
-              GROUP BY DESDE,HASTA
+              GROUP BY DESDE,HASTA,JORNADA
               ORDER BY DESDE";
-
+//echo $sql1; exit();
     Herramientas :: BuscarDatos($sql1, & $arr1);
 
     /*          print '**************************** <br>';
@@ -6290,6 +6305,7 @@ class Nomina {
           $arreglo[$i]["id"] = 9;
           $arreglo[$i]["perini"] = $a['desde'];
           $arreglo[$i]["perfin"] = $a['hasta'];
+		  $arreglo[$i]["jornada"] = $a['jornada'];
 
           $sql2 = "SELECT A.ANTAPVAC FROM NPBONOCONT A, NPASIEMPCONT B WHERE A.CODTIPCON=B.CODTIPCON AND B.CODEMP='" . $codemp . "' AND TO_CHAR(" . $a['hasta'] . ",'YYYY') BETWEEN TO_CHAR(ANOVIG,'YYYY') AND TO_CHAR(ANOVIGHAS,'YYYY')";
           Herramientas :: BuscarDatos($sql2, & $arr2);
@@ -6376,7 +6392,7 @@ class Nomina {
 
   }
 
-  public static function cargarDatosNpvacsalidasDiasVac($fechaing, $codemp, & $diasvac, & $arreglo, & $diaspend, $fechadesde, & $fechahasta) {
+  public static function cargarDatosNpvacsalidasDiasVac($fechaing, $codemp, & $diasvac, & $arreglo, & $diaspend, $fechadesde, & $fechahasta,$tipo='') {
 
     //echo $fechadesde.' - '.$diasvac; exit;
     if ($diasvac <> '0') {
@@ -6394,10 +6410,10 @@ class Nomina {
 
           self :: actualizarArregloNpvacsalidas(& $arreglo, & $diaspend, $diasvac);
         }
-        $fechahasta = self :: calcularFechaEntrada((double) $diasvac, $fechadesde, $codemp, $fechaing);
+        $fechahasta = self :: calcularFechaEntrada((double) $diasvac, $fechadesde, $codemp, $fechaing,$tipo);
       }
     } else {
-      $fechahasta = self :: calcularFechaEntrada((double) $diasvac, $fechadesde, $codemp, $fechaing);
+      $fechahasta = self :: calcularFechaEntrada((double) $diasvac, $fechadesde, $codemp, $fechaing,$tipo);
 
       if(empty($fechadesde))
         $fechadesde=date('d-m-Y');
@@ -6437,7 +6453,7 @@ class Nomina {
     $diaspend = $monto;
   }
 
-  public static function calcularFechaEntrada($diasvac, $fechadesde, $codemp, $fechaing) {
+  public static function calcularFechaEntrada($diasvac, $fechadesde, $codemp, $fechaing,$tipo='') {
     $diad = substr($fechadesde, 0, 2);
     $mesd = substr($fechadesde, 3, 2);
     $anod = substr($fechadesde, 6, 8);
@@ -6449,25 +6465,25 @@ class Nomina {
     if ($diasvac <> 0) {
       $i = 0;
       $jornada = false;
-      self :: cargarDatosNpvacsalidas($codemp, $fechaing, & $arreglo, & $diaslaborales, & $fecvac, & $diaspend, $fechadesde);
+      self :: cargarDatosNpvacsalidas($codemp, $fechaing, & $arreglo, & $diaslaborales, & $fecvac, & $diaspend, $fechadesde,$tipo);
       while ($i <= $diasvac) {
-        $valor = Herramientas :: dateAdd('d', 1, $valor, '+');
-
-        if (self :: diaLaboral($valor, $jornada, $diaslaborales)) {
-          $anoing = substr($valor, 0, 4);
-          $mes = substr($valor, 5, 2);
-          $dia = substr($valor, 8, 2);
-
-          $sql = "Select  * FROM  NPVACDIAFER WHERE DIA='" . (int) $dia . "' AND MES='" . (int) $mes . "'";
-          Herramientas :: BuscarDatos($sql, & $arr);
-
-          if (!$arr) {
-            $i++;
-            if ($i >= ($diasvac -2))
-              $jornada = true;
-
-          }
-        }
+        $valor = Herramientas :: dateAdd('d', 1, $valor, '+');		
+		
+			if (self :: diaLaboral($valor, $jornada, $diaslaborales)) {
+	          $anoing = substr($valor, 0, 4);
+	          $mes = substr($valor, 5, 2);
+	          $dia = substr($valor, 8, 2);
+	
+	          $sql = "Select  * FROM  NPVACDIAFER WHERE DIA='" . (int) $dia . "' AND MES='" . (int) $mes . "'";
+	          Herramientas :: BuscarDatos($sql, & $arr);
+	
+	          if (!$arr) {
+	            $i++;
+	            if ($i >= ($diasvac -2))
+	              $jornada = true;
+	
+	          }
+	        }	
       }
 
      // $valor = Herramientas :: dateAdd('d', 1, $valor, '+');
