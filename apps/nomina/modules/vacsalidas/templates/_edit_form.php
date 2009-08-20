@@ -9,6 +9,7 @@
 )) ?>
 
 <?php echo object_input_hidden_tag($npvacsalidas, 'getId') ?>
+<?php echo input_hidden_tag('cajocugrid', '') ?>
 <?php use_helper('Javascript','wait','Grid','PopUp','SubmitClick','tabs') ?>
 <?php echo javascript_include_tag('dFilter','ajax','tools','observe') ?>
 
@@ -29,7 +30,7 @@
   'update'   => 'grid',
   'url'      => 'vacsalidas/ajax',
   'condition' => "$('npvacsalidas_codemp').value != '' && $('id').value == ''",
-  'complete' => 'AjaxJSON(request, json)',
+  'complete' => 'AjaxJSON(request, json),llenarcajaoculta()',
   'with' => "'ajax=1&cajtexfecvac=npvacsalidas_fecvac&cajtexfecdes=npvacsalidas_fecdes&cajtexfechas=npvacsalidas_fechas&cajtexnom=npvacsalidas_nomemp&cajtexfec=npvacsalidas_fecing&cajtexdiaspend=diaspend&codigo='+this.value",
         )),
 )); echo $value ? $value : '&nbsp;' ?>
@@ -120,7 +121,7 @@
   'url'      => 'vacsalidas/ajax',
   'condition' => "$('npvacsalidas_codemp').value != '' && $('id').value == ''",
   'complete' => 'AjaxJSON(request, json)',
-  'with' => "'ajax=4&cajtexdiasvac=npvacsalidas_diasdisfrutar&cajtexdiaspend=diaspend&cajtexfechas=npvacsalidas_fechas&diasvac='+$('npvacsalidas_diasdisfrutar').value+'&codemp='+$('npvacsalidas_codemp').value+'&fecing='+$('npvacsalidas_fecing').value+'&fecdes='+this.value+'&diaspend='+$('diaspend').value",
+  'with' => "'ajax=4&cajtexdiasvac=npvacsalidas_diasdisfrutar&cajtexdiaspend=diaspend&cajtexfechas=npvacsalidas_fechas&diasvac='+$('npvacsalidas_diasdisfrutar').value+'&codemp='+$('npvacsalidas_codemp').value+'&fecing='+$('npvacsalidas_fecing').value+'&fecdes='+this.value+'&diaspend='+$('diaspend').value+'&valfilgrid='+$('cajocugrid').value",
         )),
 )); echo $value ? $value : '&nbsp;' ?>
 <div class="sf_admin_edit_help"><?php echo __('Primer Día de Vacaciones del Empleado') ?></div>
@@ -159,7 +160,7 @@
   'url'      => 'vacsalidas/ajax',
   'condition' => "$('npvacsalidas_codemp').value != '' && $('id').value == ''",
   'complete' => 'AjaxJSON(request, json)',
-  'with' => "'ajax=3&cajtexdiasvac=npvacsalidas_diasdisfrutar&cajtexdiaspend=diaspend&cajtexfechas=npvacsalidas_fechas&fecdesde='+$('npvacsalidas_fecdes').value+'&diaspend='+$('diaspend').value+'&fecing='+$('npvacsalidas_fecing').value+'&fecvac='+$('npvacsalidas_fecvac').value+'&codemp='+$('npvacsalidas_codemp').value+'&diasvac='+this.value",
+  'with' => "'ajax=3&cajtexdiasvac=npvacsalidas_diasdisfrutar&cajtexdiaspend=diaspend&cajtexfechas=npvacsalidas_fechas&fecdesde='+$('npvacsalidas_fecdes').value+'&diaspend='+$('diaspend').value+'&fecing='+$('npvacsalidas_fecing').value+'&fecvac='+$('npvacsalidas_fecvac').value+'&codemp='+$('npvacsalidas_codemp').value+'&diasvac='+this.value+'&valfilgrid='+$('cajocugrid').value",
         )),
 )); echo $value ? $value : '&nbsp;' ?>
 </th>
@@ -214,6 +215,11 @@ echo grid_tag($obj);
 		$('trigger_npvacsalidas_fecvac').hide();
 		$('trigger_npvacsalidas_fecdes').hide();
 		$('trigger_npvacsalidas_fechas').hide();
+	}
+	function llenarcajaoculta()
+	{
+		var totfil = parseInt(obtener_filas_grid('a',1))-1;
+		$('cajocugrid').value=$('ax_'+totfil+'_7').value;
 	}
 	
  </script> 
