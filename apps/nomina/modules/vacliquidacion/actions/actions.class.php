@@ -134,6 +134,26 @@ class vacliquidacionActions extends autovacliquidacionActions
 
   public function configGrid($codemp="", $nuevo="",&$ultimosueldo=0,&$ultsue=0,&$suenor=0)
   {
+  	//PARA LA PORCION ADICIONAL
+		$codnom='';
+		$sqlnom="select codnom from npasicaremp where codemp='$codemp' and status='V'";
+		if (H::BuscarDatos($sqlnom,$arrnom))
+			$codnom=$arrnom[0]['codnom'];			
+			
+		$porcion=0;
+		$sqlpor="SELECT SUM(A.MONTO)/12 as porcion FROM NPHISCON A , NPHOJINT B WHERE A.CODEMP='$codemp' AND A.CODNOM='$codnom' 
+				AND A.CODCON in (select codcon from npparamsalint where codnom='$codnom' and afecta='ABV')
+				AND A.FECNOM >=
+				to_date((case when to_char(fecing,'dd/mm')>to_char(coalesce(fecret,now()),'dd/mm')
+				then to_char(fecing,'dd/mm')||'/'||(to_number(to_char(now(),'yyyy'),'9999')-1) 
+				else '01/01/'||TO_CHAR(coalesce(FECRET,now()),'YYYY')
+				end),'DD/MM/YYYY')
+				AND A.FECNOM <=coalesce(FECRET,now())
+				AND A.CODEMP=B.CODEMP";
+		if (H::BuscarDatos($sqlpor,$arrpor))
+			$porcion=$arrpor[0]['porcion'];
+	###	
+	
     $ultimosueldo=$suenor;
     $this->sueldonormal=$ultsue;
     $per=array();
@@ -166,9 +186,9 @@ class vacliquidacionActions extends autovacliquidacionActions
            	$salnor=$ultsue;
 
            if($suenor==0)
-            $salint=$arr[$cont]['salint'];
+            $salint=$arr[$cont]['salint']+$porcion;
            else
-            $salint=$suenor;
+            $salint=$suenor+$porcion;
 
            $monto=($per[$i]['diadis']*($salnor/30))+($per[$i]['diasbono']*($salint/30));
 
@@ -199,13 +219,14 @@ class vacliquidacionActions extends autovacliquidacionActions
         }//fin del while
         //obtener el salario integral del ultimo registro del arreglo ya que ese es el ultimo sueldo del empleado
         if($suenor==0)
-        	$ultimosueldo=number_format($arr[$i-1]['salint'],2,',','.');
+        	$ultimosueldo=number_format($arr[$i-1]['salint']+$porcion,2,',','.');
         else
-        	$ultimosueldo=number_format($suenor,2,',','.');
+        	$ultimosueldo=number_format($suenor+porcion,2,',','.');
         if($ultsue==0)
         	$this->sueldonormal=number_format($arr[$i-1]['salnor'],2,',','.');
         else
         	$this->sueldonormal=number_format($ultsue,2,',','.');
+					
       }
     }
     else
@@ -221,6 +242,8 @@ class vacliquidacionActions extends autovacliquidacionActions
 	    else
 	    	$ultimosueldo=0;
 		*/
+		$ultimosueldo=H::FormatoMonto($ultimosueldo);
+		$this->sueldonormal=H::FormatoMonto($this->sueldonormal);
     }
 
 
@@ -344,7 +367,6 @@ class vacliquidacionActions extends autovacliquidacionActions
 
 
     $this->objHis = $opciones->getConfig($perHis);
-
 
   }
 
