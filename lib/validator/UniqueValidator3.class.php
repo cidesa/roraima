@@ -49,15 +49,36 @@ class UniqueValidator3 extends sfValidator
     $c->add($columnName2, $value2);
     $c->add($columnName3, $value3);
     $object = call_user_func(array($className, 'doSelectOne'),$c);
-     
-    if (count($object)>0)
+   
+	if($object) 
+	{
+	  $tableMap = call_user_func(array($className, 'getTableMap'));
+      foreach ($tableMap->getColumns() as $column)
+      {
+        if (!$column->isPrimaryKey())
+        {
+          continue;
+        }
+
+        $method = 'get'.$column->getPhpName();
+        $primaryKey = call_user_func(array($className, 'translateFieldName'), $column->getPhpName(), BasePeer::TYPE_PHPNAME, BasePeer::TYPE_FIELDNAME);
+        if ($object->$method() != $this->getContext()->getRequest()->getParameter($primaryKey))
+        {
+          $error = $this->getParameter('unique_error');
+
+          return false;
+        }
+      }
+	}
+	 
+    /*if (count($object)>0)
     {    
   	   $error = $this->getParameter('unique_error');
     }else{
   	   return true;
-    }
+    }*/
 
-    return false;
+    return true;
   }
 
   /**
