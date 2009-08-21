@@ -7025,3 +7025,23 @@ propel:
       type: INTEGER
       required: true
       autoIncrement: true
+  npparamsalint:
+    #_attributes:
+      #idMethod: native
+    codnom:
+      type: VARCHAR
+      size: 3
+      required: true
+      ##primaryKey: true
+    codcon:
+      type: VARCHAR
+      size: 3
+      required: true
+    afecta:
+      type: VARCHAR
+      size: 3
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
