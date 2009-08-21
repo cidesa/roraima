@@ -111,6 +111,7 @@ nomina:
         Definición Presupuestaria de Liquidación:                    presNomDefPre
         Definiciones Especiales para Prestaciones:                   NomDefEspParPre
         Definición de Periodos por Meses:                            presNomSemMes
+        Parámetros para el Salario Integral:                         presnomparsalint
       Registros Útiles para el Cálculo de Prestaciones Sociales:
         Asignación de Trab. para Prestaciones Por Contr. Colect:     presNomAsiTrabCont
         Registro de Tasas de Interes Periodicas:                     presNomIntFecRef
