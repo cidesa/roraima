@@ -79,7 +79,6 @@
     	&nbsp;&nbsp;
 		<?php echo input_tag('monmov','',array(
 		'onBlur' => "javascript:event.keyCode=13;return entermontootro(event, this.id)",
-		'readonly' => true,
 		'size' => 19
 		)) ?>
     </ul>
