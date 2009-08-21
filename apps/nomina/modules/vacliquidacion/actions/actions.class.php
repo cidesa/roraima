@@ -144,7 +144,7 @@ class vacliquidacionActions extends autovacliquidacionActions
 		$sqlpor="SELECT SUM(A.MONTO)/12 as porcion FROM NPHISCON A , NPHOJINT B WHERE A.CODEMP='$codemp' AND A.CODNOM='$codnom' 
 				AND A.CODCON in (select codcon from npparamsalint where codnom='$codnom' and afecta='ABV')
 				AND A.FECNOM >=
-				to_date((case when to_char(fecing,'dd/mm')>to_char(coalesce(fecret,now()),'dd/mm')
+				to_date((case when to_date(to_char(fecing,'dd/mm'),'dd/mm')>to_date(to_char(coalesce(fecret,now()),'dd/mm'),'dd/mm')
 				then to_char(fecing,'dd/mm')||'/'||(to_number(to_char(now(),'yyyy'),'9999')-1) 
 				else '01/01/'||TO_CHAR(coalesce(FECRET,now()),'YYYY')
 				end),'DD/MM/YYYY')
