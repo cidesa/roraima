@@ -543,7 +543,7 @@ public function configGrid($codemp="")
 		$this->npliquidacion_det = $this->getNpliquidacionDetOrCreate();
 		$sql= "Select * from nphojint where codemp='$codemp'";			
 		if (H::BuscarDatos($sql,$rss))
-		{			
+		{		
 			/**VERIFICAMOS SI EXISTEN PERSONAS QUE SE PUEDAN LIQUIDAR*/
 			$sql= "Select * from NPLiquidacion a, npasiempcont c where a.CEDULA=c.codemp and a.CEDULA='$codemp'";			
 
@@ -600,6 +600,7 @@ public function configGrid($codemp="")
 						}
 					}
 				}
+				
 				/**VERIFICAMOS SI EXISTEN PERSONAS CON LIQUIDACION CALCULADA*/
 				$sql2="Select * from NPLIQUIDACION_DET where CodEmp='$codigo'";
 				if (H::BuscarDatos($sql2,$rs2))
@@ -631,9 +632,17 @@ public function configGrid($codemp="")
 				/**ASIGNAMOS VALORES DE SUELDOS*/			
 				#Ultimo sueldo del empleado
 				$antiguedad = H::DateDiff("yyyy", $fecing, date("Y-m-d"));
-				$sql= "Select coalesce(sum(MonAsi),0) as ultsue from NPSALINT a, npasipre b where CodEmp='$codemp' and 
+				$sql= "select sum(ultsue) as ultsue from (
+				        Select coalesce(sum(MonAsi),0) as ultsue from NPSALINT a, npasipre b where CodEmp='$codemp' and 
 						FECFINCON = (SELECT MAX(FECFINCON) FROM NPSALINT where CodEmp='$codemp' and 
-						FECFINCON<= to_date('$fecegr','dd/mm/yyyy')) and a.codcon=b.codcon and a.codasi=b.codasi and b.tipasi='S'  ";
+						FECFINCON<= to_date('$fecegr','dd/mm/yyyy')) and a.codcon=b.codcon and a.codasi=b.codasi and b.tipasi='S'  
+						Union all
+						SELECT SUM(A.MONTO)/12 as porcion FROM NPHISCON A , NPHOJINT B WHERE A.CODEMP='$codemp' AND A.CODNOM='$codnom' 
+						AND A.CODCON in (select codcon from npparamsalint where codnom='$codnom' and afecta='ABF')
+						AND A.FECNOM >=TO_DATE('01/01/'||to_char(coalesce(fecret,now()),'yyyy'),'dd/mm/yyyy')
+						AND A.FECNOM <=coalesce(FECRET,now())
+						AND A.CODEMP=B.CODEMP
+						)a";
 
 				if (H::BuscarDatos($sql,$rs))
 				   $ultimosueldo = $rs[0]["ultsue"];
@@ -683,11 +692,20 @@ public function configGrid($codemp="")
 								where a.codasi=b.codasi and a.codcon=b.codcon and b.codcpt=c.codcon and b.afealibf='S' 
 								and a.codcon='$codtipcon' and codemp='$codemp' and  
 								TO_CHAR(fecnom,'MM/YYYY')=TO_CHAR((SELECT MAX(FECFIN) FROM NPIMPPRESOC WHERE CODEMP='$codemp' AND VALART108>0 AND TIPO=''),'mm/yyyy')
-								),0)/30)* (z.diauti/12)) as monto
+								),0)/30)* (z.diauti/12)) 
+								+
+								(coalesce((SELECT SUM(A.MONTO)/12 as porcion FROM NPHISCON A , NPHOJINT B WHERE A.CODEMP='$codemp' AND A.CODNOM='$codnom' 
+								AND A.CODCON in (select codcon from npparamsalint where codnom='$codnom' and afecta='ABF')
+								AND A.FECNOM >=TO_DATE('01/01/'||to_char(coalesce(fecret,now()),'yyyy'),'dd/mm/yyyy')
+								AND A.FECNOM <=coalesce(FECRET,now())
+								AND A.CODEMP=B.CODEMP),0))
+								as monto
 								from npbonocont z
 								where z.codtipcon='$codtipcon' and 
 								anovig<=(SELECT MAX(FECFIN) FROM NPIMPPRESOC WHERE CODEMP='$codemp' AND VALART108>0 AND TIPO='') and
 								anovighas>=(SELECT MAX(FECFIN) FROM NPIMPPRESOC WHERE CODEMP='$codemp' AND VALART108>0 AND TIPO='')
+								
+								
 								";	
 								if (H::BuscarDatos($sql,$rs))
 								    if($rs[0]["monto"]!=0)
@@ -711,7 +729,14 @@ public function configGrid($codemp="")
 											where a.codasi=c.codasi and  afealibf='S' 
 											and a.codcon='$codtipcon' and codemp='$codemp' and  
 											TO_CHAR(fecinicon,'MM/YYYY')=TO_CHAR((SELECT MAX(FECFIN) FROM NPIMPPRESOC WHERE CODEMP='$codemp' AND VALART108>0 AND TIPO=''),'mm/yyyy')
-											),0)/30)* (z.diauti/12)) as monto
+											),0)/30)* (z.diauti/12)) 
+											+
+											(coalesce((SELECT SUM(A.MONTO)/12 as porcion FROM NPHISCON A , NPHOJINT B WHERE A.CODEMP='$codemp' AND A.CODNOM='$codnom' 
+											AND A.CODCON in (select codcon from npparamsalint where codnom='$codnom' and afecta='ABF')
+											AND A.FECNOM >=TO_DATE('01/01/'||to_char(coalesce(fecret,now()),'yyyy'),'dd/mm/yyyy')
+											AND A.FECNOM <=coalesce(FECRET,now())
+											AND A.CODEMP=B.CODEMP),0))
+											as monto
 											from npbonocont z
 											where z.codtipcon='$codtipcon' and 
 											anovig<=(SELECT MAX(FECFIN) FROM NPIMPPRESOC WHERE CODEMP='$codemp' AND VALART108>0 AND TIPO='') and
