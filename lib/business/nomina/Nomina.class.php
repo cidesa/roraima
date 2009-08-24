@@ -6226,8 +6226,7 @@ class Nomina {
                 ((" . ($anohasta -1) . ")+(" . $anofin . "-B.Ano)) as Hasta,
                 0 as Disfrutados,
                 A.DIADIS as CORRESPONDE,
-                0 as CORRESPONDEHIS,
-				a.jornada
+                0 as CORRESPONDEHIS
                 from NPvacdiadis A,NPAnos B
                 Where
                 A.codnom='" . $nomina . "'
@@ -6243,8 +6242,7 @@ class Nomina {
                 to_number(C.PERFIN,'9999') as Hasta,
                 C.DIASDISFRUTADOS as Disfrutados,
                 0 as CORRESPONDE,
-                C.diasdisfutar as CORRESPONDEHIS,
-				a.jornada
+                C.diasdisfutar as CORRESPONDEHIS
                 from
                 NPvacdiadis A,NPAnos B,Npvacdisfrute C
                 Where
@@ -6255,8 +6253,10 @@ class Nomina {
                 And C.CODEMP='" . $codemp . "'
 
               ) as subconsulta
-
-              GROUP BY DESDE,HASTA,JORNADA
+			  , npvacdiadis b
+			  where b.codnom='$nomina'
+              GROUP BY DESDE,HASTA,JORNADA,rangodesde,rangohasta
+			  HAVING sum(antiguedad)>=rangodesde and sum(antiguedad)<=rangohasta
               ORDER BY DESDE";
 //echo $sql1; exit();
     Herramientas :: BuscarDatos($sql1, & $arr1);
