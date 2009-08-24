@@ -15,6 +15,7 @@ generator:
       numuni:     { name : Unidad }
       codcat:     { name : Código Categoría }
       confirm:    { name : Confirmación de Contraseña}
+      codniv:    { name : Nivel de Aprobación}
     list:
       title:          Usuarios
       display:        [=loguse, cedemp, nomuse ]
@@ -25,7 +26,7 @@ generator:
         _delete:      ~
     edit:
       title:          Edición de Usuario
-      display:        [loguse, cedemp, nomuse, pasuse, apluse, numemp, diremp, telemp, numuni, codcat, confirm]
+      display:        [loguse, cedemp, nomuse, pasuse, apluse, numemp, diremp, telemp, numuni, codcat, confirm, codniv]
       actions:
         _list:        ~
         _save:        ~

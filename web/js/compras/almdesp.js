@@ -19,7 +19,7 @@
 
  function verexisteubicacion()
  {
- 	if ($('existeubicacion').value=="N")8.000,00
+ 	if ($('existeubicacion').value=="N")
 	{
 		alert('La ubicacion : '+$('cadphart_codubi').value+', no existe para el almacen seleccionado...');
 		$('cadphart_codubi').value="";

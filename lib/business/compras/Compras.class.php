@@ -1482,7 +1482,6 @@ class Compras {
     {
       return 0;
     }
-
   }
 
   public static function eliminarAlmajuoc($reg)
@@ -2416,8 +2415,125 @@ class Compras {
       }
     }
   }
+  public static function salvarSolicitudPago($casolpag,$grid)
+  {
+  	$tienecorrelativo=false;
+    if (Herramientas::getVerCorrelativo('corpag','cacorrel',&$r))
+    {
+      if ($casolpag->getSolpag()=='########')
+      {
+      	$tienecorrelativo=true;
+        $encontrado=false;
+        while (!$encontrado)
+        {
+          $numero=str_pad($r, 8, '0', STR_PAD_LEFT);
 
-public static function actualizacionSolicitudEgresos($reqart, $actsolegr, & $error) {
+          $sql="select solpag from casolpag where solpag='".$numero."'";
+          if (Herramientas::BuscarDatos($sql,&$result))
+          {
+            $r=$r+1;
+          }
+          else
+          {
+            $encontrado=true;
+          }
+        }
+        $cor=str_pad($r, 8, '0', STR_PAD_LEFT);
+        $solpa='SP'.(substr($cor,2,strlen($cor)));
+        $casolpag->setSolpag($solpa);
+      }
+   }
+
+   if ($tienecorrelativo)
+   {
+     Herramientas::getSalvarCorrelativo('corpag','cacorrel','Referencia',$r,&$msg);
+   }
+  	$casolpag->setStasol('A');
+  	$casolpag->save();
+  	self::grabarDetalleSolicitudPago($casolpag,$grid);
+  	self::grabarCompromisoSolicitudPago($casolpag,$grid);
+  }
+
+  public static function grabarDetalleSolicitudPago($casolpag,$grid)
+  {
+    $x=$grid[0];
+    $j=0;
+    while ($j<count($x))
+    {
+      if ($x[$j]->getCodpre()!='' && $x[$j]->getMoncom()>0)
+      {
+      	$x[$j]->setSolpag($casolpag->getSolpag());
+        $x[$j]->save();
+      }
+      $j++;
+    }
+
+    $z=$grid[1];
+    $j=0;
+    if (!empty($z[$j]))
+    {
+      while ($j<count($z))
+      {
+        $z[$j]->delete();
+        $j++;
+      }
+    }
+  }
+
+  public static function grabarCompromisoSolicitudPago($casolpag,$grid)
+  {
+    $cpcompro= new Cpcompro();
+    $cpcompro->setRefcom($casolpag->getSolpag());
+    $cpcompro->setTipcom($casolpag->getTipcom());
+    $cpcompro->setCedrif($casolpag->getCedrif());
+    $cpcompro->setFeccom($casolpag->getFecsol());
+    $cpcompro->setAnno(substr($casolpag->getFecsol(),0,4));
+    $cpcompro->setRefprc(null);
+    $cpcompro->setTipprc(null);
+    $cpcompro->setDescom($casolpag->getDessol());
+    $cpcompro->setDesanu(null);
+    $cpcompro->setMoncom($casolpag->getMonsol());
+    $cpcompro->setSalcau(0);
+    $cpcompro->setSalpag(0);
+    $cpcompro->setSalaju(0);
+    $cpcompro->setStacom('A');
+    $cpcompro->save();
+
+    self::grabarDetalleImputacionesSolPag($casolpag,$grid);
+  }
+
+  public static function grabarDetalleImputacionesSolPag($casolpag,$grid)
+  {
+    $x=$grid[0];
+    $j=0;
+    while ($j<count($x))
+    {
+      if ($x[$j]->getCodpre()!='' && $x[$j]->getMoncom()>0)
+      {
+      	$cpimpcom= new Cpimpcom();
+      	$cpimpcom->setRefcom($casolpag->getSolpag());
+      	$cpimpcom->setCodpre($x[$j]->getCodpre());
+      	$cpimpcom->setMonimp($x[$j]->getMoncom());
+        $cpimpcom->setMoncau(0);
+        $cpimpcom->setMonpag(0);
+        $cpimpcom->setMonaju(0);
+        $cpimpcom->setStaimp('A');
+        $cpimpcom->setRefere('NULO');
+      	$cpimpcom->save();
+      }
+      $j++;
+    }
+  }
+
+  public static function eliminarSolicitudPago($casolpag)
+  {
+     Herramientas::EliminarRegistro('Cpimpcom','Refcom',$casolpag->getSolpag());
+     Herramientas::EliminarRegistro('Cpcompro','Refcom',$casolpag->getSolpag());
+     Herramientas::EliminarRegistro('Cadetpag','Solpag',$casolpag->getSolpag());
+     $casolpag->delete();
+  }
+
+    public static function actualizacionSolicitudEgresos($reqart, $actsolegr, & $error) {
     $gridnuevo = array ();
     $gridnuevo2 = array ();
     $gridnuevorec = array ();
@@ -2555,4 +2671,5 @@ public static function actualizacionSolicitudEgresos($reqart, $actsolegr, & $err
     }
     return true;
   }
+
 }

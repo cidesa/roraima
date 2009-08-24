@@ -77,7 +77,7 @@ function distribuirExistencia()
 		      z++;
 		    }
 		  }
-		  actualizarsaldos_b();
+		  actualizarsaldos_c();
   }
   else
   {
