@@ -103,3 +103,8 @@ CREATE TABLE "segranapr"
 );
 
 COMMENT ON TABLE "segranapr" IS 'Tabla para definir rangos(UT) x Niveles de Aprobación';
+
+--Grabar usuario que realiza la aprobación y fecha de aprobación Desireé Martínez
+ALTER TABLE "casolart"
+  ADD COLUMN "usuapr" varchar(100),
+  ADD COLUMN "fecapr" DATE;
