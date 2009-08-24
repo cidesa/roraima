@@ -133,7 +133,7 @@ class nomdefespseghcmActions extends autonomdefespseghcmActions
     $col2->setAlineacionObjeto(Columna::IZQUIERDA);
     $col2->setAlineacionContenido(Columna::IZQUIERDA);
     $col2->setNombreCampo('edaddes');
-    $col2->setHTML('type="text" size="20" ');
+    $col2->setHTML('type="text" size="10" ');
 	
 	$col3 = new Columna('Edad Hasta');
     $col3->setTipo(Columna::TEXTO);
@@ -141,21 +141,39 @@ class nomdefespseghcmActions extends autonomdefespseghcmActions
     $col3->setAlineacionObjeto(Columna::IZQUIERDA);
     $col3->setAlineacionContenido(Columna::IZQUIERDA);
     $col3->setNombreCampo('edadhas');
-    $col3->setHTML('type="text" size="20" ');
+    $col3->setHTML('type="text" size="10" ');
 	
 	$col4 = new Columna('Monto');
     $col4->setTipo(Columna::MONTO);
 	$col4->setEsGrabable(true);
     $col4->setAlineacionObjeto(Columna::IZQUIERDA);
     $col4->setAlineacionContenido(Columna::IZQUIERDA);
-    $col4->setNombreCampo('monto');
-    $col4->setHTML('type="text" size="40" ');
+    $col4->setNombreCampo('montototal');
+    $col4->setHTML('type="text" size="20" ');
+	
+	$col5 = new Columna('Cuota');
+    $col5->setTipo(Columna::TEXTO);
+	$col5->setEsGrabable(true);
+    $col5->setAlineacionObjeto(Columna::IZQUIERDA);
+    $col5->setAlineacionContenido(Columna::IZQUIERDA);
+    $col5->setNombreCampo('cuota');
+    $col5->setHTML('type="text" size="10" onBlur="actualizarmontocuota(this);"');
+	
+	$col6 = new Columna('Monto Cuota');
+    $col6->setTipo(Columna::MONTO);
+	$col6->setEsGrabable(true);
+    $col6->setAlineacionObjeto(Columna::IZQUIERDA);
+    $col6->setAlineacionContenido(Columna::IZQUIERDA);
+    $col6->setNombreCampo('monto');
+    $col6->setHTML('type="text" size="20" ');
 
     // Se guardan las columnas en el objetos de opciones
     $opciones->addColumna($col1);
     $opciones->addColumna($col2);
 	$opciones->addColumna($col3);
 	$opciones->addColumna($col4);
+	$opciones->addColumna($col5);
+	$opciones->addColumna($col6);
 
     // Se genera el arreglo de opciones necesario para generar el grid
     $this->obj_parientes = $opciones->getConfig($per);
