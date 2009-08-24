@@ -261,6 +261,40 @@ class Tesoreria {
 
   }
 
+
+	public static function hacer_Conciliables_Inconciliables($nro, $mes, $ano, $fechas) {
+  	  $dateFormat = new sfDateFormat('es_VE');
+      $fechas = $dateFormat->format($fechas, 'i', $dateFormat->getInputPattern('d'));
+
+  	  $c=new Criteria();
+	  $c->add(TsmovlibPeer::NUMCUE,$nro);
+	  $c->add(TsmovlibPeer::FECLIB,$fechas,Criteria::LESS_EQUAL);
+	  $c->add(TsmovlibPeer::STACON1,'C');
+	  $reg = TsmovlibPeer::doSelect($c);
+
+	  if ($reg){
+	      foreach ($reg as $tsconcil) {
+	        $tsconcil->setStacon('C');
+	        $tsconcil->save();
+	  	  }
+
+      }
+      //Bancos
+  	  $c=new Criteria();
+	  $c->add(TsmovbanPeer::NUMCUE,$nro);
+	  $c->add(TsmovbanPeer::FECBAN,$fechas,Criteria::LESS_EQUAL);
+	  $c->add(TsmovbanPeer::STACON1,'C');
+	  $reg = TsmovbanPeer::doSelect($c);
+
+	  if ($reg){
+	      foreach ($reg as $tstemigu) {
+	        $tstemigu->setStacon('C');
+	        $tstemigu->save();
+	  	  }
+
+      }
+  }
+
   public static function hacer_Conciliables_Anulados($nro, $mes, $ano, $fechas) {
     $sql = "Select reflibpad,tipmovpad
                  From TSMovLib
@@ -390,7 +424,7 @@ class Tesoreria {
           A.RefLib = B.RefBan And A.TipMov=B.TipMov And
                 A.FecLib <= To_Date('" . $fechas . "','DD/MM/YYYY') And
                 B.FecBan <= To_Date('" . $fechas . "','DD/MM/YYYY') And
-                A.MonMov <> B.MonMov";
+                A.MonMov <> B.MonMov and A.stacon='N'";
 
     if (Herramientas :: BuscarDatos($sql, & $result)) {
       foreach ($result as $tstemigu) {
@@ -430,11 +464,11 @@ class Tesoreria {
     $result = TsconcilPeer :: doSelect($c);
     if ($result)
     {
-    foreach ($result as $tsconcil) {
-      $tsconcil->delete();
+	    foreach ($result as $tsconcil) {
+	      $tsconcil->delete();
+	    }
     }
-    }
-
+    
     //ANULANDO MOVIMIENTOS SEGUN LIBROS
     $c = new Criteria();
     $c->add(TsmovlibPeer :: NUMCUE, $nro);
@@ -444,12 +478,31 @@ class Tesoreria {
 
     if ($result)
     {
-    foreach ($result as $tsmovlib) {
-      $tsmovlib->setStacon('N');
-      $tsmovlib->save();
-    }
+	    foreach ($result as $tsmovlib) {
+	      $tsmovlib->setStacon('N');
+	      $tsmovlib->save();
+	    }
     }
 
+    $fecdes = "01/".$mes."/".$ano;
+    $fecdes = $this->transformarFecha($fecdes);
+
+    $c = new Criteria();
+    $c->add(TsmovlibPeer :: NUMCUE, $nro);
+    $a->add(TsmovlibPeer::FECLIB,$fecdes,Criteria::GREATER_EQUAL);
+    $c->add(TsmovlibPeer :: STACON1, 'C');
+    $result = TsmovlibPeer :: doSelect($c);
+
+    if ($result)
+    {
+	    foreach ($result as $tsmovlib) {
+	      $tsmovlib->setStacon1('N');
+	      $tsmovlib->save();
+	    }
+    }
+
+
+	$c=new criteria();
     //ANULANDO MOVIMIENTOS SEGUN BANCOS
     $c = new Criteria();
     $c->add(TsmovbanPeer :: NUMCUE, $nro);
@@ -459,11 +512,43 @@ class Tesoreria {
 
     if ($result)
     {
-    foreach ($result as $tsmovban) {
-      $tsmovban->setStacon('N');
-      $tsmovban->save();
+	    foreach ($result as $tsmovban) {
+	      $tsmovban->setStacon('N');
+	      $tsmovban->save();
+	    }
     }
+
+    $c = new Criteria();
+    $c->add(TsmovbanPeer :: NUMCUE, $nro);
+    $a->add(TsmovbanPeer::FECBAN,$fecdes,Criteria::GREATER_EQUAL);
+    $c->add(TsmovbanPeer :: STACON1, 'C');
+    $result = TsmovbanPeer :: doSelect($c);
+
+    if ($result)
+    {
+	    foreach ($result as $tsmovban) {
+	      $tsmovban->setStacon1('N');
+	      $tsmovban->save();
+	    }
     }
+
+//// VB-Fuente de Tachira
+  /*  $c = new Criteria();
+    $c->add(TsmovbanPeer :: NUMCUE, $nro);
+    $sql = "Tsmovban.tipmov<>'ANUC' AND Tsmovban.fecban >='$fecdes' AND Tsmovban.stacon1='C'";
+    $c->add(TsmovbanPeer :: TIPMOV, $sql, Criteria :: CUSTOM);
+    $result = TsmovbanPeer :: doSelect($c);
+
+    if ($result)
+    {
+	    foreach ($result as $tsmovban) {
+	      $tsmovban->setStacon1('N');
+	      $tsmovban->save();
+	    }
+    }
+
+/////*/
+
   }
 
   public static function actualizar_Status($nro, $refere, $status) {
@@ -2025,6 +2110,7 @@ class Tesoreria {
     }else
     {return true;}
   }
+
 
   public static function salvarRelaciones($tsrelasiord,$grid)
   {
