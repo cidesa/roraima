@@ -48,6 +48,10 @@ class NpseghcmMapBuilder {
 
 		$tMap->addColumn('MONTO', 'Monto', 'double', CreoleTypes::NUMERIC, false, 14);
 
+		$tMap->addColumn('CUOTA', 'Cuota', 'int', CreoleTypes::INTEGER, false, null);
+
+		$tMap->addColumn('MONTOTOTAL', 'Montototal', 'double', CreoleTypes::NUMERIC, false, 14);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 
