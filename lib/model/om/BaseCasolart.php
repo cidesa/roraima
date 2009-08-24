@@ -81,6 +81,14 @@ abstract class BaseCasolart extends BaseObject  implements Persistent {
 
 
 	
+	protected $usuapr;
+
+
+	
+	protected $fecapr;
+
+
+	
 	protected $id;
 
 	
@@ -248,6 +256,35 @@ abstract class BaseCasolart extends BaseObject  implements Persistent {
     return $this->aprreq;
 
   }
+  
+  public function getUsuapr()
+  {
+
+    return $this->usuapr;
+
+  }
+  
+  public function getFecapr($format = 'Y-m-d')
+  {
+
+    if ($this->fecapr === null || $this->fecapr === '') {
+      return null;
+    } elseif (!is_int($this->fecapr)) {
+            $ts = adodb_strtotime($this->fecapr);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecapr] as date/time value: " . var_export($this->fecapr, true));
+      }
+    } else {
+      $ts = $this->fecapr;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
   
   public function getId()
   {
@@ -450,6 +487,33 @@ abstract class BaseCasolart extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setUsuapr($v)
+	{
+
+    if ($this->usuapr !== $v) {
+        $this->usuapr = $v;
+        $this->modifiedColumns[] = CasolartPeer::USUAPR;
+      }
+  
+	} 
+	
+	public function setFecapr($v)
+	{
+
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecapr] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecapr !== $ts) {
+      $this->fecapr = $ts;
+      $this->modifiedColumns[] = CasolartPeer::FECAPR;
+    }
+
+	} 
+	
 	public function setId($v)
 	{
 
@@ -500,7 +564,11 @@ abstract class BaseCasolart extends BaseObject  implements Persistent {
 
       $this->aprreq = $rs->getString($startcol + 17);
 
-      $this->id = $rs->getInt($startcol + 18);
+      $this->usuapr = $rs->getString($startcol + 18);
+
+      $this->fecapr = $rs->getDate($startcol + 19, null);
+
+      $this->id = $rs->getInt($startcol + 20);
 
       $this->resetModified();
 
@@ -508,7 +576,7 @@ abstract class BaseCasolart extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 19; 
+            return $startcol + 21; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Casolart object", $e);
     }
@@ -710,6 +778,12 @@ abstract class BaseCasolart extends BaseObject  implements Persistent {
 				return $this->getAprreq();
 				break;
 			case 18:
+				return $this->getUsuapr();
+				break;
+			case 19:
+				return $this->getFecapr();
+				break;
+			case 20:
 				return $this->getId();
 				break;
 			default:
@@ -740,7 +814,9 @@ abstract class BaseCasolart extends BaseObject  implements Persistent {
 			$keys[15] => $this->getTipfin(),
 			$keys[16] => $this->getTipreq(),
 			$keys[17] => $this->getAprreq(),
-			$keys[18] => $this->getId(),
+			$keys[18] => $this->getUsuapr(),
+			$keys[19] => $this->getFecapr(),
+			$keys[20] => $this->getId(),
 		);
 		return $result;
 	}
@@ -811,6 +887,12 @@ abstract class BaseCasolart extends BaseObject  implements Persistent {
 				$this->setAprreq($value);
 				break;
 			case 18:
+				$this->setUsuapr($value);
+				break;
+			case 19:
+				$this->setFecapr($value);
+				break;
+			case 20:
 				$this->setId($value);
 				break;
 		} 	}
@@ -838,7 +920,9 @@ abstract class BaseCasolart extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[15], $arr)) $this->setTipfin($arr[$keys[15]]);
 		if (array_key_exists($keys[16], $arr)) $this->setTipreq($arr[$keys[16]]);
 		if (array_key_exists($keys[17], $arr)) $this->setAprreq($arr[$keys[17]]);
-		if (array_key_exists($keys[18], $arr)) $this->setId($arr[$keys[18]]);
+		if (array_key_exists($keys[18], $arr)) $this->setUsuapr($arr[$keys[18]]);
+		if (array_key_exists($keys[19], $arr)) $this->setFecapr($arr[$keys[19]]);
+		if (array_key_exists($keys[20], $arr)) $this->setId($arr[$keys[20]]);
 	}
 
 	
@@ -864,6 +948,8 @@ abstract class BaseCasolart extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CasolartPeer::TIPFIN)) $criteria->add(CasolartPeer::TIPFIN, $this->tipfin);
 		if ($this->isColumnModified(CasolartPeer::TIPREQ)) $criteria->add(CasolartPeer::TIPREQ, $this->tipreq);
 		if ($this->isColumnModified(CasolartPeer::APRREQ)) $criteria->add(CasolartPeer::APRREQ, $this->aprreq);
+		if ($this->isColumnModified(CasolartPeer::USUAPR)) $criteria->add(CasolartPeer::USUAPR, $this->usuapr);
+		if ($this->isColumnModified(CasolartPeer::FECAPR)) $criteria->add(CasolartPeer::FECAPR, $this->fecapr);
 		if ($this->isColumnModified(CasolartPeer::ID)) $criteria->add(CasolartPeer::ID, $this->id);
 
 		return $criteria;
@@ -930,6 +1016,10 @@ abstract class BaseCasolart extends BaseObject  implements Persistent {
 		$copyObj->setTipreq($this->tipreq);
 
 		$copyObj->setAprreq($this->aprreq);
+
+		$copyObj->setUsuapr($this->usuapr);
+
+		$copyObj->setFecapr($this->fecapr);
 
 
 		$copyObj->setNew(true);

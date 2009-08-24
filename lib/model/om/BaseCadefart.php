@@ -185,6 +185,10 @@ abstract class BaseCadefart extends BaseObject  implements Persistent {
 
 
 	
+	protected $tipdocpre;
+
+
+	
 	protected $id;
 
 	
@@ -507,6 +511,13 @@ abstract class BaseCadefart extends BaseObject  implements Persistent {
   {
 
     return trim($this->gencorart);
+
+  }
+  
+  public function getTipdocpre()
+  {
+
+    return trim($this->tipdocpre);
 
   }
   
@@ -957,6 +968,16 @@ abstract class BaseCadefart extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setTipdocpre($v)
+	{
+
+    if ($this->tipdocpre !== $v) {
+        $this->tipdocpre = $v;
+        $this->modifiedColumns[] = CadefartPeer::TIPDOCPRE;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -1059,7 +1080,9 @@ abstract class BaseCadefart extends BaseObject  implements Persistent {
 
       $this->gencorart = $rs->getString($startcol + 43);
 
-      $this->id = $rs->getInt($startcol + 44);
+      $this->tipdocpre = $rs->getString($startcol + 44);
+
+      $this->id = $rs->getInt($startcol + 45);
 
       $this->resetModified();
 
@@ -1067,7 +1090,7 @@ abstract class BaseCadefart extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 45; 
+            return $startcol + 46; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Cadefart object", $e);
     }
@@ -1347,6 +1370,9 @@ abstract class BaseCadefart extends BaseObject  implements Persistent {
 				return $this->getGencorart();
 				break;
 			case 44:
+				return $this->getTipdocpre();
+				break;
+			case 45:
 				return $this->getId();
 				break;
 			default:
@@ -1403,7 +1429,8 @@ abstract class BaseCadefart extends BaseObject  implements Persistent {
 			$keys[41] => $this->getReqreqapr(),
 			$keys[42] => $this->getSolreqapr(),
 			$keys[43] => $this->getGencorart(),
-			$keys[44] => $this->getId(),
+			$keys[44] => $this->getTipdocpre(),
+			$keys[45] => $this->getId(),
 		);
 		return $result;
 	}
@@ -1552,6 +1579,9 @@ abstract class BaseCadefart extends BaseObject  implements Persistent {
 				$this->setGencorart($value);
 				break;
 			case 44:
+				$this->setTipdocpre($value);
+				break;
+			case 45:
 				$this->setId($value);
 				break;
 		} 	}
@@ -1605,7 +1635,8 @@ abstract class BaseCadefart extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[41], $arr)) $this->setReqreqapr($arr[$keys[41]]);
 		if (array_key_exists($keys[42], $arr)) $this->setSolreqapr($arr[$keys[42]]);
 		if (array_key_exists($keys[43], $arr)) $this->setGencorart($arr[$keys[43]]);
-		if (array_key_exists($keys[44], $arr)) $this->setId($arr[$keys[44]]);
+		if (array_key_exists($keys[44], $arr)) $this->setTipdocpre($arr[$keys[44]]);
+		if (array_key_exists($keys[45], $arr)) $this->setId($arr[$keys[45]]);
 	}
 
 	
@@ -1657,6 +1688,7 @@ abstract class BaseCadefart extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CadefartPeer::REQREQAPR)) $criteria->add(CadefartPeer::REQREQAPR, $this->reqreqapr);
 		if ($this->isColumnModified(CadefartPeer::SOLREQAPR)) $criteria->add(CadefartPeer::SOLREQAPR, $this->solreqapr);
 		if ($this->isColumnModified(CadefartPeer::GENCORART)) $criteria->add(CadefartPeer::GENCORART, $this->gencorart);
+		if ($this->isColumnModified(CadefartPeer::TIPDOCPRE)) $criteria->add(CadefartPeer::TIPDOCPRE, $this->tipdocpre);
 		if ($this->isColumnModified(CadefartPeer::ID)) $criteria->add(CadefartPeer::ID, $this->id);
 
 		return $criteria;
@@ -1775,6 +1807,8 @@ abstract class BaseCadefart extends BaseObject  implements Persistent {
 		$copyObj->setSolreqapr($this->solreqapr);
 
 		$copyObj->setGencorart($this->gencorart);
+
+		$copyObj->setTipdocpre($this->tipdocpre);
 
 
 		$copyObj->setNew(true);

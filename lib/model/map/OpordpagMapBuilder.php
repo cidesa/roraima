@@ -152,6 +152,8 @@ class OpordpagMapBuilder {
 
 		$tMap->addColumn('CODCONCEPTO', 'Codconcepto', 'string', CreoleTypes::VARCHAR, false, 4);
 
+		$tMap->addColumn('NUMFORPRE', 'Numforpre', 'string', CreoleTypes::VARCHAR, false, 8);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

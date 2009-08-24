@@ -122,6 +122,8 @@ class CadefartMapBuilder {
 
 		$tMap->addColumn('GENCORART', 'Gencorart', 'string', CreoleTypes::VARCHAR, false, 1);
 
+		$tMap->addColumn('TIPDOCPRE', 'Tipdocpre', 'string', CreoleTypes::VARCHAR, false, 4);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

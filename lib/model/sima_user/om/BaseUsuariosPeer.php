@@ -13,7 +13,7 @@ abstract class BaseUsuariosPeer {
 	const CLASS_DEFAULT = 'lib.model.sima_user.Usuarios';
 
 	
-	const NUM_COLUMNS = 11;
+	const NUM_COLUMNS = 12;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -50,6 +50,9 @@ abstract class BaseUsuariosPeer {
 	const CODCAT = 'usuarios.CODCAT';
 
 	
+	const CODNIV = 'usuarios.CODNIV';
+
+	
 	const ID = 'usuarios.ID';
 
 	
@@ -58,18 +61,18 @@ abstract class BaseUsuariosPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Loguse', 'Nomuse', 'Apluse', 'Numemp', 'Pasuse', 'Diremp', 'Telemp', 'Cedemp', 'Numuni', 'Codcat', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (UsuariosPeer::LOGUSE, UsuariosPeer::NOMUSE, UsuariosPeer::APLUSE, UsuariosPeer::NUMEMP, UsuariosPeer::PASUSE, UsuariosPeer::DIREMP, UsuariosPeer::TELEMP, UsuariosPeer::CEDEMP, UsuariosPeer::NUMUNI, UsuariosPeer::CODCAT, UsuariosPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('loguse', 'nomuse', 'apluse', 'numemp', 'pasuse', 'diremp', 'telemp', 'cedemp', 'numuni', 'codcat', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
+		BasePeer::TYPE_PHPNAME => array ('Loguse', 'Nomuse', 'Apluse', 'Numemp', 'Pasuse', 'Diremp', 'Telemp', 'Cedemp', 'Numuni', 'Codcat', 'Codniv', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (UsuariosPeer::LOGUSE, UsuariosPeer::NOMUSE, UsuariosPeer::APLUSE, UsuariosPeer::NUMEMP, UsuariosPeer::PASUSE, UsuariosPeer::DIREMP, UsuariosPeer::TELEMP, UsuariosPeer::CEDEMP, UsuariosPeer::NUMUNI, UsuariosPeer::CODCAT, UsuariosPeer::CODNIV, UsuariosPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('loguse', 'nomuse', 'apluse', 'numemp', 'pasuse', 'diremp', 'telemp', 'cedemp', 'numuni', 'codcat', 'codniv', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Loguse' => 0, 'Nomuse' => 1, 'Apluse' => 2, 'Numemp' => 3, 'Pasuse' => 4, 'Diremp' => 5, 'Telemp' => 6, 'Cedemp' => 7, 'Numuni' => 8, 'Codcat' => 9, 'Id' => 10, ),
-		BasePeer::TYPE_COLNAME => array (UsuariosPeer::LOGUSE => 0, UsuariosPeer::NOMUSE => 1, UsuariosPeer::APLUSE => 2, UsuariosPeer::NUMEMP => 3, UsuariosPeer::PASUSE => 4, UsuariosPeer::DIREMP => 5, UsuariosPeer::TELEMP => 6, UsuariosPeer::CEDEMP => 7, UsuariosPeer::NUMUNI => 8, UsuariosPeer::CODCAT => 9, UsuariosPeer::ID => 10, ),
-		BasePeer::TYPE_FIELDNAME => array ('loguse' => 0, 'nomuse' => 1, 'apluse' => 2, 'numemp' => 3, 'pasuse' => 4, 'diremp' => 5, 'telemp' => 6, 'cedemp' => 7, 'numuni' => 8, 'codcat' => 9, 'id' => 10, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
+		BasePeer::TYPE_PHPNAME => array ('Loguse' => 0, 'Nomuse' => 1, 'Apluse' => 2, 'Numemp' => 3, 'Pasuse' => 4, 'Diremp' => 5, 'Telemp' => 6, 'Cedemp' => 7, 'Numuni' => 8, 'Codcat' => 9, 'Codniv' => 10, 'Id' => 11, ),
+		BasePeer::TYPE_COLNAME => array (UsuariosPeer::LOGUSE => 0, UsuariosPeer::NOMUSE => 1, UsuariosPeer::APLUSE => 2, UsuariosPeer::NUMEMP => 3, UsuariosPeer::PASUSE => 4, UsuariosPeer::DIREMP => 5, UsuariosPeer::TELEMP => 6, UsuariosPeer::CEDEMP => 7, UsuariosPeer::NUMUNI => 8, UsuariosPeer::CODCAT => 9, UsuariosPeer::CODNIV => 10, UsuariosPeer::ID => 11, ),
+		BasePeer::TYPE_FIELDNAME => array ('loguse' => 0, 'nomuse' => 1, 'apluse' => 2, 'numemp' => 3, 'pasuse' => 4, 'diremp' => 5, 'telemp' => 6, 'cedemp' => 7, 'numuni' => 8, 'codcat' => 9, 'codniv' => 10, 'id' => 11, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
 	);
 
 	
@@ -142,6 +145,8 @@ abstract class BaseUsuariosPeer {
 		$criteria->addSelectColumn(UsuariosPeer::NUMUNI);
 
 		$criteria->addSelectColumn(UsuariosPeer::CODCAT);
+
+		$criteria->addSelectColumn(UsuariosPeer::CODNIV);
 
 		$criteria->addSelectColumn(UsuariosPeer::ID);
 

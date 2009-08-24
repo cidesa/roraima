@@ -20,6 +20,7 @@ class Cadetcot extends BaseCadetcot
        $this->desart= Herramientas::getX('CODART','Caregart','Desart',self::getCodart());;
        $reqart= Herramientas::getX('REFCOT','Cacotiza','Refsol',self::getRefcot());;
 	   $monrecargo=0;
+	   $tipdoc=Compras::ObtenerTipoDocumentoPrecompromiso();
        $cri = new Criteria();
        $cri->add(CaartsolPeer::REQART,$reqart);
        $cri->add(CaartsolPeer::CODART,self::getCodart());
@@ -31,7 +32,7 @@ class Cadetcot extends BaseCadetcot
 			 $c->add(CadisrgoPeer::REQART,$reqart);
 			 $c->add(CadisrgoPeer::CODART,$solegr->getCodart());
 			 $c->add(CadisrgoPeer::CODCAT,$solegr->getCodcat());
-			 $c->add(CadisrgoPeer::TIPDOC,'SAE');
+			 $c->add(CadisrgoPeer::TIPDOC,$tipdoc);
 			 $result=CadisrgoPeer::doSelect($c);
 			 if ($result)
 			 {
