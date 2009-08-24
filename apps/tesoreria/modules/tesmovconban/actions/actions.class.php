@@ -81,6 +81,7 @@ class tesmovconbanActions extends autotesmovconbanActions
 				Tesoreria::elimina_Conciliaciones_Anteriores($nro);
 				Tesoreria::hacer_Conciliables_Anulados($nro,$mes,$ano,$fechas);
 				Tesoreria::hacer_Conciliables($nro,$mes,$ano,$fechas);
+				Tesoreria::hacer_Conciliables_Inconciliables($nro,$mes,$ano,$fechas);
 				Tesoreria::hacer_Libro_No_Banco($nro,$mes,$ano,$fechas);
 				Tesoreria::hacer_Banco_No_Libro($nro,$mes,$ano,$fechas);
 				Tesoreria::hacer_No_Conciliables($nro,$mes,$ano,$fechas);
