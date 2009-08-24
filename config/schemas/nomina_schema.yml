@@ -5701,6 +5701,12 @@ propel:
       type: NUMERIC
       size: 14
       scale: 2
+    cuota:
+      type: INTEGER
+    montototal:
+      type: NUMERIC
+      size: 14
+      scale: 2    
     id:
       type: INTEGER
       required: true
