@@ -16,4 +16,17 @@
 		$('npseghcm_codcon').readOnly=true;
 		$('npseghcm_codconapo').readOnly=true;
 	}	
+	function actualizarmontocuota(t)
+	{
+		var id = t.id;
+		var aux = id.split("_");
+		var idnext = aux[0]+"_"+aux[1]+"_"+(parseInt(aux[2])+1)
+		var idprev = aux[0]+"_"+aux[1]+"_"+(parseInt(aux[2])-1)
+		var valprev = $(idprev).value.replace('.','');
+		valprev = valprev.replace(',','.');
+		var val = $(id).value;
+		
+        $(idnext).value=number_format(parseFloat(valprev)/parseFloat(val),'2',',','.');
+		
+	}
 </script>
