@@ -37,6 +37,14 @@ abstract class BaseNpseghcm extends BaseObject  implements Persistent {
 
 
 	
+	protected $cuota;
+
+
+	
+	protected $montototal;
+
+
+	
 	protected $id;
 
 	
@@ -95,6 +103,21 @@ abstract class BaseNpseghcm extends BaseObject  implements Persistent {
 
     if($val) return number_format($this->monto,2,',','.');
     else return $this->monto;
+
+  }
+  
+  public function getCuota()
+  {
+
+    return $this->cuota;
+
+  }
+  
+  public function getMontototal($val=false)
+  {
+
+    if($val) return number_format($this->montototal,2,',','.');
+    else return $this->montototal;
 
   }
   
@@ -175,6 +198,26 @@ abstract class BaseNpseghcm extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setCuota($v)
+	{
+
+    if ($this->cuota !== $v) {
+        $this->cuota = $v;
+        $this->modifiedColumns[] = NpseghcmPeer::CUOTA;
+      }
+  
+	} 
+	
+	public function setMontototal($v)
+	{
+
+    if ($this->montototal !== $v) {
+        $this->montototal = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpseghcmPeer::MONTOTOTAL;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -203,7 +246,11 @@ abstract class BaseNpseghcm extends BaseObject  implements Persistent {
 
       $this->monto = $rs->getFloat($startcol + 6);
 
-      $this->id = $rs->getInt($startcol + 7);
+      $this->cuota = $rs->getInt($startcol + 7);
+
+      $this->montototal = $rs->getFloat($startcol + 8);
+
+      $this->id = $rs->getInt($startcol + 9);
 
       $this->resetModified();
 
@@ -211,7 +258,7 @@ abstract class BaseNpseghcm extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 8; 
+            return $startcol + 10; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Npseghcm object", $e);
     }
@@ -380,6 +427,12 @@ abstract class BaseNpseghcm extends BaseObject  implements Persistent {
 				return $this->getMonto();
 				break;
 			case 7:
+				return $this->getCuota();
+				break;
+			case 8:
+				return $this->getMontototal();
+				break;
+			case 9:
 				return $this->getId();
 				break;
 			default:
@@ -399,7 +452,9 @@ abstract class BaseNpseghcm extends BaseObject  implements Persistent {
 			$keys[4] => $this->getEdaddes(),
 			$keys[5] => $this->getEdadhas(),
 			$keys[6] => $this->getMonto(),
-			$keys[7] => $this->getId(),
+			$keys[7] => $this->getCuota(),
+			$keys[8] => $this->getMontototal(),
+			$keys[9] => $this->getId(),
 		);
 		return $result;
 	}
@@ -437,6 +492,12 @@ abstract class BaseNpseghcm extends BaseObject  implements Persistent {
 				$this->setMonto($value);
 				break;
 			case 7:
+				$this->setCuota($value);
+				break;
+			case 8:
+				$this->setMontototal($value);
+				break;
+			case 9:
 				$this->setId($value);
 				break;
 		} 	}
@@ -453,7 +514,9 @@ abstract class BaseNpseghcm extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[4], $arr)) $this->setEdaddes($arr[$keys[4]]);
 		if (array_key_exists($keys[5], $arr)) $this->setEdadhas($arr[$keys[5]]);
 		if (array_key_exists($keys[6], $arr)) $this->setMonto($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setId($arr[$keys[7]]);
+		if (array_key_exists($keys[7], $arr)) $this->setCuota($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setMontototal($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setId($arr[$keys[9]]);
 	}
 
 	
@@ -468,6 +531,8 @@ abstract class BaseNpseghcm extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(NpseghcmPeer::EDADDES)) $criteria->add(NpseghcmPeer::EDADDES, $this->edaddes);
 		if ($this->isColumnModified(NpseghcmPeer::EDADHAS)) $criteria->add(NpseghcmPeer::EDADHAS, $this->edadhas);
 		if ($this->isColumnModified(NpseghcmPeer::MONTO)) $criteria->add(NpseghcmPeer::MONTO, $this->monto);
+		if ($this->isColumnModified(NpseghcmPeer::CUOTA)) $criteria->add(NpseghcmPeer::CUOTA, $this->cuota);
+		if ($this->isColumnModified(NpseghcmPeer::MONTOTOTAL)) $criteria->add(NpseghcmPeer::MONTOTOTAL, $this->montototal);
 		if ($this->isColumnModified(NpseghcmPeer::ID)) $criteria->add(NpseghcmPeer::ID, $this->id);
 
 		return $criteria;
@@ -512,6 +577,10 @@ abstract class BaseNpseghcm extends BaseObject  implements Persistent {
 		$copyObj->setEdadhas($this->edadhas);
 
 		$copyObj->setMonto($this->monto);
+
+		$copyObj->setCuota($this->cuota);
+
+		$copyObj->setMontototal($this->montototal);
 
 
 		$copyObj->setNew(true);
