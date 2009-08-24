@@ -709,9 +709,10 @@ class Compras {
       }//while
 
    //Grabar datos en la  tabla cargosol
+   $tipdoc=Compras::ObtenerTipoDocumentoPrecompromiso();
    $c= new Criteria();
    $c->add(CargosolPeer::REQART,$reqart);
-   $c->add(CargosolPeer::TIPDOC,'SAE');
+   $c->add(CargosolPeer::TIPDOC,$tipdoc);
    CargosolPeer::doDelete($c);
 
 
@@ -720,13 +721,14 @@ class Compras {
    if (Herramientas::BuscarDatos($sql,&$result))
     {
       $i=0;
+      $tipdoc=Compras::ObtenerTipoDocumentoPrecompromiso();
       while ($i<count($result))
       {
         $cargosol= new Cargosol();
         $cargosol->setReqart($reqart);
         $cargosol->setCodrgo($result[$i]['codrgo']);
         $cargosol->setMonrgo($result[$i]['monrgo']);
-         $cargosol->setTipdoc('SAE');
+         $cargosol->setTipdoc($tipdoc);
          $cargosol->save();
          $i++;
        }// while ($i<count($result))
@@ -757,10 +759,11 @@ class Compras {
       $c->add(CasolartPeer :: REQART, $referencia);
       $data = CasolartPeer :: doSelectOne($c);
       if ($data) {
+      	$tipdoc=Compras::ObtenerTipoDocumentoPrecompromiso();
         $cpprecom = new Cpprecom();
         $cpprecom->setRefprc($referencia);
         $cpprecom->setFecprc($data->getFecreq());
-        $cpprecom->setTipprc('SAE');
+        $cpprecom->setTipprc($tipdoc);
         $cpprecom->setAnoprc(substr($data->getFecreq(), 0, 4));
         $cpprecom->setDesanu(null);
         $cpprecom->setDesprc($data->getDesreq());
@@ -2320,6 +2323,21 @@ class Compras {
     {
       return -1;
     }
+  }
+
+  public static function ObtenerTipoDocumentoPrecompromiso()
+  {
+      $cri= new Criteria();
+      $dato= CadefartPeer::doSelectOne($cri);
+      if ($dato)
+      {
+      	$tipdoc=$dato->getTipdocpre();
+      }
+      else
+      {
+      	$tipdoc="SAE";
+      }
+      return $tipdoc;
   }
 
   public static function asignarPrioridadCostArt($reqart)

@@ -215,9 +215,10 @@ $this->Bitacora('Guardo');
         {
           $dato=rtrim(CasolartPeer::getDesreq($this->getRequestParameter('codigo')));
           $mondes=number_format(Herramientas::getX('REQART','Casolart','mondes',$this->getRequestParameter('codigo')),2,',','.');
+          $tipdoc=Compras::ObtenerTipoDocumentoPrecompromiso();
           $c= new Criteria();
 	      $c->add(CadisrgoPeer::REQART,$this->getRequestParameter('codigo'));
-	      $c->add(CadisrgoPeer::TIPDOC,'SAE');
+	      $c->add(CadisrgoPeer::TIPDOC,$tipdoc);
 	      $arr_monrgo= CadisrgoPeer::doSelect($c);
 	      $monrgo=0;
 	      foreach ($arr_monrgo as $sum)
@@ -279,6 +280,7 @@ $this->Bitacora('Guardo');
        $cosact=$this->getRequestParameter('cosact');
 
        $monrecargo=0;
+	   $tipdoc=Compras::ObtenerTipoDocumentoPrecompromiso();
 
        $cri = new Criteria();
        $cri->add(CaartsolPeer::REQART,$reqart);
@@ -291,7 +293,7 @@ $this->Bitacora('Guardo');
 			 $c->add(CadisrgoPeer::REQART,$reqart);
 			 $c->add(CadisrgoPeer::CODART,$solegr->getCodart());
 			 $c->add(CadisrgoPeer::CODCAT,$solegr->getCodcat());
-			 $c->add(CadisrgoPeer::TIPDOC,'SAE');
+			 $c->add(CadisrgoPeer::TIPDOC,$tipdoc);
 			 $result=CadisrgoPeer::doSelect($c);
 			 if ($result)
 			 {

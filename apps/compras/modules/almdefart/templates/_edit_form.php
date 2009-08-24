@@ -8,14 +8,14 @@
   'multipart' => true,
 )) ?>
 
-<?php use_helper('tabs','SubmitClick','PopUp','Javascript') ?>
+<?php use_helper('tabs','SubmitClick','PopUp','Javascript','Catalogo') ?>
 <?php echo javascript_include_tag('tools','ajax','dFilter') ?>
 
 <?php echo object_input_hidden_tag($cadefart, 'getId') ?>
 <fieldset id="sf_fieldset_none" class="">
 <div class="form-row">
 <fieldset id="sf_fieldset_none" class="">
-<legend><?php echo _('Datos de la Empresa') ?></legend>
+<legend><h2><?php echo _('Datos de la Empresa') ?></h2></legend>
 <div class="form-row">
   <?php echo label_for('cadefart[nomemp]', __($labels['cadefart{nomemp}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('cadefart{nomemp}')): ?> form-error<?php endif; ?>">
@@ -63,7 +63,7 @@
 
 <?php tabMainJS("tp1","tabPane1", "tabPage1", 'Formatos de Códigos');?>
 <fieldset id="sf_fieldset_none" class="">
-<legend><?php echo __('Código de Artículo') ?></legend>
+<legend><h2><?php echo __('Código de Artículo') ?></h2></legend>
 <div class="form-row">
   <table>
    <tr>
@@ -166,7 +166,7 @@
 <br>
 
 <fieldset id="sf_fieldset_none" class="">
-<legend><?php echo __('Códigos de Ubicación') ?></legend>
+<legend><h2><?php echo __('Códigos de Ubicación') ?></h2></legend>
 <div class="form-row">
 <?php if ($esta1!='1') {?>
   <?php echo label_for('cadefart[forubi]', __($labels['cadefart{forubi}']), 'class="required" ') ?>
@@ -218,7 +218,7 @@
 <br>
 
 <fieldset id="sf_fieldset_none" class="">
-<legend><?php echo __('Código SNC') ?></legend>
+<legend><h2><?php echo __('Código SNC') ?></h2></legend>
 <div class="form-row">
   <?php echo label_for('cadefart[forsnc]', __($labels['cadefart{forsnc}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('cadefart{forsnc}')): ?> form-error<?php endif; ?>">
@@ -256,8 +256,8 @@
 <tr>
 <th>
 <fieldset id="sf_fieldset_none" class="">
-<legend><?php echo __('Imputación del Recargo') ?></legend>
-<div class="form-row">
+<legend><h2><?php echo __('Imputación del Recargo') ?></h2></legend>
+<div class="form-row" align="left">
  <?
 if ($cadefart->getAsiparrec()=='P')  {
   ?><?php echo radiobutton_tag('cadefart[asiparrec]', 'P', true)."Código Presupuestario".'<br> <br>';
@@ -283,7 +283,7 @@ if ($cadefart->getAsiparrec()=='P')  {
 </fieldset>
 
 
-<?php tabPageOpenClose("tp1", "tabPage3", 'Correlativos');?>
+<?php /* tabPageOpenClose("tp1", "tabPage3", 'Correlativos');?>
 <fieldset id="sf_fieldset_none" class="">
 <div class="form-row">
 
@@ -443,7 +443,7 @@ if ($cadefart->getAsiparrec()=='P')  {
     </div>
 </div>
 </fieldset>
-
+<? */ ?>
 
 
 
@@ -451,15 +451,14 @@ if ($cadefart->getAsiparrec()=='P')  {
 <fieldset id="sf_fieldset_none" class="">
 <div class="form-row">
 
- <table width="35%">
+ <table>
   <tr>
     <th align="left">
     <fieldset id="sf_fieldset_none" class="">
-    <legend><legend><?php echo __('Solicitud de Egresos') ?></legend></legend>
+    <legend><h2><?php echo __('Solicitud de Egresos') ?></h2></legend>
     <div class="form-row" width="100%">
       <table width="100%">
       <tr>
-      <th width="10%"></th>
       <th>
           <?php echo label_for('cadefart[prcasopre]', __($labels['cadefart{prcasopre}']), 'class="" style="width: 200px"') ?>
           <div class="content<?php if ($sf_request->hasError('cadefart{prcasopre}')): ?> form-error<?php endif; ?>">
@@ -476,7 +475,6 @@ if ($cadefart->getAsiparrec()=='P')  {
       </tr>
 
       <tr>
-      <th width="10%"></th>
       <th>
           <?php echo label_for('cadefart[prcreqapr]', __($labels['cadefart{prcreqapr}']), 'class="" style="width: 200px"') ?>
           <div class="content<?php if ($sf_request->hasError('cadefart{prcreqapr}')): ?> form-error<?php endif; ?>">
@@ -491,8 +489,18 @@ if ($cadefart->getAsiparrec()=='P')  {
             </div>
       </th>
       </tr>
-
+<tr>
+</tr>
       </table>
+              <?php echo label_for('cadefart[tipdocpre]', __($labels['cadefart{tipdocpre}']), 'class="" Style="width:200px"') ?>
+		  <?php echo Catalogo($cadefart,1,array(
+		  'getprincipal' => 'getTipdocpre',
+		  'getsecundario' => 'getNomdocpre',
+		  'campoprincipal' => 'tipdocpre',
+		  'camposecundario' => 'nomdocpre',
+		  'tamanoprincipal' => '6',
+		  'campobase' => 'id_ipdocpre',
+		  ), 'Preprecom_Cpdocprc', 'Cpdocprc', ''); ?>
       </div>
     </fieldset>
     </th>
@@ -500,11 +508,10 @@ if ($cadefart->getAsiparrec()=='P')  {
   <tr>
       <th align="left">
     <fieldset id="sf_fieldset_none" class="">
-    <legend><legend><?php echo __('Orden de Compra y Servicio') ?></legend></legend>
+    <legend><h2><?php echo __('Orden de Compra y Servicio') ?></h2></legend>
     <div class="form-row">
       <table width="100%">
       <tr>
-      <th width="10%"></th>
       <th>
           <?php echo label_for('cadefart[comasopre]', __($labels['cadefart{comasopre}']), 'class="" style="width: 200px"') ?>
           <div class="content<?php if ($sf_request->hasError('cadefart{comasopre}')): ?> form-error<?php endif; ?>">
@@ -521,7 +528,6 @@ if ($cadefart->getAsiparrec()=='P')  {
       </tr>
 
       <tr>
-      <th width="10%"></th>
       <th>
           <?php echo label_for('cadefart[comreqapr]', __($labels['cadefart{comreqapr}']), 'class="" style="width: 200px"') ?>
           <div class="content<?php if ($sf_request->hasError('cadefart{comreqapr}')): ?> form-error<?php endif; ?>">
