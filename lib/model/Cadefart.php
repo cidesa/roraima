@@ -100,4 +100,9 @@ class Cadefart extends BaseCadefart
 	if ($dato)
 	{ return $dato->getCorsal();}else { return '';}
   }
+
+   public function getNomdocpre()
+  {
+  	 return Herramientas::getX('TIPPRC','Cpdocprc','Nomext',self::getTipdocpre());
+  }
 }

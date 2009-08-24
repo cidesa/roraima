@@ -47,7 +47,7 @@ class Ocregcon extends BaseOcregcon
 
   public function getTotalc()
   {
-  	$sql="Select coalesce(Sum(MonCon/(1+PorIva/100)),0) as montotalc From OCRegCon where CodObr = '".self::getCodobr()."'";
+  	$sql="Select coalesce(Sum(MonCon/(1+PorIva/100)),0) as montotalc From OCRegCon where Codcon = '".self::getCodcon()."'";
   	if (Herramientas :: BuscarDatos($sql, & $result))
     {
       $valtotc=number_format($result[0]["montotalc"],2,',','.');

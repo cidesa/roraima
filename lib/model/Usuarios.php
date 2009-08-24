@@ -19,4 +19,9 @@ class Usuarios extends BaseUsuarios
     return Herramientas::getX('id','acunidad','nomuni',self::getNumuni());
   }
 
+  public function getDesniv(){
+
+    return Herramientas::getX('CODNIV','Segnivapr','Desniv',self::getCodniv());
+  }
+
 }

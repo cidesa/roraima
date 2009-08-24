@@ -49,6 +49,10 @@ abstract class BaseUsuarios extends BaseObject  implements Persistent {
 
 
 	
+	protected $codniv;
+
+
+	
 	protected $id;
 
 	
@@ -125,6 +129,13 @@ abstract class BaseUsuarios extends BaseObject  implements Persistent {
   {
 
     return trim($this->codcat);
+
+  }
+  
+  public function getCodniv()
+  {
+
+    return trim($this->codniv);
 
   }
   
@@ -235,6 +246,16 @@ abstract class BaseUsuarios extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setCodniv($v)
+	{
+
+    if ($this->codniv !== $v) {
+        $this->codniv = $v;
+        $this->modifiedColumns[] = UsuariosPeer::CODNIV;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -269,7 +290,9 @@ abstract class BaseUsuarios extends BaseObject  implements Persistent {
 
       $this->codcat = $rs->getString($startcol + 9);
 
-      $this->id = $rs->getInt($startcol + 10);
+      $this->codniv = $rs->getString($startcol + 10);
+
+      $this->id = $rs->getInt($startcol + 11);
 
       $this->resetModified();
 
@@ -277,7 +300,7 @@ abstract class BaseUsuarios extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 11; 
+            return $startcol + 12; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Usuarios object", $e);
     }
@@ -455,6 +478,9 @@ abstract class BaseUsuarios extends BaseObject  implements Persistent {
 				return $this->getCodcat();
 				break;
 			case 10:
+				return $this->getCodniv();
+				break;
+			case 11:
 				return $this->getId();
 				break;
 			default:
@@ -477,7 +503,8 @@ abstract class BaseUsuarios extends BaseObject  implements Persistent {
 			$keys[7] => $this->getCedemp(),
 			$keys[8] => $this->getNumuni(),
 			$keys[9] => $this->getCodcat(),
-			$keys[10] => $this->getId(),
+			$keys[10] => $this->getCodniv(),
+			$keys[11] => $this->getId(),
 		);
 		return $result;
 	}
@@ -524,6 +551,9 @@ abstract class BaseUsuarios extends BaseObject  implements Persistent {
 				$this->setCodcat($value);
 				break;
 			case 10:
+				$this->setCodniv($value);
+				break;
+			case 11:
 				$this->setId($value);
 				break;
 		} 	}
@@ -543,7 +573,8 @@ abstract class BaseUsuarios extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[7], $arr)) $this->setCedemp($arr[$keys[7]]);
 		if (array_key_exists($keys[8], $arr)) $this->setNumuni($arr[$keys[8]]);
 		if (array_key_exists($keys[9], $arr)) $this->setCodcat($arr[$keys[9]]);
-		if (array_key_exists($keys[10], $arr)) $this->setId($arr[$keys[10]]);
+		if (array_key_exists($keys[10], $arr)) $this->setCodniv($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setId($arr[$keys[11]]);
 	}
 
 	
@@ -561,6 +592,7 @@ abstract class BaseUsuarios extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(UsuariosPeer::CEDEMP)) $criteria->add(UsuariosPeer::CEDEMP, $this->cedemp);
 		if ($this->isColumnModified(UsuariosPeer::NUMUNI)) $criteria->add(UsuariosPeer::NUMUNI, $this->numuni);
 		if ($this->isColumnModified(UsuariosPeer::CODCAT)) $criteria->add(UsuariosPeer::CODCAT, $this->codcat);
+		if ($this->isColumnModified(UsuariosPeer::CODNIV)) $criteria->add(UsuariosPeer::CODNIV, $this->codniv);
 		if ($this->isColumnModified(UsuariosPeer::ID)) $criteria->add(UsuariosPeer::ID, $this->id);
 
 		return $criteria;
@@ -611,6 +643,8 @@ abstract class BaseUsuarios extends BaseObject  implements Persistent {
 		$copyObj->setNumuni($this->numuni);
 
 		$copyObj->setCodcat($this->codcat);
+
+		$copyObj->setCodniv($this->codniv);
 
 
 		$copyObj->setNew(true);

@@ -1,62 +1,47 @@
 <?php
 
 
-abstract class BaseCacorrelPeer {
+abstract class BaseCasolpagPeer {
 
 	
 	const DATABASE_NAME = 'propel';
 
 	
-	const TABLE_NAME = 'cacorrel';
+	const TABLE_NAME = 'casolpag';
 
 	
-	const CLASS_DEFAULT = 'lib.model.Cacorrel';
+	const CLASS_DEFAULT = 'lib.model.Casolpag';
 
 	
-	const NUM_COLUMNS = 13;
+	const NUM_COLUMNS = 8;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
 
 
 	
-	const CORCOM = 'cacorrel.CORCOM';
+	const SOLPAG = 'casolpag.SOLPAG';
 
 	
-	const CORSER = 'cacorrel.CORSER';
+	const FECSOL = 'casolpag.FECSOL';
 
 	
-	const CORSOL = 'cacorrel.CORSOL';
+	const DESSOL = 'casolpag.DESSOL';
 
 	
-	const CORREQ = 'cacorrel.CORREQ';
+	const TIPCOM = 'casolpag.TIPCOM';
 
 	
-	const CORREC = 'cacorrel.CORREC';
+	const CEDRIF = 'casolpag.CEDRIF';
 
 	
-	const CORDES = 'cacorrel.CORDES';
+	const MONSOL = 'casolpag.MONSOL';
 
 	
-	const CORCOT = 'cacorrel.CORCOT';
+	const STASOL = 'casolpag.STASOL';
 
 	
-	const CORTRA = 'cacorrel.CORTRA';
-
-	
-	const CORENT = 'cacorrel.CORENT';
-
-	
-	const CORSAL = 'cacorrel.CORSAL';
-
-	
-	const CORPRO = 'cacorrel.CORPRO';
-
-	
-	const CORPAG = 'cacorrel.CORPAG';
-
-	
-	const ID = 'cacorrel.ID';
+	const ID = 'casolpag.ID';
 
 	
 	private static $phpNameMap = null;
@@ -64,31 +49,31 @@ abstract class BaseCacorrelPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Corcom', 'Corser', 'Corsol', 'Correq', 'Correc', 'Cordes', 'Corcot', 'Cortra', 'Corent', 'Corsal', 'Corpro', 'Corpag', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (CacorrelPeer::CORCOM, CacorrelPeer::CORSER, CacorrelPeer::CORSOL, CacorrelPeer::CORREQ, CacorrelPeer::CORREC, CacorrelPeer::CORDES, CacorrelPeer::CORCOT, CacorrelPeer::CORTRA, CacorrelPeer::CORENT, CacorrelPeer::CORSAL, CacorrelPeer::CORPRO, CacorrelPeer::CORPAG, CacorrelPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('corcom', 'corser', 'corsol', 'correq', 'correc', 'cordes', 'corcot', 'cortra', 'corent', 'corsal', 'corpro', 'corpag', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, )
+		BasePeer::TYPE_PHPNAME => array ('Solpag', 'Fecsol', 'Dessol', 'Tipcom', 'Cedrif', 'Monsol', 'Stasol', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (CasolpagPeer::SOLPAG, CasolpagPeer::FECSOL, CasolpagPeer::DESSOL, CasolpagPeer::TIPCOM, CasolpagPeer::CEDRIF, CasolpagPeer::MONSOL, CasolpagPeer::STASOL, CasolpagPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('solpag', 'fecsol', 'dessol', 'tipcom', 'cedrif', 'monsol', 'stasol', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Corcom' => 0, 'Corser' => 1, 'Corsol' => 2, 'Correq' => 3, 'Correc' => 4, 'Cordes' => 5, 'Corcot' => 6, 'Cortra' => 7, 'Corent' => 8, 'Corsal' => 9, 'Corpro' => 10, 'Corpag' => 11, 'Id' => 12, ),
-		BasePeer::TYPE_COLNAME => array (CacorrelPeer::CORCOM => 0, CacorrelPeer::CORSER => 1, CacorrelPeer::CORSOL => 2, CacorrelPeer::CORREQ => 3, CacorrelPeer::CORREC => 4, CacorrelPeer::CORDES => 5, CacorrelPeer::CORCOT => 6, CacorrelPeer::CORTRA => 7, CacorrelPeer::CORENT => 8, CacorrelPeer::CORSAL => 9, CacorrelPeer::CORPRO => 10, CacorrelPeer::CORPAG => 11, CacorrelPeer::ID => 12, ),
-		BasePeer::TYPE_FIELDNAME => array ('corcom' => 0, 'corser' => 1, 'corsol' => 2, 'correq' => 3, 'correc' => 4, 'cordes' => 5, 'corcot' => 6, 'cortra' => 7, 'corent' => 8, 'corsal' => 9, 'corpro' => 10, 'corpag' => 11, 'id' => 12, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, )
+		BasePeer::TYPE_PHPNAME => array ('Solpag' => 0, 'Fecsol' => 1, 'Dessol' => 2, 'Tipcom' => 3, 'Cedrif' => 4, 'Monsol' => 5, 'Stasol' => 6, 'Id' => 7, ),
+		BasePeer::TYPE_COLNAME => array (CasolpagPeer::SOLPAG => 0, CasolpagPeer::FECSOL => 1, CasolpagPeer::DESSOL => 2, CasolpagPeer::TIPCOM => 3, CasolpagPeer::CEDRIF => 4, CasolpagPeer::MONSOL => 5, CasolpagPeer::STASOL => 6, CasolpagPeer::ID => 7, ),
+		BasePeer::TYPE_FIELDNAME => array ('solpag' => 0, 'fecsol' => 1, 'dessol' => 2, 'tipcom' => 3, 'cedrif' => 4, 'monsol' => 5, 'stasol' => 6, 'id' => 7, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
 	);
 
 	
 	public static function getMapBuilder()
 	{
-		include_once 'lib/model/map/CacorrelMapBuilder.php';
-		return BasePeer::getMapBuilder('lib.model.map.CacorrelMapBuilder');
+		include_once 'lib/model/map/CasolpagMapBuilder.php';
+		return BasePeer::getMapBuilder('lib.model.map.CasolpagMapBuilder');
 	}
 	
 	public static function getPhpNameMap()
 	{
 		if (self::$phpNameMap === null) {
-			$map = CacorrelPeer::getTableMap();
+			$map = CasolpagPeer::getTableMap();
 			$columns = $map->getColumns();
 			$nameMap = array();
 			foreach ($columns as $column) {
@@ -122,43 +107,33 @@ abstract class BaseCacorrelPeer {
 	
 	public static function alias($alias, $column)
 	{
-		return str_replace(CacorrelPeer::TABLE_NAME.'.', $alias.'.', $column);
+		return str_replace(CasolpagPeer::TABLE_NAME.'.', $alias.'.', $column);
 	}
 
 	
 	public static function addSelectColumns(Criteria $criteria)
 	{
 
-		$criteria->addSelectColumn(CacorrelPeer::CORCOM);
+		$criteria->addSelectColumn(CasolpagPeer::SOLPAG);
 
-		$criteria->addSelectColumn(CacorrelPeer::CORSER);
+		$criteria->addSelectColumn(CasolpagPeer::FECSOL);
 
-		$criteria->addSelectColumn(CacorrelPeer::CORSOL);
+		$criteria->addSelectColumn(CasolpagPeer::DESSOL);
 
-		$criteria->addSelectColumn(CacorrelPeer::CORREQ);
+		$criteria->addSelectColumn(CasolpagPeer::TIPCOM);
 
-		$criteria->addSelectColumn(CacorrelPeer::CORREC);
+		$criteria->addSelectColumn(CasolpagPeer::CEDRIF);
 
-		$criteria->addSelectColumn(CacorrelPeer::CORDES);
+		$criteria->addSelectColumn(CasolpagPeer::MONSOL);
 
-		$criteria->addSelectColumn(CacorrelPeer::CORCOT);
+		$criteria->addSelectColumn(CasolpagPeer::STASOL);
 
-		$criteria->addSelectColumn(CacorrelPeer::CORTRA);
-
-		$criteria->addSelectColumn(CacorrelPeer::CORENT);
-
-		$criteria->addSelectColumn(CacorrelPeer::CORSAL);
-
-		$criteria->addSelectColumn(CacorrelPeer::CORPRO);
-
-		$criteria->addSelectColumn(CacorrelPeer::CORPAG);
-
-		$criteria->addSelectColumn(CacorrelPeer::ID);
+		$criteria->addSelectColumn(CasolpagPeer::ID);
 
 	}
 
-	const COUNT = 'COUNT(cacorrel.ID)';
-	const COUNT_DISTINCT = 'COUNT(DISTINCT cacorrel.ID)';
+	const COUNT = 'COUNT(casolpag.ID)';
+	const COUNT_DISTINCT = 'COUNT(DISTINCT casolpag.ID)';
 
 	
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
@@ -167,9 +142,9 @@ abstract class BaseCacorrelPeer {
 
 				$criteria->clearSelectColumns()->clearOrderByColumns();
 		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(CacorrelPeer::COUNT_DISTINCT);
+			$criteria->addSelectColumn(CasolpagPeer::COUNT_DISTINCT);
 		} else {
-			$criteria->addSelectColumn(CacorrelPeer::COUNT);
+			$criteria->addSelectColumn(CasolpagPeer::COUNT);
 		}
 
 				foreach($criteria->getGroupByColumns() as $column)
@@ -177,7 +152,7 @@ abstract class BaseCacorrelPeer {
 			$criteria->addSelectColumn($column);
 		}
 
-		$rs = CacorrelPeer::doSelectRS($criteria, $con);
+		$rs = CasolpagPeer::doSelectRS($criteria, $con);
 		if ($rs->next()) {
 			return $rs->getInt(1);
 		} else {
@@ -189,7 +164,7 @@ abstract class BaseCacorrelPeer {
 	{
 		$critcopy = clone $criteria;
 		$critcopy->setLimit(1);
-		$objects = CacorrelPeer::doSelect($critcopy, $con);
+		$objects = CasolpagPeer::doSelect($critcopy, $con);
 		if ($objects) {
 			return $objects[0];
 		}
@@ -198,7 +173,7 @@ abstract class BaseCacorrelPeer {
 	
 	public static function doSelect(Criteria $criteria, $con = null)
 	{
-		return CacorrelPeer::populateObjects(CacorrelPeer::doSelectRS($criteria, $con));
+		return CasolpagPeer::populateObjects(CasolpagPeer::doSelectRS($criteria, $con));
 	}
 	
 	public static function doSelectRS(Criteria $criteria, $con = null)
@@ -209,7 +184,7 @@ abstract class BaseCacorrelPeer {
 
 		if (!$criteria->getSelectColumns()) {
 			$criteria = clone $criteria;
-			CacorrelPeer::addSelectColumns($criteria);
+			CasolpagPeer::addSelectColumns($criteria);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -221,7 +196,7 @@ abstract class BaseCacorrelPeer {
 	{
 		$results = array();
 	
-				$cls = CacorrelPeer::getOMClass();
+				$cls = CasolpagPeer::getOMClass();
 		$cls = Propel::import($cls);
 				while($rs->next()) {
 		
@@ -241,7 +216,7 @@ abstract class BaseCacorrelPeer {
 	
 	public static function getOMClass()
 	{
-		return CacorrelPeer::CLASS_DEFAULT;
+		return CasolpagPeer::CLASS_DEFAULT;
 	}
 
 	
@@ -255,7 +230,7 @@ abstract class BaseCacorrelPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
-		$criteria->remove(CacorrelPeer::ID); 
+		$criteria->remove(CasolpagPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 
@@ -282,8 +257,8 @@ abstract class BaseCacorrelPeer {
 
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; 
-			$comparison = $criteria->getComparison(CacorrelPeer::ID);
-			$selectCriteria->add(CacorrelPeer::ID, $criteria->remove(CacorrelPeer::ID), $comparison);
+			$comparison = $criteria->getComparison(CasolpagPeer::ID);
+			$selectCriteria->add(CasolpagPeer::ID, $criteria->remove(CasolpagPeer::ID), $comparison);
 
 		} else { 			$criteria = $values->buildCriteria(); 			$selectCriteria = $values->buildPkeyCriteria(); 		}
 
@@ -300,7 +275,7 @@ abstract class BaseCacorrelPeer {
 		}
 		$affectedRows = 0; 		try {
 									$con->begin();
-			$affectedRows += BasePeer::doDeleteAll(CacorrelPeer::TABLE_NAME, $con);
+			$affectedRows += BasePeer::doDeleteAll(CasolpagPeer::TABLE_NAME, $con);
 			$con->commit();
 			return $affectedRows;
 		} catch (PropelException $e) {
@@ -313,16 +288,16 @@ abstract class BaseCacorrelPeer {
 	 public static function doDelete($values, $con = null)
 	 {
 		if ($con === null) {
-			$con = Propel::getConnection(CacorrelPeer::DATABASE_NAME);
+			$con = Propel::getConnection(CasolpagPeer::DATABASE_NAME);
 		}
 
 		if ($values instanceof Criteria) {
-			$criteria = clone $values; 		} elseif ($values instanceof Cacorrel) {
+			$criteria = clone $values; 		} elseif ($values instanceof Casolpag) {
 
 			$criteria = $values->buildPkeyCriteria();
 		} else {
 						$criteria = new Criteria(self::DATABASE_NAME);
-			$criteria->add(CacorrelPeer::ID, (array) $values, Criteria::IN);
+			$criteria->add(CasolpagPeer::ID, (array) $values, Criteria::IN);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -341,13 +316,13 @@ abstract class BaseCacorrelPeer {
 	}
 
 	
-	public static function doValidate(Cacorrel $obj, $cols = null)
+	public static function doValidate(Casolpag $obj, $cols = null)
 	{
 		$columns = array();
 
 		if ($cols) {
-			$dbMap = Propel::getDatabaseMap(CacorrelPeer::DATABASE_NAME);
-			$tableMap = $dbMap->getTable(CacorrelPeer::TABLE_NAME);
+			$dbMap = Propel::getDatabaseMap(CasolpagPeer::DATABASE_NAME);
+			$tableMap = $dbMap->getTable(CasolpagPeer::TABLE_NAME);
 
 			if (! is_array($cols)) {
 				$cols = array($cols);
@@ -363,11 +338,11 @@ abstract class BaseCacorrelPeer {
 
 		}
 
-		$res =  BasePeer::doValidate(CacorrelPeer::DATABASE_NAME, CacorrelPeer::TABLE_NAME, $columns);
+		$res =  BasePeer::doValidate(CasolpagPeer::DATABASE_NAME, CasolpagPeer::TABLE_NAME, $columns);
     if ($res !== true) {
         $request = sfContext::getInstance()->getRequest();
         foreach ($res as $failed) {
-            $col = CacorrelPeer::translateFieldname($failed->getColumn(), BasePeer::TYPE_COLNAME, BasePeer::TYPE_PHPNAME);
+            $col = CasolpagPeer::translateFieldname($failed->getColumn(), BasePeer::TYPE_COLNAME, BasePeer::TYPE_PHPNAME);
             $request->setError($col, $failed->getMessage());
         }
     }
@@ -382,12 +357,12 @@ abstract class BaseCacorrelPeer {
 			$con = Propel::getConnection(self::DATABASE_NAME);
 		}
 
-		$criteria = new Criteria(CacorrelPeer::DATABASE_NAME);
+		$criteria = new Criteria(CasolpagPeer::DATABASE_NAME);
 
-		$criteria->add(CacorrelPeer::ID, $pk);
+		$criteria->add(CasolpagPeer::ID, $pk);
 
 
-		$v = CacorrelPeer::doSelect($criteria, $con);
+		$v = CasolpagPeer::doSelect($criteria, $con);
 
 		return !empty($v) > 0 ? $v[0] : null;
 	}
@@ -404,8 +379,8 @@ abstract class BaseCacorrelPeer {
 			$objs = array();
 		} else {
 			$criteria = new Criteria();
-			$criteria->add(CacorrelPeer::ID, $pks, Criteria::IN);
-			$objs = CacorrelPeer::doSelect($criteria, $con);
+			$criteria->add(CasolpagPeer::ID, $pks, Criteria::IN);
+			$objs = CasolpagPeer::doSelect($criteria, $con);
 		}
 		return $objs;
 	}
@@ -413,11 +388,11 @@ abstract class BaseCacorrelPeer {
 } 
 if (Propel::isInit()) {
 			try {
-		BaseCacorrelPeer::getMapBuilder();
+		BaseCasolpagPeer::getMapBuilder();
 	} catch (Exception $e) {
 		Propel::log('Could not initialize Peer: ' . $e->getMessage(), Propel::LOG_ERR);
 	}
 } else {
-			require_once 'lib/model/map/CacorrelMapBuilder.php';
-	Propel::registerMapBuilder('lib.model.map.CacorrelMapBuilder');
+			require_once 'lib/model/map/CasolpagMapBuilder.php';
+	Propel::registerMapBuilder('lib.model.map.CasolpagMapBuilder');
 }

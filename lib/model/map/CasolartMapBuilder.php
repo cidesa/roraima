@@ -70,6 +70,10 @@ class CasolartMapBuilder {
 
 		$tMap->addColumn('APRREQ', 'Aprreq', 'string', CreoleTypes::CHAR, false, 1);
 
+		$tMap->addColumn('USUAPR', 'Usuapr', 'string', CreoleTypes::CHAR, false, 1);
+
+		$tMap->addColumn('FECAPR', 'Fecapr', 'int', CreoleTypes::DATE, false, null);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 
