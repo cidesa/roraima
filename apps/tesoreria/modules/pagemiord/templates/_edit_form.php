@@ -341,6 +341,21 @@
 
 </th>
    </tr>
+   <tr>
+   <th>
+   <?php echo label_for('opordpag[numforpre]', __($labels['opordpag{numforpre}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('opordpag{numforpre}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('opordpag{numforpre}')): ?>
+    <?php echo form_error('opordpag{numforpre}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($opordpag, 'getNumforpre', array (
+  'size' => 20,
+  'control_name' => 'opordpag[numforpre]',
+  'maxlength' => 8,
+)); echo $value ? $value : '&nbsp;' ?>
+   </th>
+   </tr>
   </table>
 <div id="comp">
 </div>

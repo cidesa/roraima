@@ -31,6 +31,26 @@ class almordcomActions extends autoalmordcomActions
 
         $grid_resumen=Herramientas::CargarDatosGrid($this,$this->obj_resumen,true);//0
 
+        $this->mannivelapr="";
+	    $varemp = $this->getUser()->getAttribute('configemp');
+	    if ($varemp)
+		if(array_key_exists('generales',$varemp))
+		   if(array_key_exists('mannivapr',$varemp['generales']))
+		   {
+		   	$this->mannivelapr=$varemp['generales']['mannivapr'];
+		   }
+
+	        if ($this->mannivelapr=='S')
+	        {
+	          $login=$this->getUser()->getAttribute('loguse');
+              Autenticacion::validadNivelAprobacion($login,H::tofloat($this->getRequestParameter('caordcom[monord]')),&$erro);
+              if ($erro!=-1)
+              {
+              	$this->coderror4=$erro;
+			    return false;
+              }
+	        }
+
         if ($this->getRequestParameter('caordcom[genctaord]')=='S')
         {
          $grabocom=$this->getUser()->getAttribute('grabo',null,$this->getUser()->getAttribute('formulario'));
@@ -276,6 +296,22 @@ class almordcomActions extends autoalmordcomActions
       {
         $this->caordcom->setId(Herramientas::getX_vacio('ordcom','caordcom','id',$this->caordcom->getOrdcom()));
         $this->setFlash('notice', 'Your modifications have been saved');
+
+        $c= new Criteria();
+	     $resul=CadefartPeer::doSelectOne($c);
+	     if ($resul)
+	     {
+	       if($resul->getComasopre()=='S' && $resul->getComreqapr()!='S')
+	       {
+	        $totaimp=Orden_compra::totalImputacion($this->caordcom->getOrdcom());
+	        if (H::convnume($this->caordcom->getMonord())!=$totaimp)
+	        {
+	        	$this->setFlash('notice', 'El Monto de la Imputaciones Generadas no es igual al de la Solicitud, Por favor verificar esta solicitud');
+	        }
+	       }
+	     }
+
+
         if ($this->getRequestParameter('save_and_add'))
           return $this->redirect('almordcom/create');
         else if ($this->getRequestParameter('save_and_list'))
@@ -303,8 +339,13 @@ class almordcomActions extends autoalmordcomActions
     $this->caordcom = $this->getCaordcomOrCreate();
     $this->updateCaordcomFromRequest();
     Orden_compra::Grabar_compromiso($this->caordcom);
-
-    $msj="Se genero el Compromiso satisfactoriamente";
+    $totaimp=Orden_compra::totalImputacion($this->caordcom->getOrdcom());
+    if (H::convnume($this->caordcom->getMonord())!=$totaimp)
+    {
+    	$msj="El Monto de la Imputaciones Generadas no es igual al de la Solicitud, Por favor verificar esta solicitud";
+    }else{
+        $msj="Se genero el Compromiso satisfactoriamente";
+    }
 
     $javascript="alert('".$msj."')";
     $output = '[["javascript","'.$javascript.'",""]]';
@@ -545,17 +586,34 @@ class almordcomActions extends autoalmordcomActions
   }
   else  if ($this->getRequestParameter('ajax')=='15')//Calcular Recargos
       {
-        $desrgo=CarecargPeer::getRecargo($this->getRequestParameter('codigo'));
-        $montorgotab=CarecargPeer::getDato($this->getRequestParameter('codigo'),'monrgo');
-        $monrgo=number_format(CarecargPeer::getDato($this->getRequestParameter('codigo'),'monrgo'),2,',','.');
-        $tiprgo=CarecargPeer::getDato($this->getRequestParameter('codigo'),'tiprgo');
-        $reccal=SolicituddeEgresos::CalcularRecargos($tiprgo,$montorgotab,$this->getRequestParameter('monart'));
-        $reccalformat=$reccal;//number_format($reccal,2,',','.');
-        $codpar=CarecargPeer::getDato($this->getRequestParameter('codigo'),'codpre');
-        if ($tiprgo=='M')//Tipo recargo puntual (monto)
-            $javascript="$('".$this->getRequestParameter('moncal')."').readOnly=false;actualizarsaldos_r();";
-        else //Tipo de recargo por porcentaje
-          $javascript="actualizarsaldos_r();";
+        $d= new Criteria();
+        $d->add(CarecargPeer::CODRGO,$this->getRequestParameter('codigo'));
+        $recargosreg= CarecargPeer::doSelectOne($d);
+        if ($recargosreg)
+        {
+          if ($recargosreg->getCodpre()!="")
+          {
+
+	        $desrgo=$recargosreg->getNomrgo();
+	        $montorgotab=$recargosreg->getMonrgo();
+	        $monrgo=number_format($montorgotab,2,',','.');
+	        $tiprgo=$recargosreg->getTiprgo();
+	        $reccal=SolicituddeEgresos::CalcularRecargos($tiprgo,$montorgotab,$this->getRequestParameter('monart'));
+	        $reccalformat=$reccal;//number_format($reccal,2,',','.');
+	        $codpar=$recargosreg->getCodpre();
+	        if ($tiprgo=='M')//Tipo recargo puntual (monto)
+	            $javascript="$('".$this->getRequestParameter('moncal')."').readOnly=false;actualizarsaldos_r();";
+	        else //Tipo de recargo por porcentaje
+	          $javascript="actualizarsaldos_r();";
+          }else{
+          	$desrgo=""; $monrgo="0,00"; $tiprgo=""; $reccalformat="0,00"; $codpar="";
+          	$javascript="alert('Debe asociarle al Recargo el Código Presupuestario'); $('$cajtexcom').value='';";
+          }
+        }
+        else {
+        	$desrgo=""; $monrgo="0,00"; $tiprgo=""; $reccalformat="0,00"; $codpar="";
+          	$javascript="alert('El Recargo no existe'); $('$cajtexcom').value='';";
+        }
         $output = '[["'.$cajtexmos.'","'.$desrgo.'",""],["'.$cajtexcom.'","4","c"],["'.$this->getRequestParameter('monto').'","'.$monrgo.'",""],["'.$this->getRequestParameter('tipo').'","'.$tiprgo.'",""],["'.$this->getRequestParameter('moncal').'","'.$reccalformat.'",""],["'.$this->getRequestParameter('codpar').'","'.$codpar.'",""],["javascript","'.$javascript.'",""]]';
         $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
     return sfView::HEADER_ONLY;

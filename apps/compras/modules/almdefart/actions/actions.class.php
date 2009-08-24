@@ -90,13 +90,13 @@ $this->Bitacora('Guardo');
    if($this->coderror1!=-1)
      {
        $err = Herramientas::obtenerMensajeError($this->coderror1);
-     $this->getRequest()->setError('cadefart{corcom}',$err);
+   //  $this->getRequest()->setError('cadefart{corcom}',$err);
      }
 
      if($this->coderror2!=-1)
      {
        $erro = Herramientas::obtenerMensajeError($this->coderror2);
-     $this->getRequest()->setError('cadefart{corser}',$erro);
+    // $this->getRequest()->setError('cadefart{corser}',$erro);
      }
   }
     return sfView::SUCCESS;
@@ -204,6 +204,10 @@ $this->Bitacora('Guardo');
     {
       $this->cadefart->setGencorart($cadefart['gencorart']);
     }
+    if (isset($cadefart['tipdocpre']))
+    {
+      $this->cadefart->setTipdocpre($cadefart['tipdocpre']);
+    }
 
   }
 
@@ -243,5 +247,35 @@ $this->Bitacora('Guardo');
     { $this->esta2='1';}
     else { $this->esta2='0';}
 
+  }
+
+  public function executeAjax()
+  {
+   if ($this->getRequestParameter('ajax')=='1')
+   {
+   	$output = '[["","",""]';
+    $cajtexmos=$this->getRequestParameter('cajtexmos');
+    $codigo=$this->getRequestParameter('codigo');
+    if ($codigo!="")
+    {
+	    $c= new Criteria();
+	    $c->add(CpdocprcPeer::TIPPRC,$codigo);
+	    $result=CpdocprcPeer::doSelectOne($c);
+	    if ($result)
+	    {
+	      $dato=$result->getNomext();
+	      $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
+	    }
+	    else
+	    {
+	      $javascript="alert('El código no existe...');$('cadefart_tipdocpre').value=''";
+	      $dato="";
+	      $output = '[["javascript","'.$javascript.'",""],["'.$cajtexmos.'","'.$dato.'",""]]';
+	    }
+    }
+
+     $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+     return sfView::HEADER_ONLY;
+   }
   }
 }

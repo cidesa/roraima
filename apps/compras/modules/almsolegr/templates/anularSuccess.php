@@ -58,7 +58,6 @@
   'date_format' => 'dd/MM/yy',
   'onkeyup' => "javascript: mascara(this,'/',patron,true)",
   'onBlur'  => "javascript:event.keyCode=13; validar(event,this.id);",
-  //'onkeyPress' => "javascript: validar(event,this.id)",
 ),date('Y-m-d')); echo $value ? $value : '&nbsp;' ?>
       </div>
   </div><?php echo input_hidden_tag('esmenor', '') ?><?php echo input_hidden_tag('valfec', '') ?>
@@ -114,31 +113,8 @@ function validar(e,id)
   {
    if ($(id).value!="")
    {
-    new Ajax.Request('/compras_dev.php/almsolegr/ajax', {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json), verificar();}, parameters:'ajax=8&fecemi='+fecemi+'&codigo='+fecac})
+    new Ajax.Request('/compras_dev.php/almsolegr/ajax', {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=8&fecemi='+fecemi+'&codigo='+fecac})
     }
   }
 }
-
-function verificar()
-{
-  if ($('esmenor').value=='N')
-  {
-  	alert('La Fecha de Anulación no puede ser menor a la Fecha de la Solicitud')
-  	$('casolart_fecanu').value="";
-  	$('casolart_fecanu').focus();
-  }
-  else if ($('valfec2').value=='S')
-  {
-	alert('La Fecha no se encuentra del Período Fiscal');
-	$('casolart_fecanu').value="";
-	$('casolart_fecanu').focus();
-  }
-  else if ($('valfec').value=='S')
-  {
-	alert('La Fecha se encuentra dentro un Período Cerrado');
-	$('casolart_fecanu').value="";
-	$('casolart_fecanu').focus();
-  }
-}
-
 </script>

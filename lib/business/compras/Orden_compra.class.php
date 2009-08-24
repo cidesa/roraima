@@ -267,7 +267,8 @@ class Orden_compra
       while ($j<count($distinto))//la hace dos veces
       {
         $result=array();
-        $sql="Select reqart,codrgo,monrgo,tipdoc From cadisrgo Where ReqArt ='".$refsol."' and codart='".$distinto[$j]."' and TipDoc='SAE' order By CodRgo";
+        $tipdoc=Compras::ObtenerTipoDocumentoPrecompromiso();
+        $sql="Select reqart,codrgo,monrgo,tipdoc From cadisrgo Where ReqArt ='".$refsol."' and codart='".$distinto[$j]."' and TipDoc='".$tipdoc."' order By CodRgo";
         if (Herramientas::BuscarDatos($sql,&$result))
         {
           $i=0;
@@ -1152,6 +1153,7 @@ class Orden_compra
    public static function Grabar_compromiso($caordcom)
    {
       $referencia = $caordcom->getOrdcom();
+      $tipdoc=Compras::ObtenerTipoDocumentoPrecompromiso();
       Herramientas::EliminarRegistro("CpCompro", "Refcom", $referencia);
       Herramientas::EliminarRegistro("Cpimpcom", "Refcom", $referencia);
       $result=array();
@@ -1168,7 +1170,7 @@ class Orden_compra
              $cpcompro_new->setRefprc($caordcom->getRefsol());
           else
              $cpcompro_new->setRefprc('NULO');
-          $cpcompro_new->setTipprc('SAE');
+          $cpcompro_new->setTipprc($tipdoc);
           $descripcion=Herramientas::getX_vacio('refprc','cpprecom','desprc',$caordcom->getRefsol());
           if ($descripcion!='')
             $cpcompro_new->setDescom($descripcion);
@@ -2144,11 +2146,12 @@ class Orden_compra
     //si la orden de compra refiere a Solicitud de egreso, los recargos son iguales a los de la solicitud,
     //de lo contrario si es orden de compra directa los recargos son los que el usuario haya introducido
     {
-          $c= new Criteria();
+    $tipdoc=Compras::ObtenerTipoDocumentoPrecompromiso();
+    $c= new Criteria();
     $c->add(CadisrgoPeer::REQART,$caordcom->getRefsol());
     $c->add(CadisrgoPeer::CODART,$arreglo_grid[$j]["codart"]);
     $c->add(CadisrgoPeer::CODCAT,$arreglo_grid[$j]["codcat"]);
-    $c->add(CadisrgoPeer::TIPDOC,"SAE");
+    $c->add(CadisrgoPeer::TIPDOC,$tipdoc);
     $recargos= CadisrgoPeer::doSelect($c);
          foreach ($recargos as $cadisrgo_ordcom)
          {
@@ -2271,11 +2274,12 @@ class Orden_compra
     //si la orden de compra refiere a Solicitud de egreso, los recargos son iguales a los de la solicitud,
     //de lo contrario si es orden de compra directa los recargos son los que el usuario haya introducido
     {
-          $c= new Criteria();
+    $tipdoc=Compras::ObtenerTipoDocumentoPrecompromiso();
+    $c= new Criteria();
     $c->add(CadisrgoPeer::REQART,$caordcom->getRefsol());
     $c->add(CadisrgoPeer::CODART,$arreglo_grid[$j]["codart"]);
     $c->add(CadisrgoPeer::CODCAT,$arreglo_grid[$j]["codcat"]);
-    $c->add(CadisrgoPeer::TIPDOC,"SAE");
+    $c->add(CadisrgoPeer::TIPDOC,$tipdoc);
     $recargos= CadisrgoPeer::doSelect($c);
          foreach ($recargos as $cadisrgo_ordcom)
          {
@@ -2342,11 +2346,12 @@ class Orden_compra
  {
 
      $cadena="";
+     $tipdoc=Compras::ObtenerTipoDocumentoPrecompromiso();
      $c = new Criteria();
      $c->add(CadisrgoPeer::REQART,$numordcom);
      $c->add(CadisrgoPeer::CODART,$codart);
      $c->add(CadisrgoPeer::CODCAT,$coduni);
-     $c->add(CadisrgoPeer::TIPDOC,'SAE');
+     $c->add(CadisrgoPeer::TIPDOC,$tipdoc);
      $c->addAscendingOrderByColumn(CadisrgoPeer::CODRGO);
      $result = CadisrgoPeer::doSelect($c);
      if ($result)
@@ -2712,7 +2717,25 @@ class Orden_compra
     return true;
  }
 
+   public static function totalImputacion($ordcom)
+  {
+  	$total=0;
+  	$c= new Criteria();
+  	$c->add(CpimpcomPeer::REFCOM,$ordcom);
+  	$result= CpimpcomPeer::doSelect($c);
+  	if ($result)
+  	{
+  	   foreach ($result as $obj)
+  	   {
+  	   	 $total= $total + $obj->getMonimp();
+  	   }
+  	}
+  	return $total;
+  }
+
+
 }// fin
+
 
 
   /**************************************************************************

@@ -3,8 +3,8 @@ methods:
    - "carecarg{codrgo}"
    - "carecarg{nomrgo}"
    - "carecarg{monrgo}"
-#   - "carecarg{codpre}"
-#   - "carecarg{codcta}"
+   - "carecarg{codpre}"
+   - "carecarg{codcta}"
 
 names:
   carecarg{codrgo}:
@@ -21,6 +21,15 @@ names:
     required:  No
     validators: MyNumberValidator
 
+  carecarg{codpre}:
+    required:  Yes
+    required_msg: El Código del Titulo Presupuestario no puedo estar en Blanco
+    validators: TituloValidator
+
+  carecarg{codcta}:
+    required:  Yes
+    required_msg: El Código de la Cuenta Contable no puedo estar en Blanco
+    validators: CuentaValidator
 
 StringValidator:
     class: sfStringValidator
@@ -52,3 +61,17 @@ CorrelValidator:
     param:
         values:    [ '/^[0-9]*$/' ]
         values_error: Los Correlativos solo puede contener valores númericos
+
+TituloValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Nppartidas
+        column:   codpar
+        unique_error:   El Código del Titulo Presupuestario no existe.
+
+CuentaValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Contabb
+        column:   codcta
+        unique_error:   El Código de la Cuenta Contable no existe.

@@ -21,7 +21,7 @@ names:
   cacotiza{feccot}:
     required:  Yes
     required_msg: La Fecha no puede estar en Blanco
-    validators: FechaValidator
+    validators: FechaValidator2, FechaValidator
 
   cacotiza{rifpro}:
     required:  Yes
@@ -90,15 +90,15 @@ UniqueValidator:
         unique_error: El Número de la Cotización ya existe. Por Favor, Cambiélo por otro.
 
 
-#FechaValidator:
-#    class:         CidesaDateNow
-#    param:
-#        compare: 'now'
-#        compare_error: La Fecha no puede ser menor a la Fecha Actual
-#        operator: '>='
-#        date_error:  Fecha Inválida
-
 FechaValidator:
+    class:         CidesaDateNow
+    param:
+        compare: 'now'
+        compare_error: La Fecha no puede ser mayor a la Fecha Actual
+        operator: '<='
+        date_error:  Fecha Inválida
+
+FechaValidator2:
     class: sfRegexValidator
     param:
         match:      yes

@@ -15,6 +15,11 @@
 <?php echo input_hidden_tag('haydesp', $haydespacho) ?>
 <?php echo input_hidden_tag('modifi', $modifico) ?>
 <?php echo input_hidden_tag('tiporecarg', $tiporec) ?>
+<table width="100%">
+  <tr>
+    <th><strong><font color="#CC0000" size="2" face="Verdana, Arial, Helvetica, sans-serif"> <?php echo $casolart->getEtiqueta() ;?></font></strong></th>
+  </tr>
+</table>
 <fieldset id="sf_fieldset_none" class="">
 <legend><?php echo __('Solicitud de Egreso') ?></legend>
 <div class="form-row">

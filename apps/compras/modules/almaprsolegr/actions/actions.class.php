@@ -106,8 +106,8 @@ class almaprsolegrActions extends autoalmaprsolegrActions
     $this->configGrid();
 
     $grid = Herramientas::CargarDatosGridv2($this,$this->casolart->getObj());
-
-    $coderr = SolicituddeEgresos::salvarAlmaprsolegr($clasemodelo,$grid);
+    $login=$this->getUser()->getAttribute('loguse');
+    $coderr = SolicituddeEgresos::salvarAlmaprsolegr($clasemodelo,$grid,$login);
 
     return $coderr;
   }

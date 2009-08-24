@@ -160,6 +160,7 @@ class SolicituddeEgresos
 
   public static function grabarSolicitudRecargo($solegreso,$grid2)
   {
+  	$tipdoc=Compras::ObtenerTipoDocumentoPrecompromiso();
     $requisicion=$solegreso->getReqart();
     $a=$grid2[0];
     if (count($a)!=0)
@@ -170,7 +171,7 @@ class SolicituddeEgresos
      if ($a[$k]->getCodrgo()!="")
        {
       $a[$k]->setReqart($requisicion);
-      $a[$k]->setTipdoc('SAE');
+      $a[$k]->setTipdoc($tipdoc);
       $a[$k]->save();
        }
      $k++;
@@ -288,9 +289,10 @@ class SolicituddeEgresos
           $distribucion->setCodpre($codpresu);
          }
        }
+         $tipdoc=Compras::ObtenerTipoDocumentoPrecompromiso();
          $montorecargo= round((($monto*$totalarticulo)/$acum),2);
          $distribucion->setMonrgo($montorecargo);
-         $distribucion->setTipdoc('SAE');
+         $distribucion->setTipdoc($tipdoc);
          $distribucion->save();
        }
       $l++;
@@ -319,10 +321,11 @@ class SolicituddeEgresos
     $existe = CpprecomPeer::doSelectOne($c);
     if (!$existe)
     {
+      $tipdoc=Compras::ObtenerTipoDocumentoPrecompromiso();
       $cpprecom= new Cpprecom();
       $cpprecom->setRefprc($referencia);
       $cpprecom->setFecprc($solegreso->getFecreq());
-      $cpprecom->setTipprc('SAE');
+      $cpprecom->setTipprc($tipdoc);
       $cpprecom->setAnoprc(substr($solegreso->getFecreq(),0,4));
       $cpprecom->setDesanu(null);
       $cpprecom->setDesprc($solegreso->getDesreq());
@@ -428,14 +431,15 @@ class SolicituddeEgresos
 
   public static function eliminarRecargos($cod)
   {
+  	$tipdoc=Compras::ObtenerTipoDocumentoPrecompromiso();
     $c= new Criteria();
     $c->add(CargosolPeer::REQART,$cod);
-    $c->add(CargosolPeer::TIPDOC,'SAE');
+    $c->add(CargosolPeer::TIPDOC,$tipdoc);
     CargosolPeer::doDelete($c);
 
     $c= new Criteria();
     $c->add(CadisrgoPeer::REQART,$cod);
-    $c->add(CadisrgoPeer::TIPDOC,'SAE');
+    $c->add(CadisrgoPeer::TIPDOC,$tipdoc);
     CadisrgoPeer::doDelete($c);
   }
 
@@ -839,10 +843,11 @@ class SolicituddeEgresos
         $montodos=0;
         if ($solegreso->getId())//Consulta/modificacion
         {
+      $tipdoc=Compras::ObtenerTipoDocumentoPrecompromiso();
       $c= new Criteria();
       $c->add(CargosolPeer::REQART,$solegreso->getReqart());
       $c->add(CargosolPeer::CODRGO,$arrTotRec[$z]['codrgo']);
-      $c->add(CargosolPeer::TIPDOC,'SAE');
+      $c->add(CargosolPeer::TIPDOC,$tipdoc);
       $datrec=CargosolPeer::doSelectOne($c);
       if ($datrec)
           $montodos=$datrec->getMonrgo();
@@ -966,12 +971,13 @@ class SolicituddeEgresos
           $aux2=split('_',$aux);
           if ($aux2[0]!="" )//&& Herramientas::toFloat($aux2[4])>0)
           {
+        $tipdoc=Compras::ObtenerTipoDocumentoPrecompromiso();
         $c= new Criteria();
         $c->add(CadisrgoPeer::REQART,$requi);
         $c->add(CadisrgoPeer::CODART,$x[$j]->getCodart());
         $c->add(CadisrgoPeer::CODCAT,$x[$j]->getCodcat());
         $c->add(CadisrgoPeer::CODRGO,$aux2[0]);
-        $c->add(CadisrgoPeer::TIPDOC,'SAE');
+        $c->add(CadisrgoPeer::TIPDOC,$tipdoc);
         CadisrgoPeer::doDelete($c);
 
             $distribucion = new Cadisrgo();
@@ -1007,9 +1013,10 @@ class SolicituddeEgresos
             $distribucion->setCodpre($codpresu);
           }
           }
+          $tipdoc=Compras::ObtenerTipoDocumentoPrecompromiso();
           $montorecargo= Herramientas::toFloat($aux2[4]);
           $distribucion->setMonrgo($montorecargo);
-          $distribucion->setTipdoc('SAE');
+          $distribucion->setTipdoc($tipdoc);
           $distribucion->save();
           }
           $r++;
@@ -1024,9 +1031,10 @@ class SolicituddeEgresos
   {
    $requisicion=$solegreso->getReqart();
 
+   $tipdoc=Compras::ObtenerTipoDocumentoPrecompromiso();
    $c= new Criteria();
    $c->add(CargosolPeer::REQART,$requisicion);
-   $c->add(CargosolPeer::TIPDOC,'SAE');
+   $c->add(CargosolPeer::TIPDOC,$tipdoc);
    CargosolPeer::doDelete($c);
 
 
@@ -1037,11 +1045,12 @@ class SolicituddeEgresos
       $i=0;
       while ($i<count($result))
       {
+      	$tipdoc=Compras::ObtenerTipoDocumentoPrecompromiso();
         $cargosol= new Cargosol();
         $cargosol->setReqart($requisicion);
         $cargosol->setCodrgo($result[$i]['codrgo']);
         $cargosol->setMonrgo($result[$i]['monrgo']);
-         $cargosol->setTipdoc('SAE');
+         $cargosol->setTipdoc($tipdoc);
          $cargosol->save();
          $i++;
        }// while ($i<count($result))
@@ -1052,7 +1061,7 @@ class SolicituddeEgresos
 /*
  * Author: Actualiza la Solicitud de Egreso para poder generar la orden de compra
  */
-  public static function salvarAlmaprsolegr($clasemodelo,$grid)
+  public static function salvarAlmaprsolegr($clasemodelo,$grid,$login)
   {
     //$ordcom = $caordcom->getOrdcom();
     $x = $grid[0];
@@ -1060,13 +1069,32 @@ class SolicituddeEgresos
     while ($j < count($x)) {
       if ($x[$j]->getCheck()=='1')
       {
+      	$x[$j]->setUsuapr($login);
+      	$x[$j]->setFecapr(date('Y-m-d'));
       	$x[$j]->setAprreq('S');
+
       	$x[$j]->save();
       }
       $j++;
     }
 
 	return -1;
+  }
+
+  public static function totalImputacion($reqart)
+  {
+  	$total=0;
+  	$c= new Criteria();
+  	$c->add(CpimpprcPeer::REFPRC,$reqart);
+  	$result= CpimpprcPeer::doSelect($c);
+  	if ($result)
+  	{
+  	   foreach ($result as $obj)
+  	   {
+  	   	 $total= $total + $obj->getMonimp();
+  	   }
+  	}
+  	return $total;
   }
 
 

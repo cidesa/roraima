@@ -8,7 +8,7 @@
 
 <div id="sf_admin_container">
 
-<h1><?php echo __('Edición de Requisiciones',
+<h1><?php echo __('Edición de Requisición',
 array()) ?></h1>
 
 <div id="sf_admin_header">

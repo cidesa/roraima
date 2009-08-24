@@ -114,6 +114,44 @@ class Autenticacion {
 
   }
 
+  public static function validadNivelAprobacion($login,$monto,&$error)
+  {
+  	$error=-1;
+
+  	$c= new Criteria();
+  	$reg=OpdefempPeer::doSelectOne($c);
+  	if ($reg)
+  	{
+  		if ($reg->getUnitri()>0)
+  		{
+  		  $unitrireal=$monto/$reg->getUnitri();
+  		}else {
+  			$error=533;
+  			return $error;
+  		}
+  	}
+
+    $u= new Criteria();
+    $u->add(UsuariosPeer::LOGUSE,$login);
+    $result= UsuariosPeer::doSelectOne($u);
+    if ($result)
+    {
+      $p= new Criteria();
+      $p->add(SegranaprPeer::CODNIV,$result->getCodniv());
+      $registro= SegranaprPeer::doSelectOne($p);
+      if ($registro)
+      {
+      	if ($unitrireal<=$registro->getRanhas() && $unitrireal>=$registro->getRandes())
+      	{
+         $error=-1;
+      	}else{
+      		$error=534;
+      	}
+      }
+    }
+    return $error;
+  }
+
 }
 
 ?>

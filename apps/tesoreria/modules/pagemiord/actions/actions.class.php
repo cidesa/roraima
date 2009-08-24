@@ -31,8 +31,28 @@ class pagemiordActions extends autopagemiordActions
       $this->setVars();
       if ($this->opordpag->getId()=="")
       {
-        $this->configGridFactura();
+      	$this->configGridFactura();
         $factura=Herramientas::CargarDatosGrid($this,$this->obj2,true);
+	  	$this->mannivelapr="";
+	    $varemp = $this->getUser()->getAttribute('configemp');
+	    if ($varemp)
+		if(array_key_exists('generales',$varemp))
+		   if(array_key_exists('mannivapr',$varemp['generales']))
+		   {
+		   	$this->mannivelapr=$varemp['generales']['mannivapr'];
+		   }
+
+        if ($this->mannivelapr=='S')
+        {
+          $login=$this->getUser()->getAttribute('loguse');
+          Autenticacion::validadNivelAprobacion($login,H::tofloat($this->getRequestParameter('opordpag[monord]')),&$erro);
+          if ($erro!=-1)
+          {
+          	$this->coderror5=$erro;
+		    return false;
+          }
+        }
+
         if ($this->opordpag->getTipcau()!=$this->ordpagnom && $this->opordpag->getTipcau()!=$this->ordpagapo && $this->opordpag->getTipcau()!=$this->ordpagliq && $this->opordpag->getTipcau()!=$this->ordpagfid)
         {
           $this->configGridApliret();
@@ -135,6 +155,7 @@ class pagemiordActions extends autopagemiordActions
        }
       }else
       {
+
       	$o= new Criteria();
 	    $o->add(OpfacturPeer::NUMORD,$this->opordpag->getNumord());
 	    $data= OpfacturPeer::doSelect($o);
@@ -690,6 +711,10 @@ $this->Bitacora('Guardo');
     if (isset($opordpag['codconcepto']))
     {
       $this->opordpag->setCodconcepto($opordpag['codconcepto']);
+    }
+    if (isset($opordpag['numforpre']))
+    {
+      $this->opordpag->setNumforpre($opordpag['numforpre']);
     }
   }
 
@@ -2710,4 +2735,3 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
     $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
   }
 }
-

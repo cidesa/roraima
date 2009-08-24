@@ -124,7 +124,24 @@ public function validateEdit()
         $this->casolart->setId(Herramientas::getX_vacio('reqart','casolart','id',$this->casolart->getReqart()));
 
         $this->setFlash('notice', 'Your modifications have been saved');
-$this->Bitacora('Guardo');
+
+        $this->Bitacora('Guardo');
+
+         $c= new Criteria();
+	     $resul=CadefartPeer::doSelectOne($c);
+	     if ($resul)
+	     {
+	       if($resul->getPrcasopre()=='S' && $resul->getPrcreqapr()!='S')
+	       {
+
+	        $totaimp=SolicituddeEgresos::totalImputacion($this->casolart->getReqart());
+	        if (H::convnume($this->casolart->getMonreq())!=$totaimp)
+	        {
+	        	$this->setFlash('notice', 'El Monto de la Imputaciones Generadas no es igual al de la Solicitud, Por favor verificar esta solicitud');
+	        }
+	       }
+	     }
+
 
         if ($this->getRequestParameter('save_and_add'))
         {
@@ -474,37 +491,57 @@ $this->Bitacora('Guardo');
       else  if ($this->getRequestParameter('ajax')=='8')
       {
       	$fec1 = $this->getRequestParameter('fecemi');
-
+        $javascript="";
         $dateFormat = new sfDateFormat('es_VE');
         $fec2 = $dateFormat->format($this->getRequestParameter('codigo'), 'i', $dateFormat->getInputPattern('d'));
 
         if ($fec2<$fec1)
         {
-          $menor='N';
-        }else { $menor='S';}
+          $javascript="alert('La Fecha de Anulación no puede ser menor a la Fecha de la Solicitud'); $('casolart_fecanu').value=''; ";
+        }else {
+            if (!Herramientas::validarPeriodoPresuesto($this->getRequestParameter('codigo')))
+	      	{
+	         $javascript="alert('La Fecha no se encuentra del Período Fiscal');	$('casolart_fecanu').value=''; ";
+	      	}else {
+	      		if (!Herramientas::validarPeriodoFiscal($this->getRequestParameter('codigo')))
+		      	{
+		      	  $javascript="alert('La Fecha se encuentra dentro un Período Cerrado'); $('casolart_fecanu').value='';	";
+		      	}
 
-      	if (Herramientas::validarPeriodoPresuesto($this->getRequestParameter('codigo')))
-      	{
-         $valido='N';
-      	}else { $valido='S';}
-
-      	if (Herramientas::validarPeriodoFiscal($this->getRequestParameter('codigo')))
-      	{ $valido2='N';}
-      	else { $valido2='S';}
-        $output = '[["esmenor","'.$menor.'",""],["valfec","'.$valido.'",""],["valfec2","'.$valido2.'",""]]';
+		    }
+        }
+        $output = '[["javascript","'.$javascript.'",""]]';
       }
       else  if ($this->getRequestParameter('ajax')=='9')//Calcular Recargos
       {
-        $desrgo=CarecargPeer::getRecargo($this->getRequestParameter('codigo'));
-        $montorgotab=CarecargPeer::getDato($this->getRequestParameter('codigo'),'monrgo');
-        $monrgo=number_format($montorgotab,2,',','.');
-        $tiprgo=CarecargPeer::getDato($this->getRequestParameter('codigo'),'tiprgo');
-        $reccal=SolicituddeEgresos::CalcularRecargos($tiprgo,$monrgo,$this->getRequestParameter('monart'));
-        $reccalformat=number_format($reccal,2,',','.');
-        if ($tiprgo=='M' and $montorgotab==0)//Tipo recargo puntual (monto)
-            $javascript="$('".$this->getRequestParameter('moncal')."').readOnly=false;actualizarsaldos_b();";
-        else //Tipo de recargo por porcentaje
-        	 $javascript="actualizarsaldos_b();";
+        $d= new Criteria();
+        $d->add(CarecargPeer::CODRGO,$this->getRequestParameter('codigo'));
+        $recargosreg= CarecargPeer::doSelectOne($d);
+        if ($recargosreg)
+        {
+          if ($recargosreg->getCodpre()!="")
+          {
+            $desrgo=$recargosreg->getNomrgo();
+	        $montorgotab=$recargosreg->getMonrgo();
+	        $monrgo=number_format($montorgotab,2,',','.');
+	        $tiprgo=$recargosreg->getTiprgo();
+	        $reccal=SolicituddeEgresos::CalcularRecargos($tiprgo,$monrgo,$this->getRequestParameter('monart'));
+	        $reccalformat=number_format($reccal,2,',','.');
+	        if ($tiprgo=='M' and $montorgotab==0)//Tipo recargo puntual (monto)
+	            $javascript="$('".$this->getRequestParameter('moncal')."').readOnly=false; actualizarsaldos_b();";
+	        else //Tipo de recargo por porcentaje
+	        	 $javascript="actualizarsaldos_b();";
+          }
+          else
+          {
+          	$desrgo=""; $monrgo="0,00"; $tiprgo=""; $reccalformat="0,00";
+          	$javascript="alert('Debe asociarle al Recargo el Código Presupuestario'); $('$cajtexcom').value='';";
+          }
+        }else{
+        	$desrgo=""; $monrgo="0,00"; $tiprgo=""; $reccalformat="0,00";
+          	$javascript="alert('El Recargo no existe'); $('$cajtexcom').value='';";
+        }
+
         $output = '[["'.$cajtexmos.'","'.$desrgo.'",""],["'.$cajtexcom.'","4","c"],["'.$this->getRequestParameter('monto').'","'.$monrgo.'",""],["'.$this->getRequestParameter('tipo').'","'.$tiprgo.'",""],["'.$this->getRequestParameter('moncal').'","'.$reccalformat.'",""],["javascript","'.$javascript.'",""]]';
       }
         $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
@@ -888,16 +925,12 @@ $this->Bitacora('Guardo');
 
     public function configGridRecargo($reqart="",$codart="",$coduni="")
    {
-
-       /*$c->add(CargosolPeer::REQART,$reqart);
-       $c->add(CargosolPeer::TIPDOC,'SAE');
-       $c->addAscendingOrderByColumn(CargosolPeer::CODRGO);
-       $reg = CargosolPeer::doSelect($c);*/
+	   $tipdoc=Compras::ObtenerTipoDocumentoPrecompromiso();
        $c = new Criteria();
        $c->add(CadisrgoPeer::REQART,$reqart);
        $c->add(CadisrgoPeer::CODART,$codart);
        $c->add(CadisrgoPeer::CODCAT,$coduni);
-       $c->add(CadisrgoPeer::TIPDOC,'SAE');
+       $c->add(CadisrgoPeer::TIPDOC,$tipdoc);
        $c->addAscendingOrderByColumn(CadisrgoPeer::CODRGO);
        $reg = CadisrgoPeer::doSelect($c);
 
@@ -967,16 +1000,12 @@ $this->Bitacora('Guardo');
 
    public function configGridRecargoConsulta($reqart="",$codart="",$coduni="")
    {
-      /* $c = new Criteria();
-       $c->add(CargosolPeer::REQART,$this->casolart->getReqart());
-       $c->add(CargosolPeer::TIPDOC,'SAE');
-       $c->addAscendingOrderByColumn(CargosolPeer::CODRGO);
-       $reg = CargosolPeer::doSelect($c);*/
+       $tipdoc=Compras::ObtenerTipoDocumentoPrecompromiso();
        $c = new Criteria();
        $c->add(CadisrgoPeer::REQART,$reqart);
        $c->add(CadisrgoPeer::CODART,$codart);
        $c->add(CadisrgoPeer::CODCAT,$coduni);
-       $c->add(CadisrgoPeer::TIPDOC,'SAE');
+       $c->add(CadisrgoPeer::TIPDOC,$tipdoc);
        $c->addAscendingOrderByColumn(CadisrgoPeer::CODRGO);
        $reg = CadisrgoPeer::doSelect($c);
 
@@ -1156,8 +1185,16 @@ $this->Bitacora('Guardo');
      if (SolicituddeEgresos::generaPrecompromiso($this->casolart,$this->casolart->getReqart(),&$msj))
      {
        SolicituddeEgresos::generarImputacionesPrecompromiso($this->casolart->getReqart());
-       $this->msj="Se genero el Precompromiso satisfactoriamente";
-       $this->id=$this->casolart->getId();
+       $totaimp=SolicituddeEgresos::totalImputacion($this->casolart->getReqart());
+        if (H::convnume($this->casolart->getMonreq())!=$totaimp)
+        {
+           $this->msj="El Monto de la Imputaciones Generadas no es igual al de la Solicitud, Por favor verificar esta solicitud";
+           $this->id=$this->casolart->getId();
+        }else{
+	       $this->msj="Se genero el Precompromiso satisfactoriamente";
+	       $this->id=$this->casolart->getId();
+        }
+
      }else {$this->msj="No se pudo grabar el compromiso, ya que existe la referencia en la base de datos";
      $this->id=$this->casolart->getId();}
    }
