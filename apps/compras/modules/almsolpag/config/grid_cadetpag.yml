@@ -1,0 +1,26 @@
+opciones:                  # Opciones generales
+  eliminar:                true
+  tabla:                   cadetpag
+  anchogrid:               800
+  ancho:                   750
+  filas:                   1
+  titulo:                  ''
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Código Presupuestario
+  tipo:                    t
+  nombrecampo:             codpre
+  esgrabable:              true
+  html:                    [size=25, readonly=true]
+2:       # Columna 2
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             nompre
+  html:                    [size=40, readonly=true]
+3:       # Columna 3
+  titulo:                  Monto
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             moncom
+  esnumerico:              true
+  html:                    [size="10", readonly=true]

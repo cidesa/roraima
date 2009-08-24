@@ -106,7 +106,36 @@
 
 <?php echo input_password_tag('usuarios[confirm]', $usuarios->getConfirm()) ?>
     </div>
+
     <br>
+<div id="niveles" style="display:none">
+  <?php echo label_for('usuarios[codniv]', __($labels['usuarios{codniv}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('usuarios{codniv}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('usuarios{codniv}')): ?>
+    <?php echo form_error('usuarios{codniv}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+   <?php $value = object_input_tag($usuarios, 'getCodniv', array (
+  'size' => 10,
+  'maxlength' => 3,
+  'control_name' => 'usuarios[codniv]',
+  'onBlur'=> remote_function(array(
+        'url'      => 'usuarios/ajax',
+        'condition' => "$('usuarios_codniv').value != ''",
+        'complete' => 'AjaxJSON(request, json)',
+          'with' => "'ajax=1&cajtexmos=usuarios_desniv&cajtexcom=usuarios_codniv&codigo='+this.value"
+        ))
+)); echo $value ? $value : '&nbsp;' ?>
+&nbsp;&nbsp;&nbsp;
+  <?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Segnivapr_Usuarios/clase/Segnivapr/frame/sf_admin_edit_form/obj1/usuarios_codniv/obj2/usuarios_desniv/campo1/codniv/campo2/desniv','','','botoncat')?>
+ &nbsp;&nbsp;&nbsp;
+  <?php $value = object_input_tag($usuarios, 'getDesniv', array (
+  'disabled' => true,
+  'size' => 60,
+  'control_name' => 'usuarios[desniv]',
+)); echo $value ? $value : '&nbsp;' ?> </div>
+</br>
+</div>
 </div>
 </fieldset>
 
@@ -126,3 +155,12 @@
 )) ?><?php endif; ?>
 </li>
   </ul>
+
+<script language="JavaScript" type="text/javascript">
+  var nivelapr='<?php echo $mannivelapr ?>';
+  if (nivelapr=='S')
+  {
+  	$('niveles').show();
+  }
+</script>
+
