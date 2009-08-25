@@ -485,11 +485,12 @@ class Tesoreria {
     }
 
     $fecdes = "01/".$mes."/".$ano;
-    $fecdes = $this->transformarFecha($fecdes);
+    $dateFormat = new sfDateFormat('es_VE');
+    $fecdes = $dateFormat->format($fecdes, 'i', $dateFormat->getInputPattern('d'));
 
     $c = new Criteria();
     $c->add(TsmovlibPeer :: NUMCUE, $nro);
-    $a->add(TsmovlibPeer::FECLIB,$fecdes,Criteria::GREATER_EQUAL);
+    $c->add(TsmovlibPeer::FECLIB,$fecdes,Criteria::GREATER_EQUAL);
     $c->add(TsmovlibPeer :: STACON1, 'C');
     $result = TsmovlibPeer :: doSelect($c);
 
@@ -520,7 +521,7 @@ class Tesoreria {
 
     $c = new Criteria();
     $c->add(TsmovbanPeer :: NUMCUE, $nro);
-    $a->add(TsmovbanPeer::FECBAN,$fecdes,Criteria::GREATER_EQUAL);
+    $c->add(TsmovbanPeer::FECBAN,$fecdes,Criteria::GREATER_EQUAL);
     $c->add(TsmovbanPeer :: STACON1, 'C');
     $result = TsmovbanPeer :: doSelect($c);
 
