@@ -42,11 +42,11 @@
   'url'      => 'biedisactmuenew/ajax',
   'condition' => "$('bndismue_codact').value != '' && $('id').value == ''",
   'complete' => 'AjaxJSON(request, json)',
-  'with' => "'ajax=4&cajtexmos=bndismue_codact&cajtexcom=bndismue_codact&cajtexubi=bndismue_codubiori&cajtexdesubi=bndismue_desubiori&codigo='+this.value",
+  'with' => "'ajax=4&cajtexmos=bndismue_codact&cajtexcom=bndismue_codact&codmue='+$('bndismue_codmue').value+'&cajtexubi=bndismue_codubiori&cajtexdesubi=bndismue_desubiori&codigo='+this.value",
 )),
 )); echo $value ? $value : '&nbsp;' ?>
 
-<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Bnregmue_Biedisactmuenew/clase/Bnregmue/frame/sf_admin_edit_form/obj1/bndismue_codact/obj2/bndismue_codmue/obj3/bndismue_desmue/obj4/bndismue_mondismue/campo1/codact/campo2/codmue/campo3/desmue/campo4/valini/param1/')?>
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Bnregmue_Biedisactmuenew/clase/Bnregmue/frame/sf_admin_edit_form/obj1/bndismue_codact/obj2/bndismue_codmue/obj3/bndismue_desmue/obj4/bndismue_mondismue/obj5/bndismue_codubiori/campo1/codact/campo2/codmue/campo3/desmue/campo4/valini/campo5/codubi/param1/')?>
 </th>
 </div>
 <th></th>
