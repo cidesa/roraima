@@ -2870,6 +2870,7 @@ class OrdendePago
   {
     $x=$grid[0];
     $j=0;
+    $l=0;
     $numcom=split('/',$numcomprob);
     $numord=split('/',$numorden);
     while ($j<count($x))
@@ -2878,9 +2879,10 @@ class OrdendePago
       {
         $x[$j]->setAprobadotes('A');
         $orden1="OP".substr($x[$j]->getNumord(),2,6);
-        if ($orden1==$numord[$j+1])
+        if ($orden1==$numord[$l+1])
         {
-          $x[$j]->setNumcomapr($numcom[$j+1]);
+          $x[$j]->setNumcomapr($numcom[$l+1]);
+          $l++;
         }
       }
       else
