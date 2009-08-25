@@ -38,9 +38,15 @@
   'control_name' => 'bndisinm[codact]',
    'maxlength' => strlen($mascaracatalogo),
    'onKeypress' => "javascript:return dFilter (event.keyCode, this,'$mascaracatalogo')",
+    'onBlur'=> remote_function(array(
+  'url'      => 'biedisactinm/ajax',
+  'condition' => "$('bndisinm_codact').value != '' && $('id').value == ''",
+  'complete' => 'AjaxJSON(request, json)',
+  'with' => "'ajax=3&cajtexmos=bndisinm_codact&cajtexcom=bndisinm_codact&codinm='+$('bndisinm_codmue').value+'&codigo='+this.value",
+)),
  )); echo $value ? $value : '&nbsp;' ?>
 
-<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Bnreginm_Biedisactinm/clase/Bnreginm/frame/sf_admin_edit_form/obj1/bndisinm_codact/obj2/bndisinm_codmue/obj3/bndisinm_desinm/obj4/bndisinm_codubiori/obj5/bndisinm_desubiori/campo1/codact/campo2/codinm/campo3/desinm/campo4/codubi/campo5/desubi/param1/')?>
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Bnreginm_Biedisactinm/clase/Bnreginm/frame/sf_admin_edit_form/obj1/bndisinm_codact/obj2/bndisinm_codmue/obj3/bndisinm_desinm/obj4/bndisinm_codubiori/obj5/bndisinm_desubiori/obj6/bndisinm_mondisinm/campo1/codact/campo2/codinm/campo3/desinm/campo4/codubi/campo5/desubi/campo6/valini/param1/')?>
 </div>
   </th>
   <th>&nbsp;&nbsp;&nbsp;</th>
@@ -61,7 +67,7 @@
 )),
 )); echo $value ? $value : '&nbsp;' ?>
 
-<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Bnreginm_Biedisactinm1/clase/Bnreginm/frame/sf_admin_edit_form/obj1/bndisinm_codmue/obj2/bndisinm_codact/obj3/bndisinm_desinm/campo1/codinm/campo2/codact/campo3/desinm/param1/')?>
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Bnreginm_Biedisactinm1/clase/Bnreginm/frame/sf_admin_edit_form/obj1/bndisinm_codmue/obj2/bndisinm_codact/obj3/bndisinm_desinm/obj4/bndisinm_mondisinm/campo1/codinm/campo2/codact/campo3/desinm/campo4/valini/param1/')?>
 </div>
   </th>
 </tr>

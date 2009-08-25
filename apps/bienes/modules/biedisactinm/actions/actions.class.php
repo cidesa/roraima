@@ -86,6 +86,7 @@ public function setVars()
   {
      $cajtexmos=$this->getRequestParameter('cajtexmos');
      $cajtexcom=$this->getRequestParameter('cajtexcom');
+     $this->setVars();
 
     if ($this->getRequestParameter('ajax')=='1')
       {
@@ -93,7 +94,10 @@ public function setVars()
         $c->add(BnreginmPeer::CODINM,$this->getRequestParameter('codigo'));
         $bnreginm = BnreginmPeer::doSelectOne($c);
 
-        if($bnreginm) $output = '[["'.$cajtexmos.'","'.$bnreginm->getCodact().'",""],["'.$cajtexcom.'","'.$bnreginm->getDesinm().'"],["bndisinm_codubiori","'.$bnreginm->getCodubi().'"],["bndisinm_desubiori","'.$bnreginm->getDesubi().'"]]';
+        if($bnreginm){
+        	$valini=number_format($bnreginm->getValini(),2,',','.');
+        	 $output = '[["'.$cajtexmos.'","'.$bnreginm->getCodact().'",""],["'.$cajtexcom.'","'.$bnreginm->getDesinm().'"],["bndisinm_codubiori","'.$bnreginm->getCodubi().'"],["bndisinm_desubiori","'.$bnreginm->getDesubi().'"],["bndisinm_mondisinm","'.$valini.'"]]';
+        }
         else $output = '[["'.$cajtexmos.'","",""],["'.$cajtexcom.'","'.Constantes::REGVACIO.'"]]';
 
       }
@@ -101,6 +105,22 @@ public function setVars()
       {
         $dato=BnreginmPeer::getDescrinm($this->getRequestParameter('codigo'),$cajtexcom);
         $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
+      }else if($this->getRequestParameter('ajax')=='3')
+      {
+        if (strlen($this->mascaracatalogo)!=strlen($this->getRequestParameter('codigo')))
+      	{
+      		$javascript="alert_('El Nivel de Activo debe ser de &uacute;ltimo Nivel'); $('$cajtexcom').value=''; $('$cajtexcom').focus();";
+      		$desubi="";
+      	}else {
+        $javascript="";
+         if ($this->getRequestParameter('codinm')!="")
+         {
+         	$codubi=Herramientas::getX('codinm','Bnreginm','codubi',$this->getRequestParameter('codinm'));
+         	$desubi=Herramientas::getX('codubi','Bnubibie','desubi',$codubi);
+         }else{ $desubi="";}
+      	}
+
+        $output = '[["javascript","'.$javascript.'",""],["bndismue_desubiori","'.$desubi.'"]]';
       }
 
       $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');

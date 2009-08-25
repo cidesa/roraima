@@ -227,7 +227,7 @@ $this->Bitacora('Guardo');
 
         $codubi=Herramientas::getX('codmue','Bnregmue','codubi',$this->getRequestParameter('codigo'));
         $desubi=Herramientas::getX('codubi','Bnubibie','desubi',$codubi);
-        $valini=number_format(Herramientas::getX('codubi','Bnubibie','valini',$codubi),2,',','.');
+        $valini=number_format(Herramientas::getX('codmue','Bnregmue','valini',$this->getRequestParameter('codigo')),2,',','.');
 
         $output = '[["'.$cajtexmos.'","'.$codact.'",""],["'.$cajtexcom.'","'.$desmue.'"],["'.$cajtexubi.'","'.$codubi.'"],["'.$cajtexdesubi.'","'.$desubi.'"],["bndismue_mondismue","'.$valini.'"]]';
 
@@ -253,11 +253,17 @@ $this->Bitacora('Guardo');
         if (strlen($this->mascaracatalogo)!=strlen($this->getRequestParameter('codigo')))
       	{
       		$javascript="alert_('El Nivel de Activo debe ser de &uacute;ltimo Nivel'); $('$cajtexcom').value=''; $('$cajtexcom').focus();";
+      		$desubi="";
       	}else {
         $javascript="";
+         if ($this->getRequestParameter('codmue')!="")
+         {
+         	$codubi=Herramientas::getX('codmue','Bnregmue','codubi',$this->getRequestParameter('codmue'));
+         	$desubi=Herramientas::getX('codubi','Bnubibie','desubi',$codubi);
+         }else{ $desubi="";}
       	}
 
-        $output = '[["javascript","'.$javascript.'",""]]';
+        $output = '[["javascript","'.$javascript.'",""],["bndismue_desubiori","'.$desubi.'"]]';
       }
 
         $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');

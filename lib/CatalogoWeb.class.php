@@ -2020,7 +2020,8 @@ $this->c= new Criteria();
       BnregmuePeer :: CODACT => 'Código Catalogo',
       BnregmuePeer :: CODMUE => 'Código Activo',
       BnregmuePeer :: DESMUE => 'Descripción',
-      BnregmuePeer :: VALINI => 'Valoración Inicial'
+      BnregmuePeer :: VALINI => 'Valoración Inicial',
+      BnregmuePeer :: CODUBI => 'Código Ubicación'
     );
   }
 
@@ -2030,7 +2031,8 @@ $this->c= new Criteria();
       BnregmuePeer :: CODMUE => 'Código Activo',
       BnregmuePeer :: CODACT => 'Código Catalogo',
       BnregmuePeer :: DESMUE => 'Descripción',
-      BnregmuePeer :: VALINI => 'Valoración Inicial'
+      BnregmuePeer :: VALINI => 'Valoración Inicial',
+      BnregmuePeer :: CODUBI => 'Código Ubicación'
     );
   }
 
@@ -2048,7 +2050,9 @@ $this->c= new Criteria();
     $this->columnas = array (
       BnreginmPeer :: CODACT => 'Código Catalogo',
       BnreginmPeer :: CODINM => 'Código Activo',
-      BnreginmPeer :: DESINM => 'Descripción'
+	  BnreginmPeer :: DESINM => 'Descripción',
+	  BnreginmPeer :: VALINI => 'Valor Inicial',
+	  BnreginmPeer :: CODUBI => 'Código de Ubicación'
     );
   }
 
@@ -2057,7 +2061,9 @@ $this->c= new Criteria();
     $this->columnas = array (
       BnreginmPeer :: CODINM => 'Código Activo',
       BnreginmPeer :: CODACT => 'Código Catalogo',
-      BnreginmPeer :: DESINM => 'Descripción'
+	  BnreginmPeer :: DESINM => 'Descripción',
+	  BnreginmPeer :: VALINI => 'Valor Inicial',
+	  BnreginmPeer :: CODUBI => 'Código de Ubicación'
     );
   }
 
