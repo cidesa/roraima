@@ -329,7 +329,7 @@
   msj: El Titulo Presupuestario no tiene Asignación Inicial.
 513:
   cod: 513
-  msj: Los Datos de la Orden no se Grabaran, debido a que no existe Disponibilidad.
+  msj: Los Datos de la Orden no se pueder grabar, debido a que no existe Disponibilidad.
 514:
   cod: 514
   msj: Deben salvar las retenciones. Presione el botón Salir.
