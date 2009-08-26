@@ -51,7 +51,7 @@ class Vacaciones {
 					coalesce(C.diasdisfrutados,0) as Disfrutados,
 					coalesce(C.diasdisfutar,A.diadis) as CORRESPONDE
 					from
-				      Npvacdisfrute C right join Npanos B on ((B.ano =  C.perfin) and ('".$codemp."' = C.codemp)),
+				      Npvacdisfrute C right join Npanos B on ((B.ano::varchar =  C.perfin) and ('".$codemp."' = C.codemp)),
 					NPvacdiadis A
 					Where (A.codnom='".$nomina."')
 					And (B.Ano BETWEEN ('".(int)$anohasta."'-1) and '".(int)$anofin."')
@@ -100,7 +100,7 @@ class Vacaciones {
 						A.codnom='".$nomina."'
 						And B.Ano Between ".(int)$anohasta." - 1 and ".(int)$anofin."
 						And ".(int)$anofin."-B.ano between A.rangodesde and A.rangohasta
-						And C.PERINI=B.ANO
+						And C.PERINI=B.ANO::varchar
 						And C.CODEMP='".$codemp."'
 
 					) as subconsulta
@@ -586,6 +586,79 @@ class Vacaciones {
 	 }
 
 
+  }
+  
+  public static function salvar_vacsalidas($npvacsalidas,$gridd)
+  {
+  	#Eliminamos los registros para este empleado, fecha de solicitud
+  	$grid=$gridd[0];
+  	$c2= new Criteria();
+    $c2->add(NpvacsalidasDetPeer::CODEMP,$npvacsalidas->getCodemp());
+    $c2->add(NpvacsalidasDetPeer::FECVAC,$npvacsalidas->getFecvac());
+    NpvacsalidasDetPeer::doDelete($c2);
+	
+	foreach($grid as $r)
+	{
+		if($r['diasvac']>0)
+		{
+			#Actualizamos npvacdsifrute
+			$c4= new Criteria();
+		    $c4->add(NpvacdisfrutePeer::CODEMP,$npvacsalidas->getCodemp());
+		    $c4->add(NpvacdisfrutePeer::PERINI,$r['perini']);
+		    $c4->add(NpvacdisfrutePeer::PERFIN,$r['perfin']);
+		    $objNpvacdisfrute = NpvacdisfrutePeer::doSelectOne($c4);
+	
+		    if (!$objNpvacdisfrute)
+		    {
+				$objNpvacdisfrute = new Npvacdisfrute();	
+		    	$objNpvacdisfrute->setCodemp($npvacsalidas->getCodemp());
+				$objNpvacdisfrute->setPerini($r['perini']);
+				$objNpvacdisfrute->setPerfin($r['perfin']);	
+		    }
+			$objNpvacdisfrute->setDiasdisfutar($r['diasdisfutar']);
+			$objNpvacdisfrute->setDiasdisfrutados(($r['diasdisfrutados']) + ($r['diasvac']));
+			$objNpvacdisfrute->save();
+			
+			#Guardamos en npvacsalidas_Det
+			$objNpvacsalidasDet = new NpvacsalidasDet();
+            $objNpvacsalidasDet->setCodemp($npvacsalidas->getCodemp());
+			$objNpvacsalidasDet->setPerini($r['perini']);
+			$objNpvacsalidasDet->setPerfin($r['perfin']);
+			$objNpvacsalidasDet->setDiasdisfutar($r['diasdisfutar']);
+			$objNpvacsalidasDet->setDiasdisfrutados($r['diasdisfrutados']);
+			$objNpvacsalidasDet->setDiasvac($r['diasvac']);
+			$objNpvacsalidasDet->setFecvac($npvacsalidas->getFecvac());	
+			$objNpvacsalidasDet->save();
+			
+		}			
+	}
+  	
+  }
+  
+  public static function eliminar_vacsalidas($npvacsalidas)
+  {  	
+  	$c= new Criteria();
+    $c->add(NpvacsalidasDetPeer::CODEMP,$npvacsalidas->getCodemp());
+    $c->add(NpvacsalidasDetPeer::FECVAC,$npvacsalidas->getFecvac());
+    $per = NpvacsalidasDetPeer::doSelect($c);
+    if($per)
+	{
+		foreach($per as $r)
+		{
+			$c2= new Criteria();
+		    $c2->add(NpvacdisfrutePeer::CODEMP,$npvacsalidas->getCodemp());
+			$c2->add(NpvacdisfrutePeer::PERINI,$r->getPerini());
+			$c2->add(NpvacdisfrutePeer::PERFIN,$r->getPerfin());
+		    $per2 = NpvacdisfrutePeer::doSelectOne($c2);			
+			if($per2)
+			{
+				$dianew = abs($per2->getDiasdisfrutados()-$r->getDiasvac());
+				$per2->setDiasdisfrutados($dianew);
+				$per2->save();
+			}
+			$r->delete();
+		}	
+	}	
   }
 
 
