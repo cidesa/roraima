@@ -2018,11 +2018,17 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
     $msj="";
     $mondis="0,00";
     $afecta=$this->getRequestParameter('afecta');
-    $codigo=$this->getRequestParameter('codpre');
-    $i=$this->getRequestParameter('fila');
-    $moncau=H::tofloat($this->getRequestParameter('moncau'));
-    OrdendePago::montoValido($i,$moncau,'N',$codigo,$afecta,&$msj,&$mondis,&$sobregiro);
-
+    $detalle=Herramientas::CargarDatosGrid($this,$this->obj);
+    $x=$detalle[0];
+    $i=0;
+    while ($i<count($x))
+    {
+     $codigo=$x[$i]->getCodpre();
+     OrdendePago::montoValido($i,$x[$i]->getMoncau(),'N',$codigo,$afecta,&$msj,&$mondis,&$sobregiro);
+     if ($msj!="")
+     { break;}
+     $i++;
+    }
     $output = '[["errormonto","'.$msj.'",""],["montodisponible","'.$mondis.'",""],["codigopresupuestario","'.$codigo.'",""]]';
     $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
     return sfView::HEADER_ONLY;
