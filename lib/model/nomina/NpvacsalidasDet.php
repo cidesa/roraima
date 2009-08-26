@@ -9,4 +9,9 @@
  */ 
 class NpvacsalidasDet extends BaseNpvacsalidasDet
 {
+	
+	public function getDiaspdisfrutar()
+   {
+   	 return ($this->diasdisfutar-$this->diasdisfrutados)-$this->diasvac;
+   }
 }

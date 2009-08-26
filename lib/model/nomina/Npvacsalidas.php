@@ -9,6 +9,9 @@
  */
 class Npvacsalidas extends BaseNpvacsalidas
 {
+  protected $diaspend=0;
+  protected $objvac=array();	
+	
   public function getNomemp()
   {
   	  $c = new Criteria();
@@ -29,9 +32,10 @@ class Npvacsalidas extends BaseNpvacsalidas
 	   if ($formato)
 	     return date("d/m/Y",strtotime($fecha->getFecing()));
 	   else
-	  	 return $fecha->getFecing();
+	     return date("d/m/Y",strtotime($fecha->getFecing()));
+	  	 #return $fecha->getFecing();
 	  else
 	    return ' ';
-   }
-
+   }  
+   
 }
