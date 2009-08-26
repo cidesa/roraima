@@ -6716,7 +6716,7 @@ class Nomina {
   public static function validarCodemp($objeto) {
     $c = new Criteria();
     $c->add(NpliquidacionDetPeer :: CODEMP, $objeto->getCodemp());
-    $objNpliquidacionDet = BnreginmPeer :: doSelectOne($c);
+    $objNpliquidacionDet = NpliquidacionDetPeer :: doSelectOne($c);
 
     if ($objNpliquidacionDet)
       return 415;
