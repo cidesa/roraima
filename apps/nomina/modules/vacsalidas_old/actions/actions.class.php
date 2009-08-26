@@ -368,7 +368,6 @@ $this->Bitacora('Guardo');
 			self::$coderror=Nomina::validarVacsalidas($this->npvacsalidas);
 		}
 
-
         if (self::$coderror<>-1)
         {
           return false;
