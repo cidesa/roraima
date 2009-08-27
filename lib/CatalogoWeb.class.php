@@ -5643,6 +5643,15 @@ A.CODREDE"
       NpbenefiembPeer :: NOMBEN => 'Nombre'
     );
   }
+  
+  public function Nptipret_codret($param = array ()) {
+	$this->c = new Criteria();
+
+	$this->columnas = array (
+		NptipretPeer :: CODRET => 'Código Retiro',
+		NptipretPeer :: DESRET => 'Descripción'
+	);
+  }
 
 }
 
