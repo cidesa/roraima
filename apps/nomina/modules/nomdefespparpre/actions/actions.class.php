@@ -14,7 +14,11 @@ class nomdefespparpreActions extends autonomdefespparpreActions
   // Para incluir funcionalidades al executeEdit()
   public function editing()
   {
-
+   $this->arrsal=array('UD'=>'Ultimo Devengado',
+                       'SP'=>'Salario Promedio',
+					   'SI'=>'Salario Integral',
+					   'SN'=>'Salario Normal');
+   $this->params=array('arrsal'=>$this->arrsal);
 
   }
 
@@ -171,6 +175,7 @@ class nomdefespparpreActions extends autonomdefespparpreActions
 
   public function saving($clasemodelo)
   {
+  	$clasemodelo->getPoranoant()==1 ? $clasemodelo->setPoranoant('S') : $clasemodelo->setPoranoant('N');
     return parent::saving($clasemodelo);
   }
 
