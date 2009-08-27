@@ -16,6 +16,28 @@ generator:
       nomnom:            { name: Nombre Nómina}
       numdiames:         { name: Número de dias por Mes, params: maxlength=2 size=5}
       numdiamaxano:      { name: Número de dias Máximo por Año, params: maxlength=3 size=5}
+      tipsalajunodep:    { name: Tipo de Salario Ajustes  no Depositados}
+      ptipsalajunodep:   { name: .}
+      tipsalbonfinanofra:{ name: Tipo de Salario Bonificación de Fin de Año Fraccionado}
+      factorbonfinanofra:{ name: Factor}
+      ptipsalbonfinanofra: {name: .}
+      tipsalbonvacfra:{ name: Tipo de Salario Bono Vacacional Fraccionado}
+      factorbonvacfra:{ name: Factor}
+      ptipsalbonvacfra: { name: .}
+      descripclau:      { name:  Descripcion clausula }
+      codret:
+        name:  Tipo Retiro
+        msj_error: Debe Ingresar Tipo de Retiro
+        catalogo:
+          catalogoweb: Nptipret_codret
+          clase: Nptipret
+          ajax: 0
+          parametros: getprincipal="getCodret" getsecundario="getDesret" campoprincipal="codret" camposecundario="desret" campobase = "id"                
+        params:  maxlength=2
+      numdiaant:        { name: Numero de Dias}  
+      poranoant:        { name: Por ano Antiguedad, type: checkbox_tag}
+      tipsaldiaant:     { name: Tipo Salario Dias Antiguedad}
+      ptipsaldiaant:    { name: .}
       
     list:
       title:          Lista de Parametros para Prestaciones
@@ -30,7 +52,12 @@ generator:
     edit:
       title:          Edicion de Parametros para Prestaciones
       display:
-        Parametros:   [codnom, numdiames, numdiamaxano]
+        NONE:              [codnom]        
+        Dias Adicionales:   [numdiames, numdiamaxano, _ptipsalajunodep]
+        Bono Fin de Año Fraccionado: [_ptipsalbonfinanofra, factorbonfinanofra]
+        Bono Vacacional Fraccionado: [_ptipsalbonvacfra, factorbonvacfra]
+        Liquidacion de Prestaciones: [descripclau, codret, _ptipsaldiaant]
+        
       actions:
         _list:        ~
         _save:        ~
