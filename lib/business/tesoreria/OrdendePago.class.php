@@ -2545,7 +2545,7 @@ class OrdendePago
     return true;
   }
 
-  public static function validarDisponibilidadPresu($grid,$afecta)
+  public static function validarDisponibilidadPresu($grid,$afecta,&$codigo)
   {
     $validardisponibilidad=true;
     $x=$grid[0];
