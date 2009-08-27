@@ -6842,6 +6842,37 @@ propel:
     numdiamaxano:
       type: INTEGER
       required: true
+    tipsalajunodep:
+      type: VARCHAR
+      size: 2
+    tipsalbonfinanofra:
+      type: VARCHAR
+      size: 2
+    factorbonfinanofra:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    tipsalbonvacfra:
+      type: VARCHAR
+      size: 2
+    factorbonvacfra:
+      type: NUMERIC
+      size: 14
+      scale: 2      
+    descripclau:
+      type: VARCHAR
+      size: 250
+    codret:
+      type: VARCHAR
+      size: 2
+    numdiaant:
+      type: INTEGER
+    poranoant:
+      type: VARCHAR
+      size: 1
+    tipsaldiaant:
+      type: VARCHAR
+      size: 2        
     id:
       type: INTEGER
       required: true
