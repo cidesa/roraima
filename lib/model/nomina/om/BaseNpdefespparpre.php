@@ -21,6 +21,46 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
 
 
 	
+	protected $tipsalajunodep;
+
+
+	
+	protected $tipsalbonfinanofra;
+
+
+	
+	protected $factorbonfinanofra;
+
+
+	
+	protected $tipsalbonvacfra;
+
+
+	
+	protected $factorbonvacfra;
+
+
+	
+	protected $descripclau;
+
+
+	
+	protected $codret;
+
+
+	
+	protected $numdiaant;
+
+
+	
+	protected $poranoant;
+
+
+	
+	protected $tipsaldiaant;
+
+
+	
 	protected $id;
 
 	
@@ -48,6 +88,78 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
   {
 
     return $this->numdiamaxano;
+
+  }
+  
+  public function getTipsalajunodep()
+  {
+
+    return trim($this->tipsalajunodep);
+
+  }
+  
+  public function getTipsalbonfinanofra()
+  {
+
+    return trim($this->tipsalbonfinanofra);
+
+  }
+  
+  public function getFactorbonfinanofra($val=false)
+  {
+
+    if($val) return number_format($this->factorbonfinanofra,2,',','.');
+    else return $this->factorbonfinanofra;
+
+  }
+  
+  public function getTipsalbonvacfra()
+  {
+
+    return trim($this->tipsalbonvacfra);
+
+  }
+  
+  public function getFactorbonvacfra($val=false)
+  {
+
+    if($val) return number_format($this->factorbonvacfra,2,',','.');
+    else return $this->factorbonvacfra;
+
+  }
+  
+  public function getDescripclau()
+  {
+
+    return trim($this->descripclau);
+
+  }
+  
+  public function getCodret()
+  {
+
+    return trim($this->codret);
+
+  }
+  
+  public function getNumdiaant()
+  {
+
+    return $this->numdiaant;
+
+  }
+  
+  public function getPoranoant()
+  {
+
+    return trim($this->poranoant);
+
+  }
+  
+  public function getTipsaldiaant()
+  {
+
+    return trim($this->tipsaldiaant);
 
   }
   
@@ -88,6 +200,106 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setTipsalajunodep($v)
+	{
+
+    if ($this->tipsalajunodep !== $v) {
+        $this->tipsalajunodep = $v;
+        $this->modifiedColumns[] = NpdefespparprePeer::TIPSALAJUNODEP;
+      }
+  
+	} 
+	
+	public function setTipsalbonfinanofra($v)
+	{
+
+    if ($this->tipsalbonfinanofra !== $v) {
+        $this->tipsalbonfinanofra = $v;
+        $this->modifiedColumns[] = NpdefespparprePeer::TIPSALBONFINANOFRA;
+      }
+  
+	} 
+	
+	public function setFactorbonfinanofra($v)
+	{
+
+    if ($this->factorbonfinanofra !== $v) {
+        $this->factorbonfinanofra = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpdefespparprePeer::FACTORBONFINANOFRA;
+      }
+  
+	} 
+	
+	public function setTipsalbonvacfra($v)
+	{
+
+    if ($this->tipsalbonvacfra !== $v) {
+        $this->tipsalbonvacfra = $v;
+        $this->modifiedColumns[] = NpdefespparprePeer::TIPSALBONVACFRA;
+      }
+  
+	} 
+	
+	public function setFactorbonvacfra($v)
+	{
+
+    if ($this->factorbonvacfra !== $v) {
+        $this->factorbonvacfra = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpdefespparprePeer::FACTORBONVACFRA;
+      }
+  
+	} 
+	
+	public function setDescripclau($v)
+	{
+
+    if ($this->descripclau !== $v) {
+        $this->descripclau = $v;
+        $this->modifiedColumns[] = NpdefespparprePeer::DESCRIPCLAU;
+      }
+  
+	} 
+	
+	public function setCodret($v)
+	{
+
+    if ($this->codret !== $v) {
+        $this->codret = $v;
+        $this->modifiedColumns[] = NpdefespparprePeer::CODRET;
+      }
+  
+	} 
+	
+	public function setNumdiaant($v)
+	{
+
+    if ($this->numdiaant !== $v) {
+        $this->numdiaant = $v;
+        $this->modifiedColumns[] = NpdefespparprePeer::NUMDIAANT;
+      }
+  
+	} 
+	
+	public function setPoranoant($v)
+	{
+
+    if ($this->poranoant !== $v) {
+        $this->poranoant = $v;
+        $this->modifiedColumns[] = NpdefespparprePeer::PORANOANT;
+      }
+  
+	} 
+	
+	public function setTipsaldiaant($v)
+	{
+
+    if ($this->tipsaldiaant !== $v) {
+        $this->tipsaldiaant = $v;
+        $this->modifiedColumns[] = NpdefespparprePeer::TIPSALDIAANT;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -108,7 +320,27 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
 
       $this->numdiamaxano = $rs->getInt($startcol + 2);
 
-      $this->id = $rs->getInt($startcol + 3);
+      $this->tipsalajunodep = $rs->getString($startcol + 3);
+
+      $this->tipsalbonfinanofra = $rs->getString($startcol + 4);
+
+      $this->factorbonfinanofra = $rs->getFloat($startcol + 5);
+
+      $this->tipsalbonvacfra = $rs->getString($startcol + 6);
+
+      $this->factorbonvacfra = $rs->getFloat($startcol + 7);
+
+      $this->descripclau = $rs->getString($startcol + 8);
+
+      $this->codret = $rs->getString($startcol + 9);
+
+      $this->numdiaant = $rs->getInt($startcol + 10);
+
+      $this->poranoant = $rs->getString($startcol + 11);
+
+      $this->tipsaldiaant = $rs->getString($startcol + 12);
+
+      $this->id = $rs->getInt($startcol + 13);
 
       $this->resetModified();
 
@@ -116,7 +348,7 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 4; 
+            return $startcol + 14; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Npdefespparpre object", $e);
     }
@@ -273,6 +505,36 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
 				return $this->getNumdiamaxano();
 				break;
 			case 3:
+				return $this->getTipsalajunodep();
+				break;
+			case 4:
+				return $this->getTipsalbonfinanofra();
+				break;
+			case 5:
+				return $this->getFactorbonfinanofra();
+				break;
+			case 6:
+				return $this->getTipsalbonvacfra();
+				break;
+			case 7:
+				return $this->getFactorbonvacfra();
+				break;
+			case 8:
+				return $this->getDescripclau();
+				break;
+			case 9:
+				return $this->getCodret();
+				break;
+			case 10:
+				return $this->getNumdiaant();
+				break;
+			case 11:
+				return $this->getPoranoant();
+				break;
+			case 12:
+				return $this->getTipsaldiaant();
+				break;
+			case 13:
 				return $this->getId();
 				break;
 			default:
@@ -288,7 +550,17 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
 			$keys[0] => $this->getCodnom(),
 			$keys[1] => $this->getNumdiames(),
 			$keys[2] => $this->getNumdiamaxano(),
-			$keys[3] => $this->getId(),
+			$keys[3] => $this->getTipsalajunodep(),
+			$keys[4] => $this->getTipsalbonfinanofra(),
+			$keys[5] => $this->getFactorbonfinanofra(),
+			$keys[6] => $this->getTipsalbonvacfra(),
+			$keys[7] => $this->getFactorbonvacfra(),
+			$keys[8] => $this->getDescripclau(),
+			$keys[9] => $this->getCodret(),
+			$keys[10] => $this->getNumdiaant(),
+			$keys[11] => $this->getPoranoant(),
+			$keys[12] => $this->getTipsaldiaant(),
+			$keys[13] => $this->getId(),
 		);
 		return $result;
 	}
@@ -314,6 +586,36 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
 				$this->setNumdiamaxano($value);
 				break;
 			case 3:
+				$this->setTipsalajunodep($value);
+				break;
+			case 4:
+				$this->setTipsalbonfinanofra($value);
+				break;
+			case 5:
+				$this->setFactorbonfinanofra($value);
+				break;
+			case 6:
+				$this->setTipsalbonvacfra($value);
+				break;
+			case 7:
+				$this->setFactorbonvacfra($value);
+				break;
+			case 8:
+				$this->setDescripclau($value);
+				break;
+			case 9:
+				$this->setCodret($value);
+				break;
+			case 10:
+				$this->setNumdiaant($value);
+				break;
+			case 11:
+				$this->setPoranoant($value);
+				break;
+			case 12:
+				$this->setTipsaldiaant($value);
+				break;
+			case 13:
 				$this->setId($value);
 				break;
 		} 	}
@@ -326,7 +628,17 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[0], $arr)) $this->setCodnom($arr[$keys[0]]);
 		if (array_key_exists($keys[1], $arr)) $this->setNumdiames($arr[$keys[1]]);
 		if (array_key_exists($keys[2], $arr)) $this->setNumdiamaxano($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setId($arr[$keys[3]]);
+		if (array_key_exists($keys[3], $arr)) $this->setTipsalajunodep($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setTipsalbonfinanofra($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setFactorbonfinanofra($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setTipsalbonvacfra($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setFactorbonvacfra($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setDescripclau($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setCodret($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setNumdiaant($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setPoranoant($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setTipsaldiaant($arr[$keys[12]]);
+		if (array_key_exists($keys[13], $arr)) $this->setId($arr[$keys[13]]);
 	}
 
 	
@@ -337,6 +649,16 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(NpdefespparprePeer::CODNOM)) $criteria->add(NpdefespparprePeer::CODNOM, $this->codnom);
 		if ($this->isColumnModified(NpdefespparprePeer::NUMDIAMES)) $criteria->add(NpdefespparprePeer::NUMDIAMES, $this->numdiames);
 		if ($this->isColumnModified(NpdefespparprePeer::NUMDIAMAXANO)) $criteria->add(NpdefespparprePeer::NUMDIAMAXANO, $this->numdiamaxano);
+		if ($this->isColumnModified(NpdefespparprePeer::TIPSALAJUNODEP)) $criteria->add(NpdefespparprePeer::TIPSALAJUNODEP, $this->tipsalajunodep);
+		if ($this->isColumnModified(NpdefespparprePeer::TIPSALBONFINANOFRA)) $criteria->add(NpdefespparprePeer::TIPSALBONFINANOFRA, $this->tipsalbonfinanofra);
+		if ($this->isColumnModified(NpdefespparprePeer::FACTORBONFINANOFRA)) $criteria->add(NpdefespparprePeer::FACTORBONFINANOFRA, $this->factorbonfinanofra);
+		if ($this->isColumnModified(NpdefespparprePeer::TIPSALBONVACFRA)) $criteria->add(NpdefespparprePeer::TIPSALBONVACFRA, $this->tipsalbonvacfra);
+		if ($this->isColumnModified(NpdefespparprePeer::FACTORBONVACFRA)) $criteria->add(NpdefespparprePeer::FACTORBONVACFRA, $this->factorbonvacfra);
+		if ($this->isColumnModified(NpdefespparprePeer::DESCRIPCLAU)) $criteria->add(NpdefespparprePeer::DESCRIPCLAU, $this->descripclau);
+		if ($this->isColumnModified(NpdefespparprePeer::CODRET)) $criteria->add(NpdefespparprePeer::CODRET, $this->codret);
+		if ($this->isColumnModified(NpdefespparprePeer::NUMDIAANT)) $criteria->add(NpdefespparprePeer::NUMDIAANT, $this->numdiaant);
+		if ($this->isColumnModified(NpdefespparprePeer::PORANOANT)) $criteria->add(NpdefespparprePeer::PORANOANT, $this->poranoant);
+		if ($this->isColumnModified(NpdefespparprePeer::TIPSALDIAANT)) $criteria->add(NpdefespparprePeer::TIPSALDIAANT, $this->tipsaldiaant);
 		if ($this->isColumnModified(NpdefespparprePeer::ID)) $criteria->add(NpdefespparprePeer::ID, $this->id);
 
 		return $criteria;
@@ -373,6 +695,26 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
 		$copyObj->setNumdiames($this->numdiames);
 
 		$copyObj->setNumdiamaxano($this->numdiamaxano);
+
+		$copyObj->setTipsalajunodep($this->tipsalajunodep);
+
+		$copyObj->setTipsalbonfinanofra($this->tipsalbonfinanofra);
+
+		$copyObj->setFactorbonfinanofra($this->factorbonfinanofra);
+
+		$copyObj->setTipsalbonvacfra($this->tipsalbonvacfra);
+
+		$copyObj->setFactorbonvacfra($this->factorbonvacfra);
+
+		$copyObj->setDescripclau($this->descripclau);
+
+		$copyObj->setCodret($this->codret);
+
+		$copyObj->setNumdiaant($this->numdiaant);
+
+		$copyObj->setPoranoant($this->poranoant);
+
+		$copyObj->setTipsaldiaant($this->tipsaldiaant);
 
 
 		$copyObj->setNew(true);

@@ -40,6 +40,26 @@ class NpdefespparpreMapBuilder {
 
 		$tMap->addColumn('NUMDIAMAXANO', 'Numdiamaxano', 'int', CreoleTypes::INTEGER, true, null);
 
+		$tMap->addColumn('TIPSALAJUNODEP', 'Tipsalajunodep', 'string', CreoleTypes::VARCHAR, false, 2);
+
+		$tMap->addColumn('TIPSALBONFINANOFRA', 'Tipsalbonfinanofra', 'string', CreoleTypes::VARCHAR, false, 2);
+
+		$tMap->addColumn('FACTORBONFINANOFRA', 'Factorbonfinanofra', 'double', CreoleTypes::NUMERIC, false, 14);
+
+		$tMap->addColumn('TIPSALBONVACFRA', 'Tipsalbonvacfra', 'string', CreoleTypes::VARCHAR, false, 2);
+
+		$tMap->addColumn('FACTORBONVACFRA', 'Factorbonvacfra', 'double', CreoleTypes::NUMERIC, false, 14);
+
+		$tMap->addColumn('DESCRIPCLAU', 'Descripclau', 'string', CreoleTypes::VARCHAR, false, 250);
+
+		$tMap->addColumn('CODRET', 'Codret', 'string', CreoleTypes::VARCHAR, false, 2);
+
+		$tMap->addColumn('NUMDIAANT', 'Numdiaant', 'int', CreoleTypes::INTEGER, false, null);
+
+		$tMap->addColumn('PORANOANT', 'Poranoant', 'string', CreoleTypes::VARCHAR, false, 1);
+
+		$tMap->addColumn('TIPSALDIAANT', 'Tipsaldiaant', 'string', CreoleTypes::VARCHAR, false, 2);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 
