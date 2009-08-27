@@ -459,7 +459,7 @@ class almordcomActions extends autoalmordcomActions
     $reg=CaregartPeer::doSelectOne($c);
     if ($reg)
     {
-      $dato=htmlspecialchars($reg->getDesart());
+      $dato=eregi_replace("[\n|\r|\n\r]", "", $reg->getDesart());
       $dato1=$reg->getUnimed();
       $dato2=number_format($reg->getCosult(),2,',','.');
       $dato3=$reg->getCodpar();
@@ -713,7 +713,7 @@ class almordcomActions extends autoalmordcomActions
     $col2->setNombreCampo('Codart');
     if ($referencia==0 and $filas_arreglo>0) $col2->setHTML('type="text" size="15"  maxlength="'.chr(39).$lonart.chr(39).'"');
     if ($referencia==1 or $filas_arreglo==0) $col2->setHTML('type="text" size="15"  readonly=true');
-    if ($referencia==0 and $filas_arreglo>0) $col2->setCatalogo('caregart','sf_admin_edit_form',array('codart' => 2,'desart' => 3, 'cospro' => 9, $campo_col13 => 13, 'codpar' => 15), 'Caregart_Almsolegr',$params);
+    if ($referencia==0 and $filas_arreglo>0) $col2->setCatalogo('caregart','sf_admin_edit_form',array('codart' => 2,'desart' => 3, 'cospro' => 9, $campo_col13 => 13, 'codpar' => 16), 'Caregart_Almsolegr',$params);
     if ($referencia==0 ) $col2->setJScript('onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascaraarticulo.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}" onBlur="javascript:event.keyCode=13; actualizo_cod_presupuestario(this.id);ajax_detalle_codigo_pre(event,this.id);ajaxdetalle(event,this.id);"');
 
     $col3 = new Columna('Descripción');
