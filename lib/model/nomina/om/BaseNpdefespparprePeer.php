@@ -13,7 +13,7 @@ abstract class BaseNpdefespparprePeer {
 	const CLASS_DEFAULT = 'lib.model.nomina.Npdefespparpre';
 
 	
-	const NUM_COLUMNS = 4;
+	const NUM_COLUMNS = 14;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -29,6 +29,36 @@ abstract class BaseNpdefespparprePeer {
 	const NUMDIAMAXANO = 'npdefespparpre.NUMDIAMAXANO';
 
 	
+	const TIPSALAJUNODEP = 'npdefespparpre.TIPSALAJUNODEP';
+
+	
+	const TIPSALBONFINANOFRA = 'npdefespparpre.TIPSALBONFINANOFRA';
+
+	
+	const FACTORBONFINANOFRA = 'npdefespparpre.FACTORBONFINANOFRA';
+
+	
+	const TIPSALBONVACFRA = 'npdefespparpre.TIPSALBONVACFRA';
+
+	
+	const FACTORBONVACFRA = 'npdefespparpre.FACTORBONVACFRA';
+
+	
+	const DESCRIPCLAU = 'npdefespparpre.DESCRIPCLAU';
+
+	
+	const CODRET = 'npdefespparpre.CODRET';
+
+	
+	const NUMDIAANT = 'npdefespparpre.NUMDIAANT';
+
+	
+	const PORANOANT = 'npdefespparpre.PORANOANT';
+
+	
+	const TIPSALDIAANT = 'npdefespparpre.TIPSALDIAANT';
+
+	
 	const ID = 'npdefespparpre.ID';
 
 	
@@ -37,18 +67,18 @@ abstract class BaseNpdefespparprePeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codnom', 'Numdiames', 'Numdiamaxano', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (NpdefespparprePeer::CODNOM, NpdefespparprePeer::NUMDIAMES, NpdefespparprePeer::NUMDIAMAXANO, NpdefespparprePeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codnom', 'numdiames', 'numdiamaxano', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
+		BasePeer::TYPE_PHPNAME => array ('Codnom', 'Numdiames', 'Numdiamaxano', 'Tipsalajunodep', 'Tipsalbonfinanofra', 'Factorbonfinanofra', 'Tipsalbonvacfra', 'Factorbonvacfra', 'Descripclau', 'Codret', 'Numdiaant', 'Poranoant', 'Tipsaldiaant', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (NpdefespparprePeer::CODNOM, NpdefespparprePeer::NUMDIAMES, NpdefespparprePeer::NUMDIAMAXANO, NpdefespparprePeer::TIPSALAJUNODEP, NpdefespparprePeer::TIPSALBONFINANOFRA, NpdefespparprePeer::FACTORBONFINANOFRA, NpdefespparprePeer::TIPSALBONVACFRA, NpdefespparprePeer::FACTORBONVACFRA, NpdefespparprePeer::DESCRIPCLAU, NpdefespparprePeer::CODRET, NpdefespparprePeer::NUMDIAANT, NpdefespparprePeer::PORANOANT, NpdefespparprePeer::TIPSALDIAANT, NpdefespparprePeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codnom', 'numdiames', 'numdiamaxano', 'tipsalajunodep', 'tipsalbonfinanofra', 'factorbonfinanofra', 'tipsalbonvacfra', 'factorbonvacfra', 'descripclau', 'codret', 'numdiaant', 'poranoant', 'tipsaldiaant', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codnom' => 0, 'Numdiames' => 1, 'Numdiamaxano' => 2, 'Id' => 3, ),
-		BasePeer::TYPE_COLNAME => array (NpdefespparprePeer::CODNOM => 0, NpdefespparprePeer::NUMDIAMES => 1, NpdefespparprePeer::NUMDIAMAXANO => 2, NpdefespparprePeer::ID => 3, ),
-		BasePeer::TYPE_FIELDNAME => array ('codnom' => 0, 'numdiames' => 1, 'numdiamaxano' => 2, 'id' => 3, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
+		BasePeer::TYPE_PHPNAME => array ('Codnom' => 0, 'Numdiames' => 1, 'Numdiamaxano' => 2, 'Tipsalajunodep' => 3, 'Tipsalbonfinanofra' => 4, 'Factorbonfinanofra' => 5, 'Tipsalbonvacfra' => 6, 'Factorbonvacfra' => 7, 'Descripclau' => 8, 'Codret' => 9, 'Numdiaant' => 10, 'Poranoant' => 11, 'Tipsaldiaant' => 12, 'Id' => 13, ),
+		BasePeer::TYPE_COLNAME => array (NpdefespparprePeer::CODNOM => 0, NpdefespparprePeer::NUMDIAMES => 1, NpdefespparprePeer::NUMDIAMAXANO => 2, NpdefespparprePeer::TIPSALAJUNODEP => 3, NpdefespparprePeer::TIPSALBONFINANOFRA => 4, NpdefespparprePeer::FACTORBONFINANOFRA => 5, NpdefespparprePeer::TIPSALBONVACFRA => 6, NpdefespparprePeer::FACTORBONVACFRA => 7, NpdefespparprePeer::DESCRIPCLAU => 8, NpdefespparprePeer::CODRET => 9, NpdefespparprePeer::NUMDIAANT => 10, NpdefespparprePeer::PORANOANT => 11, NpdefespparprePeer::TIPSALDIAANT => 12, NpdefespparprePeer::ID => 13, ),
+		BasePeer::TYPE_FIELDNAME => array ('codnom' => 0, 'numdiames' => 1, 'numdiamaxano' => 2, 'tipsalajunodep' => 3, 'tipsalbonfinanofra' => 4, 'factorbonfinanofra' => 5, 'tipsalbonvacfra' => 6, 'factorbonvacfra' => 7, 'descripclau' => 8, 'codret' => 9, 'numdiaant' => 10, 'poranoant' => 11, 'tipsaldiaant' => 12, 'id' => 13, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, )
 	);
 
 	
@@ -107,6 +137,26 @@ abstract class BaseNpdefespparprePeer {
 		$criteria->addSelectColumn(NpdefespparprePeer::NUMDIAMES);
 
 		$criteria->addSelectColumn(NpdefespparprePeer::NUMDIAMAXANO);
+
+		$criteria->addSelectColumn(NpdefespparprePeer::TIPSALAJUNODEP);
+
+		$criteria->addSelectColumn(NpdefespparprePeer::TIPSALBONFINANOFRA);
+
+		$criteria->addSelectColumn(NpdefespparprePeer::FACTORBONFINANOFRA);
+
+		$criteria->addSelectColumn(NpdefespparprePeer::TIPSALBONVACFRA);
+
+		$criteria->addSelectColumn(NpdefespparprePeer::FACTORBONVACFRA);
+
+		$criteria->addSelectColumn(NpdefespparprePeer::DESCRIPCLAU);
+
+		$criteria->addSelectColumn(NpdefespparprePeer::CODRET);
+
+		$criteria->addSelectColumn(NpdefespparprePeer::NUMDIAANT);
+
+		$criteria->addSelectColumn(NpdefespparprePeer::PORANOANT);
+
+		$criteria->addSelectColumn(NpdefespparprePeer::TIPSALDIAANT);
 
 		$criteria->addSelectColumn(NpdefespparprePeer::ID);
 
