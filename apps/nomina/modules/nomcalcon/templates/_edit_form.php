@@ -53,7 +53,7 @@
 
 	</th>
 	<th>&nbsp;&nbsp;&nbsp;
-    <?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Npcalcon_nomcalcon/clase/Npdefcpt/frame/sf_admin_edit_form/obj1/npcalcon_codcon/obj2/npcalcon_nomcon/campo1/codcon/campo2/nomcon/param1/1','','','buttoncat')?></th>
+    <?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Npcalcon_nomcalcon/clase/Npdefcpt/frame/sf_admin_edit_form/obj1/npcalcon_codcon/obj2/npcalcon_nomcon/campo1/codcon/campo2/nomcon','','','buttoncat')?></th>
   </tr>
 </table>
 
@@ -103,7 +103,7 @@
 
 	</th>
 	<th>&nbsp;&nbsp;&nbsp;
-    <?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo')."/metodo/Npcalcon_nomcalcon/clase/Npnomina/frame/sf_admin_edit_form/obj1/npcalcon_codnom/obj2/npcalcon_nomnom/campo1/codnom/campo2/nomnom/param1/2/param2/'+$('npcalcon_codcon').value+' ",'','','buttoncat')?></th>
+    <?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo')."/metodo/Npcalcon_nomcalcon2/clase/Npnomina/frame/sf_admin_edit_form/obj1/npcalcon_codnom/obj2/npcalcon_nomnom/campo1/codnom/campo2/nomnom/param1/'+$('npcalcon_codcon').value+' ",'','','buttoncat')?></th>
   </tr>
 </table>
 
