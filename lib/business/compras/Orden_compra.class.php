@@ -2076,18 +2076,14 @@ class Orden_compra
   public static function Se_elimina_compromiso($caordcom)
   {
     $c= new Criteria();
-    $referencia='OC'.substr($caordcom->getOrdcom(), 3, 6);
-        $c->add(CpcomproPeer::REFCOM,$referencia);
-        $cpcompro_del = CpcomproPeer::doSelectOne($c);
-          if (count($cpcompro_del)>0)
-          {
-            if ($cpcompro_del->getSalcau>0)
-                return false;
-            else
-                return true;
-          }
-          else
-             return true;
+    $c->add(CpimpcauPeer::REFERE,$caordcom->getOrdcom());
+    $cpimpcau = CpimpcauPeer::doSelect($c);
+    if (count($cpimpcau)>0)
+    {
+      return false;
+    }
+    else
+      return true;
    }
 
 
