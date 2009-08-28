@@ -1770,30 +1770,15 @@ class CatalogoWeb extends BaseCatalogoWeb {
 
   ////////////////////////////////////////////////NOMCALCON////////////////////////////////////////
 
-  public function Npcalcon_nomcalcon($params) {
+	public function Npcalcon_nomcalcon() {
 
-    if ($params[0] == '1') {
-      $this->c = new Criteria();
-      $this->columnas = array (
-        NpdefcptPeer :: NOMCON => 'Nombre Concepto',
-        NpdefcptPeer :: CODCON => 'Código Concepto'
-      );
-    }
-    if ($params[0] == '2') {
-      $this->c = new Criteria();
-      $this->c->addJoin(NpasiconnomPeer :: CODNOM, NpasicarnomPeer :: CODNOM);
-      $this->c->addJoin(NpasicarnomPeer :: CODNOM, NpnominaPeer :: CODNOM);
-      $this->c->add(NpasiconnomPeer :: CODCON, $params[1]);
-      $this->c->setDistinct();
-      //    $this->c->addAscendingOrderByColumn(FordefsitprePeer::CODSITPRE);
+			$this->c = new Criteria();
+			$this->columnas = array (
+				NpdefcptPeer :: NOMCON => 'Nombre Concepto',
+				NpdefcptPeer :: CODCON => 'Código Concepto'
+			);
 
-      $this->columnas = array (
-        NpnominaPeer :: NOMNOM => 'Nombre Nómina',
-        NpnominaPeer :: CODNOM => 'Código'
-      );
-    }
-
-  }
+	}
 
   public function Contabb_Almtippro() {
     $this->c = new Criteria();
@@ -5643,7 +5628,7 @@ A.CODREDE"
       NpbenefiembPeer :: NOMBEN => 'Nombre'
     );
   }
-  
+
   public function Nptipret_codret($param = array ()) {
 	$this->c = new Criteria();
 
@@ -5653,6 +5638,20 @@ A.CODREDE"
 	);
   }
 
+   	public function Npcalcon_nomcalcon2($params) {
+
+			$this->c = new Criteria();
+			$this->c->addJoin(NpasiconnomPeer :: CODNOM, NpasicarnomPeer :: CODNOM);
+			$this->c->addJoin(NpasicarnomPeer :: CODNOM, NpnominaPeer :: CODNOM);
+			$this->c->add(NpasiconnomPeer :: CODCON, $params[0]);
+			$this->c->setDistinct();
+
+			$this->columnas = array (
+				NpnominaPeer :: NOMNOM => 'Nombre Nómina',
+				NpnominaPeer :: CODNOM => 'Código'
+			);
+
+	}
 }
 
 ?>
