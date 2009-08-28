@@ -316,4 +316,10 @@ $this->Bitacora('Guardo');
 	$grid=Herramientas::CargarDatosGrid($this,$this->obj);
 	Nomina::salvarNpnomesptipos($npnomesptipos,$grid);
   }
+
+  protected function deleteNpnomesptipos($npnomesptipos)
+  {
+  	Herramientas::EliminarRegistro('Npnomespnomtip','codnomesp',$npnomesptipos->getCodnomesp());
+    $npnomesptipos->delete();
+  }
 }
