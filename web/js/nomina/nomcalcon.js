@@ -197,8 +197,8 @@
 			{
 				var cod1 = $('cajaux').value;
 				var cod2 = $('idlabel').value;
-				if (cod1=="NHMENEDA" || cod1=="NHMAYEDA"|| cod1=="SIMESDAD"|| cod1=='SHORAS' || cod1=='SDIAS' || cod1=='FECDIAS'|| cod1=='FECMES'|| cod1=='FECANNOS')
-				    var cod = cod1+cod2;
+				if (cod1=="NHMENEDA" || cod1=="NHMAYEDA"|| cod1=="SIMESDAD"|| cod1=='SHORAS' || cod1=='SDIAS' || cod1=='FECDIAS'|| cod1=='FECMES'|| cod1=='FECANNOS'|| cod1=='INTPRES')
+				    var cod = cod1+cod2.toUpperCase();
   			    else
 					var cod = cod1+"("+cod2+")";
 
@@ -224,8 +224,11 @@
 					var cod1 = $('cajaux').value;
 					var fecha = $('idlabel2').value;
 					var cod2 = fecha.substr(0,2)+fecha.substr(3,2)+fecha.substr(6,4);
-
-					var cod = cod1+cod2;
+					if (cod1=='INTPRES')
+					    var cod = cod1+cod2.toUpperCase();
+	  			    else
+						var cod = cod1+cod2;
+						
 					$('textooculto1').hide();
 					$('grid1').show();
 					$('idfunciones').disabled=false;
@@ -254,7 +257,11 @@
 			{
 				var cod1 = $('cajaux').value;
 				var cod2 = $('idlabel').value;
-				var cod = cod1+"("+cod2+")";
+				if (cod1=='INTPRES')
+				    var cod = cod1+cod2.toUpperCase();
+  			    else
+					var cod = cod1+"("+cod2+")";
+				
 				$('textooculto1').hide();
 				$('grid1').show();
 				$('idfunciones').disabled=false;
@@ -273,8 +280,11 @@
 					var cod1 = $('cajaux').value;
 					var fecha = $('idlabel2').value;
 					var cod2 = fecha.substr(0,2)+fecha.substr(3,2)+fecha.substr(6,4);
-
-					var cod = cod1+cod2;
+					if (cod1=='INTPRES')
+					    var cod = cod1+cod2.toUpperCase();
+	  			    else
+						var cod = cod1+cod2;
+					
 					$('textooculto1').hide();
 					$('grid1').show();
 					$('idfunciones').disabled=false;
@@ -697,6 +707,29 @@
 					$('idlabel').show();
 
 					$('label1').innerHTML = "Introduzca la cantidad de meses hacia atras para la funcion "+cod+":    ";
+					$('textooculto1').show();
+					$('idlabel').value='';
+					$('cajaux').value=cod;
+					$('idlabel').readOnly=false;
+					$('idlabel').focus();
+					return true;
+		     	}
+				else if(cod=='INTPRES')
+		     	{
+		     	    $('grid1').hide();
+					$('idfunciones').disabled=true;
+					$('idempleados').disabled=true;
+					$('idmovimientos').disabled=true;
+					$('idhistoricos').disabled=true;
+					$('idvariables').disabled=true;
+					$('idconceptos').disabled=true;
+					$('idlabel2').hide();
+					$('cajoculabel').value='';
+					$('idlabel2').value='';
+					$('histoculto').hide();
+					$('idlabel').show();
+
+					$('label1').innerHTML = "Introduzca el tipo de capitalizacion (A)nual, (M)ensual o (N)o-Capitalizable:    ";
 					$('textooculto1').show();
 					$('idlabel').value='';
 					$('cajaux').value=cod;
