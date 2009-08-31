@@ -283,6 +283,50 @@ echo grid_tag($obj);
 ?>
 </div>
 </fieldset>
+
+<?php tabPageOpenClose("tp1","tabPage3", 'Aumentar % Sueldos');?>
+<fieldset id="sf_fieldset_none" class="">
+<div class="form-row">
+<table>
+<tr>
+<th>
+  <?php echo label_for('npcargos[porcen]', __($labels['npcargos{porcen}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('npcargos{porcen}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npcargos{porcen}')): ?>
+    <?php echo form_error('npcargos{porcen}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($npcargos, array('getPorcen',true), array (
+  'control_name' => 'npcargos[porcen]',
+  'onBlur' => "javascript:event.keyCode=13;return entermontootro(event,this.id)",
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+</th>
+<th>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</th>
+<th>
+<ul class="sf_admin_actions">
+<li class="float-left">
+<?php echo submit_to_remote('Submit2', 'Aumentar', array(
+         'update'   => 'comp',
+         'url'      => 'nomdefespcar/ajax?ajax=4',
+         'script'   => true,
+         'complete' => 'AjaxJSON(request, json)',
+         'submit' => 'sf_admin_edit_form',
+         ),array('class' => 'sf_admin_action_save')) ?>
+</li>
+</ul>
+</th>
+</tr>
+</table>
+<br>
+<div id="comp">
+</div>
+
+</div>
+</fieldset>
+
 <?php tabInit('tp1','0');?>
 <?php include_partial('edit_actions', array('npcargos' => $npcargos)) ?>
 

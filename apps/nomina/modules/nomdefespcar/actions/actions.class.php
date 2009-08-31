@@ -138,6 +138,34 @@ $this->Bitacora('Guardo');
         $dato=NpperfilPeer::getDesperfil($this->getRequestParameter('codigo'));
           $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$cajtexcom.'","4","c"]]';
       }
+      else  if ($this->getRequestParameter('ajax')=='4')
+      {
+        $javascript="";
+        $porcent=H::tofloat($this->getRequestParameter('npcargos[porcen]'));
+        if ($porcent>0)
+        {
+         if ($porcent<=100)
+         {
+	        $p= new Criteria();
+	        $reg= NpcargosPeer::doSelect($p);
+	        if ($reg)
+	        {
+	         foreach ($reg as $obj)
+	         {
+	           $adi=(($obj->getSuecar()*$porcent)/100);
+	           $obj->setSuecar($obj->getSuecar()+$adi);
+	           $obj->save();
+	         }
+	        }
+         }else{
+         	$javascript="alert('El Porcentaje a Aumentar no puede sobrepasar el 100 %');";
+         }
+        }else{
+        	$javascript="alert('El Porcentaje a Aumentar debe ser Mayor a cero');";
+        }
+
+        $output = '[["javascript","'.$javascript.'",""]]';
+      }
 
   	    $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
 	    return sfView::HEADER_ONLY;
