@@ -2184,6 +2184,18 @@ class Nomina {
 
         return $valor;
         break;
+		
+	  case "INTPRES" :
+        $valor = 0;
+        $fecha = date('d/m/Y',strtotime($fecnom));
+        $criterio = "Select * from calculopres('$empleado','$fecha','A','P') where tipo='DEPOSITADOS' order by fecini desc";
+        if (Herramientas :: BuscarDatos($criterio, & $calpres)) 
+		{
+			$valor = $calpres[0]['monint'];
+		}          	
+
+        return $valor;
+        break;	
 
       default :
         $aux = 0;
@@ -3765,6 +3777,18 @@ class Nomina {
 
         return $valor;
         break;
+		
+	  case "INTPRES" :
+        $valor = 0;
+        $fecha = $hasta_mod;
+        $criterio = "Select * from calculopres('$empleado','$fecha','A','P') where tipo='DEPOSITADOS' order by fecini desc";
+        if (Herramientas :: BuscarDatos($criterio, & $calpres)) 
+		{
+			$valor = $calpres[0]['monint'];
+		}          	
+
+        return $valor;
+        break;	
 
       default :
         /////// FFRAC
@@ -5289,6 +5313,10 @@ class Nomina {
     $objNomesp->setDesnomesp($npnomesptipos->getDesnomesp());
     $objNomesp->setFecnomdes($npnomesptipos->getFecnomdes());
     $objNomesp->setFecnomhas($npnomesptipos->getFecnomhas());
+	if($npnomesptipos->getNomintpre()==1)
+		$objNomesp->setNomintpre('S');
+	else
+		$objNomesp->setNomintpre(null);	
     $objNomesp->save();
 
   }
