@@ -61,6 +61,10 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
 
 
 	
+	protected $codpar;
+
+
+	
 	protected $id;
 
 	
@@ -160,6 +164,13 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
   {
 
     return trim($this->tipsaldiaant);
+
+  }
+  
+  public function getCodpar()
+  {
+
+    return trim($this->codpar);
 
   }
   
@@ -300,6 +311,16 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setCodpar($v)
+	{
+
+    if ($this->codpar !== $v) {
+        $this->codpar = $v;
+        $this->modifiedColumns[] = NpdefespparprePeer::CODPAR;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -340,7 +361,9 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
 
       $this->tipsaldiaant = $rs->getString($startcol + 12);
 
-      $this->id = $rs->getInt($startcol + 13);
+      $this->codpar = $rs->getString($startcol + 13);
+
+      $this->id = $rs->getInt($startcol + 14);
 
       $this->resetModified();
 
@@ -348,7 +371,7 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 14; 
+            return $startcol + 15; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Npdefespparpre object", $e);
     }
@@ -535,6 +558,9 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
 				return $this->getTipsaldiaant();
 				break;
 			case 13:
+				return $this->getCodpar();
+				break;
+			case 14:
 				return $this->getId();
 				break;
 			default:
@@ -560,7 +586,8 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
 			$keys[10] => $this->getNumdiaant(),
 			$keys[11] => $this->getPoranoant(),
 			$keys[12] => $this->getTipsaldiaant(),
-			$keys[13] => $this->getId(),
+			$keys[13] => $this->getCodpar(),
+			$keys[14] => $this->getId(),
 		);
 		return $result;
 	}
@@ -616,6 +643,9 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
 				$this->setTipsaldiaant($value);
 				break;
 			case 13:
+				$this->setCodpar($value);
+				break;
+			case 14:
 				$this->setId($value);
 				break;
 		} 	}
@@ -638,7 +668,8 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[10], $arr)) $this->setNumdiaant($arr[$keys[10]]);
 		if (array_key_exists($keys[11], $arr)) $this->setPoranoant($arr[$keys[11]]);
 		if (array_key_exists($keys[12], $arr)) $this->setTipsaldiaant($arr[$keys[12]]);
-		if (array_key_exists($keys[13], $arr)) $this->setId($arr[$keys[13]]);
+		if (array_key_exists($keys[13], $arr)) $this->setCodpar($arr[$keys[13]]);
+		if (array_key_exists($keys[14], $arr)) $this->setId($arr[$keys[14]]);
 	}
 
 	
@@ -659,6 +690,7 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(NpdefespparprePeer::NUMDIAANT)) $criteria->add(NpdefespparprePeer::NUMDIAANT, $this->numdiaant);
 		if ($this->isColumnModified(NpdefespparprePeer::PORANOANT)) $criteria->add(NpdefespparprePeer::PORANOANT, $this->poranoant);
 		if ($this->isColumnModified(NpdefespparprePeer::TIPSALDIAANT)) $criteria->add(NpdefespparprePeer::TIPSALDIAANT, $this->tipsaldiaant);
+		if ($this->isColumnModified(NpdefespparprePeer::CODPAR)) $criteria->add(NpdefespparprePeer::CODPAR, $this->codpar);
 		if ($this->isColumnModified(NpdefespparprePeer::ID)) $criteria->add(NpdefespparprePeer::ID, $this->id);
 
 		return $criteria;
@@ -715,6 +747,8 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
 		$copyObj->setPoranoant($this->poranoant);
 
 		$copyObj->setTipsaldiaant($this->tipsaldiaant);
+
+		$copyObj->setCodpar($this->codpar);
 
 
 		$copyObj->setNew(true);

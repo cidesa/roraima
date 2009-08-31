@@ -44,6 +44,8 @@ class NpantpreMapBuilder {
 
 		$tMap->addColumn('OBSERVACION', 'Observacion', 'string', CreoleTypes::VARCHAR, false, 1000);
 
+		$tMap->addColumn('FECSOLANT', 'Fecsolant', 'int', CreoleTypes::DATE, false, null);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

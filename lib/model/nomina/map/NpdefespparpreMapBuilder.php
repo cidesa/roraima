@@ -60,6 +60,8 @@ class NpdefespparpreMapBuilder {
 
 		$tMap->addColumn('TIPSALDIAANT', 'Tipsaldiaant', 'string', CreoleTypes::VARCHAR, false, 2);
 
+		$tMap->addColumn('CODPAR', 'Codpar', 'string', CreoleTypes::VARCHAR, false, 32);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 
