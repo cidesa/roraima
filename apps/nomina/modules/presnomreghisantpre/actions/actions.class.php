@@ -37,7 +37,34 @@ class presnomreghisantpreActions extends autopresnomreghisantpreActions
     {
       $this->npantpre->setCodemp($npantpre['codemp']);
     }
-
+    if (isset($npantpre['fecsolant']))
+    {
+      if ($npantpre['fecsolant'])
+      {
+        try
+        {
+          $dateFormat = new sfDateFormat($this->getUser()->getCulture());
+                              if (!is_array($npantpre['fecsolant']))
+          {
+            $value = $dateFormat->format($npantpre['fecsolant'], 'i', $dateFormat->getInputPattern('d'));
+          }
+          else
+          {
+            $value_array = $npantpre['fecsolant'];
+            $value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+          }
+          $this->npantpre->setFecsolant($value);
+        }
+        catch (sfException $e)
+        {
+          // not a date
+        }
+      }
+      else
+      {
+        $this->npantpre->setFecsolant(null);
+      }
+    }
     if (isset($npantpre['fecant']))
     {
       if ($npantpre['fecant'])

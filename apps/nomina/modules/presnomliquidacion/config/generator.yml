@@ -5,23 +5,23 @@ generator:
     theme:            cidesaGenerator
 
     fields:
-      display: [nomemp, sue311296, sue180697, ultimosueldo, salarioint, fecing, feccor, fecegr, diaefe, mesefe, anoefe, diarn, mesrn, anorn, diara, mesra, anora]
+      display: [nomemp, sue311296, sue180697, ultimosueldo, salarioint, fecing, feccor, fecegr, diaefe, mesefe, anoefe, diarn, mesrn, anorn, diara, mesra, anora, codret]
       codemp:
         name: Código Empleado
         msj_error: El numero del expediente es necesario
         catalogo:  
           catalogoweb: Nphispre_Presnomcalintpre
           clase: Nphojint 
-          ajax: 1
+          ajax: 0
           parametros: getprincipal="getCodemp" getsecundario="getNomemp" campoprincipal="codemp" camposecundario="nomemp" campobase = "id"           
           #catalogoparams:
           #ajaxparams:  
-          divupdate: divgridvaca     
+          #divupdate: divgridvaca     
           #id:
       sue311296:
-        name: Al 31/12/1996
+        name: Ultimo Salario Devengado
       sue180697:
-        name: Al 18/06/1997
+        name: Salario Promedio A la Fecha de Egreso
       ultimosueldo:
         name: Salario Normal A la Fecha de Egreso
       salarioint:
@@ -62,12 +62,15 @@ generator:
         name: .
       deducciones:
         name: .
-
+      retiro:
+        name: .
+      codret:
+        name: Tipo de Retiro    
 
     edit:
       title:  Liquidación de Prestaciones
       display:
-        Datos del Empleados: [codemp]
+        Datos del Empleados: [codemp, _retiro]
         Datos Generales de la Liquidacion de Prestaciones: [ _salarios, _fechas, _tiempo, _vacaciones]
         Asignaciones/Deducciones para la Liquidacion de Prestaciones: [_asignaciones, _deducciones]
       actions:

@@ -10,6 +10,7 @@ generator:
       fecant:    { name: Fecha del Anticipo, params: date_format='dd/MM/yyyy' }
       observacion: { name: Observacion}
       monant:    { name: Monto del Anticipo }
+      fecsolant: { name: Fecha Solicitud Anticipo}
 
     list:
       title:          Registro Histórico de Anticipos Otorgados
@@ -25,6 +26,6 @@ generator:
 
     edit:
       title:          Registro Histórico de Anticipos Otorgados
-      display:        [codemp, nomemp, fecant, monant, observacion]
+      display:        [codemp, nomemp, fecsolant, fecant, monant, observacion]
       actions:
         _list:         ~

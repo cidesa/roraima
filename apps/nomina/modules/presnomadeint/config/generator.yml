@@ -30,6 +30,7 @@ generator:
       monade: { name: Monto }
       observacion: { name: Observación, type: textarea_tag, params: size=65x5 maxlength=1000 }
       monantint: { name: Monto intereses,  params: readonly:true  size=12}
+      fecsolade: { name: Fecha Solicitud Adelanto}
           
     list: 
       title: Listado de Anticipos de Intereses de Prestaciones:
@@ -48,7 +49,7 @@ generator:
       title: Registro de Anticipos de Intereses de Prestaciones:
       display:
         Datos Empleado:  [codcon, codemp]
-        Datos Anticipo:  [monantint, fecade, monade, observacion]
+        Datos Anticipo:  [monantint, fecsolade, fecade, monade, observacion]
       actions:
         _list:        ~
         _save:        ~

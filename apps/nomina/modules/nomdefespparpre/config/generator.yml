@@ -25,6 +25,15 @@ generator:
       factorbonvacfra:{ name: Factor}
       ptipsalbonvacfra: { name: .}
       descripclau:      { name:  Descripcion clausula }
+      codpar:
+        name:  Código Partida
+        msj_error: Debe Ingresar La Partida
+        catalogo:
+          catalogoweb: Nppartidas_Almregart
+          clase: Nppartidas
+          ajax: 0
+          parametros: getprincipal="getCodpar" getsecundario="getNompar" campoprincipal="codpar" camposecundario="nompar" campobase = "id"                
+        params:  maxlength=32
       codret:
         name:  Tipo Retiro
         msj_error: Debe Ingresar Tipo de Retiro
@@ -56,7 +65,7 @@ generator:
         Dias Adicionales:   [numdiames, numdiamaxano, _ptipsalajunodep]
         Bono Fin de Año Fraccionado: [_ptipsalbonfinanofra, factorbonfinanofra]
         Bono Vacacional Fraccionado: [_ptipsalbonvacfra, factorbonvacfra]
-        Liquidacion de Prestaciones: [descripclau, codret, _ptipsaldiaant]
+        Liquidacion de Prestaciones: [descripclau, codpar, codret, _ptipsaldiaant]
         
       actions:
         _list:        ~

@@ -13,13 +13,27 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 
   // Para incluir funcionalidades al executeEdit()
   public function editing()
-  {
+  {  	
 	$this->configGrid();
 	$this->configGridAsigDeduc();	
+	$this->arrret = $this->cargar_tiporetiro();
+	$this->params = array('arrret'=>$this->arrret);
   }
+
+  public function cargar_tiporetiro()
+  {
+  	  $c = new Criteria();
+	  $obj = NptipretPeer::doSelect($c);
+	  $r=array(''=>'Selecccione....');
+
+	  foreach($obj  as  $i)
+	  {
+	  	$r += array($i->getCodret()=>$i->getDesret());
+	  }
+	  return $r;
+  }  
   
-  
-  public function configGridAsigDeduc($codemp="",$codnom="",$categoria="",$fecegr="",$ultimosueldo="",$salariointegral="",$estaliquidado=false)
+  public function configGridAsigDeduc($codemp="",$codnom="",$categoria="",$fecegr="",$arrclau=array(),$salariointegral="",$estaliquidado=false)
   {	
     $perasig=array();
     $perdeduc=array();
@@ -204,6 +218,11 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 				   $j++;
 			  }
 			  $cont++;		  
+			}
+			#CALCULO DE LA CLAUSULA
+			if($arrclau)
+			{
+				$perasig[$i]=$arrclau;
 			}
 			
 		  }
@@ -532,7 +551,8 @@ public function configGrid($codemp="")
   {
     $codigo = $this->getRequestParameter('codigo','');    
     $ajax = $this->getRequestParameter('ajax','');	
-	$salarioi = $this->getRequestParameter('salario','');	
+	$salarioi = $this->getRequestParameter('salario','');		
+	$tipret = $this->getRequestParameter('tipret','');
 	$this->cond=0;
 	$js="";
 	$delemp="";
@@ -754,23 +774,21 @@ public function configGrid($codemp="")
 					{
 						$salariointegral=$ultimosueldo;
 					}
-				}
-				   
-				
-				
-				
+				}				
 					
 				#Sueldo al 31/12/1996
-				$sql = "Select coalesce(sum(MonAsi),0)  as sue311296 from NPSALINT where CodEmp='$codemp' and  
-				FECFINCON= to_date('31/12/1996','dd/mm/yyyy') ";
+				$sql = "select distinct salemp as sue311296 from npimppresoc a where a.codemp='$codemp' 
+						and a.fecini=(select max(fecini) from npimppresoc where codemp=a.codemp)";
 				if (H::BuscarDatos($sql,$rs))
 					$sue311296=$rs[0]["sue311296"];
 				else
 					$sue311296= 0.00;
 					
 				#Sueldo al 30/06/1997	
-				$sql =  "Select coalesce(sum(MonAsi),0)  as sue180697 from NPSALINT where CodEmp='$codemp' and 
-				FECFINCON= to_date('30/06/1997','dd/mm/yyyy') ";
+				$sql =  "select avg(salemp) as sue180697 from (
+							select distinct salemp,fecini from npimppresoc where codemp='$codemp' 
+							order by fecini desc limit 12
+							)a";
 				if (H::BuscarDatos($sql,$rs))
 					$sue180697=$rs[0]["sue180697"];
 				else
@@ -786,11 +804,72 @@ public function configGrid($codemp="")
 				$this->getUser()->setAttribute('objvaca',$this->npliquidacion_det->getObjvaca());
 				$this->objvaca = $this->getUser()->getAttribute('objvaca');
 	
+	            /**BUCAR TIPO DE SALARIO PARA AGUINALDOS y PARA CLAUSULA DE RETIRO*/				
+				$arrclau=array();
+				$tipsalagui='SI';
+				$tipsalret='SI';
+				$numdia=0;
+				$descripclau='';
+				$partida='';
+				$c1 = new Criteria();
+			    $c1->add(NpdefespparprePeer::CODNOM,$codnom);
+				$c1->add(NpdefespparprePeer::CODRET,$tipret);
+			    $per1 = NpdefespparprePeer::doSelectOne($c1);
+			    if($per1)
+				{
+					$tipsalagui=$per1->getTipsalbonfinanofra();
+					$tipsalret=$per1->getTipsaldiaant();
+					if($per1->getPoranoant()=='S')
+					   $numdia=$per1->getNumdiaant()*$anoefec;
+					else
+					   $numdia=$per1->getNumdiaant();   
+					$partida = $per1->getCodpar();
+					$descripclau = $per1->getDescripclau();
+				}				
+				#SALARIO AGUINALDO
+				if($tipsalagui=='UD')
+				  $salarioaguinaldos=$sue311296;	
+				elseif($tipsalagui=='SP')
+				  $salarioaguinaldos=$sue180697;
+				elseif($tipsalagui=='SN')
+				  $salarioaguinaldos=$ultimosueldo;
+				else
+				  $salarioaguinaldos=$salariointegral;
+				#SALARIO CLAUSULA
+				if($tipsalret=='UD')
+				  $salarioclau=$sue311296;	
+				elseif($tipsalret=='SP')
+				  $salarioclau=$sue180697;
+				elseif($tipsalret=='SN')
+				  $salarioclau=$ultimosueldo;
+				else
+				  $salarioclau=$salariointegral;  
+				  
+				$salarioclausula=($salarioclau/30)*($numdia);
+				if($salarioclausula>0)
+				{
+					$arrclau['concepto'] = $descripclau;
+					$arrclau['monto'] = H::FormatoMonto($salarioclausula);
+					$arrclau['codpre'] = $categoria."-".$partida;
+					$c = new Criteria();
+				    $c->add(CpdeftitPeer::CODPRE,$categoria."-".$partida);
+				    $rs = CpdeftitPeer::doSelectone($c);
+					if($rs->getNompre())				
+						$arrclau['descripcion'] = $rs->getNompre();
+					else
+					    $arrclau['descripcion'] = '<!titulo presupuestario no existe!>';					
+					$arrclau['codcon'] = 'AUT';				
+					$arrclau['dias'] = $numdia;				
+					$arrclau['id'] = 9;	
+				}							
+				
+				/************FIN*************************/
+	
 				/**CALCULO DE ASIGNACIONES Y DEDUCCIONES*/			
 				if(!$estaliquidado)
 				{
 					# NO TIENE LIQUIDACIONES CALCULADAS				
-					$this->configGridAsigDeduc($codemp,$codnom,$categoria,$fechae,$ultimosueldo,$salariointegral,$estaliquidado);
+					$this->configGridAsigDeduc($codemp,$codnom,$categoria,$fechae,$arrclau,$salarioaguinaldos,$estaliquidado);
 					$this->getUser()->setAttribute('objasig',$this->npliquidacion_det->getObjasig());
 					$this->getUser()->setAttribute('objdeduc',$this->npliquidacion_det->getObjdeduc());
 					$js.="toAjaxUpdater('divgridasig',2,getUrlModulo()+'ajax','2');
@@ -805,11 +884,13 @@ public function configGrid($codemp="")
 						$js.="$('save').hide();";						
 					}						
 					else{
+						$codret = $rss[0]['codret'];
+						$js.="$('npliquidacion_det_codret').selectedIndex='$codret';";
 						$js.="alert('Liquidacion Realizada');";												
 						$delemp=$codemp;
 					}
 					    
-					$this->configGridAsigDeduc($codemp,$codnom,$categoria,$fechae,$ultimosueldo,$salariointegral,$estaliquidado);
+					$this->configGridAsigDeduc($codemp,$codnom,$categoria,$fechae,$arrclau,$salarioaguinaldos,$estaliquidado);
 					$this->getUser()->setAttribute('objasig',$this->npliquidacion_det->getObjasig());
 					$this->getUser()->setAttribute('objdeduc',$this->npliquidacion_det->getObjdeduc());
 					$js.="toAjaxUpdater('divgridasig',2,getUrlModulo()+'ajax','2');
@@ -1053,6 +1134,15 @@ public function configGrid($codemp="")
   	$grida=Herramientas::CargarDatosGridv2($this,$this->Objasig,true);
 	$gridd=Herramientas::CargarDatosGridv2($this,$this->Objdeduc,true);
     $this->coderr = PrestacionesSociales::salvar_liquidacion($npliquidacion_det,$grida,$gridd);
+
+	$c = new Criteria();
+	$c->add(NphojintPeer::CODEMP,$npliquidacion_det->getCodemp());
+	$per = NphojintPeer::doSelectOne($c);
+	if($per)
+	{
+		$per->setCodret($npliquidacion_det->getCodret());
+		$per->save();
+	}
 	
     return $this->coderr;
   }
@@ -1064,6 +1154,17 @@ public function configGrid($codemp="")
 	$c = new Criteria();
 	$c->add(NpliquidacionDetPeer::CODEMP,$codemp);
 	NpliquidacionDetPeer::doDelete($c);
+	
+	$c = new Criteria();
+	$c->add(NphojintPeer::CODEMP,$codemp);
+	$per = NphojintPeer::doSelectOne($c);
+	if($per)
+	{
+		$per->setCodret('');
+		$per->save();
+	}
+	
+	
 	$this->getUser()->getAttributeHolder()->remove('delemp');
     return $this->forward('presnomliquidacion', 'list');
   }
