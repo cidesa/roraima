@@ -1012,6 +1012,11 @@ class Nomina {
       $parametro = substr($token, 8, strlen($token));
       $token = "SIMESDAD";
     }
+	
+	if (Herramientas :: StringPos($token, "INTPRES", 0) != -1) {
+      $parametro = substr($token, 7, strlen($token));
+      $token = "INTPRES";
+    }
 
     if (Herramientas :: StringPos($token, "SHORAS", 0) != -1) {
       $parametro = substr($token, 6, strlen($token));
@@ -1247,6 +1252,11 @@ class Nomina {
       $parametro = substr($token, 6, strlen($token));
 
       $token = "SHORAS";
+    }
+	
+	if (Herramientas :: StringPos($token, "INTPRES", 0) != -1) {
+      $parametro = substr($token, 7, strlen($token));
+      $token = "INTPRES";
     }
 
     if (Herramientas :: StringPos($token, "SDIAS", 0) != -1) {
@@ -2188,9 +2198,10 @@ class Nomina {
 	  case "INTPRES" :
         $valor = 0;
         $fecha = date('d/m/Y',strtotime($fecnom));
-        $criterio = "Select * from calculopres('$empleado','$fecha','A','P') where tipo='DEPOSITADOS' order by fecini desc";
+        $criterio = "Select * from calculopres('$empleado','$fecha','$parametro','P') where tipo='DEPOSITADOS' order by fecini desc";
+		
         if (Herramientas :: BuscarDatos($criterio, & $calpres)) 
-		{
+		{		
 			$valor = $calpres[0]['monint'];
 		}          	
 
@@ -2865,7 +2876,14 @@ class Nomina {
 
       $campo = "SIMESDAD";
     }
+	
+	if (Herramientas :: StringPos($campo, "INTPRES", 0) != -1) {
+      $parametro = substr($campo, 7, strlen($campo));
 
+      $campo = "INTPRES";
+    }
+print $parametro;
+print "--".$campo;
 
     if (Herramientas :: StringPos($campo, "SHORAS", 0) != -1) {
       $parametro = substr($campo, 6, strlen($campo));
@@ -3781,7 +3799,7 @@ class Nomina {
 	  case "INTPRES" :
         $valor = 0;
         $fecha = $hasta_mod;
-        $criterio = "Select * from calculopres('$empleado','$fecha','A','P') where tipo='DEPOSITADOS' order by fecini desc";
+        $criterio = "Select * from calculopres('$empleado','$fecha','$parametro','P') where tipo='DEPOSITADOS' order by fecini desc";
         if (Herramientas :: BuscarDatos($criterio, & $calpres)) 
 		{
 			$valor = $calpres[0]['monint'];
