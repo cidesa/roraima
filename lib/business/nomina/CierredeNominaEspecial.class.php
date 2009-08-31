@@ -325,6 +325,18 @@ class CierredeNominaEspecial
   c.inimon='S' and b.codcon=c.codcon and a.codnom=b.codnom and d.codnomesp='".$codnomesp."' and d.especial='S'  AND a.status='V')";
 
  Herramientas::insertarRegistros($sql4);
+ 
+ #SI LA NOMINA ES DE INTERESES DE PRESTACIONES AGREGAMOS EL REGISTRO EN NPADEINT
+
+ $sqlade="INSERT INTO NPADEINT(CODCON,CODEMP,FECADE,MONADE,FECSOLADE)
+			(select C.CODTIPCON,A.CODEMP,A.FECNOMESPHAS,A.MONTO,A.FECNOMESPHAS
+			from NPNOMCAL A, NPNOMESPTIPOS B, NPASIEMPCONT C WHERE A.CODNOM='$codnomina' AND A.CODNOMESP='$codnomesp' AND A.ESPECIAL='S'
+			AND COALESCE(B.NOMINTPRE,'N')='S'
+			AND A.CODNOMESP=B.CODNOMESP
+			AND A.CODEMP=C.CODEMP AND STATUS='A'
+			)";
+			
+ Herramientas::insertarRegistros($sqlade);			
 
 //Actualización de Prestamos
    $sql5="select * from Nptippre where codcon in (select codcon from npnomcal where codnom='".$codnomina."' and codnomesp='".$codnomesp."' and especial='S')";
