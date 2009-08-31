@@ -854,7 +854,7 @@ public function configGrid($codemp="")
 					$c = new Criteria();
 				    $c->add(CpdeftitPeer::CODPRE,$categoria."-".$partida);
 				    $rs = CpdeftitPeer::doSelectone($c);
-					if($rs->getNompre())				
+					if($rs)				
 						$arrclau['descripcion'] = $rs->getNompre();
 					else
 					    $arrclau['descripcion'] = '<!titulo presupuestario no existe!>';					
