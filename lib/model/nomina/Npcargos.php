@@ -10,6 +10,7 @@
 class Npcargos extends BaseNpcargos
 {
 	protected $carasi = '';
+	protected $porcen="0,00";
 
 	public function getNomtip()
 	{
