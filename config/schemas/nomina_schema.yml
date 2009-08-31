@@ -79,6 +79,9 @@ propel:
       type: VARCHAR
       size: 100
       ##primaryKey: true
+    fecsolade:
+      type: DATE
+      ##primaryKey: true      
     id:
       type: INTEGER
       required: true
@@ -107,6 +110,9 @@ propel:
     observacion:
       type: VARCHAR
       size: 1000
+    fecsolant:
+      type: DATE
+      ##primaryKey: true  
     id:
       type: INTEGER
       required: true
@@ -4955,6 +4961,9 @@ propel:
       type: DATE
     fecnomhas:
       type: DATE
+    nomintpre:
+      type: VARCHAR
+      size: 1  
     id:
       type: INTEGER
       required: true
@@ -6873,6 +6882,9 @@ propel:
     tipsaldiaant:
       type: VARCHAR
       size: 2        
+    codpar:
+      type: VARCHAR
+      size: 32  
     id:
       type: INTEGER
       required: true
