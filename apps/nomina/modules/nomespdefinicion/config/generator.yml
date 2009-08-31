@@ -8,6 +8,7 @@ generator:
       desnomesp: { name: Descripcion}
       fecnomdes: { name: Desde}
       fecnomhas: { name: Hasta}
+      nomintpre: { name: Nómina de Intereses de Prestaciones, type: checkbox_tag}
     list:
       title:          Definicion
       filters:        [codnomesp, desnomesp]
@@ -21,7 +22,7 @@ generator:
       max_per_page:   5
     edit:
       title:          Edicion de Definicion
-      display:       [=codnomesp, desnomesp, fecnomdes, fecnomhas]
+      display:       [=codnomesp, desnomesp, fecnomdes, fecnomhas, nomintpre]
       fields:
         fecnomdes: { params: date_format='dd/MM/yy' }
         fecnomhas: { params: date_format='dd/MM/yy' }

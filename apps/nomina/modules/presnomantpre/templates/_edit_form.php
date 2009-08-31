@@ -72,6 +72,31 @@
 <fieldset id="sf_fieldset_none" class="">
 <legend>Datos del Anticipo</legend>
 <div class="form-row">
+<?php echo label_for('npantpre[fecsolant]', __($labels['npantpre{fecsolant}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('npantpre{fecsolant}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npantpre{fecsolant}')): ?>
+    <?php echo form_error('npantpre{fecsolant}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_date_tag($npantpre, 'getFecsolant', array (
+  'rich' => true,
+  'calendar_button_img' => '/sf/sf_admin/images/date.png',
+  'control_name' => 'npantpre[fecsolant]',
+  'date_format' => 'dd/MM/yy',
+  'onChange'=> remote_function(array(
+     'update'   => 'mensaje',
+     'condition' =>  "$('id').value == ''",
+     'url'      => 'presnomantpre/ajax',
+     'complete' => 'AjaxJSON(request, json)',
+     'script' => true,
+     'with' => "'ajax=2&cod='+$('npantpre_codemp').value+'&codigo='+this.value",
+     )),
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+
+<br><br>	
+	
+	
   <?php echo label_for('npantpre[fecant]', __($labels['npantpre{fecant}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('npantpre{fecant}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('npantpre{fecant}')): ?>
@@ -94,7 +119,7 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 
-<br><br>
+<br><br>  
 
   <?php echo label_for('npantpre[monant]', __($labels['npantpre{monant}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('npantpre{monant}')): ?> form-error<?php endif; ?>">

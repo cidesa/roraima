@@ -309,6 +309,10 @@ $this->Bitacora('Guardo');
         $this->npnomesptipos->setFecnomhas(null);
       }
     }
+	if (isset($npnomesptipos['nomintpre']))
+	{
+		$this->npnomesptipos->setNomintpre($npnomesptipos['nomintpre']);
+	}
   }
 
   protected function saveNpnomesptipos($npnomesptipos)

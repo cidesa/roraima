@@ -57,6 +57,20 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 <br>
+
+  <?php echo label_for('npnomesptipos[nomintpre]', __($labels['npnomesptipos{nomintpre}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('npnomesptipos{nomintpre}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npnomesptipos{nomintpre}')): ?>
+    <?php echo form_error('npnomesptipos{nomintpre}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_checkbox_tag($npnomesptipos, 'getNomintpre', array (
+  'control_name' => 'npnomesptipos[nomintpre]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+	
+<br>	
+<br>
 </div>
 </fieldset>
 

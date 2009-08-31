@@ -10,6 +10,7 @@ generator:
       fecant: {name: Fecha del Anticipo}
       observacion: { name: Observacion}
       monto: { name: Monto del Anticipo}
+      fecsolant: { name: Fecha Solicitud Anticipo}
 
     list:
       title:          Anticipo Sobre Prestaciones
@@ -23,7 +24,7 @@ generator:
       max_per_page:   5
     edit:
       title:          Edición Anticipo Sobre Prestaciones
-      display:       [=codemp, nomemp, monant, fecant, monto, observacion]
+      display:       [=codemp, nomemp, monant, fecsolant, fecant, monto, observacion]
       fields:
         fecant: { params: date_format='dd/MM/yy' }
       actions:
