@@ -24,6 +24,8 @@ class cidesaUser extends sfBasicSecurityUser
 
   public function autenticate_native($nombre,$passwd,$codemp)
   {
+    //$usuarios = ApliUserPeer::doSelectSql('select %s from apli_user limit 3');
+    
     $credenciales = '';
 
     $c = new Criteria();
@@ -45,16 +47,16 @@ class cidesaUser extends sfBasicSecurityUser
         $c = new Criteria();
         $c->add(ApliUserPeer::LOGUSE,strtoupper($nombre).'%',Criteria::LIKE);
         $c->add(ApliUserPeer::CODEMP,$codemp);
-        $privilegios = ApliUserPeer::doSelect($c);
+        $privilegios = ApliUserPeer::doSelectArray($c);
         $credenciales = '';
 
         if($privilegios){
           foreach ($privilegios as $p) {
-            if(trim($p->getLoguse())==strtoupper($nombre)){
-              $nomopc = $p->getNomopc();
+            if(trim($p['loguse'])==strtoupper($nombre)){
+              $nomopc = $p['nomopc'];
               if($nomopc!='catalogo' && $nomopc!='menu' && $nomopc!='admin')
-                $this->addCredential(strtolower($p->getNomopc().'_'.$p->getPriuse()));
-              else $this->addCredential(strtolower($p->getNomopc()));
+                $this->addCredential(strtolower($p['nomopc'].'_'.$p['priuse']));
+              else $this->addCredential(strtolower($p['nomopc']));
             }
           }
         }
