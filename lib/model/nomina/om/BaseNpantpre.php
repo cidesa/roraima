@@ -29,6 +29,10 @@ abstract class BaseNpantpre extends BaseObject  implements Persistent {
 
 
 	
+	protected $fecsolant;
+
+
+	
 	protected $id;
 
 	
@@ -89,6 +93,28 @@ abstract class BaseNpantpre extends BaseObject  implements Persistent {
     return trim($this->observacion);
 
   }
+  
+  public function getFecsolant($format = 'Y-m-d')
+  {
+
+    if ($this->fecsolant === null || $this->fecsolant === '') {
+      return null;
+    } elseif (!is_int($this->fecsolant)) {
+            $ts = adodb_strtotime($this->fecsolant);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecsolant] as date/time value: " . var_export($this->fecsolant, true));
+      }
+    } else {
+      $ts = $this->fecsolant;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
   
   public function getId()
   {
@@ -154,6 +180,23 @@ abstract class BaseNpantpre extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setFecsolant($v)
+	{
+
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecsolant] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecsolant !== $ts) {
+      $this->fecsolant = $ts;
+      $this->modifiedColumns[] = NpantprePeer::FECSOLANT;
+    }
+
+	} 
+	
 	public function setId($v)
 	{
 
@@ -178,7 +221,9 @@ abstract class BaseNpantpre extends BaseObject  implements Persistent {
 
       $this->observacion = $rs->getString($startcol + 4);
 
-      $this->id = $rs->getInt($startcol + 5);
+      $this->fecsolant = $rs->getDate($startcol + 5, null);
+
+      $this->id = $rs->getInt($startcol + 6);
 
       $this->resetModified();
 
@@ -186,7 +231,7 @@ abstract class BaseNpantpre extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 6; 
+            return $startcol + 7; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Npantpre object", $e);
     }
@@ -349,6 +394,9 @@ abstract class BaseNpantpre extends BaseObject  implements Persistent {
 				return $this->getObservacion();
 				break;
 			case 5:
+				return $this->getFecsolant();
+				break;
+			case 6:
 				return $this->getId();
 				break;
 			default:
@@ -366,7 +414,8 @@ abstract class BaseNpantpre extends BaseObject  implements Persistent {
 			$keys[2] => $this->getMonant(),
 			$keys[3] => $this->getMonto(),
 			$keys[4] => $this->getObservacion(),
-			$keys[5] => $this->getId(),
+			$keys[5] => $this->getFecsolant(),
+			$keys[6] => $this->getId(),
 		);
 		return $result;
 	}
@@ -398,6 +447,9 @@ abstract class BaseNpantpre extends BaseObject  implements Persistent {
 				$this->setObservacion($value);
 				break;
 			case 5:
+				$this->setFecsolant($value);
+				break;
+			case 6:
 				$this->setId($value);
 				break;
 		} 	}
@@ -412,7 +464,8 @@ abstract class BaseNpantpre extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[2], $arr)) $this->setMonant($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setMonto($arr[$keys[3]]);
 		if (array_key_exists($keys[4], $arr)) $this->setObservacion($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setId($arr[$keys[5]]);
+		if (array_key_exists($keys[5], $arr)) $this->setFecsolant($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setId($arr[$keys[6]]);
 	}
 
 	
@@ -425,6 +478,7 @@ abstract class BaseNpantpre extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(NpantprePeer::MONANT)) $criteria->add(NpantprePeer::MONANT, $this->monant);
 		if ($this->isColumnModified(NpantprePeer::MONTO)) $criteria->add(NpantprePeer::MONTO, $this->monto);
 		if ($this->isColumnModified(NpantprePeer::OBSERVACION)) $criteria->add(NpantprePeer::OBSERVACION, $this->observacion);
+		if ($this->isColumnModified(NpantprePeer::FECSOLANT)) $criteria->add(NpantprePeer::FECSOLANT, $this->fecsolant);
 		if ($this->isColumnModified(NpantprePeer::ID)) $criteria->add(NpantprePeer::ID, $this->id);
 
 		return $criteria;
@@ -465,6 +519,8 @@ abstract class BaseNpantpre extends BaseObject  implements Persistent {
 		$copyObj->setMonto($this->monto);
 
 		$copyObj->setObservacion($this->observacion);
+
+		$copyObj->setFecsolant($this->fecsolant);
 
 
 		$copyObj->setNew(true);

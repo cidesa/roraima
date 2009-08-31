@@ -29,6 +29,10 @@ abstract class BaseNpadeint extends BaseObject  implements Persistent {
 
 
 	
+	protected $fecsolade;
+
+
+	
 	protected $id;
 
 	
@@ -88,6 +92,28 @@ abstract class BaseNpadeint extends BaseObject  implements Persistent {
     return trim($this->observacion);
 
   }
+  
+  public function getFecsolade($format = 'Y-m-d')
+  {
+
+    if ($this->fecsolade === null || $this->fecsolade === '') {
+      return null;
+    } elseif (!is_int($this->fecsolade)) {
+            $ts = adodb_strtotime($this->fecsolade);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecsolade] as date/time value: " . var_export($this->fecsolade, true));
+      }
+    } else {
+      $ts = $this->fecsolade;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
   
   public function getId()
   {
@@ -153,6 +179,23 @@ abstract class BaseNpadeint extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setFecsolade($v)
+	{
+
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecsolade] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecsolade !== $ts) {
+      $this->fecsolade = $ts;
+      $this->modifiedColumns[] = NpadeintPeer::FECSOLADE;
+    }
+
+	} 
+	
 	public function setId($v)
 	{
 
@@ -177,7 +220,9 @@ abstract class BaseNpadeint extends BaseObject  implements Persistent {
 
       $this->observacion = $rs->getString($startcol + 4);
 
-      $this->id = $rs->getInt($startcol + 5);
+      $this->fecsolade = $rs->getDate($startcol + 5, null);
+
+      $this->id = $rs->getInt($startcol + 6);
 
       $this->resetModified();
 
@@ -185,7 +230,7 @@ abstract class BaseNpadeint extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 6; 
+            return $startcol + 7; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Npadeint object", $e);
     }
@@ -348,6 +393,9 @@ abstract class BaseNpadeint extends BaseObject  implements Persistent {
 				return $this->getObservacion();
 				break;
 			case 5:
+				return $this->getFecsolade();
+				break;
+			case 6:
 				return $this->getId();
 				break;
 			default:
@@ -365,7 +413,8 @@ abstract class BaseNpadeint extends BaseObject  implements Persistent {
 			$keys[2] => $this->getFecade(),
 			$keys[3] => $this->getMonade(),
 			$keys[4] => $this->getObservacion(),
-			$keys[5] => $this->getId(),
+			$keys[5] => $this->getFecsolade(),
+			$keys[6] => $this->getId(),
 		);
 		return $result;
 	}
@@ -397,6 +446,9 @@ abstract class BaseNpadeint extends BaseObject  implements Persistent {
 				$this->setObservacion($value);
 				break;
 			case 5:
+				$this->setFecsolade($value);
+				break;
+			case 6:
 				$this->setId($value);
 				break;
 		} 	}
@@ -411,7 +463,8 @@ abstract class BaseNpadeint extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[2], $arr)) $this->setFecade($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setMonade($arr[$keys[3]]);
 		if (array_key_exists($keys[4], $arr)) $this->setObservacion($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setId($arr[$keys[5]]);
+		if (array_key_exists($keys[5], $arr)) $this->setFecsolade($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setId($arr[$keys[6]]);
 	}
 
 	
@@ -424,6 +477,7 @@ abstract class BaseNpadeint extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(NpadeintPeer::FECADE)) $criteria->add(NpadeintPeer::FECADE, $this->fecade);
 		if ($this->isColumnModified(NpadeintPeer::MONADE)) $criteria->add(NpadeintPeer::MONADE, $this->monade);
 		if ($this->isColumnModified(NpadeintPeer::OBSERVACION)) $criteria->add(NpadeintPeer::OBSERVACION, $this->observacion);
+		if ($this->isColumnModified(NpadeintPeer::FECSOLADE)) $criteria->add(NpadeintPeer::FECSOLADE, $this->fecsolade);
 		if ($this->isColumnModified(NpadeintPeer::ID)) $criteria->add(NpadeintPeer::ID, $this->id);
 
 		return $criteria;
@@ -464,6 +518,8 @@ abstract class BaseNpadeint extends BaseObject  implements Persistent {
 		$copyObj->setMonade($this->monade);
 
 		$copyObj->setObservacion($this->observacion);
+
+		$copyObj->setFecsolade($this->fecsolade);
 
 
 		$copyObj->setNew(true);

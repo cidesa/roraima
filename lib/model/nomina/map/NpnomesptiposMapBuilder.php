@@ -42,6 +42,8 @@ class NpnomesptiposMapBuilder {
 
 		$tMap->addColumn('FECNOMHAS', 'Fecnomhas', 'int', CreoleTypes::DATE, false, null);
 
+		$tMap->addColumn('NOMINTPRE', 'Nomintpre', 'string', CreoleTypes::VARCHAR, false, 1);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

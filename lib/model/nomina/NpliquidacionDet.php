@@ -29,6 +29,12 @@ class NpliquidacionDet extends BaseNpliquidacionDet
 	protected $objvaca=array();
 	protected $objasig=array();
 	protected $objdeduc=array();
+	protected $codret='';
 	
+	public function hydrate(ResultSet $rs, $startcol = 1)
+   {
+      parent::hydrate($rs, $startcol);
+      $this->codret=self::getCodret();
+   }
 	
 }
