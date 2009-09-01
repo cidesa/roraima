@@ -14,8 +14,7 @@ class catdefdivbarurbActions extends autocatdefdivbarurbActions
   // Para incluir funcionalidades al executeEdit()
   public function editing()
   {
-
-
+   $this->setVars();
   }
 
   public function configGrid($reg = array(),$regelim = array())
@@ -84,37 +83,53 @@ class catdefdivbarurbActions extends autocatdefdivbarurbActions
 
   public function executeAjax()
   {
-
     $codigo = $this->getRequestParameter('codigo','');
-    // Esta variable ajax debe ser usada en cada llamado para identificar
-    // que objeto hace el llamado y por consiguiente ejecutar el código necesario
     $ajax = $this->getRequestParameter('ajax','');
-
-    // Se debe enviar en la petición ajax desde el cliente los datos que necesitemos
-    // para generar el código de retorno, esto porque en un llamado Ajax no se devuelven
-    // los datos de los objetos de la vista como pasa en un submit normal.
-
+    $cajtexmos = $this->getRequestParameter('cajtexmos','');
+    $dato=""; $dato2="";
+    $javascript="";
     switch ($ajax){
       case '1':
-        // La variable $output es usada para retornar datos en formato de arreglo para actualizar
-        // objetos en la vista. mas informacion en
-        // http://201.210.211.26:8080/www/wiki/index.php/Agregar_Ajax_para_buscar_una_descripcion
-        $output = '[["","",""],["","",""],["","",""]]';
+	  	$this->loncc=0;
+	  	$c = new Criteria();
+	  	$reg = CatnivcatPeer::doselect($c);
+
+	  	foreach ($reg as $datos)
+	  	{
+	  	  $formato= $datos->getForcodcat();
+	  		if ($datos->getEssector()!='S')
+	  		{
+	            $this->loncc = $this->loncc + $datos->getLonniv()+1;
+	  		}else{
+	  			$this->loncc = $this->loncc + $datos->getLonniv();
+	  			break;
+	  		}
+	  	}
+
+	  	$mascara = substr($formato,0,$this->loncc);
+	  	$longitud = strlen($mascara);
+       if (strlen($codigo)==$longitud)
+       {
+        $t= new Criteria();
+        $t->add(CatdivgeoPeer::CODDIVGEO,$codigo);
+        $reg= CatdivgeoPeer::doSelectOne($t);
+        if ($reg)
+        {
+          $dato=$reg->getDesdivgeo(); $dato2=$reg->getId();
+        }else{
+        	$javascript="alert_('La Ubicaci&oacute;n Ge&oacute;grafica no existe'); $('catcosaval_coddivgeo').value=''; $('catcosaval_coddivgeo').focus();";
+        }
+       }else{
+       	$javascript="alert_('El  C&oacute;digo de Ubicaci&oacute;n no tiene nivel de Sector'); $('catcosaval_coddivgeo').value=''; $('catcosaval_coddivgeo').focus();";
+       }
+        $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""],["catbarurb_catdivgeo_id","'.$dato2.'",""]]';
         break;
       default:
         $output = '[["","",""],["","",""],["","",""]]';
     }
 
-    // Instruccion para escribir en la cabecera los datos a enviar a la vista
     $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
-
-    // Si solo se va usar ajax para actualziar datos en objetos ya existentes se debe
-    // mantener habilitar esta instrucción
     return sfView::HEADER_ONLY;
-
-    // Si por el contrario se quiere reemplazar un div en la vista, se debe deshabilitar
-    // por supuesto tomando en cuenta que debe existir el archivo ajaxSuccess.php en la carpeta templates.
-
   }
 
 
@@ -178,6 +193,31 @@ class catdefdivbarurbActions extends autocatdefdivbarurbActions
   public function deleting($clasemodelo)
   {
     return parent::deleting($clasemodelo);
+  }
+
+  public function setVars()
+  {
+  	$this->loncc=0;
+  	$c = new Criteria();
+  	$reg = CatnivcatPeer::doselect($c);
+
+  	foreach ($reg as $datos)
+  	{
+  	  $formato= $datos->getForcodcat();
+  		if ($datos->getEssector()!='S')
+  		{
+            $this->loncc = $this->loncc + $datos->getLonniv()+1;
+            $this->nomabr = $this->nomabr .'-'.$datos->getNomabr();
+  		}else{
+  			$this->loncc = $this->loncc + $datos->getLonniv();
+  			$this->nomabr = $this->nomabr .'-'.$datos->getNomabr();
+  			break;
+  		}
+  	}
+
+  	$this->params[0] = substr($formato,0,$this->loncc);
+  	$this->params[1] = strlen($this->params[0]);
+  	$this->params[2] = substr($this->nomabr,1,strlen($this->nomabr));
   }
 
 

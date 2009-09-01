@@ -10,6 +10,7 @@
 class Catbarurb extends BaseCatbarurb
 {
 	protected $coddivgeo="";
+	protected $desdivgeo="";
 
 
   public function __toString()
@@ -22,14 +23,18 @@ class Catbarurb extends BaseCatbarurb
    return Herramientas::getX('id','catdivgeo','coddivgeo',self::getCatdivgeoId());
   }
 
+  public function getDesdivgeo(){
+   return Herramientas::getX('id','catdivgeo','desdivgeo',self::getCatdivgeoId());
+  }
 
-  public function hydrate(ResultSet $rs, $startcol = 1){
+
+  /*public function hydrate(ResultSet $rs, $startcol = 1){
     parent::hydrate($rs, $startcol);
 
     $catdivgeo = $this->getCatdivgeo();
     //if($catdivgeo) $this->coddivgeo = $catdivgeo->getCoddivgeo();
     if($catdivgeo) $this->desdivgeo = $catdivgeo->getDesdivgeo();
 
-  }
+  }*/
 
 }

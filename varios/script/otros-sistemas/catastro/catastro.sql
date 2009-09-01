@@ -1014,3 +1014,80 @@ COMMENT ON TABLE "catusoespinm" IS '';
 ALTER TABLE "catusoespinm" ADD CONSTRAINT "catusoespinm_FK_1" FOREIGN KEY ("catreginm_id") REFERENCES "catreginm" ("id");
 
 ALTER TABLE "catusoespinm" ADD CONSTRAINT "catusoespinm_FK_2" FOREIGN KEY ("catusoesp_id") REFERENCES "catusoesp" ("id");
+
+-----------------------------------------------------------------------------
+-- catcosaval
+-----------------------------------------------------------------------------
+
+DROP TABLE IF EXISTS "catcosaval" CASCADE;
+
+DROP SEQUENCE IF EXISTS "catcosaval_seq";
+
+CREATE SEQUENCE "catcosaval_seq";
+
+
+CREATE TABLE "catcosaval"
+(
+  "coddivgeo" VARCHAR(40)  NOT NULL,
+  "catusoesp_id" INTEGER  NOT NULL,
+  "tipo" VARCHAR(2)  NOT NULL,
+  "costo" NUMERIC(12,2)  NOT NULL,
+  "id" INTEGER  NOT NULL DEFAULT nextval('catcosaval_seq'::regclass),
+  PRIMARY KEY ("id")
+);
+
+COMMENT ON TABLE "catcosaval" IS '';
+
+
+ALTER TABLE "catcosaval" ADD CONSTRAINT "catcosaval_FK_1" FOREIGN KEY ("catusoesp_id") REFERENCES "catusoesp" ("id");
+
+-----------------------------------------------------------------------------
+-- catdefaval
+-----------------------------------------------------------------------------
+
+DROP TABLE IF EXISTS "catdefaval" CASCADE;
+
+DROP SEQUENCE IF EXISTS "catdefaval_seq";
+
+CREATE SEQUENCE "catdefaval_seq";
+
+
+CREATE TABLE "catdefaval"
+(
+  "coddivgeo" VARCHAR(40)  NOT NULL,
+  "nrocas" VARCHAR(30),
+  "status" VARCHAR(1)  NOT NULL,
+  "id" INTEGER  NOT NULL DEFAULT nextval('catdefaval_seq'::regclass),
+  PRIMARY KEY ("id")
+);
+
+COMMENT ON TABLE "catdefaval" IS '';
+
+
+-----------------------------------------------------------------------------
+-- catdetaval
+-----------------------------------------------------------------------------
+
+DROP TABLE IF EXISTS "catdetaval" CASCADE;
+
+DROP SEQUENCE IF EXISTS "catdetaval_seq";
+
+CREATE SEQUENCE "catdetaval_seq";
+
+
+CREATE TABLE "catdetaval"
+(
+  "catdefaval_id" INTEGER,
+  "catusoesp_id" INTEGER  NOT NULL,
+  "tipo" VARCHAR(2)  NOT NULL,
+  "montot" NUMERIC(12,2)  NOT NULL,
+  "id" INTEGER  NOT NULL DEFAULT nextval('catdetaval_seq'::regclass),
+  PRIMARY KEY ("id")
+);
+
+COMMENT ON TABLE "catdetaval" IS '';
+
+
+ALTER TABLE "catdetaval" ADD CONSTRAINT "catdetaval_FK_1" FOREIGN KEY ("catdefaval_id") REFERENCES "catdefaval" ("id");
+
+ALTER TABLE "catdetaval" ADD CONSTRAINT "catdetaval_FK_2" FOREIGN KEY ("catusoesp_id") REFERENCES "catusoesp" ("id");

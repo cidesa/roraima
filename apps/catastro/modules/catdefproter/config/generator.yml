@@ -5,7 +5,8 @@ generator:
     theme:            cidesaGenerator
 
     fields:
-      descatproter:    { name: Descripcion, params: size=40}
+      descatproter:    { name: Descripción, params: size=40}
+      esmunicipal:     { name: Municipal}
 
     list:
       title:     Definicion de Propiedad de Terreno
@@ -21,7 +22,7 @@ generator:
 
     edit:
       title: Edicion de Propiedad de Terreno
-      display:    [ descatproter]
+      display:    [ descatproter, _esmunicipal]
       actions:
         _list:        ~
         _save:        ~

@@ -5298,18 +5298,17 @@ A.CODREDE"
 
 
 
-  public function Catdefcatman_Cattramo($params='')
-  {
-    $this->c = new Criteria();
-    $this->c->add(CattramoPeer::CATTIPVIA_ID,$params[0]);
-    $this->c->add(CattramoPeer::CATDIVGEO_ID,$params[1]);
-    $this->c->addJoin(CattramoPeer::CATDIVGEO_ID,CatdivgeoPeer::ID);
-    $this->c->addAscendingOrderByColumn(CattramoPeer::CATDIVGEO_ID);
+public function Catdefcatman_Cattramo($params = '') {
+		$this->c = new Criteria();
+		$this->c->add(CattramoPeer :: CATTIPVIA_ID, $params[0]);
+		$this->c->add(CattramoPeer :: CATDIVGEO_ID, $params[1]);
+		$this->c->addJoin(CattramoPeer :: CATDIVGEO_ID, CatdivgeoPeer :: ID);
+		$this->c->addAscendingOrderByColumn(CattramoPeer :: CATDIVGEO_ID);
 
-    $this->columnas = array (
-      CattramoPeer::NOMTRAMO => 'Descripcion'
-    );
-  }
+		$this->columnas = array (
+			CattramoPeer :: NOMTRAMO => 'Descripcion'
+		);
+	}
 
   public function Atprovee_Aciprovee($params='')
   {
@@ -5650,6 +5649,17 @@ A.CODREDE"
 				NpnominaPeer :: NOMNOM => 'Nombre Nómina',
 				NpnominaPeer :: CODNOM => 'Código'
 			);
+
+	}
+
+  	public function Catdefaval_Catreginm($params = '') {
+		$this->c = new Criteria();
+
+		$this->columnas = array (
+			CatreginmPeer :: CODDIVGEO => 'Ubicación Geógrafica',
+			CatreginmPeer :: NROCAS => 'N° Catastral',
+
+		);
 
 	}
 }

@@ -9,6 +9,10 @@ class Catastro {
       while ($j<count($x))
       {
         $x[$j]->setForcodcat($clasemodelo->getForcodcat());
+        if ($x[$j]->getEssector()=='1')
+        {
+        	$x[$j]->setEssector('S');
+        }else $x[$j]->setEssector(null);
         $x[$j]->save();
         $j++;
       }
@@ -47,5 +51,30 @@ class Catastro {
       exit();
       return $cod;
    }
+
+       public static function salvarAvaluos($clasemodelo,$grid) {
+	    try{
+	      $clasemodelo->save();
+	      $x=$grid[0];
+		  $j=0;
+		  if (count($x)>0)
+		  {
+			  while ($j<count($x))
+			  {
+	              $catdetaval= new Catdetaval();
+	              $catdetaval->setCatdefavalId($clasemodelo->getId());
+	              $catdetaval->setCatusoespId($x[$j]->getCatusoespId());
+	              $catdetaval->setTipo($x[$j]->getTipo());
+	              $catdetaval->setMontot($x[$j]->getMontot());
+                  $catdetaval->save();
+
+			    $j++;
+			  }
+		  }
+			return -1;
+		} catch (Exception $ex){
+			 return 0;
+		}
+    }
 }
 ?>
