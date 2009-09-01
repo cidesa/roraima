@@ -172,7 +172,7 @@ class catdeftramoActions extends autocatdeftramoActions
     return parent::deleting($clasemodelo);
   }
 
-  public function setVars()
+ /* public function setVars()
   {
   	$c = new Criteria();
   	//$c->add(CatnivcatPeer::CATPAR,'Z',Criteria::ALT_NOT_EQUAL);  // !=
@@ -191,6 +191,31 @@ class catdeftramoActions extends autocatdeftramoActions
   	$this->params[1] = strlen(substr($this->params[0],0,strlen($this->params[0])-$this->loncc-1));
   	$this->params[2] = substr($this->nomabr,1,strlen($this->nomabr));
   	$this->params[3] = $this->loncc;
+  }*/
+
+    public function setVars()
+  {
+  	$this->loncc=0;
+  	$c = new Criteria();
+  	$reg = CatnivcatPeer::doselect($c);
+
+  	foreach ($reg as $datos)
+  	{
+  	  $formato= $datos->getForcodcat();
+  		if ($datos->getEssector()!='S')
+  		{
+            $this->loncc = $this->loncc + $datos->getLonniv()+1;
+            $this->nomabr = $this->nomabr .'-'.$datos->getNomabr();
+  		}else{
+  			$this->loncc = $this->loncc + $datos->getLonniv();
+  			$this->nomabr = $this->nomabr .'-'.$datos->getNomabr();
+  			break;
+  		}
+  	}
+
+  	$this->params[0] = substr($formato,0,$this->loncc);
+  	$this->params[1] = strlen($this->params[0]);
+  	$this->params[2] = substr($this->nomabr,1,strlen($this->nomabr));
   }
 
 }

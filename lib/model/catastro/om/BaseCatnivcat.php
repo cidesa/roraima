@@ -25,6 +25,10 @@ abstract class BaseCatnivcat extends BaseObject  implements Persistent {
 
 
 	
+	protected $essector;
+
+
+	
 	protected $id;
 
 	
@@ -59,6 +63,13 @@ abstract class BaseCatnivcat extends BaseObject  implements Persistent {
   {
 
     return trim($this->forcodcat);
+
+  }
+  
+  public function getEssector()
+  {
+
+    return trim($this->essector);
 
   }
   
@@ -109,6 +120,16 @@ abstract class BaseCatnivcat extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setEssector($v)
+	{
+
+    if ($this->essector !== $v) {
+        $this->essector = $v;
+        $this->modifiedColumns[] = CatnivcatPeer::ESSECTOR;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -131,7 +152,9 @@ abstract class BaseCatnivcat extends BaseObject  implements Persistent {
 
       $this->forcodcat = $rs->getString($startcol + 3);
 
-      $this->id = $rs->getInt($startcol + 4);
+      $this->essector = $rs->getString($startcol + 4);
+
+      $this->id = $rs->getInt($startcol + 5);
 
       $this->resetModified();
 
@@ -139,7 +162,7 @@ abstract class BaseCatnivcat extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 5; 
+            return $startcol + 6; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Catnivcat object", $e);
     }
@@ -299,6 +322,9 @@ abstract class BaseCatnivcat extends BaseObject  implements Persistent {
 				return $this->getForcodcat();
 				break;
 			case 4:
+				return $this->getEssector();
+				break;
+			case 5:
 				return $this->getId();
 				break;
 			default:
@@ -315,7 +341,8 @@ abstract class BaseCatnivcat extends BaseObject  implements Persistent {
 			$keys[1] => $this->getLonniv(),
 			$keys[2] => $this->getNomabr(),
 			$keys[3] => $this->getForcodcat(),
-			$keys[4] => $this->getId(),
+			$keys[4] => $this->getEssector(),
+			$keys[5] => $this->getId(),
 		);
 		return $result;
 	}
@@ -344,6 +371,9 @@ abstract class BaseCatnivcat extends BaseObject  implements Persistent {
 				$this->setForcodcat($value);
 				break;
 			case 4:
+				$this->setEssector($value);
+				break;
+			case 5:
 				$this->setId($value);
 				break;
 		} 	}
@@ -357,7 +387,8 @@ abstract class BaseCatnivcat extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[1], $arr)) $this->setLonniv($arr[$keys[1]]);
 		if (array_key_exists($keys[2], $arr)) $this->setNomabr($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setForcodcat($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setId($arr[$keys[4]]);
+		if (array_key_exists($keys[4], $arr)) $this->setEssector($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setId($arr[$keys[5]]);
 	}
 
 	
@@ -369,6 +400,7 @@ abstract class BaseCatnivcat extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CatnivcatPeer::LONNIV)) $criteria->add(CatnivcatPeer::LONNIV, $this->lonniv);
 		if ($this->isColumnModified(CatnivcatPeer::NOMABR)) $criteria->add(CatnivcatPeer::NOMABR, $this->nomabr);
 		if ($this->isColumnModified(CatnivcatPeer::FORCODCAT)) $criteria->add(CatnivcatPeer::FORCODCAT, $this->forcodcat);
+		if ($this->isColumnModified(CatnivcatPeer::ESSECTOR)) $criteria->add(CatnivcatPeer::ESSECTOR, $this->essector);
 		if ($this->isColumnModified(CatnivcatPeer::ID)) $criteria->add(CatnivcatPeer::ID, $this->id);
 
 		return $criteria;
@@ -407,6 +439,8 @@ abstract class BaseCatnivcat extends BaseObject  implements Persistent {
 		$copyObj->setNomabr($this->nomabr);
 
 		$copyObj->setForcodcat($this->forcodcat);
+
+		$copyObj->setEssector($this->essector);
 
 
 		$copyObj->setNew(true);

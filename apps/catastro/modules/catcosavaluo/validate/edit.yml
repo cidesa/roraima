@@ -1,0 +1,37 @@
+methods:
+  post:
+   - "catcosaval{coddivgeo}"
+   - "catcosaval{tipo}"
+   - "catcosaval{catusoesp_id}"
+
+names:
+  catcosaval{coddivgeo}:
+    required:  Yes
+    required_msg: El Código de Ubicacción no puede estar en Blanco.
+    validators: Ubicacion_Validator, Validar3a
+
+  catcosaval{tipo}:
+    required:  Yes
+    required_msg: Seleccione un Tipo
+
+  catcosaval{catusoesp_id}:
+    required:  Yes
+    required_msg: Seleccione un Uso de Inmueble
+
+Ubicacion_Validator:
+    class: CidesaExistValidator
+    param:
+        class:    Catdivgeo
+        column:   coddivgeo
+        unique_error:  El Código de Ubicación no Existe.
+
+Validar3a:
+    class: UniqueValidator3
+    param:
+        class:        Catcosaval
+        column:       coddivgeo
+        column2:      tipo
+        column3:      catusoesp_id
+        value2:       'catcosaval[tipo]'
+        value3:       'catcosaval[catusoesp_id]'
+        unique_error:  Ya se encuentra registro para está Ubicación, Tipo y Uso, un Costo.

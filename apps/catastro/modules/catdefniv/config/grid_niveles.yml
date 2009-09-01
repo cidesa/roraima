@@ -2,8 +2,8 @@ opciones:                  # Opciones generales
   name:                    a
   eliminar:                true
   tabla:                   catnivcat
-  anchogrid:               500
-  ancho:                   400
+  anchogrid:               600
+  ancho:                   500
   filas:                   1
   titulo:                  'Longitud del Codigo'
   htmltotalfilas:          ' '
@@ -25,3 +25,9 @@ opciones:                  # Opciones generales
   esgrabable:              true
   nombrecampo:             nomabr
   html:                    [size="20" ]
+4:       # Columna
+  titulo:                  Es Sector
+  tipo:                    k
+  nombrecampo:             essector
+  esgrabable:			   true
+  html:                    [onclick="activar(this.id)"]

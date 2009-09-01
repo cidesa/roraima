@@ -6,6 +6,7 @@ generator:
 
     fields:
       coddivgeo:    { name: Codigo, params: size=32}
+      desdivgeo:    { name: Descripción, params: size=32}
       catdivgeo:    { name: Division Geografico, params: size=32}
       catdivgeo_id: { name: Division Geografico, params: size=32}
       nombarurb:    { name: Descripcion, params: size=40}
@@ -13,10 +14,10 @@ generator:
 
     list:
       title:     Definicion de Barrio/Urbanizaciones
-      display:   [ =coddivgeo, catdivgeo, nombarurb]
+      display:   [ =coddivgeo, desdivgeo, nombarurb]
       fields:
         catdivgeo_id: { name: Division Geografico, params: size=32}
-        nombarurb:    { name: Descripcion, params: size=15}
+        nombarurb:    { name: Barrio/Urbanización, params: size=15}
       sort:      nombarurb
       filters:   [ nombarurb]
       max_per_page: 10
@@ -27,7 +28,8 @@ generator:
 
     edit:
       title: Edicion de Barrio/Urbanizaciones
-      display: [ _catdivgeo_id, nombarurb, alibarurb]
+      display: [ _coddivgeo, nombarurb, alibarurb]
+      hide:    [catdivgeo_id]
       actions:
         _list:        ~
         _save:        ~

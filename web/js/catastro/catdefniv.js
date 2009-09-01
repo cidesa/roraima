@@ -1,3 +1,14 @@
+/**
+ * Librerías Javascript
+ *
+ * @package    Roraima
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * 
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
+ */
+
 function actualizarformato(id)    //Actualiza el formato de los niveles presupuestarios
 {
    $('catnivcat_forcodcat').value='';
@@ -40,4 +51,50 @@ function actualizarformato(id)    //Actualiza el formato de los niveles presupue
 	  	$(id).value = '';
   	}
   }
+ }
+
+  function activar(id)
+ {
+   var aux = id.split("_");
+   var name=aux[0];
+   var fila=aux[1];
+   var col=parseInt(aux[2]);
+
+   if ($(id).checked==true){
+	   if (activa_repetido(id))
+	   {
+	     alert('No se puede Marcar mas de un Sector al mismo tiempo');
+		 $(id).checked=false;;
+	   }
+   }
+ }
+
+ function activa_repetido(id)
+ {
+   var aux = id.split("_");
+   var name=aux[0];
+   var fila=aux[1];
+   var col=parseInt(aux[2]);
+
+   var activa_repetido=$(id).checked;
+
+   var activarepetido=false;
+   var am=obtener_filas_grid('a',2);
+   var i=0;
+   while (i<am)
+   {
+    var codigo="ax"+"_"+i+"_4";
+
+    var activa_repetido2=$(codigo).checked;
+    if (i!=fila)
+    {
+      if (activa_repetido==activa_repetido2)
+      {
+        activarepetido=true;
+        break;
+      }
+    }
+   i++;
+   }
+   return activarepetido;
  }

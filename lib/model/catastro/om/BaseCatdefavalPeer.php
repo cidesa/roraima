@@ -1,41 +1,38 @@
 <?php
 
 
-abstract class BaseCatnivcatPeer {
+abstract class BaseCatdefavalPeer {
 
 	
 	const DATABASE_NAME = 'propel';
 
 	
-	const TABLE_NAME = 'catnivcat';
+	const TABLE_NAME = 'catdefaval';
 
 	
-	const CLASS_DEFAULT = 'lib.model.catastro.Catnivcat';
+	const CLASS_DEFAULT = 'lib.model.catastro.Catdefaval';
 
 	
-	const NUM_COLUMNS = 6;
+	const NUM_COLUMNS = 5;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
 
 
 	
-	const CATPAR = 'catnivcat.CATPAR';
+	const CODDIVGEO = 'catdefaval.CODDIVGEO';
 
 	
-	const LONNIV = 'catnivcat.LONNIV';
+	const NROCAS = 'catdefaval.NROCAS';
 
 	
-	const NOMABR = 'catnivcat.NOMABR';
+	const FECAVAL = 'catdefaval.FECAVAL';
 
 	
-	const FORCODCAT = 'catnivcat.FORCODCAT';
+	const STATUS = 'catdefaval.STATUS';
 
 	
-	const ESSECTOR = 'catnivcat.ESSECTOR';
-
-	
-	const ID = 'catnivcat.ID';
+	const ID = 'catdefaval.ID';
 
 	
 	private static $phpNameMap = null;
@@ -43,31 +40,31 @@ abstract class BaseCatnivcatPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Catpar', 'Lonniv', 'Nomabr', 'Forcodcat', 'Essector', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (CatnivcatPeer::CATPAR, CatnivcatPeer::LONNIV, CatnivcatPeer::NOMABR, CatnivcatPeer::FORCODCAT, CatnivcatPeer::ESSECTOR, CatnivcatPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('catpar', 'lonniv', 'nomabr', 'forcodcat', 'essector', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
+		BasePeer::TYPE_PHPNAME => array ('Coddivgeo', 'Nrocas', 'Fecaval', 'Status', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (CatdefavalPeer::CODDIVGEO, CatdefavalPeer::NROCAS, CatdefavalPeer::FECAVAL, CatdefavalPeer::STATUS, CatdefavalPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('coddivgeo', 'nrocas', 'fecaval', 'status', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Catpar' => 0, 'Lonniv' => 1, 'Nomabr' => 2, 'Forcodcat' => 3, 'Essector' => 4, 'Id' => 5, ),
-		BasePeer::TYPE_COLNAME => array (CatnivcatPeer::CATPAR => 0, CatnivcatPeer::LONNIV => 1, CatnivcatPeer::NOMABR => 2, CatnivcatPeer::FORCODCAT => 3, CatnivcatPeer::ESSECTOR => 4, CatnivcatPeer::ID => 5, ),
-		BasePeer::TYPE_FIELDNAME => array ('catpar' => 0, 'lonniv' => 1, 'nomabr' => 2, 'forcodcat' => 3, 'essector' => 4, 'id' => 5, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
+		BasePeer::TYPE_PHPNAME => array ('Coddivgeo' => 0, 'Nrocas' => 1, 'Fecaval' => 2, 'Status' => 3, 'Id' => 4, ),
+		BasePeer::TYPE_COLNAME => array (CatdefavalPeer::CODDIVGEO => 0, CatdefavalPeer::NROCAS => 1, CatdefavalPeer::FECAVAL => 2, CatdefavalPeer::STATUS => 3, CatdefavalPeer::ID => 4, ),
+		BasePeer::TYPE_FIELDNAME => array ('coddivgeo' => 0, 'nrocas' => 1, 'fecaval' => 2, 'status' => 3, 'id' => 4, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
 	);
 
 	
 	public static function getMapBuilder()
 	{
-		include_once 'lib/model/catastro/map/CatnivcatMapBuilder.php';
-		return BasePeer::getMapBuilder('lib.model.catastro.map.CatnivcatMapBuilder');
+		include_once 'lib/model/catastro/map/CatdefavalMapBuilder.php';
+		return BasePeer::getMapBuilder('lib.model.catastro.map.CatdefavalMapBuilder');
 	}
 	
 	public static function getPhpNameMap()
 	{
 		if (self::$phpNameMap === null) {
-			$map = CatnivcatPeer::getTableMap();
+			$map = CatdefavalPeer::getTableMap();
 			$columns = $map->getColumns();
 			$nameMap = array();
 			foreach ($columns as $column) {
@@ -101,29 +98,27 @@ abstract class BaseCatnivcatPeer {
 	
 	public static function alias($alias, $column)
 	{
-		return str_replace(CatnivcatPeer::TABLE_NAME.'.', $alias.'.', $column);
+		return str_replace(CatdefavalPeer::TABLE_NAME.'.', $alias.'.', $column);
 	}
 
 	
 	public static function addSelectColumns(Criteria $criteria)
 	{
 
-		$criteria->addSelectColumn(CatnivcatPeer::CATPAR);
+		$criteria->addSelectColumn(CatdefavalPeer::CODDIVGEO);
 
-		$criteria->addSelectColumn(CatnivcatPeer::LONNIV);
+		$criteria->addSelectColumn(CatdefavalPeer::NROCAS);
 
-		$criteria->addSelectColumn(CatnivcatPeer::NOMABR);
+		$criteria->addSelectColumn(CatdefavalPeer::FECAVAL);
 
-		$criteria->addSelectColumn(CatnivcatPeer::FORCODCAT);
+		$criteria->addSelectColumn(CatdefavalPeer::STATUS);
 
-		$criteria->addSelectColumn(CatnivcatPeer::ESSECTOR);
-
-		$criteria->addSelectColumn(CatnivcatPeer::ID);
+		$criteria->addSelectColumn(CatdefavalPeer::ID);
 
 	}
 
-	const COUNT = 'COUNT(catnivcat.ID)';
-	const COUNT_DISTINCT = 'COUNT(DISTINCT catnivcat.ID)';
+	const COUNT = 'COUNT(catdefaval.ID)';
+	const COUNT_DISTINCT = 'COUNT(DISTINCT catdefaval.ID)';
 
 	
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
@@ -132,9 +127,9 @@ abstract class BaseCatnivcatPeer {
 
 				$criteria->clearSelectColumns()->clearOrderByColumns();
 		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(CatnivcatPeer::COUNT_DISTINCT);
+			$criteria->addSelectColumn(CatdefavalPeer::COUNT_DISTINCT);
 		} else {
-			$criteria->addSelectColumn(CatnivcatPeer::COUNT);
+			$criteria->addSelectColumn(CatdefavalPeer::COUNT);
 		}
 
 				foreach($criteria->getGroupByColumns() as $column)
@@ -142,7 +137,7 @@ abstract class BaseCatnivcatPeer {
 			$criteria->addSelectColumn($column);
 		}
 
-		$rs = CatnivcatPeer::doSelectRS($criteria, $con);
+		$rs = CatdefavalPeer::doSelectRS($criteria, $con);
 		if ($rs->next()) {
 			return $rs->getInt(1);
 		} else {
@@ -154,7 +149,7 @@ abstract class BaseCatnivcatPeer {
 	{
 		$critcopy = clone $criteria;
 		$critcopy->setLimit(1);
-		$objects = CatnivcatPeer::doSelect($critcopy, $con);
+		$objects = CatdefavalPeer::doSelect($critcopy, $con);
 		if ($objects) {
 			return $objects[0];
 		}
@@ -163,7 +158,7 @@ abstract class BaseCatnivcatPeer {
 	
 	public static function doSelect(Criteria $criteria, $con = null)
 	{
-		return CatnivcatPeer::populateObjects(CatnivcatPeer::doSelectRS($criteria, $con));
+		return CatdefavalPeer::populateObjects(CatdefavalPeer::doSelectRS($criteria, $con));
 	}
 	
 	public static function doSelectRS(Criteria $criteria, $con = null)
@@ -174,7 +169,7 @@ abstract class BaseCatnivcatPeer {
 
 		if (!$criteria->getSelectColumns()) {
 			$criteria = clone $criteria;
-			CatnivcatPeer::addSelectColumns($criteria);
+			CatdefavalPeer::addSelectColumns($criteria);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -186,7 +181,7 @@ abstract class BaseCatnivcatPeer {
 	{
 		$results = array();
 	
-				$cls = CatnivcatPeer::getOMClass();
+				$cls = CatdefavalPeer::getOMClass();
 		$cls = Propel::import($cls);
 				while($rs->next()) {
 		
@@ -206,7 +201,7 @@ abstract class BaseCatnivcatPeer {
 	
 	public static function getOMClass()
 	{
-		return CatnivcatPeer::CLASS_DEFAULT;
+		return CatdefavalPeer::CLASS_DEFAULT;
 	}
 
 	
@@ -220,7 +215,7 @@ abstract class BaseCatnivcatPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
-		$criteria->remove(CatnivcatPeer::ID); 
+		$criteria->remove(CatdefavalPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 
@@ -247,8 +242,8 @@ abstract class BaseCatnivcatPeer {
 
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; 
-			$comparison = $criteria->getComparison(CatnivcatPeer::ID);
-			$selectCriteria->add(CatnivcatPeer::ID, $criteria->remove(CatnivcatPeer::ID), $comparison);
+			$comparison = $criteria->getComparison(CatdefavalPeer::ID);
+			$selectCriteria->add(CatdefavalPeer::ID, $criteria->remove(CatdefavalPeer::ID), $comparison);
 
 		} else { 			$criteria = $values->buildCriteria(); 			$selectCriteria = $values->buildPkeyCriteria(); 		}
 
@@ -265,7 +260,7 @@ abstract class BaseCatnivcatPeer {
 		}
 		$affectedRows = 0; 		try {
 									$con->begin();
-			$affectedRows += BasePeer::doDeleteAll(CatnivcatPeer::TABLE_NAME, $con);
+			$affectedRows += BasePeer::doDeleteAll(CatdefavalPeer::TABLE_NAME, $con);
 			$con->commit();
 			return $affectedRows;
 		} catch (PropelException $e) {
@@ -278,16 +273,16 @@ abstract class BaseCatnivcatPeer {
 	 public static function doDelete($values, $con = null)
 	 {
 		if ($con === null) {
-			$con = Propel::getConnection(CatnivcatPeer::DATABASE_NAME);
+			$con = Propel::getConnection(CatdefavalPeer::DATABASE_NAME);
 		}
 
 		if ($values instanceof Criteria) {
-			$criteria = clone $values; 		} elseif ($values instanceof Catnivcat) {
+			$criteria = clone $values; 		} elseif ($values instanceof Catdefaval) {
 
 			$criteria = $values->buildPkeyCriteria();
 		} else {
 						$criteria = new Criteria(self::DATABASE_NAME);
-			$criteria->add(CatnivcatPeer::ID, (array) $values, Criteria::IN);
+			$criteria->add(CatdefavalPeer::ID, (array) $values, Criteria::IN);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -306,13 +301,13 @@ abstract class BaseCatnivcatPeer {
 	}
 
 	
-	public static function doValidate(Catnivcat $obj, $cols = null)
+	public static function doValidate(Catdefaval $obj, $cols = null)
 	{
 		$columns = array();
 
 		if ($cols) {
-			$dbMap = Propel::getDatabaseMap(CatnivcatPeer::DATABASE_NAME);
-			$tableMap = $dbMap->getTable(CatnivcatPeer::TABLE_NAME);
+			$dbMap = Propel::getDatabaseMap(CatdefavalPeer::DATABASE_NAME);
+			$tableMap = $dbMap->getTable(CatdefavalPeer::TABLE_NAME);
 
 			if (! is_array($cols)) {
 				$cols = array($cols);
@@ -328,11 +323,11 @@ abstract class BaseCatnivcatPeer {
 
 		}
 
-		$res =  BasePeer::doValidate(CatnivcatPeer::DATABASE_NAME, CatnivcatPeer::TABLE_NAME, $columns);
+		$res =  BasePeer::doValidate(CatdefavalPeer::DATABASE_NAME, CatdefavalPeer::TABLE_NAME, $columns);
     if ($res !== true) {
         $request = sfContext::getInstance()->getRequest();
         foreach ($res as $failed) {
-            $col = CatnivcatPeer::translateFieldname($failed->getColumn(), BasePeer::TYPE_COLNAME, BasePeer::TYPE_PHPNAME);
+            $col = CatdefavalPeer::translateFieldname($failed->getColumn(), BasePeer::TYPE_COLNAME, BasePeer::TYPE_PHPNAME);
             $request->setError($col, $failed->getMessage());
         }
     }
@@ -347,12 +342,12 @@ abstract class BaseCatnivcatPeer {
 			$con = Propel::getConnection(self::DATABASE_NAME);
 		}
 
-		$criteria = new Criteria(CatnivcatPeer::DATABASE_NAME);
+		$criteria = new Criteria(CatdefavalPeer::DATABASE_NAME);
 
-		$criteria->add(CatnivcatPeer::ID, $pk);
+		$criteria->add(CatdefavalPeer::ID, $pk);
 
 
-		$v = CatnivcatPeer::doSelect($criteria, $con);
+		$v = CatdefavalPeer::doSelect($criteria, $con);
 
 		return !empty($v) > 0 ? $v[0] : null;
 	}
@@ -369,8 +364,8 @@ abstract class BaseCatnivcatPeer {
 			$objs = array();
 		} else {
 			$criteria = new Criteria();
-			$criteria->add(CatnivcatPeer::ID, $pks, Criteria::IN);
-			$objs = CatnivcatPeer::doSelect($criteria, $con);
+			$criteria->add(CatdefavalPeer::ID, $pks, Criteria::IN);
+			$objs = CatdefavalPeer::doSelect($criteria, $con);
 		}
 		return $objs;
 	}
@@ -378,11 +373,11 @@ abstract class BaseCatnivcatPeer {
 } 
 if (Propel::isInit()) {
 			try {
-		BaseCatnivcatPeer::getMapBuilder();
+		BaseCatdefavalPeer::getMapBuilder();
 	} catch (Exception $e) {
 		Propel::log('Could not initialize Peer: ' . $e->getMessage(), Propel::LOG_ERR);
 	}
 } else {
-			require_once 'lib/model/catastro/map/CatnivcatMapBuilder.php';
-	Propel::registerMapBuilder('lib.model.catastro.map.CatnivcatMapBuilder');
+			require_once 'lib/model/catastro/map/CatdefavalMapBuilder.php';
+	Propel::registerMapBuilder('lib.model.catastro.map.CatdefavalMapBuilder');
 }

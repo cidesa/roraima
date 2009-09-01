@@ -42,6 +42,8 @@ class CatnivcatMapBuilder {
 
 		$tMap->addColumn('FORCODCAT', 'Forcodcat', 'string', CreoleTypes::VARCHAR, true, 100);
 
+		$tMap->addColumn('ESSECTOR', 'Essector', 'string', CreoleTypes::VARCHAR, false, 1);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 
