@@ -1,0 +1,13 @@
+
+
+CREATE SEQUENCE "atpriayu_seq";
+
+
+CREATE TABLE "atpriayu"
+(
+  "despriayu" VARCHAR(50),
+  "id" INTEGER  NOT NULL DEFAULT nextval('atpriayu_seq'::regclass),
+  PRIMARY KEY ("id")
+);
+
+COMMENT ON TABLE "atpriayu" IS '';
