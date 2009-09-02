@@ -9,7 +9,7 @@
  */
 class Fatippag extends BaseFatippag
 {
-	protected $monpag=0;
+	protected $monpag="0,00";
 	protected $codban="";
 	protected $numide2="";
 	protected $codtip="";
