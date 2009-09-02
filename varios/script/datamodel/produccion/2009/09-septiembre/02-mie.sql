@@ -16,3 +16,6 @@ COMMENT ON TABLE "atpriayu" IS '';
 
 ALTER TABLE fafactur
    ALTER codcli TYPE character varying(15);
+
+ALTER TABLE cobdocume
+   ALTER codcli TYPE character varying(15);
