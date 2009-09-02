@@ -57,8 +57,8 @@ $this->Bitacora('Guardo');
         (CASE when b.codcon is null then (select x.opecon from npdefcpt x where x.codcon='".$codigoconcepto."') else  b.asided end) as asided, (CASE when b.codcon is null then 'S' else  b.acucon end) as acucon,
         (CASE when b.codcon is null then 'S' else  b.calcon end) as calcon, (CASE when b.codcon is null then 'S' else  b.activo end) as activo,
         (CASE when b.codcon is null then 0.00 else  b.acumulado end) as acumulado, 9 as id
-        from nphojint c,npcargos d,npasicaremp a left outer join npasiconemp b on a.codemp=b.codemp and a.codcar=b.codcar and b.codcon='".$codigoconcepto."'
-        where a.codnom='".$codigonomina."' and a.status='V'  and a.codemp=c.codemp and a.codcar=d.codcar  order by codemp";
+        from nphojint c,npsitemp l,npcargos d,npasicaremp a left outer join npasiconemp b on a.codemp=b.codemp and a.codcar=b.codcar and b.codcon='".$codigoconcepto."'
+        where a.codnom='".$codigonomina."' and a.status='V' and l.calnom='S' and a.codemp=c.codemp and c.staemp=l.codsitemp and a.codcar=d.codcar  order by codemp";
 
     $resp = Herramientas::BuscarDatos($sql,&$per);
 

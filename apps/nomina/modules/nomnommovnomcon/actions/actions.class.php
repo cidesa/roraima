@@ -98,6 +98,7 @@ class nomnommovnomconActions extends autonomnommovnomconActions
 	 	$c->add(NpasicarempPeer::CODNOM,$codigonomina);
 		$c->add(NpasiconempPeer::CODCON,$codigoconcepto);
 		$c->add(NphojintPeer::STAEMP,'A');
+		$c->add(NpasicarempPeer::STATUS,'V');
 	 	$c->addJoin(NpasicarempPeer::CODEMP,NphojintPeer::CODEMP);
 	 	$c->addJoin(NpasiconempPeer::CODEMP,NpasicarempPeer::CODEMP);
 		$c->addJoin(NpasiconempPeer::CODCAR,NpasicarempPeer::CODCAR);
