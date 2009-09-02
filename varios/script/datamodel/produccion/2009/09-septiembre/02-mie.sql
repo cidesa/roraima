@@ -11,3 +11,8 @@ CREATE TABLE "atpriayu"
 );
 
 COMMENT ON TABLE "atpriayu" IS '';
+
+--ajuste campo codcli
+
+ALTER TABLE fafactur
+   ALTER codcli TYPE character varying(15);
