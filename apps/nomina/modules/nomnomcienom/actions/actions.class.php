@@ -71,7 +71,7 @@ class nomnomcienomActions extends sfActions
 	$fecha=$this->getRequestParameter('fecha');
 	CierredeNomina::procesoCierre($codigo,$fecha,&$msj);
 	if ($msj=='1')
-	{ $this->setFlash('notice', 'La Nómina no puede ser cerrada');}
+	{ $this->setFlash('notice2', 'La Nómina no puede ser cerrada');}
 	else { $this->setFlash('notice', 'La Nómina fue Cerrada Satisfactoriamente');}
 	return $this->redirect('nomnomcienom/index');
   }

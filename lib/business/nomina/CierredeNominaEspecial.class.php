@@ -408,9 +408,9 @@ class CierredeNominaEspecial
 
   Herramientas::insertarRegistros($sql6);
 
-
+//Las Nóminas Especiales No actualizan fechas
    //Actualizacion de fechas
-   $u= new Criteria();
+ /*  $u= new Criteria();
    $u->add(NpnomesptiposPeer::CODNOMESP,$codnomesp);
    $nomestipos= NpnomesptiposPeer::doSelectOne($u);
    if ($nomestipos)
@@ -505,7 +505,7 @@ class CierredeNominaEspecial
 
 		 $nomestipos->save();
     }// if ($registros)
-  }//if ($nomestipos)
+  }//if ($nomestipos)*/
 
   // unset($registros);
 
