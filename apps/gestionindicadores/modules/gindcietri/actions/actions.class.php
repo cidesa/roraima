@@ -20,7 +20,23 @@ class gindcietriActions extends autogindcietriActions
   {
  	  $this->giproanu = $this->getGiproanuOrCreate();	    	  
 	  $this->revision = $this->cargar_revision();
-      $this->params = array('revision'=>$this->revision);
+	  $this->trimestre = $this->cargar_trimestre();
+      $this->params = array('revision'=>$this->revision,'trimestre'=>$this->trimestre);
+  } 
+  public function cargar_trimestre()
+  {
+  	  $c = new Criteria();
+	  $c->add(GiproanuPeer::ANOINDG,$this->giproanu->getAnoindg());
+	  $obj = GiproanuPeer::doSelect($c);
+	  $r=array();
+	  if(!$obj)
+	  	$r=array(''=>'Selecccione....');
+
+	  foreach($obj  as  $i)
+	  {
+	  	$r += array($i->getNumtrim()=>$i->getNumtrim());
+	  }
+	  return $r;
   } 
  
   public function cargar_revision()
@@ -116,15 +132,14 @@ class gindcietriActions extends autogindcietriActions
         $this->labels = $this->getLabels();
         $c = new Criteria();
 		$c->add(GiproanuPeer::ANOINDG,$codigo);
+		$c->add(GiproanuPeer::ESTTRIM,'A');
 		$per = GiproanuPeer::doSelect($c);
-		$arrrev=array();
+		$arrrev=array(''=>'Seleccione...');
 		foreach($per as $r)
 		{
 			$arrrev[$r->getRevanoindg()]=$r->getRevanoindg();			
 		}
-		$this->arrrev=$arrrev;
-		if(!$this->arrrev)
-		  $this->arrrev=array(''=>'Seleccione...');
+		$this->arrrev=$arrrev;	    
         $this->cond='1';
         $output = '[["","",""],["","",""],["","",""]]';
 		$this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
@@ -144,7 +159,7 @@ class gindcietriActions extends autogindcietriActions
 			foreach($per as $r)
 			{
 				$r->setEsttrim('C');
-				$r->setFeccierre(date('Y-m-d'));
+				$r->setFeccietri(date('Y-m-d'));
 				$r->save();
 			}	
 		}
@@ -152,6 +167,24 @@ class gindcietriActions extends autogindcietriActions
 		$this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
 	    return sfView::HEADER_ONLY;
         break;
+	  case '3':
+        $ano = $this->getRequestParameter('anoindg','');
+        $this->giproanu = $this->getGiproanuOrCreate();
+        $this->labels = $this->getLabels();
+        $c = new Criteria();
+		$c->add(GiproanuPeer::ANOINDG,$ano);
+		$c->add(GiproanuPeer::REVANOINDG,$codigo);
+		$c->add(GiproanuPeer::ESTTRIM,'A');
+		$per = GiproanuPeer::doSelect($c);
+		foreach($per as $r)
+		{
+			$arrtri[$r->getNumtrim()]=$r->getNumtrim();			
+		}
+		$this->arrtri=$arrtri;		
+        $this->cond='2';
+        $output = '[["","",""],["","",""],["","",""]]';
+		$this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+        break;	
       default:
         $output = '[["","",""],["","",""],["","",""]]';
 		$this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
@@ -231,7 +264,7 @@ class gindcietriActions extends autogindcietriActions
 		foreach($per as $r)
 		{
 			$r->setEsttrim('C');
-			$r->setFeccierre(date('Y-m-d'));
+			$r->setFeccietri(date('Y-m-d'));
 			$r->save();
 		}	
 	}

@@ -1,5 +1,6 @@
-<?php if($giproanu->getId()!='') {?>	
+<?php if($giproanu->getId()!='' && $giproanu->getEstprog()!='C') {?>	
 <ul  class="sf_admin_actions" >
+	
 <?php echo submit_to_remote('btnCerrar', 'Cerrar Programacion', array(
 			   'url'      => 'gindproanu/ajax',
 			   'script'   => true,
@@ -23,6 +24,7 @@
 		$('cx_'+i+'_4').value='C';			   				   	
 		i++;
 	   }
+	   alert('Se ha cerrado la Programacion para el Año: '+$('giproanu_anoindg').value+' Revision: '+$('giproanu_revanoindg').value);
 	}
 	
 </script>

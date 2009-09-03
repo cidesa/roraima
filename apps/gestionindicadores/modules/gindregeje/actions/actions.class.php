@@ -26,6 +26,12 @@ public function configGrid($ntri='',$ano='',$rev='')
 	$c->add(GiproanuPeer::ANOINDG,$ano);
 	$c->add(GiproanuPeer::REVANOINDG,$rev);
 	$per = GiproanuPeer::doSelect($c);
+	if($per)
+	{
+		if($per[0]->getEsttrim()=='C')
+			$this->readonly=true;		  
+		$tfil=0;	
+	}
 
     $opciones = new OpcionesGrid();
     $opciones->setEliminar(false);
@@ -57,33 +63,54 @@ public function configGrid($ntri='',$ano='',$rev='')
     $col3->setTipo(Columna::MONTO);
     $col3->setEsGrabable(true);
     $col3->setAlineacionObjeto(Columna::CENTRO);
-    $col3->setAlineacionContenido(Columna::CENTRO);    
-    $col3->setHTML('type="text" size="10" ');	
+    $col3->setAlineacionContenido(Columna::CENTRO); 
+	if($this->readonly)   
+    	$col3->setHTML('type="text" size="10" readonly="true"');	
     $col3->setNombreCampo('ejectrim');
 	
-	$col4 = new Columna('Estatus Trimestre');
+	$col4 = new Columna('Estatus Programacion');
     $col4->setTipo(Columna::TEXTO);
     $col4->setEsGrabable(true);
 	$col4->setOculta(true);
     $col4->setAlineacionObjeto(Columna::CENTRO);
     $col4->setAlineacionContenido(Columna::CENTRO);
     $col4->setHTML(' type="text" size="10" readonly="true"');
-    $col4->setNombreCampo('esttrim');
+    $col4->setNombreCampo('estprog');
 	
-	$col5 = new Columna('Fecha Cierre');
+	$col5 = new Columna('Fecha Cierre Programacion');
     $col5->setTipo(Columna::FECHA);
     $col5->setEsGrabable(true);
 	$col5->setOculta(true);
     $col5->setAlineacionObjeto(Columna::CENTRO);
     $col5->setAlineacionContenido(Columna::CENTRO);
 	$col5->setHTML(' type="text" size="10" readonly="true" ');
-    $col5->setNombreCampo('feccierre');	
+    $col5->setNombreCampo('feccierre');
+	
+	$col6 = new Columna('Estatus Trimestre');
+    $col6->setTipo(Columna::TEXTO);
+    $col6->setEsGrabable(true);
+	$col6->setOculta(true);
+    $col6->setAlineacionObjeto(Columna::CENTRO);
+    $col6->setAlineacionContenido(Columna::CENTRO);
+    $col6->setHTML(' type="text" size="10" readonly="true"');
+    $col6->setNombreCampo('esttrim');
+	
+	$col7 = new Columna('Fecha Cierre');
+    $col7->setTipo(Columna::FECHA);
+    $col7->setEsGrabable(true);
+	$col7->setOculta(true);
+    $col7->setAlineacionObjeto(Columna::CENTRO);
+    $col7->setAlineacionContenido(Columna::CENTRO);
+	$col7->setHTML(' type="text" size="10" readonly="true" ');
+    $col7->setNombreCampo('feccietri');
 
     $opciones->addColumna($col1);
     $opciones->addColumna($col2);
     $opciones->addColumna($col3);
 	$opciones->addColumna($col4);
     $opciones->addColumna($col5);
+	$opciones->addColumna($col6);
+    $opciones->addColumna($col7);
 
     $this->obj = $opciones->getConfig($per);
     $this->giproanu->setObjtri($this->obj);
@@ -199,11 +226,16 @@ public function configGrid($ntri='',$ano='',$rev='')
 		$giproanu->setNumindg($r['numindg']);
 		$giproanu->setProgtrim($r['progtrim']);
 		$giproanu->setEjectrim($r['ejectrim']);
-		$giproanu->setEsttrim($r['esttrim']);				
-		if($r['esttrim']=='' || $r['esttrim']=='A')	
-			$giproanu->setFeccierre(null);
+		$giproanu->setEstprog($r['estprog']);
+		$giproanu->setFeccierre($r['feccierre']);		
+		if($r['esttrim']=='')
+			$giproanu->setEsttrim('A');
 		else
-			$giproanu->setFeccierre($r['feccierre']);	
+			$giproanu->setEsttrim($r['esttrim']);	
+		if($r['esttrim']=='' || $r['esttrim']=='A')	
+			$giproanu->setFeccietri(null);
+		else
+			$giproanu->setFeccietri($r['feccietri']);		
 		$giproanu->save();	
 	}
     return $this->redirect('gindregeje/list');
