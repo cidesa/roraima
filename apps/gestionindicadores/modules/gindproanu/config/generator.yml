@@ -18,7 +18,7 @@ generator:
     list:
       title:          Listado de la Programacion Anual
       filters:        [numindg, anoindg, revanoindg]    
-      display:        [=numindg, anoindg, revanoindg]
+      display:        [=numindg, anoindg, revanoindg, numtrim]
       max_pers:           10
       sort:               numindg
       objects_actions:
