@@ -6,6 +6,9 @@ generator:
     fields:
       display:      [numindg, anoindg, revanoindg, numuni]
       numindg:      { name: Indicador}
+      numuni:       { name: Unidad Organizativa}
+      nomuni:       { name: Nombre Unidad}
+      nomindg:      { name: Nombre Indicador}
       numtrim:      { name: Trimestre}
       anoindg:      { name: Año, params: size=10 maxlength=4}
       revanoindg:   { name: Revisión, params: size=10 maxlength=2}
@@ -18,7 +21,7 @@ generator:
     list:
       title:          Listado de la Programacion Anual
       filters:        [numindg, anoindg, revanoindg]    
-      display:        [=numindg, anoindg, revanoindg, numtrim]
+      display:        [=numindg, nomindg, numuni, nomuni, anoindg, revanoindg, numtrim]
       max_pers:           10
       sort:               numindg
       objects_actions:
@@ -30,7 +33,9 @@ generator:
     edit:
       title:           Programación Anual
       display:
-        Datos Indicador:  [_pnumuni, _pnumindg, anoindg, revanoindg, _botoncerrar, _gridtrimestre ]
+        Datos Indicador:  [_pnumuni, _pnumindg, anoindg, revanoindg, _gridtrimestre ]
+      fields:
+        revanoindg:       { params: onBlur="verificaranorev(this)"}  
       actions:
         _list:        ~
         _save:        ~

@@ -58,7 +58,7 @@ class gindproanuActions extends autogindproanuActions
   {
   	  $c = new Criteria();
 	  $obj = AcunidadPeer::doSelect($c);
-	  $r=array(''=>'Selecccione....');
+	  $r=array(''=>'Seleccione....');
 
 	  foreach($obj  as  $i)
 	  {
@@ -73,7 +73,7 @@ class gindproanuActions extends autogindproanuActions
 	  $obj = GiregindPeer::doSelect($c);
 	  $r=array();
 	  if(!$obj)
-	  	$r=array(''=>'Selecccione....');
+	  	$r=array(''=>'Seleccione....');
 
 	  foreach($obj  as  $i)
 	  {
@@ -98,7 +98,9 @@ public function configGrid($nind='',$ano='',$rev='')
 		{
 			$this->readonly=true;		  
 			$tfil=0;	
-		}			
+		}
+		if(count($per)==4)
+			$tfil=0;
 	}
 
     $opciones = new OpcionesGrid();
@@ -215,25 +217,25 @@ public function configGrid($nind='',$ano='',$rev='')
 		$this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
         break;
 	  case '2':	 
-		$indicador = $this->getRequestParameter('indicador','');
-		$ano = $this->getRequestParameter('ano','');
-		$revision = $this->getRequestParameter('revision','');
+        $ano = $this->getRequestParameter('ano',''); 
+		$rev = $this->getRequestParameter('rev',''); 		
+		$js='';
 		
 		$c = new Criteria();
-		$c->add(GiproanuPeer::NUMINDG,$indicador);
 		$c->add(GiproanuPeer::ANOINDG,$ano);
-		$c->add(GiproanuPeer::REVANOINDG,$revision);
-		$per = GiproanuPeer::doSelect($c);
+		$c->add(GiproanuPeer::REVANOINDG,$rev);
+		$per = GiproanuPeer::doSelectOne($c);
 		if($per)
 		{
-			foreach($per as $r)
+			$est = $per->getEstprog();
+			if($est=='C')
 			{
-				$r->setEstprog('C');
-				$r->setFeccierre(date('Y-m-d'));
-				$r->save();
-			}	
-		}
-		$output = '[["","",""],["","",""],["","",""]]';
+				$js=" $('giproanu_revanoindg').value='';
+					  alert('La Programacion esta cerrada para la Revision $rev  Año $ano  ');";
+			}
+		} 
+
+		$output = '[["javascript","'.$js.'",""],["","",""],["","",""]]';
 	    $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
 		return sfView::HEADER_ONLY;
 		
@@ -255,27 +257,21 @@ public function configGrid($nind='',$ano='',$rev='')
   {
     $this->coderr =-1;
 
-    // Se deben llamar a las funciones necesarias para cargar los
-    // datos de la vista que serán usados en las funciones de validación.
-    // Por ejemplo:
+    
 
     if($this->getRequest()->getMethod() == sfRequest::POST){
-
-      // $this->configGrid();
-      // $grid = Herramientas::CargarDatosGrid($this,$this->obj);
-
-      // Aqui van los llamados a los métodos de las clases del
-      // negocio para validar los datos.
-      // Los resultados de cada llamado deben ser analizados por ejemplo:
-
-      // $resp = Compras::validarAlmajuoc($this->caajuoc,$grid);
-
-       //$resp=Herramientas::ValidarCodigo($valor,$this->tstipmov,$campo);
-
-      // al final $resp es analizada en base al código que retorna
-      // Todas las funciones de validación y procesos del negocio
-      // deben retornar códigos >= -1. Estos código serám buscados en
-      // el archivo errors.yml en la función handleErrorEdit()
+       $this->giproanu = $this->getGiproanuOrCreate();
+	   $this->updateGiproanuFromRequest();	
+       $c = new Criteria();
+		$c->add(GiproanuPeer::ANOINDG,$this->giproanu->getAnoindg());
+		$c->add(GiproanuPeer::REVANOINDG,$this->giproanu->getRevanoindg());
+		$per = GiproanuPeer::doSelectOne($c);
+		if($per)
+		{
+			$est = $per->getEstprog();
+			if($est=='C')
+				$this->coderr=11101;			
+		}      
 
       if($this->coderr!=-1){
         return false;

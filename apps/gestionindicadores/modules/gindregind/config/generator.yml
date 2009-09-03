@@ -10,11 +10,12 @@ generator:
       estindg:        { name: Estatus}
       pnumuni:        { name: .}
       pestindg:       { name: .}
+      nomuni:         { name: Nombre Unidad}
       
     list:
       title:          Listado de Indicadores de Gestión
-      filters:        [numindg, nomindg]
-      display:        [=numuni, numindg, nomindg, estindg]
+      filters:        [numuni, numindg, nomindg]
+      display:        [=numuni, nomuni, numindg, nomindg, estindg]
       max_pers:           10
       sort:               numindg
       objects_actions:
