@@ -13,7 +13,7 @@ abstract class BaseGiproanuPeer {
 	const CLASS_DEFAULT = 'lib.model.gestionindicadores.Giproanu';
 
 	
-	const NUM_COLUMNS = 9;
+	const NUM_COLUMNS = 11;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -41,7 +41,13 @@ abstract class BaseGiproanuPeer {
 	const ESTTRIM = 'giproanu.ESTTRIM';
 
 	
+	const ESTPROG = 'giproanu.ESTPROG';
+
+	
 	const FECCIERRE = 'giproanu.FECCIERRE';
+
+	
+	const FECCIETRI = 'giproanu.FECCIETRI';
 
 	
 	const ID = 'giproanu.ID';
@@ -52,18 +58,18 @@ abstract class BaseGiproanuPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Numindg', 'Anoindg', 'Revanoindg', 'Numtrim', 'Progtrim', 'Ejectrim', 'Esttrim', 'Feccierre', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (GiproanuPeer::NUMINDG, GiproanuPeer::ANOINDG, GiproanuPeer::REVANOINDG, GiproanuPeer::NUMTRIM, GiproanuPeer::PROGTRIM, GiproanuPeer::EJECTRIM, GiproanuPeer::ESTTRIM, GiproanuPeer::FECCIERRE, GiproanuPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('numindg', 'anoindg', 'revanoindg', 'numtrim', 'progtrim', 'ejectrim', 'esttrim', 'feccierre', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
+		BasePeer::TYPE_PHPNAME => array ('Numindg', 'Anoindg', 'Revanoindg', 'Numtrim', 'Progtrim', 'Ejectrim', 'Esttrim', 'Estprog', 'Feccierre', 'Feccietri', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (GiproanuPeer::NUMINDG, GiproanuPeer::ANOINDG, GiproanuPeer::REVANOINDG, GiproanuPeer::NUMTRIM, GiproanuPeer::PROGTRIM, GiproanuPeer::EJECTRIM, GiproanuPeer::ESTTRIM, GiproanuPeer::ESTPROG, GiproanuPeer::FECCIERRE, GiproanuPeer::FECCIETRI, GiproanuPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('numindg', 'anoindg', 'revanoindg', 'numtrim', 'progtrim', 'ejectrim', 'esttrim', 'estprog', 'feccierre', 'feccietri', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Numindg' => 0, 'Anoindg' => 1, 'Revanoindg' => 2, 'Numtrim' => 3, 'Progtrim' => 4, 'Ejectrim' => 5, 'Esttrim' => 6, 'Feccierre' => 7, 'Id' => 8, ),
-		BasePeer::TYPE_COLNAME => array (GiproanuPeer::NUMINDG => 0, GiproanuPeer::ANOINDG => 1, GiproanuPeer::REVANOINDG => 2, GiproanuPeer::NUMTRIM => 3, GiproanuPeer::PROGTRIM => 4, GiproanuPeer::EJECTRIM => 5, GiproanuPeer::ESTTRIM => 6, GiproanuPeer::FECCIERRE => 7, GiproanuPeer::ID => 8, ),
-		BasePeer::TYPE_FIELDNAME => array ('numindg' => 0, 'anoindg' => 1, 'revanoindg' => 2, 'numtrim' => 3, 'progtrim' => 4, 'ejectrim' => 5, 'esttrim' => 6, 'feccierre' => 7, 'id' => 8, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
+		BasePeer::TYPE_PHPNAME => array ('Numindg' => 0, 'Anoindg' => 1, 'Revanoindg' => 2, 'Numtrim' => 3, 'Progtrim' => 4, 'Ejectrim' => 5, 'Esttrim' => 6, 'Estprog' => 7, 'Feccierre' => 8, 'Feccietri' => 9, 'Id' => 10, ),
+		BasePeer::TYPE_COLNAME => array (GiproanuPeer::NUMINDG => 0, GiproanuPeer::ANOINDG => 1, GiproanuPeer::REVANOINDG => 2, GiproanuPeer::NUMTRIM => 3, GiproanuPeer::PROGTRIM => 4, GiproanuPeer::EJECTRIM => 5, GiproanuPeer::ESTTRIM => 6, GiproanuPeer::ESTPROG => 7, GiproanuPeer::FECCIERRE => 8, GiproanuPeer::FECCIETRI => 9, GiproanuPeer::ID => 10, ),
+		BasePeer::TYPE_FIELDNAME => array ('numindg' => 0, 'anoindg' => 1, 'revanoindg' => 2, 'numtrim' => 3, 'progtrim' => 4, 'ejectrim' => 5, 'esttrim' => 6, 'estprog' => 7, 'feccierre' => 8, 'feccietri' => 9, 'id' => 10, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
 	);
 
 	
@@ -131,7 +137,11 @@ abstract class BaseGiproanuPeer {
 
 		$criteria->addSelectColumn(GiproanuPeer::ESTTRIM);
 
+		$criteria->addSelectColumn(GiproanuPeer::ESTPROG);
+
 		$criteria->addSelectColumn(GiproanuPeer::FECCIERRE);
+
+		$criteria->addSelectColumn(GiproanuPeer::FECCIETRI);
 
 		$criteria->addSelectColumn(GiproanuPeer::ID);
 
