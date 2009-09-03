@@ -1,0 +1,23 @@
+gindicadores:
+  opciones:
+    activo: true #true/false
+    descripcion: Módulo de Gestión de Indicadores
+    imagen: catastro.gif
+    nombre: Gestión Indicadores
+    urls:
+      default:
+        modulo: gestionindicadores.php
+        modulo_dev: gestionindicadores_dev.php
+      Reportes:
+        absoluta: reportes/reportes/gestionindicadores
+    imagenes:
+      default: OperatorClass.png
+  menu:
+    Definiciones y Registros:
+      Registro de Indicadores:                          gindregind
+      Programación Anual:                               gindproanu
+      Registro de Ejecución:                            gindregeje
+      Cierre de Trimestre:                              gindcietri
+    Reportes:
+      Listados:
+      Listado Indicadores:                      catdefsenvia.php
