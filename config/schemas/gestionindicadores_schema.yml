@@ -50,8 +50,14 @@ propel:
       type: VARCHAR
       size: 1
       required: true    
+    estprog:
+      type: VARCHAR
+      size: 1
+      required: true  
     feccierre:
       type: DATE
+    feccietri:
+      type: DATE  
     id:
       type: INTEGER
       required: true
