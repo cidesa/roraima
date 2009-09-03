@@ -1,0 +1,37 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Giproanu
+    theme:            cidesaGenerator
+    fields:
+      display:      [numindg, anoindg, revanoindg, numuni]
+      numindg:      { name: Indicador}
+      numtrim:      { name: Trimestre}
+      anoindg:      { name: Año, params: size=10 maxlength=4}
+      revanoindg:   { name: Revisión, params: size=10 maxlength=2}
+      numuni:       { name: Unidad Organizativa}
+      pnumuni:      { name: .}
+      pnumindg:     { name: .}
+      gridtrimestre:{ name: .}
+      botoncerrar:  { name: .}
+        
+    list:
+      title:          Listado de la Programacion Anual
+      filters:        [numindg, anoindg, revanoindg]    
+      display:        [=numindg, anoindg, revanoindg]
+      max_pers:           10
+      sort:               numindg
+      objects_actions:
+        _edit:            ~
+        _delete:          ~
+      actions:
+        _create:          ~  
+
+    edit:
+      title:           Programación Anual
+      display:
+        Datos Indicador:  [_pnumuni, _pnumindg, anoindg, revanoindg, _botoncerrar, _gridtrimestre ]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

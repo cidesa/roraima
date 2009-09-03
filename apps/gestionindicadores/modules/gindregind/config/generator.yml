@@ -1,0 +1,33 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Giregind
+    theme:            cidesaGenerator
+    fields:
+      numuni:         { name: Unidad Organizativa}
+      numindg:        { name: Indicador, params: size=10 maxlength=4}
+      nomindg:        { name: Nombre Indicador, params: size=40 maxlength=40}
+      estindg:        { name: Estatus}
+      pnumuni:        { name: .}
+      pestindg:       { name: .}
+      
+    list:
+      title:          Listado de Indicadores de Gestión
+      filters:        [numindg, nomindg]
+      display:        [=numuni, numindg, nomindg, estindg]
+      max_pers:           10
+      sort:               numindg
+      objects_actions:
+        _edit:            ~
+        _delete:          ~
+      actions:
+        _create:          ~  
+
+    edit:
+      title:          Edicion de Indicadores de Gestión
+      display:        
+        Registro de Indicadores: [_pnumuni, numindg, nomindg, _pestindg]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
