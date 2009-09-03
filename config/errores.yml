@@ -1183,3 +1183,13 @@
 8884:
   cod: 8884
   msj:  Error al Grabar los Uso Especificos
+ #MODULO DE GESTION DE INDICADORES 
+11101:
+  cod: 11101
+  msj:  La Programacion esta cerrada para la Revision y el Año seleccionado
+11102:
+  cod: 11102
+  msj:  Lo ejecutado no puede ser mayor a lo programado
+11103:
+  cod: 11103
+  msj:  Debe cerrar primero la Programacion para este Año y Revision
