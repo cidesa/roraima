@@ -209,7 +209,8 @@ class gindcietriActions extends autogindcietriActions
    */
   public function updateError()
   {
-    //$this->configGrid();
+    $this->revision = $this->cargar_revision();
+      $this->params = array('revision'=>$this->revision);
 
     //$grid = Herramientas::CargarDatosGrid($this,$this->obj);
 
@@ -219,7 +220,21 @@ class gindcietriActions extends autogindcietriActions
 
   public function saving($clasemodelo)
   {
-    return $this->redirect('gindcietri/create');
+	$c = new Criteria();
+	$c->add(GiproanuPeer::NUMTRIM,$clasemodelo->getNumtrim());
+	$c->add(GiproanuPeer::ANOINDG,$clasemodelo->getAnoindg());
+	$c->add(GiproanuPeer::REVANOINDG,$clasemodelo->getRevanoindg());
+	$per = GiproanuPeer::doSelect($c);
+	if($per)
+	{
+		foreach($per as $r)
+		{
+			$r->setEsttrim('C');
+			$r->setFeccierre(date('Y-m-d'));
+			$r->save();
+		}	
+	}
+    return '-1';
   }
 
   public function deleting($clasemodelo)

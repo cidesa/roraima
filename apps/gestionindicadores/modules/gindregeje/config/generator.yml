@@ -31,4 +31,3 @@ generator:
       actions:
         _list:        ~
         _save:        ~
-        _delete:      ~

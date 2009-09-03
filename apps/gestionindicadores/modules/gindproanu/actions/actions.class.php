@@ -10,7 +10,7 @@
  */
 class gindproanuActions extends autogindproanuActions
 {
-	public function executeList()
+	/*public function executeList()
   {
     $this->processSort();
 
@@ -42,7 +42,7 @@ class gindproanuActions extends autogindproanuActions
     $this->pager->setCriteria($c);
     $this->pager->setPage($this->getRequestParameter('page', 1));
     $this->pager->init();
-  }
+  }*/
 
   // Para incluir funcionalidades al executeEdit()
   public function editing()
