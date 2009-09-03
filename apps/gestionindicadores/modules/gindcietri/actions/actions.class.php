@@ -117,11 +117,12 @@ class gindcietriActions extends autogindcietriActions
         $c = new Criteria();
 		$c->add(GiproanuPeer::ANOINDG,$codigo);
 		$per = GiproanuPeer::doSelect($c);
-		$this->arrrev=array();
+		$arrrev=array();
 		foreach($per as $r)
 		{
-			$this->arrrev[$r->getRevanoindg()]=$r->getRevanoindg();			
+			$arrrev[$r->getRevanoindg()]=$r->getRevanoindg();			
 		}
+		$this->arrrev=$arrrev;
 		if(!$this->arrrev)
 		  $this->arrrev=array(''=>'Seleccione...');
         $this->cond='1';
