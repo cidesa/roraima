@@ -14,17 +14,17 @@ catastro:
       default: OperatorClass.png
   menu:
     Definiciones Especificas:
-      Niveles de Catastral:                       catdefniv
+      Niveles Catastral:                          catdefniv
       Vialidad:
         Direccion de la Vialidad:                 catdefdirvia
         Sentido de la Vialidad:                   catdefsenvia
         Tipo de Vialidad:                         catdeftipvia
-      Division Territorial:                       catdefdivgeo
+      Division Territorial:
         #Pais:                                     catdefdivpai
-        #Definicion:                                catdefdivgeo
-        #Barrio/Urbanizaciones:                     catdefdivbarurb
-        #Tramo:                                     catdeftramo
-        #Manzana:                                   catdefman
+        Definicion:                                catdefdivgeo
+        Barrio/Urbanizaciones:                     catdefdivbarurb
+        Tramo:                                     catdeftramo
+        Manzana:                                   catdefman
       Inmuebles:
         Condicion del Inmueble:                 catdefconinm
         #Caracteristicas del Inmueble:           catcarinm
@@ -38,7 +38,10 @@ catastro:
     Registro:
       Personas/Propietarios:                               catregper
       Cedula Catastral:                         catreginm
-#      Avaluo:                                   ddd
+      Generar Cédulas Catastral en Lotes:       catlotinm
+      Costos por Avalúo:                        catcosavaluo
+      Avalúos:                                   catdefaval
+
 #      Avaluo y Revision del Croquis:            dddd
 #      Entrevista:
 #        Condicion de la Entrevista:               catconent
