@@ -205,6 +205,7 @@ public function configGrid($nind='',$ano='',$rev='')
 			foreach($per as $r)
 			{
 				$r->setEsttrim('C');
+				$r->setFeccierre(date('Y-m-d'));
 				$r->save();
 			}	
 		}
