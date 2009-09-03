@@ -1,0 +1,18 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Catreginm
+    theme:            cidesaGenerator
+    fields:
+      coddivgeo: { name: Ubicacion Geografica, params: size=30 maxlength=30 readonly=true}
+      desdivgeo: { name: Descripción }
+      nrocas: { name: N° Catastral, params: readonly=true }
+      cant:  { name: Cantidad de Cédulas Catastral a generar, params: disabled=false size= 5}
+      corinicas:  { name: Correlativo de Inicio del N° Catastral, params: disabled=false size=10}
+    edit:
+      title:   Generar Cédulas Catastral en Lotes
+      display:
+        "Datos": [_coddivgeo, _nrocas, cant, corinicas]
+      actions:
+        _save:
+          name: Generar
