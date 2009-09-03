@@ -1,7 +1,7 @@
 <?php use_helper('Object', 'ObjectAdmin', 'I18N') ?>
 
-<?php $trimestre=array('I'=>'I','II'=>'II','III'=>'III','IV'=>'IV')?>
-
+<?php $trimestre=$params['trimestre'];?>
+<div id="divtri" >
   <?php if($labels['giproanu{numtrim}']!='.:') { ?>
   <?php echo label_for('giproanu[numtrim]', __($labels['giproanu{numtrim}' ]), 'class="required" Style="text-align:left; width:150px"') ?>
   <div class="content<?php if ($sf_request->hasError('giproanu{numtrim}')): ?> form-error<?php endif; ?>">
@@ -21,3 +21,4 @@
    
   </div>
   <?php  } ?> 
+</div>

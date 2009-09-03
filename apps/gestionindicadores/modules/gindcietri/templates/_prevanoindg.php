@@ -10,9 +10,9 @@
   <?php endif; }?>  
      
   
-  <?php echo select_tag('giproanu[revanoindg]', options_for_select($revision,$giproanu->getRevanoindg(), array (
-
-))); ?>
+  <?php echo select_tag('giproanu[revanoindg]', options_for_select($revision,$giproanu->getRevanoindg()), array (
+	
+)); ?>
       
 		
   <?php if($labels['giproanu{revanoindg}']!='.:') { ?>  
