@@ -9,4 +9,8 @@
  */ 
 class Giregind extends BaseGiregind
 {
+	public function getNomuni()
+	{
+		return H::getx('Numuni','Acunidad','nomuni',self::getNumuni());
+	}
 }
