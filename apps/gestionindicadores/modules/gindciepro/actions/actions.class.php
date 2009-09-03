@@ -1,18 +1,18 @@
 <?php
 
 /**
- * gindcietri actions.
+ * gindciepro actions.
  *
  * @package    siga
- * @subpackage gindcietri
+ * @subpackage gindciepro
  * @author     Your name here
  * @version    SVN: $Id: actions.class.php 2288 2006-10-02 15:22:13Z fabien $
  */
-class gindcietriActions extends autogindcietriActions
+class gindcieproActions extends autogindcieproActions
 {
   public function executeList()
   {
-  	return $this->redirect('gindcietri/create');
+  	return $this->redirect('gindciepro/create');
   }	
 
   // Para incluir funcionalidades al executeEdit()
@@ -20,24 +20,9 @@ class gindcietriActions extends autogindcietriActions
   {
  	  $this->giproanu = $this->getGiproanuOrCreate();	    	  
 	  $this->revision = $this->cargar_revision();
-	  $this->trimestre = $this->cargar_trimestre();
-      $this->params = array('revision'=>$this->revision,'trimestre'=>$this->trimestre);
+      $this->params = array('revision'=>$this->revision);
   } 
-  public function cargar_trimestre()
-  {
-  	  $c = new Criteria();
-	  $c->add(GiproanuPeer::ANOINDG,$this->giproanu->getAnoindg());
-	  $obj = GiproanuPeer::doSelect($c);
-	  $r=array();
-	  if(!$obj)
-	  	$r=array(''=>'Seleccione....');
-
-	  foreach($obj  as  $i)
-	  {
-	  	$r += array($i->getNumtrim()=>$i->getNumtrim());
-	  }
-	  return $r;
-  } 
+  
  
   public function cargar_revision()
   {
@@ -132,7 +117,7 @@ class gindcietriActions extends autogindcietriActions
         $this->labels = $this->getLabels();
         $c = new Criteria();
 		$c->add(GiproanuPeer::ANOINDG,$codigo);
-		$c->add(GiproanuPeer::ESTTRIM,'A');
+		$c->add(GiproanuPeer::ESTPROG,'A');
 		$per = GiproanuPeer::doSelect($c);
 		$arrrev=array(''=>'Seleccione...');
 		foreach($per as $r)
@@ -144,13 +129,11 @@ class gindcietriActions extends autogindcietriActions
         $output = '[["","",""],["","",""],["","",""]]';
 		$this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
         break;
-	  case '2':	
-        $trimestre = $this->getRequestParameter('trimestre','');
+	  case '2':	        
 		$ano = $this->getRequestParameter('ano','');
 		$revision = $this->getRequestParameter('revision','');
 		
 		$c = new Criteria();
-		$c->add(GiproanuPeer::NUMTRIM,$trimestre);
 		$c->add(GiproanuPeer::ANOINDG,$ano);
 		$c->add(GiproanuPeer::REVANOINDG,$revision);
 		$per = GiproanuPeer::doSelect($c);
@@ -158,8 +141,8 @@ class gindcietriActions extends autogindcietriActions
 		{
 			foreach($per as $r)
 			{
-				$r->setEsttrim('C');
-				$r->setFeccietri(date('Y-m-d'));
+				$r->setEstprog('C');
+				$r->setFeccierre(date('Y-m-d'));
 				$r->save();
 			}	
 		}
@@ -167,24 +150,6 @@ class gindcietriActions extends autogindcietriActions
 		$this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
 	    return sfView::HEADER_ONLY;
         break;
-	  case '3':
-        $ano = $this->getRequestParameter('anoindg','');
-        $this->giproanu = $this->getGiproanuOrCreate();
-        $this->labels = $this->getLabels();
-        $c = new Criteria();
-		$c->add(GiproanuPeer::ANOINDG,$ano);
-		$c->add(GiproanuPeer::REVANOINDG,$codigo);
-		$c->add(GiproanuPeer::ESTTRIM,'A');
-		$per = GiproanuPeer::doSelect($c);
-		foreach($per as $r)
-		{
-			$arrtri[$r->getNumtrim()]=$r->getNumtrim();			
-		}
-		$this->arrtri=$arrtri;		
-        $this->cond='2';
-        $output = '[["","",""],["","",""],["","",""]]';
-		$this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
-        break;	
       default:
         $output = '[["","",""],["","",""],["","",""]]';
 		$this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
@@ -209,21 +174,22 @@ class gindcietriActions extends autogindcietriActions
     // Por ejemplo:
 
     if($this->getRequest()->getMethod() == sfRequest::POST){
-     
-	    $this->giproanu = $this->getGiproanuOrCreate();
-	   	$this->updateGiproanuFromRequest();
-	 
-	    $c2 = new Criteria();
-		$c2->add(GiproanuPeer::ANOINDG,$this->giproanu->getAnoindg());
-		$c2->add(GiproanuPeer::REVANOINDG,$this->giproanu->getRevanoindg());
-		$per2 = GiproanuPeer::doSelectOne($c2);
-		if($per2)
-		{
-			$est = $per2->getEstprog();
-			if($est=='A')
-				$this->coderr=11103;
-		}
-     
+
+      // $this->configGrid();
+      // $grid = Herramientas::CargarDatosGrid($this,$this->obj);
+
+      // Aqui van los llamados a los métodos de las clases del
+      // negocio para validar los datos.
+      // Los resultados de cada llamado deben ser analizados por ejemplo:
+
+      // $resp = Compras::validarAlmajuoc($this->caajuoc,$grid);
+
+       //$resp=Herramientas::ValidarCodigo($valor,$this->tstipmov,$campo);
+
+      // al final $resp es analizada en base al código que retorna
+      // Todas las funciones de validación y procesos del negocio
+      // deben retornar códigos >= -1. Estos código serám buscados en
+      // el archivo errors.yml en la función handleErrorEdit()
 
       if($this->coderr!=-1){
         return false;
@@ -243,8 +209,7 @@ class gindcietriActions extends autogindcietriActions
   public function updateError()
   {
     $this->revision = $this->cargar_revision();
-	$this->trimestre = $this->cargar_trimestre();
-	$this->params = array('revision'=>$this->revision,'trimestre'=>$this->trimestre);
+      $this->params = array('revision'=>$this->revision);
 
     //$grid = Herramientas::CargarDatosGrid($this,$this->obj);
 
@@ -253,9 +218,8 @@ class gindcietriActions extends autogindcietriActions
   }
 
   public function saving($clasemodelo)
-  {	
-	$c = new Criteria();
-	$c->add(GiproanuPeer::NUMTRIM,$clasemodelo->getNumtrim());
+  {
+	$c = new Criteria();	
 	$c->add(GiproanuPeer::ANOINDG,$clasemodelo->getAnoindg());
 	$c->add(GiproanuPeer::REVANOINDG,$clasemodelo->getRevanoindg());
 	$per = GiproanuPeer::doSelect($c);
@@ -263,8 +227,8 @@ class gindcietriActions extends autogindcietriActions
 	{
 		foreach($per as $r)
 		{
-			$r->setEsttrim('C');
-			$r->setFeccietri(date('Y-m-d'));
+			$r->setEstprog('C');
+			$r->setFeccierre(date('Y-m-d'));
 			$r->save();
 		}	
 	}
@@ -273,7 +237,7 @@ class gindcietriActions extends autogindcietriActions
 
   public function deleting($clasemodelo)
   {
-    return $this->redirect('gindcietri/create');
+    return $this->redirect('gindciepro/create');
   }
 
 

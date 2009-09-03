@@ -1,0 +1,23 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Giproanu
+    theme:            cidesaGenerator
+    fields:      
+      anoindg:      { name: Año}
+      revanoindg:   { name: Revisión}
+      numtrim:      { name: Trimestre}
+      esttrim:      { name: Cierre}
+      prevanoindg:  { name: .}        
+      pnumtrim:     { name: .}
+      pcierre:      { name: .}
+      panoindg:     { name: .}
+      numnum:      { name: ., params: readonly=true style=border:none}
+
+    edit:
+      title:           Cierre de Programación
+      display:
+        Datos Cierre:  [_panoindg, _prevanoindg,  numnum, _pcierre]
+      actions:
+        _create:       NONE
+        

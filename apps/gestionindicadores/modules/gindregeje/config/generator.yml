@@ -5,8 +5,8 @@ generator:
     theme:            cidesaGenerator
     fields:
       anoindg:      { name: Año}
-      revanoindg:   { name: Revisión}
-      numtrim:       { name: Trimestre}
+      revanoindg:   { name: Revisión, params: size=7}
+      numtrim:       { name: Trimestre, params: size=7}
       numindg:      { name: Indicador}
       pnumtri:      { name: .}
       gridindicador:{ name: .}
@@ -14,7 +14,7 @@ generator:
     list:
       title:          Listado de Indicadores
       filters:        [anoindg, revanoindg, numindg]    
-      display:        [=anoindg, revanoindg, numtrim, numindg]
+      display:        [=anoindg, revanoindg, numtrim, numindg, nomindg]
       max_pers:           10
       sort:               numtrim
       objects_actions:
@@ -27,7 +27,7 @@ generator:
     edit:
       title:           Registro de Ejecución
       display:
-        Datos Indicador:  [anoindg, revanoindg, _pnumtri, _gridindicador ]
+        Datos Indicador:  [anoindg, revanoindg, numtrim, _gridindicador ]
       actions:
         _list:        ~
         _save:        ~
