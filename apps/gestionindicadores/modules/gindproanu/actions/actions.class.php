@@ -179,12 +179,13 @@ public function configGrid($nind='',$ano='',$rev='')
 		$c->add(GiregindPeer::NUMUNI,$codigo);
 		$c->add(GiregindPeer::ESTINDG,'A');
 		$per = GiregindPeer::doSelect($c);
-		$this->arrindg=array();
+		$arrindg=array();
 		foreach($per as $r)
 		{
 			$key = $r->getNumindg();
-			$this->arrindg[$key]=$r->getNumindg()." - ".$r->getNomindg();			
+			$arrindg[$key]=$r->getNumindg()." - ".$r->getNomindg();			
 		}
+		$this->arrindg=$arrindg;
 		if(!$this->arrindg)
 		  $this->arrindg=array(''=>'Seleccione...');
         $this->cond='1';
