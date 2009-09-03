@@ -17,4 +17,14 @@ class Giproanu extends BaseGiproanu
 		return H::getx('Numindg','Giregind','Numuni',self::getNumindg());
 	}
 	
+	public function getNomindg()
+	{
+		return H::getx('Numindg','Giregind','Nomindg',self::getNumindg());
+	}
+	
+	public function getNomuni()
+	{
+		return H::getx('Numuni','Acunidad','Nomuni',self::getNumuni());
+	}
+	
 }
