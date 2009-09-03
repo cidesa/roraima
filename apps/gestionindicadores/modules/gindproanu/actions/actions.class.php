@@ -182,7 +182,8 @@ public function configGrid($nind='',$ano='',$rev='')
 		$this->arrindg=array();
 		foreach($per as $r)
 		{
-			$this->arrindg[$r->getNumindg()]=$r->getNumindg()." - ".$r->getNomindg();			
+			$key = $r->getNumindg();
+			$this->arrindg[$key]=$r->getNumindg()." - ".$r->getNomindg();			
 		}
 		if(!$this->arrindg)
 		  $this->arrindg=array(''=>'Seleccione...');
