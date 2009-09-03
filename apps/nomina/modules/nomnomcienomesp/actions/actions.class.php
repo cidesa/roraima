@@ -228,11 +228,14 @@ class nomnomcienomespActions extends autonomnomcienomespActions
 	CierredeNominaEspecial::procesoCierre($codigo,$ultfec,$profec,&$msj,$codnomesp,$numsem);
 
 	if ($msj=='1')
-	{ $this->setFlash('notice', 'La Nómina Especial no puede ser cerrada');}
+	{
+		$this->setFlash('notice2', 'La Nómina Especial no puede ser cerrada');
+		}
+	else {
+		$this->setFlash('notice', 'La Nómina Especial fue Cerrada Satisfactoriamente');
+		}
+		return $this->redirect('nomnomcienomesp/index');
 
-	else { $this->setFlash('notice', 'La Nómina Especial fue Cerrada Satisfactoriamente');}
-
-	return $this->redirect('nomnomcienomesp/index');
   }
 
 }

@@ -238,5 +238,14 @@ border-right:4px solid #73B65A !important;
 
 #sf_admin_header input {
   float:right;
-  font-size:15px !important;;
+  font-size:15px !important;
 }
+
+#sf_admin_content .save-error h2 {
+background:#FF3333 url(../images/RemoveArgument.png) no-repeat scroll 5px 2px !important;
+color:#FFFFFF !important;
+font-size:11px !important;
+margin:0 !important;
+padding:5px 20px 5px 25px !important;
+}
+
