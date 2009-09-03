@@ -1,3 +1,5 @@
+<?php use_helper('Object', 'Validation', 'Javascript', 'Grid', 'SubmitClick') ?>
+
 <ul  class="sf_admin_actions" >
 <?php echo submit_tag_click( 'Cerrar Trimestre', array(
 			   'name' => 'save',

@@ -1,0 +1,14 @@
+methods:
+  post:
+   - "giproanu{anoindg}"     
+   - "giproanu{revanoindg}"  
+
+names:
+  giproanu{anoindg}:
+    required:  Yes
+    required_msg: Debe Ingresar el Año
+
+  giproanu{revanoindg}:
+    required:  Yes
+    required_msg: Debe introducir un Número de Revision
+
