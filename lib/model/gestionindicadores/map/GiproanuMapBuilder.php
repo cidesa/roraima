@@ -48,7 +48,11 @@ class GiproanuMapBuilder {
 
 		$tMap->addColumn('ESTTRIM', 'Esttrim', 'string', CreoleTypes::VARCHAR, true, 1);
 
+		$tMap->addColumn('ESTPROG', 'Estprog', 'string', CreoleTypes::VARCHAR, true, 1);
+
 		$tMap->addColumn('FECCIERRE', 'Feccierre', 'int', CreoleTypes::DATE, false, null);
+
+		$tMap->addColumn('FECCIETRI', 'Feccietri', 'int', CreoleTypes::DATE, false, null);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 

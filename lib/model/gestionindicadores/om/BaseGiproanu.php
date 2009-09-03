@@ -37,7 +37,15 @@ abstract class BaseGiproanu extends BaseObject  implements Persistent {
 
 
 	
+	protected $estprog;
+
+
+	
 	protected $feccierre;
+
+
+	
+	protected $feccietri;
 
 
 	
@@ -101,6 +109,13 @@ abstract class BaseGiproanu extends BaseObject  implements Persistent {
 
   }
   
+  public function getEstprog()
+  {
+
+    return trim($this->estprog);
+
+  }
+  
   public function getFeccierre($format = 'Y-m-d')
   {
 
@@ -112,6 +127,28 @@ abstract class BaseGiproanu extends BaseObject  implements Persistent {
       }
     } else {
       $ts = $this->feccierre;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getFeccietri($format = 'Y-m-d')
+  {
+
+    if ($this->feccietri === null || $this->feccietri === '') {
+      return null;
+    } elseif (!is_int($this->feccietri)) {
+            $ts = adodb_strtotime($this->feccietri);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [feccietri] as date/time value: " . var_export($this->feccietri, true));
+      }
+    } else {
+      $ts = $this->feccietri;
     }
     if ($format === null) {
       return $ts;
@@ -200,6 +237,16 @@ abstract class BaseGiproanu extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setEstprog($v)
+	{
+
+    if ($this->estprog !== $v) {
+        $this->estprog = $v;
+        $this->modifiedColumns[] = GiproanuPeer::ESTPROG;
+      }
+  
+	} 
+	
 	public function setFeccierre($v)
 	{
 
@@ -213,6 +260,23 @@ abstract class BaseGiproanu extends BaseObject  implements Persistent {
     if ($this->feccierre !== $ts) {
       $this->feccierre = $ts;
       $this->modifiedColumns[] = GiproanuPeer::FECCIERRE;
+    }
+
+	} 
+	
+	public function setFeccietri($v)
+	{
+
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [feccietri] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->feccietri !== $ts) {
+      $this->feccietri = $ts;
+      $this->modifiedColumns[] = GiproanuPeer::FECCIETRI;
     }
 
 	} 
@@ -245,9 +309,13 @@ abstract class BaseGiproanu extends BaseObject  implements Persistent {
 
       $this->esttrim = $rs->getString($startcol + 6);
 
-      $this->feccierre = $rs->getDate($startcol + 7, null);
+      $this->estprog = $rs->getString($startcol + 7);
 
-      $this->id = $rs->getInt($startcol + 8);
+      $this->feccierre = $rs->getDate($startcol + 8, null);
+
+      $this->feccietri = $rs->getDate($startcol + 9, null);
+
+      $this->id = $rs->getInt($startcol + 10);
 
       $this->resetModified();
 
@@ -255,7 +323,7 @@ abstract class BaseGiproanu extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 9; 
+            return $startcol + 11; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Giproanu object", $e);
     }
@@ -424,9 +492,15 @@ abstract class BaseGiproanu extends BaseObject  implements Persistent {
 				return $this->getEsttrim();
 				break;
 			case 7:
-				return $this->getFeccierre();
+				return $this->getEstprog();
 				break;
 			case 8:
+				return $this->getFeccierre();
+				break;
+			case 9:
+				return $this->getFeccietri();
+				break;
+			case 10:
 				return $this->getId();
 				break;
 			default:
@@ -446,8 +520,10 @@ abstract class BaseGiproanu extends BaseObject  implements Persistent {
 			$keys[4] => $this->getProgtrim(),
 			$keys[5] => $this->getEjectrim(),
 			$keys[6] => $this->getEsttrim(),
-			$keys[7] => $this->getFeccierre(),
-			$keys[8] => $this->getId(),
+			$keys[7] => $this->getEstprog(),
+			$keys[8] => $this->getFeccierre(),
+			$keys[9] => $this->getFeccietri(),
+			$keys[10] => $this->getId(),
 		);
 		return $result;
 	}
@@ -485,9 +561,15 @@ abstract class BaseGiproanu extends BaseObject  implements Persistent {
 				$this->setEsttrim($value);
 				break;
 			case 7:
-				$this->setFeccierre($value);
+				$this->setEstprog($value);
 				break;
 			case 8:
+				$this->setFeccierre($value);
+				break;
+			case 9:
+				$this->setFeccietri($value);
+				break;
+			case 10:
 				$this->setId($value);
 				break;
 		} 	}
@@ -504,8 +586,10 @@ abstract class BaseGiproanu extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[4], $arr)) $this->setProgtrim($arr[$keys[4]]);
 		if (array_key_exists($keys[5], $arr)) $this->setEjectrim($arr[$keys[5]]);
 		if (array_key_exists($keys[6], $arr)) $this->setEsttrim($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setFeccierre($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setId($arr[$keys[8]]);
+		if (array_key_exists($keys[7], $arr)) $this->setEstprog($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setFeccierre($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setFeccietri($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setId($arr[$keys[10]]);
 	}
 
 	
@@ -520,7 +604,9 @@ abstract class BaseGiproanu extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(GiproanuPeer::PROGTRIM)) $criteria->add(GiproanuPeer::PROGTRIM, $this->progtrim);
 		if ($this->isColumnModified(GiproanuPeer::EJECTRIM)) $criteria->add(GiproanuPeer::EJECTRIM, $this->ejectrim);
 		if ($this->isColumnModified(GiproanuPeer::ESTTRIM)) $criteria->add(GiproanuPeer::ESTTRIM, $this->esttrim);
+		if ($this->isColumnModified(GiproanuPeer::ESTPROG)) $criteria->add(GiproanuPeer::ESTPROG, $this->estprog);
 		if ($this->isColumnModified(GiproanuPeer::FECCIERRE)) $criteria->add(GiproanuPeer::FECCIERRE, $this->feccierre);
+		if ($this->isColumnModified(GiproanuPeer::FECCIETRI)) $criteria->add(GiproanuPeer::FECCIETRI, $this->feccietri);
 		if ($this->isColumnModified(GiproanuPeer::ID)) $criteria->add(GiproanuPeer::ID, $this->id);
 
 		return $criteria;
@@ -566,7 +652,11 @@ abstract class BaseGiproanu extends BaseObject  implements Persistent {
 
 		$copyObj->setEsttrim($this->esttrim);
 
+		$copyObj->setEstprog($this->estprog);
+
 		$copyObj->setFeccierre($this->feccierre);
+
+		$copyObj->setFeccietri($this->feccietri);
 
 
 		$copyObj->setNew(true);
