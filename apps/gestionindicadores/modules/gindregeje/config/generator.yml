@@ -11,11 +11,12 @@ generator:
       nomindg:      { name: Nombre Indicador}
       pnumtri:      { name: .}
       gridindicador:{ name: .}
+      unidades:     { name: Unidades}
         
     list:
       title:          Listado de Indicadores
-      filters:        [anoindg, revanoindg, numindg]    
-      display:        [=anoindg, revanoindg, numtrim, numindg, nomindg]
+      filters:        [anoindg, revanoindg, numtrim ]    
+      display:        [=anoindg, revanoindg, numtrim ]
       max_pers:           10
       sort:               numtrim
       objects_actions:
@@ -28,7 +29,7 @@ generator:
     edit:
       title:           Registro de Ejecución
       display:
-        Datos Indicador:  [anoindg, revanoindg, numtrim, _gridindicador ]
+        Datos Indicador:  [anoindg, revanoindg, numtrim, _unidades, _gridindicador ]
       actions:
         _list:        ~
         _save:        ~

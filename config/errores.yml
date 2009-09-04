@@ -1193,3 +1193,6 @@
 11103:
   cod: 11103
   msj:  Debe cerrar primero la Programacion para este Año y Revision
+11104:
+  cod: 11104
+  msj:  No puede borrar la Programacion de una Revision y Año ya cerrados
