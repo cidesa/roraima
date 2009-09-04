@@ -6,8 +6,9 @@ generator:
     fields:
       anoindg:      { name: Año}
       revanoindg:   { name: Revisión, params: size=7}
-      numtrim:       { name: Trimestre, params: size=7}
+      numtrim:      { name: Trimestre, params: size=7}
       numindg:      { name: Indicador}
+      nomindg:      { name: Nombre Indicador}
       pnumtri:      { name: .}
       gridindicador:{ name: .}
         

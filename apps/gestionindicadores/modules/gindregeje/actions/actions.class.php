@@ -163,7 +163,7 @@ public function validateEdit()
 if ($this->getRequest()->getMethod() == sfRequest::POST)
 {
 
-    $this->giproanu = $this->getGiproanuOrCreate();
+    /*$this->giproanu = $this->getGiproanuOrCreate();
 	$this->updateGiproanuFromRequest();
     $this->configgrid();
 	$grid = Herramientas::CargarDatosGridv2($this, $this->obj, true);
@@ -175,7 +175,7 @@ foreach ($grid[0] as $g)
         $this->coderr = 11102;
 		break;
     }
-}
+}*/
 
 
 if ($this->coderr != -1)
