@@ -6,7 +6,7 @@
 			'onChange'=> remote_function(array(
 			  'update'   => 'divgridtri',
 			  'url'      => 'gindregeje/ajax',
-			  'condition'=> "  $('giproanu_unidades').value!=''",
+			  #'condition'=> "  $('giproanu_unidades').value!=''",
 			  'complete' => 'AjaxJSON(request, json)',
 			  'with' => "'ajax=1&codigo='+this.value+'&anoindg='+$('giproanu_anoindg').value+'&revanoindg='+$('giproanu_revanoindg').value+'&numtrim='+$('giproanu_numtrim').value",
 			        )),
