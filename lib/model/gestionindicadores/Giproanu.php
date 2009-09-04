@@ -11,6 +11,7 @@ class Giproanu extends BaseGiproanu
 {
 	protected $numuni='';
 	protected $objtri=array();
+	protected $unidades='';
 	
 	public function getNumuni()
 	{

@@ -10,7 +10,48 @@
  */
 class gindproanuActions extends autogindproanuActions
 {
-	/*public function executeList()
+  protected function processFilters()
+  {
+    if ($this->getRequest()->hasParameter('filter'))
+    {
+      $filters = $this->getRequestParameter('filters');
+
+      $this->getUser()->getAttributeHolder()->removeNamespace('sf_admin/gindproanu/filters');
+      $this->getUser()->getAttributeHolder()->add($filters, 'sf_admin/gindproanu/filters');
+    }
+  }	
+  protected function addSortCriteria($c)
+  {
+    if ($sort_column = $this->getUser()->getAttribute('sort', null, 'sf_admin/gindproanu/sort'))
+    {
+      $sort_column = GiproanuPeer::translateFieldName($sort_column, BasePeer::TYPE_FIELDNAME, BasePeer::TYPE_COLNAME);
+      if ($this->getUser()->getAttribute('type', null, 'sf_admin/gindproanu/sort') == 'asc')
+      {
+        $c->addAscendingOrderByColumn($sort_column);
+      }
+      else
+      {
+        $c->addDescendingOrderByColumn($sort_column);
+      }
+    }
+  }
+  
+  protected function processSort()
+  {
+    if ($this->getRequestParameter('sort'))
+    {
+      $this->getUser()->setAttribute('sort', $this->getRequestParameter('sort'), 'sf_admin/gindproanu/sort');
+      $this->getUser()->setAttribute('type', $this->getRequestParameter('type', 'asc'), 'sf_admin/gindproanu/sort');
+    }
+
+    if (!$this->getUser()->getAttribute('sort', null, 'sf_admin/gindproanu/sort'))
+    {
+      $this->getUser()->setAttribute('sort', 'numindg', 'sf_admin/gindproanu/sort');
+      $this->getUser()->setAttribute('type', 'asc', 'sf_admin/gindproanu/sort');
+    }
+  }
+  	
+  public function executeList()
   {
     $this->processSort();
 
@@ -29,6 +70,8 @@ class gindproanuActions extends autogindproanuActions
     $c->addSelectColumn("0 AS PROGTRIM");
     $c->addSelectColumn("0 AS EJECTRIM");
     $c->addSelectColumn("'' AS ESTTRIM");
+    $c->addSelectColumn("'dd/mm/yyyy' AS FECCIETRI");
+	$c->addSelectColumn("'' AS ESTPROG");
     $c->addSelectColumn("'dd/mm/yyyy' AS FECCIERRE");
     $c->addSelectColumn("max(ID) AS ID");
    // $c->addSelectColumn(NpconfonPeer::CODNOM." AS ID");
@@ -42,7 +85,7 @@ class gindproanuActions extends autogindproanuActions
     $this->pager->setCriteria($c);
     $this->pager->setPage($this->getRequestParameter('page', 1));
     $this->pager->init();
-  }*/
+  }
 
   // Para incluir funcionalidades al executeEdit()
   public function editing()
@@ -91,6 +134,7 @@ public function configGrid($nind='',$ano='',$rev='')
 	$c->add(GiproanuPeer::NUMINDG,$nind);
 	$c->add(GiproanuPeer::ANOINDG,$ano);
 	$c->add(GiproanuPeer::REVANOINDG,$rev);
+	$c->addAscendingOrderByColumn(GiproanuPeer::NUMTRIM);
 	$per = GiproanuPeer::doSelect($c);
 	if($per)
 	{
@@ -355,10 +399,19 @@ public function configGrid($nind='',$ano='',$rev='')
 	$c->add(GiproanuPeer::ANOINDG,$clasemodelo->getAnoindg());
 	$c->add(GiproanuPeer::REVANOINDG,$clasemodelo->getRevanoindg());
 	$per = GiproanuPeer::doSelect($c);
-	foreach($per as $reg)
+	if($per)
 	{
-		$reg->delete();
-	}
+		if($per[0]->getEstprog()=='C')
+		{
+			return '11104';
+		}else
+		{
+			foreach($per as $reg)
+			{
+				$reg->delete();
+			}
+		}		
+	}	
 	return '-1';
   }
 
