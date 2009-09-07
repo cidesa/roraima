@@ -1,3 +1,17 @@
+[?php
+
+/**
+ *
+ * @package    Roraima
+ * @subpackage <?php echo $this->getGeneratedModuleName() ?>
+ 
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id$
+ * @copyright  Copyright 2007, Cidesa C.A.
+ *
+ */
+ ?]
+
 [?php echo form_tag('<?php echo $this->getModuleName() ?>/save', array(
   'id'        => 'sf_admin_edit_form',
   'name'      => 'sf_admin_edit_form',

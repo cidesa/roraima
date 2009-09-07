@@ -3,10 +3,11 @@
 /**
  * bieciemesdan actions.
  *
- * @package    siga
+ * @package    Roraima
  * @subpackage bieciemesdan
- * @author     Your name here
- * @version    SVN: $Id: actions.class.php 2692 2006-11-15 21:03:55Z fabien $
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * @version    SVN: $Id$
  */
 class bieciemesdanActions extends sfActions
 {
@@ -18,6 +19,12 @@ class bieciemesdanActions extends sfActions
   {
   }
 
+  /**
+   * Función para procesar _todas_ las funciones Ajax del formulario
+   * Cada función esta identificada con el valor de la vista "ajax"
+   * el cual traerá el indice de lo que se quiere procesar.
+   *
+   */
   public function executeAjax()
   {
     $cajtexmos=$this->getRequestParameter('cajtexmos');

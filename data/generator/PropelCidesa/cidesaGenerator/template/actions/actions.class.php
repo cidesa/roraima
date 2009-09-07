@@ -3,15 +3,18 @@
 /**
  * <?php echo $this->getGeneratedModuleName() ?> actions.
  *
- * @package    ##PROJECT_NAME##
+ * @package    Roraima
  * @subpackage <?php echo $this->getGeneratedModuleName() ?>
-
- * @author     Fabien Potencier <fabien.potencier@symfony-project.com>
- * @version    SVN: $Id: actions.class.php 3501 2007-02-18 10:28:17Z fabien $
+ 
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id$
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
 class <?php echo $this->getGeneratedModuleName() ?>Actions extends sfActions
 {
 
+  // variable donde se debe colocar el código de error generado en el validateEdit 
+  // para que sea procesado por el handleErrorEdit.
   protected $coderr = -1;
 
   public function executeIndex()
@@ -19,6 +22,11 @@ class <?php echo $this->getGeneratedModuleName() ?>Actions extends sfActions
     return $this->forward('<?php echo $this->getModuleName() ?>', 'list');
   }
 
+  /**
+   * Función principal para el manejo de la accion list
+   * del formulario.
+   *
+   */
   public function executeList()
   {
     $this->processSort();
@@ -53,6 +61,11 @@ class <?php echo $this->getGeneratedModuleName() ?>Actions extends sfActions
     return $this->forward('<?php echo $this->getModuleName() ?>', 'edit');
   }
 
+  /**
+   * Función principal para el manejo de la acción save
+   * del formulario.
+   *
+   */
   public function executeSave()
   {
 
@@ -60,14 +73,27 @@ class <?php echo $this->getGeneratedModuleName() ?>Actions extends sfActions
 
   }
 
-  // Para incluir funcionalidades al executeEdit()
+  /**
+   * Función para incluir funcionalidades adicionales en el executeEdit.
+   * Esta funcion debe ser reescrita en la clase que hereda.
+   *
+   */
   protected function editing()
   {
 
 
   }
 
-
+  /**
+   * Función principal para el manejo de las acciones create y edit
+   * del formulario.
+   *
+   */
+  /**
+   * Función principal para el manejo de las acciones create y edit
+   * del formulario.
+   *
+   */
   public function executeEdit()
   {
     $this->params=array();
@@ -144,6 +170,11 @@ class <?php echo $this->getGeneratedModuleName() ?>Actions extends sfActions
     return $this->forward('<?php echo $this->getModuleName() ?>', 'list');
   }
 
+  /**
+   * Función para manejar la captura de errores del negocio, tanto que se
+   * produzcan por algún validator y por un valor false retornado por el validateEdit
+   *
+   */
   public function handleErrorEdit()
   {
     $this->params=array();
@@ -162,6 +193,14 @@ class <?php echo $this->getGeneratedModuleName() ?>Actions extends sfActions
     return sfView::SUCCESS;
   }
 
+  /**
+   * Función para manejar de el salvado de registros del formulario.
+   * cabe destacar que llama internamente a la función $this->saving
+   * que es reescrita en la clase que hereda con el proceso que el usuario
+   * necesite implementar.
+   * Esta función saving siempre debe retornar un valor >=-1.
+   *
+   */
   protected function save<?php echo $this->getClassName() ?>($<?php echo $this->getSingularName() ?>)
   {
 
@@ -259,6 +298,11 @@ $column = sfPropelManyToMany::getColumn($class, $through_class);
 
   }
 
+  /**
+   * Función que debe ser reescrita en la clase que hereda para
+   * implementar el proceso de guardado adecuado para cada formulario.
+   *
+   */
   protected function saving($<?php echo $this->getSingularName() ?>)
   {
     $<?php echo $this->getSingularName() ?>->save();
@@ -266,6 +310,11 @@ $column = sfPropelManyToMany::getColumn($class, $through_class);
 
   }
 
+  /**
+   * Función que debe ser reescrita en la clase que hereda para
+   * implementar el proceso de eliminación adecuado para cada formulario.
+   *
+   */
   protected function deleting($<?php echo $this->getSingularName() ?>)
   {
   	$<?php echo $this->getSingularName() ?>->delete();
@@ -273,6 +322,14 @@ $column = sfPropelManyToMany::getColumn($class, $through_class);
 
   }
 
+  /**
+   * Función para manejar la eliminación de registros del formulario.
+   * cabe destacar que llama internamente a la función $this->deleting
+   * que es reescrita en la clase que hereda con el proceso que el usuario
+   * necesite implementar.
+   * Esta función deleting siempre debe retornar un valor >=-1.
+   *
+   */
   protected function delete<?php echo $this->getClassName() ?>($<?php echo $this->getSingularName() ?>)
   {
     try {
@@ -314,6 +371,11 @@ $column = sfPropelManyToMany::getColumn($class, $through_class);
     return true;
   }
 
+  /**
+   * Actualiza la informacion que viene de la vista 
+   * luego de un get/post en el obejto del modelo base del formulario.
+   *
+   */
   protected function update<?php echo $this->getClassName() ?>FromRequest()
   {
     $<?php echo $this->getSingularName() ?> = $this->getRequestParameter('<?php echo $this->getSingularName() ?>');
@@ -575,6 +637,11 @@ $column = sfPropelManyToMany::getColumn($class, $through_class);
 
   }
 
+  /**
+   * Retorna el registro del modelo del formulario
+   * Identifica si es un registro nuevo o actual, y lo retorna
+   *
+   */
   protected function get<?php echo $this->getClassName() ?>OrCreate(<?php echo $this->getMethodParamsForGetOrCreate() ?>)
   {
     if (<?php echo $this->getTestPksForGetOrCreate() ?>)
@@ -591,6 +658,10 @@ $column = sfPropelManyToMany::getColumn($class, $through_class);
     return $<?php echo $this->getSingularName() ?>;
   }
 
+  /**
+   * Función para procesar los filtros aplicados a la lista de registros
+   *
+   */
   protected function processFilters()
   {
 <?php if ($this->getParameterValue('list.filters')): ?>
@@ -616,6 +687,10 @@ $column = sfPropelManyToMany::getColumn($class, $through_class);
 <?php endif; ?>
   }
 
+  /**
+   * Función para procesar el orden de los registros en la lista
+   *
+   */
   protected function processSort()
   {
     if ($this->getRequestParameter('sort'))
@@ -638,6 +713,11 @@ $column = sfPropelManyToMany::getColumn($class, $through_class);
     }
   }
 
+  /**
+   * Función para manejar los filtros de búsqueda
+   * de la lista
+   *
+   */
   protected function addFiltersCriteria($c)
   {
 <?php if ($this->getParameterValue('list.filters')): ?>
@@ -700,6 +780,11 @@ $column = sfPropelManyToMany::getColumn($class, $through_class);
 <?php endif; ?>
   }
 
+  /**
+   * Función para colocar el criterio de ordenación de la lista de registros
+   * en la acción List
+   *
+   */
   protected function addSortCriteria($c)
   {
     if ($sort_column = $this->getUser()->getAttribute('sort', null, 'sf_admin/<?php echo $this->getSingularName() ?>/sort'))
@@ -716,6 +801,10 @@ $column = sfPropelManyToMany::getColumn($class, $through_class);
     }
   }
 
+  /**
+   * Función para retornar las etiquetas del formulario
+   *
+   */
   protected function getLabels()
   {
     $arreglo=array(
@@ -735,7 +824,11 @@ $column = sfPropelManyToMany::getColumn($class, $through_class);
 
 
 
-
+  /**
+   * Función para manejar el llamado Ajax automático con el
+   * Helper Catalogo.
+   *
+   */
   public function executeCatalogo()
   {
     $codigo = $this->getRequestParameter('codigo','');
@@ -763,6 +856,13 @@ $column = sfPropelManyToMany::getColumn($class, $through_class);
     return sfView::HEADER_ONLY;
   }
 
+
+  /**
+   * Función para guardar la bitacora de la aplicacion
+   * TODO: mejorar la carga de información en la bitacora
+   * Actualmente esta planteada información no muy relevante
+   *
+   */
  public function SalvarBitacora($id, $acc)
   {
     try{

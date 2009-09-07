@@ -1,4 +1,18 @@
 [?php
+
+/**
+ *
+ * @package    Roraima
+ * @subpackage <?php echo $this->getGeneratedModuleName() ?>
+ 
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id$
+ * @copyright  Copyright 2007, Cidesa C.A.
+ *
+ */
+ ?]
+
+[?php
 $varcargar="";
 $varemp =$sf_user->getAttribute('configemp');
     if ($varemp)

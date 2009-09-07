@@ -3,10 +3,13 @@
 /**
  * biedefconlotm actions.
  *
- * @package    siga
+ * @package    Roraima
  * @subpackage biedefconlotm
- * @author     Your name here
- * @version    SVN: $Id: actions.class.php 2288 2006-10-02 15:22:13Z fabien $
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * 
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
 class biedefconlotmActions extends autobiedefconlotmActions
 {
@@ -15,6 +18,11 @@ class biedefconlotmActions extends autobiedefconlotmActions
     return $this->forward('biedefconlotm', 'edit');
   }
 
+  /**
+   * Función principal para el manejo de las acciones create y edit
+   * del formulario.
+   *
+   */
   public function executeEdit()
   {
   	$this->setVars();
@@ -53,13 +61,23 @@ $this->Bitacora('Guardo');
     return $this->forward('biedefconlotm', 'edit');
   }
 
+  /**
+   * Función principal para el manejo de la acción save
+   * del formulario.
+   *
+   */
   public function executeSave()
   {
     return $this->forward('biedefconlotm', 'edit');
   }
 
 
- public function executeDelete()
+ /**
+   * Función principal para procesar la eliminación de registros 
+   * en el formulario.
+   *
+   */
+  public function executeDelete()
   {
     $this->bndefcon = BndefconPeer::retrieveByPk($this->getRequestParameter('id'));
     $this->forward404Unless($this->bndefcon);
@@ -78,6 +96,17 @@ $this->Bitacora('Guardo');
     return $this->redirect('biedefconlotm/list');
   }
 
+  /**
+   * Función para manejar el salvado del formulario.
+   * cabe destacar que en las versiones nuevas del formulario (cidesaPropel)
+   * llama internamente a la función $this->saving
+   * Esta función saving siempre debe retornar un valor >=-1.
+   * En esta funcción se debe realizar el proceso de guardado de informacion
+   * del negocio en la base de datos. Este proceso debe ser realizado llamado
+   * a funciones de las clases del negocio que se encuentran en lib/bussines
+   * todos los procesos de guardado deben estar en la clases del negocio (lib/bussines/"modulo")
+   *
+   */
   protected function saveBndefcon($bndefcon)
   {
     $bndefcon->save();
@@ -89,6 +118,11 @@ $this->Bitacora('Guardo');
     $bndefcon->delete();
   }
 
+  /**
+   * Actualiza la informacion que viene de la vista 
+   * luego de un get/post en el objeto principal del modelo base del formulario.
+   *
+   */
   protected function updateBndefconFromRequest()
   {
     $bndefcon = $this->getRequestParameter('bndefcon');
@@ -222,6 +256,12 @@ $this->Bitacora('Guardo');
       }
   }
 
+  /**
+   * Función para procesar _todas_ las funciones Ajax del formulario
+   * Cada función esta identificada con el valor de la vista "ajax"
+   * el cual traerá el indice de lo que se quiere procesar.
+   *
+   */
   public function executeAjax()
   {
    $cajtexmos=$this->getRequestParameter('cajtexmos');
@@ -254,7 +294,13 @@ $this->Bitacora('Guardo');
   }
 
 
- public function handleErrorEdit()
+ /**
+   * Función para manejar la captura de errores del negocio, tanto que se
+   * produzcan por algún validator y por un valor false retornado por el validateEdit
+   * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
+   *
+   */
+  public function handleErrorEdit()
   {
     $this->preExecute();
     $this->bndefcon = $this->getBndefconOrCreate();

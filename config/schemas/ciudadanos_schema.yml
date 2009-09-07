@@ -1,4 +1,3 @@
----
 propel:
   _attributes: { noXsd: false, defaultIdMethod: native, package: lib.model.ciudadanos }
 

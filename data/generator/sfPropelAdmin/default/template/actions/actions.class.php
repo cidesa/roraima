@@ -3,11 +3,11 @@
 /**
  * <?php echo $this->getGeneratedModuleName() ?> actions.
  *
- * @package    ##PROJECT_NAME##
+ * @package    Roraima
  * @subpackage <?php echo $this->getGeneratedModuleName() ?>
-
- * @author     Fabien Potencier <fabien.potencier@symfony-project.com>
- * @version    SVN: $Id: actions.class.php 7997 2008-03-20 12:29:34Z noel $
+ 
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id$
  */
 class <?php echo $this->getGeneratedModuleName() ?>Actions extends sfActions
 {
@@ -55,6 +55,11 @@ class <?php echo $this->getGeneratedModuleName() ?>Actions extends sfActions
     return $this->forward('<?php echo $this->getModuleName() ?>', 'edit');
   }
 
+  /**
+   * Función principal para el manejo de las acciones create y edit
+   * del formulario.
+   *
+   */
   public function executeEdit()
   {
     $this-><?php echo $this->getSingularName() ?> = $this->get<?php echo $this->getClassName() ?>OrCreate();
