@@ -10,7 +10,7 @@
  * @package    ##PROJECT_NAME##
  * @subpackage autoAlmdespser
  * @author     Fabien Potencier <fabien.potencier@symfony-project.com>
- * @version    SVN: $Id: actions.class.php 3501 2007-02-18 10:28:17Z fabien $
+ * @version    SVN: $Id$
  */
 class autoAlmdespserActions extends sfActions
 {
@@ -19,6 +19,11 @@ class autoAlmdespserActions extends sfActions
     return $this->forward('almdespser', 'list');
   }
 
+  /**
+   * Función principal para el manejo de la accion list
+   * del formulario.
+   *
+   */
   public function executeList()
   {
     $this->processSort();
@@ -42,11 +47,21 @@ class autoAlmdespserActions extends sfActions
     return $this->forward('almdespser', 'edit');
   }
 
+  /**
+   * Función principal para el manejo de la acción save
+   * del formulario.
+   *
+   */
   public function executeSave()
   {
     return $this->forward('almdespser', 'edit');
   }
 
+  /**
+   * Función principal para el manejo de las acciones create y edit
+   * del formulario.
+   *
+   */
   public function executeEdit()
   {
     $this->cadphartser = $this->getCadphartserOrCreate();
@@ -79,6 +94,11 @@ $this->Bitacora('Guardo');
     }
   }
 
+  /**
+   * Función principal para procesar la eliminación de registros 
+   * en el formulario.
+   *
+   */
   public function executeDelete()
   {
     $this->cadphartser = CadphartserPeer::retrieveByPk($this->getRequestParameter('id'));
@@ -97,6 +117,12 @@ $this->Bitacora('Guardo');
     return $this->redirect('almdespser/list');
   }
 
+  /**
+   * Función para manejar la captura de errores del negocio, tanto que se
+   * produzcan por algún validator y por un valor false retornado por el validateEdit
+   * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
+   *
+   */
   public function handleErrorEdit()
   {
     $this->preExecute();
@@ -108,6 +134,17 @@ $this->Bitacora('Guardo');
     return sfView::SUCCESS;
   }
 
+  /**
+   * Función para manejar el salvado del formulario.
+   * cabe destacar que en las versiones nuevas del formulario (cidesaPropel)
+   * llama internamente a la función $this->saving
+   * Esta función saving siempre debe retornar un valor >=-1.
+   * En esta funcción se debe realizar el proceso de guardado de informacion
+   * del negocio en la base de datos. Este proceso debe ser realizado llamado
+   * a funciones de las clases del negocio que se encuentran en lib/bussines
+   * todos los procesos de guardado deben estar en la clases del negocio (lib/bussines/"modulo")
+   *
+   */
   protected function saveCadphartser($cadphartser)
   {
     $cadphartser->save();
@@ -119,6 +156,11 @@ $this->Bitacora('Guardo');
     $cadphartser->delete();
   }
 
+  /**
+   * Actualiza la informacion que viene de la vista 
+   * luego de un get/post en el objeto principal del modelo base del formulario.
+   *
+   */
   protected function updateCadphartserFromRequest()
   {
     $cadphartser = $this->getRequestParameter('cadphartser');

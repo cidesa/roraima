@@ -11,7 +11,8 @@
 /**
  * Admin generator.
  *
- * This class generates an admin module.
+ * This class generates an admin module. Fue modificada por Cidesa para que hiciera
+ * lo que necesitabamos. Es el código base que fue usado para el cidesaPropel
  *
  * This class calls two ORM specific methods:
  *   getAllColumns()
@@ -21,7 +22,7 @@
  * @package    symfony
  * @subpackage generator
  * @author     Fabien Potencier <fabien.potencier@symfony-project.com>
- * @version    SVN: $Id: sfPropelAdminGenerator.class.php 2625 2006-11-07 10:36:14Z fabien $
+ * @version    SVN: $Id$
  */
 abstract class sfAdminGenerator extends sfCrudGenerator
 {
@@ -705,7 +706,7 @@ EOF;
  * @package    symfony
  * @subpackage generator
  * @author     Fabien Potencier <fabien.potencier@symfony-project.com>
- * @version    SVN: $Id: sfPropelAdminGenerator.class.php 2625 2006-11-07 10:36:14Z fabien $
+ * @version    SVN: $Id$
  */
 class sfAdminColumn
 {

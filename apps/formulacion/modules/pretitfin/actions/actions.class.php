@@ -3,14 +3,22 @@
 /**
  * pretitfin actions.
  *
- * @package    siga
+ * @package    Roraima
  * @subpackage pretitfin
- * @author     Your name here
- * @version    SVN: $Id: actions.class.php 2288 2006-10-02 15:22:13Z fabien $
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * 
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
 class pretitfinActions extends autopretitfinActions
 {
-	public function executeEdit()
+	/**
+   * Función principal para el manejo de las acciones create y edit
+   * del formulario.
+   *
+   */
+  public function executeEdit()
   {
     $this->fortipfin = $this->getFortipfinOrCreate();
 
@@ -44,6 +52,11 @@ $this->Bitacora('Guardo');
     }
   }
 
+  /**
+   * Actualiza la informacion que viene de la vista 
+   * luego de un get/post en el objeto principal del modelo base del formulario.
+   *
+   */
   protected function updateFortipfinFromRequest()
   {
     $fortipfin = $this->getRequestParameter('fortipfin');

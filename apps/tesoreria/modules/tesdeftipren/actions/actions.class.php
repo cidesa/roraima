@@ -3,13 +3,21 @@
 /**
  * tesdeftipren actions.
  *
- * @package    siga
+ * @package    Roraima
  * @subpackage tesdeftipren
- * @author     Your name here
- * @version    SVN: $Id: actions.class.php 2288 2006-10-02 15:22:13Z fabien $
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * 
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
 class tesdeftiprenActions extends autotesdeftiprenActions
 {
+  /**
+   * Función principal para el manejo de las acciones create y edit
+   * del formulario.
+   *
+   */
   public function executeEdit()
   {
     $this->tstipren = $this->getTstiprenOrCreate();
@@ -44,6 +52,11 @@ $this->Bitacora('Guardo');
     }
   }
 
+  /**
+   * Función principal para procesar la eliminación de registros 
+   * en el formulario.
+   *
+   */
   public function executeDelete()
   {
     $this->tstipren = TstiprenPeer::retrieveByPk($this->getRequestParameter('id'));

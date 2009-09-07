@@ -1,11 +1,17 @@
 <?php
 
 /**
- * Subclass for representing a row from the 'catprc' table.
+ * Subclase para representar una fila de la tabla  'catprc'.
  *
  * 
  *
- * @package lib.model.catastro
+ * @package    Roraima
+ * @subpackage lib.model.catastro
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * 
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */ 
 class Catprc extends BaseCatprc
 {

@@ -1,4 +1,17 @@
 <?php
+/**
+ * cidesaWebResponse: Clase para preprocesar las respuestas y cambiar la codificación
+ * de los caracteres especiales. Esto es usado mayormente en las respuestas Ajax
+ * para todos los formularios
+ *
+ * @package    Roraima
+ * @subpackage cidesa
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * 
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
+ */
 class cidesaWebResponse extends sfWebResponse
 {
 /**

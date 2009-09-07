@@ -59,9 +59,6 @@ abstract class BaseDfatendocdet extends BaseObject  implements Persistent {
 	protected $aDfatendoc;
 
 	
-	protected $aUsuarios;
-
-	
 	protected $aAcunidadRelatedByIdAcunidadOri;
 
 	
@@ -222,10 +219,6 @@ abstract class BaseDfatendocdet extends BaseObject  implements Persistent {
         $this->modifiedColumns[] = DfatendocdetPeer::ID_USUARIO;
       }
   
-		if ($this->aUsuarios !== null && $this->aUsuarios->getId() !== $v) {
-			$this->aUsuarios = null;
-		}
-
 	} 
 	
 	public function setDesate($v)
@@ -477,11 +470,11 @@ abstract class BaseDfatendocdet extends BaseObject  implements Persistent {
 				$this->setDfatendoc($this->aDfatendoc);
 			}
 
-			if ($this->aUsuarios !== null) {
-				if ($this->aUsuarios->isModified()) {
-					$affectedRows += $this->aUsuarios->save($con);
+			if ($this->aTableError !== null) {
+				if ($this->aTableError->isModified()) {
+					$affectedRows += $this->aTableError->save($con);
 				}
-				$this->setUsuarios($this->aUsuarios);
+				$this->setTableError($this->aTableError);
 			}
 
 			if ($this->aAcunidadRelatedByIdAcunidadOri !== null) {
@@ -575,9 +568,9 @@ abstract class BaseDfatendocdet extends BaseObject  implements Persistent {
 				}
 			}
 
-			if ($this->aUsuarios !== null) {
-				if (!$this->aUsuarios->validate($columns)) {
-					$failureMap = array_merge($failureMap, $this->aUsuarios->getValidationFailures());
+			if ($this->aTableError !== null) {
+				if (!$this->aTableError->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aTableError->getValidationFailures());
 				}
 			}
 
@@ -899,35 +892,6 @@ abstract class BaseDfatendocdet extends BaseObject  implements Persistent {
 	}
 
 	
-	public function setUsuarios($v)
-	{
-
-
-		if ($v === null) {
-			$this->setIdUsuario(NULL);
-		} else {
-			$this->setIdUsuario($v->getId());
-		}
-
-
-		$this->aUsuarios = $v;
-	}
-
-
-	
-	public function getUsuarios($con = null)
-	{
-		if ($this->aUsuarios === null && ($this->id_usuario !== null)) {
-						include_once 'lib/model/documentos/om/BaseUsuariosPeer.php';
-
-			$this->aUsuarios = UsuariosPeer::retrieveByPK($this->id_usuario, $con);
-
-			
-		}
-		return $this->aUsuarios;
-	}
-
-	
 	public function setAcunidadRelatedByIdAcunidadOri($v)
 	{
 
@@ -1111,41 +1075,6 @@ abstract class BaseDfatendocdet extends BaseObject  implements Persistent {
 	{
 		$this->collDfatendocobss[] = $l;
 		$l->setDfatendocdet($this);
-	}
-
-
-	
-	public function getDfatendocobssJoinUsuarios($criteria = null, $con = null)
-	{
-				include_once 'lib/model/documentos/om/BaseDfatendocobsPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		if ($this->collDfatendocobss === null) {
-			if ($this->isNew()) {
-				$this->collDfatendocobss = array();
-			} else {
-
-				$criteria->add(DfatendocobsPeer::ID_DFATENDOCDET, $this->getId());
-
-				$this->collDfatendocobss = DfatendocobsPeer::doSelectJoinUsuarios($criteria, $con);
-			}
-		} else {
-									
-			$criteria->add(DfatendocobsPeer::ID_DFATENDOCDET, $this->getId());
-
-			if (!isset($this->lastDfatendocobsCriteria) || !$this->lastDfatendocobsCriteria->equals($criteria)) {
-				$this->collDfatendocobss = DfatendocobsPeer::doSelectJoinUsuarios($criteria, $con);
-			}
-		}
-		$this->lastDfatendocobsCriteria = $criteria;
-
-		return $this->collDfatendocobss;
 	}
 
 } 

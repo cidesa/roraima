@@ -222,34 +222,6 @@ abstract class BaseDfatendocobsPeer {
 
 
 	
-	public static function doCountJoinUsuarios(Criteria $criteria, $distinct = false, $con = null)
-	{
-				$criteria = clone $criteria;
-
-				$criteria->clearSelectColumns()->clearOrderByColumns();
-		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(DfatendocobsPeer::COUNT_DISTINCT);
-		} else {
-			$criteria->addSelectColumn(DfatendocobsPeer::COUNT);
-		}
-
-				foreach($criteria->getGroupByColumns() as $column)
-		{
-			$criteria->addSelectColumn($column);
-		}
-
-		$criteria->addJoin(DfatendocobsPeer::ID_USUARIO, UsuariosPeer::ID);
-
-		$rs = DfatendocobsPeer::doSelectRS($criteria, $con);
-		if ($rs->next()) {
-			return $rs->getInt(1);
-		} else {
-						return 0;
-		}
-	}
-
-
-	
 	public static function doSelectJoinDfatendocdet(Criteria $c, $con = null)
 	{
 		$c = clone $c;
@@ -297,53 +269,6 @@ abstract class BaseDfatendocobsPeer {
 
 
 	
-	public static function doSelectJoinUsuarios(Criteria $c, $con = null)
-	{
-		$c = clone $c;
-
-				if ($c->getDbName() == Propel::getDefaultDB()) {
-			$c->setDbName(self::DATABASE_NAME);
-		}
-
-		DfatendocobsPeer::addSelectColumns($c);
-		$startcol = (DfatendocobsPeer::NUM_COLUMNS - DfatendocobsPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
-		UsuariosPeer::addSelectColumns($c);
-
-		$c->addJoin(DfatendocobsPeer::ID_USUARIO, UsuariosPeer::ID);
-		$rs = BasePeer::doSelect($c, $con);
-		$results = array();
-
-		while($rs->next()) {
-
-			$omClass = DfatendocobsPeer::getOMClass();
-
-			$cls = Propel::import($omClass);
-			$obj1 = new $cls();
-			$obj1->hydrate($rs);
-
-			$omClass = UsuariosPeer::getOMClass();
-
-			$cls = Propel::import($omClass);
-			$obj2 = new $cls();
-			$obj2->hydrate($rs, $startcol);
-
-			$newObject = true;
-			foreach($results as $temp_obj1) {
-				$temp_obj2 = $temp_obj1->getUsuarios(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-										$temp_obj2->addDfatendocobs($obj1); 					break;
-				}
-			}
-			if ($newObject) {
-				$obj2->initDfatendocobss();
-				$obj2->addDfatendocobs($obj1); 			}
-			$results[] = $obj1;
-		}
-		return $results;
-	}
-
-
-	
 	public static function doCountJoinAll(Criteria $criteria, $distinct = false, $con = null)
 	{
 		$criteria = clone $criteria;
@@ -360,10 +285,8 @@ abstract class BaseDfatendocobsPeer {
 			$criteria->addSelectColumn($column);
 		}
 
-		$criteria->addJoin(DfatendocobsPeer::ID_DFATENDOCDET, DfatendocdetPeer::ID);
-
-		$criteria->addJoin(DfatendocobsPeer::ID_USUARIO, UsuariosPeer::ID);
-
+			$criteria->addJoin(DfatendocobsPeer::ID_DFATENDOCDET, DfatendocdetPeer::ID);
+	
 		$rs = DfatendocobsPeer::doSelectRS($criteria, $con);
 		if ($rs->next()) {
 			return $rs->getInt(1);
@@ -385,16 +308,11 @@ abstract class BaseDfatendocobsPeer {
 		DfatendocobsPeer::addSelectColumns($c);
 		$startcol2 = (DfatendocobsPeer::NUM_COLUMNS - DfatendocobsPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		DfatendocdetPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + DfatendocdetPeer::NUM_COLUMNS;
-
-		UsuariosPeer::addSelectColumns($c);
-		$startcol4 = $startcol3 + UsuariosPeer::NUM_COLUMNS;
-
-		$c->addJoin(DfatendocobsPeer::ID_DFATENDOCDET, DfatendocdetPeer::ID);
-
-		$c->addJoin(DfatendocobsPeer::ID_USUARIO, UsuariosPeer::ID);
-
+			DfatendocdetPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + DfatendocdetPeer::NUM_COLUMNS;
+	
+			$c->addJoin(DfatendocobsPeer::ID_DFATENDOCDET, DfatendocdetPeer::ID);
+	
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
 
@@ -408,112 +326,59 @@ abstract class BaseDfatendocobsPeer {
 			$obj1->hydrate($rs);
 
 
-					
-			$omClass = DfatendocdetPeer::getOMClass();
+							
+				$omClass = DfatendocdetPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2 = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2 = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getDfatendocdet(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addDfatendocobs($obj1); 					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getDfatendocdet(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addDfatendocobs($obj1); 						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initDfatendocobss();
-				$obj2->addDfatendocobs($obj1);
-			}
-
-
-					
-			$omClass = UsuariosPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj3 = new $cls();
-			$obj3->hydrate($rs, $startcol3);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj3 = $temp_obj1->getUsuarios(); 				if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj3->addDfatendocobs($obj1); 					break;
+				if ($newObject) {
+					$obj2->initDfatendocobss();
+					$obj2->addDfatendocobs($obj1);
 				}
-			}
-
-			if ($newObject) {
-				$obj3->initDfatendocobss();
-				$obj3->addDfatendocobs($obj1);
-			}
-
+	
 			$results[] = $obj1;
 		}
 		return $results;
 	}
 
 
-	
-	public static function doCountJoinAllExceptDfatendocdet(Criteria $criteria, $distinct = false, $con = null)
-	{
-				$criteria = clone $criteria;
-
-				$criteria->clearSelectColumns()->clearOrderByColumns();
-		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(DfatendocobsPeer::COUNT_DISTINCT);
-		} else {
-			$criteria->addSelectColumn(DfatendocobsPeer::COUNT);
-		}
-
-				foreach($criteria->getGroupByColumns() as $column)
+		
+		public static function doCountJoinAllExceptDfatendocdet(Criteria $criteria, $distinct = false, $con = null)
 		{
-			$criteria->addSelectColumn($column);
-		}
+						$criteria = clone $criteria;
 
-		$criteria->addJoin(DfatendocobsPeer::ID_USUARIO, UsuariosPeer::ID);
+						$criteria->clearSelectColumns()->clearOrderByColumns();
+			if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+				$criteria->addSelectColumn(DfatendocobsPeer::COUNT_DISTINCT);
+			} else {
+				$criteria->addSelectColumn(DfatendocobsPeer::COUNT);
+			}
 
-		$rs = DfatendocobsPeer::doSelectRS($criteria, $con);
-		if ($rs->next()) {
-			return $rs->getInt(1);
-		} else {
-						return 0;
-		}
-	}
-
-
+						foreach($criteria->getGroupByColumns() as $column)
+			{
+				$criteria->addSelectColumn($column);
+			}
 	
-	public static function doCountJoinAllExceptUsuarios(Criteria $criteria, $distinct = false, $con = null)
-	{
-				$criteria = clone $criteria;
-
-				$criteria->clearSelectColumns()->clearOrderByColumns();
-		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(DfatendocobsPeer::COUNT_DISTINCT);
-		} else {
-			$criteria->addSelectColumn(DfatendocobsPeer::COUNT);
+			$rs = DfatendocobsPeer::doSelectRS($criteria, $con);
+			if ($rs->next()) {
+				return $rs->getInt(1);
+			} else {
+								return 0;
+			}
 		}
-
-				foreach($criteria->getGroupByColumns() as $column)
-		{
-			$criteria->addSelectColumn($column);
-		}
-
-		$criteria->addJoin(DfatendocobsPeer::ID_DFATENDOCDET, DfatendocdetPeer::ID);
-
-		$rs = DfatendocobsPeer::doSelectRS($criteria, $con);
-		if ($rs->next()) {
-			return $rs->getInt(1);
-		} else {
-						return 0;
-		}
-	}
-
+	
 
 	
 	public static function doSelectJoinAllExceptDfatendocdet(Criteria $c, $con = null)
@@ -527,11 +392,6 @@ abstract class BaseDfatendocobsPeer {
 		DfatendocobsPeer::addSelectColumns($c);
 		$startcol2 = (DfatendocobsPeer::NUM_COLUMNS - DfatendocobsPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		UsuariosPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + UsuariosPeer::NUM_COLUMNS;
-
-		$c->addJoin(DfatendocobsPeer::ID_USUARIO, UsuariosPeer::ID);
-
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
@@ -543,28 +403,6 @@ abstract class BaseDfatendocobsPeer {
 			$cls = Propel::import($omClass);
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
-
-			$omClass = UsuariosPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj2  = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getUsuarios(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addDfatendocobs($obj1);
-					break;
-				}
-			}
-
-			if ($newObject) {
-				$obj2->initDfatendocobss();
-				$obj2->addDfatendocobs($obj1);
-			}
 
 			$results[] = $obj1;
 		}
@@ -572,24 +410,6 @@ abstract class BaseDfatendocobsPeer {
 	}
 
 
-	
-	public static function doSelectJoinAllExceptUsuarios(Criteria $c, $con = null)
-	{
-		$c = clone $c;
-
-								if ($c->getDbName() == Propel::getDefaultDB()) {
-			$c->setDbName(self::DATABASE_NAME);
-		}
-
-		DfatendocobsPeer::addSelectColumns($c);
-		$startcol2 = (DfatendocobsPeer::NUM_COLUMNS - DfatendocobsPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
-
-		DfatendocdetPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + DfatendocdetPeer::NUM_COLUMNS;
-
-		$c->addJoin(DfatendocobsPeer::ID_DFATENDOCDET, DfatendocdetPeer::ID);
-
-
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
 
@@ -600,28 +420,6 @@ abstract class BaseDfatendocobsPeer {
 			$cls = Propel::import($omClass);
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
-
-			$omClass = DfatendocdetPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj2  = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getDfatendocdet(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addDfatendocobs($obj1);
-					break;
-				}
-			}
-
-			if ($newObject) {
-				$obj2->initDfatendocobss();
-				$obj2->addDfatendocobs($obj1);
-			}
 
 			$results[] = $obj1;
 		}

@@ -3,10 +3,13 @@
 /**
  * nomfalperper actions.
  *
- * @package    siga
+ * @package    Roraima
  * @subpackage nomfalperper
- * @author     Your name here
- * @version    SVN: $Id: actions.class.php 2288 2006-10-02 15:22:13Z fabien $
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * 
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
 class nomfalperperActions extends autonomfalperperActions
 {
@@ -16,7 +19,12 @@ class nomfalperperActions extends autonomfalperperActions
     return $this->forward('nomfalperper', 'edit');
   }
 
-	public function executeEdit()
+	/**
+   * Función principal para el manejo de las acciones create y edit
+   * del formulario.
+   *
+   */
+  public function executeEdit()
 	{
 		$this->codigoemp = $this->getRequestParameter('codigoemp');
 	    $this->nphojint = $this->getNphojintOrCreate();		
@@ -68,6 +76,13 @@ $this->Bitacora('Guardo');
 	 }
     }
 
+  /**
+   * Esta función permite definir la configuración del grid de datos
+   * que contiene el formulario. Esta función debe ser llamada
+   * en las acciones, create, edit y handleError para recargar en todo momento
+   * los datos del grid.
+   *
+   */
   public function configGrid($codigo='')
   {
 

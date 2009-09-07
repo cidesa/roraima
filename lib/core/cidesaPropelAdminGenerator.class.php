@@ -1,5 +1,16 @@
 <?php
-
+/**
+ * cidesaPropelAdminGenerator: Clase para generar los formularios en base a la clases
+ * del modelo de Propel
+ *
+ * @package    Roraima
+ * @subpackage cidesa
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * 
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
+ */
 class cidesaPropelAdminGenerator extends sfPropelAdminGenerator {
 
   public function initialize($generatorManager)

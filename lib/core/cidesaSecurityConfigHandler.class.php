@@ -1,20 +1,16 @@
 <?php
 
-/*
- * This file is part of the symfony package.
- * (c) 2004-2006 Fabien Potencier <fabien.potencier@symfony-project.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 /**
- * cidesaSecurityConfigHandler allows you to configure action security.
+ * cidesaSecurityConfigHandler: Clase para generar los privilegios automáticos de
+ * todos los formularios
  *
- * @package    symfony
- * @subpackage config
- * @author     Fabien Potencier <fabien.potencier@symfony-project.com>. Adaptado para SIGA-SL por Luis Hernández
- * @version    SVN: $Id: sfSecurityConfigHandler.class.php 3624 2007-03-17 10:57:03Z fabien $
+ * @package    Roraima
+ * @subpackage cidesa
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * 
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
 class cidesaSecurityConfigHandler extends sfYamlConfigHandler
 {

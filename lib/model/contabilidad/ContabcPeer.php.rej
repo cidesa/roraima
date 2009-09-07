@@ -1,0 +1,20 @@
+@@ -0,11 +0,17 @@
+ <?php
+ 
+ /**
+- * Subclass for performing query and update operations on the 'contabc' table.
++ * Subclase para crear funcionalidades específicas de busqueda y actualización en la tabla 'contabc'.
+  *
+  * 
+  *
+- * @package lib.model
++ * @package    Roraima
++ * @subpackage lib.model.contabilidad
++ * @author     $Author$ <desarrollo@cidesa.com.ve>
++ * @version SVN: $Id$
++ * 
++ * @copyright  Copyright 2007, Cide S.A.
++ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
+  */ 
+ class ContabcPeer extends BaseContabcPeer
+ {

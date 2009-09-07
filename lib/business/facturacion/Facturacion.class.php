@@ -1,5 +1,15 @@
 <?php
-
+/**
+ * Facturación: Clase estática para el manejo de las facturas
+ *
+ * @package    Roraima
+ * @subpackage facturacion
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * 
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
+ */
 class Facturacion {
 
 /*******************************Definición de Ciudades**********************************************/

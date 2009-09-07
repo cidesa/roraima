@@ -3,10 +3,13 @@
 /**
  * almsolegr actions.
  *
- * @package    siga
+ * @package    Roraima
  * @subpackage almsolegr
- * @author     Your name here
- * @version    SVN: $Id: actions.class.php 2288 2006-10-02 15:22:13Z fabien $
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * 
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
 class almsolegrActions extends autoalmsolegrActions
 {
@@ -26,7 +29,16 @@ class almsolegrActions extends autoalmsolegrActions
 
 
 
-public function validateEdit()
+
+  
+  
+  /**
+   *
+   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
+   *
+   */
+  public function validateEdit()
   {
     if($this->getRequest()->getMethod() == sfRequest::POST && $this->getRequestParameter('modifi')=='S')
     {

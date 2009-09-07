@@ -1,4 +1,17 @@
 <?php
+/**
+ * Grid Tag: Función que genera el grid de datos en base a las librerías js EXT (experimental).
+ * El grid es generado en base a un arreglo con la configuración y los datos que debe
+ * mostrar
+ *
+ * @package    Roraima
+ * @subpackage helper
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * 
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
+ */
 function grid_tag($obj,$objelim = array())
 {
   $name=$obj["name"];

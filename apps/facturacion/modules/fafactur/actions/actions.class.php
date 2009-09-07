@@ -4,13 +4,26 @@
 /**
  * fafactur actions.
  *
- * @package    siga
+ * @package    Roraima
  * @subpackage fafactur
- * @author     Your name here
- * @version    SVN: $Id: actions.class.php 2288 2006-10-02 15:22:13Z fabien $
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * 
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
 class fafacturActions extends autofafacturActions {
-	public function editing() {
+	/**
+   * Función para colocar el codigo necesario en  
+   * el proceso de edición.
+   * Aquí se pueden buscar datos adicionales que necesite la vista
+   * Esta función es parte de la acción executeEdit, que maneja tanto
+   * el create como el edit del formulario.
+   * Generalmente aqui se debe y puede colocar los llamados a los configGrid
+   * Para generar la información de configuración de los grids.
+   *
+   */
+  public function editing() {
 		if ($this->getUser()->getAttribute('clavecaja', null, 'fafactur') != "") {
 			if($this->fafactur->getId()=='')
 	        {
@@ -48,7 +61,14 @@ class fafacturActions extends autofafacturActions {
 		$this->configGrid();
 	}
 
-	public function configGrid() {
+	/**
+   * Esta función permite definir la configuración del grid de datos
+   * que contiene el formulario. Esta función debe ser llamada
+   * en las acciones, create, edit y handleError para recargar en todo momento
+   * los datos del grid.
+   *
+   */
+  public function configGrid() {
 		$this->configGridArtFac($this->fafactur->getReffac(), $this->fafactur->getTipref());
 		$this->configGridDescFac($this->fafactur->getReffac());
 		$this->configGridForPag($this->fafactur->getReffac());
@@ -56,7 +76,14 @@ class fafacturActions extends autofafacturActions {
 		$this->configGridPedDes($this->fafactur->getTipref(), $this->fafactur->getCodcli());
 	}
 
-	public function configGridArtFac($reffac = '', $tipref='') {
+	/**
+   * Esta función permite definir la configuración del grid de datos
+   * que contiene el formulario. Esta función debe ser llamada
+   * en las acciones, create, edit y handleError para recargar en todo momento
+   * los datos del grid.
+   *
+   */
+  public function configGridArtFac($reffac = '', $tipref='') {
 		$c = new Criteria();
 		$c->add(FaartfacPeer :: REFFAC, $reffac);
 		$artfac = FaartfacPeer :: doSelect($c);
@@ -113,7 +140,14 @@ class fafacturActions extends autofafacturActions {
 		$this->fafactur->setObj1($this->obj1);
 	}
 
-	public function configGridDescFac($reffac = '', $tipcliente = '', $arreglo = array ()) {
+	/**
+   * Esta función permite definir la configuración del grid de datos
+   * que contiene el formulario. Esta función debe ser llamada
+   * en las acciones, create, edit y handleError para recargar en todo momento
+   * los datos del grid.
+   *
+   */
+  public function configGridDescFac($reffac = '', $tipcliente = '', $arreglo = array ()) {
 		if ($tipcliente != '') {
 			$descart = $arreglo;
 		} else {
@@ -130,7 +164,14 @@ class fafacturActions extends autofafacturActions {
 		$this->fafactur->setObj2($this->obj2);
 	}
 
-	public function configGridForPag($reffac = '') {
+	/**
+   * Esta función permite definir la configuración del grid de datos
+   * que contiene el formulario. Esta función debe ser llamada
+   * en las acciones, create, edit y handleError para recargar en todo momento
+   * los datos del grid.
+   *
+   */
+  public function configGridForPag($reffac = '') {
 		$c = new Criteria();
 		$c->add(FaforpagPeer :: REFFAC, $reffac);
 		$forpag = FaforpagPeer :: doSelect($c);
@@ -142,7 +183,14 @@ class fafacturActions extends autofafacturActions {
 		$this->fafactur->setObj3($this->obj3);
 	}
 
-	public function configGridRgoArt($reffac = '') {
+	/**
+   * Esta función permite definir la configuración del grid de datos
+   * que contiene el formulario. Esta función debe ser llamada
+   * en las acciones, create, edit y handleError para recargar en todo momento
+   * los datos del grid.
+   *
+   */
+  public function configGridRgoArt($reffac = '') {
 		$c = new Criteria();
 		$c->add(FargoartPeer :: REFDOC, $reffac);
 		$rgoart = FargoartPeer :: doSelect($c);
@@ -155,7 +203,14 @@ class fafacturActions extends autofafacturActions {
 		$this->fafactur->setObj4($this->obj4);
 	}
 
-	public function configGridPedDes($referencia = '', $codcli = '') {
+	/**
+   * Esta función permite definir la configuración del grid de datos
+   * que contiene el formulario. Esta función debe ser llamada
+   * en las acciones, create, edit y handleError para recargar en todo momento
+   * los datos del grid.
+   *
+   */
+  public function configGridPedDes($referencia = '', $codcli = '') {
 		if ($referencia == 'P') {
 			$sql = "Select '' as check, NROPED as nroped,DESPED as desped,FECPED as fecped, 9 as id from FAPEDIDO WHERE CodCli='" . $codcli . "' and STATUS='A' and NroPed not in (Select CodRef from Fanotent where CodRef=FaPedido.NroPed and TipRef='P') order by NroPed";
 			Herramientas :: BuscarDatos($sql, & $reg);
@@ -178,7 +233,13 @@ class fafacturActions extends autofafacturActions {
 		$this->fafactur->setObj5($this->obj5);
 	}
 
-	public function executeAjax() {
+	/**
+   * Función para procesar _todas_ las funciones Ajax del formulario
+   * Cada función esta identificada con el valor de la vista "ajax"
+   * el cual traerá el indice de lo que se quiere procesar.
+   *
+   */
+  public function executeAjax() {
 		$codigo = $this->getRequestParameter('codigo', '');
 		$ajax = $this->getRequestParameter('ajax', '');
 		$cajtexmos = $this->getRequestParameter('cajtexmos', '');
@@ -770,7 +831,16 @@ class fafacturActions extends autofafacturActions {
 		}
 	}
 
-	public function validateEdit() {
+	
+  
+  
+  /**
+   *
+   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
+   *
+   */
+  public function validateEdit() {
 		$this->coderr = -1;
 
 		if ($this->getRequest()->getMethod() == sfRequest :: POST) {

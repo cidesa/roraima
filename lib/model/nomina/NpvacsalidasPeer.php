@@ -1,11 +1,17 @@
 <?php
 
 /**
- * Subclass for performing query and update operations on the 'npvacsalidas' table.
+ * Subclase para crear funcionalidades específicas de busqueda y actualización en la tabla 'npvacsalidas'.
  *
  * 
  *
- * @package lib.model
+ * @package    Roraima
+ * @subpackage lib.model.nomina
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * 
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */ 
 class NpvacsalidasPeer extends BaseNpvacsalidasPeer
 {

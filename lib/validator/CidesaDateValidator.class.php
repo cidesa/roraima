@@ -1,24 +1,15 @@
 <?php
-
-/*
- * This file is part of the symfony package.
- * (c) 2004-2006 Fabien Potencier <fabien.potencier@symfony-project.com>
- * (c) 2004-2006 Sean Kerr.
- * 
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 /**
- * sfDateValidator verifies a parameter is of a date format.
+ * CidesaDateValidator: Compara una fecha dada contra dos valores maximos y minimos
+ * extraidos de dos campos dados, de una tabla data
  *
- * @package    symfony
- * @subpackage validator
- * @author     Arthur Koziel <arthur@arthurkoziel.de>
- * @author     Nick Lane <nick.lane@internode.on.net>
- * @author     Fabien Potencier <fabien.potencier@symfony-project.com>
- * @author     Sean Kerr <skerr@mojavi.org>
- * @version    SVN: $Id: sfDateValidator.class.php 3233 2007-01-11 21:01:08Z fabien $
+ * @package    Roraima
+ * @subpackage validators
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * 
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
 class CidesaDateValidator extends sfValidator
 {

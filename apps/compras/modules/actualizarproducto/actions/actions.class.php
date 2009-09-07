@@ -3,10 +3,11 @@
 /**
  * importarproducto actions.
  *
- * @package    siga
+ * @package    Roraima
  * @subpackage importarproducto
- * @author     Your name here
- * @version    SVN: $Id: actions.class.php 2692 2006-11-15 21:03:55Z fabien $
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * @version    SVN: $Id$
  */
 class actualizarproductoActions extends sfActions
 {

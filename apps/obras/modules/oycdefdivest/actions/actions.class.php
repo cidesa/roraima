@@ -3,10 +3,13 @@
 /**
  * oycdefdivest actions.
  *
- * @package    siga
+ * @package    Roraima
  * @subpackage oycdefdivest
- * @author     Your name here
- * @version    SVN: $Id: actions.class.php 2288 2006-10-02 15:22:13Z fabien $
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * 
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
 class oycdefdivestActions extends autooycdefdivestActions
 {
@@ -32,7 +35,12 @@ class oycdefdivestActions extends autooycdefdivestActions
 		$this->pais = $this->Cargarpais();
 	}
 
-	public function executeEdit()
+	/**
+   * Función principal para el manejo de las acciones create y edit
+   * del formulario.
+   *
+   */
+  public function executeEdit()
 	{
 		$this->funciones_combos();
 		$this->ocestado = $this->getOcestadoOrCreate();
@@ -65,7 +73,13 @@ $this->Bitacora('Guardo');
 		}
 	}
 
-	public function handleErrorEdit()
+	/**
+   * Función para manejar la captura de errores del negocio, tanto que se
+   * produzcan por algún validator y por un valor false retornado por el validateEdit
+   * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
+   *
+   */
+  public function handleErrorEdit()
 	{
 			$this->preExecute();
 			$this->funciones_combos();
@@ -75,7 +89,12 @@ $this->Bitacora('Guardo');
 			return sfView::SUCCESS;
 	}
 
-	protected function updateOcestadoFromRequest()
+	/**
+   * Actualiza la informacion que viene de la vista 
+   * luego de un get/post en el objeto principal del modelo base del formulario.
+   *
+   */
+  protected function updateOcestadoFromRequest()
 	{
 		$ocestado = $this->getRequestParameter('ocestado');
 
@@ -97,7 +116,12 @@ $this->Bitacora('Guardo');
     }
   }
 
-    public function executeDelete()
+    /**
+   * Función principal para procesar la eliminación de registros 
+   * en el formulario.
+   *
+   */
+  public function executeDelete()
   {
     $this->ocestado = OcestadoPeer::retrieveByPk($this->getRequestParameter('id'));
     $this->forward404Unless($this->ocestado);

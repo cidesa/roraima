@@ -3,14 +3,22 @@
 /**
  * nomdefesppai actions.
  *
- * @package    siga
+ * @package    Roraima
  * @subpackage nomdefesppai
- * @author     Your name here
- * @version    SVN: $Id: actions.class.php 2288 2006-10-02 15:22:13Z fabien $
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * 
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
 class nomdefesppaiActions extends autonomdefesppaiActions
 {
-	 protected function updateNppaisFromRequest()
+	 /**
+   * Actualiza la informacion que viene de la vista 
+   * luego de un get/post en el objeto principal del modelo base del formulario.
+   *
+   */
+  protected function updateNppaisFromRequest()
   {
     $nppais = $this->getRequestParameter('nppais');
 
@@ -24,6 +32,11 @@ class nomdefesppaiActions extends autonomdefesppaiActions
     }
   }
 
+  /**
+   * Función principal para procesar la eliminación de registros 
+   * en el formulario.
+   *
+   */
   public function executeDelete()
   {
     $this->nppais = NppaisPeer::retrieveByPk($this->getRequestParameter('id'));
@@ -46,7 +59,12 @@ class nomdefesppaiActions extends autonomdefesppaiActions
     return $this->redirect('nomdefesppai/list');
   }
 
-   public function executeEdit()
+   /**
+   * Función principal para el manejo de las acciones create y edit
+   * del formulario.
+   *
+   */
+  public function executeEdit()
   {
     $this->nppais = $this->getNppaisOrCreate();
 

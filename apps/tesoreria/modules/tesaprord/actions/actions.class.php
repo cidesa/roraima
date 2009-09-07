@@ -3,10 +3,13 @@
 /**
  * tesaprord actions.
  *
- * @package    siga
+ * @package    Roraima
  * @subpackage tesaprord
- * @author     Your name here
- * @version    SVN: $Id: actions.class.php 2288 2006-10-02 15:22:13Z fabien $
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * 
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
 class tesaprordActions extends autotesaprordActions
 {
@@ -15,17 +18,41 @@ class tesaprordActions extends autotesaprordActions
     return $this->forward('tesaprord', 'edit');
   }
 
+  /**
+   * Función para colocar el codigo necesario en  
+   * el proceso de edición.
+   * Aquí se pueden buscar datos adicionales que necesite la vista
+   * Esta función es parte de la acción executeEdit, que maneja tanto
+   * el create como el edit del formulario.
+   * Generalmente aqui se debe y puede colocar los llamados a los configGrid
+   * Para generar la información de configuración de los grids.
+   *
+   */
   public function editing()
   {
     $this->configGrid();
     $this->opordpag->setFilasord($this->filas);
   }
 
+  /**
+   * Esta función permite definir la configuración del grid de datos
+   * que contiene el formulario. Esta función debe ser llamada
+   * en las acciones, create, edit y handleError para recargar en todo momento
+   * los datos del grid.
+   *
+   */
   public function configGrid()
   {
     $this->configGridOrdenes();
   }
 
+  /**
+   * Esta función permite definir la configuración del grid de datos
+   * que contiene el formulario. Esta función debe ser llamada
+   * en las acciones, create, edit y handleError para recargar en todo momento
+   * los datos del grid.
+   *
+   */
   public function configGridOrdenes()
   {
     $c = new Criteria();
@@ -43,6 +70,12 @@ class tesaprordActions extends autotesaprordActions
     $this->opordpag->setObjeto($this->objeto);
   }
 
+  /**
+   * Función para procesar _todas_ las funciones Ajax del formulario
+   * Cada función esta identificada con el valor de la vista "ajax"
+   * el cual traerá el indice de lo que se quiere procesar.
+   *
+   */
   public function executeAjax()
   {
     $codigo = $this->getRequestParameter('codigo','');

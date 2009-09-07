@@ -1,11 +1,15 @@
 <?php
-/*
- * Created on 09/10/2007
+/**
+ * Solicitud de Egreso: Clase estática para el manejo de las solicitudes de egreso
  *
- * To change the template for this generated file go to
- * Window - Preferences - PHPeclipse - PHP - Code Templates
+ * @package    Roraima
+ * @subpackage compras
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * 
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
-
 class SolicituddeEgresos
 {
   public static function salvarAlmsolegr($solegreso,$grid,$grid2,$grid3,$generar,&$msj)

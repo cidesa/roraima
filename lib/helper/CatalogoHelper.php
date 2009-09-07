@@ -1,15 +1,17 @@
 <?php
-/*
- * Created on 10/03/2008
+/**
+ * Catalogo: Función que implementa el CatalogoHelper, el cual permite crear los objetos
+ * que componen un catalogo en la vista. Estos objetos son una:
+ * campo_código + Botón_Catalogo_datos + campo_descripción
  *
- * To change the template for this generated file go to
- * Window - Preferences - PHPeclipse - PHP - Code Templates
+ * @package    Roraima
+ * @subpackage helper
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * 
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
-?>
-<?php
-
-
-
 function Catalogo($objeto,$ajaxindex, $oit=array(),$metodo,$clase,$uri_params = '',$params_ajax = '', $div = '', $id = '0')
 {
   $peer = $objeto->getPeer();

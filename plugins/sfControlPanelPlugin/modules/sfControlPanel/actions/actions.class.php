@@ -142,7 +142,7 @@ class sfControlPanelActions extends sfActions
     $modules        = array();
     $module_actions        = array();
     $module_templates      = array();
-    $model_methods         = array();
+    $model_         = array();
     $app_templates  = array();
 
     foreach ($apps as $app)
@@ -202,31 +202,31 @@ class sfControlPanelActions extends sfActions
       preg_match_all('/function\s+(.*?)\(/', file_get_contents(SF_ROOT_DIR.'/lib/model/'.$model_file), $model_names);
       foreach ($model_names[1] as $model_name)
       {
-        $model_methods[$model]['peer'][$model_name] = array('lib/model/'.$model_file, 'custom');
+        $model_[$model]['peer'][$model_name] = array('lib/model/'.$model_file, 'custom');
       }
       preg_match_all('/function\s+(.*?)\(/', file_get_contents(SF_ROOT_DIR.'/lib/model/om/Base'.$model_file), $model_names);
       foreach ($model_names[1] as $model_name)
       {
-        if(!isset($model_methods[$model]['peer'][$model_name]))
+        if(!isset($model_[$model]['peer'][$model_name]))
         {
-          $model_methods[$model]['peer'][$model_name] = array('lib/model/om/Base'.$model_file, 'base');
+          $model_[$model]['peer'][$model_name] = array('lib/model/om/Base'.$model_file, 'base');
         }
       }
-      ksort($model_methods[$model]['peer']);
+      ksort($model_[$model]['peer']);
       preg_match_all('/function\s+(.*?)\(/', file_get_contents(SF_ROOT_DIR.'/lib/model/'.$model.'.php'), $model_names);
       foreach ($model_names[1] as $model_name)
       {
-        $model_methods[$model]['object'][$model_name] = array('lib/model/'.$model.'.php', 'custom');
+        $model_[$model]['object'][$model_name] = array('lib/model/'.$model.'.php', 'custom');
       }
       preg_match_all('/function\s+(.*?)\(/', file_get_contents(SF_ROOT_DIR.'/lib/model/om/Base'.$model.'.php'), $model_names);
       foreach ($model_names[1] as $model_name)
       {
-        if(!isset($model_methods[$model]['object'][$model_name]))
+        if(!isset($model_[$model]['object'][$model_name]))
         {
-          $model_methods[$model]['object'][$model_name] = array('lib/model/om/Base'.$model.'.php', 'base');
+          $model_[$model]['object'][$model_name] = array('lib/model/om/Base'.$model.'.php', 'base');
         }
       }
-      ksort($model_methods[$model]['object']);
+      ksort($model_[$model]['object']);
     }
     if($files = sfFinder::type('dir')->maxdepth(0)->relative()->ignore_version_control()->in(SF_ROOT_DIR.'/plugins'))
     {
@@ -241,7 +241,7 @@ class sfControlPanelActions extends sfActions
     $this->module_actions = $module_actions;
     $this->module_templates = $module_templates;
     $this->app_templates  = $app_templates;
-    $this->model_methods  = $model_methods;
+    $this->model_  = $model_;
     */
   }
 

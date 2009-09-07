@@ -1,12 +1,18 @@
 <?php
 
 /**
-  * a function that allows link_to between apps
-  * @param  $app    string      the app we want to go to
-  * @param  $route  string      the route in the app. Must be valid
-  * @param  $args   array       the arguments required by the route. Optional
-  *
-  */
+ * cross_app_link_to: Función para generar un link entre aplicaciones.
+ * La version 1.0 de symfony no lo soporta y por eso se creo una helper para realizar el link
+ * entre aplicaciones
+ *
+ * @package    Roraima
+ * @subpackage helper
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * 
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
+ */
 function cross_app_link_to($app, $route, $args=null)
 {
   /* get the host to build the absolute paths

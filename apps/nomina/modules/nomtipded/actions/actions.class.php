@@ -3,10 +3,13 @@
 /**
  * nomtipded actions.
  *
- * @package    siga
+ * @package    Roraima
  * @subpackage nomtipded
- * @author     Your name here
- * @version    SVN: $Id: actions.class.php 2288 2006-10-02 15:22:13Z fabien $
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * 
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
 class nomtipdedActions extends autonomtipdedActions
 {

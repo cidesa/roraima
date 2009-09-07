@@ -325,8 +325,8 @@ abstract class BaseDfatendocPeer {
 			$criteria->addSelectColumn($column);
 		}
 
-		$criteria->addJoin(DfatendocPeer::ID_DFTABTIP, DftabtipPeer::ID);
-
+			$criteria->addJoin(DfatendocPeer::ID_DFTABTIP, DftabtipPeer::ID);
+	
 		$rs = DfatendocPeer::doSelectRS($criteria, $con);
 		if ($rs->next()) {
 			return $rs->getInt(1);
@@ -348,11 +348,11 @@ abstract class BaseDfatendocPeer {
 		DfatendocPeer::addSelectColumns($c);
 		$startcol2 = (DfatendocPeer::NUM_COLUMNS - DfatendocPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		DftabtipPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + DftabtipPeer::NUM_COLUMNS;
-
-		$c->addJoin(DfatendocPeer::ID_DFTABTIP, DftabtipPeer::ID);
-
+			DftabtipPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + DftabtipPeer::NUM_COLUMNS;
+	
+			$c->addJoin(DfatendocPeer::ID_DFTABTIP, DftabtipPeer::ID);
+	
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
 
@@ -366,28 +366,28 @@ abstract class BaseDfatendocPeer {
 			$obj1->hydrate($rs);
 
 
-					
-			$omClass = DftabtipPeer::getOMClass();
+							
+				$omClass = DftabtipPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2 = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2 = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getDftabtip(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addDfatendoc($obj1); 					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getDftabtip(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addDfatendoc($obj1); 						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initDfatendocs();
-				$obj2->addDfatendoc($obj1);
-			}
-
+				if ($newObject) {
+					$obj2->initDfatendocs();
+					$obj2->addDfatendoc($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;

@@ -3,10 +3,13 @@
 /**
  * nomdefespconsue actions.
  *
- * @package    siga
+ * @package    Roraima
  * @subpackage nomdefespconsue
- * @author     Your name here
- * @version    SVN: $Id: actions.class.php 2288 2006-10-02 15:22:13Z fabien $
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * 
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
 class nomdefespconsueActions extends autonomdefespconsueActions
 {
@@ -15,12 +18,29 @@ class nomdefespconsueActions extends autonomdefespconsueActions
   	return $this->redirect('nomdefespconsue/edit');
   }
 
+  /**
+   * Función para colocar el codigo necesario en  
+   * el proceso de edición.
+   * Aquí se pueden buscar datos adicionales que necesite la vista
+   * Esta función es parte de la acción executeEdit, que maneja tanto
+   * el create como el edit del formulario.
+   * Generalmente aqui se debe y puede colocar los llamados a los configGrid
+   * Para generar la información de configuración de los grids.
+   *
+   */
   public function editing()
   {
   	$this->npasiconsue->setTippres(Nomina::getPrestamo());
     $this->configGrid();
   }
 
+  /**
+   * Esta función permite definir la configuración del grid de datos
+   * que contiene el formulario. Esta función debe ser llamada
+   * en las acciones, create, edit y handleError para recargar en todo momento
+   * los datos del grid.
+   *
+   */
   public function configGrid()
   {
     $this->configGridSueldoCompensacion();
@@ -33,6 +53,13 @@ class nomdefespconsueActions extends autonomdefespconsueActions
     $this->configGridConstancia();
   }
 
+  /**
+   * Esta función permite definir la configuración del grid de datos
+   * que contiene el formulario. Esta función debe ser llamada
+   * en las acciones, create, edit y handleError para recargar en todo momento
+   * los datos del grid.
+   *
+   */
   public function configGridSueldoCompensacion()
   {
   	$sql="select a.codnom as codnom, a.nomnom as nomnom, b.codcon as codcon, c.nomcon as nomcon, b.codcom as codcom, c.nomcon as nomcon2, 9 as id  from npnomina a left outer join npasiconsue b on a.codnom=b.codnom left outer join npdefcpt c on b.codcon=c.codcon order by a.codnom,b.codcon";
@@ -47,6 +74,13 @@ class nomdefespconsueActions extends autonomdefespconsueActions
     $this->npasiconsue->setObj1($this->obj1);
   }
 
+  /**
+   * Esta función permite definir la configuración del grid de datos
+   * que contiene el formulario. Esta función debe ser llamada
+   * en las acciones, create, edit y handleError para recargar en todo momento
+   * los datos del grid.
+   *
+   */
   public function configGridSalarioIntegral()
   {
     $c = new Criteria();
@@ -70,6 +104,13 @@ class nomdefespconsueActions extends autonomdefespconsueActions
     $this->npasiconsue->setObj2($this->obj2);
   }
 
+  /**
+   * Esta función permite definir la configuración del grid de datos
+   * que contiene el formulario. Esta función debe ser llamada
+   * en las acciones, create, edit y handleError para recargar en todo momento
+   * los datos del grid.
+   *
+   */
   public function configGridSueldoReportes()
   {
     $c = new Criteria();
@@ -93,6 +134,13 @@ class nomdefespconsueActions extends autonomdefespconsueActions
     $this->npasiconsue->setObj3($this->obj3);
   }
 
+  /**
+   * Esta función permite definir la configuración del grid de datos
+   * que contiene el formulario. Esta función debe ser llamada
+   * en las acciones, create, edit y handleError para recargar en todo momento
+   * los datos del grid.
+   *
+   */
   public function configGridARC()
   {
     $c = new Criteria();
@@ -116,6 +164,13 @@ class nomdefespconsueActions extends autonomdefespconsueActions
     $this->npasiconsue->setObj4($this->obj4);
   }
 
+  /**
+   * Esta función permite definir la configuración del grid de datos
+   * que contiene el formulario. Esta función debe ser llamada
+   * en las acciones, create, edit y handleError para recargar en todo momento
+   * los datos del grid.
+   *
+   */
   public function configGridCASEP($tipo='')
   {
     $c = new Criteria();
@@ -138,6 +193,13 @@ class nomdefespconsueActions extends autonomdefespconsueActions
     $this->npasiconsue->setObj5($this->obj5);
   }
 
+  /**
+   * Esta función permite definir la configuración del grid de datos
+   * que contiene el formulario. Esta función debe ser llamada
+   * en las acciones, create, edit y handleError para recargar en todo momento
+   * los datos del grid.
+   *
+   */
   public function configGridConstancia()
   {
     $c = new Criteria();
@@ -162,6 +224,12 @@ class nomdefespconsueActions extends autonomdefespconsueActions
     $this->npasiconsue->setObj6($this->obj6);
   }
 
+  /**
+   * Función para procesar _todas_ las funciones Ajax del formulario
+   * Cada función esta identificada con el valor de la vista "ajax"
+   * el cual traerá el indice de lo que se quiere procesar.
+   *
+   */
   public function executeAjax()
   {
     $codigo = $this->getRequestParameter('codigo','');
@@ -244,6 +312,15 @@ class nomdefespconsueActions extends autonomdefespconsueActions
   }
 
 
+  
+  
+  
+  /**
+   *
+   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
+   *
+   */
   public function validateEdit()
   {
     $this->coderr =-1;

@@ -1,5 +1,17 @@
-
 <?php
+/**
+ * Grid Tag: Función que genera el grid de datos version 1 que usa roraima en sus formularios.
+ * El grid es generado en base a un arreglo con la configuración y los datos que debe
+ * mostrar
+ *
+ * @package    Roraima
+ * @subpackage helper
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * 
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
+ */
 function grid_tag($obj,$objelim = array())
 {
   $name=$obj["name"];
@@ -744,7 +756,20 @@ function grid_tag($obj,$objelim = array())
   return $tagt;
 }
 
-
+/**
+ * Grid Tag V2: Función que genera el grid de datos version 2 que usa roraima en sus formularios.
+ * El grid es generado en base a un arreglo con la configuración y los datos que debe
+ * mostrar.
+ * Este grid es el recomendado para los formularios nuevos, ya no se le está dado soporte al gridv1
+ *
+ * @package    Roraima
+ * @subpackage helper
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * 
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
+ */
 function grid_tag_v2($obj,$objelim = array())
 {
   $anchogrid = '800';

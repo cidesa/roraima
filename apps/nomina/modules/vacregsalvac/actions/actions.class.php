@@ -3,14 +3,22 @@
 /**
  * vacregsalvac actions.
  *
- * @package    siga
+ * @package    Roraima
  * @subpackage vacregsalvac
- * @author     Your name here
- * @version    SVN: $Id: actions.class.php 2288 2006-10-02 15:22:13Z fabien $
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * 
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
 class vacregsalvacActions extends autovacregsalvacActions
 {
 	
+  /**
+   * Función principal para el manejo de la accion list
+   * del formulario.
+   *
+   */
   public function executeList()
   {
     $this->processSort();
@@ -29,6 +37,11 @@ class vacregsalvacActions extends autovacregsalvacActions
     $this->pager->init();
   }
   
+  /**
+   * Función principal para el manejo de las acciones create y edit
+   * del formulario.
+   *
+   */
   public function executeEdit()
   {
     $this->nphojint = $this->getNphojintOrCreate();
@@ -63,6 +76,17 @@ $this->Bitacora('Guardo');
     }
   }
   
+  /**
+   * Función para manejar el salvado del formulario.
+   * cabe destacar que en las versiones nuevas del formulario (cidesaPropel)
+   * llama internamente a la función $this->saving
+   * Esta función saving siempre debe retornar un valor >=-1.
+   * En esta funcción se debe realizar el proceso de guardado de informacion
+   * del negocio en la base de datos. Este proceso debe ser realizado llamado
+   * a funciones de las clases del negocio que se encuentran en lib/bussines
+   * todos los procesos de guardado deben estar en la clases del negocio (lib/bussines/"modulo")
+   *
+   */
   protected function saveNphojint($nphojint)
   {
     

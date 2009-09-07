@@ -1,14 +1,16 @@
 <?php
 
 /**
- * sfPropelUniqueValidator validates that the uniqueness of a column.
- * This validator only works for single column primary key.
+ * CidesaMaskValidator: Valida el valor de un campo en base a una formato
+ * predefinido que se encuentra en una tabla y campo dado de la base de datos
  *
- *
- * @package    symfony
- * @subpackage validator
- * @author     Luis Hernández <luelher@gmail.com>
- * @version    SVN: $Id: CidesaMaskValidator.class.php 2995 2006-12-09 18:01:32Z Desarrollo $
+ * @package    Roraima
+ * @subpackage validators
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * 
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
 class CidesaMaskValidator extends sfValidator
 {
