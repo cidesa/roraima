@@ -45,9 +45,6 @@ group by substr(a.codpre,1,b.longitud::integer),a.id);
 
 
                                                                      
-                                                                     
-                                                                     
-                                             
 CREATE OR REPLACE VIEW NPPRESTACIONES AS
 (SELECT A.CODEMP,A.NOMEMP,A.FECING,A.FECINI,A.FECFIN,
 A.MONTO,A.SALNOR,
@@ -260,9 +257,6 @@ FROM NPHOJINT A,
 WHERE A.CODTIPCON=C.CODTIPCON
 AND A.FECINI>=C.FECINIREG)
 ORDER BY A.CODEMP,A.FECFIN,A.ID
-
-
-
 
 
 

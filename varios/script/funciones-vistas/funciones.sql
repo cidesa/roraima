@@ -1803,3 +1803,99 @@ return;
 END;
 $body$
 LANGUAGE 'plpgsql' VOLATILE CALLED ON NULL INPUT SECURITY INVOKER;
+
+
+CREATE OR REPLACE FUNCTION fecharetorno (fecha date,nomina varchar,diaspendientes integer,tipo varchar) RETURNS date AS
+$body$
+/* New function body */
+DECLARE
+   retorno date;
+   dias integer;
+   diahabil varchar;
+BEGIN
+   retorno:=fecha;
+   dias:=1;
+   loop
+      if dias<=diaspendientes then
+         if tipo<>'C' then
+             SELECT INTO diahabil
+             (CASE WHEN DIA IS NOT NULL THEN 'N' 
+	     ELSE (CASE WHEN diasemana(retorno)='Domingo' THEN coalesce(domingo,'N')
+		   WHEN diasemana(retorno)='Lunes' THEN coalesce(lunes,'N')
+		   WHEN diasemana(retorno)='Martes' THEN coalesce(martes,'N')
+		   WHEN diasemana(retorno)='Miercoles' THEN coalesce(miercoles,'N')
+		   WHEN diasemana(retorno)='Jueves' THEN coalesce(jueves,'N')
+		   WHEN diasemana(retorno)='Viernes' THEN coalesce(viernes,'N')
+		   WHEN diasemana(retorno)='Sabado' THEN coalesce(sabado,'N')
+	           END)
+              END)
+	      FROM NPVACJORLAB  LEFT OUTER JOIN NPVACDIAFER
+		               ON TO_NUMBER(TO_CHAR(retorno,'DD'),'99')=dia
+		               AND TO_NUMBER(TO_CHAR(retorno,'MM'),'99')=mes
+	      WHERE codnom=NOMINA;
+             IF diahabil is null THEN
+               exit;
+             END IF;
+             retorno=retorno+1;  
+	     IF diahabil='S' THEN		
+		dias:=dias+1;
+	     END IF;
+         else
+             retorno=retorno+1;
+             dias:=dias+1;  
+         end if;
+      else
+         loop
+             SELECT INTO diahabil
+             (CASE WHEN DIA IS NOT NULL THEN 'N' 
+	     ELSE  (CASE WHEN diasemana(retorno)='Domingo' THEN coalesce(domingo,'N')
+		   WHEN diasemana(retorno)='Lunes' THEN coalesce(lunes,'N')
+		   WHEN diasemana(retorno)='Martes' THEN coalesce(martes,'N')
+		   WHEN diasemana(retorno)='Miercoles' THEN coalesce(miercoles,'N')
+		   WHEN diasemana(retorno)='Jueves' THEN coalesce(jueves,'N')
+		   WHEN diasemana(retorno)='Viernes' THEN coalesce(viernes,'N')
+		   WHEN diasemana(retorno)='Sabado' THEN coalesce(sabado,'N')
+	           END)
+              END)
+	      FROM NPVACJORLAB  LEFT OUTER JOIN NPVACDIAFER
+		               ON TO_NUMBER(TO_CHAR(retorno,'DD'),'99')=dia
+		               AND TO_NUMBER(TO_CHAR(retorno,'MM'),'99')=mes
+	      WHERE codnom=NOMINA;
+	      IF diahabil is null THEN
+                exit;
+              END IF;
+              IF diahabil='S' THEN
+                exit;
+              else  
+                retorno=retorno+1;
+              end if; 
+         end loop;
+         exit;
+      end if;
+      
+   end loop;
+    
+   return retorno;
+END;
+$body$
+LANGUAGE 'plpgsql' VOLATILE CALLED ON NULL INPUT SECURITY INVOKER;
+
+CREATE OR REPLACE FUNCTION diasemana (fecha date) RETURNS varchar AS
+$body$
+/* New function body */
+DECLARE
+   dia varchar;
+BEGIN
+   select into dia
+   (case extract(dow from fecha) 
+    when 1 then 'Lunes' 
+    when 2 then 'Martes' 
+    when 3 then 'Miercoles' 
+    when 4 then 'Jueves' 
+    when 5 then 'Viernes' 
+    when 6 then 'Sabado' 
+    else 'Domingo' end);
+   return dia;   
+END;
+$body$
+LANGUAGE 'plpgsql' VOLATILE CALLED ON NULL INPUT SECURITY INVOKER;
