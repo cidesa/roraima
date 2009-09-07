@@ -2882,8 +2882,8 @@ class Nomina {
 
       $campo = "INTPRES";
     }
-print $parametro;
-print "--".$campo;
+//print $parametro;
+//print "--".$campo;
 
     if (Herramientas :: StringPos($campo, "SHORAS", 0) != -1) {
       $parametro = substr($campo, 6, strlen($campo));
