@@ -1,3 +1,17 @@
+[?php
+
+/**
+ *
+ * @package    Roraima
+ * @subpackage <?php echo $this->getGeneratedModuleName() ?>
+ 
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id$
+ * @copyright  Copyright 2007, Cidesa C.A.
+ *
+ */
+ ?]
+
 <td colspan="<?php echo count($this->getColumns('list.display'))  ?>">
 <?php if ($this->getParameterValue('list.params')): ?>
   <?php echo $this->getI18NString('list.params') ?>

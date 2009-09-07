@@ -1,3 +1,17 @@
+[?php
+
+/**
+ *
+ * @package    Roraima
+ * @subpackage <?php echo $this->getGeneratedModuleName() ?>
+ 
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id$
+ * @copyright  Copyright 2007, Cidesa C.A.
+ *
+ */
+ ?]
+
 [?php use_helper('Object', 'Validation', 'ObjectAdmin', 'I18N', 'Date') ?]
 
 [?php use_stylesheet('<?php echo $this->getParameterValue('css', sfConfig::get('sf_admin_web_dir').'/css/main') ?>') ?]

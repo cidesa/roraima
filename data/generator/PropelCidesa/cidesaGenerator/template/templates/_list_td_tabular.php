@@ -1,3 +1,17 @@
+[?php
+
+/**
+ *
+ * @package    Roraima
+ * @subpackage <?php echo $this->getGeneratedModuleName() ?>
+ 
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id$
+ * @copyright  Copyright 2007, Cidesa C.A.
+ *
+ */
+ ?]
+
 <?php $hs = $this->getParameterValue('list.hide', array()) ?>
 <?php foreach ($this->getColumns('list.display') as $column): ?>
 <?php if (in_array($column->getName(), $hs)) continue ?>

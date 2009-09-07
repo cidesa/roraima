@@ -3,18 +3,37 @@
 /**
  * segrangosapr actions.
  *
- * @package    siga
+ * @package    Roraima
  * @subpackage segrangosapr
- * @author     Your name here
- * @version    SVN: $Id: actions.class.php 2288 2006-10-02 15:22:13Z fabien $
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * 
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
 class segrangosaprActions extends autosegrangosaprActions
 {
+  /**
+   * Función para colocar el codigo necesario en  
+   * el proceso de edición.
+   * Aquí se pueden buscar datos adicionales que necesite la vista
+   * Esta función es parte de la acción executeEdit, que maneja tanto
+   * el create como el edit del formulario.
+   * Generalmente aqui se debe y puede colocar los llamados a los configGrid
+   * Para generar la información de configuración de los grids.
+   *
+   */
   public function editing()
   {
 
   }
 
+  /**
+   * Función para procesar _todas_ las funciones Ajax del formulario
+   * Cada función esta identificada con el valor de la vista "ajax"
+   * el cual traerá el indice de lo que se quiere procesar.
+   *
+   */
   public function executeAjax()
   {
     $codigo = $this->getRequestParameter('codigo','');
@@ -41,6 +60,15 @@ class segrangosaprActions extends autosegrangosaprActions
   }
 
 
+  
+  
+  
+  /**
+   *
+   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
+   *
+   */
   public function validateEdit()
   {
     $this->coderr =-1;

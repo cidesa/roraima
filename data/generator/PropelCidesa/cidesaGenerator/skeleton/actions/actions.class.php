@@ -3,21 +3,37 @@
 /**
  * ##MODULE_NAME## actions.
  *
- * @package    ##PROJECT_NAME##
- * @subpackage ##MODULE_NAME##
- * @author     ##AUTHOR_NAME##
- * @version    SVN: $Id: actions.class.php 2288 2006-10-02 15:22:13Z fabien $
+ * @package    Roraima
+ * @subpackage ##MODULE_NAME## 
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id$
+ * @copyright  Copyright 2007, Cidesa C.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
 class ##MODULE_NAME##Actions extends auto##MODULE_NAME##Actions
 {
 
-  // Para incluir funcionalidades al executeEdit()
+  /**
+   * Función para colocar el codigo necesario en  
+   * el proceso de edición.
+   * Aquí se pueden buscar datos adicionales que necesite la vista
+   * Esta función es parte de la acción executeEdit, que maneja tanto
+   * el create como el edit del formulario.
+   * Generalmente aqui se debe y puede colocar los llamados a los configGrid
+   * Para generar la información de configuración de los grids.
+   *
+   */
   public function editing()
   {
 
 
   }
 
+  /**
+   * Función para colocar el codigo necesario para 
+   * la configuración de los grids que contenga el formulario.
+   *
+   */
   public function configGrid($reg = array(),$regelim = array())
   {
     $this->regelim = $regelim;
@@ -82,6 +98,12 @@ class ##MODULE_NAME##Actions extends auto##MODULE_NAME##Actions
 
   }
 
+  /**
+   * Función para procesar _todas_ las funciones Ajax del formulario
+   * Cada función esta identificada con el valor de la vista "ajax"
+   * el cual traerá el indice de lo que se quiere procesar.
+   *
+   */
   public function executeAjax()
   {
 
@@ -118,7 +140,20 @@ class ##MODULE_NAME##Actions extends auto##MODULE_NAME##Actions
 
   }
 
-
+  /**
+   * Función que se ejecuta luego de que se
+   * ejecutan los validator del formulario.
+   * Esta función sirve para codificar las validaciones
+   * del negocio que sean necesarias a parte de las
+   * ya realizadas con los validators de forma automática
+   *
+   */
+  /**
+   *
+   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
+   *
+   */
   public function validateEdit()
   {
     $this->coderr =-1;
@@ -173,11 +208,29 @@ class ##MODULE_NAME##Actions extends auto##MODULE_NAME##Actions
 
   }
 
+  /**
+   * Función para colocar el codigo necesario para 
+   * el proceso de guardar.
+   * Esta función debe retornar un valor igual a -1 si no hubo 
+   * Inconvenientes al guardar, y != de -1 si existe algún error.
+   * Si es diferente de -1 el valor devuelto debe ser un código de error
+   * Válido que exista en el archivo config/errores.yml
+   *
+   */
   public function saving($clasemodelo)
   {
     return parent::saving($clasemodelo);
   }
 
+  /**
+   * Función para colocar el codigo necesario para 
+   * el proceso de eliminar.
+   * Esta función debe retornar un valor igual a -1 si no hubo 
+   * Inconvenientes al guardar, y != de -1 si existe algún error.
+   * Si es diferente de -1 el valor devuelto debe ser un código de error
+   * Válido que exista en el archivo config/errores.yml
+   *
+   */
   public function deleting($clasemodelo)
   {
     return parent::deleting($clasemodelo);

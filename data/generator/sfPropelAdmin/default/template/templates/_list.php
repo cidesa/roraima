@@ -1,3 +1,17 @@
+[?php
+
+/**
+ *
+ * @package    Roraima
+ * @subpackage <?php echo $this->getGeneratedModuleName() ?>
+ 
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id$
+ * @copyright  Copyright 2007, Cidesa C.A.
+ *
+ */
+ ?]
+
 <table cellspacing="0" class="sf_admin_list">
 <thead>
 <tr>
