@@ -3,13 +3,21 @@
 /**
  * presnomsemmes actions.
  *
- * @package    siga
+ * @package    Roraima
  * @subpackage presnomsemmes
- * @author     Your name here
- * @version    SVN: $Id: actions.class.php 2288 2006-10-02 15:22:13Z fabien $
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * 
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
 class presnomsemmesActions extends autopresnomsemmesActions
 {
+  /**
+   * Función principal para el manejo de la accion list
+   * del formulario.
+   *
+   */
   public function executeList()
   {
     $this->processSort();
@@ -138,6 +146,12 @@ class presnomsemmesActions extends autopresnomsemmesActions
     $this->nppernom->setObjper($this->obj_per);
   }
 
+  /**
+   * Función para procesar _todas_ las funciones Ajax del formulario
+   * Cada función esta identificada con el valor de la vista "ajax"
+   * el cual traerá el indice de lo que se quiere procesar.
+   *
+   */
   public function executeAjax()
   {
 
@@ -184,6 +198,15 @@ class presnomsemmesActions extends autopresnomsemmesActions
   }
 
 
+  
+  
+  
+  /**
+   *
+   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
+   *
+   */
   public function validateEdit()
   {
     $this->coderr =-1;
@@ -229,6 +252,15 @@ class presnomsemmesActions extends autopresnomsemmesActions
 
   }
 
+  /**
+   * Función para colocar el codigo necesario para 
+   * el proceso de guardar.
+   * Esta función debe retornar un valor igual a -1 si no hubo 
+   * Inconvenientes al guardar, y != de -1 si existe algún error.
+   * Si es diferente de -1 el valor devuelto debe ser un código de error
+   * Válido que exista en el archivo config/errores.yml
+   *
+   */
   public function saving($nppernom)
   {
     $grid = Herramientas::CargarDatosGridv2($this,$this->obj_per,true);
@@ -236,6 +268,15 @@ class presnomsemmesActions extends autopresnomsemmesActions
     return PS::salvar_nppernom($nppernom,$grid);
   }
 
+  /**
+   * Función para colocar el codigo necesario para 
+   * el proceso de eliminar.
+   * Esta función debe retornar un valor igual a -1 si no hubo 
+   * Inconvenientes al guardar, y != de -1 si existe algún error.
+   * Si es diferente de -1 el valor devuelto debe ser un código de error
+   * Válido que exista en el archivo config/errores.yml
+   *
+   */
   public function deleting($nppernom)
   {
     $c = new Criteria;

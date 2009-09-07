@@ -1,13 +1,61 @@
+<?php 
+/**
+ * Funciones para chequear el modelo de datos
+ *
+ * @package    Roraima
+ * @subpackage checkdatabase
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * 
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
+ */
+?>
+
 <?php
 
+$check = false;
+$checktablas = array();
+$tablasschemas = array();
 
 pake_desc('check database for current model');
 pake_task('propel-check-database', 'project_exists');
 
-function _propel_cidesa_convert_yml_schema($check_schema = true, $prefix = '')
+function convert_yml_schema($check_schema = true, $prefix = '')
 {
   $finder = pakeFinder::type('file')->ignore_version_control()->name('*schema.yml');
   $dirs = array('config');
+  if ($pluginDirs = glob(sfConfig::get('sf_root_dir').'/plugins/*/config'))
+  {
+    $dirs = array_merge($dirs, $pluginDirs);
+  }
+  $schemas = $finder->in($dirs);
+  if ($check_schema && !count($schemas))
+  {
+    throw new Exception('You must create a schema.yml file.');
+  }
+
+  $db_schema = new sfPropelDatabaseSchema();
+  $ymls = array();
+  foreach ($schemas as $schema)
+  {
+    $db_schema->loadYAML($schema);
+
+    pake_echo_action('schema', 'cargando "'.$schema.'"'.' ');
+
+    $tablas = $db_schema->getTables();
+    foreach($tablas as $k => $t){
+      $ymls[$k] = $t;  
+    }
+    
+  }
+  return $ymls;
+}
+
+function _propel_cidesa_convert_yml_schema($check_schema = true, $prefix = '')
+{
+  $finder = pakeFinder::type('file')->ignore_version_control()->name('*schema.yml')->prune('doctrine');
+  $dirs = array('config/schemas');
   if ($pluginDirs = glob(sfConfig::get('sf_root_dir').'/plugins/*/config'))
   {
     $dirs = array_merge($dirs, $pluginDirs);
@@ -46,7 +94,11 @@ function _propel_cidesa_convert_xml_schema($check_schema = true, $prefix = '')
 {
   $finder = pakeFinder::type('file')->ignore_version_control()->name('*schema.xml');
 
-  $schemas = array_merge($finder->in('config'), $finder->in(glob(sfConfig::get('sf_root_dir').'/plugins/*/config')));
+  $schemas = $finder->in(glob(sfConfig::get('sf_root_dir').'/plugins/*/config'));
+  $s = $finder->in(glob(sfConfig::get('sf_root_dir').'/config'));
+  
+  $schemas = array_merge($s, $finder->in(glob(sfConfig::get('sf_root_dir').'/plugins/*/config')));
+  
   if ($check_schema && !count($schemas))
   {
     throw new Exception('You must create a schema.xml file.');
@@ -77,6 +129,9 @@ function _propel_cidesa_convert_xml_schema($check_schema = true, $prefix = '')
 function _propel_cidesa_copy_xml_schema_from_plugins($prefix = '')
 {
   $schemas = pakeFinder::type('file')->ignore_version_control()->name('*schema.xml')->in(glob(sfConfig::get('sf_root_dir').'/plugins/*/config'));
+
+  $t = pakeFinder::type('file')->ignore_version_control()->name('*schema.xml')->prune('doctrine')->in(glob(sfConfig::get('sf_root_dir').'/config/schemas'));
+  $schemas = array_merge($schemas, $t);
 
   foreach ($schemas as $schema)
   {
@@ -119,23 +174,96 @@ function run_propel_build_model($task, $args)
 */
 function run_propel_check_database($task, $args)
 {
-//  _call_cidesa_phing($task, 'creole', false);
-//  $finder = pakeFinder::type('file')->ignore_version_control()->name('generated-*schema.xml');
-//  pake_remove($finder, 'config');
-//  $finder = pakeFinder::type('file')->ignore_version_control()->name('schema.xml');
-//  pake_remove($finder, 'config');
+  global $checktablas;
+  global $tablasschemas;  
+  global $check;
+  $check = true;
+  $ymlsremoto = array();
+  
+  pake_echo_action('check_database', 'Analizando la base de datos');
+  
+  _propel_cidesa_build_schema($task,$args);
+  
+  pake_echo_action('check_database', 'Cargando Modelo de la Base de Datos');
+  $ymlsremoto = sfYaml::load('config/schema.yml');
+  $ymlsremoto = $ymlsremoto['propel'];
+  
+  $checktablas = $ymlsremoto;
+
+  pake_echo_action('check_database', 'Analizando las tablas');
   _propel_cidesa_convert_yml_schema(false, 'generated-');
   _propel_cidesa_copy_xml_schema_from_plugins('generated-');
-  _call_cidesa_phing($task, 'sql');
+  
+  _call_cidesa_phing($task, 'sql', false);
+/*    
+  //$ymlsremoto = array();
+
+  $tablasschemas = convert_yml_schema(false, 'generated-');
+  
+  checkDropTables();
+*/
+  pake_echo_action('check_database', 'Tablas Schema '.count($ymlslocal));
+  pake_echo_action('check_database', 'Tablas Base Datos '.count($ymlsremoto));
+
+  //checkdatabase($ymlslocal,$ymlsremoto);
+
   $finder = pakeFinder::type('file')->ignore_version_control()->name('generated-*schema.xml');
   pake_remove($finder, 'config');
+  $finder = pakeFinder::type('file')->ignore_version_control()->name('generated-*schema.yml');
+  pake_remove($finder, 'config');
+  //$finder = pakeFinder::type('file')->ignore_version_control()->name('schema.*');
+  //pake_remove($finder, 'config');
 }
 
+function checkDropTables()
+{
+  global $checktablas;
+  global $tablasschemas;  
+  $remotas = $checktablas;
+  $locales = $tablasschemas;
+  
+      // Se verifica las tablas "Basura" que pueda tener la aplicación.
+    foreach($remotas as $tablaname => $tabla){
+      $sql .= "-- Tablas Basura (Que no existen en los yml del modelo) ç
+  
+  ";
+      if(!array_key_exists($tablaname, $locales)){
+        $sql .= "-- DROP TABLE \"$tablaname\" CASCADE;
+  ";
+      }
+    }
+    
+    $fp = fopen('data/sql/diff_drop.sql', 'w');
+    fwrite($fp, $sql);
+    fclose($fp);
+
+}
+
+function _propel_cidesa_build_schema($task, $args)
+{
+  _call_cidesa_phing($task, 'creole', false);
+
+  // fix database name
+  if (file_exists('config/schema.xml'))
+  {
+    $schema = file_get_contents('config/schema.xml');
+    $schema = preg_replace('/<database\s+name="[^"]+"/s', '<database name="propel" package="lib.model"', $schema);
+    file_put_contents('config/schema.xml', $schema);
+  }
+
+  if (!isset($args[0]) || $args[0] != 'xml')
+  {
+    _propel_cidesa_convert_xml_schema(false, '');
+    $finder = pakeFinder::type('file')->ignore_version_control()->name('schema.xml');
+    pake_remove($finder, 'config');
+  }
+}
 
 
 function _call_cidesa_phing($task, $task_name, $check_schema = true)
 {
-  $schemas = pakeFinder::type('file')->ignore_version_control()->name('*schema.xml')->relative()->follow_link()->in('config');
+  $schemas = pakeFinder::type('file')->ignore_version_control()->name('*schema.yml')->relative()->follow_link()->in('config/schemas/');
+
   if ($check_schema && !$schemas)
   {
     throw new Exception('You must create a schema.yml or schema.xml file.');

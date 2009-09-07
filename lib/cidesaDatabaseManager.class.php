@@ -18,7 +18,7 @@
  * @subpackage database
  * @author     Fabien Potencier <fabien.potencier@symfony-project.com>
  * @author     Sean Kerr <sean@code-box.org>
- * @version    SVN: $Id: sfDatabaseManager.class.php 7791 2008-03-09 21:57:09Z fabien $
+ * @version    SVN: $Id$
  */
 class sfDatabaseManager
 {

@@ -14,7 +14,7 @@
  * 
  * @package    Helpers
  * @author     Jason Ibele
- * @version    SVN: $Id: tabsHelper.php 4 2006-07-19 14:00:47Z jason.ibele $
+ * @version    SVN: $Id$
  */
  
 $response = sfContext::getInstance()->getResponse();

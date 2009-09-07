@@ -1,4 +1,15 @@
 <?php
+/**
+ * Tesorería: Clase estática para procesar el modulo de tesorería
+ *
+ * @package    Roraima
+ * @subpackage tesoreria
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * 
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
+ */
 class Tesoreria {
   /**************************Definición del Iva para Agentes de Retención**********************************/
   public static function salvarPagretiva($iva, $grid) {

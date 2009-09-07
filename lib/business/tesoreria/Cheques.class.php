@@ -1,13 +1,14 @@
 <?php
 /**
- * Clase para el Manejo de Cheques
+ * Cheques: Clase estática para procesar los cheques del módulo de caja y bancos
  *
- * @package    Siga
- * @subpackage lib
- * @author     Grupo Desarrollo Cidesa <desarrollo@cidesa.com.ve>
- * @version    SVN: $Id: $
- * @copyright  Copyright 2007, Cidesa C.A.
- *
+ * @package    Roraima
+ * @subpackage tesoreria
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * 
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
 class Cheques
 {

@@ -2,14 +2,15 @@
 
 
 /**
- * Herramientas Varias de manejo de datos.
+ * Herramientas: Clase estática con funciones generales varias
  *
- * @package    Siga
+ * @package    Roraima
  * @subpackage lib
- * @author     Grupo Desarrollo Cidesa <desarrollo@cidesa.com.ve>
- * @version    SVN: $Id: $
- * @copyright  Copyright 2007, Cidesa C.A.
- *
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * 
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
 class Herramientas
 {

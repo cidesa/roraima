@@ -1,21 +1,15 @@
 <?php 
 /**
- * This file is part of the cidesa symfony package.
- * (c) 2009 CIDESA <correo cidesa>
- * 
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
-/**
- * cidesaTools stores all configuration information for a cidesa application.
+ * cidesaTools: Clase estática con funcionalidades varias
  *
- * @package    cidesa
- * @subpackage cidesaTools
- * @author     Cidesa <correo cidesa>
- * @version    SVN: $Id: cidesaTools.class.php 
+ * @package    Roraima
+ * @subpackage lib
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * 
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
-
  class cidesaTools
  {
  	public static

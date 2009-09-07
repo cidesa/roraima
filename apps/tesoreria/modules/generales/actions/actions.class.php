@@ -3,10 +3,11 @@
 /**
  * generales actions.
  *
- * @package    siga
+ * @package    Roraima
  * @subpackage generales
- * @author     Your name here
- * @version    SVN: $Id: actions.class.php 2692 2006-11-15 21:03:55Z fabien $
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * @version    SVN: $Id$
  */
 class generalesActions extends sfActions
 {
@@ -73,7 +74,14 @@ class generalesActions extends sfActions
   }
 
 
-   public function configGrid($codpro=' ',$codaccesp=' ',$codmet=' ', $codpre=' ')
+   /**
+   * Esta función permite definir la configuración del grid de datos
+   * que contiene el formulario. Esta función debe ser llamada
+   * en las acciones, create, edit y handleError para recargar en todo momento
+   * los datos del grid.
+   *
+   */
+  public function configGrid($codpro=' ',$codaccesp=' ',$codmet=' ', $codpre=' ')
   {
     /**************************************************************************
      **         Grid Formulación del Plan Operativo Formulario               **

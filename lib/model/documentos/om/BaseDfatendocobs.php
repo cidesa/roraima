@@ -31,9 +31,6 @@ abstract class BaseDfatendocobs extends BaseObject  implements Persistent {
 	protected $aDfatendocdet;
 
 	
-	protected $aUsuarios;
-
-	
 	protected $alreadyInSave = false;
 
 	
@@ -122,10 +119,6 @@ abstract class BaseDfatendocobs extends BaseObject  implements Persistent {
         $this->modifiedColumns[] = DfatendocobsPeer::ID_USUARIO;
       }
   
-		if ($this->aUsuarios !== null && $this->aUsuarios->getId() !== $v) {
-			$this->aUsuarios = null;
-		}
-
 	} 
 	
 	public function setFecobs($v)
@@ -260,11 +253,11 @@ abstract class BaseDfatendocobs extends BaseObject  implements Persistent {
 				$this->setDfatendocdet($this->aDfatendocdet);
 			}
 
-			if ($this->aUsuarios !== null) {
-				if ($this->aUsuarios->isModified()) {
-					$affectedRows += $this->aUsuarios->save($con);
+			if ($this->aTableError !== null) {
+				if ($this->aTableError->isModified()) {
+					$affectedRows += $this->aTableError->save($con);
 				}
-				$this->setUsuarios($this->aUsuarios);
+				$this->setTableError($this->aTableError);
 			}
 
 
@@ -322,9 +315,9 @@ abstract class BaseDfatendocobs extends BaseObject  implements Persistent {
 				}
 			}
 
-			if ($this->aUsuarios !== null) {
-				if (!$this->aUsuarios->validate($columns)) {
-					$failureMap = array_merge($failureMap, $this->aUsuarios->getValidationFailures());
+			if ($this->aTableError !== null) {
+				if (!$this->aTableError->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aTableError->getValidationFailures());
 				}
 			}
 
@@ -525,35 +518,6 @@ abstract class BaseDfatendocobs extends BaseObject  implements Persistent {
 			
 		}
 		return $this->aDfatendocdet;
-	}
-
-	
-	public function setUsuarios($v)
-	{
-
-
-		if ($v === null) {
-			$this->setIdUsuario(NULL);
-		} else {
-			$this->setIdUsuario($v->getId());
-		}
-
-
-		$this->aUsuarios = $v;
-	}
-
-
-	
-	public function getUsuarios($con = null)
-	{
-		if ($this->aUsuarios === null && ($this->id_usuario !== null)) {
-						include_once 'lib/model/documentos/om/BaseUsuariosPeer.php';
-
-			$this->aUsuarios = UsuariosPeer::retrieveByPK($this->id_usuario, $con);
-
-			
-		}
-		return $this->aUsuarios;
 	}
 
 } 

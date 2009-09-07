@@ -1,4 +1,16 @@
 <?php
+/**
+ * Migración: Clase estática para el manejo de la migración del presupuesto formulado 
+ * al modulo de contabilidad presupuestaria
+ *
+ * @package    Roraima
+ * @subpackage formulacion
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * 
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
+ */
 class Migracion {
 
 	public static function Generar($tabla='',$param='')

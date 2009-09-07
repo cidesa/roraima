@@ -1,5 +1,15 @@
 <?php
-
+/**
+ * Cuentas por cobrar: Clase estática para el manejo las cuentas por cobrar
+ *
+ * @package    Roraima
+ * @subpackage cuentasxcobrar
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * 
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
+ */
 class Cuentasxcobrar {
   public static function salvarDocumentos($cobdocume, $grid, $grid2)
   {

@@ -1,11 +1,17 @@
 <?php
 
 /**
- * Subclass for performing query and update operations on the 'fordefsubsec' table.
+ * Subclase para crear funcionalidades específicas de busqueda y actualización en la tabla 'fordefsubsec'.
  *
  * 
  *
- * @package lib.model
+ * @package    Roraima
+ * @subpackage lib.model
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * 
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */ 
 class FordefsubsecPeer extends BaseFordefsubsecPeer
 {

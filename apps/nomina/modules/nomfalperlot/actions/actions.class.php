@@ -3,10 +3,13 @@
 /**
  * nomfalperlot actions.
  *
- * @package    siga
+ * @package    Roraima
  * @subpackage nomfalperlot
- * @author     Your name here
- * @version    SVN: $Id: actions.class.php 2288 2006-10-02 15:22:13Z fabien $
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * 
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
 class nomfalperlotActions extends autonomfalperlotActions
 {
@@ -18,6 +21,11 @@ class nomfalperlotActions extends autonomfalperlotActions
     return $this->forward('nomfalperlot', 'edit');
   }
 
+  /**
+   * Función principal para el manejo de las acciones create y edit
+   * del formulario.
+   *
+   */
   public function executeEdit()
   {
 
@@ -42,6 +50,13 @@ class nomfalperlotActions extends autonomfalperlotActions
     return $npfalper;
   }
 
+  /**
+   * Esta función permite definir la configuración del grid de datos
+   * que contiene el formulario. Esta función debe ser llamada
+   * en las acciones, create, edit y handleError para recargar en todo momento
+   * los datos del grid.
+   *
+   */
   public function configGrid($codigo='',$fecha='')
   {
 	Nomina::Obtener_Arreglo_Nomfalperlot($codigo,$fecha,&$output);
@@ -129,6 +144,17 @@ class nomfalperlotActions extends autonomfalperlotActions
 	 }
     }
 
+  /**
+   * Función para manejar el salvado del formulario.
+   * cabe destacar que en las versiones nuevas del formulario (cidesaPropel)
+   * llama internamente a la función $this->saving
+   * Esta función saving siempre debe retornar un valor >=-1.
+   * En esta funcción se debe realizar el proceso de guardado de informacion
+   * del negocio en la base de datos. Este proceso debe ser realizado llamado
+   * a funciones de las clases del negocio que se encuentran en lib/bussines
+   * todos los procesos de guardado deben estar en la clases del negocio (lib/bussines/"modulo")
+   *
+   */
   protected function saveNpfalper($npfalper)
   {
 	$grid=Herramientas::CargarDatosGrid($this,$this->obj,true);//0
@@ -154,6 +180,11 @@ class nomfalperlotActions extends autonomfalperlotActions
 	}
 
 
+  /**
+   * Función principal para el manejo de la accion list
+   * del formulario.
+   *
+   */
   public function executeList()
   {
     $this->processSort();

@@ -3,10 +3,13 @@
 /**
  * pagemiord actions.
  *
- * @package    siga
+ * @package    Roraima
  * @subpackage pagemiord
- * @author     Your name here
- * @version    SVN: $Id: actions.class.php 2288 2006-10-02 15:22:13Z fabien $
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * 
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
 class pagemiordActions extends autopagemiordActions
 {
@@ -22,6 +25,15 @@ class pagemiordActions extends autopagemiordActions
 
 
 
+  
+  
+  
+  /**
+   *
+   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
+   *
+   */
   public function validateEdit()
   {
     if($this->getRequest()->getMethod() == sfRequest::POST)
@@ -203,6 +215,11 @@ class pagemiordActions extends autopagemiordActions
     }else return true;
   }
 
+  /**
+   * Función principal para el manejo de las acciones create y edit
+   * del formulario.
+   *
+   */
   public function executeEdit()
   {
     $this->opordpag = $this->getOpordpagOrCreate();
@@ -364,6 +381,12 @@ $this->Bitacora('Guardo');
     }
   }
 
+  /**
+   * Función para manejar la captura de errores del negocio, tanto que se
+   * produzcan por algún validator y por un valor false retornado por el validateEdit
+   * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
+   *
+   */
   public function handleErrorEdit()
   {
     $this->preExecute();
@@ -422,6 +445,17 @@ $this->Bitacora('Guardo');
     return sfView::SUCCESS;
   }
 
+  /**
+   * Función para manejar el salvado del formulario.
+   * cabe destacar que en las versiones nuevas del formulario (cidesaPropel)
+   * llama internamente a la función $this->saving
+   * Esta función saving siempre debe retornar un valor >=-1.
+   * En esta funcción se debe realizar el proceso de guardado de informacion
+   * del negocio en la base de datos. Este proceso debe ser realizado llamado
+   * a funciones de las clases del negocio que se encuentran en lib/bussines
+   * todos los procesos de guardado deben estar en la clases del negocio (lib/bussines/"modulo")
+   *
+   */
   protected function saveOpordpag($opordpag)
   {
     if ($opordpag->getId())
@@ -529,6 +563,11 @@ $this->Bitacora('Guardo');
    $this->getUser()->getAttributeHolder()->remove('presiona','pagemiord');
  }
 
+  /**
+   * Actualiza la informacion que viene de la vista 
+   * luego de un get/post en el objeto principal del modelo base del formulario.
+   *
+   */
   protected function updateOpordpagFromRequest()
   {
     $opordpag = $this->getRequestParameter('opordpag');
@@ -750,6 +789,13 @@ $this->Bitacora('Guardo');
     return $opordpag;
   }
 
+  /**
+   * Esta función permite definir la configuración del grid de datos
+   * que contiene el formulario. Esta función debe ser llamada
+   * en las acciones, create, edit y handleError para recargar en todo momento
+   * los datos del grid.
+   *
+   */
   public function configGrid($codigo='')
   {
      $c = new Criteria();
@@ -829,6 +875,13 @@ $this->Bitacora('Guardo');
 
   }
 
+  /**
+   * Esta función permite definir la configuración del grid de datos
+   * que contiene el formulario. Esta función debe ser llamada
+   * en las acciones, create, edit y handleError para recargar en todo momento
+   * los datos del grid.
+   *
+   */
   public function configGrid2($codigo='')
   {
       $c = new Criteria();
@@ -901,6 +954,13 @@ $this->Bitacora('Guardo');
     $this->obj = $opciones->getConfig($per);
   }
 
+  /**
+   * Esta función permite definir la configuración del grid de datos
+   * que contiene el formulario. Esta función debe ser llamada
+   * en las acciones, create, edit y handleError para recargar en todo momento
+   * los datos del grid.
+   *
+   */
   public function configGridConsulta($codigo='',$otrotipo='',$arreglo=array())
   {
     if ($otrotipo=='OPNN' || $otrotipo=='APOR' || $otrotipo=='LIQU' || $otrotipo=='OPFD' || $otrotipo=='OPVA')
@@ -967,6 +1027,13 @@ $this->Bitacora('Guardo');
     $this->obj = $opciones->getConfig($reg);
   }
 
+  /**
+   * Esta función permite definir la configuración del grid de datos
+   * que contiene el formulario. Esta función debe ser llamada
+   * en las acciones, create, edit y handleError para recargar en todo momento
+   * los datos del grid.
+   *
+   */
   public function configGridFactura($codigo='',$arreglo1=array(),$arreglo2=array())
   {
     $sql="SELECT fecfac as fecfac, (CASE when tiptra='01' THEN numfac
@@ -1224,6 +1291,13 @@ $this->Bitacora('Guardo');
     $this->obj2 = $opciones->getConfig($reg);
   }
 
+  /**
+   * Esta función permite definir la configuración del grid de datos
+   * que contiene el formulario. Esta función debe ser llamada
+   * en las acciones, create, edit y handleError para recargar en todo momento
+   * los datos del grid.
+   *
+   */
   public function configGridRefere($codigo='')
   {
     $c = new Criteria();
@@ -1305,6 +1379,13 @@ $this->Bitacora('Guardo');
     $this->obj4 = $opciones->getConfig($reg);
   }
 
+  /**
+   * Esta función permite definir la configuración del grid de datos
+   * que contiene el formulario. Esta función debe ser llamada
+   * en las acciones, create, edit y handleError para recargar en todo momento
+   * los datos del grid.
+   *
+   */
   public function configGridRefere2($codigo='')
   {
     $c = new Criteria();
@@ -1387,6 +1468,13 @@ $this->Bitacora('Guardo');
     $this->obj4 = $opciones->getConfig($reg);
   }
 
+  /**
+   * Esta función permite definir la configuración del grid de datos
+   * que contiene el formulario. Esta función debe ser llamada
+   * en las acciones, create, edit y handleError para recargar en todo momento
+   * los datos del grid.
+   *
+   */
   public function configGridConsulRet($codigo='')
   {
     $SQL1 = "select (CASE when a.numret!='NOASIGNA' THEN a.numret
@@ -1507,6 +1595,13 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
     $this->obj3 = $opciones->getConfig($reg);
   }
 
+  /**
+   * Esta función permite definir la configuración del grid de datos
+   * que contiene el formulario. Esta función debe ser llamada
+   * en las acciones, create, edit y handleError para recargar en todo momento
+   * los datos del grid.
+   *
+   */
   public function configGridApliRet()
   {
     $reg = array();
@@ -1622,6 +1717,13 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
     $this->obj5 = $opciones->getConfig($reg);
   }
 
+  /**
+   * Esta función permite definir la configuración del grid de datos
+   * que contiene el formulario. Esta función debe ser llamada
+   * en las acciones, create, edit y handleError para recargar en todo momento
+   * los datos del grid.
+   *
+   */
   public function configGridRetenciones($arreglo1=array())
   {
     $per=$arreglo1;
@@ -1672,6 +1774,12 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
     $this->obj6 = $opciones->getConfig($per);
   }
 
+  /**
+   * Función para procesar _todas_ las funciones Ajax del formulario
+   * Cada función esta identificada con el valor de la vista "ajax"
+   * el cual traerá el indice de lo que se quiere procesar.
+   *
+   */
   public function executeAjax()
   {$this->ajax='';
     $this->setVars();
@@ -2167,6 +2275,12 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
 
  }
 
+  /**
+   * Función para procesar _todas_ las funciones Ajax del formulario
+   * Cada función esta identificada con el valor de la vista "ajax"
+   * el cual traerá el indice de lo que se quiere procesar.
+   *
+   */
   public function executeAjaxfactura()
   {
   	$javascript="";
@@ -2225,6 +2339,12 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
     }
   }
 
+  /**
+   * Función para procesar _todas_ las funciones Ajax del formulario
+   * Cada función esta identificada con el valor de la vista "ajax"
+   * el cual traerá el indice de lo que se quiere procesar.
+   *
+   */
   public function executeAjaxcomprobante()
   {
      $this->opordpag = $this->getOpordpagOrCreate();
@@ -2704,6 +2824,12 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
   }
 
 
+  /**
+   * Función para procesar _todas_ las funciones Ajax del formulario
+   * Cada función esta identificada con el valor de la vista "ajax"
+   * el cual traerá el indice de lo que se quiere procesar.
+   *
+   */
   public function executeAjaxretenciones()
   {
     $this->opordpag = $this->getOpordpagOrCreate();

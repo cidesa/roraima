@@ -3,10 +3,13 @@
 /**
  * almcontrato actions.
  *
- * @package    siga
+ * @package    Roraima
  * @subpackage almcontrato
- * @author     Your name here
- * @version    SVN: $Id: actions.class.php 2288 2006-10-02 15:22:13Z fabien $
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * 
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
 class almcontratoActions extends autoalmcontratoActions
 {
@@ -58,7 +61,12 @@ public function solicitud()
         return $this->rs;
     }
 	
-public function executeEdit()
+/**
+   * Función principal para el manejo de las acciones create y edit
+   * del formulario.
+   *
+   */
+  public function executeEdit()
   {
     $this->caordcon = $this->getCaordconOrCreate();
     $this->doctip = $this->getTipo();

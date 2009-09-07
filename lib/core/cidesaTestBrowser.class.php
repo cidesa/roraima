@@ -1,23 +1,18 @@
 <?php
-
+/**
+ * cidesaTestBrowser: Clase para generar pruebas unitarias de los formularios
+ * todos los formularios
+ *
+ * @package    Roraima
+ * @subpackage cidesa
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * 
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
+ */
 require_once('lime/lime.php');
 
-/*
- * This file is part of the symfony package.
- * (c) 2004-2006 Fabien Potencier <fabien.potencier@symfony-project.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
-/**
- * sfTestBrowser simulates a fake browser which can test a symfony application.
- *
- * @package    symfony
- * @subpackage test
- * @author     Fabien Potencier <fabien.potencier@symfony-project.com>
- * @version    SVN: $Id: sfTestBrowser.class.php 5153 2007-09-16 15:47:55Z fabien $
- */
 class cidesaTestBrowser extends sfTestBrowser
 {
 

@@ -3,15 +3,29 @@
 /**
  * pretiting actions.
  *
- * @package    siga
+ * @package    Roraima
  * @subpackage pretiting
- * @author     Your name here
- * @version    SVN: $Id: actions.class.php 2288 2006-10-02 15:22:13Z fabien $
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * 
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
 class pretitingActions extends autopretitingActions
 {
-  private static $coderror=-1;
+  // variable donde se debe colocar el código de error generado en el validateEdit 
+  // para que sea procesado por el handleErrorEdit.
+private static $coderror=-1;
 
+  
+  
+  
+  /**
+   *
+   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
+   *
+   */
   public function validateEdit()
   {
     if($this->getRequest()->getMethod() == sfRequest::POST)
@@ -29,7 +43,13 @@ class pretitingActions extends autopretitingActions
 
 
 
- public function handleErrorEdit()
+ /**
+   * Función para manejar la captura de errores del negocio, tanto que se
+   * produzcan por algún validator y por un valor false retornado por el validateEdit
+   * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
+   *
+   */
+  public function handleErrorEdit()
   {
     $this->preExecute();
    // $this->fordefparing = $this->getFordefparingOrCreate();
@@ -49,6 +69,11 @@ class pretitingActions extends autopretitingActions
     return sfView::SUCCESS;
   }
 
+  /**
+   * Función principal para el manejo de las acciones create y edit
+   * del formulario.
+   *
+   */
   public function executeEdit()
   {
     $this->fordefparing = $this->getFordefparingOrCreate();
@@ -85,6 +110,11 @@ $this->Bitacora('Guardo');
     }
   }
 
+  /**
+   * Actualiza la informacion que viene de la vista 
+   * luego de un get/post en el objeto principal del modelo base del formulario.
+   *
+   */
   protected function updateFordefparingFromRequest()
   {
     $fordefparing = $this->getRequestParameter('fordefparing');
@@ -100,7 +130,12 @@ $this->Bitacora('Guardo');
     }
   }
 
- public function executeList()
+ /**
+   * Función principal para el manejo de la accion list
+   * del formulario.
+   *
+   */
+  public function executeList()
   {
     $this->processSort();
 

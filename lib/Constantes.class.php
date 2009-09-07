@@ -1,5 +1,15 @@
 <?php
-
+/**
+ * Constantes: Clase estática que contiene las listas constantes de la aplicacion
+ *
+ * @package    Roraima
+ * @subpackage lib
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * 
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
+ */
 class Constantes
 {
   // Variables de nombres de módulos

@@ -1,24 +1,17 @@
 <?php
 
-/*
- * This file is part of the symfony package.
- * (c) 2004-2006 Fabien Potencier <fabien.potencier@symfony-project.com>
- * (c) 2004-2006 Sean Kerr <sean@code-box.org>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 /**
- * sfDatabaseConfigHandler allows you to setup database connections in a
- * configuration file that will be created for you automatically upon first
- * request.
+ * cidesaDatabaseConfigHandler: Apaptación del sfDatabaseConfigHandler para
+ * cambiar la direccion en la cual busca el archivo database.yml que contiene
+ * la configuración de la conexion con la base de datos.
  *
- * @package    symfony
- * @subpackage config
- * @author     Fabien Potencier <fabien.potencier@symfony-project.com>
- * @author     Sean Kerr <sean@code-box.org>
- * @version    SVN: $Id: sfDatabaseConfigHandler.class.php 7791 2008-03-09 21:57:09Z fabien $
+ * @package    Roraima
+ * @subpackage lib
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * 
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
 class cidesaDatabaseConfigHandler extends sfDatabaseConfigHandler
 {

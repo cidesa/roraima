@@ -3,15 +3,27 @@
 /**
  * fordefsubobj actions.
  *
- * @package    siga
+ * @package    Roraima
  * @subpackage fordefsubobj
- * @author     Your name here
- * @version    SVN: $Id: actions.class.php 2288 2006-10-02 15:22:13Z fabien $
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * 
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
 class fordefsubobjActions extends autofordefsubobjActions
 {
    public  $coderror1=-1;
   
+  
+  
+  
+  /**
+   *
+   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
+   *
+   */
   public function validateEdit()
   {
     if($this->getRequest()->getMethod() == sfRequest::POST)
@@ -29,7 +41,12 @@ class fordefsubobjActions extends autofordefsubobjActions
   }  
 	
 	
-	protected function updateFordefsubobjFromRequest()
+	/**
+   * Actualiza la informacion que viene de la vista 
+   * luego de un get/post en el objeto principal del modelo base del formulario.
+   *
+   */
+  protected function updateFordefsubobjFromRequest()
 	{
 		$fordefsubobj = $this->getRequestParameter('fordefsubobj');
 
@@ -47,7 +64,12 @@ class fordefsubobjActions extends autofordefsubobjActions
     }
   }
   
-   public function executeEdit()
+   /**
+   * Función principal para el manejo de las acciones create y edit
+   * del formulario.
+   *
+   */
+  public function executeEdit()
   {
     $this->fordefsubobj = $this->getFordefsubobjOrCreate();
 
@@ -81,13 +103,30 @@ $this->Bitacora('Guardo');
     }
   }
   
-    protected function saveFordefsubobj($fordefsubobj)
+    /**
+   * Función para manejar el salvado del formulario.
+   * cabe destacar que en las versiones nuevas del formulario (cidesaPropel)
+   * llama internamente a la función $this->saving
+   * Esta función saving siempre debe retornar un valor >=-1.
+   * En esta funcción se debe realizar el proceso de guardado de informacion
+   * del negocio en la base de datos. Este proceso debe ser realizado llamado
+   * a funciones de las clases del negocio que se encuentran en lib/bussines
+   * todos los procesos de guardado deben estar en la clases del negocio (lib/bussines/"modulo")
+   *
+   */
+  protected function saveFordefsubobj($fordefsubobj)
   {
     Formulacion::salvarFordefsubobj($fordefsubobj);
 
   }
   
-   public function handleErrorEdit()
+   /**
+   * Función para manejar la captura de errores del negocio, tanto que se
+   * produzcan por algún validator y por un valor false retornado por el validateEdit
+   * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
+   *
+   */
+  public function handleErrorEdit()
   {
     $this->preExecute();
     $this->fordefsubobj = $this->getFordefsubobjOrCreate();

@@ -3,21 +3,41 @@
 /**
  * cobtransa actions.
  *
- * @package    siga
+ * @package    Roraima
  * @subpackage cobtransa
- * @author     Your name here
- * @version    SVN: $Id: actions.class.php 2288 2006-10-02 15:22:13Z fabien $
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * 
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
 class cobtransaActions extends autocobtransaActions
 {
 
   // Para incluir funcionalidades al executeEdit()
+  /**
+   * Función para colocar el codigo necesario en  
+   * el proceso de edición.
+   * Aquí se pueden buscar datos adicionales que necesite la vista
+   * Esta función es parte de la acción executeEdit, que maneja tanto
+   * el create como el edit del formulario.
+   * Generalmente aqui se debe y puede colocar los llamados a los configGrid
+   * Para generar la información de configuración de los grids.
+   *
+   */
   public function editing()
   {
      $this->configGrid();
      $this->cobtransa->afterHydrate();
   }
 
+  /**
+   * Esta función permite definir la configuración del grid de datos
+   * que contiene el formulario. Esta función debe ser llamada
+   * en las acciones, create, edit y handleError para recargar en todo momento
+   * los datos del grid.
+   *
+   */
   public function configGrid()
   {
   	 if ($this->cobtransa->getId())
@@ -39,7 +59,14 @@ class cobtransaActions extends autocobtransaActions
   }
 
 
-   public function configGridDet($numtra="", $codcli="")
+   /**
+   * Esta función permite definir la configuración del grid de datos
+   * que contiene el formulario. Esta función debe ser llamada
+   * en las acciones, create, edit y handleError para recargar en todo momento
+   * los datos del grid.
+   *
+   */
+  public function configGridDet($numtra="", $codcli="")
    {
      if ($codcli!="")
      {
@@ -73,7 +100,14 @@ class cobtransaActions extends autocobtransaActions
     $this->cobtransa->setObjdocumentos($this->objdocumentos);
   }
 
-   public function configGridFormaPago($numtra='',$nuevo='')
+   /**
+   * Esta función permite definir la configuración del grid de datos
+   * que contiene el formulario. Esta función debe ser llamada
+   * en las acciones, create, edit y handleError para recargar en todo momento
+   * los datos del grid.
+   *
+   */
+  public function configGridFormaPago($numtra='',$nuevo='')
    {
     $reg1=array();
     if ($nuevo!="")
@@ -102,7 +136,14 @@ class cobtransaActions extends autocobtransaActions
     $this->cobtransa->setObjformapagos($this->objformapagos);
   }
 
-   public function configGridRecargos($numtra,$codcli)
+   /**
+   * Esta función permite definir la configuración del grid de datos
+   * que contiene el formulario. Esta función debe ser llamada
+   * en las acciones, create, edit y handleError para recargar en todo momento
+   * los datos del grid.
+   *
+   */
+  public function configGridRecargos($numtra,$codcli)
    {
    	$reg=array();
 
@@ -134,7 +175,14 @@ class cobtransaActions extends autocobtransaActions
     $this->cobtransa->setObjrecargos($this->objrecargos);
   }
 
-   public function configGridDescuento($numtra='',$codcli='')
+   /**
+   * Esta función permite definir la configuración del grid de datos
+   * que contiene el formulario. Esta función debe ser llamada
+   * en las acciones, create, edit y handleError para recargar en todo momento
+   * los datos del grid.
+   *
+   */
+  public function configGridDescuento($numtra='',$codcli='')
    {
    	$reg=array();
 
@@ -169,6 +217,12 @@ class cobtransaActions extends autocobtransaActions
   }
 
 
+  /**
+   * Función para procesar _todas_ las funciones Ajax del formulario
+   * Cada función esta identificada con el valor de la vista "ajax"
+   * el cual traerá el indice de lo que se quiere procesar.
+   *
+   */
   public function executeAjax()
   {
 
@@ -343,6 +397,15 @@ class cobtransaActions extends autocobtransaActions
   }
 
 
+  
+  
+  
+  /**
+   *
+   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
+   *
+   */
   public function validateEdit()
   {
     $this->coderr =-1;
@@ -639,7 +702,13 @@ class cobtransaActions extends autocobtransaActions
   }
 
 
-     public function executeAjaxcomprobante()
+     /**
+   * Función para procesar _todas_ las funciones Ajax del formulario
+   * Cada función esta identificada con el valor de la vista "ajax"
+   * el cual traerá el indice de lo que se quiere procesar.
+   *
+   */
+  public function executeAjaxcomprobante()
   {
      $this->cobtransa = $this->getCobtransaOrCreate();
      $this->updateCobtransaFromRequest();

@@ -1,35 +1,48 @@
 <?php
 
-/*
- *  $Id: PgsqlDDLBuilder.php 3752 2007-04-11 09:11:18Z fabien $
+/**
+ * cidesaPgsqlDDLBuilder: modificacion del SQL DDL-building class for PostgreSQL, para
+ * generar archivos .sql de las tablas de la base de datos.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
- * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
- * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
- * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
- * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
- * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- * This software consists of voluntary contributions made by many individuals
- * and is licensed under the LGPL. For more information please see
- * <http://propel.phpdb.org>.
+ * @package    Roraima
+ * @subpackage lib
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * 
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
 
 require_once 'propel/engine/builder/sql/pgsql/PgsqlDDLBuilder.php';
 
-/**
- * The SQL DDL-building class for PostgreSQL.
- *
- *
- * @author     Hans Lellelid <hans@xmpl.org>
- * @package    propel.engine.builder.sql.pgsql
- */
 class cidesaPgsqlDDLBuilder extends PgsqlDDLBuilder {
+
+
+	/**
+	 * Builds the SQL for current table and returns it as a string.
+	 *
+	 * This is the main entry point and defines a basic structure that classes should follow.
+	 * In most cases this method will not need to be overridden by subclasses.
+	 *
+	 * @return     string The resulting SQL DDL.
+	 */
+	public function build()
+	{
+	  if(isset($GLOBALS["check"])){
+	    if($GLOBALS["check"]==true){
+  	    $script = "";
+        $this->checkdatabase(&$script);
+        return $script;
+	    }
+	  }
+
+		$script = "";
+		$this->addTable($script);
+		$this->addIndices($script);
+		$this->addForeignKeys($script);
+		return $script;
+    
+	}
 
 
   /**
@@ -316,5 +329,124 @@ ALTER TABLE ".$this->quoteIdentifier($table->getName())." ADD CONSTRAINT ".$this
 ";
     }
   }
+  
+  /**
+   *
+   * @see        parent::addForeignKeys()
+   */
+  protected function addForeignKeysByColumn($column, &$script)
+  {
+    $table = $this->getTable();
+    $platform = $this->getPlatform();
+
+    foreach ($table->getForeignKeys() as $fk) {
+      if($this->getColumnList($fk->getLocalColumns())==strtolower($column)){
+
+        $script .= "
+  ALTER TABLE ".$this->quoteIdentifier($table->getName())." ADD CONSTRAINT ".$this->quoteIdentifier($fk->getName())." FOREIGN KEY (".$this->getColumnList($fk->getLocalColumns()) .") REFERENCES ".$this->quoteIdentifier($fk->getForeignTableName())." (".$this->getColumnList($fk->getForeignColumns()).")";
+        if ($fk->hasOnUpdate()) {
+          $script .= " ON UPDATE ".$fk->getOnUpdate();
+        }
+        if ($fk->hasOnDelete()) {
+          $script .= " ON DELETE ".$fk->getOnDelete();
+        }
+        $script .= ";
+  ";
+        
+      }
+    }
+  }
+  
+  protected function addColumn($colname, &$script)
+  {
+
+    $table = $this->getTable();
+    $platform = $this->getPlatform();
+
+    foreach ($table->getColumns() as $col) {
+      if($col->getName() == $colname){
+        if($col->getName()=='id'){
+          $lines = $this->getColumnDDL($col)." DEFAULT nextval('".(strtolower($table->getSequenceName()))."'::regclass)";
+        }else $lines = $this->getColumnDDL($col);
+        
+        $script .= "
+ALTER TABLE ".$this->quoteIdentifier($table->getName())." ADD ".$lines.";
+        ";
+        
+        
+      }
+    }
+    
+    
+  }
+
+	/**
+	 * Adds comments for the columns.
+	 *
+	 */
+	protected function addColumnCommentsByColumn($column, &$script)
+	{
+		$table = $this->getTable();
+		$platform = $this->getPlatform();
+
+		foreach ($this->getTable()->getColumns() as $col) {
+		  if($column == $col->getName()){
+  			if( $col->getDescription() != '' ) {
+	  			$script .= "
+COMMENT ON COLUMN ".$this->quoteIdentifier($table->getName()).".".$this->quoteIdentifier($col->getName())." IS '".$platform->escapeText($col->getDescription()) ."';
+";
+		    
+		    }
+			}
+		}
+	}
+  
+  protected function checkdatabase(&$script)
+  {
+    $remotas = $GLOBALS["checktablas"];
+    $locales = $this->getTable()->getColumns();
+    $objtabla = $this->getTable();
+    $tabla = $this->getTable()->getName();
+    
+    // Se verifica las diferencias entre las tablas del modelo y las de la base de datos
+    if(array_key_exists(strtolower($tabla), $remotas)){
+      // Existe en el modelo y la base de datos
+      // Se verifica si la estrucura esta correcta
+      $tablaok = true;
+      foreach($locales as $col){
+        $columnname = $col->getName();
+        if(!array_key_exists($columnname,$remotas[strtolower($tabla)])){
+          
+          // El campo no existe en la base de datos
+          // Se debe crear el campo nuevos en la tabla
+          $this->addColumn($columnname,&$script);
+        }else{
+          
+          // El campo existe en la base de datos
+          // reviso si tiene foreingkeys
+          foreach ($objtabla->getForeignKeys() as $fk) {
+            if($this->getColumnList($fk->getLocalColumns())==strtolower($columnname)){
+              if(!array_key_exists('foreignTable',$remotas[strtolower($tabla)][$columnname])){
+                $this->addForeignKeysByColumn(strtolower($columnname),&$script);
+              }
+            }
+          }
+        }
+      } // Foreach Columns
+
+      // Reviso si la tabla tiene indices          
+      if(count($objtabla->getIndices())>0){
+        if(!array_key_exists('_indexes',$remotas[strtolower($tabla)])){
+          $this->addIndices(&$script);
+        }
+      }
+      
+    }else{
+      // Existe en el modelo pero no existe en la base de datos
+      $this->addTable(&$script);
+    }
+
+  }
+
 
 }

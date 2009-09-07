@@ -3,10 +3,13 @@
 /**
  * fapedido actions.
  *
- * @package    siga
+ * @package    Roraima
  * @subpackage fapedido
- * @author     Your name here
- * @version    SVN: $Id: actions.class.php 2288 2006-10-02 15:22:13Z fabien $
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * 
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
 class fapedidoActions extends autofapedidoActions
 {
@@ -19,6 +22,16 @@ class fapedidoActions extends autofapedidoActions
   private $coderror6=-1;
   private $coderror7=-1;
 
+  /**
+   * Función para colocar el codigo necesario en  
+   * el proceso de edición.
+   * Aquí se pueden buscar datos adicionales que necesite la vista
+   * Esta función es parte de la acción executeEdit, que maneja tanto
+   * el create como el edit del formulario.
+   * Generalmente aqui se debe y puede colocar los llamados a los configGrid
+   * Para generar la información de configuración de los grids.
+   *
+   */
   public function editing()
   {
   	if ($this->fapedido->getId()=="")
@@ -46,12 +59,26 @@ class fapedidoActions extends autofapedidoActions
 	$this->configGrid();
   }
 
+  /**
+   * Esta función permite definir la configuración del grid de datos
+   * que contiene el formulario. Esta función debe ser llamada
+   * en las acciones, create, edit y handleError para recargar en todo momento
+   * los datos del grid.
+   *
+   */
   public function configGrid()
   {
     $this->configGridArtPed($this->fapedido->getNroped(),$this->getRequestParameter('fapedido[refped]'),$this->getRequestParameter('fapedido[combo]'));
     $this->configGridFecPed($this->fapedido->getNroped());
   }
 
+  /**
+   * Esta función permite definir la configuración del grid de datos
+   * que contiene el formulario. Esta función debe ser llamada
+   * en las acciones, create, edit y handleError para recargar en todo momento
+   * los datos del grid.
+   *
+   */
   public function configGridArtPed($nroped='', $refpre='', $combo='')
   {
   	if ($refpre!='')
@@ -101,6 +128,13 @@ class fapedidoActions extends autofapedidoActions
     $this->fapedido->setObj($this->obj);
   }
 
+  /**
+   * Esta función permite definir la configuración del grid de datos
+   * que contiene el formulario. Esta función debe ser llamada
+   * en las acciones, create, edit y handleError para recargar en todo momento
+   * los datos del grid.
+   *
+   */
   public function configGridFecPed($nroped='')
   {
   	$c = new Criteria();
@@ -113,6 +147,12 @@ class fapedidoActions extends autofapedidoActions
     $this->fapedido->setObjfecped($this->objfecped);
   }
 
+  /**
+   * Función para procesar _todas_ las funciones Ajax del formulario
+   * Cada función esta identificada con el valor de la vista "ajax"
+   * el cual traerá el indice de lo que se quiere procesar.
+   *
+   */
   public function executeAjax()
   {
 
@@ -304,6 +344,15 @@ class fapedidoActions extends autofapedidoActions
   }
 
 
+  
+  
+  
+  /**
+   *
+   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
+   *
+   */
   public function validateEdit()
   {
     if($this->getRequest()->getMethod() == sfRequest::POST)
@@ -465,6 +514,12 @@ class fapedidoActions extends autofapedidoActions
     return sfView::SUCCESS;
   }
 
+  /**
+   * Función para manejar la captura de errores del negocio, tanto que se
+   * produzcan por algún validator y por un valor false retornado por el validateEdit
+   * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
+   *
+   */
   public function handleErrorEdit()
   {
     $this->preExecute();

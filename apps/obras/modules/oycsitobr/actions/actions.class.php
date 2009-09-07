@@ -3,14 +3,22 @@
 /**
  * oycsitobr actions.
  *
- * @package    siga
+ * @package    Roraima
  * @subpackage oycsitobr
- * @author     Your name here
- * @version    SVN: $Id: actions.class.php 2288 2006-10-02 15:22:13Z fabien $
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * 
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
 class oycsitobrActions extends autooycsitobrActions
 {
-   public function executeEdit()
+   /**
+   * Función principal para el manejo de las acciones create y edit
+   * del formulario.
+   *
+   */
+  public function executeEdit()
   {
     $this->ocregobr = $this->getOcregobrOrCreate();
     Obras::arregloFinDet($this->ocregobr->getCodobr(),&$arreglodet);
@@ -79,6 +87,13 @@ $this->Bitacora('Guardo');
   }
 
 
+  /**
+   * Esta función permite definir la configuración del grid de datos
+   * que contiene el formulario. Esta función debe ser llamada
+   * en las acciones, create, edit y handleError para recargar en todo momento
+   * los datos del grid.
+   *
+   */
   public function configGridDet($arreglo=array())
   {
    $reg = $arreglo;
@@ -145,6 +160,13 @@ $this->Bitacora('Guardo');
    $this->obj = $opciones->getConfig($reg);
   }
 
+  /**
+   * Esta función permite definir la configuración del grid de datos
+   * que contiene el formulario. Esta función debe ser llamada
+   * en las acciones, create, edit y handleError para recargar en todo momento
+   * los datos del grid.
+   *
+   */
   public function configGridFis($arreglo=array())
   {
    $reg = $arreglo;

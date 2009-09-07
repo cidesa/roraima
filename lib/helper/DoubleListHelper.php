@@ -1,24 +1,18 @@
 <?php
-
-use_helper('Form', 'Javascript', 'Helper');
-
-/*
- * This file is part of the symfony package.
- * (c) 2004-2006 Fabien Potencier <fabien.potencier@symfony-project.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 /**
- * ObjectHelper for admin generator.
+ * object_admin_double_for_list: Función que reescribe el helper
+ * object_admin_double_for_list, por necesidades especiales de la
+ * implementación de Roraima
  *
- * @package    symfony
+ * @package    Roraima
  * @subpackage helper
- * @author     Fabien Potencier <fabien.potencier@symfony-project.com>
- * @version    SVN: $Id: ObjectAdminHelper.php 3746 2007-04-11 08:08:38Z fabien $
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * 
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
-
+use_helper('Form', 'Javascript', 'Helper');
 
 function object_admin_double_for_list($criteria, $object, $method, $options = array(), $callback = null)
 {

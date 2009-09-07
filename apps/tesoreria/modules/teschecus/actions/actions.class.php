@@ -3,14 +3,23 @@
 /**
  * teschecus actions.
  *
- * @package    siga
+ * @package    Roraima
  * @subpackage teschecus
- * @author     Your name here
- * @version    SVN: $Id: actions.class.php 2288 2006-10-02 15:22:13Z fabien $
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * 
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
 class teschecusActions extends autoteschecusActions
 {
 
+  /**
+   * Función para procesar _todas_ las funciones Ajax del formulario
+   * Cada función esta identificada con el valor de la vista "ajax"
+   * el cual traerá el indice de lo que se quiere procesar.
+   *
+   */
   public function executeAjax()
   {
 
@@ -30,6 +39,11 @@ class teschecusActions extends autoteschecusActions
     return sfView::HEADER_ONLY;
   }
 
+  /**
+   * Función principal para el manejo de las acciones create y edit
+   * del formulario.
+   *
+   */
   public function executeEdit()
   {
     $this->tscheemi = $this->getTscheemiOrCreate();
@@ -77,6 +91,12 @@ $this->Bitacora('Guardo');
   }
 
 
+  /**
+   * Función para manejar la captura de errores del negocio, tanto que se
+   * produzcan por algún validator y por un valor false retornado por el validateEdit
+   * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
+   *
+   */
   public function handleErrorEdit()
   {
     $this->preExecute();
@@ -97,7 +117,16 @@ $this->Bitacora('Guardo');
     return sfView::SUCCESS;
   }
 
-    public function validateEdit()
+    
+  
+  
+  /**
+   *
+   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
+   *
+   */
+  public function validateEdit()
     {
       $this->coderr=-1;
       if($this->getRequest()->getMethod() == sfRequest::POST)

@@ -3,14 +3,22 @@
 /**
  * oycdefuni actions.
  *
- * @package    siga
+ * @package    Roraima
  * @subpackage oycdefuni
- * @author     Your name here
- * @version    SVN: $Id: actions.class.php 2288 2006-10-02 15:22:13Z fabien $
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * 
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
 class oycdefuniActions extends autooycdefuniActions
 {
-	protected function updateOcunidadFromRequest()
+	/**
+   * Actualiza la informacion que viene de la vista 
+   * luego de un get/post en el objeto principal del modelo base del formulario.
+   *
+   */
+  protected function updateOcunidadFromRequest()
 		{
 			$ocunidad = $this->getRequestParameter('ocunidad');
 
@@ -43,6 +51,12 @@ class oycdefuniActions extends autooycdefuniActions
 		    return $ocunidad;
 		}
 
+  /**
+   * Función para procesar _todas_ las funciones Ajax del formulario
+   * Cada función esta identificada con el valor de la vista "ajax"
+   * el cual traerá el indice de lo que se quiere procesar.
+   *
+   */
   public function executeAjax()
   {
 	 $cajtexmos=$this->getRequestParameter('cajtexmos');

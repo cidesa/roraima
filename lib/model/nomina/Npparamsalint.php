@@ -1,11 +1,17 @@
 <?php
 
 /**
- * Subclass for representing a row from the 'npparamsalint' table.
+ * Subclase para representar una fila de la tabla 'npparamsalint'.
  *
  * 
  *
- * @package lib.model.nomina
+ * @package    Roraima
+ * @subpackage lib.model.nomina
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * 
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2.nomina
  */ 
 class Npparamsalint extends BaseNpparamsalint
 {

@@ -1,19 +1,16 @@
 <?php
 
-/*
- * This file is part of the symfony package.
- * (c) 2004-2006 Fabien Potencier <fabien.potencier@symfony-project.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 /**
+ * cidesaDefineEnvironmentConfigHandler: Apaptación del sfDefineEnvironmentConfigHandler para
+ * cambiar la direccion en la cual busca el archivo app.yml de la aplicacion autenticacion
  *
- * @package    symfony
- * @subpackage config
- * @author     Fabien Potencier <fabien.potencier@symfony-project.com>
- * @version    SVN: $Id: sfDefineEnvironmentConfigHandler.class.php 3254 2007-01-13 07:52:26Z fabien $
+ * @package    Roraima
+ * @subpackage lib
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * 
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
 class cidesaDefineEnvironmentConfigHandler extends sfDefineEnvironmentConfigHandler
 {

@@ -1,48 +1,5 @@
 propel:
   _attributes: { noXsd: false, defaultIdMethod: native, package: lib.model }
-  fatippag:
-    #_attributes:
-      #idMethod: native
-    destippag:
-      type: VARCHAR
-      size: 30
-      required: true
-    tipcan:
-      type: VARCHAR
-      size: 1
-    genmov:
-      type: VARCHAR
-      size: 1
-    gening:
-      type: VARCHAR
-      size: 1
-    id:
-      type: INTEGER
-      required: true
-      autoIncrement: true
-  fatipmov:
-    #_attributes:
-      #idMethod: native
-    desmov:
-      type: VARCHAR
-      size: 50
-      required: true
-    nomabr:
-      type: VARCHAR
-      size: 4
-      required: true
-    debcre:
-      type: VARCHAR
-      size: 1
-      required: true
-    codcta:
-      type: VARCHAR
-      size: 32
-      required: true
-    id:
-      type: INTEGER
-      required: true
-      autoIncrement: true
   cobdesdoc:
     #_attributes:
       #idMethod: native
