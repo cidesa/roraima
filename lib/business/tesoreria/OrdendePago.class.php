@@ -61,6 +61,8 @@ class OrdendePago
      }
       $fondos->setStatus('N');
 	  $fondos->setAproba('N');
+	  $fondos->setMondes(0.00);
+	  $fondos->setMonret(0.00);
 	  $fondos->setFecven($fondos->getFecemi());
 	  $e= new Criteria();
       $ooo= OpdefempPeer::doSelectOne($e);
