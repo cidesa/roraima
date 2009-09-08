@@ -1963,6 +1963,14 @@ propel:
     gencorart:
       type: VARCHAR
       size: 1
+    cornac:
+      type: INTEGER
+    corext:
+      type: INTEGER
+    cornac:
+      type: INTEGER
+    corext:
+      type: INTEGER
     id:
       type: integer
       required: true

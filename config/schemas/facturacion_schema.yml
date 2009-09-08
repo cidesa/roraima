@@ -62,6 +62,9 @@ propel:
       type: VARCHAR
       size: 20
       required: true
+    desart:
+      type: VARCHAR
+      size: 1500
     codref:
       type: VARCHAR
       size: 8
@@ -93,6 +96,9 @@ propel:
       type: NUMERIC
       size: 14
       scale: 2
+    nronot:
+      type: VARCHAR
+      size: 8
     id:
       type: INTEGER
       required: true

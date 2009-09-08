@@ -511,7 +511,19 @@ $this->Bitacora('Guardo');
 
   protected function saveCaprovee($caprovee)
   {
-    Proveedor::salvarAlmregpro($caprovee);
+    $this->manprocor="";
+    $varemp = $this->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('compras',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
+	     if(array_key_exists('almregpro',$varemp['aplicacion']['compras']['modulos']))
+	       if(array_key_exists('manprocor',$varemp['aplicacion']['compras']['modulos']['almregpro']))
+	       {
+	       	$this->manprocor=$varemp['aplicacion']['compras']['modulos']['almregpro']['manprocor'];
+	       }
+
+    Proveedor::salvarAlmregpro($caprovee,$this->manprocor);
   }
 
 public function executeAjax()
@@ -637,6 +649,18 @@ public function executeAjax()
       $this->mascara = Herramientas::ObtenerFormato('Contaba','Forcta');
       $this->loncta=strlen($this->mascara);
       $this->c=null;
+
+   $this->manprocor="";
+    $varemp = $this->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('compras',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
+	     if(array_key_exists('almregpro',$varemp['aplicacion']['compras']['modulos']))
+	       if(array_key_exists('manprocor',$varemp['aplicacion']['compras']['modulos']['almregpro']))
+	       {
+	       	$this->manprocor=$varemp['aplicacion']['compras']['modulos']['almregpro']['manprocor'];
+	       }
   }
 
   public function executeDelete()

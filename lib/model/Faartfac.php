@@ -72,10 +72,10 @@ class Faartfac extends BaseFaartfac
       $this->cannodesaux=self::getCantot() - ($candes + $canent);
    }
 
-  public function getDesart()
+/*  public function getDesart()
   {
    return Herramientas::getX('CODART','Caregart','Desart',self::getCodart());
-  }
+  }*/
 
   public function getUnimed()
   {

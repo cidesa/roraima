@@ -256,6 +256,41 @@
 </div>
 </fieldset>
 
+<br>
+<div id="correlpro" style="display:none">
+<fieldset id="sf_fieldset_none" class="">
+<legend><h2><?php echo __('Correlativos Proveedores') ?></h2></legend>
+<div class="form-row">
+  <?php echo label_for('cadefart[cornac]', __($labels['cadefart{cornac}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('cadefart{cornac}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('cadefart{cornac}')): ?>
+    <?php echo form_error('cadefart{cornac}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($cadefart, array('getCornac',true), array (
+  'size' => 7,
+  'control_name' => 'cadefart[cornac]',
+  'maxlength' => 8,
+  'readonly'  =>  $cadefart->getCornac()!=0 ? true : false ,
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+<br>
+  <?php echo label_for('cadefart[corext]', __($labels['cadefart{corext}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('cadefart{corext}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('cadefart{corext}')): ?>
+    <?php echo form_error('cadefart{corext}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($cadefart, array('getCorext',true), array (
+  'size' => 7,
+  'control_name' => 'cadefart[corext]',
+  'maxlength' => 8,
+  'readonly'  =>  $cadefart->getCorext()!=0 ? true : false ,
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+</div>
+</fieldset>
+</div>
 <?php tabPageOpenClose("tp1", "tabPage2", 'Integración');?>
 <fieldset id="sf_fieldset_none" class="">
 <div class="form-row">
@@ -597,6 +632,13 @@ if ($cadefart->getAsiparrec()=='P')  {
 </form>
 
 <script type="text/javascript">
+  var correlp='<?php echo $manprocor ?>';
+  if (correlp=='S')
+  {
+  	$('correlpro').show();
+  }
+
+
   function colocar(e,id)
   {
     if (e.keyCode==13)
