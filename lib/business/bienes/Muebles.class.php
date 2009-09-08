@@ -332,7 +332,10 @@ public static function Validar_biedisactmuenew($valor1,$valor2)
   {
     if (self::Elimina_Comprobantes($bndismue) != -1) return 0;
     if (self::Reactualizar_Mueble($bndismue) != -1) return 0;
+    $codact=$bndismue->getCodact();
+    $codmue=$bndismue->getCodmue();
     $bndismue->delete();
+    self::actualizarUbicacion($codact,$codmue);
     return -1;
   }
 
