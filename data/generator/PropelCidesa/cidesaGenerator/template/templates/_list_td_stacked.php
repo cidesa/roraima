@@ -3,11 +3,11 @@
 /**
  *
  * @package    Roraima
- * @subpackage <?php echo $this->getGeneratedModuleName() ?>
+ * @subpackage vistas
  
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version    SVN: $Id$
- * @copyright  Copyright 2007, Cidesa C.A.
+ * @author     $Author: lhernandez $ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id: _list_td_stacked.php 32815 2009-09-08 16:52:04Z lhernandez $
+ * @copyright  Copyright 2007, Cide S.A.
  *
  */
  ?]

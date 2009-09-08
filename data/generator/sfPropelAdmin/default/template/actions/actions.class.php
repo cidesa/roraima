@@ -6,8 +6,8 @@
  * @package    Roraima
  * @subpackage <?php echo $this->getGeneratedModuleName() ?>
  
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version    SVN: $Id$
+ * @author     $Author: lhernandez $ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id: actions.class.php 32371 2009-09-01 16:06:59Z lhernandez $
  */
 class <?php echo $this->getGeneratedModuleName() ?>Actions extends sfActions
 {
