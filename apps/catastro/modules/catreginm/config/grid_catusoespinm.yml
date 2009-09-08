@@ -20,7 +20,7 @@ opciones:                  # Opciones generales
   nombrecampo:             catusoesp_id
   html:                    [ ]
 3:       # Columna 3
-  titulo:                  Valor Unitario(m2)
+  titulo:                  Cantidad (m2)
   tipo:                    t
   nombrecampo:             valor
   esgrabable:              true
