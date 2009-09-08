@@ -6,9 +6,10 @@
  * @package    Roraima
  * @subpackage <?php echo $this->getGeneratedModuleName() ?>
  
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version    SVN: $Id$
+ * @author     $Author: lhernandez $ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id: actions.class.php 32815 2009-09-08 16:52:04Z lhernandez $
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
+ * @copyright  Copyright 2007, Cide S.A.
  */
 class <?php echo $this->getGeneratedModuleName() ?>Actions extends sfActions
 {

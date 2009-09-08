@@ -4,10 +4,10 @@
  * ##MODULE_NAME## actions.
  *
  * @package    Roraima
- * @subpackage ##MODULE_NAME## 
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version    SVN: $Id$
- * @copyright  Copyright 2007, Cidesa C.A.
+ * @subpackage controlador
+ * @author     $Author: lhernandez $ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id: actions.class.php 32815 2009-09-08 16:52:04Z lhernandez $
+ * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
 class ##MODULE_NAME##Actions extends auto##MODULE_NAME##Actions
