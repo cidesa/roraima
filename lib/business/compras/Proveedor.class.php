@@ -23,9 +23,13 @@ class Proveedor
    * @param $caprovee Object Proveedor-Benficiario-Recaudos a guardar
    * @return void
    */
-    public static function salvarAlmregpro($caprovee)
+    public static function salvarAlmregpro($caprovee,$manprocor)
     {
-      self::Grabar_Proveedor($caprovee);
+      if ($manprocor=='S')
+      {
+        self::BuscarCorrelativoActiv(&$caprovee);
+      }
+      self::Grabar_Proveedor($caprovee,$manprocor);
       self::Grabar_Beneficiario($caprovee);
       self::Grabar_Recaudosproveedor($caprovee);
     }
@@ -38,8 +42,20 @@ class Proveedor
    * @param $caprovee Object Proveedor a guardar
    * @return void
    */
-    public static function Grabar_Proveedor($caprovee){
+    public static function Grabar_Proveedor($caprovee,$manprocor){
     $caprovee->save();
+    if ($manprocor=='S') {
+    	$q= new Criteria();
+    	$dat=CadefartPeer::doSelectOne($q);
+    	if ($dat)
+    	{
+    	  if ($caprovee->getNacpro()=='N')
+    	  {
+    	  	$dat->setCornac($dat->getCornac()+1);
+    	  }else $dat->setCorext($dat->getCorext()+1);
+    	  $dat->save();
+    	}
+    }
 
     }
 
@@ -162,4 +178,27 @@ class Proveedor
           } else return -1;
         }else return -1;
       }
-    }
+
+   public static function BuscarCorrelativoActiv(&$caprovee)
+   {
+     $y= new Criteria();
+     $reg=CadefartPeer::doSelectOne($y);
+     if ($reg)
+     {
+     	if ($caprovee->getNacpro()=='N'){
+     		if ($reg->getCornac()!=0) $r=$reg->getCornac(); else $r=1;
+
+     	}else{
+     		if ($reg->getCorext()!=0) $r=$reg->getCorext();  else $r=1;
+     	}
+     }
+
+     $numero=str_pad($r, 11, '0', STR_PAD_LEFT);
+
+     if ($caprovee->getNacpro()=='N')
+     $codpro="N".substr($numero,1,10);
+     else $codpro="I".substr($numero,1,10);
+
+     $caprovee->setCodpro($codpro);
+   }
+}

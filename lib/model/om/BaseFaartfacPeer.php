@@ -13,7 +13,7 @@ abstract class BaseFaartfacPeer {
 	const CLASS_DEFAULT = 'lib.model.Faartfac';
 
 	
-	const NUM_COLUMNS = 10;
+	const NUM_COLUMNS = 12;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -24,6 +24,9 @@ abstract class BaseFaartfacPeer {
 
 	
 	const CODART = 'faartfac.CODART';
+
+	
+	const DESART = 'faartfac.DESART';
 
 	
 	const CODREF = 'faartfac.CODREF';
@@ -46,7 +49,8 @@ abstract class BaseFaartfacPeer {
 	
 	const CANAJU = 'faartfac.CANAJU';
 
-	
+	const NRONOT = 'faartfac.NRONOT';
+
 	const ID = 'faartfac.ID';
 
 	
@@ -55,18 +59,18 @@ abstract class BaseFaartfacPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Reffac', 'Codart', 'Codref', 'Cantot', 'Precio', 'Monrgo', 'Mondes', 'Totart', 'Canaju', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (FaartfacPeer::REFFAC, FaartfacPeer::CODART, FaartfacPeer::CODREF, FaartfacPeer::CANTOT, FaartfacPeer::PRECIO, FaartfacPeer::MONRGO, FaartfacPeer::MONDES, FaartfacPeer::TOTART, FaartfacPeer::CANAJU, FaartfacPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('reffac', 'codart', 'codref', 'cantot', 'precio', 'monrgo', 'mondes', 'totart', 'canaju', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
+		BasePeer::TYPE_PHPNAME => array ('Reffac', 'Codart', 'Desart', 'Codref', 'Cantot', 'Precio', 'Monrgo', 'Mondes', 'Totart', 'Canaju', 'Nronot', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (FaartfacPeer::REFFAC, FaartfacPeer::CODART, FaartfacPeer::DESART, FaartfacPeer::CODREF, FaartfacPeer::CANTOT, FaartfacPeer::PRECIO, FaartfacPeer::MONRGO, FaartfacPeer::MONDES, FaartfacPeer::TOTART, FaartfacPeer::CANAJU, FaartfacPeer::NRONOT, FaartfacPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('reffac', 'codart', 'desart', 'codref', 'cantot', 'precio', 'monrgo', 'mondes', 'totart', 'canaju', 'nronot', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Reffac' => 0, 'Codart' => 1, 'Codref' => 2, 'Cantot' => 3, 'Precio' => 4, 'Monrgo' => 5, 'Mondes' => 6, 'Totart' => 7, 'Canaju' => 8, 'Id' => 9, ),
-		BasePeer::TYPE_COLNAME => array (FaartfacPeer::REFFAC => 0, FaartfacPeer::CODART => 1, FaartfacPeer::CODREF => 2, FaartfacPeer::CANTOT => 3, FaartfacPeer::PRECIO => 4, FaartfacPeer::MONRGO => 5, FaartfacPeer::MONDES => 6, FaartfacPeer::TOTART => 7, FaartfacPeer::CANAJU => 8, FaartfacPeer::ID => 9, ),
-		BasePeer::TYPE_FIELDNAME => array ('reffac' => 0, 'codart' => 1, 'codref' => 2, 'cantot' => 3, 'precio' => 4, 'monrgo' => 5, 'mondes' => 6, 'totart' => 7, 'canaju' => 8, 'id' => 9, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
+		BasePeer::TYPE_PHPNAME => array ('Reffac' => 0, 'Codart' => 1, 'Desart' => 2, 'Codref' => 3, 'Cantot' => 4, 'Precio' => 5, 'Monrgo' => 6, 'Mondes' => 7, 'Totart' => 8, 'Canaju' => 9, 'Nronot' => 10, 'Id' => 11, ),
+		BasePeer::TYPE_COLNAME => array (FaartfacPeer::REFFAC => 0, FaartfacPeer::CODART => 1, FaartfacPeer::DESART => 2, FaartfacPeer::CODREF => 3, FaartfacPeer::CANTOT => 4, FaartfacPeer::PRECIO => 5, FaartfacPeer::MONRGO => 6, FaartfacPeer::MONDES => 7, FaartfacPeer::TOTART => 8, FaartfacPeer::CANAJU => 9, FaartfacPeer::NRONOT => 10, FaartfacPeer::ID => 11, ),
+		BasePeer::TYPE_FIELDNAME => array ('reffac' => 0, 'codart' => 1, 'desart' => 2, 'codref' => 3, 'cantot' => 4, 'precio' => 5, 'monrgo' => 6, 'mondes' => 7, 'totart' => 8, 'canaju' => 9, 'nronot' => 10, 'id' => 11, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, )
 	);
 
 	
@@ -124,6 +128,8 @@ abstract class BaseFaartfacPeer {
 
 		$criteria->addSelectColumn(FaartfacPeer::CODART);
 
+		$criteria->addSelectColumn(FaartfacPeer::DESART);
+
 		$criteria->addSelectColumn(FaartfacPeer::CODREF);
 
 		$criteria->addSelectColumn(FaartfacPeer::CANTOT);
@@ -137,6 +143,8 @@ abstract class BaseFaartfacPeer {
 		$criteria->addSelectColumn(FaartfacPeer::TOTART);
 
 		$criteria->addSelectColumn(FaartfacPeer::CANAJU);
+
+		$criteria->addSelectColumn(FaartfacPeer::NRONOT);
 
 		$criteria->addSelectColumn(FaartfacPeer::ID);
 

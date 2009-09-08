@@ -247,6 +247,14 @@ $this->Bitacora('Guardo');
     {
       $this->cadefart->setTipdocpre($cadefart['tipdocpre']);
     }
+    if (isset($cadefart['cornac']))
+    {
+      $this->cadefart->setCornac($cadefart['cornac']);
+    }
+    if (isset($cadefart['corext']))
+    {
+      $this->cadefart->setCorext($cadefart['corext']);
+    }
 
   }
 
@@ -286,6 +294,17 @@ $this->Bitacora('Guardo');
     { $this->esta2='1';}
     else { $this->esta2='0';}
 
+   $this->manprocor="";
+    $varemp = $this->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('compras',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
+	     if(array_key_exists('almregpro',$varemp['aplicacion']['compras']['modulos']))
+	       if(array_key_exists('manprocor',$varemp['aplicacion']['compras']['modulos']['almregpro']))
+	       {
+	       	$this->manprocor=$varemp['aplicacion']['compras']['modulos']['almregpro']['manprocor'];
+	       }
   }
 
   /**

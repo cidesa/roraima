@@ -124,6 +124,10 @@ class CadefartMapBuilder {
 
 		$tMap->addColumn('TIPDOCPRE', 'Tipdocpre', 'string', CreoleTypes::VARCHAR, false, 4);
 
+		$tMap->addColumn('CORNAC', 'Cornac', 'int', CreoleTypes::INTEGER, false, null);
+
+		$tMap->addColumn('COREXT', 'Corext', 'int', CreoleTypes::INTEGER, false, null);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

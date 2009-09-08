@@ -29,7 +29,8 @@ opciones:                  # Opciones generales
   titulo:                  Descripción
   tipo:                    a
   nombrecampo:             desart
-  html:                    [size="30x1", readonly=true ]
+  esgrabable:              true
+  html:                    [size="30x1"]
 5:       # Columna 5
   titulo:                  Unidad Medida
   tipo:                    t
@@ -161,3 +162,9 @@ opciones:                  # Opciones generales
   esnumerico:              true
   oculta:                  true
   html:                    [size="10"]
+23:       # Columna 23
+  titulo:                  N° de Entrega
+  tipo:                    t
+  nombrecampo:             nronot
+  esgrabable:              true
+  html:                    [size="10" maxlength=8]

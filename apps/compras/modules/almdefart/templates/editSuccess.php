@@ -24,7 +24,7 @@ array()) ?></h1>
 
 <div id="sf_admin_content">
 <?php include_partial('almdefart/edit_messages', array('cadefart' => $cadefart, 'labels' => $labels)) ?>
-<?php include_partial('almdefart/edit_form', array('cadefart' => $cadefart, 'esta' => $esta, 'esta1' => $esta1, 'esta2' => $esta2, 'labels' => $labels)) ?>
+<?php include_partial('almdefart/edit_form', array('cadefart' => $cadefart, 'esta' => $esta, 'esta1' => $esta1, 'esta2' => $esta2, 'manprocor' => $manprocor, 'labels' => $labels)) ?>
 </div>
 
 <div id="sf_admin_footer">

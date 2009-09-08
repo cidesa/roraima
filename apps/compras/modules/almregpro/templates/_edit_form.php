@@ -897,6 +897,12 @@ if ($caprovee->getNitpro()=='J')  {
   </ul>
 
 <script language="JavaScript" type="text/javascript" >
+  var correlp='<?php echo $manprocor ?>';
+  if (correlp=='S' && $('id').value=='')
+  {
+  	$('caprovee_codpro').value='###########';
+  	$('caprovee_codpro').readOnly=true;
+  }
 
 function validarExistencia(id)
 {

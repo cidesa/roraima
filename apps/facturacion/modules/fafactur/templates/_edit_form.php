@@ -334,6 +334,7 @@ echo $value ? $value : '&nbsp;'
   <?php
  $value = object_input_tag($fafactur, 'getMonto', array (
 	'readonly' => true,
+	'class' => 'grid_txtright',
 	'size' => 10,
 	'control_name' => 'fafactur[monto]',
 
@@ -357,6 +358,7 @@ echo $value ? $value : '&nbsp;'
   <?php
  $value = object_input_tag($fafactur, 'getMonrgo', array (
 	'readonly' => true,
+	'class' => 'grid_txtright',
 	'size' => 10,
 	'control_name' => 'fafactur[monrgo]',
 
@@ -380,6 +382,7 @@ echo $value ? $value : '&nbsp;'
   <?php
  $value = object_input_tag($fafactur, array ('getMondesc',true), array (
 	'size' => 10,
+	'class' => 'grid_txtright',
 	'onKeyPress' => 'return validaDecimal(event)',
 	'onBlur' => 'event.keyCode=13;return formatoDecimal(event,this.id)',
 	'control_name' => 'fafactur[mondesc]',
@@ -403,6 +406,7 @@ echo $value ? $value : '&nbsp;'
   <?php
  $value = object_input_tag($fafactur, array ('getMonfac',true), array (
 	'size' => 10,
+	'class' => 'grid_txtright',
 	'onKeyPress' => 'return validaDecimal(event)',
 	'onBlur' => 'event.keyCode=13;return formatoDecimal(event,this.id)',
 	'control_name' => 'fafactur[monfac]',
@@ -557,6 +561,7 @@ echo $value ? $value : '&nbsp;'
   <?php
  $value = object_input_tag($fafactur, 'getTotdesc', array (
 	'readonly' => true,
+	'class' => 'grid_txtright',
 	'control_name' => 'fafactur[totdesc]',
 
 ));
@@ -612,6 +617,7 @@ echo $value ? $value : '&nbsp;'
   <?php
  $value = object_input_tag($fafactur, 'getTotrec', array (
 	'readonly' => true,
+	'class' => 'grid_txtright',
 	'control_name' => 'fafactur[totrec]',
 
 ));
@@ -650,6 +656,7 @@ echo $value ? $value : '&nbsp;'
   <?php
  $value = object_input_tag($fafactur, 'getMoncan', array (
 	'readonly' => true,
+	'class' => 'grid_txtright',
 	'size' => 10,
 	'control_name' => 'fafactur[moncan]',
 
@@ -671,6 +678,7 @@ echo $value ? $value : '&nbsp;'
   <?php
  $value = object_input_tag($fafactur, 'getMonres', array (
 	'readonly' => true,
+	'class' => 'grid_txtright',
 	'size' => 10,
 	'control_name' => 'fafactur[monres]',
 ));
@@ -692,6 +700,7 @@ echo $value ? $value : '&nbsp;'
  $value = object_input_tag($fafactur, array ('getVuelto',true), array (
 	'size' => 10,
 	'readonly' => true,
+	'class' => 'grid_txtright',
 	'onKeyPress' => 'return validaDecimal(event)',
 	'onBlur' => 'event.keyCode=13;return formatoDecimal(event,this.id)',
 	'control_name' => 'fafactur[vuelto]',
