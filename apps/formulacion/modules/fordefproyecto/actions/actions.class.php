@@ -490,7 +490,7 @@ $this->Bitacora('Guardo');
     elseif ($this->getRequestParameter('par')=='3')
     {
        $var=$this->getRequestParameter('desobj');
-	   $dato=FordefequPeer::getObjetivo($this->getRequestParameter('directriz'));
+	   $dato=eregi_replace("[\n|\r|\n\r]", "", FordefequPeer::getObjetivo($this->getRequestParameter('directriz')));
        $output = '[["'.$var.'","'.$dato.'",""]]';
        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
 
