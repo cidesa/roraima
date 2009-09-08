@@ -293,6 +293,7 @@
   <?php echo select_tag('fordefpry[codequ]', options_for_select($directriz,$fordefpry->getCodequ(),'include_custom=Seleccione Uno'),array('onChange'=> remote_function(array(
     'update'   => 'divSubObjetivo',
     'url'      => 'fordefproyecto/combo?par=3',
+    'script' => true,
     'complete' => 'AjaxJSON(request, json)',
     'with' => "'directriz='+this.value+'&desobj=fordefpry_desobj'"
   ))));?>
