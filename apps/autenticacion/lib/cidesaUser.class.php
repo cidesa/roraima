@@ -1,5 +1,16 @@
 <?php
-
+/**
+ * Clase para la autenticacion de usuarios, puede ser integrada con otros
+ * metodos de autenticacion.
+ *
+ * @package    Roraima
+ * @subpackage autenticacion
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * 
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
+ */
 class cidesaUser extends sfBasicSecurityUser
 {
   public function loginIn($nombre,$passwd,$codemp)
