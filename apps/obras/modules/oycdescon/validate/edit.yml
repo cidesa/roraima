@@ -2,6 +2,12 @@ methods:
   post:
    - "ocregcon{codcon}"
    - "ocregcon{descon}"
+   - "ocregcon{fecini}"
+   - "ocregcon{feccon}"
+   - "ocregcon{codobr}"
+   - "ocregcon{codpro}"
+   - "ocregcon{tipcon}"
+   - "ocregcon{tieejecon}"
 
 names:
   ocregcon{codcon}:
@@ -14,6 +20,34 @@ names:
     required_msg: La Descripcion no puede estar en Blanco.
     validators: DescripcionValidator
 
+  ocregcon{feccon}:
+    required:  Yes
+    required_msg: La Fecha de Contrato no puede estar en Blanco.
+    validators: Fecha2Validator
+
+  ocregcon{fecini}:
+    required:  Yes
+    required_msg: La Fecha Inicio no puede estar en Blanco.
+    validators: Fecha2Validator
+
+  ocregcon{tipcon}:
+    required:  Yes
+    required_msg: El Tipo del Contrato no puede estar en Blanco.
+    validators: TipconValidator
+
+  ocregcon{codobr}:
+    required:  Yes
+    required_msg: El Codigo de la Obra no puede estar en Blanco.
+    validators: obrValidator
+
+  ocregcon{codpro}:
+    required:  Yes
+    required_msg: El Codigo del Proveedor no puede estar en Blanco.
+    validators: provValidator
+
+  ocregcon{tieejecon}:
+    required:  Yes
+    required_msg: Debe seleccionar el Tiempo de Ejecución.
 
 UniqueValidator:
     class: sfPropelUniqueValidator
@@ -30,3 +64,31 @@ DescripcionValidator:
         min_error: La Descripcion no puede tener menos de 2 caracteres
         max:       250
         max_error: La Descripcion no puede pasar mas de 250 caracteres
+
+TipconValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Octipcon
+        column:   codtipcon
+        unique_error:   El Tipo de Contrato no existe.
+
+Fecha2Validator:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha  introducida es inválida
+
+obrValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Ocregobr
+        column:   codobr
+        unique_error:   El Código de la Obra no existe.
+
+provValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Caprovee
+        column:   codpro
+        unique_error:   El Código del Proveedor no existe.
