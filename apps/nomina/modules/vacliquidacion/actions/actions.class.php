@@ -191,7 +191,29 @@ private static $coderror=-1;
 		if (H::BuscarDatos($sqlpor,$arrpor))
 			$porcion=$arrpor[0]['porcion'];
 	###	
-	
+	$tipsalbonvf='';
+ 	$factor=1;
+ 	########SUELDOS OTROS##########
+ 	#SueldoUltimo
+ 	$sql = "select distinct salemp as sueult from npimppresoc a where a.codemp='$codemp'
+ 			and a.fecini=(select max(fecini) from npimppresoc where codemp=a.codemp)";
+ 	if (H::BuscarDatos($sql,$rs))
+ 		$sueult=$rs[0]["sueult"];
+ 	else
+ 		$sueult= 0;
+ 		
+ 	#Sueldo Promedio
+ 	$sql =  "select coalesce(avg(salemp),0) as suepro from (
+ 				select distinct salemp,fecini from npimppresoc where codemp='$codemp' 
+ 				order by fecini desc limit 12
+ 				)a";
+ 	if (H::BuscarDatos($sql,$rs))
+ 		$suepro=$rs[0]["suepro"];
+ 	else
+ 		$suepro= 0;	
+ 
+ 	###############################
+ 
     $ultimosueldo=$suenor;
     $this->sueldonormal=$ultsue;
     $per=array();
