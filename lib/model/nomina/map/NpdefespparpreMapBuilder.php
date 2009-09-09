@@ -62,6 +62,10 @@ class NpdefespparpreMapBuilder {
 
 		$tMap->addColumn('CODPAR', 'Codpar', 'string', CreoleTypes::VARCHAR, false, 32);
 
+		$tMap->addColumn('AGUICOM', 'Aguicom', 'string', CreoleTypes::VARCHAR, false, 1);
+
+		$tMap->addColumn('APARTIRMES', 'Apartirmes', 'int', CreoleTypes::INTEGER, false, null);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

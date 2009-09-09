@@ -83,6 +83,42 @@
 			  <?php  } ?>
 		</th>
 	</tr>
+	<tr>
+		<th>
+			<?php if($labels['npliquidacion_det{salintdia}']!='.:') { ?>
+			  <?php echo label_for('npliquidacion_det[salintdia]', __($labels['npliquidacion_det{salintdia}' ]), 'class="required" Style="text-align:left; width:100px"') ?>
+			  <div class=" ">
+			  <?php if ($sf_request->hasError('npliquidacion_det{salintdia}')): ?>
+			    <?php echo form_error('npliquidacion_det{salintdia}', array('class' => 'form-error-msg')) ?>
+			  <?php endif; }?>
+			
+			  <?php $value = object_input_tag($npliquidacion_det, 'getSalintdia', array (
+			  'readonly' => true,
+			  'control_name' => 'npliquidacion_det[salintdia]',			  
+			)); echo $value ? $value : '&nbsp;' ?>
+			    <?php if($labels['npliquidacion_det{salintdia}']!='.:') { ?>
+			  </div>
+			  <?php  } ?>
+
+		</th>
+		<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+		<th id="thsalintconcol" style="display:none">
+			<?php if($labels['npliquidacion_det{salintdiaconcol}']!='.:') { ?>
+			  <?php echo label_for('npliquidacion_det[salintdiaconcol]', __($labels['npliquidacion_det{salintdiaconcol}' ]), 'class="required" Style="text-align:left; width:100px"') ?>
+			  <div class=" ">
+			  <?php if ($sf_request->hasError('npliquidacion_det{salintdiaconcol}')): ?>
+			    <?php echo form_error('npliquidacion_det{salintdiaconcol}', array('class' => 'form-error-msg')) ?>
+			  <?php endif; }?>
+			
+			  <?php $value = object_input_tag($npliquidacion_det, 'getSalintdiaconcol', array (
+			  'control_name' => 'npliquidacion_det[salintdiaconcol]',
+			  'readonly' => true,			  
+			)); echo $value ? $value : '&nbsp;' ?>
+			    <?php if($labels['npliquidacion_det{salintdiaconcol}']!='.:') { ?>
+			  </div>
+			  <?php  } ?>
+		</th>		
+	</tr>
 </table> 
 </div>
 </fieldset>

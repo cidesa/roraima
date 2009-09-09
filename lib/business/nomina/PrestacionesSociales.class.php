@@ -1162,8 +1162,25 @@ End Function*/
 		  if (Herramientas::BuscarDatos($sqlmeses,&$result))
 		   	$meses = $result[0]['meses'];
 		  else
-		 	$meses = 0;
-
+		 	$meses = 0;	
+			
+		  #BUSCAMOS SI ESTA DEFINIDO LOS PARAMETROS DE AGUINALDOS Y FACTOR
+		  $agui = 'N';
+		  $factor=1;
+		  $sqldef = "select  aguicom,apartirmes,factorbonfinanofra from npdefespparpre where codnom='$codnom'";
+		  if (Herramientas::BuscarDatos($sqldef,&$result))
+		  {
+		  	$agui = $result[0]['aguicom'];
+		  	$mescom = $result[0]['apartirmes'];			
+			if($agui=='S' && intval($meses)>=intval($mescom))
+			{
+				$meses=12;
+			}
+			if(is_numeric($result[0]['factorbonfinanofra']) && $result[0]['factorbonfinanofra']!=0)
+				if($result[0]['factorbonfinanofra']>1)
+					$factor = $result[0]['factorbonfinanofra'];
+			
+		  }		 	
 		  #BUSCAMOS SI COBRÓ UTILIDADES EN EL PERÍODO
           $sqluti = "Select * from NPHisCon where CodEmp='$codemp' and CodCon in (Select CodConUti from NPVacDefGen) and TO_CHAR(FecNom,'YYYY')='$anoegr'";
 		  if (!Herramientas::BuscarDatos($sqluti,&$result))
@@ -1189,7 +1206,7 @@ End Function*/
 				}else
 				{*/
 				    $diasuti = $montouti;
-					$montouti = $montouti * ($ultimosueldo/30);
+					$factor>1 ? $montouti = $montouti * ($ultimosueldo*$factor/365) : $montouti = $montouti * ($ultimosueldo/30);
 					
 				//}
 				#ARREGLO DEL GRID
@@ -1231,7 +1248,7 @@ End Function*/
 				}else
 				{
 					$diasuti = $montouti;
-					$montouti = $montouti * ($ultimosueldo/30);
+					$factor>1 ? $montouti = $montouti * ($ultimosueldo*$factor/365) : $montouti = $montouti * ($ultimosueldo/30);
 				}
 				#ARREGLO DEL GRID
 				$sql = "Select * from NPDefPreLiq where CODNOM='$codnom' AND CodCon='005' and PerDes<='$anoegr' and PerHas>='$anoegr'";
@@ -1252,7 +1269,7 @@ End Function*/
 				$montoinc = 0;				
 				$montoinc = $montoinc * $montouti;
 				$diasuti = $montouti;
-				$montouti = $montouti * ($ultimosueldo/30);
+				$factor>1 ? $montouti = $montouti * ($ultimosueldo*$factor/365) : $montouti = $montouti * ($ultimosueldo/30);
 				#ARREGLO DEL GRID
 				$sql = "Select * from NPDefPreLiq where CODNOM='$codnom' AND CodCon='005' and PerDes<='$anoegr' and PerHas>='$anoegr'";
 				if (Herramientas::BuscarDatos($sql,&$result))

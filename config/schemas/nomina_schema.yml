@@ -6884,7 +6884,12 @@ propel:
       size: 2        
     codpar:
       type: VARCHAR
-      size: 32  
+      size: 32
+    aguicom:
+      type: VARCHAR
+      size: 1      
+    apartirmes:
+      type: INTEGER    
     id:
       type: INTEGER
       required: true
