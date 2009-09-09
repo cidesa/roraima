@@ -46,7 +46,10 @@ generator:
       numdiaant:        { name: Numero de Dias}  
       poranoant:        { name: Por ano Antiguedad, type: checkbox_tag}
       tipsaldiaant:     { name: Tipo Salario Dias Antiguedad}
+      aguicom:          { name: Aguinaldos Completos}
+      apartirmes:       { name: Apartir de(meses)}
       ptipsaldiaant:    { name: .}
+      paguinaldosmes:   { name: .}
       
     list:
       title:          Lista de Parametros para Prestaciones
@@ -62,8 +65,8 @@ generator:
       title:          Edicion de Parametros para Prestaciones
       display:
         NONE:              [codnom]        
-        Dias Adicionales:   [numdiames, numdiamaxano, _ptipsalajunodep]
-        Bono Fin de Año Fraccionado: [_ptipsalbonfinanofra, factorbonfinanofra]
+        Dias para Vacaciones:   [numdiames, numdiamaxano, _ptipsalajunodep]
+        Bono Fin de Año Fraccionado: [_ptipsalbonfinanofra, factorbonfinanofra, _paguinaldosmes]
         Bono Vacacional Fraccionado: [_ptipsalbonvacfra, factorbonvacfra]
         Liquidacion de Prestaciones: [descripclau, codpar, codret, _ptipsaldiaant]
         

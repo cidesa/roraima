@@ -91,7 +91,7 @@
  </th>
   </table>
 
-<strong>Ultimo Sueldo:</strong>&nbsp;
+<strong>Sueldo Normal:</strong>&nbsp;
   <?php echo input_tag('nphojint_ultsue',$suenor, array (
   'size' => 13,
   'readonly'  =>  $nphojint->getId()!='' ? true : false ,  
@@ -106,7 +106,7 @@
 			  ))
 ));  ?>
 &nbsp;&nbsp;&nbsp;
-<strong>Salario Integral:</strong>&nbsp;
+<strong>Salario Integral:</strong>&nbsp;&nbsp;&nbsp;&nbsp;
   <?php echo input_tag('nphojint_suenor',$ultsue, array (
   'size' => 13,
   'readonly'  =>  $nphojint->getId()!='' ? true : false ,  
@@ -119,6 +119,38 @@
 			  'condition' => "$('nphojint_codemp').value != '' && $('id').value == ''",
   			  'with' => "'ajax=2&cajcodemp='+$(nphojint_codemp).value+'&cajultsue='+$(nphojint_ultsue).value+'&cajsuenor='+this.value"
 			  ))
+));  ?>
+
+
+<br>
+<br>
+
+<strong>Ultimo Sueldo:</strong>&nbsp;&nbsp;
+  <?php echo input_tag('nphojint_sueult',$sueult, array (
+  'size' => 13,
+  'readonly'  =>  true,  
+  'name' => 'nphojint_sueult',
+  'maxlength' => 15,
+  
+));  ?>
+&nbsp;&nbsp;&nbsp;
+<strong>Salario Promedio:</strong>&nbsp;
+  <?php echo input_tag('nphojint_suepro',$suepro, array (
+  'size' => 13,
+  'readonly'  =>  true,  
+  'name' => 'nphojint_suepro',
+  'maxlength' => 15,
+
+));  ?>
+
+&nbsp;&nbsp;&nbsp;
+<strong>Salario Diario:</strong>&nbsp;
+  <?php echo input_tag('nphojint_suedia',$suedia, array (
+  'size' => 13,
+  'readonly'  =>  true,  
+  'name' => 'nphojint_suedia',
+  'maxlength' => 15,
+
 ));  ?>
 
 </fieldset>

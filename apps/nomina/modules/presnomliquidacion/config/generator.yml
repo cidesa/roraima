@@ -5,7 +5,7 @@ generator:
     theme:            cidesaGenerator
 
     fields:
-      display: [nomemp, sue311296, sue180697, ultimosueldo, salarioint, fecing, feccor, fecegr, diaefe, mesefe, anoefe, diarn, mesrn, anorn, diara, mesra, anora, codret]
+      display: [nomemp, sue311296, sue180697, ultimosueldo, salarioint, fecing, feccor, fecegr, diaefe, mesefe, anoefe, diarn, mesrn, anorn, diara, mesra, anora, codret, salintdia, salintdiaconcol]
       codemp:
         name: Código Empleado
         msj_error: El numero del expediente es necesario
@@ -66,6 +66,10 @@ generator:
         name: .
       codret:
         name: Tipo de Retiro    
+      salintdia:
+        name: Salario Diario
+      salintdiaconcol:
+        name: Salario Diario Convencion Colectiva
 
     edit:
       title:  Liquidación de Prestaciones

@@ -200,6 +200,11 @@ class nomdefespparpreActions extends autonomdefespparpreActions
    */
   public function updateError()
   {
+  	$this->arrsal=array('UD'=>'Ultimo Devengado',
+                       'SP'=>'Salario Promedio',
+					   'SI'=>'Salario Integral',
+					   'SN'=>'Salario Normal');
+   $this->params=array('arrsal'=>$this->arrsal);
     //$this->configGrid();
 
     //$grid = Herramientas::CargarDatosGrid($this,$this->obj);
@@ -220,6 +225,7 @@ class nomdefespparpreActions extends autonomdefespparpreActions
   public function saving($clasemodelo)
   {
   	$clasemodelo->getPoranoant()==1 ? $clasemodelo->setPoranoant('S') : $clasemodelo->setPoranoant('N');
+	$clasemodelo->getAguicom()==1 ? $clasemodelo->setAguicom('S') : $clasemodelo->setAguicom('N');
     return parent::saving($clasemodelo);
   }
 

@@ -60,6 +60,8 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
     $perdeduc=array();
     $arr=array();
 	$totarr=0;
+	$this->salintdia = 0;
+	$this->salintdiaconcol = 0;
 	if(!$estaliquidado)
 	{	
     	$sql="select 1 as orden,
@@ -200,8 +202,18 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 	        $i=0;
 			$j=0;
 			$cont=0;
+			$factor=1;
 			$totarr=count($arr); 
 			$aguinaldos = PrestacionesSociales::AguinaldosFracionados($codnom,$codemp,$fecegr,$salariointegral,$totarr,$estaliquidado);
+			$sqldefesp = "select * from npdefespparpre where codnom='$codnom'";			
+			if (H::BuscarDatos($sqldefesp,$arrdefesp))
+			  if(is_numeric($arrdefesp[0]['factorbonfinanofra']) && $arrdefesp[0]['factorbonfinanofra']!=0)
+				$factor=$arrdefesp[0]['factorbonfinanofra'];
+			
+			$this->salintdia = $salariointegral/30;
+			if($factor>1)
+				$this->salintdiaconcol = ($salariointegral*$factor)/365;	
+			
 			$arr = array_merge($arr,$aguinaldos);
 	        while ($cont<count($arr))
 	        {
@@ -931,13 +943,16 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 						  toAjaxUpdater('divgriddeduc',3,getUrlModulo()+'ajax','3');";
 					
 				}
-				$js.="$('npliquidacion_det_salarioint').readOnly=false;";			
+				$js.="$('npliquidacion_det_salarioint').readOnly=false;";
+				$this->salintdiaconcol!=0 ? $js.="$('thsalintconcol').show();" : $js.="$('thsalintconcol').hide();";
+											
 	        	$output = '[["npliquidacion_det_fecing","'.$fecing.'",""],["npliquidacion_det_feccor","'.$feccor.'",""],["npliquidacion_det_fecegr","'.$fecegr.'",""],'.
 					  '["npliquidacion_det_diaefe","'.$diaefec.'",""],["npliquidacion_det_mesefe","'.$mesefec.'",""],["npliquidacion_det_anoefe","'.$anoefec.'",""],'.
 					  '["npliquidacion_det_diarn","'.$diaact.'",""],["npliquidacion_det_mesrn","'.$mesact.'",""],["npliquidacion_det_anorn","'.$anoact.'",""],'.
 					  '["npliquidacion_det_diara","'.$diaant.'",""],["npliquidacion_det_mesra","'.$mesant.'",""],["npliquidacion_det_anora","'.$anoant.'",""],'.
 	  				  '["npliquidacion_det_sue311296","'.H::FormatoMonto($sue311296).'",""],["npliquidacion_det_sue180697","'.H::FormatoMonto($sue180697).'",""],'.
 					  '["npliquidacion_det_ultimosueldo","'.H::FormatoMonto($ultimosueldo).'",""],["npliquidacion_det_salarioint","'.H::FormatoMonto($salariointegral).'",""],'.
+					  '["npliquidacion_det_salintdia","'.H::FormatoMonto($this->salintdia).'",""],["npliquidacion_det_salintdiaconcol","'.H::FormatoMonto($this->salintdiaconcol).'",""],'.
 				      '["npliquidacion_det_nomemp","'.$nomemp.'",""],["javascript","'.$js.'",""]]';			
 			}else
 			{

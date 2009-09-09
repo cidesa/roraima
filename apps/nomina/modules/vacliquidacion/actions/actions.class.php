@@ -79,6 +79,9 @@ private static $coderror=-1;
 		       $this->configGrid();
 		       $ultimosueldo=0;
 		       $sueldonormal=0;
+			   $sueult=0;
+		       $suepro=0;
+			   $suedia=0;
 		       $javascript="$('nphojint_codemp').value='';alert('El Empleado ya fue Liquidado');$('nphojint_codemp').focus();";
 		   }else
 		   {
@@ -96,6 +99,9 @@ private static $coderror=-1;
 		       }
 		       $this->configGrid($codigo,"S",&$ultimosueldo,&$sal1,&$sal2);
 		       $sueldonormal=$this->sueldonormal;
+			   $sueult=$this->sueult;
+			   $suepro=$this->suepro;
+			   $suedia=$this->suedia;
 		       $javascript="";
 		   }
 	   }
@@ -106,10 +112,13 @@ private static $coderror=-1;
 	       $this->configGrid();
 	       $ultimosueldo=0;
 	       $sueldonormal=0;
+		   $sueult=0;
+	       $suepro=0;
+		   $suedia=0;
 	       $javascript="alert('El Empleado no Existe')";
 	   }
 
-	   $output = '[["'.$cajnomemp.'","'.$nomemp.'",""], ["'.$cajfecing.'","'.$fecing.'",""], ["'.$cajfecret.'","'.$fecret.'",""],["'.$cajultsue.'","'.$sueldonormal.'",""],["'.$cajsuenor.'","'.$ultimosueldo.'",""],["javascript","'.$javascript.'",""] ]';
+	   $output = '[["'.$cajnomemp.'","'.$nomemp.'",""], ["'.$cajfecing.'","'.$fecing.'",""], ["'.$cajfecret.'","'.$fecret.'",""],["'.$cajultsue.'","'.$sueldonormal.'",""],["'.$cajsuenor.'","'.$ultimosueldo.'",""],["nphojint_sueult","'.$sueult.'",""],["nphojint_suepro","'.$suepro.'",""],["nphojint_suedia","'.$suedia.'",""],["javascript","'.$javascript.'",""] ]';
     }
     if ($this->getRequestParameter('ajax')=='2')
     {
@@ -131,14 +140,20 @@ private static $coderror=-1;
 	   if ($datos)
 	   {
 
-	       $this->configGrid($cajcodemp,"S",&$ultimosueldo,&$cajultsue,&$cajsuenor);
+	       $this->configGrid($cajcodemp,"S",&$ultimosueldo,&$cajultsue,&$cajsuenor,'SI');
 	       $sueldonormal=$this->sueldonormal;
+		   $sueult=$this->sueult;
+		   $suepro=$this->suepro;
+		   $suedia=$this->suedia;
 	   }
 	   else
        {
 	       $this->configGrid();
 	       $ultimosueldo=0;
 	       $sueldonormal=0;
+		   $sueult=0;
+		   $suepro=0;
+		   $suedia=0;
 	   }
 
 	   $output = '[["javascritp","",""]]';
@@ -155,7 +170,7 @@ private static $coderror=-1;
    * los datos del grid.
    *
    */
-  public function configGrid($codemp="", $nuevo="",&$ultimosueldo=0,&$ultsue=0,&$suenor=0)
+  public function configGrid($codemp="", $nuevo="",&$ultimosueldo=0,&$ultsue=0,&$suenor=0,$sal='')
   {
   	//PARA LA PORCION ADICIONAL
 		$codnom='';
@@ -190,6 +205,13 @@ private static $coderror=-1;
       //  H::PrintR($arr);
         $i=0;
         $cont=0;
+		$sqlparam="select * from npdefespparpre  where codnom='$codnom'";
+		$factor=1;
+		if (H::BuscarDatos($sqlparam,$arrparam))
+        {
+        	$factor = $arrparam[0]['factorbonvacfra'];
+			$tipsalbonvf = $arrparam[0]['tipsalbonvacfra'];
+		}		
         while ($cont<count($arr))
         {
           if ((H::tofloat($arr[$cont]['corresponde'])-H::tofloat($arr[$cont]['disfrutados']))!=0)
@@ -211,10 +233,27 @@ private static $coderror=-1;
            if($suenor==0)
             $salint=$arr[$cont]['salint']+$porcion;
            else
-            $salint=$suenor+$porcion;
+            $salint=$suenor+$porcion;          
+		   
+		   if($sal=='')
+		   {
+			   if($tipsalbonvf=='UD')
+			   	   $salario=$suenor;
+			   elseif($tipsalbonvf=='SP')
+			   	   $salario=$suepro;
+			   elseif($tipsalbonvf=='SN')
+			   	   $salario=$salnor;	   
+			   else	   
+			   	   $salario=$salint;	
+		   }else
+		   {
+		   	   $salario=$salint;
+		   }
 
-           $monto=($per[$i]['diadis']*($salnor/30))+($per[$i]['diasbono']*($salint/30));
-
+           if($factor>1)
+		      $monto=($per[$i]['diadis']*($salnor/30))+($per[$i]['diasbono']*(($salario*$factor)/365));
+           else	
+		      $monto=($per[$i]['diadis']*($salnor/30))+($per[$i]['diasbono']*($salario/30));
 
            $per[$i]['monto']=number_format($monto,2,',','.');
            $per[$i]['id']=9;
@@ -241,14 +280,27 @@ private static $coderror=-1;
           $cont++;
         }//fin del while
         //obtener el salario integral del ultimo registro del arreglo ya que ese es el ultimo sueldo del empleado
-        if($suenor==0)
-        	$ultimosueldo=number_format($arr[$i-1]['salint']+$porcion,2,',','.');
-        else
-        	$ultimosueldo=number_format($suenor+porcion,2,',','.');
+		if($factor>1){
+			if($suenor==0)
+	        	#$ultimosueldo=number_format(((($arr[$i-1]['salint']+$porcion)*$factor)/365)*30,2,',','.');
+	        	$ultimosueldo=$arr[$i-1]['salint']+$porcion;
+	        else
+			    #$ultimosueldo=number_format(((($suenor+$porcion)*$factor)/365)*30,2,',','.');	
+	        	$ultimosueldo=$suenor+$porcion;	
+		}
+		else{
+			if($suenor==0)
+			    #$ultimosueldo=number_format($arr[$i-1]['salint']+$porcion,2,',','.')
+	        	$ultimosueldo=$arr[$i-1]['salint']+$porcion;
+	        else
+			    #$ultimosueldo=number_format($suenor+$porcion,2,',','.');
+	        	$ultimosueldo=$suenor+$porcion;
+		}
+        
         if($ultsue==0)
-        	$this->sueldonormal=number_format($arr[$i-1]['salnor'],2,',','.');
+        	$this->sueldonormal=$arr[$i-1]['salnor'];
         else
-        	$this->sueldonormal=number_format($ultsue,2,',','.');
+        	$this->sueldonormal=$ultsue;
 					
       }
     }
@@ -264,11 +316,27 @@ private static $coderror=-1;
 	    	$ultimosueldo=$per[0]->getUltsue();
 	    else
 	    	$ultimosueldo=0;
-		*/
-		$ultimosueldo=H::FormatoMonto($ultimosueldo);
-		$this->sueldonormal=H::FormatoMonto($this->sueldonormal);
-    }
+		*/		
+    }	
 
+	if($factor>1)
+	{
+		if($tipsalbonvf=='UD')
+	   	   $this->suedia = H::FormatoMonto((($sueult*$factor)/365));
+		elseif($tipsalbonvf=='SP')
+	   	   $this->suedia = H::FormatoMonto((($suepro*$factor)/365));
+	    elseif($tipsalbonvf=='SN')
+	   	   $this->suedia = H::FormatoMonto((($this->sueldonormal*$factor)/365));
+	    else
+		   $this->suedia = H::FormatoMonto((($ultimosueldo*$factor)/365));	
+	}else
+	{
+		$this->suedia = H::FormatoMonto(0);	
+	}
+	$this->sueult = H::FormatoMonto($sueult);
+	$this->suepro = H::FormatoMonto($suepro);
+	$this->sueldonormal=H::FormatoMonto($this->sueldonormal);
+	$ultimosueldo=H::FormatoMonto($ultimosueldo);
 
     $opciones = new OpcionesGrid();
     $opciones->setEliminar(false);
@@ -410,6 +478,8 @@ private static $coderror=-1;
       $this->configGrid($this->getRequestParameter('nphojint[codemp]'),"S",&$ultimosueldo,&$sal2,&$sal1);
       $this->ultsue=$ultimosueldo;
       $this->suenor=$this->sueldonormal;
+	  #$this->sueult=$this->sueult;
+	  #$this->suepro=$this->suepro;
     }
     else
     {
@@ -422,9 +492,10 @@ private static $coderror=-1;
       $this->configGrid($nphojint->getCodemp(),"N",&$ultimosueldo,&$sal1,&$sal2);
       $this->ultsue=$ultimosueldo;
       $this->suenor=$this->sueldonormal;
+	  #$this->sueult=$this->sueult;
+	  #$this->suepro=$this->suepro;
       $this->forward404Unless($nphojint);
     }
-
     return $nphojint;
   }
    /**
