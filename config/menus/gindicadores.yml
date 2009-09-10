@@ -15,10 +15,10 @@ gindicadores:
   menu:
     Definiciones y Registros:
       Registro de Indicadores:                          gindregind
-      Programación Anual:                               gindproanu
+      Registro de Programación:                         gindproanu
       Registro de Ejecución:                            gindregeje
-      Cierre de Programación:                              gindciepro
-      Cierre de Trimestre:                              gindcietri
+      Cierre de Programación:                           gindciepro
+      Cierre de Ejecución:                              gindcietri
     Reportes:
       Listados:
-      Listado Indicadores:                      catdefsenvia.php
+      Listado Indicadores:                              catdefsenvia.php

@@ -15,7 +15,7 @@ generator:
       numnum:      { name: ., params: readonly=true style=border:none}
 
     edit:
-      title:           Cierre de Trimestre
+      title:           Cierre de Ejecución
       display:
         Datos Cierre:  [_panoindg, _prevanoindg, _pnumtrim, numnum, _pcierre]
       actions:

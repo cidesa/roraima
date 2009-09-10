@@ -14,7 +14,7 @@ generator:
       unidades:     { name: Unidades}
         
     list:
-      title:          Listado de Indicadores
+      title:          Listado de Años ,Revision y Trimestres 
       filters:        [anoindg, revanoindg, numtrim ]    
       display:        [=anoindg, revanoindg, numtrim ]
       max_pers:           10

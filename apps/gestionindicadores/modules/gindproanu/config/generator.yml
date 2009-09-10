@@ -19,7 +19,7 @@ generator:
       botoncerrar:  { name: .}
         
     list:
-      title:          Listado de la Programacion Anual
+      title:          Listado de Registro de la Programación
       filters:        [numindg, anoindg, revanoindg]    
       display:        [=numindg, nomindg, numuni, nomuni, anoindg, revanoindg ]
       max_pers:           10
@@ -31,7 +31,7 @@ generator:
         _create:          ~  
 
     edit:
-      title:           Programación Anual
+      title:           Registro de Programación
       display:
         Datos Indicador:  [_pnumuni, _pnumindg, anoindg, revanoindg, _gridtrimestre ]
       fields:
