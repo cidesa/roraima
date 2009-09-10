@@ -7,7 +7,7 @@
  * @subpackage fordefaccesp
  * @author     $Author$ <desarrollo@cidesa.com.ve>
  * @version SVN: $Id$
- * 
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -17,7 +17,7 @@ class fordefaccespActions extends autofordefaccespActions
 	private $coderror =-1;
 
 	/**
-   * Actualiza la informacion que viene de la vista 
+   * Actualiza la informacion que viene de la vista
    * luego de un get/post en el objeto principal del modelo base del formulario.
    *
    */
@@ -396,13 +396,13 @@ $this->Bitacora('Guardo');
     $filtros_tablas=array('');//arreglo donde mando los filtros de las clases
     $filtros_variales=array('');//arreglo donde mando los parametros de la funcion
     $campos_retornados=array('codest','desest');// arreglos donde me traigo el nombre y el codigo
-    $this->estados = Herramientas::Cargarcombo($tablas,$filtros_tablas,$filtros_variales,$campos_retornados);
+    $estados = Herramientas::Cargarcombo($tablas,$filtros_tablas,$filtros_variales,$campos_retornados);
 
-	foreach ($this->estados as $est => $estv)
+	foreach ($estados as $est => $estv)
 	{
-		$this->estados[$est] = ucfirst($estv);
+		$estados[$est] = ucfirst($estv);
 	}
-    return $this->estados;
+    return $estados;
 
   }
 
@@ -480,9 +480,9 @@ $this->Bitacora('Guardo');
     }
   }
 
-  
-  
-  
+
+
+
   /**
    *
    * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
