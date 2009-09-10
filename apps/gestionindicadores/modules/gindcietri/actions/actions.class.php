@@ -27,6 +27,7 @@ class gindcietriActions extends autogindcietriActions
   {
   	  $c = new Criteria();
 	  $c->add(GiproanuPeer::ANOINDG,$this->giproanu->getAnoindg());
+	  $c->addAscendingOrderByColumn(GiproanuPeer::NUMTRIM);
 	  $obj = GiproanuPeer::doSelect($c);
 	  $r=array();
 	  if(!$obj)
@@ -43,6 +44,7 @@ class gindcietriActions extends autogindcietriActions
   {
   	  $c = new Criteria();
 	  $c->add(GiproanuPeer::ANOINDG,$this->giproanu->getAnoindg());
+	  $c->addAscendingOrderByColumn(GiproanuPeer::REVANOINDG);
 	  $obj = GiproanuPeer::doSelect($c);
 	  $r=array();
 	  if(!$obj)
@@ -133,6 +135,7 @@ class gindcietriActions extends autogindcietriActions
         $c = new Criteria();
 		$c->add(GiproanuPeer::ANOINDG,$codigo);
 		$c->add(GiproanuPeer::ESTTRIM,'A');
+		$c->addAscendingOrderByColumn(GiproanuPeer::REVANOINDG);
 		$per = GiproanuPeer::doSelect($c);
 		$arrrev=array(''=>'Seleccione...');
 		foreach($per as $r)
@@ -175,6 +178,7 @@ class gindcietriActions extends autogindcietriActions
 		$c->add(GiproanuPeer::ANOINDG,$ano);
 		$c->add(GiproanuPeer::REVANOINDG,$codigo);
 		$c->add(GiproanuPeer::ESTTRIM,'A');
+		$c->addAscendingOrderByColumn(GiproanuPeer::NUMTRIM);
 		$per = GiproanuPeer::doSelect($c);
 		foreach($per as $r)
 		{

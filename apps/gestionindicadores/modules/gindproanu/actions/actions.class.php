@@ -270,12 +270,16 @@ public function configGrid($nind='',$ano='',$rev='')
 		$c->add(GiproanuPeer::REVANOINDG,$rev);
 		$per = GiproanuPeer::doSelectOne($c);
 		if($per)
-		{
+		{			
 			$est = $per->getEstprog();
 			if($est=='C')
 			{
 				$js=" $('giproanu_revanoindg').value='';
 					  alert('La Programacion esta cerrada para la Revision $rev  Año $ano  ');";
+			}else
+			{
+				$js=" $('giproanu_revanoindg').value='';					  
+					  alert('La Programacion ya fue registrada para la Revision $rev y el Año $ano, consulte desde la lista ');";
 			}
 		} 
 
