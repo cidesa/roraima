@@ -396,13 +396,13 @@ $this->Bitacora('Guardo');
     $filtros_tablas=array('');//arreglo donde mando los filtros de las clases
     $filtros_variales=array('');//arreglo donde mando los parametros de la funcion
     $campos_retornados=array('codest','desest');// arreglos donde me traigo el nombre y el codigo
-    $this->estados=array();
-    $this->estados = Herramientas::Cargarcombo($tablas,$filtros_tablas,$filtros_variales,$campos_retornados);
+    $esta= Herramientas::Cargarcombo($tablas,$filtros_tablas,$filtros_variales,$campos_retornados);
 
-	foreach ($this->estados as $est => $estv)
+	foreach ($esta as $est => $estv)
 	{
-		$this->estados[$est] = ucfirst($estv);
+		$esta[$est] = ucfirst($estv);
 	}
+	$this->estados=$esta;
     return $this->estados;
 
   }
