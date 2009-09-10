@@ -7,7 +7,7 @@
  * @subpackage confincomgen
  * @author     $Author$ <desarrollo@cidesa.com.ve>
  * @version SVN: $Id$
- * 
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -173,7 +173,7 @@ $this->Bitacora('Guardo');
   }
 
   /**
-   * Actualiza la informacion que viene de la vista 
+   * Actualiza la informacion que viene de la vista
    * luego de un get/post en el objeto principal del modelo base del formulario.
    *
    */
@@ -367,7 +367,7 @@ $this->Bitacora('Guardo');
     $opciones->setAncho(870);
     $opciones->setAnchoGrid(900);
     $opciones->setTitulo('Asientos Contable');
-	  $opciones->setFilas(50);
+	  $opciones->setFilas(150);
     $opciones->setHTMLTotalFilas(' ');
 
     $col1 = new Columna('Código de Cuenta');
@@ -575,9 +575,9 @@ $this->Bitacora('Guardo');
     return sfView::SUCCESS;
   }
 
-  
-  
-  
+
+
+
   /**
    *
    * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
