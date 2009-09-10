@@ -6,9 +6,9 @@
  *
  * @package    Roraima
  * @subpackage lib
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
+ * @author     $Author: jlobaton $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: Herramientas.class.php 32959 2009-09-10 16:47:51Z jlobaton $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -540,6 +540,10 @@ public static function CargarDatosGrid(&$form,$obj,$arreglo = false)
 
     }else{
 
+     if(stristr($conf, '/') === FALSE){
+       $conf = sfConfig::get('sf_app_module_dir').'/'.sfContext::getInstance()->getModuleName().'/config/'.$conf;
+     }
+
     $confgrid = sfYaml::load($conf.'.yml');
 
     $opciones =  new OpcionesGrid();
@@ -789,6 +793,7 @@ public static function CargarDatosGrid(&$form,$obj,$arreglo = false)
 
   public static function getX_vacio($campos=array(), $tabla, $result, $data=array())
     {
+	if (!empty($data[0]) or !empty($data)) {
         if (is_array($campos))
         {
           if (!empty($campos[0]) && (!empty($data[0])))
@@ -823,6 +828,8 @@ public static function CargarDatosGrid(&$form,$obj,$arreglo = false)
          {
            return '';
          }
+	}
+	      return '';
       }//end function
 
 
@@ -1908,17 +1915,17 @@ public static function obtenerDiaMesOAno($fecha,$formato,$dmoa)
   public static function BuscarDatos2($sql,&$output)
   {
     $con = Propel::getConnection(EmpresaUserPeer::DATABASE_NAME);
-     $stmt = $con->createStatement();
+    $stmt = $con->createStatement();
     $rs = $stmt->executeQuery($sql, ResultSet::FETCHMODE_ASSOC);
 
-     $output = array();
- 
-     while ($rs->next())
-     {
-       $fila = $rs->getRow();
+    $output = array();
+
+    while ($rs->next())
+    {
+      $fila = $rs->getRow();
       $output[] = $fila;
-     }
-     if (count($output)>0) return true; else return false;
+    }
+    if (count($output)>0) return true; else return false;
 
   }
 
@@ -2044,23 +2051,7 @@ public static function obtenerDiaMesOAno($fecha,$formato,$dmoa)
       return -1;
   }
 
-  public static function transformarFecha($fecha)
-  {
-      $dateFormat = new sfDateFormat($this->getUser()->getCulture());
-                          if (!is_array($fecha))
-      {
-        $value = $dateFormat->format($fecha, 'i', $dateFormat->getInputPattern('d'));
-      }
-      else
-      {
-        $value_array = $fecha;
-        $value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-      }
-
-      return $value;
-  }
-
-  public static function ObtenerMesenLetras($mes)
+    public static function ObtenerMesenLetras($mes)
   {
   			if($mes=='01')  return $mes='Enero';
 			if($mes=='02')  return $mes='Febrero';
@@ -2075,14 +2066,95 @@ public static function obtenerDiaMesOAno($fecha,$formato,$dmoa)
 			if($mes=='11')  return $mes='Noviembre';
 			if($mes=='12')  return $mes='Diciembre';
   }
-  
-  
+
   public static function AddDaysDate($orgDate,$day){
     $cd = strtotime($orgDate);
     $retDAY = date('Y-m-d H:i:s', mktime(date('H',$cd),date('i',$cd),date('s',$cd),date('m',$cd),date('d',$cd)+$day,date('Y',$cd)));
     return $retDAY;
-  }   
-  
+  }
+
+  public static function AddDaysDateVE($fecini,$dias){
+
+  	$fecha = explode("/",$fecini);
+  	$dyh = getdate(mktime(0, 0, 0, $fecha[1], $fecha[0], $fecha[2]) + 24*60*60*$dias);
+  	$fecnue = str_pad($dyh['mday'], 2,'0',STR_PAD_LEFT)."/".str_pad($dyh['mon'], 2,'0',STR_PAD_LEFT)."/".$dyh['year'];
+  	return($fecnue);
+
+  }
+
+  public static function buscarCodigoHijo($campo, $tabla, $data) {
+	if (!empty($data)){
+		eval ('$field = '.ucfirst(strtolower($tabla)).'Peer::'.strtoupper($campo).';');
+		$c = new Criteria();
+		$sql = "$campo LIKE '$data%' AND length($campo) > length('$data')";
+		$c->add($field, $sql, Criteria::CUSTOM);
+		eval ('$registro = '.ucfirst(strtolower($tabla)).'Peer::doSelectone($c);');
+    	if ($registro)
+    	{
+    		return true;
+    	}
+    	else
+    	{
+    		return false;
+     	}
+   	}
+  }
+
+  public static function obtenerCodigoPadre($campo, $tabla, $data)
+  {
+   if (!empty($data)){
+
+   	$arraydata = split('-',$data);
+   	$data = '';
+   	for($i=0;$i<(count($arraydata)-1);$i++){
+   		$data .= $arraydata[$i];
+   		if($i!=(count($arraydata)-2)) $data .= '-';
+   	}
+
+    eval ('$field = '.ucfirst(strtolower($tabla)).'Peer::'.strtoupper($campo).';');
+
+     $c = new Criteria();
+     $c->add($field,$data);
+     eval ('$registro = '.ucfirst(strtolower($tabla)).'Peer::doSelectOne($c);');
+     if ($registro)
+     {
+     	eval ('$codpadre = $registro->get'.ucfirst(strtolower($campo)).'();');
+     }
+     else
+     {
+     	$codpadre='';
+     }
+
+     return $codpadre;
+    } return '';
+  }
+
+    public static function Monto_disponible_ejecucionP($ano,$codigo,$perpre) {
+    	$mondis=0;
+      	$result=array();
+
+      	if ($perpre=='00'){
+      		$fecini='01';
+      		$feccie='12';
+      	} else {
+      		$fecini=$perpre;
+      		$feccie=$perpre;
+      	}
+
+      	$sql="select sum(monasi +
+      	coalesce(obtener_ejecucion(rtrim(codpre),'".$fecini."','".$feccie."','".$ano."','TRA'),0) +
+      	coalesce(obtener_ejecucion(rtrim(codpre),'".$fecini."','".$feccie."','".$ano."','ADI'),0) -
+      	coalesce(obtener_ejecucion(rtrim(codpre),'".$fecini."','".$feccie."','".$ano."','TRN'),0) -
+      	coalesce(obtener_ejecucion(rtrim(codpre),'".$fecini."','".$feccie."','".$ano."','DIS'),0) -
+      	coalesce(obtener_ejecucion(rtrim(codpre),'".$fecini."','".$feccie."','".$ano."','PRC'),0)) as mondis
+      	from cpasiini where codpre like '".$codigo."' and anopre='".$ano."' and perpre='".$perpre."';";
+      	if (Herramientas::BuscarDatos($sql,&$result)) {
+    		if ($result[0]['mondis']!='') {
+      			$mondis=$result[0]['mondis'];
+		    }
+      	}
+    	return $mondis;
+  	}
 }
 
 class H extends Herramientas
