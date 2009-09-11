@@ -80,49 +80,7 @@ class almforentActions extends autoalmforentActions
   }
 
 
-  public function deleteCaforent($Caforent)
-  {
     
-    $coderr = -1;
-        
-    // habilitar la siguiente línea si se usa grid
-    //$grid=Herramientas::CargarDatosGrid($this,$this->obj);
-    
-    try {
-
-      // Modificar la siguiente línea para llamar al método
-      // correcto en la clase del negocio, ej:
-      // $coderr = Compras::EliminarAlmaujoc($caajuoc,$grid);
-      
-      // OJO ----> Eliminar esta linea al modificar este método
-      parent::deleteCaforent($Caforent);
-      
-      if(is_array($coderr)){
-        foreach ($coderror as $ERR){
-          $err = Herramientas::obtenerMensajeError($ERR);
-          $this->getRequest()->setError('',$err);
-          $this->ActualizarGrid();
-        }
-      }elseif($coderr!=-1){
-        $err = Herramientas::obtenerMensajeError($coderror);
-        $this->getRequest()->setError('',$err);
-        $this->ActualizarGrid();
-      }
-      
-        
-    } catch (Exception $ex) {
-
-      $coderror = 0;
-      $err = Herramientas::obtenerMensajeError($coderror);
-      $this->getRequest()->setError('',$err);
-      
-    }
-    
-  }
-  
-  
-  
-  
   /**
    *
    * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
