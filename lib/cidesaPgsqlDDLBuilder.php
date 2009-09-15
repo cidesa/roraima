@@ -6,8 +6,8 @@
  *
  * @package    Roraima
  * @subpackage lib
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
+ * @author     $Author: lhernandez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: cidesaPgsqlDDLBuilder.php 33085 2009-09-15 15:14:30Z lhernandez $
  * 
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -107,11 +107,11 @@ class cidesaPgsqlDDLBuilder extends PgsqlDDLBuilder {
    *
    * @see        parent::addDropStatement()
    */
-  protected function addDropStatements(&$script)
+  protected function addDropStatements(&$script, $exist=true)
   {
     $table = $this->getTable();
     $platform = $this->getPlatform();
-
+    if($exist){
     $script .= "
 DROP TABLE IF EXISTS ".$this->quoteIdentifier($table->getName())." CASCADE;
 ";
@@ -120,7 +120,19 @@ DROP TABLE IF EXISTS ".$this->quoteIdentifier($table->getName())." CASCADE;
 DROP SEQUENCE IF EXISTS ".$this->quoteIdentifier(strtolower($table->getSequenceName())).";
 ";
     }
-  }
+    
+    }else{
+    $script .= "
+DROP TABLE ".$this->quoteIdentifier($table->getName())." CASCADE;
+";
+      if ($table->getIdMethod() == "native") {
+      $script .= "
+DROP SEQUENCE ".$this->quoteIdentifier(strtolower($table->getSequenceName())).";
+";
+
+      }
+    }
+  }  
 
   /**
    *
@@ -195,7 +207,7 @@ ALTER TABLE ".$this->quoteIdentifier($table->getName())." ADD COLUMN ".$this->ge
    *
    * @see        parent::addColumns()
    */
-  protected function addTable(&$script)
+  protected function addTable(&$script, $exist=true)
   {
     $table = $this->getTable();
     $platform = $this->getPlatform();
@@ -210,7 +222,7 @@ ALTER TABLE ".$this->quoteIdentifier($table->getName())." ADD COLUMN ".$this->ge
 
 //    $schemaName = $this->getSchema();
 
-    $this->addDropStatements($script);
+    $this->addDropStatements($script,$exist);
     $this->addSequences($script);
 
     $script .= "
@@ -443,7 +455,7 @@ COMMENT ON COLUMN ".$this->quoteIdentifier($table->getName()).".".$this->quoteId
       
     }else{
       // Existe en el modelo pero no existe en la base de datos
-      $this->addTable(&$script);
+      $this->addTable(&$script,false);
     }
 
   }
