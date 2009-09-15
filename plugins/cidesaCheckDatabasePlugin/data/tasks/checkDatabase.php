@@ -183,7 +183,7 @@ function run_propel_check_database($task, $args)
   pake_echo_action('check_database', 'Analizando la base de datos');
   
   _propel_cidesa_build_schema($task,$args);
-  
+
   pake_echo_action('check_database', 'Cargando Modelo de la Base de Datos');
   $ymlsremoto = sfYaml::load('config/schema.yml');
   $ymlsremoto = $ymlsremoto['propel'];
@@ -195,24 +195,24 @@ function run_propel_check_database($task, $args)
   _propel_cidesa_copy_xml_schema_from_plugins('generated-');
   
   _call_cidesa_phing($task, 'sql', false);
-/*    
-  //$ymlsremoto = array();
-
+    
+  
+  $finder = pakeFinder::type('file')->ignore_version_control()->name('schema.*');
+  pake_remove($finder, 'config');
+  
   $tablasschemas = convert_yml_schema(false, 'generated-');
   
   checkDropTables();
-*/
-  pake_echo_action('check_database', 'Tablas Schema '.count($ymlslocal));
-  pake_echo_action('check_database', 'Tablas Base Datos '.count($ymlsremoto));
+
+  pake_echo_action('check_database', 'Tablas Schema '.count($tablasschemas));
+  pake_echo_action('check_database', 'Tablas Base Datos '.count($checktablas));
 
   //checkdatabase($ymlslocal,$ymlsremoto);
 
-  $finder = pakeFinder::type('file')->ignore_version_control()->name('generated-*schema.xml');
+  $finder = pakeFinder::type('file')->ignore_version_control()->name('generated-*schema*.xml');
   pake_remove($finder, 'config');
-  $finder = pakeFinder::type('file')->ignore_version_control()->name('generated-*schema.yml');
+  $finder = pakeFinder::type('file')->ignore_version_control()->name('generated-*schema*.yml');
   pake_remove($finder, 'config');
-  //$finder = pakeFinder::type('file')->ignore_version_control()->name('schema.*');
-  //pake_remove($finder, 'config');
 }
 
 function checkDropTables()
@@ -221,15 +221,19 @@ function checkDropTables()
   global $tablasschemas;  
   $remotas = $checktablas;
   $locales = $tablasschemas;
-  
-      // Se verifica las tablas "Basura" que pueda tener la aplicación.
+
+    $sql = '';
+    $sql .= "-- Tablas Basura (Que no existen en los yml del modelo)
+    ";
+    // Se verifica las tablas "Basura" que pueda tener la base de datos.
     foreach($remotas as $tablaname => $tabla){
-      $sql .= "-- Tablas Basura (Que no existen en los yml del modelo) ç
   
-  ";
-      if(!array_key_exists($tablaname, $locales)){
-        $sql .= "-- DROP TABLE \"$tablaname\" CASCADE;
-  ";
+      if($tablaname!='_attributes'){
+        if(!array_key_exists($tablaname, $locales)){
+          $sql .= "-- DROP TABLE \"$tablaname\" CASCADE;
+    ";
+        }
+        
       }
     }
     
