@@ -77,7 +77,7 @@ class catlotinmActions extends autocatlotinmActions
   	}
   	$arreglo=array();
   	$arreglo[0] = Herramientas::getX_vacio('catpar','catnivcat','forcodcat','Z');  //Z -> Cod.Catastral
-  	$arreglo[1] = strlen(substr($this->params[0],0,strlen($this->params[0])-$this->loncc-1));
+  	$arreglo[1] = strlen(substr($arreglo[0],0,strlen($arreglo[0])-$this->loncc-1));
   	$arreglo[2] = substr($this->nomabr,1,strlen($this->nomabr));
   	$arreglo[3] = $this->loncc;
   	$this->params=$arreglo;
