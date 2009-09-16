@@ -692,8 +692,6 @@ class PHP5ComplexPeerBuilder extends PHP5BasicPeerBuilder {
 					}
 				}
 
-			}
-
 			} // foreach fkeys
 			$script .= "
 
@@ -801,6 +799,7 @@ class PHP5ComplexPeerBuilder extends PHP5BasicPeerBuilder {
 		return \$results;
 	}
 ";
+		}
 		} // foreach fk
 
 	} // addDoSelectJoinAllExcept
