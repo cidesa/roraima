@@ -23,7 +23,7 @@
   [?php echo link_to(image_tag(sfConfig::get('sf_admin_web_dir').'/images/previous.png', array('align' => 'absmiddle', 'alt' => __('Previous'), 'title' => __('Previous'))), 'auto<?php echo $this->getModuleName() ?>/list?page='.$pager->getPreviousPage()) ?]
 
   [?php foreach ($pager->getLinks() as $page): ?]
-    [?php echo link_to_unless($page == $pager->getPage(), $page, '<?php echo $this->getModuleName() ?>/list?page='.$page) ?]
+    [?php echo link_to_unless($page == $pager->getPage(), $page, 'auto<?php echo $this->getModuleName() ?>/list?page='.$page) ?]
   [?php endforeach; ?]
 
   [?php echo link_to(image_tag(sfConfig::get('sf_admin_web_dir').'/images/next.png', array('align' => 'absmiddle', 'alt' => __('Next'), 'title' => __('Next'))), 'auto<?php echo $this->getModuleName() ?>/list?page='.$pager->getNextPage()) ?]
