@@ -409,23 +409,6 @@ abstract class BaseDfatendocobsPeer {
 		return $results;
 	}
 
-
-		$rs = BasePeer::doSelect($c, $con);
-		$results = array();
-
-		while($rs->next()) {
-
-			$omClass = DfatendocobsPeer::getOMClass();
-
-			$cls = Propel::import($omClass);
-			$obj1 = new $cls();
-			$obj1->hydrate($rs);
-
-			$results[] = $obj1;
-		}
-		return $results;
-	}
-
 	
 	public static function getTableMap()
 	{
