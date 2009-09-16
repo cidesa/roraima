@@ -27,17 +27,27 @@ class sfControlPanelActions extends sfActions
   public function executeTableManager()
   {
     $class = $this->getRequestParameter('class');
+    $classpeer = $class.'Peer';
+    $columns = array();
+    eval('$columns = '.$classpeer.'::getFieldNames(BasePeer::TYPE_FIELDNAME);');
+    
+    $columns[0] = '='.$columns[0];
+    $columns[1] = '='.$columns[1];
+
     $generator_configuration = array(
       'model_class' =>  $class,
       'theme'       => 'sfControlPanel',
       'moduleName'  => $class.'ControlPanel',
       'list' => array(
           'title' => $class.' list',
+          'filters' => array_slice($columns,0,5),
+          'display' => array_slice($columns,0,5),
       ),
       'edit' => array(
           'title' => 'edit '.$class,
       ),
     );
+    
     if(file_exists(SF_ROOT_DIR.'/config/sfControlPanel_generator.yml'))
     {
       $custom_configuration = sfYaml::load(SF_ROOT_DIR.'/config/sfControlPanel_generator.yml');
