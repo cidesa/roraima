@@ -132,7 +132,144 @@ function cantdespachada(e,id)
     		new Ajax.Request(getUrlModulo()+'ajax', {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=6&cajtexmos='+descripcion+'&cajtexcom='+id+'&codalm='+valcodalm+'&codigo='+cod})
     	}
     }
+  }
 
+ function ajaxart(e,id)
+ {
+   var aux = id.split("_");
+   var name=aux[0];
+   var fil=parseInt(aux[1]);
+   var col=parseInt(aux[2]);
 
+    var coldes=col+1;
 
+    var descripcion=name+"_"+fil+"_"+coldes;
+    var cod=$(id).value;
+
+    if (e.keyCode==13 || e.keyCode==9)
+    {
+      if ($(id).value!="")
+      {
+        if (!art_repetido(id))
+       {
+        new Ajax.Request(getUrlModuloAjax(), {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=2&cajtexmos='+descripcion+'&cajtexcom='+id+'&codigo='+cod})
+       }
+       else
+       {
+         alert_('El Art&iacute;culo ya esta repetido con esa Unidad');
+         $(id).value="";
+         $(descripcion).value="";
+       }
+      }
+    }
+ }
+
+function art_repetido(id)
+ {
+   var aux = id.split("_");
+   var name=aux[0];
+   var fila=aux[1];
+   var col=parseInt(aux[2]);
+
+   var colunidad=col+2;
+   var unidad=name+"_"+fila+"_"+colunidad;
+   var artrepetido=false;
+
+   if ($(unidad).value!=""){
+   var articulo_unidad=$(id).value+"-"+$(unidad).value;
+   var am=totalregistros2('ax',1,50);
+   var i=0;
+   while (i<am)
+   {
+    var codigo="ax"+"_"+i+"_1";
+    var unidad2="ax"+"_"+i+"_3";
+
+    if ($(codigo) && $(unidad2))
+    {
+    var articulo_unidad2=$(codigo).value+"-"+$(unidad2).value;
+
+    if (i!=fila)
+    {
+      if (articulo_unidad==articulo_unidad2)
+      {
+        artrepetido=true;
+        break;
+      }
+    }
+    }
+   i++;
+   }
+   }else{ artrepetido=false; }
+
+   return artrepetido;
+ }
+
+ function ajaxcat(e,id)
+ {
+   var aux = id.split("_");
+   var name=aux[0];
+   var fil=parseInt(aux[1]);
+   var col=parseInt(aux[2]);
+
+    var coldes=col+1;
+    var descripcion=name+"_"+fil+"_"+coldes;
+    var cod=$(id).value;
+
+    if (e.keyCode==13 || e.keyCode==9)
+    {
+      if ($(id).value!="")
+      {
+        if (!uni_repetido(id))
+       {
+        new Ajax.Request(getUrlModuloAjax(), {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=3&cajtexmos='+descripcion+'&cajtexcom='+id+'&codigo='+cod})
+       }
+       else
+       {
+         alert_('El Art&iacute;culo ya esta repetido con esa Unidad');
+         $(id).value="";
+         $(descripcion).value="";
+       }
+      }
+    }
+ }
+
+function uni_repetido(id)
+ {
+   var aux = id.split("_");
+   var name=aux[0];
+   var fila=aux[1];
+   var col=parseInt(aux[2]);
+
+   var colart=col-2;
+   var arti=name+"_"+fila+"_"+colart;
+   var unirepetido=false;
+
+  if ($(arti).value!=""){
+   var articulo_unidad=$(arti).value+"-"+$(id).value;
+   var am=totalregistros2('ax',1,50);
+   var i=0;
+   while (i<am)
+   {
+    var codigo="ax"+"_"+i+"_1";
+    var unidad2="ax"+"_"+i+"_3";
+
+    if ($(codigo) && $(unidad2))
+    {
+    var articulo_unidad2=$(codigo).value+"-"+$(unidad2).value;
+
+    if (i!=fila)
+    {
+      if (articulo_unidad==articulo_unidad2)
+      {
+        unirepetido=true;
+        break;
+      }
+    }
+    }
+   i++;
+   }
+   }
+   else { unirepetido=false;  }
+
+   return unirepetido;
  }

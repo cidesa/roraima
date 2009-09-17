@@ -20,7 +20,7 @@
 <?php use_helper('Grid') ?>
 <?php echo javascript_include_tag('dFilter') ?>
 <?php echo javascript_include_tag('ajax') ?>
-<?php echo javascript_include_tag('tools','observe') ?>
+<?php echo javascript_include_tag('tools','observe','compras/almdesp') ?>
 <?php use_helper('tabs') ?>
 
 <?php echo object_input_hidden_tag($careqart, 'getId') ?>
