@@ -263,6 +263,7 @@ public function configGrid($nind='',$ano='',$rev='')
 	  case '2':	 
         $ano = $this->getRequestParameter('ano',''); 
 		$rev = $this->getRequestParameter('rev',''); 		
+		$indg = $this->getRequestParameter('indg',''); 		
 		$js='';
 		
 		$c = new Criteria();
@@ -278,8 +279,16 @@ public function configGrid($nind='',$ano='',$rev='')
 					  alert('La Programacion esta cerrada para la Revision $rev  Año $ano  ');";
 			}else
 			{
-				$js=" $('giproanu_revanoindg').value='';					  
-					  alert('La Programacion ya fue registrada para la Revision $rev y el Año $ano, consulte desde la lista ');";
+				$c2 = new Criteria();
+				$c2->add(GiproanuPeer::ANOINDG,$ano);
+				$c2->add(GiproanuPeer::REVANOINDG,$rev);
+				$c2->add(GiproanuPeer::NUMINDG,$indg);
+				$per2 = GiproanuPeer::doSelectOne($c2);
+				if($per2)
+				{
+					$js=" $('giproanu_revanoindg').value='';					  
+					  alert('La Programacion ya fue registrada para el Indicador $indg , Revision $rev y el Año $ano, consulte desde la lista ');";	
+				}				
 			}
 		} 
 
