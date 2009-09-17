@@ -220,8 +220,7 @@ class almreqActions extends autoalmreqActions
 	  $col1->setNombreCampo('Codart');
 	  $col1->setHTML('type="text" size="10" maxlength="'.chr(39).$this->longmasart.chr(39).'"');
 	  $col1->setCatalogo('caregart','sf_admin_edit_form',$obj,'Caregart_Almreq',$params);
-	  $col1->setJScript('onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39). $this->mascaraarticulo.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}"');
-	  $col1->setAjax('almreq',2,2);
+	  $col1->setJScript('onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39). $this->mascaraarticulo.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}" onBlur="javascript:event.keyCode=13; ajaxart(event,this.id);"');
 
 	  $col2 = new Columna('Descripción');
 	  $col2->setTipo(Columna::TEXTAREA);
@@ -241,8 +240,7 @@ class almreqActions extends autoalmreqActions
       $col3->setNombreCampo('Codcat');
       $col3->setHTML('type="text" size="8" maxlength="'.chr(39).$this->longcat.chr(39).'"');
       $col3->setCatalogo('Npcatpre','sf_admin_edit_form',$obj2,'Npcatpre_Almreq',$params2);
-      $col3->setJScript('onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39). $this->formatocategoria.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}"');
-      $col3->setAjax('almreq',3,4);
+      $col3->setJScript('onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39). $this->formatocategoria.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}" onBlur="javascript:event.keyCode=13; ajaxcat(event,this.id);"');
 
       $col4 = new Columna('Descripción');
       $col4->setTipo(Columna::TEXTAREA);
