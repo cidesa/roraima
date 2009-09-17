@@ -2331,7 +2331,12 @@ class Compras {
       $dato= CadefartPeer::doSelectOne($cri);
       if ($dato)
       {
+      	if (is_null($dato->getTipdocpre()) || $dato->getTipdocpre()=="")
+      	{
+      	  $tipdoc="SAE";
+      	}else {
       	$tipdoc=$dato->getTipdocpre();
+      	}
       }
       else
       {
