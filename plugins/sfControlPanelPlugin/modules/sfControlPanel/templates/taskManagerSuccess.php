@@ -19,6 +19,7 @@
     <li class="task"><?php echo link_to_remote_pane('build sql', 'sfControlPanel/taskExecute?task=propel-build-sql') ?></li>
     <li class="task"><?php echo link_to_remote_pane('insert sql', 'sfControlPanel/taskExecute?task=propel-insert-sql') ?></li>
     <li class="task"><?php echo link_to_remote_pane('build all', 'sfControlPanel/taskExecute?task=propel-build-all') ?></li>
+    <li class="task"><?php echo link_to_remote_pane('check database', 'sfControlPanel/taskExecute?task=propel-check-database') ?></li>    
   </ul>
 
   <li class="category">Module</li>
