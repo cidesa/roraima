@@ -1948,6 +1948,16 @@ class Nomina {
         }
 
       break;
+      case "SIPERANT" :
+         $criterio = "Select coalesce(SUM(Monto),0) as campo from npHISCON A,NPCONSALINT B,NPNOMINA C where  A.CODCON=B.CODCON  and a.codemp='" . $empleado . "' AND  a.codNOM='" . $nomina . "' and a.codnom=c.codnom and a.codnom=b.codnom and A.FECNOM=c.ultfec-1 ";
+          if (Herramientas :: BuscarDatos($criterio, & $tabla)) {
+             $valor = $tabla[0]["campo"];
+          }
+          else
+          {
+            $valor = 0;
+          }
+      break;
 
       case "SIANOANT" ://nueva por Leobardo
  /*        // $criterio = "Select coalesce(SUM(Monto),0) as campo from npHISCON A,NPCONSALINT B,NPNOMINA C where  A.CODCON=B.CODCON  and a.codemp='" . $empleado . "' AND  a.codNOM='" . $nomina . "' and  b.codNOM='" . $nomina . "' and a.codnom=c.codnom and a.codnom=b.codnom and A.FECNOM>=add_months(c.profec,-13) and A.FECNOM<=add_months(c.profec,-1) ";
@@ -3552,6 +3562,16 @@ class Nomina {
           $valor = $valor + 0;
         }
 
+      break;
+      case "SIPERANT" :
+         $criterio = "Select coalesce(SUM(Monto),0) as campo from npHISCON A,NPCONSALINT B,NPNOMINA C where  A.CODCON=B.CODCON  and a.codemp='" . $empleado . "' AND  a.codNOM='" . $nomina . "' and a.codnom=c.codnom and a.codnom=b.codnom and A.FECNOM=c.ultfec-1 ";
+          if (Herramientas :: BuscarDatos($criterio, & $tabla)) {
+             $valor = $tabla[0]["campo"];
+          }
+          else
+          {
+            $valor = 0;
+          }
       break;
 
 	  case "SIANOANT" : //Nueva por Leobardo
