@@ -1,0 +1,47 @@
+opciones:                  # Opciones generales
+  eliminar:                false
+  tabla:                   Tscheemi
+  anchogrid:               1050
+  ancho:                   1150
+  filas:                   0
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Firmado
+  tipo:                    k
+  nombrecampo:             firmado
+  esgrabable:			   true
+  html:                    []
+2:       # Columna 2
+  titulo:                  N° de Cheque
+  tipo:                    t
+  nombrecampo:             numche
+  esgrabable:			   true
+  html:                    [size="10" readonly=true]
+3:       # Columna 3
+  titulo:                  N° de Cuenta Bancaria
+  tipo:                    t
+  nombrecampo:             numcue
+  html:                    [size="20", readonly=true]
+4:       # Columna 4
+  titulo:                  Tipo
+  tipo:                    t
+  nombrecampo:             destip
+  html:                    [size="25", readonly=true]
+5:       # Columna 5
+  titulo:                  Fecha
+  tipo:                    f
+  nombrecampo:             fecemi
+  html:                    [ ]
+6:       # Columna 6
+  titulo:                  Monto
+  tipo:                    m
+  nombrecampo:             monche
+  esnumerico:              true
+  html:                    [size="10" readonly="true"]
+7:       # Columna 7
+  titulo:                  Beneficiario
+  tipo:                    t
+  nombrecampo:             Nomben
+  esgrabable:			   true
+  html:                    [size="50", readonly=true]

@@ -14,6 +14,37 @@
 class teschecusActions extends autoteschecusActions
 {
 
+  public function executeList()
+  {
+    $this->processSort();
+
+    $this->processFilters();
+
+    $this->filters = $this->getUser()->getAttributeHolder()->getAll('sf_admin/tscheemi/filters');
+
+    $this->reqfirma="";
+	$varemp = $this->getUser()->getAttribute('configemp');
+	if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('tesoreria',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['tesoreria']))
+	     if(array_key_exists('tesmovemiche',$varemp['aplicacion']['tesoreria']['modulos']))
+	       if(array_key_exists('reqfirma',$varemp['aplicacion']['tesoreria']['modulos']['tesmovemiche']))
+	       {
+	       	$this->reqfirma=$varemp['aplicacion']['tesoreria']['modulos']['tesmovemiche']['reqfirma'];
+	       }
+
+     // 15    // pager
+    $this->pager = new sfPropelPager('Tscheemi', 15);
+    $c = new Criteria();
+    if ($this->reqfirma=='S')   $c->add(TscheemiPeer::STATUS,'F',Criteria::NOT_EQUAL);
+    $this->addSortCriteria($c);
+    $this->addFiltersCriteria($c);
+    $this->pager->setCriteria($c);
+    $this->pager->setPage($this->getRequestParameter('page', 1));
+    $this->pager->init();
+  }
+
   /**
    * Función para procesar _todas_ las funciones Ajax del formulario
    * Cada función esta identificada con el valor de la vista "ajax"

@@ -38,6 +38,9 @@ class Tscheemi extends BaseTscheemi
 	protected $caducado="";
 	protected $faldat="";
 	protected $bloqueado="";
+	protected $filasord="";
+	protected $firmado="";
+	protected $objeto=array();
 
     public function getNomben()
 	{

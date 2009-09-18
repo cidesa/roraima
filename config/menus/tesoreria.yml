@@ -46,6 +46,7 @@ tesoreria:
       Enterar Retencion de ISLR:                              TesRetIslr
     Bancos:
       Emisión de Pagos:                                       TesMovEmiChe
+      Recepción de Cheques sin Firma:                         tesfirmascheq
       Movimientos según Libros:                               TesMovSegLib
       Movimientos según Libros Años Anteriores:               TesMovSegLibAnt
       Movimientos según Bancos:                               TesMovSegBan
