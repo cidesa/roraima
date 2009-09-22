@@ -33,12 +33,12 @@ class vacsalidasActions extends autovacsalidasActions
 		$this->totdia=0;
 		$anofin=date('Y');
 		$anodesde = date('Y',strtotime($fecing));
-		$anohasta = $anodesde + 1;	
+		$anohasta = $anodesde + 1;
 		
 		$sql="SELECT
 		          '0' as id,
 	              (CASE WHEN (SUM(HIST)=0) THEN 'NO' ELSE 'SI' END) AS HIST,
-	              SUM(ANTIGUEDAD) AS ANTIGUEDAD,
+	              ANTIGUEDAD,
 	              DESDE as perini,
 	              HASTA as perfin,
 	              SUM(DISFRUTADOS) AS diasdisfrutados,
@@ -64,7 +64,7 @@ class vacsalidasActions extends autovacsalidasActions
 	
 	                Select
 	                1 as HIST,
-	                " . $anofin . "-B.Ano as Antiguedad,
+	                to_number(C.PERFIN,'9999')-" .($anohasta-1) . " as Antiguedad,
 	                to_number(C.PERINI,'9999') as Desde,
 	                to_number(C.PERFIN,'9999') as Hasta,
 	                C.DIASDISFRUTADOS as Disfrutados,
@@ -81,11 +81,10 @@ class vacsalidasActions extends autovacsalidasActions
 	
 	              ) as subconsulta
 				  , npvacdiadis b
-				  where b.codnom='$nomina'
-	              GROUP BY DESDE,HASTA,JORNADA,rangodesde,rangohasta
-				  HAVING sum(antiguedad)>=rangodesde and sum(antiguedad)<=rangohasta
+				  where b.codnom='$nomina' AND ANTIGUEDAD>=RANGODESDE AND ANTIGUEDAD<=RANGOHASTA
+	              GROUP BY DESDE,HASTA,ANTIGUEDAD,JORNADA,rangodesde,rangohasta				  
 	              ORDER BY DESDE";
-	
+
 		if (H::BuscarDatos($sql,$arr))
 		{		
 		    $i=0;
@@ -127,7 +126,6 @@ class vacsalidasActions extends autovacsalidasActions
 		$per = NpvacsalidasDetPeer::doSelect($c);
 	}
   	
-   
     $opciones = new OpcionesGrid();
     $opciones->setEliminar(false);
     $opciones->setTabla('Npvacsalidas_det');
