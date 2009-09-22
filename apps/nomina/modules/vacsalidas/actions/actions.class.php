@@ -33,58 +33,59 @@ class vacsalidasActions extends autovacsalidasActions
 		$this->totdia=0;
 		$anofin=date('Y');
 		$anodesde = date('Y',strtotime($fecing));
-		$anohasta = $anodesde + 1;
+		$anohasta = $anodesde + 1;	
 		
 		$sql="SELECT
-		          '0' as id,
-	              (CASE WHEN (SUM(HIST)=0) THEN 'NO' ELSE 'SI' END) AS HIST,
-	              ANTIGUEDAD,
-	              DESDE as perini,
-	              HASTA as perfin,
-	              SUM(DISFRUTADOS) AS diasdisfrutados,
-	              (CASE WHEN (SUM(HIST)=0) THEN SUM(CORRESPONDE) ELSE SUM(CORRESPONDEHIS) END) AS diasdisfutar,
-				  jornada
-	              FROM
-	              (
-	                    Select
-	                0 as HIST,
-	                " . $anofin . "-B.Ano as Antiguedad,
-	                ((" . ($anohasta -1) . ")+(" . $anofin . "-B.Ano-1)) as Desde,
-	                ((" . ($anohasta -1) . ")+(" . $anofin . "-B.Ano)) as Hasta,
-	                0 as Disfrutados,
-	                A.DIADIS as CORRESPONDE,
-	                0 as CORRESPONDEHIS
-	                from NPvacdiadis A,NPAnos B
-	                Where
-	                A.codnom='" . $nomina . "'
-	                And B.Ano Between " . ($anohasta -1) . " and " . $anofin . "
-	                And " . $anofin . "-B.ano between A.rangodesde and A.rangohasta
+					'0' as id,
+					(CASE WHEN (SUM(HIST)=0) THEN 'NO' ELSE 'SI' END) AS HIST,
+					ANTIGUEDAD,
+					DESDE as perini,
+					HASTA as perfin,
+					SUM(DISFRUTADOS) AS diasdisfrutados,
+					(CASE WHEN (SUM(HIST)=0) THEN SUM(CORRESPONDE) ELSE SUM(CORRESPONDEHIS) END) AS diasdisfutar,
+					jornada
+					FROM
+					(
+					Select
+					0 as HIST,
+					$anofin-B.Ano as Antiguedad,
+					((" . ($anohasta -1) . ")+($anofin-B.Ano-1)) as Desde,
+					((" . ($anohasta -1) . ")+($anofin-B.Ano)) as Hasta,
+					0 as Disfrutados,
+					A.DIADIS as CORRESPONDE,
+					0 as CORRESPONDEHIS
+					from NPvacdiadis A,NPAnos B
+					Where
+					A.codnom='$nomina'
+					And B.Ano Between " . ($anohasta -1) . " and $anofin
+					And $anofin-B.ano between A.rangodesde and A.rangohasta
+					
+					UNION ALL
+					
+					Select
+					1 as HIST,
+					to_number(C.PERFIN,'9999') -" . ($anohasta -1) . " AS Antiguedad,
+					
+					to_number(C.PERINI,'9999') as Desde,
+					to_number(C.PERFIN,'9999') as Hasta,
+					C.DIASDISFRUTADOS as Disfrutados,
+					0 as CORRESPONDE,
+					C.diasdisfutar as CORRESPONDEHIS
+					from
+					NPvacdiadis A,NPAnos B,Npvacdisfrute C
+					Where
+					A.codnom='$nomina'
+					And B.Ano Between " . ($anohasta -1) . " and $anofin
+					And $anofin-B.ano between A.rangodesde and A.rangohasta
+					And C.PERINI=B.ANO::varchar
+					And C.CODEMP='$codemp'
+					
+					) as subconsulta
+					, npvacdiadis b
+					where b.codnom='$nomina' AND Antiguedad>=rangodesde and Antiguedad<=rangohasta
+					GROUP BY DESDE,HASTA,ANTIGUEDAD,JORNADA,rangodesde,rangohasta
+					ORDER BY DESDE";
 	
-	                UNION ALL
-	
-	                Select
-	                1 as HIST,
-	                to_number(C.PERFIN,'9999')-" .($anohasta-1) . " as Antiguedad,
-	                to_number(C.PERINI,'9999') as Desde,
-	                to_number(C.PERFIN,'9999') as Hasta,
-	                C.DIASDISFRUTADOS as Disfrutados,
-	                0 as CORRESPONDE,
-	                C.diasdisfutar as CORRESPONDEHIS
-	                from
-	                NPvacdiadis A,NPAnos B,Npvacdisfrute C
-	                Where
-	                A.codnom='" . $nomina . "'
-	                And B.Ano Between " . ($anohasta -1) . " and " . $anofin . "
-	                And " . $anofin . "-B.ano between A.rangodesde and A.rangohasta
-	                And C.PERINI=B.ANO::varchar
-	                And C.CODEMP='" . $codemp . "'
-	
-	              ) as subconsulta
-				  , npvacdiadis b
-				  where b.codnom='$nomina' AND ANTIGUEDAD>=RANGODESDE AND ANTIGUEDAD<=RANGOHASTA
-	              GROUP BY DESDE,HASTA,ANTIGUEDAD,JORNADA,rangodesde,rangohasta				  
-	              ORDER BY DESDE";
-
 		if (H::BuscarDatos($sql,$arr))
 		{		
 		    $i=0;
@@ -92,27 +93,72 @@ class vacsalidasActions extends autovacsalidasActions
 			{			
 				$per[$i]['id']=$r['id'];
 				$per[$i]['perini']=$r['perini'];
-				$per[$i]['perfin']=$r['perfin'];			
-				$diadis=$r['diasdisfutar']-$r['diasdisfrutados'];
-				if($diavac==0)
-			  		$diasvacaciones=0;
-				else
-				{
-				  if(($diadis-$diavac)<=0){
-				  	$diasvacaciones=$diadis;	
-					$diavac=abs($diadis-$diavac);
-				  }			  	
-				  else{
-				  	$diasvacaciones=$diavac;
-					$diavac-=$diavac;
-				  }
-				    
-				}						  
-				$per[$i]['diasdisfutar']=$r['diasdisfutar'];
-				$per[$i]['diasdisfrutados']=$r['diasdisfrutados'];
-				$per[$i]['diasvac']=$diasvacaciones;
-				$per[$i]['diaspdisfrutar']=$r['diasdisfutar']-$r['diasdisfrutados']-$diasvacaciones;
-				$per[$i]['jornada']=$r['jornada'];
+				$per[$i]['perfin']=$r['perfin'];
+				
+				$sql2 = "SELECT A.ANTAPVAC FROM NPBONOCONT A, NPASIEMPCONT B WHERE A.CODTIPCON=B.CODTIPCON AND B.CODEMP='" . $codemp . "' AND '" . $r['perfin'] . "' BETWEEN TO_CHAR(ANOVIG,'YYYY') AND TO_CHAR(ANOVIGHAS,'YYYY')";
+          			Herramientas :: BuscarDatos($sql2, & $arr2);
+
+					$antiguedadAP = '';
+		            if ($arr2)
+		              $antiguedadAP = $arr2[0]["antapvac"];
+					  
+					$antiguedad = $r['antiguedad']; //+ 1;
+
+			        Nomina :: tiempoServicioTotal($codemp, 0, 0, 0, & $Idia, & $Imes, & $Iano, 'I');
+					
+					$antiguedadIN = '';
+			        if ($Iano > 0) {
+			          $antiguedadIN = 'SI';
+			        }
+					
+					$antiguedad = $antiguedad + $Iano;
+					
+					if ($antiguedadAP == 'S') {
+		            Nomina :: tiempoServicioTotal($codemp, 0, 0, 0, & $Idia, & $Imes, & $Iano, 'F');
+		
+		            if ($r['hist'] == 'NO') {
+		              $antiguedad = $antiguedad + $Iano;
+		
+		              $sql3 = "Select diadis,jornada from NPvacdiadis where CodNom='" . $nomina . "' and Rangohasta >=  '" . $antiguedad . "'   order by rangodesde";
+
+		              Herramientas :: BuscarDatos($sql3, & $arr3);
+		
+		              if ($arr3)
+					   	$variable = $arr3[0]['diadis'];
+					  else
+					  	$variable = 0;
+						
+		            } else
+					{
+						$variable = $r['diasdisfutar'];						
+					}		
+		          }else
+				  {
+				  	$variable = $r['diasdisfutar'];
+				  }	
+		          $diasdisfrutar = $variable;
+							
+				$diadis=$variable-$r['diasdisfrutados'];
+					if($diavac==0)
+				  		$diasvacaciones=0;
+					else
+					{
+					  if(($diadis-$diavac)<=0){
+					  	$diasvacaciones=$diadis;	
+						$diavac=abs($diadis-$diavac);
+					  }			  	
+					  else{
+					  	$diasvacaciones=$diavac;
+						$diavac-=$diavac;
+					  }
+					    
+					}					  
+					$per[$i]['diasdisfutar']=$variable;
+					$variable = $r['diasdisfrutados'];
+					$per[$i]['diasdisfrutados']=$variable;
+					$per[$i]['diasvac']=$diasvacaciones;
+					$per[$i]['diaspdisfrutar']=$diasdisfrutar-$variable-$diasvacaciones;
+					$per[$i]['jornada']=$r['jornada'];
 				$this->totdia+=$per[$i]['diaspdisfrutar'];
 				$this->totpen+=($r['diasdisfutar']-$r['diasdisfrutados']);
 				$i++;
@@ -126,6 +172,7 @@ class vacsalidasActions extends autovacsalidasActions
 		$per = NpvacsalidasDetPeer::doSelect($c);
 	}
   	
+   
     $opciones = new OpcionesGrid();
     $opciones->setEliminar(false);
     $opciones->setTabla('Npvacsalidas_det');
