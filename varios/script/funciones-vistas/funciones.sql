@@ -1,4 +1,4 @@
-set search_path to "SIMA002";
+set search_path to "SIMA003";
 
 CREATE OR REPLACE FUNCTION instr(character varying, character varying, integer, integer)
   RETURNS integer AS
@@ -1050,12 +1050,12 @@ COALESCE(A.CAPACTACU,0) AS MONTO,0 AS MONDIA,0 AS MONDIAPRO,COALESCE(A.DIAACU,0)
 COALESCE(A.CAPACTACU,0) AS MONPRES, COALESCE(A.ANTACU,0) AS MONANT,
 -100 AS ID,''CORTE AL ''||TO_CHAR(A.FECCORACU,''DD/MM/YYYY'') AS TIPO, COALESCE(A.CAPACTACU,0) AS CAPITAL,
 COALESCE(A.CAPACTACU,0) AS CAPITALACT,0 AS TASA,0 AS MONINT,COALESCE(A.INTACU,0) AS INTACU, 0 AS MONADEINT
-FROM NPHOJINT A,(SELECT * FROM NPASIEMPCONT WHERE STATUS=''A'') B 
+FROM NPHOJINT A,(SELECT * FROM NPASIEMPCONT WHERE STATUS=''A'') B
 WHERE A.CODEMP='''||codigo||'''
-AND A.CODEMP=B.CODEMP) A LEFT OUTER JOIN 
+AND A.CODEMP=B.CODEMP) A LEFT OUTER JOIN
 (SELECT ANOVIG,ANOVIGHAS,CODTIPCON,MAX(ANTAP) AS ANTAP,
                         MAX(ANTAPVAC) AS ANTAPVAC
-                        FROM NPBONOCONT 
+                        FROM NPBONOCONT
                         GROUP BY ANOVIG,ANOVIGHAS,CODTIPCON) B ON
                         A.FECING>=B.ANOVIG
                         AND A.FECFIN<=B.ANOVIGHAS
@@ -1074,13 +1074,13 @@ ELSE
    0
 END)::NUMERIC AS MONDIAPRO,
 A.DIAS::INTEGER,A.MONPRES+((CASE WHEN A.DIAS<>5 THEN
-                     (CASE WHEN '''||salpro||'''=''P'' THEN 
+                     (CASE WHEN '''||salpro||'''=''P'' THEN
                   	(SELECT ROUND(AVG(MONDIA),2) FROM NPPRESTACIONES
                    	WHERE CODEMP='''||codigo||'''
                    	AND ID<=A.ID
                    	AND ID>=A.ID-11)
                      ELSE
-                        A.MONDIA  
+                        A.MONDIA
                      END)
                  ELSE
                    0
@@ -1133,7 +1133,7 @@ A.FECING::DATE,A.FECINI::DATE,A.FECFIN::DATE,
 	ELSE (CASE WHEN A.ALICUOCON<>0 THEN A.MONDIA
 	      ELSE ROUND(A.SALNOR/30,2) END) END)::NUMERIC AS MONDIA,0::NUMERIC AS MONDIAPRO,
 COALESCE((CASE WHEN A.ANNOANTIG>0 THEN
-      (CASE WHEN (A.MESANTIGTOT=6 AND A.DIAANTIGTOT>0) OR A.MESANTIGTOT>6 
+      (CASE WHEN (A.MESANTIGTOT=6 AND A.DIAANTIGTOT>0) OR A.MESANTIGTOT>6
        THEN 60-(SELECT COALESCE(SUM(5),0)
                 FROM NPPRESTACIONES
                 WHERE CODEMP='''||codigo||'''
@@ -1168,7 +1168,7 @@ COALESCE((CASE WHEN A.ANNOANTIG>0 THEN
                                             TO_CHAR(TO_NUMBER(SUBSTR('''||fechareal||''',7),''9999'')-1,''9999''),''DD/MM/YYYY'')
                                END)
                 AND FECFIN <= TO_DATE('''||fechareal||''',''DD/MM/YYYY'')) END)
- ELSE (CASE WHEN (A.MESANTIGTOT=6 AND A.DIAANTIGTOT>0) OR A.MESANTIGTOT>6 
+ ELSE (CASE WHEN (A.MESANTIGTOT=6 AND A.DIAANTIGTOT>0) OR A.MESANTIGTOT>6
        THEN 45-(SELECT COALESCE(SUM(5),0)
                 FROM NPPRESTACIONES
                 WHERE CODEMP='''||codigo||'''
@@ -1324,7 +1324,7 @@ AND A.FECFIN <= TO_DATE('''||fecha||''',''DD/MM/YYYY'')
 order by FECINI,ID'
 
 loop
-  
+
   IF recordSalida.tipo not like 'CORTE AL%' THEN
   	SELECT INTO tasa COALESCE((CASE WHEN B.TIPTAS='P' THEN A.TASINTPRO
         			  	WHEN B.TIPTAS='A' THEN A.TASINTACT
@@ -1336,86 +1336,86 @@ loop
   	AND B.FECDES<=recordSalida.fecini
   	AND B.FECHAS>=recordSalida.fecfin;
 
-  
+
   	SELECT INTO fideicomiso,fechafide fid,fecdes
   	FROM NPTIPCON
-  	WHERE CODTIPCON=recordSalida.codtipcon; 
- 
-  
+  	WHERE CODTIPCON=recordSalida.codtipcon;
+
+
 	IF tasa IS NULL THEN
 	   tasa:=0;
 	END IF;
-	
+
         IF fechafide IS NULL THEN
 	   fechafide:=now();
 	END IF;
 
 	  IF  capitalizacion='A' THEN
 	     IF TO_CHAR(recordSalida.fecing,'MM')=TO_CHAR(recordSalida.fecfin,'MM')
-		AND recordSalida.antannos>=1 THEN 
+		AND recordSalida.antannos>=1 THEN
 		capital:=capital+recordSalida.monpres-recordSalida.monant+interesacum;
 		IF fideicomiso='0' OR fideicomiso='N' THEN
-		   capitalint:=capitalint+recordSalida.monpres-recordSalida.monant+interesacum; 
+		   capitalint:=capitalint+recordSalida.monpres-recordSalida.monant+interesacum;
 		ELSE
 		   IF recordSalida.fecfin<fechafide THEN
-		      capitalint:=capitalint+recordSalida.monpres-recordSalida.monant+interesacum;  
+		      capitalint:=capitalint+recordSalida.monpres-recordSalida.monant+interesacum;
 		   ELSE
-		      capitalint:=capitalint+interesacum;  
+		      capitalint:=capitalint+interesacum;
 		   END IF;
-		END IF;        
+		END IF;
 		interesacum:=0;
 	     ELSE
 		capital:=capital+recordSalida.monpres-recordSalida.monant;
 		IF fideicomiso='0' OR fideicomiso='N' THEN
-		   capitalint:=capitalint+recordSalida.monpres-recordSalida.monant; 
+		   capitalint:=capitalint+recordSalida.monpres-recordSalida.monant;
 		ELSE
 		   IF recordSalida.fecfin<fechafide THEN
-		      capitalint:=capitalint+recordSalida.monpres-recordSalida.monant;    
+		      capitalint:=capitalint+recordSalida.monpres-recordSalida.monant;
 		   END IF;
-		END IF; 
+		END IF;
 	     END IF;
 	  ELSE
 	     IF capitalizacion='M' THEN
 		capital:=capital+recordSalida.monpres-recordSalida.monant+interesacum;
 		IF fideicomiso='0' OR fideicomiso='N' THEN
-		   capitalint:=capitalint+recordSalida.monpres-recordSalida.monant+interesacum; 
+		   capitalint:=capitalint+recordSalida.monpres-recordSalida.monant+interesacum;
 		ELSE
 		   IF recordSalida.fecfin<fechafide THEN
-		      capitalint:=capitalint+recordSalida.monpres-recordSalida.monant+interesacum;  
+		      capitalint:=capitalint+recordSalida.monpres-recordSalida.monant+interesacum;
 		   ELSE
-		      capitalint:=capitalint+interesacum;  
+		      capitalint:=capitalint+interesacum;
 		   END IF;
-		END IF; 
+		END IF;
 		interesacum:=0;
 	     ELSE
 		capital:=capital+recordSalida.monpres-recordSalida.monant;
 		IF fideicomiso='0' OR fideicomiso='N' THEN
-		   capitalint:=capitalint+recordSalida.monpres-recordSalida.monant; 
+		   capitalint:=capitalint+recordSalida.monpres-recordSalida.monant;
 		ELSE
 		   IF recordSalida.fecfin<fechafide THEN
-		      capitalint:=capitalint+recordSalida.monpres-recordSalida.monant;    
+		      capitalint:=capitalint+recordSalida.monpres-recordSalida.monant;
 		   END IF;
-		END IF; 
+		END IF;
 	     END IF;
 	  END IF;
   	recordSalida.capital:=capital-recordSalida.monpres+recordSalida.monant;
   	IF fideicomiso='0' OR fideicomiso='N' THEN
-     		capitalactint:=capitalint-recordSalida.monpres+recordSalida.monant; 
+     		capitalactint:=capitalint-recordSalida.monpres+recordSalida.monant;
   	ELSE
      		IF recordSalida.fecfin<fechafide THEN
-        		capitalactint:=capitalint-recordSalida.monpres+recordSalida.monant;    
-     		ELSE 
+        		capitalactint:=capitalint-recordSalida.monpres+recordSalida.monant;
+     		ELSE
         		capitalactint:=capitalint;
      		END IF;
   	END IF;
-  
-     
+
+
   	recordSalida.tasa:=tasa;
   ELSE
-        recordSalida.tasa:=0;     
+        recordSalida.tasa:=0;
         capital:=recordSalida.capitalact;
-        capitalint:=capital;        
-        capitalactint:=capitalint; 
+        capitalint:=capital;
+        capitalactint:=capitalint;
   END IF;
   IF recordSalida.tipo='DEPOSITADOS' THEN
      recordSalida.monint:=round((capitalactint* (tasa/100) / 12 /30 * 30),2);
@@ -1434,6 +1434,7 @@ return;
 END;
 $body$
 LANGUAGE 'plpgsql' VOLATILE CALLED ON NULL INPUT SECURITY INVOKER;
+
 
 
 
@@ -1523,7 +1524,7 @@ $BODY$
 ALTER FUNCTION saldoctareal(character varying, character varying, character varying) OWNER TO postgres;
 
 
-CREATE OR REPLACE FUNCTION saldocta(tipo character varying, cta character varying, periodo character varying)
+CREATE OR REPLACE FUNCTION saldocta(tipo character varying, cta character varying, periodo character varying, rup character varying)
   RETURNS numeric AS
 $BODY$
 DECLARE
@@ -1534,9 +1535,9 @@ BEGIN
 
  IF tipo = 'C' THEN
    IF periodo = '00' THEN
-  SELECT sum(salprgper) into monto from contabb1  where codcta = cta;
+    SELECT sum(salprgper) into monto from contabb1  where codcta = cta;
    ELSE
-  SELECT sum(salprgper) into monto from contabb1  where codcta = cta and pereje = periodo;
+    SELECT sum(salprgper) into monto from contabb1  where codcta = cta and pereje = periodo;
    END IF;
 
    SALDO = monto;
@@ -1546,7 +1547,7 @@ BEGIN
   SALDO = monto;
 
  ELSEIF tipo = 'P' THEN
-   SELECT sum(monasi) into monto from cpasiini where codpre like cta||'%' and perpre = periodo;
+   SELECT sum(monasi) into monto from cpasiini where substr(codpre,rup) like cta||'%' and perpre = periodo;
    SALDO = monto;
 
  END IF;
@@ -1557,7 +1558,7 @@ END;
 
 $BODY$
   LANGUAGE 'plpgsql' VOLATILE;
-ALTER FUNCTION saldocta(character varying, character varying, character varying) OWNER TO postgres;
+ALTER FUNCTION saldocta(tipo character varying, cta character varying, periodo character varying, rup character varying) OWNER TO postgres;
 
 
 CREATE OR REPLACE FUNCTION diashab(codnom varchar,fecini date,fecfin date)
@@ -1819,7 +1820,7 @@ BEGIN
       if dias<=diaspendientes then
          if tipo<>'C' then
              SELECT INTO diahabil
-             (CASE WHEN DIA IS NOT NULL THEN 'N' 
+             (CASE WHEN DIA IS NOT NULL THEN 'N'
 	     ELSE (CASE WHEN diasemana(retorno)='Domingo' THEN coalesce(domingo,'N')
 		   WHEN diasemana(retorno)='Lunes' THEN coalesce(lunes,'N')
 		   WHEN diasemana(retorno)='Martes' THEN coalesce(martes,'N')
@@ -1836,18 +1837,18 @@ BEGIN
              IF diahabil is null THEN
                exit;
              END IF;
-             retorno=retorno+1;  
-	     IF diahabil='S' THEN		
+             retorno=retorno+1;
+	     IF diahabil='S' THEN
 		dias:=dias+1;
 	     END IF;
          else
              retorno=retorno+1;
-             dias:=dias+1;  
+             dias:=dias+1;
          end if;
       else
          loop
              SELECT INTO diahabil
-             (CASE WHEN DIA IS NOT NULL THEN 'N' 
+             (CASE WHEN DIA IS NOT NULL THEN 'N'
 	     ELSE  (CASE WHEN diasemana(retorno)='Domingo' THEN coalesce(domingo,'N')
 		   WHEN diasemana(retorno)='Lunes' THEN coalesce(lunes,'N')
 		   WHEN diasemana(retorno)='Martes' THEN coalesce(martes,'N')
@@ -1866,15 +1867,15 @@ BEGIN
               END IF;
               IF diahabil='S' THEN
                 exit;
-              else  
+              else
                 retorno=retorno+1;
-              end if; 
+              end if;
          end loop;
          exit;
       end if;
-      
+
    end loop;
-    
+
    return retorno;
 END;
 $body$
@@ -1887,15 +1888,56 @@ DECLARE
    dia varchar;
 BEGIN
    select into dia
-   (case extract(dow from fecha) 
-    when 1 then 'Lunes' 
-    when 2 then 'Martes' 
-    when 3 then 'Miercoles' 
-    when 4 then 'Jueves' 
-    when 5 then 'Viernes' 
-    when 6 then 'Sabado' 
+   (case extract(dow from fecha)
+    when 1 then 'Lunes'
+    when 2 then 'Martes'
+    when 3 then 'Miercoles'
+    when 4 then 'Jueves'
+    when 5 then 'Viernes'
+    when 6 then 'Sabado'
     else 'Domingo' end);
-   return dia;   
+   return dia;
 END;
 $body$
 LANGUAGE 'plpgsql' VOLATILE CALLED ON NULL INPUT SECURITY INVOKER;
+
+
+CREATE OR REPLACE FUNCTION saldocta1(tipo character varying, cta character varying, periodo1 character varying, periodo2 character varying, rup character varying)
+  RETURNS numeric AS
+$BODY$
+DECLARE
+SALDO NUMERIC(14,2);
+monto NUMERIC(14,2);
+
+BEGIN
+
+ IF tipo = 'C' THEN
+   IF periodo1 = '00' THEN
+    SELECT sum(salprgper) into monto from contabb1  where codcta = cta;
+   ELSE
+    SELECT sum(salprgper) into monto from contabb1  where codcta = cta and (pereje >= periodo1 and pereje <= periodo2);
+   END IF;
+   SALDO = monto;
+
+  ELSEIF tipo = 'I' THEN
+  SELECT sum(monasi) into monto from ciasiini a where codpre like cta||'%' and (perpre >= periodo1 and perpre <= periodo2);
+  SALDO = monto;
+
+ ELSEIF tipo = 'P' THEN
+  IF periodo1 = '00'THEN
+
+    SELECT sum(monasi) into monto from cpasiini where codpre like substr(cta,rup)||'%' and (perpre >= periodo1);
+  ELSE
+        SELECT sum(monasi) into monto from cpasiini where codpre like substr(cta,rup)||'%' and (perpre >= periodo1 and perpre <= periodo2);
+  END IF;
+   SALDO = monto;
+
+ END IF;
+
+RETURN SALDO;
+
+END;
+
+$BODY$
+  LANGUAGE 'plpgsql' VOLATILE;
+ALTER FUNCTION saldocta1(tipo character varying, cta character varying, periodo1 character varying, periodo2 character varying, rup character varying) OWNER TO postgres;
