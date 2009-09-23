@@ -40,6 +40,8 @@ class NpacumulacptMapBuilder {
 
 		$tMap->addColumn('CODCON', 'Codcon', 'string', CreoleTypes::VARCHAR, false, 3);
 
+		$tMap->addColumn('CODNOM', 'Codnom', 'string', CreoleTypes::VARCHAR, false, 3);
+
 		$tMap->addColumn('TIPACU', 'Tipacu', 'string', CreoleTypes::VARCHAR, false, 1);
 
 		$tMap->addColumn('FACTOR', 'Factor', 'double', CreoleTypes::NUMERIC, false, 10);

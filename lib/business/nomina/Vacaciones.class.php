@@ -627,6 +627,9 @@ class Vacaciones {
 		    }
 			$objNpvacdisfrute->setDiasdisfutar($r['diasdisfutar']);
 			$objNpvacdisfrute->setDiasdisfrutados(($r['diasdisfrutados']) + ($r['diasvac']));
+			$objNpvacdisfrute->setDiasbonovac($r['diasbonovac']);
+			if($r['pagadas']==1)
+				$objNpvacdisfrute->setDiasbonovacpag($r['diasbonovac']);
 			$objNpvacdisfrute->save();
 			
 			#Guardamos en npvacsalidas_Det
@@ -637,6 +640,11 @@ class Vacaciones {
 			$objNpvacsalidasDet->setDiasdisfutar($r['diasdisfutar']);
 			$objNpvacsalidasDet->setDiasdisfrutados($r['diasdisfrutados']);
 			$objNpvacsalidasDet->setDiasvac($r['diasvac']);
+			$objNpvacsalidasDet->setDiasbonovac($r['diasbonovac']);
+			if($r['pagadas']==1)
+				$objNpvacsalidasDet->setDiasbonovacpag($r['diasbonovac']);
+			else
+				$objNpvacsalidasDet->setDiasbonovacpag($r['diasbonovacpag']);
 			$objNpvacsalidasDet->setFecvac($npvacsalidas->getFecvac());	
 			$objNpvacsalidasDet->save();
 			
@@ -664,6 +672,8 @@ class Vacaciones {
 			{
 				$dianew = abs($per2->getDiasdisfrutados()-$r->getDiasvac());
 				$per2->setDiasdisfrutados($dianew);
+				if($r->getDiasbonovac()==$r->getDiasbonovacpag())
+					$per2->setDiasbonovacpag(0);
 				$per2->save();
 			}
 			$r->delete();

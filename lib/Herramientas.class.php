@@ -2155,6 +2155,36 @@ public static function obtenerDiaMesOAno($fecha,$formato,$dmoa)
       	}
     	return $mondis;
   	}
+	
+	public static function Guardar_Grid($objgrid,$arrget,$clase)
+	{
+		$objupdate = $objgrid[0];
+	    $j = 0;
+		foreach($objupdate as $x)
+		{
+			foreach($arrget as $key => $val)
+			{
+				if(!is_numeric($key))
+				{
+					if(strpos($val,'='))
+						eval('$x->set'.ucfirst($key).'('.$val.');');
+					else
+						eval('$x->set'.ucfirst($key).'($clase->get'.ucfirst($val).'());');
+				}else
+				{
+					eval('$x->set'.ucfirst($val).'($clase->get'.ucfirst($val).'());');
+				}				
+			}			
+			$x->save();
+		}
+	    $objdelete = $objgrid[1];
+	    $j = 0;
+		foreach($objdelete as $z)
+		{
+			$z->delete();
+		}
+		return '-1';	  
+	}
 }
 
 class H extends Herramientas

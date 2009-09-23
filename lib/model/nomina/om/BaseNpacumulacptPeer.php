@@ -13,7 +13,7 @@ abstract class BaseNpacumulacptPeer {
 	const CLASS_DEFAULT = 'lib.model.nomina.Npacumulacpt';
 
 	
-	const NUM_COLUMNS = 6;
+	const NUM_COLUMNS = 7;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -27,6 +27,9 @@ abstract class BaseNpacumulacptPeer {
 
 	
 	const CODCON = 'npacumulacpt.CODCON';
+
+	
+	const CODNOM = 'npacumulacpt.CODNOM';
 
 	
 	const TIPACU = 'npacumulacpt.TIPACU';
@@ -43,18 +46,18 @@ abstract class BaseNpacumulacptPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codacu', 'Nomacu', 'Codcon', 'Tipacu', 'Factor', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (NpacumulacptPeer::CODACU, NpacumulacptPeer::NOMACU, NpacumulacptPeer::CODCON, NpacumulacptPeer::TIPACU, NpacumulacptPeer::FACTOR, NpacumulacptPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codacu', 'nomacu', 'codcon', 'tipacu', 'factor', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
+		BasePeer::TYPE_PHPNAME => array ('Codacu', 'Nomacu', 'Codcon', 'Codnom', 'Tipacu', 'Factor', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (NpacumulacptPeer::CODACU, NpacumulacptPeer::NOMACU, NpacumulacptPeer::CODCON, NpacumulacptPeer::CODNOM, NpacumulacptPeer::TIPACU, NpacumulacptPeer::FACTOR, NpacumulacptPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codacu', 'nomacu', 'codcon', 'codnom', 'tipacu', 'factor', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codacu' => 0, 'Nomacu' => 1, 'Codcon' => 2, 'Tipacu' => 3, 'Factor' => 4, 'Id' => 5, ),
-		BasePeer::TYPE_COLNAME => array (NpacumulacptPeer::CODACU => 0, NpacumulacptPeer::NOMACU => 1, NpacumulacptPeer::CODCON => 2, NpacumulacptPeer::TIPACU => 3, NpacumulacptPeer::FACTOR => 4, NpacumulacptPeer::ID => 5, ),
-		BasePeer::TYPE_FIELDNAME => array ('codacu' => 0, 'nomacu' => 1, 'codcon' => 2, 'tipacu' => 3, 'factor' => 4, 'id' => 5, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
+		BasePeer::TYPE_PHPNAME => array ('Codacu' => 0, 'Nomacu' => 1, 'Codcon' => 2, 'Codnom' => 3, 'Tipacu' => 4, 'Factor' => 5, 'Id' => 6, ),
+		BasePeer::TYPE_COLNAME => array (NpacumulacptPeer::CODACU => 0, NpacumulacptPeer::NOMACU => 1, NpacumulacptPeer::CODCON => 2, NpacumulacptPeer::CODNOM => 3, NpacumulacptPeer::TIPACU => 4, NpacumulacptPeer::FACTOR => 5, NpacumulacptPeer::ID => 6, ),
+		BasePeer::TYPE_FIELDNAME => array ('codacu' => 0, 'nomacu' => 1, 'codcon' => 2, 'codnom' => 3, 'tipacu' => 4, 'factor' => 5, 'id' => 6, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
 	);
 
 	
@@ -113,6 +116,8 @@ abstract class BaseNpacumulacptPeer {
 		$criteria->addSelectColumn(NpacumulacptPeer::NOMACU);
 
 		$criteria->addSelectColumn(NpacumulacptPeer::CODCON);
+
+		$criteria->addSelectColumn(NpacumulacptPeer::CODNOM);
 
 		$criteria->addSelectColumn(NpacumulacptPeer::TIPACU);
 

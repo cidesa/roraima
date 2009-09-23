@@ -13,7 +13,7 @@ abstract class BaseNpbonocontPeer {
 	const CLASS_DEFAULT = 'lib.model.nomina.Npbonocont';
 
 	
-	const NUM_COLUMNS = 11;
+	const NUM_COLUMNS = 12;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -38,6 +38,9 @@ abstract class BaseNpbonocontPeer {
 	const DIAVAC = 'npbonocont.DIAVAC';
 
 	
+	const DIAPRO = 'npbonocont.DIAPRO';
+
+	
 	const ANOVIGHAS = 'npbonocont.ANOVIGHAS';
 
 	
@@ -58,18 +61,18 @@ abstract class BaseNpbonocontPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codtipcon', 'Anovig', 'Desde', 'Hasta', 'Diauti', 'Diavac', 'Anovighas', 'Calinc', 'Antap', 'Antapvac', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (NpbonocontPeer::CODTIPCON, NpbonocontPeer::ANOVIG, NpbonocontPeer::DESDE, NpbonocontPeer::HASTA, NpbonocontPeer::DIAUTI, NpbonocontPeer::DIAVAC, NpbonocontPeer::ANOVIGHAS, NpbonocontPeer::CALINC, NpbonocontPeer::ANTAP, NpbonocontPeer::ANTAPVAC, NpbonocontPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codtipcon', 'anovig', 'desde', 'hasta', 'diauti', 'diavac', 'anovighas', 'calinc', 'antap', 'antapvac', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
+		BasePeer::TYPE_PHPNAME => array ('Codtipcon', 'Anovig', 'Desde', 'Hasta', 'Diauti', 'Diavac', 'Diapro', 'Anovighas', 'Calinc', 'Antap', 'Antapvac', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (NpbonocontPeer::CODTIPCON, NpbonocontPeer::ANOVIG, NpbonocontPeer::DESDE, NpbonocontPeer::HASTA, NpbonocontPeer::DIAUTI, NpbonocontPeer::DIAVAC, NpbonocontPeer::DIAPRO, NpbonocontPeer::ANOVIGHAS, NpbonocontPeer::CALINC, NpbonocontPeer::ANTAP, NpbonocontPeer::ANTAPVAC, NpbonocontPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codtipcon', 'anovig', 'desde', 'hasta', 'diauti', 'diavac', 'diapro', 'anovighas', 'calinc', 'antap', 'antapvac', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codtipcon' => 0, 'Anovig' => 1, 'Desde' => 2, 'Hasta' => 3, 'Diauti' => 4, 'Diavac' => 5, 'Anovighas' => 6, 'Calinc' => 7, 'Antap' => 8, 'Antapvac' => 9, 'Id' => 10, ),
-		BasePeer::TYPE_COLNAME => array (NpbonocontPeer::CODTIPCON => 0, NpbonocontPeer::ANOVIG => 1, NpbonocontPeer::DESDE => 2, NpbonocontPeer::HASTA => 3, NpbonocontPeer::DIAUTI => 4, NpbonocontPeer::DIAVAC => 5, NpbonocontPeer::ANOVIGHAS => 6, NpbonocontPeer::CALINC => 7, NpbonocontPeer::ANTAP => 8, NpbonocontPeer::ANTAPVAC => 9, NpbonocontPeer::ID => 10, ),
-		BasePeer::TYPE_FIELDNAME => array ('codtipcon' => 0, 'anovig' => 1, 'desde' => 2, 'hasta' => 3, 'diauti' => 4, 'diavac' => 5, 'anovighas' => 6, 'calinc' => 7, 'antap' => 8, 'antapvac' => 9, 'id' => 10, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
+		BasePeer::TYPE_PHPNAME => array ('Codtipcon' => 0, 'Anovig' => 1, 'Desde' => 2, 'Hasta' => 3, 'Diauti' => 4, 'Diavac' => 5, 'Diapro' => 6, 'Anovighas' => 7, 'Calinc' => 8, 'Antap' => 9, 'Antapvac' => 10, 'Id' => 11, ),
+		BasePeer::TYPE_COLNAME => array (NpbonocontPeer::CODTIPCON => 0, NpbonocontPeer::ANOVIG => 1, NpbonocontPeer::DESDE => 2, NpbonocontPeer::HASTA => 3, NpbonocontPeer::DIAUTI => 4, NpbonocontPeer::DIAVAC => 5, NpbonocontPeer::DIAPRO => 6, NpbonocontPeer::ANOVIGHAS => 7, NpbonocontPeer::CALINC => 8, NpbonocontPeer::ANTAP => 9, NpbonocontPeer::ANTAPVAC => 10, NpbonocontPeer::ID => 11, ),
+		BasePeer::TYPE_FIELDNAME => array ('codtipcon' => 0, 'anovig' => 1, 'desde' => 2, 'hasta' => 3, 'diauti' => 4, 'diavac' => 5, 'diapro' => 6, 'anovighas' => 7, 'calinc' => 8, 'antap' => 9, 'antapvac' => 10, 'id' => 11, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
 	);
 
 	
@@ -134,6 +137,8 @@ abstract class BaseNpbonocontPeer {
 		$criteria->addSelectColumn(NpbonocontPeer::DIAUTI);
 
 		$criteria->addSelectColumn(NpbonocontPeer::DIAVAC);
+
+		$criteria->addSelectColumn(NpbonocontPeer::DIAPRO);
 
 		$criteria->addSelectColumn(NpbonocontPeer::ANOVIGHAS);
 

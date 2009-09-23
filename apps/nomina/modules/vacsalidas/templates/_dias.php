@@ -18,11 +18,12 @@
 			  'control_name' => 'npvacsalidas[diasdisfrutar]',
 			  'readonly' => $npvacsalidas->getId()== '' ? false : true,
 			  'onBlur'=> remote_function(array(
-			  'update'   => 'divgridvaca',
-			  'url'      => 'vacsalidas/ajax',
-			  'condition' => "$('npvacsalidas_codemp').value != '' && $('id').value == ''",
-			  'complete' => 'AjaxJSON(request, json)',
-			  'with' => "'ajax=2&codigo='+$('npvacsalidas_codemp').value+'&fecdes='+$('npvacsalidas_fecdes').value+'&diavac='+this.value+'&diaspend='+$('npvacsalidas_diaspend').value",
+				  'update'   => 'divgridvaca',
+				  'url'      => 'vacsalidas/ajax',
+				  'condition' => "$('npvacsalidas_codemp').value != '' && $('id').value == ''",
+				  'complete' => 'AjaxJSON(request, json)',
+				  'script' => true,
+				  'with' => "'ajax=2&codigo='+$('npvacsalidas_codemp').value+'&fecdes='+$('npvacsalidas_fecdes').value+'&diavac='+this.value+'&diaspend='+$('npvacsalidas_diaspend').value",
 			        )),
 			)); echo $value ? $value : '&nbsp;' ?>
 			      

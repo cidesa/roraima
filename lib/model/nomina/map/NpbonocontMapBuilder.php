@@ -46,6 +46,8 @@ class NpbonocontMapBuilder {
 
 		$tMap->addColumn('DIAVAC', 'Diavac', 'double', CreoleTypes::NUMERIC, true, 3);
 
+		$tMap->addColumn('DIAPRO', 'Diapro', 'double', CreoleTypes::NUMERIC, false, 3);
+
 		$tMap->addColumn('ANOVIGHAS', 'Anovighas', 'int', CreoleTypes::DATE, false, null);
 
 		$tMap->addColumn('CALINC', 'Calinc', 'string', CreoleTypes::VARCHAR, false, 1);

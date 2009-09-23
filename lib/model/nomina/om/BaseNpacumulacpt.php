@@ -21,6 +21,10 @@ abstract class BaseNpacumulacpt extends BaseObject  implements Persistent {
 
 
 	
+	protected $codnom;
+
+
+	
 	protected $tipacu;
 
 
@@ -56,6 +60,13 @@ abstract class BaseNpacumulacpt extends BaseObject  implements Persistent {
   {
 
     return trim($this->codcon);
+
+  }
+  
+  public function getCodnom()
+  {
+
+    return trim($this->codnom);
 
   }
   
@@ -111,6 +122,16 @@ abstract class BaseNpacumulacpt extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setCodnom($v)
+	{
+
+    if ($this->codnom !== $v) {
+        $this->codnom = $v;
+        $this->modifiedColumns[] = NpacumulacptPeer::CODNOM;
+      }
+  
+	} 
+	
 	public function setTipacu($v)
 	{
 
@@ -151,11 +172,13 @@ abstract class BaseNpacumulacpt extends BaseObject  implements Persistent {
 
       $this->codcon = $rs->getString($startcol + 2);
 
-      $this->tipacu = $rs->getString($startcol + 3);
+      $this->codnom = $rs->getString($startcol + 3);
 
-      $this->factor = $rs->getFloat($startcol + 4);
+      $this->tipacu = $rs->getString($startcol + 4);
 
-      $this->id = $rs->getInt($startcol + 5);
+      $this->factor = $rs->getFloat($startcol + 5);
+
+      $this->id = $rs->getInt($startcol + 6);
 
       $this->resetModified();
 
@@ -163,7 +186,7 @@ abstract class BaseNpacumulacpt extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 6; 
+            return $startcol + 7; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Npacumulacpt object", $e);
     }
@@ -320,12 +343,15 @@ abstract class BaseNpacumulacpt extends BaseObject  implements Persistent {
 				return $this->getCodcon();
 				break;
 			case 3:
-				return $this->getTipacu();
+				return $this->getCodnom();
 				break;
 			case 4:
-				return $this->getFactor();
+				return $this->getTipacu();
 				break;
 			case 5:
+				return $this->getFactor();
+				break;
+			case 6:
 				return $this->getId();
 				break;
 			default:
@@ -341,9 +367,10 @@ abstract class BaseNpacumulacpt extends BaseObject  implements Persistent {
 			$keys[0] => $this->getCodacu(),
 			$keys[1] => $this->getNomacu(),
 			$keys[2] => $this->getCodcon(),
-			$keys[3] => $this->getTipacu(),
-			$keys[4] => $this->getFactor(),
-			$keys[5] => $this->getId(),
+			$keys[3] => $this->getCodnom(),
+			$keys[4] => $this->getTipacu(),
+			$keys[5] => $this->getFactor(),
+			$keys[6] => $this->getId(),
 		);
 		return $result;
 	}
@@ -369,12 +396,15 @@ abstract class BaseNpacumulacpt extends BaseObject  implements Persistent {
 				$this->setCodcon($value);
 				break;
 			case 3:
-				$this->setTipacu($value);
+				$this->setCodnom($value);
 				break;
 			case 4:
-				$this->setFactor($value);
+				$this->setTipacu($value);
 				break;
 			case 5:
+				$this->setFactor($value);
+				break;
+			case 6:
 				$this->setId($value);
 				break;
 		} 	}
@@ -387,9 +417,10 @@ abstract class BaseNpacumulacpt extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[0], $arr)) $this->setCodacu($arr[$keys[0]]);
 		if (array_key_exists($keys[1], $arr)) $this->setNomacu($arr[$keys[1]]);
 		if (array_key_exists($keys[2], $arr)) $this->setCodcon($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setTipacu($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setFactor($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setId($arr[$keys[5]]);
+		if (array_key_exists($keys[3], $arr)) $this->setCodnom($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setTipacu($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setFactor($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setId($arr[$keys[6]]);
 	}
 
 	
@@ -400,6 +431,7 @@ abstract class BaseNpacumulacpt extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(NpacumulacptPeer::CODACU)) $criteria->add(NpacumulacptPeer::CODACU, $this->codacu);
 		if ($this->isColumnModified(NpacumulacptPeer::NOMACU)) $criteria->add(NpacumulacptPeer::NOMACU, $this->nomacu);
 		if ($this->isColumnModified(NpacumulacptPeer::CODCON)) $criteria->add(NpacumulacptPeer::CODCON, $this->codcon);
+		if ($this->isColumnModified(NpacumulacptPeer::CODNOM)) $criteria->add(NpacumulacptPeer::CODNOM, $this->codnom);
 		if ($this->isColumnModified(NpacumulacptPeer::TIPACU)) $criteria->add(NpacumulacptPeer::TIPACU, $this->tipacu);
 		if ($this->isColumnModified(NpacumulacptPeer::FACTOR)) $criteria->add(NpacumulacptPeer::FACTOR, $this->factor);
 		if ($this->isColumnModified(NpacumulacptPeer::ID)) $criteria->add(NpacumulacptPeer::ID, $this->id);
@@ -438,6 +470,8 @@ abstract class BaseNpacumulacpt extends BaseObject  implements Persistent {
 		$copyObj->setNomacu($this->nomacu);
 
 		$copyObj->setCodcon($this->codcon);
+
+		$copyObj->setCodnom($this->codnom);
 
 		$copyObj->setTipacu($this->tipacu);
 

@@ -320,34 +320,42 @@ class presnomtipconActions extends autopresnomtipconActions
 		$col6->setAlineacionContenido(Columna::CENTRO);
 		$col6->setNombreCampo('Diavac');
 		$col6->setHTML('type="text" size="10"');
+		
+		$col7 = new Columna('Dias Productividad');
+		$col7->setTipo(Columna::TEXTO);
+		$col7->setEsGrabable(true);
+		$col7->setAlineacionObjeto(Columna::CENTRO);
+		$col7->setAlineacionContenido(Columna::CENTRO);
+		$col7->setNombreCampo('Diapro');
+		$col7->setHTML('type="text" size="10"');
 
 
-		$col7 = new Columna('Incidencia.');
-	    $col7->setTipo(Columna::COMBO);
-	    $col7->setCombo(Constantes::Contratos_nomina());
-	    $col7->setAlineacionObjeto(Columna::DERECHA);
-	    $col7->setAlineacionContenido(Columna::DERECHA);
-	    $col7->setEsGrabable(true);
-	    $col7->setNombreCampo('Calinc');
-	    $col7->setHTML(' ');
-
-		$col8 = new Columna('Antiguedad A.P.');
+		$col8 = new Columna('Incidencia.');
 	    $col8->setTipo(Columna::COMBO);
 	    $col8->setCombo(Constantes::Contratos_nomina());
 	    $col8->setAlineacionObjeto(Columna::DERECHA);
 	    $col8->setAlineacionContenido(Columna::DERECHA);
 	    $col8->setEsGrabable(true);
-	    $col8->setNombreCampo('Antap');
+	    $col8->setNombreCampo('Calinc');
 	    $col8->setHTML(' ');
 
-		$col9 = new Columna('A.A.P. Vacaciones');
+		$col9 = new Columna('Antiguedad A.P.');
 	    $col9->setTipo(Columna::COMBO);
 	    $col9->setCombo(Constantes::Contratos_nomina());
 	    $col9->setAlineacionObjeto(Columna::DERECHA);
 	    $col9->setAlineacionContenido(Columna::DERECHA);
 	    $col9->setEsGrabable(true);
-	    $col9->setNombreCampo('Antapvac');
+	    $col9->setNombreCampo('Antap');
 	    $col9->setHTML(' ');
+
+		$col10 = new Columna('A.A.P. Vacaciones');
+	    $col10->setTipo(Columna::COMBO);
+	    $col10->setCombo(Constantes::Contratos_nomina());
+	    $col10->setAlineacionObjeto(Columna::DERECHA);
+	    $col10->setAlineacionContenido(Columna::DERECHA);
+	    $col10->setEsGrabable(true);
+	    $col10->setNombreCampo('Antapvac');
+	    $col10->setHTML(' ');
 
 		// Se guardan las columnas en el objetos de opciones
 		$opciones->addColumna($col1);
@@ -359,6 +367,7 @@ class presnomtipconActions extends autopresnomtipconActions
 		$opciones->addColumna($col7);
 		$opciones->addColumna($col8);
 		$opciones->addColumna($col9);
+		$opciones->addColumna($col10);
 
 
 		// Ee genera el arreglo de opciones necesario para generar el grid

@@ -6,7 +6,7 @@
  * @package    siga
  * @subpackage vacsalidas
  * @author     Your name here
- * @version    SVN: $Id: actions.class.php 32903 2009-09-09 21:53:28Z dmartinez $
+ * @version    SVN: $Id: actions.class.php 33315 2009-09-23 14:42:43Z cramirez $
  */
 class vacsalidasActions extends autovacsalidasActions
 {
@@ -22,8 +22,10 @@ class vacsalidasActions extends autovacsalidasActions
 		$this->configGrid();	
   }
 
-  public function configGrid($codemp='',$nomina='',$fecing='',$diavac=0,$nuevo='')
+  public function configGrid($codemp='',$nomina='',$fecing='',$diavac=0,$nuevo='',$fecdesde='')
   {
+  	if ($fecdesde=='')
+	   $fecdesde=date('Y-m-d');
   	if($nuevo=='')
 	{
 		$auxfecing = split("/",$fecing);	
@@ -33,8 +35,7 @@ class vacsalidasActions extends autovacsalidasActions
 		$this->totdia=0;
 		$anofin=date('Y');
 		$anodesde = date('Y',strtotime($fecing));
-		$anohasta = $anodesde + 1;	
-		
+		$anohasta = $anodesde + 1;					
 		$sql="SELECT
 					'0' as id,
 					(CASE WHEN (SUM(HIST)=0) THEN 'NO' ELSE 'SI' END) AS HIST,
@@ -85,17 +86,88 @@ class vacsalidasActions extends autovacsalidasActions
 					where b.codnom='$nomina' AND Antiguedad>=rangodesde and Antiguedad<=rangohasta
 					GROUP BY DESDE,HASTA,ANTIGUEDAD,JORNADA,rangodesde,rangohasta
 					ORDER BY DESDE";
+
+		/*$sql="SELECT
+		          '0' as id,
+	              (CASE WHEN (SUM(HIST)=0) THEN 'NO' ELSE 'SI' END) AS HIST,
+	              SUM(ANTIGUEDAD) AS ANTIGUEDAD,
+	              DESDE as perini,
+	              HASTA as perfin,
+	              SUM(DISFRUTADOS) AS diasdisfrutados,
+	              (CASE WHEN (SUM(HIST)=0) THEN SUM(CORRESPONDE) ELSE SUM(CORRESPONDEHIS) END) AS diasdisfutar,
+				  jornada
+	              FROM
+	              (
+	                    Select
+	                0 as HIST,
+	                " . $anofin . "-B.Ano as Antiguedad,
+	                ((" . ($anohasta -1) . ")+(" . $anofin . "-B.Ano-1)) as Desde,
+	                ((" . ($anohasta -1) . ")+(" . $anofin . "-B.Ano)) as Hasta,
+	                0 as Disfrutados,
+	                A.DIADIS as CORRESPONDE,
+	                0 as CORRESPONDEHIS
+	                from NPvacdiadis A,NPAnos B
+	                Where
+	                A.codnom='" . $nomina . "'
+	                And B.Ano Between " . ($anohasta -1) . " and " . $anofin . "
+	                And " . $anofin . "-B.ano between A.rangodesde and A.rangohasta
 	
+	                UNION ALL
+	
+	                Select
+	                1 as HIST,
+	                " . $anofin . "-B.Ano as Antiguedad,
+	                to_number(C.PERINI,'9999') as Desde,
+	                to_number(C.PERFIN,'9999') as Hasta,
+	                C.DIASDISFRUTADOS as Disfrutados,
+	                0 as CORRESPONDE,
+	                C.diasdisfutar as CORRESPONDEHIS
+	                from
+	                NPvacdiadis A,NPAnos B,Npvacdisfrute C
+	                Where
+	                A.codnom='" . $nomina . "'
+	                And B.Ano Between " . ($anohasta -1) . " and " . $anofin . "
+	                And " . $anofin . "-B.ano between A.rangodesde and A.rangohasta
+	                And C.PERINI=B.ANO::varchar
+	                And C.CODEMP='" . $codemp . "'
+	
+	              ) as subconsulta
+				  , npvacdiadis b
+				  where b.codnom='$nomina'
+	              GROUP BY DESDE,HASTA,JORNADA,rangodesde,rangohasta
+				  HAVING sum(antiguedad)>=rangodesde and sum(antiguedad)<=rangohasta
+	              ORDER BY DESDE";*/
+
 		if (H::BuscarDatos($sql,$arr))
-		{		
+		{			    
+			#VERIFICAMOS SI DEBE MOSTRAR EL PERIODO NO VENCIDO			
+		    $diah = date('d',strtotime($fecdesde));
+		    $mesh = date('m',strtotime($fecdesde));
+		    $anoh = date('Y',strtotime($fecdesde));
+		    $fechah = mktime(0, 0, 0, (int) $mesh, (int) $diah, (int) $anoh);
+			$diaing = date('d',strtotime($fecing));
+		    $mesing = date('m',strtotime($fecing));
 		    $i=0;
+			$fec='';
+			$sqldef = "select * from npvacdefgen where codnomvac='$nomina'";
+			if (H::BuscarDatos($sqldef,$arrdef))
+				$fec=$arrdef[0]['pagoad'];							
+			
 			foreach($arr as $r)
-			{			
-				$per[$i]['id']=$r['id'];
-				$per[$i]['perini']=$r['perini'];
-				$per[$i]['perfin']=$r['perfin'];
-				
-				$sql2 = "SELECT A.ANTAPVAC FROM NPBONOCONT A, NPASIEMPCONT B WHERE A.CODTIPCON=B.CODTIPCON AND B.CODEMP='" . $codemp . "' AND '" . $r['perfin'] . "' BETWEEN TO_CHAR(ANOVIG,'YYYY') AND TO_CHAR(ANOVIGHAS,'YYYY')";
+			{
+				$ano = $r['perfin'];
+       			$fecha = mktime(0, 0, 0, (int) $mesing, (int) $diaing, (int) $ano);
+				if($fec=='S')
+					$fechah=$fecha;
+
+				if ($fecha <= $fechah) {				
+
+					$per[$i]['id']=$r['id'];
+					$per[$i]['perini']=$r['perini'];
+					$per[$i]['perfin']=$r['perfin'];
+					
+					
+					$sql2 = "SELECT A.ANTAPVAC FROM NPBONOCONT A, NPASIEMPCONT B WHERE A.CODTIPCON=B.CODTIPCON AND B.CODEMP='" . $codemp . "' AND '" . $r['perfin'] . "' BETWEEN TO_CHAR(ANOVIG,'YYYY') AND TO_CHAR(ANOVIGHAS,'YYYY')";
           			Herramientas :: BuscarDatos($sql2, & $arr2);
 
 					$antiguedadAP = '';
@@ -137,8 +209,9 @@ class vacsalidasActions extends autovacsalidasActions
 				  	$variable = $r['diasdisfutar'];
 				  }	
 		          $diasdisfrutar = $variable;
-							
-				$diadis=$variable-$r['diasdisfrutados'];
+					
+								
+					$diadis=$variable-$r['diasdisfrutados'];
 					if($diavac==0)
 				  		$diasvacaciones=0;
 					else
@@ -152,17 +225,54 @@ class vacsalidasActions extends autovacsalidasActions
 						$diavac-=$diavac;
 					  }
 					    
-					}					  
+					}						  
 					$per[$i]['diasdisfutar']=$variable;
 					$variable = $r['diasdisfrutados'];
 					$per[$i]['diasdisfrutados']=$variable;
 					$per[$i]['diasvac']=$diasvacaciones;
 					$per[$i]['diaspdisfrutar']=$diasdisfrutar-$variable-$diasvacaciones;
-					$per[$i]['jornada']=$r['jornada'];
-				$this->totdia+=$per[$i]['diaspdisfrutar'];
-				$this->totpen+=($r['diasdisfutar']-$r['diasdisfrutados']);
-				$i++;
-			}
+					$per[$i]['jornada']=$r['jornada'];					
+					$c = new Criteria();
+					$c->add(NpvacdisfrutePeer::CODEMP,$codemp);
+					$c->add(NpvacdisfrutePeer::PERINI,$r['perini']);
+					$c->add(NpvacdisfrutePeer::PERFIN,$r['perfin']);
+					$per0 = NpvacdisfrutePeer::doSelectOne($c);
+					if($per0)
+					{
+						if($per0->getDiasbonovac())
+						{
+							$per[$i]['diasbonovac']=$per0->getDiasbonovac();
+							$per[$i]['diasbonovacpag']=$per0->getDiasbonovacpag();		
+						}else
+						{
+							$sqldef = "SELECT A.ANTAPVAC,A.DIAVAC FROM NPBONOCONT A, NPASIEMPCONT B WHERE A.CODTIPCON=B.CODTIPCON AND B.CODEMP='" . $codemp . "' AND '" . $anohasta . "' BETWEEN TO_CHAR(ANOVIG,'YYYY') AND TO_CHAR(ANOVIGHAS,'YYYY')";
+							if(Herramientas :: BuscarDatos($sqldef, & $perdef))
+								$per[$i]['diasbonovac']=$perdef[0]['diavac'];
+							else
+								$per[$i]['diasbonovac']='0';						
+							$per[$i]['diasbonovacpag']='0';
+						}						
+					}else
+					{
+						$sqldef = "SELECT A.ANTAPVAC,A.DIAVAC FROM NPBONOCONT A, NPASIEMPCONT B WHERE A.CODTIPCON=B.CODTIPCON AND B.CODEMP='" . $codemp . "' AND '" . $anohasta . "' BETWEEN TO_CHAR(ANOVIG,'YYYY') AND TO_CHAR(ANOVIGHAS,'YYYY')";
+						if(Herramientas :: BuscarDatos($sqldef, & $perdef))
+							$per[$i]['diasbonovac']=$perdef[0]['diavac'];
+						else
+							$per[$i]['diasbonovac']='0';						
+						$per[$i]['diasbonovacpag']='0';
+					}
+					if($per[$i]['diasbonovac']==$per[$i]['diasbonovacpag'])
+					{
+						$per[$i]['pagadas']=1;
+					}else
+					{
+						$per[$i]['pagadas']=0;
+					}
+					$this->totdia+=$per[$i]['diaspdisfrutar'];
+					$this->totpen+=($r['diasdisfutar']-$r['diasdisfrutados']);
+					$i++;
+				}
+			}			
 		}	
 	}else
 	{
@@ -172,7 +282,7 @@ class vacsalidasActions extends autovacsalidasActions
 		$per = NpvacsalidasDetPeer::doSelect($c);
 	}
   	
-   
+
     $opciones = new OpcionesGrid();
     $opciones->setEliminar(false);
     $opciones->setTabla('Npvacsalidas_det');
@@ -236,6 +346,31 @@ class vacsalidasActions extends autovacsalidasActions
     $col7->setTipo(Columna::TEXTO);
     $col7->setOculta(true);
     $col7->setNombreCampo('jornada');
+	
+	$col8 = new Columna('Dias de Bono Vacacional');
+    $col8->setTipo(Columna::TEXTO);
+    $col8->setEsGrabable(true);
+    $col8->setNombreCampo('diasbonovac');
+    $col8->setAlineacionObjeto(Columna::DERECHA);
+    $col8->setAlineacionContenido(Columna::DERECHA);
+    $col8->setHTML('type="text" size="8" readonly= true');
+	
+	$col9 = new Columna(' ');
+    $col9->setTipo(Columna::TEXTO);
+    $col9->setEsGrabable(true);
+	$col9->setOculta(true);
+    $col9->setNombreCampo('diasbonovacpag');
+    $col9->setAlineacionObjeto(Columna::DERECHA);
+    $col9->setAlineacionContenido(Columna::DERECHA);
+    $col9->setHTML('type="text" size="8" readonly= true');
+	
+	$col10 = new Columna('Pagadas');
+    $col10->setTipo(Columna::CHECK);
+    $col10->setEsGrabable(true);
+    $col10->setNombreCampo('pagadas');
+    $col10->setAlineacionObjeto(Columna::DERECHA);
+    $col10->setAlineacionContenido(Columna::DERECHA);
+    $col10->setHTML(' ');
 
     $opciones->addColumna($col1);
     $opciones->addColumna($col2);
@@ -244,6 +379,9 @@ class vacsalidasActions extends autovacsalidasActions
     $opciones->addColumna($col5);
     $opciones->addColumna($col6);
 	$opciones->addColumna($col7);
+	$opciones->addColumna($col8);
+	$opciones->addColumna($col9);
+	$opciones->addColumna($col10);
 	
 	$this->obj = $opciones->getConfig($per);
     $this->npvacsalidas->setObjvac($this->obj);
@@ -291,8 +429,10 @@ class vacsalidasActions extends autovacsalidasActions
 		$fecdes = $this->getRequestParameter('fecdes','');
 		$diavac = $this->getRequestParameter('diavac','');		
 		$fecing = NphojintPeer::getFecing($codigo);
-        $codnom = NphojintPeer::getCodnom($codigo);		
-		$this->configGrid($codigo,$codnom,$fecing,$diavac);
+        $codnom = NphojintPeer::getCodnom($codigo);
+		$auxfec = split('/',$fecdes);	
+		$fecdesgrid = $auxfec[2].'/'.$auxfec[1].'/'.$auxfec[0];
+		$this->configGrid($codigo,$codnom,$fecing,$diavac,'',$fecdesgrid);
 		$arrgrid = $this->npvacsalidas->getObjvac();
 		if($diavac>$this->totpen)
 		   $diavac=$this->totpen;

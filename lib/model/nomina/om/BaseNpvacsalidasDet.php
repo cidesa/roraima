@@ -33,6 +33,14 @@ abstract class BaseNpvacsalidasDet extends BaseObject  implements Persistent {
 
 
 	
+	protected $diasbonovac;
+
+
+	
+	protected $diasbonovacpag;
+
+
+	
 	protected $fecvac;
 
 
@@ -88,6 +96,22 @@ abstract class BaseNpvacsalidasDet extends BaseObject  implements Persistent {
 
     if($val) return number_format($this->diasvac,2,',','.');
     else return $this->diasvac;
+
+  }
+  
+  public function getDiasbonovac($val=false)
+  {
+
+    if($val) return number_format($this->diasbonovac,2,',','.');
+    else return $this->diasbonovac;
+
+  }
+  
+  public function getDiasbonovacpag($val=false)
+  {
+
+    if($val) return number_format($this->diasbonovacpag,2,',','.');
+    else return $this->diasbonovacpag;
 
   }
   
@@ -180,6 +204,26 @@ abstract class BaseNpvacsalidasDet extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setDiasbonovac($v)
+	{
+
+    if ($this->diasbonovac !== $v) {
+        $this->diasbonovac = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpvacsalidasDetPeer::DIASBONOVAC;
+      }
+  
+	} 
+	
+	public function setDiasbonovacpag($v)
+	{
+
+    if ($this->diasbonovacpag !== $v) {
+        $this->diasbonovacpag = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpvacsalidasDetPeer::DIASBONOVACPAG;
+      }
+  
+	} 
+	
 	public function setFecvac($v)
 	{
 
@@ -223,9 +267,13 @@ abstract class BaseNpvacsalidasDet extends BaseObject  implements Persistent {
 
       $this->diasvac = $rs->getFloat($startcol + 5);
 
-      $this->fecvac = $rs->getDate($startcol + 6, null);
+      $this->diasbonovac = $rs->getFloat($startcol + 6);
 
-      $this->id = $rs->getInt($startcol + 7);
+      $this->diasbonovacpag = $rs->getFloat($startcol + 7);
+
+      $this->fecvac = $rs->getDate($startcol + 8, null);
+
+      $this->id = $rs->getInt($startcol + 9);
 
       $this->resetModified();
 
@@ -233,7 +281,7 @@ abstract class BaseNpvacsalidasDet extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 8; 
+            return $startcol + 10; 
     } catch (Exception $e) {
       throw new PropelException("Error populating NpvacsalidasDet object", $e);
     }
@@ -399,9 +447,15 @@ abstract class BaseNpvacsalidasDet extends BaseObject  implements Persistent {
 				return $this->getDiasvac();
 				break;
 			case 6:
-				return $this->getFecvac();
+				return $this->getDiasbonovac();
 				break;
 			case 7:
+				return $this->getDiasbonovacpag();
+				break;
+			case 8:
+				return $this->getFecvac();
+				break;
+			case 9:
 				return $this->getId();
 				break;
 			default:
@@ -420,8 +474,10 @@ abstract class BaseNpvacsalidasDet extends BaseObject  implements Persistent {
 			$keys[3] => $this->getDiasdisfutar(),
 			$keys[4] => $this->getDiasdisfrutados(),
 			$keys[5] => $this->getDiasvac(),
-			$keys[6] => $this->getFecvac(),
-			$keys[7] => $this->getId(),
+			$keys[6] => $this->getDiasbonovac(),
+			$keys[7] => $this->getDiasbonovacpag(),
+			$keys[8] => $this->getFecvac(),
+			$keys[9] => $this->getId(),
 		);
 		return $result;
 	}
@@ -456,9 +512,15 @@ abstract class BaseNpvacsalidasDet extends BaseObject  implements Persistent {
 				$this->setDiasvac($value);
 				break;
 			case 6:
-				$this->setFecvac($value);
+				$this->setDiasbonovac($value);
 				break;
 			case 7:
+				$this->setDiasbonovacpag($value);
+				break;
+			case 8:
+				$this->setFecvac($value);
+				break;
+			case 9:
 				$this->setId($value);
 				break;
 		} 	}
@@ -474,8 +536,10 @@ abstract class BaseNpvacsalidasDet extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[3], $arr)) $this->setDiasdisfutar($arr[$keys[3]]);
 		if (array_key_exists($keys[4], $arr)) $this->setDiasdisfrutados($arr[$keys[4]]);
 		if (array_key_exists($keys[5], $arr)) $this->setDiasvac($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setFecvac($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setId($arr[$keys[7]]);
+		if (array_key_exists($keys[6], $arr)) $this->setDiasbonovac($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setDiasbonovacpag($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setFecvac($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setId($arr[$keys[9]]);
 	}
 
 	
@@ -489,6 +553,8 @@ abstract class BaseNpvacsalidasDet extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(NpvacsalidasDetPeer::DIASDISFUTAR)) $criteria->add(NpvacsalidasDetPeer::DIASDISFUTAR, $this->diasdisfutar);
 		if ($this->isColumnModified(NpvacsalidasDetPeer::DIASDISFRUTADOS)) $criteria->add(NpvacsalidasDetPeer::DIASDISFRUTADOS, $this->diasdisfrutados);
 		if ($this->isColumnModified(NpvacsalidasDetPeer::DIASVAC)) $criteria->add(NpvacsalidasDetPeer::DIASVAC, $this->diasvac);
+		if ($this->isColumnModified(NpvacsalidasDetPeer::DIASBONOVAC)) $criteria->add(NpvacsalidasDetPeer::DIASBONOVAC, $this->diasbonovac);
+		if ($this->isColumnModified(NpvacsalidasDetPeer::DIASBONOVACPAG)) $criteria->add(NpvacsalidasDetPeer::DIASBONOVACPAG, $this->diasbonovacpag);
 		if ($this->isColumnModified(NpvacsalidasDetPeer::FECVAC)) $criteria->add(NpvacsalidasDetPeer::FECVAC, $this->fecvac);
 		if ($this->isColumnModified(NpvacsalidasDetPeer::ID)) $criteria->add(NpvacsalidasDetPeer::ID, $this->id);
 
@@ -532,6 +598,10 @@ abstract class BaseNpvacsalidasDet extends BaseObject  implements Persistent {
 		$copyObj->setDiasdisfrutados($this->diasdisfrutados);
 
 		$copyObj->setDiasvac($this->diasvac);
+
+		$copyObj->setDiasbonovac($this->diasbonovac);
+
+		$copyObj->setDiasbonovacpag($this->diasbonovacpag);
 
 		$copyObj->setFecvac($this->fecvac);
 

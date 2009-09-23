@@ -33,6 +33,10 @@ abstract class BaseNpbonocont extends BaseObject  implements Persistent {
 
 
 	
+	protected $diapro;
+
+
+	
 	protected $anovighas;
 
 
@@ -116,6 +120,14 @@ abstract class BaseNpbonocont extends BaseObject  implements Persistent {
 
     if($val) return number_format($this->diavac,2,',','.');
     else return $this->diavac;
+
+  }
+  
+  public function getDiapro($val=false)
+  {
+
+    if($val) return number_format($this->diapro,2,',','.');
+    else return $this->diapro;
 
   }
   
@@ -236,6 +248,16 @@ abstract class BaseNpbonocont extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setDiapro($v)
+	{
+
+    if ($this->diapro !== $v) {
+        $this->diapro = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpbonocontPeer::DIAPRO;
+      }
+  
+	} 
+	
 	public function setAnovighas($v)
 	{
 
@@ -309,15 +331,17 @@ abstract class BaseNpbonocont extends BaseObject  implements Persistent {
 
       $this->diavac = $rs->getFloat($startcol + 5);
 
-      $this->anovighas = $rs->getDate($startcol + 6, null);
+      $this->diapro = $rs->getFloat($startcol + 6);
 
-      $this->calinc = $rs->getString($startcol + 7);
+      $this->anovighas = $rs->getDate($startcol + 7, null);
 
-      $this->antap = $rs->getString($startcol + 8);
+      $this->calinc = $rs->getString($startcol + 8);
 
-      $this->antapvac = $rs->getString($startcol + 9);
+      $this->antap = $rs->getString($startcol + 9);
 
-      $this->id = $rs->getInt($startcol + 10);
+      $this->antapvac = $rs->getString($startcol + 10);
+
+      $this->id = $rs->getInt($startcol + 11);
 
       $this->resetModified();
 
@@ -325,7 +349,7 @@ abstract class BaseNpbonocont extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 11; 
+            return $startcol + 12; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Npbonocont object", $e);
     }
@@ -491,18 +515,21 @@ abstract class BaseNpbonocont extends BaseObject  implements Persistent {
 				return $this->getDiavac();
 				break;
 			case 6:
-				return $this->getAnovighas();
+				return $this->getDiapro();
 				break;
 			case 7:
-				return $this->getCalinc();
+				return $this->getAnovighas();
 				break;
 			case 8:
-				return $this->getAntap();
+				return $this->getCalinc();
 				break;
 			case 9:
-				return $this->getAntapvac();
+				return $this->getAntap();
 				break;
 			case 10:
+				return $this->getAntapvac();
+				break;
+			case 11:
 				return $this->getId();
 				break;
 			default:
@@ -521,11 +548,12 @@ abstract class BaseNpbonocont extends BaseObject  implements Persistent {
 			$keys[3] => $this->getHasta(),
 			$keys[4] => $this->getDiauti(),
 			$keys[5] => $this->getDiavac(),
-			$keys[6] => $this->getAnovighas(),
-			$keys[7] => $this->getCalinc(),
-			$keys[8] => $this->getAntap(),
-			$keys[9] => $this->getAntapvac(),
-			$keys[10] => $this->getId(),
+			$keys[6] => $this->getDiapro(),
+			$keys[7] => $this->getAnovighas(),
+			$keys[8] => $this->getCalinc(),
+			$keys[9] => $this->getAntap(),
+			$keys[10] => $this->getAntapvac(),
+			$keys[11] => $this->getId(),
 		);
 		return $result;
 	}
@@ -560,18 +588,21 @@ abstract class BaseNpbonocont extends BaseObject  implements Persistent {
 				$this->setDiavac($value);
 				break;
 			case 6:
-				$this->setAnovighas($value);
+				$this->setDiapro($value);
 				break;
 			case 7:
-				$this->setCalinc($value);
+				$this->setAnovighas($value);
 				break;
 			case 8:
-				$this->setAntap($value);
+				$this->setCalinc($value);
 				break;
 			case 9:
-				$this->setAntapvac($value);
+				$this->setAntap($value);
 				break;
 			case 10:
+				$this->setAntapvac($value);
+				break;
+			case 11:
 				$this->setId($value);
 				break;
 		} 	}
@@ -587,11 +618,12 @@ abstract class BaseNpbonocont extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[3], $arr)) $this->setHasta($arr[$keys[3]]);
 		if (array_key_exists($keys[4], $arr)) $this->setDiauti($arr[$keys[4]]);
 		if (array_key_exists($keys[5], $arr)) $this->setDiavac($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setAnovighas($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setCalinc($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setAntap($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setAntapvac($arr[$keys[9]]);
-		if (array_key_exists($keys[10], $arr)) $this->setId($arr[$keys[10]]);
+		if (array_key_exists($keys[6], $arr)) $this->setDiapro($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setAnovighas($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setCalinc($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setAntap($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setAntapvac($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setId($arr[$keys[11]]);
 	}
 
 	
@@ -605,6 +637,7 @@ abstract class BaseNpbonocont extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(NpbonocontPeer::HASTA)) $criteria->add(NpbonocontPeer::HASTA, $this->hasta);
 		if ($this->isColumnModified(NpbonocontPeer::DIAUTI)) $criteria->add(NpbonocontPeer::DIAUTI, $this->diauti);
 		if ($this->isColumnModified(NpbonocontPeer::DIAVAC)) $criteria->add(NpbonocontPeer::DIAVAC, $this->diavac);
+		if ($this->isColumnModified(NpbonocontPeer::DIAPRO)) $criteria->add(NpbonocontPeer::DIAPRO, $this->diapro);
 		if ($this->isColumnModified(NpbonocontPeer::ANOVIGHAS)) $criteria->add(NpbonocontPeer::ANOVIGHAS, $this->anovighas);
 		if ($this->isColumnModified(NpbonocontPeer::CALINC)) $criteria->add(NpbonocontPeer::CALINC, $this->calinc);
 		if ($this->isColumnModified(NpbonocontPeer::ANTAP)) $criteria->add(NpbonocontPeer::ANTAP, $this->antap);
@@ -651,6 +684,8 @@ abstract class BaseNpbonocont extends BaseObject  implements Persistent {
 		$copyObj->setDiauti($this->diauti);
 
 		$copyObj->setDiavac($this->diavac);
+
+		$copyObj->setDiapro($this->diapro);
 
 		$copyObj->setAnovighas($this->anovighas);
 

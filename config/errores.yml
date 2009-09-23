@@ -797,6 +797,12 @@
 494:
   cod: 494
   msj: Debe ingresar un valor entre 1 y 100 en el porcentaje del Seguro HCM
+495:
+  cod: 495
+  msj: El Grid no puede estar Vacio
+496:
+  cod: 496
+  msj: Faltan Datos en el Grid  
 ###############OBRAS################
 1000:
     cod: 1000
