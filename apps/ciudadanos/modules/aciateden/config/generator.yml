@@ -24,9 +24,8 @@ generator:
           params:     text_method=getDesuni include_custom=Seleccione...
         atsolici:
           name:       Nombre
-          params:     readonly=false
       title:          Atención de Denuncias
-      display:        [=nombre, unidad]
+      display:        [=atsolici, unidad]
       object_actions:
         _edit:        ~
         _delete:      ~
