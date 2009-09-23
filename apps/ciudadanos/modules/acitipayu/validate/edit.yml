@@ -8,7 +8,7 @@ names:
   attipayu{codayu}:
     required:  Yes
     required_msg: Se debe colocar el código del tipo de ayuda
-    validators: MyStringValidator1
+    validators: MyStringValidator1, UniqueValidator
 
   attipayu{desayu}:
     required:  Yes
@@ -42,3 +42,10 @@ MyStringValidator3:
         min_error: El código presupuestario debe tener al menos 1 caracter
         max:       100
         max_error: El código presupuestario debe tener menos de 100 caracteres
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Attipayu
+        column:   codayu
+        unique_error:   El Código ya existe. Por Favor, Cambiélo por otro.
