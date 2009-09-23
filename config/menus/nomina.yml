@@ -40,6 +40,7 @@ nomina:
       Situacion del Empleado:                                        nomdefespsitemp
       Definición de Condición Contractual:                           NomDefEspGruLab
       Definición Seguro HCM:                                         NomDefEspSegHcm
+      Definición de Acumulador de Conceptos:                         Nomacumulacpt
       #Conceptos para Reportes:                                      NomDefEspConSue
       Conceptos para el Salario Integral:                            NomConceptosSalarioIntegral
       Conceptos para el Sueldo:                                      NomConceptosSueldo

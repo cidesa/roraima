@@ -17,6 +17,7 @@ class Npvacsalidas extends BaseNpvacsalidas
 {
   protected $diaspend=0;
   protected $objvac=array();	
+  protected $pagadas='';
 	
   public function getNomemp()
   {

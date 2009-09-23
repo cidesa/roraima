@@ -133,6 +133,24 @@ private static $coderror=-1;
     $col5->setAlineacionObjeto(Columna::DERECHA);
     $col5->setAlineacionContenido(Columna::DERECHA);
     $col5->setHTML('type="text" size="8" ');
+	
+	$col6 = new Columna('Dias de Bono Vacacional');
+    $col6->setTipo(Columna::TEXTO);
+    $col6->setEsGrabable(true);
+    $col6->setNombreCampo('diasbonovac');
+	$col6->setJScript('onBlur="javascript:event.keyCode=13; enternumero(event,this.id);"');
+    $col6->setAlineacionObjeto(Columna::DERECHA);
+    $col6->setAlineacionContenido(Columna::DERECHA);
+    $col6->setHTML('type="text" size="8" ');
+	
+	$col7 = new Columna('Dias de Bono Vacacional Pagados');
+    $col7->setTipo(Columna::TEXTO);
+    $col7->setEsGrabable(true);
+    $col7->setNombreCampo('diasbonovacpag');
+	$col7->setJScript('onBlur="javascript:event.keyCode=13; enternumero(event,this.id);"');
+    $col7->setAlineacionObjeto(Columna::DERECHA);
+    $col7->setAlineacionContenido(Columna::DERECHA);
+    $col7->setHTML('type="text" size="8" ');
 
 
     $opciones->addColumna($col1);
@@ -140,6 +158,8 @@ private static $coderror=-1;
     $opciones->addColumna($col3);
     $opciones->addColumna($col4);
     $opciones->addColumna($col5);
+	$opciones->addColumna($col6);
+    $opciones->addColumna($col7);
 
     $this->obj = $opciones->getConfig($per);
 

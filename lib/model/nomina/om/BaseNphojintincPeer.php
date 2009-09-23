@@ -350,10 +350,10 @@ abstract class BaseNphojintincPeer {
 			$criteria->addSelectColumn($column);
 		}
 
-		$criteria->addJoin(NphojintincPeer::CODEMP, NphojintPeer::CODEMP);
-
-		$criteria->addJoin(NphojintincPeer::CODINC, NpincapaPeer::CODINC);
-
+			$criteria->addJoin(NphojintincPeer::CODEMP, NphojintPeer::CODEMP);
+	
+			$criteria->addJoin(NphojintincPeer::CODINC, NpincapaPeer::CODINC);
+	
 		$rs = NphojintincPeer::doSelectRS($criteria, $con);
 		if ($rs->next()) {
 			return $rs->getInt(1);
@@ -375,16 +375,16 @@ abstract class BaseNphojintincPeer {
 		NphojintincPeer::addSelectColumns($c);
 		$startcol2 = (NphojintincPeer::NUM_COLUMNS - NphojintincPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		NphojintPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + NphojintPeer::NUM_COLUMNS;
-
-		NpincapaPeer::addSelectColumns($c);
-		$startcol4 = $startcol3 + NpincapaPeer::NUM_COLUMNS;
-
-		$c->addJoin(NphojintincPeer::CODEMP, NphojintPeer::CODEMP);
-
-		$c->addJoin(NphojintincPeer::CODINC, NpincapaPeer::CODINC);
-
+			NphojintPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + NphojintPeer::NUM_COLUMNS;
+	
+			NpincapaPeer::addSelectColumns($c);
+			$startcol4 = $startcol3 + NpincapaPeer::NUM_COLUMNS;
+	
+			$c->addJoin(NphojintincPeer::CODEMP, NphojintPeer::CODEMP);
+	
+			$c->addJoin(NphojintincPeer::CODINC, NpincapaPeer::CODINC);
+	
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
 
@@ -398,112 +398,112 @@ abstract class BaseNphojintincPeer {
 			$obj1->hydrate($rs);
 
 
-					
-			$omClass = NphojintPeer::getOMClass();
+							
+				$omClass = NphojintPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2 = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2 = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getNphojint(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addNphojintinc($obj1); 					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getNphojint(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addNphojintinc($obj1); 						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initNphojintincs();
-				$obj2->addNphojintinc($obj1);
-			}
-
-
-					
-			$omClass = NpincapaPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj3 = new $cls();
-			$obj3->hydrate($rs, $startcol3);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj3 = $temp_obj1->getNpincapa(); 				if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj3->addNphojintinc($obj1); 					break;
+				if ($newObject) {
+					$obj2->initNphojintincs();
+					$obj2->addNphojintinc($obj1);
 				}
-			}
+	
 
-			if ($newObject) {
-				$obj3->initNphojintincs();
-				$obj3->addNphojintinc($obj1);
-			}
+							
+				$omClass = NpincapaPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj3 = new $cls();
+				$obj3->hydrate($rs, $startcol3);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj3 = $temp_obj1->getNpincapa(); 					if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj3->addNphojintinc($obj1); 						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj3->initNphojintincs();
+					$obj3->addNphojintinc($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;
 	}
 
 
-	
-	public static function doCountJoinAllExceptNphojint(Criteria $criteria, $distinct = false, $con = null)
-	{
-				$criteria = clone $criteria;
-
-				$criteria->clearSelectColumns()->clearOrderByColumns();
-		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(NphojintincPeer::COUNT_DISTINCT);
-		} else {
-			$criteria->addSelectColumn(NphojintincPeer::COUNT);
-		}
-
-				foreach($criteria->getGroupByColumns() as $column)
+		
+		public static function doCountJoinAllExceptNphojint(Criteria $criteria, $distinct = false, $con = null)
 		{
-			$criteria->addSelectColumn($column);
-		}
+						$criteria = clone $criteria;
 
-		$criteria->addJoin(NphojintincPeer::CODINC, NpincapaPeer::CODINC);
+						$criteria->clearSelectColumns()->clearOrderByColumns();
+			if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+				$criteria->addSelectColumn(NphojintincPeer::COUNT_DISTINCT);
+			} else {
+				$criteria->addSelectColumn(NphojintincPeer::COUNT);
+			}
 
-		$rs = NphojintincPeer::doSelectRS($criteria, $con);
-		if ($rs->next()) {
-			return $rs->getInt(1);
-		} else {
-						return 0;
-		}
-	}
-
-
+						foreach($criteria->getGroupByColumns() as $column)
+			{
+				$criteria->addSelectColumn($column);
+			}
 	
-	public static function doCountJoinAllExceptNpincapa(Criteria $criteria, $distinct = false, $con = null)
-	{
-				$criteria = clone $criteria;
-
-				$criteria->clearSelectColumns()->clearOrderByColumns();
-		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(NphojintincPeer::COUNT_DISTINCT);
-		} else {
-			$criteria->addSelectColumn(NphojintincPeer::COUNT);
+				$criteria->addJoin(NphojintincPeer::CODINC, NpincapaPeer::CODINC);
+		
+			$rs = NphojintincPeer::doSelectRS($criteria, $con);
+			if ($rs->next()) {
+				return $rs->getInt(1);
+			} else {
+								return 0;
+			}
 		}
+	
 
-				foreach($criteria->getGroupByColumns() as $column)
+		
+		public static function doCountJoinAllExceptNpincapa(Criteria $criteria, $distinct = false, $con = null)
 		{
-			$criteria->addSelectColumn($column);
+						$criteria = clone $criteria;
+
+						$criteria->clearSelectColumns()->clearOrderByColumns();
+			if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+				$criteria->addSelectColumn(NphojintincPeer::COUNT_DISTINCT);
+			} else {
+				$criteria->addSelectColumn(NphojintincPeer::COUNT);
+			}
+
+						foreach($criteria->getGroupByColumns() as $column)
+			{
+				$criteria->addSelectColumn($column);
+			}
+	
+				$criteria->addJoin(NphojintincPeer::CODEMP, NphojintPeer::CODEMP);
+		
+			$rs = NphojintincPeer::doSelectRS($criteria, $con);
+			if ($rs->next()) {
+				return $rs->getInt(1);
+			} else {
+								return 0;
+			}
 		}
-
-		$criteria->addJoin(NphojintincPeer::CODEMP, NphojintPeer::CODEMP);
-
-		$rs = NphojintincPeer::doSelectRS($criteria, $con);
-		if ($rs->next()) {
-			return $rs->getInt(1);
-		} else {
-						return 0;
-		}
-	}
-
+	
 
 	
 	public static function doSelectJoinAllExceptNphojint(Criteria $c, $con = null)
@@ -517,11 +517,11 @@ abstract class BaseNphojintincPeer {
 		NphojintincPeer::addSelectColumns($c);
 		$startcol2 = (NphojintincPeer::NUM_COLUMNS - NphojintincPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		NpincapaPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + NpincapaPeer::NUM_COLUMNS;
-
-		$c->addJoin(NphojintincPeer::CODINC, NpincapaPeer::CODINC);
-
+			NpincapaPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + NpincapaPeer::NUM_COLUMNS;
+	
+			$c->addJoin(NphojintincPeer::CODINC, NpincapaPeer::CODINC);
+	
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
@@ -534,28 +534,28 @@ abstract class BaseNphojintincPeer {
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
 
-			$omClass = NpincapaPeer::getOMClass();
+				$omClass = NpincapaPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2  = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2  = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getNpincapa(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addNphojintinc($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getNpincapa(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addNphojintinc($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initNphojintincs();
-				$obj2->addNphojintinc($obj1);
-			}
-
+				if ($newObject) {
+					$obj2->initNphojintincs();
+					$obj2->addNphojintinc($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;
@@ -574,11 +574,11 @@ abstract class BaseNphojintincPeer {
 		NphojintincPeer::addSelectColumns($c);
 		$startcol2 = (NphojintincPeer::NUM_COLUMNS - NphojintincPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		NphojintPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + NphojintPeer::NUM_COLUMNS;
-
-		$c->addJoin(NphojintincPeer::CODEMP, NphojintPeer::CODEMP);
-
+			NphojintPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + NphojintPeer::NUM_COLUMNS;
+	
+			$c->addJoin(NphojintincPeer::CODEMP, NphojintPeer::CODEMP);
+	
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
@@ -591,28 +591,28 @@ abstract class BaseNphojintincPeer {
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
 
-			$omClass = NphojintPeer::getOMClass();
+				$omClass = NphojintPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2  = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2  = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getNphojint(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addNphojintinc($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getNphojint(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addNphojintinc($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initNphojintincs();
-				$obj2->addNphojintinc($obj1);
-			}
-
+				if ($newObject) {
+					$obj2->initNphojintincs();
+					$obj2->addNphojintinc($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;

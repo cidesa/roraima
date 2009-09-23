@@ -13,7 +13,7 @@ abstract class BaseNpvacdisfrutePeer {
 	const CLASS_DEFAULT = 'lib.model.nomina.Npvacdisfrute';
 
 	
-	const NUM_COLUMNS = 6;
+	const NUM_COLUMNS = 8;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -35,6 +35,12 @@ abstract class BaseNpvacdisfrutePeer {
 	const DIASDISFRUTADOS = 'npvacdisfrute.DIASDISFRUTADOS';
 
 	
+	const DIASBONOVAC = 'npvacdisfrute.DIASBONOVAC';
+
+	
+	const DIASBONOVACPAG = 'npvacdisfrute.DIASBONOVACPAG';
+
+	
 	const ID = 'npvacdisfrute.ID';
 
 	
@@ -43,18 +49,18 @@ abstract class BaseNpvacdisfrutePeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codemp', 'Perini', 'Perfin', 'Diasdisfutar', 'Diasdisfrutados', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (NpvacdisfrutePeer::CODEMP, NpvacdisfrutePeer::PERINI, NpvacdisfrutePeer::PERFIN, NpvacdisfrutePeer::DIASDISFUTAR, NpvacdisfrutePeer::DIASDISFRUTADOS, NpvacdisfrutePeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codemp', 'perini', 'perfin', 'diasdisfutar', 'diasdisfrutados', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
+		BasePeer::TYPE_PHPNAME => array ('Codemp', 'Perini', 'Perfin', 'Diasdisfutar', 'Diasdisfrutados', 'Diasbonovac', 'Diasbonovacpag', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (NpvacdisfrutePeer::CODEMP, NpvacdisfrutePeer::PERINI, NpvacdisfrutePeer::PERFIN, NpvacdisfrutePeer::DIASDISFUTAR, NpvacdisfrutePeer::DIASDISFRUTADOS, NpvacdisfrutePeer::DIASBONOVAC, NpvacdisfrutePeer::DIASBONOVACPAG, NpvacdisfrutePeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codemp', 'perini', 'perfin', 'diasdisfutar', 'diasdisfrutados', 'diasbonovac', 'diasbonovacpag', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codemp' => 0, 'Perini' => 1, 'Perfin' => 2, 'Diasdisfutar' => 3, 'Diasdisfrutados' => 4, 'Id' => 5, ),
-		BasePeer::TYPE_COLNAME => array (NpvacdisfrutePeer::CODEMP => 0, NpvacdisfrutePeer::PERINI => 1, NpvacdisfrutePeer::PERFIN => 2, NpvacdisfrutePeer::DIASDISFUTAR => 3, NpvacdisfrutePeer::DIASDISFRUTADOS => 4, NpvacdisfrutePeer::ID => 5, ),
-		BasePeer::TYPE_FIELDNAME => array ('codemp' => 0, 'perini' => 1, 'perfin' => 2, 'diasdisfutar' => 3, 'diasdisfrutados' => 4, 'id' => 5, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
+		BasePeer::TYPE_PHPNAME => array ('Codemp' => 0, 'Perini' => 1, 'Perfin' => 2, 'Diasdisfutar' => 3, 'Diasdisfrutados' => 4, 'Diasbonovac' => 5, 'Diasbonovacpag' => 6, 'Id' => 7, ),
+		BasePeer::TYPE_COLNAME => array (NpvacdisfrutePeer::CODEMP => 0, NpvacdisfrutePeer::PERINI => 1, NpvacdisfrutePeer::PERFIN => 2, NpvacdisfrutePeer::DIASDISFUTAR => 3, NpvacdisfrutePeer::DIASDISFRUTADOS => 4, NpvacdisfrutePeer::DIASBONOVAC => 5, NpvacdisfrutePeer::DIASBONOVACPAG => 6, NpvacdisfrutePeer::ID => 7, ),
+		BasePeer::TYPE_FIELDNAME => array ('codemp' => 0, 'perini' => 1, 'perfin' => 2, 'diasdisfutar' => 3, 'diasdisfrutados' => 4, 'diasbonovac' => 5, 'diasbonovacpag' => 6, 'id' => 7, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
 	);
 
 	
@@ -117,6 +123,10 @@ abstract class BaseNpvacdisfrutePeer {
 		$criteria->addSelectColumn(NpvacdisfrutePeer::DIASDISFUTAR);
 
 		$criteria->addSelectColumn(NpvacdisfrutePeer::DIASDISFRUTADOS);
+
+		$criteria->addSelectColumn(NpvacdisfrutePeer::DIASBONOVAC);
+
+		$criteria->addSelectColumn(NpvacdisfrutePeer::DIASBONOVACPAG);
 
 		$criteria->addSelectColumn(NpvacdisfrutePeer::ID);
 

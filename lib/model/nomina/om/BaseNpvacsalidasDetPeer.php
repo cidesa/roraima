@@ -13,7 +13,7 @@ abstract class BaseNpvacsalidasDetPeer {
 	const CLASS_DEFAULT = 'lib.model.nomina.NpvacsalidasDet';
 
 	
-	const NUM_COLUMNS = 8;
+	const NUM_COLUMNS = 10;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -38,6 +38,12 @@ abstract class BaseNpvacsalidasDetPeer {
 	const DIASVAC = 'npvacsalidas_det.DIASVAC';
 
 	
+	const DIASBONOVAC = 'npvacsalidas_det.DIASBONOVAC';
+
+	
+	const DIASBONOVACPAG = 'npvacsalidas_det.DIASBONOVACPAG';
+
+	
 	const FECVAC = 'npvacsalidas_det.FECVAC';
 
 	
@@ -49,18 +55,18 @@ abstract class BaseNpvacsalidasDetPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codemp', 'Perini', 'Perfin', 'Diasdisfutar', 'Diasdisfrutados', 'Diasvac', 'Fecvac', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (NpvacsalidasDetPeer::CODEMP, NpvacsalidasDetPeer::PERINI, NpvacsalidasDetPeer::PERFIN, NpvacsalidasDetPeer::DIASDISFUTAR, NpvacsalidasDetPeer::DIASDISFRUTADOS, NpvacsalidasDetPeer::DIASVAC, NpvacsalidasDetPeer::FECVAC, NpvacsalidasDetPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codemp', 'perini', 'perfin', 'diasdisfutar', 'diasdisfrutados', 'diasvac', 'fecvac', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
+		BasePeer::TYPE_PHPNAME => array ('Codemp', 'Perini', 'Perfin', 'Diasdisfutar', 'Diasdisfrutados', 'Diasvac', 'Diasbonovac', 'Diasbonovacpag', 'Fecvac', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (NpvacsalidasDetPeer::CODEMP, NpvacsalidasDetPeer::PERINI, NpvacsalidasDetPeer::PERFIN, NpvacsalidasDetPeer::DIASDISFUTAR, NpvacsalidasDetPeer::DIASDISFRUTADOS, NpvacsalidasDetPeer::DIASVAC, NpvacsalidasDetPeer::DIASBONOVAC, NpvacsalidasDetPeer::DIASBONOVACPAG, NpvacsalidasDetPeer::FECVAC, NpvacsalidasDetPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codemp', 'perini', 'perfin', 'diasdisfutar', 'diasdisfrutados', 'diasvac', 'diasbonovac', 'diasbonovacpag', 'fecvac', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codemp' => 0, 'Perini' => 1, 'Perfin' => 2, 'Diasdisfutar' => 3, 'Diasdisfrutados' => 4, 'Diasvac' => 5, 'Fecvac' => 6, 'Id' => 7, ),
-		BasePeer::TYPE_COLNAME => array (NpvacsalidasDetPeer::CODEMP => 0, NpvacsalidasDetPeer::PERINI => 1, NpvacsalidasDetPeer::PERFIN => 2, NpvacsalidasDetPeer::DIASDISFUTAR => 3, NpvacsalidasDetPeer::DIASDISFRUTADOS => 4, NpvacsalidasDetPeer::DIASVAC => 5, NpvacsalidasDetPeer::FECVAC => 6, NpvacsalidasDetPeer::ID => 7, ),
-		BasePeer::TYPE_FIELDNAME => array ('codemp' => 0, 'perini' => 1, 'perfin' => 2, 'diasdisfutar' => 3, 'diasdisfrutados' => 4, 'diasvac' => 5, 'fecvac' => 6, 'id' => 7, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
+		BasePeer::TYPE_PHPNAME => array ('Codemp' => 0, 'Perini' => 1, 'Perfin' => 2, 'Diasdisfutar' => 3, 'Diasdisfrutados' => 4, 'Diasvac' => 5, 'Diasbonovac' => 6, 'Diasbonovacpag' => 7, 'Fecvac' => 8, 'Id' => 9, ),
+		BasePeer::TYPE_COLNAME => array (NpvacsalidasDetPeer::CODEMP => 0, NpvacsalidasDetPeer::PERINI => 1, NpvacsalidasDetPeer::PERFIN => 2, NpvacsalidasDetPeer::DIASDISFUTAR => 3, NpvacsalidasDetPeer::DIASDISFRUTADOS => 4, NpvacsalidasDetPeer::DIASVAC => 5, NpvacsalidasDetPeer::DIASBONOVAC => 6, NpvacsalidasDetPeer::DIASBONOVACPAG => 7, NpvacsalidasDetPeer::FECVAC => 8, NpvacsalidasDetPeer::ID => 9, ),
+		BasePeer::TYPE_FIELDNAME => array ('codemp' => 0, 'perini' => 1, 'perfin' => 2, 'diasdisfutar' => 3, 'diasdisfrutados' => 4, 'diasvac' => 5, 'diasbonovac' => 6, 'diasbonovacpag' => 7, 'fecvac' => 8, 'id' => 9, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
 	);
 
 	
@@ -125,6 +131,10 @@ abstract class BaseNpvacsalidasDetPeer {
 		$criteria->addSelectColumn(NpvacsalidasDetPeer::DIASDISFRUTADOS);
 
 		$criteria->addSelectColumn(NpvacsalidasDetPeer::DIASVAC);
+
+		$criteria->addSelectColumn(NpvacsalidasDetPeer::DIASBONOVAC);
+
+		$criteria->addSelectColumn(NpvacsalidasDetPeer::DIASBONOVACPAG);
 
 		$criteria->addSelectColumn(NpvacsalidasDetPeer::FECVAC);
 

@@ -13,7 +13,7 @@ abstract class BaseNpvacsalidasPeer {
 	const CLASS_DEFAULT = 'lib.model.nomina.Npvacsalidas';
 
 	
-	const NUM_COLUMNS = 7;
+	const NUM_COLUMNS = 8;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -38,6 +38,9 @@ abstract class BaseNpvacsalidasPeer {
 	const FECHAS = 'npvacsalidas.FECHAS';
 
 	
+	const FECPAGBONVAC = 'npvacsalidas.FECPAGBONVAC';
+
+	
 	const ID = 'npvacsalidas.ID';
 
 	
@@ -46,18 +49,18 @@ abstract class BaseNpvacsalidasPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codemp', 'Fecvac', 'Diasdisfrutar', 'Observa', 'Fecdes', 'Fechas', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (NpvacsalidasPeer::CODEMP, NpvacsalidasPeer::FECVAC, NpvacsalidasPeer::DIASDISFRUTAR, NpvacsalidasPeer::OBSERVA, NpvacsalidasPeer::FECDES, NpvacsalidasPeer::FECHAS, NpvacsalidasPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codemp', 'fecvac', 'diasdisfrutar', 'observa', 'fecdes', 'fechas', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
+		BasePeer::TYPE_PHPNAME => array ('Codemp', 'Fecvac', 'Diasdisfrutar', 'Observa', 'Fecdes', 'Fechas', 'Fecpagbonvac', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (NpvacsalidasPeer::CODEMP, NpvacsalidasPeer::FECVAC, NpvacsalidasPeer::DIASDISFRUTAR, NpvacsalidasPeer::OBSERVA, NpvacsalidasPeer::FECDES, NpvacsalidasPeer::FECHAS, NpvacsalidasPeer::FECPAGBONVAC, NpvacsalidasPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codemp', 'fecvac', 'diasdisfrutar', 'observa', 'fecdes', 'fechas', 'fecpagbonvac', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codemp' => 0, 'Fecvac' => 1, 'Diasdisfrutar' => 2, 'Observa' => 3, 'Fecdes' => 4, 'Fechas' => 5, 'Id' => 6, ),
-		BasePeer::TYPE_COLNAME => array (NpvacsalidasPeer::CODEMP => 0, NpvacsalidasPeer::FECVAC => 1, NpvacsalidasPeer::DIASDISFRUTAR => 2, NpvacsalidasPeer::OBSERVA => 3, NpvacsalidasPeer::FECDES => 4, NpvacsalidasPeer::FECHAS => 5, NpvacsalidasPeer::ID => 6, ),
-		BasePeer::TYPE_FIELDNAME => array ('codemp' => 0, 'fecvac' => 1, 'diasdisfrutar' => 2, 'observa' => 3, 'fecdes' => 4, 'fechas' => 5, 'id' => 6, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
+		BasePeer::TYPE_PHPNAME => array ('Codemp' => 0, 'Fecvac' => 1, 'Diasdisfrutar' => 2, 'Observa' => 3, 'Fecdes' => 4, 'Fechas' => 5, 'Fecpagbonvac' => 6, 'Id' => 7, ),
+		BasePeer::TYPE_COLNAME => array (NpvacsalidasPeer::CODEMP => 0, NpvacsalidasPeer::FECVAC => 1, NpvacsalidasPeer::DIASDISFRUTAR => 2, NpvacsalidasPeer::OBSERVA => 3, NpvacsalidasPeer::FECDES => 4, NpvacsalidasPeer::FECHAS => 5, NpvacsalidasPeer::FECPAGBONVAC => 6, NpvacsalidasPeer::ID => 7, ),
+		BasePeer::TYPE_FIELDNAME => array ('codemp' => 0, 'fecvac' => 1, 'diasdisfrutar' => 2, 'observa' => 3, 'fecdes' => 4, 'fechas' => 5, 'fecpagbonvac' => 6, 'id' => 7, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
 	);
 
 	
@@ -122,6 +125,8 @@ abstract class BaseNpvacsalidasPeer {
 		$criteria->addSelectColumn(NpvacsalidasPeer::FECDES);
 
 		$criteria->addSelectColumn(NpvacsalidasPeer::FECHAS);
+
+		$criteria->addSelectColumn(NpvacsalidasPeer::FECPAGBONVAC);
 
 		$criteria->addSelectColumn(NpvacsalidasPeer::ID);
 

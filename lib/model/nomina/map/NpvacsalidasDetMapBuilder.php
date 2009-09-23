@@ -46,6 +46,10 @@ class NpvacsalidasDetMapBuilder {
 
 		$tMap->addColumn('DIASVAC', 'Diasvac', 'double', CreoleTypes::NUMERIC, false, 14);
 
+		$tMap->addColumn('DIASBONOVAC', 'Diasbonovac', 'double', CreoleTypes::NUMERIC, false, 14);
+
+		$tMap->addColumn('DIASBONOVACPAG', 'Diasbonovacpag', 'double', CreoleTypes::NUMERIC, false, 14);
+
 		$tMap->addColumn('FECVAC', 'Fecvac', 'int', CreoleTypes::DATE, false, null);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
