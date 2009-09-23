@@ -196,10 +196,12 @@ class catdefavalActions extends autocatdefavalActions
   			$this->nomabr = $this->nomabr .'-'.$datos->getNomabr();
   		}
   	}
-  	$this->params[0] = Herramientas::getX_vacio('catpar','catnivcat','forcodcat','Z');  //Z -> Cod.Catastral
-  	$this->params[1] = strlen(substr($this->params[0],0,strlen($this->params[0])-$this->loncc-1));
-  	$this->params[2] = substr($this->nomabr,1,strlen($this->nomabr));
-  	$this->params[3] = $this->loncc;
+  	$arreglopar=array();
+  	$arreglopar[0] = Herramientas::getX_vacio('catpar','catnivcat','forcodcat','Z');  //Z -> Cod.Catastral
+  	$arreglopar[1] = strlen(substr($arreglopar[0],0,strlen($arreglopar[0])-$this->loncc-1));
+  	$arreglopar[2] = substr($this->nomabr,1,strlen($this->nomabr));
+  	$arreglopar[3] = $this->loncc;
+  	$this->params=$arreglopar;
   }
 
   protected function updateError()

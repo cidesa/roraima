@@ -265,10 +265,11 @@ class catdeftramoActions extends autocatdeftramoActions
   			break;
   		}
   	}
-
-  	$this->params[0] = substr($formato,0,$this->loncc);
-  	$this->params[1] = strlen($this->params[0]);
-  	$this->params[2] = substr($this->nomabr,1,strlen($this->nomabr));
+    $arreglopar=array();
+  	$arreglopar[0] = substr($formato,0,$this->loncc);
+  	$arreglopar[1] = strlen($arreglopar[0]);
+  	$arreglopar[2] = substr($this->nomabr,1,strlen($this->nomabr));
+  	$this->params=$arreglopar;
   }
 
 }
