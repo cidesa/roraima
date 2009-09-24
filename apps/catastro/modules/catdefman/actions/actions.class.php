@@ -329,9 +329,10 @@ class catdefmanActions extends autocatdefmanActions
   public function setVars()
   {
   	$this->loncc=0;
+  	$formato="";
   	$c = new Criteria();
   	$reg = CatnivcatPeer::doselect($c);
-
+    if ($reg) {
   	foreach ($reg as $datos)
   	{
   	  $formato= $datos->getForcodcat();
@@ -345,10 +346,12 @@ class catdefmanActions extends autocatdefmanActions
   			break;
   		}
   	}
-
-  	$this->params[0] = substr($formato,0,$this->loncc);
-  	$this->params[1] = strlen($this->params[0]);
-  	$this->params[2] = substr($this->nomabr,1,strlen($this->nomabr));
+    }
+    $arreglopar=array();
+  	$arreglopar[0] = substr($formato,0,$this->loncc);
+  	$arreglopar[1] = strlen($arreglopar[0]);
+  	$arreglopar[2] = substr($this->nomabr,1,strlen($this->nomabr));
+  	$this->params=$arreglopar;
   }
 
 }
