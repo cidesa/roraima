@@ -35,7 +35,7 @@ class catdefdivgeoActions extends autocatdefdivgeoActions
   {
   	$c = new Criteria();
   	$reg = CatnivcatPeer::doselect($c);
-
+    if ($reg) {
   	foreach ($reg as $datos)
   	{
   		if ($datos->getCatpar()=='Z')
@@ -45,6 +45,7 @@ class catdefdivgeoActions extends autocatdefdivgeoActions
   			$this->nomabr = $this->nomabr .'-'.$datos->getNomabr();
   		}
   	}
+    }
   	$arreglopar=array();
   	$arreglopar[0] = Herramientas::getX_vacio('catpar','catnivcat','forcodcat','Z');  //Z -> Cod.Catastral
   	$arreglopar[1] = strlen(substr($arreglopar[0],0,strlen($arreglopar[0])-$this->loncc-1));

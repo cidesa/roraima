@@ -249,9 +249,10 @@ class catdeftramoActions extends autocatdeftramoActions
     public function setVars()
   {
   	$this->loncc=0;
+  	$formato="";
   	$c = new Criteria();
   	$reg = CatnivcatPeer::doselect($c);
-
+    if ($reg) {
   	foreach ($reg as $datos)
   	{
   	  $formato= $datos->getForcodcat();
@@ -265,6 +266,7 @@ class catdeftramoActions extends autocatdeftramoActions
   			break;
   		}
   	}
+    }
     $arreglopar=array();
   	$arreglopar[0] = substr($formato,0,$this->loncc);
   	$arreglopar[1] = strlen($arreglopar[0]);
