@@ -497,12 +497,48 @@ public static function PagoDoble()
 
   public static function ListadeTipo() //Catastral
   {
-    return array('P' => 'Pais', 'E' => 'Estado', 'M' => 'Municipios', 'C' => 'Ciudad', 'P' => 'Parroquias', 'S' => 'Sector', 'B' => 'Barrio/Urb', 'T' => 'Tramo', 'MA' => 'Manzana', 'Z' => 'Cod.Catastral');
+    //return array('P' => 'Pais', 'E' => 'Estado', 'M' => 'Municipios', 'C' => 'Ciudad', 'P' => 'Parroquias', 'S' => 'Sector', 'B' => 'Barrio/Urb', 'T' => 'Tramo', 'MA' => 'Manzana', 'Z' => 'Cod.Catastral');
+     return array('P' => 'Pais', 'E' => 'Estado', 'M' => 'Municipios', 'C' => 'Ciudad', 'P' => 'Parroquias', 'S' => 'Sector', 'B' => 'Barrio/Urb', 'Z' => 'Cod.Catastral');
   }
 
   public static function ListaCaract() //Caracteristica
   {
-    return array('T' => 'Terreno', 'C' => 'Construccion');
+    return array('T' => 'Terreno', 'C' => 'Construcción');
+  }
+
+  public static function ListaTipoAjuste()
+  {
+    return array('CREDITO' => 'CREDITO', 'DEBITO' => 'DEBITO');
+  }
+
+  public static function ListaCatpar()
+  {
+    return array('C' => 'Categoría', 'P' => 'Partida');
+  }
+
+  public static function ListaStatuscat() //Estatus de Avalúos
+  {
+    return array('I' => 'Inscripción', 'A' => 'Actualización');
+  }
+
+  public static function ListaEstReq()
+  {
+  	return array('L' => 'Levantado', 'A' => 'Analizado', 'P' => 'Planificado', 'D' => 'Desarrollado');
+  }
+
+  public static function ListaEstDetReq()
+  {
+  	return array('A' => 'Aceptado', 'R' => 'Rechazado');
+  }
+
+  public static function ListaEstPlanReq()
+  {
+  	return array('G' => 'Asignado', 'C' => 'Comenzado', 'T' => 'Terminado');
+  }
+
+  public static function ListadeCriterioConstribuyente()
+  {
+  	return array('I' => 'Industria y Comercio', 'V' => 'Vehiculo', 'U' => 'Inmuebles Urbanos', 'P' => 'Propaganda Comercial', 'G' => 'General', 'O' => 'Otros Ingresos');
   }
 
 }
