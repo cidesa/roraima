@@ -588,11 +588,12 @@ class almordcomActions extends autoalmordcomActions
     $monto=trim($this->getRequestParameter('monto'));
     $vacio='';
     $result=array();
-    $monto=Herramientas::convnume($monto);
+    $monto=Herramientas::tofloat($monto);
     $sql = "Select mondis from CPAsiIni WHERE CodPre = '".$codigo."' AND PERPRE = '00' and AnoPre='".$ano."'";
     if (Herramientas::BuscarDatos($sql,&$result))
     {
-      if ($monto > $result[0]['mondis'])
+      $mondis=SolicituddeEgresos::montoDisponible($codigo);
+      if ($monto > $mondis)
       {
         $javascript="alert_('El C&oacute;digo ".$codigo. " no tiene disponibilidad');";
       }
