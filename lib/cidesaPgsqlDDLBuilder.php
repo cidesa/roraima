@@ -207,7 +207,7 @@ ALTER TABLE ".$this->quoteIdentifier($table->getName())." ADD COLUMN ".$this->ge
    *
    * @see        parent::addColumns()
    */
-  protected function addTable(&$script, $exist=true)
+  protected function addTable(&$script, $exist=true, $drop=true)
   {
     $table = $this->getTable();
     $platform = $this->getPlatform();
@@ -222,7 +222,7 @@ ALTER TABLE ".$this->quoteIdentifier($table->getName())." ADD COLUMN ".$this->ge
 
 //    $schemaName = $this->getSchema();
 
-    $this->addDropStatements($script,$exist);
+    if($drop) $this->addDropStatements($script,$exist);
     $this->addSequences($script);
 
     $script .= "
@@ -455,7 +455,7 @@ COMMENT ON COLUMN ".$this->quoteIdentifier($table->getName()).".".$this->quoteId
       
     }else{
       // Existe en el modelo pero no existe en la base de datos
-      $this->addTable(&$script,false);
+      $this->addTable(&$script,false,false);
     }
 
   }

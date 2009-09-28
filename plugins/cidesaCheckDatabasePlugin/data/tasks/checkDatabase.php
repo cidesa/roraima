@@ -230,7 +230,7 @@ function checkDropTables()
   
       if($tablaname!='_attributes'){
         if(!array_key_exists($tablaname, $locales)){
-          $sql .= "-- DROP TABLE \"$tablaname\" CASCADE;
+          $sql .= "-- DROP TABLE \"$tablaname\" CASCADE; DROP SEQUENCE ".$tablaname."_seq;
     ";
         }
         
