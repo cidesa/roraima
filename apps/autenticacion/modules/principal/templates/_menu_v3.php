@@ -20,12 +20,18 @@ function addNodo($nodo,$indice)
 
   foreach($nodo as $k){
   	$val=explode('.',$k['nomyml']);
-    if (SF_ENVIRONMENT=='dev') $dev = '_dev';
-    else $dev = '';
-  	?>
-   <div dojoType="TreeNode" widgetId="<?php echo $indice ?>" title="<a href='<?php echo 'http://'.$_SERVER['HTTP_HOST'].'/autenticacion'.$dev.'.php/principal/menu/m/'.strtolower($val[0]) ?>'><?php echo $k['nomapl'] ?></a>"></div>
-   <?php
+    $dir="";
+    $dir=CIDESA_CONFIG.'/menus/'.strtolower($val[0]).'.yml';
+    cidesaTools::exitsfile($dir) ? $dir=$dir : $dir = sfConfig::get('sf_root_dir').'/config/menus/'.strtolower($val[0]).'.yml';
+    if(file_exists($dir)){
+      if (SF_ENVIRONMENT=='dev') $dev = '_dev';
+      else $dev = '';
+    	?>
+     <div dojoType="TreeNode" widgetId="<?php echo $indice ?>" title="<a href='<?php echo 'http://'.$_SERVER['HTTP_HOST'].'/autenticacion'.$dev.'.php/principal/menu/m/'.strtolower($val[0]) ?>'><?php echo $k['nomapl'] ?></a>"></div>
+     <?php
     }
+
+  }
 }
 
 
