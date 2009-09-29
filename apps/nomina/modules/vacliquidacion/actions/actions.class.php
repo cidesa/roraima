@@ -82,6 +82,7 @@ private static $coderror=-1;
 			   $sueult=0;
 		       $suepro=0;
 			   $suedia=0;
+			   $suediario=0;
 		       $javascript="$('nphojint_codemp').value='';alert('El Empleado ya fue Liquidado');$('nphojint_codemp').focus();";
 		   }else
 		   {
@@ -102,7 +103,10 @@ private static $coderror=-1;
 			   $sueult=$this->sueult;
 			   $suepro=$this->suepro;
 			   $suedia=$this->suedia;
+			   $suediario=$this->suediario;
 		       $javascript="";
+			   if($suedia>0)
+			   	$javascript.="$('divsuedia').show();";
 		   }
 	   }
 	   else
@@ -115,10 +119,12 @@ private static $coderror=-1;
 		   $sueult=0;
 	       $suepro=0;
 		   $suedia=0;
-	       $javascript="alert('El Empleado no Existe')";
+		   $suediario=0;
+	       $javascript="alert('El Empleado no Existe');";
+		  
 	   }
 
-	   $output = '[["'.$cajnomemp.'","'.$nomemp.'",""], ["'.$cajfecing.'","'.$fecing.'",""], ["'.$cajfecret.'","'.$fecret.'",""],["'.$cajultsue.'","'.$sueldonormal.'",""],["'.$cajsuenor.'","'.$ultimosueldo.'",""],["nphojint_sueult","'.$sueult.'",""],["nphojint_suepro","'.$suepro.'",""],["nphojint_suedia","'.$suedia.'",""],["javascript","'.$javascript.'",""] ]';
+	   $output = '[["'.$cajnomemp.'","'.$nomemp.'",""], ["'.$cajfecing.'","'.$fecing.'",""], ["'.$cajfecret.'","'.$fecret.'",""],["'.$cajultsue.'","'.$sueldonormal.'",""],["'.$cajsuenor.'","'.$ultimosueldo.'",""],["nphojint_sueult","'.$sueult.'",""],["nphojint_suepro","'.$suepro.'",""],["nphojint_suedia","'.$suedia.'",""],["nphojint_suediario","'.$suediario.'",""],["javascript","'.$javascript.'",""] ]';
     }
     if ($this->getRequestParameter('ajax')=='2')
     {
@@ -145,6 +151,7 @@ private static $coderror=-1;
 		   $sueult=$this->sueult;
 		   $suepro=$this->suepro;
 		   $suedia=$this->suedia;
+		   $suediario=$this->suediario;
 	   }
 	   else
        {
@@ -154,6 +161,7 @@ private static $coderror=-1;
 		   $sueult=0;
 		   $suepro=0;
 		   $suedia=0;
+		   $suediario=0;
 	   }
 
 	   $output = '[["javascritp","",""]]';
@@ -177,7 +185,7 @@ private static $coderror=-1;
 		$sqlnom="select codnom from npasicaremp where codemp='$codemp' and status='V'";
 		if (H::BuscarDatos($sqlnom,$arrnom))
 			$codnom=$arrnom[0]['codnom'];			
-			
+	
 		$porcion=0;
 		$sqlpor="SELECT SUM(A.MONTO)/12 as porcion FROM NPHISCON A , NPHOJINT B WHERE A.CODEMP='$codemp' AND A.CODNOM='$codnom' 
 				AND A.CODCON in (select codcon from npparamsalint where codnom='$codnom' and afecta='ABV')
@@ -192,7 +200,7 @@ private static $coderror=-1;
 			$porcion=$arrpor[0]['porcion'];
 	###	
 	$tipsalbonvf='';
- 	$factor=1;
+ 	$tipsalvacven='';
  	########SUELDOS OTROS##########
  	#SueldoUltimo
  	$sql = "select distinct salemp as sueult from npimppresoc a where a.codemp='$codemp'
@@ -213,7 +221,16 @@ private static $coderror=-1;
  		$suepro= 0;	
  
  	###############################
- 
+    $sqlparam="select * from npdefespparpre  where codnom='$codnom'";
+    $factorbonvf=0;
+    $factorvacv=0;
+    if (H::BuscarDatos($sqlparam,$arrparam))
+    {
+    	$factorbonvf = $arrparam[0]['factorbonvacfra'];
+      	$tipsalbonvf = $arrparam[0]['tipsalbonvacfra'];
+      	$factorvacv = $arrparam[0]['factorvacven'];
+      	$tipsalvacven = $arrparam[0]['tipsalvacven'];
+    }
     $ultimosueldo=$suenor;
     $this->sueldonormal=$ultsue;
     $per=array();
@@ -226,14 +243,7 @@ private static $coderror=-1;
       {
       //  H::PrintR($arr);
         $i=0;
-        $cont=0;
-		$sqlparam="select * from npdefespparpre  where codnom='$codnom'";
-		$factor=1;
-		if (H::BuscarDatos($sqlparam,$arrparam))
-        {
-        	$factor = $arrparam[0]['factorbonvacfra'];
-			$tipsalbonvf = $arrparam[0]['tipsalbonvacfra'];
-		}		
+        $cont=0;				
         while ($cont<count($arr))
         {
           if ((H::tofloat($arr[$cont]['corresponde'])-H::tofloat($arr[$cont]['disfrutados']))!=0)
@@ -256,11 +266,11 @@ private static $coderror=-1;
             $salint=$arr[$cont]['salint']+$porcion;
            else
             $salint=$suenor+$porcion;          
-		   
+
 		   if($sal=='')
 		   {
 			   if($tipsalbonvf=='UD')
-			   	   $salario=$suenor;
+			   	   $salario=$sueult;
 			   elseif($tipsalbonvf=='SP')
 			   	   $salario=$suepro;
 			   elseif($tipsalbonvf=='SN')
@@ -271,19 +281,43 @@ private static $coderror=-1;
 		   {
 		   	   $salario=$salint;
 		   }
+		   
+		   if($tipsalvacven!='')
+		   {
+			   if($tipsalvacven=='UD')
+			   	   $salarionor=$sueult;
+			   elseif($tipsalvacven=='SP')
+			   	   $salarionor=$suepro;
+			   elseif($tipsalvacven=='SI')
+			   	   $salarionor=$salint;	   
+			   else	   
+			   	   $salarionor=$salnor;	
+		   }else
+		   {
+		   	   $salarionor=$salnor;
+		   }
 
-           if($factor>1)
-		      $monto=($per[$i]['diadis']*($salnor/30))+($per[$i]['diasbono']*(($salario*$factor)/365));
-           else	
-		      $monto=($per[$i]['diadis']*($salnor/30))+($per[$i]['diasbono']*($salario/30));
+		   if($factorbonvf!=0 && (!is_null($factorbonvf)))
+		   		$salario=($salario*$factorbonvf)/365;
+		   else 
+		        $salario=$salario/30;
+
+		   if($factorvacv!=0 && (!is_null($factorvacv)))
+		   		$salarionor=($salarionor*$factorvacv)/365;
+		   else 
+		        $salarionor=$salarionor/30;
+
+
+		   $monto=($per[$i]['diadis']*($salarionor))+($per[$i]['diasbono']*($salario));
+
 
            $per[$i]['monto']=number_format($monto,2,',','.');
            $per[$i]['id']=9;
            //Historico
            $perHis[$cont]['perini']=$arr[$cont]['desde'];
            $perHis[$cont]['perfin']=$arr[$cont]['hasta'];
-           $perHis[$cont]['diadis']=$per[$i]['diadis'];
-           $perHis[$cont]['diadisfru']=H::tofloat($arr[$cont]['disfrutados']);
+           $perHis[$cont]['diasdisfutar']=$per[$i]['diadis'];
+           $perHis[$cont]['diasdisfrutados']=H::tofloat($arr[$cont]['disfrutados']);
            $perHis[$cont]['id']=9;
            $i++;
           }
@@ -292,35 +326,36 @@ private static $coderror=-1;
            $perHis[$cont]['perini']=$arr[$cont]['desde'];
            $perHis[$cont]['perfin']=$arr[$cont]['hasta'];
            if ($arr[$cont]['fraccion']=='SI')
-           		$perHis[$cont]['diadis']=H::tofloat($arr[$cont]['fracciondia']);
+           		$perHis[$cont]['diasdisfutar']=H::tofloat($arr[$cont]['fracciondia']);
            else
-           		$perHis[$cont]['diadis']=H::tofloat($arr[$cont]['corresponde']);
+           		$perHis[$cont]['diasdisfutar']=H::tofloat($arr[$cont]['corresponde']);
 
-           $perHis[$cont]['diadisfru']=H::tofloat($arr[$cont]['disfrutados']);
+           $perHis[$cont]['diasdisfrutados']=H::tofloat($arr[$cont]['disfrutados']);
            $perHis[$cont]['id']=9;
          }
           $cont++;
         }//fin del while
         //obtener el salario integral del ultimo registro del arreglo ya que ese es el ultimo sueldo del empleado
-		if($factor>1){
+
+/*		if($factor>1){
 			if($suenor==0)
 	        	#$ultimosueldo=number_format(((($arr[$i-1]['salint']+$porcion)*$factor)/365)*30,2,',','.');
-	        	$ultimosueldo=$arr[$i-1]['salint']+$porcion;
+	        	$ultimosueldo=$arr[$cont-1]['salint']+$porcion;
 	        else
 			    #$ultimosueldo=number_format(((($suenor+$porcion)*$factor)/365)*30,2,',','.');	
 	        	$ultimosueldo=$suenor+$porcion;	
 		}
-		else{
-			if($suenor==0)
-			    #$ultimosueldo=number_format($arr[$i-1]['salint']+$porcion,2,',','.')
-	        	$ultimosueldo=$arr[$i-1]['salint']+$porcion;
-	        else
-			    #$ultimosueldo=number_format($suenor+$porcion,2,',','.');
-	        	$ultimosueldo=$suenor+$porcion;
-		}
+		else{*/
+		if($suenor==0)
+		    #$ultimosueldo=number_format($arr[$i-1]['salint']+$porcion,2,',','.')
+        	$ultimosueldo=$arr[$cont-1]['salint']+$porcion;
+        else
+		    #$ultimosueldo=number_format($suenor+$porcion,2,',','.');
+        	$ultimosueldo=$suenor+$porcion;
+		#}
         
         if($ultsue==0)
-        	$this->sueldonormal=$arr[$i-1]['salnor'];
+        	$this->sueldonormal=$arr[$cont-1]['salnor'];
         else
         	$this->sueldonormal=$ultsue;
 					
@@ -340,25 +375,36 @@ private static $coderror=-1;
 	    	$ultimosueldo=0;
 		*/		
     }	
-
-	if($factor>1)
+	if($factorbonvf!=0 && (!is_null($factorbonvf)))
 	{
 		if($tipsalbonvf=='UD')
-	   	   $this->suedia = H::FormatoMonto((($sueult*$factor)/365));
+	   	   $this->suedia = H::FormatoMonto((($sueult*$factorbonvf)/365));
 		elseif($tipsalbonvf=='SP')
-	   	   $this->suedia = H::FormatoMonto((($suepro*$factor)/365));
+	   	   $this->suedia = H::FormatoMonto((($suepro*$factorbonvf)/365));
 	    elseif($tipsalbonvf=='SN')
-	   	   $this->suedia = H::FormatoMonto((($this->sueldonormal*$factor)/365));
+	   	   $this->suedia = H::FormatoMonto((($this->sueldonormal*$factorbonvf)/365));
 	    else
-		   $this->suedia = H::FormatoMonto((($ultimosueldo*$factor)/365));	
+		   $this->suedia = H::FormatoMonto((($ultimosueldo*$factorbonvf)/365));	
 	}else
 	{
 		$this->suedia = H::FormatoMonto(0);	
 	}
+
+	if($tipsalbonvf=='UD')
+	   	   $this->suediario = H::FormatoMonto($sueult/30);
+		elseif($tipsalbonvf=='SP')
+	   	   $this->suediario = H::FormatoMonto($suepro/30);
+	    elseif($tipsalbonvf=='SN')
+	   	   $this->suediario = H::FormatoMonto($this->sueldonormal/30);
+	    else
+		   $this->suediario = H::FormatoMonto($ultimosueldo/30);
+
 	$this->sueult = H::FormatoMonto($sueult);
 	$this->suepro = H::FormatoMonto($suepro);
 	$this->sueldonormal=H::FormatoMonto($this->sueldonormal);
 	$ultimosueldo=H::FormatoMonto($ultimosueldo);
+	$this->factorbonvf=$factorbonvf;
+	$this->factorvacv=$factorvacv;
 
     $opciones = new OpcionesGrid();
     $opciones->setEliminar(false);
@@ -432,7 +478,7 @@ private static $coderror=-1;
     //Grid de Historico de Vacaciones
     $opciones = new OpcionesGrid();
     $opciones->setEliminar(false);
-    $opciones->setTabla('Npvacliquidacion');
+    $opciones->setTabla('Npvacdisfrute');
     $opciones->setAnchoGrid(600);
     $opciones->setAncho(600);
     $opciones->setFilas(0);
@@ -461,7 +507,7 @@ private static $coderror=-1;
     $col3->setEsGrabable(true);
     $col3->setAlineacionObjeto(Columna::CENTRO);
     $col3->setAlineacionContenido(Columna::CENTRO);
-    $col3->setNombreCampo('diadis');
+    $col3->setNombreCampo('diasdisfutar');
     $col3->setHTML('type="text" size="8" readonly="true"');
 
     $col4 = new Columna('Días Disfrutados');
@@ -469,7 +515,7 @@ private static $coderror=-1;
     $col4->setEsGrabable(true);
     $col4->setAlineacionObjeto(Columna::CENTRO);
     $col4->setAlineacionContenido(Columna::CENTRO);
-    $col4->setNombreCampo('diadisfru');
+    $col4->setNombreCampo('diasdisfrutados');
     $col4->setHTML('type="text" size="8" readonly="true"');
 
 
@@ -498,8 +544,17 @@ private static $coderror=-1;
         $sal2=0;
       }
       $this->configGrid($this->getRequestParameter('nphojint[codemp]'),"S",&$ultimosueldo,&$sal2,&$sal1);
-      $this->ultsue=$ultimosueldo;
-      $this->suenor=$this->sueldonormal;
+
+	  if($this->factorbonvf!=0 && (!is_null($this->factorbonvf)))
+	  	$this->ultsue=H::formatonum($this->suedia)*30;
+	  else	  
+      	$this->ultsue=H::formatonum($this->suediario)*30;
+		
+	  if($this->factorvacv!=0 && (!is_null($this->factorvacv)))
+	  	$this->suenor=H::formatonum($this->suedia)*30;
+	  else	  
+      	$this->suenor=H::formatonum($this->suediario)*30;			
+      #$this->suenor=$this->sueldonormal;
 	  #$this->sueult=$this->sueult;
 	  #$this->suepro=$this->suepro;
     }
@@ -512,8 +567,17 @@ private static $coderror=-1;
 	  $sal1=$rs->getUltsue();
       $sal2=$rs->getMontoinci();
       $this->configGrid($nphojint->getCodemp(),"N",&$ultimosueldo,&$sal1,&$sal2);
-      $this->ultsue=$ultimosueldo;
-      $this->suenor=$this->sueldonormal;
+	  if($this->factorbonvf!=0 && (!is_null($this->factorbonvf)))
+	  	$this->ultsue=H::formatonum($this->suedia)*30;
+	  else	  
+      	$this->ultsue=H::formatonum($this->suediario)*30;
+		
+	  if($this->factorvacv!=0 && (!is_null($this->factorvacv)))
+	  	$this->suenor=H::formatonum($this->suedia)*30;
+	  else	  
+      	$this->suenor=H::formatonum($this->suediario)*30;
+      #$this->ultsue=$ultimosueldo;
+      #$this->suenor=$this->sueldonormal;
 	  #$this->sueult=$this->sueult;
 	  #$this->suepro=$this->suepro;
       $this->forward404Unless($nphojint);
@@ -533,7 +597,7 @@ private static $coderror=-1;
    */
   protected function saveNphojint($nphojint)
   {
-    $grid=Herramientas::CargarDatosGrid($this,$this->objVac,true);//0
+    $grid=Herramientas::CargarDatosGrid($this,$this->objVac,true);//0       
     V::salvarnpvacliquidacion($nphojint,$grid,$this->ultsue,$this->suenor);
   }
 

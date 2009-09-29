@@ -24,7 +24,7 @@ array()) ?></h1>
 
 <div id="sf_admin_content">
 <?php include_partial('vacliquidacion/edit_messages', array('nphojint' => $nphojint, 'labels' => $labels)) ?>
-<?php include_partial('vacliquidacion/edit_form', array('nphojint' => $nphojint, 'labels' => $labels, 'objVac' => $objVac, 'objHis' => $objHis, 'ultsue' => $ultsue, 'suenor' => $suenor, 'sueult' => $sueult, 'suepro' => $suepro, 'suedia' => $suedia)) ?>
+<?php include_partial('vacliquidacion/edit_form', array('nphojint' => $nphojint, 'labels' => $labels, 'objVac' => $objVac, 'objHis' => $objHis, 'ultsue' => $ultsue, 'suenor' => $suenor, 'sueult' => $sueult, 'suepro' => $suepro, 'suedia' => $suedia, 'suediario' => $suediario)) ?>
 </div>
 
 <div id="sf_admin_footer">

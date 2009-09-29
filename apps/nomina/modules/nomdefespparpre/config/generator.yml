@@ -23,6 +23,8 @@ generator:
       ptipsalbonfinanofra: {name: .}
       tipsalbonvacfra:{ name: Tipo de Salario Bono Vacacional Fraccionado}
       factorbonvacfra:{ name: Factor}
+      tipsalvacven:{ name: Tipo de Salario Vacaciones Vencidas}
+      factorvacven:{ name: Factor}
       ptipsalbonvacfra: { name: .}
       descripclau:      { name:  Descripcion clausula }
       codpar:
@@ -50,6 +52,7 @@ generator:
       apartirmes:       { name: Apartir de(meses)}
       ptipsaldiaant:    { name: .}
       paguinaldosmes:   { name: .}
+      ptipsalvacven:    { name: .}
       
     list:
       title:          Lista de Parametros para Prestaciones
@@ -68,6 +71,7 @@ generator:
         Dias para Vacaciones:   [numdiames, numdiamaxano, _ptipsalajunodep]
         Bono Fin de Año Fraccionado: [_ptipsalbonfinanofra, factorbonfinanofra, _paguinaldosmes]
         Bono Vacacional Fraccionado: [_ptipsalbonvacfra, factorbonvacfra]
+        Vacaciones Vencidas:         [_ptipsalvacven, factorvacven]
         Liquidacion de Prestaciones: [descripclau, codpar, codret, _ptipsaldiaant]
         
       actions:

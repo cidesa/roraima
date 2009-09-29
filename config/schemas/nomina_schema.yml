@@ -6892,6 +6892,13 @@ propel:
       type: NUMERIC
       size: 14
       scale: 2      
+    tipsalvacven:
+      type: VARCHAR
+      size: 2
+    factorvacven:
+      type: NUMERIC
+      size: 14
+      scale: 2
     descripclau:
       type: VARCHAR
       size: 250
