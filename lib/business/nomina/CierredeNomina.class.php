@@ -34,6 +34,7 @@ class CierredeNomina
  	$c= new Criteria();
  	$c->add(NphisconPeer::CODNOM,$codigo);
  	$c->add(NphisconPeer::FECNOM,$fec);
+ 	$c->add(NphisconPeer::ESPECIAL,'S',Criteria::NOT_EQUAL);
  	$resultado= NphisconPeer::doSelectOne($c);
  	if ($resultado)
  	{ return true;}else {return false;}
