@@ -90,68 +90,98 @@
     </div>
  </th>
   </table>
+<table>
+	<tr>
+		<th>
+			<strong>Sueldo Normal:</strong>&nbsp;
+			  <?php echo input_tag('nphojint_ultsue',$suenor, array (
+			  'size' => 13,
+			  'readonly'  =>  $nphojint->getId()!='' ? true : false ,  
+			  'name' => 'nphojint_ultsue',
+			  'maxlength' => 15,
+			  'onBlur'=> remote_function(array(
+						  'update'=> 'grid',
+						  'url'      => 'vacliquidacion/ajax',
+						  'complete' => 'AjaxJSON(request, json);$("nphojint_fecing").focus();formatearcajita("nphojint_ultsue");',
+						  'condition' => "$('nphojint_codemp').value != '' && $('id').value == ''",
+			  			  'with' => "'ajax=2&cajcodemp='+$(nphojint_codemp).value+'&cajultsue='+this.value+'&cajsuenor='+$(nphojint_suenor).value"
+						  ))
+			));  ?>
+			&nbsp;&nbsp;&nbsp;
+		</th>
+		<th>
+			<strong>Salario Integral:</strong>&nbsp;&nbsp;&nbsp;&nbsp;
+				  <?php echo input_tag('nphojint_suenor',$ultsue, array (
+				  'size' => 13,
+				  'readonly'  =>  $nphojint->getId()!='' ? true : false ,  
+				  'name' => 'nphojint_suenor',
+				  'maxlength' => 15,
+				  'onBlur'=> remote_function(array(
+							  'update'=> 'grid',
+							  'url'      => 'vacliquidacion/ajax',
+							  'complete' => 'AjaxJSON(request, json);$("nphojint_fecing").focus();formatearcajita("nphojint_suenor");',
+							  'condition' => "$('nphojint_codemp').value != '' && $('id').value == ''",
+				  			  'with' => "'ajax=2&cajcodemp='+$(nphojint_codemp).value+'&cajultsue='+$(nphojint_ultsue).value+'&cajsuenor='+this.value"
+							  ))
+				));  ?>
+				&nbsp;&nbsp;&nbsp;
+		</th>
+		<th>
+			<strong>Salario Diario &nbsp;
+			  <?php echo input_tag('nphojint_suediario',$suediario, array (
+			  'size' => 13,
+			  'readonly'  =>  true,  
+			  'name' => 'nphojint_suedia',
+			  'maxlength' => 15,
+			
+			));  ?>
+		</th>
+	</tr>
+</table>
 
-<strong>Sueldo Normal:</strong>&nbsp;
-  <?php echo input_tag('nphojint_ultsue',$suenor, array (
-  'size' => 13,
-  'readonly'  =>  $nphojint->getId()!='' ? true : false ,  
-  'name' => 'nphojint_ultsue',
-  'maxlength' => 15,
-  'onBlur'=> remote_function(array(
-			  'update'=> 'grid',
-			  'url'      => 'vacliquidacion/ajax',
-			  'complete' => 'AjaxJSON(request, json);$("nphojint_fecing").focus();formatearcajita("nphojint_ultsue");',
-			  'condition' => "$('nphojint_codemp').value != '' && $('id').value == ''",
-  			  'with' => "'ajax=2&cajcodemp='+$(nphojint_codemp).value+'&cajultsue='+this.value+'&cajsuenor='+$(nphojint_suenor).value"
-			  ))
-));  ?>
-&nbsp;&nbsp;&nbsp;
-<strong>Salario Integral:</strong>&nbsp;&nbsp;&nbsp;&nbsp;
-  <?php echo input_tag('nphojint_suenor',$ultsue, array (
-  'size' => 13,
-  'readonly'  =>  $nphojint->getId()!='' ? true : false ,  
-  'name' => 'nphojint_suenor',
-  'maxlength' => 15,
-  'onBlur'=> remote_function(array(
-			  'update'=> 'grid',
-			  'url'      => 'vacliquidacion/ajax',
-			  'complete' => 'AjaxJSON(request, json);$("nphojint_fecing").focus();formatearcajita("nphojint_suenor");',
-			  'condition' => "$('nphojint_codemp').value != '' && $('id').value == ''",
-  			  'with' => "'ajax=2&cajcodemp='+$(nphojint_codemp).value+'&cajultsue='+$(nphojint_ultsue).value+'&cajsuenor='+this.value"
-			  ))
-));  ?>
-
-
-<br>
-<br>
-
-<strong>Ultimo Sueldo:</strong>&nbsp;&nbsp;
-  <?php echo input_tag('nphojint_sueult',$sueult, array (
-  'size' => 13,
-  'readonly'  =>  true,  
-  'name' => 'nphojint_sueult',
-  'maxlength' => 15,
-  
-));  ?>
-&nbsp;&nbsp;&nbsp;
-<strong>Salario Promedio:</strong>&nbsp;
-  <?php echo input_tag('nphojint_suepro',$suepro, array (
-  'size' => 13,
-  'readonly'  =>  true,  
-  'name' => 'nphojint_suepro',
-  'maxlength' => 15,
-
-));  ?>
-
-&nbsp;&nbsp;&nbsp;
-<strong>Salario Diario:</strong>&nbsp;
-  <?php echo input_tag('nphojint_suedia',$suedia, array (
-  'size' => 13,
-  'readonly'  =>  true,  
-  'name' => 'nphojint_suedia',
-  'maxlength' => 15,
-
-));  ?>
+<table>
+	<tr>
+		<th>
+			<strong>Ultimo Sueldo:</strong>&nbsp;&nbsp;
+				  <?php echo input_tag('nphojint_sueult',$sueult, array (
+				  'size' => 13,
+				  'readonly'  =>  true,  
+				  'name' => 'nphojint_sueult',
+				  'maxlength' => 15,
+				  
+				));  ?>
+				&nbsp;&nbsp;&nbsp;
+		</th>
+		<th>
+			<strong>Salario Promedio:</strong>&nbsp;
+			  <?php echo input_tag('nphojint_suepro',$suepro, array (
+			  'size' => 13,
+			  'readonly'  =>  true,  
+			  'name' => 'nphojint_suepro',
+			  'maxlength' => 15,
+			
+			));  ?>
+			
+			&nbsp;&nbsp;&nbsp;
+		</th>
+		<th>
+			<?php if($suedia==0){?>
+				<div id="divsuedia" style="display:none">
+			<?php }else{?>	
+			    <div id="divsuedia" >
+			<?php }?>	
+				<strong>Salario Diario Convencion Colectiva:</strong>&nbsp;
+			  <?php echo input_tag('nphojint_suedia',$suedia, array (
+			  'size' => 13,
+			  'readonly'  =>  true,  
+			  'name' => 'nphojint_suedia',
+			  'maxlength' => 15,
+			
+			));  ?>
+			</div> 			
+		</th>
+	</tr>
+</table>
 
 </fieldset>
 

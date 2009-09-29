@@ -15,4 +15,8 @@
  */ 
 class Npvacliquidacion extends BaseNpvacliquidacion
 {
+	public  function getDiacan()
+	{
+		return $this->diadis+$this->diasbono;
+	}
 }

@@ -1166,7 +1166,7 @@ End Function*/
 			
 		  #BUSCAMOS SI ESTA DEFINIDO LOS PARAMETROS DE AGUINALDOS Y FACTOR
 		  $agui = 'N';
-		  $factor=1;
+		  $factor=0;
 		  $sqldef = "select  aguicom,apartirmes,factorbonfinanofra from npdefespparpre where codnom='$codnom'";
 		  if (Herramientas::BuscarDatos($sqldef,&$result))
 		  {
@@ -1206,7 +1206,7 @@ End Function*/
 				}else
 				{*/
 				    $diasuti = $montouti;
-					$factor>1 ? $montouti = $montouti * ($ultimosueldo*$factor/365) : $montouti = $montouti * ($ultimosueldo/30);
+					($factor!=0 && (!is_null($factor))) ? $montouti = $montouti * ($ultimosueldo*$factor/365) : $montouti = $montouti * ($ultimosueldo/30);
 					
 				//}
 				#ARREGLO DEL GRID
@@ -1248,7 +1248,7 @@ End Function*/
 				}else
 				{
 					$diasuti = $montouti;
-					$factor>1 ? $montouti = $montouti * ($ultimosueldo*$factor/365) : $montouti = $montouti * ($ultimosueldo/30);
+					($factor!=0 && (!is_null($factor))) ? $montouti = $montouti * ($ultimosueldo*$factor/365) : $montouti = $montouti * ($ultimosueldo/30);
 				}
 				#ARREGLO DEL GRID
 				$sql = "Select * from NPDefPreLiq where CODNOM='$codnom' AND CodCon='005' and PerDes<='$anoegr' and PerHas>='$anoegr'";
@@ -1269,7 +1269,7 @@ End Function*/
 				$montoinc = 0;				
 				$montoinc = $montoinc * $montouti;
 				$diasuti = $montouti;
-				$factor>1 ? $montouti = $montouti * ($ultimosueldo*$factor/365) : $montouti = $montouti * ($ultimosueldo/30);
+				($factor!=0 && (!is_null($factor))) ? $montouti = $montouti * ($ultimosueldo*$factor/365) : $montouti = $montouti * ($ultimosueldo/30);
 				#ARREGLO DEL GRID
 				$sql = "Select * from NPDefPreLiq where CODNOM='$codnom' AND CodCon='005' and PerDes<='$anoegr' and PerHas>='$anoegr'";
 				if (Herramientas::BuscarDatos($sql,&$result))

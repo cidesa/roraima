@@ -50,6 +50,10 @@ class NpdefespparpreMapBuilder {
 
 		$tMap->addColumn('FACTORBONVACFRA', 'Factorbonvacfra', 'double', CreoleTypes::NUMERIC, false, 14);
 
+		$tMap->addColumn('TIPSALVACVEN', 'Tipsalvacven', 'string', CreoleTypes::VARCHAR, false, 2);
+
+		$tMap->addColumn('FACTORVACVEN', 'Factorvacven', 'double', CreoleTypes::NUMERIC, false, 14);
+
 		$tMap->addColumn('DESCRIPCLAU', 'Descripclau', 'string', CreoleTypes::VARCHAR, false, 250);
 
 		$tMap->addColumn('CODRET', 'Codret', 'string', CreoleTypes::VARCHAR, false, 2);

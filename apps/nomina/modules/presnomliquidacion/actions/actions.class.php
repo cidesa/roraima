@@ -196,22 +196,22 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 			HAVING
 			SUM(A.MONANT)<>0 
 			ORDER BY orden,DESCRIPCION DESC";
-#print "<pre>".$sql;
+
 	      if (H::BuscarDatos($sql,$arr))
 	      {	      	
 	        $i=0;
 			$j=0;
 			$cont=0;
-			$factor=1;
+			$factor=0;
 			$totarr=count($arr); 
 			$aguinaldos = PrestacionesSociales::AguinaldosFracionados($codnom,$codemp,$fecegr,$salariointegral,$totarr,$estaliquidado);
 			$sqldefesp = "select * from npdefespparpre where codnom='$codnom'";			
 			if (H::BuscarDatos($sqldefesp,$arrdefesp))
 			  if(is_numeric($arrdefesp[0]['factorbonfinanofra']) && $arrdefesp[0]['factorbonfinanofra']!=0)
 				$factor=$arrdefesp[0]['factorbonfinanofra'];
-			
+
 			$this->salintdia = $salariointegral/30;
-			if($factor>1)
+			if($factor!=0 && (!is_null($factor)))
 				$this->salintdiaconcol = ($salariointegral*$factor)/365;	
 			
 			$arr = array_merge($arr,$aguinaldos);
@@ -502,9 +502,8 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
           $per[$i]['perfin']=$arr[$cont]['perfin'];
    		  $per[$i]['diadis']=H::tofloat($arr[$cont]['diadis']);
           $per[$i]['diasbono']=H::tofloat($arr[$cont]['diasbono']);
-          $per[$i]['diacan']=$per[$i]['diadis']+$per[$i]['diasbono'];
-          $monto=($per[$i]['diadis']*($arr[$cont]['ultsue']/30))+($per[$i]['diasbono']*($arr[$cont]['montoinci']/30));
-          $per[$i]['monto']=number_format($monto,2,',','.');
+          $per[$i]['diacan']=$per[$i]['diadis']+$per[$i]['diasbono'];          
+          $per[$i]['monto']=H::FormatoMonto($arr[$cont]['monto']);
           $per[$i]['id']=9;
           $i++;
 
@@ -697,7 +696,8 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 				$diaefec=$rs[0]["diasefectivo"];
 				/**ASIGNAMOS VALORES DE SUELDOS*/			
 				#Ultimo sueldo del empleado
-				$antiguedad = H::DateDiff("yyyy", $fecing, date("Y-m-d"));
+				$antiguedad = H::DateDiff("yyyy", $fecing, date("Y-m-d"));		
+				
 				$sql= "select sum(ultsue) as ultsue from (
 				        Select coalesce(sum(MonAsi),0) as ultsue from NPSALINT a, npasipre b where CodEmp='$codemp' and 
 						FECFINCON = (SELECT MAX(FECFINCON) FROM NPSALINT where CodEmp='$codemp' and 
