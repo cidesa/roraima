@@ -76,6 +76,9 @@ sima_user:
     codcat:
       type: VARCHAR
       size: 16
+    codniv:
+      type: VARCHAR
+      size: 3
     id:
   aplifor:
     codapl:
