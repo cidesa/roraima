@@ -14,16 +14,6 @@
 <?php echo javascript_include_tag('tools') ?>
 
 <?
-
-/*if ($vargrid=='id1')
-	echo grid_tag($obj);
-elseif ($vargrid=='id2')
-	echo grid_tag($obj2);
-elseif ($vargrid=='id3')
-	echo grid_tag($obj3);
-
-
-*/
 if ($varg=='a'){
 //	array_pop($registro);  ///Borra la Ultima Posicion
 //  array_pop($registro);  ///Borra la Ultima Posicion
@@ -94,18 +84,9 @@ if ($varg=='a'){
 
 
 <?
-/*
-$col7->setEsTotal(true, 'totcapitalact');
-$col8->setEsTotal(true, 'totmonpres');
 
- *  * $col12->setEsTotal(true, 'totintacu');
-			$col13->setEsTotal(true, 'totmonant');
-			$col14->setEsTotal(true, 'totmonadeint');
-
- *
- * */
 }elseif($varg=='b')
-{	
+{
 ?>
 <div id="id2">
 <?php
@@ -116,26 +97,14 @@ $col8->setEsTotal(true, 'totmonpres');
 	if($('trigger_bx_'+i+'_1'))
 	{
 		while (i<tot)
-	  	{  		
+	  	{
 			$('trigger_bx_'+i+'_1').hide();
 	  		$('trigger_bx_'+i+'_2').hide();
 	  		i++;
-	  	}	
+	  	}
 	}
   	");
  ?>
 </div>
-<?php 
+<?php
 }
-/*
-
-if ($aux=='si')
-echo javascript_tag("
-		new Ajax.Updater( 'id2', '/nomina'+$('entorno').value+'.php/presnomcalintpre/ajax', {asynchronous:true, evalScripts:true, parameters:'ajax=3'});
-");
-if ($aux2=='si')
-echo javascript_tag("
-		new Ajax.Updater( 'id3', '/nomina'+$('entorno').value+'.php/presnomcalintpre/ajax', {asynchronous:true, evalScripts:true, parameters:'ajax=4'});
-");
-
-*/
