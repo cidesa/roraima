@@ -1,4 +1,4 @@
-set search_path to "SIMA002";
+set search_path to "SIMA003";
 
 -- View: "SIMA002".npanos
 
@@ -256,7 +256,7 @@ FROM NPHOJINT A,
                         AND A.CODTIPCON=B.CODTIPCON,NPTIPCON C
 WHERE A.CODTIPCON=C.CODTIPCON
 AND A.FECINI>=C.FECINIREG)
-ORDER BY A.CODEMP,A.FECFIN,A.ID
+ORDER BY A.CODEMP,A.FECFIN,A.ID;
 
 
 
@@ -414,7 +414,7 @@ FROM  (Select 0 AS HIST,
 	      AND w.CodCon=t.CodCpt
 	      group by w.CodEmp) D on A.CodEmp=D.CodEmp
 GROUP BY A.DESDE,A.HASTA,A.CODEMP,A.FECRET,A.FECING,A.CodTipCon,A.NumDiaMes,A.NumDiaMaxAno
-ORDER BY A.CODEMP,A.DESDE)
+ORDER BY A.CODEMP,A.DESDE);
 
 
 
@@ -467,7 +467,7 @@ group by
   a.antacu,
   b.intacu,
   a.intacu,
-  coalesce(A.ADEPRE,0))
+  coalesce(A.ADEPRE,0));
   
  CREATE OR REPLACE VIEW NPPRESREGANT AS
 (SELECT A.CODEMP,A.NOMEMP,A.FECING,A.FECRET AS FECEGR,
