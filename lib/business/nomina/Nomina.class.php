@@ -1698,7 +1698,19 @@ class Nomina {
         break;
 
       case "AM" :
-        $valor = Herramientas :: dateDiff('m', $fechaing, $fecnom);
+		$valorano=0;
+		$sql="select to_char(age(to_date('$fecnom','yyyy-mm-dd'),to_date('$fechaing','yyyy-mm-dd')),'YY') as ano";
+		if (Herramientas :: BuscarDatos($sql, & $tabla)) {			
+			$valorano = intval($tabla[0]['ano']);
+		}
+		$valormes=0;
+		$sql="select to_char(age(to_date('$fecnom','yyyy-mm-dd'),to_date('$fechaing','yyyy-mm-dd')),'MM') as mes";
+		if (Herramientas :: BuscarDatos($sql, & $tabla)){
+			$valormes = intval($tabla[0]['mes']);
+		}
+		$valor = ($valorano*12)+$valormes;
+		return $valor;
+        #$valor = Herramientas :: dateDiff('m', $fechaing, $fecnom);
         break;
 
       case "AC" :
@@ -3273,8 +3285,21 @@ class Nomina {
         return $valor;
         break;
       case "AM" :
-        return Herramientas :: dateDiff('m', $fechaing, $profec);
-        break;
+
+       case "AM" :
+		$valorano=0;
+		$sql="select to_char(age(to_date('$profec','yyyy-mm-dd'),to_date('$fechaing','yyyy-mm-dd')),'YY') as ano";
+		if (Herramientas :: BuscarDatos($sql, & $tabla)) {			
+			$valorano = intval($tabla[0]['ano']);
+		}
+		$valormes=0;
+		$sql="select to_char(age(to_date('$profec','yyyy-mm-dd'),to_date('$fechaing','yyyy-mm-dd')),'MM') as mes";
+		if (Herramientas :: BuscarDatos($sql, & $tabla)){
+			$valormes = intval($tabla[0]['mes']);
+		}
+		$valor = ($valorano*12)+$valormes;
+		return $valor;
+        #$valor = Herramientas :: dateDiff('m', $fechaing, $fecnom);
       case "AAP" :
 
         if (strrpos($hasta, "/")) {
