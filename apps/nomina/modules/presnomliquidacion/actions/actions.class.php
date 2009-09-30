@@ -260,7 +260,17 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 			
 		  }
 	}else
-	{ #ESTA LIQUIDADO
+	{
+		
+	  $sqldefesp = "select * from npdefespparpre where codnom='$codnom'";			
+			if (H::BuscarDatos($sqldefesp,$arrdefesp))
+			  if(is_numeric($arrdefesp[0]['factorbonfinanofra']) && $arrdefesp[0]['factorbonfinanofra']!=0)
+				$factor=$arrdefesp[0]['factorbonfinanofra'];
+
+			$this->salintdia = $salariointegral/30;
+			if($factor!=0 && (!is_null($factor)))
+				$this->salintdiaconcol = ($salariointegral*$factor)/365;
+	  #ESTA LIQUIDADO
 	  $sql="select * from npliquidacion_det where codemp='$codemp' order by numreg,concepto desc";
 	  if (H::BuscarDatos($sql,$arr))
       {
@@ -401,7 +411,7 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
     $col1->setAlineacionObjeto(Columna::CENTRO);
     $col1->setAlineacionContenido(Columna::CENTRO);
 	$col1->setCatalogo('npdefcpt','sf_admin_edit_form',array('codcon' => 5,'nomcon' => 1), 'Npdefcpt_nomdefespguarde');
-    $col1->setHTML('type="text" size="60" readonly="true"');
+    $col1->setHTML('type="text" size="60" ');
     $col1->setNombreCampo('concepto');
 
     $col2 = new Columna('Monto');
@@ -437,7 +447,7 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
     $col5->setAlineacionObjeto(Columna::CENTRO);
     $col5->setAlineacionContenido(Columna::CENTRO);
     $col5->setNombreCampo('codcon');
-    $col5->setHTML('type="text" size="10" readonly="true"');
+    $col5->setHTML('type="text" size="10" ');
 
     $col6 = new Columna('Dias');
     $col6->setTipo(Columna::TEXTO);
