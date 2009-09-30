@@ -44,7 +44,7 @@ group by substr(a.codpre,1,b.longitud::integer),a.id);
 
 
 
-                                                                     
+
 CREATE OR REPLACE VIEW NPPRESTACIONES AS
 (SELECT A.CODEMP,A.NOMEMP,A.FECING,A.FECINI,A.FECFIN,
 A.MONTO,A.SALNOR,
@@ -162,7 +162,7 @@ COALESCE((CASE WHEN (SELECT SUM(X.MONASI)
            FROM NPSALINT X,NPASIPRE Y
            WHERE X.CODEMP=A.CODEMP
            AND Y.CODCON=X.CODCON
-           AND Y.TIPASI='S' 
+           AND Y.TIPASI='S'
            AND X.CODASI=Y.CODASI
            AND X.FECINICON=B.FECINI
            AND X.FECFINCON=B.FECFIN) IS NOT NULL THEN
@@ -170,7 +170,7 @@ COALESCE((CASE WHEN (SELECT SUM(X.MONASI)
            FROM NPSALINT X,NPASIPRE Y
            WHERE X.CODEMP=A.CODEMP
            AND Y.CODCON=X.CODCON
-           AND Y.TIPASI='S' 
+           AND Y.TIPASI='S'
            AND X.CODASI=Y.CODASI
            AND X.FECINICON=B.FECINI
            AND X.FECFINCON=B.FECFIN)
@@ -225,27 +225,27 @@ COALESCE((CASE WHEN (SELECT SUM(X.MONASI)
 				        AND X.FECNOM>=B.FECINI
 				        AND X.FECNOM<=B.FECFIN
 				        AND Y.CODEMP=X.CODEMP
-				        AND Y.CODNOM=X.CODNOM) 
+				        AND Y.CODNOM=X.CODNOM)
 			      ELSE
-				  (SELECT CODTIPCON FROM NPASIEMPCONT 
+				  (SELECT CODTIPCON FROM NPASIEMPCONT
 				  WHERE CODEMP=A.CODEMP
-				  AND FECCAL=(SELECT MAX(FECCAL) FROM NPASIEMPCONT WHERE CODEMP=A.CODEMP)) 
+				  AND FECCAL=(SELECT MAX(FECCAL) FROM NPASIEMPCONT WHERE CODEMP=A.CODEMP))
 			      END)
 			   END) END) AS CODTIPCON,
 B.ID
 FROM NPHOJINT A,
-  (select 
+  (select
    add_months((select to_date('01/01/'||to_char(min(ano),'9999'),'dd/mm/yyyy') from npanos),id-1) as fecini,
    last_day(add_months((select to_date('01/01/'||to_char(min(ano),'9999'),'dd/mm/yyyy') from npanos),id-1)) as fecfin,
    id
    from generate_series(1,(SELECT count(*)
-			   FROM npanos a, 
-			  (select '01/'||lpad(trim(to_char(fecdes,'99')),2,'0') as fecdes 
+			   FROM npanos a,
+			  (select '01/'||lpad(trim(to_char(fecdes,'99')),2,'0') as fecdes
 			  from generate_series(1,12) as fecdes) b)) as id
-   order by id) B 
+   order by id) B
  WHERE  B.FECFIN>=(CASE WHEN TO_CHAR(A.FECING,'DD')>'01' THEN ADD_MONTHS(A.FECING,4)
                   ELSE ADD_MONTHS(A.FECING,4)-1 END)
- AND B.FECINI>COALESCE(A.FECCORACU,A.FECING) 
+ AND B.FECINI>COALESCE(A.FECCORACU,A.FECING)
  AND B.FECFIN<=(SELECT COALESCE(MAX(FECFINCON),NOW()) FROM NPSALINT WHERE CODEMP=A.CODEMP)) A LEFT OUTER JOIN
                        (SELECT ANOVIG,ANOVIGHAS,CODTIPCON,MAX(ANTAP) AS ANTAP,
                         MAX(ANTAPVAC) AS ANTAPVAC
@@ -259,25 +259,20 @@ AND A.FECINI>=C.FECINIREG)
 ORDER BY A.CODEMP,A.FECFIN,A.ID;
 
 
-
-                                                                     
-                                                                     
-                                                                     
-                                             
 CREATE OR REPLACE VIEW NPLIQVACACION AS
 (SELECT
 (CASE WHEN SUM(A.HIST)=0 THEN 'NO' ELSE 'SI' END) AS HISTORICO,SUM(A.ANTIGUEDAD) AS ANTIGUEDAD,
 A.DESDE,A.HASTA,SUM(A.DISFRUTADOS) AS DISFRUTADOS,
 (CASE WHEN SUM(A.HIST)=0 THEN SUM(A.CORRESPONDE) ELSE SUM(A.CORRESPONDEHIS) END) AS CORRESPONDE,
 A.CODEMP,A.FECRET,
-ROUND((CASE WHEN 
-         (CASE WHEN TO_DATE(TO_CHAR(A.FECRET,'DD/MM/')||TO_CHAR(A.FECING,'YYYY'),'DD/MM/YYYY')<=A.FECING THEN   
+ROUND((CASE WHEN
+         (CASE WHEN TO_DATE(TO_CHAR(A.FECRET,'DD/MM/')||TO_CHAR(A.FECING,'YYYY'),'DD/MM/YYYY')<=A.FECING THEN
           TO_NUMBER(TO_CHAR(A.FECRET,'YYYY'),'9999')-1
-          ELSE 
+          ELSE
           TO_NUMBER(TO_CHAR(A.FECRET,'YYYY'),'9999') END)>=TO_NUMBER(A.DESDE,'9999')
-       AND (CASE WHEN TO_DATE(TO_CHAR(A.FECRET,'DD/MM/')||TO_CHAR(A.FECING,'YYYY'),'DD/MM/YYYY')<=A.FECING THEN   
+       AND (CASE WHEN TO_DATE(TO_CHAR(A.FECRET,'DD/MM/')||TO_CHAR(A.FECING,'YYYY'),'DD/MM/YYYY')<=A.FECING THEN
             TO_NUMBER(TO_CHAR(A.FECRET,'YYYY'),'9999')-1
-            ELSE 
+            ELSE
             TO_NUMBER(TO_CHAR(A.FECRET,'YYYY'),'9999') END)<TO_NUMBER(A.HASTA,'9999')
  THEN (CASE WHEN (CASE WHEN COALESCE(A.NUMDIAMES,0)=0 THEN ((CASE WHEN SUM(A.HIST)=0 THEN SUM(A.CORRESPONDE) ELSE SUM(A.CORRESPONDEHIS) END)/12) ELSE A.NUMDIAMES END)*
       cuantotiempo((CASE WHEN
@@ -286,7 +281,7 @@ ROUND((CASE WHEN
                     TO_DATE(TO_CHAR(A.FECING,'DD/MM/')||TO_CHAR(TO_NUMBER(TO_CHAR(A.FECRET,'YYYY'),'9999')-1,'YYYY'),'DD/MM/YYYY')
                     ELSE
                     TO_DATE(TO_CHAR(A.FECING,'DD/MM/')||TO_CHAR(A.FECRET,'YYYY'),'DD/MM/YYYY')
-                    END),A.FECRET,'CM','0')<= COALESCE(A.NUMDIAMAXANO,0) OR A.NUMDIAMES IS NULL THEN 
+                    END),A.FECRET,'CM','0')<= COALESCE(A.NUMDIAMAXANO,0) OR A.NUMDIAMES IS NULL THEN
        (CASE WHEN COALESCE(A.NUMDIAMES,0)=0 THEN ((CASE WHEN SUM(A.HIST)=0 THEN SUM(A.CORRESPONDE) ELSE SUM(A.CORRESPONDEHIS) END)/12) ELSE A.NUMDIAMES END)*
       cuantotiempo((CASE WHEN
                     TO_DATE(TO_CHAR(A.FECING,'DD/MM/')||TO_CHAR(A.FECRET,'YYYY'),'DD/MM/YYYY')>A.FECRET
@@ -297,14 +292,14 @@ ROUND((CASE WHEN
                     END),A.FECRET,'CM','0')
        ELSE COALESCE(A.NUMDIAMAXANO,0) END)
  ELSE 0  END),2) AS FRACCIONDIA,
-ROUND((CASE WHEN 
-         (CASE WHEN TO_DATE(TO_CHAR(A.FECRET,'DD/MM/')||TO_CHAR(A.FECING,'YYYY'),'DD/MM/YYYY')<=A.FECING THEN   
+ROUND((CASE WHEN
+         (CASE WHEN TO_DATE(TO_CHAR(A.FECRET,'DD/MM/')||TO_CHAR(A.FECING,'YYYY'),'DD/MM/YYYY')<=A.FECING THEN
           TO_NUMBER(TO_CHAR(A.FECRET,'YYYY'),'9999')-1
-          ELSE 
+          ELSE
           TO_NUMBER(TO_CHAR(A.FECRET,'YYYY'),'9999') END)>=TO_NUMBER(A.DESDE,'9999')
-       AND (CASE WHEN TO_DATE(TO_CHAR(A.FECRET,'DD/MM/')||TO_CHAR(A.FECING,'YYYY'),'DD/MM/YYYY')<=A.FECING THEN   
+       AND (CASE WHEN TO_DATE(TO_CHAR(A.FECRET,'DD/MM/')||TO_CHAR(A.FECING,'YYYY'),'DD/MM/YYYY')<=A.FECING THEN
             TO_NUMBER(TO_CHAR(A.FECRET,'YYYY'),'9999')-1
-            ELSE 
+            ELSE
             TO_NUMBER(TO_CHAR(A.FECRET,'YYYY'),'9999') END)<TO_NUMBER(A.HASTA,'9999')
  THEN (CASE WHEN COALESCE(A.NUMDIAMES,0)=0 THEN MAX(COALESCE(B.DIAVAC,0)/12) ELSE 0 END)*
       cuantotiempo((CASE WHEN
@@ -315,14 +310,14 @@ ROUND((CASE WHEN
                     TO_DATE(TO_CHAR(A.FECING,'DD/MM/')||TO_CHAR(A.FECRET,'YYYY'),'DD/MM/YYYY')
                     END),A.FECRET,'CM','0')
  ELSE 0  END),2) AS FRACCIONBONO,
-(CASE WHEN 
-         (CASE WHEN TO_DATE(TO_CHAR(A.FECRET,'DD/MM/')||TO_CHAR(A.FECING,'YYYY'),'DD/MM/YYYY')<=A.FECING THEN   
+(CASE WHEN
+         (CASE WHEN TO_DATE(TO_CHAR(A.FECRET,'DD/MM/')||TO_CHAR(A.FECING,'YYYY'),'DD/MM/YYYY')<=A.FECING THEN
           TO_NUMBER(TO_CHAR(A.FECRET,'YYYY'),'9999')-1
-          ELSE 
+          ELSE
           TO_NUMBER(TO_CHAR(A.FECRET,'YYYY'),'9999') END)>=TO_NUMBER(A.DESDE,'9999')
-       AND (CASE WHEN TO_DATE(TO_CHAR(A.FECRET,'DD/MM/')||TO_CHAR(A.FECING,'YYYY'),'DD/MM/YYYY')<=A.FECING THEN   
+       AND (CASE WHEN TO_DATE(TO_CHAR(A.FECRET,'DD/MM/')||TO_CHAR(A.FECING,'YYYY'),'DD/MM/YYYY')<=A.FECING THEN
             TO_NUMBER(TO_CHAR(A.FECRET,'YYYY'),'9999')-1
-            ELSE 
+            ELSE
             TO_NUMBER(TO_CHAR(A.FECRET,'YYYY'),'9999') END)<TO_NUMBER(A.HASTA,'9999')
  THEN 'SI'
  ELSE 'NO'  END) as Fraccion,
@@ -345,20 +340,20 @@ FROM  (Select 0 AS HIST,
        from NPvacdiadis A left outer join NPDefEspParPre F on A.CodNom=F.CodNom,NPAnos B,NPHojInt C,NPASINOMCONT D
        Where A.codnom=COALESCE((SELECT CODNOM FROM NPASIEMPCONT WHERE CODEMP=C.CODEMP
                        AND FECDES<=TO_DATE(TO_CHAR(C.FECING,'DD/MM/')||
-                       (CASE WHEN TO_DATE(TO_CHAR(C.FECRET,'DD/MM/')||TO_CHAR(C.FECING,'YYYY'),'DD/MM/YYYY')<=C.FECING 
+                       (CASE WHEN TO_DATE(TO_CHAR(C.FECRET,'DD/MM/')||TO_CHAR(C.FECING,'YYYY'),'DD/MM/YYYY')<=C.FECING
  THEN ((TO_NUMBER(TO_CHAR(C.FecIng,'YYYY'),'9999')+1)+((TO_NUMBER(TO_CHAR(C.FecRet,'YYYY'),'9999')+1)-B.Ano)-2)::VARCHAR
  ELSE ((TO_NUMBER(TO_CHAR(C.FecIng,'YYYY'),'9999')+1)+((TO_NUMBER(TO_CHAR(C.FecRet,'YYYY'),'9999')+1)-B.Ano)-1)::VARCHAR END),'DD/MM/YYYY')
                        AND FECHAS>=TO_DATE(TO_CHAR(C.FECING,'DD/MM/')||
-                       (CASE WHEN TO_DATE(TO_CHAR(C.FECRET,'DD/MM/')||TO_CHAR(C.FECING,'YYYY'),'DD/MM/YYYY')<=C.FECING 
+                       (CASE WHEN TO_DATE(TO_CHAR(C.FECRET,'DD/MM/')||TO_CHAR(C.FECING,'YYYY'),'DD/MM/YYYY')<=C.FECING
  THEN ((TO_NUMBER(TO_CHAR(C.FecIng,'YYYY'),'9999')+1)+((TO_NUMBER(TO_CHAR(C.FecRet,'YYYY'),'9999')+1)-B.Ano)-2)::VARCHAR
  ELSE ((TO_NUMBER(TO_CHAR(C.FecIng,'YYYY'),'9999')+1)+((TO_NUMBER(TO_CHAR(C.FecRet,'YYYY'),'9999')+1)-B.Ano)-1)::VARCHAR END),'DD/MM/YYYY')),
-                       (SELECT MAX(CODNOM) FROM NPHISCON                       
+                       (SELECT MAX(CODNOM) FROM NPHISCON
                        WHERE CODEMP=C.CODEMP
                        AND FECNOM=(SELECT MAX(FECNOM) FROM NPHISCON WHERE CODEMP=C.CODEMP
-                       AND TO_CHAR(FECNOM,'YYYY')=TO_CHAR((TO_NUMBER(TO_CHAR(C.FecIng,'YYYY'),'9999')+1)+((TO_NUMBER(TO_CHAR(C.FecRet,'YYYY'),'9999')+1)-B.Ano)-1,'9999'))), 
+                       AND TO_CHAR(FECNOM,'YYYY')=TO_CHAR((TO_NUMBER(TO_CHAR(C.FecIng,'YYYY'),'9999')+1)+((TO_NUMBER(TO_CHAR(C.FecRet,'YYYY'),'9999')+1)-B.Ano)-1,'9999'))),
                        COALESCE((SELECT MAX(CODNOM) FROM NPHISCON WHERE CODEMP=C.CODEMP
                        AND FECNOM=(SELECT MAX(FECNOM) FROM NPHISCON WHERE CODEMP=C.CODEMP))))
-             And B.Ano Between TO_NUMBER(TO_CHAR(C.FecIng,'YYYY'),'9999') 
+             And B.Ano Between TO_NUMBER(TO_CHAR(C.FecIng,'YYYY'),'9999')
                        and (CASE WHEN TO_DATE(TO_CHAR(C.FECRET,'DD/MM/')||TO_CHAR(C.FECING,'YYYY'),'DD/MM/YYYY')>C.FECING THEN TO_NUMBER(TO_CHAR(C.FecRet,'YYYY'),'9999')
                             ELSE TO_NUMBER(TO_CHAR(C.FecRet,'YYYY'),'9999')-1 END)
              And C.FecRet is Not NUll
@@ -389,20 +384,20 @@ FROM  (Select 0 AS HIST,
              And (CASE WHEN TO_DATE(TO_CHAR(A.FecIng,'DD/MM/')||A.Hasta::VARCHAR,'DD/MM/YYYY')>A.FECRET THEN
                       A.FECRET
                   ELSE
-                      TO_DATE(TO_CHAR(A.FecIng,'DD/MM/')||A.Hasta::VARCHAR,'DD/MM/YYYY') 
-                  END)  
-             BETWEEN B.AnoVig and B.AnoVigHas left outer join 
+                      TO_DATE(TO_CHAR(A.FecIng,'DD/MM/')||A.Hasta::VARCHAR,'DD/MM/YYYY')
+                  END)
+             BETWEEN B.AnoVig and B.AnoVigHas left outer join
              (Select w.CodEmp,Sum((CASE WHEN v.TipAsi='S' then w.MONASI else 0 end)) as MONASI,
 	      Sum((CASE WHEN v.AfeAliBV='S' then w.MONASI else 0 end)) as MONBV,
-	      Sum((CASE WHEN v.AfeAliBF='S' then w.MONASI else 0 end)) as MONBF 
-              from NPSalInt w, NPAsiPre v 
+	      Sum((CASE WHEN v.AfeAliBF='S' then w.MONASI else 0 end)) as MONBF
+              from NPSalInt w, NPAsiPre v
               where w.CodCon=(Select CodTipCon from NPAsiEmpCont where CodEmp=w.CodEmp and Status='A')
               And to_char(w.FecFinCon,'mm/yyyy')=(Select to_char(MAX(FecFin),'mm/yyyy') From NPImpPreSoc where CodEmp=w.CodEmp and ValArt108>0 and Tipo='')
               And v.CodCon=w.CodCon AND w.CodAsi=v.CodAsi
               group by w.CodEmp) C on A.CodEmp=C.CodEmp left outer join
              (Select w.CodEmp,SUM((CASE WHEN v.TipAsi='S' THEN w.Monto ELSE 0 END)) as MonHis,
-	      SUM((CASE WHEN t.AfeAliBV='S' THEN w.Monto ELSE 0 END)) as MonHisBV, 
-	      SUM((CASE WHEN t.AfeAliBF='S' THEN w.Monto ELSE 0 END)) as MonHisBF 
+	      SUM((CASE WHEN t.AfeAliBV='S' THEN w.Monto ELSE 0 END)) as MonHisBV,
+	      SUM((CASE WHEN t.AfeAliBF='S' THEN w.Monto ELSE 0 END)) as MonHisBF
 	      from NPHisCon w,NPAsiPre v,NPConAsi t,NPAsiNomCont r
 	      where to_char(w.FecNom,'mm/yyyy')=(Select to_char(MAX(FecFin),'mm/yyyy') From NPImpPreSoc where CodEmp=w.CodEmp and ValArt108>0 and Tipo='')
 	      And v.CodCon=(Select CodTipCon from NPAsiEmpCont where CodEmp=w.CodEmp and Status='A')
@@ -467,8 +462,13 @@ group by
   a.antacu,
   b.intacu,
   a.intacu,
+<<<<<<< .mine
   coalesce(A.ADEPRE,0));
-  
+
+=======
+  coalesce(A.ADEPRE,0));
+
+>>>>>>> .r33604
  CREATE OR REPLACE VIEW NPPRESREGANT AS
 (SELECT A.CODEMP,A.NOMEMP,A.FECING,A.FECRET AS FECEGR,
 (CASE WHEN TO_CHAR(A.FECFIN,'MM')=TO_CHAR(A.FECING,'MM') THEN TO_DATE(TO_CHAR(A.FECING,'DD/')||TO_CHAR(A.FECINI,'MM/YYYY'),'DD/MM/YYYY') ELSE A.FECINI END) AS FECINI,
@@ -495,8 +495,8 @@ ROUND(A.MONTO/30,2) +
   END),0)/30/12)*ROUND(A.MONTO/30,2) AS MONDIA,
 A.CODTIPCON,
 D.TIPTAS,
-COALESCE((CASE WHEN D.TIPTAS='P' THEN E.TASINTPRO 
- WHEN D.TIPTAS='A' THEN E.TASINTACT 
+COALESCE((CASE WHEN D.TIPTAS='P' THEN E.TASINTPRO
+ WHEN D.TIPTAS='A' THEN E.TASINTACT
  WHEN D.TIPTAS='S' THEN E.TASINTPAS END),0) AS TASINT,
  B.ANTAP,B.ANTAPVAC,C.ALICUOCON,
 (CASE WHEN COALESCE(B.ANTAP,'N')='N' THEN A.ANNOANTIG ELSE A.ANNOANTIGPUB END) AS ANNOANTIG,
@@ -560,13 +560,13 @@ B.FECFIN,
              AND Y.CODNOM=X.CODNOM) END) AS CODTIPCON,
 B.ID
 FROM NPHOJINT A,
-(select 
+(select
    add_months((select to_date('01/01/'||to_char(min(ano),'9999'),'dd/mm/yyyy') from npanos),id-1) as fecini,
    last_day(add_months((select to_date('01/01/'||to_char(min(ano),'9999'),'dd/mm/yyyy') from npanos),id-1)) as fecfin,
    id,null as CodEmp
    from generate_series(1,(SELECT count(*)
-			   FROM npanos a, 
-			  (select '01/'||lpad(trim(to_char(fecdes,'99')),2,'0') as fecdes 
+			   FROM npanos a,
+			  (select '01/'||lpad(trim(to_char(fecdes,'99')),2,'0') as fecdes
 			  from generate_series(1,12) as fecdes) b)) as id
    order by id) B
  WHERE B.FECFIN<=NOW()) A LEFT OUTER JOIN
@@ -576,15 +576,14 @@ FROM NPHOJINT A,
                         GROUP BY ANOVIG,ANOVIGHAS,CODTIPCON) B ON
                         A.FECINI>=B.ANOVIG
                         AND A.FECFIN<=B.ANOVIGHAS
-                        AND A.CODTIPCON=B.CODTIPCON 
-                        LEFT OUTER JOIN NPINTFECREF E ON 
+                        AND A.CODTIPCON=B.CODTIPCON
+                        LEFT OUTER JOIN NPINTFECREF E ON
                         A.FECFIN>=E.FECINIREF AND
                         A.FECFIN<=E.FECFINREF
-                        ,NPTIPCON C,NPINTCON D 
+                        ,NPTIPCON C,NPINTCON D
 WHERE A.CODTIPCON=C.CODTIPCON
 AND A.FECINI<C.FECINIREG
 AND A.CODTIPCON=D.CODCON
 AND A.FECFIN>=D.FECDES
 AND A.FECFIN<=D.FECHAS)
-ORDER BY A.CODEMP,A.FECFIN,A.ID
-  
+ORDER BY A.CODEMP,A.FECFIN,A.ID;
