@@ -6,7 +6,7 @@
  * @subpackage presnomcalintpre
  * @author     $Author$ <desarrollo@cidesa.com.ve>
  * @version SVN: $Id$
- * 
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -264,7 +264,7 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
 		if($per)
 			$codniv = $per->getCodNiv();
 		else
-			$codniv = "";	
+			$codniv = "";
 		$c = new Criteria();
 		$c->add(NpasicarempPeer::CODEMP,$this->getRequestParameter('codemp'));
 		$c->add(NpasicarempPeer::STATUS,'V');
@@ -272,31 +272,31 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
 		if($per)
 		{
 			$codcar = $per->getCodcar();
-			$nomcar = $per->getNomcar();	
+			$nomcar = $per->getNomcar();
 		}else
 		{
 			$codcar = "";
-			$nomcar = "";	
-		}		
+			$nomcar = "";
+		}
 		$c = new Criteria();
 		$c->add(NpestorgPeer::CODNIV,$codniv);
 		$per = NpestorgPeer::doSelectOne($c);
 		if($per)
 			$desniv = $per->getDesniv();
-		else	
+		else
 			$desniv = "";
-		
+
         $destipcon  = $this->tipcon; //NptipconPeer::getDestipcon($this->tipcon);
         $feccalpres = @adodb_date("d/m/Y", strtotime($this->feccalculo));
         $feccor     = @adodb_date("d/m/Y", strtotime($this->feccor));
-        
+
         //echo $feccor; exit();
         //$this->configGridConsulta($this->getRequestParameter('codemp'));
         $this->configGridRN($this->getRequestParameter('codemp'));
-		$this->configGridRA($this->getRequestParameter('codemp'));		
+		$this->configGridRA($this->getRequestParameter('codemp'));
 
 		$this->getUser()->setAttribute('obj2', $this->obj2);
-	    $js="toAjaxUpdater('id2',7,getUrlModulo()+'ajax','7');";  
+	    $js="toAjaxUpdater('id2',7,getUrlModulo()+'ajax','7');";
 
 //echo $this->control;
         $output = '[["nppresoc_nomemp","' . $nomemp . '",""],["nppresoc_cedemp","' . $cedemp . '",""],["nppresoc_fecing","' . $fecing . '",""],                    ["nppresoc_feccalpres","' . $feccalpres . '",""],["nppresoc_destipcon","' . $destipcon . '",""],["nppresoc_feccor","' . $feccor . '",""],
@@ -363,23 +363,23 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
 			      $anno='365';
 			  else
 			      $anno='360';
-				  	  
+
               if ($this->getRequestParameter('codemp') != "" and $this->getRequestParameter('feccor') != "" and $this->getRequestParameter('capita') != "")
               {
                 $this->configGrid($this->getRequestParameter('codemp'), $this->getRequestParameter('feccor'), $this->getRequestParameter('capita'), $salario,$anno);
 				$this->configGrid_bueno($this->getRequestParameter('codemp'), $this->getRequestParameter('feccor'), $this->getRequestParameter('capita'), $salario,$anno);
 			    $this->getUser()->setAttribute('obj2', $this->obj2);
-			    $js="toAjaxUpdater('id2',7,getUrlModulo()+'ajax','7');";  
+			    $js="toAjaxUpdater('id2',7,getUrlModulo()+'ajax','7');";
                 $output = '[["diaserrn","'.$this->antdias.'",""],["messerrn","'.$this->antmeses.'",""],["anoserrn","'.$this->antannos.'",""],["diaserra","'.$this->antdias2.'",""],["messerra","'.$this->antmeses2.'",""],["anoserra","'.$this->antannos2.'",""],["totcapitalact","'.H::Formatomonto($this->capitalact).'",""],["totintacu","'.H::Formatomonto($this->intacu).'",""],["totcapitalact2","'.H::Formatomonto($this->capitalact2).'",""],["totintacu2","'.H::Formatomonto($this->intacu2).'",""],["javascript","'.$js.'",""]]';
-				
+
 				$this->getUser()->setAttribute('calculado','SI');
 				$this->getUser()->setAttribute('anno',$anno);
 				$this->getUser()->setAttribute('obj2',$this->obj2);
                 $this->getResponse()->setHttpHeader("X-JSON", '(' . $output . ')');
               }
-			  
-			  
-        	  
+
+
+
 
       } elseif ($this->getRequestParameter('ajax') == '6') //Autor: Jesus Lobaton
                 {
@@ -405,9 +405,9 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
   }
 
 
-    
-  
-  
+
+
+
   /**
    *
    * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
@@ -436,6 +436,7 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
    	        return false;
 
 		  }
+	/*
 		  $gridrn = Herramientas :: CargarDatosGrid($this, $this->obj);
 		  $gridra = Herramientas :: CargarDatosGrid($this, $this->obj2);
 		  if(count($gridrn[0])<=0 || count($gridra[0])<=0)
@@ -453,6 +454,7 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
 		  	$this->coderr=462;
    	        return false;
 		  }
+		  */
       }
       return true;
   }
@@ -499,11 +501,11 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
 			  round(capitalact,2) as capitalact,round(monant,2) as monant,round(monint,2) as intdev,antannos as anoser,
 			  round(monadeint,2) as adeant,round(intacu,2) as intacu,dias as diadif
               from calculopresant('$codemp','$fecha','$capital',$anno) order by fecinior";
-	  
+
 	   Herramientas :: BuscarDatos($sql, & $result);
 
       $per = $result;
-      
+
       $this->tfil2 = count($per);
 	  $this->intacu2=0;
 	  $this->capitalact2=0;
@@ -519,7 +521,7 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
 			if($r['intacu']!=0)
 			$this->intacu2= $r['intacu'];
 		}
-		
+
 
         // Copio los dos ultimo registro
         $this->grid_1 = $result[$this->tfil2-1];
@@ -528,7 +530,7 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
         // array_pop($per);  ///Borra la Ultima Posicion
           // array_pop($per);  ///Borra la Ultima Posicion
       }
-	  
+
 
       ////OPCIONES DEL GRID//////
       $opciones = new OpcionesGrid();
@@ -546,7 +548,7 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
     $col1->setAlineacionObjeto(Columna :: CENTRO);
     $col1->setAlineacionContenido(Columna :: CENTRO);
     $col1->setNombreCampo('fecini');
-    $col1->setHTML('type="text" readonly=true');	
+    $col1->setHTML('type="text" readonly=true');
     $col1->setEsGrabable(true);
 
     $col2 = new Columna('Al');
@@ -554,7 +556,7 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
     $col2->setAlineacionObjeto(Columna :: CENTRO);
     $col2->setAlineacionContenido(Columna :: CENTRO);
     $col2->setNombreCampo('fecfin');
-    $col2->setHTML('type="text" readonly=true');	
+    $col2->setHTML('type="text" readonly=true');
     $col2->setEsGrabable(true);
 
     $col3 = new Columna('Salario');
@@ -580,7 +582,7 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
     $col5->setNombreCampo('capemp');
     $col5->setHTML('type="text"  maxlength="20"  readonly=true');
 	$col5->setEsGrabable(true);
-	
+
 	$col12 = new Columna('Capital');
     $col12->setTipo(Columna :: MONTO);
     $col12->setAlineacionObjeto(Columna :: CENTRO);
@@ -588,7 +590,7 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
     $col12->setNombreCampo('capitalact');
     $col12->setHTML('type="text"  maxlength="20"  readonly=true');
 	$col12->setEsGrabable(true);
-	
+
 	$col6 = new Columna('Anticipo');
     $col6->setTipo(Columna :: MONTO);
     $col6->setAlineacionObjeto(Columna :: CENTRO);
@@ -636,7 +638,7 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
     $col11->setNombreCampo('diadif');
     $col11->setHTML('type="text"  maxlength="20"  readonly=true');
 	$col11->setEsGrabable(true);
-	
+
 	$col13 = new Columna('codtipcon');
     $col13->setTipo(Columna :: TEXTO);
     $col13->setNombreCampo('codtipcon');
@@ -647,7 +649,7 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
     $col14->setTipo(Columna :: TEXTO);
     $col14->setNombreCampo('antdias');
     $col14->setOculta('true');
-	
+
     $col15 = new Columna('antmeses');
     $col15->setTipo(Columna :: TEXTO);
     $col15->setNombreCampo('antmeses');
@@ -692,7 +694,7 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
    *
    */
   public function configGrid($codemp = '', $fecha= '', $capital= '', $salario= '',$anno= '')
-  { 
+  {
   	if($this->salario=="true")
   		$cadena="round(monpres,2)";
   	else
@@ -726,14 +728,14 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
 			if($r['intacu']!=0)
 			$this->intacu= $r['intacu'];
 		}
-		
+
 
         // Copio los dos ultimo registro
         $this->grid_1 = $result[$this->tfil-1];
 		if($this->tfil>1)
         	$this->grid_2 = $result[$this->tfil-2];
 		else
-			$this->grid_2 = $result[$this->tfil-1];	
+			$this->grid_2 = $result[$this->tfil-1];
 
         // array_pop($per);  ///Borra la Ultima Posicion
           // array_pop($per);  ///Borra la Ultima Posicion
@@ -1357,12 +1359,12 @@ $this->Bitacora('Guardo');
         //Saco los totales Regimen Nuevo
         //$this->antannos  = $per[$this->tfil-1]['antannos'];
         //$this->antmeses  = $per[$this->tfil-1]['antmeses'];
-        //$this->antdias   = $per[$this->tfil-1]['antdias'];		
+        //$this->antdias   = $per[$this->tfil-1]['antdias'];
 		$this->capitalact = $per[$this->tfil-1]->getAntacum();
 		foreach($per as $r)
 		{
 			if($r->getIntacum()!=0)
-			$this->intacu = $r->getIntacum();	
+			$this->intacu = $r->getIntacum();
 		}
         // Copio los dos ultimo registro
         $this->grid_1 = $per[$this->tfil-1];
@@ -1434,7 +1436,7 @@ $this->Bitacora('Guardo');
     $col7->setAlineacionObjeto(Columna :: CENTRO);
     $col7->setAlineacionContenido(Columna :: CENTRO);
     $col7->setNombreCampo('saltot');
-    $col7->setHTML('type="text" size="10" maxlength="10"  readonly=true');  
+    $col7->setHTML('type="text" size="10" maxlength="10"  readonly=true');
 
     $col9 = new Columna('Dias Art. 108');
     $col9->setTipo(Columna :: MONTO);
@@ -1581,7 +1583,7 @@ $this->Bitacora('Guardo');
 		foreach($per as $r)
 		{
 			if($r->getIntacum()!=0)
-			$this->intacu2 = $r->getIntacum();	
+			$this->intacu2 = $r->getIntacum();
 		}
         // Copio los dos ultimo registro
         $this->grid_1 = $per[$this->tfil2-1];
@@ -1637,14 +1639,14 @@ $this->Bitacora('Guardo');
     $col5->setAlineacionContenido(Columna :: CENTRO);
     $col5->setNombreCampo('capemp');
     $col5->setHTML('type="text" size="20" maxlength="20"  readonly=true');
-	
+
 	$col6 = new Columna('Capital');
     $col6->setTipo(Columna :: MONTO);
     $col6->setAlineacionObjeto(Columna :: CENTRO);
     $col6->setAlineacionContenido(Columna :: CENTRO);
     $col6->setNombreCampo('antacum');
     $col6->setHTML('type="text" size="20" maxlength="20"  readonly=true');
-	
+
 	$col7 = new Columna('Anticipo');
     $col7->setTipo(Columna :: MONTO);
     $col7->setAlineacionObjeto(Columna :: CENTRO);
@@ -1658,7 +1660,7 @@ $this->Bitacora('Guardo');
     $col8->setAlineacionContenido(Columna :: CENTRO);
     $col8->setNombreCampo('intdev');
     $col8->setHTML('type="text" size="20" maxlength="20"  readonly=true');
-	
+
     $col9 = new Columna('Años de Servicios');
     $col9->setTipo(Columna :: MONTO);
     $col9->setAlineacionObjeto(Columna :: CENTRO);
@@ -1697,7 +1699,7 @@ $this->Bitacora('Guardo');
     $col14->setTipo(Columna :: TEXTO);
     $col14->setNombreCampo('antdias');
     $col14->setOculta('true');
-	
+
     $col15 = new Columna('antmeses');
     $col15->setTipo(Columna :: TEXTO);
     $col15->setNombreCampo('antmeses');
@@ -1861,7 +1863,7 @@ $this->Bitacora('Guardo');
 	if(count($gridra[0])>0 && count($gridrn[0])<=0)
 	{
 		$grid=$gridra;
-		$grid[2] = array ($this->getRequestParameter('totintacu2'), $this->getRequestParameter('totmonadeint2'), $this->getRequestParameter('totmonpres2'), $this->getRequestParameter('totmonant2'), $this->getRequestParameter('totcapitalact2'));		
+		$grid[2] = array ($this->getRequestParameter('totintacu2'), $this->getRequestParameter('totmonadeint2'), $this->getRequestParameter('totmonpres2'), $this->getRequestParameter('totmonant2'), $this->getRequestParameter('totcapitalact2'));
 		$grid[3][] = $this->grid_1;
       	$grid[3][] = $this->grid_2;
 		$grid[3][] = array($this->antdias2,$this->antmeses2,$this->antannos2);
@@ -1869,13 +1871,13 @@ $this->Bitacora('Guardo');
 	}else
 	{
 		$grid=$gridrn;
-		$grid[2] = array ($this->getRequestParameter('totintacu'), $this->getRequestParameter('totmonadeint'), $this->getRequestParameter('totmonpres'), $this->getRequestParameter('totmonant'), $this->getRequestParameter('totcapitalact'));			
+		$grid[2] = array ($this->getRequestParameter('totintacu'), $this->getRequestParameter('totmonadeint'), $this->getRequestParameter('totmonpres'), $this->getRequestParameter('totmonant'), $this->getRequestParameter('totcapitalact'));
 		$grid[3][] = $this->grid_1;
       	$grid[3][] = $this->grid_2;
 		$grid[3][] = array($this->antdias,$this->antmeses,$this->antannos);
 		$grid[4][] = 'N';
 	}
-    	
+
     try {
 
       // Modificar la siguiente línea para llamar al método
@@ -1912,7 +1914,7 @@ $this->Bitacora('Guardo');
 
 
   /**
-   * Actualiza la informacion que viene de la vista 
+   * Actualiza la informacion que viene de la vista
    * luego de un get/post en el objeto principal del modelo base del formulario.
    *
    */
