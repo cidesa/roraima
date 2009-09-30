@@ -923,12 +923,21 @@ propel:
     aprobadotes:
       type: VARCHAR
       size: 1
+    fecret:
+      type: DATE
+      required: true
+    numcue:
+      type: VARCHAR
+      size: 20
     numcomapr:
       type: VARCHAR
       size: 8
     codconcepto:
       type: VARCHAR
       size: 4
+    numforpre:
+      type: VARCHAR
+      size: 8
     id:
       type: INTEGER
       required: true
