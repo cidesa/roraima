@@ -354,6 +354,7 @@ class PHP5ComplexObjectBuilder extends PHP5BasicObjectBuilder {
 		$conditional = "";
 		$arglist = "";
 		$argsize = 0;
+    $argaddcriteria = "";
 		foreach ($fk->getLocalColumns() as $columnName) {
 			$column = $table->getColumn($columnName);
 			$cptype = $column->getPhpNative();
@@ -372,10 +373,21 @@ class PHP5ComplexObjectBuilder extends PHP5BasicObjectBuilder {
 			$comma = ", ";
 			$argsize = $argsize + 1;
 		}
-
+    
 		$pCollName = $this->getFKPhpNameAffix($fk, $plural = true);
 
 		$fkPeerBuilder = OMBuilder::getNewPeerBuilder($this->getForeignTable($fk));
+    $localcolumns = $fk->getLocalColumns();
+
+		foreach ($fk->getForeignColumns() as $index => $columnName) {
+			$column = $this->getForeignTable($fk)->getColumn($columnName);
+			$cptype = $column->getPhpNative();
+			$clo = strtolower($column->getName());
+      
+      $argaddcriteria .= "\$c->add(".$fkPeerBuilder->getPeerClassname()."::".strtoupper($clo).",\$this->" . $localcolumns[$index] .");
+      ";
+      
+    }
 
 		$script .= "
 
@@ -393,7 +405,9 @@ class PHP5ComplexObjectBuilder extends PHP5BasicObjectBuilder {
 			include_once '".$fkPeerBuilder->getClassFilePath()."';
 ";
 		$script .= "
-			\$this->$varName = ".$fkPeerBuilder->getPeerClassname()."::".$fkPeerBuilder->getRetrieveMethodName()."($arglist, \$con);
+      \$c = new Criteria();
+      $argaddcriteria
+			\$this->$varName = ".$fkPeerBuilder->getPeerClassname()."::doSelectOne(\$c, \$con);
 
 			/* The following can be used instead of the line above to
 			   guarantee the related object contains a reference
