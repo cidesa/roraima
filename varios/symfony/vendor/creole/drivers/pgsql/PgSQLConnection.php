@@ -112,13 +112,14 @@ class PgSQLConnection extends ConnectionCommon implements Connection {
         // Incluido por lhernandez 05/03/07-17:55:00
         // Para solventar el problema de los schemas en pgsql. Actualizado 05/02/09
         //-------------------------------------------------------
-        if(!empty($_SESSION['schema']) && !empty($dsninfo['schema'])){
+        if(!empty($_SESSION['schema']) && !empty($dsninfo['schema']) && strstr($dsninfo['schema'],'SIMA')!=''){
           if($dsninfo['schema']!=$_SESSION['schema'] && $dsninfo['schema']!='SIMA_USER' ) $dsninfo['schema']=$_SESSION['schema'];
         }
         if(!empty($dsninfo['schema']))
           $result = @pg_query($this->dblink,'SET search_path TO '.chr(34).$dsninfo['schema'].chr(34).';');
-//          $result = @pg_query($this->dblink,'SET search_path TO '.chr(34).'SIMA_USER'.chr(34).';');
         //-------------------------------------------------------
+        if(!empty($dsninfo['encoding']))
+          $result = @pg_query($this->dblink,'SET CLIENT_ENCODING TO '.chr(34).$dsninfo['encoding'].chr(34).';');
 
     }
 
