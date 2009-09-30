@@ -1963,10 +1963,9 @@ propel:
     gencorart:
       type: VARCHAR
       size: 1
-    cornac:
-      type: INTEGER
-    corext:
-      type: INTEGER
+    tipdocpre:
+      type: VARCHAR
+      size: 4
     cornac:
       type: INTEGER
     corext:
