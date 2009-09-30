@@ -33,6 +33,18 @@ class cidesaPgsqlDDLBuilder extends PgsqlDDLBuilder {
   	    $script = "";
         $this->checkdatabase(&$script);
         return $script;
+	    }elseif($GLOBALS["trim"]){
+  	    if($GLOBALS["trim"]==true){
+    	    $script = "";
+          $this->trimdatabase(&$script);
+          return $script;
+  	    }
+      }
+	  }elseif($GLOBALS["trim"]){
+	    if($GLOBALS["trim"]==true){
+  	    $script = "";
+        $this->trimdatabase(&$script);
+        return $script;
 	    }
 	  }
 
@@ -392,6 +404,25 @@ ALTER TABLE ".$this->quoteIdentifier($table->getName())." ADD ".$lines.";
     
   }
 
+  protected function addTrimColumn($colname, &$script)
+  {
+
+    $table = $this->getTable();
+    $platform = $this->getPlatform();
+
+    foreach ($table->getColumns() as $col) {
+      if($col->getName() == $colname){
+        $script .= "
+UPDATE ".$this->quoteIdentifier($table->getName())." SET ".$col->getName()." = TRIM(".$col->getName().");
+        ";
+        
+        
+      }
+    }
+    
+    
+  }
+
 	/**
 	 * Adds comments for the columns.
 	 *
@@ -411,6 +442,17 @@ COMMENT ON COLUMN ".$this->quoteIdentifier($table->getName()).".".$this->quoteId
 		    }
 			}
 		}
+	}
+  
+	/**
+	 * Get column Type
+	 * @return     string
+	 */
+	public function getColumnType(Column $col)
+	{
+		$domain = $col->getDomain();
+
+		return $domain->getSqlType();
 	}
   
   protected function checkdatabase(&$script)
@@ -457,6 +499,24 @@ COMMENT ON COLUMN ".$this->quoteIdentifier($table->getName()).".".$this->quoteId
       // Existe en el modelo pero no existe en la base de datos
       $this->addTable(&$script,false,false);
     }
+
+  }
+
+  protected function trimdatabase(&$script)
+  {
+    $locales = $this->getTable()->getColumns();
+    $objtabla = $this->getTable();
+    $tabla = $this->getTable()->getName();
+    
+    foreach($locales as $col){
+      $columnname = $col->getName();
+      $columntype = $this->getColumnType($col);
+      // verifico tipo de columna
+      if(strstr($columntype,'VARCHAR')!=''){
+        // Se debe crear el campo nuevos en la tabla
+        $this->addTrimColumn($columnname,&$script);        
+      }
+    } // Foreach Columns
 
   }
 
