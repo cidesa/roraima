@@ -4957,9 +4957,21 @@ class Nomina {
         $npasiconnom->setCodnom($codigo);
         $npasiconnom->setCodcon(str_replace("'", '', $g["codcon"]));
         $npasiconnom->setFrecon(str_replace("'", '', $g["frecon"]));
-        $npasiconnom->setActivo(str_replace("'", '', substr($g["conact"], 0, 1)));
-
+        $npasiconnom->setActivo(str_replace("'", '', substr($g["conact"], 0, 1)));		
         $npasiconnom->save();
+		
+		$c = new Criteria();
+		$c->add(NpasiconempPeer::CODCON,$g["codcon"]);
+		$npasiconemp = NpasiconempPeer::doSelect($c);
+		if($npasiconemp)
+		{
+			foreach($npasiconemp as $clase)
+			{
+				$clase->setFrecon($g["frecon"]);
+				$clase->save();
+			}
+		}
+
       }
     }
 

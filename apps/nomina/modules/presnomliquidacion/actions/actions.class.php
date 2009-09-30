@@ -1175,6 +1175,8 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
   	$this->configGrid($this->npliquidacion_det->getCodemp());
 	$this->configGridAsigDeduc($this->npliquidacion_det->getCodemp(),$codnom,$categoria,$fecegr,$this->npliquidacion_det->getUltimosueldo(),false);
 	*/
+	$this->arrret = $this->cargar_tiporetiro();
+	$this->params = array('arrret'=>$this->arrret);
 	$this->npliquidacion_det = $this->getNpliquidacionDetOrCreate();
     $this->updateNpliquidacionDetFromRequest();
 	

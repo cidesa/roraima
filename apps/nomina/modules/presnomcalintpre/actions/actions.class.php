@@ -436,6 +436,23 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
    	        return false;
 
 		  }
+		  $gridrn = Herramientas :: CargarDatosGrid($this, $this->obj);
+		  $gridra = Herramientas :: CargarDatosGrid($this, $this->obj2);
+		  if(count($gridrn[0])<=0 || count($gridra[0])<=0)
+		  {
+		  	if (SF_ENVIRONMENT == 'dev') {
+		      $this->ent = '_dev';
+		    } else {
+		      $this->ent = '';
+		    }
+		  	$this->capitalizacion = Constantes :: Capitalizacion();
+	        $this->configGrid();
+			$this->configGrid_bueno();
+	        $this->configGridRA();
+	        $this->configGridIntereses();
+		  	$this->coderr=462;
+   	        return false;
+		  }
       }
       return true;
   }
@@ -713,7 +730,10 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
 
         // Copio los dos ultimo registro
         $this->grid_1 = $result[$this->tfil-1];
-        $this->grid_2 = $result[$this->tfil-2];
+		if($this->tfil>1)
+        	$this->grid_2 = $result[$this->tfil-2];
+		else
+			$this->grid_2 = $result[$this->tfil-1];	
 
         // array_pop($per);  ///Borra la Ultima Posicion
           // array_pop($per);  ///Borra la Ultima Posicion
