@@ -86,6 +86,7 @@ private $coderror =-1;
 		      {
 			       if ( $x[$j]->getCodart()!="")
 			       {
+			       	if ($x[$j]->getCandesp() > 0){
 			        $c= new Criteria();
 			        $c->add(CaartalmPeer::CODALM,$x[$j]->getCodalm());
 			        $c->add(CaartalmPeer::CODART,$x[$j]->getCodart());
@@ -118,14 +119,14 @@ private $coderror =-1;
 					        	}
 							}
 						}
-						else{
-							$cantconcero = $cantconcero + 1;
-						}
 					}
 					else{
 			            $this->coderror=1125;
 			            return false;
 					}
+			       	}else{
+							$cantconcero = $cantconcero + 1;
+						}
 			       }
 			       $j++;
 		      }
@@ -162,6 +163,46 @@ private $coderror =-1;
         return false;
   }
 
+  /**
+   * Función principal para el manejo de la accion list
+   * del formulario.
+   *
+   */
+  public function executeList()
+  {
+    $this->processSort();
+
+    $this->processFilters();
+
+    $this->filters = $this->getUser()->getAttributeHolder()->getAll('sf_admin/cadphart/filters');
+
+    $this->despnotent="";
+    $varemp = $this->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('facturacion',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['facturacion']))
+	     if(array_key_exists('fadesp',$varemp['aplicacion']['facturacion']['modulos']))
+	       if(array_key_exists('despnotent',$varemp['aplicacion']['facturacion']['modulos']['fadesp']))
+	       {
+	       	$this->despnotent=$varemp['aplicacion']['facturacion']['modulos']['fadesp']['despnotent'];
+	       }
+
+     // 15    // pager
+    $this->pager = new sfPropelPager('Cadphart', 15);
+    $c = new Criteria();
+    $this->addSortCriteria($c);
+    $this->addFiltersCriteria($c);
+    $this->pager->setCriteria($c);
+    $this->pager->setPage($this->getRequestParameter('page', 1));
+    $this->pager->init();
+  }
+
+  /**
+   * Función principal para el manejo de las acciones create y edit
+   * del formulario.
+   *
+   */
   public function executeEdit()
   {
     $this->cadphart = $this->getCadphartOrCreate();
@@ -384,7 +425,7 @@ private $coderror =-1;
     else //nuevo
     {
   	  $grid2=Herramientas::CargarDatosGrid($this,$this->obj);
-	  Despachos::salvarFadesp($cadphart,$grid2);
+	  Despachos::salvarFadesp($cadphart,$grid2,$this->despnotent);
     }
     return -1;
   }
@@ -396,6 +437,7 @@ private $coderror =-1;
 
   protected function getCadphartOrCreate($id = 'id')
   {
+  	$this->setVars();
     if (!$this->getRequestParameter($id))
     {
       $cadphart = new Cadphart();
@@ -462,7 +504,8 @@ private $coderror =-1;
         }
         $opciones->setAnchoGrid(1500);
         $opciones->setAncho(1500);
-        $opciones->setTitulo('Detalle del Despacho');
+        if ($this->despnotent=="") $opciones->setTitulo('Detalle del Despacho');
+        else $opciones->setTitulo('Detalle de la Nota de Entrega ');
         //$opciones->setName('b');
         $opciones->setFilas(30);
         $opciones->setHTMLTotalFilas(' ');
@@ -539,7 +582,8 @@ private $coderror =-1;
         $col6->setNombreCampo('desart');
         $col6->setHTML('type="text" size="30x1" readonly=true');
 
-        $col7 = new Columna('Cant. Despachar');
+        if ($this->despnotent=="") $col7 = new Columna('Cant. Despachar');
+        else $col7 = new Columna('Cant. Entregar');
         $col7->setTipo(Columna::MONTO);
         $col7->setEsGrabable(true);
         $col7->setAlineacionContenido(Columna::IZQUIERDA);
@@ -550,7 +594,8 @@ private $coderror =-1;
         $col7->setJScript('onBlur="Cantidad(this.id)"');
 
         $col8 = clone $col7;
-        $col8->setTitulo('Cant. No Despachada');
+        if ($this->despnotent=="") $col8->setTitulo('Cant. No Despachada');
+        else $col8->setTitulo('Cant. No Entregada');
 		$col8->setNombreCampo('cannodes');
         $col8->setHTML('type="text" size="10" readonly=true');
         $col8->setJScript('');
@@ -782,6 +827,7 @@ private $coderror =-1;
 	     $cajtexcom=$this->getRequestParameter('cajtexcom');
 	     $tipref=$this->getRequestParameter('tipref');
 	     $this->mensaje="";
+	     $this->setVars();
 	    if ($this->getRequestParameter('codigo')!="")
 	    {
 			if ($this->getRequestParameter('ajax')=='2')
@@ -977,6 +1023,17 @@ private $coderror =-1;
     $this->mascaraubicacionalm = Herramientas::ObtenerFormato('Cadefart','Forubi');
     $this->lonubialm=strlen($this->mascaraubicacionalm);
     $this->numreg=0;
+    $this->despnotent="";
+    $varemp = $this->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('facturacion',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['facturacion']))
+	     if(array_key_exists('fadesp',$varemp['aplicacion']['facturacion']['modulos']))
+	       if(array_key_exists('despnotent',$varemp['aplicacion']['facturacion']['modulos']['fadesp']))
+	       {
+	       	$this->despnotent=$varemp['aplicacion']['facturacion']['modulos']['fadesp']['despnotent'];
+	       }
   }
 
 }
