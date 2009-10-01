@@ -127,7 +127,12 @@
 				&nbsp;&nbsp;&nbsp;
 		</th>
 		<th>
-			<strong>Salario Diario &nbsp;
+			<?php if($factorvacv!=0 && !is_null($factorvacv)){?>
+				<strong>Salario Diario Vacaciones Vencidas <br> (Convencion Colectiva):
+			<?php }else{?>	
+			    <strong>Salario Diario Vacaciones Vencidas :
+			<?php }?>	
+			&nbsp;
 			  <?php echo input_tag('nphojint_suediario',$suediario, array (
 			  'size' => 13,
 			  'readonly'  =>  true,  
@@ -165,12 +170,14 @@
 			&nbsp;&nbsp;&nbsp;
 		</th>
 		<th>
-			<?php if($suedia==0){?>
-				<div id="divsuedia" style="display:none">
+			<?php if($factorbonvf!=0 && !is_null($factorbonvf)){?>
+				<div id="divsuedia" >
+					<strong>Salario Diario Bono Vacacional Fraccionado <br>(Convencion Colectiva):</strong>&nbsp;	
 			<?php }else{?>	
 			    <div id="divsuedia" >
+			    	<strong>Salario Diario Bono Vacacional Fraccionado :</strong>&nbsp;
 			<?php }?>	
-				<strong>Salario Diario Convencion Colectiva:</strong>&nbsp;
+				
 			  <?php echo input_tag('nphojint_suedia',$suedia, array (
 			  'size' => 13,
 			  'readonly'  =>  true,  

@@ -235,6 +235,8 @@ private static $coderror=-1;
     $this->sueldonormal=$ultsue;
     $per=array();
     $perHis=array();
+	$salario=0;	
+	$salarionor=0;
     if ($nuevo=="S" and $codemp!="")
     {
       $arr=array();
@@ -265,7 +267,7 @@ private static $coderror=-1;
            if($suenor==0)
             $salint=$arr[$cont]['salint']+$porcion;
            else
-            $salint=$suenor+$porcion;          
+            $salint=$suenor;          
 
 		   if($sal=='')
 		   {
@@ -281,7 +283,7 @@ private static $coderror=-1;
 		   {
 		   	   $salario=$salint;
 		   }
-		   
+
 		   if($tipsalvacven!='')
 		   {
 			   if($tipsalvacven=='UD')
@@ -306,7 +308,6 @@ private static $coderror=-1;
 		   		$salarionor=($salarionor*$factorvacv)/365;
 		   else 
 		        $salarionor=$salarionor/30;
-
 
 		   $monto=($per[$i]['diadis']*($salarionor))+($per[$i]['diasbono']*($salario));
 
@@ -351,7 +352,7 @@ private static $coderror=-1;
         	$ultimosueldo=$arr[$cont-1]['salint']+$porcion;
         else
 		    #$ultimosueldo=number_format($suenor+$porcion,2,',','.');
-        	$ultimosueldo=$suenor+$porcion;
+        	$ultimosueldo=$suenor;
 		#}
         
         if($ultsue==0)
@@ -369,13 +370,13 @@ private static $coderror=-1;
 	    $c = new Criteria();
 	    $c->add(NpvacdisfrutePeer::CODEMP,$codemp);
 	    $perHis = NpvacdisfrutePeer::doSelect($c);
-	    /*if($per)
-	    	$ultimosueldo=$per[0]->getUltsue();
-	    else
-	    	$ultimosueldo=0;
-		*/		
+	    if($per)
+		{
+			$salarionor=$per[0]->getUltsue()/30;
+			$salario=$per[0]->getMontoinci()/30;
+		}		
     }	
-	if($factorbonvf!=0 && (!is_null($factorbonvf)))
+	/*if($factorbonvf!=0 && (!is_null($factorbonvf)))
 	{
 		if($tipsalbonvf=='UD')
 	   	   $this->suedia = H::FormatoMonto((($sueult*$factorbonvf)/365));
@@ -398,7 +399,11 @@ private static $coderror=-1;
 	   	   $this->suediario = H::FormatoMonto($this->sueldonormal/30);
 	    else
 		   $this->suediario = H::FormatoMonto($ultimosueldo/30);
-
+*/
+    $this->suedia=H::FormatoMonto($salario);
+	$this->suediario=H::FormatoMonto($salarionor);
+	$this->suedia2=$salario;
+	$this->suediario2=$salarionor;
 	$this->sueult = H::FormatoMonto($sueult);
 	$this->suepro = H::FormatoMonto($suepro);
 	$this->sueldonormal=H::FormatoMonto($this->sueldonormal);
@@ -543,17 +548,9 @@ private static $coderror=-1;
       	$sal1=0;
         $sal2=0;
       }
-      $this->configGrid($this->getRequestParameter('nphojint[codemp]'),"S",&$ultimosueldo,&$sal2,&$sal1);
-
-	  if($this->factorbonvf!=0 && (!is_null($this->factorbonvf)))
-	  	$this->ultsue=H::formatonum($this->suedia)*30;
-	  else	  
-      	$this->ultsue=H::formatonum($this->suediario)*30;
-		
-	  if($this->factorvacv!=0 && (!is_null($this->factorvacv)))
-	  	$this->suenor=H::formatonum($this->suedia)*30;
-	  else	  
-      	$this->suenor=H::formatonum($this->suediario)*30;			
+      $this->configGrid($this->getRequestParameter('nphojint[codemp]'),"S",&$ultimosueldo,&$sal2,&$sal1);	  
+      $this->ultsue=$this->suedia2*30;
+      $this->suenor=$this->suediario2*30;      	
       #$this->suenor=$this->sueldonormal;
 	  #$this->sueult=$this->sueult;
 	  #$this->suepro=$this->suepro;
@@ -567,17 +564,15 @@ private static $coderror=-1;
 	  $sal1=$rs->getUltsue();
       $sal2=$rs->getMontoinci();
       $this->configGrid($nphojint->getCodemp(),"N",&$ultimosueldo,&$sal1,&$sal2);
-	  if($this->factorbonvf!=0 && (!is_null($this->factorbonvf)))
-	  	$this->ultsue=H::formatonum($this->suedia)*30;
-	  else	  
-      	$this->ultsue=H::formatonum($this->suediario)*30;
-		
-	  if($this->factorvacv!=0 && (!is_null($this->factorvacv)))
-	  	$this->suenor=H::formatonum($this->suedia)*30;
-	  else	  
-      	$this->suenor=H::formatonum($this->suediario)*30;
-      #$this->ultsue=$ultimosueldo;
-      #$this->suenor=$this->sueldonormal;
+	  #$this->ultsue=$this->suedia2*30;
+      #$this->suenor=$this->suediario2*30;
+      $this->ultsue=$ultimosueldo;
+      $this->suenor=$this->sueldonormal;
+      if($this->factorbonvf!=$this->factorvacv)
+	  {
+	  	$this->ultsue=$this->sueldonormal;
+      	$this->suenor=$this->sueldonormal;	
+	  }      
 	  #$this->sueult=$this->sueult;
 	  #$this->suepro=$this->suepro;
       $this->forward404Unless($nphojint);
