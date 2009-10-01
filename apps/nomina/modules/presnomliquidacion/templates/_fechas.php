@@ -1,5 +1,5 @@
 <fieldset>
-<legend>Fechas</legend>
+<h2>Fechas</h2>
 <div class="form-row">
   <?php if($labels['npliquidacion_det{fecing}']!='.:') { ?>
   <?php echo label_for('npliquidacion_det[fecing]', __($labels['npliquidacion_det{fecing}' ]), 'class="required" Style="text-align:left; width:100px"') ?>
@@ -10,6 +10,7 @@
 
   <?php $value = object_input_tag($npliquidacion_det, 'getFecing', array (
   'readonly' => true,
+  'size' => 10,
   'control_name' => 'npliquidacion_det[fecing]',
 )); echo $value ? $value : '&nbsp;' ?>
     <?php if($labels['npliquidacion_det{fecing}']!='.:') { ?>
@@ -26,6 +27,7 @@
 
   <?php $value = object_input_tag($npliquidacion_det, 'getFeccor', array (
   'readonly' => true,
+  'size' => 10,
   'control_name' => 'npliquidacion_det[feccor]',
 )); echo $value ? $value : '&nbsp;' ?>
     <?php if($labels['npliquidacion_det{feccor}']!='.:') { ?>
@@ -42,6 +44,7 @@
 
   <?php $value = object_input_tag($npliquidacion_det, 'getFecegr', array (
   'readonly' => true,
+  'size' => 10,
   'control_name' => 'npliquidacion_det[fecegr]',
 )); echo $value ? $value : '&nbsp;' ?>
     <?php if($labels['npliquidacion_det{fecegr}']!='.:') { ?>

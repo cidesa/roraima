@@ -1,5 +1,5 @@
 <fieldset>
-<legend>Salarios</legend>
+<h2>Salarios</h2>
 <div class="form-row">
 <table>
 	<tr>
@@ -10,14 +10,14 @@
 			  <?php if ($sf_request->hasError('npliquidacion_det{sue311296}')): ?>
 			    <?php echo form_error('npliquidacion_det{sue311296}', array('class' => 'form-error-msg')) ?>
 			  <?php endif; }?>
-			
+
 			  <?php $value = object_input_tag($npliquidacion_det, 'getSue311296', array (
 			  'readonly' => true,
 			  'control_name' => 'npliquidacion_det[sue311296]',
 			)); echo $value ? $value : '&nbsp;' ?>
 			    <?php if($labels['npliquidacion_det{sue311296}']!='.:') { ?>
 			  </div>
-			  <?php  } ?>		
+			  <?php  } ?>
 		</th>
 		<th></th>
 		<th>
@@ -27,14 +27,14 @@
 			  <?php if ($sf_request->hasError('npliquidacion_det{sue180697}')): ?>
 			    <?php echo form_error('npliquidacion_det{sue180697}', array('class' => 'form-error-msg')) ?>
 			  <?php endif; }?>
-			
+
 			  <?php $value = object_input_tag($npliquidacion_det, 'getSue180697', array (
 			  'readonly' => true,
 			  'control_name' => 'npliquidacion_det[sue180697]',
 			)); echo $value ? $value : '&nbsp;' ?>
 			    <?php if($labels['npliquidacion_det{sue180697}']!='.:') { ?>
 			  </div>
-			  <?php  } ?>		
+			  <?php  } ?>
 		</th>
 	</tr>
 	<tr>
@@ -48,10 +48,10 @@
 			  <?php if ($sf_request->hasError('npliquidacion_det{ultimosueldo}')): ?>
 			    <?php echo form_error('npliquidacion_det{ultimosueldo}', array('class' => 'form-error-msg')) ?>
 			  <?php endif; }?>
-			
+
 			  <?php $value = object_input_tag($npliquidacion_det, 'getUltimosueldo', array (
 			  'readonly' => true,
-			  'control_name' => 'npliquidacion_det[ultimosueldo]',			  
+			  'control_name' => 'npliquidacion_det[ultimosueldo]',
 			)); echo $value ? $value : '&nbsp;' ?>
 			    <?php if($labels['npliquidacion_det{ultimosueldo}']!='.:') { ?>
 			  </div>
@@ -66,7 +66,7 @@
 			  <?php if ($sf_request->hasError('npliquidacion_det{salarioint}')): ?>
 			    <?php echo form_error('npliquidacion_det{salarioint}', array('class' => 'form-error-msg')) ?>
 			  <?php endif; }?>
-			
+
 			  <?php $value = object_input_tag($npliquidacion_det, 'getSalarioint', array (
 			  'control_name' => 'npliquidacion_det[salarioint]',
 			  'readonly' => true,
@@ -91,10 +91,10 @@
 			  <?php if ($sf_request->hasError('npliquidacion_det{salintdia}')): ?>
 			    <?php echo form_error('npliquidacion_det{salintdia}', array('class' => 'form-error-msg')) ?>
 			  <?php endif; }?>
-			
+
 			  <?php $value = object_input_tag($npliquidacion_det, 'getSalintdia', array (
 			  'readonly' => true,
-			  'control_name' => 'npliquidacion_det[salintdia]',			  
+			  'control_name' => 'npliquidacion_det[salintdia]',
 			)); echo $value ? $value : '&nbsp;' ?>
 			    <?php if($labels['npliquidacion_det{salintdia}']!='.:') { ?>
 			  </div>
@@ -109,20 +109,20 @@
 			  <?php if ($sf_request->hasError('npliquidacion_det{salintdiaconcol}')): ?>
 			    <?php echo form_error('npliquidacion_det{salintdiaconcol}', array('class' => 'form-error-msg')) ?>
 			  <?php endif; }?>
-			
+
 			  <?php $value = object_input_tag($npliquidacion_det, 'getSalintdiaconcol', array (
 			  'control_name' => 'npliquidacion_det[salintdiaconcol]',
-			  'readonly' => true,			  
+			  'readonly' => true,
 			)); echo $value ? $value : '&nbsp;' ?>
 			    <?php if($labels['npliquidacion_det{salintdiaconcol}']!='.:') { ?>
 			  </div>
 			  <?php  } ?>
-		</th>		
+		</th>
 	</tr>
-</table> 
+</table>
 </div>
 </fieldset>
 <script language="JavaScript">
 if($('npliquidacion_det_codemp').value!='')
-	$('npliquidacion_det_codemp').readOnly=true;		
+	$('npliquidacion_det_codemp').readOnly=true;
 </script>
