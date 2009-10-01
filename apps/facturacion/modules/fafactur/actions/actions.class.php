@@ -58,6 +58,8 @@ class fafacturActions extends autofafacturActions {
 		$this->fafactur->setReapor($this->getUser()->getAttribute('loguse', null));
 		$this->setVars();
 		$this->fafactur->setLonart($this->lonart);
+		$this->fafactur->setDespnotent($this->despnotent);
+
 		$this->configGrid();
 	}
 
@@ -177,7 +179,7 @@ class fafacturActions extends autofafacturActions {
 		$forpag = FaforpagPeer :: doSelect($c);
 
 		$this->columnas = Herramientas :: getConfigGrid(sfConfig :: get('sf_app_module_dir') . '/fafactur/' . sfConfig :: get('sf_app_module_config_dir_name') . '/grid_faforpag');
-		$this->columnas[1][5]->setHTML('size="10" onKeyPress=calcularmontopago(event,this.id);');
+		$this->columnas[1][5]->setHTML('size=10 onKeyPress=calcularmontopago(event,this.id);');
 		$this->obj3 = $this->columnas[0]->getConfig($forpag);
 
 		$this->fafactur->setObj3($this->obj3);
@@ -585,7 +587,7 @@ class fafacturActions extends autofafacturActions {
 							if ($this->getRequestParameter('totaltotarti') != "") {
 								if ($dato6 > $this->getRequestParameter('totaltotarti')) {
 									$dato6 = '0,00';
-									$dato7 = $this->getRequestParameter('totaldesc') - H :: convnume($dato6);
+									$dato7 = $this->getRequestParameter('totaldesc') - H :: tofloat($dato6);
 								} else {
 									$javascript = $javascript."calcularTotalDescuento(); montoTotal(); actualizarRecargos(); recalcularRecargos(); montoTotal();";
 								}
@@ -823,6 +825,12 @@ class fafacturActions extends autofafacturActions {
 				$this->getResponse()->setHttpHeader("X-JSON", '(' . $output . ')');
 				return sfView :: HEADER_ONLY;
              break;
+            case '18':
+		        $dato=TstipmovPeer::getDestip($codigo);
+		        $output = '[["fafactur_destip","'.$dato.'",""]]';
+		        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+		        return sfView::HEADER_ONLY;
+             break;
 			default :
 				$output = '[["","",""],["","",""],["","",""]]';
 				$this->getResponse()->setHttpHeader("X-JSON", '(' . $output . ')');
@@ -831,9 +839,9 @@ class fafacturActions extends autofafacturActions {
 		}
 	}
 
-	
-  
-  
+
+
+
   /**
    *
    * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
@@ -932,16 +940,26 @@ class fafacturActions extends autofafacturActions {
           	$sql="Select coalesce(Sum(MonDoc+RecDoc-DscDoc-AboDoc),0) as monto from CobDocume where CodCli='".$this->getRequestParameter('fafactur[codcli]')."' Group by CodCli";
             if (Herramientas::BuscarDatos($sql,&$result))
             {
-            	$cal=$result[0]["monto"] + H::convnume($this->getRequestParameter('fafactur[monfac]')) - H::convnume($this->getRequestParameter('fafactur[mondesc]'));
+            	if (count($result)>0)
+            	{
+            	$cal=H::tofloat($result[0]["monto"]) + H::tofloat($this->getRequestParameter('fafactur[monfac]')) - H::tofloat($this->getRequestParameter('fafactur[mondesc]'));
             	if ($cal>$this->getRequestParameter('fafactur[limitecredito]'))
             	{
 	       	      $this->coderr=1145;
 	       	      return false;
             	}
+            	}else{
+            	  $cal=H::tofloat($this->getRequestParameter('fafactur[monfac]')) - H::tofloat($this->getRequestParameter('fafactur[mondesc]'));
+	            	if ($cal>$this->getRequestParameter('fafactur[limitecredito]'))
+	            	{
+	            	   $this->coderr=1145;
+		       	       return false;
+	            	}
+            	}
             }
             else
             {
-               $cal=H::convnume($this->getRequestParameter('fafactur[monfac]')) - H::convnume($this->getRequestParameter('fafactur[mondesc]'));
+               $cal=H::tofloat($this->getRequestParameter('fafactur[monfac]')) - H::tofloat($this->getRequestParameter('fafactur[mondesc]'));
             	if ($cal>$this->getRequestParameter('fafactur[limitecredito]'))
             	{
             	   $this->coderr=1145;
@@ -983,6 +1001,17 @@ class fafacturActions extends autofafacturActions {
 	public function setVars() {
 		$this->mascaraarticulo = Herramientas :: getMascaraArticulo();
 		$this->lonart = strlen($this->mascaraarticulo);
+		$this->despnotent="";
+	    $varemp = $this->getUser()->getAttribute('configemp');
+	    if ($varemp)
+		if(array_key_exists('aplicacion',$varemp))
+		 if(array_key_exists('facturacion',$varemp['aplicacion']))
+		   if(array_key_exists('modulos',$varemp['aplicacion']['facturacion']))
+		     if(array_key_exists('fadesp',$varemp['aplicacion']['facturacion']['modulos']))
+		       if(array_key_exists('despnotent',$varemp['aplicacion']['facturacion']['modulos']['fadesp']))
+		       {
+		       	$this->despnotent=$varemp['aplicacion']['facturacion']['modulos']['fadesp']['despnotent'];
+		       }
 	}
 
 	public function executeAnular() {
