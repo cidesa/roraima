@@ -3,3 +3,7 @@
 <?
 	echo grid_tag_v2($fafactur->getObj3());
 ?>
+
+<script language="JavaScript" type="text/javascript">
+  $('divcodtip').hide();
+</script>
