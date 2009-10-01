@@ -3888,7 +3888,7 @@ class Nomina {
 
 	  case "INTPRES" :
         $valor = 0;
-        $fecha = $hasta_mod;
+        $fecha = $hasta;
         $criterio = "Select * from calculopres('$empleado','$fecha','$parametro','P') where tipo='DEPOSITADOS' order by fecini desc";
         if (Herramientas :: BuscarDatos($criterio, & $calpres))
 		{
@@ -3901,7 +3901,7 @@ class Nomina {
 	  case "DIASBONOVAC" :
 
         $valor = 0;
-        $fecha = $hasta_mod;
+        $fecha = $hasta;
         $criterio = "select sum(coalesce(a.diasbonovac,0)) as valor
 				from npvacsalidas_det a, npvacsalidas b
 				where
@@ -3919,7 +3919,7 @@ class Nomina {
 		case "MESFINALANO" :
 
         $valor = 0;
-		$fecha = '31/12/'.substr($hasta_mod,6,4);
+		$fecha = '31/12/'.substr($hasta,6,4);
         $criterio = "select months_between(fecing,to_date('$fecha','dd/mm/yyyy')+1) as valor
 						from nphojint
 						where
