@@ -1700,7 +1700,7 @@ class Nomina {
       case "AM" :
 		$valorano=0;
 		$sql="select to_char(age(to_date('$fecnom','yyyy-mm-dd'),to_date('$fechaing','yyyy-mm-dd')),'YY') as ano";
-		if (Herramientas :: BuscarDatos($sql, & $tabla)) {			
+		if (Herramientas :: BuscarDatos($sql, & $tabla)) {
 			$valorano = intval($tabla[0]['ano']);
 		}
 		$valormes=0;
@@ -2245,35 +2245,35 @@ class Nomina {
 
         $valor = 0;
         $fecha = date('d/m/Y',strtotime($fecnom));
-        $criterio = "select sum(coalesce(a.diasbonovac,0)) as valor 
-				from npvacsalidas_det a, npvacsalidas b 
-				where 
+        $criterio = "select sum(coalesce(a.diasbonovac,0)) as valor
+				from npvacsalidas_det a, npvacsalidas b
+				where
 				b.fecpagbonvac=to_date('$fecha','dd/mm/yyyy')
-				and a.codemp='$empleado' 
+				and a.codemp='$empleado'
 				and a.fecvac=b.fecvac ";
 
         if (Herramientas :: BuscarDatos($criterio, & $rs))
 			if($rs[0]['valor']!='')
 				$valor = $rs[0]['valor'];
-		
+
         return $valor;
         break;
 
 	  case "MESFINALANO" :
 
-        $valor = 0;  
-		$fecha = '31/12/'.date('Y',strtotime($fecnom));      
+        $valor = 0;
+		$fecha = '31/12/'.date('Y',strtotime($fecnom));
         $criterio = "select months_between(fecing,to_date('$fecha','dd/mm/yyyy')+1) as valor
 						from nphojint
-						where 
+						where
 						codemp='$empleado'";
 
         if (Herramientas :: BuscarDatos($criterio, & $rs))
 			if($rs[0]['valor']!='')
 				$valor = $rs[0]['valor'];
-		
+
         return $valor;
-        break;		
+        break;
 
       default :
         $aux = 0;
@@ -3289,7 +3289,7 @@ class Nomina {
        case "AM" :
 		$valorano=0;
 		$sql="select to_char(age(to_date('$profec','yyyy-mm-dd'),to_date('$fechaing','yyyy-mm-dd')),'YY') as ano";
-		if (Herramientas :: BuscarDatos($sql, & $tabla)) {			
+		if (Herramientas :: BuscarDatos($sql, & $tabla)) {
 			$valorano = intval($tabla[0]['ano']);
 		}
 		$valormes=0;
@@ -3409,7 +3409,7 @@ class Nomina {
       case "CCARG" :
         return $cargo;
         break;
-      case "ACUC" : 
+      case "ACUC" :
         $sql = "Select coalesce(Sum(case when B.TIPACU='C' then A.Cantidad
                                 when B.TIPACU='M' then A.Monto
                               when B.TIPACU='S' then C.Saldo)*B.Factor),0) as cuantos
@@ -3902,35 +3902,35 @@ class Nomina {
 
         $valor = 0;
         $fecha = $hasta_mod;
-        $criterio = "select sum(coalesce(a.diasbonovac,0)) as valor 
-				from npvacsalidas_det a, npvacsalidas b 
-				where 
+        $criterio = "select sum(coalesce(a.diasbonovac,0)) as valor
+				from npvacsalidas_det a, npvacsalidas b
+				where
 				b.fecpagbonvac=to_date('$fecha','dd/mm/yyyy')
-				and and a.codemp='$empleado' 
+				and and a.codemp='$empleado'
 				and a.fecvac=b.fecvac ";
 
         if (Herramientas :: BuscarDatos($criterio, & $rs))
 			if($rs[0]['valor']!='')
 				$valor = $rs[0]['valor'];
-		
+
         return $valor;
         break;
 
 		case "MESFINALANO" :
 
-        $valor = 0;  
+        $valor = 0;
 		$fecha = '31/12/'.substr($hasta_mod,6,4);
         $criterio = "select months_between(fecing,to_date('$fecha','dd/mm/yyyy')+1) as valor
 						from nphojint
-						where 
+						where
 						codemp='$empleado'";
 
         if (Herramientas :: BuscarDatos($criterio, & $rs))
 			if($rs[0]['valor']!='')
 				$valor = $rs[0]['valor'];
-		
+
         return $valor;
-        break;		
+        break;
 
       default :
         /////// FFRAC
@@ -4982,9 +4982,9 @@ class Nomina {
         $npasiconnom->setCodnom($codigo);
         $npasiconnom->setCodcon(str_replace("'", '', $g["codcon"]));
         $npasiconnom->setFrecon(str_replace("'", '', $g["frecon"]));
-        $npasiconnom->setActivo(str_replace("'", '', substr($g["conact"], 0, 1)));		
+        $npasiconnom->setActivo(str_replace("'", '', substr($g["conact"], 0, 1)));
         $npasiconnom->save();
-		
+
 		$c = new Criteria();
 		$c->add(NpasiconempPeer::CODCON,$g["codcon"]);
 		$npasiconemp = NpasiconempPeer::doSelect($c);
@@ -5754,8 +5754,12 @@ class Nomina {
         $resp = Herramientas :: BuscarDatos($sql, & $per);
 
         $antiguedadAP = '';
-        if ($per)
+        if ($per){
           $antiguedadAP = $per[0]["antapvac"];
+          $arreglo[$i]["diasbonovac"] = $per[0]['diavac'];
+        }else{
+        	$arreglo[$i]["diasbonovac"] = '0';
+        }
 
         self :: tiempoServicioTotal($codemp, 0, 0, 0, & $Idia, & $Imes, & $Iano, 'I');
 
@@ -5803,8 +5807,7 @@ class Nomina {
         $arreglo[$i]["diasdisfrutados"] = 0;
 
         $arreglo[$i]["diaspdisfrutar"] = $arreglo[$i]["diasdisfutar"] - $arreglo[$i]["diasdisfrutados"];
-		
-		$arreglo[$i]["diasbonovac"] = $per[0]['diavac'];
+
         $arreglo[$i]["diasbonovacpag"] = 0;
 
         $c = new Criteria();
@@ -5820,13 +5823,11 @@ class Nomina {
 		  $objNpvacdisfrute->getDiasbonovacpag()=='' ? $diapag=0 : $diapag=$objNpvacdisfrute->getDiasbonovacpag();
 		  $arreglo[$i]["diasbonovacpag"] = $diapag;
         }
-		
 
         $anodesde = $anodesde +1;
         $anohasta = $anohasta +1;
         $i = $i +1;
       }
-
     }
 
   }
