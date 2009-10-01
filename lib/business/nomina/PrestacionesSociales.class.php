@@ -1301,11 +1301,12 @@ End Function*/
 	else
 		$contrato = '001';
 	
-	$sql = "select (to_date('$fechaini','dd/mm/yyyy')-(select fecing from nphojint where codemp='$codemp'))::numeric/365 as anoser;";
+	$sql = "select trunc((to_date('$fechaini','dd/mm/yyyy')-(select fecing from nphojint where codemp='$codemp'))::numeric/365)::numeric as anoser;";
 	if (Herramientas::BuscarDatos($sql,&$result))
 		$anoser = $result[0]['anoser'];		
 	else
 		$anoser=0;		
+	$anoser=$anoser+1;
 		
 	$sql = "select * from npbonocont 
 	       where 
