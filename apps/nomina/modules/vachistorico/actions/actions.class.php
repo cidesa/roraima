@@ -5,15 +5,15 @@
  *
  * @package    Roraima
  * @subpackage vachistorico
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: actions.class.php 33315 2009-09-23 14:42:43Z cramirez $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
 class vachistoricoActions extends autovachistoricoActions
 {
-	// variable donde se debe colocar el código de error generado en el validateEdit 
+	// variable donde se debe colocar el código de error generado en el validateEdit
   // para que sea procesado por el handleErrorEdit.
 private static $coderror=-1;
 
@@ -69,6 +69,7 @@ private static $coderror=-1;
    */
   public function configGrid($codemp='',$fecing='')
   {
+  	$arreglo = array();
  	Nomina::ArregloVacaciones($codemp,$fecing,&$arreglo);
 
  	/**
@@ -133,7 +134,7 @@ private static $coderror=-1;
     $col5->setAlineacionObjeto(Columna::DERECHA);
     $col5->setAlineacionContenido(Columna::DERECHA);
     $col5->setHTML('type="text" size="8" ');
-	
+
 	$col6 = new Columna('Dias de Bono Vacacional');
     $col6->setTipo(Columna::TEXTO);
     $col6->setEsGrabable(true);
@@ -142,7 +143,7 @@ private static $coderror=-1;
     $col6->setAlineacionObjeto(Columna::DERECHA);
     $col6->setAlineacionContenido(Columna::DERECHA);
     $col6->setHTML('type="text" size="8" ');
-	
+
 	$col7 = new Columna('Dias de Bono Vacacional Pagados');
     $col7->setTipo(Columna::TEXTO);
     $col7->setEsGrabable(true);
@@ -198,8 +199,8 @@ private static $coderror=-1;
 	     }
 		 else
 		 {
-		 	$nombre=NphojintPeer::getNomemp($codigoemp);
-	     	$fechaing=NphojintPeer::getFecing($codigoemp);
+		 	$nombre   = NphojintPeer::getNomemp($codigoemp);
+	     	$fechaing = NphojintPeer::getFecing($codigoemp);
 	     	$this->configGrid($codigoemp,$fechaing);
 	     	$output = '[["'.$cajtexnom.'","'.$nombre.'",""],["'.$cajtexfec.'","'.$fechaing.'",""],["'.$cajadias.'","'.$this->diaspen.'",""],["javascript","'.$js.'",""]]';
 	     	$this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
@@ -261,7 +262,7 @@ $this->Bitacora('Guardo');
 
 
   /**
-   * Actualiza la informacion que viene de la vista 
+   * Actualiza la informacion que viene de la vista
    * luego de un get/post en el objeto principal del modelo base del formulario.
    *
    */
@@ -324,12 +325,13 @@ $this->Bitacora('Guardo');
     Nomina::salvarNphojint($nphojint,$grid);
 
   }
-  
-  
-  
+
+
+
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -390,7 +392,7 @@ $this->Bitacora('Guardo');
       return sfView::SUCCESS;
   }
   /**
-   * Función principal para procesar la eliminación de registros 
+   * Función principal para procesar la eliminación de registros
    * en el formulario.
    *
    */
