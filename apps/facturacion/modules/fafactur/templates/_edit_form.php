@@ -37,6 +37,7 @@ echo form_tag('fafactur/save', array (
 <?php echo object_input_hidden_tag($fafactur, 'getLonart', array('id' => 'fafactur_lonart', 'name' => 'fafactur[lonart]')) ?>
 <?php echo object_input_hidden_tag($fafactur, 'getRgofijos', array('id' => 'fafactur_rgofijos', 'name' => 'fafactur[rgofijos]')) ?>
 <?php echo object_input_hidden_tag($fafactur, 'getCtasociada', array('id' => 'fafactur_ctasociada', 'name' => 'fafactur[ctasociada]')) ?>
+<?php echo object_input_hidden_tag($fafactur, 'getFilgenmov', array('id' => 'fafactur_filgenmov', 'name' => 'fafactur[filgenmov]')) ?>
 
 
 <div id="CajaPrinc" style="display:none">
@@ -634,6 +635,28 @@ echo $value ? $value : '&nbsp;'
 <fieldset id="sf_fieldset_forma_de_pago" class="">
 
 <div class="form-row" id="divForma de Pago">
+<div id="divcodtip">
+  <?php if($labels['fafactur{codtip}']!='.:') { ?>
+  <?php echo label_for('fafactur[codtip]', __($labels['fafactur{codtip}' ]), 'class="required" Style="text-align:left; width:150px"') ?>
+  <div class="content<?php if ($sf_request->hasError('fafactur{codtip}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('fafactur{codtip}')): ?>
+    <?php echo form_error('fafactur{codtip}', array('class' => 'form-error-msg')) ?>
+  <?php endif; }?>
+
+
+
+  <?php $value = get_partial('codtip', array('type' => 'edit', 'fafactur' => $fafactur,'labels' => $labels,'params' => $params)); echo $value ? $value : '&nbsp;' ?>
+
+
+  <?php if($labels['fafactur{codtip}']!='.:') { ?>
+
+
+
+  </div>
+  <?php  } ?>
+
+</div>
+<br/>
 <div id="divgrid_faforpag">
   <?php echo label_for('fafactur[grid_faforpag]', __($labels['fafactur{grid_faforpag}' ]), 'class="required" Style="text-align:left; width:150px"') ?>
   <div class="content<?php if ($sf_request->hasError('fafactur{grid_faforpag}')): ?> form-error<?php endif; ?>">
@@ -784,6 +807,7 @@ var consul='<?php echo $fafactur->getId(); ?>';
 if (consul!="")
 {
   mostrarPromedio();
+  calcularPago();
 }
 
  $('fafactur_tipper_J').disabled=true;
