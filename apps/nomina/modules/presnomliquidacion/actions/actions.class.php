@@ -195,6 +195,23 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 			GROUP BY A.FECANT,B.CODPAR
 			HAVING
 			SUM(A.MONANT)<>0 
+			
+			Union All 
+			SELECT 2 as orden,
+			SUM(0) as DIAS,
+			SUM(A.ADEPRE)*-1 AS MONTO,
+			(case when B.PERDES=B.PERHAS then 'ADELANTO DE INTERESES SOBRE PREST. SOCIALES ART. 108 '||B.PERDES else 'INTERESES SOBRE PREST. SOCIALES ART. 108 '||B.PERDES||' - '||B.PERHAS end ) AS DESCRIPCION,
+			B.CODPAR AS PARTIDA 
+			From NPIMPPRESOC A,NPDEFPRELIQ B 
+			where 
+			A.codemp='$codemp' AND 
+			B.CODNOM='$codnom' AND 
+			B.CODCON='001' AND 
+			TO_CHAR(A.FECFIN,'YYYY')>=B.PERDES AND 
+			TO_CHAR(A.FECFIN,'YYYY')<=B.PERHAS 
+			GROUP BY (case when B.PERDES=B.PERHAS then 'ADELANTO DE INTERESES SOBRE PREST. SOCIALES ART. 108 '||B.PERDES else 'INTERESES SOBRE PREST. SOCIALES ART. 108 '||B.PERDES||' - '||B.PERHAS end ),B.CODPAR 
+			HAVING
+			SUM(A.ADEPRE)<>0
 			ORDER BY orden,DESCRIPCION DESC";
 
 	      if (H::BuscarDatos($sql,$arr))
