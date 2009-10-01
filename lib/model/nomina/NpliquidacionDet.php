@@ -9,7 +9,7 @@
  * @subpackage lib.model.nomina
  * @author     $Author$ <desarrollo@cidesa.com.ve>
  * @version SVN: $Id$
- * 
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -38,11 +38,11 @@ class NpliquidacionDet extends BaseNpliquidacionDet
 	protected $objasig=array();
 	protected $objdeduc=array();
 	protected $codret='';
-	
+
 	public function hydrate(ResultSet $rs, $startcol = 1)
    {
       parent::hydrate($rs, $startcol);
-      $this->codret=self::getCodret();
+      //$this->codret=self::getCodret();
    }
-	
+
 }

@@ -1,7 +1,7 @@
 <fieldset>
 <div class=" divlado">
 <fieldset Style="width:290px">
-<legend>Tiempo Efectivo</legend>
+<h2>Tiempo Efectivo</h2>
 <div class="divlado form-row">
   <?php if($labels['npliquidacion_det{diaefe}']!='.:') { ?>
   <?php echo label_for('npliquidacion_det[diaefe]', __($labels['npliquidacion_det{diaefe}' ]), 'class="required" Style="text-align:left; width:25px"') ?>
@@ -59,7 +59,7 @@
 </div>
 <div class="divlado">
 <fieldset Style="width:290px">
-<legend>Tiempo Nuevo Regimen</legend>
+<h2>Tiempo Nuevo Regimen</h2>
 <div class="divlado form-row">
   <?php if($labels['npliquidacion_det{diarn}']!='.:') { ?>
   <?php echo label_for('npliquidacion_det[diarn]', __($labels['npliquidacion_det{diarn}' ]), 'class="required" Style="text-align:left; width:25px"') ?>
@@ -119,7 +119,7 @@
 
 <div class="divlado">
 <fieldset Style="width:290px">
-<legend>Tiempo Regimen Viejo</legend>
+<h2>Tiempo Regimen Viejo</h2>
 <div class="divlado form-row">
   <?php if($labels['npliquidacion_det{diara}']!='.:') { ?>
   <?php echo label_for('npliquidacion_det[diara]', __($labels['npliquidacion_det{diara}' ]), 'class="required" Style="text-align:left; width:25px"') ?>
