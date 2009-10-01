@@ -29,7 +29,13 @@
 
 <div class="form-row" id="divDatos del Despacho">
 <fieldset id="sf_fieldset_none" class="">
-<legend><?php echo __('Datos del Despacho') ?></legend>
+<legend><?php if ($despnotent=="") {?>
+	<?php echo __('Datos del Despacho') ?>
+	<?php }else {?>
+    <?php echo __('Datos de la Nota de Entrega') ?>
+    <?php }?>
+
+	</legend>
 <div class="form-row">
 <table>
 <tr>
