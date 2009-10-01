@@ -326,7 +326,10 @@ $this->Bitacora('Guardo');
         $col2->setNombreCampo('desart');
         $col2->setHTML('type="text" size="30x2" readonly=true');
 
-        $col3 = new Columna('Cant. Solicitada');
+        if ($tipaju == 'P') $col3 = new Columna('Cant. Solicitada');
+        else if ($tipaju == 'NE') $col3 = new Columna('Cant. Entregada');
+        else if ($tipaju == 'F')$col3 = new Columna('Cant. Facturada');
+        else $col3 = new Columna('Cant. Solicitada');
         $col3->setTipo(Columna::MONTO);
         $col3->setEsGrabable(true);
         $col3->setAlineacionContenido(Columna::IZQUIERDA);
@@ -376,6 +379,12 @@ $this->Bitacora('Guardo');
 
   }
 
+  /**
+   * Función para procesar _todas_ las funciones Ajax del formulario
+   * Cada función esta identificada con el valor de la vista "ajax"
+   * el cual traerá el indice de lo que se quiere procesar.
+   *
+   */
   public function executeAjax()
   {
 
@@ -404,16 +413,18 @@ $this->Bitacora('Guardo');
 
           if ($this->getRequestParameter('tipref')=='P')
           {
-             $cantival=Facturacion::chequearCantPedido($this->getRequestParameter('referencia'),$this->getRequestParameter('articuloaju'),$codigo,$this->getRequestParameter('solicit'),&$cantaju);
+             $cantival=Facturacion::chequearCantPedido($this->getRequestParameter('referencia'),$this->getRequestParameter('articuloaju'),$codigo,$this->getRequestParameter('solicit'),&$cantaju,&$canent);
           }else if ($this->getRequestParameter('tipref')=='NE'){
              $cantival=Facturacion::chequearCantNota($this->getRequestParameter('referencia'),$this->getRequestParameter('articuloaju'),$codigo,$this->getRequestParameter('solicit'),$this->getRequestParameter('tipref'),$this->getRequestParameter('canentart'),&$cantaju,&$canent);
+             $cantaju=0;
           }else{
-
+            $cantival=true;
+            $cantaju=0;
           }
           $canpuedoaju=$cantaju;
           if ($cantival)
           {
-           if (H::tofloat($codigo)>H::tofloat($this->getRequestParameter('solicit')))
+           if (H::tofloat($codigo)>H::tofloat($this->getRequestParameter('solicit'))) //Ajuste por arriba
            {
            	 if (H::tofloat($codigo) <= $numlot || H::getX('CODART','Caregart','Tipo',$this->getRequestParameter('articuloaju'))=='S')
            	 {
@@ -431,14 +442,13 @@ $this->Bitacora('Guardo');
            {
            	 if (H::tofloat($codigo)==H::tofloat($this->getRequestParameter('solicit')))
            	 {
-           	 	$javascript="alert('La Cantidad del Ajuste no puede ser igual a la Cantidad Solicitada');";
-           	 	$catajuste="0,00";
-           	 	$total="0,00";
-
+           	   $catajuste=$codigo;
+               $producto=H::tofloat($codigo) * H::tofloat($this->getRequestParameter('precioart'));
+               $total=number_format($producto,2,',','.');
            	 }
            	 else
            	 {
-           	 	$catajuste=$codigo;
+           	   $catajuste=$codigo;
                $producto=H::tofloat($codigo) * H::tofloat($this->getRequestParameter('precioart'));
                $total=number_format($producto,2,',','.');
            	 }
@@ -472,6 +482,46 @@ $this->Bitacora('Guardo');
                        $producto=H::tofloat($codigo) * H::tofloat($this->getRequestParameter('precioart'));
                        $total=number_format($producto,2,',','.');
             		}
+
+            		if ($this->getRequestParameter('tipref')=='P') $canevaluar=H::tofloat($this->getRequestParameter('solicit'));
+            		else if ($this->getRequestParameter('tipref')=='F') $canevaluar=H::tofloat($this->getRequestParameter('solicit'));
+            		else $canevaluar=$numlot;
+
+
+            		if ($cantaju!=-1 && $cantaju!=-2)
+            		{
+            		  if ($cantaju>H::tofloat($this->getRequestParameter('solicit')))
+            		  {
+                        if ($cantaju<=$canevaluar)
+                        {
+                          $catajuste=number_format($cantaju,2,',','.');
+                          $producto=H::tofloat($catajuste) * H::tofloat($this->getRequestParameter('precioart'));
+                          $total=number_format($producto,2,',','.');
+                        }
+                        else
+                        {
+                        	$catajuste="0,00";
+                            $total="0,00";
+                        }
+            		  }else{
+            		  	if (($cantaju!=H::tofloat($catajuste)) && ($canent!=H::tofloat($catajuste)))
+            		  	{
+            		  	  if ($cantaju==H::tofloat($this->getRequestParameter('solicit')))
+            		  	  {
+            		  	  	$catajuste=number_format($canent,2,',','.');
+            		  	  }else{
+            		  	  	$catajuste="0,00";
+            		  	  }
+            		  	  $producto=H::tofloat($catajuste) * H::tofloat($this->getRequestParameter('precioart'));
+                          $total=number_format($producto,2,',','.');
+            		  	}else{
+            		  	  $catajuste=$catajuste;
+                          $producto=H::tofloat($catajuste) * H::tofloat($this->getRequestParameter('precioart'));
+                          $total=number_format($producto,2,',','.');
+            		  	}
+            		  }
+            		}
+
             	}
             }
           }
@@ -491,6 +541,15 @@ $this->Bitacora('Guardo');
   }
 
 
+  
+  
+  
+  /**
+   *
+   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
+   *
+   */
   public function validateEdit()
   {
     if($this->getRequest()->getMethod() == sfRequest::POST)
@@ -519,6 +578,12 @@ $this->Bitacora('Guardo');
     }else return true;
   }
 
+  /**
+   * Función para manejar la captura de errores del negocio, tanto que se
+   * produzcan por algún validator y por un valor false retornado por el validateEdit
+   * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
+   *
+   */
   public function handleErrorEdit()
   {
     $this->preExecute();
@@ -539,6 +604,17 @@ $this->Bitacora('Guardo');
     return sfView::SUCCESS;
   }
 
+  /**
+   * Función para manejar el salvado del formulario.
+   * cabe destacar que en las versiones nuevas del formulario (cidesaPropel)
+   * llama internamente a la función $this->saving
+   * Esta función saving siempre debe retornar un valor >=-1.
+   * En esta funcción se debe realizar el proceso de guardado de informacion
+   * del negocio en la base de datos. Este proceso debe ser realizado llamado
+   * a funciones de las clases del negocio que se encuentran en lib/bussines
+   * todos los procesos de guardado deben estar en la clases del negocio (lib/bussines/"modulo")
+   *
+   */
   protected function saveFaajuste($faajuste)
   {
     if ($faajuste->getId())
@@ -554,9 +630,19 @@ $this->Bitacora('Guardo');
     return -1;
   }
 
-  public function deleting($clasemodelo)
+  /**
+   * Función para colocar el codigo necesario para 
+   * el proceso de eliminar.
+   * Esta función debe retornar un valor igual a -1 si no hubo 
+   * Inconvenientes al guardar, y != de -1 si existe algún error.
+   * Si es diferente de -1 el valor devuelto debe ser un código de error
+   * Válido que exista en el archivo config/errores.yml
+   *
+   */
+  public function deleting($faajuste)
   {
-    return parent::deleting($clasemodelo);
+    Facturacion::eliminarFaajuste($faajuste);
+    return -1;
   }
 
 
