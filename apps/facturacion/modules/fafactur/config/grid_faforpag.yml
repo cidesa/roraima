@@ -20,7 +20,7 @@ opciones:                  # Opciones generales
   nombrecampo:             destippag
   esgrabable:              true
   html:                    [size="20", readonly=true ]
-  catalogo:                [fatippag, sf_admin_edit_form, { Id: 1, Destippag: 2 }, Fatippag_Fafactur ]
+  catalogo:                [fatippag, sf_admin_edit_form, { Id: 1, Destippag: 2, Genmov: 8 }, Fatippag_Fafactur ]
 3:       # Columna 3
   titulo:                  Banco
   tipo:                    t
@@ -47,3 +47,17 @@ opciones:                  # Opciones generales
   nombrecampo:             monpag
   esnumerico:              true
   html:                    [size="10"]
+7:       # Columna 7
+  titulo:                  Código del Mov
+  tipo:                    t
+  nombrecampo:             codmov
+  esgrabable:              true
+  oculta:                  true
+  html:                    [size="10" readonly=true]
+8:       # Columna 8
+  titulo:                  Genera Mov
+  tipo:                    t
+  nombrecampo:             genmov
+  esgrabable:              true
+  oculta:                  true
+  html:                    [size="20" readonly=true]

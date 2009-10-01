@@ -36,6 +36,8 @@ generator:
       grid_faforpag:    { name: Forma de Pago}
       combo: { name: Combos de Artículos}
       listaart: { name: Artículos}
+      codtip: { name: Tipo de Movimiento}
+      destip: { name: Descripción}
     list:
       title:          Facturas
       display:        [=reffac, fecfac]
@@ -50,9 +52,9 @@ generator:
       display:
         "Datos de la Factura": [codcaj, reffac, fecfac, _tipref, _tipmon, _rifpro, telpro, dirpro, tipper, _codconpag, desfac, monto, monrgo, mondesc, monfac, combo]
         "Detalle": [listaart, _grid_fapeddes, _grid_faartfac, _grid_fadescart, totdesc, _grid_fargoart, totrec]
-        "Forma de Pago": [_grid_faforpag, moncan, monres, vuelto]
+        "Forma de Pago": [_codtip, _grid_faforpag, moncan, monres, vuelto]
         "Descripción Detallada/Sucursal": [observ, sucursal, usuarios, password]
-      hide: [codcli, reapor, status, valmon, numcom, numcomord, numcominv, incluircliente, tipconpag, tipo, apliclades, docrefiera, esretencion, tottotart, totmonrgo, monedaanterior, trajo, porcentajedescto, totcanpreart, totprecio, ctasociada, ctacli]
+      hide: [codcli, reapor, status, valmon, numcom, numcomord, numcominv, incluircliente, tipconpag, tipo, apliclades, docrefiera, esretencion, tottotart, totmonrgo, monedaanterior, trajo, porcentajedescto, totcanpreart, totprecio, ctasociada, ctacli, filgenmov]
       actions:
         _list:        ~
         _save:        ~
