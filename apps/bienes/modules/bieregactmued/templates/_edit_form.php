@@ -37,6 +37,7 @@
   'size' => 16,
   'control_name' => 'bnregmue[codact]',
   'maxlength' => $lonact,
+  'readonly'  =>  $bnregmue->getId()!='' ? true : false ,
   'onKeyPress' => "javascript:return dFilter (event.keyCode, this,'$foract')",
   'onBlur'=> remote_function(array(
         'url'      => 'bieregactmued/ajax',
@@ -48,7 +49,7 @@
 )); echo $value ? $value : '&nbsp;' ?>
 &nbsp;
 
-<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Bndefact_Bieregactmued/clase/Bndefact/frame/sf_admin_edit_form/obj1/bnregmue_codact/obj2/bnregmue_desmue/campo1/codact/campo2/desact')?>
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Bndefact_Bieregactmued/clase/Bndefact/frame/sf_admin_edit_form/obj1/bnregmue_codact/obj2/bnregmue_desmue/campo1/codact/campo2/desact','','','botoncat')?>
 
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -59,6 +60,7 @@
   'size' => 12,
   'control_name' => 'bnregmue[codmue]',
   'maxlength' => 20,
+  'readonly'  =>  $bnregmue->getId()!='' ? true : false ,
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 <br>
@@ -764,6 +766,9 @@ function enter(e,valor)
 
 var incorporacion='<?php echo $incorporacion;  ?>';
 var  id='<? echo $bnregmue->getId();?>';
+if (id){
+	     $$('.botoncat')[0].disabled=true;
+}
 if ((incorporacion=='S'))
 {
     if(confirm("¿Desea Incorporar este Mueble?"))
