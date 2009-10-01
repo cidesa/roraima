@@ -45,6 +45,10 @@ abstract class BaseFaajuste extends BaseObject  implements Persistent {
 
 
 	
+	protected $tipo;
+
+
+	
 	protected $id;
 
 	
@@ -130,6 +134,13 @@ abstract class BaseFaajuste extends BaseObject  implements Persistent {
   {
 
     return trim($this->staaju);
+
+  }
+  
+  public function getTipo()
+  {
+
+    return trim($this->tipo);
 
   }
   
@@ -237,6 +248,16 @@ abstract class BaseFaajuste extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setTipo($v)
+	{
+
+    if ($this->tipo !== $v) {
+        $this->tipo = $v;
+        $this->modifiedColumns[] = FaajustePeer::TIPO;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -269,7 +290,9 @@ abstract class BaseFaajuste extends BaseObject  implements Persistent {
 
       $this->staaju = $rs->getString($startcol + 8);
 
-      $this->id = $rs->getInt($startcol + 9);
+      $this->tipo = $rs->getString($startcol + 9);
+
+      $this->id = $rs->getInt($startcol + 10);
 
       $this->resetModified();
 
@@ -277,7 +300,7 @@ abstract class BaseFaajuste extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 10; 
+            return $startcol + 11; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Faajuste object", $e);
     }
@@ -452,6 +475,9 @@ abstract class BaseFaajuste extends BaseObject  implements Persistent {
 				return $this->getStaaju();
 				break;
 			case 9:
+				return $this->getTipo();
+				break;
+			case 10:
 				return $this->getId();
 				break;
 			default:
@@ -473,7 +499,8 @@ abstract class BaseFaajuste extends BaseObject  implements Persistent {
 			$keys[6] => $this->getMonaju(),
 			$keys[7] => $this->getObsaju(),
 			$keys[8] => $this->getStaaju(),
-			$keys[9] => $this->getId(),
+			$keys[9] => $this->getTipo(),
+			$keys[10] => $this->getId(),
 		);
 		return $result;
 	}
@@ -517,6 +544,9 @@ abstract class BaseFaajuste extends BaseObject  implements Persistent {
 				$this->setStaaju($value);
 				break;
 			case 9:
+				$this->setTipo($value);
+				break;
+			case 10:
 				$this->setId($value);
 				break;
 		} 	}
@@ -535,7 +565,8 @@ abstract class BaseFaajuste extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[6], $arr)) $this->setMonaju($arr[$keys[6]]);
 		if (array_key_exists($keys[7], $arr)) $this->setObsaju($arr[$keys[7]]);
 		if (array_key_exists($keys[8], $arr)) $this->setStaaju($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setId($arr[$keys[9]]);
+		if (array_key_exists($keys[9], $arr)) $this->setTipo($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setId($arr[$keys[10]]);
 	}
 
 	
@@ -552,6 +583,7 @@ abstract class BaseFaajuste extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(FaajustePeer::MONAJU)) $criteria->add(FaajustePeer::MONAJU, $this->monaju);
 		if ($this->isColumnModified(FaajustePeer::OBSAJU)) $criteria->add(FaajustePeer::OBSAJU, $this->obsaju);
 		if ($this->isColumnModified(FaajustePeer::STAAJU)) $criteria->add(FaajustePeer::STAAJU, $this->staaju);
+		if ($this->isColumnModified(FaajustePeer::TIPO)) $criteria->add(FaajustePeer::TIPO, $this->tipo);
 		if ($this->isColumnModified(FaajustePeer::ID)) $criteria->add(FaajustePeer::ID, $this->id);
 
 		return $criteria;
@@ -600,6 +632,8 @@ abstract class BaseFaajuste extends BaseObject  implements Persistent {
 		$copyObj->setObsaju($this->obsaju);
 
 		$copyObj->setStaaju($this->staaju);
+
+		$copyObj->setTipo($this->tipo);
 
 
 		$copyObj->setNew(true);

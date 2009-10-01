@@ -39,10 +39,16 @@ class Despachos
    * @param $grid Array de Objects Articulos.
    * @return void
    */
-    public static function salvarFadesp($despacho,$grid)
+    public static function salvarFadesp($despacho,$grid,$despnotent)
     {
-        self::grabarDespachoFac($despacho,$grid);
+        self::grabarDespachoFac(&$despacho,$grid);
 	    self::grabarDespachoArticulosFac($despacho,$grid);
+	    if ($despnotent=='S'){
+	    if (Facturacion::grabarComprobanteNotEnt(&$despacho, $grid,&$msj2))
+	    {
+	      $despacho->save();
+	    }
+	    }
 	    if (self::actualizarArticulosFAC($despacho,$grid,&$msj))
 	    {
 	      	if ($despacho->getTipref() == 'P')
@@ -120,7 +126,6 @@ class Despachos
 	    if (self::actualizarArticulos($despacho,$grid,&$msj))
 	    {
 	      	self::actualizarArticulosRequision($despacho,$grid);
-//	      	self::actualizarArticulosPedido($despacho,$grid);
 	    }
     }
 

@@ -13,7 +13,7 @@ abstract class BaseFaajustePeer {
 	const CLASS_DEFAULT = 'lib.model.Faajuste';
 
 	
-	const NUM_COLUMNS = 10;
+	const NUM_COLUMNS = 11;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -47,6 +47,9 @@ abstract class BaseFaajustePeer {
 	const STAAJU = 'faajuste.STAAJU';
 
 	
+	const TIPO = 'faajuste.TIPO';
+
+	
 	const ID = 'faajuste.ID';
 
 	
@@ -55,18 +58,18 @@ abstract class BaseFaajustePeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Refaju', 'Tipaju', 'Codref', 'Fecaju', 'Desaju', 'Codalm', 'Monaju', 'Obsaju', 'Staaju', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (FaajustePeer::REFAJU, FaajustePeer::TIPAJU, FaajustePeer::CODREF, FaajustePeer::FECAJU, FaajustePeer::DESAJU, FaajustePeer::CODALM, FaajustePeer::MONAJU, FaajustePeer::OBSAJU, FaajustePeer::STAAJU, FaajustePeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('refaju', 'tipaju', 'codref', 'fecaju', 'desaju', 'codalm', 'monaju', 'obsaju', 'staaju', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
+		BasePeer::TYPE_PHPNAME => array ('Refaju', 'Tipaju', 'Codref', 'Fecaju', 'Desaju', 'Codalm', 'Monaju', 'Obsaju', 'Staaju', 'Tipo', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (FaajustePeer::REFAJU, FaajustePeer::TIPAJU, FaajustePeer::CODREF, FaajustePeer::FECAJU, FaajustePeer::DESAJU, FaajustePeer::CODALM, FaajustePeer::MONAJU, FaajustePeer::OBSAJU, FaajustePeer::STAAJU, FaajustePeer::TIPO, FaajustePeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('refaju', 'tipaju', 'codref', 'fecaju', 'desaju', 'codalm', 'monaju', 'obsaju', 'staaju', 'tipo', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Refaju' => 0, 'Tipaju' => 1, 'Codref' => 2, 'Fecaju' => 3, 'Desaju' => 4, 'Codalm' => 5, 'Monaju' => 6, 'Obsaju' => 7, 'Staaju' => 8, 'Id' => 9, ),
-		BasePeer::TYPE_COLNAME => array (FaajustePeer::REFAJU => 0, FaajustePeer::TIPAJU => 1, FaajustePeer::CODREF => 2, FaajustePeer::FECAJU => 3, FaajustePeer::DESAJU => 4, FaajustePeer::CODALM => 5, FaajustePeer::MONAJU => 6, FaajustePeer::OBSAJU => 7, FaajustePeer::STAAJU => 8, FaajustePeer::ID => 9, ),
-		BasePeer::TYPE_FIELDNAME => array ('refaju' => 0, 'tipaju' => 1, 'codref' => 2, 'fecaju' => 3, 'desaju' => 4, 'codalm' => 5, 'monaju' => 6, 'obsaju' => 7, 'staaju' => 8, 'id' => 9, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
+		BasePeer::TYPE_PHPNAME => array ('Refaju' => 0, 'Tipaju' => 1, 'Codref' => 2, 'Fecaju' => 3, 'Desaju' => 4, 'Codalm' => 5, 'Monaju' => 6, 'Obsaju' => 7, 'Staaju' => 8, 'Tipo' => 9, 'Id' => 10, ),
+		BasePeer::TYPE_COLNAME => array (FaajustePeer::REFAJU => 0, FaajustePeer::TIPAJU => 1, FaajustePeer::CODREF => 2, FaajustePeer::FECAJU => 3, FaajustePeer::DESAJU => 4, FaajustePeer::CODALM => 5, FaajustePeer::MONAJU => 6, FaajustePeer::OBSAJU => 7, FaajustePeer::STAAJU => 8, FaajustePeer::TIPO => 9, FaajustePeer::ID => 10, ),
+		BasePeer::TYPE_FIELDNAME => array ('refaju' => 0, 'tipaju' => 1, 'codref' => 2, 'fecaju' => 3, 'desaju' => 4, 'codalm' => 5, 'monaju' => 6, 'obsaju' => 7, 'staaju' => 8, 'tipo' => 9, 'id' => 10, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
 	);
 
 	
@@ -137,6 +140,8 @@ abstract class BaseFaajustePeer {
 		$criteria->addSelectColumn(FaajustePeer::OBSAJU);
 
 		$criteria->addSelectColumn(FaajustePeer::STAAJU);
+
+		$criteria->addSelectColumn(FaajustePeer::TIPO);
 
 		$criteria->addSelectColumn(FaajustePeer::ID);
 

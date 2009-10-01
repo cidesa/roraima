@@ -1878,7 +1878,7 @@
       {
         if ((monto > calculo) && $('fafactur_apliclades').value=='S')
         {
-          alert('El Porcentaje del Descuento sobrepasa el límite permitido para el Usuario');
+          alert('El Porcentaje del Descuento sobrepasa el lï¿½mite permitido para el Usuario');
           $(id).value="0,00";
         }
       }
@@ -1958,6 +1958,8 @@
     var fil=aux[1];
     var col=parseInt(aux[2]);
 
+   var colgenmov=col+2;
+   var genmov=name+"_"+fil+"_"+colgenmov;
     var num1= toFloat(id);
 
     calcularPago();
@@ -1977,6 +1979,12 @@
    }
    else
    {
+     if ($(genmov).value=='S')
+     {
+       $('divcodtip').show();
+       $('fafactur_filgenmov').value=fil;
+     }
+
     var nmoncan= toFloat('fafactur_moncan');
     var nmonfac= toFloat('fafactur_monfac');
     var cal2= nmonfac - nmoncan;
@@ -3314,3 +3322,20 @@
     $(mdesc).checked=true;
 
  }
+
+  function aceptartipmov()
+  {
+    if ($('fafactur_codtip').value!="")
+    {
+      $('divcodtip').hide();
+      var l=parseInt($('fafactur_filgenmov').value);
+      var filcodtip="dx_"+l+"_7"
+      $(filcodtip).value=$('fafactur_codtip').value;
+      $('fafactur_filgenmov').value="";
+    }
+    else
+    {
+      alert('Tipee el Tipo de Movimiento');
+      $('fafactur_codtip').focus();
+    }
+  }

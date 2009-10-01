@@ -495,7 +495,15 @@ class Facturacion {
          if ($faajuste->getTipaju() == 'NE'){
          $famovaju->setNumlot($numlot);}
          $famovaju->setCanord($x[$j]->getCanord());
-         $famovaju->setCanaju($x[$j]->getCanaju());
+         if ($faajuste->getTipo()=='CREDITO')
+         {
+           $famovaju->setCanaju($x[$j]->getCanaju());
+           $facantaju=$x[$j]->getCanaju();
+         }
+         else {
+         	$famovaju->setCanaju($x[$j]->getCanaju()*(-1));
+         	$facantaju=$x[$j]->getCanaju()*(-1);
+         }
          $famovaju->setMontot($x[$j]->getMontot());
          $famovaju->save();
          $tipo=H::getX('CODART','Caregart','Tipo',$codarti);
@@ -530,6 +538,21 @@ class Facturacion {
 			}
 		 }
 		 else if ($faajuste->getTipaju() == 'P'){
+		 	$l= new Criteria();
+		 	$l->add(CaregartPeer::CODART,$codarti);
+		 	$data= CaregartPeer::doSelectOne($l);
+		 	if ($data)
+		 	{
+              if ($x[$j]->getCanaju() < $x[$j]->getCanord())
+              {
+              	$data->setDistot($data->getDistot() + ($x[$j]->getCanord() - $x[$j]->getCanaju()));
+              	$data->save();
+              }else{
+              	$data->setDistot($data->getDistot() - ($x[$j]->getCanaju() - $x[$j]->getCanord()));
+              	$data->save();
+              }
+		 	}
+
 			 $p= new Criteria();
 			 $p->add(FaartpedPeer::NROPED,$faajuste->getCodref());
 			 $p->add(FaartpedPeer::CODART,$codarti);
@@ -542,14 +565,30 @@ class Facturacion {
 			 }
 		 }
 		 else if ($faajuste->getTipaju() == 'F'){
-		 	$p= new Criteria();
+
+		 	$l= new Criteria();
+		 	$l->add(CaregartPeer::CODART,$codarti);
+		 	$data= CaregartPeer::doSelectOne($l);
+		 	if ($data)
+		 	{
+              if ($facantaju < $x[$j]->getCanord())
+              {
+              	$data->setDistot($data->getDistot() - $facantaju);
+              	$data->save();
+              }else{
+              	$data->setDistot($data->getDistot() - ($facantaju - $x[$j]->getCanord()));
+              	$data->save();
+              }
+		 	}
+
+		 	 $p= new Criteria();
 			 $p->add(FaartfacPeer::REFFAC,$faajuste->getCodref());
 			 $p->add(FaartfacPeer::CODART,$codarti);
   			 $datos= FaartfacPeer::doSelectOne($p);
   			 if ($datos){
                $datos->setCantot($x[$j]->getCanaju());
 	           $datos->setTotart($x[$j]->getCanaju()*$x[$j]->getPreart());
-	           $datos->setCanaju($datos->getCanaju() + $x[$j]->getCanaju());
+	           $datos->setCanaju($datos->getCanaju() + $facantaju);
 	           $datos->save();
 			 }
 		 }
@@ -1213,7 +1252,7 @@ public static function entregas($nroped)
 
   }
 
-  public static function chequearCantPedido($refped,$articulo,$ajustada,$solicitada,&$cantaju)
+  public static function chequearCantPedido($refped,$articulo,$ajustada,$solicitada,&$cantaju,&$canent)
   {
   	$cantaju=0;
   	$sument=0;
@@ -1262,17 +1301,18 @@ public static function entregas($nroped)
            	 return true;
            }else
            {
-           	if (H::tofloat($ajustada)==H::tofloat($solicitada))
+           /*	if (H::tofloat($ajustada)==H::tofloat($solicitada))
            	{
            		$cantaju=-2;
-           	}else{
+           	}else{*/
            	  if (H::tofloat($ajustada)<$reg->getCandes())
            	  {
            	  	$cantaju=-1;
            	  }else {
+           	  	$canent=$reg->getCandes();
            	  	$cantaju=$solicitada;
            	  }
-           	}
+           	//}
            	return false;
            }
   	  	}
@@ -1380,22 +1420,22 @@ public static function entregas($nroped)
     }
   }
 
-  public static function grabarComprobanteNotEnt(&$fanotent, $grid,&$msj2)
+  public static function grabarComprobanteNotEnt(&$fades, $grid,&$msj2)
   {
     $grabarcomprobantenot=true;
     $msj2="";
 
 	$correl=OrdendePago::Buscar_Correlativo();
-	$reftra=$fanotent->getNronot();
-    $fanotent->setNumcom($correl);
+	$reftra=$fades->getDphart();
+    $fades->setNumcom($correl);
 	$contabc= new Contabc();
 	$contabc->setNumcom($correl);
 	$contabc->setReftra($reftra);
-	$contabc->setFeccom($fanotent->getFecnot());
-	$contabc->setDescom($fanotent->getDesnot());
+	$contabc->setFeccom($fades->getFecdph());
+	$contabc->setDescom($fades->getDesdph());
 	$contabc->setStacom('D');
 	$contabc->setTipcom(null);
-	$contabc->setMoncom($fanotent->getMonnot());
+	$contabc->setMoncom($fades->getMondph());
 
 	$numasiento=0; // Generamos el asiento del Debito del articulo
 	$numasiento2=0;
@@ -1408,12 +1448,12 @@ public static function entregas($nroped)
 	  $resul= CaregartPeer::doSelectOne($a);
 	  if ($resul)
 	  {
-	      $monto=$x[$j]->getTotart();
+	      $monto=$x[$j]->getMontotdes();
 	      if ($monto>0)
 	      {
 	        $f= new Criteria();
 	        $f->add(Contabc1Peer::NUMCOM,$correl);
-	        $f->add(Contabc1Peer::FECCOM,$fanotent->getFecnot());
+	        $f->add(Contabc1Peer::FECCOM,$fades->getFecdph());
 	        $f->add(Contabc1Peer::CODCTA,$resul->getCtavta());
 	        $resul2= Contabc1Peer::doSelectOne($f);
 	        if ($resul2)
@@ -1433,7 +1473,7 @@ public static function entregas($nroped)
 	            $numasiento= $numasiento + 1;
 	            $contabc1= new Contabc1();
 		        $contabc1->setNumcom($correl);
-		        $contabc1->setFeccom($fanotent->getFecnot());
+		        $contabc1->setFeccom($fades->getFecdph());
 		        $contabc1->setCodcta($resul->getCtavta());
 		        $contabc1->setNumasi($numasiento);
 		        $contabc1->setRefasi($reftra);
@@ -1453,7 +1493,7 @@ public static function entregas($nroped)
 
 	        $f= new Criteria(); // Generamos el asiento del Credito del articulo
 	        $f->add(Contabc1Peer::NUMCOM,$correl);
-	        $f->add(Contabc1Peer::FECCOM,$fanotent->getFecnot());
+	        $f->add(Contabc1Peer::FECCOM,$fades->getFecdph());
 	        $f->add(Contabc1Peer::CODCTA,$resul->getCtapro());
 	        $resul2= Contabc1Peer::doSelectOne($f);
 	        if ($resul2)
@@ -1473,7 +1513,7 @@ public static function entregas($nroped)
 	            $numasiento2= $numasiento2 + 1;
 	            $contabc1= new Contabc1();
 		        $contabc1->setNumcom($correl);
-		        $contabc1->setFeccom($fanotent->getFecnot());
+		        $contabc1->setFeccom($fades->getFecdph());
 		        $contabc1->setCodcta($resul->getCtapro());
 		        $contabc1->setNumasi($numasiento2);
 		        $contabc1->setRefasi($reftra);
@@ -1502,6 +1542,77 @@ public static function entregas($nroped)
 	  }
 
     return $grabarcomprobantenot;
+  }
+
+  public static function eliminarFaajuste($faajuste)
+  {
+    self::devolverArticulosAju($faajuste);
+    Herramientas :: EliminarRegistro('Famovaju', 'Refaju', $faajuste->getRefaju());
+    Herramientas :: EliminarRegistro('Faajuste', 'Refaju', $faajuste->getRefaju());
+  }
+
+  public static function devolverArticulosAju($faajuste)
+  {
+    $r= new Criteria();
+    $r->add(FamovajuPeer::REFAJU,$faajuste->getRefaju());
+    $resu= FamovajuPeer::doSelect($r);
+    if ($resu)
+    {
+      foreach ($resu as $resul) {
+      if ($faajuste->getTipaju()=='P')
+      {
+         $p= new Criteria();
+         $p->add(FaartpedPeer::NROPED,$faajuste->getCodref());
+         $p->add(FaartpedPeer::CODART,$resul->getCodart());
+         $reg= FaartpedPeer::doSelectOne($p);
+      }else if ($faajuste->getTipaju()=='NE'){
+      	 $p= new Criteria();
+         $p->add(FaartnotPeer::NRONOT,$faajuste->getCodref());
+         $p->add(FaartnotPeer::CODART,$resul->getCodart());
+         $reg= FaartnotPeer::doSelectOne($p);
+      }else{
+      	 $p= new Criteria();
+         $p->add(FaartfacPeer::REFFAC,$faajuste->getCodref());
+         $p->add(FaartfacPeer::CODART,$resul->getCodart());
+         $reg= FaartfacPeer::doSelectOne($p);
+      }
+      if ($reg)
+      {
+        if ($faajuste->getTipaju()=='P')
+        {
+          $reg->setCantot($reg->getCantot() + $resul->getCanaju());
+        }else if ($faajuste->getTipaju()=='NE'){
+        	$reg->setCantot($resul->getCanord());
+        }else{
+        	$reg->setCantot($reg->getCantot() + $resul->getCanaju());
+        }
+
+        $tipo=H::getX('CODART','Caregart','Tipo',$resul->getCodart());
+        if ($tipo=='A')
+        {
+            $l= new Criteria();
+		 	$l->add(CaregartPeer::CODART,$resul->getCodart());
+		 	$data= CaregartPeer::doSelectOne($l);
+		 	if ($data)
+		 	{
+              if ($resul->getCanaju() <= $resul->getCanord())
+              {
+              	$data->setDistot($data->getDistot() - ($resul->getCanord() - $resul->getCanaju()));
+              	$data->save();
+              }else{
+              	$data->setDistot($data->getDistot() + ($resul->getCanaju() - $resul->getCanord()));
+              	$data->save();
+              }
+		 	}
+        }
+        if ($faajuste->getTipaju() == 'F'){
+        $reg->setTotart($reg->getCantot()*$reg->getPrecio());
+        }else $reg->setTotart($reg->getCantot()*$reg->getPreart());
+        $reg->setCanaju($reg->getCanaju()-$resul->getCanaju());
+        $reg->save();
+      }
+     }
+    }
   }
 
 

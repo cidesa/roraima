@@ -28,6 +28,12 @@ abstract class BaseFatippag extends BaseObject  implements Persistent {
 	protected $id;
 
 	
+	protected $collCobdetfors;
+
+	
+	protected $lastCobdetforCriteria = null;
+
+	
 	protected $alreadyInSave = false;
 
 	
@@ -227,6 +233,14 @@ abstract class BaseFatippag extends BaseObject  implements Persistent {
 				}
 				$this->resetModified(); 			}
 
+			if ($this->collCobdetfors !== null) {
+				foreach($this->collCobdetfors as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
+
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
@@ -267,6 +281,14 @@ abstract class BaseFatippag extends BaseObject  implements Persistent {
 				$failureMap = array_merge($failureMap, $retval);
 			}
 
+
+				if ($this->collCobdetfors !== null) {
+					foreach($this->collCobdetfors as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
 
 
 			$this->alreadyInValidation = false;
@@ -409,6 +431,15 @@ abstract class BaseFatippag extends BaseObject  implements Persistent {
 		$copyObj->setGening($this->gening);
 
 
+		if ($deepCopy) {
+									$copyObj->setNew(false);
+
+			foreach($this->getCobdetfors() as $relObj) {
+				$copyObj->addCobdetfor($relObj->copy($deepCopy));
+			}
+
+		} 
+
 		$copyObj->setNew(true);
 
 		$copyObj->setId(NULL); 
@@ -430,6 +461,76 @@ abstract class BaseFatippag extends BaseObject  implements Persistent {
 			self::$peer = new FatippagPeer();
 		}
 		return self::$peer;
+	}
+
+	
+	public function initCobdetfors()
+	{
+		if ($this->collCobdetfors === null) {
+			$this->collCobdetfors = array();
+		}
+	}
+
+	
+	public function getCobdetfors($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseCobdetforPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCobdetfors === null) {
+			if ($this->isNew()) {
+			   $this->collCobdetfors = array();
+			} else {
+
+				$criteria->add(CobdetforPeer::FATIPPAG_ID, $this->getId());
+
+				CobdetforPeer::addSelectColumns($criteria);
+				$this->collCobdetfors = CobdetforPeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(CobdetforPeer::FATIPPAG_ID, $this->getId());
+
+				CobdetforPeer::addSelectColumns($criteria);
+				if (!isset($this->lastCobdetforCriteria) || !$this->lastCobdetforCriteria->equals($criteria)) {
+					$this->collCobdetfors = CobdetforPeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastCobdetforCriteria = $criteria;
+		return $this->collCobdetfors;
+	}
+
+	
+	public function countCobdetfors($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/om/BaseCobdetforPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(CobdetforPeer::FATIPPAG_ID, $this->getId());
+
+		return CobdetforPeer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addCobdetfor(Cobdetfor $l)
+	{
+		$this->collCobdetfors[] = $l;
+		$l->setFatippag($this);
 	}
 
 } 

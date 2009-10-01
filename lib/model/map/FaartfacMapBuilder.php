@@ -54,7 +54,9 @@ class FaartfacMapBuilder {
 
 		$tMap->addColumn('CANAJU', 'Canaju', 'double', CreoleTypes::NUMERIC, false, 14);
 
-        $tMap->addColumn('NRONOT', 'Nronot', 'string', CreoleTypes::VARCHAR, false, 8);
+		$tMap->addColumn('CANDES', 'Candes', 'double', CreoleTypes::NUMERIC, false, 14);
+
+		$tMap->addColumn('NRONOT', 'Nronot', 'string', CreoleTypes::VARCHAR, false, 8);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 

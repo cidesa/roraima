@@ -48,9 +48,15 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 	protected $canaju;
 
 
+	
+	protected $candes;
+
+
+	
 	protected $nronot;
 
 
+	
 	protected $id;
 
 	
@@ -136,13 +142,21 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 
   }
   
+  public function getCandes($val=false)
+  {
+
+    if($val) return number_format($this->candes,2,',','.');
+    else return $this->candes;
+
+  }
+  
   public function getNronot()
   {
 
     return trim($this->nronot);
 
   }
-
+  
   public function getId()
   {
 
@@ -250,6 +264,16 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setCandes($v)
+	{
+
+    if ($this->candes !== $v) {
+        $this->candes = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FaartfacPeer::CANDES;
+      }
+  
+	} 
+	
 	public function setNronot($v)
 	{
 
@@ -259,7 +283,7 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
       }
   
 	} 
-
+	
 	public function setId($v)
 	{
 
@@ -294,9 +318,11 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 
       $this->canaju = $rs->getFloat($startcol + 9);
 
-      $this->nronot = $rs->getString($startcol + 10);
+      $this->candes = $rs->getFloat($startcol + 10);
 
-      $this->id = $rs->getInt($startcol + 11);
+      $this->nronot = $rs->getString($startcol + 11);
+
+      $this->id = $rs->getInt($startcol + 12);
 
       $this->resetModified();
 
@@ -304,7 +330,7 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 12; 
+            return $startcol + 13; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Faartfac object", $e);
     }
@@ -482,9 +508,12 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 				return $this->getCanaju();
 				break;
 			case 10:
-				return $this->getNronot();
+				return $this->getCandes();
 				break;
 			case 11:
+				return $this->getNronot();
+				break;
+			case 12:
 				return $this->getId();
 				break;
 			default:
@@ -507,8 +536,9 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 			$keys[7] => $this->getMondes(),
 			$keys[8] => $this->getTotart(),
 			$keys[9] => $this->getCanaju(),
-			$keys[10] => $this->getNronot(),
-			$keys[11] => $this->getId(),
+			$keys[10] => $this->getCandes(),
+			$keys[11] => $this->getNronot(),
+			$keys[12] => $this->getId(),
 		);
 		return $result;
 	}
@@ -555,9 +585,12 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 				$this->setCanaju($value);
 				break;
 			case 10:
-				$this->setNronot($value);
+				$this->setCandes($value);
 				break;
 			case 11:
+				$this->setNronot($value);
+				break;
+			case 12:
 				$this->setId($value);
 				break;
 		} 	}
@@ -577,8 +610,9 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[7], $arr)) $this->setMondes($arr[$keys[7]]);
 		if (array_key_exists($keys[8], $arr)) $this->setTotart($arr[$keys[8]]);
 		if (array_key_exists($keys[9], $arr)) $this->setCanaju($arr[$keys[9]]);
-		if (array_key_exists($keys[10], $arr)) $this->setNronot($arr[$keys[10]]);
-		if (array_key_exists($keys[11], $arr)) $this->setId($arr[$keys[11]]);
+		if (array_key_exists($keys[10], $arr)) $this->setCandes($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setNronot($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setId($arr[$keys[12]]);
 	}
 
 	
@@ -596,6 +630,7 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(FaartfacPeer::MONDES)) $criteria->add(FaartfacPeer::MONDES, $this->mondes);
 		if ($this->isColumnModified(FaartfacPeer::TOTART)) $criteria->add(FaartfacPeer::TOTART, $this->totart);
 		if ($this->isColumnModified(FaartfacPeer::CANAJU)) $criteria->add(FaartfacPeer::CANAJU, $this->canaju);
+		if ($this->isColumnModified(FaartfacPeer::CANDES)) $criteria->add(FaartfacPeer::CANDES, $this->candes);
 		if ($this->isColumnModified(FaartfacPeer::NRONOT)) $criteria->add(FaartfacPeer::NRONOT, $this->nronot);
 		if ($this->isColumnModified(FaartfacPeer::ID)) $criteria->add(FaartfacPeer::ID, $this->id);
 
@@ -648,6 +683,7 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 
 		$copyObj->setCanaju($this->canaju);
 
+		$copyObj->setCandes($this->candes);
 
 		$copyObj->setNronot($this->nronot);
 

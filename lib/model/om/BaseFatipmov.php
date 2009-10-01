@@ -28,6 +28,18 @@ abstract class BaseFatipmov extends BaseObject  implements Persistent {
 	protected $id;
 
 	
+	protected $collCobdocumes;
+
+	
+	protected $lastCobdocumeCriteria = null;
+
+	
+	protected $collCobtransas;
+
+	
+	protected $lastCobtransaCriteria = null;
+
+	
 	protected $alreadyInSave = false;
 
 	
@@ -227,6 +239,22 @@ abstract class BaseFatipmov extends BaseObject  implements Persistent {
 				}
 				$this->resetModified(); 			}
 
+			if ($this->collCobdocumes !== null) {
+				foreach($this->collCobdocumes as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
+
+			if ($this->collCobtransas !== null) {
+				foreach($this->collCobtransas as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
+
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
@@ -267,6 +295,22 @@ abstract class BaseFatipmov extends BaseObject  implements Persistent {
 				$failureMap = array_merge($failureMap, $retval);
 			}
 
+
+				if ($this->collCobdocumes !== null) {
+					foreach($this->collCobdocumes as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
+
+				if ($this->collCobtransas !== null) {
+					foreach($this->collCobtransas as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
 
 
 			$this->alreadyInValidation = false;
@@ -409,6 +453,19 @@ abstract class BaseFatipmov extends BaseObject  implements Persistent {
 		$copyObj->setCodcta($this->codcta);
 
 
+		if ($deepCopy) {
+									$copyObj->setNew(false);
+
+			foreach($this->getCobdocumes() as $relObj) {
+				$copyObj->addCobdocume($relObj->copy($deepCopy));
+			}
+
+			foreach($this->getCobtransas() as $relObj) {
+				$copyObj->addCobtransa($relObj->copy($deepCopy));
+			}
+
+		} 
+
 		$copyObj->setNew(true);
 
 		$copyObj->setId(NULL); 
@@ -430,6 +487,146 @@ abstract class BaseFatipmov extends BaseObject  implements Persistent {
 			self::$peer = new FatipmovPeer();
 		}
 		return self::$peer;
+	}
+
+	
+	public function initCobdocumes()
+	{
+		if ($this->collCobdocumes === null) {
+			$this->collCobdocumes = array();
+		}
+	}
+
+	
+	public function getCobdocumes($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseCobdocumePeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCobdocumes === null) {
+			if ($this->isNew()) {
+			   $this->collCobdocumes = array();
+			} else {
+
+				$criteria->add(CobdocumePeer::FATIPMOV_ID, $this->getId());
+
+				CobdocumePeer::addSelectColumns($criteria);
+				$this->collCobdocumes = CobdocumePeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(CobdocumePeer::FATIPMOV_ID, $this->getId());
+
+				CobdocumePeer::addSelectColumns($criteria);
+				if (!isset($this->lastCobdocumeCriteria) || !$this->lastCobdocumeCriteria->equals($criteria)) {
+					$this->collCobdocumes = CobdocumePeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastCobdocumeCriteria = $criteria;
+		return $this->collCobdocumes;
+	}
+
+	
+	public function countCobdocumes($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/om/BaseCobdocumePeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(CobdocumePeer::FATIPMOV_ID, $this->getId());
+
+		return CobdocumePeer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addCobdocume(Cobdocume $l)
+	{
+		$this->collCobdocumes[] = $l;
+		$l->setFatipmov($this);
+	}
+
+	
+	public function initCobtransas()
+	{
+		if ($this->collCobtransas === null) {
+			$this->collCobtransas = array();
+		}
+	}
+
+	
+	public function getCobtransas($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseCobtransaPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCobtransas === null) {
+			if ($this->isNew()) {
+			   $this->collCobtransas = array();
+			} else {
+
+				$criteria->add(CobtransaPeer::FATIPMOV_ID, $this->getId());
+
+				CobtransaPeer::addSelectColumns($criteria);
+				$this->collCobtransas = CobtransaPeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(CobtransaPeer::FATIPMOV_ID, $this->getId());
+
+				CobtransaPeer::addSelectColumns($criteria);
+				if (!isset($this->lastCobtransaCriteria) || !$this->lastCobtransaCriteria->equals($criteria)) {
+					$this->collCobtransas = CobtransaPeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastCobtransaCriteria = $criteria;
+		return $this->collCobtransas;
+	}
+
+	
+	public function countCobtransas($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/om/BaseCobtransaPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(CobtransaPeer::FATIPMOV_ID, $this->getId());
+
+		return CobtransaPeer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addCobtransa(Cobtransa $l)
+	{
+		$this->collCobtransas[] = $l;
+		$l->setFatipmov($this);
 	}
 
 } 
