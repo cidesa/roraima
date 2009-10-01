@@ -37,6 +37,7 @@
 <?php echo input_hidden_tag('opordpag[totfonter]', $opordpag->getTotfonter()) ?>
 <?php echo input_hidden_tag('opordpag[datosnomina]', $opordpag->getDatosnomina()) ?>
 <?php echo input_hidden_tag('opordpag[observe]', $opordpag->getObserve()) ?>
+<?php echo input_hidden_tag('opordpag[modbasimpiva]', $opordpag->getModbasimpiva()) ?>
 <table width="100%">
   <tr>
     <th><strong><font color="<? print $color;?>" size="2" face="Verdana, Arial, Helvetica, sans-serif"> <? print $eti;?></font></strong></th>

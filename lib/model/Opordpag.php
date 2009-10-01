@@ -71,6 +71,8 @@ class Opordpag extends BaseOpordpag
   protected $observe="";
   protected $referencias2 = '';
   protected $nombeneficiario="";
+  protected $modbasimpiva="";
+
    public function afterHydrate()
    {
    	  Herramientas::obtenerFormatoCategoria(&$formatopar,&$iniciopartida);
