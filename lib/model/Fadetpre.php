@@ -25,6 +25,7 @@ class Fadetpre extends BaseFadetpre
 	protected $precioe="0,00";
 	protected $totart2="0,00";
 
+
   public function getDesart()
   {
    return Herramientas::getX('CODART','Caregart','Desart',self::getCodart());

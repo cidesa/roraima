@@ -273,9 +273,10 @@ public static function PagoDoble()
     return array('P' => 'Pedido', 'F' => 'Factura');
     }
 
-   public static function ListaRefiereA()
+   public static function ListaRefiereA($despnotent)
   {
-    return array('V' => 'Venta Directa', 'P' => 'Pedido', 'D' => 'Despacho'); //, 'VC' => 'Venta en Consignación');
+  	if ($despnotent=="") return array('V' => 'Venta Directa', 'P' => 'Pedido', 'D' => 'Despacho'); //, 'VC' => 'Venta en Consignación');
+    else return array('V' => 'Venta Directa', 'P' => 'Pedido', 'D' => 'Nota de Entrega'); //, 'VC' => 'Venta en Consignación');
   }
 
    public static function ListaTipoPagoTicket()

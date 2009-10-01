@@ -20,12 +20,12 @@
      var solicitida=$(cantsol).value;
      var aajustar=$(id).value;
      var precioart=$(precio).value;
-     var referencia=$('faajuste_refaju').value;
+     var referencia=$('faajuste_codref').value;
      var tipref=$('faajuste_tipaju').value;
      var articuloaju=$(articulo).value;
      var canentart=cantidadEntregarArt(fil,articuloaju);
 
-     if ($(art).value != ''){
+     if ($(articulo).value != ''){
 	   if (!validarnumero(id))
 	   {
 	    alert_('Monto Inv&aacute;lido');

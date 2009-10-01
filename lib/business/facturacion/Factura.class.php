@@ -54,8 +54,8 @@ class Factura {
 
     if ($fafactur->getTipconpag()=='C') //Pago a Contado
     {
-      self::grabarIngreso($fafactur,$grid3);
-      self::grabarImpIng($fafactur);
+    //  self::grabarIngreso($fafactur,$grid3);
+    //  self::grabarImpIng($fafactur);
     }
 
     return true;
@@ -1051,7 +1051,7 @@ class Factura {
           	$montop=$x[$j]->getMonpag();
           	$nroreflib=$x[$j]->getNumero();
             $nrocue=$x[$j]->getNomban();
-            $tipmov=$x[$j]->getTippag();
+            $tipmov=$x[$j]->getCodmov();
             self::generaMovLib($fafactur,$descop,$montop,$nroreflib,$nrocue,$tipmov);
           }
         }
