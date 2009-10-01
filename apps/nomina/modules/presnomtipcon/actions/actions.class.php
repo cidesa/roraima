@@ -7,7 +7,7 @@
  * @subpackage presnomtipcon
  * @author     $Author$ <desarrollo@cidesa.com.ve>
  * @version SVN: $Id$
- * 
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -16,9 +16,9 @@ class presnomtipconActions extends autopresnomtipconActions
 
   public  $coderror1=-1;
 
-  
-  
-  
+
+
+
   /**
    *
    * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
@@ -35,12 +35,12 @@ class presnomtipconActions extends autopresnomtipconActions
     		$this->coderror1=465;
 			return false;
     	}
-			
-		
-		$this->configGrid_nomina();	
+
+
+		$this->configGrid_nomina();
         $grid_detalle=Herramientas::CargarDatosGrid($this,$this->obj_nomina,true);//0
         $grid_nomina=$grid_detalle[0];
-        $this->configGrid();		
+        $this->configGrid();
         $grid = Herramientas::CargarDatosGrid($this,$this->obj,true);
         if(empty( $grid[0]))
 			$this->coderror1=436;
@@ -72,7 +72,7 @@ class presnomtipconActions extends autopresnomtipconActions
 	  while ($s<count($x)){
 	  $desde=$x[$s]['desde'];#->getDesde();
 	  $hasta=$x[$s]['hasta'];#->getHasta();
-     if ($desde >= $hasta)
+     if ($desde > $hasta)
        {
        	$this->coderror1=180;
 		       	return false;
@@ -126,10 +126,10 @@ class presnomtipconActions extends autopresnomtipconActions
 		$j++;
 	  }}
 	  $s++;}
-	  
-	$this->configGrid_intereses();	
+
+	$this->configGrid_intereses();
     $grid_int=Herramientas::CargarDatosGridv2($this,$this->obj_intereses);//0
-    $z=$grid_int[0]; 
+    $z=$grid_int[0];
 	$r=0;
 	while ($r<count($z))
     {
@@ -137,7 +137,7 @@ class presnomtipconActions extends autopresnomtipconActions
 	  {
 	  	$this->coderror1= 463;
 	  	break;
-	  }	  	
+	  }
       if(!$z[$r]->getFechas())
 	  {
 	  	$this->coderror1= 463;
@@ -148,12 +148,12 @@ class presnomtipconActions extends autopresnomtipconActions
 	  	$this->coderror1= 463;
 	  	break;
 	  }
-	  $r++;	
+	  $r++;
 	}
-	
-	$this->configGrid_antiguedad();	
+
+	$this->configGrid_antiguedad();
     $grid_ant=Herramientas::CargarDatosGridv2($this,$this->obj_antiguedad);//0
-    $y=$grid_ant[0]; 
+    $y=$grid_ant[0];
 	$r=0;
 	while ($r<count($y))
     {
@@ -161,7 +161,7 @@ class presnomtipconActions extends autopresnomtipconActions
 	  {
 	  	$this->coderror1= 464;
 	  	break;
-	  }	  	
+	  }
       if(!$y[$r]->getFechas())
 	  {
 	  	$this->coderror1= 464;
@@ -175,7 +175,7 @@ class presnomtipconActions extends autopresnomtipconActions
 	  $r++;
 	}
 
-	  
+
 
     }else return false;
 //print $this->coderror1; exit;
@@ -320,7 +320,7 @@ class presnomtipconActions extends autopresnomtipconActions
 		$col6->setAlineacionContenido(Columna::CENTRO);
 		$col6->setNombreCampo('Diavac');
 		$col6->setHTML('type="text" size="10"');
-		
+
 		$col7 = new Columna('Dias Productividad');
 		$col7->setTipo(Columna::TEXTO);
 		$col7->setEsGrabable(true);
@@ -374,7 +374,7 @@ class presnomtipconActions extends autopresnomtipconActions
 		$this->obj = $opciones->getConfig($per);
 
 	}
-	
+
 	/**
    * Esta función permite definir la configuración del grid de datos
    * que contiene el formulario. Esta función debe ser llamada
@@ -438,7 +438,7 @@ class presnomtipconActions extends autopresnomtipconActions
 		$this->obj_intereses = $opciones->getConfig($per);
 
 	}
-	
+
 	/**
    * Esta función permite definir la configuración del grid de datos
    * que contiene el formulario. Esta función debe ser llamada
@@ -603,15 +603,15 @@ class presnomtipconActions extends autopresnomtipconActions
 		$p = new Criteria();
 		$p->add(NpasinomcontPeer::CODTIPCON,$var);
 		$arreglo = NpasinomcontPeer::doDelete($p);
-		
+
 		$p = new Criteria();
 		$p->add(NpintconPeer::CODCON,$var);
 		$arreglo = NpintconPeer::doDelete($p);
-		
+
 		$p = new Criteria();
 		$p->add(NpdiaantperPeer::CODCON,$var);
 		$arreglo = NpdiaantperPeer::doDelete($p);
-		
+
 		$nptipcon->delete();
 
   }
@@ -670,7 +670,7 @@ class presnomtipconActions extends autopresnomtipconActions
 
   }
     /**
-   * Actualiza la informacion que viene de la vista 
+   * Actualiza la informacion que viene de la vista
    * luego de un get/post en el objeto principal del modelo base del formulario.
    *
    */
@@ -728,7 +728,7 @@ class presnomtipconActions extends autopresnomtipconActions
     }
 	if (isset($nptipcon['fid']))
     {
-      $fid = 'S';    	 
+      $fid = 'S';
       $this->nptipcon->setFid(1);
     }
 	if (isset($nptipcon['fecdes']))
