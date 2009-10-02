@@ -5,8 +5,8 @@
  *
  * @package    Roraima
  * @subpackage presnomliquidacion
- * @author     $Author:(local) $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id:actions.class.php 33656M 2009-10-01 14:21:32Z (local) $
+ * @author     $Author:jlobaton $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id:actions.class.php 33711 2009-10-02 14:38:18Z jlobaton $
  *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -62,6 +62,7 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 	$totarr=0;
 	$this->salintdia = 0;
 	$this->salintdiaconcol = 0;
+	$factor = '';
 	if(!$estaliquidado)
 	{
     	$sql="select 1 as orden,
@@ -195,38 +196,21 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 			GROUP BY A.FECANT,B.CODPAR
 			HAVING
 			SUM(A.MONANT)<>0
-			
-			Union All 
+
+			Union All
 			SELECT 2 as orden,
 			SUM(0) as DIAS,
 			SUM(A.ADEPRE)*-1 AS MONTO,
 			(case when B.PERDES=B.PERHAS then 'ADELANTO DE INTERESES SOBRE PREST. SOCIALES ART. 108 '||B.PERDES else 'INTERESES SOBRE PREST. SOCIALES ART. 108 '||B.PERDES||' - '||B.PERHAS end ) AS DESCRIPCION,
-			B.CODPAR AS PARTIDA 
-			From NPIMPPRESOC A,NPDEFPRELIQ B 
-			where 
-			A.codemp='$codemp' AND 
-			B.CODNOM='$codnom' AND 
-			B.CODCON='001' AND 
-			TO_CHAR(A.FECFIN,'YYYY')>=B.PERDES AND 
-			TO_CHAR(A.FECFIN,'YYYY')<=B.PERHAS 
-			GROUP BY (case when B.PERDES=B.PERHAS then 'ADELANTO DE INTERESES SOBRE PREST. SOCIALES ART. 108 '||B.PERDES else 'INTERESES SOBRE PREST. SOCIALES ART. 108 '||B.PERDES||' - '||B.PERHAS end ),B.CODPAR 
-			HAVING
-			SUM(A.ADEPRE)<>0
-			
-			Union All 
-			SELECT 2 as orden,
-			SUM(0) as DIAS,
-			SUM(A.ADEPRE)*-1 AS MONTO,
-			(case when B.PERDES=B.PERHAS then 'ADELANTO DE INTERESES SOBRE PREST. SOCIALES ART. 108 '||B.PERDES else 'INTERESES SOBRE PREST. SOCIALES ART. 108 '||B.PERDES||' - '||B.PERHAS end ) AS DESCRIPCION,
-			B.CODPAR AS PARTIDA 
-			From NPIMPPRESOC A,NPDEFPRELIQ B 
-			where 
-			A.codemp='$codemp' AND 
-			B.CODNOM='$codnom' AND 
-			B.CODCON='001' AND 
-			TO_CHAR(A.FECFIN,'YYYY')>=B.PERDES AND 
-			TO_CHAR(A.FECFIN,'YYYY')<=B.PERHAS 
-			GROUP BY (case when B.PERDES=B.PERHAS then 'ADELANTO DE INTERESES SOBRE PREST. SOCIALES ART. 108 '||B.PERDES else 'INTERESES SOBRE PREST. SOCIALES ART. 108 '||B.PERDES||' - '||B.PERHAS end ),B.CODPAR 
+			B.CODPAR AS PARTIDA
+			From NPIMPPRESOC A,NPDEFPRELIQ B
+			where
+			A.codemp='$codemp' AND
+			B.CODNOM='$codnom' AND
+			B.CODCON='001' AND
+			TO_CHAR(A.FECFIN,'YYYY')>=B.PERDES AND
+			TO_CHAR(A.FECFIN,'YYYY')<=B.PERHAS
+			GROUP BY (case when B.PERDES=B.PERHAS then 'ADELANTO DE INTERESES SOBRE PREST. SOCIALES ART. 108 '||B.PERDES else 'INTERESES SOBRE PREST. SOCIALES ART. 108 '||B.PERDES||' - '||B.PERHAS end ),B.CODPAR
 			HAVING
 			SUM(A.ADEPRE)<>0
 			ORDER BY orden,DESCRIPCION DESC";
@@ -295,8 +279,8 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 		  }
 	}else
 	{
-		
-	  $sqldefesp = "select * from npdefespparpre where codnom='$codnom'";			
+
+	  $sqldefesp = "select * from npdefespparpre where codnom='$codnom'";
 			if (H::BuscarDatos($sqldefesp,$arrdefesp))
 			  if(is_numeric($arrdefesp[0]['factorbonfinanofra']) && $arrdefesp[0]['factorbonfinanofra']!=0)
 				$factor=$arrdefesp[0]['factorbonfinanofra'];
@@ -546,7 +530,7 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
           $per[$i]['perfin']=$arr[$cont]['perfin'];
    		  $per[$i]['diadis']=H::tofloat($arr[$cont]['diadis']);
           $per[$i]['diasbono']=H::tofloat($arr[$cont]['diasbono']);
-          $per[$i]['diacan']=$per[$i]['diadis']+$per[$i]['diasbono'];          
+          $per[$i]['diacan']=$per[$i]['diadis']+$per[$i]['diasbono'];
           $per[$i]['monto']=H::FormatoMonto($arr[$cont]['monto']);
           $per[$i]['id']=9;
           $i++;
@@ -740,8 +724,8 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 				$diaefec=$rs[0]["diasefectivo"];
 				/**ASIGNAMOS VALORES DE SUELDOS*/
 				#Ultimo sueldo del empleado
-				$antiguedad = H::DateDiff("yyyy", $fecing, date("Y-m-d"));		
-				
+				$antiguedad = H::DateDiff("yyyy", $fecing, date("Y-m-d"));
+
 				$sql= "select sum(ultsue) as ultsue from (
 				        Select coalesce(sum(MonAsi),0) as ultsue from NPSALINT a, npasipre b where CodEmp='$codemp' and
 						FECFINCON = (SELECT MAX(FECFINCON) FROM NPSALINT where CodEmp='$codemp' and
@@ -989,6 +973,8 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 				}
 				$js.="$('npliquidacion_det_salarioint').readOnly=false;";
 				$this->salintdiaconcol!=0 ? $js.="$('thsalintconcol').show();" : $js.="$('thsalintconcol').hide();";
+
+				$js = $js." ActualizarSaldosGrid('c',ArrTotales_c) ActualizarSaldosGrid('a',ArrTotales_a) ActualizarSaldosGrid('b',ArrTotales_b)";
 
 	        	$output = '[["npliquidacion_det_fecing","'.$fecing.'",""],["npliquidacion_det_feccor","'.$feccor.'",""],["npliquidacion_det_fecegr","'.$fecegr.'",""],'.
 					  '["npliquidacion_det_diaefe","'.$diaefec.'",""],["npliquidacion_det_mesefe","'.$mesefec.'",""],["npliquidacion_det_anoefe","'.$anoefec.'",""],'.
