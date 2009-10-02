@@ -974,7 +974,7 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 				$js.="$('npliquidacion_det_salarioint').readOnly=false;";
 				$this->salintdiaconcol!=0 ? $js.="$('thsalintconcol').show();" : $js.="$('thsalintconcol').hide();";
 
-				$js = $js." ActualizarSaldosGrid('c',ArrTotales_c) ActualizarSaldosGrid('a',ArrTotales_a) ActualizarSaldosGrid('b',ArrTotales_b)";
+				//$js = $js." ActualizarSaldosGrid('c',ArrTotales_c) ActualizarSaldosGrid('a',ArrTotales_a) ActualizarSaldosGrid('b',ArrTotales_b)";
 
 	        	$output = '[["npliquidacion_det_fecing","'.$fecing.'",""],["npliquidacion_det_feccor","'.$feccor.'",""],["npliquidacion_det_fecegr","'.$fecegr.'",""],'.
 					  '["npliquidacion_det_diaefe","'.$diaefec.'",""],["npliquidacion_det_mesefe","'.$mesefec.'",""],["npliquidacion_det_anoefe","'.$anoefec.'",""],'.
