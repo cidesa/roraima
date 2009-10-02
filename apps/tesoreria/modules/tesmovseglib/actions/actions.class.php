@@ -303,14 +303,16 @@ class tesmovseglibActions extends autotesmovseglibActions
               $criterio="SELECT to_char(feclib,'dd/mm/yyyy') as feclib FROM TSMOVLIB WHERE NUMCUE='".$this->tsmovlib->getNumcue()."' AND REFLIB='A".$this->tsmovlib->getReflib()."' and tipmov = 'ANUC'";
             }
         }
-      }
 
-      if (Herramientas::BuscarDatos($criterio,&$tsmovlibA))
+        if (Herramientas::BuscarDatos($criterio,&$tsmovlibA))
         {
           $this->color='#CC0000';
           $this->eti='ANULADO EL '.$tsmovlibA[0]["feclib"];
           $this->anular='N';
         }
+
+      }
+
 
       $sql="select gencomadi from opdefemp";
       if (Herramientas::BuscarDatos($sql,&$opdefemp))
