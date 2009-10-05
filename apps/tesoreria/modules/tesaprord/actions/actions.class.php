@@ -57,6 +57,7 @@ class tesaprordActions extends autotesaprordActions
   {
     $c = new Criteria();
     $c->add(OpordpagPeer::STATUS,'N');
+    $c->add(OpordpagPeer::APROBADOORD,null);
     $c->add(OpordpagPeer::APROBADOTES,null);
     $c->add(OpordpagPeer::NUMCHE,null);
     $detalle = OpordpagPeer::doSelect($c);

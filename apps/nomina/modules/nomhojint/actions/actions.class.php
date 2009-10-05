@@ -204,6 +204,20 @@ class nomhojintActions extends autonomhojintActions
     return $bancos;
   }
 
+   public function CargarTipEmp()
+  {
+    $c = new Criteria();
+    $lista_tipemp = NptipempPeer::doSelect($c);
+
+    $tipemp = array();
+
+    foreach($lista_tipemp as $obj_tipemp)
+    {
+      $tipemp += array($obj_tipemp->getCodtipemp() => $obj_tipemp->getDestipemp());
+    }
+    return $tipemp;
+  }
+
   public function CargarGrupoL()
   {
     $c = new Criteria();
@@ -291,6 +305,7 @@ class nomhojintActions extends autonomhojintActions
     $this->listaformapago= Constantes::ListaFormaPago();
     $this->bancos = $this->CargarBancos();
     $this->listatipocuenta= Constantes::ListaTipoCuenta();
+    $this->listtipemp=$this->CargarTipEmp();
     $this->configGrid();
     $this->configGrid2();
     $this->configGrid3();
@@ -443,6 +458,7 @@ $this->Bitacora('Guardo');
     $this->listaformapago= Constantes::ListaFormaPago();
     $this->bancos = $this->CargarBancos();
     $this->listatipocuenta= Constantes::ListaTipoCuenta();
+    $this->listtipemp=$this->CargarTipEmp();
     $this->configGrid();
     $this->configGrid2();
     $this->configGrid3();
@@ -979,6 +995,18 @@ $this->Bitacora('Guardo');
     {
       $this->nphojint->setDiaadiacu($nphojint['diaadiacu']);
     }
+    if (isset($nphojint['codtipemp']))
+    {
+      $this->nphojint->setCodtipemp($nphojint['codtipemp']);
+    }
+    if (isset($nphojint['desniv']))
+    {
+      $this->nphojint->setDesniv($nphojint['desniv']);
+    }
+    if (isset($nphojint['desniv2']))
+    {
+      $this->nphojint->setDesniv2($nphojint['desniv2']);
+    }
   }
 
   protected function getNphojintOrCreate($id = 'id')
@@ -1301,11 +1329,20 @@ $this->Bitacora('Guardo');
     $col6->setNombreCampo('anocul');
 
     $col7 = new Columna('Activo');
-  $col7->setTipo(Columna::CHECK);
-  $col7->setEsGrabable(true);
-  $col7->setNombreCampo('activo');
-  $col7->setHTML(' ');
-  $col7->setJScript('onClick= "activar_check(this.id)"');
+    $col7->setTipo(Columna::CHECK);
+    $col7->setEsGrabable(true);
+    $col7->setNombreCampo('activo');
+    $col7->setHTML(' ');
+    $col7->setJScript('onClick= "activar_check(this.id)"');
+
+    $col8 = new Columna('Fecha de Entrega Titulo');
+    $col8->setTipo(Columna::FECHA);
+    $col8->setAlineacionObjeto(Columna::CENTRO);
+    $col8->setAlineacionContenido(Columna::CENTRO);
+    $col8->setEsGrabable(true);
+    $col8->setHTML(' ');
+    $col8->setVacia(true);
+    $col8->setNombreCampo('fecenttit');
 
     $opciones->addColumna($col1);
     $opciones->addColumna($col2);
@@ -1314,6 +1351,7 @@ $this->Bitacora('Guardo');
     $opciones->addColumna($col5);
     $opciones->addColumna($col6);
     $opciones->addColumna($col7);
+    $opciones->addColumna($col8);
 
     $this->obj4 = $opciones->getConfig($per);
   }
@@ -1505,6 +1543,20 @@ $this->Bitacora('Guardo');
     $annopub=Nomina::obtenerEdad($this->getRequestParameter('codigo'));
   	$output = '[["'.$cajtexmos.'","'.$annopub.'",""]]';
   }
+  else if ($this->getRequestParameter('ajax')=='4')
+  {
+  	$r= new Criteria();
+  	$r->add(NpestorgPeer::CODNIV,$this->getRequestParameter('codigo'));
+  	$datos= NpestorgPeer::doSelectOne($r);
+  	if ($datos)
+  	{
+      $dato=$datos->getDesniv();
+    }else
+  	{  $dato="";
+  		$javascript="alert('El Nivel Organizacional no existe'); $('$cajtextcom').value=''; ";
+  	}
+  	$output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""]]';
+  }
 
   $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
   return sfView::HEADER_ONLY;
@@ -1603,6 +1655,7 @@ $this->Bitacora('Guardo');
       'nphojint{antacu}' => 'Anticipos Acumulados:',
       'nphojint{diaacu}' => 'Dias Acumulados:',
       'nphojint{diaadiacu}' => 'Dias Adicionales Acumulados:',
+      'nphojint{codtipemp}' => 'Tipo de Empleado:',
 
 
 

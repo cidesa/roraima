@@ -1,0 +1,27 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Nptipemp
+    theme:            cidesaGenerator
+    fields:
+      codtipemp:    { name: Código, params: maxlength=3 }
+      destipemp:    { name: Descripción, params: maxlength=100 }
+    list:
+      title:          Tipos de Empleados
+      filters:        [codtipemp, destipemp]
+      display:        [=codtipemp, destipemp]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+    edit:
+      title:          Edición de Tipos de Empleados
+      display:        [codtipemp, destipemp]
+      fields:
+        codtipemp:
+          params:     maxlength=3,size=5 onBlur  = "$(this.id).value=$(this.id).value.pad(3,'0',0)"
+      actions:
+        _list:        ~
+        _save:        ~
+        _create:      ~
+        _delete:      ~

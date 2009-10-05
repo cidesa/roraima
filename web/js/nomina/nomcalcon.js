@@ -508,7 +508,7 @@
 			}
 			if (dato != "SIC" &&  dato != "SIC" && dato != "SIM" && dato != "SC" && dato != "SCAR" && dato != "TAF" && dato != "NL" && dato != "NLP" && dato != "NS" &&
 			    dato != "AD" && dato != "DC" && dato != "DV" && dato != "DBV" && dato != "PV" && dato != "ADV" && dato != "ADF" && dato != "AM" && dato != "CATRAB" &&
-			    dato != "AC" && dato != "AA" && dato != "AAP" && dato != "CC" && dato != "ED" && dato != "EE"  && dato != "FFRAC" && dato != "FINT" && dato != "ACUC" &&
+			    dato != "AC" && dato != "AA" && dato != "AET" && dato != "AAP" && dato != "CC" && dato != "ED" && dato != "EE"  && dato != "FFRAC" && dato != "FINT" && dato != "ACUC" &&
 			    dato != "MESF"  && dato != "DIAF" && dato != "ANOF" && dato != "NHGR" && dato != "NHIJ" && dato != "PPROF" && dato != "PHIJO" && dato != "MCES" &&
 			    dato != "ADIC")
 			{
@@ -907,7 +907,7 @@
         	{
 				$(id).setAttribute('maxlength','1');
         	}
-        	if ($(idnew).value=="E08" || $(idnew).value=="AA" || $(idnew).value=="AAP" || $(idnew).value=="CC" || $(idnew).value=="NHIJ" ||
+        	if ($(idnew).value=="E08" || $(idnew).value=="AA" || $(idnew).value=="AET" || $(idnew).value=="AAP" || $(idnew).value=="CC" || $(idnew).value=="NHIJ" ||
         	$(idnew).value=="NHGR" || $(idnew).value=="MESF" || $(idnew).value=="DIAF" || $(idnew).value=="CATRAB" || $(idnew).value=="AC" )
         	{
 				$(id).setAttribute('maxlength','2');
@@ -1002,7 +1002,7 @@
 				   $(id).value="";
 				}
         	}else
-        	if (($(idnew).value=="E08" || $(idnew).value=="AA" || $(idnew).value=="AAP" || $(idnew).value=="CC" || $(idnew).value=="NHIJ" ||
+        	if (($(idnew).value=="E08" || $(idnew).value=="AA" || $(idnew).value=="AET" || $(idnew).value=="AAP" || $(idnew).value=="CC" || $(idnew).value=="NHIJ" ||
         	$(idnew).value=="NHGR" || $(idnew).value=="MESF" || $(idnew).value=="DIAF" || $(idnew).value=="CATRAB" || $(idnew).value=="AC")&&  $(id).value!='')
         	{
         		var num = parseInt($(id).value);

@@ -41,6 +41,10 @@ abstract class BaseNpinfcur extends BaseObject  implements Persistent {
 
 
 	
+	protected $fecenttit;
+
+
+	
 	protected $id;
 
 	
@@ -105,6 +109,28 @@ abstract class BaseNpinfcur extends BaseObject  implements Persistent {
     return trim($this->activo);
 
   }
+  
+  public function getFecenttit($format = 'Y-m-d')
+  {
+
+    if ($this->fecenttit === null || $this->fecenttit === '') {
+      return null;
+    } elseif (!is_int($this->fecenttit)) {
+            $ts = adodb_strtotime($this->fecenttit);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecenttit] as date/time value: " . var_export($this->fecenttit, true));
+      }
+    } else {
+      $ts = $this->fecenttit;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
   
   public function getId()
   {
@@ -193,6 +219,23 @@ abstract class BaseNpinfcur extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setFecenttit($v)
+	{
+
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecenttit] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecenttit !== $ts) {
+      $this->fecenttit = $ts;
+      $this->modifiedColumns[] = NpinfcurPeer::FECENTTIT;
+    }
+
+	} 
+	
 	public function setId($v)
 	{
 
@@ -223,7 +266,9 @@ abstract class BaseNpinfcur extends BaseObject  implements Persistent {
 
       $this->activo = $rs->getString($startcol + 7);
 
-      $this->id = $rs->getInt($startcol + 8);
+      $this->fecenttit = $rs->getDate($startcol + 8, null);
+
+      $this->id = $rs->getInt($startcol + 9);
 
       $this->resetModified();
 
@@ -231,7 +276,7 @@ abstract class BaseNpinfcur extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 9; 
+            return $startcol + 10; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Npinfcur object", $e);
     }
@@ -403,6 +448,9 @@ abstract class BaseNpinfcur extends BaseObject  implements Persistent {
 				return $this->getActivo();
 				break;
 			case 8:
+				return $this->getFecenttit();
+				break;
+			case 9:
 				return $this->getId();
 				break;
 			default:
@@ -423,7 +471,8 @@ abstract class BaseNpinfcur extends BaseObject  implements Persistent {
 			$keys[5] => $this->getAnocul(),
 			$keys[6] => $this->getCodprofes(),
 			$keys[7] => $this->getActivo(),
-			$keys[8] => $this->getId(),
+			$keys[8] => $this->getFecenttit(),
+			$keys[9] => $this->getId(),
 		);
 		return $result;
 	}
@@ -464,6 +513,9 @@ abstract class BaseNpinfcur extends BaseObject  implements Persistent {
 				$this->setActivo($value);
 				break;
 			case 8:
+				$this->setFecenttit($value);
+				break;
+			case 9:
 				$this->setId($value);
 				break;
 		} 	}
@@ -481,7 +533,8 @@ abstract class BaseNpinfcur extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[5], $arr)) $this->setAnocul($arr[$keys[5]]);
 		if (array_key_exists($keys[6], $arr)) $this->setCodprofes($arr[$keys[6]]);
 		if (array_key_exists($keys[7], $arr)) $this->setActivo($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setId($arr[$keys[8]]);
+		if (array_key_exists($keys[8], $arr)) $this->setFecenttit($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setId($arr[$keys[9]]);
 	}
 
 	
@@ -497,6 +550,7 @@ abstract class BaseNpinfcur extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(NpinfcurPeer::ANOCUL)) $criteria->add(NpinfcurPeer::ANOCUL, $this->anocul);
 		if ($this->isColumnModified(NpinfcurPeer::CODPROFES)) $criteria->add(NpinfcurPeer::CODPROFES, $this->codprofes);
 		if ($this->isColumnModified(NpinfcurPeer::ACTIVO)) $criteria->add(NpinfcurPeer::ACTIVO, $this->activo);
+		if ($this->isColumnModified(NpinfcurPeer::FECENTTIT)) $criteria->add(NpinfcurPeer::FECENTTIT, $this->fecenttit);
 		if ($this->isColumnModified(NpinfcurPeer::ID)) $criteria->add(NpinfcurPeer::ID, $this->id);
 
 		return $criteria;
@@ -543,6 +597,8 @@ abstract class BaseNpinfcur extends BaseObject  implements Persistent {
 		$copyObj->setCodprofes($this->codprofes);
 
 		$copyObj->setActivo($this->activo);
+
+		$copyObj->setFecenttit($this->fecenttit);
 
 
 		$copyObj->setNew(true);

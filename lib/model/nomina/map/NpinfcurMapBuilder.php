@@ -50,6 +50,8 @@ class NpinfcurMapBuilder {
 
 		$tMap->addColumn('ACTIVO', 'Activo', 'string', CreoleTypes::VARCHAR, false, 1);
 
+		$tMap->addColumn('FECENTTIT', 'Fecenttit', 'int', CreoleTypes::DATE, false, null);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

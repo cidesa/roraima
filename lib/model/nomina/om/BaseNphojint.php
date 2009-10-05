@@ -389,6 +389,10 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 
 
 	
+	protected $codtipemp;
+
+
+	
 	protected $id;
 
 	
@@ -1209,6 +1213,13 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
   {
 
     return trim($this->numcueaho);
+
+  }
+  
+  public function getCodtipemp()
+  {
+
+    return trim($this->codtipemp);
 
   }
   
@@ -2232,6 +2243,16 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setCodtipemp($v)
+	{
+
+    if ($this->codtipemp !== $v) {
+        $this->codtipemp = $v;
+        $this->modifiedColumns[] = NphojintPeer::CODTIPEMP;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -2436,7 +2457,9 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 
       $this->numcueaho = $rs->getString($startcol + 94);
 
-      $this->id = $rs->getInt($startcol + 95);
+      $this->codtipemp = $rs->getString($startcol + 95);
+
+      $this->id = $rs->getInt($startcol + 96);
 
       $this->resetModified();
 
@@ -2444,7 +2467,7 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 96; 
+            return $startcol + 97; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Nphojint object", $e);
     }
@@ -2893,6 +2916,9 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 				return $this->getNumcueaho();
 				break;
 			case 95:
+				return $this->getCodtipemp();
+				break;
+			case 96:
 				return $this->getId();
 				break;
 			default:
@@ -3000,7 +3026,8 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 			$keys[92] => $this->getUbifis(),
 			$keys[93] => $this->getTipcueaho(),
 			$keys[94] => $this->getNumcueaho(),
-			$keys[95] => $this->getId(),
+			$keys[95] => $this->getCodtipemp(),
+			$keys[96] => $this->getId(),
 		);
 		return $result;
 	}
@@ -3302,6 +3329,9 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 				$this->setNumcueaho($value);
 				break;
 			case 95:
+				$this->setCodtipemp($value);
+				break;
+			case 96:
 				$this->setId($value);
 				break;
 		} 	}
@@ -3406,7 +3436,8 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[92], $arr)) $this->setUbifis($arr[$keys[92]]);
 		if (array_key_exists($keys[93], $arr)) $this->setTipcueaho($arr[$keys[93]]);
 		if (array_key_exists($keys[94], $arr)) $this->setNumcueaho($arr[$keys[94]]);
-		if (array_key_exists($keys[95], $arr)) $this->setId($arr[$keys[95]]);
+		if (array_key_exists($keys[95], $arr)) $this->setCodtipemp($arr[$keys[95]]);
+		if (array_key_exists($keys[96], $arr)) $this->setId($arr[$keys[96]]);
 	}
 
 	
@@ -3509,6 +3540,7 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(NphojintPeer::UBIFIS)) $criteria->add(NphojintPeer::UBIFIS, $this->ubifis);
 		if ($this->isColumnModified(NphojintPeer::TIPCUEAHO)) $criteria->add(NphojintPeer::TIPCUEAHO, $this->tipcueaho);
 		if ($this->isColumnModified(NphojintPeer::NUMCUEAHO)) $criteria->add(NphojintPeer::NUMCUEAHO, $this->numcueaho);
+		if ($this->isColumnModified(NphojintPeer::CODTIPEMP)) $criteria->add(NphojintPeer::CODTIPEMP, $this->codtipemp);
 		if ($this->isColumnModified(NphojintPeer::ID)) $criteria->add(NphojintPeer::ID, $this->id);
 
 		return $criteria;
@@ -3729,6 +3761,8 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 		$copyObj->setTipcueaho($this->tipcueaho);
 
 		$copyObj->setNumcueaho($this->numcueaho);
+
+		$copyObj->setCodtipemp($this->codtipemp);
 
 
 		if ($deepCopy) {
