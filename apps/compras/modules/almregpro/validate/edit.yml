@@ -9,6 +9,7 @@ methods:
    - "caprovee{fecinscir}"
    - "caprovee{fecreg}"
    - "caprovee{fecven}"
+   - "caprovee{nitpro}"
 
 names:
   caprovee{codpro}:
@@ -20,6 +21,10 @@ names:
     required:  Yes
     required_msg: El Nombre no puedo estar en Blanco.
     validators: Validator_nompro
+
+  caprovee{nitpro}:
+    required:  Yes
+    required_msg: Debe seleccionar el Tipo de Persona no puedo estar en Blanco.
 
   caprovee{rifpro}:
     required:  Yes
