@@ -79,6 +79,15 @@
     </div>
     </div>
 
+  <div class="form-row">
+    <label for="filters_codconcepto"><?php echo __('Concepto de Pago:') ?></label>
+    <div class="content">
+    <?php echo input_tag('filters[codconcepto]', isset($filters['codconcepto']) ? $filters['codconcepto'] : null, array (
+  'size' => 4,
+)) ?>
+    </div>
+    </div>
+
       </fieldset>
 
   <ul class="sf_admin_actions">

@@ -21,7 +21,9 @@ generator:
     list:
       title:          Definición de Conceptos
       display:        [=codcon, nomcon, codpar, nompar]
-      filters:		  [codcon, nomcon, codpar]
+      filters:		  [codcon, nomcon, codpar, opecon]
+      fields:
+        opecon:  { name: Tipo de Concepto, help: A(signación) D(educción) P(Aporte Patronal)}
       max_per_page:	  10
       sort:  codcon
       object_actions:

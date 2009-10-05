@@ -3691,6 +3691,9 @@ propel:
     numcueaho:
       type: VARCHAR
       size: 31
+    codtipemp:
+      type: VARCHAR
+      size: 3
     id:
       type: INTEGER
       required: true
@@ -4062,6 +4065,8 @@ propel:
     activo:
       type: VARCHAR
       size: 1
+    fecenttit:
+      type: DATE
     id:
       type: INTEGER
       required: true
@@ -7125,6 +7130,21 @@ propel:
     afecta:
       type: VARCHAR
       size: 3
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  nptipemp:
+    #_attributes:
+      #idMethod: native
+    codtipemp:
+      type: VARCHAR
+      size: 3
+      required: true
+    destipemp:
+      type: VARCHAR
+      size: 100
       required: true
     id:
       type: INTEGER

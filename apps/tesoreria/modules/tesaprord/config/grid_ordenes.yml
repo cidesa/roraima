@@ -7,7 +7,7 @@ opciones:                  # Opciones generales
   titulo:                  ' '
   htmltotalfilas:          ' '
 1:       # Columna 1
-  titulo:                  Aprobar/Desaprobar
+  titulo:                  Aprobar
   tipo:                    k
   nombrecampo:             aprobadoord
   esgrabable:			   true

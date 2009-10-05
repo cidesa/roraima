@@ -1756,6 +1756,22 @@ class Nomina {
         	$valor = 0;
 		return $valor;
         break;
+      case "AET" :
+        $d= new Criteria();
+        $d->add(NpinfcurPeer::CODEMP,$empleado);
+        $d->add(NpinfcurPeer::ACTIVO,'1');
+        $reg= NpinfcurPeer::doSelectOne($d);
+        if ($reg)
+        {
+        	$feenttit=$reg->getFecenttit();
+        }else $feenttit='';
+		$sql="select to_char(age(to_date('$fecnom','yyyy-mm-dd'),to_date('$feenttit','yyyy-mm-dd')),'YY') as ano";
+		if (Herramientas :: BuscarDatos($sql, & $tabla)) {
+			$valor = intval($tabla[0]['ano']);
+		}else
+        	$valor = 0;
+		return $valor;
+        break;
 
       case "CATRAB" :
         $sql = "Select ultfec from NPNomina where CodNom='" . $nomina . "'";
@@ -3284,8 +3300,6 @@ class Nomina {
         }
         return $valor;
         break;
-      case "AM" :
-
        case "AM" :
 		$valorano=0;
 		$sql="select to_char(age(to_date('$profec','yyyy-mm-dd'),to_date('$fechaing','yyyy-mm-dd')),'YY') as ano";
@@ -3300,6 +3314,7 @@ class Nomina {
 		$valor = ($valorano*12)+$valormes;
 		return $valor;
         #$valor = Herramientas :: dateDiff('m', $fechaing, $fecnom);
+        break;
       case "AAP" :
 
         if (strrpos($hasta, "/")) {
@@ -3426,6 +3441,23 @@ class Nomina {
       case "AA" :
         // ????????? año bisiesto ojoooooooooo cambiar
 		$sql="select to_char(age(to_date('$profec','yyyy-mm-dd'),to_date('$fechaing','yyyy-mm-dd')),'YY') as ano";
+		if (Herramientas :: BuscarDatos($sql, & $tabla)) {
+			$valor = intval($tabla[0]['ano']);
+		}else
+        	$valor = 0;
+		return $valor;
+        break;
+      case "AET" :
+        ///Funcion calcule los años de haber entregado el titulo fondo negro Barcelona
+        $d= new Criteria();
+        $d->add(NpinfcurPeer::CODEMP,$empleado);
+        $d->add(NpinfcurPeer::ACTIVO,'1');
+        $reg= NpinfcurPeer::doSelectOne($d);
+        if ($reg)
+        {
+        	$feenttit=$reg->getFecenttit();
+        }else $feenttit='';
+		$sql="select to_char(age(to_date('$fecnom','yyyy-mm-dd'),to_date('$feenttit','yyyy-mm-dd')),'YY') as ano";
 		if (Herramientas :: BuscarDatos($sql, & $tabla)) {
 			$valor = intval($tabla[0]['ano']);
 		}else
@@ -5740,7 +5772,6 @@ class Nomina {
 	  {
 		  $anofin = ((int)$anohoy)-1;
 	  }
-
 
       $i = 0;
 

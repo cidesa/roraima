@@ -10,8 +10,8 @@ generator:
       nomcon: { name: Descripción Concepto }
     list:
       title:          Conceptos para el Salario Integral
+      display:        [=codnom, nomnom]
       filters:        [codnom, nomnom]
-      display:        [=codnom, =nomnom]
       max_per_page:   20
       sort:     codnom
     edit:
