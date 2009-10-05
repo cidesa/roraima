@@ -327,11 +327,17 @@ $value = object_input_tag($nphojint, 'getPorseghcm', array (
   'maxlength' => $lonnivel,
   'control_name' => 'nphojint[codniv]',
   'onKeyPress' => "javascript:cadena=rayaenter(event,this.value);",
-  'onBlur' => "nivel(event);",
+  'onBlur' => "nivel(event,1);",
   'onKeyDown' => "javascript:return dFilter (event.keyCode, this,'$mascaranivel')",
 
+)); echo $value ? $value : '&nbsp;' ?></div></th>
+   <th>&nbsp;&nbsp;&nbsp;<?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Npestorg_Nomhojint/clase/Npestorg/frame/sf_admin_edit_form/obj1/nphojint_codniv/obj2/nphojint_desniv/campo1/codniv/campo2/desniv/param1/'.$lonnivel)?></th>
+   <th> <?php $value = object_input_tag($nphojint, 'getDesniv', array (
+  'readonly' => true,
+  'size' => 60,
+  'control_name' => 'nphojint[desniv]',
 )); echo $value ? $value : '&nbsp;' ?></th>
-   <th>&nbsp;&nbsp;&nbsp;<?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Npestorg_Nomhojint/clase/Npestorg/frame/sf_admin_edit_form/obj1/nphojint_codniv/campo1/codniv/param1/'.$lonnivel)?></th>
+
   </tr>
  </table>
 
@@ -403,19 +409,44 @@ $value = object_input_tag($nphojint, 'getPorseghcm', array (
     </div>
 
 <br>
-
+<table>
+<tr>
+<th>
  <?php echo label_for('nphojint[ubifis]', __($labels['nphojint{ubifis}']), 'class="required" style="width: 150px"') ?>
   <div class="content<?php if ($sf_request->hasError('nphojint{ubifis}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('nphojint{ubifis}')): ?>
     <?php echo form_error('nphojint{ubifis}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_textarea_tag($nphojint, 'getUbifis', array (
-  'size' => '80x2',
-  'maxlength' => 100,
+ <?php $value = object_input_tag($nphojint, 'getUbifis', array (
+  'size' => 20,
+  'maxlength' => $lonnivel,
   'control_name' => 'nphojint[ubifis]',
-)); echo $value ? $value : '&nbsp;' ?>
+  'onKeyPress' => "javascript:cadena=rayaenter(event,this.value);",
+  'onBlur' => "nivel(event,2);",
+  'onKeyDown' => "javascript:return dFilter (event.keyCode, this,'$mascaranivel')",
 
+)); echo $value ? $value : '&nbsp;' ?></div></th>
+   <th>&nbsp;&nbsp;&nbsp;<?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Npestorg_Nomhojint/clase/Npestorg/frame/sf_admin_edit_form/obj1/nphojint_ubifis/obj2/nphojint_desniv2/campo1/codniv/campo2/desniv/param1/'.$lonnivel)?></th>
+   <th> <?php $value = object_input_tag($nphojint, 'getDesniv2', array (
+  'readonly' => true,
+  'size' => 60,
+  'control_name' => 'nphojint[desniv2]',
+)); echo $value ? $value : '&nbsp;' ?></th>
+
+  </tr>
+ </table>
+
+<br>
+
+ <?php echo label_for('nphojint[codtipemp]', __($labels['nphojint{codtipemp}']), 'class="required" style="width: 150px"') ?>
+  <div class="content<?php if ($sf_request->hasError('nphojint{codtipemp}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('nphojint{codtipemp}')): ?>
+    <?php echo form_error('nphojint{codtipemp}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php echo select_tag('nphojint[codtipemp]', options_for_select($listtipemp,$nphojint->getCodtipemp(),'include_custom=Seleccione Uno')) ?>
+    </div>
 </div>
 </fieldset>
 
@@ -1472,13 +1503,31 @@ function reingreso(e,id)
   }
 }
 
-function nivel(e)
+function nivel(e,numero)
 {
   var longitud='<?php echo $lonnivel?>';
-  if (($('nphojint_codniv').value.length < longitud) && ($('nphojint_codniv').value!=''))
+  if (numero==1){
+	  if (($('nphojint_codniv').value.length < longitud) && ($('nphojint_codniv').value!=''))
+	  {
+	    $('nphojint_codniv').value = '';
+	    alert('El nivel organizacional no es de ultimo Nivel');
+	  }else{
+	    var cod=$('nphojint_codniv').value;
+	    var cajamos='nphojint_desniv';
+	    var cajacom='nphojint_codniv';
+	    new Ajax.Request(getUrlModuloAjax(), {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=4&cajtexmos='+cajamos+'&cajtexcom='+cajacom+'&codigo='+cod})
+	  }
+  }else{
+  	if (($('nphojint_ubifis').value.length < longitud) && ($('nphojint_ubifis').value!=''))
   {
-    $('nphojint_codniv').values = '';
+    $('nphojint_ubifis').value = '';
     alert('El nivel organizacional no es de ultimo Nivel');
+  }else{
+    var cod=$('nphojint_ubifis').value;
+    var cajamos='nphojint_desniv2';
+    var cajacom='nphojint_ubifis';
+    new Ajax.Request(getUrlModuloAjax(), {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=4&cajtexmos='+cajamos+'&cajtexcom='+cajacom+'&codigo='+cod})
+  }
   }
 }
 
