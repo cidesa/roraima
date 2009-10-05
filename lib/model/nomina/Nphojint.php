@@ -263,5 +263,17 @@ class Nphojint extends BaseNphojint
 			return  count($auxnom)>2 ? $auxnom[1] : ' ';
 		}
     }
-	
+
+	public function getDesniv()
+	{
+		return Herramientas::getX('CODNIV', 'Npestorg', 'Desniv',self::getCodniv());
+
+	}
+
+	public function getDesniv2()
+	{
+		return Herramientas::getX('CODNIV', 'Npestorg', 'Desniv',self::getUbifis());
+
+	}
+
 }
