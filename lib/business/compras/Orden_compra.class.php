@@ -1356,42 +1356,101 @@ class Orden_compra
           {
               if ($caordcom->getOrdcom()=='########')
               {
-            $encontrado=false;
-            while (!$encontrado)
-            {
-              $numero=str_pad($r, 8, '0', STR_PAD_LEFT);
-                  if (($caordcom->getTipord()=='S') || ($caordcom->getTipord()=='T'))
-                  $numero='OS'.(substr($numero,2,strlen($numero)));
-                else
-                    $numero='OC'.(substr($numero,2,strlen($numero)));
-                $sql="select ordcom from caordcom where ordcom='".$numero."'";
-                if (Herramientas::BuscarDatos($sql,&$result))
-                {
-                  $r=$r+1;
-                }
-                else
-                {
-                  $encontrado=true;
-                }
-            }//while (!$encontrado)
+              	  $valido=false;
+              	  $longitud='8';
+              	  $nroorden=0;
+              	  $formato='';
+			      $c = new Criteria();
+			      $c->add(ContabaPeer::CODEMP,'001');
+			      $per = ContabaPeer::doSelectOne($c);
+
+			      if ($per->getCorcomp()=='AAMM####'){
+			      	$formato = date('ym');
+			      	$mes=date('m');
+			      	$longitud='4';
+			      	$sql="select substring(ordcom,5,4) as num from caordcom where substring(ordcom,3,2)='".$mes."' order by fecord desc limit 1";
+			      	if (Herramientas::BuscarDatos($sql,&$result))
+			      	{
+			      	  $cor=$result[0]["num"]+1;
+			      	}else $cor=1;
+
+			      	while(!$valido){
+				     $nroorden = $formato.str_pad((string)$cor, $longitud, "0", STR_PAD_LEFT);
+
+				      $c = new Criteria();
+				      $c->add(CaordcomPeer::ORDCOM,$nroorden);
+				      $clase = CaordcomPeer::doSelectOne($c);
+				      if(!$clase){
+				        $valido = true;
+				      }else { $cor=$cor +1;}
+			      	}
+			      	$caordcom->setOrdcom($nroorden);
+
+			      }elseif ($per->getCorcomp()=='MMAA####'){
+			      	$formato = date('my');
+					$longitud='4';
+					$mes=date('m');
+			      	$sql="select substring(ordcom,5,4) as num from caordcom where substring(ordcom,1,2)='".$mes."' order by fecord desc limit 1";
+			      	if (Herramientas::BuscarDatos($sql,&$result))
+			      	{
+			      	  $cor=$result[0]["num"]+1;
+			      	}else $cor=1;
+
+			      	while(!$valido){
+				     $nroorden = $formato.str_pad((string)$cor, $longitud, "0", STR_PAD_LEFT);
+
+				      $c = new Criteria();
+				      $c->add(CaordcomPeer::ORDCOM,$nroorden);
+				      $clase = CaordcomPeer::doSelectOne($c);
+				      if(!$clase){
+				        $valido = true;
+				      }else { $cor=$cor +1;}
+			      	}
+			      	$caordcom->setOrdcom($nroorden);
+
+			      }else{
+	            $encontrado=false;
+	            while (!$encontrado)
+	            {
+	              $numero=str_pad($r, 8, '0', STR_PAD_LEFT);
+	                  if (($caordcom->getTipord()=='S') || ($caordcom->getTipord()=='T'))
+	                  $numero='OS'.(substr($numero,2,strlen($numero)));
+	                else
+	                    $numero='OC'.(substr($numero,2,strlen($numero)));
+	                $sql="select ordcom from caordcom where ordcom='".$numero."'";
+	                if (Herramientas::BuscarDatos($sql,&$result))
+	                {
+	                  $r=$r+1;
+	                }
+	                else
+	                {
+	                  $encontrado=true;
+	                }
+	            }//while (!$encontrado)
                 $caordcom->setOrdcom(str_pad($r, 8, '0', STR_PAD_LEFT));
                 Herramientas::getSalvarCorrelativo($tipord,'cacorrel','cacorrel',$r,&$msg);
                 //$caordcom->setOrdcom(Herramientas::getBuscar_correlativo($caordcom->getOrdcom(),'cadefart',$tipord,'caordcom','ordcom'));
+
+                if (($caordcom->getTipord()=='S') || ($caordcom->getTipord()=='T'))
+                 $caordcom->setOrdcom('OS'.substr($caordcom->getOrdcom(), 2, 6));
+                else
+                 $caordcom->setOrdcom('OC'.substr($caordcom->getOrdcom(), 2, 6));
+              }
               }
               else
               {
                 $caordcom->setOrdcom(str_replace('#','0',$caordcom->getOrdcom()));
                 $caordcom->setOrdcom(str_pad($caordcom->getOrdcom(), 8, '0', STR_PAD_LEFT));
                 //$caordcom->setOrdcom(Herramientas::getBuscar_correlativo($caordcom->getOrdcom(),'cadefart',$tipord,'caordcom','ordcom'));
+
+                if (($caordcom->getTipord()=='S') || ($caordcom->getTipord()=='T'))
+		          $caordcom->setOrdcom('OS'.substr($caordcom->getOrdcom(), 2, 6));
+		        else
+		          $caordcom->setOrdcom('OC'.substr($caordcom->getOrdcom(), 2, 6));
               }
            }
 
-            if (($caordcom->getTipord()=='S') || ($caordcom->getTipord()=='T'))
-              $caordcom->setOrdcom('OS'.substr($caordcom->getOrdcom(), 2, 6));
-            else
-              $caordcom->setOrdcom('OC'.substr($caordcom->getOrdcom(), 2, 6));
-
-           // campos
+          // campos
             $total_detalle_orden=$arreglo_campos[0];
             $total_descuento=$arreglo_campos[1];
             $total_recargo=$arreglo_campos[2];
