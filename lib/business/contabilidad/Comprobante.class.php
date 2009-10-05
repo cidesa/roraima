@@ -137,6 +137,7 @@ class Comprobante
   public static function Buscar_Correlativo()
   {
     $num=0;
+    $cor=0;
     $numcom='';
     $valido = false;
     $formato = '';
@@ -149,23 +150,58 @@ class Comprobante
 
       if ($per->getCorcomp()=='AAMM####'){
       	$formato = date('ym');
+      	$mes=date('m');
       	$longitud='4';
+      	$sql="select substring(numcom,5,4) as num from contabc where substring(numcom,3,2)='".$mes."' order by feccom desc limit 1";
+      	if (Herramientas::BuscarDatos($sql,&$result))
+      	{
+      	  $cor=$result[0]["num"]+1;
+      	}else $cor=1;
+
+      	while(!$valido){
+	     $numcom = $formato.str_pad((string)$cor, $longitud, "0", STR_PAD_LEFT);
+
+	      $c = new Criteria();
+	      $c->add(ContabcPeer::NUMCOM,$numcom);
+	      $contabc = ContabcPeer::doSelectOne($c);
+	      if(!$contabc){
+	        $valido = true;
+	      }else { $cor=$cor +1;}
+      	}
 
       }elseif ($per->getCorcomp()=='MMAA####'){
       	$formato = date('my');
 		$longitud='4';
-      }
+		$mes=date('m');
+        $sql="select substring(numcom,5,4) as num from contabc where substring(numcom,1,2)='".$mes."' order by feccom desc limit 1";
+        if (Herramientas::BuscarDatos($sql,&$result))
+      	{
+      	  $cor=$result[0]["num"]+1;
+      	}else $cor=1;
 
-    while(!$valido){
-      $num = H::getNextvalSecuencia('contabc_numcom_seq');
-      $numcom = $formato.str_pad((string)$num, $longitud, "0", STR_PAD_LEFT);
+      	while(!$valido){
+	     $numcom = $formato.str_pad((string)$cor, $longitud, "0", STR_PAD_LEFT);
 
-      $c = new Criteria();
-      $c->add(ContabcPeer::NUMCOM,$numcom);
-      $contabc = ContabcPeer::doSelectOne($c);
-      if(!$contabc){
-        $valido = true;
-      }
+	      $c = new Criteria();
+	      $c->add(ContabcPeer::NUMCOM,$numcom);
+	      $contabc = ContabcPeer::doSelectOne($c);
+	      if(!$contabc){
+	        $valido = true;
+	      }else { $cor=$cor +1;}
+      	}
+
+      }else{
+	    while(!$valido){
+	      $num = H::getNextvalSecuencia('contabc_numcom_seq');
+	      $numcom = $formato.str_pad((string)$num, $longitud, "0", STR_PAD_LEFT);
+
+	      $c = new Criteria();
+	      $c->add(ContabcPeer::NUMCOM,$numcom);
+	      $contabc = ContabcPeer::doSelectOne($c);
+	      if(!$contabc){
+	        $valido = true;
+	      }
+	    }
     }
     return $numcom;
   }
@@ -176,10 +212,8 @@ class Comprobante
     if($numcom=='########'){
       $numcom = Comprobante::Buscar_Correlativo();
     }
-    
     Tesoreria::Salvarconfincomgen($numcom,$reftra,$feccom,$descom,$debito,$credito);
     Tesoreria::Salvar_asientosconfincomgen($numcom,$reftra,$feccom,$grid,$guarda);
-    
     return $numcom;
   }
   

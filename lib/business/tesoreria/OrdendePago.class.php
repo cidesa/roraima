@@ -28,25 +28,81 @@ class OrdendePago
   {
     if (Herramientas::getVerCorrelativo('numini','opdefemp',&$r))
     {
+     $tienecorrelativo=false;
       if ($fondos->getNumord()=='########')
       {
-        $encontrado=false;
-        while (!$encontrado)
-        {
-          $numero=str_pad($r, 8, '0', STR_PAD_LEFT);
+      	  $valido=false;
+      	  $longitud='8';
+      	  $nroorden=0;
+      	  $formato='';
+	      $c = new Criteria();
+	      $c->add(ContabaPeer::CODEMP,'001');
+	      $per = ContabaPeer::doSelectOne($c);
 
-          $sql="select numord from opordpag where numord='".$numero."'";
-          if (Herramientas::BuscarDatos($sql,&$result))
-          {
-            $r=$r+1;
-          }
-          else
-          {
-            $encontrado=true;
-          }
-        }
+	      if ($per->getCorcomp()=='AAMM####'){
+	      	$formato = date('ym');
+	      	$mes=date('m');
+	      	$longitud='4';
+	      	$sql="select substring(numord,5,4) as num from opordpag where substring(numord,3,2)='".$mes."' order by fecemi desc limit 1";
+	      	if (Herramientas::BuscarDatos($sql,&$result))
+	      	{
+	      	  $cor=$result[0]["num"]+1;
+	      	}else $cor=1;
 
-        $fondos->setNumord(str_pad($r, 8, '0', STR_PAD_LEFT));
+	      	while(!$valido){
+		     $nroorden = $formato.str_pad((string)$cor, $longitud, "0", STR_PAD_LEFT);
+
+		      $c = new Criteria();
+		      $c->add(OpordpagPeer::NUMORD,$nroorden);
+		      $clase = OpordpagPeer::doSelectOne($c);
+		      if(!$clase){
+		        $valido = true;
+		      }else { $cor=$cor +1;}
+	      	}
+	      	 $fondos->setNumord($nroorden);
+
+	      }elseif ($per->getCorcomp()=='MMAA####'){
+	      	$formato = date('my');
+			$longitud='4';
+			$mes=date('m');
+	      	$sql="select substring(numord,5,4) as num from opordpag where substring(numord,1,2)='".$mes."' order by fecemi desc limit 1";
+	      	if (Herramientas::BuscarDatos($sql,&$result))
+	      	{
+	      	  $cor=$result[0]["num"]+1;
+	      	}else $cor=1;
+
+	      	while(!$valido){
+		     $nroorden = $formato.str_pad((string)$cor, $longitud, "0", STR_PAD_LEFT);
+
+		      $c = new Criteria();
+		      $c->add(OpordpagPeer::NUMORD,$nroorden);
+		      $clase = OpordpagPeer::doSelectOne($c);
+		      if(!$clase){
+		        $valido = true;
+		      }else { $cor=$cor +1;}
+	      	}
+	      	 $fondos->setNumord($nroorden);
+
+	      }else{
+	      	$tienecorrelativo=true;
+	        $encontrado=false;
+	        while (!$encontrado)
+	        {
+	          $numero=str_pad($r, 8, '0', STR_PAD_LEFT);
+
+	          $sql="select numord from opordpag where numord='".$numero."'";
+	          if (Herramientas::BuscarDatos($sql,&$result))
+	          {
+	            $r=$r+1;
+	          }
+	          else
+	          {
+	            $encontrado=true;
+	          }
+	        }
+
+	        $fondos->setNumord(str_pad($r, 8, '0', STR_PAD_LEFT));
+         }
       }
       else
       {
@@ -55,7 +111,7 @@ class OrdendePago
 
      }
 
-     if ($fondos->getNumord()=='########')
+     if ($tienecorrelativo==true)
      {
        Herramientas::getSalvarCorrelativo('numini','opdefemp','Referencia',$r,$msg);
      }
@@ -271,23 +327,78 @@ class OrdendePago
     if (Herramientas::getVerCorrelativo('numini','opdefemp',&$r))
     {
       if ($orden->getNumord()=='########')
-      { $tienecorrelativo=true;
-        $encontrado=false;
-        while (!$encontrado)
-        {
-          $numero=str_pad($r, 8, '0', STR_PAD_LEFT);
+      {
+      	  $valido=false;
+      	  $longitud='8';
+      	  $nroorden=0;
+      	  $formato='';
+	      $c = new Criteria();
+	      $c->add(ContabaPeer::CODEMP,'001');
+	      $per = ContabaPeer::doSelectOne($c);
 
-          $sql="select numord from opordpag where numord='".$numero."'";
-          if (Herramientas::BuscarDatos($sql,&$result))
-          {
-            $r=$r+1;
-          }
-          else
-          {
-            $encontrado=true;
-          }
+	      if ($per->getCorcomp()=='AAMM####'){
+	      	$formato = date('ym');
+	      	$mes=date('m');
+	      	$longitud='4';
+	      	$sql="select substring(numord,5,4) as num from opordpag where substring(numord,3,2)='".$mes."' order by fecemi desc limit 1";
+	      	if (Herramientas::BuscarDatos($sql,&$result))
+	      	{
+	      	  $cor=$result[0]["num"]+1;
+	      	}else $cor=1;
+
+	      	while(!$valido){
+		     $nroorden = $formato.str_pad((string)$cor, $longitud, "0", STR_PAD_LEFT);
+
+		      $c = new Criteria();
+		      $c->add(OpordpagPeer::NUMORD,$nroorden);
+		      $clase = OpordpagPeer::doSelectOne($c);
+		      if(!$clase){
+		        $valido = true;
+		      }else { $cor=$cor +1;}
+	      	}
+	      	 $orden->setNumord($nroorden);
+
+	      }elseif ($per->getCorcomp()=='MMAA####'){
+	      	$formato = date('my');
+			$longitud='4';
+			$mes=date('m');
+	      	$sql="select substring(numord,5,4) as num from opordpag where substring(numord,1,2)='".$mes."' order by fecemi desc limit 1";
+	      	if (Herramientas::BuscarDatos($sql,&$result))
+	      	{
+	      	  $cor=$result[0]["num"]+1;
+	      	}else $cor=1;
+
+	      	while(!$valido){
+		     $nroorden = $formato.str_pad((string)$cor, $longitud, "0", STR_PAD_LEFT);
+
+		      $c = new Criteria();
+		      $c->add(OpordpagPeer::NUMORD,$nroorden);
+		      $clase = OpordpagPeer::doSelectOne($c);
+		      if(!$clase){
+		        $valido = true;
+		      }else { $cor=$cor +1;}
+	      	}
+	      	 $orden->setNumord($nroorden);
+
+	      }else{
+	      	$tienecorrelativo=true;
+	        $encontrado=false;
+	        while (!$encontrado)
+	        {
+	          $numero=str_pad($r, 8, '0', STR_PAD_LEFT);
+
+	          $sql="select numord from opordpag where numord='".$numero."'";
+	          if (Herramientas::BuscarDatos($sql,&$result))
+	          {
+	            $r=$r+1;
+	          }
+	          else
+	          {
+	            $encontrado=true;
+	          }
+	        }
+	        $orden->setNumord(str_pad($r, 8, '0', STR_PAD_LEFT));
         }
-        $orden->setNumord(str_pad($r, 8, '0', STR_PAD_LEFT));
       }
       else
       {
@@ -424,23 +535,76 @@ class OrdendePago
     {
       if ($orden->getNumord()=='########')
       {
-        $encontrado=false;
-        while (!$encontrado)
-        {
-          $numero=str_pad($r, 8, '0', STR_PAD_LEFT);
+          $valido=false;
+      	  $longitud='8';
+      	  $nroorden=0;
+      	  $formato='';
+	      $c = new Criteria();
+	      $c->add(ContabaPeer::CODEMP,'001');
+	      $per = ContabaPeer::doSelectOne($c);
 
-          $sql="select numord from opordpag where numord='".$numero."'";
-          if (Herramientas::BuscarDatos($sql,&$result))
-          {
-            $r=$r+1;
-          }
-          else
-          {
-            $encontrado=true;
-          }
-        }
-        $numeroorden=str_pad($r, 8, '0', STR_PAD_LEFT);
+	      if ($per->getCorcomp()=='AAMM####'){
+	      	$formato = date('ym');
+	      	$mes=date('m');
+	      	$longitud='4';
+	      	$sql="select substring(numord,5,4) as num from opordpag where substring(numord,3,2)='".$mes."' order by fecemi desc limit 1";
+	      	if (Herramientas::BuscarDatos($sql,&$result))
+	      	{
+	      	  $cor=$result[0]["num"]+1;
+	      	}else $cor=1;
 
+	      	while(!$valido){
+		     $nroorden = $formato.str_pad((string)$cor, $longitud, "0", STR_PAD_LEFT);
+
+		      $c = new Criteria();
+		      $c->add(OpordpagPeer::NUMORD,$nroorden);
+		      $clase = OpordpagPeer::doSelectOne($c);
+		      if(!$clase){
+		        $valido = true;
+		      }else { $cor=$cor +1;}
+	      	}
+	      	$numeroorden=$nroorden;
+
+	      }elseif ($per->getCorcomp()=='MMAA####'){
+	      	$formato = date('my');
+			$longitud='4';
+			$mes=date('m');
+	      	$sql="select substring(numord,5,4) as num from opordpag where substring(numord,1,2)='".$mes."' order by fecemi desc limit 1";
+	      	if (Herramientas::BuscarDatos($sql,&$result))
+	      	{
+	      	  $cor=$result[0]["num"]+1;
+	      	}else $cor=1;
+
+	      	while(!$valido){
+		     $nroorden = $formato.str_pad((string)$cor, $longitud, "0", STR_PAD_LEFT);
+
+		      $c = new Criteria();
+		      $c->add(OpordpagPeer::NUMORD,$nroorden);
+		      $clase = OpordpagPeer::doSelectOne($c);
+		      if(!$clase){
+		        $valido = true;
+		      }else { $cor=$cor +1;}
+	      	}
+	      	$numeroorden=$nroorden;
+
+	      }else{
+	        $encontrado=false;
+	        while (!$encontrado)
+	        {
+	          $numero=str_pad($r, 8, '0', STR_PAD_LEFT);
+
+	          $sql="select numord from opordpag where numord='".$numero."'";
+	          if (Herramientas::BuscarDatos($sql,&$result))
+	          {
+	            $r=$r+1;
+	          }
+	          else
+	          {
+	            $encontrado=true;
+	          }
+	        }
+	        $numeroorden=str_pad($r, 8, '0', STR_PAD_LEFT);
+      }
       }
       else
       {
