@@ -7,7 +7,7 @@
  * @subpackage fadevolu
  * @author     $Author$ <desarrollo@cidesa.com.ve>
  * @version SVN: $Id$
- * 
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -76,11 +76,11 @@ $this->Bitacora('Guardo');
 
 /*
   /**
-   * Actualiza la informacion que viene de la vista 
+   * Actualiza la informacion que viene de la vista
    * luego de un get/post en el objeto principal del modelo base del formulario.
    *
    */
-  protected function updateFadevoluFromRequest()
+  /*protected function updateFadevoluFromRequest()
   {
     $fadevolu = $this->getRequestParameter('fadevolu');
 
@@ -413,9 +413,9 @@ $this->Bitacora('Guardo');
   }
 
 
-  
-  
-  
+
+
+
   /**
    *
    * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
@@ -511,9 +511,9 @@ $this->Bitacora('Guardo');
   }
 
   /**
-   * Función para colocar el codigo necesario para 
+   * Función para colocar el codigo necesario para
    * el proceso de eliminar.
-   * Esta función debe retornar un valor igual a -1 si no hubo 
+   * Esta función debe retornar un valor igual a -1 si no hubo
    * Inconvenientes al guardar, y != de -1 si existe algún error.
    * Si es diferente de -1 el valor devuelto debe ser un código de error
    * Válido que exista en el archivo config/errores.yml
