@@ -409,6 +409,8 @@ $this->Bitacora('Guardo');
       {
         self::GenerarComprobante(&$bndismue, array());
         return Muebles::SalvarBiedisactmuenew($bndismue);
+      }else{
+      	$bndismue->save();
       }
     }
     return $this->coderror;
