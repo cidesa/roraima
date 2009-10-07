@@ -467,7 +467,7 @@ class fapedidoActions extends autofapedidoActions
      $c= new Criteria();
      $c->add(FafecpedPeer::NROPED,$fapedido->getNroped());
      FafecpedPeer::doDelete($c);
-     //$fapedido->delete();
+     $fapedido->delete();
      return -1;
     }else return 1112;
   }
