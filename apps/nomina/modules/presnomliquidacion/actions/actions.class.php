@@ -5,8 +5,8 @@
  *
  * @package    Roraima
  * @subpackage presnomliquidacion
- * @author     $Author:jlobaton $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id:actions.class.php 33711 2009-10-02 14:38:18Z jlobaton $
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
  *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -65,7 +65,8 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 	$factor = '';
 	if(!$estaliquidado)
 	{
-    	$sql="select 1 as orden,
+    	$sql="
+		select 1 as orden,
 			SUM(A.DIAART108) as DIAS,
 			SUM(A.VALART108) AS MONTO,
 			(case when B.PERDES=B.PERDES then 'PRESTACIONES DE ANTIGUEDAD ' else 'PRESTACIONES DE ANTIGUEDAD '||B.PERDES||' - '||B.PERHAS end ) AS DESCRIPCION,
@@ -84,7 +85,7 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 			(case when B.PERDES=B.PERDES then 'PRESTACIONES DE ANTIGUEDAD 'else 'PRESTACIONES DE ANTIGUEDAD '||B.PERDES||' - '||B.PERHAS end),B.CODPAR
 			HAVING
 			SUM(A.VALART108)<>0
-
+			
 			Union All
 			select 1 as orden,
 			SUM(0) as DIAS,
@@ -111,7 +112,7 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 			GROUP BY B.CODPAR
 			HAVING
 			SUM(A.VALART108)<>0
-
+			
 			Union All
 			select 2 as orden,
 			SUM(A.DIAART108) as DIAS,
@@ -130,7 +131,7 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 			Group By B.CODPAR
 			HAVING
 			SUM(A.VALART108)<>0
-
+			
 			Union All
 			SELECT 3 as orden,
 			SUM(0) as DIAS,
@@ -147,30 +148,63 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 			GROUP BY (case when B.PERDES=B.PERHAS then 'INTERESES SOBRE PREST. SOCIALES ART. 108 '||B.PERDES else 'INTERESES SOBRE PREST. SOCIALES ART. 108 '||B.PERDES||' - '||B.PERHAS end ),B.CODPAR
 			HAVING
 			SUM(A.INTDEV)<>0
-
-			Union All
+			
+			UNION ALL
 			select 4 as orden,
 			A.DIASBONO as DIAS,
 			(A.MONTOINCI/30*A.DIASBONO) AS MONTO,
 			'BONO VACACIONAL FRACCIONADO AÑO '||A.PERINI||'-'||A.PERFIN AS DESCRIPCION,
 			B.CODPAR AS PARTIDA
-			From NPVACLIQUIDACION A,NPDEFPRELIQ B
+			From NPVACLIQUIDACION A,NPDEFPRELIQ B,CONTABA C
 			WHERE
 			A.CODEMP='$codemp' AND
 			A.DIASBONO>0 AND
 			B.CODNOM='$codnom' AND
 			B.CODCON='004' AND
-			A.PERFIN>=B.PERDES AND
-			A.PERFIN<=B.PERHAS AND
+			A.PERINI>=B.PERDES AND
+			A.PERINI<=B.PERHAS AND
+			A.PERINI=TO_CHAR(C.FECINI,'YYYY') AND             
 			(A.MONTOINCI/30*A.DIASBONO)<>0
-
-
-			Union ALL
+			
+			UNION ALL            
+			select 4 as orden,
+			A.DIASBONO as DIAS,
+			(A.MONTOINCI/30*A.DIASBONO) AS MONTO,
+			'BONO VACACIONAL VENCIDO AÑO '||A.PERINI||'-'||A.PERFIN AS DESCRIPCION,
+			B.CODPAR AS PARTIDA
+			From NPVACLIQUIDACION A,NPDEFPRELIQ B,CONTABA C
+			WHERE
+			A.CODEMP='$codemp' AND
+			A.DIASBONO>0 AND
+			B.CODNOM='$codnom' AND
+			B.CODCON='004' AND
+			A.PERINI>=B.PERDES AND
+			A.PERINI<=B.PERHAS AND
+			            A.PERINI<>TO_CHAR(C.FECINI,'YYYY') AND             
+			(A.MONTOINCI/30*A.DIASBONO)<>0            
+			            
+			UNION ALL            
 			select 5 as orden,
 			A.DIADIS as DIAS,(A.ULTSUE/30*A.DIADIS) AS MONTO,
 			'VACACIONES FRACCIONADAS '||A.PERINI||'-'||A.PERFIN AS DESCRIPCION,
 			B.CODPAR AS PARTIDA
-			From NPVACLIQUIDACION A,NPDEFPRELIQ B
+			From NPVACLIQUIDACION A,NPDEFPRELIQ B,CONTABA C
+			WHERE
+			A.CODEMP='$codemp' AND
+			A.DIADIS<>0 AND
+			B.CODNOM='$codnom' AND
+			B.CODCON='003' AND
+			A.PERINI>=B.PERDES AND
+			A.PERINI<=B.PERHAS AND
+			            A.PERINI=TO_CHAR(C.FECINI,'YYYY') AND 
+			(A.ULTSUE/30*A.DIADIS)<>0
+			
+			UNION ALL
+			select 5 as orden,
+			A.DIADIS as DIAS,(A.ULTSUE/30*A.DIADIS) AS MONTO,
+			'VACACIONES VENCIDAS '||A.PERINI||'-'||A.PERFIN AS DESCRIPCION,
+			B.CODPAR AS PARTIDA
+			From NPVACLIQUIDACION A,NPDEFPRELIQ B,CONTABA C
 			WHERE
 			A.CODEMP='$codemp' AND
 			A.DIADIS<>0 AND
@@ -178,8 +212,9 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 			B.CODCON='003' AND
 			A.PERFIN>=B.PERDES AND
 			A.PERFIN<=B.PERHAS AND
-			(A.ULTSUE/30*A.DIADIS)<>0
-
+			A.PERINI<>TO_CHAR(C.FECINI,'YYYY') AND 
+			(A.ULTSUE/30*A.DIADIS)<>0      
+			      
 			UNION All
 			SELECT 1 as orden,
 			SUM(0) as DIAS,
@@ -196,7 +231,7 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 			GROUP BY A.FECANT,B.CODPAR
 			HAVING
 			SUM(A.MONANT)<>0
-
+			
 			Union All
 			SELECT 2 as orden,
 			SUM(0) as DIAS,
@@ -213,7 +248,7 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 			GROUP BY (case when B.PERDES=B.PERHAS then 'ADELANTO DE INTERESES SOBRE PREST. SOCIALES ART. 108 '||B.PERDES else 'INTERESES SOBRE PREST. SOCIALES ART. 108 '||B.PERDES||' - '||B.PERHAS end ),B.CODPAR
 			HAVING
 			SUM(A.ADEPRE)<>0
-			ORDER BY orden,DESCRIPCION DESC";
+			ORDER BY orden,DESCRIPCION DESC;";
 
 	      if (H::BuscarDatos($sql,$arr))
 	      {
@@ -974,6 +1009,7 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 				$js.="$('npliquidacion_det_salarioint').readOnly=false;";
 				$this->salintdiaconcol!=0 ? $js.="$('thsalintconcol').show();" : $js.="$('thsalintconcol').hide();";
 
+				//$js = $js." ActualizarSaldosGrid('c',ArrTotales_c) ActualizarSaldosGrid('a',ArrTotales_a) ActualizarSaldosGrid('b',ArrTotales_b)";
 				//$js = $js." ActualizarSaldosGrid('c',ArrTotales_c) ActualizarSaldosGrid('a',ArrTotales_a) ActualizarSaldosGrid('b',ArrTotales_b)";
 
 	        	$output = '[["npliquidacion_det_fecing","'.$fecing.'",""],["npliquidacion_det_feccor","'.$feccor.'",""],["npliquidacion_det_fecegr","'.$fecegr.'",""],'.
