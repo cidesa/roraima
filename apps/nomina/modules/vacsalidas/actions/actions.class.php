@@ -6,7 +6,7 @@
  * @package    siga
  * @subpackage vacsalidas
  * @author     Your name here
- * @version    SVN: $Id: actions.class.php 33315 2009-09-23 14:42:43Z cramirez $
+ * @version    SVN: $Id: actions.class.php 33317 2009-09-23 14:55:17Z cramirez $
  */
 class vacsalidasActions extends autovacsalidasActions
 {
@@ -437,7 +437,7 @@ class vacsalidasActions extends autovacsalidasActions
 		if($diavac>$this->totpen)
 		   $diavac=$this->totpen;
         #RECORRER EL GRID PARA CALCULAR DI LOS DIAS SON CONTINUOS O HABILES
-        $fecret=$fecdes;
+        /*$fecret=$fecdes;
         foreach($arrgrid['datos'] as $reg)
 		{
 			$dia = $reg['diasvac'];
@@ -449,6 +449,39 @@ class vacsalidasActions extends autovacsalidasActions
 					$fecret=$arrret[0]['fecharetorno'];					
 			}						
 		}
+		$output = '[["npvacsalidas_diaspend","'.$this->totdia.'",""],["npvacsalidas_fechas","'.$fecret.'",""],["npvacsalidas_diasdisfrutar","'.$diavac.'",""]]';
+		$this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');*/
+		$fecret=$fecdes;
+		$dia_c=0;
+		$dia_h=0;
+        foreach($arrgrid['datos'] as $reg)
+		{
+			$jor = $reg['jornada'];			
+			if ($jor=='C')#asumiendo que se grabe H no se que posible valores trae
+			{  
+			   $dia_c = $dia_c+$reg['diasvac'];
+			}else
+			{
+			   $dia_h = $dia_h+$reg['diasvac'];
+			}					
+		}		
+		#pregunto primero por continuos porq asi es en chacao, esto nos pudiese traer probelmas en otro cliente donde primero sean habiles y despues continuos
+		#despues hay que buscar la manera de determinar que condicion evaluar primero
+		if($dia_c>0)
+		{
+		    $jor='C';#inicializo para que evalue continuo asumiendo que ese sea el valor de continuos
+			$sqlfecretorno = "select to_char(fecharetorno(to_date('$fecret','dd/mm/yyyy'),'$codnom',$dia_c,'$jor'),'dd/mm/yyyy') as fecharetorno;";
+			if (H::BuscarDatos($sqlfecretorno,$arrret))
+				$fecret=$arrret[0]['fecharetorno'];					
+		}			
+		
+		if($dia_h>0)
+		{
+		    $jor='H';
+			$sqlfecretorno = "select to_char(fecharetorno(to_date('$fecret','dd/mm/yyyy'),'$codnom',$dia_h,'$jor'),'dd/mm/yyyy') as fecharetorno;";
+			if (H::BuscarDatos($sqlfecretorno,$arrret))
+				$fecret=$arrret[0]['fecharetorno'];					
+		}						
 		$output = '[["npvacsalidas_diaspend","'.$this->totdia.'",""],["npvacsalidas_fechas","'.$fecret.'",""],["npvacsalidas_diasdisfrutar","'.$diavac.'",""]]';
 		$this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
 
