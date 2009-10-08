@@ -7,7 +7,7 @@
  * @subpackage fadefart
  * @author     $Author$ <desarrollo@cidesa.com.ve>
  * @version SVN: $Id$
- * 
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -79,7 +79,7 @@ class fadefartActions extends autofadefartActions
 
   // Para incluir funcionalidades al executeEdit()
   /**
-   * Función para colocar el codigo necesario en  
+   * Función para colocar el codigo necesario en
    * el proceso de edición.
    * Aquí se pueden buscar datos adicionales que necesite la vista
    * Esta función es parte de la acción executeEdit, que maneja tanto
@@ -171,9 +171,9 @@ class fadefartActions extends autofadefartActions
 	}
 
 
-/*  
-  
-  
+/*
+
+
   /**
    *
    * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
@@ -215,7 +215,7 @@ class fadefartActions extends autofadefartActions
       }
         }
     return sfView::SUCCESS;
-  }*/
+  }
 
 
   /**
