@@ -6,7 +6,7 @@
  * @package    siga
  * @subpackage vacsalidas
  * @author     Your name here
- * @version    SVN: $Id: actions.class.php 33317 2009-09-23 14:55:17Z cramirez $
+ * @version    SVN: $Id: actions.class.php 33887 2009-10-08 19:53:41Z cramirez $
  */
 class vacsalidasActions extends autovacsalidasActions
 {
@@ -159,7 +159,7 @@ class vacsalidasActions extends autovacsalidasActions
        			$fecha = mktime(0, 0, 0, (int) $mesing, (int) $diaing, (int) $ano);
 				if($fec=='S')
 					$fechah=$fecha;
-
+				$jornada=$r['jornada'];
 				if ($fecha <= $fechah) {				
 
 					$per[$i]['id']=$r['id'];
@@ -175,9 +175,10 @@ class vacsalidasActions extends autovacsalidasActions
 		              $antiguedadAP = $arr2[0]["antapvac"];
 					  
 					$antiguedad = $r['antiguedad']; //+ 1;
+					$antjor = $r['antiguedad']; //+ 1;
 
 			        Nomina :: tiempoServicioTotal($codemp, 0, 0, 0, & $Idia, & $Imes, & $Iano, 'I');
-					
+
 					$antiguedadIN = '';
 			        if ($Iano > 0) {
 			          $antiguedadIN = 'SI';
@@ -185,9 +186,9 @@ class vacsalidasActions extends autovacsalidasActions
 					
 					$antiguedad = $antiguedad + $Iano;
 					
-					if ($antiguedadAP == 'S') {
+					if ($antiguedadAP == 'S') {						
 		            Nomina :: tiempoServicioTotal($codemp, 0, 0, 0, & $Idia, & $Imes, & $Iano, 'F');
-		
+
 		            if ($r['hist'] == 'NO') {
 		              $antiguedad = $antiguedad + $Iano;
 		
@@ -196,16 +197,28 @@ class vacsalidasActions extends autovacsalidasActions
 		              Herramientas :: BuscarDatos($sql3, & $arr3);
 		
 		              if ($arr3)
-					   	$variable = $arr3[0]['diadis'];
+					  {
+					  	$variable = $arr3[0]['diadis'];
+					  	$jornada = $arr3[0]['jornada'];
+					  }					   	
 					  else
+					  {
 					  	$variable = 0;
-						
+					  	$jornada = $arr3[0]['jornada'];
+					  }						
 		            } else
 					{
+						$antjor = $antjor + $Iano;
+						$sql3 = "Select diadis,jornada from NPvacdiadis where CodNom='" . $nomina . "' and Rangohasta >=  '" . $antjor . "'   order by rangodesde";
+						Herramientas :: BuscarDatos($sql3, & $arr3);
+		
+			            if ($arr3)
+						  $jornada = $arr3[0]['jornada'];			
+						
 						$variable = $r['diasdisfutar'];						
 					}		
 		          }else
-				  {
+				  {				  	
 				  	$variable = $r['diasdisfutar'];
 				  }	
 		          $diasdisfrutar = $variable;
@@ -231,7 +244,7 @@ class vacsalidasActions extends autovacsalidasActions
 					$per[$i]['diasdisfrutados']=$variable;
 					$per[$i]['diasvac']=$diasvacaciones;
 					$per[$i]['diaspdisfrutar']=$diasdisfrutar-$variable-$diasvacaciones;
-					$per[$i]['jornada']=$r['jornada'];					
+					$per[$i]['jornada']=$jornada;
 					$c = new Criteria();
 					$c->add(NpvacdisfrutePeer::CODEMP,$codemp);
 					$c->add(NpvacdisfrutePeer::PERINI,$r['perini']);
