@@ -196,41 +196,42 @@ private static $coderror=-1;
 				end),'DD/MM/YYYY')
 				AND A.FECNOM <=coalesce(FECRET,now())
 				AND A.CODEMP=B.CODEMP";
+
 		if (H::BuscarDatos($sqlpor,$arrpor))
 			$porcion=$arrpor[0]['porcion'];
 	###	
-	$tipsalbonvf='';
- 	$tipsalvacven='';
- 	########SUELDOS OTROS##########
- 	#SueldoUltimo
- 	$sql = "select distinct salemp as sueult from npimppresoc a where a.codemp='$codemp'
- 			and a.fecini=(select max(fecini) from npimppresoc where codemp=a.codemp)";
- 	if (H::BuscarDatos($sql,$rs))
- 		$sueult=$rs[0]["sueult"];
- 	else
- 		$sueult= 0;
- 		
- 	#Sueldo Promedio
- 	$sql =  "select coalesce(avg(salemp),0) as suepro from (
- 				select distinct salemp,fecini from npimppresoc where codemp='$codemp' 
- 				order by fecini desc limit 12
- 				)a";
- 	if (H::BuscarDatos($sql,$rs))
- 		$suepro=$rs[0]["suepro"];
- 	else
- 		$suepro= 0;	
- 
- 	###############################
+    $tipsalbonvf='';
+	$tipsalvacven='';
+	########SUELDOS OTROS##########
+	#SueldoUltimo
+	$sql = "select distinct salemp as sueult from npimppresoc a where a.codemp='$codemp'
+			and a.fecini=(select max(fecini) from npimppresoc where codemp=a.codemp)";
+	if (H::BuscarDatos($sql,$rs))
+		$sueult=$rs[0]["sueult"];
+	else
+		$sueult= 0;
+		
+	#Sueldo Promedio
+	$sql =  "select coalesce(avg(salemp),0) as suepro from (
+				select distinct salemp,fecini from npimppresoc where codemp='$codemp' 
+				order by fecini desc limit 12
+				)a";
+	if (H::BuscarDatos($sql,$rs))
+		$suepro=$rs[0]["suepro"];
+	else
+		$suepro= 0;	
+
+	###############################
     $sqlparam="select * from npdefespparpre  where codnom='$codnom'";
-    $factorbonvf=0;
-    $factorvacv=0;
-    if (H::BuscarDatos($sqlparam,$arrparam))
+	$factorbonvf=0;
+	$factorvacv=0;
+	if (H::BuscarDatos($sqlparam,$arrparam))
     {
     	$factorbonvf = $arrparam[0]['factorbonvacfra'];
-      	$tipsalbonvf = $arrparam[0]['tipsalbonvacfra'];
-      	$factorvacv = $arrparam[0]['factorvacven'];
-      	$tipsalvacven = $arrparam[0]['tipsalvacven'];
-    }
+		$tipsalbonvf = $arrparam[0]['tipsalbonvacfra'];
+		$factorvacv = $arrparam[0]['factorvacven'];
+		$tipsalvacven = $arrparam[0]['tipsalvacven'];
+	}
     $ultimosueldo=$suenor;
     $this->sueldonormal=$ultsue;
     $per=array();
@@ -240,7 +241,8 @@ private static $coderror=-1;
     if ($nuevo=="S" and $codemp!="")
     {
       $arr=array();
-      $sql="select * from NPLIQVACACION WHERE CODEMP='$codemp' ORDER BY DESDE desc";
+      $sql="select a.*,dcontinuos((corresponde-disfrutados),obtenerjornada(codemp,antiguedad) ) as diasdif
+			from NPLIQVACACION a WHERE CODEMP='$codemp' ORDER BY DESDE desc";
       if (H::BuscarDatos($sql,$arr))
       {
       //  H::PrintR($arr);
@@ -248,14 +250,18 @@ private static $coderror=-1;
         $cont=0;				
         while ($cont<count($arr))
         {
-          if ((H::tofloat($arr[$cont]['corresponde'])-H::tofloat($arr[$cont]['disfrutados']))!=0)
+          #if ((H::tofloat($arr[$cont]['corresponde'])-H::tofloat($arr[$cont]['disfrutados']))!=0)
+          if (H::tofloat($arr[$cont]['diasdif'])!=0)
           {
            $per[$i]['perini']=$arr[$cont]['desde'];
            $per[$i]['perfin']=$arr[$cont]['hasta'];
            if ($arr[$cont]['fraccion']=='SI')
            		$per[$i]['diadis']=H::tofloat($arr[$cont]['fracciondia']);
-           else
-           		$per[$i]['diadis']=H::tofloat($arr[$cont]['corresponde']-$arr[$cont]['disfrutados']);
+           else{
+           		#$per[$i]['diadis']=H::tofloat($arr[$cont]['corresponde']-$arr[$cont]['disfrutados']);
+           		$per[$i]['diadis']=H::tofloat($arr[$cont]['diasdif']);
+           }
+           		
            $per[$i]['diasbono']=H::tofloat($arr[$cont]['fraccionbono']);
            $per[$i]['diacan']=$per[$i]['diadis']+$per[$i]['diasbono'];
 
