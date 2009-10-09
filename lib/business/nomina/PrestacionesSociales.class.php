@@ -1218,7 +1218,7 @@ End Function*/
 				$arr[$totarr]['orden'] = '5';
 				$arr[$totarr]['dias'] = $diasuti;
 				$arr[$totarr]['monto'] = $montouti + $montoinc;
-				$arr[$totarr]['descripcion'] = 'AGUINALDOS FRACCIONADOS';				
+				$arr[$totarr]['descripcion'] = 'BONIFICACIÓN DE FIN DE AÑO';				
 				$arr[$totarr]['partida'] = $partida;
 			}else
 			{
@@ -1259,7 +1259,7 @@ End Function*/
 				$arr[$totarr]['orden'] = '5';
 				$arr[$totarr]['dias'] = $diasuti;
 				$arr[$totarr]['monto'] = ($montouti + $montoinc)*(-1);
-				$arr[$totarr]['descripcion'] = 'AGUINALDOS FRACCIONADOS';				
+				$arr[$totarr]['descripcion'] = 'BONIFICACIÓN DE FIN DE AÑO';				
 				$arr[$totarr]['partida'] = $partida;				
 			}else
 			{
@@ -1279,7 +1279,7 @@ End Function*/
 				$arr[$totarr]['orden'] = '5';
 				$arr[$totarr]['dias'] = $diasuti;
 				$arr[$totarr]['monto'] = ($montouti + $montoinc)*(-1);
-				$arr[$totarr]['descripcion'] = 'AGUINALDOS FRACCIONADOS';				
+				$arr[$totarr]['descripcion'] = 'BONIFICACIÓN DE FIN DE AÑO';				
 				$arr[$totarr]['partida'] = $partida;
 			}	
 		  } 
