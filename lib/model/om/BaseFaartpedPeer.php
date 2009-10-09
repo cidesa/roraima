@@ -13,7 +13,7 @@ abstract class BaseFaartpedPeer {
 	const CLASS_DEFAULT = 'lib.model.Faartped';
 
 	
-	const NUM_COLUMNS = 9;
+	const NUM_COLUMNS = 11;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -41,6 +41,12 @@ abstract class BaseFaartpedPeer {
 	const PREART = 'faartped.PREART';
 
 	
+	const MONDESC = 'faartped.MONDESC';
+
+	
+	const MONRGO = 'faartped.MONRGO';
+
+	
 	const TOTART = 'faartped.TOTART';
 
 	
@@ -52,18 +58,18 @@ abstract class BaseFaartpedPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Nroped', 'Codart', 'Canord', 'Canaju', 'Candes', 'Cantot', 'Preart', 'Totart', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (FaartpedPeer::NROPED, FaartpedPeer::CODART, FaartpedPeer::CANORD, FaartpedPeer::CANAJU, FaartpedPeer::CANDES, FaartpedPeer::CANTOT, FaartpedPeer::PREART, FaartpedPeer::TOTART, FaartpedPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('nroped', 'codart', 'canord', 'canaju', 'candes', 'cantot', 'preart', 'totart', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
+		BasePeer::TYPE_PHPNAME => array ('Nroped', 'Codart', 'Canord', 'Canaju', 'Candes', 'Cantot', 'Preart', 'Mondesc', 'Monrgo', 'Totart', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (FaartpedPeer::NROPED, FaartpedPeer::CODART, FaartpedPeer::CANORD, FaartpedPeer::CANAJU, FaartpedPeer::CANDES, FaartpedPeer::CANTOT, FaartpedPeer::PREART, FaartpedPeer::MONDESC, FaartpedPeer::MONRGO, FaartpedPeer::TOTART, FaartpedPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('nroped', 'codart', 'canord', 'canaju', 'candes', 'cantot', 'preart', 'mondesc', 'monrgo', 'totart', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Nroped' => 0, 'Codart' => 1, 'Canord' => 2, 'Canaju' => 3, 'Candes' => 4, 'Cantot' => 5, 'Preart' => 6, 'Totart' => 7, 'Id' => 8, ),
-		BasePeer::TYPE_COLNAME => array (FaartpedPeer::NROPED => 0, FaartpedPeer::CODART => 1, FaartpedPeer::CANORD => 2, FaartpedPeer::CANAJU => 3, FaartpedPeer::CANDES => 4, FaartpedPeer::CANTOT => 5, FaartpedPeer::PREART => 6, FaartpedPeer::TOTART => 7, FaartpedPeer::ID => 8, ),
-		BasePeer::TYPE_FIELDNAME => array ('nroped' => 0, 'codart' => 1, 'canord' => 2, 'canaju' => 3, 'candes' => 4, 'cantot' => 5, 'preart' => 6, 'totart' => 7, 'id' => 8, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
+		BasePeer::TYPE_PHPNAME => array ('Nroped' => 0, 'Codart' => 1, 'Canord' => 2, 'Canaju' => 3, 'Candes' => 4, 'Cantot' => 5, 'Preart' => 6, 'Mondesc' => 7, 'Monrgo' => 8, 'Totart' => 9, 'Id' => 10, ),
+		BasePeer::TYPE_COLNAME => array (FaartpedPeer::NROPED => 0, FaartpedPeer::CODART => 1, FaartpedPeer::CANORD => 2, FaartpedPeer::CANAJU => 3, FaartpedPeer::CANDES => 4, FaartpedPeer::CANTOT => 5, FaartpedPeer::PREART => 6, FaartpedPeer::MONDESC => 7, FaartpedPeer::MONRGO => 8, FaartpedPeer::TOTART => 9, FaartpedPeer::ID => 10, ),
+		BasePeer::TYPE_FIELDNAME => array ('nroped' => 0, 'codart' => 1, 'canord' => 2, 'canaju' => 3, 'candes' => 4, 'cantot' => 5, 'preart' => 6, 'mondesc' => 7, 'monrgo' => 8, 'totart' => 9, 'id' => 10, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
 	);
 
 	
@@ -130,6 +136,10 @@ abstract class BaseFaartpedPeer {
 		$criteria->addSelectColumn(FaartpedPeer::CANTOT);
 
 		$criteria->addSelectColumn(FaartpedPeer::PREART);
+
+		$criteria->addSelectColumn(FaartpedPeer::MONDESC);
+
+		$criteria->addSelectColumn(FaartpedPeer::MONRGO);
 
 		$criteria->addSelectColumn(FaartpedPeer::TOTART);
 

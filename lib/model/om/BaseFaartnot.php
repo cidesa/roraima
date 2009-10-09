@@ -53,6 +53,14 @@ abstract class BaseFaartnot extends BaseObject  implements Persistent {
 
 
 	
+	protected $mondes;
+
+
+	
+	protected $monrgo;
+
+
+	
 	protected $totart;
 
 
@@ -147,6 +155,22 @@ abstract class BaseFaartnot extends BaseObject  implements Persistent {
 
     if($val) return number_format($this->preart,2,',','.');
     else return $this->preart;
+
+  }
+  
+  public function getMondes($val=false)
+  {
+
+    if($val) return number_format($this->mondes,2,',','.');
+    else return $this->mondes;
+
+  }
+  
+  public function getMonrgo($val=false)
+  {
+
+    if($val) return number_format($this->monrgo,2,',','.');
+    else return $this->monrgo;
 
   }
   
@@ -275,6 +299,26 @@ abstract class BaseFaartnot extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setMondes($v)
+	{
+
+    if ($this->mondes !== $v) {
+        $this->mondes = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FaartnotPeer::MONDES;
+      }
+  
+	} 
+	
+	public function setMonrgo($v)
+	{
+
+    if ($this->monrgo !== $v) {
+        $this->monrgo = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FaartnotPeer::MONRGO;
+      }
+  
+	} 
+	
 	public function setTotart($v)
 	{
 
@@ -321,9 +365,13 @@ abstract class BaseFaartnot extends BaseObject  implements Persistent {
 
       $this->preart = $rs->getFloat($startcol + 10);
 
-      $this->totart = $rs->getFloat($startcol + 11);
+      $this->mondes = $rs->getFloat($startcol + 11);
 
-      $this->id = $rs->getInt($startcol + 12);
+      $this->monrgo = $rs->getFloat($startcol + 12);
+
+      $this->totart = $rs->getFloat($startcol + 13);
+
+      $this->id = $rs->getInt($startcol + 14);
 
       $this->resetModified();
 
@@ -331,7 +379,7 @@ abstract class BaseFaartnot extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 13; 
+            return $startcol + 15; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Faartnot object", $e);
     }
@@ -512,9 +560,15 @@ abstract class BaseFaartnot extends BaseObject  implements Persistent {
 				return $this->getPreart();
 				break;
 			case 11:
-				return $this->getTotart();
+				return $this->getMondes();
 				break;
 			case 12:
+				return $this->getMonrgo();
+				break;
+			case 13:
+				return $this->getTotart();
+				break;
+			case 14:
 				return $this->getId();
 				break;
 			default:
@@ -538,8 +592,10 @@ abstract class BaseFaartnot extends BaseObject  implements Persistent {
 			$keys[8] => $this->getCandev(),
 			$keys[9] => $this->getCantot(),
 			$keys[10] => $this->getPreart(),
-			$keys[11] => $this->getTotart(),
-			$keys[12] => $this->getId(),
+			$keys[11] => $this->getMondes(),
+			$keys[12] => $this->getMonrgo(),
+			$keys[13] => $this->getTotart(),
+			$keys[14] => $this->getId(),
 		);
 		return $result;
 	}
@@ -589,9 +645,15 @@ abstract class BaseFaartnot extends BaseObject  implements Persistent {
 				$this->setPreart($value);
 				break;
 			case 11:
-				$this->setTotart($value);
+				$this->setMondes($value);
 				break;
 			case 12:
+				$this->setMonrgo($value);
+				break;
+			case 13:
+				$this->setTotart($value);
+				break;
+			case 14:
 				$this->setId($value);
 				break;
 		} 	}
@@ -612,8 +674,10 @@ abstract class BaseFaartnot extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[8], $arr)) $this->setCandev($arr[$keys[8]]);
 		if (array_key_exists($keys[9], $arr)) $this->setCantot($arr[$keys[9]]);
 		if (array_key_exists($keys[10], $arr)) $this->setPreart($arr[$keys[10]]);
-		if (array_key_exists($keys[11], $arr)) $this->setTotart($arr[$keys[11]]);
-		if (array_key_exists($keys[12], $arr)) $this->setId($arr[$keys[12]]);
+		if (array_key_exists($keys[11], $arr)) $this->setMondes($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setMonrgo($arr[$keys[12]]);
+		if (array_key_exists($keys[13], $arr)) $this->setTotart($arr[$keys[13]]);
+		if (array_key_exists($keys[14], $arr)) $this->setId($arr[$keys[14]]);
 	}
 
 	
@@ -632,6 +696,8 @@ abstract class BaseFaartnot extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(FaartnotPeer::CANDEV)) $criteria->add(FaartnotPeer::CANDEV, $this->candev);
 		if ($this->isColumnModified(FaartnotPeer::CANTOT)) $criteria->add(FaartnotPeer::CANTOT, $this->cantot);
 		if ($this->isColumnModified(FaartnotPeer::PREART)) $criteria->add(FaartnotPeer::PREART, $this->preart);
+		if ($this->isColumnModified(FaartnotPeer::MONDES)) $criteria->add(FaartnotPeer::MONDES, $this->mondes);
+		if ($this->isColumnModified(FaartnotPeer::MONRGO)) $criteria->add(FaartnotPeer::MONRGO, $this->monrgo);
 		if ($this->isColumnModified(FaartnotPeer::TOTART)) $criteria->add(FaartnotPeer::TOTART, $this->totart);
 		if ($this->isColumnModified(FaartnotPeer::ID)) $criteria->add(FaartnotPeer::ID, $this->id);
 
@@ -685,6 +751,10 @@ abstract class BaseFaartnot extends BaseObject  implements Persistent {
 		$copyObj->setCantot($this->cantot);
 
 		$copyObj->setPreart($this->preart);
+
+		$copyObj->setMondes($this->mondes);
+
+		$copyObj->setMonrgo($this->monrgo);
 
 		$copyObj->setTotart($this->totart);
 

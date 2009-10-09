@@ -25,12 +25,13 @@
     alert_('Monto Inv&aacute;lido');
     $(id).value="0,00";
    }
-   else if (num1<=0)
-   {
-    alert('El valor debe ser mayor que cero');
-   }
+   //else if (num1<=0)
+   //{
+    //alert('El valor debe ser mayor que cero');
+   //}
    else
    {
+
      if (num1 > num2){
 		alert('La Cantidad a Devolver no puede ser mayor a la Cantidad Despachada');
 	    $(id).value="0,00";
@@ -41,6 +42,7 @@
          sumardatosgrid();
          }
    }
+
   }
 
   function sumardatosgrid()

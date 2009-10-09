@@ -80,7 +80,7 @@ $this->Bitacora('Guardo');
    * luego de un get/post en el objeto principal del modelo base del formulario.
    *
    */
-  /*protected function updateFadevoluFromRequest()
+ /* protected function updateFadevoluFromRequest()
   {
     $fadevolu = $this->getRequestParameter('fadevolu');
 
@@ -445,10 +445,10 @@ $this->Bitacora('Guardo');
 	            return false;
 			 }
       	}
-      	else{
+      	/*else{
             $this->coderror=1126;
             return false;
-      	}
+      	}*/
          $j++;
       } //while ($j<count($x))
 

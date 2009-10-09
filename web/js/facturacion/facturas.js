@@ -10,12 +10,21 @@
    var colcant=col+3;
    var colprecio=col+4;
    var colprecioe=col+5;
-   var coltotal=col+6;
+   var coldescto=col+6;
+   var colrgo=col+7;
+   var coltotal=col+8;
+   var colporcrgo=col+9;
 
    var cantto=name+"_"+fil+"_"+colcant;
    var precio=name+"_"+fil+"_"+colprecio;
    var precioe=name+"_"+fil+"_"+colprecioe;
+   var recargo=name+"_"+fil+"_"+colrgo;
+   var descto=name+"_"+fil+"_"+coldescto;
    var total=name+"_"+fil+"_"+coltotal;
+   var porcrgo=name+"_"+fil+"_"+colporcrgo;
+
+    var num4=toFloat(descto);
+    var num5=toFloat(porcrgo);
 
     if ($(precio).value!="")
     { var num1=toFloat(precio); }
@@ -37,7 +46,10 @@
     $(cantto).value=format(num2.toFixed(2),'.',',','.');
     if (validarnumero(precio) || validarnumero(precioe))
     {
-     var costototal=(num2*num1);
+     var calrec=(num2*num1)*(num5/100);
+     $(recargo).value=format(calrec.toFixed(2),'.',',','.');
+
+     var costototal=(num2*num1) + calrec - num4;
      $(total).value=format(costototal.toFixed(2),'.',',','.');
      llenargridfechas();
      monto_total();
@@ -113,7 +125,7 @@
     var i=0;
     while (i<fil)
     {
-     var id1="ax"+"_"+i+"_9";
+     var id1="ax"+"_"+i+"_11";
      if ($(id1)){
      if ($(id1).value!="" && validarnumero(id1))
      {
@@ -135,13 +147,21 @@
    var col=parseInt(aux[2]);
 
    var colcant=col-4;
-   var coltotal=col+2;
+   var coldescto=col+2;
+   var colrgo=col+3;
+   var coltotal=col+4;
+   var colporcrgo=col+5;
 
    var cant=name+"_"+fil+"_"+colcant;
+   var recargo=name+"_"+fil+"_"+colrgo;
+   var descto=name+"_"+fil+"_"+coldescto;
    var total=name+"_"+fil+"_"+coltotal;
+   var porcrgo=name+"_"+fil+"_"+colporcrgo;
 
    var num1=toFloat(id);
    var num2=toFloat(cant);
+    var num4=toFloat(descto);
+    var num5=toFloat(porcrgo);
 
    if (!validarnumero(id))
    {
@@ -156,7 +176,10 @@
    {
     if (validarnumero(id))
     {
-     var costototal=(num2*num1);
+      var calrec=(num2*num1)*(num5/100);
+      $(recargo).value=format(calrec.toFixed(2),'.',',','.');
+
+     var costototal=(num2*num1) + calrec - num4;
      $(total).value=format(costototal.toFixed(2),'.',',','.');
      monto_total();
     }
@@ -173,13 +196,21 @@
    var col=parseInt(aux[2]);
 
    var colcant=col-5;
-   var coltotal=col+1;
+   var coldescto=col+1;
+   var colrgo=col+2;
+   var coltotal=col+3;
+   var colporcrgo=col+4;
 
    var cant=name+"_"+fil+"_"+colcant;
+   var recargo=name+"_"+fil+"_"+colrgo;
+   var descto=name+"_"+fil+"_"+coldescto;
    var total=name+"_"+fil+"_"+coltotal;
+   var porcrgo=name+"_"+fil+"_"+colporcrgo;
 
    var num1=toFloat(id);
    var num2=toFloat(cant);
+   var num4=toFloat(descto);
+   var num5=toFloat(porcrgo);
 
    if (!validarnumero(id))
    {
@@ -194,7 +225,10 @@
    {
     if (validarnumero(id))
     {
-     var costototal=(num2*num1);
+      var calrec=(num2*num1)*(num5/100);
+      $(recargo).value=format(calrec.toFixed(2),'.',',','.');
+
+     var costototal=(num2*num1) + calrec - num4;
      $(total).value=format(costototal.toFixed(2),'.',',','.');
      monto_total();
     }
@@ -214,9 +248,11 @@
     var coldes=col+1;
     var colpre=col+6;
     var colpree=col+7;
+    var colporrgo=col+11;
     var descripcion=name+"_"+fil+"_"+coldes;
     var precio=name+"_"+fil+"_"+colpre;
     var precioe=name+"_"+fil+"_"+colpree;
+    var porrgo=name+"_"+fil+"_"+colporrgo;
 
     var cod=$(id).value;
 
@@ -224,7 +260,7 @@
     {
       if ($(id).value!="")
       {
-        new Ajax.Request(getUrlModulo()+'ajax', {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=3&cajtexmos='+descripcion+'&cajtexcom='+id+'&codigo='+cod})
+        new Ajax.Request(getUrlModulo()+'ajax', {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=3&cajtexmos='+descripcion+'&cajtexcom='+id+'&porrgo='+porrgo+'&codigo='+cod})
         new Ajax.Updater(precio, getUrlModulo()+'ajax', {asynchronous:true, evalScripts:true, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=5&id='+$('id').value+'&precioe='+precioe+'&codigo='+cod});
       }
     }
@@ -240,15 +276,23 @@
 
    var colcant=col+3;
    var colprecio=col+4;
-   var coltotal=col+5;
+   var coldescto=col+6;
+   var colrgo=col+7;
+   var coltotal=col+8;
+   var colporcrgo=col+9;
 
    var cantto=name+"_"+fil+"_"+colcant;
    var precio=name+"_"+fil+"_"+colprecio;
+   var recargo=name+"_"+fil+"_"+colrgo;
+   var descto=name+"_"+fil+"_"+coldescto;
    var total=name+"_"+fil+"_"+coltotal;
+   var porcrgo=name+"_"+fil+"_"+colporcrgo;
 
    var index=$(precio).selectedIndex;
    var num1=$(precio).options[index].text;
    var num2=toFloat(id);
+   var num4=toFloat(descto);
+   var num5=toFloat(porcrgo);
 
    if (!validarnumero(id))
    {
@@ -264,7 +308,10 @@
     $(cantto).value=format(num2.toFixed(2),'.',',','.');
     if (validarnumero(precio))
     {
-     var costototal=(num2*num1);
+      var calrec=(num2*num1)*(num5/100);
+      $(recargo).value=format(calrec.toFixed(2),'.',',','.');
+
+     var costototal=(num2*num1) + calrec - num4;
      $(total).value=format(costototal.toFixed(2),'.',',','.');
      llenargridfechas();
      monto_total();

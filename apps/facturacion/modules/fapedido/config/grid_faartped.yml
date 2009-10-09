@@ -60,9 +60,31 @@ opciones:                  # Opciones generales
   oculta:                  false
   html:                    [size="10" readonly=true]
 9:
+  titulo:                  Descuento
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             mondesc
+  esnumerico:              true
+  html:                    [size="10", readonly=true]
+10:
+  titulo:                  Recargo
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             monrgo
+  esnumerico:              true
+  html:                    [size="10", readonly=true]
+11:
   titulo:                  Total
   tipo:                    m
   esgrabable:              true
   nombrecampo:             totart
   esnumerico:              true
+  html:                    [size="10", readonly=true]
+12:
+  titulo:                  Porcentaje Recargo
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             porrgo
+  esnumerico:              true
+  oculta:                  true
   html:                    [size="10", readonly=true]

@@ -81,6 +81,20 @@ opciones:                  # Opciones generales
   esnumerico:              true
   html:                    [size="10", readonly=true]
 12:
+  titulo:                  Descuento
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             mondes
+  esnumerico:              true
+  html:                    [size="10", readonly=true]
+13:
+  titulo:                  Recargo
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             monrgo
+  esnumerico:              true
+  html:                    [size="10", readonly=true]
+14:
   titulo:                  Total
   tipo:                    m
   esgrabable:              true
