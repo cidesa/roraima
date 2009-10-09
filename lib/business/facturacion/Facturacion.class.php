@@ -666,7 +666,7 @@ class Facturacion {
       $j=0;
       while ($j<count($x))
       {
-       if ( $x[$j]->getCodart()!="")
+       if ( $x[$j]->getCodart()!="" && $x[$j]->getCandev()>0)
        {
        	 $codarti = $x[$j]->getCodart();
        	 $faartnot= new Faartdev();
@@ -821,6 +821,8 @@ class Facturacion {
 	         $faartnot->setCandev($x[$j]->getCandev());
 	         $faartnot->setCantot($x[$j]->getCantot());
 	         $faartnot->setPreart($x[$j]->getPreart());
+	         $faartnot->setMondes($x[$j]->getMondes());
+	         $faartnot->setMonrgo($x[$j]->getMonrgo());
 	         $faartnot->setTotart($x[$j]->getTotart());
 	         $faartnot->save();
 
@@ -978,6 +980,8 @@ class Facturacion {
 		             $faartped->setCanaju($x[$j]->getCanaju());
 		             $faartped->setCandes($x[$j]->getCandes());
 		             $faartped->setCantot($x[$j]->getCantot());
+		             $faartped->setMondesc($x[$j]->getMondesc());
+		             $faartped->setMonrgo($x[$j]->getMonrgo());
 		             if ($fapedido->getCombo()!='')
 		             {
 		             	if ($x[$j]->getPreart()=="0,00")
@@ -1004,6 +1008,7 @@ class Facturacion {
                      {
 		              $faartped->setTotart(H::tofloat($x[$j]->getTotart2()));
                      }else $faartped->setTotart(H::tofloat($x[$j]->getTotart()));
+
 			         $faartped->save();
 			       }
 		        }

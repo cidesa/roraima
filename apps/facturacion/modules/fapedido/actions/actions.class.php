@@ -107,7 +107,7 @@ class fapedidoActions extends autofapedidoActions
     if ($refpre!='')
     {
     $this->columnas[0]->setTabla('Fadetpre');
-    $this->columnas[1][8]->setNombrecampo('totart2');
+    $this->columnas[1][10]->setNombrecampo('totart2');
     }
     else if ($combo!='')
     $this->columnas[0]->setTabla('Faartcom');
@@ -121,7 +121,7 @@ class fapedidoActions extends autofapedidoActions
     $this->columnas[1][6]->setCombo(FaartpvpPeer::getPrecios());
     $this->columnas[1][6]->setHTML('onChange=Precio(this.id);');
     $this->columnas[1][7]->setHTML('size="10" readonly=true onKeyPress=Preciocaja(event,this.id);');
-    $this->columnas[1][8]->setEsTotal(true,'fapedido_monped');
+    $this->columnas[1][10]->setEsTotal(true,'fapedido_monped');
 
     $this->obj =$this->columnas[0]->getConfig($artped);
 
@@ -212,7 +212,21 @@ class fapedidoActions extends autofapedidoActions
   		if ($reg)
   		{
 	        $dato=$reg->getDesart();
-	        $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
+	        $porcrgo=0;
+		    $c= new Criteria();
+		    $c->add(FarecargPeer::TIPRGO,'P');
+		    $this->sql = "codrgo in (select codrgo from farecart where codart = '".$reg->getCodart()."')";
+			$c->add(FarecargPeer::CODRGO,$this->sql,Criteria :: CUSTOM);
+		    $reg=FarecargPeer::doSelect($c);
+			if ($reg){
+			 foreach ($reg as $sum)
+			 {
+			   $porcrgo += $sum->getMonrgo();
+			 }
+			}
+		    $porrgo=number_format($porcrgo,2,',','.');
+
+	        $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$this->getRequestParameter('porrgo').'","'.$porrgo.'",""]]';
   		}
   		else
   		{

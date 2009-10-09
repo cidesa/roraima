@@ -153,6 +153,14 @@ propel:
       type: NUMERIC
       size: 14
       scale: 2
+    mondes:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monrgo:
+      type: NUMERIC
+      size: 14
+      scale: 2
     totart:
       type: NUMERIC
       size: 14
@@ -191,6 +199,14 @@ propel:
       size: 14
       scale: 2
     preart:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    mondesc:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monrgo:
       type: NUMERIC
       size: 14
       scale: 2
@@ -1386,6 +1402,9 @@ propel:
     staaju:
       type: VARCHAR
       size: 1
+    tipo:
+      type: VARCHAR
+      size: 8
     id:
       type: integer
       required: true

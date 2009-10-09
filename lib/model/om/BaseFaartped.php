@@ -37,6 +37,14 @@ abstract class BaseFaartped extends BaseObject  implements Persistent {
 
 
 	
+	protected $mondesc;
+
+
+	
+	protected $monrgo;
+
+
+	
 	protected $totart;
 
 
@@ -101,6 +109,22 @@ abstract class BaseFaartped extends BaseObject  implements Persistent {
 
     if($val) return number_format($this->preart,2,',','.');
     else return $this->preart;
+
+  }
+  
+  public function getMondesc($val=false)
+  {
+
+    if($val) return number_format($this->mondesc,2,',','.');
+    else return $this->mondesc;
+
+  }
+  
+  public function getMonrgo($val=false)
+  {
+
+    if($val) return number_format($this->monrgo,2,',','.');
+    else return $this->monrgo;
 
   }
   
@@ -189,6 +213,26 @@ abstract class BaseFaartped extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setMondesc($v)
+	{
+
+    if ($this->mondesc !== $v) {
+        $this->mondesc = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FaartpedPeer::MONDESC;
+      }
+  
+	} 
+	
+	public function setMonrgo($v)
+	{
+
+    if ($this->monrgo !== $v) {
+        $this->monrgo = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FaartpedPeer::MONRGO;
+      }
+  
+	} 
+	
 	public function setTotart($v)
 	{
 
@@ -227,9 +271,13 @@ abstract class BaseFaartped extends BaseObject  implements Persistent {
 
       $this->preart = $rs->getFloat($startcol + 6);
 
-      $this->totart = $rs->getFloat($startcol + 7);
+      $this->mondesc = $rs->getFloat($startcol + 7);
 
-      $this->id = $rs->getInt($startcol + 8);
+      $this->monrgo = $rs->getFloat($startcol + 8);
+
+      $this->totart = $rs->getFloat($startcol + 9);
+
+      $this->id = $rs->getInt($startcol + 10);
 
       $this->resetModified();
 
@@ -237,7 +285,7 @@ abstract class BaseFaartped extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 9; 
+            return $startcol + 11; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Faartped object", $e);
     }
@@ -406,9 +454,15 @@ abstract class BaseFaartped extends BaseObject  implements Persistent {
 				return $this->getPreart();
 				break;
 			case 7:
-				return $this->getTotart();
+				return $this->getMondesc();
 				break;
 			case 8:
+				return $this->getMonrgo();
+				break;
+			case 9:
+				return $this->getTotart();
+				break;
+			case 10:
 				return $this->getId();
 				break;
 			default:
@@ -428,8 +482,10 @@ abstract class BaseFaartped extends BaseObject  implements Persistent {
 			$keys[4] => $this->getCandes(),
 			$keys[5] => $this->getCantot(),
 			$keys[6] => $this->getPreart(),
-			$keys[7] => $this->getTotart(),
-			$keys[8] => $this->getId(),
+			$keys[7] => $this->getMondesc(),
+			$keys[8] => $this->getMonrgo(),
+			$keys[9] => $this->getTotart(),
+			$keys[10] => $this->getId(),
 		);
 		return $result;
 	}
@@ -467,9 +523,15 @@ abstract class BaseFaartped extends BaseObject  implements Persistent {
 				$this->setPreart($value);
 				break;
 			case 7:
-				$this->setTotart($value);
+				$this->setMondesc($value);
 				break;
 			case 8:
+				$this->setMonrgo($value);
+				break;
+			case 9:
+				$this->setTotart($value);
+				break;
+			case 10:
 				$this->setId($value);
 				break;
 		} 	}
@@ -486,8 +548,10 @@ abstract class BaseFaartped extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[4], $arr)) $this->setCandes($arr[$keys[4]]);
 		if (array_key_exists($keys[5], $arr)) $this->setCantot($arr[$keys[5]]);
 		if (array_key_exists($keys[6], $arr)) $this->setPreart($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setTotart($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setId($arr[$keys[8]]);
+		if (array_key_exists($keys[7], $arr)) $this->setMondesc($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setMonrgo($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setTotart($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setId($arr[$keys[10]]);
 	}
 
 	
@@ -502,6 +566,8 @@ abstract class BaseFaartped extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(FaartpedPeer::CANDES)) $criteria->add(FaartpedPeer::CANDES, $this->candes);
 		if ($this->isColumnModified(FaartpedPeer::CANTOT)) $criteria->add(FaartpedPeer::CANTOT, $this->cantot);
 		if ($this->isColumnModified(FaartpedPeer::PREART)) $criteria->add(FaartpedPeer::PREART, $this->preart);
+		if ($this->isColumnModified(FaartpedPeer::MONDESC)) $criteria->add(FaartpedPeer::MONDESC, $this->mondesc);
+		if ($this->isColumnModified(FaartpedPeer::MONRGO)) $criteria->add(FaartpedPeer::MONRGO, $this->monrgo);
 		if ($this->isColumnModified(FaartpedPeer::TOTART)) $criteria->add(FaartpedPeer::TOTART, $this->totart);
 		if ($this->isColumnModified(FaartpedPeer::ID)) $criteria->add(FaartpedPeer::ID, $this->id);
 
@@ -547,6 +613,10 @@ abstract class BaseFaartped extends BaseObject  implements Persistent {
 		$copyObj->setCantot($this->cantot);
 
 		$copyObj->setPreart($this->preart);
+
+		$copyObj->setMondesc($this->mondesc);
+
+		$copyObj->setMonrgo($this->monrgo);
 
 		$copyObj->setTotart($this->totart);
 

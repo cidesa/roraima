@@ -7,7 +7,7 @@
 
    var colcant=col;
    var colprecio=col+5;
-   var coltotal=col+6;
+   var coltotal=col+8;
    var colsol=col-1;
    var colart=col-3;
    var colcodalm=col-5;
@@ -77,7 +77,7 @@
     var i=0;
     while (i<fil)
     {
-     var id1="ax"+"_"+i+"_12";
+     var id1="ax"+"_"+i+"_14";
      if ($(id1).value!="" && validarnumero(id1))
      {
        tot=toFloat(id1);
