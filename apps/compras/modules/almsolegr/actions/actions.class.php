@@ -147,7 +147,7 @@ class almsolegrActions extends autoalmsolegrActions
 	       {
 
 	        $totaimp=SolicituddeEgresos::totalImputacion($this->casolart->getReqart());
-	        if (H::convnume($this->casolart->getMonreq())!=$totaimp)
+	        if (H::toFloat($this->casolart->getMonreq())!=$totaimp)
 	        {
 	        	$this->setFlash('notice', 'El Monto de la Imputaciones Generadas no es igual al de la Solicitud, Por favor verificar esta solicitud');
 	        }
