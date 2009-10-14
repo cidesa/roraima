@@ -175,7 +175,7 @@ $this->Bitacora('Guardo');
    * luego de un get/post en el objeto principal del modelo base del formulario.
    *
    */
-  protected function updateFaartpvpFromRequest()
+  /*protected function updateFaartpvpFromRequest()
 	{
 	    $faartpvp = $this->getRequestParameter('faartpvp');
 		$this->configGrid();
