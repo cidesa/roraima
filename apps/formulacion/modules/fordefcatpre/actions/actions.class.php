@@ -5,9 +5,9 @@
  *
  * @package    Roraima
  * @subpackage fordefcatpre
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
+ * @author     $Author: jlobaton $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: actions.class.php 33968 2009-10-14 13:41:55Z jlobaton $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -104,7 +104,7 @@ $this->Bitacora('Guardo');
   }
 
   /**
-   * Actualiza la informacion que viene de la vista 
+   * Actualiza la informacion que viene de la vista
    * luego de un get/post en el objeto principal del modelo base del formulario.
    *
    */
@@ -252,5 +252,5 @@ $this->Bitacora('Guardo');
     $opciones->addColumna($col5);
 
     $this->obj = $opciones->getConfig($per);
-  }*/
+  }
 }
