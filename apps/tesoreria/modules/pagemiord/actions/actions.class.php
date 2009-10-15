@@ -2073,7 +2073,7 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
   {
     $this->div='OPNN';
     $datosnomina=$this->getRequestParameter('tipnom')."_".$this->getRequestParameter('gasto')."_".$this->getRequestParameter('banco')."_".$this->getRequestParameter('fecha');
-    OrdendePago::ArregloNomina($this->getRequestParameter('tipnom'),$this->getRequestParameter('banco'),$this->getRequestParameter('gasto'),$this->getRequestParameter('fecha'),$this->getRequestParameter('opordpag_referencias'),&$arreglodet,&$arregloret,&$dato);
+    OrdendePago::ArregloNomina($this->getRequestParameter('tipnom'),$this->getRequestParameter('banco'),$this->getRequestParameter('gasto'),$this->getRequestParameter('fecha'),$this->getRequestParameter('opordpag_referencias'),&$arreglodet,&$arregloret,&$dato,$this->impcpt);
 
     $this->divu=$this->getRequestParameter('divu');
     if ($this->getRequestParameter('divu')==1)
@@ -2514,6 +2514,19 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
   $c= new Criteria();
   $dato= OpdefempPeer::doSelectOne($c);
   if ($dato) $this->genordret=$dato->getGenordret(); else $this->genordret="";
+
+    $varemp = $this->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('generales',$varemp))
+	{
+		$this->impcpt='';
+		if(array_key_exists('impcpt',$varemp['generales']))
+		{
+		   $this->impcpt=$varemp['generales']['impcpt'];
+		}
+	}
+   	  
+
   }
 
   public function validarGeneraComprobante()
