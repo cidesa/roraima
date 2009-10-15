@@ -2295,7 +2295,7 @@ class Nomina {
 
         $valor = 0;
 		$fecha = '31/12/'.date('Y',strtotime($fecnom));
-        $criterio = "select dias360(to_char(fecing,'dd/mm/yyyy'),to_char(to_date('$fecha','dd/mm/yyyy')+1,'dd/mm/yyyy')) as valor
+        $criterio = "select dias360(to_char(fecing,'dd/mm/yyyy'),$fecha) as valor
 						from nphojint
 						where
 						codemp='$empleado'";
@@ -3984,7 +3984,7 @@ class Nomina {
 
         $valor = 0;
 		$fecha = '31/12/'.substr($hasta,6,4);
-        $criterio = "select dias360(to_char(fecing,'dd/mm/yyyy'),to_char(to_date('$fecha','dd/mm/yyyy')+1,'dd/mm/yyyy')) as valor
+        $criterio = "select dias360(to_char(fecing,'dd/mm/yyyy'),$fecha) as valor
 						from nphojint
 						where
 						codemp='$empleado'";
