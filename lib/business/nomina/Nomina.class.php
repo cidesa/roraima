@@ -2290,6 +2290,22 @@ class Nomina {
 
         return $valor;
         break;
+		
+	  case "D360FA" :
+
+        $valor = 0;
+		$fecha = '31/12/'.date('Y',strtotime($fecnom));
+        $criterio = "select dias360(to_char(fecing,'dd/mm/yyyy'),to_char(to_date('$fecha','dd/mm/yyyy')+1,'dd/mm/yyyy')) as valor
+						from nphojint
+						where
+						codemp='$empleado'";
+
+        if (Herramientas :: BuscarDatos($criterio, & $rs))
+			if($rs[0]['valor']!='')
+				$valor = $rs[0]['valor'];
+
+        return $valor;
+        break;	
 
       default :
         $aux = 0;
@@ -3953,6 +3969,22 @@ class Nomina {
         $valor = 0;
 		$fecha = '31/12/'.substr($hasta,6,4);
         $criterio = "select months_between(fecing,to_date('$fecha','dd/mm/yyyy')+1) as valor
+						from nphojint
+						where
+						codemp='$empleado'";
+
+        if (Herramientas :: BuscarDatos($criterio, & $rs))
+			if($rs[0]['valor']!='')
+				$valor = $rs[0]['valor'];
+
+        return $valor;
+        break;
+		
+		case "D360FA" :
+
+        $valor = 0;
+		$fecha = '31/12/'.substr($hasta,6,4);
+        $criterio = "select dias360(to_char(fecing,'dd/mm/yyyy'),to_char(to_date('$fecha','dd/mm/yyyy')+1,'dd/mm/yyyy')) as valor
 						from nphojint
 						where
 						codemp='$empleado'";
