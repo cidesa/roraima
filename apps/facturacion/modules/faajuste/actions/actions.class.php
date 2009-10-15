@@ -392,6 +392,7 @@ $this->Bitacora('Guardo');
     $ajax = $this->getRequestParameter('ajax','');
     $cajtexmos = $this->getRequestParameter('cajtexmos','');
     $cajtexcom = $this->getRequestParameter('cajtexcom','');
+    $javascript="";
     switch ($ajax){
       case '1':
         $output = '[["","",""],["","",""],["","",""]]';
