@@ -819,7 +819,7 @@ if (consul!="")
  {
    $('CajaPrinc').show();
    $$('.sf_admin_action_list')[0].hide();
-   $$('.sf_admin_action_save')[5].hide();
+   $$('.sf_admin_action_save')[6].hide();
    $$('.sf_admin_action_create')[0].hide();
  }else if (ensesion!="" && consul=="")
  {
