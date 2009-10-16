@@ -448,11 +448,11 @@ $this->Bitacora('Guardo');
 						}
 						else{
 							$totent = Facturacion::BuscarTotalEntregado($x[$j]->getCodart(), $this->getRequestParameter('fanotent[tipref]'), $this->getRequestParameter('fanotent[codref]'));
-				        	if ((number_format($x[$j]->getCansol()) - number_format($totent)) == 0){
+				        	if ((H::toFloat($x[$j]->getCansol()) - H::toFloat($totent)) == 0){
 					            $this->coderror1=1121;
 					            return false;
 				        	}
-				        	else if (number_format($x[$j]->getCanent()) > (number_format($x[$j]->getCansol()) - number_format($totent))){
+				        	else if (H::toFloat($x[$j]->getCanent()) > (H::toFloat($x[$j]->getCansol()) - H::toFloat($totent))){
 					            $this->coderror1=1122;
 					            return false;
 				        	}
