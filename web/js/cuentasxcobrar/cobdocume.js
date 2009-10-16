@@ -500,6 +500,13 @@ function recargos(id)
       var fildoc='cx_'+filact+'_1';
       var filmonori='cx_'+filact+'_5';
 
+      if ($(fildoc).value!="")
+      {
+       NuevaFilaGrid('c');
+       var fildoc='cx_'+(filact+1)+'_1';
+       var filmonori='cx_'+(filact+1)+'_5';
+      }
+
       $(fildoc).value=doc;
       $(filmonori).value=monto;
     }
@@ -509,6 +516,13 @@ function recargos(id)
       var filact=fd;
       var fildoc='dx_'+filact+'_1';
       var filmonori='dx_'+filact+'_5';
+
+      if ($(fildoc).value!="")
+      {
+       NuevaFilaGrid('d');
+       var fildoc='dx_'+(filact+1)+'_1';
+       var filmonori='dx_'+(filact+1)+'_5';
+      }
 
       $(fildoc).value=doc;
       $(filmonori).value=monto;

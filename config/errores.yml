@@ -1175,6 +1175,9 @@
 1804:
   cod: 1804
   msj:  No se puede eliminar debido a que el Movimiento según Libro esta conciliado o el Comprobante esta actualizado.
+1805:
+  cod: 1805
+  msj:  No se puede generar el Movimiento según Libro, ya que existe uno con la Misma Cuenta Bancaria, Referencia y Tipo de Movimiento.
 
 ############ Catastro #########
 8881:
