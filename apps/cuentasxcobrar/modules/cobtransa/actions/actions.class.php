@@ -478,6 +478,17 @@ class cobtransaActions extends autocobtransaActions
       		           $this->coderr=1802;
                        return false;
       		  		}
+
+      		  	    $c= new Criteria();
+			        $c->add(TsmovlibPeer::NUMCUE,$x[$i]->getCodban());
+			        $c->add(TsmovlibPeer::REFLIB,$x[$i]->getNumide2());
+			        $c->add(TsmovlibPeer::TIPMOV,$x[$i]->getCodtip());
+			        $data= TsmovlibPeer::doSelectOne($c);
+			        if ($data)
+			        {
+			      	  $this->coderr=1805;
+                      return false;
+			        }
       		  	}
       		  }
 
