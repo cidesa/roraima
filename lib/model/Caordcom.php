@@ -209,7 +209,8 @@ class Caordcom extends BaseCaordcom
           	$fecha=H::getX('NUMCHE','Tscheemi','fecemi',$reg->getNumche());
           	$si="Pagada con el N° de Cheque: ".$reg->getNumche()." el ".date('d/m/Y',strtotime($fecha));
           }else{
-          	$si="Causada con N° de Orden ".$data->getNumord()." el ".date('d/m/Y',strtotime($data->getFecemi()));
+          	$fecha=H::getX('NUMORD','Opordpag','fecemi',$data->getNumord());
+          	$si="Causada con N° de Orden ".$data->getNumord()." el ".date('d/m/Y',strtotime($fecha));
           }
         }else $si="Pendiente por Causar";
       }
