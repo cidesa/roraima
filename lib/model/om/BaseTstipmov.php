@@ -29,6 +29,10 @@ abstract class BaseTstipmov extends BaseObject  implements Persistent {
 
 
 	
+	protected $codcon;
+
+
+	
 	protected $id;
 
 	
@@ -70,6 +74,13 @@ abstract class BaseTstipmov extends BaseObject  implements Persistent {
   {
 
     return $this->escheque;
+
+  }
+  
+  public function getCodcon()
+  {
+
+    return trim($this->codcon);
 
   }
   
@@ -130,6 +141,16 @@ abstract class BaseTstipmov extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setCodcon($v)
+	{
+
+    if ($this->codcon !== $v) {
+        $this->codcon = $v;
+        $this->modifiedColumns[] = TstipmovPeer::CODCON;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -154,7 +175,9 @@ abstract class BaseTstipmov extends BaseObject  implements Persistent {
 
       $this->escheque = $rs->getBoolean($startcol + 4);
 
-      $this->id = $rs->getInt($startcol + 5);
+      $this->codcon = $rs->getString($startcol + 5);
+
+      $this->id = $rs->getInt($startcol + 6);
 
       $this->resetModified();
 
@@ -162,7 +185,7 @@ abstract class BaseTstipmov extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 6; 
+            return $startcol + 7; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Tstipmov object", $e);
     }
@@ -325,6 +348,9 @@ abstract class BaseTstipmov extends BaseObject  implements Persistent {
 				return $this->getEscheque();
 				break;
 			case 5:
+				return $this->getCodcon();
+				break;
+			case 6:
 				return $this->getId();
 				break;
 			default:
@@ -342,7 +368,8 @@ abstract class BaseTstipmov extends BaseObject  implements Persistent {
 			$keys[2] => $this->getDebcre(),
 			$keys[3] => $this->getOrden(),
 			$keys[4] => $this->getEscheque(),
-			$keys[5] => $this->getId(),
+			$keys[5] => $this->getCodcon(),
+			$keys[6] => $this->getId(),
 		);
 		return $result;
 	}
@@ -374,6 +401,9 @@ abstract class BaseTstipmov extends BaseObject  implements Persistent {
 				$this->setEscheque($value);
 				break;
 			case 5:
+				$this->setCodcon($value);
+				break;
+			case 6:
 				$this->setId($value);
 				break;
 		} 	}
@@ -388,7 +418,8 @@ abstract class BaseTstipmov extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[2], $arr)) $this->setDebcre($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setOrden($arr[$keys[3]]);
 		if (array_key_exists($keys[4], $arr)) $this->setEscheque($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setId($arr[$keys[5]]);
+		if (array_key_exists($keys[5], $arr)) $this->setCodcon($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setId($arr[$keys[6]]);
 	}
 
 	
@@ -401,6 +432,7 @@ abstract class BaseTstipmov extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(TstipmovPeer::DEBCRE)) $criteria->add(TstipmovPeer::DEBCRE, $this->debcre);
 		if ($this->isColumnModified(TstipmovPeer::ORDEN)) $criteria->add(TstipmovPeer::ORDEN, $this->orden);
 		if ($this->isColumnModified(TstipmovPeer::ESCHEQUE)) $criteria->add(TstipmovPeer::ESCHEQUE, $this->escheque);
+		if ($this->isColumnModified(TstipmovPeer::CODCON)) $criteria->add(TstipmovPeer::CODCON, $this->codcon);
 		if ($this->isColumnModified(TstipmovPeer::ID)) $criteria->add(TstipmovPeer::ID, $this->id);
 
 		return $criteria;
@@ -441,6 +473,8 @@ abstract class BaseTstipmov extends BaseObject  implements Persistent {
 		$copyObj->setOrden($this->orden);
 
 		$copyObj->setEscheque($this->escheque);
+
+		$copyObj->setCodcon($this->codcon);
 
 
 		$copyObj->setNew(true);

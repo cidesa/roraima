@@ -206,6 +206,18 @@ class tesmovseglibActions extends autotesmovseglibActions
   public function executeEdit()
   {
     $this->tsmovlib = $this->getTsmovlibOrCreate();
+    $this->cuentamov="";
+	$varemp = $this->getUser()->getAttribute('configemp');
+	if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('tesoreria',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['tesoreria']))
+	     if(array_key_exists('tesmovseglib',$varemp['aplicacion']['tesoreria']['modulos']))
+	       if(array_key_exists('cuentamov',$varemp['aplicacion']['tesoreria']['modulos']['tesmovseglib']))
+	       {
+	       	$this->cuentamov=$varemp['aplicacion']['tesoreria']['modulos']['tesmovseglib']['cuentamov'];
+	       }
+
     ///////////////////////////////////
     /* CHEQUEO PARA VER SI PUEDE O NO ANU/ELIMINAR */
 
@@ -415,7 +427,21 @@ $this->Bitacora('Guardo');
       {
         $dato=TstipmovPeer::getDestip($this->getRequestParameter('codigo'));
         $dato2=TstipmovPeer::getDebcre($this->getRequestParameter('codigo'));
-           $output = '[["'.$cajtexmos.'","'.$dato.'",""],["tsmovlib_debcre","'.$dato2.'",""]]';
+        $dato3=Herramientas::getX('CODTIP','Tstipmov','Codcon',strtoupper($this->getRequestParameter('codigo')));
+	    $this->cuentamov="";
+		$varemp = $this->getUser()->getAttribute('configemp');
+		if ($varemp)
+		if(array_key_exists('aplicacion',$varemp))
+		 if(array_key_exists('tesoreria',$varemp['aplicacion']))
+		   if(array_key_exists('modulos',$varemp['aplicacion']['tesoreria']))
+		     if(array_key_exists('tesmovseglib',$varemp['aplicacion']['tesoreria']['modulos']))
+		       if(array_key_exists('cuentamov',$varemp['aplicacion']['tesoreria']['modulos']['tesmovseglib']))
+		       {
+		       	$this->cuentamov=$varemp['aplicacion']['tesoreria']['modulos']['tesmovseglib']['cuentamov'];
+		       }
+         if ($this->cuentamov=='S')
+           $output = '[["'.$cajtexmos.'","'.$dato.'",""],["tsmovlib_debcre","'.$dato2.'",""],["ctaeje","'.$dato3.'",""]]';
+          else $output = '[["'.$cajtexmos.'","'.$dato.'",""],["tsmovlib_debcre","'.$dato2.'",""],["tstipmov_codcon","'.$dato3.'",""]]';
             $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
         return sfView::HEADER_ONLY;
       }

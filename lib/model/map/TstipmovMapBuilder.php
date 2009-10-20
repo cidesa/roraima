@@ -44,6 +44,8 @@ class TstipmovMapBuilder {
 
 		$tMap->addColumn('ESCHEQUE', 'Escheque', 'boolean', CreoleTypes::BOOLEAN, false, null);
 
+		$tMap->addColumn('CODCON', 'Codcon', 'string', CreoleTypes::VARCHAR, false, 32);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

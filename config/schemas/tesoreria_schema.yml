@@ -2202,6 +2202,9 @@ propel:
       size: 2
     escheque:
       type: BOOLEAN
+    codcon:
+      type: VARCHAR
+      size: 32
     id:
       type: INTEGER
       required: true

@@ -9,6 +9,8 @@ generator:
       debcre:      { name: Tipo }
       desdebcre:   { name: Afecta }
       escheque:    { name: ¿Es Cheque? }
+      codcon:    { name: Cuenta Contable}
+      descta:    { name: Descripción}
     list:
       title:          Definición de Tipos de Movimientos Bancarios
       display:        [=codtip, destip, desdebcre]
@@ -21,7 +23,7 @@ generator:
       sort:  codtip
     edit:
       title:          Edición de Tipos de Movimientos Bancarios
-      display:        [codtip, destip, debcre, desdebcre, escheque]
+      display:        [codtip, destip, debcre, desdebcre, escheque, codcon, descta]
       actions:
         _list:        ~
         _save:        ~

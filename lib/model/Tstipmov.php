@@ -25,4 +25,9 @@ class Tstipmov extends BaseTstipmov
 	    else return 'Indefinido';	       
 	  }
 
+  public function getDescta()
+  {
+  return Herramientas::getX('CODCTA','Contabb','Descta',self::getCodcon());
+  }
+
 }
