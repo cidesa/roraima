@@ -411,7 +411,7 @@ class fafacturActions extends autofafacturActions {
 					$correl = "";
 				}
 				$this->getUser()->setAttribute('clavecaja', $this->getRequestParameter('codigocaja'), 'fafactur');
-				$javascript = $javascript . "$('FormaPrinc').show(); $$('.sf_admin_action_list')[0].show(); $$('.sf_admin_action_save')[5].show(); $$('.sf_admin_action_create')[0].show();";
+				$javascript = $javascript . "$('FormaPrinc').show(); $$('.sf_admin_action_list')[0].show(); $$('.sf_admin_action_save')[6].show(); $$('.sf_admin_action_create')[0].show();";
 				$output = '[["javascript","' . $javascript . '",""],["fafactur_reffac","' . $correl . '",""]]';
 				$this->getResponse()->setHttpHeader("X-JSON", '(' . $output . ')');
 				return sfView :: HEADER_ONLY;
