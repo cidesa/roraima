@@ -174,7 +174,7 @@
   'size' => 50,
   'maxlength' => 80,
   'control_name' => 'tsmovlib[destip]',
-   )); echo $value ? $value : '&nbsp;' ?><?php echo input_hidden_tag('tsmovlib[debcre]', $tsmovlib->getDebcre()) ?>
+   )); echo $value ? $value : '&nbsp;' ?><?php echo input_hidden_tag('tsmovlib[debcre]', $tsmovlib->getDebcre()) ?> <?php echo input_hidden_tag('tsmovlib[codcon]', $tsmovlib->getCodcon()) ?>
     </div>
 
 <br>

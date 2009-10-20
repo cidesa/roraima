@@ -13,7 +13,7 @@ abstract class BaseTstipmovPeer {
 	const CLASS_DEFAULT = 'lib.model.Tstipmov';
 
 	
-	const NUM_COLUMNS = 6;
+	const NUM_COLUMNS = 7;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -35,6 +35,9 @@ abstract class BaseTstipmovPeer {
 	const ESCHEQUE = 'tstipmov.ESCHEQUE';
 
 	
+	const CODCON = 'tstipmov.CODCON';
+
+	
 	const ID = 'tstipmov.ID';
 
 	
@@ -43,18 +46,18 @@ abstract class BaseTstipmovPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codtip', 'Destip', 'Debcre', 'Orden', 'Escheque', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (TstipmovPeer::CODTIP, TstipmovPeer::DESTIP, TstipmovPeer::DEBCRE, TstipmovPeer::ORDEN, TstipmovPeer::ESCHEQUE, TstipmovPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codtip', 'destip', 'debcre', 'orden', 'escheque', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
+		BasePeer::TYPE_PHPNAME => array ('Codtip', 'Destip', 'Debcre', 'Orden', 'Escheque', 'Codcon', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (TstipmovPeer::CODTIP, TstipmovPeer::DESTIP, TstipmovPeer::DEBCRE, TstipmovPeer::ORDEN, TstipmovPeer::ESCHEQUE, TstipmovPeer::CODCON, TstipmovPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codtip', 'destip', 'debcre', 'orden', 'escheque', 'codcon', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codtip' => 0, 'Destip' => 1, 'Debcre' => 2, 'Orden' => 3, 'Escheque' => 4, 'Id' => 5, ),
-		BasePeer::TYPE_COLNAME => array (TstipmovPeer::CODTIP => 0, TstipmovPeer::DESTIP => 1, TstipmovPeer::DEBCRE => 2, TstipmovPeer::ORDEN => 3, TstipmovPeer::ESCHEQUE => 4, TstipmovPeer::ID => 5, ),
-		BasePeer::TYPE_FIELDNAME => array ('codtip' => 0, 'destip' => 1, 'debcre' => 2, 'orden' => 3, 'escheque' => 4, 'id' => 5, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
+		BasePeer::TYPE_PHPNAME => array ('Codtip' => 0, 'Destip' => 1, 'Debcre' => 2, 'Orden' => 3, 'Escheque' => 4, 'Codcon' => 5, 'Id' => 6, ),
+		BasePeer::TYPE_COLNAME => array (TstipmovPeer::CODTIP => 0, TstipmovPeer::DESTIP => 1, TstipmovPeer::DEBCRE => 2, TstipmovPeer::ORDEN => 3, TstipmovPeer::ESCHEQUE => 4, TstipmovPeer::CODCON => 5, TstipmovPeer::ID => 6, ),
+		BasePeer::TYPE_FIELDNAME => array ('codtip' => 0, 'destip' => 1, 'debcre' => 2, 'orden' => 3, 'escheque' => 4, 'codcon' => 5, 'id' => 6, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
 	);
 
 	
@@ -117,6 +120,8 @@ abstract class BaseTstipmovPeer {
 		$criteria->addSelectColumn(TstipmovPeer::ORDEN);
 
 		$criteria->addSelectColumn(TstipmovPeer::ESCHEQUE);
+
+		$criteria->addSelectColumn(TstipmovPeer::CODCON);
 
 		$criteria->addSelectColumn(TstipmovPeer::ID);
 
