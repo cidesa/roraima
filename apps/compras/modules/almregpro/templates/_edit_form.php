@@ -88,9 +88,9 @@ if ($caprovee->getNitpro()=='J')  {
   echo radiobutton_tag('caprovee[nitpro]', 'G', false, array('onClick' => 'colocaletra(this.value);'))."Gubernamental".'<br> <br>';?>
 
 <? } else { ?>
-    <?php echo radiobutton_tag('caprovee[nitpro]', 'J', false, array('onClick' => 'colocaletra(this.value);'))."Jurídica".'<br> <br>';
-    echo radiobutton_tag('caprovee[nitpro]', 'N', false, array('onClick' => 'colocaletra(this.value);'))."Natural".'<br> <br>';
-  echo radiobutton_tag('caprovee[nitpro]', 'G', false, array('onClick' => 'colocaletra(this.value);'))."Gubernamental".'<br> <br>';  ?>
+    <?php echo radiobutton_tag('caprovee[nitpro]', 'J', false, array('onClick' => 'colocaletra(this.value);', 'disabled' => $caprovee->getId()!='' ? true : false))." Jurídica".'<br>';
+    echo radiobutton_tag('caprovee[nitpro]', 'N', false, array('onClick' => 'colocaletra(this.value);', 'disabled' => $caprovee->getId()!='' ? true : false))." Natural".'<br>';
+  echo radiobutton_tag('caprovee[nitpro]', 'G', false, array('onClick' => 'colocaletra(this.value);' , 'disabled' => $caprovee->getId()!='' ? true : false))." Gubernamental".'<br>';  ?>
   <? } ?>
  </div> </fieldset>
  </th>
