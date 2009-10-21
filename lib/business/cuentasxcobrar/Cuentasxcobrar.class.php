@@ -509,6 +509,10 @@ class Cuentasxcobrar {
 	      {
             if ($x[$j]->getMonpag()>0)
             {
+              if ($x[$j]->getGenmov()=='S')
+              {
+              	$ctacon=H::getX('NUMCUE','Tsdefban','Codcta',$x[$j]->getCodban());
+              }
               $codigocuenta=$ctacon;
               $tipo='D';
               $des="";
