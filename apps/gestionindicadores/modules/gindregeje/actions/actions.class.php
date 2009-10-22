@@ -336,7 +336,8 @@ class gindregejeActions extends autogindregejeActions
 		$c->add(GiproanuPeer::NUMTRIM, $clasemodelo->getNumtrim());
 		$c->add(GiproanuPeer::ANOINDG, $clasemodelo->getAnoindg());
 		$c->add(GiproanuPeer::REVANOINDG, $clasemodelo->getRevanoindg());
-		$c->add(GiregindPeer::NUMUNI, $clasemodelo->getUnidades());
+		if($clasemodelo->getUnidades()!='')
+			$c->add(GiregindPeer::NUMUNI, $clasemodelo->getUnidades());
 		$c->addJoin(GiproanuPeer::NUMINDG,GiregindPeer::NUMINDG);
 		$per = GiproanuPeer::doSelect($c);
 		foreach ($per as $reg)
