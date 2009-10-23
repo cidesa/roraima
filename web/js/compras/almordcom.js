@@ -35,7 +35,7 @@
   {
     var motivo='Motivo de la Anulacion';
     var fecha= $('caordcom_fecord').value;
-  if(confirm('¿Estas Seguro?'))
+  if(confirm('ï¿½Estas Seguro?'))
   {
     var valor = prompt('Desea Anular Orden con fecha: '+$('caordcom_fecord').value+' de C&oacute;digo:',motivo);
     var fecha = prompt('Desea Anular Orden con fecha:',fecha);
@@ -84,7 +84,7 @@
             $('parcial').value='S';
           if ($('caordcom_refsol')!="")
             {
-              new Ajax.Updater('grid', '/compras_dev.php/almordcom/grid_parcial', {asynchronous:true, evalScripts:true, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=1&refsol='+document.getElementById('caordcom_refsol').value+'&rifpro='+document.getElementById('caordcom_rifpro').value+'&parcial='+document.getElementById('parcial').value});
+              new Ajax.Updater('grid', '/compras_dev.php/almordcom/grid_parcial', {asynchronous:true, evalScripts:true, onComplete:function(request, json){AjaxJSON(request, json), limpiardatos()}, parameters:'ajax=1&refsol='+document.getElementById('caordcom_refsol').value+'&rifpro='+document.getElementById('caordcom_rifpro').value+'&parcial='+document.getElementById('parcial').value});
             }
           }
           else
@@ -92,10 +92,12 @@
             $('parcial').value='N';
           if ($('caordcom_refsol')!="")
             {
-              new Ajax.Updater('grid', '/compras_dev.php/almordcom/grid', {asynchronous:true, evalScripts:true, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=1&referencia=1&filas_orden=numero_filas_orden&ordcom='+document.getElementById('caordcom_refsol').value});
+              new Ajax.Updater('grid', '/compras_dev.php/almordcom/grid', {asynchronous:true, evalScripts:true, onComplete:function(request, json){AjaxJSON(request, json), limpiardatos()}, parameters:'ajax=1&referencia=1&filas_orden=numero_filas_orden&rifpro='+document.getElementById('caordcom_rifpro').value+'&fecord='+document.getElementById('caordcom_fecord').value+'&refsol='+document.getElementById('caordcom_refsol').value+'&ordcom='+document.getElementById('caordcom_refsol').value});
             }
 
           }
+      }else{
+        new Ajax.Updater('grid', '/compras_dev.php/almordcom/grid', {asynchronous:true, evalScripts:true, onComplete:function(request, json){AjaxJSON(request, json), limpiardatos()}, parameters:'ajax=1&referencia=1&filas_orden=numero_filas_orden&rifpro='+document.getElementById('caordcom_rifpro').value+'&fecord='+document.getElementById('caordcom_fecord').value+'&refsol='+document.getElementById('caordcom_refsol').value+'&ordcom='+document.getElementById('caordcom_refsol').value});
       }
     }
     }

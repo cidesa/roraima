@@ -238,17 +238,19 @@ class almordcomActions extends autoalmordcomActions
           $this->aprobacion='N';
         }
         $this->setVars();
+        $tipopro=H::getX('RIFPRO','Caprovee','Tipo',$this->getRequestParameter('caordcom[rifpro]'));
         $this->funciones_combos($this->getRequestParameter('caordcom[codpai]'),$this->getRequestParameter('caordcom[codedo]'),$this->getRequestParameter('caordcom[codmun]'));
         //si viene de una referencia y no se carga parcialmente
         if (($this->getRequestParameter('caordcom[refsol]')!="") and ($this->getRequestParameter('parcial')=="N"))
-          $this->configGrid($this->getRequestParameter('caordcom[refsol]'),'1');
+          $this->configGrid($this->getRequestParameter('caordcom[refsol]'),'1',$tipopro);
         //si viene de una referencia y se carga parcialmente
         else if (($this->getRequestParameter('caordcom[refsol]')!="") and ($this->getRequestParameter('parcial')=="S"))
         {
           if ($this->getRequestParameter('caordcom[rifpro]')!='')
           {
             if (Orden_compra::Verificar_proveedor(trim($this->getRequestParameter('caordcom[refsol]')),trim($this->getRequestParameter('caordcom[rifpro]')),&$rifpro,&$msg,&$cancotpril,&$strrifpro,&$srtrefcot))
-              $this->configGrid_Parcial($this->getRequestParameter('caordcom[refsol]'),trim($this->getRequestParameter('caordcom[rifpro]')));
+
+              $this->configGrid_Parcial($this->getRequestParameter('caordcom[refsol]'),trim($this->getRequestParameter('caordcom[rifpro]')),$tipopro);
           }
         }
         //si no viene de una referencia y no se carga parcialmente
@@ -277,6 +279,7 @@ class almordcomActions extends autoalmordcomActions
           $this->aprobacion='N';
         }
         $caordcom = CaordcomPeer::retrieveByPk($this->getRequestParameter($id));
+        $tipopro=H::getX('RIFPRO','Caprovee','Tipo',$caordcom->getRifpro());
         $sql = "Select fecanu from caordcom Where ordcom='".$caordcom->getOrdcom()."' and staord='N'";
        /* if (Herramientas::BuscarDatos($sql,&$result))
         {
@@ -285,7 +288,7 @@ class almordcomActions extends autoalmordcomActions
         }*/
         $this->setVars();
         $this->funciones_combos($caordcom->getCodpai(),$caordcom->getCodedo(),$caordcom->getCodmun());
-        $this->configGrid($caordcom->getOrdcom(),'0');
+        $this->configGrid($caordcom->getOrdcom(),'0',$tipopro);
         $this->configGridRecargo();
         $this->configGrid_Resumen($caordcom->getOrdcom());
         $this->configGrid_ResumenPartidas($caordcom->getOrdcom());
@@ -678,7 +681,7 @@ class almordcomActions extends autoalmordcomActions
    * los datos del grid.
    *
    */
-  public function configGrid($ordcom='',$referencia='')
+  public function configGrid($ordcom='',$referencia='',$tipo='')
   {
     $this->getUser()->getAttributeHolder()->remove('referencia');
     $c = new Criteria();
@@ -835,6 +838,7 @@ class almordcomActions extends autoalmordcomActions
     $col12 = clone $col6;
     $col12->setTitulo('Monto Recargo');
     $col12->setNombreCampo($campo_col12);
+    if ($tipo=='P') $col12->setOculta(true);
     if ($referencia==0)
     {
       if ($this->deshabmonrec=='S')
@@ -885,7 +889,8 @@ class almordcomActions extends autoalmordcomActions
 	$col17->setAlineacionObjeto(Columna::CENTRO);
 	$col17->setAlineacionContenido(Columna::CENTRO);
 	$col17->setNombreCampo('anadir');
-	$col17->setHTML('type="text" size="1" style="border:none" class="imagenalmacen"');
+	if ($tipo=='P') $col17->setOculta(true);
+    $col17->setHTML('type="text" size="1" style="border:none" class="imagenalmacen"');
 	$col17->setJScript('onClick="mostrargridrecargos(this.id)"');
 
     $col18 = new Columna('cadena_datos_recargo');
@@ -937,7 +942,7 @@ class almordcomActions extends autoalmordcomActions
    * los datos del grid.
    *
    */
-  public function configGrid_Parcial($refsol='',$rifpro='')
+  public function configGrid_Parcial($refsol='',$rifpro='',$tipo='')
   {
   Orden_compra::Obtener_Grid_Parcial($refsol,$rifpro,&$output);
   $per = $output;
@@ -1030,6 +1035,7 @@ class almordcomActions extends autoalmordcomActions
     $col12 = clone $col6;
     $col12->setTitulo('Monto Recargo');
     $col12->setNombreCampo('Monrgo');
+    if ($tipo=='P') $col12->setOculta(true);
     $col12->setEsTotal(true,'caordcom_totrecargo');
 
     $col13 = clone $col6;
@@ -1069,6 +1075,7 @@ class almordcomActions extends autoalmordcomActions
     $col17->setAlineacionObjeto(Columna::CENTRO);
     $col17->setAlineacionContenido(Columna::CENTRO);
     $col17->setNombreCampo('anadir');
+    if ($tipo=='P') $col17->setOculta(true);
     $col17->setHTML('type="text" size="1" style="border:none" class="imagenalmacen"');
     $col17->setJScript('onClick="mostrargridrecargos(this.id)"');
 
@@ -2137,21 +2144,22 @@ class almordcomActions extends autoalmordcomActions
         $var='S';
         $output = '[["'.$filas.'","'.$num_filas.'",""]]';
         $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+        $tipopro=H::getX('RIFPRO','Caprovee','Tipo',$this->getRequestParameter('rifpro'));
         if (($this->getRequestParameter('refsol')!='') and ($this->getRequestParameter('rifpro')!='') and ($this->getRequestParameter('parcial')=='S'))
         {
           //print '1';
-          $this->configGrid_Parcial($this->getRequestParameter('refsol'),$this->getRequestParameter('rifpro'));
+          $this->configGrid_Parcial($this->getRequestParameter('refsol'),$this->getRequestParameter('rifpro'),$tipopro);
         }
         else
         {
           //print '2';
-          $this->configGrid($this->getRequestParameter('refsol'),'1');
+          $this->configGrid($this->getRequestParameter('refsol'),'1',$tipopro);
         }
       }
       else
       {
         //print 'hola';
-        $this->configGrid('0','0');
+        $this->configGrid('0','0','');
       }
     }
   }
@@ -2210,7 +2218,8 @@ class almordcomActions extends autoalmordcomActions
 
           $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$filas_orden.'","'.$numero_filas.'",""],["'.$cajita.'","'.$validacion_fec_egresos.'",""],["caordcom_desord","'.$desreq.'",""],["caordcom_tipfin","'.$filas[0]->getTipfin().'",""],["caordcom_nomfin","'.$desfin.'",""]'.$provee.']';
           $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
-          $this->configGrid($this->getRequestParameter('ordcom'),$this->getRequestParameter('referencia'));
+          $tipopro=H::getX('RIFPRO','Caprovee','Tipo',$this->getRequestParameter('rifpro'));
+          $this->configGrid($this->getRequestParameter('ordcom'),$this->getRequestParameter('referencia'),$tipopro);
       }
     }else{
 
@@ -2264,11 +2273,13 @@ class almordcomActions extends autoalmordcomActions
       {
           $dato=CaproveePeer::getNompro(trim($rif_encontrado));
           $dato1=CaproveePeer::getCod_provee(trim($rif_encontrado));
+          $dato2=H::getX('RIFPRO','Caprovee','Tipo',trim($rif_encontrado));
       }
       else
       {
           $dato='';//CaproveePeer::getNompro_vacio(trim($this->getRequestParameter('codigo')));
           $dato1='';//CaproveePeer::getCod_provee(trim($this->getRequestParameter('codigo')));
+          $dato2='';
       }
       $c = new Criteria();
               $c->add(CadisrgoPeer::REQART,$refsol);
@@ -2286,13 +2297,14 @@ class almordcomActions extends autoalmordcomActions
       }
       $codconpag_des_result=CaconpagPeer::getDesconpag(trim($codconpag_result));
       $codforent_des_result=CaforentPeer::getDesforent(trim($codforent_result));
-      $output = '[["'.$cajtexcom.'","'.$rif_encontrado.'",""],["'.$cajtexmos.'","'.$dato.'",""],["'.$codigo_provee.'","'.$dato1.'",""],["'.$mostrar_msg.'","'.$mensaje.'",""],["'.$codconpag.'","'.$codconpag_result.'",""],["'.$codforent.'","'.$codforent_result.'",""],["'.$codconpag_des.'","'.$codconpag_des_result.'",""],["'.$codforent_des.'","'.$codforent_des_result.'",""],["'.$numfilas.'","'.$numero_filas.'",""],["'.$codconpag_codigo.'","'.$codconpag_result.'",""],["'.$codforent_codigo.'","'.$codforent_result.'",""],["'.$cancotpril_caja.'","'.$cancotpril.'",""]]';
+      $output = '[["'.$cajtexcom.'","'.$rif_encontrado.'",""],["'.$cajtexmos.'","'.$dato.'",""],["'.$codigo_provee.'","'.$dato1.'",""],["'.$mostrar_msg.'","'.$mensaje.'",""],["'.$codconpag.'","'.$codconpag_result.'",""],["'.$codforent.'","'.$codforent_result.'",""],["'.$codconpag_des.'","'.$codconpag_des_result.'",""],["'.$codforent_des.'","'.$codforent_des_result.'",""],["'.$numfilas.'","'.$numero_filas.'",""],["'.$codconpag_codigo.'","'.$codconpag_result.'",""],["'.$codforent_codigo.'","'.$codforent_result.'",""],["'.$cancotpril_caja.'","'.$cancotpril.'",""],["caordcom_tipopro","'.$dato2.'",""]]';
     }
     else
     {
       $dato=CaproveePeer::getNompro(trim($this->getRequestParameter('codigo')));
       $dato1=CaproveePeer::getCod_provee(trim($this->getRequestParameter('codigo')));
-      $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$codigo_provee.'","'.$dato1.'",""]]';
+      $dato2=H::getX('RIFPRO','Caprovee','Tipo',$this->getRequestParameter('codigo'));
+      $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$codigo_provee.'","'.$dato1.'",""],["caordcom_tipopro","'.$dato2.'",""]]';
     }
 
     $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
