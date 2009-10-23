@@ -1036,14 +1036,14 @@ $this->Bitacora('Guardo');
    */
   public function configGridFactura($codigo='',$arreglo1=array(),$arreglo2=array())
   {
-    $sql="SELECT fecfac as fecfac, (CASE when tiptra='01' THEN numfac
-  else '' END) as numfac,numctr as numctr,(CASE when tiptra='02' THEN numfac
-  else '' END) as notdeb,(CASE when tiptra='03' THEN numfac
-  else '' END) as notcrd,tiptra as tiptra,facafe as facafe,poriva as poriva,totfac as totfac,exeiva as exeiva,
-  basimp as basimp,monret as monret,moniva as moniva,(CASE when basltf!=0 THEN 1
-  else 0 END) as unocien,basltf as basltf,porltf as porltf,monltf as monltf,(CASE when basislr!=0 THEN 1
-  else 0 END) as impusob,basislr as basislr,porislr as porislr,monislr as monislr,codislr as cosislr,id as id
-  from opfactur where numord='".$codigo."'";
+    $sql="SELECT b.fecfac as fecfac, (CASE when b.tiptra='01' THEN b.numfac
+  else '' END) as numfac,b.numctr as numctr,(CASE when b.tiptra='02' THEN b.numfac
+  else '' END) as notdeb,(CASE when b.tiptra='03' THEN b.numfac
+  else '' END) as notcrd,b.tiptra as tiptra,b.facafe as facafe,b.poriva as poriva,b.totfac as totfac,b.exeiva as exeiva,
+  b.basimp as basimp,b.monret as monret,b.moniva as moniva,(CASE when b.basltf!=0 THEN 1
+  else 0 END) as unocien,b.basltf as basltf,b.porltf as porltf,b.monltf as monltf,(CASE when b.basislr!=0 THEN 1
+  else 0 END) as impusob,b.basislr as basislr,b.porislr as porislr,b.monislr as monislr,b.codislr as codislr,b.rifalt as rifalt,a.nomben as nomben,b.id as id
+  from opfactur b left outer join opbenefi a on b.rifalt=a.cedrif where b.numord='".$codigo."'";
 
     $resp = Herramientas::BuscarDatos($sql,&$reg);
 
@@ -1264,6 +1264,24 @@ $this->Bitacora('Guardo');
     $col22->setHTML('type="text" size="15"');
     $col22->setOculta(true);
 
+    $col23 = new Columna('C.I / R.I.F');
+    $col23->setTipo(Columna::TEXTO);
+    $col23->setAlineacionObjeto(Columna::CENTRO);
+    $col23->setAlineacionContenido(Columna::CENTRO);
+    $col23->setEsGrabable(true);
+    $col23->setNombreCampo('rifalt');
+    $objos= array('cedrif' => 23,'nomben' => 24);
+    $col23->setCatalogo('opbenefi','sf_admin_edit_form', $objos,'Opbenefi_Pagemiord');
+    $col23->setHTML('type="text" size="15" maxlength="15"');
+    $col23->setAjax('pagemiord',24,24);
+
+    $col24 = new Columna('Descripción');
+    $col24->setTipo(Columna::TEXTO);
+    $col24->setAlineacionObjeto(Columna::IZQUIERDA);
+    $col24->setAlineacionContenido(Columna::IZQUIERDA);
+    $col24->setNombreCampo('nomben');
+    $col24->setHTML('type="text" size="20" readonly="true"');
+
 
     $opciones->addColumna($col1);
     $opciones->addColumna($col2);
@@ -1287,6 +1305,8 @@ $this->Bitacora('Guardo');
     $opciones->addColumna($col20);
     $opciones->addColumna($col21);
     $opciones->addColumna($col22);
+    $opciones->addColumna($col23);
+    $opciones->addColumna($col24);
 
     $this->obj2 = $opciones->getConfig($reg);
   }
@@ -2268,6 +2288,20 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
   	{
        $dato=$reg->getNomconcepto();
   	}else $javascript="alert('El Concepto de Pago no Existe'); $('$cajtexcom').value=''; ";
+    $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""]]';
+    $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+    return sfView::HEADER_ONLY;
+  }
+  else if ($this->getRequestParameter('ajax')=='24')
+  {
+  	$javascript="";
+  	$c= new Criteria();
+  	$c->add(OpbenefiPeer::CEDRIF,$this->getRequestParameter('codigo'));
+  	$reg= OpbenefiPeer::doSelectOne($c);
+  	if ($reg)
+  	{
+       $dato=$reg->getNomben();
+  	}else $javascript="alert('El Beneficiario Alterno no Existe'); $('$cajtexcom').value=''; ";
     $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""]]';
     $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
     return sfView::HEADER_ONLY;

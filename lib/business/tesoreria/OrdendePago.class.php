@@ -1053,6 +1053,7 @@ class OrdendePago
         $factura->setPorislr($x[$j]['porislr']);
         $factura->setMonislr($x[$j]['monislr']);
         $factura->setCodislr($x[$j]['codislr']);
+        $factura->setRifalt($x[$j]['rifalt']);
 
         $factura->save();
       }
