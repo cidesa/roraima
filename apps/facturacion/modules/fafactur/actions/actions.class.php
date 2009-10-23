@@ -943,14 +943,14 @@ class fafacturActions extends autofafacturActions {
             	if (count($result)>0)
             	{
             	$cal=H::tofloat($result[0]["monto"]) + H::tofloat($this->getRequestParameter('fafactur[monfac]')) - H::tofloat($this->getRequestParameter('fafactur[mondesc]'));
-            	if ($cal>$this->getRequestParameter('fafactur[limitecredito]'))
+            	if ($cal>H::tofloat($this->getRequestParameter('fafactur[limitecredito]')))
             	{
 	       	      $this->coderr=1145;
 	       	      return false;
             	}
             	}else{
             	  $cal=H::tofloat($this->getRequestParameter('fafactur[monfac]')) - H::tofloat($this->getRequestParameter('fafactur[mondesc]'));
-	            	if ($cal>$this->getRequestParameter('fafactur[limitecredito]'))
+	            	if ($cal>H::tofloat($this->getRequestParameter('fafactur[limitecredito]')))
 	            	{
 	            	   $this->coderr=1145;
 		       	       return false;
@@ -960,7 +960,7 @@ class fafacturActions extends autofafacturActions {
             else
             {
                $cal=H::tofloat($this->getRequestParameter('fafactur[monfac]')) - H::tofloat($this->getRequestParameter('fafactur[mondesc]'));
-            	if ($cal>$this->getRequestParameter('fafactur[limitecredito]'))
+            	if ($cal>H::tofloat($this->getRequestParameter('fafactur[limitecredito]')))
             	{
             	   $this->coderr=1145;
 	       	       return false;

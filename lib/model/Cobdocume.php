@@ -44,8 +44,8 @@ class Cobdocume extends BaseCobdocume
     }
 
     $this->montotal= self::getMondoc() + self::getRecdoc() - self::getDscdoc();
-    $this->monpagado=number_format(self::getAbodoc(),2,',','.');
-    $this->montotalformato=number_format($this->montotal,2,',','.');
+    $this->monpagado=self::getAbodoc();//number_format(self::getAbodoc(),2,',','.');
+    $this->montotalformato=$this->montotal;//number_format($this->montotal,2,',','.');
   }
 
 	public function getFatipmovdeb()
@@ -95,5 +95,77 @@ class Cobdocume extends BaseCobdocume
    {
      return Herramientas::getX_vacio('numcom','contabc','id',self::getNumcom());
     }
+	
+  public function getMonpag($val=false)
+  {
+    if($val) return number_format($this->monpag,2,',','.');
+    else return $this->monpag;
+
+  }
+  
+   public function setMonpag($val)
+   {
+     $this->monpag = $val;
+   }	
+   
+  public function getMondsc($val=false)
+  {
+    if($val) return number_format($this->mondsc,2,',','.');
+    else return $this->mondsc;
+
+  }
+  
+   public function setMondsc($val)
+   {
+     $this->mondsc = $val;
+   }
+   
+  public function getMonrec($val=false)
+  {
+    if($val) return number_format($this->monrec,2,',','.');
+    else return $this->monrec;
+
+  }
+  
+   public function setMonrec($val)
+   {
+     $this->monrec = $val;
+   }   	   
+   
+  public function getMontotal($val=false)
+  {
+    if($val) return number_format($this->montotal,2,',','.');
+    //else return $this->montotal;
+
+  }
+  
+   public function setMontotal($val)
+   {
+     $this->montotal = $val;
+   }     
+   
+  public function getMonpagado($val=false)
+  {
+    if($val) return number_format($this->monpagado,2,',','.');
+    //else return $this->monpagado;
+
+  }
+  
+   public function setMonpagado($val)
+   {
+     $this->monpagado = $val;
+   }   
+   
+  public function getMontotalformato($val=false)
+  {
+    if($val) return number_format($this->montotalformato,2,',','.');
+   // else return $this->montotalformato;
+
+  }
+  
+   public function setMontotalformato($val)
+   {
+     $this->montotalformato = $val;
+   }    
 
 }

@@ -25,4 +25,16 @@ class Fatippag extends BaseFatippag
    public function getFatippagId(){
      return self::getId();
   }
+  
+  public function getMonpag($val=false)
+  {
+    if($val) return number_format($this->monpag,2,',','.');
+    else return $this->monpag;
+
+  }
+  
+   public function setMonpag($val)
+   {
+     $this->monpag = $val;
+   }
 }
