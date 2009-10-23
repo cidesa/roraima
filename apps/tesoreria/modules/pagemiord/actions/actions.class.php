@@ -532,7 +532,7 @@ $this->Bitacora('Guardo');
      {
        $aux=split('_',$opordpag->getDatosnomina());
        //$sql="DELETE FROM NPCIENOM WHERE CODNOM='".$this->getRequestParameter('tipnom')."' And CODTIPGAS='".$this->getRequestParameter('gasto')."' And CODBAN='".$this->getRequestParameter('banco')."' And (ASIDED='A' OR ASIDED='D') And FECNOM=TO_DATE('".$this->getRequestParameter('fechanomina')."','YYYY-MM-DD')";
-       $sql="DELETE FROM NPCIENOM WHERE CODNOM='".$aux[0]."' And CODTIPGAS='".$aux[1]."' And CODBAN='".$aux[2]."' And (ASIDED='A' OR ASIDED='D') And FECNOM=TO_DATE('".$aux[3]."','YYYY-MM-DD')";
+       $sql="DELETE FROM NPCIENOM WHERE CODNOM='".$aux[0]."' And CODTIPGAS='".$aux[1]."' And CODBAN='".$aux[2]."' And (ASIDED='A' OR ASIDED='D') And FECNOM=TO_DATE('".$aux[3]."','YYYY-MM-DD') AND ESPECIAL='".$aux[4]."'";
        Herramientas::insertarRegistros($sql);
      }
      //aportes
@@ -2092,8 +2092,8 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
   else if ($this->getRequestParameter('ajax')=='11')
   {
     $this->div='OPNN';
-    $datosnomina=$this->getRequestParameter('tipnom')."_".$this->getRequestParameter('gasto')."_".$this->getRequestParameter('banco')."_".$this->getRequestParameter('fecha');
-    OrdendePago::ArregloNomina($this->getRequestParameter('tipnom'),$this->getRequestParameter('banco'),$this->getRequestParameter('gasto'),$this->getRequestParameter('fecha'),$this->getRequestParameter('opordpag_referencias'),&$arreglodet,&$arregloret,&$dato,$this->impcpt);
+    $datosnomina=$this->getRequestParameter('tipnom')."_".$this->getRequestParameter('gasto')."_".$this->getRequestParameter('banco')."_".$this->getRequestParameter('fecha')."_".$this->getRequestParameter('nomespecial');
+    OrdendePago::ArregloNomina($this->getRequestParameter('tipnom'),$this->getRequestParameter('banco'),$this->getRequestParameter('gasto'),$this->getRequestParameter('fecha'),$this->getRequestParameter('opordpag_referencias'),&$arreglodet,&$arregloret,&$dato,$this->impcpt,$this->getRequestParameter('nomespecial'));
 
     $this->divu=$this->getRequestParameter('divu');
     if ($this->getRequestParameter('divu')==1)
