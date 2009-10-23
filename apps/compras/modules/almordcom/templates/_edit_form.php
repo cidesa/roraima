@@ -40,6 +40,7 @@
 <?php echo input_hidden_tag('caordcom[genctaord]', $caordcom->getGenctaord()) ?>
 <?php echo input_hidden_tag('caordcom[gencomalc]', $caordcom->getGencomalc()) ?>
 <?php echo input_hidden_tag('caordcom[eti]', $caordcom->getEti()) ?>
+<?php echo input_hidden_tag('caordcom[tipopro]', $caordcom->getTipopro()) ?>
 
 <input id="codigo_presupuestario_sin_disponibilidad" name="codigo_presupuestario_sin_disponibilidad" type="hidden">
 <script language="JavaScript" type="text/javascript">

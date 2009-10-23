@@ -323,6 +323,7 @@ class Orden_compra
     $grid=array();
     $result=array();
     $arreglo_codart=array();
+    $tipopro=H::getX('RIFPRO','Caprovee','Tipo',trim($rifpro));
     if (Orden_compra::Verificar_proveedor(trim($refsol),trim($rifpro),&$rifpro,&$msg,&$cancotpril,&$strrifpro,&$srtrefcot))
     {
       $sql = "Select reqart,codart,codcat,canreq,canrec,montot,costo,monrgo,canord,mondes,relart,unimed,codpar From CaArtSol Where ReqArt='".$refsol."' order By CodArt";
@@ -345,7 +346,7 @@ class Orden_compra
                   if (Herramientas::BuscarDatos($sql2,&$result2))
                   {
                     $grid['id']=$i;
-                    if ($result[$i]['monrgo']>0)
+                    if ($result[$i]['monrgo']>0 && $tipopro!='P')
                        $grid['check'] = '1';
                     else
                       $grid['check'] = '0';
@@ -393,7 +394,7 @@ class Orden_compra
                   else
                       $grid['mondes'] = "0.00";
 
-                  if ($result[$i]['monrgo']>0)
+                  if ($result[$i]['monrgo']>0 && $tipopro!='P')
                       $grid['monrgo'] = $result[$i]['monrgo'];
                   else
                       $grid['monrgo'] = "0.00";
@@ -415,7 +416,7 @@ class Orden_compra
 
                     $grid['anadir']="";
                     $grid['datosrecargo']="";
-                    $grid['datosrecargo']=self::Cargartirarecargosgrid($refsol,$result[$i]['codart'],$result[$i]['codcat']);
+                    if ($tipopro!='P') $grid['datosrecargo']=self::Cargartirarecargosgrid($refsol,$result[$i]['codart'],$result[$i]['codcat']);
                     $output[] = $grid;
                  }
                }
