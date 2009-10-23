@@ -54,7 +54,7 @@ generator:
         "Detalle": [listaart, _grid_fapeddes, _grid_faartfac, _grid_fadescart, totdesc, _grid_fargoart, totrec]
         "Forma de Pago": [_codtip, _grid_faforpag, moncan, monres, vuelto]
         "Descripción Detallada/Sucursal": [observ, sucursal, usuarios, password]
-      hide: [codcli, reapor, status, valmon, numcom, numcomord, numcominv, incluircliente, tipconpag, tipo, apliclades, docrefiera, esretencion, tottotart, totmonrgo, monedaanterior, trajo, porcentajedescto, totcanpreart, totprecio, ctasociada, ctacli, filgenmov]
+      hide: [codcli, reapor, status, valmon, numcom, numcomord, numcominv, incluircliente, tipconpag, tipo, apliclades, docrefiera, esretencion, tottotart, totmonrgo, monedaanterior, trajo, porcentajedescto, totcanpreart, totprecio, ctasociada, ctacli, filgenmov, limitecredito]
       actions:
         _list:        ~
         _save:        ~
