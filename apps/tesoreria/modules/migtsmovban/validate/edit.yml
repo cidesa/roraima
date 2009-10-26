@@ -1,0 +1,16 @@
+methods:
+  post:
+   - "tspararc{numcue}"
+
+names:
+  tspararc{numcue}:
+    required:  Yes
+    required_msg: El Número de Cuenta Bancaria no puedo estar en Blanco
+    validators: ExistValidator
+
+ExistValidator:
+    class: CidesaExistValidator
+    param:
+        class:        Tsdefban
+        column:       numcue
+        unique_error: El Número de Cuenta Bancaria no existe

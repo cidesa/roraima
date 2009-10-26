@@ -1189,6 +1189,18 @@ class almsolegrActions extends autoalmsolegrActions
       $this->autorizaprecom="";
       $this->tiporec="";
     }
+
+    $this->cambiareti="";
+    $varemp = $this->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('compras',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
+	     if(array_key_exists('almsolegr',$varemp['aplicacion']['compras']['modulos']))
+	       if(array_key_exists('cambiareti',$varemp['aplicacion']['compras']['modulos']['almsolegr']))
+	       {
+	       	$this->cambiareti=$varemp['aplicacion']['compras']['modulos']['almsolegr']['cambiareti'];
+	       }
   }
 
   public function executeGenerarcompromiso()
@@ -1315,6 +1327,37 @@ class almsolegrActions extends autoalmsolegrActions
     }
 
     return $casolart;
+  }
+
+  public function executeList()
+  {
+    $this->processSort();
+
+    $this->processFilters();
+
+    $this->filters = $this->getUser()->getAttributeHolder()->getAll('sf_admin/casolart/filters');
+
+    $this->cambiareti="";
+    $varemp = $this->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('compras',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
+	     if(array_key_exists('almsolegr',$varemp['aplicacion']['compras']['modulos']))
+	       if(array_key_exists('cambiareti',$varemp['aplicacion']['compras']['modulos']['almsolegr']))
+	       {
+	       	$this->cambiareti=$varemp['aplicacion']['compras']['modulos']['almsolegr']['cambiareti'];
+	       }
+
+
+     // 15    // pager
+    $this->pager = new sfPropelPager('Casolart', 15);
+    $c = new Criteria();
+    $this->addSortCriteria($c);
+    $this->addFiltersCriteria($c);
+    $this->pager->setCriteria($c);
+    $this->pager->setPage($this->getRequestParameter('page', 1));
+    $this->pager->init();
   }
 
 }

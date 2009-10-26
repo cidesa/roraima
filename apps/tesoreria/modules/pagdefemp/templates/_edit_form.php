@@ -4,8 +4,8 @@
  *
  * @package    Roraima
  * @subpackage vistas
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version    SVN: $Id$
+ * @author     $Author: dmartinez $ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id: _edit_form.php 33258 2009-09-21 22:34:36Z dmartinez $
  */
 // date: 2007/07/03 12:48:57
 ?>
@@ -190,7 +190,7 @@
   'control_name' => 'opdefemp[gencomalc]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
-<br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 </div>
 </fieldset>
  </th>
@@ -446,6 +446,74 @@
   'size' => 60,
   'disabled' => true,
   'control_name' => 'opdefemp[nomtipret]',
+  )); echo $value ? $value : '&nbsp;' ?>
+<br><br>
+<table>
+<tr>
+<th>
+  <?php echo label_for('opdefemp[ordtna]', __($labels['opdefemp{ordtna}']), 'class="required" Style="width:40px"') ?>
+  <div class="content<?php if ($sf_request->hasError('opdefemp{ordtna}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('opdefemp{ordtna}')): ?>
+    <?php echo form_error('opdefemp{ordtna}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+ <?php echo input_auto_complete_tag('opdefemp[ordtna]', $opdefemp->getOrdtna(),
+  'pagdefemp/autocomplete?ajax=5',  array('autocomplete' => 'off','maxlength' => 4,
+  'onKeyPress' => "javascript:cadena=this.value;cadena=cadena.toUpperCase();document.getElementById('opdefemp_ordtna').value=cadena",
+  'onBlur'=> remote_function(array(
+        'url'      => 'pagdefemp/ajax',
+        'complete' => 'AjaxJSON(request, json)',
+        'condition' => "$('opdefemp_ordtna').value != '' ",
+        'script' => true,
+        'with' => "'ajax=1&cajtexmos=opdefemp_nomtiptna&codigo='+this.value"
+        ))),
+     array('use_style' => 'true',)
+  )
+?></div>
+</th>
+<th>
+&nbsp;&nbsp;&nbsp; <?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Opdefemp_pagdefemp2/clase/Cpdoccau/frame/sf_admin_edit_form/obj1/opdefemp_nomtiptna/obj2/opdefemp_ordtna/campo1/nomext/campo2/tipcau/param1/1')?>
+</th>
+</tr>
+</table>
+<?php $value = object_input_tag($opdefemp, 'getNomtiptna', array (
+  'size' => 60,
+  'disabled' => true,
+  'control_name' => 'opdefemp[nomtiptna]',
+  )); echo $value ? $value : '&nbsp;' ?>
+<br><br>
+<table>
+<tr>
+<th>
+  <?php echo label_for('opdefemp[ordtba]', __($labels['opdefemp{ordtba}']), 'class="required" Style="width:40px"') ?>
+  <div class="content<?php if ($sf_request->hasError('opdefemp{ordtba}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('opdefemp{ordtba}')): ?>
+    <?php echo form_error('opdefemp{ordtba}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+ <?php echo input_auto_complete_tag('opdefemp[ordtba]', $opdefemp->getOrdtba(),
+  'pagdefemp/autocomplete?ajax=5',  array('autocomplete' => 'off','maxlength' => 4,
+  'onKeyPress' => "javascript:cadena=this.value;cadena=cadena.toUpperCase();document.getElementById('opdefemp_ordtba').value=cadena",
+  'onBlur'=> remote_function(array(
+        'url'      => 'pagdefemp/ajax',
+        'complete' => 'AjaxJSON(request, json)',
+        'condition' => "$('opdefemp_ordtba').value != '' ",
+        'script' => true,
+        'with' => "'ajax=1&cajtexmos=opdefemp_nomtiptba&codigo='+this.value"
+        ))),
+     array('use_style' => 'true',)
+  )
+?></div>
+</th>
+<th>
+&nbsp;&nbsp;&nbsp; <?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Opdefemp_pagdefemp2/clase/Cpdoccau/frame/sf_admin_edit_form/obj1/opdefemp_nomtiptba/obj2/opdefemp_ordtba/campo1/nomext/campo2/tipcau/param1/1')?>
+</th>
+</tr>
+</table>
+<?php $value = object_input_tag($opdefemp, 'getNomtiptba', array (
+  'size' => 60,
+  'disabled' => true,
+  'control_name' => 'opdefemp[nomtiptba]',
   )); echo $value ? $value : '&nbsp;' ?>
 </div>
   </fieldset>

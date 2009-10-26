@@ -30,6 +30,24 @@ class tesaprordtesActions extends autotesaprordtesActions
    */
   public function editing()
   {
+  	$this->cambiaretiapr="";
+  	$this->nometiaprts="";
+    $varemp = $this->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('tesoreria',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['tesoreria']))
+	     if(array_key_exists('tesaprord',$varemp['aplicacion']['tesoreria']['modulos'])){
+	       if(array_key_exists('cambiaretiapr',$varemp['aplicacion']['tesoreria']['modulos']['tesaprord']))
+	       {
+	       	$this->cambiaretiapr=$varemp['aplicacion']['tesoreria']['modulos']['tesaprord']['cambiaretiapr'];
+	       if(array_key_exists('nometiaprts',$varemp['aplicacion']['tesoreria']['modulos']['tesaprord']))
+	       {
+	       	$this->nometiaprts=$varemp['aplicacion']['tesoreria']['modulos']['tesaprord']['nometiaprts'];
+	       }
+	       }
+	     }
+
     $this->configGrid();
     $this->opordpag->setFilasord($this->filas);
   }
@@ -109,9 +127,15 @@ class tesaprordtesActions extends autotesaprordtesActions
     $this->coderr =-1;
 
     if($this->getRequest()->getMethod() == sfRequest::POST){
-      if (self::validarGeneraComprobante())
-      {
-        $this->coderr=508;
+      $e= new Criteria();
+      $reg= OpdefempPeer::doSelectOne($e);
+      if ($reg){
+       if ($reg->getGencomalc()=="S"){
+	      if (self::validarGeneraComprobante())
+	      {
+	        $this->coderr=508;
+	      }
+       }
       }
 
       if($this->coderr!=-1){
@@ -123,6 +147,24 @@ class tesaprordtesActions extends autotesaprordtesActions
 
   public function updateError()
   {
+    $this->cambiaretiapr="";
+  	$this->nometiaprts="";
+    $varemp = $this->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('tesoreria',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['tesoreria']))
+	     if(array_key_exists('tesaprord',$varemp['aplicacion']['tesoreria']['modulos'])){
+	       if(array_key_exists('cambiaretiapr',$varemp['aplicacion']['tesoreria']['modulos']['tesaprord']))
+	       {
+	       	$this->cambiaretiapr=$varemp['aplicacion']['tesoreria']['modulos']['tesaprord']['cambiaretiapr'];
+	       if(array_key_exists('nometiaprts',$varemp['aplicacion']['tesoreria']['modulos']['tesaprord']))
+	       {
+	       	$this->nometiaprts=$varemp['aplicacion']['tesoreria']['modulos']['tesaprord']['nometiaprts'];
+	       }
+	       }
+	     }
+
     $this->configGrid();
     $grid=Herramientas::CargarDatosGridv2($this,$this->objeto);
   }
@@ -201,7 +243,7 @@ class tesaprordtesActions extends autotesaprordtesActions
 	       {
 	         if ($reg->getGencomalc()=='S')
 	         {
-	          $x=OrdendePago::grabarComprobanteAlc($y[$l]->getNumord(),&$msjuno,&$comprobante);
+	          $x=OrdendePago::grabarComprobanteAlc($y[$l]->getNumord(),&$msjuno,&$comprobante,$y[$l]->getNomben());
 	          if ($msjuno=="") $concom=$concom + 1;
 	          else break;
 	         }

@@ -466,6 +466,19 @@ class OrdendePago
      $orden->setCtapag($cuentaporpagarrendicion);
    }
 
+   $e= new Criteria();
+   $ooo= OpdefempPeer::doSelectOne($e);
+   if ($ooo)
+   {
+      if ($ooo->getReqaprord()=='S')
+      {
+      	if ($orden->getTipcau()==$ooo->getOrdtna() || $orden->getTipcau()==$ooo->getOrdtba())
+      	{
+          $orden->setAprobadoord('A');
+      	}
+      }
+   }//////////////////////
+
    $orden->save();
    Comprobante::ActualizarReferenciaComprobante($numerocomp,$orden->getNumord());
 
@@ -890,7 +903,7 @@ class OrdendePago
       $clscommpro->setNumcom($numerocomprob);
       $clscommpro->setReftra($reftra);
       $clscommpro->setFectra(date("d/m/Y",strtotime($orden->getFecemi())));
-      $clscommpro->setDestra($orden->getDesord());
+      $clscommpro->setDestra($orden->getDesord()." - ".$orden->getNomben());
       $clscommpro->setCtas($cuentas);
       $clscommpro->setDesc($descr);
       $clscommpro->setMov($tipos);
@@ -2971,7 +2984,7 @@ class OrdendePago
     return true;
   }
 
-  public static function grabarComprobanteAlc($numord,&$msjuno,&$arrcompro)
+  public static function grabarComprobanteAlc($numord,&$msjuno,&$arrcompro,$bene)
   {
     $numeroorden="";
 
@@ -3051,7 +3064,7 @@ class OrdendePago
     $clscommpro->setNumcom($numerocomprob);
     $clscommpro->setReftra($reftra);
     $clscommpro->setFectra(date("d/m/Y",strtotime($fecha)));
-    $clscommpro->setDestra($desord);
+    $clscommpro->setDestra($desord." - ".$bene);
     $clscommpro->setCtas($cuentas);
     $clscommpro->setDesc($descr);
     $clscommpro->setMov($tipos);
@@ -3093,12 +3106,18 @@ class OrdendePago
       if ($x[$j]->getAprobadotes()=="1")
       {
         $x[$j]->setAprobadotes('A');
-        $orden1="OP".substr($x[$j]->getNumord(),2,6);
-        if ($orden1==$numord[$l+1])
-        {
-          $x[$j]->setNumcomapr($numcom[$l+1]);
-          $l++;
-        }
+         $e= new Criteria();
+         $reg= OpdefempPeer::doSelectOne($e);
+         if ($reg){
+          if ($reg->getGencomalc()=="S"){
+           $orden1="OP".substr($x[$j]->getNumord(),2,6);
+	        if ($orden1==$numord[$l+1])
+	        {
+	          $x[$j]->setNumcomapr($numcom[$l+1]);
+	          $l++;
+	        }
+          }
+         }
       }
       else
       {

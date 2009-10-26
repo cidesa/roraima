@@ -405,6 +405,18 @@
 538:
   cod: 538
   msj: Ya existe un Movimiento según Libro con ese mismo N° de Cuenta, referencia y tipo de documento.
+539:
+  cod: 539
+  msj: El Archivo ya fue Migrado
+540:
+  cod: 540
+  msj: Su migración fue un exito Total
+541:
+  cod: 541
+  msj: Debe Indicar el Archivo a Migrar.
+542:
+  cod: 542
+  msj: Se Rechazaron tantos registros de un total de tanto registros.
 3:
   cod: 3
   msj: La contraseña es diferente.

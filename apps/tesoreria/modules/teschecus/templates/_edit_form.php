@@ -176,7 +176,20 @@ if (($status=='E' || $status=='A') && $tscheemi->getFaldat()!='S')
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 <br>
+  <?php echo label_for('tscheemi[numcomegr]', __($labels['tscheemi{numcomegr}']), 'class="required"  style="width: 130px"	') ?>
+  <div class="content<?php if ($sf_request->hasError('tscheemi{numcomegr}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('tscheemi{numcomegr}')): ?>
+    <?php echo form_error('tscheemi{numcomegr}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
 
+  <?php $value = object_input_tag($tscheemi, 'getNumcomegr', array (
+  'control_name' => 'tscheemi[numcomegr]',
+  'size' => 80,
+  'readonly' => true,
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+<br>
+<br>
   <?php echo label_for('tscheemi[status]', __($labels['tscheemi{status}']), 'class="required" style="width: 130px"') ?>
   <div class="content<?php if ($sf_request->hasError('tscheemi{status}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('tscheemi{status}')): ?>

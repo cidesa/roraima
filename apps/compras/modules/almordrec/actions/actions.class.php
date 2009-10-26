@@ -5,9 +5,9 @@
  *
  * @package    Roraima
  * @subpackage almordrec
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
+ * @author     $Author: dmartinez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: actions.class.php 32987 2009-09-11 14:43:17Z dmartinez $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -26,11 +26,56 @@ class almordrecActions extends autoalmordrecActions
 	 $cajtexmos=$this->getRequestParameter('cajtexmos');
      $cajtexcom=$this->getRequestParameter('cajtexcom');
 	  if ($this->getRequestParameter('ajax')=='1')
-	    {
-	  		$dato=CadefalmPeer::getDesalmacen($this->getRequestParameter('codigo'));
+	  {
+	    $datos=split('!',$this->getRequestParameter('codigo'));
+	  	$codalm=$datos[0];
+	  	$codart=$datos[1];
+	  	$cajtexmos=$datos[2];
+	    $codubi="";
+	  	$output = '[["","",""]]';
 
-            $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$cajtexcom.'","6","c"]]';
-	    }
+	  if ($codalm!="")
+	  {
+		$aux = split('_',$cajtexmos);
+		$name=$aux[0];
+		$fil=$aux[1];
+		$cajtexcom=$name."_".$fil."_20";
+		$cajcodubi=$name."_".$fil."_21";
+		$cajnomubi=$name."_".$fil."_22";
+		$codalm=str_pad($codalm,6,'0',STR_PAD_LEFT);
+		$c=new Criteria();
+	    $c->add(CadefalmPeer::CODALM,$codalm);
+	    $datos=CadefalmPeer::doSelectOne($c);
+	    if ($datos)
+		{
+		       $nomalm=$datos->getNomalm();
+		       //busco la primera ubicacion para el almacen seleccionado, para el articulo tipeado
+		       $c = new Criteria();
+	           $c->add(CaartalmubiPeer::CODALM,$codalm);
+	           $c->add(CaartalmubiPeer::CODART,$codart);
+	           $c->addAscendingOrderByColumn(CaartalmubiPeer::CODUBI);
+	           $alm = CaartalmubiPeer::doSelectOne($c);
+	           if ($alm)
+	           {
+	             	$codubi=$alm->getCodubi();
+	             	$nomubi=CadefubiPeer::getDesubicacion($codubi);
+	             	$output = '[["'.$cajtexmos.'","'.$nomalm.'",""],["'.$cajtexcom.'","6","c"],["'.$cajcodubi.'","'.$codubi.'",""],["'.$cajnomubi.'","'.$nomubi.'",""]]';
+	           }
+	           else//el almacen seleccionado no existe para el articulo introducido por el usuario
+	           {
+		    	$javascript="alert('El articulo : ".$codart.", no existe en el Almacen seleccionado: ".$codalm." ');$('".$cajtexmos."').focus()";
+		    	$output = '[["'.$cajtexmos.'","",""],["'.$cajcodubi.'","",""],["'.$cajnomubi.'","",""],["'.$cajtexcom.'","",""],["javascript","'.$javascript.'",""]]';
+	           }
+
+		}
+		else
+		{
+		    	$nomalm="";
+		    	$javascript="alert('Codigo del Almacen no existe...')";
+		    	$output = '[["'.$cajtexmos.'","'.$nomalm.'",""],["'.$cajcodubi.'","",""],["'.$cajnomubi.'","",""],["'.$cajtexcom.'","",""],["javascript","'.$javascript.'",""]]';
+		}// if ($datos)
+	    }// if ($codalm)
+	   }
 	   else if ($this->getRequestParameter('ajax')=='2')
 	    {
 	  		$dato=CaordcomPeer::getFecord($this->getRequestParameter('codigo'));
@@ -44,21 +89,55 @@ class almordrecActions extends autoalmordrecActions
 	    }
 	    else  if ($this->getRequestParameter('ajax')=='4')//Ubicación
 	    {
-	  		 $javascript="";
-	  		 $codalm=$this->getRequestParameter('codalm');
-	  		 $codubi=$this->getRequestParameter('codigo');
-	  		 if (Compras::verificarexistenciaubialm($codalm,$codubi))
-              {
-                  $dato=CadefubiPeer::getDesubicacion($codubi);
-              }
-                else
-              {
- 				  $javascript="alert('La ubicacion : ".$codubi.", no existe para el almacen seleccionado...');";
-                  $dato="";
-                  $codubi="";
-              }
-            $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$cajtexcom.'","'.$codubi.'",""],["javascript","'.$javascript.'",""]]';
-	    }
+	  	    $datos=split('!',$this->getRequestParameter('codigo'));
+		   	$codubi=$datos[0];
+		  	$codalm=$datos[1];
+		  	$codart=$datos[2];
+		  	$cajtexmos=$datos[3];
+		  	$javascript="";
+		  	$output = '[["","",""]]';
+		  	if ($codart=="")
+		  	{
+		     $javascript="alert('Debe primero seleccionar el artículo');";
+		     $output = '[["javascript","'.$javascript.'",""]]';
+		  	}
+		  	else
+		  	{
+		  		$aux = split('_',$cajtexmos);
+				$name=$aux[0];
+				$fil=$aux[1];
+				$cajcodubi=$name."_".$fil."_21";
+				$cajnomubi=$name."_".$fil."_22";
+				if (trim($codalm)!="")
+		        {
+	               $c = new Criteria();
+		           $c->add(CaartalmubiPeer::CODALM,$codalm);
+		           $c->add(CaartalmubiPeer::CODUBI,$codubi);
+		           $c->add(CaartalmubiPeer::CODART,$codart);
+		           $alm = CaartalmubiPeer::doSelectOne($c);
+	           	   if ($alm)
+	           	   {
+	           	   		$dato=CadefubiPeer::getDesubicacion($codubi);
+	           	   		$javascript="";
+	           	   }
+	              else
+	              {
+	                  $javascript="alert('La ubicacion : ".$codubi.", no existe para el almacen seleccionado: ".$codalm." y el articulo ".$codart." ')";
+	                  $dato="";
+	                  $codubi="";
+	              }
+	            $output = '[["'.$cajnomubi.'","'.$dato.'",""],["'.$cajcodubi.'","'.$codubi.'",""],["javascript","'.$javascript.'",""]]';
+		      }
+		      else
+		      {
+		      	$javascript="alert('Primero debe seleccionar un Almacen...');";
+		      	$dato="";
+		      	$codubi="";
+	  			$output = '[["'.$cajnomubi.'","'.$dato.'",""],["'.$cajcodubi.'","'.$codubi.'",""],["javascript","'.$javascript.'",""]]';
+		      }
+		  	}
+
+        }
 	    else  if ($this->getRequestParameter('ajax')=='5')
 	    {
 	  	    $msg="";
@@ -358,7 +437,9 @@ class almordrecActions extends autoalmordrecActions
     $col19->setNombreCampo('codalm');
     $col19->setHTML('type="text" size="8" maxlength="6"');
     $col19->setCatalogo('Cadefalm','sf_admin_edit_form',$objalm,'Cadelfalm_Almordrec');
-    $col19->setAjax('almordrec',1,20);
+    $signo="-";
+   	$signomas="+";
+    $col19->setJScript('onBlur="toAjax(1,getUrlModuloAjax(),this.value+'.chr(39).'!'.chr(39).'+$(obtenerColumna(this.id,18,'.chr(39).$signo.chr(39).')).value+'.chr(39).'!'.chr(39).'+obtenerColumna(this.id,1,'.chr(39).$signomas.chr(39).'),devuelveParVacios(),devuelveParVacios());"');
 
     $col20 = new Columna('Nombre Almacén');
 	$col20->setTipo(Columna::TEXTAREA);
@@ -378,7 +459,7 @@ class almordrecActions extends autoalmordrecActions
     $col21->setNombreCampo('codubi');
     $col21->setHTML('type="text" size="10" maxlength="'.chr(39).$this->lonubi.chr(39).'"');
     $col21->setCatalogo('Cadefubi','sf_admin_edit_form',$objubi,'Cadefubi_Almdes',$params);
-    $col21->setJScript('onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$this->mascaraubi.chr(39).')"  onKeypress="ejecutaajax(event,this.id)"');
+    $col21->setJScript('onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$this->mascaraubi.chr(39).')"  onBlur="toAjax(4,getUrlModuloAjax(),this.value+'.chr(39).'!'.chr(39).'+$(obtenerColumna(this.id,2,'.chr(39).$signo.chr(39).')).value+'.chr(39).'!'.chr(39).'+$(obtenerColumna(this.id,20,'.chr(39).$signo.chr(39).')).value+'.chr(39).'!'.chr(39).'+obtenerColumna(this.id,1,'.chr(39).$signomas.chr(39).'),devuelveParVacios(),devuelveParVacios());"');
 
     $col22 = new Columna('Nombre Ubicación');
 	$col22->setTipo(Columna::TEXTAREA);
