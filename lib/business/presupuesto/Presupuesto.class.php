@@ -25,6 +25,11 @@ class Presupuesto
         $x[$j]->setAprcom('S');
         $x[$j]->save();
       }
+      if ($x[$j]->getCheck2()=='1')
+      {
+        $x[$j]->setAprcom('R');
+        $x[$j]->save();
+      }
       $j++;
     }
 

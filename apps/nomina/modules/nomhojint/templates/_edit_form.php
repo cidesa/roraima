@@ -1608,6 +1608,27 @@ function nivel(e,numero)
     }
 }
 
+ function ajaxubiad(e,id)
+ {
+   var aux = id.split("_");
+    var name=aux[0];
+    var fil=parseInt(aux[1]);
+    var col=parseInt(aux[2]);
+
+    var coldes=col+1;
+
+    var descrip=name+"_"+fil+"_"+coldes;
+    var cod=$(id).value;
+
+    if (e.keyCode==13 || e.keyCode==9)
+    {
+    if ($(id).value!='')
+    {
+      new Ajax.Request(getUrlModuloAjax(), {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=4&cajtexmos='+descrip+'&cajtexcom='+id+'&codigo='+cod})
+    }
+  }
+  }
+
 </script>
 
 </form>

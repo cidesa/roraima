@@ -60,8 +60,8 @@
   ?>
 
 <input id="opsi" type="text" value="" style="display:none">
-
- <?php echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.button_to_popup('...','generales/catalogo?clase=Npnomina&frame=sf_admin_edit_form&obj1=npnomina_codnom&obj2=npnomina_nomnom')?>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Npdefcpt_nomconceptossalariointegral/clase/Npnomina/frame/sf_admin_edit_form/obj1/npnomina_codnom/obj2/npnomina_nomnom/campo1/codnom/campo2/nomnom/param1/1','','','botoncat')?>
 
   <?php $value = object_input_tag($npnomina, 'getNomnom', array (
   'readonly' => true,

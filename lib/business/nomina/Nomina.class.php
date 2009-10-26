@@ -7908,6 +7908,10 @@ public static function salvarNpsalintind($npsalint, $grid) {
 	if(count($x)>0)
     while ($j<count($x))
     {
+	  if ($x[$j]->getConsest()=='1')
+	  {
+	  	$x[$j]->setConsest('S');
+	  }else $x[$j]->setConsest(null);
 	  $x[$j]->save();
 	  $j++;
     }

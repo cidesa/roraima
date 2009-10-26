@@ -13,7 +13,7 @@ abstract class BaseCpcomproPeer {
 	const CLASS_DEFAULT = 'lib.model.Cpcompro';
 
 	
-	const NUM_COLUMNS = 18;
+	const NUM_COLUMNS = 20;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -71,6 +71,12 @@ abstract class BaseCpcomproPeer {
 	const APRCOM = 'cpcompro.APRCOM';
 
 	
+	const CODUBI = 'cpcompro.CODUBI';
+
+	
+	const MOTREC = 'cpcompro.MOTREC';
+
+	
 	const ID = 'cpcompro.ID';
 
 	
@@ -79,18 +85,18 @@ abstract class BaseCpcomproPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Refcom', 'Tipcom', 'Feccom', 'Anocom', 'Refprc', 'Tipprc', 'Descom', 'Desanu', 'Moncom', 'Salcau', 'Salpag', 'Salaju', 'Stacom', 'Fecanu', 'Cedrif', 'Tipo', 'Aprcom', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (CpcomproPeer::REFCOM, CpcomproPeer::TIPCOM, CpcomproPeer::FECCOM, CpcomproPeer::ANOCOM, CpcomproPeer::REFPRC, CpcomproPeer::TIPPRC, CpcomproPeer::DESCOM, CpcomproPeer::DESANU, CpcomproPeer::MONCOM, CpcomproPeer::SALCAU, CpcomproPeer::SALPAG, CpcomproPeer::SALAJU, CpcomproPeer::STACOM, CpcomproPeer::FECANU, CpcomproPeer::CEDRIF, CpcomproPeer::TIPO, CpcomproPeer::APRCOM, CpcomproPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('refcom', 'tipcom', 'feccom', 'anocom', 'refprc', 'tipprc', 'descom', 'desanu', 'moncom', 'salcau', 'salpag', 'salaju', 'stacom', 'fecanu', 'cedrif', 'tipo', 'aprcom', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, )
+		BasePeer::TYPE_PHPNAME => array ('Refcom', 'Tipcom', 'Feccom', 'Anocom', 'Refprc', 'Tipprc', 'Descom', 'Desanu', 'Moncom', 'Salcau', 'Salpag', 'Salaju', 'Stacom', 'Fecanu', 'Cedrif', 'Tipo', 'Aprcom', 'Codubi', 'Motrec', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (CpcomproPeer::REFCOM, CpcomproPeer::TIPCOM, CpcomproPeer::FECCOM, CpcomproPeer::ANOCOM, CpcomproPeer::REFPRC, CpcomproPeer::TIPPRC, CpcomproPeer::DESCOM, CpcomproPeer::DESANU, CpcomproPeer::MONCOM, CpcomproPeer::SALCAU, CpcomproPeer::SALPAG, CpcomproPeer::SALAJU, CpcomproPeer::STACOM, CpcomproPeer::FECANU, CpcomproPeer::CEDRIF, CpcomproPeer::TIPO, CpcomproPeer::APRCOM, CpcomproPeer::CODUBI, CpcomproPeer::MOTREC, CpcomproPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('refcom', 'tipcom', 'feccom', 'anocom', 'refprc', 'tipprc', 'descom', 'desanu', 'moncom', 'salcau', 'salpag', 'salaju', 'stacom', 'fecanu', 'cedrif', 'tipo', 'aprcom', 'codubi', 'motrec', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Refcom' => 0, 'Tipcom' => 1, 'Feccom' => 2, 'Anocom' => 3, 'Refprc' => 4, 'Tipprc' => 5, 'Descom' => 6, 'Desanu' => 7, 'Moncom' => 8, 'Salcau' => 9, 'Salpag' => 10, 'Salaju' => 11, 'Stacom' => 12, 'Fecanu' => 13, 'Cedrif' => 14, 'Tipo' => 15, 'Aprcom' => 16, 'Id' => 17, ),
-		BasePeer::TYPE_COLNAME => array (CpcomproPeer::REFCOM => 0, CpcomproPeer::TIPCOM => 1, CpcomproPeer::FECCOM => 2, CpcomproPeer::ANOCOM => 3, CpcomproPeer::REFPRC => 4, CpcomproPeer::TIPPRC => 5, CpcomproPeer::DESCOM => 6, CpcomproPeer::DESANU => 7, CpcomproPeer::MONCOM => 8, CpcomproPeer::SALCAU => 9, CpcomproPeer::SALPAG => 10, CpcomproPeer::SALAJU => 11, CpcomproPeer::STACOM => 12, CpcomproPeer::FECANU => 13, CpcomproPeer::CEDRIF => 14, CpcomproPeer::TIPO => 15, CpcomproPeer::APRCOM => 16, CpcomproPeer::ID => 17, ),
-		BasePeer::TYPE_FIELDNAME => array ('refcom' => 0, 'tipcom' => 1, 'feccom' => 2, 'anocom' => 3, 'refprc' => 4, 'tipprc' => 5, 'descom' => 6, 'desanu' => 7, 'moncom' => 8, 'salcau' => 9, 'salpag' => 10, 'salaju' => 11, 'stacom' => 12, 'fecanu' => 13, 'cedrif' => 14, 'tipo' => 15, 'aprcom' => 16, 'id' => 17, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, )
+		BasePeer::TYPE_PHPNAME => array ('Refcom' => 0, 'Tipcom' => 1, 'Feccom' => 2, 'Anocom' => 3, 'Refprc' => 4, 'Tipprc' => 5, 'Descom' => 6, 'Desanu' => 7, 'Moncom' => 8, 'Salcau' => 9, 'Salpag' => 10, 'Salaju' => 11, 'Stacom' => 12, 'Fecanu' => 13, 'Cedrif' => 14, 'Tipo' => 15, 'Aprcom' => 16, 'Codubi' => 17, 'Motrec' => 18, 'Id' => 19, ),
+		BasePeer::TYPE_COLNAME => array (CpcomproPeer::REFCOM => 0, CpcomproPeer::TIPCOM => 1, CpcomproPeer::FECCOM => 2, CpcomproPeer::ANOCOM => 3, CpcomproPeer::REFPRC => 4, CpcomproPeer::TIPPRC => 5, CpcomproPeer::DESCOM => 6, CpcomproPeer::DESANU => 7, CpcomproPeer::MONCOM => 8, CpcomproPeer::SALCAU => 9, CpcomproPeer::SALPAG => 10, CpcomproPeer::SALAJU => 11, CpcomproPeer::STACOM => 12, CpcomproPeer::FECANU => 13, CpcomproPeer::CEDRIF => 14, CpcomproPeer::TIPO => 15, CpcomproPeer::APRCOM => 16, CpcomproPeer::CODUBI => 17, CpcomproPeer::MOTREC => 18, CpcomproPeer::ID => 19, ),
+		BasePeer::TYPE_FIELDNAME => array ('refcom' => 0, 'tipcom' => 1, 'feccom' => 2, 'anocom' => 3, 'refprc' => 4, 'tipprc' => 5, 'descom' => 6, 'desanu' => 7, 'moncom' => 8, 'salcau' => 9, 'salpag' => 10, 'salaju' => 11, 'stacom' => 12, 'fecanu' => 13, 'cedrif' => 14, 'tipo' => 15, 'aprcom' => 16, 'codubi' => 17, 'motrec' => 18, 'id' => 19, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, )
 	);
 
 	
@@ -177,6 +183,10 @@ abstract class BaseCpcomproPeer {
 		$criteria->addSelectColumn(CpcomproPeer::TIPO);
 
 		$criteria->addSelectColumn(CpcomproPeer::APRCOM);
+
+		$criteria->addSelectColumn(CpcomproPeer::CODUBI);
+
+		$criteria->addSelectColumn(CpcomproPeer::MOTREC);
 
 		$criteria->addSelectColumn(CpcomproPeer::ID);
 

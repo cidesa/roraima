@@ -13,7 +13,7 @@ abstract class BaseNpprimashijosPeer {
 	const CLASS_DEFAULT = 'lib.model.nomina.Npprimashijos';
 
 	
-	const NUM_COLUMNS = 6;
+	const NUM_COLUMNS = 7;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -35,6 +35,9 @@ abstract class BaseNpprimashijosPeer {
 	const ESTUDIOS = 'npprimashijos.ESTUDIOS';
 
 	
+	const CONSEST = 'npprimashijos.CONSEST';
+
+	
 	const ID = 'npprimashijos.ID';
 
 	
@@ -43,18 +46,18 @@ abstract class BaseNpprimashijosPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Parfam', 'Edaddes', 'Edadhas', 'Monto', 'Estudios', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (NpprimashijosPeer::PARFAM, NpprimashijosPeer::EDADDES, NpprimashijosPeer::EDADHAS, NpprimashijosPeer::MONTO, NpprimashijosPeer::ESTUDIOS, NpprimashijosPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('parfam', 'edaddes', 'edadhas', 'monto', 'estudios', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
+		BasePeer::TYPE_PHPNAME => array ('Parfam', 'Edaddes', 'Edadhas', 'Monto', 'Estudios', 'Consest', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (NpprimashijosPeer::PARFAM, NpprimashijosPeer::EDADDES, NpprimashijosPeer::EDADHAS, NpprimashijosPeer::MONTO, NpprimashijosPeer::ESTUDIOS, NpprimashijosPeer::CONSEST, NpprimashijosPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('parfam', 'edaddes', 'edadhas', 'monto', 'estudios', 'consest', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Parfam' => 0, 'Edaddes' => 1, 'Edadhas' => 2, 'Monto' => 3, 'Estudios' => 4, 'Id' => 5, ),
-		BasePeer::TYPE_COLNAME => array (NpprimashijosPeer::PARFAM => 0, NpprimashijosPeer::EDADDES => 1, NpprimashijosPeer::EDADHAS => 2, NpprimashijosPeer::MONTO => 3, NpprimashijosPeer::ESTUDIOS => 4, NpprimashijosPeer::ID => 5, ),
-		BasePeer::TYPE_FIELDNAME => array ('parfam' => 0, 'edaddes' => 1, 'edadhas' => 2, 'monto' => 3, 'estudios' => 4, 'id' => 5, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
+		BasePeer::TYPE_PHPNAME => array ('Parfam' => 0, 'Edaddes' => 1, 'Edadhas' => 2, 'Monto' => 3, 'Estudios' => 4, 'Consest' => 5, 'Id' => 6, ),
+		BasePeer::TYPE_COLNAME => array (NpprimashijosPeer::PARFAM => 0, NpprimashijosPeer::EDADDES => 1, NpprimashijosPeer::EDADHAS => 2, NpprimashijosPeer::MONTO => 3, NpprimashijosPeer::ESTUDIOS => 4, NpprimashijosPeer::CONSEST => 5, NpprimashijosPeer::ID => 6, ),
+		BasePeer::TYPE_FIELDNAME => array ('parfam' => 0, 'edaddes' => 1, 'edadhas' => 2, 'monto' => 3, 'estudios' => 4, 'consest' => 5, 'id' => 6, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
 	);
 
 	
@@ -117,6 +120,8 @@ abstract class BaseNpprimashijosPeer {
 		$criteria->addSelectColumn(NpprimashijosPeer::MONTO);
 
 		$criteria->addSelectColumn(NpprimashijosPeer::ESTUDIOS);
+
+		$criteria->addSelectColumn(NpprimashijosPeer::CONSEST);
 
 		$criteria->addSelectColumn(NpprimashijosPeer::ID);
 

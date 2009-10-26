@@ -13,7 +13,7 @@ abstract class BaseNpexplabPeer {
 	const CLASS_DEFAULT = 'lib.model.nomina.Npexplab';
 
 	
-	const NUM_COLUMNS = 13;
+	const NUM_COLUMNS = 14;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -56,6 +56,9 @@ abstract class BaseNpexplabPeer {
 	const MONTOPRES = 'npexplab.MONTOPRES';
 
 	
+	const CODNIV = 'npexplab.CODNIV';
+
+	
 	const ID = 'npexplab.ID';
 
 	
@@ -64,18 +67,18 @@ abstract class BaseNpexplabPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codemp', 'Nomemp', 'Codcar', 'Descar', 'Fecini', 'Fecter', 'Sueobt', 'Stacar', 'Compobt', 'Durexp', 'Tiporg', 'Montopres', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (NpexplabPeer::CODEMP, NpexplabPeer::NOMEMP, NpexplabPeer::CODCAR, NpexplabPeer::DESCAR, NpexplabPeer::FECINI, NpexplabPeer::FECTER, NpexplabPeer::SUEOBT, NpexplabPeer::STACAR, NpexplabPeer::COMPOBT, NpexplabPeer::DUREXP, NpexplabPeer::TIPORG, NpexplabPeer::MONTOPRES, NpexplabPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codemp', 'nomemp', 'codcar', 'descar', 'fecini', 'fecter', 'sueobt', 'stacar', 'compobt', 'durexp', 'tiporg', 'montopres', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, )
+		BasePeer::TYPE_PHPNAME => array ('Codemp', 'Nomemp', 'Codcar', 'Descar', 'Fecini', 'Fecter', 'Sueobt', 'Stacar', 'Compobt', 'Durexp', 'Tiporg', 'Montopres', 'Codniv', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (NpexplabPeer::CODEMP, NpexplabPeer::NOMEMP, NpexplabPeer::CODCAR, NpexplabPeer::DESCAR, NpexplabPeer::FECINI, NpexplabPeer::FECTER, NpexplabPeer::SUEOBT, NpexplabPeer::STACAR, NpexplabPeer::COMPOBT, NpexplabPeer::DUREXP, NpexplabPeer::TIPORG, NpexplabPeer::MONTOPRES, NpexplabPeer::CODNIV, NpexplabPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codemp', 'nomemp', 'codcar', 'descar', 'fecini', 'fecter', 'sueobt', 'stacar', 'compobt', 'durexp', 'tiporg', 'montopres', 'codniv', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codemp' => 0, 'Nomemp' => 1, 'Codcar' => 2, 'Descar' => 3, 'Fecini' => 4, 'Fecter' => 5, 'Sueobt' => 6, 'Stacar' => 7, 'Compobt' => 8, 'Durexp' => 9, 'Tiporg' => 10, 'Montopres' => 11, 'Id' => 12, ),
-		BasePeer::TYPE_COLNAME => array (NpexplabPeer::CODEMP => 0, NpexplabPeer::NOMEMP => 1, NpexplabPeer::CODCAR => 2, NpexplabPeer::DESCAR => 3, NpexplabPeer::FECINI => 4, NpexplabPeer::FECTER => 5, NpexplabPeer::SUEOBT => 6, NpexplabPeer::STACAR => 7, NpexplabPeer::COMPOBT => 8, NpexplabPeer::DUREXP => 9, NpexplabPeer::TIPORG => 10, NpexplabPeer::MONTOPRES => 11, NpexplabPeer::ID => 12, ),
-		BasePeer::TYPE_FIELDNAME => array ('codemp' => 0, 'nomemp' => 1, 'codcar' => 2, 'descar' => 3, 'fecini' => 4, 'fecter' => 5, 'sueobt' => 6, 'stacar' => 7, 'compobt' => 8, 'durexp' => 9, 'tiporg' => 10, 'montopres' => 11, 'id' => 12, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, )
+		BasePeer::TYPE_PHPNAME => array ('Codemp' => 0, 'Nomemp' => 1, 'Codcar' => 2, 'Descar' => 3, 'Fecini' => 4, 'Fecter' => 5, 'Sueobt' => 6, 'Stacar' => 7, 'Compobt' => 8, 'Durexp' => 9, 'Tiporg' => 10, 'Montopres' => 11, 'Codniv' => 12, 'Id' => 13, ),
+		BasePeer::TYPE_COLNAME => array (NpexplabPeer::CODEMP => 0, NpexplabPeer::NOMEMP => 1, NpexplabPeer::CODCAR => 2, NpexplabPeer::DESCAR => 3, NpexplabPeer::FECINI => 4, NpexplabPeer::FECTER => 5, NpexplabPeer::SUEOBT => 6, NpexplabPeer::STACAR => 7, NpexplabPeer::COMPOBT => 8, NpexplabPeer::DUREXP => 9, NpexplabPeer::TIPORG => 10, NpexplabPeer::MONTOPRES => 11, NpexplabPeer::CODNIV => 12, NpexplabPeer::ID => 13, ),
+		BasePeer::TYPE_FIELDNAME => array ('codemp' => 0, 'nomemp' => 1, 'codcar' => 2, 'descar' => 3, 'fecini' => 4, 'fecter' => 5, 'sueobt' => 6, 'stacar' => 7, 'compobt' => 8, 'durexp' => 9, 'tiporg' => 10, 'montopres' => 11, 'codniv' => 12, 'id' => 13, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, )
 	);
 
 	
@@ -152,6 +155,8 @@ abstract class BaseNpexplabPeer {
 		$criteria->addSelectColumn(NpexplabPeer::TIPORG);
 
 		$criteria->addSelectColumn(NpexplabPeer::MONTOPRES);
+
+		$criteria->addSelectColumn(NpexplabPeer::CODNIV);
 
 		$criteria->addSelectColumn(NpexplabPeer::ID);
 

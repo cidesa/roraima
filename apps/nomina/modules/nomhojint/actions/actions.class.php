@@ -1164,12 +1164,33 @@ $this->Bitacora('Guardo');
     $col6->setTitulo('Compensación');
     $col6->setNombreCampo('compobt');
 
+    $params2= array('param1' => $this->lonnivel);
+    $col7 = new Columna('Ubicación Administrativa');
+    $col7->setTipo(Columna::TEXTO);
+    $col7->setEsGrabable(true);
+    $col7->setAlineacionObjeto(Columna::CENTRO);
+    $col7->setAlineacionContenido(Columna::CENTRO);
+    $col7->setNombreCampo('codniv');
+    $col7->setCatalogo('npestorg','sf_admin_edit_form',array('codniv' => 7,'desniv' => 8),'Npestorg_Nomhojint',$params2);
+    $col7->setHTML('type="text" size="17" maxlength="'.chr(39).$this->lonnivel.chr(39).'"');
+    $col7->setJScript('onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$this->mascaranivel.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}" onBlur="javascript:event.keyCode=13; ajaxubiad(event,this.id);;"');
+
+    $col8 = new Columna('Descripción');
+    $col8->setTipo(Columna::TEXTO);
+    $col8->setAlineacionObjeto(Columna::IZQUIERDA);
+    $col8->setAlineacionContenido(Columna::IZQUIERDA);
+    $col8->setEsGrabable(true);
+    $col8->setNombreCampo('desniv');
+    $col8->setHTML('type="text" size="25"');
+
     $opciones->addColumna($col1);
     $opciones->addColumna($col2);
     $opciones->addColumna($col3);
     $opciones->addColumna($col4);
     $opciones->addColumna($col5);
     $opciones->addColumna($col6);
+    $opciones->addColumna($col7);
+    $opciones->addColumna($col8);
 
     $this->obj2 = $opciones->getConfig($per);
   }
@@ -1553,7 +1574,7 @@ $this->Bitacora('Guardo');
       $dato=$datos->getDesniv();
     }else
   	{  $dato="";
-  		$javascript="alert('El Nivel Organizacional no existe'); $('$cajtextcom').value=''; ";
+  		$javascript="alert('El Nivel Organizacional no existe'); $('$cajtexcom').value=''; ";
   	}
   	$output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""]]';
   }
@@ -1570,6 +1591,7 @@ $this->Bitacora('Guardo');
   $this->lonemp=strlen($this->mascaraemp);
   $this->c=null;
   }
+
 
   protected function getLabels()
   {
@@ -1656,7 +1678,6 @@ $this->Bitacora('Guardo');
       'nphojint{diaacu}' => 'Dias Acumulados:',
       'nphojint{diaadiacu}' => 'Dias Adicionales Acumulados:',
       'nphojint{codtipemp}' => 'Tipo de Empleado:',
-
 
 
     );

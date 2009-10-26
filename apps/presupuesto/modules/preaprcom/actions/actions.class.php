@@ -58,13 +58,19 @@ class preaprcomActions extends autopreaprcomActions
     	$c->add(CpcomproPeer::APRCOM,'N');
     	$c->add(CpcomproPeer::STACOM,'A');
     	//$c->add(CpcomproPeer::APRCOM,ISNOTNULL,Criteria::CUSTOM);
-    	$sql = "(cpcompro.APRCOM<>'S' or cpcompro.APRCOM isnull)";
+    	$sql = "((cpcompro.APRCOM<>'S' and cpcompro.APRCOM<>'R') or cpcompro.APRCOM isnull)";
     	$c->add(CpcomproPeer::APRCOM, $sql, Criteria :: CUSTOM);
     	$c->addAscendingOrderByColumn(CpcomproPeer::REFCOM);
     	$c->addAscendingOrderByColumn(CpcomproPeer::FECCOM);
     	$reg = CpcomproPeer::doSelect($c);
 
-	    $this->obj = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/preaprcom/'.sfConfig::get('sf_app_module_config_dir_name').'/grid_cpcompro',$reg);
+	    //$this->obj = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/preaprcom/'.sfConfig::get('sf_app_module_config_dir_name').'/grid_cpcompro',$reg);
+        $this->columnas = Herramientas :: getConfigGrid(sfConfig :: get('sf_app_module_dir') . '/preaprcom/' . sfConfig :: get('sf_app_module_config_dir_name') . '/grid_cpcompro');
+
+	    $this->columnas[1][0]->setHTML('onClick="verificar(this.id)"');
+	    $this->columnas[1][1]->setHTML('onClick="verificar(this.id)"');
+
+	    $this->obj = $this->columnas[0]->getConfig($reg);
 
         $this->cpcompro->setObj($this->obj);
 

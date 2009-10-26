@@ -68,6 +68,10 @@ class CpcomproMapBuilder {
 
 		$tMap->addColumn('APRCOM', 'Aprcom', 'string', CreoleTypes::VARCHAR, false, 1);
 
+		$tMap->addColumn('CODUBI', 'Codubi', 'string', CreoleTypes::VARCHAR, false, 30);
+
+		$tMap->addColumn('MOTREC', 'Motrec', 'string', CreoleTypes::VARCHAR, false, 1000);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

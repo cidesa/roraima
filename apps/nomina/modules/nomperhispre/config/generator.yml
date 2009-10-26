@@ -10,6 +10,7 @@ generator:
       codemp: { name: Codigo Empleado, params: maxlength=16 }
       monpre: { name: Monto del Prestamo, params: onBlur="javascript:return  ObtenerSalActual()" , validate: Vdecimal_6, msj_error: Debe insertar el monto del prestamo }
       saldo:  { name: Saldo Actual, params:  readonly=true}
+      nrocuota: { name: Número de Cuotas }
       moncuota: { name: Monto de la cuota }
       salant: { name: Saldo Anterior, params: readonly=true }
       signo: { name: Signo }
@@ -31,7 +32,7 @@ generator:
          Empleado: [ _codemp]
          Tipo Préstamo: [ _codtippre]
          Descripción del Préstamo: [ deshispre]
-         Datos del Préstamo: [ salant, _signo, monpre, _moncuota, saldo]
+         Datos del Préstamo: [ salant, _signo, monpre, _nrocuota, _moncuota, saldo]
       actions:
         _list:        ~
         _save:        ~

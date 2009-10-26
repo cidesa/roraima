@@ -10,7 +10,7 @@ generator:
       nomcar:   { name: Descripción }
       codnom:   { name: Nómina, params: maxlength=3 }
       nomnom:   { name: Descripción }
-      codcat:   { name: Categoria}
+      codcat:   { name: Categoria Presupuestaria}
       nomcat:   { name: Nombre Categoria, params: maxlength=3 }
       paso:     { name: Paso, params: maxlength=3 }
       despaso:  { name: Descripción Paso }

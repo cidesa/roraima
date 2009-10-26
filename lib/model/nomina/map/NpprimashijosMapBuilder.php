@@ -44,6 +44,8 @@ class NpprimashijosMapBuilder {
 
 		$tMap->addColumn('ESTUDIOS', 'Estudios', 'string', CreoleTypes::VARCHAR, false, 1);
 
+		$tMap->addColumn('CONSEST', 'Consest', 'string', CreoleTypes::VARCHAR, false, 1);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 
