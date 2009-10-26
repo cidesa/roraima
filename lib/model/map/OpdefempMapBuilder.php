@@ -114,6 +114,10 @@ class OpdefempMapBuilder {
 
 		$tMap->addColumn('ORDCONPRE', 'Ordconpre', 'boolean', CreoleTypes::BOOLEAN, false, null);
 
+		$tMap->addColumn('ORDTNA', 'Ordtna', 'string', CreoleTypes::VARCHAR, false, 4);
+
+		$tMap->addColumn('ORDTBA', 'Ordtba', 'string', CreoleTypes::VARCHAR, false, 4);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

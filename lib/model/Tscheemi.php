@@ -9,7 +9,7 @@
  * @subpackage lib.model
  * @author     $Author$ <desarrollo@cidesa.com.ve>
  * @version SVN: $Id$
- * 
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -127,6 +127,40 @@ class Tscheemi extends BaseTscheemi
   public function getEscheque()
   {
     return Herramientas::getX('CODTIP','Tstipmov','escheque',$this->getTipdoc());
+  }
+
+  public function getEstatus()
+  {
+  	$estatus="";
+
+  	if (self::getStatus()=='C')
+  	{
+  		$estatus='CAJA';
+  	}
+  	else if (self::getStatus()=='E')
+  	{
+  		$estatus='ENTREGADO';
+  	}
+  	else if (self::getStatus()=='A')
+  	{
+  		$estatus='ANULADO';
+  	}
+  	return $estatus;
+  }
+
+  public function getFecha()
+  {
+  	$fecha="";
+
+  	if (self::getStatus()=='E')
+  	{
+  		$fecha=date('d/m/Y',strtotime(self::getFecent()));
+  	}
+  	else if (self::getStatus()=='A')
+  	{
+  		$fecha=date('d/m/Y',strtotime(self::getFecanu()));
+  	}
+  	return $fecha;
   }
 
 
