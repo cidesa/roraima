@@ -148,14 +148,21 @@ if ($caprovee->getNitpro()=='J')  {
     <?  if ($caprovee->getTipo()=='P'){
       echo radiobutton_tag('caprovee[tipo]','P', true) .'&nbsp;&nbsp;'. "Cooperativa"."<br>";
       echo radiobutton_tag('caprovee[tipo]','C', false) .'&nbsp;&nbsp;'. "Contratista"."<br>";
+      echo radiobutton_tag('caprovee[tipo]','O', false) .'&nbsp;&nbsp;'. "Proveedor"."<br>";
 
     }elseif ($caprovee->getTipo()=='C'){
       echo radiobutton_tag('caprovee[tipo]','P', false) .'&nbsp;&nbsp;'. "Cooperativa"."<br>";
       echo radiobutton_tag('caprovee[tipo]','C', true) .'&nbsp;&nbsp;'. "Contratista"."<br>";
+      echo radiobutton_tag('caprovee[tipo]','O', false) .'&nbsp;&nbsp;'. "Proveedor"."<br>";
+    }elseif ($caprovee->getTipo()=='O'){
+      echo radiobutton_tag('caprovee[tipo]','P', false) .'&nbsp;&nbsp;'. "Cooperativa"."<br>";
+      echo radiobutton_tag('caprovee[tipo]','C', false) .'&nbsp;&nbsp;'. "Contratista"."<br>";
+      echo radiobutton_tag('caprovee[tipo]','O', true) .'&nbsp;&nbsp;'. "Proveedor"."<br>";
 
     }else{
       echo radiobutton_tag('caprovee[tipo]','P', true) .'&nbsp;&nbsp;'. "Cooperativa"."<br>";
       echo radiobutton_tag('caprovee[tipo]','C', false) .'&nbsp;&nbsp;'. "Contratista"."<br>";
+      echo radiobutton_tag('caprovee[tipo]','O', false) .'&nbsp;&nbsp;'. "Proveedor"."<br>";
     }    ?>
   </div> </fieldset></th>
  </tr>

@@ -30,6 +30,24 @@ class tesaprordActions extends autotesaprordActions
    */
   public function editing()
   {
+  	$this->cambiaretiapr="";
+  	$this->nometiaprad="";
+    $varemp = $this->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('tesoreria',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['tesoreria']))
+	     if(array_key_exists('tesaprord',$varemp['aplicacion']['tesoreria']['modulos'])){
+	       if(array_key_exists('cambiaretiapr',$varemp['aplicacion']['tesoreria']['modulos']['tesaprord']))
+	       {
+	       	$this->cambiaretiapr=$varemp['aplicacion']['tesoreria']['modulos']['tesaprord']['cambiaretiapr'];
+	       if(array_key_exists('nometiaprad',$varemp['aplicacion']['tesoreria']['modulos']['tesaprord']))
+	       {
+	       	$this->nometiaprad=$varemp['aplicacion']['tesoreria']['modulos']['tesaprord']['nometiaprad'];
+	       }
+	       }
+	     }
+
     $this->configGrid();
     $this->opordpag->setFilasord($this->filas);
   }

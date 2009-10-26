@@ -1,0 +1,23 @@
+methods:
+  post:
+   - "tspararc{numcue}"
+
+names:
+  tspararc{numcue}:
+    required:  Yes
+    required_msg: El Número de Cuenta Bancaria no puedo estar en Blanco
+    validators: UniqueValidator, ExistValidator
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Tspararc
+        column:   numcue
+        unique_error:   El Número de Cuenta Bancaria ya esta Configurado. Por Favor, Cambiélo por otro.
+
+ExistValidator:
+    class: CidesaExistValidator
+    param:
+        class:        Tsdefban
+        column:       numcue
+        unique_error: El Número de Cuenta Bancaria no existe

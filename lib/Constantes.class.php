@@ -120,7 +120,7 @@ public static function PagoDoble()
     {return array('P' => 'Proyecto', 'A' => 'Acción Centralizada');}
 
   public static function ListaTipoReporte()
-  {return array('001' => 'Comprobante de Retención de I.V.A', '002' => 'Comprobante de Retención de I.S.L.R', '003' => 'Comprobante de Retención de Ley de Timbre Fiscal');}
+  {return array('001' => 'Comprobante de Retención de I.V.A', '002' => 'Comprobante de Retención de I.S.L.R', '003' => 'Comprobante de Retención de Ley de Timbre Fiscal', '004' => 'Comprobante de Retención de Impuesto Municipal');}
 
   public static function DistribMonto()
   {

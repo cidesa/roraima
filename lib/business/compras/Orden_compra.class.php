@@ -1173,10 +1173,10 @@ class Orden_compra
           else
              $cpcompro_new->setRefprc('NULO');
           $cpcompro_new->setTipprc($tipdoc);
-          $descripcion=Herramientas::getX_vacio('refprc','cpprecom','desprc',$caordcom->getRefsol());
+          /*$descripcion=Herramientas::getX_vacio('refprc','cpprecom','desprc',$caordcom->getRefsol());
           if ($descripcion!='')
             $cpcompro_new->setDescom($descripcion);
-          else
+          else*/
             $cpcompro_new->setDescom($caordcom->getDesord());
 
           //$cpcompro_new->setDesanu('');

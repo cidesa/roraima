@@ -45,6 +45,8 @@ generator:
       ordconpre:  { name: Colocar el Prefijo OP en el Comprobante}
       manbloqban:  { name: Maneja Bloqueos de Cuentas Bancarias}
       ordret:    { name: Retenciones  }
+      ordtna:    { name: Tesoreria Nacional  }
+      ordtba:    { name: Transferencias Bancarias  }
     list:
       title:          Definición de Empresa
       display:        [=codemp, nomemp, diremp]
@@ -53,7 +55,7 @@ generator:
       max_per_page:   10
     edit:
       title:          Definición de Empresa
-      display:        [codemp, nomemp, diremp, ctapag, nomctapag, ctades, nomctades, numini, forubi, ordnom, ordobr, tipeje, ordliq, ordfid, ordval, unitri, genctaord, gencomadi, gencaubon, vercomret, genordret, emichepag, cuecajchi, nomcuecajchi, tipcajchi, nomtipcajchi, monapecajchi, porrepcajchi, tiprencajchi, nomtiprencajchi, numinicajchi, cedrifcajchi, nomben, codcatcajchi, nomcat, gencomalc, reqaprord, ordcomptot, ordmotanu, manbloqban, ordret, ordconpre]
+      display:        [codemp, nomemp, diremp, ctapag, nomctapag, ctades, nomctades, numini, forubi, ordnom, ordobr, tipeje, ordliq, ordfid, ordval, unitri, genctaord, gencomadi, gencaubon, vercomret, genordret, emichepag, cuecajchi, nomcuecajchi, tipcajchi, nomtipcajchi, monapecajchi, porrepcajchi, tiprencajchi, nomtiprencajchi, numinicajchi, cedrifcajchi, nomben, codcatcajchi, nomcat, gencomalc, reqaprord, ordcomptot, ordmotanu, manbloqban, ordret, ordconpre, ordtna, ordtba]
       fields:
         genctaord:  {type: checkbox_tag}
         gencomadi: {type: checkbox_tag}

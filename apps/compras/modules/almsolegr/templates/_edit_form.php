@@ -28,7 +28,13 @@
   </tr>
 </table>
 <fieldset id="sf_fieldset_none" class="">
-<legend><?php echo __('Solicitud de Egreso') ?></legend>
+<legend>
+<?php if ($cambiareti=="") {?>
+<?php echo __('Solicitud de Egreso') ?>
+<?php }else {?>
+<?php echo __('Solicitud de Cotización') ?>
+<?php }?>
+</legend>
 <div class="form-row">
   <table>
    <tr>

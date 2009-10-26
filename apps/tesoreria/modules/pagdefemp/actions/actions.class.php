@@ -300,6 +300,14 @@ $this->Bitacora('Guardo');
       $this->opdefemp->setOrdret($opdefemp['ordret']);
     }
 	$this->opdefemp->setOrdconpre(isset($opdefemp['ordconpre']) ? $opdefemp['ordconpre'] : 0);
+	if (isset($opdefemp['ordtna']))
+    {
+      $this->opdefemp->setOrdtna($opdefemp['ordtna']);
+    }
+    if (isset($opdefemp['ordtba']))
+    {
+      $this->opdefemp->setOrdtba($opdefemp['ordtba']);
+    }
   }
 
   /**

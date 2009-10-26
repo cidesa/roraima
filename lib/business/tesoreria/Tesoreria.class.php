@@ -2223,4 +2223,77 @@ class Tesoreria {
 	return -1;
   }
 
+  public static function MigrarMovimientosBancarios($tspararc,&$total,&$rechazado)
+  {
+  	$val=-1;
+    if ($file = fopen(sfConfig::get('sf_upload_dir')."//".$tspararc->getArchivo(),  "r")) {
+	$i=0;
+	$total=0;
+	$rechazado=0;
+    $t= new Criteria();
+    $t->add(TspararcPeer::NUMCUE,$tspararc->getNumcue());
+    $regis= TspararcPeer::doSelectOne($t);
+    if ($regis)
+    {
+	  while(!feof($file)) {
+	    $cuenta=fgets($file, 255);
+		if (trim($cuenta)!='' && trim($cuenta)!='/n'){
+		    $numcue=substr($cuenta,$regis->getInicue(),$regis->getFincue());
+		    $referencia= substr($cuenta,$regis->getIniref(),$regis->getFinref());
+		    $fecha= substr($cuenta,$regis->getInifec(),$regis->getFinfec());
+		    $dateFormat = new sfDateFormat('es_VE');
+            $fec1 = $dateFormat->format($fecha, 'i', $dateFormat->getInputPattern('d'));
+		    $tipo= substr($cuenta,$regis->getInitip(),$regis->getFintip());
+		    $descrip= substr($cuenta,$regis->getInides(),$regis->getFindes());
+             if (is_numeric(H::toFloat(substr($cuenta,$regis->getInimon(),$regis->getFinmon()))))
+             {
+               $monto=H::toFloat(substr($cuenta,$regis->getInimon(),$regis->getFinmon()));
+             }else $monto=0;
+
+			$d= new Criteria();
+			$d->add(TsmovbanPeer::NUMCUE, $tspararc->getNumcue());
+			$d->add(TsmovbanPeer::REFBAN, $referencia);
+			$d->add(TsmovbanPeer::TIPMOV, $tipo);
+			$reg1= TsmovbanPeer::doSelectOne($d);
+			if (!$reg1)
+			{
+                $tsmovban = new Tsmovban();
+				$tsmovban->setNumcue($tspararc->getNumcue());
+				$tsmovban->setCodcta(H::getX_Vacio('Numcue','Tsdefban','Codcta',$tspararc->getNumcue()));
+				$tsmovban->setRefban($referencia);
+				$tsmovban->setFecban($fec1);
+				$tsmovban->setTipmov($tipo);
+				$tsmovban->setDesban($descrip);
+				$tsmovban->setMonmov($monto);
+				$tsmovban->setStatus('C');
+				$tsmovban->setStacon('N');
+				$tsmovban->save();
+			}else{
+			  $rechazado= $rechazado + 1;
+			}
+		$total= $total + 1;
+	    }
+	  $i++;
+    }
+
+    if ($total==$rechazado)
+    {
+      $val=-1;
+    }else{
+      $val=-1;
+      if ($rechazado>0)
+      {
+      	$val=-1;
+      }
+    }
+    }
+    fclose ($file);
+    unlink(sfConfig::get('sf_upload_dir')."//".$tspararc->getArchivo());
+  }else
+  {
+  	$val=541;
+  }
+  return $val;
+  }
+
 }
