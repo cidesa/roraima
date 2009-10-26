@@ -169,6 +169,14 @@ abstract class BaseOpdefemp extends BaseObject  implements Persistent {
 
 
 	
+	protected $ordtna;
+
+
+	
+	protected $ordtba;
+
+
+	
 	protected $id;
 
 	
@@ -459,6 +467,20 @@ abstract class BaseOpdefemp extends BaseObject  implements Persistent {
   {
 
     return $this->ordconpre;
+
+  }
+  
+  public function getOrdtna()
+  {
+
+    return trim($this->ordtna);
+
+  }
+  
+  public function getOrdtba()
+  {
+
+    return trim($this->ordtba);
 
   }
   
@@ -869,6 +891,26 @@ abstract class BaseOpdefemp extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setOrdtna($v)
+	{
+
+    if ($this->ordtna !== $v) {
+        $this->ordtna = $v;
+        $this->modifiedColumns[] = OpdefempPeer::ORDTNA;
+      }
+  
+	} 
+	
+	public function setOrdtba($v)
+	{
+
+    if ($this->ordtba !== $v) {
+        $this->ordtba = $v;
+        $this->modifiedColumns[] = OpdefempPeer::ORDTBA;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -963,7 +1005,11 @@ abstract class BaseOpdefemp extends BaseObject  implements Persistent {
 
       $this->ordconpre = $rs->getBoolean($startcol + 39);
 
-      $this->id = $rs->getInt($startcol + 40);
+      $this->ordtna = $rs->getString($startcol + 40);
+
+      $this->ordtba = $rs->getString($startcol + 41);
+
+      $this->id = $rs->getInt($startcol + 42);
 
       $this->resetModified();
 
@@ -971,7 +1017,7 @@ abstract class BaseOpdefemp extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 41; 
+            return $startcol + 43; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Opdefemp object", $e);
     }
@@ -1239,6 +1285,12 @@ abstract class BaseOpdefemp extends BaseObject  implements Persistent {
 				return $this->getOrdconpre();
 				break;
 			case 40:
+				return $this->getOrdtna();
+				break;
+			case 41:
+				return $this->getOrdtba();
+				break;
+			case 42:
 				return $this->getId();
 				break;
 			default:
@@ -1291,7 +1343,9 @@ abstract class BaseOpdefemp extends BaseObject  implements Persistent {
 			$keys[37] => $this->getManbloqban(),
 			$keys[38] => $this->getOrdret(),
 			$keys[39] => $this->getOrdconpre(),
-			$keys[40] => $this->getId(),
+			$keys[40] => $this->getOrdtna(),
+			$keys[41] => $this->getOrdtba(),
+			$keys[42] => $this->getId(),
 		);
 		return $result;
 	}
@@ -1428,6 +1482,12 @@ abstract class BaseOpdefemp extends BaseObject  implements Persistent {
 				$this->setOrdconpre($value);
 				break;
 			case 40:
+				$this->setOrdtna($value);
+				break;
+			case 41:
+				$this->setOrdtba($value);
+				break;
+			case 42:
 				$this->setId($value);
 				break;
 		} 	}
@@ -1477,7 +1537,9 @@ abstract class BaseOpdefemp extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[37], $arr)) $this->setManbloqban($arr[$keys[37]]);
 		if (array_key_exists($keys[38], $arr)) $this->setOrdret($arr[$keys[38]]);
 		if (array_key_exists($keys[39], $arr)) $this->setOrdconpre($arr[$keys[39]]);
-		if (array_key_exists($keys[40], $arr)) $this->setId($arr[$keys[40]]);
+		if (array_key_exists($keys[40], $arr)) $this->setOrdtna($arr[$keys[40]]);
+		if (array_key_exists($keys[41], $arr)) $this->setOrdtba($arr[$keys[41]]);
+		if (array_key_exists($keys[42], $arr)) $this->setId($arr[$keys[42]]);
 	}
 
 	
@@ -1525,6 +1587,8 @@ abstract class BaseOpdefemp extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(OpdefempPeer::MANBLOQBAN)) $criteria->add(OpdefempPeer::MANBLOQBAN, $this->manbloqban);
 		if ($this->isColumnModified(OpdefempPeer::ORDRET)) $criteria->add(OpdefempPeer::ORDRET, $this->ordret);
 		if ($this->isColumnModified(OpdefempPeer::ORDCONPRE)) $criteria->add(OpdefempPeer::ORDCONPRE, $this->ordconpre);
+		if ($this->isColumnModified(OpdefempPeer::ORDTNA)) $criteria->add(OpdefempPeer::ORDTNA, $this->ordtna);
+		if ($this->isColumnModified(OpdefempPeer::ORDTBA)) $criteria->add(OpdefempPeer::ORDTBA, $this->ordtba);
 		if ($this->isColumnModified(OpdefempPeer::ID)) $criteria->add(OpdefempPeer::ID, $this->id);
 
 		return $criteria;
@@ -1635,6 +1699,10 @@ abstract class BaseOpdefemp extends BaseObject  implements Persistent {
 		$copyObj->setOrdret($this->ordret);
 
 		$copyObj->setOrdconpre($this->ordconpre);
+
+		$copyObj->setOrdtna($this->ordtna);
+
+		$copyObj->setOrdtba($this->ordtba);
 
 
 		$copyObj->setNew(true);

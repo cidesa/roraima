@@ -9,7 +9,7 @@
  * @subpackage lib.model
  * @author     $Author$ <desarrollo@cidesa.com.ve>
  * @version SVN: $Id$
- * 
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -86,5 +86,15 @@ class Opdefemp extends BaseOpdefemp
 	public function getNomtipret()
 	{
 		return Herramientas::getX('tipcau','cpdoccau','nomext',self::getOrdret());
+	}
+
+	public function getNomtiptna()
+	{
+		return Herramientas::getX('tipcau','cpdoccau','nomext',self::getOrdtna());
+	}
+
+	public function getNomtiptba()
+	{
+		return Herramientas::getX('tipcau','cpdoccau','nomext',self::getOrdtba());
 	}
 }
