@@ -53,6 +53,7 @@ class catdefavalActions extends autocatdefavalActions
          $this->params = array();
          $this->catdefaval = $this->getCatdefavalOrCreate();
          $this->labels = $this->getLabels();
+         $longitud="";
 
          $c = new Criteria();
 	   	 $reg = CatnivcatPeer::doselect($c);
