@@ -62,6 +62,14 @@ class tesmovemicheActions extends autotesmovemicheActions
     $this->impche=$this->getRequestParameter('impche');
     $this->numches=$this->getRequestParameter('numches');
     $this->getUser()->setAttribute('tschemi_operacion',"");
+    $this->comprobaut="";
+    $varemp = $this->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('generales',$varemp))
+     if(array_key_exists('comprobaut',$varemp['generales']))
+	 {
+	   $this->comprobaut=$varemp['generales']['comprobaut'];
+	 }
     if ($this->getRequest()->getMethod() == sfRequest::POST)
     {
          $this->updateTscheemiFromRequest();
@@ -537,6 +545,15 @@ $this->Bitacora('Guardo');
 		       	$this->reqfirma=$varemp['aplicacion']['tesoreria']['modulos']['tesmovemiche']['reqfirma'];
 		       }
 		     }
+
+	  	$this->comprobaut="";
+	    $varemp = $this->getUser()->getAttribute('configemp');
+	    if ($varemp)
+		if(array_key_exists('generales',$varemp))
+	     if(array_key_exists('comprobaut',$varemp['generales']))
+		 {
+		   $this->comprobaut=$varemp['generales']['comprobaut'];
+		 }
       $comprobante= array();
       $concom=1;
       $output = '[["","",""]]';
@@ -554,7 +571,7 @@ $this->Bitacora('Guardo');
              //print_r($this->gridOrdPag);print 'SSS';exit;
 	         $grid=Herramientas::CargarDatosGrid($this,$this->gridOrdPag);
 	         if ($this->ValidarDatosenGrid($grid))
-	            Cheques::ActualizaOrdPag($this->tscheemi,$grid,$tippag,$despag,"","S",$che,&$concom,&$comprobante,$this->reqfirma);
+	            Cheques::ActualizaOrdPag($this->tscheemi,$grid,$tippag,$despag,"","S",$che,&$concom,&$comprobante,$this->reqfirma,$this->comprobaut);
 	         else
 	            $this->msgerr="Debe seleccionar al menos una orden de pago...";
 	      }
@@ -563,7 +580,7 @@ $this->Bitacora('Guardo');
 	      {
 	           $grid=Herramientas::CargarDatosGrid($this,$this->gridCompro);
 	           if ($this->ValidarDatosenGrid($grid))
-	             Cheques::ActualizaCompro($this->tscheemi,$grid,"",$ctapag,$desctacre,$che,"S",&$comprobante,$this->reqfirma);
+	             Cheques::ActualizaCompro($this->tscheemi,$grid,"",$ctapag,$desctacre,$che,"S",&$comprobante,$this->reqfirma,$this->comprobaut);
 	           else
 	            $this->msgerr="Debe seleccionar al menos un compromiso...";
 	      }
@@ -572,7 +589,7 @@ $this->Bitacora('Guardo');
 	      {
 	           $grid=Herramientas::CargarDatosGrid($this,$this->gridPrecom);
 	           if ($this->ValidarDatosenGrid($grid))
-	               Cheques::ActualizaPrecom($this->tscheemi,$grid,"",$ctapag,$desctacre,$che,"S",&$comprobante,$this->reqfirma);
+	               Cheques::ActualizaPrecom($this->tscheemi,$grid,"",$ctapag,$desctacre,$che,"S",&$comprobante,$this->reqfirma,$this->comprobaut);
 	           else
 	            $this->msgerr="Debe seleccionar al menos un precompromiso...";
 	      }
@@ -586,7 +603,7 @@ $this->Bitacora('Guardo');
 	           $x=$grid[0];
 	           if (count($x)>0)
 	           {
-	              Cheques::ActualizaPagDir($this->tscheemi,$grid,"",$concep,$descue,$condto,$ctapag,$desctacre,$che,"S",&$comprobante,$this->reqfirma);
+	              Cheques::ActualizaPagDir($this->tscheemi,$grid,"",$concep,$descue,$condto,$ctapag,$desctacre,$che,"S",&$comprobante,$this->reqfirma,$this->comprobaut);
 	           }
 	           else
 	           {
@@ -600,7 +617,7 @@ $this->Bitacora('Guardo');
 	           $montpnrn=$this->getRequestParameter('tscheemi[montotpagnap]');
 	           $dctopnrn=$this->getRequestParameter('tscheemi[mondtopagnap]');
            	   $condpnrn=$this->getRequestParameter('tscheemi[condtopagnap]');
-	           Cheques::ActualizaPagExtPre($this->tscheemi,"",$concpnrn,$montpnrn,$dctopnrn,$condpnrn,$ctapag,$desctacre,$che,"S",&$comprobante,$this->reqfirma);
+	           Cheques::ActualizaPagExtPre($this->tscheemi,"",$concpnrn,$montpnrn,$dctopnrn,$condpnrn,$ctapag,$desctacre,$che,"S",&$comprobante,$this->reqfirma,$this->comprobaut);
 	        }
      }//if  validaciones de campos distinto de vacio
      else
@@ -1190,6 +1207,15 @@ $this->Bitacora('Guardo');
 		       }
 		     }
 
+	  	$this->comprobaut="";
+	    $varemp = $this->getUser()->getAttribute('configemp');
+	    if ($varemp)
+		if(array_key_exists('generales',$varemp))
+	     if(array_key_exists('comprobaut',$varemp['generales']))
+		 {
+		   $this->comprobaut=$varemp['generales']['comprobaut'];
+		 }
+
         //Ordenes de Pago
         $ctapag=$this->getRequestParameter('ctapag');
         $desctacre=$this->getRequestParameter('desctacre');
@@ -1202,19 +1228,19 @@ $this->Bitacora('Guardo');
            $despag=$this->getRequestParameter('tscheemi[descriordpag]');
            $concom="";
            $grid=Herramientas::CargarDatosGrid($this,$this->gridOrdPag);
-           Cheques::ActualizaOrdPag($tscheemi,$grid,$tippag,$despag,$numcomche,"N",&$this->arraynumche,$concom,$comprobante,$this->reqfirma);
+           Cheques::ActualizaOrdPag($tscheemi,$grid,$tippag,$despag,$numcomche,"N",&$this->arraynumche,$concom,$comprobante,$this->reqfirma,$this->comprobaut);
         }
         //compromisos
       else if ($tscheemi->getOperacion()=='compro')
       {
            $grid=Herramientas::CargarDatosGrid($this,$this->gridCompro);
-           Cheques::ActualizaCompro($tscheemi,$grid,$numcom,$ctapag,$desctacre,&$this->arraynumche,"N",$comprobante,$this->reqfirma);
+           Cheques::ActualizaCompro($tscheemi,$grid,$numcom,$ctapag,$desctacre,&$this->arraynumche,"N",$comprobante,$this->reqfirma,$this->comprobaut);
       }
       //precompromisos
       else if ($tscheemi->getOperacion()=='precom')
       {
            $grid=Herramientas::CargarDatosGrid($this,$this->gridPrecom);
-           Cheques::ActualizaPrecom($tscheemi,$grid,$numcom,$ctapag,$desctacre,&$this->arraynumche,"N",$comprobante,$this->reqfirma);
+           Cheques::ActualizaPrecom($tscheemi,$grid,$numcom,$ctapag,$desctacre,&$this->arraynumche,"N",$comprobante,$this->reqfirma,$this->comprobaut);
       }
       //Pagos Directos
         else if ($tscheemi->getOperacion()=='pagdir')
@@ -1223,7 +1249,7 @@ $this->Bitacora('Guardo');
            $descue=$this->getRequestParameter('tscheemi[mondtopagdir]');
            $condto=$this->getRequestParameter('tscheemi[condtopagdir]');
            $grid=Herramientas::CargarDatosGrid($this,$this->gridPagdir);
-           Cheques::ActualizaPagDir($tscheemi,$grid,$numcom,$concep,$descue,$condto,$ctapag,$desctacre,&$this->arraynumche,"N",$comprobante,$this->reqfirma);
+           Cheques::ActualizaPagDir($tscheemi,$grid,$numcom,$concep,$descue,$condto,$ctapag,$desctacre,&$this->arraynumche,"N",$comprobante,$this->reqfirma,$this->comprobaut);
         }
         //pagos Extrapresupuesto
         else if ($tscheemi->getOperacion()=='pagnopre')
@@ -1232,7 +1258,7 @@ $this->Bitacora('Guardo');
            $montpnrn=$this->getRequestParameter('tscheemi[montotpagnap]');
            $dctopnrn=$this->getRequestParameter('tscheemi[mondtopagnap]');
            $condpnrn=$this->getRequestParameter('tscheemi[condtopagnap]');
-           Cheques::ActualizaPagExtPre($tscheemi,$numcom,$concpnrn,$montpnrn,$dctopnrn,$condpnrn,$ctapag,$desctacre,&$this->arraynumche,"N",$comprobante,$this->reqfirma);
+           Cheques::ActualizaPagExtPre($tscheemi,$numcom,$concpnrn,$montpnrn,$dctopnrn,$condpnrn,$ctapag,$desctacre,&$this->arraynumche,"N",$comprobante,$this->reqfirma,$this->comprobaut);
         }
 
 
@@ -1258,6 +1284,14 @@ $this->Bitacora('Guardo');
     try{ $this->updateTscheemiFromRequest();}catch(Exception $ex){}
     $this->impche="";
     $this->numches="";
+    $this->comprobaut="";
+    $varemp = $this->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('generales',$varemp))
+     if(array_key_exists('comprobaut',$varemp['generales']))
+	 {
+	   $this->comprobaut=$varemp['generales']['comprobaut'];
+	 }
 
     $this->labels = $this->getLabels();
 
@@ -1409,11 +1443,22 @@ $this->Bitacora('Guardo');
            }
       }
 
+  	$this->comprobaut="";
+    $varemp = $this->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('generales',$varemp))
+     if(array_key_exists('comprobaut',$varemp['generales']))
+	 {
+	   $this->comprobaut=$varemp['generales']['comprobaut'];
+	 }
+
+     if ($this->comprobaut!='S'){
       if (!$this->ValidarGeneroComprobantes())
       {
           $this->coderror2=508;
           return false;
        }
+     }
 
       return true;
     }else return true;

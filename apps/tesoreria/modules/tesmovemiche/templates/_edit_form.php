@@ -158,13 +158,14 @@
      ))
 ),date('Y-m-d')); echo $value ? $value : '&nbsp;' ?>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<? if ($comprobaut!='S') { ?>
   <?php echo submit_to_remote('Submit2', 'Generar Comprobante', array(
          'update'   => 'comprobante',
          'url'      => 'tesmovemiche/comprobante',
          'script'   => true,
          'complete' => 'AjaxJSON(request, json)',
          'submit' => 'sf_admin_edit_form',
-    )) ?>
+    )) ?><?php }?>
     </div>
 </div>
 </fieldset>
