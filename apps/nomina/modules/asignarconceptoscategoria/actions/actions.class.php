@@ -23,6 +23,7 @@ class asignarconceptoscategoriaActions extends autoasignarconceptoscategoriaActi
   public function executeEdit()
   {
     $this->npconceptoscategoria = $this->getNpconceptoscategoriaOrCreate();
+	$this->configGrid($this->npconceptoscategoria->getCodcat());
     $this->setVars();
     if ($this->getRequest()->getMethod() == sfRequest::POST)
     {
@@ -271,6 +272,7 @@ $this->Bitacora('Guardo');
     $grid=Herramientas::CargarDatosGrid($this,$this->obj,true);
   //  print_r ($grid);exit;
     $j=$this->getRequestParameter('npconceptoscategoria[codcat]');  
+
     EmpleadosBanco::Grabar_grid_Npconceptoscategoria($npconceptoscategoria,$grid,$j);
   }
 
