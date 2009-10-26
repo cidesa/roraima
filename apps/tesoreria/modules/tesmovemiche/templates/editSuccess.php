@@ -24,7 +24,7 @@ array()) ?></h1>
 
 <div id="sf_admin_content">
 <?php include_partial('tesmovemiche/edit_messages', array('tscheemi' => $tscheemi, 'labels' => $labels)) ?>
-<?php include_partial('tesmovemiche/edit_form', array('tscheemi' => $tscheemi, 'impche'=> $impche, 'numches'=> $numches, 'gridOrdPag' => $gridOrdPag, 'gridCompro' => $gridCompro, 'gridPrecom' => $gridPrecom, 'gridPagdir' => $gridPagdir, 'mensajeBen' => $mensajeBen, 'bloqueaopc' => $bloqueaopc, 'valoropc' => $valoropc, 'labels' => $labels)) ?>
+<?php include_partial('tesmovemiche/edit_form', array('tscheemi' => $tscheemi, 'impche'=> $impche, 'numches'=> $numches, 'gridOrdPag' => $gridOrdPag, 'gridCompro' => $gridCompro, 'gridPrecom' => $gridPrecom, 'gridPagdir' => $gridPagdir, 'mensajeBen' => $mensajeBen, 'bloqueaopc' => $bloqueaopc, 'valoropc' => $valoropc, 'labels' => $labels, 'comprobaut' => $comprobaut)) ?>
 </div>
 
 <div id="sf_admin_footer">

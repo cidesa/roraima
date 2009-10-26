@@ -333,7 +333,7 @@
   'control_name' => 'opordpag[nomconcepto]',
 )); echo $value ? $value : '&nbsp;' ?></th>
 <th>
-<? if ($opordpag->getId()=='') { ?>
+<? if ($opordpag->getId()=='' && $comprobaut!='S') { ?>
 <?php echo submit_to_remote('Submit2', 'Generar Comprobante', array(
          'update'   => 'comp',
          'url'      => 'pagemiord/ajaxcomprobante',
@@ -341,7 +341,7 @@
          'complete' => 'AjaxJSON(request, json)',
          'submit' => 'sf_admin_edit_form',
          )) ?>
-<? } else { ?>
+<? } else if ($opordpag->getId()!='') { ?>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="Comprobante" type="button" value="Comprobantes" onClick="consultarComp()">
   <input type="button" name="Submit" value="Forma Pre-Impresa" onclick="javascript:Mostrar_orden_preimpresa();" />
 <?php } ?>

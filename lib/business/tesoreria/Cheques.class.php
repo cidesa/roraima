@@ -586,7 +586,7 @@ class Cheques
    * @return void
    */
 
-  public static function ActualizaOrdPag($tscheemi,$grid,$tippag,$despag,$numcomarr,$gencom,&$arraynumche,&$concom,&$arrcompro,$reqfirma)
+  public static function ActualizaOrdPag($tscheemi,$grid,$tippag,$despag,$numcomarr,$gencom,&$arraynumche,&$concom,&$arrcompro,$reqfirma,$comprobaut)
   {
       //////////////////////PAGO SIMPLE/////////////////////////////////////////////////////////////////////
     $arraynumche="";
@@ -598,7 +598,7 @@ class Cheques
       $numche=$tscheemi->getNumche();
       $j=0;
       $concom=0;
-     if ($gencom!="S") $minumcom=split("_",$numcomarr);
+     if ($gencom!="S" && $comprobaut!='S') $minumcom=split("_",$numcomarr);
 
       while ($j<count($x))
       {
@@ -718,8 +718,27 @@ class Cheques
             else
             {
               $x[$j]->save();
+              if ($comprobaut!='S')
+              {
               $numcom=$minumcom[$concom +1];
               $concom++;
+              }else{
+               $c= new Criteria();
+			   $reg= OpdefempPeer::doSelectOne($c);
+			   if ($reg)
+			   {
+			     if ($reg->getGencomalc()=='S')
+			     {
+			       self::grabarComprobanteAlcAutomatico($tscheemi,$grid,$DescOp,$tippag,$MontDcto,$Monto,$CtaPag,$DesCtaCre,&$numcom);
+			     }
+			     else
+			     {
+                    self::Genera_Comprobante_Automatico($numche,$tscheemi,$grid,$OrdenDePago,$tippag,$DescOp,$DesCtaDeb,
+                                         $DesCtaCre,$CtaPag,$CtaDcto,$MontDcto,$DescOp,$Monto,$MontRet,
+										 "ordpag",&$numcom);
+			     }
+			   }
+              }
               //print "Comprobante Nro. ". $numcom . " para el cheque ". $numche . " con la orden de pago ".$x[$j]->getNumord() ;
 
               self::Actualiza_Bancos($tscheemi,"A","C",$Monto,$numche);
@@ -876,8 +895,27 @@ class Cheques
        {
           if ($grabar=="S")
           {
+          	if ($comprobaut!='S'){
             $minumcom=split("_",$numcomarr);
             $numcom=$minumcom[1];
+          	}else{
+               $c= new Criteria();
+			   $reg= OpdefempPeer::doSelectOne($c);
+			   if ($reg)
+			   {
+			     if ($reg->getGencomalc()=='S')
+			     {
+			       self::grabarComprobanteAlcAutomatico($tscheemi,$grid,$DescOp,$tippag,$MontDcto,$Monto,$CtaPag,$DesCtaCre,&$numcom);
+			     }
+			     else
+			     {
+                    self::Genera_Comprobante_Automatico($numche,$tscheemi,$grid,"",$tippag,$DescOp,$DesCtaDeb,
+                                    $DesCtaCre,$CtaPag,$CtaDcto,$MontDcto,$DescOp,$Monto,$MontRet,"ordpag",
+                                    &$numcom);
+			     }
+			   }
+          	}
+
             $refpago = self::Genera_Pagos_Compuesto($tscheemi,$numord,$cedrif,$TipCausad,$DescOp,$numche,$x);
             self::Genera_MovLib($tscheemi,$DescOp,$Monto,$numcom,$numche,$refpago);
             self::Actualiza_Bancos($tscheemi,"A","C",$Monto,$numche);
@@ -891,7 +929,7 @@ class Cheques
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
   }//end function ActualizaOrdpag
 
-  public static function ActualizaCompro($tscheemi,$grid,$numcom,$ctapag,$desctacre,&$arraynumche,$gencom,&$arrcompro,$reqfirma)
+  public static function ActualizaCompro($tscheemi,$grid,$numcom,$ctapag,$desctacre,&$arraynumche,$gencom,&$arrcompro,$reqfirma,$comprobaut)
   {
       $x=$grid[0];
       $arraynumche="";
@@ -944,6 +982,24 @@ class Cheques
        }
        else //if ($gencom=="S")
        {
+       	 if ($comprobaut=='S')
+       	 {
+       	 	$c= new Criteria();
+			   $reg= OpdefempPeer::doSelectOne($c);
+			   if ($reg)
+			   {
+			     if ($reg->getGencomalc()=='S')
+			     {
+			       self::grabarComprobanteAlcAutomatico($tscheemi,$grid,$DescOp,"S",0,$MontOP,$ctapag,$desctacre,&$numcom);
+			     }
+			     else
+			     {
+                    self::Genera_Comprobante_Automatico($numche,$tscheemi,$grid,"","S",$DescOp,$DesCtaDeb,
+                                    $desctacre,$ctapag,"",0,"",$MontOP,0,"compro",&$numcom);
+			     }
+			   }
+       	 }
+
          self::Actualiza_Bancos($tscheemi,"A","C",$MontOP,$numche);
          $refpago = self::Genera_Pagos($tscheemi,$NumCompro,$tscheemi->getCedrif(),$TipCompro,$DescOp,$MontOP,"C",100,$numche,$x);
          self::Genera_MovLib($tscheemi,$DescOp,$MontOP,$numcom,$numche, $refpago);
@@ -954,7 +1010,7 @@ class Cheques
   }//end del function
 
 
-  public static function ActualizaPrecom($tscheemi,$grid,$numcom,$ctapag,$desctacre,&$arraynumche,$gencom,&$arrcompro,$reqfirma)
+  public static function ActualizaPrecom($tscheemi,$grid,$numcom,$ctapag,$desctacre,&$arraynumche,$gencom,&$arrcompro,$reqfirma,$comprobaut)
   {
       $x=$grid[0];
       $arraynumche="";
@@ -1008,6 +1064,24 @@ class Cheques
         }
         else
         {
+       	 if ($comprobaut=='S')
+       	 {
+       	 	$c= new Criteria();
+			   $reg= OpdefempPeer::doSelectOne($c);
+			   if ($reg)
+			   {
+			     if ($reg->getGencomalc()=='S')
+			     {
+			       self::grabarComprobanteAlcAutomatico($tscheemi,$grid,$DescOp,"S",0,$MontOP,$ctapag,$desctacre,&$numcom);
+			     }
+			     else
+			     {
+                    self::Genera_Comprobante_Automatico($numche,$tscheemi,$grid,"","S",$DescOp,$DesCtaDeb,
+                                             $desctacre,$ctapag,"",0,"",$MontOP,0,"precom",&$numcom);
+			     }
+			   }
+       	 }
+
             self::Genera_MovLib($tscheemi,$DescOp,$MontOP,$numcom,$numche);
             self::Actualiza_Bancos($tscheemi,"A","C",$MontOP,$numche);
             $refpago = self::Genera_Pagos($tscheemi,$NumPreCom,$tscheemi->getCedrif(),$TipPreCom,$DescOp,$MontOP,"P",100,$numche,$x);
@@ -1020,7 +1094,7 @@ class Cheques
   }//end Busca_Actualiza_PreCompromiso
 
 
-  public static function ActualizaPagDir($tscheemi,$grid,$numcom,$concep,$descue,$condto,$ctapag,$desctacre,&$arraynumche,$gencom,&$arrcompro,$reqfirma)
+  public static function ActualizaPagDir($tscheemi,$grid,$numcom,$concep,$descue,$condto,$ctapag,$desctacre,&$arraynumche,$gencom,&$arrcompro,$reqfirma,$comprobaut)
   {
       $x=$grid[0];
       $arraynumche="";
@@ -1075,7 +1149,26 @@ class Cheques
         }
         else
         {
-           $total=$MontOP-Herramientas::tofloat($MontDcto);
+        $total=$MontOP-Herramientas::tofloat($MontDcto);
+       	 if ($comprobaut=='S')
+       	 {
+       	 	   $c= new Criteria();
+			   $reg= OpdefempPeer::doSelectOne($c);
+			   if ($reg)
+			   {
+			     if ($reg->getGencomalc()=='S')
+			     {
+			       self::grabarComprobanteAlcAutomatico($tscheemi,$grid,$DescOp,"S",Herramientas::tofloat($MontDcto),$total,$ctapag,$desctacre,&$numcom);
+			     }
+			     else
+			     {
+                    self::Genera_Comprobante_Automatico($numche,$tscheemi,$grid,"","S",$DescOp,$DesCtaDeb,
+                                    $desctacre,$CtaPag,$CuentaDes,Herramientas::tofloat($MontDcto),$condto,
+                                    $total,0,"pagdir",&$numcom);
+			     }
+			   }
+       	 }
+
            self::Actualiza_Bancos($tscheemi,"A","C",$total,$numche);
            $refpago = self::Genera_Pagos($tscheemi,"",$tscheemi->getCedrif(),"",$DescOp,$MontOP,"D",100,$numche,$x);
            self::Genera_MovLib($tscheemi,$DescOp,$total,$numcom,$numche,$refpago);
@@ -1086,7 +1179,7 @@ class Cheques
   }
 
 
-  public static function ActualizaPagExtPre($tscheemi,$numcom,$concpnrn,$montpnrn,$dctopnrn,$condpnrn,$ctapag,$desctacre,&$arraynumche,$gencom,&$arrcompro,$reqfirma)
+  public static function ActualizaPagExtPre($tscheemi,$numcom,$concpnrn,$montpnrn,$dctopnrn,$condpnrn,$ctapag,$desctacre,&$arraynumche,$gencom,&$arrcompro,$reqfirma,$comprobaut)
   {
      $arraynumche="";
      $CtaDcto="";
@@ -1130,6 +1223,25 @@ class Cheques
         else
         {
            $total=Herramientas::tofloat($MontOP)-Herramientas::tofloat($MontDcto);
+       	 if ($comprobaut=='S')
+       	 {
+       	 	   $c= new Criteria();
+			   $reg= OpdefempPeer::doSelectOne($c);
+			   if ($reg)
+			   {
+			     if ($reg->getGencomalc()=='S')
+			     {
+			       self::grabarComprobanteAlcAutomatico($tscheemi,$grid,$DescOp,"S",Herramientas::tofloat($MontDcto),$total,$ctapag,$desctacre,&$numcom);
+			     }
+			     else
+			     {
+                    self::Genera_Comprobante_Automatico($numche,$tscheemi,$grid,"","S",$DescOp,$DesCtaDeb,
+                                    $desctacre,$ctapag,$CtaDcto,Herramientas::tofloat($MontDcto),$condpnrn,
+                                    $total,0,"pagnopre",&$numcom);
+			     }
+			   }
+       	 }
+
            self::Genera_MovLib($tscheemi,$DescOp,$total,$numcom,$numche);
            self::Actualiza_Bancos($tscheemi,"A","C",$total,$numche);
            self::Grabar_Datos($tscheemi,$total,$tscheemi->getCedrif(),$numche,$reqfirma);
@@ -1490,6 +1602,465 @@ class Cheques
       }
       $j++;
     }
+  }
+
+  public static function  Genera_Comprobante_Automatico($numcomcon,$tscheemi,$grid,$ordendepago,$tippag,$DescOp,$DesCtaDeb,
+                                             $DesCtaCre,$CtaPag,$CtaDcto,$MontDcto,$ConDto,$Monto,$MonRet,
+                                             $operacion,&$correl2)
+  {
+      $ctas="";$movs="";$montos="";$desc="";
+      $CtaBan = Herramientas::getX('numcue','Tsdefban','Codcta',$tscheemi->getNumcue());
+      $SQL = "Select pagrepcaj,ctarepcaj,pagcheant,ctacheant from TSDefRenGas";
+      if (Herramientas::BuscarDatos($SQL,&$result))
+      {
+         if (($tscheemi->getTipdoc()==$result[0]['pagrepcaj'])  &&  ($result[0]['ctarepcaj'] != "" ))
+            $CtaPag = $result[0]['ctarepcaj'];
+         else if ($tscheemi->getTipdoc()== $result[0]['pagcheant'] && trim($result[0]['ctacheant']) != "" )
+            $CtaPag = $result[0]['ctacheant'];
+
+      }//if (Herramientas::BuscarDatos($SQL,&$result))
+      if ($tippag=='S') //Pago Simple
+      {
+        //Comprobante.IncluirAsiento CtaPag, DesCtaDeb, Comprob, "D", CDbl(Monto + MontDcto)
+        $ctas = $CtaPag;
+        $desc=$DesCtaDeb;
+        $movs="D";
+        $montos=$Monto+$MontDcto; //+$MonRet;
+      }
+      else if ($tippag=='C')//pagos compuestos
+      {
+        $x=$grid[0];
+        $j=0;
+        while ($j<count($x))
+        {
+          if ($x[$j]->getCheck()=="1")
+          {
+               $sql = "Select ctapag From OPORDPAG Where NumOrd = '". $x[$j]->getNumord() ."' Order by NumOrd";
+               if (Herramientas::BuscarDatos($sql,&$result))
+               {
+                  $CtaPag = $result[0]['ctapag'];
+               }
+             //Comprobante.IncluirAsiento CtaPag, DesCtaDeb, Comprob, "D", CDbl(GridBd1.TextMatrix(I, 5))
+             if (trim($ctas)!="") $ctas=$ctas."_".$CtaPag; else  $ctas = $CtaPag;
+             if (trim($desc)!="") $desc=$desc."_".$DesCtaDeb; else  $desc = $DesCtaDeb;
+             if (trim($movs)!="") $movs=$movs."_"."D"; else  $movs = "D";
+             $montot=$x[$j]->getMontotalGrid()+$x[$j]->getMondes();
+             if (trim($montos)!="") $montos=$montos."_".$montot; else $montos=$montot;
+          }
+          $j++;
+        }//while
+      }//else if ($tippag=='C')//pagos compuestos
+
+       if ($operacion=='ordpag')
+       {
+          if ($MontDcto > 0)
+          {
+            // Comprobante.IncluirAsiento CtaDcto, DescOp, Comprob, "C", CDbl(MontDcto)
+            if (trim($ctas)!="") $ctas=$ctas."_".$CtaDcto; else  $ctas = $CtaDcto;
+            if (trim($desc)!="") $desc=$desc."_".$ConDto; else  $desc = $ConDto;
+            if (trim($movs)!="") $movs=$movs."_"."C"; else  $movs = "C";
+            if (trim($montos)!="") $montos=$montos."_".$MontDcto; else $montos=$MontDcto;
+          }//if ($MontDcto > 0)
+       }
+
+        if ($operacion=='pagdir')
+        {
+          if ($MontDcto > 0)
+          {
+            // //Comprobante.IncluirAsiento CtaDcto, ConcDescto.Text, Comprob, "C", CDbl(MontDcto)
+            if (trim($ctas)!="") $ctas=$ctas."_".$CtaDcto; else  $ctas = $CtaDcto;
+            if (trim($desc)!="") $desc=$desc."_".$ConDto; else  $desc = $ConDto;
+            if (trim($movs)!="") $movs=$movs."_"."C"; else  $movs = "C";
+            if (trim($montos)!="") $montos=$montos."_".$MontDcto; else $montos=$MontDcto;
+          }//if ($MontDcto > 0)
+        }//if ($operacion=='pagdir')
+
+        if ($operacion=='pagnopre')
+         {
+           if ($MontDcto > 0)
+           {
+              //Comprobante.IncluirAsiento CtaDcto, ConDPnrn.Text, Comprob, "C", CDbl(MontDcto)
+              if (trim($ctas)!="") $ctas=$ctas."_".$CtaDcto; else  $ctas = $CtaDcto;
+              if (trim($desc)!="") $desc=$desc."_".$ConDto; else  $desc = $ConDto;
+              if (trim($movs)!="") $movs=$movs."_"."C"; else  $movs = "C";
+              if (trim($montos)!="") $montos=$montos."_".$MontDcto; else $montos=$MontDcto;
+           }//if ($MontDcto > 0)
+         }
+
+        //Comprobante.IncluirAsiento CtaBan, DesCtaCre, Comprob, "C", CDbl(Monto)
+      if (trim($ctas)!="") $ctas=$ctas."_".$CtaBan; else  $ctas = $CtaBan;
+      if (trim($desc)!="") $desc=$desc."_".$DesCtaCre; else  $desc = $DesCtaCre;
+      if (trim($movs)!="") $movs=$movs."_"."C"; else  $movs = "C";
+      if (trim($montos)!="") $montos=$montos."_".$Monto; else $montos=$Monto;
+      //--------------------------Generando la Parte de Las Retenciones --------------------------------
+      if ($operacion=='ordpag')
+      {
+      //Comprobante.IncluirAsiento CtaPag, DesCtaDeb, Comprob, "D", CDbl(MontRet)
+       if (trim($ctas)!="") $ctas=$ctas."_".$CtaPag; else  $ctas = $CtaPag;
+       if (trim($desc)!="") $desc=$desc."_".$DesCtaDeb; else  $desc = $DesCtaDeb;
+       if (trim($movs)!="") $movs=$movs."_"."D"; else  $movs = "D";
+       if (trim($montos)!="") $montos=$montos."_".$MonRet; else $montos=$MonRet;
+       if ($tippag=='S') //Pago Simple
+       {
+            $SQL = "Select codtip,SUM(MonRet) as montoret,numret,codtip from OPRetOrd where NumOrd= '".$ordendepago."' group by CodTip,Numret";
+            if (Herramientas::BuscarDatos($SQL,&$result))
+            {
+              $k=0;
+              while ($k<count($result))
+              {
+                  $strsql = "Select codcon,destip From OPTipRet where CodTip= '". trim($result[$k]['codtip']) ."'";
+                  if (Herramientas::BuscarDatos($strsql,&$optipret))
+                  {
+                    //Comprobante.IncluirAsiento $optipret[0]['codcon'], $optipret[0]['destip'], Comprob, "C", $result[0]['montoret'])
+                    if (trim($ctas)!="") $ctas=$ctas."_".$optipret[0]['codcon']; else  $ctas = $optipret[0]['codcon'];
+                    if (trim($desc)!="") $desc=$desc."_".$optipret[0]['destip']; else  $desc = $optipret[0]['destip'];
+                    if (trim($movs)!="") $movs=$movs."_"."C"; else  $movs = "C";
+                    if (trim($montos)!="") $montos=$montos."_".$result[$k]['montoret']; else $montos=$result[$k]['montoret'];
+                  }
+                $k++;
+              } //while ($k<count($result))
+            }//buscar datos
+       }
+       else if ($tippag=='C')//pagos compuestos
+       {
+        $x=$grid[0];
+        $j=0;
+        while ($j<count($x))
+        {
+          if ($x[$j]->getCheck()=="1")
+          {
+               $strsql = "Select codtip,SUM(MonRet) as montoret,numret from OPRetOrd where NumOrd= '".$x[$j]->getNumord()."' group by codtip,Numret";
+               if (Herramientas::BuscarDatos($strsql,&$resultado))
+               {
+                $k=0;
+                while ($k<count($resultado))
+                {
+                    $strsql = "Select codcon,destip From OPTipRet where CodTip= '". trim($resultado[$k]['codtip']) ."'";
+                    if (Herramientas::BuscarDatos($strsql,&$optipret))
+                    {
+                      //Comprobante.IncluirAsiento $toptipret[0]['codcon'], $toptipret[0]['destip'], Comprob, "C", $resultado[0]['montoret'])
+                      if (trim($ctas)!="") $ctas=$ctas."_".$optipret[0]['codcon']; else  $ctas = $optipret[0]['codcon'];
+                      if (trim($desc)!="") $desc=$desc."_".$optipret[0]['destip']; else  $desc = $optipret[0]['destip'];
+                      if (trim($movs)!="") $movs=$movs."_"."C"; else  $movs = "C";
+                      if (trim($montos)!="") $montos=$montos."_".$resultado[$k]['montoret']; else $montos=$resultado[$k]['montoret'];
+                    }
+                  $k++;
+                } //while ($k<count($result))
+              }//buscar datos
+          }//if ($x[$j]->getCheck()=="1")
+          $j++;
+        }//while
+       }//else if ($tippag=='C')//pagos compuestos
+       // Comprobante.CargarComprobante
+      }//if ($operacion=='ordpag')
+
+
+    $arrecuentas=split("_",$ctas);
+    $arretipos=split("_",$movs);
+    $arremontos=split("_",$montos);
+    $yapaso=array();
+    $dondesta=array();
+
+     foreach ($arrecuentas as $cta)
+     {
+       $dondesta=array_keys($yapaso,$cta);
+
+       if (count($dondesta)==0)
+       {
+	    $yapaso[]=$cta;
+	    // buscamos todas las posiciones de esa cta.
+	    $posiciones=array();
+        $posiciones=array_keys($arrecuentas,$cta); //arreglo con las posiciones
+
+         $contd=0;
+         $contc=0;
+         $acumd=0;
+         $acumc=0;
+
+         foreach ($posiciones as $pos)
+         {
+           if ($arretipos[$pos]=='D')  //DEBITO
+           {
+             $acumd=$acumd+Herramientas::toFloat($arremontos[$pos]);
+             $contd=$contd+1;
+           }
+           else  //CREDITO
+           {
+             $acumc=$acumc+Herramientas::toFloat($arremontos[$pos]);
+             $contc=$contc+1;
+           }
+
+         } // foreach 2
+
+	      if ($contd>=1)
+	      {
+           $new_ctas[]=$cta;
+           $new_descs[]=H::getX('codcta','Contabb','Descta',$cta);
+           $new_movs[]='D';
+           $new_montos[]=$acumd;
+	      }
+	      if ($contc>=1)
+	      {
+           $new_ctas[]=$cta;
+           $new_descs[]=H::getX('codcta','Contabb','Descta',$cta);
+           $new_movs[]='C';
+           $new_montos[]=$acumc;
+	      }
+
+	  } // if dondesta
+    } // foreach 1
+
+    $sumdeb=0;
+    $sumcre=0;
+
+    $i=0;
+	  while ($i<=(count($new_ctas)-1))
+	  {
+	  	if ($new_ctas[$i]!="")
+	  	{
+          if ($new_movs[$i]=='D')
+          {
+          	$sumdeb= $sumdeb +$new_montos[$i];
+          }
+          else
+          {
+          	$sumcre= $sumcre + $new_montos[$i];
+          }
+	  	}
+	  	$i++;
+	  }
+
+        $correl2=OrdendePago::Buscar_Correlativo();
+	    $contabc = new Contabc();
+	    $contabc->setNumcom($correl2);
+	    $contabc->setReftra($numcomcon);
+	    $contabc->setFeccom($tscheemi->getFecemi());
+	    $numcomegr=self::BuscarCorrelEgrMes($tscheemi,&$correl,&$campo);
+	    $contabc->setDescom($DescOp." - ".$DesCtaCre." - ".$numcomegr);
+	    if ($sumdeb==$sumcre)
+	    $contabc->setStacom('D');
+	    else
+	    $contabc->setStacom('E');
+	    $contabc->setTipcom(null);
+	    $contabc->setMoncom($sumdeb);
+	    $contabc->save();
+
+      $i=0;
+	  while ($i<=(count($new_ctas)-1))
+	  {
+	  	if ($new_ctas[$i]!="")
+	  	{
+          $contabc1= new Contabc1();
+          $contabc1->setNumcom($correl2);
+          $contabc1->setFeccom($tscheemi->getFecemi());
+          $contabc1->setCodcta($new_ctas[$i]);
+          $numasi= $i +1;
+          $contabc1->setNumasi($numasi);
+          $contabc1->setRefasi($numcomcon);
+          $contabc1->setDesasi($new_descs[$i]);
+          if ($new_movs[$i]=='D')
+          {
+          	$contabc1->setDebcre('D');
+          	$contabc1->setMonasi($new_montos[$i]);
+          }
+          else
+          {
+          	$contabc1->setDebcre('C');
+          	$contabc1->setMonasi($new_montos[$i]);
+          }
+          $contabc1->save();
+	  	}
+	  	$i++;
+	  }
+
+  }//end function Genera_Comprobante_Automatico
+
+
+  public static function grabarComprobanteAlcAutomatico($tscheemi,$grid,$DescOp,$tippag,$MontDcto,$Monto,$CtaPag,$desctacre,&$correl3)
+  {
+    $reftra = str_pad($tscheemi->getNumche(),8,"0",STR_PAD_LEFT);
+    $codigocuenta="";  $tipo="";  $des="";  $monto="";  $codigocuentas="";  $tipo1="";  $desc="";  $monto1="";  $codigocuenta2="";  $tipo2="";  $des2="";  $monto2="";
+    $cuentas="";  $tipos="";  $montos="";  $descr="";   $msjuno="";  $msjdos="";  $mont=0;
+
+     if ($tippag=='S') //Pago Simple
+     {
+     	$mont=$Monto+$MontDcto;
+     }
+     else if ($tippag=='C')//pagos compuestos
+     {
+        $x=$grid[0];
+        $j=0;
+        while ($j<count($x))
+        {
+          if ($x[$j]->getCheck()=="1")
+          {
+             $mont= $mont + ($x[$j]->getMontotalGrid()+$x[$j]->getMondes());
+          }
+          $j++;
+        }
+     }
+
+    $c= new Criteria();
+    $c->add(TsrelasiordPeer::CTAGASXPAG,$CtaPag);
+    $reg= TsrelasiordPeer::doSelectOne($c);
+    if ($reg)
+    {
+      $v= new Criteria();
+      $v->add(ContabbPeer::CODCTA,$reg->getCtaordxpag());
+      $dato= ContabbPeer::doSelectOne($v);
+      if ($dato)
+      {
+        $codigocuenta=$dato->getCodcta();
+        $tipo='D';
+        $des="";
+        $monto=$mont;
+      }
+    }
+
+   $b= new Criteria();
+   $b->add(TsdefbanPeer::NUMCUE,$tscheemi->getNumcue());
+   $reg1= TsdefbanPeer::doSelectOne($b);
+   if ($reg1)
+   {
+   	 $cuenta=$reg1->getCodcta();
+   }else $cuenta='';
+
+    $x= new Criteria();
+    $x->add(ContabbPeer::CODCTA,$cuenta);
+    $reg2= ContabbPeer::doSelectOne($x);
+    if ($reg2)
+    {
+       $codigocuenta2=$cuenta;
+	   $tipo2='C';
+	   $des2="";
+	   $monto2=$mont;
+    }
+
+    $cuentas=$codigocuenta2.'_'.$codigocuenta;
+    $tipos=$tipo2.'_'.$tipo;
+    $descr=$des2.'_'.$des;
+    $montos=$monto2.'_'.$monto;
+
+
+    $arrecuentas=split("_",$cuentas);
+    $arretipos=split("_",$tipos);
+    $arremontos=split("_",$montos);
+    $yapaso=array();
+    $dondesta=array();
+
+     foreach ($arrecuentas as $cta)
+     {
+       $dondesta=array_keys($yapaso,$cta);
+
+       if (count($dondesta)==0)
+       {
+	    $yapaso[]=$cta;
+	    // buscamos todas las posiciones de esa cta.
+	    $posiciones=array();
+        $posiciones=array_keys($arrecuentas,$cta); //arreglo con las posiciones
+
+         $contd=0;
+         $contc=0;
+         $acumd=0;
+         $acumc=0;
+
+         foreach ($posiciones as $pos)
+         {
+           if ($arretipos[$pos]=='D')  //DEBITO
+           {
+             $acumd=$acumd+Herramientas::toFloat($arremontos[$pos]);
+             $contd=$contd+1;
+           }
+           else  //CREDITO
+           {
+             $acumc=$acumc+Herramientas::toFloat($arremontos[$pos]);
+             $contc=$contc+1;
+           }
+
+         } // foreach 2
+
+	      if ($contd>=1)
+	      {
+           $new_ctas[]=$cta;
+           $new_descs[]=H::getX('codcta','Contabb','Descta',$cta);
+           $new_movs[]='D';
+           $new_montos[]=$acumd;
+	      }
+	      if ($contc>=1)
+	      {
+           $new_ctas[]=$cta;
+           $new_descs[]=H::getX('codcta','Contabb','Descta',$cta);
+           $new_movs[]='C';
+           $new_montos[]=$acumc;
+	      }
+
+	  } // if dondesta
+    } // foreach 1
+
+    $sumdeb=0;
+    $sumcre=0;
+
+    $i=0;
+	  while ($i<=(count($new_ctas)-1))
+	  {
+	  	if ($new_ctas[$i]!="")
+	  	{
+          if ($new_movs[$i]=='D')
+          {
+          	$sumdeb= $sumdeb +$new_montos[$i];
+          }
+          else
+          {
+          	$sumcre= $sumcre + $new_montos[$i];
+          }
+	  	}
+	  	$i++;
+	  }
+
+        $correl3=OrdendePago::Buscar_Correlativo();
+	    $contabc = new Contabc();
+	    $contabc->setNumcom($correl3);
+	    $contabc->setReftra($reftra);
+	    $contabc->setFeccom($tscheemi->getFecemi());
+	    $numcomegr=self::BuscarCorrelEgrMes($tscheemi,&$correl,&$campo);
+	    $contabc->setDescom($DescOp." - ".$desctacre."N° Com. Egr. ".$numcomegr);
+	    if ($sumdeb==$sumcre)
+	    $contabc->setStacom('D');
+	    else
+	    $contabc->setStacom('E');
+	    $contabc->setTipcom(null);
+	    $contabc->setMoncom($sumdeb);
+	    $contabc->save();
+
+      $i=0;
+	  while ($i<=(count($new_ctas)-1))
+	  {
+	  	if ($new_ctas[$i]!="")
+	  	{
+          $contabc1= new Contabc1();
+          $contabc1->setNumcom($correl3);
+          $contabc1->setFeccom($tscheemi->getFecemi());
+          $contabc1->setCodcta($new_ctas[$i]);
+          $numasi= $i +1;
+          $contabc1->setNumasi($numasi);
+          $contabc1->setRefasi($reftra);
+          $contabc1->setDesasi($new_descs[$i]);
+          if ($new_movs[$i]=='D')
+          {
+          	$contabc1->setDebcre('D');
+          	$contabc1->setMonasi($new_montos[$i]);
+          }
+          else
+          {
+          	$contabc1->setDebcre('C');
+          	$contabc1->setMonasi($new_montos[$i]);
+          }
+          $contabc1->save();
+	  	}
+	  	$i++;
+	  }
+
+    return true;
   }
 }
 ?>

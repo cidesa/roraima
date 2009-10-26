@@ -46,12 +46,17 @@ class pagemiordActions extends autopagemiordActions
       	$this->configGridFactura();
         $factura=Herramientas::CargarDatosGrid($this,$this->obj2,true);
 	  	$this->mannivelapr="";
+	  	$this->comprobaut="";
 	    $varemp = $this->getUser()->getAttribute('configemp');
 	    if ($varemp)
 		if(array_key_exists('generales',$varemp))
 		   if(array_key_exists('mannivapr',$varemp['generales']))
 		   {
 		   	$this->mannivelapr=$varemp['generales']['mannivapr'];
+		   	if(array_key_exists('comprobaut',$varemp['generales']))
+		   	{
+		   		$this->comprobaut=$varemp['generales']['comprobaut'];
+		   	}
 		   }
 
         if ($this->mannivelapr=='S')
@@ -81,12 +86,13 @@ class pagemiordActions extends autopagemiordActions
           $this->coderror6=529;
           return false;
       	}
-
-        if (self::validarGeneraComprobante())
-      {
-    $this->coderror4=508;
-    return false;
-    }
+        if ($this->comprobaut!="S"){
+          if (self::validarGeneraComprobante())
+	      {
+	        $this->coderror4=508;
+	        return false;
+	      }
+        }
     $this->configGridFactura();
     $factura=Herramientas::CargarDatosGrid($this,$this->obj2,true);
     $cedrif=$this->getRequestParameter('opordpag[cedrif]');
@@ -458,6 +464,7 @@ $this->Bitacora('Guardo');
    */
   protected function saveOpordpag($opordpag)
   {
+  	$numerocomp="";
     if ($opordpag->getId())
     {
       $factura=Herramientas::CargarDatosGrid($this,$this->obj2,true);
@@ -520,13 +527,21 @@ $this->Bitacora('Guardo');
       }
       $this->getUser()->getAttributeHolder()->remove('grabo',$form.'0');
       $this->getUser()->getAttributeHolder()->remove('grabo',$form.'1');
+      $this->comprobaut="";
+	    $varemp = $this->getUser()->getAttribute('configemp');
+	    if ($varemp)
+		if(array_key_exists('generales',$varemp))
+  	   	  if(array_key_exists('comprobaut',$varemp['generales']))
+		  {
+		  	$this->comprobaut=$varemp['generales']['comprobaut'];
+		  }
 
      $detalle=Herramientas::CargarDatosGrid($this,$this->obj);
      if ($this->getRequestParameter('opordpag[vacio]')=='1')
      { $factura=Herramientas::CargarDatosGrid($this,$this->obj2,true);}
      else { $factura=Herramientas::CargarDatosGrid($this,$this->obj2,true);}
      $retenc=Herramientas::CargarDatosGrid($this,$this->obj6,true);
-     OrdendePago::salvarPagemiord($opordpag,$detalle,$factura,$retenc,$opordpag->getReferencias(),$opordpag->getCuentarendicion(),$numerocomp);
+     OrdendePago::salvarPagemiord($opordpag,$detalle,$factura,$retenc,$opordpag->getReferencias(),$opordpag->getCuentarendicion(),$numerocomp,$this->comprobaut);
 
      if ($opordpag->getTipcau()==$this->ordpagnom)
      {
@@ -2549,17 +2564,21 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
   $dato= OpdefempPeer::doSelectOne($c);
   if ($dato) $this->genordret=$dato->getGenordret(); else $this->genordret="";
 
+    $this->comprobaut="";
     $varemp = $this->getUser()->getAttribute('configemp');
     if ($varemp)
 	if(array_key_exists('generales',$varemp))
 	{
+		if(array_key_exists('comprobaut',$varemp['generales']))
+		{
+		   $this->comprobaut=$varemp['generales']['comprobaut'];
+		}
 		$this->impcpt='';
 		if(array_key_exists('impcpt',$varemp['generales']))
 		{
 		   $this->impcpt=$varemp['generales']['impcpt'];
 		}
 	}
-   	  
 
   }
 
