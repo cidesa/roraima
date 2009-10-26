@@ -44,3 +44,22 @@ CREATE TABLE "tscomegrmes"
 );
 
 COMMENT ON TABLE "tscomegrmes" IS 'Tabla para establecer correlativos de Comprobantes por mes';
+
+--Requerimientos de UNERMB Tesoreria  o Banco Desireé Martínez
+
+ALTER TABLE "opdefemp"
+  ADD COLUMN "ordtna" VARCHAR(4),
+  ADD COLUMN "ordtba" VARCHAR(4);
+
+--Matriz de Requerimientos Nómina UNERMB
+ALTER TABLE "npexplab"
+ ADD COLUMN codniv character varying(16);
+
+ALTER TABLE "npprimashijos"
+ ADD COLUMN consest character varying(1);
+
+--Matriz de Requerimientos de UNERMB Contabilidad Presupuestaria
+
+ALTER TABLE "cpcompro"
+   ADD COLUMN codubi character varying(30),
+   ADD COLUMN motrec character varying(1000);

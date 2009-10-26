@@ -17,6 +17,7 @@ class Cpcompro extends BaseCpcompro
 {
 	protected $obj = array();
 	protected $check = "";
+	protected $check2 = "";
     protected $nompro = "";
 
   public function afterHydrate(){

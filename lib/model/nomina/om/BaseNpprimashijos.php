@@ -29,6 +29,10 @@ abstract class BaseNpprimashijos extends BaseObject  implements Persistent {
 
 
 	
+	protected $consest;
+
+
+	
 	protected $id;
 
 	
@@ -73,6 +77,13 @@ abstract class BaseNpprimashijos extends BaseObject  implements Persistent {
   {
 
     return trim($this->estudios);
+
+  }
+  
+  public function getConsest()
+  {
+
+    return trim($this->consest);
 
   }
   
@@ -133,6 +144,16 @@ abstract class BaseNpprimashijos extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setConsest($v)
+	{
+
+    if ($this->consest !== $v) {
+        $this->consest = $v;
+        $this->modifiedColumns[] = NpprimashijosPeer::CONSEST;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -157,7 +178,9 @@ abstract class BaseNpprimashijos extends BaseObject  implements Persistent {
 
       $this->estudios = $rs->getString($startcol + 4);
 
-      $this->id = $rs->getInt($startcol + 5);
+      $this->consest = $rs->getString($startcol + 5);
+
+      $this->id = $rs->getInt($startcol + 6);
 
       $this->resetModified();
 
@@ -165,7 +188,7 @@ abstract class BaseNpprimashijos extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 6; 
+            return $startcol + 7; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Npprimashijos object", $e);
     }
@@ -328,6 +351,9 @@ abstract class BaseNpprimashijos extends BaseObject  implements Persistent {
 				return $this->getEstudios();
 				break;
 			case 5:
+				return $this->getConsest();
+				break;
+			case 6:
 				return $this->getId();
 				break;
 			default:
@@ -345,7 +371,8 @@ abstract class BaseNpprimashijos extends BaseObject  implements Persistent {
 			$keys[2] => $this->getEdadhas(),
 			$keys[3] => $this->getMonto(),
 			$keys[4] => $this->getEstudios(),
-			$keys[5] => $this->getId(),
+			$keys[5] => $this->getConsest(),
+			$keys[6] => $this->getId(),
 		);
 		return $result;
 	}
@@ -377,6 +404,9 @@ abstract class BaseNpprimashijos extends BaseObject  implements Persistent {
 				$this->setEstudios($value);
 				break;
 			case 5:
+				$this->setConsest($value);
+				break;
+			case 6:
 				$this->setId($value);
 				break;
 		} 	}
@@ -391,7 +421,8 @@ abstract class BaseNpprimashijos extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[2], $arr)) $this->setEdadhas($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setMonto($arr[$keys[3]]);
 		if (array_key_exists($keys[4], $arr)) $this->setEstudios($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setId($arr[$keys[5]]);
+		if (array_key_exists($keys[5], $arr)) $this->setConsest($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setId($arr[$keys[6]]);
 	}
 
 	
@@ -404,6 +435,7 @@ abstract class BaseNpprimashijos extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(NpprimashijosPeer::EDADHAS)) $criteria->add(NpprimashijosPeer::EDADHAS, $this->edadhas);
 		if ($this->isColumnModified(NpprimashijosPeer::MONTO)) $criteria->add(NpprimashijosPeer::MONTO, $this->monto);
 		if ($this->isColumnModified(NpprimashijosPeer::ESTUDIOS)) $criteria->add(NpprimashijosPeer::ESTUDIOS, $this->estudios);
+		if ($this->isColumnModified(NpprimashijosPeer::CONSEST)) $criteria->add(NpprimashijosPeer::CONSEST, $this->consest);
 		if ($this->isColumnModified(NpprimashijosPeer::ID)) $criteria->add(NpprimashijosPeer::ID, $this->id);
 
 		return $criteria;
@@ -444,6 +476,8 @@ abstract class BaseNpprimashijos extends BaseObject  implements Persistent {
 		$copyObj->setMonto($this->monto);
 
 		$copyObj->setEstudios($this->estudios);
+
+		$copyObj->setConsest($this->consest);
 
 
 		$copyObj->setNew(true);

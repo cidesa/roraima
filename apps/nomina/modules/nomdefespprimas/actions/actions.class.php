@@ -126,12 +126,19 @@ class nomdefespprimasActions extends autonomdefespprimasActions
 		$col5->setNombreCampo('estudios');
 		$col5->setHTML(' ');
 
+	    $col6 = new Columna('Constancia Est.');
+	    $col6->setTipo(Columna::CHECK);
+	    $col6->setNombreCampo('consest');
+	    $col6->setEsGrabable(true);
+	    $col6->setHTML(' ');
+
 		// Se guardan las columnas en el objetos de opciones
 		$opciones->addColumna($col1);
 		$opciones->addColumna($col2);
 		$opciones->addColumna($col3);
 		$opciones->addColumna($col4);
 		$opciones->addColumna($col5);
+		$opciones->addColumna($col6);
 
 		// Se genera el arreglo de opciones necesario para generar el grid
 		$this->obj_hij = $opciones->getConfig($per);

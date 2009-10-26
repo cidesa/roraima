@@ -155,10 +155,10 @@
 )); echo $value ? $value : '&nbsp;' ?>
  </div>
 </div>
-<?php }else{  ?>
-<?php if($sf_user->getAttribute('codcar','','nomasicarconnom')==$sf_user->getAttribute('codtipcar','','nomasicarconnom') && $sf_user->getAttribute('codcar','','nomasicarconnom')!='') {?>	
+<?php }else{ ?>
+<?php if($sf_user->getAttribute('codcar','','nomasicarconnom')==$npasicaremp->getCodcar() && $sf_user->getAttribute('codcar','','nomasicarconnom')!='') {?>
 	<div class="form-row" id="gridcatded">
-<?php }else{?>		
+<?php }else{?>
  	<div class="form-row" id="gridcatded" style="display:none">
 <?php }?>
   <?php echo label_for('npasicaremp[codtipded]', __($labels['npasicaremp{codtipded}']), 'class="required"') ?>
@@ -179,7 +179,7 @@
   <?php echo select_tag('npasicaremp[codtipcat]', options_for_select($listacategoria,$npasicaremp->getCodtipcat(),'include_custom=Seleccione Uno')) ?>
     </div>
 </div>
-	
+
 <?php } ?>
 </fieldset>
 
@@ -284,7 +284,7 @@ echo grid_tag($obj);
 <?php endif; ?>
 </li>
   </ul>
-    
+
 <script type="text/javascript">
   function eliminar()
   {
@@ -293,14 +293,14 @@ echo grid_tag($obj);
     var nomina=$('npasicaremp_codnom').value;
     var fecha=$('npasicaremp_fecasi').value;
     var id=$('id').value;
-    
+
     if (confirm('¿Realmente desea eliminar este cargo a este Trabajador, recuerde que se eliminaran los conceptos asignados con sus respectivos valores?'))
-    {	  
-	  if (confirm('¿Desea Grabar en Histórico esta Información?'))		  
-        var explab='si';	
+    {
+	  if (confirm('¿Desea Grabar en Histórico esta Información?'))
+        var explab='si';
 	  else
-	    var explab='no';	  
-	  location.href=getUrlModulo()+'eliminar?empleado='+empleado+'&cargo='+cargo+'&nomina='+nomina+'&fecha='+fecha+'&explab='+explab;	
+	    var explab='no';
+	  location.href=getUrlModulo()+'eliminar?empleado='+empleado+'&cargo='+cargo+'&nomina='+nomina+'&fecha='+fecha+'&explab='+explab;
     }
   }
 

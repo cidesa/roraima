@@ -58,6 +58,8 @@ class NpexplabMapBuilder {
 
 		$tMap->addColumn('MONTOPRES', 'Montopres', 'double', CreoleTypes::NUMERIC, false, 14);
 
+		$tMap->addColumn('CODNIV', 'Codniv', 'string', CreoleTypes::VARCHAR, false, 16);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

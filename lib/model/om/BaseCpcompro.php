@@ -77,6 +77,14 @@ abstract class BaseCpcompro extends BaseObject  implements Persistent {
 
 
 	
+	protected $codubi;
+
+
+	
+	protected $motrec;
+
+
+	
 	protected $id;
 
 	
@@ -236,6 +244,20 @@ abstract class BaseCpcompro extends BaseObject  implements Persistent {
   {
 
     return trim($this->aprcom);
+
+  }
+  
+  public function getCodubi()
+  {
+
+    return trim($this->codubi);
+
+  }
+  
+  public function getMotrec()
+  {
+
+    return trim($this->motrec);
 
   }
   
@@ -430,6 +452,26 @@ abstract class BaseCpcompro extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setCodubi($v)
+	{
+
+    if ($this->codubi !== $v) {
+        $this->codubi = $v;
+        $this->modifiedColumns[] = CpcomproPeer::CODUBI;
+      }
+  
+	} 
+	
+	public function setMotrec($v)
+	{
+
+    if ($this->motrec !== $v) {
+        $this->motrec = $v;
+        $this->modifiedColumns[] = CpcomproPeer::MOTREC;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -478,7 +520,11 @@ abstract class BaseCpcompro extends BaseObject  implements Persistent {
 
       $this->aprcom = $rs->getString($startcol + 16);
 
-      $this->id = $rs->getInt($startcol + 17);
+      $this->codubi = $rs->getString($startcol + 17);
+
+      $this->motrec = $rs->getString($startcol + 18);
+
+      $this->id = $rs->getInt($startcol + 19);
 
       $this->resetModified();
 
@@ -486,7 +532,7 @@ abstract class BaseCpcompro extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 18; 
+            return $startcol + 20; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Cpcompro object", $e);
     }
@@ -685,6 +731,12 @@ abstract class BaseCpcompro extends BaseObject  implements Persistent {
 				return $this->getAprcom();
 				break;
 			case 17:
+				return $this->getCodubi();
+				break;
+			case 18:
+				return $this->getMotrec();
+				break;
+			case 19:
 				return $this->getId();
 				break;
 			default:
@@ -714,7 +766,9 @@ abstract class BaseCpcompro extends BaseObject  implements Persistent {
 			$keys[14] => $this->getCedrif(),
 			$keys[15] => $this->getTipo(),
 			$keys[16] => $this->getAprcom(),
-			$keys[17] => $this->getId(),
+			$keys[17] => $this->getCodubi(),
+			$keys[18] => $this->getMotrec(),
+			$keys[19] => $this->getId(),
 		);
 		return $result;
 	}
@@ -782,6 +836,12 @@ abstract class BaseCpcompro extends BaseObject  implements Persistent {
 				$this->setAprcom($value);
 				break;
 			case 17:
+				$this->setCodubi($value);
+				break;
+			case 18:
+				$this->setMotrec($value);
+				break;
+			case 19:
 				$this->setId($value);
 				break;
 		} 	}
@@ -808,7 +868,9 @@ abstract class BaseCpcompro extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[14], $arr)) $this->setCedrif($arr[$keys[14]]);
 		if (array_key_exists($keys[15], $arr)) $this->setTipo($arr[$keys[15]]);
 		if (array_key_exists($keys[16], $arr)) $this->setAprcom($arr[$keys[16]]);
-		if (array_key_exists($keys[17], $arr)) $this->setId($arr[$keys[17]]);
+		if (array_key_exists($keys[17], $arr)) $this->setCodubi($arr[$keys[17]]);
+		if (array_key_exists($keys[18], $arr)) $this->setMotrec($arr[$keys[18]]);
+		if (array_key_exists($keys[19], $arr)) $this->setId($arr[$keys[19]]);
 	}
 
 	
@@ -833,6 +895,8 @@ abstract class BaseCpcompro extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CpcomproPeer::CEDRIF)) $criteria->add(CpcomproPeer::CEDRIF, $this->cedrif);
 		if ($this->isColumnModified(CpcomproPeer::TIPO)) $criteria->add(CpcomproPeer::TIPO, $this->tipo);
 		if ($this->isColumnModified(CpcomproPeer::APRCOM)) $criteria->add(CpcomproPeer::APRCOM, $this->aprcom);
+		if ($this->isColumnModified(CpcomproPeer::CODUBI)) $criteria->add(CpcomproPeer::CODUBI, $this->codubi);
+		if ($this->isColumnModified(CpcomproPeer::MOTREC)) $criteria->add(CpcomproPeer::MOTREC, $this->motrec);
 		if ($this->isColumnModified(CpcomproPeer::ID)) $criteria->add(CpcomproPeer::ID, $this->id);
 
 		return $criteria;
@@ -898,6 +962,9 @@ abstract class BaseCpcompro extends BaseObject  implements Persistent {
 
 		$copyObj->setAprcom($this->aprcom);
 
+		$copyObj->setCodubi($this->codubi);
+
+        $copyObj->setMotrec($this->motrec);
 
 		$copyObj->setNew(true);
 
