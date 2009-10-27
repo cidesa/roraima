@@ -2022,6 +2022,12 @@
 	   {
 	    alert('El Monto debe ser mayor que cero');
 	    $(id).value="0,00";
+	   }else{
+	     if ($(genmov).value=='S')
+	     {
+	       $('divcodtip').show();
+	       $('fafactur_filgenmov').value=fil;
+	     }
 	   }
    }
    else
