@@ -488,6 +488,12 @@ propel:
     ordconpre:
       type: BOOLEAN
       default: false
+    ordtna:
+      type: VARCHAR
+      size: 4
+    ordtba:
+      type: VARCHAR
+      size: 4
     id:
       type: INTEGER
       required: true
