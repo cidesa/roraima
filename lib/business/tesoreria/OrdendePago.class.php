@@ -854,7 +854,6 @@ class OrdendePago
               }
             }
           }else { $msjuno='El Código Presupuestario no tiene asociado Codigo Contable válido'; return true;}
-        }
         if ($moncau>0)
         {
          if ($j==0)
@@ -871,6 +870,8 @@ class OrdendePago
           $tipo1=$tipo1.'_'.$tipo;
           $monto1=$monto1.'_'.$monto;
           }
+        }
+
         }
 
         $j++;
