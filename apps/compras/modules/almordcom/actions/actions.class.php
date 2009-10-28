@@ -2174,6 +2174,7 @@ class almordcomActions extends autoalmordcomActions
   $validacion_fec_egresos='0';
   if ($this->getRequestParameter('ajax')=='1')
   {
+  	if ($this->getRequestParameter('ordcom')!=""){
     $c = new Criteria();
     $c->add(CasolartPeer :: REQART,$this->getRequestParameter('ordcom'));
     $c->add(CasolartPeer :: STAREQ, "A");
@@ -2230,6 +2231,9 @@ class almordcomActions extends autoalmordcomActions
         return sfView::HEADER_ONLY;
 
     }
+  	}else {
+  		$this->configGrid($this->getRequestParameter('caordcom[ordcom]'),'0','');
+  	}
   }
     }
 
