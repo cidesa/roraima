@@ -1583,8 +1583,9 @@ class Cheques
     $clscommpro->setNumcom($numerocomprob);
     $clscommpro->setReftra($reftra);
     $clscommpro->setFectra(date("d/m/Y",strtotime($tscheemi->getFecemi())));
-    $numcomegr=self::BuscarCorrelEgrMes($tscheemi,&$correl,&$campo);
-    $clscommpro->setDestra($DescOp." - ".$desctacre."N° Com. Egr. ".$numcomegr);
+    //$numcomegr=self::BuscarCorrelEgrMes($tscheemi,&$correl,&$campo);
+    //$clscommpro->setDestra($DescOp." - ".$desctacre."N° Com. Egr. ".$numcomegr);
+    $clscommpro->setDestra($DescOp." - ".$desctacre);
     $clscommpro->setCtas($cuentas);
     $clscommpro->setDesc($descr);
     $clscommpro->setMov($tipos);
@@ -2112,8 +2113,9 @@ class Cheques
 	    $contabc->setNumcom($correl3);
 	    $contabc->setReftra($reftra);
 	    $contabc->setFeccom($tscheemi->getFecemi());
-	    $numcomegr=self::BuscarCorrelEgrMes($tscheemi,&$correl,&$campo);
-	    $contabc->setDescom($DescOp." - ".$desctacre."N° Com. Egr. ".$numcomegr);
+	    //$numcomegr=self::BuscarCorrelEgrMes($tscheemi,&$correl,&$campo);
+	    //$contabc->setDescom($DescOp." - ".$desctacre."N° Com. Egr. ".$numcomegr);
+	    $contabc->setDescom($DescOp." - ".$desctacre);
 	    if ($sumdeb==$sumcre)
 	    $contabc->setStacom('D');
 	    else

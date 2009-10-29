@@ -38,4 +38,5 @@ opciones:                  # Opciones generales
   titulo:                  Beneficiario
   tipo:                    t
   nombrecampo:             Nomben
+  esgrabable:			   true
   html:                    [size="40", readonly=true]
