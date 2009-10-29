@@ -127,14 +127,27 @@ class tesaprordtesActions extends autotesaprordtesActions
     $this->coderr =-1;
 
     if($this->getRequest()->getMethod() == sfRequest::POST){
+
+    $this->comprobaut="";
+    $varemp = $this->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('generales',$varemp))
+	{
+		if(array_key_exists('comprobaut',$varemp['generales']))
+		{
+		   $this->comprobaut=$varemp['generales']['comprobaut'];
+		}
+	}
       $e= new Criteria();
       $reg= OpdefempPeer::doSelectOne($e);
       if ($reg){
        if ($reg->getGencomalc()=="S"){
+         if ($this->comprobaut!='S'){
 	      if (self::validarGeneraComprobante())
 	      {
 	        $this->coderr=508;
 	      }
+         }
        }
       }
 
@@ -164,6 +177,17 @@ class tesaprordtesActions extends autotesaprordtesActions
 	       }
 	       }
 	     }
+
+    $this->comprobaut="";
+    $varemp = $this->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('generales',$varemp))
+	{
+		if(array_key_exists('comprobaut',$varemp['generales']))
+		{
+		   $this->comprobaut=$varemp['generales']['comprobaut'];
+		}
+	}
 
     $this->configGrid();
     $grid=Herramientas::CargarDatosGridv2($this,$this->objeto);
@@ -207,7 +231,18 @@ class tesaprordtesActions extends autotesaprordtesActions
 	}
 
     $grid=Herramientas::CargarDatosGridv2($this,$this->objeto);
-    OrdendePago::aprobarOrdenesTes($opordpag,$grid,$numcompro,$numorden);
+    $this->comprobaut="";
+    $varemp = $this->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('generales',$varemp))
+	{
+		if(array_key_exists('comprobaut',$varemp['generales']))
+		{
+		   $this->comprobaut=$varemp['generales']['comprobaut'];
+		}
+	}
+
+    OrdendePago::aprobarOrdenesTes($opordpag,$grid,$numcompro,$numorden,$this->comprobaut);
    return -1;
  }
 

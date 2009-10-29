@@ -3095,7 +3095,7 @@ class OrdendePago
     }
   }
 
-  public static function aprobarOrdenesTes($opordpag,$grid,$numcomprob,$numorden)
+  public static function aprobarOrdenesTes($opordpag,$grid,$numcomprob,$numorden,$comprobaut)
   {
     $x=$grid[0];
     $j=0;
@@ -3111,11 +3111,21 @@ class OrdendePago
          $reg= OpdefempPeer::doSelectOne($e);
          if ($reg){
           if ($reg->getGencomalc()=="S"){
+          if ($comprobaut=='S')
+		    {
+		      self::grabarComprobanteAlcAutomatico($x[$j]->getNumord(),&$numcom,&$reftra);
+		      $orden1="OP".substr($x[$j]->getNumord(),2,6);
+		        if ($orden1==$reftra)
+		        {
+			      $x[$j]->setNumcomapr($numcom);
+		        }
+		    }else{
            $orden1="OP".substr($x[$j]->getNumord(),2,6);
 	        if ($orden1==$numord[$l+1])
 	        {
 	          $x[$j]->setNumcomapr($numcom[$l+1]);
 	          $l++;
+	        }
 	        }
           }
          }
@@ -3716,5 +3726,193 @@ public static function actualizarOrdenPag($orden,$grid3)
 
    return true;
   }
+
+  public static function grabarComprobanteAlcAutomatico($numord,&$correl2,&$reftra)
+  {
+    $numeroorden3="OP".substr($numord,2,6);
+    $t= new Criteria();
+    $t->add(OpordpagPeer::NUMORD,$numord);
+    $data= OpordpagPeer::doSelectOne($t);
+    if ($data)
+    {
+      $ctapago=$data->getCtapag();
+      $monorden=$data->getMonord();
+      $desord= $data->getDesord();
+      $fecha=$data->getFecemi();
+      $bene=$data->getNomben();
+    }
+
+    $reftra = $numeroorden3;
+    $codigocuenta="";
+    $tipo="";
+    $des="";
+    $monto="";
+    $codigocuentas="";
+    $tipo1="";
+    $desc="";
+    $monto1="";
+    $codigocuenta2="";
+    $tipo2="";
+    $des2="";
+    $monto2="";
+    $cuentas="";
+    $tipos="";
+    $montos="";
+    $descr="";
+    $msjuno="";
+
+    $cuenta=$ctapago;
+    $monord=$monorden;
+    if ($monord>0)
+    {
+      $codigocuenta=$cuenta;
+      $tipo='D';
+      $des="";
+      $mon=$monorden;
+      $monto=$mon;
+    }
+
+    $c= new Criteria();
+    $c->add(TsrelasiordPeer::CTAGASXPAG,$ctapago);
+    $reg= TsrelasiordPeer::doSelectOne($c);
+    if ($reg)
+    {
+      $v= new Criteria();
+      $v->add(ContabbPeer::CODCTA,$reg->getCtaordxpag());
+      $dato= ContabbPeer::doSelectOne($v);
+      if ($dato)
+      {
+        $codigocuenta2=$dato->getCodcta();
+        $tipo2='C';
+        $des2="";
+        $mont=$monorden;
+        $monto2=$mont;
+      }
+    }
+
+    $cuentas=$codigocuenta2.'_'.$codigocuenta;
+    $tipos=$tipo2.'_'.$tipo;
+    $descr=$des2.'_'.$des;
+    $montos=$monto2.'_'.$monto;
+
+    $arrecuentas=split("_",$cuentas);
+    $arretipos=split("_",$tipos);
+    $arremontos=split("_",$montos);
+    $yapaso=array();
+    $dondesta=array();
+
+     foreach ($arrecuentas as $cta)
+     {
+       $dondesta=array_keys($yapaso,$cta);
+
+       if (count($dondesta)==0)
+       {
+	    $yapaso[]=$cta;
+	    // buscamos todas las posiciones de esa cta.
+	    $posiciones=array();
+        $posiciones=array_keys($arrecuentas,$cta); //arreglo con las posiciones
+
+         $contd=0;
+         $contc=0;
+         $acumd=0;
+         $acumc=0;
+
+         foreach ($posiciones as $pos)
+         {
+           if ($arretipos[$pos]=='D')  //DEBITO
+           {
+             $acumd=$acumd+Herramientas::toFloat($arremontos[$pos]);
+             $contd=$contd+1;
+           }
+           else  //CREDITO
+           {
+             $acumc=$acumc+Herramientas::toFloat($arremontos[$pos]);
+             $contc=$contc+1;
+           }
+
+         } // foreach 2
+
+	      if ($contd>=1)
+	      {
+           $new_ctas[]=$cta;
+           $new_descs[]=H::getX('codcta','Contabb','Descta',$cta);
+           $new_movs[]='D';
+           $new_montos[]=$acumd;
+	      }
+	      if ($contc>=1)
+	      {
+           $new_ctas[]=$cta;
+           $new_descs[]=H::getX('codcta','Contabb','Descta',$cta);
+           $new_movs[]='C';
+           $new_montos[]=$acumc;
+	      }
+
+	  } // if dondesta
+    } // foreach 1
+
+    $sumdeb=0;
+    $sumcre=0;
+
+    $i=0;
+	  while ($i<=(count($new_ctas)-1))
+	  {
+	  	if ($new_ctas[$i]!="")
+	  	{
+          if ($new_movs[$i]=='D')
+          {
+          	$sumdeb= $sumdeb +$new_montos[$i];
+          }
+          else
+          {
+          	$sumcre= $sumcre + $new_montos[$i];
+          }
+	  	}
+	  	$i++;
+	  }
+
+        $correl2=OrdendePago::Buscar_Correlativo();
+	    $contabc = new Contabc();
+	    $contabc->setNumcom($correl2);
+	    $contabc->setReftra($reftra);
+	    $contabc->setFeccom($fecha);
+	    $contabc->setDescom($desord." - ".$bene);
+	    if ($sumdeb==$sumcre)
+	    $contabc->setStacom('D');
+	    else
+	    $contabc->setStacom('E');
+	    $contabc->setTipcom(null);
+	    $contabc->setMoncom($sumdeb);
+	    $contabc->save();
+
+      $i=0;
+	  while ($i<=(count($new_ctas)-1))
+	  {
+	  	if ($new_ctas[$i]!="")
+	  	{
+          $contabc1= new Contabc1();
+          $contabc1->setNumcom($correl2);
+          $contabc1->setFeccom($fecha);
+          $contabc1->setCodcta($new_ctas[$i]);
+          $numasi= $i +1;
+          $contabc1->setNumasi($numasi);
+          $contabc1->setRefasi($reftra);
+          $contabc1->setDesasi($new_descs[$i]);
+          if ($new_movs[$i]=='D')
+          {
+          	$contabc1->setDebcre('D');
+          	$contabc1->setMonasi($new_montos[$i]);
+          }
+          else
+          {
+          	$contabc1->setDebcre('C');
+          	$contabc1->setMonasi($new_montos[$i]);
+          }
+          $contabc1->save();
+	  	}
+	  	$i++;
+	  }
+    return true;
+  }
+
 }
 ?>
