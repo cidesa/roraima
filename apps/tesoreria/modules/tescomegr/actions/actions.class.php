@@ -15,12 +15,23 @@ class tescomegrActions extends autotescomegrActions
 
   public function executeIndex()
   {
-    return $this->forward('tescomegr', 'edit');
+    $c= new Criteria();
+  	$resul= TscomegrmesPeer::doSelectOne($c);
+  	if ($resul)
+  	{
+  	 $id=$resul->getId();
+  	 return $this->redirect('tescomegr/edit?id='.$id);
+  	}
+  	else
+  	{
+  	  return $this->redirect('tescomegr/edit');
+  	}
   }
 
   // Para incluir funcionalidades al executeEdit()
   public function editing()
   {
+  	if (!$this->tscomegrmes->getId()) {
     $this->tscomegrmes->setMes1('01');
     $this->tscomegrmes->setMes2('02');
     $this->tscomegrmes->setMes3('03');
@@ -33,5 +44,6 @@ class tescomegrActions extends autotescomegrActions
     $this->tscomegrmes->setMes10('10');
     $this->tscomegrmes->setMes11('11');
     $this->tscomegrmes->setMes12('12');
+  	}
   }
 }
