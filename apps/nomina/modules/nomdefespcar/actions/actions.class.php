@@ -51,7 +51,7 @@ $this->Bitacora('Guardo');
     }
     else
     {
-      $this->labels = $this->getLabels();
+      $labels = $this->getLabels();
 	  $varemp = $this->getUser()->getAttribute('configemp');
 	  if(is_array($varemp))
 	    if(array_key_exists('aplicacion',$varemp))
@@ -59,7 +59,8 @@ $this->Bitacora('Guardo');
 		   if(array_key_exists('modulos',$varemp['aplicacion']['nomina']))
 		     if(array_key_exists('nomdefespcar',$varemp['aplicacion']['nomina']['modulos']))
 		       if(array_key_exists('graocp',$varemp['aplicacion']['nomina']['modulos']['nomdefespcar']))
-	  		     $this->labels['npcargos{graocp}'] = $varemp['aplicacion']['nomina']['modulos']['nomdefespcar']['graocp'];
+	  		     $labels['npcargos{graocp}'] = $varemp['aplicacion']['nomina']['modulos']['nomdefespcar']['graocp'];
+	  $this->labels = $labels;
 
     }
   }
