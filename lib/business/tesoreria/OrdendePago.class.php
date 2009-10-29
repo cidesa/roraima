@@ -3084,13 +3084,18 @@ class OrdendePago
       if ($x[$j]->getAprobadoord()=="1")
       {
         $x[$j]->setAprobadoord('A');
+        $x[$j]->save();
       }
       else
       {
       	$x[$j]->setAprobadoord(null);
+      	$x[$j]->save();
       }
-
-      $x[$j]->save();
+      if ($x[$j]->getCheck()=="1")
+      {
+        $x[$j]->setAprobadoord('R');
+        $x[$j]->save();
+      }
       $j++;
     }
   }
@@ -3129,12 +3134,19 @@ class OrdendePago
 	        }
           }
          }
+         $x[$j]->save();
       }
       else
       {
       	$x[$j]->setAprobadotes(null);
+      	$x[$j]->save();
       }
-      $x[$j]->save();
+      if ($x[$j]->getCheck()=="1")
+      {
+        $x[$j]->setAprobadotes('R');
+        $x[$j]->save();
+      }
+
       $j++;
     }
   }

@@ -526,6 +526,7 @@ class Cheques
   public static function Grabar_Datos($tscheemi,$Monto,$cedrif,$numche,$reqfirma,$mancomegr)
   {
     $escheque=H::getX('CODTIP','Tstipmov','Escheque',$tscheemi->getTipdoc());
+    $numcomegr="";
     if ($escheque==1)
     {
       $tscheeminew= new Tscheemi();
@@ -1620,8 +1621,10 @@ class Cheques
     $q= new Criteria();
     $reg=TscomegrmesPeer::doSelectOne($q);
     if ($reg)
-    {
-      switch ($mes){
+    {   $mes=intval($mes);
+    	eval('$correl=$reg->getCormes'.$mes.'();');
+    	eval('$campo="cormes'.$mes.'";');
+      /*switch ($mes){
 	    case '01':
 	      $correl=$reg->getCormes1();
 	      $campo='cormes1';
@@ -1670,7 +1673,7 @@ class Cheques
           $correl=$reg->getCormes12();
           $campo='cormes12';
          break;
-     }
+     }*/
 
 
      $encontrado=false;

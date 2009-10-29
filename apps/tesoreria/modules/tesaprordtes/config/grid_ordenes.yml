@@ -13,30 +13,42 @@ opciones:                  # Opciones generales
   esgrabable:			   true
   html:                    []
 2:       # Columna 2
+  titulo:                  Rechazar
+  tipo:                    k
+  nombrecampo:             check
+  esgrabable:			   true
+  html:                    []
+3:       # Columna 3
   titulo:                  N° de Orden
   tipo:                    t
   nombrecampo:             numord
   esgrabable:			   true
   html:                    [size="10" readonly=true]
-3:       # Columna 3
+4:       # Columna 4
   titulo:                  Descripción
   tipo:                    t
   nombrecampo:             desord
   html:                    [size="40", readonly=true]
-4:       # Columna 4
+5:       # Columna 5
   titulo:                  Fecha
   tipo:                    f
   nombrecampo:             fecemi
   html:                    [ ]
-5:       # Columna 5
+6:       # Columna 6
   titulo:                  Monto
   tipo:                    m
   nombrecampo:             monord
   esnumerico:              true
   html:                    [size="10" readonly="true"]
-6:       # Columna 6
+7:       # Columna 7
   titulo:                  Beneficiario
   tipo:                    t
   nombrecampo:             Nomben
   esgrabable:			   true
   html:                    [size="40", readonly=true]
+8:       # Columna 8
+  titulo:                  Motivo de Rechazo
+  tipo:                    a
+  nombrecampo:             motrectes
+  esgrabable:			   true
+  html:                    [size="20x2"]

@@ -1116,7 +1116,7 @@ $this->Bitacora('Guardo');
     $opciones->setTabla('Npexplab');
     $opciones->setAnchoGrid(1000);
     $opciones->setName('b');
-    $opciones->setTitulo('Dentro de la Empresa');
+    $opciones->setTitulo('Dentro de la Institución');
     $opciones->setHTMLTotalFilas(' ');
 
     $col1 = new Columna('Código');
@@ -1215,7 +1215,7 @@ $this->Bitacora('Guardo');
     $opciones->setAnchoGrid(1000);
 	$opciones->setAncho(1200);
     $opciones->setName('c');
-    $opciones->setTitulo('Fuera de la Empresa');
+    $opciones->setTitulo('Fuera de la Institución');
     $opciones->setHTMLTotalFilas(' ');
 
     $col1 = new Columna('Institución');

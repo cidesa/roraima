@@ -13,7 +13,7 @@ abstract class BaseOpordpagPeer {
 	const CLASS_DEFAULT = 'lib.model.Opordpag';
 
 	
-	const NUM_COLUMNS = 61;
+	const NUM_COLUMNS = 63;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -200,6 +200,12 @@ abstract class BaseOpordpagPeer {
 	const NUMFORPRE = 'opordpag.NUMFORPRE';
 
 	
+	const MOTRECORD = 'opordpag.MOTRECORD';
+
+	
+	const MOTRECTES = 'opordpag.MOTRECTES';
+
+	
 	const ID = 'opordpag.ID';
 
 	
@@ -208,10 +214,10 @@ abstract class BaseOpordpagPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Numord', 'Tipcau', 'Fecemi', 'Cedrif', 'Nomben', 'Monord', 'Desord', 'Mondes', 'Monret', 'Numche', 'Ctaban', 'Ctapag', 'Numcom', 'Status', 'Coduni', 'Fecenvcon', 'Fecenvfin', 'Ctapagfin', 'Obsord', 'Fecven', 'Fecanu', 'Desanu', 'Monpag', 'Aproba', 'Nombensus', 'Fecrecfin', 'Anopre', 'Fecpag', 'Numtiq', 'Peraut', 'Cedaut', 'Nomper2', 'Nomper1', 'Horcon', 'Feccon', 'Nomcat', 'Numfac', 'Numconfac', 'Numcorfac', 'Fechafac', 'Fecfac', 'Tipfin', 'Comret', 'Feccomret', 'Comretislr', 'Feccomretislr', 'Comretltf', 'Feccomretltf', 'Numsigecof', 'Fecsigecof', 'Expsigecof', 'Aprobadoord', 'Codmotanu', 'Usuanu', 'Aprobadotes', 'Fecret', 'Numcue', 'Numcomapr', 'Codconcepto', 'Numforpre', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (OpordpagPeer::NUMORD, OpordpagPeer::TIPCAU, OpordpagPeer::FECEMI, OpordpagPeer::CEDRIF, OpordpagPeer::NOMBEN, OpordpagPeer::MONORD, OpordpagPeer::DESORD, OpordpagPeer::MONDES, OpordpagPeer::MONRET, OpordpagPeer::NUMCHE, OpordpagPeer::CTABAN, OpordpagPeer::CTAPAG, OpordpagPeer::NUMCOM, OpordpagPeer::STATUS, OpordpagPeer::CODUNI, OpordpagPeer::FECENVCON, OpordpagPeer::FECENVFIN, OpordpagPeer::CTAPAGFIN, OpordpagPeer::OBSORD, OpordpagPeer::FECVEN, OpordpagPeer::FECANU, OpordpagPeer::DESANU, OpordpagPeer::MONPAG, OpordpagPeer::APROBA, OpordpagPeer::NOMBENSUS, OpordpagPeer::FECRECFIN, OpordpagPeer::ANOPRE, OpordpagPeer::FECPAG, OpordpagPeer::NUMTIQ, OpordpagPeer::PERAUT, OpordpagPeer::CEDAUT, OpordpagPeer::NOMPER2, OpordpagPeer::NOMPER1, OpordpagPeer::HORCON, OpordpagPeer::FECCON, OpordpagPeer::NOMCAT, OpordpagPeer::NUMFAC, OpordpagPeer::NUMCONFAC, OpordpagPeer::NUMCORFAC, OpordpagPeer::FECHAFAC, OpordpagPeer::FECFAC, OpordpagPeer::TIPFIN, OpordpagPeer::COMRET, OpordpagPeer::FECCOMRET, OpordpagPeer::COMRETISLR, OpordpagPeer::FECCOMRETISLR, OpordpagPeer::COMRETLTF, OpordpagPeer::FECCOMRETLTF, OpordpagPeer::NUMSIGECOF, OpordpagPeer::FECSIGECOF, OpordpagPeer::EXPSIGECOF, OpordpagPeer::APROBADOORD, OpordpagPeer::CODMOTANU, OpordpagPeer::USUANU, OpordpagPeer::APROBADOTES, OpordpagPeer::FECRET, OpordpagPeer::NUMCUE, OpordpagPeer::NUMCOMAPR, OpordpagPeer::CODCONCEPTO, OpordpagPeer::NUMFORPRE, OpordpagPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('numord', 'tipcau', 'fecemi', 'cedrif', 'nomben', 'monord', 'desord', 'mondes', 'monret', 'numche', 'ctaban', 'ctapag', 'numcom', 'status', 'coduni', 'fecenvcon', 'fecenvfin', 'ctapagfin', 'obsord', 'fecven', 'fecanu', 'desanu', 'monpag', 'aproba', 'nombensus', 'fecrecfin', 'anopre', 'fecpag', 'numtiq', 'peraut', 'cedaut', 'nomper2', 'nomper1', 'horcon', 'feccon', 'nomcat', 'numfac', 'numconfac', 'numcorfac', 'fechafac', 'fecfac', 'tipfin', 'comret', 'feccomret', 'comretislr', 'feccomretislr', 'comretltf', 'feccomretltf', 'numsigecof', 'fecsigecof', 'expsigecof', 'aprobadoord', 'codmotanu', 'usuanu', 'aprobadotes', 'fecret', 'numcue', 'numcomapr', 'codconcepto', 'numforpre', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, )
+		BasePeer::TYPE_PHPNAME => array ('Numord', 'Tipcau', 'Fecemi', 'Cedrif', 'Nomben', 'Monord', 'Desord', 'Mondes', 'Monret', 'Numche', 'Ctaban', 'Ctapag', 'Numcom', 'Status', 'Coduni', 'Fecenvcon', 'Fecenvfin', 'Ctapagfin', 'Obsord', 'Fecven', 'Fecanu', 'Desanu', 'Monpag', 'Aproba', 'Nombensus', 'Fecrecfin', 'Anopre', 'Fecpag', 'Numtiq', 'Peraut', 'Cedaut', 'Nomper2', 'Nomper1', 'Horcon', 'Feccon', 'Nomcat', 'Numfac', 'Numconfac', 'Numcorfac', 'Fechafac', 'Fecfac', 'Tipfin', 'Comret', 'Feccomret', 'Comretislr', 'Feccomretislr', 'Comretltf', 'Feccomretltf', 'Numsigecof', 'Fecsigecof', 'Expsigecof', 'Aprobadoord', 'Codmotanu', 'Usuanu', 'Aprobadotes', 'Fecret', 'Numcue', 'Numcomapr', 'Codconcepto', 'Numforpre', 'Motrecord', 'Motrectes', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (OpordpagPeer::NUMORD, OpordpagPeer::TIPCAU, OpordpagPeer::FECEMI, OpordpagPeer::CEDRIF, OpordpagPeer::NOMBEN, OpordpagPeer::MONORD, OpordpagPeer::DESORD, OpordpagPeer::MONDES, OpordpagPeer::MONRET, OpordpagPeer::NUMCHE, OpordpagPeer::CTABAN, OpordpagPeer::CTAPAG, OpordpagPeer::NUMCOM, OpordpagPeer::STATUS, OpordpagPeer::CODUNI, OpordpagPeer::FECENVCON, OpordpagPeer::FECENVFIN, OpordpagPeer::CTAPAGFIN, OpordpagPeer::OBSORD, OpordpagPeer::FECVEN, OpordpagPeer::FECANU, OpordpagPeer::DESANU, OpordpagPeer::MONPAG, OpordpagPeer::APROBA, OpordpagPeer::NOMBENSUS, OpordpagPeer::FECRECFIN, OpordpagPeer::ANOPRE, OpordpagPeer::FECPAG, OpordpagPeer::NUMTIQ, OpordpagPeer::PERAUT, OpordpagPeer::CEDAUT, OpordpagPeer::NOMPER2, OpordpagPeer::NOMPER1, OpordpagPeer::HORCON, OpordpagPeer::FECCON, OpordpagPeer::NOMCAT, OpordpagPeer::NUMFAC, OpordpagPeer::NUMCONFAC, OpordpagPeer::NUMCORFAC, OpordpagPeer::FECHAFAC, OpordpagPeer::FECFAC, OpordpagPeer::TIPFIN, OpordpagPeer::COMRET, OpordpagPeer::FECCOMRET, OpordpagPeer::COMRETISLR, OpordpagPeer::FECCOMRETISLR, OpordpagPeer::COMRETLTF, OpordpagPeer::FECCOMRETLTF, OpordpagPeer::NUMSIGECOF, OpordpagPeer::FECSIGECOF, OpordpagPeer::EXPSIGECOF, OpordpagPeer::APROBADOORD, OpordpagPeer::CODMOTANU, OpordpagPeer::USUANU, OpordpagPeer::APROBADOTES, OpordpagPeer::FECRET, OpordpagPeer::NUMCUE, OpordpagPeer::NUMCOMAPR, OpordpagPeer::CODCONCEPTO, OpordpagPeer::NUMFORPRE, OpordpagPeer::MOTRECORD, OpordpagPeer::MOTRECTES, OpordpagPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('numord', 'tipcau', 'fecemi', 'cedrif', 'nomben', 'monord', 'desord', 'mondes', 'monret', 'numche', 'ctaban', 'ctapag', 'numcom', 'status', 'coduni', 'fecenvcon', 'fecenvfin', 'ctapagfin', 'obsord', 'fecven', 'fecanu', 'desanu', 'monpag', 'aproba', 'nombensus', 'fecrecfin', 'anopre', 'fecpag', 'numtiq', 'peraut', 'cedaut', 'nomper2', 'nomper1', 'horcon', 'feccon', 'nomcat', 'numfac', 'numconfac', 'numcorfac', 'fechafac', 'fecfac', 'tipfin', 'comret', 'feccomret', 'comretislr', 'feccomretislr', 'comretltf', 'feccomretltf', 'numsigecof', 'fecsigecof', 'expsigecof', 'aprobadoord', 'codmotanu', 'usuanu', 'aprobadotes', 'fecret', 'numcue', 'numcomapr', 'codconcepto', 'numforpre', 'motrecord', 'motrectes', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, )
 	);
 
 	
@@ -392,6 +398,10 @@ abstract class BaseOpordpagPeer {
 		$criteria->addSelectColumn(OpordpagPeer::CODCONCEPTO);
 
 		$criteria->addSelectColumn(OpordpagPeer::NUMFORPRE);
+
+		$criteria->addSelectColumn(OpordpagPeer::MOTRECORD);
+
+		$criteria->addSelectColumn(OpordpagPeer::MOTRECTES);
 
 		$criteria->addSelectColumn(OpordpagPeer::ID);
 
