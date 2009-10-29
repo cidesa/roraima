@@ -154,6 +154,10 @@ class OpordpagMapBuilder {
 
 		$tMap->addColumn('NUMFORPRE', 'Numforpre', 'string', CreoleTypes::VARCHAR, false, 8);
 
+		$tMap->addColumn('MOTRECORD', 'Motrecord', 'string', CreoleTypes::VARCHAR, false, 500);
+
+		$tMap->addColumn('MOTRECTES', 'Motrectes', 'string', CreoleTypes::VARCHAR, false, 500);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 
