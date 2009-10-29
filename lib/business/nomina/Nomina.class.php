@@ -1310,7 +1310,8 @@ class Nomina {
         break;
 
       case "SIC" :
-        $criterio = "Select coalesce(SUM(a.saldo),0) as campo from npNomCal A,NPCONSALINT B where  A.CODCON=B.CODCON AND  a.CODNOM=B.CODNOM AND  a.codnom='" . $nomina . "' and a.codemp='" . $empleado . "' and a.codcar='" . $cargo . "' " . $cadena;
+        #$criterio = "Select coalesce(SUM(a.saldo),0) as campo from npNomCal A,NPCONSALINT B where  A.CODCON=B.CODCON AND  a.CODNOM=B.CODNOM AND  a.codnom='" . $nomina . "' and a.codemp='" . $empleado . "' and a.codcar='" . $cargo . "' " . $cadena;
+        $criterio = "Select coalesce(SUM(a.saldo),0) as campo from npNomCal A,NPCONSALINT B where  A.CODCON=B.CODCON AND  a.CODNOM=B.CODNOM AND  a.codnom='" . $nomina . "' and a.codemp='" . $empleado . "' and a.codcar='" . $cargo . "' ";
 
         if (Herramientas :: BuscarDatos($criterio, & $tabla)) {
           $valor = $tabla[0]["campo"];
