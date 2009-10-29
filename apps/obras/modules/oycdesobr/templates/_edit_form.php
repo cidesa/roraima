@@ -4,8 +4,8 @@
  *
  * @package    Roraima
  * @subpackage vistas
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version    SVN: $Id$
+ * @author     $Author: dmartinez $ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id: _edit_form.php 34312 2009-10-29 13:31:22Z dmartinez $
  */
 // date: 2007/05/04 16:19:31
 ?>
@@ -18,6 +18,7 @@
 <?php echo object_input_hidden_tag($ocregobr, 'getId') ?>
 <?php echo javascript_include_tag('dFilter','ajax','tools','observe','obras/ofertas') ?>
 <?php use_helper('tabs') ?>
+<?php echo input_hidden_tag('aplicaiva', $apliva) ?>
 <fieldset>
 <legend><?php echo __('Datos de la Obra')?></legend>
 <div class="form-row">
@@ -191,9 +192,10 @@
     </div>
 </div>
 </fieldset>
-<?php tabPageOpenClose("tp1", "tabPage2", 'Presupuesto');?>
+<?php tabPageOpenClose("tp1", "tabPage2", 'Partidas Covenin');?>
 <fieldset>
 <div class="form-row">
+<?php if ($apliva!='S') {?>
   <?php echo label_for('ocregobr[ivaobr]', __($labels['ocregobr{ivaobr}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('ocregobr{ivaobr}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('ocregobr{ivaobr}')): ?>
@@ -210,7 +212,7 @@
     </div>
 
 <br>
-
+<?php }?>
 <?php echo grid_tag($obj);?>
 
 <br>
@@ -272,9 +274,34 @@
 </div>
 </fieldset>
 
-<?php tabPageOpenClose("tp1", "tabPage3", 'Asignación');?>
+<?php tabPageOpenClose("tp1", "tabPage3", 'Asignación de Presupuesto');?>
 <fieldset>
 <div class="form-row">
+<div id="tipopre">
+  <?php echo label_for('ocregobr[tipprc]', __($labels['ocregobr{tipprc}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('ocregobr{tipprc}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('ocregobr{tipprc}')): ?>
+    <?php echo form_error('ocregobr{tipprc}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($ocregobr, 'getTipprc', array (
+  'size' => 32,
+  'maxlength' => 4,
+  'readonly'  =>  $ocregobr->getId()!='' ? true : false,
+  'control_name' => 'ocregobr[tipprc]',
+  'onBlur'=> remote_function(array(
+        'url'      => 'oycdesobr/ajax',
+        'condition' => "$('ocregobr_tipprc').value != '' && $('id').value == ''",
+        'complete' => 'AjaxJSON(request, json)',
+        'with' => "'ajax=5&cajtexcom=ocregobr_tipprc&codigo='+this.value"
+        ))
+)); echo $value ? $value : '&nbsp;' ?>
+&nbsp;
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Cpdocprc_Predocpre/clase/Cpdocprc/frame/sf_admin_edit_form/obj1/ocregobr_tipprc/campo1/tipprc','','','botoncat')?>
+    </div>
+
+<br>
+</div>
   <?php echo label_for('ocregobr[codpre]', __($labels['ocregobr{codpre}']), 'class="required"') ?>
   <div class="content<?php if ($sf_request->hasError('ocregobr{codpre}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('ocregobr{codpre}')): ?>
@@ -384,6 +411,7 @@
    $$('.botoncat')[2].disabled=true;
    $('trigger_ocregobr_fecini').hide();
    $('trigger_ocregobr_fecfin').hide();
+   $('tipopre').hide();
 
  }
 

@@ -888,6 +888,12 @@
 1023:
     cod: 1023
     msj: El Monto Total debe ser mayor a cero
+1024:
+    cod: 1024
+    msj: Selecciones el Tipo de Precompromiso
+1025:
+    cod: 1025
+    msj: Selecciones el Tipo de Compromiso
 ###############FACTURACION################
 1100:
     cod: 1100

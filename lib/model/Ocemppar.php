@@ -60,4 +60,14 @@ class Ocemppar extends BaseOcemppar
   {
     return Herramientas::getX('CODPRO','Caprovee','Nompro',self::getCodpro());
   }
+
+  public function getCodpre()
+  {
+    return Herramientas::getX('CODOBR','Ocregobr','Codpre',self::getCodobr());
+  }
+
+  public function getNompre()
+  {
+    return Herramientas::getX('CODPRE','Cpdeftit','Nompre',self::getCodpre());
+  }
 }

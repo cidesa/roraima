@@ -11,6 +11,7 @@ generator:
       fecini: { name: Fecha Inicio}
       fecfin: { name: Fecha Fin}
       monobr: { name: Monto}
+      codpre: { name: Codigo Presupuestario}
     list:
       title: Empresas Participantes
       display: [=codobr, desobr]
@@ -23,7 +24,7 @@ generator:
     edit:
       title: Edición de Empresas Participantes
       display:
-        "NONE": [_codobr, codtipobr, destipobr, fecini, fecfin, monobr, _empresas]
+        "NONE": [_codobr, codtipobr, destipobr, fecini, fecfin, monobr, _codpre, _empresas]
       actions:
         _list:        ~
         _save:        ~

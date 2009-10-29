@@ -26,6 +26,7 @@ generator:
       codprogan: { name: Código, params: size=15 maxlength=15}
       despro: { name: Descripción}
       fecgan: { name: Fecha, params: onkeyup= "mascara(this,'/',patron,true)"}
+      codpre: { name: Codigo Presupuestario}
     list:
       title: Obras Adjudicadas
       display: [=codadj, tipadj, fecadj, codobr]
@@ -39,7 +40,7 @@ generator:
       title: Edición de Adjudicación de Obras
       display:
         "NONE": [_codadj, _tipadj, _fecadj, _status]
-        "Datos de la Obra": [_codobr, codtipobr, destipobr, fecini, fecfin, monobr]
+        "Datos de la Obra": [_codobr, codtipobr, destipobr, fecini, fecfin, monobr, _codpre]
         "Fechas Previstas para el Proceso de Adjudicación": []
         "Publicación": [fecinipub, fecfinpub]
         "Retiro de Base": [fecbaseini, fecbasefin]

@@ -51,6 +51,7 @@
 
   <?php $value = object_input_tag($ocregcon, 'getDesobr', array (
   'disabled' => true,
+  'size' => 60,
   'control_name' => 'ocregcon[desobr]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
@@ -63,6 +64,7 @@
 
   <?php $value = object_input_tag($ocregcon, 'getNompro', array (
   'disabled' => true,
+  'size' => 60,
   'control_name' => 'ocregcon[nompro]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>

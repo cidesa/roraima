@@ -37,6 +37,12 @@ class oycdesconActions extends autooycdesconActions
       $grid = Herramientas::CargarDatosGrid($this,$this->obj);
       $grid = Herramientas::CargarDatosGrid($this,$this->obj3);
 
+      if ($this->getRequestParameter('ocregcon[tipcom]')=='')
+      {
+      	$this->coderror=1025;
+      	return false;
+      }
+
       $anno=substr($this->ocregcon->getFeccon(),0,4);
       $monto=$this->ocregcon->getMoncon();
   	  if (!Obras::chequearDisponibilidadPresupuesto($this->ocregcon->getCodpre(),$anno,$grid,'1',$monto,&$mondis))
@@ -44,6 +50,8 @@ class oycdesconActions extends autooycdesconActions
         $this->coderror1=152;
         $this->disponible=$mondis;
   	  }
+
+
 
        if ($this->coderror1<>-1)
        {
@@ -945,6 +953,10 @@ class oycdesconActions extends autooycdesconActions
     {
       $this->ocregcon->setDisponible($ocregcon['disponible']);
     }
+    if (isset($ocregcon['tipcom']))
+    {
+      $this->ocregcon->setTipcom($ocregcon['tipcom']);
+    }
   }
 
   public function setVars()
@@ -1260,6 +1272,10 @@ class oycdesconActions extends autooycdesconActions
        	 {
        	   $dato=$reg->getCodpro();
        	   $dato1=$reg->getNompro();
+       	   if ($reg->getTipo()=='P')
+       	   {
+       	   	$javascript="$('ocregcon_ivaobr').value='0,00'; $('ocregcon_ivaobr').readOnly=true;";
+       	   }
 
        	   $c= new Criteria();
        	   $c->add(OcreglicPeer::CODOBR,$this->getRequestParameter('obra'));
@@ -1574,6 +1590,19 @@ class oycdesconActions extends autooycdesconActions
       return sfView::HEADER_ONLY;
 
      }
+     else  if ($this->getRequestParameter('ajax')=='16')
+     {
+       $c= new Criteria();
+	   $c->add(CpdoccomPeer::TIPCOM,$this->getRequestParameter('codigo'));
+       $reg=CpdoccomPeer::doSelectOne($c);
+       if (!$reg)
+       {
+         $javascript="alert('El Tipo de Compromiso no existe'); $('". $cajtexcom ."').value='';";
+       }
+       $output = '[["javascript","'.$javascript.'",""]]';
+       $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+       return sfView::HEADER_ONLY;
+     }
     }
 
 
@@ -1615,6 +1644,11 @@ class oycdesconActions extends autooycdesconActions
 
    if($this->getRequest()->getMethod() == sfRequest::POST)
    {
+   	if($this->coderror!=-1)
+    {
+     $err = Herramientas::obtenerMensajeError($this->coderror);
+     $this->getRequest()->setError('',$err);
+    }
     if($this->coderror1!=-1)
     {
      $err = Herramientas::obtenerMensajeError($this->coderror1);

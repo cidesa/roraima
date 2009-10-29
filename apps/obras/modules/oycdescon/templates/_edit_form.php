@@ -153,7 +153,7 @@
 </div>
 </fieldset>
 
-<?php tabPageOpenClose("tp1", "tabPage2", 'Partidas');?>
+<?php tabPageOpenClose("tp1", "tabPage2", 'Partidas Covenin');?>
 <fieldset id="sf_fieldset_none" class="">
 <div class="form-row">
  <?php echo label_for('ocregcon[poriva]', __($labels['ocregcon{poriva}']), 'class="required" ') ?>
@@ -164,13 +164,37 @@
 
   <?php $value = object_input_tag($ocregcon, array('getPoriva',true), array (
   'size' => 7,
-  'readonly' => true,
+  //'readonly' => true,
   'control_name' => 'ocregcon[poriva]',
   'onBlur' => "javascript:event.keyCode=13;return entermontootro(event, this.id)",
 )); echo $value ? $value : '&nbsp;' ?>
 <?php echo '&nbsp;&nbsp;'.'(Aplicado al Contrato)' ?>
     </div>
+<br>
 
+<div id="tipocom">
+  <?php echo label_for('ocregcon[tipcom]', __($labels['ocregcon{tipcom}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('ocregcon{tipcom}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('ocregcon{tipcom}')): ?>
+    <?php echo form_error('ocregcon{tipcom}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($ocregcon, 'getTipcom', array (
+  'size' => 32,
+  'maxlength' => 4,
+  'readonly'  =>  $ocregcon->getId()!='' ? true : false,
+  'control_name' => 'ocregcon[tipcom]',
+  'onBlur'=> remote_function(array(
+        'url'      => 'oycdescon/ajax',
+        'condition' => "$('ocregcon_tipcom').value != '' && $('id').value == ''",
+        'complete' => 'AjaxJSON(request, json)',
+        'with' => "'ajax=16&cajtexcom=ocregcon_tipcom&codigo='+this.value"
+        ))
+)); echo $value ? $value : '&nbsp;' ?>
+&nbsp;
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Cpdoccom_Predoccom/clase/Cpdoccom/frame/sf_admin_edit_form/obj1/ocregcon_tipcom/campo1/tipcom','','','botoncat')?>
+    </div>
+</div>
 <br>
 
 <div id="partida">
@@ -617,6 +641,7 @@
    $('trigger_ocregcon_fecbuepro').hide();
    $('trigger_ocregcon_fecfin').hide();
    $('trigger_ocregcon_fecfinmod').hide();
+   $('tipocom').hide();
    totalizargridcon();
   }
 

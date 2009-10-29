@@ -7,7 +7,7 @@
  * @subpackage lib
  * @author     $Author$ <desarrollo@cidesa.com.ve>
  * @version SVN: $Id$
- * 
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -3273,29 +3273,31 @@ $this->c= new Criteria();
     );
   }
 
-  public function Obras_Ocoferpre() {
-    $this->c = new Criteria();
-    $this->c->addAscendingOrderByColumn(OcregobrPeer :: CODOBR);
+	public function Obras_Ocoferpre() {
+		$this->c = new Criteria();
+		$this->c->addAscendingOrderByColumn(OcregobrPeer :: CODOBR);
 
-    $this->columnas = array (
-      OcregobrPeer :: CODOBR => 'Código',
-      OcregobrPeer :: DESOBR => 'Descripción'
-    );
-  }
+		$this->columnas = array (
+			OcregobrPeer :: CODOBR => 'Código',
+			OcregobrPeer :: DESOBR => 'Descripción',
+			OcregobrPeer :: CODPRE => 'Código Presupuestario'
+		);
+	}
 
-  public function Obras_Ocadjobr() {
-    $this->c = new Criteria();
-    $this->c->addAscendingOrderByColumn(OcregobrPeer :: CODOBR);
+	public function Obras_Ocadjobr() {
+		$this->c = new Criteria();
+		$this->c->addAscendingOrderByColumn(OcregobrPeer :: CODOBR);
 
-    $this->columnas = array (
-      OcregobrPeer :: CODOBR => 'Código',
-      OcregobrPeer :: DESOBR => 'Descripción',
-      OcregobrPeer :: CODTIPOBR => 'Tipo',
-      OcregobrPeer :: FECINI => 'Fecha Inicio',
-      OcregobrPeer :: FECFIN => 'Fecha Fin',
-      OcregobrPeer :: MONOBR => 'Monto'
-    );
-  }
+		$this->columnas = array (
+			OcregobrPeer :: CODOBR => 'Código',
+			OcregobrPeer :: DESOBR => 'Descripción',
+			OcregobrPeer :: CODTIPOBR => 'Tipo',
+			OcregobrPeer :: FECINI => 'Fecha Inicio',
+			OcregobrPeer :: FECFIN => 'Fecha Fin',
+			OcregobrPeer :: MONOBR => 'Monto',
+            OcregobrPeer :: CODPRE => 'Código Presupuestario'
+		);
+	}
 
   public function Tipofin_Ocreglic() {
     $this->c = new Criteria();

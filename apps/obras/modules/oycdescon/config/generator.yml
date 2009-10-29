@@ -39,6 +39,7 @@ generator:
       despre: { name: despre}
       totcon: { name: Total Contratado}
       codpreiva: { name: codpreiva}
+      tipcom:    { name: Tipo de Compromiso}
     list:
       title:          Contratos
       filters:		  [codcon, descon]
@@ -48,7 +49,7 @@ generator:
         _edit:        ~
     edit:
       title:          Edición de Contratos
-      display:        [codcon, tipcon, nomtipcon, codobr, desobr, codpro, nompro, descon, feccon, fecini, feclic, fecproini, fecrei, fecfin, fecrecdef, fecbuepro, fecpar, fecpro, fecrecprov, fecfinmod, moncon, monext, monmod, monmul, monful, poriva, moniva, tieejecon, stacon, subtot, gasree, platie, codpre, despre, totcon, codpreiva, contratado, contrapar, disponible]
+      display:        [codcon, tipcon, nomtipcon, codobr, desobr, codpro, nompro, descon, feccon, fecini, feclic, fecproini, fecrei, fecfin, fecrecdef, fecbuepro, fecpar, fecpro, fecrecprov, fecfinmod, moncon, monext, monmod, monmul, monful, poriva, moniva, tieejecon, stacon, subtot, gasree, platie, codpre, despre, totcon, codpreiva, contratado, contrapar, disponible, tipcom]
       actions:
         _list:        ~
         _save:        ~

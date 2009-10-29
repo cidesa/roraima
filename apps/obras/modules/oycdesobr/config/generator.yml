@@ -27,6 +27,7 @@ generator:
       nompreiva:   { name: Descripción}
       unocon:      { name: xx}
       staobr:      { name: Estatus}
+      tipprc:      { name: Tipo de Precompromiso}
 
     list:
       title:          Obras
@@ -40,7 +41,7 @@ generator:
 
     edit:
       title:          Edición de Obras
-      display:        [codobr, codtipobr, desobr, fecini, fecfin, codpai, codedo, codmun, codpar, codsec, dirobr, monobr, subtot, moniva, ivaobr, codpre, nompre, codpreiva, nompreiva, staobr, unocon]
+      display:        [codobr, codtipobr, desobr, fecini, fecfin, codpai, codedo, codmun, codpar, codsec, dirobr, monobr, subtot, moniva, ivaobr, codpre, nompre, codpreiva, nompreiva, staobr, unocon, tipprc]
       actions:
         _list:        ~
         _save:        ~

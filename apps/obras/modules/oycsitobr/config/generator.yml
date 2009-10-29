@@ -6,6 +6,8 @@ generator:
     fields:
       codobr: { name: Código}
       desobr: { name: Descripción}
+      codpre: { name: Código Presupuestario}
+      nompre: { name: Descripción}
       staobr: { name: Estatus}
       totalp: { name: Presupuestado}
       totala: { name: Asignado}
@@ -23,12 +25,12 @@ generator:
     list:
       title:          Situación de la Obra
       filters:		  [codobr, desobr]
-      display:        [=codobr, desobr]
+      display:        [=codobr, desobr, codpre, nompre]
       max_per_page:	  10
       object_actions:
         _edit:        ~
     edit:
       title:          Situación de la Obra
-      display:        [codobr, desobr, totalp, totala, totaldif, totalc, totalcv, pordif, porvarcon, moneje, poreje, monporeje, porxeje, totobreje, obrejefis]
+      display:        [codobr, desobr, codpre, nompre, totalp, totala, totaldif, totalc, totalcv, pordif, porvarcon, moneje, poreje, monporeje, porxeje, totobreje, obrejefis]
       actions:
         _list:        ~

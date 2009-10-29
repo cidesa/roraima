@@ -154,15 +154,17 @@ public static function salvarLicitacion($ocreglic, $grid)
     }
   }
 
-  public static function salvarOycdesobr($ocregobr,$grid1,$grid2,&$msj)
+  public static function salvarOycdesobr($ocregobr,$grid1,$grid2,&$msj,$apliva)
  {
+ 	$msj=-1;
    if (!$ocregobr->getId())
    {
     $ocregobr->setUnocon('N');
     $ocregobr->setStaobr('A');
    }
    $referencia='OB'.(substr($ocregobr->getCodobr(),2,strlen($ocregobr->getCodobr())));
-   self::generaPrecompromiso($ocregobr,$referencia,&$msj);
+   if ($apliva!='S'){
+   self::generaPrecompromiso($ocregobr,$referencia,&$msj);}
 
    if ($msj==-1)
    {
@@ -171,7 +173,9 @@ public static function salvarLicitacion($ocreglic, $grid)
      self::grabarPresupuesto($ocregobr,$grid1);
      self::actualizarPartidas($ocregobr,$grid1);
      self::grabarInspectores($ocregobr,$grid2);
+      if ($apliva!='S'){
      self::generarImputacionesPrecompromiso($ocregobr);
+      }
    return true;
    }
  }
@@ -1121,10 +1125,11 @@ public static function salvarLicitacion($ocreglic, $grid)
     $existe = CpprecomPeer::doSelectOne($c);
     if (!$existe)
     {
+     if ($ocregobr->getMonobr()>0){
       $cpprecom= new Cpprecom();
       $cpprecom->setRefprc($referencia);
       $cpprecom->setFecprc($ocregobr->getFecini());
-      $cpprecom->setTipprc($ocregobr->getCodtipobr());
+      $cpprecom->setTipprc($ocregobr->getTipprc());
       $cpprecom->setAnoprc(substr($ocregobr->getFecini(),0,4));
       $cpprecom->setDesanu(null);
       $cpprecom->setDesprc($ocregobr->getDesobr());
@@ -1136,6 +1141,7 @@ public static function salvarLicitacion($ocreglic, $grid)
       $cpprecom->setStaprc('A');
       $cpprecom->setcedrif(null);
       $cpprecom->save();
+     }
       return true;
     }
     else
@@ -1148,7 +1154,7 @@ public static function salvarLicitacion($ocreglic, $grid)
   public static function generarImputacionesPrecompromiso($ocregobr)
   {
   	$referencia=$ocregobr->getCodobr();
-
+    if ($ocregobr->getSubtot()>0) {
     $registro = new Cpimpprc();
     $registro->setRefprc($referencia);
     $registro->setCodpre($ocregobr->getCodpre());
@@ -1159,7 +1165,9 @@ public static function salvarLicitacion($ocreglic, $grid)
     $registro->setMonaju(0);
     $registro->setStaimp('A');
     $registro->save();
+    }
 
+    if ($ocregobr->getMoniva()>0) {
     $registro2 = new Cpimpprc();
     $registro2->setRefprc($referencia);
     $registro2->setCodpre($ocregobr->getCodpreiva());
@@ -1170,6 +1178,7 @@ public static function salvarLicitacion($ocreglic, $grid)
     $registro2->setMonaju(0);
     $registro2->setStaimp('A');
     $registro2->save();
+    }
   }
 
   public static function eliminarPrecompromiso($code)
@@ -1230,7 +1239,7 @@ public static function salvarLicitacion($ocreglic, $grid)
 
      	$cpcompro= new Cpcompro();
      	$cpcompro->setRefcom($referencia);
-     	$cpcompro->setTipcom($ocregcon->getTipcon());
+     	$cpcompro->setTipcom($ocregcon->getTipcom());
      	$cpcompro->setFeccom($ocregcon->getFeccon());
      	$cpcompro->setAnocom(substr($ocregcon->getFeccon(),0,4));
      	$cpcompro->setRefprc($ocregcon->getCodobr());
@@ -1261,6 +1270,7 @@ public static function salvarLicitacion($ocreglic, $grid)
 	    $registro->setRefere($ocregcon->getCodobr());
 	    $registro->save();
 
+        if ($ocregcon->getMoniva()>0) {
         $registro1 = new Cpimpcom();
 	    $registro1->setRefcom($referencia);
 	    $registro1->setCodpre($ocregcon->getCodpreiva());
@@ -1271,6 +1281,7 @@ public static function salvarLicitacion($ocreglic, $grid)
 	    $registro1->setStaimp('A');
 	    $registro1->setRefere($ocregcon->getCodobr());
 	    $registro1->save();
+        }
 
 	    // Actualizar Ocregcon
 
