@@ -45,6 +45,12 @@ class oycdesobrActions extends autooycdesobrActions
        return false;
       }
 
+      if ($this->getRequestParameter('ocregobr[tipprc]')=='')
+      {
+      	$this->partid=1024;
+      	return false;
+      }
+
       if (count($grid[0])==0)
       {
       	$this->partid=1005;
@@ -488,6 +494,10 @@ $this->Bitacora('Guardo');
     {
       $this->ocregobr->setUnocon($ocregobr['unocon']);
     }
+     if (isset($ocregobr['tipprc']))
+    {
+      $this->ocregobr->setTipprc($ocregobr['tipprc']);
+    }
   }
 
 	public function funciones_combos()
@@ -498,6 +508,20 @@ $this->Bitacora('Guardo');
 		$this->parroquia = $this->Cargarparroquia($this->ocregobr->getCodpai(),$this->ocregobr->getCodedo(),$this->ocregobr->getCodmun());//colocar lo q viene de bd
 		$this->sector = $this->Cargarsector($this->ocregobr->getCodpai(),$this->ocregobr->getCodedo(),$this->ocregobr->getCodmun(),$this->ocregobr->getCodpar());
 	}
+
+	    $this->apliva="";
+	    $varemp = $this->getUser()->getAttribute('configemp');
+		if ($varemp)
+		if(array_key_exists('aplicacion',$varemp))
+		 if(array_key_exists('obras',$varemp['aplicacion']))
+		   if(array_key_exists('modulos',$varemp['aplicacion']['obras']))
+		     if(array_key_exists('oycdesobr',$varemp['aplicacion']['obras']['modulos'])){
+		      if(array_key_exists('apliva',$varemp['aplicacion']['obras']['modulos']['oycdesobr']))
+		      {
+		   	     $this->apliva=$varemp['aplicacion']['obras']['modulos']['oycdesobr']['apliva'];
+		      }
+		 }
+}
 
    /**
    * Función para procesar _todas_ las funciones Ajax del formulario
@@ -527,6 +551,9 @@ $this->Bitacora('Guardo');
        	if (Obras::chequearDisponibilidadPresupuesto($this->getRequestParameter('codigo'),$anno,$grid,$num,$monto,&$mondis))
        	{
        	  $dato=$reg->getNompre();
+       	  if ($cajtexcom=='ocregobr_codpre'){
+       	  $javascript="if (confirm('Desea actualizar la Descripcion de la Obra con la Descripcion del Codigo Presupuestario?')) { $('ocregobr_desobr').value=$('ocregobr_nompre').value;}";
+       	  }
        	}
        	else
        	{
@@ -586,6 +613,17 @@ $this->Bitacora('Guardo');
        }
        $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""]]';
      }
+      else  if ($this->getRequestParameter('ajax')=='5')
+     {
+       $c= new Criteria();
+	   $c->add(CpdocprcPeer::TIPPRC,$this->getRequestParameter('codigo'));
+       $reg=CpdocprcPeer::doSelectOne($c);
+       if (!$reg)
+       {
+         $javascript="alert('El Tipo de Precopromiso no existe'); $('". $cajtexcom ."').value='';";
+       }
+       $output = '[["javascript","'.$javascript.'",""]]';
+     }
       $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
       return sfView::HEADER_ONLY;
     }
@@ -613,9 +651,22 @@ $this->Bitacora('Guardo');
   	}
   	else
   	{
+        $this->apliva="";
+	    $varemp = $this->getUser()->getAttribute('configemp');
+		if ($varemp)
+		if(array_key_exists('aplicacion',$varemp))
+		 if(array_key_exists('obras',$varemp['aplicacion']))
+		   if(array_key_exists('modulos',$varemp['aplicacion']['obras']))
+		     if(array_key_exists('oycdesobr',$varemp['aplicacion']['obras']['modulos'])){
+		      if(array_key_exists('apliva',$varemp['aplicacion']['obras']['modulos']['oycdesobr']))
+		      {
+		   	     $this->apliva=$varemp['aplicacion']['obras']['modulos']['oycdesobr']['apliva'];
+		      }
+		     }
+
 	  	$grid=Herramientas::CargarDatosGrid($this,$this->obj);
 	    $grid2=Herramientas::CargarDatosGrid($this,$this->obj2);
-	    if (Obras::salvarOycdesobr($ocregobr,$grid,$grid2,&$error))
+	    if (Obras::salvarOycdesobr($ocregobr,$grid,$grid2,&$error,$this->apliva))
 	    {
 	    	$this->coderror=$error;
 	       	return $this->coderror;

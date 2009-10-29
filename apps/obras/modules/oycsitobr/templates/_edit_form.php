@@ -43,6 +43,27 @@
   'control_name' => 'ocregobr[desobr]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
+
+<br>
+
+  <?php echo label_for('ocregobr[codpre]', __($labels['ocregobr{codpre}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('ocregobr{codpre}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('ocregobr{codpre}')): ?>
+    <?php echo form_error('ocregobr{codpre}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($ocregobr, 'getCodpre', array (
+  'size' => 32,
+  'readonly' => true,
+  'control_name' => 'ocregobr[codobr]',
+)); echo $value ? $value : '&nbsp;' ?>
+&nbsp;
+  <?php $value = object_input_tag($ocregobr, 'getNompre', array (
+  'size' => 80,
+  'readonly' => true,
+  'control_name' => 'ocregobr[nompre]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
 </div>
 </fieldset>
 

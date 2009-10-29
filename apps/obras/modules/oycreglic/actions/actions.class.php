@@ -136,9 +136,9 @@ class oycreglicActions extends autooycreglicActions
    */
   public function updateError()
   {
-    //$this->configGrid();
+    $this->configGrid();
 
-    //$grid = Herramientas::CargarDatosGrid($this,$this->obj);
+    $grid = Herramientas::CargarDatosGrid($this,$this->obj);
 
     //$this->configGrid($grid[0],$grid[1]);
 

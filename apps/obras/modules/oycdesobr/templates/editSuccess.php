@@ -4,8 +4,8 @@
  *
  * @package    Roraima
  * @subpackage vistas
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version    SVN: $Id$
+ * @author     $Author: dmartinez $ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id: editSuccess.php 34312 2009-10-29 13:31:22Z dmartinez $
  */
 // date: 2007/05/04 19:24:10
 ?>
@@ -23,7 +23,7 @@
 
 <div id="sf_admin_content">
 <?php include_partial('oycdesobr/edit_messages', array('ocregobr' => $ocregobr, 'labels' => $labels)) ?>
-<?php include_partial('oycdesobr/edit_form', array('ocregobr' => $ocregobr, 'labels' => $labels, 'obj' => $obj, 'obj2' => $obj2, 'pais' => $pais, 'estados' => $estados, 'municipio' => $municipio, 'parroquia' => $parroquia, 'sector' => $sector, 'mascarapresupuesto' => $mascarapresupuesto, 'lonpre' => $lonpre)) ?>
+<?php include_partial('oycdesobr/edit_form', array('ocregobr' => $ocregobr, 'labels' => $labels, 'obj' => $obj, 'obj2' => $obj2, 'pais' => $pais, 'estados' => $estados, 'municipio' => $municipio, 'parroquia' => $parroquia, 'sector' => $sector, 'mascarapresupuesto' => $mascarapresupuesto, 'lonpre' => $lonpre, 'apliva' => $apliva)) ?>
 </div>
 
 <div id="sf_admin_footer">

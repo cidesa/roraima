@@ -105,6 +105,7 @@ $this->Bitacora('Guardo');
    $opciones->setAncho(1000);
    $opciones->setAnchoGrid(1000);
    $opciones->setFilas(0);
+   $opciones->setEliminar(false);
    $opciones->setTitulo('');
    $opciones->setHTMLTotalFilas(' ');
 
@@ -178,6 +179,7 @@ $this->Bitacora('Guardo');
    $opciones->setAncho(1000);
    $opciones->setAnchoGrid(1000);
    $opciones->setFilas(0);
+   $opciones->setEliminar(false);
    $opciones->setTitulo('');
    $opciones->setName('b');
    $opciones->setHTMLTotalFilas(' ');

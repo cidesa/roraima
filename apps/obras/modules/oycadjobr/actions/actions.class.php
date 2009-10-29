@@ -42,7 +42,7 @@ class oycadjobrActions extends autooycadjobrActions
     $codigo = $this->getRequestParameter('codigo','');
     $ajax = $this->getRequestParameter('ajax','');
     $cajtexmos=$this->getRequestParameter('cajtexmos');
-    $dato="";
+    $dato=""; $dato1=""; $dato2=""; $dato3=""; $dato4=""; $dato5=""; $dato6=""; $dato7="";
     $javascript="";
 
     switch ($ajax){
@@ -58,13 +58,15 @@ class oycadjobrActions extends autooycadjobrActions
           $dato3=date("d/m/Y",strtotime($data->getFecini()));
           $dato4=date("d/m/Y",strtotime($data->getFecfin()));
           $dato5=number_format($data->getMonobr(),2,',','.');
+	      $dato6=$data->getCodpre();
+       	  $dato7=Herramientas::getX('CODPRE','Cpdeftit','Nompre',$dato6);
         }
         else
         {
          $dato1=""; $dato2=""; $dato3=""; $dato4=""; $dato5="";
          $javascript="alert('La Obra no se encuentra Registrada');";
         }
-        $output = '[["'.$cajtexmos.'","'.$dato.'",""],["ocadjobr_codtipobr","'.$dato1.'",""],["ocadjobr_destipobr","'.$dato2.'",""],["ocadjobr_fecini","'.$dato3.'",""],["ocadjobr_fecfin","'.$dato4.'",""],["ocadjobr_monobr","'.$dato5.'",""],["javascript","'.$javascript.'",""]]';
+        $output = '[["'.$cajtexmos.'","'.$dato.'",""],["ocadjobr_codtipobr","'.$dato1.'",""],["ocadjobr_destipobr","'.$dato2.'",""],["ocadjobr_fecini","'.$dato3.'",""],["ocadjobr_fecfin","'.$dato4.'",""],["ocadjobr_monobr","'.$dato5.'",""],["ocadjobr_codpre","'.$dato6.'",""],["ocadjobr_nompre","'.$dato7.'",""],["javascript","'.$javascript.'",""]]';
         break;
       case '2':
         $c= new Criteria();

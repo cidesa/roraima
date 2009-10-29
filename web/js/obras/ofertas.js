@@ -115,6 +115,7 @@
    }
 
    $('ocregobr_subtot').value=format(acumulador.toFixed(2),'.',',','.');
+   if ($('aplicaiva').value!='S') {
    var numiva=toFloat('ocregobr_ivaobr');
    if (numiva>0)
    {
@@ -130,6 +131,9 @@
    {
     alert('Debe Colocar el Monto de IVA aplicado al Contrato');
     $('ocregobr_ivaobr').focus();
+   }
+   }else{
+        $('ocregobr_monobr').value=   $('ocregobr_subtot').value;
    }
  }
 //Registro de Contratistas

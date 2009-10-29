@@ -68,7 +68,7 @@ class oycempparActions extends autooycempparActions
     $ajax = $this->getRequestParameter('ajax','');
     $cajtexmos=$this->getRequestParameter('cajtexmos');
     $cajtexcom=$this->getRequestParameter('cajtexcom');
-    $javascript="";
+    $javascript=""; $dato=""; $dato1=""; $dato2=""; $dato3=""; $dato4=""; $dato5=""; $dato6=""; $dato7="";
     switch ($ajax){
       case '1':
        $c= new Criteria();
@@ -82,10 +82,12 @@ class oycempparActions extends autooycempparActions
        	$dato2=date("d/m/Y",strtotime($reg->getFecini()));
        	$dato3=date("d/m/Y",strtotime($reg->getFecfin()));
        	$dato5=number_format($reg->getMonobr(),2,',','.');
+       	$dato6=$reg->getCodpre();
+       	$dato7=Herramientas::getX('CODPRE','Cpdeftit','Nompre',$dato6);
        }else {
        $javascript="alert('La Obra no esta Registrada no existe');$('". $cajtexmos ."').value='';$('". $cajtexcom ."').value='';";
        }
-       $output = '[["'.$cajtexmos.'","'.$dato.'",""],["ocemppar_codtipobr","'.$dato1.'",""],["ocemppar_fecini","'.$dato2.'",""],["ocemppar_fecfin","'.$dato3.'",""],["ocemppar_destipobr","'.$dato4.'",""],["ocemppar_monobr","'.$dato5.'",""],["javascript","'.$javascript.'",""]]';
+       $output = '[["'.$cajtexmos.'","'.$dato.'",""],["ocemppar_codtipobr","'.$dato1.'",""],["ocemppar_fecini","'.$dato2.'",""],["ocemppar_fecfin","'.$dato3.'",""],["ocemppar_destipobr","'.$dato4.'",""],["ocemppar_monobr","'.$dato5.'",""],["ocemppar_codpre","'.$dato6.'",""],["ocemppar_nompre","'.$dato7.'",""],["javascript","'.$javascript.'",""]]';
         break;
       default:
         $output = '[["","",""],["","",""],["","",""]]';
@@ -109,27 +111,24 @@ class oycempparActions extends autooycempparActions
   {
     $this->coderr =-1;
 
-    // Se deben llamar a las funciones necesarias para cargar los
-    // datos de la vista que serán usados en las funciones de validación.
-    // Por ejemplo:
-
     if($this->getRequest()->getMethod() == sfRequest::POST){
 
-      // $this->configGrid();
-      // $grid = Herramientas::CargarDatosGrid($this,$this->obj);
+      $this->ocemppar = $this->getOcempparOrCreate();
+      $this->updateOcempparFromRequest();
+      $this->configGrid();
+      $grid=Herramientas::CargarDatosGridv2($this,$this->obj,true);
+      $x=$grid[0];
+      $i=0;
+      if (count($x)==0)
+      {
+        $this->coderr=528;
+        return false;
+      }
+      else{
 
-      // Aqui van los llamados a los métodos de las clases del
-      // negocio para validar los datos.
-      // Los resultados de cada llamado deben ser analizados por ejemplo:
+      }
 
-      // $resp = Compras::validarAlmajuoc($this->caajuoc,$grid);
 
-       //$resp=Herramientas::ValidarCodigo($valor,$this->tstipmov,$campo);
-
-      // al final $resp es analizada en base al código que retorna
-      // Todas las funciones de validación y procesos del negocio
-      // deben retornar códigos >= -1. Estos código serám buscados en
-      // el archivo errors.yml en la función handleErrorEdit()
 
       if($this->coderr!=-1){
         return false;
@@ -148,12 +147,8 @@ class oycempparActions extends autooycempparActions
    */
   public function updateError()
   {
-    //$this->configGrid();
-
-    //$grid = Herramientas::CargarDatosGrid($this,$this->obj);
-
-    //$this->configGrid($grid[0],$grid[1]);
-
+    $this->configGrid();
+    $grid = Herramientas::CargarDatosGridv2($this,$this->obj);
   }
 
   public function saving($ocemppar)
