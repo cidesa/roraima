@@ -1621,60 +1621,9 @@ class Cheques
     $q= new Criteria();
     $reg=TscomegrmesPeer::doSelectOne($q);
     if ($reg)
-    {   $mes=intval($mes);
-    	eval('$correl=$reg->getCormes'.$mes.'();');
-    	eval('$campo="cormes'.$mes.'";');
-      /*switch ($mes){
-	    case '01':
-	      $correl=$reg->getCormes1();
-	      $campo='cormes1';
-         break;
-        case '02':
-          $correl=$reg->getCormes2();
-          $campo='cormes2';
-         break;
-        case '03':
-          $correl=$reg->getCormes3();
-          $campo='cormes3';
-         break;
-        case '04':
-          $correl=$reg->getCormes4();
-          $campo='cormes4';
-         break;
-        case '05':
-          $correl=$reg->getCormes5();
-          $campo='cormes5';
-         break;
-        case '06':
-          $correl=$reg->getCormes6();
-          $campo='cormes6';
-         break;
-        case '07':
-          $correl=$reg->getCormes7();
-          $campo='cormes7';
-         break;
-        case '08':
-          $correl=$reg->getCormes8();
-          $campo='cormes8';
-         break;
-        case '09':
-          $correl=$reg->getCormes9();
-          $campo='cormes9';
-         break;
-        case '10':
-          $correl=$reg->getCormes10();
-          $campo='cormes10';
-         break;
-        case '11':
-          $correl=$reg->getCormes11();
-          $campo='cormes11';
-         break;
-        case '12':
-          $correl=$reg->getCormes12();
-          $campo='cormes12';
-         break;
-     }*/
-
+    {   $ames=intval($mes);
+    	eval('$correl=$reg->getCormes'.$ames.'();');
+    	eval('$campo="cormes'.$ames.'";');
 
      $encontrado=false;
      while (!$encontrado)
