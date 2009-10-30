@@ -6,7 +6,7 @@
  * @subpackage almordcom
  * @author     $Author$ <desarrollo@cidesa.com.ve>
  * @version SVN: $Id$
- * 
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -19,9 +19,9 @@ class almordcomActions extends autoalmordcomActions
   public  $coderror3=-1;
   public  $coderror4=-1;
 
-  
-  
-  
+
+
+
   /**
    *
    * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
@@ -703,7 +703,7 @@ class almordcomActions extends autoalmordcomActions
       if (Herramientas::getX_vacio('ordcom','Caartord','ordcom',$ordcom)!='')
         $filas_arreglo=0;
       else
-        $filas_arreglo=150;
+        $filas_arreglo=50;
     }
     elseif ($referencia==1)
     {
@@ -752,7 +752,7 @@ class almordcomActions extends autoalmordcomActions
     $col1->setHTML(' ');
     $col1->setJScript('onClick="desmarcarfila(this.id)"');
 
-    $lonart=strlen($this->mascaraarticulo);
+    //$lonart=strlen($this->mascaraarticulo);
     //$params= array('param1' => $lonart);
 
     $params= array('param1' => $lonart, 'param2' => "'+$('caordcom_tipord').value+'", 'val2');
@@ -1388,7 +1388,7 @@ class almordcomActions extends autoalmordcomActions
     $c = new Criteria();
     $c->add(CaresordcomPeer::ORDCOM,$ordcom);
     $per4 = CaresordcomPeer::doSelect($c);
-    $filas_arreglo=150;
+    $filas_arreglo=50;
 
     $mascaraarticulo=$this->mascaraarticulo;
     $formatocategoria=$this->formatocategoria;
@@ -1535,7 +1535,7 @@ class almordcomActions extends autoalmordcomActions
     $opciones = new OpcionesGrid();
     // Se configuran las opciones globales del Grid
     $opciones->setEliminar(false);
-    $opciones->setFilas(150);
+    $opciones->setFilas(50);
     $opciones->setTabla('Caartord');
     $opciones->setName('z');
     $opciones->setAncho(600);
@@ -1600,7 +1600,7 @@ class almordcomActions extends autoalmordcomActions
     $c = new Criteria();
     $c->add(CaartfecPeer::ORDCOM,$ordcom);
     $per5 = CaartfecPeer::doSelect($c);
-    $filas_arreglo=150;
+    $filas_arreglo=50;
 
     $mascaraarticulo=$this->mascaraarticulo;
     $formatocategoria=$this->formatocategoria;
@@ -1777,7 +1777,7 @@ class almordcomActions extends autoalmordcomActions
 
 
   /**
-   * Actualiza la informacion que viene de la vista 
+   * Actualiza la informacion que viene de la vista
    * luego de un get/post en el objeto principal del modelo base del formulario.
    *
    */
@@ -2171,6 +2171,7 @@ class almordcomActions extends autoalmordcomActions
   $cajtexmos=$this->getRequestParameter('cajtexmos');
   $filas_orden=$this->getRequestParameter('filas_orden');
   $cajita='fecha_egresos';
+  $this->setVars();
   $validacion_fec_egresos='0';
   if ($this->getRequestParameter('ajax')=='1')
   {
