@@ -400,5 +400,40 @@ public static function Validar_biedisactmuenew($valor1,$valor2)
     }
   }
 
+  public static function actualizarUbicacion($codact,$codmue)
+  {
+    try
+    {
+      $c= new Criteria();
+      $c->add(BnregmuePeer::CODACT,$codact);
+      $c->add(BnregmuePeer::CODMUE,$codmue);
+      $reg= BnregmuePeer::doSelectOne($c);
+      if ($reg)
+      {
+         $sql="select  codubiori,codubides from bndismue where id = (
+				select max(id) from (
+				select codubiori,codubides,id from bndismue where codact='".$codact."' and codmue='".$codmue."' and ( length(trim(codubiori))>0 and length(trim(codubides)) > 0 )
+				union
+				select codubiori,codubides,id from bndismue where codact='".$codact."' and codmue='".$codmue."' and substring(tipdismue,1, instr1(tipdismue,' ')-1)='".$reg->getCoddis()."'
+				) as bienes	)";
+	     if (Herramientas::BuscarDatos($sql,&$result))
+	     {
+           if (trim($result[0]["codubides"])=="")
+           {
+           	 $reg->setCodubi($result[0]["codubiori"]);
+           }else {
+           	$reg->setCodubi($result[0]["codubides"]);
+           }
+           $reg->save();
+	     }
+      }
+
+      return -1;
+
+    } catch (Exception $ex){
+      return 0;
+    }
+  }
+
 }
 ?>
