@@ -2232,6 +2232,7 @@ class almordcomActions extends autoalmordcomActions
 
     }
   	}else {
+  		$this->setVars();
   		$this->configGrid($this->getRequestParameter('caordcom[ordcom]'),'0','');
   	}
   }
