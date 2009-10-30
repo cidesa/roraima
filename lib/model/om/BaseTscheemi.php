@@ -97,6 +97,10 @@ abstract class BaseTscheemi extends BaseObject  implements Persistent {
 
 
 	
+	protected $numcomegr;
+
+
+	
 	protected $id;
 
 	
@@ -318,6 +322,13 @@ abstract class BaseTscheemi extends BaseObject  implements Persistent {
   {
 
     return trim($this->peraut);
+
+  }
+  
+  public function getNumcomegr()
+  {
+
+    return trim($this->numcomegr);
 
   }
   
@@ -576,6 +587,16 @@ abstract class BaseTscheemi extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setNumcomegr($v)
+	{
+
+    if ($this->numcomegr !== $v) {
+        $this->numcomegr = $v;
+        $this->modifiedColumns[] = TscheemiPeer::NUMCOMEGR;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -634,7 +655,9 @@ abstract class BaseTscheemi extends BaseObject  implements Persistent {
 
       $this->peraut = $rs->getString($startcol + 21);
 
-      $this->id = $rs->getInt($startcol + 22);
+      $this->numcomegr = $rs->getString($startcol + 22);
+
+      $this->id = $rs->getInt($startcol + 23);
 
       $this->resetModified();
 
@@ -642,7 +665,7 @@ abstract class BaseTscheemi extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 23; 
+            return $startcol + 24; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Tscheemi object", $e);
     }
@@ -856,6 +879,9 @@ abstract class BaseTscheemi extends BaseObject  implements Persistent {
 				return $this->getPeraut();
 				break;
 			case 22:
+				return $this->getNumcomegr();
+				break;
+			case 23:
 				return $this->getId();
 				break;
 			default:
@@ -890,7 +916,8 @@ abstract class BaseTscheemi extends BaseObject  implements Persistent {
 			$keys[19] => $this->getNumtiq(),
 			$keys[20] => $this->getCedaut(),
 			$keys[21] => $this->getPeraut(),
-			$keys[22] => $this->getId(),
+			$keys[22] => $this->getNumcomegr(),
+			$keys[23] => $this->getId(),
 		);
 		return $result;
 	}
@@ -973,6 +1000,9 @@ abstract class BaseTscheemi extends BaseObject  implements Persistent {
 				$this->setPeraut($value);
 				break;
 			case 22:
+				$this->setNumcomegr($value);
+				break;
+			case 23:
 				$this->setId($value);
 				break;
 		} 	}
@@ -1004,7 +1034,8 @@ abstract class BaseTscheemi extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[19], $arr)) $this->setNumtiq($arr[$keys[19]]);
 		if (array_key_exists($keys[20], $arr)) $this->setCedaut($arr[$keys[20]]);
 		if (array_key_exists($keys[21], $arr)) $this->setPeraut($arr[$keys[21]]);
-		if (array_key_exists($keys[22], $arr)) $this->setId($arr[$keys[22]]);
+		if (array_key_exists($keys[22], $arr)) $this->setNumcomegr($arr[$keys[22]]);
+		if (array_key_exists($keys[23], $arr)) $this->setId($arr[$keys[23]]);
 	}
 
 	
@@ -1034,6 +1065,7 @@ abstract class BaseTscheemi extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(TscheemiPeer::NUMTIQ)) $criteria->add(TscheemiPeer::NUMTIQ, $this->numtiq);
 		if ($this->isColumnModified(TscheemiPeer::CEDAUT)) $criteria->add(TscheemiPeer::CEDAUT, $this->cedaut);
 		if ($this->isColumnModified(TscheemiPeer::PERAUT)) $criteria->add(TscheemiPeer::PERAUT, $this->peraut);
+		if ($this->isColumnModified(TscheemiPeer::NUMCOMEGR)) $criteria->add(TscheemiPeer::NUMCOMEGR, $this->numcomegr);
 		if ($this->isColumnModified(TscheemiPeer::ID)) $criteria->add(TscheemiPeer::ID, $this->id);
 
 		return $criteria;
@@ -1109,6 +1141,7 @@ abstract class BaseTscheemi extends BaseObject  implements Persistent {
 
 		$copyObj->setPeraut($this->peraut);
 
+		$copyObj->setNumcomegr($this->numcomegr);
 
 		$copyObj->setNew(true);
 
