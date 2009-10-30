@@ -15,4 +15,8 @@
  */ 
 class Atrecaud extends BaseAtrecaud
 {
+    public function setDesrec($val)
+    {
+        return parent::setDesrec(strtoupper($val));
+    }
 }
