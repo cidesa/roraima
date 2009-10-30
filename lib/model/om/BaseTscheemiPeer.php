@@ -13,7 +13,7 @@ abstract class BaseTscheemiPeer {
 	const CLASS_DEFAULT = 'lib.model.Tscheemi';
 
 	
-	const NUM_COLUMNS = 23;
+	const NUM_COLUMNS = 24;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -86,6 +86,9 @@ abstract class BaseTscheemiPeer {
 	const PERAUT = 'tscheemi.PERAUT';
 
 	
+	const NUMCOMEGR = 'tscheemi.NUMCOMEGR';
+
+	
 	const ID = 'tscheemi.ID';
 
 	
@@ -94,18 +97,18 @@ abstract class BaseTscheemiPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Numche', 'Numcue', 'Cedrif', 'Fecemi', 'Monche', 'Status', 'Codemi', 'Fecent', 'Codent', 'Obsent', 'Fecanu', 'Cedrec', 'Nomrec', 'Tipdoc', 'Fecing', 'Temporal', 'Temporal2', 'Nombensus', 'Anopre', 'Numtiq', 'Cedaut', 'Peraut', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (TscheemiPeer::NUMCHE, TscheemiPeer::NUMCUE, TscheemiPeer::CEDRIF, TscheemiPeer::FECEMI, TscheemiPeer::MONCHE, TscheemiPeer::STATUS, TscheemiPeer::CODEMI, TscheemiPeer::FECENT, TscheemiPeer::CODENT, TscheemiPeer::OBSENT, TscheemiPeer::FECANU, TscheemiPeer::CEDREC, TscheemiPeer::NOMREC, TscheemiPeer::TIPDOC, TscheemiPeer::FECING, TscheemiPeer::TEMPORAL, TscheemiPeer::TEMPORAL2, TscheemiPeer::NOMBENSUS, TscheemiPeer::ANOPRE, TscheemiPeer::NUMTIQ, TscheemiPeer::CEDAUT, TscheemiPeer::PERAUT, TscheemiPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('numche', 'numcue', 'cedrif', 'fecemi', 'monche', 'status', 'codemi', 'fecent', 'codent', 'obsent', 'fecanu', 'cedrec', 'nomrec', 'tipdoc', 'fecing', 'temporal', 'temporal2', 'nombensus', 'anopre', 'numtiq', 'cedaut', 'peraut', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, )
+		BasePeer::TYPE_PHPNAME => array ('Numche', 'Numcue', 'Cedrif', 'Fecemi', 'Monche', 'Status', 'Codemi', 'Fecent', 'Codent', 'Obsent', 'Fecanu', 'Cedrec', 'Nomrec', 'Tipdoc', 'Fecing', 'Temporal', 'Temporal2', 'Nombensus', 'Anopre', 'Numtiq', 'Cedaut', 'Peraut', 'Numcomegr', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (TscheemiPeer::NUMCHE, TscheemiPeer::NUMCUE, TscheemiPeer::CEDRIF, TscheemiPeer::FECEMI, TscheemiPeer::MONCHE, TscheemiPeer::STATUS, TscheemiPeer::CODEMI, TscheemiPeer::FECENT, TscheemiPeer::CODENT, TscheemiPeer::OBSENT, TscheemiPeer::FECANU, TscheemiPeer::CEDREC, TscheemiPeer::NOMREC, TscheemiPeer::TIPDOC, TscheemiPeer::FECING, TscheemiPeer::TEMPORAL, TscheemiPeer::TEMPORAL2, TscheemiPeer::NOMBENSUS, TscheemiPeer::ANOPRE, TscheemiPeer::NUMTIQ, TscheemiPeer::CEDAUT, TscheemiPeer::PERAUT, TscheemiPeer::NUMCOMEGR, TscheemiPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('numche', 'numcue', 'cedrif', 'fecemi', 'monche', 'status', 'codemi', 'fecent', 'codent', 'obsent', 'fecanu', 'cedrec', 'nomrec', 'tipdoc', 'fecing', 'temporal', 'temporal2', 'nombensus', 'anopre', 'numtiq', 'cedaut', 'peraut', 'numcomegr', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Numche' => 0, 'Numcue' => 1, 'Cedrif' => 2, 'Fecemi' => 3, 'Monche' => 4, 'Status' => 5, 'Codemi' => 6, 'Fecent' => 7, 'Codent' => 8, 'Obsent' => 9, 'Fecanu' => 10, 'Cedrec' => 11, 'Nomrec' => 12, 'Tipdoc' => 13, 'Fecing' => 14, 'Temporal' => 15, 'Temporal2' => 16, 'Nombensus' => 17, 'Anopre' => 18, 'Numtiq' => 19, 'Cedaut' => 20, 'Peraut' => 21, 'Id' => 22, ),
-		BasePeer::TYPE_COLNAME => array (TscheemiPeer::NUMCHE => 0, TscheemiPeer::NUMCUE => 1, TscheemiPeer::CEDRIF => 2, TscheemiPeer::FECEMI => 3, TscheemiPeer::MONCHE => 4, TscheemiPeer::STATUS => 5, TscheemiPeer::CODEMI => 6, TscheemiPeer::FECENT => 7, TscheemiPeer::CODENT => 8, TscheemiPeer::OBSENT => 9, TscheemiPeer::FECANU => 10, TscheemiPeer::CEDREC => 11, TscheemiPeer::NOMREC => 12, TscheemiPeer::TIPDOC => 13, TscheemiPeer::FECING => 14, TscheemiPeer::TEMPORAL => 15, TscheemiPeer::TEMPORAL2 => 16, TscheemiPeer::NOMBENSUS => 17, TscheemiPeer::ANOPRE => 18, TscheemiPeer::NUMTIQ => 19, TscheemiPeer::CEDAUT => 20, TscheemiPeer::PERAUT => 21, TscheemiPeer::ID => 22, ),
-		BasePeer::TYPE_FIELDNAME => array ('numche' => 0, 'numcue' => 1, 'cedrif' => 2, 'fecemi' => 3, 'monche' => 4, 'status' => 5, 'codemi' => 6, 'fecent' => 7, 'codent' => 8, 'obsent' => 9, 'fecanu' => 10, 'cedrec' => 11, 'nomrec' => 12, 'tipdoc' => 13, 'fecing' => 14, 'temporal' => 15, 'temporal2' => 16, 'nombensus' => 17, 'anopre' => 18, 'numtiq' => 19, 'cedaut' => 20, 'peraut' => 21, 'id' => 22, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, )
+		BasePeer::TYPE_PHPNAME => array ('Numche' => 0, 'Numcue' => 1, 'Cedrif' => 2, 'Fecemi' => 3, 'Monche' => 4, 'Status' => 5, 'Codemi' => 6, 'Fecent' => 7, 'Codent' => 8, 'Obsent' => 9, 'Fecanu' => 10, 'Cedrec' => 11, 'Nomrec' => 12, 'Tipdoc' => 13, 'Fecing' => 14, 'Temporal' => 15, 'Temporal2' => 16, 'Nombensus' => 17, 'Anopre' => 18, 'Numtiq' => 19, 'Cedaut' => 20, 'Peraut' => 21, 'Numcomegr' => 22, 'Id' => 23, ),
+		BasePeer::TYPE_COLNAME => array (TscheemiPeer::NUMCHE => 0, TscheemiPeer::NUMCUE => 1, TscheemiPeer::CEDRIF => 2, TscheemiPeer::FECEMI => 3, TscheemiPeer::MONCHE => 4, TscheemiPeer::STATUS => 5, TscheemiPeer::CODEMI => 6, TscheemiPeer::FECENT => 7, TscheemiPeer::CODENT => 8, TscheemiPeer::OBSENT => 9, TscheemiPeer::FECANU => 10, TscheemiPeer::CEDREC => 11, TscheemiPeer::NOMREC => 12, TscheemiPeer::TIPDOC => 13, TscheemiPeer::FECING => 14, TscheemiPeer::TEMPORAL => 15, TscheemiPeer::TEMPORAL2 => 16, TscheemiPeer::NOMBENSUS => 17, TscheemiPeer::ANOPRE => 18, TscheemiPeer::NUMTIQ => 19, TscheemiPeer::CEDAUT => 20, TscheemiPeer::PERAUT => 21, TscheemiPeer::NUMCOMEGR => 22, TscheemiPeer::ID => 23, ),
+		BasePeer::TYPE_FIELDNAME => array ('numche' => 0, 'numcue' => 1, 'cedrif' => 2, 'fecemi' => 3, 'monche' => 4, 'status' => 5, 'codemi' => 6, 'fecent' => 7, 'codent' => 8, 'obsent' => 9, 'fecanu' => 10, 'cedrec' => 11, 'nomrec' => 12, 'tipdoc' => 13, 'fecing' => 14, 'temporal' => 15, 'temporal2' => 16, 'nombensus' => 17, 'anopre' => 18, 'numtiq' => 19, 'cedaut' => 20, 'peraut' => 21, 'numcomegr' => 22, 'id' => 23, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, )
 	);
 
 	
@@ -202,6 +205,8 @@ abstract class BaseTscheemiPeer {
 		$criteria->addSelectColumn(TscheemiPeer::CEDAUT);
 
 		$criteria->addSelectColumn(TscheemiPeer::PERAUT);
+
+		$criteria->addSelectColumn(TscheemiPeer::NUMCOMEGR);
 
 		$criteria->addSelectColumn(TscheemiPeer::ID);
 
