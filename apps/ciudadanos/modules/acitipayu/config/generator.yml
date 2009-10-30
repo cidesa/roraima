@@ -18,7 +18,7 @@ generator:
       sort:  codayu
     edit:
       title:          Edición de Tipos de Donaciones
-      display:        [codayu, desayu, _codpre]
+      display:        [_codayu, desayu, _codpre]
       actions:
         _list:        ~
         _save:        ~
