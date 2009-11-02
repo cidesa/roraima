@@ -1,13 +1,32 @@
+/**
+ * Librerías Javascript
+ *
+ * @package    Roraima
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ *
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
+ */
 
-  var expresionfloatVE = /^(\d{1,3}\.){0,6}(\d{1,3})(\,\d{1,6})$/;
-  var expresionfloatVE_1 = /^(\d{1,10})(\,\d{1,6})?$/;
-  var expresionfloatVE_2 = /^(\d{1,3}\.){1,6}(\d{1,3})(\,\d{1,6})?$/;
 
-  var expresionfloat =  /^(\d{1,3}\,){0,6}(\d{1,3})(\.\d{1,6})$/;
-  var expresionfloat_1 =  /^(\d{1,10})(\.\d{1,6})?$/;
-  var expresionfloat_2 =  /^(\d{1,3}\,){1,6}(\d{3,3})(\.\d{1,6})$/;
-
-
+function validaMontos(id,obj) {
+  var idS=id.split('_');
+  var c=0;
+  var f=idS[1];
+  var u=idS[2];
+  if (u=='4') {
+    if (toFloat($('ax_'+f+'_5').id)>0) {
+      $('ax_'+f+'_4').value=format(c.toFixed(2),'.',',','.');;
+    }
+  }else
+    if (u=='5') {
+      if (toFloat($('ax_'+f+'_4').id)>0) {
+        $('ax_'+f+'_5').value=format(c.toFixed(2),'.',',','.');;
+    }
+  }
+  ValidarMontoGridv2(obj);
+}
 
 // Inserta una nueva fila en el grid indicado
 // grid = string
@@ -17,8 +36,6 @@
     var descendientes = ultima_fila.descendants();
     var ultimo = descendientes[1];
 
-    //if(ultimo.className == "imagenborrar") ultimo = descendientes[3];
-
     var array_ultimo = ultimo.id.split('_');
 
     var max = parseFloat(array_ultimo[1])+1;
@@ -27,94 +44,15 @@
 
     new Insertion.After(ultima_fila,nuevo);
 
-    ActualizarObjetosGrids(grid);
+    ActualizarObjetosGrids(grid,max);
 
-  }
-
-
-  // Validar si puede ser parseado por las funciones
-  function ValidarNumeroV2(t)
-  {
-    if(ValidarNumeroV2VE(t) || ValidarNumeroV2Float(t)) return true;
-    else return false;
-  }
-
-  // Pasando el Objeto HTML
-  function ValidarNumeroV2VE(t)
-  {
-    var val = $(t).value;
-
-    if(val.match(expresionfloatVE) || val.match(expresionfloatVE_1) || val.match(expresionfloatVE_2)) return true;
-    else return false;
-  }
-
-  // Pasando el valor string
-  function ValidarNumeroV2VE_(t)
-  {
-    var val = t;
-
-    if(val.match(expresionfloatVE) || val.match(expresionfloatVE_1) || val.match(expresionfloatVE_2)) return true;
-    else return false;
-  }
-
-  // Pasando el Objeto HTML
-  function ValidarNumeroV2Float(t)
-  {
-    var val = $(t).value;
-
-    if(val.match(expresionfloat_1) || val.match(expresionfloat_2) || val.match(expresionfloat)) return true;
-    else return false;
-  }
-
-  // Pasando el Valor String
-  function ValidarNumeroV2Float_(t)
-  {
-    var val = t;
-
-    if(val.match(expresionfloat_1) || val.match(expresionfloat_2) || val.match(expresionfloat)) return true;
-    else return false;
-  }
-
-  function ValidarMontoGrid(id)
-  {
-    if (ValidarNumeroV2(id)==true)
-    {
-      if(ValidarNumeroV2Float(id))
-        elnum = FloattoFloatVE($(id).value);
-      else
-        if(ValidarNumeroV2VE(id))
-        {
-          elnum = FloatVEtoFloat($(id).value);
-          elnum = FloattoFloatVE(elnum);
-        }
-        else{elnum = '0,00';}
-      $(id).value = elnum;
-      ActualizarSaldosGrid($(id).name.substring(0,1),ArrTotales);
-      return true;
-    }
-    else
-    {
-      $(id).value='0,00';
-      $(id).focus();
-      $(id).select();
-      return false;
-    }
   }
 
   function ValidarMontoGridv2(id)
   {
-    if (ValidarNumeroV2(id)==true)
+    if ($(id).esNumeroValido()==true)
     {
-      if(ValidarNumeroV2Float(id))
-        elnum = FloattoFloatVE($(id).value);
-      else
-        if(ValidarNumeroV2VE(id))
-        {
-          elnum = FloatVEtoFloat($(id).value);
-          elnum = FloattoFloatVE(elnum);
-        }
-        else{elnum = '0,00';}
-      $(id).value = elnum;
+      $(id).valueToFloatVE();
       eval('Atotales = ArrTotales_'+$(id).name.substring(4,5)+';');
       ActualizarSaldosGrid($(id).name.substring(4,5),Atotales);
       return true;
@@ -128,59 +66,97 @@
     }
   }
 
-  function ActualizarObjetosGrids(grid)
+  function EliminarFilaArreglosGrid(grid,fila)
   {
-  	ActualizarInputs();
-    var codigo = "objs_montos_"+grid+" = $$('.g_"+grid+"_m input')";
-    eval(codigo);
-    codigo = "objs_filas_"+grid+" = $$('."+grid+"f');";
-    eval(codigo);
-    codigo = "var filas = objs_filas_"+grid+"";
-    eval(codigo);
-    codigo = "var columnas = $$('grid_"+grid+"_col')";
-    eval(codigo);
-    codigo = "inputs_filas_"+grid+" = Array("+filas.lenght+");";
-    eval(codigo);
-    codigo = "inputs_cols_"+grid+" = Array("+columnas.lenght+");";
-    eval(codigo);
-    codigo = "inputs_grid_"+grid+" = $$('.gridint_"+grid+" input');";
-    eval(codigo);
 
-    filas.each(function(e,index){
-      var f = e.className.substring(5);
-      codigo = "var objs = $$('."+grid+"f"+f+" input');"
-      eval(codigo);
-      codigo = "inputs_filas_"+grid+"["+index+"] = objs;"
-      eval(codigo);
-    })
-
-    columnas.each(function(e,index){
-      var c = e.className.substring(5);
-      codigo = "var objs = $$('."+grid+"c"+index+" input');"
-      eval(codigo);
-      codigo = "inputs_cols_"+grid+"["+index+"] = objs;"
-      eval(codigo);
-    })
-
-  }
-
-
-  function ActualizarSaldosGrid(grid,totales)
-  {  
     // Objetos tipo Monto del Grid
     var codigo = "var objs_montos = objs_montos_"+grid+""
     try{eval(codigo);}catch(e){}
 
     // Filas del Grid
-    var codigo = "var objs_filas = objs_filas_"+grid+""
+    var codigo = "var objs_filas = inputs_filas_"+grid+""
     try{eval(codigo);}catch(e){}
-	
+
+    // recorrer y eliminar cada objeto del arreglo que concuerde con la fila
+    // son puros inputs
+    if (objs_montos != null && objs_filas != null) {
+
+      if (objs_montos.size() > 0 && objs_filas.size() > 0) {
+
+        // Objetos Tipo Monto por Fila
+        var objXfila = (parseInt(objs_montos.size() / objs_filas.size()));
+
+        // Eliminamos tantos objetos como tipos monto exista en el arreglo objs_montos_"grid"
+        for(var i=0;i<objs_montos.size();i++){
+          if(objs_montos[i].lastIndexOf("x_"+fila+"_")!=-1 || objs_montos[i].lastIndexOf("x"+fila+"id")!=-1){
+            var codigo = "objs_montos_"+grid+".splice("+i+","+objXfila+")";
+            try{eval(codigo);}catch(e){}
+            break;
+          }
+        }
+
+        // Eliminamos la fila del arreglo de filas
+        for(var i=0;i<objs_filas.size();i++){
+          if(objs_filas[i][0].lastIndexOf("x_"+fila+"_")!=-1 || objs_filas[i][0].lastIndexOf("x"+fila+"id")!=-1){
+            var codigo = "inputs_filas_"+grid+".splice("+i+",1)";
+            try{eval(codigo);}catch(e){}
+            break;
+          }
+        }
+      }
+    }
+  }
+
+  function ActualizarObjetosGrids(grid,fila)
+  {
+
+    var codigo = "var objs_montos = $$('."+grid+"f"+fila+" .g_"+grid+"_m input')";
+    eval(codigo);
+
+    // Objetos para los montos
+    var arrayobjs = new Array();
+
+    objs_montos.each(function(e,index){
+      auxid = $(e).id.split('_').size();
+      if (auxid == 3) {
+        codigo = "objs_montos_"+grid+".push('"+e.id+"');";
+        eval(codigo);
+      }
+    })
+
+    // Filas
+    codigo = "var objs = $$('."+grid+"f"+fila+" input');"
+    eval(codigo);
+    var arrayobjs = new Array(objs.size());
+
+    objs.each(function(e,index){
+      arrayobjs[index] = e.id;
+    })
+
+    // Agregar una nueva fila
+    codigo = "inputs_filas_"+grid+".push(arrayobjs);"
+    eval(codigo);
+
+    return true;
+  }
+
+
+  function ActualizarSaldosGrid(grid,totales)
+  {
+    // Objetos tipo Monto del Grid
+    var codigo = "var objs_montos = objs_montos_"+grid+"";
+    try{eval(codigo);}catch(e){}
+
+    // Filas del Grid
+    var codigo = "var objs_filas = inputs_filas_"+grid+"";
+    try{eval(codigo);}catch(e){}
+
     if(objs_montos!=null && objs_filas!=null){
 
       if(objs_montos.size()>0 && objs_filas.size()>0){
 
         // Objetos Tipo Monto por Fila
-        var objXfila = (parseInt(objs_montos.size() / objs_filas.size())-1);
+        var objXfila = (parseInt(objs_montos.size() / objs_filas.size()));
 
         // Arreglo de totales
         var acumtotales = new Array(objXfila);
@@ -188,49 +164,40 @@
         for(u=0;u<objXfila;u++) acumtotales[u] = 0;
 
         var columna = 0;
-		var idc = '';
-		var  sw = true;
+    		var idc = '';
+		    var  sw = true;
         // Ciclo para recorrer todos los objetos tipo monto del Grid
         objs_montos.each(function(elemento) {
-		  auxid = elemento.id.split('_').size();		  
-		  if((auxid)>=3){
-         //var cal=toFloat2(elemento.value);
-         //$(elemento).value=format(cal.toFixed(2),'.',',','.');
-          // ACUMULAR LOS CAMPOS DEL GRID y PROBAR CODIGO		  
-          //valor = FloatVEtoFloat($(elemento.id).value);
-          //acumtotales[columna] += valor;
-          //columna++;
-          //if(columna==(objXfila)) columna=0;		  
-		  if(sw){
-		  	  idc = elemento.id;		  	 
-			  actualizartotales(idc,totales[columna]);			  
-			  columna++;		  
-			  if(columna==(objXfila)){
-			  	columna=0; sw=false;
-			  }	
-		    }		  	
-		  }		  
-        });		
+  		    auxid = $(elemento).id.split('_').size();
+  		    if((auxid)==3){
+              acumtotales[columna] += $(elemento).toFloat();
+  			      columna++;
+  			      if(columna==(objXfila)){
+  			  	    columna=0;
+  			      }
+          }
+        });
 
-        /*totales.each(function(elemento,index){
-          try{		  	
-            if(elemento!='' && $(elemento))
-              $(elemento).value = FloattoFloatVE(acumtotales[index]);
-          }catch(e){}
-        })*/
-      }	  
+        totales.each(function(elemento, index){
+          if($(elemento)!=null){
+            $(elemento).value = acumtotales[index];
+            $(elemento).valueToFloatVE();
+          }
+        });
+
+      }
     }
-	
+
   }
 
   function EliminarFilaGrid(grid,fila,totales)
-  {	
-    var aux = totales.split(',');	
-	var campototales = "'"+aux[0]+"'";
-	for(g=1;g<aux.size();g++)	
-		campototales = campototales+","+ "'"+aux[g]+"'";
+  {
+    var aux = totales.split(',');
+  	var campototales = "'"+aux[0]+"'";
+	  for(g=1;g<aux.size();g++)
+		  campototales = campototales+","+ "'"+aux[g]+"'";
 
-	eval('var ArrTotales = new Array('+campototales+');');
+	  eval('var ArrTotales = new Array('+campototales+');');
     var idFila = $(grid+"x"+fila+"id");
     var eliminados = $(grid+"_idborrado");
     var filasAEliminar = $$('.'+grid+'f'+fila);
@@ -245,13 +212,13 @@
       // Eliminamos la fila
       if(filasAEliminar) {
         filasAEliminar[0].remove();
-        ActualizarObjetosGrids(grid);
+        EliminarFilaArreglosGrid(grid,fila)
         ActualizarSaldosGrid(grid,ArrTotales);
       }
     }else{
       if(filasAEliminar) {
         filasAEliminar[0].remove();
-		ActualizarObjetosGrids(grid);
+        EliminarFilaArreglosGrid(grid,fila)
         ActualizarSaldosGrid(grid,ArrTotales);
       }
     }
@@ -259,69 +226,9 @@
     else{
     if(filasAEliminar) {
         filasAEliminar[0].remove();
-		ActualizarObjetosGrids(grid);
+        EliminarFilaArreglosGrid(grid,fila)
         ActualizarSaldosGrid(grid,ArrTotales);
       }
-    }
-  }
-
-  function FloatVEtoFloat(val)
-  {
-
-    try{
-      if(val.match(expresionfloatVE) || val.match(expresionfloatVE_1) || val.match(expresionfloatVE_2)){
-        var sinpuntos = val.gsub(/\./, '');
-        var valor_en_float = parseFloat(sinpuntos.gsub(/,/, '.'));
-        if(isNaN(valor_en_float))
-          return 0.00;
-        else return valor_en_float
-      }else return 0.00;
-    }catch(e){return 0.00;}
-  }
-
-  function FloattoFloatVE(monto)
-  {
-    var val = monto.toString()
-    var expresion = /^(\d{1,3}\,?){0,6}(\d{1,3})(\.\d{1,6})?$/;
-    if(val.match(expresion)){
-        //monto = redondeo2decimales(monto);
-        //val = monto.toString();
-        var numero = null;
-        if(val.substring(val.length-3,val.length-2)!=',' && val.substring(val.length-2,val.length-1)!=',')
-          {numero = val.gsub(/\,/,'');}
-        else {
-          numero = val.gsub(/\./,'');
-          numero = numero.gsub(/\,/,'.');
-        }
-        numero = numero.split(/\./);
-        var digitos = numero[0].length;
-        var primer = digitos % 3;
-        var miles = Math.ceil(digitos / 3);
-        var i = 0;
-        var floatve = '';
-        for(var n=0;n<miles;n++) {
-          if(n==0){
-            if(primer==0){
-              floatve = floatve + numero[0].substring(0,3);
-              i += 3;
-            }
-            else{
-              floatve = floatve + numero[0].substring(0,primer);
-              i += primer;
-            }
-          }
-          else{
-            floatve = floatve + numero[0].substring(i,i+3);
-            i += 3;
-          }
-          if(n!=(miles-1)) floatve = floatve + '.';
-        }
-        floatve = floatve + ',';
-        if (numero.length>1) floatve = floatve + numero[1].substring(0,3);
-        else floatve = floatve + '00';
-        return floatve;
-    }else {
-      if(ValidarNumeroV2VE_(val)) return val; else return '0,00';
     }
   }
 
@@ -336,13 +243,23 @@
   {
     codigo = "var filas = inputs_filas_"+grid+";";
     eval(codigo);
-    var json = "";
 
-    filas[fila].each(function(e,index){
+    var json = "";
+    var index = 0;
+
+    for(var i=0;i<filas.size();i++){
+      if(filas[i][0].lastIndexOf("x_"+fila+"_")!=-1 || filas[i][0].lastIndexOf("x"+fila+"id")!=-1){
+        index = i;
+        break;
+      }
+    }
+
+
+    filas[index].each(function(e,index){
       var serial = "";
-      if(e.id) {
+      if($(e).id) {
         try{
-          serial = Form.Element.serialize(e);
+          serial = Form.Element.serialize($(e));
           if(serial!="") {json += "&"; json += serial;}
         }catch(e){}
       }
@@ -356,33 +273,55 @@
 
   function serializeColumna(grid,col)
   {
-    codigo = "var cols = inputs_cols_"+grid+";";
+    codigo = "var filas = inputs_filas_"+grid+";";
     eval(codigo);
+
     var json = "";
+    var index = 0;
 
-    cols[col].each(function(e,index){
-      try{
-        json += Form.Element.serialize(e);
-      }catch(e){}
-    })
-    json += "&grid="+grid;
-    json += "&columna="+col;
-    json += "&accion=columna";
+    if(filas!=null){
 
-    return json;
+      filas.each(function(e){
+        e.each(function(elemento,i){
+          auxid = $(elemento).id.split('_');
+          if(auxid.size()==3)
+          if(auxid[2]==col){
+            index = i;
+            throw $break;
+          }
+        });
+        throw $break;
+      })
+
+      for(var i=0;i<filas.size();i++){
+        try{
+            serial = Form.Element.serialize($(filas[i][index]));
+            if(serial!="") {json += "&"; json += serial;}
+        }catch(e){}
+
+      }
+
+      json += "&grid="+grid;
+      json += "&columna="+col;
+      json += "&accion=columna";
+
+      return json;
+    }else return '';
   }
 
   function serializeGrid(grid)
   {
-    codigo = "var objsgrid = inputs_grid_"+grid+";";
+    codigo = "var objsgrid = inputs_filas_"+grid+";";
     eval(codigo);
     var json = "";
 
-    objsgrid.each(function(e,index){
-      try{
-        json += Form.Element.serialize(e);
-      }catch(e){}
-
+    objsgrid.each(function(fila){
+      fila.each(function(e){
+        try{
+          serial = Form.Element.serialize($(e));
+          if(serial!="") {json += "&"; json += serial;}
+        }catch(e){}
+      });
     })
     json += "&grid="+grid;
     json += "&accion=grid";
@@ -426,50 +365,3 @@
         parameters: 'ajax='+indiceAjax+'&cajtexmos='+objMos+'&cajtexcom='+objCom+'&codigo='+valor
         });
   }
-
-  function FloattoFloatVEd(monto,dec)
-  {
-    var val = monto.toString()
-    var expresion = /^(\d{1,3}\,?){0,6}(\d{1,3})(\.\d{1,6})?$/;
-    if(val.match(expresion)){
-        //monto = redondeo2decimales(monto);
-        //val = monto.toString();
-        var numero = null;
-        if(val.substring(val.length-3,val.length-2)!=',' && val.substring(val.length-2,val.length-1)!=',')
-          {numero = val.gsub(/\,/,'');}
-        else {
-          numero = val.gsub(/\./,'');
-          numero = numero.gsub(/\,/,'.');
-        }
-        numero = numero.split(/\./);
-        var digitos = numero[0].length;
-        var primer = digitos % 3;
-        var miles = Math.ceil(digitos / 3);
-        var i = 0;
-        var floatve = '';
-        for(var n=0;n<miles;n++) {
-          if(n==0){
-            if(primer==0){
-              floatve = floatve + numero[0].substring(0,3);
-              i += 3;
-            }
-            else{
-              floatve = floatve + numero[0].substring(0,primer);
-              i += primer;
-            }
-          }
-          else{
-            floatve = floatve + numero[0].substring(i,i+3);
-            i += 3;
-          }
-          if(n!=(miles-1)) floatve = floatve + '.';
-        }
-        floatve = floatve + ',';
-        if (numero.length>1) floatve = floatve + numero[1].substring(0,dec);
-        else floatve = floatve + '00';
-        return floatve;
-    }else {
-      if(ValidarNumeroV2VE_(val)) return val; else return '0,00';
-    }
-  }
-
