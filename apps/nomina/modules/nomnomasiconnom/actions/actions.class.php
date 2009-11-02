@@ -7,7 +7,7 @@
  * @subpackage nomnomasiconnom
  * @author     $Author$ <desarrollo@cidesa.com.ve>
  * @version SVN: $Id$
- * 
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -68,7 +68,7 @@ $this->Bitacora('Guardo');
    $sql="select (CASE when b.codcon is null then 0 else 1 end) as check,a.codemp as codemp,c.nomemp as nomemp,a.codcar as codcar,d.nomcar as nomcar,
         (CASE when b.codcon is null then 0.00 else  b.cantidad end) as cantidad, (CASE when b.codcon is null then 0.00 else  b.monto end) as monto,
         (CASE when b.codcon is null then to_date('1920-01-01','yyyy-mm-dd') else  b.fecini end) as fecini, (CASE when b.codcon is null then to_date('2000-12-31','yyyy-mm-dd') else  b.fecexp end) as fecexp,
-        (CASE when b.codcon is null then (select frecon from npasiconnom where codnom=a.codnom and codcon='P54') else  b.frecon end) as frecon,
+        (CASE when b.codcon is null then (select frecon from npasiconnom where codnom=a.codnom and codcon='$codigoconcepto') else  b.frecon end) as frecon,
         (CASE when b.codcon is null then (select x.opecon from npdefcpt x where x.codcon='".$codigoconcepto."') else  b.asided end) as asided, (CASE when b.codcon is null then 'S' else  b.acucon end) as acucon,
         (CASE when b.codcon is null then 'S' else  b.calcon end) as calcon, (CASE when b.codcon is null then 'S' else  b.activo end) as activo,
         (CASE when b.codcon is null then 0.00 else  b.acumulado end) as acumulado, 9 as id
@@ -347,7 +347,7 @@ $this->Bitacora('Guardo');
   }
 
   /**
-   * Actualiza la informacion que viene de la vista 
+   * Actualiza la informacion que viene de la vista
    * luego de un get/post en el objeto principal del modelo base del formulario.
    *
    */
