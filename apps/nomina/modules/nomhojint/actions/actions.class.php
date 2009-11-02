@@ -1119,69 +1119,67 @@ $this->Bitacora('Guardo');
     $opciones->setTitulo('Dentro de la Institución');
     $opciones->setHTMLTotalFilas(' ');
 
-    $col1 = new Columna('Código');
+    $col1 = new Columna('Nómina');
     $col1->setTipo(Columna::TEXTO);
     $col1->setEsGrabable(true);
     $col1->setAlineacionObjeto(Columna::CENTRO);
     $col1->setAlineacionContenido(Columna::CENTRO);
-    $col1->setNombreCampo('codcar');
-    $col1->setCatalogo('npcargos','sf_admin_edit_form',array('codcar' => 1,'nomcar' => 2, 'suecar' => 5, 'comcar' => 6),'Npcargos_Nomhojint');
-    $col1->setJScript('onBlur="javascript:event.keyCode=13; ajaxexplab(event,this.id);"');
+    $col1->setNombreCampo('codnom');
+    $col1->setCatalogo('npnomina','sf_admin_edit_form',array('codnom' => 1,'nomnom' => 2),'Npnomina_Vacdefgen');
+    $col1->setAjax('nomhojint',5,2);
 
-    $col2 = new Columna('Descripción del Cargo');
+    $col2 = new Columna('Descripción');
     $col2->setTipo(Columna::TEXTO);
     $col2->setAlineacionObjeto(Columna::IZQUIERDA);
     $col2->setAlineacionContenido(Columna::IZQUIERDA);
     $col2->setEsGrabable(true);
-    $col2->setNombreCampo('descar');
-    $col2->setHTML('type="text" size="25"');
+    $col2->setNombreCampo('nomnom');
+    $col2->setHTML('type="text" size="25" readonly=true');
 
-
-    $col3 = new Columna('Fecha de Inicio');
-    $col3->setTipo(Columna::FECHA);
+    $col3 = new Columna('Cargo');
+    $col3->setTipo(Columna::TEXTO);
+    $col3->setEsGrabable(true);
     $col3->setAlineacionObjeto(Columna::CENTRO);
     $col3->setAlineacionContenido(Columna::CENTRO);
-    $col3->setEsGrabable(true);
-    $col3->setHTML(' ');
-    $col3->setVacia(true);
-    $col3->setNombreCampo('fecini');
+    $col3->setNombreCampo('codcar');
+    $col3->setCatalogo('npcargos','sf_admin_edit_form',array('codcar' => 3,'nomcar' => 4, 'suecar' => 7, 'comcar' => 8),'Npcargos_Nomhojint');
+    $col3->setJScript('onBlur="javascript:event.keyCode=13; ajaxexplab(event,this.id);"');
 
-    $col4 = clone $col3;
-    $col4->setTitulo('Fecha Fin');
-    $col4->setNombreCampo('fecter');
+    $col4 = new Columna('Descripción');
+    $col4->setTipo(Columna::TEXTO);
+    $col4->setAlineacionObjeto(Columna::IZQUIERDA);
+    $col4->setAlineacionContenido(Columna::IZQUIERDA);
+    $col4->setEsGrabable(true);
+    $col4->setNombreCampo('descar');
+    $col4->setHTML('type="text" size="25"');
 
-    $col5 = new Columna('Sueldo');
-    $col5->setTipo(Columna::MONTO);
+
+    $col5 = new Columna('Fecha de Inicio');
+    $col5->setTipo(Columna::FECHA);
+    $col5->setAlineacionObjeto(Columna::CENTRO);
+    $col5->setAlineacionContenido(Columna::CENTRO);
     $col5->setEsGrabable(true);
-    $col5->setAlineacionContenido(Columna::IZQUIERDA);
-    $col5->setAlineacionObjeto(Columna::IZQUIERDA);
-    $col5->setNombreCampo('sueobt');
-    $col5->setEsNumerico(true);
-    $col5->setHTML('type="text" size="10"');
-    $col5->setJScript('onBlur = "javascript:event.keyCode=13;return entermontootro(event,this.id)"');
+    $col5->setHTML(' ');
+    $col5->setVacia(true);
+    $col5->setNombreCampo('fecini');
 
     $col6 = clone $col5;
-    $col6->setTitulo('Compensación');
-    $col6->setNombreCampo('compobt');
+    $col6->setTitulo('Fecha Fin');
+    $col6->setNombreCampo('fecter');
 
-    $params2= array('param1' => $this->lonnivel);
-    $col7 = new Columna('Ubicación Administrativa');
-    $col7->setTipo(Columna::TEXTO);
+    $col7 = new Columna('Sueldo');
+    $col7->setTipo(Columna::MONTO);
     $col7->setEsGrabable(true);
-    $col7->setAlineacionObjeto(Columna::CENTRO);
-    $col7->setAlineacionContenido(Columna::CENTRO);
-    $col7->setNombreCampo('codniv');
-    $col7->setCatalogo('npestorg','sf_admin_edit_form',array('codniv' => 7,'desniv' => 8),'Npestorg_Nomhojint',$params2);
-    $col7->setHTML('type="text" size="17" maxlength="'.chr(39).$this->lonnivel.chr(39).'"');
-    $col7->setJScript('onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$this->mascaranivel.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}" onBlur="javascript:event.keyCode=13; ajaxubiad(event,this.id);;"');
+    $col7->setAlineacionContenido(Columna::IZQUIERDA);
+    $col7->setAlineacionObjeto(Columna::IZQUIERDA);
+    $col7->setNombreCampo('sueobt');
+    $col7->setEsNumerico(true);
+    $col7->setHTML('type="text" size="10"');
+    $col7->setJScript('onBlur = "javascript:event.keyCode=13;return entermontootro(event,this.id)"');
 
-    $col8 = new Columna('Descripción');
-    $col8->setTipo(Columna::TEXTO);
-    $col8->setAlineacionObjeto(Columna::IZQUIERDA);
-    $col8->setAlineacionContenido(Columna::IZQUIERDA);
-    $col8->setEsGrabable(true);
-    $col8->setNombreCampo('desniv');
-    $col8->setHTML('type="text" size="25"');
+    $col8 = clone $col7;
+    $col8->setTitulo('Compensación');
+    $col8->setNombreCampo('compobt');
 
     $opciones->addColumna($col1);
     $opciones->addColumna($col2);
@@ -1575,6 +1573,20 @@ $this->Bitacora('Guardo');
     }else
   	{  $dato="";
   		$javascript="alert('El Nivel Organizacional no existe'); $('$cajtexcom').value=''; ";
+  	}
+  	$output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""]]';
+  }
+   else if ($this->getRequestParameter('ajax')=='5')
+  {
+  	$r= new Criteria();
+  	$r->add(NpnominaPeer::CODNOM,$this->getRequestParameter('codigo'));
+  	$datos= NpnominaPeer::doSelectOne($r);
+  	if ($datos)
+  	{
+      $dato=$datos->getNomnom();
+    }else
+  	{  $dato="";
+  		$javascript="alert_('El C&oacute;digo no existe'); $('$cajtexcom').value=''; ";
   	}
   	$output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""]]';
   }
