@@ -42,6 +42,17 @@ class nomdefespconActions extends autonomdefespconActions
   public function executeEdit()
 	{
 		$this->npdefcpt = $this->getNpdefcptOrCreate();
+		if (!$this->npdefcpt->getId())
+		{
+			$t= new Criteria();
+			$t->addDescendingOrderByColumn(NpdefcptPeer::CODCON);
+			$reg= NpdefcptPeer::doSelectOne($t);
+			if ($reg)
+			{
+			 $numseg=$reg->getCodcon()+1;
+			}else $numseg='001';
+			$this->npdefcpt->setCodcon($numseg);
+		}
 		$this->formato= Herramientas::getMascaraPartida();
 		$this->longitud=strlen($this->formato);
 
