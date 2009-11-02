@@ -152,41 +152,44 @@ function validaMontos(id,obj) {
     try{eval(codigo);}catch(e){}
 
     if(objs_montos!=null && objs_filas!=null){
-
-      if(objs_montos.size()>0 && objs_filas.size()>0){
-
-        // Objetos Tipo Monto por Fila
-        var objXfila = (parseInt(objs_montos.size() / objs_filas.size()));
-
-        // Arreglo de totales
-        var acumtotales = new Array(objXfila);
-
-        for(u=0;u<objXfila;u++) acumtotales[u] = 0;
-
-        var columna = 0;
-    		var idc = '';
-		    var  sw = true;
-        // Ciclo para recorrer todos los objetos tipo monto del Grid
-        objs_montos.each(function(elemento) {
-  		    auxid = $(elemento).id.split('_').size();
-  		    if((auxid)==3){
+      try {
+        if (objs_montos.size() > 0 && objs_filas.size() > 0) {
+        
+          // Objetos Tipo Monto por Fila
+          var objXfila = (parseInt(objs_montos.size() / objs_filas.size()));
+          
+          // Arreglo de totales
+          var acumtotales = new Array(objXfila);
+          
+          for (u = 0; u < objXfila; u++) 
+            acumtotales[u] = 0;
+          
+          var columna = 0;
+          var idc = '';
+          var sw = true;
+          // Ciclo para recorrer todos los objetos tipo monto del Grid
+          objs_montos.each(function(elemento){
+            auxid = $(elemento).id.split('_').size();
+            if ((auxid) == 3) {
               acumtotales[columna] += $(elemento).toFloat();
-  			      columna++;
-  			      if(columna==(objXfila)){
-  			  	    columna=0;
-  			      }
-          }
-        });
-
-        totales.each(function(elemento, index){
-          if($(elemento)!=null){
-            $(elemento).value = acumtotales[index];
-            $(elemento).valueToFloatVE();
-          }
-        });
-
-      }
+              columna++;
+              if (columna == (objXfila)) {
+                columna = 0;
+              }
+            }
+          });
+          
+          totales.each(function(elemento, index){
+            if ($(elemento) != null) {
+              $(elemento).value = acumtotales[index];
+              $(elemento).valueToFloatVE();
+            }
+          });
+          
+        }
+      }catch(e){}
     }
+    
 
   }
 
