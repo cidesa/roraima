@@ -1575,7 +1575,7 @@ class Tesoreria {
 
   }
 
-  public static function VerificarChequeCaducado($numcue,$fecemiche)
+  public static function VerificarChequeCaducado($numcue,$fecemiche,$estatus)
   {
     $diasval=0;
     $c = new Criteria();
@@ -1588,7 +1588,7 @@ class Tesoreria {
     $fechacaducidad=Herramientas::dateAdd('d',$diasval,$fecemiche,'+');
     $fechaactual=date("Y-m-d");
 
-    if (strtotime($fechacaducidad)<=strtotime($fechaactual))
+    if ((strtotime($fechacaducidad)<=strtotime($fechaactual)) and $estatus=='C')
       return true;
     else
       return false;

@@ -90,7 +90,7 @@ class teschecusActions extends autoteschecusActions
        	$this->tscheemi->setCodent($objUsuario->getNomuse());
        }
 
-       if (Tesoreria::VerificarChequeCaducado($this->tscheemi->getNumcue(),$this->tscheemi->getFecemi()))
+       if (Tesoreria::VerificarChequeCaducado($this->tscheemi->getNumcue(),$this->tscheemi->getFecemi(),$this->tscheemi->getStatus()))
           $this->tscheemi->setCaducado('S');
     }
     if ($this->getRequest()->getMethod() == sfRequest::POST)
