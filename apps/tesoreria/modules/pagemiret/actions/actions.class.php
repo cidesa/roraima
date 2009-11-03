@@ -372,7 +372,7 @@ $this->Bitacora('Guardo');
     	$emichepag = "";
     }
 
-    $SQL="SELECT 1 as check, A.NUMORD as numord,A.FECEMI as fecemi,B.CODPRE as codpre,B.MONRET as monret, nomben as nomben, 9 as id FROM OPORDPAG A,OPRETORD B".$sqltabla." WHERE A.NUMORD = B.NUMORD AND B.CODTIP = '".$codigo."' AND B.NUMRET = 'NOASIGNA' ".$sqlche.$sqlfecdes.$sqlfechas ." order by a.fecemi, a.numord";
+    $SQL="SELECT 0 as check, A.NUMORD as numord,A.FECEMI as fecemi,B.CODPRE as codpre,B.MONRET as monret, nomben as nomben, 9 as id FROM OPORDPAG A,OPRETORD B".$sqltabla." WHERE A.NUMORD = B.NUMORD AND B.CODTIP = '".$codigo."' AND B.NUMRET = 'NOASIGNA' ".$sqlche.$sqlfecdes.$sqlfechas ." order by a.fecemi, a.numord";
 
     $resp = Herramientas::BuscarDatos($SQL,&$all);
     $opciones = new OpcionesGrid();
@@ -432,7 +432,7 @@ $this->Bitacora('Guardo');
     $col6->setNombreCampo('monret');
     $col6->setEsNumerico(true);
     $col6->setHTML('type="text" size="10" readonly=true');
-    $col6->setEsTotal(true,'opordpag_monord');
+    //$col6->setEsTotal(true,'opordpag_monord');
 
     $opciones->addColumna($col1);
     $opciones->addColumna($col2);
