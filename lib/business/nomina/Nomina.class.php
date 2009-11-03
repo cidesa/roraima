@@ -1747,9 +1747,21 @@ class Nomina {
         }
         break;
 
+
       case "AA" :
         // ????????? año bisiesto ojoooooooooo cambiar
-		$sql="select to_char(age(to_date('$fecnom','yyyy-mm-dd'),to_date('$fechaing','yyyy-mm-dd')),'YY') as ano";
+		$t= new Criteria();
+        $t->add(NphojintPeer::CODEMP,$empleado);
+        $result= NphojintPeer::doSelectOne($t);
+        if ($result)
+        {
+          $fecharein=$result->getFecrei();
+        }else $fecharein="";
+		if ($fecharein!=""){
+		  $sql="select to_char(age(to_date('$fecnom','yyyy-mm-dd'),to_date('$fecharein','yyyy-mm-dd')),'YY') as ano";
+		}else{
+          $sql="select to_char(age(to_date('$fecnom','yyyy-mm-dd'),to_date('$fechaing','yyyy-mm-dd')),'YY') as ano";
+		}
 		if (Herramientas :: BuscarDatos($sql, & $tabla)) {
 			$valor = intval($tabla[0]['ano']);
 		}else
@@ -1778,13 +1790,32 @@ class Nomina {
         if (Herramientas :: BuscarDatos($sql, & $tabla)) {
           $fecnom1 = $tabla[0]["ultfec"];
           $valor = 0;
-          if (intval(date('m', strtotime($fechaing))) == intval(date('m', strtotime($fecnom)))) {
+        $t= new Criteria();
+        $t->add(NphojintPeer::CODEMP,$empleado);
+        $result= NphojintPeer::doSelectOne($t);
+        if ($result)
+        {
+          $fecharein=$result->getFecrei();
+        }else $fecharein="";
+
+        if ($fecharein!="")
+        {
+           if (intval(date('m', strtotime($fecharein))) == intval(date('m', strtotime($fecnom)))) {
+            if (intval(date('d', strtotime($fecharein))) >= intval(date('d', strtotime($fecnom1))) && intval(date('d', strtotime($fecharein))) <= intval(date('d', strtotime($fecnom)))) {
+              if (intval(date('Y', strtotime($fecharein))) < intval(date('Y', strtotime($fecnom)))) {
+                $valor = 1;
+              }
+            }
+          }
+        }else{
+           if (intval(date('m', strtotime($fechaing))) == intval(date('m', strtotime($fecnom)))) {
             if (intval(date('d', strtotime($fechaing))) >= intval(date('d', strtotime($fecnom1))) && intval(date('d', strtotime($fechaing))) <= intval(date('d', strtotime($fecnom)))) {
               if (intval(date('Y', strtotime($fechaing))) < intval(date('Y', strtotime($fecnom)))) {
                 $valor = 1;
               }
             }
           }
+        }
         }
         break;
 
@@ -3456,7 +3487,18 @@ class Nomina {
         break;
       case "AA" :
         // ????????? año bisiesto ojoooooooooo cambiar
-		$sql="select to_char(age(to_date('$profec','yyyy-mm-dd'),to_date('$fechaing','yyyy-mm-dd')),'YY') as ano";
+        $t= new Criteria();
+        $t->add(NphojintPeer::CODEMP,$empleado);
+        $result= NphojintPeer::doSelectOne($t);
+        if ($result)
+        {
+          $fecharein=$result->getFecrei();
+        }else $fecharein="";
+		if ($fecharein!=""){
+		  $sql="select to_char(age(to_date('$profec','yyyy-mm-dd'),to_date('$fecharein','yyyy-mm-dd')),'YY') as ano";
+		}else{
+		  $sql="select to_char(age(to_date('$profec','yyyy-mm-dd'),to_date('$fechaing','yyyy-mm-dd')),'YY') as ano";
+		}
 		if (Herramientas :: BuscarDatos($sql, & $tabla)) {
 			$valor = intval($tabla[0]['ano']);
 		}else
@@ -3484,12 +3526,30 @@ class Nomina {
         $valor = 0;
         $hasta_mod = split('/', $hasta);
         $desde_mod = split('/', $desde);
+        $t= new Criteria();
+        $t->add(NphojintPeer::CODEMP,$empleado);
+        $result= NphojintPeer::doSelectOne($t);
+        if ($result)
+        {
+          $fecharein=$result->getFecrei();
+        }else $fecharein="";
+        if ($fecharein!="")
+        {
+          if (intval(date('m', strtotime($fecharein))) == intval(date('m', strtotime($hasta_mod[1] . '/' . $hasta_mod[0] . '/' . $hasta_mod[2])))) {
+          if (intval(date('d', strtotime($fecharein))) >= intval(date('d', strtotime($desde_mod[1] . '/' . $desde_mod[0] . '/' . $desde_mod[2]))) && intval(date('d', strtotime($fecharein))) <= intval(date('d', strtotime($hasta_mod[1] . '/' . $hasta_mod[0] . '/' . $hasta_mod[2])))) {
+            if (intval(date('Y', strtotime($fecharein))) < intval(date('Y', strtotime($hasta_mod[1] . '/' . $hasta_mod[0] . '/' . $hasta_mod[2])))) {
+              $valor = 1;
+            }
+          }
+        }
+        }else{
         if (intval(date('m', strtotime($fechaing))) == intval(date('m', strtotime($hasta_mod[1] . '/' . $hasta_mod[0] . '/' . $hasta_mod[2])))) {
           if (intval(date('d', strtotime($fechaing))) >= intval(date('d', strtotime($desde_mod[1] . '/' . $desde_mod[0] . '/' . $desde_mod[2]))) && intval(date('d', strtotime($fechaing))) <= intval(date('d', strtotime($hasta_mod[1] . '/' . $hasta_mod[0] . '/' . $hasta_mod[2])))) {
             if (intval(date('Y', strtotime($fechaing))) < intval(date('Y', strtotime($hasta_mod[1] . '/' . $hasta_mod[0] . '/' . $hasta_mod[2])))) {
               $valor = 1;
             }
           }
+        }
         }
         return $valor;
         break;
