@@ -698,7 +698,13 @@ class Tesoreria {
   //formulario tesmovtraban
   /********************************************************************************************************/
 
-  public static function Salvartesmovtraban($objeto, $tipmovdesd, $tipmovhast) {
+  public static function Salvartesmovtraban($objeto, $tipmovdesd, $tipmovhast,$comprobaut) {
+    if ($comprobaut=='S')
+    {
+     self::generaComprobanteAutomatico($objeto, $tipmovdesd, $tipmovhast,&$numcom);
+     $objeto->setNumcom($numcom);
+     $objeto->save();
+    }
     self :: Genera_movlibdeb_confincomgen($objeto, $tipmovdesd);
     self :: Genera_movlibcre_confincomgen($objeto, $tipmovhast);
     $c = new Criteria();
@@ -2294,6 +2300,43 @@ class Tesoreria {
   	$val=541;
   }
   return $val;
+  }
+
+  public static function generaComprobanteAutomatico($objeto, $tipmovdesd, $tipmovhast,&$correl2)
+  {
+        $correl2=OrdendePago::Buscar_Correlativo();
+	    $contabc = new Contabc();
+	    $contabc->setNumcom($correl2);
+	    $contabc->setReftra($objeto->getReftra());
+	    $contabc->setFeccom($objeto->getFectra());
+	    $contabc->setDescom($objeto->getDestra());
+	    $contabc->setStacom('D');
+	    $contabc->setTipcom(null);
+	    $contabc->setMoncom($objeto->getMontra());
+	    $contabc->save();
+
+        $contabc1= new Contabc1();
+        $contabc1->setNumcom($correl2);
+        $contabc1->setFeccom($objeto->getFectra());
+        $contabc1->setCodcta($objeto->getCtacon_des());
+        $contabc1->setNumasi(1);
+        $contabc1->setRefasi($objeto->getReftra());
+        $contabc1->setDesasi(H::getX('codcta','Contabb','Descta',$objeto->getCtacon_des()));
+       	$contabc1->setDebcre('D');
+       	$contabc1->setMonasi($objeto->getMontra());
+        $contabc1->save();
+
+        $contabc1= new Contabc1();
+        $contabc1->setNumcom($correl2);
+        $contabc1->setFeccom($objeto->getFectra());
+        $contabc1->setCodcta($objeto->getCtacon_ori());
+        $contabc1->setNumasi(2);
+        $contabc1->setRefasi($objeto->getReftra());
+        $contabc1->setDesasi(H::getX('codcta','Contabb','Descta',$objeto->getCtacon_ori()));
+       	$contabc1->setDebcre('C');
+       	$contabc1->setMonasi($objeto->getMontra());
+        $contabc1->save();
+
   }
 
 }
