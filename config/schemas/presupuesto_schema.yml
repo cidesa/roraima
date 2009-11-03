@@ -1,13 +1,10 @@
 propel:
   _attributes: { noXsd: false, defaultIdMethod: native, package: lib.model }
   cpadidis:
-    #_attributes:
-      #idMethod: native
     refadi:
       type: VARCHAR
       size: 8
       required: true
-      ##primaryKey: true
     fecadi:
       type: DATE
       required: true
@@ -44,19 +41,20 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   cpajuste:
-    #_attributes:
-      #idMethod: native
     refaju:
       type: VARCHAR
       size: 8
       required: true
-      ##primaryKey: true
     tipaju:
       type: VARCHAR
       size: 4
       required: true
+      foreignTable: cpdocaju
+      foreignReference: tipaju
     fecaju:
       type: DATE
       required: true
@@ -103,15 +101,16 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   cpasiini:
-    #_attributes:
-      #idMethod: native
     codpre:
       type: VARCHAR
       size: 32
       required: true
-      ##primaryKey: true
+      foreignTable: cpdeftit
+      foreignReference: codpre
     nompre:
       type: VARCHAR
       size: 250
@@ -119,12 +118,10 @@ propel:
       type: VARCHAR
       size: 2
       required: true
-      ##primaryKey: true
     anopre:
       type: VARCHAR
       size: 4
       required: true
-      ##primaryKey: true
     monasi:
       type: NUMERIC
       size: 14
@@ -179,25 +176,20 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
-#    _indexes:
-#      i02cpasiini:
-#        - codpre
-#      i03cpasiini:
-#        - codpre
-#        - perpre
+      description: Identificador Único del registro
   cpcompro:
-    #_attributes:
-      #idMethod: native
     refcom:
       type: VARCHAR
       size: 8
       required: true
-      ##primaryKey: true
     tipcom:
       type: VARCHAR
       size: 4
       required: true
+      foreignTable: cpdoccom
+      foreignReference: tipcom
     feccom:
       type: DATE
       required: true
@@ -207,6 +199,8 @@ propel:
     refprc:
       type: VARCHAR
       size: 8
+      foreignTable: cpprecom
+      foreignReference: refprc
     tipprc:
       type: VARCHAR
       size: 4
@@ -240,24 +234,31 @@ propel:
     cedrif:
       type: VARCHAR
       size: 15
+      foreignTable: opbenefi
+      foreignReference: cedrif
     tipo:
       type: VARCHAR
       size: 1
     aprcom:
       type: VARCHAR
       size: 1
+    codubi:
+      type: VARCHAR
+      size: 30
+    motrec:
+      type: VARCHAR
+      size: 1000
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   cpdefniv:
-    #_attributes:
-      #idMethod: native
     codemp:
       type: VARCHAR
       size: 3
       required: true
-      ##primaryKey: true
     loncod:
       type: NUMERIC
       size: 2
@@ -374,15 +375,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   cpdeftit:
-    #_attributes:
-      #idMethod: native
     codpre:
       type: VARCHAR
       size: 32
       required: true
-      ##primaryKey: true
     nompre:
       type: VARCHAR
       size: 250
@@ -390,6 +390,8 @@ propel:
     codcta:
       type: VARCHAR
       size: 32
+      foreignTable: contabb
+      foreignReference: codcta
     stacod:
       type: VARCHAR
       size: 1
@@ -405,10 +407,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   cpdiscre:
-    #_attributes:
-      #idMethod: native
     sector:
       type: VARCHAR
       size: 2
@@ -422,10 +424,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   cpdisfuefin:
-    #_attributes:
-      #idMethod: native
     correl:
       type: VARCHAR
       size: 10
@@ -453,15 +455,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   cpdocaju:
-    #_attributes:
-      #idMethod: native
     tipaju:
       type: VARCHAR
       size: 4
       required: true
-      ##primaryKey: true
     nomext:
       type: VARCHAR
       size: 100
@@ -477,15 +478,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   cpdoccau:
-    #_attributes:
-      #idMethod: native
     tipcau:
       type: VARCHAR
       size: 4
       required: true
-      ##primaryKey: true
     nomext:
       type: VARCHAR
       size: 100
@@ -517,15 +517,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   cpdoccom:
-    #_attributes:
-      #idMethod: native
     tipcom:
       type: VARCHAR
       size: 4
       required: true
-      ##primaryKey: true
     nomext:
       type: VARCHAR
       size: 100
@@ -557,15 +556,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   cpdocpag:
-    #_attributes:
-      #idMethod: native
     tippag:
       type: VARCHAR
       size: 4
       required: true
-      ##primaryKey: true
     nomext:
       type: VARCHAR
       size: 100
@@ -601,15 +599,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   cpdocprc:
-    #_attributes:
-      #idMethod: native
     tipprc:
       type: VARCHAR
       size: 4
       required: true
-      ##primaryKey: true
     nomext:
       type: VARCHAR
       size: 100
@@ -621,14 +618,16 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   cpimpcau:
-    #_attributes:
-      #idMethod: native
     refcau:
       type: VARCHAR
       size: 8
       required: true
+      foreignTable: cpcausad
+      foreignReference: refcau
     codpre:
       type: VARCHAR
       size: 32
@@ -657,28 +656,22 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
-    _indexes:
-      i01cpimpcau:
-        - refcau
-      i02cpimpcau:
-        - refcau
-        - refere
-        - refprc
-        - codpre
-      i03cpimpcau:
-        - codpre
+      description: Identificador Único del registro
   cpimpcom:
-    #_attributes:
-      #idMethod: native
     refcom:
       type: VARCHAR
       size: 8
       required: true
+      foreignTable: cpcompro
+      foreignReference: refcom
     codpre:
       type: VARCHAR
       size: 32
       required: true
+      foreignTable: cpdeftit
+      foreignReference: codpre
     monimp:
       type: NUMERIC
       size: 14
@@ -704,23 +697,16 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
-    _indexes:
-      i01cpimpcom:
-        - refcom
-      i02cpimpcom:
-        - refcom
-        - refere
-        - codpre
-      i03cpimpcom:
-        - codpre
+      description: Identificador Único del registro
   cpimppag:
-    #_attributes:
-      #idMethod: native
     refpag:
       type: VARCHAR
       size: 8
       required: true
+      foreignTable: cppagos
+      foreignReference: refpag
     codpre:
       type: VARCHAR
       size: 32
@@ -748,23 +734,22 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
-    _indexes:
-      i01cpimppag:
-        - refpag
-      i02cpimppag:
-        - codpre
+      description: Identificador Único del registro
   cpimpprc:
-    #_attributes:
-      #idMethod: native
     refprc:
       type: VARCHAR
       size: 8
       required: true
+      foreignTable: cpprecom
+      foreignReference: refprc
     codpre:
       type: VARCHAR
       size: 32
       required: true
+      foreignTable: cpdeftit
+      foreignReference: codpre
     monimp:
       type: NUMERIC
       size: 14
@@ -791,20 +776,22 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   cpmovadi:
-    #_attributes:
-      #idMethod: native
     refadi:
       type: VARCHAR
       size: 8
       required: true
-      ##primaryKey: true
+      foreignTable: cpadidis
+      foreignReference: refadi
     codpre:
       type: VARCHAR
       size: 32
       required: true
-      ##primaryKey: true
+      foreignTable: cpdeftit
+      foreignReference: codpre
     perpre:
       type: VARCHAR
       size: 2
@@ -819,23 +806,22 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
-    _indexes:
-      i01cpmovadi:
-        - refadi
+      description: Identificador Único del registro
   cpmovaju:
-    #_attributes:
-      #idMethod: native
     refaju:
       type: VARCHAR
       size: 8
       required: true
-      ##primaryKey: true
+      foreignTable: cpajuste
+      foreignReference: refaju
     codpre:
       type: VARCHAR
       size: 32
       required: true
-      ##primaryKey: true
+      foreignTable: cpdeftit
+      foreignReference: codpre
     monaju:
       type: NUMERIC
       size: 14
@@ -861,19 +847,20 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   cppagos:
-    #_attributes:
-      #idMethod: native
     refpag:
       type: VARCHAR
       size: 8
       required: true
-      ##primaryKey: true
     tippag:
       type: VARCHAR
       size: 4
       required: true
+      foreignTable: cpdocpag
+      foreignReference: tippag
     fecpag:
       type: DATE
       required: true
@@ -908,22 +895,25 @@ propel:
     cedrif:
       type: VARCHAR
       size: 15
+      foreignTable: opbenefi
+      foreignReference: cedrif
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   cpprecom:
-    #_attributes:
-      #idMethod: native
     refprc:
       type: VARCHAR
       size: 8
       required: true
-      ##primaryKey: true
     tipprc:
       type: VARCHAR
       size: 4
       required: true
+      foreignTable: cpdocprc
+      foreignReference: tipprc
     fecprc:
       type: DATE
       required: true
@@ -964,20 +954,24 @@ propel:
     cedrif:
       type: VARCHAR
       size: 15
+      foreignTable: opbenefi
+      foreignReference: cedrif
     refsol:
       type: VARCHAR
       size: 8
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   cpsoltrasla:
-    #_attributes:
-      #idMethod: native
     reftra:
       type: VARCHAR
       size: 8
       required: true
+      foreignTable: cptrasla
+      foreignReference: reftra
     fectra:
       type: DATE
     anotra:
@@ -1003,6 +997,8 @@ propel:
     codart:
       type: VARCHAR
       size: 3
+      foreignTable: cpartley
+      foreignReference: codart
     stacon:
       type: VARCHAR
       size: 1
@@ -1094,10 +1090,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   cpartley:
-    #_attributes:
-      #idMethod: native
     codart:
       type: VARCHAR
       size: 3
@@ -1120,19 +1116,21 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   cpcausad:
-    #_attributes:
-      #idMethod: native
     refcau:
       type: VARCHAR
       size: 8
       required: true
-      ##primaryKey: true
+      #primaryKey: true
     tipcau:
       type: VARCHAR
       size: 4
       required: true
+      foreignTable: cpdoccau
+      foreignReference: tipcau
     feccau:
       type: DATE
       required: true
@@ -1142,6 +1140,8 @@ propel:
     refcom:
       type: VARCHAR
       size: 8
+      foreignTable: cpcompro
+      foreignReference: refcom
     tipcom:
       type: VARCHAR
       size: 4
@@ -1171,17 +1171,21 @@ propel:
     cedrif:
       type: VARCHAR
       size: 15
+      foreignTable: opbenefi
+      foreignReference: cedrif
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   cpsolmovadi:
-    #_attributes:
-      #idMethod: native
     refadi:
       type: VARCHAR
       size: 8
       required: true
+      foreignTable: cpsoladidis
+      foreignReference: refadi
     codpre:
       type: VARCHAR
       size: 32
@@ -1198,14 +1202,16 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   cpsolmovtra:
-    #_attributes:
-      #idMethod: native
     reftra:
       type: VARCHAR
       size: 8
       required: true
+      foreignTable: cpsoltrasla
+      foreignReference: reftra
     codori:
       type: VARCHAR
       size: 32
@@ -1222,10 +1228,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   cpsoladidis:
-    #_attributes:
-      #idMethod: native
     despre:
       type: VARCHAR
       size: 250
@@ -1238,6 +1244,8 @@ propel:
     refadi:
       type: VARCHAR
       size: 8
+      foreignTable: cpadidis
+      foreignReference: refadi
       required: true
     fecadi:
       type: DATE
@@ -1265,6 +1273,8 @@ propel:
     codart:
       type: VARCHAR
       size: 3
+      foreignTable: cpartley
+      foreignReference: codart
     stacon:
       type: VARCHAR
       size: 1
@@ -1289,10 +1299,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   cpmovfuefin:
-    #_attributes:
-      #idMethod: native
     correl:
       type: VARCHAR
       size: 10
@@ -1317,20 +1327,18 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   cpniveles:
-    #_attributes:
-      #idMethod: native
     catpar:
       type: VARCHAR
       size: 1
       required: true
-      ##primaryKey: true
     consec:
       type: NUMERIC
       size: 2
       required: true
-      ##primaryKey: true
     nomabr:
       type: VARCHAR
       size: 10
@@ -1348,10 +1356,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   cppereje:
-    #_attributes:
-      #idMethod: native
     fecini:
       type: DATE
       required: true
@@ -1377,15 +1385,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   cptrasla:
-    #_attributes:
-      #idMethod: native
     reftra:
       type: VARCHAR
       size: 8
       required: true
-      ##primaryKey: true
     fectra:
       type: DATE
       required: true
@@ -1417,14 +1424,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
-    _indexes:
-      i01cptrasla:
-        - reftra
-        - fectra
+      description: Identificador Único del registro
   cpimpapa:
-    #_attributes:
-      #idMethod: native
     refapa:
       type: VARCHAR
       size: 8
@@ -1459,10 +1462,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   cpimprel:
-    #_attributes:
-      #idMethod: native
     refrel:
       type: VARCHAR
       size: 8
@@ -1494,25 +1497,28 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   cpmovtra:
-    #_attributes:
-      #idMethod: native
     reftra:
       type: VARCHAR
       size: 8
       required: true
-      ##primaryKey: true
+      foreignTable: cptrasla
+      foreignReference: reftra
     codori:
       type: VARCHAR
       size: 32
       required: true
-      ##primaryKey: true
+      foreignTable: cpdeftit
+      foreignReference: codpre
     coddes:
       type: VARCHAR
       size: 32
       required: true
-      ##primaryKey: true
+      foreignTable: cpdeftit
+      foreignReference: codpre
     monmov:
       type: NUMERIC
       size: 14
@@ -1523,13 +1529,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
-    _indexes:
-      i01cpmovtra:
-        - reftra
+      description: Identificador Único del registro
   cpmovadifin:
-    #_attributes:
-      #idMethod: native
     refadi:
       type: VARCHAR
       size: 8
@@ -1544,15 +1547,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   cprelapa:
-    #_attributes:
-      #idMethod: native
     refrel:
       type: VARCHAR
       size: 8
       required: true
-      ##primaryKey: true
     tiprel:
       type: VARCHAR
       size: 4
@@ -1591,10 +1593,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   cpdefapr:
-    #_attributes:
-      #idMethod: native
     stacon:
       type: VARCHAR
       size: 50
@@ -1634,15 +1636,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   hisconb:
-    #_attributes:
-      #idMethod: native
     codcta:
       type: VARCHAR
       size: 18
       required: true
-      ##primaryKey: true
     descta:
       type: VARCHAR
       size: 40
@@ -1676,28 +1677,24 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   hisconb1:
-    #_attributes:
-      #idMethod: native
     codcta:
       type: VARCHAR
       size: 18
       required: true
-      ##primaryKey: true
     fecini:
       type: DATE
       required: true
-      ##primaryKey: true
     feccie:
       type: DATE
       required: true
-      ##primaryKey: true
     pereje:
       type: VARCHAR
       size: 2
       required: true
-      ##primaryKey: true
     totdeb:
       type: NUMERIC
       size: 14
@@ -1713,19 +1710,17 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   hisconc:
-    #_attributes:
-      #idMethod: native
     numcom:
       type: VARCHAR
       size: 8
       required: true
-      ##primaryKey: true
     feccom:
       type: DATE
       required: true
-      ##primaryKey: true
     descom:
       type: VARCHAR
       size: 50
@@ -1743,34 +1738,29 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   hisconc1:
-    #_attributes:
-      #idMethod: native
     numcom:
       type: VARCHAR
       size: 8
       required: true
-      ##primaryKey: true
     feccom:
       type: DATE
       required: true
-      ##primaryKey: true
     debcre:
       type: VARCHAR
       size: 1
       required: true
-      ##primaryKey: true
     codcta:
       type: VARCHAR
       size: 18
       required: true
-      ##primaryKey: true
     numasi:
       type: NUMERIC
       size: 3
       required: true
-      ##primaryKey: true
     refasi:
       type: VARCHAR
       size: 8
@@ -1784,5 +1774,7 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
 
