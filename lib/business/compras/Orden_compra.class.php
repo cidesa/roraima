@@ -399,8 +399,10 @@ class Orden_compra
                   else
                       $grid['monrgo'] = "0.00";
 
-                  if ($result[$i]['montot']>0)
+                  if ($result[$i]['montot']>0 && $tipopro!='P')
                       $grid['montot'] =$result[$i]['montot'];
+                  else if ($result[$i]['montot']>0 && $tipopro=='P')
+                      $grid['montot'] =$result[$i]['montot'] -$result[$i]['monrgo'];
                   else
                       $grid['montot'] = "0.00";
 

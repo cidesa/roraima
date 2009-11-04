@@ -255,7 +255,7 @@ class almordcomActions extends autoalmordcomActions
         }
         //si no viene de una referencia y no se carga parcialmente
         else
-          $this->configGrid($this->getRequestParameter('caordcom[ordcom]'),'0');
+          $this->configGrid($this->getRequestParameter('caordcom[ordcom]'),'0','');
 
         /*  if (($this->getRequestParameter('caordcom[refsol]')!="") and ($this->getRequestParameter('parcial')=="S"))
           $this->configGrid_Recargos($this->getRequestParameter('caordcom[refsol]'),$this->getRequestParameter('caordcom[rifpro]'));
@@ -330,7 +330,7 @@ class almordcomActions extends autoalmordcomActions
 	       if($resul->getComasopre()=='S' && $resul->getComreqapr()!='S')
 	       {
 	        $totaimp=Orden_compra::totalImputacion($this->caordcom->getOrdcom());
-	        if (H::convnume($this->caordcom->getMonord())!=$totaimp)
+	        if (H::toFloat($this->caordcom->getMonord())!=$totaimp)
 	        {
 	        	$this->setFlash('notice', 'El Monto de la Imputaciones Generadas no es igual al de la Solicitud, Por favor verificar esta solicitud');
 	        }
@@ -372,7 +372,7 @@ class almordcomActions extends autoalmordcomActions
     $this->updateCaordcomFromRequest();
     Orden_compra::Grabar_compromiso($this->caordcom);
     $totaimp=Orden_compra::totalImputacion($this->caordcom->getOrdcom());
-    if (H::convnume($this->caordcom->getMonord())!=$totaimp)
+    if (H::toFloat($this->caordcom->getMonord())!=$totaimp)
     {
     	$msj="El Monto de la Imputaciones Generadas no es igual al de la Solicitud, Por favor verificar esta solicitud";
     }else{
@@ -2208,10 +2208,12 @@ class almordcomActions extends autoalmordcomActions
                 group by a.refsol, a.codpro, b.priori";
         if (Herramientas::BuscarDatos($sql,&$result)){
           if(count($result)==1){
+          	$codigopro=$result[0]["codpro"];
             $despro   = Herramientas::getX('codpro','Caprovee','nompro',$result[0]["codpro"]);
-            $provee=',["caordcom_rifpro","'.$result[0]["codpro"].'",""],["caordcom_nompro","'.$despro.'",""]';
-          }else $provee='';
-        }else $provee='';
+            $tippro   = Herramientas::getX('codpro','Caprovee','tipo',$result[0]["codpro"]);
+            $provee=',["caordcom_rifpro","'.$result[0]["codpro"].'",""],["caordcom_nompro","'.$despro.'",""],["caordcom_tipopro","'.$tippro.'",""]';
+          }else { $provee=''; $codigopro=""; $tippro="";}
+        }else { $provee=''; $codigopro=""; $tippro="";}
 
           $dato   = Herramientas::getX('reqart','Casolart','monreq',trim($this->getRequestParameter('ordcom')));
           $desreq = Herramientas::getX('reqart','Casolart','desreq',trim($this->getRequestParameter('ordcom')));
@@ -2219,8 +2221,13 @@ class almordcomActions extends autoalmordcomActions
 
           $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$filas_orden.'","'.$numero_filas.'",""],["'.$cajita.'","'.$validacion_fec_egresos.'",""],["caordcom_desord","'.$desreq.'",""],["caordcom_tipfin","'.$filas[0]->getTipfin().'",""],["caordcom_nomfin","'.$desfin.'",""]'.$provee.']';
           $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
-          $tipopro=H::getX('RIFPRO','Caprovee','Tipo',$this->getRequestParameter('rifpro'));
+          if ($codigopro!=""){
+          $tipopro=H::getX('RIFPRO','Caprovee','Tipo',$codigopro);
           $this->configGrid($this->getRequestParameter('ordcom'),$this->getRequestParameter('referencia'),$tipopro);
+          }else{
+          	$this->setVars();
+          	$this->configGrid($this->getRequestParameter('ordcom'),$this->getRequestParameter('referencia'),'');
+          }
       }
     }else{
 

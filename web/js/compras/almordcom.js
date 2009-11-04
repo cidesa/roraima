@@ -1452,3 +1452,32 @@ function salvarmontorecargos()
   {
 
   }
+
+function limpiardatos()
+  {
+   if ($('caordcom_tipopro').value=='P'){
+    var f=0;
+    while (f < $('numero_filas_orden').value)
+    {
+      var filacheck = "ax_"+f+"_1";
+      var filarecargo = "ax_"+f+"_12";
+      var filatotal = "ax_"+f+"_13";
+      var filadatrec = "ax_"+f+"_18";
+
+      var num1=toFloat(filarecargo);
+      var num2=toFloat(filatotal);
+
+      var calculo= num2 - num1;
+      $(filatotal).value=format(calculo.toFixed(2),'.',',','.');
+
+      $(filacheck).checked=false;
+      $(filarecargo).value="0,00";
+      $(filadatrec).value="";
+
+      f++;
+    }
+    actualizarsaldos();
+    }
+
+
+  }
