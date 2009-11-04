@@ -172,11 +172,11 @@ echo input_tag('caordcom[refsol]', $caordcom->getRefsol(), array (
  'maxlength' => 8,
  'control_name' => 'caordcom[refsol]',
  'onBlur'=> remote_function(array(
-              'update'   => 'grid',
+          'update'   => 'grid',
           'script' => true,
           'condition' => "$('caordcom_refsol').value != '' && $('id').value == ''",
-              'url' => 'almordcom/grid?ajax=1&referencia=1',
-        'complete' => 'AjaxJSON(request, json), Mostrar_mensaje_fecha_egresos_invalidad(),$("botonesmarcar").hide()',
+          'url' => 'almordcom/grid?ajax=1&referencia=1',
+          'complete' => 'AjaxJSON(request, json), Mostrar_mensaje_fecha_egresos_invalidad(),$("botonesmarcar").hide(),limpiardatos(),actualizarsaldos()',
           'with' => "'cajtexmos=caordcom_monord&filas_orden=numero_filas_orden&cajtexmos2=caordcom_rifpro&cajtexmos3=caordcom_nompro&ordcom='+this.value+'&fecord='+document.getElementById('caordcom_fecord').value+'&refsol='+document.getElementById('caordcom_refsol').value",
         ))))
  . '&nbsp;'. button_to_popup('...',cross_app_link_to('herramientas','catalogo')."/metodo/Casolart_Almcotiza/clase/Casolart/frame/sf_admin_edit_form/obj1/caordcom_refsol/campo1/reqart",'','','botoncat')
