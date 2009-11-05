@@ -119,7 +119,7 @@
         'url'      => 'nomasicarconnom/ajax',
         'complete' => 'AjaxJSON(request, json)',
 		'condition' => "$(this.id).value!='' && $('id').value=='' ",
-          'with' => "'ajax=3&cajtexmos=npasicaremp_nomcar&cajtexcom=npasicaremp_codcar&codemp='+$('npasicaremp_codemp').value+'&codnom='+$('npasicaremp_codnom').value+'&frecuen='+$('frecuencal').value+'&codigo='+this.value"
+        'with' => "'ajax=3&cajtexmos=npasicaremp_nomcar&cajtexcom=npasicaremp_codcar&codemp='+$('npasicaremp_codemp').value+'&codnom='+$('npasicaremp_codnom').value+'&frecuen='+$('frecuencal').value+'&codigo='+this.value"
         ))),
      array('use_style' => 'true')
   )
@@ -127,7 +127,7 @@
  </div>
 </th>
 <th>
- <?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo')."/metodo/Nomasicarconnom_Npasicarnom/clase/Npcargos/frame/sf_admin_edit_form/obj1/npasicaremp_codcar/obj2/npasicaremp_nomcar/obj3/sueldo/campo1/codcar/campo2/nomcar/campo3/sueldo/param1/'+$('npasicaremp_codnom').value+'") ?>   </div>
+ <?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo')."/metodo/Nomasicarconnom_Npasicarnom/clase/Npcargos/frame/sf_admin_edit_form/obj1/npasicaremp_codcar/obj2/npasicaremp_nomcar/obj3/sueldo/campo1/codcar/campo2/nomcar/campo3/sueldo/param1/'+$('npasicaremp_codnom').value+'/param2/".$filvac) ?>   </div>
 <th>
 <?php $value = object_input_tag($npasicaremp, 'getNomcar', array (
   'readonly' => true,

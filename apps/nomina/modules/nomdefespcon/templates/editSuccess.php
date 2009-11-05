@@ -24,7 +24,7 @@ array()) ?></h1>
 
 <div id="sf_admin_content">
 <?php include_partial('nomdefespcon/edit_messages', array('npdefcpt' => $npdefcpt, 'labels' => $labels)) ?>
-<?php include_partial('nomdefespcon/edit_form', array('npdefcpt' => $npdefcpt, 'formato' => $formato, 'longitud' => $longitud, 'labels' => $labels)) ?>
+<?php include_partial('nomdefespcon/edit_form', array('npdefcpt' => $npdefcpt, 'formato' => $formato, 'longitud' => $longitud, 'labels' => $labels, 'mancorrel' => $mancorrel)) ?>
 </div>
 
 <div id="sf_admin_footer">

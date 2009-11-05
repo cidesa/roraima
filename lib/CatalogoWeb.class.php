@@ -3885,7 +3885,10 @@ public function Tsmovlib_tesmovdeglib2()
 
       $this->c->addJoin(NpcargosPeer::CODCAR, NpasicarnomPeer :: CODCAR);
 
-      if($params) $this->c->add(NpasicarnomPeer::CODNOM,$params[0]);
+      if ($params){
+		  if ($params[1]!="") $this->c->add(NpcargosPeer :: CARVAN, 0,Criteria::GREATER_THAN);
+			$this->c->add(NpasicarnomPeer :: CODNOM, $params[0]);
+		}
 
       $this->columnas = array (
         NpcargosPeer :: CODCAR => 'Código',

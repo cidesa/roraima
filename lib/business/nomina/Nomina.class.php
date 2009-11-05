@@ -13,6 +13,17 @@
 class Nomina {
 
   public static function salvarNomdefespcon($concepto) {
+    if ($concepto->getCodcon()=='###')
+    {
+      $t= new Criteria();
+	  $t->add(NpdefcptPeer::OPECON,$concepto->getOpecon());
+	  $t->addDescendingOrderByColumn(NpdefcptPeer::CODCON);
+	  $reg= NpdefcptPeer::doSelectOne($t);
+	  if ($reg)
+	  {
+	    $concepto->setCodcon($reg->getCodcon()+1);
+	  }else $concepto->setCodcon('001');
+    }
     $concepto->save();
 
     $c = new Criteria();
