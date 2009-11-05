@@ -1223,3 +1223,6 @@
 11104:
   cod: 11104
   msj:  No puede borrar la Programacion de una Revision y Año ya cerrados
+99999999:
+  cod: 99999999
+  msj: Número de Orden de Pago ya Existe, intento con otro.
