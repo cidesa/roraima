@@ -40,6 +40,19 @@ class pagemiordActions extends autopagemiordActions
     {
       $this->opordpag = $this->getOpordpagOrCreate();
       try{ $this->updateOpordpagFromRequest();}catch(Exception $ex){}
+	  #SE AGREGO MOMENTANEAMENTE
+	  if ($this->opordpag->getId()=="")
+      {
+      		  $cc = new Criteria();
+			  $cc->add(OpordpagPeer::NUMORD,$this->opordpag->getNumord());
+			  $percc = OpordpagPeer::doSelectOne($cc);
+			  if($percc)
+			  {
+			  	$this->coderror5="99999999";
+				return false;
+			  }
+	  }	  
+	  ##FIN##
       $this->setVars();
       if ($this->opordpag->getId()=="")
       {
