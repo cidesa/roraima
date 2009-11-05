@@ -32,7 +32,7 @@
   'maxlength' => '3',
   'readonly'  =>  $npdefcpt->getId()!='' ? true : false ,
   'onKeyPress' => "javascript:cadena=this.value;cadena=cadena.toUpperCase();document.getElementById('npdefcpt_codcon').value=cadena",
-  'onBlur'  => "javascript: valor=this.value; valor=valor.pad(3, '0',0);document.getElementById('npdefcpt_codcon').value=valor;document.getElementById('npdefcpt_codcon').disabled=false;",
+  'onBlur'  => "javascript:event.keyCode=13; enter(event,this.value);"
 )); echo $value ? $value : '&nbsp;' ?> </div>
 
 <br>
@@ -292,3 +292,22 @@
 )) ?><?php endif; ?>
 </li>
   </ul>
+
+<script language="JavaScript" type="text/javascript">
+  function enter(e,valor)
+ {
+   if (e.keyCode==13 || e.keyCode==9)
+   {
+   	 var correl='<?php echo $mancorrel; ?>';
+     if (correl=='S') {
+     if (valor!='')
+     { valor=valor.pad(3, '0',0);}
+     else{valor=valor.pad(3, '#',0);}
+     }else{
+     	valor=valor.pad(3, '0',0);
+     }
+
+     $('npdefcpt_codcon').value=valor;
+   }
+ }
+</script>

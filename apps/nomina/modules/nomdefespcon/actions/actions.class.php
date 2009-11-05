@@ -13,6 +13,7 @@
  */
 class nomdefespconActions extends autonomdefespconActions
 {
+   public $coderror1=-1;
 
 /**
    * Función para procesar _todas_ las funciones Ajax del formulario
@@ -42,19 +43,22 @@ class nomdefespconActions extends autonomdefespconActions
   public function executeEdit()
 	{
 		$this->npdefcpt = $this->getNpdefcptOrCreate();
-		if (!$this->npdefcpt->getId())
-		{
-			$t= new Criteria();
-			$t->addDescendingOrderByColumn(NpdefcptPeer::CODCON);
-			$reg= NpdefcptPeer::doSelectOne($t);
-			if ($reg)
-			{
-			 $numseg=$reg->getCodcon()+1;
-			}else $numseg='001';
-			$this->npdefcpt->setCodcon($numseg);
-		}
 		$this->formato= Herramientas::getMascaraPartida();
 		$this->longitud=strlen($this->formato);
+        $this->mancorrel="";
+  	    $varemp = $this->getUser()->getAttribute('configemp');
+	    if(is_array($varemp))
+	     if(array_key_exists('aplicacion',$varemp))
+	  	  if(array_key_exists('nomina',$varemp['aplicacion']))
+		   if(array_key_exists('modulos',$varemp['aplicacion']['nomina']))
+		     if(array_key_exists('nomdefespcon',$varemp['aplicacion']['nomina']['modulos']))
+			 {
+			 	if (array_key_exists('mancorrel',$varemp['aplicacion']['nomina']['modulos']['nomdefespcon']))
+		        {
+		       	 $this->mancorrel=$varemp['aplicacion']['nomina']['modulos']['nomdefespcon']['mancorrel'];
+		        }
+
+			 }
 
 		if ($this->getRequest()->getMethod() == sfRequest::POST)
 		{
@@ -114,6 +118,19 @@ $this->Bitacora('Guardo');
 		$npdefcpt = $this->getRequestParameter('npdefcpt');
 		$this->formato= Herramientas::getMascaraPartida();
 		$this->longitud=strlen($this->formato);
+        $this->mancorrel="";
+  	    $varemp = $this->getUser()->getAttribute('configemp');
+	    if(is_array($varemp))
+	     if(array_key_exists('aplicacion',$varemp))
+	  	  if(array_key_exists('nomina',$varemp['aplicacion']))
+		   if(array_key_exists('modulos',$varemp['aplicacion']['nomina']))
+		     if(array_key_exists('nomdefespcon',$varemp['aplicacion']['nomina']['modulos']))
+			 {
+			 	if (array_key_exists('mancorrel',$varemp['aplicacion']['nomina']['modulos']['nomdefespcon']))
+		        {
+		       	 $this->mancorrel=$varemp['aplicacion']['nomina']['modulos']['nomdefespcon']['mancorrel'];
+		        }
+			 }
 
 	if (isset($npdefcpt['codcon']))
     {

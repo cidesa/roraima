@@ -150,8 +150,8 @@ $this->Bitacora('Guardo');
     $col1->setNombreCampo('codcar');
     $col1->setHTML('type="text" size="10"');
     $col1->setCatalogo('npcargos','sf_admin_edit_form', array('codcar' => 1, 'nomcar' => 2));
-    $col1->setJScript('onKeyPress="javascript:cadena=verificar_codigo_repetido(this.id)"');
-    $col1->setAjax('nomdefespasicartipnomlot',2,2);
+    $col1->setJScript('onBlur="javascript:event.keyCode=13; verificar_codigo_repetido(event,this.id)"');
+    //$col1->setAjax('nomdefespasicartipnomlot',2,2);
 
 
     $col2 = new Columna('Descripción');
@@ -240,6 +240,35 @@ $this->Bitacora('Guardo');
   {
   $grid=Herramientas::CargarDatosGrid($this,$this->obj);//0
   Nomina::Grabar_grid_nomdefespasicartipnomlot($npasicarnom,$grid);
+  }
+
+  public function executeDelete()
+  {
+    //$this->npasicarnom = NpasicarnomPeer::retrieveByPk($this->getRequestParameter('id'));
+    //$this->forward404Unless($this->npasicarnom);
+
+    try
+    {
+      $r= new Criteria();
+      $r->add(NpasicarnomPeer::CODNOM,$this->getRequestParameter('codnom'));
+      NpasicarnomPeer::doDelete($r);
+      $this->Bitacora('Elimino');
+    }
+    catch (PropelException $e)
+    {
+      $this->getRequest()->setError('delete', 'Could not delete the selected Npasicarnom. Make sure it does not have any associated items.');
+      return $this->forward('nomdefespasicartipnomlot', 'list');
+    }
+
+    return $this->redirect('nomdefespasicartipnomlot/list');
+  }
+
+
+
+
+  protected function deleteNpasicarnom($npasicarnom)
+  {
+
   }
 
 }

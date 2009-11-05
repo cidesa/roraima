@@ -23,7 +23,7 @@ generator:
 
     list:
       title:                           Cargos
-      display:                         [=codcar, nomcar]
+      display:                         [=codcar, nomcar, carvan, carasi]
       sort:  codcar
       filters:                         [codcar, nomcar]
       max_per_page:                    10
