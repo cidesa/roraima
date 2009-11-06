@@ -944,6 +944,15 @@ propel:
     numforpre:
       type: VARCHAR
       size: 8
+    motrecord:
+      type: VARCHAR
+      size: 500
+    motrectes:
+      type: VARCHAR
+      size: 500
+    aprorddir:
+      type: VARCHAR
+      size: 1
     id:
       type: INTEGER
       required: true

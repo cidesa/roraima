@@ -736,6 +736,27 @@ $this->Bitacora('Guardo');
           }
         }//////////////////////
 
+        $this->aprorddir="";
+		$varemp = $this->getUser()->getAttribute('configemp');
+		if ($varemp)
+		if(array_key_exists('aplicacion',$varemp))
+		 if(array_key_exists('tesoreria',$varemp['aplicacion']))
+		   if(array_key_exists('modulos',$varemp['aplicacion']['tesoreria']))
+		     if(array_key_exists('tesmovemiche',$varemp['aplicacion']['tesoreria']['modulos'])){
+		       if(array_key_exists('aprorddirec',$varemp['aplicacion']['tesoreria']['modulos']['tesmovemiche']))
+		       {
+		       	$this->aprorddir=$varemp['aplicacion']['tesoreria']['modulos']['tesmovemiche']['aprorddirec'];
+		       }
+		     }
+		if ($this->aprorddir=="S")
+		{
+		  $this->sql2="opordpag.aprorddir='A' and opordpag.tipcau in (select tipcau from cpdoccau where
+                       cpdoccau.refier='N' and cpdoccau.afeprc='S' and cpdoccau.afecom='S' and cpdoccau.afecau='S' and cpdoccau.afedis='R')
+                       or (opordpag.tipcau not in (select tipcau from cpdoccau where
+                       cpdoccau.refier='N' and cpdoccau.afeprc='S' and cpdoccau.afecom='S' and cpdoccau.afecau='S' and cpdoccau.afedis='R'))";
+		  $c->add(OpordpagPeer::APRORDDIR,$this->sql2,Criteria::CUSTOM);
+		}
+
         $c->add(OpordpagPeer::STATUS,"N");
         $per = OpordpagPeer::doSelect($c);
         if (!$per)

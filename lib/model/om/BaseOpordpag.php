@@ -257,6 +257,10 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 
 
 	
+	protected $aprorddir;
+
+
+	
 	protected $id;
 
 	
@@ -926,6 +930,13 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
   {
 
     return trim($this->motrectes);
+
+  }
+  
+  public function getAprorddir()
+  {
+
+    return trim($this->aprorddir);
 
   }
   
@@ -1661,6 +1672,16 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setAprorddir($v)
+	{
+
+    if ($this->aprorddir !== $v) {
+        $this->aprorddir = $v;
+        $this->modifiedColumns[] = OpordpagPeer::APRORDDIR;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -1799,7 +1820,9 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 
       $this->motrectes = $rs->getString($startcol + 61);
 
-      $this->id = $rs->getInt($startcol + 62);
+      $this->aprorddir = $rs->getString($startcol + 62);
+
+      $this->id = $rs->getInt($startcol + 63);
 
       $this->resetModified();
 
@@ -1807,7 +1830,7 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 63; 
+            return $startcol + 64; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Opordpag object", $e);
     }
@@ -2141,6 +2164,9 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 				return $this->getMotrectes();
 				break;
 			case 62:
+				return $this->getAprorddir();
+				break;
+			case 63:
 				return $this->getId();
 				break;
 			default:
@@ -2215,7 +2241,8 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 			$keys[59] => $this->getNumforpre(),
 			$keys[60] => $this->getMotrecord(),
 			$keys[61] => $this->getMotrectes(),
-			$keys[62] => $this->getId(),
+			$keys[62] => $this->getAprorddir(),
+			$keys[63] => $this->getId(),
 		);
 		return $result;
 	}
@@ -2418,6 +2445,9 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 				$this->setMotrectes($value);
 				break;
 			case 62:
+				$this->setAprorddir($value);
+				break;
+			case 63:
 				$this->setId($value);
 				break;
 		} 	}
@@ -2489,7 +2519,8 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[59], $arr)) $this->setNumforpre($arr[$keys[59]]);
 		if (array_key_exists($keys[60], $arr)) $this->setMotrecord($arr[$keys[60]]);
 		if (array_key_exists($keys[61], $arr)) $this->setMotrectes($arr[$keys[61]]);
-		if (array_key_exists($keys[62], $arr)) $this->setId($arr[$keys[62]]);
+		if (array_key_exists($keys[62], $arr)) $this->setAprorddir($arr[$keys[62]]);
+		if (array_key_exists($keys[63], $arr)) $this->setId($arr[$keys[63]]);
 	}
 
 	
@@ -2559,6 +2590,7 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(OpordpagPeer::NUMFORPRE)) $criteria->add(OpordpagPeer::NUMFORPRE, $this->numforpre);
 		if ($this->isColumnModified(OpordpagPeer::MOTRECORD)) $criteria->add(OpordpagPeer::MOTRECORD, $this->motrecord);
 		if ($this->isColumnModified(OpordpagPeer::MOTRECTES)) $criteria->add(OpordpagPeer::MOTRECTES, $this->motrectes);
+		if ($this->isColumnModified(OpordpagPeer::APRORDDIR)) $criteria->add(OpordpagPeer::APRORDDIR, $this->aprorddir);
 		if ($this->isColumnModified(OpordpagPeer::ID)) $criteria->add(OpordpagPeer::ID, $this->id);
 
 		return $criteria;
@@ -2713,6 +2745,8 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 		$copyObj->setMotrecord($this->motrecord);
 
 		$copyObj->setMotrectes($this->motrectes);
+
+		$copyObj->setAprorddir($this->aprorddir);
 
 
 		$copyObj->setNew(true);

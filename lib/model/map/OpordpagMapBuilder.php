@@ -158,6 +158,8 @@ class OpordpagMapBuilder {
 
 		$tMap->addColumn('MOTRECTES', 'Motrectes', 'string', CreoleTypes::VARCHAR, false, 500);
 
+		$tMap->addColumn('APRORDDIR', 'Aprorddir', 'string', CreoleTypes::VARCHAR, false, 1);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 
