@@ -117,7 +117,7 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 			select 2 as orden,
 			SUM(A.DIAART108) as DIAS,
 			SUM(A.VALART108) AS MONTO,
-			'DIFERENCIA PRESTACION DE ANTIGUEDAD (ART. 108 L.O.T.) '||' ('||TO_CHAR(SUM(A.DIAART108),'9999')||' DÍAS)' AS DESCRIPCION,
+			'DIFERENCIA PRESTACION DE ANTIGUEDAD (ART. 108 L.O.T.) '||' ('||TO_CHAR(SUM(A.DIAART108),'9999')||' DIAS)' AS DESCRIPCION,
 			B.CODPAR AS PARTIDA
 			From NPIMPPRESOC A,NPDEFPRELIQ B
 			where
