@@ -82,6 +82,7 @@ class teschecusActions extends autoteschecusActions
     //Verificar si el cheque esta cadudaco
     if ($this->tscheemi->getId())
     {
+      if ($this->tscheemi->getCodent()=='') {
        $c = new Criteria();
        $c->add(UsuariosPeer::LOGUSE,$this->getUser()->getAttribute('loguse'));
        $objUsuario = UsuariosPeer::doSelectOne($c);
@@ -89,6 +90,7 @@ class teschecusActions extends autoteschecusActions
        {
        	$this->tscheemi->setCodent($objUsuario->getNomuse());
        }
+      }
 
        if (Tesoreria::VerificarChequeCaducado($this->tscheemi->getNumcue(),$this->tscheemi->getFecemi(),$this->tscheemi->getStatus()))
           $this->tscheemi->setCaducado('S');
