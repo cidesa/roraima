@@ -22,6 +22,7 @@ class Dfatendocdet extends BaseDfatendocdet
   protected $dias = '';
   protected $diadoc = 0;
   protected $fecent = '';
+  protected $desrut = '';
 
   public function afterHydrate(){
 
@@ -52,6 +53,9 @@ class Dfatendocdet extends BaseDfatendocdet
     $dfrutadoc = $this->getDfrutadoc();
     if($dfrutadoc) $this->diadoc = $dfrutadoc->getDiadoc();
     else $this->diadoc = 99;
+
+    if($dfrutadoc) $this->desrut = $dfrutadoc->getDesrut();
+    else $this->desrut = 'Descripción No Encontrada';
     
     if($dias>$this->diadoc) $this->dias = "<font color=\"#FF0000\">$dias</font>";
     else $this->dias = "<font color=\"#000080\">$dias</font>";        
