@@ -22,7 +22,7 @@ generator:
 
     list:
       title:          Movimientos Segun Libros
-      filters:        [numcue, reflib, feclib, tipmov]
+      filters:        [numcue, reflib, feclib, tipmov, deslib]
       display:        [=numcue, reflib, tipmov, deslib, feclib]
       sort:           numcue
       object_actions:

@@ -3926,5 +3926,30 @@ public static function actualizarOrdenPag($orden,$grid3)
     return true;
   }
 
+  public static function aprobarOrdenesDirectas($opordpag,$grid)
+  {
+    $x=$grid[0];
+    $j=0;
+    while ($j<count($x))
+    {
+      if ($x[$j]->getAprorddir()=="1")
+      {
+        $x[$j]->setAprorddir('A');
+        $x[$j]->save();
+      }
+      else
+      {
+      	$x[$j]->setAprorddir(null);
+      	$x[$j]->save();
+      }
+      if ($x[$j]->getCheck()=="1")
+      {
+        $x[$j]->setAprorddir('R');
+        $x[$j]->save();
+      }
+      $j++;
+    }
+  }
+
 }
 ?>
