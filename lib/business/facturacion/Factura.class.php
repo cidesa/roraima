@@ -12,7 +12,7 @@
  */
 class Factura {
 
-  public static function salvarFactura($fafactur,$grid1,$grid2,$grid3,$grid4,$tipocaja,&$msj,&$msj2)
+  public static function salvarFactura($fafactur,$grid1,$grid2,$grid3,$grid4,$tipocaja,&$msj,&$msj2,&$msj3)
   {
     if (!self::grabarComprobanteOrden(&$fafactur,$grid1,&$msj))
     {
@@ -27,6 +27,11 @@ class Factura {
       }
     }
 
+    if (!self::generarAsientos(&$fafactur,$grid1,$grid2,$grid3,$grid4,&$arrasientos,&$pos,&$msj3))
+    {
+      return true;
+    }
+
     if ($fafactur->getIncluircliente()=='S')
     {
       $facliente= new Facliente();
@@ -38,8 +43,6 @@ class Factura {
       $facliente->setTipper($fafactur->getTipper());
       $facliente->save();
     }
-
-    self::generarAsientos(&$fafactur,$grid1,$grid2,$grid3,$grid4,&$arrasientos,&$pos);
 
     self::grabarComprobanteMaestro(&$fafactur,$arrasientos,&$pos);
 
@@ -308,9 +311,10 @@ class Factura {
     return $busctasig;
   }
 
-  public static function generarAsientos(&$fafactur,$grid1,$grid2,$grid3,$grid4,&$arrasientos,&$pos)
+  public static function generarAsientos(&$fafactur,$grid1,$grid2,$grid3,$grid4,&$arrasientos,&$pos,&$msj3)
   {
-  	$salactual=H::convnume($fafactur->getTottotart()) - H::convnume($fafactur->getMondesc());
+  	$msj3=-1;
+  	$salactual=H::toFloat($fafactur->getTottotart()) - H::toFloat($fafactur->getMondesc());
   	$numcomord="FA".substr($fafactur->getReffac(),2,6);
   	$correl=OrdendePago::Buscar_Correlativo();
   	//$fafactur->setNumcom($correl);
@@ -321,8 +325,13 @@ class Factura {
     if ($fafactur->getTipconpag()=='R') //Asiento Contable d Cta x Cobrar a Cliente
     {
       $ctacont=$fafactur->getCtacli();
+      if ($ctacont!=""){
       $desdoc=H::getX('codcta','Contabb','Descta',$ctacont);
       self::guardarAsientos($ctacont,$desdoc,'D',$salactual,&$arrasientos,&$pos);
+      }else{
+      	$msj3=1147;
+      	return false;
+      }
     }
     else
     {
@@ -343,8 +352,16 @@ class Factura {
             if ($reg)
             {
               $ctaban=$reg->getCodcta();
+              if ($ctaban!=""){
               $desdoc=H::getX('codcta','Contabb','Descta',$ctaban);
               self::guardarAsientos($ctaban,$desdoc,'D',$x[$j]->getMonpag(),&$arrasientos,&$pos);
+              }else{
+            	$msj3=1149;
+      	        return false;
+              }
+            }else{
+            	$msj3=1148;
+      	        return false;
             }
           }
           else  //Asiento Contable de Venta al Contado
@@ -354,8 +371,13 @@ class Factura {
             if ($reg)
             {
               $ctaVco= $reg->getCtavco();
+              if ($ctaVco!=""){
               $desdoc=H::getX('codcta','Contabb','Descta',$ctaVco);
               self::guardarAsientos($ctaVco,$desdoc,'D',$x[$j]->getMonpag(),&$arrasientos,&$pos);
+              }else{
+            	$msj3=1150;
+      	        return false;
+              }
             }
           }
         }
@@ -366,8 +388,13 @@ class Factura {
           if ($reg)
           {
             $ctaVco= $reg->getCtavco();
-            $desdoc=H::getX('codcta','Contabb','Descta',$ctaVco);
-            self::guardarAsientos($ctaVco,$desdoc,'D',$x[$j]->getMonpag(),&$arrasientos,&$pos);
+            if ($ctaVco!=""){
+              $desdoc=H::getX('codcta','Contabb','Descta',$ctaVco);
+              self::guardarAsientos($ctaVco,$desdoc,'D',$x[$j]->getMonpag(),&$arrasientos,&$pos);
+            }else{
+            	$msj3=1150;
+      	        return false;
+            }
           }
         }
 	  	$j++;
@@ -383,8 +410,13 @@ class Factura {
          if ($reg)
          {
            $ctaVco= $reg->getCtavco();
-           $desdoc=H::getX('codcta','Contabb','Descta',$ctaVco);
-           self::guardarAsientos($ctaVco,$desdoc,'C',$fafactur->getVuelto(),&$arrasientos,&$pos);
+           if ($ctaVco!="") {
+            $desdoc=H::getX('codcta','Contabb','Descta',$ctaVco);
+            self::guardarAsientos($ctaVco,$desdoc,'C',$fafactur->getVuelto(),&$arrasientos,&$pos);
+           }else{
+            	$msj3=1150;
+      	        return false;
+            }
          }
        }
        else
@@ -400,11 +432,22 @@ class Factura {
 	  {
          while($i<count($z))
          {
+           if ($z[$i]->getCoddesc()!="")
+           {
            if ($z[$i]->getCodcta()!="")
            {
             $cuencon=$z[$i]->getCodcta();
+            if ($cuencon!=""){
             $descrip=H::getX('codcta','Contabb','Descta',$cuencon);
             self::guardarAsientos($cuencon,$descrip,'D',$z[$i]->getMondesc(),&$arrasientos,&$pos);
+            }else{
+              $msj3=1151;
+      	      return false;
+            }
+           }else{
+              $msj3=1151;
+      	      return false;
+            }
            }
            $i++;
          }
@@ -416,12 +459,23 @@ class Factura {
 	  {
          while($l<count($w))
          {
+          if ($w[$l]->getCodrgo()!="")
+          {
            if ($w[$l]->getCodcta()!="")
            {
             $cuencon=$w[$l]->getCodcta();
-            $descrip=H::getX('codcta','Contabb','Descta',$cuencon);
-            self::guardarAsientos($cuencon,$descrip,'C',$w[$l]->getMonrgo(),&$arrasientos,&$pos);
-           }
+            if ($cuencon!=""){
+             $descrip=H::getX('codcta','Contabb','Descta',$cuencon);
+             self::guardarAsientos($cuencon,$descrip,'C',$w[$l]->getMonrgo(),&$arrasientos,&$pos);
+            }else{
+              $msj3=1152;
+      	      return false;
+            }
+           }else{
+              $msj3=1152;
+      	      return false;
+            }
+          }
            $l++;
          }
 	  }
@@ -475,6 +529,9 @@ class Factura {
               $descrip=H::getX('codcta','Contabb','Descta',$cta_vta);
               self::guardarAsientos($cta_vta,$descrip,'C',$monto_ingreso,&$arrasientos,&$pos);
             }
+          }else{
+              $msj3=1153;
+      	      return false;
           }
 
           if ($x[$j]->getBlanco2()!='0,00' || $fafactur->getTipref()=='VC')
@@ -500,12 +557,16 @@ class Factura {
 	              $descrip=H::getX('codcta','Contabb','Descta',$cta_provee);
 	              self::guardarAsientos($cta_provee,$descrip,'C',$monto_provee,&$arrasientos,&$pos);
 	            }
+          	}else{
+          	  $msj3=1154;
+      	      return false;
           	}
           }
 
         }
       	$j++;
       }
+     return true;
   }
 
   public static function guardarAsientos($ctacont,$desdoc,$debcre,$monto,&$arrasientos,&$pos)
@@ -601,7 +662,7 @@ class Factura {
   public static function grabarComprobanteInv(&$fafactur,$grid1,&$msj2)
   {
     $grabarcomprobanteinv=true;
-    $msj2="";
+    $msj2=-1;
     $montotot=self::calcularCostoPro($fafactur,$grid1);
     $col=self::determinarReferenciaDoc($fafactur->getTipref());
     $cant=0;

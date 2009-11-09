@@ -649,6 +649,7 @@ class fafacturActions extends autofafacturActions {
 				$monrgo = "";
 				$blanco = "";
 				$total = "";
+				$rgofijos="";
 
 				$c = new Criteria();
 				$c->add(CaregartPeer :: CODART, $codigo);
@@ -992,8 +993,12 @@ class fafacturActions extends autofafacturActions {
 			$grid2 = Herramientas :: CargarDatosGridv2($this, $this->obj2);
 			$grid3 = Herramientas :: CargarDatosGridv2($this, $this->obj3);
 			$grid4 = Herramientas :: CargarDatosGridv2($this, $this->obj4);
-			Factura :: salvarFactura($fafactur, $grid, $grid2, $grid3, $grid4, $tipocaja,&$msj,&$msj2);
-			return $msj;
+			Factura :: salvarFactura($fafactur, $grid, $grid2, $grid3, $grid4, $tipocaja,&$msj,&$msj2,&$msj3);
+
+			if ($msj!=-1) return $msj;
+			if ($msj3!=-1) return $msj3;
+
+		  return -1;
 		}
 
 	}
