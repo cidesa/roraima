@@ -457,9 +457,9 @@ public static function Validar_Datos_Npasiempcont($grid)
 	                    {
 	                    	   $val =411;
 	                    	   break;
-	                    }		
-				   }	
-				  
+	                    }
+
+
                    	$dato1=$y[$j]["codemp"];
                	   	$k=0;
                	   	foreach ($z as $n)
@@ -475,6 +475,7 @@ public static function Validar_Datos_Npasiempcont($grid)
 
                	   	$k++;
                	   	}//$j++;
+               }
                	  $j++;
                	} //foreach ($y as $m)
       }
