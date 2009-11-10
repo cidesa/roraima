@@ -1101,7 +1101,7 @@ $this->Bitacora('Guardo');
     $col2->setAlineacionContenido(Columna::CENTRO);
     $col2->setNombreCampo('numfac');
     $col2->setHTML('type="text" size="15" maxlength="20"');
-    $col2->setJScript('onkeyPress="javascript: nrofacturadeshabilitar(event,this.id)" onBlur="javascript:event.keyCode=13; nrofacturadeshabilitar(event,this.id);"');
+    $col2->setJScript('onBlur="javascript:event.keyCode=13; nrofacturadeshabilitar(event,this.id);"');
 
     $col3 = new Columna('Nro. Control');
     $col3->setTipo(Columna::TEXTO);
