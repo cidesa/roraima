@@ -5,9 +5,9 @@
  *
  * @package    Roraima
  * @subpackage nomnomcalnom
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
+ * @author     $Author:jlobaton $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id:actions.class.php 34580 2009-11-09 15:29:46Z jlobaton $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -198,7 +198,7 @@ class nomnomcalnomActions extends autonomnomcalnomActions
     else if ($this->getRequestParameter('ajax')=='2') // CALCULO DE NOMINA!!!!!!!!!!!
       {
       $codnom=$this->getRequestParameter('codnom');
-
+      $javascript = ''; $this->err="";
       if ($codnom!='')
       {
           try{
@@ -244,12 +244,35 @@ class nomnomcalnomActions extends autonomnomcalnomActions
             //ELIMINAR ESTA LINEA DESPUES DE LA PRUEBA
             $now = strtotime(date("Y-m-d H:i:s"));
 
-            CalculoNomina::ValidicionPorEmpleado($codnom,$desde,$hasta,$opsi,$msem,&$cont);
+		  ////////////   Integracion con Presupuesto   ////////////
+   		  $intpre = 'N';
+		  $varemp = $this->getUser()->getAttribute('configemp');
+		  if(is_array($varemp))
+		    if(array_key_exists('aplicacion',$varemp))
+		  	  if(array_key_exists('nomina',$varemp['aplicacion']))
+			   if(array_key_exists('modulos',$varemp['aplicacion']['nomina']))
+			     if(array_key_exists('nomnomcienom',$varemp['aplicacion']['nomina']['modulos']))
+			       if(array_key_exists('intpre',$varemp['aplicacion']['nomina']['modulos']['nomnomcienom']))
+		  		         $intpre = $varemp['aplicacion']['nomina']['modulos']['nomnomcienom']['intpre'];
+			////////////////////////////////////
+
+            CalculoNomina::ValidicionPorEmpleado($codnom,$desde,$hasta,$opsi,$msem,&$cont,$intpre,&$sobregiro);
+			if ($intpre=='S')
+			{
+	            CierredeNomina::Validarcodprenomina($codnom,$desde,&$sobregiro);
+
+				if ($sobregiro==true)
+				{
+	     	        $this->err = Herramientas::obtenerMensajeError('497');
+					//$javascript = "alert('".$err."');";
+					///$this->err1 = $err;
+				}
+			}
             //////////////////////////////////////////
             $now2 = strtotime(date("Y-m-d H:i:s"));
             $now3 = $now2-$now;
 
-            $output = '[["controlador","no",""],["tiempo","'.$now3.'",""]]';
+            $output = '[["controlador","no",""],["tiempo","'.$now3.'",""],["javascript","'.$javascript.'",""]]';
           }
           else
           {
@@ -262,9 +285,10 @@ class nomnomcalnomActions extends autonomnomcalnomActions
               $sql = "drop table tmpcalculo";
               Herramientas::insertarRegistros($sql);
             }
+
+
           ///////////////////////////////////////////////
           $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
-          //return sfView::HEADER_ONLY;
           $this->configGrid($codnom);
       }else
       {
@@ -339,9 +363,9 @@ class nomnomcalnomActions extends autonomnomcalnomActions
   }
 
 
-  
-  
-  
+
+
+
   /**
    *
    * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario

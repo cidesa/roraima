@@ -5,9 +5,9 @@
  *
  * @package    Roraima
  * @subpackage nomnomcienom
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * @version    SVN: $Id$
+ * @author     $Author:jlobaton $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id:actions.class.php 34527 2009-11-06 15:17:11Z jlobaton $
+ * @version    SVN: $Id:actions.class.php 34527 2009-11-06 15:17:11Z jlobaton $
  */
 class nomnomcienomActions extends sfActions
 {
@@ -76,10 +76,31 @@ class nomnomcienomActions extends sfActions
   {
 	$codigo=$this->getRequestParameter('codigo');
 	$fecha=$this->getRequestParameter('fecha');
-	CierredeNomina::procesoCierre($codigo,$fecha,&$msj);
+
+   		  $intpre = 'N';     //Integracion con Presupuesto
+		  $varemp = $this->getUser()->getAttribute('configemp');
+		  if(is_array($varemp))
+		    if(array_key_exists('aplicacion',$varemp))
+		  	  if(array_key_exists('nomina',$varemp['aplicacion']))
+			   if(array_key_exists('modulos',$varemp['aplicacion']['nomina']))
+			     if(array_key_exists('nomnomcienom',$varemp['aplicacion']['nomina']['modulos']))
+			       if(array_key_exists('intpre',$varemp['aplicacion']['nomina']['modulos']['nomnomcienom']))
+		  		       $intpre = $varemp['aplicacion']['nomina']['modulos']['nomnomcienom']['intpre'];
+
+
+	CierredeNomina::procesoCierre($codigo,$fecha,&$msj,$intpre);
 	if ($msj=='1')
-	{ $this->setFlash('notice2', 'La Nómina no puede ser cerrada');}
-	else { $this->setFlash('notice', 'La Nómina fue Cerrada Satisfactoriamente');}
+	{
+		$this->setFlash('notice2', 'La Nómina no puede ser cerrada');
+	}elseif ($msj=='497')
+	{
+        $err = Herramientas::obtenerMensajeError($msj);
+        $this->setFlash('error', $err);
+
+	}else if ($msj==''){
+		$this->setFlash('notice', 'La Nómina fue Cerrada Satisfactoriamente');
+	}
+
 	return $this->redirect('nomnomcienom/index');
   }
 }

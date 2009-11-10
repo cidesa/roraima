@@ -6,11 +6,17 @@
 <div id="sf_admin_container">
 <h1><?php echo __('Cierre de Nómina', array()) ?></h1>
 <div id="sf_admin_content">
-<?php if ($sf_flash->has('notice')): ?>
+<?php if ($sf_flash->has('notice')){ ?>
 <div class="save-ok">
 <h2><?php echo __($sf_flash->get('notice')) ?></h2>
 </div>
-<?php endif; ?>
+
+<?php }else if ($sf_flash->has('error')){ ?>
+<div class="save-error">
+<h2><?php echo __($sf_flash->get('error')) ?></h2>
+</div>
+
+<?php } ?>
 <?php echo form_tag('nomnomcienom/index', array(
   'id'        => 'sf_admin_edit_form',
   'name'      => 'sf_admin_edit_form',
@@ -21,7 +27,7 @@
 
 <div class="form-row">
 <fieldset id="sf_fieldset_none" class="">
-<legend><?php echo __('Tipo de Nomina') ?></legend>
+<h2><?php echo __('Tipo de Nomina') ?></h2>
 <div class="form-row">
 <table>
 <tr>
@@ -58,7 +64,8 @@
 <br>
 <?php echo label_for('fecha',__('Última Fecha de Procesamiento') , 'class="required" Style="width:110px"') ?>
 <?php echo input_tag('fecha','', array(
- 'size' => 15,
+ 'size' => 10,
+ 'maxlength' => 10,
  'rich' => true,
  'readonly' => true,
  'date_format' => 'dd/MM/yyyy',
@@ -72,10 +79,10 @@
 <div id="divAvisos">
 <table width="100%">
 <tr>
-<th width="80%">
+<th width="90%">
 </th>
-<th width="20%">
-<input type="button" name="Submit" value="Cerrar" disabled="true"/>
+<th width="10%">
+	<!--input type="button" name="Submit" value="      Cerrar" class="sf_admin_action_cancel" disabled="true"/-->
 </th>
 </tr>
 </table>
