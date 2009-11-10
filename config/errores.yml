@@ -814,7 +814,10 @@
   msj: El Grid no puede estar Vacio
 496:
   cod: 496
-  msj: Faltan Datos en el Grid  
+  msj: Faltan Datos en el Grid
+497:
+  cod: 497
+  msj: Existen problemas con la disponibilidad presupuestaria para esta nomina
 ###############OBRAS################
 1000:
     cod: 1000
@@ -1210,7 +1213,7 @@
 8884:
   cod: 8884
   msj:  Error al Grabar los Uso Especificos
- #MODULO DE GESTION DE INDICADORES 
+ #MODULO DE GESTION DE INDICADORES
 11101:
   cod: 11101
   msj:  La Programacion esta cerrada para la Revision y el Año seleccionado
