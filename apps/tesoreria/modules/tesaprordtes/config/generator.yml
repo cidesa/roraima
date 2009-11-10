@@ -5,6 +5,7 @@ generator:
     theme:            cidesaGenerator
     fields:
       grid: { name: . }
+      comprobante: { name: . }
     edit:
       title:          Recepción de Órdenes Aprobadas
       display:
