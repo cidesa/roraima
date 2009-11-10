@@ -7,7 +7,7 @@
  * @subpackage almentalm
  * @author     $Author$ <desarrollo@cidesa.com.ve>
  * @version SVN: $Id$
- * 
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -102,7 +102,7 @@ $this->Bitacora('Guardo');
 
 
   /**
-   * Función principal para procesar la eliminación de registros 
+   * Función principal para procesar la eliminación de registros
    * en el formulario.
    *
    */
@@ -134,7 +134,7 @@ $this->Bitacora('Guardo');
   }
 
   /**
-   * Actualiza la informacion que viene de la vista 
+   * Actualiza la informacion que viene de la vista
    * luego de un get/post en el objeto principal del modelo base del formulario.
    *
    */
@@ -514,6 +514,14 @@ $this->Bitacora('Guardo');
 		$col9->setAlineacionContenido(Columna::CENTRO);
 	    $col9->setHTML('type="text" size="30x1" readonly=true');
 
+	    $col10 = new Columna('Fecha de Vencimiento');
+		$col10->setTipo(Columna::FECHA);
+		$col10->setEsGrabable(true);
+		$col10->setNombreCampo('fecven');
+		$col10->setAlineacionObjeto(Columna::CENTRO);
+		$col10->setAlineacionContenido(Columna::CENTRO);
+	    $col10->setHTML('type="text" size="10" ');
+
 
         // Se guardan las columnas en el objetos de opciones
         $opciones->addColumna($col1);
@@ -525,14 +533,15 @@ $this->Bitacora('Guardo');
         $opciones->addColumna($col7);
         $opciones->addColumna($col8);
         $opciones->addColumna($col9);
+        $opciones->addColumna($col10);
 	    // Ee genera el arreglo de opciones necesario para generar el grid
         $this->obj = $opciones->getConfig($per);
 
 	}
 
-  
-  
-  
+
+
+
   /**
    *
    * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario

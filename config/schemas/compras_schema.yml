@@ -962,6 +962,17 @@ propel:
     codubi:
       type: VARCHAR
       size: 20
+    nomcli:
+      type: VARCHAR
+      size: 100
+    cancaj:
+      type: NUMERIC
+      size: 10
+      scale: 2
+    canjau:
+      type: NUMERIC
+      size: 10
+      scale: 2
     id:
       type: integer
       required: true
@@ -2341,6 +2352,8 @@ propel:
       type: VARCHAR
       syze: 20
       required: true
+    fecven:
+      type: DATE
     id:
       type: INTEGER
       required: true

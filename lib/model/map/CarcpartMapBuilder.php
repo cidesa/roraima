@@ -66,6 +66,12 @@ class CarcpartMapBuilder {
 
 		$tMap->addColumn('CODUBI', 'Codubi', 'string', CreoleTypes::VARCHAR, false, 20);
 
+		$tMap->addColumn('NOMCLI', 'Nomcli', 'string', CreoleTypes::VARCHAR, false, 100);
+
+		$tMap->addColumn('CANCAJ', 'Cancaj', 'double', CreoleTypes::NUMERIC, false, 10);
+
+		$tMap->addColumn('CANJAU', 'Canjau', 'double', CreoleTypes::NUMERIC, false, 10);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

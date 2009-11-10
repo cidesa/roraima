@@ -22,7 +22,7 @@
 <?php echo input_hidden_tag('existeubicacion', '') ?>
 
 <fieldset id="sf_fieldset_none" class="">
-<legend> <?php echo __('Recepción')?></legend>
+<h2> <?php echo __('Recepción')?></h2>
 <div class="form-row">
 <table>
 <tr>
@@ -173,7 +173,7 @@
 </table>
 <br>
 <table>
-<tr>
+<tr align="left">
 <th>
   <?php echo label_for('carcpart[numfac]', __($labels['carcpart{numfac}']),'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('carcpart{numfac}')): ?> form-error<?php endif; ?>">
@@ -217,6 +217,45 @@
   'control_name' => 'carcpart[monrcp]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
+</th>
+</tr>
+
+<tr align="left">
+<th colspan="4">
+
+
+  <?php echo label_for('carcpart[nomcli]', __($recmer=='S' ? $labels['carcpart{nomcli}'] : '' ) , 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('carcpart{nomcli}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('carcpart{nomcli}')): ?>
+    <?php echo form_error('carcpart{nomcli}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = get_partial('nomcli', array('type' => 'edit', 'carcpart' => $carcpart, 'recmer' => $recmer )); echo $value ? $value : '&nbsp;' ?>
+    </div>
+
+
+<br>
+
+  <?php echo label_for('carcpart[cancaj]', __($recmer=='S' ? $labels['carcpart{cancaj}'] : '' ) , 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('carcpart{cancaj}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('carcpart{cancaj}')): ?>
+    <?php echo form_error('carcpart{cancaj}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = get_partial('cancaj', array('type' => 'edit', 'carcpart' => $carcpart, 'recmer' => $recmer )); echo $value ? $value : '&nbsp;' ?>
+    </div>
+
+<br>
+
+  <?php echo label_for('carcpart[canjau]', __($recmer=='S' ? $labels['carcpart{canjau}'] : '' ) , 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('carcpart{canjau}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('carcpart{canjau}')): ?>
+    <?php echo form_error('carcpart{canjau}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = get_partial('canjau', array('type' => 'edit', 'carcpart' => $carcpart, 'recmer' => $recmer )); echo $value ? $value : '&nbsp;' ?>
+    </div>
+
 </th>
 </tr>
 </table>
