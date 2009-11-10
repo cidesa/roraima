@@ -1435,7 +1435,7 @@
 
   function nrofacturadeshabilitar(e,id)
   {
-   if (e.keyCode==13)
+   if (e.keyCode==13 || e.keyCode==9)
    {
      var aux = id.split("_");
      var name=aux[0];
@@ -1452,11 +1452,49 @@
      var tipotrans=name+"_"+fil+"_"+tipo;
      var facafect=name+"_"+fil+"_"+afectada;
 
-     $(notdeb).disabled=true;
-     $(notcre).disabled=true;
-     $(tipotrans).value="01";
-     $(facafect).disabled=true;
+     if (!numfac_repetido(id))
+     {
+       $(notdeb).disabled=true;
+       $(notcre).disabled=true;
+       $(tipotrans).value="01";
+       $(facafect).disabled=true;
+     }else{
+      alert_('El N&uacute;mero de Factura esta Repetido');
+      $(id).value="";
+      $(id).focus();
+     }
    }
+ }
+
+  function numfac_repetido(id)
+ {
+   var aux = id.split("_");
+   var name=aux[0];
+   var fila=aux[1];
+   var col=parseInt(aux[2]);
+
+   var numfac=$(id).value;
+
+   var numfacrepetido=false;
+   var am=totalregistros('bx',2,80);
+   var i=0;
+   while (i<am)
+   {
+    var codigo="bx"+"_"+i+"_2";
+
+    var numfac2=$(codigo).value;
+
+    if (i!=fila)
+    {
+      if (numfac==numfac2)
+      {
+        numfacrepetido=true;
+        break;
+      }
+    }
+   i++;
+   }
+   return numfacrepetido;
  }
 
  function debitodeshabilitar(e,id)
