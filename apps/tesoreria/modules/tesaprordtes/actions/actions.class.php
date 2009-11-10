@@ -47,9 +47,20 @@ class tesaprordtesActions extends autotesaprordtesActions
 	       }
 	       }
 	     }
+    $this->comprobaut="";
+    $varemp = $this->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('generales',$varemp))
+	{
+		if(array_key_exists('comprobaut',$varemp['generales']))
+		{
+		   $this->comprobaut=$varemp['generales']['comprobaut'];
+		}
+	}
 
     $this->configGrid();
     $this->opordpag->setFilasord($this->filas);
+    $this->opordpag->setObserve($this->comprobaut);
   }
 
 
