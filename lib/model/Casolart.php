@@ -65,6 +65,13 @@ class Casolart extends BaseCasolart
   	  if ($resul)
   	  {
   	  	$eti="SOLICITUD APROBADA";
+  	  	  $z= new Criteria();
+	  	  $z->add(CaordcomPeer::REFSOL,self::getReqart());
+	  	  $resul2= CaordcomPeer::doSelectOne($z);
+	  	  if ($resul2)
+	  	  {
+            $eti="LA SOLICITUD TIENE ASOCIADA UNA ORDEN DE COMPRA N° ".$resul2->getOrdcom()." DE FECHA ".date('d/m/Y',strtotime($resul2->getFecord()));
+	  	  }
   	  }else
   	  {
   	  	$eti="SOLICITUD NO APROBADA";
