@@ -188,48 +188,42 @@ class pagemiordActions extends autopagemiordActions
       }else
       {
 
-      	$o= new Criteria();
-	    $o->add(OpfacturPeer::NUMORD,$this->opordpag->getNumord());
-	    $data= OpfacturPeer::doSelect($o);
-	    if (!$data)
-	    {
-	      	$this->configGridFactura();
-		    $factura=Herramientas::CargarDatosGrid($this,$this->obj2,true);
-		    $cedrif=$this->opordpag->getCedrif();
+      	$this->configGridFactura();
+	    $factura=Herramientas::CargarDatosGrid($this,$this->obj2,true);
+	    $cedrif=$this->opordpag->getCedrif();
 
-		    $l= new Criteria();
-		    $l->add(OpordpagPeer::NUMORD,$this->opordpag->getNumord(),Criteria::NOT_EQUAL);
-		    $l->add(OpordpagPeer::CEDRIF,$cedrif);
-		    $benefi= OpordpagPeer::doSelect($l);
-		    if ($benefi)
-		    {
-		      foreach ($benefi as $provee)
-		      {
-		      	$y= new Criteria();
-		      	$y->add(OpfacturPeer::NUMORD,$provee->getNumord());
-		      	$resul= OpfacturPeer::doSelect($y);
-		      	if ($resul)
-		      	{
-		           foreach ($resul as $factur)
-		           {
-		           	 $t=0;
-				     $u=$factura[0];
-				     while ($t<count($u))
-				     {
-		               if ($factur->getNumfac()==$u[$t]["numfac"])
-		               {
-		               	$this->coderror4=532;
-		                return false;
-		               	break;
-		               }
-				       $t++;
-				     }
-		           }
-		      	}
-		      }
-		    }
+	    $l= new Criteria();
+	    $l->add(OpordpagPeer::CEDRIF,$cedrif);
+	    $benefi= OpordpagPeer::doSelect($l);
+	    if ($benefi)
+	    {
+	      foreach ($benefi as $provee)
+	      {
+	      	$y= new Criteria();
+	      	$y->add(OpfacturPeer::NUMORD,$provee->getNumord());
+	      	$resul= OpfacturPeer::doSelect($y);
+	      	if ($resul)
+	      	{
+	           foreach ($resul as $factur)
+	           {
+	           	 $t=0;
+			     $u=$factura[0];
+			     while ($t<count($u))
+			     {
+	               if ($factur->getNumfac()==$u[$t]["numfac"])
+	               {
+	               	$this->coderror4=532;
+	                return false;
+	               	break;
+	               }
+			       $t++;
+			     }
+	           }
+	      	}
+	      }
 	    }
-      }
+
+	  }
       return true;
     }else return true;
   }
