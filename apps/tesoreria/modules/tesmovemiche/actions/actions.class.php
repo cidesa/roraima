@@ -750,10 +750,19 @@ $this->Bitacora('Guardo');
 		     }
 		if ($this->aprorddir=="S")
 		{
+		  if (trim($cedrif)!="") {
+
 		  $this->sql2="opordpag.aprorddir='A' and opordpag.tipcau in (select tipcau from cpdoccau where
                        cpdoccau.refier='N' and cpdoccau.afeprc='S' and cpdoccau.afecom='S' and cpdoccau.afecau='S' and cpdoccau.afedis='R')
                        or (opordpag.tipcau not in (select tipcau from cpdoccau where
+                       cpdoccau.refier='N' and cpdoccau.afeprc='S' and cpdoccau.afecom='S' and cpdoccau.afecau='S' and cpdoccau.afedis='R')
+                       and opordpag.CEDRIF='".$cedrif."' AND opordpag.FECEMI<='".$fecemi."')";
+		  }else{
+		  	$this->sql2="opordpag.aprorddir='A' and opordpag.tipcau in (select tipcau from cpdoccau where
+                       cpdoccau.refier='N' and cpdoccau.afeprc='S' and cpdoccau.afecom='S' and cpdoccau.afecau='S' and cpdoccau.afedis='R')
+                       or (opordpag.tipcau not in (select tipcau from cpdoccau where
                        cpdoccau.refier='N' and cpdoccau.afeprc='S' and cpdoccau.afecom='S' and cpdoccau.afecau='S' and cpdoccau.afedis='R'))";
+		  }
 		  $c->add(OpordpagPeer::APRORDDIR,$this->sql2,Criteria::CUSTOM);
 		}
 
