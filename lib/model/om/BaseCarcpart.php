@@ -73,6 +73,18 @@ abstract class BaseCarcpart extends BaseObject  implements Persistent {
 
 
 	
+	protected $nomcli;
+
+
+	
+	protected $cancaj;
+
+
+	
+	protected $canjau;
+
+
+	
 	protected $id;
 
 	
@@ -225,6 +237,29 @@ abstract class BaseCarcpart extends BaseObject  implements Persistent {
 
   }
   
+  public function getNomcli()
+  {
+
+    return trim($this->nomcli);
+
+  }
+  
+  public function getCancaj($val=false)
+  {
+
+    if($val) return number_format($this->cancaj,2,',','.');
+    else return $this->cancaj;
+
+  }
+  
+  public function getCanjau($val=false)
+  {
+
+    if($val) return number_format($this->canjau,2,',','.');
+    else return $this->canjau;
+
+  }
+  
   public function getId()
   {
 
@@ -244,6 +279,11 @@ abstract class BaseCarcpart extends BaseObject  implements Persistent {
 	
 	public function setFecrcp($v)
 	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
@@ -382,6 +422,11 @@ abstract class BaseCarcpart extends BaseObject  implements Persistent {
 	public function setFecfac($v)
 	{
 
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecfac] from input: " . var_export($v, true));
@@ -402,6 +447,36 @@ abstract class BaseCarcpart extends BaseObject  implements Persistent {
     if ($this->codubi !== $v) {
         $this->codubi = $v;
         $this->modifiedColumns[] = CarcpartPeer::CODUBI;
+      }
+  
+	} 
+	
+	public function setNomcli($v)
+	{
+
+    if ($this->nomcli !== $v) {
+        $this->nomcli = $v;
+        $this->modifiedColumns[] = CarcpartPeer::NOMCLI;
+      }
+  
+	} 
+	
+	public function setCancaj($v)
+	{
+
+    if ($this->cancaj !== $v) {
+        $this->cancaj = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CarcpartPeer::CANCAJ;
+      }
+  
+	} 
+	
+	public function setCanjau($v)
+	{
+
+    if ($this->canjau !== $v) {
+        $this->canjau = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CarcpartPeer::CANJAU;
       }
   
 	} 
@@ -452,7 +527,13 @@ abstract class BaseCarcpart extends BaseObject  implements Persistent {
 
       $this->codubi = $rs->getString($startcol + 15);
 
-      $this->id = $rs->getInt($startcol + 16);
+      $this->nomcli = $rs->getString($startcol + 16);
+
+      $this->cancaj = $rs->getFloat($startcol + 17);
+
+      $this->canjau = $rs->getFloat($startcol + 18);
+
+      $this->id = $rs->getInt($startcol + 19);
 
       $this->resetModified();
 
@@ -460,7 +541,7 @@ abstract class BaseCarcpart extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 17; 
+            return $startcol + 20; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Carcpart object", $e);
     }
@@ -656,6 +737,15 @@ abstract class BaseCarcpart extends BaseObject  implements Persistent {
 				return $this->getCodubi();
 				break;
 			case 16:
+				return $this->getNomcli();
+				break;
+			case 17:
+				return $this->getCancaj();
+				break;
+			case 18:
+				return $this->getCanjau();
+				break;
+			case 19:
 				return $this->getId();
 				break;
 			default:
@@ -684,7 +774,10 @@ abstract class BaseCarcpart extends BaseObject  implements Persistent {
 			$keys[13] => $this->getNroent(),
 			$keys[14] => $this->getFecfac(),
 			$keys[15] => $this->getCodubi(),
-			$keys[16] => $this->getId(),
+			$keys[16] => $this->getNomcli(),
+			$keys[17] => $this->getCancaj(),
+			$keys[18] => $this->getCanjau(),
+			$keys[19] => $this->getId(),
 		);
 		return $result;
 	}
@@ -749,6 +842,15 @@ abstract class BaseCarcpart extends BaseObject  implements Persistent {
 				$this->setCodubi($value);
 				break;
 			case 16:
+				$this->setNomcli($value);
+				break;
+			case 17:
+				$this->setCancaj($value);
+				break;
+			case 18:
+				$this->setCanjau($value);
+				break;
+			case 19:
 				$this->setId($value);
 				break;
 		} 	}
@@ -774,7 +876,10 @@ abstract class BaseCarcpart extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[13], $arr)) $this->setNroent($arr[$keys[13]]);
 		if (array_key_exists($keys[14], $arr)) $this->setFecfac($arr[$keys[14]]);
 		if (array_key_exists($keys[15], $arr)) $this->setCodubi($arr[$keys[15]]);
-		if (array_key_exists($keys[16], $arr)) $this->setId($arr[$keys[16]]);
+		if (array_key_exists($keys[16], $arr)) $this->setNomcli($arr[$keys[16]]);
+		if (array_key_exists($keys[17], $arr)) $this->setCancaj($arr[$keys[17]]);
+		if (array_key_exists($keys[18], $arr)) $this->setCanjau($arr[$keys[18]]);
+		if (array_key_exists($keys[19], $arr)) $this->setId($arr[$keys[19]]);
 	}
 
 	
@@ -798,6 +903,9 @@ abstract class BaseCarcpart extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CarcpartPeer::NROENT)) $criteria->add(CarcpartPeer::NROENT, $this->nroent);
 		if ($this->isColumnModified(CarcpartPeer::FECFAC)) $criteria->add(CarcpartPeer::FECFAC, $this->fecfac);
 		if ($this->isColumnModified(CarcpartPeer::CODUBI)) $criteria->add(CarcpartPeer::CODUBI, $this->codubi);
+		if ($this->isColumnModified(CarcpartPeer::NOMCLI)) $criteria->add(CarcpartPeer::NOMCLI, $this->nomcli);
+		if ($this->isColumnModified(CarcpartPeer::CANCAJ)) $criteria->add(CarcpartPeer::CANCAJ, $this->cancaj);
+		if ($this->isColumnModified(CarcpartPeer::CANJAU)) $criteria->add(CarcpartPeer::CANJAU, $this->canjau);
 		if ($this->isColumnModified(CarcpartPeer::ID)) $criteria->add(CarcpartPeer::ID, $this->id);
 
 		return $criteria;
@@ -860,6 +968,12 @@ abstract class BaseCarcpart extends BaseObject  implements Persistent {
 		$copyObj->setFecfac($this->fecfac);
 
 		$copyObj->setCodubi($this->codubi);
+
+		$copyObj->setNomcli($this->nomcli);
+
+		$copyObj->setCancaj($this->cancaj);
+
+		$copyObj->setCanjau($this->canjau);
 
 
 		$copyObj->setNew(true);

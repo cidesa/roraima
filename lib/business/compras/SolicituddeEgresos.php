@@ -943,7 +943,12 @@ class SolicituddeEgresos
     }
     else if ($tiprgo=='P')
     {
-     $recargo = (($monbasart*$monrgo)/100);
+    	//echo " monbasart: ".$monbasart;
+    	//echo " monrgo: ".$monrgo." ";
+
+      $recargo = (($monbasart*$monrgo)/100);
+      //echo "calculo > ".$recargo;
+     //exit();
     }
     else
     {

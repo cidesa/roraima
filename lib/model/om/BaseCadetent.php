@@ -4,62 +4,66 @@
 abstract class BaseCadetent extends BaseObject  implements Persistent {
 
 
-	
+
 	protected static $peer;
 
 
-	
+
 	protected $rcpart;
 
 
-	
+
 	protected $codart;
 
 
-	
+
 	protected $canrec;
 
 
-	
+
 	protected $montot;
 
 
-	
+
 	protected $cosart;
 
 
-	
+
 	protected $codalm;
 
 
-	
+
 	protected $codubi;
 
 
-	
+
+	protected $fecven;
+
+
+
 	protected $id;
 
-	
+
 	protected $alreadyInSave = false;
 
-	
+
 	protected $alreadyInValidation = false;
 
-  
+
   public function getRcpart()
   {
 
     return trim($this->rcpart);
 
   }
-  
+
   public function getCodart()
   {
 
     return trim($this->codart);
 
   }
-  
+
   public function getCanrec($val=false)
   {
 
@@ -67,7 +71,7 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
     else return $this->canrec;
 
   }
-  
+
   public function getMontot($val=false)
   {
 
@@ -75,7 +79,7 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
     else return $this->montot;
 
   }
-  
+
   public function getCosart($val=false)
   {
 
@@ -83,28 +87,49 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
     else return $this->cosart;
 
   }
-  
+
   public function getCodalm()
   {
 
     return trim($this->codalm);
 
   }
-  
+
   public function getCodubi()
   {
 
     return trim($this->codubi);
 
   }
-  
+
+  public function getFecven($format = 'Y-m-d')
+  {
+    if ($this->fecven === null || $this->fecven === '') {
+      return null;
+    } elseif (!is_int($this->fecven)) {
+            $ts = adodb_strtotime($this->fecven);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecven] as date/time value: " . var_export($this->fecven, true));
+      }
+    } else {
+      $ts = $this->fecven;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+
   public function getId()
   {
 
     return $this->id;
 
   }
-	
+
 	public function setRcpart($v)
 	{
 
@@ -112,9 +137,9 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
         $this->rcpart = $v;
         $this->modifiedColumns[] = CadetentPeer::RCPART;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCodart($v)
 	{
 
@@ -122,9 +147,9 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
         $this->codart = $v;
         $this->modifiedColumns[] = CadetentPeer::CODART;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCanrec($v)
 	{
 
@@ -132,9 +157,9 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
         $this->canrec = Herramientas::toFloat($v);
         $this->modifiedColumns[] = CadetentPeer::CANREC;
       }
-  
-	} 
-	
+
+	}
+
 	public function setMontot($v)
 	{
 
@@ -142,9 +167,9 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
         $this->montot = Herramientas::toFloat($v);
         $this->modifiedColumns[] = CadetentPeer::MONTOT;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCosart($v)
 	{
 
@@ -152,9 +177,9 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
         $this->cosart = Herramientas::toFloat($v);
         $this->modifiedColumns[] = CadetentPeer::COSART;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCodalm($v)
 	{
 
@@ -162,9 +187,9 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
         $this->codalm = $v;
         $this->modifiedColumns[] = CadetentPeer::CODALM;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCodubi($v)
 	{
 
@@ -172,9 +197,31 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
         $this->codubi = $v;
         $this->modifiedColumns[] = CadetentPeer::CODUBI;
       }
-  
-	} 
-	
+
+	}
+
+	public function setFecven($v)
+	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecven] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecven !== $ts) {
+      $this->fecven = $ts;
+      $this->modifiedColumns[] = CadetentPeer::FECVEN;
+    }
+
+	}
+
 	public function setId($v)
 	{
 
@@ -182,9 +229,9 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
         $this->id = $v;
         $this->modifiedColumns[] = CadetentPeer::ID;
       }
-  
-	} 
-  
+
+	}
+
   public function hydrate(ResultSet $rs, $startcol = 1)
   {
     try {
@@ -203,7 +250,9 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
 
       $this->codubi = $rs->getString($startcol + 6);
 
-      $this->id = $rs->getInt($startcol + 7);
+      $this->fecven = $rs->getDate($startcol + 7, null);
+
+      $this->id = $rs->getInt($startcol + 8);
 
       $this->resetModified();
 
@@ -211,7 +260,7 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 8; 
+            return $startcol + 9;
     } catch (Exception $e) {
       throw new PropelException("Error populating Cadetent object", $e);
     }
@@ -222,8 +271,8 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
   {
 
   }
-    
-  
+
+
   public function __call($m, $a)
     {
       $prefijo = substr($m,0,3);
@@ -237,7 +286,7 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
 
     }
 
-	
+
 	public function delete($con = null)
 	{
 		if ($this->isDeleted()) {
@@ -259,7 +308,7 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	public function save($con = null)
 	{
 		if ($this->isDeleted()) {
@@ -281,7 +330,7 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	protected function doSave($con)
 	{
 		$affectedRows = 0; 		if (!$this->alreadyInSave) {
@@ -291,8 +340,8 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
 						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = CadetentPeer::doInsert($this, $con);
-					$affectedRows += 1; 										 										 
-					$this->setId($pk);  
+					$affectedRows += 1;
+					$this->setId($pk);
 					$this->setNew(false);
 				} else {
 					$affectedRows += CadetentPeer::doUpdate($this, $con);
@@ -302,17 +351,17 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
-	} 
-	
+	}
+
 	protected $validationFailures = array();
 
-	
+
 	public function getValidationFailures()
 	{
 		return $this->validationFailures;
 	}
 
-	
+
 	public function validate($columns = null)
 	{
 		$res = $this->doValidate($columns);
@@ -325,7 +374,7 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	protected function doValidate($columns = null)
 	{
 		if (!$this->alreadyInValidation) {
@@ -347,14 +396,14 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
 		return (!empty($failureMap) ? $failureMap : true);
 	}
 
-	
+
 	public function getByName($name, $type = BasePeer::TYPE_PHPNAME)
 	{
 		$pos = CadetentPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->getByPosition($pos);
 	}
 
-	
+
 	public function getByPosition($pos)
 	{
 		switch($pos) {
@@ -380,6 +429,9 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
 				return $this->getCodubi();
 				break;
 			case 7:
+				return $this->getFecven();
+				break;
+			case 8:
 				return $this->getId();
 				break;
 			default:
@@ -387,7 +439,7 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
 				break;
 		} 	}
 
-	
+
 	public function toArray($keyType = BasePeer::TYPE_PHPNAME)
 	{
 		$keys = CadetentPeer::getFieldNames($keyType);
@@ -399,19 +451,20 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
 			$keys[4] => $this->getCosart(),
 			$keys[5] => $this->getCodalm(),
 			$keys[6] => $this->getCodubi(),
-			$keys[7] => $this->getId(),
+			$keys[7] => $this->getFecven(),
+			$keys[8] => $this->getId(),
 		);
 		return $result;
 	}
 
-	
+
 	public function setByName($name, $value, $type = BasePeer::TYPE_PHPNAME)
 	{
 		$pos = CadetentPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->setByPosition($pos, $value);
 	}
 
-	
+
 	public function setByPosition($pos, $value)
 	{
 		switch($pos) {
@@ -437,11 +490,14 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
 				$this->setCodubi($value);
 				break;
 			case 7:
+				$this->setFecven($value);
+				break;
+			case 8:
 				$this->setId($value);
 				break;
 		} 	}
 
-	
+
 	public function fromArray($arr, $keyType = BasePeer::TYPE_PHPNAME)
 	{
 		$keys = CadetentPeer::getFieldNames($keyType);
@@ -453,10 +509,11 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[4], $arr)) $this->setCosart($arr[$keys[4]]);
 		if (array_key_exists($keys[5], $arr)) $this->setCodalm($arr[$keys[5]]);
 		if (array_key_exists($keys[6], $arr)) $this->setCodubi($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setId($arr[$keys[7]]);
+		if (array_key_exists($keys[7], $arr)) $this->setFecven($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setId($arr[$keys[8]]);
 	}
 
-	
+
 	public function buildCriteria()
 	{
 		$criteria = new Criteria(CadetentPeer::DATABASE_NAME);
@@ -468,12 +525,13 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CadetentPeer::COSART)) $criteria->add(CadetentPeer::COSART, $this->cosart);
 		if ($this->isColumnModified(CadetentPeer::CODALM)) $criteria->add(CadetentPeer::CODALM, $this->codalm);
 		if ($this->isColumnModified(CadetentPeer::CODUBI)) $criteria->add(CadetentPeer::CODUBI, $this->codubi);
+		if ($this->isColumnModified(CadetentPeer::FECVEN)) $criteria->add(CadetentPeer::FECVEN, $this->fecven);
 		if ($this->isColumnModified(CadetentPeer::ID)) $criteria->add(CadetentPeer::ID, $this->id);
 
 		return $criteria;
 	}
 
-	
+
 	public function buildPkeyCriteria()
 	{
 		$criteria = new Criteria(CadetentPeer::DATABASE_NAME);
@@ -483,19 +541,19 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
 		return $criteria;
 	}
 
-	
+
 	public function getPrimaryKey()
 	{
 		return $this->getId();
 	}
 
-	
+
 	public function setPrimaryKey($key)
 	{
 		$this->setId($key);
 	}
 
-	
+
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
@@ -513,13 +571,15 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
 
 		$copyObj->setCodubi($this->codubi);
 
+		$copyObj->setFecven($this->fecven);
+
 
 		$copyObj->setNew(true);
 
-		$copyObj->setId(NULL); 
+		$copyObj->setId(NULL);
 	}
 
-	
+
 	public function copy($deepCopy = false)
 	{
 				$clazz = get_class($this);
@@ -528,7 +588,7 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
 		return $copyObj;
 	}
 
-	
+
 	public function getPeer()
 	{
 		if (self::$peer === null) {
@@ -537,4 +597,4 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
 		return self::$peer;
 	}
 
-} 
+}

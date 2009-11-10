@@ -18,6 +18,10 @@ generator:
       desforent:   { name : Forma de Entrega}
       codubi:      { name: Código de la Ubicación}
       nomubi:      { name: Nombre Ubicación}
+      nomcli:      { name: Nombre Cliente, params: maxlenght=100}
+      cancaj:      { name: Cantidad de Cajas, params: maxlenght=14}
+      canjau:      { name: Cantidad de Jaulas, params: maxlenght=14}
+
     list:
       title:          Recepción de Articulos por Orden de Compra
       display:        [=rcpart, fecrcp, desrcp, ordcom]
@@ -29,7 +33,8 @@ generator:
       max_per_page:   10
     edit:
       title:          Recepción de Articulos por Orden de Compra
-      display:        [=rcpart, fecrcp, codalm, nomalm, ordcom, fecord, desrcp, codpro, nompro, desconpag, desforent, numfac, nroent, monrcp, codubi, nomubi]
+      display:        [rcpart, fecrcp, codalm, nomalm, ordcom, fecord, desrcp, codpro, nompro, desconpag, desforent, numfac, nroent, monrcp, _nomcli, _cancaj, _canjau, codubi, nomubi]
+      #display:        [_nomcli]
       actions:
         _list:        ~
         _save:        ~

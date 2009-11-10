@@ -807,6 +807,22 @@ $this->Bitacora('Guardo');
     {
       $this->carcpart->setNomubi($carcpart['nomubi']);
     }
+
+    if (isset($carcpart['canjau']))
+    {
+      $this->carcpart->setCanjau($carcpart['canjau']);
+    }
+
+    if (isset($carcpart['nomcli']))
+    {
+      $this->carcpart->setNomcli($carcpart['nomcli']);
+    }
+
+    if (isset($carcpart['cancaj']))
+    {
+      $this->carcpart->setCancaj($carcpart['cancaj']);
+    }
+
   }
 
   /**
@@ -1002,8 +1018,19 @@ $this->Bitacora('Guardo');
 
   public function setVars()
   {
+  	$this->recmer='';
     $this->mascaraubi= Herramientas::ObtenerFormato('Cadefart','Forubi');
     $this->lonubi=strlen($this->mascaraubi);
+
+   		  $recmer = 'N';     //Integracion con Presupuesto
+		  $varemp = $this->getUser()->getAttribute('configemp');
+		  if(is_array($varemp))
+		    if(array_key_exists('aplicacion',$varemp))
+		  	  if(array_key_exists('compras',$varemp['aplicacion']))
+			   if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
+			     if(array_key_exists('almordrec',$varemp['aplicacion']['compras']['modulos']))
+			       if(array_key_exists('recmer',$varemp['aplicacion']['compras']['modulos']['almordrec']))
+		  		       $this->recmer = $varemp['aplicacion']['compras']['modulos']['almordrec']['recmer'];
   }
 
 
