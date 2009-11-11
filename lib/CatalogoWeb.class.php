@@ -3886,7 +3886,9 @@ public function Tsmovlib_tesmovdeglib2()
       $this->c->addJoin(NpcargosPeer::CODCAR, NpasicarnomPeer :: CODCAR);
 
       if ($params){
+      	if (count($params) > 1) {
 		  if ($params[1]!="") $this->c->add(NpcargosPeer :: CARVAN, 0,Criteria::GREATER_THAN);
+      	}
 			$this->c->add(NpasicarnomPeer :: CODNOM, $params[0]);
 		}
 
