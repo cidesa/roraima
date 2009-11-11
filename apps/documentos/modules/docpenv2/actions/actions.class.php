@@ -57,7 +57,7 @@ class docpenv2Actions extends autodocpenv2Actions
   public function editing()
   {
 
-    $this->params['diaent'] = array(0,1,2,3,4,5,6,7,8,9,10);
+    $params['diaent'] = array(0,1,2,3,4,5,6,7,8,9,10);
 
     $dfmedtra = DfmedtraPeer::doSelect(new Criteria());
 
@@ -66,7 +66,7 @@ class docpenv2Actions extends autodocpenv2Actions
         $arreglo[$medtra->getId()] = $medtra->__toString();
     }
 
-    $this->params['dfmedtra'] = $arreglo;
+    $params['dfmedtra'] = $arreglo;
 
     $list = Constantes::listaEstadoDocumento();
     if($this->dfatendoc->getAnuate(true)==$list[1]){
@@ -74,6 +74,7 @@ class docpenv2Actions extends autodocpenv2Actions
       $this->getRequest()->setError('','Documento Anulado.');
     }
 
+    $this->params = $params;
 
   }
 
