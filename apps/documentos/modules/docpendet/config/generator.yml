@@ -21,9 +21,10 @@ generator:
       diaent:         { name : Dias de Entrega }
       fecent:         { name : Fecha Aprox. Entrega }
       id_dfmedtra:    { name : Medio de Transporte }
+      desrut:         { name : Descripción Paso }
     list:
       title:          Detalle Documento
-      display:        [coddoc, nomuse, desate, fecrec, fecate, dias, diadoc, _fecent, nomunio, nomunid ]
+      display:        [coddoc, nomuse, desate, fecrec, fecate, dias, diadoc, _fecent, nomunio, nomunid, desrut ]
       #filters:       [coddoc ]
       max_per_page:    10
     edit:

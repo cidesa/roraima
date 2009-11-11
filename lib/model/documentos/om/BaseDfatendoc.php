@@ -781,7 +781,10 @@ abstract class BaseDfatendoc extends BaseObject  implements Persistent {
 		if ($this->aDftabtip === null && ($this->id_dftabtip !== null)) {
 						include_once 'lib/model/documentos/om/BaseDftabtipPeer.php';
 
-			$this->aDftabtip = DftabtipPeer::retrieveByPK($this->id_dftabtip, $con);
+      $c = new Criteria();
+      $c->add(DftabtipPeer::ID,$this->id_dftabtip);
+      
+			$this->aDftabtip = DftabtipPeer::doSelectOne($c, $con);
 
 			
 		}
