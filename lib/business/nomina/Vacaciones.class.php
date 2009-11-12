@@ -644,7 +644,7 @@ class Vacaciones {
 			if($r['pagadas']==1)
 				$objNpvacsalidasDet->setDiasbonovacpag($r['diasbonovac']);
 			else
-				$objNpvacsalidasDet->setDiasbonovacpag($r['diasbonovacpag']);
+				$objNpvacsalidasDet->setDiasbonovacpag(0);
 			$objNpvacsalidasDet->setFecvac($npvacsalidas->getFecvac());	
 			$objNpvacsalidasDet->save();
 			
