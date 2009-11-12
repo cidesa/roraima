@@ -2303,7 +2303,7 @@ class Nomina {
 
         $valor = 0;
         $fecha = date('d/m/Y',strtotime($fecnom));
-        $criterio = "select sum(coalesce(a.diasbonovac,0)) as valor
+        $criterio = "select sum(coalesce(a.diasbonovacpag,0)) as valor
 				from npvacsalidas_det a, npvacsalidas b
 				where
 				b.fecpagbonvac=to_date('$fecha','dd/mm/yyyy')
@@ -4022,7 +4022,7 @@ class Nomina {
 
         $valor = 0;
         $fecha = $hasta;
-        $criterio = "select sum(coalesce(a.diasbonovac,0)) as valor
+        $criterio = "select sum(coalesce(a.diasbonovacpag,0)) as valor
 				from npvacsalidas_det a, npvacsalidas b
 				where
 				b.fecpagbonvac=to_date('$fecha','dd/mm/yyyy')
