@@ -2308,7 +2308,8 @@ class Nomina {
 				where
 				b.fecpagbonvac=to_date('$fecha','dd/mm/yyyy')
 				and a.codemp='$empleado'
-				and a.fecvac=b.fecvac ";
+				and a.fecvac=b.fecvac 
+				and a.codemp=b.codemp";
 
         if (Herramientas :: BuscarDatos($criterio, & $rs))
 			if($rs[0]['valor']!='')
@@ -4025,8 +4026,9 @@ class Nomina {
 				from npvacsalidas_det a, npvacsalidas b
 				where
 				b.fecpagbonvac=to_date('$fecha','dd/mm/yyyy')
-				and and a.codemp='$empleado'
-				and a.fecvac=b.fecvac ";
+				and a.codemp='$empleado'
+				and a.fecvac=b.fecvac 
+				and a.codemp=b.codemp";
 
         if (Herramientas :: BuscarDatos($criterio, & $rs))
 			if($rs[0]['valor']!='')
