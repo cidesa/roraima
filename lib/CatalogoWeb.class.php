@@ -2548,8 +2548,12 @@ $this->c= new Criteria();
     );
   }
 
-  public function Npcargos_Nomhojint() {
+  public function Npcargos_Nomhojint($params = array ()) {
     $this->c = new Criteria();
+	if (count($params)>0)
+	{
+		if ($params[0]!="") $this->c->add(NpcargosPeer :: CARVAN, 0,Criteria::GREATER_THAN);
+	}
     $this->columnas = array (
       NpcargosPeer :: CODCAR => 'Código',
       NpcargosPeer :: NOMCAR => 'Descripción del Cargo',

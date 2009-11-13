@@ -129,6 +129,21 @@ $this->Bitacora('Guardo');
     $filas_arreglo=200;
     //print $codigo;
 
+  	$filvac="";
+  	$varemp = $this->getUser()->getAttribute('configemp');
+	  if(is_array($varemp))
+	    if(array_key_exists('aplicacion',$varemp))
+	  	  if(array_key_exists('nomina',$varemp['aplicacion']))
+		   if(array_key_exists('modulos',$varemp['aplicacion']['nomina']))
+		     if(array_key_exists('nomasicarconnom',$varemp['aplicacion']['nomina']['modulos']))
+			 {
+				if(array_key_exists('filvac',$varemp['aplicacion']['nomina']['modulos']['nomasicarconnom']))
+		        {
+		       	 $filvac=$varemp['aplicacion']['nomina']['modulos']['nomasicarconnom']['filvac'];
+		        }
+
+			 }
+
 
     // Se crea el objeto principal de la clase OpcionesGrid
     $opciones = new OpcionesGrid();
@@ -149,7 +164,7 @@ $this->Bitacora('Guardo');
     $col1->setAlineacionContenido(Columna::CENTRO);
     $col1->setNombreCampo('codcar');
     $col1->setHTML('type="text" size="10"');
-    $col1->setCatalogo('npcargos','sf_admin_edit_form', array('codcar' => 1, 'nomcar' => 2));
+    $col1->setCatalogo('npcargos','sf_admin_edit_form', array('codcar' => 1, 'nomcar' => 2),'Npcargos_Nomhojint',array('param1' => $filvac));
     $col1->setJScript('onBlur="javascript:event.keyCode=13; verificar_codigo_repetido(event,this.id)"');
     //$col1->setAjax('nomdefespasicartipnomlot',2,2);
 
