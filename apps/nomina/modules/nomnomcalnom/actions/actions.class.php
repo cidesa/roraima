@@ -6,7 +6,7 @@
  * @package    Roraima
  * @subpackage nomnomcalnom
  * @author     $Author:jlobaton $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id:actions.class.php 34580 2009-11-09 15:29:46Z jlobaton $
+ * @version SVN: $Id:actions.class.php 34727 2009-11-13 13:25:56Z jlobaton $
  *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -256,7 +256,7 @@ class nomnomcalnomActions extends autonomnomcalnomActions
 		  		         $intpre = $varemp['aplicacion']['nomina']['modulos']['nomnomcienom']['intpre'];
 			////////////////////////////////////
 
-            CalculoNomina::ValidicionPorEmpleado($codnom,$desde,$hasta,$opsi,$msem,&$cont,$intpre,&$sobregiro);
+            CalculoNomina::ValidicionPorEmpleado($codnom,$desde,$hasta,$opsi,$msem,&$cont);
 			if ($intpre=='S')
 			{
 	            CierredeNomina::Validarcodprenomina($codnom,$desde,&$sobregiro);
@@ -264,8 +264,6 @@ class nomnomcalnomActions extends autonomnomcalnomActions
 				if ($sobregiro==true)
 				{
 	     	        $this->err = Herramientas::obtenerMensajeError('497');
-					//$javascript = "alert('".$err."');";
-					///$this->err1 = $err;
 				}
 			}
             //////////////////////////////////////////
