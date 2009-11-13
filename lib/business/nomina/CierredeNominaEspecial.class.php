@@ -4,9 +4,9 @@
  *
  * @package    Roraima
  * @subpackage nomina
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
+ * @author     $Author: jlobaton $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: CierredeNominaEspecial.class.php 34727 2009-11-13 13:25:56Z jlobaton $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -70,12 +70,25 @@ class CierredeNominaEspecial
   }
  }
 
- public static function procesoCierre($codnomina,$ultfec,$profec,&$msj,$codnomesp,$numsem)
+ public static function procesoCierre($codnomina,$ultfec,$profec,&$msj,$codnomesp,$numsem, $intpre)
  {
-   if (self::generarNompag($codnomina,$ultfec,$profec,$codnomesp))
-   { $msj="";
-     self::cierre($codnomina,$ultfec,$profec,$codnomesp,$numsem);
-     self::eliminarNpnomcal($codnomina,$codnomesp,$profec);
+   $msj = '';
+   $profecha = Herramientas::getX('CODNOM','Npnomina','Profec',$codnomina);
+
+   if (self::generarNompag($codnomina,$ultfec,$profec,$codnomesp,&$sobregiro,$intpre))
+   {
+	   	if ($intpre=='S')
+	   	{
+		     $msj = $sobregiro == true ? '497' : '';
+		     if ($msj != '497')
+		     {
+			     self::cierre($codnomina,$ultfec,$profec,$codnomesp,$numsem);
+			     self::eliminarNpnomcal($codnomina,$codnomesp,$profec);
+		     }
+	   	}else{
+			     self::cierre($codnomina,$ultfec,$profec,$codnomesp,$numsem);
+			     self::eliminarNpnomcal($codnomina,$codnomesp,$profec);
+	   	}
    }
    else
    {
@@ -83,10 +96,10 @@ class CierredeNominaEspecial
    }
  }
 
- public static function generarNompag($codnomina,$ultfec,$profec,$codnomesp)
+ public static function generarNompag($codnomina,$ultfec,$profec,$codnomesp,&$sobregiro,$intpre)
  {
    self::eliminarCierre($codnomina,$ultfec,$profec,$codnomesp);
-   if(self::generar($codnomina,$ultfec,$profec,$codnomesp))
+   if(self::generar($codnomina,$ultfec,$profec,$codnomesp,&$sobregiro,$intpre))
    { return true;}
    else {return false;}
  }
@@ -117,13 +130,13 @@ class CierredeNominaEspecial
 
  }
 
- public static function generar($codnomina,$ultfec,$profec,$codnomesp)
+ public static function generar($codnomina,$ultfec,$profec,$codnomesp,&$sobregiro=false, $intpre='N')
  {
    try{
    $dateFormat = new sfDateFormat('es_VE');
    $ultfec = $dateFormat->format($ultfec, 'i', $dateFormat->getInputPattern('d'));
    $profec = $dateFormat->format($profec, 'i', $dateFormat->getInputPattern('d'));
-
+   $anopresu = substr(Herramientas :: getX('codemp', 'cpdefniv', 'fecper', '001'), 0, 4);
    $variable=array();
 
    $c= new Criteria();
@@ -135,9 +148,6 @@ class CierredeNominaEspecial
    $c->add(NpnomcalPeer::SALDO,0,Criteria::NOT_EQUAL);
    $c->add(NpnomcalPeer::CODCON,'XXX',Criteria::NOT_EQUAL);
    $resultados= NpnomcalPeer::doSelect($c);
-
-//H::printR($resultados);
-  // exit('11');
 
    if ($resultados)
    {
@@ -159,6 +169,7 @@ class CierredeNominaEspecial
 	   $dato= NpdefcptPeer::doSelectOne($b);
 	   if ($dato)
 	   {
+	   	/*
 	   	 $a= new Criteria();
 	   	 $a->add(NpasiparconPeer::CODNOM,$npnomcal->getCodnom());
 	   	 $a->add(NpasiparconPeer::CODCAR,$npnomcal->getCodcar());
@@ -179,7 +190,7 @@ class CierredeNominaEspecial
 		   	   { $partida=$dato->getCodpar();}
 	   	 }//else if $dato1
 
-        /*  integracion con presupuesto*/
+
 	   	 $p= new Criteria();
 	   	 $p->add(NpconceptoscategoriaPeer::CODCON,$npnomcal->getCodcon());
 	   	 $dato2=NpconceptoscategoriaPeer::doSelectOne($p);
@@ -200,6 +211,18 @@ class CierredeNominaEspecial
 	   	 		$categoria=$result[0]['codcat'];}
 	   	 }
 	   	 $codpre=$categoria.'-'.$partida;
+*/
+
+		$sql  ="select
+					categoriaemp('".$npnomcal->getCodnom()."','".$npnomcal->getCodemp()."','".$npnomcal->getCodcar()."','".$npnomcal->getCodcon()."') as categoria,
+					partidaconcepto('".$npnomcal->getCodcon()."','".$npnomcal->getCodnom()."','".$npnomcal->getCodcar()."') as partida
+				from
+				empresa";
+
+   		if (Herramientas::BuscarDatos($sql,&$resul))
+	   	{
+	   		$codpre = $resul[0]["categoria"].'-'.$resul[0]["partida"];
+	   	}
 
 	   	 if (($dato->getOrdpag()=='S' && $dato->getImpcpt()=='S' && ($dato->getOpecon()=='A' || $dato->getOpecon()=='D'))||($dato->getOrdpag()=='S' && $dato->getOpecon()=='P'))
 	   	 {
@@ -251,16 +274,38 @@ class CierredeNominaEspecial
 	   }
 	 }
    	}
+
    	foreach ($variable as $grabar)
    	{
-   	 $grabar->save();
+	     ////  Validar contra Presupuesto  ////
+	   	 if ($intpre=='S')
+	   	 {
+		      if (Herramientas::Monto_disponible_ejecucion($anopresu,$grabar->getCodpre(),&$mondis))
+		      {
+		        if ($grabar->getMonto() > $mondis){
+		          $sobregiro = true;
+		          break;
+		        }
+		       }else{
+		      	$sobregiro = true; //Esto nunca deberia suceder, pero se coloco para su validacion
+		      }
+	     }
     }
+
+	if($sobregiro!= true)
+	{
+	   	foreach ($variable as $grabar)
+	   	{
+	       	$grabar->save();
+	    }
+
+	}
     unset($npnomcal);
     unset($result);
     unset($dato);
-    unset($dato1);
-    unset($dato2);
-    unset($dato3);
+    //unset($dato1);
+    //unset($dato2);
+    //unset($dato3);
     unset($data);
     unset($resultado);
     unset($grabar);
@@ -336,7 +381,7 @@ class CierredeNominaEspecial
   c.inimon='S' and b.codcon=c.codcon and a.codnom=b.codnom and d.codnomesp='".$codnomesp."' and d.especial='S'  AND a.status='V')";
 
  Herramientas::insertarRegistros($sql4);
- 
+
  #SI LA NOMINA ES DE INTERESES DE PRESTACIONES AGREGAMOS EL REGISTRO EN NPADEINT
 
  $sqlade="INSERT INTO NPADEINT(CODCON,CODEMP,FECADE,MONADE,FECSOLADE)
@@ -346,8 +391,8 @@ class CierredeNominaEspecial
 			AND A.CODNOMESP=B.CODNOMESP
 			AND A.CODEMP=C.CODEMP AND STATUS='A'
 			)";
-			
- Herramientas::insertarRegistros($sqlade);			
+
+ Herramientas::insertarRegistros($sqlade);
 
 //Actualización de Prestamos
    $sql5="select * from Nptippre where codcon in (select codcon from npnomcal where codnom='".$codnomina."' and codnomesp='".$codnomesp."' and especial='S')";
@@ -539,6 +584,163 @@ class CierredeNominaEspecial
    NpnomcalPeer::doDelete($c);
  }
 
+
+
+ public static function Validarcodprenomina($codnomina,$fecha,&$sobregiro=false, $intpre = 'N')
+ {
+   $dateFormat = new sfDateFormat('es_VE');
+   $fecha = $dateFormat->format($fecha, 'i', $dateFormat->getInputPattern('d'));
+   $anopresu = substr(Herramientas :: getX('codemp', 'cpdefniv', 'fecper', '001'), 0, 4);
+   $variable=array();
+
+   $c= new Criteria();
+   $c->add(NpnomcalPeer::CODNOM,$codnomina);
+   $c->add(NpnomcalPeer::SALDO,0,Criteria::NOT_EQUAL);
+   $c->add(NpnomcalPeer::ESPECIAL,'S');
+   $resultados= NpnomcalPeer::doSelect($c);
+   if ($resultados)
+   {
+   	foreach ($resultados as $npnomcal)
+   	{
+   	 $sql="Select A.codemp as codemp,A.codcar as codcar,A.codnom as codnom,A.codcat as codcat,A.fecasi as fecasi,A.nomemp as nomemp,A.nomcar as nomcar,A.nomnom as nomnom,A.nomcat as nomcat,A.unieje as unieje,A.sueldo as sueldo,A.status as status,A.nronom as nronom,A.montonomina as montonomina,A.codtip as codtip,A.codtipgas as codtipgas,A.codniv as codniv,A.grado as grado,A.paso as paso,
+      (CASE when C.CodTipPag='01' then C.Codban else C.Codemp end) as codigobancario
+      From NPAsiCarEmp A,NPHOJINT C Where
+      A.CodNom = '".$npnomcal->getCodnom()."' And
+      A.CodCar = '" .$npnomcal->getCodcar()."'   And
+      A.CodEmp = '" .$npnomcal->getCodemp()."' And
+      A.Status = 'V' And A.CODEMP = C.CODEMP";
+
+   	 if (Herramientas::BuscarDatos($sql,&$result))
+	 {
+	   $b= new Criteria();
+	   $b->add(NpdefcptPeer::CODCON,$npnomcal->getCodcon());
+	   $dato= NpdefcptPeer::doSelectOne($b);
+	   if ($dato)
+	   {
+/*
+	   	 $a= new Criteria();
+	   	 $a->add(NpasiparconPeer::CODNOM,$npnomcal->getCodnom());
+	   	 $a->add(NpasiparconPeer::CODCAR,$npnomcal->getCodcar());
+	   	 $a->add(NpasiparconPeer::CODCON,$npnomcal->getCodcon());
+	   	 $dato1= NpasiparconPeer::doSelectOne($a);
+	   	 if ($dato1)
+	   	 { $partida=$dato1->getCodpar();}
+	   	 else
+	   	 {
+	         $cri= new Criteria();
+		   	 $cri->add(NpasicodprePeer::CODNOM,$npnomcal->getCodnom());
+		   	 $cri->add(NpasicodprePeer::CODCON,$npnomcal->getCodcon());
+		   	 $resul= NpasicodprePeer::doSelectOne($cri);
+		   	 if ($resul)
+		   	 { $partida=$resul->getCodpre();}
+		   	 else
+		   	   { $partida=$dato->getCodpar();}
+	   	 }//else if $dato1
+
+	   	 $p= new Criteria();
+	   	 $p->add(NpconceptoscategoriaPeer::CODCON,$npnomcal->getCodcon());
+	   	 $dato2=NpconceptoscategoriaPeer::doSelectOne($p);
+	   	 if ($dato2)
+	   	 { $categoria=$dato2->getCodcat();}
+	   	 else
+	   	 {
+	   	 	$f=new Criteria();
+	   	 	$f->add(NpasicatconempPeer::CODEMP,$npnomcal->getCodemp());
+	   	 	$f->add(NpasicatconempPeer::CODCAR,$npnomcal->getCodcar());
+	   	 	$f->add(NpasicatconempPeer::CODNOM,$npnomcal->getCodnom());
+	   	 	$f->add(NpasicatconempPeer::CODCON,$npnomcal->getCodcon());
+	   	 	$dato3= NpasicatconempPeer::doselectOne($f);
+	   	 	if ($dato3)
+	   	 	{ $categoria=$dato3->getCodcat();}
+	   	 	else {$categoria=$result[0]['codcat'];}
+	   	 }
+	   	 $codpre=$categoria.'-'.$partida;
+*/
+
+		 $sql  ="select
+					categoriaemp('".$npnomcal->getCodnom()."','".$npnomcal->getCodemp()."','".$npnomcal->getCodcar()."','".$npnomcal->getCodcon()."') as categoria,
+					partidaconcepto('".$npnomcal->getCodcon()."','".$npnomcal->getCodnom()."','".$npnomcal->getCodcar()."') as partida
+				from
+				empresa";
+
+   		if (Herramientas::BuscarDatos($sql,&$resul))
+	   	{
+	   		$codpre = $resul[0]["categoria"].'-'.$resul[0]["partida"];
+	   	}
+
+	   	 if (($dato->getOrdpag()=='S' && $dato->getImpcpt()=='S' && ($dato->getOpecon()=='A' || $dato->getOpecon()=='D'))||($dato->getOrdpag()=='S' && $dato->getOpecon()=='P'))
+	   	 {
+	   	 	$genord=true;
+	   	 }else {$genord=false;}
+
+	   	 if ($genord==true)
+	   	 {
+	   	   $s= new Criteria();
+	   	   $s->add(CpdeftitPeer::CODPRE,$codpre);
+	   	   $data=CpdeftitPeer::doSelectOne($s);
+	   	   if ($data)
+	   	   {
+	   	   	 $t= new Criteria();
+	   	   	 $t->add(NpcienomPeer::CODTIPGAS,$result[0]['codtipgas']);
+	   	   	 $t->add(NpcienomPeer::CODPRE,$codpre);
+	   	   	 $t->add(NpcienomPeer::CODCON,$npnomcal->getCodcon());
+	   	   	 $t->add(NpcienomPeer::CODNOM,$codnomina);
+	   	   	 $t->add(NpcienomPeer::ASIDED,$npnomcal->getAsided());
+	   	   	 $t->add(NpcienomPeer::FECNOM,$npnomcal->getFecnom());
+	   	   	 $t->add(NpcienomPeer::CODBAN,$result[0]['codigobancario']);
+	   	   	 $resultado=NpcienomPeer::doSelectOne($t);
+	   	   	 if (count($resultado)>0)
+	   	   	 {
+	   	       $resultado->setMonto($resultado->getMonto() + $npnomcal->getSaldo());
+	   	       $variable[]=$resultado;
+	   	   	 }
+	   	   	 else
+	   	   	 {
+	   	   	 	$npcienom = new Npcienom();
+	   	   	 	$npcienom->setCodnom($npnomcal->getCodnom());
+	   	   	 	$npcienom->setCodcon($npnomcal->getCodcon());
+	   	   	 	$npcienom->setFecnom($npnomcal->getFecnom());
+	   	   	 	$npcienom->setEspecial($npnomcal->getEspecial());
+	   	   	 	$npcienom->setCodpre($codpre);
+	   	   	 	$npcienom->setCodcta('1');
+	   	   	 	$npcienom->setMonto($npnomcal->getSaldo());
+	   	   	 	$npcienom->setCantidad($npnomcal->getCantidad());
+	   	   	 	$npcienom->setAsided($npnomcal->getAsided());
+	   	   	 	$npcienom->setCodtipgas($result[0]['codtipgas']);
+	   	   	 	$npcienom->setCodban($result[0]['codigobancario']);
+	   	   	 	$variable[]=$npcienom;
+	   	   	 }
+	   	   }
+	   	 }
+	   }
+	 }
+   	}
+   	foreach ($variable as $grabar)
+   	{
+     ////  Validar contra Presupuesto  ////
+      if (Herramientas::Monto_disponible_ejecucion($anopresu,$grabar->getCodpre(),&$mondis))
+      {
+        if ($grabar->getMonto() > $mondis){
+          $sobregiro = true;
+          break;
+        }
+      }else{
+      	$sobregiro = true; //Esto nunca deberia suceder, pero se coloco para su validacion
+      }
+     }
+
+    unset($npnomcal);
+    unset($result);
+    unset($dato);
+//    unset($dato1);
+  //  unset($dato2);
+   // unset($dato3);
+    unset($data);
+    unset($resultado);
+    unset($grabar);
+   	return true;
+   	} else {return false;}
+ }
 
 }
 

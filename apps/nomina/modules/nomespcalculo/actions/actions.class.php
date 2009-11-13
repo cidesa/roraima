@@ -5,9 +5,9 @@
  *
  * @package    Roraima
  * @subpackage nomespcalculo
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
+ * @author     $Author:jlobaton $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id:actions.class.php 34727 2009-11-13 13:25:56Z jlobaton $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -21,7 +21,7 @@ class nomespcalculoActions extends autonomespcalculoActions
 
   // Para incluir funcionalidades al executeEdit()
   /**
-   * Función para colocar el codigo necesario en  
+   * Función para colocar el codigo necesario en
    * el proceso de edición.
    * Aquí se pueden buscar datos adicionales que necesite la vista
    * Esta función es parte de la acción executeEdit, que maneja tanto
@@ -166,7 +166,7 @@ class nomespcalculoActions extends autonomespcalculoActions
       {
       $codnom    = $this->getRequestParameter('codnom');
       $codnomesp = $this->getRequestParameter('codnomesp');
-
+      $javascript = ''; $this->err="";
       if ($codnom!='')
       {
           try{
@@ -210,18 +210,38 @@ class nomespcalculoActions extends autonomespcalculoActions
             system('wget '.$url.' > /dev/null &',$retval);*/
             ///////////////////////////////////////////////////////
 
-
             //ELIMINAR ESTA LINEA DESPUES DE LA PRUEBA
             $now = strtotime(date("Y-m-d H:i:s"));
 
+		  ////////////   Integracion con Presupuesto   ////////////
+   		  $intpre = 'N';
+		  $varemp = $this->getUser()->getAttribute('configemp');
+		  if(is_array($varemp))
+		    if(array_key_exists('aplicacion',$varemp))
+		  	  if(array_key_exists('nomina',$varemp['aplicacion']))
+			   if(array_key_exists('modulos',$varemp['aplicacion']['nomina']))
+			     if(array_key_exists('nomnomcienom',$varemp['aplicacion']['nomina']['modulos']))
+			       if(array_key_exists('intpre',$varemp['aplicacion']['nomina']['modulos']['nomnomcienom']))
+		  		         $intpre = $varemp['aplicacion']['nomina']['modulos']['nomnomcienom']['intpre'];
+			////////////////////////////////////
+
+
             CalculoNominaEspecial::ValidicionPorEmpleado($codnom,$desde,$hasta,$opsi,$msem,&$cont,$codnomesp);
             CalculoNominaEspecial::EliminarRegistro($codnom, $codnomesp);
+
+			if ($intpre=='S')
+			{
+	            CierredeNominaEspecial::Validarcodprenomina($codnom,$desde,&$sobregiro);
+				if ($sobregiro==true)
+				{
+	     	        $this->err = Herramientas::obtenerMensajeError('497');
+				}
+			}
             //////////////////////////////////////////
             $now2 = strtotime(date("Y-m-d H:i:s"));
             $now3 = $now2-$now;
 
-            $output = '[["controlador","no",""],["tiempo","'.$now3.'",""]]';
-
+            $output = '[["controlador","no",""],["tiempo","'.$now3.'",""],["javascript","'.$javascript.'",""]]';
           }
           else
           {
@@ -248,9 +268,9 @@ class nomespcalculoActions extends autonomespcalculoActions
   }
 
 
-  
-  
-  
+
+
+
   /**
    *
    * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
@@ -286,9 +306,9 @@ class nomespcalculoActions extends autonomespcalculoActions
   }
 
   /**
-   * Función para colocar el codigo necesario para 
+   * Función para colocar el codigo necesario para
    * el proceso de guardar.
-   * Esta función debe retornar un valor igual a -1 si no hubo 
+   * Esta función debe retornar un valor igual a -1 si no hubo
    * Inconvenientes al guardar, y != de -1 si existe algún error.
    * Si es diferente de -1 el valor devuelto debe ser un código de error
    * Válido que exista en el archivo config/errores.yml
@@ -300,9 +320,9 @@ class nomespcalculoActions extends autonomespcalculoActions
   }
 
   /**
-   * Función para colocar el codigo necesario para 
+   * Función para colocar el codigo necesario para
    * el proceso de eliminar.
-   * Esta función debe retornar un valor igual a -1 si no hubo 
+   * Esta función debe retornar un valor igual a -1 si no hubo
    * Inconvenientes al guardar, y != de -1 si existe algún error.
    * Si es diferente de -1 el valor devuelto debe ser un código de error
    * Válido que exista en el archivo config/errores.yml

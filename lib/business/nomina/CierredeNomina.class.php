@@ -5,7 +5,7 @@
  * @package    Roraima
  * @subpackage nomina
  * @author     $Author: jlobaton $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id: CierredeNomina.class.php 34610 2009-11-09 19:38:50Z jlobaton $
+ * @version SVN: $Id: CierredeNomina.class.php 34727 2009-11-13 13:25:56Z jlobaton $
  *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -105,6 +105,7 @@ class CierredeNomina
    $c->add(NpnomcalPeer::SALDO,0,Criteria::NOT_EQUAL);
    $c->add(NpnomcalPeer::ESPECIAL,'N');
    $resultados= NpnomcalPeer::doSelect($c);
+
    if ($resultados)
    {
    	foreach ($resultados as $npnomcal)
@@ -119,11 +120,13 @@ class CierredeNomina
 
    	 if (Herramientas::BuscarDatos($sql,&$result))
 	 {
+
 	   $b= new Criteria();
 	   $b->add(NpdefcptPeer::CODCON,$npnomcal->getCodcon());
 	   $dato= NpdefcptPeer::doSelectOne($b);
 	   if ($dato)
 	   {
+	   	/*
 	   	 $a= new Criteria();
 	   	 $a->add(NpasiparconPeer::CODNOM,$npnomcal->getCodnom());
 	   	 $a->add(NpasiparconPeer::CODCAR,$npnomcal->getCodcar());
@@ -161,6 +164,18 @@ class CierredeNomina
 	   	 	else {$categoria=$result[0]['codcat'];}
 	   	 }
 	   	 $codpre=$categoria.'-'.$partida;
+*/
+
+		$sql  ="select
+					categoriaemp('".$npnomcal->getCodnom()."','".$npnomcal->getCodemp()."','".$npnomcal->getCodcar()."','".$npnomcal->getCodcon()."') as categoria,
+					partidaconcepto('".$npnomcal->getCodcon()."','".$npnomcal->getCodnom()."','".$npnomcal->getCodcar()."') as partida
+				from
+				empresa";
+
+   		if (Herramientas::BuscarDatos($sql,&$resul))
+	   	{
+	   		$codpre = $resul[0]["categoria"].'-'.$resul[0]["partida"];
+	   	}
 
 	   	 if (($dato->getOrdpag()=='S' && $dato->getImpcpt()=='S' && ($dato->getOpecon()=='A' || $dato->getOpecon()=='D'))||($dato->getOrdpag()=='S' && $dato->getOpecon()=='P'))
 	   	 {
@@ -237,9 +252,9 @@ class CierredeNomina
     unset($npnomcal);
     unset($result);
     unset($dato);
-    unset($dato1);
-    unset($dato2);
-    unset($dato3);
+//    unset($dato1);
+    //unset($dato2);
+    //unset($dato3);
     unset($data);
     unset($resultado);
     unset($grabar);
@@ -495,6 +510,7 @@ class CierredeNomina
 	   $dato= NpdefcptPeer::doSelectOne($b);
 	   if ($dato)
 	   {
+	   	/*
 	   	 $a= new Criteria();
 	   	 $a->add(NpasiparconPeer::CODNOM,$npnomcal->getCodnom());
 	   	 $a->add(NpasiparconPeer::CODCAR,$npnomcal->getCodcar());
@@ -532,6 +548,19 @@ class CierredeNomina
 	   	 	else {$categoria=$result[0]['codcat'];}
 	   	 }
 	   	 $codpre=$categoria.'-'.$partida;
+*/
+
+
+		$sql  ="select
+					categoriaemp('".$npnomcal->getCodnom()."','".$npnomcal->getCodemp()."','".$npnomcal->getCodcar()."','".$npnomcal->getCodcon()."') as categoria,
+					partidaconcepto('".$npnomcal->getCodcon()."','".$npnomcal->getCodnom()."','".$npnomcal->getCodcar()."') as partida
+				from
+				empresa";
+
+   		if (Herramientas::BuscarDatos($sql,&$resul))
+	   	{
+	   		$codpre = $resul[0]["categoria"].'-'.$resul[0]["partida"];
+	   	}
 
 	   	 if (($dato->getOrdpag()=='S' && $dato->getImpcpt()=='S' && ($dato->getOpecon()=='A' || $dato->getOpecon()=='D'))||($dato->getOrdpag()=='S' && $dato->getOpecon()=='P'))
 	   	 {
@@ -597,9 +626,9 @@ class CierredeNomina
     unset($npnomcal);
     unset($result);
     unset($dato);
-    unset($dato1);
-    unset($dato2);
-    unset($dato3);
+    //unset($dato1);
+    //unset($dato2);
+    //unset($dato3);
     unset($data);
     unset($resultado);
     unset($grabar);

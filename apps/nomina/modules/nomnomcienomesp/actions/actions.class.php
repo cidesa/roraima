@@ -5,9 +5,9 @@
  *
  * @package    Roraima
  * @subpackage nomnomcienomesp
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
+ * @author     $Author:jlobaton $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id:actions.class.php 34727 2009-11-13 13:25:56Z jlobaton $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -22,7 +22,7 @@ class nomnomcienomespActions extends autonomnomcienomespActions
 
   // Para incluir funcionalidades al executeEdit()
   /**
-   * Función para colocar el codigo necesario en  
+   * Función para colocar el codigo necesario en
    * el proceso de edición.
    * Aquí se pueden buscar datos adicionales que necesite la vista
    * Esta función es parte de la acción executeEdit, que maneja tanto
@@ -182,9 +182,9 @@ class nomnomcienomespActions extends autonomnomcienomespActions
 
 
 
-  
-  
-  
+
+
+
   /**
    *
    * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
@@ -243,9 +243,9 @@ class nomnomcienomespActions extends autonomnomcienomespActions
   }
 
   /**
-   * Función para colocar el codigo necesario para 
+   * Función para colocar el codigo necesario para
    * el proceso de guardar.
-   * Esta función debe retornar un valor igual a -1 si no hubo 
+   * Esta función debe retornar un valor igual a -1 si no hubo
    * Inconvenientes al guardar, y != de -1 si existe algún error.
    * Si es diferente de -1 el valor devuelto debe ser un código de error
    * Válido que exista en el archivo config/errores.yml
@@ -257,9 +257,9 @@ class nomnomcienomespActions extends autonomnomcienomespActions
   }
 
   /**
-   * Función para colocar el codigo necesario para 
+   * Función para colocar el codigo necesario para
    * el proceso de eliminar.
-   * Esta función debe retornar un valor igual a -1 si no hubo 
+   * Esta función debe retornar un valor igual a -1 si no hubo
    * Inconvenientes al guardar, y != de -1 si existe algún error.
    * Si es diferente de -1 el valor devuelto debe ser un código de error
    * Válido que exista en el archivo config/errores.yml
@@ -278,15 +278,30 @@ class nomnomcienomespActions extends autonomnomcienomespActions
     $profec    = $this->getRequestParameter('profec');
     $numsem    = $this->getRequestParameter('numsem');
 
-	CierredeNominaEspecial::procesoCierre($codigo,$ultfec,$profec,&$msj,$codnomesp,$numsem);
+   		  $intpre = 'N';     //Integracion con Presupuesto
+		  $varemp = $this->getUser()->getAttribute('configemp');
+		  if(is_array($varemp))
+		    if(array_key_exists('aplicacion',$varemp))
+		  	  if(array_key_exists('nomina',$varemp['aplicacion']))
+			   if(array_key_exists('modulos',$varemp['aplicacion']['nomina']))
+			     if(array_key_exists('nomnomcienom',$varemp['aplicacion']['nomina']['modulos']))
+			       if(array_key_exists('intpre',$varemp['aplicacion']['nomina']['modulos']['nomnomcienom']))
+		  		       $intpre = $varemp['aplicacion']['nomina']['modulos']['nomnomcienom']['intpre'];
+
+
+	CierredeNominaEspecial::procesoCierre($codigo,$ultfec,$profec,&$msj,$codnomesp,$numsem,$intpre);
 
 	if ($msj=='1')
 	{
 		$this->setFlash('notice2', 'La Nómina Especial no puede ser cerrada');
-		}
-	else {
+	}elseif ($msj=='497')
+	{
+        $err = Herramientas::obtenerMensajeError($msj);
+        $this->setFlash('error', $err);
+
+	}else if ($msj==''){
 		$this->setFlash('notice', 'La Nómina Especial fue Cerrada Satisfactoriamente');
-		}
+	}
 		return $this->redirect('nomnomcienomesp/index');
 
   }

@@ -1,13 +1,13 @@
 <?php
 /**
- * Calculo de Nóminas Especiales: Clase estática para el control de prenominas 
+ * Calculo de Nóminas Especiales: Clase estática para el control de prenominas
  * de nóminas especiales
  *
  * @package    Roraima
  * @subpackage nomina
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
+ * @author     $Author: jlobaton $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: CalculoNominaEspecial.class.php 34727 2009-11-13 13:25:56Z jlobaton $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -351,7 +351,6 @@ public static function ValidacionSalvar($vars,$error,$resecu,$codnom,$codemp,$ca
 		{
 			$vars='CON'.$vars;
 		}
-
 
 		if (!$error && $resecu!=0)
 		{
