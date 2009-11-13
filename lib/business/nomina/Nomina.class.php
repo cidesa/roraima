@@ -7597,6 +7597,10 @@ public static function salvarNpsalintind($npsalint, $grid) {
       $c = new Criteria();
       $c->add(NpcatprePeer :: CODCAT, $codcat);
       $npcatpre = NpcatprePeer :: doSelectOne($c);
+      if ($npcatpre)
+      {
+      	$nomcat=$npcatpre->getNomcat();
+      }else $nomcat="";
 
        /*$c = new Criteria();
       $c->add(NpasicarempPeer::CODEMP, $npasiaremp->getCodemp());
@@ -7613,7 +7617,7 @@ public static function salvarNpsalintind($npsalint, $grid) {
       $npasicarempnew->setCodcat($codcat);
         $npasicarempnew->setNomcar($npcargos->getNomcar());
       $npasicarempnew->setNomnom($npnomina->getNomnom());
-      $npasicarempnew->setNomcat($npcatpre->getNomcat());
+      $npasicarempnew->setNomcat($nomcat);
       $npasicarempnew->setFecasi($npasicaremp->getFecasi());
       $npasicarempnew->setNomemp($npasicaremp->getNomemp());
       $npasicarempnew->setUnieje($npasicaremp->getUnieje());
