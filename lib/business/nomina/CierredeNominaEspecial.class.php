@@ -718,15 +718,17 @@ class CierredeNominaEspecial
    	foreach ($variable as $grabar)
    	{
      ////  Validar contra Presupuesto  ////
-      if (Herramientas::Monto_disponible_ejecucion($anopresu,$grabar->getCodpre(),&$mondis))
-      {
-        if ($grabar->getMonto() > $mondis){
-          $sobregiro = true;
-          break;
-        }
-      }else{
-      	$sobregiro = true; //Esto nunca deberia suceder, pero se coloco para su validacion
-      }
+	   	 	$sql = "select mondis from cpasiini where perpre='00' and codpre='".$grabar->getCodpre()."'";
+	   		  if (Herramientas::BuscarDatos($sql,&$resul))
+//		      if (Herramientas::Monto_disponible_ejecucion($anopresu,$grabar->getCodpre(),&$mondis))
+		      {
+		        if ($grabar->getMonto() > $resul[0]["mondis"]){
+		          $sobregiro = true;
+		          break;
+		        }
+		       }else{
+		      	$sobregiro = true; //Esto nunca deberia suceder, pero se coloco para su validacion
+		      }
      }
 
     unset($npnomcal);

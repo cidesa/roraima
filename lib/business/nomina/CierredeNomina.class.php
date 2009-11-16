@@ -5,7 +5,7 @@
  * @package    Roraima
  * @subpackage nomina
  * @author     $Author: jlobaton $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id: CierredeNomina.class.php 34727 2009-11-13 13:25:56Z jlobaton $
+ * @version SVN: $Id: CierredeNomina.class.php 34776 2009-11-16 20:48:32Z jlobaton $
  *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -229,9 +229,11 @@ class CierredeNomina
 	     ////  Validar contra Presupuesto  ////
 	   	 if ($intpre=='S')
 	   	 {
-		      if (Herramientas::Monto_disponible_ejecucion($anopresu,$grabar->getCodpre(),&$mondis))
+	   	 	$sql = "select mondis from cpasiini where perpre='00' and codpre='".$grabar->getCodpre()."'";
+	   		  if (Herramientas::BuscarDatos($sql,&$resul))
+//		      if (Herramientas::Monto_disponible_ejecucion($anopresu,$grabar->getCodpre(),&$mondis))
 		      {
-		        if ($grabar->getMonto() > $mondis){
+		        if ($grabar->getMonto() > $resul[0]["mondis"]){
 		          $sobregiro = true;
 		          break;
 		        }
