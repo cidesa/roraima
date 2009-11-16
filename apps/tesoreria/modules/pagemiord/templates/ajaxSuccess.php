@@ -6,11 +6,12 @@
 <?php $opnn= label_for('', __('Por favor, seleccione la Nómina a Pagar'), 'class="required" style="width:220px "')?>
 <?php $opnn .= input_tag('tipnom', '', 'size=7; onBlur=javascript:cargar1();') ?>
 <?php $opnn .= input_hidden_tag('nomina', '') ?><?php $opnn .= input_hidden_tag('fechanomina', '') ?><?php $opnn .= input_hidden_tag('gasto', '') ?><?php $opnn .= input_hidden_tag('banco', '') ?><?php $opnn .= input_hidden_tag('nomespecial', '') ?>
+<?php $opnn .= input_hidden_tag('codnomesp', '') ?>
 <? $sql="Select distinct((CASE when c.cedemp is null THEN b.nomnom else C.NOMEMP||' ('||B.NOMNOM||')' END)) as nomina,
-         A.CODNOM as codigo,A.FECNOM as fecha,a.codtipgas as gasto,A.CODBAN as codban, A.ESPECIAL as especial
+         A.CODNOM as codigo,A.FECNOM as fecha,a.codtipgas as gasto,A.CODBAN as codban, A.ESPECIAL as especial, A.CODNOMESP as nominaesp
          FROM NPNOMINA B,NPCIENOM A left outer join NPHOJINT C on A.CODBAN=C.CEDEMP
          WHERE A.CODNOM=B.CODNOM AND A.ASIDED<>'P' order by nomina,fecha;";
-   $url=cross_app_link_to('herramientas','catalogobuscar').'/space/catalogo1/objs/tipnom-nomina-fechanomina-gasto-banco-nomespecial/campos/codigo-nomina-fecha-gasto-codban-especial'; ?>
+   $url=cross_app_link_to('herramientas','catalogobuscar').'/space/catalogo1/objs/tipnom-nomina-fechanomina-gasto-banco-nomespecial-codnomesp/campos/codigo-nomina-fecha-gasto-codban-especial-nominaesp'; ?>
 <?php $opnn .=  '&nbsp;&nbsp;&nbsp;'.button_to_popup('...',$url,$sql,'catalogo1')?>
 
 <?php  echo javascript_tag(

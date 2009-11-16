@@ -2436,12 +2436,12 @@ class OrdendePago
    }
   }
 
-  public static function ArregloNomina($tipnom,$banco,$gasto,$fecha, $referencias,&$arreglodet,&$arregloret,&$dato,$impcpt='',$nomespecial='')
+  public static function ArregloNomina($tipnom,$banco,$gasto,$fecha, $referencias,&$arreglodet,&$arregloret,&$dato,$impcpt='',$nomespecial='',$codnomesp='')
   {
     $dato="";
     $result=array();
 	$impcpt=='X' ? $sqlimpcpt='' : $sqlimpcpt="AND  b.impcpt='S'";
-    $sql="SELECT a.codpre as codpre, a.monto as monto, a.asided as asided, a.codcon as codcon FROM NPCIENOM a,NPDEFCPT b WHERE  a.CODNOM = '".$tipnom."' AND a.CodTipGas='".$gasto."' AND a.CODBAN='".$banco."' AND  (a.ASIDED='A' OR a.ASIDED='D') AND a.especial='".$nomespecial."' AND a.FECNOM=TO_DATE('".$fecha."','YYYY-MM-DD') $sqlimpcpt  AND a.codcon=b.codcon Order By CodCon";
+    $sql="SELECT a.codpre as codpre, a.monto as monto, a.asided as asided, a.codcon as codcon FROM NPCIENOM a,NPDEFCPT b WHERE  a.CODNOM = '".$tipnom."' AND a.CodTipGas='".$gasto."' AND a.CODBAN='".$banco."' AND  (a.ASIDED='A' OR a.ASIDED='D') AND a.especial='".$nomespecial."' AND a.codnomesp='".$codnomesp."' AND a.FECNOM=TO_DATE('".$fecha."','YYYY-MM-DD') $sqlimpcpt  AND a.codcon=b.codcon Order By CodCon";
     if (Herramientas::BuscarDatos($sql,&$result))
     {
       $c= new Criteria();
