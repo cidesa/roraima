@@ -2485,12 +2485,13 @@ function ajaxretenciones(e,id)
         var gasto=$('gasto').value;
         var banco=$('banco').value;
         var nomespecial=$('nomespecial').value;
+        var codnomesp=$('codnomesp').value;
         var fecha=$('fechanomina').value;
         if ($('opordpag_referencias').value=='')
         { $('opordpag_referencias').value='_';}
         var referencias=$('opordpag_referencias').value;
-        new Ajax.Updater('divGrid', '/tesoreria_dev.php/pagemiord/ajax', {asynchronous:true, evalScripts:true, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=11&tipnom='+tipnom+'&fecha='+fecha+'&gasto='+gasto+'&divu=1&referencias='+referencias+'&nomespecial='+nomespecial+'&banco='+banco});
-        new Ajax.Updater('consulta', '/tesoreria_dev.php/pagemiord/ajax', {asynchronous:true, evalScripts:true, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=11&tipnom='+tipnom+'&fecha='+fecha+'&gasto='+gasto+'&divu=2&referencias='+referencias+'&nomespecial='+nomespecial+'&banco='+banco});
+        new Ajax.Updater('divGrid', '/tesoreria_dev.php/pagemiord/ajax', {asynchronous:true, evalScripts:true, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=11&tipnom='+tipnom+'&fecha='+fecha+'&gasto='+gasto+'&divu=1&referencias='+referencias+'&nomespecial='+nomespecial+'&codnomesp='+codnomesp+'&banco='+banco});
+        new Ajax.Updater('consulta', '/tesoreria_dev.php/pagemiord/ajax', {asynchronous:true, evalScripts:true, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=11&tipnom='+tipnom+'&fecha='+fecha+'&gasto='+gasto+'&divu=2&referencias='+referencias+'&nomespecial='+nomespecial+'&codnomesp='+codnomesp+'&banco='+banco});
 
       }
       else
