@@ -365,8 +365,10 @@ class Tesoreria {
           $c->add(TsmovlibPeer :: STACON, 'N');
           $tsmovlib2 = TsmovlibPeer :: doSelectOne($c);
           if ($tsmovlib2) {
-            $tsmovlib2->setStacon('N');
-            $tsmovlib2->save();
+          	foreach ($tsmovlib2 as $lib2) {
+            $lib2->setStacon('N');
+            $lib2->save();
+          	}
           }
         }
 
@@ -415,8 +417,10 @@ class Tesoreria {
           $c->add(TsmovbanPeer :: STACON, 'N');
           $tsmovban2 = TsmovbanPeer :: doSelectOne($c);
           if ($tsmovban2) {
+          	foreach ($tsmovban2 as $ban2) {
             $tsmovban2->setStacon('N');
             $tsmovban2->save();
+          	}
           }
         }
 
@@ -570,8 +574,10 @@ class Tesoreria {
     $tsmovlib = TsmovlibPeer :: doSelectOne($c);
 
     if ($tsmovlib) {
-      $tsmovlib->setStacon($status);
-      $tsmovlib->save();
+    foreach ($tsmovlib as $lib){
+      $lib->setStacon($status);
+      $lib->save();
+    }
     }
 
     $c = new Criteria();
@@ -580,8 +586,10 @@ class Tesoreria {
     $tsmovban = TsmovbanPeer :: doSelectOne($c);
 
     if ($tsmovban) {
-      $tsmovban->setStacon($status);
-      $tsmovban->save();
+    foreach ($tsmovban as $ban){
+      $ban->setStacon($status);
+      $ban->save();
+    }
     }
   }
 
@@ -2318,10 +2326,11 @@ class Tesoreria {
         $contabc1= new Contabc1();
         $contabc1->setNumcom($correl2);
         $contabc1->setFeccom($objeto->getFectra());
-        $contabc1->setCodcta($objeto->getCtacon_des());
+        $ctades=H::getX('numcue','Tsdefban','Codcta',$objeto->getCtades());
+        $contabc1->setCodcta($ctades);
         $contabc1->setNumasi(1);
         $contabc1->setRefasi($objeto->getReftra());
-        $contabc1->setDesasi(H::getX('codcta','Contabb','Descta',$objeto->getCtacon_des()));
+        $contabc1->setDesasi(H::getX('codcta','Contabb','Descta',$ctades));
        	$contabc1->setDebcre('D');
        	$contabc1->setMonasi($objeto->getMontra());
         $contabc1->save();
@@ -2329,10 +2338,11 @@ class Tesoreria {
         $contabc1= new Contabc1();
         $contabc1->setNumcom($correl2);
         $contabc1->setFeccom($objeto->getFectra());
-        $contabc1->setCodcta($objeto->getCtacon_ori());
+        $ctahas=H::getX('numcue','Tsdefban','Codcta',$objeto->getCtaori());
+        $contabc1->setCodcta($ctahas);
         $contabc1->setNumasi(2);
         $contabc1->setRefasi($objeto->getReftra());
-        $contabc1->setDesasi(H::getX('codcta','Contabb','Descta',$objeto->getCtacon_ori()));
+        $contabc1->setDesasi(H::getX('codcta','Contabb','Descta',$ctahas));
        	$contabc1->setDebcre('C');
        	$contabc1->setMonasi($objeto->getMontra());
         $contabc1->save();
