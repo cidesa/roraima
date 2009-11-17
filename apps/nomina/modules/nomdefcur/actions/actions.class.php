@@ -78,7 +78,7 @@ class nomdefcurActions extends autonomdefcurActions
     $col4->setAlineacionObjeto(Columna::IZQUIERDA);
     $col4->setAlineacionContenido(Columna::IZQUIERDA);
     $col4->setNombreCampo('horini');
-    $col4->setHTML('type="text" size="15" maxlength="6" onKeypress="return EscribirHora(event,this);"');
+    $col4->setHTML('type="text" size="15" maxlength="7" onKeypress="return EscribirHora(event,this);"');
 	
 	$col5 = new Columna('Hora Fin');
     $col5->setTipo(Columna::TEXTO);
@@ -86,7 +86,7 @@ class nomdefcurActions extends autonomdefcurActions
     $col5->setAlineacionObjeto(Columna::IZQUIERDA);
     $col5->setAlineacionContenido(Columna::IZQUIERDA);
     $col5->setNombreCampo('horfin');
-    $col5->setHTML('type="text" size="15" maxlength="6" onKeypress="return EscribirHora(event,this);"');
+    $col5->setHTML('type="text" size="15" maxlength="7" onKeypress="return EscribirHora(event,this);"');
 
     // Se guardan las columnas en el objetos de opciones
     $opciones->addColumna($col1);
