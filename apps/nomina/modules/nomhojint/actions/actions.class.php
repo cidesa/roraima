@@ -217,6 +217,20 @@ class nomhojintActions extends autonomhojintActions
     }
     return $tipemp;
   }
+  
+  public function CargarEstatus()
+  {
+    $c = new Criteria();
+    $lista_estemp = NpestempPeer::doSelect($c);
+
+    $estemp = array();
+
+    foreach($lista_estemp as $obj_estemp)
+    {
+      $estemp += array($obj_estemp->getCodestemp() => $obj_estemp->getDesestemp());
+    }
+    return $estemp;
+  }
 
   public function CargarGrupoL()
   {
@@ -319,7 +333,7 @@ class nomhojintActions extends autonomhojintActions
     $this->listatipovivienda= Constantes::ListaTipoVivienda();
     $this->listaformatenencia= Constantes::ListaFormaTenencia();
     $this->listaservicios= Constantes::ListaServicios();
-    $this->listasituacion= Constantes::ListaSituacionEmpleados();
+    $this->listasituacion= $this->cargarEstatus();
 
     if ($this->getRequest()->getMethod() == sfRequest::POST)
     {
@@ -472,7 +486,7 @@ $this->Bitacora('Guardo');
     $this->listatipovivienda= Constantes::ListaTipoVivienda();
     $this->listaformatenencia= Constantes::ListaFormaTenencia();
     $this->listaservicios= Constantes::ListaServicios();
-    $this->listasituacion= Constantes::ListaSituacionEmpleados();
+    $this->listasituacion= $this->cargarEstatus();
 
 
      if (isset($nphojint['codemp']))
@@ -1663,7 +1677,7 @@ $this->Bitacora('Guardo');
       'nphojint{fecret}' => 'Egreso:',
       'nphojint{fecrei}' => 'Reingreso:',
       'nphojint{obsemp}' => 'Motivo de Egreso:',
-      'nphojint{staemp}' => 'Estatus del Empleado:',
+      'nphojint{staemp}' => 'Situación del Empleado:',
       'nphojint{codtippag}' => 'Forma de Pago:',
       'nphojint{codban}' => 'Banco:',
       'nphojint{numcue}' => 'Número de Cuenta Nómina:',
@@ -1696,7 +1710,7 @@ $this->Bitacora('Guardo');
       'nphojint{tenotr}' => 'Descripción:',
       'nphojint{sercon}' => 'Servicios:',
       'nphojint{temporal}' => 'Temporal:',
-      'nphojint{situac}' => 'Situacion:',
+      'nphojint{situac}' => 'Estatus del Empleado:',
       'nphojint{profes}' => 'Profesional:',
 	  'nphojint{prinom}' => 'Primer Nombre:',
       'nphojint{segnom}' => 'Segundo Nombre:',
