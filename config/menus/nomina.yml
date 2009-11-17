@@ -38,6 +38,7 @@ nomina:
       Tipos de Gastos:                                               NomDefTipGas
       Tipo de Cargos:                                                NomTipCar      
       Motivos de Faltas y/o Permisos:                                NomDefEspMotFalPre
+      Estatus del Empleado:                                          nomdefestemp
       Situacion del Empleado:                                        nomdefespsitemp
       Definición de Condición Contractual:                           NomDefEspGruLab
       Definición Seguro HCM:                                         NomDefEspSegHcm

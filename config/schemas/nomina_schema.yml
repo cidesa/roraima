@@ -7150,3 +7150,18 @@ propel:
       type: INTEGER
       required: true
       autoIncrement: true
+  npestemp:
+    #_attributes:
+      #idMethod: native
+    codestemp:
+      type: VARCHAR
+      size: 1
+      required: true
+    desestemp:
+      type: VARCHAR
+      size: 100
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
