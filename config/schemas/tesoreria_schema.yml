@@ -1290,6 +1290,9 @@ propel:
     peraut:
       type: VARCHAR
       size: 40
+    numcomegr:
+      type: VARCHAR
+      size: 8
     id:
       type: INTEGER
       required: true
