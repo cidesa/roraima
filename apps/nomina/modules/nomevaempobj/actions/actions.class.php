@@ -218,12 +218,17 @@ class nomevaempobjActions extends autonomevaempobjActions
 		$auxid= split("_", $idcaja);
 		
 		$pespun='';
+		$js='';
 		if(floatval($valor)>=floatval($minpun) && floatval($valor)<=floatval($maxpun))
 		{
 			$pespun=$valor*$pesobj;
+		}else
+		{
+			$js.="$('$idcaja').value='';
+			      alert('La puntuación debe estar en el rango minimo y maximo del nivel');";
 		}
 		
-		$output = '[["'.$auxid[0].'_'.$auxid[1].'_8","'.$pespun.'",""],["","",""]]';			
+		$output = '[["'.$auxid[0].'_'.$auxid[1].'_8","'.$pespun.'",""],["javascript","'.$js.'",""]]';			
         break;	
       default:
         $output = '[["","",""],["","",""],["","",""]]';
