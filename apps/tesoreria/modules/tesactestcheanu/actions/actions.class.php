@@ -31,8 +31,9 @@ class tesactestcheanuActions extends autotesactestcheanuActions
   	$c->addAscendingOrderByColumn(TscheemiPeer::NUMCHE);
   	$c->addAscendingOrderByColumn(TscheemiPeer::FECENT);
   	$c->addAscendingOrderByColumn(TscheemiPeer::NUMCUE);
+    $c->setLimit(100);
     $reg = TscheemiPeer::doSelect($c);
-
+//H::printR($reg);exit();
     $this->obj = H::getConfigGrid('grid' ,$reg);
     $this->params['grid'] = $this->obj;
   }
