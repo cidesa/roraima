@@ -1,0 +1,31 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Rhdefind
+    theme:            cidesaGenerator
+    fields:
+      codind:      { name: Código, params: size=10 maxlength=4 onBlur  = "$(this.id).value=$(this.id).value.pad(4,'0',0)"} 
+      desind:      { name: Descripción, type: textarea_tag, params: maxlength=250 cols=60 }
+      tipind:      { name: Tipo}
+      ptipind:     { name: .}
+   
+    list:
+      title:              Definicion de Indicadores
+      display:            [=codind, desind]
+      filters:            [codind, desind]
+      max_pers:           10
+      sort:               codind
+      objects_actions:
+        _edit:            ~
+        _delete:          ~
+      actions:
+        _create:          ~           
+
+    edit:
+      title:              Edicion de Definicion de Indicadoress
+      display:
+        Definción de Valores:   [codind, desind, _ptipind]  
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

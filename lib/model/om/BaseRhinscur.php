@@ -25,6 +25,10 @@ abstract class BaseRhinscur extends BaseObject  implements Persistent {
 
 
 	
+	protected $tipper;
+
+
+	
 	protected $id;
 
 	
@@ -77,6 +81,13 @@ abstract class BaseRhinscur extends BaseObject  implements Persistent {
   }
 
   
+  public function getTipper()
+  {
+
+    return trim($this->tipper);
+
+  }
+  
   public function getId()
   {
 
@@ -117,6 +128,11 @@ abstract class BaseRhinscur extends BaseObject  implements Persistent {
 	public function setFecins($v)
 	{
 
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecins] from input: " . var_export($v, true));
@@ -129,6 +145,16 @@ abstract class BaseRhinscur extends BaseObject  implements Persistent {
       $this->modifiedColumns[] = RhinscurPeer::FECINS;
     }
 
+	} 
+	
+	public function setTipper($v)
+	{
+
+    if ($this->tipper !== $v) {
+        $this->tipper = $v;
+        $this->modifiedColumns[] = RhinscurPeer::TIPPER;
+      }
+  
 	} 
 	
 	public function setId($v)
@@ -153,7 +179,9 @@ abstract class BaseRhinscur extends BaseObject  implements Persistent {
 
       $this->fecins = $rs->getDate($startcol + 3, null);
 
-      $this->id = $rs->getInt($startcol + 4);
+      $this->tipper = $rs->getString($startcol + 4);
+
+      $this->id = $rs->getInt($startcol + 5);
 
       $this->resetModified();
 
@@ -161,7 +189,7 @@ abstract class BaseRhinscur extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 5; 
+            return $startcol + 6; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Rhinscur object", $e);
     }
@@ -321,6 +349,9 @@ abstract class BaseRhinscur extends BaseObject  implements Persistent {
 				return $this->getFecins();
 				break;
 			case 4:
+				return $this->getTipper();
+				break;
+			case 5:
 				return $this->getId();
 				break;
 			default:
@@ -337,7 +368,8 @@ abstract class BaseRhinscur extends BaseObject  implements Persistent {
 			$keys[1] => $this->getCodemp(),
 			$keys[2] => $this->getCodcar(),
 			$keys[3] => $this->getFecins(),
-			$keys[4] => $this->getId(),
+			$keys[4] => $this->getTipper(),
+			$keys[5] => $this->getId(),
 		);
 		return $result;
 	}
@@ -366,6 +398,9 @@ abstract class BaseRhinscur extends BaseObject  implements Persistent {
 				$this->setFecins($value);
 				break;
 			case 4:
+				$this->setTipper($value);
+				break;
+			case 5:
 				$this->setId($value);
 				break;
 		} 	}
@@ -379,7 +414,8 @@ abstract class BaseRhinscur extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[1], $arr)) $this->setCodemp($arr[$keys[1]]);
 		if (array_key_exists($keys[2], $arr)) $this->setCodcar($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setFecins($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setId($arr[$keys[4]]);
+		if (array_key_exists($keys[4], $arr)) $this->setTipper($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setId($arr[$keys[5]]);
 	}
 
 	
@@ -391,6 +427,7 @@ abstract class BaseRhinscur extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(RhinscurPeer::CODEMP)) $criteria->add(RhinscurPeer::CODEMP, $this->codemp);
 		if ($this->isColumnModified(RhinscurPeer::CODCAR)) $criteria->add(RhinscurPeer::CODCAR, $this->codcar);
 		if ($this->isColumnModified(RhinscurPeer::FECINS)) $criteria->add(RhinscurPeer::FECINS, $this->fecins);
+		if ($this->isColumnModified(RhinscurPeer::TIPPER)) $criteria->add(RhinscurPeer::TIPPER, $this->tipper);
 		if ($this->isColumnModified(RhinscurPeer::ID)) $criteria->add(RhinscurPeer::ID, $this->id);
 
 		return $criteria;
@@ -429,6 +466,8 @@ abstract class BaseRhinscur extends BaseObject  implements Persistent {
 		$copyObj->setCodcar($this->codcar);
 
 		$copyObj->setFecins($this->fecins);
+
+		$copyObj->setTipper($this->tipper);
 
 
 		$copyObj->setNew(true);

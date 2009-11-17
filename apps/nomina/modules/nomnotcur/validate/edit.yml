@@ -1,0 +1,17 @@
+methods:
+  post:
+   - "rhnotcur{codcur}"
+   
+names:
+  rhnotcur{codcur}:
+    required:  Yes
+    required_msg: El código no puede estar en Blanco
+    validators: Validator_codcur
+
+Validator_codcur:
+    class: CidesaExistValidator
+    param:
+        class:    Rhdefcur
+        column:   codcur
+        unique_error:   El Código del Curso no existe  
+        

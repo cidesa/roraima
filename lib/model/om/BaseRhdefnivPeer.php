@@ -13,7 +13,7 @@ abstract class BaseRhdefnivPeer {
 	const CLASS_DEFAULT = 'lib.model.Rhdefniv';
 
 	
-	const NUM_COLUMNS = 3;
+	const NUM_COLUMNS = 8;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -26,6 +26,21 @@ abstract class BaseRhdefnivPeer {
 	const DESNIV = 'rhdefniv.DESNIV';
 
 	
+	const MINPUN = 'rhdefniv.MINPUN';
+
+	
+	const MAXPUN = 'rhdefniv.MAXPUN';
+
+	
+	const TOTPES = 'rhdefniv.TOTPES';
+
+	
+	const CODRAN = 'rhdefniv.CODRAN';
+
+	
+	const TIPCAL = 'rhdefniv.TIPCAL';
+
+	
 	const ID = 'rhdefniv.ID';
 
 	
@@ -34,18 +49,18 @@ abstract class BaseRhdefnivPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codniv', 'Desniv', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (RhdefnivPeer::CODNIV, RhdefnivPeer::DESNIV, RhdefnivPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codniv', 'desniv', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, )
+		BasePeer::TYPE_PHPNAME => array ('Codniv', 'Desniv', 'Minpun', 'Maxpun', 'Totpes', 'Codran', 'Tipcal', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (RhdefnivPeer::CODNIV, RhdefnivPeer::DESNIV, RhdefnivPeer::MINPUN, RhdefnivPeer::MAXPUN, RhdefnivPeer::TOTPES, RhdefnivPeer::CODRAN, RhdefnivPeer::TIPCAL, RhdefnivPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codniv', 'desniv', 'minpun', 'maxpun', 'totpes', 'codran', 'tipcal', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codniv' => 0, 'Desniv' => 1, 'Id' => 2, ),
-		BasePeer::TYPE_COLNAME => array (RhdefnivPeer::CODNIV => 0, RhdefnivPeer::DESNIV => 1, RhdefnivPeer::ID => 2, ),
-		BasePeer::TYPE_FIELDNAME => array ('codniv' => 0, 'desniv' => 1, 'id' => 2, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, )
+		BasePeer::TYPE_PHPNAME => array ('Codniv' => 0, 'Desniv' => 1, 'Minpun' => 2, 'Maxpun' => 3, 'Totpes' => 4, 'Codran' => 5, 'Tipcal' => 6, 'Id' => 7, ),
+		BasePeer::TYPE_COLNAME => array (RhdefnivPeer::CODNIV => 0, RhdefnivPeer::DESNIV => 1, RhdefnivPeer::MINPUN => 2, RhdefnivPeer::MAXPUN => 3, RhdefnivPeer::TOTPES => 4, RhdefnivPeer::CODRAN => 5, RhdefnivPeer::TIPCAL => 6, RhdefnivPeer::ID => 7, ),
+		BasePeer::TYPE_FIELDNAME => array ('codniv' => 0, 'desniv' => 1, 'minpun' => 2, 'maxpun' => 3, 'totpes' => 4, 'codran' => 5, 'tipcal' => 6, 'id' => 7, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
 	);
 
 	
@@ -102,6 +117,16 @@ abstract class BaseRhdefnivPeer {
 		$criteria->addSelectColumn(RhdefnivPeer::CODNIV);
 
 		$criteria->addSelectColumn(RhdefnivPeer::DESNIV);
+
+		$criteria->addSelectColumn(RhdefnivPeer::MINPUN);
+
+		$criteria->addSelectColumn(RhdefnivPeer::MAXPUN);
+
+		$criteria->addSelectColumn(RhdefnivPeer::TOTPES);
+
+		$criteria->addSelectColumn(RhdefnivPeer::CODRAN);
+
+		$criteria->addSelectColumn(RhdefnivPeer::TIPCAL);
 
 		$criteria->addSelectColumn(RhdefnivPeer::ID);
 

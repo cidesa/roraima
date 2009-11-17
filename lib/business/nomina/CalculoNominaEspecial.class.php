@@ -308,6 +308,7 @@ public static function CalculoPorFormula($grid,$codemp,$cargo,$conceptos,$codnom
 {
 	$especial='SI';
 	$valor1=Nomina::evaluar_Campo($grid["campo"],&$resecu,&$error,&$guardar,$codemp,$cargo,$conceptos["codcon"],$codnom,&$fecnom,$fechanac,$fechaing,$sexo,$especial,$desde,$hasta,$ultfec,$profec);
+
 	if ($nroope==0)
 	{
 		$booleanos[0]=Nomina::evaluar_Cond($valor1,$grid["operador"],$grid["valor"]);
@@ -328,7 +329,7 @@ public static function CalculoPorFormula($grid,$codemp,$cargo,$conceptos,$codnom
 	else // es la formula
 	{
 		if ($booleanos[0])
-		{
+		{		
 			// ejecuta y pasa a otro concepto
 			$cadena= trim(strtoupper($grid["confor"]));
 			$ecuacion=Nomina::posfix($cadena);

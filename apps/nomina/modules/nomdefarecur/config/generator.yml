@@ -1,0 +1,32 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Rharecur
+    theme:            cidesaGenerator
+    fields:
+      codarecur:                 { name: Código, params: maxlength=4 size=10 onFocus="if($('id').value!='')$(this.id).readOnly=true" }
+      desarecur:                 { name: Descripción, readonly : true, params: maxlength=250 size=60 }
+
+    list:
+      title:              Definición  Area del Curso
+      display:            [=codarecur, desarecur]
+      filters:            [codarecur, desarecur]
+      max_pers:           10
+      sort:               codarecur
+      objects_actions:
+        _edit:            ~
+        _delete:          ~
+      actions:
+        _create:          ~           
+
+    edit:
+      title:              Edición de Definición Area del Curso
+      display:
+        Datos Area del Curso:   [codarecur, desarecur]  
+      fields:
+        codarecur:
+          params:     maxlength=4,size=5 onBlur  = "$(this.id).value=$(this.id).value.pad(4,'0',0)"  
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

@@ -14,5 +14,5 @@
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */ 
 class RhasicurPeer extends BaseRhasicurPeer
-{
+{	
 }

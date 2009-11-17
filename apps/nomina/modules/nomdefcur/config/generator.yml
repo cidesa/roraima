@@ -1,0 +1,66 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Rhdefcur
+    theme:            cidesaGenerator
+    fields:
+      codcur:                 { name: Código, params: maxlength=10 size=15 onFocus="if($('id').value!='')$(this.id).readOnly=true" }
+      descur:                 { name: Descripción, readonly : true, params: maxlength=250 size=60 }
+      codtipcur:
+        name: Tipo
+        msj_error: El Tipo es necesario
+        catalogo:  
+          catalogoweb: rhtipcur_codtipcur
+          clase: Rhtipcur
+          ajax: 0
+          parametros: getprincipal="getCodtipcur" getsecundario="getDestipcur" campoprincipal="codtipcur" camposecundario="destipcur" campobase = "id"           
+      codpro:
+        name: Instituto
+        msj_error: El Instituto es necesario
+        catalogo:  
+          catalogoweb: cotizaciones
+          clase: Caprovee
+          ajax: 0
+          parametros: getprincipal="getCodpro" getsecundario="getNompro" campoprincipal="codpro" camposecundario="nompro" campobase = "id"                   
+      codtit:
+        name: Titulo
+        msj_error: El Titulo es necesario
+        catalogo:  
+          catalogoweb: rhtitcur_codtit
+          clase: Rhtitcur
+          ajax: 0
+          parametros: getprincipal="getCodtit" getsecundario="getNomtit" campoprincipal="codtit" camposecundario="nomtit" campobase = "id"               
+      fecini:         { name: Fecha Inicio}
+      fecfin:         { name: Fecha Culminación}
+      durcur:         { name: Duración Curso (Horas)}
+      notapr:         { name: Nota Aprobatoria}
+      turcur:         { name: Turno}
+      turno:          { name: .}
+      clase:          { name: .}
+      instructores:   { name: .}
+
+    list:
+      title:              Definición de Cursos
+      display:            [=codcur, descur, codtipcur, codpro, codtit, fecini, fecfin]
+      filters:            [codcur, descur, codtipcur, codpro, codtit, fecini, fecfin]
+      max_pager:      15
+      sort:               codcur
+      objects_actions:
+        _edit:            ~
+        _delete:          ~
+      actions:
+        _create:          ~           
+
+    edit:
+      title:              Edición de Definición de Cursos
+      display:
+        Datos del Curso:   [codcur, descur, codtipcur, codpro, codtit, fecini, fecfin, durcur, notapr, _turno]  
+        Clase:             [_clase]
+        Instructores:      [_instructores]
+      fields:
+        codcur:
+          params:     maxlength=4,size=5 onBlur  = "$(this.id).value=$(this.id).value.pad(4,'0',0)"  
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

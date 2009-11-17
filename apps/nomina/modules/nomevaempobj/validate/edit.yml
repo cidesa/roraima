@@ -1,0 +1,45 @@
+methods:
+  post:
+
+   - "rhevaempobj{codniv}"
+   - "rhevaempobj{feceval}"
+   - "rhevaempobj{codemp}"
+      
+names:
+  rhevaempobj{codniv}:
+    required:  Yes
+    required_msg: El código no puede estar en Blanco
+    validators: Validator_codniv    
+
+  rhevaempobj{feceval}:
+    required:  Yes
+    required_msg: La Fecha de Evaluación no puede estar en Blanco
+    validators: FechaValidator
+    
+  rhevaempobj{codemp}:
+    required:  Yes
+    required_msg: El código no puede estar en Blanco
+    validators: Validator_codemp
+    
+        
+Validator_codniv:
+    class: CidesaExistValidator
+    param:
+        class:    Rhdefniv
+        column:   codniv
+        unique_error:   El Código del Nivel no existe 
+        
+FechaValidator:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha  introducida es invalida
+        
+Validator_codemp:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Rhevaempobj
+        column:   codevdo
+        unique_error:   El Código del Nivel no existe 
+                

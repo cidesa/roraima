@@ -13,7 +13,7 @@ abstract class BaseRhevaempobjPeer {
 	const CLASS_DEFAULT = 'lib.model.Rhevaempobj';
 
 	
-	const NUM_COLUMNS = 6;
+	const NUM_COLUMNS = 9;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -35,6 +35,15 @@ abstract class BaseRhevaempobjPeer {
 	const ALCOBJ = 'rhevaempobj.ALCOBJ';
 
 	
+	const PESOBJ = 'rhevaempobj.PESOBJ';
+
+	
+	const PUNOBJ = 'rhevaempobj.PUNOBJ';
+
+	
+	const FECEVAL = 'rhevaempobj.FECEVAL';
+
+	
 	const ID = 'rhevaempobj.ID';
 
 	
@@ -43,18 +52,18 @@ abstract class BaseRhevaempobjPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codevdo', 'Codniv', 'Codobj', 'Plaobj', 'Alcobj', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (RhevaempobjPeer::CODEVDO, RhevaempobjPeer::CODNIV, RhevaempobjPeer::CODOBJ, RhevaempobjPeer::PLAOBJ, RhevaempobjPeer::ALCOBJ, RhevaempobjPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codevdo', 'codniv', 'codobj', 'plaobj', 'alcobj', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
+		BasePeer::TYPE_PHPNAME => array ('Codevdo', 'Codniv', 'Codobj', 'Plaobj', 'Alcobj', 'Pesobj', 'Punobj', 'Feceval', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (RhevaempobjPeer::CODEVDO, RhevaempobjPeer::CODNIV, RhevaempobjPeer::CODOBJ, RhevaempobjPeer::PLAOBJ, RhevaempobjPeer::ALCOBJ, RhevaempobjPeer::PESOBJ, RhevaempobjPeer::PUNOBJ, RhevaempobjPeer::FECEVAL, RhevaempobjPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codevdo', 'codniv', 'codobj', 'plaobj', 'alcobj', 'pesobj', 'punobj', 'feceval', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codevdo' => 0, 'Codniv' => 1, 'Codobj' => 2, 'Plaobj' => 3, 'Alcobj' => 4, 'Id' => 5, ),
-		BasePeer::TYPE_COLNAME => array (RhevaempobjPeer::CODEVDO => 0, RhevaempobjPeer::CODNIV => 1, RhevaempobjPeer::CODOBJ => 2, RhevaempobjPeer::PLAOBJ => 3, RhevaempobjPeer::ALCOBJ => 4, RhevaempobjPeer::ID => 5, ),
-		BasePeer::TYPE_FIELDNAME => array ('codevdo' => 0, 'codniv' => 1, 'codobj' => 2, 'plaobj' => 3, 'alcobj' => 4, 'id' => 5, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
+		BasePeer::TYPE_PHPNAME => array ('Codevdo' => 0, 'Codniv' => 1, 'Codobj' => 2, 'Plaobj' => 3, 'Alcobj' => 4, 'Pesobj' => 5, 'Punobj' => 6, 'Feceval' => 7, 'Id' => 8, ),
+		BasePeer::TYPE_COLNAME => array (RhevaempobjPeer::CODEVDO => 0, RhevaempobjPeer::CODNIV => 1, RhevaempobjPeer::CODOBJ => 2, RhevaempobjPeer::PLAOBJ => 3, RhevaempobjPeer::ALCOBJ => 4, RhevaempobjPeer::PESOBJ => 5, RhevaempobjPeer::PUNOBJ => 6, RhevaempobjPeer::FECEVAL => 7, RhevaempobjPeer::ID => 8, ),
+		BasePeer::TYPE_FIELDNAME => array ('codevdo' => 0, 'codniv' => 1, 'codobj' => 2, 'plaobj' => 3, 'alcobj' => 4, 'pesobj' => 5, 'punobj' => 6, 'feceval' => 7, 'id' => 8, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
 	);
 
 	
@@ -117,6 +126,12 @@ abstract class BaseRhevaempobjPeer {
 		$criteria->addSelectColumn(RhevaempobjPeer::PLAOBJ);
 
 		$criteria->addSelectColumn(RhevaempobjPeer::ALCOBJ);
+
+		$criteria->addSelectColumn(RhevaempobjPeer::PESOBJ);
+
+		$criteria->addSelectColumn(RhevaempobjPeer::PUNOBJ);
+
+		$criteria->addSelectColumn(RhevaempobjPeer::FECEVAL);
 
 		$criteria->addSelectColumn(RhevaempobjPeer::ID);
 

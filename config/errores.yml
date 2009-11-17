@@ -1226,6 +1226,86 @@
 11104:
   cod: 11104
   msj:  No puede borrar la Programacion de una Revision y Año ya cerrados
+#####################EVALUACION Y DESEMPEÑO#############################
+801:
+  cod: 801
+  msj: Debe cargar informacion de la Clases del Curso  
+802:
+  cod: 802
+  msj: Debe ingresar la informacion de las Clases del Curso
+803:
+  cod: 803
+  msj: Informacion de Clases del Curso, horas no cumplen con el formato HH:MM
+804:
+  cod: 804
+  msj: Informacion de Clases del Curso, debe indicar si la hora es "am" ó "pm"
+805:
+  cod: 805
+  msj: Debe ingresar la informacion de Instructores del Curso
+806:
+  cod: 806
+  msj: Debe cargar informacion de los Instructores del Curso
+807:
+  cod: 807
+  msj: Falta Informacion del Personal a Inscribir en el Curso
+808:
+  cod: 808
+  msj: Debe cargar informacion del Personal a Inscribir en el Curso
+809:
+  cod: 809
+  msj: No se puede eliminar el Registro porque tiene asociado Asistencias
+810:
+  cod: 810
+  msj: Debe seleccionar por lo menos una persona
+811:
+  cod: 811
+  msj: El Grid debe Cargar informacion de Personal Inscrito
+812:
+  cod: 812
+  msj: Debe cargar las notas del personal inscrito
+813:
+  cod: 813
+  msj: Debe cargar información de los rangos
+814:
+  cod: 814
+  msj: Falta Información en el Grid
+815:
+  cod: 815
+  msj: Debe cargar información de los Valores
+816:
+  cod: 816
+  msj: Faltan Datos en el Grid de Valores
+817:
+  cod: 817
+  msj: Los Valores de Porcentaje deben estar comprendidos entre 1 y 100
+818:
+  cod: 818
+  msj: Debe cargar datos en el grid de valores
+819:
+  cod: 819
+  msj: Faltan Datos en el Grid  de Valores  
+820:
+  cod: 820
+  msj: Faltan Datos en el Grid de Indicadores
+821:
+  cod: 821
+  msj: Debe cargar información de los Indicadores
+822:
+  cod: 822
+  msj: Faltan Datos en el Grid de Objetivos
+823:
+  cod: 823
+  msj: Debe cargar Datos en el Grid Objetivos
+824:
+  cod: 824
+  msj: Faltan Datos en el Grid de Objetivos Planificados
+825:
+  cod: 825
+  msj: Debe cargar Datos en el Grid Objetivos Planificados
+9000:
+  cod: 9000
+  msj: Debe cargar informacion en el grid
 99999999:
   cod: 99999999
-  msj: Número de Orden de Pago ya Existe, intento con otro.
+  msj: Número de Orden de Pago ya Existe, intento 
+  con otro.  

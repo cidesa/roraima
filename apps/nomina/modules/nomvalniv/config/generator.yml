@@ -1,0 +1,39 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Rhvalniv
+    theme:            cidesaGenerator
+    fields:
+      codniv:
+        name: Código
+        msj_error: El Código es necesario
+        catalogo:  
+          catalogoweb: rhdefniv_codniv
+          clase: Rhdefniv
+          ajax: 0
+          parametros: getprincipal="getCodniv" getsecundario="getDesniv" campoprincipal="codniv" camposecundario="desniv" campobase = "id"           
+      gridvalniv:      { name: .}
+      desniv:          { name: Nivel}
+      codvalins:       { name: Valores}
+      desvalins:       { name: Descripcion}
+
+    list:
+      title:              Valores por Niveles
+      display:            [=codniv, desniv, codvalins, desvalins]
+      filters:            [codniv, codvalins]
+      max_pers:           10
+      sort:               codniv
+      objects_actions:
+        _edit:            ~
+        _delete:          ~
+      actions:
+        _create:          ~           
+
+    edit:
+      title:              Edición de Valores por Niveles
+      display:
+        Datos Niveles:       [codniv, _gridvalniv]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

@@ -29,6 +29,18 @@ abstract class BaseRhevaempobj extends BaseObject  implements Persistent {
 
 
 	
+	protected $pesobj;
+
+
+	
+	protected $punobj;
+
+
+	
+	protected $feceval;
+
+
+	
 	protected $id;
 
 	
@@ -74,6 +86,44 @@ abstract class BaseRhevaempobj extends BaseObject  implements Persistent {
     else return $this->alcobj;
 
   }
+  
+  public function getPesobj($val=false)
+  {
+
+    if($val) return number_format($this->pesobj,2,',','.');
+    else return $this->pesobj;
+
+  }
+  
+  public function getPunobj($val=false)
+  {
+
+    if($val) return number_format($this->punobj,2,',','.');
+    else return $this->punobj;
+
+  }
+  
+  public function getFeceval($format = 'Y-m-d')
+  {
+
+    if ($this->feceval === null || $this->feceval === '') {
+      return null;
+    } elseif (!is_int($this->feceval)) {
+            $ts = adodb_strtotime($this->feceval);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [feceval] as date/time value: " . var_export($this->feceval, true));
+      }
+    } else {
+      $ts = $this->feceval;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
   
   public function getId()
   {
@@ -132,6 +182,48 @@ abstract class BaseRhevaempobj extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setPesobj($v)
+	{
+
+    if ($this->pesobj !== $v) {
+        $this->pesobj = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = RhevaempobjPeer::PESOBJ;
+      }
+  
+	} 
+	
+	public function setPunobj($v)
+	{
+
+    if ($this->punobj !== $v) {
+        $this->punobj = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = RhevaempobjPeer::PUNOBJ;
+      }
+  
+	} 
+	
+	public function setFeceval($v)
+	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [feceval] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->feceval !== $ts) {
+      $this->feceval = $ts;
+      $this->modifiedColumns[] = RhevaempobjPeer::FECEVAL;
+    }
+
+	} 
+	
 	public function setId($v)
 	{
 
@@ -156,7 +248,13 @@ abstract class BaseRhevaempobj extends BaseObject  implements Persistent {
 
       $this->alcobj = $rs->getFloat($startcol + 4);
 
-      $this->id = $rs->getInt($startcol + 5);
+      $this->pesobj = $rs->getFloat($startcol + 5);
+
+      $this->punobj = $rs->getFloat($startcol + 6);
+
+      $this->feceval = $rs->getDate($startcol + 7, null);
+
+      $this->id = $rs->getInt($startcol + 8);
 
       $this->resetModified();
 
@@ -164,7 +262,7 @@ abstract class BaseRhevaempobj extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 6; 
+            return $startcol + 9; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Rhevaempobj object", $e);
     }
@@ -327,6 +425,15 @@ abstract class BaseRhevaempobj extends BaseObject  implements Persistent {
 				return $this->getAlcobj();
 				break;
 			case 5:
+				return $this->getPesobj();
+				break;
+			case 6:
+				return $this->getPunobj();
+				break;
+			case 7:
+				return $this->getFeceval();
+				break;
+			case 8:
 				return $this->getId();
 				break;
 			default:
@@ -344,7 +451,10 @@ abstract class BaseRhevaempobj extends BaseObject  implements Persistent {
 			$keys[2] => $this->getCodobj(),
 			$keys[3] => $this->getPlaobj(),
 			$keys[4] => $this->getAlcobj(),
-			$keys[5] => $this->getId(),
+			$keys[5] => $this->getPesobj(),
+			$keys[6] => $this->getPunobj(),
+			$keys[7] => $this->getFeceval(),
+			$keys[8] => $this->getId(),
 		);
 		return $result;
 	}
@@ -376,6 +486,15 @@ abstract class BaseRhevaempobj extends BaseObject  implements Persistent {
 				$this->setAlcobj($value);
 				break;
 			case 5:
+				$this->setPesobj($value);
+				break;
+			case 6:
+				$this->setPunobj($value);
+				break;
+			case 7:
+				$this->setFeceval($value);
+				break;
+			case 8:
 				$this->setId($value);
 				break;
 		} 	}
@@ -390,7 +509,10 @@ abstract class BaseRhevaempobj extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[2], $arr)) $this->setCodobj($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setPlaobj($arr[$keys[3]]);
 		if (array_key_exists($keys[4], $arr)) $this->setAlcobj($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setId($arr[$keys[5]]);
+		if (array_key_exists($keys[5], $arr)) $this->setPesobj($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setPunobj($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setFeceval($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setId($arr[$keys[8]]);
 	}
 
 	
@@ -403,6 +525,9 @@ abstract class BaseRhevaempobj extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(RhevaempobjPeer::CODOBJ)) $criteria->add(RhevaempobjPeer::CODOBJ, $this->codobj);
 		if ($this->isColumnModified(RhevaempobjPeer::PLAOBJ)) $criteria->add(RhevaempobjPeer::PLAOBJ, $this->plaobj);
 		if ($this->isColumnModified(RhevaempobjPeer::ALCOBJ)) $criteria->add(RhevaempobjPeer::ALCOBJ, $this->alcobj);
+		if ($this->isColumnModified(RhevaempobjPeer::PESOBJ)) $criteria->add(RhevaempobjPeer::PESOBJ, $this->pesobj);
+		if ($this->isColumnModified(RhevaempobjPeer::PUNOBJ)) $criteria->add(RhevaempobjPeer::PUNOBJ, $this->punobj);
+		if ($this->isColumnModified(RhevaempobjPeer::FECEVAL)) $criteria->add(RhevaempobjPeer::FECEVAL, $this->feceval);
 		if ($this->isColumnModified(RhevaempobjPeer::ID)) $criteria->add(RhevaempobjPeer::ID, $this->id);
 
 		return $criteria;
@@ -443,6 +568,12 @@ abstract class BaseRhevaempobj extends BaseObject  implements Persistent {
 		$copyObj->setPlaobj($this->plaobj);
 
 		$copyObj->setAlcobj($this->alcobj);
+
+		$copyObj->setPesobj($this->pesobj);
+
+		$copyObj->setPunobj($this->punobj);
+
+		$copyObj->setFeceval($this->feceval);
 
 
 		$copyObj->setNew(true);

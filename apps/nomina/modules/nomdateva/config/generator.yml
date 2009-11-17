@@ -1,0 +1,45 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Rhdateva
+    theme:            cidesaGenerator
+    fields:
+      evaluado:      { name: Código} 
+      cargoevdo:     { name: Cargo, params: style="border:none" size=100}
+      evaluador:     { name: Código}
+      cargoevor:     { name: Cargo, params: style="border:none" size=100}
+      supervisor:    { name: Código}
+      cargosup:      { name: Cargo, params: style="border:none" size=100}
+      fecela:        { name: Fecha Elaboración}
+      fecdes:        { name: Periodo Desde}
+      fechas:        { name: Periodo Hasta}
+      desevdo:       { name: Nombre}
+      desevor:       { name: Nombre}
+      dessup:        { name: Nombre}
+      codevdo:       { name: Evaluado}
+      codevor:       { name: Evaluador}
+      codsup:       { name: Supervisor}
+   
+    list:
+      title:              Datos del Evaluado
+      display:            [=codevdo, desevdo, codevor, desevor, codsup, dessup]
+      filters:            [codevdo, codevor, codsup]
+      max_pers:           10
+      sort:               codevdo
+      objects_actions:
+        _edit:            ~
+        _delete:          ~
+      actions:
+        _create:          ~           
+
+    edit:
+      title:              Edicion de Datos del Evaluado
+      display:
+        Datos del Evaluado:   [_evaluado, cargoevdo]  
+        Datos del Evaluador:  [_evaluador, cargoevor]
+        Datos del Supervisor: [_supervisor, cargosup]
+        Datos Generales:      [fecela, fecdes, fechas]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
