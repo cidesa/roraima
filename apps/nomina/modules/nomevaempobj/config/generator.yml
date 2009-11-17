@@ -1,0 +1,54 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Rhevaempobj
+    theme:            cidesaGenerator
+    fields:
+      display:         [codemp, nomemp, codevdo, feceval, codniv]
+      codevdo:
+        name: Código del Evaluado
+        msj_error: El Código es necesario
+        catalogo:  
+          catalogoweb: Rhevaconcom_codevdo
+          clase: Nphojint
+          ajax: 1
+          parametros: getprincipal="getCodemp" getsecundario="getNomemp" campoprincipal="codemp" camposecundario="nomemp" campobase = "id"           
+      codniv:
+        name: Nivel
+        msj_error: El Código es necesario
+        catalogo:  
+          catalogoweb: rhdefniv_codniv
+          clase: Rhdefniv
+          ajax: 2
+          parametros: getprincipal="getCodniv" getsecundario="getDesniv" campoprincipal="codniv" camposecundario="desniv" campobase = "id"           
+      cargoevdo:         { name: Cargo, params: style="border:none" size=100}
+      feceval:           { name: Fecha Evaluación}    
+      nomemp:            { name: Nombre}
+      desniv:            { name: Descripción}
+      gridempobj:        { name: .}
+      minpun:            { name: . , params: disabled=false style="display:none" }
+      maxpun:            { name: . , params: disabled=false style="display:none"}
+      tipcal:            { name: . , params: disabled=false style="display:none"}
+
+    list:
+      title:              Listado de Evaluación de los Objetivos Individuales
+      display:            [=codevdo, nomemp, codniv, desniv]
+      filters:            [codevdo, codniv]
+      max_pers:           10
+      sort:               codevdo
+      objects_actions:
+        _edit:            ~
+        _delete:          ~
+      actions:
+        _create:          ~           
+
+    edit:
+      title:              Evaluar los Objetivos Individuales
+      display:
+        Datos del Empleado:   [codevdo, cargoevdo]  
+        Datos del Nivel:      [codniv, feceval, minpun, maxpun, tipcal ]
+        Datos de Objetivos Planifiacdos:     [_gridempobj]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

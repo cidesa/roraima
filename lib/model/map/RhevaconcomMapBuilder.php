@@ -44,6 +44,8 @@ class RhevaconcomMapBuilder {
 
 		$tMap->addColumn('PUNVAL', 'Punval', 'double', CreoleTypes::NUMERIC, false, 14);
 
+		$tMap->addColumn('FECEVAL', 'Feceval', 'int', CreoleTypes::DATE, false, null);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

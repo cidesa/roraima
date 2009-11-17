@@ -1,0 +1,16 @@
+methods:
+  post:
+   - "rhvalniv{codniv}"
+
+names:
+  rhvalniv{codniv}:
+    required:  Yes
+    required_msg: El código no puede estar en Blanco
+    validators: Validator_codniv
+
+Validator_codniv:
+    class: CidesaExistValidator
+    param:
+        class:    Rhdefniv
+        column:   codniv
+        unique_error:   El Código del Nivel no existe  

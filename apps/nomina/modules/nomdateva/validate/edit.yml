@@ -1,0 +1,53 @@
+methods:
+  post:
+   - "rhdateva{codevdo}"
+   - "rhdateva{codevor}"
+   - "rhdateva{codsup}"
+   - "rhdateva{fecela}"
+   - "rhdateva{fecdes}"
+   - "rhdateva{fechas}"
+
+names:
+  rhdateva{codevdo}:
+    required:  Yes
+    required_msg: El código no puede estar en Blanco
+    validators: Validator_codemp
+
+  rhdateva{codevor}:
+    required:  Yes
+    required_msg: El código no puede estar en Blanco
+    validators: Validator_codemp
+    
+  rhdateva{codsup}:
+    required:  Yes
+    required_msg: El código no puede estar en Blanco
+    validators: Validator_codemp    
+
+  rhdateva{fecela}:
+    required:  Yes
+    required_msg: La Fecha de Elaboración no puede estar en Blanco
+    validators: FechaValidator
+  
+  rhdateva{fecdes}:
+    required:  Yes
+    required_msg: La Fecha Inicial no puede estar en Blanco
+    validators: FechaValidator
+
+  rhdateva{fechas}:
+    required:  Yes
+    required_msg: La Fecha Final no puede estar en Blanco
+    validators: FechaValidator
+
+Validator_codemp:
+    class: CidesaExistValidator
+    param:
+        class:    Nphojint
+        column:   codemp
+        unique_error:   El Codigo no existe  
+ 
+FechaValidator:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha  introducida es invalida

@@ -15,4 +15,19 @@
  */ 
 class Rhdefcur extends BaseRhdefcur
 {
+	protected $obj_cla=array();
+	protected $obj_inst=array();
+	
+	public  function getDestipur()
+	{
+		return H::GetX('Codtipcur','Rhtipcur','Destipcur',$this->codtipcur);
+	}
+	public  function getNompro()
+	{
+		return H::GetX('Codpro','Caprovee','Nompro',$this->codpro);
+	}
+	public  function getNomtit()
+	{
+		return H::GetX('Codtit','Rhtitcur','Nomtit',$this->codtit);
+	}
 }

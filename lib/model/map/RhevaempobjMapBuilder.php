@@ -44,6 +44,12 @@ class RhevaempobjMapBuilder {
 
 		$tMap->addColumn('ALCOBJ', 'Alcobj', 'double', CreoleTypes::NUMERIC, false, 14);
 
+		$tMap->addColumn('PESOBJ', 'Pesobj', 'double', CreoleTypes::NUMERIC, false, 14);
+
+		$tMap->addColumn('PUNOBJ', 'Punobj', 'double', CreoleTypes::NUMERIC, false, 14);
+
+		$tMap->addColumn('FECEVAL', 'Feceval', 'int', CreoleTypes::DATE, false, null);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

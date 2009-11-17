@@ -1,0 +1,31 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Rhdefran
+    theme:            cidesaGenerator
+    fields:
+      codran:         { name: Código, params: size = 5 maxlength = 2 }
+      desran:         { name: Descripción, params: maxlength = 100}
+      gridrangos:     { name: .}
+      
+    list:
+      title:              Definición de Rangos
+      display:            [=codran, desran]
+      filters:            [codran, desran]
+      max_pers:           10
+      sort:               codran
+      objects_actions:
+        _edit:            ~
+        _delete:          ~
+      actions:
+        _create:          ~           
+
+    edit:
+      title:              Edición de Definición de Rangos
+      display:
+        Definción de Rangos:   [codran, desran]
+        Detalle de Rangos:     [_gridrangos]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

@@ -1,0 +1,30 @@
+methods:
+  post:
+   - "rhrelobjind{codniv}"
+   - "rhrelobjind{codemp}"
+      
+names:
+  rhrelobjind{codniv}:
+    required:  Yes
+    required_msg: El código no puede estar en Blanco
+    validators: Validator_codniv    
+    
+  rhrelobjind{codemp}:
+    required:  Yes
+    required_msg: El código no puede estar en Blanco
+    validators: Validator_codemp
+        
+Validator_codniv:
+    class: CidesaExistValidator
+    param:
+        class:    Rhdefniv
+        column:   codniv
+        unique_error:   El Código del Nivel no existe 
+
+Validator_codemp:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Rhrelobjind
+        column:   codevdo
+        unique_error:   El Código del Nivel no existe 
+        

@@ -15,9 +15,7 @@ generator:
           ajax: 1
           parametros: getprincipal="getRifpro1" getsecundario="getNompro1" campoprincipal="rifpro1" camposecundario="nompro1" campobase = "atprovee1"
           catalogoparams: campo1/rifpro/campo2/nompro
-          #ajaxparams:  
-          divupdate: divgridprovee
-          #id:
+          divupdate: divgridvaca
       monto1:         { name: Monto }
 
       atprovee2:

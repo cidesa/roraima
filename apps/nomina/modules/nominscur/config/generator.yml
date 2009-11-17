@@ -1,0 +1,45 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Rhinscur
+    theme:            cidesaGenerator
+    fields:
+      codcur:
+        name: Código
+        msj_error: El Código es necesario
+        catalogo:  
+          catalogoweb: rhdefcur_codcur
+          clase: Rhdefcur
+          ajax: 1
+          parametros: getprincipal="getCodcur" getsecundario="getDescur" campoprincipal="codcur" camposecundario="descur" campobase = "id"           
+      fecini:         { name: Fecha Inicio, params: style="border:none" }
+      fecfin:         { name: Fecha Culminación, params: style="border:none"}
+      durcur:         { name: Duración Curso (Horas), params: style="border:none"}
+      notapr:         { name: Nota Aprobatoria, params: style="border:none"}
+      turcur:         { name: Turno, params: style="border:none"}
+      gridperins:     { name: .}
+      codemp:         { name: Código Empleado}
+      nomemp:         { name: Nombre}
+      descur:         { name: Descripción}
+
+    list:
+      title:              Inscripción al Curso
+      display:            [=codcur, descur, codemp, nomemp]
+      filters:            [codcur, codemp]
+      max_pers:           10
+      sort:               codcur
+      objects_actions:
+        _edit:            ~
+        _delete:          ~
+      actions:
+        _create:          ~           
+
+    edit:
+      title:              Edición de Inscripciones al Curso
+      display:
+        Datos del Curso:   [codcur, fecini, fecfin, durcur, turcur]  
+        Datos del Personal Inscrito: [_gridperins]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

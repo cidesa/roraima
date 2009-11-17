@@ -15,4 +15,8 @@
  */ 
 class Rhdefniv extends BaseRhdefniv
 {
+	public  function getDesran()
+	{
+		return H::GetX('Codran','Rhdefran','Desran',$this->codran);
+	}
 }

@@ -1,0 +1,30 @@
+methods:
+  post:
+   - "rhdefran{codran}"
+   - "rhdefran{desran}"
+
+names:
+  rhdefran{codran}:
+    required:  Yes
+    required_msg: El código no puede estar en Blanco
+    validators: Validator_codran
+
+  rhdefran{desran}:
+    required:  Yes
+    required_msg: La descripción no puede estar en Blanco
+    validators: Validator_desran
+
+Validator_codran:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Rhdefran
+        column:       codran
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_desran:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       100
+        max_error: La descripción no puede pasar mas de 100 caracteres

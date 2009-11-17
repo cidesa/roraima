@@ -17,6 +17,26 @@ abstract class BaseRhdefniv extends BaseObject  implements Persistent {
 
 
 	
+	protected $minpun;
+
+
+	
+	protected $maxpun;
+
+
+	
+	protected $totpes;
+
+
+	
+	protected $codran;
+
+
+	
+	protected $tipcal;
+
+
+	
 	protected $id;
 
 	
@@ -37,6 +57,41 @@ abstract class BaseRhdefniv extends BaseObject  implements Persistent {
   {
 
     return trim($this->desniv);
+
+  }
+  
+  public function getMinpun()
+  {
+
+    return $this->minpun;
+
+  }
+  
+  public function getMaxpun()
+  {
+
+    return $this->maxpun;
+
+  }
+  
+  public function getTotpes()
+  {
+
+    return $this->totpes;
+
+  }
+  
+  public function getCodran()
+  {
+
+    return trim($this->codran);
+
+  }
+  
+  public function getTipcal()
+  {
+
+    return trim($this->tipcal);
 
   }
   
@@ -67,6 +122,56 @@ abstract class BaseRhdefniv extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setMinpun($v)
+	{
+
+    if ($this->minpun !== $v) {
+        $this->minpun = $v;
+        $this->modifiedColumns[] = RhdefnivPeer::MINPUN;
+      }
+  
+	} 
+	
+	public function setMaxpun($v)
+	{
+
+    if ($this->maxpun !== $v) {
+        $this->maxpun = $v;
+        $this->modifiedColumns[] = RhdefnivPeer::MAXPUN;
+      }
+  
+	} 
+	
+	public function setTotpes($v)
+	{
+
+    if ($this->totpes !== $v) {
+        $this->totpes = $v;
+        $this->modifiedColumns[] = RhdefnivPeer::TOTPES;
+      }
+  
+	} 
+	
+	public function setCodran($v)
+	{
+
+    if ($this->codran !== $v) {
+        $this->codran = $v;
+        $this->modifiedColumns[] = RhdefnivPeer::CODRAN;
+      }
+  
+	} 
+	
+	public function setTipcal($v)
+	{
+
+    if ($this->tipcal !== $v) {
+        $this->tipcal = $v;
+        $this->modifiedColumns[] = RhdefnivPeer::TIPCAL;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -85,7 +190,17 @@ abstract class BaseRhdefniv extends BaseObject  implements Persistent {
 
       $this->desniv = $rs->getString($startcol + 1);
 
-      $this->id = $rs->getInt($startcol + 2);
+      $this->minpun = $rs->getInt($startcol + 2);
+
+      $this->maxpun = $rs->getInt($startcol + 3);
+
+      $this->totpes = $rs->getInt($startcol + 4);
+
+      $this->codran = $rs->getString($startcol + 5);
+
+      $this->tipcal = $rs->getString($startcol + 6);
+
+      $this->id = $rs->getInt($startcol + 7);
 
       $this->resetModified();
 
@@ -93,7 +208,7 @@ abstract class BaseRhdefniv extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 3; 
+            return $startcol + 8; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Rhdefniv object", $e);
     }
@@ -247,6 +362,21 @@ abstract class BaseRhdefniv extends BaseObject  implements Persistent {
 				return $this->getDesniv();
 				break;
 			case 2:
+				return $this->getMinpun();
+				break;
+			case 3:
+				return $this->getMaxpun();
+				break;
+			case 4:
+				return $this->getTotpes();
+				break;
+			case 5:
+				return $this->getCodran();
+				break;
+			case 6:
+				return $this->getTipcal();
+				break;
+			case 7:
 				return $this->getId();
 				break;
 			default:
@@ -261,7 +391,12 @@ abstract class BaseRhdefniv extends BaseObject  implements Persistent {
 		$result = array(
 			$keys[0] => $this->getCodniv(),
 			$keys[1] => $this->getDesniv(),
-			$keys[2] => $this->getId(),
+			$keys[2] => $this->getMinpun(),
+			$keys[3] => $this->getMaxpun(),
+			$keys[4] => $this->getTotpes(),
+			$keys[5] => $this->getCodran(),
+			$keys[6] => $this->getTipcal(),
+			$keys[7] => $this->getId(),
 		);
 		return $result;
 	}
@@ -284,6 +419,21 @@ abstract class BaseRhdefniv extends BaseObject  implements Persistent {
 				$this->setDesniv($value);
 				break;
 			case 2:
+				$this->setMinpun($value);
+				break;
+			case 3:
+				$this->setMaxpun($value);
+				break;
+			case 4:
+				$this->setTotpes($value);
+				break;
+			case 5:
+				$this->setCodran($value);
+				break;
+			case 6:
+				$this->setTipcal($value);
+				break;
+			case 7:
 				$this->setId($value);
 				break;
 		} 	}
@@ -295,7 +445,12 @@ abstract class BaseRhdefniv extends BaseObject  implements Persistent {
 
 		if (array_key_exists($keys[0], $arr)) $this->setCodniv($arr[$keys[0]]);
 		if (array_key_exists($keys[1], $arr)) $this->setDesniv($arr[$keys[1]]);
-		if (array_key_exists($keys[2], $arr)) $this->setId($arr[$keys[2]]);
+		if (array_key_exists($keys[2], $arr)) $this->setMinpun($arr[$keys[2]]);
+		if (array_key_exists($keys[3], $arr)) $this->setMaxpun($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setTotpes($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setCodran($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setTipcal($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setId($arr[$keys[7]]);
 	}
 
 	
@@ -305,6 +460,11 @@ abstract class BaseRhdefniv extends BaseObject  implements Persistent {
 
 		if ($this->isColumnModified(RhdefnivPeer::CODNIV)) $criteria->add(RhdefnivPeer::CODNIV, $this->codniv);
 		if ($this->isColumnModified(RhdefnivPeer::DESNIV)) $criteria->add(RhdefnivPeer::DESNIV, $this->desniv);
+		if ($this->isColumnModified(RhdefnivPeer::MINPUN)) $criteria->add(RhdefnivPeer::MINPUN, $this->minpun);
+		if ($this->isColumnModified(RhdefnivPeer::MAXPUN)) $criteria->add(RhdefnivPeer::MAXPUN, $this->maxpun);
+		if ($this->isColumnModified(RhdefnivPeer::TOTPES)) $criteria->add(RhdefnivPeer::TOTPES, $this->totpes);
+		if ($this->isColumnModified(RhdefnivPeer::CODRAN)) $criteria->add(RhdefnivPeer::CODRAN, $this->codran);
+		if ($this->isColumnModified(RhdefnivPeer::TIPCAL)) $criteria->add(RhdefnivPeer::TIPCAL, $this->tipcal);
 		if ($this->isColumnModified(RhdefnivPeer::ID)) $criteria->add(RhdefnivPeer::ID, $this->id);
 
 		return $criteria;
@@ -339,6 +499,16 @@ abstract class BaseRhdefniv extends BaseObject  implements Persistent {
 		$copyObj->setCodniv($this->codniv);
 
 		$copyObj->setDesniv($this->desniv);
+
+		$copyObj->setMinpun($this->minpun);
+
+		$copyObj->setMaxpun($this->maxpun);
+
+		$copyObj->setTotpes($this->totpes);
+
+		$copyObj->setCodran($this->codran);
+
+		$copyObj->setTipcal($this->tipcal);
 
 
 		$copyObj->setNew(true);

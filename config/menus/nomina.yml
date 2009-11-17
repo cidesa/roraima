@@ -19,6 +19,7 @@ nomina:
       default: OperatorClass.png
   menu:
     Definiciones Específicas:
+      Prueba:                                                        nomdeftablaemp
       Incapacidades:                                                 Nominc
       Institución:                                                   NomDefEspGen
       Tipos Nóminas:                                                 NomDefEspTipNom
@@ -87,6 +88,35 @@ nomina:
       #Información Familiar:                                         NomPerEleInfFam
       #Información Curricular:                                       NomPerEleInfCur
       #Experiencia Laboral:                                          NomPerEleExpLab
+    Capacitación y Adiestramiento:
+      Definiciones Especificas:
+        Area del Curso:                                              NomDefAreCur
+        Tipo de Curso:                                               NomDefTipCur
+        Títulos del Curso:                                           NomDefTitCur
+        Definición del Curso:                                        NomDefCur
+      Adiestramiento:
+        Inscripción al Curso:                                        NomInsCur
+        Asistencia al Curso:                                         NomAsiCur
+        Evaluar Curso:                                               NomNotCur      
+    Evalución y Desempeño:
+      Definicion de Rangos e Actuacion:                              NomDefRan
+      Control de Competencias:
+        Definiciones Especificas:
+          Valores Institucionales:                                   NomDefValIns
+          Niveles:                                                   NomDefNiv
+          Valores por Nivel:                                         NomValNiv
+        Evaluación:
+          Datos del Evaluado:                                        NomDatEva
+          Control de Competencia:                                    NomEvaConCom
+      Control de Gestion por Resultados:
+        Definiciones Especificas:
+          Objetivos:                                                 NomDefObj
+          Indicadores:                                               NomDefInd
+          #Niveles:                                                   NomDefNiv2
+          Indicadores por Nivel:                                     NomIndNiv
+        Evaluación:
+          Relación de Objetivos Individuales:                        NomRelObjInd
+          Evaluación de los Objetivos:                               NomEvaEmpObj
     Faltas y/o Permisos:
       Permisos:                                                      NomFalPerPer
       Salidas:                                                       NomFalPerSal

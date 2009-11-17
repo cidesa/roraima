@@ -5674,6 +5674,92 @@ public function Catdefcatman_Cattramo($params = '') {
 		);
 
 	}
+	 	
+ 	public function rhclacur_numcla($param = array ()) {
+ 		$this->c = new Criteria();
+ 
+ 		if (count($param) > 0) {
+ 			$this->c->add(RhclacurPeer :: CODCUR,$param[0]);
+ 		}
+ 		$this->c->addAscendingOrderByColumn(RhclacurPeer :: NUMCLA);
+ 		$this->columnas = array (
+ 			RhclacurPeer :: NUMCLA => 'Numero clase',
+ 			RhclacurPeer :: FECCLA => 'Fecha'
+ 		);
+ 	}
+ 	
+ 	public function rhdefvalins_codvalins() {
+ 		$this->c = new Criteria();
+ 		$this->c->addAscendingOrderByColumn(RhdefvalinsPeer::CODVALINS);
+ 		$this->columnas = array (
+ 			RhdefvalinsPeer :: CODVALINS => 'Código',
+ 			RhdefvalinsPeer :: DESVALINS => 'Descripción'
+ 		);
+ 	}
+ 	
+ 	public function rhdefniv_codniv() {
+ 		$this->c = new Criteria();
+ 		$this->c->addAscendingOrderByColumn(RhdefnivPeer::CODNIV);
+ 		$this->columnas = array (
+ 			RhdefnivPeer :: CODNIV => 'Código',
+ 			RhdefnivPeer :: DESNIV => 'Descripción'
+ 		);
+ 	}
+ 	
+ 	public function Rhevaconcom_codevdo()
+ 	{
+ 		$this->c = new Criteria();
+ 		$this->c->addJoin(NphojintPeer::CODEMP,RhdatevaPeer::CODEVDO);
+ 		$this->c->addAscendingOrderByColumn(NphojintPeer::CODEMP);
+ 		$this->columnas = array (
+ 			NphojintPeer :: CODEMP => 'Código',
+ 			NphojintPeer :: NOMEMP => 'Nombre'
+ 		);
+ 	}
+ 	
+ 	public function rhvalniv_codvalins($params = array()) {
+ 		$this->c = new Criteria();
+ 		$this->c->addAscendingOrderByColumn(RhvalnivPeer::CODNIV);
+ 		$this->columnas = array (
+ 			RhvalnivPeer :: CODVALINS => 'Código',
+ 			RhvalnivPeer :: DESVALINS => 'Descripción',
+ 			RhvalnivPeer :: PORVALINS => 'Porcentaje'
+ 		);
+ 	}
+ 	
+ 	public function nphojint_codemp2()
+ 	{
+ 		$this->c = new Criteria();
+ 		$this->c->addAscendingOrderByColumn(NphojintPeer::CODEMP);
+ 		$this->columnas = array (
+ 			NphojintPeer :: CODEMP => 'Código',
+ 			NphojintPeer :: NOMEMP => 'Nombre',
+ 			NphojintPeer :: FECING => 'Descripcion'
+ 		);
+ 		
+ 	}
+ 	
+ 	public function rhdefind_codind()
+ 	{
+ 		$this->c = new Criteria();
+ 		$this->c->addAscendingOrderByColumn(RhdefindPeer::CODIND);
+ 		$this->columnas = array (
+ 			RhdefindPeer :: CODIND => 'Código',
+ 			RhdefindPeer :: DESIND => 'Nombre'
+ 		);
+ 		
+ 	}
+ 	
+ 	public function rhdefobj_codobj()
+ 	{
+ 		$this->c = new Criteria();
+ 		$this->c->addAscendingOrderByColumn(RhdefobjPeer::CODOBJ);
+ 		$this->columnas = array (
+ 			RhdefobjPeer :: CODOBJ => 'Código',
+ 			RhdefobjPeer :: DESOBJ => 'Nombre'
+ 		);
+ 	}
+
 }
 
 ?>
