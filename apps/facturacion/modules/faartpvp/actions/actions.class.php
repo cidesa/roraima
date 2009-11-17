@@ -189,7 +189,7 @@ $this->Bitacora('Guardo');
 	      $this->faartpvp->setDesart($faartpvp['desart']);
 	    }
   }
-*/
+
   /**
    * Función principal para el manejo de la accion list
    * del formulario.

@@ -105,7 +105,7 @@ $this->Bitacora('Guardo');
       $this->faciudad->setNomciu($faciudad['nomciu']);
     }
   }
-*/
+//*/
   public function setVars($pais = ' ')
   {
     $this->paises=$this->CargarPais();
@@ -129,7 +129,7 @@ $this->Bitacora('Guardo');
     // Se debe enviar en la petición ajax desde el cliente los datos que necesitemos
     // para generar el código de retorno, esto porque en un llamado Ajax no se devuelven
     // los datos de los objetos de la vista como pasa en un submit normal.
-
+ 
     switch ($ajax){
       case '1':
         // La variable $output es usada para retornar datos en formato de arreglo para actualizar
@@ -206,7 +206,8 @@ $this->Bitacora('Guardo');
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
-  public function validateEdit()
+/* modificado 14/09  
+public function validateEdit()
   {
     $this->coderror =-1;
     $this->setVars();
@@ -243,7 +244,7 @@ $this->Bitacora('Guardo');
 
 
   }
-*/
+*/ //MODIFICADO 14/09
 
  /**
    * Función para manejar la captura de errores del negocio, tanto que se
@@ -320,7 +321,7 @@ $this->Bitacora('Guardo');
   {
     return parent::deleting($clasemodelo);
   }
-*/
+
   public function CargarPais()
   {
     $tablas=array('Fapais');//areglo de los joins de las tablas
