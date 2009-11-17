@@ -60,7 +60,7 @@ alter table rhevaconcom
   add column feceval date;  
   
 alter table rhevaempobj
-  add column feceval date
+  add column feceval date,
   add column pesobj NUMERIC(14,2)  NOT NULL,
   add column punobj NUMERIC(14,2)  NOT NULL;
   
