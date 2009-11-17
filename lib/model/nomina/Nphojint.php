@@ -272,7 +272,7 @@ class Nphojint extends BaseNphojint
 
 	public function getDesniv2()
 	{
-		return Herramientas::getX('CODNIV', 'Npestorg', 'Desniv',self::getUbifis());
+		return Herramientas::getX('CODUBI', 'Bnubibie', 'Desubi',self::getUbifis());
 
 	}
 
