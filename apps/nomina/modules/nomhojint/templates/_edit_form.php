@@ -420,14 +420,14 @@ $value = object_input_tag($nphojint, 'getPorseghcm', array (
 
  <?php $value = object_input_tag($nphojint, 'getUbifis', array (
   'size' => 20,
-  'maxlength' => $lonnivel,
+  'maxlength' => $lonnivel2,
   'control_name' => 'nphojint[ubifis]',
   'onKeyPress' => "javascript:cadena=rayaenter(event,this.value);",
   'onBlur' => "nivel(event,2);",
-  'onKeyDown' => "javascript:return dFilter (event.keyCode, this,'$mascaranivel')",
+  'onKeyDown' => "javascript:return dFilter (event.keyCode, this,'$mascaraubi')",
 
 )); echo $value ? $value : '&nbsp;' ?></div></th>
-   <th>&nbsp;&nbsp;&nbsp;<?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Npestorg_Nomhojint/clase/Npestorg/frame/sf_admin_edit_form/obj1/nphojint_ubifis/obj2/nphojint_desniv2/campo1/codniv/campo2/desniv/param1/'.$lonnivel)?></th>
+   <th>&nbsp;&nbsp;&nbsp;<?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Bnubibie_Bieregactmued/clase/Bnubibie/frame/sf_admin_edit_form/obj1/nphojint_ubifis/obj2/nphojint_desniv2/campo1/codubi/campo2/desubi/param1/'.$lonnivel2)?></th>
    <th> <?php $value = object_input_tag($nphojint, 'getDesniv2', array (
   'readonly' => true,
   'size' => 60,
@@ -1506,6 +1506,7 @@ function reingreso(e,id)
 function nivel(e,numero)
 {
   var longitud='<?php echo $lonnivel?>';
+  var longitud2='<?php echo $lonnivel2?>';
   if (numero==1){
 	  if (($('nphojint_codniv').value.length < longitud) && ($('nphojint_codniv').value!=''))
 	  {
@@ -1518,15 +1519,15 @@ function nivel(e,numero)
 	    new Ajax.Request(getUrlModuloAjax(), {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=4&cajtexmos='+cajamos+'&cajtexcom='+cajacom+'&codigo='+cod})
 	  }
   }else{
-  	if (($('nphojint_ubifis').value.length < longitud) && ($('nphojint_ubifis').value!=''))
+  	if (($('nphojint_ubifis').value.length < longitud2) && ($('nphojint_ubifis').value!=''))
   {
     $('nphojint_ubifis').value = '';
-    alert('El nivel organizacional no es de ultimo Nivel');
+    alert_('La Ubicaci&oacute;n Fisica no es de ultimo Nivel');
   }else{
     var cod=$('nphojint_ubifis').value;
     var cajamos='nphojint_desniv2';
     var cajacom='nphojint_ubifis';
-    new Ajax.Request(getUrlModuloAjax(), {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=4&cajtexmos='+cajamos+'&cajtexcom='+cajacom+'&codigo='+cod})
+    new Ajax.Request(getUrlModuloAjax(), {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=6&cajtexmos='+cajamos+'&cajtexcom='+cajacom+'&codigo='+cod})
   }
   }
 }

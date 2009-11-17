@@ -1625,6 +1625,20 @@ $this->Bitacora('Guardo');
   	}
   	$output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""]]';
   }
+  else if ($this->getRequestParameter('ajax')=='6')
+  {
+  	$r= new Criteria();
+  	$r->add(BnubibiePeer::CODUBI,$this->getRequestParameter('codigo'));
+  	$datos= BnubibiePeer::doSelectOne($r);
+  	if ($datos)
+  	{
+      $dato=$datos->getDesubi();
+    }else
+  	{  $dato="";
+  		$javascript="alert('La Ubicaci&oacute;n F&iacute;sica no existe'); $('$cajtexcom').value=''; ";
+  	}
+  	$output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""]]';
+  }
 
   $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
   return sfView::HEADER_ONLY;
@@ -1635,6 +1649,8 @@ $this->Bitacora('Guardo');
   $this->mascaranivel = Herramientas::ObtenerFormato('Npdefgen','Fororg');
   $this->lonnivel=strlen($this->mascaranivel);
   $this->mascaraemp = Herramientas::ObtenerFormato('Npdefgen','Foremp');
+  $this->mascaraubi=Herramientas :: getX_vacio('codins', 'bndefins', 'forubi', '001');
+  $this->lonnivel2=strlen($this->mascaraubi);
   $this->lonemp=strlen($this->mascaraemp);
   $this->c=null;
   }
