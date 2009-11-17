@@ -1,0 +1,47 @@
+opciones:                  # Opciones generales
+  name:                    a #identificador del grid dentro del formulario
+  eliminar:                false
+  tabla:                   tscheemi
+  anchogrid:               800
+  ancho:                   750
+  filas:                   0
+  titulo:                  'Listados de Cheques Entregados '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:
+  tipo:                    k
+  nombrecampo:             check
+  html:                    [size="01" ]
+  esgrabable:              true
+2:       # Columna 2
+  titulo:                  Numero/Chq
+  tipo:                    t
+  nombrecampo:             numche
+  html:                    [size="20" readonly=true ]
+  oculta:                  false
+  esgrabable:              true
+3:       # Columna 3
+  titulo:                  Numero/Cuenta
+  tipo:                    t
+  nombrecampo:             numcue
+  html:                    [size="20"  readonly=true ]
+  oculta:                  false
+  esgrabable:              false
+4:       # Columna 4
+  titulo:                  Cedula/Rif
+  tipo:                    t
+  nombrecampo:             cedrif
+  html:                    [size="15"  readonly=true ]
+  esgrabable:              false
+5:       # Columna 5
+  titulo:                  Fecha/Retiro
+  tipo:                    f
+  nombrecampo:             fecent
+  html:                    [size="10"  readonly=true ]
+  esgrabable:              false
+6:       # Columna 6
+  titulo:                  Monto
+  tipo:                    m
+  nombrecampo:             monche
+  html:                    [size="15"  readonly=true ]
+  esgrabable:              false

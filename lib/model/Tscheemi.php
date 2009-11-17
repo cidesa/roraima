@@ -41,6 +41,8 @@ class Tscheemi extends BaseTscheemi
 	protected $filasord="";
 	protected $firmado="";
 	protected $objeto=array();
+	protected $grid=array();
+	protected $check="";
 
     public function getNomben()
 	{

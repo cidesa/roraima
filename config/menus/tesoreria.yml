@@ -101,3 +101,6 @@ tesoreria:
     Mantenimiento:
       Actualizar Monto de Retenciones por Orden:              pagmodret
       Cambiar Contraseña:                                     cambiopasswd
+       Configuración de Archivos:                              tspararctex
+       Migración de Movimientos Bancarios:                     migtsmovban
+       Actualizar estatus de cheques para anulación:           TesActEstCheAnu

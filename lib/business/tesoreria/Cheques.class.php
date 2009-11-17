@@ -2106,5 +2106,30 @@ class Cheques
 
     return true;
   }
+
+  public static function salvarTesactestcheanu($clasemodelo,$grid)
+  {
+    try{
+      $x=$grid[0];
+      $j=0;
+      while ($j<count($x))
+      {
+      	if ($x[$j]->getCheck()=='1')
+      	{
+      		//echo '1';
+      		$x[$j]->setStatus('C');
+			$x[$j]->save();
+      	}
+        $j++;
+      }
+      //H::printR($x);
+//exit();
+
+		return -1;
+	} catch (Exception $ex){
+		echo $ex; exit();
+		 return 0;
+	}
+  }
 }
 ?>
