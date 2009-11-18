@@ -210,7 +210,7 @@ class pagemiordActions extends autopagemiordActions
 			     $u=$factura[0];
 			     while ($t<count($u))
 			     {
-	               if ($factur->getNumfac()==$u[$t]["numfac"])
+	               if ($factur->getNumfac()==$u[$t]["numfac"] && $u[$t]["id"]=="")
 	               {
 	               	$this->coderror4=532;
 	                return false;
@@ -223,7 +223,7 @@ class pagemiordActions extends autopagemiordActions
 	      }
 	    }
 
-	  }
+      }
       return true;
     }else return true;
   }
