@@ -695,7 +695,7 @@ class Cheques
           }// if ($gencom!="S")
 
           ///////////////////////////////////////////////////////////////////////////////////////////
-          $Porcentaje =  (($Monto + $MontDcto) * 100) / ($x[$j]->getMonord() - $x[$j]->getMonret());
+          $Porcentaje =  (($Monto + $MontDcto) * 100) / (($x[$j]->getMonord()-self::ObtenerAjuste($x[$j]->getNumord())) - $x[$j]->getMonret());
 
             $OrdenDePago = $x[$j]->getNumord();
             if (trim($despag)!= "")
