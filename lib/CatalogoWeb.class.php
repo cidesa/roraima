@@ -5674,10 +5674,10 @@ public function Catdefcatman_Cattramo($params = '') {
 		);
 
 	}
-	 	
+
  	public function rhclacur_numcla($param = array ()) {
  		$this->c = new Criteria();
- 
+
  		if (count($param) > 0) {
  			$this->c->add(RhclacurPeer :: CODCUR,$param[0]);
  		}
@@ -5687,7 +5687,7 @@ public function Catdefcatman_Cattramo($params = '') {
  			RhclacurPeer :: FECCLA => 'Fecha'
  		);
  	}
- 	
+
  	public function rhdefvalins_codvalins() {
  		$this->c = new Criteria();
  		$this->c->addAscendingOrderByColumn(RhdefvalinsPeer::CODVALINS);
@@ -5696,7 +5696,7 @@ public function Catdefcatman_Cattramo($params = '') {
  			RhdefvalinsPeer :: DESVALINS => 'Descripción'
  		);
  	}
- 	
+
  	public function rhdefniv_codniv() {
  		$this->c = new Criteria();
  		$this->c->addAscendingOrderByColumn(RhdefnivPeer::CODNIV);
@@ -5705,7 +5705,7 @@ public function Catdefcatman_Cattramo($params = '') {
  			RhdefnivPeer :: DESNIV => 'Descripción'
  		);
  	}
- 	
+
  	public function Rhevaconcom_codevdo()
  	{
  		$this->c = new Criteria();
@@ -5716,7 +5716,7 @@ public function Catdefcatman_Cattramo($params = '') {
  			NphojintPeer :: NOMEMP => 'Nombre'
  		);
  	}
- 	
+
  	public function rhvalniv_codvalins($params = array()) {
  		$this->c = new Criteria();
  		$this->c->addAscendingOrderByColumn(RhvalnivPeer::CODNIV);
@@ -5726,7 +5726,7 @@ public function Catdefcatman_Cattramo($params = '') {
  			RhvalnivPeer :: PORVALINS => 'Porcentaje'
  		);
  	}
- 	
+
  	public function nphojint_codemp2()
  	{
  		$this->c = new Criteria();
@@ -5736,9 +5736,9 @@ public function Catdefcatman_Cattramo($params = '') {
  			NphojintPeer :: NOMEMP => 'Nombre',
  			NphojintPeer :: FECING => 'Descripcion'
  		);
- 		
+
  	}
- 	
+
  	public function rhdefind_codind()
  	{
  		$this->c = new Criteria();
@@ -5747,9 +5747,9 @@ public function Catdefcatman_Cattramo($params = '') {
  			RhdefindPeer :: CODIND => 'Código',
  			RhdefindPeer :: DESIND => 'Nombre'
  		);
- 		
+
  	}
- 	
+
  	public function rhdefobj_codobj()
  	{
  		$this->c = new Criteria();
@@ -5759,7 +5759,15 @@ public function Catdefcatman_Cattramo($params = '') {
  			RhdefobjPeer :: DESOBJ => 'Nombre'
  		);
  	}
-
+	public function Npdefubi_Nomhojint()
+	{
+		$this->c = new Criteria();
+		$this->c->addAscendingOrderByColumn(NpdefubiPeer::CODUBI);
+		$this->columnas = array (
+			NpdefubiPeer :: CODUBI => 'Código',
+			NpdefubiPeer :: DESUBI => 'Nombre'
+		);
+	}
 }
 
 ?>
