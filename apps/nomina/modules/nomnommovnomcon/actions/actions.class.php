@@ -124,7 +124,26 @@ class nomnommovnomconActions extends autonomnommovnomconActions
 		$c->addJoin(NpasiconempPeer::CODCAR,NpasicarempPeer::CODCAR);
 		$per = NpasiconempPeer::doSelect($c);
 
+        $this->nfilgrid="";
+		$varemp = $this->getUser()->getAttribute('configemp');
+		if ($varemp)
+		if(array_key_exists('aplicacion',$varemp))
+		 if(array_key_exists('nomina',$varemp['aplicacion']))
+		   if(array_key_exists('modulos',$varemp['aplicacion']['nomina']))
+		     if(array_key_exists('nomnommovnomcon',$varemp['aplicacion']['nomina']['modulos'])){
+		       if(array_key_exists('nfilgrid',$varemp['aplicacion']['nomina']['modulos']['nomnommovnomcon']))
+		       {
+		       	$this->nfilgrid=$varemp['aplicacion']['nomina']['modulos']['nomnommovnomcon']['nfilgrid'];
+		       }
+		     }
+
+
+         if ($this->nfilgrid!="")
+         {
+           $filas_arreglo=$this->nfilgrid;
+         }else{
 		$filas_arreglo=150;
+         }
 		//print $codigo;
 
 
