@@ -109,11 +109,11 @@ private $coderror =-1;
 							}
 							else{
 								$totent = Facturacion::BuscarTotalEntregado($x[$j]->getCodart(), $this->getRequestParameter('cadphart[tipref]'), $this->getRequestParameter('cadphart[reqart]'));
-					        	if ((number_format($x[$j]->getCandesp()) - number_format($totent)) == 0){
+					        	if ((H::toFloat($x[$j]->getCantot()) - H::toFloat($totent)) == 0){
 						            $this->coderror=1121;
 						            return false;
 					        	}
-					        	else if (number_format($x[$j]->getCandesp()) > (number_format($x[$j]->getCansol()) - number_format($totent))){
+					        	else if (H::toFloat($x[$j]->getCandesp()) > (H::toFloat($x[$j]->getCansol()) - H::toFloat($totent))){
 						            $this->coderror=1122;
 						            return false;
 					        	}
