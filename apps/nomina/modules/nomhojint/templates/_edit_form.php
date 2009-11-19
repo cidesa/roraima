@@ -427,7 +427,7 @@ $value = object_input_tag($nphojint, 'getPorseghcm', array (
   'onKeyDown' => "javascript:return dFilter (event.keyCode, this,'$mascaraubi')",
 
 )); echo $value ? $value : '&nbsp;' ?></div></th>
-   <th>&nbsp;&nbsp;&nbsp;<?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Bnubibie_Bieregactmued/clase/Bnubibie/frame/sf_admin_edit_form/obj1/nphojint_ubifis/obj2/nphojint_desniv2/campo1/codubi/campo2/desubi/param1/'.$lonnivel2)?></th>
+   <th>&nbsp;&nbsp;&nbsp;<?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Bnubica_Pagemiord/clase/Bnubica/frame/sf_admin_edit_form/obj1/nphojint_ubifis/obj2/nphojint_desniv2/campo1/codubi/campo2/desubi/param1/'.$lonnivel2)?></th>
    <th> <?php $value = object_input_tag($nphojint, 'getDesniv2', array (
   'readonly' => true,
   'size' => 60,
