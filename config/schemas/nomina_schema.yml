@@ -43,7 +43,7 @@ propel:
       size: 3
     codnom:
       type: VARCHAR
-      size: 3      
+      size: 3
     tipacu:
       type: VARCHAR
       size: 1
@@ -84,7 +84,7 @@ propel:
       ##primaryKey: true
     fecsolade:
       type: DATE
-      ##primaryKey: true      
+      ##primaryKey: true
     id:
       type: INTEGER
       required: true
@@ -115,7 +115,7 @@ propel:
       size: 1000
     fecsolant:
       type: DATE
-      ##primaryKey: true  
+      ##primaryKey: true
     id:
       type: INTEGER
       required: true
@@ -832,7 +832,7 @@ propel:
       required: true
     diapro:
       type: NUMERIC
-      size: 3      
+      size: 3
     anovighas:
       type: DATE
     calinc:
@@ -4974,7 +4974,7 @@ propel:
       type: DATE
     nomintpre:
       type: VARCHAR
-      size: 1  
+      size: 1
     id:
       type: INTEGER
       required: true
@@ -5726,7 +5726,7 @@ propel:
     montototal:
       type: NUMERIC
       size: 14
-      scale: 2    
+      scale: 2
     id:
       type: INTEGER
       required: true
@@ -6397,7 +6397,7 @@ propel:
     diasbonovacpag:
       type: NUMERIC
       size: 14
-      scale: 2            
+      scale: 2
     id:
       type: INTEGER
       required: true
@@ -6618,7 +6618,7 @@ propel:
     fechas:
       type: DATE
     fecpagbonvac:
-      type: DATE      
+      type: DATE
     id:
       type: INTEGER
       required: true
@@ -6654,7 +6654,7 @@ propel:
     diasbonovacpag:
       type: NUMERIC
       size: 14
-      scale: 2                  
+      scale: 2
     fecvac:
       type: DATE
     id:
@@ -6896,7 +6896,7 @@ propel:
     factorbonvacfra:
       type: NUMERIC
       size: 14
-      scale: 2      
+      scale: 2
     tipsalvacven:
       type: VARCHAR
       size: 2
@@ -6917,15 +6917,15 @@ propel:
       size: 1
     tipsaldiaant:
       type: VARCHAR
-      size: 2        
+      size: 2
     codpar:
       type: VARCHAR
       size: 32
     aguicom:
       type: VARCHAR
-      size: 1      
+      size: 1
     apartirmes:
-      type: INTEGER    
+      type: INTEGER
     id:
       type: INTEGER
       required: true
@@ -7160,6 +7160,21 @@ propel:
     desestemp:
       type: VARCHAR
       size: 100
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npdefubi:
+    #_attributes:
+      #idMethod: native
+    codubi:
+      type: VARCHAR
+      size: 4
+      required: true
+    desubi:
+      type: VARCHAR
+      size: 250
       required: true
     id:
       type: INTEGER
