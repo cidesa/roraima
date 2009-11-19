@@ -1628,8 +1628,8 @@ $this->Bitacora('Guardo');
   else if ($this->getRequestParameter('ajax')=='6')
   {
   	$r= new Criteria();
-  	$r->add(BnubibiePeer::CODUBI,$this->getRequestParameter('codigo'));
-  	$datos= BnubibiePeer::doSelectOne($r);
+  	$r->add(BnubicaPeer::CODUBI,$this->getRequestParameter('codigo'));
+  	$datos= BnubicaPeer::doSelectOne($r);
   	if ($datos)
   	{
       $dato=$datos->getDesubi();
@@ -1649,7 +1649,7 @@ $this->Bitacora('Guardo');
   $this->mascaranivel = Herramientas::ObtenerFormato('Npdefgen','Fororg');
   $this->lonnivel=strlen($this->mascaranivel);
   $this->mascaraemp = Herramientas::ObtenerFormato('Npdefgen','Foremp');
-  $this->mascaraubi=Herramientas :: getX_vacio('codins', 'bndefins', 'forubi', '001');
+  $this->mascaraubi=Herramientas::ObtenerFormato('Opdefemp','Forubi');
   $this->lonnivel2=strlen($this->mascaraubi);
   $this->lonemp=strlen($this->mascaraemp);
   $this->c=null;
