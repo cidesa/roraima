@@ -1628,8 +1628,8 @@ $this->Bitacora('Guardo');
   else if ($this->getRequestParameter('ajax')=='6')
   {
   	$r= new Criteria();
-  	$r->add(BnubicaPeer::CODUBI,$this->getRequestParameter('codigo'));
-  	$datos= BnubicaPeer::doSelectOne($r);
+  	$r->add(NpdefubiPeer::CODUBI,$this->getRequestParameter('codigo'));
+  	$datos= NpdefubiPeer::doSelectOne($r);
   	if ($datos)
   	{
       $dato=$datos->getDesubi();
