@@ -2190,7 +2190,7 @@
         }
         else
         {
-          alert('Código del Artículo está Repetido');
+          alert('Cï¿½digo del Artï¿½culo estï¿½ Repetido');
           $(id).value="";
         }
       }
@@ -2268,7 +2268,7 @@
    }
    else
    {
-     alert('Debe Introducir la C.I ó R.I.F del Cliente');
+     alert('Debe Introducir la C.I ï¿½ R.I.F del Cliente');
    }
  }
 
@@ -2461,7 +2461,7 @@
    var coltotal=col+6;
    var coldistot=col+7;
    var colexis=col-1;
-   var colblanco=col+13;
+   var colblanco=col+14;
    var colart=col-4;
    var colprec=col+3;
    var colprec2=col+4;
@@ -2884,7 +2884,7 @@
            }
            else
            {
-             alert('No Hay Disponibilidad para el Artículo'+cod);
+             alert('No Hay Disponibilidad para el Artï¿½culo'+cod);
              $(id).value="0,00";
            }
 	     }
@@ -2917,7 +2917,7 @@
     var coldistot=col+5;
     var colcanpreart=col+7;
     var colcansol=col-2;
-    var colblanco=col+14;
+    var colblanco=col+12;
     var colart=col-6;
     var colprec=col+2;
     var colprec2=col+3;
