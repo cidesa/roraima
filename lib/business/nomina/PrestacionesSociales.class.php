@@ -1157,8 +1157,21 @@ End Function*/
 		  {
 		  	$anoe=$anoegr+1;
 			$mesnext='01';
-		  }		  	  
-		  $sqlmeses = "select case when (to_date('".$fecegrf."','dd/mm/yyyy'))=cast('$anoe-$mesnext-01' as date)-1 then (to_char(to_date('".$fecegrf."','dd/mm/yyyy'),'mm')::numeric -to_char(to_date('01/01/$anoegr','dd/mm/yyyy'),'mm')::numeric)+1 else (to_char(to_date('".$fecegrf."','dd/mm/yyyy'),'mm')::numeric -to_char(to_date('01/01/$anoegr','dd/mm/yyyy'),'mm')::numeric) end as meses";
+		  }
+                  $fecing = "$anoegr-01-01";
+                  $sqling = "Select fecing from nphojint where codemp='$codemp'";
+                  if(Herramientas::BuscarDatos($sqling, $rsing))
+                        $fecing = $rsing[0]['fecing'];
+
+                  if(strtotime($fecing)>strtotime("$anoegr-01-01"))
+                  {
+                    $fechaing = date('d/m/Y',strtotime($fecing));
+                    $sqlmeses = "select months_between(to_date('$fechaing','dd/mm/yyyy'),to_date('$fecegrf','dd/mm/yyyy'))  as meses";
+                  }else
+                  {
+                    $sqlmeses = "select case when (to_date('".$fecegrf."','dd/mm/yyyy'))=cast('$anoe-$mesnext-01' as date)-1 then (to_char(to_date('".$fecegrf."','dd/mm/yyyy'),'mm')::numeric -to_char(to_date('01/01/$anoegr','dd/mm/yyyy'),'mm')::numeric)+1 else (to_char(to_date('".$fecegrf."','dd/mm/yyyy'),'mm')::numeric -to_char(to_date('01/01/$anoegr','dd/mm/yyyy'),'mm')::numeric) end as meses";
+                  }
+
 		  if (Herramientas::BuscarDatos($sqlmeses,&$result))
 		   	$meses = $result[0]['meses'];
 		  else
