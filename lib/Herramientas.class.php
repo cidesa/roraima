@@ -2019,12 +2019,13 @@ public static function obtenerDiaMesOAno($fecha,$formato,$dmoa)
   {
 
     $usuario = UsuariosPeer::retrieveByPK(sfContext::getInstance()->getUser()->getAttribute('usuario_id'));
-
+    if ($usuario) {
     $c = new Criteria();
     $c->add(NphojintPeer::CEDEMP,$usuario->getCedemp());
     $nphojint = NphojintPeer::doSelectOne($c);
     if($nphojint) return $nphojint->getCodemp();
     else return '';
+    }else return '';
 
   }
 
