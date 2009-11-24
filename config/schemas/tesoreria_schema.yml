@@ -2351,3 +2351,80 @@ propel:
       type: INTEGER
       required: true
       autoIncrement: true
+  tscomegrmes:
+    mes1:
+      type: VARCHAR
+      size: 2
+      required: true
+    cormes1:
+      type: INTEGER
+    mes2:
+      type: VARCHAR
+      size: 2
+      required: true
+    cormes2:
+      type: INTEGER
+    mes3:
+      type: VARCHAR
+      size: 2
+      required: true
+    cormes3:
+      type: INTEGER
+    mes4:
+      type: VARCHAR
+      size: 2
+      required: true
+    cormes4:
+      type: INTEGER
+    mes5:
+      type: VARCHAR
+      size: 2
+      required: true
+    cormes5:
+      type: INTEGER
+    mes6:
+      type: VARCHAR
+      size: 2
+      required: true
+    cormes6:
+      type: INTEGER
+    mes7:
+      type: VARCHAR
+      size: 2
+      required: true
+    cormes7:
+      type: INTEGER
+    mes8:
+      type: VARCHAR
+      size: 2
+      required: true
+    cormes8:
+      type: INTEGER
+    mes9:
+      type: VARCHAR
+      size: 2
+      required: true
+    cormes9:
+      type: INTEGER
+    mes10:
+      type: VARCHAR
+      size: 2
+      required: true
+    cormes10:
+      type: INTEGER
+    mes11:
+      type: VARCHAR
+      size: 2
+      required: true
+    cormes11:
+      type: INTEGER
+    mes12:
+      type: VARCHAR
+      size: 2
+      required: true
+    cormes12:
+      type: INTEGER
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
