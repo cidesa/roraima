@@ -30,7 +30,8 @@ class pagemiordActions extends autopagemiordActions
 
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -1527,9 +1528,8 @@ else 'N' END) as esta,
 else 'N' END) as estaislr,
 (CASE when c.codret=a.codtip and c.codrep='003' THEN 'S'
 else 'N' END) as esta1xmil,
-round(sum(a.monret)/ ( CASE when count(d.codret) <> 0 THEN count(d.codret)
-else 1 END ),2 ) as montoret, 1 as id, count(d.codret) as valor
- from  optipret b,tsretiva d RIGHT outer join (opretord a left outer join tsrepret c on c.codret = a.codtip) on d.codret=a.codtip
+round(sum(a.monret),2 ) as montoret, 1 as id, count(d.codret) as valor
+ from  optipret b,(select distinct(codret) from tsretiva) d RIGHT outer join (opretord a left outer join tsrepret c on c.codret = a.codtip) on d.codret=a.codtip
  where a.numord = '".$codigo."'
  and a.codtip = b.codtip
 group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c.codrep,c.codret,d.codret";
