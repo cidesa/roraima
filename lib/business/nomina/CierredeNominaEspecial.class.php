@@ -4,8 +4,8 @@
  *
  * @package    Roraima
  * @subpackage nomina
- * @author     $Author: jlobaton $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id: CierredeNominaEspecial.class.php 34727 2009-11-13 13:25:56Z jlobaton $
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
  *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -388,6 +388,18 @@ class CierredeNominaEspecial
 			(select C.CODTIPCON,A.CODEMP,A.FECNOMESPHAS,A.MONTO,A.FECNOMESPHAS
 			from NPNOMCAL A, NPNOMESPTIPOS B, NPASIEMPCONT C WHERE A.CODNOM='$codnomina' AND A.CODNOMESP='$codnomesp' AND A.ESPECIAL='S'
 			AND COALESCE(B.NOMINTPRE,'N')='S'
+			AND A.CODNOMESP=B.CODNOMESP
+			AND A.CODEMP=C.CODEMP AND STATUS='A'
+			)";
+
+ Herramientas::insertarRegistros($sqlade);
+
+#SI LA NOMINA ES DE DIAS ADICIONALES DE PRESTACIONES AGREGAMOS EL REGISTRO EN NPANTPRE
+
+ $sqlade="INSERT INTO NPANTPRE(CODEMP,FECANT,MONANT,FECSOLANT)
+			(select A.CODEMP,A.FECNOMESPHAS,A.MONTO,A.FECNOMESPHAS
+			from NPNOMCAL A, NPNOMESPTIPOS B, NPASIEMPCONT C WHERE A.CODNOM='$codnomina' AND A.CODNOMESP='$codnomesp' AND A.ESPECIAL='S'
+			AND COALESCE(B.NOMDIAADI,'N')='S'
 			AND A.CODNOMESP=B.CODNOMESP
 			AND A.CODEMP=C.CODEMP AND STATUS='A'
 			)";
