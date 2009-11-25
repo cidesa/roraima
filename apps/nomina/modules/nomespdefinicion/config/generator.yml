@@ -9,6 +9,7 @@ generator:
       fecnomdes: { name: Desde}
       fecnomhas: { name: Hasta}
       nomintpre: { name: Nómina de Intereses de Prestaciones, type: checkbox_tag}
+      nomdiaadi: { name: Nómina Dias Adicionales  Prestaciones, type: checkbox_tag}
     list:
       title:          Definicion
       filters:        [codnomesp, desnomesp]
@@ -22,7 +23,7 @@ generator:
       max_per_page:   5
     edit:
       title:          Edicion de Definicion
-      display:       [=codnomesp, desnomesp, fecnomdes, fecnomhas, nomintpre]
+      display:       [=codnomesp, desnomesp, fecnomdes, fecnomhas, nomintpre, nomdiaadi]
       fields:
         fecnomdes: { params: date_format='dd/MM/yy' }
         fecnomhas: { params: date_format='dd/MM/yy' }
