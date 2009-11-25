@@ -2361,8 +2361,10 @@ class Nomina {
         break;	
       case "DIAADIPRE" :
         $valor = 0;
-        $fecha = date('d/m/Y',strtotime($fecnom));
-        $criterio = "Select * from calculopres('$empleado','$fecha','$parametro','P') where tipo='DEPOSITADOS' order by fecini desc";
+        $auxfec = split("-",$fecnom);
+        #$fecha = date('d/m/Y',strtotime($fecnom));
+        $fecha = $auxfec[0].'-'.$auxfec[1].'-01';
+        $criterio = "Select * from calculopres('$empleado',to_char(cast('$fecha' as date)-1,'dd/mm/yyyy'),'$parametro','P') where tipo='DEPOSITADOS' order by fecini desc";
 
         if (Herramientas :: BuscarDatos($criterio, & $calpres))
 		{
@@ -4097,8 +4099,10 @@ class Nomina {
         
       case "DIAADIPRE" :
         $valor = 0;
-        $fecha = $hasta;
-        $criterio = "Select * from calculopres('$empleado','$fecha','$parametro','P') where tipo='DEPOSITADOS' order by fecini desc";
+        $auxfec = split("/",$hasta);
+        #$fecha = $hasta;
+        $fecha = $auxfec[2].'-'.$auxfec[1].'-01';
+        $criterio = "Select * from calculopres('$empleado','to_char(cast('$fecha' as date)-1,'dd/mm/yyyy')','$parametro','P') where tipo='DEPOSITADOS' order by fecini desc";
         if (Herramientas :: BuscarDatos($criterio, & $calpres))
 		{
 			$valor = ($calpres[0]['dias']-5)*$calpres[0]['mondia'];
