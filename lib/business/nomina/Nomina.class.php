@@ -1040,6 +1040,11 @@ class Nomina {
       $token = "INTPRES";
     }
 
+    if (Herramientas :: StringPos($token, "DIAADIPRE", 0) != -1) {
+      $parametro = substr($token, 9, strlen($token));
+      $token = "DIAADIPRE";
+    }
+
     if (Herramientas :: StringPos($token, "SHORAS", 0) != -1) {
       $parametro = substr($token, 6, strlen($token));
       $token = "SHORAS";
@@ -1279,6 +1284,11 @@ class Nomina {
 	if (Herramientas :: StringPos($token, "INTPRES", 0) != -1) {
       $parametro = substr($token, 7, strlen($token));
       $token = "INTPRES";
+    }
+
+    if (Herramientas :: StringPos($token, "DIAADIPRE", 0) != -1) {
+      $parametro = substr($token, 9, strlen($token));
+      $token = "DIAADIPRE";
     }
 
     if (Herramientas :: StringPos($token, "SDIAS", 0) != -1) {
@@ -2349,7 +2359,17 @@ class Nomina {
 
         return $valor;
         break;	
+      case "DIAADIPRE" :
+        $valor = 0;
+        $fecha = date('d/m/Y',strtotime($fecnom));
+        $criterio = "Select * from calculopres('$empleado','$fecha','$parametro','P') where tipo='DEPOSITADOS' order by fecini desc";
 
+        if (Herramientas :: BuscarDatos($criterio, & $calpres))
+		{
+			$valor = ($calpres[0]['dias']-5)*$calpres[0]['mondia'];
+		}
+
+        return $valor;
       default :
         $aux = 0;
 
@@ -3023,6 +3043,12 @@ class Nomina {
       $parametro = substr($campo, 7, strlen($campo));
 
       $campo = "INTPRES";
+    }
+
+    if (Herramientas :: StringPos($campo, "DIAADIPRE", 0) != -1) {
+      $parametro = substr($campo, 9, strlen($campo));
+
+      $campo = "DIAADIPRE";
     }
 //print $parametro;
 //print "--".$campo;
@@ -4068,7 +4094,18 @@ class Nomina {
 
         return $valor;
         break;
+        
+      case "DIAADIPRE" :
+        $valor = 0;
+        $fecha = $hasta;
+        $criterio = "Select * from calculopres('$empleado','$fecha','$parametro','P') where tipo='DEPOSITADOS' order by fecini desc";
+        if (Herramientas :: BuscarDatos($criterio, & $calpres))
+		{
+			$valor = ($calpres[0]['dias']-5)*$calpres[0]['mondia'];
+		}
 
+        return $valor;
+        break;
       default :
         /////// FFRAC
 
@@ -5608,6 +5645,10 @@ class Nomina {
 		$objNomesp->setNomintpre('S');
 	else
 		$objNomesp->setNomintpre(null);
+        if($npnomesptipos->getNomdiaadi()==1)
+		$objNomesp->setNomdiaadi('S');
+	else
+		$objNomesp->setNomdiaadi(null);
     $objNomesp->save();
 
   }

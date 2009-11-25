@@ -64,20 +64,38 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 <br>
+<table>
+    <tr>
+        <th>
+            <?php echo label_for('npnomesptipos[nomintpre]', __($labels['npnomesptipos{nomintpre}']), 'class="required"') ?>
+              <div class="content<?php if ($sf_request->hasError('npnomesptipos{nomintpre}')): ?> form-error<?php endif; ?>">
+              <?php if ($sf_request->hasError('npnomesptipos{nomintpre}')): ?>
+                <?php echo form_error('npnomesptipos{nomintpre}', array('class' => 'form-error-msg')) ?>
+              <?php endif; ?>
 
-  <?php echo label_for('npnomesptipos[nomintpre]', __($labels['npnomesptipos{nomintpre}']), 'class="required"') ?>
-  <div class="content<?php if ($sf_request->hasError('npnomesptipos{nomintpre}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('npnomesptipos{nomintpre}')): ?>
-    <?php echo form_error('npnomesptipos{nomintpre}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
+              <?php $value = object_checkbox_tag($npnomesptipos, 'getNomintpre', array (
+              'control_name' => 'npnomesptipos[nomintpre]',
+            )); echo $value ? $value : '&nbsp;' ?>
+                </div>
+        </th>
+        <th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
+        <th>
+            <?php echo label_for('npnomesptipos[nomdiaadi]', __($labels['npnomesptipos{nomdiaadi}']), 'class="required"') ?>
+              <div class="content<?php if ($sf_request->hasError('npnomesptipos{nomdiaadi}')): ?> form-error<?php endif; ?>">
+              <?php if ($sf_request->hasError('npnomesptipos{nomdiaadi}')): ?>
+                <?php echo form_error('npnomesptipos{nomdiaadi}', array('class' => 'form-error-msg')) ?>
+              <?php endif; ?>
 
-  <?php $value = object_checkbox_tag($npnomesptipos, 'getNomintpre', array (
-  'control_name' => 'npnomesptipos[nomintpre]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-	
-<br>	
-<br>
+              <?php $value = object_checkbox_tag($npnomesptipos, 'getNomdiaadi', array (
+              'control_name' => 'npnomesptipos[nomdiaadi]',
+            )); echo $value ? $value : '&nbsp;' ?>
+                </div>
+        </th>
+    </tr>
+</table>
+  
+
+
 </div>
 </fieldset>
 

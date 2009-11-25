@@ -13,7 +13,7 @@ abstract class BaseNpnomesptiposPeer {
 	const CLASS_DEFAULT = 'lib.model.nomina.Npnomesptipos';
 
 	
-	const NUM_COLUMNS = 6;
+	const NUM_COLUMNS = 7;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -35,6 +35,9 @@ abstract class BaseNpnomesptiposPeer {
 	const NOMINTPRE = 'npnomesptipos.NOMINTPRE';
 
 	
+	const NOMDIAADI = 'npnomesptipos.NOMDIAADI';
+
+	
 	const ID = 'npnomesptipos.ID';
 
 	
@@ -43,18 +46,18 @@ abstract class BaseNpnomesptiposPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codnomesp', 'Desnomesp', 'Fecnomdes', 'Fecnomhas', 'Nomintpre', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (NpnomesptiposPeer::CODNOMESP, NpnomesptiposPeer::DESNOMESP, NpnomesptiposPeer::FECNOMDES, NpnomesptiposPeer::FECNOMHAS, NpnomesptiposPeer::NOMINTPRE, NpnomesptiposPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codnomesp', 'desnomesp', 'fecnomdes', 'fecnomhas', 'nomintpre', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
+		BasePeer::TYPE_PHPNAME => array ('Codnomesp', 'Desnomesp', 'Fecnomdes', 'Fecnomhas', 'Nomintpre', 'Nomdiaadi', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (NpnomesptiposPeer::CODNOMESP, NpnomesptiposPeer::DESNOMESP, NpnomesptiposPeer::FECNOMDES, NpnomesptiposPeer::FECNOMHAS, NpnomesptiposPeer::NOMINTPRE, NpnomesptiposPeer::NOMDIAADI, NpnomesptiposPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codnomesp', 'desnomesp', 'fecnomdes', 'fecnomhas', 'nomintpre', 'nomdiaadi', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codnomesp' => 0, 'Desnomesp' => 1, 'Fecnomdes' => 2, 'Fecnomhas' => 3, 'Nomintpre' => 4, 'Id' => 5, ),
-		BasePeer::TYPE_COLNAME => array (NpnomesptiposPeer::CODNOMESP => 0, NpnomesptiposPeer::DESNOMESP => 1, NpnomesptiposPeer::FECNOMDES => 2, NpnomesptiposPeer::FECNOMHAS => 3, NpnomesptiposPeer::NOMINTPRE => 4, NpnomesptiposPeer::ID => 5, ),
-		BasePeer::TYPE_FIELDNAME => array ('codnomesp' => 0, 'desnomesp' => 1, 'fecnomdes' => 2, 'fecnomhas' => 3, 'nomintpre' => 4, 'id' => 5, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
+		BasePeer::TYPE_PHPNAME => array ('Codnomesp' => 0, 'Desnomesp' => 1, 'Fecnomdes' => 2, 'Fecnomhas' => 3, 'Nomintpre' => 4, 'Nomdiaadi' => 5, 'Id' => 6, ),
+		BasePeer::TYPE_COLNAME => array (NpnomesptiposPeer::CODNOMESP => 0, NpnomesptiposPeer::DESNOMESP => 1, NpnomesptiposPeer::FECNOMDES => 2, NpnomesptiposPeer::FECNOMHAS => 3, NpnomesptiposPeer::NOMINTPRE => 4, NpnomesptiposPeer::NOMDIAADI => 5, NpnomesptiposPeer::ID => 6, ),
+		BasePeer::TYPE_FIELDNAME => array ('codnomesp' => 0, 'desnomesp' => 1, 'fecnomdes' => 2, 'fecnomhas' => 3, 'nomintpre' => 4, 'nomdiaadi' => 5, 'id' => 6, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
 	);
 
 	
@@ -117,6 +120,8 @@ abstract class BaseNpnomesptiposPeer {
 		$criteria->addSelectColumn(NpnomesptiposPeer::FECNOMHAS);
 
 		$criteria->addSelectColumn(NpnomesptiposPeer::NOMINTPRE);
+
+		$criteria->addSelectColumn(NpnomesptiposPeer::NOMDIAADI);
 
 		$criteria->addSelectColumn(NpnomesptiposPeer::ID);
 

@@ -4975,6 +4975,9 @@ propel:
     nomintpre:
       type: VARCHAR
       size: 1
+    nomdiaadi:
+      type: VARCHAR
+      size: 1
     id:
       type: INTEGER
       required: true
