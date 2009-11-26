@@ -28,7 +28,7 @@ pake_task('propel-trim-database', 'project_exists');
 
 function convert_yml_schema($check_schema = true, $prefix = '')
 {
-  $finder = pakeFinder::type('file')->ignore_version_control()->name('*schema.yml');
+  $finder = pakeFinder::type('file')->ignore_version_control()->name($prefix.'*schema.yml');
   $dirs = array('config');
   if ($pluginDirs = glob(sfConfig::get('sf_root_dir').'/plugins/*/config'))
   {
@@ -59,7 +59,7 @@ function convert_yml_schema($check_schema = true, $prefix = '')
 
 function _propel_cidesa_convert_yml_schema($check_schema = true, $prefix = '')
 {
-  $finder = pakeFinder::type('file')->ignore_version_control()->name('*schema.yml')->prune('doctrine');
+  $finder = pakeFinder::type('file')->ignore_version_control()->name($prefix.'*schema.yml')->prune('doctrine');
   $dirs = array('config/schemas');
   if ($pluginDirs = glob(sfConfig::get('sf_root_dir').'/plugins/*/config'))
   {
@@ -174,7 +174,20 @@ function run_propel_check_database($task, $args)
   global $check;
   $check = true;
   $ymlsremoto = array();
-  
+
+  pake_echo_action('check_database', 'Limpiando entorno de analisis');
+
+  $finder = pakeFinder::type('file')->ignore_version_control()->name('generated-*schema*.xml');
+  pake_remove($finder, 'config');
+  $finder = pakeFinder::type('file')->ignore_version_control()->name('generated-*schema*.yml');
+  pake_remove($finder, 'config');
+
+  $finder = pakeFinder::type('file')->ignore_version_control()->name('*schema*.xml');
+  pake_remove($finder, 'config/schemas');
+  $finder = pakeFinder::type('file')->ignore_version_control()->name('*schema*.xml');
+  pake_remove($finder, 'config');
+
+
   pake_echo_action('check_database', 'Analizando la base de datos');
   
   _propel_cidesa_build_schema($task,$args);
@@ -184,10 +197,11 @@ function run_propel_check_database($task, $args)
   $ymlsremoto = $ymlsremoto['propel'];
   
   $checktablas = $ymlsremoto;
-
+  if(isset($args[0])) $schema = $args[0];
+  else $schema = '';
   pake_echo_action('check_database', 'Analizando las tablas');
-  _propel_cidesa_convert_yml_schema(false, 'generated-');
-  _propel_cidesa_copy_xml_schema_from_plugins('generated-');
+  _propel_cidesa_convert_yml_schema(false, $schema);
+  _propel_cidesa_copy_xml_schema_from_plugins($schema);
   
   _call_cidesa_phing($task, 'sql', false);
     
@@ -207,6 +221,8 @@ function run_propel_check_database($task, $args)
   $finder = pakeFinder::type('file')->ignore_version_control()->name('generated-*schema*.xml');
   pake_remove($finder, 'config');
   $finder = pakeFinder::type('file')->ignore_version_control()->name('generated-*schema*.yml');
+  pake_remove($finder, 'config');
+  $finder = pakeFinder::type('file')->ignore_version_control()->name('*schema*.xml');
   pake_remove($finder, 'config');
 }
 
