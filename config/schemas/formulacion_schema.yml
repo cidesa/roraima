@@ -1,13 +1,10 @@
 propel:
   _attributes: { noXsd: false, defaultIdMethod: native, package: lib.model }
   fordeftipcnx:
-    #_attributes:
-      #idMethod: native
     codtipcnx:
       type: VARCHAR
       size: 3
       required: true
-      ##primaryKey: true
     destipcnx:
       type: VARCHAR
       size: 100
@@ -15,20 +12,18 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fordefaccesp:
-    #_attributes:
-      #idMethod: native
     codpro:
       type: VARCHAR
       size: 20
       required: true
-      ##primaryKey: true
     codaccesp:
       type: VARCHAR
       size: 20
       required: true
-      ##primaryKey: true
     desaccesp:
       type: VARCHAR
       size: 1000
@@ -66,15 +61,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fordefcatpre:
-    #_attributes:
-      #idMethod: native
     codcat:
       type: VARCHAR
       size: 20
       required: true
-      ##primaryKey: true
     nomcat:
       type: VARCHAR
       size: 250
@@ -100,15 +94,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fordefegrgen:
-    #_attributes:
-      #idMethod: native
     codemp:
       type: VARCHAR
       size: 3
       required: true
-      ##primaryKey: true
     nivproacc:
       type: NUMERIC
       size: 2
@@ -199,15 +192,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fordefequ:
-    #_attributes:
-      #idMethod: native
     codequ:
       type: VARCHAR
       size: 2
       required: true
-      ##primaryKey: true
     desequ:
       type: VARCHAR
       size: 50
@@ -218,15 +210,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fordefest:
-    #_attributes:
-      #idMethod: native
     codest:
       type: VARCHAR
       size: 5
       required: true
-      ##primaryKey: true
     desest:
       type: VARCHAR
       size: 100
@@ -234,20 +225,18 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fordefmun:
-    #_attributes:
-      #idMethod: native
     codest:
       type: VARCHAR
       size: 5
       required: true
-      ##primaryKey: true
     codmun:
       type: VARCHAR
       size: 5
       required: true
-      ##primaryKey: true
     desmun:
       type: VARCHAR
       size: 250
@@ -255,10 +244,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fordefniv:
-    #_attributes:
-      #idMethod: native
     codemp:
       type: VARCHAR
       size: 3
@@ -319,15 +308,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fordefobj:
-    #_attributes:
-      #idMethod: native
     codobj:
       type: VARCHAR
       size: 5
       required: true
-      ##primaryKey: true
     desobj:
       type: VARCHAR
       size: 1000
@@ -361,10 +349,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fordeforg:
-    #_attributes:
-      #idMethod: native
     codorg:
       type: VARCHAR
       size: 4
@@ -375,15 +363,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fordeforgpub:
-    #_attributes:
-      #idMethod: native
     codorg:
       type: VARCHAR
       size: 5
       required: true
-      ##primaryKey: true
     nomorg:
       type: VARCHAR
       size: 100
@@ -414,25 +401,22 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fordefpar:
-    #_attributes:
-      #idMethod: native
     codest:
       type: VARCHAR
       size: 5
       required: true
-      ##primaryKey: true
     codmun:
       type: VARCHAR
       size: 5
       required: true
-      ##primaryKey: true
     codpar:
       type: VARCHAR
       size: 5
       required: true
-      ##primaryKey: true
     despar:
       type: VARCHAR
       size: 250
@@ -440,15 +424,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fordefparegr:
-    #_attributes:
-      #idMethod: native
     codparegr:
       type: VARCHAR
       size: 32
       required: true
-      ##primaryKey: true
     nomparegr:
       type: VARCHAR
       size: 250
@@ -456,15 +439,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fordefparing:
-    #_attributes:
-      #idMethod: native
     codparing:
       type: VARCHAR
       size: 32
       required: true
-      ##primaryKey: true
     nomparing:
       type: VARCHAR
       size: 250
@@ -483,15 +465,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fordefprg:
-    #_attributes:
-      #idMethod: native
     codprg:
       type: VARCHAR
       size: 3
       required: true
-      ##primaryKey: true
     desprg:
       type: VARCHAR
       size: 1000
@@ -503,15 +484,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fordefpro:
-    #_attributes:
-      #idMethod: native
     codpro:
       type: VARCHAR
       size: 5
       required: true
-      ##primaryKey: true
     despro:
       type: VARCHAR
       size: 500
@@ -521,15 +501,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fordefpry:
-    #_attributes:
-      #idMethod: native
     codpro:
       type: VARCHAR
       size: 20
       required: true
-      ##primaryKey: true
     nompro:
       type: VARCHAR
       size: 1000
@@ -759,28 +738,33 @@ propel:
     accdif:
       type: VARCHAR
       size: 250
+    numempfem:
+      type: NUMERIC
+      size: 4
+      scale: 0
+    numempmas:
+      type: NUMERIC
+      size: 4
+      scale: 0
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fordefpryaccact:
-    #_attributes:
-      #idMethod: native
     codpro:
       type: VARCHAR
       size: 20
       required: true
-      ##primaryKey: true
     codaccesp:
       type: VARCHAR
       size: 20
       required: true
-      ##primaryKey: true
     codact:
       type: VARCHAR
       size: 5
       required: true
-      ##primaryKey: true
     desact:
       type: VARCHAR
       size: 250
@@ -790,25 +774,22 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fordefpryaccmet:
-    #_attributes:
-      #idMethod: native
     codpro:
       type: VARCHAR
       size: 20
       required: true
-      ##primaryKey: true
     codaccesp:
       type: VARCHAR
       size: 20
       required: true
-      ##primaryKey: true
     codmet:
       type: VARCHAR
       size: 5
       required: true
-      ##primaryKey: true
     desmet:
       type: VARCHAR
       size: 250
@@ -822,15 +803,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fordefsec:
-    #_attributes:
-      #idMethod: native
     codsec:
       type: VARCHAR
       size: 4
       required: true
-      ##primaryKey: true
     nomsec:
       type: VARCHAR
       size: 250
@@ -838,15 +818,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fordefsitpre:
-    #_attributes:
-      #idMethod: native
     codsitpre:
       type: VARCHAR
       size: 2
       required: true
-      ##primaryKey: true
     dessitpre:
       type: VARCHAR
       size: 100
@@ -854,15 +833,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fordefsta:
-    #_attributes:
-      #idMethod: native
     codsta:
       type: VARCHAR
       size: 2
       required: true
-      ##primaryKey: true
     dessta:
       type: VARCHAR
       size: 100
@@ -870,20 +848,18 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fordefsubobj:
-    #_attributes:
-      #idMethod: native
     codequ:
       type: VARCHAR
       size: 2
       required: true
-      ##primaryKey: true
     codsubobj:
       type: VARCHAR
       size: 3
       required: true
-      ##primaryKey: true
     dessubobj:
       type: VARCHAR
       size: 1000
@@ -891,20 +867,18 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fordefsubsec:
-    #_attributes:
-      #idMethod: native
     codsec:
       type: VARCHAR
       size: 4
       required: true
-      ##primaryKey: true
     codsubsec:
       type: VARCHAR
       size: 4
       required: true
-      ##primaryKey: true
     nomsubsec:
       type: VARCHAR
       size: 250
@@ -912,25 +886,22 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fordefsubsubobj:
-    #_attributes:
-      #idMethod: native
     codequ:
       type: VARCHAR
       size: 2
       required: true
-      ##primaryKey: true
     codsubobj:
       type: VARCHAR
       size: 3
       required: true
-      ##primaryKey: true
     codsubsubobj:
       type: VARCHAR
       size: 3
       required: true
-      ##primaryKey: true
     dessubsubobj:
       type: VARCHAR
       size: 1000
@@ -938,15 +909,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fordefunimed:
-    #_attributes:
-      #idMethod: native
     codunimed:
       type: VARCHAR
       size: 3
       required: true
-      ##primaryKey: true
     desunimed:
       type: VARCHAR
       size: 30
@@ -956,10 +926,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fordetpryaccespmet:
-    #_attributes:
-      #idMethod: native
     codpro:
       type: VARCHAR
       size: 20
@@ -1031,10 +1001,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fordisfuefinpryaccmet:
-    #_attributes:
-      #idMethod: native
     codpro:
       type: VARCHAR
       size: 20
@@ -1068,30 +1038,26 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fordismetperpryaccmet:
-    #_attributes:
-      #idMethod: native
     codpro:
       type: VARCHAR
       size: 20
       required: true
-      ##primaryKey: true
     codaccesp:
       type: VARCHAR
       size: 20
       required: true
-      ##primaryKey: true
     codmet:
       type: VARCHAR
       size: 5
       required: true
-      ##primaryKey: true
     perpre:
       type: VARCHAR
       size: 2
       required: true
-      ##primaryKey: true
     canmet:
       type: NUMERIC
       size: 14
@@ -1103,10 +1069,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   forencpryaccespmet:
-    #_attributes:
-      #idMethod: native
     codpro:
       type: VARCHAR
       size: 20
@@ -1137,20 +1103,18 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   foringdisper:
-    #_attributes:
-      #idMethod: native
     codpar:
       type: VARCHAR
       size: 32
       required: true
-      ##primaryKey: true
     perpar:
       type: VARCHAR
       size: 2
       required: true
-      ##primaryKey: true
     monpar:
       type: NUMERIC
       size: 14
@@ -1163,10 +1127,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   forniveles:
-    #_attributes:
-      #idMethod: native
     catpar:
       type: VARCHAR
       size: 1
@@ -1192,15 +1156,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   forparing:
-    #_attributes:
-      #idMethod: native
     codparing:
       type: VARCHAR
       size: 32
       required: true
-      ##primaryKey: true
     montoing:
       type: NUMERIC
       size: 20
@@ -1219,10 +1182,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   forpryorgpub:
-    #_attributes:
-      #idMethod: native
     codpro:
       type: VARCHAR
       size: 20
@@ -1256,47 +1219,41 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   forpryubigeo:
-    #_attributes:
-      #idMethod: native
     codpro:
       type: VARCHAR
       size: 20
       required: true
-      ##primaryKey: true
     codest:
       type: VARCHAR
       size: 5
       required: true
-      ##primaryKey: true
     codmun:
       type: VARCHAR
       size: 5
       required: true
-      ##primaryKey: true
     codpar:
       type: VARCHAR
       size: 5
       required: true
-      ##primaryKey: true
     espadiubigeo:
       type: VARCHAR
       size: 250
       required: true
-      ##primaryKey: true
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fortipfin:
-    #_attributes:
-      #idMethod: native
     codfin:
       type: VARCHAR
       size: 4
       required: true
-      ##primaryKey: true
     nomext:
       type: VARCHAR
       size: 100
@@ -1326,15 +1283,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fortiptit:
-    #_attributes:
-      #idMethod: native
     codtip:
       type: VARCHAR
       size: 4
       required: true
-      ##primaryKey: true
     destip:
       type: VARCHAR
       size: 100
@@ -1342,15 +1298,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fordefobjestnvaeta:
-    #_attributes:
-      #idMethod: native
     codobjnvaeta:
       type: VARCHAR
       size: 3
       required: true
-      ##primaryKey: true
     desobjnvaeta:
       type: VARCHAR
       size: 250
@@ -1358,10 +1313,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fordefaccpoa:
-    #_attributes:
-      #idMethod: native
     codsubacc:
       type: VARCHAR
       size: 5
@@ -1410,10 +1365,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fordefdirec:
-    #_attributes:
-      #idMethod: native
     coddir:
       type: VARCHAR
       size: 3
@@ -1423,7 +1378,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fordefinst:
     nrofor:
       type: VARCHAR
@@ -1433,11 +1390,12 @@ propel:
       type: VARCHAR
       size: 250
       required: true
-     id:
-      type: integer
+    id:
+      type: INTEGER
       required: true
       primaryKey: true
-      autoincrement: true
+      autoIncrement: true
+      description: Identificador Único del registro
   forcfgrepins:
     nrofor:
       type: VARCHAR
@@ -1459,13 +1417,12 @@ propel:
       type: INTEGER
       required: true
     id:
-      type: integer
+      type: INTEGER
       required: true
       primaryKey: true
-      autoincrement: true
+      autoIncrement: true
+      description: Identificador Único del registro
   forcargos:
-    #_attributes:
-      #idMethod: native
     codcar:
       type: VARCHAR
       size: 16
@@ -1502,7 +1459,7 @@ propel:
       size: 3
     codtip:
       type: VARCHAR
-      size: 3      
+      size: 3
     pricar:
       type: NUMERIC
       size: 20
@@ -1510,24 +1467,22 @@ propel:
     canhom:
       type: NUMERIC
       size: 6
-      scale: 0            
+      scale: 0
     canmuj:
       type: NUMERIC
       size: 6
-      scale: 0                  
+      scale: 0
     id:
       type: INTEGER
       required: true
-      autoIncrement: true      
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
   forprocar:
-    #_attributes:
-      #idMethod: native
     codprofes:
       type: VARCHAR
       size: 4
       required: true
-      foreignTable: npprofesion
-      foreignReference: codprofes
     codcar:
       type: VARCHAR
       size: 16
@@ -1537,4 +1492,23 @@ propel:
     id:
       type: INTEGER
       required: true
-      autoIncrement: true      
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  foringdisfuefin:
+    codparing:
+      type: VARCHAR
+      size: 32
+      required: true
+    codfin:
+      type: VARCHAR
+      size: 4
+      required: true
+    montoing:
+      type: NUMERIC
+      size: 20
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true

@@ -1,16 +1,17 @@
 propel:
-  _attributes: { noXsd: false, defaultIdMethod: native, package: lib.model }
+  _attributes: { noXsd: false, defaultIdMethod: native, package: lib.model.contabilidad }
   contaba:
+    _attributes: { description: Configuración del módulo de contabilidad }
     codemp:
       type: VARCHAR
       size: 3
       required: true
-#      index: unique
-#      primaryKey: true
+      description: Código Empresa
     loncta:
       type: NUMERIC
       size: 2
       required: true
+      description: Longitud de la cuenta
     numrup:
       type: NUMERIC
       size: 2
@@ -142,7 +143,7 @@ propel:
     codctaingdev:
       type: VARCHAR
       size: 32
-    unidad:unidad
+    unidad:
       type: VARCHAR
       size: 10
     corcomp:    #Correlativo Comprobante
@@ -157,7 +158,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   contaba1:
     fecini:
       type: DATE
@@ -182,14 +185,13 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true      
       autoIncrement: true
   contabb:
     codcta:
       type: VARCHAR
       size: 32
       required: true
-#      index: unique
-      #primaryKeytrue
     descta:
       type: VARCHAR
       size: 250
@@ -227,22 +229,13 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true      
       autoIncrement: true
-    _indexes:
-      i02contabb:
-        - codcta
-        - fecini
-        - feccie
-      i10contabb:
-        - codcta
-        - cargab
   contabb1:
     codcta:
       type: VARCHAR
       size: 32
       required: true
-#      index: unique
-      #primaryKeytrue
       foreignTable: contabb
       foreignReference: codcta
     fecini:
@@ -278,29 +271,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
-    _indexes:
-      i01contabb1:
-        - codcta
-      i02contabb1:
-        - codcta
-        - fecini
-        - feccie
-      i05contabb1:
-        - codcta
-        - pereje
-      i06contabb1:
-        - codcta
-        - pereje
-        - fecini
-        - feccie
+      description: Identificador Único del registro
   contabc:
     numcom:
       type: VARCHAR
       size: 8
       required: true
-#      index: unique
-      #primaryKey:true
     feccom:
       type: DATE
       required: true
@@ -324,32 +302,35 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
-    _indexes:
-      i03contabc:
-        - stacom
+      description: Identificador Único del registro
+
   contabc1:
+    _attributes: { description: Detalle de los comprobantes contables }
     numcom:
       type: VARCHAR
       size: 8
       required: true
-#      index: unique
-      #primaryKey:true
-      foreignTable: contabc
-      foreignReference: numcom
+      foreignTable: contabc           # Tabla foranea
+      foreignReference: numcom   # Campo de la tabla foranea
+      description: Número de Comprobante
     feccom:
       type: DATE
       required: true
+      description: Fecha del comprobante
     debcre:
       type: VARCHAR
       size: 1
       required: true
+      description: Débito o Crédito
     codcta:
       type: VARCHAR
       size: 32
       required: true
-      foreignTable: contabb
-      foreignReference: codcta
+      foreignTable: contabb      # Tabla foranea
+      foreignReference: codcta   # Campo de la tabla foranea
+      description: Cuenta Contable
     numasi:
       type: NUMERIC
       size: 3
@@ -363,12 +344,13 @@ propel:
       type: NUMERIC
       size: 14
       scale: 2
+      description: Monto asignado
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
+      description: Identificador Único de la tabla
     _indexes:
-      i01contabc1:
-        - numcom
-      i02contabc1:
-        - codcta
+      contabc1_index_01: [numcon, codcta, feccom]

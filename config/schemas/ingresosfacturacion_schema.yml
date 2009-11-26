@@ -1,8 +1,6 @@
 propel:
   _attributes: { noXsd: false, defaultIdMethod: native, package: lib.model }
   inestado:
-    #_attributes:
-      #idMethod: native
     codedo:
       type: VARCHAR
       size: 4
@@ -14,10 +12,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   inmunicipio:
-    #_attributes:
-      #idMethod: native
     inestado_id:
       type: INTEGER
       foreignTable: inestado
@@ -35,10 +33,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   inparroquia:
-    #_attributes:
-      #idMethod: native
     inestado_id:
       type: INTEGER
       foreignTable: inestado
@@ -62,10 +60,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   intippag:
-    #_attributes:
-      #idMethod: native
     codtippag:
       type: VARCHAR
       size: 4
@@ -77,10 +75,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   ingruprec:
-    #_attributes:
-      #idMethod: native
     codgrup:
       type: VARCHAR
       size: 4
@@ -92,10 +90,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   indefban:
-    #_attributes:
-      #idMethod: native
     codban:
       type: VARCHAR
       size: 4
@@ -107,10 +105,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   indefcaj:
-    #_attributes:
-      #idMethod: native
     codcaj:
       type: VARCHAR
       size: 4
@@ -122,10 +120,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   inrecaud:
-    #_attributes:
-      #idMethod: native
     ingruprec_id:
       type: INTEGER
       foreignTable: ingruprec
@@ -151,10 +149,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   indestipcli:
-    #_attributes:
-      #idMethod: native
     indefdes_id:
       type: INTEGER
       foreignTable: indefdes
@@ -170,10 +168,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   incondpag:
-    #_attributes:
-      #idMethod: native
     codcond:
       type: VARCHAR
       size: 4
@@ -196,10 +194,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   incliente:
-    #_attributes:
-      #idMethod: native
     codcli:
       type: VARCHAR
       size: 15
@@ -325,12 +323,12 @@ propel:
       type: VARCHAR
       size: 4
     id:
-      type: integer
+      type: INTEGER
       required: true
-      autoincrement: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
   infactura:
-    #_attributes:
-      #idMethod: native
     incliente_id:
       type: INTEGER
       foreignTable: incliente
@@ -390,10 +388,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   ingruprub:
-    #_attributes:
-      #idMethod: native
     codgruprub:
       type: VARCHAR
       size: 4
@@ -405,10 +403,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   inrubro:
-    #_attributes:
-      #idMethod: native
     ingruprub_id:
       type: INTEGER
       foreignTable: ingruprub
@@ -431,10 +429,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   indetfac:
-    #_attributes:
-      #idMethod: native
     infactura_id:
       type: INTEGER
       foreignTable: infactura
@@ -453,10 +451,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   intipcli:
-    #_attributes:
-      #idMethod: native
     codtipcli:
       type: VARCHAR
       size: 4
@@ -468,10 +466,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   indefdes:
-    #_attributes:
-      #idMethod: native
     coddes:
       type: VARCHAR
       size: 4
@@ -502,10 +500,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   inarticulo:
-    #_attributes:
-      #idMethod: native
     codart:
       type: VARCHAR
       size: 4
@@ -517,10 +515,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   inforpag:
-    #_attributes:
-      #idMethod: native
     codforpag:
       type: VARCHAR
       size: 4
@@ -532,10 +530,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   insancion:
-    #_attributes:
-      #idMethod: native
     codsan:
       type: VARCHAR
       size: 4
@@ -547,10 +545,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   inmulta:
-    #_attributes:
-      #idMethod: native
     insancion_id:
       type: INTEGER
       foreignTable: insancion
@@ -573,10 +571,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   intipmul:
-    #_attributes:
-      #idMethod: native
     codtipmul:
       type: VARCHAR
       size: 4
@@ -588,10 +586,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   intipprof:
-     #_attributes:
-      #idMethod: native
     codtipprof:
       type: VARCHAR
       size: 4
@@ -603,10 +601,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   inespeci:
-     #_attributes:
-      #idMethod: native
     codespeci:
       type: VARCHAR
       size: 4
@@ -618,10 +616,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   intipemp:
-    #_attributes:
-      #idMethod: native
     codtipemp:
       type: VARCHAR
       size: 4
@@ -633,10 +631,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   informsol:
-    #_attributes:
-      #idMethod: native
     codformsol:
       type: VARCHAR
       size: 4
@@ -648,10 +646,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   inprofes:
-    #_attributes:
-      #idMethod: native
     venext:
       type: VARCHAR
       size: 1
@@ -731,10 +729,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   inempresa:
-    #_attributes:
-      #idMethod: native
     rifemp:
       type: VARCHAR
       size: 12
@@ -815,10 +813,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   infactura:
-    #_attributes:
-      #idMethod: native
     numfac:
       type: VARCHAR
       size: 12
@@ -858,10 +856,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   intipsol:
-    #_attributes:
-      #idMethod: native
     codtipsol:
       type: VARCHAR
       size: 4
@@ -873,10 +871,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   iningprof:
-    #_attributes:
-      #idMethod: native
     intipsol_id:
       type: INTEGER
       foreignTable: intipsol
