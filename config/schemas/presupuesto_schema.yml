@@ -1,5 +1,5 @@
 propel:
-  _attributes: { noXsd: false, defaultIdMethod: native, package: lib.model }
+  _attributes: { noXsd: false, defaultIdMethod: native, package: lib.model.presupuesto }
   cpadidis:
     refadi:
       type: VARCHAR
