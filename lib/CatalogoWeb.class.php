@@ -3188,7 +3188,7 @@ $this->c= new Criteria();
     $this->c= new Criteria();
     $this->c->addJoin(CpasiiniPeer :: CODPRE,CpdeftitPeer :: CODPRE);
   $this->c->add(CpasiiniPeer :: PERPRE, '00');
-  $this->c->add(CpasiiniPeer :: MONDIS, 0, Criteria::GREATER_THAN);
+  $this->c->add(CpasiiniPeer :: MONDIS, 0, Criteria::GREATER_EQUAL);
 
     $this->c->addAscendingOrderByColumn(CpasiiniPeer::CODPRE);
 
