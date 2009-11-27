@@ -16,13 +16,13 @@ generator:
       feclic: { name: Licitación}
       fecproini: { name: Inicio según Prórroga}
       fecrei: { name: Reinicio}
-      fecfin: { name: Terminación Original}
+      fecfin: { name: Terminación según Contrato}
       fecrecdef: { name: Recep. Definitiva}
       fecbuepro: { name: Otorg. Buena Pro}
       fecpar: { name: Paralización}
-      fecpro: { name: Prórroga Terminac.}
+      fecpro: { name: Prórroga Ejecución}
       fecrecprov: { name: Recep. Provisional}
-      fecfinmod: { name: Terminación Modificada}
+      fecfinmod: { name: Terminación por Obra Ejecutada}
       moncon:      { name: Monto del Contrato (+)}
       monext:      { name: Monto Extras (+)}
       monmod:      { name: Monto Modificado (+)}

@@ -19,11 +19,11 @@ generator:
       codactini:    { name: Inicio}
       codactpar:    { name: Paralización}
       codactrei:    { name: Reinicio}
-      codactproter:    { name: Prórroga de Terminación}
+      codactproter:    { name: Prórroga de Ejecución}
       codactter:    { name: Terminación}
       codactrecpro:    { name: Recepción Provisional}
       codactrecdef:    { name: Recepción Definitiva}
-      codingres:    { name: Cód. Ing. Residente}
+      codingres:    { name: Cód. Ing. Inspector}
       codconobr:    { name: Obras}
       codconins:    { name: Inspección}
       codconsup:    { name: Supervición}
@@ -41,7 +41,7 @@ generator:
       title:          Registro Información del Sistema
       display:        [=codemp, nomemp, diremp]
       filters:        [codemp]
-      sort            codemp
+      sort:            codemp
       object_actions:
         _edit:        ~
         _delete:      ~

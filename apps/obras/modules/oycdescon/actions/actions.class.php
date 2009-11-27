@@ -1246,7 +1246,7 @@ class oycdesconActions extends autooycdesconActions
           $dato4="";
           $javascript="alert('La Obra no esta registrada');$('". $cajtexmos ."').value='';$('". $cajtexcom ."').value='';";
   		}
-  		$output = '[["'.$cajtexmos.'","'.$dato.'",""],["ocregcon_poriva","'.$dato1.'",""],["ocregcon_codpre","'.$dato2.'",""],["ocregcon_despre","'.$dato3.'",""],["ocregcon_codpreiva","'.$dato4.'",""],["javascript","'.$javascript.'",""]]';
+  		$output = '[["'.$cajtexmos.'","'.$dato.'",""],["ocregcon_poriva","'.$dato1.'",""],["ocregcon_codpre","'.$dato2.'",""],["ocregcon_despre","'.$dato3.'",""],["ocregcon_codpreiva","'.$dato4.'",""],["ocregcon_descon","'.$dato.'",""],["javascript","'.$javascript.'",""]]';
   		$this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
         return sfView::HEADER_ONLY;
       }
