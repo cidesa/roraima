@@ -18,6 +18,7 @@ $check = false;
 $checktablas = array();
 $tablasschemas = array();
 $trim = false;
+$seq = false;
 
 pake_desc('check database for current model');
 pake_task('propel-check-database', 'project_exists');
@@ -25,6 +26,8 @@ pake_task('propel-check-database', 'project_exists');
 pake_desc('trim all string columns on database for current model');
 pake_task('propel-trim-database', 'project_exists');
 
+pake_desc('create sequenses for all tables on database for current model');
+pake_task('propel-seq-database', 'project_exists');
 
 function convert_yml_schema($check_schema = true, $prefix = '')
 {
@@ -230,19 +233,46 @@ function run_propel_trim_database($task, $args)
 {
   global $trim;
   $trim = true;
-  
+
+  pake_echo_action('trim_database', 'Limpiando Carpeta config');
+  $finder = pakeFinder::type('file')->ignore_version_control()->name('*schema*.xml');
+  pake_remove($finder, 'config');
+
+
   pake_echo_action('trim_database', 'Analizando las tablas');
-  _propel_cidesa_convert_yml_schema(false, 'generated-');
-  _propel_cidesa_copy_xml_schema_from_plugins('generated-');
+
+  _propel_cidesa_convert_yml_schema(false, '');
+  _propel_cidesa_copy_xml_schema_from_plugins('');
   
   _call_cidesa_phing($task, 'sql', false);
   
   $finder = pakeFinder::type('file')->ignore_version_control()->name('schema.*');
   pake_remove($finder, 'config');
 
-  $finder = pakeFinder::type('file')->ignore_version_control()->name('generated-*schema*.xml');
+  $finder = pakeFinder::type('file')->ignore_version_control()->name('*schema*.xml');
   pake_remove($finder, 'config');
-  $finder = pakeFinder::type('file')->ignore_version_control()->name('generated-*schema*.yml');
+}
+
+function run_propel_seq_database($task, $args)
+{
+  global $seq;
+  $seq = true;
+
+  pake_echo_action('seq_database', 'Limpiando Carpeta config');
+  $finder = pakeFinder::type('file')->ignore_version_control()->name('*schema*.xml');
+  pake_remove($finder, 'config');
+
+
+  pake_echo_action('seq_database', 'Analizando las tablas');
+  _propel_cidesa_convert_yml_schema(false, '');
+  _propel_cidesa_copy_xml_schema_from_plugins('');
+
+  _call_cidesa_phing($task, 'sql', false);
+
+  $finder = pakeFinder::type('file')->ignore_version_control()->name('schema.*');
+  pake_remove($finder, 'config');
+
+  $finder = pakeFinder::type('file')->ignore_version_control()->name('*schema*.xml');
   pake_remove($finder, 'config');
 }
 

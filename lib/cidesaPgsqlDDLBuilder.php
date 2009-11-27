@@ -6,8 +6,8 @@
  *
  * @package    Roraima
  * @subpackage lib
- * @author     $Author: lhernandez $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id: cidesaPgsqlDDLBuilder.php 33593 2009-09-30 14:44:43Z lhernandez $
+ * @author     $Author: jlobaton $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: cidesaPgsqlDDLBuilder.php 35120 2009-11-27 19:29:24Z jlobaton $
  *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -39,6 +39,12 @@ class cidesaPgsqlDDLBuilder extends PgsqlDDLBuilder {
                     $this->trimdatabase(&$script);
                     return $script;
                 }
+            }elseif($GLOBALS["seq"]) {
+                if($GLOBALS["seq"]==true) {
+                    $script = "";
+                    $this->seqdatabase(&$script);
+                    return $script;
+                }
             }
         }
         elseif($GLOBALS["trim"]) {
@@ -47,7 +53,13 @@ class cidesaPgsqlDDLBuilder extends PgsqlDDLBuilder {
                 $this->trimdatabase(&$script);
                 return $script;
             }
-        }
+        }elseif($GLOBALS["seq"]) {
+                if($GLOBALS["seq"]==true) {
+                    $script = "";
+                    $this->seqdatabase(&$script);
+                    return $script;
+                }
+            }
 
         $script = "";
         $this->addTable($script);
@@ -479,7 +491,7 @@ COMMENT ON COLUMN ".$this->quoteIdentifier($table->getName()).".".$this->quoteId
                     $this->addColumn($columnname,&$script);
                 }
                 else {
-
+                    
                     $columntype = $this->getColumnType($col);
 
                     // verifico el tamaño de la columna si es de tipo varchar
@@ -526,5 +538,11 @@ COMMENT ON COLUMN ".$this->quoteIdentifier($table->getName()).".".$this->quoteId
 
     }
 
+    protected function seqdatabase(&$script) {
+
+        // Se agrega la seq de la tabla
+        $this->addSequences(&$script);
+
+    }
 
 }
