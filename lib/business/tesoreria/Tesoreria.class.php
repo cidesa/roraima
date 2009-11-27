@@ -503,7 +503,7 @@ class Tesoreria {
     $dateFormat = new sfDateFormat('es_VE');
     $fecdes = $dateFormat->format($fecdes, 'i', $dateFormat->getInputPattern('d'));
 
-    $c = new Criteria();
+  /*  $c = new Criteria();
     $c->add(TsmovlibPeer :: NUMCUE, $nro);
     $c->add(TsmovlibPeer::FECLIB,$fecdes,Criteria::GREATER_EQUAL);
     $c->add(TsmovlibPeer :: STACON1, 'C');
@@ -515,7 +515,7 @@ class Tesoreria {
 	      $tsmovlib->setStacon1('N');
 	      $tsmovlib->save();
 	    }
-    }
+    }*/
 
 
 	$c=new criteria();
@@ -534,7 +534,7 @@ class Tesoreria {
 	    }
     }
 
-    $c = new Criteria();
+  /*  $c = new Criteria();
     $c->add(TsmovbanPeer :: NUMCUE, $nro);
     $c->add(TsmovbanPeer::FECBAN,$fecdes,Criteria::GREATER_EQUAL);
     $c->add(TsmovbanPeer :: STACON1, 'C');
@@ -546,24 +546,8 @@ class Tesoreria {
 	      $tsmovban->setStacon1('N');
 	      $tsmovban->save();
 	    }
-    }
+    }*/
 
-//// VB-Fuente de Tachira
-  /*  $c = new Criteria();
-    $c->add(TsmovbanPeer :: NUMCUE, $nro);
-    $sql = "Tsmovban.tipmov<>'ANUC' AND Tsmovban.fecban >='$fecdes' AND Tsmovban.stacon1='C'";
-    $c->add(TsmovbanPeer :: TIPMOV, $sql, Criteria :: CUSTOM);
-    $result = TsmovbanPeer :: doSelect($c);
-
-    if ($result)
-    {
-	    foreach ($result as $tsmovban) {
-	      $tsmovban->setStacon1('N');
-	      $tsmovban->save();
-	    }
-    }
-
-/////*/
 
   }
 
