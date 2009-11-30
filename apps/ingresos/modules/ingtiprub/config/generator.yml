@@ -4,12 +4,15 @@ generator:
     model_class:      Citiprub
     theme:            cidesaGenerator
     fields:
-      codtiprub:      { name: Código, params: size=3 maxlength=3 }
+      codtiprub:      { name: Código, params: size=3 maxlength=3 onBlur="this.value=this.value.pad(3, '0',0);" }
       destiprub:      { name: Descripción, type: textarea_tag, params: size=50x2 }
 
     list:
       title:          Tipos de Rubros
       display:        [ =codtiprub, destiprub ]
+      fields:
+        codtiprub:      { params: size=3 maxlength=3 }
+        destiprub:      { params: size=20 }
       object_actions:
         _edit:        ~
         _delete:      ~
@@ -18,8 +21,6 @@ generator:
       sort: codtiprub
     edit:
       title:          Edición de Tipos de Rubros
-      fields:
-        codtiprub:      { name: Código, params: size=3 readonly=true }
       display:        [ codtiprub, destiprub ]
       actions:
         _list:        ~

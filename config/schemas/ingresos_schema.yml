@@ -1,8 +1,6 @@
 propel:
-  _attributes: { noXsd: false, defaultIdMethod: native, package: lib.model }
+  _attributes: { noXsd: false, defaultIdMethod: native, package: lib.model.ingresos }
   ciadidis:
-    #_attributes:
-      #idMethod: native
     refadi:
       type: VARCHAR
       size: 8
@@ -34,10 +32,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   ciajuste:
-    #_attributes:
-      #idMethod: native
     refaju:
       type: VARCHAR
       size: 8
@@ -70,15 +68,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   ciasiini:
-    #_attributes:
-      #idMethod: native
     codpre:
       type: VARCHAR
       size: 34
       required: true
-      ##primaryKey: true
     nompre:
       type: VARCHAR
       size: 100
@@ -86,12 +83,10 @@ propel:
       type: VARCHAR
       size: 2
       required: true
-      ##primaryKey: true
     anopre:
       type: VARCHAR
       size: 4
       required: true
-      ##primaryKey: true
     monasi:
       type: NUMERIC
       size: 14
@@ -146,15 +141,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   ciconrep:
-    #_attributes:
-      #idMethod: native
     rifcon:
       type: VARCHAR
       size: 14
       required: true
-      ##primaryKey: true
     repcon:
       type: VARCHAR
       size: 1
@@ -204,15 +198,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   cidefniv:
-    #_attributes:
-      #idMethod: native
     codemp:
       type: VARCHAR
       size: 3
       required: true
-      ##primaryKey: true
     loncod:
       type: NUMERIC
       size: 2
@@ -275,15 +268,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   cideftit:
-    #_attributes:
-      #idMethod: native
     codpre:
       type: VARCHAR
       size: 32
       required: true
-      ##primaryKey: true
     nompre:
       type: VARCHAR
       size: 100
@@ -303,10 +295,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   cidisniv:
-    #_attributes:
-      #idMethod: native
     codpre:
       type: VARCHAR
       size: 32
@@ -354,10 +346,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   cierre:
-    #_attributes:
-      #idMethod: native
     codnom:
       type: VARCHAR
       size: 3
@@ -398,10 +390,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   ciimping:
-    #_attributes:
-      #idMethod: native
     refing:
       type: VARCHAR
       size: 8
@@ -441,10 +433,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   cimovadi:
-    #_attributes:
-      #idMethod: native
     refadi:
       type: VARCHAR
       size: 8
@@ -467,10 +459,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   cimovaju:
-    #_attributes:
-      #idMethod: native
     refaju:
       type: VARCHAR
       size: 8
@@ -490,10 +482,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   cimovtra:
-    #_attributes:
-      #idMethod: native
     reftra:
       type: VARCHAR
       size: 8
@@ -516,10 +508,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   ciniveles:
-    #_attributes:
-      #idMethod: native
     catpar:
       type: VARCHAR
       size: 1
@@ -545,10 +537,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   cipereje:
-    #_attributes:
-      #idMethod: native
     fecini:
       type: DATE
       required: true
@@ -568,19 +560,17 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   cireging:
-    #_attributes:
-      #idMethod: native
     refing:                   #referencia
       type: VARCHAR
       size: 8
       required: true
-      ##primaryKey: true
     fecing:                   #fecha
       type: DATE
       required: true
-      ##primaryKey: true
     desing:                   #descripcion
       type: VARCHAR
       size: 500
@@ -655,10 +645,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   ciregingr:
-    #_attributes:
-      #idMethod: native
     refing:
       type: VARCHAR
       size: 8
@@ -711,15 +701,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   citiping:
-    #_attributes:
-      #idMethod: native
     codtip:
       type: VARCHAR
       size: 3
       required: true
-      ##primaryKey: true
     destip:
       type: VARCHAR
       size: 250
@@ -727,15 +716,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   citrasla:
-    #_attributes:
-      #idMethod: native
     reftra:
       type: VARCHAR
       size: 8
       required: true
-      ##primaryKey: true
     fectra:
       type: DATE
       required: true
@@ -764,15 +752,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   citiprub:
-    #_attributes:
-      #idMethod: native
     codtiprub:
       type: VARCHAR
       size: 3
       required: true
-      ##primaryKey: true
     destiprub:
       type: VARCHAR
       size: 250
@@ -780,4 +767,6 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
