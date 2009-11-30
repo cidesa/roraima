@@ -229,11 +229,11 @@ class CierredeNomina
 	     ////  Validar contra Presupuesto  ////
 	   	 if ($intpre=='S')
 	   	 {
-	   	 	$sql = "select mondis from cpasiini where perpre='00' and codpre='".$grabar->getCodpre()."'";
-	   		  if (Herramientas::BuscarDatos($sql,&$resul))
-//		      if (Herramientas::Monto_disponible_ejecucion($anopresu,$grabar->getCodpre(),&$mondis))
+	   	 	//$sql = "select mondis from cpasiini where perpre='00' and codpre='".$grabar->getCodpre()."'";
+	   		  //if (Herramientas::BuscarDatos($sql,&$resul))
+		      if (Herramientas::Monto_disponible_ejecucion($anopresu,$grabar->getCodpre(),&$mondis))
 		      {
-		        if ($grabar->getMonto() > $resul[0]["mondis"]){
+		        if ($grabar->getMonto() > $mondis){
 		          $sobregiro = true;
 		          break;
 		        }
