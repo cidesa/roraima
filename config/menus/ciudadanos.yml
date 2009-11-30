@@ -23,6 +23,7 @@ ciudadanos:
       Tipos de Donaciones:                                    acitipayu
       Tipos de Rubros:                                        acirubros
       #Asignar Recaudos a Tipos de Donaciones:                acirecayu
+      Migrar Categorías a Unidades:                           acimigcat
       Unidades de la Organización:                            aciunidad
       #Grupos de Articulos:                                   acigrupos
       Ayuda/Beneficio a Otorgar:                              acidonaciones
