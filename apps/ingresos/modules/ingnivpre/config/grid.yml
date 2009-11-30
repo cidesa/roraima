@@ -3,7 +3,7 @@ opciones:                  # Opciones generales
   eliminar:                true
   tabla:                   ciniveles
   ancho:                   300
-  anchogrid:               550
+  anchogrid:               650
   filas:                   1
   titulo:                  ' '
   htmltotalfilas:          ' '

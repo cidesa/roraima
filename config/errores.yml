@@ -815,9 +815,6 @@
 496:
   cod: 496
   msj: Faltan Datos en el Grid
-497:
-  cod: 497
-  msj: Existen problemas con la Disponibilidad Presupuestaria para esta Nomina
 ###############OBRAS################
 1000:
     cod: 1000
@@ -1036,6 +1033,30 @@
 1146:
     cod:1146
     msj: La Condición de Pago no corresponde con la Forma de Pago.
+1147:
+    cod:1147
+    msj: El Cliente no Posee Cuenta Contable. No se puede generar el Comprobante.
+1148:
+    cod:1148
+    msj: La Forma de Pago Genera Movimiento Según libro y El Número de Cuenta Bancaria no existe. No se puede generar el Comprobante.
+1149:
+    cod:1149
+    msj: La Cuenta Bancaria asociada a la Forma de Pago no posee Cuenta Contable. No se puede generar el Comprobante.
+1150:
+    cod:1150
+    msj: La Cuenta de Venta al Contado no esta Definida(Artículo). No se puede generar el Comprobante.
+1151:
+    cod:1151
+    msj: Verifique que los Descuentos aplicados tengan asociada Cuenta Contable. No se puede generar el Comprobante.
+1152:
+    cod:1152
+    msj: Verifique que los Recargos aplicados tengan asociada Cuenta Contable. No se puede generar el Comprobante.
+1153:
+    cod:1153
+    msj: Verifique que los Artículos posean Cuenta de Venta asociada. No se puede generar el Comprobante.
+1154:
+    cod:1154
+    msj: El Proveedor no posee Cuenta de Contable asociada. No se puede generar el Comprobante.
 ########## Licitaciones ########
 901:
     cod: 901
@@ -1147,16 +1168,158 @@
   msj: El Monto del Financiamiento no puede ser Mayor que el Comprometido de la Partida
 1302:
   cod: 1302
-  msj: El Monto del Financiamiento no puede ser Mayor a la Asignacion Inicial
+  msj: El Monto del Financiamiento no puede ser Mayor a la Asignacion Inicial.
 1303:
   cod: 1303
-  msj: El numero inicial del Correlativo no ha sido definido
+  msj: El numero inicial del Correlativo no ha sido definido.
 1304:
   cod: 1304
-  msj: El Monto Total del Financiamiento no puede ser Menor al Movimiento del Documento
+  msj: El Monto Total del Financiamiento no puede ser Menor al Movimiento del Documento.
 1305:
   cod: 1305
-  msj: El Monto del Financiamiento no puede ser Menor a la Asignacion Inicial
+  msj: El Monto del Financiamiento no puede ser Menor a la Asignacion Inicial.
+1306:
+  cod: 1306
+  msj: La Definición Presupuestaria no ha sido grabada.
+1307:
+  cod: 1307
+  msj: Nivel Anterior no existe.
+1308:
+  cod: 1308
+  msj: El nivel de Disponibilidad debe ser menor o igual a la suma de categorias y partidas.
+1309:
+  cod: 1309
+  msj: La Cuenta Contable que ud asoció NO EXISTE.
+1310:
+  cod: 1310
+  msj: No Esta Definido El Formato Presupuestario.
+1311:
+  cod: 1311
+  msj: Código Presupuestario ya tiene Asociado un Traslado.
+1312:
+  cod: 1312
+  msj: Código Presupuestario ya tiene Asociado una Adicion/Disminución.
+1313:
+  cod: 1313
+  msj: Código Presupuestario ya tiene Asociado un Ajuste.
+1314:
+  cod: 1314
+  msj: Código Presupuestario ya tiene Pagado Asociados.
+1315:
+  cod: 1315
+  msj: Código Presupuestario ya tiene Causado Asociados.
+1316:
+  cod: 1316
+  msj: Código Presupuestario ya tiene Compromisos Asociados.
+1317:
+  cod: 1317
+  msj: Código Presupuestario ya tiene Precompromisos Asociados.
+1318:
+  cod: 1318
+  msj: Código Presupuestario ya tiene Asignación Presupuestaria.
+1319:
+  cod: 1319
+  msj: La Fecha de Cierre debe ser mayor que la Fecha de Inicio.
+1320:
+  cod: 1320
+  msj: La Fecha de Inicio debe estar dentro del Periodo.
+1321:
+  cod: 1321
+  msj: La Fecha de Cierre esta fuera del Periodo.
+1322:
+  cod: 1322
+  msj: No se puede eliminar titulo presupuestario padre.
+1323:
+  cod: 1323
+  msj: El números de categorías debe igual a la clasificación de categorías.
+1324:
+  cod: 1324
+  msj: El números de partidas debe igual a la clasificación de partidas.
+1325:
+  cod: 1325
+  msj: Categoría Presupuestaria Inválida
+1326:
+  cod: 1326
+  msj: No se puede eliminar ese Pago por que esta siendo referenciado en CPPAGOS.
+1327:
+  cod: 1327
+  msj: No se puede eliminar ese Ajuste por que esta siendo referenciado en CPMOVAJU.
+1328:
+  cod: 1328
+  msj: El Precompromiso ya esta Anulado.
+1329:
+  cod: 1329
+  msj: El Precompromiso No Puede ser Eliminado Ni Anulado, Tiene un Ajuste.
+1330:
+  cod: 1330
+  msj: El Precompromiso No Puede ser Eliminado Ni Anulado, Tiene Movimiento.
+1331:
+  cod: 1331
+  msj: El Compromiso ya esta Anulado.
+1332:
+  cod: 1332
+  msj: El Compromiso No Puede ser Eliminado Ni Anulado, Tiene Movimiento.
+1333:
+  cod: 1333
+  msj: Fecha fuera del Ejercicio Fiscal.
+1334:
+  cod: 1334
+  msj: El Periodo en Presupuesto fue Cerrado.
+1335:
+  cod: 1335
+  msj: El Compromiso No Puede ser Eliminado Ni Anulado, Tiene un Ajuste.
+1336:
+  cod: 1336
+  msj: El Compromiso NO Puede Ser Eliminado,Porque Fue Generado Desde Otro Modulo.
+1337:
+  cod: 1337
+  msj: El codigo presupuestario no puede estar repetido.
+1338:
+  cod: 1338
+  msj: El monto a imputar es mayor al monto disponible.
+1339:
+  cod: 1339
+  msj: No se puede eliminar, el Documento esta siendo usado por uno o mas movimientos.
+1340:
+  cod: 1340
+  msj: El código presupuestario no existe.
+1341:
+  cod: 1341
+  msj: Este Compromiso no se puede Aprobar por que esta Anulado.
+1342:
+  cod: 1342
+  msj: No se puede guardar sin imputaciones presupuestarias.
+1343:
+  cod: 1343
+  msj: El Pagado ya esta Anulado.
+1344:
+  cod: 1344
+  msj: El Pagado No Puede ser Anulado, Tiene un Ajuste.
+1345:
+  cod: 1345
+  msj: El Pagado no puede ser Eliminado porque se Originó en Otro Módulo.
+1346:
+  cod: 1346
+  msj: El Causado ya esta Anulado.
+1347:
+  cod: 1347
+  msj: El Causado No Puede ser Eliminado Ni Anulado, Tiene un Ajuste.
+1348:
+  cod: 1348
+  msj: El Causado No Puede ser Eliminado Ni Anulado, Tiene Movimiento.
+1349:
+  cod: 1349
+  msj: Año se encuentra fuera del Periodo Actual.El Monto a Asignar no puede ser menor al monto ejecutado
+1350:
+  cod: 1350
+  msj: El Monto a Asignar no puede ser menor al monto ejecutado.
+1351:
+  cod: 1351
+  msj: No puede Grabar ya que la Etapa de Definición está Cerrada.
+1352:
+  cod: 1352
+  msj: El Codigo introducido no cumple con el Formato Presupuestario.
+
 
 
 ########### Hacienda ##############
@@ -1179,6 +1342,10 @@
 706:
   cod: 706
   msj: Complete todos los campos de la Cancelación de la Licencia.
+707:
+  cod: 707
+  msj: Existen Código de Actividad en la Declaración que no pertenecen al Año de la misma
+
 
 ############Cuentas x Cobrar#########
 1800:
@@ -1213,6 +1380,88 @@
 8884:
   cod: 8884
   msj:  Error al Grabar los Uso Especificos
+
+############ Contabilidad #########
+600:
+  cod: 600
+  msj:  No se puede definir esta cuenta como cargable ya que la misma tiene cuentas Hijas
+601:
+  cod: 601
+  msj:  La Cuenta de Resultado Acumulado de los Ejercicios Anteriores No es Cargable
+602:
+  cod: 602
+  msj:  La Cuenta de Resultado Acumulado de Restar los Ingresos menos los Egresos del Ejercicio en Curso No es Cargable
+603:
+  cod: 603
+  msj:  Hay Períodos Anteriores a este que están Abiertos, Ciérrelos Primero
+604:
+  cod: 604
+  msj:  No se puede cerrar el periodo ya que contiene Comprobante DIFERIDOS
+605:
+  cod: 605
+  msj:  Todavia existen comprobantes diferidos en el Ejercicio.
+606:
+  cod: 606
+  msj:  Debe cerrar todos los Periodos antes de hacer el Cierre de Ejercicio.
+607:
+  cod: 607
+  msj:  No se puede abrir el periodo ya que contiene Comprobante DIFERIDOS
+608:
+  cod: 608
+  msj:  Verifique en Tipos de Cuentas y en Cuentas Contables que los datos esten completos
+609:
+  cod: 609
+  msj:  Ya se Realizo el Cierre
+610:
+  cod: 610
+  msj:  Debe configurar las Definiciones Específicas de la Institución para poder cargar Cuentas Nuevas
+611:
+  cod: 611
+  msj:  Existen Comprobantes contables para este código de cuenta
+612:
+  cod: 612
+  msj:  Existen Proveedores con este código contable asociado
+613:
+  cod: 613
+  msj:  Existen Titulos Presupuestarios con este código contable asociado
+614:
+  cod: 614
+  msj:  El periodo ya esta abierto
+615:
+  cod: 615
+  msj:  El periodo ya esta cerrado
+616:
+  cod: 616
+  msj:  Este Comprobante esta Nulo, no se puede Eliminar
+617:
+  cod: 617
+  msj:  La cuenta no tiene padre y no es de primer nivel.
+618:
+  cod: 618
+  msj:  Error Generando Comprobantes, Ya se realizó el cierre.
+619:
+  cod: 619
+  msj:  La Etapa de Definición esta cerrada, no podrá actualizar la Cuenta.
+620:
+  cod: 620
+  msj:  La Etapa de Definicion no se ha Cerrado.
+621:
+  cod: 621
+  msj: La Fecha del Comprobante pertenece a un periodo Cerrado.
+622:
+  cod: 622
+  msj: La Fecha del Comprobante esta fuera del Período del Ejercicio Fiscal.
+623:
+  cod: 623
+  msj: No se puede eliminar el Comprobante porque tiene Ordenes de Pago.
+624:
+  cod: 624
+  msj: No se puede eliminar el Comprobante porque tiene Movimientos según Libro.
+625:
+  cod: 625
+  msj: El Código Padre de esta Cuenta ya es Cargable, no puede tener mas hijos.
+
+
  #MODULO DE GESTION DE INDICADORES
 11101:
   cod: 11101
@@ -1229,7 +1478,7 @@
 #####################EVALUACION Y DESEMPEÑO#############################
 801:
   cod: 801
-  msj: Debe cargar informacion de la Clases del Curso  
+  msj: Debe cargar informacion de la Clases del Curso
 802:
   cod: 802
   msj: Debe ingresar la informacion de las Clases del Curso
@@ -1283,7 +1532,7 @@
   msj: Debe cargar datos en el grid de valores
 819:
   cod: 819
-  msj: Faltan Datos en el Grid  de Valores  
+  msj: Faltan Datos en el Grid  de Valores
 820:
   cod: 820
   msj: Faltan Datos en el Grid de Indicadores
@@ -1307,5 +1556,5 @@
   msj: Debe cargar informacion en el grid
 99999999:
   cod: 99999999
-  msj: Número de Orden de Pago ya Existe, intento 
-  con otro.  
+  msj: Número de Orden de Pago ya Existe, intento
+  con otro.
