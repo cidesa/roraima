@@ -1,4 +1,3 @@
-
 <?php
 
 	$b->get('/'.$modulo.'/index')->
