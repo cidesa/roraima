@@ -11,7 +11,7 @@ opciones:                  # Opciones generales
   tipo:                    t
   nombrecampo:             codpre
   esgrabable:              true
-  html:                    [size="20" readonly=true]
+  html:                    [size="50" readonly=true]
 2:       # Columna 2
   titulo:                  Monto
   tipo:                    m

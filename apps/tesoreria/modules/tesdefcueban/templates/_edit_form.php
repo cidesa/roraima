@@ -19,7 +19,10 @@
 <?php echo object_input_hidden_tag($tsdefban, 'getId') ?>
 
 <?php echo input_hidden_tag('tsdefban[fecreg]', date('d/m/Y')) ?>
-
+<?php echo input_hidden_tag('tsdefban[debban]', $tsdefban->getDebban()) ?>
+<?php echo input_hidden_tag('tsdefban[creban]', $tsdefban->getCreban()) ?>
+<?php echo input_hidden_tag('tsdefban[deblib]', $tsdefban->getDeblib()) ?>
+<?php echo input_hidden_tag('tsdefban[crelib]', $tsdefban->getCrelib()) ?>
 <fieldset id="sf_fieldset_none" class="">
 <legend><? echo __('Datos del Banco') ?></legend>
 <div class="form-row">
@@ -362,29 +365,29 @@
 <?php echo label_for('debitos', __('Débitos'), 'class="required" ') ?>
 </th>
 <th>
-<div class="content<?php if ($sf_request->hasError('tsdefban{debban}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('tsdefban{debban}')): ?>
-    <?php echo form_error('tsdefban{debban}', array('class' => 'form-error-msg')) ?>
+<div class="content<?php if ($sf_request->hasError('tsdefban{debbandis}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('tsdefban{debbandis}')): ?>
+    <?php echo form_error('tsdefban{debbandis}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_input_tag($tsdefban, array('getDebban',true), array (
+  <?php $value = object_input_tag($tsdefban, array('getDebbandis',true), array (
   'size' => 15,
   'readonly' => $tsmovban_credito_debito,
-  'control_name' => 'tsdefban[debban]',
+  'control_name' => 'tsdefban[debbandis]',
   'onBlur' => "javascript:event.keyCode=13; return  mientermonto(event, this.id)",
 )); echo $value ? $value : '&nbsp;' ?>
    </div>
 </th>
 <th>
-<div class="content<?php if ($sf_request->hasError('tsdefban{deblib}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('tsdefban{deblib}')): ?>
-    <?php echo form_error('tsdefban{deblib}', array('class' => 'form-error-msg')) ?>
+<div class="content<?php if ($sf_request->hasError('tsdefban{deblibdis}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('tsdefban{deblibdis}')): ?>
+    <?php echo form_error('tsdefban{deblibdis}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
   <?php $value = object_input_tag($tsdefban, 'getDeblibdis', array (
   'size' => 15,
   'readonly' => $tsmovlib_credito_debito,
-  'control_name' => 'tsdefban[deblib]',
+  'control_name' => 'tsdefban[deblibdis]',
   'onBlur' => "javascript:event.keyCode=13; return mientermontoLib(event, this.id )",
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
@@ -395,29 +398,29 @@
 <?php echo label_for('creditos', __('Créditos'), 'class="required" ') ?>
 </th>
 <th>
-<div class="content<?php if ($sf_request->hasError('tsdefban{creban}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('tsdefban{creban}')): ?>
-    <?php echo form_error('tsdefban{creban}', array('class' => 'form-error-msg')) ?>
+<div class="content<?php if ($sf_request->hasError('tsdefban{crebandis}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('tsdefban{crebandis}')): ?>
+    <?php echo form_error('tsdefban{crebandis}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_input_tag($tsdefban, array('getCreban',true), array (
+  <?php $value = object_input_tag($tsdefban, array('getCrebandis',true), array (
   'size' => 15,
   'readonly' => $tsmovban_credito_debito,
-  'control_name' => 'tsdefban[creban]',
+  'control_name' => 'tsdefban[crebandis]',
    'onBlur' => "javascript:event.keyCode=13; return mientermonto(event, this.id)",
   )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </th>
 <th>
-     <div class="content<?php if ($sf_request->hasError('tsdefban{crelib}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('tsdefban{crelib}')): ?>
-    <?php echo form_error('tsdefban{crelib}', array('class' => 'form-error-msg')) ?>
+     <div class="content<?php if ($sf_request->hasError('tsdefban{crelibdis}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('tsdefban{crelibdis}')): ?>
+    <?php echo form_error('tsdefban{crelibdis}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
   <?php $value = object_input_tag($tsdefban, 'getCrelibdis', array (
   'size' => 15,
   'readonly' => $tsmovlib_credito_debito,
-  'control_name' => 'tsdefban[crelib]',
+  'control_name' => 'tsdefban[crelibdis]',
     'onBlur' => "javascript:event.keyCode=13; return mientermontoLib(event, this.id)",
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
@@ -584,14 +587,20 @@ function num(e) {
    {
     if (validarnumero(id)==true)
      {
+       if (id=='tsdefban_debbandis'){
+         $('tsdefban_debban').value=$(id).value;
+       }else if (id=='tsdefban_crebandis'){
+         $('tsdefban_creban').value=$(id).value;
+       }
+
        var num=toFloat(id);
 
        document.getElementById(id).value=format(num.toFixed(2),'.',',','.');
        //Obtener Saldo Actual para Bancos
 
        var antban=toFloat('tsdefban_antban');
-       var debban=toFloat('tsdefban_debban');
-       var creban=toFloat('tsdefban_creban');
+       var debban=toFloat('tsdefban_debbandis');
+       var creban=toFloat('tsdefban_crebandis');
 
        var salactban=antban+debban-creban;
        document.getElementById('tsdefban_saltotban').value=format(salactban.toFixed(2),'.',',','.');
@@ -612,14 +621,20 @@ function num(e) {
    {
     if (validarnumero(id)==true)
      {
+       if (id=='tsdefban_deblibdis'){
+         $('tsdefban_deblib').value=$(id).value;
+       }else if (id=='tsdefban_crelibdis'){
+         $('tsdefban_crelib').value=$(id).value;
+       }
+
        var num=toFloat(id);
        document.getElementById(id).value=format(num.toFixed(2),'.',',','.');
 
        //Obtener Saldo Actual paralibros
 
        var antban=toFloat('tsdefban_antlib');
-       var debban=toFloat('tsdefban_deblib');
-       var creban=toFloat('tsdefban_crelib');
+       var debban=toFloat('tsdefban_deblibdis');
+       var creban=toFloat('tsdefban_crelibdis');
 
        var salactlib=antban+debban-creban;
        document.getElementById('tsdefban_saltotlib').value=format(salactlib.toFixed(2),'.',',','.');

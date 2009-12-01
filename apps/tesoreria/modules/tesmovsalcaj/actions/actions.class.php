@@ -232,7 +232,24 @@ class tesmovsalcajActions extends autotesmovsalcajActions
       if (count($x)==0)
       {
         $this->coderr=525;
-      }
+        return false;
+      }      
+      $dateFormat = new sfDateFormat('es_VE');
+      $fecha = $dateFormat->format($this->getRequestParameter('tssalcaj[fecsal]'), 'i', $dateFormat->getInputPattern('d'));
+      $fec1=split("-",$fecha);
+       if(H::validarPeriodoFiscal($fecha)==false)
+       {
+           $this->coderr=543;
+           return false;
+       }
+       if ($this->getRequestParameter('tssalcaj[numcue]')!=""){
+           if (Tesoreria::el_Banco_Esta_Cerrado($this->getRequestParameter('tssalcaj[numcue]'),$fec1[1],$fec1[0]))
+           {
+             $this->coderr=544;
+             return false;
+           }
+       }
+       
 
       if($this->coderr!=-1){
         return false;

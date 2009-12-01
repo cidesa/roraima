@@ -417,6 +417,12 @@
 542:
   cod: 542
   msj: Se Rechazaron tantos registros de un total de tanto registros.
+543:
+  cod: 543
+  msj: Fecha Fuera del Período.
+544:
+  cod: 544
+  msj: El Mes ya se encuentra cerrado, por lo que no se podrá registrar Movimiento en esta Fecha.
 3:
   cod: 3
   msj: La contraseña es diferente.
