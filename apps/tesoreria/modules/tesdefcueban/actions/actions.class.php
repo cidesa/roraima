@@ -407,6 +407,14 @@ $this->Bitacora('Guardo');
     {
       $this->tsdefban->setCreban($tsdefban['creban']);
     }
+    if (isset($tsdefban['debbandis']))
+    {
+      $this->tsdefban->setDebbandis($tsdefban['debbandis']);
+    }
+    if (isset($tsdefban['crebandis']))
+    {
+      $this->tsdefban->setCrebandis($tsdefban['crebandis']);
+    }
     if (isset($tsdefban['antlib']))
     {
       $this->tsdefban->setAntlib($tsdefban['antlib']);
@@ -418,6 +426,14 @@ $this->Bitacora('Guardo');
     if (isset($tsdefban['crelib']))
     {
       $this->tsdefban->setCrelib($tsdefban['crelib']);
+    }
+    if (isset($tsdefban['deblibdis']))
+    {
+      $this->tsdefban->setDeblibdis($tsdefban['deblibdis']);
+    }
+    if (isset($tsdefban['crelibdis']))
+    {
+      $this->tsdefban->setCrelibdis($tsdefban['crelibdis']);
     }
     if (isset($tsdefban['valche']))
     {
@@ -663,6 +679,10 @@ $this->Bitacora('Guardo');
         }
       $j++;
       }
+      $tsdefban->setDeblib($tsdefban->getDeblibdis());
+      $tsdefban->setCrelib($tsdefban->getCrelibdis());
+      $tsdefban->setDebban($tsdefban->getDebbandis());
+      $tsdefban->setCreban($tsdefban->getCrebandis());
       $tsdefban->save();
       Tesoreria::Grabar_Chequeras($tsdefban,$grid);
    }

@@ -19,13 +19,13 @@ generator:
       usocue:     { name: Uso de la Cuenta, params: maxlength=20 }
       numche:     { name: Número de Cheque, params: maxlength=8}
       antban:     { name: Saldo Anterior Bancos }
-      debban:     { name: Débitos Bancos }
-      creban:     { name: Crédito Bancos }
+      debbandis:     { name: Débitos Bancos }
+      crebandis:     { name: Crédito Bancos }
       antlib:     { name: Saldo Anterior Libros }
-      deblib:     { name: Débitos Libros }
-      crelib:     { name: Crédito Libros }
-      deblibdis:  { name: Débitos Libros }
-      crelibdis:  { name: Crédito Libros }
+      deblibdis:     { name: Débitos Libros }
+      crelibdis:     { name: Crédito Libros }
+      #deblibdis:  { name: Débitos Libros }
+      #crelibdis:  { name: Crédito Libros }
       valche:     { name: Validez del Documento (Días) }
       concil:     { name: Conciliable, params: maxlength=1 }
       plazo:      { name: Plazo }
@@ -45,7 +45,7 @@ generator:
         _delete:      ~
     edit:
       title:         Edición de Bancos
-      display:       [numcue, nomcue, tipcue, destip, codcta, fecreg, fecven, fecper, fecape, renaut, porint, tipint, usocue, numche, antban, debban, creban, antlib, deblib, crelib, valche, concil, plazo, tipren, destipren, cantdig, saltotlib, saltotban, deblibdis, crelibdis, endosable]
+      display:       [numcue, nomcue, tipcue, destip, codcta, fecreg, fecven, fecper, fecape, renaut, porint, tipint, usocue, numche, antban, debban, creban, antlib, deblib, crelib, valche, concil, plazo, tipren, destipren, cantdig, saltotlib, saltotban, deblibdis, crelibdis, debbandis, crebandis, endosable]
       actions:
         _list:        ~
         _save:        ~
