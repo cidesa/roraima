@@ -156,6 +156,15 @@ propel:
       type: BOOLEAN
     attipproviv_id:
     attipviv_id:
+    sector:
+      type: VARCHAR
+      size: 50
+    urbanizacion:
+      type: VARCHAR
+      size: 50
+    zona:
+      type: VARCHAR
+      size: 50
     id:
   attiping:                 # Tipo de Ingreso
     tiping:
