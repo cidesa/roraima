@@ -10,7 +10,7 @@ abstract class BaseContabaPeer {
 	const TABLE_NAME = 'contaba';
 
 	
-	const CLASS_DEFAULT = 'lib.model.Contaba';
+	const CLASS_DEFAULT = 'lib.model.contabilidad.Contaba';
 
 	
 	const NUM_COLUMNS = 50;
@@ -192,8 +192,8 @@ abstract class BaseContabaPeer {
 	
 	public static function getMapBuilder()
 	{
-		include_once 'lib/model/map/ContabaMapBuilder.php';
-		return BasePeer::getMapBuilder('lib.model.map.ContabaMapBuilder');
+		include_once 'lib/model/contabilidad/map/ContabaMapBuilder.php';
+		return BasePeer::getMapBuilder('lib.model.contabilidad.map.ContabaMapBuilder');
 	}
 	
 	public static function getPhpNameMap()
@@ -603,6 +603,6 @@ if (Propel::isInit()) {
 		Propel::log('Could not initialize Peer: ' . $e->getMessage(), Propel::LOG_ERR);
 	}
 } else {
-			require_once 'lib/model/map/ContabaMapBuilder.php';
-	Propel::registerMapBuilder('lib.model.map.ContabaMapBuilder');
+			require_once 'lib/model/contabilidad/map/ContabaMapBuilder.php';
+	Propel::registerMapBuilder('lib.model.contabilidad.map.ContabaMapBuilder');
 }
