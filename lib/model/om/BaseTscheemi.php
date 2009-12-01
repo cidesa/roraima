@@ -1143,6 +1143,7 @@ abstract class BaseTscheemi extends BaseObject  implements Persistent {
 
 		$copyObj->setNumcomegr($this->numcomegr);
 
+
 		$copyObj->setNew(true);
 
 		$copyObj->setId(NULL); 
