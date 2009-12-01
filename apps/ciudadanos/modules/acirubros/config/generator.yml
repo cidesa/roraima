@@ -9,17 +9,17 @@ generator:
       desrub:              { name: Descripción, validate: Vstring_1_100, msj_error: Debe insertar la Descripción del Rubro }
       destipayu:           { name: Rubros }
     list:
-        fields:
-          desdon:            { name: Rubros, params: size=10 }
-        title:          Rubros
-        display:        [=desrub, destipayu]
-        object_actions:
-          _edit:        ~
-          _delete:      ~
-        filters:        [desrub, attipayu_id]
-        fields:
-          attipayu_id:
-            params: style:width=20px
+      fields:
+        desdon:            { name: Rubros, params: size=10 }
+      title:          Rubros
+      display:        [=desrub, destipayu]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [desrub, attipayu_id]
+      fields:
+        attipayu_id:
+          params: style:width=20px
       max_per_page:   5
       sort:  desrub
     edit:
