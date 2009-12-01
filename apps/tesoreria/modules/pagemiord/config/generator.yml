@@ -50,7 +50,7 @@ generator:
       actions:
         _list:        ~
         _save:        ~
-        _create:      ~
+        _create:      
           params:     confirm='¿Desea crear un nuevo registro?. Perderá cualquier cambio en la ventana actual'
         _delete:      ~
 
