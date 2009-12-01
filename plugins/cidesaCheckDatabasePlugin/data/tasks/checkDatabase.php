@@ -29,6 +29,9 @@ pake_task('propel-trim-database', 'project_exists');
 pake_desc('create sequenses for all tables on database for current model');
 pake_task('propel-seq-database', 'project_exists');
 
+pake_desc('execute sql por customs database functions and triggers');
+pake_task('propel-update-script', 'project_exists');
+
 function convert_yml_schema($check_schema = true, $prefix = '')
 {
   $finder = pakeFinder::type('file')->ignore_version_control()->name($prefix.'*schema.yml');
@@ -170,6 +173,46 @@ function _propel_cidesa_copy_xml_schema_from_plugins($prefix = '')
   }
 }
 
+function run_propel_update_script($task, $args)
+{
+
+  if (count($args) < 1)
+  {
+    throw new Exception('Debes proveer el nombre del script a ejecutar (dentro de data/update).');
+  }
+  pake_echo_action('update_database_functions', 'Limpiando entorno de ejecución');
+
+  $finder = pakeFinder::type('file')->ignore_version_control()->name('*.*');
+  pake_remove($finder, 'data/sql');
+
+  pake_echo_action('update_database_functions', 'Copiando script a ejecutar');
+  if(isset($args[0])) $script = $args[0];
+  else $script = '';
+
+  copy('data/updates/'.$script.'.sql','data/sql/'.$script.'.sql');
+
+  $info = "# Sqlfile -> Database map
+$script.sql=propel";
+
+  $fp = fopen('data/sql/sqldb.map', 'w');
+  fwrite($fp, $info);
+  fclose($fp);
+
+  _propel_cidesa_convert_yml_schema(false, 'generated-');
+  _propel_cidesa_copy_xml_schema_from_plugins('generated-');
+  _call_cidesa_phing($task, 'insert-sql');
+
+  $finder = pakeFinder::type('file')->ignore_version_control()->name('generated-*schema*.xml');
+  pake_remove($finder, 'config');
+  $finder = pakeFinder::type('file')->ignore_version_control()->name('generated-*schema*.yml');
+  pake_remove($finder, 'config');
+  $finder = pakeFinder::type('file')->ignore_version_control()->name('*schema*.xml');
+  pake_remove($finder, 'config');
+  $finder = pakeFinder::type('file')->ignore_version_control()->name('*.*');
+  pake_remove($finder, 'data/sql');
+
+}
+
 function run_propel_check_database($task, $args)
 {
   global $checktablas;
@@ -180,6 +223,8 @@ function run_propel_check_database($task, $args)
 
   pake_echo_action('check_database', 'Limpiando entorno de analisis');
 
+  $finder = pakeFinder::type('file')->ignore_version_control()->name('*.*');
+  pake_remove($finder, 'data/sql');
   $finder = pakeFinder::type('file')->ignore_version_control()->name('generated-*schema*.xml');
   pake_remove($finder, 'config');
   $finder = pakeFinder::type('file')->ignore_version_control()->name('generated-*schema*.yml');
