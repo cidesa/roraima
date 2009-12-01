@@ -6,6 +6,9 @@ methods:
    - "atciudadano{tipo}"
    - "atciudadano{fecnac}"
    - "atciudadano{sexo}"
+   - "atciudadano{sector}"
+   - "atciudadano{urbanizacion}"
+   - "atciudadano{zona}"
 #   - "atciudadano{estciv}"
 #   - "atciudadano{atestados_id}"
 #   - "atciudadano{atmunicipios_id}"
@@ -42,6 +45,19 @@ names:
     required:  Yes
     required_msg: Este campo es requerido
     validators: MyStringValidator3
+
+  atciudadano{sector}:
+    required:  No
+    validators: MyStringValidator2
+
+  atciudadano{urbanizacion}:
+    required:  No
+    validators: MyStringValidator2
+
+  atciudadano{zona}:
+    required:  No
+    validators: MyStringValidator2
+
 
 #  atciudadano{estciv}:
 #    required:  Yes

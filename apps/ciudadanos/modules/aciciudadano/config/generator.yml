@@ -67,7 +67,7 @@ generator:
       display:
         Datos Personales: [cedciu, nomciu, apeciu, _sexo, _estciv]
         Datos Nacimiento: [fecnac, edaact, pais, nacciu, segpri ]
-        Dirección Habitacion:        [_atestados_id, _atmunicipios_id, _atparroquias_id, ciudad, caserio, attipviv_id, attipproviv_id]
+        Dirección Habitacion:        [_atestados_id, _atmunicipios_id, _atparroquias_id, ciudad, caserio, sector, urbanizacion, zona , attipviv_id, attipproviv_id]
         Información de Contacto: [dirhab, telhab, teladihab ]
         Participación Comunal: [concomciu, carconcomciu ]
         Información Profesional: [traciu, grains, prociu, diremp, telemp, attiping_id, moning ]
