@@ -2,10 +2,10 @@
 
 
 
-class ContabcConvMapBuilder {
+class ContabcMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.ContabcConvMapBuilder';
+	const CLASS_NAME = 'lib.model.contabilidad.map.ContabcMapBuilder';
 
 	
 	private $dbMap;
@@ -27,10 +27,12 @@ class ContabcConvMapBuilder {
 	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
 
-		$tMap = $this->dbMap->addTable('contabc_conv');
-		$tMap->setPhpName('ContabcConv');
+		$tMap = $this->dbMap->addTable('contabc');
+		$tMap->setPhpName('Contabc');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('contabc_SEQ');
 
 		$tMap->addColumn('NUMCOM', 'Numcom', 'string', CreoleTypes::VARCHAR, true, 8);
 
@@ -43,6 +45,8 @@ class ContabcConvMapBuilder {
 		$tMap->addColumn('STACOM', 'Stacom', 'string', CreoleTypes::VARCHAR, true, 1);
 
 		$tMap->addColumn('TIPCOM', 'Tipcom', 'string', CreoleTypes::VARCHAR, false, 3);
+
+		$tMap->addColumn('REFTRA', 'Reftra', 'string', CreoleTypes::VARCHAR, false, 8);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 

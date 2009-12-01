@@ -2,10 +2,10 @@
 
 
 
-class ContabbtempMapBuilder {
+class ContabbMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.ContabbtempMapBuilder';
+	const CLASS_NAME = 'lib.model.contabilidad.map.ContabbMapBuilder';
 
 	
 	private $dbMap;
@@ -27,10 +27,12 @@ class ContabbtempMapBuilder {
 	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
 
-		$tMap = $this->dbMap->addTable('contabbtemp');
-		$tMap->setPhpName('Contabbtemp');
+		$tMap = $this->dbMap->addTable('contabb');
+		$tMap->setPhpName('Contabb');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('contabb_SEQ');
 
 		$tMap->addColumn('CODCTA', 'Codcta', 'string', CreoleTypes::VARCHAR, true, 32);
 

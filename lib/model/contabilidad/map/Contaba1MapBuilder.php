@@ -5,7 +5,7 @@
 class Contaba1MapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.Contaba1MapBuilder';
+	const CLASS_NAME = 'lib.model.contabilidad.map.Contaba1MapBuilder';
 
 	
 	private $dbMap;

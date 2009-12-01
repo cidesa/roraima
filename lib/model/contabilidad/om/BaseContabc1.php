@@ -153,6 +153,11 @@ abstract class BaseContabc1 extends BaseObject  implements Persistent {
 	public function setFeccom($v)
 	{
 
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [feccom] from input: " . var_export($v, true));
@@ -656,9 +661,12 @@ abstract class BaseContabc1 extends BaseObject  implements Persistent {
 	public function getContabc($con = null)
 	{
 		if ($this->aContabc === null && (($this->numcom !== "" && $this->numcom !== null))) {
-						include_once 'lib/model/om/BaseContabcPeer.php';
+						include_once 'lib/model/contabilidad/om/BaseContabcPeer.php';
 
-			$this->aContabc = ContabcPeer::retrieveByPK($this->numcom, $con);
+      $c = new Criteria();
+      $c->add(ContabcPeer::NUMCOM,$this->numcom);
+      
+			$this->aContabc = ContabcPeer::doSelectOne($c, $con);
 
 			
 		}
@@ -685,9 +693,12 @@ abstract class BaseContabc1 extends BaseObject  implements Persistent {
 	public function getContabb($con = null)
 	{
 		if ($this->aContabb === null && (($this->codcta !== "" && $this->codcta !== null))) {
-						include_once 'lib/model/om/BaseContabbPeer.php';
+						include_once 'lib/model/contabilidad/om/BaseContabbPeer.php';
 
-			$this->aContabb = ContabbPeer::retrieveByPK($this->codcta, $con);
+      $c = new Criteria();
+      $c->add(ContabbPeer::CODCTA,$this->codcta);
+      
+			$this->aContabb = ContabbPeer::doSelectOne($c, $con);
 
 			
 		}

@@ -1,7 +1,7 @@
 <?php
 
 
-abstract class BaseContabbmod extends BaseObject  implements Persistent {
+abstract class BaseContabb extends BaseObject  implements Persistent {
 
 
 	
@@ -50,6 +50,18 @@ abstract class BaseContabbmod extends BaseObject  implements Persistent {
 
 	
 	protected $id;
+
+	
+	protected $collContabb1s;
+
+	
+	protected $lastContabb1Criteria = null;
+
+	
+	protected $collContabc1s;
+
+	
+	protected $lastContabc1Criteria = null;
 
 	
 	protected $alreadyInSave = false;
@@ -174,7 +186,7 @@ abstract class BaseContabbmod extends BaseObject  implements Persistent {
 
     if ($this->codcta !== $v) {
         $this->codcta = $v;
-        $this->modifiedColumns[] = ContabbmodPeer::CODCTA;
+        $this->modifiedColumns[] = ContabbPeer::CODCTA;
       }
   
 	} 
@@ -184,13 +196,18 @@ abstract class BaseContabbmod extends BaseObject  implements Persistent {
 
     if ($this->descta !== $v) {
         $this->descta = $v;
-        $this->modifiedColumns[] = ContabbmodPeer::DESCTA;
+        $this->modifiedColumns[] = ContabbPeer::DESCTA;
       }
   
 	} 
 	
 	public function setFecini($v)
 	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
@@ -201,13 +218,18 @@ abstract class BaseContabbmod extends BaseObject  implements Persistent {
     }
     if ($this->fecini !== $ts) {
       $this->fecini = $ts;
-      $this->modifiedColumns[] = ContabbmodPeer::FECINI;
+      $this->modifiedColumns[] = ContabbPeer::FECINI;
     }
 
 	} 
 	
 	public function setFeccie($v)
 	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
@@ -218,7 +240,7 @@ abstract class BaseContabbmod extends BaseObject  implements Persistent {
     }
     if ($this->feccie !== $ts) {
       $this->feccie = $ts;
-      $this->modifiedColumns[] = ContabbmodPeer::FECCIE;
+      $this->modifiedColumns[] = ContabbPeer::FECCIE;
     }
 
 	} 
@@ -228,7 +250,7 @@ abstract class BaseContabbmod extends BaseObject  implements Persistent {
 
     if ($this->salant !== $v) {
         $this->salant = Herramientas::toFloat($v);
-        $this->modifiedColumns[] = ContabbmodPeer::SALANT;
+        $this->modifiedColumns[] = ContabbPeer::SALANT;
       }
   
 	} 
@@ -238,7 +260,7 @@ abstract class BaseContabbmod extends BaseObject  implements Persistent {
 
     if ($this->debcre !== $v) {
         $this->debcre = $v;
-        $this->modifiedColumns[] = ContabbmodPeer::DEBCRE;
+        $this->modifiedColumns[] = ContabbPeer::DEBCRE;
       }
   
 	} 
@@ -248,7 +270,7 @@ abstract class BaseContabbmod extends BaseObject  implements Persistent {
 
     if ($this->cargab !== $v) {
         $this->cargab = $v;
-        $this->modifiedColumns[] = ContabbmodPeer::CARGAB;
+        $this->modifiedColumns[] = ContabbPeer::CARGAB;
       }
   
 	} 
@@ -258,7 +280,7 @@ abstract class BaseContabbmod extends BaseObject  implements Persistent {
 
     if ($this->salprgper !== $v) {
         $this->salprgper = Herramientas::toFloat($v);
-        $this->modifiedColumns[] = ContabbmodPeer::SALPRGPER;
+        $this->modifiedColumns[] = ContabbPeer::SALPRGPER;
       }
   
 	} 
@@ -268,7 +290,7 @@ abstract class BaseContabbmod extends BaseObject  implements Persistent {
 
     if ($this->salacuper !== $v) {
         $this->salacuper = Herramientas::toFloat($v);
-        $this->modifiedColumns[] = ContabbmodPeer::SALACUPER;
+        $this->modifiedColumns[] = ContabbPeer::SALACUPER;
       }
   
 	} 
@@ -278,7 +300,7 @@ abstract class BaseContabbmod extends BaseObject  implements Persistent {
 
     if ($this->salprgperfor !== $v) {
         $this->salprgperfor = Herramientas::toFloat($v);
-        $this->modifiedColumns[] = ContabbmodPeer::SALPRGPERFOR;
+        $this->modifiedColumns[] = ContabbPeer::SALPRGPERFOR;
       }
   
 	} 
@@ -288,7 +310,7 @@ abstract class BaseContabbmod extends BaseObject  implements Persistent {
 
     if ($this->id !== $v) {
         $this->id = $v;
-        $this->modifiedColumns[] = ContabbmodPeer::ID;
+        $this->modifiedColumns[] = ContabbPeer::ID;
       }
   
 	} 
@@ -327,7 +349,7 @@ abstract class BaseContabbmod extends BaseObject  implements Persistent {
 
             return $startcol + 11; 
     } catch (Exception $e) {
-      throw new PropelException("Error populating Contabbmod object", $e);
+      throw new PropelException("Error populating Contabb object", $e);
     }
   }
 
@@ -359,12 +381,12 @@ abstract class BaseContabbmod extends BaseObject  implements Persistent {
 		}
 
 		if ($con === null) {
-			$con = Propel::getConnection(ContabbmodPeer::DATABASE_NAME);
+			$con = Propel::getConnection(ContabbPeer::DATABASE_NAME);
 		}
 
 		try {
 			$con->begin();
-			ContabbmodPeer::doDelete($this, $con);
+			ContabbPeer::doDelete($this, $con);
 			$this->setDeleted(true);
 			$con->commit();
 		} catch (PropelException $e) {
@@ -381,7 +403,7 @@ abstract class BaseContabbmod extends BaseObject  implements Persistent {
 		}
 
 		if ($con === null) {
-			$con = Propel::getConnection(ContabbmodPeer::DATABASE_NAME);
+			$con = Propel::getConnection(ContabbPeer::DATABASE_NAME);
 		}
 
 		try {
@@ -404,13 +426,30 @@ abstract class BaseContabbmod extends BaseObject  implements Persistent {
 
 						if ($this->isModified()) {
 				if ($this->isNew()) {
-					$pk = ContabbmodPeer::doInsert($this, $con);
+					$pk = ContabbPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
-					$affectedRows += ContabbmodPeer::doUpdate($this, $con);
+					$affectedRows += ContabbPeer::doUpdate($this, $con);
 				}
 				$this->resetModified(); 			}
+
+			if ($this->collContabb1s !== null) {
+				foreach($this->collContabb1s as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
+
+			if ($this->collContabc1s !== null) {
+				foreach($this->collContabc1s as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
 
 			$this->alreadyInSave = false;
 		}
@@ -448,10 +487,26 @@ abstract class BaseContabbmod extends BaseObject  implements Persistent {
 			$failureMap = array();
 
 
-			if (($retval = ContabbmodPeer::doValidate($this, $columns)) !== true) {
+			if (($retval = ContabbPeer::doValidate($this, $columns)) !== true) {
 				$failureMap = array_merge($failureMap, $retval);
 			}
 
+
+				if ($this->collContabb1s !== null) {
+					foreach($this->collContabb1s as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
+
+				if ($this->collContabc1s !== null) {
+					foreach($this->collContabc1s as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
 
 
 			$this->alreadyInValidation = false;
@@ -463,7 +518,7 @@ abstract class BaseContabbmod extends BaseObject  implements Persistent {
 	
 	public function getByName($name, $type = BasePeer::TYPE_PHPNAME)
 	{
-		$pos = ContabbmodPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
+		$pos = ContabbPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->getByPosition($pos);
 	}
 
@@ -512,7 +567,7 @@ abstract class BaseContabbmod extends BaseObject  implements Persistent {
 	
 	public function toArray($keyType = BasePeer::TYPE_PHPNAME)
 	{
-		$keys = ContabbmodPeer::getFieldNames($keyType);
+		$keys = ContabbPeer::getFieldNames($keyType);
 		$result = array(
 			$keys[0] => $this->getCodcta(),
 			$keys[1] => $this->getDescta(),
@@ -532,7 +587,7 @@ abstract class BaseContabbmod extends BaseObject  implements Persistent {
 	
 	public function setByName($name, $value, $type = BasePeer::TYPE_PHPNAME)
 	{
-		$pos = ContabbmodPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
+		$pos = ContabbPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->setByPosition($pos, $value);
 	}
 
@@ -578,7 +633,7 @@ abstract class BaseContabbmod extends BaseObject  implements Persistent {
 	
 	public function fromArray($arr, $keyType = BasePeer::TYPE_PHPNAME)
 	{
-		$keys = ContabbmodPeer::getFieldNames($keyType);
+		$keys = ContabbPeer::getFieldNames($keyType);
 
 		if (array_key_exists($keys[0], $arr)) $this->setCodcta($arr[$keys[0]]);
 		if (array_key_exists($keys[1], $arr)) $this->setDescta($arr[$keys[1]]);
@@ -596,19 +651,19 @@ abstract class BaseContabbmod extends BaseObject  implements Persistent {
 	
 	public function buildCriteria()
 	{
-		$criteria = new Criteria(ContabbmodPeer::DATABASE_NAME);
+		$criteria = new Criteria(ContabbPeer::DATABASE_NAME);
 
-		if ($this->isColumnModified(ContabbmodPeer::CODCTA)) $criteria->add(ContabbmodPeer::CODCTA, $this->codcta);
-		if ($this->isColumnModified(ContabbmodPeer::DESCTA)) $criteria->add(ContabbmodPeer::DESCTA, $this->descta);
-		if ($this->isColumnModified(ContabbmodPeer::FECINI)) $criteria->add(ContabbmodPeer::FECINI, $this->fecini);
-		if ($this->isColumnModified(ContabbmodPeer::FECCIE)) $criteria->add(ContabbmodPeer::FECCIE, $this->feccie);
-		if ($this->isColumnModified(ContabbmodPeer::SALANT)) $criteria->add(ContabbmodPeer::SALANT, $this->salant);
-		if ($this->isColumnModified(ContabbmodPeer::DEBCRE)) $criteria->add(ContabbmodPeer::DEBCRE, $this->debcre);
-		if ($this->isColumnModified(ContabbmodPeer::CARGAB)) $criteria->add(ContabbmodPeer::CARGAB, $this->cargab);
-		if ($this->isColumnModified(ContabbmodPeer::SALPRGPER)) $criteria->add(ContabbmodPeer::SALPRGPER, $this->salprgper);
-		if ($this->isColumnModified(ContabbmodPeer::SALACUPER)) $criteria->add(ContabbmodPeer::SALACUPER, $this->salacuper);
-		if ($this->isColumnModified(ContabbmodPeer::SALPRGPERFOR)) $criteria->add(ContabbmodPeer::SALPRGPERFOR, $this->salprgperfor);
-		if ($this->isColumnModified(ContabbmodPeer::ID)) $criteria->add(ContabbmodPeer::ID, $this->id);
+		if ($this->isColumnModified(ContabbPeer::CODCTA)) $criteria->add(ContabbPeer::CODCTA, $this->codcta);
+		if ($this->isColumnModified(ContabbPeer::DESCTA)) $criteria->add(ContabbPeer::DESCTA, $this->descta);
+		if ($this->isColumnModified(ContabbPeer::FECINI)) $criteria->add(ContabbPeer::FECINI, $this->fecini);
+		if ($this->isColumnModified(ContabbPeer::FECCIE)) $criteria->add(ContabbPeer::FECCIE, $this->feccie);
+		if ($this->isColumnModified(ContabbPeer::SALANT)) $criteria->add(ContabbPeer::SALANT, $this->salant);
+		if ($this->isColumnModified(ContabbPeer::DEBCRE)) $criteria->add(ContabbPeer::DEBCRE, $this->debcre);
+		if ($this->isColumnModified(ContabbPeer::CARGAB)) $criteria->add(ContabbPeer::CARGAB, $this->cargab);
+		if ($this->isColumnModified(ContabbPeer::SALPRGPER)) $criteria->add(ContabbPeer::SALPRGPER, $this->salprgper);
+		if ($this->isColumnModified(ContabbPeer::SALACUPER)) $criteria->add(ContabbPeer::SALACUPER, $this->salacuper);
+		if ($this->isColumnModified(ContabbPeer::SALPRGPERFOR)) $criteria->add(ContabbPeer::SALPRGPERFOR, $this->salprgperfor);
+		if ($this->isColumnModified(ContabbPeer::ID)) $criteria->add(ContabbPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -616,9 +671,9 @@ abstract class BaseContabbmod extends BaseObject  implements Persistent {
 	
 	public function buildPkeyCriteria()
 	{
-		$criteria = new Criteria(ContabbmodPeer::DATABASE_NAME);
+		$criteria = new Criteria(ContabbPeer::DATABASE_NAME);
 
-		$criteria->add(ContabbmodPeer::ID, $this->id);
+		$criteria->add(ContabbPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -660,6 +715,19 @@ abstract class BaseContabbmod extends BaseObject  implements Persistent {
 		$copyObj->setSalprgperfor($this->salprgperfor);
 
 
+		if ($deepCopy) {
+									$copyObj->setNew(false);
+
+			foreach($this->getContabb1s() as $relObj) {
+				$copyObj->addContabb1($relObj->copy($deepCopy));
+			}
+
+			foreach($this->getContabc1s() as $relObj) {
+				$copyObj->addContabc1($relObj->copy($deepCopy));
+			}
+
+		} 
+
 		$copyObj->setNew(true);
 
 		$copyObj->setId(NULL); 
@@ -678,9 +746,184 @@ abstract class BaseContabbmod extends BaseObject  implements Persistent {
 	public function getPeer()
 	{
 		if (self::$peer === null) {
-			self::$peer = new ContabbmodPeer();
+			self::$peer = new ContabbPeer();
 		}
 		return self::$peer;
+	}
+
+	
+	public function initContabb1s()
+	{
+		if ($this->collContabb1s === null) {
+			$this->collContabb1s = array();
+		}
+	}
+
+	
+	public function getContabb1s($criteria = null, $con = null)
+	{
+				include_once 'lib/model/contabilidad/om/BaseContabb1Peer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collContabb1s === null) {
+			if ($this->isNew()) {
+			   $this->collContabb1s = array();
+			} else {
+
+				$criteria->add(Contabb1Peer::CODCTA, $this->getCodcta());
+
+				Contabb1Peer::addSelectColumns($criteria);
+				$this->collContabb1s = Contabb1Peer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(Contabb1Peer::CODCTA, $this->getCodcta());
+
+				Contabb1Peer::addSelectColumns($criteria);
+				if (!isset($this->lastContabb1Criteria) || !$this->lastContabb1Criteria->equals($criteria)) {
+					$this->collContabb1s = Contabb1Peer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastContabb1Criteria = $criteria;
+		return $this->collContabb1s;
+	}
+
+	
+	public function countContabb1s($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/contabilidad/om/BaseContabb1Peer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(Contabb1Peer::CODCTA, $this->getCodcta());
+
+		return Contabb1Peer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addContabb1(Contabb1 $l)
+	{
+		$this->collContabb1s[] = $l;
+		$l->setContabb($this);
+	}
+
+	
+	public function initContabc1s()
+	{
+		if ($this->collContabc1s === null) {
+			$this->collContabc1s = array();
+		}
+	}
+
+	
+	public function getContabc1s($criteria = null, $con = null)
+	{
+				include_once 'lib/model/contabilidad/om/BaseContabc1Peer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collContabc1s === null) {
+			if ($this->isNew()) {
+			   $this->collContabc1s = array();
+			} else {
+
+				$criteria->add(Contabc1Peer::CODCTA, $this->getCodcta());
+
+				Contabc1Peer::addSelectColumns($criteria);
+				$this->collContabc1s = Contabc1Peer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(Contabc1Peer::CODCTA, $this->getCodcta());
+
+				Contabc1Peer::addSelectColumns($criteria);
+				if (!isset($this->lastContabc1Criteria) || !$this->lastContabc1Criteria->equals($criteria)) {
+					$this->collContabc1s = Contabc1Peer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastContabc1Criteria = $criteria;
+		return $this->collContabc1s;
+	}
+
+	
+	public function countContabc1s($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/contabilidad/om/BaseContabc1Peer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(Contabc1Peer::CODCTA, $this->getCodcta());
+
+		return Contabc1Peer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addContabc1(Contabc1 $l)
+	{
+		$this->collContabc1s[] = $l;
+		$l->setContabb($this);
+	}
+
+
+	
+	public function getContabc1sJoinContabc($criteria = null, $con = null)
+	{
+				include_once 'lib/model/contabilidad/om/BaseContabc1Peer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collContabc1s === null) {
+			if ($this->isNew()) {
+				$this->collContabc1s = array();
+			} else {
+
+				$criteria->add(Contabc1Peer::CODCTA, $this->getCodcta());
+
+				$this->collContabc1s = Contabc1Peer::doSelectJoinContabc($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(Contabc1Peer::CODCTA, $this->getCodcta());
+
+			if (!isset($this->lastContabc1Criteria) || !$this->lastContabc1Criteria->equals($criteria)) {
+				$this->collContabc1s = Contabc1Peer::doSelectJoinContabc($criteria, $con);
+			}
+		}
+		$this->lastContabc1Criteria = $criteria;
+
+		return $this->collContabc1s;
 	}
 
 } 

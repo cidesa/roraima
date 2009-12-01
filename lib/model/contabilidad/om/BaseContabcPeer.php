@@ -1,56 +1,47 @@
 <?php
 
 
-abstract class BaseContabbtempPeer {
+abstract class BaseContabcPeer {
 
 	
 	const DATABASE_NAME = 'propel';
 
 	
-	const TABLE_NAME = 'contabbtemp';
+	const TABLE_NAME = 'contabc';
 
 	
-	const CLASS_DEFAULT = 'lib.model.Contabbtemp';
+	const CLASS_DEFAULT = 'lib.model.contabilidad.Contabc';
 
 	
-	const NUM_COLUMNS = 11;
+	const NUM_COLUMNS = 8;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
 
 
 	
-	const CODCTA = 'contabbtemp.CODCTA';
+	const NUMCOM = 'contabc.NUMCOM';
 
 	
-	const DESCTA = 'contabbtemp.DESCTA';
+	const FECCOM = 'contabc.FECCOM';
 
 	
-	const FECINI = 'contabbtemp.FECINI';
+	const DESCOM = 'contabc.DESCOM';
 
 	
-	const FECCIE = 'contabbtemp.FECCIE';
+	const MONCOM = 'contabc.MONCOM';
 
 	
-	const SALANT = 'contabbtemp.SALANT';
+	const STACOM = 'contabc.STACOM';
 
 	
-	const DEBCRE = 'contabbtemp.DEBCRE';
+	const TIPCOM = 'contabc.TIPCOM';
 
 	
-	const CARGAB = 'contabbtemp.CARGAB';
+	const REFTRA = 'contabc.REFTRA';
 
 	
-	const SALPRGPER = 'contabbtemp.SALPRGPER';
-
-	
-	const SALACUPER = 'contabbtemp.SALACUPER';
-
-	
-	const SALPRGPERFOR = 'contabbtemp.SALPRGPERFOR';
-
-	
-	const ID = 'contabbtemp.ID';
+	const ID = 'contabc.ID';
 
 	
 	private static $phpNameMap = null;
@@ -58,31 +49,31 @@ abstract class BaseContabbtempPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codcta', 'Descta', 'Fecini', 'Feccie', 'Salant', 'Debcre', 'Cargab', 'Salprgper', 'Salacuper', 'Salprgperfor', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (ContabbtempPeer::CODCTA, ContabbtempPeer::DESCTA, ContabbtempPeer::FECINI, ContabbtempPeer::FECCIE, ContabbtempPeer::SALANT, ContabbtempPeer::DEBCRE, ContabbtempPeer::CARGAB, ContabbtempPeer::SALPRGPER, ContabbtempPeer::SALACUPER, ContabbtempPeer::SALPRGPERFOR, ContabbtempPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codcta', 'descta', 'fecini', 'feccie', 'salant', 'debcre', 'cargab', 'salprgper', 'salacuper', 'salprgperfor', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
+		BasePeer::TYPE_PHPNAME => array ('Numcom', 'Feccom', 'Descom', 'Moncom', 'Stacom', 'Tipcom', 'Reftra', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (ContabcPeer::NUMCOM, ContabcPeer::FECCOM, ContabcPeer::DESCOM, ContabcPeer::MONCOM, ContabcPeer::STACOM, ContabcPeer::TIPCOM, ContabcPeer::REFTRA, ContabcPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('numcom', 'feccom', 'descom', 'moncom', 'stacom', 'tipcom', 'reftra', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codcta' => 0, 'Descta' => 1, 'Fecini' => 2, 'Feccie' => 3, 'Salant' => 4, 'Debcre' => 5, 'Cargab' => 6, 'Salprgper' => 7, 'Salacuper' => 8, 'Salprgperfor' => 9, 'Id' => 10, ),
-		BasePeer::TYPE_COLNAME => array (ContabbtempPeer::CODCTA => 0, ContabbtempPeer::DESCTA => 1, ContabbtempPeer::FECINI => 2, ContabbtempPeer::FECCIE => 3, ContabbtempPeer::SALANT => 4, ContabbtempPeer::DEBCRE => 5, ContabbtempPeer::CARGAB => 6, ContabbtempPeer::SALPRGPER => 7, ContabbtempPeer::SALACUPER => 8, ContabbtempPeer::SALPRGPERFOR => 9, ContabbtempPeer::ID => 10, ),
-		BasePeer::TYPE_FIELDNAME => array ('codcta' => 0, 'descta' => 1, 'fecini' => 2, 'feccie' => 3, 'salant' => 4, 'debcre' => 5, 'cargab' => 6, 'salprgper' => 7, 'salacuper' => 8, 'salprgperfor' => 9, 'id' => 10, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
+		BasePeer::TYPE_PHPNAME => array ('Numcom' => 0, 'Feccom' => 1, 'Descom' => 2, 'Moncom' => 3, 'Stacom' => 4, 'Tipcom' => 5, 'Reftra' => 6, 'Id' => 7, ),
+		BasePeer::TYPE_COLNAME => array (ContabcPeer::NUMCOM => 0, ContabcPeer::FECCOM => 1, ContabcPeer::DESCOM => 2, ContabcPeer::MONCOM => 3, ContabcPeer::STACOM => 4, ContabcPeer::TIPCOM => 5, ContabcPeer::REFTRA => 6, ContabcPeer::ID => 7, ),
+		BasePeer::TYPE_FIELDNAME => array ('numcom' => 0, 'feccom' => 1, 'descom' => 2, 'moncom' => 3, 'stacom' => 4, 'tipcom' => 5, 'reftra' => 6, 'id' => 7, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
 	);
 
 	
 	public static function getMapBuilder()
 	{
-		include_once 'lib/model/map/ContabbtempMapBuilder.php';
-		return BasePeer::getMapBuilder('lib.model.map.ContabbtempMapBuilder');
+		include_once 'lib/model/contabilidad/map/ContabcMapBuilder.php';
+		return BasePeer::getMapBuilder('lib.model.contabilidad.map.ContabcMapBuilder');
 	}
 	
 	public static function getPhpNameMap()
 	{
 		if (self::$phpNameMap === null) {
-			$map = ContabbtempPeer::getTableMap();
+			$map = ContabcPeer::getTableMap();
 			$columns = $map->getColumns();
 			$nameMap = array();
 			foreach ($columns as $column) {
@@ -116,39 +107,33 @@ abstract class BaseContabbtempPeer {
 	
 	public static function alias($alias, $column)
 	{
-		return str_replace(ContabbtempPeer::TABLE_NAME.'.', $alias.'.', $column);
+		return str_replace(ContabcPeer::TABLE_NAME.'.', $alias.'.', $column);
 	}
 
 	
 	public static function addSelectColumns(Criteria $criteria)
 	{
 
-		$criteria->addSelectColumn(ContabbtempPeer::CODCTA);
+		$criteria->addSelectColumn(ContabcPeer::NUMCOM);
 
-		$criteria->addSelectColumn(ContabbtempPeer::DESCTA);
+		$criteria->addSelectColumn(ContabcPeer::FECCOM);
 
-		$criteria->addSelectColumn(ContabbtempPeer::FECINI);
+		$criteria->addSelectColumn(ContabcPeer::DESCOM);
 
-		$criteria->addSelectColumn(ContabbtempPeer::FECCIE);
+		$criteria->addSelectColumn(ContabcPeer::MONCOM);
 
-		$criteria->addSelectColumn(ContabbtempPeer::SALANT);
+		$criteria->addSelectColumn(ContabcPeer::STACOM);
 
-		$criteria->addSelectColumn(ContabbtempPeer::DEBCRE);
+		$criteria->addSelectColumn(ContabcPeer::TIPCOM);
 
-		$criteria->addSelectColumn(ContabbtempPeer::CARGAB);
+		$criteria->addSelectColumn(ContabcPeer::REFTRA);
 
-		$criteria->addSelectColumn(ContabbtempPeer::SALPRGPER);
-
-		$criteria->addSelectColumn(ContabbtempPeer::SALACUPER);
-
-		$criteria->addSelectColumn(ContabbtempPeer::SALPRGPERFOR);
-
-		$criteria->addSelectColumn(ContabbtempPeer::ID);
+		$criteria->addSelectColumn(ContabcPeer::ID);
 
 	}
 
-	const COUNT = 'COUNT(contabbtemp.ID)';
-	const COUNT_DISTINCT = 'COUNT(DISTINCT contabbtemp.ID)';
+	const COUNT = 'COUNT(contabc.ID)';
+	const COUNT_DISTINCT = 'COUNT(DISTINCT contabc.ID)';
 
 	
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
@@ -157,9 +142,9 @@ abstract class BaseContabbtempPeer {
 
 				$criteria->clearSelectColumns()->clearOrderByColumns();
 		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(ContabbtempPeer::COUNT_DISTINCT);
+			$criteria->addSelectColumn(ContabcPeer::COUNT_DISTINCT);
 		} else {
-			$criteria->addSelectColumn(ContabbtempPeer::COUNT);
+			$criteria->addSelectColumn(ContabcPeer::COUNT);
 		}
 
 				foreach($criteria->getGroupByColumns() as $column)
@@ -167,7 +152,7 @@ abstract class BaseContabbtempPeer {
 			$criteria->addSelectColumn($column);
 		}
 
-		$rs = ContabbtempPeer::doSelectRS($criteria, $con);
+		$rs = ContabcPeer::doSelectRS($criteria, $con);
 		if ($rs->next()) {
 			return $rs->getInt(1);
 		} else {
@@ -179,7 +164,7 @@ abstract class BaseContabbtempPeer {
 	{
 		$critcopy = clone $criteria;
 		$critcopy->setLimit(1);
-		$objects = ContabbtempPeer::doSelect($critcopy, $con);
+		$objects = ContabcPeer::doSelect($critcopy, $con);
 		if ($objects) {
 			return $objects[0];
 		}
@@ -188,7 +173,7 @@ abstract class BaseContabbtempPeer {
 	
 	public static function doSelect(Criteria $criteria, $con = null)
 	{
-		return ContabbtempPeer::populateObjects(ContabbtempPeer::doSelectRS($criteria, $con));
+		return ContabcPeer::populateObjects(ContabcPeer::doSelectRS($criteria, $con));
 	}
 	
 	public static function doSelectRS(Criteria $criteria, $con = null)
@@ -199,7 +184,7 @@ abstract class BaseContabbtempPeer {
 
 		if (!$criteria->getSelectColumns()) {
 			$criteria = clone $criteria;
-			ContabbtempPeer::addSelectColumns($criteria);
+			ContabcPeer::addSelectColumns($criteria);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -211,7 +196,7 @@ abstract class BaseContabbtempPeer {
 	{
 		$results = array();
 	
-				$cls = ContabbtempPeer::getOMClass();
+				$cls = ContabcPeer::getOMClass();
 		$cls = Propel::import($cls);
 				while($rs->next()) {
 		
@@ -231,7 +216,7 @@ abstract class BaseContabbtempPeer {
 	
 	public static function getOMClass()
 	{
-		return ContabbtempPeer::CLASS_DEFAULT;
+		return ContabcPeer::CLASS_DEFAULT;
 	}
 
 	
@@ -245,6 +230,7 @@ abstract class BaseContabbtempPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(ContabcPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 
@@ -271,8 +257,8 @@ abstract class BaseContabbtempPeer {
 
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; 
-			$comparison = $criteria->getComparison(ContabbtempPeer::ID);
-			$selectCriteria->add(ContabbtempPeer::ID, $criteria->remove(ContabbtempPeer::ID), $comparison);
+			$comparison = $criteria->getComparison(ContabcPeer::ID);
+			$selectCriteria->add(ContabcPeer::ID, $criteria->remove(ContabcPeer::ID), $comparison);
 
 		} else { 			$criteria = $values->buildCriteria(); 			$selectCriteria = $values->buildPkeyCriteria(); 		}
 
@@ -289,7 +275,7 @@ abstract class BaseContabbtempPeer {
 		}
 		$affectedRows = 0; 		try {
 									$con->begin();
-			$affectedRows += BasePeer::doDeleteAll(ContabbtempPeer::TABLE_NAME, $con);
+			$affectedRows += BasePeer::doDeleteAll(ContabcPeer::TABLE_NAME, $con);
 			$con->commit();
 			return $affectedRows;
 		} catch (PropelException $e) {
@@ -302,16 +288,16 @@ abstract class BaseContabbtempPeer {
 	 public static function doDelete($values, $con = null)
 	 {
 		if ($con === null) {
-			$con = Propel::getConnection(ContabbtempPeer::DATABASE_NAME);
+			$con = Propel::getConnection(ContabcPeer::DATABASE_NAME);
 		}
 
 		if ($values instanceof Criteria) {
-			$criteria = clone $values; 		} elseif ($values instanceof Contabbtemp) {
+			$criteria = clone $values; 		} elseif ($values instanceof Contabc) {
 
 			$criteria = $values->buildPkeyCriteria();
 		} else {
 						$criteria = new Criteria(self::DATABASE_NAME);
-			$criteria->add(ContabbtempPeer::ID, (array) $values, Criteria::IN);
+			$criteria->add(ContabcPeer::ID, (array) $values, Criteria::IN);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -330,13 +316,13 @@ abstract class BaseContabbtempPeer {
 	}
 
 	
-	public static function doValidate(Contabbtemp $obj, $cols = null)
+	public static function doValidate(Contabc $obj, $cols = null)
 	{
 		$columns = array();
 
 		if ($cols) {
-			$dbMap = Propel::getDatabaseMap(ContabbtempPeer::DATABASE_NAME);
-			$tableMap = $dbMap->getTable(ContabbtempPeer::TABLE_NAME);
+			$dbMap = Propel::getDatabaseMap(ContabcPeer::DATABASE_NAME);
+			$tableMap = $dbMap->getTable(ContabcPeer::TABLE_NAME);
 
 			if (! is_array($cols)) {
 				$cols = array($cols);
@@ -352,11 +338,11 @@ abstract class BaseContabbtempPeer {
 
 		}
 
-		$res =  BasePeer::doValidate(ContabbtempPeer::DATABASE_NAME, ContabbtempPeer::TABLE_NAME, $columns);
+		$res =  BasePeer::doValidate(ContabcPeer::DATABASE_NAME, ContabcPeer::TABLE_NAME, $columns);
     if ($res !== true) {
         $request = sfContext::getInstance()->getRequest();
         foreach ($res as $failed) {
-            $col = ContabbtempPeer::translateFieldname($failed->getColumn(), BasePeer::TYPE_COLNAME, BasePeer::TYPE_PHPNAME);
+            $col = ContabcPeer::translateFieldname($failed->getColumn(), BasePeer::TYPE_COLNAME, BasePeer::TYPE_PHPNAME);
             $request->setError($col, $failed->getMessage());
         }
     }
@@ -371,12 +357,12 @@ abstract class BaseContabbtempPeer {
 			$con = Propel::getConnection(self::DATABASE_NAME);
 		}
 
-		$criteria = new Criteria(ContabbtempPeer::DATABASE_NAME);
+		$criteria = new Criteria(ContabcPeer::DATABASE_NAME);
 
-		$criteria->add(ContabbtempPeer::ID, $pk);
+		$criteria->add(ContabcPeer::ID, $pk);
 
 
-		$v = ContabbtempPeer::doSelect($criteria, $con);
+		$v = ContabcPeer::doSelect($criteria, $con);
 
 		return !empty($v) > 0 ? $v[0] : null;
 	}
@@ -393,8 +379,8 @@ abstract class BaseContabbtempPeer {
 			$objs = array();
 		} else {
 			$criteria = new Criteria();
-			$criteria->add(ContabbtempPeer::ID, $pks, Criteria::IN);
-			$objs = ContabbtempPeer::doSelect($criteria, $con);
+			$criteria->add(ContabcPeer::ID, $pks, Criteria::IN);
+			$objs = ContabcPeer::doSelect($criteria, $con);
 		}
 		return $objs;
 	}
@@ -402,11 +388,11 @@ abstract class BaseContabbtempPeer {
 } 
 if (Propel::isInit()) {
 			try {
-		BaseContabbtempPeer::getMapBuilder();
+		BaseContabcPeer::getMapBuilder();
 	} catch (Exception $e) {
 		Propel::log('Could not initialize Peer: ' . $e->getMessage(), Propel::LOG_ERR);
 	}
 } else {
-			require_once 'lib/model/map/ContabbtempMapBuilder.php';
-	Propel::registerMapBuilder('lib.model.map.ContabbtempMapBuilder');
+			require_once 'lib/model/contabilidad/map/ContabcMapBuilder.php';
+	Propel::registerMapBuilder('lib.model.contabilidad.map.ContabcMapBuilder');
 }

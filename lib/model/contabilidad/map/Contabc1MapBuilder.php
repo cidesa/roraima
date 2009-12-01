@@ -2,10 +2,10 @@
 
 
 
-class Contabc1ConvMapBuilder {
+class Contabc1MapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.Contabc1ConvMapBuilder';
+	const CLASS_NAME = 'lib.model.contabilidad.map.Contabc1MapBuilder';
 
 	
 	private $dbMap;
@@ -27,18 +27,20 @@ class Contabc1ConvMapBuilder {
 	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
 
-		$tMap = $this->dbMap->addTable('contabc1_conv');
-		$tMap->setPhpName('Contabc1Conv');
+		$tMap = $this->dbMap->addTable('contabc1');
+		$tMap->setPhpName('Contabc1');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
 
-		$tMap->addColumn('NUMCOM', 'Numcom', 'string', CreoleTypes::VARCHAR, true, 8);
+		$tMap->setPrimaryKeyMethodInfo('contabc1_SEQ');
+
+		$tMap->addForeignKey('NUMCOM', 'Numcom', 'string', CreoleTypes::VARCHAR, 'contabc', 'NUMCOM', true, 8);
 
 		$tMap->addColumn('FECCOM', 'Feccom', 'int', CreoleTypes::DATE, true, null);
 
 		$tMap->addColumn('DEBCRE', 'Debcre', 'string', CreoleTypes::VARCHAR, true, 1);
 
-		$tMap->addColumn('CODCTA', 'Codcta', 'string', CreoleTypes::VARCHAR, true, 32);
+		$tMap->addForeignKey('CODCTA', 'Codcta', 'string', CreoleTypes::VARCHAR, 'contabb', 'CODCTA', true, 32);
 
 		$tMap->addColumn('NUMASI', 'Numasi', 'double', CreoleTypes::NUMERIC, false, 3);
 
