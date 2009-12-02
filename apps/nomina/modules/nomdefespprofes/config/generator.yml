@@ -5,7 +5,7 @@ generator:
     theme:            default
 
     fields:
-      codprofes:    { name: Codigo, params: maxlength=10,size=10  }
+      codprofes:    { name: Codigo, params: maxlength=10 size=10  }
       desprofes:    { name: Descripción, params: size=20  }
 
     list:
