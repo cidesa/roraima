@@ -4,7 +4,7 @@ generator:
     model_class:      Nptipded
     theme:            default
     fields:
-      codtip: { name: Código, params: maxlength=4,size=6}
+      codtip: { name: Código, params: maxlength=4 size=6}
       destip: { name: Descripción }
     list:
       title:          Tipo de Dedicación
