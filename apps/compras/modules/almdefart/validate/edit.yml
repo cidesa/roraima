@@ -23,7 +23,7 @@ names:
   cadefart{rupart}:
     required:  No
     validators: CorrelValidator
-	
+
   cadefart{forart}:
     required:  Yes
     required_msg: El Formato del Artículo no puedo estar en Blanco
