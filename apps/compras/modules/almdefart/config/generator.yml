@@ -38,7 +38,7 @@ generator:
       dessnc:    { name: Descripción}
       reqreqapr:    { name: Aprobación de la Requisición para poder ser Despachada }
       solreqapr:    { name: Aprobación de Solicitud de Egreso para poder realizar la Orden de Compra}
-       gencorart:  { name: Se genera correlativo en el Código del Artículo}
+      gencorart:  { name: Se genera correlativo en el Código del Artículo}
       tipdocpre:  { name: Tipo de Documento}
       cornac: { name: Nacionales}
       corext: { name: Extranjeros}
