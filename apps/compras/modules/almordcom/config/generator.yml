@@ -55,7 +55,7 @@ generator:
       fields:
         codpro:      { name : Código de la Contratistas}
       filters:        [ordcom, desord, fecord, staord, codpro]
-      sort            ordcom
+      sort:            ordcom
       object_actions:
         _edit:        ~
         _delete:      ~
