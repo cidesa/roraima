@@ -5163,7 +5163,7 @@ class Nomina {
         $npasiconnom->setActivo(str_replace("'", '', substr($g["conact"], 0, 1)));
         $npasiconnom->save();
 
-		$c = new Criteria();
+		/*$c = new Criteria();
 		$c->add(NpasiconempPeer::CODCON,$g["codcon"]);
 		$npasiconemp = NpasiconempPeer::doSelect($c);
 		if($npasiconemp)
@@ -5173,7 +5173,9 @@ class Nomina {
 				$clase->setFrecon($g["frecon"]);
 				$clase->save();
 			}
-		}
+		}*/
+        $sql="UPDATE npasiconemp SET frecon='".$g["frecon"]."' WHERE codcon ='".$g["codcon"]."'";
+         Herramientas::insertarRegistros($sql);
 
       }
     }
