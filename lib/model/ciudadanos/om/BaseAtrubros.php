@@ -467,7 +467,10 @@ abstract class BaseAtrubros extends BaseObject  implements Persistent {
 		if ($this->aAttipayu === null && ($this->attipayu_id !== null)) {
 						include_once 'lib/model/ciudadanos/om/BaseAttipayuPeer.php';
 
-			$this->aAttipayu = AttipayuPeer::retrieveByPK($this->attipayu_id, $con);
+      $c = new Criteria();
+      $c->add(AttipayuPeer::ID,$this->attipayu_id);
+      
+			$this->aAttipayu = AttipayuPeer::doSelectOne($c, $con);
 
 			
 		}
@@ -852,6 +855,41 @@ abstract class BaseAtrubros extends BaseObject  implements Persistent {
 
 			if (!isset($this->lastAtayudasCriteria) || !$this->lastAtayudasCriteria->equals($criteria)) {
 				$this->collAtayudass = AtayudasPeer::doSelectJoinAtmedico($criteria, $con);
+			}
+		}
+		$this->lastAtayudasCriteria = $criteria;
+
+		return $this->collAtayudass;
+	}
+
+
+	
+	public function getAtayudassJoinAtunidades($criteria = null, $con = null)
+	{
+				include_once 'lib/model/ciudadanos/om/BaseAtayudasPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collAtayudass === null) {
+			if ($this->isNew()) {
+				$this->collAtayudass = array();
+			} else {
+
+				$criteria->add(AtayudasPeer::ATRUBROS_ID, $this->getId());
+
+				$this->collAtayudass = AtayudasPeer::doSelectJoinAtunidades($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(AtayudasPeer::ATRUBROS_ID, $this->getId());
+
+			if (!isset($this->lastAtayudasCriteria) || !$this->lastAtayudasCriteria->equals($criteria)) {
+				$this->collAtayudass = AtayudasPeer::doSelectJoinAtunidades($criteria, $con);
 			}
 		}
 		$this->lastAtayudasCriteria = $criteria;

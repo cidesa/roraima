@@ -275,8 +275,8 @@ abstract class BaseAtmunicipiosPeer {
 			$criteria->addSelectColumn($column);
 		}
 
-		$criteria->addJoin(AtmunicipiosPeer::ATESTADOS_ID, AtestadosPeer::ID);
-
+			$criteria->addJoin(AtmunicipiosPeer::ATESTADOS_ID, AtestadosPeer::ID);
+	
 		$rs = AtmunicipiosPeer::doSelectRS($criteria, $con);
 		if ($rs->next()) {
 			return $rs->getInt(1);
@@ -298,11 +298,11 @@ abstract class BaseAtmunicipiosPeer {
 		AtmunicipiosPeer::addSelectColumns($c);
 		$startcol2 = (AtmunicipiosPeer::NUM_COLUMNS - AtmunicipiosPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		AtestadosPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + AtestadosPeer::NUM_COLUMNS;
-
-		$c->addJoin(AtmunicipiosPeer::ATESTADOS_ID, AtestadosPeer::ID);
-
+			AtestadosPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + AtestadosPeer::NUM_COLUMNS;
+	
+			$c->addJoin(AtmunicipiosPeer::ATESTADOS_ID, AtestadosPeer::ID);
+	
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
 
@@ -316,28 +316,28 @@ abstract class BaseAtmunicipiosPeer {
 			$obj1->hydrate($rs);
 
 
-					
-			$omClass = AtestadosPeer::getOMClass();
+							
+				$omClass = AtestadosPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2 = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2 = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getAtestados(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addAtmunicipios($obj1); 					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getAtestados(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addAtmunicipios($obj1); 						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initAtmunicipioss();
-				$obj2->addAtmunicipios($obj1);
-			}
-
+				if ($newObject) {
+					$obj2->initAtmunicipioss();
+					$obj2->addAtmunicipios($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;

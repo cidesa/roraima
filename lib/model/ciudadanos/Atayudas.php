@@ -142,4 +142,23 @@ class Atayudas extends BaseAtayudas
     else return "";
   }
 
+  public function save($con = null)
+  {
+    if($this->id){
+      $atayudas = AtayudasPeer::retrieveByPK($this->id);
+      if($atayudas->getAtestayuId()!=$this->atestayu_id){
+        $atdetest = new Atdetest();
+        $atdetest->setAtayudasId($this->id);
+        $atdetest->setAtestayuDesde($atayudas->getAtestayuId());
+        $atdetest->setAtestayuHasta($this->atestayu_id);
+        $atdetest->setUsuario(sfContext::getInstance()->getUser()->getAttribute('usuario'));
+        $atdetest->save();
+      }
+    }
+
+    return parent::save($con);
+
+
+  }
+
 }

@@ -375,10 +375,10 @@ abstract class BaseAtdetayuPeer {
 			$criteria->addSelectColumn($column);
 		}
 
-		$criteria->addJoin(AtdetayuPeer::ATAYUDAS_ID, AtayudasPeer::ID);
-
-		$criteria->addJoin(AtdetayuPeer::ATDONACIONES_ID, AtdonacionesPeer::ID);
-
+			$criteria->addJoin(AtdetayuPeer::ATAYUDAS_ID, AtayudasPeer::ID);
+	
+			$criteria->addJoin(AtdetayuPeer::ATDONACIONES_ID, AtdonacionesPeer::ID);
+	
 		$rs = AtdetayuPeer::doSelectRS($criteria, $con);
 		if ($rs->next()) {
 			return $rs->getInt(1);
@@ -400,16 +400,16 @@ abstract class BaseAtdetayuPeer {
 		AtdetayuPeer::addSelectColumns($c);
 		$startcol2 = (AtdetayuPeer::NUM_COLUMNS - AtdetayuPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		AtayudasPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + AtayudasPeer::NUM_COLUMNS;
-
-		AtdonacionesPeer::addSelectColumns($c);
-		$startcol4 = $startcol3 + AtdonacionesPeer::NUM_COLUMNS;
-
-		$c->addJoin(AtdetayuPeer::ATAYUDAS_ID, AtayudasPeer::ID);
-
-		$c->addJoin(AtdetayuPeer::ATDONACIONES_ID, AtdonacionesPeer::ID);
-
+			AtayudasPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + AtayudasPeer::NUM_COLUMNS;
+	
+			AtdonacionesPeer::addSelectColumns($c);
+			$startcol4 = $startcol3 + AtdonacionesPeer::NUM_COLUMNS;
+	
+			$c->addJoin(AtdetayuPeer::ATAYUDAS_ID, AtayudasPeer::ID);
+	
+			$c->addJoin(AtdetayuPeer::ATDONACIONES_ID, AtdonacionesPeer::ID);
+	
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
 
@@ -423,112 +423,112 @@ abstract class BaseAtdetayuPeer {
 			$obj1->hydrate($rs);
 
 
-					
-			$omClass = AtayudasPeer::getOMClass();
+							
+				$omClass = AtayudasPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2 = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2 = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getAtayudas(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addAtdetayu($obj1); 					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getAtayudas(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addAtdetayu($obj1); 						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initAtdetayus();
-				$obj2->addAtdetayu($obj1);
-			}
-
-
-					
-			$omClass = AtdonacionesPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj3 = new $cls();
-			$obj3->hydrate($rs, $startcol3);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj3 = $temp_obj1->getAtdonaciones(); 				if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj3->addAtdetayu($obj1); 					break;
+				if ($newObject) {
+					$obj2->initAtdetayus();
+					$obj2->addAtdetayu($obj1);
 				}
-			}
+	
 
-			if ($newObject) {
-				$obj3->initAtdetayus();
-				$obj3->addAtdetayu($obj1);
-			}
+							
+				$omClass = AtdonacionesPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj3 = new $cls();
+				$obj3->hydrate($rs, $startcol3);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj3 = $temp_obj1->getAtdonaciones(); 					if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj3->addAtdetayu($obj1); 						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj3->initAtdetayus();
+					$obj3->addAtdetayu($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;
 	}
 
 
-	
-	public static function doCountJoinAllExceptAtayudas(Criteria $criteria, $distinct = false, $con = null)
-	{
-				$criteria = clone $criteria;
-
-				$criteria->clearSelectColumns()->clearOrderByColumns();
-		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(AtdetayuPeer::COUNT_DISTINCT);
-		} else {
-			$criteria->addSelectColumn(AtdetayuPeer::COUNT);
-		}
-
-				foreach($criteria->getGroupByColumns() as $column)
+		
+		public static function doCountJoinAllExceptAtayudas(Criteria $criteria, $distinct = false, $con = null)
 		{
-			$criteria->addSelectColumn($column);
-		}
+						$criteria = clone $criteria;
 
-		$criteria->addJoin(AtdetayuPeer::ATDONACIONES_ID, AtdonacionesPeer::ID);
+						$criteria->clearSelectColumns()->clearOrderByColumns();
+			if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+				$criteria->addSelectColumn(AtdetayuPeer::COUNT_DISTINCT);
+			} else {
+				$criteria->addSelectColumn(AtdetayuPeer::COUNT);
+			}
 
-		$rs = AtdetayuPeer::doSelectRS($criteria, $con);
-		if ($rs->next()) {
-			return $rs->getInt(1);
-		} else {
-						return 0;
-		}
-	}
-
-
+						foreach($criteria->getGroupByColumns() as $column)
+			{
+				$criteria->addSelectColumn($column);
+			}
 	
-	public static function doCountJoinAllExceptAtdonaciones(Criteria $criteria, $distinct = false, $con = null)
-	{
-				$criteria = clone $criteria;
-
-				$criteria->clearSelectColumns()->clearOrderByColumns();
-		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(AtdetayuPeer::COUNT_DISTINCT);
-		} else {
-			$criteria->addSelectColumn(AtdetayuPeer::COUNT);
+				$criteria->addJoin(AtdetayuPeer::ATDONACIONES_ID, AtdonacionesPeer::ID);
+		
+			$rs = AtdetayuPeer::doSelectRS($criteria, $con);
+			if ($rs->next()) {
+				return $rs->getInt(1);
+			} else {
+								return 0;
+			}
 		}
+	
 
-				foreach($criteria->getGroupByColumns() as $column)
+		
+		public static function doCountJoinAllExceptAtdonaciones(Criteria $criteria, $distinct = false, $con = null)
 		{
-			$criteria->addSelectColumn($column);
+						$criteria = clone $criteria;
+
+						$criteria->clearSelectColumns()->clearOrderByColumns();
+			if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+				$criteria->addSelectColumn(AtdetayuPeer::COUNT_DISTINCT);
+			} else {
+				$criteria->addSelectColumn(AtdetayuPeer::COUNT);
+			}
+
+						foreach($criteria->getGroupByColumns() as $column)
+			{
+				$criteria->addSelectColumn($column);
+			}
+	
+				$criteria->addJoin(AtdetayuPeer::ATAYUDAS_ID, AtayudasPeer::ID);
+		
+			$rs = AtdetayuPeer::doSelectRS($criteria, $con);
+			if ($rs->next()) {
+				return $rs->getInt(1);
+			} else {
+								return 0;
+			}
 		}
-
-		$criteria->addJoin(AtdetayuPeer::ATAYUDAS_ID, AtayudasPeer::ID);
-
-		$rs = AtdetayuPeer::doSelectRS($criteria, $con);
-		if ($rs->next()) {
-			return $rs->getInt(1);
-		} else {
-						return 0;
-		}
-	}
-
+	
 
 	
 	public static function doSelectJoinAllExceptAtayudas(Criteria $c, $con = null)
@@ -542,11 +542,11 @@ abstract class BaseAtdetayuPeer {
 		AtdetayuPeer::addSelectColumns($c);
 		$startcol2 = (AtdetayuPeer::NUM_COLUMNS - AtdetayuPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		AtdonacionesPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + AtdonacionesPeer::NUM_COLUMNS;
-
-		$c->addJoin(AtdetayuPeer::ATDONACIONES_ID, AtdonacionesPeer::ID);
-
+			AtdonacionesPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + AtdonacionesPeer::NUM_COLUMNS;
+	
+			$c->addJoin(AtdetayuPeer::ATDONACIONES_ID, AtdonacionesPeer::ID);
+	
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
@@ -559,28 +559,28 @@ abstract class BaseAtdetayuPeer {
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
 
-			$omClass = AtdonacionesPeer::getOMClass();
+				$omClass = AtdonacionesPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2  = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2  = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getAtdonaciones(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addAtdetayu($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getAtdonaciones(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addAtdetayu($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initAtdetayus();
-				$obj2->addAtdetayu($obj1);
-			}
-
+				if ($newObject) {
+					$obj2->initAtdetayus();
+					$obj2->addAtdetayu($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;
@@ -599,11 +599,11 @@ abstract class BaseAtdetayuPeer {
 		AtdetayuPeer::addSelectColumns($c);
 		$startcol2 = (AtdetayuPeer::NUM_COLUMNS - AtdetayuPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		AtayudasPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + AtayudasPeer::NUM_COLUMNS;
-
-		$c->addJoin(AtdetayuPeer::ATAYUDAS_ID, AtayudasPeer::ID);
-
+			AtayudasPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + AtayudasPeer::NUM_COLUMNS;
+	
+			$c->addJoin(AtdetayuPeer::ATAYUDAS_ID, AtayudasPeer::ID);
+	
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
@@ -616,28 +616,28 @@ abstract class BaseAtdetayuPeer {
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
 
-			$omClass = AtayudasPeer::getOMClass();
+				$omClass = AtayudasPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2  = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2  = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getAtayudas(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addAtdetayu($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getAtayudas(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addAtdetayu($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initAtdetayus();
-				$obj2->addAtdetayu($obj1);
-			}
-
+				if ($newObject) {
+					$obj2->initAtdetayus();
+					$obj2->addAtdetayu($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;

@@ -21,6 +21,7 @@ class Atdetayu extends BaseAtdetayu
 
   protected $coddon = '';
   protected $desdon = '';
+  protected $totapr = 0.0;
 
   public function afterHydrate(){
 
@@ -35,6 +36,11 @@ class Atdetayu extends BaseAtdetayu
 
     }
 
+  }
+
+  public function getTotapr()
+  {
+    return H::FormatoMonto($this->precio * $this->canapr);
   }
 
 }

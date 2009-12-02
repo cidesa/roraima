@@ -467,7 +467,10 @@ abstract class BaseAtmunicipios extends BaseObject  implements Persistent {
 		if ($this->aAtestados === null && ($this->atestados_id !== null)) {
 						include_once 'lib/model/ciudadanos/om/BaseAtestadosPeer.php';
 
-			$this->aAtestados = AtestadosPeer::retrieveByPK($this->atestados_id, $con);
+      $c = new Criteria();
+      $c->add(AtestadosPeer::ID,$this->atestados_id);
+      
+			$this->aAtestados = AtestadosPeer::doSelectOne($c, $con);
 
 			
 		}

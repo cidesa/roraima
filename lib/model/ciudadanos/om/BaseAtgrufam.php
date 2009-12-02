@@ -615,7 +615,10 @@ abstract class BaseAtgrufam extends BaseObject  implements Persistent {
 		if ($this->aAtciudadano === null && ($this->atciudadano_id !== null)) {
 						include_once 'lib/model/ciudadanos/om/BaseAtciudadanoPeer.php';
 
-			$this->aAtciudadano = AtciudadanoPeer::retrieveByPK($this->atciudadano_id, $con);
+      $c = new Criteria();
+      $c->add(AtciudadanoPeer::ID,$this->atciudadano_id);
+      
+			$this->aAtciudadano = AtciudadanoPeer::doSelectOne($c, $con);
 
 			
 		}

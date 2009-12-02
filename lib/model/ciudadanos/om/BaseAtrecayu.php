@@ -430,7 +430,10 @@ abstract class BaseAtrecayu extends BaseObject  implements Persistent {
 		if ($this->aAttipayu === null && ($this->attipayu_id !== null)) {
 						include_once 'lib/model/ciudadanos/om/BaseAttipayuPeer.php';
 
-			$this->aAttipayu = AttipayuPeer::retrieveByPK($this->attipayu_id, $con);
+      $c = new Criteria();
+      $c->add(AttipayuPeer::ID,$this->attipayu_id);
+      
+			$this->aAttipayu = AttipayuPeer::doSelectOne($c, $con);
 
 			
 		}
@@ -459,7 +462,10 @@ abstract class BaseAtrecayu extends BaseObject  implements Persistent {
 		if ($this->aAtrecaud === null && ($this->atrecaud_id !== null)) {
 						include_once 'lib/model/ciudadanos/om/BaseAtrecaudPeer.php';
 
-			$this->aAtrecaud = AtrecaudPeer::retrieveByPK($this->atrecaud_id, $con);
+      $c = new Criteria();
+      $c->add(AtrecaudPeer::ID,$this->atrecaud_id);
+      
+			$this->aAtrecaud = AtrecaudPeer::doSelectOne($c, $con);
 
 			
 		}

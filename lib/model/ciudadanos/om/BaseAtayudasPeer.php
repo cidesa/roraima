@@ -13,7 +13,7 @@ abstract class BaseAtayudasPeer {
 	const CLASS_DEFAULT = 'lib.model.ciudadanos.Atayudas';
 
 	
-	const NUM_COLUMNS = 36;
+	const NUM_COLUMNS = 37;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -125,6 +125,9 @@ abstract class BaseAtayudasPeer {
 	const FECSOL = 'atayudas.FECSOL';
 
 	
+	const ATUNIDADES_ID = 'atayudas.ATUNIDADES_ID';
+
+	
 	const ID = 'atayudas.ID';
 
 	
@@ -133,18 +136,18 @@ abstract class BaseAtayudasPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Nroexp', 'Refdoc', 'Parentesco', 'Priayu', 'AtpriayuId', 'Atsolici', 'Atbenefi', 'AttipayuId', 'AtrubrosId', 'AtestayuId', 'AttrasocId', 'AtproveeId', 'Proayu', 'Nroofi', 'Desayu', 'Motayu', 'CreatedAt', 'UpdatedAt', 'Usucre', 'Usumod', 'Codpre', 'Detayu', 'Monayu', 'Monapr', 'AtmedicoId', 'Respat', 'Infmed', 'Obsmed', 'Fecdiasoc', 'Usudiasoc', 'Resdiasoc', 'Fecvisdoc', 'Usuvisdoc', 'Resvisdoc', 'Fecsol', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (AtayudasPeer::NROEXP, AtayudasPeer::REFDOC, AtayudasPeer::PARENTESCO, AtayudasPeer::PRIAYU, AtayudasPeer::ATPRIAYU_ID, AtayudasPeer::ATSOLICI, AtayudasPeer::ATBENEFI, AtayudasPeer::ATTIPAYU_ID, AtayudasPeer::ATRUBROS_ID, AtayudasPeer::ATESTAYU_ID, AtayudasPeer::ATTRASOC_ID, AtayudasPeer::ATPROVEE_ID, AtayudasPeer::PROAYU, AtayudasPeer::NROOFI, AtayudasPeer::DESAYU, AtayudasPeer::MOTAYU, AtayudasPeer::CREATED_AT, AtayudasPeer::UPDATED_AT, AtayudasPeer::USUCRE, AtayudasPeer::USUMOD, AtayudasPeer::CODPRE, AtayudasPeer::DETAYU, AtayudasPeer::MONAYU, AtayudasPeer::MONAPR, AtayudasPeer::ATMEDICO_ID, AtayudasPeer::RESPAT, AtayudasPeer::INFMED, AtayudasPeer::OBSMED, AtayudasPeer::FECDIASOC, AtayudasPeer::USUDIASOC, AtayudasPeer::RESDIASOC, AtayudasPeer::FECVISDOC, AtayudasPeer::USUVISDOC, AtayudasPeer::RESVISDOC, AtayudasPeer::FECSOL, AtayudasPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('nroexp', 'refdoc', 'parentesco', 'priayu', 'atpriayu_id', 'atsolici', 'atbenefi', 'attipayu_id', 'atrubros_id', 'atestayu_id', 'attrasoc_id', 'atprovee_id', 'proayu', 'nroofi', 'desayu', 'motayu', 'created_at', 'updated_at', 'usucre', 'usumod', 'codpre', 'detayu', 'monayu', 'monapr', 'atmedico_id', 'respat', 'infmed', 'obsmed', 'fecdiasoc', 'usudiasoc', 'resdiasoc', 'fecvisdoc', 'usuvisdoc', 'resvisdoc', 'fecsol', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, )
+		BasePeer::TYPE_PHPNAME => array ('Nroexp', 'Refdoc', 'Parentesco', 'Priayu', 'AtpriayuId', 'Atsolici', 'Atbenefi', 'AttipayuId', 'AtrubrosId', 'AtestayuId', 'AttrasocId', 'AtproveeId', 'Proayu', 'Nroofi', 'Desayu', 'Motayu', 'CreatedAt', 'UpdatedAt', 'Usucre', 'Usumod', 'Codpre', 'Detayu', 'Monayu', 'Monapr', 'AtmedicoId', 'Respat', 'Infmed', 'Obsmed', 'Fecdiasoc', 'Usudiasoc', 'Resdiasoc', 'Fecvisdoc', 'Usuvisdoc', 'Resvisdoc', 'Fecsol', 'AtunidadesId', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (AtayudasPeer::NROEXP, AtayudasPeer::REFDOC, AtayudasPeer::PARENTESCO, AtayudasPeer::PRIAYU, AtayudasPeer::ATPRIAYU_ID, AtayudasPeer::ATSOLICI, AtayudasPeer::ATBENEFI, AtayudasPeer::ATTIPAYU_ID, AtayudasPeer::ATRUBROS_ID, AtayudasPeer::ATESTAYU_ID, AtayudasPeer::ATTRASOC_ID, AtayudasPeer::ATPROVEE_ID, AtayudasPeer::PROAYU, AtayudasPeer::NROOFI, AtayudasPeer::DESAYU, AtayudasPeer::MOTAYU, AtayudasPeer::CREATED_AT, AtayudasPeer::UPDATED_AT, AtayudasPeer::USUCRE, AtayudasPeer::USUMOD, AtayudasPeer::CODPRE, AtayudasPeer::DETAYU, AtayudasPeer::MONAYU, AtayudasPeer::MONAPR, AtayudasPeer::ATMEDICO_ID, AtayudasPeer::RESPAT, AtayudasPeer::INFMED, AtayudasPeer::OBSMED, AtayudasPeer::FECDIASOC, AtayudasPeer::USUDIASOC, AtayudasPeer::RESDIASOC, AtayudasPeer::FECVISDOC, AtayudasPeer::USUVISDOC, AtayudasPeer::RESVISDOC, AtayudasPeer::FECSOL, AtayudasPeer::ATUNIDADES_ID, AtayudasPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('nroexp', 'refdoc', 'parentesco', 'priayu', 'atpriayu_id', 'atsolici', 'atbenefi', 'attipayu_id', 'atrubros_id', 'atestayu_id', 'attrasoc_id', 'atprovee_id', 'proayu', 'nroofi', 'desayu', 'motayu', 'created_at', 'updated_at', 'usucre', 'usumod', 'codpre', 'detayu', 'monayu', 'monapr', 'atmedico_id', 'respat', 'infmed', 'obsmed', 'fecdiasoc', 'usudiasoc', 'resdiasoc', 'fecvisdoc', 'usuvisdoc', 'resvisdoc', 'fecsol', 'atunidades_id', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Nroexp' => 0, 'Refdoc' => 1, 'Parentesco' => 2, 'Priayu' => 3, 'AtpriayuId' => 4, 'Atsolici' => 5, 'Atbenefi' => 6, 'AttipayuId' => 7, 'AtrubrosId' => 8, 'AtestayuId' => 9, 'AttrasocId' => 10, 'AtproveeId' => 11, 'Proayu' => 12, 'Nroofi' => 13, 'Desayu' => 14, 'Motayu' => 15, 'CreatedAt' => 16, 'UpdatedAt' => 17, 'Usucre' => 18, 'Usumod' => 19, 'Codpre' => 20, 'Detayu' => 21, 'Monayu' => 22, 'Monapr' => 23, 'AtmedicoId' => 24, 'Respat' => 25, 'Infmed' => 26, 'Obsmed' => 27, 'Fecdiasoc' => 28, 'Usudiasoc' => 29, 'Resdiasoc' => 30, 'Fecvisdoc' => 31, 'Usuvisdoc' => 32, 'Resvisdoc' => 33, 'Fecsol' => 34, 'Id' => 35, ),
-		BasePeer::TYPE_COLNAME => array (AtayudasPeer::NROEXP => 0, AtayudasPeer::REFDOC => 1, AtayudasPeer::PARENTESCO => 2, AtayudasPeer::PRIAYU => 3, AtayudasPeer::ATPRIAYU_ID => 4, AtayudasPeer::ATSOLICI => 5, AtayudasPeer::ATBENEFI => 6, AtayudasPeer::ATTIPAYU_ID => 7, AtayudasPeer::ATRUBROS_ID => 8, AtayudasPeer::ATESTAYU_ID => 9, AtayudasPeer::ATTRASOC_ID => 10, AtayudasPeer::ATPROVEE_ID => 11, AtayudasPeer::PROAYU => 12, AtayudasPeer::NROOFI => 13, AtayudasPeer::DESAYU => 14, AtayudasPeer::MOTAYU => 15, AtayudasPeer::CREATED_AT => 16, AtayudasPeer::UPDATED_AT => 17, AtayudasPeer::USUCRE => 18, AtayudasPeer::USUMOD => 19, AtayudasPeer::CODPRE => 20, AtayudasPeer::DETAYU => 21, AtayudasPeer::MONAYU => 22, AtayudasPeer::MONAPR => 23, AtayudasPeer::ATMEDICO_ID => 24, AtayudasPeer::RESPAT => 25, AtayudasPeer::INFMED => 26, AtayudasPeer::OBSMED => 27, AtayudasPeer::FECDIASOC => 28, AtayudasPeer::USUDIASOC => 29, AtayudasPeer::RESDIASOC => 30, AtayudasPeer::FECVISDOC => 31, AtayudasPeer::USUVISDOC => 32, AtayudasPeer::RESVISDOC => 33, AtayudasPeer::FECSOL => 34, AtayudasPeer::ID => 35, ),
-		BasePeer::TYPE_FIELDNAME => array ('nroexp' => 0, 'refdoc' => 1, 'parentesco' => 2, 'priayu' => 3, 'atpriayu_id' => 4, 'atsolici' => 5, 'atbenefi' => 6, 'attipayu_id' => 7, 'atrubros_id' => 8, 'atestayu_id' => 9, 'attrasoc_id' => 10, 'atprovee_id' => 11, 'proayu' => 12, 'nroofi' => 13, 'desayu' => 14, 'motayu' => 15, 'created_at' => 16, 'updated_at' => 17, 'usucre' => 18, 'usumod' => 19, 'codpre' => 20, 'detayu' => 21, 'monayu' => 22, 'monapr' => 23, 'atmedico_id' => 24, 'respat' => 25, 'infmed' => 26, 'obsmed' => 27, 'fecdiasoc' => 28, 'usudiasoc' => 29, 'resdiasoc' => 30, 'fecvisdoc' => 31, 'usuvisdoc' => 32, 'resvisdoc' => 33, 'fecsol' => 34, 'id' => 35, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, )
+		BasePeer::TYPE_PHPNAME => array ('Nroexp' => 0, 'Refdoc' => 1, 'Parentesco' => 2, 'Priayu' => 3, 'AtpriayuId' => 4, 'Atsolici' => 5, 'Atbenefi' => 6, 'AttipayuId' => 7, 'AtrubrosId' => 8, 'AtestayuId' => 9, 'AttrasocId' => 10, 'AtproveeId' => 11, 'Proayu' => 12, 'Nroofi' => 13, 'Desayu' => 14, 'Motayu' => 15, 'CreatedAt' => 16, 'UpdatedAt' => 17, 'Usucre' => 18, 'Usumod' => 19, 'Codpre' => 20, 'Detayu' => 21, 'Monayu' => 22, 'Monapr' => 23, 'AtmedicoId' => 24, 'Respat' => 25, 'Infmed' => 26, 'Obsmed' => 27, 'Fecdiasoc' => 28, 'Usudiasoc' => 29, 'Resdiasoc' => 30, 'Fecvisdoc' => 31, 'Usuvisdoc' => 32, 'Resvisdoc' => 33, 'Fecsol' => 34, 'AtunidadesId' => 35, 'Id' => 36, ),
+		BasePeer::TYPE_COLNAME => array (AtayudasPeer::NROEXP => 0, AtayudasPeer::REFDOC => 1, AtayudasPeer::PARENTESCO => 2, AtayudasPeer::PRIAYU => 3, AtayudasPeer::ATPRIAYU_ID => 4, AtayudasPeer::ATSOLICI => 5, AtayudasPeer::ATBENEFI => 6, AtayudasPeer::ATTIPAYU_ID => 7, AtayudasPeer::ATRUBROS_ID => 8, AtayudasPeer::ATESTAYU_ID => 9, AtayudasPeer::ATTRASOC_ID => 10, AtayudasPeer::ATPROVEE_ID => 11, AtayudasPeer::PROAYU => 12, AtayudasPeer::NROOFI => 13, AtayudasPeer::DESAYU => 14, AtayudasPeer::MOTAYU => 15, AtayudasPeer::CREATED_AT => 16, AtayudasPeer::UPDATED_AT => 17, AtayudasPeer::USUCRE => 18, AtayudasPeer::USUMOD => 19, AtayudasPeer::CODPRE => 20, AtayudasPeer::DETAYU => 21, AtayudasPeer::MONAYU => 22, AtayudasPeer::MONAPR => 23, AtayudasPeer::ATMEDICO_ID => 24, AtayudasPeer::RESPAT => 25, AtayudasPeer::INFMED => 26, AtayudasPeer::OBSMED => 27, AtayudasPeer::FECDIASOC => 28, AtayudasPeer::USUDIASOC => 29, AtayudasPeer::RESDIASOC => 30, AtayudasPeer::FECVISDOC => 31, AtayudasPeer::USUVISDOC => 32, AtayudasPeer::RESVISDOC => 33, AtayudasPeer::FECSOL => 34, AtayudasPeer::ATUNIDADES_ID => 35, AtayudasPeer::ID => 36, ),
+		BasePeer::TYPE_FIELDNAME => array ('nroexp' => 0, 'refdoc' => 1, 'parentesco' => 2, 'priayu' => 3, 'atpriayu_id' => 4, 'atsolici' => 5, 'atbenefi' => 6, 'attipayu_id' => 7, 'atrubros_id' => 8, 'atestayu_id' => 9, 'attrasoc_id' => 10, 'atprovee_id' => 11, 'proayu' => 12, 'nroofi' => 13, 'desayu' => 14, 'motayu' => 15, 'created_at' => 16, 'updated_at' => 17, 'usucre' => 18, 'usumod' => 19, 'codpre' => 20, 'detayu' => 21, 'monayu' => 22, 'monapr' => 23, 'atmedico_id' => 24, 'respat' => 25, 'infmed' => 26, 'obsmed' => 27, 'fecdiasoc' => 28, 'usudiasoc' => 29, 'resdiasoc' => 30, 'fecvisdoc' => 31, 'usuvisdoc' => 32, 'resvisdoc' => 33, 'fecsol' => 34, 'atunidades_id' => 35, 'id' => 36, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, )
 	);
 
 	
@@ -267,6 +270,8 @@ abstract class BaseAtayudasPeer {
 		$criteria->addSelectColumn(AtayudasPeer::RESVISDOC);
 
 		$criteria->addSelectColumn(AtayudasPeer::FECSOL);
+
+		$criteria->addSelectColumn(AtayudasPeer::ATUNIDADES_ID);
 
 		$criteria->addSelectColumn(AtayudasPeer::ID);
 
@@ -618,6 +623,34 @@ abstract class BaseAtayudasPeer {
 		}
 
 		$criteria->addJoin(AtayudasPeer::ATMEDICO_ID, AtmedicoPeer::ID);
+
+		$rs = AtayudasPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doCountJoinAtunidades(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(AtayudasPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(AtayudasPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(AtayudasPeer::ATUNIDADES_ID, AtunidadesPeer::ID);
 
 		$rs = AtayudasPeer::doSelectRS($criteria, $con);
 		if ($rs->next()) {
@@ -1099,6 +1132,53 @@ abstract class BaseAtayudasPeer {
 
 
 	
+	public static function doSelectJoinAtunidades(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		AtayudasPeer::addSelectColumns($c);
+		$startcol = (AtayudasPeer::NUM_COLUMNS - AtayudasPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+		AtunidadesPeer::addSelectColumns($c);
+
+		$c->addJoin(AtayudasPeer::ATUNIDADES_ID, AtunidadesPeer::ID);
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = AtayudasPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = AtunidadesPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol);
+
+			$newObject = true;
+			foreach($results as $temp_obj1) {
+				$temp_obj2 = $temp_obj1->getAtunidades(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+										$temp_obj2->addAtayudas($obj1); 					break;
+				}
+			}
+			if ($newObject) {
+				$obj2->initAtayudass();
+				$obj2->addAtayudas($obj1); 			}
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
 	public static function doCountJoinAll(Criteria $criteria, $distinct = false, $con = null)
 	{
 		$criteria = clone $criteria;
@@ -1115,26 +1195,28 @@ abstract class BaseAtayudasPeer {
 			$criteria->addSelectColumn($column);
 		}
 
-		$criteria->addJoin(AtayudasPeer::REFDOC, CaordcomPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATPRIAYU_ID, AtpriayuPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATSOLICI, AtciudadanoPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATBENEFI, AtciudadanoPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATTIPAYU_ID, AttipayuPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATRUBROS_ID, AtrubrosPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATESTAYU_ID, AtestayuPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATTRASOC_ID, AttrasocPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATPROVEE_ID, AtproveePeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATMEDICO_ID, AtmedicoPeer::ID);
-
+			$criteria->addJoin(AtayudasPeer::REFDOC, CaordcomPeer::ID);
+	
+			$criteria->addJoin(AtayudasPeer::ATPRIAYU_ID, AtpriayuPeer::ID);
+	
+			$criteria->addJoin(AtayudasPeer::ATSOLICI, AtciudadanoPeer::ID);
+	
+			$criteria->addJoin(AtayudasPeer::ATBENEFI, AtciudadanoPeer::ID);
+	
+			$criteria->addJoin(AtayudasPeer::ATTIPAYU_ID, AttipayuPeer::ID);
+	
+			$criteria->addJoin(AtayudasPeer::ATRUBROS_ID, AtrubrosPeer::ID);
+	
+			$criteria->addJoin(AtayudasPeer::ATESTAYU_ID, AtestayuPeer::ID);
+	
+			$criteria->addJoin(AtayudasPeer::ATTRASOC_ID, AttrasocPeer::ID);
+	
+			$criteria->addJoin(AtayudasPeer::ATPROVEE_ID, AtproveePeer::ID);
+	
+			$criteria->addJoin(AtayudasPeer::ATMEDICO_ID, AtmedicoPeer::ID);
+	
+			$criteria->addJoin(AtayudasPeer::ATUNIDADES_ID, AtunidadesPeer::ID);
+	
 		$rs = AtayudasPeer::doSelectRS($criteria, $con);
 		if ($rs->next()) {
 			return $rs->getInt(1);
@@ -1156,56 +1238,61 @@ abstract class BaseAtayudasPeer {
 		AtayudasPeer::addSelectColumns($c);
 		$startcol2 = (AtayudasPeer::NUM_COLUMNS - AtayudasPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		CaordcomPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + CaordcomPeer::NUM_COLUMNS;
-
-		AtpriayuPeer::addSelectColumns($c);
-		$startcol4 = $startcol3 + AtpriayuPeer::NUM_COLUMNS;
-
-		AtciudadanoPeer::addSelectColumns($c);
-		$startcol5 = $startcol4 + AtciudadanoPeer::NUM_COLUMNS;
-
-		AtciudadanoPeer::addSelectColumns($c);
-		$startcol6 = $startcol5 + AtciudadanoPeer::NUM_COLUMNS;
-
-		AttipayuPeer::addSelectColumns($c);
-		$startcol7 = $startcol6 + AttipayuPeer::NUM_COLUMNS;
-
-		AtrubrosPeer::addSelectColumns($c);
-		$startcol8 = $startcol7 + AtrubrosPeer::NUM_COLUMNS;
-
-		AtestayuPeer::addSelectColumns($c);
-		$startcol9 = $startcol8 + AtestayuPeer::NUM_COLUMNS;
-
-		AttrasocPeer::addSelectColumns($c);
-		$startcol10 = $startcol9 + AttrasocPeer::NUM_COLUMNS;
-
-		AtproveePeer::addSelectColumns($c);
-		$startcol11 = $startcol10 + AtproveePeer::NUM_COLUMNS;
-
-		AtmedicoPeer::addSelectColumns($c);
-		$startcol12 = $startcol11 + AtmedicoPeer::NUM_COLUMNS;
-
-		$c->addJoin(AtayudasPeer::REFDOC, CaordcomPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATPRIAYU_ID, AtpriayuPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATSOLICI, AtciudadanoPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATBENEFI, AtciudadanoPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATTIPAYU_ID, AttipayuPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATRUBROS_ID, AtrubrosPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATESTAYU_ID, AtestayuPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATTRASOC_ID, AttrasocPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATPROVEE_ID, AtproveePeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATMEDICO_ID, AtmedicoPeer::ID);
-
+			CaordcomPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + CaordcomPeer::NUM_COLUMNS;
+	
+			AtpriayuPeer::addSelectColumns($c);
+			$startcol4 = $startcol3 + AtpriayuPeer::NUM_COLUMNS;
+	
+			AtciudadanoPeer::addSelectColumns($c);
+			$startcol5 = $startcol4 + AtciudadanoPeer::NUM_COLUMNS;
+	
+			AtciudadanoPeer::addSelectColumns($c);
+			$startcol6 = $startcol5 + AtciudadanoPeer::NUM_COLUMNS;
+	
+			AttipayuPeer::addSelectColumns($c);
+			$startcol7 = $startcol6 + AttipayuPeer::NUM_COLUMNS;
+	
+			AtrubrosPeer::addSelectColumns($c);
+			$startcol8 = $startcol7 + AtrubrosPeer::NUM_COLUMNS;
+	
+			AtestayuPeer::addSelectColumns($c);
+			$startcol9 = $startcol8 + AtestayuPeer::NUM_COLUMNS;
+	
+			AttrasocPeer::addSelectColumns($c);
+			$startcol10 = $startcol9 + AttrasocPeer::NUM_COLUMNS;
+	
+			AtproveePeer::addSelectColumns($c);
+			$startcol11 = $startcol10 + AtproveePeer::NUM_COLUMNS;
+	
+			AtmedicoPeer::addSelectColumns($c);
+			$startcol12 = $startcol11 + AtmedicoPeer::NUM_COLUMNS;
+	
+			AtunidadesPeer::addSelectColumns($c);
+			$startcol13 = $startcol12 + AtunidadesPeer::NUM_COLUMNS;
+	
+			$c->addJoin(AtayudasPeer::REFDOC, CaordcomPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATPRIAYU_ID, AtpriayuPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATSOLICI, AtciudadanoPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATBENEFI, AtciudadanoPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATTIPAYU_ID, AttipayuPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATRUBROS_ID, AtrubrosPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATESTAYU_ID, AtestayuPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATTRASOC_ID, AttrasocPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATPROVEE_ID, AtproveePeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATMEDICO_ID, AtmedicoPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATUNIDADES_ID, AtunidadesPeer::ID);
+	
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
 
@@ -1219,676 +1306,765 @@ abstract class BaseAtayudasPeer {
 			$obj1->hydrate($rs);
 
 
-					
-			$omClass = CaordcomPeer::getOMClass();
+							
+				$omClass = CaordcomPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2 = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2 = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getCaordcom(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addAtayudas($obj1); 					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getCaordcom(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addAtayudas($obj1); 						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initAtayudass();
-				$obj2->addAtayudas($obj1);
-			}
-
-
-					
-			$omClass = AtpriayuPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj3 = new $cls();
-			$obj3->hydrate($rs, $startcol3);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj3 = $temp_obj1->getAtpriayu(); 				if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj3->addAtayudas($obj1); 					break;
+				if ($newObject) {
+					$obj2->initAtayudass();
+					$obj2->addAtayudas($obj1);
 				}
-			}
+	
 
-			if ($newObject) {
-				$obj3->initAtayudass();
-				$obj3->addAtayudas($obj1);
-			}
+							
+				$omClass = AtpriayuPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj3 = new $cls();
+				$obj3->hydrate($rs, $startcol3);
 
-					
-			$omClass = AtciudadanoPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj4 = new $cls();
-			$obj4->hydrate($rs, $startcol4);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj4 = $temp_obj1->getAtciudadanoRelatedByAtsolici(); 				if ($temp_obj4->getPrimaryKey() === $obj4->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj4->addAtayudasRelatedByAtsolici($obj1); 					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj3 = $temp_obj1->getAtpriayu(); 					if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj3->addAtayudas($obj1); 						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj4->initAtayudassRelatedByAtsolici();
-				$obj4->addAtayudasRelatedByAtsolici($obj1);
-			}
-
-
-					
-			$omClass = AtciudadanoPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj5 = new $cls();
-			$obj5->hydrate($rs, $startcol5);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj5 = $temp_obj1->getAtciudadanoRelatedByAtbenefi(); 				if ($temp_obj5->getPrimaryKey() === $obj5->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj5->addAtayudasRelatedByAtbenefi($obj1); 					break;
+				if ($newObject) {
+					$obj3->initAtayudass();
+					$obj3->addAtayudas($obj1);
 				}
-			}
+	
 
-			if ($newObject) {
-				$obj5->initAtayudassRelatedByAtbenefi();
-				$obj5->addAtayudasRelatedByAtbenefi($obj1);
-			}
+							
+				$omClass = AtciudadanoPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj4 = new $cls();
+				$obj4->hydrate($rs, $startcol4);
 
-					
-			$omClass = AttipayuPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj6 = new $cls();
-			$obj6->hydrate($rs, $startcol6);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj6 = $temp_obj1->getAttipayu(); 				if ($temp_obj6->getPrimaryKey() === $obj6->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj6->addAtayudas($obj1); 					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj4 = $temp_obj1->getAtciudadanoRelatedByAtsolici(); 					if ($temp_obj4->getPrimaryKey() === $obj4->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj4->addAtayudasRelatedByAtsolici($obj1); 						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj6->initAtayudass();
-				$obj6->addAtayudas($obj1);
-			}
-
-
-					
-			$omClass = AtrubrosPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj7 = new $cls();
-			$obj7->hydrate($rs, $startcol7);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj7 = $temp_obj1->getAtrubros(); 				if ($temp_obj7->getPrimaryKey() === $obj7->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj7->addAtayudas($obj1); 					break;
+				if ($newObject) {
+					$obj4->initAtayudassRelatedByAtsolici();
+					$obj4->addAtayudasRelatedByAtsolici($obj1);
 				}
-			}
+	
 
-			if ($newObject) {
-				$obj7->initAtayudass();
-				$obj7->addAtayudas($obj1);
-			}
+							
+				$omClass = AtciudadanoPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj5 = new $cls();
+				$obj5->hydrate($rs, $startcol5);
 
-					
-			$omClass = AtestayuPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj8 = new $cls();
-			$obj8->hydrate($rs, $startcol8);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj8 = $temp_obj1->getAtestayu(); 				if ($temp_obj8->getPrimaryKey() === $obj8->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj8->addAtayudas($obj1); 					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj5 = $temp_obj1->getAtciudadanoRelatedByAtbenefi(); 					if ($temp_obj5->getPrimaryKey() === $obj5->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj5->addAtayudasRelatedByAtbenefi($obj1); 						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj8->initAtayudass();
-				$obj8->addAtayudas($obj1);
-			}
-
-
-					
-			$omClass = AttrasocPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj9 = new $cls();
-			$obj9->hydrate($rs, $startcol9);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj9 = $temp_obj1->getAttrasoc(); 				if ($temp_obj9->getPrimaryKey() === $obj9->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj9->addAtayudas($obj1); 					break;
+				if ($newObject) {
+					$obj5->initAtayudassRelatedByAtbenefi();
+					$obj5->addAtayudasRelatedByAtbenefi($obj1);
 				}
-			}
+	
 
-			if ($newObject) {
-				$obj9->initAtayudass();
-				$obj9->addAtayudas($obj1);
-			}
+							
+				$omClass = AttipayuPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj6 = new $cls();
+				$obj6->hydrate($rs, $startcol6);
 
-					
-			$omClass = AtproveePeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj10 = new $cls();
-			$obj10->hydrate($rs, $startcol10);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj10 = $temp_obj1->getAtprovee(); 				if ($temp_obj10->getPrimaryKey() === $obj10->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj10->addAtayudas($obj1); 					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj6 = $temp_obj1->getAttipayu(); 					if ($temp_obj6->getPrimaryKey() === $obj6->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj6->addAtayudas($obj1); 						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj10->initAtayudass();
-				$obj10->addAtayudas($obj1);
-			}
-
-
-					
-			$omClass = AtmedicoPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj11 = new $cls();
-			$obj11->hydrate($rs, $startcol11);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj11 = $temp_obj1->getAtmedico(); 				if ($temp_obj11->getPrimaryKey() === $obj11->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj11->addAtayudas($obj1); 					break;
+				if ($newObject) {
+					$obj6->initAtayudass();
+					$obj6->addAtayudas($obj1);
 				}
-			}
+	
 
-			if ($newObject) {
-				$obj11->initAtayudass();
-				$obj11->addAtayudas($obj1);
-			}
+							
+				$omClass = AtrubrosPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj7 = new $cls();
+				$obj7->hydrate($rs, $startcol7);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj7 = $temp_obj1->getAtrubros(); 					if ($temp_obj7->getPrimaryKey() === $obj7->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj7->addAtayudas($obj1); 						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj7->initAtayudass();
+					$obj7->addAtayudas($obj1);
+				}
+	
+
+							
+				$omClass = AtestayuPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj8 = new $cls();
+				$obj8->hydrate($rs, $startcol8);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj8 = $temp_obj1->getAtestayu(); 					if ($temp_obj8->getPrimaryKey() === $obj8->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj8->addAtayudas($obj1); 						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj8->initAtayudass();
+					$obj8->addAtayudas($obj1);
+				}
+	
+
+							
+				$omClass = AttrasocPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj9 = new $cls();
+				$obj9->hydrate($rs, $startcol9);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj9 = $temp_obj1->getAttrasoc(); 					if ($temp_obj9->getPrimaryKey() === $obj9->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj9->addAtayudas($obj1); 						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj9->initAtayudass();
+					$obj9->addAtayudas($obj1);
+				}
+	
+
+							
+				$omClass = AtproveePeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj10 = new $cls();
+				$obj10->hydrate($rs, $startcol10);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj10 = $temp_obj1->getAtprovee(); 					if ($temp_obj10->getPrimaryKey() === $obj10->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj10->addAtayudas($obj1); 						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj10->initAtayudass();
+					$obj10->addAtayudas($obj1);
+				}
+	
+
+							
+				$omClass = AtmedicoPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj11 = new $cls();
+				$obj11->hydrate($rs, $startcol11);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj11 = $temp_obj1->getAtmedico(); 					if ($temp_obj11->getPrimaryKey() === $obj11->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj11->addAtayudas($obj1); 						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj11->initAtayudass();
+					$obj11->addAtayudas($obj1);
+				}
+	
+
+							
+				$omClass = AtunidadesPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj12 = new $cls();
+				$obj12->hydrate($rs, $startcol12);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj12 = $temp_obj1->getAtunidades(); 					if ($temp_obj12->getPrimaryKey() === $obj12->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj12->addAtayudas($obj1); 						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj12->initAtayudass();
+					$obj12->addAtayudas($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;
 	}
 
 
-	
-	public static function doCountJoinAllExceptCaordcom(Criteria $criteria, $distinct = false, $con = null)
-	{
-				$criteria = clone $criteria;
-
-				$criteria->clearSelectColumns()->clearOrderByColumns();
-		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(AtayudasPeer::COUNT_DISTINCT);
-		} else {
-			$criteria->addSelectColumn(AtayudasPeer::COUNT);
-		}
-
-				foreach($criteria->getGroupByColumns() as $column)
+		
+		public static function doCountJoinAllExceptCaordcom(Criteria $criteria, $distinct = false, $con = null)
 		{
-			$criteria->addSelectColumn($column);
-		}
+						$criteria = clone $criteria;
 
-		$criteria->addJoin(AtayudasPeer::ATPRIAYU_ID, AtpriayuPeer::ID);
+						$criteria->clearSelectColumns()->clearOrderByColumns();
+			if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+				$criteria->addSelectColumn(AtayudasPeer::COUNT_DISTINCT);
+			} else {
+				$criteria->addSelectColumn(AtayudasPeer::COUNT);
+			}
 
-		$criteria->addJoin(AtayudasPeer::ATSOLICI, AtciudadanoPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATBENEFI, AtciudadanoPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATTIPAYU_ID, AttipayuPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATRUBROS_ID, AtrubrosPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATESTAYU_ID, AtestayuPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATTRASOC_ID, AttrasocPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATPROVEE_ID, AtproveePeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATMEDICO_ID, AtmedicoPeer::ID);
-
-		$rs = AtayudasPeer::doSelectRS($criteria, $con);
-		if ($rs->next()) {
-			return $rs->getInt(1);
-		} else {
-						return 0;
-		}
-	}
-
-
+						foreach($criteria->getGroupByColumns() as $column)
+			{
+				$criteria->addSelectColumn($column);
+			}
 	
-	public static function doCountJoinAllExceptAtpriayu(Criteria $criteria, $distinct = false, $con = null)
-	{
-				$criteria = clone $criteria;
-
-				$criteria->clearSelectColumns()->clearOrderByColumns();
-		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(AtayudasPeer::COUNT_DISTINCT);
-		} else {
-			$criteria->addSelectColumn(AtayudasPeer::COUNT);
+				$criteria->addJoin(AtayudasPeer::ATPRIAYU_ID, AtpriayuPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATSOLICI, AtciudadanoPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATBENEFI, AtciudadanoPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATTIPAYU_ID, AttipayuPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATRUBROS_ID, AtrubrosPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATESTAYU_ID, AtestayuPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATTRASOC_ID, AttrasocPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATPROVEE_ID, AtproveePeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATMEDICO_ID, AtmedicoPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATUNIDADES_ID, AtunidadesPeer::ID);
+		
+			$rs = AtayudasPeer::doSelectRS($criteria, $con);
+			if ($rs->next()) {
+				return $rs->getInt(1);
+			} else {
+								return 0;
+			}
 		}
-
-				foreach($criteria->getGroupByColumns() as $column)
-		{
-			$criteria->addSelectColumn($column);
-		}
-
-		$criteria->addJoin(AtayudasPeer::REFDOC, CaordcomPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATSOLICI, AtciudadanoPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATBENEFI, AtciudadanoPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATTIPAYU_ID, AttipayuPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATRUBROS_ID, AtrubrosPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATESTAYU_ID, AtestayuPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATTRASOC_ID, AttrasocPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATPROVEE_ID, AtproveePeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATMEDICO_ID, AtmedicoPeer::ID);
-
-		$rs = AtayudasPeer::doSelectRS($criteria, $con);
-		if ($rs->next()) {
-			return $rs->getInt(1);
-		} else {
-						return 0;
-		}
-	}
-
-
 	
-	public static function doCountJoinAllExceptAtciudadanoRelatedByAtsolici(Criteria $criteria, $distinct = false, $con = null)
-	{
-				$criteria = clone $criteria;
 
-				$criteria->clearSelectColumns()->clearOrderByColumns();
-		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(AtayudasPeer::COUNT_DISTINCT);
-		} else {
-			$criteria->addSelectColumn(AtayudasPeer::COUNT);
-		}
-
-				foreach($criteria->getGroupByColumns() as $column)
+		
+		public static function doCountJoinAllExceptAtpriayu(Criteria $criteria, $distinct = false, $con = null)
 		{
-			$criteria->addSelectColumn($column);
-		}
+						$criteria = clone $criteria;
 
-		$criteria->addJoin(AtayudasPeer::REFDOC, CaordcomPeer::ID);
+						$criteria->clearSelectColumns()->clearOrderByColumns();
+			if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+				$criteria->addSelectColumn(AtayudasPeer::COUNT_DISTINCT);
+			} else {
+				$criteria->addSelectColumn(AtayudasPeer::COUNT);
+			}
 
-		$criteria->addJoin(AtayudasPeer::ATPRIAYU_ID, AtpriayuPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATTIPAYU_ID, AttipayuPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATRUBROS_ID, AtrubrosPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATESTAYU_ID, AtestayuPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATTRASOC_ID, AttrasocPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATPROVEE_ID, AtproveePeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATMEDICO_ID, AtmedicoPeer::ID);
-
-		$rs = AtayudasPeer::doSelectRS($criteria, $con);
-		if ($rs->next()) {
-			return $rs->getInt(1);
-		} else {
-						return 0;
-		}
-	}
-
-
+						foreach($criteria->getGroupByColumns() as $column)
+			{
+				$criteria->addSelectColumn($column);
+			}
 	
-	public static function doCountJoinAllExceptAtciudadanoRelatedByAtbenefi(Criteria $criteria, $distinct = false, $con = null)
-	{
-				$criteria = clone $criteria;
-
-				$criteria->clearSelectColumns()->clearOrderByColumns();
-		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(AtayudasPeer::COUNT_DISTINCT);
-		} else {
-			$criteria->addSelectColumn(AtayudasPeer::COUNT);
+				$criteria->addJoin(AtayudasPeer::REFDOC, CaordcomPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATSOLICI, AtciudadanoPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATBENEFI, AtciudadanoPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATTIPAYU_ID, AttipayuPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATRUBROS_ID, AtrubrosPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATESTAYU_ID, AtestayuPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATTRASOC_ID, AttrasocPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATPROVEE_ID, AtproveePeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATMEDICO_ID, AtmedicoPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATUNIDADES_ID, AtunidadesPeer::ID);
+		
+			$rs = AtayudasPeer::doSelectRS($criteria, $con);
+			if ($rs->next()) {
+				return $rs->getInt(1);
+			} else {
+								return 0;
+			}
 		}
-
-				foreach($criteria->getGroupByColumns() as $column)
-		{
-			$criteria->addSelectColumn($column);
-		}
-
-		$criteria->addJoin(AtayudasPeer::REFDOC, CaordcomPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATPRIAYU_ID, AtpriayuPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATTIPAYU_ID, AttipayuPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATRUBROS_ID, AtrubrosPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATESTAYU_ID, AtestayuPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATTRASOC_ID, AttrasocPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATPROVEE_ID, AtproveePeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATMEDICO_ID, AtmedicoPeer::ID);
-
-		$rs = AtayudasPeer::doSelectRS($criteria, $con);
-		if ($rs->next()) {
-			return $rs->getInt(1);
-		} else {
-						return 0;
-		}
-	}
-
-
 	
-	public static function doCountJoinAllExceptAttipayu(Criteria $criteria, $distinct = false, $con = null)
-	{
-				$criteria = clone $criteria;
 
-				$criteria->clearSelectColumns()->clearOrderByColumns();
-		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(AtayudasPeer::COUNT_DISTINCT);
-		} else {
-			$criteria->addSelectColumn(AtayudasPeer::COUNT);
-		}
-
-				foreach($criteria->getGroupByColumns() as $column)
+		
+		public static function doCountJoinAllExceptAtciudadanoRelatedByAtsolici(Criteria $criteria, $distinct = false, $con = null)
 		{
-			$criteria->addSelectColumn($column);
-		}
+						$criteria = clone $criteria;
 
-		$criteria->addJoin(AtayudasPeer::REFDOC, CaordcomPeer::ID);
+						$criteria->clearSelectColumns()->clearOrderByColumns();
+			if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+				$criteria->addSelectColumn(AtayudasPeer::COUNT_DISTINCT);
+			} else {
+				$criteria->addSelectColumn(AtayudasPeer::COUNT);
+			}
 
-		$criteria->addJoin(AtayudasPeer::ATPRIAYU_ID, AtpriayuPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATSOLICI, AtciudadanoPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATBENEFI, AtciudadanoPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATRUBROS_ID, AtrubrosPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATESTAYU_ID, AtestayuPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATTRASOC_ID, AttrasocPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATPROVEE_ID, AtproveePeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATMEDICO_ID, AtmedicoPeer::ID);
-
-		$rs = AtayudasPeer::doSelectRS($criteria, $con);
-		if ($rs->next()) {
-			return $rs->getInt(1);
-		} else {
-						return 0;
-		}
-	}
-
-
+						foreach($criteria->getGroupByColumns() as $column)
+			{
+				$criteria->addSelectColumn($column);
+			}
 	
-	public static function doCountJoinAllExceptAtrubros(Criteria $criteria, $distinct = false, $con = null)
-	{
-				$criteria = clone $criteria;
-
-				$criteria->clearSelectColumns()->clearOrderByColumns();
-		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(AtayudasPeer::COUNT_DISTINCT);
-		} else {
-			$criteria->addSelectColumn(AtayudasPeer::COUNT);
+				$criteria->addJoin(AtayudasPeer::REFDOC, CaordcomPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATPRIAYU_ID, AtpriayuPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATTIPAYU_ID, AttipayuPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATRUBROS_ID, AtrubrosPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATESTAYU_ID, AtestayuPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATTRASOC_ID, AttrasocPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATPROVEE_ID, AtproveePeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATMEDICO_ID, AtmedicoPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATUNIDADES_ID, AtunidadesPeer::ID);
+		
+			$rs = AtayudasPeer::doSelectRS($criteria, $con);
+			if ($rs->next()) {
+				return $rs->getInt(1);
+			} else {
+								return 0;
+			}
 		}
-
-				foreach($criteria->getGroupByColumns() as $column)
-		{
-			$criteria->addSelectColumn($column);
-		}
-
-		$criteria->addJoin(AtayudasPeer::REFDOC, CaordcomPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATPRIAYU_ID, AtpriayuPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATSOLICI, AtciudadanoPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATBENEFI, AtciudadanoPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATTIPAYU_ID, AttipayuPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATESTAYU_ID, AtestayuPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATTRASOC_ID, AttrasocPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATPROVEE_ID, AtproveePeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATMEDICO_ID, AtmedicoPeer::ID);
-
-		$rs = AtayudasPeer::doSelectRS($criteria, $con);
-		if ($rs->next()) {
-			return $rs->getInt(1);
-		} else {
-						return 0;
-		}
-	}
-
-
 	
-	public static function doCountJoinAllExceptAtestayu(Criteria $criteria, $distinct = false, $con = null)
-	{
-				$criteria = clone $criteria;
 
-				$criteria->clearSelectColumns()->clearOrderByColumns();
-		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(AtayudasPeer::COUNT_DISTINCT);
-		} else {
-			$criteria->addSelectColumn(AtayudasPeer::COUNT);
-		}
-
-				foreach($criteria->getGroupByColumns() as $column)
+		
+		public static function doCountJoinAllExceptAtciudadanoRelatedByAtbenefi(Criteria $criteria, $distinct = false, $con = null)
 		{
-			$criteria->addSelectColumn($column);
-		}
+						$criteria = clone $criteria;
 
-		$criteria->addJoin(AtayudasPeer::REFDOC, CaordcomPeer::ID);
+						$criteria->clearSelectColumns()->clearOrderByColumns();
+			if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+				$criteria->addSelectColumn(AtayudasPeer::COUNT_DISTINCT);
+			} else {
+				$criteria->addSelectColumn(AtayudasPeer::COUNT);
+			}
 
-		$criteria->addJoin(AtayudasPeer::ATPRIAYU_ID, AtpriayuPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATSOLICI, AtciudadanoPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATBENEFI, AtciudadanoPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATTIPAYU_ID, AttipayuPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATRUBROS_ID, AtrubrosPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATTRASOC_ID, AttrasocPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATPROVEE_ID, AtproveePeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATMEDICO_ID, AtmedicoPeer::ID);
-
-		$rs = AtayudasPeer::doSelectRS($criteria, $con);
-		if ($rs->next()) {
-			return $rs->getInt(1);
-		} else {
-						return 0;
-		}
-	}
-
-
+						foreach($criteria->getGroupByColumns() as $column)
+			{
+				$criteria->addSelectColumn($column);
+			}
 	
-	public static function doCountJoinAllExceptAttrasoc(Criteria $criteria, $distinct = false, $con = null)
-	{
-				$criteria = clone $criteria;
-
-				$criteria->clearSelectColumns()->clearOrderByColumns();
-		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(AtayudasPeer::COUNT_DISTINCT);
-		} else {
-			$criteria->addSelectColumn(AtayudasPeer::COUNT);
+				$criteria->addJoin(AtayudasPeer::REFDOC, CaordcomPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATPRIAYU_ID, AtpriayuPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATTIPAYU_ID, AttipayuPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATRUBROS_ID, AtrubrosPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATESTAYU_ID, AtestayuPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATTRASOC_ID, AttrasocPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATPROVEE_ID, AtproveePeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATMEDICO_ID, AtmedicoPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATUNIDADES_ID, AtunidadesPeer::ID);
+		
+			$rs = AtayudasPeer::doSelectRS($criteria, $con);
+			if ($rs->next()) {
+				return $rs->getInt(1);
+			} else {
+								return 0;
+			}
 		}
-
-				foreach($criteria->getGroupByColumns() as $column)
-		{
-			$criteria->addSelectColumn($column);
-		}
-
-		$criteria->addJoin(AtayudasPeer::REFDOC, CaordcomPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATPRIAYU_ID, AtpriayuPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATSOLICI, AtciudadanoPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATBENEFI, AtciudadanoPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATTIPAYU_ID, AttipayuPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATRUBROS_ID, AtrubrosPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATESTAYU_ID, AtestayuPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATPROVEE_ID, AtproveePeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATMEDICO_ID, AtmedicoPeer::ID);
-
-		$rs = AtayudasPeer::doSelectRS($criteria, $con);
-		if ($rs->next()) {
-			return $rs->getInt(1);
-		} else {
-						return 0;
-		}
-	}
-
-
 	
-	public static function doCountJoinAllExceptAtprovee(Criteria $criteria, $distinct = false, $con = null)
-	{
-				$criteria = clone $criteria;
 
-				$criteria->clearSelectColumns()->clearOrderByColumns();
-		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(AtayudasPeer::COUNT_DISTINCT);
-		} else {
-			$criteria->addSelectColumn(AtayudasPeer::COUNT);
-		}
-
-				foreach($criteria->getGroupByColumns() as $column)
+		
+		public static function doCountJoinAllExceptAttipayu(Criteria $criteria, $distinct = false, $con = null)
 		{
-			$criteria->addSelectColumn($column);
-		}
+						$criteria = clone $criteria;
 
-		$criteria->addJoin(AtayudasPeer::REFDOC, CaordcomPeer::ID);
+						$criteria->clearSelectColumns()->clearOrderByColumns();
+			if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+				$criteria->addSelectColumn(AtayudasPeer::COUNT_DISTINCT);
+			} else {
+				$criteria->addSelectColumn(AtayudasPeer::COUNT);
+			}
 
-		$criteria->addJoin(AtayudasPeer::ATPRIAYU_ID, AtpriayuPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATSOLICI, AtciudadanoPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATBENEFI, AtciudadanoPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATTIPAYU_ID, AttipayuPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATRUBROS_ID, AtrubrosPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATESTAYU_ID, AtestayuPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATTRASOC_ID, AttrasocPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATMEDICO_ID, AtmedicoPeer::ID);
-
-		$rs = AtayudasPeer::doSelectRS($criteria, $con);
-		if ($rs->next()) {
-			return $rs->getInt(1);
-		} else {
-						return 0;
-		}
-	}
-
-
+						foreach($criteria->getGroupByColumns() as $column)
+			{
+				$criteria->addSelectColumn($column);
+			}
 	
-	public static function doCountJoinAllExceptAtmedico(Criteria $criteria, $distinct = false, $con = null)
-	{
-				$criteria = clone $criteria;
-
-				$criteria->clearSelectColumns()->clearOrderByColumns();
-		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(AtayudasPeer::COUNT_DISTINCT);
-		} else {
-			$criteria->addSelectColumn(AtayudasPeer::COUNT);
+				$criteria->addJoin(AtayudasPeer::REFDOC, CaordcomPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATPRIAYU_ID, AtpriayuPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATSOLICI, AtciudadanoPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATBENEFI, AtciudadanoPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATRUBROS_ID, AtrubrosPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATESTAYU_ID, AtestayuPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATTRASOC_ID, AttrasocPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATPROVEE_ID, AtproveePeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATMEDICO_ID, AtmedicoPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATUNIDADES_ID, AtunidadesPeer::ID);
+		
+			$rs = AtayudasPeer::doSelectRS($criteria, $con);
+			if ($rs->next()) {
+				return $rs->getInt(1);
+			} else {
+								return 0;
+			}
 		}
+	
 
-				foreach($criteria->getGroupByColumns() as $column)
+		
+		public static function doCountJoinAllExceptAtrubros(Criteria $criteria, $distinct = false, $con = null)
 		{
-			$criteria->addSelectColumn($column);
+						$criteria = clone $criteria;
+
+						$criteria->clearSelectColumns()->clearOrderByColumns();
+			if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+				$criteria->addSelectColumn(AtayudasPeer::COUNT_DISTINCT);
+			} else {
+				$criteria->addSelectColumn(AtayudasPeer::COUNT);
+			}
+
+						foreach($criteria->getGroupByColumns() as $column)
+			{
+				$criteria->addSelectColumn($column);
+			}
+	
+				$criteria->addJoin(AtayudasPeer::REFDOC, CaordcomPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATPRIAYU_ID, AtpriayuPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATSOLICI, AtciudadanoPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATBENEFI, AtciudadanoPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATTIPAYU_ID, AttipayuPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATESTAYU_ID, AtestayuPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATTRASOC_ID, AttrasocPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATPROVEE_ID, AtproveePeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATMEDICO_ID, AtmedicoPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATUNIDADES_ID, AtunidadesPeer::ID);
+		
+			$rs = AtayudasPeer::doSelectRS($criteria, $con);
+			if ($rs->next()) {
+				return $rs->getInt(1);
+			} else {
+								return 0;
+			}
 		}
+	
 
-		$criteria->addJoin(AtayudasPeer::REFDOC, CaordcomPeer::ID);
+		
+		public static function doCountJoinAllExceptAtestayu(Criteria $criteria, $distinct = false, $con = null)
+		{
+						$criteria = clone $criteria;
 
-		$criteria->addJoin(AtayudasPeer::ATPRIAYU_ID, AtpriayuPeer::ID);
+						$criteria->clearSelectColumns()->clearOrderByColumns();
+			if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+				$criteria->addSelectColumn(AtayudasPeer::COUNT_DISTINCT);
+			} else {
+				$criteria->addSelectColumn(AtayudasPeer::COUNT);
+			}
 
-		$criteria->addJoin(AtayudasPeer::ATSOLICI, AtciudadanoPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATBENEFI, AtciudadanoPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATTIPAYU_ID, AttipayuPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATRUBROS_ID, AtrubrosPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATESTAYU_ID, AtestayuPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATTRASOC_ID, AttrasocPeer::ID);
-
-		$criteria->addJoin(AtayudasPeer::ATPROVEE_ID, AtproveePeer::ID);
-
-		$rs = AtayudasPeer::doSelectRS($criteria, $con);
-		if ($rs->next()) {
-			return $rs->getInt(1);
-		} else {
-						return 0;
+						foreach($criteria->getGroupByColumns() as $column)
+			{
+				$criteria->addSelectColumn($column);
+			}
+	
+				$criteria->addJoin(AtayudasPeer::REFDOC, CaordcomPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATPRIAYU_ID, AtpriayuPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATSOLICI, AtciudadanoPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATBENEFI, AtciudadanoPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATTIPAYU_ID, AttipayuPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATRUBROS_ID, AtrubrosPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATTRASOC_ID, AttrasocPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATPROVEE_ID, AtproveePeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATMEDICO_ID, AtmedicoPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATUNIDADES_ID, AtunidadesPeer::ID);
+		
+			$rs = AtayudasPeer::doSelectRS($criteria, $con);
+			if ($rs->next()) {
+				return $rs->getInt(1);
+			} else {
+								return 0;
+			}
 		}
-	}
+	
 
+		
+		public static function doCountJoinAllExceptAttrasoc(Criteria $criteria, $distinct = false, $con = null)
+		{
+						$criteria = clone $criteria;
+
+						$criteria->clearSelectColumns()->clearOrderByColumns();
+			if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+				$criteria->addSelectColumn(AtayudasPeer::COUNT_DISTINCT);
+			} else {
+				$criteria->addSelectColumn(AtayudasPeer::COUNT);
+			}
+
+						foreach($criteria->getGroupByColumns() as $column)
+			{
+				$criteria->addSelectColumn($column);
+			}
+	
+				$criteria->addJoin(AtayudasPeer::REFDOC, CaordcomPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATPRIAYU_ID, AtpriayuPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATSOLICI, AtciudadanoPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATBENEFI, AtciudadanoPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATTIPAYU_ID, AttipayuPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATRUBROS_ID, AtrubrosPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATESTAYU_ID, AtestayuPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATPROVEE_ID, AtproveePeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATMEDICO_ID, AtmedicoPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATUNIDADES_ID, AtunidadesPeer::ID);
+		
+			$rs = AtayudasPeer::doSelectRS($criteria, $con);
+			if ($rs->next()) {
+				return $rs->getInt(1);
+			} else {
+								return 0;
+			}
+		}
+	
+
+		
+		public static function doCountJoinAllExceptAtprovee(Criteria $criteria, $distinct = false, $con = null)
+		{
+						$criteria = clone $criteria;
+
+						$criteria->clearSelectColumns()->clearOrderByColumns();
+			if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+				$criteria->addSelectColumn(AtayudasPeer::COUNT_DISTINCT);
+			} else {
+				$criteria->addSelectColumn(AtayudasPeer::COUNT);
+			}
+
+						foreach($criteria->getGroupByColumns() as $column)
+			{
+				$criteria->addSelectColumn($column);
+			}
+	
+				$criteria->addJoin(AtayudasPeer::REFDOC, CaordcomPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATPRIAYU_ID, AtpriayuPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATSOLICI, AtciudadanoPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATBENEFI, AtciudadanoPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATTIPAYU_ID, AttipayuPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATRUBROS_ID, AtrubrosPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATESTAYU_ID, AtestayuPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATTRASOC_ID, AttrasocPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATMEDICO_ID, AtmedicoPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATUNIDADES_ID, AtunidadesPeer::ID);
+		
+			$rs = AtayudasPeer::doSelectRS($criteria, $con);
+			if ($rs->next()) {
+				return $rs->getInt(1);
+			} else {
+								return 0;
+			}
+		}
+	
+
+		
+		public static function doCountJoinAllExceptAtmedico(Criteria $criteria, $distinct = false, $con = null)
+		{
+						$criteria = clone $criteria;
+
+						$criteria->clearSelectColumns()->clearOrderByColumns();
+			if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+				$criteria->addSelectColumn(AtayudasPeer::COUNT_DISTINCT);
+			} else {
+				$criteria->addSelectColumn(AtayudasPeer::COUNT);
+			}
+
+						foreach($criteria->getGroupByColumns() as $column)
+			{
+				$criteria->addSelectColumn($column);
+			}
+	
+				$criteria->addJoin(AtayudasPeer::REFDOC, CaordcomPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATPRIAYU_ID, AtpriayuPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATSOLICI, AtciudadanoPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATBENEFI, AtciudadanoPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATTIPAYU_ID, AttipayuPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATRUBROS_ID, AtrubrosPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATESTAYU_ID, AtestayuPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATTRASOC_ID, AttrasocPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATPROVEE_ID, AtproveePeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATUNIDADES_ID, AtunidadesPeer::ID);
+		
+			$rs = AtayudasPeer::doSelectRS($criteria, $con);
+			if ($rs->next()) {
+				return $rs->getInt(1);
+			} else {
+								return 0;
+			}
+		}
+	
+
+		
+		public static function doCountJoinAllExceptAtunidades(Criteria $criteria, $distinct = false, $con = null)
+		{
+						$criteria = clone $criteria;
+
+						$criteria->clearSelectColumns()->clearOrderByColumns();
+			if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+				$criteria->addSelectColumn(AtayudasPeer::COUNT_DISTINCT);
+			} else {
+				$criteria->addSelectColumn(AtayudasPeer::COUNT);
+			}
+
+						foreach($criteria->getGroupByColumns() as $column)
+			{
+				$criteria->addSelectColumn($column);
+			}
+	
+				$criteria->addJoin(AtayudasPeer::REFDOC, CaordcomPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATPRIAYU_ID, AtpriayuPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATSOLICI, AtciudadanoPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATBENEFI, AtciudadanoPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATTIPAYU_ID, AttipayuPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATRUBROS_ID, AtrubrosPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATESTAYU_ID, AtestayuPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATTRASOC_ID, AttrasocPeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATPROVEE_ID, AtproveePeer::ID);
+		
+				$criteria->addJoin(AtayudasPeer::ATMEDICO_ID, AtmedicoPeer::ID);
+		
+			$rs = AtayudasPeer::doSelectRS($criteria, $con);
+			if ($rs->next()) {
+				return $rs->getInt(1);
+			} else {
+								return 0;
+			}
+		}
+	
 
 	
 	public static function doSelectJoinAllExceptCaordcom(Criteria $c, $con = null)
@@ -1902,51 +2078,56 @@ abstract class BaseAtayudasPeer {
 		AtayudasPeer::addSelectColumns($c);
 		$startcol2 = (AtayudasPeer::NUM_COLUMNS - AtayudasPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		AtpriayuPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + AtpriayuPeer::NUM_COLUMNS;
-
-		AtciudadanoPeer::addSelectColumns($c);
-		$startcol4 = $startcol3 + AtciudadanoPeer::NUM_COLUMNS;
-
-		AtciudadanoPeer::addSelectColumns($c);
-		$startcol5 = $startcol4 + AtciudadanoPeer::NUM_COLUMNS;
-
-		AttipayuPeer::addSelectColumns($c);
-		$startcol6 = $startcol5 + AttipayuPeer::NUM_COLUMNS;
-
-		AtrubrosPeer::addSelectColumns($c);
-		$startcol7 = $startcol6 + AtrubrosPeer::NUM_COLUMNS;
-
-		AtestayuPeer::addSelectColumns($c);
-		$startcol8 = $startcol7 + AtestayuPeer::NUM_COLUMNS;
-
-		AttrasocPeer::addSelectColumns($c);
-		$startcol9 = $startcol8 + AttrasocPeer::NUM_COLUMNS;
-
-		AtproveePeer::addSelectColumns($c);
-		$startcol10 = $startcol9 + AtproveePeer::NUM_COLUMNS;
-
-		AtmedicoPeer::addSelectColumns($c);
-		$startcol11 = $startcol10 + AtmedicoPeer::NUM_COLUMNS;
-
-		$c->addJoin(AtayudasPeer::ATPRIAYU_ID, AtpriayuPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATSOLICI, AtciudadanoPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATBENEFI, AtciudadanoPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATTIPAYU_ID, AttipayuPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATRUBROS_ID, AtrubrosPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATESTAYU_ID, AtestayuPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATTRASOC_ID, AttrasocPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATPROVEE_ID, AtproveePeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATMEDICO_ID, AtmedicoPeer::ID);
-
+			AtpriayuPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + AtpriayuPeer::NUM_COLUMNS;
+	
+			AtciudadanoPeer::addSelectColumns($c);
+			$startcol4 = $startcol3 + AtciudadanoPeer::NUM_COLUMNS;
+	
+			AtciudadanoPeer::addSelectColumns($c);
+			$startcol5 = $startcol4 + AtciudadanoPeer::NUM_COLUMNS;
+	
+			AttipayuPeer::addSelectColumns($c);
+			$startcol6 = $startcol5 + AttipayuPeer::NUM_COLUMNS;
+	
+			AtrubrosPeer::addSelectColumns($c);
+			$startcol7 = $startcol6 + AtrubrosPeer::NUM_COLUMNS;
+	
+			AtestayuPeer::addSelectColumns($c);
+			$startcol8 = $startcol7 + AtestayuPeer::NUM_COLUMNS;
+	
+			AttrasocPeer::addSelectColumns($c);
+			$startcol9 = $startcol8 + AttrasocPeer::NUM_COLUMNS;
+	
+			AtproveePeer::addSelectColumns($c);
+			$startcol10 = $startcol9 + AtproveePeer::NUM_COLUMNS;
+	
+			AtmedicoPeer::addSelectColumns($c);
+			$startcol11 = $startcol10 + AtmedicoPeer::NUM_COLUMNS;
+	
+			AtunidadesPeer::addSelectColumns($c);
+			$startcol12 = $startcol11 + AtunidadesPeer::NUM_COLUMNS;
+	
+			$c->addJoin(AtayudasPeer::ATPRIAYU_ID, AtpriayuPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATSOLICI, AtciudadanoPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATBENEFI, AtciudadanoPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATTIPAYU_ID, AttipayuPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATRUBROS_ID, AtrubrosPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATESTAYU_ID, AtestayuPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATTRASOC_ID, AttrasocPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATPROVEE_ID, AtproveePeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATMEDICO_ID, AtmedicoPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATUNIDADES_ID, AtunidadesPeer::ID);
+	
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
@@ -1959,204 +2140,226 @@ abstract class BaseAtayudasPeer {
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
 
-			$omClass = AtpriayuPeer::getOMClass();
+				$omClass = AtpriayuPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2  = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2  = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getAtpriayu(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addAtayudas($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getAtpriayu(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addAtayudas($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initAtayudass();
-				$obj2->addAtayudas($obj1);
-			}
-
-			$omClass = AtciudadanoPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj3  = new $cls();
-			$obj3->hydrate($rs, $startcol3);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj3 = $temp_obj1->getAtciudadanoRelatedByAtsolici(); 				if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj3->addAtayudasRelatedByAtsolici($obj1);
-					break;
+				if ($newObject) {
+					$obj2->initAtayudass();
+					$obj2->addAtayudas($obj1);
 				}
-			}
+	
+				$omClass = AtciudadanoPeer::getOMClass();
+	
 
-			if ($newObject) {
-				$obj3->initAtayudassRelatedByAtsolici();
-				$obj3->addAtayudasRelatedByAtsolici($obj1);
-			}
+				$cls = Propel::import($omClass);
+				$obj3  = new $cls();
+				$obj3->hydrate($rs, $startcol3);
 
-			$omClass = AtciudadanoPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj4  = new $cls();
-			$obj4->hydrate($rs, $startcol4);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj4 = $temp_obj1->getAtciudadanoRelatedByAtbenefi(); 				if ($temp_obj4->getPrimaryKey() === $obj4->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj4->addAtayudasRelatedByAtbenefi($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj3 = $temp_obj1->getAtciudadanoRelatedByAtsolici(); 					if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj3->addAtayudasRelatedByAtsolici($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj4->initAtayudassRelatedByAtbenefi();
-				$obj4->addAtayudasRelatedByAtbenefi($obj1);
-			}
-
-			$omClass = AttipayuPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj5  = new $cls();
-			$obj5->hydrate($rs, $startcol5);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj5 = $temp_obj1->getAttipayu(); 				if ($temp_obj5->getPrimaryKey() === $obj5->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj5->addAtayudas($obj1);
-					break;
+				if ($newObject) {
+					$obj3->initAtayudassRelatedByAtsolici();
+					$obj3->addAtayudasRelatedByAtsolici($obj1);
 				}
-			}
+	
+				$omClass = AtciudadanoPeer::getOMClass();
+	
 
-			if ($newObject) {
-				$obj5->initAtayudass();
-				$obj5->addAtayudas($obj1);
-			}
+				$cls = Propel::import($omClass);
+				$obj4  = new $cls();
+				$obj4->hydrate($rs, $startcol4);
 
-			$omClass = AtrubrosPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj6  = new $cls();
-			$obj6->hydrate($rs, $startcol6);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj6 = $temp_obj1->getAtrubros(); 				if ($temp_obj6->getPrimaryKey() === $obj6->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj6->addAtayudas($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj4 = $temp_obj1->getAtciudadanoRelatedByAtbenefi(); 					if ($temp_obj4->getPrimaryKey() === $obj4->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj4->addAtayudasRelatedByAtbenefi($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj6->initAtayudass();
-				$obj6->addAtayudas($obj1);
-			}
-
-			$omClass = AtestayuPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj7  = new $cls();
-			$obj7->hydrate($rs, $startcol7);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj7 = $temp_obj1->getAtestayu(); 				if ($temp_obj7->getPrimaryKey() === $obj7->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj7->addAtayudas($obj1);
-					break;
+				if ($newObject) {
+					$obj4->initAtayudassRelatedByAtbenefi();
+					$obj4->addAtayudasRelatedByAtbenefi($obj1);
 				}
-			}
+	
+				$omClass = AttipayuPeer::getOMClass();
+	
 
-			if ($newObject) {
-				$obj7->initAtayudass();
-				$obj7->addAtayudas($obj1);
-			}
+				$cls = Propel::import($omClass);
+				$obj5  = new $cls();
+				$obj5->hydrate($rs, $startcol5);
 
-			$omClass = AttrasocPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj8  = new $cls();
-			$obj8->hydrate($rs, $startcol8);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj8 = $temp_obj1->getAttrasoc(); 				if ($temp_obj8->getPrimaryKey() === $obj8->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj8->addAtayudas($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj5 = $temp_obj1->getAttipayu(); 					if ($temp_obj5->getPrimaryKey() === $obj5->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj5->addAtayudas($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj8->initAtayudass();
-				$obj8->addAtayudas($obj1);
-			}
-
-			$omClass = AtproveePeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj9  = new $cls();
-			$obj9->hydrate($rs, $startcol9);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj9 = $temp_obj1->getAtprovee(); 				if ($temp_obj9->getPrimaryKey() === $obj9->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj9->addAtayudas($obj1);
-					break;
+				if ($newObject) {
+					$obj5->initAtayudass();
+					$obj5->addAtayudas($obj1);
 				}
-			}
+	
+				$omClass = AtrubrosPeer::getOMClass();
+	
 
-			if ($newObject) {
-				$obj9->initAtayudass();
-				$obj9->addAtayudas($obj1);
-			}
+				$cls = Propel::import($omClass);
+				$obj6  = new $cls();
+				$obj6->hydrate($rs, $startcol6);
 
-			$omClass = AtmedicoPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj10  = new $cls();
-			$obj10->hydrate($rs, $startcol10);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj10 = $temp_obj1->getAtmedico(); 				if ($temp_obj10->getPrimaryKey() === $obj10->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj10->addAtayudas($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj6 = $temp_obj1->getAtrubros(); 					if ($temp_obj6->getPrimaryKey() === $obj6->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj6->addAtayudas($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj10->initAtayudass();
-				$obj10->addAtayudas($obj1);
-			}
+				if ($newObject) {
+					$obj6->initAtayudass();
+					$obj6->addAtayudas($obj1);
+				}
+	
+				$omClass = AtestayuPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj7  = new $cls();
+				$obj7->hydrate($rs, $startcol7);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj7 = $temp_obj1->getAtestayu(); 					if ($temp_obj7->getPrimaryKey() === $obj7->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj7->addAtayudas($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj7->initAtayudass();
+					$obj7->addAtayudas($obj1);
+				}
+	
+				$omClass = AttrasocPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj8  = new $cls();
+				$obj8->hydrate($rs, $startcol8);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj8 = $temp_obj1->getAttrasoc(); 					if ($temp_obj8->getPrimaryKey() === $obj8->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj8->addAtayudas($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj8->initAtayudass();
+					$obj8->addAtayudas($obj1);
+				}
+	
+				$omClass = AtproveePeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj9  = new $cls();
+				$obj9->hydrate($rs, $startcol9);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj9 = $temp_obj1->getAtprovee(); 					if ($temp_obj9->getPrimaryKey() === $obj9->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj9->addAtayudas($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj9->initAtayudass();
+					$obj9->addAtayudas($obj1);
+				}
+	
+				$omClass = AtmedicoPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj10  = new $cls();
+				$obj10->hydrate($rs, $startcol10);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj10 = $temp_obj1->getAtmedico(); 					if ($temp_obj10->getPrimaryKey() === $obj10->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj10->addAtayudas($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj10->initAtayudass();
+					$obj10->addAtayudas($obj1);
+				}
+	
+				$omClass = AtunidadesPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj11  = new $cls();
+				$obj11->hydrate($rs, $startcol11);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj11 = $temp_obj1->getAtunidades(); 					if ($temp_obj11->getPrimaryKey() === $obj11->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj11->addAtayudas($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj11->initAtayudass();
+					$obj11->addAtayudas($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;
@@ -2175,51 +2378,56 @@ abstract class BaseAtayudasPeer {
 		AtayudasPeer::addSelectColumns($c);
 		$startcol2 = (AtayudasPeer::NUM_COLUMNS - AtayudasPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		CaordcomPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + CaordcomPeer::NUM_COLUMNS;
-
-		AtciudadanoPeer::addSelectColumns($c);
-		$startcol4 = $startcol3 + AtciudadanoPeer::NUM_COLUMNS;
-
-		AtciudadanoPeer::addSelectColumns($c);
-		$startcol5 = $startcol4 + AtciudadanoPeer::NUM_COLUMNS;
-
-		AttipayuPeer::addSelectColumns($c);
-		$startcol6 = $startcol5 + AttipayuPeer::NUM_COLUMNS;
-
-		AtrubrosPeer::addSelectColumns($c);
-		$startcol7 = $startcol6 + AtrubrosPeer::NUM_COLUMNS;
-
-		AtestayuPeer::addSelectColumns($c);
-		$startcol8 = $startcol7 + AtestayuPeer::NUM_COLUMNS;
-
-		AttrasocPeer::addSelectColumns($c);
-		$startcol9 = $startcol8 + AttrasocPeer::NUM_COLUMNS;
-
-		AtproveePeer::addSelectColumns($c);
-		$startcol10 = $startcol9 + AtproveePeer::NUM_COLUMNS;
-
-		AtmedicoPeer::addSelectColumns($c);
-		$startcol11 = $startcol10 + AtmedicoPeer::NUM_COLUMNS;
-
-		$c->addJoin(AtayudasPeer::REFDOC, CaordcomPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATSOLICI, AtciudadanoPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATBENEFI, AtciudadanoPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATTIPAYU_ID, AttipayuPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATRUBROS_ID, AtrubrosPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATESTAYU_ID, AtestayuPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATTRASOC_ID, AttrasocPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATPROVEE_ID, AtproveePeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATMEDICO_ID, AtmedicoPeer::ID);
-
+			CaordcomPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + CaordcomPeer::NUM_COLUMNS;
+	
+			AtciudadanoPeer::addSelectColumns($c);
+			$startcol4 = $startcol3 + AtciudadanoPeer::NUM_COLUMNS;
+	
+			AtciudadanoPeer::addSelectColumns($c);
+			$startcol5 = $startcol4 + AtciudadanoPeer::NUM_COLUMNS;
+	
+			AttipayuPeer::addSelectColumns($c);
+			$startcol6 = $startcol5 + AttipayuPeer::NUM_COLUMNS;
+	
+			AtrubrosPeer::addSelectColumns($c);
+			$startcol7 = $startcol6 + AtrubrosPeer::NUM_COLUMNS;
+	
+			AtestayuPeer::addSelectColumns($c);
+			$startcol8 = $startcol7 + AtestayuPeer::NUM_COLUMNS;
+	
+			AttrasocPeer::addSelectColumns($c);
+			$startcol9 = $startcol8 + AttrasocPeer::NUM_COLUMNS;
+	
+			AtproveePeer::addSelectColumns($c);
+			$startcol10 = $startcol9 + AtproveePeer::NUM_COLUMNS;
+	
+			AtmedicoPeer::addSelectColumns($c);
+			$startcol11 = $startcol10 + AtmedicoPeer::NUM_COLUMNS;
+	
+			AtunidadesPeer::addSelectColumns($c);
+			$startcol12 = $startcol11 + AtunidadesPeer::NUM_COLUMNS;
+	
+			$c->addJoin(AtayudasPeer::REFDOC, CaordcomPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATSOLICI, AtciudadanoPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATBENEFI, AtciudadanoPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATTIPAYU_ID, AttipayuPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATRUBROS_ID, AtrubrosPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATESTAYU_ID, AtestayuPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATTRASOC_ID, AttrasocPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATPROVEE_ID, AtproveePeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATMEDICO_ID, AtmedicoPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATUNIDADES_ID, AtunidadesPeer::ID);
+	
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
@@ -2232,204 +2440,226 @@ abstract class BaseAtayudasPeer {
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
 
-			$omClass = CaordcomPeer::getOMClass();
+				$omClass = CaordcomPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2  = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2  = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getCaordcom(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addAtayudas($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getCaordcom(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addAtayudas($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initAtayudass();
-				$obj2->addAtayudas($obj1);
-			}
-
-			$omClass = AtciudadanoPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj3  = new $cls();
-			$obj3->hydrate($rs, $startcol3);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj3 = $temp_obj1->getAtciudadanoRelatedByAtsolici(); 				if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj3->addAtayudasRelatedByAtsolici($obj1);
-					break;
+				if ($newObject) {
+					$obj2->initAtayudass();
+					$obj2->addAtayudas($obj1);
 				}
-			}
+	
+				$omClass = AtciudadanoPeer::getOMClass();
+	
 
-			if ($newObject) {
-				$obj3->initAtayudassRelatedByAtsolici();
-				$obj3->addAtayudasRelatedByAtsolici($obj1);
-			}
+				$cls = Propel::import($omClass);
+				$obj3  = new $cls();
+				$obj3->hydrate($rs, $startcol3);
 
-			$omClass = AtciudadanoPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj4  = new $cls();
-			$obj4->hydrate($rs, $startcol4);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj4 = $temp_obj1->getAtciudadanoRelatedByAtbenefi(); 				if ($temp_obj4->getPrimaryKey() === $obj4->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj4->addAtayudasRelatedByAtbenefi($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj3 = $temp_obj1->getAtciudadanoRelatedByAtsolici(); 					if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj3->addAtayudasRelatedByAtsolici($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj4->initAtayudassRelatedByAtbenefi();
-				$obj4->addAtayudasRelatedByAtbenefi($obj1);
-			}
-
-			$omClass = AttipayuPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj5  = new $cls();
-			$obj5->hydrate($rs, $startcol5);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj5 = $temp_obj1->getAttipayu(); 				if ($temp_obj5->getPrimaryKey() === $obj5->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj5->addAtayudas($obj1);
-					break;
+				if ($newObject) {
+					$obj3->initAtayudassRelatedByAtsolici();
+					$obj3->addAtayudasRelatedByAtsolici($obj1);
 				}
-			}
+	
+				$omClass = AtciudadanoPeer::getOMClass();
+	
 
-			if ($newObject) {
-				$obj5->initAtayudass();
-				$obj5->addAtayudas($obj1);
-			}
+				$cls = Propel::import($omClass);
+				$obj4  = new $cls();
+				$obj4->hydrate($rs, $startcol4);
 
-			$omClass = AtrubrosPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj6  = new $cls();
-			$obj6->hydrate($rs, $startcol6);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj6 = $temp_obj1->getAtrubros(); 				if ($temp_obj6->getPrimaryKey() === $obj6->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj6->addAtayudas($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj4 = $temp_obj1->getAtciudadanoRelatedByAtbenefi(); 					if ($temp_obj4->getPrimaryKey() === $obj4->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj4->addAtayudasRelatedByAtbenefi($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj6->initAtayudass();
-				$obj6->addAtayudas($obj1);
-			}
-
-			$omClass = AtestayuPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj7  = new $cls();
-			$obj7->hydrate($rs, $startcol7);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj7 = $temp_obj1->getAtestayu(); 				if ($temp_obj7->getPrimaryKey() === $obj7->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj7->addAtayudas($obj1);
-					break;
+				if ($newObject) {
+					$obj4->initAtayudassRelatedByAtbenefi();
+					$obj4->addAtayudasRelatedByAtbenefi($obj1);
 				}
-			}
+	
+				$omClass = AttipayuPeer::getOMClass();
+	
 
-			if ($newObject) {
-				$obj7->initAtayudass();
-				$obj7->addAtayudas($obj1);
-			}
+				$cls = Propel::import($omClass);
+				$obj5  = new $cls();
+				$obj5->hydrate($rs, $startcol5);
 
-			$omClass = AttrasocPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj8  = new $cls();
-			$obj8->hydrate($rs, $startcol8);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj8 = $temp_obj1->getAttrasoc(); 				if ($temp_obj8->getPrimaryKey() === $obj8->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj8->addAtayudas($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj5 = $temp_obj1->getAttipayu(); 					if ($temp_obj5->getPrimaryKey() === $obj5->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj5->addAtayudas($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj8->initAtayudass();
-				$obj8->addAtayudas($obj1);
-			}
-
-			$omClass = AtproveePeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj9  = new $cls();
-			$obj9->hydrate($rs, $startcol9);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj9 = $temp_obj1->getAtprovee(); 				if ($temp_obj9->getPrimaryKey() === $obj9->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj9->addAtayudas($obj1);
-					break;
+				if ($newObject) {
+					$obj5->initAtayudass();
+					$obj5->addAtayudas($obj1);
 				}
-			}
+	
+				$omClass = AtrubrosPeer::getOMClass();
+	
 
-			if ($newObject) {
-				$obj9->initAtayudass();
-				$obj9->addAtayudas($obj1);
-			}
+				$cls = Propel::import($omClass);
+				$obj6  = new $cls();
+				$obj6->hydrate($rs, $startcol6);
 
-			$omClass = AtmedicoPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj10  = new $cls();
-			$obj10->hydrate($rs, $startcol10);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj10 = $temp_obj1->getAtmedico(); 				if ($temp_obj10->getPrimaryKey() === $obj10->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj10->addAtayudas($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj6 = $temp_obj1->getAtrubros(); 					if ($temp_obj6->getPrimaryKey() === $obj6->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj6->addAtayudas($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj10->initAtayudass();
-				$obj10->addAtayudas($obj1);
-			}
+				if ($newObject) {
+					$obj6->initAtayudass();
+					$obj6->addAtayudas($obj1);
+				}
+	
+				$omClass = AtestayuPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj7  = new $cls();
+				$obj7->hydrate($rs, $startcol7);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj7 = $temp_obj1->getAtestayu(); 					if ($temp_obj7->getPrimaryKey() === $obj7->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj7->addAtayudas($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj7->initAtayudass();
+					$obj7->addAtayudas($obj1);
+				}
+	
+				$omClass = AttrasocPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj8  = new $cls();
+				$obj8->hydrate($rs, $startcol8);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj8 = $temp_obj1->getAttrasoc(); 					if ($temp_obj8->getPrimaryKey() === $obj8->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj8->addAtayudas($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj8->initAtayudass();
+					$obj8->addAtayudas($obj1);
+				}
+	
+				$omClass = AtproveePeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj9  = new $cls();
+				$obj9->hydrate($rs, $startcol9);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj9 = $temp_obj1->getAtprovee(); 					if ($temp_obj9->getPrimaryKey() === $obj9->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj9->addAtayudas($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj9->initAtayudass();
+					$obj9->addAtayudas($obj1);
+				}
+	
+				$omClass = AtmedicoPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj10  = new $cls();
+				$obj10->hydrate($rs, $startcol10);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj10 = $temp_obj1->getAtmedico(); 					if ($temp_obj10->getPrimaryKey() === $obj10->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj10->addAtayudas($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj10->initAtayudass();
+					$obj10->addAtayudas($obj1);
+				}
+	
+				$omClass = AtunidadesPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj11  = new $cls();
+				$obj11->hydrate($rs, $startcol11);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj11 = $temp_obj1->getAtunidades(); 					if ($temp_obj11->getPrimaryKey() === $obj11->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj11->addAtayudas($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj11->initAtayudass();
+					$obj11->addAtayudas($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;
@@ -2448,46 +2678,51 @@ abstract class BaseAtayudasPeer {
 		AtayudasPeer::addSelectColumns($c);
 		$startcol2 = (AtayudasPeer::NUM_COLUMNS - AtayudasPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		CaordcomPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + CaordcomPeer::NUM_COLUMNS;
-
-		AtpriayuPeer::addSelectColumns($c);
-		$startcol4 = $startcol3 + AtpriayuPeer::NUM_COLUMNS;
-
-		AttipayuPeer::addSelectColumns($c);
-		$startcol5 = $startcol4 + AttipayuPeer::NUM_COLUMNS;
-
-		AtrubrosPeer::addSelectColumns($c);
-		$startcol6 = $startcol5 + AtrubrosPeer::NUM_COLUMNS;
-
-		AtestayuPeer::addSelectColumns($c);
-		$startcol7 = $startcol6 + AtestayuPeer::NUM_COLUMNS;
-
-		AttrasocPeer::addSelectColumns($c);
-		$startcol8 = $startcol7 + AttrasocPeer::NUM_COLUMNS;
-
-		AtproveePeer::addSelectColumns($c);
-		$startcol9 = $startcol8 + AtproveePeer::NUM_COLUMNS;
-
-		AtmedicoPeer::addSelectColumns($c);
-		$startcol10 = $startcol9 + AtmedicoPeer::NUM_COLUMNS;
-
-		$c->addJoin(AtayudasPeer::REFDOC, CaordcomPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATPRIAYU_ID, AtpriayuPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATTIPAYU_ID, AttipayuPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATRUBROS_ID, AtrubrosPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATESTAYU_ID, AtestayuPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATTRASOC_ID, AttrasocPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATPROVEE_ID, AtproveePeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATMEDICO_ID, AtmedicoPeer::ID);
-
+			CaordcomPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + CaordcomPeer::NUM_COLUMNS;
+	
+			AtpriayuPeer::addSelectColumns($c);
+			$startcol4 = $startcol3 + AtpriayuPeer::NUM_COLUMNS;
+	
+			AttipayuPeer::addSelectColumns($c);
+			$startcol5 = $startcol4 + AttipayuPeer::NUM_COLUMNS;
+	
+			AtrubrosPeer::addSelectColumns($c);
+			$startcol6 = $startcol5 + AtrubrosPeer::NUM_COLUMNS;
+	
+			AtestayuPeer::addSelectColumns($c);
+			$startcol7 = $startcol6 + AtestayuPeer::NUM_COLUMNS;
+	
+			AttrasocPeer::addSelectColumns($c);
+			$startcol8 = $startcol7 + AttrasocPeer::NUM_COLUMNS;
+	
+			AtproveePeer::addSelectColumns($c);
+			$startcol9 = $startcol8 + AtproveePeer::NUM_COLUMNS;
+	
+			AtmedicoPeer::addSelectColumns($c);
+			$startcol10 = $startcol9 + AtmedicoPeer::NUM_COLUMNS;
+	
+			AtunidadesPeer::addSelectColumns($c);
+			$startcol11 = $startcol10 + AtunidadesPeer::NUM_COLUMNS;
+	
+			$c->addJoin(AtayudasPeer::REFDOC, CaordcomPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATPRIAYU_ID, AtpriayuPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATTIPAYU_ID, AttipayuPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATRUBROS_ID, AtrubrosPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATESTAYU_ID, AtestayuPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATTRASOC_ID, AttrasocPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATPROVEE_ID, AtproveePeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATMEDICO_ID, AtmedicoPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATUNIDADES_ID, AtunidadesPeer::ID);
+	
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
@@ -2500,182 +2735,204 @@ abstract class BaseAtayudasPeer {
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
 
-			$omClass = CaordcomPeer::getOMClass();
+				$omClass = CaordcomPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2  = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2  = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getCaordcom(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addAtayudas($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getCaordcom(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addAtayudas($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initAtayudass();
-				$obj2->addAtayudas($obj1);
-			}
-
-			$omClass = AtpriayuPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj3  = new $cls();
-			$obj3->hydrate($rs, $startcol3);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj3 = $temp_obj1->getAtpriayu(); 				if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj3->addAtayudas($obj1);
-					break;
+				if ($newObject) {
+					$obj2->initAtayudass();
+					$obj2->addAtayudas($obj1);
 				}
-			}
+	
+				$omClass = AtpriayuPeer::getOMClass();
+	
 
-			if ($newObject) {
-				$obj3->initAtayudass();
-				$obj3->addAtayudas($obj1);
-			}
+				$cls = Propel::import($omClass);
+				$obj3  = new $cls();
+				$obj3->hydrate($rs, $startcol3);
 
-			$omClass = AttipayuPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj4  = new $cls();
-			$obj4->hydrate($rs, $startcol4);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj4 = $temp_obj1->getAttipayu(); 				if ($temp_obj4->getPrimaryKey() === $obj4->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj4->addAtayudas($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj3 = $temp_obj1->getAtpriayu(); 					if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj3->addAtayudas($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj4->initAtayudass();
-				$obj4->addAtayudas($obj1);
-			}
-
-			$omClass = AtrubrosPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj5  = new $cls();
-			$obj5->hydrate($rs, $startcol5);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj5 = $temp_obj1->getAtrubros(); 				if ($temp_obj5->getPrimaryKey() === $obj5->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj5->addAtayudas($obj1);
-					break;
+				if ($newObject) {
+					$obj3->initAtayudass();
+					$obj3->addAtayudas($obj1);
 				}
-			}
+	
+				$omClass = AttipayuPeer::getOMClass();
+	
 
-			if ($newObject) {
-				$obj5->initAtayudass();
-				$obj5->addAtayudas($obj1);
-			}
+				$cls = Propel::import($omClass);
+				$obj4  = new $cls();
+				$obj4->hydrate($rs, $startcol4);
 
-			$omClass = AtestayuPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj6  = new $cls();
-			$obj6->hydrate($rs, $startcol6);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj6 = $temp_obj1->getAtestayu(); 				if ($temp_obj6->getPrimaryKey() === $obj6->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj6->addAtayudas($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj4 = $temp_obj1->getAttipayu(); 					if ($temp_obj4->getPrimaryKey() === $obj4->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj4->addAtayudas($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj6->initAtayudass();
-				$obj6->addAtayudas($obj1);
-			}
-
-			$omClass = AttrasocPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj7  = new $cls();
-			$obj7->hydrate($rs, $startcol7);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj7 = $temp_obj1->getAttrasoc(); 				if ($temp_obj7->getPrimaryKey() === $obj7->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj7->addAtayudas($obj1);
-					break;
+				if ($newObject) {
+					$obj4->initAtayudass();
+					$obj4->addAtayudas($obj1);
 				}
-			}
+	
+				$omClass = AtrubrosPeer::getOMClass();
+	
 
-			if ($newObject) {
-				$obj7->initAtayudass();
-				$obj7->addAtayudas($obj1);
-			}
+				$cls = Propel::import($omClass);
+				$obj5  = new $cls();
+				$obj5->hydrate($rs, $startcol5);
 
-			$omClass = AtproveePeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj8  = new $cls();
-			$obj8->hydrate($rs, $startcol8);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj8 = $temp_obj1->getAtprovee(); 				if ($temp_obj8->getPrimaryKey() === $obj8->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj8->addAtayudas($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj5 = $temp_obj1->getAtrubros(); 					if ($temp_obj5->getPrimaryKey() === $obj5->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj5->addAtayudas($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj8->initAtayudass();
-				$obj8->addAtayudas($obj1);
-			}
-
-			$omClass = AtmedicoPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj9  = new $cls();
-			$obj9->hydrate($rs, $startcol9);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj9 = $temp_obj1->getAtmedico(); 				if ($temp_obj9->getPrimaryKey() === $obj9->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj9->addAtayudas($obj1);
-					break;
+				if ($newObject) {
+					$obj5->initAtayudass();
+					$obj5->addAtayudas($obj1);
 				}
-			}
+	
+				$omClass = AtestayuPeer::getOMClass();
+	
 
-			if ($newObject) {
-				$obj9->initAtayudass();
-				$obj9->addAtayudas($obj1);
-			}
+				$cls = Propel::import($omClass);
+				$obj6  = new $cls();
+				$obj6->hydrate($rs, $startcol6);
 
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj6 = $temp_obj1->getAtestayu(); 					if ($temp_obj6->getPrimaryKey() === $obj6->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj6->addAtayudas($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj6->initAtayudass();
+					$obj6->addAtayudas($obj1);
+				}
+	
+				$omClass = AttrasocPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj7  = new $cls();
+				$obj7->hydrate($rs, $startcol7);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj7 = $temp_obj1->getAttrasoc(); 					if ($temp_obj7->getPrimaryKey() === $obj7->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj7->addAtayudas($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj7->initAtayudass();
+					$obj7->addAtayudas($obj1);
+				}
+	
+				$omClass = AtproveePeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj8  = new $cls();
+				$obj8->hydrate($rs, $startcol8);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj8 = $temp_obj1->getAtprovee(); 					if ($temp_obj8->getPrimaryKey() === $obj8->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj8->addAtayudas($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj8->initAtayudass();
+					$obj8->addAtayudas($obj1);
+				}
+	
+				$omClass = AtmedicoPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj9  = new $cls();
+				$obj9->hydrate($rs, $startcol9);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj9 = $temp_obj1->getAtmedico(); 					if ($temp_obj9->getPrimaryKey() === $obj9->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj9->addAtayudas($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj9->initAtayudass();
+					$obj9->addAtayudas($obj1);
+				}
+	
+				$omClass = AtunidadesPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj10  = new $cls();
+				$obj10->hydrate($rs, $startcol10);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj10 = $temp_obj1->getAtunidades(); 					if ($temp_obj10->getPrimaryKey() === $obj10->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj10->addAtayudas($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj10->initAtayudass();
+					$obj10->addAtayudas($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;
@@ -2694,46 +2951,51 @@ abstract class BaseAtayudasPeer {
 		AtayudasPeer::addSelectColumns($c);
 		$startcol2 = (AtayudasPeer::NUM_COLUMNS - AtayudasPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		CaordcomPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + CaordcomPeer::NUM_COLUMNS;
-
-		AtpriayuPeer::addSelectColumns($c);
-		$startcol4 = $startcol3 + AtpriayuPeer::NUM_COLUMNS;
-
-		AttipayuPeer::addSelectColumns($c);
-		$startcol5 = $startcol4 + AttipayuPeer::NUM_COLUMNS;
-
-		AtrubrosPeer::addSelectColumns($c);
-		$startcol6 = $startcol5 + AtrubrosPeer::NUM_COLUMNS;
-
-		AtestayuPeer::addSelectColumns($c);
-		$startcol7 = $startcol6 + AtestayuPeer::NUM_COLUMNS;
-
-		AttrasocPeer::addSelectColumns($c);
-		$startcol8 = $startcol7 + AttrasocPeer::NUM_COLUMNS;
-
-		AtproveePeer::addSelectColumns($c);
-		$startcol9 = $startcol8 + AtproveePeer::NUM_COLUMNS;
-
-		AtmedicoPeer::addSelectColumns($c);
-		$startcol10 = $startcol9 + AtmedicoPeer::NUM_COLUMNS;
-
-		$c->addJoin(AtayudasPeer::REFDOC, CaordcomPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATPRIAYU_ID, AtpriayuPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATTIPAYU_ID, AttipayuPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATRUBROS_ID, AtrubrosPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATESTAYU_ID, AtestayuPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATTRASOC_ID, AttrasocPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATPROVEE_ID, AtproveePeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATMEDICO_ID, AtmedicoPeer::ID);
-
+			CaordcomPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + CaordcomPeer::NUM_COLUMNS;
+	
+			AtpriayuPeer::addSelectColumns($c);
+			$startcol4 = $startcol3 + AtpriayuPeer::NUM_COLUMNS;
+	
+			AttipayuPeer::addSelectColumns($c);
+			$startcol5 = $startcol4 + AttipayuPeer::NUM_COLUMNS;
+	
+			AtrubrosPeer::addSelectColumns($c);
+			$startcol6 = $startcol5 + AtrubrosPeer::NUM_COLUMNS;
+	
+			AtestayuPeer::addSelectColumns($c);
+			$startcol7 = $startcol6 + AtestayuPeer::NUM_COLUMNS;
+	
+			AttrasocPeer::addSelectColumns($c);
+			$startcol8 = $startcol7 + AttrasocPeer::NUM_COLUMNS;
+	
+			AtproveePeer::addSelectColumns($c);
+			$startcol9 = $startcol8 + AtproveePeer::NUM_COLUMNS;
+	
+			AtmedicoPeer::addSelectColumns($c);
+			$startcol10 = $startcol9 + AtmedicoPeer::NUM_COLUMNS;
+	
+			AtunidadesPeer::addSelectColumns($c);
+			$startcol11 = $startcol10 + AtunidadesPeer::NUM_COLUMNS;
+	
+			$c->addJoin(AtayudasPeer::REFDOC, CaordcomPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATPRIAYU_ID, AtpriayuPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATTIPAYU_ID, AttipayuPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATRUBROS_ID, AtrubrosPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATESTAYU_ID, AtestayuPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATTRASOC_ID, AttrasocPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATPROVEE_ID, AtproveePeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATMEDICO_ID, AtmedicoPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATUNIDADES_ID, AtunidadesPeer::ID);
+	
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
@@ -2746,182 +3008,204 @@ abstract class BaseAtayudasPeer {
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
 
-			$omClass = CaordcomPeer::getOMClass();
+				$omClass = CaordcomPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2  = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2  = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getCaordcom(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addAtayudas($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getCaordcom(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addAtayudas($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initAtayudass();
-				$obj2->addAtayudas($obj1);
-			}
-
-			$omClass = AtpriayuPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj3  = new $cls();
-			$obj3->hydrate($rs, $startcol3);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj3 = $temp_obj1->getAtpriayu(); 				if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj3->addAtayudas($obj1);
-					break;
+				if ($newObject) {
+					$obj2->initAtayudass();
+					$obj2->addAtayudas($obj1);
 				}
-			}
+	
+				$omClass = AtpriayuPeer::getOMClass();
+	
 
-			if ($newObject) {
-				$obj3->initAtayudass();
-				$obj3->addAtayudas($obj1);
-			}
+				$cls = Propel::import($omClass);
+				$obj3  = new $cls();
+				$obj3->hydrate($rs, $startcol3);
 
-			$omClass = AttipayuPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj4  = new $cls();
-			$obj4->hydrate($rs, $startcol4);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj4 = $temp_obj1->getAttipayu(); 				if ($temp_obj4->getPrimaryKey() === $obj4->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj4->addAtayudas($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj3 = $temp_obj1->getAtpriayu(); 					if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj3->addAtayudas($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj4->initAtayudass();
-				$obj4->addAtayudas($obj1);
-			}
-
-			$omClass = AtrubrosPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj5  = new $cls();
-			$obj5->hydrate($rs, $startcol5);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj5 = $temp_obj1->getAtrubros(); 				if ($temp_obj5->getPrimaryKey() === $obj5->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj5->addAtayudas($obj1);
-					break;
+				if ($newObject) {
+					$obj3->initAtayudass();
+					$obj3->addAtayudas($obj1);
 				}
-			}
+	
+				$omClass = AttipayuPeer::getOMClass();
+	
 
-			if ($newObject) {
-				$obj5->initAtayudass();
-				$obj5->addAtayudas($obj1);
-			}
+				$cls = Propel::import($omClass);
+				$obj4  = new $cls();
+				$obj4->hydrate($rs, $startcol4);
 
-			$omClass = AtestayuPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj6  = new $cls();
-			$obj6->hydrate($rs, $startcol6);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj6 = $temp_obj1->getAtestayu(); 				if ($temp_obj6->getPrimaryKey() === $obj6->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj6->addAtayudas($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj4 = $temp_obj1->getAttipayu(); 					if ($temp_obj4->getPrimaryKey() === $obj4->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj4->addAtayudas($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj6->initAtayudass();
-				$obj6->addAtayudas($obj1);
-			}
-
-			$omClass = AttrasocPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj7  = new $cls();
-			$obj7->hydrate($rs, $startcol7);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj7 = $temp_obj1->getAttrasoc(); 				if ($temp_obj7->getPrimaryKey() === $obj7->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj7->addAtayudas($obj1);
-					break;
+				if ($newObject) {
+					$obj4->initAtayudass();
+					$obj4->addAtayudas($obj1);
 				}
-			}
+	
+				$omClass = AtrubrosPeer::getOMClass();
+	
 
-			if ($newObject) {
-				$obj7->initAtayudass();
-				$obj7->addAtayudas($obj1);
-			}
+				$cls = Propel::import($omClass);
+				$obj5  = new $cls();
+				$obj5->hydrate($rs, $startcol5);
 
-			$omClass = AtproveePeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj8  = new $cls();
-			$obj8->hydrate($rs, $startcol8);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj8 = $temp_obj1->getAtprovee(); 				if ($temp_obj8->getPrimaryKey() === $obj8->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj8->addAtayudas($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj5 = $temp_obj1->getAtrubros(); 					if ($temp_obj5->getPrimaryKey() === $obj5->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj5->addAtayudas($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj8->initAtayudass();
-				$obj8->addAtayudas($obj1);
-			}
-
-			$omClass = AtmedicoPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj9  = new $cls();
-			$obj9->hydrate($rs, $startcol9);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj9 = $temp_obj1->getAtmedico(); 				if ($temp_obj9->getPrimaryKey() === $obj9->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj9->addAtayudas($obj1);
-					break;
+				if ($newObject) {
+					$obj5->initAtayudass();
+					$obj5->addAtayudas($obj1);
 				}
-			}
+	
+				$omClass = AtestayuPeer::getOMClass();
+	
 
-			if ($newObject) {
-				$obj9->initAtayudass();
-				$obj9->addAtayudas($obj1);
-			}
+				$cls = Propel::import($omClass);
+				$obj6  = new $cls();
+				$obj6->hydrate($rs, $startcol6);
 
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj6 = $temp_obj1->getAtestayu(); 					if ($temp_obj6->getPrimaryKey() === $obj6->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj6->addAtayudas($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj6->initAtayudass();
+					$obj6->addAtayudas($obj1);
+				}
+	
+				$omClass = AttrasocPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj7  = new $cls();
+				$obj7->hydrate($rs, $startcol7);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj7 = $temp_obj1->getAttrasoc(); 					if ($temp_obj7->getPrimaryKey() === $obj7->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj7->addAtayudas($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj7->initAtayudass();
+					$obj7->addAtayudas($obj1);
+				}
+	
+				$omClass = AtproveePeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj8  = new $cls();
+				$obj8->hydrate($rs, $startcol8);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj8 = $temp_obj1->getAtprovee(); 					if ($temp_obj8->getPrimaryKey() === $obj8->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj8->addAtayudas($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj8->initAtayudass();
+					$obj8->addAtayudas($obj1);
+				}
+	
+				$omClass = AtmedicoPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj9  = new $cls();
+				$obj9->hydrate($rs, $startcol9);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj9 = $temp_obj1->getAtmedico(); 					if ($temp_obj9->getPrimaryKey() === $obj9->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj9->addAtayudas($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj9->initAtayudass();
+					$obj9->addAtayudas($obj1);
+				}
+	
+				$omClass = AtunidadesPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj10  = new $cls();
+				$obj10->hydrate($rs, $startcol10);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj10 = $temp_obj1->getAtunidades(); 					if ($temp_obj10->getPrimaryKey() === $obj10->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj10->addAtayudas($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj10->initAtayudass();
+					$obj10->addAtayudas($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;
@@ -2940,51 +3224,56 @@ abstract class BaseAtayudasPeer {
 		AtayudasPeer::addSelectColumns($c);
 		$startcol2 = (AtayudasPeer::NUM_COLUMNS - AtayudasPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		CaordcomPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + CaordcomPeer::NUM_COLUMNS;
-
-		AtpriayuPeer::addSelectColumns($c);
-		$startcol4 = $startcol3 + AtpriayuPeer::NUM_COLUMNS;
-
-		AtciudadanoPeer::addSelectColumns($c);
-		$startcol5 = $startcol4 + AtciudadanoPeer::NUM_COLUMNS;
-
-		AtciudadanoPeer::addSelectColumns($c);
-		$startcol6 = $startcol5 + AtciudadanoPeer::NUM_COLUMNS;
-
-		AtrubrosPeer::addSelectColumns($c);
-		$startcol7 = $startcol6 + AtrubrosPeer::NUM_COLUMNS;
-
-		AtestayuPeer::addSelectColumns($c);
-		$startcol8 = $startcol7 + AtestayuPeer::NUM_COLUMNS;
-
-		AttrasocPeer::addSelectColumns($c);
-		$startcol9 = $startcol8 + AttrasocPeer::NUM_COLUMNS;
-
-		AtproveePeer::addSelectColumns($c);
-		$startcol10 = $startcol9 + AtproveePeer::NUM_COLUMNS;
-
-		AtmedicoPeer::addSelectColumns($c);
-		$startcol11 = $startcol10 + AtmedicoPeer::NUM_COLUMNS;
-
-		$c->addJoin(AtayudasPeer::REFDOC, CaordcomPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATPRIAYU_ID, AtpriayuPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATSOLICI, AtciudadanoPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATBENEFI, AtciudadanoPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATRUBROS_ID, AtrubrosPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATESTAYU_ID, AtestayuPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATTRASOC_ID, AttrasocPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATPROVEE_ID, AtproveePeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATMEDICO_ID, AtmedicoPeer::ID);
-
+			CaordcomPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + CaordcomPeer::NUM_COLUMNS;
+	
+			AtpriayuPeer::addSelectColumns($c);
+			$startcol4 = $startcol3 + AtpriayuPeer::NUM_COLUMNS;
+	
+			AtciudadanoPeer::addSelectColumns($c);
+			$startcol5 = $startcol4 + AtciudadanoPeer::NUM_COLUMNS;
+	
+			AtciudadanoPeer::addSelectColumns($c);
+			$startcol6 = $startcol5 + AtciudadanoPeer::NUM_COLUMNS;
+	
+			AtrubrosPeer::addSelectColumns($c);
+			$startcol7 = $startcol6 + AtrubrosPeer::NUM_COLUMNS;
+	
+			AtestayuPeer::addSelectColumns($c);
+			$startcol8 = $startcol7 + AtestayuPeer::NUM_COLUMNS;
+	
+			AttrasocPeer::addSelectColumns($c);
+			$startcol9 = $startcol8 + AttrasocPeer::NUM_COLUMNS;
+	
+			AtproveePeer::addSelectColumns($c);
+			$startcol10 = $startcol9 + AtproveePeer::NUM_COLUMNS;
+	
+			AtmedicoPeer::addSelectColumns($c);
+			$startcol11 = $startcol10 + AtmedicoPeer::NUM_COLUMNS;
+	
+			AtunidadesPeer::addSelectColumns($c);
+			$startcol12 = $startcol11 + AtunidadesPeer::NUM_COLUMNS;
+	
+			$c->addJoin(AtayudasPeer::REFDOC, CaordcomPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATPRIAYU_ID, AtpriayuPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATSOLICI, AtciudadanoPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATBENEFI, AtciudadanoPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATRUBROS_ID, AtrubrosPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATESTAYU_ID, AtestayuPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATTRASOC_ID, AttrasocPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATPROVEE_ID, AtproveePeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATMEDICO_ID, AtmedicoPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATUNIDADES_ID, AtunidadesPeer::ID);
+	
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
@@ -2997,204 +3286,226 @@ abstract class BaseAtayudasPeer {
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
 
-			$omClass = CaordcomPeer::getOMClass();
+				$omClass = CaordcomPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2  = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2  = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getCaordcom(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addAtayudas($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getCaordcom(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addAtayudas($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initAtayudass();
-				$obj2->addAtayudas($obj1);
-			}
-
-			$omClass = AtpriayuPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj3  = new $cls();
-			$obj3->hydrate($rs, $startcol3);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj3 = $temp_obj1->getAtpriayu(); 				if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj3->addAtayudas($obj1);
-					break;
+				if ($newObject) {
+					$obj2->initAtayudass();
+					$obj2->addAtayudas($obj1);
 				}
-			}
+	
+				$omClass = AtpriayuPeer::getOMClass();
+	
 
-			if ($newObject) {
-				$obj3->initAtayudass();
-				$obj3->addAtayudas($obj1);
-			}
+				$cls = Propel::import($omClass);
+				$obj3  = new $cls();
+				$obj3->hydrate($rs, $startcol3);
 
-			$omClass = AtciudadanoPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj4  = new $cls();
-			$obj4->hydrate($rs, $startcol4);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj4 = $temp_obj1->getAtciudadanoRelatedByAtsolici(); 				if ($temp_obj4->getPrimaryKey() === $obj4->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj4->addAtayudasRelatedByAtsolici($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj3 = $temp_obj1->getAtpriayu(); 					if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj3->addAtayudas($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj4->initAtayudassRelatedByAtsolici();
-				$obj4->addAtayudasRelatedByAtsolici($obj1);
-			}
-
-			$omClass = AtciudadanoPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj5  = new $cls();
-			$obj5->hydrate($rs, $startcol5);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj5 = $temp_obj1->getAtciudadanoRelatedByAtbenefi(); 				if ($temp_obj5->getPrimaryKey() === $obj5->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj5->addAtayudasRelatedByAtbenefi($obj1);
-					break;
+				if ($newObject) {
+					$obj3->initAtayudass();
+					$obj3->addAtayudas($obj1);
 				}
-			}
+	
+				$omClass = AtciudadanoPeer::getOMClass();
+	
 
-			if ($newObject) {
-				$obj5->initAtayudassRelatedByAtbenefi();
-				$obj5->addAtayudasRelatedByAtbenefi($obj1);
-			}
+				$cls = Propel::import($omClass);
+				$obj4  = new $cls();
+				$obj4->hydrate($rs, $startcol4);
 
-			$omClass = AtrubrosPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj6  = new $cls();
-			$obj6->hydrate($rs, $startcol6);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj6 = $temp_obj1->getAtrubros(); 				if ($temp_obj6->getPrimaryKey() === $obj6->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj6->addAtayudas($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj4 = $temp_obj1->getAtciudadanoRelatedByAtsolici(); 					if ($temp_obj4->getPrimaryKey() === $obj4->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj4->addAtayudasRelatedByAtsolici($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj6->initAtayudass();
-				$obj6->addAtayudas($obj1);
-			}
-
-			$omClass = AtestayuPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj7  = new $cls();
-			$obj7->hydrate($rs, $startcol7);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj7 = $temp_obj1->getAtestayu(); 				if ($temp_obj7->getPrimaryKey() === $obj7->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj7->addAtayudas($obj1);
-					break;
+				if ($newObject) {
+					$obj4->initAtayudassRelatedByAtsolici();
+					$obj4->addAtayudasRelatedByAtsolici($obj1);
 				}
-			}
+	
+				$omClass = AtciudadanoPeer::getOMClass();
+	
 
-			if ($newObject) {
-				$obj7->initAtayudass();
-				$obj7->addAtayudas($obj1);
-			}
+				$cls = Propel::import($omClass);
+				$obj5  = new $cls();
+				$obj5->hydrate($rs, $startcol5);
 
-			$omClass = AttrasocPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj8  = new $cls();
-			$obj8->hydrate($rs, $startcol8);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj8 = $temp_obj1->getAttrasoc(); 				if ($temp_obj8->getPrimaryKey() === $obj8->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj8->addAtayudas($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj5 = $temp_obj1->getAtciudadanoRelatedByAtbenefi(); 					if ($temp_obj5->getPrimaryKey() === $obj5->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj5->addAtayudasRelatedByAtbenefi($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj8->initAtayudass();
-				$obj8->addAtayudas($obj1);
-			}
-
-			$omClass = AtproveePeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj9  = new $cls();
-			$obj9->hydrate($rs, $startcol9);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj9 = $temp_obj1->getAtprovee(); 				if ($temp_obj9->getPrimaryKey() === $obj9->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj9->addAtayudas($obj1);
-					break;
+				if ($newObject) {
+					$obj5->initAtayudassRelatedByAtbenefi();
+					$obj5->addAtayudasRelatedByAtbenefi($obj1);
 				}
-			}
+	
+				$omClass = AtrubrosPeer::getOMClass();
+	
 
-			if ($newObject) {
-				$obj9->initAtayudass();
-				$obj9->addAtayudas($obj1);
-			}
+				$cls = Propel::import($omClass);
+				$obj6  = new $cls();
+				$obj6->hydrate($rs, $startcol6);
 
-			$omClass = AtmedicoPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj10  = new $cls();
-			$obj10->hydrate($rs, $startcol10);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj10 = $temp_obj1->getAtmedico(); 				if ($temp_obj10->getPrimaryKey() === $obj10->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj10->addAtayudas($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj6 = $temp_obj1->getAtrubros(); 					if ($temp_obj6->getPrimaryKey() === $obj6->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj6->addAtayudas($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj10->initAtayudass();
-				$obj10->addAtayudas($obj1);
-			}
+				if ($newObject) {
+					$obj6->initAtayudass();
+					$obj6->addAtayudas($obj1);
+				}
+	
+				$omClass = AtestayuPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj7  = new $cls();
+				$obj7->hydrate($rs, $startcol7);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj7 = $temp_obj1->getAtestayu(); 					if ($temp_obj7->getPrimaryKey() === $obj7->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj7->addAtayudas($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj7->initAtayudass();
+					$obj7->addAtayudas($obj1);
+				}
+	
+				$omClass = AttrasocPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj8  = new $cls();
+				$obj8->hydrate($rs, $startcol8);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj8 = $temp_obj1->getAttrasoc(); 					if ($temp_obj8->getPrimaryKey() === $obj8->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj8->addAtayudas($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj8->initAtayudass();
+					$obj8->addAtayudas($obj1);
+				}
+	
+				$omClass = AtproveePeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj9  = new $cls();
+				$obj9->hydrate($rs, $startcol9);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj9 = $temp_obj1->getAtprovee(); 					if ($temp_obj9->getPrimaryKey() === $obj9->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj9->addAtayudas($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj9->initAtayudass();
+					$obj9->addAtayudas($obj1);
+				}
+	
+				$omClass = AtmedicoPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj10  = new $cls();
+				$obj10->hydrate($rs, $startcol10);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj10 = $temp_obj1->getAtmedico(); 					if ($temp_obj10->getPrimaryKey() === $obj10->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj10->addAtayudas($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj10->initAtayudass();
+					$obj10->addAtayudas($obj1);
+				}
+	
+				$omClass = AtunidadesPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj11  = new $cls();
+				$obj11->hydrate($rs, $startcol11);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj11 = $temp_obj1->getAtunidades(); 					if ($temp_obj11->getPrimaryKey() === $obj11->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj11->addAtayudas($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj11->initAtayudass();
+					$obj11->addAtayudas($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;
@@ -3213,51 +3524,56 @@ abstract class BaseAtayudasPeer {
 		AtayudasPeer::addSelectColumns($c);
 		$startcol2 = (AtayudasPeer::NUM_COLUMNS - AtayudasPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		CaordcomPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + CaordcomPeer::NUM_COLUMNS;
-
-		AtpriayuPeer::addSelectColumns($c);
-		$startcol4 = $startcol3 + AtpriayuPeer::NUM_COLUMNS;
-
-		AtciudadanoPeer::addSelectColumns($c);
-		$startcol5 = $startcol4 + AtciudadanoPeer::NUM_COLUMNS;
-
-		AtciudadanoPeer::addSelectColumns($c);
-		$startcol6 = $startcol5 + AtciudadanoPeer::NUM_COLUMNS;
-
-		AttipayuPeer::addSelectColumns($c);
-		$startcol7 = $startcol6 + AttipayuPeer::NUM_COLUMNS;
-
-		AtestayuPeer::addSelectColumns($c);
-		$startcol8 = $startcol7 + AtestayuPeer::NUM_COLUMNS;
-
-		AttrasocPeer::addSelectColumns($c);
-		$startcol9 = $startcol8 + AttrasocPeer::NUM_COLUMNS;
-
-		AtproveePeer::addSelectColumns($c);
-		$startcol10 = $startcol9 + AtproveePeer::NUM_COLUMNS;
-
-		AtmedicoPeer::addSelectColumns($c);
-		$startcol11 = $startcol10 + AtmedicoPeer::NUM_COLUMNS;
-
-		$c->addJoin(AtayudasPeer::REFDOC, CaordcomPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATPRIAYU_ID, AtpriayuPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATSOLICI, AtciudadanoPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATBENEFI, AtciudadanoPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATTIPAYU_ID, AttipayuPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATESTAYU_ID, AtestayuPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATTRASOC_ID, AttrasocPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATPROVEE_ID, AtproveePeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATMEDICO_ID, AtmedicoPeer::ID);
-
+			CaordcomPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + CaordcomPeer::NUM_COLUMNS;
+	
+			AtpriayuPeer::addSelectColumns($c);
+			$startcol4 = $startcol3 + AtpriayuPeer::NUM_COLUMNS;
+	
+			AtciudadanoPeer::addSelectColumns($c);
+			$startcol5 = $startcol4 + AtciudadanoPeer::NUM_COLUMNS;
+	
+			AtciudadanoPeer::addSelectColumns($c);
+			$startcol6 = $startcol5 + AtciudadanoPeer::NUM_COLUMNS;
+	
+			AttipayuPeer::addSelectColumns($c);
+			$startcol7 = $startcol6 + AttipayuPeer::NUM_COLUMNS;
+	
+			AtestayuPeer::addSelectColumns($c);
+			$startcol8 = $startcol7 + AtestayuPeer::NUM_COLUMNS;
+	
+			AttrasocPeer::addSelectColumns($c);
+			$startcol9 = $startcol8 + AttrasocPeer::NUM_COLUMNS;
+	
+			AtproveePeer::addSelectColumns($c);
+			$startcol10 = $startcol9 + AtproveePeer::NUM_COLUMNS;
+	
+			AtmedicoPeer::addSelectColumns($c);
+			$startcol11 = $startcol10 + AtmedicoPeer::NUM_COLUMNS;
+	
+			AtunidadesPeer::addSelectColumns($c);
+			$startcol12 = $startcol11 + AtunidadesPeer::NUM_COLUMNS;
+	
+			$c->addJoin(AtayudasPeer::REFDOC, CaordcomPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATPRIAYU_ID, AtpriayuPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATSOLICI, AtciudadanoPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATBENEFI, AtciudadanoPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATTIPAYU_ID, AttipayuPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATESTAYU_ID, AtestayuPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATTRASOC_ID, AttrasocPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATPROVEE_ID, AtproveePeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATMEDICO_ID, AtmedicoPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATUNIDADES_ID, AtunidadesPeer::ID);
+	
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
@@ -3270,204 +3586,226 @@ abstract class BaseAtayudasPeer {
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
 
-			$omClass = CaordcomPeer::getOMClass();
+				$omClass = CaordcomPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2  = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2  = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getCaordcom(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addAtayudas($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getCaordcom(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addAtayudas($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initAtayudass();
-				$obj2->addAtayudas($obj1);
-			}
-
-			$omClass = AtpriayuPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj3  = new $cls();
-			$obj3->hydrate($rs, $startcol3);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj3 = $temp_obj1->getAtpriayu(); 				if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj3->addAtayudas($obj1);
-					break;
+				if ($newObject) {
+					$obj2->initAtayudass();
+					$obj2->addAtayudas($obj1);
 				}
-			}
+	
+				$omClass = AtpriayuPeer::getOMClass();
+	
 
-			if ($newObject) {
-				$obj3->initAtayudass();
-				$obj3->addAtayudas($obj1);
-			}
+				$cls = Propel::import($omClass);
+				$obj3  = new $cls();
+				$obj3->hydrate($rs, $startcol3);
 
-			$omClass = AtciudadanoPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj4  = new $cls();
-			$obj4->hydrate($rs, $startcol4);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj4 = $temp_obj1->getAtciudadanoRelatedByAtsolici(); 				if ($temp_obj4->getPrimaryKey() === $obj4->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj4->addAtayudasRelatedByAtsolici($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj3 = $temp_obj1->getAtpriayu(); 					if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj3->addAtayudas($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj4->initAtayudassRelatedByAtsolici();
-				$obj4->addAtayudasRelatedByAtsolici($obj1);
-			}
-
-			$omClass = AtciudadanoPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj5  = new $cls();
-			$obj5->hydrate($rs, $startcol5);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj5 = $temp_obj1->getAtciudadanoRelatedByAtbenefi(); 				if ($temp_obj5->getPrimaryKey() === $obj5->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj5->addAtayudasRelatedByAtbenefi($obj1);
-					break;
+				if ($newObject) {
+					$obj3->initAtayudass();
+					$obj3->addAtayudas($obj1);
 				}
-			}
+	
+				$omClass = AtciudadanoPeer::getOMClass();
+	
 
-			if ($newObject) {
-				$obj5->initAtayudassRelatedByAtbenefi();
-				$obj5->addAtayudasRelatedByAtbenefi($obj1);
-			}
+				$cls = Propel::import($omClass);
+				$obj4  = new $cls();
+				$obj4->hydrate($rs, $startcol4);
 
-			$omClass = AttipayuPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj6  = new $cls();
-			$obj6->hydrate($rs, $startcol6);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj6 = $temp_obj1->getAttipayu(); 				if ($temp_obj6->getPrimaryKey() === $obj6->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj6->addAtayudas($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj4 = $temp_obj1->getAtciudadanoRelatedByAtsolici(); 					if ($temp_obj4->getPrimaryKey() === $obj4->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj4->addAtayudasRelatedByAtsolici($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj6->initAtayudass();
-				$obj6->addAtayudas($obj1);
-			}
-
-			$omClass = AtestayuPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj7  = new $cls();
-			$obj7->hydrate($rs, $startcol7);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj7 = $temp_obj1->getAtestayu(); 				if ($temp_obj7->getPrimaryKey() === $obj7->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj7->addAtayudas($obj1);
-					break;
+				if ($newObject) {
+					$obj4->initAtayudassRelatedByAtsolici();
+					$obj4->addAtayudasRelatedByAtsolici($obj1);
 				}
-			}
+	
+				$omClass = AtciudadanoPeer::getOMClass();
+	
 
-			if ($newObject) {
-				$obj7->initAtayudass();
-				$obj7->addAtayudas($obj1);
-			}
+				$cls = Propel::import($omClass);
+				$obj5  = new $cls();
+				$obj5->hydrate($rs, $startcol5);
 
-			$omClass = AttrasocPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj8  = new $cls();
-			$obj8->hydrate($rs, $startcol8);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj8 = $temp_obj1->getAttrasoc(); 				if ($temp_obj8->getPrimaryKey() === $obj8->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj8->addAtayudas($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj5 = $temp_obj1->getAtciudadanoRelatedByAtbenefi(); 					if ($temp_obj5->getPrimaryKey() === $obj5->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj5->addAtayudasRelatedByAtbenefi($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj8->initAtayudass();
-				$obj8->addAtayudas($obj1);
-			}
-
-			$omClass = AtproveePeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj9  = new $cls();
-			$obj9->hydrate($rs, $startcol9);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj9 = $temp_obj1->getAtprovee(); 				if ($temp_obj9->getPrimaryKey() === $obj9->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj9->addAtayudas($obj1);
-					break;
+				if ($newObject) {
+					$obj5->initAtayudassRelatedByAtbenefi();
+					$obj5->addAtayudasRelatedByAtbenefi($obj1);
 				}
-			}
+	
+				$omClass = AttipayuPeer::getOMClass();
+	
 
-			if ($newObject) {
-				$obj9->initAtayudass();
-				$obj9->addAtayudas($obj1);
-			}
+				$cls = Propel::import($omClass);
+				$obj6  = new $cls();
+				$obj6->hydrate($rs, $startcol6);
 
-			$omClass = AtmedicoPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj10  = new $cls();
-			$obj10->hydrate($rs, $startcol10);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj10 = $temp_obj1->getAtmedico(); 				if ($temp_obj10->getPrimaryKey() === $obj10->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj10->addAtayudas($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj6 = $temp_obj1->getAttipayu(); 					if ($temp_obj6->getPrimaryKey() === $obj6->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj6->addAtayudas($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj10->initAtayudass();
-				$obj10->addAtayudas($obj1);
-			}
+				if ($newObject) {
+					$obj6->initAtayudass();
+					$obj6->addAtayudas($obj1);
+				}
+	
+				$omClass = AtestayuPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj7  = new $cls();
+				$obj7->hydrate($rs, $startcol7);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj7 = $temp_obj1->getAtestayu(); 					if ($temp_obj7->getPrimaryKey() === $obj7->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj7->addAtayudas($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj7->initAtayudass();
+					$obj7->addAtayudas($obj1);
+				}
+	
+				$omClass = AttrasocPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj8  = new $cls();
+				$obj8->hydrate($rs, $startcol8);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj8 = $temp_obj1->getAttrasoc(); 					if ($temp_obj8->getPrimaryKey() === $obj8->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj8->addAtayudas($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj8->initAtayudass();
+					$obj8->addAtayudas($obj1);
+				}
+	
+				$omClass = AtproveePeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj9  = new $cls();
+				$obj9->hydrate($rs, $startcol9);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj9 = $temp_obj1->getAtprovee(); 					if ($temp_obj9->getPrimaryKey() === $obj9->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj9->addAtayudas($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj9->initAtayudass();
+					$obj9->addAtayudas($obj1);
+				}
+	
+				$omClass = AtmedicoPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj10  = new $cls();
+				$obj10->hydrate($rs, $startcol10);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj10 = $temp_obj1->getAtmedico(); 					if ($temp_obj10->getPrimaryKey() === $obj10->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj10->addAtayudas($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj10->initAtayudass();
+					$obj10->addAtayudas($obj1);
+				}
+	
+				$omClass = AtunidadesPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj11  = new $cls();
+				$obj11->hydrate($rs, $startcol11);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj11 = $temp_obj1->getAtunidades(); 					if ($temp_obj11->getPrimaryKey() === $obj11->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj11->addAtayudas($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj11->initAtayudass();
+					$obj11->addAtayudas($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;
@@ -3486,51 +3824,56 @@ abstract class BaseAtayudasPeer {
 		AtayudasPeer::addSelectColumns($c);
 		$startcol2 = (AtayudasPeer::NUM_COLUMNS - AtayudasPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		CaordcomPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + CaordcomPeer::NUM_COLUMNS;
-
-		AtpriayuPeer::addSelectColumns($c);
-		$startcol4 = $startcol3 + AtpriayuPeer::NUM_COLUMNS;
-
-		AtciudadanoPeer::addSelectColumns($c);
-		$startcol5 = $startcol4 + AtciudadanoPeer::NUM_COLUMNS;
-
-		AtciudadanoPeer::addSelectColumns($c);
-		$startcol6 = $startcol5 + AtciudadanoPeer::NUM_COLUMNS;
-
-		AttipayuPeer::addSelectColumns($c);
-		$startcol7 = $startcol6 + AttipayuPeer::NUM_COLUMNS;
-
-		AtrubrosPeer::addSelectColumns($c);
-		$startcol8 = $startcol7 + AtrubrosPeer::NUM_COLUMNS;
-
-		AttrasocPeer::addSelectColumns($c);
-		$startcol9 = $startcol8 + AttrasocPeer::NUM_COLUMNS;
-
-		AtproveePeer::addSelectColumns($c);
-		$startcol10 = $startcol9 + AtproveePeer::NUM_COLUMNS;
-
-		AtmedicoPeer::addSelectColumns($c);
-		$startcol11 = $startcol10 + AtmedicoPeer::NUM_COLUMNS;
-
-		$c->addJoin(AtayudasPeer::REFDOC, CaordcomPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATPRIAYU_ID, AtpriayuPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATSOLICI, AtciudadanoPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATBENEFI, AtciudadanoPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATTIPAYU_ID, AttipayuPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATRUBROS_ID, AtrubrosPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATTRASOC_ID, AttrasocPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATPROVEE_ID, AtproveePeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATMEDICO_ID, AtmedicoPeer::ID);
-
+			CaordcomPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + CaordcomPeer::NUM_COLUMNS;
+	
+			AtpriayuPeer::addSelectColumns($c);
+			$startcol4 = $startcol3 + AtpriayuPeer::NUM_COLUMNS;
+	
+			AtciudadanoPeer::addSelectColumns($c);
+			$startcol5 = $startcol4 + AtciudadanoPeer::NUM_COLUMNS;
+	
+			AtciudadanoPeer::addSelectColumns($c);
+			$startcol6 = $startcol5 + AtciudadanoPeer::NUM_COLUMNS;
+	
+			AttipayuPeer::addSelectColumns($c);
+			$startcol7 = $startcol6 + AttipayuPeer::NUM_COLUMNS;
+	
+			AtrubrosPeer::addSelectColumns($c);
+			$startcol8 = $startcol7 + AtrubrosPeer::NUM_COLUMNS;
+	
+			AttrasocPeer::addSelectColumns($c);
+			$startcol9 = $startcol8 + AttrasocPeer::NUM_COLUMNS;
+	
+			AtproveePeer::addSelectColumns($c);
+			$startcol10 = $startcol9 + AtproveePeer::NUM_COLUMNS;
+	
+			AtmedicoPeer::addSelectColumns($c);
+			$startcol11 = $startcol10 + AtmedicoPeer::NUM_COLUMNS;
+	
+			AtunidadesPeer::addSelectColumns($c);
+			$startcol12 = $startcol11 + AtunidadesPeer::NUM_COLUMNS;
+	
+			$c->addJoin(AtayudasPeer::REFDOC, CaordcomPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATPRIAYU_ID, AtpriayuPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATSOLICI, AtciudadanoPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATBENEFI, AtciudadanoPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATTIPAYU_ID, AttipayuPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATRUBROS_ID, AtrubrosPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATTRASOC_ID, AttrasocPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATPROVEE_ID, AtproveePeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATMEDICO_ID, AtmedicoPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATUNIDADES_ID, AtunidadesPeer::ID);
+	
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
@@ -3543,204 +3886,226 @@ abstract class BaseAtayudasPeer {
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
 
-			$omClass = CaordcomPeer::getOMClass();
+				$omClass = CaordcomPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2  = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2  = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getCaordcom(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addAtayudas($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getCaordcom(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addAtayudas($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initAtayudass();
-				$obj2->addAtayudas($obj1);
-			}
-
-			$omClass = AtpriayuPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj3  = new $cls();
-			$obj3->hydrate($rs, $startcol3);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj3 = $temp_obj1->getAtpriayu(); 				if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj3->addAtayudas($obj1);
-					break;
+				if ($newObject) {
+					$obj2->initAtayudass();
+					$obj2->addAtayudas($obj1);
 				}
-			}
+	
+				$omClass = AtpriayuPeer::getOMClass();
+	
 
-			if ($newObject) {
-				$obj3->initAtayudass();
-				$obj3->addAtayudas($obj1);
-			}
+				$cls = Propel::import($omClass);
+				$obj3  = new $cls();
+				$obj3->hydrate($rs, $startcol3);
 
-			$omClass = AtciudadanoPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj4  = new $cls();
-			$obj4->hydrate($rs, $startcol4);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj4 = $temp_obj1->getAtciudadanoRelatedByAtsolici(); 				if ($temp_obj4->getPrimaryKey() === $obj4->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj4->addAtayudasRelatedByAtsolici($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj3 = $temp_obj1->getAtpriayu(); 					if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj3->addAtayudas($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj4->initAtayudassRelatedByAtsolici();
-				$obj4->addAtayudasRelatedByAtsolici($obj1);
-			}
-
-			$omClass = AtciudadanoPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj5  = new $cls();
-			$obj5->hydrate($rs, $startcol5);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj5 = $temp_obj1->getAtciudadanoRelatedByAtbenefi(); 				if ($temp_obj5->getPrimaryKey() === $obj5->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj5->addAtayudasRelatedByAtbenefi($obj1);
-					break;
+				if ($newObject) {
+					$obj3->initAtayudass();
+					$obj3->addAtayudas($obj1);
 				}
-			}
+	
+				$omClass = AtciudadanoPeer::getOMClass();
+	
 
-			if ($newObject) {
-				$obj5->initAtayudassRelatedByAtbenefi();
-				$obj5->addAtayudasRelatedByAtbenefi($obj1);
-			}
+				$cls = Propel::import($omClass);
+				$obj4  = new $cls();
+				$obj4->hydrate($rs, $startcol4);
 
-			$omClass = AttipayuPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj6  = new $cls();
-			$obj6->hydrate($rs, $startcol6);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj6 = $temp_obj1->getAttipayu(); 				if ($temp_obj6->getPrimaryKey() === $obj6->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj6->addAtayudas($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj4 = $temp_obj1->getAtciudadanoRelatedByAtsolici(); 					if ($temp_obj4->getPrimaryKey() === $obj4->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj4->addAtayudasRelatedByAtsolici($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj6->initAtayudass();
-				$obj6->addAtayudas($obj1);
-			}
-
-			$omClass = AtrubrosPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj7  = new $cls();
-			$obj7->hydrate($rs, $startcol7);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj7 = $temp_obj1->getAtrubros(); 				if ($temp_obj7->getPrimaryKey() === $obj7->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj7->addAtayudas($obj1);
-					break;
+				if ($newObject) {
+					$obj4->initAtayudassRelatedByAtsolici();
+					$obj4->addAtayudasRelatedByAtsolici($obj1);
 				}
-			}
+	
+				$omClass = AtciudadanoPeer::getOMClass();
+	
 
-			if ($newObject) {
-				$obj7->initAtayudass();
-				$obj7->addAtayudas($obj1);
-			}
+				$cls = Propel::import($omClass);
+				$obj5  = new $cls();
+				$obj5->hydrate($rs, $startcol5);
 
-			$omClass = AttrasocPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj8  = new $cls();
-			$obj8->hydrate($rs, $startcol8);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj8 = $temp_obj1->getAttrasoc(); 				if ($temp_obj8->getPrimaryKey() === $obj8->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj8->addAtayudas($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj5 = $temp_obj1->getAtciudadanoRelatedByAtbenefi(); 					if ($temp_obj5->getPrimaryKey() === $obj5->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj5->addAtayudasRelatedByAtbenefi($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj8->initAtayudass();
-				$obj8->addAtayudas($obj1);
-			}
-
-			$omClass = AtproveePeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj9  = new $cls();
-			$obj9->hydrate($rs, $startcol9);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj9 = $temp_obj1->getAtprovee(); 				if ($temp_obj9->getPrimaryKey() === $obj9->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj9->addAtayudas($obj1);
-					break;
+				if ($newObject) {
+					$obj5->initAtayudassRelatedByAtbenefi();
+					$obj5->addAtayudasRelatedByAtbenefi($obj1);
 				}
-			}
+	
+				$omClass = AttipayuPeer::getOMClass();
+	
 
-			if ($newObject) {
-				$obj9->initAtayudass();
-				$obj9->addAtayudas($obj1);
-			}
+				$cls = Propel::import($omClass);
+				$obj6  = new $cls();
+				$obj6->hydrate($rs, $startcol6);
 
-			$omClass = AtmedicoPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj10  = new $cls();
-			$obj10->hydrate($rs, $startcol10);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj10 = $temp_obj1->getAtmedico(); 				if ($temp_obj10->getPrimaryKey() === $obj10->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj10->addAtayudas($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj6 = $temp_obj1->getAttipayu(); 					if ($temp_obj6->getPrimaryKey() === $obj6->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj6->addAtayudas($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj10->initAtayudass();
-				$obj10->addAtayudas($obj1);
-			}
+				if ($newObject) {
+					$obj6->initAtayudass();
+					$obj6->addAtayudas($obj1);
+				}
+	
+				$omClass = AtrubrosPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj7  = new $cls();
+				$obj7->hydrate($rs, $startcol7);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj7 = $temp_obj1->getAtrubros(); 					if ($temp_obj7->getPrimaryKey() === $obj7->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj7->addAtayudas($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj7->initAtayudass();
+					$obj7->addAtayudas($obj1);
+				}
+	
+				$omClass = AttrasocPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj8  = new $cls();
+				$obj8->hydrate($rs, $startcol8);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj8 = $temp_obj1->getAttrasoc(); 					if ($temp_obj8->getPrimaryKey() === $obj8->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj8->addAtayudas($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj8->initAtayudass();
+					$obj8->addAtayudas($obj1);
+				}
+	
+				$omClass = AtproveePeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj9  = new $cls();
+				$obj9->hydrate($rs, $startcol9);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj9 = $temp_obj1->getAtprovee(); 					if ($temp_obj9->getPrimaryKey() === $obj9->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj9->addAtayudas($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj9->initAtayudass();
+					$obj9->addAtayudas($obj1);
+				}
+	
+				$omClass = AtmedicoPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj10  = new $cls();
+				$obj10->hydrate($rs, $startcol10);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj10 = $temp_obj1->getAtmedico(); 					if ($temp_obj10->getPrimaryKey() === $obj10->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj10->addAtayudas($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj10->initAtayudass();
+					$obj10->addAtayudas($obj1);
+				}
+	
+				$omClass = AtunidadesPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj11  = new $cls();
+				$obj11->hydrate($rs, $startcol11);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj11 = $temp_obj1->getAtunidades(); 					if ($temp_obj11->getPrimaryKey() === $obj11->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj11->addAtayudas($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj11->initAtayudass();
+					$obj11->addAtayudas($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;
@@ -3759,51 +4124,56 @@ abstract class BaseAtayudasPeer {
 		AtayudasPeer::addSelectColumns($c);
 		$startcol2 = (AtayudasPeer::NUM_COLUMNS - AtayudasPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		CaordcomPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + CaordcomPeer::NUM_COLUMNS;
-
-		AtpriayuPeer::addSelectColumns($c);
-		$startcol4 = $startcol3 + AtpriayuPeer::NUM_COLUMNS;
-
-		AtciudadanoPeer::addSelectColumns($c);
-		$startcol5 = $startcol4 + AtciudadanoPeer::NUM_COLUMNS;
-
-		AtciudadanoPeer::addSelectColumns($c);
-		$startcol6 = $startcol5 + AtciudadanoPeer::NUM_COLUMNS;
-
-		AttipayuPeer::addSelectColumns($c);
-		$startcol7 = $startcol6 + AttipayuPeer::NUM_COLUMNS;
-
-		AtrubrosPeer::addSelectColumns($c);
-		$startcol8 = $startcol7 + AtrubrosPeer::NUM_COLUMNS;
-
-		AtestayuPeer::addSelectColumns($c);
-		$startcol9 = $startcol8 + AtestayuPeer::NUM_COLUMNS;
-
-		AtproveePeer::addSelectColumns($c);
-		$startcol10 = $startcol9 + AtproveePeer::NUM_COLUMNS;
-
-		AtmedicoPeer::addSelectColumns($c);
-		$startcol11 = $startcol10 + AtmedicoPeer::NUM_COLUMNS;
-
-		$c->addJoin(AtayudasPeer::REFDOC, CaordcomPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATPRIAYU_ID, AtpriayuPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATSOLICI, AtciudadanoPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATBENEFI, AtciudadanoPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATTIPAYU_ID, AttipayuPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATRUBROS_ID, AtrubrosPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATESTAYU_ID, AtestayuPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATPROVEE_ID, AtproveePeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATMEDICO_ID, AtmedicoPeer::ID);
-
+			CaordcomPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + CaordcomPeer::NUM_COLUMNS;
+	
+			AtpriayuPeer::addSelectColumns($c);
+			$startcol4 = $startcol3 + AtpriayuPeer::NUM_COLUMNS;
+	
+			AtciudadanoPeer::addSelectColumns($c);
+			$startcol5 = $startcol4 + AtciudadanoPeer::NUM_COLUMNS;
+	
+			AtciudadanoPeer::addSelectColumns($c);
+			$startcol6 = $startcol5 + AtciudadanoPeer::NUM_COLUMNS;
+	
+			AttipayuPeer::addSelectColumns($c);
+			$startcol7 = $startcol6 + AttipayuPeer::NUM_COLUMNS;
+	
+			AtrubrosPeer::addSelectColumns($c);
+			$startcol8 = $startcol7 + AtrubrosPeer::NUM_COLUMNS;
+	
+			AtestayuPeer::addSelectColumns($c);
+			$startcol9 = $startcol8 + AtestayuPeer::NUM_COLUMNS;
+	
+			AtproveePeer::addSelectColumns($c);
+			$startcol10 = $startcol9 + AtproveePeer::NUM_COLUMNS;
+	
+			AtmedicoPeer::addSelectColumns($c);
+			$startcol11 = $startcol10 + AtmedicoPeer::NUM_COLUMNS;
+	
+			AtunidadesPeer::addSelectColumns($c);
+			$startcol12 = $startcol11 + AtunidadesPeer::NUM_COLUMNS;
+	
+			$c->addJoin(AtayudasPeer::REFDOC, CaordcomPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATPRIAYU_ID, AtpriayuPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATSOLICI, AtciudadanoPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATBENEFI, AtciudadanoPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATTIPAYU_ID, AttipayuPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATRUBROS_ID, AtrubrosPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATESTAYU_ID, AtestayuPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATPROVEE_ID, AtproveePeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATMEDICO_ID, AtmedicoPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATUNIDADES_ID, AtunidadesPeer::ID);
+	
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
@@ -3816,204 +4186,226 @@ abstract class BaseAtayudasPeer {
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
 
-			$omClass = CaordcomPeer::getOMClass();
+				$omClass = CaordcomPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2  = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2  = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getCaordcom(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addAtayudas($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getCaordcom(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addAtayudas($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initAtayudass();
-				$obj2->addAtayudas($obj1);
-			}
-
-			$omClass = AtpriayuPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj3  = new $cls();
-			$obj3->hydrate($rs, $startcol3);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj3 = $temp_obj1->getAtpriayu(); 				if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj3->addAtayudas($obj1);
-					break;
+				if ($newObject) {
+					$obj2->initAtayudass();
+					$obj2->addAtayudas($obj1);
 				}
-			}
+	
+				$omClass = AtpriayuPeer::getOMClass();
+	
 
-			if ($newObject) {
-				$obj3->initAtayudass();
-				$obj3->addAtayudas($obj1);
-			}
+				$cls = Propel::import($omClass);
+				$obj3  = new $cls();
+				$obj3->hydrate($rs, $startcol3);
 
-			$omClass = AtciudadanoPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj4  = new $cls();
-			$obj4->hydrate($rs, $startcol4);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj4 = $temp_obj1->getAtciudadanoRelatedByAtsolici(); 				if ($temp_obj4->getPrimaryKey() === $obj4->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj4->addAtayudasRelatedByAtsolici($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj3 = $temp_obj1->getAtpriayu(); 					if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj3->addAtayudas($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj4->initAtayudassRelatedByAtsolici();
-				$obj4->addAtayudasRelatedByAtsolici($obj1);
-			}
-
-			$omClass = AtciudadanoPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj5  = new $cls();
-			$obj5->hydrate($rs, $startcol5);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj5 = $temp_obj1->getAtciudadanoRelatedByAtbenefi(); 				if ($temp_obj5->getPrimaryKey() === $obj5->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj5->addAtayudasRelatedByAtbenefi($obj1);
-					break;
+				if ($newObject) {
+					$obj3->initAtayudass();
+					$obj3->addAtayudas($obj1);
 				}
-			}
+	
+				$omClass = AtciudadanoPeer::getOMClass();
+	
 
-			if ($newObject) {
-				$obj5->initAtayudassRelatedByAtbenefi();
-				$obj5->addAtayudasRelatedByAtbenefi($obj1);
-			}
+				$cls = Propel::import($omClass);
+				$obj4  = new $cls();
+				$obj4->hydrate($rs, $startcol4);
 
-			$omClass = AttipayuPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj6  = new $cls();
-			$obj6->hydrate($rs, $startcol6);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj6 = $temp_obj1->getAttipayu(); 				if ($temp_obj6->getPrimaryKey() === $obj6->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj6->addAtayudas($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj4 = $temp_obj1->getAtciudadanoRelatedByAtsolici(); 					if ($temp_obj4->getPrimaryKey() === $obj4->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj4->addAtayudasRelatedByAtsolici($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj6->initAtayudass();
-				$obj6->addAtayudas($obj1);
-			}
-
-			$omClass = AtrubrosPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj7  = new $cls();
-			$obj7->hydrate($rs, $startcol7);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj7 = $temp_obj1->getAtrubros(); 				if ($temp_obj7->getPrimaryKey() === $obj7->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj7->addAtayudas($obj1);
-					break;
+				if ($newObject) {
+					$obj4->initAtayudassRelatedByAtsolici();
+					$obj4->addAtayudasRelatedByAtsolici($obj1);
 				}
-			}
+	
+				$omClass = AtciudadanoPeer::getOMClass();
+	
 
-			if ($newObject) {
-				$obj7->initAtayudass();
-				$obj7->addAtayudas($obj1);
-			}
+				$cls = Propel::import($omClass);
+				$obj5  = new $cls();
+				$obj5->hydrate($rs, $startcol5);
 
-			$omClass = AtestayuPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj8  = new $cls();
-			$obj8->hydrate($rs, $startcol8);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj8 = $temp_obj1->getAtestayu(); 				if ($temp_obj8->getPrimaryKey() === $obj8->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj8->addAtayudas($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj5 = $temp_obj1->getAtciudadanoRelatedByAtbenefi(); 					if ($temp_obj5->getPrimaryKey() === $obj5->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj5->addAtayudasRelatedByAtbenefi($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj8->initAtayudass();
-				$obj8->addAtayudas($obj1);
-			}
-
-			$omClass = AtproveePeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj9  = new $cls();
-			$obj9->hydrate($rs, $startcol9);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj9 = $temp_obj1->getAtprovee(); 				if ($temp_obj9->getPrimaryKey() === $obj9->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj9->addAtayudas($obj1);
-					break;
+				if ($newObject) {
+					$obj5->initAtayudassRelatedByAtbenefi();
+					$obj5->addAtayudasRelatedByAtbenefi($obj1);
 				}
-			}
+	
+				$omClass = AttipayuPeer::getOMClass();
+	
 
-			if ($newObject) {
-				$obj9->initAtayudass();
-				$obj9->addAtayudas($obj1);
-			}
+				$cls = Propel::import($omClass);
+				$obj6  = new $cls();
+				$obj6->hydrate($rs, $startcol6);
 
-			$omClass = AtmedicoPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj10  = new $cls();
-			$obj10->hydrate($rs, $startcol10);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj10 = $temp_obj1->getAtmedico(); 				if ($temp_obj10->getPrimaryKey() === $obj10->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj10->addAtayudas($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj6 = $temp_obj1->getAttipayu(); 					if ($temp_obj6->getPrimaryKey() === $obj6->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj6->addAtayudas($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj10->initAtayudass();
-				$obj10->addAtayudas($obj1);
-			}
+				if ($newObject) {
+					$obj6->initAtayudass();
+					$obj6->addAtayudas($obj1);
+				}
+	
+				$omClass = AtrubrosPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj7  = new $cls();
+				$obj7->hydrate($rs, $startcol7);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj7 = $temp_obj1->getAtrubros(); 					if ($temp_obj7->getPrimaryKey() === $obj7->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj7->addAtayudas($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj7->initAtayudass();
+					$obj7->addAtayudas($obj1);
+				}
+	
+				$omClass = AtestayuPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj8  = new $cls();
+				$obj8->hydrate($rs, $startcol8);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj8 = $temp_obj1->getAtestayu(); 					if ($temp_obj8->getPrimaryKey() === $obj8->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj8->addAtayudas($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj8->initAtayudass();
+					$obj8->addAtayudas($obj1);
+				}
+	
+				$omClass = AtproveePeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj9  = new $cls();
+				$obj9->hydrate($rs, $startcol9);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj9 = $temp_obj1->getAtprovee(); 					if ($temp_obj9->getPrimaryKey() === $obj9->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj9->addAtayudas($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj9->initAtayudass();
+					$obj9->addAtayudas($obj1);
+				}
+	
+				$omClass = AtmedicoPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj10  = new $cls();
+				$obj10->hydrate($rs, $startcol10);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj10 = $temp_obj1->getAtmedico(); 					if ($temp_obj10->getPrimaryKey() === $obj10->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj10->addAtayudas($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj10->initAtayudass();
+					$obj10->addAtayudas($obj1);
+				}
+	
+				$omClass = AtunidadesPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj11  = new $cls();
+				$obj11->hydrate($rs, $startcol11);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj11 = $temp_obj1->getAtunidades(); 					if ($temp_obj11->getPrimaryKey() === $obj11->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj11->addAtayudas($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj11->initAtayudass();
+					$obj11->addAtayudas($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;
@@ -4032,51 +4424,56 @@ abstract class BaseAtayudasPeer {
 		AtayudasPeer::addSelectColumns($c);
 		$startcol2 = (AtayudasPeer::NUM_COLUMNS - AtayudasPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		CaordcomPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + CaordcomPeer::NUM_COLUMNS;
-
-		AtpriayuPeer::addSelectColumns($c);
-		$startcol4 = $startcol3 + AtpriayuPeer::NUM_COLUMNS;
-
-		AtciudadanoPeer::addSelectColumns($c);
-		$startcol5 = $startcol4 + AtciudadanoPeer::NUM_COLUMNS;
-
-		AtciudadanoPeer::addSelectColumns($c);
-		$startcol6 = $startcol5 + AtciudadanoPeer::NUM_COLUMNS;
-
-		AttipayuPeer::addSelectColumns($c);
-		$startcol7 = $startcol6 + AttipayuPeer::NUM_COLUMNS;
-
-		AtrubrosPeer::addSelectColumns($c);
-		$startcol8 = $startcol7 + AtrubrosPeer::NUM_COLUMNS;
-
-		AtestayuPeer::addSelectColumns($c);
-		$startcol9 = $startcol8 + AtestayuPeer::NUM_COLUMNS;
-
-		AttrasocPeer::addSelectColumns($c);
-		$startcol10 = $startcol9 + AttrasocPeer::NUM_COLUMNS;
-
-		AtmedicoPeer::addSelectColumns($c);
-		$startcol11 = $startcol10 + AtmedicoPeer::NUM_COLUMNS;
-
-		$c->addJoin(AtayudasPeer::REFDOC, CaordcomPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATPRIAYU_ID, AtpriayuPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATSOLICI, AtciudadanoPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATBENEFI, AtciudadanoPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATTIPAYU_ID, AttipayuPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATRUBROS_ID, AtrubrosPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATESTAYU_ID, AtestayuPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATTRASOC_ID, AttrasocPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATMEDICO_ID, AtmedicoPeer::ID);
-
+			CaordcomPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + CaordcomPeer::NUM_COLUMNS;
+	
+			AtpriayuPeer::addSelectColumns($c);
+			$startcol4 = $startcol3 + AtpriayuPeer::NUM_COLUMNS;
+	
+			AtciudadanoPeer::addSelectColumns($c);
+			$startcol5 = $startcol4 + AtciudadanoPeer::NUM_COLUMNS;
+	
+			AtciudadanoPeer::addSelectColumns($c);
+			$startcol6 = $startcol5 + AtciudadanoPeer::NUM_COLUMNS;
+	
+			AttipayuPeer::addSelectColumns($c);
+			$startcol7 = $startcol6 + AttipayuPeer::NUM_COLUMNS;
+	
+			AtrubrosPeer::addSelectColumns($c);
+			$startcol8 = $startcol7 + AtrubrosPeer::NUM_COLUMNS;
+	
+			AtestayuPeer::addSelectColumns($c);
+			$startcol9 = $startcol8 + AtestayuPeer::NUM_COLUMNS;
+	
+			AttrasocPeer::addSelectColumns($c);
+			$startcol10 = $startcol9 + AttrasocPeer::NUM_COLUMNS;
+	
+			AtmedicoPeer::addSelectColumns($c);
+			$startcol11 = $startcol10 + AtmedicoPeer::NUM_COLUMNS;
+	
+			AtunidadesPeer::addSelectColumns($c);
+			$startcol12 = $startcol11 + AtunidadesPeer::NUM_COLUMNS;
+	
+			$c->addJoin(AtayudasPeer::REFDOC, CaordcomPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATPRIAYU_ID, AtpriayuPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATSOLICI, AtciudadanoPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATBENEFI, AtciudadanoPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATTIPAYU_ID, AttipayuPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATRUBROS_ID, AtrubrosPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATESTAYU_ID, AtestayuPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATTRASOC_ID, AttrasocPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATMEDICO_ID, AtmedicoPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATUNIDADES_ID, AtunidadesPeer::ID);
+	
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
@@ -4089,204 +4486,226 @@ abstract class BaseAtayudasPeer {
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
 
-			$omClass = CaordcomPeer::getOMClass();
+				$omClass = CaordcomPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2  = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2  = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getCaordcom(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addAtayudas($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getCaordcom(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addAtayudas($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initAtayudass();
-				$obj2->addAtayudas($obj1);
-			}
-
-			$omClass = AtpriayuPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj3  = new $cls();
-			$obj3->hydrate($rs, $startcol3);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj3 = $temp_obj1->getAtpriayu(); 				if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj3->addAtayudas($obj1);
-					break;
+				if ($newObject) {
+					$obj2->initAtayudass();
+					$obj2->addAtayudas($obj1);
 				}
-			}
+	
+				$omClass = AtpriayuPeer::getOMClass();
+	
 
-			if ($newObject) {
-				$obj3->initAtayudass();
-				$obj3->addAtayudas($obj1);
-			}
+				$cls = Propel::import($omClass);
+				$obj3  = new $cls();
+				$obj3->hydrate($rs, $startcol3);
 
-			$omClass = AtciudadanoPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj4  = new $cls();
-			$obj4->hydrate($rs, $startcol4);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj4 = $temp_obj1->getAtciudadanoRelatedByAtsolici(); 				if ($temp_obj4->getPrimaryKey() === $obj4->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj4->addAtayudasRelatedByAtsolici($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj3 = $temp_obj1->getAtpriayu(); 					if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj3->addAtayudas($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj4->initAtayudassRelatedByAtsolici();
-				$obj4->addAtayudasRelatedByAtsolici($obj1);
-			}
-
-			$omClass = AtciudadanoPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj5  = new $cls();
-			$obj5->hydrate($rs, $startcol5);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj5 = $temp_obj1->getAtciudadanoRelatedByAtbenefi(); 				if ($temp_obj5->getPrimaryKey() === $obj5->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj5->addAtayudasRelatedByAtbenefi($obj1);
-					break;
+				if ($newObject) {
+					$obj3->initAtayudass();
+					$obj3->addAtayudas($obj1);
 				}
-			}
+	
+				$omClass = AtciudadanoPeer::getOMClass();
+	
 
-			if ($newObject) {
-				$obj5->initAtayudassRelatedByAtbenefi();
-				$obj5->addAtayudasRelatedByAtbenefi($obj1);
-			}
+				$cls = Propel::import($omClass);
+				$obj4  = new $cls();
+				$obj4->hydrate($rs, $startcol4);
 
-			$omClass = AttipayuPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj6  = new $cls();
-			$obj6->hydrate($rs, $startcol6);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj6 = $temp_obj1->getAttipayu(); 				if ($temp_obj6->getPrimaryKey() === $obj6->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj6->addAtayudas($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj4 = $temp_obj1->getAtciudadanoRelatedByAtsolici(); 					if ($temp_obj4->getPrimaryKey() === $obj4->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj4->addAtayudasRelatedByAtsolici($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj6->initAtayudass();
-				$obj6->addAtayudas($obj1);
-			}
-
-			$omClass = AtrubrosPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj7  = new $cls();
-			$obj7->hydrate($rs, $startcol7);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj7 = $temp_obj1->getAtrubros(); 				if ($temp_obj7->getPrimaryKey() === $obj7->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj7->addAtayudas($obj1);
-					break;
+				if ($newObject) {
+					$obj4->initAtayudassRelatedByAtsolici();
+					$obj4->addAtayudasRelatedByAtsolici($obj1);
 				}
-			}
+	
+				$omClass = AtciudadanoPeer::getOMClass();
+	
 
-			if ($newObject) {
-				$obj7->initAtayudass();
-				$obj7->addAtayudas($obj1);
-			}
+				$cls = Propel::import($omClass);
+				$obj5  = new $cls();
+				$obj5->hydrate($rs, $startcol5);
 
-			$omClass = AtestayuPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj8  = new $cls();
-			$obj8->hydrate($rs, $startcol8);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj8 = $temp_obj1->getAtestayu(); 				if ($temp_obj8->getPrimaryKey() === $obj8->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj8->addAtayudas($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj5 = $temp_obj1->getAtciudadanoRelatedByAtbenefi(); 					if ($temp_obj5->getPrimaryKey() === $obj5->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj5->addAtayudasRelatedByAtbenefi($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj8->initAtayudass();
-				$obj8->addAtayudas($obj1);
-			}
-
-			$omClass = AttrasocPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj9  = new $cls();
-			$obj9->hydrate($rs, $startcol9);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj9 = $temp_obj1->getAttrasoc(); 				if ($temp_obj9->getPrimaryKey() === $obj9->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj9->addAtayudas($obj1);
-					break;
+				if ($newObject) {
+					$obj5->initAtayudassRelatedByAtbenefi();
+					$obj5->addAtayudasRelatedByAtbenefi($obj1);
 				}
-			}
+	
+				$omClass = AttipayuPeer::getOMClass();
+	
 
-			if ($newObject) {
-				$obj9->initAtayudass();
-				$obj9->addAtayudas($obj1);
-			}
+				$cls = Propel::import($omClass);
+				$obj6  = new $cls();
+				$obj6->hydrate($rs, $startcol6);
 
-			$omClass = AtmedicoPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj10  = new $cls();
-			$obj10->hydrate($rs, $startcol10);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj10 = $temp_obj1->getAtmedico(); 				if ($temp_obj10->getPrimaryKey() === $obj10->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj10->addAtayudas($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj6 = $temp_obj1->getAttipayu(); 					if ($temp_obj6->getPrimaryKey() === $obj6->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj6->addAtayudas($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj10->initAtayudass();
-				$obj10->addAtayudas($obj1);
-			}
+				if ($newObject) {
+					$obj6->initAtayudass();
+					$obj6->addAtayudas($obj1);
+				}
+	
+				$omClass = AtrubrosPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj7  = new $cls();
+				$obj7->hydrate($rs, $startcol7);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj7 = $temp_obj1->getAtrubros(); 					if ($temp_obj7->getPrimaryKey() === $obj7->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj7->addAtayudas($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj7->initAtayudass();
+					$obj7->addAtayudas($obj1);
+				}
+	
+				$omClass = AtestayuPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj8  = new $cls();
+				$obj8->hydrate($rs, $startcol8);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj8 = $temp_obj1->getAtestayu(); 					if ($temp_obj8->getPrimaryKey() === $obj8->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj8->addAtayudas($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj8->initAtayudass();
+					$obj8->addAtayudas($obj1);
+				}
+	
+				$omClass = AttrasocPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj9  = new $cls();
+				$obj9->hydrate($rs, $startcol9);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj9 = $temp_obj1->getAttrasoc(); 					if ($temp_obj9->getPrimaryKey() === $obj9->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj9->addAtayudas($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj9->initAtayudass();
+					$obj9->addAtayudas($obj1);
+				}
+	
+				$omClass = AtmedicoPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj10  = new $cls();
+				$obj10->hydrate($rs, $startcol10);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj10 = $temp_obj1->getAtmedico(); 					if ($temp_obj10->getPrimaryKey() === $obj10->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj10->addAtayudas($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj10->initAtayudass();
+					$obj10->addAtayudas($obj1);
+				}
+	
+				$omClass = AtunidadesPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj11  = new $cls();
+				$obj11->hydrate($rs, $startcol11);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj11 = $temp_obj1->getAtunidades(); 					if ($temp_obj11->getPrimaryKey() === $obj11->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj11->addAtayudas($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj11->initAtayudass();
+					$obj11->addAtayudas($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;
@@ -4305,51 +4724,56 @@ abstract class BaseAtayudasPeer {
 		AtayudasPeer::addSelectColumns($c);
 		$startcol2 = (AtayudasPeer::NUM_COLUMNS - AtayudasPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		CaordcomPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + CaordcomPeer::NUM_COLUMNS;
-
-		AtpriayuPeer::addSelectColumns($c);
-		$startcol4 = $startcol3 + AtpriayuPeer::NUM_COLUMNS;
-
-		AtciudadanoPeer::addSelectColumns($c);
-		$startcol5 = $startcol4 + AtciudadanoPeer::NUM_COLUMNS;
-
-		AtciudadanoPeer::addSelectColumns($c);
-		$startcol6 = $startcol5 + AtciudadanoPeer::NUM_COLUMNS;
-
-		AttipayuPeer::addSelectColumns($c);
-		$startcol7 = $startcol6 + AttipayuPeer::NUM_COLUMNS;
-
-		AtrubrosPeer::addSelectColumns($c);
-		$startcol8 = $startcol7 + AtrubrosPeer::NUM_COLUMNS;
-
-		AtestayuPeer::addSelectColumns($c);
-		$startcol9 = $startcol8 + AtestayuPeer::NUM_COLUMNS;
-
-		AttrasocPeer::addSelectColumns($c);
-		$startcol10 = $startcol9 + AttrasocPeer::NUM_COLUMNS;
-
-		AtproveePeer::addSelectColumns($c);
-		$startcol11 = $startcol10 + AtproveePeer::NUM_COLUMNS;
-
-		$c->addJoin(AtayudasPeer::REFDOC, CaordcomPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATPRIAYU_ID, AtpriayuPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATSOLICI, AtciudadanoPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATBENEFI, AtciudadanoPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATTIPAYU_ID, AttipayuPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATRUBROS_ID, AtrubrosPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATESTAYU_ID, AtestayuPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATTRASOC_ID, AttrasocPeer::ID);
-
-		$c->addJoin(AtayudasPeer::ATPROVEE_ID, AtproveePeer::ID);
-
+			CaordcomPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + CaordcomPeer::NUM_COLUMNS;
+	
+			AtpriayuPeer::addSelectColumns($c);
+			$startcol4 = $startcol3 + AtpriayuPeer::NUM_COLUMNS;
+	
+			AtciudadanoPeer::addSelectColumns($c);
+			$startcol5 = $startcol4 + AtciudadanoPeer::NUM_COLUMNS;
+	
+			AtciudadanoPeer::addSelectColumns($c);
+			$startcol6 = $startcol5 + AtciudadanoPeer::NUM_COLUMNS;
+	
+			AttipayuPeer::addSelectColumns($c);
+			$startcol7 = $startcol6 + AttipayuPeer::NUM_COLUMNS;
+	
+			AtrubrosPeer::addSelectColumns($c);
+			$startcol8 = $startcol7 + AtrubrosPeer::NUM_COLUMNS;
+	
+			AtestayuPeer::addSelectColumns($c);
+			$startcol9 = $startcol8 + AtestayuPeer::NUM_COLUMNS;
+	
+			AttrasocPeer::addSelectColumns($c);
+			$startcol10 = $startcol9 + AttrasocPeer::NUM_COLUMNS;
+	
+			AtproveePeer::addSelectColumns($c);
+			$startcol11 = $startcol10 + AtproveePeer::NUM_COLUMNS;
+	
+			AtunidadesPeer::addSelectColumns($c);
+			$startcol12 = $startcol11 + AtunidadesPeer::NUM_COLUMNS;
+	
+			$c->addJoin(AtayudasPeer::REFDOC, CaordcomPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATPRIAYU_ID, AtpriayuPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATSOLICI, AtciudadanoPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATBENEFI, AtciudadanoPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATTIPAYU_ID, AttipayuPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATRUBROS_ID, AtrubrosPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATESTAYU_ID, AtestayuPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATTRASOC_ID, AttrasocPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATPROVEE_ID, AtproveePeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATUNIDADES_ID, AtunidadesPeer::ID);
+	
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
@@ -4362,204 +4786,526 @@ abstract class BaseAtayudasPeer {
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
 
-			$omClass = CaordcomPeer::getOMClass();
+				$omClass = CaordcomPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2  = new $cls();
+				$obj2->hydrate($rs, $startcol2);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getCaordcom(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addAtayudas($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj2->initAtayudass();
+					$obj2->addAtayudas($obj1);
+				}
+	
+				$omClass = AtpriayuPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj3  = new $cls();
+				$obj3->hydrate($rs, $startcol3);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj3 = $temp_obj1->getAtpriayu(); 					if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj3->addAtayudas($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj3->initAtayudass();
+					$obj3->addAtayudas($obj1);
+				}
+	
+				$omClass = AtciudadanoPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj4  = new $cls();
+				$obj4->hydrate($rs, $startcol4);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj4 = $temp_obj1->getAtciudadanoRelatedByAtsolici(); 					if ($temp_obj4->getPrimaryKey() === $obj4->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj4->addAtayudasRelatedByAtsolici($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj4->initAtayudassRelatedByAtsolici();
+					$obj4->addAtayudasRelatedByAtsolici($obj1);
+				}
+	
+				$omClass = AtciudadanoPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj5  = new $cls();
+				$obj5->hydrate($rs, $startcol5);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj5 = $temp_obj1->getAtciudadanoRelatedByAtbenefi(); 					if ($temp_obj5->getPrimaryKey() === $obj5->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj5->addAtayudasRelatedByAtbenefi($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj5->initAtayudassRelatedByAtbenefi();
+					$obj5->addAtayudasRelatedByAtbenefi($obj1);
+				}
+	
+				$omClass = AttipayuPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj6  = new $cls();
+				$obj6->hydrate($rs, $startcol6);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj6 = $temp_obj1->getAttipayu(); 					if ($temp_obj6->getPrimaryKey() === $obj6->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj6->addAtayudas($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj6->initAtayudass();
+					$obj6->addAtayudas($obj1);
+				}
+	
+				$omClass = AtrubrosPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj7  = new $cls();
+				$obj7->hydrate($rs, $startcol7);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj7 = $temp_obj1->getAtrubros(); 					if ($temp_obj7->getPrimaryKey() === $obj7->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj7->addAtayudas($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj7->initAtayudass();
+					$obj7->addAtayudas($obj1);
+				}
+	
+				$omClass = AtestayuPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj8  = new $cls();
+				$obj8->hydrate($rs, $startcol8);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj8 = $temp_obj1->getAtestayu(); 					if ($temp_obj8->getPrimaryKey() === $obj8->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj8->addAtayudas($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj8->initAtayudass();
+					$obj8->addAtayudas($obj1);
+				}
+	
+				$omClass = AttrasocPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj9  = new $cls();
+				$obj9->hydrate($rs, $startcol9);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj9 = $temp_obj1->getAttrasoc(); 					if ($temp_obj9->getPrimaryKey() === $obj9->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj9->addAtayudas($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj9->initAtayudass();
+					$obj9->addAtayudas($obj1);
+				}
+	
+				$omClass = AtproveePeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj10  = new $cls();
+				$obj10->hydrate($rs, $startcol10);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj10 = $temp_obj1->getAtprovee(); 					if ($temp_obj10->getPrimaryKey() === $obj10->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj10->addAtayudas($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj10->initAtayudass();
+					$obj10->addAtayudas($obj1);
+				}
+	
+				$omClass = AtunidadesPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj11  = new $cls();
+				$obj11->hydrate($rs, $startcol11);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj11 = $temp_obj1->getAtunidades(); 					if ($temp_obj11->getPrimaryKey() === $obj11->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj11->addAtayudas($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj11->initAtayudass();
+					$obj11->addAtayudas($obj1);
+				}
+	
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doSelectJoinAllExceptAtunidades(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+								if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		AtayudasPeer::addSelectColumns($c);
+		$startcol2 = (AtayudasPeer::NUM_COLUMNS - AtayudasPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+
+			CaordcomPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + CaordcomPeer::NUM_COLUMNS;
+	
+			AtpriayuPeer::addSelectColumns($c);
+			$startcol4 = $startcol3 + AtpriayuPeer::NUM_COLUMNS;
+	
+			AtciudadanoPeer::addSelectColumns($c);
+			$startcol5 = $startcol4 + AtciudadanoPeer::NUM_COLUMNS;
+	
+			AtciudadanoPeer::addSelectColumns($c);
+			$startcol6 = $startcol5 + AtciudadanoPeer::NUM_COLUMNS;
+	
+			AttipayuPeer::addSelectColumns($c);
+			$startcol7 = $startcol6 + AttipayuPeer::NUM_COLUMNS;
+	
+			AtrubrosPeer::addSelectColumns($c);
+			$startcol8 = $startcol7 + AtrubrosPeer::NUM_COLUMNS;
+	
+			AtestayuPeer::addSelectColumns($c);
+			$startcol9 = $startcol8 + AtestayuPeer::NUM_COLUMNS;
+	
+			AttrasocPeer::addSelectColumns($c);
+			$startcol10 = $startcol9 + AttrasocPeer::NUM_COLUMNS;
+	
+			AtproveePeer::addSelectColumns($c);
+			$startcol11 = $startcol10 + AtproveePeer::NUM_COLUMNS;
+	
+			AtmedicoPeer::addSelectColumns($c);
+			$startcol12 = $startcol11 + AtmedicoPeer::NUM_COLUMNS;
+	
+			$c->addJoin(AtayudasPeer::REFDOC, CaordcomPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATPRIAYU_ID, AtpriayuPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATSOLICI, AtciudadanoPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATBENEFI, AtciudadanoPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATTIPAYU_ID, AttipayuPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATRUBROS_ID, AtrubrosPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATESTAYU_ID, AtestayuPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATTRASOC_ID, AttrasocPeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATPROVEE_ID, AtproveePeer::ID);
+	
+			$c->addJoin(AtayudasPeer::ATMEDICO_ID, AtmedicoPeer::ID);
+	
+
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = AtayudasPeer::getOMClass();
 
 			$cls = Propel::import($omClass);
-			$obj2  = new $cls();
-			$obj2->hydrate($rs, $startcol2);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
 
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getCaordcom(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addAtayudas($obj1);
-					break;
+				$omClass = CaordcomPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj2  = new $cls();
+				$obj2->hydrate($rs, $startcol2);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getCaordcom(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addAtayudas($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initAtayudass();
-				$obj2->addAtayudas($obj1);
-			}
-
-			$omClass = AtpriayuPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj3  = new $cls();
-			$obj3->hydrate($rs, $startcol3);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj3 = $temp_obj1->getAtpriayu(); 				if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj3->addAtayudas($obj1);
-					break;
+				if ($newObject) {
+					$obj2->initAtayudass();
+					$obj2->addAtayudas($obj1);
 				}
-			}
+	
+				$omClass = AtpriayuPeer::getOMClass();
+	
 
-			if ($newObject) {
-				$obj3->initAtayudass();
-				$obj3->addAtayudas($obj1);
-			}
+				$cls = Propel::import($omClass);
+				$obj3  = new $cls();
+				$obj3->hydrate($rs, $startcol3);
 
-			$omClass = AtciudadanoPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj4  = new $cls();
-			$obj4->hydrate($rs, $startcol4);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj4 = $temp_obj1->getAtciudadanoRelatedByAtsolici(); 				if ($temp_obj4->getPrimaryKey() === $obj4->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj4->addAtayudasRelatedByAtsolici($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj3 = $temp_obj1->getAtpriayu(); 					if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj3->addAtayudas($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj4->initAtayudassRelatedByAtsolici();
-				$obj4->addAtayudasRelatedByAtsolici($obj1);
-			}
-
-			$omClass = AtciudadanoPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj5  = new $cls();
-			$obj5->hydrate($rs, $startcol5);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj5 = $temp_obj1->getAtciudadanoRelatedByAtbenefi(); 				if ($temp_obj5->getPrimaryKey() === $obj5->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj5->addAtayudasRelatedByAtbenefi($obj1);
-					break;
+				if ($newObject) {
+					$obj3->initAtayudass();
+					$obj3->addAtayudas($obj1);
 				}
-			}
+	
+				$omClass = AtciudadanoPeer::getOMClass();
+	
 
-			if ($newObject) {
-				$obj5->initAtayudassRelatedByAtbenefi();
-				$obj5->addAtayudasRelatedByAtbenefi($obj1);
-			}
+				$cls = Propel::import($omClass);
+				$obj4  = new $cls();
+				$obj4->hydrate($rs, $startcol4);
 
-			$omClass = AttipayuPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj6  = new $cls();
-			$obj6->hydrate($rs, $startcol6);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj6 = $temp_obj1->getAttipayu(); 				if ($temp_obj6->getPrimaryKey() === $obj6->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj6->addAtayudas($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj4 = $temp_obj1->getAtciudadanoRelatedByAtsolici(); 					if ($temp_obj4->getPrimaryKey() === $obj4->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj4->addAtayudasRelatedByAtsolici($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj6->initAtayudass();
-				$obj6->addAtayudas($obj1);
-			}
-
-			$omClass = AtrubrosPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj7  = new $cls();
-			$obj7->hydrate($rs, $startcol7);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj7 = $temp_obj1->getAtrubros(); 				if ($temp_obj7->getPrimaryKey() === $obj7->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj7->addAtayudas($obj1);
-					break;
+				if ($newObject) {
+					$obj4->initAtayudassRelatedByAtsolici();
+					$obj4->addAtayudasRelatedByAtsolici($obj1);
 				}
-			}
+	
+				$omClass = AtciudadanoPeer::getOMClass();
+	
 
-			if ($newObject) {
-				$obj7->initAtayudass();
-				$obj7->addAtayudas($obj1);
-			}
+				$cls = Propel::import($omClass);
+				$obj5  = new $cls();
+				$obj5->hydrate($rs, $startcol5);
 
-			$omClass = AtestayuPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj8  = new $cls();
-			$obj8->hydrate($rs, $startcol8);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj8 = $temp_obj1->getAtestayu(); 				if ($temp_obj8->getPrimaryKey() === $obj8->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj8->addAtayudas($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj5 = $temp_obj1->getAtciudadanoRelatedByAtbenefi(); 					if ($temp_obj5->getPrimaryKey() === $obj5->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj5->addAtayudasRelatedByAtbenefi($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj8->initAtayudass();
-				$obj8->addAtayudas($obj1);
-			}
-
-			$omClass = AttrasocPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj9  = new $cls();
-			$obj9->hydrate($rs, $startcol9);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj9 = $temp_obj1->getAttrasoc(); 				if ($temp_obj9->getPrimaryKey() === $obj9->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj9->addAtayudas($obj1);
-					break;
+				if ($newObject) {
+					$obj5->initAtayudassRelatedByAtbenefi();
+					$obj5->addAtayudasRelatedByAtbenefi($obj1);
 				}
-			}
+	
+				$omClass = AttipayuPeer::getOMClass();
+	
 
-			if ($newObject) {
-				$obj9->initAtayudass();
-				$obj9->addAtayudas($obj1);
-			}
+				$cls = Propel::import($omClass);
+				$obj6  = new $cls();
+				$obj6->hydrate($rs, $startcol6);
 
-			$omClass = AtproveePeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj10  = new $cls();
-			$obj10->hydrate($rs, $startcol10);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj10 = $temp_obj1->getAtprovee(); 				if ($temp_obj10->getPrimaryKey() === $obj10->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj10->addAtayudas($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj6 = $temp_obj1->getAttipayu(); 					if ($temp_obj6->getPrimaryKey() === $obj6->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj6->addAtayudas($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj10->initAtayudass();
-				$obj10->addAtayudas($obj1);
-			}
+				if ($newObject) {
+					$obj6->initAtayudass();
+					$obj6->addAtayudas($obj1);
+				}
+	
+				$omClass = AtrubrosPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj7  = new $cls();
+				$obj7->hydrate($rs, $startcol7);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj7 = $temp_obj1->getAtrubros(); 					if ($temp_obj7->getPrimaryKey() === $obj7->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj7->addAtayudas($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj7->initAtayudass();
+					$obj7->addAtayudas($obj1);
+				}
+	
+				$omClass = AtestayuPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj8  = new $cls();
+				$obj8->hydrate($rs, $startcol8);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj8 = $temp_obj1->getAtestayu(); 					if ($temp_obj8->getPrimaryKey() === $obj8->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj8->addAtayudas($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj8->initAtayudass();
+					$obj8->addAtayudas($obj1);
+				}
+	
+				$omClass = AttrasocPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj9  = new $cls();
+				$obj9->hydrate($rs, $startcol9);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj9 = $temp_obj1->getAttrasoc(); 					if ($temp_obj9->getPrimaryKey() === $obj9->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj9->addAtayudas($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj9->initAtayudass();
+					$obj9->addAtayudas($obj1);
+				}
+	
+				$omClass = AtproveePeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj10  = new $cls();
+				$obj10->hydrate($rs, $startcol10);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj10 = $temp_obj1->getAtprovee(); 					if ($temp_obj10->getPrimaryKey() === $obj10->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj10->addAtayudas($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj10->initAtayudass();
+					$obj10->addAtayudas($obj1);
+				}
+	
+				$omClass = AtmedicoPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj11  = new $cls();
+				$obj11->hydrate($rs, $startcol11);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj11 = $temp_obj1->getAtmedico(); 					if ($temp_obj11->getPrimaryKey() === $obj11->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj11->addAtayudas($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj11->initAtayudass();
+					$obj11->addAtayudas($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;

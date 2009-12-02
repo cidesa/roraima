@@ -234,6 +234,11 @@ abstract class BaseAtdenuncias extends BaseObject  implements Persistent {
 	public function setFechaa($v)
 	{
 
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fechaa] from input: " . var_export($v, true));
@@ -250,6 +255,11 @@ abstract class BaseAtdenuncias extends BaseObject  implements Persistent {
 	
 	public function setFechar($v)
 	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
@@ -692,7 +702,10 @@ abstract class BaseAtdenuncias extends BaseObject  implements Persistent {
 		if ($this->aAtunidades === null && ($this->atunidades_id !== null)) {
 						include_once 'lib/model/ciudadanos/om/BaseAtunidadesPeer.php';
 
-			$this->aAtunidades = AtunidadesPeer::retrieveByPK($this->atunidades_id, $con);
+      $c = new Criteria();
+      $c->add(AtunidadesPeer::ID,$this->atunidades_id);
+      
+			$this->aAtunidades = AtunidadesPeer::doSelectOne($c, $con);
 
 			
 		}

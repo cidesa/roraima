@@ -104,6 +104,8 @@ class AtayudasMapBuilder {
 
 		$tMap->addColumn('FECSOL', 'Fecsol', 'int', CreoleTypes::DATE, false, null);
 
+		$tMap->addForeignKey('ATUNIDADES_ID', 'AtunidadesId', 'int', CreoleTypes::INTEGER, 'atunidades', 'ID', false, null);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

@@ -2,3 +2,5 @@ modules/*/config/security.yml:
   class:    cidesaSecurityConfigHandler
 modules/generales/config/security.yml:
   class:    sfSecurityConfigHandler
+modules/acidetest/config/security.yml:
+  class:    sfSecurityConfigHandler
