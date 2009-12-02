@@ -4,7 +4,7 @@ generator:
     model_class:      Nptipcar
     theme:            default
     fields:
-      codtipcar:    { name: Código, params: maxlength=3,size=5}
+      codtipcar:    { name: Código, params: maxlength=3 size=5}
       destipcar:    { name: Cargo }
 
 
