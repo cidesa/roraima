@@ -5,7 +5,7 @@ generator:
     theme:            default
 
     fields:
-      codcon:    { name: Código, params: maxlength=3,size=4}
+      codcon:    { name: Código, params: maxlength=3 size=4}
       nomcon:    { name: Descripción, params: size=18}
       codpar:    { name: Código Partida, params: size=18}
       nompar: 	 { name: Nombre de la partida}
