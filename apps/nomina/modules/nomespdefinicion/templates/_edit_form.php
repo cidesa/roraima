@@ -110,7 +110,7 @@
 <?php if ($sf_request->hasError('npnomesptipos{fecnomdes}')): ?> <?php echo form_error('npnomesptipos{fecnomdes}', array('class' => 'form-error-msg')) ?>
 <?php endif; ?> <?php $value = object_input_date_tag($npnomesptipos, 'getFecnomdes', array (
   'rich' => true,
-  'readonly' => $npnomesptipos->getId()!='' ? true : false ,
+  //'readonly' => $npnomesptipos->getId()!='' ? true : false ,
   'calendar_button_img' => '/sf/sf_admin/images/date.png',
   'control_name' => 'npnomesptipos[fecnomdes]',
   'date_format' => 'dd/MM/yy',
@@ -119,7 +119,7 @@
 <strong>Hasta</strong>
 &nbsp; <?php $value = object_input_date_tag($npnomesptipos, 'getFecnomhas', array (
 'rich' => true,
-'readonly' => $npnomesptipos->getId()!='' ? true : false ,
+//'readonly' => $npnomesptipos->getId()!='' ? true : false ,
 'calendar_button_img' => '/sf/sf_admin/images/date.png',
 'control_name' => 'npnomesptipos[fecnomhas]',
 'date_format' => 'dd/MM/yy',
@@ -163,8 +163,8 @@
     var id='<?php echo $npnomesptipos->getId()?>';
     if (id!="")
     {
-      $('trigger_npnomesptipos_fecnomdes').hide();
-      $('trigger_npnomesptipos_fecnomhas').hide();
+      //$('trigger_npnomesptipos_fecnomdes').hide();
+      //$('trigger_npnomesptipos_fecnomhas').hide();
     }
 
  function totalregistros(letra,posicion,filas)
