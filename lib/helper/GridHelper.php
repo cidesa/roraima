@@ -6,9 +6,9 @@
  *
  * @package    Roraima
  * @subpackage helper
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
+ * @author     $Author: lhernandez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: GridHelper.php 35247 2009-12-02 23:06:40Z lhernandez $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -764,9 +764,9 @@ function grid_tag($obj,$objelim = array())
  *
  * @package    Roraima
  * @subpackage helper
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
+ * @author     $Author: lhernandez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: GridHelper.php 35247 2009-12-02 23:06:40Z lhernandez $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -807,6 +807,9 @@ function grid_tag_v2($obj,$objelim = array())
   $ajaxgrid   = $obj["ajaxgrid"];
   $ajaxadicionales = $obj["ajaxadicionales"];
 
+  $jsfilas = array();
+  $jsobjs = array();
+
   $modulo = sfContext::getInstance()->getModuleName();
 
   if(sfContext::getInstance()->getRequest()->getMethod() == sfRequest::POST && sfContext::getInstance()->getRequest()->isXmlHttpRequest()==false){
@@ -834,7 +837,7 @@ function grid_tag_v2($obj,$objelim = array())
       background-color: #FFFFFF;
     }
   </style>
-  '.javascript_include_tag('tools', 'dFilter', 'grid');
+  '.javascript_include_tag('tools', 'dFilter', 'grid', 'numberformat');
   /////////////////
   // Inicio Grid //
   /////////////////
@@ -893,7 +896,7 @@ function grid_tag_v2($obj,$objelim = array())
     $i++;
   }
 
-  $tagb =  '</tr></thead>';
+  $tagb =  '</tr></thead><tbody>';
 
    ///////////////////////////////////
   // Generar el Arreglo de Totales para el boton eliminar//
@@ -926,7 +929,7 @@ function grid_tag_v2($obj,$objelim = array())
       $tagf .= '" '.$jseliminar.' ></td>';
     }
 
-
+    $jsfilas[$i] = array();
     $j=0;
     $acumtagw='';
     $ajaxadic = '';
@@ -952,11 +955,11 @@ function grid_tag_v2($obj,$objelim = array())
         $for=$aj[3];
         $blur=" accionAjax('".url_for($for.'/ajax')."','$funcionajax[$j]','$aj[0]','$mos','$com',this.value); ";
       }elseif($ajaxfila[$j]) {
-         $blur=" accionRemotaGrid('".url_for($modulo.'/ajaxfila')."','".$name."','fila','".$i."',new Array(".$ajaxadic.")); ";
+         $blur=" accionRemotaGrid('".url_for($modulo.'/ajaxfila')."','".$name."','fila','".$i."',new Array(".$ajaxadic."),this); ";
       }elseif($ajaxcolumna[$j]) {
-         $blur=" accionRemotaGrid('".url_for($modulo.'/ajaxcolumna')."','".$name."','columna','".$j."',new Array(".$ajaxadic.")); ";
+         $blur=" accionRemotaGrid('".url_for($modulo.'/ajaxcolumna')."','".$name."','columna','".($j+1)."',new Array(".$ajaxadic."),this); ";
       }elseif($ajaxgrid[$j]) {
-         $blur=" accionRemotaGrid('".url_for($modulo.'/ajaxgrid')."','".$name."','columna','0',new Array(".$ajaxadic.")); ";
+         $blur=" accionRemotaGrid('".url_for($modulo.'/ajaxgrid')."','".$name."','grid','0',new Array(".$ajaxadic."),this); ";
       }else $blur="";
 
       //print 'onBlur='.$blur;
@@ -1108,6 +1111,7 @@ function grid_tag_v2($obj,$objelim = array())
              $tagw = '     <td class="grid_fila g_'.$name.'_m '.$name.'c'.$j.'" align="right" height="25">';
              $tagw .= input_tag($name.'x_'.$i.'_'.$jmasuno,$get, 'name="grid'.$name.'['.$i.']['.$j.']" style="border:none" class="grid_txtright" onBlur=" javascript: obj=this; ValidarMontoGridv2(obj); '.$blur.' '.$js[$j].' " '.$taghtml);
              $tagw .= $catobj.$btnobj.$tagId.'</td>';
+             $jsobjs[] = $name.'x_'.$i.'_'.$jmasuno;
              break;
            case 'c':  //Combo
              $tagw = '     <td class="grid_fila g_'.$name.'_c '.$name.'c'.$j.'" >';
@@ -1128,6 +1132,8 @@ function grid_tag_v2($obj,$objelim = array())
        }else {
          $tagw ='<input type="hidden" class="'.$name.'_ids '.$name.'c'.$j.'" name="grid'.$name.'['.$i.']['.$j.']" id="'.$name.'x_'.$i.'_'.$jmasuno.'" '.$js[$j].' value="'.$get.'" >';
        }
+       $jsfilas[$i][] = $name.'x_'.$i.'_'.$jmasuno;
+       if($tagId!='') $jsfilas[$i][] = $name.'x'.$i.'id';
        $catobj = '';
        $btnobj = '';
 
@@ -1183,11 +1189,11 @@ function grid_tag_v2($obj,$objelim = array())
         $for=$aj[3];
         $blur=" accionAjax('".url_for($for.'/ajax')."','$funcionajax[$j]','$aj[0]','$mos','$com',this.value); ";
       }elseif($ajaxfila[$j]) {
-         $blur=" accionRemotaGrid('".url_for($modulo.'/ajaxfila')."','".$name."','fila','".$i.'?'."',new Array(".$ajaxadic.")); ";
+         $blur=" accionRemotaGrid('".url_for($modulo.'/ajaxfila')."','".$name."','fila','".$i.'?'."',new Array(".$ajaxadic."),this); ";
       }elseif($ajaxcolumna[$j]) {
-         $blur=" accionRemotaGrid('".url_for($modulo.'/ajaxcolumna')."','".$name."','columna','".$j."',new Array(".$ajaxadic.")); ";
+         $blur=" accionRemotaGrid('".url_for($modulo.'/ajaxcolumna')."','".$name."','columna','".($j+1)."',new Array(".$ajaxadic."),this); ";
       }elseif($ajaxgrid[$j]) {
-         $blur=" accionRemotaGrid('".url_for($modulo.'/ajaxgrid')."','".$name."','columna','0',new Array(".$ajaxadic.")); ";
+         $blur=" accionRemotaGrid('".url_for($modulo.'/ajaxgrid')."','".$name."','grid','0',new Array(".$ajaxadic."),this); ";
       }else $blur="";
 
       ///////////////
@@ -1288,6 +1294,7 @@ function grid_tag_v2($obj,$objelim = array())
              $tagw = '     <td class="grid_fila g_'.$name.'_m '.$name.'c'.$j.'" align="right" height="25">';
              $tagw .= input_tag($name.'x_'.$i.'?'.'_'.$jmasuno,$default[$j], 'name="grid'.$name.'['.$i.'?'.']['.$j.']" style="border:none" class="grid_txtright" onBlur=" javascript: obj=this; ValidarMontoGridv2(obj); '.$blur.' '.$js[$j].' " '.$taghtml);
              $tagw .= $catobj.$btnobj.$tagId.'</td>';
+             $jsobjs[] = $name.'x_'.$i.'_'.$jmasuno;
              break;
            case 'c':
              $tagw = '     <td class="grid_fila g_'.$name.'_c '.$name.'c'.$j.'" >';
@@ -1308,6 +1315,9 @@ function grid_tag_v2($obj,$objelim = array())
        }else {
          $tagw ='<input type="hidden" class="'.$name.'_ids '.$name.'c'.$j.'" name="grid'.$name.'['.$i.'?'.']['.$j.']" id="'.$name.'x_'.$i.'?'.'_'.$jmasuno.'" '.$js[$j].' value="'.$default[$j].'" >';
        }
+       $jsfilas[$i][] = $name.'x_'.$i.'_'.$jmasuno;
+       if($tagId!='') $jsfilas[$i][] = $name.'x'.$i.'id';
+
        $catobj = '';
        $btnobj = '';
       //}
@@ -1335,7 +1345,7 @@ function grid_tag_v2($obj,$objelim = array())
   else $botonnuevafila = '';
 
 
-  $tag2='                 </table>
+  $tag2='                 </tbody></table>
                    </div>
                </td>
             </tr>
@@ -1380,22 +1390,38 @@ function grid_tag_v2($obj,$objelim = array())
   if(!$aj && !$ac) $acum = 'false';
   else $acum = 'true';
 
+  //////////////////////////////////
+  // Arreglos de Objetos del Grid //
+  //////////////////////////////////
+  $arrayfilas=array();
+  $strarrayfilas=array();
+  foreach($jsfilas as $fila){
+    $arrayfilas[] = "Array("."'".implode("', '",$fila)."'".")";
+  }
+  $strarrayfilas = "Array(".implode(", ",$arrayfilas).")";
+
+  $strarrayobjs = "Array("."'".implode("', '",$jsobjs)."'".")";
+
+
   ///////////////////////////////////////
   // JavaScripts de variables del Grid //
   ///////////////////////////////////////
   $scriptActSal = '
-      <script type="text/javascript">' .
-        'var objs_montos_'.$name.' = null;'.
-        'var objs_filas_'.$name.' = null;'.
-        'var inputs_filas_'.$name.' = null;'.
-        'var inputs_cols_'.$name.' = null;'.
-        'var inputs_grid_'.$name.' = null;'.
-        'var ArrTotales_'.$name.' = new Array('.$campostotales.');'.
-    'var grid_acum_'.$name.'='.$acum.';'.
-        '' .
-        'ActualizarSaldosGrid("'.$name.'",ArrTotales_'.$name.');'.
-        'ActualizarObjetosGrids("'.$name.'");' .
-      '</script>';
+      <script type="text/javascript">
+        var objs_montos_'.$name.' = '.$strarrayobjs.';
+        var objs_filas_'.$name.' = null;
+        var inputs_filas_'.$name.' = '.$strarrayfilas.';
+        var inputs_cols_'.$name.' = null;
+        var inputs_grid_'.$name.' = null;
+        var ArrTotales_'.$name.' = new Array('.$campostotales.');
+        var grid_acum_'.$name.'='.$acum.';
+
+        Event.observe(window, "load",
+          function() {
+            ActualizarSaldosGrid("'.$name.'",ArrTotales_'.$name.');
+          }
+        );
+      </script>';
 
   $tagt=$tagsrc.$tag.$tagciclo1.$tagb.$tagciclo2.$tagciclo3.$tag2.$scriptActSal;
 
