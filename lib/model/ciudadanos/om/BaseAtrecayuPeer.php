@@ -350,10 +350,10 @@ abstract class BaseAtrecayuPeer {
 			$criteria->addSelectColumn($column);
 		}
 
-		$criteria->addJoin(AtrecayuPeer::ATTIPAYU_ID, AttipayuPeer::ID);
-
-		$criteria->addJoin(AtrecayuPeer::ATRECAUD_ID, AtrecaudPeer::ID);
-
+			$criteria->addJoin(AtrecayuPeer::ATTIPAYU_ID, AttipayuPeer::ID);
+	
+			$criteria->addJoin(AtrecayuPeer::ATRECAUD_ID, AtrecaudPeer::ID);
+	
 		$rs = AtrecayuPeer::doSelectRS($criteria, $con);
 		if ($rs->next()) {
 			return $rs->getInt(1);
@@ -375,16 +375,16 @@ abstract class BaseAtrecayuPeer {
 		AtrecayuPeer::addSelectColumns($c);
 		$startcol2 = (AtrecayuPeer::NUM_COLUMNS - AtrecayuPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		AttipayuPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + AttipayuPeer::NUM_COLUMNS;
-
-		AtrecaudPeer::addSelectColumns($c);
-		$startcol4 = $startcol3 + AtrecaudPeer::NUM_COLUMNS;
-
-		$c->addJoin(AtrecayuPeer::ATTIPAYU_ID, AttipayuPeer::ID);
-
-		$c->addJoin(AtrecayuPeer::ATRECAUD_ID, AtrecaudPeer::ID);
-
+			AttipayuPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + AttipayuPeer::NUM_COLUMNS;
+	
+			AtrecaudPeer::addSelectColumns($c);
+			$startcol4 = $startcol3 + AtrecaudPeer::NUM_COLUMNS;
+	
+			$c->addJoin(AtrecayuPeer::ATTIPAYU_ID, AttipayuPeer::ID);
+	
+			$c->addJoin(AtrecayuPeer::ATRECAUD_ID, AtrecaudPeer::ID);
+	
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
 
@@ -398,112 +398,112 @@ abstract class BaseAtrecayuPeer {
 			$obj1->hydrate($rs);
 
 
-					
-			$omClass = AttipayuPeer::getOMClass();
+							
+				$omClass = AttipayuPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2 = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2 = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getAttipayu(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addAtrecayu($obj1); 					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getAttipayu(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addAtrecayu($obj1); 						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initAtrecayus();
-				$obj2->addAtrecayu($obj1);
-			}
-
-
-					
-			$omClass = AtrecaudPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj3 = new $cls();
-			$obj3->hydrate($rs, $startcol3);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj3 = $temp_obj1->getAtrecaud(); 				if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj3->addAtrecayu($obj1); 					break;
+				if ($newObject) {
+					$obj2->initAtrecayus();
+					$obj2->addAtrecayu($obj1);
 				}
-			}
+	
 
-			if ($newObject) {
-				$obj3->initAtrecayus();
-				$obj3->addAtrecayu($obj1);
-			}
+							
+				$omClass = AtrecaudPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj3 = new $cls();
+				$obj3->hydrate($rs, $startcol3);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj3 = $temp_obj1->getAtrecaud(); 					if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj3->addAtrecayu($obj1); 						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj3->initAtrecayus();
+					$obj3->addAtrecayu($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;
 	}
 
 
-	
-	public static function doCountJoinAllExceptAttipayu(Criteria $criteria, $distinct = false, $con = null)
-	{
-				$criteria = clone $criteria;
-
-				$criteria->clearSelectColumns()->clearOrderByColumns();
-		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(AtrecayuPeer::COUNT_DISTINCT);
-		} else {
-			$criteria->addSelectColumn(AtrecayuPeer::COUNT);
-		}
-
-				foreach($criteria->getGroupByColumns() as $column)
+		
+		public static function doCountJoinAllExceptAttipayu(Criteria $criteria, $distinct = false, $con = null)
 		{
-			$criteria->addSelectColumn($column);
-		}
+						$criteria = clone $criteria;
 
-		$criteria->addJoin(AtrecayuPeer::ATRECAUD_ID, AtrecaudPeer::ID);
+						$criteria->clearSelectColumns()->clearOrderByColumns();
+			if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+				$criteria->addSelectColumn(AtrecayuPeer::COUNT_DISTINCT);
+			} else {
+				$criteria->addSelectColumn(AtrecayuPeer::COUNT);
+			}
 
-		$rs = AtrecayuPeer::doSelectRS($criteria, $con);
-		if ($rs->next()) {
-			return $rs->getInt(1);
-		} else {
-						return 0;
-		}
-	}
-
-
+						foreach($criteria->getGroupByColumns() as $column)
+			{
+				$criteria->addSelectColumn($column);
+			}
 	
-	public static function doCountJoinAllExceptAtrecaud(Criteria $criteria, $distinct = false, $con = null)
-	{
-				$criteria = clone $criteria;
-
-				$criteria->clearSelectColumns()->clearOrderByColumns();
-		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(AtrecayuPeer::COUNT_DISTINCT);
-		} else {
-			$criteria->addSelectColumn(AtrecayuPeer::COUNT);
+				$criteria->addJoin(AtrecayuPeer::ATRECAUD_ID, AtrecaudPeer::ID);
+		
+			$rs = AtrecayuPeer::doSelectRS($criteria, $con);
+			if ($rs->next()) {
+				return $rs->getInt(1);
+			} else {
+								return 0;
+			}
 		}
+	
 
-				foreach($criteria->getGroupByColumns() as $column)
+		
+		public static function doCountJoinAllExceptAtrecaud(Criteria $criteria, $distinct = false, $con = null)
 		{
-			$criteria->addSelectColumn($column);
+						$criteria = clone $criteria;
+
+						$criteria->clearSelectColumns()->clearOrderByColumns();
+			if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+				$criteria->addSelectColumn(AtrecayuPeer::COUNT_DISTINCT);
+			} else {
+				$criteria->addSelectColumn(AtrecayuPeer::COUNT);
+			}
+
+						foreach($criteria->getGroupByColumns() as $column)
+			{
+				$criteria->addSelectColumn($column);
+			}
+	
+				$criteria->addJoin(AtrecayuPeer::ATTIPAYU_ID, AttipayuPeer::ID);
+		
+			$rs = AtrecayuPeer::doSelectRS($criteria, $con);
+			if ($rs->next()) {
+				return $rs->getInt(1);
+			} else {
+								return 0;
+			}
 		}
-
-		$criteria->addJoin(AtrecayuPeer::ATTIPAYU_ID, AttipayuPeer::ID);
-
-		$rs = AtrecayuPeer::doSelectRS($criteria, $con);
-		if ($rs->next()) {
-			return $rs->getInt(1);
-		} else {
-						return 0;
-		}
-	}
-
+	
 
 	
 	public static function doSelectJoinAllExceptAttipayu(Criteria $c, $con = null)
@@ -517,11 +517,11 @@ abstract class BaseAtrecayuPeer {
 		AtrecayuPeer::addSelectColumns($c);
 		$startcol2 = (AtrecayuPeer::NUM_COLUMNS - AtrecayuPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		AtrecaudPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + AtrecaudPeer::NUM_COLUMNS;
-
-		$c->addJoin(AtrecayuPeer::ATRECAUD_ID, AtrecaudPeer::ID);
-
+			AtrecaudPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + AtrecaudPeer::NUM_COLUMNS;
+	
+			$c->addJoin(AtrecayuPeer::ATRECAUD_ID, AtrecaudPeer::ID);
+	
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
@@ -534,28 +534,28 @@ abstract class BaseAtrecayuPeer {
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
 
-			$omClass = AtrecaudPeer::getOMClass();
+				$omClass = AtrecaudPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2  = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2  = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getAtrecaud(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addAtrecayu($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getAtrecaud(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addAtrecayu($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initAtrecayus();
-				$obj2->addAtrecayu($obj1);
-			}
-
+				if ($newObject) {
+					$obj2->initAtrecayus();
+					$obj2->addAtrecayu($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;
@@ -574,11 +574,11 @@ abstract class BaseAtrecayuPeer {
 		AtrecayuPeer::addSelectColumns($c);
 		$startcol2 = (AtrecayuPeer::NUM_COLUMNS - AtrecayuPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		AttipayuPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + AttipayuPeer::NUM_COLUMNS;
-
-		$c->addJoin(AtrecayuPeer::ATTIPAYU_ID, AttipayuPeer::ID);
-
+			AttipayuPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + AttipayuPeer::NUM_COLUMNS;
+	
+			$c->addJoin(AtrecayuPeer::ATTIPAYU_ID, AttipayuPeer::ID);
+	
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
@@ -591,28 +591,28 @@ abstract class BaseAtrecayuPeer {
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
 
-			$omClass = AttipayuPeer::getOMClass();
+				$omClass = AttipayuPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2  = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2  = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getAttipayu(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addAtrecayu($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getAttipayu(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addAtrecayu($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initAtrecayus();
-				$obj2->addAtrecayu($obj1);
-			}
-
+				if ($newObject) {
+					$obj2->initAtrecayus();
+					$obj2->addAtrecayu($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;

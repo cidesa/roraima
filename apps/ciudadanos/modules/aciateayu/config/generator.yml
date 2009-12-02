@@ -25,8 +25,8 @@ generator:
       cedula:      { name: Cedula }
       desayu:      { name: Observación, type: textarea_tag, params: cols=60 rows=2 rich=false }
       motayu:      { name: Motivo, type: textarea_tag, params: cols=60 rows=2 rich=false }
-      detalleayudas: {name: Detalle Ayuda}
-      detallerecaudos: {name: Detalle Recaudos}
+      detalleayudas: {name: .}
+      detallerecaudos: {name: .}
       nroexp:      { name: Expediente }
       nomsol:      { name: Solicitante }
       nomben:      { name: Paciente }
@@ -50,6 +50,7 @@ generator:
       refdoc:     { name: Orden de Compra }
       priayu:     { name: Prioridad de Atención }
       atpriayu_id:     { name: Prioridad de Atención, params: include_blank=false }
+      atdetest:       {name: Detalle de Estados}
     list:
       title:          Atencion de Donaciones
       display:        [=nroexp, =nomsol, =nomben, desayu]
@@ -63,7 +64,7 @@ generator:
       title:          Edición de Atención de Donaciones
       display:
         Expediente:   [ _expediente, fecsol ]
-        Estatus:      [atestayu_id]
+        Estatus:      [atestayu_id, _atdetest]
         Solicitante:  [_atsolici, _atbenefi, _parentesco]
         Prioridad:    [atpriayu_id]
         Procedencia:  [proayu, nroofi ]

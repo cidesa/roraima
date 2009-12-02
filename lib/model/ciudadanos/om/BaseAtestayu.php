@@ -26,6 +26,18 @@ abstract class BaseAtestayu extends BaseObject  implements Persistent {
 	protected $lastAtayudasCriteria = null;
 
 	
+	protected $collAtdetestsRelatedByAtestayuDesde;
+
+	
+	protected $lastAtdetestRelatedByAtestayuDesdeCriteria = null;
+
+	
+	protected $collAtdetestsRelatedByAtestayuHasta;
+
+	
+	protected $lastAtdetestRelatedByAtestayuHastaCriteria = null;
+
+	
 	protected $alreadyInSave = false;
 
 	
@@ -195,6 +207,22 @@ abstract class BaseAtestayu extends BaseObject  implements Persistent {
 				}
 			}
 
+			if ($this->collAtdetestsRelatedByAtestayuDesde !== null) {
+				foreach($this->collAtdetestsRelatedByAtestayuDesde as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
+
+			if ($this->collAtdetestsRelatedByAtestayuHasta !== null) {
+				foreach($this->collAtdetestsRelatedByAtestayuHasta as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
+
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
@@ -238,6 +266,22 @@ abstract class BaseAtestayu extends BaseObject  implements Persistent {
 
 				if ($this->collAtayudass !== null) {
 					foreach($this->collAtayudass as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
+
+				if ($this->collAtdetestsRelatedByAtestayuDesde !== null) {
+					foreach($this->collAtdetestsRelatedByAtestayuDesde as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
+
+				if ($this->collAtdetestsRelatedByAtestayuHasta !== null) {
+					foreach($this->collAtdetestsRelatedByAtestayuHasta as $referrerFK) {
 						if (!$referrerFK->validate($columns)) {
 							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
 						}
@@ -368,6 +412,14 @@ abstract class BaseAtestayu extends BaseObject  implements Persistent {
 
 			foreach($this->getAtayudass() as $relObj) {
 				$copyObj->addAtayudas($relObj->copy($deepCopy));
+			}
+
+			foreach($this->getAtdetestsRelatedByAtestayuDesde() as $relObj) {
+				$copyObj->addAtdetestRelatedByAtestayuDesde($relObj->copy($deepCopy));
+			}
+
+			foreach($this->getAtdetestsRelatedByAtestayuHasta() as $relObj) {
+				$copyObj->addAtdetestRelatedByAtestayuHasta($relObj->copy($deepCopy));
 			}
 
 		} 
@@ -778,6 +830,251 @@ abstract class BaseAtestayu extends BaseObject  implements Persistent {
 		$this->lastAtayudasCriteria = $criteria;
 
 		return $this->collAtayudass;
+	}
+
+
+	
+	public function getAtayudassJoinAtunidades($criteria = null, $con = null)
+	{
+				include_once 'lib/model/ciudadanos/om/BaseAtayudasPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collAtayudass === null) {
+			if ($this->isNew()) {
+				$this->collAtayudass = array();
+			} else {
+
+				$criteria->add(AtayudasPeer::ATESTAYU_ID, $this->getId());
+
+				$this->collAtayudass = AtayudasPeer::doSelectJoinAtunidades($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(AtayudasPeer::ATESTAYU_ID, $this->getId());
+
+			if (!isset($this->lastAtayudasCriteria) || !$this->lastAtayudasCriteria->equals($criteria)) {
+				$this->collAtayudass = AtayudasPeer::doSelectJoinAtunidades($criteria, $con);
+			}
+		}
+		$this->lastAtayudasCriteria = $criteria;
+
+		return $this->collAtayudass;
+	}
+
+	
+	public function initAtdetestsRelatedByAtestayuDesde()
+	{
+		if ($this->collAtdetestsRelatedByAtestayuDesde === null) {
+			$this->collAtdetestsRelatedByAtestayuDesde = array();
+		}
+	}
+
+	
+	public function getAtdetestsRelatedByAtestayuDesde($criteria = null, $con = null)
+	{
+				include_once 'lib/model/ciudadanos/om/BaseAtdetestPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collAtdetestsRelatedByAtestayuDesde === null) {
+			if ($this->isNew()) {
+			   $this->collAtdetestsRelatedByAtestayuDesde = array();
+			} else {
+
+				$criteria->add(AtdetestPeer::ATESTAYU_DESDE, $this->getId());
+
+				AtdetestPeer::addSelectColumns($criteria);
+				$this->collAtdetestsRelatedByAtestayuDesde = AtdetestPeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(AtdetestPeer::ATESTAYU_DESDE, $this->getId());
+
+				AtdetestPeer::addSelectColumns($criteria);
+				if (!isset($this->lastAtdetestRelatedByAtestayuDesdeCriteria) || !$this->lastAtdetestRelatedByAtestayuDesdeCriteria->equals($criteria)) {
+					$this->collAtdetestsRelatedByAtestayuDesde = AtdetestPeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastAtdetestRelatedByAtestayuDesdeCriteria = $criteria;
+		return $this->collAtdetestsRelatedByAtestayuDesde;
+	}
+
+	
+	public function countAtdetestsRelatedByAtestayuDesde($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/ciudadanos/om/BaseAtdetestPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(AtdetestPeer::ATESTAYU_DESDE, $this->getId());
+
+		return AtdetestPeer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addAtdetestRelatedByAtestayuDesde(Atdetest $l)
+	{
+		$this->collAtdetestsRelatedByAtestayuDesde[] = $l;
+		$l->setAtestayuRelatedByAtestayuDesde($this);
+	}
+
+
+	
+	public function getAtdetestsRelatedByAtestayuDesdeJoinAtayudas($criteria = null, $con = null)
+	{
+				include_once 'lib/model/ciudadanos/om/BaseAtdetestPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collAtdetestsRelatedByAtestayuDesde === null) {
+			if ($this->isNew()) {
+				$this->collAtdetestsRelatedByAtestayuDesde = array();
+			} else {
+
+				$criteria->add(AtdetestPeer::ATESTAYU_DESDE, $this->getId());
+
+				$this->collAtdetestsRelatedByAtestayuDesde = AtdetestPeer::doSelectJoinAtayudas($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(AtdetestPeer::ATESTAYU_DESDE, $this->getId());
+
+			if (!isset($this->lastAtdetestRelatedByAtestayuDesdeCriteria) || !$this->lastAtdetestRelatedByAtestayuDesdeCriteria->equals($criteria)) {
+				$this->collAtdetestsRelatedByAtestayuDesde = AtdetestPeer::doSelectJoinAtayudas($criteria, $con);
+			}
+		}
+		$this->lastAtdetestRelatedByAtestayuDesdeCriteria = $criteria;
+
+		return $this->collAtdetestsRelatedByAtestayuDesde;
+	}
+
+	
+	public function initAtdetestsRelatedByAtestayuHasta()
+	{
+		if ($this->collAtdetestsRelatedByAtestayuHasta === null) {
+			$this->collAtdetestsRelatedByAtestayuHasta = array();
+		}
+	}
+
+	
+	public function getAtdetestsRelatedByAtestayuHasta($criteria = null, $con = null)
+	{
+				include_once 'lib/model/ciudadanos/om/BaseAtdetestPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collAtdetestsRelatedByAtestayuHasta === null) {
+			if ($this->isNew()) {
+			   $this->collAtdetestsRelatedByAtestayuHasta = array();
+			} else {
+
+				$criteria->add(AtdetestPeer::ATESTAYU_HASTA, $this->getId());
+
+				AtdetestPeer::addSelectColumns($criteria);
+				$this->collAtdetestsRelatedByAtestayuHasta = AtdetestPeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(AtdetestPeer::ATESTAYU_HASTA, $this->getId());
+
+				AtdetestPeer::addSelectColumns($criteria);
+				if (!isset($this->lastAtdetestRelatedByAtestayuHastaCriteria) || !$this->lastAtdetestRelatedByAtestayuHastaCriteria->equals($criteria)) {
+					$this->collAtdetestsRelatedByAtestayuHasta = AtdetestPeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastAtdetestRelatedByAtestayuHastaCriteria = $criteria;
+		return $this->collAtdetestsRelatedByAtestayuHasta;
+	}
+
+	
+	public function countAtdetestsRelatedByAtestayuHasta($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/ciudadanos/om/BaseAtdetestPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(AtdetestPeer::ATESTAYU_HASTA, $this->getId());
+
+		return AtdetestPeer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addAtdetestRelatedByAtestayuHasta(Atdetest $l)
+	{
+		$this->collAtdetestsRelatedByAtestayuHasta[] = $l;
+		$l->setAtestayuRelatedByAtestayuHasta($this);
+	}
+
+
+	
+	public function getAtdetestsRelatedByAtestayuHastaJoinAtayudas($criteria = null, $con = null)
+	{
+				include_once 'lib/model/ciudadanos/om/BaseAtdetestPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collAtdetestsRelatedByAtestayuHasta === null) {
+			if ($this->isNew()) {
+				$this->collAtdetestsRelatedByAtestayuHasta = array();
+			} else {
+
+				$criteria->add(AtdetestPeer::ATESTAYU_HASTA, $this->getId());
+
+				$this->collAtdetestsRelatedByAtestayuHasta = AtdetestPeer::doSelectJoinAtayudas($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(AtdetestPeer::ATESTAYU_HASTA, $this->getId());
+
+			if (!isset($this->lastAtdetestRelatedByAtestayuHastaCriteria) || !$this->lastAtdetestRelatedByAtestayuHastaCriteria->equals($criteria)) {
+				$this->collAtdetestsRelatedByAtestayuHasta = AtdetestPeer::doSelectJoinAtayudas($criteria, $con);
+			}
+		}
+		$this->lastAtdetestRelatedByAtestayuHastaCriteria = $criteria;
+
+		return $this->collAtdetestsRelatedByAtestayuHasta;
 	}
 
 } 

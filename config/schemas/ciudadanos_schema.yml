@@ -551,6 +551,7 @@ propel:
       size: 5000
     fecsol:
       type: DATE
+    atunidades_id:
     id:
   atdetrecayu:                           # Detalle de recaudos entregados para llevar a cabo la ayuda
     atayudas_id:
@@ -916,6 +917,21 @@ propel:
       type: VARCHAR
       size: 50
     id:
+  atdetest:
+    atayudas_id:
+    atestayu_desde:
+      type: INTEGER
+      foreignTable: atestayu
+      foreignReference: id
+    atestayu_hasta:
+      type: INTEGER
+      foreignTable: atestayu
+      foreignReference: id
+    usuario:
+      type: VARCHAR
+      size: 100
+    created_at:
+
     
     
     

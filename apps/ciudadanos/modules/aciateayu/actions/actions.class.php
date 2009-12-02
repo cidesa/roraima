@@ -233,76 +233,75 @@ class aciateayuActions extends autoaciateayuActions
     $grid = $this->getRequestParameter('grid'.$name,'');
 
     $fila = $this->getRequestParameter('fila','');
+    $columna = $this->getRequestParameter('columna','');
 
-    $codgru = $grid[$fila][1];
+    if($columna=='6'){
+      $codgru = $grid[$fila][1];
 
-    $c = new Criteria();
-    $c->add(AtgrudonPeer::CODGRU,$codgru);
-    $atgrudo = AtgrudonPeer::doSelectOne($c);
+      $c = new Criteria();
+      $c->add(AtgrudonPeer::CODGRU,$codgru);
+      $atgrudo = AtgrudonPeer::doSelectOne($c);
 
-    if($atgrudo){
-      $grid[$fila][0] = $atgrudo->getId();
-      $grid[$fila][2] = $atgrudo->getDesgru();
+      if($atgrudo){
+        $grid[$fila][0] = $atgrudo->getId();
+        $grid[$fila][2] = $atgrudo->getDesgru();
 
-      $coddon = $grid[$fila][4];
+        $coddon = $grid[$fila][4];
 
-      if($coddon!=''){
-        $c = new Criteria();
-        $c->add(AtdonacionesPeer::CODDON,$coddon);
-        $c->add(AtdonacionesPeer::ATGRUDON_ID,$atgrudo->getId());
-        $atdonaciones = AtdonacionesPeer::doSelectOne($c);
-        if($atdonaciones){
-          $grid[$fila][3] = $atdonaciones->getId();
-          $grid[$fila][4] = $atdonaciones->getCoddon();
-          $grid[$fila][5] = $atdonaciones->getDesdon();
-        }else{
-          $grid[$fila][3] = '';
-          $grid[$fila][4] = '';
-          $grid[$fila][5] = Constantes::REGVACIO;
-        }
-      }
-    }else{
-      $grid[$fila][0] = '';
-      $grid[$fila][1] = '';
-      $grid[$fila][2] = Constantes::REGVACIO;
-
-
-      $coddon = $grid[$fila][4];
-
-      if($coddon!=''){
-        $c = new Criteria();
-        $c->add(AtdonacionesPeer::CODDON,$coddon);
-        $atdonaciones = AtdonacionesPeer::doSelectOne($c);
-        if($atdonaciones){
-          $grid[$fila][3] = $atdonaciones->getId();
-          $grid[$fila][4] = $atdonaciones->getCoddon();
-          $grid[$fila][5] = $atdonaciones->getDesdon();
-
-          $idgru = $atdonaciones->getAtgrudonId();
-
+        if($coddon!=''){
           $c = new Criteria();
-          $c->add(AtgrudonPeer::ID,$idgru);
-          $atgrudo = AtgrudonPeer::doSelectOne($c);
-
-          if($atgrudo){
-            $grid[$fila][0] = $atgrudo->getId();
-            $grid[$fila][2] = $atgrudo->getDesgru();
+          $c->add(AtdonacionesPeer::CODDON,$coddon);
+          $c->add(AtdonacionesPeer::ATGRUDON_ID,$atgrudo->getId());
+          $atdonaciones = AtdonacionesPeer::doSelectOne($c);
+          if($atdonaciones){
+            $grid[$fila][3] = $atdonaciones->getId();
+            $grid[$fila][4] = $atdonaciones->getCoddon();
+            $grid[$fila][5] = $atdonaciones->getDesdon();
+          }else{
+            $grid[$fila][3] = '';
+            $grid[$fila][4] = '';
+            $grid[$fila][5] = Constantes::REGVACIO;
           }
+        }
+      }else{
+        $grid[$fila][0] = '';
+        $grid[$fila][1] = '';
+        $grid[$fila][2] = Constantes::REGVACIO;
 
-        }else{
-          $grid[$fila][3] = '';
-          $grid[$fila][4] = '';
-          $grid[$fila][5] = Constantes::REGVACIO;
+
+        $coddon = $grid[$fila][5];
+
+        if($coddon!=''){
+          $c = new Criteria();
+          $c->add(AtdonacionesPeer::CODDON,$coddon);
+          $atdonaciones = AtdonacionesPeer::doSelectOne($c);
+          if($atdonaciones){
+            $grid[$fila][4] = $atdonaciones->getId();
+            $grid[$fila][5] = $atdonaciones->getCoddon();
+            $grid[$fila][6] = $atdonaciones->getDesdon();
+
+            $idgru = $atdonaciones->getAtgrudonId();
+
+            $c = new Criteria();
+            $c->add(AtgrudonPeer::ID,$idgru);
+            $atgrudo = AtgrudonPeer::doSelectOne($c);
+
+            if($atgrudo){
+              $grid[$fila][0] = $atgrudo->getId();
+              $grid[$fila][2] = $atgrudo->getDesgru();
+            }
+
+          }else{
+            $grid[$fila][3] = '';
+            $grid[$fila][4] = '';
+            $grid[$fila][5] = Constantes::REGVACIO;
+          }
         }
       }
-
-
-
-//      $grid[$fila][3] = '';
-//      $grid[$fila][5] = Constantes::REGVACIO;
+    }elseif($columna=='9' || $columna=='10'){
+      $grid[$fila][10] = H::FormatoMonto((H::FloatVEtoFloat($grid[$fila][8]) * H::FloatVEtoFloat($grid[$fila][9]))) ;
     }
 
-//    print $codgru;
 
     $output = Herramientas::grid_to_json($grid,$name);
 
@@ -317,7 +316,8 @@ class aciateayuActions extends autoaciateayuActions
   
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */

@@ -355,10 +355,10 @@ abstract class BaseAtdetrecrubPeer {
 			$criteria->addSelectColumn($column);
 		}
 
-		$criteria->addJoin(AtdetrecrubPeer::ATRUBROS_ID, AtrubrosPeer::ID);
-
-		$criteria->addJoin(AtdetrecrubPeer::ATRECAUD_ID, AtrecaudPeer::ID);
-
+			$criteria->addJoin(AtdetrecrubPeer::ATRUBROS_ID, AtrubrosPeer::ID);
+	
+			$criteria->addJoin(AtdetrecrubPeer::ATRECAUD_ID, AtrecaudPeer::ID);
+	
 		$rs = AtdetrecrubPeer::doSelectRS($criteria, $con);
 		if ($rs->next()) {
 			return $rs->getInt(1);
@@ -380,16 +380,16 @@ abstract class BaseAtdetrecrubPeer {
 		AtdetrecrubPeer::addSelectColumns($c);
 		$startcol2 = (AtdetrecrubPeer::NUM_COLUMNS - AtdetrecrubPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		AtrubrosPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + AtrubrosPeer::NUM_COLUMNS;
-
-		AtrecaudPeer::addSelectColumns($c);
-		$startcol4 = $startcol3 + AtrecaudPeer::NUM_COLUMNS;
-
-		$c->addJoin(AtdetrecrubPeer::ATRUBROS_ID, AtrubrosPeer::ID);
-
-		$c->addJoin(AtdetrecrubPeer::ATRECAUD_ID, AtrecaudPeer::ID);
-
+			AtrubrosPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + AtrubrosPeer::NUM_COLUMNS;
+	
+			AtrecaudPeer::addSelectColumns($c);
+			$startcol4 = $startcol3 + AtrecaudPeer::NUM_COLUMNS;
+	
+			$c->addJoin(AtdetrecrubPeer::ATRUBROS_ID, AtrubrosPeer::ID);
+	
+			$c->addJoin(AtdetrecrubPeer::ATRECAUD_ID, AtrecaudPeer::ID);
+	
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
 
@@ -403,112 +403,112 @@ abstract class BaseAtdetrecrubPeer {
 			$obj1->hydrate($rs);
 
 
-					
-			$omClass = AtrubrosPeer::getOMClass();
+							
+				$omClass = AtrubrosPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2 = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2 = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getAtrubros(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addAtdetrecrub($obj1); 					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getAtrubros(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addAtdetrecrub($obj1); 						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initAtdetrecrubs();
-				$obj2->addAtdetrecrub($obj1);
-			}
-
-
-					
-			$omClass = AtrecaudPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj3 = new $cls();
-			$obj3->hydrate($rs, $startcol3);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj3 = $temp_obj1->getAtrecaud(); 				if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj3->addAtdetrecrub($obj1); 					break;
+				if ($newObject) {
+					$obj2->initAtdetrecrubs();
+					$obj2->addAtdetrecrub($obj1);
 				}
-			}
+	
 
-			if ($newObject) {
-				$obj3->initAtdetrecrubs();
-				$obj3->addAtdetrecrub($obj1);
-			}
+							
+				$omClass = AtrecaudPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj3 = new $cls();
+				$obj3->hydrate($rs, $startcol3);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj3 = $temp_obj1->getAtrecaud(); 					if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj3->addAtdetrecrub($obj1); 						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj3->initAtdetrecrubs();
+					$obj3->addAtdetrecrub($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;
 	}
 
 
-	
-	public static function doCountJoinAllExceptAtrubros(Criteria $criteria, $distinct = false, $con = null)
-	{
-				$criteria = clone $criteria;
-
-				$criteria->clearSelectColumns()->clearOrderByColumns();
-		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(AtdetrecrubPeer::COUNT_DISTINCT);
-		} else {
-			$criteria->addSelectColumn(AtdetrecrubPeer::COUNT);
-		}
-
-				foreach($criteria->getGroupByColumns() as $column)
+		
+		public static function doCountJoinAllExceptAtrubros(Criteria $criteria, $distinct = false, $con = null)
 		{
-			$criteria->addSelectColumn($column);
-		}
+						$criteria = clone $criteria;
 
-		$criteria->addJoin(AtdetrecrubPeer::ATRECAUD_ID, AtrecaudPeer::ID);
+						$criteria->clearSelectColumns()->clearOrderByColumns();
+			if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+				$criteria->addSelectColumn(AtdetrecrubPeer::COUNT_DISTINCT);
+			} else {
+				$criteria->addSelectColumn(AtdetrecrubPeer::COUNT);
+			}
 
-		$rs = AtdetrecrubPeer::doSelectRS($criteria, $con);
-		if ($rs->next()) {
-			return $rs->getInt(1);
-		} else {
-						return 0;
-		}
-	}
-
-
+						foreach($criteria->getGroupByColumns() as $column)
+			{
+				$criteria->addSelectColumn($column);
+			}
 	
-	public static function doCountJoinAllExceptAtrecaud(Criteria $criteria, $distinct = false, $con = null)
-	{
-				$criteria = clone $criteria;
-
-				$criteria->clearSelectColumns()->clearOrderByColumns();
-		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(AtdetrecrubPeer::COUNT_DISTINCT);
-		} else {
-			$criteria->addSelectColumn(AtdetrecrubPeer::COUNT);
+				$criteria->addJoin(AtdetrecrubPeer::ATRECAUD_ID, AtrecaudPeer::ID);
+		
+			$rs = AtdetrecrubPeer::doSelectRS($criteria, $con);
+			if ($rs->next()) {
+				return $rs->getInt(1);
+			} else {
+								return 0;
+			}
 		}
+	
 
-				foreach($criteria->getGroupByColumns() as $column)
+		
+		public static function doCountJoinAllExceptAtrecaud(Criteria $criteria, $distinct = false, $con = null)
 		{
-			$criteria->addSelectColumn($column);
+						$criteria = clone $criteria;
+
+						$criteria->clearSelectColumns()->clearOrderByColumns();
+			if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+				$criteria->addSelectColumn(AtdetrecrubPeer::COUNT_DISTINCT);
+			} else {
+				$criteria->addSelectColumn(AtdetrecrubPeer::COUNT);
+			}
+
+						foreach($criteria->getGroupByColumns() as $column)
+			{
+				$criteria->addSelectColumn($column);
+			}
+	
+				$criteria->addJoin(AtdetrecrubPeer::ATRUBROS_ID, AtrubrosPeer::ID);
+		
+			$rs = AtdetrecrubPeer::doSelectRS($criteria, $con);
+			if ($rs->next()) {
+				return $rs->getInt(1);
+			} else {
+								return 0;
+			}
 		}
-
-		$criteria->addJoin(AtdetrecrubPeer::ATRUBROS_ID, AtrubrosPeer::ID);
-
-		$rs = AtdetrecrubPeer::doSelectRS($criteria, $con);
-		if ($rs->next()) {
-			return $rs->getInt(1);
-		} else {
-						return 0;
-		}
-	}
-
+	
 
 	
 	public static function doSelectJoinAllExceptAtrubros(Criteria $c, $con = null)
@@ -522,11 +522,11 @@ abstract class BaseAtdetrecrubPeer {
 		AtdetrecrubPeer::addSelectColumns($c);
 		$startcol2 = (AtdetrecrubPeer::NUM_COLUMNS - AtdetrecrubPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		AtrecaudPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + AtrecaudPeer::NUM_COLUMNS;
-
-		$c->addJoin(AtdetrecrubPeer::ATRECAUD_ID, AtrecaudPeer::ID);
-
+			AtrecaudPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + AtrecaudPeer::NUM_COLUMNS;
+	
+			$c->addJoin(AtdetrecrubPeer::ATRECAUD_ID, AtrecaudPeer::ID);
+	
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
@@ -539,28 +539,28 @@ abstract class BaseAtdetrecrubPeer {
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
 
-			$omClass = AtrecaudPeer::getOMClass();
+				$omClass = AtrecaudPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2  = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2  = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getAtrecaud(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addAtdetrecrub($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getAtrecaud(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addAtdetrecrub($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initAtdetrecrubs();
-				$obj2->addAtdetrecrub($obj1);
-			}
-
+				if ($newObject) {
+					$obj2->initAtdetrecrubs();
+					$obj2->addAtdetrecrub($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;
@@ -579,11 +579,11 @@ abstract class BaseAtdetrecrubPeer {
 		AtdetrecrubPeer::addSelectColumns($c);
 		$startcol2 = (AtdetrecrubPeer::NUM_COLUMNS - AtdetrecrubPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		AtrubrosPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + AtrubrosPeer::NUM_COLUMNS;
-
-		$c->addJoin(AtdetrecrubPeer::ATRUBROS_ID, AtrubrosPeer::ID);
-
+			AtrubrosPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + AtrubrosPeer::NUM_COLUMNS;
+	
+			$c->addJoin(AtdetrecrubPeer::ATRUBROS_ID, AtrubrosPeer::ID);
+	
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
@@ -596,28 +596,28 @@ abstract class BaseAtdetrecrubPeer {
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
 
-			$omClass = AtrubrosPeer::getOMClass();
+				$omClass = AtrubrosPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2  = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2  = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getAtrubros(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addAtdetrecrub($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getAtrubros(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addAtdetrecrub($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initAtdetrecrubs();
-				$obj2->addAtdetrecrub($obj1);
-			}
-
+				if ($newObject) {
+					$obj2->initAtdetrecrubs();
+					$obj2->addAtdetrecrub($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;

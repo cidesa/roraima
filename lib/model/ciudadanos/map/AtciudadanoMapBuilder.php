@@ -110,6 +110,12 @@ class AtciudadanoMapBuilder {
 
 		$tMap->addForeignKey('ATTIPVIV_ID', 'AttipvivId', 'int', CreoleTypes::INTEGER, 'attipviv', 'ID', false, null);
 
+		$tMap->addColumn('SECTOR', 'Sector', 'string', CreoleTypes::VARCHAR, false, 50);
+
+		$tMap->addColumn('URBANIZACION', 'Urbanizacion', 'string', CreoleTypes::VARCHAR, false, 50);
+
+		$tMap->addColumn('ZONA', 'Zona', 'string', CreoleTypes::VARCHAR, false, 50);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 
