@@ -5,7 +5,7 @@ generator:
     theme:            default
 
     fields:
-      codcon:    { name: Concepto, params: maxlength=3,size=5 }
+      codcon:    { name: Concepto, params: maxlength=3 size=5 }
       nomcon:    { name: Descripción de Concepto}
       nomgua:    { name: Nombre de Guardería}
 

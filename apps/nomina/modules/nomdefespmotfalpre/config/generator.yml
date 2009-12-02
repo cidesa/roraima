@@ -5,7 +5,7 @@ generator:
     theme:            default
 
     fields:
-      codmotfal :    { name: Código, params: maxlength=4,size=5}
+      codmotfal :    { name: Código, params: maxlength=4 size=5}
       desmotfal :    { name: Descripción, params: size=20}
       causa		:    { name: Causa }
 
