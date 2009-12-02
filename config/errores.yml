@@ -58,7 +58,7 @@
   msj: No puede salvar sin Introducir el Código de Partida
 118:
   cod: 118
-  msj: No hay disponibilidad en el siguiente Código presupuestario:
+  msj: No hay disponibilidad en el siguiente Código presupuestario
 119:
   cod: 119
   msj: No hay disponibilidad para los Recargos
@@ -172,19 +172,19 @@
   cod: 156
   msj: No se puede Anular la Orden ya que tiene una Recepcion asociada
 157:
-  cod:157
+  cod: 157
   msj: No se puede Anular la Orden ya que tiene un Ajuste asociado. Debe eliminar el Ajuste por Presupuesto
 158:
-  cod:158
+  cod: 158
   msj: La Orden fue Anulada Satisfactoriamente
 159:
-  cod:159
+  cod: 159
   msj: La Orden ya fue Anulada
 160:
   cod: 160
   msj: Al menos uno de los artículos del detalle debe tener cantidad a despachar mayor que cero (0).
 161:
-  cod:161
+  cod: 161
   msj: Debe crear un Comprobante Contable
 162:
   cod: 162
@@ -299,22 +299,22 @@
 # Emisión de Cheques (TesMovEmiChe)
 504:
   cod: 504
-  msj:El Correlativo a Generar ya Existe.
+  msj: El Correlativo a Generar ya Existe.
 505:
   cod: 505
-  msj:Debe seleccionar al menos una Orden de Pago
+  msj: Debe seleccionar al menos una Orden de Pago
   # Emisión de Cheques (TesMovEmiChe)
 506:
   cod: 506
-  msj:Debe seleccionar al menos un Compromiso
+  msj: Debe seleccionar al menos un Compromiso
   # Emisión de Cheques (TesMovEmiChe)
 507:
   cod: 507
-  msj:Debe seleccionar al menos un Precompromiso
+  msj: Debe seleccionar al menos un Precompromiso
   # Emisión de Cheques (TesMovEmiChe)
 508:
   cod: 508
-  msj:No puede salvar sin generar el comprobante contable. Por favor haga click en el botón Generar Comprobante
+  msj: No puede salvar sin generar el comprobante contable. Por favor haga click en el botón Generar Comprobante
 509:
   cod: 509
   msj: La Asociación se encuentra registrada. Por favor, cambiela por otra.
@@ -614,7 +614,7 @@
 424:
   cod: 424
   msj: La fecha  ya  se  encuentra en un rango registrado
-425:  .
+425:  
   cod: 425
   msj: Empleado no encontrado
 426:
@@ -977,91 +977,91 @@
     cod: 1125
     msj: El Código de Ubicación no está asociado para el artículo el(los) Artículo(s).
 1126:
-    cod:1126
+    cod: 1126
     msj: La(s) Cantidad(s) a Devolver debe(n) ser mayor a cero (0.00)
 1127:
-    cod:1127
+    cod: 1127
     msj: El almacén seleccionado no está asociado al(los) artículo(s) a devolver.
 1128:
-    cod:1128
+    cod: 1128
     msj: El Cliente no tiene asociada una Cuenta Percontra para Mercancía a Consignación válida asociada.
 1129:
-    cod:1129
+    cod: 1129
     msj: El Cliente no tiene asociada una Cuenta de Orden para Mercancía a Consignación válida asociada.
 1130:
-    cod:1130
+    cod: 1130
     msj: El Proveedor de la Mercancía a Consignación no tiene asociada una Cuenta Percontra para Mercancía a Consignación válida asociada.
 1131:
-    cod:1131
+    cod: 1131
     msj: El Proveedor de la Mercancía a Consignación no tiene asociada una Cuenta de Orden para Mercancía a Consignación válida asociada.
 1132:
-    cod:1132
+    cod: 1132
     msj: Los Artículos no tiene Costo Promedio... El comprobante de Inventario no será generado.
 1133:
-    cod:1133
+    cod: 1133
     msj: La(s) Cantidad(s) a Ajustar debe(n) ser mayor a cero (0.00)
 1134:
-    cod:1134
+    cod: 1134
     msj: La(s) Cantidad(s) a Despachar debe(n) ser mayor a cero (0.00) en al menos un Artículo
 1135:
-    cod:1135
+    cod: 1135
     msj: La(s) Cantidad(s) a Entregar debe(n) ser mayor a cero (0.00) en al menos un Artículo
 1136:
-    cod:1136
+    cod: 1136
     msj: No puede salvar, debido que existen Precios diferentes para un mismo Artículo.
 1137:
-    cod:1137
+    cod: 1137
     msj: No puede salvar debido a que existen Artículos sin Cuenta de Venta asociada.
 1138:
-    cod:1138
+    cod: 1138
     msj: No puede salvar sin introducir el Código del Pedido
 1139:
-    cod:1139
+    cod: 1139
     msj: No puede salvar sin introducir los Artículos asociados a la Factura
 1140:
-    cod:1140
+    cod: 1140
     msj: No puede salvar sin introducir la Cantidad a Solicitar
 1141:
-    cod:1141
+    cod: 1141
     msj: No puede salvar sin introducir el Precio del Artículo a Solicitar
 1142:
-    cod:1142
+    cod: 1142
     msj: No puede salvar sin introducir la Cantidad a Entregar
 1143:
-    cod:1143
+    cod: 1143
     msj: No puede salvar sin introducir el Monto a Cancelar
 1144:
-    cod:1144
+    cod: 1144
     msj: No puede salvar sin introducir el Tipo de Pago para Cancelar la Factura
 1145:
-    cod:1145
+    cod: 1145
     msj: El Cliente Ya Sobrepaso el Límite de Credito
 1146:
-    cod:1146
+    cod: 1146
     msj: La Condición de Pago no corresponde con la Forma de Pago.
 1147:
-    cod:1147
+    cod: 1147
     msj: El Cliente no Posee Cuenta Contable. No se puede generar el Comprobante.
 1148:
-    cod:1148
+    cod: 1148
     msj: La Forma de Pago Genera Movimiento Según libro y El Número de Cuenta Bancaria no existe. No se puede generar el Comprobante.
 1149:
-    cod:1149
+    cod: 1149
     msj: La Cuenta Bancaria asociada a la Forma de Pago no posee Cuenta Contable. No se puede generar el Comprobante.
 1150:
-    cod:1150
+    cod: 1150
     msj: La Cuenta de Venta al Contado no esta Definida(Artículo). No se puede generar el Comprobante.
 1151:
-    cod:1151
+    cod: 1151
     msj: Verifique que los Descuentos aplicados tengan asociada Cuenta Contable. No se puede generar el Comprobante.
 1152:
-    cod:1152
+    cod: 1152
     msj: Verifique que los Recargos aplicados tengan asociada Cuenta Contable. No se puede generar el Comprobante.
 1153:
-    cod:1153
+    cod: 1153
     msj: Verifique que los Artículos posean Cuenta de Venta asociada. No se puede generar el Comprobante.
 1154:
-    cod:1154
+    cod: 1154
     msj: El Proveedor no posee Cuenta de Contable asociada. No se puede generar el Comprobante.
 ########## Licitaciones ########
 901:
@@ -1077,10 +1077,10 @@
     cod: 904
     msj: El puntaje del recaudo seleccionado  debe ser mayor a cero (0.00)
 905:
-    cod:905
+    cod: 905
     msj: La empresa no es oferente para la Licitación Seleccionada
 906:
-    cod:906
+    cod: 906
     msj: El puntaje del Criterio de Evaluación debe ser mayor a cero (0.00)
 907:
     cod: 907
