@@ -4945,6 +4945,21 @@ class Nomina {
       }
       $npasicaremp->save();
 
+
+      // Genero la experiencia laboral con el cargo Nuevo
+      $npexplab = new Npexplab();
+      $npexplab->setCodemp($registro->getCodemp());
+      $npexplab->setNomemp($registro->getNomemp());
+      $npexplab->setCodcar($registro->getCodcar());
+      $npexplab->setCodnom($registro->getCodnom());
+      $npexplab->setDescar($registro->getNomcar());
+      $npexplab->setFecini($registro->getFecasi());
+      $npexplab->setFecter(null);
+      $npexplab->setSueobt($sueldo);
+      $npexplab->setStacar('D');
+      $npexplab->setTiporg('Publico');
+      $npexplab->save();
+
     }
 
     //detalle
@@ -7696,20 +7711,29 @@ public static function salvarNpsalintind($npsalint, $grid) {
       $nphisasicaremp->setCodtipgas($npasicaremp->getCodtipgas());
       $nphisasicaremp->save();
 
+      //Actualizo la fecha fin del experiencia laboral anterior
+     $u= new Criteria();
+     $u->add(NpexplabPeer::CODEMP,$npasicaremp->getCodemp());
+     $u->add(NpexplabPeer::STACAR,'D');
+     $u->add(NpexplabPeer::FECTER,null);
+     $result= NpexplabPeer::doSelectOne($u);
+     if ($result)
+     {
+     	$result->setFecter($feccam);
+     	$result->save();
+     }
 
-
-      // Genero la experiencia laboral con el cargo viejo
+      // Genero la experiencia laboral con el cargo Nuevo
       $npexplab = new Npexplab();
       $npexplab->setCodemp($npasicaremp->getCodemp());
       $npexplab->setNomemp($nphojint->getNomemp());
-      $npexplab->setCodcar($npasicaremp->getCodcar());
-      $npexplab->setDescar($npasicaremp->getNomcar());
-      $npexplab->setFecini($npasicaremp->getFecasi());
-      $npexplab->setFecter($feccam);
-      $npexplab->setSueobt($npcargosant->getSuecar());
+      $npexplab->setCodcar($codcar);
+      $npexplab->setCodnom($codnom);
+      $npexplab->setDescar($npcargos->getNomcar());
+      $npexplab->setFecini($feccam);
+      $npexplab->setFecter(null);
+      $npexplab->setSueobt($npasicaremp->getSueldo());
       $npexplab->setStacar('D');
-      //$npexplab->setCompobt();
-      //$npexplab->setDurexp();
       $npexplab->setTiporg('Publico');
       $npexplab->save();
 
