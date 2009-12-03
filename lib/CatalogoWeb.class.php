@@ -3195,7 +3195,7 @@ $this->c= new Criteria();
     $this->columnas = array (
         CpasiiniPeer::CODPRE => 'Código Presupuestario',
         CpasiiniPeer::NOMPRE => 'Descripción',
-        CpdeftitPeer::ESTATUS => 'Estatus',
+        CpasiiniPeer :: MONDIS => 'Disponible',
     );
   }
 
@@ -3211,7 +3211,7 @@ $this->c= new Criteria();
     $this->columnas = array (
         CpasiiniPeer::CODPRE => 'Código Presupuestario',
         CpasiiniPeer::NOMPRE => 'Descripción',
-        CpdeftitPeer::ESTATUS => 'Estatus',
+        CpasiiniPeer :: MONDIS => 'Disponible',
     );
   }
 
