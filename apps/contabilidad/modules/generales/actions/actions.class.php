@@ -199,5 +199,9 @@ class generalesActions extends sfActions
 
   }
 
+  public function executeDisabled()
+  {
+
+  }
 
 }
