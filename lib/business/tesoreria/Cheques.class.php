@@ -1297,7 +1297,7 @@ class Cheques
         $ctas = $CtaPag;
         $desc=$DesCtaDeb;
         $movs="D";
-        $montos=$Monto+$MontDcto; //+$MonRet;
+        $montos=$Monto+$MontDcto+$MonRet;
       }
       else if ($tippag=='C')//pagos compuestos
       {
@@ -1316,7 +1316,7 @@ class Cheques
              if (trim($ctas)!="") $ctas=$ctas."_".$CtaPag; else  $ctas = $CtaPag;
              if (trim($desc)!="") $desc=$desc."_".$DesCtaDeb; else  $desc = $DesCtaDeb;
              if (trim($movs)!="") $movs=$movs."_"."D"; else  $movs = "D";
-             $montot=$x[$j]->getMontotalGrid()+$x[$j]->getMondes();
+             $montot=$x[$j]->getMontotalGrid()+$x[$j]->getMondes() + $x[$j]->getMonret();
              if (trim($montos)!="") $montos=$montos."_".$montot; else $montos=$montot;
           }
           $j++;
@@ -1368,10 +1368,10 @@ class Cheques
       if ($operacion=='ordpag')
       {
       //Comprobante.IncluirAsiento CtaPag, DesCtaDeb, Comprob, "D", CDbl(MontRet)
-       if (trim($ctas)!="") $ctas=$ctas."_".$CtaPag; else  $ctas = $CtaPag;
+       /*if (trim($ctas)!="") $ctas=$ctas."_".$CtaPag; else  $ctas = $CtaPag;
        if (trim($desc)!="") $desc=$desc."_".$DesCtaDeb; else  $desc = $DesCtaDeb;
        if (trim($movs)!="") $movs=$movs."_"."D"; else  $movs = "D";
-       if (trim($montos)!="") $montos=$montos."_".$MonRet; else $montos=$MonRet;
+       if (trim($montos)!="") $montos=$montos."_".$MonRet; else $montos=$MonRet;*/
        if ($tippag=='S') //Pago Simple
        {
             $SQL = "Select codtip,SUM(MonRet) as montoret,numret,codtip from OPRetOrd where NumOrd= '".$ordendepago."' group by CodTip,Numret";
