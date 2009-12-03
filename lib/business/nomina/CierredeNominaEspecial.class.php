@@ -730,9 +730,9 @@ class CierredeNominaEspecial
    	foreach ($variable as $grabar)
    	{
      ////  Validar contra Presupuesto  ////
-	   	 	$sql = "select mondis from cpasiini where perpre='00' and codpre='".$grabar->getCodpre()."'";
-	   		  if (Herramientas::BuscarDatos($sql,&$resul))
-//		      if (Herramientas::Monto_disponible_ejecucion($anopresu,$grabar->getCodpre(),&$mondis))
+	   	 	//$sql = "select mondis from cpasiini where perpre='00' and codpre='".$grabar->getCodpre()."'";
+	   		//  if (Herramientas::BuscarDatos($sql,&$resul))
+		      if (Herramientas::Monto_disponible_ejecucion($anopresu,$grabar->getCodpre(),&$mondis))
 		      {
 		        if ($grabar->getMonto() > $resul[0]["mondis"]){
 		          $sobregiro = true;
