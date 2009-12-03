@@ -58,7 +58,7 @@
   msj: No puede salvar sin Introducir el Código de Partida
 118:
   cod: 118
-  msj: No hay disponibilidad en el siguiente Código presupuestario
+  msj: No hay disponibilidad en el siguiente Código presupuestario:
 119:
   cod: 119
   msj: No hay disponibilidad para los Recargos
@@ -614,7 +614,7 @@
 424:
   cod: 424
   msj: La fecha  ya  se  encuentra en un rango registrado
-425:  
+425:
   cod: 425
   msj: Empleado no encontrado
 426:
@@ -821,6 +821,9 @@
 496:
   cod: 496
   msj: Faltan Datos en el Grid
+497:
+  cod: 497
+  msj: Existen problemas con la disponibilidad presupuestaria para esta nomina
 ###############OBRAS################
 1000:
     cod: 1000
@@ -1562,4 +1565,4 @@
   msj: Debe cargar informacion en el grid
 99999999:
   cod: 99999999
-  msj: Número de Orden de Pago ya Existe, intente con otro.
+  msj: Número de Orden de Pago ya Existe, intento con otro.
