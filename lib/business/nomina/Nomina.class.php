@@ -2318,7 +2318,7 @@ class Nomina {
 				where
 				b.fecpagbonvac=to_date('$fecha','dd/mm/yyyy')
 				and a.codemp='$empleado'
-				and a.fecvac=b.fecvac 
+				and a.fecvac=b.fecvac
 				and a.codemp=b.codemp";
 
         if (Herramientas :: BuscarDatos($criterio, & $rs))
@@ -2343,7 +2343,7 @@ class Nomina {
 
         return $valor;
         break;
-		
+
 	  case "D360FA" :
 
         $valor = 0;
@@ -2358,7 +2358,7 @@ class Nomina {
 				$valor = $rs[0]['valor'];
 
         return $valor;
-        break;	
+        break;
       case "DIAADIPRE" :
         $valor = 0;
         $auxfec = split("-",$fecnom);
@@ -2368,7 +2368,7 @@ class Nomina {
 
         if (Herramientas :: BuscarDatos($criterio, & $calpres))
 		{
-			$valor = ($calpres[0]['dias']-5)*$calpres[0]['mondia'];
+			$valor = ($calpres[0]['dias']-5)*$calpres[0]['mondiapro'];
 		}
 
         return $valor;
@@ -4055,7 +4055,7 @@ class Nomina {
 				where
 				b.fecpagbonvac=to_date('$fecha','dd/mm/yyyy')
 				and a.codemp='$empleado'
-				and a.fecvac=b.fecvac 
+				and a.fecvac=b.fecvac
 				and a.codemp=b.codemp";
 
         if (Herramientas :: BuscarDatos($criterio, & $rs))
@@ -4080,7 +4080,7 @@ class Nomina {
 
         return $valor;
         break;
-		
+
 		case "D360FA" :
 
         $valor = 0;
@@ -4096,7 +4096,7 @@ class Nomina {
 
         return $valor;
         break;
-        
+
       case "DIAADIPRE" :
         $valor = 0;
         $auxfec = split("/",$hasta);
@@ -4105,7 +4105,7 @@ class Nomina {
         $criterio = "Select * from calculopres('$empleado','to_char(cast('$fecha' as date)-1,'dd/mm/yyyy')','$parametro','P') where tipo='DEPOSITADOS' order by fecini desc";
         if (Herramientas :: BuscarDatos($criterio, & $calpres))
 		{
-			$valor = ($calpres[0]['dias']-5)*$calpres[0]['mondia'];
+			$valor = ($calpres[0]['dias']-5)*$calpres[0]['mondiapro'];
 		}
 
         return $valor;

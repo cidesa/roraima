@@ -892,7 +892,7 @@ class Tesoreria {
           if ($tscheemi[0]["status"] == 'A') {
             return "El cheque fué Anulado";
           }
-          if ($tscheemi[0]["status"] == 'C') {
+          if ($tscheemi[0]["status"] == 'C' || $tscheemi[0]["status"] == 'F') {
             $c = new Criteria();
             $c->add(TscheemiPeer :: NUMCUE, $numcue);
             $c->add(TscheemiPeer :: NUMCHE, $reflib);
@@ -912,7 +912,7 @@ class Tesoreria {
           if ($tscheemi[0]["status"] == 'A') {
             return "El cheque fué Anulado";
           }
-          if ($tscheemi[0]["status"] == 'C') {
+          if ($tscheemi[0]["status"] == 'C' || $tscheemi[0]["status"] == 'F') {
             $c = new Criteria();
             $c->add(TscheemiPeer :: NUMCUE, $numcue);
             $c->add(TscheemiPeer :: NUMCHE, $reflib);
