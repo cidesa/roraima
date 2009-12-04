@@ -109,7 +109,7 @@ $this->Bitacora('Guardo');
    */
   protected function saveBndefcon($bndefcon)
   {
-    $bndefcon->save();
+    Muebles::salvarDefConMue($bndefcon);
 
   }
 

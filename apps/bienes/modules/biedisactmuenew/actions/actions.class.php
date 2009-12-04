@@ -13,7 +13,7 @@
  */
 class biedisactmuenewActions extends autobiedisactmuenewActions
 {
-   // variable donde se debe colocar el código de error generado en el validateEdit 
+   // variable donde se debe colocar el código de error generado en el validateEdit
   // para que sea procesado por el handleErrorEdit.
 private static $coderror=-1;
    public  $coderror1=-1;
@@ -232,6 +232,7 @@ $this->Bitacora('Guardo');
      $cajtexcom    = $this->getRequestParameter('cajtexcom');
      $cajtexubi    = $this->getRequestParameter('cajtexubi');
      $cajtexdesubi = $this->getRequestParameter('cajtexdesubi');
+     $codigo = $this->getRequestParameter('codigo');
      $this->setVars();
 
      if ($this->getRequestParameter('ajax')=='0')
@@ -286,6 +287,43 @@ $this->Bitacora('Guardo');
 
         $output = '[["javascript","'.$javascript.'",""],["bndismue_desubiori","'.$desubi.'"]]';
       }
+      elseif ($this->getRequestParameter('ajax')=='5')
+      {
+        $javascript="";
+        $t= new Criteria();
+        $t->add(BndisbiePeer::CODDIS,substr($codigo,0,10));
+        $data= BndisbiePeer::doSelectOne($t);
+        if ($data)
+        {
+          if ($data->getDesinc()=='S')
+          {
+              $e= new Criteria();
+              $e->add(BnregmuePeer::CODACT,$this->getRequestParameter('codact'));
+              $e->add(BnregmuePeer::CODMUE,$this->getRequestParameter('codmue'));
+              $resultado=BnreginmPeer::doSelectOne($e);
+              if ($resultado)
+              {
+                  if ($resultado->getEstatus()=='D')
+                  {
+                    $javascript="alert('El Bien ya fue Desincorporado');";
+                  }
+              }
+          }
+
+          if ($data->getViduti()!='N'){
+            if ($data->getViduti()=='S'){
+               $javascript="$('label16').innerHTML = 'Vida Util (+)'; $('vidautil').show()";
+             }else{
+               $javascript="$('label16').innerHTML = 'Vida Util (-)'; $('vidautil').show()";
+             }
+          }
+          else{
+            $javascript="$('vidautil').hide()";
+        }
+        }
+        
+        $output = '[["javascript","'.$javascript.'",""]]';
+      }
 
         $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
       return sfView::HEADER_ONLY;
@@ -304,7 +342,7 @@ $this->Bitacora('Guardo');
     $this->updateBndismueFromRequest();
 
     $c = new Criteria();
-    $c->add(BndisbiePeer::CODDIS,substr($this->bndismue->getTipdismue(),0,6));
+    $c->add(BndisbiePeer::CODDIS,substr($this->bndismue->getTipdismue(),0,10));
     $bndisbie = BndisbiePeer::doSelectOne($c);
 
     if ($bndisbie){

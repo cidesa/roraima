@@ -67,10 +67,11 @@ class biedefubiActions extends autobiedefubiActions
    */
   public function executeAjax()
   {
-   if ($this->getRequestParameter('ajax')=='1')
-   {
-    $cajtexmos=$this->getRequestParameter('cajtexmos');
+   $cajtexmos=$this->getRequestParameter('cajtexmos');
+   $cajtexcom=$this->getRequestParameter('cajtexcom');
     $codigo=$this->getRequestParameter('codigo');
+   if ($this->getRequestParameter('ajax')=='1')
+   {    
     $c= new Criteria();
     $c->add(BnubicaPeer::CODUBI,$codigo);
     $result=BnubicaPeer::doSelectOne($c);
@@ -89,6 +90,22 @@ class biedefubiActions extends autobiedefubiActions
 
      $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
      return sfView::HEADER_ONLY;
+   }
+   else if ($this->getRequestParameter('ajax')=='2')
+   {
+       $valor=Bienes::validarCodubi($codigo);
+       
+       if ($valor==101){        
+           $javascript="alert('El Codigo no puede estar en Blanco ó longitud del código invalida'); $('$cajtexcom').value=''; $('$cajtexcom').focus();";
+       }else if ($valor==100)
+       { 
+           $javascript="alert('Nivel Anterior No Existe'); $('$cajtexcom').value=''; $('$cajtexcom').focus();";
+       }else {         
+           $javascript="";
+       }
+       $output = '[["javascript","'.$javascript.'",""]]';
+       $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+       return sfView::HEADER_ONLY;
    }
   }
 
