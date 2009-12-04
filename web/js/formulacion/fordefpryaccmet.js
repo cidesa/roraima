@@ -1,3 +1,14 @@
+/**
+ * Librerías Javascript
+ *
+ * @package    Roraima
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ *
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
+ */
+
 function mostrar(id)
 {
   //if (e.keyCode==13)
@@ -21,7 +32,41 @@ function mostrar(id)
                      parameters:'ajax=4&proyecto='+proyecto+'&accion='+accion+'&meta='+meta+'&fil='+fil
                      })
   //}
+
+  CalculoTrimestral();
 }
+
+function CalculoTrimestral()
+{
+		var cantproanual;
+		var fil=0;
+		var i=1;
+		var tot=0;
+		while (fil<12)
+		{
+		  str1= $("bx"+"_"+fil+"_2").value.toString();
+		  str1= str1.replace('.','') ;
+		  str1= str1.replace('.','') ;
+		  str1= str1.replace('.','') ;
+		  str1= str1.replace('.','') ;
+		  str1= str1.replace('.','') ;
+		  str1= str1.replace('.','') ;
+		  str1= str1.replace(',','.');
+		  var t=parseFloat(str1);
+
+		  tot = tot + t;
+			$("bx"+"_"+fil+"_4").value = format(tot.toFixed(2),'.',',','.');
+			if ((fil==2) || (fil==5) || (fil==8) || (fil==11))
+		      {
+		          //fil = 0;
+
+		          tot=0;
+		      }
+		  fil++;
+		}
+}
+
+
 
 function distribuirPeriodos()
 {

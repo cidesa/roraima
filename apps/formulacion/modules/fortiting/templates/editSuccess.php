@@ -4,8 +4,8 @@
  *
  * @package    Roraima
  * @subpackage vistas
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version    SVN: $Id$
+ * @author     $Author:lhernandez $ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id:editSuccess.php 32813 2009-09-08 16:19:47Z lhernandez $
  */
 // date: 2007/06/29 11:41:38
 ?>
@@ -15,7 +15,7 @@
 
 <div id="sf_admin_container">
 
-<h1><?php echo __('Edición Formulación Presupuesto de Ingresos', 
+<h1><?php echo __('Edición Formulación Presupuesto de Ingresos',
 array()) ?></h1>
 
 <div id="sf_admin_header">
@@ -24,7 +24,7 @@ array()) ?></h1>
 
 <div id="sf_admin_content">
 <?php include_partial('fortiting/edit_messages', array('forparing' => $forparing, 'labels' => $labels)) ?>
-<?php include_partial('fortiting/edit_form', array('forparing' => $forparing, 'labels' => $labels, 'obj' => $obj, 'forpar' => $forpar, 'lonpar' => $lonpar)) ?>
+<?php include_partial('fortiting/edit_form', array('forparing' => $forparing, 'labels' => $labels, 'obj' => $obj, 'objFF' => $objFF, 'forpar' => $forpar, 'lonpar' => $lonpar)) ?>
 </div>
 
 <div id="sf_admin_footer">

@@ -65,7 +65,8 @@ generator:
       desbrepry:     { name: Descripcion Breve del Proyecto }
       poravafis:     { name: Porcentaje de Avance Físico del Proyecto}
       poravafin:     { name: Porcentaje de Avance Financiero del Proyecto}
-
+      numempfem:     { name: Nro de Empleado Femenino}
+      numempmas:     { name: Nro de Empleado Masculino}
 
     list:
       title:          Proyectos y Acciones Centralizadas
@@ -78,7 +79,7 @@ generator:
       sort:    codpro
     edit:
       title:          Edición de Proyectos y Acciones Centralizadas
-      display:      [=codpro, proacc, nompro, codprg, desprg, fecini, feccul, montotpry, ubigeo, codemp, nomemp2, uniejepri, descat, enupro, desobjnva, objestins, objeesppro, objpndes, codequ, desobj, codsubobj, codsubsubobj, respro, unimedres, desunimed, benpro, nroempdir, nroempind, codsta, dessta, codpryonapre, tieejeanopry, tieejemespry, codobjnvaeta, sitobjdes, tieimpmes, tieimpano, accinm, accdif, codsitpre, tieejeanopry, tieejemespry, coddir, codobjnvaeta, codsec, codsubsec, indsitact, fecultdat, forind, fueind, indsitobj, cantmet,  nucdesend, zonecodes, comindust, uniadsemp, caremp, telemp, faxemp, emaemp, placontin, desbrepry, poravafis, poravafin]
+      display:      [=codpro, proacc, nompro, codprg, desprg, fecini, feccul, montotpry, ubigeo, codemp, nomemp2, uniejepri, descat, enupro, desobjnva, objestins, objeesppro, objpndes, codequ, desobj, codsubobj, codsubsubobj, respro, unimedres, desunimed, benpro, nroempdir, nroempind, codsta, dessta, codpryonapre, tieejeanopry, tieejemespry, codobjnvaeta, sitobjdes, tieimpmes, tieimpano, accinm, accdif, codsitpre, tieejeanopry, tieejemespry, coddir, codobjnvaeta, codsec, codsubsec, indsitact, fecultdat, forind, fueind, indsitobj, cantmet,  nucdesend, zonecodes, comindust, uniadsemp, caremp, telemp, faxemp, emaemp, placontin, desbrepry, poravafis, poravafin, numempfem, numempmas]
       actions:
         _create:      ~
         _list:        ~

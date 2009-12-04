@@ -5,9 +5,9 @@
  *
  * @package    Roraima
  * @subpackage fordefpryaccmet
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
+ * @author     $Author:jlobaton $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id:actions.class.php 34632 2009-11-10 14:32:11Z jlobaton $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -144,7 +144,7 @@ $this->Bitacora('Guardo');
   }
 
   /**
-   * Actualiza la informacion que viene de la vista 
+   * Actualiza la informacion que viene de la vista
    * luego de un get/post en el objeto principal del modelo base del formulario.
    *
    */
@@ -198,7 +198,7 @@ $this->Bitacora('Guardo');
   }
 
   /**
-   * Función principal para procesar la eliminación de registros 
+   * Función principal para procesar la eliminación de registros
    * en el formulario.
    *
    */
@@ -280,7 +280,7 @@ $this->Bitacora('Guardo');
     $col4->setAlineacionObjeto(Columna::IZQUIERDA);
     $col4->setNombreCampo('canmet');
     $col4->setEsNumerico(true);
-    $col4->setHTML('type="text" size="10" disabled="true"');
+    $col4->setHTML('type="text" size="10" disabled="true" autocomplete = "off"');
     $col4->setJScript('onKeypress="entermonto(event,this.id); mostrar(event,this.id);"');
 
     $col5 = new Columna('Distribucion Cantidad');
@@ -298,7 +298,7 @@ $this->Bitacora('Guardo');
     $col6->setAlineacionObjeto(Columna::CENTRO);
     $col6->setAlineacionContenido(Columna::CENTRO);
     $col6->setNombreCampo('anadir');
-    $col6->setHTML('type="text" size="1" style="border:none" class="imagenalmacen"');
+    $col6->setHTML('type="text" size="1" style="border:none" class="imagenalmacen" autocomplete = "off"');
     $col6->setJScript('onClick="mostrar(this.id)"');
 
     $opciones->addColumna($col1);
@@ -351,7 +351,7 @@ $this->Bitacora('Guardo');
     $col2->setAlineacionContenido(Columna::CENTRO);
     $col2->setEsNumerico(true);
     $col2->setNombreCampo('canmet');
-    $col2->setJScript('onKeypress="entermonto_b(event,this.id);"');
+    $col2->setJScript('onKeypress="entermonto_b(event,this.id); CalculoTrimestral();"');
     $col2->setEsGrabable(true);
     $col2->setHTML('type="text" size="10"');
     $col2->setEsTotal(true,'total');
@@ -364,12 +364,23 @@ $this->Bitacora('Guardo');
     $col3->setNombreCampo('canmeteje');
     $col3->setEsNumerico(true);
     $col3->setOculta(true);
-    $col3->setJScript('onKeypress="entermonto_b(event,this.id);"');
+    $col3->setJScript('onKeypress="entermonto_b(event,this.id); "');
     $col3->setHTML('type="text" size="10"');
+
+    $col4 = new Columna('Totales');
+    $col4->setTipo(Columna::MONTO);
+    $col4->setAlineacionObjeto(Columna::CENTRO);
+    $col4->setAlineacionContenido(Columna::CENTRO);
+    $col4->setEsGrabable(false);
+    $col4->setNombreCampo('trimestre');
+    $col4->setEsNumerico(true);
+    $col4->setOculta(false);
+    $col4->setHTML('type="text" size="10"');
 
     $opciones->addColumna($col1);
     $opciones->addColumna($col2);
     $opciones->addColumna($col3);
+    $opciones->addColumna($col4);
 
     $this->obj2 = $opciones->getConfig($per);
    }
@@ -431,7 +442,7 @@ $this->Bitacora('Guardo');
 
      $this->configGrid2($proyecto,$accion,$meta);
 
-     $javascript='actualizarsaldos_b();distribuirPeriodos();';
+     $javascript='actualizarsaldos_b();distribuirPeriodos();CalculoTrimestral();';
      $output = '[["fila","'.$fila.'",""],["javascript","'.$javascript.'",""]]';
      $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
    }

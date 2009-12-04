@@ -5,8 +5,8 @@
  *
  * @package    Roraima
  * @subpackage fordefcatpre
- * @author     $Author: jlobaton $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id: actions.class.php 33968 2009-10-14 13:41:55Z jlobaton $
+ * @author     $Author:jlobaton $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id:actions.class.php 33968 2009-10-14 13:41:55Z jlobaton $
  *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2

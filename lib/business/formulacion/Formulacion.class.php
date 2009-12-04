@@ -4,8 +4,8 @@
  *
  * @package    Roraima
  * @subpackage facturacion
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
+ * @author     $Author:lhernandez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id:Formulacion.class.php 32397 2009-09-01 19:18:37Z lhernandez $
  * 
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -464,9 +464,11 @@ class Formulacion
 /****************************Actualización Totales de Fuente de Ingresos **************************************/
   public static function actdisfueing()
   {
-       $sql = "Select  Sum(MontoIng) as ingreso, Sum(MontoDis) as disponible, codtipfin
-                 From ForParIng Group by codtipfin Order by CodTipFin ";
+       //$sql = "Select  Sum(MontoIng) as ingreso, Sum(MontoDis) as disponible, codtipfin
+       //          From ForParIng Group by codtipfin Order by CodTipFin ";
 
+		$sql = "Select  Sum(MontoIng) as ingreso, Sum(MontoIng) as disponible, codfin
+                 From foringdisfuefin Group by codfin Order by Codfin";
     $result=array();
     if (Herramientas::BuscarDatos($sql,&$result))
     {
@@ -475,7 +477,7 @@ class Formulacion
       {
         $montodis = $result[$i]['disponible'];
         $montoing = $result[$i]['ingreso'];
-        $codtipfin= $result[$i]['codtipfin'];
+        $codtipfin= $result[$i]['codfin'];
 
           $c = new Criteria();
           $c->add(FortipfinPeer::CODFIN,$codtipfin);
@@ -1006,11 +1008,37 @@ class Formulacion
 **                                Miki                                   **
 **************************************************************************/
 
-  public static function salvarFortiting($forparing,$grid)
+  public static function salvarFortiting($forparing,$grid,$gridFF)
   {
       $forparing->save();
       self::grabarCantPeriodo($forparing,$grid);
+      self::grabarFuenteFinanciamiento($forparing,$gridFF);
   }
+
+  public static function grabarFuenteFinanciamiento($forparing,$grid)
+  {
+    $codigo=$forparing->getCodparing();
+    $x=$grid[0];
+    $j=0;
+    while ($j<(count($x)))
+    {
+      $x[$j]->setCodparing($codigo);
+      $x[$j]->save();
+      $j++;
+    }
+
+    $z=$grid[1];
+    $j=0;
+    if (!empty($z[$j]))
+    {
+     while ($j<count($z))
+     {
+      $z[$j]->delete();
+      $j++;
+     }
+    }
+ }
+
 
   public static function grabarCantPeriodo($forparing,$grid)
   {
@@ -1022,11 +1050,9 @@ class Formulacion
       $x[$j]->setCodpar($codigo);
       $x[$j]->save();
       $j++;
-      //print $j;
     }
 
     $z=$grid[1];
-   // print_r($z[1]);exit();
     $j=0;
     if (!empty($z[$j]))
     {
@@ -1635,7 +1661,7 @@ public static function salvarFordefest($estado)
     self :: grabarProfesion($cargos, $ids);
     self :: grabarPerfil($cargos, $grid);
   }
-  
+
     public static function grabarProfesion($cargos, $ids) {
     $c = new Criteria();
     $c->add(ForprocarPeer :: CODCAR, $cargos->getCodcar());
