@@ -33,6 +33,12 @@
         'onKeyPress' => "javascript:return dFilter (event.keyCode, this,'$forubi')",
         'size'=> 32,
         'readonly' => $bnubibie->getId()!='' ? true : false ,
+        'onBlur'=> remote_function(array(
+          'url'      => 'biedefubi/ajax',
+          'condition' => "$('bnubibie_codubi').value != '' && $('id').value == ''",
+          'complete' => 'AjaxJSON(request, json)',
+          'with' => "'ajax=2&cajtexcom=bnubibie_codubi&codigo='+this.value",
+)),
      )); echo $value ? $value : '&nbsp;' ?>
 
 </div>

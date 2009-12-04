@@ -698,5 +698,47 @@ class Bienes
   	}
   }
 
+  public static function validarCodubi($codubi)
+  {
+     $formato=Herramientas::ObtenerFormato('Bndefins','forubi');
+     $posrup1=Herramientas::instr($formato,'-',0,1);
+     $posrup1=$posrup1-1;
+     if (strlen(trim($codubi))<$posrup1)
+     {
+       return 101;
+     }
+
+    Herramientas::FormarCodigoPadre($codubi,&$nivelcodigo,&$ultimo,$formato);     
+    $c= new Criteria();
+    $c->add(BnubibiePeer::CODUBI,$ultimo);
+    $bnubibie = BnubibiePeer::doSelectOne($c);
+    if (!$bnubibie)
+    {        
+       if ($nivelcodigo == 0) return 100;
+    }    
+    return -1;
+  }
+
+    public static function validarCodactivo($codact)
+  {
+     $formato=Herramientas::ObtenerFormato('Bndefins','foract');
+     $posrup1=Herramientas::instr($formato,'-',0,1);
+     $posrup1=$posrup1-1;
+     if (strlen(trim($codact))<$posrup1)
+     {
+       return 101;
+     }
+
+    Herramientas::FormarCodigoPadre($codact,&$nivelcodigo,&$ultimo,$formato);
+    $c= new Criteria();
+    $c->add(BndefactPeer::CODACT,$ultimo);
+    $bnubibie = BndefactPeer::doSelectOne($c);
+    if (!$bnubibie)
+    {
+       if ($nivelcodigo == 0) return 100;
+    }
+    return -1;
+  }
+
 }
 ?>

@@ -158,6 +158,8 @@ public static function Validar_biedisactmuenew($valor1,$valor2)
 	  {
 	     Herramientas::getSalvarCorrelativo('corrmue','bndefins','Referencia',$r,&$msg);
 	  }
+
+      $clase->setValini($clase->getMondismue());
       $clase->save();
       return -1;
 
@@ -202,6 +204,14 @@ public static function Validar_biedisactmuenew($valor1,$valor2)
         if (($adiciona) and $clase->getId()=='')
         {
           $bnregmue->setValadi($clase->getValadi() + $clase->getMondismue());
+        }
+        ///Actualizar Vida Util segun sea el caso
+        if ($bndisbie->getViduti()!='N'){
+            if ($bndisbie->getViduti()=='S'){  //Aumenta
+                $bnregmue->setAumviduti($bnregmue->getAumviduti()+ $clase->getVidutil());
+            }else{  //Disminuye
+              $bnregmue->setDimviduti($bnregmue->getDimviduti()+ $clase->getVidutil());
+            }
         }
         $bnregmue->save();
       }
@@ -288,17 +298,28 @@ public static function Validar_biedisactmuenew($valor1,$valor2)
         $tipo1 = 'D';
         $monto1 = $clase->getMondismue();
     }else{
-        $codigocuenta1  = $ctadepcar;
-        $desc1 = $descripC;
-        $tipo1 = 'D';
-        $monto1 = $depacu;
+
+        if ($depacu>0)
+        {
+            $codigocuenta1  = $ctadepcar;
+            $desc1 = $descripC;
+            $tipo1 = 'D';
+            $monto1 = $depacu;            
+        }
 
         if (($valini + $valadi) - $depacu > 0)
         {
+          if ($depacu>0){
           $codigocuenta1  = $codigocuenta1."_".$CuentaPedida;
           $desc1 = $desc1."_".$descripC;
           $tipo1 = $tipo1."_".'D';
           $monto1 = $monto1."_".(($valini + $valadi) - $depacu);
+          }else{
+              $codigocuenta1  = $CuentaPedida;
+          $desc1 = $descripC;
+          $tipo1 = 'D';
+          $monto1 = (($valini + $valadi) - $depacu);
+          }
         }
 
         $codigocuenta2 = $CuentaAbo;
@@ -433,6 +454,52 @@ public static function Validar_biedisactmuenew($valor1,$valor2)
     } catch (Exception $ex){
       return 0;
     }
+  }
+
+  public static function salvarDefConMue($clase)
+  {
+       $sql="select codact, codmue from bnregmue where codact>='".$clase->getCodact()."' and codact<='".$clase->getCodact1()."'";
+       if (Herramientas::BuscarDatos($sql,&$result)){
+         $i=0;
+         while ($i<count($result))
+         {
+           $z= new Criteria();
+           $z->add(BndefconPeer::CODACT,$result[$i]["codact"]);
+           $z->add(BndefconPeer::CODMUE,$result[$i]["codmue"]);
+           $registro= BndefconPeer::doSelectOne($z);
+           if ($registro)
+           {
+               $registro->setCodact($registro->getCodact());
+               $registro->setCodmue($registro->getCodmue());
+               $registro->setCtadepcar($clase->getCodcta());
+               $registro->setCtadepabo($clase->getCtadepabo());
+               $registro->setCtaajucar($clase->getCtaajucar());
+               $registro->setCtaajuabo($clase->getCtaajuabo());
+               $registro->setCtapercar($clase->getCtapercar());
+               $registro->setCtaperabo($clase->getCtaperabo());
+               $registro->setCtarevcar($clase->getCtarevcar());
+               $registro->setCtarevabo($clase->getCtarevabo());
+               $registro->setStacta('A');
+               $registro->save();
+           }else{
+               $bndefcon= new Bndefcon();
+               $bndefcon->setCodact($result[$i]["codact"]);
+               $bndefcon->setCodmue($result[$i]["codmue"]);
+               $bndefcon->setCtadepcar($clase->getCodcta());
+               $bndefcon->setCtadepabo($clase->getCtadepabo());
+               $bndefcon->setCtaajucar($clase->getCtaajucar());
+               $bndefcon->setCtaajuabo($clase->getCtaajuabo());
+               $bndefcon->setCtapercar($clase->getCtapercar());
+               $bndefcon->setCtaperabo($clase->getCtaperabo());
+               $bndefcon->setCtarevcar($clase->getCtarevcar());
+               $bndefcon->setCtarevabo($clase->getCtarevabo());
+               $bndefcon->setStacta('A');
+               $bndefcon->save();
+           }
+           $i++;
+         }
+           
+       }
   }
 
 }
