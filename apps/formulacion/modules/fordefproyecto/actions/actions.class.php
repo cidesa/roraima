@@ -5,9 +5,9 @@
  *
  * @package    Roraima
  * @subpackage fordefproyecto
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
+ * @author     $Author:jlobaton $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id:actions.class.php 34632 2009-11-10 14:32:11Z jlobaton $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -123,7 +123,7 @@ $this->Bitacora('Guardo');
   }
 
   /**
-   * Actualiza la informacion que viene de la vista 
+   * Actualiza la informacion que viene de la vista
    * luego de un get/post en el objeto principal del modelo base del formulario.
    *
    */
@@ -474,6 +474,15 @@ $this->Bitacora('Guardo');
     {
       $this->fordefpry->setPoravafin($fordefpry['poravafin']);
     }
+    if (isset($fordefpry['numempfem']))
+    {
+      $this->fordefpry->setNumempfem($fordefpry['numempfem']);
+    }
+    if (isset($fordefpry['numempmas']))
+    {
+      $this->fordefpry->setNumempmas($fordefpry['numempmas']);
+    }
+
   }
   public function executeCombo()
   {

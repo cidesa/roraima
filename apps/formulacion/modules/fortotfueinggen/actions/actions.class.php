@@ -5,8 +5,8 @@
  *
  * @package    Roraima
  * @subpackage fortotfueinggen
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
+ * @author     $Author:lhernandez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id:actions.class.php 32379 2009-09-01 16:59:06Z lhernandez $
  * 
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -118,7 +118,7 @@ $this->Bitacora('Guardo');
     if (Formulacion::verificarexistenmovimientos())
     {
        $this->setFlash('notice1','Existen movimientos de formulación por metas registrados, no se puede recalcular ingresos');
-       $this->eximov='S';
+       $this->eximov='N';
   }
   else
      $this->eximov='N';

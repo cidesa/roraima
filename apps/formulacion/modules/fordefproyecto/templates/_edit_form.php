@@ -4,8 +4,8 @@
  *
  * @package    Roraima
  * @subpackage vistas
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version    SVN: $Id$
+ * @author     $Author:jlobaton $ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id:_edit_form.php 34632 2009-11-10 14:32:11Z jlobaton $
  */
 // date: 2007/06/27 17:25:29
 ?>
@@ -201,8 +201,8 @@
 	  <?php endif; ?>
 
 	  <?php $value = object_input_tag($fordefpry, 'getTieejeanopry', array (
-	  'size' => 7,
-	  'maxlength' =>5,
+	  'size' => 4,
+	  'maxlength' =>4,
 	  'control_name' => 'fordefpry[tieejeanopry]',
 	)); echo $value ? $value : '&nbsp;' ?>
     </div>
@@ -308,7 +308,7 @@
 
   <?php $value = object_textarea_tag($fordefpry, 'getDesobj', array (
   'disabled' => true,
-  'size' => '80x2',
+  'size' => '1000x2',
   'control_name' => 'fordefpry[desobj]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
@@ -1043,6 +1043,37 @@
   'size' => 7,
   'maxlength' => 10,
   'control_name' => 'fordefpry[nroempind]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+    </th>
+
+    <th>
+    <?php echo label_for('fordefpry[numempfem]', __($labels['fordefpry{numempfem}']), 'class="required" style="width: 250px"') ?>
+  <div class="content<?php if ($sf_request->hasError('fordefpry{numempfem}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('fordefpry{numempfem}')): ?>
+    <?php echo form_error('fordefpry{numempfem}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($fordefpry, 'getNumempfem', array (
+  'size' => 4,
+  'maxlength' => 4,
+  'control_name' => 'fordefpry[numempfem]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+    </th>
+
+
+    <th>
+    <?php echo label_for('fordefpry[numempmas]', __($labels['fordefpry{numempmas}']), 'class="required" style="width: 250px"') ?>
+  <div class="content<?php if ($sf_request->hasError('fordefpry{numempmas}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('fordefpry{numempmas}')): ?>
+    <?php echo form_error('fordefpry{numempmas}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($fordefpry, 'getNumempmas', array (
+  'size' => 4,
+  'maxlength' => 4,
+  'control_name' => 'fordefpry[numempmas]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
     </th>

@@ -4,8 +4,8 @@
  *
  * @package    Roraima
  * @subpackage vistas
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version    SVN: $Id$
+ * @author     $Author:jlobaton $ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id:_edit_form.php 34632 2009-11-10 14:32:11Z jlobaton $
  */
 // date: 2007/06/18 12:23:52
 ?>
@@ -26,7 +26,7 @@
 
 
 <fieldset id="sf_fieldset_none" class="">
-<legend><?php echo __('Proyecto ó Acción Centralizada') ?></legend>
+<h2><?php echo __('Proyecto ó Acción Centralizada') ?></h2>
 <div class="form-row">
   <table>
    <tr>
@@ -88,7 +88,7 @@
 </fieldset>
 <br>
 <fieldset>
-<legend><?php echo __('Ubicación Geográfica de cada Acción Específica') ?></legend>
+<h2><?php echo __('Ubicación Geográfica de cada Acción Específica') ?></h2>
   <div class="form-row">
    <table>
    <tr>

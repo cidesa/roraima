@@ -1,3 +1,13 @@
+/**
+ * LibrerÃ­as Javascript
+ *
+ * @package    Roraima
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * 
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
+ */
 
   function CatalogoGrid(e,id)  //Grid fuente de financiamiento
   {
@@ -9,7 +19,7 @@
 
   var id1=name+"_"+fil+"_"+'5';       //Distribucion del Monto
   var asig=name+"_"+fil+"_"+'6';      //Asignacion Presupuestaria
-  var codpre=name+"_"+fil+"_"+'14';   //Código Presupuestario
+  var codpre=name+"_"+fil+"_"+'14';   //Cï¿½digo Presupuestario
   var ftemonto=name+"_"+fil+"_"+'16';   //Fte.Financiamiento.Monto
 
   //se hizo asi por que no encontre la manera mas optima de hacerlo
