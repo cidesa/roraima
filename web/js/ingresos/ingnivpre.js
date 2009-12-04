@@ -1,3 +1,13 @@
+/**
+ * Librerías Javascript
+ *
+ * @package    Roraima
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * 
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
+ */
 
 function actualizarformato(id)//Actualiza el formato de los niveles presupuestarios
 {
@@ -66,69 +76,64 @@ function actualizarformato(id)//Actualiza el formato de los niveles presupuestar
 
  function validarfecini(){
 
- var fecini=$('cidefniv_fecini').value;
- var fecper=$('cidefniv_fecper').value;
+	var fecini=$('cidefniv_fecini').value;
+ 	var fecper=$('cidefniv_fecper').value;
 
+	array_fecini = fecini.split("/");
 
- array_fecini = fecini.split("/");
+	var diaini=array_fecini[0];
+	var mesini=(array_fecini[1]-1);
+	var anoini=(array_fecini[2]);
+	var fechaini = new Date(anoini,mesini,diaini);
 
- var diaini=array_fecini[0];
- var mesini=(array_fecini[1]-1);
- var anoini=(array_fecini[2]);
- var fechaini = new Date(anoini,mesini,diaini);
+	array_fecper = fecper.split("/");
 
-  array_fecper = fecper.split("/");
+	var diaper=array_fecper[0];
+	var mesper=(array_fecper[1]-1);
+	var anoper=(array_fecper[2]);
+	var fechaper = new Date(anoper,mesper,diaper);
 
- var diaper=array_fecper[0];
- var mesper=(array_fecper[1]-1);
- var anoper=(array_fecper[2]);
- var fechaper = new Date(anoper,mesper,diaper);
-
- if (fechaini>fechaper){
-   alert_('La Fecha de Inicio debe estar dentro del Periodo');
-   $('cidefniv_fecini').value='';
- }
-
+	if (fechaini>fechaper){
+   		alert_('La Fecha de Inicio debe estar dentro del Periodo');
+   		$('cidefniv_fecini').value='';
+ 	}
  }
 
  function validarfeccie(){
 
- var fecini=$('cidefniv_fecini').value;
- var feccie=$('cidefniv_feccie').value;
-  var fecper=$('cidefniv_fecper').value;
+	var fecini=$('cidefniv_fecini').value;
+ 	var feccie=$('cidefniv_feccie').value;
+  	var fecper=$('cidefniv_fecper').value;
 
- array_fecini = fecini.split("/");
+	array_fecini = fecini.split("/");
 
- var diaini=array_fecini[0];
- var mesini=(array_fecini[1]-1);
- var anoini=(array_fecini[2]);
- var fechaini = new Date(anoini,mesini,diaini);
+	var diaini=array_fecini[0];
+	var mesini=(array_fecini[1]-1);
+	var anoini=(array_fecini[2]);
+	var fechaini = new Date(anoini,mesini,diaini);
 
-  array_fecper = fecper.split("/");
+	array_fecper = fecper.split("/");
 
- var diaper=array_fecper[0];
- var mesper=(array_fecper[1]-1);
- var anoper=(array_fecper[2]);
- var fechaper = new Date(anoper,mesper,diaper);
+	var diaper=array_fecper[0];
+	var mesper=(array_fecper[1]-1);
+	var anoper=(array_fecper[2]);
+	var fechaper = new Date(anoper,mesper,diaper);
 
-   array_feccie = feccie.split("/")
+	array_feccie = feccie.split("/");
 
-var diacie=array_feccie[0];
-var mescie=(array_feccie[1]-1);
-var anocie=(array_feccie[2]);
-var fechacie = new Date(anocie,mescie,diacie);
+	var diacie=array_feccie[0];
+	var mescie=(array_feccie[1]-1);
+	var anocie=(array_feccie[2]);
+	var fechacie = new Date(anocie,mescie,diacie);
 
-
- if (fechacie<fechaini){
-   alert('La Fecha de Cierre debe ser mayor que la Fecha de Inicio');
-   $('cidefniv_feccie').value='';
- }
-
-  if (fechacie>fechaper){
-   alert('La Fecha de Cierre esta fuera del Periodo');
-   $('cidefniv_feccie').value='';
-  }
-
+	if (fechacie<fechaini){
+   		alert('La Fecha de Cierre debe ser mayor que la Fecha de Inicio');
+	   	$('cidefniv_feccie').value='';
+ 	}
+	if (fechacie<fechaper){
+		alert('La Fecha de Cierre esta fuera del Periodo');
+		$('cidefniv_feccie').value='';
+	}
  }
 
  function validarcatpar()//Valida el numero de partidas y categorias

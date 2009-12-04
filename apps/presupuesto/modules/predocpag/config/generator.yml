@@ -1,0 +1,33 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Cpdocpag
+    theme:            cidesaGenerator
+    fields:
+      tippag: {name: Tipo de Documento, params: onblur=convertirMayusculas(this.id) maxlength=4 size=5}
+      nomext: {name: Nombre Extendido}
+      nomabr: {name: Nombre Abreviado, params: onblur=convertirMayusculas(this.id) maxlength=4 size=5}
+      refier: {name: Refiere a}
+      afeprc: {name: .}
+      afecom: {name: .}
+      afecau: {name: .}
+      afepag: {name: .}
+      afedis: {name: .}
+    list:
+      title:   Pagos
+      display: [=tippag, nomext]
+      filters: [tippag, nomext]
+    edit:
+      title:                     Pagos
+      display:
+        Datos del Documento:     [tippag, nomext, nomabr, _refier]
+        Precompromiso:           [_afeprc]
+        Compromiso:              [_afecom]
+        Causado:                 [_afecau]
+        Pagado:                  [_afepag]
+        Disponibilidad:          [_afedis]
+      actions:
+        _list:        ~
+        _create:       ~
+        _save:        ~
+        _delete:      ~

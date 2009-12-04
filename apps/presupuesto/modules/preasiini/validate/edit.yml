@@ -1,0 +1,22 @@
+methods:
+  post:
+   - "cpasiini{codpre}"
+   - "cpasiini{asiper}"
+
+names:
+  cpasiini{codpre}:
+    required:  Yes
+    required_msg: El código presupuestario no puede estar en blanco
+    validators: Validator_existe
+
+  cpasiini{asiper}:
+    required:  Yes
+    required_msg: Debe seleccionar el tipo de asignación
+
+Validator_existe:
+    class: CidesaExistValidator
+    param:
+        class:        Cpasiini
+        column:       codpre
+        unique_error: El código presupuestario no existe.
+

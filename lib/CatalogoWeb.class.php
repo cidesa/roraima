@@ -1190,27 +1190,30 @@ class CatalogoWeb extends BaseCatalogoWeb {
 
   public function Bndefact_Biedefconlotm() {
     $this->c = new Criteria();
+    $this->c->addAscendingOrderByColumn(BndefactPeer :: CODACT);
     $this->columnas = array (
       BndefactPeer :: CODACT => 'Código Nivel',
       BndefactPeer :: DESACT => 'Descripción'
     );
   }
 
-  public function Bndefact_Biedefconlotm1() {
-    $this->c = new Criteria();
-    $this->columnas = array (
-      BndefactPeer :: CODACT => 'Código Nivel',
-      BndefactPeer :: DESACT => 'Descripción'
-    );
-  }
+	public function Bndefact_Biedefconlotm1() {
+		$this->c = new Criteria();
+		$this->c->addAscendingOrderByColumn(BndefactPeer :: CODACT);
+		$this->columnas = array (
+			BndefactPeer :: CODACT => 'Código Nivel',
+			BndefactPeer :: DESACT => 'Descripción'
+		);
+	}
 
-  public function Contabb_Biedefconlotm() {
-    $this->c = new Criteria();
-    $this->columnas = array (
-      ContabbPeer :: CODCTA => 'Código Cuenta',
-      ContabbPeer :: DESCTA => 'Descripción'
-    );
-  }
+	public function Contabb_Biedefconlotm() {
+		$this->c = new Criteria();
+		$this->c->addAscendingOrderByColumn(ContabbPeer:: CODCTA);
+		$this->columnas = array (
+			ContabbPeer :: CODCTA => 'Código Cuenta',
+			ContabbPeer :: DESCTA => 'Descripción'
+		);
+	}
 
   ////////////////////////////////////////////////////////////////////////////////////////////
 

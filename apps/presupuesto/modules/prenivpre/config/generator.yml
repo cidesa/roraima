@@ -1,0 +1,32 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Cpdefniv
+    theme:            cidesaGenerator
+    fields:
+      nomemp:  { name: ., params: size=50 readOnly=true, help: Nombre de la empresa}
+      rupcat:  { name: Clasifi. de Categorías, help: a}
+      ruppar:  { name: Clasifi. de Partidas, help: a}
+      nivdis:  { name: Nivel Disponibilidad, help: a}
+      forpre:  { name: Formato Código Presupuestario, params: readOnly=true, help: a}
+      fecini:  { name: Inicio de Ejercicio, params: onBlur=validarFecini(), help: a}
+      feccie:  { name: Fin de Ejercicio, params: onBlur=validarFeccie(), help: a}
+      fecper:  { name: Período, help: a}
+      asiper:  { name: Asignación Periodica, help: a}
+      numper:  { name: Número de Períodos, help: a}
+      grid:    { name: .}
+      gridper: { name: . }
+    #list:
+      #title:                    Catálogo de Cuentas
+      #display:                  [=codcta, descta]
+      #filters:                  [codcta, descta]
+    edit:
+      title:                                 Niveles Presupuestarios
+      display:
+        Nombre Empresa:                      [nomemp]
+        Datos del Código Presupuestario:     [_rupcat, _ruppar, _nivdis]
+        NONE:                                [_grid, forpre]
+        Configuraciones Generales:           [fecini, feccie, fecper, _asiper, _numper]
+        Distribución de los Períodos:        [_gridper]
+      actions:
+        _save:        ~

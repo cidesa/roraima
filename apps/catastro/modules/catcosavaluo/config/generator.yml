@@ -10,8 +10,8 @@ generator:
       destipo: { name: Tipo }
       desuso: { name: Uso Inmueble}
       catusoesp_id: { name: Uso Inmueble, params: include_custom= "Seleccione" }
-      costo: { name: Costo en Mt2, params: onBlur="event.keyCode=13; formatoDecimal(event,this.id);" }
-
+      costo: { name: Costo en Mt2      }
+# params:  onBlur='event.keyCode=13; formatoDecimal(event,this.id);'
     list:
       title: Costos para Avalúo
       display: [=coddivgeo, desdivgeo, destipo, desuso]
