@@ -4,7 +4,8 @@ generator:
     model_class:      Bndefcon
     theme:            default
     fields:
-      codact:      { name : Código Nivel }
+      codact:      { name : Desde }
+      codact1:      { name : Hasta }
       codmue:      { name : Código Activo }
       desmue:      { name : Descripción }
 

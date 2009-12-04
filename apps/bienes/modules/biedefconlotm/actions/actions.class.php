@@ -131,6 +131,10 @@ $this->Bitacora('Guardo');
     {
       $this->bndefcon->setCodact($bndefcon['codact']);
     }
+    if (isset($bndefcon['codact1']))
+    {
+      $this->bndefcon->setCodact1($bndefcon['codact1']);
+    }
     if (isset($bndefcon['codmue']))
     {
       $this->bndefcon->setCodmue($bndefcon['codmue']);
@@ -266,17 +270,30 @@ $this->Bitacora('Guardo');
   {
    $cajtexmos=$this->getRequestParameter('cajtexmos');
      $cajtexcom=$this->getRequestParameter('cajtexcom');
+     $javascript="";
 
      if ($this->getRequestParameter('ajax')=='0')
       {
-        $desact=Herramientas::getX('codact','Bndefact','desact',$this->getRequestParameter('codigo'));
-        $output = '[["'.$cajtexmos.'","'.$desact.'",""]]';
+        $this->mascaralonformato = Herramientas::getX_vacio('codins','bndefins','LonAct','001');
+          if ($this->mascaralonformato==strlen($this->getRequestParameter('codigo'))){
+             $desact=Herramientas::getX('codact','Bndefact','desact',$this->getRequestParameter('codigo'));
+          }else{
+              $desact="";
+              $javascript="alert('El codigo no es de ultimo nivel'); $('$cajtexcom').value=''; $('$cajtexcom').focus();";
+          }
+        $output = '[["'.$cajtexmos.'","'.$desact.'",""],["javascript","'.$javascript.'",""]]';
       }
 
     elseif ($this->getRequestParameter('ajax')=='1')
       {
-        $desact=Herramientas::getX('codact','Bndefact','desact',$this->getRequestParameter('codigo'));
-        $output = '[["'.$cajtexmos.'","'.$desact.'",""]]';
+          $this->mascaralonformato = Herramientas::getX_vacio('codins','bndefins','LonAct','001');
+          if ($this->mascaralonformato==strlen($this->getRequestParameter('codigo'))){
+             $desact=Herramientas::getX('codact','Bndefact','desact',$this->getRequestParameter('codigo'));
+          }else{
+              $desact="";
+              $javascript="alert('El codigo no es de ultimo nivel'); $('$cajtexcom').value=''; $('$cajtexcom').focus();";
+          }
+        $output = '[["'.$cajtexmos.'","'.$desact.'",""],["javascript","'.$javascript.'",""]]';
       }
       elseif ($this->getRequestParameter('ajax')=='2')
       {

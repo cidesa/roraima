@@ -458,7 +458,7 @@ public static function Validar_biedisactmuenew($valor1,$valor2)
 
   public static function salvarDefConMue($clase)
   {
-       $sql="select codact, codmue from bnregmue where codact>='".$clase->getCodact()."' and codact<='".$clase->getCodact1()."'";
+       $sql="select codact, codmue from bnregmue where codact>='".$clase->getCodact()."' and codact<='".$clase->getCodact1()."' and stamue='A'";
        if (Herramientas::BuscarDatos($sql,&$result)){
          $i=0;
          while ($i<count($result))

@@ -238,8 +238,11 @@ class Bienes
 
          $c1= new Criteria();
          $c1->add(BndefconPeer::STACTA,'A');
+         $c1->add(BnregmuePeer::STAMUE,'A');
          $c1->addAscendingOrderByColumn(BndefconPeer::CODACT);
          $c1->addAscendingOrderByColumn(BndefconPeer::CODMUE); //Definición Contable
+         $c1->addJoin(BndefconPeer::CODACT, BnregmuePeer::CODACT);
+         $c1->addJoin(BndefconPeer::CODMUE, BnregmuePeer::CODMUE);
          $reg1= BndefconPeer::doSelect($c1);
 
          //Monto  Depreciación Mueble
@@ -258,8 +261,11 @@ class Bienes
 
          $c1= new Criteria();
          $c1->add(BndefconiPeer::STACTA,'A');
+         $c1->add(BnreginmPeer::STAINM,'A');
          $c1->addAscendingOrderByColumn(BndefconiPeer::CODACT);
          $c1->addAscendingOrderByColumn(BndefconiPeer::CODINM); //Definición Contable
+         $c1->addJoin(BndefconiPeer::CODACT, BnreginmPeer::CODACT);
+         $c1->addJoin(BndefconiPeer::CODINM, BnreginmPeer::CODINM);
          $reg1= BndefconiPeer::doSelect($c1);
 
          //Monto  Depreciación Inmueble
