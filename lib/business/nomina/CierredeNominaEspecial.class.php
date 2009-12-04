@@ -133,6 +133,7 @@ class CierredeNominaEspecial
  public static function generar($codnomina,$ultfec,$profec,$codnomesp,&$sobregiro=false, $intpre='N')
  {
    try{
+   $sobregiro=false;
    $dateFormat = new sfDateFormat('es_VE');
    $ultfec = $dateFormat->format($ultfec, 'i', $dateFormat->getInputPattern('d'));
    $profec = $dateFormat->format($profec, 'i', $dateFormat->getInputPattern('d'));
@@ -600,6 +601,7 @@ class CierredeNominaEspecial
 
  public static function Validarcodprenomina($codnomina,$fecha,&$sobregiro=false, $intpre = 'N')
  {
+   
    $dateFormat = new sfDateFormat('es_VE');
    $fecha = $dateFormat->format($fecha, 'i', $dateFormat->getInputPattern('d'));
    $anopresu = substr(Herramientas :: getX('codemp', 'cpdefniv', 'fecper', '001'), 0, 4);
@@ -731,10 +733,10 @@ class CierredeNominaEspecial
    	{
      ////  Validar contra Presupuesto  ////
 	   	 	//$sql = "select mondis from cpasiini where perpre='00' and codpre='".$grabar->getCodpre()."'";
-	   		//  if (Herramientas::BuscarDatos($sql,&$resul))
+	   		  //if (Herramientas::BuscarDatos($sql,&$resul))
 		      if (Herramientas::Monto_disponible_ejecucion($anopresu,$grabar->getCodpre(),&$mondis))
 		      {
-		        if ($grabar->getMonto() > $resul[0]["mondis"]){
+		        if ($grabar->getMonto() > $mondis){
 		          $sobregiro = true;
 		          break;
 		        }
