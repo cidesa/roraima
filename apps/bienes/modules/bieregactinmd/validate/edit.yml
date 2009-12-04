@@ -48,7 +48,7 @@ names:
   bnreginm{codact}:
     required:  Yes
     required_msg: El Código del catalogo no puede estar en Blanco.
-    validators:ExistValidator_codact
+    validators: ExistValidator_codact
 
   bnreginm{codinm}:
     required:  Yes
@@ -128,23 +128,23 @@ names:
   bnreginm{areter}:
     required:  No
     validators: MyNumberValidator
-    
+
   bnreginm{arecub}:
     required:  No
     validators: MyNumberValidator
-    
+
   bnreginm{arecon}:
     required:  No
     validators: MyNumberValidator
-    
+
   bnreginm{areotr}:
     required:  No
     validators: MyNumberValidator
-    
+
   bnreginm{aretot}:
     required:  No
     validators: MyNumberValidator
-  
+
 MyNumberValidator:
     class: CidesaStringValidator
     param:
@@ -172,9 +172,9 @@ Validar2b:
 ExistValidator_codact:
     class: CidesaExistValidator
     param:
-        class:        BNDEFACT
-        column:       codact
-        unique_error: El Catalogo debe Existir.
+      class:        BNDEFACT
+      column:       codact
+      unique_error: El Catalogo debe Existir.
 
 ExistValidator_ordcom:
     class: CidesaExistValidator
