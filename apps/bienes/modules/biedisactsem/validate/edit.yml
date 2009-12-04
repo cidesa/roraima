@@ -1,16 +1,16 @@
 methods:
   post:
    - "bndissem{codact}"
-   - "bndissem{mondissem}" 
-   - "bndissem{fecdissem}" 
-   - "bndissem{fecdevdis}" 
+   - "bndissem{mondissem}"
+   - "bndissem{fecdissem}"
+   - "bndissem{fecdevdis}"
 
 names:
   bndissem{codact}:
     required:  Yes
     required_msg: El Código no puede estar en Blanco.
     validators: UniqueValidator
- 
+
   bndissem{mondissem}:
     required:  No
     validators: MyNumberValidator
@@ -22,19 +22,19 @@ names:
   bndissem{fecdevdis}:
     required:  No
     validators: FechaValidator
-        
+
 MyNumberValidator:
     class: CidesaStringValidator
     param:
         values:    [ '/^([0-9]*(\.*([0-9]{2,}))*\,?[0-9]+|[0-9]+\,?[0-9]*)?$/' ]
-        values_error:El Campo solo puede contener valores númericos
+        values_error: El Campo solo puede contener valores númericos
 
 UniqueValidator:
     class: sfPropelUniqueValidator
     param:
         class:    Bndissem
         column:   codact
-        unique_error:   El Código ya existe. Por Favor, Cambiélo por otro.
+        unique_error: El Código ya existe. Por Favor, Cambiélo por otro.
 
 FechaValidator:
     class: sfRegexValidator
