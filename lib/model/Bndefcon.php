@@ -15,6 +15,7 @@
  */
 class Bndefcon extends BaseBndefcon
 {
+   protected $codact1="";
   public function getDesmue()
   {
     $filtros=array('CODACT','CODMUE');//arreglo donde mando los filtros de las clases

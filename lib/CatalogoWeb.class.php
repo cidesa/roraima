@@ -1189,7 +1189,11 @@ class CatalogoWeb extends BaseCatalogoWeb {
   }
 
   public function Bndefact_Biedefconlotm() {
-    $this->c = new Criteria();
+            $longitudact = Herramientas :: getX_vacio('codins', 'bndefins', 'lonact', '001');
+		$this->c = new Criteria();
+		$this->sql = "length(Codact) = '" . $longitudact . "'";
+		$this->c->add(BndefactPeer :: CODACT, $this->sql, Criteria :: CUSTOM);
+
     $this->c->addAscendingOrderByColumn(BndefactPeer :: CODACT);
     $this->columnas = array (
       BndefactPeer :: CODACT => 'Código Nivel',
@@ -1206,14 +1210,14 @@ class CatalogoWeb extends BaseCatalogoWeb {
 		);
 	}
 
-	public function Contabb_Biedefconlotm() {
-		$this->c = new Criteria();
-		$this->c->addAscendingOrderByColumn(ContabbPeer:: CODCTA);
-		$this->columnas = array (
-			ContabbPeer :: CODCTA => 'Código Cuenta',
-			ContabbPeer :: DESCTA => 'Descripción'
-		);
-	}
+  public function Contabb_Biedefconlotm() {
+    $this->c = new Criteria();
+    $this->c->add(ContabbPeer :: CARGAB, 'C');
+    $this->columnas = array (
+      ContabbPeer :: CODCTA => 'Código Cuenta',
+      ContabbPeer :: DESCTA => 'Descripción'
+    );
+  }
 
   ////////////////////////////////////////////////////////////////////////////////////////////
 
