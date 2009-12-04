@@ -1,0 +1,61 @@
+opciones:                  #
+  name:                    a
+  eliminar:                true
+  tabla:                   cpimpprc
+  anchogrid:               850
+  ancho:                   1090
+  filas:                   1
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+
+1:       # Columna 1
+  titulo:                  Código Presupuestario
+  tipo:                    t
+  nombrecampo:             codpre
+  html:                    [size="30" ]
+  oculta:                  false
+  esgrabable:              true
+  ajaxfila:                true
+  catalogo:                [ cpasiini, sf_admin_edit_form, { codpre: 1 }, Preprecom_Cpasiini ]
+2:       # Columna 2
+  titulo:                  Monto
+  tipo:                    m
+  nombrecampo:             monimp
+  html:                    [size="10" ]
+  oculta:                  false
+  esgrabable:              true
+  ajaxfila:                true
+  estotal:                 [ true, cpprecom_monprc ]
+3:       # Columna 3
+  titulo:                  Disponibilidad
+  tipo:                    m
+  nombrecampo:             mondis
+  html:                    [size="10" readonly="true" ]
+  esgrabable:              false
+4:       # Columna 4
+  titulo:                  Comprometido
+  tipo:                    m
+  nombrecampo:             moncom
+  html:                    [size="10" readonly="true" ]
+  esgrabable:              false
+  estotal:                 [ true, cpprecom_salcom ]
+5:       # Columna 5
+  titulo:                  Causado
+  tipo:                    m
+  nombrecampo:             moncau
+  html:                    [size="10" readonly="true" ]
+  esgrabable:              false
+  estotal:                 [ true, cpprecom_salcau ]
+6:       # Columna 6
+  titulo:                  Pagado
+  tipo:                    m
+  nombrecampo:             monpag
+  html:                    [size="10" readonly="true" ]
+  esgrabable:              false
+  estotal:                 [ true, cpprecom_salpag ]
+7:       # Columna 7
+  titulo:                  Ajuste
+  tipo:                    m
+  nombrecampo:             monaju
+  html:                    [size="10" readonly="true" ]
+  esgrabable:              false

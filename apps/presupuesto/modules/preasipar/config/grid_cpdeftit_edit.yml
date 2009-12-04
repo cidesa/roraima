@@ -1,0 +1,29 @@
+opciones:                  # Opciones generales
+  name:                    a #identificador del grid dentro del formulario
+  eliminar:                false #si kiero qaparezk el boton eliminar
+  tabla:                   cpdeftit
+  anchogrid:               750
+  ancho:                   700
+  filas:                   0#filas vacias x defecto
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:
+  tipo:                    k
+  nombrecampo:             checked
+  html:                    [size="01" ]
+  esgrabable:              true
+2:       # Columna 2
+  titulo:                  Codigo
+  tipo:                    t
+  nombrecampo:             codpre
+  html:                    [size="16" readonly=true ]
+  oculta:                  false
+  esgrabable:              true
+3:       # Columna 3
+  titulo:                  Partidas
+  tipo:                    t
+  nombrecampo:             nompre
+  html:                    [size="25"  readonly=true ]
+  oculta:                  false
+  esgrabable:              false

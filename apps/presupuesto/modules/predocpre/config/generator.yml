@@ -1,0 +1,22 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Cpdocprc
+    theme:            cidesaGenerator
+    fields:
+      tipprc: {name: Tipo de Documento, params: onblur=convertirMayusculas(this.id) maxlength=4 size=5}
+      nomext: {name: Nombre Extendido}
+      nomabr: {name: Nombre Abreviado, params: onblur=convertirMayusculas(this.id) maxlength=4 size=5}
+    list:
+      title:   Precompromisos
+      display: [=tipprc, nomext]
+      filters: [tipprc, nomext]
+    edit:
+      title:                     Precompromisos
+      display:
+        Datos del Documento:     [tipprc, nomext, nomabr]
+      actions:
+        _list:        ~
+        _create:      ~
+        _save:        ~
+        _delete:      ~

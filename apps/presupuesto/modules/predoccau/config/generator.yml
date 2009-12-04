@@ -1,0 +1,32 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Cpdoccau
+    theme:            cidesaGenerator
+    fields:
+      tipcau: {name: Tipo de Documento, params: onblur=convertirMayusculas(this.id) maxlength=4 size=5}
+      nomext: {name: Nombre Extendido}
+      nomabr: {name: Nombre Abreviado, params: onblur=convertirMayusculas(this.id) maxlength=4 size=5}
+      refier: {name: Refiere a}
+      afeprc: {name: .}
+      afecom: {name: .}
+      afecau: {name: .}
+      afedis: {name: .}
+    list:
+      title:   Causados
+      display: [=tipcau, nomext]
+      filters: [tipcau, nomext]
+
+    edit:
+      title:                     Causados
+      display:
+        Datos del Documento:     [tipcau, nomext, nomabr, _refier]
+        Precompromiso:           [_afeprc]
+        Compromiso:              [_afecom]
+        Causado:                 [_afecau]
+        Disponibilidad:          [_afedis]
+      actions:
+        _list:        ~
+        _create:      ~
+        _save:        ~
+        _delete:      ~

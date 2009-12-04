@@ -1,0 +1,61 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Cpcausad
+    theme:            cidesaGenerator
+    fields:
+      mensaje: {name: .}
+      refcau: { name: Referencia, params: onblur=rellenar() maxlength=8 }
+      feccau: { name: Fecha, params: date_format='dd/MM/yy' }
+      descau: { name: Descripción, type: textarea_tag, params: size=80x5 }
+      moncau: { name: Monto Causado }
+      salaju2: { name: Ajustado, params: readonly=true }
+      salpre: { name: Causado, params: readonly=true }
+      totpag: { name: total Pagado, params: readonly=true }
+      tipcau:
+        name: Código
+        catalogo:
+          catalogoweb: Precausar_Cpdoccau
+          clase: Cpdoccau
+          ajax: 0
+          parametros: getprincipal="getTipcau" getsecundario="getNomext" campoprincipal="tipcau" camposecundario="nomext" campobase = "id"
+      cedrif:
+        name: Cedula/Rif
+        catalogo:
+          catalogoweb: Precausar_Opbenefi
+          clase: Opbenefi
+          ajax: 0
+          parametros: getprincipal="getCedrif" getsecundario="getNomben" campoprincipal="cedrif" camposecundario="nomben" campobase = "id"
+      refcom:
+        name: Referencia
+        catalogo:
+          catalogoweb: Precausar_Cpcausad
+          clase: Cpcompro
+          ajax: 0
+          parametros: getprincipal="getRefcom" getsecundario="getDescom" campoprincipal="refcom" camposecundario="descom" campobase = "id"
+          catalogoparams: param1/'."'+$('cpcausad_tipcau').value.replace('/','*')+'".'
+
+      grid:{name: . }
+    list:
+      fields:
+        refcau: { name: Referencia, params: key_method="getRefcau" }
+      title:  Causados
+      display:        [ =refcau, descau, feccau ]
+      filters:        [refcau, feccau, descau]
+    edit:
+      title:  Edición de Causados
+      display:
+        Datos del documento:   [ _mensaje, _refcau, feccau, descau ]
+        Tipo Causado:  [ tipcau, refcom]
+        Datos del Beneficiario: [cedrif]
+        Imputaciones Presupuestarias: [_grid]
+        Saldos:                [salaju2, _salpre, totpag, moncau]
+      actions:
+        _list:        ~
+        _save:        ~
+        _create:      ~
+        _delete:      ~
+        _anular:
+          name: Anular
+          only_for: edit
+          params: class="sf_admin_action_delete" onClick="anular()"

@@ -1,0 +1,34 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Cpdeftit
+    theme:            cidesaGenerator
+    fields:
+      formato:   {name: . }
+      codpre:    {name: Código, params: size=32, help: Código presupuestario }
+      nompre:    {name: Nombre, params: size=68, help: Descripción del código presupuestario }
+      descta:
+       name: Codigo contable y decsripción
+       catalogo:
+          catalogoweb: Contabb_pretitpre
+          clase: Contabb
+          ajax: 1
+          parametros: getprincipal="getCodcta" getsecundario="getDescta" campoprincipal="codcta" camposecundario="descta" campobase = "id"
+    list:
+      title: Título presupuestario
+      fields:
+        codpre: {params: size=17}
+        nompre: {params: size=17}
+      filters: [codpre, nompre]
+      display:
+        NONE:  [=codpre, nompre]
+    edit:
+      title: Título presupuestario
+      display:
+        Datos del Título: [ _codpre, nompre]
+        Datos Contables: [descta]
+      actions:
+        _list:        ~
+        _save:        ~
+        _create:      ~
+        _delete:      ~

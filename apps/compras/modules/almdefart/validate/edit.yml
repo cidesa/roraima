@@ -14,7 +14,7 @@ methods:
    - "cadefart{corsol}"
    - "cadefart{corcot2}"
 
-names: 
+names:
 
   cadefart{lonart}:
     required:  No
@@ -65,10 +65,10 @@ names:
   cadefart{corsol}:
     required:  No
     validators: CorrelValidator
-    
+
   cadefart{corcot2}:
     required:  No
-    validators: CorrelValidator 
+    validators: CorrelValidator
 
 
 StringValidator_forart:
@@ -107,4 +107,4 @@ CorrelValidator:
     class: CidesaStringValidator
     param:
         values:    [ '/^[0-9]*$/' ]
-        values_error: Los Correlativos solo puede contener valores númericos 
+        values_error: Los Correlativos solo puede contener valores númericos

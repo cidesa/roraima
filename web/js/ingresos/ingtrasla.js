@@ -1,3 +1,14 @@
+/**
+ * LibrerÃ­as Javascript
+ *
+ * @package    Roraima
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * 
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
+ */
+
  function repetido(e,id)
  {
    var aux = id.split("_");
@@ -73,12 +84,12 @@
               new Ajax.Request(getUrlModuloAjax(), {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=4&codigo='+cod1})
 
         }else{
-               alert_('Título presupuestario repetido');}
+               alert_('Tï¿½tulo presupuestario repetido');}
      }else{
-               alert_('El título presupuestario no puede estar vacio');}
+               alert_('El tï¿½tulo presupuestario no puede estar vacio');}
 
    }else{
-               alert_('El título presupuestario origen no puede estar vacio');}
+               alert_('El tï¿½tulo presupuestario origen no puede estar vacio');}
 
   }
 
@@ -199,7 +210,7 @@
        var caux="ax_"+i+"_1";
        var codaux=$(caux).value;
        if (cod2==codaux){
-          alert_('El título presupuestario no puede ser origen del movimiento');
+          alert_('El tï¿½tulo presupuestario no puede ser origen del movimiento');
           $(id).value='';
        }
        }
@@ -218,7 +229,7 @@
        var caux="ax_"+i+"_2";
        var codaux=$(caux).value;
        if (cod1==codaux){
-        alert_('El título presupuestario no puede ser destino del movimiento');
+        alert_('El tï¿½tulo presupuestario no puede ser destino del movimiento');
         $(id).value='';
        }
        i++;

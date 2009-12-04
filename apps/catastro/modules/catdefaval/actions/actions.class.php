@@ -5,9 +5,9 @@
  *
  * @package    Roraima
  * @subpackage catdefaval
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
+ * @author     $Author:dmartinez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id:actions.class.php 34244 2009-10-26 15:01:18Z dmartinez $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */

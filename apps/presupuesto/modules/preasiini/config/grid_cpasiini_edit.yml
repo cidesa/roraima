@@ -1,0 +1,22 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                false
+  tabla:                   cpasiini
+  anchogrid:               300
+  ancho:                   200
+  filas:                   0
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Período
+  tipo:                    t
+  nombrecampo:             perpre
+  html:                    [readOnly=true size=3]
+  esgrabable:              true
+2:       # Columna 2
+  titulo:                  Saldo Actual
+  tipo:                    m
+  nombrecampo:             monasi
+  html:                    [readOnly=true size=12]
+  esgrabable:              true
+  estotal:                 [true, cpasiini_monasi]
