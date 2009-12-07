@@ -74,6 +74,8 @@ class OpfacturMapBuilder {
 
 		$tMap->addColumn('FACAFE', 'Facafe', 'string', CreoleTypes::VARCHAR, false, 50);
 
+		$tMap->addColumn('OBSERVACION', 'Observacion', 'string', CreoleTypes::VARCHAR, false, 250);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 
