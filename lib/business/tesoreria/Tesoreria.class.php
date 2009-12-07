@@ -1569,6 +1569,7 @@ class Tesoreria {
     }
     $tsmovlib->setStatus('C');
     $tsmovlib->setStacon('N');
+    $tsmovlib->setStacon1('N');
     $tsmovlib->save();
 
   }
