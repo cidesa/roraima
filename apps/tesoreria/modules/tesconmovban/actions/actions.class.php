@@ -87,7 +87,7 @@ class tesconmovbanActions extends autotesconmovbanActions
 
  * */
    $c->add(TsmovbanPeer::STACON,'N');
-   $c->add(TsmovbanPeer::STACON1,'N');
+   $c->add(TsmovbanPeer::STACON1,'C',Criteria::NOT_EQUAL);
    $c->addAscendingOrderByColumn(TsmovbanPeer :: FECBAN);
    $per = TsmovbanPeer::doSelect($c);
 
@@ -150,7 +150,8 @@ class tesconmovbanActions extends autotesconmovbanActions
 
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
