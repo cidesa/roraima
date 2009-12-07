@@ -107,7 +107,8 @@ $this->Bitacora('Guardo');
 		}
 		else
 		{
-			$tsmovban->save();
+			$tsmovban->setStacon1('N');
+                        $tsmovban->save();
 			$debcre=Herramientas::getX('codtip','tstipmov','debcre',$this->tsmovban->getTipmov());
 			$this->Actualiza_Bancos('A',$debcre);
 		}

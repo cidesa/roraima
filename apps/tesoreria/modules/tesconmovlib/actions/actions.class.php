@@ -79,7 +79,8 @@ class tesconmovlibActions extends autotesconmovlibActions
     $c->add($opc6);
 
    $c->add(TsmovlibPeer::STACON,'N');
-   $c->add(TsmovlibPeer::STACON1,'C',Criteria::NOT_EQUAL);
+   $sql = "(tsmovlib.stacon1<>'C' or tsmovlib.stacon1 isnull))";
+   $c->add(TsmovlibPeer::STACON1, $sql, Criteria :: CUSTOM);
    $c->addAscendingOrderByColumn(TsmovlibPeer :: FECLIB);
    $per = TsmovlibPeer::doSelect($c);
 

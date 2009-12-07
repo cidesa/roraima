@@ -87,7 +87,8 @@ class tesconmovbanActions extends autotesconmovbanActions
 
  * */
    $c->add(TsmovbanPeer::STACON,'N');
-   $c->add(TsmovbanPeer::STACON1,'C',Criteria::NOT_EQUAL);
+   $sql = "(tsmovban.stacon1<>'C' or tsmovban.stacon1 isnull))";
+   $c->add(TsmovbanPeer::STACON1, $sql, Criteria :: CUSTOM);
    $c->addAscendingOrderByColumn(TsmovbanPeer :: FECBAN);
    $per = TsmovbanPeer::doSelect($c);
 
