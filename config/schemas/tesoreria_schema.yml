@@ -494,6 +494,9 @@ propel:
     ordtba:
       type: VARCHAR
       size: 4
+    ordcre:
+      type: VARCHAR
+      size: 4
     id:
       type: INTEGER
       required: true
