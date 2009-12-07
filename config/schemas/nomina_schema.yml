@@ -4520,7 +4520,9 @@ propel:
       type: VARCHAR
       size: 8
     dias:
-      type: INTEGER
+      type: NUMERIC
+      size: 14
+      scale: 2
     id:
       type: INTEGER
       required: true
