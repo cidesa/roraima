@@ -79,7 +79,7 @@ class tesconmovlibActions extends autotesconmovlibActions
     $c->add($opc6);
 
    $c->add(TsmovlibPeer::STACON,'N');
-   $c->add(TsmovlibPeer::STACON1,'N');
+   $c->add(TsmovlibPeer::STACON1,'C',Criteria::NOT_EQUAL);
    $c->addAscendingOrderByColumn(TsmovlibPeer :: FECLIB);
    $per = TsmovlibPeer::doSelect($c);
 
@@ -142,7 +142,8 @@ class tesconmovlibActions extends autotesconmovlibActions
 
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
