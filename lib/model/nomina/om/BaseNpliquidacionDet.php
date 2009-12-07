@@ -112,10 +112,11 @@ abstract class BaseNpliquidacionDet extends BaseObject  implements Persistent {
 
   }
   
-  public function getDias()
+  public function getDias($val=false)
   {
 
-    return $this->dias;
+    if($val) return number_format($this->dias,2,',','.');
+    else return $this->dias;
 
   }
   
@@ -210,7 +211,7 @@ abstract class BaseNpliquidacionDet extends BaseObject  implements Persistent {
 	{
 
     if ($this->dias !== $v) {
-        $this->dias = $v;
+        $this->dias = Herramientas::toFloat($v);
         $this->modifiedColumns[] = NpliquidacionDetPeer::DIAS;
       }
   
@@ -246,7 +247,7 @@ abstract class BaseNpliquidacionDet extends BaseObject  implements Persistent {
 
       $this->numord = $rs->getString($startcol + 7);
 
-      $this->dias = $rs->getInt($startcol + 8);
+      $this->dias = $rs->getFloat($startcol + 8);
 
       $this->id = $rs->getInt($startcol + 9);
 
