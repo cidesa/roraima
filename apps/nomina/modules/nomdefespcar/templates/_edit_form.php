@@ -168,6 +168,7 @@
 			  <?php $value = object_input_tag($npcargos, array('getCanmuj',true), array (
 			  'size' => 7,
 			  'maxlength' => 21,
+			  'onBlur' => "javascript:event.keyCode=13; calcularo(event,this.id)",
 			  'control_name' => 'npcargos[canmuj]',
 			)); echo $value ? $value : '&nbsp;' ?>
 		</td>
@@ -180,6 +181,7 @@
 			  <?php $value = object_input_tag($npcargos, array('getCanhom',true), array (
 			  'size' => 7,
 			  'maxlength' => 21,
+			  'onBlur' => "javascript:event.keyCode=13; calcularo(event,this.id)",
 			  'control_name' => 'npcargos[canhom]',
 			)); echo $value ? $value : '&nbsp;'?>
 		</td>
@@ -196,6 +198,7 @@
 			  <?php $value = object_input_tag($npcargos, array('getCarvan',true), array (
 			  'size' => 6,
 			  'maxlength' => 6,
+			  'readonly' => true,
 			  'control_name' => 'npcargos[carvan]',
 			)); echo $value ? $value : '&nbsp;' ?>
 		</td>
@@ -208,7 +211,7 @@
 			  <?php $value = object_input_tag($npcargos, array('getCarasi',true), array (
 			  'size' => 6,
 			  'maxlength' => 6,
-			  'disabled' => "true",
+			  'readonly' => true,
 			  'control_name' => 'npcargos[carasi]',
 			)); echo $value ? $value : '&nbsp;'?>
 		</td>
@@ -366,6 +369,27 @@ echo grid_tag($obj);
     $(id).value="";
     $(descripcion).value="";
   }
+
+ }
+
+ function calcularo(e,id)
+ {
+
+ 	if (e.keyCode==13 || e.keyCode==9)
+ 	{
+       if (IsNumeric($(id).value))
+       {
+       	  var canmuj=parseInt($('npcargos_canmuj').value);
+       	  var canhom=parseInt($('npcargos_canhom').value);
+       	  var carasi=parseInt($('npcargos_carasi').value);
+
+          var cuenta= canmuj + canhom - carasi;
+          $('npcargos_carvan').value=cuenta;
+       }else{
+       	alert('Debe introducir un valor entero');
+       	$(id).value='';
+       }
+ 	}
 
  }
 
