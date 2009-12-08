@@ -63,7 +63,7 @@
 <div class="content<?php if ($sf_request->hasError('caordcom{ordcom}')): ?> form-error<?php endif; ?>">
 <?php if ($sf_request->hasError('caordcom{ordcom}')): ?> <?php echo form_error('caordcom{ordcom}', array('class' => 'form-error-msg')) ?>
 <?php endif; ?> <?php $value = object_input_tag($caordcom, 'getOrdcom', array (
-'readonly' => $readonly,
+'readOnly' => $readonly,
 'size' => 8,
 'maxlength' => 8,
 'control_name' => 'caordcom[ordcom]',
