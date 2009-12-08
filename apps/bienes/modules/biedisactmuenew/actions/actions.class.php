@@ -291,7 +291,7 @@ $this->Bitacora('Guardo');
       {
         $javascript="";
         $t= new Criteria();
-        $t->add(BndisbiePeer::CODDIS,substr($codigo,0,10));
+        $t->add(BndisbiePeer::CODDIS,substr($codigo,0,6));
         $data= BndisbiePeer::doSelectOne($t);
         if ($data)
         {
@@ -342,7 +342,7 @@ $this->Bitacora('Guardo');
     $this->updateBndismueFromRequest();
 
     $c = new Criteria();
-    $c->add(BndisbiePeer::CODDIS,substr($this->bndismue->getTipdismue(),0,10));
+    $c->add(BndisbiePeer::CODDIS,substr($this->bndismue->getTipdismue(),0,6));
     $bndisbie = BndisbiePeer::doSelectOne($c);
 
     if ($bndisbie){
