@@ -197,7 +197,7 @@
 			{
 				var cod1 = $('cajaux').value;
 				var cod2 = $('idlabel').value;
-				if (cod1=="NHMENEDA" || cod1=="NHMAYEDA"|| cod1=="SIMESDAD"|| cod1=='SHORAS' || cod1=='SDIAS' || cod1=='FECDIAS'|| cod1=='FECMES'|| cod1=='FECANNOS'|| cod1=='INTPRES'|| cod1=='DIAADIPRE' )
+				if (cod1=="NHMENEDA" || cod1=="NHMAYEDA"|| cod1=="SIMESDAD"|| cod1=='SHORAS' || cod1=='SDIAS' || cod1=='FECDIAS'|| cod1=='FECMES'|| cod1=='FECANNOS'|| cod1=='INTPRES'|| cod1=='DIAADIPRE' || cod1=='DIAADIFID')
 				    var cod = cod1+cod2.toUpperCase();
   			    else
 					var cod = cod1+"("+cod2+")";
@@ -224,7 +224,7 @@
 					var cod1 = $('cajaux').value;
 					var fecha = $('idlabel2').value;
 					var cod2 = fecha.substr(0,2)+fecha.substr(3,2)+fecha.substr(6,4);
-					if (cod1=='INTPRES' || cod1=='DIAADIPRE')
+					if (cod1=='INTPRES' || cod1=='DIAADIPRE' || cod1=='DIAADIFID')
 					    var cod = cod1+cod2.toUpperCase();
 	  			    else
 						var cod = cod1+cod2;
@@ -257,7 +257,7 @@
 			{
 				var cod1 = $('cajaux').value;
 				var cod2 = $('idlabel').value;
-				if (cod1=='INTPRES' || cod1=='DIAADIPRE')
+				if (cod1=='INTPRES' || cod1=='DIAADIPRE' || cod1=='DIAADIFID')
 				    var cod = cod1+cod2.toUpperCase();
   			    else
 					var cod = cod1+"("+cod2+")";
@@ -280,7 +280,7 @@
 					var cod1 = $('cajaux').value;
 					var fecha = $('idlabel2').value;
 					var cod2 = fecha.substr(0,2)+fecha.substr(3,2)+fecha.substr(6,4);
-					if (cod1=='INTPRES' || cod1=='DIAADIPRE')
+					if (cod1=='INTPRES' || cod1=='DIAADIPRE' || cod1=='DIAADIFID')
 					    var cod = cod1+cod2.toUpperCase();
 	  			    else
 						var cod = cod1+cod2;
@@ -714,7 +714,7 @@
 					$('idlabel').focus();
 					return true;
 		     	}
-				else if(cod=='INTPRES' || cod=='DIAADIPRE')
+				else if(cod=='INTPRES' || cod=='DIAADIPRE' || cod=='DIAADIFID')
 		     	{
 		     	    $('grid1').hide();
 					$('idfunciones').disabled=true;
