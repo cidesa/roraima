@@ -173,7 +173,7 @@ public static function Validar_biedisactmuenew($valor1,$valor2)
     try{
       #Paso 1
       $c = new Criteria();
-      $c->add(BndisbiePeer::CODDIS,substr($clase->getTipdismue(),0,10));
+      $c->add(BndisbiePeer::CODDIS,substr($clase->getTipdismue(),0,6));
       $bndisbie = BndisbiePeer::doSelectOne($c);
       $encontro = false;
       $adiciona = false;

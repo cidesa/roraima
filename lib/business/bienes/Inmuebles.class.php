@@ -120,7 +120,7 @@ class Inmuebles
     try{
       #Paso 1
       $c = new Criteria();
-      $c->add(BndisbiePeer::CODDIS,substr($clase->getTipdisinm(),0,10));
+      $c->add(BndisbiePeer::CODDIS,substr($clase->getTipdisinm(),0,6));
       $bndisbie = BndisbiePeer::doSelectOne($c);
       $encontro = false;
       $adiciona = false;
