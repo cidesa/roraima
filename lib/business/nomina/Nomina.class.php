@@ -1045,6 +1045,11 @@ class Nomina {
       $token = "DIAADIPRE";
     }
 
+    if (Herramientas :: StringPos($token, "DIAADIFID", 0) != -1) {
+      $parametro = substr($token, 9, strlen($token));
+      $token = "DIAADIFID";
+    }
+
     if (Herramientas :: StringPos($token, "SHORAS", 0) != -1) {
       $parametro = substr($token, 6, strlen($token));
       $token = "SHORAS";
@@ -1289,6 +1294,11 @@ class Nomina {
     if (Herramientas :: StringPos($token, "DIAADIPRE", 0) != -1) {
       $parametro = substr($token, 9, strlen($token));
       $token = "DIAADIPRE";
+    }
+
+    if (Herramientas :: StringPos($token, "DIAADIFID", 0) != -1) {
+      $parametro = substr($token, 9, strlen($token));
+      $token = "DIAADIFID";
     }
 
     if (Herramientas :: StringPos($token, "SDIAS", 0) != -1) {
@@ -2372,6 +2382,19 @@ class Nomina {
 		}
 
         return $valor;
+      case "DIAADIFID" :
+        $valor = 0;
+        $auxfec = split("-",$fecnom);
+        #$fecha = date('d/m/Y',strtotime($fecnom));
+        $fecha = $auxfec[0].'-'.$auxfec[1].'-'.$auxfec[0];
+        $criterio = "Select * from calculopres('$empleado',to_char(cast('$fecha' as date),'dd/mm/yyyy'),'$parametro','P') where tipo='DEPOSITADOS' order by fecini desc";
+
+        if (Herramientas :: BuscarDatos($criterio, & $calpres))
+		{
+			$valor = ($calpres[0]['dias']-5)*$calpres[0]['mondiapro'];
+		}
+
+        return $valor;
       default :
         $aux = 0;
 
@@ -3051,6 +3074,12 @@ class Nomina {
       $parametro = substr($campo, 9, strlen($campo));
 
       $campo = "DIAADIPRE";
+    }
+
+    if (Herramientas :: StringPos($campo, "DIAADIFID", 0) != -1) {
+      $parametro = substr($campo, 9, strlen($campo));
+
+      $campo = "DIAADIFID";
     }
 //print $parametro;
 //print "--".$campo;
@@ -4103,6 +4132,18 @@ class Nomina {
         #$fecha = $hasta;
         $fecha = $auxfec[2].'-'.$auxfec[1].'-01';
         $criterio = "Select * from calculopres('$empleado','to_char(cast('$fecha' as date)-1,'dd/mm/yyyy')','$parametro','P') where tipo='DEPOSITADOS' order by fecini desc";
+        if (Herramientas :: BuscarDatos($criterio, & $calpres))
+		{
+			$valor = ($calpres[0]['dias']-5)*$calpres[0]['mondiapro'];
+		}
+
+        return $valor;
+        break;
+      case "DIAADIFID" :
+        $valor = 0;
+        $auxfec = split("/",$hasta);
+        $fecha = $auxfec[2].'-'.$auxfec[1].'-'.$auxfec[0];
+        $criterio = "Select * from calculopres('$empleado','to_char(cast('$fecha' as date),'dd/mm/yyyy')','$parametro','P') where tipo='DEPOSITADOS' order by fecini desc";
         if (Herramientas :: BuscarDatos($criterio, & $calpres))
 		{
 			$valor = ($calpres[0]['dias']-5)*$calpres[0]['mondiapro'];
