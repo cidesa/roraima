@@ -313,7 +313,7 @@ class almordcomActions extends autoalmordcomActions
             //$err = Herramientas::obtenerMensajeError($coderror);
 
     if ($this->caordcom->getOrdcom()!='')
-      $this->readonly='readonly';
+      $this->readonly=true;
 
     if ($this->getRequest()->getMethod() == sfRequest::POST)
     {
