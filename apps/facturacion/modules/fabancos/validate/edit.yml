@@ -13,7 +13,7 @@ names:
   fabancos{codban}:
     required:  Yes
     required_msg: Debe insertar el número de cuenta
-    validators: Vstring_1_20_0
+    validators: Validator_codban, Vstring_1_20_0
 
 Vstring_1_100_0:
     class: sfStringValidator
@@ -30,3 +30,10 @@ Vstring_1_20_0:
         min_error: El número de Cuenta debe tener 20 dígitos
         max:       20
         max_error: El número de Cuenta debe tener 20 dígitos
+
+Validator_codban:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Fabancos
+        column:       codban
+        unique_error: El registro ya Existe intente con otro.
