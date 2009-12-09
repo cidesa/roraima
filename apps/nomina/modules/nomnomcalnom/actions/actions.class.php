@@ -259,12 +259,12 @@ class nomnomcalnomActions extends autonomnomcalnomActions
             CalculoNomina::ValidicionPorEmpleado($codnom,$desde,$hasta,$opsi,$msem,&$cont);
 			if ($intpre=='S')
 			{
-	            CierredeNomina::Validarcodprenomina($codnom,$desde,&$sobregiro);
+	            /*CierredeNomina::Validarcodprenomina($codnom,$desde,&$sobregiro);
 
 				if ($sobregiro==true)
 				{
 	     	        $this->err = Herramientas::obtenerMensajeError('497');
-				}
+				}*/
 			}
             //////////////////////////////////////////
             $now2 = strtotime(date("Y-m-d H:i:s"));
