@@ -131,6 +131,44 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 			Group By B.CODPAR
 			HAVING
 			SUM(A.VALART108)<>0
+
+			Union All
+			select 2 as orden,
+			SUM(A.DIAART108) as DIAS,
+			SUM(A.VALART108) AS MONTO,
+			'AJUSTE POR PRESTACION DE ANTIGUEDAD NO DEPOSITADA '||' ('||TO_CHAR(SUM(A.DIAART108),'9999')||' DIAS)' AS DESCRIPCION,
+			B.CODPAR AS PARTIDA
+			From NPIMPPRESOC A,NPDEFPRELIQ B
+			where
+			A.TIPO='A' AND
+			A.VALART108>0 AND
+			A.codemp='$codemp' AND
+			B.CODNOM='$codnom' AND
+			B.CODCON='002' AND
+			TO_CHAR(A.FECFIN,'YYYY')>=B.PERDES AND
+			TO_CHAR(A.FECFIN,'YYYY')<=B.PERHAS
+			Group By B.CODPAR
+			HAVING
+			SUM(A.VALART108)<>0
+
+			Union All
+			select 2 as orden,
+			SUM(A.DIAART108) as DIAS,
+			SUM(A.VALART108) AS MONTO,
+			'AJUSTE DIAS ADICIONALES NO DEPOSITADOS '||' ('||TO_CHAR(SUM(A.DIAART108),'9999')||' DIAS)' AS DESCRIPCION,
+			B.CODPAR AS PARTIDA
+			From NPIMPPRESOC A,NPDEFPRELIQ B
+			where
+			A.TIPO='P' AND
+			A.VALART108>0 AND
+			A.codemp='$codemp' AND
+			B.CODNOM='$codnom' AND
+			B.CODCON='002' AND
+			TO_CHAR(A.FECFIN,'YYYY')>=B.PERDES AND
+			TO_CHAR(A.FECFIN,'YYYY')<=B.PERHAS
+			Group By B.CODPAR
+			HAVING
+			SUM(A.VALART108)<>0
 			
 			Union All
 			SELECT 3 as orden,
@@ -1102,7 +1140,8 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
