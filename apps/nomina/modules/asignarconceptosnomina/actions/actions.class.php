@@ -140,10 +140,10 @@ $this->Bitacora('Guardo');
   public function configGridno($nomina='',$fre)
   {
 	      $sql="select 0 as check, a.codcon as codcon, b.codnom, a.nomcon as nomcon, (case when a.conact='S' then 'SI' else 'NO' end) as conact, a.id as id
-				from npdefcpt a left outer join npasiconnom b ON (a.codcon=b.codcon and b.codnom='".$nomina."') 
-				where trim(b.codnom) is null";
-				
-            $resp = Herramientas::BuscarDatos($sql,&$per); 
+				from npdefcpt a left outer join npasiconnom b ON (a.codcon=b.codcon and b.codnom='".$nomina."')
+				where trim(b.codnom) is null order by a.codcon";
+
+            $resp = Herramientas::BuscarDatos($sql,&$per);
 			$filas_arreglo=0;
 
 			    $opciones = new OpcionesGrid();
