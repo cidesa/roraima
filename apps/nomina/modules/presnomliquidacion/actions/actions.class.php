@@ -113,24 +113,6 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 			HAVING
 			SUM(A.VALART108)<>0
 			
-			Union All
-			select 2 as orden,
-			SUM(A.DIAART108) as DIAS,
-			SUM(A.VALART108) AS MONTO,
-			'DIFERENCIA PRESTACION DE ANTIGUEDAD (ART. 108 L.O.T.) '||' ('||TO_CHAR(SUM(A.DIAART108),'9999')||' DIAS)' AS DESCRIPCION,
-			B.CODPAR AS PARTIDA
-			From NPIMPPRESOC A,NPDEFPRELIQ B
-			where
-			A.TIPO<>'' AND
-			A.VALART108>0 AND
-			A.codemp='$codemp' AND
-			B.CODNOM='$codnom' AND
-			B.CODCON='002' AND
-			TO_CHAR(A.FECFIN,'YYYY')>=B.PERDES AND
-			TO_CHAR(A.FECFIN,'YYYY')<=B.PERHAS
-			Group By B.CODPAR
-			HAVING
-			SUM(A.VALART108)<>0
 
 			Union All
 			select 2 as orden,
