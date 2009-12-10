@@ -494,7 +494,7 @@ public static function PagoDoble()
 
   public static function ListaOcupacion()
   {
-    return array('E' => 'Estudiante', 'T' => 'Trabajador', 'D' => 'Desempleado',);
+    return array('E' => 'Estudiante', 'T' => 'Trabajador', 'D' => 'Desempleado', 'P' => 'Pensionado');
   }
 
   public static function ListadeTipo() //Catastral
