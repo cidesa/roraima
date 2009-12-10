@@ -117,10 +117,11 @@ public static function Grabar_grid_Npasicatconemp($npasicatconemp,$grid,$codigo=
 		  while ($i<count($x))
 		  {
 		    $c= new Criteria();
-		    $c->add(NpasicatconempPeer::CODEMP,$x[$i]["codemp"]);
+                    $c->add(NpasicatconempPeer::CODEMP,$x[$i]["codemp"]);
+		    $c->add(NpasicatconempPeer::CODCON,$codigo);
 		    $empbamc = NpasicatconempPeer::doSelectOne($c);
-            if ($empbamc)
-            {
+                    if ($empbamc)
+                    {
 
               $empbamc->setCodcat($x[$i]["codcat"]);
        		  $empbamc->save();
