@@ -34,6 +34,16 @@
     </div>
     </div>
 
+
+        <div class="form-row">
+    <label for="filters_nomcon"><?php echo __('Concepto::') ?></label>
+    <div class="content">
+    <?php echo input_tag('filters[nomcon]', isset($filters['nomcon']) ? $filters['nomcon'] : null, array (
+  'size' => 15,
+)) ?>
+    </div>
+    </div>
+
       </fieldset>
 
   <ul class="sf_admin_actions">
