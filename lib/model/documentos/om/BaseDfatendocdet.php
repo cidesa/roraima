@@ -466,20 +466,6 @@ abstract class BaseDfatendocdet extends BaseObject  implements Persistent {
 				$this->setDfatendoc($this->aDfatendoc);
 			}
 
-			if ($this->aTableError !== null) {
-				if ($this->aTableError->isModified()) {
-					$affectedRows += $this->aTableError->save($con);
-				}
-				$this->setTableError($this->aTableError);
-			}
-
-			if ($this->aTableError !== null) {
-				if ($this->aTableError->isModified()) {
-					$affectedRows += $this->aTableError->save($con);
-				}
-				$this->setTableError($this->aTableError);
-			}
-
 			if ($this->aDfrutadoc !== null) {
 				if ($this->aDfrutadoc->isModified()) {
 					$affectedRows += $this->aDfrutadoc->save($con);
