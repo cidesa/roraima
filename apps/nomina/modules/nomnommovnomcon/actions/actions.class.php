@@ -63,6 +63,17 @@ class nomnommovnomconActions extends autonomnommovnomconActions
     {
       $c->add(NpasiconnomPeer::CODNOM, $this->filters['codnom']);
     }
+    if (isset($this->filters['nomcon_is_empty']))
+    {
+      $criterion = $c->getNewCriterion(NpasiconempPeer::NOMCON, '');
+      $criterion->addOr($c->getNewCriterion(NpasiconempPeer::NOMCON, null, Criteria::ISNULL));
+      $c->add($criterion);
+    }
+    else if (isset($this->filters['nomcon']) && $this->filters['nomcon'] !== '')
+    {
+      $c->add(NpasiconempPeer::NOMCON, '%'.strtr($this->filters['nomcon'], '*', '%').'%', Criteria::LIKE);
+    $c->setIgnoreCase(true);
+    }
   }
 
 	/**
