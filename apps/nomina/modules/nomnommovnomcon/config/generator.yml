@@ -17,7 +17,7 @@ generator:
     list:
       title:          Movimientos por Concepto
       display:        [=codcon, nomcon, codnom, nomnom]
-      filters:		  [codcon, codnom]
+      filters:		  [codcon, codnom, nomcon]
       max_per_page:	  10
       object_actions:
         _edit:        ~
