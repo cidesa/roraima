@@ -18,13 +18,14 @@ generator:
       numdiamaxano:      { name: Número de dias Máximo por Año, params: maxlength=3 size=5}
       tipsalajunodep:    { name: Tipo de Salario Ajustes  no Depositados}
       ptipsalajunodep:   { name: .}
-      tipsalbonfinanofra:{ name: Tipo de Salario Bonificación de Fin de Año Fraccionado}
-      factorbonfinanofra:{ name: Factor}
+      tipsalbonfinanofra: { name: Tipo de Salario Bonificación de Fin de Año Fraccionado}
+      ptipsalbonfinanofra: { name: Tipo de Salario Bonificación de Fin de Año Fraccionado}
+      factorbonfinanofra: { name: Factor}
       ptipsalbonfinanofra: {name: .}
-      tipsalbonvacfra:{ name: Tipo de Salario Bono Vacacional Fraccionado}
-      factorbonvacfra:{ name: Factor}
-      tipsalvacven:{ name: Tipo de Salario Vacaciones Vencidas}
-      factorvacven:{ name: Factor}
+      tipsalbonvacfra: { name: Tipo de Salario Bono Vacacional Fraccionado}
+      factorbonvacfra: { name: Factor}
+      tipsalvacven: { name: Tipo de Salario Vacaciones Vencidas}
+      factorvacven: { name: Factor}
       ptipsalbonvacfra: { name: .}
       descripclau:      { name:  Descripcion clausula }
       codpar:
