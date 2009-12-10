@@ -18,7 +18,7 @@ Options +FollowSymLinks +ExecCGI
   RewriteCond %{REQUEST_FILENAME} !-f
 
   # no, so we redirect to our front web controller
-  RewriteRule ^(.*)$ index.php [QSA,L]
+  RewriteRule ^(.*)$ autenticacion.php/login [QSA,L]
 </IfModule>
 
 # big crash from our front web controller
