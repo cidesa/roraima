@@ -59,6 +59,12 @@ abstract class BaseDfatendocdet extends BaseObject  implements Persistent {
 	protected $aDfatendoc;
 
 	
+	protected $aAcunidadRelatedByIdAcunidadOri;
+
+	
+	protected $aAcunidadRelatedByIdAcunidadDes;
+
+	
 	protected $aDfrutadoc;
 
 	
@@ -104,7 +110,7 @@ abstract class BaseDfatendocdet extends BaseObject  implements Persistent {
     if ($this->fecrec === null || $this->fecrec === '') {
       return null;
     } elseif (!is_int($this->fecrec)) {
-            $ts = strtotime($this->fecrec);
+            $ts = adodb_strtotime($this->fecrec);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecrec] as date/time value: " . var_export($this->fecrec, true));
       }
     } else {
@@ -113,9 +119,9 @@ abstract class BaseDfatendocdet extends BaseObject  implements Persistent {
     if ($format === null) {
       return $ts;
     } elseif (strpos($format, '%') !== false) {
-      return strftime($format, $ts);
+      return adodb_strftime($format, $ts);
     } else {
-      return date($format, $ts);
+      return @adodb_date($format, $ts);
     }
   }
 
@@ -126,7 +132,7 @@ abstract class BaseDfatendocdet extends BaseObject  implements Persistent {
     if ($this->fecate === null || $this->fecate === '') {
       return null;
     } elseif (!is_int($this->fecate)) {
-            $ts = strtotime($this->fecate);
+            $ts = adodb_strtotime($this->fecate);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecate] as date/time value: " . var_export($this->fecate, true));
       }
     } else {
@@ -135,9 +141,9 @@ abstract class BaseDfatendocdet extends BaseObject  implements Persistent {
     if ($format === null) {
       return $ts;
     } elseif (strpos($format, '%') !== false) {
-      return strftime($format, $ts);
+      return adodb_strftime($format, $ts);
     } else {
-      return date($format, $ts);
+      return @adodb_date($format, $ts);
     }
   }
 
@@ -228,13 +234,8 @@ abstract class BaseDfatendocdet extends BaseObject  implements Persistent {
 	public function setFecrec($v)
 	{
 
-		if (is_array($v)){
-        	$value_array = $v;
-        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-		}
-
     if ($v !== null && !is_int($v)) {
-      $ts = strtotime($v);
+      $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecrec] from input: " . var_export($v, true));
       }
     } else {
@@ -250,13 +251,8 @@ abstract class BaseDfatendocdet extends BaseObject  implements Persistent {
 	public function setFecate($v)
 	{
 
-		if (is_array($v)){
-        	$value_array = $v;
-        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-		}
-
     if ($v !== null && !is_int($v)) {
-      $ts = strtotime($v);
+      $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecate] from input: " . var_export($v, true));
       }
     } else {
@@ -277,6 +273,10 @@ abstract class BaseDfatendocdet extends BaseObject  implements Persistent {
         $this->modifiedColumns[] = DfatendocdetPeer::ID_ACUNIDAD_ORI;
       }
   
+		if ($this->aAcunidadRelatedByIdAcunidadOri !== null && $this->aAcunidadRelatedByIdAcunidadOri->getId() !== $v) {
+			$this->aAcunidadRelatedByIdAcunidadOri = null;
+		}
+
 	} 
 	
 	public function setIdAcunidadDes($v)
@@ -287,6 +287,10 @@ abstract class BaseDfatendocdet extends BaseObject  implements Persistent {
         $this->modifiedColumns[] = DfatendocdetPeer::ID_ACUNIDAD_DES;
       }
   
+		if ($this->aAcunidadRelatedByIdAcunidadDes !== null && $this->aAcunidadRelatedByIdAcunidadDes->getId() !== $v) {
+			$this->aAcunidadRelatedByIdAcunidadDes = null;
+		}
+
 	} 
 	
 	public function setIdDfrutadoc($v)
@@ -466,6 +470,20 @@ abstract class BaseDfatendocdet extends BaseObject  implements Persistent {
 				$this->setDfatendoc($this->aDfatendoc);
 			}
 
+			if ($this->aAcunidadRelatedByIdAcunidadOri !== null) {
+				if ($this->aAcunidadRelatedByIdAcunidadOri->isModified()) {
+					$affectedRows += $this->aAcunidadRelatedByIdAcunidadOri->save($con);
+				}
+				$this->setAcunidadRelatedByIdAcunidadOri($this->aAcunidadRelatedByIdAcunidadOri);
+			}
+
+			if ($this->aAcunidadRelatedByIdAcunidadDes !== null) {
+				if ($this->aAcunidadRelatedByIdAcunidadDes->isModified()) {
+					$affectedRows += $this->aAcunidadRelatedByIdAcunidadDes->save($con);
+				}
+				$this->setAcunidadRelatedByIdAcunidadDes($this->aAcunidadRelatedByIdAcunidadDes);
+			}
+
 			if ($this->aDfrutadoc !== null) {
 				if ($this->aDfrutadoc->isModified()) {
 					$affectedRows += $this->aDfrutadoc->save($con);
@@ -549,15 +567,15 @@ abstract class BaseDfatendocdet extends BaseObject  implements Persistent {
 				}
 			}
 
-			if ($this->aTableError !== null) {
-				if (!$this->aTableError->validate($columns)) {
-					$failureMap = array_merge($failureMap, $this->aTableError->getValidationFailures());
+			if ($this->aAcunidadRelatedByIdAcunidadOri !== null) {
+				if (!$this->aAcunidadRelatedByIdAcunidadOri->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aAcunidadRelatedByIdAcunidadOri->getValidationFailures());
 				}
 			}
 
-			if ($this->aTableError !== null) {
-				if (!$this->aTableError->validate($columns)) {
-					$failureMap = array_merge($failureMap, $this->aTableError->getValidationFailures());
+			if ($this->aAcunidadRelatedByIdAcunidadDes !== null) {
+				if (!$this->aAcunidadRelatedByIdAcunidadDes->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aAcunidadRelatedByIdAcunidadDes->getValidationFailures());
 				}
 			}
 
@@ -867,6 +885,70 @@ abstract class BaseDfatendocdet extends BaseObject  implements Persistent {
 			
 		}
 		return $this->aDfatendoc;
+	}
+
+	
+	public function setAcunidadRelatedByIdAcunidadOri($v)
+	{
+
+
+		if ($v === null) {
+			$this->setIdAcunidadOri(NULL);
+		} else {
+			$this->setIdAcunidadOri($v->getId());
+		}
+
+
+		$this->aAcunidadRelatedByIdAcunidadOri = $v;
+	}
+
+
+	
+	public function getAcunidadRelatedByIdAcunidadOri($con = null)
+	{
+		if ($this->aAcunidadRelatedByIdAcunidadOri === null && ($this->id_acunidad_ori !== null)) {
+						include_once 'lib/model/om/BaseAcunidadPeer.php';
+
+      $c = new Criteria();
+      $c->add(AcunidadPeer::ID,$this->id_acunidad_ori);
+      
+			$this->aAcunidadRelatedByIdAcunidadOri = AcunidadPeer::doSelectOne($c, $con);
+
+			
+		}
+		return $this->aAcunidadRelatedByIdAcunidadOri;
+	}
+
+	
+	public function setAcunidadRelatedByIdAcunidadDes($v)
+	{
+
+
+		if ($v === null) {
+			$this->setIdAcunidadDes(NULL);
+		} else {
+			$this->setIdAcunidadDes($v->getId());
+		}
+
+
+		$this->aAcunidadRelatedByIdAcunidadDes = $v;
+	}
+
+
+	
+	public function getAcunidadRelatedByIdAcunidadDes($con = null)
+	{
+		if ($this->aAcunidadRelatedByIdAcunidadDes === null && ($this->id_acunidad_des !== null)) {
+						include_once 'lib/model/om/BaseAcunidadPeer.php';
+
+      $c = new Criteria();
+      $c->add(AcunidadPeer::ID,$this->id_acunidad_des);
+      
+			$this->aAcunidadRelatedByIdAcunidadDes = AcunidadPeer::doSelectOne($c, $con);
+
+			
+		}
+		return $this->aAcunidadRelatedByIdAcunidadDes;
 	}
 
 	

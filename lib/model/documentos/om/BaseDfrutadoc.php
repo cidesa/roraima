@@ -36,6 +36,9 @@ abstract class BaseDfrutadoc extends BaseObject  implements Persistent {
 	protected $id;
 
 	
+	protected $aAcunidad;
+
+	
 	protected $aDftabtip;
 
 	
@@ -148,6 +151,10 @@ abstract class BaseDfrutadoc extends BaseObject  implements Persistent {
         $this->modifiedColumns[] = DfrutadocPeer::ID_ACUNIDAD;
       }
   
+		if ($this->aAcunidad !== null && $this->aAcunidad->getId() !== $v) {
+			$this->aAcunidad = null;
+		}
+
 	} 
 	
 	public function setIdDftabtip($v)
@@ -276,11 +283,11 @@ abstract class BaseDfrutadoc extends BaseObject  implements Persistent {
 
 
 												
-			if ($this->aTableError !== null) {
-				if ($this->aTableError->isModified()) {
-					$affectedRows += $this->aTableError->save($con);
+			if ($this->aAcunidad !== null) {
+				if ($this->aAcunidad->isModified()) {
+					$affectedRows += $this->aAcunidad->save($con);
 				}
-				$this->setTableError($this->aTableError);
+				$this->setAcunidad($this->aAcunidad);
 			}
 
 			if ($this->aDftabtip !== null) {
@@ -347,9 +354,9 @@ abstract class BaseDfrutadoc extends BaseObject  implements Persistent {
 
 
 												
-			if ($this->aTableError !== null) {
-				if (!$this->aTableError->validate($columns)) {
-					$failureMap = array_merge($failureMap, $this->aTableError->getValidationFailures());
+			if ($this->aAcunidad !== null) {
+				if (!$this->aAcunidad->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aAcunidad->getValidationFailures());
 				}
 			}
 
@@ -566,6 +573,38 @@ abstract class BaseDfrutadoc extends BaseObject  implements Persistent {
 			self::$peer = new DfrutadocPeer();
 		}
 		return self::$peer;
+	}
+
+	
+	public function setAcunidad($v)
+	{
+
+
+		if ($v === null) {
+			$this->setIdAcunidad(NULL);
+		} else {
+			$this->setIdAcunidad($v->getId());
+		}
+
+
+		$this->aAcunidad = $v;
+	}
+
+
+	
+	public function getAcunidad($con = null)
+	{
+		if ($this->aAcunidad === null && ($this->id_acunidad !== null)) {
+						include_once 'lib/model/om/BaseAcunidadPeer.php';
+
+      $c = new Criteria();
+      $c->add(AcunidadPeer::ID,$this->id_acunidad);
+      
+			$this->aAcunidad = AcunidadPeer::doSelectOne($c, $con);
+
+			
+		}
+		return $this->aAcunidad;
 	}
 
 	

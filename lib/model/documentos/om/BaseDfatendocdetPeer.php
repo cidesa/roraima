@@ -322,6 +322,10 @@ abstract class BaseDfatendocdetPeer {
 
 			$criteria->addJoin(DfatendocdetPeer::ID_DFATENDOC, DfatendocPeer::ID);
 	
+			$criteria->addJoin(DfatendocdetPeer::ID_ACUNIDAD_ORI, AcunidadPeer::ID);
+	
+			$criteria->addJoin(DfatendocdetPeer::ID_ACUNIDAD_DES, AcunidadPeer::ID);
+	
 			$criteria->addJoin(DfatendocdetPeer::ID_DFRUTADOC, DfrutadocPeer::ID);
 	
 			$criteria->addJoin(DfatendocdetPeer::ID_DFMEDTRA, DfmedtraPeer::ID);
@@ -350,13 +354,23 @@ abstract class BaseDfatendocdetPeer {
 			DfatendocPeer::addSelectColumns($c);
 			$startcol3 = $startcol2 + DfatendocPeer::NUM_COLUMNS;
 	
+			AcunidadPeer::addSelectColumns($c);
+			$startcol4 = $startcol3 + AcunidadPeer::NUM_COLUMNS;
+	
+			AcunidadPeer::addSelectColumns($c);
+			$startcol5 = $startcol4 + AcunidadPeer::NUM_COLUMNS;
+	
 			DfrutadocPeer::addSelectColumns($c);
-			$startcol4 = $startcol3 + DfrutadocPeer::NUM_COLUMNS;
+			$startcol6 = $startcol5 + DfrutadocPeer::NUM_COLUMNS;
 	
 			DfmedtraPeer::addSelectColumns($c);
-			$startcol5 = $startcol4 + DfmedtraPeer::NUM_COLUMNS;
+			$startcol7 = $startcol6 + DfmedtraPeer::NUM_COLUMNS;
 	
 			$c->addJoin(DfatendocdetPeer::ID_DFATENDOC, DfatendocPeer::ID);
+	
+			$c->addJoin(DfatendocdetPeer::ID_ACUNIDAD_ORI, AcunidadPeer::ID);
+	
+			$c->addJoin(DfatendocdetPeer::ID_ACUNIDAD_DES, AcunidadPeer::ID);
 	
 			$c->addJoin(DfatendocdetPeer::ID_DFRUTADOC, DfrutadocPeer::ID);
 	
@@ -399,7 +413,7 @@ abstract class BaseDfatendocdetPeer {
 	
 
 							
-				$omClass = DfrutadocPeer::getOMClass();
+				$omClass = AcunidadPeer::getOMClass();
 	
 
 				$cls = Propel::import($omClass);
@@ -409,20 +423,20 @@ abstract class BaseDfatendocdetPeer {
 				$newObject = true;
 				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 					$temp_obj1 = $results[$j];
-					$temp_obj3 = $temp_obj1->getDfrutadoc(); 					if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+					$temp_obj3 = $temp_obj1->getAcunidadRelatedByIdAcunidadOri(); 					if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
 						$newObject = false;
-						$temp_obj3->addDfatendocdet($obj1); 						break;
+						$temp_obj3->addDfatendocdetRelatedByIdAcunidadOri($obj1); 						break;
 					}
 				}
 
 				if ($newObject) {
-					$obj3->initDfatendocdets();
-					$obj3->addDfatendocdet($obj1);
+					$obj3->initDfatendocdetsRelatedByIdAcunidadOri();
+					$obj3->addDfatendocdetRelatedByIdAcunidadOri($obj1);
 				}
 	
 
 							
-				$omClass = DfmedtraPeer::getOMClass();
+				$omClass = AcunidadPeer::getOMClass();
 	
 
 				$cls = Propel::import($omClass);
@@ -432,15 +446,61 @@ abstract class BaseDfatendocdetPeer {
 				$newObject = true;
 				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 					$temp_obj1 = $results[$j];
-					$temp_obj4 = $temp_obj1->getDfmedtra(); 					if ($temp_obj4->getPrimaryKey() === $obj4->getPrimaryKey()) {
+					$temp_obj4 = $temp_obj1->getAcunidadRelatedByIdAcunidadDes(); 					if ($temp_obj4->getPrimaryKey() === $obj4->getPrimaryKey()) {
 						$newObject = false;
-						$temp_obj4->addDfatendocdet($obj1); 						break;
+						$temp_obj4->addDfatendocdetRelatedByIdAcunidadDes($obj1); 						break;
 					}
 				}
 
 				if ($newObject) {
-					$obj4->initDfatendocdets();
-					$obj4->addDfatendocdet($obj1);
+					$obj4->initDfatendocdetsRelatedByIdAcunidadDes();
+					$obj4->addDfatendocdetRelatedByIdAcunidadDes($obj1);
+				}
+	
+
+							
+				$omClass = DfrutadocPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj5 = new $cls();
+				$obj5->hydrate($rs, $startcol5);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj5 = $temp_obj1->getDfrutadoc(); 					if ($temp_obj5->getPrimaryKey() === $obj5->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj5->addDfatendocdet($obj1); 						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj5->initDfatendocdets();
+					$obj5->addDfatendocdet($obj1);
+				}
+	
+
+							
+				$omClass = DfmedtraPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj6 = new $cls();
+				$obj6->hydrate($rs, $startcol6);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj6 = $temp_obj1->getDfmedtra(); 					if ($temp_obj6->getPrimaryKey() === $obj6->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj6->addDfatendocdet($obj1); 						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj6->initDfatendocdets();
+					$obj6->addDfatendocdet($obj1);
 				}
 	
 			$results[] = $obj1;
@@ -466,6 +526,74 @@ abstract class BaseDfatendocdetPeer {
 				$criteria->addSelectColumn($column);
 			}
 	
+				$criteria->addJoin(DfatendocdetPeer::ID_ACUNIDAD_ORI, AcunidadPeer::ID);
+		
+				$criteria->addJoin(DfatendocdetPeer::ID_ACUNIDAD_DES, AcunidadPeer::ID);
+		
+				$criteria->addJoin(DfatendocdetPeer::ID_DFRUTADOC, DfrutadocPeer::ID);
+		
+				$criteria->addJoin(DfatendocdetPeer::ID_DFMEDTRA, DfmedtraPeer::ID);
+		
+			$rs = DfatendocdetPeer::doSelectRS($criteria, $con);
+			if ($rs->next()) {
+				return $rs->getInt(1);
+			} else {
+								return 0;
+			}
+		}
+	
+
+		
+		public static function doCountJoinAllExceptAcunidadRelatedByIdAcunidadOri(Criteria $criteria, $distinct = false, $con = null)
+		{
+						$criteria = clone $criteria;
+
+						$criteria->clearSelectColumns()->clearOrderByColumns();
+			if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+				$criteria->addSelectColumn(DfatendocdetPeer::COUNT_DISTINCT);
+			} else {
+				$criteria->addSelectColumn(DfatendocdetPeer::COUNT);
+			}
+
+						foreach($criteria->getGroupByColumns() as $column)
+			{
+				$criteria->addSelectColumn($column);
+			}
+	
+				$criteria->addJoin(DfatendocdetPeer::ID_DFATENDOC, DfatendocPeer::ID);
+		
+				$criteria->addJoin(DfatendocdetPeer::ID_DFRUTADOC, DfrutadocPeer::ID);
+		
+				$criteria->addJoin(DfatendocdetPeer::ID_DFMEDTRA, DfmedtraPeer::ID);
+		
+			$rs = DfatendocdetPeer::doSelectRS($criteria, $con);
+			if ($rs->next()) {
+				return $rs->getInt(1);
+			} else {
+								return 0;
+			}
+		}
+	
+
+		
+		public static function doCountJoinAllExceptAcunidadRelatedByIdAcunidadDes(Criteria $criteria, $distinct = false, $con = null)
+		{
+						$criteria = clone $criteria;
+
+						$criteria->clearSelectColumns()->clearOrderByColumns();
+			if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+				$criteria->addSelectColumn(DfatendocdetPeer::COUNT_DISTINCT);
+			} else {
+				$criteria->addSelectColumn(DfatendocdetPeer::COUNT);
+			}
+
+						foreach($criteria->getGroupByColumns() as $column)
+			{
+				$criteria->addSelectColumn($column);
+			}
+	
+				$criteria->addJoin(DfatendocdetPeer::ID_DFATENDOC, DfatendocPeer::ID);
+		
 				$criteria->addJoin(DfatendocdetPeer::ID_DFRUTADOC, DfrutadocPeer::ID);
 		
 				$criteria->addJoin(DfatendocdetPeer::ID_DFMEDTRA, DfmedtraPeer::ID);
@@ -498,6 +626,10 @@ abstract class BaseDfatendocdetPeer {
 	
 				$criteria->addJoin(DfatendocdetPeer::ID_DFATENDOC, DfatendocPeer::ID);
 		
+				$criteria->addJoin(DfatendocdetPeer::ID_ACUNIDAD_ORI, AcunidadPeer::ID);
+		
+				$criteria->addJoin(DfatendocdetPeer::ID_ACUNIDAD_DES, AcunidadPeer::ID);
+		
 				$criteria->addJoin(DfatendocdetPeer::ID_DFMEDTRA, DfmedtraPeer::ID);
 		
 			$rs = DfatendocdetPeer::doSelectRS($criteria, $con);
@@ -528,6 +660,10 @@ abstract class BaseDfatendocdetPeer {
 	
 				$criteria->addJoin(DfatendocdetPeer::ID_DFATENDOC, DfatendocPeer::ID);
 		
+				$criteria->addJoin(DfatendocdetPeer::ID_ACUNIDAD_ORI, AcunidadPeer::ID);
+		
+				$criteria->addJoin(DfatendocdetPeer::ID_ACUNIDAD_DES, AcunidadPeer::ID);
+		
 				$criteria->addJoin(DfatendocdetPeer::ID_DFRUTADOC, DfrutadocPeer::ID);
 		
 			$rs = DfatendocdetPeer::doSelectRS($criteria, $con);
@@ -551,11 +687,21 @@ abstract class BaseDfatendocdetPeer {
 		DfatendocdetPeer::addSelectColumns($c);
 		$startcol2 = (DfatendocdetPeer::NUM_COLUMNS - DfatendocdetPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
+			AcunidadPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + AcunidadPeer::NUM_COLUMNS;
+	
+			AcunidadPeer::addSelectColumns($c);
+			$startcol4 = $startcol3 + AcunidadPeer::NUM_COLUMNS;
+	
 			DfrutadocPeer::addSelectColumns($c);
-			$startcol3 = $startcol2 + DfrutadocPeer::NUM_COLUMNS;
+			$startcol5 = $startcol4 + DfrutadocPeer::NUM_COLUMNS;
 	
 			DfmedtraPeer::addSelectColumns($c);
-			$startcol4 = $startcol3 + DfmedtraPeer::NUM_COLUMNS;
+			$startcol6 = $startcol5 + DfmedtraPeer::NUM_COLUMNS;
+	
+			$c->addJoin(DfatendocdetPeer::ID_ACUNIDAD_ORI, AcunidadPeer::ID);
+	
+			$c->addJoin(DfatendocdetPeer::ID_ACUNIDAD_DES, AcunidadPeer::ID);
 	
 			$c->addJoin(DfatendocdetPeer::ID_DFRUTADOC, DfrutadocPeer::ID);
 	
@@ -573,48 +719,92 @@ abstract class BaseDfatendocdetPeer {
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
 
+				$omClass = AcunidadPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj2  = new $cls();
+				$obj2->hydrate($rs, $startcol2);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getAcunidadRelatedByIdAcunidadOri(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addDfatendocdetRelatedByIdAcunidadOri($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj2->initDfatendocdetsRelatedByIdAcunidadOri();
+					$obj2->addDfatendocdetRelatedByIdAcunidadOri($obj1);
+				}
+	
+				$omClass = AcunidadPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj3  = new $cls();
+				$obj3->hydrate($rs, $startcol3);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj3 = $temp_obj1->getAcunidadRelatedByIdAcunidadDes(); 					if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj3->addDfatendocdetRelatedByIdAcunidadDes($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj3->initDfatendocdetsRelatedByIdAcunidadDes();
+					$obj3->addDfatendocdetRelatedByIdAcunidadDes($obj1);
+				}
+	
 				$omClass = DfrutadocPeer::getOMClass();
 	
 
 				$cls = Propel::import($omClass);
-				$obj2  = new $cls();
-				$obj2->hydrate($rs, $startcol2);
+				$obj4  = new $cls();
+				$obj4->hydrate($rs, $startcol4);
 
 				$newObject = true;
 				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 					$temp_obj1 = $results[$j];
-					$temp_obj2 = $temp_obj1->getDfrutadoc(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$temp_obj4 = $temp_obj1->getDfrutadoc(); 					if ($temp_obj4->getPrimaryKey() === $obj4->getPrimaryKey()) {
 						$newObject = false;
-						$temp_obj2->addDfatendocdet($obj1);
+						$temp_obj4->addDfatendocdet($obj1);
 						break;
 					}
 				}
 
 				if ($newObject) {
-					$obj2->initDfatendocdets();
-					$obj2->addDfatendocdet($obj1);
+					$obj4->initDfatendocdets();
+					$obj4->addDfatendocdet($obj1);
 				}
 	
 				$omClass = DfmedtraPeer::getOMClass();
 	
 
 				$cls = Propel::import($omClass);
-				$obj3  = new $cls();
-				$obj3->hydrate($rs, $startcol3);
+				$obj5  = new $cls();
+				$obj5->hydrate($rs, $startcol5);
 
 				$newObject = true;
 				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 					$temp_obj1 = $results[$j];
-					$temp_obj3 = $temp_obj1->getDfmedtra(); 					if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+					$temp_obj5 = $temp_obj1->getDfmedtra(); 					if ($temp_obj5->getPrimaryKey() === $obj5->getPrimaryKey()) {
 						$newObject = false;
-						$temp_obj3->addDfatendocdet($obj1);
+						$temp_obj5->addDfatendocdet($obj1);
 						break;
 					}
 				}
 
 				if ($newObject) {
-					$obj3->initDfatendocdets();
-					$obj3->addDfatendocdet($obj1);
+					$obj5->initDfatendocdets();
+					$obj5->addDfatendocdet($obj1);
 				}
 	
 			$results[] = $obj1;
@@ -624,91 +814,7 @@ abstract class BaseDfatendocdetPeer {
 
 
 	
-	public static function doSelectJoinAllExceptDfrutadoc(Criteria $c, $con = null)
-	{
-		$c = clone $c;
-
-								if ($c->getDbName() == Propel::getDefaultDB()) {
-			$c->setDbName(self::DATABASE_NAME);
-		}
-
-		DfatendocdetPeer::addSelectColumns($c);
-		$startcol2 = (DfatendocdetPeer::NUM_COLUMNS - DfatendocdetPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
-
-			DfatendocPeer::addSelectColumns($c);
-			$startcol3 = $startcol2 + DfatendocPeer::NUM_COLUMNS;
-	
-			DfmedtraPeer::addSelectColumns($c);
-			$startcol4 = $startcol3 + DfmedtraPeer::NUM_COLUMNS;
-	
-			$c->addJoin(DfatendocdetPeer::ID_DFATENDOC, DfatendocPeer::ID);
-	
-			$c->addJoin(DfatendocdetPeer::ID_DFMEDTRA, DfmedtraPeer::ID);
-	
-
-		$rs = BasePeer::doSelect($c, $con);
-		$results = array();
-
-		while($rs->next()) {
-
-			$omClass = DfatendocdetPeer::getOMClass();
-
-			$cls = Propel::import($omClass);
-			$obj1 = new $cls();
-			$obj1->hydrate($rs);
-
-				$omClass = DfatendocPeer::getOMClass();
-	
-
-				$cls = Propel::import($omClass);
-				$obj2  = new $cls();
-				$obj2->hydrate($rs, $startcol2);
-
-				$newObject = true;
-				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-					$temp_obj1 = $results[$j];
-					$temp_obj2 = $temp_obj1->getDfatendoc(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-						$newObject = false;
-						$temp_obj2->addDfatendocdet($obj1);
-						break;
-					}
-				}
-
-				if ($newObject) {
-					$obj2->initDfatendocdets();
-					$obj2->addDfatendocdet($obj1);
-				}
-	
-				$omClass = DfmedtraPeer::getOMClass();
-	
-
-				$cls = Propel::import($omClass);
-				$obj3  = new $cls();
-				$obj3->hydrate($rs, $startcol3);
-
-				$newObject = true;
-				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-					$temp_obj1 = $results[$j];
-					$temp_obj3 = $temp_obj1->getDfmedtra(); 					if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
-						$newObject = false;
-						$temp_obj3->addDfatendocdet($obj1);
-						break;
-					}
-				}
-
-				if ($newObject) {
-					$obj3->initDfatendocdets();
-					$obj3->addDfatendocdet($obj1);
-				}
-	
-			$results[] = $obj1;
-		}
-		return $results;
-	}
-
-
-	
-	public static function doSelectJoinAllExceptDfmedtra(Criteria $c, $con = null)
+	public static function doSelectJoinAllExceptAcunidadRelatedByIdAcunidadOri(Criteria $c, $con = null)
 	{
 		$c = clone $c;
 
@@ -725,9 +831,14 @@ abstract class BaseDfatendocdetPeer {
 			DfrutadocPeer::addSelectColumns($c);
 			$startcol4 = $startcol3 + DfrutadocPeer::NUM_COLUMNS;
 	
+			DfmedtraPeer::addSelectColumns($c);
+			$startcol5 = $startcol4 + DfmedtraPeer::NUM_COLUMNS;
+	
 			$c->addJoin(DfatendocdetPeer::ID_DFATENDOC, DfatendocPeer::ID);
 	
 			$c->addJoin(DfatendocdetPeer::ID_DFRUTADOC, DfrutadocPeer::ID);
+	
+			$c->addJoin(DfatendocdetPeer::ID_DFMEDTRA, DfmedtraPeer::ID);
 	
 
 		$rs = BasePeer::doSelect($c, $con);
@@ -783,6 +894,415 @@ abstract class BaseDfatendocdetPeer {
 				if ($newObject) {
 					$obj3->initDfatendocdets();
 					$obj3->addDfatendocdet($obj1);
+				}
+	
+				$omClass = DfmedtraPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj4  = new $cls();
+				$obj4->hydrate($rs, $startcol4);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj4 = $temp_obj1->getDfmedtra(); 					if ($temp_obj4->getPrimaryKey() === $obj4->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj4->addDfatendocdet($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj4->initDfatendocdets();
+					$obj4->addDfatendocdet($obj1);
+				}
+	
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doSelectJoinAllExceptAcunidadRelatedByIdAcunidadDes(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+								if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		DfatendocdetPeer::addSelectColumns($c);
+		$startcol2 = (DfatendocdetPeer::NUM_COLUMNS - DfatendocdetPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+
+			DfatendocPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + DfatendocPeer::NUM_COLUMNS;
+	
+			DfrutadocPeer::addSelectColumns($c);
+			$startcol4 = $startcol3 + DfrutadocPeer::NUM_COLUMNS;
+	
+			DfmedtraPeer::addSelectColumns($c);
+			$startcol5 = $startcol4 + DfmedtraPeer::NUM_COLUMNS;
+	
+			$c->addJoin(DfatendocdetPeer::ID_DFATENDOC, DfatendocPeer::ID);
+	
+			$c->addJoin(DfatendocdetPeer::ID_DFRUTADOC, DfrutadocPeer::ID);
+	
+			$c->addJoin(DfatendocdetPeer::ID_DFMEDTRA, DfmedtraPeer::ID);
+	
+
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = DfatendocdetPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+				$omClass = DfatendocPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj2  = new $cls();
+				$obj2->hydrate($rs, $startcol2);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getDfatendoc(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addDfatendocdet($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj2->initDfatendocdets();
+					$obj2->addDfatendocdet($obj1);
+				}
+	
+				$omClass = DfrutadocPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj3  = new $cls();
+				$obj3->hydrate($rs, $startcol3);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj3 = $temp_obj1->getDfrutadoc(); 					if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj3->addDfatendocdet($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj3->initDfatendocdets();
+					$obj3->addDfatendocdet($obj1);
+				}
+	
+				$omClass = DfmedtraPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj4  = new $cls();
+				$obj4->hydrate($rs, $startcol4);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj4 = $temp_obj1->getDfmedtra(); 					if ($temp_obj4->getPrimaryKey() === $obj4->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj4->addDfatendocdet($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj4->initDfatendocdets();
+					$obj4->addDfatendocdet($obj1);
+				}
+	
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doSelectJoinAllExceptDfrutadoc(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+								if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		DfatendocdetPeer::addSelectColumns($c);
+		$startcol2 = (DfatendocdetPeer::NUM_COLUMNS - DfatendocdetPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+
+			DfatendocPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + DfatendocPeer::NUM_COLUMNS;
+	
+			AcunidadPeer::addSelectColumns($c);
+			$startcol4 = $startcol3 + AcunidadPeer::NUM_COLUMNS;
+	
+			AcunidadPeer::addSelectColumns($c);
+			$startcol5 = $startcol4 + AcunidadPeer::NUM_COLUMNS;
+	
+			DfmedtraPeer::addSelectColumns($c);
+			$startcol6 = $startcol5 + DfmedtraPeer::NUM_COLUMNS;
+	
+			$c->addJoin(DfatendocdetPeer::ID_DFATENDOC, DfatendocPeer::ID);
+	
+			$c->addJoin(DfatendocdetPeer::ID_ACUNIDAD_ORI, AcunidadPeer::ID);
+	
+			$c->addJoin(DfatendocdetPeer::ID_ACUNIDAD_DES, AcunidadPeer::ID);
+	
+			$c->addJoin(DfatendocdetPeer::ID_DFMEDTRA, DfmedtraPeer::ID);
+	
+
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = DfatendocdetPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+				$omClass = DfatendocPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj2  = new $cls();
+				$obj2->hydrate($rs, $startcol2);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getDfatendoc(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addDfatendocdet($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj2->initDfatendocdets();
+					$obj2->addDfatendocdet($obj1);
+				}
+	
+				$omClass = AcunidadPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj3  = new $cls();
+				$obj3->hydrate($rs, $startcol3);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj3 = $temp_obj1->getAcunidadRelatedByIdAcunidadOri(); 					if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj3->addDfatendocdetRelatedByIdAcunidadOri($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj3->initDfatendocdetsRelatedByIdAcunidadOri();
+					$obj3->addDfatendocdetRelatedByIdAcunidadOri($obj1);
+				}
+	
+				$omClass = AcunidadPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj4  = new $cls();
+				$obj4->hydrate($rs, $startcol4);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj4 = $temp_obj1->getAcunidadRelatedByIdAcunidadDes(); 					if ($temp_obj4->getPrimaryKey() === $obj4->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj4->addDfatendocdetRelatedByIdAcunidadDes($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj4->initDfatendocdetsRelatedByIdAcunidadDes();
+					$obj4->addDfatendocdetRelatedByIdAcunidadDes($obj1);
+				}
+	
+				$omClass = DfmedtraPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj5  = new $cls();
+				$obj5->hydrate($rs, $startcol5);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj5 = $temp_obj1->getDfmedtra(); 					if ($temp_obj5->getPrimaryKey() === $obj5->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj5->addDfatendocdet($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj5->initDfatendocdets();
+					$obj5->addDfatendocdet($obj1);
+				}
+	
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doSelectJoinAllExceptDfmedtra(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+								if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		DfatendocdetPeer::addSelectColumns($c);
+		$startcol2 = (DfatendocdetPeer::NUM_COLUMNS - DfatendocdetPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+
+			DfatendocPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + DfatendocPeer::NUM_COLUMNS;
+	
+			AcunidadPeer::addSelectColumns($c);
+			$startcol4 = $startcol3 + AcunidadPeer::NUM_COLUMNS;
+	
+			AcunidadPeer::addSelectColumns($c);
+			$startcol5 = $startcol4 + AcunidadPeer::NUM_COLUMNS;
+	
+			DfrutadocPeer::addSelectColumns($c);
+			$startcol6 = $startcol5 + DfrutadocPeer::NUM_COLUMNS;
+	
+			$c->addJoin(DfatendocdetPeer::ID_DFATENDOC, DfatendocPeer::ID);
+	
+			$c->addJoin(DfatendocdetPeer::ID_ACUNIDAD_ORI, AcunidadPeer::ID);
+	
+			$c->addJoin(DfatendocdetPeer::ID_ACUNIDAD_DES, AcunidadPeer::ID);
+	
+			$c->addJoin(DfatendocdetPeer::ID_DFRUTADOC, DfrutadocPeer::ID);
+	
+
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = DfatendocdetPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+				$omClass = DfatendocPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj2  = new $cls();
+				$obj2->hydrate($rs, $startcol2);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getDfatendoc(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addDfatendocdet($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj2->initDfatendocdets();
+					$obj2->addDfatendocdet($obj1);
+				}
+	
+				$omClass = AcunidadPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj3  = new $cls();
+				$obj3->hydrate($rs, $startcol3);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj3 = $temp_obj1->getAcunidadRelatedByIdAcunidadOri(); 					if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj3->addDfatendocdetRelatedByIdAcunidadOri($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj3->initDfatendocdetsRelatedByIdAcunidadOri();
+					$obj3->addDfatendocdetRelatedByIdAcunidadOri($obj1);
+				}
+	
+				$omClass = AcunidadPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj4  = new $cls();
+				$obj4->hydrate($rs, $startcol4);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj4 = $temp_obj1->getAcunidadRelatedByIdAcunidadDes(); 					if ($temp_obj4->getPrimaryKey() === $obj4->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj4->addDfatendocdetRelatedByIdAcunidadDes($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj4->initDfatendocdetsRelatedByIdAcunidadDes();
+					$obj4->addDfatendocdetRelatedByIdAcunidadDes($obj1);
+				}
+	
+				$omClass = DfrutadocPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj5  = new $cls();
+				$obj5->hydrate($rs, $startcol5);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj5 = $temp_obj1->getDfrutadoc(); 					if ($temp_obj5->getPrimaryKey() === $obj5->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj5->addDfatendocdet($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj5->initDfatendocdets();
+					$obj5->addDfatendocdet($obj1);
 				}
 	
 			$results[] = $obj1;
