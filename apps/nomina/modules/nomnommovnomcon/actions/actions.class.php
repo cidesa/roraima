@@ -122,6 +122,7 @@ class nomnommovnomconActions extends autonomnommovnomconActions
 	 	$c->addJoin(NpasicarempPeer::CODEMP,NphojintPeer::CODEMP);
 	 	$c->addJoin(NpasiconempPeer::CODEMP,NpasicarempPeer::CODEMP);
 		$c->addJoin(NpasiconempPeer::CODCAR,NpasicarempPeer::CODCAR);
+		$c->addAscendingOrderByColumn(NpasiconempPeer::NOMEMP);
 		$per = NpasiconempPeer::doSelect($c);
 
         $this->nfilgrid="";
