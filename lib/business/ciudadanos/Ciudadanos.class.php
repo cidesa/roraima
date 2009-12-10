@@ -97,7 +97,7 @@ class Ciudadanos {
     {
       $result=array();
 
-      if($Atayudas->getId()=='') $Atayudas->setUsucre(substr(sfContext::getInstance()->getUser()->getAttribute('usuario','Sin Autenticar'),0,50));
+        if($Atayudas->getId()=='') $Atayudas->setUsucre(substr(sfContext::getInstance()->getUser()->getAttribute('usuario','Sin Autenticar'),0,50));
       else $Atayudas->setUsumod(substr(sfContext::getInstance()->getUser()->getAttribute('usuario','Sin Autenticar'),0,50));
 
       if($Atayudas->getId()==''){
@@ -109,8 +109,20 @@ class Ciudadanos {
 
         if($Atayudas->getNroexp()=='XXXXXX' || $Atayudas->getNroexp()=='XXXXX' || $Atayudas->getNroexp()=='XXXX' || $Atayudas->getNroexp()=='XXX' || $Atayudas->getNroexp()=='XX' || $Atayudas->getNroexp()=='X'){
           $sql = "select nextval('atayudas_nroexp_seq') as nroexp";
-          if(Herramientas::BuscarDatos($sql,&$result)){
-            $Atayudas->setNroexp(str_pad($result[0]['nroexp'],6,'0',STR_PAD_LEFT));
+          try{
+            if(Herramientas::BuscarDatos($sql,&$result)){
+              $Atayudas->setNroexp(str_pad($result[0]['nroexp'],6,'0',STR_PAD_LEFT));
+            }
+          }catch(Exception $ex){
+            // Creamos la secuencia
+            $sql = 'CREATE SEQUENCE atayudas_nroexp_seq;';
+            H::insertarRegistros($sql);
+
+            $sql = "select nextval('atayudas_nroexp_seq') as nroexp";
+            if(Herramientas::BuscarDatos($sql,&$result)){
+              $Atayudas->setNroexp(str_pad($result[0]['nroexp'],6,'0',STR_PAD_LEFT));
+            }
+
           }
         }
 
