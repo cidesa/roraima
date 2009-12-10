@@ -241,7 +241,7 @@ private static $coderror=-1;
     if ($nuevo=="S" and $codemp!="")
     {
       $arr=array();
-      $sql="select a.*,dcontinuos((corresponde-disfrutados),obtenerjornada(codemp,antiguedad) ) as diasdif
+      $sql="select a.*,dcontinuos((corresponde-disfrutados)::int,obtenerjornada(codemp,antiguedad) ) as diasdif
 			from NPLIQVACACION a WHERE CODEMP='$codemp' ORDER BY DESDE desc";
       if (H::BuscarDatos($sql,$arr))
       {
@@ -607,7 +607,8 @@ private static $coderror=-1;
   
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
