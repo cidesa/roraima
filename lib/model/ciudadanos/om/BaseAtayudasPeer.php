@@ -13,7 +13,7 @@ abstract class BaseAtayudasPeer {
 	const CLASS_DEFAULT = 'lib.model.ciudadanos.Atayudas';
 
 	
-	const NUM_COLUMNS = 37;
+	const NUM_COLUMNS = 36;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -27,9 +27,6 @@ abstract class BaseAtayudasPeer {
 
 	
 	const PARENTESCO = 'atayudas.PARENTESCO';
-
-	
-	const PRIAYU = 'atayudas.PRIAYU';
 
 	
 	const ATPRIAYU_ID = 'atayudas.ATPRIAYU_ID';
@@ -136,18 +133,18 @@ abstract class BaseAtayudasPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Nroexp', 'Refdoc', 'Parentesco', 'Priayu', 'AtpriayuId', 'Atsolici', 'Atbenefi', 'AttipayuId', 'AtrubrosId', 'AtestayuId', 'AttrasocId', 'AtproveeId', 'Proayu', 'Nroofi', 'Desayu', 'Motayu', 'CreatedAt', 'UpdatedAt', 'Usucre', 'Usumod', 'Codpre', 'Detayu', 'Monayu', 'Monapr', 'AtmedicoId', 'Respat', 'Infmed', 'Obsmed', 'Fecdiasoc', 'Usudiasoc', 'Resdiasoc', 'Fecvisdoc', 'Usuvisdoc', 'Resvisdoc', 'Fecsol', 'AtunidadesId', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (AtayudasPeer::NROEXP, AtayudasPeer::REFDOC, AtayudasPeer::PARENTESCO, AtayudasPeer::PRIAYU, AtayudasPeer::ATPRIAYU_ID, AtayudasPeer::ATSOLICI, AtayudasPeer::ATBENEFI, AtayudasPeer::ATTIPAYU_ID, AtayudasPeer::ATRUBROS_ID, AtayudasPeer::ATESTAYU_ID, AtayudasPeer::ATTRASOC_ID, AtayudasPeer::ATPROVEE_ID, AtayudasPeer::PROAYU, AtayudasPeer::NROOFI, AtayudasPeer::DESAYU, AtayudasPeer::MOTAYU, AtayudasPeer::CREATED_AT, AtayudasPeer::UPDATED_AT, AtayudasPeer::USUCRE, AtayudasPeer::USUMOD, AtayudasPeer::CODPRE, AtayudasPeer::DETAYU, AtayudasPeer::MONAYU, AtayudasPeer::MONAPR, AtayudasPeer::ATMEDICO_ID, AtayudasPeer::RESPAT, AtayudasPeer::INFMED, AtayudasPeer::OBSMED, AtayudasPeer::FECDIASOC, AtayudasPeer::USUDIASOC, AtayudasPeer::RESDIASOC, AtayudasPeer::FECVISDOC, AtayudasPeer::USUVISDOC, AtayudasPeer::RESVISDOC, AtayudasPeer::FECSOL, AtayudasPeer::ATUNIDADES_ID, AtayudasPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('nroexp', 'refdoc', 'parentesco', 'priayu', 'atpriayu_id', 'atsolici', 'atbenefi', 'attipayu_id', 'atrubros_id', 'atestayu_id', 'attrasoc_id', 'atprovee_id', 'proayu', 'nroofi', 'desayu', 'motayu', 'created_at', 'updated_at', 'usucre', 'usumod', 'codpre', 'detayu', 'monayu', 'monapr', 'atmedico_id', 'respat', 'infmed', 'obsmed', 'fecdiasoc', 'usudiasoc', 'resdiasoc', 'fecvisdoc', 'usuvisdoc', 'resvisdoc', 'fecsol', 'atunidades_id', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, )
+		BasePeer::TYPE_PHPNAME => array ('Nroexp', 'Refdoc', 'Parentesco', 'AtpriayuId', 'Atsolici', 'Atbenefi', 'AttipayuId', 'AtrubrosId', 'AtestayuId', 'AttrasocId', 'AtproveeId', 'Proayu', 'Nroofi', 'Desayu', 'Motayu', 'CreatedAt', 'UpdatedAt', 'Usucre', 'Usumod', 'Codpre', 'Detayu', 'Monayu', 'Monapr', 'AtmedicoId', 'Respat', 'Infmed', 'Obsmed', 'Fecdiasoc', 'Usudiasoc', 'Resdiasoc', 'Fecvisdoc', 'Usuvisdoc', 'Resvisdoc', 'Fecsol', 'AtunidadesId', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (AtayudasPeer::NROEXP, AtayudasPeer::REFDOC, AtayudasPeer::PARENTESCO, AtayudasPeer::ATPRIAYU_ID, AtayudasPeer::ATSOLICI, AtayudasPeer::ATBENEFI, AtayudasPeer::ATTIPAYU_ID, AtayudasPeer::ATRUBROS_ID, AtayudasPeer::ATESTAYU_ID, AtayudasPeer::ATTRASOC_ID, AtayudasPeer::ATPROVEE_ID, AtayudasPeer::PROAYU, AtayudasPeer::NROOFI, AtayudasPeer::DESAYU, AtayudasPeer::MOTAYU, AtayudasPeer::CREATED_AT, AtayudasPeer::UPDATED_AT, AtayudasPeer::USUCRE, AtayudasPeer::USUMOD, AtayudasPeer::CODPRE, AtayudasPeer::DETAYU, AtayudasPeer::MONAYU, AtayudasPeer::MONAPR, AtayudasPeer::ATMEDICO_ID, AtayudasPeer::RESPAT, AtayudasPeer::INFMED, AtayudasPeer::OBSMED, AtayudasPeer::FECDIASOC, AtayudasPeer::USUDIASOC, AtayudasPeer::RESDIASOC, AtayudasPeer::FECVISDOC, AtayudasPeer::USUVISDOC, AtayudasPeer::RESVISDOC, AtayudasPeer::FECSOL, AtayudasPeer::ATUNIDADES_ID, AtayudasPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('nroexp', 'refdoc', 'parentesco', 'atpriayu_id', 'atsolici', 'atbenefi', 'attipayu_id', 'atrubros_id', 'atestayu_id', 'attrasoc_id', 'atprovee_id', 'proayu', 'nroofi', 'desayu', 'motayu', 'created_at', 'updated_at', 'usucre', 'usumod', 'codpre', 'detayu', 'monayu', 'monapr', 'atmedico_id', 'respat', 'infmed', 'obsmed', 'fecdiasoc', 'usudiasoc', 'resdiasoc', 'fecvisdoc', 'usuvisdoc', 'resvisdoc', 'fecsol', 'atunidades_id', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Nroexp' => 0, 'Refdoc' => 1, 'Parentesco' => 2, 'Priayu' => 3, 'AtpriayuId' => 4, 'Atsolici' => 5, 'Atbenefi' => 6, 'AttipayuId' => 7, 'AtrubrosId' => 8, 'AtestayuId' => 9, 'AttrasocId' => 10, 'AtproveeId' => 11, 'Proayu' => 12, 'Nroofi' => 13, 'Desayu' => 14, 'Motayu' => 15, 'CreatedAt' => 16, 'UpdatedAt' => 17, 'Usucre' => 18, 'Usumod' => 19, 'Codpre' => 20, 'Detayu' => 21, 'Monayu' => 22, 'Monapr' => 23, 'AtmedicoId' => 24, 'Respat' => 25, 'Infmed' => 26, 'Obsmed' => 27, 'Fecdiasoc' => 28, 'Usudiasoc' => 29, 'Resdiasoc' => 30, 'Fecvisdoc' => 31, 'Usuvisdoc' => 32, 'Resvisdoc' => 33, 'Fecsol' => 34, 'AtunidadesId' => 35, 'Id' => 36, ),
-		BasePeer::TYPE_COLNAME => array (AtayudasPeer::NROEXP => 0, AtayudasPeer::REFDOC => 1, AtayudasPeer::PARENTESCO => 2, AtayudasPeer::PRIAYU => 3, AtayudasPeer::ATPRIAYU_ID => 4, AtayudasPeer::ATSOLICI => 5, AtayudasPeer::ATBENEFI => 6, AtayudasPeer::ATTIPAYU_ID => 7, AtayudasPeer::ATRUBROS_ID => 8, AtayudasPeer::ATESTAYU_ID => 9, AtayudasPeer::ATTRASOC_ID => 10, AtayudasPeer::ATPROVEE_ID => 11, AtayudasPeer::PROAYU => 12, AtayudasPeer::NROOFI => 13, AtayudasPeer::DESAYU => 14, AtayudasPeer::MOTAYU => 15, AtayudasPeer::CREATED_AT => 16, AtayudasPeer::UPDATED_AT => 17, AtayudasPeer::USUCRE => 18, AtayudasPeer::USUMOD => 19, AtayudasPeer::CODPRE => 20, AtayudasPeer::DETAYU => 21, AtayudasPeer::MONAYU => 22, AtayudasPeer::MONAPR => 23, AtayudasPeer::ATMEDICO_ID => 24, AtayudasPeer::RESPAT => 25, AtayudasPeer::INFMED => 26, AtayudasPeer::OBSMED => 27, AtayudasPeer::FECDIASOC => 28, AtayudasPeer::USUDIASOC => 29, AtayudasPeer::RESDIASOC => 30, AtayudasPeer::FECVISDOC => 31, AtayudasPeer::USUVISDOC => 32, AtayudasPeer::RESVISDOC => 33, AtayudasPeer::FECSOL => 34, AtayudasPeer::ATUNIDADES_ID => 35, AtayudasPeer::ID => 36, ),
-		BasePeer::TYPE_FIELDNAME => array ('nroexp' => 0, 'refdoc' => 1, 'parentesco' => 2, 'priayu' => 3, 'atpriayu_id' => 4, 'atsolici' => 5, 'atbenefi' => 6, 'attipayu_id' => 7, 'atrubros_id' => 8, 'atestayu_id' => 9, 'attrasoc_id' => 10, 'atprovee_id' => 11, 'proayu' => 12, 'nroofi' => 13, 'desayu' => 14, 'motayu' => 15, 'created_at' => 16, 'updated_at' => 17, 'usucre' => 18, 'usumod' => 19, 'codpre' => 20, 'detayu' => 21, 'monayu' => 22, 'monapr' => 23, 'atmedico_id' => 24, 'respat' => 25, 'infmed' => 26, 'obsmed' => 27, 'fecdiasoc' => 28, 'usudiasoc' => 29, 'resdiasoc' => 30, 'fecvisdoc' => 31, 'usuvisdoc' => 32, 'resvisdoc' => 33, 'fecsol' => 34, 'atunidades_id' => 35, 'id' => 36, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, )
+		BasePeer::TYPE_PHPNAME => array ('Nroexp' => 0, 'Refdoc' => 1, 'Parentesco' => 2, 'AtpriayuId' => 3, 'Atsolici' => 4, 'Atbenefi' => 5, 'AttipayuId' => 6, 'AtrubrosId' => 7, 'AtestayuId' => 8, 'AttrasocId' => 9, 'AtproveeId' => 10, 'Proayu' => 11, 'Nroofi' => 12, 'Desayu' => 13, 'Motayu' => 14, 'CreatedAt' => 15, 'UpdatedAt' => 16, 'Usucre' => 17, 'Usumod' => 18, 'Codpre' => 19, 'Detayu' => 20, 'Monayu' => 21, 'Monapr' => 22, 'AtmedicoId' => 23, 'Respat' => 24, 'Infmed' => 25, 'Obsmed' => 26, 'Fecdiasoc' => 27, 'Usudiasoc' => 28, 'Resdiasoc' => 29, 'Fecvisdoc' => 30, 'Usuvisdoc' => 31, 'Resvisdoc' => 32, 'Fecsol' => 33, 'AtunidadesId' => 34, 'Id' => 35, ),
+		BasePeer::TYPE_COLNAME => array (AtayudasPeer::NROEXP => 0, AtayudasPeer::REFDOC => 1, AtayudasPeer::PARENTESCO => 2, AtayudasPeer::ATPRIAYU_ID => 3, AtayudasPeer::ATSOLICI => 4, AtayudasPeer::ATBENEFI => 5, AtayudasPeer::ATTIPAYU_ID => 6, AtayudasPeer::ATRUBROS_ID => 7, AtayudasPeer::ATESTAYU_ID => 8, AtayudasPeer::ATTRASOC_ID => 9, AtayudasPeer::ATPROVEE_ID => 10, AtayudasPeer::PROAYU => 11, AtayudasPeer::NROOFI => 12, AtayudasPeer::DESAYU => 13, AtayudasPeer::MOTAYU => 14, AtayudasPeer::CREATED_AT => 15, AtayudasPeer::UPDATED_AT => 16, AtayudasPeer::USUCRE => 17, AtayudasPeer::USUMOD => 18, AtayudasPeer::CODPRE => 19, AtayudasPeer::DETAYU => 20, AtayudasPeer::MONAYU => 21, AtayudasPeer::MONAPR => 22, AtayudasPeer::ATMEDICO_ID => 23, AtayudasPeer::RESPAT => 24, AtayudasPeer::INFMED => 25, AtayudasPeer::OBSMED => 26, AtayudasPeer::FECDIASOC => 27, AtayudasPeer::USUDIASOC => 28, AtayudasPeer::RESDIASOC => 29, AtayudasPeer::FECVISDOC => 30, AtayudasPeer::USUVISDOC => 31, AtayudasPeer::RESVISDOC => 32, AtayudasPeer::FECSOL => 33, AtayudasPeer::ATUNIDADES_ID => 34, AtayudasPeer::ID => 35, ),
+		BasePeer::TYPE_FIELDNAME => array ('nroexp' => 0, 'refdoc' => 1, 'parentesco' => 2, 'atpriayu_id' => 3, 'atsolici' => 4, 'atbenefi' => 5, 'attipayu_id' => 6, 'atrubros_id' => 7, 'atestayu_id' => 8, 'attrasoc_id' => 9, 'atprovee_id' => 10, 'proayu' => 11, 'nroofi' => 12, 'desayu' => 13, 'motayu' => 14, 'created_at' => 15, 'updated_at' => 16, 'usucre' => 17, 'usumod' => 18, 'codpre' => 19, 'detayu' => 20, 'monayu' => 21, 'monapr' => 22, 'atmedico_id' => 23, 'respat' => 24, 'infmed' => 25, 'obsmed' => 26, 'fecdiasoc' => 27, 'usudiasoc' => 28, 'resdiasoc' => 29, 'fecvisdoc' => 30, 'usuvisdoc' => 31, 'resvisdoc' => 32, 'fecsol' => 33, 'atunidades_id' => 34, 'id' => 35, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, )
 	);
 
 	
@@ -206,8 +203,6 @@ abstract class BaseAtayudasPeer {
 		$criteria->addSelectColumn(AtayudasPeer::REFDOC);
 
 		$criteria->addSelectColumn(AtayudasPeer::PARENTESCO);
-
-		$criteria->addSelectColumn(AtayudasPeer::PRIAYU);
 
 		$criteria->addSelectColumn(AtayudasPeer::ATPRIAYU_ID);
 

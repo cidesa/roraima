@@ -470,9 +470,6 @@ propel:
       foreignReference: id
     parentesco:
       type: INTEGER    
-    priayu:
-      type: INTEGER
-      required: true
     atpriayu_id:
     atsolici:
       type: INTEGER
