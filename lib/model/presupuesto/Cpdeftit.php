@@ -7,9 +7,9 @@
  *
  * @package    Roraima
  * @subpackage lib.model
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
+ * @author     $Author:lhernandez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id:Cpdeftit.php 35042 2009-11-26 01:33:34Z lhernandez $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -17,13 +17,17 @@ class Cpdeftit extends BaseCpdeftit
 {
   protected $listaperiodo = array();
   protected $obj = array();
+  protected $codigo1='';
+  protected $nombre1='';
 
-  public function getCodigo1()
-  {
+  protected $dismon;
+  protected $dispor;
+  protected $checked="";
+
+  /*public function getCodigo1(){
    return self::getCodpre();
-  }
-  public function getNombre1()
-  {
+  }*/
+  public function getNombre1(){
    return self::getNompre();
   }
 
@@ -42,6 +46,9 @@ class Cpdeftit extends BaseCpdeftit
       }
 	}
 	return $lista;
-
   }
+
+    public function __toString(){
+	  	return $this->getCodpre();
+	}
 }

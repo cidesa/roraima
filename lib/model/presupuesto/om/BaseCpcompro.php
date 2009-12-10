@@ -109,6 +109,12 @@ abstract class BaseCpcompro extends BaseObject  implements Persistent {
 	protected $lastCpcausadCriteria = null;
 
 	
+	protected $collCccredits;
+
+	
+	protected $lastCccreditCriteria = null;
+
+	
 	protected $alreadyInSave = false;
 
 	
@@ -316,6 +322,11 @@ abstract class BaseCpcompro extends BaseObject  implements Persistent {
 	public function setFeccom($v)
 	{
 
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [feccom] from input: " . var_export($v, true));
@@ -436,6 +447,11 @@ abstract class BaseCpcompro extends BaseObject  implements Persistent {
 	
 	public function setFecanu($v)
 	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
@@ -692,6 +708,14 @@ abstract class BaseCpcompro extends BaseObject  implements Persistent {
 				}
 			}
 
+			if ($this->collCccredits !== null) {
+				foreach($this->collCccredits as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
+
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
@@ -763,6 +787,14 @@ abstract class BaseCpcompro extends BaseObject  implements Persistent {
 
 				if ($this->collCpcausads !== null) {
 					foreach($this->collCpcausads as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
+
+				if ($this->collCccredits !== null) {
+					foreach($this->collCccredits as $referrerFK) {
 						if (!$referrerFK->validate($columns)) {
 							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
 						}
@@ -1084,6 +1116,10 @@ abstract class BaseCpcompro extends BaseObject  implements Persistent {
 
 			foreach($this->getCpcausads() as $relObj) {
 				$copyObj->addCpcausad($relObj->copy($deepCopy));
+			}
+
+			foreach($this->getCccredits() as $relObj) {
+				$copyObj->addCccredit($relObj->copy($deepCopy));
 			}
 
 		} 
@@ -1450,6 +1486,426 @@ abstract class BaseCpcompro extends BaseObject  implements Persistent {
 		$this->lastCpcausadCriteria = $criteria;
 
 		return $this->collCpcausads;
+	}
+
+	
+	public function initCccredits()
+	{
+		if ($this->collCccredits === null) {
+			$this->collCccredits = array();
+		}
+	}
+
+	
+	public function getCccredits($criteria = null, $con = null)
+	{
+				include_once 'lib/model/creditos/om/BaseCccreditPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCccredits === null) {
+			if ($this->isNew()) {
+			   $this->collCccredits = array();
+			} else {
+
+				$criteria->add(CccreditPeer::CPCOMPRO_ID, $this->getId());
+
+				CccreditPeer::addSelectColumns($criteria);
+				$this->collCccredits = CccreditPeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(CccreditPeer::CPCOMPRO_ID, $this->getId());
+
+				CccreditPeer::addSelectColumns($criteria);
+				if (!isset($this->lastCccreditCriteria) || !$this->lastCccreditCriteria->equals($criteria)) {
+					$this->collCccredits = CccreditPeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastCccreditCriteria = $criteria;
+		return $this->collCccredits;
+	}
+
+	
+	public function countCccredits($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/creditos/om/BaseCccreditPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(CccreditPeer::CPCOMPRO_ID, $this->getId());
+
+		return CccreditPeer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addCccredit(Cccredit $l)
+	{
+		$this->collCccredits[] = $l;
+		$l->setCpcompro($this);
+	}
+
+
+	
+	public function getCccreditsJoinCcbenefi($criteria = null, $con = null)
+	{
+				include_once 'lib/model/creditos/om/BaseCccreditPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCccredits === null) {
+			if ($this->isNew()) {
+				$this->collCccredits = array();
+			} else {
+
+				$criteria->add(CccreditPeer::CPCOMPRO_ID, $this->getId());
+
+				$this->collCccredits = CccreditPeer::doSelectJoinCcbenefi($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(CccreditPeer::CPCOMPRO_ID, $this->getId());
+
+			if (!isset($this->lastCccreditCriteria) || !$this->lastCccreditCriteria->equals($criteria)) {
+				$this->collCccredits = CccreditPeer::doSelectJoinCcbenefi($criteria, $con);
+			}
+		}
+		$this->lastCccreditCriteria = $criteria;
+
+		return $this->collCccredits;
+	}
+
+
+	
+	public function getCccreditsJoinCcfuefin($criteria = null, $con = null)
+	{
+				include_once 'lib/model/creditos/om/BaseCccreditPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCccredits === null) {
+			if ($this->isNew()) {
+				$this->collCccredits = array();
+			} else {
+
+				$criteria->add(CccreditPeer::CPCOMPRO_ID, $this->getId());
+
+				$this->collCccredits = CccreditPeer::doSelectJoinCcfuefin($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(CccreditPeer::CPCOMPRO_ID, $this->getId());
+
+			if (!isset($this->lastCccreditCriteria) || !$this->lastCccreditCriteria->equals($criteria)) {
+				$this->collCccredits = CccreditPeer::doSelectJoinCcfuefin($criteria, $con);
+			}
+		}
+		$this->lastCccreditCriteria = $criteria;
+
+		return $this->collCccredits;
+	}
+
+
+	
+	public function getCccreditsJoinCctipcar($criteria = null, $con = null)
+	{
+				include_once 'lib/model/creditos/om/BaseCccreditPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCccredits === null) {
+			if ($this->isNew()) {
+				$this->collCccredits = array();
+			} else {
+
+				$criteria->add(CccreditPeer::CPCOMPRO_ID, $this->getId());
+
+				$this->collCccredits = CccreditPeer::doSelectJoinCctipcar($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(CccreditPeer::CPCOMPRO_ID, $this->getId());
+
+			if (!isset($this->lastCccreditCriteria) || !$this->lastCccreditCriteria->equals($criteria)) {
+				$this->collCccredits = CccreditPeer::doSelectJoinCctipcar($criteria, $con);
+			}
+		}
+		$this->lastCccreditCriteria = $criteria;
+
+		return $this->collCccredits;
+	}
+
+
+	
+	public function getCccreditsJoinCcsolici($criteria = null, $con = null)
+	{
+				include_once 'lib/model/creditos/om/BaseCccreditPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCccredits === null) {
+			if ($this->isNew()) {
+				$this->collCccredits = array();
+			} else {
+
+				$criteria->add(CccreditPeer::CPCOMPRO_ID, $this->getId());
+
+				$this->collCccredits = CccreditPeer::doSelectJoinCcsolici($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(CccreditPeer::CPCOMPRO_ID, $this->getId());
+
+			if (!isset($this->lastCccreditCriteria) || !$this->lastCccreditCriteria->equals($criteria)) {
+				$this->collCccredits = CccreditPeer::doSelectJoinCcsolici($criteria, $con);
+			}
+		}
+		$this->lastCccreditCriteria = $criteria;
+
+		return $this->collCccredits;
+	}
+
+
+	
+	public function getCccreditsJoinCctipmon($criteria = null, $con = null)
+	{
+				include_once 'lib/model/creditos/om/BaseCccreditPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCccredits === null) {
+			if ($this->isNew()) {
+				$this->collCccredits = array();
+			} else {
+
+				$criteria->add(CccreditPeer::CPCOMPRO_ID, $this->getId());
+
+				$this->collCccredits = CccreditPeer::doSelectJoinCctipmon($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(CccreditPeer::CPCOMPRO_ID, $this->getId());
+
+			if (!isset($this->lastCccreditCriteria) || !$this->lastCccreditCriteria->equals($criteria)) {
+				$this->collCccredits = CccreditPeer::doSelectJoinCctipmon($criteria, $con);
+			}
+		}
+		$this->lastCccreditCriteria = $criteria;
+
+		return $this->collCccredits;
+	}
+
+
+	
+	public function getCccreditsJoinCcbanco($criteria = null, $con = null)
+	{
+				include_once 'lib/model/creditos/om/BaseCccreditPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCccredits === null) {
+			if ($this->isNew()) {
+				$this->collCccredits = array();
+			} else {
+
+				$criteria->add(CccreditPeer::CPCOMPRO_ID, $this->getId());
+
+				$this->collCccredits = CccreditPeer::doSelectJoinCcbanco($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(CccreditPeer::CPCOMPRO_ID, $this->getId());
+
+			if (!isset($this->lastCccreditCriteria) || !$this->lastCccreditCriteria->equals($criteria)) {
+				$this->collCccredits = CccreditPeer::doSelectJoinCcbanco($criteria, $con);
+			}
+		}
+		$this->lastCccreditCriteria = $criteria;
+
+		return $this->collCccredits;
+	}
+
+
+	
+	public function getCccreditsJoinCcagenci($criteria = null, $con = null)
+	{
+				include_once 'lib/model/creditos/om/BaseCccreditPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCccredits === null) {
+			if ($this->isNew()) {
+				$this->collCccredits = array();
+			} else {
+
+				$criteria->add(CccreditPeer::CPCOMPRO_ID, $this->getId());
+
+				$this->collCccredits = CccreditPeer::doSelectJoinCcagenci($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(CccreditPeer::CPCOMPRO_ID, $this->getId());
+
+			if (!isset($this->lastCccreditCriteria) || !$this->lastCccreditCriteria->equals($criteria)) {
+				$this->collCccredits = CccreditPeer::doSelectJoinCcagenci($criteria, $con);
+			}
+		}
+		$this->lastCccreditCriteria = $criteria;
+
+		return $this->collCccredits;
+	}
+
+
+	
+	public function getCccreditsJoinCcprioridad($criteria = null, $con = null)
+	{
+				include_once 'lib/model/creditos/om/BaseCccreditPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCccredits === null) {
+			if ($this->isNew()) {
+				$this->collCccredits = array();
+			} else {
+
+				$criteria->add(CccreditPeer::CPCOMPRO_ID, $this->getId());
+
+				$this->collCccredits = CccreditPeer::doSelectJoinCcprioridad($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(CccreditPeer::CPCOMPRO_ID, $this->getId());
+
+			if (!isset($this->lastCccreditCriteria) || !$this->lastCccreditCriteria->equals($criteria)) {
+				$this->collCccredits = CccreditPeer::doSelectJoinCcprioridad($criteria, $con);
+			}
+		}
+		$this->lastCccreditCriteria = $criteria;
+
+		return $this->collCccredits;
+	}
+
+
+	
+	public function getCccreditsJoinCccondic($criteria = null, $con = null)
+	{
+				include_once 'lib/model/creditos/om/BaseCccreditPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCccredits === null) {
+			if ($this->isNew()) {
+				$this->collCccredits = array();
+			} else {
+
+				$criteria->add(CccreditPeer::CPCOMPRO_ID, $this->getId());
+
+				$this->collCccredits = CccreditPeer::doSelectJoinCccondic($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(CccreditPeer::CPCOMPRO_ID, $this->getId());
+
+			if (!isset($this->lastCccreditCriteria) || !$this->lastCccreditCriteria->equals($criteria)) {
+				$this->collCccredits = CccreditPeer::doSelectJoinCccondic($criteria, $con);
+			}
+		}
+		$this->lastCccreditCriteria = $criteria;
+
+		return $this->collCccredits;
+	}
+
+
+	
+	public function getCccreditsJoinCctipups($criteria = null, $con = null)
+	{
+				include_once 'lib/model/creditos/om/BaseCccreditPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCccredits === null) {
+			if ($this->isNew()) {
+				$this->collCccredits = array();
+			} else {
+
+				$criteria->add(CccreditPeer::CPCOMPRO_ID, $this->getId());
+
+				$this->collCccredits = CccreditPeer::doSelectJoinCctipups($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(CccreditPeer::CPCOMPRO_ID, $this->getId());
+
+			if (!isset($this->lastCccreditCriteria) || !$this->lastCccreditCriteria->equals($criteria)) {
+				$this->collCccredits = CccreditPeer::doSelectJoinCctipups($criteria, $con);
+			}
+		}
+		$this->lastCccreditCriteria = $criteria;
+
+		return $this->collCccredits;
 	}
 
 } 
