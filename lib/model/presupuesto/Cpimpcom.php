@@ -7,9 +7,9 @@
  *
  * @package    Roraima
  * @subpackage lib.model
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
+ * @author     $Author:lhernandez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id:Cpimpcom.php 35165 2009-12-01 04:55:10Z lhernandez $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -20,6 +20,8 @@ class Cpimpcom extends BaseCpimpcom
   private $check = '';
   private $retiva = '';
   private $monporpag = 0.00;
+  protected $mondis = 0.00;
+  protected $mondescre = 0.00;
 
   public function setComprometido($val)
   {
@@ -34,13 +36,14 @@ class Cpimpcom extends BaseCpimpcom
 
   public function setAcausar($val)
   {
-	$this->acausar = $val;
+	  $this->acausar = $val;
   }
 
   public function getAcausar()
   {
-  	$acausar= self::getMonimp() - self::getMoncau() - self::getMonaju();
-	return $acausar;
+    if($this->mondescre>0) $acausar= $this->mondescre;
+    else $acausar= self::getMonimp() - self::getMoncau() - self::getMonaju();
+	  return $acausar;
   }
 
   public function setCheck($val)
@@ -105,6 +108,11 @@ class Cpimpcom extends BaseCpimpcom
   public function setRetiva($val)
   {
 	$this->retiva = $val;
+  }
+
+  public function setMondescre($val)
+  {
+    $this->mondescre = $val;
   }
 
 }
