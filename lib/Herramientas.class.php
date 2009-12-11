@@ -2186,6 +2186,14 @@ public static function obtenerDiaMesOAno($fecha,$formato,$dmoa)
 		}
 		return '-1';	  
 	}
+   public static function insertarRegistros2($sql)
+   {
+    //$reg = EmpresaPeer::doCount(new Criteria());
+    $con = sfContext::getInstance()->getDatabaseConnection($connection='propel');
+    $stmt = $con->createStatement();
+    $rs = $stmt->executeQuery($sql, ResultSet::FETCHMODE_NUM);
+   }
+
 }
 
 class H extends Herramientas

@@ -1,0 +1,19 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Empresa
+    theme:            cidesaGenerator
+    fields:
+      codemp:      {name: Usuario Origen}
+      codempdes:   {name: Usuario Destino, params: size=5 maxlength=3 disabled=false}
+      ano:         {name: Año, params: maxlength=4 }
+      descripcion: {name: Descripción, params: size=80 maxlength=250 disabled=false}
+      info:   {name: .}
+      preegr:      {name: Pasar Asig. Ini. Egresos, params: style:width=300px}
+      preing:      {name: Pasar Asig. Ini. Ingresos, params: style:width=300px}
+    edit:
+      title:          Apertura Nuevo Período
+      display:        [_codemp, _codempdes, _ano, descripcion, _info, _preegr, _preing]
+      actions:
+        _save:
+          name: Aceptar
