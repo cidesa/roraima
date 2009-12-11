@@ -15,4 +15,12 @@
  */ 
 class Empresa extends BaseEmpresa
 {
+   protected $ano="";
+   protected $codempdes="";
+   protected $descripcion="";
+   protected $salban="";
+   protected $movtra="";
+   protected $preegr="";
+   protected $preing="";
+
 }

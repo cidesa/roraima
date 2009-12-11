@@ -543,4 +543,21 @@ public static function PagoDoble()
   	return array('I' => 'Industria y Comercio', 'V' => 'Vehiculo', 'U' => 'Inmuebles Urbanos', 'P' => 'Propaganda Comercial', 'G' => 'General', 'O' => 'Otros Ingresos');
   }
 
+  public static function ListaTrimestre()
+  {
+  	return array('Primer' => 'Primer', 'Segundo' => 'Segundo', 'Tercer' => 'Tercer', 'Cuarto' => 'Cuarto');
+  }
+
+  public static function Empresa_Ano()
+  {
+    return array('2009' => '2009','2010' => '2010','2011' => '2011','2012' => '2012','2013' => '2013','2014' => '2014','2015' => '2015','2016' => '2016','2017' => '2017','2018' => '2018','2019' => '2019','2020' => '2020','2021' => '2021','2022' => '2022','2023' => '2023','2024' => '2024','2025' => '2025','2026' => '2026','2027' => '2027','2028' => '2028','2029' => '2029');
+  }
+
+  public static function ListaModulos()
+  {
+    return array('cont' => 'Contabilidad','cp' => 'Presupuesto','ci' => 'Presupuesto Ingresos','op' => 'Tesoreria','ts' => 'Bancos','ca' => 'Compras y Almacén');
+  }
+
+
+
 }
