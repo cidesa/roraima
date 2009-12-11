@@ -96,11 +96,13 @@ class Inmueblescatastro {
 	  $j=0;
 	  while ($j<count($x))
 	  {
+            if (($x[$j]->getCancar()!='' || $x[$j]->getCancar()>0) && ($x[$j]->getMetare()!='' || $x[$j]->getMetare()>0)){
 	    $x[$j]->setCatreginmId($clasemodelo->getId());
 	    //$x[$j]->setCatregperId(H::getX('cedrif','catregper','id',$x[$j]->getCedrif()));
 	    //$x[$j]->setCatcarconId(H::getX('id','catcarcon','tipo',$x[$j]->getCatcarconid()));
 
 	    $x[$j]->save();
+            }
 	     $j++;
 	  }
 
