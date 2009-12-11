@@ -39,4 +39,62 @@ if (e.keyCode==13 || e.keyCode==9)
 	 $(id).value=format(valact.toFixed(2),'.',',','.');
 
  }
+}
+ function totvacaciones()
+ {
+   var cm = obtener_filas_grid('c',1);
+   var fil=0;
+   var acuval = 0;
+   while (fil<cm)
+   {
+     var  ida = 'cx_'+fil+'_6';
+     var  val = $(ida).value;
+ 	 if($(ida))
+	 {
+	   var num1=toFloat(ida);
+  	   acuval = acuval + num1;
+	 }
+	 fil++;
+   }
+   $('total_vac').value = number_format(acuval,2,',','.');
  }
+
+ function totasignaciones()
+ {
+   var cm = obtener_filas_grid('a',1);
+   var fil=0;
+   var acuval = 0;
+   while (fil<cm)
+   {
+     var  ida = 'ax_'+fil+'_2';
+     var  val = $(ida).value;
+ 	 if($(ida))
+	 {
+	   var num1=toFloat(ida);
+  	   acuval = acuval + num1;
+	 }
+	 fil++;
+   }
+   $('total_asi').value = number_format(acuval,2,',','.');
+ }
+
+  function totdeducciones()
+ {
+   var cm = obtener_filas_grid('b',1);
+   var fil=0;
+   var acuval = 0;
+   while (fil<cm)
+   {
+     var  ida = 'bx_'+fil+'_2';
+     var  val = $(ida).value;
+ 	 if($(ida))
+	 {
+	   var num1=toFloat(ida);
+  	   acuval = acuval + num1;
+	 }
+	 fil++;
+   }
+   $('total_ded').value = number_format(acuval,2,',','.');
+ }
+
+
