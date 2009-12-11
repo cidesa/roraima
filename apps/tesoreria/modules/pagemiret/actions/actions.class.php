@@ -57,6 +57,20 @@ class pagemiretActions extends autopagemiretActions
     $this->opordpag = $this->getOpordpagOrCreate();
     $this->mascara = Herramientas::ObtenerFormato('Contaba','Forcta');
     $this->lonmas=strlen($this->mascara);
+    $varemp = $this->getUser()->getAttribute('configemp');
+    $this->numdesh="";
+	if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('tesoreria',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['tesoreria']))
+	     if(array_key_exists('pagemiret',$varemp['aplicacion']['tesoreria']['modulos'])){
+	       if(array_key_exists('numorddesh',$varemp['aplicacion']['tesoreria']['modulos']['pagemiret']))
+	       {
+	       	$this->numdesh=$varemp['aplicacion']['tesoreria']['modulos']['pagemiret']['numorddesh'];
+	       }
+	     }
+
+
     if ($this->getRequestParameter('formulario')!="")
     {
      $this->getUser()->setAttribute('formulario',$this->getRequestParameter('formulario'));
@@ -139,6 +153,19 @@ $this->Bitacora('Guardo');
     $opordpag = $this->getRequestParameter('opordpag');
     $this->mascara = Herramientas::ObtenerFormato('Contaba','Forcta');
     $this->lonmas=strlen($this->mascara);
+    $varemp = $this->getUser()->getAttribute('configemp');
+    $this->numdesh="";
+	if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('tesoreria',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['tesoreria']))
+	     if(array_key_exists('pagemiret',$varemp['aplicacion']['tesoreria']['modulos'])){
+	       if(array_key_exists('numorddesh',$varemp['aplicacion']['tesoreria']['modulos']['pagemiret']))
+	       {
+	       	$this->numdesh=$varemp['aplicacion']['tesoreria']['modulos']['pagemiret']['numorddesh'];
+	       }
+	     }
+
     if ($this->getRequestParameter('formulario')!="")
     {
      $this->getUser()->setAttribute('formulario',$this->getRequestParameter('formulario'));

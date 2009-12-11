@@ -24,7 +24,7 @@ array()) ?></h1>
 
 <div id="sf_admin_content">
 <?php include_partial('pagemiret/edit_messages', array('opordpag' => $opordpag, 'labels' => $labels)) ?>
-<?php include_partial('pagemiret/edit_form', array('opordpag' => $opordpag, 'mascara' => $mascara, 'lonmas' => $lonmas, 'obj' => $obj, 'labels' => $labels, 'formulario' => $formulario, 'tipo' => $tipo, 'concepto' => $concepto, 'tiporet' => $tiporet, 'nomext' => $nomext)) ?>
+<?php include_partial('pagemiret/edit_form', array('opordpag' => $opordpag, 'mascara' => $mascara, 'lonmas' => $lonmas, 'obj' => $obj, 'labels' => $labels, 'formulario' => $formulario, 'tipo' => $tipo, 'concepto' => $concepto, 'tiporet' => $tiporet, 'nomext' => $nomext, 'numdesh' => $numdesh)) ?>
 </div>
 
 <div id="sf_admin_footer">
