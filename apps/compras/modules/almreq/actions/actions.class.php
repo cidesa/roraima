@@ -331,6 +331,18 @@ class almreqActions extends autoalmreqActions
     $this->forubi = Herramientas::ObtenerFormato('Bndefins','forubi');
     $this->lonubi= Herramientas::ObtenerFormato('Bndefins','lonubi');
     $this->autorizareq= Herramientas::ObtenerFormato('Cadefart','reqreqapr');
+    $varemp = $this->getUser()->getAttribute('configemp');
+    $this->numdesh="";
+	if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('compras',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
+	     if(array_key_exists('almreq',$varemp['aplicacion']['compras']['modulos'])){
+	       if(array_key_exists('reqartdesh',$varemp['aplicacion']['compras']['modulos']['almreq']))
+	       {
+	       	$this->numdesh=$varemp['aplicacion']['compras']['modulos']['almreq']['reqartdesh'];
+	       }
+	     }
   }
 
   /**

@@ -745,6 +745,12 @@ function num(e) {
      else{valor=valor.pad(8, '#',0);}
 
      $('opordpag_numord').value=valor;
+     var desh='<?php echo $numdesh; ?>';
+     if (desh=='S')
+     {
+     	$('opordpag_numord').readOnly=true;
+     }
+
    }
  }
 

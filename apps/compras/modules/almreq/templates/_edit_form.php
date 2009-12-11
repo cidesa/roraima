@@ -167,6 +167,11 @@ function enter(valor)
      {valor=valor.pad(8, '#',0);}
 
      $('careqart_reqart').value=valor;
+     var desh='<?php echo $numdesh; ?>';
+     if (desh=='S')
+     {
+       $('careqart_reqart').readOnly=true;
+     }
  }
 
 function calcularcosto(e,id)

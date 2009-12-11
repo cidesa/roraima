@@ -389,6 +389,24 @@ $this->Bitacora('Guardo');
               if ($tipmov)
               {if($tipmov->getEscheque()==false) $numche=''; }
           	}
+          	$this->numchedesh="";
+            $varemp = $this->getUser()->getAttribute('configemp');
+			if ($varemp)
+			if(array_key_exists('aplicacion',$varemp))
+			 if(array_key_exists('tesoreria',$varemp['aplicacion']))
+			   if(array_key_exists('modulos',$varemp['aplicacion']['tesoreria']))
+			     if(array_key_exists('tesmovemiche',$varemp['aplicacion']['tesoreria']['modulos'])){
+			       if(array_key_exists('numchedesh',$varemp['aplicacion']['tesoreria']['modulos']['tesmovemiche']))
+			       {
+			       	$this->numchedesh=$varemp['aplicacion']['tesoreria']['modulos']['tesmovemiche']['numchedesh'];
+			       }
+			     }
+			 if ($this->numchedesh=='S')
+			 {
+			 	$javascript=$javascript." $('tscheemi_numche').readOnly=true;";
+			 }
+
+
 
               $output = '[["'.$cajtexmos.'","'.$dato.'",""],["tscheemi_numche","'.$numche.'",""],["tscheemi_bloqueado","'.$bloqueado.'",""],["javascript","'.$javascript.'",""]]';
               $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');

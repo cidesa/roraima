@@ -1830,6 +1830,7 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
     $cuenta=$this->getRequestParameter('cuenta');
     $descta=$this->getRequestParameter('descuenta');
     $cuentasec=$this->getRequestParameter('cuenta2');
+    $javascript="";
   if ($this->getRequestParameter('ajax')=='1')
   {
    $c= new Criteria();
@@ -2012,11 +2013,28 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
         {
          $this->configGridRefere2(str_pad($this->getRequestParameter('codigo'),8,'0',STR_PAD_LEFT));
         }else {$this->configGridRefere2();}
+
+        $this->cedrifdesh="";
+        $varemp = $this->getUser()->getAttribute('configemp');
+		if ($varemp)
+		if(array_key_exists('aplicacion',$varemp))
+		 if(array_key_exists('tesoreria',$varemp['aplicacion']))
+		   if(array_key_exists('modulos',$varemp['aplicacion']['tesoreria']))
+		     if(array_key_exists('pagemiord',$varemp['aplicacion']['tesoreria']['modulos'])){
+		       if(array_key_exists('cedrifdesh',$varemp['aplicacion']['tesoreria']['modulos']['pagemiord']))
+		       {
+		       	$this->cedrifdesh=$varemp['aplicacion']['tesoreria']['modulos']['pagemiord']['cedrifdesh'];
+		       }
+		     }
+		 if ($this->cedrifdesh=='S')
+		 {
+		 	$javascript=" $('opordpag_cedrif').readOnly=true; $('opordpag_nomben').readOnly=true; $$('.botoncat')[1].disabled=true;";
+		 }
         if ($this->getRequestParameter('observe')=="")
         {
-         $output = '[["fecha","'.$fechas.'",""],["descripcion","'.$descripcions.'",""],["tipo","'.$tipos.'",""],["destipo","'.$destipos.'",""],["fila","'.$this->numfila.'",""],["mensaje","'.$msj.'",""],["ajaxs","6",""],["opordpag_desord","'.$descripcion2.'",""],["opordpag_cedrif","'.$elrif.'",""],["opordpag_nomben","'.$dato.'",""],["opordpag_ctapag","'.$dato1.'",""],["opordpag_descta","'.$dato2.'",""],["opordpag_tipfin","'.$financiamiento.'",""],["opordpag_nomext2","'.$dato3.'",""],["opordpag_observe","N",""]]';
+         $output = '[["fecha","'.$fechas.'",""],["descripcion","'.$descripcions.'",""],["tipo","'.$tipos.'",""],["destipo","'.$destipos.'",""],["fila","'.$this->numfila.'",""],["mensaje","'.$msj.'",""],["ajaxs","6",""],["opordpag_desord","'.$descripcion2.'",""],["opordpag_cedrif","'.$elrif.'",""],["opordpag_nomben","'.$dato.'",""],["opordpag_ctapag","'.$dato1.'",""],["opordpag_descta","'.$dato2.'",""],["opordpag_tipfin","'.$financiamiento.'",""],["opordpag_nomext2","'.$dato3.'",""],["opordpag_observe","N",""],["javascript","'.$javascript.'",""]]';
         }else{
-         $output = '[["fecha","'.$fechas.'",""],["descripcion","'.$descripcions.'",""],["tipo","'.$tipos.'",""],["destipo","'.$destipos.'",""],["fila","'.$this->numfila.'",""],["mensaje","'.$msj.'",""],["ajaxs","6",""],["opordpag_observe","N",""]]';
+         $output = '[["fecha","'.$fechas.'",""],["descripcion","'.$descripcions.'",""],["tipo","'.$tipos.'",""],["destipo","'.$destipos.'",""],["fila","'.$this->numfila.'",""],["mensaje","'.$msj.'",""],["ajaxs","6",""],["opordpag_observe","N",""],["javascript","'.$javascript.'",""]]';
         }
         $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
      }
@@ -2586,6 +2604,19 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
 		   $this->impcpt=$varemp['generales']['impcpt'];
 		}
 	}
+
+    $this->numdesh="";
+	if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('tesoreria',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['tesoreria']))
+	     if(array_key_exists('pagemiord',$varemp['aplicacion']['tesoreria']['modulos'])){
+	       if(array_key_exists('numorddesh',$varemp['aplicacion']['tesoreria']['modulos']['pagemiord']))
+	       {
+	       	$this->numdesh=$varemp['aplicacion']['tesoreria']['modulos']['pagemiord']['numorddesh'];
+	       }
+	     }
+
 
   }
 
