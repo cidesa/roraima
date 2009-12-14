@@ -15,4 +15,7 @@
  */ 
 class Bdcriterio extends BaseBdcriterio
 {
+    protected $obj=array();
+    protected $nroreg="";
+    protected $numfilas="";
 }

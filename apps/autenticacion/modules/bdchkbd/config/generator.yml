@@ -1,0 +1,14 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Bdcriterio
+    theme:            cidesaGenerator
+    edit:
+      title:          Chequear Base de Datos
+      display:        [_grid]
+      hide:           [numfilas]
+      actions:
+        _list:       NONE
+        _save:       NONE
+        _delete:     NONE
+        _create:     NONE

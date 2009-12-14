@@ -1,0 +1,34 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                false
+  tabla:                   Bdcriterio
+  ancho:				           950
+  anchogrid:               850
+  filas:                   0
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:
+  titulo:                  Criterio
+  tipo:                    t
+  nombrecampo:             criterio
+  esgrabable:              true
+  html:                    [size="30" readonly=true]
+2:       # Columna 1
+  titulo:                  Temporal
+  tipo:                    t
+  nombrecampo:             temporal
+  html:                    [size="15" readonly=true]
+  esgrabable:              true
+3:       # Columna 2
+  titulo:                  Nro Registros
+  tipo:                    t
+  esgrabable:              true
+  nombrecampo:             nroreg
+  esnumerico:              true
+  html:                    [size="10" readonly=true]
+4:
+  titulo:                  Sql
+  tipo:                    t
+  nombrecampo:             sql
+  esgrabable:              true  
+  html:                    [size="60" readonly=true]

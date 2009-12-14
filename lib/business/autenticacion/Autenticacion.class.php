@@ -685,6 +685,36 @@ class Autenticacion {
       }
   }
 
+  public static function cargarResultados(){
+
+   $arreglores=array();
+   $i=0;
+   $t= new Criteria();
+   $resul=BdcriterioPeer::doSelect($t);
+   if ($resul){
+      foreach ($resul as $obj){
+          $arreglores[$i]["criterio"]=$obj->getCriterio();
+          $arreglores[$i]["temporal"]=$obj->getTemporal();
+          $sql='select * from pg_class where relname = \''.$obj->getTemporal().'\'';
+          if (Herramientas::BuscarDatos($sql,&$result)){
+              $sql1='DROP TABLE '.$obj->getTemporal().' CASCADE';
+              Herramientas::insertarRegistros($sql1);
+          }
+          $sql1='CREATE  TABLE '.$obj->getTemporal().' AS ('.$obj->getSql().')';
+          Herramientas::insertarRegistros($sql1);
+
+          $sql2='select coalesce(Count(*),0) as cuantos from '.$obj->getTemporal().'';
+          if (Herramientas::BuscarDatos($sql2,&$resulta)){
+          $arreglores[$i]["nroreg"]=$resulta[0]["cuantos"];
+          }          
+          $arreglores[$i]["sql"]=$obj->getSql();
+          $arreglores[$i]["id"]='9';
+          $i++;
+      }
+   }
+   return $arreglores;
+  }
+
 }
 
 ?>
