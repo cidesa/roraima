@@ -1,0 +1,47 @@
+methods:
+  post:
+   - "bdcriterio{numero}"
+   - "bdcriterio{criterio}"
+   - "bdcriterio{sql}"
+   - "bdcriterio{temporal}"
+names:
+  bdcriterio{numero}:
+    required:  Yes
+    required_msg: No puede salvar sin Introducir el Código del Criterio
+    validators: UniqueValidator, NumeroValidator
+
+  bdcriterio{criterio}:
+    required:  Yes
+    required_msg: No puede salvar sin Introducir la  Descripción
+    validators: DescripcionValidator
+
+  bdcriterio{sql}:
+    required:  Yes
+    required_msg: No puede salvar sin introducir el sql a evaluar
+
+  bdcriterio{temporal}:
+    required:  Yes
+    required_msg: No puede salvar sin Introducir Nombre de la Tabla temporal
+
+DescripcionValidator:
+    class: sfStringValidator
+    param:
+        min:       5
+        min_error: La Descripción no puede tener menos de 5 caracteres
+        max:       1000
+        max_error: La Descripción no puede tener más de 1000 caracteres
+
+NumeroValidator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El Código no puede tener menos de 2 caracteres
+        max:       2
+        max_error: El Código no puede tener más de 2 caracteres
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Bdcriterio
+        column:   numero
+        unique_error:   EL Código del Criterio ya existe. Por Favor, Cambiélo por otro.
