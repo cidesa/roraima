@@ -67,8 +67,7 @@
 'size' => 8,
 'maxlength' => 8,
 'control_name' => 'caordcom[ordcom]',
-'onKeyPress'  => "javascript: enter(event,this.value);",
-'onBlur'  => "javascript: valor=this.value; valor=valor.pad(8, '#',0);document.getElementById('caordcom_ordcom').value=valor;document.getElementById('caordcom_ordcom').disabled=false;",
+'onBlur'  => "javascript:event.keyCode=13; enter(event,this.value);",
 )); echo $value ? $value : '&nbsp;' ?>
 <div class="sf_admin_edit_help"><?php echo __('Máximo 8 caracteres') ?></div>
 </div>
@@ -913,6 +912,11 @@ function enter(e,valor)
      {valor=valor.pad(8, '#',0);}
 
      $('caordcom_ordcom').value=valor;
+     var ordcomdesh='<?php echo $ordcomdesh; ?>';
+     if (ordcomdesh=='S')
+     {
+     	$('caordcom_ordcom').readOnly=true;
+     }
    }
  }
 

@@ -1667,16 +1667,22 @@ class almordcomActions extends autoalmordcomActions
     $this->mascaraarticulo = Herramientas::getMascaraArticulo();
     $this->formatocategoria = Herramientas::getObtener_FormatoCategoria();
     $this->deshabmonrec="";
+    $this->ordcomdesh="";
     $varemp = $this->getUser()->getAttribute('configemp');
     if ($varemp)
 	if(array_key_exists('aplicacion',$varemp))
 	 if(array_key_exists('compras',$varemp['aplicacion']))
 	   if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
-	     if(array_key_exists('almordcom',$varemp['aplicacion']['compras']['modulos']))
+	     if(array_key_exists('almordcom',$varemp['aplicacion']['compras']['modulos'])){
 	       if(array_key_exists('deshabilmonrec',$varemp['aplicacion']['compras']['modulos']['almordcom']))
 	       {
 	       	$this->deshabmonrec=$varemp['aplicacion']['compras']['modulos']['almordcom']['deshabilmonrec'];
 	       }
+               if(array_key_exists('ordcomdesh',$varemp['aplicacion']['compras']['modulos']['almordcom']))
+	       {
+	       	$this->ordcomdesh=$varemp['aplicacion']['compras']['modulos']['almordcom']['ordcomdesh'];
+	       }
+             }
 
   }
 
