@@ -1368,7 +1368,7 @@ propel:
       type: DATE
     desref:
       type: VARCHAR
-      size: 100
+      size: 1000
     monlib:
       type: NUMERIC
       size: 14
