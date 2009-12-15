@@ -3442,7 +3442,7 @@ propel:
       size: 2
     lugnac:
       type: VARCHAR
-      size: 30
+      size: 100
     dirhab:
       type: VARCHAR
       size: 1000
