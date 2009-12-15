@@ -19,7 +19,7 @@ class nomnommovnomconActions extends autonomnommovnomconActions
    * del formulario.
    *
    */
-  public function executeList()
+/*  public function executeList()
     {
     $this->processSort();
 
@@ -74,7 +74,13 @@ class nomnommovnomconActions extends autonomnommovnomconActions
       $c->add(NpasiconempPeer::NOMCON, '%'.strtr($this->filters['nomcon'], '*', '%').'%', Criteria::LIKE);
     $c->setIgnoreCase(true);
     }
+  }*/
+
+  public function executeIndex()
+  {
+    return $this->redirect('nomnommovnomcon/edit');
   }
+
 
 	/**
    * Actualiza la informacion que viene de la vista 
@@ -217,7 +223,7 @@ class nomnommovnomconActions extends autonomnommovnomconActions
 
 
 
-  protected function getNpasiconempOrCreate($id = 'id', $codcon = 'codcon', $codnom= 'codnom')
+  protected function getNpasiconempOrCreate($id = 'id')
   {
     if (!$this->getRequestParameter($id))
     {
@@ -227,16 +233,7 @@ class nomnommovnomconActions extends autonomnommovnomconActions
     }
     else
     {
-
-      $c = new Criteria();
- 	  $c->add(NpasiconempPeer::CODCON,$this->getRequestParameter($codcon));
-  	  $npasiconemp = NpasiconempPeer::doSelectOne($c);
-  	  if (!$npasiconemp) $npasiconemp = new Npasiconemp();
-  	  $nomina=$this->getRequestParameter($codnom);
-      if ($nomina=="") $nomina=Herramientas::getX('CODCON','Npasiconnom','Codnom',$npasiconemp->getCodcon());
-      $npasiconemp->setCodnom($nomina);
-      $this->configGrid($npasiconemp->getCodnom(),$npasiconemp->getCodcon());
-
+      $npasiconemp = NpasiconempPeer::retrieveByPk($this->getRequestParameter($id));
 
       $this->forward404Unless($npasiconemp);
     }
