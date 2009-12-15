@@ -346,11 +346,10 @@ class Autenticacion {
       $comando = 'pg_dump --username '.$userbd.' --format custom --verbose --file "'.$ruta.'" --schema '.$simaori.' '.$nombd.'';
       }else{
       $comando = 'pg_dump --username '.$userbd.' --format custom --verbose --file "'.$ruta.'" --schema \''.$simaorir.'\' '.$nombd.'';
-      }
-      print $comando; exit;
+      }      
       $salida=shell_exec($comando);
 
-    /*//Al esquema viejo le colocamos un nombre X para poder restaurar el otro.
+    //Al esquema viejo le colocamos un nombre X para poder restaurar el otro.
       $esqvie=$simaori.'X';
       $sql='ALTER SCHEMA "'.$simaori.'" RENAME TO "'.$esqvie.'"';
       Herramientas::insertarRegistros2($sql);
@@ -677,7 +676,7 @@ class Autenticacion {
       Herramientas::insertarRegistros($sql1);
 
       $sql2='ALTER TABLE "'.$simades.'".CIMOVTRA ENABLE TRIGGER ALL';
-      Herramientas::insertarRegistros($sql2);*/
+      Herramientas::insertarRegistros($sql2);
       
   }
 
