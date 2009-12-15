@@ -29,7 +29,7 @@
   <?php $value = object_input_tag($npasiconemp, 'getCodnom', array (
   'size' => 10,
   'control_name' => 'codigonomina',
-  'maxlength' => '12,',
+  'maxlength' => 3,
   'onBlur'=> remote_function(array(
         'url'      => 'nomnommovnomconcar/ajax',
         'complete' => 'AjaxJSON(request, json)',
@@ -67,7 +67,7 @@
   <?php $value = object_input_tag($npasiconemp, 'getCodcon', array (
   'size' => 10,
   'control_name' => 'npasiconemp[codcon]',
-  'maxlength' => '12,',
+  'maxlength' => 3,
   'onBlur'=> remote_function(array(
         'update'   => 'grid',
         'url'      => 'nomnommovnomcon/ajax',

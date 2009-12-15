@@ -10,7 +10,7 @@ generator:
       nomcar:       { name: Nombre del Cargo }
       codnom:       { name: Codigo Nomina }
       nomnom:       { name: Nomina }
-      nomcon:       { name: Concepto: }
+      nomcon:       { name: Concepto }
       monto:        { name: Monto }
       cantidad:     { name: Cantidad }
       codcon:		{ name: Código Concepto }
@@ -27,5 +27,4 @@ generator:
       title:          Movimientos por Concepto
       display:        [codcon, codemp, nomemp, codcar, nomcar, monto, cantidad]
       actions:
-        _list:        ~
         _save:        ~
