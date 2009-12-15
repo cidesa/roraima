@@ -334,14 +334,19 @@ class Autenticacion {
       if(is_array($confbd)){
         $nombd = $confbd['all']['propel']['param']['database'];
         $userbd = $confbd['all']['propel']['param']['username'];
+        $verpostg = $confbd['all']['propel']['param']['postgres8.1'];
       }
       $esquema=sfContext::getInstance()->getUser()->getAttribute('schema');
       $ruta=$_SERVER['DOCUMENT_ROOT'].'/uploads/'.strtolower($nombd).'_migracion_'.strtolower($simaori).'.backup';
 
     // Nuevo Esquema
         // Creamos el backup del esquema viejo
-      $simaorir='"'.$simaori.'"';      
+      $simaorir='"'.$simaori.'"';
+      if ($verpostg=='S'){
+      $comando = 'pg_dump --username '.$userbd.' --format custom --verbose --file "'.$ruta.'" --schema '.$simaori.' '.$nombd.'';
+      }else{
       $comando = 'pg_dump --username '.$userbd.' --format custom --verbose --file "'.$ruta.'" --schema \''.$simaorir.'\' '.$nombd.'';
+      }      
       $salida=shell_exec($comando);
 
     //Al esquema viejo le colocamos un nombre X para poder restaurar el otro.
