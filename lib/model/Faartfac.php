@@ -113,6 +113,12 @@ class Faartfac extends BaseFaartfac
     {
       $this->precioe=self::getPrecio();
     }
+    if (self::getId())
+    {
+      $this->canent=number_format(self::getCantot(), 2, ',', '.');
+      $this->candesp=number_format(self::getCantot(), 2, ',', '.');
+    }
+
     $this->canord=number_format((self::getCantot() - self::getCanaju()), 2, ',', '.');
     $this->preart=number_format(self::getPrecio(), 2, ',', '.');
     $val=self::getPrecio() * self::getCantot();
