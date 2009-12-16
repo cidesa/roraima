@@ -5,9 +5,9 @@
  *
  * @package    Roraima
  * @subpackage autenticacion
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
+ * @author     $Author: dmartinez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: Autenticacion.class.php 35626 2009-12-15 21:04:14Z dmartinez $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -166,8 +166,8 @@ class Autenticacion {
   public static function ActsaldosContables($empresa)
   {
      $codorigen='SIMA'.$empresa->getCodemp();
-     $coddestino='SIMA'.$empresa->getCodempdes(); 
-    
+     $coddestino='SIMA'.$empresa->getCodempdes();
+
      $sql='Select * from "'.$coddestino.'".contaba';
      if (Herramientas::BuscarDatos($sql,&$result)){
        $codingreso=$result[0]["codind"];
@@ -346,28 +346,28 @@ class Autenticacion {
       $comando = 'pg_dump --username '.$userbd.' --format custom --verbose --file "'.$ruta.'" --schema '.$simaori.' '.$nombd.'';
       }else{
       $comando = 'pg_dump --username '.$userbd.' --format custom --verbose --file "'.$ruta.'" --schema \''.$simaorir.'\' '.$nombd.'';
-      }      
+      }
       $salida=shell_exec($comando);
 
     //Al esquema viejo le colocamos un nombre X para poder restaurar el otro.
       $esqvie=$simaori.'X';
       $sql='ALTER SCHEMA "'.$simaori.'" RENAME TO "'.$esqvie.'"';
       Herramientas::insertarRegistros2($sql);
-   
+
 
     // Creamos el nuevo esquema
-      $comando2='pg_restore --username '.$userbd.' --dbname "'.$nombd.'" --format custom --verbose "'.$ruta.'"';      
+      $comando2='pg_restore --username '.$userbd.' --dbname "'.$nombd.'" --format custom --verbose "'.$ruta.'"';
       $salida=shell_exec($comando2);
 
     // Le colocamos el nombre destino al esquema nuevo
-      
+
       $sql='ALTER SCHEMA "'.$simaori.'" RENAME TO "'.$simades.'"';
       Herramientas::insertarRegistros2($sql);
 
       //Al esquema origen le colocamos el nombre original
 
       $sql='ALTER SCHEMA "'.$esqvie.'" RENAME TO "'.$simaori.'"';
-      Herramientas::insertarRegistros2($sql); 
+      Herramientas::insertarRegistros2($sql);
 
 
       $sql1='Insert Into "SIMA_USER".Empresa Values (\''.$empresa->getCodempdes().'\',\''.$empresa->getDescripcion().'\',\'\',\'\',\''.$simades.'\')';
@@ -450,7 +450,7 @@ class Autenticacion {
       Herramientas::insertarRegistros($sql20);
 
       //Borrando Comprobantes
-      
+
       $sql19='delete from "'.$simades.'".contabc1';
       Herramientas::insertarRegistros($sql19);
 
@@ -602,7 +602,7 @@ class Autenticacion {
       Herramientas::insertarRegistros($sql2);
 
       // Bancos
-      
+
       $sql3='update "'.$simades.'".tsdefban set debban=0,creban=0,deblib=0,crelib=0';
       Herramientas::insertarRegistros($sql3);
 
@@ -677,17 +677,24 @@ class Autenticacion {
 
       $sql2='ALTER TABLE "'.$simades.'".CIMOVTRA ENABLE TRIGGER ALL';
       Herramientas::insertarRegistros($sql2);
-      
+
   }
 
   public static function grabarTablas($dat,$tablas)
   {
+      try{
       for ($i = 0; $i < count($tablas); $i++) {
           $newapertura= new Apernueper();
           $newapertura->setOrden($i);
           $newapertura->setNomtab($tablas[$i]);
           $newapertura->save();
       }
+
+	return -1;
+	} catch (Exception $ex){
+    	  //echo $ex; exit();
+	  return 0;
+	}
   }
 
   public static function cargarResultados(){
@@ -711,7 +718,7 @@ class Autenticacion {
           $sql2='select coalesce(Count(*),0) as cuantos from '.$obj->getTemporal().'';
           if (Herramientas::BuscarDatos($sql2,&$resulta)){
           $arreglores[$i]["nroreg"]=$resulta[0]["cuantos"];
-          }          
+          }
           $arreglores[$i]["sql"]=$obj->getSql();
           $arreglores[$i]["id"]='9';
           $i++;
