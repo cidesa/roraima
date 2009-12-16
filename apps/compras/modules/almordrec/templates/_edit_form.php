@@ -2,10 +2,11 @@
 /**
  * Funciones de la vista.
  *
+ * 
  * @package    Roraima
  * @subpackage vistas
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version    SVN: $Id$
+ * @author     $Author: jlobaton $ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id: _edit_form.php 34583 2009-11-09 16:23:42Z jlobaton $
  */
 // date: 2007/05/23 15:30:38
 ?>

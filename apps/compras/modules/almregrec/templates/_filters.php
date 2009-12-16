@@ -22,7 +22,7 @@
     <label for="codrec"><?php echo __('Código') ?></label>
     <div class="content">
     <?php echo input_tag('filters[codrec]', isset($filters['codrec']) ? $filters['codrec'] : null, array (
-  'size' => 10,
+  'size' => 8,
   'maxlength' => 8,
   'onBlur'  => "javascript: valor=this.value; valor=valor.pad(8, '0',0);document.getElementById('filters_codrec').value=valor;",
 )) ?>

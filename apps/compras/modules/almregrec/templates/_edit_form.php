@@ -28,8 +28,8 @@
   <?php endif; ?>
 
   <?php $value = object_input_tag($carecaud, 'getCodrec', array (
-  'size' => 12,
-  'maxlength' => 10,
+  'size' => 10,
+  'maxlength' => 8,
   'readonly'  =>  $carecaud->getId()!='' ? true : false ,
   'control_name' => 'carecaud[codrec]',
   'onBlur'  => "javascript: valor=this.value; valor=valor.pad(8, '0',0);document.getElementById('carecaud_codrec').value=valor;",
