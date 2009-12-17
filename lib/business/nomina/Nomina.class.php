@@ -5230,8 +5230,8 @@ class Nomina {
 				$clase->save();
 			}
 		}*/
-        $sql="UPDATE npasiconemp SET frecon='".$g["frecon"]."' WHERE codcon ='".$g["codcon"]."'";
-         Herramientas::insertarRegistros($sql);
+        //$sql="UPDATE npasiconemp SET frecon='".$g["frecon"]."' WHERE codcon ='".$g["codcon"]."'";
+        //Herramientas::insertarRegistros($sql);
 
       }
     }
