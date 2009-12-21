@@ -211,11 +211,28 @@ class Nphojint extends BaseNphojint
 			if(count($aux)==2)
 			{
 				$auxnom=split(' ',trim($aux[1]));
-				return count($auxnom)>1 ? $auxnom[1] : ' ';
+        if(count($auxnom)>1){
+          $segnom = '';
+          foreach($auxnom as $i => $nom){
+            if($i!=0){
+              $segnom .= $nom.' ';
+            }
+          }
+          return trim($segnom);
+        }else return ' ';
+				
 			}else
 			{
 				$auxnom=split(' ',self::getNomemp());
-				return  count($auxnom)>3 ? $auxnom[3] : ' ';	
+        if(count($auxnom)>3){
+          $segnom = '';
+          foreach($auxnom as $i => $nom){
+            if($i>2){
+              $segnom .= $nom.' ';
+            }
+          }
+          return trim($segnom);
+        }else return ' ';
 			}
 		}else
 		{
