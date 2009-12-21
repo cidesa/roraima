@@ -20,7 +20,8 @@ class Npasiconemp extends BaseNpasiconemp
    private $status = '';
    protected $codnom = '';
    protected $codnom2='';
-
+   protected $grid='';
+   
 
    public function hydrate(ResultSet $rs, $startcol = 1)
    {
