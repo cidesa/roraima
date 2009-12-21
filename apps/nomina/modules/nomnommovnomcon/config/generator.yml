@@ -4,7 +4,7 @@ generator:
     model_class:      Npasiconemp
     theme:            default
     fields:
-      codemp:       { name: Codigo Empleado, params: maxlength=10,size=10  }
+      codemp:       { name: Codigo Empleado, params: maxlength=10 size=10  }
       nomemp:       { name: Nombre empleado }
       codcar:       { name: Codigo Cargo, params: size=20  }
       nomcar:       { name: Nombre del Cargo }
