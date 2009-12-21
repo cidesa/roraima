@@ -21,7 +21,7 @@
 <?php echo object_input_hidden_tag($npasiconemp, 'getId') ?>
 
 <fieldset>
-<legend>Tipo de N&oacute;mina</legend>
+<h2>Tipo de N&oacute;mina</h2>
 <div class="form-row">
 
  <strong>C&oacute;digo</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -54,7 +54,7 @@
 
 
 <fieldset>
-<legend>Conceptos</legend>
+<h2>Conceptos</h2>
 <div class="form-row">
 
 
@@ -94,8 +94,10 @@
 
 <div id="grid" class="form-row">
 <?
-echo grid_tag($obj);
+//echo grid_tag($obj);
+echo grid_tag_v2($npasiconemp->getGrid());
 ?>
+
 </div>
 
 
