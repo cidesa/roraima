@@ -1,0 +1,36 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                true
+  tabla:                   npasiconemp
+  anchogrid:               700
+  ancho:                   700
+  filas:                   1   #arreglar que venga del yml
+  titulo:                  'Empleados'
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Cód. Emp
+  tipo:                    t
+  nombrecampo:             codemp
+  esgrabable:              true  
+  html:                    [ size=10  readOnly=true ]
+2:       # Columna 2
+  titulo:                  Nombre del Empleado
+  tipo:                    t
+  nombrecampo:             nomemp
+  esgrabable:              false
+  html:                    [ size=40 readOnly=true ]
+
+3:       # Columna 3
+  titulo:                  Monto
+  tipo:                    m
+  nombrecampo:             monto
+  esgrabable:              true   
+  jscript:                 'onBlur ="event.keyCode=13 entermontootro(event,this.id)"'
+  html:                    [ size=12 ]
+4:       # Columna 4
+  titulo:                  Cantidad
+  tipo:                    t
+  nombrecampo:             cantidad
+  esgrabable:              true
+  html:                    [ size=12 ]
+  jscript:                 'onBlur ="event.keyCode=13; enternumero(event,this.id)"'
