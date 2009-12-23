@@ -9,7 +9,7 @@
  * @subpackage lib.model
  * @author     $Author$ <desarrollo@cidesa.com.ve>
  * @version SVN: $Id$
- * 
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -198,8 +198,8 @@ class Caordcom extends BaseCaordcom
       	$si="Anulada el ".date('d/m/Y',strtotime(self::getFecanu()));
       }else{
         $c= new Criteria();
-        $c->add(OpdetordPeer::REFCOM,self::getOrdcom());
-        $data= OpdetordPeer::doSelectOne($c);
+        $c->add(CpimpcauPeer::REFERE,self::getOrdcom());
+        $data= CpimpcauPeer::doSelectOne($c);
         if ($data)
         {
           $d= new Criteria();
@@ -210,8 +210,8 @@ class Caordcom extends BaseCaordcom
           	$fecha=H::getX('NUMCHE','Tscheemi','fecemi',$reg->getNumche());
           	$si="Pagada con el N° de Cheque: ".$reg->getNumche()." el ".date('d/m/Y',strtotime($fecha));
           }else{
-          	$fecha=H::getX('NUMORD','Opordpag','fecemi',$data->getNumord());
-          	$si="Causada con N° de Orden ".$data->getNumord()." el ".date('d/m/Y',strtotime($fecha));
+          	$fecha=H::getX('refcau','cpcausad','feccau',$data->getRefcau());
+          	$si="Causada con N° de Orden ".$data->getRefcau()." el ".date('d/m/Y',strtotime($fecha));
           }
         }else $si="Pendiente por Causar";
       }
