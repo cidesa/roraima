@@ -3,6 +3,8 @@ generator:
   param:
     model_class:      Bdcriterio
     theme:            cidesaGenerator
+    fields:
+      grid:           { name: .   }
     edit:
       title:          Chequear Base de Datos
       display:        [_grid]
