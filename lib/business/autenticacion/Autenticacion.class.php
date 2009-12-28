@@ -704,14 +704,16 @@ class Autenticacion {
    $t= new Criteria();
    $resul=BdcriterioPeer::doSelect($t);
    if ($resul){
+
       foreach ($resul as $obj){
           $arreglores[$i]["criterio"]=$obj->getCriterio();
           $arreglores[$i]["temporal"]=$obj->getTemporal();
-          $sql='select * from pg_class where relname = \''.$obj->getTemporal().'\'';
+          $sql='select * from pg_class where upper(relname) = \''.strtoupper($obj->getTemporal()).'\'';
           if (Herramientas::BuscarDatos($sql,&$result)){
               $sql1='DROP TABLE '.$obj->getTemporal().' CASCADE';
               Herramientas::insertarRegistros($sql1);
           }
+
           $sql1='CREATE  TABLE '.$obj->getTemporal().' AS ('.$obj->getSql().')';
           Herramientas::insertarRegistros($sql1);
 
