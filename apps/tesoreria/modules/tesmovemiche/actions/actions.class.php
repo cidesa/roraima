@@ -766,6 +766,7 @@ $this->Bitacora('Guardo');
 		       	$this->aprorddir=$varemp['aplicacion']['tesoreria']['modulos']['tesmovemiche']['aprorddirec'];
 		       }
 		     }
+    $c->add(OpordpagPeer::STATUS,"N");
 		if ($this->aprorddir=="S")
 		{
 		  if (trim($cedrif)!="") {
@@ -784,7 +785,6 @@ $this->Bitacora('Guardo');
 		  $c->add(OpordpagPeer::APRORDDIR,$this->sql2,Criteria::CUSTOM);
 		}
 
-        $c->add(OpordpagPeer::STATUS,"N");
         $per = OpordpagPeer::doSelect($c);
         if (!$per)
         {
@@ -1403,7 +1403,8 @@ $this->Bitacora('Guardo');
   
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
