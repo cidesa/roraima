@@ -7,32 +7,34 @@
  */
 ?>
 
-<table width="100">
-    <tr>
-        <td width="40"> 
 <div id="nomtabla">
+<table width="50%" border="0">
+    <tr>
+        <td width="25%">
        <?php echo select_tag('apernueper[nomtab]', options_for_select(ApernueperPeer::cargarSelect($apernueper->getModulo()), $apernueper->getNomtab()),array (
 		  'control_name' => 'apernueper_nomtab',
 		  'size' => '10',
 		  'multiple' => true,
-		  'style' => 'width:400px',
+		  'style' => 'width:250px',
 		)); ?>
-            </div>
+
 		</td>
-                <td width="20">
+                <td width="3%">
 	  	<?php echo link_to_function(image_tag('/sf/sf_admin/images/next.png'), "seleccionarlista()") ?>
 	  	<?php echo link_to_function(image_tag('/sf/sf_admin/images/previous.png'), "seleccionarlistareversa()") ?>
 	  </td>
-          <td width="40">
-	  <?php echo select_tag('apernueper[nomtab_r]', options_for_select(ApernueperPeer::cargarSelect2(), $apernueper->getNomtab()),array (
+          <td width="25%">
+	  <?php echo select_tag('apernueper[nomtab_r]', options_for_select(ApernueperPeer::cargarSelect2($apernueper->getModulo()), $apernueper->getNomtab()),array (
 		  'control_name' => 'apernueper_nomtab_r',
 		  'size' => 10,
 		  'multiple' => true,
-		  'style' => 'width:400px',
+		  'style' => 'width:250px',
 		)); ?>
 	  </td>
     </tr>
   </table>
+
+</div>
 
 <script language="JavaScript" type="text/javascript">
    function seleccionarlista()
