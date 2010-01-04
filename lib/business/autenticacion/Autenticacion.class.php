@@ -5,8 +5,8 @@
  *
  * @package    Roraima
  * @subpackage autenticacion
- * @author     $Author: dmartinez $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id: Autenticacion.class.php 35626 2009-12-15 21:04:14Z dmartinez $
+ * @author     $Author: jlobaton $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: Autenticacion.class.php 35760 2010-01-04 14:17:19Z jlobaton $
  *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -683,6 +683,10 @@ class Autenticacion {
   public static function grabarTablas($dat,$tablas)
   {
       try{
+      	$c = new Criteria();
+      	$c->add(ApernueperPeer::NOMTAB, $dat->getModulo().'%',Criteria::LIKE);
+      	$reg = ApernueperPeer::doDelete($c);
+
       for ($i = 0; $i < count($tablas); $i++) {
           $newapertura= new Apernueper();
           $newapertura->setOrden($i);
@@ -690,9 +694,8 @@ class Autenticacion {
           $newapertura->save();
       }
 
-	return -1;
+		return -1;
 	} catch (Exception $ex){
-    	  //echo $ex; exit();
 	  return 0;
 	}
   }

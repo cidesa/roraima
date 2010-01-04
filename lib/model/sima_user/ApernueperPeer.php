@@ -21,22 +21,34 @@ class ApernueperPeer extends BaseApernueperPeer
       $schema= sfContext::getInstance()->getUser()->getAttribute('schema');
       $result=array();
       $resp=array();
-      $sql1='SELECT TABLE_NAME as nomtab FROM "information_schema".TABLES
-                     WHERE table_schema=\''.$schema.'\'
-                     AND TABLE_TYPE=\'BASE TABLE\' AND TABLE_NAME LIKE \''.$modulo.'%\'
-                     ORDER BY TABLE_NAME;';
+
+	 $sql1='select a.nomtab  from
+				(SELECT TABLE_NAME as nomtab FROM "information_schema".TABLES
+					WHERE table_schema=\''.$schema.'\'
+					AND TABLE_TYPE=\'BASE TABLE\' AND TABLE_NAME LIKE \''.$modulo.'%\'
+					ORDER BY TABLE_NAME)
+				 A
+				left outer JOIN
+
+				(select * from "SIMA_USER".apernueper  where nomtab like   \''.$modulo.'%\')
+				B
+				ON a.NOMTAB = b.NOMTAB
+				where
+				b. nomtab is null
+			ORDER BY a.nomtab';
+
       Herramientas::BuscarDatos($sql1,&$result);
       $objects = $result;
       if ($tabexi!=''){
-          $aux=split(';',$tabexi);          
+          $aux=split(';',$tabexi);
           foreach($objects as $tab){
             $p=1;
             $encontro=false;
-            while ($p<=(count($aux)-1)){            
+            while ($p<=(count($aux)-1)){
               if ($aux[$p]==$tab["nomtab"]) {
               $encontro=true;
                   break;
-            }            
+            }
             $p++;
           }
           if (!$encontro)
@@ -52,11 +64,11 @@ class ApernueperPeer extends BaseApernueperPeer
 
       return $resp;
      }
-    public static function cargarSelect2()
-    {      
-      $resp=array();
-
-       $t = new Criteria();     
+    public static function cargarSelect2($modulo='')
+    {
+       $resp=array();
+       $t = new Criteria();
+       $t->add(ApernueperPeer::NOMTAB, $modulo.'%',Criteria::LIKE);
        $t->addAscendingOrderByColumn(ApernueperPeer::ORDEN);
        $data= ApernueperPeer::doSelect($t);
        if ($data){
