@@ -85,7 +85,7 @@ class asigtabdelActions extends autoasigtabdelActions
   }
 
   public function saving($apernueper)
-  {
+  {  	
     return Autenticacion::grabarTablas($apernueper,$this->getRequestParameter('apernueper[nomtab_r]'));
   }
 

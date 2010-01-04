@@ -8,7 +8,7 @@
  *
  * @package    Roraima
  * @subpackage vistas
- 
+
  * @author     $Author: lhernandez $ <desarrollo@cidesa.com.ve>
  * @version    SVN: $Id: editSuccess.php 32815 2009-09-08 16:52:04Z lhernandez $
  * @copyright  Copyright 2007, Cide S.A.
@@ -22,7 +22,7 @@
 
 <div id="sf_admin_container">
 
-<h1><?php echo __('Tablas a Limpiar', 
+<h1><?php echo __('Tablas a Limpiar',
 array()) ?></h1>
 
 
@@ -43,7 +43,7 @@ array()) ?></h1>
 
 <?php echo javascript_tag("
   salvarsave=function()
-	{	  
+	{
       f=document.sf_admin_edit_form;
 	  ObjetosSelectMultiple(f.apernueper_nomtab_r);
 	  f.action=location.pathname;

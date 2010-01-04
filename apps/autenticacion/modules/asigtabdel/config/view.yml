@@ -5,13 +5,13 @@ default:
   metas:
     title:        Cidesa - Tablas a Limpiar
     robots:       index, follow
-    description:  symfony project
-    keywords:     symfony, project
+    description:  Aplicación Maestra
+    keywords:     Aplicación Maestra
     language:     en
 
   stylesheets:    [siga]
 
-  javascripts:    [ %SF_PROTOTYPE_WEB_DIR%/js/prototype, %SF_PROTOTYPE_WEB_DIR%/js/scriptaculous ]
+  javascripts:    [ %SF_PROTOTYPE_WEB_DIR%/js/prototype, %SF_PROTOTYPE_WEB_DIR%/js/scriptaculous, tools, observe, ajax, dFilter]
 
   has_layout:     on
   layout:         layout_seguridad
