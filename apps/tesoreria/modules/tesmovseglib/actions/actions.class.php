@@ -1001,8 +1001,13 @@ $this->Bitacora('Guardo');
               if ($escheque==1)
               {
                 $this->msg=$this->msg.Tesoreria::anular_Eliminar_Cheque('E',$numcue,$reflib);
+                if ($this->msg==''){
                 $this->msg=$this->msg.Tesoreria::actualiza_Orden_De_Pago($reflib,$numcue,$tipmov);
+                if ($this->msg==''){
                 $this->msg=$this->msg.Tesoreria::anular_Eliminar_Imppag('E',$reflib,$numcue,$feclib,$refpag);
+                }
+                }
+
               }
               else
               {
@@ -1012,11 +1017,14 @@ $this->Bitacora('Guardo');
                   if ($tabla[0]["refier"]=='A')
                   {
                     $this->msg=$this->msg.Tesoreria::actualiza_Orden_De_Pago($reflib,$numcue,$tipmov);
+                    if ($this->msg==''){
                     $this->msg=$this->msg.Tesoreria::anular_Eliminar_Imppag('E',$reflib,$numcue,$feclib,$refpag);
+                    }
                   }
                   else
                   {
                     $this->msg=$this->msg.Tesoreria::anular_Eliminar_Imppag('E',$reflib,$numcue,$feclib,$refpag);
+                    if ($this->msg==''){
                   $c = new Criteria();
                   $c->add(OpdetperPeer::NUMCHE,$reflib);
                   $c->add(OpdetperPeer::CTABAN,$numcue);
@@ -1028,9 +1036,11 @@ $this->Bitacora('Guardo');
                     $opdetper->setNumche(null);
                     $opdetper->save();
                   }
+                    }
                   }
                 }
               }
+            if ($this->msg==''){
               $c = new Criteria();
             $c->add(TsmovlibPeer::NUMCUE,$numcue);
             $c->add(TsmovlibPeer::REFLIB,$reflib);
@@ -1042,6 +1052,7 @@ $this->Bitacora('Guardo');
             Tesoreria::actualiza_Bancos('E',$debcre,$numcue,$monmov);
             Tesoreria::anular_Eliminar('E',$numcomadi,$feccomadi,$compadic,$feccom,$numcom,$numcom,$feclib);
             $this->SalvarBitacora($ideeli ,'Elimino');
+            }
             }
             else
             {
