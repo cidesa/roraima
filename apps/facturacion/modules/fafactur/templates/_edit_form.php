@@ -808,6 +808,7 @@ if (consul!="")
 {
   mostrarPromedio();
   calcularPago();
+  mostrarPromedio();
 }
 
  $('fafactur_tipper_J').disabled=true;
