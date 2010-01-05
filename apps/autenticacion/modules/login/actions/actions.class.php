@@ -5,8 +5,8 @@
  *
  * @package    Roraima
  * @subpackage autenticacion
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
+ * @author     $Author:lhernandez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id:actions.class.php 32813 2009-09-08 16:19:47Z lhernandez $
  * 
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2

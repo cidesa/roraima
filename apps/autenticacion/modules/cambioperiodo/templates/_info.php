@@ -3,7 +3,7 @@
     <td width="10%" rowspan="3" valign="top">
        <div align="left">
        <p></p>
-        <p><img src="/images/alerta.png" alt="Alerta"></p>
+        <p><img src="/images/alerta.png"  alt="Alerta"></p>
         <p></p>
        </div>
     </td>
