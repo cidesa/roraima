@@ -1151,7 +1151,7 @@
     $('fafactur_tottotart').value=format(montota.toFixed(2),'.',',','.');
 
     var ntotaldesc= toFloat('fafactur_mondesc');
-    var calcu= montota + ntotaldesc;
+    var calcu= montota - ntotaldesc;
     $('fafactur_monfac').value=format(calcu.toFixed(2),'.',',','.');
 
     var variable1= toFloat('fafactur_totmonrgo');
