@@ -567,19 +567,6 @@ function Totalrecargo(e,id)
   }
  }
 
-  function enters(e,valor)
-  {
-   if (e.keyCode==13 || e.keyCode==9)
-   {
-     if (valor!='')
-     { valor=valor.pad(8, '0',0);}
-     else{valor=valor.pad(8, '#',0);}
-
-     $('casolart_reqart').value=valor;
-
-   }
-  }
-
   function ajaxdetalle(e,id)
  {
    var aux = id.split("_");

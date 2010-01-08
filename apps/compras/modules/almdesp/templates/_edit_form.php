@@ -192,4 +192,19 @@ echo grid_tag($obj);
   var id="";
   var id='<?php echo $cadphart->getId()?>';
   actualiza(id);
+
+ function enter(valor)
+ {
+     if (valor!='')
+     { valor=valor.pad(8, '0',0);}
+     else
+     {valor=valor.pad(8, '#',0);}
+     $('cadphart_dphart').value=valor;
+     
+     var dphdesh='<?php echo $dphdesh; ?>';
+     if (dphdesh=='S')
+     {
+     	$('cadphart_dphart').readOnly=true;
+     }
+ }
 </script>

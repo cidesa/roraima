@@ -31,7 +31,7 @@
   'readonly'  =>  $carancot->getId()!='' ? true : false ,
   'control_name' => 'carancot[candes]',
   'onBlur' => "javascript:event.keyCode=13;return enternumero(event, this.id)",
-  'maxlength' => 17,
+  'maxlength' => 8,
 )); echo $value ? $value : '&nbsp;' ?>
 
     </div>
@@ -45,7 +45,7 @@
   <?php $value = object_input_tag($carancot, 'getCanhas', array (
   'size' => 19,
   'control_name' => 'carancot[canhas]',
-  'maxlength' => 17,
+  'maxlength' => 8,
   'onBlur' => "javascript:event.keyCode=13;return enternumero(event, this.id)",
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
@@ -60,7 +60,7 @@
   'size' => 19,
   'control_name' => 'carancot[cancot]',
   'onBlur' => "javascript:event.keyCode=13;return enternumero(event, this.id)",
-  'maxlength' => 17,
+  'maxlength' => 8,
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>

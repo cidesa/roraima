@@ -129,8 +129,8 @@ class almsolegrActions extends autoalmsolegrActions
       if ($this->getRequest()->getMethod() == sfRequest::POST)
       {
         $this->updateCasolartFromRequest();
-
-        if ($this->saveCasolart($this->casolart)==-1)
+		$save = $this->saveCasolart($this->casolart);
+        if ($save==-1)
         {
 
         $this->casolart->setId(Herramientas::getX_vacio('reqart','casolart','id',$this->casolart->getReqart()));
@@ -167,6 +167,24 @@ class almsolegrActions extends autoalmsolegrActions
         {
           return $this->redirect('almsolegr/edit?id='.$this->casolart->getId());
         }
+       }else if ($save==-11){
+
+	        $this->setFlash('notice', 'Se ha guardado solamente la Descripcion ya que la solicitud tiene asociada una Orden de Compra.');
+	        $this->Bitacora('Guardo');
+
+	        if ($this->getRequestParameter('save_and_add'))
+	        {
+	          return $this->redirect('almsolegr/create');
+	        }
+	        else if ($this->getRequestParameter('save_and_list'))
+	        {
+	          return $this->redirect('almsolegr/list');
+	        }
+	        else
+	        {
+	          return $this->redirect('almsolegr/edit?id='.$this->casolart->getId());
+	        }
+
        }
        else
        {
@@ -265,8 +283,20 @@ class almsolegrActions extends autoalmsolegrActions
     {
       if ($casolart->getId() && $this->getRequestParameter('modifi')=='N')
       {
-        $casolart->save();
-        $this->coderror=-1;
+        $refsol = Herramientas::getX_vacio('refsol','caordcom','refsol',$casolart->getReqart());
+  		if (!empty($refsol))
+  		{
+	  		$reg = CasolartPeer::retrieveByPKs($casolart->getId());
+	  		$reg1 = array();
+	  		$reg1 = $reg[0];
+	  		$reg1->setDesreq($casolart->getDesreq());
+			$reg1->save();
+			$this->coderror=-11;
+                }else{
+         $casolart->save();
+                    $this->coderror=-1;
+         }
+        
        	return $this->coderror;
       }
       else
@@ -1191,16 +1221,22 @@ class almsolegrActions extends autoalmsolegrActions
     }
 
     $this->cambiareti="";
+    $this->numsoldesh="";
     $varemp = $this->getUser()->getAttribute('configemp');
     if ($varemp)
 	if(array_key_exists('aplicacion',$varemp))
 	 if(array_key_exists('compras',$varemp['aplicacion']))
 	   if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
-	     if(array_key_exists('almsolegr',$varemp['aplicacion']['compras']['modulos']))
+	     if(array_key_exists('almsolegr',$varemp['aplicacion']['compras']['modulos'])){
 	       if(array_key_exists('cambiareti',$varemp['aplicacion']['compras']['modulos']['almsolegr']))
 	       {
 	       	$this->cambiareti=$varemp['aplicacion']['compras']['modulos']['almsolegr']['cambiareti'];
 	       }
+               if(array_key_exists('numsoldesh',$varemp['aplicacion']['compras']['modulos']['almsolegr']))
+	       {
+	       	$this->numsoldesh=$varemp['aplicacion']['compras']['modulos']['almsolegr']['numsoldesh'];
+	       }
+             }
   }
 
   public function executeGenerarcompromiso()

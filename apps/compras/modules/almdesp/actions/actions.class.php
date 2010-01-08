@@ -926,6 +926,18 @@ class almdespActions extends autoalmdespActions
     $this->lonubi= Herramientas::ObtenerFormato('Bndefins','lonubi');
     $this->mascaraubicacionalm = Herramientas::ObtenerFormato('Cadefart','Forubi');
     $this->lonubialm=strlen($this->mascaraubicacionalm);
+    $this->dphdesh="";
+    $varemp = $this->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('compras',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
+	     if(array_key_exists('almdesp',$varemp['aplicacion']['compras']['modulos']))
+               if(array_key_exists('dphdesh',$varemp['aplicacion']['compras']['modulos']['almdesp']))
+	       {
+	       	$this->dphdesh=$varemp['aplicacion']['compras']['modulos']['almdesp']['dphdesh'];
+	       }
+             
   }
 
 

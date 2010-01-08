@@ -34,7 +34,15 @@ class Orden_compra
  */
   public static function Salvar($caordcom,$arreglo_arreglo,$arreglo_objetos,$arreglo_campos,&$coderror)
   {
-    $refiereprecom = '';
+             if ($caordcom->getId()){
+                $reg = CaordcomPeer::retrieveByPKs($caordcom->getId());
+                $reg1 = array();
+                $reg1 = $reg[0];
+                $reg1->setDesord($caordcom->getDesord());
+                $reg1->save();
+                $coderror=-11;
+          }else {
+  $refiereprecom = '';
   $afectacompro = '';
   $afectadis = '';
   $referencia='';
@@ -217,6 +225,7 @@ class Orden_compra
             }
           }    // si grabo orden_de_compra
      }  //REFSOL
+}
       //exit($caordcom->getOrdcom());
    return true;
   }

@@ -100,6 +100,7 @@
 
   <?php $value = object_input_tag($bndismue, 'getNrodismue', array (
   'size' => 15,
+  'maxlength' => 10,
   'readonly'  =>  $bndismue->getId()!='' ? true : false ,
   'control_name' => 'bndismue[nrodismue]',
   'onKeyPress' => "javascript:if (event.keyCode==13 || event.keyCode==9){document.getElementById('bndismue_codmot').focus();}",

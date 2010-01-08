@@ -517,13 +517,18 @@ $this->Bitacora('Guardo');
 	if(array_key_exists('aplicacion',$varemp))
 	 if(array_key_exists('compras',$varemp['aplicacion']))
 	   if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
-	     if(array_key_exists('almregpro',$varemp['aplicacion']['compras']['modulos']))
+	     if(array_key_exists('almregpro',$varemp['aplicacion']['compras']['modulos'])){
 	       if(array_key_exists('manprocor',$varemp['aplicacion']['compras']['modulos']['almregpro']))
 	       {
 	       	$this->manprocor=$varemp['aplicacion']['compras']['modulos']['almregpro']['manprocor'];
 	       }
+               if(array_key_exists('mascararif',$varemp['aplicacion']['compras']['modulos']['almregpro']))
+	       {
+	       	$this->mascararif=$varemp['aplicacion']['compras']['modulos']['almregpro']['mascararif'];
+	       }
+  }
 
-    Proveedor::salvarAlmregpro($caprovee,$this->manprocor);
+    Proveedor::salvarAlmregpro($caprovee,$this->manprocor,$this->mascararif);
   }
 
 public function executeAjax()

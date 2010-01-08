@@ -17,7 +17,7 @@ generator:
       numregant:           { name: Nro del Registro, params: size=30 maxlength=100, help: Coloque el Nro del Registro }
       folioant:            { name: Folio, type: textarea_tag, params: size=30x2 maxlength=1000, help: Coloque el Nro del Folio }
       triant:              { name: Trimestre, params: size=30 maxlength=250, help: Coloque el Trimestre }
-      proant:              { name: Protocolo, params: size=30 maxlength=250, help: Coloque el Protocolo }
+      proant:              { name: Protocolo, params: size=30 maxlength=100, help: Coloque el Protocolo }
       #catciu_id:           { name: Localidad, params: include_custom= "Seleccione", help: Coloque la Localidad}
       catbarurb_id:        { name: Urb/Barrio, help: Coloque la Urbanizacion/Barrio}
       cattramofro_id:      { name: Av./Call./Vrd., help: Coloque la Av./Call./Vrd.}

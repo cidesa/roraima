@@ -15,7 +15,7 @@
  */
 class Npcargos extends BaseNpcargos
 {
-	protected $carasi = '';
+	protected $carasi = '0';
 	protected $porcen="0,00";
 
 	public function getNomtip()
@@ -35,12 +35,12 @@ class Npcargos extends BaseNpcargos
 
 	public function getCarasi()
 	{
-		$result='';
-		$sql = "select count(codcar) as codcar from npasicaremp group by codcar";
+		$result=array();
+		$sql = "select coalesce(count(codcar),0) as codcar from npasicaremp where codcar='".self::getCodcar()."'group by codcar";
 		if (H::BuscarDatos($sql,$result))
 		{
 			return $result[0]["codcar"];
-		}
+		}else return '0';
 	}
 
 
