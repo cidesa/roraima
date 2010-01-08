@@ -21,6 +21,7 @@ class fapedidoActions extends autofapedidoActions
   private $coderror5=-1;
   private $coderror6=-1;
   private $coderror7=-1;
+  private $coderror8=-1;
 
   /**
    * Función para colocar el codigo necesario en  
@@ -390,6 +391,12 @@ class fapedidoActions extends autofapedidoActions
          return false;
       }
 
+      if (H::toFloat($this->getRequestParameter('fapedido[monped]'))==0)
+      {
+      	$this->coderror8=1155;
+         return false;
+      }
+
       $grid=Herramientas::CargarDatosGridv2($this,$this->obj);
       $x=$grid[0];
       $i=0;
@@ -588,6 +595,11 @@ class fapedidoActions extends autofapedidoActions
         {
          $err1 = Herramientas::obtenerMensajeError($this->coderror7);
          $this->getRequest()->setError('fapedido{rifpro}',$err1);
+        }
+        if($this->coderror8!=-1)
+        {
+         $err1 = Herramientas::obtenerMensajeError($this->coderror8);
+         $this->getRequest()->setError('fapedido{monped}',$err1);
         }
       }
     return sfView::SUCCESS;
