@@ -23,13 +23,13 @@ class Proveedor
    * @param $caprovee Object Proveedor-Benficiario-Recaudos a guardar
    * @return void
    */
-    public static function salvarAlmregpro($caprovee,$manprocor)
+    public static function salvarAlmregpro($caprovee,$manprocor,$mascararif)
     {
       if ($manprocor=='S')
       {
         self::BuscarCorrelativoActiv(&$caprovee);
       }
-      self::Grabar_Proveedor($caprovee,$manprocor);
+      self::Grabar_Proveedor($caprovee,$manprocor,$mascararif);
       self::Grabar_Beneficiario($caprovee);
       self::Grabar_Recaudosproveedor($caprovee);
     }
@@ -42,7 +42,19 @@ class Proveedor
    * @param $caprovee Object Proveedor a guardar
    * @return void
    */
-    public static function Grabar_Proveedor($caprovee,$manprocor){
+    public static function Grabar_Proveedor($caprovee,$manprocor,$mascararif){
+    
+    if ($mascararif=='S')
+        {
+            $caprovee->setRifpro($caprovee->getNitpro()."-".substr($caprovee->getRifpro(),2,10));
+        }
+     if ($caprovee->getId())
+         {
+            $reg = CaproveePeer::retrieveByPKs($caprovee->getId());
+            $reg1 = array();
+            $reg1 = $reg[0];
+            $caprovee->setNitpro($reg1->getNitpro());
+         }
     $caprovee->save();
     if ($manprocor=='S') {
     	$q= new Criteria();

@@ -2678,4 +2678,22 @@ class Compras {
     return true;
   }
 
+
+
+  public static function ValidarAlmRamart($clasemodelo)
+  {
+
+      $reg2 = Herramientas::getX_vacio('codram','caprovee','ramart',$clasemodelo->getRamart());
+      $reg = Herramientas::getX_vacio('ramart','caregart','ramart',$clasemodelo->getRamart());
+
+     if ($reg=='' && $reg2=='')
+     {
+     	$clasemodelo->delete();
+     	return -1;
+     }else{
+     	return 5;
+     }
+
+  }
+
 }

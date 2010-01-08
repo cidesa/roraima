@@ -63,6 +63,7 @@
   <?php $value = object_input_date_tag($casolart, 'getFecreq', array (
   'rich' => true,
   'calendar_button_img' => '/sf/sf_admin/images/date.png',
+  'size' => '10',
   'control_name' => 'casolart[fecreq]',
   'date_format' => 'dd/MM/yy',
   'readonly'  =>  $casolart->getId()!='' ? true : false ,
@@ -371,6 +372,25 @@ echo grid_tag($obj3);
   if (ids!="" && $('haydesp').value!='S' && estatus!='N')
   {
     $('anul').show();
+  }
+
+
+    function enters(e,valor)
+  {
+   if (e.keyCode==13 || e.keyCode==9)
+   {
+     if (valor!='')
+     { valor=valor.pad(8, '0',0);}
+     else{valor=valor.pad(8, '#',0);}
+
+     $('casolart_reqart').value=valor;
+     var numsoldesh='<?php echo $numsoldesh; ?>';
+     if (numsoldesh=='S')
+     {
+     	$('casolart_reqart').readOnly=true;
+     }
+
+   }
   }
 
   function anular()

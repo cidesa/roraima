@@ -4971,8 +4971,8 @@ class Nomina {
       $npasicaremp->setNomcar($registro->getNomcar());
       $npasicaremp->setNomnom($registro->getNomnom());
       $npasicaremp->setNomcat($registro->getNomcat());
-	  $npasicaremp->setCodtipded($registro->getCodtipded());
-	  $npasicaremp->setCodtipcat($registro->getCodtipcat());
+      $npasicaremp->setCodtipded($registro->getCodtipded());
+      $npasicaremp->setCodtipcat($registro->getCodtipcat());
       $npasicaremp->setUnieje(null);
       $npasicaremp->setSueldo($sueldo);
       $npasicaremp->setStatus('V');
@@ -5000,6 +5000,10 @@ class Nomina {
       $npexplab->setStacar('D');
       $npexplab->setTiporg('Publico');
       $npexplab->save();
+
+      // Actualizo el cargo vacantes
+      $resul->setCarvan($resul->getCarvan()-1);
+      $resul->save();
 
     }
 

@@ -100,14 +100,6 @@ function cantdespachada(e,id)
   }
 }
 
-	 function enter(valor)
-	 {
-	     if (valor!='')
-	     { valor=valor.pad(8, '0',0);}
-	     else
-	     {valor=valor.pad(8, '#',0);}
-	     $('cadphart_dphart').value=valor;
-	 }
 
 
   function ejecutaajax(e,id)

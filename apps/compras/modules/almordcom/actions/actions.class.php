@@ -318,7 +318,8 @@ class almordcomActions extends autoalmordcomActions
     if ($this->getRequest()->getMethod() == sfRequest::POST)
     {
       $this->updateCaordcomFromRequest();
-      if ($this->saveCaordcom($this->caordcom)==-1)
+      $coderr = $this->saveCaordcom($this->caordcom);
+      if ($coderr ==-1)
       {
         $this->caordcom->setId(Herramientas::getX_vacio('ordcom','caordcom','id',$this->caordcom->getOrdcom()));
         $this->setFlash('notice', 'Your modifications have been saved');
@@ -346,8 +347,31 @@ class almordcomActions extends autoalmordcomActions
           return $this->redirect('almordcom/edit?imp=S&id='.$this->caordcom->getId());
 
       }//if ($this->saveCaordcom($this->caordcom)==-1)
+      else if ($coderr==-11){
+
+	        $this->setFlash('notice', 'Se ha guardado solamente la Descripción');
+	        $this->Bitacora('Guardo');
+
+	        if ($this->getRequestParameter('save_and_add'))
+	        {
+	          return $this->redirect('almordcom/create');
+	        }
+	        else if ($this->getRequestParameter('save_and_list'))
+	        {
+	          return $this->redirect('almordcom/list');
+	        }
+	        else
+	        {
+	          return $this->redirect('almordcom/edit?id='.$this->caordcom->getId());
+	        }
+      }
       else
       {
+	      if($coderr!=-1){
+        	$err = Herramientas::obtenerMensajeError($coderr);
+        	$this->getRequest()->setError('',$err);
+      	}
+
            $this->labels = $this->getLabels();
            return sfView::SUCCESS;
       }
