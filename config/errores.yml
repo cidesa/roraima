@@ -1066,6 +1066,9 @@
 1154:
     cod: 1154
     msj: El Proveedor no posee Cuenta de Contable asociada. No se puede generar el Comprobante.
+1155:
+    cod: 1155
+    msj: El Monto del Pedido debe ser mayor a cero.
 ########## Licitaciones ########
 901:
     cod: 901
