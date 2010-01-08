@@ -113,7 +113,7 @@ private $coderror =-1;
 						            $this->coderror=1121;
 						            return false;
 					        	}
-					        	else if (H::toFloat($x[$j]->getCandesp()) > (H::toFloat($x[$j]->getCantot()) - H::toFloat($totent))){
+					        	else if (H::toFloat($x[$j]->getCandesp()) > (H::toFloat($x[$j]->getCantot() -$totent))){
 						            $this->coderror=1122;
 						            return false;
 					        	}
