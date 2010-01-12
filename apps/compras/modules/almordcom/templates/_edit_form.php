@@ -64,7 +64,7 @@
 <?php if ($sf_request->hasError('caordcom{ordcom}')): ?> <?php echo form_error('caordcom{ordcom}', array('class' => 'form-error-msg')) ?>
 <?php endif; ?> <?php $value = object_input_tag($caordcom, 'getOrdcom', array (
 'readonly'  =>  $caordcom->getId()!='' ? true : false ,
-'size' => 8,
+'size' => 10,
 'maxlength' => 8,
 'control_name' => 'caordcom[ordcom]',
 'onBlur'  => "javascript:event.keyCode=13; enter(event,this.value);",
@@ -894,7 +894,18 @@ nuevo='<?php echo $caordcom->getId() ?>';
 if (nuevo!="")
 {
 	actualizarsaldos();
+}else{
+     var manesolcorr='<?php echo $mansolocor; ?>';
+     if (manesolcorr=='S')
+     {
+        $('caordcom_ordcom').value='########';
+     	$('caordcom_ordcom').readOnly=true;
+        $('caordcom_doccom').focus();
+     }
 }
+
+
+
  // if ($('caordcom_refsol').value=='') $('div_solicitud').hide();
    if ($('id').value=='' ||  $('caordcom_refsol').value=='')  $('div_solicitud').hide();
    var idordcom=$('id').value;
