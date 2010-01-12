@@ -627,14 +627,26 @@ if ( ($opordpag->getId()!='')) //ES CONSULTA
 </li>
 </ul>
 <script type="text/javascript">
+var nuevo='<?php echo $opordpag->getId()?>';
+    if (nuevo=='')
+    {
+     var manesolcorr='<?php echo $mansolocor; ?>';
+     if (manesolcorr=='S')
+     {
+        $('opordpag_numord').value='########';
+     	$('opordpag_numord').readOnly=true;
+        $('opordpag_tipcau').focus();
+     }else{
+      $('opordpag_numord').focus();
+     }
+    }
+
 var ordpagval='<?echo $ordpagval;?>';
 if ($('opordpag_tipcau').value!='' && ($('opordpag_tipcau').value!=$('opnomina').value || $('opordpag_tipcau').value!='OPNN') && ($('opordpag_tipcau').value!=$('opaporte').value || $('opordpag_tipcau').value!='APOR') && ($('opordpag_tipcau').value!=$('opliquidacion').value || $('opordpag_tipcau').value!='LIQU') && ($('opordpag_tipcau').value!=$('opfideicomiso').value || $('opordpag_tipcau').value!='OPFD') && ($('opordpag_tipcau').value!=ordpagval || $('opordpag_tipcau').value!='OPVA'))
 {
   $('botonret').show();
 }
 mostarq();
-
-$('opordpag_numord').focus();
 actualiza();
 
 

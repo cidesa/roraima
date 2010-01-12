@@ -1692,6 +1692,7 @@ class almordcomActions extends autoalmordcomActions
     $this->formatocategoria = Herramientas::getObtener_FormatoCategoria();
     $this->deshabmonrec="";
     $this->ordcomdesh="";
+    $this->mansolocor="";
     $varemp = $this->getUser()->getAttribute('configemp');
     if ($varemp)
 	if(array_key_exists('aplicacion',$varemp))
@@ -1705,6 +1706,10 @@ class almordcomActions extends autoalmordcomActions
                if(array_key_exists('ordcomdesh',$varemp['aplicacion']['compras']['modulos']['almordcom']))
 	       {
 	       	$this->ordcomdesh=$varemp['aplicacion']['compras']['modulos']['almordcom']['ordcomdesh'];
+	       }
+               if(array_key_exists('mansolocor',$varemp['aplicacion']['compras']['modulos']['almordcom']))
+	       {
+	       	$this->mansolocor=$varemp['aplicacion']['compras']['modulos']['almordcom']['mansolocor'];
 	       }
              }
 
