@@ -100,37 +100,19 @@ class catdefdivgeoActions extends autocatdefdivgeoActions
   public function validateEdit()
   {
     $this->coderr =-1;
-
-    // Se deben llamar a las funciones necesarias para cargar los
-    // datos de la vista que serán usados en las funciones de validación.
-    // Por ejemplo:
-
     if($this->getRequest()->getMethod() == sfRequest::POST){
 
-      // $this->configGrid();
-      // $grid = Herramientas::CargarDatosGrid($this,$this->obj);
+        $this->catdivgeo = $this->getCatdivgeoOrCreate();
+        $this->updateCatdivgeoFromRequest();
 
-      // Aqui van los llamados a los métodos de las clases del
-      // negocio para validar los datos.
-      // Los resultados de cada llamado deben ser analizados por ejemplo:
-
-      // $resp = Compras::validarAlmajuoc($this->caajuoc,$grid);
-
-       //$resp=Herramientas::ValidarCodigo($valor,$this->tstipmov,$campo);
-
-      // al final $resp es analizada en base al código que retorna
-      // Todas las funciones de validación y procesos del negocio
-      // deben retornar códigos >= -1. Estos código serám buscados en
-      // el archivo errors.yml en la función handleErrorEdit()
+        if (!$this->catdivgeo->getId())
+        $this->coderr=Catastro::validarUbicaGeo($this->getRequestParameter('catdivgeo[coddivgeo]'));
 
       if($this->coderr!=-1){
         return false;
       } else return true;
 
     }else return true;
-
-
-
   }
 
   /**

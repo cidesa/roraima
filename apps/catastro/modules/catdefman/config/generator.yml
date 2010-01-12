@@ -22,7 +22,7 @@ generator:
 
     list:
       title:     Definicion de la Manzana
-      display:   [ =coddivgeo, catdivgeo, nomtramo]
+      display:   [ =coddivgeo, catdivgeo, nomman]
       fields:
         catdivgeo_id: { name: Division Geografico, params: size=32}
         nomtramo:    { name: Manzana, params: size=15}

@@ -64,7 +64,7 @@ class Inmueblescatastro {
 	  $j=0;
 	  while ($j<count($x))
 	  {
-	    if ($x[$j]->getCancar()>0 && $x[$j]->getMetare()>0){
+	    if ($x[$j]->getDimensiones()>0 && $x[$j]->getValor()>0){
 	    $x[$j]->setCatreginmId($clasemodelo->getId());
 	    //$x[$j]->setCatregperId(H::getX('cedrif','catregper','id',$x[$j]->getCedrif()));
 	    //$x[$j]->setCatcarconId(H::getX('id','catcarcon','tipo',$x[$j]->getCatcarconid()));

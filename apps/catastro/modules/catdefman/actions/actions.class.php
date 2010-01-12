@@ -194,7 +194,8 @@ class catdefmanActions extends autocatdefmanActions
     switch ($ajax){
       case '1':
         $desdivgeo = Herramientas::getX('coddivgeo','catdivgeo','desdivgeo',$codigo);
-        $output = '[["'.$cajtexmos.'","'.$desdivgeo.'",""]]';
+          $iddivgeo = Herramientas::getX('coddivgeo','catdivgeo','id',$codigo);
+        $output = '[["'.$cajtexmos.'","'.$desdivgeo.'",""],["catman_catdivgeo_id","'.$iddivgeo.'",""]]';
         break;
       default:
         $output = '[["","",""],["","",""],["","",""]]';

@@ -21,10 +21,10 @@
         )),
    )); 	echo $value ? $value : '&nbsp;' ?>
 
-<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Catdefdivbarurb_Catdivgeo/clase/Catdivgeo/frame/sf_admin_edit_form/obj1/cattramo_desdivgeo/obj2/cattramo_coddivgeo/campo1/desdivgeo/campo2/coddivgeo/param1/'.$longdivgeo)?>
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Catdefdivbarurb_Catdivgeo/clase/Catdivgeo/frame/sf_admin_edit_form/obj1/cattramo_coddivgeo/obj2/cattramo_desdivgeo/campo1/coddivgeo/campo2/desdivgeo/param1/'.$longdivgeo)?>
 
   <?php $value = object_input_tag($cattramo, 'getDesdivgeo', array (
   'size' => 40,
   'disabled' => true,
   'control_name' => 'cattramo[desdivgeo]',
-)); echo $value ? $value : '&nbsp;' ?>
+)); echo $value ? $value : '&nbsp;' ?> <?php echo input_hidden_tag('cattramo[catdivgeo_id]', $cattramo->getCatdivgeoId()) ?>
