@@ -113,7 +113,6 @@ facturacion:
         Resumen de Artículos y Servicios:                   artser.php
       Movimientos:
         Listado de Pedidos:                                 farpedart.php
-        #Notas de Entrega:                                   farnotent.php
         Listado de Despachos:                               fardphart.php
         Listado Detallado de Facturas:                      farfactur.php
         Listado de Facturas:                                farffactura.php
