@@ -523,7 +523,7 @@ $this->Bitacora('Guardo');
     	  $c->add(OpdefempPeer::CODEMP,'001');
     	  $per = OpdefempPeer::doSelectOne($c);
            if ($this->getUser()->getAttribute('confcorcom')=='N')
-           {  $numcom = H::iif($per->getOrdconpre()=='t','OP'.substr($numcom = $opordpag->getNumord(),2,strlen($numcom)),$numcom); }
+           {  $numcom = H::iif($per->getOrdconpre()=='t',$reftra,$numcom); }
            else
            {  $numcom = H::iif($per->getOrdconpre()=='t','OP'.substr($numcom = Comprobante::Buscar_Correlativo(),2,strlen($numcom)),$numcom); }
           $numcom = Comprobante::SalvarComprobante($numcom,$reftra,$feccom,$descom,$debito,$credito,$grid,$this->getUser()->getAttribute('grabar',null,$formulario[$i]));
