@@ -182,6 +182,12 @@ abstract class BaseCaprovee extends BaseObject  implements Persistent {
 	protected $lastCarecproCriteria = null;
 
 	
+	protected $collCaordcoms;
+
+	
+	protected $lastCaordcomCriteria = null;
+
+	
 	protected $alreadyInSave = false;
 
 	
@@ -1161,6 +1167,14 @@ abstract class BaseCaprovee extends BaseObject  implements Persistent {
 				}
 			}
 
+			if ($this->collCaordcoms !== null) {
+				foreach($this->collCaordcoms as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
+
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
@@ -1204,6 +1218,14 @@ abstract class BaseCaprovee extends BaseObject  implements Persistent {
 
 				if ($this->collCarecpros !== null) {
 					foreach($this->collCarecpros as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
+
+				if ($this->collCaordcoms !== null) {
+					foreach($this->collCaordcoms as $referrerFK) {
 						if (!$referrerFK->validate($columns)) {
 							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
 						}
@@ -1765,6 +1787,10 @@ abstract class BaseCaprovee extends BaseObject  implements Persistent {
 				$copyObj->addCarecpro($relObj->copy($deepCopy));
 			}
 
+			foreach($this->getCaordcoms() as $relObj) {
+				$copyObj->addCaordcom($relObj->copy($deepCopy));
+			}
+
 		} 
 
 		$copyObj->setNew(true);
@@ -1893,6 +1919,146 @@ abstract class BaseCaprovee extends BaseObject  implements Persistent {
 		$this->lastCarecproCriteria = $criteria;
 
 		return $this->collCarecpros;
+	}
+
+	
+	public function initCaordcoms()
+	{
+		if ($this->collCaordcoms === null) {
+			$this->collCaordcoms = array();
+		}
+	}
+
+	
+	public function getCaordcoms($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseCaordcomPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCaordcoms === null) {
+			if ($this->isNew()) {
+			   $this->collCaordcoms = array();
+			} else {
+
+				$criteria->add(CaordcomPeer::CODPRO, $this->getCodpro());
+
+				CaordcomPeer::addSelectColumns($criteria);
+				$this->collCaordcoms = CaordcomPeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(CaordcomPeer::CODPRO, $this->getCodpro());
+
+				CaordcomPeer::addSelectColumns($criteria);
+				if (!isset($this->lastCaordcomCriteria) || !$this->lastCaordcomCriteria->equals($criteria)) {
+					$this->collCaordcoms = CaordcomPeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastCaordcomCriteria = $criteria;
+		return $this->collCaordcoms;
+	}
+
+	
+	public function countCaordcoms($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/om/BaseCaordcomPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(CaordcomPeer::CODPRO, $this->getCodpro());
+
+		return CaordcomPeer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addCaordcom(Caordcom $l)
+	{
+		$this->collCaordcoms[] = $l;
+		$l->setCaprovee($this);
+	}
+
+
+	
+	public function getCaordcomsJoinCaconpag($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseCaordcomPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCaordcoms === null) {
+			if ($this->isNew()) {
+				$this->collCaordcoms = array();
+			} else {
+
+				$criteria->add(CaordcomPeer::CODPRO, $this->getCodpro());
+
+				$this->collCaordcoms = CaordcomPeer::doSelectJoinCaconpag($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(CaordcomPeer::CODPRO, $this->getCodpro());
+
+			if (!isset($this->lastCaordcomCriteria) || !$this->lastCaordcomCriteria->equals($criteria)) {
+				$this->collCaordcoms = CaordcomPeer::doSelectJoinCaconpag($criteria, $con);
+			}
+		}
+		$this->lastCaordcomCriteria = $criteria;
+
+		return $this->collCaordcoms;
+	}
+
+
+	
+	public function getCaordcomsJoinCaforent($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseCaordcomPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCaordcoms === null) {
+			if ($this->isNew()) {
+				$this->collCaordcoms = array();
+			} else {
+
+				$criteria->add(CaordcomPeer::CODPRO, $this->getCodpro());
+
+				$this->collCaordcoms = CaordcomPeer::doSelectJoinCaforent($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(CaordcomPeer::CODPRO, $this->getCodpro());
+
+			if (!isset($this->lastCaordcomCriteria) || !$this->lastCaordcomCriteria->equals($criteria)) {
+				$this->collCaordcoms = CaordcomPeer::doSelectJoinCaforent($criteria, $con);
+			}
+		}
+		$this->lastCaordcomCriteria = $criteria;
+
+		return $this->collCaordcoms;
 	}
 
 } 

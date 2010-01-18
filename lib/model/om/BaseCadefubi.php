@@ -20,6 +20,18 @@ abstract class BaseCadefubi extends BaseObject  implements Persistent {
 	protected $id;
 
 	
+	protected $collCaartalmubis;
+
+	
+	protected $lastCaartalmubiCriteria = null;
+
+	
+	protected $collCaalmubis;
+
+	
+	protected $lastCaalmubiCriteria = null;
+
+	
 	protected $alreadyInSave = false;
 
 	
@@ -181,6 +193,22 @@ abstract class BaseCadefubi extends BaseObject  implements Persistent {
 				}
 				$this->resetModified(); 			}
 
+			if ($this->collCaartalmubis !== null) {
+				foreach($this->collCaartalmubis as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
+
+			if ($this->collCaalmubis !== null) {
+				foreach($this->collCaalmubis as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
+
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
@@ -221,6 +249,22 @@ abstract class BaseCadefubi extends BaseObject  implements Persistent {
 				$failureMap = array_merge($failureMap, $retval);
 			}
 
+
+				if ($this->collCaartalmubis !== null) {
+					foreach($this->collCaartalmubis as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
+
+				if ($this->collCaalmubis !== null) {
+					foreach($this->collCaalmubis as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
 
 
 			$this->alreadyInValidation = false;
@@ -341,6 +385,19 @@ abstract class BaseCadefubi extends BaseObject  implements Persistent {
 		$copyObj->setNomubi($this->nomubi);
 
 
+		if ($deepCopy) {
+									$copyObj->setNew(false);
+
+			foreach($this->getCaartalmubis() as $relObj) {
+				$copyObj->addCaartalmubi($relObj->copy($deepCopy));
+			}
+
+			foreach($this->getCaalmubis() as $relObj) {
+				$copyObj->addCaalmubi($relObj->copy($deepCopy));
+			}
+
+		} 
+
 		$copyObj->setNew(true);
 
 		$copyObj->setId(NULL); 
@@ -362,6 +419,146 @@ abstract class BaseCadefubi extends BaseObject  implements Persistent {
 			self::$peer = new CadefubiPeer();
 		}
 		return self::$peer;
+	}
+
+	
+	public function initCaartalmubis()
+	{
+		if ($this->collCaartalmubis === null) {
+			$this->collCaartalmubis = array();
+		}
+	}
+
+	
+	public function getCaartalmubis($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseCaartalmubiPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCaartalmubis === null) {
+			if ($this->isNew()) {
+			   $this->collCaartalmubis = array();
+			} else {
+
+				$criteria->add(CaartalmubiPeer::CODUBI, $this->getCodubi());
+
+				CaartalmubiPeer::addSelectColumns($criteria);
+				$this->collCaartalmubis = CaartalmubiPeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(CaartalmubiPeer::CODUBI, $this->getCodubi());
+
+				CaartalmubiPeer::addSelectColumns($criteria);
+				if (!isset($this->lastCaartalmubiCriteria) || !$this->lastCaartalmubiCriteria->equals($criteria)) {
+					$this->collCaartalmubis = CaartalmubiPeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastCaartalmubiCriteria = $criteria;
+		return $this->collCaartalmubis;
+	}
+
+	
+	public function countCaartalmubis($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/om/BaseCaartalmubiPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(CaartalmubiPeer::CODUBI, $this->getCodubi());
+
+		return CaartalmubiPeer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addCaartalmubi(Caartalmubi $l)
+	{
+		$this->collCaartalmubis[] = $l;
+		$l->setCadefubi($this);
+	}
+
+	
+	public function initCaalmubis()
+	{
+		if ($this->collCaalmubis === null) {
+			$this->collCaalmubis = array();
+		}
+	}
+
+	
+	public function getCaalmubis($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseCaalmubiPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCaalmubis === null) {
+			if ($this->isNew()) {
+			   $this->collCaalmubis = array();
+			} else {
+
+				$criteria->add(CaalmubiPeer::CODUBI, $this->getCodubi());
+
+				CaalmubiPeer::addSelectColumns($criteria);
+				$this->collCaalmubis = CaalmubiPeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(CaalmubiPeer::CODUBI, $this->getCodubi());
+
+				CaalmubiPeer::addSelectColumns($criteria);
+				if (!isset($this->lastCaalmubiCriteria) || !$this->lastCaalmubiCriteria->equals($criteria)) {
+					$this->collCaalmubis = CaalmubiPeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastCaalmubiCriteria = $criteria;
+		return $this->collCaalmubis;
+	}
+
+	
+	public function countCaalmubis($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/om/BaseCaalmubiPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(CaalmubiPeer::CODUBI, $this->getCodubi());
+
+		return CaalmubiPeer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addCaalmubi(Caalmubi $l)
+	{
+		$this->collCaalmubis[] = $l;
+		$l->setCadefubi($this);
 	}
 
 } 

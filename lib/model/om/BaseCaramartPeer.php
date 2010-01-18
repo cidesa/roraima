@@ -107,8 +107,8 @@ abstract class BaseCaramartPeer {
 
 	}
 
-	const COUNT = 'COUNT(caramart.ID)';
-	const COUNT_DISTINCT = 'COUNT(DISTINCT caramart.ID)';
+	const COUNT = 'COUNT(caramart.RAMART)';
+	const COUNT_DISTINCT = 'COUNT(DISTINCT caramart.RAMART)';
 
 	
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
@@ -232,6 +232,9 @@ abstract class BaseCaramartPeer {
 
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; 
+			$comparison = $criteria->getComparison(CaramartPeer::RAMART);
+			$selectCriteria->add(CaramartPeer::RAMART, $criteria->remove(CaramartPeer::RAMART), $comparison);
+
 			$comparison = $criteria->getComparison(CaramartPeer::ID);
 			$selectCriteria->add(CaramartPeer::ID, $criteria->remove(CaramartPeer::ID), $comparison);
 
@@ -272,7 +275,20 @@ abstract class BaseCaramartPeer {
 			$criteria = $values->buildPkeyCriteria();
 		} else {
 						$criteria = new Criteria(self::DATABASE_NAME);
-			$criteria->add(CaramartPeer::ID, (array) $values, Criteria::IN);
+												if(count($values) == count($values, COUNT_RECURSIVE))
+			{
+								$values = array($values);
+			}
+			$vals = array();
+			foreach($values as $value)
+			{
+
+				$vals[0][] = $value[0];
+				$vals[1][] = $value[1];
+			}
+
+			$criteria->add(CaramartPeer::RAMART, $vals[0], Criteria::IN);
+			$criteria->add(CaramartPeer::ID, $vals[1], Criteria::IN);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -326,40 +342,17 @@ abstract class BaseCaramartPeer {
 	}
 
 	
-	public static function retrieveByPK($pk, $con = null)
-	{
+	public static function retrieveByPK( $ramart, $id, $con = null) {
 		if ($con === null) {
 			$con = Propel::getConnection(self::DATABASE_NAME);
 		}
-
-		$criteria = new Criteria(CaramartPeer::DATABASE_NAME);
-
-		$criteria->add(CaramartPeer::ID, $pk);
-
-
+		$criteria = new Criteria();
+		$criteria->add(CaramartPeer::RAMART, $ramart);
+		$criteria->add(CaramartPeer::ID, $id);
 		$v = CaramartPeer::doSelect($criteria, $con);
 
-		return !empty($v) > 0 ? $v[0] : null;
+		return !empty($v) ? $v[0] : null;
 	}
-
-	
-	public static function retrieveByPKs($pks, $con = null)
-	{
-		if ($con === null) {
-			$con = Propel::getConnection(self::DATABASE_NAME);
-		}
-
-		$objs = null;
-		if (empty($pks)) {
-			$objs = array();
-		} else {
-			$criteria = new Criteria();
-			$criteria->add(CaramartPeer::ID, $pks, Criteria::IN);
-			$objs = CaramartPeer::doSelect($criteria, $con);
-		}
-		return $objs;
-	}
-
 } 
 if (Propel::isInit()) {
 			try {

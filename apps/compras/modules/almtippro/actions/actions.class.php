@@ -102,6 +102,32 @@ $this->Bitacora('Guardo');
     $catippro->save();
   }
 
+   public function executeDelete()
+  {
+    $this->catippro = CatipproPeer::retrieveByPk($this->getRequestParameter('id'));
+    $this->forward404Unless($this->catippro);
+
+    try
+    {
+      $reg = Herramientas::getX_vacio('tippro','caordcom','tippro',$this->catippro->getCodpro());
+        if ($reg=='')
+        {
+          $this->deleteCatippro($this->catippro);
+          $this->Bitacora('Elimino');
+        }else{
+     	  $this->getRequest()->setError('delete', 'No se pudo borrar la registro seleccionado. Asegúrese de que no tiene ningún tipo de registros asociados.');
+          return $this->forward('almtippro', 'list');
+        }
+    }
+    catch (PropelException $e)
+    {
+      $this->getRequest()->setError('delete', 'No se pudo borrar la registro seleccionado. Asegúrese de que no tiene ningún tipo de registros asociados.');
+      return $this->forward('almtippro', 'list');
+    }
+
+    return $this->redirect('almtippro/list');
+  }
+
 
   public function setVars()
   {

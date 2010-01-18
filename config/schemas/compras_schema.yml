@@ -444,6 +444,9 @@ propel:
       primaryKey: true
       autoIncrement: true
       description: Identificador Único del registro
+    _uniques:
+      unique_caconpag_codconpag:
+        - codconpag
   cacorrel:
     corcom:
       type: NUMERIC
@@ -526,6 +529,9 @@ propel:
       primaryKey: true
       autoIncrement: true
       description: Identificador Único del registro
+    _uniques:
+      unique_cadefubi_codubi:
+        - codubi
   cadescto:
     coddesc:
       type: VARCHAR
@@ -777,20 +783,26 @@ propel:
     desforent:
       type: VARCHAR
       size: 255
+      required: true
     id:
       type: INTEGER
       required: true
       primaryKey: true
       autoIncrement: true
       description: Identificador Único del registro
+    _uniques:
+      unique_caforent_codforent:
+        - codforent
   camotfal:
     codfal:
       type: VARCHAR
       size: 3
       required: true
+      primaryKey: true
     desfal:
       type: VARCHAR
       size: 250
+      required: true
     tipfal:
       type: VARCHAR
       size: 3
@@ -892,6 +904,7 @@ propel:
       type: VARCHAR
       size: 6
       required: true
+      primaryKey: true
     nomram:
       type: VARCHAR
       size: 100
@@ -935,12 +948,16 @@ propel:
     desrazcom:
       type: VARCHAR
       size: 255
+      required: true
     id:
       type: INTEGER
       required: true
       primaryKey: true
       autoIncrement: true
       description: Identificador Único del registro
+    _uniques:
+      unique_carazcom_codrazcom:
+        - codrazcom
   carcpart:
     rcpart:
       type: VARCHAR
@@ -1017,6 +1034,7 @@ propel:
     nomrgo:
       type: VARCHAR
       size: 100
+      required: true
     codpre:
       type: VARCHAR
       size: 32
@@ -1042,6 +1060,9 @@ propel:
       primaryKey: true
       autoIncrement: true
       description: Identificador Único del registro
+    _uniques:
+      unique_carecarg_codrgo:
+        - codrgo
   carecaud:
     codrec:
       type: VARCHAR
@@ -1065,6 +1086,9 @@ propel:
     codtiprec:
       type: VARCHAR
       size: 4
+      required: true
+      foreignTable: catiprec
+      foreignReference: codtiprec
     observ:
       type: VARCHAR
       size: 100
@@ -1074,6 +1098,9 @@ propel:
       primaryKey: true
       autoIncrement: true
       description: Identificador Único del registro
+    _uniques:
+      unique_carecaud_codrec:
+        - codrec
   carecpro:
     codpro:
       type: VARCHAR
@@ -1226,6 +1253,8 @@ propel:
       type: VARCHAR
       size: 4
       required: true
+      foreignTable: carecarg
+      foreignReference: codrgo
     monrgo:
       type: NUMERIC
       size: 14
@@ -1350,15 +1379,20 @@ propel:
     codtipent:
       type: VARCHAR
       size: 3
+      required: true
     destipent:
       type: VARCHAR
       size: 50
+      required: true
     id:
       type: INTEGER
       required: true
       primaryKey: true
       autoIncrement: true
       description: Identificador Único del registro
+    _uniques:
+      unique_catipent_codtipent:
+        - codtipent
   catippro:
     codpro:
       type: VARCHAR
@@ -1388,25 +1422,34 @@ propel:
     destiprec:
       type: VARCHAR
       size: 100
+      required: true
     id:
       type: INTEGER
       required: true
       primaryKey: true
       autoIncrement: true
       description: Identificador Único del registro
+    _uniques:
+      unique_catiprec_codtiprec:
+        - codtiprec
   catipsal:
     codtipsal:
       type: VARCHAR
       size: 3
+      required: true
     destipsal:
       type: VARCHAR
       size: 50
+      required: true
     id:
       type: INTEGER
       required: true
       primaryKey: true
       autoIncrement: true
       description: Identificador Único del registro
+    _uniques:
+      unique_catipsal_codtipsal:
+        - codtipsal
   caartpar:
     codart:
       type: VARCHAR
@@ -1538,6 +1581,8 @@ propel:
       type: VARCHAR
       size: 15
       required: true
+      foreignTable: caprovee
+      foreignReference: codpro
     desord:
       type: VARCHAR
       size: 1000
@@ -1570,9 +1615,15 @@ propel:
     conpag:
       type: VARCHAR
       size: 1000
+      required: true
+      foreignTable: caconpag
+      foreignReference: codconpag
     forent:
       type: VARCHAR
       size: 1000
+      required: true
+      foreignTable: caforent
+      foreignReference: codforent
     fecanu:
       type: DATE
     tipmon:
@@ -1719,7 +1770,7 @@ propel:
     codpro:
       type: VARCHAR
       size: 15
-      required: true
+      required: true      
     nompro:
       type: VARCHAR
       size: 250
@@ -1786,7 +1837,7 @@ propel:
       size: 30
     codram:
       type: VARCHAR
-      size: 6
+      size: 6            
     fecinscir:
       type: DATE
     numinscir:
@@ -2140,6 +2191,9 @@ propel:
     codubi:
       type: VARCHAR
       size: 20
+      required: true
+      foreignTable: cadefubi
+      foreignReference: codubi
     exiact:
       type: NUMERIC
       size: 14
@@ -2158,6 +2212,9 @@ propel:
     codubi:
       type: VARCHAR
       size: 20
+      required: true
+      foreignTable: cadefubi
+      foreignReference: codubi
     id:
       type: INTEGER
       required: true
@@ -2194,6 +2251,9 @@ propel:
     tipmov:
       type: VARCHAR
       size: 3
+      required: true
+      foreignTable: catipent
+      foreignReference: codtipent
     id:
       type: INTEGER
       required: true
@@ -2230,6 +2290,9 @@ propel:
     tipmov:
       type: VARCHAR
       size: 3
+      required: true
+      foreignTable: catipsal
+      foreignReference: codtipsal
     observ:
       type: VARCHAR
       size: 1000
@@ -2307,6 +2370,8 @@ propel:
       type: VARCHAR
       size: 4
       required: true
+      foreignTable: carazcom
+      foreignReference: codrazcom
     id:
       type: INTEGER
       required: true
@@ -2360,6 +2425,8 @@ propel:
     codfal:
       type: VARCHAR
       size: 3
+      foreignTable: camotfal
+      foreignReference: codfal
     fecest:
       type: DATE
     serial:

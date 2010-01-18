@@ -176,6 +176,15 @@ abstract class BaseCaordcom extends BaseObject  implements Persistent {
 	protected $id;
 
 	
+	protected $aCaprovee;
+
+	
+	protected $aCaconpag;
+
+	
+	protected $aCaforent;
+
+	
 	protected $alreadyInSave = false;
 
 	
@@ -537,6 +546,11 @@ abstract class BaseCaordcom extends BaseObject  implements Persistent {
 	public function setFecord($v)
 	{
 
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecord] from input: " . var_export($v, true));
@@ -559,6 +573,10 @@ abstract class BaseCaordcom extends BaseObject  implements Persistent {
         $this->modifiedColumns[] = CaordcomPeer::CODPRO;
       }
   
+		if ($this->aCaprovee !== null && $this->aCaprovee->getCodpro() !== $v) {
+			$this->aCaprovee = null;
+		}
+
 	} 
 	
 	public function setDesord($v)
@@ -659,6 +677,10 @@ abstract class BaseCaordcom extends BaseObject  implements Persistent {
         $this->modifiedColumns[] = CaordcomPeer::CONPAG;
       }
   
+		if ($this->aCaconpag !== null && $this->aCaconpag->getCodconpag() !== $v) {
+			$this->aCaconpag = null;
+		}
+
 	} 
 	
 	public function setForent($v)
@@ -669,10 +691,19 @@ abstract class BaseCaordcom extends BaseObject  implements Persistent {
         $this->modifiedColumns[] = CaordcomPeer::FORENT;
       }
   
+		if ($this->aCaforent !== null && $this->aCaforent->getCodforent() !== $v) {
+			$this->aCaforent = null;
+		}
+
 	} 
 	
 	public function setFecanu($v)
 	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
@@ -931,6 +962,11 @@ abstract class BaseCaordcom extends BaseObject  implements Persistent {
 	public function setFecsigecof($v)
 	{
 
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecsigecof] from input: " . var_export($v, true));
@@ -1136,6 +1172,29 @@ abstract class BaseCaordcom extends BaseObject  implements Persistent {
 			$this->alreadyInSave = true;
 
 
+												
+			if ($this->aCaprovee !== null) {
+				if ($this->aCaprovee->isModified()) {
+					$affectedRows += $this->aCaprovee->save($con);
+				}
+				$this->setCaprovee($this->aCaprovee);
+			}
+
+			if ($this->aCaconpag !== null) {
+				if ($this->aCaconpag->isModified()) {
+					$affectedRows += $this->aCaconpag->save($con);
+				}
+				$this->setCaconpag($this->aCaconpag);
+			}
+
+			if ($this->aCaforent !== null) {
+				if ($this->aCaforent->isModified()) {
+					$affectedRows += $this->aCaforent->save($con);
+				}
+				$this->setCaforent($this->aCaforent);
+			}
+
+
 						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = CaordcomPeer::doInsert($this, $con);
@@ -1181,6 +1240,26 @@ abstract class BaseCaordcom extends BaseObject  implements Persistent {
 			$retval = null;
 
 			$failureMap = array();
+
+
+												
+			if ($this->aCaprovee !== null) {
+				if (!$this->aCaprovee->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aCaprovee->getValidationFailures());
+				}
+			}
+
+			if ($this->aCaconpag !== null) {
+				if (!$this->aCaconpag->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aCaconpag->getValidationFailures());
+				}
+			}
+
+			if ($this->aCaforent !== null) {
+				if (!$this->aCaforent->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aCaforent->getValidationFailures());
+				}
+			}
 
 
 			if (($retval = CaordcomPeer::doValidate($this, $columns)) !== true) {
@@ -1757,6 +1836,93 @@ abstract class BaseCaordcom extends BaseObject  implements Persistent {
 			self::$peer = new CaordcomPeer();
 		}
 		return self::$peer;
+	}
+
+	
+	public function setCaprovee($v)
+	{
+
+
+		if ($v === null) {
+			$this->setCodpro(NULL);
+		} else {
+			$this->setCodpro($v->getCodpro());
+		}
+
+
+		$this->aCaprovee = $v;
+	}
+
+
+	
+	public function getCaprovee($con = null)
+	{
+		if ($this->aCaprovee === null && (($this->codpro !== "" && $this->codpro !== null))) {
+						include_once 'lib/model/om/BaseCaproveePeer.php';
+
+			$this->aCaprovee = CaproveePeer::retrieveByPK($this->codpro, $con);
+
+			
+		}
+		return $this->aCaprovee;
+	}
+
+	
+	public function setCaconpag($v)
+	{
+
+
+		if ($v === null) {
+			$this->setConpag(NULL);
+		} else {
+			$this->setConpag($v->getCodconpag());
+		}
+
+
+		$this->aCaconpag = $v;
+	}
+
+
+	
+	public function getCaconpag($con = null)
+	{
+		if ($this->aCaconpag === null && (($this->conpag !== "" && $this->conpag !== null))) {
+						include_once 'lib/model/om/BaseCaconpagPeer.php';
+
+			$this->aCaconpag = CaconpagPeer::retrieveByPK($this->conpag, $con);
+
+			
+		}
+		return $this->aCaconpag;
+	}
+
+	
+	public function setCaforent($v)
+	{
+
+
+		if ($v === null) {
+			$this->setForent(NULL);
+		} else {
+			$this->setForent($v->getCodforent());
+		}
+
+
+		$this->aCaforent = $v;
+	}
+
+
+	
+	public function getCaforent($con = null)
+	{
+		if ($this->aCaforent === null && (($this->forent !== "" && $this->forent !== null))) {
+						include_once 'lib/model/om/BaseCaforentPeer.php';
+
+			$this->aCaforent = CaforentPeer::retrieveByPK($this->forent, $con);
+
+			
+		}
+		return $this->aCaforent;
 	}
 
 } 

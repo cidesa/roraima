@@ -182,6 +182,167 @@ abstract class BaseCaalmubiPeer {
 		}
 		return $results;
 	}
+
+	
+	public static function doCountJoinCadefubi(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(CaalmubiPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(CaalmubiPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(CaalmubiPeer::CODUBI, CadefubiPeer::CODUBI);
+
+		$rs = CaalmubiPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinCadefubi(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		CaalmubiPeer::addSelectColumns($c);
+		$startcol = (CaalmubiPeer::NUM_COLUMNS - CaalmubiPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+		CadefubiPeer::addSelectColumns($c);
+
+		$c->addJoin(CaalmubiPeer::CODUBI, CadefubiPeer::CODUBI);
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = CaalmubiPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = CadefubiPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol);
+
+			$newObject = true;
+			foreach($results as $temp_obj1) {
+				$temp_obj2 = $temp_obj1->getCadefubi(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+										$temp_obj2->addCaalmubi($obj1); 					break;
+				}
+			}
+			if ($newObject) {
+				$obj2->initCaalmubis();
+				$obj2->addCaalmubi($obj1); 			}
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doCountJoinAll(Criteria $criteria, $distinct = false, $con = null)
+	{
+		$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(CaalmubiPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(CaalmubiPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(CaalmubiPeer::CODUBI, CadefubiPeer::CODUBI);
+
+		$rs = CaalmubiPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinAll(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		CaalmubiPeer::addSelectColumns($c);
+		$startcol2 = (CaalmubiPeer::NUM_COLUMNS - CaalmubiPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+
+		CadefubiPeer::addSelectColumns($c);
+		$startcol3 = $startcol2 + CadefubiPeer::NUM_COLUMNS;
+
+		$c->addJoin(CaalmubiPeer::CODUBI, CadefubiPeer::CODUBI);
+
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = CaalmubiPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+
+					
+			$omClass = CadefubiPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol2);
+
+			$newObject = true;
+			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+				$temp_obj1 = $results[$j];
+				$temp_obj2 = $temp_obj1->getCadefubi(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+					$temp_obj2->addCaalmubi($obj1); 					break;
+				}
+			}
+
+			if ($newObject) {
+				$obj2->initCaalmubis();
+				$obj2->addCaalmubi($obj1);
+			}
+
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
 	
 	public static function getTableMap()
 	{

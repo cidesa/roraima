@@ -20,6 +20,9 @@ abstract class BaseCasolraz extends BaseObject  implements Persistent {
 	protected $id;
 
 	
+	protected $aCarazcom;
+
+	
 	protected $alreadyInSave = false;
 
 	
@@ -65,6 +68,10 @@ abstract class BaseCasolraz extends BaseObject  implements Persistent {
         $this->modifiedColumns[] = CasolrazPeer::CODRAZCOM;
       }
   
+		if ($this->aCarazcom !== null && $this->aCarazcom->getCodrazcom() !== $v) {
+			$this->aCarazcom = null;
+		}
+
 	} 
 	
 	public function setId($v)
@@ -170,6 +177,15 @@ abstract class BaseCasolraz extends BaseObject  implements Persistent {
 			$this->alreadyInSave = true;
 
 
+												
+			if ($this->aCarazcom !== null) {
+				if ($this->aCarazcom->isModified()) {
+					$affectedRows += $this->aCarazcom->save($con);
+				}
+				$this->setCarazcom($this->aCarazcom);
+			}
+
+
 						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = CasolrazPeer::doInsert($this, $con);
@@ -215,6 +231,14 @@ abstract class BaseCasolraz extends BaseObject  implements Persistent {
 			$retval = null;
 
 			$failureMap = array();
+
+
+												
+			if ($this->aCarazcom !== null) {
+				if (!$this->aCarazcom->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aCarazcom->getValidationFailures());
+				}
+			}
 
 
 			if (($retval = CasolrazPeer::doValidate($this, $columns)) !== true) {
@@ -362,6 +386,35 @@ abstract class BaseCasolraz extends BaseObject  implements Persistent {
 			self::$peer = new CasolrazPeer();
 		}
 		return self::$peer;
+	}
+
+	
+	public function setCarazcom($v)
+	{
+
+
+		if ($v === null) {
+			$this->setCodrazcom(NULL);
+		} else {
+			$this->setCodrazcom($v->getCodrazcom());
+		}
+
+
+		$this->aCarazcom = $v;
+	}
+
+
+	
+	public function getCarazcom($con = null)
+	{
+		if ($this->aCarazcom === null && (($this->codrazcom !== "" && $this->codrazcom !== null))) {
+						include_once 'lib/model/om/BaseCarazcomPeer.php';
+
+			$this->aCarazcom = CarazcomPeer::retrieveByPK($this->codrazcom, $con);
+
+			
+		}
+		return $this->aCarazcom;
 	}
 
 } 

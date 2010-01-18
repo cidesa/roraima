@@ -36,7 +36,7 @@ class CasolrazMapBuilder {
 
 		$tMap->addColumn('NUMSOL', 'Numsol', 'string', CreoleTypes::VARCHAR, true, 8);
 
-		$tMap->addColumn('CODRAZCOM', 'Codrazcom', 'string', CreoleTypes::VARCHAR, true, 4);
+		$tMap->addForeignKey('CODRAZCOM', 'Codrazcom', 'string', CreoleTypes::VARCHAR, 'carazcom', 'CODRAZCOM', true, 4);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 

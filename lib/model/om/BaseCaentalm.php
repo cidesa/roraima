@@ -48,6 +48,9 @@ abstract class BaseCaentalm extends BaseObject  implements Persistent {
 	protected $id;
 
 	
+	protected $aCatipent;
+
+	
 	protected $alreadyInSave = false;
 
 	
@@ -153,6 +156,11 @@ abstract class BaseCaentalm extends BaseObject  implements Persistent {
 	public function setFecrcp($v)
 	{
 
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecrcp] from input: " . var_export($v, true));
@@ -235,6 +243,10 @@ abstract class BaseCaentalm extends BaseObject  implements Persistent {
         $this->modifiedColumns[] = CaentalmPeer::TIPMOV;
       }
   
+		if ($this->aCatipent !== null && $this->aCatipent->getCodtipent() !== $v) {
+			$this->aCatipent = null;
+		}
+
 	} 
 	
 	public function setId($v)
@@ -354,6 +366,15 @@ abstract class BaseCaentalm extends BaseObject  implements Persistent {
 			$this->alreadyInSave = true;
 
 
+												
+			if ($this->aCatipent !== null) {
+				if ($this->aCatipent->isModified()) {
+					$affectedRows += $this->aCatipent->save($con);
+				}
+				$this->setCatipent($this->aCatipent);
+			}
+
+
 						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = CaentalmPeer::doInsert($this, $con);
@@ -399,6 +420,14 @@ abstract class BaseCaentalm extends BaseObject  implements Persistent {
 			$retval = null;
 
 			$failureMap = array();
+
+
+												
+			if ($this->aCatipent !== null) {
+				if (!$this->aCatipent->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aCatipent->getValidationFailures());
+				}
+			}
 
 
 			if (($retval = CaentalmPeer::doValidate($this, $columns)) !== true) {
@@ -623,6 +652,35 @@ abstract class BaseCaentalm extends BaseObject  implements Persistent {
 			self::$peer = new CaentalmPeer();
 		}
 		return self::$peer;
+	}
+
+	
+	public function setCatipent($v)
+	{
+
+
+		if ($v === null) {
+			$this->setTipmov(NULL);
+		} else {
+			$this->setTipmov($v->getCodtipent());
+		}
+
+
+		$this->aCatipent = $v;
+	}
+
+
+	
+	public function getCatipent($con = null)
+	{
+		if ($this->aCatipent === null && (($this->tipmov !== "" && $this->tipmov !== null))) {
+						include_once 'lib/model/om/BaseCatipentPeer.php';
+
+			$this->aCatipent = CatipentPeer::retrieveByPK($this->tipmov, $con);
+
+			
+		}
+		return $this->aCatipent;
 	}
 
 } 

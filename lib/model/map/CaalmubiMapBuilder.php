@@ -36,7 +36,7 @@ class CaalmubiMapBuilder {
 
 		$tMap->addColumn('CODALM', 'Codalm', 'string', CreoleTypes::VARCHAR, true, 6);
 
-		$tMap->addColumn('CODUBI', 'Codubi', 'string', CreoleTypes::VARCHAR, false, 20);
+		$tMap->addForeignKey('CODUBI', 'Codubi', 'string', CreoleTypes::VARCHAR, 'cadefubi', 'CODUBI', true, 20);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 

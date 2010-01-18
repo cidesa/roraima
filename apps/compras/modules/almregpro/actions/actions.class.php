@@ -668,36 +668,5 @@ public function executeAjax()
 	       }
   }
 
-  public function executeDelete()
-  {
-    $this->caprovee = CaproveePeer::retrieveByPk($this->getRequestParameter('id'));
-    $this->forward404Unless($this->caprovee);
-
-	$c = new Criteria();
-	$c->add(CaordcomPeer::CODPRO,$this->caprovee->getCodpro());
-	$caordcom = CaordcomPeer::doSelectOne($c);
-	if(!$caordcom){
-      try
-      {
-        $this->deleteCaprovee($this->caprovee);
-        $this->Bitacora('Elimino');
-      }
-      catch (PropelException $e)
-      {
-        $this->getRequest()->setError('delete', 'Could not delete the selected Caprovee. Make sure it does not have any associated items.');
-        return $this->forward('almregpro', 'list');
-      }
-
-      return $this->redirect('almregpro/list');
-	}else{
-      $this->getRequest()->setError('delete', 'Could not delete the selected Caprovee. Make sure it does not have any associated items.');
-      return $this->forward('almregpro', 'list');
-	}
-
-
-
-  }
-
-
 
 }

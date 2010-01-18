@@ -52,6 +52,9 @@ abstract class BaseCasalalm extends BaseObject  implements Persistent {
 	protected $id;
 
 	
+	protected $aCatipsal;
+
+	
 	protected $alreadyInSave = false;
 
 	
@@ -164,6 +167,11 @@ abstract class BaseCasalalm extends BaseObject  implements Persistent {
 	public function setFecsal($v)
 	{
 
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecsal] from input: " . var_export($v, true));
@@ -246,6 +254,10 @@ abstract class BaseCasalalm extends BaseObject  implements Persistent {
         $this->modifiedColumns[] = CasalalmPeer::TIPMOV;
       }
   
+		if ($this->aCatipsal !== null && $this->aCatipsal->getCodtipsal() !== $v) {
+			$this->aCatipsal = null;
+		}
+
 	} 
 	
 	public function setObserv($v)
@@ -377,6 +389,15 @@ abstract class BaseCasalalm extends BaseObject  implements Persistent {
 			$this->alreadyInSave = true;
 
 
+												
+			if ($this->aCatipsal !== null) {
+				if ($this->aCatipsal->isModified()) {
+					$affectedRows += $this->aCatipsal->save($con);
+				}
+				$this->setCatipsal($this->aCatipsal);
+			}
+
+
 						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = CasalalmPeer::doInsert($this, $con);
@@ -422,6 +443,14 @@ abstract class BaseCasalalm extends BaseObject  implements Persistent {
 			$retval = null;
 
 			$failureMap = array();
+
+
+												
+			if ($this->aCatipsal !== null) {
+				if (!$this->aCatipsal->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aCatipsal->getValidationFailures());
+				}
+			}
 
 
 			if (($retval = CasalalmPeer::doValidate($this, $columns)) !== true) {
@@ -657,6 +686,35 @@ abstract class BaseCasalalm extends BaseObject  implements Persistent {
 			self::$peer = new CasalalmPeer();
 		}
 		return self::$peer;
+	}
+
+	
+	public function setCatipsal($v)
+	{
+
+
+		if ($v === null) {
+			$this->setTipmov(NULL);
+		} else {
+			$this->setTipmov($v->getCodtipsal());
+		}
+
+
+		$this->aCatipsal = $v;
+	}
+
+
+	
+	public function getCatipsal($con = null)
+	{
+		if ($this->aCatipsal === null && (($this->tipmov !== "" && $this->tipmov !== null))) {
+						include_once 'lib/model/om/BaseCatipsalPeer.php';
+
+			$this->aCatipsal = CatipsalPeer::retrieveByPK($this->tipmov, $con);
+
+			
+		}
+		return $this->aCatipsal;
 	}
 
 } 

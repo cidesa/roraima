@@ -38,7 +38,7 @@ class CaordcomMapBuilder {
 
 		$tMap->addColumn('FECORD', 'Fecord', 'int', CreoleTypes::DATE, true, null);
 
-		$tMap->addColumn('CODPRO', 'Codpro', 'string', CreoleTypes::VARCHAR, true, 15);
+		$tMap->addForeignKey('CODPRO', 'Codpro', 'string', CreoleTypes::VARCHAR, 'caprovee', 'CODPRO', true, 15);
 
 		$tMap->addColumn('DESORD', 'Desord', 'string', CreoleTypes::VARCHAR, false, 1000);
 
@@ -58,9 +58,9 @@ class CaordcomMapBuilder {
 
 		$tMap->addColumn('AFEPRE', 'Afepre', 'string', CreoleTypes::VARCHAR, false, 1);
 
-		$tMap->addColumn('CONPAG', 'Conpag', 'string', CreoleTypes::VARCHAR, false, 1000);
+		$tMap->addForeignKey('CONPAG', 'Conpag', 'string', CreoleTypes::VARCHAR, 'caconpag', 'CODCONPAG', true, 1000);
 
-		$tMap->addColumn('FORENT', 'Forent', 'string', CreoleTypes::VARCHAR, false, 1000);
+		$tMap->addForeignKey('FORENT', 'Forent', 'string', CreoleTypes::VARCHAR, 'caforent', 'CODFORENT', true, 1000);
 
 		$tMap->addColumn('FECANU', 'Fecanu', 'int', CreoleTypes::DATE, false, null);
 

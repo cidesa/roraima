@@ -76,6 +76,9 @@ abstract class BaseCaartrcp extends BaseObject  implements Persistent {
 	protected $id;
 
 	
+	protected $aCamotfal;
+
+	
 	protected $alreadyInSave = false;
 
 	
@@ -341,10 +344,19 @@ abstract class BaseCaartrcp extends BaseObject  implements Persistent {
         $this->modifiedColumns[] = CaartrcpPeer::CODFAL;
       }
   
+		if ($this->aCamotfal !== null && $this->aCamotfal->getCodfal() !== $v) {
+			$this->aCamotfal = null;
+		}
+
 	} 
 	
 	public function setFecest($v)
 	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
@@ -521,6 +533,15 @@ abstract class BaseCaartrcp extends BaseObject  implements Persistent {
 			$this->alreadyInSave = true;
 
 
+												
+			if ($this->aCamotfal !== null) {
+				if ($this->aCamotfal->isModified()) {
+					$affectedRows += $this->aCamotfal->save($con);
+				}
+				$this->setCamotfal($this->aCamotfal);
+			}
+
+
 						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = CaartrcpPeer::doInsert($this, $con);
@@ -566,6 +587,14 @@ abstract class BaseCaartrcp extends BaseObject  implements Persistent {
 			$retval = null;
 
 			$failureMap = array();
+
+
+												
+			if ($this->aCamotfal !== null) {
+				if (!$this->aCamotfal->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aCamotfal->getValidationFailures());
+				}
+			}
 
 
 			if (($retval = CaartrcpPeer::doValidate($this, $columns)) !== true) {
@@ -867,6 +896,35 @@ abstract class BaseCaartrcp extends BaseObject  implements Persistent {
 			self::$peer = new CaartrcpPeer();
 		}
 		return self::$peer;
+	}
+
+	
+	public function setCamotfal($v)
+	{
+
+
+		if ($v === null) {
+			$this->setCodfal(NULL);
+		} else {
+			$this->setCodfal($v->getCodfal());
+		}
+
+
+		$this->aCamotfal = $v;
+	}
+
+
+	
+	public function getCamotfal($con = null)
+	{
+		if ($this->aCamotfal === null && (($this->codfal !== "" && $this->codfal !== null))) {
+						include_once 'lib/model/om/BaseCamotfalPeer.php';
+
+			$this->aCamotfal = CamotfalPeer::retrieveByPK($this->codfal, $con);
+
+			
+		}
+		return $this->aCamotfal;
 	}
 
 } 

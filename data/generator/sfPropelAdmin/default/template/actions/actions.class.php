@@ -105,7 +105,7 @@ class <?php echo $this->getGeneratedModuleName() ?>Actions extends sfActions
     }
     catch (PropelException $e)
     {
-      $this->getRequest()->setError('delete', 'Could not delete the selected <?php echo sfInflector::humanize($this->getSingularName()) ?>. Make sure it does not have any associated items.');
+      $this->getRequest()->setError('delete', 'No se pudo borrar la registro seleccionado. Asegúrese de que no tiene ningún tipo de registros asociados.');
       return $this->forward('<?php echo $this->getModuleName() ?>', 'list');
     }
 

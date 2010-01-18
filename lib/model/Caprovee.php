@@ -19,6 +19,12 @@ class Caprovee extends BaseCaprovee
   public $codtipesp='';
   public $destipesp='';
 
+   public function __toString()
+  {
+    return $this->codpro;
+  }
+
+
   public function hydrate(ResultSet $rs, $startcol = 1)
    {
       parent::hydrate($rs, $startcol);

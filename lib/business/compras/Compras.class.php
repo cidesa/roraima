@@ -2691,7 +2691,7 @@ class Compras {
      	$clasemodelo->delete();
      	return -1;
      }else{
-     	return 5;
+     	return 6;
      }
 
   }

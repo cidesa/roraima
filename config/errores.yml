@@ -18,6 +18,9 @@
 5:
   cod: 5
   msj: Por que Existen Datos que Depende de Este
+6:
+  cod: 6
+  msj: No se pudo borrar la registro seleccionado. Asegúrese de que no tiene ningún tipo de registros asociados.
 100:
   cod: 100
   msj: Nivel Anterior No Existe
@@ -30,6 +33,10 @@
 103:
   cod: 103
   msj: Ya existe una Orden de Servicio con ese Correlativo
+109:
+  cod: 109
+  msj: No se ha podido modificar esta Orden de Compra por que ya fue causada y/o pagada.
+
 # Rangos de Cotizaciones (Almdefcot)
 110:
   cod: 110

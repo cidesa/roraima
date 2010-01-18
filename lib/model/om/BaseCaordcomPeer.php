@@ -377,6 +377,719 @@ abstract class BaseCaordcomPeer {
 		}
 		return $results;
 	}
+
+	
+	public static function doCountJoinCaprovee(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(CaordcomPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(CaordcomPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(CaordcomPeer::CODPRO, CaproveePeer::CODPRO);
+
+		$rs = CaordcomPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doCountJoinCaconpag(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(CaordcomPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(CaordcomPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(CaordcomPeer::CONPAG, CaconpagPeer::CODCONPAG);
+
+		$rs = CaordcomPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doCountJoinCaforent(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(CaordcomPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(CaordcomPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(CaordcomPeer::FORENT, CaforentPeer::CODFORENT);
+
+		$rs = CaordcomPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinCaprovee(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		CaordcomPeer::addSelectColumns($c);
+		$startcol = (CaordcomPeer::NUM_COLUMNS - CaordcomPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+		CaproveePeer::addSelectColumns($c);
+
+		$c->addJoin(CaordcomPeer::CODPRO, CaproveePeer::CODPRO);
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = CaordcomPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = CaproveePeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol);
+
+			$newObject = true;
+			foreach($results as $temp_obj1) {
+				$temp_obj2 = $temp_obj1->getCaprovee(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+										$temp_obj2->addCaordcom($obj1); 					break;
+				}
+			}
+			if ($newObject) {
+				$obj2->initCaordcoms();
+				$obj2->addCaordcom($obj1); 			}
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doSelectJoinCaconpag(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		CaordcomPeer::addSelectColumns($c);
+		$startcol = (CaordcomPeer::NUM_COLUMNS - CaordcomPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+		CaconpagPeer::addSelectColumns($c);
+
+		$c->addJoin(CaordcomPeer::CONPAG, CaconpagPeer::CODCONPAG);
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = CaordcomPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = CaconpagPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol);
+
+			$newObject = true;
+			foreach($results as $temp_obj1) {
+				$temp_obj2 = $temp_obj1->getCaconpag(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+										$temp_obj2->addCaordcom($obj1); 					break;
+				}
+			}
+			if ($newObject) {
+				$obj2->initCaordcoms();
+				$obj2->addCaordcom($obj1); 			}
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doSelectJoinCaforent(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		CaordcomPeer::addSelectColumns($c);
+		$startcol = (CaordcomPeer::NUM_COLUMNS - CaordcomPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+		CaforentPeer::addSelectColumns($c);
+
+		$c->addJoin(CaordcomPeer::FORENT, CaforentPeer::CODFORENT);
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = CaordcomPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = CaforentPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol);
+
+			$newObject = true;
+			foreach($results as $temp_obj1) {
+				$temp_obj2 = $temp_obj1->getCaforent(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+										$temp_obj2->addCaordcom($obj1); 					break;
+				}
+			}
+			if ($newObject) {
+				$obj2->initCaordcoms();
+				$obj2->addCaordcom($obj1); 			}
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doCountJoinAll(Criteria $criteria, $distinct = false, $con = null)
+	{
+		$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(CaordcomPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(CaordcomPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(CaordcomPeer::CODPRO, CaproveePeer::CODPRO);
+
+		$criteria->addJoin(CaordcomPeer::CONPAG, CaconpagPeer::CODCONPAG);
+
+		$criteria->addJoin(CaordcomPeer::FORENT, CaforentPeer::CODFORENT);
+
+		$rs = CaordcomPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinAll(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		CaordcomPeer::addSelectColumns($c);
+		$startcol2 = (CaordcomPeer::NUM_COLUMNS - CaordcomPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+
+		CaproveePeer::addSelectColumns($c);
+		$startcol3 = $startcol2 + CaproveePeer::NUM_COLUMNS;
+
+		CaconpagPeer::addSelectColumns($c);
+		$startcol4 = $startcol3 + CaconpagPeer::NUM_COLUMNS;
+
+		CaforentPeer::addSelectColumns($c);
+		$startcol5 = $startcol4 + CaforentPeer::NUM_COLUMNS;
+
+		$c->addJoin(CaordcomPeer::CODPRO, CaproveePeer::CODPRO);
+
+		$c->addJoin(CaordcomPeer::CONPAG, CaconpagPeer::CODCONPAG);
+
+		$c->addJoin(CaordcomPeer::FORENT, CaforentPeer::CODFORENT);
+
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = CaordcomPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+
+					
+			$omClass = CaproveePeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol2);
+
+			$newObject = true;
+			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+				$temp_obj1 = $results[$j];
+				$temp_obj2 = $temp_obj1->getCaprovee(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+					$temp_obj2->addCaordcom($obj1); 					break;
+				}
+			}
+
+			if ($newObject) {
+				$obj2->initCaordcoms();
+				$obj2->addCaordcom($obj1);
+			}
+
+
+					
+			$omClass = CaconpagPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj3 = new $cls();
+			$obj3->hydrate($rs, $startcol3);
+
+			$newObject = true;
+			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+				$temp_obj1 = $results[$j];
+				$temp_obj3 = $temp_obj1->getCaconpag(); 				if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+					$newObject = false;
+					$temp_obj3->addCaordcom($obj1); 					break;
+				}
+			}
+
+			if ($newObject) {
+				$obj3->initCaordcoms();
+				$obj3->addCaordcom($obj1);
+			}
+
+
+					
+			$omClass = CaforentPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj4 = new $cls();
+			$obj4->hydrate($rs, $startcol4);
+
+			$newObject = true;
+			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+				$temp_obj1 = $results[$j];
+				$temp_obj4 = $temp_obj1->getCaforent(); 				if ($temp_obj4->getPrimaryKey() === $obj4->getPrimaryKey()) {
+					$newObject = false;
+					$temp_obj4->addCaordcom($obj1); 					break;
+				}
+			}
+
+			if ($newObject) {
+				$obj4->initCaordcoms();
+				$obj4->addCaordcom($obj1);
+			}
+
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doCountJoinAllExceptCaprovee(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(CaordcomPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(CaordcomPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(CaordcomPeer::CONPAG, CaconpagPeer::CODCONPAG);
+
+		$criteria->addJoin(CaordcomPeer::FORENT, CaforentPeer::CODFORENT);
+
+		$rs = CaordcomPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doCountJoinAllExceptCaconpag(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(CaordcomPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(CaordcomPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(CaordcomPeer::CODPRO, CaproveePeer::CODPRO);
+
+		$criteria->addJoin(CaordcomPeer::FORENT, CaforentPeer::CODFORENT);
+
+		$rs = CaordcomPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doCountJoinAllExceptCaforent(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(CaordcomPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(CaordcomPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(CaordcomPeer::CODPRO, CaproveePeer::CODPRO);
+
+		$criteria->addJoin(CaordcomPeer::CONPAG, CaconpagPeer::CODCONPAG);
+
+		$rs = CaordcomPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinAllExceptCaprovee(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+								if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		CaordcomPeer::addSelectColumns($c);
+		$startcol2 = (CaordcomPeer::NUM_COLUMNS - CaordcomPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+
+		CaconpagPeer::addSelectColumns($c);
+		$startcol3 = $startcol2 + CaconpagPeer::NUM_COLUMNS;
+
+		CaforentPeer::addSelectColumns($c);
+		$startcol4 = $startcol3 + CaforentPeer::NUM_COLUMNS;
+
+		$c->addJoin(CaordcomPeer::CONPAG, CaconpagPeer::CODCONPAG);
+
+		$c->addJoin(CaordcomPeer::FORENT, CaforentPeer::CODFORENT);
+
+
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = CaordcomPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = CaconpagPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj2  = new $cls();
+			$obj2->hydrate($rs, $startcol2);
+
+			$newObject = true;
+			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+				$temp_obj1 = $results[$j];
+				$temp_obj2 = $temp_obj1->getCaconpag(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+					$temp_obj2->addCaordcom($obj1);
+					break;
+				}
+			}
+
+			if ($newObject) {
+				$obj2->initCaordcoms();
+				$obj2->addCaordcom($obj1);
+			}
+
+			$omClass = CaforentPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj3  = new $cls();
+			$obj3->hydrate($rs, $startcol3);
+
+			$newObject = true;
+			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+				$temp_obj1 = $results[$j];
+				$temp_obj3 = $temp_obj1->getCaforent(); 				if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+					$newObject = false;
+					$temp_obj3->addCaordcom($obj1);
+					break;
+				}
+			}
+
+			if ($newObject) {
+				$obj3->initCaordcoms();
+				$obj3->addCaordcom($obj1);
+			}
+
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doSelectJoinAllExceptCaconpag(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+								if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		CaordcomPeer::addSelectColumns($c);
+		$startcol2 = (CaordcomPeer::NUM_COLUMNS - CaordcomPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+
+		CaproveePeer::addSelectColumns($c);
+		$startcol3 = $startcol2 + CaproveePeer::NUM_COLUMNS;
+
+		CaforentPeer::addSelectColumns($c);
+		$startcol4 = $startcol3 + CaforentPeer::NUM_COLUMNS;
+
+		$c->addJoin(CaordcomPeer::CODPRO, CaproveePeer::CODPRO);
+
+		$c->addJoin(CaordcomPeer::FORENT, CaforentPeer::CODFORENT);
+
+
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = CaordcomPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = CaproveePeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj2  = new $cls();
+			$obj2->hydrate($rs, $startcol2);
+
+			$newObject = true;
+			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+				$temp_obj1 = $results[$j];
+				$temp_obj2 = $temp_obj1->getCaprovee(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+					$temp_obj2->addCaordcom($obj1);
+					break;
+				}
+			}
+
+			if ($newObject) {
+				$obj2->initCaordcoms();
+				$obj2->addCaordcom($obj1);
+			}
+
+			$omClass = CaforentPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj3  = new $cls();
+			$obj3->hydrate($rs, $startcol3);
+
+			$newObject = true;
+			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+				$temp_obj1 = $results[$j];
+				$temp_obj3 = $temp_obj1->getCaforent(); 				if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+					$newObject = false;
+					$temp_obj3->addCaordcom($obj1);
+					break;
+				}
+			}
+
+			if ($newObject) {
+				$obj3->initCaordcoms();
+				$obj3->addCaordcom($obj1);
+			}
+
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doSelectJoinAllExceptCaforent(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+								if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		CaordcomPeer::addSelectColumns($c);
+		$startcol2 = (CaordcomPeer::NUM_COLUMNS - CaordcomPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+
+		CaproveePeer::addSelectColumns($c);
+		$startcol3 = $startcol2 + CaproveePeer::NUM_COLUMNS;
+
+		CaconpagPeer::addSelectColumns($c);
+		$startcol4 = $startcol3 + CaconpagPeer::NUM_COLUMNS;
+
+		$c->addJoin(CaordcomPeer::CODPRO, CaproveePeer::CODPRO);
+
+		$c->addJoin(CaordcomPeer::CONPAG, CaconpagPeer::CODCONPAG);
+
+
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = CaordcomPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = CaproveePeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj2  = new $cls();
+			$obj2->hydrate($rs, $startcol2);
+
+			$newObject = true;
+			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+				$temp_obj1 = $results[$j];
+				$temp_obj2 = $temp_obj1->getCaprovee(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+					$temp_obj2->addCaordcom($obj1);
+					break;
+				}
+			}
+
+			if ($newObject) {
+				$obj2->initCaordcoms();
+				$obj2->addCaordcom($obj1);
+			}
+
+			$omClass = CaconpagPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj3  = new $cls();
+			$obj3->hydrate($rs, $startcol3);
+
+			$newObject = true;
+			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+				$temp_obj1 = $results[$j];
+				$temp_obj3 = $temp_obj1->getCaconpag(); 				if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+					$newObject = false;
+					$temp_obj3->addCaordcom($obj1);
+					break;
+				}
+			}
+
+			if ($newObject) {
+				$obj3->initCaordcoms();
+				$obj3->addCaordcom($obj1);
+			}
+
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
 	
 	public static function getTableMap()
 	{
