@@ -175,7 +175,7 @@ $this->Bitacora('Guardo');
    * en el formulario.
    *
    */
-  public function executeDelete()
+  /*public function executeDelete()
   {
     $this->cadefubi = CadefubiPeer::retrieveByPk($this->getRequestParameter('id'));
     $this->forward404Unless($this->cadefubi);
@@ -203,5 +203,11 @@ $this->Bitacora('Guardo');
 
 	    return $this->redirect('almdefubi/list');
      }//else
+  }*/
+
+  protected function deleteCadefubi($cadefubi)
+  {
+    Herramientas::EliminarRegistro('Caalmubi','Codubi',$this->cadefubi->getCodubi());
+    $cadefubi->delete();
   }
 }

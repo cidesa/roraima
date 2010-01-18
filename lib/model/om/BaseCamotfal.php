@@ -24,6 +24,12 @@ abstract class BaseCamotfal extends BaseObject  implements Persistent {
 	protected $id;
 
 	
+	protected $collCaartrcps;
+
+	
+	protected $lastCaartrcpCriteria = null;
+
+	
 	protected $alreadyInSave = false;
 
 	
@@ -204,6 +210,14 @@ abstract class BaseCamotfal extends BaseObject  implements Persistent {
 				}
 				$this->resetModified(); 			}
 
+			if ($this->collCaartrcps !== null) {
+				foreach($this->collCaartrcps as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
+
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
@@ -244,6 +258,14 @@ abstract class BaseCamotfal extends BaseObject  implements Persistent {
 				$failureMap = array_merge($failureMap, $retval);
 			}
 
+
+				if ($this->collCaartrcps !== null) {
+					foreach($this->collCaartrcps as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
 
 
 			$this->alreadyInValidation = false;
@@ -347,6 +369,7 @@ abstract class BaseCamotfal extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(CamotfalPeer::DATABASE_NAME);
 
+		$criteria->add(CamotfalPeer::CODFAL, $this->codfal);
 		$criteria->add(CamotfalPeer::ID, $this->id);
 
 		return $criteria;
@@ -355,28 +378,46 @@ abstract class BaseCamotfal extends BaseObject  implements Persistent {
 	
 	public function getPrimaryKey()
 	{
-		return $this->getId();
+		$pks = array();
+
+		$pks[0] = $this->getCodfal();
+
+		$pks[1] = $this->getId();
+
+		return $pks;
 	}
 
 	
-	public function setPrimaryKey($key)
+	public function setPrimaryKey($keys)
 	{
-		$this->setId($key);
+
+		$this->setCodfal($keys[0]);
+
+		$this->setId($keys[1]);
+
 	}
 
 	
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
-		$copyObj->setCodfal($this->codfal);
-
 		$copyObj->setDesfal($this->desfal);
 
 		$copyObj->setTipfal($this->tipfal);
 
 
+		if ($deepCopy) {
+									$copyObj->setNew(false);
+
+			foreach($this->getCaartrcps() as $relObj) {
+				$copyObj->addCaartrcp($relObj->copy($deepCopy));
+			}
+
+		} 
+
 		$copyObj->setNew(true);
 
+		$copyObj->setCodfal(NULL); 
 		$copyObj->setId(NULL); 
 	}
 
@@ -396,6 +437,76 @@ abstract class BaseCamotfal extends BaseObject  implements Persistent {
 			self::$peer = new CamotfalPeer();
 		}
 		return self::$peer;
+	}
+
+	
+	public function initCaartrcps()
+	{
+		if ($this->collCaartrcps === null) {
+			$this->collCaartrcps = array();
+		}
+	}
+
+	
+	public function getCaartrcps($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseCaartrcpPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCaartrcps === null) {
+			if ($this->isNew()) {
+			   $this->collCaartrcps = array();
+			} else {
+
+				$criteria->add(CaartrcpPeer::CODFAL, $this->getCodfal());
+
+				CaartrcpPeer::addSelectColumns($criteria);
+				$this->collCaartrcps = CaartrcpPeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(CaartrcpPeer::CODFAL, $this->getCodfal());
+
+				CaartrcpPeer::addSelectColumns($criteria);
+				if (!isset($this->lastCaartrcpCriteria) || !$this->lastCaartrcpCriteria->equals($criteria)) {
+					$this->collCaartrcps = CaartrcpPeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastCaartrcpCriteria = $criteria;
+		return $this->collCaartrcps;
+	}
+
+	
+	public function countCaartrcps($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/om/BaseCaartrcpPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(CaartrcpPeer::CODFAL, $this->getCodfal());
+
+		return CaartrcpPeer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addCaartrcp(Caartrcp $l)
+	{
+		$this->collCaartrcps[] = $l;
+		$l->setCamotfal($this);
 	}
 
 } 

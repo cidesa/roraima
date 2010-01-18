@@ -112,8 +112,8 @@ abstract class BaseCamotfalPeer {
 
 	}
 
-	const COUNT = 'COUNT(camotfal.ID)';
-	const COUNT_DISTINCT = 'COUNT(DISTINCT camotfal.ID)';
+	const COUNT = 'COUNT(camotfal.CODFAL)';
+	const COUNT_DISTINCT = 'COUNT(DISTINCT camotfal.CODFAL)';
 
 	
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
@@ -237,6 +237,9 @@ abstract class BaseCamotfalPeer {
 
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; 
+			$comparison = $criteria->getComparison(CamotfalPeer::CODFAL);
+			$selectCriteria->add(CamotfalPeer::CODFAL, $criteria->remove(CamotfalPeer::CODFAL), $comparison);
+
 			$comparison = $criteria->getComparison(CamotfalPeer::ID);
 			$selectCriteria->add(CamotfalPeer::ID, $criteria->remove(CamotfalPeer::ID), $comparison);
 
@@ -277,7 +280,20 @@ abstract class BaseCamotfalPeer {
 			$criteria = $values->buildPkeyCriteria();
 		} else {
 						$criteria = new Criteria(self::DATABASE_NAME);
-			$criteria->add(CamotfalPeer::ID, (array) $values, Criteria::IN);
+												if(count($values) == count($values, COUNT_RECURSIVE))
+			{
+								$values = array($values);
+			}
+			$vals = array();
+			foreach($values as $value)
+			{
+
+				$vals[0][] = $value[0];
+				$vals[1][] = $value[1];
+			}
+
+			$criteria->add(CamotfalPeer::CODFAL, $vals[0], Criteria::IN);
+			$criteria->add(CamotfalPeer::ID, $vals[1], Criteria::IN);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -331,40 +347,17 @@ abstract class BaseCamotfalPeer {
 	}
 
 	
-	public static function retrieveByPK($pk, $con = null)
-	{
+	public static function retrieveByPK( $codfal, $id, $con = null) {
 		if ($con === null) {
 			$con = Propel::getConnection(self::DATABASE_NAME);
 		}
-
-		$criteria = new Criteria(CamotfalPeer::DATABASE_NAME);
-
-		$criteria->add(CamotfalPeer::ID, $pk);
-
-
+		$criteria = new Criteria();
+		$criteria->add(CamotfalPeer::CODFAL, $codfal);
+		$criteria->add(CamotfalPeer::ID, $id);
 		$v = CamotfalPeer::doSelect($criteria, $con);
 
-		return !empty($v) > 0 ? $v[0] : null;
+		return !empty($v) ? $v[0] : null;
 	}
-
-	
-	public static function retrieveByPKs($pks, $con = null)
-	{
-		if ($con === null) {
-			$con = Propel::getConnection(self::DATABASE_NAME);
-		}
-
-		$objs = null;
-		if (empty($pks)) {
-			$objs = array();
-		} else {
-			$criteria = new Criteria();
-			$criteria->add(CamotfalPeer::ID, $pks, Criteria::IN);
-			$objs = CamotfalPeer::doSelect($criteria, $con);
-		}
-		return $objs;
-	}
-
 } 
 if (Propel::isInit()) {
 			try {

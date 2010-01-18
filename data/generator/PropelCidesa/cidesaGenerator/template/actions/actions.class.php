@@ -149,7 +149,7 @@ class <?php echo $this->getGeneratedModuleName() ?>Actions extends sfActions
     }
     catch (PropelException $e)
     {
-      $this->getRequest()->setError('delete', 'No se puede eliminar porque tiene registros asociados.');
+      $this->getRequest()->setError('delete', 'No se pudo borrar la registro seleccionado. Asegúrese de que no tiene ningún tipo de registros asociados.');
       return $this->forward('<?php echo $this->getModuleName() ?>', 'list');
     }
 
@@ -357,7 +357,7 @@ $column = sfPropelManyToMany::getColumn($class, $through_class);
       //return -1;
 
     } catch (Exception $ex) {
-      $this->coderr = 0;
+      $this->coderr = 6;
       $err = Herramientas::obtenerMensajeError($this->coderr);
       $this->getRequest()->setError('delete',$err);
       $this->updateError();

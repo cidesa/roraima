@@ -222,6 +222,167 @@ abstract class BaseCasalalmPeer {
 		}
 		return $results;
 	}
+
+	
+	public static function doCountJoinCatipsal(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(CasalalmPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(CasalalmPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(CasalalmPeer::TIPMOV, CatipsalPeer::CODTIPSAL);
+
+		$rs = CasalalmPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinCatipsal(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		CasalalmPeer::addSelectColumns($c);
+		$startcol = (CasalalmPeer::NUM_COLUMNS - CasalalmPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+		CatipsalPeer::addSelectColumns($c);
+
+		$c->addJoin(CasalalmPeer::TIPMOV, CatipsalPeer::CODTIPSAL);
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = CasalalmPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = CatipsalPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol);
+
+			$newObject = true;
+			foreach($results as $temp_obj1) {
+				$temp_obj2 = $temp_obj1->getCatipsal(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+										$temp_obj2->addCasalalm($obj1); 					break;
+				}
+			}
+			if ($newObject) {
+				$obj2->initCasalalms();
+				$obj2->addCasalalm($obj1); 			}
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doCountJoinAll(Criteria $criteria, $distinct = false, $con = null)
+	{
+		$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(CasalalmPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(CasalalmPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(CasalalmPeer::TIPMOV, CatipsalPeer::CODTIPSAL);
+
+		$rs = CasalalmPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinAll(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		CasalalmPeer::addSelectColumns($c);
+		$startcol2 = (CasalalmPeer::NUM_COLUMNS - CasalalmPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+
+		CatipsalPeer::addSelectColumns($c);
+		$startcol3 = $startcol2 + CatipsalPeer::NUM_COLUMNS;
+
+		$c->addJoin(CasalalmPeer::TIPMOV, CatipsalPeer::CODTIPSAL);
+
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = CasalalmPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+
+					
+			$omClass = CatipsalPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol2);
+
+			$newObject = true;
+			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+				$temp_obj1 = $results[$j];
+				$temp_obj2 = $temp_obj1->getCatipsal(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+					$temp_obj2->addCasalalm($obj1); 					break;
+				}
+			}
+
+			if ($newObject) {
+				$obj2->initCasalalms();
+				$obj2->addCasalalm($obj1);
+			}
+
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
 	
 	public static function getTableMap()
 	{

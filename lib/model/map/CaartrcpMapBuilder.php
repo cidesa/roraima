@@ -56,7 +56,7 @@ class CaartrcpMapBuilder {
 
 		$tMap->addColumn('CANASILOT', 'Canasilot', 'double', CreoleTypes::NUMERIC, false, 14);
 
-		$tMap->addColumn('CODFAL', 'Codfal', 'string', CreoleTypes::VARCHAR, false, 3);
+		$tMap->addForeignKey('CODFAL', 'Codfal', 'string', CreoleTypes::VARCHAR, 'camotfal', 'CODFAL', false, 3);
 
 		$tMap->addColumn('FECEST', 'Fecest', 'int', CreoleTypes::DATE, false, null);
 

@@ -36,7 +36,7 @@ class CatiprecMapBuilder {
 
 		$tMap->addColumn('CODTIPREC', 'Codtiprec', 'string', CreoleTypes::VARCHAR, true, 4);
 
-		$tMap->addColumn('DESTIPREC', 'Destiprec', 'string', CreoleTypes::VARCHAR, false, 100);
+		$tMap->addColumn('DESTIPREC', 'Destiprec', 'string', CreoleTypes::VARCHAR, true, 100);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 

@@ -315,6 +315,7 @@ abstract class BaseCaramart extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(CaramartPeer::DATABASE_NAME);
 
+		$criteria->add(CaramartPeer::RAMART, $this->ramart);
 		$criteria->add(CaramartPeer::ID, $this->id);
 
 		return $criteria;
@@ -323,26 +324,35 @@ abstract class BaseCaramart extends BaseObject  implements Persistent {
 	
 	public function getPrimaryKey()
 	{
-		return $this->getId();
+		$pks = array();
+
+		$pks[0] = $this->getRamart();
+
+		$pks[1] = $this->getId();
+
+		return $pks;
 	}
 
 	
-	public function setPrimaryKey($key)
+	public function setPrimaryKey($keys)
 	{
-		$this->setId($key);
+
+		$this->setRamart($keys[0]);
+
+		$this->setId($keys[1]);
+
 	}
 
 	
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
-		$copyObj->setRamart($this->ramart);
-
 		$copyObj->setNomram($this->nomram);
 
 
 		$copyObj->setNew(true);
 
+		$copyObj->setRamart(NULL); 
 		$copyObj->setId(NULL); 
 	}
 

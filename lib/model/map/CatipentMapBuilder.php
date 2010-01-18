@@ -34,9 +34,9 @@ class CatipentMapBuilder {
 
 		$tMap->setPrimaryKeyMethodInfo('catipent_SEQ');
 
-		$tMap->addColumn('CODTIPENT', 'Codtipent', 'string', CreoleTypes::VARCHAR, false, 3);
+		$tMap->addColumn('CODTIPENT', 'Codtipent', 'string', CreoleTypes::VARCHAR, true, 3);
 
-		$tMap->addColumn('DESTIPENT', 'Destipent', 'string', CreoleTypes::VARCHAR, false, 50);
+		$tMap->addColumn('DESTIPENT', 'Destipent', 'string', CreoleTypes::VARCHAR, true, 50);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 

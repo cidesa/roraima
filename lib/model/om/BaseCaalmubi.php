@@ -20,6 +20,9 @@ abstract class BaseCaalmubi extends BaseObject  implements Persistent {
 	protected $id;
 
 	
+	protected $aCadefubi;
+
+	
 	protected $alreadyInSave = false;
 
 	
@@ -65,6 +68,10 @@ abstract class BaseCaalmubi extends BaseObject  implements Persistent {
         $this->modifiedColumns[] = CaalmubiPeer::CODUBI;
       }
   
+		if ($this->aCadefubi !== null && $this->aCadefubi->getCodubi() !== $v) {
+			$this->aCadefubi = null;
+		}
+
 	} 
 	
 	public function setId($v)
@@ -170,6 +177,15 @@ abstract class BaseCaalmubi extends BaseObject  implements Persistent {
 			$this->alreadyInSave = true;
 
 
+												
+			if ($this->aCadefubi !== null) {
+				if ($this->aCadefubi->isModified()) {
+					$affectedRows += $this->aCadefubi->save($con);
+				}
+				$this->setCadefubi($this->aCadefubi);
+			}
+
+
 						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = CaalmubiPeer::doInsert($this, $con);
@@ -215,6 +231,14 @@ abstract class BaseCaalmubi extends BaseObject  implements Persistent {
 			$retval = null;
 
 			$failureMap = array();
+
+
+												
+			if ($this->aCadefubi !== null) {
+				if (!$this->aCadefubi->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aCadefubi->getValidationFailures());
+				}
+			}
 
 
 			if (($retval = CaalmubiPeer::doValidate($this, $columns)) !== true) {
@@ -362,6 +386,35 @@ abstract class BaseCaalmubi extends BaseObject  implements Persistent {
 			self::$peer = new CaalmubiPeer();
 		}
 		return self::$peer;
+	}
+
+	
+	public function setCadefubi($v)
+	{
+
+
+		if ($v === null) {
+			$this->setCodubi(NULL);
+		} else {
+			$this->setCodubi($v->getCodubi());
+		}
+
+
+		$this->aCadefubi = $v;
+	}
+
+
+	
+	public function getCadefubi($con = null)
+	{
+		if ($this->aCadefubi === null && (($this->codubi !== "" && $this->codubi !== null))) {
+						include_once 'lib/model/om/BaseCadefubiPeer.php';
+
+			$this->aCadefubi = CadefubiPeer::retrieveByPK($this->codubi, $con);
+
+			
+		}
+		return $this->aCadefubi;
 	}
 
 } 
