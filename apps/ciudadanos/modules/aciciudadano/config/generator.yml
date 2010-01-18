@@ -5,14 +5,14 @@ generator:
     theme:            cidesaGenerator
 
     fields:
-      cedciu:      { name: Cédula, params: size=10 }
-      nomciu:      { name: Nombre, params: size=60 }
-      apeciu:      { name: Apellido, params: size=60 }
-      _tipo:       { name: Pertenece a, params: size=60 } # Cooperativa, Particular, Consejo Comunal, Empresa, Organismo del Estado
-      _sexo:       { name: Teléfono, params: size=20 }
+      cedciu:      { name: Cédula, params: size=10 maxlength=10 }
+      nomciu:      { name: Nombre, params: size=60 maxlength=60 }
+      apeciu:      { name: Apellido, params: size=60 maxlength=60 }
+      _tipo:       { name: Pertenece a, params: size=60 maxlength=60 } # Cooperativa, Particular, Consejo Comunal, Empresa, Organismo del Estado
+      _sexo:       { name: Teléfono, params: size=20 maxlength=20 }
 
       fecnac:      { name: Fecha Nacimiento }
-      edaact:      { name: Edad, params: size=4  }
+      edaact:      { name: Edad, params: size=4 maxlength=4 }
       pais:        { name: Pais Nacimiento }
       conext:      { name: Con Ext }
       lugnac:      { name: Lugar de Nacimiento }

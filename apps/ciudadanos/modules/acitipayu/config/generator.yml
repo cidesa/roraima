@@ -4,8 +4,8 @@ generator:
     model_class:      Attipayu
     theme:            cidesaGenerator
     fields:
-      codayu:      { name: Código }
-      desayu:      { name: Descripción }
+      codayu:      { name: Código, params: size=8 maxlength=8 }
+      desayu:      { name: Descripción, params: size=50 maxlength=50 }
       codpre:      { name: Código Presupuestario }
     list:
       title:          Definición de Tipos de Donaciones

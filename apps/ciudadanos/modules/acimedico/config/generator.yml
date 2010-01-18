@@ -5,9 +5,9 @@ generator:
     theme:            cidesaGenerator
 
     fields:
-      cedrifmed:      { name: Rif/Cédula, params: size=15 }
-      nombremed:      { name: Nombre, params: size=60 }
-      apellimed:      { name: Apellido, params: size=60 }
+      cedrifmed:      { name: Rif/Cédula, params: size=15 maxlength=15 }
+      nombremed:      { name: Nombre, params: size=60 maxlength=60 }
+      apellimed:      { name: Apellido, params: size=60 maxlength=60 }
       dirhabmed:      { name: Dirección Habitación }
       dirtramed:      { name: Dirección Trabajo }
       telunomed:      { name: Telefono Uno}

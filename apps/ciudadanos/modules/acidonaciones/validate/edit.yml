@@ -10,7 +10,7 @@ names:
   atdonaciones{coddon}:
     required:  Yes
     required_msg: Debe tipear un código
-    validators: Vstring_1_50_0
+    validators: Vstring_1_50_0, uniquevalidator
 
 
   atdonaciones{desdon}:
@@ -55,3 +55,9 @@ Vstring_1_50_2:
         max_error: La descripción no puede pasar mas de 50 caracteres
 
 
+uniquevalidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:        atdonaciones
+        column:       coddon
+        unique_error: El registro ya Existe intente con otro.

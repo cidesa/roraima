@@ -8,6 +8,7 @@ names:
   atmedico{cedrifmed}:
     required:  Yes
     required_msg: Cédula/Rif es un campo requerido
+    validators: uniquevalidator
 
   atmedico{nombremed}:
     required:  Yes
@@ -16,3 +17,10 @@ names:
   atmedico{apellimed}:
     required:  Yes
     required_msg: Apellido es un campo requerido
+
+uniquevalidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:        atmedico
+        column:       cedrifmed
+        unique_error: El registro ya Existe intente con otro.

@@ -6,3 +6,12 @@ names:
   attiping{tiping}:
     required:  Yes
     required_msg: Este Campo es requerido
+    validators: uniquevalidator
+
+
+uniquevalidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:        attiping
+        column:       tiping
+        unique_error: El registro ya Existe intente con otro.
