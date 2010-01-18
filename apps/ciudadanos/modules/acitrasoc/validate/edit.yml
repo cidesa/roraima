@@ -9,7 +9,7 @@ names:
   attrasoc{cedtra}:
     required:  Yes
     required_msg: Este Campo es requerido
-    validators: Validator_cedtra
+    validators: Validator_cedtra, uniquevalidator
 
 
   attrasoc{nomtra}:
@@ -30,3 +30,11 @@ Validator_cedtra:
         class:        Attrasoc
         column:       cedtra
         unique_error: La cédula ya Existe.
+
+
+uniquevalidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:        attrasoc
+        column:       cedtra
+        unique_error: El registro ya Existe intente con otro.

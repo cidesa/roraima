@@ -5,8 +5,8 @@ generator:
     theme:            cidesaGenerator
 
     fields:
-      cedtra:      { name: Cedula }
-      nomtra:      { name: Nombre }
+      cedtra:      { name: Cedula, params: size=8 maxlength=8 }
+      nomtra:      { name: Nombre, params: size=8 maxlength=8 }
       apetra:      { name: Apellido }
       nrocol:      { name: Nro. Colegio }
     list:

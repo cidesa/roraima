@@ -5,8 +5,8 @@ generator:
     theme:            cidesaGenerator
 
     fields:
-      codrec:      { name: Código }
-      desrec:      { name: Descripción }
+      codrec:      { name: Código, params: size=12 maxlength=12 }
+      desrec:      { name: Descripción, params: size=50 maxlength=50 }
     list:
       title:          Definición de Requisitos de Pacientes
       display:        [=codrec, desrec]

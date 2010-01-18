@@ -5,7 +5,7 @@ generator:
     theme:            cidesaGenerator
 
     fields:
-      tiping:      { name: Descripción }
+      tiping:      { name: Descripción, params: size=50 maxlength=50 }
     list:
       title:          Definición de Tipos de Ingresos
       display:        [=tiping]

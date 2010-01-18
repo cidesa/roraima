@@ -7,7 +7,7 @@ names:
   atrecaud{codrec}:
     required:  Yes
     required_msg: Debe existir el Código del Recaudo
-    validators: MyStringValidator1
+    validators: MyStringValidator1, uniquevalidator
 
   atrecaud{desrec}:
     required:  Yes
@@ -29,3 +29,10 @@ MyStringValidator2:
         min_error: Debe existir la descripción del Recaudo
         max:       50
         max_error: La descripción del Recaudo debe tener menos de 51 Caracteres
+
+uniquevalidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:        atrecaud
+        column:       docrec
+        unique_error: El registro ya Existe intente con otro.

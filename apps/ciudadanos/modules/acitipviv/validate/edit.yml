@@ -6,3 +6,12 @@ names:
   attipviv{tipviv}:
     required:  Yes
     required_msg: Este Campo es requerido
+    validators: uniquevalidator
+
+
+uniquevalidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:        attipviv
+        column:       tipviv
+        unique_error: El registro ya Existe intente con otro.

@@ -5,7 +5,7 @@ generator:
     theme:            cidesaGenerator
 
     fields:
-      tipproviv:      { name: Descripción }
+      tipproviv:      { name: Descripción, params: size=50 maxlength=50 }
     list:
       title:          Definición de Tipos de Propiedad de Viviendas
       display:        [=tipproviv]
