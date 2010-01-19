@@ -8386,9 +8386,77 @@ exit();
   }
 
 
+  public static function SalvarNomFalPerEmp($clasemodelo,$grid)
+  {
+    try {
+      $x  = $grid[0];
+      $j  = 0;
+
+      while ($j<count($x) and ($x[$j]->getCodmot()!='') and ($x[$j]->getFecret()!=''))
+       {
+         $x[$j]->setCodemp($clasemodelo->getCodemp());
+         $x[$j]->save();
+         $j++;
+       }
+       $z=$grid[1];
+       $j=0;
+       if (!empty($z[$j]))
+       {
+	       while ($j<count($z))
+	       {
+	         $z[$j]->delete();
+	         $j++;
+	       }
+       }
+
+    return -1;
+  }catch (Exception $ex){
+  	h::printR($ex);
+  	exit();
+    return 0;
+  }
+  }
+
+
+
+
+  public static function validarNomfalperemp($clasemodelo,$grid)
+  {
+    /// Valida que en el grid hayan datos ///
+      $x  = $grid[0];
+      $j  = 0;
+      while ($j<count($x) ) //and ($x[$j]->getFecret()!=''))
+       {
+         if (($x[$j]->getFecret()=='') or ($x[$j]->getFecini()=='')){
+			return 546;
+         }
+
+         if ($x[$j]->getFecini() > $x[$j]->getFecret()){
+			return 545;
+         }
+         for($i=$j;$i<count($x)-1;$i++)
+         {
+			$fecha        = $x[$j]->getFecini();
+			$fecha2       = $x[$j]->getFecret();
+			$c = $j+1;
+			if (count($x) > 1){
+				$fechaInicio  = $x[$c]->getFecini();
+				$fechaRetorno = $x[$c]->getFecini();
+		        if (($fecha > $fechaInicio) and  ($fecha > $fechaRetorno)){
+					return 545;
+		        }
+
+		        if ($fecha2 > $fechaInicio and  ($fecha2 > $fechaRetorno)){
+					return 545;
+		        }
+			}
+
+         }
+         $j++;
+       }
+
+    return -1;
+  }
+
 } // fin clase
-
-
-
-
 ?>

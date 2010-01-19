@@ -147,6 +147,9 @@
 145:
   cod: 145
   msj:  Error al Asignar un Codigo al Proveedor, Verifique su Correlativo.
+146:
+  cod: 146
+  msj:  Se ha guardado solamente la Descripcion ya que la solicitud tiene asociada una Orden de Compra.
 
 ####### Ajuste OC ##########
 148:
@@ -163,6 +166,7 @@
   msj: El Compromiso asociado a la Orden de Compra no puede ser mayor al Precompromiso
 
 ######   orden de compra ######
+
 150:
   cod: 150
   msj: La Fecha no se encuentra del Período Fiscal
@@ -283,6 +287,7 @@
 199:
   cod: 199
   msj: La Cuenta Contable No existe.
+
 ################### NOMINA ####################
 400:
   cod: 400
@@ -430,6 +435,12 @@
 544:
   cod: 544
   msj: El Mes ya se encuentra cerrado, por lo que no se podrá registrar Movimiento en esta Fecha.
+545:
+  cod: 545
+  msj: La Fecha de Inicio no puede ser mayor a la Fecha Retorno del mismo.
+546:
+  cod: 546
+  msj: La fecha no puede estar vacia
 3:
   cod: 3
   msj: La contraseña es diferente.
@@ -467,6 +478,9 @@
 206:
   cod: 206
   msj: El Nivel de aprobación ya se encuentra registrado con ese rango.
+207:
+  cod: 207
+  msj: Estos Muebles no se encuentra Registrado
 
 ################### FORMULACION ####################
 # Definiciones Generales (Fordefgen)
