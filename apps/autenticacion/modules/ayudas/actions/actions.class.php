@@ -17,11 +17,13 @@ class ayudasActions extends sfActions
    */
   public function executeIndex()
   {
-    $this->menu = $this->getRequestParameter('m','');
+    $this->redirect('http://'.$this->getRequest()->getHost().'/ayudas/doku.php');
 
-    $this->m = Herramientas::obtenerMenuAyuda($this->menu);
+    //$this->menu = $this->getRequestParameter('m','');
 
-    $this->ayuda = sfConfig::get('app_ayuda');
+    //$this->m = Herramientas::obtenerMenuAyuda($this->menu);
+
+    //$this->ayuda = sfConfig::get('app_ayuda');
 
     //print_r(array_values($this->m));
 
