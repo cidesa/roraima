@@ -1085,7 +1085,14 @@ function grid_tag_v2($obj,$objelim = array())
            case 'f':   //Fecha
              $tagw ='     <td class="grid_fila g_'.$name.'_f '.$name.'c'.$j.'" align="left" height="10">';
 
-             $tagw .= input_date_tag($name.'x_'.$i.'_'.$jmasuno, @adodb_date("Y-m-d",adodb_strtotime($get)), array (
+//echo $get." ";
+//echo @adodb_date("Y-m-d",adodb_strtotime($get))."<br>";
+			if ($get!=''){  $valor2 = @adodb_date("Y-m-d",adodb_strtotime($get)); }else{ $valor2 = ''; }
+
+//echo $valor2." 555";
+	//             $tagw .= input_date_tag($name.'x_'.$i.'_'.$jmasuno, @adodb_date("Y-m-d",adodb_strtotime($get)), array (
+
+             $tagw .= input_date_tag($name.'x_'.$i.'_'.$jmasuno, $valor2, array (
                 'name' => 'grid'.$name.'['.$i.']['.$j.']',
                 'rich' => true,
                 'maxlength' => 10,
