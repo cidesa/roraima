@@ -405,7 +405,8 @@ $this->Bitacora('Guardo');
     $c->addSelectColumn("0 AS SUECAR");
     $c->addSelectColumn(NpcomocpPeer::CODTIPCAR);
     $c->addSelectColumn(NpcomocpPeer::FECDES);
-    $c->addSelectColumn("0 AS ID");
+    //$c->addSelectColumn("0 AS ID");
+    $c->addSelectColumn("MAX(ID) AS ID");
 
     $c->addGroupByColumn(NpcomocpPeer::CODTIPCAR);
     $c->addGroupByColumn(NpcomocpPeer::FECDES);
@@ -474,5 +475,28 @@ $this->Bitacora('Guardo');
  	$this->configGrid();		
 	$grid = Herramientas::CargarDatosGrid($this,$this->obj,true);
 
+  }
+
+
+ public function executeDelete()
+  {
+    $this->npcomocp = NpcomocpPeer::retrieveByPk($this->getRequestParameter('id'));
+    $this->forward404Unless($this->npcomocp);
+
+    try
+    {
+      $c = new Criteria();
+      $c->add(NpcomocpPeer :: CODTIPCAR, $this->getRequestParameter('codtipcar'));
+      $c->add(NpcomocpPeer :: FECDES,$this->getRequestParameter('fecdes'));
+      $npcomocp_del = NpcomocpPeer :: doDelete($c);
+      $this->Bitacora('Elimino');
+    }
+    catch (PropelException $e)
+    {
+      $this->getRequest()->setError('delete', 'No se pudo borrar la registro seleccionado. Asegúrese de que no tiene ningún tipo de registros asociados.');
+      return $this->forward('nomcomocp', 'list');
+    }
+
+    return $this->redirect('nomcomocp/list');
   }
 }

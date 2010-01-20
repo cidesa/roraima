@@ -4,12 +4,12 @@ generator:
     model_class:      Nptipcar
     theme:            default
     fields:
-      codtipcar:    { name: Código, params: maxlength=3 size=5}
-      destipcar:    { name: Cargo }
+      codtipcar:    { name: Código, params: maxlength=3,size=5}
+      destipcar:    { name: Descripción }
 
 
     list:
-      title:          Tipos de Personal
+      title:          Tipos de Cargos
       filters:        [codtipcar, destipcar]
       display:        [=codtipcar, destipcar]
       object_actions:
@@ -17,7 +17,7 @@ generator:
         _delete:      ~
       max_per_page:   5
     edit:
-      title:          Tipos de Personal
+      title:          Tipos de Cargos
       display:        [codtipcar, destipcar]
       actions:
         _list:         ~
