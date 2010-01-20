@@ -25,3 +25,4 @@ generator:
         _list:         ~
         _save:         ~
         _create:        ~
+        _delete:        ~
