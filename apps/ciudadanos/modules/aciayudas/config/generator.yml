@@ -63,7 +63,7 @@ generator:
         Monto Total de la Ayuda Solicitada: [monayu]
       report:
         url:         ciudadanos/r.php?m=ciudadanos&r=atfichareg.php
-        params:      { numexpdes: expediente, numexphas: expediente }
+        params:      { numexpdes: nroexp, numexphas: nroexp }
       actions:
         _save:        ~
         _create:      ~
