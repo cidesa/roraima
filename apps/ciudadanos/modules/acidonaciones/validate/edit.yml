@@ -58,6 +58,6 @@ Vstring_1_50_2:
 uniquevalidator:
     class: sfPropelUniqueValidator
     param:
-        class:        atdonaciones
-        column:       coddon
-        unique_error: El registro ya Existe intente con otro.
+      class:        Atdonaciones
+      column:       coddon
+      unique_error: El registro ya Existe intente con otro.
