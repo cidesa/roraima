@@ -24,9 +24,6 @@ array()) ?>
 <?php }?>
 </h1>
 
-<h1><?php echo __('Tipos de Cargos',
-array()) ?></h1>
-
 <div id="sf_admin_header">
 <?php include_partial('nomtipcar/edit_header', array('nptipcar' => $nptipcar)) ?>
 </div>
