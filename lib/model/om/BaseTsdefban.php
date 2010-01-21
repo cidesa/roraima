@@ -530,11 +530,6 @@ abstract class BaseTsdefban extends BaseObject  implements Persistent {
 	public function setFecreg($v)
 	{
 
-		if (is_array($v)){
-        	$value_array = $v;
-        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-		}
-
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecreg] from input: " . var_export($v, true));
@@ -552,11 +547,6 @@ abstract class BaseTsdefban extends BaseObject  implements Persistent {
 	public function setFecven($v)
 	{
 
-		if (is_array($v)){
-        	$value_array = $v;
-        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-		}
-
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecven] from input: " . var_export($v, true));
@@ -573,11 +563,6 @@ abstract class BaseTsdefban extends BaseObject  implements Persistent {
 	
 	public function setFecper($v)
 	{
-
-		if (is_array($v)){
-        	$value_array = $v;
-        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-		}
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
@@ -726,11 +711,6 @@ abstract class BaseTsdefban extends BaseObject  implements Persistent {
 	public function setFecape($v)
 	{
 
-		if (is_array($v)){
-        	$value_array = $v;
-        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-		}
-
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecape] from input: " . var_export($v, true));
@@ -837,11 +817,6 @@ abstract class BaseTsdefban extends BaseObject  implements Persistent {
 	
 	public function setFecaper($v)
 	{
-
-		if (is_array($v)){
-        	$value_array = $v;
-        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-		}
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);

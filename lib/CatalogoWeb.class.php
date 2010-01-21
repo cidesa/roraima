@@ -5775,6 +5775,55 @@ public function Catdefcatman_Cattramo($params = '') {
 			NpdefubiPeer :: DESUBI => 'Nombre'
 		);
 	}
+
+	public function Ccsoldescuades_Pagemiord() {
+
+
+    // XX = ccsoldescuades c inner join ccsoldes e on c.ccsoldes_id=e.id
+    // YY = (XX) inner join ccdetcuades d on c.cccuades_id=d.cccuades_id
+    // ZZ = (YY) inner join cccredit b on e.cccredit_id=b.id
+    // X = (ZZ) inner join cpcompro f on b.cpcompro_id=f.id
+    // Y = (X) inner join ccdetcuades d on c.cccuades_id=d.cccuades_id
+    // Z = (Y) inner join cccredit b on e.cccredit_id=b.id
+    // (Z) inner join cpcompro f on b.cpcompro_id=f.id
+
+
+
+
+		$this->sql = "cpcompro.moncom > ((Select case when Sum(moncau) isnull then 0 else Sum(moncau) end as moncau from cpimpcom where refcom=cpcompro.refcom)+(Select case when Sum(monaju) isnull then 0 else Sum(monaju) end as monaju from cpimpcom where refcom=cpcompro.refcom))";
+
+		$this->c = new Criteria();
+
+    $this->c->addJoin(CcsoldescuadesPeer::CCSOLDES_ID,CcsoldesPeer::ID);
+    $this->c->addJoin(CcsoldescuadesPeer::CCCUADES_ID,CcdetcuadesPeer::CCCUADES_ID);
+    $this->c->addJoin(CcsoldesPeer::CCCREDIT_ID,CccreditPeer::ID);
+    $this->c->addJoin(CcsolliqPeer::CCSOLDES_ID,CcsoldesPeer::ID);
+    $this->c->addJoin(CccreditPeer::CPCOMPRO_ID,CpcomproPeer::ID);
+
+		$this->c->add(CpcomproPeer :: MONCOM, $this->sql, Criteria :: CUSTOM); //$this->c->add(CpcomproPeer :: MONCOM, CpcomproPeer :: SALCAU, Criteria :: NOT_EQUAL);
+
+		$a = new Criteria();
+		$dato = CadefartPeer :: doSelectOne($a);
+		if ($dato) {
+			if ($dato->getComreqapr() == 'S') {
+				$this->c->add(CpcomproPeer :: APRCOM, 'S');
+			}
+		}
+		$this->c->add(CpcomproPeer :: STACOM, 'N', Criteria :: NOT_EQUAL);
+    $this->c->add(CcdetcuadesPeer::CPCAUSAD_ID,null, Criteria :: ISNULL);
+
+		$this->columnas = array (
+			'ccdetcuades.CODIGO' => 'Cod. Det. Desembolso',
+			CcdetcuadesPeer :: MONTO => 'Monto',
+      'ccdetcuades.FECHA' => 'Fecha',
+			'ccdetcuades.RIFTER' => 'Cod. Beneficiario',
+      'ccdetcuades.NOMTER' => 'Nombre',
+      'ccdetcuades.REFCOM' => 'Compromiso',
+      'ccdetcuades.DESCOM' => 'Descripcion',
+		);
+
+	}
+
 }
 
 ?>

@@ -1,0 +1,4932 @@
+---
+propel:
+  _attributes:
+    noXsd: false
+    defaultIdMethod: native
+    package: lib.model.creditos
+  ccopcgen:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    tipcom:
+      type: VARCHAR
+      size: 100
+      required: true
+      foreignTable: cpdoccom
+      foreignReference: tipcom
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccactana:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    observ:
+      type: VARCHAR
+    fecasi:
+      type: DATE
+    feccul:
+      type: DATE
+    nomact:
+      type: VARCHAR
+    desact:
+      type: VARCHAR
+    resact:
+      type: VARCHAR
+      size: 250
+    estatu:
+      type: VARCHAR
+    ccactivi_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccactivi
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccclaact_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccclaact
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccanalis_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccanalis
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    cccredit_id:
+      type: INTEGER
+      required: true
+      foreignTable: cccredit
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccacteco:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nomacteco:
+      type: VARCHAR
+    desacteco:
+      type: VARCHAR
+    codciiu:
+      type: INTEGER
+  ccactivi:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nomact:
+      type: VARCHAR
+    desact:
+      type: VARCHAR
+    fecini:
+      type: DATE
+    resact:
+      type: VARCHAR
+      size: 250
+    obsres:
+      type: VARCHAR
+      size: 250
+    feccul:
+      type: DATE
+    estatu:
+      type: VARCHAR
+      size: 20
+    solcrenum:
+      type: VARCHAR
+      size: 30
+    solcre:
+      type: VARCHAR
+      size: 1
+    ccclaact_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccclaact
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccagenci:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    codage:
+      type: INTEGER
+    dirage:
+      type: VARCHAR
+    telage:
+      type: VARCHAR
+    telage2:
+      type: VARCHAR
+    faxage:
+      type: VARCHAR
+    codaretel:
+      type: VARCHAR
+    codaretel2:
+      type: VARCHAR
+    codarefax:
+      type: VARCHAR
+    ccbanco_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccbanco
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccparroq_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccparroq
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccamoact:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    capini:
+      type: DOUBLE
+    monint:
+      type: DOUBLE
+    fecven:
+      type: DATE
+    estatu:
+      type: VARCHAR
+    monpri:
+      type: DOUBLE
+    monsalcap:
+      type: DOUBLE
+    numcuo:
+      type: INTEGER
+    moncuo:
+      type: DOUBLE
+    monintmor:
+      type: DOUBLE
+    monintgra:
+      type: DOUBLE
+    monintcum:
+      type: DOUBLE
+    montotcuo:
+      type: DOUBLE
+    tipcuo:
+      type: VARCHAR
+      size: 1
+    ccdefamo_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccdefamo
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    cccredit_id:
+      type: INTEGER
+      required: true
+      foreignTable: cccredit
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccpartid_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccpartid
+      foreignReference: id
+    ccprogra_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccprogra
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccamoactresp:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    capini:
+      type: DOUBLE
+    monint:
+      type: DOUBLE
+    fecven:
+      type: DATE
+    estatu:
+      type: VARCHAR
+    monpri:
+      type: DOUBLE
+    monsalcap:
+      type: DOUBLE
+    numcuo:
+      type: INTEGER
+    moncuo:
+      type: DOUBLE
+    monintmor:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    ccdefamo_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccdefamo
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    cccredit_id:
+      type: INTEGER
+      required: true
+      foreignTable: cccredit
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccpartid_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccpartid
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccprogra_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccprogra
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccamodebcue:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    ccamoact_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccamoact
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccdebcue_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccdebcue
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccamopag:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    debmonint:
+      type: DOUBLE
+    debmoncap:
+      type: DOUBLE
+    debmonintmor:
+      type: DOUBLE
+    debmonintgra:
+      type: DOUBLE
+    debmonintcum:
+      type: DOUBLE
+    pagmoncap:
+      type: DOUBLE
+    pagmonint:
+      type: DOUBLE
+    pagmonintmor:
+      type: DOUBLE
+    pagmonintgra:
+      type: DOUBLE
+    pagmonintcum:
+      type: DOUBLE
+    salmoncap:
+      type: DOUBLE
+    salmonint:
+      type: DOUBLE
+    salmonintmor:
+      type: DOUBLE
+    salmonintgra:
+      type: DOUBLE
+    salmonintcum:
+      type: DOUBLE
+    fecpag:
+      type: DATE
+    fecven:
+      type: DATE
+    cedrifcue:
+      type: VARCHAR
+    estatu:
+      type: VARCHAR
+    ccamoact_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccamoact
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccpago_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccpago
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    cccredit_id:
+      type: INTEGER
+      required: true
+      foreignTable: cccredit
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccperpre_id:
+      type: INTEGER
+      foreignTable: ccperpre
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccpartid_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccpartid
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccprogra_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccprogra
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccamoprin:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    capini:
+      type: DOUBLE
+    monint:
+      type: DOUBLE
+    fecven:
+      type: DATE
+    estatu:
+      type: VARCHAR
+    monpri:
+      type: DOUBLE
+    monsalcap:
+      type: DOUBLE
+    numcuo:
+      type: INTEGER
+    ccamoact_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccamoact
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccdefamo_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccdefamo
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccanacre:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    cccredit_id:
+      type: INTEGER
+      required: true
+      foreignTable: cccredit
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccanalis_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccanalis
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccanaest:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    ccestado_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccestado
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccanalis_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccanalis
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccanalis:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    cedana:
+      type: VARCHAR
+      size: 12
+    nomana:
+      type: VARCHAR
+    sexana:
+      type: VARCHAR
+    telana:
+      type: VARCHAR
+    celana:
+      type: VARCHAR
+      size: 15
+    codaretel:
+      type: VARCHAR
+    codarecel:
+      type: VARCHAR
+    dirana:
+      type: VARCHAR
+    estatu:
+      type: VARCHAR
+    ccperpre_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccperpre
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    cctipana_id:
+      type: INTEGER
+      required: true
+      foreignTable: cctipana
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccareger_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccareger
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccparroq_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccparroq
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccareger:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nomare:
+      type: VARCHAR
+    desare:
+      type: VARCHAR
+    objare:
+      type: VARCHAR
+    ccgerenc_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccgerenc
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccasigana:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    fecasig:
+      type: DATE
+      required: true
+    tipasig:
+      type: VARCHAR
+      size: 1
+    estatus:
+      type: VARCHAR
+      size: 1
+    ccanalis_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccanalis
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccsolici_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccsolici
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccusuint_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccusuint
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccgerenc_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccgerenc
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccavagarcre:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    ccavalis_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccavalis
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccgarant_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccgarant
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccavagarsol:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    ccavalis_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccavalis
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccgarsol_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccgarsol
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccavalis:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nomava:
+      type: VARCHAR
+      size: 50
+    cedava:
+      type: VARCHAR
+      size: 10
+    corava:
+      type: VARCHAR
+      size: 50
+    codaretel:
+      type: VARCHAR
+    numtelloc:
+      type: VARCHAR
+      size: 15
+    codarecel:
+      type: VARCHAR
+    numcel:
+      type: VARCHAR
+      size: 15
+    codareotro:
+      type: VARCHAR
+    numotrtel:
+      type: VARCHAR
+      size: 15
+    dirnomurb:
+      type: VARCHAR
+      size: 50
+    dirnumcal:
+      type: VARCHAR
+      size: 50
+    dirnumcasedif:
+      type: VARCHAR
+      size: 50
+    dirnumpis:
+      type: VARCHAR
+      size: 50
+    dirpunref:
+      type: VARCHAR
+      size: 50
+    dirnumapt:
+      type: VARCHAR
+      size: 20
+    ccperpre_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccperpre
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccgarant_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccgarant
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccbalger:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    fecbalger:
+      type: DATE
+    ccbenefi_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccbenefi
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccsolici_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccsolici
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccusuario_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccusuario
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccbanco:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nomban:
+      type: VARCHAR
+    abrban:
+      type: VARCHAR
+    dirban:
+      type: VARCHAR
+    nompercon:
+      type: VARCHAR
+    telpercon:
+      type: VARCHAR
+    codaretel:
+      type: VARCHAR
+    codsudeban:
+      type: INTEGER
+    ccparroq_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccparroq
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccbaremo:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nombar:
+      type: VARCHAR
+    orden:
+      type: INTEGER
+    puntua:
+      type: DOUBLE
+    ponder:
+      type: DOUBLE
+    result:
+      type: DOUBLE
+    ccgerenc_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccgerenc
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    cctitulo_id:
+      type: INTEGER
+      required: true
+      foreignTable: cctitulo
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccbarinf:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    puntua:
+      type: DOUBLE
+      required: true
+    ponder:
+      type: DOUBLE
+      required: true
+    result:
+      type: DOUBLE
+      required: true
+    ccinform_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccinform
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    cctitulo_id:
+      type: INTEGER
+      required: true
+      foreignTable: cctitulo
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccbenefi:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    cedrif:
+      type: VARCHAR
+      size: 10
+    nomben:
+      type: VARCHAR
+    sexrep:
+      type: VARCHAR
+      size: 1
+    fecnac:
+      type: DATE
+    numaso:
+      type: INTEGER
+    numhom:
+      type: INTEGER
+    nummuj:
+      type: INTEGER
+    numregsun:
+      type: INTEGER
+    empactmuj:
+      type: INTEGER
+    empacthom:
+      type: INTEGER
+    capsoc:
+      type: INTEGER
+    capcon:
+      type: DOUBLE
+    feccon:
+      type: DATE
+    duraci:
+      type: INTEGER
+    dirnomurb:
+      type: VARCHAR
+      size: 100
+    dircalles:
+      type: VARCHAR
+      size: 100
+    dircasedi:
+      type: VARCHAR
+      size: 100
+    dirnumpis:
+      type: VARCHAR
+      size: 100
+    dirapatar:
+      type: VARCHAR
+      size: 100
+    dirpunref:
+      type: VARCHAR
+      size: 255
+    telben:
+      type: VARCHAR
+      size: 15
+    celben:
+      type: VARCHAR
+      size: 15
+    faxben:
+      type: VARCHAR
+      size: 15
+    codaretel:
+      type: VARCHAR
+    codarecel:
+      type: VARCHAR
+    codarefax:
+      type: VARCHAR
+    corele:
+      type: VARCHAR
+      size: 255
+    creant:
+      type: BOOLEAN
+    proela:
+      type: VARCHAR
+      size: 255
+    matpri:
+      type: VARCHAR
+      size: 255
+    dissisven:
+      type: VARCHAR
+      size: 255
+    ingres:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    espacteco:
+      type: VARCHAR
+    ocupa:
+      type: VARCHAR
+      size: 100
+    profe:
+      type: VARCHAR
+      size: 100
+    numnom:
+      type: VARCHAR
+      size: 50
+    fecing:
+      type: DATE
+    exten:
+      type: VARCHAR
+      size: 50
+    ingmen:
+      type: DOUBLE
+    otroing:
+      type: DOUBLE
+    detotroing:
+      type: VARCHAR
+      size: 255
+    ccperpre_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccperpre
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccestciv_id:
+      type: INTEGER
+      foreignTable: ccestciv
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    cctipups_id:
+      type: INTEGER
+      required: true
+      foreignTable: cctipups
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccparroq_id:
+      type: INTEGER
+      foreignTable: ccparroq
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccsececo_id:
+      type: INTEGER
+      foreignTable: ccsececo
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccacteco_id:
+      type: INTEGER
+      foreignTable: ccacteco
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccorimatpri_id:
+      type: INTEGER
+      foreignTable: ccorimatpri
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    cccargo_id:
+      type: INTEGER
+      foreignTable: cccargo
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    cccondic_id:
+      type: INTEGER
+      required: true
+      foreignTable: cccondic
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccubiadm_id:
+      type: INTEGER
+      foreignTable: ccubiadm
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccciudad_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccciudad
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccbieadq:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    desbieadq:
+      type: VARCHAR
+      size: 250
+    monpre:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monfacpro:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    proced:
+      type: VARCHAR
+      size: 50
+    gravam:
+      type: BOOLEAN
+    grado:
+      type: VARCHAR
+      size: 10
+    ubinomurb:
+      type: VARCHAR
+      size: 100
+    ubinumcal:
+      type: VARCHAR
+      size: 100
+    ubinumcas:
+      type: VARCHAR
+      size: 100
+    ubipunref:
+      type: VARCHAR
+      size: 255
+    tipbien:
+      type: VARCHAR
+      size: 50
+    observ:
+      type: VARCHAR
+      size: 255
+    ubinumpis:
+      type: VARCHAR
+      size: 50
+    ubinumapt:
+      type: VARCHAR
+      size: 50
+    desotr:
+      type: VARCHAR
+      size: 50
+    numbie:
+      type: INTEGER
+    termetcua:
+      type: VARCHAR
+      size: 20
+    conmetcua:
+      type: VARCHAR
+      size: 20
+    numhab:
+      type: VARCHAR
+      size: 4
+    numban:
+      type: VARCHAR
+      size: 4
+    numest:
+      type: VARCHAR
+      size: 4
+    precinmu:
+      type: DOUBLE
+    diaofe:
+      type: VARCHAR
+      siza: 10
+    nomproven:
+      type: VARCHAR
+      size: 50
+    cedrifpro:
+      type: VARCHAR
+      size: 20
+    codarehab:
+      type: VARCHAR
+      size: 5
+    telhab:
+      type: VARCHAR
+      size: 10
+    codarecel:
+      type: VARCHAR
+      size: 5
+    telcel:
+      type: VARCHAR
+      size: 10
+    codareofi:
+      type: VARCHAR
+      size: 5
+    telofi:
+      type: VARCHAR
+      size: 10
+    ccsolici_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccsolici
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccclabie_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccclabie
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    cctipprobie_id:
+      type: INTEGER
+      foreignTable: cctipprobie
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccparroq_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccparroq
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccbitcred:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    fecvig:
+      type: DATE
+    fecven:
+      type: DATE
+    nomestatu:
+      type: VARCHAR
+      size: 150
+    nomgerenc:
+      type: VARCHAR
+      size: 150
+    ccestatu_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccestatu
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    cccredit_id:
+      type: INTEGER
+      required: true
+      foreignTable: cccredit
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccusuario_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccusuario
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccbitusu:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    usuario:
+      type: VARCHAR
+      size: 50
+      required: true
+    forma:
+      type: VARCHAR
+      size: 50
+      required: true
+    fecha:
+      type: DATE
+      required: true
+    registro:
+      type: INTEGER
+      required: true
+    accion:
+      type: VARCHAR
+      size: 50
+    hora:
+      type: TIME
+  cccargo:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nomcar:
+      type: VARCHAR
+    descar:
+      type: VARCHAR
+  cccircuito:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nomcircuito:
+      type: VARCHAR
+      size: 50
+    descircuito:
+      type: VARCHAR
+      size: 255
+    ccestado_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccestado
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccciudad:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nomciu:
+      type: VARCHAR
+      size: 50
+    ccestado_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccestado
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccregion_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccregion
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccclaact:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nomclaact:
+      type: VARCHAR
+    desclaact:
+      type: VARCHAR
+  ccclabie:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nomclabie:
+      type: VARCHAR
+      size: 50
+    desclabie:
+      type: VARCHAR
+      size: 50
+  ccclainf:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nominf:
+      type: VARCHAR
+    desinf:
+      type: VARCHAR
+    aplbar:
+      type: VARCHAR
+      size: 1
+  cccodare:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    codarea:
+      type: VARCHAR
+    loccel:
+      type: VARCHAR
+      size: 1
+  cccodtra:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    codtra:
+      type: INTEGER
+    descodtra:
+      type: VARCHAR
+    observ:
+      type: VARCHAR
+    ccbanco_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccbanco
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccconbalger:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nomconbalger:
+      type: VARCHAR
+      required: true
+    codigo:
+      type: VARCHAR
+      size: 20
+      required: true
+    tipo:
+      type: VARCHAR
+      size: 1
+      required: true
+    sumres:
+      type: VARCHAR
+      size: 1
+      required: true
+    ccvariab_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccvariab
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    _uniques:
+      ccconbalger_codigo_key:
+        - codigo
+  ccconben:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    cedcon:
+      type: VARCHAR
+      size: 12
+    nomcon:
+      type: VARCHAR
+      size: 250
+    lugtracon:
+      type: VARCHAR
+      size: 100
+    telcon:
+      type: VARCHAR
+      size: 20
+    celcon:
+      type: VARCHAR
+      size: 20
+    fecnac:
+      type: DATE
+    dirnomurb:
+      type: VARCHAR
+      size: 100
+    dircalles:
+      type: VARCHAR
+      size: 100
+    dircasedi:
+      type: VARCHAR
+      size: 100
+    dirnumpis:
+      type: VARCHAR
+      size: 100
+    dirapatar:
+      type: VARCHAR
+      size: 100
+    dirpunref:
+      type: VARCHAR
+      size: 255
+    codaretel:
+      type: VARCHAR
+    codarecel:
+      type: VARCHAR
+    corele:
+      type: VARCHAR
+      size: 255
+    ocupa:
+      type: VARCHAR
+      size: 100
+    profe:
+      type: VARCHAR
+      size: 100
+    ingmen:
+      type: DOUBLE
+    ccperpre_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccperpre
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccbenefi_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccbenefi
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccconcep:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nomcon:
+      type: VARCHAR
+    descon:
+      type: VARCHAR
+    codpar:
+      type: VARCHAR
+    ccpartid_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccpartid
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccconcre:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    montot:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    cccredit_id:
+      type: INTEGER
+      required: true
+      foreignTable: cccredit
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccpartid_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccpartid
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccprogra_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccprogra
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccconcep_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccconcep
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  cccondic:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nomcondic:
+      type: VARCHAR
+      size: 50
+      required: true
+    descondic:
+      type: VARCHAR
+      size: 255
+      required: true
+    gentxt:
+      type: VARCHAR
+      size: 1
+  ccconfcon:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    descri:
+      type: VARCHAR
+      size: 50
+    cuecon:
+      type: VARCHAR
+      size: 60
+      required: true
+    atribu:
+      type: VARCHAR
+      size: 50
+      required: true
+  ccconpag:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    fecdes:
+      type: DATE
+    fechas:
+      type: DATE
+    debcomcon:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    habcomcon:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    numcon:
+      type: INTEGER
+    tipo:
+      type: VARCHAR
+    essum:
+      type: BOOLEAN
+    intdev:
+      type: BOOLEAN
+    feccon:
+      type: DATE
+  cccorrel:
+    id:
+      type: integer
+      required: true
+      primaryKey: true
+      autoincrement: true
+    cornumsol:
+      type: INTEGER
+    corsolliq:
+      type: INTEGER
+    corcredit:
+      type: INTEGER
+    corsoldes:
+      type: INTEGER
+    corpag:
+      type: INTEGER
+  cccreant:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    feccre:
+      type: DATE
+    numcre:
+      type: VARCHAR
+      size: 50
+    moncre:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    salact:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    estatu:
+      type: VARCHAR
+      size: 50
+    nomentfin:
+      type: VARCHAR
+      size: 50
+    tipent:
+      type: VARCHAR
+      size: 1
+    ccbenefi_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccbenefi
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  cccreden:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nomcre:
+      type: VARCHAR
+      size: 50
+  cccredit:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    numexp:
+      type: VARCHAR
+    natcre:
+      type: VARCHAR
+    destino:
+      type: VARCHAR
+    monapr:
+      type: DOUBLE
+    actapr:
+      type: VARCHAR
+    fecapr:
+      type: DATE
+    apercue:
+      type: VARCHAR
+      size: 2
+    feccrecue:
+      type: DATE
+    numcue:
+      type: VARCHAR
+    gentxt:
+      type: VARCHAR
+      size: 2
+    fecliq:
+      type: DATE
+    disdes:
+      type: VARCHAR
+      size: 1
+    estatu:
+      type: VARCHAR
+    ccbenefi_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccbenefi
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccfuefin_id:
+      type: INTEGER
+      foreignTable: ccfuefin
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    cctipcar_id:
+      type: INTEGER
+      foreignTable: cctipcar
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccsolici_id:
+      type: INTEGER
+      foreignTable: ccsolici
+      foreignReference: id
+    cctipmon_id:
+      type: INTEGER
+      foreignTable: cctipmon
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccbanco_id:
+      type: INTEGER
+      foreignTable: ccbanco
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccagenci_id:
+      type: INTEGER
+      foreignTable: ccagenci
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccprioridad_id:
+      type: INTEGER
+      foreignTable: ccprioridad
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    cccondic_id:
+      type: INTEGER
+      foreignTable: cccondic
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    observ:
+      type: VARCHAR
+    cctipups_id:
+      type: INTEGER
+      foreignTable: cctipups
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    numnom:
+      type: VARCHAR
+      size: 250
+    cpcompro_id:
+      type: INTEGER
+      foreignTable: cpcompro
+      foreignReference: id
+  cccrereg:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    fecent:
+      type: DATE
+    fecsal:
+      type: DATE
+    observ:
+      type: VARCHAR
+    fecprotoc:
+      type: DATE
+    numero:
+      type: INTEGER
+    tomo:
+      type: INTEGER
+    protoc:
+      type: VARCHAR
+    folio:
+      type: INTEGER
+    trimes:
+      type: VARCHAR
+    anno:
+      type: INTEGER
+    cccredit_id:
+      type: INTEGER
+      required: true
+      foreignTable: cccredit
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccregnot_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccregnot
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  cccreses:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    motivo:
+      type: VARCHAR
+    obsres:
+      type: VARCHAR
+    estatu:
+      type: VARCHAR
+    cccredit_id:
+      type: INTEGER
+      required: true
+      foreignTable: cccredit
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccsesion_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccsesion
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  cccreusu:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    ccusuario_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccusuario
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    cccreden_id:
+      type: INTEGER
+      required: true
+      foreignTable: cccreden
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  cccuades:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    orddes:
+      type: VARCHAR
+    mondes:
+      type: DOUBLE
+    estatu:
+      type: VARCHAR
+    fecdes:
+      type: DATE
+    codusuaut:
+      type: INTEGER
+    aplded:
+      type: BOOLEAN
+    numcheded:
+      type: INTEGER
+    cccredit_id:
+      type: INTEGER
+      required: true
+      foreignTable: cccredit
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccpartid_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccpartid
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccprogra_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccprogra
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  cccueban:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    numcue:
+      type: VARCHAR
+    estatu:
+      type: VARCHAR
+    cctipcue_id:
+      type: INTEGER
+      required: true
+      foreignTable: cctipcue
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccbanco_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccbanco
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccdatsoeco:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    esptipvi:
+      type: VARCHAR
+      size: 255
+    dormit:
+      type: VARCHAR
+      size: 4
+    banos:
+      type: VARCHAR
+      size: 4
+    sala:
+      type: VARCHAR
+      size: 4
+    cocina:
+      type: VARCHAR
+      size: 4
+    lavade:
+      type: VARCHAR
+      size: 4
+    closet:
+      type: VARCHAR
+      size: 4
+    jardin:
+      type: VARCHAR
+      size: 4
+    estacio:
+      type: VARCHAR
+      size: 4
+    expliestruc:
+      type: VARCHAR
+      size: 255
+    techos:
+      type: VARCHAR
+      size: 255
+    paredes:
+      type: VARCHAR
+      size: 255
+    piso:
+      type: VARCHAR
+      size: 255
+    revest:
+      type: VARCHAR
+      size: 255
+    conser:
+      type: VARCHAR
+      size: 255
+    edad:
+      type: VARCHAR
+      size: 100
+    zona:
+      type: VARCHAR
+      size: 255
+    dist:
+      type: VARCHAR
+      size: 100
+    acceso:
+      type: VARCHAR
+      size: 255
+    observ:
+      type: VARCHAR
+      size: 255
+    linnorte:
+      type: VARCHAR
+      size: 100
+    linsur:
+      type: VARCHAR
+      size: 100
+    lineste:
+      type: VARCHAR
+      size: 100
+    linoeste:
+      type: VARCHAR
+      size: 100
+    superfi:
+      type: VARCHAR
+      size: 100
+    trasoc:
+      type: VARCHAR
+      size: 255
+    analisis:
+      type: VARCHAR
+      size: 1000
+    recomen:
+      type: VARCHAR
+      size: 255
+    respon:
+      type: VARCHAR
+      size: 1
+    asigna:
+      type: DOUBLE
+    deducc:
+      type: DOUBLE
+    asigcon:
+      type: DOUBLE
+    deducon:
+      type: DOUBLE
+    gasfam:
+      type: DOUBLE
+    cappago:
+      type: DOUBLE
+    ccorimatpri_id:
+      type: INTEGER
+      foreignTable: ccorimatpri
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccacteco_id:
+      type: INTEGER
+      foreignTable: ccacteco
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccestruc_id:
+      type: INTEGER
+      foreignTable: ccestruc
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccriezona_id:
+      type: INTEGER
+      foreignTable: ccriezona
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccsolici_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccsolici
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccdebban:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    numcue:
+      type: VARCHAR
+      size: 20
+    fecha:
+      type: DATE
+    monto:
+      type: DOUBLE
+    totreg:
+      type: INTEGER
+  ccdebcue:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    numcue:
+      type: VARCHAR
+      size: 20
+    monto:
+      type: DOUBLE
+    cedrif:
+      type: VARCHAR
+      size: 12
+    empresa:
+      type: VARCHAR
+      size: 4
+    numexp:
+      type: VARCHAR
+      size: 20
+    ccdebban_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccdebban
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    _indexes:
+      fki_ccdebcue_reference_ccdebban:
+        - ccdebban_id
+  ccdebcueres:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    observ:
+      type: VARCHAR
+    ccdebcue_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccdebcue
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccrespue_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccrespue
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccdedcre:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    ccdeducc_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccdeducc
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    cccredit_id:
+      type: INTEGER
+      required: true
+      foreignTable: cccredit
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccdeducc:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nomded:
+      type: VARCHAR
+    unided:
+      type: VARCHAR
+    codcta:
+      type: VARCHAR
+    monded:
+      type: DOUBLE
+  ccdefamo:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    montot:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    cuotas:
+      type: VARCHAR
+      size: 150
+    numcuo:
+      type: INTEGER
+    numcuofin:
+      type: INTEGER
+    numcuoanu:
+      type: DOUBLE
+    pergra:
+      type: INTEGER
+    permue:
+      type: INTEGER
+    plafin:
+      type: INTEGER
+    plazo:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    fecdesdef:
+      type: DATE
+    fechasdef:
+      type: DATE
+    difint:
+      type: BOOLEAN
+    tasintmor:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    tasint:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    disanu:
+      type: BOOLEAN
+    pordisanu:
+      type: DOUBLE
+    resequ:
+      type: BOOLEAN
+    cuoesp:
+      type: BOOLEAN
+    cuoespigu:
+      type: BOOLEAN
+    intgrava:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    intcuminc:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    aporgrava:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    ccperiod_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccperiod
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    cctipint_id:
+      type: INTEGER
+      foreignTable: cctipint
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    cccredit_id:
+      type: INTEGER
+      required: true
+      foreignTable: cccredit
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccpartid_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccpartid
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccprogra_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccprogra
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccpergrava_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccperiod
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    cantcuoesp:
+      type: INTEGER
+    cuoespinic:
+      type: INTEGER
+    frecuoesp:
+      type: INTEGER
+      foreignTable: ccperiod
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    moncuoesp:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    moncuopla:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    observ:
+      type: VARCHAR
+  ccdetbalger:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    monbalger:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    fecdetbalger:
+      type: DATE
+    ccbalger_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccbalger
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccconbalger_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccconbalger
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccdetcuades:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    monto:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    monded:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    nrocheqcon:
+      type: INTEGER
+    benpro:
+      type: BOOLEAN
+    ccpagter_id:
+      type: INTEGER
+      foreignTable: ccpagter
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccbenefi_id:
+      type: INTEGER
+      foreignTable: ccbenefi
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    cccueban_id:
+      type: INTEGER
+      foreignTable: cccueban
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccconcep_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccconcep
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    cccuades_id:
+      type: INTEGER
+      required: true
+      foreignTable: cccuades
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    cpcausad_id:
+      type: INTEGER
+      foreignTable: cpcausad
+      foreignReference: id
+  ccdetger:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    login:
+      type: VARCHAR
+      size: 50
+      required: true
+    nomfor:
+      type: VARCHAR
+      size: 50
+    priusu:
+      type: INTEGER
+    ccgerenc_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccgerenc
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccdircorben:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    dirnomurb:
+      type: VARCHAR
+      size: 100
+    dirnumcal:
+      type: VARCHAR
+      size: 100
+    dirnumcasedi:
+      type: VARCHAR
+      size: 100
+    dirnumpis:
+      type: VARCHAR
+      size: 100
+    dirnumapt:
+      type: VARCHAR
+      size: 100
+    dirpunref:
+      type: VARCHAR
+      size: 255
+    numtel:
+      type: VARCHAR
+      size: 12
+    numcel:
+      type: VARCHAR
+      size: 12
+    numfax:
+      type: VARCHAR
+      size: 12
+    codaretel:
+      type: VARCHAR
+    codarecel:
+      type: VARCHAR
+    codarefax:
+      type: VARCHAR
+    mail:
+      type: VARCHAR
+      size: 50
+    ccbenefi_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccbenefi
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccparroq_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccparroq
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccdocane:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nomdocane:
+      type: VARCHAR
+      required: true
+    desdocane:
+      type: VARCHAR
+      required: true
+  ccempresa:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nombre:
+      type: VARCHAR
+      size: 80
+    direccion:
+      type: VARCHAR
+      size: 80
+    telefono:
+      type: VARCHAR
+      size: 80
+    fax:
+      type: VARCHAR
+      size: 80
+    rif:
+      type: VARCHAR
+      size: 80
+  ccentfin:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nomentfin:
+      type: VARCHAR
+      size: 50
+  ccestado:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nomest:
+      type: VARCHAR
+    nomcoo:
+      type: VARCHAR
+    telcoo:
+      type: VARCHAR
+    codaretel:
+      type: VARCHAR
+    dirofi:
+      type: VARCHAR
+    cedcoo:
+      type: VARCHAR
+      size: 12
+    ccperpre_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccperpre
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccestana:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    ccestado_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccestado
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccanalis_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccanalis
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccestatu:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    alias:
+      type: VARCHAR
+    nombre:
+      type: VARCHAR
+    maxdia:
+      type: INTEGER
+    comentario:
+      type: VARCHAR
+    movcont:
+      type: VARCHAR
+      size: 1
+    enruta:
+      type: VARCHAR
+      size: 1
+    orden:
+      type: INTEGER
+    ccgerenc_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccgerenc
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    _uniques:
+      ccestatu_orden_key:
+        - orden
+  ccestciv:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nomestciv:
+      type: VARCHAR
+      size: 100
+  ccestcre:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    fecha:
+      type: date
+    ccestatu_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccestatu
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    cccredit_id:
+      type: INTEGER
+      required: true
+      foreignTable: cccredit
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccusuint_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccusuint
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccestcred:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    fecha:
+      type: TIMESTAMP
+    memo:
+      type: VARCHAR
+    ccestatu_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccestatu
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccsolici_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccsolici
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccusuint_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccusuint
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccgerencori_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccgerenc
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccgerencdes_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccgerenc
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccestsig_id:
+      type: INTEGER
+      foreignTable: ccestatu
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccestruc:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nomestruc:
+      type: VARCHAR
+      size: 100
+    desestruc:
+      type: VARCHAR
+      size: 255
+  ccfiador:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nomfia:
+      type: VARCHAR
+    cedfia:
+      type: VARCHAR
+    telfia:
+      type: VARCHAR
+    celfia:
+      type: VARCHAR
+    dirfia:
+      type: VARCHAR
+    codaretel:
+      type: VARCHAR
+    codarecel:
+      type: VARCHAR
+    parent:
+      type: VARCHAR
+      size: 70
+    cccredit_id:
+      type: INTEGER
+      required: true
+      foreignTable: cccredit
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccparroq_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccparroq
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccfreact:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    ccfreneco_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccfreneco
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccacteco_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccacteco
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccfreneco:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nomfre:
+      type: VARCHAR
+    desfre:
+      type: VARCHAR
+  ccfuefin:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nomfuefin:
+      type: VARCHAR
+    alias:
+      type: VARCHAR
+    rif:
+      type: VARCHAR
+    contabb_id:
+      type: INTEGER
+      required: true
+      foreignTable: contabb
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccgarant:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nomgar:
+      type: VARCHAR
+    monestgar:
+      type: DOUBLE
+    desgar:
+      type: VARCHAR
+    monava:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    fecrec:
+      type: DATE
+    codusu:
+      type: INTEGER
+    ubinomurb:
+      type: VARCHAR
+      size: 100
+    ubinumcasedi:
+      type: VARCHAR
+      size: 100
+    ubinumcal:
+      type: VARCHAR
+      size: 100
+    ubinumpis:
+      type: VARCHAR
+      size: 50
+    ubinumapt:
+      type: VARCHAR
+      size: 50
+    ubipunref:
+      type: VARCHAR
+      size: 255
+    gravam:
+      type: BOOLEAN
+    grado:
+      type: VARCHAR
+      size: 10
+    reapor:
+      type: VARCHAR
+      size: 100
+    nompro:
+      type: VARCHAR
+      size: 200
+    cedpro:
+      type: VARCHAR
+      size: 10
+    cctipgar_id:
+      type: INTEGER
+      required: true
+      foreignTable: cctipgar
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    cccredit_id:
+      type: INTEGER
+      required: true
+      foreignTable: cccredit
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccparroq_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccparroq
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccgarsol:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nomgar:
+      type: VARCHAR
+    monestgar:
+      type: DOUBLE
+    desgar:
+      type: VARCHAR
+    monava:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    fecrec:
+      type: DATE
+    codusu:
+      type: INTEGER
+    ubinomurb:
+      type: VARCHAR
+      size: 100
+    ubinumcasedi:
+      type: VARCHAR
+      size: 100
+    ubinumcal:
+      type: VARCHAR
+      size: 100
+    ubinumpis:
+      type: VARCHAR
+      size: 50
+    ubinumapt:
+      type: VARCHAR
+      size: 50
+    ubipunref:
+      type: VARCHAR
+      size: 255
+    gravam:
+      type: BOOLEAN
+    grado:
+      type: VARCHAR
+      size: 10
+    reapor:
+      type: VARCHAR
+      size: 100
+    nompro:
+      type: VARCHAR
+      size: 200
+    cedpro:
+      type: VARCHAR
+      size: 10
+    numgar:
+      type: INTEGER
+    cctipgar_id:
+      type: INTEGER
+      required: true
+      foreignTable: cctipgar
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccsolici_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccsolici
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccparroq_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccparroq
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    cccredit_id:
+      type: INTEGER
+      foreignTable: cccredit
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccgerenc:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nomger:
+      type: VARCHAR
+    desger:
+      type: VARCHAR
+    objger:
+      type: VARCHAR
+    fecvig:
+      type: DATE
+    fecven:
+      type: DATE
+    nomyml:
+      type: VARCHAR
+      size: 50
+    orden:
+      type: INTEGER
+    enruta:
+      type: VARCHAR
+      size: 1
+  ccgescob:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    fecges:
+      type: DATE
+    feccompag:
+      type: DATE
+    tipacc:
+      type: VARCHAR
+    fecdep:
+      type: DATE
+    fecrec:
+      type: DATE
+    ccbanco_id:
+      type: INTEGER
+    numdep:
+      type: VARCHAR
+    mondep:
+      type: DOUBLE
+    envfax:
+      type: BOOLEAN
+    coment:
+      type: VARCHAR
+      size: 100
+    ccclaact_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccclaact
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccusuint_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccusuint
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccactana_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccactana
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    cctiptra_id:
+      type: INTEGER
+      required: true
+      foreignTable: cctiptra
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    cccredit_id:
+      type: INTEGER
+      required: true
+      foreignTable: cccredit
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccanalis_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccanalis
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccestado_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccestado
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccindbalger:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    fecindbalger:
+      type: DATE
+    monindbalger:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    ccbalger_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccbalger
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccindica_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccindica
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccindica:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nomind:
+      type: VARCHAR
+      required: true
+    formula:
+      type: VARCHAR
+      required: true
+    unidad:
+      type: VARCHAR
+      size: 1
+      required: true
+    codigo:
+      type: VARCHAR
+      size: 10
+      required: true
+    operandos:
+      type: VARCHAR
+      required: true
+  ccinform:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    titulo:
+      type: VARCHAR
+    conten:
+      type: VARCHAR
+    fecrec:
+      type: DATE
+    fecent:
+      type: DATE
+    feccul:
+      type: DATE
+    puntuacion:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    ccgerenc_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccgerenc
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccanalis_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccanalis
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccclainf_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccclainf
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccsolici_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccsolici
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccresbar_id:
+      type: INTEGER
+      foreignTable: ccgerenc
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccliquid:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    ordliq:
+      type: VARCHAR
+    monliq:
+      type: DOUBLE
+    numche:
+      type: VARCHAR
+    codusuaut:
+      type: INTEGER
+    estche:
+      type: VARCHAR
+    monaculiq:
+      type: DOUBLE
+    cccredit_id:
+      type: INTEGER
+      required: true
+      foreignTable: cccredit
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    cccuades_id:
+      type: INTEGER
+      required: true
+      foreignTable: cccuades
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccpartid_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccpartid
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccsolliq_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccsolliq
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccconcep_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccconcep
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccpagter_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccpagter
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    cccueban_id:
+      type: INTEGER
+      required: true
+      foreignTable: cccueban
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccprogra_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccprogra
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccmunici:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nommun:
+      type: VARCHAR
+    ccestado_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccestado
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccopcion:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nomopc:
+      type: VARCHAR
+    desopc:
+      type: VARCHAR
+  ccorimatpri:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nomorimatpri:
+      type: VARCHAR
+      size: 50
+  ccpago:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    montot:
+      type: DOUBLE
+    numtra:
+      type: VARCHAR
+    fecpag:
+      type: DATE
+    fecreg:
+      type: DATE
+    numcue:
+      type: VARCHAR
+    cedrifcue:
+      type: VARCHAR
+    ccperparamo_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccperparamo
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    cccueban_id:
+      type: INTEGER
+      required: true
+      foreignTable: cccueban
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccperpre_id:
+      type: INTEGER
+      foreignTable: ccperpre
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    cctiptra_id:
+      type: INTEGER
+      required: true
+      foreignTable: cctiptra
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    cccredit_id:
+      type: INTEGER
+      required: true
+      foreignTable: cccredit
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    resamocap:
+      type: VARCHAR
+      size: 1
+  ccpagres:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    detres:
+      type: VARCHAR
+      required: true
+    ccpago_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccpago
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccrespue_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccrespue
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccpagter:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nomter:
+      type: VARCHAR
+    rifter:
+      type: VARCHAR
+    telter:
+      type: VARCHAR
+    codaretel:
+      type: VARCHAR
+    dirtel:
+      type: VARCHAR
+    observ:
+      type: VARCHAR
+    ccacteco_id:
+      type: INTEGER
+      foreignTable: ccacteco
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccperpre_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccperpre
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    cctipups_id:
+      type: INTEGER
+      foreignTable: cctipups
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccparroq_id:
+      type: INTEGER
+      foreignTable: ccparroq
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccparamo:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    priori:
+      type: INTEGER
+    nombre:
+      type: VARCHAR
+    primonintmor:
+      type: INTEGER
+    primonint:
+      type: INTEGER
+    primonpri:
+      type: INTEGER
+    primonintgra:
+      type: INTEGER
+    primonintcum:
+      type: INTEGER
+    ccperparamo_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccperparamo
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccparamopar:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    priori:
+      type: INTEGER
+      required: true
+    porcen:
+      type: DOUBLE
+    ccpartid_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccpartid
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccperparamo_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccperparamo
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccparcre:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    montot:
+      type: DOUBLE
+    ccpartid_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccpartid
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    cccredit_id:
+      type: INTEGER
+      required: true
+      foreignTable: cccredit
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccprogra_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccprogra
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccparcrecon:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    monto:
+      type: DOUBLE
+    ccparcre_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccparcre
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccconcep_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccconcep
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccparent:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nomparent:
+      type: VARCHAR
+      size: 50
+      required: true
+    desparent:
+      type: VARCHAR
+      size: 255
+  ccparpro:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    plazo:
+      type: INTEGER
+    permue:
+      type: INTEGER
+    pergra:
+      type: INTEGER
+    modali:
+      type: BOOLEAN
+    numcuo:
+      type: INTEGER
+    numcuofin:
+      type: INTEGER
+    tasint:
+      type: DOUBLE
+      required: true
+    tasintmor:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    fecdespp:
+      type: DATE
+    fechaspp:
+      type: DATE
+    coduni:
+      type: VARCHAR
+    intgrava:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    intcuminc:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    contabb_id:
+      type: INTEGER
+      required: true
+      foreignTable: contabb
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccpartid_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccpartid
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccprogra_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccprogra
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    cctipint_id:
+      type: INTEGER
+      required: true
+      foreignTable: cctipint
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccdeducc_id:
+      type: INTEGER
+      foreignTable: ccdeducc
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccpergrava_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccperiod
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccparrec:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    cccredit_id:
+      type: INTEGER
+      required: true
+      foreignTable: cccredit
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    cccuades_id:
+      type: INTEGER
+      required: true
+      foreignTable: cccuades
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccparroq:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nompar:
+      type: VARCHAR
+    ccmunici_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccmunici
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccparsol:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    monto:
+      type: DOUBLE
+    ccpartid_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccpartid
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccsolici_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccsolici
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccconcep_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccconcep
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccpartid:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nompar:
+      type: VARCHAR
+    codcon:
+      type: integer
+  ccperben:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nomperben:
+      type: VARCHAR
+    cedperben:
+      type: VARCHAR
+    dirperben:
+      type: VARCHAR
+    telperben:
+      type: VARCHAR
+    celular:
+      type: VARCHAR
+    codaretel:
+      type: VARCHAR
+    codarecel:
+      type: VARCHAR
+    sexperben:
+      type: VARCHAR
+    email:
+      type: VARCHAR
+    cccargo_id:
+      type: INTEGER
+      required: true
+      foreignTable: cccargo
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccperpre_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccperpre
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccparroq_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccparroq
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccbenefi_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccbenefi
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccperiod:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    desper:
+      type: VARCHAR
+    alias:
+      type: VARCHAR
+    cantid:
+      type: INTEGER
+  ccperparamo:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nomper:
+      type: VARCHAR
+    desper:
+      type: VARCHAR
+  ccperpre:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    prefijo:
+      type: VARCHAR
+      size: 1
+    descripcion:
+      type: VARCHAR
+      size: 30
+  ccpoliza:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    numpol:
+      type: VARCHAR
+      size: 50
+    nomase:
+      type: VARCHAR
+      size: 50
+    anoseg:
+      type: INTEGER
+    montoseg:
+      type: DOUBLE
+    ccvehicu_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccvehicu
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccpregun:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    pregun:
+      type: VARCHAR
+      size: 150
+  ccprioridad:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nompri:
+      type: VARCHAR
+      size: 100
+    alias:
+      type: VARCHAR
+      size: 10
+    despri:
+      type: VARCHAR
+      size: 255
+  ccprocred:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    ccprogra_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccprogra
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    cccredit_id:
+      type: INTEGER
+      required: true
+      foreignTable: cccredit
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccprogra:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nompro:
+      type: VARCHAR
+    monmax:
+      type: DOUBLE
+    prepro:
+      type: INTEGER
+    fecvig:
+      type: DATE
+    fecven:
+      type: DATE
+    coduni:
+      type: VARCHAR
+    codcat:
+      type: VARCHAR
+    objeto:
+      type: VARCHAR
+    destino:
+      type: VARCHAR
+    monfin:
+      type: VARCHAR
+      size: 255
+    condic:
+      type: VARCHAR
+    garant:
+      type: VARCHAR
+    recaud:
+      type: VARCHAR
+    plafin:
+      type: VARCHAR
+    nomprocom:
+      type: VARCHAR
+    ccperiod_id:
+      type: INTEGER
+      foreignTable: ccperiod
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccfuefin_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccfuefin
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    tipcom:
+      type: VARCHAR
+      required: true
+      foreignTable: cpdoccom
+      foreignReference: tipcom
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccprosol:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    ccsolici_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccsolici
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccprogra_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccprogra
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccproyec:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nompro:
+      type: VARCHAR
+      size: 50
+    respro:
+      type: VARCHAR
+      size: 500
+    empdirgen:
+      type: INTEGER
+    empindgen:
+      type: INTEGER
+    aregeo:
+      type: VARCHAR
+      size: 100
+    monapo:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    desacteco:
+      type: VARCHAR
+      size: 100
+    introd:
+      type: VARCHAR
+    resume:
+      type: VARCHAR
+    estmer:
+      type: VARCHAR
+    tamloc:
+      type: VARCHAR
+    ingpro:
+      type: VARCHAR
+    aposoc:
+      type: VARCHAR
+    invfin:
+      type: VARCHAR
+    profin:
+      type: VARCHAR
+    anafin:
+      type: VARCHAR
+    anexos:
+      type: VARCHAR
+    recome:
+      type: VARCHAR
+    observ:
+      type: VARCHAR
+    ccacteco_id:
+      type: INTEGER
+      foreignTable: ccacteco
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccsolici_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccsolici
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccrecaud:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nomrec:
+      type: VARCHAR
+    desrec:
+      type: VARCHAR
+    alias:
+      type: VARCHAR
+  ccreccre:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    fecha:
+      type: DATE
+    estatus:
+      type: integer
+    ccusuint_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccusuint
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccrecaud_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccrecaud
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    cccredit_id:
+      type: INTEGER
+      required: true
+      foreignTable: cccredit
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccrecdes:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    obsrec:
+      type: VARCHAR
+    fecrec:
+      type: DATE
+    codusurec:
+      type: INTEGER
+    fecreccen:
+      type: DATE
+    codusucen:
+      type: INTEGER
+    estatu:
+      type: VARCHAR
+    ccrecaud_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccrecaud
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    cccuades_id:
+      type: INTEGER
+      required: true
+      foreignTable: cccuades
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccrecpro:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    obsrec:
+      type: VARCHAR
+    fecvig:
+      type: DATE
+    fecven:
+      type: DATE
+    ccrecaud_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccrecaud
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccprogra_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccprogra
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccrecprocre:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    fecrec:
+      type: DATE
+    codusurec:
+      type: INTEGER
+    fecreccen:
+      type: DATE
+    codusucen:
+      type: INTEGER
+    estatu:
+      type: VARCHAR
+    ccrecaud_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccrecaud
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccprogra_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccprogra
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    cccredit_id:
+      type: INTEGER
+      required: true
+      foreignTable: cccredit
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccrecsol:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    ccstatus:
+      type: INTEGER
+    ccrecaud_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccrecaud
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccsolici_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccsolici
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccregion:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nomreg:
+      type: VARCHAR
+      size: 50
+    desreg:
+      type: VARCHAR
+      size: 255
+  ccregnot:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nomregnot:
+      type: VARCHAR
+    desregnot:
+      type: VARCHAR
+    dirregnot:
+      type: VARCHAR
+    codaretel:
+      type: VARCHAR
+    numtelreg:
+      type: VARCHAR
+    codaretel2:
+      type: VARCHAR
+    numtelreg2:
+      type: VARCHAR
+    tipregnot:
+      type: VARCHAR
+      size: 1
+    ccmunici_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccmunici
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccrepben:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nomrepben:
+      type: VARCHAR
+      size: 100
+    cedrifben:
+      type: VARCHAR
+      size: 10
+    fecnac:
+      type: DATE
+    ocupa:
+      type: VARCHAR
+      size: 100
+    dirnomurb:
+      type: VARCHAR
+      size: 100
+    dirnumcal:
+      type: VARCHAR
+      size: 100
+    dirnumcasedi:
+      type: VARCHAR
+      size: 100
+    dirnumpis:
+      type: VARCHAR
+      size: 50
+    dirnumapt:
+      type: VARCHAR
+      size: 50
+    dirpunref:
+      type: VARCHAR
+      size: 255
+    numtel:
+      type: VARCHAR
+      size: 12
+    numcel:
+      type: VARCHAR
+      size: 12
+    numfax:
+      type: VARCHAR
+      size: 12
+    codaretel:
+      type: VARCHAR
+    codarecel:
+      type: VARCHAR
+    codarefax:
+      type: VARCHAR
+    corele:
+      type: VARCHAR
+      size: 50
+    sexrepben:
+      type: CHAR
+      size: 1
+    parloccas:
+      type: VARCHAR
+      size: 50
+    ccperpre_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccperpre
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccbenefi_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccbenefi
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccparroq_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccparroq
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccparent_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccparent
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccresban:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    numcue:
+      type: VARCHAR
+      size: 20
+    fecha:
+      type: DATE
+    monto:
+      type: DOUBLE
+    totreg:
+      type: INTEGER
+    monnocob:
+      type: DOUBLE
+    fecreg:
+      type: DATE
+  ccresbar:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    descri:
+      type: VARCHAR
+    ranmen:
+      type: INTEGER
+    ranmay:
+      type: INTEGER
+    ccgerenc_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccgerenc
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccrespue:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    estatu:
+      type: VARCHAR
+    nomfis:
+      type: VARCHAR
+    monsol:
+      type: DOUBLE
+    moncob:
+      type: DOUBLE
+    observ:
+      type: VARCHAR
+    cedrif:
+      type: VARCHAR
+      size: 11
+    numcue:
+      type: VARCHAR
+      size: 20
+    ccresban_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccresban
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    _indexes:
+      fk_ccrespue_reference_ccresban:
+        - ccresban_id
+  ccresusu:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    respue:
+      type: VARCHAR
+      size: 150
+    ccpregun_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccpregun
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccusuario_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccusuario
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccrevisi:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    coment:
+      type: VARCHAR
+    estatu:
+      type: VARCHAR
+    fecha:
+      type: DATE
+    ccinform_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccinform
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccanalis_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccanalis
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccriezona:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nomriezona:
+      type: VARCHAR
+      size: 100
+    desriezona:
+      type: VARCHAR
+      size: 255
+  ccsececo:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nomsececo:
+      type: VARCHAR
+      size: 50
+    dessececo:
+      type: VARCHAR
+      size: 50
+  ccsecsol:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    ccsececo_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccsececo
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccbieadq_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccbieadq
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccsesion:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    observ:
+      type: VARCHAR
+    fecses:
+      type: DATE
+    hora:
+      type: VARCHAR
+    estatu:
+      type: VARCHAR
+    feccieses:
+      type: DATE
+  ccsinies:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    descripcion:
+      type: VARCHAR
+      size: 100
+    ccpoliza_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccpoliza
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccsoldes:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    numsoldes:
+      type: INTEGER
+    fecsoldes:
+      type: DATE
+    codusuact:
+      type: INTEGER
+      required: true
+    estatu:
+      type: VARCHAR
+    observacion:
+      type: VARCHAR
+    para:
+      type: VARCHAR
+      size: 150
+    de:
+      type: VARCHAR
+      size: 150
+    fecanu:
+      type: DATE
+    desanu:
+      type: VARCHAR
+    cctipdes_id:
+      type: INTEGER
+      required: true
+      foreignTable: cctipdes
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    cccredit_id:
+      type: INTEGER
+      required: true
+      foreignTable: cccredit
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccsoldescuades:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    ccsoldes_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccsoldes
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    cccuades_id:
+      type: INTEGER
+      required: true
+      foreignTable: cccuades
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccsolici:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    numsol:
+      type: VARCHAR
+      size: 20
+    monsol:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    fecsol:
+      type: DATE
+    obsbie:
+      type: VARCHAR
+      size: 250
+    fecrev:
+      type: DATE
+    nomrev:
+      type: VARCHAR
+      size: 50
+    carrev:
+      type: VARCHAR
+      size: 50
+    observ:
+      type: VARCHAR
+      size: 250
+    actapr:
+      type: INTEGER
+    fecapr:
+      type: DATE
+    nomcor:
+      type: VARCHAR
+      size: 50
+      required: true
+    existeaval:
+      type: BOOLEAN
+    estatu:
+      type: VARCHAR
+      size: 20
+    ccbenefi_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccbenefi
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccusuario_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccusuario
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccciudad_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccciudad
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccmunici_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccmunici
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    cccircuito_id:
+      type: INTEGER
+      foreignTable: cccircuito
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    cccondic_id:
+      type: INTEGER
+      foreignTable: cccondic
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    _uniques:
+      ccsolici_numsol_key:
+        - numsol
+  ccsolinf:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nomsolinf:
+      type: VARCHAR
+    obssolinf:
+      type: VARCHAR
+    fecsolinf:
+      type: DATE
+    ccgerenc_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccgerenc
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccanalis_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccanalis
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccclainf_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccclainf
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccsolliq:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    numsolliq:
+      type: VARCHAR
+    fecliq:
+      type: DATE
+    estatu:
+      type: VARCHAR
+    monto:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    moncaptra:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monactfij:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    montrauti:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monotr:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    observ:
+      type: VARCHAR
+    desdocane:
+      type: VARCHAR
+      size: 40
+    fecanu:
+      type: DATE
+    desanu:
+      type: VARCHAR
+    cccredit_id:
+      type: INTEGER
+      required: true
+      foreignTable: cccredit
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccsoldes_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccsoldes
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    cccuades_id:
+      type: INTEGER
+      required: true
+      foreignTable: cccuades
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccusuint_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccusuint
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccsolliqdocane:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    ccsolliq_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccsolliq
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccdocane_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccdocane
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccsolliqtipliq:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    ccsolliq_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccsolliq
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    cctipliq_id:
+      type: INTEGER
+      required: true
+      foreignTable: cctipliq
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccsolses:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    motivo:
+      type: VARCHAR
+    obsres:
+      type: VARCHAR
+    estatu:
+      type: VARCHAR
+    ccsolici_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccsolici
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccsesion_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccsesion
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  cctipana:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nomtipana:
+      type: VARCHAR
+    destipana:
+      type: VARCHAR
+    ccgerenc_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccgerenc
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  cctipcar:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nomtipcar:
+      type: VARCHAR
+    destipcar:
+      type: VARCHAR
+    fecini:
+      type: DATE
+    fecven:
+      type: DATE
+  cctipcue:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nomtipcue:
+      type: VARCHAR
+      size: 50
+  cctipdes:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nomtipdes:
+      type: VARCHAR
+    destipdes:
+      type: VARCHAR
+  cctipgar:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nomtipgar:
+      type: VARCHAR
+    destipgar:
+      type: VARCHAR
+  cctipint:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nomtipint:
+      type: VARCHAR
+  cctipliq:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nomtipliq:
+      type: VARCHAR
+      required: true
+    destipliq:
+      type: VARCHAR
+      required: true
+  cctipmon:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nomtipmon:
+      type: VARCHAR
+    abrtipmon:
+      type: VARCHAR
+    equivalbol:
+      type: NUMERIC
+      size: 14
+      scale: 2
+  cctippro:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nomtippro:
+      type: VARCHAR
+    destippro:
+      type: VARCHAR
+    empcoop:
+      type: VARCHAR
+  cctipprobie:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nomtipprobie:
+      type: VARCHAR
+      size: 50
+  cctiptra:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nomtiptra:
+      type: VARCHAR
+    destiptra:
+      type: VARCHAR
+  cctipups:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nomtipups:
+      type: VARCHAR
+    destipups:
+      type: VARCHAR
+  cctipupspro:
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+    cctipups_id:
+      type: INTEGER
+      required: true
+      foreignTable: cctipups
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccprogra_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccprogra
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  cctitulo:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    pregunta:
+      type: VARCHAR
+    orden:
+      type: INTEGER
+  ccubiadm:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nomubiadm:
+      type: VARCHAR
+      size: 50
+      required: true
+    desubiadm:
+      type: VARCHAR
+      size: 255
+      required: true
+  ccusuario:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nomusu:
+      type: VARCHAR
+      size: 50
+    contras:
+      type: VARCHAR
+      size: 50
+    cedusu:
+      type: VARCHAR
+      size: 15
+      required: true
+    login:
+      type: VARCHAR
+      size: 50
+      required: true
+    ccbenefi_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccbenefi
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccperpre_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccperpre
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    _uniques:
+      ccusuario_cedusu_key:
+        - cedusu
+      ccusuario_login_key:
+        - login
+  ccusuger:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    ccgerenc_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccgerenc
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccusuint_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccusuint
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccusuint:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nomusuint:
+      type: VARCHAR
+      size: 50
+    contras:
+      type: VARCHAR
+      size: 50
+    cedusuint:
+      type: VARCHAR
+      size: 15
+      required: true
+    login:
+      type: VARCHAR
+      size: 50
+      required: true
+    ccperpre_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccperpre
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    _uniques:
+      ccusuint_cedusuint_key:
+        - cedusuint
+      ccusuint_login_key:
+        - login
+  ccvarbalger:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    fecvarbalger:
+      type: DATE
+    monvarbalger:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    ccbalger_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccbalger
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccvariab_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccvariab
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccvariab:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nomvar:
+      type: VARCHAR
+      required: true
+    tipo:
+      type: VARCHAR
+      size: 1
+      required: true
+    valor:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    abrevi:
+      type: VARCHAR
+      size: 10
+      required: true
+    _uniques:
+      ccvariab_abrevi_key:
+        - abrevi
+  ccvehcreparcon:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    ccparcrecon_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccparcrecon
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    ccvehicu_id:
+      type: INTEGER
+      required: true
+      foreignTable: ccvehicu
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+  ccvehicu:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    nomveh:
+      type: VARCHAR
+      size: 50
+    marca:
+      type: VARCHAR
+      size: 50
+    anoveh:
+      type: INTEGER
+    placa:
+      type: VARCHAR
+      size: 20

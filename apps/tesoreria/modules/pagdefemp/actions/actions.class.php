@@ -5,9 +5,9 @@
  *
  * @package    Roraima
  * @subpackage pagdefemp
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
+ * @author     $Author: lhernandez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: actions.class.php 35165 2009-12-01 04:55:10Z lhernandez $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -127,7 +127,7 @@ $this->Bitacora('Guardo');
   }
 
   /**
-   * Actualiza la informacion que viene de la vista 
+   * Actualiza la informacion que viene de la vista
    * luego de un get/post en el objeto principal del modelo base del formulario.
    *
    */
@@ -307,6 +307,10 @@ $this->Bitacora('Guardo');
     if (isset($opdefemp['ordtba']))
     {
       $this->opdefemp->setOrdtba($opdefemp['ordtba']);
+    }
+    if (isset($opdefemp['ordcre']))
+    {
+      $this->opdefemp->setOrdcre($opdefemp['ordcre']);
     }
   }
 
