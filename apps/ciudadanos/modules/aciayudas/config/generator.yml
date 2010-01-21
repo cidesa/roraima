@@ -25,9 +25,9 @@ generator:
       respat:   { name: Diagnóstico, type: textarea_tag, params: size=70x3 maxlength=5000 }
       infmed:   { name: Informe Médico, type: textarea_tag, params: size=70x3 maxlength=5000 }
       obsmed:   { name: Observación, type: textarea_tag, params: size=70x3 maxlength=5000 }
-      fecdiasoc:     { name: Fecha }
+      fecdiasoc:     { name: Fecha Informe }
       usudiasoc:     { name: Elaborado Por, params: size=100 maxlength=100 }
-      resdiasoc:    { name: Resumen, type: textarea_tag, params: size=70x3 maxlength=5000 }
+      resdiasoc:    { name: Resumen Patología, type: textarea_tag, params: size=70x3 maxlength=5000 }
       fecvisdoc:     { name: Fecha }
       usuvisdoc:     { name: Elaborado Por, params: size=100 maxlength=100 }
       resvisdoc:   { name: Resumen, type: textarea_tag, params: size=70x3 maxlength=5000 }
@@ -54,9 +54,8 @@ generator:
 #        Proveedor:    [_caprovee_id]
         Ayuda:        [attipayu_id, _atrubros_id, desayu]
         Detalle de Recaudos: [_detallerecaudos]
-        Información Médica: [_atmedico_id]
-        Diagnostico Socioeconómico: [respat, obsmed]
-        Diagnostico Social: [fecdiasoc, usudiasoc, resdiasoc]
+        Diagnostico Médico: [fecdiasoc, _atmedico_id, resdiasoc]
+        Diagnostico Social: [respat, obsmed]
 #        Informe de Visita Domiciliaria: [fecvisdoc, usuvisdoc, resvisdoc]
         Detalle de Ayuda: [_detalleayudas]
 #        Detalle de Ayuda: [_detayu]
