@@ -582,6 +582,10 @@ $this->Bitacora('Guardo');
       Herramientas::insertarRegistros($sql);
        }
      }
+     if($opordpag->getTipcau()==$this->ordpagcre)
+     {
+        CreditosIntegracion::actualizarLiquidacionCreditos($opordpag, $this->getRequestParameter('refcre',''));
+     }
    }
    $this->getUser()->getAttributeHolder()->remove('presiona','pagemiord');
  }
@@ -1969,6 +1973,7 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
   {$this->ajax='';
     $this->div='REF'; // div grid de la referencia
     $this->docrefiere=CpdoccauPeer::getRefier($this->getRequestParameter('tipcau'));
+    $refcre = $this->getRequestParameter('refcre','');
     if ($this->docrefiere=='P')
     {
       OrdendePago::datosRefere($this->getRequestParameter('codigo'),$this->getRequestParameter('fecha2'),&$fecha,&$descripcion,&$tipo,&$destipo,&$elrif,&$descripcion2,&$msj);
@@ -2012,8 +2017,19 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
         if ($msj=='')
         {
          $this->configGridRefere2(str_pad($this->getRequestParameter('codigo'),8,'0',STR_PAD_LEFT));
-        }else {$this->configGridRefere2();}
-
+        }else {
+          $this->configGridRefere2();
+        }
+        if($refcre){
+          $ccdetcuades = CcdetcuadesPeer::retrieveByPK($refcre);
+          if($ccdetcuades){
+            if($this->obj4['datos']){
+              $this->obj4['datos'][0]->setMondescre($ccdetcuades->getMonto());
+            }
+            $elrif = $ccdetcuades->getRifter();
+            $dato = $ccdetcuades->getNomter();
+          }
+        }
         $this->cedrifdesh="";
         $varemp = $this->getUser()->getAttribute('configemp');
 		if ($varemp)
@@ -2566,7 +2582,7 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
   $this->mascaraubi = Herramientas::ObtenerFormato('Opdefemp','Forubi');
   $this->lonubi=strlen($this->mascaraubi);
   $this->mascarapresupuesto = Herramientas::formatoPresupuesto();
-  OrdendePago::formload(&$afectarecargo,&$ordpagnom,&$ordpagapo,&$ordpagliq,&$ordpagfid,&$ordpagval,&$compadic,&$genctaord);
+  OrdendePago::formload(&$afectarecargo,&$ordpagnom,&$ordpagapo,&$ordpagliq,&$ordpagfid,&$ordpagval,&$compadic,&$genctaord,&$ordpagcre);
   Herramientas::obtenerFormatoCategoria(&$formatopar,&$iniciopartida);
   $this->afectarec=$afectarecargo;
   $this->formatpar=$formatopar;
@@ -2578,6 +2594,7 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
   $this->ordpagval=$ordpagval;
   $this->compadic=$compadic;
   $this->genctaord=$genctaord;
+  $this->ordpagcre=$ordpagcre;
   $this->unidad=Herramientas::getX('CODEMP','Opdefemp','Unitri','001');
   //$this->anoini=substr(Herramientas::getX('CODEMP','Cpdefniv','fecini','001'),0,4);
   //$this->anocie=substr(Herramientas::getX('CODEMP','Cpdefniv','feccie','001'),0,4);

@@ -4,8 +4,8 @@
  *
  * @package    Roraima
  * @subpackage vistas
- * @author     $Author: dmartinez $ <desarrollo@cidesa.com.ve>
- * @version    SVN: $Id: _edit_form.php 33258 2009-09-21 22:34:36Z dmartinez $
+ * @author     $Author: lhernandez $ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id: _edit_form.php 35165 2009-12-01 04:55:10Z lhernandez $
  */
 // date: 2007/07/03 12:48:57
 ?>
@@ -514,6 +514,41 @@
   'size' => 60,
   'disabled' => true,
   'control_name' => 'opdefemp[nomtiptba]',
+  )); echo $value ? $value : '&nbsp;' ?>
+<br>
+<br>
+<table>
+<tr>
+<th>
+  <?php echo label_for('opdefemp[ordcre]', __($labels['opdefemp{ordcre}']), 'class="required" Style="width:40px"') ?>
+  <div class="content<?php if ($sf_request->hasError('opdefemp{ordcre}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('opdefemp{ordcre}')): ?>
+    <?php echo form_error('opdefemp{ordcre}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+ <?php echo input_auto_complete_tag('opdefemp[ordcre]', $opdefemp->getOrdcre(),
+  'pagdefemp/autocomplete?ajax=5',  array('autocomplete' => 'off','maxlength' => 4,
+  'onKeyPress' => "javascript:cadena=this.value;cadena=cadena.toUpperCase();document.getElementById('opdefemp_ordtba').value=cadena",
+  'onBlur'=> remote_function(array(
+        'url'      => 'pagdefemp/ajax',
+        'complete' => 'AjaxJSON(request, json)',
+        'condition' => "$('opdefemp_ordcre').value != '' ",
+        'script' => true,
+        'with' => "'ajax=1&cajtexmos=opdefemp_nomtipcre&codigo='+this.value"
+        ))),
+     array('use_style' => 'true',)
+  )
+?></div>
+</th>
+<th>
+&nbsp;&nbsp;&nbsp; <?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Opdefemp_pagdefemp2/clase/Cpdoccau/frame/sf_admin_edit_form/obj1/opdefemp_nomtipcre/obj2/opdefemp_ordcre/campo1/nomext/campo2/tipcau/param1/1')?>
+</th>
+</tr>
+</table>
+<?php $value = object_input_tag($opdefemp, 'getNomtipcre', array (
+  'size' => 60,
+  'disabled' => true,
+  'control_name' => 'opdefemp[nomtipcre]',
   )); echo $value ? $value : '&nbsp;' ?>
 </div>
   </fieldset>
