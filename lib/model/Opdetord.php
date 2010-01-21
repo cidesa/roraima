@@ -11,7 +11,9 @@ class Opdetord extends BaseOpdetord
 {
   private $check = ''; 
   private $retiva = '';
-	
+  protected $refe="";
+  protected $refsal = '';
+
   public function setCheck($val)
   {
 	$this->check = $val;		

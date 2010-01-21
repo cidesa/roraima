@@ -69,7 +69,8 @@ class tesrencajchiActions extends autotesrencajchiActions
    */
   public function configGrid()
   {
-    $this->configGridDetalle($this->opordpag->getNumord(),$this->opordpag->getCodcat(),$this->opordpag->getTipcau(),$this->getRequestParameter('opordpag[fecemi]'));
+    $this->configGridSalida($this->getRequestParameter('opordpag[fecdes]'),$this->getRequestParameter('opordpag[fechas]'));
+    $this->configGridDetalle($this->opordpag->getNumord());
   }
 
   /**
@@ -79,14 +80,39 @@ class tesrencajchiActions extends autotesrencajchiActions
    * los datos del grid.
    *
    */
-  public function configGridDetalle($numord='',$codcat='',$tipren='',$fecha='')
+  public function configGridSalida($fechades='', $fechahas='')
   {
-    if ($fecha=='') $fecha=date('d/m/Y');
+    if ($fechades=='') $fechades=date('Y-m-d');
+    if ($fechahas=='') $fechahas=date('Y-m-d');
+    $sql="tssalcaj.fecsal>='".$fechades."'  and tssalcaj.fecsal<='".$fechahas."'";
+
+    $a= new Criteria();
+    $a->add(TssalcajPeer::FECSAL,$sql,Criteria::CUSTOM);
+    $a->add(TssalcajPeer::STASAL,'P');
+    $det= TssalcajPeer::doSelect($a);
+
+    $this->filsal=count($det);
+    $this->opordpag->setFilassal($this->filsal);
+
+    $this->columnas = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/tesrencajchi/'.sfConfig::get('sf_app_module_config_dir_name').'/grid_tssalcaj');
+    $this->columnas[1][0]->setHTML('onClick="guardarseleccion()"');
+    $this->objeto1 =$this->columnas[0]->getConfig($det);
+
+    $this->opordpag->setObjeto1($this->objeto1);
+  }
+
+  /**
+   * Esta función permite definir la configuración del grid de datos
+   * que contiene el formulario. Esta función debe ser llamada
+   * en las acciones, create, edit y handleError para recargar en todo momento
+   * los datos del grid.
+   *
+   */
+  public function configGridDetalle($numord='',$arreglo=array())
+  {
     if ($numord=='')
-    {
-      $sql = "Select A.Codcat||'-'||B.CodPar as codpre,Sum(A.MonSal) as moncau, '' as id From TSDetSal A,CARegArt B Where A.RefSal In (Select C.RefSal From TSSalCaj C Where C.FecSal<=TO_DATE('".$fecha."','dd/mm/yyyy') And C.StaSal='P') And A.CodArt=B.CodArt Group By A.Codcat,B.CodPar";
-    Herramientas :: BuscarDatos($sql, & $reg);
-    $detalle=$reg;
+    {      
+      $detalle=$arreglo;
     }
     else
     {
@@ -121,15 +147,16 @@ class tesrencajchiActions extends autotesrencajchiActions
     switch ($ajax){
       case '1':
         $javascript="";
-        //$fecha=date('Y-m-d',strtotime($codigo));
+        $this->entrada='1';
         $this->params=array();
         $this->labels = $this->getLabels();
         $this->opordpag = $this->getOpordpagOrCreate();
         $this->setVars();
-        $this->configGridDetalle('',$this->opordpag->getCodcat(),$this->opordpag->getTipcau(),$codigo);
+        $arre=Tesoreria::FormarArreImp($codigo);
+        $this->configGridDetalle('',$arre);
         $filajax=$this->filajax;
         $javascript="totalfil('$filajax');";
-        $output = '[["javascript","'.$javascript.'",""],["","",""],["","",""]]';
+        $output = '[["javascript","'.$javascript.'",""],["opordpag_filasord","'.$filajax.'",""],["","",""]]';
         $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
         break;
       case '2':
@@ -189,6 +216,23 @@ class tesrencajchiActions extends autotesrencajchiActions
         $output = '[["javascript","'.$msj.'",""]]';
         $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
         return sfView::HEADER_ONLY;
+        break;
+      case '5':
+        $this->entrada='2';
+        $javascript="";
+        $arredes=split('/',$this->getRequestParameter('fecdes'));
+        $arrehas=split('/',$codigo);
+        $fechades=$arredes[2]."-".$arredes[1]."-".$arredes[0];
+        $fechahas=$arrehas[2]."-".$arrehas[1]."-".$arrehas[0];
+        
+        $this->params=array();
+        $this->labels = $this->getLabels();
+        $this->opordpag = $this->getOpordpagOrCreate();
+        $this->setVars();        
+        $this->configGridSalida($fechades,$fechahas);
+        $filsal=$this->filsal;
+        $output = '[["javascript","'.$javascript.'",""],["opordpag_filassal","'.$filsal.'",""],["","",""]]';        
+        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
         break;
       default:
         $output = '[["","",""],["","",""],["","",""]]';

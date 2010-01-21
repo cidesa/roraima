@@ -2334,4 +2334,25 @@ class Tesoreria {
 
   }
 
+  public static function FormarArreImp($cadenasal)
+  {
+    $arregloimp=array();
+    $j=0;
+    $arre=split('/',$cadenasal);
+    $ind=count($arre)-1;
+    $p=1;
+    while ($p<=$ind)
+    {
+      $sql = "Select A.Codcat||'-'||B.CodPar as codpre,Sum(A.MonSal) as moncau, '' as id From TSDetSal A,CARegArt B Where A.RefSal='".$arre[$p]."' And A.CodArt=B.CodArt Group By A.Codcat,B.CodPar";
+      if (Herramientas :: BuscarDatos($sql, & $reg)){      
+          $j=count($arregloimp)+1;
+          $arregloimp[$j-1]["codpre"]=$reg[0]["codpre"];
+          $arregloimp[$j-1]["moncau"]=number_format($reg[0]["moncau"],2,',','.');
+          $arregloimp[$j-1]["id"]=$reg[0]["id"];;
+      }
+      $p++;
+    }
+    return $arregloimp;
+  }
+
 }

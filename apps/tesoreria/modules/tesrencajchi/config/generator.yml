@@ -12,7 +12,11 @@ generator:
       tipfin: { name: Financiamiento, params: maxlength=4}
       nomext2: { name: Descripción}
       monord: { name: Monto Total}
+      fecdes: { name: Fecha Desde, params: date_format='dd/MM/yyyy' maxlength=10}
+      fechas: { name: Fecha Hasta, params: date_format='dd/MM/yyyy' maxlength=10}
       grid: { name: . }
+      gridsal: { name: . }
+      btnimp: { name: . }
     list:
       title:          Rendición de Caja
       display:        [=numord, fecemi]
@@ -26,8 +30,9 @@ generator:
       title:          Edición de Rendición de Caja
       display:
         "Datos": [numord, _fecemi, desord, _coduni, _tipfin, monord]
+        "Salidas por Rendir": [_fecdes, _fechas, _gridsal, _btnimp]
         "Imputaciones Presupuestarias": [_grid]
-      hide: [tipcau, cedrif, mascaraubi, lonubi, codcat, idrefer, totalcomprobantes, numcom, filasord]
+      hide: [tipcau, cedrif, mascaraubi, lonubi, codcat, idrefer, totalcomprobantes, numcom, filasord, cadesel, filassal]
       actions:
         _list:        ~
         _save:        ~

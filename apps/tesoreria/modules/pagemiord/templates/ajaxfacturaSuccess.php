@@ -17,15 +17,43 @@
 <?
   echo grid_tag($obj2);
 ?>
-<?php echo input_hidden_tag('totfac', '') ?>
-<?php echo input_hidden_tag('totexen', '') ?>
-<?php echo input_hidden_tag('totbas', '') ?>
-<?php echo input_hidden_tag('totimp', '') ?>
-<?php echo input_hidden_tag('totiva', '') ?>
-<?php echo input_hidden_tag('totbasmil', '') ?>
-<?php echo input_hidden_tag('totbasislr', '') ?>
-<?php echo input_hidden_tag('totmontmil', '') ?>
-<?php echo input_hidden_tag('totmontislr', '') ?>
+<br>
+<?php echo label_for('',__('Total Factura') , 'class="required" Style="width:100px"') ?>
+<?php echo input_tag('totfac','', 'size=15 class=grid_txtright readonly=true') ?>
+<br>
+<?php echo label_for('',__('Total Exento') , 'class="required" Style="width:100px"') ?>
+<?php echo input_tag('totexen','', 'size=15 class=grid_txtright readonly=true') ?>
+<br>
+<?php echo label_for('',__('Total Bas Imp.') , 'class="required" Style="width:100px"') ?>
+<?php echo input_tag('totbas','', 'size=15 class=grid_txtright readonly=true') ?>
+<br>
+<?php echo label_for('',__('Total Impuesto') , 'class="required" Style="width:100px"') ?>
+<?php echo input_tag('totimp','', 'size=15 class=grid_txtright readonly=true') ?>
+<br>
+<?php echo label_for('',__('Total Iva Ret.') , 'class="required" Style="width:100px"') ?>
+<?php echo input_tag('totiva','', 'size=15 class=grid_txtright readonly=true') ?>
+<br>
+<?php echo label_for('',__('Total Bas Imp 1xMil') , 'class="required" Style="width:100px"') ?>
+<?php echo input_tag('totbasmil','', 'size=15 class=grid_txtright readonly=true') ?>
+<br>
+<?php echo label_for('',__('Total Monto 1xMil') , 'class="required" Style="width:100px"') ?>
+<?php echo input_tag('totmontmil','', 'size=15 class=grid_txtright readonly=true') ?>
+<br>
+<?php echo label_for('',__('Total Bas Imp ISLR') , 'class="required" Style="width:100px"') ?>
+<?php echo input_tag('totbasislr','', 'size=15 class=grid_txtright readonly=true') ?>
+<br>
+<?php echo label_for('',__('Total Monto ISLR') , 'class="required" Style="width:100px"') ?>
+<?php echo input_tag('totmontislr','', 'size=15 class=grid_txtright readonly=true') ?>
+
+<?php //echo input_hidden_tag('totfac', '') ?>
+<?php //echo input_hidden_tag('totexen', '') ?>
+<?php //echo input_hidden_tag('totbas', '') ?>
+<?php //echo input_hidden_tag('totimp', '') ?>
+<?php //echo input_hidden_tag('totiva', '') ?>
+<?php //echo input_hidden_tag('totbasmil', '') ?>
+<?php //echo input_hidden_tag('totbasislr', '') ?>
+<?php //echo input_hidden_tag('totmontmil', '') ?>
+<?php //echo input_hidden_tag('totmontislr', '') ?>
 <? }?>
 <script language="JavaScript" type="text/javascript">
 if ($('msj').value!="")

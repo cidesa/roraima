@@ -196,6 +196,10 @@ class Nomina {
     }
     $datos->setSercon($cadena);
     $datos->save();
+    if (self::agregaBenefi($datos)==true)
+    {
+      self::grabarBenefi($datos);
+    }
     self :: grabarInffam($datos, $grid);
     self :: grabarInfcur($datos, $grid2);
     self :: grabarExplabden($datos, $grid3);
@@ -8416,6 +8420,39 @@ exit();
     return 0;
   }
   }
+
+
+  public static function agregaBenefi($datos)
+  {
+    if ($datos->getRifemp()!='')
+    {
+        $variable=$datos->getRifemp();
+    }else $variable=$datos->getCedemp();
+
+    $c= new Criteria();
+    $c->add(OpbenefiPeer::CEDRIF, $variable);
+    $ben= OpbenefiPeer::doSelectOne($c);
+    if ($ben)
+    {return false;}
+    else {return true;}
+  }
+
+  public static function grabarBenefi($datos)
+  {
+    if ($datos->getRifemp()!='')
+    {
+        $variable=$datos->getRifemp();
+    }else $variable=$datos->getCedemp();
+
+    $benefi= new Opbenefi();
+    $benefi->setCedrif($variable);
+    $benefi->setNomben($datos->getNomemp());
+    $benefi->setDirben($datos->getDirhab());
+    $benefi->setTelben($datos->getTelhab());
+    $benefi->setNacionalidad($datos->getNacemp());
+    $benefi->save();
+  }
+
 
 
 
