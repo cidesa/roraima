@@ -72,6 +72,9 @@ class Opordpag extends BaseOpordpag
   protected $referencias2 = '';
   protected $nombeneficiario="";
   protected $modbasimpiva="";
+  protected $objeto1=array();
+  protected $cadesel='';
+  protected $filassal=0;
 
    public function afterHydrate()
    {
