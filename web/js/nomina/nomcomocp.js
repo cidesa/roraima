@@ -129,3 +129,37 @@
      $('incremento').disabled=false;
 
    }
+
+   function validarepetido(nomina_concepto,fila)
+   {
+       var conceptorepetido=false;
+       var am=obtener_filas_grid('a',3);
+       var i=0;
+       while (i<am)
+       {
+        var codigo="ax"+"_"+i+"_1";
+        var concepto="ax"+"_"+i+"_3";
+
+        var nomina_concepto2=$(codigo).value+$(concepto).value;
+
+        if (i!=fila)
+        {
+          if (nomina_concepto==nomina_concepto2)
+          {
+            conceptorepetido=true;
+            break;
+          }
+        }
+       i++;
+       }
+       
+       if (conceptorepetido)
+       {
+          var nom="ax"+"_"+fila+"_1";
+          var con="ax"+"_"+fila+"_3";
+          var descrcon="ax"+"_"+fila+"_4";
+           alert('El Concepto '+$(con).value+' ya esta asociado a la Nomina '+$(nom).value+' cambielo por otro');
+           $(con).value='';
+           $(descrcon).value='';
+       }
+   }

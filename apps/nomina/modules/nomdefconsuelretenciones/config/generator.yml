@@ -1,0 +1,31 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Nptipaportes
+    theme:            cidesaGenerator
+    fields:
+      codtipapo: { name: Código, params: readonly=true}
+      destipapo: { name: Descripción, params: readonly=true}
+      grid: {name: .}
+    list:
+      title:          Conceptos de Sueldo para Retenciones
+      filters:        [codtipapo]
+      fields:
+        destipapo: { name: Retención, params: readonly=true}
+      display:        [=codtipapo, destipapo]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+      actions:
+        _create:                 NONE
+      sort: codtipapo
+    edit:
+      title:          Edición de Conceptos de Sueldo para Retenciones
+      display:
+        "Tipo de Aporte":    [codtipapo, destipapo]
+        "Conceptos de Sueldo para Retenciones":     [_grid]
+      actions:
+        _list:                 ~
+        _save:                 ~
+        _delete:               ~

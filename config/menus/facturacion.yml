@@ -32,6 +32,9 @@ facturacion:
       Compra:
         modulo: compras.php
         modulo_dev: compras_dev.php
+      Transacciones:
+        modulo: cuentasxcobrar.php
+        modulo_dev: cuentasxcobrar_dev.php
       Terminado:
         modulo: compras.php
         modulo_dev: compras_dev.php
@@ -90,6 +93,7 @@ facturacion:
       Despachos:                                            fadesp
       Devoluciones:                                         fadevolu
       Ajustes:                                              faajuste
+      Transacciones:                                        cobtransa
     Reportes:
       Generales:
         División Territorial:
