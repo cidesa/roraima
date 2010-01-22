@@ -15,5 +15,5 @@
  */
 class Nptipaportes extends BaseNptipaportes
 {
-
+    protected $objeto=array();
 }
