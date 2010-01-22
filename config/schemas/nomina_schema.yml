@@ -7185,3 +7185,26 @@ propel:
       type: INTEGER
       required: true
       autoIncrement: true
+  npconsuelaporet:
+    codtipapo:
+      type: VARCHAR
+      size: 4
+      required: true
+    codnom:
+      type: VARCHAR
+      size: 3
+      required: true
+    codcon:
+      type: VARCHAR
+      size: 3
+      required: true
+    tipo:
+      type: VARCHAR
+      size: 1
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro

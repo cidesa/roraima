@@ -8495,5 +8495,65 @@ exit();
     return -1;
   }
 
+  public static function salvarConceptosSueldosAportes($objNptipaportes,$grid)
+  {
+    $x = $grid[0];
+    $j = 0;
+    while ($j < count($x)) {
+      if ($x[$j]->getCodnom() != '' && $x[$j]->getCodcon() != '') {
+        $x[$j]->setCodtipapo($objNptipaportes->getCodtipapo());
+        $x[$j]->setTipo('A');
+        $x[$j]->save();
+      }
+      $j++;
+    }
+    $z = $grid[1];
+    $j = 0;
+    if (!empty ($z[$j])) {
+      while ($j < count($z)) {
+        $z[$j]->delete();
+        $j++;
+      } //while ($j<count($z))
+    } //if (!empty($z[$j]))
+  }
+
+  public static function salvarConceptosSueldosRetenciones($objNptipaportes,$grid)
+  {
+    $x = $grid[0];
+    $j = 0;
+    while ($j < count($x)) {
+      if ($x[$j]->getCodnom() != '' && $x[$j]->getCodcon() != '') {
+        $x[$j]->setCodtipapo($objNptipaportes->getCodtipapo());
+        $x[$j]->setTipo('R');
+        $x[$j]->save();
+      }
+      $j++;
+    }
+    $z = $grid[1];
+    $j = 0;
+    if (!empty ($z[$j])) {
+      while ($j < count($z)) {
+        $z[$j]->delete();
+        $j++;
+      } //while ($j<count($z))
+    } //if (!empty($z[$j]))
+  }
+
+  public static function eliminarConceptosSueldosAportes($objNptipaportes)
+  {
+      $d= new Criteria();
+      $d->add(NpconsuelaporetPeer::CODTIPAPO,$objNptipaportes->getCodtipapo());
+      $d->add(NpconsuelaporetPeer::TIPO,'A');
+      NpconsuelaporetPeer::doDelete($d);
+  }
+
+  public static function eliminarConceptosSueldosRetenciones($objNptipaportes)
+  {
+      $d= new Criteria();
+      $d->add(NpconsuelaporetPeer::CODTIPAPO,$objNptipaportes->getCodtipapo());
+      $d->add(NpconsuelaporetPeer::TIPO,'R');
+      NpconsuelaporetPeer::doDelete($d);
+  }
+
 } // fin clase
 ?>

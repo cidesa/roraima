@@ -86,6 +86,7 @@
 
   function toAjax(indiceAjax,accion,valor,funcion,params)
   {
+    if (valor!=''){
     new Ajax.Request(accion, {
         asynchronous:true,
         evalScripts:true,
@@ -97,6 +98,7 @@
             },
         parameters: 'ajax='+indiceAjax+'&codigo='+valor+params
         });
+    }
   }
 
   function toAjaxUpdater(div,indiceAjax,accion,valor,funcion,params)
