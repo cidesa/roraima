@@ -164,7 +164,7 @@ class tesmovsalcajActions extends autotesmovsalcajActions
         $resul= CaregartPeer::doSelectOne($u);
         if ($resul)
         {
-          $dato1=$resul->getDesart();
+          $dato1=eregi_replace("[\n|\r|\n\r]", "", $resul->getDesart());
           $dato2=number_format($resul->getCosult(),2,',','.');
           $dato3=$resul->getCodpar();
         }
