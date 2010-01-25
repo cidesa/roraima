@@ -308,20 +308,23 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 				   $i++;
 			  }else
 			  {
-			  	   $perdeduc[$j]['concepto']=$arr[$cont]['descripcion'];
-				   $perdeduc[$j]['monto']=H::FormatoMonto($arr[$cont]['monto']*-1);
-				   $perdeduc[$j]['codpre']=$categoria."-".$arr[$cont]['partida'];
-				   $c = new Criteria();
-				   $c->add(CpdeftitPeer::CODPRE,$categoria."-".$arr[$cont]['partida']);
-				   $rs = CpdeftitPeer::doSelectone($c);
-				   if($rs)
-					   $perdeduc[$j]['descripcion']=$rs->getNompre();
-				   else
-				   	   $perdeduc[$j]['descripcion']='<!titulo presupuestario no existe!>';
-				   $perdeduc[$j]['codcon']='AUT';
-				   $perdeduc[$j]['dias']=$arr[$cont]['dias'];
-				   $perdeduc[$j]['id']=9;
-				   $j++;
+			  	  if(H::FormatoMonto($arr[$cont]['monto']*-1)>0)
+				  {
+				  	   $perdeduc[$j]['concepto']=$arr[$cont]['descripcion'];
+					   $perdeduc[$j]['monto']=H::FormatoMonto($arr[$cont]['monto']*-1);
+					   $perdeduc[$j]['codpre']=$categoria."-".$arr[$cont]['partida'];
+					   $c = new Criteria();
+					   $c->add(CpdeftitPeer::CODPRE,$categoria."-".$arr[$cont]['partida']);
+					   $rs = CpdeftitPeer::doSelectone($c);
+					   if($rs)
+						   $perdeduc[$j]['descripcion']=$rs->getNompre();
+					   else
+					   	   $perdeduc[$j]['descripcion']='<!titulo presupuestario no existe!>';
+					   $perdeduc[$j]['codcon']='AUT';
+					   $perdeduc[$j]['dias']=$arr[$cont]['dias'];
+					   $perdeduc[$j]['id']=9;
+					   $j++;	
+				  }			  	   
 			  }
 			  $cont++;
 			}
