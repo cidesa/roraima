@@ -789,7 +789,7 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
       $col4->setAlineacionObjeto(Columna :: CENTRO);
       $col4->setAlineacionContenido(Columna :: CENTRO);
       $col4->setNombreCampo('dias');
-      $col4->setHTML('type="text" size="3" maxlength="3"  readonly=true');
+      $col4->setHTML('type="text" size="5" maxlength="5"  readonly=true');
       $col4->setEsGrabable('true');
       $col4->setEsTotal(true, 'totmonpres');
 
@@ -1067,7 +1067,7 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
       $col4->setAlineacionObjeto(Columna :: CENTRO);
       $col4->setAlineacionContenido(Columna :: CENTRO);
       $col4->setNombreCampo('dias');
-      $col4->setHTML('type="text" size="3" maxlength="3"  readonly=true');
+      $col4->setHTML('type="text" size="5" maxlength="5"  readonly=true');
       $col4->setEsGrabable('true');
       $col4->setEsTotal(true, 'totmonpres');
 
