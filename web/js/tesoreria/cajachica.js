@@ -99,12 +99,12 @@ function totalizarMonto(e)
    var articulo=$(id).value;
 
    var articulorepetido=false;
-   var am=totalregistros('ax',1,25);
+   var am=totalregistros2('ax',1,25);
    var i=0;
    while (i<am)
    {
     var codigo="ax"+"_"+i+"_1";
-
+    if ($(codigo)){
     var articulo2=$(codigo).value;
 
     if (i!=fila)
@@ -114,6 +114,7 @@ function totalizarMonto(e)
         articulorepetido=true;
         break;
       }
+    }
     }
    i++;
    }
@@ -228,12 +229,12 @@ function totalizarMonto(e)
    var cuenta=$(id).value;
 
    var cuentarepetida=false;
-   var am=totalregistros('ax',1,30);
+   var am=totalregistros2('ax',1,30);
    var i=0;
    while (i<am)
    {
     var codigo="ax"+"_"+i+"_1";
-
+    if ($(codigo)){
     var cuenta2=$(codigo).value;
 
     if (i!=fila)
@@ -243,6 +244,7 @@ function totalizarMonto(e)
         cuentarepetida=true;
         break;
       }
+    }
     }
    i++;
    }
