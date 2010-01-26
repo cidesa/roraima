@@ -20,6 +20,12 @@
 <?php echo object_input_hidden_tag($bnregmue, 'getStamue') ?>
 <?php echo input_hidden_tag('incorporacion', $incorporacion) ?>
 
+<table width="100%">
+  <tr>
+    <th><strong><font color="#CC0000" size="4" face="Verdana, Arial, Helvetica, sans-serif"> <? print $desincorp;?></font></strong></th>
+  </tr>
+</table>
+
 <?php tabMainJS("tp1","tabPane1", "tabPage1", 'Registro ');?>
 <a name="registro"></a>
 <fieldset>

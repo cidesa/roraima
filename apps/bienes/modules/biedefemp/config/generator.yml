@@ -1,8 +1,8 @@
 generator:
-  class:              sfPropelAdminGenerator
+  class:              cidesaPropelAdminGenerator
   param:
     model_class:      Bndefins
-    theme:            default
+    theme:            cidesaGenerator
     fields:
       codins: { name: Código}
       nomins: { name: Nombre}

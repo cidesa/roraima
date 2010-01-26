@@ -13,6 +13,26 @@
  */
 class biedefempActions extends autobiedefempActions
 {
+  public function editing()
+  {	
+	$c = new Criteria();
+	$objact = BndefactPeer::doSelect($c);
+	if($objact)
+	   $this->defact=true;
+	else   
+	   $this->defact=false;
+	 
+	$c1 = new Criteria();
+	$objubi = BnubibiePeer::doSelect($c1);
+	
+	if($objubi)
+	   $this->ubibie=true;
+	else   
+	   $this->ubibie=false;  
+	
+	   
+  }	
+	
   protected function getBndefinsOrCreate($id = 'id')
   {
   	$this->new=false;

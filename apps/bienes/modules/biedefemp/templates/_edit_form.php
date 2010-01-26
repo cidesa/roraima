@@ -211,6 +211,7 @@
   <?php $value = object_input_tag($bndefins, 'getForact', array (
   'size' => 30,
   'maxlength'=>25,
+  'readonly' => $defact,
   'control_name' => 'bndefins[foract]',
 )); echo $value ? $value : '&nbsp;' ?>
 </div>
@@ -248,6 +249,7 @@
   <?php $value = object_input_tag($bndefins, 'getForubi', array (
   'size' => 35,
   'maxlength'=>25,
+  'readonly' => $ubibie,
   'control_name' => 'bndefins[forubi]',
 )); echo $value ? $value : '&nbsp;' ?>
   </div>
