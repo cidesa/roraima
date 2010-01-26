@@ -471,7 +471,7 @@ public static function Validar_biedisactmuenew($valor1,$valor2)
            {
                $registro->setCodact($registro->getCodact());
                $registro->setCodmue($registro->getCodmue());
-               $registro->setCtadepcar($clase->getCodcta());
+               $registro->setCtadepcar($clase->getCtadepcar());
                $registro->setCtadepabo($clase->getCtadepabo());
                $registro->setCtaajucar($clase->getCtaajucar());
                $registro->setCtaajuabo($clase->getCtaajuabo());
@@ -485,7 +485,7 @@ public static function Validar_biedisactmuenew($valor1,$valor2)
                $bndefcon= new Bndefcon();
                $bndefcon->setCodact($result[$i]["codact"]);
                $bndefcon->setCodmue($result[$i]["codmue"]);
-               $bndefcon->setCtadepcar($clase->getCodcta());
+               $bndefcon->setCtadepcar($clase->getCtadepcar());
                $bndefcon->setCtadepabo($clase->getCtadepabo());
                $bndefcon->setCtaajucar($clase->getCtaajucar());
                $bndefcon->setCtaajuabo($clase->getCtaajuabo());
