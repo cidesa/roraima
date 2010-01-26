@@ -2345,10 +2345,15 @@ class Tesoreria {
     {
       $sql = "Select A.Codcat||'-'||B.CodPar as codpre,Sum(A.MonSal) as moncau, '' as id From TSDetSal A,CARegArt B Where A.RefSal='".$arre[$p]."' And A.CodArt=B.CodArt Group By A.Codcat,B.CodPar";
       if (Herramientas :: BuscarDatos($sql, & $reg)){      
+         $i=0;
+         while ($i<count($reg)) {
+
           $j=count($arregloimp)+1;
-          $arregloimp[$j-1]["codpre"]=$reg[0]["codpre"];
-          $arregloimp[$j-1]["moncau"]=number_format($reg[0]["moncau"],2,',','.');
-          $arregloimp[$j-1]["id"]=$reg[0]["id"];;
+          $arregloimp[$j-1]["codpre"]=$reg[$i]["codpre"];
+          $arregloimp[$j-1]["moncau"]=number_format($reg[$i]["moncau"],2,',','.');
+          $arregloimp[$j-1]["id"]=$reg[$i]["id"];
+          $i++;
+         }
       }
       $p++;
     }
