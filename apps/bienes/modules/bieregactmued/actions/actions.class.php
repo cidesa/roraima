@@ -554,6 +554,21 @@ private static $coderror=-1;
   {
     $this->bnregmue = $this->getBnregmueOrCreate();
     $this->incorporacion = $this->getRequestParameter('incorporacion');
+	$this->desincorp = '';
+
+	if($this->bnregmue->getCodmue())
+	{
+		$c = new Criteria();
+		$sql="substr(bndismue.tipdismue,1,6)=bndisbie.coddis";
+		$c->add(BndisbiePeer::CODDIS,$sql,Criteria :: CUSTOM);
+		$c->add(BndismuePeer::CODMUE,$this->bnregmue->getCodmue());
+		$c->add(BndisbiePeer::DESINC,'S');
+		$per = BndismuePeer::doSelectOne($c);
+		if($per)
+		{
+			$this->desincorp = 'D E S I N C O R P O R A D O';
+		}
+	}
 
     if ($this->getRequest()->getMethod() == sfRequest::POST)
     {

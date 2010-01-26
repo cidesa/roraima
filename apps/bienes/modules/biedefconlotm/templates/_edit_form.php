@@ -99,7 +99,7 @@
 <?php if ($sf_request->hasError('bndefcon{ctadepcar}')): ?> <?php echo form_error('bndefcon{ctadepcar}', array('class' => 'form-error-msg')) ?>
 <?php endif; ?>
 
-<?php echo input_auto_complete_tag('bndefcon[codcta]', $bndefcon->getCodcta(),
+<?php echo input_auto_complete_tag('bndefcon[ctadepcar]', $bndefcon->getCtadepcar(),
     'biedefconlotm/autocomplete?ajax=1', array('size' => 30, 'autocomplete' => 'off', 'onBlur'=> remote_function(array(
       'url'      => 'biedefconlotm/ajax',
       'complete' => 'AjaxJSON(request, json)',
@@ -110,7 +110,7 @@
   )
   ?>
 
-<?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Contabb_Biedefconlotm/clase/Contabb/frame/sf_admin_edit_form/obj1/bndefcon_codcta/obj2/bndefcon_descta/campo1/codcta/campo2/descta'); ?>
+<?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Contabb_Biedefconlotm/clase/Contabb/frame/sf_admin_edit_form/obj1/bndefcon_ctadepcar/obj2/bndefcon_descta/campo1/codcta/campo2/descta'); ?>
 
 <?php $value = object_input_tag($bndefcon, 'getDescta', array (
 'disabled' => true,
