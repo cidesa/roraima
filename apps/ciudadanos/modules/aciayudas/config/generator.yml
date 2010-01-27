@@ -7,9 +7,9 @@ generator:
     fields:
       expediente:          { name: Nro. de Expediente, params: disabled=true size=6 }
       atsolici:
-        name: Solicitante
+        name: Cédule Solicitante
       atbenefi:
-        name: Paciente/Beneficiario
+        name: Cédula Paciente/Beneficiario
       attipayu_id:
         name: Grupo de Rubros
         params:     text_method=getDesayu onchange=toAjaxUpdater('divrubros',5,getUrlModulo()+'ajax',this.value,'','');

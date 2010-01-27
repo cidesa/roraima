@@ -12,7 +12,7 @@ names:
   atayudas{atbenefi}:
     required:  Yes
     required_msg: Debe Seleccionar un Beneficiario
-    validators: MyStringValidator1
+    validators: MyStringValidator1, validadorexistencia
 
   atayudas{attipayu_id}:
     required:  Yes
@@ -73,3 +73,9 @@ MyStringValidator4:
         max:       200
         max_error: El motivo no puede pasar mas de 8 caracteres
 
+validadorexistencia:
+    class: CidesaExistValidator
+    param:
+        class:     Atciudadano
+        column:    cedciu
+        unique_error: La cédula del beneficiario no existe. Por Favor verifique la información.

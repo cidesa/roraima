@@ -52,6 +52,13 @@ propel:
       size: 30
       required: true
     id:
+
+  atmisiones:
+    desmis:
+      type: VARCHAR
+      size: 50
+      required: true
+    id:
   atciudadano:                         # Ciudadano
     cedciu:
       type: VARCHAR
@@ -154,6 +161,9 @@ propel:
       size: 50
     segpri:
       type: BOOLEAN
+    seguro:
+      type: VARCHAR
+      size: 50
     attipproviv_id:
     attipviv_id:
     sector:
@@ -165,6 +175,7 @@ propel:
     zona:
       type: VARCHAR
       size: 50
+    atmisiones_id:
     id:
   attiping:                 # Tipo de Ingreso
     tiping:

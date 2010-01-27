@@ -454,4 +454,57 @@ class aciateayuActions extends autoaciateayuActions
     return sfView::SUCCESS;
   }
 
+  /**
+   * Función para manejar los filtros de búsqueda
+   * de la lista
+   *
+   */
+  protected function addFiltersCriteria($c)
+  {
+    if (isset($this->filters['nroexp_is_empty']))
+    {
+      $criterion = $c->getNewCriterion(AtayudasPeer::NROEXP, '');
+      $criterion->addOr($c->getNewCriterion(AtayudasPeer::NROEXP, null, Criteria::ISNULL));
+      $c->add($criterion);
+    }
+    else if (isset($this->filters['nroexp']) && $this->filters['nroexp'] !== '')
+    {
+      $c->add(AtayudasPeer::NROEXP, strtr("%".$this->filters['nroexp']."%", '*', '%'), Criteria::LIKE);
+    $c->setIgnoreCase(true);
+    }
+    if (isset($this->filters['atbenefifilter_is_empty']))
+    {
+      $criterion = $c->getNewCriterion(AtayudasPeer::ATBENEFI, '');
+      $criterion->addOr($c->getNewCriterion(AtayudasPeer::ATBENEFI, null, Criteria::ISNULL));
+      $c->add($criterion);
+    }
+    else if (isset($this->filters['atbenefifilter']) && $this->filters['atbenefifilter'] !== '')
+    {
+      $c->addJoin(AtayudasPeer::ATBENEFI,AtciudadanoPeer::ID);
+      $c->add(AtciudadanoPeer::CEDCIU, strtr("%".$this->filters['atbenefifilter']."%", '*', '%'), Criteria::LIKE);
+    }
+    if (isset($this->filters['atsolicifilter_is_empty']))
+    {
+      $criterion = $c->getNewCriterion(AtayudasPeer::ATSOLICI, '');
+      $criterion->addOr($c->getNewCriterion(AtayudasPeer::ATSOLICI, null, Criteria::ISNULL));
+      $c->add($criterion);
+    }
+    else if (isset($this->filters['atsolicifilter']) && $this->filters['atsolicifilter'] !== '')
+    {
+      $c->addJoin(AtayudasPeer::ATSOLICI,AtciudadanoPeer::ID);
+      $c->add(AtciudadanoPeer::CEDCIU, strtr("%".$this->filters['atsolicifilter']."%", '*', '%'), Criteria::LIKE);
+    }
+    if (isset($this->filters['attipayu_id_is_empty']))
+    {
+      $criterion = $c->getNewCriterion(AtayudasPeer::ATTIPAYU_ID, '');
+      $criterion->addOr($c->getNewCriterion(AtayudasPeer::ATTIPAYU_ID, null, Criteria::ISNULL));
+      $c->add($criterion);
+    }
+    else if (isset($this->filters['attipayu_id']) && $this->filters['attipayu_id'] !== '')
+    {
+      $c->add(AtayudasPeer::ATTIPAYU_ID, $this->filters['attipayu_id']);
+    }
+  }
+
+
 }
