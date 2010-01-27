@@ -200,17 +200,19 @@ if (impche=='S')
     if(confirm("¿Desea imprimir el/los Cheques emitidos?"))
     {
       var  numches='<? print $numches;?>';
+      var  numcues='<? print $numcues;?>';
       var  mosparform='<? print $pdfparform;?>';
       var anumche=numches.split(",");
+      var anumcue=numcues.split(",");
 	  for (r=0;r<anumche.length;r++)
 	  {
 	  	var  ruta='http://'+'<?echo $this->getContext()->getRequest()->getHost();?>';
 		if (mosparform=='S')
 		{
-			pagina=ruta+"/<?php echo $sf_user->getAttribute('reportes_web');?>/tesoreria/tsrvoucher.php?numchedes="+anumche[r]+"&numchehas="+anumche[r];			
+			pagina=ruta+"/<?php echo $sf_user->getAttribute('reportes_web');?>/tesoreria/tsrvoucher.php?numchedes="+anumche[r]+"&numchehas="+anumche[r]+"&numcuedes="+anumcue[r]+"&numcuehas="+anumcue[r];
 		}else
 		{
-			pagina=ruta+"/<?php echo $sf_user->getAttribute('reportes_web');?>/tesoreria/r.php?r=tsrvoucher.php&numchedes="+anumche[r]+"&numchehas="+anumche[r];			
+			pagina=ruta+"/<?php echo $sf_user->getAttribute('reportes_web');?>/tesoreria/r.php?r=tsrvoucher.php&numchedes="+anumche[r]+"&numchehas="+anumche[r]+"&numchehas="+anumche[r]+"&numcuedes="+anumcue[r]+"&numcuehas="+anumcue[r];
 		}
 		window.open(pagina,anumche[r],"menubar=yes,toolbar=yes,scrollbars=yes,width=1200,height=800,resizable=yes,left=1000,top=80");
 		

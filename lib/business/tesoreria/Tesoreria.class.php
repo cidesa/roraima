@@ -1918,8 +1918,12 @@ class Tesoreria {
     {
       $numorden=str_replace('#','0',$opordpag->getNumord());
     }
-
-    $numcom=OrdendePago::Buscar_Correlativo();
+     $confcorcom=sfContext::getInstance()->getUser()->getAttribute('confcorcom');
+    if ($confcorcom=='N')
+    {
+      $numcom= "OP".substr($numorden,2,6);
+    }else $numcom= OrdendePago::Buscar_Correlativo();
+    
     $reftra=$numorden;
     $codigocuenta="";
     $tipo="";
@@ -1995,14 +1999,19 @@ class Tesoreria {
         if (!is_null($resul->getCodcta()))
         {
          $codigocuenta2=$resul->getCodcta();
-        }else $codigocuenta2="";
-        if ($opordpag->getMonord()>0)
+         if ($opordpag->getMonord()>0)
         {
           $tipo2='C';
           $des2="";
           $b=$opordpag->getMonord();
           $monto2=$b;
         }
+        }else {$codigocuenta2="";
+             $tipo2="";
+          $des2="";
+          $b="0,00";
+          $monto2=$b;
+        }        
       }
       $cuentas=$codigocuenta2.'_'.$codigocuentas;
       $descr=$des2.'_'.$desc;

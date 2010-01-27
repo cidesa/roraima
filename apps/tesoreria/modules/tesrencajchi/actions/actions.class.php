@@ -346,6 +346,13 @@ class tesrencajchiActions extends autotesrencajchiActions
           $this->getUser()->getAttributeHolder()->remove('credito',$formulario[$i]);
           $this->getUser()->getAttributeHolder()->remove('grid',$formulario[$i]);
 
+          $c = new Criteria();
+    	  $c->add(OpdefempPeer::CODEMP,'001');
+    	  $per = OpdefempPeer::doSelectOne($c);
+           if ($this->getUser()->getAttribute('confcorcom')=='N')
+           {  $numerocomp = H::iif($per->getOrdconpre()=='t',$reftra,$numcom); }
+           else
+           {  $numerocomp = H::iif($per->getOrdconpre()=='t','OP'.substr($numerocomp = Comprobante::Buscar_Correlativo(),2,strlen($numcom)),$numcom); }
           $numerocomp = Comprobante::SalvarComprobante($numcom,$reftra,$feccom,$descom,$debito,$credito,$grid,$this->getUser()->getAttribute('grabar',null,$formulario[$i]));
           $opordpag->setNumcom($numerocomp);
          }

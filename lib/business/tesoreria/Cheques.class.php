@@ -592,16 +592,18 @@ class Cheques
    * @return void
    */
 
-  public static function ActualizaOrdPag($tscheemi,$grid,$tippag,$despag,$numcomarr,$gencom,&$arraynumche,&$concom,&$arrcompro,$reqfirma,$mancomegr,$comprobaut)
+  public static function ActualizaOrdPag($tscheemi,$grid,$tippag,$despag,$numcomarr,$gencom,&$arraynumche,&$concom,&$arrcompro,$reqfirma,$mancomegr,$comprobaut,&$arraynumcue)
   {
       //////////////////////PAGO SIMPLE/////////////////////////////////////////////////////////////////////
     $arraynumche="";
+    $arraynumcue="";
     $concom=0;
 
     if ($tippag=='S') //Pago Simple
     {
       $x=$grid[0];
       $numche=$tscheemi->getNumche();
+      $numcue=$tscheemi->getNumcue();
       $j=0;
       $concom=0;
      if ($gencom!="S" && $comprobaut!='S') $minumcom=split("_",$numcomarr);
@@ -752,10 +754,14 @@ class Cheques
               self::Genera_MovLib($tscheemi,$DescOp,$Monto,$numcom,$numche,$refpago);
               self::Grabar_Datos($tscheemi,$Monto,$x[$j]->getCedrif(),$numche,$reqfirma,$mancomegr);
               //Actualizar arreglos de Cheques, necesario para imprimir luego los cheques emitidos;
-              if (trim($arraynumche)!="")
+              if (trim($arraynumche)!=""){
                 $arraynumche=$arraynumche.",".$numche;
-              else
+                $arraynumcue=$arraynumcue.",".$numcue;
+              }
+              else{
                 $arraynumche=$numche;
+                $arraynumcue=$numcue;
+              }
 
             }// if ($gencom="S")
             $CanRet = 0;
@@ -776,6 +782,7 @@ class Cheques
       $x=$grid[0];
       $j=0;
       $numche=$tscheemi->getNumche();
+      $numcue=$tscheemi->getNumcue();
       $CtaDcto="";
       $Monto=0;
       $MontRet=0;
@@ -927,6 +934,7 @@ class Cheques
             self::Actualiza_Bancos($tscheemi,"A","C",$Monto,$numche);
             self::Grabar_Datos($tscheemi,$Monto,$cedrif,$numche,$reqfirma,$mancomegr);
             $arraynumche=$numche;
+            $arraynumcue=$numcue;
           }
        }// else if ($gencom=="S")
 
@@ -935,12 +943,14 @@ class Cheques
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
   }//end function ActualizaOrdpag
 
-  public static function ActualizaCompro($tscheemi,$grid,$numcom,$ctapag,$desctacre,&$arraynumche,$gencom,&$arrcompro,$reqfirma,$mancomegr,$comprobaut)
+  public static function ActualizaCompro($tscheemi,$grid,$numcom,$ctapag,$desctacre,&$arraynumche,$gencom,&$arrcompro,$reqfirma,$mancomegr,$comprobaut,&$arraynumcue)
   {
       $x=$grid[0];
       $arraynumche="";
+      $arraynumcue="";
       $j=0;
       $numche=$tscheemi->getNumche();
+      $numcue=$tscheemi->getNumcue();
       $MontOP = 0;
       $DescOp="";
       $TipCompro="";
@@ -1011,17 +1021,20 @@ class Cheques
          self::Genera_MovLib($tscheemi,$DescOp,$MontOP,$numcom,$numche, $refpago);
          self::Grabar_Datos($tscheemi,$MontOP,$tscheemi->getCedrif(),$numche,$reqfirma,$mancomegr);
          $arraynumche=$numche;
+         $arraynumcue=$numcue;
        }
      }
   }//end del function
 
 
-  public static function ActualizaPrecom($tscheemi,$grid,$numcom,$ctapag,$desctacre,&$arraynumche,$gencom,&$arrcompro,$reqfirma,$mancomegr,$comprobaut)
+  public static function ActualizaPrecom($tscheemi,$grid,$numcom,$ctapag,$desctacre,&$arraynumche,$gencom,&$arrcompro,$reqfirma,$mancomegr,$comprobaut,&$arraynumcue)
   {
       $x=$grid[0];
       $arraynumche="";
+      $arraynumcue="";
       $j=0;
       $numche=$tscheemi->getNumche();
+      $numcue=$tscheemi->getNumcue();
       $MontOP = 0;
       $DescOp="";
       $TipCompro="";
@@ -1094,18 +1107,21 @@ class Cheques
             self::Genera_MovLib($tscheemi,$DescOp,$MontOP,$numcom,$numche,$refpago);
             self::Grabar_Datos($tscheemi,$MontOP,$tscheemi->getCedrif(),$numche,$reqfirma,$mancomegr);
             $arraynumche=$numche;
+            $arraynumcue=$numcue;
         }
       }
 
   }//end Busca_Actualiza_PreCompromiso
 
 
-  public static function ActualizaPagDir($tscheemi,$grid,$numcom,$concep,$descue,$condto,$ctapag,$desctacre,&$arraynumche,$gencom,&$arrcompro,$reqfirma,$mancomegr,$comprobaut)
+  public static function ActualizaPagDir($tscheemi,$grid,$numcom,$concep,$descue,$condto,$ctapag,$desctacre,&$arraynumche,$gencom,&$arrcompro,$reqfirma,$mancomegr,$comprobaut,&$arraynumcue)
   {
       $x=$grid[0];
       $arraynumche="";
+      $arraynumcue="";
       $j=0;
       $numche=$tscheemi->getNumche();
+      $numcue=$tscheemi->getNumcue();
       $MontOP=0;
       $CuentaDes="";
       $MontDcto=0;
@@ -1180,14 +1196,16 @@ class Cheques
            self::Genera_MovLib($tscheemi,$DescOp,$total,$numcom,$numche,$refpago);
            self::Grabar_Datos($tscheemi,$total,$tscheemi->getCedrif(),$numche,$reqfirma,$mancomegr);
            $arraynumche=$numche;
+           $arraynumcue=$numcue;
         }
      }
   }
 
 
-  public static function ActualizaPagExtPre($tscheemi,$numcom,$concpnrn,$montpnrn,$dctopnrn,$condpnrn,$ctapag,$desctacre,&$arraynumche,$gencom,&$arrcompro,$reqfirma,$mancomegr,$comprobaut)
+  public static function ActualizaPagExtPre($tscheemi,$numcom,$concpnrn,$montpnrn,$dctopnrn,$condpnrn,$ctapag,$desctacre,&$arraynumche,$gencom,&$arrcompro,$reqfirma,$mancomegr,$comprobaut,&$arraynumcue)
   {
      $arraynumche="";
+     $arraynumcue="";
      $CtaDcto="";
      $DescOp = $concpnrn;
      $DesCtaDeb = $DescOp;
@@ -1197,6 +1215,7 @@ class Cheques
      $NumOrden = "";
      $TipCausad = "";
      $numche=str_pad($tscheemi->getNumche(),8,"0",STR_PAD_LEFT);
+     $numcue=$tscheemi->getNumcue();
      if ($dctopnrn > 0)
      {
        $CtaDcto=self::Busca_CtaDes();
@@ -1252,6 +1271,7 @@ class Cheques
            self::Actualiza_Bancos($tscheemi,"A","C",$total,$numche);
            self::Grabar_Datos($tscheemi,$total,$tscheemi->getCedrif(),$numche,$reqfirma,$mancomegr);
            $arraynumche=$numche;
+           $arraynumcue=$numcue;
         }
   }
 
