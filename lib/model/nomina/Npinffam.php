@@ -16,10 +16,16 @@
 class Npinffam extends BaseNpinffam
 {
 	protected $edafamact=0;
+	protected $seghcm=0;
 
  public function hydrate(ResultSet $rs, $startcol = 1)
    {
       parent::hydrate($rs, $startcol);
+	  if($this->seghcm == 'S' || $this->seghcm == 1)
+	    $this->seghcm='S';
+	  else
+	  	$this->seghcm=0;
+		
       if (self::getFecNac())
       {
 	      $sql = "select  Extract(year from age(now(),'" . self::getFecNac() . "')) as edad";
