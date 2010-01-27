@@ -110,7 +110,8 @@ class aciciudadanoActions extends autoaciciudadanoActions
   
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -120,6 +121,16 @@ class aciciudadanoActions extends autoaciciudadanoActions
 
 
     if($this->getRequest()->getMethod() == sfRequest::POST){
+
+      $this->atciudadanos= $this->getAtciudadanosOrCreate();
+      $this->updateAtciudadanosFromRequest();
+
+      $prefijo = substr($this->atciudadanos->getCedciu(), 0, 1);
+      if($prefijo!='0' && $prefijo!='1' && $prefijo!='2' && $prefijo!='3' && $prefijo!='4' && $prefijo!='5' && $prefijo!='6' && $prefijo!='7' && $prefijo!='8' && $prefijo!='9' && $prefijo!='R'){
+        $this->coderr = 1403;
+        return false;
+      }
+
 
       if($this->coderr!=-1){
         return false;

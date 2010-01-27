@@ -45,19 +45,21 @@ generator:
       usuvisdoc:     { name: Elaborado Por, params: size=100 maxlength=100 }
       resvisdoc:   { name: Resumen, type: textarea_tag, params: size=70x3 maxlength=5000 }
       monayu:    { name: Monto en Bolívares (Bs.)}
-      monapr:    { name: Monto Aprobado en Bolívares (Bs.)}
+      monapr:    { name: Monto Aprobado en Bolívares (Bs.) }
       fecsol:     { name: Fecha }
       refdoc:     { name: Orden de Compra }
       priayu:     { name: Prioridad de Atención }
       atpriayu_id:     { name: Prioridad de Atención, params: include_blank=false }
-      atdetest:       {name: Detalle de Estados}
+      atdetest:       {name: Detalle de Estados }
+      atbenefifilter: {name: Cedula Beneficiario }
+      atsolicifilter: {name: Cedula Solicitante }
     list:
       title:          Atencion de Donaciones
       display:        [=nroexp, =nomsol, =nomben, desayu]
       object_actions:
         _edit:        ~
         _delete:      ~
-      filters:        [nroexp, attipayu_id]
+      filters:        [nroexp, _atbenefifilter, _atsolicifilter, attipayu_id ]
       max_per_page:   5
       sort:           [nroexp, desc]
     edit:
