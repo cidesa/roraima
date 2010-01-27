@@ -1826,24 +1826,30 @@ class Tesoreria {
     }// if ($tsdefban)
   }
 
-  public static function salvarRendicionCajaChica($opordpag,$grid,$numerocomp)
+  public static function salvarRendicionCajaChica($opordpag,$grid,$numerocomp,$grid1)
   {
   	self::grabarOrden($opordpag,$numerocomp);
   	self::grabarDetalleOrden($opordpag,$grid);
   	self::grabarCausado($opordpag);
   	self::grabarImpcau($opordpag,$grid);
 
-  	$a= new Criteria();
-  	$a->add(TssalcajPeer::FECSAL,$opordpag->getFecemi(),Criteria::LESS_EQUAL);
-  	$data= TssalcajPeer::doSelect($a);
-  	if ($data)
-  	{
-      foreach ($data as $obj)
-  	 {
-  	   $obj->setStasal('R');
-  	   $obj->save();
+  	$x=$grid1[0];
+        $j=0;
+        while ($j<count($x))
+        {
+          if ($x[$j]->getCheck()=='1'){
+          $a= new Criteria();
+  	  $a->add(TssalcajPeer::REFSAL,$x[$j]->getRefsal());
+  	  $data= TssalcajPeer::doSelectOne($a);
+  	  if ($data)
+  	  {
+  	   $data->setStasal('R');
+  	   $data->save();
   	  }
-  	}
+          }
+          $j++;
+        }
+
   }
 
   public static function grabarCausado($opordpag)

@@ -69,7 +69,7 @@ class tesrencajchiActions extends autotesrencajchiActions
    */
   public function configGrid()
   {
-    $this->configGridSalida($this->getRequestParameter('opordpag[fecdes]'),$this->getRequestParameter('opordpag[fechas]'));
+    $this->configGridSalida($this->opordpag->getFecdes(),$this->opordpag->getFechas());
     $this->configGridDetalle($this->opordpag->getNumord());
   }
 
@@ -362,7 +362,8 @@ class tesrencajchiActions extends autotesrencajchiActions
       $this->getUser()->getAttributeHolder()->remove('grabo',$form.'0');
 
       $grid=Herramientas::CargarDatosGridv2($this,$this->objeto,true);
-      Tesoreria::salvarRendicionCajaChica($opordpag,$grid,$numerocomp);
+      $grid1=Herramientas::CargarDatosGridv2($this,$this->objeto1);
+      Tesoreria::salvarRendicionCajaChica($opordpag,$grid,$numerocomp,$grid1);
     }
     return -1;
 
