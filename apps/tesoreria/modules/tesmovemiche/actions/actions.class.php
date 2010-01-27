@@ -597,7 +597,7 @@ $this->Bitacora('Guardo');
              //print_r($this->gridOrdPag);print 'SSS';exit;
 	         $grid=Herramientas::CargarDatosGrid($this,$this->gridOrdPag);
 	         if ($this->ValidarDatosenGrid($grid))
-	            Cheques::ActualizaOrdPag($this->tscheemi,$grid,$tippag,$despag,"","S",$che,&$concom,&$comprobante,$this->reqfirma,$this->mancomegr,$this->comprobaut,"");
+	            Cheques::ActualizaOrdPag($this->tscheemi,$grid,$tippag,$despag,"","S",$che,&$concom,&$comprobante,$this->reqfirma,$this->mancomegr,$this->comprobaut,$che);
 	         else
 	            $this->msgerr="Debe seleccionar al menos una orden de pago...";
 	      }
@@ -606,7 +606,7 @@ $this->Bitacora('Guardo');
 	      {
 	           $grid=Herramientas::CargarDatosGrid($this,$this->gridCompro);
 	           if ($this->ValidarDatosenGrid($grid))
-	             Cheques::ActualizaCompro($this->tscheemi,$grid,"",$ctapag,$desctacre,$che,"S",&$comprobante,$this->reqfirma,$this->mancomegr,$this->comprobaut,"");
+	             Cheques::ActualizaCompro($this->tscheemi,$grid,"",$ctapag,$desctacre,$che,"S",&$comprobante,$this->reqfirma,$this->mancomegr,$this->comprobaut,$che);
 	           else
 	            $this->msgerr="Debe seleccionar al menos un compromiso...";
 	      }
@@ -615,7 +615,7 @@ $this->Bitacora('Guardo');
 	      {
 	           $grid=Herramientas::CargarDatosGrid($this,$this->gridPrecom);
 	           if ($this->ValidarDatosenGrid($grid))
-	               Cheques::ActualizaPrecom($this->tscheemi,$grid,"",$ctapag,$desctacre,$che,"S",&$comprobante,$this->reqfirma,$this->mancomegr,$this->comprobaut,"");
+	               Cheques::ActualizaPrecom($this->tscheemi,$grid,"",$ctapag,$desctacre,$che,"S",&$comprobante,$this->reqfirma,$this->mancomegr,$this->comprobaut,$che);
 	           else
 	            $this->msgerr="Debe seleccionar al menos un precompromiso...";
 	      }
@@ -629,7 +629,7 @@ $this->Bitacora('Guardo');
 	           $x=$grid[0];
 	           if (count($x)>0)
 	           {
-	              Cheques::ActualizaPagDir($this->tscheemi,$grid,"",$concep,$descue,$condto,$ctapag,$desctacre,$che,"S",&$comprobante,$this->reqfirma,$this->mancomegr,$this->comprobaut,"");
+	              Cheques::ActualizaPagDir($this->tscheemi,$grid,"",$concep,$descue,$condto,$ctapag,$desctacre,$che,"S",&$comprobante,$this->reqfirma,$this->mancomegr,$this->comprobaut,$che);
 	           }
 	           else
 	           {
@@ -643,7 +643,7 @@ $this->Bitacora('Guardo');
 	           $montpnrn=$this->getRequestParameter('tscheemi[montotpagnap]');
 	           $dctopnrn=$this->getRequestParameter('tscheemi[mondtopagnap]');
            	   $condpnrn=$this->getRequestParameter('tscheemi[condtopagnap]');
-	           Cheques::ActualizaPagExtPre($this->tscheemi,"",$concpnrn,$montpnrn,$dctopnrn,$condpnrn,$ctapag,$desctacre,$che,"S",&$comprobante,$this->reqfirma,$this->mancomegr,$this->comprobaut,"");
+	           Cheques::ActualizaPagExtPre($this->tscheemi,"",$concpnrn,$montpnrn,$dctopnrn,$condpnrn,$ctapag,$desctacre,$che,"S",&$comprobante,$this->reqfirma,$this->mancomegr,$this->comprobaut,$che);
 	        }
      }//if  validaciones de campos distinto de vacio
      else
