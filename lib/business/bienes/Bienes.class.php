@@ -287,6 +287,7 @@ class Bienes
               {
                 $montodep=0;
                 $depmensual=0;
+                $montodeprec=0;
 
                 if ($tipoactivo=='1')
                 {
@@ -296,7 +297,8 @@ class Bienes
                 }
 
                 $difmes=Herramientas :: dateDiff('m', $dato->getFecreg(), $lafechadep) + 1;
-                $difdia=Herramientas :: dateDiff('d', $dato->getFecreg(), $lafechadep);
+                $difdia=Herramientas :: dateDiff('d', $dato->getFecreg(), $lafechadep);  
+
 
                 if ($dato->getDepmen()==0)
                 {
@@ -304,11 +306,11 @@ class Bienes
                   {
                     $valorbien= (($dato->getValini() + $montomejora) - $dato->getValres());
                     $vidabien= ($dato->getViduti() + $vidamejora);
-                    $depmen= ($valorbien / $vidabien);
+                    $depmensual= ($valorbien / $vidabien);
                   }
-                  else $depmen=0;
+                  else $depmensual=0;
                 }
-                else $depmen=$dato->getDepmen();
+                else $depmensual=$dato->getDepmen();
 
                 if ($difdia>0)
                 {
@@ -467,8 +469,6 @@ class Bienes
     $result= BndepactPeer::doSelectOne($y);
     if ($result)
     {
-       $montomejora=$result[0]["mondismue"];
-       $vidamejora=$result[0]["vidutil"];
        $result->setMonmue($montodepm);
        $result->setMoninm($montodepi);
        $result->save();
@@ -494,7 +494,8 @@ class Bienes
     $descom="DEPRECIACION DE MUE. MES ".$mes." AÑO ".$anno;
 
     $sql="SELECT A.CTAAJUCAR as codcta, SUM(B.DEPMEN) as monto FROM BNDEFCON A, BnRegmue B WHERE A.CODACT=B.CODACT AND
-          A.CODMUE = B.CODMUE AND A.STACTA = 'A' AND B.STAMUE = 'A' AND B.FECEXP >= '".$fechacomp."' AND B.DEPACU > 0 Group By(a.CTAAJUCAR)";
+          A.CODMUE = B.CODMUE AND A.STACTA = 'A' AND B.STAMUE = 'A' --AND B.FECEXP >= '".$fechacomp."'
+              AND B.DEPACU > 0 Group By(a.CTAAJUCAR)";
     if (H::BuscarDatos($sql,&$result))
     {
        $i=0;
@@ -525,7 +526,8 @@ class Bienes
     }
     $result2=array();
     $sql1="SELECT A.CTAAJUABO as codcta, SUM(B.DEPMEN) as monto FROM BNDEFCON A, BnRegmue B WHERE A.CODACT=B.CODACT AND
-           A.CODMUE = B.CODMUE AND A.STACTA = 'A' AND B.STAMUE = 'A' AND B.FECEXP >= '".$fechacomp."' AND B.DEPACU > 0 Group By(a.CTAAJUABO)";
+           A.CODMUE = B.CODMUE AND A.STACTA = 'A' AND B.STAMUE = 'A' --AND B.FECEXP >= '".$fechacomp."'
+               AND B.DEPACU > 0 Group By(a.CTAAJUABO)";
     if (H::BuscarDatos($sql1,&$result2))
     {
       $l=0;
@@ -557,7 +559,8 @@ class Bienes
 
     $result3=array();
     $sql2="SELECT A.CTAAJUCAR as codcta, SUM(B.DEPMEN) as monto FROM BNDEFCONI A, BnRegInm B WHERE A.CODACT=B.CODACT AND
-           A.CODINM = B.CODINM AND A.STACTA = 'A' AND B.STAINM = 'A' AND B.FECEXP >= '".$fechacomp."' AND B.DEPACU > 0 Group By(A.CTAAJUCAR)";
+           A.CODINM = B.CODINM AND A.STACTA = 'A' AND B.STAINM = 'A' --AND B.FECEXP >= '".$fechacomp."'
+               AND B.DEPACU > 0 Group By(A.CTAAJUCAR)";
     if (H::BuscarDatos($sql2,&$result3))
     {
       $p=0;
@@ -589,7 +592,8 @@ class Bienes
 
     $result4=array();
     $sql3="SELECT A.CTAAJUABO as codcta, SUM(B.DEPMEN) as monto FROM BNDEFCONI A, BnRegInm B WHERE A.CODACT=B.CODACT AND
-           A.CODINM = B.CODINM AND A.STACTA = 'A' AND B.STAINM = 'A' AND B.FECEXP >= '".$fechacomp."' AND B.DEPACU > 0 Group By(A.CTAAJUABO)";
+           A.CODINM = B.CODINM AND A.STACTA = 'A' AND B.STAINM = 'A' --AND B.FECEXP >= '".$fechacomp."'
+               AND B.DEPACU > 0 Group By(A.CTAAJUABO)";
     if (H::BuscarDatos($sql3,&$result4))
     {
       $e=0;
