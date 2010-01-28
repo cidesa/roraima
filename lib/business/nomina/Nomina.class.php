@@ -2390,7 +2390,7 @@ class Nomina {
         $valor = 0;
         $auxfec = split("-",$fecnom);
         #$fecha = date('d/m/Y',strtotime($fecnom));
-        $fecha = $auxfec[0].'-'.$auxfec[1].'-'.$auxfec[0];
+        $fecha = $auxfec[0].'-'.$auxfec[1].'-'.$auxfec[2];
         $criterio = "Select * from calculopres('$empleado',to_char(cast('$fecha' as date),'dd/mm/yyyy'),'$parametro','P') where tipo='DEPOSITADOS' order by fecini desc";
 
         if (Herramientas :: BuscarDatos($criterio, & $calpres))
@@ -2398,6 +2398,135 @@ class Nomina {
 			$valor = ($calpres[0]['dias']-5)*$calpres[0]['mondiapro'];
 		}
 
+        return $valor;
+
+      case "DIAVACCON" :
+        $valor = 0;
+        $criterio = "select ((fechas-fecdes)) as dias from npvacsalidas where codemp='$empleado' order by fecvac desc";
+        if (Herramientas :: BuscarDatos($criterio, & $result))
+        {
+           $valor = $result[0]['dias'];
+        }
+        return $valor;
+      case "DIAVACNOM" :
+        $valor = 0;
+        $fecnomdes=null;
+        $sql = "select ultfec from npnomina where codnom='$nomina'";
+        if (Herramientas :: BuscarDatos(sql, & $res))
+        {
+            $fecnomdes=$res[0]['ultfec'];
+        }
+        $criterio = "select
+                        case when to_char(last_day(to_date('$fecnom','yyyy-mm-dd')),'dd')='31'
+                        then (
+                            case when to_date('$fecnom','yyyy-mm-dd')>a.fechas then a.fechas else to_date('$fecnom','yyyy-mm-dd') end
+                            -
+                            case when to_date('$fecnomdes','yyyy-mm-dd')>a.fecdes then to_date('$fecnomdes','yyyy-mm-dd') else a.fecdes end
+                        )
+                        else(
+                            case when to_date('$fecnom','yyyy-mm-dd')>a.fechas then a.fechas else to_date('$fecnom','yyyy-mm-dd') end
+                            -
+                            case when to_date('$fecnomdes','yyyy-mm-dd')>a.fecdes then to_date('$fecnomdes','yyyy-mm-dd') else a.fecdes end
+                            +1
+                        ) end as dias
+                        from npvacsalidas a where codemp='$empleado' order by fecvac desc";
+        if (Herramientas :: BuscarDatos($criterio, & $result))
+        {
+           $valor = $result[0]['dias'];
+        }
+        return $valor;
+      case "NSVAC" :
+        $valor = 0;
+        $criterio = "select fecdes,fechas from npvacsalidas a where codemp='$empleado' order by fecvac desc";
+        if (Herramientas :: BuscarDatos($criterio, & $result))
+        {
+            $fechades = $result[0]['fecdes'];
+            $fechahas = $result[0]['fechas'];
+            $numerosemanas = 0;
+            while (strtotime($fechades) <= strtotime($fechahas)) {
+              $auxfechades = split('-', $fechades);
+              if (Herramientas :: dia_semana($auxfechades[2], $auxfechades[1], $auxfechades[0]) == 'Sabado') {
+                $numerosemanas += 1;
+              }
+              $fechades = Herramientas :: dateAdd('d', 1, $fechades, '+');
+            }
+            $valor = $numerosemanas;
+        }
+        return $valor;
+      case "NDVAC" :
+        $valor = 0;
+        $criterio = "select fecdes,fechas from npvacsalidas a where codemp='$empleado' order by fecvac desc";
+        if (Herramientas :: BuscarDatos($criterio, & $result))
+        {
+            $fechades = $result[0]['fecdes'];
+            $fechahas = $result[0]['fechas'];
+            $numerosemanas = 0;
+            while (strtotime($fechades) <= strtotime($fechahas)) {
+              $auxfechades = split('-', $fechades);
+              if (Herramientas :: dia_semana($auxfechades[2], $auxfechades[1], $auxfechades[0]) == 'Domingo') {
+                $numerosemanas += 1;
+              }
+              $fechades = Herramientas :: dateAdd('d', 1, $fechades, '+');
+            }
+            $valor = $numerosemanas;
+        }
+        return $valor;
+       case "NFVAC" :
+        $valor = 0;
+        $criterio = "select fecdes,fechas from npvacsalidas a where codemp='$empleado' order by fecvac desc";
+        if (Herramientas :: BuscarDatos($criterio, & $result))
+        {
+            $fechades = $result[0]['fecdes'];
+            $fechahas = $result[0]['fechas'];
+            $numerosemanas = 0;
+            while (strtotime($fechades) <= strtotime($fechahas)) {
+              $auxfechades = split('-', $fechades);
+              $sql="select * from npvacdiafer where dia='".$auxfechades[2]."' and mes='".$auxfechades[1]."'";
+              if (Herramientas :: BuscarDatos($sql, & $res))
+              {
+                  $numerosemanas += 1;
+              }
+              $fechades = Herramientas :: dateAdd('d', 1, $fechades, '+');
+            }
+            $valor = $numerosemanas;
+        }
+        return $valor;
+      case "NLVAC" :
+        $valor = 0;
+        $criterio = "select fecdes,fechas from npvacsalidas a where codemp='$empleado' order by fecvac desc";
+        if (Herramientas :: BuscarDatos($criterio, & $result))
+        {
+            $fechades = $result[0]['fecdes'];
+            $fechahas = $result[0]['fechas'];
+            $numerosemanas = 0;
+            while (strtotime($fechades) <= strtotime($fechahas)) {
+              $auxfechades = split('-', $fechades);
+              if (Herramientas :: dia_semana($auxfechades[2], $auxfechades[1], $auxfechades[0]) == 'Lunes') {
+                $numerosemanas += 1;
+              }
+              $fechades = Herramientas :: dateAdd('d', 1, $fechades, '+');
+            }
+            $valor = $numerosemanas;
+        }
+        return $valor;
+      case "NLENNOM" :
+        $valor = 0;
+        $fecnomdes=null;
+        $sql = "select ultfec from npnomina where codnom='$nomina'";
+        if (Herramientas :: BuscarDatos(sql, & $res))
+        {
+            $fechades = $result[0]['ultfec'];
+            $fechahas = $fecnom;
+            $numerosemanas = 0;
+            while (strtotime($fechades) <= strtotime($fechahas)) {
+              $auxfechades = split('-', $fechades);
+              if (Herramientas :: dia_semana($auxfechades[2], $auxfechades[1], $auxfechades[0]) == 'Lunes') {
+                $numerosemanas += 1;
+              }
+              $fechades = Herramientas :: dateAdd('d', 1, $fechades, '+');
+            }
+            $valor = $numerosemanas;
+        }        
         return $valor;
       default :
         $aux = 0;
