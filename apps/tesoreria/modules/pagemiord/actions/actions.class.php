@@ -1101,6 +1101,7 @@ $this->Bitacora('Guardo');
     $col2->setNombreCampo('numfac');
     $col2->setHTML('type="text" size="15" maxlength="20"');
     $col2->setJScript('onBlur="javascript:event.keyCode=13; nrofacturadeshabilitar(event,this.id);"');
+    $col2->setAjax('pagemiord',99,2);
 
     $col3 = new Columna('Nro. Control');
     $col3->setTipo(Columna::TEXTO);
@@ -2359,6 +2360,12 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
        $dato=$reg->getNomben();
   	}else $javascript="alert('El Beneficiario Alterno no Existe'); $('$cajtexcom').value=''; ";
     $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""]]';
+    $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+    return sfView::HEADER_ONLY;
+  }else if ($this->getRequestParameter('ajax')=='99')
+  {
+    // Función ajax mantener la session abierta
+    $output = '[["","",""]]';
     $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
     return sfView::HEADER_ONLY;
   }
