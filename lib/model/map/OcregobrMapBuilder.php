@@ -40,6 +40,8 @@ class OcregobrMapBuilder {
 
 		$tMap->addColumn('DESOBR', 'Desobr', 'string', CreoleTypes::VARCHAR, true, 250);
 
+		$tMap->addColumn('FECREG', 'Fecreg', 'int', CreoleTypes::DATE, false, null);
+
 		$tMap->addColumn('FECINI', 'Fecini', 'int', CreoleTypes::DATE, false, null);
 
 		$tMap->addColumn('FECFIN', 'Fecfin', 'int', CreoleTypes::DATE, false, null);

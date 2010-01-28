@@ -1,0 +1,146 @@
+methods:
+  post:
+   - "ocdefemp{codactini}"
+   - "ocdefemp{codactpar}"
+   - "ocdefemp{codactrei}"
+   - "ocdefemp{codactter}"
+   - "ocdefemp{codactproini}"
+   - "ocdefemp{codactproter}"
+   - "ocdefemp{codactrecpro}"
+   - "ocdefemp{codactrecdef}"
+   - "ocdefemp{codconobr}"
+   - "ocdefemp{codconins}"
+   - "ocdefemp{codconsup}"
+   - "ocdefemp{codconpro}"
+   - "ocdefemp{codvalant}"
+   - "ocdefemp{codvalpar}"
+   - "ocdefemp{codvalfin}"
+   - "ocdefemp{codvalret}"
+   - "ocdefemp{codvalrec}"
+   - "ocdefemp{codparrec}"
+   - "ocdefemp{numini}"
+
+names:
+  ocdefemp{codactini}:
+    required:  No    
+    validators: ExistValidator_codact
+
+  ocdefemp{codactpar}:
+    required:  No    
+    validators: ExistValidator_codact
+
+  ocdefemp{codactrei}:
+    required:  No    
+    validators: ExistValidator_codact
+
+  ocdefemp{codactter}:
+    required:  No    
+    validators: ExistValidator_codact
+
+  ocdefemp{codactproini}:
+    required:  No
+    validators: ExistValidator_codact
+
+  ocdefemp{codactproter}:
+    required:  No
+    validators: ExistValidator_codact
+
+  ocdefemp{codactrecpro}:
+    required:  No
+    validators: ExistValidator_codact
+
+  ocdefemp{codactrecdef}:
+    required:  No
+    validators: ExistValidator_codact
+
+  ocdefemp{codconobr}:
+    required:  No
+    validators: ExistValidator_codcon
+
+  ocdefemp{codconins}:
+    required:  No
+    validators: ExistValidator_codcon
+
+  ocdefemp{codconsup}:
+    required:  No
+    validators: ExistValidator_codcon
+
+  ocdefemp{codconpro}:
+    required:  No
+    validators: ExistValidator_codcon
+
+  ocdefemp{codvalant}:
+    required:  No
+    validators: ExistValidator_codval
+
+  ocdefemp{codvalpar}:
+    required:  No
+    validators: ExistValidator_codval
+
+  ocdefemp{codvalfin}:
+    required:  No
+    validators: ExistValidator_codval
+
+  ocdefemp{codvalret}:
+    required:  No
+    validators: ExistValidator_codval
+
+  ocdefemp{codvalrec}:
+    required:  No
+    validators: ExistValidator_codval
+
+  ocdefemp{codparrec}:
+    required:  No
+    validators: ExistValidator_codpar
+
+  ocdefemp{numini}:
+    required:  No
+    validators: InicialValidator
+
+Validator_codemp:
+    class: sfPropelUniqueValidator
+    param:
+        class:        ocdefemp
+        column:       codemp
+        unique_error: El registro ya Existe intente con otro.
+
+ExistValidator_codact:
+    class: CidesaExistValidator
+    param:
+        class:        Octipact
+        column:       codtipact
+        unique_error: El Código de Acta no Existe.
+
+ExistValidator_codcon:
+    class: CidesaExistValidator
+    param:
+        class:        Octipcon
+        column:       codtipcon
+        unique_error: El Código del Contrato no EXiste.
+
+ExistValidator_codval:
+    class: CidesaExistValidator
+    param:
+        class:        Octipval
+        column:       codtipval
+        unique_error: El Código de Valuación no Existe.
+
+ExistValidator_codpar:
+    class: CidesaExistValidator
+    param:
+        class:        Ocdefpar
+        column:       codpar
+        unique_error: El Código de la Partida no Existe.
+
+ExistValidator_tipcar:
+    class: CidesaExistValidator
+    param:
+        class:        Octipcar
+        column:       codtipcar
+        unique_error: El Código de Ingeniero Inspector no Existe.
+
+InicialValidator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^[0-9]*$/' ]
+        values_error: El Número Inicial para la Obra solo puede contener valores númericos

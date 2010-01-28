@@ -48,6 +48,12 @@ abstract class BaseOptipret extends BaseObject  implements Persistent {
 	protected $id;
 
 	
+	protected $collOpretords;
+
+	
+	protected $lastOpretordCriteria = null;
+
+	
 	protected $alreadyInSave = false;
 
 	
@@ -347,6 +353,14 @@ abstract class BaseOptipret extends BaseObject  implements Persistent {
 				}
 				$this->resetModified(); 			}
 
+			if ($this->collOpretords !== null) {
+				foreach($this->collOpretords as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
+
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
@@ -387,6 +401,14 @@ abstract class BaseOptipret extends BaseObject  implements Persistent {
 				$failureMap = array_merge($failureMap, $retval);
 			}
 
+
+				if ($this->collOpretords !== null) {
+					foreach($this->collOpretords as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
 
 
 			$this->alreadyInValidation = false;
@@ -584,6 +606,15 @@ abstract class BaseOptipret extends BaseObject  implements Persistent {
 		$copyObj->setCodtipsen($this->codtipsen);
 
 
+		if ($deepCopy) {
+									$copyObj->setNew(false);
+
+			foreach($this->getOpretords() as $relObj) {
+				$copyObj->addOpretord($relObj->copy($deepCopy));
+			}
+
+		} 
+
 		$copyObj->setNew(true);
 
 		$copyObj->setId(NULL); 
@@ -605,6 +636,76 @@ abstract class BaseOptipret extends BaseObject  implements Persistent {
 			self::$peer = new OptipretPeer();
 		}
 		return self::$peer;
+	}
+
+	
+	public function initOpretords()
+	{
+		if ($this->collOpretords === null) {
+			$this->collOpretords = array();
+		}
+	}
+
+	
+	public function getOpretords($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseOpretordPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collOpretords === null) {
+			if ($this->isNew()) {
+			   $this->collOpretords = array();
+			} else {
+
+				$criteria->add(OpretordPeer::CODTIP, $this->getCodtip());
+
+				OpretordPeer::addSelectColumns($criteria);
+				$this->collOpretords = OpretordPeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(OpretordPeer::CODTIP, $this->getCodtip());
+
+				OpretordPeer::addSelectColumns($criteria);
+				if (!isset($this->lastOpretordCriteria) || !$this->lastOpretordCriteria->equals($criteria)) {
+					$this->collOpretords = OpretordPeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastOpretordCriteria = $criteria;
+		return $this->collOpretords;
+	}
+
+	
+	public function countOpretords($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/om/BaseOpretordPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(OpretordPeer::CODTIP, $this->getCodtip());
+
+		return OpretordPeer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addOpretord(Opretord $l)
+	{
+		$this->collOpretords[] = $l;
+		$l->setOptipret($this);
 	}
 
 } 

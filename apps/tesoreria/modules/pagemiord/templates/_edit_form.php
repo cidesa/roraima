@@ -133,7 +133,10 @@
 </div>
 
 <br><?php echo input_hidden_tag('opordpag[afectapre]', $opordpag->getAfectapre()) ?> <?php echo input_hidden_tag('partidas', '') ?><?php echo input_hidden_tag('opordpag[documento]', $opordpag->getDocumento()) ?>
-  <?php echo label_for('opordpag[desord]', __($labels['opordpag{desord}']), 'class="required" ') ?>
+
+<?php $cadestatus=substr($eti,0,6);?>
+
+ <?php echo label_for('opordpag[desord]', __($labels['opordpag{desord}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('opordpag{desord}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('opordpag{desord}')): ?>
     <?php echo form_error('opordpag{desord}', array('class' => 'form-error-msg')) ?>
@@ -141,6 +144,7 @@
 
   <?php $value = object_textarea_tag($opordpag, 'getDesord', array (
   'size' => '80x3',
+  'readonly'  =>  $cadestatus=='PAGADA' ? true : false ,
   'control_name' => 'opordpag[desord]',
   'maxlength'=> 1000,
   'onkeyup' => "javascript:return ismaxlength(this)",

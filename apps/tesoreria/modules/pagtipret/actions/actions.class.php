@@ -26,6 +26,15 @@ class pagtipretActions extends autopagtipretActions
     {
         $unitri=$this->MostrarUnidadesTributarias();
 		$this->optipret->setUnitri($unitri);
+
+       $t= new Criteria();
+       $t->setLimit(1);
+       $t->addDescendingOrderByColumn(OptipretPeer::CODTIP);
+       $reg= OptipretPeer::doSelectOne($t);
+       if ($reg)
+       {
+           $this->optipret->setCodtip(str_pad(($reg->getCodtip()+1),4,'0',STR_PAD_LEFT));
+       }else $this->optipret->setCodtip('0001');
     }
 
     if ($this->getRequest()->getMethod() == sfRequest::POST)

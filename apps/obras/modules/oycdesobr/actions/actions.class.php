@@ -309,6 +309,13 @@ class oycdesobrActions extends autooycdesobrActions
     $this->funciones_combos();
     $this->configGrid($this->ocregobr->getCodobr());
     $this->configGridIns($this->ocregobr->getCodobr());
+    if ($this->mancorrel=='S')
+    {
+        if (!$this->ocregobr->getId())
+        {
+           $this->ocregobr->setCodobr('##########');
+        }
+    }
 
     if ($this->getRequest()->getMethod() == sfRequest::POST)
     {
@@ -507,8 +514,9 @@ $this->Bitacora('Guardo');
 		$this->municipio = $this->Cargarmunicipio($this->ocregobr->getCodpai(),$this->ocregobr->getCodedo());//colocar lo q viene de bd
 		$this->parroquia = $this->Cargarparroquia($this->ocregobr->getCodpai(),$this->ocregobr->getCodedo(),$this->ocregobr->getCodmun());//colocar lo q viene de bd
 		$this->sector = $this->Cargarsector($this->ocregobr->getCodpai(),$this->ocregobr->getCodedo(),$this->ocregobr->getCodmun(),$this->ocregobr->getCodpar());
-	
+
 	    $this->apliva="";
+            $this->mancorrel="";
 	    $varemp = $this->getUser()->getAttribute('configemp');
 		if ($varemp)
 		if(array_key_exists('aplicacion',$varemp))
@@ -518,6 +526,10 @@ $this->Bitacora('Guardo');
 		      if(array_key_exists('apliva',$varemp['aplicacion']['obras']['modulos']['oycdesobr']))
 		      {
 		   	     $this->apliva=$varemp['aplicacion']['obras']['modulos']['oycdesobr']['apliva'];
+		      }
+                      if(array_key_exists('mancorrel',$varemp['aplicacion']['obras']['modulos']['oycdesobr']))
+		      {
+		   	     $this->mancorrel=$varemp['aplicacion']['obras']['modulos']['oycdesobr']['mancorrel'];
 		      }
 		 }
 }
@@ -651,6 +663,7 @@ $this->Bitacora('Guardo');
   	else
   	{
         $this->apliva="";
+        $this->mancorrel="";
 	    $varemp = $this->getUser()->getAttribute('configemp');
 		if ($varemp)
 		if(array_key_exists('aplicacion',$varemp))
@@ -661,11 +674,15 @@ $this->Bitacora('Guardo');
 		      {
 		   	     $this->apliva=$varemp['aplicacion']['obras']['modulos']['oycdesobr']['apliva'];
 		      }
+                      if(array_key_exists('mancorrel',$varemp['aplicacion']['obras']['modulos']['oycdesobr']))
+		      {
+		   	     $this->mancorrel=$varemp['aplicacion']['obras']['modulos']['oycdesobr']['mancorrel'];
+		      }
 		     }
 
 	  	$grid=Herramientas::CargarDatosGrid($this,$this->obj);
 	    $grid2=Herramientas::CargarDatosGrid($this,$this->obj2);
-	    if (Obras::salvarOycdesobr($ocregobr,$grid,$grid2,&$error,$this->apliva))
+	    if (Obras::salvarOycdesobr($ocregobr,$grid,$grid2,&$error,$this->apliva,$this->mancorrel))
 	    {
 	    	$this->coderror=$error;
 	       	return $this->coderror;
@@ -680,7 +697,20 @@ $this->Bitacora('Guardo');
 
   protected function deleteOcregobr($ocregobr)
   {
-    if (!Obras::eliminarOycdesobr($ocregobr))
+
+    $this->mancorrel="";
+    $varemp = $this->getUser()->getAttribute('configemp');
+        if ($varemp)
+        if(array_key_exists('aplicacion',$varemp))
+         if(array_key_exists('obras',$varemp['aplicacion']))
+           if(array_key_exists('modulos',$varemp['aplicacion']['obras']))
+             if(array_key_exists('oycdesobr',$varemp['aplicacion']['obras']['modulos'])){
+              if(array_key_exists('mancorrel',$varemp['aplicacion']['obras']['modulos']['oycdesobr']))
+              {
+                     $this->mancorrel=$varemp['aplicacion']['obras']['modulos']['oycdesobr']['mancorrel'];
+              }
+             }
+    if (!Obras::eliminarOycdesobr($ocregobr,$this->mancorrel))
     {
      return false;
     }

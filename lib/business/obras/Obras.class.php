@@ -162,19 +162,25 @@ public static function salvarLicitacion($ocreglic, $grid)
     $ocregobr->setUnocon('N');
     $ocregobr->setStaobr('A');
    }
-   $referencia='OB'.(substr($ocregobr->getCodobr(),2,strlen($ocregobr->getCodobr())));
+
+   $referencia=self::generarCorrelativoObra($ocregobr,&$tienecorrelativo,&$r);
    if ($apliva!='S'){
-   self::generaPrecompromiso($ocregobr,$referencia,&$msj);}
+   self::generaPrecompromiso($ocregobr,$referencia,&$msj,$mancorrel);}
 
    if ($msj==-1)
    {
-   	 $ocregobr->setCodobr($referencia);
+     $ocregobr->setCodobr($referencia);
+     $ocregobr->setFecreg(date('Y-m-d'));
      $ocregobr->save();
+     if ($tienecorrelativo)
+     {
+       Herramientas::getSalvarCorrelativo('numini','ocdefemp','Referencia',$r,$msg);
+     }
      self::grabarPresupuesto($ocregobr,$grid1);
      self::actualizarPartidas($ocregobr,$grid1);
      self::grabarInspectores($ocregobr,$grid2);
       if ($apliva!='S'){
-     self::generarImputacionesPrecompromiso($ocregobr);
+     self::generarImputacionesPrecompromiso($ocregobr,$mancorrel);
       }
    return true;
    }
@@ -252,7 +258,7 @@ public static function salvarLicitacion($ocreglic, $grid)
     }
  }
 
- public static function eliminarOycdesobr($ocregobr)
+ public static function eliminarOycdesobr($ocregobr,$mancorrel)
  {
  	$c= new Criteria();
  	$c->add(OcregconPeer::CODOBR,$ocregobr->getCodobr());
@@ -262,7 +268,7 @@ public static function salvarLicitacion($ocreglic, $grid)
  	  Herramientas::EliminarRegistro('Ocpreobr','Codobr',$ocregobr->getCodobr());
  	  Herramientas::EliminarRegistro('Ocinginsobr','Codobr',$ocregobr->getCodobr());
  	  Herramientas::EliminarRegistro('Ocregobr','Codobr',$ocregobr->getCodobr());
- 	  self::eliminarPrecompromiso($ocregobr->getCodobr());
+ 	  self::eliminarPrecompromiso($ocregobr->getCodobr(),$mancorrel);
  	  $ocregobr->delete();
  	  return true;
  	}
@@ -1106,9 +1112,13 @@ public static function salvarLicitacion($ocreglic, $grid)
       }else  $verificar_contrato=false;
   }
 
-  public static function generaPrecompromiso($ocregobr,$referencia,&$msj)
+  public static function generaPrecompromiso($ocregobr,$referencia,&$msj,$mancorrel)
   {
     $msj=-1;
+    if ($mancorrel=='S')
+    {
+     $referencia=substr($referencia,2,strlen($referencia));
+    }
     if ($ocregobr->getId()!="")
     {
       $c = new Criteria();
@@ -1151,9 +1161,13 @@ public static function salvarLicitacion($ocreglic, $grid)
     }
   }
 
-  public static function generarImputacionesPrecompromiso($ocregobr)
+  public static function generarImputacionesPrecompromiso($ocregobr,$mancorrel)
   {
-  	$referencia=$ocregobr->getCodobr();
+    if ($mancorrel=='S')
+    {
+     $referencia=substr($ocregobr->getCodobr(),2,strlen($ocregobr->getCodobr()));
+    }
+
     if ($ocregobr->getSubtot()>0) {
     $registro = new Cpimpprc();
     $registro->setRefprc($referencia);
@@ -1181,14 +1195,17 @@ public static function salvarLicitacion($ocreglic, $grid)
     }
   }
 
-  public static function eliminarPrecompromiso($code)
+  public static function eliminarPrecompromiso($code,$mancorrel)
   {
+    if ($mancorrel=='S'){
+    $refe=substr($code,2,strlen($code));
+    }
     $c= new Criteria();
-    $c->add(CpimpprcPeer::REFPRC,$code);
+    $c->add(CpimpprcPeer::REFPRC,$refe);
     CpimpprcPeer::doDelete($c);
 
     $c= new Criteria();
-    $c->add(CpprecomPeer::REFPRC,$code);
+    $c->add(CpprecomPeer::REFPRC,$refe);
     CpprecomPeer::doDelete($c);
   }
 
@@ -3304,6 +3321,81 @@ public static function salvarLicitacion($ocreglic, $grid)
        break;
     }
     $verficargasree=true;
+  }
+
+  public static function generarCorrelativoObra($obra,&$tienecorrelativo,&$r)
+  {
+    $tienecorrelativo=false;
+    if (Herramientas::getVerCorrelativo('numini','ocdefemp',&$r))
+    {
+      if ($obra->getCodobr()=='##########')
+      {
+      	  $valido=false;
+      	  $longitud='10';
+      	  $newcodobr=0;
+      	  $formato='';
+          $c = new Criteria();
+          $c->add(ContabaPeer::CODEMP,'001');
+          $per = ContabaPeer::doSelectOne($c);
+          if ($per->getCorcomp()=='AAMM####'){
+            $formato = date('ym');
+            $mes=date('m');
+            $longitud='4';
+            $sql="select substring(codobr,7,4) as num from ocregobr where substring(codobr,5,2)='".$mes."' order by fecreg desc limit 1";
+            if (Herramientas::BuscarDatos($sql,&$result))
+            {
+              $cor=$result[0]["num"]+1;
+            }else $cor=1;
+
+            while(!$valido){
+             $newcodobr = "OB".$formato.str_pad((string)$cor, $longitud, "0", STR_PAD_LEFT);
+              $c = new Criteria();
+              $c->add(OcregobrPeer::CODOBR,$newcodobr);
+              $clase = OcregobrPeer::doSelectOne($c);
+              if(!$clase){
+                $valido = true;
+              }else { $cor=$cor +1;}
+            }
+          }elseif ($per->getCorcomp()=='MMAA####'){
+            $formato = date('my');
+            $longitud='4';
+            $mes=date('m');
+	    $sql="select substring(codobr,7,4) as num from ocregobr where substring(codobr,3,2)='".$mes."' order by fecreg desc limit 1";
+            if (Herramientas::BuscarDatos($sql,&$result))
+            {
+              $cor=$result[0]["num"]+1;
+            }else $cor=1;
+
+            while(!$valido){
+              $newcodobr = "OB".$formato.str_pad((string)$cor, $longitud, "0", STR_PAD_LEFT);
+              $c = new Criteria();
+              $c->add(OcregobrPeer::CODOBR,$newcodobr);
+              $clase = OcregobrPeer::doSelectOne($c);
+              if(!$clase){
+                $valido = true;
+              }else { $cor=$cor +1;}
+            }
+          }else{
+            $tienecorrelativo=true;
+            $encontrado=false;
+            while (!$encontrado)
+            {
+              $numero="OB".str_pad($r, 8, '0', STR_PAD_LEFT);
+              $sql="select codobr from ocregobr where codobr='".$numero."'";
+              if (Herramientas::BuscarDatos($sql,&$result))
+              { $r=$r+1; }
+              else { $encontrado=true;}
+            }
+	    $newcodobr="OB".str_pad($r, 8, '0', STR_PAD_LEFT);
+        }
+      }
+      else
+      {
+        $newcodobr="OB".substr($obra->getCodobr(),2,strlen($obra->getCodobr()));
+      }
+    }
+    return $newcodobr;
+   
   }
 
 
