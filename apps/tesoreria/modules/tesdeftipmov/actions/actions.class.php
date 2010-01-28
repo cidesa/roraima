@@ -22,6 +22,20 @@ class tesdeftipmovActions extends autotesdeftipmovActions
   {
     $this->tstipmov = $this->getTstipmovOrCreate();
     $this->setVars();
+    if ($this->mancorrel=='S'){
+          if (!$this->tstipmov->getId()) {
+
+           $t= new Criteria();
+           $t->setLimit(1);
+           $t->addDescendingOrderByColumn(TstipmovPeer::CODTIP);
+           $reg= TstipmovPeer::doSelectOne($t);
+           if ($reg)
+           {
+               $this->tstipmov->setCodtip(str_pad(($reg->getCodtip()+1),4,'0',STR_PAD_LEFT));
+           }else $this->tstipmov->setCodtip('0001');
+         }
+    }
+
 
     if ($this->getRequest()->getMethod() == sfRequest::POST)
     {
@@ -32,7 +46,8 @@ class tesdeftipmovActions extends autotesdeftipmovActions
       $this->tstipmov->setId(Herramientas::getX_vacio('codtip','tstipmov','id',$this->tstipmov->getCodtip()));
 
       $this->setFlash('notice', 'Your modifications have been saved');
-$this->Bitacora('Guardo');
+
+      $this->Bitacora('Guardo');
 
       if ($this->getRequestParameter('save_and_add'))
       {
@@ -129,6 +144,18 @@ $this->Bitacora('Guardo');
 	{
 	  $this->mascaracontabilidad = Herramientas::ObtenerFormato('Contaba','Forcta');
 	  $this->loncta=strlen($this->mascaracontabilidad);
+            $this->mancorrel="";
+            $varemp = $this->getUser()->getAttribute('configemp');
+            if ($varemp)
+            if(array_key_exists('aplicacion',$varemp))
+             if(array_key_exists('tesoreria',$varemp['aplicacion']))
+               if(array_key_exists('modulos',$varemp['aplicacion']['tesoreria']))
+                 if(array_key_exists('tesdeftipmov',$varemp['aplicacion']['tesoreria']['modulos'])){
+                   if(array_key_exists('mancorrel',$varemp['aplicacion']['tesoreria']['modulos']['tesdeftipmov']))
+                   {
+                    $this->mancorrel=$varemp['aplicacion']['tesoreria']['modulos']['tesdeftipmov']['mancorrel'];
+                   }
+                 }
 	}
 
 	 protected function updateTstipmovFromRequest()

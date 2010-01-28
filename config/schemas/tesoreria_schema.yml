@@ -734,6 +734,9 @@ propel:
     facafe:
       type: VARCHAR
       size: 50
+    observacion:
+      type: VARCHAR
+      size: 250
     id:
       type: INTEGER
       required: true
@@ -1059,6 +1062,8 @@ propel:
       type: VARCHAR
       size: 3
       required: true
+      foreignTable: optipret
+      foreignReference: codtip
     monret:
       type: NUMERIC
       size: 14

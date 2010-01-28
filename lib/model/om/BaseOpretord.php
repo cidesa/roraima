@@ -44,6 +44,9 @@ abstract class BaseOpretord extends BaseObject  implements Persistent {
 	protected $id;
 
 	
+	protected $aOptipret;
+
+	
 	protected $alreadyInSave = false;
 
 	
@@ -134,6 +137,10 @@ abstract class BaseOpretord extends BaseObject  implements Persistent {
         $this->modifiedColumns[] = OpretordPeer::CODTIP;
       }
   
+		if ($this->aOptipret !== null && $this->aOptipret->getCodtip() !== $v) {
+			$this->aOptipret = null;
+		}
+
 	} 
 	
 	public function setMonret($v)
@@ -311,6 +318,15 @@ abstract class BaseOpretord extends BaseObject  implements Persistent {
 			$this->alreadyInSave = true;
 
 
+												
+			if ($this->aOptipret !== null) {
+				if ($this->aOptipret->isModified()) {
+					$affectedRows += $this->aOptipret->save($con);
+				}
+				$this->setOptipret($this->aOptipret);
+			}
+
+
 						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = OpretordPeer::doInsert($this, $con);
@@ -356,6 +372,14 @@ abstract class BaseOpretord extends BaseObject  implements Persistent {
 			$retval = null;
 
 			$failureMap = array();
+
+
+												
+			if ($this->aOptipret !== null) {
+				if (!$this->aOptipret->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aOptipret->getValidationFailures());
+				}
+			}
 
 
 			if (($retval = OpretordPeer::doValidate($this, $columns)) !== true) {
@@ -569,6 +593,35 @@ abstract class BaseOpretord extends BaseObject  implements Persistent {
 			self::$peer = new OpretordPeer();
 		}
 		return self::$peer;
+	}
+
+	
+	public function setOptipret($v)
+	{
+
+
+		if ($v === null) {
+			$this->setCodtip(NULL);
+		} else {
+			$this->setCodtip($v->getCodtip());
+		}
+
+
+		$this->aOptipret = $v;
+	}
+
+
+	
+	public function getOptipret($con = null)
+	{
+		if ($this->aOptipret === null && (($this->codtip !== "" && $this->codtip !== null))) {
+						include_once 'lib/model/om/BaseOptipretPeer.php';
+
+			$this->aOptipret = OptipretPeer::retrieveByPK($this->codtip, $con);
+
+			
+		}
+		return $this->aOptipret;
 	}
 
 } 

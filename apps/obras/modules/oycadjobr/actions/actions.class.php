@@ -27,7 +27,18 @@ class oycadjobrActions extends autooycadjobrActions
    */
   public function editing()
   {
+    if (!$this->ocadjobr->getId())
+    {
+       $t= new Criteria();
+       $t->setLimit(1);
+       $t->addDescendingOrderByColumn(OcadjobrPeer::CODADJ);
+       $reg= OcadjobrPeer::doSelectOne($t);
+       if ($reg)
+       {
+           $this->ocadjobr->setCodadj(str_pad(($reg->getCodadj()+1),8,'0',STR_PAD_LEFT));
+       }else $this->ocadjobr->setCodadj('00000001');
 
+    }
 
   }
 

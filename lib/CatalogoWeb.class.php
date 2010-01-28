@@ -1147,6 +1147,7 @@ class CatalogoWeb extends BaseCatalogoWeb {
   /******************************** Bienes: biedefpar: Partidas  ********************************/
   public function Bnregmue_Bieregsegmue() {
     $this->c = new Criteria();
+    $this->c->add(BnregmuePeer::STAMUE,'A');
     //   $this->c->addAscendingOrderByColumn(BnregmuePeer::CODACT);
     $this->columnas = array (
       BnregmuePeer :: CODMUE => 'Código Activo',
@@ -2062,6 +2063,8 @@ $this->c= new Criteria();
 
   public function Bnregmue_Bieregsegmue1() {
     $this->c = new Criteria();
+    $this->c->add(BnregmuePeer::STAMUE,'A');
+
     $this->columnas = array (
       BnregmuePeer :: CODACT => 'Código Nivel',
       BnregmuePeer :: CODMUE => 'Código Activo',

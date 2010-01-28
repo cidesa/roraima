@@ -219,6 +219,9 @@ propel:
     tipcom:
       type: VARCHAR
       size: 4
+    numini:
+      type: VARCHAR
+      size: 10
     id:
       type: INTEGER
       required: true

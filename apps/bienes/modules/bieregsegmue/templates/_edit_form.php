@@ -64,7 +64,7 @@
     'onBlur'=> "javascript: document.getElementById('bnsegmue_codmue').disabled=false; ".remote_function(array(
   			'url'      => 'bieregsegmue/ajax',
   			'complete' => 'AjaxJSON(request, json)',
-  			'with' => "'ajax=1&cajtexmos=bnsegmue_codact&cajtexcom=bnsegmue_desmue&codigo='+this.value",
+  			'with' => "'ajax=1&codactivo='+$('bnsegmue_codact').value+'&cajtexmos=bnsegmue_desmue&cajtexcom=bnsegmue_codmue&codigo='+this.value",
        		)),
 )); echo $value ? $value : '&nbsp;' ?>
 

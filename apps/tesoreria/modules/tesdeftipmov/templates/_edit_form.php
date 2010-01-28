@@ -32,7 +32,7 @@
   'maxlength'=>4,
   'readonly'  =>  $tstipmov->getId()!='' ? true : false ,
   'control_name' => 'tstipmov[codtip]',
-  'onKeyPress' => "javascript:cadena=this.value;cadena=cadena.toUpperCase();document.getElementById('tstipmov_codtip').value=cadena",
+  'onKeyPress' => $mancorrel=='S' ? "return IsNumber(event);" : "javascript:cadena=this.value;cadena=cadena.toUpperCase();document.getElementById('tstipmov_codtip').value=cadena",
 )); echo $value ? $value : '&nbsp;' ?>
 
     <div class="sf_admin_edit_help"><?php echo __('Máximo 4 caracteres') ?></div>  </div>
@@ -115,7 +115,6 @@
     </div>
 </div>
 </fieldset>
-
 </div>
 </fieldset>
 
@@ -132,3 +131,11 @@
 )) ?><?php endif; ?>
 </li>
   </ul>
+<script >
+var nav4 = window.Event ? true : false;
+function IsNumber(evt){
+// Backspace = 8, Enter = 13, ‘0′ = 48, ‘9′ = 57
+var key = nav4 ? evt.which : evt.keyCode;
+return (key <= 13 || (key >= 48 && key <= 57));
+}
+</script>

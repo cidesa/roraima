@@ -179,6 +179,7 @@ class bieregsegmueActions extends autobieregsegmueActions
     $ajax = $this->getRequestParameter('ajax','');
     $cajtexmos=$this->getRequestParameter('cajtexmos','');
     $cajtexcom=$this->getRequestParameter('cajtexcom','');
+    $javascript="";
 
 
     switch ($ajax){
@@ -189,11 +190,23 @@ class bieregsegmueActions extends autobieregsegmueActions
 
      break;
       case '1':
-
-      	$codact=BnregmuePeer::getCodact($codigo);
-      	$desmue=BnregmuePeer::getDesmue1($codigo);
-
-      	$output = '[["'.$cajtexmos.'","'.$codact.'",""], ["'.$cajtexcom.'","'.$desmue.'",""]]';
+        $desmue="";
+      	$c= new Criteria();
+        $c->add(BnregmuePeer::CODACT,$this->getRequestParameter('codactivo'));
+        $c->add(BnregmuePeer::CODMUE,$codigo);
+        $reg=BnregmuePeer::doSelectOne($c);
+        if ($reg)
+        {
+            if ($reg->getStamue()=='D')
+            {
+             $javascript="alert('El Mueble esta desincorporado'); $('$cajtexcom').value='';";
+            }else{
+              $desmue=$reg->getDesmue();
+            }
+        }else{
+            $javascript="alert('El Mueble no existe'); $('$cajtexcom').value='';";
+        }
+      	$output = '[["'.$cajtexmos.'","'.$desmue.'",""],["javascript","'.$javascript.'",""]]';
 
       break;
 

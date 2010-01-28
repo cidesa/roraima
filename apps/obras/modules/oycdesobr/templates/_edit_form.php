@@ -30,7 +30,7 @@
 
   <?php $value = object_input_tag($ocregobr, 'getCodobr', array (
   'size' => 15,
-  'maxlength' => 8,
+  'maxlength' => 10,
   'readonly'  =>  $ocregobr->getId()!='' ? true : false ,
   'control_name' => 'ocregobr[codobr]',
   'onKeyPress' => "javascript:if (event.keyCode==13 || event.keyCode==9){document.getElementById('ocregobr_codtipobr').focus();}",
@@ -413,6 +413,12 @@
    $('trigger_ocregobr_fecfin').hide();
    $('tipopre').hide();
 
+ }
+
+ var tienecorrel='<?php echo $mancorrel; ?>';
+ if (tienecorrel=='S' && nuevo=='')
+ {
+   $('ocregobr_codobr').readOnly=true;
  }
 
  function enter(e,valor)

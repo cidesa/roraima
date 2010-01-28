@@ -145,6 +145,10 @@ abstract class BaseOcdefemp extends BaseObject  implements Persistent {
 
 
 	
+	protected $numini;
+
+
+	
 	protected $id;
 
 	
@@ -394,6 +398,13 @@ abstract class BaseOcdefemp extends BaseObject  implements Persistent {
   {
 
     return trim($this->tipcom);
+
+  }
+  
+  public function getNumini()
+  {
+
+    return trim($this->numini);
 
   }
   
@@ -744,6 +755,16 @@ abstract class BaseOcdefemp extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setNumini($v)
+	{
+
+    if ($this->numini !== $v) {
+        $this->numini = $v;
+        $this->modifiedColumns[] = OcdefempPeer::NUMINI;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -826,7 +847,9 @@ abstract class BaseOcdefemp extends BaseObject  implements Persistent {
 
       $this->tipcom = $rs->getString($startcol + 33);
 
-      $this->id = $rs->getInt($startcol + 34);
+      $this->numini = $rs->getString($startcol + 34);
+
+      $this->id = $rs->getInt($startcol + 35);
 
       $this->resetModified();
 
@@ -834,7 +857,7 @@ abstract class BaseOcdefemp extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 35; 
+            return $startcol + 36; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Ocdefemp object", $e);
     }
@@ -1084,6 +1107,9 @@ abstract class BaseOcdefemp extends BaseObject  implements Persistent {
 				return $this->getTipcom();
 				break;
 			case 34:
+				return $this->getNumini();
+				break;
+			case 35:
 				return $this->getId();
 				break;
 			default:
@@ -1130,7 +1156,8 @@ abstract class BaseOcdefemp extends BaseObject  implements Persistent {
 			$keys[31] => $this->getRetant(),
 			$keys[32] => $this->getGencom(),
 			$keys[33] => $this->getTipcom(),
-			$keys[34] => $this->getId(),
+			$keys[34] => $this->getNumini(),
+			$keys[35] => $this->getId(),
 		);
 		return $result;
 	}
@@ -1249,6 +1276,9 @@ abstract class BaseOcdefemp extends BaseObject  implements Persistent {
 				$this->setTipcom($value);
 				break;
 			case 34:
+				$this->setNumini($value);
+				break;
+			case 35:
 				$this->setId($value);
 				break;
 		} 	}
@@ -1292,7 +1322,8 @@ abstract class BaseOcdefemp extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[31], $arr)) $this->setRetant($arr[$keys[31]]);
 		if (array_key_exists($keys[32], $arr)) $this->setGencom($arr[$keys[32]]);
 		if (array_key_exists($keys[33], $arr)) $this->setTipcom($arr[$keys[33]]);
-		if (array_key_exists($keys[34], $arr)) $this->setId($arr[$keys[34]]);
+		if (array_key_exists($keys[34], $arr)) $this->setNumini($arr[$keys[34]]);
+		if (array_key_exists($keys[35], $arr)) $this->setId($arr[$keys[35]]);
 	}
 
 	
@@ -1334,6 +1365,7 @@ abstract class BaseOcdefemp extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(OcdefempPeer::RETANT)) $criteria->add(OcdefempPeer::RETANT, $this->retant);
 		if ($this->isColumnModified(OcdefempPeer::GENCOM)) $criteria->add(OcdefempPeer::GENCOM, $this->gencom);
 		if ($this->isColumnModified(OcdefempPeer::TIPCOM)) $criteria->add(OcdefempPeer::TIPCOM, $this->tipcom);
+		if ($this->isColumnModified(OcdefempPeer::NUMINI)) $criteria->add(OcdefempPeer::NUMINI, $this->numini);
 		if ($this->isColumnModified(OcdefempPeer::ID)) $criteria->add(OcdefempPeer::ID, $this->id);
 
 		return $criteria;
@@ -1432,6 +1464,8 @@ abstract class BaseOcdefemp extends BaseObject  implements Persistent {
 		$copyObj->setGencom($this->gencom);
 
 		$copyObj->setTipcom($this->tipcom);
+
+		$copyObj->setNumini($this->numini);
 
 
 		$copyObj->setNew(true);
