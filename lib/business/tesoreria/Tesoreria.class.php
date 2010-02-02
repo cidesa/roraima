@@ -365,10 +365,10 @@ class Tesoreria {
           $c->add(TsmovlibPeer :: STACON, 'N');
           $tsmovlib2 = TsmovlibPeer :: doSelectOne($c);
           if ($tsmovlib2) {
-          	foreach ($tsmovlib2 as $lib2) {
-            $lib2->setStacon('N');
-            $lib2->save();
-          	}
+          	//foreach ($tsmovlib2 as $lib2) {
+            $tsmovlib2->setStacon('N');
+            $tsmovlib2->save();
+          	//}
           }
         }
 
@@ -417,10 +417,10 @@ class Tesoreria {
           $c->add(TsmovbanPeer :: STACON, 'N');
           $tsmovban2 = TsmovbanPeer :: doSelectOne($c);
           if ($tsmovban2) {
-          	foreach ($tsmovban2 as $ban2) {
+          	//foreach ($tsmovban2 as $ban2) {
             $tsmovban2->setStacon('N');
             $tsmovban2->save();
-          	}
+          	//}
           }
         }
 
@@ -557,11 +557,9 @@ class Tesoreria {
     $c->add(TsmovlibPeer :: REFLIB, $refere);
     $tsmovlib = TsmovlibPeer :: doSelectOne($c);
 
-    if ($tsmovlib) {
-    foreach ($tsmovlib as $lib){
-      $lib->setStacon($status);
-      $lib->save();
-    }
+    if ($tsmovlib) {    
+      $tsmovlib->setStacon($status);
+      $tsmovlib->save();
     }
 
     $c = new Criteria();
@@ -569,11 +567,10 @@ class Tesoreria {
     $c->add(TsmovbanPeer :: REFBAN, $refere);
     $tsmovban = TsmovbanPeer :: doSelectOne($c);
 
-    if ($tsmovban) {
-    foreach ($tsmovban as $ban){
-      $ban->setStacon($status);
-      $ban->save();
-    }
+    if ($tsmovban) {    
+      $tsmovban->setStacon($status);
+      $tsmovban->save();
+    
     }
   }
 
