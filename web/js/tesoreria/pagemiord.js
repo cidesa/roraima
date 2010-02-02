@@ -1458,6 +1458,7 @@
        $(notcre).disabled=true;
        $(tipotrans).value="01";
        $(facafect).disabled=true;
+       new Ajax.Request(getUrlModuloAjax(), {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=99&cajtexmos='+facafect+'&codigo='+id})
      }else{
       alert_('El N&uacute;mero de Factura esta Repetido');
       $(id).value="";
