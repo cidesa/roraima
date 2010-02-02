@@ -6,7 +6,7 @@
  * @subpackage bienes
  * @author     $Author$ <desarrollo@cidesa.com.ve>
  * @version SVN: $Id$
- * 
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -297,7 +297,7 @@ class Bienes
                 }
 
                 $difmes=Herramientas :: dateDiff('m', $dato->getFecreg(), $lafechadep) + 1;
-                $difdia=Herramientas :: dateDiff('d', $dato->getFecreg(), $lafechadep);  
+                $difdia=Herramientas :: dateDiff('d', $dato->getFecreg(), $lafechadep);
 
 
                 if ($dato->getDepmen()==0)
@@ -325,6 +325,7 @@ class Bienes
                     if ($montomejora>0 && $vidamejora>0)
                     {
                       $difmes= (($dato->getViduti() - $difmes) + 1);
+                      $mesesdep= $difmes;
                       $valorbien= (($dato->getvalini()-$dato->getDepacu()) +$montomejora -$dato->getValres());
                       $vidabien= $difmes + $vidamejora;
 
@@ -718,14 +719,14 @@ class Bienes
        return 101;
      }
 
-    Herramientas::FormarCodigoPadre($codubi,&$nivelcodigo,&$ultimo,$formato);     
+    Herramientas::FormarCodigoPadre($codubi,&$nivelcodigo,&$ultimo,$formato);
     $c= new Criteria();
     $c->add(BnubibiePeer::CODUBI,$ultimo);
     $bnubibie = BnubibiePeer::doSelectOne($c);
     if (!$bnubibie)
-    {        
+    {
        if ($nivelcodigo == 0) return 100;
-    }    
+    }
     return -1;
   }
 
