@@ -52,7 +52,7 @@ class pagemiordActions extends autopagemiordActions
 			  	$this->coderror5="99999999";
 				return false;
 			  }
-	  }	  
+	  }
 	  ##FIN##
       $this->setVars();
       if ($this->opordpag->getId()=="")
@@ -1101,7 +1101,6 @@ $this->Bitacora('Guardo');
     $col2->setNombreCampo('numfac');
     $col2->setHTML('type="text" size="15" maxlength="20"');
     $col2->setJScript('onBlur="javascript:event.keyCode=13; nrofacturadeshabilitar(event,this.id);"');
-    $col2->setAjax('pagemiord',99,2);
 
     $col3 = new Columna('Nro. Control');
     $col3->setTipo(Columna::TEXTO);
