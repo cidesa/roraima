@@ -1,0 +1,70 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Tsdefcajchi
+    theme:            cidesaGenerator
+    fields:
+      codcaj: { name: Código, params: size=10 maxlength=3}
+      descaj: { name: Descripción, params: maxlength=250}
+      cedrif:
+        name: Beneficiario
+        params: maxlength=15
+        catalogo:
+          catalogoweb: Opbenefi_Pagemiord
+          clase: Opbenefi
+          ajax: 0
+          parametros: getprincipal="getCedrif" getsecundario="getNomben" campoprincipal="cedrif" camposecundario="nomben" campobase = "id"
+      codcat:
+        name: Categoría
+        params: maxlength=32
+        catalogo:
+          catalogoweb: Npcatpre_Almsolegr
+          clase: Npcatpre
+          ajax: 0
+          parametros: getprincipal="getCodcat" getsecundario="getNomcat" campoprincipal="codcat" camposecundario="nomcat" campobase = "id"
+          catalogoparams: /param1/'."'+$('tsdefcajchi_longitud').value+'".'
+      numcue:
+        name: Cuenta Bancaria
+        params: maxlength=20
+        catalogo:
+          catalogoweb: Opdefemp_tsdefban
+          clase: Tsdefban
+          ajax: 0
+          parametros: getprincipal="getNumcue" getsecundario="getNomcue" campoprincipal="numcue" camposecundario="nomcue" campobase = "id"         
+      codtip:
+        name: Movimiento de Salida
+        params: onblur=convertirMayusculas(this.id) maxlength=4
+        catalogo:
+          catalogoweb: Opdefemp_pagdefemp3
+          clase: Tstipmov
+          ajax: 0
+          parametros: getprincipal="getCodtip" getsecundario="getDestip" campoprincipal="codtip" camposecundario="destip" campobase = "id"
+      tipcau:
+        name: Movimiento de Rendición
+        params: onblur=convertirMayusculas(this.id) maxlength=4
+        catalogo:
+          catalogoweb: Cpdoccau_Pagemiord
+          clase: Cpdoccau
+          ajax: 0
+          parametros: getprincipal="getTipcau" getsecundario="getNomext" campoprincipal="tipcau" camposecundario="nomext" campobase = "id"
+      monape:  {name: Monto Apertura}
+      porrep:  {name: Porcentaje de Reposición}
+      numini: { name: N° Inicial, params: size=10 maxlength=8}
+    list:
+      title:          Lista de Caja Chica     
+      display:        [=codcaj, descaj]
+      filters:        [codcaj, descaj, cedrif]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+      sort: codcaj
+    edit:
+      title:          Edición de Caja Chica
+      display:       [codcaj, descaj, cedrif, codcat, numcue, codtip, tipcau, monape, porrep, numini]
+      hide:          [longitud]
+      actions:
+        _list:                 ~
+        _save:                 ~
+        _create:               ~
+        _delete:               ~

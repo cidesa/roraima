@@ -1997,12 +1997,17 @@ class Tesoreria {
       $j++;
     }
 
+    $t= new Criteria();
+    $t->add(TsdefcajchiPeer::CODCAJ,$opordpag->getCodcajchi());
+    $reg= TsdefcajchiPeer::doSelectOne($t);
+    if ($reg){
+
       $n= new Criteria();
-      $n->addJoin(OpdefempPeer::CEDRIFCAJCHI,OpbenefiPeer::CEDRIF);
+      $n->add(OpbenefiPeer::CEDRIF,$reg->getCedrif());
       $resul= OpbenefiPeer::doSelectOne($n);
       if ($resul)
       {
-        if (!is_null($resul->getCodcta()))
+        if (!is_null($resul->getCodcta())  && $resul->getCodcta()!='')
         {
          $codigocuenta2=$resul->getCodcta();
          if ($opordpag->getMonord()>0)
@@ -2019,6 +2024,13 @@ class Tesoreria {
           $monto2=$b;
         }        
       }
+    }else{
+        $codigocuenta2="";
+             $tipo2="";
+          $des2="";
+          $b="0,00";
+          $monto2=$b;
+    }
       $cuentas=$codigocuenta2.'_'.$codigocuentas;
       $descr=$des2.'_'.$desc;
       $tipos=$tipo2.'_'.$tipo1;

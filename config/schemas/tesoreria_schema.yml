@@ -959,6 +959,9 @@ propel:
     aprorddir:
       type: VARCHAR
       size: 1
+    codcajchi:
+      type: VARCHAR
+      size: 3
     id:
       type: INTEGER
       required: true
@@ -2436,3 +2439,52 @@ propel:
       type: INTEGER
       required: true
       autoIncrement: true
+  tsdefcajchi:
+    codcaj:
+      type: VARCHAR
+      size: 3
+      required: true
+    descaj:
+      type: VARCHAR
+      size: 250
+      required: true
+    cedrif:
+      type: VARCHAR
+      size: 15
+      required: true
+    codcat:
+      type: VARCHAR
+      size: 32
+      required: true
+    numcue:
+      type: VARCHAR
+      size: 20
+      required: true
+    codtip:
+      type: VARCHAR
+      size: 4
+      required: true
+    tipcau:
+      type: VARCHAR
+      size: 4
+      required: true
+    monape:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    porrep:
+      type: NUMERIC
+      size: 14
+      scale: 2    
+    numini:
+      type: VARCHAR
+      size: 8
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+    _uniques:
+      unique_tsdefcajchi_codcaj:
+        - codcaj
