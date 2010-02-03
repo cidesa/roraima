@@ -441,6 +441,9 @@
 546:
   cod: 546
   msj: La fecha no puede estar vacia
+547:
+  cod: 547
+  msj: El numero de Cheque debe estar en el rango de la chequera que se encuentre activa  
 3:
   cod: 3
   msj: La contraseña es diferente.
