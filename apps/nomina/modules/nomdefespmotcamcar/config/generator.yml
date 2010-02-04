@@ -1,0 +1,32 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Npmotcamcar
+    theme:            cidesaGenerator
+    fields:
+      codmotcamcar:    { name: Código, params: maxlength=4 size=10 onFocus="if($('id').value!='')$(this.id).readOnly=true" }
+      desmotcamcar:    { name: Descripción, readonly : true, params: maxlength=1000 size=60 }
+
+    list:
+      title:              Definición  Motivos de Cambio de Cargo
+      display:            [=codmotcamcar, desmotcamcar]
+      filters:            [codmotcamcar, desmotcamcar]
+      max_pers:           10
+      sort:               codmotcamcar
+      objects_actions:
+        _edit:            ~
+        _delete:          ~
+      actions:
+        _create:          ~           
+
+    edit:
+      title:              Edición de Motivos de Cambios de Cargo
+      display:
+        Datos Area del Curso:   [codmotcamcar, desmotcamcar]  
+      fields:
+        codmotcamcar:
+          params:     maxlength=4,size=5 onBlur  = "$(this.id).value=$(this.id).value.pad(4,'0',0)"  
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

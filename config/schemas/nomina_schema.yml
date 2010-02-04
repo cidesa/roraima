@@ -187,6 +187,10 @@ propel:
       type: VARCHAR
       size: 4
       ##required: true
+    codmotcamcar:
+      type: VARCHAR
+      size: 4
+      ##required: true      
     id:
       type: INTEGER
       required: true
@@ -7083,3 +7087,18 @@ propel:
       primaryKey: true
       autoIncrement: true
       description: Identificador Único del registro
+  npmotcamcar:
+    codmotcamcar:
+      type: VARCHAR
+      size: 4
+      required: true
+    desmotcamcar:
+      type: VARCHAR
+      size: 1000
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro      
