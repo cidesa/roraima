@@ -7,3 +7,7 @@ CREATE SEQUENCE npincapa_correl
   START 8
   CACHE 1;
 ALTER TABLE npincapa_correl OWNER TO postgres;
+
+--CARLOS RAMIREZ
+alter table npcargos
+  add column canmix numeric(6,0);
