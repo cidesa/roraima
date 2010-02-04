@@ -11,3 +11,8 @@ ALTER TABLE npincapa_correl OWNER TO postgres;
 --CARLOS RAMIREZ
 alter table npcargos
   add column canmix numeric(6,0);
+  
+--CARLOS RAMIREZ
+--PRESTACIONES REALIZADO EN NOVIEMBRE PERO NO SE HABIA SUBIDO AL REPOSITORIO
+alter table npvacdefgen
+  add column vacant varchar(1);  
