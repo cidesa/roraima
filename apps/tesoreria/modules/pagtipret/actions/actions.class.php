@@ -33,8 +33,8 @@ class pagtipretActions extends autopagtipretActions
        $reg= OptipretPeer::doSelectOne($t);
        if ($reg)
        {
-           $this->optipret->setCodtip(str_pad(($reg->getCodtip()+1),4,'0',STR_PAD_LEFT));
-       }else $this->optipret->setCodtip('0001');
+           $this->optipret->setCodtip(str_pad(($reg->getCodtip()+1),3,'0',STR_PAD_LEFT));
+       }else $this->optipret->setCodtip('001');
     }
 
     if ($this->getRequest()->getMethod() == sfRequest::POST)
