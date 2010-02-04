@@ -19,7 +19,8 @@ generator:
       canhom:                          { name: Cargos para Hombres  }
       carvan:                          { name: Cargos Vacantes  }
       carasi:                          { name: Cargos Asignados  }
-      porcen:                         { name: Porcentaje }
+      porcen:                          { name: Porcentaje }
+      canmix:                          { name: Cargos Mixtos  }
 
     list:
       title:                           Cargos
@@ -34,7 +35,7 @@ generator:
       fields:
         profecargo:                    { type: admin_double_list, params: through_class=Npprocar}
       title:                           Edición de Cargos
-      display:                         [=codcar, nomcar, codtip, graocp, suecar, punmin, stacar, profecargo, comcar, pricar, canmuj, canhom, carvan, carasi, porcen]
+      display:                         [=codcar, nomcar, codtip, graocp, suecar, punmin, stacar, profecargo, comcar, pricar, canmuj, canhom, carvan, carasi, porcen, canmix]
       actions:
         _list:                 ~
         _save:                 ~

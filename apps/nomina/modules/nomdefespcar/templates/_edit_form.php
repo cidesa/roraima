@@ -4,8 +4,8 @@
  *
  * @package    Roraima
  * @subpackage vistas
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version    SVN: $Id$
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id: _edit_form.php 36298 2010-02-04 16:51:58Z cramirez $
  */
 // date: 2007/08/17 17:53:42
 ?>
@@ -183,6 +183,19 @@
 			  'maxlength' => 21,
 			  'onBlur' => "javascript:event.keyCode=13; calcularo(event,this.id)",
 			  'control_name' => 'npcargos[canhom]',
+			)); echo $value ? $value : '&nbsp;'?>
+		</td>
+		<td><?php echo label_for('npcargos[canmix]', __($labels['npcargos{canmix}']), 'class="required" ') ?>
+			  <div class="content<?php if ($sf_request->hasError('npcargos{canmix}')): ?> form-error<?php endif; ?>">
+			  <?php if ($sf_request->hasError('npcargos{canmix}')): ?>
+			    <?php echo form_error('npcargos{canmix}', array('class' => 'form-error-msg')) ?>
+			  <?php endif; ?>
+
+			  <?php $value = object_input_tag($npcargos, array('getCanmix',true), array (
+			  'size' => 7,
+			  'maxlength' => 21,
+			  'onBlur' => "javascript:event.keyCode=13; calcularo(event,this.id)",
+			  'control_name' => 'npcargos[canmix]',
 			)); echo $value ? $value : '&nbsp;'?>
 		</td>
 	</tr>
@@ -381,9 +394,10 @@ echo grid_tag($obj);
        {
        	  var canmuj=parseInt($('npcargos_canmuj').value);
        	  var canhom=parseInt($('npcargos_canhom').value);
+		  var canmix=parseInt($('npcargos_canmix').value);
        	  var carasi=parseInt($('npcargos_carasi').value);
 
-          var cuenta= canmuj + canhom - carasi;
+          var cuenta= canmuj + canhom + canmix - carasi;
           $('npcargos_carvan').value=cuenta;
        }else{
        	alert('Debe introducir un valor entero');
