@@ -3,4 +3,5 @@
   'control_name' => 'npincapa[codinc]',
   'maxlength' =>  8,
   'readonly'  =>  $npincapa->getId()!='' ? true : false,
+  'onBlur'  =>   ' $("npincapa_codinc").value == "" ? $("npincapa_codinc").value="########" : "" ',
 )); echo $value ? $value : '&nbsp;' ?>

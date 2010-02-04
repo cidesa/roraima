@@ -215,6 +215,14 @@ class nomincActions extends autonomincActions
    */
   public function saving($clasemodelo)
   {
+  	
+  	if(strrpos($clasemodelo->getCodinc(),'#'))
+		{
+			    $sql = "select nextval('npincapa_correl') as correl;";
+			    if (Herramientas :: BuscarDatos($sql, & $result)) 
+			      $clasemodelo->setCodinc($result[0]['correl']);
+		}		
+    $clasemodelo->setCodinc(str_pad($clasemodelo->getCodinc(),8,'0',STR_PAD_LEFT));
     return parent::saving($clasemodelo);
   }
 
