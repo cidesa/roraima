@@ -24,6 +24,17 @@ alter table npvacsalidas
   add column domvac integer,
   add column fervac integer;  
 
+
 alter table nphojint 
-  add column numpuncue varchar(20)  ;  
-  
+  add column numpuncue varchar(20)  ;
+
+alter table npasicaremp
+  add column codmotcamcar varchar(4);
+
+create SEQUENCE npmotcamcar_seq;
+
+create table npmotcamcar(
+ codmotcamcar varchar(4) not null,
+ desmotcamcar varchar(1000),
+ id integer NOT NULL DEFAULT nextval('npmotcamcar_seq'::regclass) 
+);  
