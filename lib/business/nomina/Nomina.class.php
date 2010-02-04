@@ -1873,6 +1873,7 @@ class Nomina {
 
       case "CTAB" :
       case "STAB" :
+
         $movconvar = substr($parametro, 0, 2) . "/" . substr($parametro, 2, 2) . "/" . substr($parametro, 4);
         $sql = "Select * from npasicaremp where Status='V' and CodNom='" . $nomina . "' and codemp='" . $empleado . "'";
 
@@ -1881,6 +1882,7 @@ class Nomina {
 		  if($tabla[0]['codtipded']!='' && $tabla[0]['codtipcat']!='')
 		  {
 	          $sql = "Select A.* from NPCOMOCP A, NPCARGOS B  WHERE B.CODCAR='" . $tabla[0]["codcar"] . "' AND A.CODTIPCAR=B.CODTIP AND A.GRACAR='".$tabla[0]['codtipcat']."' and A.PASCAR='".$tabla[0]['codtipded']."' AND FECDES<=TO_DATE('" . $movconvar . "','DD/MM/YYYY') ORDER BY FECDES DESC";
+
 	          if (Herramientas :: BuscarDatos($sql, & $tablaescala)) {
 	            $valor = $tablaescala[0]["suecar"];
 	          } else {
@@ -1893,6 +1895,7 @@ class Nomina {
 	          } else {
 	            $sql = "Select ABS(SUM(case when a.pascar=lpad(coalesce('".$tabla[0]["paso"]."','001'),3,'0') then a.suecar else a.suecar*-1)) as suecar from NPCOMOCP A,NPCARGOS B WHERE B.CODCAR='" . $tabla[0]["codcar"] . "' AND A.CODTIPCAR=B.CODTIP AND A.GRACAR=B.GRAOCP AND (A.PASCAR='001' OR A.PASCAR='" . $tabla[0]["paso"] . "') AND FECDES<=TO_DATE('" . $movconvar . "','DD/MM/YYYY') ORDER BY FECDES DESC";
 	          }
+
 	          if (Herramientas :: BuscarDatos($sql, & $tablaescala)) {
 	            $valor = $tablaescala[0]["suecar"];
 	          } else {
@@ -2333,7 +2336,7 @@ class Nomina {
 				b.fecpagbonvac=to_date('$fecha','dd/mm/yyyy')
 				and a.codemp='$empleado'
 				and a.fecvac=b.fecvac
-				and a.codemp=b.codemp";
+				and a.codemp=b.codemp ";
 
         if (Herramientas :: BuscarDatos($criterio, & $rs))
 			if($rs[0]['valor']!='')
@@ -3263,6 +3266,7 @@ class Nomina {
         break;
       case "SIC" :
         $criterio = "Select coalesce(SUM(a.saldo),0) as campo from npNomCal A,NPCONSALINT B where  A.CODCON=B.CODCON AND  a.CODNOM=B.CODNOM AND  a.codnom='" . $nomina . "' and a.codemp='" . $empleado . "' and a.codcar='" . $cargo . "' ";
+
         if (Herramientas :: BuscarDatos($criterio, & $tabla)) {
           return $tabla[0]["campo"];
         }
@@ -5369,6 +5373,7 @@ class Nomina {
 		}*/
         //$sql="UPDATE npasiconemp SET frecon='".$g["frecon"]."' WHERE codcon ='".$g["codcon"]."'";
         //Herramientas::insertarRegistros($sql);
+
 
       }
     }
@@ -7755,8 +7760,6 @@ public static function salvarNpsalintind($npsalint, $grid) {
     return -1;
   }
 
-
-
   public static function validarNomcamnomcar($npasicaremp, $codnom, $codcar, $codcat, $feccam) {
 
     if ($npasicaremp) {
@@ -8517,7 +8520,6 @@ exit();
 
   return true;
   }
-
 
   public static function SalvarNomFalPerEmp($clasemodelo,$grid)
   {
