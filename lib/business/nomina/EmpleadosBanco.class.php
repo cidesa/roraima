@@ -4,9 +4,9 @@
  *
  * @package    Roraima
  * @subpackage nomina
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: EmpleadosBanco.class.php 36321 2010-02-04 20:25:58Z cramirez $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -112,7 +112,7 @@ public static function ArregloCatEmpleados($codcon, &$arreglodet)
   }
 public static function Grabar_grid_Npasicatconemp($npasicatconemp,$grid,$codigo='')
 {
-		  $x=$grid[0];
+		  $x=$grid[0];                  
 		  $i=0;
 		  while ($i<count($x))
 		  {
@@ -123,23 +123,23 @@ public static function Grabar_grid_Npasicatconemp($npasicatconemp,$grid,$codigo=
                     if ($empbamc)
                     {
 
-              $empbamc->setCodcat($x[$i]["codcat"]);
-       		  $empbamc->save();
-	        }
-	        else
-	          {
-	            $npasicatconemp_new = new Npasicatconemp();
-			    $npasicatconemp_new->setCodemp($x[$i]["codemp"]);
-			    $npasicatconemp_new->setCodcon($codigo);
-			    $npasicatconemp_new->setCodcat($x[$i]["codcat"]);
-			    $npasicatconemp_new->setCodcar($x[$i]["codcar"]);
-			    $npasicatconemp_new->setCodnom($x[$i]["codnom"]);
-			    $npasicatconemp_new->save();
-	          }
-
-	       $i++;
-
+                         $empbamc->setCodcat($x[$i]["codcat"]);
+                          $empbamc->save();
+                        }
+                        else
+                          {
+                 
+                            $npasicatconemp_new = new Npasicatconemp();
+                            $npasicatconemp_new->setCodemp($x[$i]["codemp"]);
+                            $npasicatconemp_new->setCodcon($codigo);
+                            $npasicatconemp_new->setCodcat($x[$i]["codcat"]);
+                            $npasicatconemp_new->setCodcar($x[$i]["codcar"]);
+                            $npasicatconemp_new->setCodnom($x[$i]["codnom"]);
+                            $npasicatconemp_new->save();
+                    }
+	           $i++;
 	      }
+              
 	return -1;
 }
 public static function Grabar_grid_Npasiempcont($grid,$npasiempcont_new)
@@ -165,14 +165,14 @@ public static function Grabar_grid_Npasiempcont($grid,$npasiempcont_new)
 							$sql="select to_char((to_date('".$x[$i]["fecdes"]."','yyyy-mm-dd')-1),'yyyy-mm-dd') as fecha;";
 							$resp = Herramientas::BuscarDatos($sql,&$r);
 							if($resp)
-								$npasiempcont2->setFechas($r[0]['fecha']);					
+								$npasiempcont2->setFechas($r[0]['fecha']);
 							else
 								$npasiempcont2->setFechas($x[$i]["fecdes"]);
-					    	$npasiempcont2->setStatus('I');			
+					    	$npasiempcont2->setStatus('I');
 							$npasiempcont2->save();
-						}	
+						}
 					}else
-					{						
+					{
 						if($x[$i]["codtipcon2"]=='')
 						{
 							$status='A';
@@ -181,7 +181,7 @@ public static function Grabar_grid_Npasiempcont($grid,$npasiempcont_new)
 							$status=$x[$i]["status"];
 						}
 					}
-					
+
 		  	    	$npasiempcont = new Npasiempcont();
 				    $npasiempcont->setCodtipcon($npasiempcont_new->getCodtipcon());
 				    $npasiempcont->setCodnom($x[$i]["codnom"]);
@@ -189,8 +189,8 @@ public static function Grabar_grid_Npasiempcont($grid,$npasiempcont_new)
 				    $npasiempcont->setNomemp($x[$i]["nomemp"]);
 				    $npasiempcont->setFeccal($x[$i]["feccal"]);
 					$npasiempcont->setFecdes($x[$i]["fecdes"]);
-				    $npasiempcont->setFechas($x[$i]["fechas"]);					
-				    $npasiempcont->setStatus($status);	
+				    $npasiempcont->setFechas($x[$i]["fechas"]);
+				    $npasiempcont->setStatus($status);
 				    $npasiempcont->save();
 		  	    }
 	            $i++;
@@ -239,36 +239,29 @@ public static function Grabar_grid_EmpleadosBancos($npempleados,$grid)
 	}
 
 public static function Grabar_grid_Vacdefgen($npvacdefgen_new,$grid)
-	{
-		  $val=-1;
-		  $x=$grid[0];
-		  $sql="delete from npvacdefgen";
-		  Herramientas::insertarRegistros($sql);
-		  	  foreach ($x as $v)
+        {
+               $val=-1;
+               $x=$grid[0];
+               $sql="delete from npvacdefgen";
+               Herramientas::insertarRegistros($sql);
+               foreach ($x as $v)
                {
-               	      	if ($v->getPagoad()!='')
-               	      	{
-               	        $npvacdefgen_new = new Npvacdefgen();
-			            $npvacdefgen_new->setCodnomvac($v->getCodnomvac());
-			            $npvacdefgen_new->setCodconvac($v->getCodconvac());
-			            $npvacdefgen_new->setCodconuti($v->getCodconuti());
-			            $npvacdefgen_new->setPagoad($v->getPagoad());
-			            $npvacdefgen_new->save();
-               	      	}
-               	      	else
-               	      	{
-                        $npvacdefgen_new = new Npvacdefgen();
-			            $npvacdefgen_new->setCodnomvac($v->getCodnomvac());
-			            $npvacdefgen_new->setCodconvac($v->getCodconvac());
-			            $npvacdefgen_new->setCodconuti($v->getCodconuti());
-			            $npvacdefgen_new->setPagoad('N');
-			            $npvacdefgen_new->save();
-
-               	      	}
-            }
-
-   return $val;
-	}
+                    $npvacdefgen_new = new Npvacdefgen();
+                    $npvacdefgen_new->setCodnomvac($v->getCodnomvac());
+                    $npvacdefgen_new->setCodconvac($v->getCodconvac());
+                    $npvacdefgen_new->setCodconuti($v->getCodconuti());
+                    if ($v->getPagoad()!='')
+                        $npvacdefgen_new->setPagoad($v->getPagoad());
+                    else
+                        $npvacdefgen_new->setPagoad('N');
+                    if($v->getVacant()!='')
+                        $npvacdefgen_new->setVacant($v->getVacant());
+                    else
+                        $npvacdefgen_new->setVacant('N');
+                    $npvacdefgen_new->save();
+               }
+               return $val;
+        }
 
 public static function Validar_Datos_Vacdefgen($grid)
 	{
@@ -942,12 +935,12 @@ public static function Validar_Npdefpreliq_datos($grid)
                	     { // print 'entre';exit;
                	     	$val=413;
                	     	break;
-               	     } 
+               	     }
 					if (intval($dato2) <= 1500 ||  intval($dato2) >= 3000)
                	     { // print 'entre';exit;
                	     	$val=413;
                	     	break;
-               	     }  
+               	     }
                	   	}//$j++;
 
                	} //foreach ($y as $m)
