@@ -22,6 +22,7 @@ class Npasicaremp extends BaseNpasicaremp
     protected $nomnomnew="";
 	protected $nomcarnew="";
 	protected $nomcatnew="";
+	protected $fecing=null;
 
 
 	public function getCodcon()
@@ -141,5 +142,9 @@ class Npasicaremp extends BaseNpasicaremp
 		}else{
 			return ' ';
 		}
+  }
+  public function getFecing()
+  {
+  	return date('d/m/Y',strtotime(H::Getx('Codemp','Nphojint','Fecing',self::getCodemp())));
   }
 }

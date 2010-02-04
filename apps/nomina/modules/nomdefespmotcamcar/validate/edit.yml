@@ -1,0 +1,31 @@
+methods:
+  post:
+   - "npmotcamcar{codmotcamcar}"
+   - "npmotcamcar{desmotcamcar}"
+
+names:
+  npmotcamcar{codmotcamcar}:
+    required:  Yes
+    required_msg: El código no puede estar en Blanco
+    validators: Validator_codmotcamcar
+
+  npmotcamcar{desmotcamcar}:
+    required:  Yes
+    required_msg: La descripción no puede estar en Blanco
+    validators: Validator_desmotcamcar
+
+
+Validator_codmotcamcar:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Npmotcamcar
+        column:       codmotcamcar
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_desmotcamcar:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       1000
+        max_error: La descripción no puede pasar mas de 1000 caracteres        

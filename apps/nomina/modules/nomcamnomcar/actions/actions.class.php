@@ -51,7 +51,21 @@ class nomcamnomcarActions extends autonomcamnomcarActions
    */
   public function editing()
   {
+	$arrmot=$this->CargarMotivos();
+    $this->params=array('arrmot'=>$arrmot);
+  }
+  
+  public function CargarMotivos()
+  {
+  	  $c = new Criteria();
+	  $obj = NpmotcamcarPeer::doSelect($c);
+	  $r=array(''=>'Selecccione....');
 
+	  foreach($obj  as  $i)
+	  {
+	  	$r += array($i->getCodmotcamcar()=>$i->getDesmotcamcar());
+	  }
+	  return $r;
   }
 
   /**
@@ -226,6 +240,10 @@ class nomcamnomcarActions extends autonomcamnomcarActions
     if (isset($npasicaremp['codcat']))
     {
       $this->npasicaremp->setCodcatnew($npasicaremp['codcat']);
+    }
+	if (isset($npasicaremp['codmotcamcar']))
+    {
+      $this->npasicaremp->setCodmotcamcar($npasicaremp['codmotcamcar']);
     }
 
   }

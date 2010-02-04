@@ -58,6 +58,7 @@ nomina:
       Tipos de Retiros:                                              NomDefTipRet
       Definición de Conceptos para Dias Adicionales:                 NomDefDiaAdicNom
       Conceptos para el ISLR:                                        NomDefEspISLR      
+      Motivos de Cambios de Cargos:                                  NomDefEspMotCamCar            
       Embargos:
         Registro de Juzgados:                                        NomDefJuz
         Registro de Beneficiarios por Embargos:                      NomDefBenEmb 

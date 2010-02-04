@@ -18,6 +18,9 @@ generator:
       codnomnew: { name: Nómina Nueva }
       codcarnew: { name: Cargo Nuevo }
       codcatnew: { name: Categoría Nueva }
+      fecing:    { name: Fecha de Ingreso}
+      codmotcamcar: { name: Motivo de cambio}
+      pdesmotcamcar: { name: .}
     list:
       title:    Empleados a aplicar el cambio
       display:        [=codemp, nomemp, codnom, nomnom, codcar, nomcar]
@@ -29,13 +32,17 @@ generator:
       title:    Cambiando de Nómina, Cargos o Categoria a Empleado
       fields:
         codemp:
-          params: readonly=true
+          params: readonly=true style="border:none"
+        cedemp:
+          params: readonly=true style="border:none"
         nomemp:
-          params: readonly=true
+          params: readonly=true style="border:none"
+        fecing:
+          params: readonly=true style="border:none"
       display:
-        Información Empleado: [codemp, cedemp, nomemp]
+        Información Empleado: [codemp, cedemp, nomemp, fecing]
         Información de Nomina Actual del Empleado: [_codnom, _codcar, _codcat]
-        Información de Cambio: [_fecha, _codnomnew, _codcarnew, _codcatnew]
+        Información de Cambio: [_fecha, _pdesmotcamcar, _codnomnew, _codcarnew, _codcatnew]
       actions:
         _list:        ~
         _save:        ~
