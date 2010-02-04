@@ -62,6 +62,8 @@ class NpcargosMapBuilder {
 
 		$tMap->addColumn('CARVAN', 'Carvan', 'int', CreoleTypes::INTEGER, false, 4);
 
+		$tMap->addColumn('CANMIX', 'Canmix', 'double', CreoleTypes::NUMERIC, false, 6);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 
