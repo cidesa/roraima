@@ -1120,6 +1120,10 @@ propel:
     carvan:          #cargos vacantes
       type: INTEGER
       size: 4
+    canmix:
+      type: NUMERIC
+      size: 6
+      scale: 0      
     id:
       type: INTEGER
       required: true
