@@ -226,6 +226,8 @@ class NphojintMapBuilder {
 
 		$tMap->addColumn('CODTIPEMP', 'Codtipemp', 'string', CreoleTypes::VARCHAR, false, 3);
 
+		$tMap->addColumn('NUMPUNCUE', 'Numpuncue', 'string', CreoleTypes::VARCHAR, false, 20);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

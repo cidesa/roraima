@@ -230,6 +230,22 @@
 
 
    </tr>
+   <tr>
+   	  <th>
+   	  	  <?php echo label_for('nphojint[numpuncue]', __($labels['nphojint{numpuncue}']), 'class="required" ') ?>
+		  <div class="content<?php if ($sf_request->hasError('nphojint{numpuncue}')): ?> form-error<?php endif; ?>">
+		  <?php if ($sf_request->hasError('nphojint{numpuncue}')): ?>
+		    <?php echo form_error('nphojint{numpuncue}', array('class' => 'form-error-msg')) ?>
+		  <?php endif; ?>
+		
+		  <?php $value = object_input_tag($nphojint, 'getNumpuncue', array (
+		  'size' => 20,
+		  'maxlength' => 20,
+		  'control_name' => 'nphojint[numpuncue]',
+		)); echo $value ? $value : '&nbsp;' ?>
+    </div>  
+   	  </th>
+   </tr>
   </table>
 
 
