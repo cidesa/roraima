@@ -3592,6 +3592,9 @@ propel:
     codtipemp:
       type: VARCHAR
       size: 3
+    numpuncue:
+      type: VARCHAR
+      size: 20  
     id:
       type: INTEGER
       required: true

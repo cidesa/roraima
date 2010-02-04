@@ -527,6 +527,10 @@ $this->Bitacora('Guardo');
     {
       $this->nphojint->setNumcon($nphojint['numcon']);
     }
+	if (isset($nphojint['numpuncue']))
+    {
+      $this->nphojint->setNumpuncue($nphojint['numpuncue']);
+    }
     if (isset($nphojint['nacemp']))
     {
       $this->nphojint->setNacemp($nphojint['nacemp']);
@@ -1741,6 +1745,7 @@ $this->Bitacora('Guardo');
       'nphojint{diaacu}' => 'Dias Acumulados:',
       'nphojint{diaadiacu}' => 'Dias Adicionales Acumulados:',
       'nphojint{codtipemp}' => 'Tipo de Empleado:',
+	  'nphojint{numpuncue}' => 'Punto de Cuenta:',
 
 
     );
