@@ -5,9 +5,9 @@
  *
  * @package    Roraima
  * @subpackage nomdefespcar
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: actions.class.php 36298 2010-02-04 16:51:58Z cramirez $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -66,7 +66,7 @@ $this->Bitacora('Guardo');
   }
 
   /**
-   * Actualiza la informacion que viene de la vista 
+   * Actualiza la informacion que viene de la vista
    * luego de un get/post en el objeto principal del modelo base del formulario.
    *
    */
@@ -122,6 +122,10 @@ $this->Bitacora('Guardo');
 	if (isset($npcargos['canhom']))
     {
       $this->npcargos->setCanhom($npcargos['canhom']);
+    }
+	if (isset($npcargos['canmix']))
+    {
+      $this->npcargos->setCanmix($npcargos['canmix']);
     }
 	if (isset($npcargos['carvan']))
     {
@@ -267,9 +271,9 @@ $this->Bitacora('Guardo');
     return sfView::SUCCESS;
   }
 
-  
-  
-  
+
+
+
   /**
    *
    * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
@@ -354,7 +358,7 @@ $this->Bitacora('Guardo');
   }
 
   /**
-   * Función principal para procesar la eliminación de registros 
+   * Función principal para procesar la eliminación de registros
    * en el formulario.
    *
    */
