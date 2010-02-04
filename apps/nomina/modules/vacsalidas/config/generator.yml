@@ -4,7 +4,7 @@ generator:
     model_class:      Npvacsalidas
     theme:            cidesaGenerator    
     fields:
-      display:  [codemp, fecing, fecvac, fecdes, fechas, diasdisfrutar, observa, diaspend, fecpagbonvac]
+      display:  [codemp, fecing, fecvac, fecdes, fechas, diasdisfrutar, observa, diaspend, fecpagbonvac, fecsalnom, fecreinom]
       codemp:
         name: Empleado
         msj_error: Código de empleado es necesario
@@ -18,11 +18,14 @@ generator:
       fecvac: { name: Fecha de la Solicitud, params: date_format='dd/MM/yyyy' }
       fecdes: { name: Fecha de Salida, params: date_format='dd/MM/yyyy'}
       fechas: { name: Fecha de Incorporaci&oacute;n, params: date_format='dd/MM/yyyy'}
+      fecsalnom: { name: Fecha Nómina de Salida, params: date_format='dd/MM/yyyy'}
+      fecreinom: { name: Fecha Nómina de Reingreso, params: date_format='dd/MM/yyyy'}
       fecpagbonvac: { name: Fecha del Pago de Vacaciones, params: date_format='dd/MM/yyyy'}
       diasdisfrutar: { name: Días  de Vacaciones}
       observa: { name: Observaciones}
       diaspend: { name: Días Pendientes}
-      fecsalreg: { name: .}   
+      fecsalreg: { name: .}
+      fecnom: { name: .}
       dias:      {name: .}
       gridvacaciones: { name: .}
 
@@ -44,7 +47,7 @@ generator:
         observa:       { type: textarea_tag, params: cols=60}
       display:
         Datos Empleados:       [codemp, fecing ]
-        Datos Solicitúd:       [fecvac, _fecsalreg, _dias, observa]
+        Datos Solicitúd:       [fecvac, _fecsalreg, _fecnom, _dias, observa]
         Relación Vacaciones:   [_gridvacaciones]
       actions:
         _list:        ~

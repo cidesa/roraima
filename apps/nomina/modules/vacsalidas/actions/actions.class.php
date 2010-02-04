@@ -431,9 +431,13 @@ class vacsalidasActions extends autovacsalidasActions
         // La variable $output es usada para retornar datos en formato de arreglo para actualizar
         // objetos en la vista. mas informacion en
         // http://201.210.211.26:8080/www/wiki/index.php/Agregar_Ajax_para_buscar_una_descripcion
+
+
         $output = '[["npvacsalidas_fecing","'.$fecing.'",""],["npvacsalidas_nomemp","'.$nomemp.'",""],
 					["npvacsalidas_fecvac","'.date('d/m/Y').'",""],["npvacsalidas_fecdes","'.date('d/m/Y').'",""],
 					["npvacsalidas_fechas","'.date('d/m/Y',mktime(0, 0, 0, date("m")  , date("d")+1, date("Y"))).'",""],
+                                        ["npvacsalidas_fecsalnom","'.date('d/m/Y').'",""],
+                                        ["npvacsalidas_fecreinom","'.date('d/m/Y',mktime(0, 0, 0, date("m")  , date("d")+1, date("Y"))).'",""],
 					["npvacsalidas_diaspend","'.$this->totdia.'",""]]';
 		$this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');			
         break;
@@ -442,7 +446,7 @@ class vacsalidasActions extends autovacsalidasActions
 		$fecdes = $this->getRequestParameter('fecdes','');
 		$diavac = $this->getRequestParameter('diavac','');		
 		$fecing = NphojintPeer::getFecing($codigo);
-        $codnom = NphojintPeer::getCodnom($codigo);
+                $codnom = NphojintPeer::getCodnom($codigo);
 		$auxfec = split('/',$fecdes);	
 		$fecdesgrid = $auxfec[2].'/'.$auxfec[1].'/'.$auxfec[0];
 		$this->configGrid($codigo,$codnom,$fecing,$diavac,'',$fecdesgrid);
@@ -494,8 +498,32 @@ class vacsalidasActions extends autovacsalidasActions
 			$sqlfecretorno = "select to_char(fecharetorno(to_date('$fecret','dd/mm/yyyy'),'$codnom',$dia_h,'$jor'),'dd/mm/yyyy') as fecharetorno;";
 			if (H::BuscarDatos($sqlfecretorno,$arrret))
 				$fecret=$arrret[0]['fecharetorno'];					
-		}						
-		$output = '[["npvacsalidas_diaspend","'.$this->totdia.'",""],["npvacsalidas_fechas","'.$fecret.'",""],["npvacsalidas_diasdisfrutar","'.$diavac.'",""]]';
+		}
+                $fecsalnom=$fecdes;
+                $fecreinom=$fecret;
+                $c = new Criteria();
+                $c->add(NpnominaPeer::CODNOM,$codnom);
+                $per = NpnominaPeer::doSelectOne($c);
+                $per ? $frenom = $per->getFrecal() : $frenom = '';
+                if($frenom=='Q')
+                {
+                    $sqlfecnomina = "select to_char(case when to_char(to_date('$fecdes','dd/mm/yyyy'),'dd')::numeric<=15
+                                    then to_date('15/'||to_char(to_date('$fecdes','dd/mm/yyyy'),'mm/yyyy'),'dd/mm/yyyy')
+                                    else last_day(to_date('$fecdes','dd/mm/yyyy'))
+                                    end,'dd/mm/yyyy') as fechasal,
+                                    to_char(case when to_char(to_date('$fecret','dd/mm/yyyy'),'dd')::numeric<=15
+                                    then to_date('15/'||to_char(to_date('$fecret','dd/mm/yyyy'),'mm/yyyy'),'dd/mm/yyyy')
+                                    else last_day(to_date('$fecret','dd/mm/yyyy'))
+                                    end,'dd/mm/yyyy') as fecharei;";
+                    
+                    if (H::BuscarDatos($sqlfecnomina,$arrfecnom))
+                    {
+                        $fecsalnom=$arrfecnom[0]['fechasal'];
+                        $fecreinom=$arrfecnom[0]['fecharei'];
+                    }
+                }
+		$output = '[["npvacsalidas_diaspend","'.$this->totdia.'",""],["npvacsalidas_fechas","'.$fecret.'",""],["npvacsalidas_diasdisfrutar","'.$diavac.'",""],
+                            ["npvacsalidas_fecsalnom","'.$fecsalnom.'",""],["npvacsalidas_fecreinom","'.$fecreinom.'",""]]';
 		$this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
 
         break;	
