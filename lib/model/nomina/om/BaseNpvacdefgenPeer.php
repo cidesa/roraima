@@ -13,7 +13,7 @@ abstract class BaseNpvacdefgenPeer {
 	const CLASS_DEFAULT = 'lib.model.nomina.Npvacdefgen';
 
 	
-	const NUM_COLUMNS = 6;
+	const NUM_COLUMNS = 7;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -35,6 +35,9 @@ abstract class BaseNpvacdefgenPeer {
 	const CODCONUTI = 'npvacdefgen.CODCONUTI';
 
 	
+	const VACANT = 'npvacdefgen.VACANT';
+
+	
 	const ID = 'npvacdefgen.ID';
 
 	
@@ -43,18 +46,18 @@ abstract class BaseNpvacdefgenPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codnomvac', 'Codconvac', 'Pagoad', 'Codconcom', 'Codconuti', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (NpvacdefgenPeer::CODNOMVAC, NpvacdefgenPeer::CODCONVAC, NpvacdefgenPeer::PAGOAD, NpvacdefgenPeer::CODCONCOM, NpvacdefgenPeer::CODCONUTI, NpvacdefgenPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codnomvac', 'codconvac', 'pagoad', 'codconcom', 'codconuti', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
+		BasePeer::TYPE_PHPNAME => array ('Codnomvac', 'Codconvac', 'Pagoad', 'Codconcom', 'Codconuti', 'Vacant', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (NpvacdefgenPeer::CODNOMVAC, NpvacdefgenPeer::CODCONVAC, NpvacdefgenPeer::PAGOAD, NpvacdefgenPeer::CODCONCOM, NpvacdefgenPeer::CODCONUTI, NpvacdefgenPeer::VACANT, NpvacdefgenPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codnomvac', 'codconvac', 'pagoad', 'codconcom', 'codconuti', 'vacant', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codnomvac' => 0, 'Codconvac' => 1, 'Pagoad' => 2, 'Codconcom' => 3, 'Codconuti' => 4, 'Id' => 5, ),
-		BasePeer::TYPE_COLNAME => array (NpvacdefgenPeer::CODNOMVAC => 0, NpvacdefgenPeer::CODCONVAC => 1, NpvacdefgenPeer::PAGOAD => 2, NpvacdefgenPeer::CODCONCOM => 3, NpvacdefgenPeer::CODCONUTI => 4, NpvacdefgenPeer::ID => 5, ),
-		BasePeer::TYPE_FIELDNAME => array ('codnomvac' => 0, 'codconvac' => 1, 'pagoad' => 2, 'codconcom' => 3, 'codconuti' => 4, 'id' => 5, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
+		BasePeer::TYPE_PHPNAME => array ('Codnomvac' => 0, 'Codconvac' => 1, 'Pagoad' => 2, 'Codconcom' => 3, 'Codconuti' => 4, 'Vacant' => 5, 'Id' => 6, ),
+		BasePeer::TYPE_COLNAME => array (NpvacdefgenPeer::CODNOMVAC => 0, NpvacdefgenPeer::CODCONVAC => 1, NpvacdefgenPeer::PAGOAD => 2, NpvacdefgenPeer::CODCONCOM => 3, NpvacdefgenPeer::CODCONUTI => 4, NpvacdefgenPeer::VACANT => 5, NpvacdefgenPeer::ID => 6, ),
+		BasePeer::TYPE_FIELDNAME => array ('codnomvac' => 0, 'codconvac' => 1, 'pagoad' => 2, 'codconcom' => 3, 'codconuti' => 4, 'vacant' => 5, 'id' => 6, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
 	);
 
 	
@@ -117,6 +120,8 @@ abstract class BaseNpvacdefgenPeer {
 		$criteria->addSelectColumn(NpvacdefgenPeer::CODCONCOM);
 
 		$criteria->addSelectColumn(NpvacdefgenPeer::CODCONUTI);
+
+		$criteria->addSelectColumn(NpvacdefgenPeer::VACANT);
 
 		$criteria->addSelectColumn(NpvacdefgenPeer::ID);
 

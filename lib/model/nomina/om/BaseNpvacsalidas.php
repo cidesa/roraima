@@ -37,6 +37,26 @@ abstract class BaseNpvacsalidas extends BaseObject  implements Persistent {
 
 
 	
+	protected $fecsalnom;
+
+
+	
+	protected $fecreinom;
+
+
+	
+	protected $sabvac;
+
+
+	
+	protected $domvac;
+
+
+	
+	protected $fervac;
+
+
+	
 	protected $id;
 
 	
@@ -155,6 +175,71 @@ abstract class BaseNpvacsalidas extends BaseObject  implements Persistent {
     }
   }
 
+  
+  public function getFecsalnom($format = 'Y-m-d')
+  {
+
+    if ($this->fecsalnom === null || $this->fecsalnom === '') {
+      return null;
+    } elseif (!is_int($this->fecsalnom)) {
+            $ts = adodb_strtotime($this->fecsalnom);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecsalnom] as date/time value: " . var_export($this->fecsalnom, true));
+      }
+    } else {
+      $ts = $this->fecsalnom;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getFecreinom($format = 'Y-m-d')
+  {
+
+    if ($this->fecreinom === null || $this->fecreinom === '') {
+      return null;
+    } elseif (!is_int($this->fecreinom)) {
+            $ts = adodb_strtotime($this->fecreinom);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecreinom] as date/time value: " . var_export($this->fecreinom, true));
+      }
+    } else {
+      $ts = $this->fecreinom;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getSabvac()
+  {
+
+    return $this->sabvac;
+
+  }
+  
+  public function getDomvac()
+  {
+
+    return $this->domvac;
+
+  }
+  
+  public function getFervac()
+  {
+
+    return $this->fervac;
+
+  }
   
   public function getId()
   {
@@ -281,6 +366,80 @@ abstract class BaseNpvacsalidas extends BaseObject  implements Persistent {
 
 	} 
 	
+	public function setFecsalnom($v)
+	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecsalnom] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecsalnom !== $ts) {
+      $this->fecsalnom = $ts;
+      $this->modifiedColumns[] = NpvacsalidasPeer::FECSALNOM;
+    }
+
+	} 
+	
+	public function setFecreinom($v)
+	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecreinom] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecreinom !== $ts) {
+      $this->fecreinom = $ts;
+      $this->modifiedColumns[] = NpvacsalidasPeer::FECREINOM;
+    }
+
+	} 
+	
+	public function setSabvac($v)
+	{
+
+    if ($this->sabvac !== $v) {
+        $this->sabvac = $v;
+        $this->modifiedColumns[] = NpvacsalidasPeer::SABVAC;
+      }
+  
+	} 
+	
+	public function setDomvac($v)
+	{
+
+    if ($this->domvac !== $v) {
+        $this->domvac = $v;
+        $this->modifiedColumns[] = NpvacsalidasPeer::DOMVAC;
+      }
+  
+	} 
+	
+	public function setFervac($v)
+	{
+
+    if ($this->fervac !== $v) {
+        $this->fervac = $v;
+        $this->modifiedColumns[] = NpvacsalidasPeer::FERVAC;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -309,7 +468,17 @@ abstract class BaseNpvacsalidas extends BaseObject  implements Persistent {
 
       $this->fecpagbonvac = $rs->getDate($startcol + 6, null);
 
-      $this->id = $rs->getInt($startcol + 7);
+      $this->fecsalnom = $rs->getDate($startcol + 7, null);
+
+      $this->fecreinom = $rs->getDate($startcol + 8, null);
+
+      $this->sabvac = $rs->getInt($startcol + 9);
+
+      $this->domvac = $rs->getInt($startcol + 10);
+
+      $this->fervac = $rs->getInt($startcol + 11);
+
+      $this->id = $rs->getInt($startcol + 12);
 
       $this->resetModified();
 
@@ -317,7 +486,7 @@ abstract class BaseNpvacsalidas extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 8; 
+            return $startcol + 13; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Npvacsalidas object", $e);
     }
@@ -486,6 +655,21 @@ abstract class BaseNpvacsalidas extends BaseObject  implements Persistent {
 				return $this->getFecpagbonvac();
 				break;
 			case 7:
+				return $this->getFecsalnom();
+				break;
+			case 8:
+				return $this->getFecreinom();
+				break;
+			case 9:
+				return $this->getSabvac();
+				break;
+			case 10:
+				return $this->getDomvac();
+				break;
+			case 11:
+				return $this->getFervac();
+				break;
+			case 12:
 				return $this->getId();
 				break;
 			default:
@@ -505,7 +689,12 @@ abstract class BaseNpvacsalidas extends BaseObject  implements Persistent {
 			$keys[4] => $this->getFecdes(),
 			$keys[5] => $this->getFechas(),
 			$keys[6] => $this->getFecpagbonvac(),
-			$keys[7] => $this->getId(),
+			$keys[7] => $this->getFecsalnom(),
+			$keys[8] => $this->getFecreinom(),
+			$keys[9] => $this->getSabvac(),
+			$keys[10] => $this->getDomvac(),
+			$keys[11] => $this->getFervac(),
+			$keys[12] => $this->getId(),
 		);
 		return $result;
 	}
@@ -543,6 +732,21 @@ abstract class BaseNpvacsalidas extends BaseObject  implements Persistent {
 				$this->setFecpagbonvac($value);
 				break;
 			case 7:
+				$this->setFecsalnom($value);
+				break;
+			case 8:
+				$this->setFecreinom($value);
+				break;
+			case 9:
+				$this->setSabvac($value);
+				break;
+			case 10:
+				$this->setDomvac($value);
+				break;
+			case 11:
+				$this->setFervac($value);
+				break;
+			case 12:
 				$this->setId($value);
 				break;
 		} 	}
@@ -559,7 +763,12 @@ abstract class BaseNpvacsalidas extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[4], $arr)) $this->setFecdes($arr[$keys[4]]);
 		if (array_key_exists($keys[5], $arr)) $this->setFechas($arr[$keys[5]]);
 		if (array_key_exists($keys[6], $arr)) $this->setFecpagbonvac($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setId($arr[$keys[7]]);
+		if (array_key_exists($keys[7], $arr)) $this->setFecsalnom($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setFecreinom($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setSabvac($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setDomvac($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setFervac($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setId($arr[$keys[12]]);
 	}
 
 	
@@ -574,6 +783,11 @@ abstract class BaseNpvacsalidas extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(NpvacsalidasPeer::FECDES)) $criteria->add(NpvacsalidasPeer::FECDES, $this->fecdes);
 		if ($this->isColumnModified(NpvacsalidasPeer::FECHAS)) $criteria->add(NpvacsalidasPeer::FECHAS, $this->fechas);
 		if ($this->isColumnModified(NpvacsalidasPeer::FECPAGBONVAC)) $criteria->add(NpvacsalidasPeer::FECPAGBONVAC, $this->fecpagbonvac);
+		if ($this->isColumnModified(NpvacsalidasPeer::FECSALNOM)) $criteria->add(NpvacsalidasPeer::FECSALNOM, $this->fecsalnom);
+		if ($this->isColumnModified(NpvacsalidasPeer::FECREINOM)) $criteria->add(NpvacsalidasPeer::FECREINOM, $this->fecreinom);
+		if ($this->isColumnModified(NpvacsalidasPeer::SABVAC)) $criteria->add(NpvacsalidasPeer::SABVAC, $this->sabvac);
+		if ($this->isColumnModified(NpvacsalidasPeer::DOMVAC)) $criteria->add(NpvacsalidasPeer::DOMVAC, $this->domvac);
+		if ($this->isColumnModified(NpvacsalidasPeer::FERVAC)) $criteria->add(NpvacsalidasPeer::FERVAC, $this->fervac);
 		if ($this->isColumnModified(NpvacsalidasPeer::ID)) $criteria->add(NpvacsalidasPeer::ID, $this->id);
 
 		return $criteria;
@@ -618,6 +832,16 @@ abstract class BaseNpvacsalidas extends BaseObject  implements Persistent {
 		$copyObj->setFechas($this->fechas);
 
 		$copyObj->setFecpagbonvac($this->fecpagbonvac);
+
+		$copyObj->setFecsalnom($this->fecsalnom);
+
+		$copyObj->setFecreinom($this->fecreinom);
+
+		$copyObj->setSabvac($this->sabvac);
+
+		$copyObj->setDomvac($this->domvac);
+
+		$copyObj->setFervac($this->fervac);
 
 
 		$copyObj->setNew(true);

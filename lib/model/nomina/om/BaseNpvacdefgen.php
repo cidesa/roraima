@@ -29,6 +29,10 @@ abstract class BaseNpvacdefgen extends BaseObject  implements Persistent {
 
 
 	
+	protected $vacant;
+
+
+	
 	protected $id;
 
 	
@@ -70,6 +74,13 @@ abstract class BaseNpvacdefgen extends BaseObject  implements Persistent {
   {
 
     return trim($this->codconuti);
+
+  }
+  
+  public function getVacant()
+  {
+
+    return trim($this->vacant);
 
   }
   
@@ -130,6 +141,16 @@ abstract class BaseNpvacdefgen extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setVacant($v)
+	{
+
+    if ($this->vacant !== $v) {
+        $this->vacant = $v;
+        $this->modifiedColumns[] = NpvacdefgenPeer::VACANT;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -154,7 +175,9 @@ abstract class BaseNpvacdefgen extends BaseObject  implements Persistent {
 
       $this->codconuti = $rs->getString($startcol + 4);
 
-      $this->id = $rs->getInt($startcol + 5);
+      $this->vacant = $rs->getString($startcol + 5);
+
+      $this->id = $rs->getInt($startcol + 6);
 
       $this->resetModified();
 
@@ -162,7 +185,7 @@ abstract class BaseNpvacdefgen extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 6; 
+            return $startcol + 7; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Npvacdefgen object", $e);
     }
@@ -325,6 +348,9 @@ abstract class BaseNpvacdefgen extends BaseObject  implements Persistent {
 				return $this->getCodconuti();
 				break;
 			case 5:
+				return $this->getVacant();
+				break;
+			case 6:
 				return $this->getId();
 				break;
 			default:
@@ -342,7 +368,8 @@ abstract class BaseNpvacdefgen extends BaseObject  implements Persistent {
 			$keys[2] => $this->getPagoad(),
 			$keys[3] => $this->getCodconcom(),
 			$keys[4] => $this->getCodconuti(),
-			$keys[5] => $this->getId(),
+			$keys[5] => $this->getVacant(),
+			$keys[6] => $this->getId(),
 		);
 		return $result;
 	}
@@ -374,6 +401,9 @@ abstract class BaseNpvacdefgen extends BaseObject  implements Persistent {
 				$this->setCodconuti($value);
 				break;
 			case 5:
+				$this->setVacant($value);
+				break;
+			case 6:
 				$this->setId($value);
 				break;
 		} 	}
@@ -388,7 +418,8 @@ abstract class BaseNpvacdefgen extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[2], $arr)) $this->setPagoad($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setCodconcom($arr[$keys[3]]);
 		if (array_key_exists($keys[4], $arr)) $this->setCodconuti($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setId($arr[$keys[5]]);
+		if (array_key_exists($keys[5], $arr)) $this->setVacant($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setId($arr[$keys[6]]);
 	}
 
 	
@@ -401,6 +432,7 @@ abstract class BaseNpvacdefgen extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(NpvacdefgenPeer::PAGOAD)) $criteria->add(NpvacdefgenPeer::PAGOAD, $this->pagoad);
 		if ($this->isColumnModified(NpvacdefgenPeer::CODCONCOM)) $criteria->add(NpvacdefgenPeer::CODCONCOM, $this->codconcom);
 		if ($this->isColumnModified(NpvacdefgenPeer::CODCONUTI)) $criteria->add(NpvacdefgenPeer::CODCONUTI, $this->codconuti);
+		if ($this->isColumnModified(NpvacdefgenPeer::VACANT)) $criteria->add(NpvacdefgenPeer::VACANT, $this->vacant);
 		if ($this->isColumnModified(NpvacdefgenPeer::ID)) $criteria->add(NpvacdefgenPeer::ID, $this->id);
 
 		return $criteria;
@@ -441,6 +473,8 @@ abstract class BaseNpvacdefgen extends BaseObject  implements Persistent {
 		$copyObj->setCodconcom($this->codconcom);
 
 		$copyObj->setCodconuti($this->codconuti);
+
+		$copyObj->setVacant($this->vacant);
 
 
 		$copyObj->setNew(true);
