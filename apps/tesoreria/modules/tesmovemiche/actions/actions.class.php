@@ -41,10 +41,12 @@ class tesmovemicheActions extends autotesmovemicheActions
     else
     {
       $tscheemi = TscheemiPeer::retrieveByPk($this->getRequestParameter($id));
+      if ($tscheemi) {
       $this->configGridOrdPag('S',$tscheemi->getCedrif(),$tscheemi->getFecemi());
       $this->configGridCompro('S',$tscheemi->getCedrif());
       $this->configGridPrecom('S',$tscheemi->getCedrif());
       $this->configGridPagDir();
+      }
       $this->forward404Unless($tscheemi);
     }
     return $tscheemi;
