@@ -1,0 +1,26 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Npcargos
+    theme:            cidesaGenerator
+    fields:
+      display:        [ codnom ]
+      codnom:         { name: Nómina}
+      tipnom:         { name: .}
+      gridcargos:     { name: .}
+      cantidad:       { name: Aumentar por Cantidad}
+      porcentaje:     { name: Aumentar por Porcentaje}
+
+    edit:
+      title:      Aumento de Sueldos por Cargos
+      fields:
+        cantidad:                    {params: disabled=false onBlur="mientermontootro(event,this.id);aumentosuecar(this.value,1);"}
+        porcentaje:                  {params: disabled=false onBlur="aumentosuecar(this.value,2);" maxlength=3 size=5}
+      display:
+        Datos para el Aumento:       [_tipnom, cantidad, porcentaje]
+        Listado de Cargos:           [_gridcargos]
+        
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
