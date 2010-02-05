@@ -572,12 +572,16 @@ $this->Bitacora('Guardo');
 
       if (Herramientas::BuscarDatos($sql,&$tabla))
       {
-	      $error= Tesoreria::validarTesdefcueban($grid);
-	      if ($error<>-1)
-	      {
-	        $this->error=$error;
-	        return false;
-	      }
+      	  if(count($grid[0])>1)
+	  	  {
+	  	  	  $error= Tesoreria::validarTesdefcueban($grid);
+		      if ($error<>-1)
+		      {
+		        $this->error=$error;
+		        return false;
+		      }	
+	  	  }
+	      
       }
 
 
