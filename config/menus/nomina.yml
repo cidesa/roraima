@@ -172,6 +172,7 @@ nomina:
       Movimientos Por Concepto y Cargos:                             NomNomMovNomConCar
       Movimientos Por Empleado:                                      NomNomMovNomEmp
       #Modificar Monto/cantidad a Conceptos Según Formula:           ModificarMontoConcepto
+      Aumento de Sueldos por Cargos:                                 NomAumSueCar
     Nominas Especiales:
       Definición:                                                    NomEspDefinicion
       Conceptos:                                                     NomEspConceptos
