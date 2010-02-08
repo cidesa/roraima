@@ -82,16 +82,15 @@ presupuesto:
         Documentos Causado:                                   precatcau.php
         Documentos Pago:                                      precatpag.php
         Documentos Ajuste:                                    precataju.php
-        aaaa:                             precatartley2.php
-        Listado de Tipos de Financiamiento:                              precattipfin.php
-
+        Articulos de Ley:                                     precatartley2.php
+        Listado de Tipos de Financiamiento:                   precattipfin.php
       Formatos:
         PreCompromisos:                                       cprprecompromiso.php
         Compromisos:                                          cprcompromiso.php
         Causado:                                              cprcausado.php
         Pagado:                                               cprpagado.php
       Movimientos:
-        #Certificacion Presupuestaria:                         precerpre.php
+        Certificacion Presupuestaria:                         precerpre.php
         Precompromisos:                                       preprc.php
         Compromisos:                                          precom.php
         Causados:                                             precau.php
