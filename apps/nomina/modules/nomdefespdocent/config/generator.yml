@@ -1,0 +1,32 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Npdocent
+    theme:            cidesaGenerator
+    fields:
+      coddoc:    { name: Código, params: maxlength=3 size=10 onFocus="if($('id').value!='')$(this.id).readOnly=true" }
+      desdoc:    { name: Descripción, readonly : true, params: maxlength=250 size=60 }
+
+    list:
+      title:              Definición  de Documentos Consignados por los Empleados
+      display:            [=coddoc, desdoc]
+      filters:            [coddoc, desdoc]
+      max_pers:           10
+      sort:               coddoc
+      objects_actions:
+        _edit:            ~
+        _delete:          ~
+      actions:
+        _create:          ~           
+
+    edit:
+      title:              Edición de Documentos Consignados por los Empleados
+      display:
+        Datos Area del Curso:   [coddoc, desdoc]  
+      fields:
+        coddoc:
+          params:     maxlength=3,size=5 onBlur  = "$(this.id).value=$(this.id).value.pad(3,'0',0)"  
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

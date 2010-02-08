@@ -1,0 +1,16 @@
+methods:
+  post:
+   - "npdocentporemp{codemp}"
+   
+names:
+  npdocentporemp{codemp}:
+    required:  Yes
+    required_msg: El Código de Empleado no puede estar en Blanco
+    validators: Validator_codemp
+
+Validator_codemp:
+    class: CidesaExistValidator
+    param:
+        class:    Nphojint
+        column:   codemp
+        unique_error:   El Código del Empleado no existe        

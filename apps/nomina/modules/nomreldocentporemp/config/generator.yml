@@ -1,0 +1,42 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Npdocentporemp
+    theme:            cidesaGenerator
+    fields:
+      codemp:
+        name: Código Empleado
+        msj_error: El numero del expediente es necesario
+        catalogo:  
+          catalogoweb: Nphispre_Presnomcalintpre
+          clase: Nphojint 
+          ajax: 0
+          parametros: getprincipal="getCodemp" getsecundario="getNomemp" campoprincipal="codemp" camposecundario="nomemp" campobase = "id"           
+          #catalogoparams:
+          #ajaxparams:  
+          #divupdate: divgridvaca     
+          #id:
+      griddoc:        { name: .}
+
+    list:
+      title:  Relacion de Documentos Entregados      
+      display:  [=codemp, nomemp, coddoc, desdoc]
+      filters:  [codemp]
+      max_pers:           10
+      sort:     codemp
+      objects_actions:
+        _edit:            ~
+        _delete:          ~
+      actions:
+        _create:          ~     
+
+    edit:
+      title:      Relacion de Documentos Entregados      
+      display:
+        Datos Empleado:       [ codemp]
+        Relacion de Documentos:           [_griddoc]
+        
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

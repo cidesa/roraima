@@ -59,6 +59,7 @@ nomina:
       Definición de Conceptos para Dias Adicionales:                 NomDefDiaAdicNom
       Conceptos para el ISLR:                                        NomDefEspISLR      
       Motivos de Cambios de Cargos:                                  NomDefEspMotCamCar            
+      Definición de Documentos consignados por el Empleado:          NomDefEspDocEnt            
       Embargos:
         Registro de Juzgados:                                        NomDefJuz
         Registro de Beneficiarios por Embargos:                      NomDefBenEmb 
@@ -84,6 +85,7 @@ nomina:
       Asignación de Cargos y Conceptos a Empleados:                  NomAsiCarConNom
       #Asignación de Cargos a Empleados en lote:                     NomAsiCarEmpLot
       Cambio de Nómina y Cargos a Empleados:                         nomcamnomcar
+      Relación de Documentos Entregados por Empleado:                nomreldocentporemp
       #Formulación de Cargos Presupuestados:                         ForPreGasPer
       #Archivo de Elegibles:                                         nomhojint
       #Datos Personales:                                             NomPerEleDatPer
