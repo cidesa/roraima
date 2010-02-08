@@ -52,7 +52,7 @@ nomina:
       Conceptos de Ahorro Habitacional:                              NomDefConAho
       Conceptos para el Fondo de Jubilación y Pensiones:             NomDefConFon
       Conceptos para Reportes:                                       nomdefespconsue
-      #Definición de Jornadas Laborales:                             NomJorLabLot
+      Definición de Jornadas Laborales:                              NomDefEspJorLab
       Jornadas Laborales por Empleado:                               NomJorLabInd
       Definición de Concepto de Cesta Tickets:                       NomDefEspCesTic
       Tipos de Retiros:                                              NomDefTipRet
