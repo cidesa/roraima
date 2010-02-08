@@ -13,7 +13,7 @@ abstract class BaseAtciudadanoPeer {
 	const CLASS_DEFAULT = 'lib.model.ciudadanos.Atciudadano';
 
 	
-	const NUM_COLUMNS = 42;
+	const NUM_COLUMNS = 44;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -128,6 +128,9 @@ abstract class BaseAtciudadanoPeer {
 	const SEGPRI = 'atciudadano.SEGPRI';
 
 	
+	const SEGURO = 'atciudadano.SEGURO';
+
+	
 	const ATTIPPROVIV_ID = 'atciudadano.ATTIPPROVIV_ID';
 
 	
@@ -143,6 +146,9 @@ abstract class BaseAtciudadanoPeer {
 	const ZONA = 'atciudadano.ZONA';
 
 	
+	const ATMISIONES_ID = 'atciudadano.ATMISIONES_ID';
+
+	
 	const ID = 'atciudadano.ID';
 
 	
@@ -151,18 +157,18 @@ abstract class BaseAtciudadanoPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Cedciu', 'Nomciu', 'Apeciu', 'Nacciu', 'Pais', 'Conext', 'Lugnac', 'Tipo', 'Sexo', 'Fecnac', 'Dirnac', 'Estciv', 'Telhab', 'Teladihab', 'Prociu', 'AtestadosId', 'AtmunicipiosId', 'AtparroquiasId', 'Ciudad', 'Caserio', 'Dirhab', 'Dirtra', 'Concomciu', 'Carconcomciu', 'Nota', 'Grains', 'Traciu', 'Nomemp', 'Diremp', 'Telemp', 'AttipingId', 'Moning', 'AtinsrefierId', 'Ayusolant', 'Insayuant', 'Segpri', 'AttipprovivId', 'AttipvivId', 'Sector', 'Urbanizacion', 'Zona', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (AtciudadanoPeer::CEDCIU, AtciudadanoPeer::NOMCIU, AtciudadanoPeer::APECIU, AtciudadanoPeer::NACCIU, AtciudadanoPeer::PAIS, AtciudadanoPeer::CONEXT, AtciudadanoPeer::LUGNAC, AtciudadanoPeer::TIPO, AtciudadanoPeer::SEXO, AtciudadanoPeer::FECNAC, AtciudadanoPeer::DIRNAC, AtciudadanoPeer::ESTCIV, AtciudadanoPeer::TELHAB, AtciudadanoPeer::TELADIHAB, AtciudadanoPeer::PROCIU, AtciudadanoPeer::ATESTADOS_ID, AtciudadanoPeer::ATMUNICIPIOS_ID, AtciudadanoPeer::ATPARROQUIAS_ID, AtciudadanoPeer::CIUDAD, AtciudadanoPeer::CASERIO, AtciudadanoPeer::DIRHAB, AtciudadanoPeer::DIRTRA, AtciudadanoPeer::CONCOMCIU, AtciudadanoPeer::CARCONCOMCIU, AtciudadanoPeer::NOTA, AtciudadanoPeer::GRAINS, AtciudadanoPeer::TRACIU, AtciudadanoPeer::NOMEMP, AtciudadanoPeer::DIREMP, AtciudadanoPeer::TELEMP, AtciudadanoPeer::ATTIPING_ID, AtciudadanoPeer::MONING, AtciudadanoPeer::ATINSREFIER_ID, AtciudadanoPeer::AYUSOLANT, AtciudadanoPeer::INSAYUANT, AtciudadanoPeer::SEGPRI, AtciudadanoPeer::ATTIPPROVIV_ID, AtciudadanoPeer::ATTIPVIV_ID, AtciudadanoPeer::SECTOR, AtciudadanoPeer::URBANIZACION, AtciudadanoPeer::ZONA, AtciudadanoPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('cedciu', 'nomciu', 'apeciu', 'nacciu', 'pais', 'conext', 'lugnac', 'tipo', 'sexo', 'fecnac', 'dirnac', 'estciv', 'telhab', 'teladihab', 'prociu', 'atestados_id', 'atmunicipios_id', 'atparroquias_id', 'ciudad', 'caserio', 'dirhab', 'dirtra', 'concomciu', 'carconcomciu', 'nota', 'grains', 'traciu', 'nomemp', 'diremp', 'telemp', 'attiping_id', 'moning', 'atinsrefier_id', 'ayusolant', 'insayuant', 'segpri', 'attipproviv_id', 'attipviv_id', 'sector', 'urbanizacion', 'zona', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, )
+		BasePeer::TYPE_PHPNAME => array ('Cedciu', 'Nomciu', 'Apeciu', 'Nacciu', 'Pais', 'Conext', 'Lugnac', 'Tipo', 'Sexo', 'Fecnac', 'Dirnac', 'Estciv', 'Telhab', 'Teladihab', 'Prociu', 'AtestadosId', 'AtmunicipiosId', 'AtparroquiasId', 'Ciudad', 'Caserio', 'Dirhab', 'Dirtra', 'Concomciu', 'Carconcomciu', 'Nota', 'Grains', 'Traciu', 'Nomemp', 'Diremp', 'Telemp', 'AttipingId', 'Moning', 'AtinsrefierId', 'Ayusolant', 'Insayuant', 'Segpri', 'Seguro', 'AttipprovivId', 'AttipvivId', 'Sector', 'Urbanizacion', 'Zona', 'AtmisionesId', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (AtciudadanoPeer::CEDCIU, AtciudadanoPeer::NOMCIU, AtciudadanoPeer::APECIU, AtciudadanoPeer::NACCIU, AtciudadanoPeer::PAIS, AtciudadanoPeer::CONEXT, AtciudadanoPeer::LUGNAC, AtciudadanoPeer::TIPO, AtciudadanoPeer::SEXO, AtciudadanoPeer::FECNAC, AtciudadanoPeer::DIRNAC, AtciudadanoPeer::ESTCIV, AtciudadanoPeer::TELHAB, AtciudadanoPeer::TELADIHAB, AtciudadanoPeer::PROCIU, AtciudadanoPeer::ATESTADOS_ID, AtciudadanoPeer::ATMUNICIPIOS_ID, AtciudadanoPeer::ATPARROQUIAS_ID, AtciudadanoPeer::CIUDAD, AtciudadanoPeer::CASERIO, AtciudadanoPeer::DIRHAB, AtciudadanoPeer::DIRTRA, AtciudadanoPeer::CONCOMCIU, AtciudadanoPeer::CARCONCOMCIU, AtciudadanoPeer::NOTA, AtciudadanoPeer::GRAINS, AtciudadanoPeer::TRACIU, AtciudadanoPeer::NOMEMP, AtciudadanoPeer::DIREMP, AtciudadanoPeer::TELEMP, AtciudadanoPeer::ATTIPING_ID, AtciudadanoPeer::MONING, AtciudadanoPeer::ATINSREFIER_ID, AtciudadanoPeer::AYUSOLANT, AtciudadanoPeer::INSAYUANT, AtciudadanoPeer::SEGPRI, AtciudadanoPeer::SEGURO, AtciudadanoPeer::ATTIPPROVIV_ID, AtciudadanoPeer::ATTIPVIV_ID, AtciudadanoPeer::SECTOR, AtciudadanoPeer::URBANIZACION, AtciudadanoPeer::ZONA, AtciudadanoPeer::ATMISIONES_ID, AtciudadanoPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('cedciu', 'nomciu', 'apeciu', 'nacciu', 'pais', 'conext', 'lugnac', 'tipo', 'sexo', 'fecnac', 'dirnac', 'estciv', 'telhab', 'teladihab', 'prociu', 'atestados_id', 'atmunicipios_id', 'atparroquias_id', 'ciudad', 'caserio', 'dirhab', 'dirtra', 'concomciu', 'carconcomciu', 'nota', 'grains', 'traciu', 'nomemp', 'diremp', 'telemp', 'attiping_id', 'moning', 'atinsrefier_id', 'ayusolant', 'insayuant', 'segpri', 'seguro', 'attipproviv_id', 'attipviv_id', 'sector', 'urbanizacion', 'zona', 'atmisiones_id', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Cedciu' => 0, 'Nomciu' => 1, 'Apeciu' => 2, 'Nacciu' => 3, 'Pais' => 4, 'Conext' => 5, 'Lugnac' => 6, 'Tipo' => 7, 'Sexo' => 8, 'Fecnac' => 9, 'Dirnac' => 10, 'Estciv' => 11, 'Telhab' => 12, 'Teladihab' => 13, 'Prociu' => 14, 'AtestadosId' => 15, 'AtmunicipiosId' => 16, 'AtparroquiasId' => 17, 'Ciudad' => 18, 'Caserio' => 19, 'Dirhab' => 20, 'Dirtra' => 21, 'Concomciu' => 22, 'Carconcomciu' => 23, 'Nota' => 24, 'Grains' => 25, 'Traciu' => 26, 'Nomemp' => 27, 'Diremp' => 28, 'Telemp' => 29, 'AttipingId' => 30, 'Moning' => 31, 'AtinsrefierId' => 32, 'Ayusolant' => 33, 'Insayuant' => 34, 'Segpri' => 35, 'AttipprovivId' => 36, 'AttipvivId' => 37, 'Sector' => 38, 'Urbanizacion' => 39, 'Zona' => 40, 'Id' => 41, ),
-		BasePeer::TYPE_COLNAME => array (AtciudadanoPeer::CEDCIU => 0, AtciudadanoPeer::NOMCIU => 1, AtciudadanoPeer::APECIU => 2, AtciudadanoPeer::NACCIU => 3, AtciudadanoPeer::PAIS => 4, AtciudadanoPeer::CONEXT => 5, AtciudadanoPeer::LUGNAC => 6, AtciudadanoPeer::TIPO => 7, AtciudadanoPeer::SEXO => 8, AtciudadanoPeer::FECNAC => 9, AtciudadanoPeer::DIRNAC => 10, AtciudadanoPeer::ESTCIV => 11, AtciudadanoPeer::TELHAB => 12, AtciudadanoPeer::TELADIHAB => 13, AtciudadanoPeer::PROCIU => 14, AtciudadanoPeer::ATESTADOS_ID => 15, AtciudadanoPeer::ATMUNICIPIOS_ID => 16, AtciudadanoPeer::ATPARROQUIAS_ID => 17, AtciudadanoPeer::CIUDAD => 18, AtciudadanoPeer::CASERIO => 19, AtciudadanoPeer::DIRHAB => 20, AtciudadanoPeer::DIRTRA => 21, AtciudadanoPeer::CONCOMCIU => 22, AtciudadanoPeer::CARCONCOMCIU => 23, AtciudadanoPeer::NOTA => 24, AtciudadanoPeer::GRAINS => 25, AtciudadanoPeer::TRACIU => 26, AtciudadanoPeer::NOMEMP => 27, AtciudadanoPeer::DIREMP => 28, AtciudadanoPeer::TELEMP => 29, AtciudadanoPeer::ATTIPING_ID => 30, AtciudadanoPeer::MONING => 31, AtciudadanoPeer::ATINSREFIER_ID => 32, AtciudadanoPeer::AYUSOLANT => 33, AtciudadanoPeer::INSAYUANT => 34, AtciudadanoPeer::SEGPRI => 35, AtciudadanoPeer::ATTIPPROVIV_ID => 36, AtciudadanoPeer::ATTIPVIV_ID => 37, AtciudadanoPeer::SECTOR => 38, AtciudadanoPeer::URBANIZACION => 39, AtciudadanoPeer::ZONA => 40, AtciudadanoPeer::ID => 41, ),
-		BasePeer::TYPE_FIELDNAME => array ('cedciu' => 0, 'nomciu' => 1, 'apeciu' => 2, 'nacciu' => 3, 'pais' => 4, 'conext' => 5, 'lugnac' => 6, 'tipo' => 7, 'sexo' => 8, 'fecnac' => 9, 'dirnac' => 10, 'estciv' => 11, 'telhab' => 12, 'teladihab' => 13, 'prociu' => 14, 'atestados_id' => 15, 'atmunicipios_id' => 16, 'atparroquias_id' => 17, 'ciudad' => 18, 'caserio' => 19, 'dirhab' => 20, 'dirtra' => 21, 'concomciu' => 22, 'carconcomciu' => 23, 'nota' => 24, 'grains' => 25, 'traciu' => 26, 'nomemp' => 27, 'diremp' => 28, 'telemp' => 29, 'attiping_id' => 30, 'moning' => 31, 'atinsrefier_id' => 32, 'ayusolant' => 33, 'insayuant' => 34, 'segpri' => 35, 'attipproviv_id' => 36, 'attipviv_id' => 37, 'sector' => 38, 'urbanizacion' => 39, 'zona' => 40, 'id' => 41, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, )
+		BasePeer::TYPE_PHPNAME => array ('Cedciu' => 0, 'Nomciu' => 1, 'Apeciu' => 2, 'Nacciu' => 3, 'Pais' => 4, 'Conext' => 5, 'Lugnac' => 6, 'Tipo' => 7, 'Sexo' => 8, 'Fecnac' => 9, 'Dirnac' => 10, 'Estciv' => 11, 'Telhab' => 12, 'Teladihab' => 13, 'Prociu' => 14, 'AtestadosId' => 15, 'AtmunicipiosId' => 16, 'AtparroquiasId' => 17, 'Ciudad' => 18, 'Caserio' => 19, 'Dirhab' => 20, 'Dirtra' => 21, 'Concomciu' => 22, 'Carconcomciu' => 23, 'Nota' => 24, 'Grains' => 25, 'Traciu' => 26, 'Nomemp' => 27, 'Diremp' => 28, 'Telemp' => 29, 'AttipingId' => 30, 'Moning' => 31, 'AtinsrefierId' => 32, 'Ayusolant' => 33, 'Insayuant' => 34, 'Segpri' => 35, 'Seguro' => 36, 'AttipprovivId' => 37, 'AttipvivId' => 38, 'Sector' => 39, 'Urbanizacion' => 40, 'Zona' => 41, 'AtmisionesId' => 42, 'Id' => 43, ),
+		BasePeer::TYPE_COLNAME => array (AtciudadanoPeer::CEDCIU => 0, AtciudadanoPeer::NOMCIU => 1, AtciudadanoPeer::APECIU => 2, AtciudadanoPeer::NACCIU => 3, AtciudadanoPeer::PAIS => 4, AtciudadanoPeer::CONEXT => 5, AtciudadanoPeer::LUGNAC => 6, AtciudadanoPeer::TIPO => 7, AtciudadanoPeer::SEXO => 8, AtciudadanoPeer::FECNAC => 9, AtciudadanoPeer::DIRNAC => 10, AtciudadanoPeer::ESTCIV => 11, AtciudadanoPeer::TELHAB => 12, AtciudadanoPeer::TELADIHAB => 13, AtciudadanoPeer::PROCIU => 14, AtciudadanoPeer::ATESTADOS_ID => 15, AtciudadanoPeer::ATMUNICIPIOS_ID => 16, AtciudadanoPeer::ATPARROQUIAS_ID => 17, AtciudadanoPeer::CIUDAD => 18, AtciudadanoPeer::CASERIO => 19, AtciudadanoPeer::DIRHAB => 20, AtciudadanoPeer::DIRTRA => 21, AtciudadanoPeer::CONCOMCIU => 22, AtciudadanoPeer::CARCONCOMCIU => 23, AtciudadanoPeer::NOTA => 24, AtciudadanoPeer::GRAINS => 25, AtciudadanoPeer::TRACIU => 26, AtciudadanoPeer::NOMEMP => 27, AtciudadanoPeer::DIREMP => 28, AtciudadanoPeer::TELEMP => 29, AtciudadanoPeer::ATTIPING_ID => 30, AtciudadanoPeer::MONING => 31, AtciudadanoPeer::ATINSREFIER_ID => 32, AtciudadanoPeer::AYUSOLANT => 33, AtciudadanoPeer::INSAYUANT => 34, AtciudadanoPeer::SEGPRI => 35, AtciudadanoPeer::SEGURO => 36, AtciudadanoPeer::ATTIPPROVIV_ID => 37, AtciudadanoPeer::ATTIPVIV_ID => 38, AtciudadanoPeer::SECTOR => 39, AtciudadanoPeer::URBANIZACION => 40, AtciudadanoPeer::ZONA => 41, AtciudadanoPeer::ATMISIONES_ID => 42, AtciudadanoPeer::ID => 43, ),
+		BasePeer::TYPE_FIELDNAME => array ('cedciu' => 0, 'nomciu' => 1, 'apeciu' => 2, 'nacciu' => 3, 'pais' => 4, 'conext' => 5, 'lugnac' => 6, 'tipo' => 7, 'sexo' => 8, 'fecnac' => 9, 'dirnac' => 10, 'estciv' => 11, 'telhab' => 12, 'teladihab' => 13, 'prociu' => 14, 'atestados_id' => 15, 'atmunicipios_id' => 16, 'atparroquias_id' => 17, 'ciudad' => 18, 'caserio' => 19, 'dirhab' => 20, 'dirtra' => 21, 'concomciu' => 22, 'carconcomciu' => 23, 'nota' => 24, 'grains' => 25, 'traciu' => 26, 'nomemp' => 27, 'diremp' => 28, 'telemp' => 29, 'attiping_id' => 30, 'moning' => 31, 'atinsrefier_id' => 32, 'ayusolant' => 33, 'insayuant' => 34, 'segpri' => 35, 'seguro' => 36, 'attipproviv_id' => 37, 'attipviv_id' => 38, 'sector' => 39, 'urbanizacion' => 40, 'zona' => 41, 'atmisiones_id' => 42, 'id' => 43, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, )
 	);
 
 	
@@ -288,6 +294,8 @@ abstract class BaseAtciudadanoPeer {
 
 		$criteria->addSelectColumn(AtciudadanoPeer::SEGPRI);
 
+		$criteria->addSelectColumn(AtciudadanoPeer::SEGURO);
+
 		$criteria->addSelectColumn(AtciudadanoPeer::ATTIPPROVIV_ID);
 
 		$criteria->addSelectColumn(AtciudadanoPeer::ATTIPVIV_ID);
@@ -297,6 +305,8 @@ abstract class BaseAtciudadanoPeer {
 		$criteria->addSelectColumn(AtciudadanoPeer::URBANIZACION);
 
 		$criteria->addSelectColumn(AtciudadanoPeer::ZONA);
+
+		$criteria->addSelectColumn(AtciudadanoPeer::ATMISIONES_ID);
 
 		$criteria->addSelectColumn(AtciudadanoPeer::ID);
 
@@ -564,6 +574,34 @@ abstract class BaseAtciudadanoPeer {
 		}
 
 		$criteria->addJoin(AtciudadanoPeer::ATTIPVIV_ID, AttipvivPeer::ID);
+
+		$rs = AtciudadanoPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doCountJoinAtmisiones(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(AtciudadanoPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(AtciudadanoPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(AtciudadanoPeer::ATMISIONES_ID, AtmisionesPeer::ID);
 
 		$rs = AtciudadanoPeer::doSelectRS($criteria, $con);
 		if ($rs->next()) {
@@ -904,6 +942,53 @@ abstract class BaseAtciudadanoPeer {
 
 
 	
+	public static function doSelectJoinAtmisiones(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		AtciudadanoPeer::addSelectColumns($c);
+		$startcol = (AtciudadanoPeer::NUM_COLUMNS - AtciudadanoPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+		AtmisionesPeer::addSelectColumns($c);
+
+		$c->addJoin(AtciudadanoPeer::ATMISIONES_ID, AtmisionesPeer::ID);
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = AtciudadanoPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = AtmisionesPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol);
+
+			$newObject = true;
+			foreach($results as $temp_obj1) {
+				$temp_obj2 = $temp_obj1->getAtmisiones(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+										$temp_obj2->addAtciudadano($obj1); 					break;
+				}
+			}
+			if ($newObject) {
+				$obj2->initAtciudadanos();
+				$obj2->addAtciudadano($obj1); 			}
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
 	public static function doCountJoinAll(Criteria $criteria, $distinct = false, $con = null)
 	{
 		$criteria = clone $criteria;
@@ -933,6 +1018,8 @@ abstract class BaseAtciudadanoPeer {
 			$criteria->addJoin(AtciudadanoPeer::ATTIPPROVIV_ID, AttipprovivPeer::ID);
 	
 			$criteria->addJoin(AtciudadanoPeer::ATTIPVIV_ID, AttipvivPeer::ID);
+	
+			$criteria->addJoin(AtciudadanoPeer::ATMISIONES_ID, AtmisionesPeer::ID);
 	
 		$rs = AtciudadanoPeer::doSelectRS($criteria, $con);
 		if ($rs->next()) {
@@ -976,6 +1063,9 @@ abstract class BaseAtciudadanoPeer {
 			AttipvivPeer::addSelectColumns($c);
 			$startcol9 = $startcol8 + AttipvivPeer::NUM_COLUMNS;
 	
+			AtmisionesPeer::addSelectColumns($c);
+			$startcol10 = $startcol9 + AtmisionesPeer::NUM_COLUMNS;
+	
 			$c->addJoin(AtciudadanoPeer::ATESTADOS_ID, AtestadosPeer::ID);
 	
 			$c->addJoin(AtciudadanoPeer::ATMUNICIPIOS_ID, AtmunicipiosPeer::ID);
@@ -989,6 +1079,8 @@ abstract class BaseAtciudadanoPeer {
 			$c->addJoin(AtciudadanoPeer::ATTIPPROVIV_ID, AttipprovivPeer::ID);
 	
 			$c->addJoin(AtciudadanoPeer::ATTIPVIV_ID, AttipvivPeer::ID);
+	
+			$c->addJoin(AtciudadanoPeer::ATMISIONES_ID, AtmisionesPeer::ID);
 	
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
@@ -1163,6 +1255,29 @@ abstract class BaseAtciudadanoPeer {
 					$obj8->addAtciudadano($obj1);
 				}
 	
+
+							
+				$omClass = AtmisionesPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj9 = new $cls();
+				$obj9->hydrate($rs, $startcol9);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj9 = $temp_obj1->getAtmisiones(); 					if ($temp_obj9->getPrimaryKey() === $obj9->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj9->addAtciudadano($obj1); 						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj9->initAtciudadanos();
+					$obj9->addAtciudadano($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;
@@ -1197,6 +1312,8 @@ abstract class BaseAtciudadanoPeer {
 				$criteria->addJoin(AtciudadanoPeer::ATTIPPROVIV_ID, AttipprovivPeer::ID);
 		
 				$criteria->addJoin(AtciudadanoPeer::ATTIPVIV_ID, AttipvivPeer::ID);
+		
+				$criteria->addJoin(AtciudadanoPeer::ATMISIONES_ID, AtmisionesPeer::ID);
 		
 			$rs = AtciudadanoPeer::doSelectRS($criteria, $con);
 			if ($rs->next()) {
@@ -1236,6 +1353,8 @@ abstract class BaseAtciudadanoPeer {
 		
 				$criteria->addJoin(AtciudadanoPeer::ATTIPVIV_ID, AttipvivPeer::ID);
 		
+				$criteria->addJoin(AtciudadanoPeer::ATMISIONES_ID, AtmisionesPeer::ID);
+		
 			$rs = AtciudadanoPeer::doSelectRS($criteria, $con);
 			if ($rs->next()) {
 				return $rs->getInt(1);
@@ -1273,6 +1392,8 @@ abstract class BaseAtciudadanoPeer {
 				$criteria->addJoin(AtciudadanoPeer::ATTIPPROVIV_ID, AttipprovivPeer::ID);
 		
 				$criteria->addJoin(AtciudadanoPeer::ATTIPVIV_ID, AttipvivPeer::ID);
+		
+				$criteria->addJoin(AtciudadanoPeer::ATMISIONES_ID, AtmisionesPeer::ID);
 		
 			$rs = AtciudadanoPeer::doSelectRS($criteria, $con);
 			if ($rs->next()) {
@@ -1312,6 +1433,8 @@ abstract class BaseAtciudadanoPeer {
 		
 				$criteria->addJoin(AtciudadanoPeer::ATTIPVIV_ID, AttipvivPeer::ID);
 		
+				$criteria->addJoin(AtciudadanoPeer::ATMISIONES_ID, AtmisionesPeer::ID);
+		
 			$rs = AtciudadanoPeer::doSelectRS($criteria, $con);
 			if ($rs->next()) {
 				return $rs->getInt(1);
@@ -1349,6 +1472,8 @@ abstract class BaseAtciudadanoPeer {
 				$criteria->addJoin(AtciudadanoPeer::ATTIPPROVIV_ID, AttipprovivPeer::ID);
 		
 				$criteria->addJoin(AtciudadanoPeer::ATTIPVIV_ID, AttipvivPeer::ID);
+		
+				$criteria->addJoin(AtciudadanoPeer::ATMISIONES_ID, AtmisionesPeer::ID);
 		
 			$rs = AtciudadanoPeer::doSelectRS($criteria, $con);
 			if ($rs->next()) {
@@ -1388,6 +1513,8 @@ abstract class BaseAtciudadanoPeer {
 		
 				$criteria->addJoin(AtciudadanoPeer::ATTIPVIV_ID, AttipvivPeer::ID);
 		
+				$criteria->addJoin(AtciudadanoPeer::ATMISIONES_ID, AtmisionesPeer::ID);
+		
 			$rs = AtciudadanoPeer::doSelectRS($criteria, $con);
 			if ($rs->next()) {
 				return $rs->getInt(1);
@@ -1425,6 +1552,48 @@ abstract class BaseAtciudadanoPeer {
 				$criteria->addJoin(AtciudadanoPeer::ATINSREFIER_ID, AtinsrefierPeer::ID);
 		
 				$criteria->addJoin(AtciudadanoPeer::ATTIPPROVIV_ID, AttipprovivPeer::ID);
+		
+				$criteria->addJoin(AtciudadanoPeer::ATMISIONES_ID, AtmisionesPeer::ID);
+		
+			$rs = AtciudadanoPeer::doSelectRS($criteria, $con);
+			if ($rs->next()) {
+				return $rs->getInt(1);
+			} else {
+								return 0;
+			}
+		}
+	
+
+		
+		public static function doCountJoinAllExceptAtmisiones(Criteria $criteria, $distinct = false, $con = null)
+		{
+						$criteria = clone $criteria;
+
+						$criteria->clearSelectColumns()->clearOrderByColumns();
+			if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+				$criteria->addSelectColumn(AtciudadanoPeer::COUNT_DISTINCT);
+			} else {
+				$criteria->addSelectColumn(AtciudadanoPeer::COUNT);
+			}
+
+						foreach($criteria->getGroupByColumns() as $column)
+			{
+				$criteria->addSelectColumn($column);
+			}
+	
+				$criteria->addJoin(AtciudadanoPeer::ATESTADOS_ID, AtestadosPeer::ID);
+		
+				$criteria->addJoin(AtciudadanoPeer::ATMUNICIPIOS_ID, AtmunicipiosPeer::ID);
+		
+				$criteria->addJoin(AtciudadanoPeer::ATPARROQUIAS_ID, AtparroquiasPeer::ID);
+		
+				$criteria->addJoin(AtciudadanoPeer::ATTIPING_ID, AttipingPeer::ID);
+		
+				$criteria->addJoin(AtciudadanoPeer::ATINSREFIER_ID, AtinsrefierPeer::ID);
+		
+				$criteria->addJoin(AtciudadanoPeer::ATTIPPROVIV_ID, AttipprovivPeer::ID);
+		
+				$criteria->addJoin(AtciudadanoPeer::ATTIPVIV_ID, AttipvivPeer::ID);
 		
 			$rs = AtciudadanoPeer::doSelectRS($criteria, $con);
 			if ($rs->next()) {
@@ -1465,6 +1634,9 @@ abstract class BaseAtciudadanoPeer {
 			AttipvivPeer::addSelectColumns($c);
 			$startcol8 = $startcol7 + AttipvivPeer::NUM_COLUMNS;
 	
+			AtmisionesPeer::addSelectColumns($c);
+			$startcol9 = $startcol8 + AtmisionesPeer::NUM_COLUMNS;
+	
 			$c->addJoin(AtciudadanoPeer::ATMUNICIPIOS_ID, AtmunicipiosPeer::ID);
 	
 			$c->addJoin(AtciudadanoPeer::ATPARROQUIAS_ID, AtparroquiasPeer::ID);
@@ -1476,6 +1648,8 @@ abstract class BaseAtciudadanoPeer {
 			$c->addJoin(AtciudadanoPeer::ATTIPPROVIV_ID, AttipprovivPeer::ID);
 	
 			$c->addJoin(AtciudadanoPeer::ATTIPVIV_ID, AttipvivPeer::ID);
+	
+			$c->addJoin(AtciudadanoPeer::ATMISIONES_ID, AtmisionesPeer::ID);
 	
 
 		$rs = BasePeer::doSelect($c, $con);
@@ -1621,6 +1795,28 @@ abstract class BaseAtciudadanoPeer {
 					$obj7->addAtciudadano($obj1);
 				}
 	
+				$omClass = AtmisionesPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj8  = new $cls();
+				$obj8->hydrate($rs, $startcol8);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj8 = $temp_obj1->getAtmisiones(); 					if ($temp_obj8->getPrimaryKey() === $obj8->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj8->addAtciudadano($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj8->initAtciudadanos();
+					$obj8->addAtciudadano($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;
@@ -1657,6 +1853,9 @@ abstract class BaseAtciudadanoPeer {
 			AttipvivPeer::addSelectColumns($c);
 			$startcol8 = $startcol7 + AttipvivPeer::NUM_COLUMNS;
 	
+			AtmisionesPeer::addSelectColumns($c);
+			$startcol9 = $startcol8 + AtmisionesPeer::NUM_COLUMNS;
+	
 			$c->addJoin(AtciudadanoPeer::ATESTADOS_ID, AtestadosPeer::ID);
 	
 			$c->addJoin(AtciudadanoPeer::ATPARROQUIAS_ID, AtparroquiasPeer::ID);
@@ -1668,6 +1867,8 @@ abstract class BaseAtciudadanoPeer {
 			$c->addJoin(AtciudadanoPeer::ATTIPPROVIV_ID, AttipprovivPeer::ID);
 	
 			$c->addJoin(AtciudadanoPeer::ATTIPVIV_ID, AttipvivPeer::ID);
+	
+			$c->addJoin(AtciudadanoPeer::ATMISIONES_ID, AtmisionesPeer::ID);
 	
 
 		$rs = BasePeer::doSelect($c, $con);
@@ -1813,6 +2014,28 @@ abstract class BaseAtciudadanoPeer {
 					$obj7->addAtciudadano($obj1);
 				}
 	
+				$omClass = AtmisionesPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj8  = new $cls();
+				$obj8->hydrate($rs, $startcol8);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj8 = $temp_obj1->getAtmisiones(); 					if ($temp_obj8->getPrimaryKey() === $obj8->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj8->addAtciudadano($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj8->initAtciudadanos();
+					$obj8->addAtciudadano($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;
@@ -1849,6 +2072,9 @@ abstract class BaseAtciudadanoPeer {
 			AttipvivPeer::addSelectColumns($c);
 			$startcol8 = $startcol7 + AttipvivPeer::NUM_COLUMNS;
 	
+			AtmisionesPeer::addSelectColumns($c);
+			$startcol9 = $startcol8 + AtmisionesPeer::NUM_COLUMNS;
+	
 			$c->addJoin(AtciudadanoPeer::ATESTADOS_ID, AtestadosPeer::ID);
 	
 			$c->addJoin(AtciudadanoPeer::ATMUNICIPIOS_ID, AtmunicipiosPeer::ID);
@@ -1860,6 +2086,8 @@ abstract class BaseAtciudadanoPeer {
 			$c->addJoin(AtciudadanoPeer::ATTIPPROVIV_ID, AttipprovivPeer::ID);
 	
 			$c->addJoin(AtciudadanoPeer::ATTIPVIV_ID, AttipvivPeer::ID);
+	
+			$c->addJoin(AtciudadanoPeer::ATMISIONES_ID, AtmisionesPeer::ID);
 	
 
 		$rs = BasePeer::doSelect($c, $con);
@@ -2005,6 +2233,28 @@ abstract class BaseAtciudadanoPeer {
 					$obj7->addAtciudadano($obj1);
 				}
 	
+				$omClass = AtmisionesPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj8  = new $cls();
+				$obj8->hydrate($rs, $startcol8);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj8 = $temp_obj1->getAtmisiones(); 					if ($temp_obj8->getPrimaryKey() === $obj8->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj8->addAtciudadano($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj8->initAtciudadanos();
+					$obj8->addAtciudadano($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;
@@ -2041,6 +2291,9 @@ abstract class BaseAtciudadanoPeer {
 			AttipvivPeer::addSelectColumns($c);
 			$startcol8 = $startcol7 + AttipvivPeer::NUM_COLUMNS;
 	
+			AtmisionesPeer::addSelectColumns($c);
+			$startcol9 = $startcol8 + AtmisionesPeer::NUM_COLUMNS;
+	
 			$c->addJoin(AtciudadanoPeer::ATESTADOS_ID, AtestadosPeer::ID);
 	
 			$c->addJoin(AtciudadanoPeer::ATMUNICIPIOS_ID, AtmunicipiosPeer::ID);
@@ -2052,6 +2305,8 @@ abstract class BaseAtciudadanoPeer {
 			$c->addJoin(AtciudadanoPeer::ATTIPPROVIV_ID, AttipprovivPeer::ID);
 	
 			$c->addJoin(AtciudadanoPeer::ATTIPVIV_ID, AttipvivPeer::ID);
+	
+			$c->addJoin(AtciudadanoPeer::ATMISIONES_ID, AtmisionesPeer::ID);
 	
 
 		$rs = BasePeer::doSelect($c, $con);
@@ -2197,6 +2452,28 @@ abstract class BaseAtciudadanoPeer {
 					$obj7->addAtciudadano($obj1);
 				}
 	
+				$omClass = AtmisionesPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj8  = new $cls();
+				$obj8->hydrate($rs, $startcol8);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj8 = $temp_obj1->getAtmisiones(); 					if ($temp_obj8->getPrimaryKey() === $obj8->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj8->addAtciudadano($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj8->initAtciudadanos();
+					$obj8->addAtciudadano($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;
@@ -2233,6 +2510,9 @@ abstract class BaseAtciudadanoPeer {
 			AttipvivPeer::addSelectColumns($c);
 			$startcol8 = $startcol7 + AttipvivPeer::NUM_COLUMNS;
 	
+			AtmisionesPeer::addSelectColumns($c);
+			$startcol9 = $startcol8 + AtmisionesPeer::NUM_COLUMNS;
+	
 			$c->addJoin(AtciudadanoPeer::ATESTADOS_ID, AtestadosPeer::ID);
 	
 			$c->addJoin(AtciudadanoPeer::ATMUNICIPIOS_ID, AtmunicipiosPeer::ID);
@@ -2244,6 +2524,8 @@ abstract class BaseAtciudadanoPeer {
 			$c->addJoin(AtciudadanoPeer::ATTIPPROVIV_ID, AttipprovivPeer::ID);
 	
 			$c->addJoin(AtciudadanoPeer::ATTIPVIV_ID, AttipvivPeer::ID);
+	
+			$c->addJoin(AtciudadanoPeer::ATMISIONES_ID, AtmisionesPeer::ID);
 	
 
 		$rs = BasePeer::doSelect($c, $con);
@@ -2389,6 +2671,28 @@ abstract class BaseAtciudadanoPeer {
 					$obj7->addAtciudadano($obj1);
 				}
 	
+				$omClass = AtmisionesPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj8  = new $cls();
+				$obj8->hydrate($rs, $startcol8);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj8 = $temp_obj1->getAtmisiones(); 					if ($temp_obj8->getPrimaryKey() === $obj8->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj8->addAtciudadano($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj8->initAtciudadanos();
+					$obj8->addAtciudadano($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;
@@ -2425,6 +2729,9 @@ abstract class BaseAtciudadanoPeer {
 			AttipvivPeer::addSelectColumns($c);
 			$startcol8 = $startcol7 + AttipvivPeer::NUM_COLUMNS;
 	
+			AtmisionesPeer::addSelectColumns($c);
+			$startcol9 = $startcol8 + AtmisionesPeer::NUM_COLUMNS;
+	
 			$c->addJoin(AtciudadanoPeer::ATESTADOS_ID, AtestadosPeer::ID);
 	
 			$c->addJoin(AtciudadanoPeer::ATMUNICIPIOS_ID, AtmunicipiosPeer::ID);
@@ -2436,6 +2743,8 @@ abstract class BaseAtciudadanoPeer {
 			$c->addJoin(AtciudadanoPeer::ATINSREFIER_ID, AtinsrefierPeer::ID);
 	
 			$c->addJoin(AtciudadanoPeer::ATTIPVIV_ID, AttipvivPeer::ID);
+	
+			$c->addJoin(AtciudadanoPeer::ATMISIONES_ID, AtmisionesPeer::ID);
 	
 
 		$rs = BasePeer::doSelect($c, $con);
@@ -2581,6 +2890,28 @@ abstract class BaseAtciudadanoPeer {
 					$obj7->addAtciudadano($obj1);
 				}
 	
+				$omClass = AtmisionesPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj8  = new $cls();
+				$obj8->hydrate($rs, $startcol8);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj8 = $temp_obj1->getAtmisiones(); 					if ($temp_obj8->getPrimaryKey() === $obj8->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj8->addAtciudadano($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj8->initAtciudadanos();
+					$obj8->addAtciudadano($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;
@@ -2617,6 +2948,9 @@ abstract class BaseAtciudadanoPeer {
 			AttipprovivPeer::addSelectColumns($c);
 			$startcol8 = $startcol7 + AttipprovivPeer::NUM_COLUMNS;
 	
+			AtmisionesPeer::addSelectColumns($c);
+			$startcol9 = $startcol8 + AtmisionesPeer::NUM_COLUMNS;
+	
 			$c->addJoin(AtciudadanoPeer::ATESTADOS_ID, AtestadosPeer::ID);
 	
 			$c->addJoin(AtciudadanoPeer::ATMUNICIPIOS_ID, AtmunicipiosPeer::ID);
@@ -2628,6 +2962,8 @@ abstract class BaseAtciudadanoPeer {
 			$c->addJoin(AtciudadanoPeer::ATINSREFIER_ID, AtinsrefierPeer::ID);
 	
 			$c->addJoin(AtciudadanoPeer::ATTIPPROVIV_ID, AttipprovivPeer::ID);
+	
+			$c->addJoin(AtciudadanoPeer::ATMISIONES_ID, AtmisionesPeer::ID);
 	
 
 		$rs = BasePeer::doSelect($c, $con);
@@ -2771,6 +3107,247 @@ abstract class BaseAtciudadanoPeer {
 				if ($newObject) {
 					$obj7->initAtciudadanos();
 					$obj7->addAtciudadano($obj1);
+				}
+	
+				$omClass = AtmisionesPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj8  = new $cls();
+				$obj8->hydrate($rs, $startcol8);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj8 = $temp_obj1->getAtmisiones(); 					if ($temp_obj8->getPrimaryKey() === $obj8->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj8->addAtciudadano($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj8->initAtciudadanos();
+					$obj8->addAtciudadano($obj1);
+				}
+	
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doSelectJoinAllExceptAtmisiones(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+								if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		AtciudadanoPeer::addSelectColumns($c);
+		$startcol2 = (AtciudadanoPeer::NUM_COLUMNS - AtciudadanoPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+
+			AtestadosPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + AtestadosPeer::NUM_COLUMNS;
+	
+			AtmunicipiosPeer::addSelectColumns($c);
+			$startcol4 = $startcol3 + AtmunicipiosPeer::NUM_COLUMNS;
+	
+			AtparroquiasPeer::addSelectColumns($c);
+			$startcol5 = $startcol4 + AtparroquiasPeer::NUM_COLUMNS;
+	
+			AttipingPeer::addSelectColumns($c);
+			$startcol6 = $startcol5 + AttipingPeer::NUM_COLUMNS;
+	
+			AtinsrefierPeer::addSelectColumns($c);
+			$startcol7 = $startcol6 + AtinsrefierPeer::NUM_COLUMNS;
+	
+			AttipprovivPeer::addSelectColumns($c);
+			$startcol8 = $startcol7 + AttipprovivPeer::NUM_COLUMNS;
+	
+			AttipvivPeer::addSelectColumns($c);
+			$startcol9 = $startcol8 + AttipvivPeer::NUM_COLUMNS;
+	
+			$c->addJoin(AtciudadanoPeer::ATESTADOS_ID, AtestadosPeer::ID);
+	
+			$c->addJoin(AtciudadanoPeer::ATMUNICIPIOS_ID, AtmunicipiosPeer::ID);
+	
+			$c->addJoin(AtciudadanoPeer::ATPARROQUIAS_ID, AtparroquiasPeer::ID);
+	
+			$c->addJoin(AtciudadanoPeer::ATTIPING_ID, AttipingPeer::ID);
+	
+			$c->addJoin(AtciudadanoPeer::ATINSREFIER_ID, AtinsrefierPeer::ID);
+	
+			$c->addJoin(AtciudadanoPeer::ATTIPPROVIV_ID, AttipprovivPeer::ID);
+	
+			$c->addJoin(AtciudadanoPeer::ATTIPVIV_ID, AttipvivPeer::ID);
+	
+
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = AtciudadanoPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+				$omClass = AtestadosPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj2  = new $cls();
+				$obj2->hydrate($rs, $startcol2);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getAtestados(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addAtciudadano($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj2->initAtciudadanos();
+					$obj2->addAtciudadano($obj1);
+				}
+	
+				$omClass = AtmunicipiosPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj3  = new $cls();
+				$obj3->hydrate($rs, $startcol3);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj3 = $temp_obj1->getAtmunicipios(); 					if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj3->addAtciudadano($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj3->initAtciudadanos();
+					$obj3->addAtciudadano($obj1);
+				}
+	
+				$omClass = AtparroquiasPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj4  = new $cls();
+				$obj4->hydrate($rs, $startcol4);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj4 = $temp_obj1->getAtparroquias(); 					if ($temp_obj4->getPrimaryKey() === $obj4->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj4->addAtciudadano($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj4->initAtciudadanos();
+					$obj4->addAtciudadano($obj1);
+				}
+	
+				$omClass = AttipingPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj5  = new $cls();
+				$obj5->hydrate($rs, $startcol5);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj5 = $temp_obj1->getAttiping(); 					if ($temp_obj5->getPrimaryKey() === $obj5->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj5->addAtciudadano($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj5->initAtciudadanos();
+					$obj5->addAtciudadano($obj1);
+				}
+	
+				$omClass = AtinsrefierPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj6  = new $cls();
+				$obj6->hydrate($rs, $startcol6);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj6 = $temp_obj1->getAtinsrefier(); 					if ($temp_obj6->getPrimaryKey() === $obj6->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj6->addAtciudadano($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj6->initAtciudadanos();
+					$obj6->addAtciudadano($obj1);
+				}
+	
+				$omClass = AttipprovivPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj7  = new $cls();
+				$obj7->hydrate($rs, $startcol7);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj7 = $temp_obj1->getAttipproviv(); 					if ($temp_obj7->getPrimaryKey() === $obj7->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj7->addAtciudadano($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj7->initAtciudadanos();
+					$obj7->addAtciudadano($obj1);
+				}
+	
+				$omClass = AttipvivPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj8  = new $cls();
+				$obj8->hydrate($rs, $startcol8);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj8 = $temp_obj1->getAttipviv(); 					if ($temp_obj8->getPrimaryKey() === $obj8->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj8->addAtciudadano($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj8->initAtciudadanos();
+					$obj8->addAtciudadano($obj1);
 				}
 	
 			$results[] = $obj1;
