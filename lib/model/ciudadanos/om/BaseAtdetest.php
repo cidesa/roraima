@@ -81,7 +81,7 @@ abstract class BaseAtdetest extends BaseObject  implements Persistent {
     if ($this->created_at === null || $this->created_at === '') {
       return null;
     } elseif (!is_int($this->created_at)) {
-            $ts = strtotime($this->created_at);
+            $ts = adodb_strtotime($this->created_at);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [created_at] as date/time value: " . var_export($this->created_at, true));
       }
     } else {
@@ -90,9 +90,9 @@ abstract class BaseAtdetest extends BaseObject  implements Persistent {
     if ($format === null) {
       return $ts;
     } elseif (strpos($format, '%') !== false) {
-      return strftime($format, $ts);
+      return adodb_strftime($format, $ts);
     } else {
-      return date($format, $ts);
+      return @adodb_date($format, $ts);
     }
   }
 
@@ -159,13 +159,8 @@ abstract class BaseAtdetest extends BaseObject  implements Persistent {
 	public function setCreatedAt($v)
 	{
 
-		if (is_array($v)){
-        	$value_array = $v;
-        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-		}
-
     if ($v !== null && !is_int($v)) {
-      $ts = strtotime($v);
+      $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [created_at] from input: " . var_export($v, true));
       }
     } else {
