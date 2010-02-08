@@ -42,3 +42,20 @@ $BODY$
   LANGUAGE 'plpgsql' VOLATILE
   COST 100;
 ALTER FUNCTION diaslaborados(character varying,character varying , date, date, character varying) OWNER TO postgres;
+
+
+CREATE SEQUENCE npdocent_seq;
+
+CREATE TABLE  npdocent (
+  coddoc varchar(3),
+  desdoc varchar(250),
+  id integer not null default nextval('npdocent_seq'::regclass)
+  );
+
+CREATE SEQUENCE npdocentporemp_seq;
+
+CREATE TABLE  npdocentporemp (
+  codemp varchar(26),
+  coddoc varchar(3),  
+  id integer not null default nextval('npdocentporemp_seq'::regclass)  
+  );  

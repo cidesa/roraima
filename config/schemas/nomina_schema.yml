@@ -7102,3 +7102,35 @@ propel:
       primaryKey: true
       autoIncrement: true
       description: Identificador Único del registro      
+  npdocent:
+    coddoc:
+      type: VARCHAR
+      size: 3
+      required: true
+    desdoc:
+      type: VARCHAR
+      size: 250
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro            
+  npdocentporemp:
+    codemp:
+      type: VARCHAR
+      size: 16
+      #foreignTable: nphojint
+      #foreignReference: codemp
+    coddoc:
+      type: VARCHAR
+      size: 3
+      #foreignTable: npdocent
+      #foreignReference: coddoc
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro      
