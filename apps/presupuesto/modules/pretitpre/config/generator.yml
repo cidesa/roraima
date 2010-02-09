@@ -8,7 +8,7 @@ generator:
       codpre:    {name: Código, params: size=32, help: Código presupuestario }
       nompre:    {name: Nombre, params: size=68, help: Descripción del código presupuestario }
       descta:
-       name: Codigo contable y decsripción
+       name: Codigo contable
        catalogo:
           catalogoweb: Contabb_pretitpre
           clase: Contabb
@@ -22,10 +22,11 @@ generator:
       filters: [codpre, nompre]
       display:
         NONE:  [=codpre, nompre]
+      sort:  codpre
     edit:
       title: Título presupuestario
       display:
-        Datos del Título: [ _codpre, nompre]
+        Datos del Título: [ _codpre, _nompre]
         Datos Contables: [descta]
       actions:
         _list:        ~

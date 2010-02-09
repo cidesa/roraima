@@ -1320,3 +1320,7 @@ function totalregistros2(letra,posicion,filas)
     }
     return total;
   }
+
+function convertirMayusculas(id) {
+    $(id).value=$(id).value.toUpperCase();
+}

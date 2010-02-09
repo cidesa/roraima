@@ -16,10 +16,6 @@ generator:
       numper:  { name: Número de Períodos, help: a}
       grid:    { name: .}
       gridper: { name: . }
-    #list:
-      #title:                    Catálogo de Cuentas
-      #display:                  [=codcta, descta]
-      #filters:                  [codcta, descta]
     edit:
       title:                                 Niveles Presupuestarios
       display:
@@ -28,5 +24,6 @@ generator:
         NONE:                                [_grid, forpre]
         Configuraciones Generales:           [fecini, feccie, fecper, _asiper, _numper]
         Distribución de los Períodos:        [_gridper]
+      hide:  [defcod]
       actions:
         _save:        ~

@@ -9,6 +9,7 @@
 
   $value = object_input_tag($cpdeftit, 'getCodpre', array (
   'size' => $long,
+  'readonly'  =>  $cpdeftit->getId()!='' ? true : false ,
   'maxlength' => $long,
   'control_name' => 'cpdeftit[codpre]',
   'onKeyDown'    => "javascript:return dFilter (event.keyCode, this,'$mascara')",

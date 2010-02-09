@@ -83,12 +83,6 @@ abstract class BaseCpcausad extends BaseObject  implements Persistent {
 	protected $lastCpimpcauCriteria = null;
 
 	
-	protected $collCcdetcuadess;
-
-	
-	protected $lastCcdetcuadesCriteria = null;
-
-	
 	protected $alreadyInSave = false;
 
 	
@@ -260,6 +254,11 @@ abstract class BaseCpcausad extends BaseObject  implements Persistent {
 	public function setFeccau($v)
 	{
 
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [feccau] from input: " . var_export($v, true));
@@ -370,6 +369,11 @@ abstract class BaseCpcausad extends BaseObject  implements Persistent {
 	
 	public function setFecanu($v)
 	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
@@ -568,14 +572,6 @@ abstract class BaseCpcausad extends BaseObject  implements Persistent {
 				}
 			}
 
-			if ($this->collCcdetcuadess !== null) {
-				foreach($this->collCcdetcuadess as $referrerFK) {
-					if (!$referrerFK->isDeleted()) {
-						$affectedRows += $referrerFK->save($con);
-					}
-				}
-			}
-
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
@@ -639,14 +635,6 @@ abstract class BaseCpcausad extends BaseObject  implements Persistent {
 
 				if ($this->collCpimpcaus !== null) {
 					foreach($this->collCpimpcaus as $referrerFK) {
-						if (!$referrerFK->validate($columns)) {
-							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
-						}
-					}
-				}
-
-				if ($this->collCcdetcuadess !== null) {
-					foreach($this->collCcdetcuadess as $referrerFK) {
 						if (!$referrerFK->validate($columns)) {
 							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
 						}
@@ -911,10 +899,6 @@ abstract class BaseCpcausad extends BaseObject  implements Persistent {
 				$copyObj->addCpimpcau($relObj->copy($deepCopy));
 			}
 
-			foreach($this->getCcdetcuadess() as $relObj) {
-				$copyObj->addCcdetcuades($relObj->copy($deepCopy));
-			}
-
 		} 
 
 		$copyObj->setNew(true);
@@ -1104,251 +1088,6 @@ abstract class BaseCpcausad extends BaseObject  implements Persistent {
 	{
 		$this->collCpimpcaus[] = $l;
 		$l->setCpcausad($this);
-	}
-
-	
-	public function initCcdetcuadess()
-	{
-		if ($this->collCcdetcuadess === null) {
-			$this->collCcdetcuadess = array();
-		}
-	}
-
-	
-	public function getCcdetcuadess($criteria = null, $con = null)
-	{
-				include_once 'lib/model/creditos/om/BaseCcdetcuadesPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		if ($this->collCcdetcuadess === null) {
-			if ($this->isNew()) {
-			   $this->collCcdetcuadess = array();
-			} else {
-
-				$criteria->add(CcdetcuadesPeer::CPCAUSAD_ID, $this->getId());
-
-				CcdetcuadesPeer::addSelectColumns($criteria);
-				$this->collCcdetcuadess = CcdetcuadesPeer::doSelect($criteria, $con);
-			}
-		} else {
-						if (!$this->isNew()) {
-												
-
-				$criteria->add(CcdetcuadesPeer::CPCAUSAD_ID, $this->getId());
-
-				CcdetcuadesPeer::addSelectColumns($criteria);
-				if (!isset($this->lastCcdetcuadesCriteria) || !$this->lastCcdetcuadesCriteria->equals($criteria)) {
-					$this->collCcdetcuadess = CcdetcuadesPeer::doSelect($criteria, $con);
-				}
-			}
-		}
-		$this->lastCcdetcuadesCriteria = $criteria;
-		return $this->collCcdetcuadess;
-	}
-
-	
-	public function countCcdetcuadess($criteria = null, $distinct = false, $con = null)
-	{
-				include_once 'lib/model/creditos/om/BaseCcdetcuadesPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		$criteria->add(CcdetcuadesPeer::CPCAUSAD_ID, $this->getId());
-
-		return CcdetcuadesPeer::doCount($criteria, $distinct, $con);
-	}
-
-	
-	public function addCcdetcuades(Ccdetcuades $l)
-	{
-		$this->collCcdetcuadess[] = $l;
-		$l->setCpcausad($this);
-	}
-
-
-	
-	public function getCcdetcuadessJoinCcpagter($criteria = null, $con = null)
-	{
-				include_once 'lib/model/creditos/om/BaseCcdetcuadesPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		if ($this->collCcdetcuadess === null) {
-			if ($this->isNew()) {
-				$this->collCcdetcuadess = array();
-			} else {
-
-				$criteria->add(CcdetcuadesPeer::CPCAUSAD_ID, $this->getId());
-
-				$this->collCcdetcuadess = CcdetcuadesPeer::doSelectJoinCcpagter($criteria, $con);
-			}
-		} else {
-									
-			$criteria->add(CcdetcuadesPeer::CPCAUSAD_ID, $this->getId());
-
-			if (!isset($this->lastCcdetcuadesCriteria) || !$this->lastCcdetcuadesCriteria->equals($criteria)) {
-				$this->collCcdetcuadess = CcdetcuadesPeer::doSelectJoinCcpagter($criteria, $con);
-			}
-		}
-		$this->lastCcdetcuadesCriteria = $criteria;
-
-		return $this->collCcdetcuadess;
-	}
-
-
-	
-	public function getCcdetcuadessJoinCcbenefi($criteria = null, $con = null)
-	{
-				include_once 'lib/model/creditos/om/BaseCcdetcuadesPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		if ($this->collCcdetcuadess === null) {
-			if ($this->isNew()) {
-				$this->collCcdetcuadess = array();
-			} else {
-
-				$criteria->add(CcdetcuadesPeer::CPCAUSAD_ID, $this->getId());
-
-				$this->collCcdetcuadess = CcdetcuadesPeer::doSelectJoinCcbenefi($criteria, $con);
-			}
-		} else {
-									
-			$criteria->add(CcdetcuadesPeer::CPCAUSAD_ID, $this->getId());
-
-			if (!isset($this->lastCcdetcuadesCriteria) || !$this->lastCcdetcuadesCriteria->equals($criteria)) {
-				$this->collCcdetcuadess = CcdetcuadesPeer::doSelectJoinCcbenefi($criteria, $con);
-			}
-		}
-		$this->lastCcdetcuadesCriteria = $criteria;
-
-		return $this->collCcdetcuadess;
-	}
-
-
-	
-	public function getCcdetcuadessJoinCccueban($criteria = null, $con = null)
-	{
-				include_once 'lib/model/creditos/om/BaseCcdetcuadesPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		if ($this->collCcdetcuadess === null) {
-			if ($this->isNew()) {
-				$this->collCcdetcuadess = array();
-			} else {
-
-				$criteria->add(CcdetcuadesPeer::CPCAUSAD_ID, $this->getId());
-
-				$this->collCcdetcuadess = CcdetcuadesPeer::doSelectJoinCccueban($criteria, $con);
-			}
-		} else {
-									
-			$criteria->add(CcdetcuadesPeer::CPCAUSAD_ID, $this->getId());
-
-			if (!isset($this->lastCcdetcuadesCriteria) || !$this->lastCcdetcuadesCriteria->equals($criteria)) {
-				$this->collCcdetcuadess = CcdetcuadesPeer::doSelectJoinCccueban($criteria, $con);
-			}
-		}
-		$this->lastCcdetcuadesCriteria = $criteria;
-
-		return $this->collCcdetcuadess;
-	}
-
-
-	
-	public function getCcdetcuadessJoinCcconcep($criteria = null, $con = null)
-	{
-				include_once 'lib/model/creditos/om/BaseCcdetcuadesPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		if ($this->collCcdetcuadess === null) {
-			if ($this->isNew()) {
-				$this->collCcdetcuadess = array();
-			} else {
-
-				$criteria->add(CcdetcuadesPeer::CPCAUSAD_ID, $this->getId());
-
-				$this->collCcdetcuadess = CcdetcuadesPeer::doSelectJoinCcconcep($criteria, $con);
-			}
-		} else {
-									
-			$criteria->add(CcdetcuadesPeer::CPCAUSAD_ID, $this->getId());
-
-			if (!isset($this->lastCcdetcuadesCriteria) || !$this->lastCcdetcuadesCriteria->equals($criteria)) {
-				$this->collCcdetcuadess = CcdetcuadesPeer::doSelectJoinCcconcep($criteria, $con);
-			}
-		}
-		$this->lastCcdetcuadesCriteria = $criteria;
-
-		return $this->collCcdetcuadess;
-	}
-
-
-	
-	public function getCcdetcuadessJoinCccuades($criteria = null, $con = null)
-	{
-				include_once 'lib/model/creditos/om/BaseCcdetcuadesPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		if ($this->collCcdetcuadess === null) {
-			if ($this->isNew()) {
-				$this->collCcdetcuadess = array();
-			} else {
-
-				$criteria->add(CcdetcuadesPeer::CPCAUSAD_ID, $this->getId());
-
-				$this->collCcdetcuadess = CcdetcuadesPeer::doSelectJoinCccuades($criteria, $con);
-			}
-		} else {
-									
-			$criteria->add(CcdetcuadesPeer::CPCAUSAD_ID, $this->getId());
-
-			if (!isset($this->lastCcdetcuadesCriteria) || !$this->lastCcdetcuadesCriteria->equals($criteria)) {
-				$this->collCcdetcuadess = CcdetcuadesPeer::doSelectJoinCccuades($criteria, $con);
-			}
-		}
-		$this->lastCcdetcuadesCriteria = $criteria;
-
-		return $this->collCcdetcuadess;
 	}
 
 } 
