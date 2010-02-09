@@ -1052,6 +1052,7 @@ $this->Bitacora('Guardo');
             Tesoreria::actualiza_Bancos('E',$debcre,$numcue,$monmov);
             Tesoreria::anular_Eliminar('E',$numcomadi,$feccomadi,$compadic,$feccom,$numcom,$numcom,$feclib);
             $this->SalvarBitacora($ideeli ,'Elimino');
+            } else { return $this->msg; }
             }
             }
             else

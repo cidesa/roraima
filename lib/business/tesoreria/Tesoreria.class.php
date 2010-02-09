@@ -884,10 +884,10 @@ class Tesoreria {
       switch ($accion) {
         case 'A' :
           if ($tscheemi[0]["status"] == 'E') {
-            return "El cheque fué Entregado";
+            return "No se puede anular el movimiento, El cheque fué Entregado";
           }
           if ($tscheemi[0]["status"] == 'A') {
-            return "El cheque fué Anulado";
+            return "No se puede anular el movimiento, El cheque fué Anulado";
           }
           if ($tscheemi[0]["status"] == 'C' || $tscheemi[0]["status"] == 'F') {
             $c = new Criteria();
@@ -904,10 +904,10 @@ class Tesoreria {
           break;
         case 'E' :
           if ($tscheemi[0]["status"] == 'E') {
-            return "El cheque fué Entregado";
+            return "No se puede eliminar el movimiento, El cheque fué Entregado";
           }
           if ($tscheemi[0]["status"] == 'A') {
-            return "El cheque fué Anulado";
+            return "No se puede eliminar el movimiento, El cheque fué Anulado";
           }
           if ($tscheemi[0]["status"] == 'C' || $tscheemi[0]["status"] == 'F') {
             $c = new Criteria();
