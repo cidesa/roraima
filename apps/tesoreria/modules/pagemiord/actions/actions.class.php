@@ -2841,36 +2841,65 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
 
     //Verificar si la orden de pago es de retencion, si es asi se puede eliminar sin verificar los comprobantes contables
     //ya que las ordenes de pago de retención no tienen comprobantes contables asociados
-    $c=new Criteria();
-    $c->add(OpretordPeer::NUMRET,$numord);
-    $datosret=OpretordPeer::doSelectOne($c);
-    if ($datosret)
-    {
-    $c= new Criteria();
-    $c->add(OpordpagPeer::NUMORD,$numord);
-    $data= OpordpagPeer::doSelectOne($c);
-    if ($data)
-    {
-      if (($data->getNumche()=='') || (strlen($data->getNumche())==0))
-      {
-        OrdendePago::eliminarRetenciones($numord,&$puedeeliminar,&$msjs);
-        Herramientas::EliminarRegistro('Opdetord','Numord',$data->getNumord());
-           OrdendePago::eliminarCausado($data->getNumord());
-           OrdendePago::eliminarOrdenRetencion($data->getNumord());
-           OrdendePago::eliminarOPP($data->getNumord());
-           Herramientas::EliminarRegistro('Opfactur','Numord',$data->getNumord());
+    $ordret=H::getX('codemp','Opdefemp','Ordret','001');
+    if ($tipcau==$ordret){
+	    $c=new Criteria();
+	    $c->add(OpretordPeer::NUMRET,$numord);
+	    $datosret=OpretordPeer::doSelectOne($c);
+	    if ($datosret)
+	    {
+	    $c= new Criteria();
+	    $c->add(OpordpagPeer::NUMORD,$numord);
+	    $data= OpordpagPeer::doSelectOne($c);
+	    if ($data)
+	    {
+	      if (($data->getNumche()=='') || (strlen($data->getNumche())==0))
+	      {
+	        OrdendePago::eliminarRetenciones($numord,&$puedeeliminar,&$msjs);
+	        Herramientas::EliminarRegistro('Opdetord','Numord',$data->getNumord());
+	           OrdendePago::eliminarCausado($data->getNumord());
+	           OrdendePago::eliminarOrdenRetencion($data->getNumord());
+	           OrdendePago::eliminarOPP($data->getNumord());
+	           Herramientas::EliminarRegistro('Opfactur','Numord',$data->getNumord());
 
-           $sql="Update Npliquidacion_det set numord='' where numord='".$numord."'";
-           Herramientas::insertarRegistros($sql);
+	           $sql="Update Npliquidacion_det set numord='' where numord='".$numord."'";
+	           Herramientas::insertarRegistros($sql);
 
-           $sql2="Update Npordfid set numord='' where numord='".$numord."'";
-           Herramientas::insertarRegistros($sql2);
+	           $sql2="Update Npordfid set numord='' where numord='".$numord."'";
+	           Herramientas::insertarRegistros($sql2);
 
-           $data->delete();
-      }
-      else { return $this->msj="La Orden ya fue pagada en el Módulo de Bancos";}
-    }//  if ($data)
-    }// if ($datosret)
+	           $data->delete();
+	      }
+	      else { return $this->msj="La Orden ya fue pagada en el Módulo de Bancos";}
+	    }//  if ($data)
+	    }// if ($datosret)
+	    else {
+	    		$c= new Criteria();
+			    $c->add(OpordpagPeer::NUMORD,$numord);
+			    $data= OpordpagPeer::doSelectOne($c);
+			    if ($data)
+			    {
+			      if (($data->getNumche()=='') || (strlen($data->getNumche())==0))
+			      {
+			        OrdendePago::eliminarRetenciones($numord,&$puedeeliminar,&$msjs);
+			        Herramientas::EliminarRegistro('Opdetord','Numord',$data->getNumord());
+			           OrdendePago::eliminarCausado($data->getNumord());
+			           OrdendePago::eliminarOrdenRetencion($data->getNumord());
+			           OrdendePago::eliminarOPP($data->getNumord());
+			           Herramientas::EliminarRegistro('Opfactur','Numord',$data->getNumord());
+
+			           $sql="Update Npliquidacion_det set numord='' where numord='".$numord."'";
+			           Herramientas::insertarRegistros($sql);
+
+			           $sql2="Update Npordfid set numord='' where numord='".$numord."'";
+			           Herramientas::insertarRegistros($sql2);
+
+			           $data->delete();
+			      }
+			      else { return $this->msj="La Orden ya fue pagada en el Módulo de Bancos";}
+			    }
+		    }
+    }
     else //orden de pago normal
     {
         $c= new Criteria();

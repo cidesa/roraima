@@ -14,6 +14,7 @@
 class pagemiretActions extends autopagemiretActions
 {
 	public  $coderror1=-1;
+	public  $coderror2=-1;
 
 	
   
@@ -37,6 +38,25 @@ class pagemiretActions extends autopagemiretActions
           $this->coderror1=529;
           return false;
       	}
+
+      	$grid=Herramientas::CargarDatosGrid($this, $this->obj,true);
+      	$t=0;
+      	$contador=0;
+		$u=$grid[0];
+	     while ($t<count($u))
+	     {
+           if ($u[$t]["check"]=="1")
+           {
+             $contador++;
+           }
+	       $t++;
+	     }
+
+	     if ($contador==0)
+	     {
+	     	$this->coderror2=548;
+            return false;
+	     }
       }
       return true;
     }else return true;
@@ -171,6 +191,7 @@ $this->Bitacora('Guardo');
      $this->getUser()->setAttribute('formulario',$this->getRequestParameter('formulario'));
      $this->formulario=$this->getRequestParameter('formulario');
      $this->tipo=$this->getUser()->getAttribute('tipo',null,$this->getUser()->getAttribute('formulario'));
+     $this->nomext   = Herramientas::getX('TIPCAU','Cpdoccau','Nomext',$this->tipo);
      $this->concepto = $this->getUser()->getAttribute('concepto',null,$this->getUser()->getAttribute('formulario'));
      $this->tiporet = $this->getUser()->getAttribute('tiporet',null,$this->getUser()->getAttribute('formulario'));
     }
@@ -180,6 +201,7 @@ $this->Bitacora('Guardo');
      $this->tipo='';
      $this->concepto='';
      $this->tiporet='';
+     $this->nomext   = '';
     }
 
     if (isset($opordpag['numord']))
@@ -609,6 +631,11 @@ $this->Bitacora('Guardo');
       {
        $err = Herramientas::obtenerMensajeError($this->coderror1);
        $this->getRequest()->setError('opordpag{fecemi}',$err);
+      }
+      if($this->coderror2!=-1)
+      {
+       $err = Herramientas::obtenerMensajeError($this->coderror2);
+       $this->getRequest()->setError('',$err);
       }
     }
 

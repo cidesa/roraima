@@ -443,7 +443,10 @@
   msj: La fecha no puede estar vacia
 547:
   cod: 547
-  msj: El numero de Cheque debe estar en el rango de la chequera que se encuentre activa  
+  msj: El numero de Cheque debe estar en el rango de la chequera que se encuentre activa
+548:
+  cod: 548
+  msj: Debe seleccionar al menos una orden de Pago.
 3:
   cod: 3
   msj: La contraseña es diferente.
