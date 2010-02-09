@@ -4,8 +4,8 @@
  *
  * @package    Roraima
  * @subpackage presupuesto
- * @author     $Author:(local) $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id:Presupuesto.class.php 34238M 2009-10-23 21:35:13Z (local) $
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
  *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -453,13 +453,14 @@ H::printR($per);
   		$cpniveles = $grid[0];
 
   		foreach($cpniveles as $cpnivel) {
+  		if($cpnivel->getCatpar()!="") {
 			if($cpnivel->getCatpar()=='C') {
 				$contC++;
 			}else {
 				$contP++;
 			}
   		}
-
+  		}
   		if ($cpdefniv->getRupcat()!=$contC) {
 			return 1323;
   		}
@@ -485,7 +486,8 @@ H::printR($per);
 
 	public static function salvarPrenivpre($cpdefniv,$grid,$gridPer) {
 		$cpdefniv->setLoncod(strlen($cpdefniv->getForpre()));
-		$cpdefniv->setPeract('01');
+		$cpdefniv->setCodemp('001');
+        $cpdefniv->setPeract('01');
 		$cpdefniv->setEtadef('A');
 		$cpdefniv->setStaprc('N');
 		$cpdefniv->save();
@@ -515,29 +517,28 @@ H::printR($per);
 	 	$cpperejes = $gridPer[0];
 
 		foreach ($cpperejes as $cppereje) {
-        	$cppereje->setFecini($cpdefniv->getFecini());
-        	$cppereje->setFeccie($cpdefniv->getFeccie());
-          	$cppereje->save();
+			$tablacppereje= new Cppereje();
+        	$tablacppereje->setFecini($cpdefniv->getFecini());
+        	$tablacppereje->setFeccie($cpdefniv->getFeccie());
+        	$tablacppereje->setPereje($cppereje["pereje"]);
+        	$tablacppereje->setFecdes($cppereje["fecdes2"]);
+        	$tablacppereje->setFechas($cppereje["fechas2"]);
+          	$tablacppereje->save();
         }
   	}
 
 /***************************************************************************************************************************************************/
 
   public static function buscaCodigos($clasemodelo){
-
-  	    $c = new Criteria();
-        $c->add(CpdeftitPeer::CODPRE,$clasemodelo->getCodpre());
-        $reg = CpdeftitPeer::doSelect($c);
-
-        if($reg){
-			return true;
-        }else{
-        	if (H::buscarCodigoPadre('codpre', 'cpdeftit', $clasemodelo->getCodpre())){
-				return true;
-        	}else{
-        		return 1307;
-        	}
-        }
+	$formato = Herramientas :: ObtenerFormato('cpdefniv', 'forpre');
+    Herramientas :: FormarCodigoPadre($clasemodelo->getCodpre(), & $nivelcodigo, & $ultimo, $formato);
+	if ( ! (H::buscarCodigoPadre('codpre', 'cpdeftit', $ultimo))){
+	      if ($nivelcodigo == 0) {
+	        return false;
+	      } else
+	        return true;
+	} else
+	      return true;
   }
 
 
@@ -581,6 +582,9 @@ H::printR($per);
 	  		}
 	  	}
 		return -1;
+   }else
+   {
+   		return 1307;
    }
   }
 
@@ -634,7 +638,7 @@ H::printR($per);
 		if ($codN==-1){
 			$codA=self::validarAnoPer($cpasiini);
 			if ($codA==-1){
-				$codE=self::validarEtadef();
+				$codE=self::validarEtadef($cpasiini);
 				if ($codE==-1) {
 					return -1;
 				}else return $codE;
@@ -669,10 +673,14 @@ H::printR($per);
 		return -1;
 	}
 
-	public static function validarEtadef() {
+	public static function validarEtadef($cpasiini) {
 		$etadef=H::getX('CODEMP','cpdefniv','etadef','001');
 
-		if ($etadef=='C') return 1351;
+		if ($etadef=='C')
+		{
+		  if ($cpasiini->getMonasi()>0)  return 1351;
+		  else return -1;
+	    }
 		else return -1;
 	}
 
@@ -680,34 +688,40 @@ H::printR($per);
 		$cpasiinis = $grid[0];
 
 		$cpasiini->setPerpre('00');
-		$cpasiini->setMonprc(H::FormatoMonto(''));
-		$cpasiini->setMoncom(H::FormatoMonto(''));
-		$cpasiini->setMoncau(H::FormatoMonto(''));
-		$cpasiini->setMonpag(H::FormatoMonto(''));
-		$cpasiini->setMontra(H::FormatoMonto(''));
-		$cpasiini->setMontrn(H::FormatoMonto(''));
-		$cpasiini->setMonadi(H::FormatoMonto(''));
-		$cpasiini->setMondim(H::FormatoMonto(''));
-		$cpasiini->setMonaju(H::FormatoMonto(''));
+		$cpasiini->setMonprc(0);
+		$cpasiini->setMoncom(0);
+		$cpasiini->setMoncau(0);
+		$cpasiini->setMonpag(0);
+		$cpasiini->setMontra(0);
+		$cpasiini->setMontrn(0);
+		$cpasiini->setMonadi(0);
+		$cpasiini->setMondim(0);
+		$cpasiini->setMonaju(0);
 		$cpasiini->setMondis($cpasiini->getMonasi());
-		$cpasiini->setDifere(H::FormatoMonto(''));
+		$cpasiini->setDifere(0);
 		$cpasiini->setStatus('A');
 		$cpasiini->save();
 
 		foreach ($cpasiinis as $cpasiini_) {
-			$cpasiini_->setMonprc(H::FormatoMonto(''));
-			$cpasiini_->setMoncom(H::FormatoMonto(''));
-			$cpasiini_->setMoncau(H::FormatoMonto(''));
-			$cpasiini_->setMonpag(H::FormatoMonto(''));
-			$cpasiini_->setMontra(H::FormatoMonto(''));
-			$cpasiini_->setMontrn(H::FormatoMonto(''));
-			$cpasiini_->setMonadi(H::FormatoMonto(''));
-			$cpasiini_->setMondim(H::FormatoMonto(''));
-			$cpasiini_->setMonaju(H::FormatoMonto(''));
-			$cpasiini_->setMondis($cpasiini->getMonasi());
-			$cpasiini_->setDifere(H::FormatoMonto(''));
-			$cpasiini_->setStatus('A');
-			$cpasiini_->save();
+			$tablacpasiini= new Cpasiini();
+			$tablacpasiini->setCodpre($cpasiini->getCodpre());
+ 		    $tablacpasiini->setNompre($cpasiini->getNompre());
+			$tablacpasiini->setAnopre($cpasiini->getAnopre());
+			$tablacpasiini->setPerpre($cpasiini_["perpre"]);
+			$tablacpasiini->setMonasi($cpasiini_["monasi"]);
+			$tablacpasiini->setMonprc(0);
+			$tablacpasiini->setMoncom(0);
+			$tablacpasiini->setMoncau(0);
+			$tablacpasiini->setMonpag(0);
+			$tablacpasiini->setMontra(0);
+			$tablacpasiini->setMontrn(0);
+			$tablacpasiini->setMonadi(0);
+			$tablacpasiini->setMondim(0);
+			$tablacpasiini->setMonaju(0);
+			$tablacpasiini->setMondis($cpasiini_["monasi"]);
+			$tablacpasiini->setDifere(0);
+			$tablacpasiini->setStatus('A');
+			$tablacpasiini->save();
 		}
 		return -1;
 	}
@@ -1626,11 +1640,29 @@ H::printR($per);
 		}return -1;
 	}
 
-	public static function validarPretitpre($clasemodelo,$mascara)
+	public static function validarPretitpre($clasemodelo)
 	{
-		//H::printR($clasemodelo);exit();
-		echo H::VerificarFormatoPadre($clasemodelo->getCodpre(),$mascara);
-		exit();
+		return H::VerificarFormatoPadre($clasemodelo->getCodpre());
+	}
+
+	public static function llenarPer($numper=12,$monasi=0)
+	{
+		$arregloper=array();
+		if ($monasi>0)
+		{
+		  $monto=$monasi/$numper;
+		}
+		$j=0;
+		while ($j<$numper){
+	    if (($j+1)<10){
+         $arregloper[$j]["perpre"]='0'.($j+1); }
+        else {$arregloper[$j]["perpre"]=$j+1;}
+         if ($monasi>0) $arregloper[$j]["monasi"]=number_format($monto,2,',','.');
+         else $arregloper[$j]["monasi"]="0,00";
+         $arregloper[$j]["id"]="";
+         $j++;
+		}
+		return $arregloper;
 	}
 }
 ?>

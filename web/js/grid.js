@@ -345,7 +345,7 @@ function validaMontos(id,obj) {
     var param = null;
     if(tipo=="fila") param = serializeFila(grid,indice,obj.id.split('_')[2],obj);
     else if(tipo=="columna") param = serializeColumna(grid,obj.id.split('_')[1],indice,obj);
-    else if(tipo=="grid") param = serializeGrid(grid,obj);
+    else if(tipo=="grid") param = serializeGrid(grid,obj.id.split('_')[1],obj.id.split('_')[2],obj);
 
     for(i=0;i<adicionales.length;i++) param += '&'+adicionales[0]+'='+$(adicionales[0]).value;
 

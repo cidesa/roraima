@@ -47,10 +47,11 @@ function validarCmbTipo(idActual) {
   	}
 }
 
-function actualizarFormato(id) {
+function actualizarFormato2(id) {
 	$('cpdefniv_forpre').value='';
 
 	var totfil = objs_filas_a.size();
+        alert('total'+totfil);
 	var fila = true;
 	var fil=0;
 

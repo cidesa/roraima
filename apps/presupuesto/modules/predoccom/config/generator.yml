@@ -23,8 +23,9 @@ generator:
         Precompromiso:           [_afeprc]
         Compromiso:              [_afecom]
         Disponibilidad:          [_afedis]
+      hide:   [etadef]
       actions:
         _list:        ~
-        _create:       ~
         _save:        ~
+        _create:       ~
         _delete:      ~

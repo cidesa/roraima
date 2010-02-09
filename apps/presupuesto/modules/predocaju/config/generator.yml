@@ -17,8 +17,9 @@ generator:
       title:                     Ajustes
       display:
         Datos del Documento:     [tipaju, nomext, nomabr, _refier]
+      hide:  [etadef]
       actions:
         _list:        ~
-        _create:      ~
         _save:        ~
+        _create:      ~
         _delete:      ~

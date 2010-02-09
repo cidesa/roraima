@@ -5,8 +5,8 @@
  *
  * @package    Roraima
  * @subpackage preasiini
- * @author     $Author:glagea $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id:actions.class.php 33667 2009-10-01 16:44:01Z glagea $
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
  *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -17,11 +17,40 @@ class preasiiniActions extends autopreasiiniActions
 		return $this->redirect('preasiini/list');
     }
 
+/**
+   * Función principal para el manejo de la accion list
+   * del formulario.
+   *
+   */
+  public function executeList()
+  {
+    $this->processSort();
+
+    $this->processFilters();
+
+    $this->filters = $this->getUser()->getAttributeHolder()->getAll('sf_admin/cpasiini/filters');
+
+
+     // 15    // pager
+    $this->pager = new sfPropelPager('Cpasiini', 15);
+    $c = new Criteria();
+    $c->add(CpasiiniPeer::PERPRE,'00');
+    $this->addSortCriteria($c);
+    $this->addFiltersCriteria($c);
+    $this->pager->setCriteria($c);
+    $this->pager->setPage($this->getRequestParameter('page', 1));
+    $this->pager->init();
+  }
+
 	public function editing() {
-		$this->configGrid();
+	  $mascarapre=Herramientas::ObtenerFormato('Cpdefniv','Forpre');
+      $this->cpasiini->setMascarapre($mascarapre);
+      $this->cpasiini->setLonpre(strlen($mascarapre));
+      $this->cpasiini->setAnopre(date('Y'));
+	  $this->configGrid($this->cpasiini->getMonasi());
 	}
 
-	public function configGrid($reg = array(),$regelim = array()) {
+	public function configGrid($monasi=0,$reg = array()) {
 		$this->params = array();
 
 		if ($this->cpasiini->getId()!='') {
@@ -38,19 +67,41 @@ class preasiiniActions extends autopreasiiniActions
   			$c->addAscendingOrderByColumn(CpasiiniPeer::ANOPRE);
   			$c->addAscendingOrderByColumn(CpasiiniPeer::PERPRE);
     		$reg = CpasiiniPeer::doSelect($c);
-		} else {}
+		}else{ $reg=Presupuesto::llenarPer($this->cpasiini->getNumper(),$monasi);}
 
-		$this->obj = H::getConfigGrid('grid_cpasiini_edit',$reg);
+		$this->obj = H::getConfigGrid(($this->cpasiini->getId()=='' && $this->cpasiini->getAsiper()=='N') ? 'grid_cpasiini_asigN' : 'grid_cpasiini_con');
+		$this->obj = $this->obj[0]->getConfig($reg);
 		$this->params['grid'] = $this->obj;
 	}
 
 	public function executeAjax() {
 		$codigo = $this->getRequestParameter('codigo','');
     	$ajax = $this->getRequestParameter('ajax','');
+    	$cajtexcom = $this->getRequestParameter('cajtexcom','');
+    	$cajtexmos = $this->getRequestParameter('cajtexmos','');
+    	$javascript=""; $dato="";
 
     	switch ($ajax){
       		case '1':
-      			$output = '[["","",""],["","",""],["","",""]]';
+                $longitud=strlen(Herramientas::ObtenerFormato('Cpdefniv','Forpre'));
+                if ($longitud==strlen($codigo))
+                {
+                  $c= new Criteria();
+                  $c->add(CpdeftitPeer::CODPRE,$codigo);
+                  $reg= CpdeftitPeer::doSelectOne($c);
+                  if ($reg)
+                  {
+                  	$dato=$reg->getNompre();
+                  }else{
+                  	$javascript="alert_('El C&oacute;digo Presupuestario no existe'); $('$cajtexcom').value=''; $('$cajtexcom').focus();";
+                  }
+
+                }else{
+                	$javascript="alert_('El C&oacute;digo Presupuestario no es de &Uacute;ltimo Nivel'); $('$cajtexcom').value=''; $('$cajtexcom').focus();";
+                }
+      			$output = '[["javascript","'.$javascript.'",""],["'.$cajtexmos.'","'.$dato.'",""],["","",""]]';
+        	break;
+        	case '2':
         	break;
       		default:
         		$output = '[["","",""],["","",""],["","",""]]';
@@ -65,8 +116,9 @@ class preasiiniActions extends autopreasiiniActions
 
 		if($this->getRequest()->getMethod() == sfRequest::POST) {
 			$this->cpasiini = $this->getCpasiiniOrCreate();
-			$this->configGrid();
-			$grid = Herramientas::CargarDatosGridv2($this,$this->obj);
+			$this->updateCpasiiniFromRequest();
+			$this->configGrid($this->cpasiini->getMonasi());
+			$grid = Herramientas::CargarDatosGridv2($this,$this->obj,true);
 	  		$this->coderr = Presupuesto::validarPreasiini($this->cpasiini,$grid);
 	  		if($this->coderr!=-1) {
 	    		return false;
@@ -80,13 +132,12 @@ class preasiiniActions extends autopreasiiniActions
    *
    */
   public function updateError(){
-    $this->configGrid();
-    $grid = Herramientas::CargarDatosGridv2($this,$this->obj);
-    $this->configGrid($grid[0],$grid[1]);
+    $this->configGrid($this->cpasiini->getMonasi());
+    $grid = Herramientas::CargarDatosGridv2($this,$this->obj,true);
   }
 
   public function saving($clasemodelo){
-  	$grid = Herramientas::CargarDatosGridv2($this,$this->obj);
+  	$grid = Herramientas::CargarDatosGridv2($this,$this->obj,true);
     return Presupuesto::salvarPreasiini($clasemodelo,$grid);
   }
 

@@ -14,9 +14,10 @@ generator:
     edit:
       title:                     Precompromisos
       display:
-        Datos del Documento:     [tipprc, nomext, nomabr]
+        Datos del Documento:     [_tipprc, _nomext, _nomabr]
+      hide:     [etadef]
       actions:
         _list:        ~
-        _create:      ~
         _save:        ~
+        _create:      ~
         _delete:      ~

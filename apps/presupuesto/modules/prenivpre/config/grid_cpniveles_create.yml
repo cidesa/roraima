@@ -17,18 +17,18 @@ opciones:                  # Opciones generales
   titulo:                  Longitud
   tipo:                    t
   nombrecampo:             lonniv
-  html:                    [size="3"  onBlur=actualizarFormato(this.id);]
+  html:                    [size="3" maxlength=2 ]
   esgrabable:              true
-  #ajaxfila:               true
+  ajaxgrid:                true
 3:       # Columna 3
   titulo:                  Nombre Abreviado
   tipo:                    t
   nombrecampo:             nomabr
-  html:                    [size="3"]
+  html:                    [size=3 maxlength=10 onBlur=convertirMayusculas(this.id)]
   esgrabable:              true
 4:       # Columna 4
   titulo:                  Nombre Extendido
   tipo:                    t
   nombrecampo:             nomext
-  html:                    [size="25"]
-  esgrabable:              false
+  html:                    [size=25 maxlength=50 onBlur=convertirMayusculas(this.id)]
+  esgrabable:              true

@@ -44,6 +44,7 @@ tesoreria:
       Ordenes de Pago:                                        PagEmiOrd
       Fondos a Terceros:                                      PagEmiRet
       Enterar Retencion de ISLR:                              TesRetIslr
+      Aprobación de Órdenes de Pago Directas:                 tesaprorddir
     Bancos:
       Emisión de Pagos:                                       TesMovEmiChe
       Recepción de Cheques sin Firma:                         tesfirmascheq
@@ -101,6 +102,6 @@ tesoreria:
     Mantenimiento:
       Actualizar Monto de Retenciones por Orden:              pagmodret
       Cambiar Contraseña:                                     cambiopasswd
-       Configuración de Archivos:                              tspararctex
-       Migración de Movimientos Bancarios:                     migtsmovban
-       Actualizar estatus de cheques para anulación:           TesActEstCheAnu
+      Configuración de Archivos:                              tspararctex
+      Migración de Movimientos Bancarios:                     migtsmovban
+      Actualizar estatus de cheques para anulación:           tesactestcheanu

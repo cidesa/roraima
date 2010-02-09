@@ -5,8 +5,8 @@
  *
  * @package    Roraima
  * @subpackage preaprcom
- * @author     $Author:dmartinez $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id:actions.class.php 34238 2009-10-23 21:35:13Z dmartinez $
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
  *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2

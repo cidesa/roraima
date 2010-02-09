@@ -7,8 +7,8 @@
  *
  * @package    Roraima
  * @subpackage lib.model
- * @author     $Author:lhernandez $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id:Cpdeftit.php 35042 2009-11-26 01:33:34Z lhernandez $
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
  *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -23,6 +23,7 @@ class Cpdeftit extends BaseCpdeftit
   protected $dismon;
   protected $dispor;
   protected $checked="";
+  protected $asigna="";
 
   /*public function getCodigo1(){
    return self::getCodpre();
@@ -51,4 +52,19 @@ class Cpdeftit extends BaseCpdeftit
     public function __toString(){
 	  	return $this->getCodpre();
 	}
+
+  public function getDescta()
+  {
+  return Herramientas::getX('CODCTA','Contabb','Descta',self::getCodcta());
+  }
+
+    public function getAsigna()
+    {
+      $c= new Criteria();
+      $c->add(CpasiiniPeer::CODPRE,self::getCodpre());
+      $reg=CpasiiniPeer::doSelect($c);
+      if ($reg)
+          return $this->asigna='S';
+       else  return  $this->asigna='N';
+    }
 }

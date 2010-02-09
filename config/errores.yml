@@ -1354,7 +1354,7 @@
   msj: El Monto a Asignar no puede ser menor al monto ejecutado.
 1351:
   cod: 1351
-  msj: No puede Grabar ya que la Etapa de Definición está Cerrada.
+  msj: Solo puede grabar la asignación con monto igual a cero.
 1352:
   cod: 1352
   msj: El Codigo introducido no cumple con el Formato Presupuestario.
