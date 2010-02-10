@@ -1054,7 +1054,6 @@ $this->Bitacora('Guardo');
             $this->SalvarBitacora($ideeli ,'Elimino');
             } else { return $this->msg; }
             }
-            }
             else
             {
               if ($tsmovlib[0]["tipmov"]=='ANUC')
