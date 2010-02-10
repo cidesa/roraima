@@ -2186,6 +2186,56 @@ public static function obtenerDiaMesOAno($fecha,$formato,$dmoa)
 		}
 		return '-1';	  
 	}
+
+
+	public static function DiasdeSemana($fecha)
+	{
+    	$fecha = str_replace("/","-",$fecha);
+    	list($dia,$mes,$anio)=explode("-",$fecha);
+
+	    return (((mktime ( 0, 0, 0, $mes, $dia, $anio) - mktime ( 0, 0, 0, 7, 17, 2006))/(60*60*24))+700000) % 7;
+	}
+
+
+	public static function DiasHabiles($FechaIni)
+	{
+	    $FechaFin  = substr($FechaIni,6,4)."/".substr($FechaIni,3,2)."/".substr($FechaIni,0,2);
+	    $dHabil = 0;
+	    while ($dHabil < 25){
+				$FechaFin = H::dateadd("d", 1, $FechaIni,'+');
+	        if (H::DiasdeSemana(H::FormatoFecha($FechaFin)) <> 6 and H::DiasdeSemana(H::FormatoFecha($FechaFin)) <> 0 ){
+	            $dHabil = $dHabil + 1;
+	        }
+	        $FechaIni = $FechaFin;
+	    }
+
+	  return H::FormatoFecha($FechaFin);
+	}
+
+
+	public static function VerificarFormatoPadre($codigo)
+	{
+		$c = new Criteria();
+		$c->addAscendingOrderByColumn(CpnivelesPeer::CONSEC);
+		$reg = CpnivelesPeer::doselect($c);
+		$arr = array();
+		$i=0;
+		$f=0;
+		$error = '-1';
+		foreach($reg as $key => $val)
+		{
+			$posicion = $i==0 ? '' : $arr[$i-1];
+			$arr[] = $posicion+$val->getLonniv()+$f;
+			$f=1;
+			$i++;
+		}
+		if (!in_array(strlen($codigo), $arr))
+		{
+			$error = '1352';
+		}
+		return $error;
+	}
+
    public static function insertarRegistros2($sql)
    {
     //$reg = EmpresaPeer::doCount(new Criteria());
