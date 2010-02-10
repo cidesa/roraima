@@ -396,7 +396,7 @@ class Cheques
                   //$cpimppag->setRefpag($tscheemi->getNumche());
                   $cpimppag->setRefpag($refpag);
                   $cpimppag->setCodpre($opdetord[$k]['codpre']);
-                  if ($monpagado==0 || is_nul($monpagado))
+                  if ($monpagado==0 || is_null($monpagado))
                     $Porcentaje = (($grid[$j]->getMontotalGrid() + $grid[$j]->getMondes()) * 100) / self::Obtener_Monto_Total_Orden($grid[$j]->getNumord());
                   else
                       $Porcentaje = (($grid[$j]->getMontotalGrid()) * 100) / self::Obtener_Monto_Total_Orden($grid[$j]->getNumord());
@@ -706,7 +706,7 @@ class Cheques
           $Porcentaje =  (($Monto + $MontDcto) * 100) / (($x[$j]->getMonord()-self::ObtenerAjuste($x[$j]->getNumord())) - $x[$j]->getMonret());
           else
           $Porcentaje =  (($Monto) * 100) / (($x[$j]->getMonord()-self::ObtenerAjuste($x[$j]->getNumord())) - $x[$j]->getMonret());
-      
+
             $OrdenDePago = $x[$j]->getNumord();
             if (trim($despag)!= "")
             $DescOp = $despag;
