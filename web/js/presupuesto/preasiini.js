@@ -49,3 +49,18 @@ function generarMonasig() {
         j++;
     }
 }
+
+function distribuyePer(e,id) {
+    formatoDecimal(e,id);
+
+	var monto = toFloat('cpasiini_monasi');
+	var pereje=parseInt($('cpasiini_numper').value);
+    var montoPeriodo=monto/pereje;
+
+    j=0;
+    while (j<pereje) {
+    	idActual = "ax_"+j+"_"+'2';
+    	$(idActual).value=format(montoPeriodo.toFixed(2),'.',',','.');
+        j++;
+    }
+}
