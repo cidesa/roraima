@@ -26,7 +26,7 @@
     var defcod='<? echo $cpdefniv->getDefcod();?>';
     var nuevo='<? echo $cpdefniv->getId();?>';
     var etadef='<? echo $cpdefniv->getEtadef();?>';
-    if (nuevo!="" && defcod=='S' && etadef=='C')
+    if (nuevo!="" && defcod=='S')
     {
       $('save').hide();
     }
