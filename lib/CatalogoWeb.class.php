@@ -3579,28 +3579,36 @@ $this->c= new Criteria();
       NptipconPeer :: DESTIPCON => 'Descripción'
     );
   }
-    public function Presnomasicompre_npasipre($param) {
-      $c= new Criteria();
-      $c->add(NpasiprePeer::CODCON,$param[0]);
-      $rs = NPasiprePeer::doSelectone($c);
 
-    $this->c = new Criteria();
-    if($rs)
-      $this->c->add(NpasiprePeer::CODCON,$param[0]);
+	public function Presnomasicompre_npasipre($param) {
+		$c = new Criteria();
+		$c->add(NpasiprePeer :: CODCON, $param[0]);
+		$rs = NPasiprePeer :: doSelectone($c);
 
-      $this->c->addSelectColumn("'' AS CODCON");
-      $this->c->addSelectColumn(NpasiprePeer::CODASI);
-    $this->c->addSelectColumn(NpasiprePeer::DESASI);
-      $this->c->addSelectColumn("max(ID) AS ID");
+		$this->c = new Criteria();
+		if ($rs)
+			$this->c->add(NpasiprePeer :: CODCON, $param[0]);
 
-      $this->c->addGroupByColumn(NpasiprePeer::CODASI);
-      $this->c->addGroupByColumn(NpasiprePeer::DESASI);
+		$this->c->addSelectColumn("'' AS CODCON");
+		$this->c->addSelectColumn(NpasiprePeer :: CODASI);
+		$this->c->addSelectColumn(NpasiprePeer :: DESASI);
+		$this->c->addSelectColumn(NpasiprePeer :: TIPASI);
+		$this->c->addSelectColumn(NpasiprePeer :: AFEALIBV);
+        $this->c->addSelectColumn(NpasiprePeer :: AFEALIBF);
+		$this->c->addSelectColumn("max(ID) AS ID");
 
-      $this->columnas = array (
-        NpasiprePeer :: CODASI => 'Código Grupo',
-        NpasiprePeer :: DESASI => 'Descripción'
-      );
-    }
+		$this->c->addGroupByColumn(NpasiprePeer :: CODASI);
+		$this->c->addGroupByColumn(NpasiprePeer :: DESASI);
+		$this->c->addGroupByColumn(NpasiprePeer :: TIPASI);
+		$this->c->addGroupByColumn(NpasiprePeer :: AFEALIBV);
+		$this->c->addGroupByColumn(NpasiprePeer :: AFEALIBF);
+
+		$this->columnas = array (
+			NpasiprePeer :: CODASI => 'Código Grupo',
+			NpasiprePeer :: DESASI => 'Descripción'
+		);
+	}
+
 
 
       public function Npdefcpt_Presnomasiconpre_codnom($params = array ()){
