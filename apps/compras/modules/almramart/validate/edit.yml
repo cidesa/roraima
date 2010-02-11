@@ -8,7 +8,7 @@ names:
   caramart{ramart}:
     required:  Yes
     required_msg: El Código no puedo estar en Blanco
-    validators: Validator_ramart, CorrelValidator
+    validators: Validator_ramart#, CorrelValidator
 
   caramart{nomram}:
     required:  Yes
