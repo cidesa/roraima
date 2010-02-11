@@ -3,7 +3,6 @@ methods:
    - "atciudadano{cedciu}"
    - "atciudadano{nomciu}"
    - "atciudadano{apeciu}"
-   - "atciudadano{tipo}"
    - "atciudadano{fecnac}"
    - "atciudadano{sexo}"
    - "atciudadano{sector}"
@@ -29,11 +28,6 @@ names:
     required:  Yes
     required_msg: Este campo es requerido
     validators: MyStringValidator2
-
-  atciudadano{tipo}:
-    required:  Yes
-    required_msg: Este campo es requerido
-    validators: MyStringValidator3
 
   atciudadano{fecnac}:
     required:  Yes

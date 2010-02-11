@@ -122,10 +122,10 @@ class aciciudadanoActions extends autoaciciudadanoActions
 
     if($this->getRequest()->getMethod() == sfRequest::POST){
 
-      $this->atciudadanos= $this->getAtciudadanosOrCreate();
-      $this->updateAtciudadanosFromRequest();
+      $this->atciudadano = $this->getAtciudadanoOrCreate();
+      $this->updateAtciudadanoFromRequest();
 
-      $prefijo = substr($this->atciudadanos->getCedciu(), 0, 1);
+      $prefijo = substr($this->atciudadano->getCedciu(), 0, 1);
       if($prefijo!='0' && $prefijo!='1' && $prefijo!='2' && $prefijo!='3' && $prefijo!='4' && $prefijo!='5' && $prefijo!='6' && $prefijo!='7' && $prefijo!='8' && $prefijo!='9' && $prefijo!='R'){
         $this->coderr = 1403;
         return false;
@@ -167,7 +167,7 @@ class aciciudadanoActions extends autoaciciudadanoActions
   public function saving($clasemodelo)
   {
     $this->configGrid();
-
+    $clasemodelo->setTipo('P');
     $gridgrufam = Herramientas::CargarDatosGridv2($this,$this->obj);
 
     return Ciudadanos::salvarAciciudadano($clasemodelo,$gridgrufam);
