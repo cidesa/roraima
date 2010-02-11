@@ -265,9 +265,14 @@
 
 <div id="divGrid">
 <form name="form1" id="form1">
-<?
-echo grid_tag($obj);
-?>
+
+
+<table width="100%">
+  <tr>
+    <th><strong><font color="#CC0000" size="3" face="Verdana, Arial, Helvetica, sans-serif"> <? echo __('Si el Empleado no tiene asociado ningun concepto el sistema por defecto traera marcado todos los conceptos')?></font></strong></th>
+  </tr>
+</table>
+<? echo grid_tag($obj); ?>
 </form>
 </div>
 
