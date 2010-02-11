@@ -97,7 +97,9 @@ $this->Bitacora('Guardo');
           }
           else
           {
+          	if ($this->tscheemi->getId())
             return $this->redirect('tesmovemiche/edit?impche=S&numches='.$this->arraynumche.'&numcues='.$this->arraynumcue.'&id='.$this->tscheemi->getId().'&numcomegr='.$this->tscheemi->getNumcomegr());
+            else return $this->redirect('tesmovemiche/edit?impche=S&numches='.$this->arraynumche.'&numcues='.$this->arraynumcue.'&numcomegr='.$this->tscheemi->getNumcomegr());
           }
      }
     else
