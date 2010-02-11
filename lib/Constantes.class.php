@@ -58,7 +58,7 @@ class Constantes
     {return array('S' => 'S', 'M' => 'M', 'L' => 'L', 'XL' => 'XL', 'XXL' => 'XXL', 'XXXL' => 'XXXL');}
 
     public static function ListaGrupoSanguineo()
-    {return array('ARH+' => 'ARH+', 'ARH-' => 'ARH-', 'BRH+' => 'BRH+', 'BRH-' => 'BRH-', 'ABRH+' => 'ABRH+', 'ABRH-' => 'ABRH-', 'ORH+' => 'ORH+');}
+    {return array('ARH+' => 'ARH+', 'ARH-' => 'ARH-', 'BRH+' => 'BRH+', 'BRH-' => 'BRH-', 'ABRH+' => 'ABRH+', 'ABRH-' => 'ABRH-', 'ORH+' => 'ORH+', 'ORH-' => 'ORH-');}
 
     public static function ListaGrupoLaboral()
     {return array('0001' => 'Fijo', '0002' => 'Contratado', '0003' => 'Pasantia', '0004' => 'Periodo de Prueba');}
