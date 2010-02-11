@@ -8,7 +8,7 @@ names:
   caramart{ramart}:
     required:  Yes
     required_msg: El Código no puedo estar en Blanco
-    validators: Validator_ramart#, CorrelValidator
+    validators: Validator_ramart
 
   caramart{nomram}:
     required:  Yes
@@ -29,13 +29,3 @@ Validator_nomram:
         min_error: La descripción no puede tener menos de 2 caracteres
         max:       99
         max_error: La descripción no puede pasar mas de 100 caracteres
-
-CorrelValidator:
-    class: CidesaStringValidator
-    param:
-        values:    [ '/^[0-9]*$/' ]
-        values_error: Los Correlativos solo puede contener valores númericos
-
-
-
-
