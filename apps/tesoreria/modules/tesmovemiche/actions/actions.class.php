@@ -1527,20 +1527,30 @@ $this->Bitacora('Guardo');
           return false;
        }
      }
+	 
 	 $c = new Criteria();
-	 $c->add(TsdefchequeraPeer::NUMCUE,$this->tscheemi->getNumcue());
-	 $c->add(TsdefchequeraPeer::ACTIVA,'SI');
-	 $objp = TsdefchequeraPeer::doSelectOne($c);
-	 if($objp)
-	 {
-	 	if($objp->getNumchedes()>$this->tscheemi->getNumche() || $objp->getNumchehas()<$this->tscheemi->getNumche())
-		{			
-			$this->coderror2=547;
-			return false;
+	 $c->add(TstipmovPeer::CODTIP,$this->getRequestParameter('tscheemi[tipdoc]'));
+	 $rsc = TstipmovPeer::doSelectOne($c);
+	 if($rsc)
+	 	if($rsc->getEscheque()=='t' || $rsc->getEscheque()==true)
+		{
+			 $c = new Criteria();
+			 $c->add(TsdefchequeraPeer::NUMCUE,$this->tscheemi->getNumcue());
+			 $c->add(TsdefchequeraPeer::ACTIVA,'SI');
+			 $objp = TsdefchequeraPeer::doSelectOne($c);
+			 if($objp)
+			 {
+			 	if($objp->getNumchedes()>$this->tscheemi->getNumche() || $objp->getNumchehas()<$this->tscheemi->getNumche())
+				{
+					$this->coderror2=547;
+					return false;
+				}
+		
+			 }		
 		}
-			
-	 }
-	
+	 
+	 
+
       return true;
     }else return true;
   }
