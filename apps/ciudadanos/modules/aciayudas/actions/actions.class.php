@@ -429,6 +429,7 @@ class aciayudasActions extends autoaciayudasActions
   {
     $this->updateError();
 
+    $this->params = array();
 
     $this->labels = $this->getLabels();
     if($this->getRequest()->getMethod() == sfRequest::POST)

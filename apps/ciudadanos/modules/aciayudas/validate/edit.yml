@@ -77,5 +77,5 @@ validadorexistencia:
     class: CidesaExistValidator
     param:
         class:     Atciudadano
-        column:    cedciu
+        column:    id
         unique_error: La cédula del beneficiario no existe. Por Favor verifique la información.
