@@ -19,6 +19,6 @@ class Tsdefchequera extends BaseTsdefchequera
 
     public function afterHydrate()
     {
-      $this->canche=self::getNumchehas()-self::getNumchedes();
+      $this->canche=self::getNumchehas()-self::getNumchedes()+1;
 	}
 }
