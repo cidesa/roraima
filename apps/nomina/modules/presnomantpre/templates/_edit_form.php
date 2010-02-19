@@ -139,7 +139,7 @@
   'control_name' => 'npantpre[monant]',
   'onChange' => "javascript:event.keyCode=13;return entermonantotro(event,this.id)",
     'onBlur'=> remote_function(array(
-      'condition' =>  "$('npantpre_monant').value != '0,00'  && $('id').value == ''",
+      'condition' =>  "$('npantpre_monant').value != '0,00'  && $('npantpre_monant').value != '0' && $('id').value == ''",
       'update'   => 'mensaje',
       'url'      => 'presnomantpre/ajax',
       'complete' => 'AjaxJSON(request, json)',
@@ -155,7 +155,7 @@
   <?php  echo input_tag('npantpre_pormon','0',array(
   	'size' => 2,
   	'onBlur'=> remote_function(array(
-      'condition' =>  "$('npantpre_pormon').value != '0,00'  && $('id').value == ''",
+      'condition' =>  "$('npantpre_pormon').value != '0,00'  && $('npantpre_pormon').value != '0' && $('id').value == ''",
       'update'   => 'mensaje',
       'url'      => 'presnomantpre/ajax',
       'complete' => 'AjaxJSON(request, json)',
