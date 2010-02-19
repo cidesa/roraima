@@ -659,6 +659,7 @@ private static $coderror=-1;
    */
   public function validateEdit()
     {
+      $this->desincorp='';
       if($this->getRequest()->getMethod() == sfRequest::POST)
       {
         $this->bnregmue = $this->getBnregmueOrCreate();
