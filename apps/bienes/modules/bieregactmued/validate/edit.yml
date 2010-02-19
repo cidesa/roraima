@@ -38,7 +38,7 @@ names:
 
   bnregmue{ordcom}:
     required:  no
-    validators: ExistValidator_ordcom
+    #validators: ExistValidator_ordcom
 
   bnregmue{codpro}:
     required:  no
