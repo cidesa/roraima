@@ -2837,7 +2837,7 @@ $this->c= new Criteria();
     //$sql="select a.CodAct as codigo_nivel,a.DesAct as activo From BNDEFACT a, BNDEFINS b where length(RTrim(a.CodAct))=b.LonAct And codact like '1%%' Order By CodAct";
 
     $this->c = new Criteria();
-    $this->sql = "BNDEFINS.LonAct=length(RTrim(BNDEFACT.CodAct)) and  (codact like '1%%' or codact like '01%%')";
+    $this->sql = "cast (BNDEFINS.LonAct as integer)=length(RTrim(BNDEFACT.CodAct)) and  (codact like '1%%' or codact like '01%%')";
     $this->c->add(BndefinsPeer :: LONACT, $this->sql, Criteria :: CUSTOM);
     $this->c->addAscendingOrderByColumn(BndefactPeer :: CODACT);
 
