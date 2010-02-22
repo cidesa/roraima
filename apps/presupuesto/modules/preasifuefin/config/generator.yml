@@ -27,7 +27,7 @@ generator:
         NONE:                          [ codpre, nompre, anopre, monasi, monmov]
         Fuente de Financiamiento:      [ _gripfuefin]
       fields:
-        codpre:    { params: maxlength=32 size=32 readonly=true}
+        codpre:    { params: maxlength=32  readonly=true}
         nompre:    { type: textarea_tag, params: size=30x3 maxlength=254 readonly=true}
       actions:
         _list:        ~
