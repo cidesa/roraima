@@ -22,3 +22,9 @@
   'class' => 'sf_admin_action_create',
 )) ?></li>
   </ul>
+
+<script language="JavaScript" type="text/javascript">
+ var tieregrel='<?php echo $tsdefban->getTiedatrel(); ?>';
+  if (tieregrel=='S') $('save').hide();
+</script>
+

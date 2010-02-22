@@ -81,6 +81,34 @@ $this->Bitacora('Guardo');
    $this->mascaraubi = Herramientas::ObtenerFormato('Opdefemp','Forubi');
    $this->lonubi=strlen($this->mascaraubi);
   }
+
+    public function executeDelete()
+  {
+    $this->bnubica = BnubicaPeer::retrieveByPk($this->getRequestParameter('id'));
+    $this->forward404Unless($this->bnubica);
+
+    try
+    {
+      $c= new Criteria();
+      $c->add(OpordpagPeer::CODUNI,$this->bnubica->getCodubi());
+      $reg= OpordpagPeer::doSelectOne($c);
+      if (!$reg){
+      $this->deleteBnubica($this->bnubica);
+      $this->Bitacora('Elimino');
+      }else {
+      	$this->getRequest()->setError('delete', 'No se pudo borrar la registro seleccionado. Asegúrese de que no tiene ningún tipo de registros asociados.');
+        return $this->forward('tesdesubi', 'list');
+      }
+    }
+    catch (PropelException $e)
+    {
+      $this->getRequest()->setError('delete', 'No se pudo borrar la registro seleccionado. Asegúrese de que no tiene ningún tipo de registros asociados.');
+      return $this->forward('tesdesubi', 'list');
+    }
+
+    return $this->redirect('tesdesubi/list');
+  }
+
 }
 
 

@@ -28,7 +28,7 @@
   <?php endif; ?>
 
   <?php $value = object_input_tag($bnubica, 'getCodubi', array (
-  'size' => 7,
+  'size' => 15,
   'maxlength' => $lonubi,
   'control_name' => 'bnubica[codubi]',
   'readonly'  =>  $bnubica->getId()!='' ? true : false ,

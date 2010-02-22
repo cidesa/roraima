@@ -196,4 +196,22 @@ $this->Bitacora('Guardo');
 	  $this->mascaracontabilidad = Herramientas::ObtenerFormato('Contaba','Forcta');
 	  $this->loncta=strlen($this->mascaracontabilidad);
 	}
+
+  protected function saveOptipret($optipret)
+  {
+    if (!$optipret->getId()) {$optipret->save(); }
+    else {
+    	if ($optipret->getTiedatrel()=='S')
+    	{
+    		$a= new Criteria();
+    		$a->add(OptipretPeer::CODTIP,$optipret->getCodtip());
+    		$reg= OptipretPeer::doSelectOne($a);
+    		if ($reg){
+    			$reg->setCodcon($optipret->getCodcon());
+    			$reg->save();
+    		}
+    	}else $optipret->save();
+    }
+
+  }
 }

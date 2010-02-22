@@ -32,7 +32,7 @@
   <?php $value = object_input_tag($optipret, 'getCodtip', array (
   'size' => 20,
   'maxlength'=>3,
-  'readonly'  =>  $optipret->getId()!='' ? true : false ,
+  'readonly'  =>  true,
   'control_name' => 'optipret[codtip]',
   'onKeyPress' => "javascript:cadena=this.value;cadena=cadena.toUpperCase();document.getElementById('optipret_codtip').value=cadena",
   'onBlur'  => "javascript: valor=this.value; valor=valor.pad(3, '0',0);document.getElementById('optipret_codtip').value=valor;",
