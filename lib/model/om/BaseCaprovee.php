@@ -188,6 +188,12 @@ abstract class BaseCaprovee extends BaseObject  implements Persistent {
 	protected $lastCaordcomCriteria = null;
 
 	
+	protected $collCacotizas;
+
+	
+	protected $lastCacotizaCriteria = null;
+
+	
 	protected $alreadyInSave = false;
 
 	
@@ -1175,6 +1181,14 @@ abstract class BaseCaprovee extends BaseObject  implements Persistent {
 				}
 			}
 
+			if ($this->collCacotizas !== null) {
+				foreach($this->collCacotizas as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
+
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
@@ -1232,6 +1246,13 @@ abstract class BaseCaprovee extends BaseObject  implements Persistent {
 					}
 				}
 
+				if ($this->collCacotizas !== null) {
+					foreach($this->collCacotizas as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
 
 			$this->alreadyInValidation = false;
 		}
@@ -1791,6 +1812,10 @@ abstract class BaseCaprovee extends BaseObject  implements Persistent {
 				$copyObj->addCaordcom($relObj->copy($deepCopy));
 			}
 
+			foreach($this->getCacotizas() as $relObj) {
+				$copyObj->addCacotiza($relObj->copy($deepCopy));
+			}
+
 		} 
 
 		$copyObj->setNew(true);
@@ -2059,6 +2084,146 @@ abstract class BaseCaprovee extends BaseObject  implements Persistent {
 		$this->lastCaordcomCriteria = $criteria;
 
 		return $this->collCaordcoms;
+	}
+
+
+	
+	public function getCaordcomsJoinTsdesmon($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseCaordcomPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCaordcoms === null) {
+			if ($this->isNew()) {
+				$this->collCaordcoms = array();
+			} else {
+
+				$criteria->add(CaordcomPeer::CODPRO, $this->getCodpro());
+
+				$this->collCaordcoms = CaordcomPeer::doSelectJoinTsdesmon($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(CaordcomPeer::CODPRO, $this->getCodpro());
+
+			if (!isset($this->lastCaordcomCriteria) || !$this->lastCaordcomCriteria->equals($criteria)) {
+				$this->collCaordcoms = CaordcomPeer::doSelectJoinTsdesmon($criteria, $con);
+			}
+		}
+		$this->lastCaordcomCriteria = $criteria;
+
+		return $this->collCaordcoms;
+	}
+
+	
+	public function initCacotizas()
+	{
+		if ($this->collCacotizas === null) {
+			$this->collCacotizas = array();
+		}
+	}
+
+	
+	public function getCacotizas($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseCacotizaPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCacotizas === null) {
+			if ($this->isNew()) {
+			   $this->collCacotizas = array();
+			} else {
+
+				$criteria->add(CacotizaPeer::CODPRO, $this->getCodpro());
+
+				CacotizaPeer::addSelectColumns($criteria);
+				$this->collCacotizas = CacotizaPeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(CacotizaPeer::CODPRO, $this->getCodpro());
+
+				CacotizaPeer::addSelectColumns($criteria);
+				if (!isset($this->lastCacotizaCriteria) || !$this->lastCacotizaCriteria->equals($criteria)) {
+					$this->collCacotizas = CacotizaPeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastCacotizaCriteria = $criteria;
+		return $this->collCacotizas;
+	}
+
+	
+	public function countCacotizas($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/om/BaseCacotizaPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(CacotizaPeer::CODPRO, $this->getCodpro());
+
+		return CacotizaPeer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addCacotiza(Cacotiza $l)
+	{
+		$this->collCacotizas[] = $l;
+		$l->setCaprovee($this);
+	}
+
+
+	
+	public function getCacotizasJoinTsdesmon($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseCacotizaPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCacotizas === null) {
+			if ($this->isNew()) {
+				$this->collCacotizas = array();
+			} else {
+
+				$criteria->add(CacotizaPeer::CODPRO, $this->getCodpro());
+
+				$this->collCacotizas = CacotizaPeer::doSelectJoinTsdesmon($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(CacotizaPeer::CODPRO, $this->getCodpro());
+
+			if (!isset($this->lastCacotizaCriteria) || !$this->lastCacotizaCriteria->equals($criteria)) {
+				$this->collCacotizas = CacotizaPeer::doSelectJoinTsdesmon($criteria, $con);
+			}
+		}
+		$this->lastCacotizaCriteria = $criteria;
+
+		return $this->collCacotizas;
 	}
 
 } 
