@@ -16,6 +16,7 @@
 class Bnubica extends BaseBnubica
 {
   private $genera= '';
+  protected $tiedatrel="";
 
   public function getGenera()
   {
@@ -37,4 +38,23 @@ class Bnubica extends BaseBnubica
   {
   	return self::getDesubi();
   }
+
+  public function getTiedatrel()
+  {
+  	  $valor="N";
+  	  $d= new Criteria();
+  	  $d->add(OpordpagPeer::CODUNI,self::getCodubi());
+  	  $resul= OpordpagPeer::doSelectOne($d);
+  	  if ($resul)
+  	  {
+  	  	$valor= 'S';
+  	  } else $valor= 'N';
+  	return $valor;
+  }
+
+  public function setTiedatrel()
+  {
+  	return $this->tiedatrel;
+  }
+
 }
