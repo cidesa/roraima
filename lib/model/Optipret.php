@@ -17,6 +17,7 @@ class Optipret extends BaseOptipret
 {
   private $base = '';
   private $montorete = '';
+  protected $tiedatrel="";
 
   public function getDescta()
   {
@@ -123,5 +124,48 @@ class Optipret extends BaseOptipret
   {
     if($val) return number_format($this->factor,4,',','.');
     else return $this->factor;
+  }
+
+
+    public function getTiedatrel()
+  {
+  	  $valor="N";
+  	  $d= new Criteria();
+  	  $d->add(OpretconPeer::CODTIP,self::getCodtip());
+  	  $resul= OpretconPeer::doSelectOne($d);
+  	  if ($resul)
+  	  {
+  	  	$valor= 'S';
+  	  }else {
+  	  $d= new Criteria();
+  	  $d->add(TsretivaPeer::CODRET,self::getCodtip());
+  	  $resul= TsretivaPeer::doSelectOne($d);
+  	  if ($resul)
+  	  {
+  	  	$valor= 'S';
+  	  }else {
+  	  	  $d= new Criteria();
+	  	  $d->add(TsrepretPeer::CODRET,self::getCodtip());
+	  	  $resul= TsrepretPeer::doSelectOne($d);
+	  	  if ($resul)
+	  	  {
+	  	  	$valor= 'S';
+	  	  }else{
+	  	  	  $d= new Criteria();
+		  	  $d->add(OpretordPeer::CODTIP,self::getCodtip());
+		  	  $resul= OpretordPeer::doSelectOne($d);
+		  	  if ($resul)
+		  	  {
+		  	  	$valor= 'S';
+		  	  }
+	  	  }
+  	  }
+  	  }
+  	return $valor;
+  }
+
+  public function setTiedatrel()
+  {
+  	return $this->tiedatrel;
   }
 }

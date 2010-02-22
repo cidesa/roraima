@@ -17,6 +17,7 @@ class Tsdefcajchi extends BaseTsdefcajchi
 {
 
    protected $longitud="";
+   protected $tiedatrel="";
 
    public function getLongitud()
    {
@@ -53,5 +54,23 @@ class Tsdefcajchi extends BaseTsdefcajchi
     {
         return Herramientas::getX('tipcau','Cpdoccau','nomext',self::getTipcau());
     }
+
+  public function getTiedatrel()
+  {
+  	  $valor="N";
+  	  $d= new Criteria();
+  	  $d->add(OpordpagPeer::CODCAJCHI,self::getCodcaj());
+  	  $resul= OpordpagPeer::doSelectOne($d);
+  	  if ($resul)
+  	  {
+  	  	$valor= 'S';
+  	  } else $valor= 'N';
+  	return $valor;
+  }
+
+  public function setTiedatrel()
+  {
+  	return $this->tiedatrel;
+  }
 
 }
