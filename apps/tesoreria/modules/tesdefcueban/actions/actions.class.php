@@ -699,44 +699,4 @@ $this->Bitacora('Guardo');
 
      $tsdefban->delete();
    }
-
-    /**
-   * Función principal para procesar la eliminación de registros 
-   * en el formulario.
-   *
-   */
-  public function executeDelete()
-  {
-    $this->tsdefban = TsdefbanPeer::retrieveByPk($this->getRequestParameter('id'));
-    $this->forward404Unless($this->tsdefban);
-
-    $id=$this->getRequestParameter('id');
-    $c= new Criteria();
-    $c->add(TsmovlibPeer::NUMCUE,$this->tsdefban->getNumcue());
-    $dato=TsmovlibPeer::doSelect($c);
-    if (!$dato)
-    {
-      $c= new Criteria();
-      $c->add(TsmovbanPeer::NUMCUE,$this->tsdefban->getNumcue());
-      $dato2=TsmovbanPeer::doSelect($c);
-      if (!$dato2)
-      {
-      	$this->deleteTsdefban($this->tsdefban);
-      	$this->Bitacora('Elimino');
-      }
-      else
-      {
-      	$this->setFlash('notice','El Banco no puede ser eliminado, porque hay Movimientos asociados');
-      return $this->redirect('tesdefcueban/edit?id='.$id);
-      }
-    }
-    else
-    {
-      $this->setFlash('notice','El Banco no puede ser eliminado, porque hay Movimientos asociados');
-      return $this->redirect('tesdefcueban/edit?id='.$id);
-    }
-
-    return $this->redirect('tesdefcueban/list');
-  }
-
 }

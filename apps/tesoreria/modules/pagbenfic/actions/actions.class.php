@@ -244,31 +244,4 @@ $this->Bitacora('Guardo');
   }
   }
 
-   /**
-   * Función principal para procesar la eliminación de registros 
-   * en el formulario.
-   *
-   */
-  public function executeDelete()
-  {
-    $this->opbenefi = OpbenefiPeer::retrieveByPk($this->getRequestParameter('id'));
-    $this->forward404Unless($this->opbenefi);
-
-    $id=$this->getRequestParameter('id');
-    $c= new Criteria();
-    $c->add(OpordpagPeer::CEDRIF,$this->opbenefi->getCedrif());
-    $dato=OpordpagPeer::doSelect($c);
-    if (!$dato)
-    {
-      $this->deleteOpbenefi($this->opbenefi);
-      $this->Bitacora('Elimino');
-    }
-    else
-    {
-      $this->setFlash('notice','El Beneficiario no puede ser eliminado, porque esta asociado a una Orden de Pago');
-      return $this->redirect('pagbenfic/edit?id='.$id);
-    }
-    return $this->redirect('pagbenfic/list');
-  }
-
 }

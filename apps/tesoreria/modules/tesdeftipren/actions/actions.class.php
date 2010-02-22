@@ -52,42 +52,4 @@ $this->Bitacora('Guardo');
     }
   }
 
-  /**
-   * Función principal para procesar la eliminación de registros 
-   * en el formulario.
-   *
-   */
-  public function executeDelete()
-  {
-    $this->tstipren = TstiprenPeer::retrieveByPk($this->getRequestParameter('id'));
-    $this->forward404Unless($this->tstipren);
-
-   //verificar si existe algun banco con ese tipo de rendimiento
-   $c = new Criteria();
-   $c->add(TsdefbanPeer::TIPREN,$this->tstipren->getCodtip());
-   $datos=TsdefbanPeer::doSelectOne($c);
-   if ($datos)//no se puede eliminar
-     {
-     	$menerr = "El Tipo de Rendimiento ". $this->tstipren->getCodtip() .", no puede ser eliminado ya que esta asociado a Bancos";
-	    $this->getRequest()->setError('delete', $menerr);
-	    return $this->forward('tesdeftipren', 'list');
-     }
-     else
-     {
-     	 try
-	    {
-	      $this->deleteTstipren($this->tstipren);
-	      $this->Bitacora('Elimino');
-	    }
-	    catch (PropelException $e)
-	    {
-	      $this->getRequest()->setError('delete', 'Could not delete the selected Tstipren. Make sure it does not have any associated items.');
-	      return $this->forward('tesdeftipren', 'list');
-	    }
-
-	    return $this->redirect('tesdeftipren/list');
-
-     }//else if (Articulos::Hay_movimientos
-  }
-
 }

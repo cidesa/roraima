@@ -131,7 +131,16 @@
 )) ?><?php endif; ?>
 </li>
   </ul>
-<script >
+<script language="JavaScript" type="text/javascript">
+ var tieregrel='<?php echo $tstipmov->getTiedatrel(); ?>';
+ var nuevo='<?php echo $tstipmov->getId(); ?>';
+  if (nuevo!="" && tieregrel=='S') {
+    $('tstipmov_destip').readOnly=true;
+     $('tstipmov_debcre_D').disabled=true;
+     $('tstipmov_debcre_C').disabled=true;
+     $('tstipmov_escheque').disabled=true;
+  }
+
 var nav4 = window.Event ? true : false;
 function IsNumber(evt){
 // Backspace = 8, Enter = 13, ‘0′ = 48, ‘9′ = 57

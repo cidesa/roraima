@@ -68,44 +68,6 @@ class tesdeftipmovActions extends autotesdeftipmovActions
     }
   }
 
-  /**
-   * Función principal para procesar la eliminación de registros 
-   * en el formulario.
-   *
-   */
-  public function executeDelete()
-  {
-    $this->tstipmov = TstipmovPeer::retrieveByPk($this->getRequestParameter('id'));
-    $this->forward404Unless($this->tstipmov);
-
-    $id=$this->getRequestParameter('id');
-    $c= new Criteria();
-    $c->add(TsmovlibPeer::TIPMOV,$this->tstipmov->getCodtip());
-    $dato=TsmovlibPeer::doSelect($c);
-    if (!$dato)
-    {
-      $c= new Criteria();
-      $c->add(TsmovbanPeer::TIPMOV,$this->tstipmov->getCodtip());
-      $dato2=TsmovbanPeer::doSelect($c);
-      if (!$dato2)
-      {
-      	$this->deleteTstipmov($this->tstipmov);
-      	$this->Bitacora('Elimino');
-      }
-      else
-      {
-      	$this->setFlash('notice','El Movimiento no puede ser eliminado, porque hay Movimientos de Bancos asociados a este');
-      return $this->redirect('tesdeftipmov/edit?id='.$id);
-      }
-    }
-    else
-    {
-      $this->setFlash('notice','El Movimiento no puede ser eliminado, porque hay Movimientos de Libros asociados a este');
-      return $this->redirect('tesdeftipmov/edit?id='.$id);
-    }
-    return $this->redirect('tesdeftipmov/list');
-  }
-
     /**
    * Función para procesar _todas_ las funciones Ajax del formulario
    * Cada función esta identificada con el valor de la vista "ajax"
@@ -185,4 +147,24 @@ class tesdeftipmovActions extends autotesdeftipmovActions
       $this->tstipmov->setCodcon($tstipmov['codcon']);
     }
   }
+
+  protected function saveTstipmov($tstipmov)
+  {
+   if (!$tstipmov->getId()){  $tstipmov->save();}
+   else {
+   	if ($tstipmov->getTiedatrel()=='S')
+   	{
+      $c= new Criteria();
+      $c->add(TstipmovPeer::CODTIP,$tstipmov->getCodtip());
+      $reg= TstipmovPeer::doSelectOne($c);
+      if ($reg)
+      {
+      	$reg->setCodcon($tstipmov->getCodcon());
+      	$reg->save();
+      }
+   	}else $tstipmov->save();
+   }
+
+  }
+
 }

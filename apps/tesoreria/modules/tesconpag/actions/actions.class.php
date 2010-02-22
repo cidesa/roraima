@@ -229,7 +229,11 @@ class tesconpagActions extends autotesconpagActions
    */
   public function deleting($clasemodelo)
   {
-    return parent::deleting($clasemodelo);
+    $c= new Criteria();
+    $c->add(OpordpagPeer::CODCONCEPTO,$clasemodelo->getCodconcepto());
+    $reg= OpordpagPeer::doSelectOne($c);
+    if (!$reg) return -1;
+    else return 6;
   }
 
 
