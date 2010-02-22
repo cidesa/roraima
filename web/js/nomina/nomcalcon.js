@@ -506,7 +506,7 @@
 
 				dato = 'CTAB';
 			}
-			if (dato != "SIC" &&  dato != "SIC" && dato != "SIM" && dato != "SC" && dato != "SCAR" && dato != "TAF" && dato != "NL" && dato != "NLP" && dato != "NS" &&
+			if (dato != "SIC" &&  dato != "SIC" && dato != "SIM" && dato != "SC" && dato != "SCAR" && dato != "TAF" && dato != "TDED" && dato != "NL" && dato != "NLP" && dato != "NS" &&
 			    dato != "AD" && dato != "DC" && dato != "DV" && dato != "DBV" && dato != "PV" && dato != "ADV" && dato != "ADF" && dato != "AM" && dato != "CATRAB" &&
 			    dato != "AC" && dato != "AA" && dato != "AET" && dato != "AAP" && dato != "CC" && dato != "ED" && dato != "EE"  && dato != "FFRAC" && dato != "FINT" && dato != "ACUC" &&
 			    dato != "MESF"  && dato != "DIAF" && dato != "ANOF" && dato != "NHGR" && dato != "NHIJ" && dato != "PPROF" && dato != "PHIJO" && dato != "MCES" &&

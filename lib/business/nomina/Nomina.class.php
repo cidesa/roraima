@@ -1343,7 +1343,12 @@ class Nomina {
           $valor = $tabla[0]["campo"];
         }
         break;
-
+      case "TDED" :
+        $criterio = "Select coalesce(SUM(a.saldo),0) as campo from npNomCal A,NPDEFCPT B where  A.CODCON=B.CODCON AND  a.codnom='" . $nomina . "' and a.codemp='" . $empleado . "' and a.codcar='" . $cargo . "' AND b.OPECON='D' AND b.IMPCPT='S' " . $cadena;
+        if (Herramientas :: BuscarDatos($criterio, & $tabla)) {
+          $valor = $tabla[0]["campo"];
+        }
+        break;
       case "SIC" :
         $criterio = "Select coalesce(SUM(a.saldo),0) as campo from npNomCal A,NPCONSALINT B where  A.CODCON=B.CODCON AND  a.CODNOM=B.CODNOM AND  a.codnom='" . $nomina . "' and a.codemp='" . $empleado . "' and a.codcar='" . $cargo . "' " . $cadena;
 		#$criterio = "Select coalesce(SUM(a.saldo),0) as campo from npNomCal A,NPCONSALINT B where  A.CODCON=B.CODCON AND  a.CODNOM=B.CODNOM AND  a.codnom='" . $nomina . "' and a.codemp='" . $empleado . "' and a.codcar='" . $cargo . "' ";
@@ -3468,6 +3473,12 @@ class Nomina {
         $criterio = "Select coalesce(SUM(a.saldo),0) as campo from npNomCal A,NPDEFCPT B where  A.CODCON=B.CODCON AND  a.codnom='" . $nomina . "' and a.codemp='" . $empleado . "' and a.codcar='" . $cargo . "' AND b.OPECON='A' AND b.IMPCPT='S' ";
         if (Herramientas :: BuscarDatos($criterio, & $tabla)) {
           return $tabla[0]["campo"];
+        }
+        break;
+      case "TDED" :
+        $criterio = "Select coalesce(SUM(a.saldo),0) as campo from npNomCal A,NPDEFCPT B where  A.CODCON=B.CODCON AND  a.codnom='" . $nomina . "' and a.codemp='" . $empleado . "' and a.codcar='" . $cargo . "' AND b.OPECON='D' AND b.IMPCPT='S' ";
+        if (Herramientas :: BuscarDatos($criterio, & $tabla)) {
+          $valor = $tabla[0]["campo"];
         }
         break;
       case "NLP" :
