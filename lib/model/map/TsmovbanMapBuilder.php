@@ -34,7 +34,7 @@ class TsmovbanMapBuilder {
 
 		$tMap->setPrimaryKeyMethodInfo('tsmovban_SEQ');
 
-		$tMap->addColumn('NUMCUE', 'Numcue', 'string', CreoleTypes::VARCHAR, true, 20);
+		$tMap->addForeignKey('NUMCUE', 'Numcue', 'string', CreoleTypes::VARCHAR, 'tsdefban', 'NUMCUE', true, 20);
 
 		$tMap->addColumn('CODCTA', 'Codcta', 'string', CreoleTypes::VARCHAR, false, 32);
 
@@ -42,7 +42,7 @@ class TsmovbanMapBuilder {
 
 		$tMap->addColumn('FECBAN', 'Fecban', 'int', CreoleTypes::DATE, true, null);
 
-		$tMap->addColumn('TIPMOV', 'Tipmov', 'string', CreoleTypes::VARCHAR, true, 4);
+		$tMap->addForeignKey('TIPMOV', 'Tipmov', 'string', CreoleTypes::VARCHAR, 'tstipmov', 'CODTIP', true, 4);
 
 		$tMap->addColumn('DESBAN', 'Desban', 'string', CreoleTypes::VARCHAR, true, 250);
 

@@ -38,7 +38,7 @@ class CacotizaMapBuilder {
 
 		$tMap->addColumn('FECCOT', 'Feccot', 'int', CreoleTypes::DATE, true, null);
 
-		$tMap->addColumn('CODPRO', 'Codpro', 'string', CreoleTypes::VARCHAR, true, 15);
+		$tMap->addForeignKey('CODPRO', 'Codpro', 'string', CreoleTypes::VARCHAR, 'caprovee', 'CODPRO', true, 15);
 
 		$tMap->addColumn('DESCOT', 'Descot', 'string', CreoleTypes::VARCHAR, false, 255);
 
@@ -56,7 +56,7 @@ class CacotizaMapBuilder {
 
 		$tMap->addColumn('MONREC', 'Monrec', 'double', CreoleTypes::NUMERIC, false, 14);
 
-		$tMap->addColumn('TIPMON', 'Tipmon', 'string', CreoleTypes::VARCHAR, false, 3);
+		$tMap->addForeignKey('TIPMON', 'Tipmon', 'string', CreoleTypes::VARCHAR, 'tsdesmon', 'CODMON', true, 3);
 
 		$tMap->addColumn('VALMON', 'Valmon', 'double', CreoleTypes::NUMERIC, false, 18);
 
