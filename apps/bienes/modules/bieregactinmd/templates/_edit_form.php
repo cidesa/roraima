@@ -374,7 +374,7 @@
   <?php endif; ?>
 
 <?php echo Catalogo($bnreginm,5,array(
-  'getprincipal' => 'getClafun',
+  'getprincipal' => 'getCodcla',
   'getsecundario' => 'getDescla',
   'campoprincipal' => 'codcla',
   'camposecundario'=> 'descla',
