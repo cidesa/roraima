@@ -196,7 +196,11 @@ class tesdefcajachiActions extends autotesdefcajachiActions
 
   public function deleting($clasemodelo)
   {
-    return parent::deleting($clasemodelo);
+    $c= new Criteria();
+    $c->add(OpordpagPeer::CODCAJCHI,$clasemodelo->getCodcaj());
+    $reg= OpordpagPeer::doSelectOne($c);
+    if (!$reg) return -1;
+    else return 6;
   }
 
 
