@@ -185,6 +185,9 @@ abstract class BaseCaordcom extends BaseObject  implements Persistent {
 	protected $aCaforent;
 
 	
+	protected $aTsdesmon;
+
+	
 	protected $alreadyInSave = false;
 
 	
@@ -727,6 +730,10 @@ abstract class BaseCaordcom extends BaseObject  implements Persistent {
         $this->modifiedColumns[] = CaordcomPeer::TIPMON;
       }
   
+		if ($this->aTsdesmon !== null && $this->aTsdesmon->getCodmon() !== $v) {
+			$this->aTsdesmon = null;
+		}
+
 	} 
 	
 	public function setValmon($v)
@@ -1194,6 +1201,13 @@ abstract class BaseCaordcom extends BaseObject  implements Persistent {
 				$this->setCaforent($this->aCaforent);
 			}
 
+			if ($this->aTsdesmon !== null) {
+				if ($this->aTsdesmon->isModified()) {
+					$affectedRows += $this->aTsdesmon->save($con);
+				}
+				$this->setTsdesmon($this->aTsdesmon);
+			}
+
 
 						if ($this->isModified()) {
 				if ($this->isNew()) {
@@ -1258,6 +1272,12 @@ abstract class BaseCaordcom extends BaseObject  implements Persistent {
 			if ($this->aCaforent !== null) {
 				if (!$this->aCaforent->validate($columns)) {
 					$failureMap = array_merge($failureMap, $this->aCaforent->getValidationFailures());
+				}
+			}
+
+			if ($this->aTsdesmon !== null) {
+				if (!$this->aTsdesmon->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aTsdesmon->getValidationFailures());
 				}
 			}
 
@@ -1923,6 +1943,35 @@ abstract class BaseCaordcom extends BaseObject  implements Persistent {
 			
 		}
 		return $this->aCaforent;
+	}
+
+	
+	public function setTsdesmon($v)
+	{
+
+
+		if ($v === null) {
+			$this->setTipmon(NULL);
+		} else {
+			$this->setTipmon($v->getCodmon());
+		}
+
+
+		$this->aTsdesmon = $v;
+	}
+
+
+	
+	public function getTsdesmon($con = null)
+	{
+		if ($this->aTsdesmon === null && (($this->tipmon !== "" && $this->tipmon !== null))) {
+						include_once 'lib/model/om/BaseTsdesmonPeer.php';
+
+			$this->aTsdesmon = TsdesmonPeer::retrieveByPK($this->tipmon, $con);
+
+			
+		}
+		return $this->aTsdesmon;
 	}
 
 } 
