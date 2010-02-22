@@ -15,6 +15,20 @@
  */
 class Bnreginm extends BaseBnreginm
 {
+	protected $codcla='';
+	protected $descla='';
+	
+	public function hydrate(ResultSet $rs, $startcol = 1)
+    {
+      parent::hydrate($rs, $startcol);
+      $this->codcla=self::getClafun();
+    }
+	
+	public function getDescla()
+	{
+		 return Herramientas::getX('codcla','bnclafun','descla',trim(self::getClafun()));
+	}
+	
 	public function getNomprovee()
 	{
 		 return Herramientas::getX('codpro','caprovee','nompro',trim(self::getCodpro()));
