@@ -20,6 +20,9 @@ abstract class BaseTsrepret extends BaseObject  implements Persistent {
 	protected $id;
 
 	
+	protected $aOptipret;
+
+	
 	protected $alreadyInSave = false;
 
 	
@@ -65,6 +68,10 @@ abstract class BaseTsrepret extends BaseObject  implements Persistent {
         $this->modifiedColumns[] = TsrepretPeer::CODRET;
       }
   
+		if ($this->aOptipret !== null && $this->aOptipret->getCodtip() !== $v) {
+			$this->aOptipret = null;
+		}
+
 	} 
 	
 	public function setId($v)
@@ -170,6 +177,15 @@ abstract class BaseTsrepret extends BaseObject  implements Persistent {
 			$this->alreadyInSave = true;
 
 
+												
+			if ($this->aOptipret !== null) {
+				if ($this->aOptipret->isModified()) {
+					$affectedRows += $this->aOptipret->save($con);
+				}
+				$this->setOptipret($this->aOptipret);
+			}
+
+
 						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = TsrepretPeer::doInsert($this, $con);
@@ -215,6 +231,14 @@ abstract class BaseTsrepret extends BaseObject  implements Persistent {
 			$retval = null;
 
 			$failureMap = array();
+
+
+												
+			if ($this->aOptipret !== null) {
+				if (!$this->aOptipret->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aOptipret->getValidationFailures());
+				}
+			}
 
 
 			if (($retval = TsrepretPeer::doValidate($this, $columns)) !== true) {
@@ -362,6 +386,35 @@ abstract class BaseTsrepret extends BaseObject  implements Persistent {
 			self::$peer = new TsrepretPeer();
 		}
 		return self::$peer;
+	}
+
+	
+	public function setOptipret($v)
+	{
+
+
+		if ($v === null) {
+			$this->setCodret(NULL);
+		} else {
+			$this->setCodret($v->getCodtip());
+		}
+
+
+		$this->aOptipret = $v;
+	}
+
+
+	
+	public function getOptipret($con = null)
+	{
+		if ($this->aOptipret === null && (($this->codret !== "" && $this->codret !== null))) {
+						include_once 'lib/model/om/BaseOptipretPeer.php';
+
+			$this->aOptipret = OptipretPeer::retrieveByPK($this->codret, $con);
+
+			
+		}
+		return $this->aOptipret;
 	}
 
 } 

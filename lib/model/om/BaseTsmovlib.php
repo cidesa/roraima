@@ -108,6 +108,12 @@ abstract class BaseTsmovlib extends BaseObject  implements Persistent {
 	protected $id;
 
 	
+	protected $aTsdefban;
+
+	
+	protected $aTstipmov;
+
+	
 	protected $alreadyInSave = false;
 
 	
@@ -374,6 +380,10 @@ abstract class BaseTsmovlib extends BaseObject  implements Persistent {
         $this->modifiedColumns[] = TsmovlibPeer::NUMCUE;
       }
   
+		if ($this->aTsdefban !== null && $this->aTsdefban->getNumcue() !== $v) {
+			$this->aTsdefban = null;
+		}
+
 	} 
 	
 	public function setReflib($v)
@@ -388,6 +398,11 @@ abstract class BaseTsmovlib extends BaseObject  implements Persistent {
 	
 	public function setFeclib($v)
 	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
@@ -411,6 +426,10 @@ abstract class BaseTsmovlib extends BaseObject  implements Persistent {
         $this->modifiedColumns[] = TsmovlibPeer::TIPMOV;
       }
   
+		if ($this->aTstipmov !== null && $this->aTstipmov->getCodtip() !== $v) {
+			$this->aTstipmov = null;
+		}
+
 	} 
 	
 	public function setDeslib($v)
@@ -456,6 +475,11 @@ abstract class BaseTsmovlib extends BaseObject  implements Persistent {
 	public function setFeccom($v)
 	{
 
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [feccom] from input: " . var_export($v, true));
@@ -493,6 +517,11 @@ abstract class BaseTsmovlib extends BaseObject  implements Persistent {
 	public function setFecing($v)
 	{
 
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecing] from input: " . var_export($v, true));
@@ -509,6 +538,11 @@ abstract class BaseTsmovlib extends BaseObject  implements Persistent {
 	
 	public function setFecanu($v)
 	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
@@ -566,6 +600,11 @@ abstract class BaseTsmovlib extends BaseObject  implements Persistent {
 	
 	public function setFeccomadi($v)
 	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
@@ -788,6 +827,22 @@ abstract class BaseTsmovlib extends BaseObject  implements Persistent {
 			$this->alreadyInSave = true;
 
 
+												
+			if ($this->aTsdefban !== null) {
+				if ($this->aTsdefban->isModified()) {
+					$affectedRows += $this->aTsdefban->save($con);
+				}
+				$this->setTsdefban($this->aTsdefban);
+			}
+
+			if ($this->aTstipmov !== null) {
+				if ($this->aTstipmov->isModified()) {
+					$affectedRows += $this->aTstipmov->save($con);
+				}
+				$this->setTstipmov($this->aTstipmov);
+			}
+
+
 						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = TsmovlibPeer::doInsert($this, $con);
@@ -833,6 +888,20 @@ abstract class BaseTsmovlib extends BaseObject  implements Persistent {
 			$retval = null;
 
 			$failureMap = array();
+
+
+												
+			if ($this->aTsdefban !== null) {
+				if (!$this->aTsdefban->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aTsdefban->getValidationFailures());
+				}
+			}
+
+			if ($this->aTstipmov !== null) {
+				if (!$this->aTstipmov->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aTstipmov->getValidationFailures());
+				}
+			}
 
 
 			if (($retval = TsmovlibPeer::doValidate($this, $columns)) !== true) {
@@ -1222,6 +1291,64 @@ abstract class BaseTsmovlib extends BaseObject  implements Persistent {
 			self::$peer = new TsmovlibPeer();
 		}
 		return self::$peer;
+	}
+
+	
+	public function setTsdefban($v)
+	{
+
+
+		if ($v === null) {
+			$this->setNumcue(NULL);
+		} else {
+			$this->setNumcue($v->getNumcue());
+		}
+
+
+		$this->aTsdefban = $v;
+	}
+
+
+	
+	public function getTsdefban($con = null)
+	{
+		if ($this->aTsdefban === null && (($this->numcue !== "" && $this->numcue !== null))) {
+						include_once 'lib/model/om/BaseTsdefbanPeer.php';
+
+			$this->aTsdefban = TsdefbanPeer::retrieveByPK($this->numcue, $con);
+
+			
+		}
+		return $this->aTsdefban;
+	}
+
+	
+	public function setTstipmov($v)
+	{
+
+
+		if ($v === null) {
+			$this->setTipmov(NULL);
+		} else {
+			$this->setTipmov($v->getCodtip());
+		}
+
+
+		$this->aTstipmov = $v;
+	}
+
+
+	
+	public function getTstipmov($con = null)
+	{
+		if ($this->aTstipmov === null && (($this->tipmov !== "" && $this->tipmov !== null))) {
+						include_once 'lib/model/om/BaseTstipmovPeer.php';
+
+			$this->aTstipmov = TstipmovPeer::retrieveByPK($this->tipmov, $con);
+
+			
+		}
+		return $this->aTstipmov;
 	}
 
 } 

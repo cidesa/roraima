@@ -20,6 +20,12 @@ abstract class BaseOptipben extends BaseObject  implements Persistent {
 	protected $id;
 
 	
+	protected $collOpbenefis;
+
+	
+	protected $lastOpbenefiCriteria = null;
+
+	
 	protected $alreadyInSave = false;
 
 	
@@ -181,6 +187,14 @@ abstract class BaseOptipben extends BaseObject  implements Persistent {
 				}
 				$this->resetModified(); 			}
 
+			if ($this->collOpbenefis !== null) {
+				foreach($this->collOpbenefis as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
+
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
@@ -221,6 +235,14 @@ abstract class BaseOptipben extends BaseObject  implements Persistent {
 				$failureMap = array_merge($failureMap, $retval);
 			}
 
+
+				if ($this->collOpbenefis !== null) {
+					foreach($this->collOpbenefis as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
 
 
 			$this->alreadyInValidation = false;
@@ -341,6 +363,15 @@ abstract class BaseOptipben extends BaseObject  implements Persistent {
 		$copyObj->setDestipben($this->destipben);
 
 
+		if ($deepCopy) {
+									$copyObj->setNew(false);
+
+			foreach($this->getOpbenefis() as $relObj) {
+				$copyObj->addOpbenefi($relObj->copy($deepCopy));
+			}
+
+		} 
+
 		$copyObj->setNew(true);
 
 		$copyObj->setId(NULL); 
@@ -362,6 +393,76 @@ abstract class BaseOptipben extends BaseObject  implements Persistent {
 			self::$peer = new OptipbenPeer();
 		}
 		return self::$peer;
+	}
+
+	
+	public function initOpbenefis()
+	{
+		if ($this->collOpbenefis === null) {
+			$this->collOpbenefis = array();
+		}
+	}
+
+	
+	public function getOpbenefis($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseOpbenefiPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collOpbenefis === null) {
+			if ($this->isNew()) {
+			   $this->collOpbenefis = array();
+			} else {
+
+				$criteria->add(OpbenefiPeer::CODTIPBEN, $this->getCodtipben());
+
+				OpbenefiPeer::addSelectColumns($criteria);
+				$this->collOpbenefis = OpbenefiPeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(OpbenefiPeer::CODTIPBEN, $this->getCodtipben());
+
+				OpbenefiPeer::addSelectColumns($criteria);
+				if (!isset($this->lastOpbenefiCriteria) || !$this->lastOpbenefiCriteria->equals($criteria)) {
+					$this->collOpbenefis = OpbenefiPeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastOpbenefiCriteria = $criteria;
+		return $this->collOpbenefis;
+	}
+
+	
+	public function countOpbenefis($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/om/BaseOpbenefiPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(OpbenefiPeer::CODTIPBEN, $this->getCodtipben());
+
+		return OpbenefiPeer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addOpbenefi(Opbenefi $l)
+	{
+		$this->collOpbenefis[] = $l;
+		$l->setOptipben($this);
 	}
 
 } 

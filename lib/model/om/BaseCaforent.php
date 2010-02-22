@@ -535,4 +535,39 @@ abstract class BaseCaforent extends BaseObject  implements Persistent {
 		return $this->collCaordcoms;
 	}
 
+
+	
+	public function getCaordcomsJoinTsdesmon($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseCaordcomPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCaordcoms === null) {
+			if ($this->isNew()) {
+				$this->collCaordcoms = array();
+			} else {
+
+				$criteria->add(CaordcomPeer::FORENT, $this->getCodforent());
+
+				$this->collCaordcoms = CaordcomPeer::doSelectJoinTsdesmon($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(CaordcomPeer::FORENT, $this->getCodforent());
+
+			if (!isset($this->lastCaordcomCriteria) || !$this->lastCaordcomCriteria->equals($criteria)) {
+				$this->collCaordcoms = CaordcomPeer::doSelectJoinTsdesmon($criteria, $con);
+			}
+		}
+		$this->lastCaordcomCriteria = $criteria;
+
+		return $this->collCaordcoms;
+	}
+
 } 

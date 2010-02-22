@@ -272,6 +272,167 @@ abstract class BaseOpbenefiPeer {
 		}
 		return $results;
 	}
+
+	
+	public static function doCountJoinOptipben(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(OpbenefiPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(OpbenefiPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(OpbenefiPeer::CODTIPBEN, OptipbenPeer::CODTIPBEN);
+
+		$rs = OpbenefiPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinOptipben(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		OpbenefiPeer::addSelectColumns($c);
+		$startcol = (OpbenefiPeer::NUM_COLUMNS - OpbenefiPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+		OptipbenPeer::addSelectColumns($c);
+
+		$c->addJoin(OpbenefiPeer::CODTIPBEN, OptipbenPeer::CODTIPBEN);
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = OpbenefiPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = OptipbenPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol);
+
+			$newObject = true;
+			foreach($results as $temp_obj1) {
+				$temp_obj2 = $temp_obj1->getOptipben(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+										$temp_obj2->addOpbenefi($obj1); 					break;
+				}
+			}
+			if ($newObject) {
+				$obj2->initOpbenefis();
+				$obj2->addOpbenefi($obj1); 			}
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doCountJoinAll(Criteria $criteria, $distinct = false, $con = null)
+	{
+		$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(OpbenefiPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(OpbenefiPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(OpbenefiPeer::CODTIPBEN, OptipbenPeer::CODTIPBEN);
+
+		$rs = OpbenefiPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinAll(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		OpbenefiPeer::addSelectColumns($c);
+		$startcol2 = (OpbenefiPeer::NUM_COLUMNS - OpbenefiPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+
+		OptipbenPeer::addSelectColumns($c);
+		$startcol3 = $startcol2 + OptipbenPeer::NUM_COLUMNS;
+
+		$c->addJoin(OpbenefiPeer::CODTIPBEN, OptipbenPeer::CODTIPBEN);
+
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = OpbenefiPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+
+					
+			$omClass = OptipbenPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol2);
+
+			$newObject = true;
+			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+				$temp_obj1 = $results[$j];
+				$temp_obj2 = $temp_obj1->getOptipben(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+					$temp_obj2->addOpbenefi($obj1); 					break;
+				}
+			}
+
+			if ($newObject) {
+				$obj2->initOpbenefis();
+				$obj2->addOpbenefi($obj1);
+			}
+
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
 	
 	public static function getTableMap()
 	{

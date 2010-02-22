@@ -24,6 +24,9 @@ abstract class BaseTsretiva extends BaseObject  implements Persistent {
 	protected $id;
 
 	
+	protected $aOptipret;
+
+	
 	protected $alreadyInSave = false;
 
 	
@@ -66,6 +69,10 @@ abstract class BaseTsretiva extends BaseObject  implements Persistent {
         $this->modifiedColumns[] = TsretivaPeer::CODRET;
       }
   
+		if ($this->aOptipret !== null && $this->aOptipret->getCodtip() !== $v) {
+			$this->aOptipret = null;
+		}
+
 	} 
 	
 	public function setCodrec($v)
@@ -193,6 +200,15 @@ abstract class BaseTsretiva extends BaseObject  implements Persistent {
 			$this->alreadyInSave = true;
 
 
+												
+			if ($this->aOptipret !== null) {
+				if ($this->aOptipret->isModified()) {
+					$affectedRows += $this->aOptipret->save($con);
+				}
+				$this->setOptipret($this->aOptipret);
+			}
+
+
 						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = TsretivaPeer::doInsert($this, $con);
@@ -238,6 +254,14 @@ abstract class BaseTsretiva extends BaseObject  implements Persistent {
 			$retval = null;
 
 			$failureMap = array();
+
+
+												
+			if ($this->aOptipret !== null) {
+				if (!$this->aOptipret->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aOptipret->getValidationFailures());
+				}
+			}
 
 
 			if (($retval = TsretivaPeer::doValidate($this, $columns)) !== true) {
@@ -396,6 +420,35 @@ abstract class BaseTsretiva extends BaseObject  implements Persistent {
 			self::$peer = new TsretivaPeer();
 		}
 		return self::$peer;
+	}
+
+	
+	public function setOptipret($v)
+	{
+
+
+		if ($v === null) {
+			$this->setCodret(NULL);
+		} else {
+			$this->setCodret($v->getCodtip());
+		}
+
+
+		$this->aOptipret = $v;
+	}
+
+
+	
+	public function getOptipret($con = null)
+	{
+		if ($this->aOptipret === null && (($this->codret !== "" && $this->codret !== null))) {
+						include_once 'lib/model/om/BaseOptipretPeer.php';
+
+			$this->aOptipret = OptipretPeer::retrieveByPK($this->codret, $con);
+
+			
+		}
+		return $this->aOptipret;
 	}
 
 } 

@@ -292,6 +292,442 @@ abstract class BaseTsmovlibPeer {
 		}
 		return $results;
 	}
+
+	
+	public static function doCountJoinTsdefban(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(TsmovlibPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(TsmovlibPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(TsmovlibPeer::NUMCUE, TsdefbanPeer::NUMCUE);
+
+		$rs = TsmovlibPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doCountJoinTstipmov(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(TsmovlibPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(TsmovlibPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(TsmovlibPeer::TIPMOV, TstipmovPeer::CODTIP);
+
+		$rs = TsmovlibPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinTsdefban(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		TsmovlibPeer::addSelectColumns($c);
+		$startcol = (TsmovlibPeer::NUM_COLUMNS - TsmovlibPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+		TsdefbanPeer::addSelectColumns($c);
+
+		$c->addJoin(TsmovlibPeer::NUMCUE, TsdefbanPeer::NUMCUE);
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = TsmovlibPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = TsdefbanPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol);
+
+			$newObject = true;
+			foreach($results as $temp_obj1) {
+				$temp_obj2 = $temp_obj1->getTsdefban(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+										$temp_obj2->addTsmovlib($obj1); 					break;
+				}
+			}
+			if ($newObject) {
+				$obj2->initTsmovlibs();
+				$obj2->addTsmovlib($obj1); 			}
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doSelectJoinTstipmov(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		TsmovlibPeer::addSelectColumns($c);
+		$startcol = (TsmovlibPeer::NUM_COLUMNS - TsmovlibPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+		TstipmovPeer::addSelectColumns($c);
+
+		$c->addJoin(TsmovlibPeer::TIPMOV, TstipmovPeer::CODTIP);
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = TsmovlibPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = TstipmovPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol);
+
+			$newObject = true;
+			foreach($results as $temp_obj1) {
+				$temp_obj2 = $temp_obj1->getTstipmov(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+										$temp_obj2->addTsmovlib($obj1); 					break;
+				}
+			}
+			if ($newObject) {
+				$obj2->initTsmovlibs();
+				$obj2->addTsmovlib($obj1); 			}
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doCountJoinAll(Criteria $criteria, $distinct = false, $con = null)
+	{
+		$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(TsmovlibPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(TsmovlibPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(TsmovlibPeer::NUMCUE, TsdefbanPeer::NUMCUE);
+
+		$criteria->addJoin(TsmovlibPeer::TIPMOV, TstipmovPeer::CODTIP);
+
+		$rs = TsmovlibPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinAll(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		TsmovlibPeer::addSelectColumns($c);
+		$startcol2 = (TsmovlibPeer::NUM_COLUMNS - TsmovlibPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+
+		TsdefbanPeer::addSelectColumns($c);
+		$startcol3 = $startcol2 + TsdefbanPeer::NUM_COLUMNS;
+
+		TstipmovPeer::addSelectColumns($c);
+		$startcol4 = $startcol3 + TstipmovPeer::NUM_COLUMNS;
+
+		$c->addJoin(TsmovlibPeer::NUMCUE, TsdefbanPeer::NUMCUE);
+
+		$c->addJoin(TsmovlibPeer::TIPMOV, TstipmovPeer::CODTIP);
+
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = TsmovlibPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+
+					
+			$omClass = TsdefbanPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol2);
+
+			$newObject = true;
+			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+				$temp_obj1 = $results[$j];
+				$temp_obj2 = $temp_obj1->getTsdefban(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+					$temp_obj2->addTsmovlib($obj1); 					break;
+				}
+			}
+
+			if ($newObject) {
+				$obj2->initTsmovlibs();
+				$obj2->addTsmovlib($obj1);
+			}
+
+
+					
+			$omClass = TstipmovPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj3 = new $cls();
+			$obj3->hydrate($rs, $startcol3);
+
+			$newObject = true;
+			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+				$temp_obj1 = $results[$j];
+				$temp_obj3 = $temp_obj1->getTstipmov(); 				if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+					$newObject = false;
+					$temp_obj3->addTsmovlib($obj1); 					break;
+				}
+			}
+
+			if ($newObject) {
+				$obj3->initTsmovlibs();
+				$obj3->addTsmovlib($obj1);
+			}
+
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doCountJoinAllExceptTsdefban(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(TsmovlibPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(TsmovlibPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(TsmovlibPeer::TIPMOV, TstipmovPeer::CODTIP);
+
+		$rs = TsmovlibPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doCountJoinAllExceptTstipmov(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(TsmovlibPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(TsmovlibPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(TsmovlibPeer::NUMCUE, TsdefbanPeer::NUMCUE);
+
+		$rs = TsmovlibPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinAllExceptTsdefban(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+								if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		TsmovlibPeer::addSelectColumns($c);
+		$startcol2 = (TsmovlibPeer::NUM_COLUMNS - TsmovlibPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+
+		TstipmovPeer::addSelectColumns($c);
+		$startcol3 = $startcol2 + TstipmovPeer::NUM_COLUMNS;
+
+		$c->addJoin(TsmovlibPeer::TIPMOV, TstipmovPeer::CODTIP);
+
+
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = TsmovlibPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = TstipmovPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj2  = new $cls();
+			$obj2->hydrate($rs, $startcol2);
+
+			$newObject = true;
+			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+				$temp_obj1 = $results[$j];
+				$temp_obj2 = $temp_obj1->getTstipmov(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+					$temp_obj2->addTsmovlib($obj1);
+					break;
+				}
+			}
+
+			if ($newObject) {
+				$obj2->initTsmovlibs();
+				$obj2->addTsmovlib($obj1);
+			}
+
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doSelectJoinAllExceptTstipmov(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+								if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		TsmovlibPeer::addSelectColumns($c);
+		$startcol2 = (TsmovlibPeer::NUM_COLUMNS - TsmovlibPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+
+		TsdefbanPeer::addSelectColumns($c);
+		$startcol3 = $startcol2 + TsdefbanPeer::NUM_COLUMNS;
+
+		$c->addJoin(TsmovlibPeer::NUMCUE, TsdefbanPeer::NUMCUE);
+
+
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = TsmovlibPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = TsdefbanPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj2  = new $cls();
+			$obj2->hydrate($rs, $startcol2);
+
+			$newObject = true;
+			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+				$temp_obj1 = $results[$j];
+				$temp_obj2 = $temp_obj1->getTsdefban(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+					$temp_obj2->addTsmovlib($obj1);
+					break;
+				}
+			}
+
+			if ($newObject) {
+				$obj2->initTsmovlibs();
+				$obj2->addTsmovlib($obj1);
+			}
+
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
 	
 	public static function getTableMap()
 	{

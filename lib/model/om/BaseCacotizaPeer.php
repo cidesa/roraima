@@ -262,6 +262,442 @@ abstract class BaseCacotizaPeer {
 		}
 		return $results;
 	}
+
+	
+	public static function doCountJoinCaprovee(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(CacotizaPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(CacotizaPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(CacotizaPeer::CODPRO, CaproveePeer::CODPRO);
+
+		$rs = CacotizaPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doCountJoinTsdesmon(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(CacotizaPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(CacotizaPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(CacotizaPeer::TIPMON, TsdesmonPeer::CODMON);
+
+		$rs = CacotizaPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinCaprovee(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		CacotizaPeer::addSelectColumns($c);
+		$startcol = (CacotizaPeer::NUM_COLUMNS - CacotizaPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+		CaproveePeer::addSelectColumns($c);
+
+		$c->addJoin(CacotizaPeer::CODPRO, CaproveePeer::CODPRO);
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = CacotizaPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = CaproveePeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol);
+
+			$newObject = true;
+			foreach($results as $temp_obj1) {
+				$temp_obj2 = $temp_obj1->getCaprovee(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+										$temp_obj2->addCacotiza($obj1); 					break;
+				}
+			}
+			if ($newObject) {
+				$obj2->initCacotizas();
+				$obj2->addCacotiza($obj1); 			}
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doSelectJoinTsdesmon(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		CacotizaPeer::addSelectColumns($c);
+		$startcol = (CacotizaPeer::NUM_COLUMNS - CacotizaPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+		TsdesmonPeer::addSelectColumns($c);
+
+		$c->addJoin(CacotizaPeer::TIPMON, TsdesmonPeer::CODMON);
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = CacotizaPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = TsdesmonPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol);
+
+			$newObject = true;
+			foreach($results as $temp_obj1) {
+				$temp_obj2 = $temp_obj1->getTsdesmon(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+										$temp_obj2->addCacotiza($obj1); 					break;
+				}
+			}
+			if ($newObject) {
+				$obj2->initCacotizas();
+				$obj2->addCacotiza($obj1); 			}
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doCountJoinAll(Criteria $criteria, $distinct = false, $con = null)
+	{
+		$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(CacotizaPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(CacotizaPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(CacotizaPeer::CODPRO, CaproveePeer::CODPRO);
+
+		$criteria->addJoin(CacotizaPeer::TIPMON, TsdesmonPeer::CODMON);
+
+		$rs = CacotizaPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinAll(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		CacotizaPeer::addSelectColumns($c);
+		$startcol2 = (CacotizaPeer::NUM_COLUMNS - CacotizaPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+
+		CaproveePeer::addSelectColumns($c);
+		$startcol3 = $startcol2 + CaproveePeer::NUM_COLUMNS;
+
+		TsdesmonPeer::addSelectColumns($c);
+		$startcol4 = $startcol3 + TsdesmonPeer::NUM_COLUMNS;
+
+		$c->addJoin(CacotizaPeer::CODPRO, CaproveePeer::CODPRO);
+
+		$c->addJoin(CacotizaPeer::TIPMON, TsdesmonPeer::CODMON);
+
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = CacotizaPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+
+					
+			$omClass = CaproveePeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol2);
+
+			$newObject = true;
+			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+				$temp_obj1 = $results[$j];
+				$temp_obj2 = $temp_obj1->getCaprovee(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+					$temp_obj2->addCacotiza($obj1); 					break;
+				}
+			}
+
+			if ($newObject) {
+				$obj2->initCacotizas();
+				$obj2->addCacotiza($obj1);
+			}
+
+
+					
+			$omClass = TsdesmonPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj3 = new $cls();
+			$obj3->hydrate($rs, $startcol3);
+
+			$newObject = true;
+			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+				$temp_obj1 = $results[$j];
+				$temp_obj3 = $temp_obj1->getTsdesmon(); 				if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+					$newObject = false;
+					$temp_obj3->addCacotiza($obj1); 					break;
+				}
+			}
+
+			if ($newObject) {
+				$obj3->initCacotizas();
+				$obj3->addCacotiza($obj1);
+			}
+
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doCountJoinAllExceptCaprovee(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(CacotizaPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(CacotizaPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(CacotizaPeer::TIPMON, TsdesmonPeer::CODMON);
+
+		$rs = CacotizaPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doCountJoinAllExceptTsdesmon(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(CacotizaPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(CacotizaPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(CacotizaPeer::CODPRO, CaproveePeer::CODPRO);
+
+		$rs = CacotizaPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinAllExceptCaprovee(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+								if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		CacotizaPeer::addSelectColumns($c);
+		$startcol2 = (CacotizaPeer::NUM_COLUMNS - CacotizaPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+
+		TsdesmonPeer::addSelectColumns($c);
+		$startcol3 = $startcol2 + TsdesmonPeer::NUM_COLUMNS;
+
+		$c->addJoin(CacotizaPeer::TIPMON, TsdesmonPeer::CODMON);
+
+
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = CacotizaPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = TsdesmonPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj2  = new $cls();
+			$obj2->hydrate($rs, $startcol2);
+
+			$newObject = true;
+			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+				$temp_obj1 = $results[$j];
+				$temp_obj2 = $temp_obj1->getTsdesmon(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+					$temp_obj2->addCacotiza($obj1);
+					break;
+				}
+			}
+
+			if ($newObject) {
+				$obj2->initCacotizas();
+				$obj2->addCacotiza($obj1);
+			}
+
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doSelectJoinAllExceptTsdesmon(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+								if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		CacotizaPeer::addSelectColumns($c);
+		$startcol2 = (CacotizaPeer::NUM_COLUMNS - CacotizaPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+
+		CaproveePeer::addSelectColumns($c);
+		$startcol3 = $startcol2 + CaproveePeer::NUM_COLUMNS;
+
+		$c->addJoin(CacotizaPeer::CODPRO, CaproveePeer::CODPRO);
+
+
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = CacotizaPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = CaproveePeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj2  = new $cls();
+			$obj2->hydrate($rs, $startcol2);
+
+			$newObject = true;
+			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+				$temp_obj1 = $results[$j];
+				$temp_obj2 = $temp_obj1->getCaprovee(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+					$temp_obj2->addCacotiza($obj1);
+					break;
+				}
+			}
+
+			if ($newObject) {
+				$obj2->initCacotizas();
+				$obj2->addCacotiza($obj1);
+			}
+
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
 	
 	public static function getTableMap()
 	{

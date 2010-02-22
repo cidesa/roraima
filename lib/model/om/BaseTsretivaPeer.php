@@ -187,6 +187,167 @@ abstract class BaseTsretivaPeer {
 		}
 		return $results;
 	}
+
+	
+	public static function doCountJoinOptipret(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(TsretivaPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(TsretivaPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(TsretivaPeer::CODRET, OptipretPeer::CODTIP);
+
+		$rs = TsretivaPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinOptipret(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		TsretivaPeer::addSelectColumns($c);
+		$startcol = (TsretivaPeer::NUM_COLUMNS - TsretivaPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+		OptipretPeer::addSelectColumns($c);
+
+		$c->addJoin(TsretivaPeer::CODRET, OptipretPeer::CODTIP);
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = TsretivaPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = OptipretPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol);
+
+			$newObject = true;
+			foreach($results as $temp_obj1) {
+				$temp_obj2 = $temp_obj1->getOptipret(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+										$temp_obj2->addTsretiva($obj1); 					break;
+				}
+			}
+			if ($newObject) {
+				$obj2->initTsretivas();
+				$obj2->addTsretiva($obj1); 			}
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doCountJoinAll(Criteria $criteria, $distinct = false, $con = null)
+	{
+		$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(TsretivaPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(TsretivaPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(TsretivaPeer::CODRET, OptipretPeer::CODTIP);
+
+		$rs = TsretivaPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinAll(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		TsretivaPeer::addSelectColumns($c);
+		$startcol2 = (TsretivaPeer::NUM_COLUMNS - TsretivaPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+
+		OptipretPeer::addSelectColumns($c);
+		$startcol3 = $startcol2 + OptipretPeer::NUM_COLUMNS;
+
+		$c->addJoin(TsretivaPeer::CODRET, OptipretPeer::CODTIP);
+
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = TsretivaPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+
+					
+			$omClass = OptipretPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol2);
+
+			$newObject = true;
+			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+				$temp_obj1 = $results[$j];
+				$temp_obj2 = $temp_obj1->getOptipret(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+					$temp_obj2->addTsretiva($obj1); 					break;
+				}
+			}
+
+			if ($newObject) {
+				$obj2->initTsretivas();
+				$obj2->addTsretiva($obj1);
+			}
+
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
 	
 	public static function getTableMap()
 	{
