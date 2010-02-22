@@ -20,6 +20,7 @@ class Fortipfin extends BaseFortipfin
 	 protected $monasi  = 0;
 	 protected $monasi2 = 0;
 	 protected $codpre  = '';
+	 protected $tiedatrel="";
 
     public function AfterHydrate()
     {
@@ -87,4 +88,22 @@ class Fortipfin extends BaseFortipfin
 	{
 	  return self::getCodfin();
 	}
+
+  public function getTiedatrel()
+  {
+  	  $valor="N";
+  	  $d= new Criteria();
+  	  $d->add(OpordpagPeer::TIPFIN,self::getCodfin());
+  	  $resul= OpordpagPeer::doSelectOne($d);
+  	  if ($resul)
+  	  {
+  	  	$valor= 'S';
+  	  } else $valor= 'N';
+  	return $valor;
+  }
+
+  public function setTiedatrel()
+  {
+  	return $this->tiedatrel;
+  }
 }
