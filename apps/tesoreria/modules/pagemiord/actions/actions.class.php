@@ -554,8 +554,9 @@ $this->Bitacora('Guardo');
      if ($opordpag->getTipcau()==$this->ordpagnom)
      {
        $aux=split('_',$opordpag->getDatosnomina());
-       //$sql="DELETE FROM NPCIENOM WHERE CODNOM='".$this->getRequestParameter('tipnom')."' And CODTIPGAS='".$this->getRequestParameter('gasto')."' And CODBAN='".$this->getRequestParameter('banco')."' And (ASIDED='A' OR ASIDED='D') And FECNOM=TO_DATE('".$this->getRequestParameter('fechanomina')."','YYYY-MM-DD')";
+       if ($aux[4]!='N')
        $sql="DELETE FROM NPCIENOM WHERE CODNOM='".$aux[0]."' And CODTIPGAS='".$aux[1]."' And CODBAN='".$aux[2]."' And (ASIDED='A' OR ASIDED='D') And FECNOM=TO_DATE('".$aux[3]."','YYYY-MM-DD') AND ESPECIAL='".$aux[4]."' AND CODNOMESP='".$aux[5]."'";
+       else $sql="DELETE FROM NPCIENOM WHERE CODNOM='".$aux[0]."' And CODTIPGAS='".$aux[1]."' And CODBAN='".$aux[2]."' And (ASIDED='A' OR ASIDED='D') And FECNOM=TO_DATE('".$aux[3]."','YYYY-MM-DD') AND ESPECIAL='".$aux[4]."'";
        Herramientas::insertarRegistros($sql);
      }
      //aportes
