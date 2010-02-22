@@ -3278,6 +3278,7 @@ class oycvalActions extends autooycvalActions
       $this->con_pro="";
       $this->ivaant="";
       $this->retant="";
+	  $this->par_rec="";
     }
 
     $this->verifica_anular=Obras::verificarRelaciones($this->ocregval->getCodcon(),$this->ocregval->getCodtipval());
