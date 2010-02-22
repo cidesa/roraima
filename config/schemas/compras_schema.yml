@@ -1310,6 +1310,9 @@ propel:
     tipmon:
       type: VARCHAR
       size: 3
+      required: true
+      foreignTable: tsdesmon
+      foreignReference: codmon
     valmon:
       type: NUMERIC
       size: 14
@@ -1629,6 +1632,9 @@ propel:
     tipmon:
       type: VARCHAR
       size: 3
+      required: true
+      foreignTable: tsdesmon
+      foreignReference: codmon
     valmon:
       type: NUMERIC
       size: 14
@@ -2121,6 +2127,8 @@ propel:
       type: VARCHAR
       size: 15
       required: true
+      foreignTable: caprovee
+      foreignReference: codpro
     descot:
       type: VARCHAR
       size: 255
@@ -2152,6 +2160,9 @@ propel:
     tipmon:
       type: VARCHAR
       size: 3
+      required: true
+      foreignTable: tsdesmon
+      foreignReference: codmon
     valmon:
       type: NUMERIC
       size: 18

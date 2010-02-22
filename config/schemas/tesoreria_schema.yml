@@ -154,6 +154,9 @@ propel:
     codtipben:
       type: VARCHAR
       size: 3
+      required: true
+      foreignTable: optipben
+      foreignReference: codtipben
     tipper:
       type: VARCHAR
       size: 1
@@ -196,7 +199,12 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
+    _uniques:
+      unique_opbenefi_cedrif:
+        - cedrif
   opbenefi2:
     #_attributes:
       #idMethod: native
@@ -259,7 +267,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   opbenfonava:
     #_attributes:
       #idMethod: native
@@ -787,6 +797,8 @@ propel:
       type: VARCHAR
       size: 15
       required: true
+      foreignTable: opbenefi
+      foreignReference: cedrif
     nomben:
       type: VARCHAR
       size: 250
@@ -965,7 +977,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   opordper:
     #_attributes:
       #idMethod: native
@@ -1045,6 +1059,8 @@ propel:
       type: VARCHAR
       size: 3
       required: true
+      foreignTable: optipret
+      foreignReference: codtip
     codnom:
       type: VARCHAR
       size: 3
@@ -1107,10 +1123,16 @@ propel:
     destipben:
       type: VARCHAR
       size: 50
+      required: true
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
+    _uniques:
+      unique_optipben_codtipben:
+        - codtipben
   optipret:
     #_attributes:
       #idMethod: native
@@ -1153,7 +1175,12 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
+    _uniques:
+      unique_optipret_codtip:
+        - codtip
   tsantici:
     #_attributes:
       #idMethod: native
@@ -1471,6 +1498,8 @@ propel:
       type: VARCHAR
       size: 3
       required: true
+      foreignTable: tstipcue
+      foreignReference: codtip
     codcta:
       type: VARCHAR
       size: 32
@@ -1535,6 +1564,9 @@ propel:
     tipren:
       type: VARCHAR
       size: 20
+      required: true
+      foreignTable: tstipren
+      foreignReference: codtip
     desenl:
       type: VARCHAR
       size: 250
@@ -1573,7 +1605,12 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
+    _uniques:
+      unique_tsdefban_numcue:
+        - numcue
   tsdefchequera:
     #_attributes:
       #idMethod: native
@@ -1688,7 +1725,12 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
+    _uniques:
+      unique_tsdesmon_codmon:
+        - codmon
   tsdettra:
     #_attributes:
       #idMethod: native
@@ -1801,7 +1843,8 @@ propel:
       type: VARCHAR
       size: 20
       required: true
-      ##primaryKey: true
+      foreignTable: tsdefban
+      foreignReference: numcue
     codcta:
       type: VARCHAR
       size: 32
@@ -1817,6 +1860,8 @@ propel:
       type: VARCHAR
       size: 4
       required: true
+      foreignTable: tstipmov
+      foreignReference: codtip
     desban:
       type: VARCHAR
       size: 250
@@ -1856,7 +1901,8 @@ propel:
       type: VARCHAR
       size: 20
       required: true
-      ##primaryKey: true
+      foreignTable: tsdefban
+      foreignReference: numcue
     reflib:
       type: VARCHAR
       size: 20
@@ -1869,6 +1915,8 @@ propel:
       type: VARCHAR
       size: 4
       required: true
+      foreignTable: tstipmov
+      foreignReference: codtip
     deslib:
       type: VARCHAR
       size: 4000
@@ -2101,9 +2149,13 @@ propel:
     codrep:
       type: VARCHAR
       size: 50
+      required: true
     codret:
       type: VARCHAR
       size: 4
+      required: true
+      foreignTable: optipret
+      foreignReference: codtip
     id:
       type: INTEGER
       required: true
@@ -2115,6 +2167,8 @@ propel:
       type: VARCHAR
       size: 3
       required: true
+      foreignTable: optipret
+      foreignReference: codtip
     codrec:
       type: VARCHAR
       size: 4
@@ -2194,7 +2248,12 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
+    _uniques:
+      unique_tstipcue_codtip:
+        - codtip
   tstipfte:
     #_attributes:
       #idMethod: native
@@ -2237,7 +2296,12 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
+    _uniques:
+      unique_tstipmov_codtip:
+        - codtip
   tstipren:
     #_attributes:
       #idMethod: native
@@ -2248,10 +2312,16 @@ propel:
     destip:
       type: VARCHAR
       size: 50
+      required: true
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
+    _uniques:
+      unique_tstipren_codtip:
+        - codtip
   tssalcaj:
     #_attributes:
       #idMethod: native
