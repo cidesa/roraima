@@ -34,13 +34,13 @@ class TsmovlibMapBuilder {
 
 		$tMap->setPrimaryKeyMethodInfo('tsmovlib_SEQ');
 
-		$tMap->addColumn('NUMCUE', 'Numcue', 'string', CreoleTypes::VARCHAR, true, 20);
+		$tMap->addForeignKey('NUMCUE', 'Numcue', 'string', CreoleTypes::VARCHAR, 'tsdefban', 'NUMCUE', true, 20);
 
 		$tMap->addColumn('REFLIB', 'Reflib', 'string', CreoleTypes::VARCHAR, true, 20);
 
 		$tMap->addColumn('FECLIB', 'Feclib', 'int', CreoleTypes::DATE, true, null);
 
-		$tMap->addColumn('TIPMOV', 'Tipmov', 'string', CreoleTypes::VARCHAR, true, 4);
+		$tMap->addForeignKey('TIPMOV', 'Tipmov', 'string', CreoleTypes::VARCHAR, 'tstipmov', 'CODTIP', true, 4);
 
 		$tMap->addColumn('DESLIB', 'Deslib', 'string', CreoleTypes::VARCHAR, true, 4000);
 
