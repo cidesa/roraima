@@ -268,6 +268,9 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 	protected $id;
 
 	
+	protected $aOpbenefi;
+
+	
 	protected $alreadyInSave = false;
 
 	
@@ -981,6 +984,11 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 	public function setFecemi($v)
 	{
 
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecemi] from input: " . var_export($v, true));
@@ -1003,6 +1011,10 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
         $this->modifiedColumns[] = OpordpagPeer::CEDRIF;
       }
   
+		if ($this->aOpbenefi !== null && $this->aOpbenefi->getCedrif() !== $v) {
+			$this->aOpbenefi = null;
+		}
+
 	} 
 	
 	public function setNomben($v)
@@ -1118,6 +1130,11 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 	public function setFecenvcon($v)
 	{
 
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecenvcon] from input: " . var_export($v, true));
@@ -1134,6 +1151,11 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 	
 	public function setFecenvfin($v)
 	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
@@ -1172,6 +1194,11 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 	public function setFecven($v)
 	{
 
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecven] from input: " . var_export($v, true));
@@ -1188,6 +1215,11 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 	
 	public function setFecanu($v)
 	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
@@ -1246,6 +1278,11 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 	public function setFecrecfin($v)
 	{
 
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecrecfin] from input: " . var_export($v, true));
@@ -1272,6 +1309,11 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 	
 	public function setFecpag($v)
 	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
@@ -1350,6 +1392,11 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 	public function setFeccon($v)
 	{
 
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [feccon] from input: " . var_export($v, true));
@@ -1407,6 +1454,11 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 	public function setFechafac($v)
 	{
 
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fechafac] from input: " . var_export($v, true));
@@ -1423,6 +1475,11 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 	
 	public function setFecfac($v)
 	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
@@ -1461,6 +1518,11 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 	public function setFeccomret($v)
 	{
 
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [feccomret] from input: " . var_export($v, true));
@@ -1487,6 +1549,11 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 	
 	public function setFeccomretislr($v)
 	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
@@ -1515,6 +1582,11 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 	public function setFeccomretltf($v)
 	{
 
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [feccomretltf] from input: " . var_export($v, true));
@@ -1541,6 +1613,11 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 	
 	public function setFecsigecof($v)
 	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
@@ -1608,6 +1685,11 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 	
 	public function setFecret($v)
 	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
@@ -1930,6 +2012,15 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 			$this->alreadyInSave = true;
 
 
+												
+			if ($this->aOpbenefi !== null) {
+				if ($this->aOpbenefi->isModified()) {
+					$affectedRows += $this->aOpbenefi->save($con);
+				}
+				$this->setOpbenefi($this->aOpbenefi);
+			}
+
+
 						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = OpordpagPeer::doInsert($this, $con);
@@ -1975,6 +2066,14 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 			$retval = null;
 
 			$failureMap = array();
+
+
+												
+			if ($this->aOpbenefi !== null) {
+				if (!$this->aOpbenefi->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aOpbenefi->getValidationFailures());
+				}
+			}
 
 
 			if (($retval = OpordpagPeer::doValidate($this, $columns)) !== true) {
@@ -2804,6 +2903,35 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 			self::$peer = new OpordpagPeer();
 		}
 		return self::$peer;
+	}
+
+	
+	public function setOpbenefi($v)
+	{
+
+
+		if ($v === null) {
+			$this->setCedrif(NULL);
+		} else {
+			$this->setCedrif($v->getCedrif());
+		}
+
+
+		$this->aOpbenefi = $v;
+	}
+
+
+	
+	public function getOpbenefi($con = null)
+	{
+		if ($this->aOpbenefi === null && (($this->cedrif !== "" && $this->cedrif !== null))) {
+						include_once 'lib/model/om/BaseOpbenefiPeer.php';
+
+			$this->aOpbenefi = OpbenefiPeer::retrieveByPK($this->cedrif, $con);
+
+			
+		}
+		return $this->aOpbenefi;
 	}
 
 } 

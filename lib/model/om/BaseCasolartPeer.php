@@ -272,6 +272,167 @@ abstract class BaseCasolartPeer {
 		}
 		return $results;
 	}
+
+	
+	public static function doCountJoinTsdesmon(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(CasolartPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(CasolartPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(CasolartPeer::TIPMON, TsdesmonPeer::CODMON);
+
+		$rs = CasolartPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinTsdesmon(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		CasolartPeer::addSelectColumns($c);
+		$startcol = (CasolartPeer::NUM_COLUMNS - CasolartPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+		TsdesmonPeer::addSelectColumns($c);
+
+		$c->addJoin(CasolartPeer::TIPMON, TsdesmonPeer::CODMON);
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = CasolartPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = TsdesmonPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol);
+
+			$newObject = true;
+			foreach($results as $temp_obj1) {
+				$temp_obj2 = $temp_obj1->getTsdesmon(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+										$temp_obj2->addCasolart($obj1); 					break;
+				}
+			}
+			if ($newObject) {
+				$obj2->initCasolarts();
+				$obj2->addCasolart($obj1); 			}
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doCountJoinAll(Criteria $criteria, $distinct = false, $con = null)
+	{
+		$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(CasolartPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(CasolartPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(CasolartPeer::TIPMON, TsdesmonPeer::CODMON);
+
+		$rs = CasolartPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinAll(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		CasolartPeer::addSelectColumns($c);
+		$startcol2 = (CasolartPeer::NUM_COLUMNS - CasolartPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+
+		TsdesmonPeer::addSelectColumns($c);
+		$startcol3 = $startcol2 + TsdesmonPeer::NUM_COLUMNS;
+
+		$c->addJoin(CasolartPeer::TIPMON, TsdesmonPeer::CODMON);
+
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = CasolartPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+
+					
+			$omClass = TsdesmonPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol2);
+
+			$newObject = true;
+			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+				$temp_obj1 = $results[$j];
+				$temp_obj2 = $temp_obj1->getTsdesmon(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+					$temp_obj2->addCasolart($obj1); 					break;
+				}
+			}
+
+			if ($newObject) {
+				$obj2->initCasolarts();
+				$obj2->addCasolart($obj1);
+			}
+
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
 	
 	public static function getTableMap()
 	{

@@ -92,6 +92,9 @@ abstract class BaseCasolart extends BaseObject  implements Persistent {
 	protected $id;
 
 	
+	protected $aTsdesmon;
+
+	
 	protected $alreadyInSave = false;
 
 	
@@ -413,6 +416,10 @@ abstract class BaseCasolart extends BaseObject  implements Persistent {
         $this->modifiedColumns[] = CasolartPeer::TIPMON;
       }
   
+		if ($this->aTsdesmon !== null && $this->aTsdesmon->getCodmon() !== $v) {
+			$this->aTsdesmon = null;
+		}
+
 	} 
 	
 	public function setValmon($v)
@@ -668,6 +675,15 @@ abstract class BaseCasolart extends BaseObject  implements Persistent {
 			$this->alreadyInSave = true;
 
 
+												
+			if ($this->aTsdesmon !== null) {
+				if ($this->aTsdesmon->isModified()) {
+					$affectedRows += $this->aTsdesmon->save($con);
+				}
+				$this->setTsdesmon($this->aTsdesmon);
+			}
+
+
 						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = CasolartPeer::doInsert($this, $con);
@@ -713,6 +729,14 @@ abstract class BaseCasolart extends BaseObject  implements Persistent {
 			$retval = null;
 
 			$failureMap = array();
+
+
+												
+			if ($this->aTsdesmon !== null) {
+				if (!$this->aTsdesmon->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aTsdesmon->getValidationFailures());
+				}
+			}
 
 
 			if (($retval = CasolartPeer::doValidate($this, $columns)) !== true) {
@@ -1058,6 +1082,35 @@ abstract class BaseCasolart extends BaseObject  implements Persistent {
 			self::$peer = new CasolartPeer();
 		}
 		return self::$peer;
+	}
+
+	
+	public function setTsdesmon($v)
+	{
+
+
+		if ($v === null) {
+			$this->setTipmon(NULL);
+		} else {
+			$this->setTipmon($v->getCodmon());
+		}
+
+
+		$this->aTsdesmon = $v;
+	}
+
+
+	
+	public function getTsdesmon($con = null)
+	{
+		if ($this->aTsdesmon === null && (($this->tipmon !== "" && $this->tipmon !== null))) {
+						include_once 'lib/model/om/BaseTsdesmonPeer.php';
+
+			$this->aTsdesmon = TsdesmonPeer::retrieveByPK($this->tipmon, $con);
+
+			
+		}
+		return $this->aTsdesmon;
 	}
 
 } 

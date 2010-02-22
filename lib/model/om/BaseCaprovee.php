@@ -173,6 +173,26 @@ abstract class BaseCaprovee extends BaseObject  implements Persistent {
 
 
 	
+	protected $ramgen;
+
+
+	
+	protected $estpro;
+
+
+	
+	protected $codban;
+
+
+	
+	protected $numcue;
+
+
+	
+	protected $codtip;
+
+
+	
 	protected $id;
 
 	
@@ -186,6 +206,12 @@ abstract class BaseCaprovee extends BaseObject  implements Persistent {
 
 	
 	protected $lastCaordcomCriteria = null;
+
+	
+	protected $collCacotizas;
+
+	
+	protected $lastCacotizaCriteria = null;
 
 	
 	protected $alreadyInSave = false;
@@ -529,6 +555,41 @@ abstract class BaseCaprovee extends BaseObject  implements Persistent {
 
   }
   
+  public function getRamgen()
+  {
+
+    return trim($this->ramgen);
+
+  }
+  
+  public function getEstpro()
+  {
+
+    return trim($this->estpro);
+
+  }
+  
+  public function getCodban()
+  {
+
+    return trim($this->codban);
+
+  }
+  
+  public function getNumcue()
+  {
+
+    return trim($this->numcue);
+
+  }
+  
+  public function getCodtip()
+  {
+
+    return trim($this->codtip);
+
+  }
+  
   public function getId()
   {
 
@@ -649,6 +710,11 @@ abstract class BaseCaprovee extends BaseObject  implements Persistent {
 	public function setFecreg($v)
 	{
 
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecreg] from input: " . var_export($v, true));
@@ -766,6 +832,11 @@ abstract class BaseCaprovee extends BaseObject  implements Persistent {
 	public function setFecinscir($v)
 	{
 
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecinscir] from input: " . var_export($v, true));
@@ -862,6 +933,11 @@ abstract class BaseCaprovee extends BaseObject  implements Persistent {
 	
 	public function setFecven($v)
 	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
@@ -967,6 +1043,56 @@ abstract class BaseCaprovee extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setRamgen($v)
+	{
+
+    if ($this->ramgen !== $v) {
+        $this->ramgen = $v;
+        $this->modifiedColumns[] = CaproveePeer::RAMGEN;
+      }
+  
+	} 
+	
+	public function setEstpro($v)
+	{
+
+    if ($this->estpro !== $v) {
+        $this->estpro = $v;
+        $this->modifiedColumns[] = CaproveePeer::ESTPRO;
+      }
+  
+	} 
+	
+	public function setCodban($v)
+	{
+
+    if ($this->codban !== $v) {
+        $this->codban = $v;
+        $this->modifiedColumns[] = CaproveePeer::CODBAN;
+      }
+  
+	} 
+	
+	public function setNumcue($v)
+	{
+
+    if ($this->numcue !== $v) {
+        $this->numcue = $v;
+        $this->modifiedColumns[] = CaproveePeer::NUMCUE;
+      }
+  
+	} 
+	
+	public function setCodtip($v)
+	{
+
+    if ($this->codtip !== $v) {
+        $this->codtip = $v;
+        $this->modifiedColumns[] = CaproveePeer::CODTIP;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -1063,7 +1189,17 @@ abstract class BaseCaprovee extends BaseObject  implements Persistent {
 
       $this->codtipemp = $rs->getString($startcol + 40);
 
-      $this->id = $rs->getInt($startcol + 41);
+      $this->ramgen = $rs->getString($startcol + 41);
+
+      $this->estpro = $rs->getString($startcol + 42);
+
+      $this->codban = $rs->getString($startcol + 43);
+
+      $this->numcue = $rs->getString($startcol + 44);
+
+      $this->codtip = $rs->getString($startcol + 45);
+
+      $this->id = $rs->getInt($startcol + 46);
 
       $this->resetModified();
 
@@ -1071,7 +1207,7 @@ abstract class BaseCaprovee extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 42; 
+            return $startcol + 47; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Caprovee object", $e);
     }
@@ -1175,6 +1311,14 @@ abstract class BaseCaprovee extends BaseObject  implements Persistent {
 				}
 			}
 
+			if ($this->collCacotizas !== null) {
+				foreach($this->collCacotizas as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
+
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
@@ -1226,6 +1370,14 @@ abstract class BaseCaprovee extends BaseObject  implements Persistent {
 
 				if ($this->collCaordcoms !== null) {
 					foreach($this->collCaordcoms as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
+
+				if ($this->collCacotizas !== null) {
+					foreach($this->collCacotizas as $referrerFK) {
 						if (!$referrerFK->validate($columns)) {
 							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
 						}
@@ -1374,6 +1526,21 @@ abstract class BaseCaprovee extends BaseObject  implements Persistent {
 				return $this->getCodtipemp();
 				break;
 			case 41:
+				return $this->getRamgen();
+				break;
+			case 42:
+				return $this->getEstpro();
+				break;
+			case 43:
+				return $this->getCodban();
+				break;
+			case 44:
+				return $this->getNumcue();
+				break;
+			case 45:
+				return $this->getCodtip();
+				break;
+			case 46:
 				return $this->getId();
 				break;
 			default:
@@ -1427,7 +1594,12 @@ abstract class BaseCaprovee extends BaseObject  implements Persistent {
 			$keys[38] => $this->getTemrifpro(),
 			$keys[39] => $this->getCodctasec(),
 			$keys[40] => $this->getCodtipemp(),
-			$keys[41] => $this->getId(),
+			$keys[41] => $this->getRamgen(),
+			$keys[42] => $this->getEstpro(),
+			$keys[43] => $this->getCodban(),
+			$keys[44] => $this->getNumcue(),
+			$keys[45] => $this->getCodtip(),
+			$keys[46] => $this->getId(),
 		);
 		return $result;
 	}
@@ -1567,6 +1739,21 @@ abstract class BaseCaprovee extends BaseObject  implements Persistent {
 				$this->setCodtipemp($value);
 				break;
 			case 41:
+				$this->setRamgen($value);
+				break;
+			case 42:
+				$this->setEstpro($value);
+				break;
+			case 43:
+				$this->setCodban($value);
+				break;
+			case 44:
+				$this->setNumcue($value);
+				break;
+			case 45:
+				$this->setCodtip($value);
+				break;
+			case 46:
 				$this->setId($value);
 				break;
 		} 	}
@@ -1617,7 +1804,12 @@ abstract class BaseCaprovee extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[38], $arr)) $this->setTemrifpro($arr[$keys[38]]);
 		if (array_key_exists($keys[39], $arr)) $this->setCodctasec($arr[$keys[39]]);
 		if (array_key_exists($keys[40], $arr)) $this->setCodtipemp($arr[$keys[40]]);
-		if (array_key_exists($keys[41], $arr)) $this->setId($arr[$keys[41]]);
+		if (array_key_exists($keys[41], $arr)) $this->setRamgen($arr[$keys[41]]);
+		if (array_key_exists($keys[42], $arr)) $this->setEstpro($arr[$keys[42]]);
+		if (array_key_exists($keys[43], $arr)) $this->setCodban($arr[$keys[43]]);
+		if (array_key_exists($keys[44], $arr)) $this->setNumcue($arr[$keys[44]]);
+		if (array_key_exists($keys[45], $arr)) $this->setCodtip($arr[$keys[45]]);
+		if (array_key_exists($keys[46], $arr)) $this->setId($arr[$keys[46]]);
 	}
 
 	
@@ -1666,6 +1858,11 @@ abstract class BaseCaprovee extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CaproveePeer::TEMRIFPRO)) $criteria->add(CaproveePeer::TEMRIFPRO, $this->temrifpro);
 		if ($this->isColumnModified(CaproveePeer::CODCTASEC)) $criteria->add(CaproveePeer::CODCTASEC, $this->codctasec);
 		if ($this->isColumnModified(CaproveePeer::CODTIPEMP)) $criteria->add(CaproveePeer::CODTIPEMP, $this->codtipemp);
+		if ($this->isColumnModified(CaproveePeer::RAMGEN)) $criteria->add(CaproveePeer::RAMGEN, $this->ramgen);
+		if ($this->isColumnModified(CaproveePeer::ESTPRO)) $criteria->add(CaproveePeer::ESTPRO, $this->estpro);
+		if ($this->isColumnModified(CaproveePeer::CODBAN)) $criteria->add(CaproveePeer::CODBAN, $this->codban);
+		if ($this->isColumnModified(CaproveePeer::NUMCUE)) $criteria->add(CaproveePeer::NUMCUE, $this->numcue);
+		if ($this->isColumnModified(CaproveePeer::CODTIP)) $criteria->add(CaproveePeer::CODTIP, $this->codtip);
 		if ($this->isColumnModified(CaproveePeer::ID)) $criteria->add(CaproveePeer::ID, $this->id);
 
 		return $criteria;
@@ -1779,6 +1976,16 @@ abstract class BaseCaprovee extends BaseObject  implements Persistent {
 
 		$copyObj->setCodtipemp($this->codtipemp);
 
+		$copyObj->setRamgen($this->ramgen);
+
+		$copyObj->setEstpro($this->estpro);
+
+		$copyObj->setCodban($this->codban);
+
+		$copyObj->setNumcue($this->numcue);
+
+		$copyObj->setCodtip($this->codtip);
+
 
 		if ($deepCopy) {
 									$copyObj->setNew(false);
@@ -1789,6 +1996,10 @@ abstract class BaseCaprovee extends BaseObject  implements Persistent {
 
 			foreach($this->getCaordcoms() as $relObj) {
 				$copyObj->addCaordcom($relObj->copy($deepCopy));
+			}
+
+			foreach($this->getCacotizas() as $relObj) {
+				$copyObj->addCacotiza($relObj->copy($deepCopy));
 			}
 
 		} 
@@ -2059,6 +2270,146 @@ abstract class BaseCaprovee extends BaseObject  implements Persistent {
 		$this->lastCaordcomCriteria = $criteria;
 
 		return $this->collCaordcoms;
+	}
+
+
+	
+	public function getCaordcomsJoinTsdesmon($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseCaordcomPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCaordcoms === null) {
+			if ($this->isNew()) {
+				$this->collCaordcoms = array();
+			} else {
+
+				$criteria->add(CaordcomPeer::CODPRO, $this->getCodpro());
+
+				$this->collCaordcoms = CaordcomPeer::doSelectJoinTsdesmon($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(CaordcomPeer::CODPRO, $this->getCodpro());
+
+			if (!isset($this->lastCaordcomCriteria) || !$this->lastCaordcomCriteria->equals($criteria)) {
+				$this->collCaordcoms = CaordcomPeer::doSelectJoinTsdesmon($criteria, $con);
+			}
+		}
+		$this->lastCaordcomCriteria = $criteria;
+
+		return $this->collCaordcoms;
+	}
+
+	
+	public function initCacotizas()
+	{
+		if ($this->collCacotizas === null) {
+			$this->collCacotizas = array();
+		}
+	}
+
+	
+	public function getCacotizas($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseCacotizaPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCacotizas === null) {
+			if ($this->isNew()) {
+			   $this->collCacotizas = array();
+			} else {
+
+				$criteria->add(CacotizaPeer::CODPRO, $this->getCodpro());
+
+				CacotizaPeer::addSelectColumns($criteria);
+				$this->collCacotizas = CacotizaPeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(CacotizaPeer::CODPRO, $this->getCodpro());
+
+				CacotizaPeer::addSelectColumns($criteria);
+				if (!isset($this->lastCacotizaCriteria) || !$this->lastCacotizaCriteria->equals($criteria)) {
+					$this->collCacotizas = CacotizaPeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastCacotizaCriteria = $criteria;
+		return $this->collCacotizas;
+	}
+
+	
+	public function countCacotizas($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/om/BaseCacotizaPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(CacotizaPeer::CODPRO, $this->getCodpro());
+
+		return CacotizaPeer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addCacotiza(Cacotiza $l)
+	{
+		$this->collCacotizas[] = $l;
+		$l->setCaprovee($this);
+	}
+
+
+	
+	public function getCacotizasJoinTsdesmon($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseCacotizaPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCacotizas === null) {
+			if ($this->isNew()) {
+				$this->collCacotizas = array();
+			} else {
+
+				$criteria->add(CacotizaPeer::CODPRO, $this->getCodpro());
+
+				$this->collCacotizas = CacotizaPeer::doSelectJoinTsdesmon($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(CacotizaPeer::CODPRO, $this->getCodpro());
+
+			if (!isset($this->lastCacotizaCriteria) || !$this->lastCacotizaCriteria->equals($criteria)) {
+				$this->collCacotizas = CacotizaPeer::doSelectJoinTsdesmon($criteria, $con);
+			}
+		}
+		$this->lastCacotizaCriteria = $criteria;
+
+		return $this->collCacotizas;
 	}
 
 } 

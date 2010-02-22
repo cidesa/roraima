@@ -92,28 +92,13 @@ abstract class BaseOpbenefi extends BaseObject  implements Persistent {
 	protected $id;
 
 	
-	protected $collCpcompros;
+	protected $aOptipben;
 
 	
-	protected $lastCpcomproCriteria = null;
+	protected $collOpordpags;
 
 	
-	protected $collCppagoss;
-
-	
-	protected $lastCppagosCriteria = null;
-
-	
-	protected $collCpprecoms;
-
-	
-	protected $lastCpprecomCriteria = null;
-
-	
-	protected $collCpcausads;
-
-	
-	protected $lastCpcausadCriteria = null;
+	protected $lastOpordpagCriteria = null;
 
 	
 	protected $alreadyInSave = false;
@@ -337,6 +322,10 @@ abstract class BaseOpbenefi extends BaseObject  implements Persistent {
         $this->modifiedColumns[] = OpbenefiPeer::CODTIPBEN;
       }
   
+		if ($this->aOptipben !== null && $this->aOptipben->getCodtipben() !== $v) {
+			$this->aOptipben = null;
+		}
+
 	} 
 	
 	public function setTipper($v)
@@ -608,6 +597,15 @@ abstract class BaseOpbenefi extends BaseObject  implements Persistent {
 			$this->alreadyInSave = true;
 
 
+												
+			if ($this->aOptipben !== null) {
+				if ($this->aOptipben->isModified()) {
+					$affectedRows += $this->aOptipben->save($con);
+				}
+				$this->setOptipben($this->aOptipben);
+			}
+
+
 						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = OpbenefiPeer::doInsert($this, $con);
@@ -619,32 +617,8 @@ abstract class BaseOpbenefi extends BaseObject  implements Persistent {
 				}
 				$this->resetModified(); 			}
 
-			if ($this->collCpcompros !== null) {
-				foreach($this->collCpcompros as $referrerFK) {
-					if (!$referrerFK->isDeleted()) {
-						$affectedRows += $referrerFK->save($con);
-					}
-				}
-			}
-
-			if ($this->collCppagoss !== null) {
-				foreach($this->collCppagoss as $referrerFK) {
-					if (!$referrerFK->isDeleted()) {
-						$affectedRows += $referrerFK->save($con);
-					}
-				}
-			}
-
-			if ($this->collCpprecoms !== null) {
-				foreach($this->collCpprecoms as $referrerFK) {
-					if (!$referrerFK->isDeleted()) {
-						$affectedRows += $referrerFK->save($con);
-					}
-				}
-			}
-
-			if ($this->collCpcausads !== null) {
-				foreach($this->collCpcausads as $referrerFK) {
+			if ($this->collOpordpags !== null) {
+				foreach($this->collOpordpags as $referrerFK) {
 					if (!$referrerFK->isDeleted()) {
 						$affectedRows += $referrerFK->save($con);
 					}
@@ -687,37 +661,21 @@ abstract class BaseOpbenefi extends BaseObject  implements Persistent {
 			$failureMap = array();
 
 
+												
+			if ($this->aOptipben !== null) {
+				if (!$this->aOptipben->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aOptipben->getValidationFailures());
+				}
+			}
+
+
 			if (($retval = OpbenefiPeer::doValidate($this, $columns)) !== true) {
 				$failureMap = array_merge($failureMap, $retval);
 			}
 
 
-				if ($this->collCpcompros !== null) {
-					foreach($this->collCpcompros as $referrerFK) {
-						if (!$referrerFK->validate($columns)) {
-							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
-						}
-					}
-				}
-
-				if ($this->collCppagoss !== null) {
-					foreach($this->collCppagoss as $referrerFK) {
-						if (!$referrerFK->validate($columns)) {
-							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
-						}
-					}
-				}
-
-				if ($this->collCpprecoms !== null) {
-					foreach($this->collCpprecoms as $referrerFK) {
-						if (!$referrerFK->validate($columns)) {
-							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
-						}
-					}
-				}
-
-				if ($this->collCpcausads !== null) {
-					foreach($this->collCpcausads as $referrerFK) {
+				if ($this->collOpordpags !== null) {
+					foreach($this->collOpordpags as $referrerFK) {
 						if (!$referrerFK->validate($columns)) {
 							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
 						}
@@ -1044,20 +1002,8 @@ abstract class BaseOpbenefi extends BaseObject  implements Persistent {
 		if ($deepCopy) {
 									$copyObj->setNew(false);
 
-			foreach($this->getCpcompros() as $relObj) {
-				$copyObj->addCpcompro($relObj->copy($deepCopy));
-			}
-
-			foreach($this->getCppagoss() as $relObj) {
-				$copyObj->addCppagos($relObj->copy($deepCopy));
-			}
-
-			foreach($this->getCpprecoms() as $relObj) {
-				$copyObj->addCpprecom($relObj->copy($deepCopy));
-			}
-
-			foreach($this->getCpcausads() as $relObj) {
-				$copyObj->addCpcausad($relObj->copy($deepCopy));
+			foreach($this->getOpordpags() as $relObj) {
+				$copyObj->addOpordpag($relObj->copy($deepCopy));
 			}
 
 		} 
@@ -1086,17 +1032,46 @@ abstract class BaseOpbenefi extends BaseObject  implements Persistent {
 	}
 
 	
-	public function initCpcompros()
+	public function setOptipben($v)
 	{
-		if ($this->collCpcompros === null) {
-			$this->collCpcompros = array();
+
+
+		if ($v === null) {
+			$this->setCodtipben(NULL);
+		} else {
+			$this->setCodtipben($v->getCodtipben());
+		}
+
+
+		$this->aOptipben = $v;
+	}
+
+
+	
+	public function getOptipben($con = null)
+	{
+		if ($this->aOptipben === null && (($this->codtipben !== "" && $this->codtipben !== null))) {
+						include_once 'lib/model/om/BaseOptipbenPeer.php';
+
+			$this->aOptipben = OptipbenPeer::retrieveByPK($this->codtipben, $con);
+
+			
+		}
+		return $this->aOptipben;
+	}
+
+	
+	public function initOpordpags()
+	{
+		if ($this->collOpordpags === null) {
+			$this->collOpordpags = array();
 		}
 	}
 
 	
-	public function getCpcompros($criteria = null, $con = null)
+	public function getOpordpags($criteria = null, $con = null)
 	{
-				include_once 'lib/model/presupuesto/om/BaseCpcomproPeer.php';
+				include_once 'lib/model/om/BaseOpordpagPeer.php';
 		if ($criteria === null) {
 			$criteria = new Criteria();
 		}
@@ -1105,36 +1080,36 @@ abstract class BaseOpbenefi extends BaseObject  implements Persistent {
 			$criteria = clone $criteria;
 		}
 
-		if ($this->collCpcompros === null) {
+		if ($this->collOpordpags === null) {
 			if ($this->isNew()) {
-			   $this->collCpcompros = array();
+			   $this->collOpordpags = array();
 			} else {
 
-				$criteria->add(CpcomproPeer::CEDRIF, $this->getCedrif());
+				$criteria->add(OpordpagPeer::CEDRIF, $this->getCedrif());
 
-				CpcomproPeer::addSelectColumns($criteria);
-				$this->collCpcompros = CpcomproPeer::doSelect($criteria, $con);
+				OpordpagPeer::addSelectColumns($criteria);
+				$this->collOpordpags = OpordpagPeer::doSelect($criteria, $con);
 			}
 		} else {
 						if (!$this->isNew()) {
 												
 
-				$criteria->add(CpcomproPeer::CEDRIF, $this->getCedrif());
+				$criteria->add(OpordpagPeer::CEDRIF, $this->getCedrif());
 
-				CpcomproPeer::addSelectColumns($criteria);
-				if (!isset($this->lastCpcomproCriteria) || !$this->lastCpcomproCriteria->equals($criteria)) {
-					$this->collCpcompros = CpcomproPeer::doSelect($criteria, $con);
+				OpordpagPeer::addSelectColumns($criteria);
+				if (!isset($this->lastOpordpagCriteria) || !$this->lastOpordpagCriteria->equals($criteria)) {
+					$this->collOpordpags = OpordpagPeer::doSelect($criteria, $con);
 				}
 			}
 		}
-		$this->lastCpcomproCriteria = $criteria;
-		return $this->collCpcompros;
+		$this->lastOpordpagCriteria = $criteria;
+		return $this->collOpordpags;
 	}
 
 	
-	public function countCpcompros($criteria = null, $distinct = false, $con = null)
+	public function countOpordpags($criteria = null, $distinct = false, $con = null)
 	{
-				include_once 'lib/model/presupuesto/om/BaseCpcomproPeer.php';
+				include_once 'lib/model/om/BaseOpordpagPeer.php';
 		if ($criteria === null) {
 			$criteria = new Criteria();
 		}
@@ -1143,436 +1118,16 @@ abstract class BaseOpbenefi extends BaseObject  implements Persistent {
 			$criteria = clone $criteria;
 		}
 
-		$criteria->add(CpcomproPeer::CEDRIF, $this->getCedrif());
+		$criteria->add(OpordpagPeer::CEDRIF, $this->getCedrif());
 
-		return CpcomproPeer::doCount($criteria, $distinct, $con);
+		return OpordpagPeer::doCount($criteria, $distinct, $con);
 	}
 
 	
-	public function addCpcompro(Cpcompro $l)
+	public function addOpordpag(Opordpag $l)
 	{
-		$this->collCpcompros[] = $l;
+		$this->collOpordpags[] = $l;
 		$l->setOpbenefi($this);
-	}
-
-
-	
-	public function getCpcomprosJoinCpdoccom($criteria = null, $con = null)
-	{
-				include_once 'lib/model/presupuesto/om/BaseCpcomproPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		if ($this->collCpcompros === null) {
-			if ($this->isNew()) {
-				$this->collCpcompros = array();
-			} else {
-
-				$criteria->add(CpcomproPeer::CEDRIF, $this->getCedrif());
-
-				$this->collCpcompros = CpcomproPeer::doSelectJoinCpdoccom($criteria, $con);
-			}
-		} else {
-									
-			$criteria->add(CpcomproPeer::CEDRIF, $this->getCedrif());
-
-			if (!isset($this->lastCpcomproCriteria) || !$this->lastCpcomproCriteria->equals($criteria)) {
-				$this->collCpcompros = CpcomproPeer::doSelectJoinCpdoccom($criteria, $con);
-			}
-		}
-		$this->lastCpcomproCriteria = $criteria;
-
-		return $this->collCpcompros;
-	}
-
-
-	
-	public function getCpcomprosJoinCpprecom($criteria = null, $con = null)
-	{
-				include_once 'lib/model/presupuesto/om/BaseCpcomproPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		if ($this->collCpcompros === null) {
-			if ($this->isNew()) {
-				$this->collCpcompros = array();
-			} else {
-
-				$criteria->add(CpcomproPeer::CEDRIF, $this->getCedrif());
-
-				$this->collCpcompros = CpcomproPeer::doSelectJoinCpprecom($criteria, $con);
-			}
-		} else {
-									
-			$criteria->add(CpcomproPeer::CEDRIF, $this->getCedrif());
-
-			if (!isset($this->lastCpcomproCriteria) || !$this->lastCpcomproCriteria->equals($criteria)) {
-				$this->collCpcompros = CpcomproPeer::doSelectJoinCpprecom($criteria, $con);
-			}
-		}
-		$this->lastCpcomproCriteria = $criteria;
-
-		return $this->collCpcompros;
-	}
-
-	
-	public function initCppagoss()
-	{
-		if ($this->collCppagoss === null) {
-			$this->collCppagoss = array();
-		}
-	}
-
-	
-	public function getCppagoss($criteria = null, $con = null)
-	{
-				include_once 'lib/model/presupuesto/om/BaseCppagosPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		if ($this->collCppagoss === null) {
-			if ($this->isNew()) {
-			   $this->collCppagoss = array();
-			} else {
-
-				$criteria->add(CppagosPeer::CEDRIF, $this->getCedrif());
-
-				CppagosPeer::addSelectColumns($criteria);
-				$this->collCppagoss = CppagosPeer::doSelect($criteria, $con);
-			}
-		} else {
-						if (!$this->isNew()) {
-												
-
-				$criteria->add(CppagosPeer::CEDRIF, $this->getCedrif());
-
-				CppagosPeer::addSelectColumns($criteria);
-				if (!isset($this->lastCppagosCriteria) || !$this->lastCppagosCriteria->equals($criteria)) {
-					$this->collCppagoss = CppagosPeer::doSelect($criteria, $con);
-				}
-			}
-		}
-		$this->lastCppagosCriteria = $criteria;
-		return $this->collCppagoss;
-	}
-
-	
-	public function countCppagoss($criteria = null, $distinct = false, $con = null)
-	{
-				include_once 'lib/model/presupuesto/om/BaseCppagosPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		$criteria->add(CppagosPeer::CEDRIF, $this->getCedrif());
-
-		return CppagosPeer::doCount($criteria, $distinct, $con);
-	}
-
-	
-	public function addCppagos(Cppagos $l)
-	{
-		$this->collCppagoss[] = $l;
-		$l->setOpbenefi($this);
-	}
-
-
-	
-	public function getCppagossJoinCpdocpag($criteria = null, $con = null)
-	{
-				include_once 'lib/model/presupuesto/om/BaseCppagosPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		if ($this->collCppagoss === null) {
-			if ($this->isNew()) {
-				$this->collCppagoss = array();
-			} else {
-
-				$criteria->add(CppagosPeer::CEDRIF, $this->getCedrif());
-
-				$this->collCppagoss = CppagosPeer::doSelectJoinCpdocpag($criteria, $con);
-			}
-		} else {
-									
-			$criteria->add(CppagosPeer::CEDRIF, $this->getCedrif());
-
-			if (!isset($this->lastCppagosCriteria) || !$this->lastCppagosCriteria->equals($criteria)) {
-				$this->collCppagoss = CppagosPeer::doSelectJoinCpdocpag($criteria, $con);
-			}
-		}
-		$this->lastCppagosCriteria = $criteria;
-
-		return $this->collCppagoss;
-	}
-
-	
-	public function initCpprecoms()
-	{
-		if ($this->collCpprecoms === null) {
-			$this->collCpprecoms = array();
-		}
-	}
-
-	
-	public function getCpprecoms($criteria = null, $con = null)
-	{
-				include_once 'lib/model/presupuesto/om/BaseCpprecomPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		if ($this->collCpprecoms === null) {
-			if ($this->isNew()) {
-			   $this->collCpprecoms = array();
-			} else {
-
-				$criteria->add(CpprecomPeer::CEDRIF, $this->getCedrif());
-
-				CpprecomPeer::addSelectColumns($criteria);
-				$this->collCpprecoms = CpprecomPeer::doSelect($criteria, $con);
-			}
-		} else {
-						if (!$this->isNew()) {
-												
-
-				$criteria->add(CpprecomPeer::CEDRIF, $this->getCedrif());
-
-				CpprecomPeer::addSelectColumns($criteria);
-				if (!isset($this->lastCpprecomCriteria) || !$this->lastCpprecomCriteria->equals($criteria)) {
-					$this->collCpprecoms = CpprecomPeer::doSelect($criteria, $con);
-				}
-			}
-		}
-		$this->lastCpprecomCriteria = $criteria;
-		return $this->collCpprecoms;
-	}
-
-	
-	public function countCpprecoms($criteria = null, $distinct = false, $con = null)
-	{
-				include_once 'lib/model/presupuesto/om/BaseCpprecomPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		$criteria->add(CpprecomPeer::CEDRIF, $this->getCedrif());
-
-		return CpprecomPeer::doCount($criteria, $distinct, $con);
-	}
-
-	
-	public function addCpprecom(Cpprecom $l)
-	{
-		$this->collCpprecoms[] = $l;
-		$l->setOpbenefi($this);
-	}
-
-
-	
-	public function getCpprecomsJoinCpdocprc($criteria = null, $con = null)
-	{
-				include_once 'lib/model/presupuesto/om/BaseCpprecomPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		if ($this->collCpprecoms === null) {
-			if ($this->isNew()) {
-				$this->collCpprecoms = array();
-			} else {
-
-				$criteria->add(CpprecomPeer::CEDRIF, $this->getCedrif());
-
-				$this->collCpprecoms = CpprecomPeer::doSelectJoinCpdocprc($criteria, $con);
-			}
-		} else {
-									
-			$criteria->add(CpprecomPeer::CEDRIF, $this->getCedrif());
-
-			if (!isset($this->lastCpprecomCriteria) || !$this->lastCpprecomCriteria->equals($criteria)) {
-				$this->collCpprecoms = CpprecomPeer::doSelectJoinCpdocprc($criteria, $con);
-			}
-		}
-		$this->lastCpprecomCriteria = $criteria;
-
-		return $this->collCpprecoms;
-	}
-
-	
-	public function initCpcausads()
-	{
-		if ($this->collCpcausads === null) {
-			$this->collCpcausads = array();
-		}
-	}
-
-	
-	public function getCpcausads($criteria = null, $con = null)
-	{
-				include_once 'lib/model/presupuesto/om/BaseCpcausadPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		if ($this->collCpcausads === null) {
-			if ($this->isNew()) {
-			   $this->collCpcausads = array();
-			} else {
-
-				$criteria->add(CpcausadPeer::CEDRIF, $this->getCedrif());
-
-				CpcausadPeer::addSelectColumns($criteria);
-				$this->collCpcausads = CpcausadPeer::doSelect($criteria, $con);
-			}
-		} else {
-						if (!$this->isNew()) {
-												
-
-				$criteria->add(CpcausadPeer::CEDRIF, $this->getCedrif());
-
-				CpcausadPeer::addSelectColumns($criteria);
-				if (!isset($this->lastCpcausadCriteria) || !$this->lastCpcausadCriteria->equals($criteria)) {
-					$this->collCpcausads = CpcausadPeer::doSelect($criteria, $con);
-				}
-			}
-		}
-		$this->lastCpcausadCriteria = $criteria;
-		return $this->collCpcausads;
-	}
-
-	
-	public function countCpcausads($criteria = null, $distinct = false, $con = null)
-	{
-				include_once 'lib/model/presupuesto/om/BaseCpcausadPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		$criteria->add(CpcausadPeer::CEDRIF, $this->getCedrif());
-
-		return CpcausadPeer::doCount($criteria, $distinct, $con);
-	}
-
-	
-	public function addCpcausad(Cpcausad $l)
-	{
-		$this->collCpcausads[] = $l;
-		$l->setOpbenefi($this);
-	}
-
-
-	
-	public function getCpcausadsJoinCpdoccau($criteria = null, $con = null)
-	{
-				include_once 'lib/model/presupuesto/om/BaseCpcausadPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		if ($this->collCpcausads === null) {
-			if ($this->isNew()) {
-				$this->collCpcausads = array();
-			} else {
-
-				$criteria->add(CpcausadPeer::CEDRIF, $this->getCedrif());
-
-				$this->collCpcausads = CpcausadPeer::doSelectJoinCpdoccau($criteria, $con);
-			}
-		} else {
-									
-			$criteria->add(CpcausadPeer::CEDRIF, $this->getCedrif());
-
-			if (!isset($this->lastCpcausadCriteria) || !$this->lastCpcausadCriteria->equals($criteria)) {
-				$this->collCpcausads = CpcausadPeer::doSelectJoinCpdoccau($criteria, $con);
-			}
-		}
-		$this->lastCpcausadCriteria = $criteria;
-
-		return $this->collCpcausads;
-	}
-
-
-	
-	public function getCpcausadsJoinCpcompro($criteria = null, $con = null)
-	{
-				include_once 'lib/model/presupuesto/om/BaseCpcausadPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		if ($this->collCpcausads === null) {
-			if ($this->isNew()) {
-				$this->collCpcausads = array();
-			} else {
-
-				$criteria->add(CpcausadPeer::CEDRIF, $this->getCedrif());
-
-				$this->collCpcausads = CpcausadPeer::doSelectJoinCpcompro($criteria, $con);
-			}
-		} else {
-									
-			$criteria->add(CpcausadPeer::CEDRIF, $this->getCedrif());
-
-			if (!isset($this->lastCpcausadCriteria) || !$this->lastCpcausadCriteria->equals($criteria)) {
-				$this->collCpcausads = CpcausadPeer::doSelectJoinCpcompro($criteria, $con);
-			}
-		}
-		$this->lastCpcausadCriteria = $criteria;
-
-		return $this->collCpcausads;
 	}
 
 } 

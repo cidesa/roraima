@@ -36,6 +36,18 @@ abstract class BaseTstipmov extends BaseObject  implements Persistent {
 	protected $id;
 
 	
+	protected $collTsmovbans;
+
+	
+	protected $lastTsmovbanCriteria = null;
+
+	
+	protected $collTsmovlibs;
+
+	
+	protected $lastTsmovlibCriteria = null;
+
+	
 	protected $alreadyInSave = false;
 
 	
@@ -273,6 +285,22 @@ abstract class BaseTstipmov extends BaseObject  implements Persistent {
 				}
 				$this->resetModified(); 			}
 
+			if ($this->collTsmovbans !== null) {
+				foreach($this->collTsmovbans as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
+
+			if ($this->collTsmovlibs !== null) {
+				foreach($this->collTsmovlibs as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
+
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
@@ -313,6 +341,22 @@ abstract class BaseTstipmov extends BaseObject  implements Persistent {
 				$failureMap = array_merge($failureMap, $retval);
 			}
 
+
+				if ($this->collTsmovbans !== null) {
+					foreach($this->collTsmovbans as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
+
+				if ($this->collTsmovlibs !== null) {
+					foreach($this->collTsmovlibs as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
 
 
 			$this->alreadyInValidation = false;
@@ -477,6 +521,19 @@ abstract class BaseTstipmov extends BaseObject  implements Persistent {
 		$copyObj->setCodcon($this->codcon);
 
 
+		if ($deepCopy) {
+									$copyObj->setNew(false);
+
+			foreach($this->getTsmovbans() as $relObj) {
+				$copyObj->addTsmovban($relObj->copy($deepCopy));
+			}
+
+			foreach($this->getTsmovlibs() as $relObj) {
+				$copyObj->addTsmovlib($relObj->copy($deepCopy));
+			}
+
+		} 
+
 		$copyObj->setNew(true);
 
 		$copyObj->setId(NULL); 
@@ -498,6 +555,216 @@ abstract class BaseTstipmov extends BaseObject  implements Persistent {
 			self::$peer = new TstipmovPeer();
 		}
 		return self::$peer;
+	}
+
+	
+	public function initTsmovbans()
+	{
+		if ($this->collTsmovbans === null) {
+			$this->collTsmovbans = array();
+		}
+	}
+
+	
+	public function getTsmovbans($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseTsmovbanPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collTsmovbans === null) {
+			if ($this->isNew()) {
+			   $this->collTsmovbans = array();
+			} else {
+
+				$criteria->add(TsmovbanPeer::TIPMOV, $this->getCodtip());
+
+				TsmovbanPeer::addSelectColumns($criteria);
+				$this->collTsmovbans = TsmovbanPeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(TsmovbanPeer::TIPMOV, $this->getCodtip());
+
+				TsmovbanPeer::addSelectColumns($criteria);
+				if (!isset($this->lastTsmovbanCriteria) || !$this->lastTsmovbanCriteria->equals($criteria)) {
+					$this->collTsmovbans = TsmovbanPeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastTsmovbanCriteria = $criteria;
+		return $this->collTsmovbans;
+	}
+
+	
+	public function countTsmovbans($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/om/BaseTsmovbanPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(TsmovbanPeer::TIPMOV, $this->getCodtip());
+
+		return TsmovbanPeer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addTsmovban(Tsmovban $l)
+	{
+		$this->collTsmovbans[] = $l;
+		$l->setTstipmov($this);
+	}
+
+
+	
+	public function getTsmovbansJoinTsdefban($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseTsmovbanPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collTsmovbans === null) {
+			if ($this->isNew()) {
+				$this->collTsmovbans = array();
+			} else {
+
+				$criteria->add(TsmovbanPeer::TIPMOV, $this->getCodtip());
+
+				$this->collTsmovbans = TsmovbanPeer::doSelectJoinTsdefban($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(TsmovbanPeer::TIPMOV, $this->getCodtip());
+
+			if (!isset($this->lastTsmovbanCriteria) || !$this->lastTsmovbanCriteria->equals($criteria)) {
+				$this->collTsmovbans = TsmovbanPeer::doSelectJoinTsdefban($criteria, $con);
+			}
+		}
+		$this->lastTsmovbanCriteria = $criteria;
+
+		return $this->collTsmovbans;
+	}
+
+	
+	public function initTsmovlibs()
+	{
+		if ($this->collTsmovlibs === null) {
+			$this->collTsmovlibs = array();
+		}
+	}
+
+	
+	public function getTsmovlibs($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseTsmovlibPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collTsmovlibs === null) {
+			if ($this->isNew()) {
+			   $this->collTsmovlibs = array();
+			} else {
+
+				$criteria->add(TsmovlibPeer::TIPMOV, $this->getCodtip());
+
+				TsmovlibPeer::addSelectColumns($criteria);
+				$this->collTsmovlibs = TsmovlibPeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(TsmovlibPeer::TIPMOV, $this->getCodtip());
+
+				TsmovlibPeer::addSelectColumns($criteria);
+				if (!isset($this->lastTsmovlibCriteria) || !$this->lastTsmovlibCriteria->equals($criteria)) {
+					$this->collTsmovlibs = TsmovlibPeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastTsmovlibCriteria = $criteria;
+		return $this->collTsmovlibs;
+	}
+
+	
+	public function countTsmovlibs($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/om/BaseTsmovlibPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(TsmovlibPeer::TIPMOV, $this->getCodtip());
+
+		return TsmovlibPeer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addTsmovlib(Tsmovlib $l)
+	{
+		$this->collTsmovlibs[] = $l;
+		$l->setTstipmov($this);
+	}
+
+
+	
+	public function getTsmovlibsJoinTsdefban($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseTsmovlibPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collTsmovlibs === null) {
+			if ($this->isNew()) {
+				$this->collTsmovlibs = array();
+			} else {
+
+				$criteria->add(TsmovlibPeer::TIPMOV, $this->getCodtip());
+
+				$this->collTsmovlibs = TsmovlibPeer::doSelectJoinTsdefban($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(TsmovlibPeer::TIPMOV, $this->getCodtip());
+
+			if (!isset($this->lastTsmovlibCriteria) || !$this->lastTsmovlibCriteria->equals($criteria)) {
+				$this->collTsmovlibs = TsmovlibPeer::doSelectJoinTsdefban($criteria, $con);
+			}
+		}
+		$this->lastTsmovlibCriteria = $criteria;
+
+		return $this->collTsmovlibs;
 	}
 
 } 
