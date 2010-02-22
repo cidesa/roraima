@@ -15,6 +15,8 @@
  */ 
 class Opbenefi extends BaseOpbenefi
 {
+	protected $tiedatrel="";
+
 	public function getNomcuentacont()
 	{
 		return Herramientas::getX('Codcta','contabb','descta',trim(self::getCodcta()));
@@ -46,5 +48,23 @@ class Opbenefi extends BaseOpbenefi
 	public function getNomctacajchi()
 	{
 		return Herramientas::getX('Codcta','contabb','descta',trim(self::getCodctacajchi()));
-	}	
+	}
+
+  public function getTiedatrel()
+  {
+  	  $valor="N";
+  	  $d= new Criteria();
+  	  $d->add(OpordpagPeer::CEDRIF,self::getCedrif());
+  	  $resul= OpordpagPeer::doSelectOne($d);
+  	  if ($resul)
+  	  {
+  	  	$valor= 'S';
+  	  } else $valor= 'N';
+  	return $valor;
+  }
+
+  public function setTiedatrel()
+  {
+  	return $this->tiedatrel;
+  }
 }

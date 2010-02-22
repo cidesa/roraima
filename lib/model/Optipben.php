@@ -15,4 +15,23 @@
  */ 
 class Optipben extends BaseOptipben
 {
+  protected $tiedatrel="";
+
+  public function getTiedatrel()
+  {
+  	  $valor="N";
+  	  $d= new Criteria();
+  	  $d->add(OpbenefiPeer::CODTIPBEN,self::getCodtipben());
+  	  $resul= OpbenefiPeer::doSelectOne($d);
+  	  if ($resul)
+  	  {
+  	  	$valor= 'S';
+  	  } else $valor= 'N';
+  	return $valor;
+  }
+
+  public function setTiedatrel()
+  {
+  	return $this->tiedatrel;
+  }
 }

@@ -25,6 +25,7 @@ class Tsdefban extends BaseTsdefban
         protected $crelibdis=0;
         protected $debbandis=0;
         protected $crebandis=0;
+        protected $tiedatrel="";
 
 
   public function afterHydrate()
@@ -165,4 +166,32 @@ class Tsdefban extends BaseTsdefban
     else
        return 8;
   }
+
+  public function getTiedatrel()
+  {
+  	  $valor="N";
+  	  $d= new Criteria();
+  	  $d->add(TsmovlibPeer::NUMCUE,self::getNumcue());
+  	  $resul= TsmovlibPeer::doSelectOne($d);
+  	  if ($resul)
+  	  {
+  	  	$valor= 'S';
+  	  }else {
+  	  $d= new Criteria();
+  	  $d->add(TsmovbanPeer::NUMCUE,self::getNumcue());
+  	  $resul= TsmovbanPeer::doSelectOne($d);
+  	  if ($resul)
+  	  {
+  	  	$valor= 'S';
+  	  }else $valor= 'N';
+  	  }
+
+  	return $valor;
+  }
+
+  public function setTiedatrel()
+  {
+  	return $this->tiedatrel;
+  }
+
  }
