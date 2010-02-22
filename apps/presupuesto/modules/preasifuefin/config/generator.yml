@@ -4,7 +4,7 @@ generator:
     model_class:      Cpasiini
     theme:            cidesaGenerator
     fields:
-      codpre:    { name: Codigo Presupuestario, params: maxlength=32 size=32 }
+      codpre:    { name: Codigo Presupuestario, params: maxlength=32  }
       nompre:    { name: Descripcion, type: textarea_tag, params: size=30x3 maxlength=254 }
       anopre:    { name: Ano, params: maxlength=4 size=4 readonly=true}
       monmov:    { name: Total Asignacion , params: size=8  disabled=false readonly=true}
