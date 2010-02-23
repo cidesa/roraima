@@ -5,8 +5,43 @@ generator:
     theme:            cidesaGenerator
 
 
+    fields:
+      codact: { name: Código Catálogo}
+      codmue: { name: Código Activo}
+      desmue: { name: Descripción}
+      nrodisinm: { name: Número de Orden}
+      tipdisinm: { name: Tipo}
+      #codmot: { name: Motivo}
+      #desmot: { name: Descripción}
+      fecdisinm: { name: Fecha, params: date_format='dd/MM/yy'}
+      fecdevdis: { name: Fecha Devolución, params: date_format='dd/MM/yy'}
+      mondisinm: { name: Monto}
+      vidutil: { name: Vida Útil}
+      detdisinm: { name: Detalle}
+      codubiori: { name: Origen}
+      desubiori: { name: Descripción}
+      codubides: { name: Destino}
+      desubides: { name: Descripción}
+      obsdisinm: { name: Observación}
+      stadisinm: { name: Estatus}
+      motdisinm: { name: No se}
+      #disponer:  { name: A Disponer}
+    list:
+      title:          Disposición de Inmuebles en Lotes
+      filters:        [nrodisinm]
+      display:        [=nrodisinm, tipdisinm, fecdisinm, fecdevdis]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+      sort:  codact
     edit:
+      title:         Disposición de Inmuebles en Lotes
+      display:
+        Información de Disposición: [nrodisinm, tipdisinm, fecdisinm, fecdevdis, mondisinm, detdisinm]
+        #Muebles a Disponer: [_disponer]
       actions:
         _list:        ~
         _save:        ~
+        _create:      ~
         _delete:      ~
