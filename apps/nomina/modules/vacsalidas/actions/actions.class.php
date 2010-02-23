@@ -447,8 +447,10 @@ class vacsalidasActions extends autovacsalidasActions
 		$diavac = $this->getRequestParameter('diavac','');		
 		$fecing = NphojintPeer::getFecing($codigo);
                 $codnom = NphojintPeer::getCodnom($codigo);
-		$auxfec = split('/',$fecdes);	
-		$fecdesgrid = $auxfec[2].'/'.$auxfec[1].'/'.$auxfec[0];
+		$auxfec = split('/',$fecdes);
+		$fecdesgrid='';
+		if(count($auxfec)==3)	
+			$fecdesgrid = $auxfec[2].'/'.$auxfec[1].'/'.$auxfec[0];
 		$this->configGrid($codigo,$codnom,$fecing,$diavac,'',$fecdesgrid);
 		$arrgrid = $this->npvacsalidas->getObjvac();
 		if($diavac>$this->totpen)
