@@ -774,6 +774,7 @@ class almordcomActions extends autoalmordcomActions
     $col1->setNombreCampo('check');
     $col1->setEsGrabable(true);
     $col1->setHTML(' ');
+    if ($tipo=='P') $col1->setOculta(true);
     $col1->setJScript('onClick="desmarcarfila(this.id)"');
 
     $lonart=strlen($this->mascaraarticulo);
@@ -988,6 +989,7 @@ class almordcomActions extends autoalmordcomActions
     $col1 = new Columna('Marque');
     $col1->setTipo(Columna::CHECK);
     $col1->setNombreCampo('check');
+    if ($tipo=='P') $col1->setOculta(true);
     $col1->setEsGrabable(true);
     $col1->setHTML(' ');
 
