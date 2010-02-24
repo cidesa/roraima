@@ -345,7 +345,50 @@ class Inmuebles
       return 0;
     }
   }
-
-
+  
+  public static function salvarDefConInm($clase)
+  {
+       $sql="select codact, codinm from bnreginm where codact>='".$clase->getCodact()."' and codact<='".$clase->getCodact1()."' and stamue='A'";
+       if (Herramientas::BuscarDatos($sql,&$result)){
+         $i=0;
+         while ($i<count($result))
+         {
+           $z= new Criteria();
+           $z->add(BndefconiPeer::CODACT,$result[$i]["codact"]);
+           $z->add(BndefconiPeer::CODINM,$result[$i]["codinm"]);
+           $registro= BndefconiPeer::doSelectOne($z);
+           if ($registro)
+           {
+               $registro->setCodact($registro->getCodact());
+               $registro->setCodinm($registro->getCodinm());
+               $registro->setCtadepcar($clase->getCtadepcar());
+               $registro->setCtadepabo($clase->getCtadepabo());
+               $registro->setCtaajucar($clase->getCtaajucar());
+               $registro->setCtaajuabo($clase->getCtaajuabo());
+               $registro->setCtapercar($clase->getCtapercar());
+               $registro->setCtaperabo($clase->getCtaperabo());
+               $registro->setCtarevcar($clase->getCtarevcar());
+               $registro->setCtarevabo($clase->getCtarevabo());
+               $registro->setStacta('A');
+               $registro->save();
+           }else{
+               $bndefconi= new Bndefconi();
+               $bndefconi->setCodact($result[$i]["codact"]);
+               $bndefconi->setCodinm($result[$i]["codinm"]);
+               $bndefconi->setCtadepcar($clase->getCtadepcar());
+               $bndefconi->setCtadepabo($clase->getCtadepabo());
+               $bndefconi->setCtaajucar($clase->getCtaajucar());
+               $bndefconi->setCtaajuabo($clase->getCtaajuabo());
+               $bndefconi->setCtapercar($clase->getCtapercar());
+               $bndefconi->setCtaperabo($clase->getCtaperabo());
+               $bndefconi->setCtarevcar($clase->getCtarevcar());
+               $bndefconi->setCtarevabo($clase->getCtarevabo());
+               $bndefconi->setStacta('A');
+               $bndefconi->save();
+           }
+           $i++;
+         }
+       }
+   }
 }
 ?>
