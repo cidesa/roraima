@@ -15,7 +15,7 @@
 
 <div id="sf_admin_container">
 
-<h1><?php echo __('Definición Contable de Inmuebled por Lotes',
+<h1><?php echo __('Definición Contable de Inmuebles por Lotes',
 array()) ?></h1>
 
 <div id="sf_admin_header">
