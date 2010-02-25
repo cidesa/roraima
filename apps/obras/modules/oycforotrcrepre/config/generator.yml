@@ -1,10 +1,43 @@
 generator:
   class:              cidesaPropelAdminGenerator
   param:
-    model_class:      Forotrcrepe
+    model_class:      Forotrcrepre
     theme:            cidesaGenerator
+    
+    fields:
+      codcat:        
+        name: Código Categoria
+        msj_error: El Codigo de Categoria es necesario
+        catalogo:
+          catalogoweb: Fordefcatpre_Codcat
+          clase: Fordefcatpre
+          ajax: 0
+          parametros: getprincipal="getCodcat" getsecundario="getDescat" campoprincipal="codcat" camposecundario="descat" campobase = "id"           
+      codparegr:     
+        name: Código Partida
+        msj_error: El Codigo de Partida es necesario
+        catalogo:
+          catalogoweb: Fordefparegr_Codparegr
+          clase: Fordefparegr
+          ajax: 0
+          parametros: getprincipal="getCodparegr" getsecundario="getNomparegr" campoprincipal="codparegr" camposecundario="nomparegr" campobase = "id"           
+      codtip:
+        name: Tipo de Obra
+        msj_error: El Tipo de Obra es necesario
+        catalogo:
+          catalogoweb: Octipobr_Oycdesobr
+          clase: Octipobr
+          ajax: 0
+          parametros: getprincipal="getCodtipobr" getsecundario="getDestipobr" campoprincipal="codtipobr" camposecundario="destipobr" campobase = "id"           
+      observ:        { name: Observación, type: textarea_tag, params:  cols=67}
+      monpre:        { name: Monto Presupuestado}
 
     edit:
+      title:    Formulacion de Obras Otros Creditos Presupuestarios
+      display:
+        Datos Presupuestarios:    [ codcat, codparegr]
+        Otros Datos:              [ codtip, observ, monpre]
+        
       actions:
         _list:        ~
         _save:        ~
