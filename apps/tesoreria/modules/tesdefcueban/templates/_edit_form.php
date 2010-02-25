@@ -572,13 +572,13 @@ function num(e) {
   var numchedes="ax_"+fil+"_"+'2';
   var numchehas="ax_"+fil+"_"+'4';
 
- //if (document.getElementById(numchedes).value!='' && document.getElementById(numchehas).value!='' )
-  //{
+  if (document.getElementById(numchedes).value!='' && document.getElementById(numchehas).value!='' )
+  {
       obj1= document.getElementById(numchedes).value;
       obj2= document.getElementById(numchehas).value;
       obj3= document.getElementById('tsdefban_numcue').value;
      window.open('/tesoreria_dev.php/tesdefcueban/gridcheques?numchedes='+obj1+'&numchehas='+obj2+'&numcue='+obj3,'...','menubar=no,toolbar=no,scrollbars=no,width=950,height=500,resizable=yes,left=200,top=150')
-  //}
+  }
   }
 
  function mientermonto(e,id)
