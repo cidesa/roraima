@@ -31,6 +31,11 @@ generator:
           parametros: getprincipal="getCodtipobr" getsecundario="getDestipobr" campoprincipal="codtipobr" camposecundario="destipobr" campobase = "id"           
       observ:        { name: Observación, type: textarea_tag, params:  cols=67}
       monpre:        { name: Monto Presupuestado}
+      
+    list:
+      title:    Listado de Formulacion de Obras
+      display:  [codcat, codparegr, codtip]  
+      filters:  [codcat, codparegr, codtip]
 
     edit:
       title:    Formulacion de Obras Otros Creditos Presupuestarios
