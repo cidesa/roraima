@@ -5834,6 +5834,30 @@ public function Catdefcatman_Cattramo($params = '') {
 		);
 
 	}
+	
+	public function Fordefcatpre_Codcat() {
+		$this->c = new Criteria();
+		// $this->c->addAscendingOrderByColumn(CaramartPeer::RAMART);
+
+		$this->columnas = array (
+			FordefcatprePeer :: CODCAT => 'Código',
+			FordefcatprePeer :: DESCAT => 'Descripción',
+
+
+		);
+	}
+	
+	public function Fordefparegr_Codparegr() {
+		$this->c = new Criteria();
+		// $this->c->addAscendingOrderByColumn(CaramartPeer::RAMART);
+
+		$this->columnas = array (
+			FordefparegrPeer :: CODPAREGR => 'Código',
+			FordefparegrPeer :: NOMPAREGR => 'Descripción',
+
+
+		);
+	}
 
 }
 
