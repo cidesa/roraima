@@ -42,8 +42,11 @@ class oycdesconActions extends autooycdesconActions
       	$this->coderror=1025;
       	return false;
       }
+	  
+	  $c = new Criteria();
+	  $objc = ContabaPeer::doSelectOne($c);
 
-      $anno=substr($this->ocregcon->getFeccon(),0,4);
+      $anno= date('Y',strtotime($objc->getFeccie()));
       $monto=$this->ocregcon->getMoncon();
   	  if (!Obras::chequearDisponibilidadPresupuesto($this->ocregcon->getCodpre(),$anno,$grid,'1',$monto,&$mondis))
   	  {
