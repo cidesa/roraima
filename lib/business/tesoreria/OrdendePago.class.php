@@ -766,7 +766,9 @@ class OrdendePago
                   $des="";
                   $mont1=$x[$j]->getMoncau();
                   $mont2=$x[$j]->getMonret();
-                  $monto=$mont1 - $mont2;
+                  #$monto=$mont1 - $mont2;
+                  #Cambios hecho por leobardo
+                  $monto=$mont1;
                 }else {
                   $codigocuenta=$regis2->getCodcta();
                   $tipo='D';
