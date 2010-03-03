@@ -24,7 +24,7 @@
   </ul>
 
 <script language="JavaScript" type="text/javascript">
- var tieregrel='<?php echo $tsdefban->getTiedatrel(); ?>';
-  if (tieregrel=='S') $('save').hide();
+ //var tieregrel='<?php echo $tsdefban->getTiedatrel(); ?>';
+  //if (tieregrel=='S') $('save').hide();
 </script>
 
