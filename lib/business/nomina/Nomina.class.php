@@ -1482,7 +1482,7 @@ class Nomina {
         $fecha2 = Herramientas :: dateAdd('m', 1, $fecha1, '+');
         $fecha2 = Herramientas :: dateAdd('d', 1, $fecha2, '-');
 
-        $criterio = "Select fecrei from nphojint where codemp='" . $empleado . "'";
+        $criterio = "Select coalesce(fecrei,fecing) as fecrei from nphojint where codemp='" . $empleado . "'";
         if (Herramientas :: BuscarDatos($criterio, & $datosper)) {
           if (trim($datosper[0]["fecrei"]) != '') {
             $fechaini = $datosper[0]["fecrei"];
@@ -1499,6 +1499,23 @@ class Nomina {
         } else {
           $fechaini = $fecha1;
           $salir = true;
+        }
+        
+        $criterio = "Select fecret as fecret from nphojint where codemp='" . $empleado . "'";
+        if (Herramientas :: BuscarDatos($criterio, & $datosper)) {
+          if (trim($datosper[0]["fecret"]) != '') {
+            $fechafin = $datosper[0]["fecret"];
+            /*if ( strtotime($datosper[0]["fecret"]) < strtotime($fecha2) )
+            {
+              $fecha2=$datosper[0]["fecret"];
+              $salir=false;
+            }*/
+          }
+        }
+        if (strtotime($fechafin) < strtotime($fecha2)) {
+          $salir = false;
+          $fecha2=$fechafin;
+         } 
         }
 
         /*if (Herramientas::dia_semana($fechaini_mod[2],$fechaini_mod[1],$fechaini_mod[0])=='Lunes')
@@ -3585,7 +3602,7 @@ class Nomina {
         $fecha2 = Herramientas :: dateAdd('m', 1, $fecha1, '+');
         $fecha2 = Herramientas :: dateAdd('d', 1, $fecha2, '-');
 
-        $criterio = "Select fecrei from nphojint where codemp='" . $empleado . "'";
+        $criterio = "Select coalesce(fecrei,fecing) as fecrei from nphojint where codemp='" . $empleado . "'";
         if (Herramientas :: BuscarDatos($criterio, & $datosper)) {
           if (trim($datosper[0]["fecrei"]) != '') {
             $fechaini = $datosper[0]["fecrei"];
@@ -3603,6 +3620,24 @@ class Nomina {
           $fechaini = $fecha1;
           $salir = true;
         }
+        
+        $criterio = "Select fecret as fecret from nphojint where codemp='" . $empleado . "'";
+        if (Herramientas :: BuscarDatos($criterio, & $datosper)) {
+          if (trim($datosper[0]["fecret"]) != '') {
+            $fechafin = $datosper[0]["fecret"];
+            /*if ( strtotime($datosper[0]["fecret"]) < strtotime($fecha2) )
+            {
+              $fecha2=$datosper[0]["fecret"];
+              $salir=false;
+            }*/
+          }
+        }
+        if (strtotime($fechafin) < strtotime($fecha2)) {
+          $salir = false;
+          $fecha2=$fechafin;
+         } 
+        }
+        
         $numerosemanas = 0;
         while (strtotime($fechaini) <= strtotime($fecha2)) {
           $fechaini_mod = split('-', $fechaini);
