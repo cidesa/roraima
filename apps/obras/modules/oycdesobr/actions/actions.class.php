@@ -560,8 +560,10 @@ $this->Bitacora('Guardo');
        {
        	$num=$this->getRequestParameter('num');
        	$monto=Herramientas::toFloat($this->getRequestParameter('monto'));
-       	$fecha=explode('/',$this->getRequestParameter('fecha'));
-       	$anno=$fecha[2];
+       	$fecha= $this->getRequestParameter('fecha') ? explode('/',$this->getRequestParameter('fecha')) : explode('/',date('d/m/Y'));
+       	$c = new Criteria();
+	    $objc = ContabaPeer::doSelectOne($c);
+        $anno= $objc ? ($objc->getFeccie() ? date('Y',strtotime($objc->getFeccie())) : date('Y')) : date('Y');        
        	$this->configGrid();
        	$grid=Herramientas::CargarDatosGrid($this,$this->obj);
        	if (Obras::chequearDisponibilidadPresupuesto($this->getRequestParameter('codigo'),$anno,$grid,$num,$monto,&$mondis))
