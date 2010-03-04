@@ -1456,6 +1456,27 @@ class Tesoreria {
       return true;
     }
   }
+  
+public static function validarCuentasGrid($grid)
+  {
+    $x=$grid[0];
+    $j=0;
+    $total1=0;
+    $total2=0;
+    while ($j<count($x))
+    {
+      if ($x[$j]->getCodcta()!="")
+      {
+        $c = new Criteria();
+        $c->add(ContabbPeer::CODCTA,$x[$j]->getCodcta());
+        $per = ContabbPeer::doSelectOne($c);
+        if(!$per)
+        {
+        	return false;
+        }
+      }
+      $j++;
+    }
 
   public static function validarFechaPerContable($fecha)
   {
