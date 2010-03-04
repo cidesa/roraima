@@ -16,28 +16,28 @@ methods:
 names:
   atciudadano{cedciu}:
     required:  Yes
-    required_msg: Este campo es requerido
+    required_msg: La Cédula es requerida
     validators: UniqueValidator, MyStringValidator1
 
   atciudadano{nomciu}:
     required:  Yes
-    required_msg: Este campo es requerido
+    required_msg: El nombre es requerido
     validators: MyStringValidator2
 
   atciudadano{apeciu}:
     required:  Yes
-    required_msg: Este campo es requerido
+    required_msg: El apellido es requerido
     validators: MyStringValidator2
 
   atciudadano{fecnac}:
     required:  Yes
-    required_msg: Debe insertar la fecha de nacimiento
+    required_msg: La fecha de nacimiento es requerida
     validators: Vfecha_1
 
 
   atciudadano{sexo}:
     required:  Yes
-    required_msg: Este campo es requerido
+    required_msg: El Campo sexo es requerido
     validators: MyStringValidator3
 
   atciudadano{sector}:
