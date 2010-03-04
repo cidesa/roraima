@@ -633,6 +633,11 @@ $this->Bitacora('Guardo');
       	  $this->coderror2=519;
       	  return false;
       	}
+        if (!Tesoreria::validarCuentasGrid($grid))
+      	{
+      	  $this->coderror1=549;
+      	  return false;
+      	}
       }
 
       return true;
