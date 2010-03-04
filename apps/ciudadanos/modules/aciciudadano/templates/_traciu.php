@@ -9,7 +9,7 @@
 <?php use_helper('Object', 'ObjectAdmin', 'I18N') ?>
 
 <?php echo __('Sí') ?>
-<?php echo radiobutton_tag('atciudadano[traciu]', 'true', $atciudadano->getTraciu()==true ? true : false ); ?>
+<?php echo radiobutton_tag('atciudadano[traciu]', 1, $atciudadano->getTraciu()==1 ? true : false ); ?>
 &emsp;
 <?php echo __('No') ?>
-<?php echo radiobutton_tag('atciudadano[traciu]', 'false', $atciudadano->getTraciu()==false ? true : false ); ?>
+<?php echo radiobutton_tag('atciudadano[traciu]', 0, $atciudadano->getTraciu()==0 ? true : false ); ?>

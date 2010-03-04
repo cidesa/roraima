@@ -7,9 +7,9 @@
  */
 ?>
 <?php use_helper('Object', 'ObjectAdmin', 'I18N') ?>
-
+<?php echo $atciudadano->getSegpri() ?>
 <?php echo __('Sí') ?>
-<?php echo radiobutton_tag('atciudadano[segpri]', 'true', $atciudadano->getSegpri()==true ? true : false ); ?>
+<?php echo radiobutton_tag('atciudadano[segpri]', 1, $atciudadano->getSegpri()==1 ? true : false ); ?>
 &emsp;
 <?php echo __('No') ?>
-<?php echo radiobutton_tag('atciudadano[segpri]', 'false', $atciudadano->getSegpri()==false ? true : false ); ?>
+<?php echo radiobutton_tag('atciudadano[segpri]', 0, $atciudadano->getSegpri()==0 ? true : false ); ?>
