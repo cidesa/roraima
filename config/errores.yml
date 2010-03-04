@@ -446,7 +446,10 @@
   msj: El numero de Cheque debe estar en el rango de la chequera que se encuentre activa
 548:
   cod: 548
-  msj: Debe seleccionar al menos una orden de Pago.
+  msj: Debe seleccionar al menos una orden de Pago
+549:
+  cod: 549
+  msj: Existe una Cuenta Contable no registrada en contabilidad  
 3:
   cod: 3
   msj: La contraseña es diferente.
