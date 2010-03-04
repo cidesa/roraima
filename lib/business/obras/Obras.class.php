@@ -154,7 +154,7 @@ public static function salvarLicitacion($ocreglic, $grid)
     }
   }
 
-  public static function salvarOycdesobr($ocregobr,$grid1,$grid2,&$msj,$apliva)
+  public static function salvarOycdesobr($ocregobr,$grid1,$grid2,&$msj,$apliva,$mancorrel,$corraut='')
  {
  	$msj=-1;
    if (!$ocregobr->getId())
@@ -163,7 +163,7 @@ public static function salvarLicitacion($ocreglic, $grid)
     $ocregobr->setStaobr('A');
    }
 
-   $referencia=self::generarCorrelativoObra($ocregobr,&$tienecorrelativo,&$r);
+   $referencia=self::generarCorrelativoObra($ocregobr,&$tienecorrelativo,&$r,$corraut);
    if ($apliva!='S'){
    self::generaPrecompromiso($ocregobr,$referencia,&$msj,$mancorrel);}
 
@@ -180,7 +180,7 @@ public static function salvarLicitacion($ocreglic, $grid)
      self::actualizarPartidas($ocregobr,$grid1);
      self::grabarInspectores($ocregobr,$grid2);
       if ($apliva!='S'){
-     self::generarImputacionesPrecompromiso($ocregobr,$mancorrel);
+     self::generarImputacionesPrecompromiso($ocregobr,$mancorrel,$referencia);
       }
    return true;
    }
@@ -1161,7 +1161,7 @@ public static function salvarLicitacion($ocreglic, $grid)
     }
   }
 
-  public static function generarImputacionesPrecompromiso($ocregobr,$mancorrel)
+  public static function generarImputacionesPrecompromiso($ocregobr,$mancorrel,$referencia)
   {
     if ($mancorrel=='S')
     {
@@ -3323,10 +3323,35 @@ public static function salvarLicitacion($ocreglic, $grid)
     $verficargasree=true;
   }
 
-  public static function generarCorrelativoObra($obra,&$tienecorrelativo,&$r)
+  public static function generarCorrelativoObra($obra,&$tienecorrelativo,&$r,$corraut)
   {
     $tienecorrelativo=false;
-    if (Herramientas::getVerCorrelativo('numini','ocdefemp',&$r))
+    if($corraut=='S' && $obra->getCodobr()=='AAMM####')
+	{
+	    $corr=9999;
+	    try{
+	    	$sql = "select nextval('ocregobr_correl') as correl;";
+	    	if(Herramientas :: BuscarDatos($sql, & $result))				    	
+	    		$corr=$result[0]['correl'];
+	    }catch(Exception $e){				    	
+	    	$sql = "CREATE SEQUENCE ocregobr_correl
+				  INCREMENT 1
+				  MINVALUE 1
+				  MAXVALUE 9223372036854775807
+				  START 1
+				  CACHE 1;
+				ALTER TABLE ocregobr_correl OWNER TO postgres;";
+	    	Herramientas :: BuscarDatos($sql, & $rs);
+	    	$sql = "select nextval('ocregobr_correl') as correl;";
+	    		if(Herramientas :: BuscarDatos($sql, & $result))
+	    			$corr=$result[0]['correl'];				    	
+	    }			    
+	    $codobr = str_pad($corr,4,'0',STR_PAD_LEFT);
+    	$codobr = date('ym').$codobr;
+    	$newcodobr = $codobr;				    				      
+		
+	}
+    elseif (Herramientas::getVerCorrelativo('numini','ocdefemp',&$r))
     {
       if ($obra->getCodobr()=='##########')
       {
@@ -3390,8 +3415,8 @@ public static function salvarLicitacion($ocreglic, $grid)
         }
       }
       else
-      {
-        $newcodobr="OB".substr($obra->getCodobr(),2,strlen($obra->getCodobr()));
+      {        
+      	$newcodobr="OB".substr($obra->getCodobr(),2,strlen($obra->getCodobr()));
       }
     }
     return $newcodobr;
