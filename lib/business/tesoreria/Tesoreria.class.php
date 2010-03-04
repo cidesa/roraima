@@ -1478,6 +1478,16 @@ public static function validarCuentasGrid($grid)
       $j++;
     }
 
+    if (Herramientas::toFloat($total1)!=Herramientas::toFloat($total2))
+    {
+      return false;
+    }
+    else
+    {
+      return true;
+    }
+  } 
+
   public static function validarFechaPerContable($fecha)
   {
     $dateFormat = new sfDateFormat('es_VE');
