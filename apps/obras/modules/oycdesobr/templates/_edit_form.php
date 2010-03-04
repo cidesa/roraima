@@ -34,7 +34,8 @@
   'readonly'  =>  $ocregobr->getId()!='' ? true : false ,
   'control_name' => 'ocregobr[codobr]',
   'onKeyPress' => "javascript:if (event.keyCode==13 || event.keyCode==9){document.getElementById('ocregobr_codtipobr').focus();}",
-  'onBlur'  => "javascript:event.keyCode=13; enter(event,this.value);",
+  'onBlur'  =>   $corraut=='S' ? '$("ocregobr_codobr").value == "" ? $("ocregobr_codobr").value="AAMM####" : event.keyCode=13; enter(event,this.value); ' : 'javascript:event.keyCode=13; enter(event,this.value);',
+  #'onBlur'  => "javascript:event.keyCode=13; enter(event,this.value);",
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 <br>

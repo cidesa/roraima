@@ -23,7 +23,7 @@
 
 <div id="sf_admin_content">
 <?php include_partial('oycdesobr/edit_messages', array('ocregobr' => $ocregobr, 'labels' => $labels)) ?>
-<?php include_partial('oycdesobr/edit_form', array('ocregobr' => $ocregobr, 'labels' => $labels, 'obj' => $obj, 'obj2' => $obj2, 'pais' => $pais, 'estados' => $estados, 'municipio' => $municipio, 'parroquia' => $parroquia, 'sector' => $sector, 'mascarapresupuesto' => $mascarapresupuesto, 'lonpre' => $lonpre, 'apliva' => $apliva, 'mancorrel' => $mancorrel)) ?>
+<?php include_partial('oycdesobr/edit_form', array('ocregobr' => $ocregobr, 'labels' => $labels, 'obj' => $obj, 'obj2' => $obj2, 'pais' => $pais, 'estados' => $estados, 'municipio' => $municipio, 'parroquia' => $parroquia, 'sector' => $sector, 'mascarapresupuesto' => $mascarapresupuesto, 'lonpre' => $lonpre, 'apliva' => $apliva, 'mancorrel' => $mancorrel, 'corraut' => $corraut)) ?>
 </div>
 
 <div id="sf_admin_footer">
