@@ -2238,8 +2238,7 @@ public static function salvarLicitacion($ocreglic, $grid)
              $arreglopar[$j-1]["cantidad"]="0,00";
              $montot=0*$cosuni;
              $arreglopar[$j-1]["montot"]=number_format($montot,2,',','.');
-             self::totalPartidas($arreglopar,&$arregloret,&$arreglomontos,$codcon,$tipval,$val_ant,$val_par,$val_ret,$val_fin,$val_rec,$poriva,$porant,$montotcon,$aumobr,$disobr,$obrext,$monper,$valpag,$gasretot,&$msj,&$montotparacum);
-	         H::PrintR($arreglomontos);
+             self::totalPartidas($arreglopar,&$arregloret,&$arreglomontos,$codcon,$tipval,$val_ant,$val_par,$val_ret,$val_fin,$val_rec,$poriva,$porant,$montotcon,$aumobr,$disobr,$obrext,$monper,$valpag,$gasretot,&$msj,&$montotparacum);	         
 	       break;
 	      case ($val_fin):
              $arreglopar[$j-1]["canval"]=number_format($obj->getCanval(),2,',','.');
