@@ -2920,16 +2920,16 @@ propel:
       required: true
     nomemp:
       type: VARCHAR
-      size: 51
+      size: 100
     nomcar:
       type: VARCHAR
-      size: 30
+      size: 100
     nomnom:
       type: VARCHAR
-      size: 29
+      size: 100
     nomcat:
       type: VARCHAR
-      size: 40
+      size: 100
     unieje:
       type: VARCHAR
       size: 30

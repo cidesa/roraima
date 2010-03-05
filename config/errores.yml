@@ -854,6 +854,9 @@
 497:
   cod: 497
   msj: Existen problemas con la disponibilidad presupuestaria para esta nomina
+498:
+  cod: 498
+  msj: Ya existe un registro con los Datos Cargos, verifquelos  
 ###############OBRAS################
 1000:
     cod: 1000
