@@ -1516,7 +1516,7 @@ class Nomina {
           $salir = false;
           $fecha2=$fechafin;
          } 
-        }
+        
 
         /*if (Herramientas::dia_semana($fechaini_mod[2],$fechaini_mod[1],$fechaini_mod[0])=='Lunes')
         {
@@ -3636,7 +3636,7 @@ class Nomina {
           $salir = false;
           $fecha2=$fechafin;
          } 
-        }
+        
         
         $numerosemanas = 0;
         while (strtotime($fechaini) <= strtotime($fecha2)) {
