@@ -21,7 +21,7 @@ class Caprovee extends BaseCaprovee
 
    public function __toString()
   {
-    return $this->codpro;
+    return array ($this->codpro => $this->codpro);
   }
 
 

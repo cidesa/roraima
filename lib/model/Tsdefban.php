@@ -27,6 +27,10 @@ class Tsdefban extends BaseTsdefban
         protected $crebandis=0;
         protected $tiedatrel="";
 
+   public function __toString()
+  {
+    return array($this->numcue => $this->numcue);
+  }
 
   public function afterHydrate()
   {

@@ -17,6 +17,11 @@ class Tstipmov extends BaseTstipmov
 {
   protected $tiedatrel="";
 
+  public function __toString()
+  {
+    return array($this->codtip => $this->codtip);
+  }
+
     public function getDesdebcre()
 	  {
 	  	if (self::getDebcre()=='C')

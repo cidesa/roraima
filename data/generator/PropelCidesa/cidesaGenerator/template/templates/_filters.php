@@ -16,7 +16,7 @@
 
 <?php if ($this->getParameterValue('list.filters')): ?>
 <div class="sf_admin_filters">
-[?php echo form_tag('<?php echo $this->getModuleName() ?>/list', array('method' => 'get')) ?]
+[?php echo form_tag('<?php echo $this->getModuleName() ?>/list', array('method' => 'get','name'=>'sf_admin_filters_form')) ?]
 
   <fieldset>
     <h2>[?php echo __('filters') ?]</h2>
@@ -49,3 +49,14 @@
 </form>
 </div>
 <?php endif; ?>
+<?php foreach ($this->getColumns('list.options') as $columnf) {?>
+	<script language="JavaScript" type="text/javascript">
+	    if(document.sf_admin_filters_form.filters_<?php echo $columnf->getName();?>)
+	    {
+	    	obj = document.sf_admin_filters_form.filters_<?php echo $columnf->getName();?>;
+			opt = obj.getElementsByTagName('optgroup');
+			for (i=0;i<opt.length;i++)
+		    opt[i].label='';
+	    }
+	</script>
+<?php }?>
