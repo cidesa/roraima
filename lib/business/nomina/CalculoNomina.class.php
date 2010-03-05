@@ -184,7 +184,7 @@ public static function CalculoPorEmpleado($codemp,$cargo,$codnom,$nomnom,$profec
 {
 
 		//$empleado=$temporal["nomemp"];
-
+		$sqlfrecuencia = self::Buscar_frecuencia($frecal,$msem,$opsi,$profec);
 
 		$periodos = Nomina::buscar_Periodos($codnom,$codemp,$cargo,&$i_periodos_adicionales);
 		if ($periodos!=0)
@@ -197,7 +197,7 @@ public static function CalculoPorEmpleado($codemp,$cargo,$codnom,$nomnom,$profec
 					where a.activo='S'
 				    and b.codcon is null
 					and a.codcon=c.codcon and C.CONACT='S'
-					and a.codemp='".$codemp."'
+					and a.codemp='".$codemp."' $sqlfrecuencia
 					and a.codcar='".$cargo."' and calcon='S' --and a.codcon='262'
 					) X left outer join NPVACDEFGEN Y on x.codcon = y.codconvac and y.codnomvac = '".$codnom."')
 					 p left outer join nptippre q  on (p.codcon = q.codcon ) oRDER bY asided,p.cODcON ";
@@ -549,7 +549,29 @@ public static function ValidacionSalvar($vars,$error,$resecu,$codnom,$codemp,$ca
 		  //$cont="no";   // end if error
 }
 
-
+public static function Buscar_frecuencia($frecal,$msem,$opsi,$profec)
+{
+	$cadena="";
+	switch ($frecal) {
+		
+		case "S": #nomina semanal
+		    if($opsi[0]) #no es ultima semana
+				$cadena = " and (a.frecon='$msem' or a.frecon='T')";
+			else #es ultima semana
+				$cadena = " and (a.frecon='$msem' or a.frecon='T' or a.frecon='U')";		
+		break;
+		case "Q": #nomina quincenal
+			if(date('d',strtotime($profec))<=15) #es primera quincena
+				$cadena="and (a.frecon='P' or a.frecon='D')";
+			else #es segunda quincena
+				$cadena="and (a.frecon='S' or a.frecon='D')";	
+		break;
+		case "M": #nomina mensual
+			$cadena = "and a.frecon='M'";
+		break;		
+	}
+	return $cadena;
+}
 
 
 }
