@@ -346,7 +346,7 @@ public static function CalculoPorConceptos($conceptos,$codnom,$profec,$frecal,$p
 					
 				}
 				#GUARDAR APORTE SEGURO HCM
-				if($guardar)
+				if($guardar && $montosegurohcm>0)
 				{
 					$nomcal= new Npnomcal();
 					$nomcal->setCodnom($codnom);
