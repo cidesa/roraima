@@ -8340,6 +8340,15 @@ class Nomina {
         $npcargos = NpcargosPeer :: doSelectOne($c);
         if (!$npcargos)
           return 444;
+          
+        $c = new Criteria();
+        $c->add(NpasicarempPeer :: CODEMP, $npasicaremp->getCodemp());
+        $c->add(NpasicarempPeer :: CODNOM, $codnom);
+        $c->add(NpasicarempPeer :: CODCAR, $codcar);
+        $c->add(NpasicarempPeer :: STATUS, 'V');        
+        $objnew = NpasicarempPeer :: doSelectOne($c);
+        if ($objnew)
+          return 498;
       }
       elseif ($codnom != '' && $codcar == '') {
         return 445;
