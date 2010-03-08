@@ -50,6 +50,10 @@ class CadetentMapBuilder {
 
 		$tMap->addColumn('FECVEN', 'Fecven', 'int', CreoleTypes::DATE, false, null);
 
+		$tMap->addColumn('NUMJAU', 'Numjau', 'double', CreoleTypes::NUMERIC, false, 10);
+
+		$tMap->addColumn('TAMMET', 'Tammet', 'double', CreoleTypes::NUMERIC, false, 10);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

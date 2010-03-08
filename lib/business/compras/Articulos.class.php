@@ -535,6 +535,8 @@ public static function Grabar_DetallesRetenciones($caretser,$grid)
 		    $costo      = $x[$j]->getCosart();
             $calmacen   = $x[$j]->getCodalm();
 		    $cubicacion = $x[$j]->getCodubi();
+		    $cnumjau   = $x[$j]->getNumjau();
+		    $ctammet = $x[$j]->getTammet();
 
 		     if (($codarti!="") and ($cantd>0))
 		     {
