@@ -40,15 +40,19 @@ class Bnubica extends BaseBnubica
   }
 
   public function getTiedatrel()
-  {
+  {  	
   	  $valor="N";
-  	  $d= new Criteria();
-  	  $d->add(OpordpagPeer::CODUNI,self::getCodubi());
-  	  $resul= OpordpagPeer::doSelectOne($d);
-  	  if ($resul)
+  	  if(self:getId()!='')
   	  {
-  	  	$valor= 'S';
-  	  } else $valor= 'N';
+  	  	  $d= new Criteria();
+	  	  $d->add(OpordpagPeer::CODUNI,self::getCodubi());
+	  	  $resul= OpordpagPeer::doSelectOne($d);
+	  	  if ($resul)
+	  	  {
+	  	  	$valor= 'S';
+	  	  } else $valor= 'N';	
+  	  }
+  	  
   	return $valor;
   }
 
