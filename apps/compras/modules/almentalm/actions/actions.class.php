@@ -520,9 +520,30 @@ $this->Bitacora('Guardo');
 		$col10->setNombreCampo('fecven');
 		$col10->setAlineacionObjeto(Columna::CENTRO);
 		$col10->setAlineacionContenido(Columna::CENTRO);
-	    $col10->setHTML('type="text" size="10" ');
-
-
+	    $col10->setHTML('type="text" size="10" ');	    
+    
+    	$col11 = new Columna('Número de Jaulas');
+		$col11->setTipo(Columna::MONTO);
+		$col11->setEsGrabable(true);
+		$col11->setNombreCampo('numjau');
+		$col11->setAlineacionObjeto(Columna::CENTRO);
+		$col11->setAlineacionContenido(Columna::CENTRO);
+	    $col11->setHTML('type="text" size="10" ');
+	    
+	    $col12 = new Columna('Tamaño Métrico');
+		$col12->setTipo(Columna::MONTO);
+		$col12->setEsGrabable(true);
+		$col12->setNombreCampo('tammet');
+		$col12->setAlineacionObjeto(Columna::CENTRO);
+		$col12->setAlineacionContenido(Columna::CENTRO);
+	    $col12->setHTML('type="text" size="10" ');	
+	    
+	    if($this->recmer='S')
+	    {
+	    	$col11->setOculta(false);	
+	    	$col12->setOculta(false);
+	    }
+	    
         // Se guardan las columnas en el objetos de opciones
         $opciones->addColumna($col1);
         $opciones->addColumna($col2);
@@ -534,6 +555,8 @@ $this->Bitacora('Guardo');
         $opciones->addColumna($col8);
         $opciones->addColumna($col9);
         $opciones->addColumna($col10);
+        $opciones->addColumna($col11);
+        $opciones->addColumna($col12);
 	    // Ee genera el arreglo de opciones necesario para generar el grid
         $this->obj = $opciones->getConfig($per);
 
@@ -638,6 +661,33 @@ $this->Bitacora('Guardo');
     $this->mascaraarticulo = Herramientas::getMascaraArticulo();
     $this->mascaraubi= Herramientas::ObtenerFormato('Cadefart','Forubi');
     $this->lonubi=strlen($this->mascaraubi);
+    $this->mansolocor="";
+    $this->bloqfec="";
+    $this->oculeli="";
+    $this->recmer="";
+    $varemp = $this->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('compras',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
+	     if(array_key_exists('almentalm',$varemp['aplicacion']['compras']['modulos'])){
+           if(array_key_exists('mansolocor',$varemp['aplicacion']['compras']['modulos']['almentalm']))
+	       {
+	       	$this->mansolocor=$varemp['aplicacion']['compras']['modulos']['almentalm']['mansolocor'];
+	       }
+	       if(array_key_exists('bloqfec',$varemp['aplicacion']['compras']['modulos']['almentalm']))
+	       {
+	       	$this->bloqfec=$varemp['aplicacion']['compras']['modulos']['almentalm']['bloqfec'];
+	       }
+	       if(array_key_exists('oculeli',$varemp['aplicacion']['compras']['modulos']['almentalm']))
+	       {
+	       	$this->oculeli=$varemp['aplicacion']['compras']['modulos']['almentalm']['oculeli'];
+	       }
+	       if(array_key_exists('recmer',$varemp['aplicacion']['compras']['modulos']['almentalm']))
+	       {
+	       	$this->recmer=$varemp['aplicacion']['compras']['modulos']['almentalm']['recmer'];
+	       }
+         }
   }
 
 }

@@ -584,6 +584,28 @@ $this->Bitacora('Guardo');
 	$col9->setAlineacionObjeto(Columna::CENTRO);
 	$col9->setAlineacionContenido(Columna::CENTRO);
     $col9->setHTML('type="text" size="8x1" readonly=true');
+    
+    $col10 = new Columna('Número de Jaulas');
+	$col10->setTipo(Columna::MONTO);
+	$col10->setEsGrabable(true);
+	$col10->setNombreCampo('numjau');
+	$col10->setAlineacionObjeto(Columna::CENTRO);
+	$col10->setAlineacionContenido(Columna::CENTRO);
+    $col10->setHTML('type="text" size="10" ');
+    
+    $col11 = new Columna('Tamaño Métrico');
+	$col11->setTipo(Columna::MONTO);
+	$col11->setEsGrabable(true);
+	$col11->setNombreCampo('tammet');
+	$col11->setAlineacionObjeto(Columna::CENTRO);
+	$col11->setAlineacionContenido(Columna::CENTRO);
+    $col11->setHTML('type="text" size="10" ');	
+	    
+    if($this->recmer='S')
+    {
+    	$col10->setOculta(false);	
+    	$col11->setOculta(false);
+    }
 
 
 
@@ -596,6 +618,8 @@ $this->Bitacora('Guardo');
     $opciones->addColumna($col7);
     $opciones->addColumna($col8);
     $opciones->addColumna($col9);
+    $opciones->addColumna($col10);
+    $opciones->addColumna($col11);
     $this->obj = $opciones->getConfig($per);
 
   }
@@ -703,6 +727,33 @@ $this->Bitacora('Guardo');
      $this->longart=strlen($this->mascaraarticulo);
      $this->mascaraubi= Herramientas::ObtenerFormato('Cadefart','Forubi');
      $this->lonubi=strlen($this->mascaraubi);
+    $this->mansolocor="";
+    $this->bloqfec="";
+    $this->oculeli="";
+    $this->recmer="";
+    $varemp = $this->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('compras',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
+	     if(array_key_exists('almsalalm',$varemp['aplicacion']['compras']['modulos'])){
+           if(array_key_exists('mansolocor',$varemp['aplicacion']['compras']['modulos']['almsalalm']))
+	       {
+	       	$this->mansolocor=$varemp['aplicacion']['compras']['modulos']['almsalalm']['mansolocor'];
+	       }
+	       if(array_key_exists('bloqfec',$varemp['aplicacion']['compras']['modulos']['almsalalm']))
+	       {
+	       	$this->bloqfec=$varemp['aplicacion']['compras']['modulos']['almsalalm']['bloqfec'];
+	       }
+	       if(array_key_exists('oculeli',$varemp['aplicacion']['compras']['modulos']['almsalalm']))
+	       {
+	       	$this->oculeli=$varemp['aplicacion']['compras']['modulos']['almsalalm']['oculeli'];
+	       }
+	       if(array_key_exists('recmer',$varemp['aplicacion']['compras']['modulos']['almsalalm']))
+	       {
+	       	$this->recmer=$varemp['aplicacion']['compras']['modulos']['almsalalm']['recmer'];
+	       }
+         }
   }
 
 
