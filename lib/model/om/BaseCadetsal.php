@@ -37,6 +37,14 @@ abstract class BaseCadetsal extends BaseObject  implements Persistent {
 
 
 	
+	protected $numjau;
+
+
+	
+	protected $tammet;
+
+
+	
 	protected $id;
 
 	
@@ -95,6 +103,22 @@ abstract class BaseCadetsal extends BaseObject  implements Persistent {
   {
 
     return trim($this->codubi);
+
+  }
+  
+  public function getNumjau($val=false)
+  {
+
+    if($val) return number_format($this->numjau,2,',','.');
+    else return $this->numjau;
+
+  }
+  
+  public function getTammet($val=false)
+  {
+
+    if($val) return number_format($this->tammet,2,',','.');
+    else return $this->tammet;
 
   }
   
@@ -175,6 +199,26 @@ abstract class BaseCadetsal extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setNumjau($v)
+	{
+
+    if ($this->numjau !== $v) {
+        $this->numjau = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CadetsalPeer::NUMJAU;
+      }
+  
+	} 
+	
+	public function setTammet($v)
+	{
+
+    if ($this->tammet !== $v) {
+        $this->tammet = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CadetsalPeer::TAMMET;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -203,7 +247,11 @@ abstract class BaseCadetsal extends BaseObject  implements Persistent {
 
       $this->codubi = $rs->getString($startcol + 6);
 
-      $this->id = $rs->getInt($startcol + 7);
+      $this->numjau = $rs->getFloat($startcol + 7);
+
+      $this->tammet = $rs->getFloat($startcol + 8);
+
+      $this->id = $rs->getInt($startcol + 9);
 
       $this->resetModified();
 
@@ -211,7 +259,7 @@ abstract class BaseCadetsal extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 8; 
+            return $startcol + 10; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Cadetsal object", $e);
     }
@@ -380,6 +428,12 @@ abstract class BaseCadetsal extends BaseObject  implements Persistent {
 				return $this->getCodubi();
 				break;
 			case 7:
+				return $this->getNumjau();
+				break;
+			case 8:
+				return $this->getTammet();
+				break;
+			case 9:
 				return $this->getId();
 				break;
 			default:
@@ -399,7 +453,9 @@ abstract class BaseCadetsal extends BaseObject  implements Persistent {
 			$keys[4] => $this->getCosart(),
 			$keys[5] => $this->getCodalm(),
 			$keys[6] => $this->getCodubi(),
-			$keys[7] => $this->getId(),
+			$keys[7] => $this->getNumjau(),
+			$keys[8] => $this->getTammet(),
+			$keys[9] => $this->getId(),
 		);
 		return $result;
 	}
@@ -437,6 +493,12 @@ abstract class BaseCadetsal extends BaseObject  implements Persistent {
 				$this->setCodubi($value);
 				break;
 			case 7:
+				$this->setNumjau($value);
+				break;
+			case 8:
+				$this->setTammet($value);
+				break;
+			case 9:
 				$this->setId($value);
 				break;
 		} 	}
@@ -453,7 +515,9 @@ abstract class BaseCadetsal extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[4], $arr)) $this->setCosart($arr[$keys[4]]);
 		if (array_key_exists($keys[5], $arr)) $this->setCodalm($arr[$keys[5]]);
 		if (array_key_exists($keys[6], $arr)) $this->setCodubi($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setId($arr[$keys[7]]);
+		if (array_key_exists($keys[7], $arr)) $this->setNumjau($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setTammet($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setId($arr[$keys[9]]);
 	}
 
 	
@@ -468,6 +532,8 @@ abstract class BaseCadetsal extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CadetsalPeer::COSART)) $criteria->add(CadetsalPeer::COSART, $this->cosart);
 		if ($this->isColumnModified(CadetsalPeer::CODALM)) $criteria->add(CadetsalPeer::CODALM, $this->codalm);
 		if ($this->isColumnModified(CadetsalPeer::CODUBI)) $criteria->add(CadetsalPeer::CODUBI, $this->codubi);
+		if ($this->isColumnModified(CadetsalPeer::NUMJAU)) $criteria->add(CadetsalPeer::NUMJAU, $this->numjau);
+		if ($this->isColumnModified(CadetsalPeer::TAMMET)) $criteria->add(CadetsalPeer::TAMMET, $this->tammet);
 		if ($this->isColumnModified(CadetsalPeer::ID)) $criteria->add(CadetsalPeer::ID, $this->id);
 
 		return $criteria;
@@ -512,6 +578,10 @@ abstract class BaseCadetsal extends BaseObject  implements Persistent {
 		$copyObj->setCodalm($this->codalm);
 
 		$copyObj->setCodubi($this->codubi);
+
+		$copyObj->setNumjau($this->numjau);
+
+		$copyObj->setTammet($this->tammet);
 
 
 		$copyObj->setNew(true);

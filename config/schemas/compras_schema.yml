@@ -2507,6 +2507,14 @@ propel:
       required: true
     fecven:
       type: DATE
+    numjau:
+      type: NUMERIC
+      size: 10
+      scale: 2
+    tammet:
+      type: NUMERIC
+      size: 10
+      scale: 2    
     id:
       type: INTEGER
       required: true
@@ -2542,6 +2550,14 @@ propel:
       type: VARCHAR
       syze: 20
       required: true
+    numjau:
+      type: NUMERIC
+      size: 10
+      scale: 2
+    tammet:
+      type: NUMERIC
+      size: 10
+      scale: 2 
     id:
       type: INTEGER
       required: true
