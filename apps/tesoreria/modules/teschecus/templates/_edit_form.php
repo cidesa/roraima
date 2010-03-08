@@ -345,7 +345,9 @@ function push3()
 	if (status=='A')
 	{document.sf_admin_edit_form.tscheemi_status_A.checked=true;}
 	else if (status=='E')
-	{document.sf_admin_edit_form.tscheemi_status_E.checked=true;}
+	{//document.sf_admin_edit_form.tscheemi_status_E.checked=true;
+	document.getElementById('divx').style.display="block";
+	}
 	else if (status=='C')
 	{document.getElementById('divx').display="none";}
 }
