@@ -7,7 +7,7 @@
  * @subpackage almsolegr
  * @author     $Author$ <desarrollo@cidesa.com.ve>
  * @version SVN: $Id$
- * 
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -30,8 +30,8 @@ class almsolegrActions extends autoalmsolegrActions
 
 
 
-  
-  
+
+
   /**
    *
    * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
@@ -92,8 +92,19 @@ class almsolegrActions extends autoalmsolegrActions
       if ($this->coderror1<>-1 || $this->coderror2<>-1 || $this->coderror3<>-1)
       {
        return false;
+      }
+
+      SolicituddeEgresos::ultimoChequeo2($this->casolart,$grid,$grid2,$this->getRequestParameter('id'),$this->getRequestParameter('tiporecarg'),&$msj1,&$cod1,&$msj2,&$cod2);
+      $this->coderror1=$msj1;
+      $this->coderror2=$msj2;
+      $this->codigo1=$cod1;
+      $this->codigo2=$cod2;
+      if ($this->coderror1<>-1 || $this->coderror2<>-1)
+      {
+       return false;
       }else return true;
       }
+
     }else return true;
    }
 
@@ -296,7 +307,7 @@ class almsolegrActions extends autoalmsolegrActions
          $casolart->save();
                     $this->coderror=-1;
          }
-        
+
        	return $this->coderror;
       }
       else
