@@ -25,7 +25,7 @@ class Proveedor
    */
     public static function salvarAlmregpro($caprovee,$manprocor,$mascararif)
     {
-      if ($manprocor=='S')
+      if ($manprocor=='S' && $caprovee->getId())
       {
         self::BuscarCorrelativoActiv(&$caprovee);
       }
