@@ -299,14 +299,6 @@ class tesrencajchiActions extends autotesrencajchiActions
 
     public function setVars()
   {
-    $b= new Criteria();
-    $dat=OpdefempPeer::doSelectOne($b);
-    if ($dat)
-    {
-      $this->opordpag->setTipcau($dat->getTiprencajchi());
-      $this->opordpag->setCedrif($dat->getCedrifcajchi());
-      $this->opordpag->setCodcat($dat->getCodcatcajchi());
-    }
     $mascaraubi=Herramientas::ObtenerFormato('Opdefemp','Forubi');
     $this->opordpag->setMascaraubi($mascaraubi);
     $this->opordpag->setLonubi(strlen($mascaraubi));
