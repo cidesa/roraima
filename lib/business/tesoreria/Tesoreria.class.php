@@ -2109,6 +2109,16 @@ public static function validarCuentasGrid($grid)
       $opordpag->setNumord(str_replace('#','0',$opordpag->getNumord()));
     }
 
+    $b= new Criteria();
+    $b->add(TsdefcajchiPeer::CODCAJ,$opordpag->getCodcajchi());
+    $dat=TsdefcajchiPeer::doSelectOne($b);
+    if ($dat)
+    {
+      $opordpag->setTipcau($dat->getTipcau());
+      $opordpag->setCedrif($dat->getCedrif());
+      $opordpag->setCodcat($dat->getCodcat());
+    }
+
     $opordpag->setMonret(0);
     $opordpag->setMondes(0);
     $opordpag->setNomben(H::getX('Cedrif','Opbenefi','Nomben',$opordpag->getCedrif()));
