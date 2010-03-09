@@ -34,9 +34,7 @@ class tesactestcheanuActions extends autotesactestcheanuActions
     $reg = TscheemiPeer::doSelect($c);
 
     $this->obj = H::getConfigGrid('grid' ,$reg);
-    $params = $this->obj;
-    //$this->params['grid'] = $this->obj;
-    $this->params = $params;
+    $this->params['grid'] = $this->obj;
   }
 
   public function executeAjax()
