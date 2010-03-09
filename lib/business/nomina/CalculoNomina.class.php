@@ -388,7 +388,7 @@ public static function CalculoPorConceptos($conceptos,$codnom,$profec,$frecal,$p
 				{
 					self::ValidacionFormula($tgrid,$codemp,$cargo,$conceptos,$codnom,$desde,$hasta,$fechanac,$fechaing,$sexo,$nomnom,$conceptotickets,$periodosefectivos,$cuotas,$redondeo,$ultfec,$profec,$nroope,$acumulacre,$acumuladeb,&$cont);
 				}
-				else // no existe una formula asociada a este concepto
+				else // no existe una formula asociada a este concepto va al siguiente registro de conceptos
 				{}
 				////////////////////////////////////////
 
