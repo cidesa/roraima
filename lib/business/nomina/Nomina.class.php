@@ -8247,7 +8247,7 @@ class Nomina {
     return -1;
   }
 
-  public static function salvarNpsalintind($npsalint, $grid) {
+public static function salvarNpsalintind($npsalint, $grid) {
 
 
 
@@ -8273,52 +8273,30 @@ class Nomina {
 
     //Herramientas::PrintR($x);
     $j = 0;
+    $montoasiref=-1;
     $monasi=0;
-    $valmon=0;
-    $valmonaux=0;
-    $monasicomp0=0;
-    $monasicomp1=0;
-    $monasicomp2=0;
-    $monasicomp3=0;
-    $monasicomp4=0;
-    $monasicomp5=0;
-    $monasicomp6=0;
-    $monasicomp7=0;
-    $monasicomp8=0;
-    $monasicomp9=0;
-    $monasicomp10=0;
-    $monasicomp11=0;
-    $monasicomp12=0;
-    $monasicomp13=0;
-    $monasicomp14=0;
     while ($j < count($x)) {
       $h = 0;
-
       while ($h < count($arr_codasi)) {
-       eval('$valmon=$monasicomp'.$h.';');
-       if($valmon!=$x[$j][$arr_codasi[$h]["codasi"]] && $x[$j][$arr_codasi[$h]["codasi"]]!=0)
+
+      /*  if($montoasiref!=$x[$j][$arr_codasi[$h]["codasi"]] && $x[$j][$arr_codasi[$h]["codasi"]]!=0)
         {
-          eval('$monasi'.$h.'=$x[$j][$arr_codasi[$h]["codasi"]];');
-        }
-        else
-        {
-          eval('$monasi'.$h.'=$monasicomp'.$h.';');
-        }
+          $monasi=$x[$j][$arr_codasi[$h]["codasi"]];
+        }*/
         $npsalint = new Npsalint();
         $npsalint->setCodemp($codemp);
         $npsalint->setCodasi($arr_codasi[$h]["codasi"]);
-        //$npsalint->setMonasi($x[$j][$arr_codasi[$h]["codasi"]]);
+        $npsalint->setMonasi($x[$j][$arr_codasi[$h]["codasi"]]);
+        //$npsalint->setMonasi($monasi);
         $fecinicon = $x[$j]["fecinicon"];
         $fecfincon = $x[$j]["fecfincon"];
         $npsalint->setFecinicon($fecinicon);
         $npsalint->setFecfincon($fecfincon);
         $npsalint->setCodcon($codcon);
-        eval('$npsalint->setMonasi($monasi'.$h.');');
-	    $npsalint->save();
-
-        #eval('$valmonaux=$x[$j][$arr_codasi[$h]["codasi"]];');
-        if ($x[$j][$arr_codasi[$h]["codasi"]]!=0)
-        	eval('$monasicomp'.$h.'=$x[$j][$arr_codasi[$h]["codasi"]];');
+        $npsalint->save();
+        //print "<br> A grabar, codemp ".$codemp." Cod Asi ".$arr_codasi[$h]["codasi"]. " Monasi ".$x[$j][$arr_codasi[$h]["codasi"]];
+        //print "<br> A grabar, fecinicon ".$fecinicon." fecfincon ".$fecfincon;
+        $montoasiref=$x[$j][$arr_codasi[$h]["codasi"]];
         $h++;
       }
       $j++;
