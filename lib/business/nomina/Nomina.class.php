@@ -1501,6 +1501,7 @@ class Nomina {
           $salir = true;
         }
         
+        $fechafin="";
         $criterio = "Select fecret as fecret from nphojint where codemp='" . $empleado . "'";
         if (Herramientas :: BuscarDatos($criterio, & $datosper)) {
           if (trim($datosper[0]["fecret"]) != '') {
@@ -1512,10 +1513,11 @@ class Nomina {
             }*/
           }
         }
-        if (strtotime($fechafin) < strtotime($fecha2)) {
-          $salir = false;
-          $fecha2=$fechafin;
-         } 
+    	if($fechafin)
+	        if (strtotime($fechafin) < strtotime($fecha2)) {
+	          $salir = false;
+	          $fecha2=$fechafin;
+	         }
         
 
         /*if (Herramientas::dia_semana($fechaini_mod[2],$fechaini_mod[1],$fechaini_mod[0])=='Lunes')
@@ -3621,6 +3623,7 @@ class Nomina {
           $salir = true;
         }
         
+        $fechafin="";
         $criterio = "Select fecret as fecret from nphojint where codemp='" . $empleado . "'";
         if (Herramientas :: BuscarDatos($criterio, & $datosper)) {
           if (trim($datosper[0]["fecret"]) != '') {
@@ -3632,10 +3635,11 @@ class Nomina {
             }*/
           }
         }
-        if (strtotime($fechafin) < strtotime($fecha2)) {
-          $salir = false;
-          $fecha2=$fechafin;
-         } 
+    	if($fechafin)
+	        if (strtotime($fechafin) < strtotime($fecha2)) {
+	          $salir = false;
+	          $fecha2=$fechafin;
+	         } 
         
         
         $numerosemanas = 0;
