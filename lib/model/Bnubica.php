@@ -9,7 +9,7 @@
  * @subpackage lib.model
  * @author     $Author$ <desarrollo@cidesa.com.ve>
  * @version SVN: $Id$
- * 
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -40,9 +40,9 @@ class Bnubica extends BaseBnubica
   }
 
   public function getTiedatrel()
-  {  	
+  {
   	  $valor="N";
-  	  if(self:getId()!='')
+  	  if(self::getId()!='')
   	  {
   	  	  $d= new Criteria();
 	  	  $d->add(OpordpagPeer::CODUNI,self::getCodubi());
@@ -50,9 +50,9 @@ class Bnubica extends BaseBnubica
 	  	  if ($resul)
 	  	  {
 	  	  	$valor= 'S';
-	  	  } else $valor= 'N';	
+	  	  } else $valor= 'N';
   	  }
-  	  
+
   	return $valor;
   }
 
