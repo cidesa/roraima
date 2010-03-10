@@ -107,7 +107,7 @@ propel:
   cpasiini:
     codpre:
       type: VARCHAR
-      size: 32
+      size: 50
       required: true
       foreignTable: cpdeftit
       foreignReference: codpre
@@ -381,7 +381,7 @@ propel:
   cpdeftit:
     codpre:
       type: VARCHAR
-      size: 32
+      size: 50
       required: true
     nompre:
       type: VARCHAR
@@ -441,7 +441,7 @@ propel:
       type: DATE
     codpre:
       type: VARCHAR
-      size: 32
+      size: 50
     monasi:
       type: NUMERIC
       size: 20
@@ -630,7 +630,7 @@ propel:
       foreignReference: refcau
     codpre:
       type: VARCHAR
-      size: 32
+      size: 50
       required: true
     monimp:
       type: NUMERIC
@@ -668,7 +668,7 @@ propel:
       foreignReference: refcom
     codpre:
       type: VARCHAR
-      size: 32
+      size: 50
       required: true
       foreignTable: cpdeftit
       foreignReference: codpre
@@ -709,7 +709,7 @@ propel:
       foreignReference: refpag
     codpre:
       type: VARCHAR
-      size: 32
+      size: 50
       required: true
     monimp:
       type: NUMERIC
@@ -746,7 +746,7 @@ propel:
       foreignReference: refprc
     codpre:
       type: VARCHAR
-      size: 32
+      size: 50
       required: true
       foreignTable: cpdeftit
       foreignReference: codpre
@@ -788,7 +788,7 @@ propel:
       foreignReference: refadi
     codpre:
       type: VARCHAR
-      size: 32
+      size: 50
       required: true
       foreignTable: cpdeftit
       foreignReference: codpre
@@ -818,7 +818,7 @@ propel:
       foreignReference: refaju
     codpre:
       type: VARCHAR
-      size: 32
+      size: 50
       required: true
       foreignTable: cpdeftit
       foreignReference: codpre
@@ -1188,7 +1188,7 @@ propel:
       foreignReference: refadi
     codpre:
       type: VARCHAR
-      size: 32
+      size: 50
     perpre:
       type: VARCHAR
       size: 2
@@ -1214,10 +1214,10 @@ propel:
       foreignReference: reftra
     codori:
       type: VARCHAR
-      size: 32
+      size: 50
     coddes:
       type: VARCHAR
-      size: 32
+      size: 50
     monmov:
       type: NUMERIC
       size: 14
@@ -1320,7 +1320,7 @@ propel:
       type: DATE
     codpre:
       type: VARCHAR
-      size: 32
+      size: 50
     stamov:
       type: VARCHAR
       size: 1
@@ -1509,13 +1509,13 @@ propel:
       foreignReference: reftra
     codori:
       type: VARCHAR
-      size: 32
+      size: 50
       required: true
       foreignTable: cpdeftit
       foreignReference: codpre
     coddes:
       type: VARCHAR
-      size: 32
+      size: 50
       required: true
       foreignTable: cpdeftit
       foreignReference: codpre
