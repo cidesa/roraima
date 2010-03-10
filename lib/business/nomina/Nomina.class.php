@@ -5941,7 +5941,7 @@ class Nomina {
     foreach ($grid1 as $g) {
       if ($g["check"] == '1') {
         if ($g["frecon"] == "") {
-          return 400;
+          return 4400;
         }
       }
     }
@@ -5950,7 +5950,7 @@ class Nomina {
       if ($g["check"] == '1') {
 
         if ($g["frecon"] == "") {
-          return 401;
+          return 4401;
         }
       }
     }
