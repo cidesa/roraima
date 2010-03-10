@@ -34,7 +34,7 @@ class CpdeftitMapBuilder {
 
 		$tMap->setPrimaryKeyMethodInfo('cpdeftit_SEQ');
 
-		$tMap->addColumn('CODPRE', 'Codpre', 'string', CreoleTypes::VARCHAR, true, 32);
+		$tMap->addColumn('CODPRE', 'Codpre', 'string', CreoleTypes::VARCHAR, true, 50);
 
 		$tMap->addColumn('NOMPRE', 'Nompre', 'string', CreoleTypes::VARCHAR, true, 250);
 

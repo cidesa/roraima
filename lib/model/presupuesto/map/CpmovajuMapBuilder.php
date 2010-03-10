@@ -36,7 +36,7 @@ class CpmovajuMapBuilder {
 
 		$tMap->addForeignKey('REFAJU', 'Refaju', 'string', CreoleTypes::VARCHAR, 'cpajuste', 'REFAJU', true, 8);
 
-		$tMap->addForeignKey('CODPRE', 'Codpre', 'string', CreoleTypes::VARCHAR, 'cpdeftit', 'CODPRE', true, 32);
+		$tMap->addForeignKey('CODPRE', 'Codpre', 'string', CreoleTypes::VARCHAR, 'cpdeftit', 'CODPRE', true, 50);
 
 		$tMap->addColumn('MONAJU', 'Monaju', 'double', CreoleTypes::NUMERIC, false, 14);
 

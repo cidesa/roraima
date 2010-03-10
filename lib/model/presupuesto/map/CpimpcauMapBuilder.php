@@ -36,7 +36,7 @@ class CpimpcauMapBuilder {
 
 		$tMap->addForeignKey('REFCAU', 'Refcau', 'string', CreoleTypes::VARCHAR, 'cpcausad', 'REFCAU', true, 8);
 
-		$tMap->addColumn('CODPRE', 'Codpre', 'string', CreoleTypes::VARCHAR, true, 32);
+		$tMap->addColumn('CODPRE', 'Codpre', 'string', CreoleTypes::VARCHAR, true, 50);
 
 		$tMap->addColumn('MONIMP', 'Monimp', 'double', CreoleTypes::NUMERIC, false, 14);
 
