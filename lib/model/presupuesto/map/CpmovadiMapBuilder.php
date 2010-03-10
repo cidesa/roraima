@@ -36,7 +36,7 @@ class CpmovadiMapBuilder {
 
 		$tMap->addForeignKey('REFADI', 'Refadi', 'string', CreoleTypes::VARCHAR, 'cpadidis', 'REFADI', true, 8);
 
-		$tMap->addForeignKey('CODPRE', 'Codpre', 'string', CreoleTypes::VARCHAR, 'cpdeftit', 'CODPRE', true, 32);
+		$tMap->addForeignKey('CODPRE', 'Codpre', 'string', CreoleTypes::VARCHAR, 'cpdeftit', 'CODPRE', true, 50);
 
 		$tMap->addColumn('PERPRE', 'Perpre', 'string', CreoleTypes::VARCHAR, true, 2);
 

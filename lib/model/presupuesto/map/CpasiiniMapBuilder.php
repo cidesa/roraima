@@ -34,7 +34,7 @@ class CpasiiniMapBuilder {
 
 		$tMap->setPrimaryKeyMethodInfo('cpasiini_SEQ');
 
-		$tMap->addForeignKey('CODPRE', 'Codpre', 'string', CreoleTypes::VARCHAR, 'cpdeftit', 'CODPRE', true, 32);
+		$tMap->addForeignKey('CODPRE', 'Codpre', 'string', CreoleTypes::VARCHAR, 'cpdeftit', 'CODPRE', true, 50);
 
 		$tMap->addColumn('NOMPRE', 'Nompre', 'string', CreoleTypes::VARCHAR, false, 250);
 

@@ -36,9 +36,9 @@ class CpmovtraMapBuilder {
 
 		$tMap->addForeignKey('REFTRA', 'Reftra', 'string', CreoleTypes::VARCHAR, 'cptrasla', 'REFTRA', true, 8);
 
-		$tMap->addForeignKey('CODORI', 'Codori', 'string', CreoleTypes::VARCHAR, 'cpdeftit', 'CODPRE', true, 32);
+		$tMap->addForeignKey('CODORI', 'Codori', 'string', CreoleTypes::VARCHAR, 'cpdeftit', 'CODPRE', true, 50);
 
-		$tMap->addForeignKey('CODDES', 'Coddes', 'string', CreoleTypes::VARCHAR, 'cpdeftit', 'CODPRE', true, 32);
+		$tMap->addForeignKey('CODDES', 'Coddes', 'string', CreoleTypes::VARCHAR, 'cpdeftit', 'CODPRE', true, 50);
 
 		$tMap->addColumn('MONMOV', 'Monmov', 'double', CreoleTypes::NUMERIC, false, 14);
 

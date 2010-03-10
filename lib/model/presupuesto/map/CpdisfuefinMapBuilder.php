@@ -42,7 +42,7 @@ class CpdisfuefinMapBuilder {
 
 		$tMap->addColumn('FECDIS', 'Fecdis', 'int', CreoleTypes::DATE, false, null);
 
-		$tMap->addColumn('CODPRE', 'Codpre', 'string', CreoleTypes::VARCHAR, false, 32);
+		$tMap->addColumn('CODPRE', 'Codpre', 'string', CreoleTypes::VARCHAR, false, 50);
 
 		$tMap->addColumn('MONASI', 'Monasi', 'double', CreoleTypes::NUMERIC, false, 20);
 

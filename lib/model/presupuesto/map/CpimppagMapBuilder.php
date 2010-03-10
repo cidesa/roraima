@@ -36,7 +36,7 @@ class CpimppagMapBuilder {
 
 		$tMap->addForeignKey('REFPAG', 'Refpag', 'string', CreoleTypes::VARCHAR, 'cppagos', 'REFPAG', true, 8);
 
-		$tMap->addColumn('CODPRE', 'Codpre', 'string', CreoleTypes::VARCHAR, true, 32);
+		$tMap->addColumn('CODPRE', 'Codpre', 'string', CreoleTypes::VARCHAR, true, 50);
 
 		$tMap->addColumn('MONIMP', 'Monimp', 'double', CreoleTypes::NUMERIC, false, 14);
 

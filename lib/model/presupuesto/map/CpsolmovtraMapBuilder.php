@@ -36,9 +36,9 @@ class CpsolmovtraMapBuilder {
 
 		$tMap->addForeignKey('REFTRA', 'Reftra', 'string', CreoleTypes::VARCHAR, 'cpsoltrasla', 'REFTRA', true, 8);
 
-		$tMap->addColumn('CODORI', 'Codori', 'string', CreoleTypes::VARCHAR, false, 32);
+		$tMap->addColumn('CODORI', 'Codori', 'string', CreoleTypes::VARCHAR, false, 50);
 
-		$tMap->addColumn('CODDES', 'Coddes', 'string', CreoleTypes::VARCHAR, false, 32);
+		$tMap->addColumn('CODDES', 'Coddes', 'string', CreoleTypes::VARCHAR, false, 50);
 
 		$tMap->addColumn('MONMOV', 'Monmov', 'double', CreoleTypes::NUMERIC, false, 14);
 

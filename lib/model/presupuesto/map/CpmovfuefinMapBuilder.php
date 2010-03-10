@@ -44,7 +44,7 @@ class CpmovfuefinMapBuilder {
 
 		$tMap->addColumn('FECMOV', 'Fecmov', 'int', CreoleTypes::DATE, false, null);
 
-		$tMap->addColumn('CODPRE', 'Codpre', 'string', CreoleTypes::VARCHAR, false, 32);
+		$tMap->addColumn('CODPRE', 'Codpre', 'string', CreoleTypes::VARCHAR, false, 50);
 
 		$tMap->addColumn('STAMOV', 'Stamov', 'string', CreoleTypes::VARCHAR, false, 1);
 

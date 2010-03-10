@@ -36,7 +36,7 @@ class CpimpprcMapBuilder {
 
 		$tMap->addForeignKey('REFPRC', 'Refprc', 'string', CreoleTypes::VARCHAR, 'cpprecom', 'REFPRC', true, 8);
 
-		$tMap->addForeignKey('CODPRE', 'Codpre', 'string', CreoleTypes::VARCHAR, 'cpdeftit', 'CODPRE', true, 32);
+		$tMap->addForeignKey('CODPRE', 'Codpre', 'string', CreoleTypes::VARCHAR, 'cpdeftit', 'CODPRE', true, 50);
 
 		$tMap->addColumn('MONIMP', 'Monimp', 'double', CreoleTypes::NUMERIC, false, 14);
 
