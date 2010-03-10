@@ -36,7 +36,11 @@ class presnomantpreActions extends autopresnomantpreActions
 	    	if ($resp)
 	    	{
 	    	//SELECT * FROM NPPRESOC WHERE CODEMP = '" + DatosAntPre(0).Text + "'"
-	        $dato1=Herramientas::getX('codemp','nppresoc','antacu',$this->getRequestParameter('codigo'));
+	        #$dato1=Herramientas::getX('codemp','nppresoc','antacu',$this->getRequestParameter('codigo'));
+	        $dato1=0;
+	        $sqlpresoc="select antacum from  npimppresoc where codemp='".$this->getRequestParameter('codigo')."' and tipo='' order by fecini desc";
+	    	if(H::BuscarDatos($sqlpresoc,$rspresoc));
+	    		$dato1=$rspresoc[0]['antacum'];	    			
 	        $dato1=H::formatoMonto($dato1);
 	        $dato=Herramientas::getX('codemp','nphojint','nomemp',$this->getRequestParameter('codigo'));
 	    	$output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$cajtexmos1.'","'.$dato1.'",""]]';
