@@ -22,6 +22,7 @@
 <?php echo input_hidden_tag('haydesp', $haydespacho) ?>
 <?php echo input_hidden_tag('modifi', $modifico) ?>
 <?php echo input_hidden_tag('tiporecarg', $tiporec) ?>
+<?php echo object_input_hidden_tag($casolart, 'getPrecom') ?>
 <table width="100%">
   <tr>
     <th><strong><font color="#CC0000" size="2" face="Verdana, Arial, Helvetica, sans-serif"> <?php echo $casolart->getEtiqueta() ;?></font></strong></th>
@@ -190,13 +191,13 @@
   'disabled' => true,
   'control_name' => 'casolart[nomext]',
 )); echo $value ? $value : '&nbsp;' ?></th>
-<th><?php if ($casolart->getId()!="" && $precompromete=='S' && $autorizaprecom=='S') { ?>
+<th><?php if ($casolart->getId()!="" && $precompromete=='S' && $autorizaprecom=='S' && $casolart->getPrecom()=='N') { ?>
 <?php echo button_to(__('Generar Precompromiso'), 'almsolegr/generarcompromiso?id='.$casolart->getId()) ?>
    <? }?></th>
       <th>&nbsp;&nbsp;&nbsp;</th>
    <th>
      <?php if ($casolart->getId()!='') { ?>
-  <input type="button" name="Submit" class="sf_admin_action_list" value="Forma Pre-Impresa" onclick="javascript:Mostrar_orden_preimpresa();" />
+  <input type="button" name="Submit" class="sf_admin_action_list" value="      Forma Pre-Impresa" onclick="javascript:Mostrar_orden_preimpresa();" />
 <? } ?>
    </th>
    </tr>
@@ -350,13 +351,15 @@ echo grid_tag($obj3);
 </form>
 
 <ul class="sf_admin_actions">
-      <li class="float-right"><?php if ($casolart->getId() && $haydespacho!='S' && $cotiz!='S' && $casolart->getStareq()!='N'): ?>
+      <li class="float-right">
+      <?php if ($oculeli!="S"): ?>
+      <?php if ($casolart->getId() && $haydespacho!='S' && $cotiz!='S' && $casolart->getStareq()!='N'): ?>
 <?php echo button_to(__('delete'), 'almsolegr/delete?id='.$casolart->getId(), array (
   'post' => true,
   'confirm' => __('Are you sure?'),
   'class' => 'sf_admin_action_delete',
   'onclick' => 'elimin()',
-)) ?><?php endif; ?>
+)) ?><?php endif; ?> <?php endif; ?>
 </li>
 <li>
 <div id="anul" style="display:none">
@@ -366,8 +369,23 @@ echo grid_tag($obj3);
   </ul>
 
 <script language="JavaScript" type="text/javascript">
-  $('casolart_reqart').focus();
   var ids='<?php echo $casolart->getId()?>';
+  var deshab='<?php echo $bloqfec; ?>';
+  if (deshab=='S')
+  {
+  	$('trigger_casolart_fecreq').hide();
+  	$('casolart_fecreq').readOnly=true;
+  }
+  var correla='<?php echo $mansolocor; ?>';
+  if (correla=='S' && ids=='')
+  {
+  	$('casolart_reqart').value='########';
+  	$('casolart_reqart').readOnly=true;
+  }
+
+
+  $('casolart_reqart').focus();
+
   var estatus='<?php echo $casolart->getStareq()?>';
   if (ids!="" && $('haydesp').value!='S' && estatus!='N')
   {

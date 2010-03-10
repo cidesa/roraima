@@ -26,6 +26,7 @@ class Caordcom extends BaseCaordcom
     protected $genctaalc="";
     private $eti="";
     protected $tipopro="";
+    protected $compro="";
 
 
     public function getReptipcom()
@@ -220,5 +221,22 @@ class Caordcom extends BaseCaordcom
 
    return $si;
     }
+
+
+  public function getCompro()
+  {
+  	  $d= new Criteria();
+  	  $d->add(CpcomproPeer::REFCOM,self::getOrdcom());
+  	  $resul= CpcomproPeer::doSelectOne($d);
+  	  if ($resul)
+  	  {
+  	  	return 'S';
+  	  }else return 'N';
+  }
+
+  public function setCompro()
+  {
+  	return $this->compro;
+  }
 
 }

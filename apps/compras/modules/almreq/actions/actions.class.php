@@ -333,6 +333,9 @@ class almreqActions extends autoalmreqActions
     $this->autorizareq= Herramientas::ObtenerFormato('Cadefart','reqreqapr');
     $varemp = $this->getUser()->getAttribute('configemp');
     $this->numdesh="";
+    $this->mansolocor="";
+    $this->bloqfec="";
+    $this->oculeli="";
 	if ($varemp)
 	if(array_key_exists('aplicacion',$varemp))
 	 if(array_key_exists('compras',$varemp['aplicacion']))
@@ -341,6 +344,18 @@ class almreqActions extends autoalmreqActions
 	       if(array_key_exists('reqartdesh',$varemp['aplicacion']['compras']['modulos']['almreq']))
 	       {
 	       	$this->numdesh=$varemp['aplicacion']['compras']['modulos']['almreq']['reqartdesh'];
+	       }
+           if(array_key_exists('mansolocor',$varemp['aplicacion']['compras']['modulos']['almcotiza']))
+	       {
+	       	$this->mansolocor=$varemp['aplicacion']['compras']['modulos']['almcotiza']['mansolocor'];
+	       }
+	       if(array_key_exists('bloqfec',$varemp['aplicacion']['compras']['modulos']['almcotiza']))
+	       {
+	       	$this->bloqfec=$varemp['aplicacion']['compras']['modulos']['almcotiza']['bloqfec'];
+	       }
+	       if(array_key_exists('oculeli',$varemp['aplicacion']['compras']['modulos']['almcotiza']))
+	       {
+	       	$this->oculeli=$varemp['aplicacion']['compras']['modulos']['almcotiza']['oculeli'];
 	       }
 	     }
   }

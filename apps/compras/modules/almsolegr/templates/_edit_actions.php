@@ -30,6 +30,10 @@
   </ul>
 
 <script language="JavaScript" type="text/javascript">
+
+   var tiepre='<?php echo $casolart->getPrecom(); ?>';
+   if (tiepre=='S') $('save').hide();
+
   function generar()
   {
     if ($(id).value=="")

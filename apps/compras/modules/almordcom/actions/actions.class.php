@@ -1695,6 +1695,8 @@ class almordcomActions extends autoalmordcomActions
     $this->deshabmonrec="";
     $this->ordcomdesh="";
     $this->mansolocor="";
+    $this->bloqfec="";
+    $this->oculeli="";
     $varemp = $this->getUser()->getAttribute('configemp');
     if ($varemp)
 	if(array_key_exists('aplicacion',$varemp))
@@ -1709,11 +1711,19 @@ class almordcomActions extends autoalmordcomActions
 	       {
 	       	$this->ordcomdesh=$varemp['aplicacion']['compras']['modulos']['almordcom']['ordcomdesh'];
 	       }
-               if(array_key_exists('mansolocor',$varemp['aplicacion']['compras']['modulos']['almordcom']))
+           if(array_key_exists('mansolocor',$varemp['aplicacion']['compras']['modulos']['almordcom']))
 	       {
 	       	$this->mansolocor=$varemp['aplicacion']['compras']['modulos']['almordcom']['mansolocor'];
 	       }
-             }
+	       if(array_key_exists('bloqfec',$varemp['aplicacion']['compras']['modulos']['almordcom']))
+	       {
+	       	$this->bloqfec=$varemp['aplicacion']['compras']['modulos']['almordcom']['bloqfec'];
+	       }
+	       if(array_key_exists('oculeli',$varemp['aplicacion']['compras']['modulos']['almordcom']))
+	       {
+	       	$this->oculeli=$varemp['aplicacion']['compras']['modulos']['almordcom']['oculeli'];
+	       }
+         }
 
   }
 

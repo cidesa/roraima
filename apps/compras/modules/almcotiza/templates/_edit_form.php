@@ -399,7 +399,7 @@
 </form>
 
 <ul class="sf_admin_actions">
-      <li class="float-rigth"><?php if ($cacotiza->getId()): ?>
+      <li class="float-rigth"><?php if ($cacotiza->getId() && $oculeli!="S"): ?>
 <?php echo button_to(__('delete'), 'almcotiza/delete?id='.$cacotiza->getId(), array (
   'post' => true,
   'confirm' => __('Are you sure?'),
@@ -416,7 +416,22 @@ if (id)
 	$$('.botoncat')[0].disabled=true;
 	$$('.botoncat')[1].disabled=true;
 	$('cacotiza_monrec').value=$('montorecargo').value
+}else {
+	var manesolcorr='<?php echo $mansolocor; ?>';
+     if (manesolcorr=='S')
+     {
+        $('cacotiza_refcot').value='########';
+     	$('cacotiza_refcot').readOnly=true;
+        $('cacotiza_rifpro').focus();
+     }
 }
+
+  var deshab='<?php echo $bloqfec; ?>';
+  if (deshab=='S')
+  {
+  	$('trigger_cacotiza_feccot').hide();
+  	$('cacotiza_feccot').readOnly=true;
+  }
 
 
 function enter(e,valor)

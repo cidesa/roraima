@@ -17,6 +17,7 @@ class Caregart extends BaseCaregart
 {
   protected $ubicacion = '';
   protected $gencorart="";
+  protected $tiedatrel="";
 
 public function getNomram($val=false)
 	{
@@ -51,4 +52,34 @@ public function getNompar()
       }else $si=null;
       return $si;
     }
+
+  public function getTiedatrel()
+  {
+  	$valor="N";
+  	if (self::getId()){
+  	  $d= new Criteria();
+  	  $d->add(CaartsolPeer::CODART,self::getCodart());
+  	  $resul= CaartsolPeer::doSelectOne($d);
+  	  if ($resul)
+  	  {
+  	  	$valor= 'S';
+  	  }else {
+  	  $d= new Criteria();
+  	  $d->add(CaartordPeer::CODART,self::getCodart());
+  	  $resul= CaartordPeer::doSelectOne($d);
+  	  if ($resul)
+  	  {
+  	  	$valor= 'S';
+  	  }else $valor= 'N';
+  	  }
+  	}
+
+
+  	return $valor;
+  }
+
+  public function setTiedatrel()
+  {
+  	return $this->tiedatrel;
+  }
 }

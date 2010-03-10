@@ -15,6 +15,7 @@
  */
 class Carecaud extends BaseCarecaud
 {
+  protected $tiedatrel="";
 
    public function __toString()
     {
@@ -25,4 +26,26 @@ class Carecaud extends BaseCarecaud
 	{
 		return Herramientas::getX('CODTIPREC','Catiprec','destiprec',self::getCodtiprec());
 	}
+
+   public function getTiedatrel()
+  {
+   	$valor="N";
+   	if (self::getId()){
+  	$d= new Criteria();
+  	$d->add(CarecproPeer::CODREC,self::getCodrec());
+  	$resul= CarecproPeer::doSelectOne($d);
+  	if ($resul)
+  	{
+  		$valor= 'S';
+  	}
+  	else $valor= 'N';
+   	}
+
+  	return $valor;
+  }
+
+  public function setTiedatrel()
+  {
+  	return $this->tiedatrel;
+  }
 }

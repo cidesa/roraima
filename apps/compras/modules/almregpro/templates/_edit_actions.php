@@ -24,3 +24,8 @@
 )) ?></li>
 
   </ul>
+
+<script language="JavaScript" type="text/javascript">
+ var tieregrel='<?php echo $caprovee->getTiedatrel(); ?>';
+  if (tieregrel=='S') $('save').hide();
+</script>

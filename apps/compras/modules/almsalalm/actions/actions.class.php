@@ -607,8 +607,6 @@ $this->Bitacora('Guardo');
     	$col11->setOculta(false);
     }
 
-
-
     $opciones->addColumna($col1);
     $opciones->addColumna($col2);
     $opciones->addColumna($col3);

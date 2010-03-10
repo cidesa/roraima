@@ -20,7 +20,7 @@ generator:
       sort:           ajuoc
       object_actions:
         _edit:        ~
-        _delete:      ~
+        _delete:      NONE
     edit:
       title:          Edición de Ajustes a Ordenes de Compra
       display:        [ajuoc, ordcom, fecaju, desaju, monaju, codpro, nompro]

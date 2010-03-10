@@ -174,6 +174,24 @@ echo grid_tag($obj);
 </form>
 
 <script type="text/javascript">
+  var id='<?php echo $casalalm->getId()?>';
+  if (id=='')
+  {
+	var manesolcorr='<?php echo $mansolocor; ?>';
+     if (manesolcorr=='S')
+     {
+        $('casalalm_codsal').value='########';
+     	$('casalalm_codsal').readOnly=true;
+        $('casalalm_rifpro').focus();
+     }
+  }
+
+  var deshab='<?php echo $bloqfec; ?>';
+  if (deshab=='S')
+  {
+  	$('trigger_casalalm_fecsal').hide();
+  	$('casalalm_fecsal').readOnly=true;
+  }
 function canttotal(e,id)
 {
 if (e.keyCode==13)
@@ -239,7 +257,7 @@ if (e.keyCode==13)
 </form>
 
 <ul class="sf_admin_actions">
-      <li class="float-left"><?php if ($casalalm->getId()): ?>
+      <li class="float-left"><?php if ($casalalm->getId() && $oculeli!="S"): ?>
 <?php echo button_to(__('delete'), 'almsalalm/delete?id='.$casalalm->getId(), array (
   'post' => true,
   'confirm' => __('Are you sure?'),

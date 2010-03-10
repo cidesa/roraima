@@ -1023,14 +1023,33 @@ $this->Bitacora('Guardo');
     $this->lonubi=strlen($this->mascaraubi);
 
    		  $recmer = 'N';     //Integracion con Presupuesto
+		    $this->mansolocor="";
+		    $this->bloqfec="";
+		    $this->oculeli="";
 		  $varemp = $this->getUser()->getAttribute('configemp');
 		  if(is_array($varemp))
 		    if(array_key_exists('aplicacion',$varemp))
 		  	  if(array_key_exists('compras',$varemp['aplicacion']))
 			   if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
-			     if(array_key_exists('almordrec',$varemp['aplicacion']['compras']['modulos']))
+			     if(array_key_exists('almordrec',$varemp['aplicacion']['compras']['modulos'])){
 			       if(array_key_exists('recmer',$varemp['aplicacion']['compras']['modulos']['almordrec']))
+			       {
 		  		       $this->recmer = $varemp['aplicacion']['compras']['modulos']['almordrec']['recmer'];
+			       }
+		           if(array_key_exists('mansolocor',$varemp['aplicacion']['compras']['modulos']['almordrec']))
+			       {
+			       	$this->mansolocor=$varemp['aplicacion']['compras']['modulos']['almordrec']['mansolocor'];
+			       }
+			       if(array_key_exists('bloqfec',$varemp['aplicacion']['compras']['modulos']['almordrec']))
+			       {
+			       	$this->bloqfec=$varemp['aplicacion']['compras']['modulos']['almordrec']['bloqfec'];
+			       }
+			       if(array_key_exists('oculeli',$varemp['aplicacion']['compras']['modulos']['almordrec']))
+			       {
+			       	$this->oculeli=$varemp['aplicacion']['compras']['modulos']['almordrec']['oculeli'];
+			       }
+
+			     }
   }
 
 
