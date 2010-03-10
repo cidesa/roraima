@@ -65,7 +65,7 @@
   msj: No puede salvar sin Introducir el Código de Partida
 118:
   cod: 118
-  msj: No hay disponibilidad en el siguiente Código presupuestario:
+  msj: No hay disponibilidad en el siguiente Código presupuestario 
 119:
   cod: 119
   msj: No hay disponibilidad para los Recargos
@@ -289,11 +289,11 @@
   msj: La Cuenta Contable No existe.
 
 ################### NOMINA ####################
-400:
-  cod: 400
+4400:
+  cod: 4400
   msj: Uno de los Conceptos a grabar no tiene Frecuencia de Pago asociada, en el grid de los Asociados
-401:
-  cod: 401
+4401:
+  cod: 4401
   msj: Uno de los Conceptos a grabar no tiene Frecuencia de Pago asociada, en el grid de los No Asociados
 500:
   cod: 500
@@ -1174,12 +1174,18 @@
 1400:
     cod: 1400
     msj: Debe existir al menos un item a donar.
+
 1401:
     cod: 1401
     msj: No se puede guardar la solicitud si existen recaudos no consignados.
+
 1402:
   cod: 1402
   msj: Los precios o cantidades aprobadas en los items no pueden ser cero (0.0)
+
+1403:
+  cod: 1403
+  msj: La cédula del beneficiario sólo puede contener el prefijo "R" que significa que es el representante legal del no cedulado.
 
   ########## Viaticos ########
 1600:
