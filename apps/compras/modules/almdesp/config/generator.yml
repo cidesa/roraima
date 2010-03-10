@@ -34,7 +34,7 @@ generator:
         fecdph: { params: date_format='dd/MM/yy' }
       object_actions:
         _edit:        ~
-        _delete:        ~
+        _delete:      NONE
       max_per_page:   10
       sort:    dphart
     edit:

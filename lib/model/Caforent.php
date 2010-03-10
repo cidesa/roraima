@@ -15,4 +15,27 @@
  */ 
 class Caforent extends BaseCaforent
 {
+  protected $tiedatrel="";
+
+   public function getTiedatrel()
+  {
+   	$valor="N";
+   	if (self::getId()){
+  	$d= new Criteria();
+  	$d->add(CaordcomPeer::FORENT,self::getCodforent());
+  	$resul= CaordcomPeer::doSelectOne($d);
+  	if ($resul)
+  	{
+  		$valor= 'S';
+  	}
+  	else $valor= 'N';
+   	}
+
+  	return $valor;
+  }
+
+  public function setTiedatrel()
+  {
+  	return $this->tiedatrel;
+  }
 }

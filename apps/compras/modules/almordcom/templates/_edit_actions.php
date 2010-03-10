@@ -25,3 +25,8 @@
   'confirm' => '¿Desea crear un nuevo registro?. Perderá cualquier cambio en la ventana actual',
 )) ?></li>
 </ul>
+
+<script language="JavaScript" type="text/javascript">
+  var tiecom='<?php echo $caordcom->getCompro(); ?>';
+  if (tiecom=='S') $('save').hide();
+</script>

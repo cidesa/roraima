@@ -15,5 +15,27 @@
  */ 
 class Caramart extends BaseCaramart
 {
-	
+  protected $tiedatrel="";
+
+   public function getTiedatrel()
+  {
+   	$valor="N";
+   	if (self::getId()){
+  	$d= new Criteria();
+  	$d->add(CaregartPeer::RAMART,self::getRamart());
+  	$resul= CaregartPeer::doSelectOne($d);
+  	if ($resul)
+  	{
+  		$valor= 'S';
+  	}
+  	else $valor= 'N';
+   	}
+
+  	return $valor;
+  }
+
+  public function setTiedatrel()
+  {
+  	return $this->tiedatrel;
+  }
 }

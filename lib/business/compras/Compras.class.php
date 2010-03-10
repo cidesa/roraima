@@ -1246,6 +1246,14 @@ class Compras {
 
     // Código para validaciones del negocio
     // Debe retornar el código de error, si existe, si no retorna -1
+    $t= new Criteria();
+    $t->add(CpimpcauPeer::REFERE,$reg->getOrdcom());
+    $resultado= CpimpcauPeer::doSelect($t);
+    if ($resultado)
+    {
+    	$result=197;
+    }
+
 
     return $result;
 

@@ -27,7 +27,7 @@ generator:
       fields:
       object_actions:
         _edit:          ~
-        _delete:        ~
+        _delete:        NONE
       max_per_page:   10
       sort:           codsal
     edit:

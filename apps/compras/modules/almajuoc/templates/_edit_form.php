@@ -144,7 +144,7 @@
 
 </form>
 <ul class="sf_admin_actions">
-      <li class="float-left"><?php if ($caajuoc->getId()): ?>
+      <li class="float-left"><?php if ($caajuoc->getId() && $oculeli!="S"): ?>
 <?php echo button_to(__('delete'), 'almajuoc/delete?id='.$caajuoc->getId(), array (
   'post' => true,
   'confirm' => __('Are you sure?'),
@@ -152,3 +152,14 @@
 )) ?><?php endif; ?>
 </li>
   </ul>
+
+<script language="JavaScript" type="text/javascript">
+var nuevo='<?php echo $caajuoc->getId(); ?>';
+  var deshab='<?php echo $bloqfec; ?>';
+  if (deshab=='S')
+  {
+  	$('trigger_caajuoc_fecaju').hide();
+  	$('caajuoc_fecaju').readOnly=true;
+  }
+
+</script>

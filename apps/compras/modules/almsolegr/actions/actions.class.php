@@ -45,66 +45,75 @@ class almsolegrActions extends autoalmsolegrActions
       $this->casolart = $this->getCasolartOrCreate();
       try{ $this->updateCasolartFromRequest();}
       catch (Exception $ex){}
-      $this->configGridDetalle();
-      $this->configGridRecargo($this->casolart->getReqart());
-      $this->configGridRazon();
-      $grid = Herramientas::CargarDatosGrid($this,$this->obj);
-      $grid2 = Herramientas::CargarDatosGrid($this,$this->obj2);
-      $grid3 = Herramientas::CargarDatosGrid($this,$this->obj3);
-      if (!Herramientas::validarPeriodoPresuesto($this->casolart->getFecreq()))
-      {
-       $this->fecper=142;
-       return false;
-      }
 
-      if (!Herramientas::validarPeriodoFiscal($this->casolart->getFecreq()))
-      {
-        $this->fecperfis=143;
-        return false;
-      }
-      if (count($grid[0])==0)
-      {
-      	$this->detallevacia=128;
-      	return false;
-      }
+		if ($this->casolart->getId())      //Validacion que permite guardar solamente la descripcion
+		{
+			$refsol = Herramientas::getX_vacio('refsol','caordcom','refsol',$this->casolart->getReqart());
+			if (!empty($refsol))
+			{
+				return true;
+			}
+		}
 
-		//Valida la Razon de Compra
-      //if (count($grid3[0])==0)
-      //{
-      //	$this->razonvacia=127;
-      //	return false;
-      //}
+		      $this->configGridDetalle();
+		      $this->configGridRecargo($this->casolart->getReqart());
+		      $this->configGridRazon();
+		      $grid = Herramientas::CargarDatosGrid($this,$this->obj);
+		      $grid2 = Herramientas::CargarDatosGrid($this,$this->obj2);
+		      $grid3 = Herramientas::CargarDatosGrid($this,$this->obj3);
+		      if (!Herramientas::validarPeriodoPresuesto($this->casolart->getFecreq()))
+		      {
+		       $this->fecper=142;
+		       return false;
+		      }
 
-    /*  if ((count($grid2[0])>0) && ($this->getUser()->getAttribute('presiono','','almsolegr'))!='S')
-      {
-      	$this->salvarrecar=138;
-      	return false;
-      }*/
-      if (count($grid[0])!=0 || count($grid2[0])!=0)
-      {
-      SolicituddeEgresos::validarAlmsolegr($this->casolart,$grid,$grid2,$this->getRequestParameter('id'),$this->getRequestParameter('tiporecarg'),&$msj1,&$cod1,&$msj2,&$cod2,&$msj3,&$cod3);
-      $this->coderror1=$msj1;
-      $this->coderror2=$msj2;
-      $this->coderror3=$msj3;
-      $this->codigo1=$cod1;
-      $this->codigo2=$cod2;
-      $this->codigo3=$cod3;
-      if ($this->coderror1<>-1 || $this->coderror2<>-1 || $this->coderror3<>-1)
-      {
-       return false;
-      }
+		      if (!Herramientas::validarPeriodoFiscal($this->casolart->getFecreq()))
+		      {
+		        $this->fecperfis=143;
+		        return false;
+		      }
+		      if (count($grid[0])==0)
+		      {
+		      	$this->detallevacia=128;
+		      	return false;
+		      }
 
-      SolicituddeEgresos::ultimoChequeo2($this->casolart,$grid,$grid2,$this->getRequestParameter('id'),$this->getRequestParameter('tiporecarg'),&$msj1,&$cod1,&$msj2,&$cod2);
-      $this->coderror1=$msj1;
-      $this->coderror2=$msj2;
-      $this->codigo1=$cod1;
-      $this->codigo2=$cod2;
-      if ($this->coderror1<>-1 || $this->coderror2<>-1)
-      {
-       return false;
-      }else return true;
-      }
+				//Valida la Razon de Compra
+		      //if (count($grid3[0])==0)
+		      //{
+		      //	$this->razonvacia=127;
+		      //	return false;
+		      //}
 
+		    /*  if ((count($grid2[0])>0) && ($this->getUser()->getAttribute('presiono','','almsolegr'))!='S')
+		      {
+		      	$this->salvarrecar=138;
+		      	return false;
+		      }*/
+		      if (count($grid[0])!=0 || count($grid2[0])!=0)
+		      {
+		      SolicituddeEgresos::validarAlmsolegr($this->casolart,$grid,$grid2,$this->getRequestParameter('id'),$this->getRequestParameter('tiporecarg'),&$msj1,&$cod1,&$msj2,&$cod2,&$msj3,&$cod3);
+		      $this->coderror1=$msj1;
+		      $this->coderror2=$msj2;
+		      $this->coderror3=$msj3;
+		      $this->codigo1=$cod1;
+		      $this->codigo2=$cod2;
+		      $this->codigo3=$cod3;
+		      if ($this->coderror1<>-1 || $this->coderror2<>-1 || $this->coderror3<>-1)
+		      {
+		       return false;
+		      }
+
+		      SolicituddeEgresos::ultimoChequeo2($this->casolart,$grid,$grid2,$this->getRequestParameter('id'),$this->getRequestParameter('tiporecarg'),&$msj1,&$cod1,&$msj2,&$cod2);
+		      $this->coderror1=$msj1;
+		      $this->coderror2=$msj2;
+		      $this->codigo1=$cod1;
+		      $this->codigo2=$cod2;
+		      if ($this->coderror1<>-1 || $this->coderror2<>-1)
+		      {
+		       return false;
+		      }else return true;
+		      }
     }else return true;
    }
 
@@ -143,42 +152,41 @@ class almsolegrActions extends autoalmsolegrActions
 		$save = $this->saveCasolart($this->casolart);
         if ($save==-1)
         {
+	        $this->casolart->setId(Herramientas::getX_vacio('reqart','casolart','id',$this->casolart->getReqart()));
 
-        $this->casolart->setId(Herramientas::getX_vacio('reqart','casolart','id',$this->casolart->getReqart()));
+	        $this->setFlash('notice', 'Your modifications have been saved');
 
-        $this->setFlash('notice', 'Your modifications have been saved');
+	        $this->Bitacora('Guardo');
 
-        $this->Bitacora('Guardo');
+	         $c= new Criteria();
+		     $resul=CadefartPeer::doSelectOne($c);
+		     if ($resul)
+		     {
+		       if($resul->getPrcasopre()=='S' && $resul->getPrcreqapr()!='S')
+		       {
 
-         $c= new Criteria();
-	     $resul=CadefartPeer::doSelectOne($c);
-	     if ($resul)
-	     {
-	       if($resul->getPrcasopre()=='S' && $resul->getPrcreqapr()!='S')
-	       {
+		        $totaimp=SolicituddeEgresos::totalImputacion($this->casolart->getReqart());
+		        if (H::toFloat($this->casolart->getMonreq())!=$totaimp)
+		        {
+		        	$this->setFlash('notice', 'El Monto de la Imputaciones Generadas no es igual al de la Solicitud, Por favor verificar esta solicitud');
+		        }
+		       }
+		     }
 
-	        $totaimp=SolicituddeEgresos::totalImputacion($this->casolart->getReqart());
-	        if (H::toFloat($this->casolart->getMonreq())!=$totaimp)
+
+	        if ($this->getRequestParameter('save_and_add'))
 	        {
-	        	$this->setFlash('notice', 'El Monto de la Imputaciones Generadas no es igual al de la Solicitud, Por favor verificar esta solicitud');
+	          return $this->redirect('almsolegr/create');
 	        }
-	       }
-	     }
-
-
-        if ($this->getRequestParameter('save_and_add'))
-        {
-          return $this->redirect('almsolegr/create');
-        }
-        else if ($this->getRequestParameter('save_and_list'))
-        {
-          return $this->redirect('almsolegr/list');
-        }
-        else
-        {
-          return $this->redirect('almsolegr/edit?id='.$this->casolart->getId());
-        }
-       }else if ($save==-11){
+	        else if ($this->getRequestParameter('save_and_list'))
+	        {
+	          return $this->redirect('almsolegr/list');
+	        }
+	        else
+	        {
+	          return $this->redirect('almsolegr/edit?id='.$this->casolart->getId());
+	        }
+       } else if ($save==-11){
 
 	        $this->setFlash('notice', 'Se ha guardado solamente la Descripcion ya que la solicitud tiene asociada una Orden de Compra.');
 	        $this->Bitacora('Guardo');
@@ -196,9 +204,7 @@ class almsolegrActions extends autoalmsolegrActions
 	          return $this->redirect('almsolegr/edit?id='.$this->casolart->getId());
 	        }
 
-       }
-       else
-       {
+       }else{
 
           $this->labels = $this->getLabels();
           $err = Herramientas::obtenerMensajeError($this->coderror);
@@ -292,7 +298,7 @@ class almsolegrActions extends autoalmsolegrActions
 
     protected function saveCasolart($casolart)
     {
-      if ($casolart->getId() && $this->getRequestParameter('modifi')=='N')
+      if (($casolart->getId() && $this->getRequestParameter('modifi')=='N'))
       {
         $refsol = Herramientas::getX_vacio('refsol','caordcom','refsol',$casolart->getReqart());
   		if (!empty($refsol))
@@ -309,27 +315,26 @@ class almsolegrActions extends autoalmsolegrActions
          }
 
        	return $this->coderror;
-      }
-      else
-      {
-      $grid=Herramientas::CargarDatosGrid($this,$this->obj);
-      $grid2=Herramientas::CargarDatosGrid($this,$this->obj2);
-      $grid3=Herramientas::CargarDatosGrid($this,$this->obj3);
 
-  	// Si en el parametro reqreqapr  de Cadefart, no requiere que la requisicion esta aprobada para despacharla
-  	// entonces de una vez grabo la requisicion como aprobada
-  	 if ($this->autoriza_solicutud_egreso=="") $casolart->setAprreq('S');
+      }else{
+	      $grid=Herramientas::CargarDatosGrid($this,$this->obj);
+	      $grid2=Herramientas::CargarDatosGrid($this,$this->obj2);
+	      $grid3=Herramientas::CargarDatosGrid($this,$this->obj3);
 
-      if (SolicituddeEgresos::salvarAlmsolegr($casolart,$grid,$grid2,$grid3,$this->getRequestParameter('generapre'),&$error))
-       {
-       	$this->coderror=$error;
-       	return $this->coderror;
-       }
-       else
-       {
-       	$this->coderror=$error;
-       	return $this->coderror;
-       }
+	  	// Si en el parametro reqreqapr  de Cadefart, no requiere que la requisicion esta aprobada para despacharla
+	  	// entonces de una vez grabo la requisicion como aprobada
+	  	 if ($this->autoriza_solicutud_egreso=="") $casolart->setAprreq('S');
+
+	      if (SolicituddeEgresos::salvarAlmsolegr($casolart,$grid,$grid2,$grid3,$this->getRequestParameter('generapre'),&$error))
+	       {
+	       	$this->coderror=$error;
+	       	return $this->coderror;
+	       }
+	       else
+	       {
+	       	$this->coderror=$error;
+	       	return $this->coderror;
+	       }
       }
      //$this->getUser()->getAttributeHolder()->remove('presiono','almsolegr');
 
@@ -487,7 +492,7 @@ class almsolegrActions extends autoalmsolegrActions
      if ($this->getRequestParameter('ajax')=='1')
       {
         $dato=NpcatprePeer::getCategoria($this->getRequestParameter('codigo'));
-          $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
+        $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
       }
       else  if ($this->getRequestParameter('ajax')=='2')
       {
@@ -1237,6 +1242,9 @@ class almsolegrActions extends autoalmsolegrActions
 
     $this->cambiareti="";
     $this->numsoldesh="";
+    $this->mansolocor="";
+    $this->bloqfec="";
+    $this->oculeli="";
     $varemp = $this->getUser()->getAttribute('configemp');
     if ($varemp)
 	if(array_key_exists('aplicacion',$varemp))
@@ -1247,11 +1255,23 @@ class almsolegrActions extends autoalmsolegrActions
 	       {
 	       	$this->cambiareti=$varemp['aplicacion']['compras']['modulos']['almsolegr']['cambiareti'];
 	       }
-               if(array_key_exists('numsoldesh',$varemp['aplicacion']['compras']['modulos']['almsolegr']))
+           if(array_key_exists('numsoldesh',$varemp['aplicacion']['compras']['modulos']['almsolegr']))
 	       {
 	       	$this->numsoldesh=$varemp['aplicacion']['compras']['modulos']['almsolegr']['numsoldesh'];
 	       }
-             }
+	       if(array_key_exists('mansolocor',$varemp['aplicacion']['compras']['modulos']['almsolegr']))
+	       {
+	       	$this->mansolocor=$varemp['aplicacion']['compras']['modulos']['almsolegr']['mansolocor'];
+	       }
+	       if(array_key_exists('bloqfec',$varemp['aplicacion']['compras']['modulos']['almsolegr']))
+	       {
+	       	$this->bloqfec=$varemp['aplicacion']['compras']['modulos']['almsolegr']['bloqfec'];
+	       }
+	       if(array_key_exists('oculeli',$varemp['aplicacion']['compras']['modulos']['almsolegr']))
+	       {
+	       	$this->oculeli=$varemp['aplicacion']['compras']['modulos']['almsolegr']['oculeli'];
+	       }
+         }
   }
 
   public function executeGenerarcompromiso()

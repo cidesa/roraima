@@ -142,7 +142,7 @@ if ($careqart->getId()!="" &&  $autorizareq=='S' && $careqart->getAprreq()!='S')
 </form>
 
 <ul class="sf_admin_actions">
-      <li class="float-left"><?php if ($careqart->getId()): ?>
+      <li class="float-left"><?php if ($careqart->getId() && $oculeli!="S"): ?>
 <?php echo button_to(__('delete'), 'almreq/delete?id='.$careqart->getId(), array (
   'post' => true,
   'confirm' => __('Are you sure?'),
@@ -157,7 +157,22 @@ if ($careqart->getId()!="" &&  $autorizareq=='S' && $careqart->getAprreq()!='S')
     if (id!="")
     {
      $$('.botoncat')[0].disabled=true;
+   }else{
+   	     var manesolcorr='<?php echo $mansolocor; ?>';
+     if (manesolcorr=='S')
+     {
+        $('careqart_reqart').value='########';
+     	$('careqart_reqart').readOnly=true;
+        $('careqart_desreq').focus();
+     }
    }
+
+  var deshab='<?php echo $bloqfec; ?>';
+  if (deshab=='S')
+  {
+  	$('trigger_careqart_fecreq').hide();
+  	$('careqart_fecreq').readOnly=true;
+  }
 
 function enter(valor)
  {

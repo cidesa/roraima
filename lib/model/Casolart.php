@@ -24,6 +24,7 @@ class Casolart extends BaseCasolart
   protected $etiqueta="";
   protected $porcostart='';
   protected $pormoncot='';
+  protected $precom="";
 
   public function getMonreq($val=false)
   {
@@ -59,12 +60,14 @@ class Casolart extends BaseCasolart
   {
   	if (self::getStareq()=='A')
   	{
+      $reqapr=H::getX_vacio('Codemp','Cadefart','Prcreqapr','001');
   	  $d= new Criteria();
   	  $d->add(CpprecomPeer::REFPRC,self::getReqart());
   	  $resul= CpprecomPeer::doSelectOne($d);
   	  if ($resul)
   	  {
-  	  	$eti="SOLICITUD APROBADA";
+        if ($reqapr=='S') $eti="SOLICITUD APROBADA";
+        else $eti="";
   	  	  $z= new Criteria();
 	  	  $z->add(CaordcomPeer::REFSOL,self::getReqart());
 	  	  $resul2= CaordcomPeer::doSelectOne($z);
@@ -74,7 +77,8 @@ class Casolart extends BaseCasolart
 	  	  }
   	  }else
   	  {
-  	  	$eti="SOLICITUD NO APROBADA";
+  	  	if ($reqapr=='S') $eti="SOLICITUD NO APROBADA";
+  	  	else $eti="";
   	  }
   	}
   	else if (self::getStareq()=='N')
@@ -86,6 +90,22 @@ class Casolart extends BaseCasolart
   	 $eti="";
   	}
   	return $eti;
+  }
+
+  public function getPrecom()
+  {
+  	  $d= new Criteria();
+  	  $d->add(CpprecomPeer::REFPRC,self::getReqart());
+  	  $resul= CpprecomPeer::doSelectOne($d);
+  	  if ($resul)
+  	  {
+  	  	return 'S';
+  	  }else return 'N';
+  }
+
+  public function setPrecom()
+  {
+  	return $this->precom;
   }
 
 }

@@ -281,7 +281,7 @@
 
 </form>
 <ul class="sf_admin_actions">
-      <li class="float-left"><?php if ($carcpart->getId()): ?>
+      <li class="float-left"><?php if ($carcpart->getId() && $oculeli!="S"): ?>
 <?php echo button_to(__('delete'), 'almordrec/delete?id='.$carcpart->getId(), array (
   'post' => true,
   'confirm' => __('Are you sure?'),
@@ -289,3 +289,24 @@
 )) ?><?php endif; ?>
 </li>
   </ul>
+
+<script language="JavaScript" type="text/javascript">
+nuevo='<?php echo $carcpart->getId() ?>';
+if (nuevo=="")
+{
+     var manesolcorr='<?php echo $mansolocor; ?>';
+     if (manesolcorr=='S')
+     {
+        $('carcpart_rcpart').value='########';
+     	$('carcpart_rcpart').readOnly=true;
+        $('carcpart_ordcom').focus();
+     }
+}
+
+  var deshab='<?php echo $bloqfec; ?>';
+  if (deshab=='S')
+  {
+  	$('trigger_carcpart_fecrcp').hide();
+  	$('carcpart_fecrcp').readOnly=true;
+  }
+</script>

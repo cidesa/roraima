@@ -18,6 +18,7 @@ class Caprovee extends BaseCaprovee
   private $recargo ='';
   public $codtipesp='';
   public $destipesp='';
+  protected $tiedatrel="";
 
    public function __toString()
   {
@@ -131,6 +132,36 @@ class Caprovee extends BaseCaprovee
   public function getDespro()
   {
   return self::getNompro();
+  }
+
+  public function getTiedatrel()
+  {
+  	$valor="N";
+  	if (self::getId()){
+  	  $d= new Criteria();
+  	  $d->add(CacotizaPeer::CODPRO,self::getCodpro());
+  	  $resul= CacotizaPeer::doSelectOne($d);
+  	  if ($resul)
+  	  {
+  	  	$valor= 'S';
+  	  }else {
+  	  $d= new Criteria();
+  	  $d->add(CaordcomPeer::CODPRO,self::getCodpro());
+  	  $resul= CaordcomPeer::doSelectOne($d);
+  	  if ($resul)
+  	  {
+  	  	$valor= 'S';
+  	  }else $valor= 'N';
+  	  }
+  	}
+
+
+  	return $valor;
+  }
+
+  public function setTiedatrel()
+  {
+  	return $this->tiedatrel;
   }
 
 }

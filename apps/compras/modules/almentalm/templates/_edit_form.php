@@ -155,7 +155,7 @@ echo grid_tag($obj);
 </form>
 
 <ul class="sf_admin_actions">
-      <li class="float-left"><?php if ($caentalm->getId()): ?>
+      <li class="float-left"><?php if ($caentalm->getId() && $oculeli!="S"): ?>
 <?php echo button_to(__('delete'), 'almentalm/delete?id='.$caentalm->getId(), array (
   'post' => true,
   'confirm' => __('Are you sure?'),
@@ -167,4 +167,21 @@ echo grid_tag($obj);
   var id="";
   var id='<?php echo $caentalm->getId()?>';
   actualiza(id);
+  if (id=='')
+  {
+	var manesolcorr='<?php echo $mansolocor; ?>';
+     if (manesolcorr=='S')
+     {
+        $('caentalm_rcpart').value='########';
+     	$('caentalm_rcpart').readOnly=true;
+        $('caentalm_codpro').focus();
+     }
+  }
+
+  var deshab='<?php echo $bloqfec; ?>';
+  if (deshab=='S')
+  {
+  	$('trigger_caentalm_fecrcp').hide();
+  	$('caentalm_fecrcp').readOnly=true;
+  }
 </script>

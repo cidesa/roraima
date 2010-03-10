@@ -35,7 +35,7 @@ generator:
       sort:    refcot
       object_actions:
         _edit:        ~
-        _delete:      ~
+        _delete:      NONE
       fields:
         refcot:      { params : maxlength=8 }
 

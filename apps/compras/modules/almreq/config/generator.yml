@@ -19,7 +19,7 @@ generator:
       sort:           reqart
       object_actions:
         _edit:        ~
-        _delete:        ~
+        _delete:      NONE
     edit:
       title:          Edición de Requisiciones
       display:        [reqart, fecreq, desreq, monreq, codcatreq, desubi]

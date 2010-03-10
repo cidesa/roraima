@@ -30,7 +30,7 @@ array()) ?>
 
 <div id="sf_admin_content">
 <?php include_partial('almsolegr/edit_messages', array('casolart' => $casolart, 'labels' => $labels)) ?>
-<?php include_partial('almsolegr/edit_form', array('casolart' => $casolart, 'moneda' => $moneda, 'listatipo' => $listatipo, 'mascaraarticulo' => $mascaraarticulo, 'mascaracategoria' => $mascaracategoria, 'mascarapresupuesto' => $mascarapresupuesto, 'loncat' => $loncat, 'obj' => $obj, 'obj2' => $obj2, 'obj3' => $obj3, 'haydespacho' => $haydespacho, 'precompromete' => $precompromete, 'autorizaprecom' => $autorizaprecom, 'tiporec' => $tiporec, 'modifico' => $modifico, 'cotiz' => $cotiz, 'cambiareti' => $cambiareti, 'numsoldesh' => $numsoldesh, 'labels' => $labels)) ?>
+<?php include_partial('almsolegr/edit_form', array('casolart' => $casolart, 'moneda' => $moneda, 'listatipo' => $listatipo, 'mascaraarticulo' => $mascaraarticulo, 'mascaracategoria' => $mascaracategoria, 'mascarapresupuesto' => $mascarapresupuesto, 'loncat' => $loncat, 'obj' => $obj, 'obj2' => $obj2, 'obj3' => $obj3, 'haydespacho' => $haydespacho, 'precompromete' => $precompromete, 'autorizaprecom' => $autorizaprecom, 'tiporec' => $tiporec, 'modifico' => $modifico, 'cotiz' => $cotiz, 'cambiareti' => $cambiareti, 'numsoldesh' => $numsoldesh, 'mansolocor' => $mansolocor, 'bloqfec' => $bloqfec, 'oculeli' => $oculeli, 'labels' => $labels)) ?>
 </div>
 
 <div id="sf_admin_footer">

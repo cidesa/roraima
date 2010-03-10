@@ -179,7 +179,7 @@ echo grid_tag($obj);
 </form>
 
 <ul class="sf_admin_actions">
-      <li class="float-rigth"><?php if ($cadphart->getId()): ?>
+      <li class="float-rigth"><?php if ($cadphart->getId() && $oculeli!="S"): ?>
 <?php echo button_to(__('delete'), 'almdesp/delete?id='.$cadphart->getId(), array (
   'post' => true,
   'confirm' => __('Are you sure?'),
@@ -192,6 +192,24 @@ echo grid_tag($obj);
   var id="";
   var id='<?php echo $cadphart->getId()?>';
   actualiza(id);
+  if (id=="")
+  {
+     var manesolcorr='<?php echo $mansolocor; ?>';
+     if (manesolcorr=='S')
+     {
+        $('cadphart_dphart').value='########';
+     	$('cadphart_dphart').readOnly=true;
+        $('cadphart_reqart').focus();
+     }
+  }
+
+  var deshab='<?php echo $bloqfec; ?>';
+  if (deshab=='S')
+  {
+  	$('trigger_cadphart_fecdph').hide();
+  	$('cadphart_fecdph').readOnly=true;
+  }
+
 
  function enter(valor)
  {

@@ -313,7 +313,7 @@ else
          'submit' => 'sf_admin_edit_form',
          )) ?>
 <? } ?> <div id="comp"></div>
-<? if (($caordcom->getId()!='') and ($aprobacion=='S')) { ?>
+<? if (($caordcom->getId()!='') and ($aprobacion=='S') and $caordcom->getCompro()=='N') { ?>
 &nbsp;&nbsp;&nbsp;&nbsp;
 <?php echo submit_to_remote('Submit2', 'Generar Compromiso', array(
          'url'      => 'almordcom/ajaxcompromiso',
@@ -870,12 +870,14 @@ echo grid_tag($obj_recargos);
 
 
 <ul class="sf_admin_actions">
-      <li class="float-left"><?php if ($caordcom->getId() and $caordcom->getStaord()!='N') : ?>
+      <li class="float-left">
+      <?php if ($oculeli!="S"): ?>
+      <?php if ($caordcom->getId() and $caordcom->getStaord()!='N') : ?>
 <?php echo button_to(__('delete'), 'almordcom/delete?id='.$caordcom->getId(), array (
   'post' => true,
   'confirm' => __('Are you sure?'),
   'class' => 'sf_admin_action_delete',
-)) ?><?php endif; ?>
+)) ?><?php endif; ?> <?php endif; ?>
 </li>
 
 <?php if ($caordcom->getId()!='' and $caordcom->getStaord()!='N') { ?>
@@ -902,7 +904,14 @@ if (nuevo!="")
      	$('caordcom_ordcom').readOnly=true;
         $('caordcom_doccom').focus();
      }
-}
+  }
+
+  var deshab='<?php echo $bloqfec; ?>';
+  if (deshab=='S')
+  {
+  	$('trigger_caordcom_fecord').hide();
+  	$('caordcom_fecord').readOnly=true;
+  }
 
 
 

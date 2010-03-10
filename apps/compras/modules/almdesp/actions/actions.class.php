@@ -927,17 +927,33 @@ class almdespActions extends autoalmdespActions
     $this->mascaraubicacionalm = Herramientas::ObtenerFormato('Cadefart','Forubi');
     $this->lonubialm=strlen($this->mascaraubicacionalm);
     $this->dphdesh="";
+    $this->mansolocor="";
+    $this->bloqfec="";
+    $this->oculeli="";
     $varemp = $this->getUser()->getAttribute('configemp');
     if ($varemp)
 	if(array_key_exists('aplicacion',$varemp))
 	 if(array_key_exists('compras',$varemp['aplicacion']))
 	   if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
-	     if(array_key_exists('almdesp',$varemp['aplicacion']['compras']['modulos']))
+	     if(array_key_exists('almdesp',$varemp['aplicacion']['compras']['modulos'])){
                if(array_key_exists('dphdesh',$varemp['aplicacion']['compras']['modulos']['almdesp']))
 	       {
 	       	$this->dphdesh=$varemp['aplicacion']['compras']['modulos']['almdesp']['dphdesh'];
 	       }
-             
+	       if(array_key_exists('mansolocor',$varemp['aplicacion']['compras']['modulos']['almdesp']))
+	       {
+	       	$this->mansolocor=$varemp['aplicacion']['compras']['modulos']['almdesp']['mansolocor'];
+	       }
+	       if(array_key_exists('bloqfec',$varemp['aplicacion']['compras']['modulos']['almdesp']))
+	       {
+	       	$this->bloqfec=$varemp['aplicacion']['compras']['modulos']['almdesp']['bloqfec'];
+	       }
+	       if(array_key_exists('oculeli',$varemp['aplicacion']['compras']['modulos']['almdesp']))
+	       {
+	       	$this->oculeli=$varemp['aplicacion']['compras']['modulos']['almdesp']['oculeli'];
+	       }
+	     }
+
   }
 
 

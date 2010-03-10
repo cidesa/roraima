@@ -14,7 +14,26 @@ class SolicituddeEgresos
 {
   public static function salvarAlmsolegr($solegreso,$grid,$grid2,$grid3,$generar,&$msj)
   {
-    self::grabarSolicitudEgreso($solegreso,$grid,$grid2,$grid3,$generar,&$msj);
+  	if ($solegreso->getId()) //Validacion que permite guardar solamente la descripcion
+  	{
+  		$refsol = Herramientas::getX_vacio('refsol','caordcom','refsol',$solegreso->getReqart());
+  		if (!empty($refsol))
+  		{
+	  		$reg = CasolartPeer::retrieveByPKs($solegreso->getId());
+	  		$reg1 = array();
+	  		$reg1 = $reg[0];
+	  		$reg1->setDesreq($solegreso->getDesreq());
+			$reg1->save();
+			//$msj=-1;
+			$msj=-11;
+			//return -1;
+
+  		}else{
+	  		self::grabarSolicitudEgreso($solegreso,$grid,$grid2,$grid3,$generar,&$msj);
+  		}
+  	}else{
+	  		self::grabarSolicitudEgreso($solegreso,$grid,$grid2,$grid3,$generar,&$msj);
+  		}
   }
 
   public static function grabarSolicitudEgreso($solegreso,$grid,$grid2,$grid3,$generar,&$msj)

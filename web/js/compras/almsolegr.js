@@ -576,19 +576,22 @@ function Totalrecargo(e,id)
 
     var coldes=col+1;
     var coluni=col+2;
+   var colunres=col+3;
     var colcos=col+7;
     var colpar=col+11;
     var descripcion=name+"_"+fil+"_"+coldes;
     var unidad=name+"_"+fil+"_"+coluni;
     var costo=name+"_"+fil+"_"+colcos;
     var partida=name+"_"+fil+"_"+colpar;
+    var unires=name+"_"+fil+"_"+colunres;
+    var unidadres=$('casolart_unires').value;
     var cod=$(id).value;
 
     if (e.keyCode==13 || e.keyCode==9)
     {
       if ($(id).value!="")
       {
-    new Ajax.Request(getUrlModulo()+'ajax', {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=3&cajtexmos='+descripcion+'&cajtexcom='+id+'&unidad='+unidad+'&costo='+costo+'&partida='+partida+'&codigo='+cod})
+    new Ajax.Request(getUrlModulo()+'ajax', {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=3&cajtexmos='+descripcion+'&cajtexcom='+id+'&unidad='+unidad+'&costo='+costo+'&unires='+unires+'&valuni='+unidadres+'&partida='+partida+'&codigo='+cod})
     }
     }
  }
