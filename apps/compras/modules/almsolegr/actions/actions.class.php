@@ -483,6 +483,7 @@ class almsolegrActions extends autoalmsolegrActions
      $cajtexmos=$this->getRequestParameter('cajtexmos');
      $cajtexcom=$this->getRequestParameter('cajtexcom');
      $output=array();
+     $javascript="";
      if ($this->getRequestParameter('ajax')=='1')
       {
         $dato=NpcatprePeer::getCategoria($this->getRequestParameter('codigo'));
@@ -504,7 +505,10 @@ class almsolegrActions extends autoalmsolegrActions
 	        $dato1=$reg->getUnimed();
 	        $dato2=number_format($reg->getCosult(),2,',','.');
 	        $dato3=$reg->getCodpar();
-	        $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$this->getRequestParameter('unidad').'","'.$dato1.'",""],["'.$this->getRequestParameter('costo').'","'.$dato2.'",""],["'.$this->getRequestParameter('partida').'","'.$dato3.'",""]]';
+	        $unires=$this->getRequestParameter('unires');
+	        $costo=$this->getRequestParameter('costo');
+	        $javascript="$('$unires').focus(); $('$costo').focus();";
+	        $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$this->getRequestParameter('unidad').'","'.$dato1.'",""],["'.$this->getRequestParameter('costo').'","'.$dato2.'",""],["'.$this->getRequestParameter('partida').'","'.$dato3.'",""],["'.$this->getRequestParameter('unires').'","'.$this->getRequestParameter('valuni').'",""],["javascript","'.$javascript.'",""]]';
   		}
   		else
   		{
