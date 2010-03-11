@@ -20,6 +20,7 @@ generator:
       refpag: { name: Referencia del Pagado}
 
 
+
     list:
       title:          Movimientos Segun Libros
       filters:        [numcue, reflib, feclib, tipmov, deslib]

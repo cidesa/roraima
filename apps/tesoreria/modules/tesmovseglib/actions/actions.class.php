@@ -1134,7 +1134,11 @@ $this->Bitacora('Guardo');
     $this->id=$idmovseglib;
     $this->msg='';
 
-   if (Tesoreria::validaPeriodoCerrado($this->getRequestParameter('tsmovlib[feclib]'))==true)
+    $anoactual=date('Y');
+    $anofeclib=substr($feclib_m,0,4);
+  if ($anofeclib==$anoactual)
+  {
+   if (Tesoreria::validaPeriodoCerrado($feclib)==true)
    {
      $coderror=529;
      $this->msgpercer = Herramientas::obtenerMensajeError($coderror);
@@ -1224,6 +1228,152 @@ $this->Bitacora('Guardo');
         }//if (!$tsmovlib[0]["stacon"]!='C')
       }//  if (Herramientas::BuscarDatos($sql,&$tsmovlib))
      }//else if (Tesoreria::validaPeriodoCerrado($this->getRequestParameter('tsmovlib[feclib]'))==true)
+  }
+  else{
+  	$form="sf_admin/tesmovseglib/confincomgen";
+    $grabo=$this->getUser()->getAttribute('grabo',null,$form.'0');
+    if ($grabo=='') {
+    $this->msg=1; ///Generar el Comprobante
+    Tesoreria::grabarCompAnulacionMovLibAnoANt($numcue,$reflib,$tipmov,$fecanu,&$msjuno,&$comprobante);
+    $concom=1;
+    $this->msjuno="";
+    if ($msjuno=="")
+    {
+      $i=0;
+      while ($i<$concom)
+      {
+       $f[$i]=$form.$i;
+       $this->getUser()->setAttribute('grabar',$comprobante[$i]->getGrabar(),$f[$i]);
+       $this->getUser()->setAttribute('reftra',$comprobante[$i]->getReftra(),$f[$i]);
+       $this->getUser()->setAttribute('numcomp',$comprobante[$i]->getNumcom(),$f[$i]);
+       $this->getUser()->setAttribute('fectra',$comprobante[$i]->getFectra(),$f[$i]);
+       $this->getUser()->setAttribute('destra',$comprobante[$i]->getDestra(),$f[$i]);
+       $this->getUser()->setAttribute('ctas', $comprobante[$i]->getCtas(),$f[$i]);
+       $this->getUser()->setAttribute('desctas', $comprobante[$i]->getDesc(),$f[$i]);
+       $this->getUser()->setAttribute('tipmov', '');
+       $this->getUser()->setAttribute('mov', $comprobante[$i]->getMov(),$f[$i]);
+       $this->getUser()->setAttribute('montos', $comprobante[$i]->getMontos(),$f[$i]);
+       $i++;
+      }
+      $this->i=$concom-1;
+      $this->formulario=$f;
+      }else
+      {
+        $this->msjuno=$msjuno;
+      }
+    }else{ ///Grabar el comprobante y generar la anulacion
+
+    $sql="Select stacon,tipmov,monmov,codcta,numcue From TsMovLib Where NumCue = '".$numcue."' And RefLib = '".$reflib."' and TipMov = '".$tipmov."' ";
+    if (Herramientas::BuscarDatos($sql,&$tsmovlib))
+      {
+        if (!$tsmovlib[0]["stacon"]!='C')
+        {
+          $escheque=H::getX('CODTIP','Tstipmov','Escheque',$tsmovlib[0]["tipmov"]);
+          if ($escheque==1)
+          {
+            $this->msg=$this->msg.Tesoreria::anular_Eliminar_Cheque('A',$numcue,$reflib);
+            $this->msg=$this->msg.Tesoreria::actualiza_Orden_De_Pago($reflib,$numcue,$tipmov);
+            $this->msg=$this->msg.Tesoreria::anular_Eliminar_Imppag('A',$reflib,$numcue,$fecanu, $refpag);
+          }
+          else
+          {
+            $sql2="select refier from cpdocpag where tippag='".$tsmovlib[0]["tipmov"]."' ";
+            if (Herramientas::BuscarDatos($sql2,&$tabla))
+            {
+              if ($tabla[0]["refier"]=='A')
+              {
+                $this->msg=$this->msg.Tesoreria::actualiza_Orden_De_Pago($reflib,$numcue,$tipmov);
+                $this->msg=$this->msg.Tesoreria::anular_Eliminar_Imppag('A',$reflib,$numcue,$fecanu,$refpag);
+              }
+              else
+              {
+                $this->msg=$this->msg.Tesoreria::anular_Eliminar_Imppag('A',$reflib,$numcue,$fecanu,$refpag);
+
+              $c = new Criteria();
+              $c->add(OpdetperPeer::NUMCHE,$reflib);
+              $c->add(OpdetperPeer::CTABAN,$numcue);
+              $c->add(OpdetperPeer::TIPMOV,$tipmov);
+              $opdetper = OpdetperPeer::doSelectOne($c);
+              if ($opdetper)
+              {
+                $opdetper->setFecpag(null);
+                $opdetper->setNumche(null);
+                $opdetper->save();
+              }
+              }
+            }
+          }
+          $sql3="select debcre from tstipmov where codtip='".$tipmov."'";
+          if (Herramientas::BuscarDatos($sql3,&$tstipmov))
+          {
+            $afecta=$tstipmov[0]["debcre"];
+          }
+
+          // Grabar Nuevo comprobante contable
+          if ($this->getUser()->getAttribute('grabo',null,$this->getUser()->getAttribute('formulario'))=='S')
+	      {
+	        $numcomq='';
+	        $concom=1;
+	        $i=0;
+	        while ($i<$concom)
+	        {
+	          $formcont="sf_admin/tesmovseglib/confincomgen".$i;
+	          $numcom=$this->getUser()->getAttribute('contabc[numcom]',null,$formcont);
+	          $reftra=$this->getUser()->getAttribute('contabc[reftra]',null,$formcont);
+	          $feccom=$this->getUser()->getAttribute('contabc[feccom]',null,$formcont);
+	          $descom=$this->getUser()->getAttribute('contabc[descom]',null,$formcont);
+	          $debito=$this->getUser()->getAttribute('debito',null,$formcont);
+	          $credito=$this->getUser()->getAttribute('credito',null,$formcont);
+	          $grid=$this->getUser()->getAttribute('grid',null,$formcont);
+
+	          $this->getUser()->getAttributeHolder()->remove('contabc[numcom]',$formcont);
+	          $this->getUser()->getAttributeHolder()->remove('contabc[reftra]',$formcont);
+	          $this->getUser()->getAttributeHolder()->remove('contabc[feccom]',$formcont);
+	          $this->getUser()->getAttributeHolder()->remove('contabc[descom]',$formcont);
+	          $this->getUser()->getAttributeHolder()->remove('debito',$formcont);
+	          $this->getUser()->getAttributeHolder()->remove('credito',$formcont);
+	          $this->getUser()->getAttributeHolder()->remove('grid',$formcont);
+
+	          $numcomq = Comprobante::SalvarComprobante($numcom,$reftra,$feccom,$descom,$debito,$credito,$grid,$this->getUser()->getAttribute('grabar',null,$formcont));
+	          $i++;
+	        }
+	        $this->getUser()->getAttributeHolder()->remove('grabo',$this->getUser()->getAttribute('formulario'));
+
+          // GENERAR NUEVO MOVIMIENTO SEGUN LIBRO
+          $tsmovlibA= new Tsmovlib();
+          $dateFormat = new sfDateFormat($this->getUser()->getCulture());
+          $fec = $dateFormat->format($fecanu, 'i', $dateFormat->getInputPattern('d'));
+
+          $tsmovlibA->setNumcue($tsmovlib[0]["numcue"]);
+          $tsmovlibA->setReflib($reflib2);
+          $tsmovlibA->setRefpag($refpag);
+          $tsmovlibA->setFeclib($fec);
+          if ($afecta=='C')
+          {
+            $tsmovlibA->setTipmov('ANUC');
+          }
+          else if ($afecta=='D')
+          {
+            $tsmovlibA->setTipmov('ANUD');
+          }
+          $tsmovlibA->setMonmov($tsmovlib[0]["monmov"]);
+          $tsmovlibA->setNumcom($numcomq);
+          $tsmovlibA->setMotanu($desanu);
+          $tsmovlibA->setCodcta($tsmovlib[0]["codcta"]);
+          $tsmovlibA->setFeccom($fec);
+          $tsmovlibA->setStatus('C');
+          $tsmovlibA->setStacon('C');
+          $tsmovlibA->setDeslib('Cheque Anulado');
+          $tsmovlibA->setReflibpad($reflib);
+          $tsmovlibA->setTipmovpad($tipmov);
+          $tsmovlibA->save();
+
+          Tesoreria::actualiza_Bancos('A','D',$numcue,$monmov);
+        }//if (!$tsmovlib[0]["stacon"]!='C')
+      }//  if (Herramientas::BuscarDatos($sql,&$tsmovlib))
+    }
+    }
+  }
     return sfView::SUCCESS;
   }
 
