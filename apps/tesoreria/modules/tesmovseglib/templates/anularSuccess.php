@@ -87,7 +87,7 @@
 <div class="form-row" align="center">
    <input type="button" value="Salvar" onClick="salvar();">
 </div>
-
+<div id="divAnul"></div>
 </div>
 </form>
 </fieldset>
@@ -117,9 +117,11 @@ function salvar()
 	var tipmov='<? print $tsmovlib->getTipmov(); ?>';
 	var monmov='<? print $tsmovlib->getMonmov(); ?>';
 
-	f=document.sf_admin_edit_form;
-	f.action='salvaranu?reflib='+reflib+'&reflib2='+reflib2+'&refpag='+refpag+'&feclib='+feclib+'&tipmov='+tipmov+'&id='+id+'&numcue='+numcue+'&numcom='+numcom+'&desanu='+desanu+'&monmov='+monmov+'&numcomadi='+numcomadi+'&feccomadi='+feccomadi+'&compadic='+compadic+'&fechacom='+fechacom+'&numcom='+numcom+'&numcom2='+numcom2+'&fecanu='+fecanu;
-	f.submit();
+	//f=document.sf_admin_edit_form;
+//	f.action='salvaranu?reflib='+reflib+'&reflib2='+reflib2+'&refpag='+refpag+'&feclib='+feclib+'&tipmov='+tipmov+'&id='+id+'&numcue='+numcue+'&numcom='+numcom+'&desanu='+desanu+'&monmov='+monmov+'&numcomadi='+numcomadi+'&feccomadi='+feccomadi+'&compadic='+compadic+'&fechacom='+fechacom+'&numcom='+numcom+'&numcom2='+numcom2+'&fecanu='+fecanu;
+//	f.submit();
+
+	new Ajax.Updater('divAnul','/tesoreria_dev.php/tesmovseglib/salvaranu', {asynchronous:true, evalScripts:true, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'reflib='+reflib+'&reflib2='+reflib2+'&refpag='+refpag+'&feclib='+feclib+'&tipmov='+tipmov+'&id='+id+'&numcue='+numcue+'&numcom='+numcom+'&desanu='+desanu+'&monmov='+monmov+'&numcomadi='+numcomadi+'&feccomadi='+feccomadi+'&compadic='+compadic+'&fechacom='+fechacom+'&numcom='+numcom+'&numcom2='+numcom2+'&fecanu='+fecanu})
 }
 
 valor2=document.getElementById('tsmovlib_reflib').value;
@@ -127,6 +129,10 @@ mas2=valor2.substr(1,7);
 document.getElementById('tsmovlib_reflib').value="A"+mas2;
 document.getElementById('tsmovlib_numcom').value="########";
 
+  function comprobante(formulario)
+  {
+      window.open('/tesoreria_dev.php/confincomgen/edit/?formulario='+formulario,formulario,'menubar=no,toolbar=no,scrollbars=yes,width=1200,height=800,resizable=yes,left=1000,top=80');
+  }
 
 </script>
 

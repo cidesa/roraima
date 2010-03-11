@@ -2425,4 +2425,67 @@ public static function validarCuentasGrid($grid)
     return $arregloimp;
   }
 
+  public static function grabarCompAnulacionMovLibAnoANt($numcue,$reflib,$tipmov,$fecanu,&$msjuno,&$arrcompro)
+  {
+    $msjuno="";
+    $c= new Criteria();
+    $c->add(TsmovlibPeer::NUMCUE,$numcue);
+    $c->add(TsmovlibPeer::REFLIB,$reflib);
+    $c->add(TsmovlibPeer::TIPMOV,$tipmov);
+    $resul= TsmovlibPeer::doSelectOne($c);
+    if ($resul){
+
+    $reftra=$reflib;
+    $confcorcom=sfContext::getInstance()->getUser()->getAttribute('confcorcom');
+    if ($confcorcom=='N')
+    {
+      $numerocomprob= $reftra;
+    }else $numerocomprob= '########';
+
+
+    $codigocuenta=""; $tipo=""; $des=""; $monto=""; $codigocuentas=""; $tipo1=""; $desc=""; $monto1=""; $codigocuenta2=""; $tipo2=""; $des2=""; $monto2="";
+    $cuentas=""; $tipos=""; $montos=""; $descr=""; $msjuno="";
+
+    $d= new Criteria();
+    $d->add(TstipmovPeer::CODTIP,$tipmov);
+    $dato= TstipmovPeer::doSelectOne($d);
+    if ($dato)
+    {
+    $afecta=$dato->getDebcre();
+    }
+
+    if ($afecta=='D')
+    {
+		$codigocuenta2=H::getX('NUMCUE','Tsdefban','Codcta',$numcue);
+	    $tipo2='C';
+	    $des2="";
+	    $monto2=$resul->getMonmov();
+    }else{
+	      $codigocuenta=H::getX('NUMCUE','Tsdefban','Codcta',$numcue);
+	      $tipo='D';
+	      $des="";
+	      $monto=$resul->getMonmov();
+    }
+
+    $cuentas=$codigocuenta2.'_'.$codigocuenta;
+    $tipos=$tipo2.'_'.$tipo;
+    $descr=$des2.'_'.$des;
+    $montos=$monto2.'_'.$monto;
+
+    $clscommpro=new Comprobante();
+    $clscommpro->setGrabar("N");
+    $clscommpro->setNumcom($numerocomprob);
+    $clscommpro->setReftra($reftra);
+    $clscommpro->setFectra($fecanu);
+    $clscommpro->setDestra($resul->getDeslib());
+    $clscommpro->setCtas($cuentas);
+    $clscommpro->setDesc($descr);
+    $clscommpro->setMov($tipos);
+    $clscommpro->setMontos($montos);
+    $arrcompro[]=$clscommpro;
+    }
+
+    return true;
+  }
+
 }
