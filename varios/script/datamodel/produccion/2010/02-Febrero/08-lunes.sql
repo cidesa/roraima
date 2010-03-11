@@ -39,8 +39,7 @@ BEGIN
    RETURN DIAS;
 END;
 $BODY$
-  LANGUAGE 'plpgsql' VOLATILE
-  COST 100;
+  LANGUAGE 'plpgsql' VOLATILE;
 ALTER FUNCTION diaslaborados(character varying,character varying , date, date, character varying) OWNER TO postgres;
 
 
