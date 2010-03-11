@@ -982,7 +982,7 @@ class Tesoreria {
 
   public static function actualiza_Orden_De_Pago($reflib, $numcue, $tipmov) {
     $result=array();
-    $sql = "Select numord,monpag from opordche where numche='" . $reflib . "' and codcta='".$numcue."' order by numche";
+    $sql = "Select numord,monpag from opordche where numche='" . $reflib . "' and codcta='".$numcue."' and tipmov='".$tipmov."' order by numche";
     if (Herramientas :: BuscarDatos($sql,&$result))
     {
       $j=0;
@@ -1020,14 +1020,17 @@ class Tesoreria {
         }
         $j++;
       }
-      $c2 = new Criteria();
+      /*$c2 = new Criteria();
       $c2->add(OpordchePeer :: NUMCHE, $reflib);
-      OpordchePeer :: doDelete($c2);
+      OpordchePeer :: doDelete($c2);*/
+
+      $sql4="delete from opordche where numche='" . $reflib . "' and codcta='".$numcue."' and tipmov='".$tipmov."'";
+         Herramientas::insertarRegistros($sql4);
 
       return '';
     } else {
 
-    	$sql4="update opordpag set status='N', numche=null, ctaban=null where numche='".$reflib."'";
+    	$sql4="update opordpag set status='N', numche=null, ctaban=null, monpag=0 where numche='".$reflib."' and ctaban='".$numcue."'";
          Herramientas::insertarRegistros($sql4);
 
       /*$c = new Criteria();
