@@ -255,11 +255,15 @@ class Cheques
       {
         if ($grid[$j]->getCheck()=="1")
         {
+          $monpagado=H::getX('Numord','Opordpag','Monpag',$grid[$j]->getNumord());
           $criterio = "Select A.afeprc,A.afecom,A.afecau,A.afedis From CPDOCCAU A,OPORDPAG B Where B.NumOrd = '".$grid[$j]->getNumord()."' AND B.TIPCAU=A.TIPCAU";
           if (!Herramientas::BuscarDatos($criterio,&$result))
           {
-            if (!($result[0]['afeprc']== "N" and $result[0]['afecom']== "N" and $result[0]['afecau']== "N" and $result[0]['afedis']=="N"))
-            $MontoDelCompuesto = $MontoDelCompuesto + $grid[$j]->getMontotalGrid();
+            if (!($result[0]['afeprc']== "N" and $result[0]['afecom']== "N" and $result[0]['afecau']== "N" and $result[0]['afedis']=="N")){
+             if ($monpagado==0 || is_null($monpagado))
+            $MontoDelCompuesto = $MontoDelCompuesto + $grid[$j]->getMontotalGrid()+ $grid[$j]->getMondes();
+            else $MontoDelCompuesto = $MontoDelCompuesto + $grid[$j]->getMontotalGrid();
+            }
           }//if (!Herramientas::BuscarDatos($criterio,&$result))
         }//if ($grid[$j]->getCheck()=="1")
         $j++;
@@ -756,9 +760,13 @@ class Cheques
 			   }
               }
               //print "Comprobante Nro. ". $numcom . " para el cheque ". $numche . " con la orden de pago ".$x[$j]->getNumord() ;
+		         if ($monpagado==0 || is_null($monpagado))
+		          $montoreal =  $Monto + $MontDcto;
+		          else
+		          $montoreal =  $Monto;
 
               self::Actualiza_Bancos($tscheemi,"A","C",$Monto,$numche);
-              $refpago = self::Genera_Pagos($tscheemi,$x[$j]->getNumord(),$x[$j]->getCedrif(),$TipCausad,$DescOp,$Monto+$MontDcto,"O",$Porcentaje,$numche,$x);
+              $refpago = self::Genera_Pagos($tscheemi,$x[$j]->getNumord(),$x[$j]->getCedrif(),$TipCausad,$DescOp,$montoreal,"O",$Porcentaje,$numche,$x);
               self::Genera_MovLib($tscheemi,$DescOp,$Monto,$numcom,$numche,$refpago);
               self::Grabar_Datos($tscheemi,$Monto,$x[$j]->getCedrif(),$numche,$reqfirma,$mancomegr);
               //Actualizar arreglos de Cheques, necesario para imprimir luego los cheques emitidos;
