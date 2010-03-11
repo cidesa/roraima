@@ -676,8 +676,8 @@ class Cheques
             $sql = "Select * from OPOrdChe where NumOrd='". $x[$j]->getNumord()."' and NumChe='". $numche ."' and CodCta='". $tscheemi->getNumcue() ."'";
             if (Herramientas::BuscarDatos($sql,&$result))
             {
-              $mensaje="Esta Orden de Pago ya fue pagada con un cheque de igual número y la misma cuenta";
-              //    exit();
+              $arraynumcue="Esta Orden de Pago ya fue pagada con un cheque de igual número y la misma cuenta";
+              return true;
             }
             else
             {
@@ -866,7 +866,8 @@ class Cheques
             $sql = "Select * from OPOrdChe where NumOrd='". $x[$j]->getNumord()."' and NumChe='". $numche ."' and CodCta='". $tscheemi->getNumcue() ."'";
             if (Herramientas::BuscarDatos($sql,&$result))
             {
-              $mensaje="Esta Orden de Pago ya fue pagada con un cheque de igual número y la misma cuenta";
+              $arraynumcue="Esta Orden de Pago ya fue pagada con un cheque de igual número y la misma cuenta";
+              return true;
             }
             else
             {
@@ -957,6 +958,7 @@ class Cheques
 
     }//if ($tippag=='C') Then //Pago Simple
 
+     return true;
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
   }//end function ActualizaOrdpag
 

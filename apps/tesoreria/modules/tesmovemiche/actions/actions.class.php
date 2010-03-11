@@ -88,8 +88,13 @@ class tesmovemicheActions extends autotesmovemicheActions
           $r = TscheemiPeer::doSelectOne($c);
           if ($r) {$this->tscheemi->setId($r->getId()); $this->tscheemi->setNumcomegr($r->getNumcomegr());}
 
-          $this->setFlash('notice', 'Your modifications have been saved');
-$this->Bitacora('Guardo');
+          if ($this->arraynumche!=""){
+              $this->setFlash('notice', 'Your modifications have been saved');
+              $this->Bitacora('Guardo');
+          }else {
+          	  $this->setFlash('notice', $this->arraynumcue);
+              $this->Bitacora('Guardo');
+          }
 
           if ($this->getRequestParameter('save_and_list'))
           {

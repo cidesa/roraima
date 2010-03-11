@@ -434,6 +434,15 @@ class tesrencajchiActions extends autotesrencajchiActions
      $this->setVars();
      $this->configGrid();
      $detalle=Herramientas::CargarDatosGridv2($this,$this->objeto,true);
+     $c = new Criteria();
+     $c->add(TsdefcajchiPeer::CODCAJ,$this->opordpag->getCodcajchi());
+     $reg= TsdefcajchiPeer::doSelectOne($c);
+     if ($reg)
+     {
+     	$this->opordpag->setCedrif($reg->getCedrif());
+     	$this->opordpag->setCodcat($reg->getCodcat());
+     }
+
      if ($this->opordpag->getCedrif()=="" || $this->opordpag->getCodcat()=="" || count($detalle[0])==0)
      {
        $msjtres="No se puede Generar el Comprobante, Verique si introdujo los Datos del Beneficiario y el Código Categoria de Caja Chica en la definicion de Empresa ó las Imputaciones Presupuestarias, para luego generar el comprobante";
