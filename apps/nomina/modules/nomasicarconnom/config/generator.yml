@@ -19,6 +19,7 @@ generator:
       codtipded:{ name: Dedicacion }
       codtipcat:{ name: Categoria del Profesor }
       destipgas:{ name: Tipo de Gasto }
+      codtie:   { name: Tiempo }
 
     list:
       title:          Asignación de Cargos y Conceptos a Empleados
@@ -29,7 +30,7 @@ generator:
       max_per_page:  8
     edit:
       title:          Asignación de Cargos y Conceptos a Empleados
-      display:        [codemp, nomemp, codnom, nomnom, codcar, nomcar, paso, despaso, fecasi, codtipgas, destipgas, codcat, nomcat, codtipded, codtipcat]
+      display:        [codemp, nomemp, codnom, nomnom, codcar, nomcar, paso, despaso, fecasi, codtipgas, destipgas, codcat, nomcat, codtipded, codtipcat, codtie]
       actions:
         _list:          ~
         _save:          ~

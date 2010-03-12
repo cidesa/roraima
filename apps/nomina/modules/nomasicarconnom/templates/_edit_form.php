@@ -214,8 +214,23 @@
 
  <?php //echo select_tag('npasicaremp[tipgas]', options_for_select($tipos,$npasicaremp->getCodtipgas(),'include_custom=Seleccione Uno')); ?>
  <?php if ($npasicaremp->getCodtipgas()!='') $tipos=$npasicaremp->getCodtipgas(); ?>
- <?php echo select_tag('npasicaremp[codtipgas]', objects_for_select(NptipgasPeer::doSelect(new Criteria()),'getCodtipgas','getDestipgas',$tipos,'include_custom=Seleccione')) ?>
+ <?php echo select_tag('npasicaremp[codtipgas]', objects_for_select(NptipgasPeer::doSelect(new Criteria()),'getCodtipgas','getDestipgas',$tipos,'include_custom=Seleccione Uno')) ?>
+<br>
+<br>
+</th>
+</tr>
+<tr>
+<th>
+<?php if($sf_user->getAttribute('varforma','','nomasicarconnom') == 'S') {?>
+<?php echo label_for('npasicaremp[codtie]', __($labels['npasicaremp{codtie}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('npasicaremp{codtie}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npasicaremp{codtie}')): ?>
+    <?php echo form_error('npasicaremp{codtie}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
 
+  <?php echo select_tag('npasicaremp[codtie]', options_for_select($listatiempo,$npasicaremp->getCodtie(),'include_custom=Seleccione Uno')) ?>
+    </div>
+<?php }?>    
 </th>
 </tr>
 </table>

@@ -1914,10 +1914,10 @@ class Nomina {
 	          }
 		  }else
 		  {
-	  		if ($token = "STAB") {
-	            $sql = "Select A.* from NPCOMOCP A,NPCARGOS B WHERE B.CODCAR='" . $tabla[0]["codcar"] . "' AND A.CODTIPCAR=B.CODTIP AND A.GRACAR=B.GRAOCP AND A.PASCAR=lpad(coalesce('".$tabla[0]["paso"]."','001'),3,'0') AND FECDES<=TO_DATE('" . $movconvar . "','DD/MM/YYYY') ORDER BY FECDES DESC";
+	  		if ($token == "STAB") {
+	            $sql = "Select A.* from NPCOMOCP A,NPCARGOS B WHERE B.CODCAR='" . $tabla[0]["codcar"] . "' AND A.CODTIPCAR=B.CODTIP AND A.GRACAR=B.GRAOCP AND A.PASCAR='001' AND FECDES<=TO_DATE('" . $movconvar . "','DD/MM/YYYY') ORDER BY FECDES DESC";
 	          } else {
-	            $sql = "Select ABS(SUM(case when a.pascar=lpad(coalesce('".$tabla[0]["paso"]."','001'),3,'0') then a.suecar else a.suecar*-1)) as suecar from NPCOMOCP A,NPCARGOS B WHERE B.CODCAR='" . $tabla[0]["codcar"] . "' AND A.CODTIPCAR=B.CODTIP AND A.GRACAR=B.GRAOCP AND (A.PASCAR='001' OR A.PASCAR='" . $tabla[0]["paso"] . "') AND FECDES<=TO_DATE('" . $movconvar . "','DD/MM/YYYY') ORDER BY FECDES DESC";
+	            $sql = "Select ABS(SUM(case when a.pascar='001' then a.suecar else a.suecar*-1)) as suecar from NPCOMOCP A,NPCARGOS B WHERE B.CODCAR='" . $tabla[0]["codcar"] . "' AND A.CODTIPCAR=B.CODTIP AND A.GRACAR=B.GRAOCP AND (A.PASCAR='001' ) AND FECDES<=TO_DATE('" . $movconvar . "','DD/MM/YYYY') ORDER BY FECDES DESC";
 	          }
 
 	          if (Herramientas :: BuscarDatos($sql, & $tablaescala)) {
@@ -1928,6 +1928,15 @@ class Nomina {
 		  }
         } else
           $valor = 0;
+        #CODIGO QUE REALIZA OPERACIONES SOBRE EL SUELDO SEGUN SU TIEMPO   
+        if($tabla[0]['codtie']!='' && $valor!=0)
+        {
+        	$sqlf="select factor from nptiempo where codtie='".$tabla[0]['codtie']."'";
+	       	if (Herramientas :: BuscarDatos($sqlf, & $rsf))
+	       		if($rsf[0]["factor"]!='') 
+		            eval('$valor = $valor'.$rsf[0]["factor"].';');
+		          
+        }            
         break;
 
       case "CTAF" :
@@ -4021,9 +4030,9 @@ class Nomina {
 		  }else
 		  {
 		  	if ($campo = "STAB") {
-	            $sql = "Select A.* from NPCOMOCP A,NPCARGOS B WHERE B.CODCAR='" . $tabla[0]["codcar"] . "' AND A.CODTIPCAR=B.CODTIP AND A.GRACAR=B.GRAOCP AND A.PASCAR=lpad(coalesce('".$tabla[0]["paso"]."','001'),3,'0') AND FECDES<=TO_DATE('" . $movconvar . "','DD/MM/YYYY') ORDER BY FECDES DESC";
+	            $sql = "Select A.* from NPCOMOCP A,NPCARGOS B WHERE B.CODCAR='" . $tabla[0]["codcar"] . "' AND A.CODTIPCAR=B.CODTIP AND A.GRACAR=B.GRAOCP AND A.PASCAR='001' AND FECDES<=TO_DATE('" . $movconvar . "','DD/MM/YYYY') ORDER BY FECDES DESC";
 	          } else {
-	            $sql = "Select ABS(SUM(case when a.pascar=lpad(coalesce('".$tabla[0]["paso"]."','001'),3,'0') then a.suecar else a.suecar*-1)) as suecar from NPCOMOCP A,NPCARGOS B WHERE B.CODCAR='" . $tabla[0]["codcar"] . "' AND A.CODTIPCAR=B.CODTIP AND A.GRACAR=B.GRAOCP AND (A.PASCAR='001' OR A.PASCAR='" . $tabla[0]["paso"] . "') AND FECDES<=TO_DATE('" . $movconvar . "','DD/MM/YYYY') ORDER BY FECDES DESC";
+	            $sql = "Select ABS(SUM(case when a.pascar='001' then a.suecar else a.suecar*-1)) as suecar from NPCOMOCP A,NPCARGOS B WHERE B.CODCAR='" . $tabla[0]["codcar"] . "' AND A.CODTIPCAR=B.CODTIP AND A.GRACAR=B.GRAOCP AND (A.PASCAR='001' ) AND FECDES<=TO_DATE('" . $movconvar . "','DD/MM/YYYY') ORDER BY FECDES DESC";
 	          }
 	          if (Herramientas :: BuscarDatos($sql, & $tablaescala)) {
 	            $valor = $tablaescala[0]["suecar"];
@@ -4033,6 +4042,15 @@ class Nomina {
 		  }
         } else
           $valor = 0;
+        #CODIGO QUE REALIZA OPERACIONES SOBRE EL SUELDO SEGUN SU TIEMPO   
+        if($tabla[0]['codtie']!='' && $valor!=0)
+        {
+        	$sqlf="select factor from nptiempo where codtie='".$tabla[0]['codtie']."'";
+	       	if (Herramientas :: BuscarDatos($sqlf, & $rsf))
+	       		if($rsf[0]["factor"]!='') 
+		            eval('$valor = $valor'.$rsf[0]["factor"].';');
+		          
+        }    
         break;
 
       case "CTAF" :
@@ -5615,6 +5633,7 @@ class Nomina {
       $r->setNomcat($registro->getNomcat());
 	  $r->setCodtipded($registro->getCodtipded());
 	  $r->setCodtipcat($registro->getCodtipcat());
+	  $r->setCodtie($registro->getCodtie());
       $r->setUnieje(null);
       $r->setSueldo($sueldo);
       $r->setStatus('V');
@@ -5654,6 +5673,7 @@ class Nomina {
       $npasicaremp->setNomcat($registro->getNomcat());
       $npasicaremp->setCodtipded($registro->getCodtipded());
       $npasicaremp->setCodtipcat($registro->getCodtipcat());
+      $npasicaremp->setCodtie($registro->getCodtie());
       $npasicaremp->setUnieje(null);
       $npasicaremp->setSueldo($sueldo);
       $npasicaremp->setStatus('V');

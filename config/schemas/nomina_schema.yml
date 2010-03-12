@@ -190,7 +190,11 @@ propel:
     codmotcamcar:
       type: VARCHAR
       size: 4
-      ##required: true      
+      ##required: true
+    codtie:
+      type: VARCHAR
+      size: 3
+      ##required: true        
     id:
       type: INTEGER
       required: true
@@ -7133,4 +7137,20 @@ propel:
       required: true
       primaryKey: true
       autoIncrement: true
-      description: Identificador Único del registro      
+      description: Identificador Único del registro
+  nptiempo:
+    codtie:
+      type: VARCHAR
+      size: 3
+    destie:
+      type: VARCHAR
+      size: 100
+    factor:
+      type: VARCHAR
+      size: 50  
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro                

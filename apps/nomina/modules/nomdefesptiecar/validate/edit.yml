@@ -1,0 +1,29 @@
+methods:
+  post:
+   - "nptiempo{codtie}"
+   - "nptiempo{destie}"  
+names: 
+  nptiempo{codtie}:
+    required:  Yes
+    required_msg: El código no puede estar en Blanco
+    validators: Validator_codtie
+    
+  nptiempo{destie}:
+    required:  Yes
+    required_msg: La descripción no puede estar en Blanco
+    validators: Validator_destie
+    
+Validator_codtie:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Nptiempo
+        column:       codtie
+        unique_error: El registro ya Existe intente con otro.
+    
+Validator_destie:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       100
+        max_error: La descripción no puede pasar mas de 100 caracteres
