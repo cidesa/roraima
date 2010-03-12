@@ -1107,6 +1107,9 @@ class OrdendePago
         $factura->setPorislr($x[$j]['porislr']);
         $factura->setMonislr($x[$j]['monislr']);
         $factura->setCodislr($x[$j]['codislr']);
+        if ($x[$j]['rifalt']=='')
+        $factura->setRifalt($orden->getCedrif());
+        else
         $factura->setRifalt($x[$j]['rifalt']);
 
         $factura->save();
