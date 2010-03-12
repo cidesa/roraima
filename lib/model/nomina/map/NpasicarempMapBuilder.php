@@ -78,6 +78,8 @@ class NpasicarempMapBuilder {
 
 		$tMap->addColumn('CODMOTCAMCAR', 'Codmotcamcar', 'string', CreoleTypes::VARCHAR, false, 4);
 
+		$tMap->addColumn('CODTIE', 'Codtie', 'string', CreoleTypes::VARCHAR, false, 3);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

@@ -5,9 +5,9 @@
  *
  * @package    Roraima
  * @subpackage nomasicarconnom
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: actions.class.php 37064 2010-03-12 15:24:10Z cramirez $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -59,6 +59,20 @@ class nomasicarconnomActions extends autonomasicarconnomActions
     return $frecuencia;
   }
   
+  public function CargarTiempo()
+  {
+    $c = new Criteria();
+    $lista_tie = NptiempoPeer::doSelect($c);
+
+    $tiempo = array();
+
+    foreach($lista_tie as $obj)
+    {
+      $tiempo += array($obj->getCodtie() => $obj->getDestie());
+    }
+    return $tiempo;
+  }
+
   public function CargarDedicacion()
   {
     $c = new Criteria();
@@ -85,10 +99,10 @@ class nomasicarconnomActions extends autonomasicarconnomActions
     }
     return $catl;
   }
-  
-  
-  
-  
+
+
+
+
   /**
    *
    * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
@@ -141,7 +155,7 @@ class nomasicarconnomActions extends autonomasicarconnomActions
   {
     $grid=Herramientas::CargarDatosGrid($this,$this->obj,true);
     $arreglo=array($grid);
-	
+
     $this->coderror = Nomina::salvarNomasicarconnom($npasicaremp,$arreglo);
 
     if($this->coderror!=-1)
@@ -234,7 +248,7 @@ class nomasicarconnomActions extends autonomasicarconnomActions
 			else
 				$js.="$('gridcatded').hide()";
 		}
-	
+
         $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$cajtexcom.'","'.$cod.'",""],["javascript","'.$js.'",""]]';
         $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
 
@@ -459,11 +473,16 @@ public function executeAutocomplete()
 		        {
 		       	 $this->filvac=$varemp['aplicacion']['nomina']['modulos']['nomasicarconnom']['filvac'];
 		        }
+			    if(array_key_exists('vartiempo',$varemp['aplicacion']['nomina']['modulos']['nomasicarconnom']))
+		        {
+		       	 $this->getUser()->setAttribute('vartiempo',$varemp['aplicacion']['nomina']['modulos']['nomasicarconnom']['vartiempo'],'nomasicarconnom');
+		        }
 
 			 }
 
     $this->npasicaremp = $this->getNpasicarempOrCreate();
 	$this->listadedicacion= $this->cargardedicacion();
+	$this->listatiempo= $this->cargartiempo();
 	$this->listacategoria= $this->cargarcategoria();
     $this->formato= Herramientas::getMascaraCategoria();
     $this->lonfor=strlen($this->formato);
@@ -531,7 +550,7 @@ public function executeAutocomplete()
   }
 
   /**
-   * Actualiza la informacion que viene de la vista 
+   * Actualiza la informacion que viene de la vista
    * luego de un get/post en el objeto principal del modelo base del formulario.
    *
    */
@@ -561,6 +580,10 @@ public function executeAutocomplete()
 				if(array_key_exists('filvac',$varemp['aplicacion']['nomina']['modulos']['nomasicarconnom']))
 		        {
 		       	 $this->filvac=$varemp['aplicacion']['nomina']['modulos']['nomasicarconnom']['filvac'];
+		        }
+			    if(array_key_exists('vartiempo',$varemp['aplicacion']['nomina']['modulos']['nomasicarconnom']))
+		        {
+		       	 $this->getUser()->setAttribute('vartiempo',$varemp['aplicacion']['nomina']['modulos']['nomasicarconnom']['vartiempo'],'nomasicarconnom');
 		        }
 
 			 }
@@ -650,6 +673,10 @@ public function executeAutocomplete()
     {
       $this->npasicaremp->setCodtipcat($npasicaremp['codtipcat']);
     }
+    if (isset($npasicaremp['codtie']))
+    {
+      $this->npasicaremp->setCodtie($npasicaremp['codtie']);
+    }
   }
 
   public function CargarTipoGasto()
@@ -723,6 +750,7 @@ public function executeAutocomplete()
 	$this->lonfor=strlen($this->formato);
 	$this->tipos=self::CargarTipoGasto();
 	$this->listadedicacion= $this->cargardedicacion();
+	$this->listatiempo= $this->cargartiempo();
 	$this->listacategoria= $this->cargarcategoria();
     $this->updateNpasicarempFromRequest();
     $this->labels = $this->getLabels();

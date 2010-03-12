@@ -25,9 +25,10 @@ nomina:
       Tipos Nóminas:                                                 NomDefEspTipNom
       Conceptos:                                                     NomDefEspCon
       Niveles Organizacionales:                                      NomDefEspNivOrg
+      Ubicaciones Físicas:                                            nomdefubi
       Niveles de Estudio:                                            NomDefEspNivEdu
       Cargos:                                                        NomDefEspCar
-      Cargos Colaterales:                                            NomDefEspCargosCol      
+      Cargos Colaterales:                                            NomDefEspCargosCol
       Definición de Conceptos Variables:                             NomDefEspMovPer
       Variables:                                                     NomDefEspVar
       Bancos:                                                        NomDefEspBan
@@ -36,7 +37,9 @@ nomina:
       Tipos de Parientes:                                            NomDefEspPar
       Guarderías:                                                    NomDefEspGuarde
       Tipos de Gastos:                                               NomDefTipGas
-      Tipo de Cargos:                                                NomTipCar      
+      Tipo de Cargos:                                                NomTipCar
+      Tiempos del Cargo:                                             NomDefEspTieCar
+      Tipo de Empleado:                                              nomtipemp
       Motivos de Faltas y/o Permisos:                                NomDefEspMotFalPre
       Estatus del Empleado:                                          nomdefestemp
       Situacion del Empleado:                                        nomdefespsitemp
@@ -57,13 +60,13 @@ nomina:
       Definición de Concepto de Cesta Tickets:                       NomDefEspCesTic
       Tipos de Retiros:                                              NomDefTipRet
       Definición de Conceptos para Dias Adicionales:                 NomDefDiaAdicNom
-      Conceptos para el ISLR:                                        NomDefEspISLR      
-      Motivos de Cambios de Cargos:                                  NomDefEspMotCamCar            
+      Conceptos para el ISLR:                                        NomDefEspISLR
+      Motivos de Cambios de Cargos:                                  NomDefEspMotCamCar      
       Definición de Documentos consignados por el Empleado:          NomDefEspDocEnt            
       Embargos:
         Registro de Juzgados:                                        NomDefJuz
-        Registro de Beneficiarios por Embargos:                      NomDefBenEmb 
-        Registro de Embargos:                                        NomRegEmb      
+        Registro de Beneficiarios por Embargos:                      NomDefBenEmb
+        Registro de Embargos:                                        NomRegEmb
       Definición de Retenciones y Aportes:
         Retenciones y Aportes:                                       NomDefAportes
         Conceptos para Aportes:                                      NomDefConAportes
@@ -79,7 +82,7 @@ nomina:
       #Nominas a Formular:                                           ForNomFor
       #Formulas de Conceptos:                                        ForCalCon
       Tipo de Dedicación:                                            NomTipDed
-      Tipo de Categoria:                                             NomTipCat      
+      Tipo de Categoria:                                             NomTipCat
       #Asignación de Conceptos a Cargos:                             ForAsoConCar
       Tabla de Sueldos por Grado y Paso:                             NomComOCP
       Asignación de Cargos y Conceptos a Empleados:                  NomAsiCarConNom
@@ -101,7 +104,7 @@ nomina:
       Adiestramiento:
         Inscripción al Curso:                                        NomInsCur
         Asistencia al Curso:                                         NomAsiCur
-        Evaluar Curso:                                               NomNotCur      
+        Evaluar Curso:                                               NomNotCur
     Evalución y Desempeño:
       Definicion de Rangos e Actuacion:                              NomDefRan
       Control de Competencias:
@@ -135,7 +138,7 @@ nomina:
       Tabla para los Días Feriados:                                  VacDiaFer
       Registro de Vacaciones Disfrutadas:                            VacHistorico
       Registro de Vacaciones Disfrutadas en Lote:                    VacHistorico_Lote
-      Registro de Vacaciones Colectivas:                             Vaccolecti      
+      Registro de Vacaciones Colectivas:                             Vaccolecti
       Registro de Solicitud de Vacaciones:                           VacSALIDAS
       #Registro y Control de Vacaciones:                             VacRegSalVac
       Liquidación de Vacaciones Por Egreso:                          VacLiquidacion
@@ -155,7 +158,7 @@ nomina:
       Registro Histórico de Anticipos Otorgados:                     PresNomRegHisAntPre
       Registro Histórico de Adelanto de Intereses de Prestaciones:   PresNomRegHisAdeint
       Solicitud de Anticipo Sobre Prestaciones:                      PresNomAntPre
-      Solicitud de Anticipo Sobre Intereses de Prestaciones:         PresNomAdeInt            
+      Solicitud de Anticipo Sobre Intereses de Prestaciones:         PresNomAdeInt
       Cálculo de Antiguedad:                                         presNomCalIntPre
       Liquidación Final de Prestaciones:                             presnomliquidacion
       #Importar Datos Prestaciones Sociales:                         ImportarPrestaciones
@@ -308,6 +311,6 @@ nomina:
       #Cambiar Password de Usuario:                                  NomCamPwd.php
       #IMPORTAR ASIGNACION DE CARGOS:                                ImportarAsignarCargos.php
       #IMPORTAR HOJA INTEGRAL:                                       ImportarHojaIntegral.php
-      #IMPORTAR VALORES DE CONCEPTOS:                                ImportarValoresConceptos.php
+      Migrar Valores de Conceptos:                                   nommigvalcon
       #Actualizar Saldos de Préstamos:                               NomActPre.php
 
