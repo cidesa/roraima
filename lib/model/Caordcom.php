@@ -27,6 +27,7 @@ class Caordcom extends BaseCaordcom
     private $eti="";
     protected $tipopro="";
     protected $compro="";
+    protected $oculsave="";
 
 
     public function getReptipcom()

@@ -44,14 +44,14 @@ class Orden_compra
 		return false;
   	}else{
 
-          if ($caordcom->getId()){
+      /*if ($caordcom->getId()){
                 $reg = CaordcomPeer::retrieveByPKs($caordcom->getId());
                 $reg1 = array();
                 $reg1 = $reg[0];
                 $reg1->setDesord($caordcom->getDesord());
                 $reg1->save();
                 $coderror=-11;
-          }else {
+          }else {*/
  	      $refiereprecom = '';
 		  $afectacompro = '';
 		  $afectadis = '';
@@ -236,7 +236,7 @@ class Orden_compra
 		          }    // si grabo orden_de_compra
 		     }  //REFSOL
 		      //exit($caordcom->getOrdcom());
-          }
+          //}
   	}
    return true;
   }
@@ -1557,6 +1557,24 @@ class Orden_compra
           $caordcom_mod->setDesord($caordcom->getDesord());
           $caordcom_mod->setNotord($caordcom->getNotord());
           $caordcom_mod->save();
+
+
+        // campos
+        $total_detalle_orden=$arreglo_campos[0];
+        $total_descuento=$arreglo_campos[1];
+        $total_recargo=$arreglo_campos[2];
+        //arreglos de arreglos
+        $grid_detalle_orden_objetos=$grid_detalle_orden_arreglos;
+        //arreglos de objetos
+        $grid_detalle_resumen_objetos=$arreglo_objetos[0];
+        $grid_detalle_entrega_objetos=$arreglo_objetos[1];
+
+        self::Grabar_detalles_orden_compra($caordcom,$grid_detalle_orden_objetos,$grid_detalle_recargo,$total_recargo,$referencia,$codconpag,$codforent);//grabo en el grid general de detalle de la orden
+        self::Grabar_grid_resumen($caordcom,$grid_detalle_resumen_objetos);//grabo en el grid resumen
+        self::Grabar_grid_entregas($caordcom,$grid_detalle_entrega_objetos);//grabo en el grid entrega
+        self::grabarDistribucionRgo($caordcom,$grid_detalle_orden_arreglos);
+        self::grabarRecargo($caordcom);
+
       }
       return false;
     }
@@ -1667,6 +1685,9 @@ class Orden_compra
     }
     if (count($grid_detalle)>0)
     {
+    	if ($caordcom->getId()){
+    		Herramientas::EliminarRegistro("Caartord", "Ordcom", $caordcom->getOrdcom());
+    	}
       $i=0;
       $a=0;
         while ($i<count($grid_detalle))
