@@ -28,5 +28,6 @@
 
 <script language="JavaScript" type="text/javascript">
   var tiecom='<?php echo $caordcom->getCompro(); ?>';
-  if (tiecom=='S') $('save').hide();
+  var oculsave='<?php echo $caordcom->getOculsave(); ?>';
+  if (tiecom=='S' && oculsave=='S') $('save').hide();
 </script>

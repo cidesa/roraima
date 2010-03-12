@@ -307,6 +307,7 @@ class almordcomActions extends autoalmordcomActions
   public function executeEdit()
   {
     $this->caordcom = $this->getCaordcomOrCreate();
+    $this->caordcom->setOculsave($this->oculsave);
     $this->imp=$this->getRequestParameter('impche');
     $this->listatipocompra = Constantes::ListaTipoCompra();
     $this->readonly='';
@@ -725,7 +726,8 @@ class almordcomActions extends autoalmordcomActions
       $campo_col15='Codpre';//tabla Caartord
       $this->getUser()->setAttribute('referencia', '0');
       if (Herramientas::getX_vacio('ordcom','Caartord','ordcom',$ordcom)!='')
-        $filas_arreglo=0;
+        //$filas_arreglo=0;
+        $filas_arreglo=150;
       else
         $filas_arreglo=150;
     }
@@ -1697,6 +1699,7 @@ class almordcomActions extends autoalmordcomActions
     $this->mansolocor="";
     $this->bloqfec="";
     $this->oculeli="";
+    $this->oculsave="";
     $varemp = $this->getUser()->getAttribute('configemp');
     if ($varemp)
 	if(array_key_exists('aplicacion',$varemp))
@@ -1722,6 +1725,10 @@ class almordcomActions extends autoalmordcomActions
 	       if(array_key_exists('oculeli',$varemp['aplicacion']['compras']['modulos']['almordcom']))
 	       {
 	       	$this->oculeli=$varemp['aplicacion']['compras']['modulos']['almordcom']['oculeli'];
+	       }
+	       if(array_key_exists('oculsave',$varemp['aplicacion']['compras']['modulos']['almordcom']))
+	       {
+	       	$this->oculsave=$varemp['aplicacion']['compras']['modulos']['almordcom']['oculsave'];
 	       }
          }
 
@@ -2206,7 +2213,8 @@ class almordcomActions extends autoalmordcomActions
       else
       {
         //print 'hola';
-        $this->configGrid('0','0','');
+        $tipopro=H::getX('RIFPRO','Caprovee','Tipo',$this->getRequestParameter('rifpro'));
+        $this->configGrid('0','0',$tipopro);
       }
     }
   }
@@ -2287,7 +2295,8 @@ class almordcomActions extends autoalmordcomActions
     }
   	}else {
   		$this->setVars();
-  		$this->configGrid($this->getRequestParameter('caordcom[ordcom]'),'0','');
+  		$tipopro=H::getX('RIFPRO','Caprovee','Tipo',$this->getRequestParameter('rifpro'));
+  		$this->configGrid($this->getRequestParameter('caordcom[ordcom]'),'0',$tipopro);
   	}
   }
     }
