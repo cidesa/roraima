@@ -35,7 +35,7 @@
   msj: Ya existe una Orden de Servicio con ese Correlativo
 109:
   cod: 109
-  msj: No se ha podido modificar esta Orden de Compra por que ya fue causada y/o pagada.
+  msj: No se ha podido modificar esta Orden de Compra por que ya fue Comprometida, causada y/o pagada.
 
 # Rangos de Cotizaciones (Almdefcot)
 110:

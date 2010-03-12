@@ -37,8 +37,9 @@ class Orden_compra
 
 	$refere1 = Herramientas::getX_vacio('refere','cpimppag','refere',$caordcom->getOrdcom());
 	$refere2 = Herramientas::getX_vacio('refere','cpimpcau','refere',$caordcom->getOrdcom());
+	$refere0 = Herramientas::getX_vacio('refcom','cpimpcom','refcom',$caordcom->getOrdcom());
 
-	if (!empty($refere1) or (!empty($refere2)) and ($caordcom->getId()))
+	if (!empty($refere1) or (!empty($refere2) or (!empty($refere0))) and ($caordcom->getId()))
 	{
 		$coderror=109;
 		return false;
