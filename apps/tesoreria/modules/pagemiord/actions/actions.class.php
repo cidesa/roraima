@@ -1082,7 +1082,7 @@ $this->Bitacora('Guardo');
     $opciones->setAncho(2800);
     $opciones->setTitulo('Facturas');
     $opciones->setName('b');
-    $opciones->setFilas(80);
+    $opciones->setFilas(100);
     $opciones->setHTMLTotalFilas(' ');
 
     $col1 = new Columna('Fecha Factura');
