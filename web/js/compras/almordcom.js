@@ -1297,7 +1297,7 @@ function salvarmontorecargos()
 
  function GenerarResumenPartidas(id)
   {
-  if (id=='')
+  if (id=='' || $('caordcom_compro').value=='N')
   {
      f=0;
      total=150;
