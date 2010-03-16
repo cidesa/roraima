@@ -25,7 +25,7 @@ class Proveedor
    */
     public static function salvarAlmregpro($caprovee,$manprocor,$mascararif)
     {
-      if ($manprocor=='S' && $caprovee->getId())
+      if ($manprocor=='S' && (!$caprovee->getId()))
       {
         self::BuscarCorrelativoActiv(&$caprovee);
       }
@@ -56,7 +56,7 @@ class Proveedor
             $caprovee->setNitpro($reg1->getNitpro());
          }
     $caprovee->save();
-    if ($manprocor=='S') {
+    if ($manprocor=='S' && $caprovee->getId()) {
     	$q= new Criteria();
     	$dat=CadefartPeer::doSelectOne($q);
     	if ($dat)
