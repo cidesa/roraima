@@ -173,6 +173,26 @@ abstract class BaseCaprovee extends BaseObject  implements Persistent {
 
 
 	
+	protected $ramgen;
+
+
+	
+	protected $estpro;
+
+
+	
+	protected $codban;
+
+
+	
+	protected $numcue;
+
+
+	
+	protected $codtip;
+
+
+	
 	protected $id;
 
 	
@@ -535,6 +555,41 @@ abstract class BaseCaprovee extends BaseObject  implements Persistent {
 
   }
   
+  public function getRamgen()
+  {
+
+    return trim($this->ramgen);
+
+  }
+  
+  public function getEstpro()
+  {
+
+    return trim($this->estpro);
+
+  }
+  
+  public function getCodban()
+  {
+
+    return trim($this->codban);
+
+  }
+  
+  public function getNumcue()
+  {
+
+    return trim($this->numcue);
+
+  }
+  
+  public function getCodtip()
+  {
+
+    return trim($this->codtip);
+
+  }
+  
   public function getId()
   {
 
@@ -655,6 +710,11 @@ abstract class BaseCaprovee extends BaseObject  implements Persistent {
 	public function setFecreg($v)
 	{
 
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecreg] from input: " . var_export($v, true));
@@ -772,6 +832,11 @@ abstract class BaseCaprovee extends BaseObject  implements Persistent {
 	public function setFecinscir($v)
 	{
 
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecinscir] from input: " . var_export($v, true));
@@ -868,6 +933,11 @@ abstract class BaseCaprovee extends BaseObject  implements Persistent {
 	
 	public function setFecven($v)
 	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
@@ -973,6 +1043,56 @@ abstract class BaseCaprovee extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setRamgen($v)
+	{
+
+    if ($this->ramgen !== $v) {
+        $this->ramgen = $v;
+        $this->modifiedColumns[] = CaproveePeer::RAMGEN;
+      }
+  
+	} 
+	
+	public function setEstpro($v)
+	{
+
+    if ($this->estpro !== $v) {
+        $this->estpro = $v;
+        $this->modifiedColumns[] = CaproveePeer::ESTPRO;
+      }
+  
+	} 
+	
+	public function setCodban($v)
+	{
+
+    if ($this->codban !== $v) {
+        $this->codban = $v;
+        $this->modifiedColumns[] = CaproveePeer::CODBAN;
+      }
+  
+	} 
+	
+	public function setNumcue($v)
+	{
+
+    if ($this->numcue !== $v) {
+        $this->numcue = $v;
+        $this->modifiedColumns[] = CaproveePeer::NUMCUE;
+      }
+  
+	} 
+	
+	public function setCodtip($v)
+	{
+
+    if ($this->codtip !== $v) {
+        $this->codtip = $v;
+        $this->modifiedColumns[] = CaproveePeer::CODTIP;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -1069,7 +1189,17 @@ abstract class BaseCaprovee extends BaseObject  implements Persistent {
 
       $this->codtipemp = $rs->getString($startcol + 40);
 
-      $this->id = $rs->getInt($startcol + 41);
+      $this->ramgen = $rs->getString($startcol + 41);
+
+      $this->estpro = $rs->getString($startcol + 42);
+
+      $this->codban = $rs->getString($startcol + 43);
+
+      $this->numcue = $rs->getString($startcol + 44);
+
+      $this->codtip = $rs->getString($startcol + 45);
+
+      $this->id = $rs->getInt($startcol + 46);
 
       $this->resetModified();
 
@@ -1077,7 +1207,7 @@ abstract class BaseCaprovee extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 42; 
+            return $startcol + 47; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Caprovee object", $e);
     }
@@ -1254,6 +1384,7 @@ abstract class BaseCaprovee extends BaseObject  implements Persistent {
 					}
 				}
 
+
 			$this->alreadyInValidation = false;
 		}
 
@@ -1395,6 +1526,21 @@ abstract class BaseCaprovee extends BaseObject  implements Persistent {
 				return $this->getCodtipemp();
 				break;
 			case 41:
+				return $this->getRamgen();
+				break;
+			case 42:
+				return $this->getEstpro();
+				break;
+			case 43:
+				return $this->getCodban();
+				break;
+			case 44:
+				return $this->getNumcue();
+				break;
+			case 45:
+				return $this->getCodtip();
+				break;
+			case 46:
 				return $this->getId();
 				break;
 			default:
@@ -1448,7 +1594,12 @@ abstract class BaseCaprovee extends BaseObject  implements Persistent {
 			$keys[38] => $this->getTemrifpro(),
 			$keys[39] => $this->getCodctasec(),
 			$keys[40] => $this->getCodtipemp(),
-			$keys[41] => $this->getId(),
+			$keys[41] => $this->getRamgen(),
+			$keys[42] => $this->getEstpro(),
+			$keys[43] => $this->getCodban(),
+			$keys[44] => $this->getNumcue(),
+			$keys[45] => $this->getCodtip(),
+			$keys[46] => $this->getId(),
 		);
 		return $result;
 	}
@@ -1588,6 +1739,21 @@ abstract class BaseCaprovee extends BaseObject  implements Persistent {
 				$this->setCodtipemp($value);
 				break;
 			case 41:
+				$this->setRamgen($value);
+				break;
+			case 42:
+				$this->setEstpro($value);
+				break;
+			case 43:
+				$this->setCodban($value);
+				break;
+			case 44:
+				$this->setNumcue($value);
+				break;
+			case 45:
+				$this->setCodtip($value);
+				break;
+			case 46:
 				$this->setId($value);
 				break;
 		} 	}
@@ -1638,7 +1804,12 @@ abstract class BaseCaprovee extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[38], $arr)) $this->setTemrifpro($arr[$keys[38]]);
 		if (array_key_exists($keys[39], $arr)) $this->setCodctasec($arr[$keys[39]]);
 		if (array_key_exists($keys[40], $arr)) $this->setCodtipemp($arr[$keys[40]]);
-		if (array_key_exists($keys[41], $arr)) $this->setId($arr[$keys[41]]);
+		if (array_key_exists($keys[41], $arr)) $this->setRamgen($arr[$keys[41]]);
+		if (array_key_exists($keys[42], $arr)) $this->setEstpro($arr[$keys[42]]);
+		if (array_key_exists($keys[43], $arr)) $this->setCodban($arr[$keys[43]]);
+		if (array_key_exists($keys[44], $arr)) $this->setNumcue($arr[$keys[44]]);
+		if (array_key_exists($keys[45], $arr)) $this->setCodtip($arr[$keys[45]]);
+		if (array_key_exists($keys[46], $arr)) $this->setId($arr[$keys[46]]);
 	}
 
 	
@@ -1687,6 +1858,11 @@ abstract class BaseCaprovee extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CaproveePeer::TEMRIFPRO)) $criteria->add(CaproveePeer::TEMRIFPRO, $this->temrifpro);
 		if ($this->isColumnModified(CaproveePeer::CODCTASEC)) $criteria->add(CaproveePeer::CODCTASEC, $this->codctasec);
 		if ($this->isColumnModified(CaproveePeer::CODTIPEMP)) $criteria->add(CaproveePeer::CODTIPEMP, $this->codtipemp);
+		if ($this->isColumnModified(CaproveePeer::RAMGEN)) $criteria->add(CaproveePeer::RAMGEN, $this->ramgen);
+		if ($this->isColumnModified(CaproveePeer::ESTPRO)) $criteria->add(CaproveePeer::ESTPRO, $this->estpro);
+		if ($this->isColumnModified(CaproveePeer::CODBAN)) $criteria->add(CaproveePeer::CODBAN, $this->codban);
+		if ($this->isColumnModified(CaproveePeer::NUMCUE)) $criteria->add(CaproveePeer::NUMCUE, $this->numcue);
+		if ($this->isColumnModified(CaproveePeer::CODTIP)) $criteria->add(CaproveePeer::CODTIP, $this->codtip);
 		if ($this->isColumnModified(CaproveePeer::ID)) $criteria->add(CaproveePeer::ID, $this->id);
 
 		return $criteria;
@@ -1799,6 +1975,16 @@ abstract class BaseCaprovee extends BaseObject  implements Persistent {
 		$copyObj->setCodctasec($this->codctasec);
 
 		$copyObj->setCodtipemp($this->codtipemp);
+
+		$copyObj->setRamgen($this->ramgen);
+
+		$copyObj->setEstpro($this->estpro);
+
+		$copyObj->setCodban($this->codban);
+
+		$copyObj->setNumcue($this->numcue);
+
+		$copyObj->setCodtip($this->codtip);
 
 
 		if ($deepCopy) {

@@ -9,7 +9,7 @@
  * @subpackage lib.model
  * @author     $Author$ <desarrollo@cidesa.com.ve>
  * @version SVN: $Id$
- * 
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -18,6 +18,10 @@ class Caprovee extends BaseCaprovee
   private $recargo ='';
   public $codtipesp='';
   public $destipesp='';
+  public $objrecaudos=array();
+  public $objcontactos=array();
+  public $objramos=array();
+  public $objretenciones=array();
   protected $tiedatrel="";
   protected $oculsave="";
 
@@ -133,6 +137,16 @@ class Caprovee extends BaseCaprovee
   public function getDespro()
   {
   return self::getNompro();
+  }
+
+  public function getDesban()
+  {
+    return Herramientas::getX('codban','cabanco','desban',self::getCodban());
+  }
+
+  public function getDestipcta()
+  {
+    return Herramientas::getX('codtip','tstipcue','destip',self::getCodtip());
   }
 
   public function getTiedatrel()

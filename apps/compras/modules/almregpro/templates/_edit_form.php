@@ -16,6 +16,7 @@
   'onsubmit'  => 'double_list_submit(); return true;'
 )) ?>
 
+
 <?php echo object_input_hidden_tag($caprovee, 'getId') ?>
 <?php echo input_hidden_tag('entorno', $ent) ?>
 <?php echo input_hidden_tag('codproaux', '') ?>
@@ -35,11 +36,12 @@
   <?php endif; ?>
 
   <?php $value = object_input_tag($caprovee, 'getCodpro', array (
-  'size' => 15,
-  'maxlength' => 15,
-  'readonly'  =>  $caprovee->getId()!='' ? true : false ,
-  'control_name' => 'caprovee[codpro]',
-  'onBlur'  => "javascript: valor=this.value; if ($('caprovee_codpro').value!='') valor=valor.pad(8, '0',0);document.getElementById('caprovee_codpro').value=valor;document.getElementById('caprovee_codpro').disabled=false;validarExistencia(this.id);",
+   'size'      => 15,
+   'maxlength' => 15,
+   'readonly'  => $caprovee->getId()!='' ? true : $corcodpro=='S' ? true : false ,
+   'value'     => $caprovee->getId()=='' ? $corcodpro=='S' ? '########' : '' : $caprovee->getCodpro(),
+   'control_name' => 'caprovee[codpro]',
+   'onBlur'  => "javascript: valor=this.value; if ($('caprovee_codpro').value!='') valor=valor.pad(8, '0',0);document.getElementById('caprovee_codpro').value=valor;document.getElementById('caprovee_codpro').disabled=false;validarExistencia(this.id);",
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
  </th>
@@ -74,8 +76,8 @@
  <tr>
  <th>
  <fieldset id="sf_fieldset_none" class="">
-    <legend><strong><?php echo  __('Tipo de Persona:') ?></strong></legend>
-    <div class="form-row">
+    <legend><h2><?php echo  __('Tipo de Persona:') ?></h2></legend>
+    <div class="form-row"  align="left">
    <?
 if ($caprovee->getNitpro()=='J')  {
   ?><?php echo radiobutton_tag('caprovee[nitpro]', 'J', true, array('onClick' => 'colocaletra(this.value);', 'readonly'  =>  $caprovee->getId()!='' ? true : false ))." Jurídica".'<br> ';
@@ -103,7 +105,7 @@ if ($caprovee->getNitpro()=='J')  {
     class="content<?php if ($sf_request->hasError('caprovee{rifpro}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('caprovee{rifpro}')): ?> <?php echo form_error('caprovee{rifpro}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
-<?php $mascara2='#-########-#'?>
+
    <?php $value = object_input_tag($caprovee, 'getRifpro', array (
     'size' => 15,
     'maxlength' => 12,
@@ -119,14 +121,11 @@ if ($caprovee->getNitpro()=='J')  {
  <br>
 
 <table>
- <tr>
- <th>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
- </th>
+ <tr valign="top">
+
  <th><fieldset id="sf_fieldset_none" class="">
-    <legend><strong><?php echo  __('Nacionalidad :') ?></strong></legend>
-    <div class="form-row">
+    <legend><h2><?php echo  __('Nacionalidad :') ?></h2></legend>
+    <div class="form-row"  align="left">
     <?  if ($caprovee->getNacpro()=='N'){
 
         echo radiobutton_tag('caprovee[nacpro]','N', true) .'&nbsp;&nbsp;'. "Nacional"."<br>";
@@ -141,10 +140,10 @@ if ($caprovee->getNitpro()=='J')  {
         echo radiobutton_tag('caprovee[nacpro]','P', false) .'&nbsp;&nbsp;'. "Internacional"."<br>";
       }?>
  </div> </fieldset></th>
- <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+ <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
  <th><fieldset id="sf_fieldset_none" class="">
-    <legend><strong><?php echo  __('Actividad Profesional :') ?></strong></legend>
-    <div class="form-row">
+    <legend><h2><?php echo  __('Actividad Profesional :') ?></h2></legend>
+    <div class="form-row"  align="left">
     <?  if ($caprovee->getTipo()=='P'){
       echo radiobutton_tag('caprovee[tipo]','P', true) .'&nbsp;&nbsp;'. "Cooperativa"."<br>";
       echo radiobutton_tag('caprovee[tipo]','C', false) .'&nbsp;&nbsp;'. "Contratista"."<br>";
@@ -396,7 +395,26 @@ if ($caprovee->getNitpro()=='J')  {
    'date_format' => 'dd/MM/yy',
   'onkeyup' => "javascript: mascara(this,'/',patron,true)",
 )); echo $value ? $value : '&nbsp;' ?></div>
+
+
+<br>
+
+  <?php echo label_for('caprovee[estpro]', __($labels['caprovee{estpro}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('caprovee{estpro}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('caprovee{estpro}')): ?>
+    <?php echo form_error('caprovee{estpro}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+<?php
+	echo
+	select_tag('caprovee[estpro]]', options_for_select(
+	Constantes::ListaEstados(),
+	$caprovee->getEstpro())
+	);
+?>
+
 </div>
+
 </fieldset>
 
 
@@ -566,108 +584,141 @@ if ($caprovee->getNitpro()=='J')  {
   'control_name' => 'caprovee[destip]',
 )); echo $value ? $value : '&nbsp;' ?></div>
 
-<br>
+<br><br>
 
+ <fieldset id="sf_fieldset_none" class="">
+    <legend><h2><?php echo  __('Informacion Bancaria:') ?></h2></legend>
+	<div class="form-row">
+	  <?php echo label_for('caprovee[codban]', __($labels['caprovee{codban}']), 'class="required" ') ?>
+	  <div class="content<?php if ($sf_request->hasError('caprovee{codban}')): ?> form-error<?php endif; ?>">
+	  <?php if ($sf_request->hasError('caprovee{codban}')): ?>
+	    <?php echo form_error('caprovee{codban}', array('class' => 'form-error-msg')) ?>
+	  <?php endif; ?>
+
+        <?php $value = get_partial('codban', array('type' => 'edit', 'caprovee' => $caprovee)); echo $value ? $value : '&nbsp;' ?>
+	    </div>
+
+<br >
+
+	  <?php echo label_for('caprovee[numcue]', __($labels['caprovee{numcue}']), 'class="required"') ?>
+	  <div class="content<?php if ($sf_request->hasError('caprovee{numcue}')): ?> form-error<?php endif; ?>">
+	  <?php if ($sf_request->hasError('caprovee{numcue}')): ?>
+	    <?php echo form_error('caprovee{numcue}', array('class' => 'form-error-msg')) ?>
+	  <?php endif; ?>
+
+	  <?php $value = object_input_tag($caprovee, 'getNumcue', array (
+	  'size' => 20,
+	  'maxlength' => 20,
+	  'control_name' => 'caprovee[numcue]',
+	)); echo $value ? $value : '&nbsp;' ?>
+	    </div>
+
+<br >
+
+	  <?php echo label_for('caprovee[codtip]', __($labels['caprovee{codtip}']), 'class="required"') ?>
+	  <div class="content<?php if ($sf_request->hasError('caprovee{codtip}')): ?> form-error<?php endif; ?>">
+	  <?php if ($sf_request->hasError('caprovee{codtip}')): ?>
+	    <?php echo form_error('caprovee{codtip}', array('class' => 'form-error-msg')) ?>
+	  <?php endif; ?>
+
+		<?php $value = get_partial('codtip', array('type' => 'edit', 'caprovee' => $caprovee)); echo $value ? $value : '&nbsp;' ?>
+	    </div>
+	</div>
+
+ </fieldset>
+
+</fieldset>
+
+
+<?php tabPageOpenClose("tp1", "tabPage5", 'Contactos');?>
 <fieldset id="sf_fieldset_none" class="">
-<legend><?php echo __('Datos Persona Contacto')?></legend>
-<div class="form-row"><?php echo label_for('caprovee[rifrepleg]', __($labels['caprovee{rifrepleg}']), 'class="required" ') ?>
-<div
-  class="content<?php if ($sf_request->hasError('caprovee{rifrepleg}')): ?> form-error<?php endif; ?>">
-<?php if ($sf_request->hasError('caprovee{rifrepleg}')): ?> <?php echo form_error('caprovee{rifrepleg}', array('class' => 'form-error-msg')) ?>
-<?php endif; ?> <?php $value = object_input_tag($caprovee, 'getRifrepleg', array (
-  'size' => 20,
-  'control_name' => 'caprovee[rifrepleg]',
-)); echo $value ? $value : '&nbsp;' ?></div>
 
-<br>
+<div class="form-row">
+  <?php echo label_for('caprovee[gripcontactos]', __(''), '') ?>
+  <div class="content<?php if ($sf_request->hasError('caprovee{gripcontactos}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('caprovee{gripcontactos}')): ?>
+    <?php echo form_error('caprovee{gripcontactos}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
 
-<?php echo label_for('caprovee[nomrepleg]', __($labels['caprovee{nomrepleg}']), 'class="required" ') ?>
-<div
-  class="content<?php if ($sf_request->hasError('caprovee{nomrepleg}')): ?> form-error<?php endif; ?>">
-<?php if ($sf_request->hasError('caprovee{nomrepleg}')): ?> <?php echo form_error('caprovee{nomrepleg}', array('class' => 'form-error-msg')) ?>
-<?php endif; ?> <?php $value = object_input_tag($caprovee, 'getNomrepleg', array (
-  'size' => 50,
-  'control_name' => 'caprovee[nomrepleg]',
-)); echo $value ? $value : '&nbsp;' ?></div>
-
-<br>
-
-<?php echo label_for('caprovee[dirrepleg]', __($labels['caprovee{dirrepleg}']), 'class="required" ') ?>
-<div
-  class="content<?php if ($sf_request->hasError('caprovee{dirrepleg}')): ?> form-error<?php endif; ?>">
-<?php if ($sf_request->hasError('caprovee{dirrepleg}')): ?> <?php echo form_error('caprovee{dirrepleg}', array('class' => 'form-error-msg')) ?>
-<?php endif; ?> <?php $value = object_input_tag($caprovee, 'getDirrepleg', array (
-  'size' => 80,
-  'control_name' => 'caprovee[dirrepleg]',
-)); echo $value ? $value : '&nbsp;' ?></div>
-
-<br>
-
-<?php echo label_for('caprovee[telrepleg]', __($labels['caprovee{telrepleg}']), 'class="required" ') ?>
-<div
-  class="content<?php if ($sf_request->hasError('caprovee{telrepleg}')): ?> form-error<?php endif; ?>">
-<?php if ($sf_request->hasError('caprovee{telrepleg}')): ?> <?php echo form_error('caprovee{telrepleg}', array('class' => 'form-error-msg')) ?>
-<?php endif; ?> <?php $value = object_input_tag($caprovee, 'getTelrepleg', array (
-  'size' => 30,
-   'maxlength' => 30,
-  'control_name' => 'caprovee[telrepleg]',
-)); echo $value ? $value : '&nbsp;' ?></div>
+  <?php $value = get_partial('gripcontactos', array('type' => 'edit', 'caprovee' => $caprovee)); echo $value ? $value : '&nbsp;' ?>
+    </div>
 </div>
-</fieldset>
-</div>
+
+
 </fieldset>
 
+
+<?php tabPageOpenClose("tp1", "tabPage6", 'Ramos');?>
+<fieldset id="sf_fieldset_none" class="">
+
+<div class="form-row">
+  <?php echo label_for('caprovee[gripramos]', __(''), '') ?>
+  <div class="content<?php if ($sf_request->hasError('caprovee{gripramos}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('caprovee{gripramos}')): ?>
+    <?php echo form_error('caprovee{gripramos}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = get_partial('gripramos', array('type' => 'edit', 'caprovee' => $caprovee)); echo $value ? $value : '&nbsp;' ?>
+
+</div>
+
+  <?php echo label_for('caprovee[ramgen]', __($labels['caprovee{ramgen}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('caprovee{ramgen}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('caprovee{ramgen}')): ?>
+    <?php echo form_error('caprovee{ramgen}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_textarea_tag($caprovee, 'getRamgen', array (
+  'size' => '90x2',
+  'control_name' => 'caprovee[ramgen]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+
+</div>
+
+<?php tabPageOpenClose("tp1", "tabPage7", 'Retenciones');?>
+<fieldset id="sf_fieldset_none" class="">
+
+<div class="form-row">
+  <?php echo label_for('caprovee[gripretenciones]', __(''), '') ?>
+  <div class="content<?php if ($sf_request->hasError('caprovee{gripretenciones}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('caprovee{gripretenciones}')): ?>
+    <?php echo form_error('caprovee{gripretenciones}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = get_partial('gripretenciones', array('type' => 'edit', 'caprovee' => $caprovee)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+</div>
+
+
+</fieldset>
 
 <?php tabPageOpenClose("tp1", "tabPage3", 'Recaudos');?>
 <fieldset id="sf_fieldset_none" class="">
+
 <div class="form-row">
-<?php echo label_for('caprovee[codtiprec]', __($labels['caprovee{codtiprec}']), 'class="required" ') ?>
-<div
-  class="content<?php if ($sf_request->hasError('caprovee{codtiprec}')): ?> form-error<?php endif; ?>">
-<?php if ($sf_request->hasError('caprovee{codtiprec}')): ?> <?php echo form_error('caprovee{codtiprec}', array('class' => 'form-error-msg')) ?>
-<?php endif; ?>
+  <?php echo label_for('caprovee[codtiprec]', __($labels['caprovee{codtiprec}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('caprovee{codtiprec}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('caprovee{codtiprec}')): ?>
+    <?php echo form_error('caprovee{codtiprec}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
 
-<?php echo input_auto_complete_tag('caprovee[codtiprec]', $caprovee->getCodtiprec(),
-    'almregpro/autocomplete?ajax=4',  array('autocomplete' => 'off','size'=>6,'maxlength' => 4,
-     'onBlur'=> remote_function(array(
-        'update'   => 'doblelista',
-        'url'      => 'almregpro/doble?id='.$caprovee->getId(),
-        'complete' => 'AjaxJSON(request, json)',
-        'condition' => "$('caprovee_codtiprec').value != '' ",
-            'with' => "'ajax=4&cajtexmos=caprovee_destiprec&cajtexcom=caprovee_codtiprec&codigo='+this.value",
-        'script'  => true,
-        ))),
-     array('use_style' => 'true')
-  )
-?>&nbsp;
-<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Catiprec_Almregpro/clase/Catiprec/frame/sf_admin_edit_form/obj1/caprovee_codtiprec/obj2/caprovee_destiprec/campo1/codtiprec/campo2/destiprec')?></th>
-
-  <?php $value = object_input_tag($caprovee, 'getDestiprec', array (
-   'disabled' => true,
-  'size' => 60,
-  'control_name' => 'caprovee[destiprec]',
-)); echo $value ? $value : '&nbsp;' ?></div>
+  <?php $value = get_partial('codtiprec', array('type' => 'edit', 'caprovee' => $caprovee)); echo $value ? $value : '&nbsp;' ?>
+    </div>
 
 <br>
 
-<div id="doblelista"class="form-row">
-  <div class="content<?php if ($sf_request->hasError('caprovee{recargo}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('caprovee{recargo}')): ?>
-    <?php echo form_error('caprovee{recargo}', array('class' => 'form-error-msg')) ?>
+  <?php echo label_for('caprovee[griprecaudos]', __(''), '') ?>
+  <div class="content<?php if ($sf_request->hasError('caprovee{griprecaudos}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('caprovee{griprecaudos}')): ?>
+    <?php echo form_error('caprovee{griprecaudos}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_admin_double_list_criteria($c,$caprovee, 'getRecargo', array (
-  'control_name' => 'caprovee[recargo]',
-  'through_class' => 'Carecpro',
-  'unassociated_label' => 'Recaudos',
-  'associated_label' => 'Recaudos Seleccionados',
-  'style' => 'width:450px'
-)); echo $value ? $value : '&nbsp;' ?>
-
-
+  <?php $value = get_partial('griprecaudos', array('type' => 'edit', 'caprovee' => $caprovee)); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
-</div>
+
+
 </fieldset>
 
 <?php tabPageOpenClose("tp1", "tabPage4", 'Otras cuentas contables (Actividad Secundaria)');?>
@@ -761,7 +812,7 @@ if ($caprovee->getNitpro()=='J')  {
 <br>
 
 <fieldset id="sf_fieldset_none" class=""><legend>
-<strong><?php echo  __('Cuentas de Orden para Mercancias a Consignación :') ?></strong></legend>
+<h2><?php echo  __('Cuentas de Orden para Mercancias a Consignación :') ?></h2></legend>
 <div class="form-row">
 <?php echo label_for('caprovee[codordmercon]', __($labels['caprovee{codordmercon}']), 'class="required" Style="width:120px"') ?>
   <div class="content<?php if ($sf_request->hasError('caprovee{codordmercon}')): ?> form-error<?php endif; ?>">
@@ -786,7 +837,7 @@ if ($caprovee->getNitpro()=='J')  {
 
 <?php $value = object_input_tag($caprovee, 'getDesctacodordmercon', array (
   'disabled' => true,
-  'size' => 80,
+  'size' => 58,
   'control_name' => 'caprovee[desctacodordmercon]',
 )); echo $value ? $value : '&nbsp;' ?>  </div>
 
@@ -815,7 +866,7 @@ if ($caprovee->getNitpro()=='J')  {
 
  <?php $value = object_input_tag($caprovee, 'getDesctacodpermercon', array (
   'disabled' => true,
-  'size' => 80,
+  'size' => 58,
   'control_name' => 'caprovee[desctacodpermercon]',
 )); echo $value ? $value : '&nbsp;' ?>  </div>
 </div>
@@ -824,7 +875,7 @@ if ($caprovee->getNitpro()=='J')  {
 <br>
 
 <fieldset id="sf_fieldset_none" class=""><legend>
-<strong><?php echo  __('Cuentas de Orden para Contratos :') ?></strong></legend>
+<h2><?php echo  __('Cuentas de Orden para Contratos :') ?></h2></legend>
 <div class="form-row">
 <?php echo label_for('caprovee[codordcontra]', __($labels['caprovee{codordcontra}']), 'class="required" Style="width:120px"') ?>
   <div class="content<?php if ($sf_request->hasError('caprovee{codordcontra}')): ?> form-error<?php endif; ?>">
@@ -849,7 +900,7 @@ if ($caprovee->getNitpro()=='J')  {
 
 <?php $value = object_input_tag($caprovee, 'getDesctacodordcontra', array (
   'disabled' => true,
-  'size' => 80,
+  'size' => 58,
   'control_name' => 'caprovee[desctacodordcontra]',
 )); echo $value ? $value : '&nbsp;' ?>  </div>
 
@@ -878,7 +929,7 @@ if ($caprovee->getNitpro()=='J')  {
 
   <?php $value = object_input_tag($caprovee, 'getDesctacodpercontra', array (
   'disabled' => true,
-  'size' => 80,
+  'size' => 58,
   'control_name' => 'caprovee[desctacodpercontra]',
 )); echo $value ? $value : '&nbsp;' ?></div>
 </div>
@@ -910,6 +961,7 @@ if ($caprovee->getNitpro()=='J')  {
   	$('caprovee_codpro').value='###########';
   	$('caprovee_codpro').readOnly=true;
   }
+
 
 function validarExistencia(id)
 {

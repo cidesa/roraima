@@ -359,7 +359,7 @@ class CatalogoWeb extends BaseCatalogoWeb {
 
   public function Cotizaciones() {
     $this->c = new Criteria();
-   // $this->c->add(CaproveePeer::ESTPRO,'A');
+    $this->c->add(CaproveePeer::ESTPRO,'A');
     $this->columnas = array (
       CaproveePeer :: RIFPRO => 'Código',
       CaproveePeer :: NOMPRO => 'Descripción',
@@ -1100,7 +1100,7 @@ class CatalogoWeb extends BaseCatalogoWeb {
   public function Caordcom_Bieregactmued() {
     $this->c = new Criteria;
     $this->c->addJoin(CaordcomPeer :: CODPRO, CaproveePeer :: CODPRO);
- //   $this->c->add(CaproveePeer::ESTPRO,'A');
+    $this->c->add(CaproveePeer::ESTPRO,'A');
     //  $this->c->addAscendingOrderByColumn(CaordcomPeer::ORDCOM);
     $this->columnas = array (
       CaordcomPeer :: ORDCOM => 'Codigo',
@@ -1135,7 +1135,7 @@ class CatalogoWeb extends BaseCatalogoWeb {
 
   public function Caprovee_Bieregactmued() {
     $this->c = new Criteria();
- //   $this->c->add(CaproveePeer::ESTPRO,'A');
+    $this->c->add(CaproveePeer::ESTPRO,'A');
     //   $this->c->addAscendingOrderByColumn(CaproveePeer::CODPRO);
     $this->columnas = array (
       CaproveePeer :: CODPRO => 'Código',
@@ -1523,7 +1523,7 @@ class CatalogoWeb extends BaseCatalogoWeb {
 
   public function Caprovee_Bieregactinmd() {
     $this->c = new Criteria();
- //   $this->c->add(CaproveePeer::ESTPRO,'A');
+    $this->c->add(CaproveePeer::ESTPRO,'A');
     //  $this->c->addAscendingOrderByColumn(CaproveePeer::CODPRO);
     $this->columnas = array (
       CaproveePeer :: CODPRO => 'Código',
@@ -3762,7 +3762,7 @@ public function Tsmovlib_tesmovdeglib2()
   {
 
     $this->c= new Criteria();
-  //  $this->c->add(CaproveePeer::ESTPRO,'A');
+    $this->c->add(CaproveePeer::ESTPRO,'A');
     $this->columnas = array (CaproveePeer::RIFPRO => 'Rif', CaproveePeer::NOMPRO => 'Nombre', CaproveePeer::CODPRO => 'Código');
 
 
@@ -3999,7 +3999,7 @@ public function Tsmovlib_tesmovdeglib2()
 
     public function Liemppar_caprovee() {
     $this->c = new Criteria();
- //   $this->c->add(CaproveePeer::ESTPRO,'A');
+    $this->c->add(CaproveePeer::ESTPRO,'A');
     $this->c->addAscendingOrderByColumn(CaproveePeer :: CODPRO);
 
     $this->columnas = array (
@@ -4012,7 +4012,7 @@ public function Tsmovlib_tesmovdeglib2()
   {
     $this->c = new Criteria();
     $this->c->add(LiempofePeer::CODLIC, $param[0]);
-   // $this->c->add(CaproveePeer::ESTPRO,'A');
+    $this->c->add(CaproveePeer::ESTPRO,'A');
     $this->c->addJoin(CaproveePeer::CODPRO, LiempofePeer::CODPRO);
     $this->columnas = array (
       CaproveePeer :: CODPRO => 'Cod. Empresa',
@@ -4866,7 +4866,7 @@ public function Tsmovlib_tesmovdeglib2()
     if (count($param)==0)
     {
       $this->c = new Criteria();
-   //   $this->c->add(CaproveePeer::ESTPRO,'A');
+      $this->c->add(CaproveePeer::ESTPRO,'A');
 
       $this->columnas = array (
       CaproveePeer::RIFPRO => 'Rif',
@@ -4883,7 +4883,7 @@ public function Tsmovlib_tesmovdeglib2()
            $this->c = new Criteria();
            $this->c->add(CacotizaPeer::REFSOL,$param[0]);
            $this->c->add(CadetcotPeer::PRIORI,1);
- //          $this->c->add(CaproveePeer::ESTPRO,'A');
+           $this->c->add(CaproveePeer::ESTPRO,'A');
            $this->c->addJoin(CacotizaPeer::REFCOT,CadetcotPeer::REFCOT);
            $this->c->addJoin(CaproveePeer::CODPRO,CacotizaPeer::CODPRO);
            $this->c->setDistinct();
@@ -4897,7 +4897,7 @@ public function Tsmovlib_tesmovdeglib2()
       else
       {
         $this->c = new Criteria();
-//		$this->c->add(CaproveePeer::ESTPRO,'A');
+		$this->c->add(CaproveePeer::ESTPRO,'A');
 
           $this->columnas = array (
         	CaproveePeer::RIFPRO => 'Rif',
@@ -5834,7 +5834,7 @@ public function Catdefcatman_Cattramo($params = '') {
 		);
 
 	}
-	
+
 	public function Fordefcatpre_Codcat() {
 		$this->c = new Criteria();
 		// $this->c->addAscendingOrderByColumn(CaramartPeer::RAMART);
@@ -5846,7 +5846,7 @@ public function Catdefcatman_Cattramo($params = '') {
 
 		);
 	}
-	
+
 	public function Fordefparegr_Codparegr() {
 		$this->c = new Criteria();
 		// $this->c->addAscendingOrderByColumn(CaramartPeer::RAMART);

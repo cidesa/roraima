@@ -1,0 +1,49 @@
+opciones:                  # Opciones generales
+  name:                    b
+  eliminar:                true
+  tabla:                   caconpro
+  anchogrid:               790
+  ancho:                   790
+  filas:                   1
+  titulo:                  ' Contactos '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Cedula
+  tipo:                    t
+  nombrecampo:             cedcon
+  esgrabable:              true
+  html:                    [size="15" maxlength="15" ]
+2:       # Columna 2
+  titulo:                  Nombre
+  tipo:                    t
+  nombrecampo:             nomcon
+  esgrabable:              true
+  html:                    [size="25" maxlength="250"]
+
+3:       # Columna 3
+  titulo:                  Direccion
+  tipo:                    t
+  nombrecampo:             dircon
+  esgrabable:              true
+  html:                    [size="20" maxlength="250"]
+
+4:       # Columna 4
+  titulo:                  Telefono
+  tipo:                    t
+  nombrecampo:             telcon
+  esgrabable:              true
+  html:                    [size="13" maxlength="30"]
+
+5:       # Columna 5
+  titulo:                  Email
+  tipo:                    t
+  nombrecampo:             emacon
+  esgrabable:              true
+  html:                    [size="20" maxlength="100"]
+
+6:       # Columna 6
+  titulo:                  Relacion
+  tipo:                    c
+  nombrecampo:             relcon
+  esgrabable:              true
+  html:                    []

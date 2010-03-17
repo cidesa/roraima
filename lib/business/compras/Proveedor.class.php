@@ -23,16 +23,136 @@ class Proveedor
    * @param $caprovee Object Proveedor-Benficiario-Recaudos a guardar
    * @return void
    */
-    public static function salvarAlmregpro($caprovee,$manprocor,$mascararif)
+    public static function salvarAlmregpro($caprovee,$grid,$gridC,$gridR,$gridRE,$manprocor,$mascararif)
     {
       if ($manprocor=='S' && (!$caprovee->getId()))
       {
-        self::BuscarCorrelativoActiv(&$caprovee);
+        $trajo=self::BuscarCorrelativoActiv(&$caprovee);
+      }else $trajo=-1;
+
+      if ($trajo == -1){
+      	self::Grabar_Proveedor($caprovee,$manprocor,$mascararif);
+      	self::Grabar_Beneficiario($caprovee);
+      	self::Grabar_Recaudosproveedor($caprovee,$grid);
+      	self::Grabar_Contactosproveedor($caprovee,$gridC);
+      	self::Grabar_Ramosproveedor($caprovee,$gridR);
+      	self::Grabar_Retencionesproveedor($caprovee,$gridRE);
+      }else{
+      	return 145;
       }
-      self::Grabar_Proveedor($caprovee,$manprocor,$mascararif);
-      self::Grabar_Beneficiario($caprovee);
-      self::Grabar_Recaudosproveedor($caprovee);
+
     }
+
+    public static function BuscarCorrelativo_Proveedor($caprovee)
+    {
+    	if ($caprovee->getCodpro()=='########'){
+    	 if (H::getVerCorrelativo('corpro','cacorrel',&$output)){
+    	 	$codpro = str_pad($output,8,0,STR_PAD_LEFT);
+    	 	$caprovee->setCodpro($codpro);
+
+    	 	if (!(H::getSalvarCorrelativo('corpro','cacorrel','Proveedor',$codpro,&$msg)))
+    	 	{
+    	 		return 145;
+    	 	}
+
+    	 }else{ return 145; }
+
+    	}
+    	 return -1;
+    }
+
+    public static function Grabar_Retencionesproveedor($caprovee,$grid)
+    {
+    try {
+      $x  = $grid[0];
+      $j  = 0;
+
+      while ($j<count($x))
+       {
+       	 $x[$j]->setCodpro($caprovee->getCodpro());
+         $x[$j]->save();
+         $j++;
+     	}
+       $z=$grid[1];
+       $j=0;
+       if (!empty($z[$j]))
+       {
+	       while ($j<count($z))
+	       {
+	         $z[$j]->delete();
+	         $j++;
+	       }
+       }
+  	 return -1;
+
+  	}catch (Exception $ex){
+	    return 0;
+  	}
+
+    }
+
+
+    public static function Grabar_Contactosproveedor($caprovee,$grid)
+    {
+    try {
+      $x  = $grid[0];
+      $j  = 0;
+
+      while ($j<count($x))
+       {
+       	 $x[$j]->setCodpro($caprovee->getCodpro());
+         $x[$j]->save();
+         $j++;
+     	}
+       $z=$grid[1];
+       $j=0;
+       if (!empty($z[$j]))
+       {
+	       while ($j<count($z))
+	       {
+	         $z[$j]->delete();
+	         $j++;
+	       }
+       }
+  	 return -1;
+
+  	}catch (Exception $ex){
+	    return 0;
+  	}
+
+    }
+
+
+    public static function Grabar_Ramosproveedor($caprovee,$grid)
+    {
+    try {
+      $x  = $grid[0];
+      $j  = 0;
+
+      while ($j<count($x))
+       {
+       	 $x[$j]->setCodpro($caprovee->getCodpro());
+         $x[$j]->save();
+         $j++;
+     	}
+       $z=$grid[1];
+       $j=0;
+       if (!empty($z[$j]))
+       {
+	       while ($j<count($z))
+	       {
+	         $z[$j]->delete();
+	         $j++;
+	       }
+       }
+  	 return -1;
+
+  	}catch (Exception $ex){
+	    return 0;
+  	}
+
+    }
+
 
 
 /**
@@ -130,29 +250,35 @@ class Proveedor
    * @param $caprovee Object Recaudos a guardar
    * @return void
    */
-    public static function Grabar_Recaudosproveedor($caprovee){
-      // Update many-to-many for "recargo"
-      $c = new Criteria();
-      $c->add(CarecproPeer::CODPRO, $caprovee->getCodpro());
-      CarecproPeer::doDelete($c);
+    public static function Grabar_Recaudosproveedor($caprovee,$grid)
+    {
+    try {
+      $x  = $grid[0];
+      $j  = 0;
 
-      $ids = $caprovee->getRecargo();
-      if (is_array($ids))
-      {
-        foreach ($ids as $id)
-        {
-          $Carecpro = new Carecpro();
-          $Carecpro->setCodpro($caprovee->getCodpro());
+      while ($j<count($x))
+       {
+       	 $x[$j]->setCodpro($caprovee->getCodpro());
+         $x[$j]->save();
+         $j++;
+     	}
+       $z=$grid[1];
+       $j=0;
+       if (!empty($z[$j]))
+       {
+	       while ($j<count($z))
+	       {
+	         $z[$j]->delete();
+	         $j++;
+	       }
+       }
 
-          $c = new criteria();
-          $c->add(CarecaudPeer::ID,$id);
-          $obj = CarecaudPeer::doSelectOne($c);
+  	 return -1;
 
-          $Carecpro->setCodrec($obj->getCodrec());
-          $Carecpro->save();
-        }
-      }
-      return -1;
+  	}catch (Exception $ex){
+	    return 0;
+  	}
+
     }
 
 
@@ -212,5 +338,6 @@ class Proveedor
      else $codpro="I".substr($numero,1,10);
 
      $caprovee->setCodpro($codpro);
+     return -1;
    }
 }

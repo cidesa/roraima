@@ -15,8 +15,24 @@
  */
 class Carecpro extends BaseCarecpro
 {
+	protected $grupo='';
+
   public function getDesrec()
   {
   return Herramientas::getX('CODREC','Carecaud','Desrec',self::getCodrec());
+  }
+
+  public function getGrupo()
+  {
+  	$c = new Criteria();
+  	//$c->add(CarecaudPeer::CODRED,self::);
+  	$c->add(CarecaudPeer::CODREC,self::getCodrec());
+  	$c->addJoin(CarecaudPeer::CODTIPREC,CatiprecPeer::CODTIPREC);
+  	$reg = CatiprecPeer::doSelectone($c);
+
+  	if ($reg)
+  	{
+  		return $reg->getDestiprec();
+  	}
   }
 }
