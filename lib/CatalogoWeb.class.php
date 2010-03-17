@@ -5206,10 +5206,10 @@ A.CODREDE"
 
   }
 
-public function Cpcompro_PreAjuste($params = array ()) {
+	public function Cpcompro_PreAjuste($params = array ()) {
 		$this->c = new Criteria();
 		$this->c->add(CpcomproPeer :: STACOM, 'A');
-		$this->sql = "feccom <= '".$params[0]."' and (moncom-salaju-salcau) > 0";
+		$this->sql = "feccom <= to_date('".$params[0]."','dd/mm/yyyy') and (moncom-salaju-salcau) > 0";
 		$this->c->add(CpcomproPeer :: FECCOM, $this->sql, Criteria :: CUSTOM);
 		$this->c->addAscendingOrderByColumn(CpcomproPeer :: REFCOM);
 
@@ -5224,7 +5224,7 @@ public function Cpcompro_PreAjuste($params = array ()) {
 	public function Cpcausad_PreAjuste($params = array ()) {
 		$this->c = new Criteria();
 		$this->c->add(CpcausadPeer :: STACAU, 'A');
-		$this->sql = "feccau <= '".$params[0]."' and (moncau-salaju-salpag) > 0";
+		$this->sql = "feccau <= to_date('".$params[0]."','dd/mm/yyyy') and (moncau-salaju-salpag) > 0";
 		$this->c->add(CpcausadPeer :: FECCAU, $this->sql, Criteria :: CUSTOM);
 		$this->c->addAscendingOrderByColumn(CpcausadPeer :: REFCAU);
 
@@ -5239,7 +5239,7 @@ public function Cpcompro_PreAjuste($params = array ()) {
 	public function Cppagos_PreAjuste($params = array ()) {
 		$this->c = new Criteria();
 		$this->c->add(CppagosPeer :: STAPAG, 'A');
-		$this->sql = "fecpag <= '".$params[0]."' and (monpag-salaju) > 0";
+		$this->sql = "fecpag <= to_date('".$params[0]."','dd/mm/yyyy') and (monpag-salaju) > 0";
 		$this->c->add(CppagosPeer :: FECPAG, $this->sql, Criteria :: CUSTOM);
 		$this->c->addAscendingOrderByColumn(CppagosPeer :: REFPAG);
 
@@ -5254,7 +5254,7 @@ public function Cpcompro_PreAjuste($params = array ()) {
 	public function Cpprecom_PreAjuste($params = array ()) {
 		$this->c = new Criteria();
 		$this->c->add(CpprecomPeer :: STAPRC, 'A');
-		$this->sql = "fecprc <= '".$params[0]."' and (monprc-salaju-salcom) > 0";
+		$this->sql = "fecprc <= to_date('".$params[0]."','dd/mm/yyyy') and (monprc-salaju-salcom) > 0";
 		$this->c->add(CpprecomPeer :: FECPRC, $this->sql, Criteria :: CUSTOM);
 		$this->c->addAscendingOrderByColumn(CpprecomPeer :: REFPRC);
 
