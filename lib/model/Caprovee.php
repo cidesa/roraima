@@ -19,6 +19,7 @@ class Caprovee extends BaseCaprovee
   public $codtipesp='';
   public $destipesp='';
   protected $tiedatrel="";
+  protected $oculsave="";
 
    public function __toString()
   {
@@ -162,6 +163,28 @@ class Caprovee extends BaseCaprovee
   public function setTiedatrel()
   {
   	return $this->tiedatrel;
+  }
+
+  public function getOculsave()
+  {
+    $dato="";
+    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('compras',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
+	     if(array_key_exists('almregpro',$varemp['aplicacion']['compras']['modulos'])){
+	       if(array_key_exists('oculsave',$varemp['aplicacion']['compras']['modulos']['almregpro']))
+	       {
+	       	$dato=$varemp['aplicacion']['compras']['modulos']['almregpro']['oculsave'];
+	       }
+         }
+     return $dato;
+  }
+
+  public function setOculsave()
+  {
+  	return $this->oculsave;
   }
 
 }

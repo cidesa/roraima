@@ -27,5 +27,6 @@
 
 <script language="JavaScript" type="text/javascript">
  var tieregrel='<?php echo $caprovee->getTiedatrel(); ?>';
-  if (tieregrel=='S') $('save').hide();
+var ocultar='<?php echo $caprovee->getOculsave(); ?>';
+  if (tieregrel=='S' && ocultar=='S') $('save').hide();
 </script>
