@@ -175,7 +175,7 @@ class Proveedor
             $reg1 = $reg[0];
             $caprovee->setNitpro($reg1->getNitpro());
          }
-    $caprovee->save();
+
     if ($manprocor=='S' && (!$caprovee->getId())) {
     	$q= new Criteria();
     	$dat=CadefartPeer::doSelectOne($q);
@@ -188,6 +188,7 @@ class Proveedor
     	  $dat->save();
     	}
     }
+    $caprovee->save();
 
     }
 
