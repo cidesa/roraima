@@ -13,7 +13,7 @@ abstract class BaseCaproveePeer {
 	const CLASS_DEFAULT = 'lib.model.Caprovee';
 
 	
-	const NUM_COLUMNS = 42;
+	const NUM_COLUMNS = 47;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -143,6 +143,21 @@ abstract class BaseCaproveePeer {
 	const CODTIPEMP = 'caprovee.CODTIPEMP';
 
 	
+	const RAMGEN = 'caprovee.RAMGEN';
+
+	
+	const ESTPRO = 'caprovee.ESTPRO';
+
+	
+	const CODBAN = 'caprovee.CODBAN';
+
+	
+	const NUMCUE = 'caprovee.NUMCUE';
+
+	
+	const CODTIP = 'caprovee.CODTIP';
+
+	
 	const ID = 'caprovee.ID';
 
 	
@@ -151,18 +166,18 @@ abstract class BaseCaproveePeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codpro', 'Nompro', 'Rifpro', 'Nitpro', 'Dirpro', 'Telpro', 'Faxpro', 'Email', 'Limcre', 'Codcta', 'Regmer', 'Fecreg', 'Tomreg', 'Folreg', 'Capsus', 'Cappag', 'Rifrepleg', 'Nomrepleg', 'Dirrepleg', 'Telrepleg', 'Nrocei', 'Codram', 'Fecinscir', 'Numinscir', 'Nacpro', 'Codord', 'Codpercon', 'Codtiprec', 'Codordadi', 'Codperconadi', 'Tipo', 'Fecven', 'Ciudad', 'Codordmercon', 'Codpermercon', 'Codordcontra', 'Codpercontra', 'Temcodpro', 'Temrifpro', 'Codctasec', 'Codtipemp', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (CaproveePeer::CODPRO, CaproveePeer::NOMPRO, CaproveePeer::RIFPRO, CaproveePeer::NITPRO, CaproveePeer::DIRPRO, CaproveePeer::TELPRO, CaproveePeer::FAXPRO, CaproveePeer::EMAIL, CaproveePeer::LIMCRE, CaproveePeer::CODCTA, CaproveePeer::REGMER, CaproveePeer::FECREG, CaproveePeer::TOMREG, CaproveePeer::FOLREG, CaproveePeer::CAPSUS, CaproveePeer::CAPPAG, CaproveePeer::RIFREPLEG, CaproveePeer::NOMREPLEG, CaproveePeer::DIRREPLEG, CaproveePeer::TELREPLEG, CaproveePeer::NROCEI, CaproveePeer::CODRAM, CaproveePeer::FECINSCIR, CaproveePeer::NUMINSCIR, CaproveePeer::NACPRO, CaproveePeer::CODORD, CaproveePeer::CODPERCON, CaproveePeer::CODTIPREC, CaproveePeer::CODORDADI, CaproveePeer::CODPERCONADI, CaproveePeer::TIPO, CaproveePeer::FECVEN, CaproveePeer::CIUDAD, CaproveePeer::CODORDMERCON, CaproveePeer::CODPERMERCON, CaproveePeer::CODORDCONTRA, CaproveePeer::CODPERCONTRA, CaproveePeer::TEMCODPRO, CaproveePeer::TEMRIFPRO, CaproveePeer::CODCTASEC, CaproveePeer::CODTIPEMP, CaproveePeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codpro', 'nompro', 'rifpro', 'nitpro', 'dirpro', 'telpro', 'faxpro', 'email', 'limcre', 'codcta', 'regmer', 'fecreg', 'tomreg', 'folreg', 'capsus', 'cappag', 'rifrepleg', 'nomrepleg', 'dirrepleg', 'telrepleg', 'nrocei', 'codram', 'fecinscir', 'numinscir', 'nacpro', 'codord', 'codpercon', 'codtiprec', 'codordadi', 'codperconadi', 'tipo', 'fecven', 'ciudad', 'codordmercon', 'codpermercon', 'codordcontra', 'codpercontra', 'temcodpro', 'temrifpro', 'codctasec', 'codtipemp', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, )
+		BasePeer::TYPE_PHPNAME => array ('Codpro', 'Nompro', 'Rifpro', 'Nitpro', 'Dirpro', 'Telpro', 'Faxpro', 'Email', 'Limcre', 'Codcta', 'Regmer', 'Fecreg', 'Tomreg', 'Folreg', 'Capsus', 'Cappag', 'Rifrepleg', 'Nomrepleg', 'Dirrepleg', 'Telrepleg', 'Nrocei', 'Codram', 'Fecinscir', 'Numinscir', 'Nacpro', 'Codord', 'Codpercon', 'Codtiprec', 'Codordadi', 'Codperconadi', 'Tipo', 'Fecven', 'Ciudad', 'Codordmercon', 'Codpermercon', 'Codordcontra', 'Codpercontra', 'Temcodpro', 'Temrifpro', 'Codctasec', 'Codtipemp', 'Ramgen', 'Estpro', 'Codban', 'Numcue', 'Codtip', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (CaproveePeer::CODPRO, CaproveePeer::NOMPRO, CaproveePeer::RIFPRO, CaproveePeer::NITPRO, CaproveePeer::DIRPRO, CaproveePeer::TELPRO, CaproveePeer::FAXPRO, CaproveePeer::EMAIL, CaproveePeer::LIMCRE, CaproveePeer::CODCTA, CaproveePeer::REGMER, CaproveePeer::FECREG, CaproveePeer::TOMREG, CaproveePeer::FOLREG, CaproveePeer::CAPSUS, CaproveePeer::CAPPAG, CaproveePeer::RIFREPLEG, CaproveePeer::NOMREPLEG, CaproveePeer::DIRREPLEG, CaproveePeer::TELREPLEG, CaproveePeer::NROCEI, CaproveePeer::CODRAM, CaproveePeer::FECINSCIR, CaproveePeer::NUMINSCIR, CaproveePeer::NACPRO, CaproveePeer::CODORD, CaproveePeer::CODPERCON, CaproveePeer::CODTIPREC, CaproveePeer::CODORDADI, CaproveePeer::CODPERCONADI, CaproveePeer::TIPO, CaproveePeer::FECVEN, CaproveePeer::CIUDAD, CaproveePeer::CODORDMERCON, CaproveePeer::CODPERMERCON, CaproveePeer::CODORDCONTRA, CaproveePeer::CODPERCONTRA, CaproveePeer::TEMCODPRO, CaproveePeer::TEMRIFPRO, CaproveePeer::CODCTASEC, CaproveePeer::CODTIPEMP, CaproveePeer::RAMGEN, CaproveePeer::ESTPRO, CaproveePeer::CODBAN, CaproveePeer::NUMCUE, CaproveePeer::CODTIP, CaproveePeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codpro', 'nompro', 'rifpro', 'nitpro', 'dirpro', 'telpro', 'faxpro', 'email', 'limcre', 'codcta', 'regmer', 'fecreg', 'tomreg', 'folreg', 'capsus', 'cappag', 'rifrepleg', 'nomrepleg', 'dirrepleg', 'telrepleg', 'nrocei', 'codram', 'fecinscir', 'numinscir', 'nacpro', 'codord', 'codpercon', 'codtiprec', 'codordadi', 'codperconadi', 'tipo', 'fecven', 'ciudad', 'codordmercon', 'codpermercon', 'codordcontra', 'codpercontra', 'temcodpro', 'temrifpro', 'codctasec', 'codtipemp', 'ramgen', 'estpro', 'codban', 'numcue', 'codtip', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codpro' => 0, 'Nompro' => 1, 'Rifpro' => 2, 'Nitpro' => 3, 'Dirpro' => 4, 'Telpro' => 5, 'Faxpro' => 6, 'Email' => 7, 'Limcre' => 8, 'Codcta' => 9, 'Regmer' => 10, 'Fecreg' => 11, 'Tomreg' => 12, 'Folreg' => 13, 'Capsus' => 14, 'Cappag' => 15, 'Rifrepleg' => 16, 'Nomrepleg' => 17, 'Dirrepleg' => 18, 'Telrepleg' => 19, 'Nrocei' => 20, 'Codram' => 21, 'Fecinscir' => 22, 'Numinscir' => 23, 'Nacpro' => 24, 'Codord' => 25, 'Codpercon' => 26, 'Codtiprec' => 27, 'Codordadi' => 28, 'Codperconadi' => 29, 'Tipo' => 30, 'Fecven' => 31, 'Ciudad' => 32, 'Codordmercon' => 33, 'Codpermercon' => 34, 'Codordcontra' => 35, 'Codpercontra' => 36, 'Temcodpro' => 37, 'Temrifpro' => 38, 'Codctasec' => 39, 'Codtipemp' => 40, 'Id' => 41, ),
-		BasePeer::TYPE_COLNAME => array (CaproveePeer::CODPRO => 0, CaproveePeer::NOMPRO => 1, CaproveePeer::RIFPRO => 2, CaproveePeer::NITPRO => 3, CaproveePeer::DIRPRO => 4, CaproveePeer::TELPRO => 5, CaproveePeer::FAXPRO => 6, CaproveePeer::EMAIL => 7, CaproveePeer::LIMCRE => 8, CaproveePeer::CODCTA => 9, CaproveePeer::REGMER => 10, CaproveePeer::FECREG => 11, CaproveePeer::TOMREG => 12, CaproveePeer::FOLREG => 13, CaproveePeer::CAPSUS => 14, CaproveePeer::CAPPAG => 15, CaproveePeer::RIFREPLEG => 16, CaproveePeer::NOMREPLEG => 17, CaproveePeer::DIRREPLEG => 18, CaproveePeer::TELREPLEG => 19, CaproveePeer::NROCEI => 20, CaproveePeer::CODRAM => 21, CaproveePeer::FECINSCIR => 22, CaproveePeer::NUMINSCIR => 23, CaproveePeer::NACPRO => 24, CaproveePeer::CODORD => 25, CaproveePeer::CODPERCON => 26, CaproveePeer::CODTIPREC => 27, CaproveePeer::CODORDADI => 28, CaproveePeer::CODPERCONADI => 29, CaproveePeer::TIPO => 30, CaproveePeer::FECVEN => 31, CaproveePeer::CIUDAD => 32, CaproveePeer::CODORDMERCON => 33, CaproveePeer::CODPERMERCON => 34, CaproveePeer::CODORDCONTRA => 35, CaproveePeer::CODPERCONTRA => 36, CaproveePeer::TEMCODPRO => 37, CaproveePeer::TEMRIFPRO => 38, CaproveePeer::CODCTASEC => 39, CaproveePeer::CODTIPEMP => 40, CaproveePeer::ID => 41, ),
-		BasePeer::TYPE_FIELDNAME => array ('codpro' => 0, 'nompro' => 1, 'rifpro' => 2, 'nitpro' => 3, 'dirpro' => 4, 'telpro' => 5, 'faxpro' => 6, 'email' => 7, 'limcre' => 8, 'codcta' => 9, 'regmer' => 10, 'fecreg' => 11, 'tomreg' => 12, 'folreg' => 13, 'capsus' => 14, 'cappag' => 15, 'rifrepleg' => 16, 'nomrepleg' => 17, 'dirrepleg' => 18, 'telrepleg' => 19, 'nrocei' => 20, 'codram' => 21, 'fecinscir' => 22, 'numinscir' => 23, 'nacpro' => 24, 'codord' => 25, 'codpercon' => 26, 'codtiprec' => 27, 'codordadi' => 28, 'codperconadi' => 29, 'tipo' => 30, 'fecven' => 31, 'ciudad' => 32, 'codordmercon' => 33, 'codpermercon' => 34, 'codordcontra' => 35, 'codpercontra' => 36, 'temcodpro' => 37, 'temrifpro' => 38, 'codctasec' => 39, 'codtipemp' => 40, 'id' => 41, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, )
+		BasePeer::TYPE_PHPNAME => array ('Codpro' => 0, 'Nompro' => 1, 'Rifpro' => 2, 'Nitpro' => 3, 'Dirpro' => 4, 'Telpro' => 5, 'Faxpro' => 6, 'Email' => 7, 'Limcre' => 8, 'Codcta' => 9, 'Regmer' => 10, 'Fecreg' => 11, 'Tomreg' => 12, 'Folreg' => 13, 'Capsus' => 14, 'Cappag' => 15, 'Rifrepleg' => 16, 'Nomrepleg' => 17, 'Dirrepleg' => 18, 'Telrepleg' => 19, 'Nrocei' => 20, 'Codram' => 21, 'Fecinscir' => 22, 'Numinscir' => 23, 'Nacpro' => 24, 'Codord' => 25, 'Codpercon' => 26, 'Codtiprec' => 27, 'Codordadi' => 28, 'Codperconadi' => 29, 'Tipo' => 30, 'Fecven' => 31, 'Ciudad' => 32, 'Codordmercon' => 33, 'Codpermercon' => 34, 'Codordcontra' => 35, 'Codpercontra' => 36, 'Temcodpro' => 37, 'Temrifpro' => 38, 'Codctasec' => 39, 'Codtipemp' => 40, 'Ramgen' => 41, 'Estpro' => 42, 'Codban' => 43, 'Numcue' => 44, 'Codtip' => 45, 'Id' => 46, ),
+		BasePeer::TYPE_COLNAME => array (CaproveePeer::CODPRO => 0, CaproveePeer::NOMPRO => 1, CaproveePeer::RIFPRO => 2, CaproveePeer::NITPRO => 3, CaproveePeer::DIRPRO => 4, CaproveePeer::TELPRO => 5, CaproveePeer::FAXPRO => 6, CaproveePeer::EMAIL => 7, CaproveePeer::LIMCRE => 8, CaproveePeer::CODCTA => 9, CaproveePeer::REGMER => 10, CaproveePeer::FECREG => 11, CaproveePeer::TOMREG => 12, CaproveePeer::FOLREG => 13, CaproveePeer::CAPSUS => 14, CaproveePeer::CAPPAG => 15, CaproveePeer::RIFREPLEG => 16, CaproveePeer::NOMREPLEG => 17, CaproveePeer::DIRREPLEG => 18, CaproveePeer::TELREPLEG => 19, CaproveePeer::NROCEI => 20, CaproveePeer::CODRAM => 21, CaproveePeer::FECINSCIR => 22, CaproveePeer::NUMINSCIR => 23, CaproveePeer::NACPRO => 24, CaproveePeer::CODORD => 25, CaproveePeer::CODPERCON => 26, CaproveePeer::CODTIPREC => 27, CaproveePeer::CODORDADI => 28, CaproveePeer::CODPERCONADI => 29, CaproveePeer::TIPO => 30, CaproveePeer::FECVEN => 31, CaproveePeer::CIUDAD => 32, CaproveePeer::CODORDMERCON => 33, CaproveePeer::CODPERMERCON => 34, CaproveePeer::CODORDCONTRA => 35, CaproveePeer::CODPERCONTRA => 36, CaproveePeer::TEMCODPRO => 37, CaproveePeer::TEMRIFPRO => 38, CaproveePeer::CODCTASEC => 39, CaproveePeer::CODTIPEMP => 40, CaproveePeer::RAMGEN => 41, CaproveePeer::ESTPRO => 42, CaproveePeer::CODBAN => 43, CaproveePeer::NUMCUE => 44, CaproveePeer::CODTIP => 45, CaproveePeer::ID => 46, ),
+		BasePeer::TYPE_FIELDNAME => array ('codpro' => 0, 'nompro' => 1, 'rifpro' => 2, 'nitpro' => 3, 'dirpro' => 4, 'telpro' => 5, 'faxpro' => 6, 'email' => 7, 'limcre' => 8, 'codcta' => 9, 'regmer' => 10, 'fecreg' => 11, 'tomreg' => 12, 'folreg' => 13, 'capsus' => 14, 'cappag' => 15, 'rifrepleg' => 16, 'nomrepleg' => 17, 'dirrepleg' => 18, 'telrepleg' => 19, 'nrocei' => 20, 'codram' => 21, 'fecinscir' => 22, 'numinscir' => 23, 'nacpro' => 24, 'codord' => 25, 'codpercon' => 26, 'codtiprec' => 27, 'codordadi' => 28, 'codperconadi' => 29, 'tipo' => 30, 'fecven' => 31, 'ciudad' => 32, 'codordmercon' => 33, 'codpermercon' => 34, 'codordcontra' => 35, 'codpercontra' => 36, 'temcodpro' => 37, 'temrifpro' => 38, 'codctasec' => 39, 'codtipemp' => 40, 'ramgen' => 41, 'estpro' => 42, 'codban' => 43, 'numcue' => 44, 'codtip' => 45, 'id' => 46, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, )
 	);
 
 	
@@ -297,6 +312,16 @@ abstract class BaseCaproveePeer {
 		$criteria->addSelectColumn(CaproveePeer::CODCTASEC);
 
 		$criteria->addSelectColumn(CaproveePeer::CODTIPEMP);
+
+		$criteria->addSelectColumn(CaproveePeer::RAMGEN);
+
+		$criteria->addSelectColumn(CaproveePeer::ESTPRO);
+
+		$criteria->addSelectColumn(CaproveePeer::CODBAN);
+
+		$criteria->addSelectColumn(CaproveePeer::NUMCUE);
+
+		$criteria->addSelectColumn(CaproveePeer::CODTIP);
 
 		$criteria->addSelectColumn(CaproveePeer::ID);
 

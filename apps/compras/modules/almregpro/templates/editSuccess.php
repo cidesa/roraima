@@ -36,7 +36,7 @@ array()) ?></h1>
   salvar=function()
 	{
       f=document.sf_admin_edit_form;
-	  ObjetosSelectMultiple(f.associated_recargo);
+	  //ObjetosSelectMultiple(f.associated_recargo);
 	  f.action=location.pathname;
       f.submit();
 	}

@@ -34,27 +34,27 @@ class CacorrelMapBuilder {
 
 		$tMap->setPrimaryKeyMethodInfo('cacorrel_SEQ');
 
-		$tMap->addColumn('CORCOM', 'Corcom', 'int', CreoleTypes::INTEGER, false, 8);
+		$tMap->addColumn('CORCOM', 'Corcom', 'double', CreoleTypes::NUMERIC, false, 8);
 
-		$tMap->addColumn('CORSER', 'Corser', 'int', CreoleTypes::INTEGER, false, 8);
+		$tMap->addColumn('CORSER', 'Corser', 'double', CreoleTypes::NUMERIC, false, 8);
 
-		$tMap->addColumn('CORSOL', 'Corsol', 'int', CreoleTypes::INTEGER, false, 8);
+		$tMap->addColumn('CORSOL', 'Corsol', 'double', CreoleTypes::NUMERIC, false, 8);
 
-		$tMap->addColumn('CORREQ', 'Correq', 'int', CreoleTypes::INTEGER, false, 8);
+		$tMap->addColumn('CORREQ', 'Correq', 'double', CreoleTypes::NUMERIC, false, 8);
 
-		$tMap->addColumn('CORREC', 'Correc', 'int', CreoleTypes::INTEGER, false, 8);
+		$tMap->addColumn('CORREC', 'Correc', 'double', CreoleTypes::NUMERIC, false, 8);
 
-		$tMap->addColumn('CORDES', 'Cordes', 'int', CreoleTypes::INTEGER, false, 8);
+		$tMap->addColumn('CORDES', 'Cordes', 'double', CreoleTypes::NUMERIC, false, 8);
 
-		$tMap->addColumn('CORCOT', 'Corcot', 'int', CreoleTypes::INTEGER, false, 8);
+		$tMap->addColumn('CORCOT', 'Corcot', 'double', CreoleTypes::NUMERIC, false, 8);
 
-		$tMap->addColumn('CORTRA', 'Cortra', 'int', CreoleTypes::INTEGER, false, 8);
+		$tMap->addColumn('CORTRA', 'Cortra', 'double', CreoleTypes::NUMERIC, false, 8);
 
-		$tMap->addColumn('CORENT', 'Corent', 'int', CreoleTypes::INTEGER, false, 8);
+		$tMap->addColumn('CORENT', 'Corent', 'double', CreoleTypes::NUMERIC, false, 8);
 
-		$tMap->addColumn('CORSAL', 'Corsal', 'int', CreoleTypes::INTEGER, false, 8);
+		$tMap->addColumn('CORSAL', 'Corsal', 'double', CreoleTypes::NUMERIC, false, 8);
 
-		$tMap->addColumn('CORPRO', 'Corpro', 'int', CreoleTypes::INTEGER, false, 8);
+		$tMap->addColumn('CORPRO', 'Corpro', 'double', CreoleTypes::NUMERIC, false, 8);
 
 		$tMap->addColumn('CORPAG', 'Corpag', 'int', CreoleTypes::INTEGER, false, 8);
 

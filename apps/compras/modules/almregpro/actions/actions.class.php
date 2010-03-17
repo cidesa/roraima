@@ -7,7 +7,7 @@
  * @subpackage almregpro
  * @author     $Author$ <desarrollo@cidesa.com.ve>
  * @version SVN: $Id$
- * 
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -15,18 +15,18 @@
 
 class almregproActions extends autoalmregproActions
 {
-    // variable donde se debe colocar el código de error generado en el validateEdit 
+    // variable donde se debe colocar el código de error generado en el validateEdit
   // para que sea procesado por el handleErrorEdit.
 private static $coderror=-1;
 
 
 
-    
-  
-  
+
+
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -37,13 +37,13 @@ private static $coderror=-1;
     $resp2 = -1;
       if($this->getRequest()->getMethod() == sfRequest::POST)
       {
-     $this->caprovee = $this->getCaproveeOrCreate();
+         $this->caprovee = $this->getCaproveeOrCreate();
          $caprovee = $this->getRequestParameter('caprovee');
          $valor = $caprovee['codpro'];
          $campo='codpro';
-       $valor1 = $caprovee['rifpro'];
+         $valor1 = $caprovee['rifpro'];
          $campo1='rifpro';
-       $valor2 = $caprovee['codcta'];
+         $valor2 = $caprovee['codcta'];
          $campo2='codcta';
 
        /**********VALIDACION DE FECHA****************/
@@ -52,14 +52,6 @@ private static $coderror=-1;
 
        if ($fecreg!='' && $fecven!='')
        {
-        /*$fecha1 = split("/",$fecreg);
-        $fecha2 = split("/",$fecven);
-
-        $fecreg = $fecha1[1]."/".$fecha1[0]."/".$fecha1[2];
-        $fecven = $fecha2[1]."/".$fecha2[0]."/".$fecha2[2];*/
-
-      //$rfecreg = strtotime($fecreg);
-      //$rfecven = strtotime($fecven);
 
       $rfecreg = adodb_strtotime($fecreg);
       $rfecven = adodb_strtotime($fecven);
@@ -112,12 +104,31 @@ private static $coderror=-1;
 		}
        //$resp2=Herramientas::ValidarCodigo($valor2,$this->caprovee,$campo2);
 
+	   //$this->configGrid();
+       //$grid = Herramientas::CargarDatosGridv2($this,$this->caprovee->getObjrecaudos());
+       //$resp3 = Herramientas::ValidarGrid($grid);
+       $resp3 = -1;
+
+
+	   //$this->configGrid_Contacto();
+       //$grid = Herramientas::CargarDatosGridv2($this,$this->caprovee->getObjcontactos());
+       //$resp5 = Herramientas::ValidarGrid($grid);
+       $resp5 = -1;
+
      if($resp!=-1){
         $this->coderror = $resp;
         return false;
       }
     else if($resp1!=-1){
         $this->coderror = $resp1;
+        return false;
+      }
+    else if($resp3!=-1){
+        $this->coderror = $resp3;
+        return false;
+      }
+    else if($resp5!=-1){
+        $this->coderror = $resp5;
         return false;
       }
     else if($resp2!=-1){
@@ -134,10 +145,16 @@ private static $coderror=-1;
 
     }
 
-    public function handleErrorEdit()
-      {
-         if(SF_ENVIRONMENT=='dev'){
-      $this->ent='_dev';
+    /**
+   * Función para manejar la captura de errores del negocio, tanto que se
+   * produzcan por algún validator y por un valor false retornado por el validateEdit
+   * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
+   *
+   */
+  public function handleErrorEdit()
+    {
+      if(SF_ENVIRONMENT=='dev'){
+      	$this->ent='_dev';
       }else
       {
         $this->ent='';
@@ -149,6 +166,17 @@ private static $coderror=-1;
 
          try{
          $this->updateCaproveeFromRequest();
+         //$grid = Herramientas::CargarDatosGridv2($this,$this->obj);
+	    //	$this->configGrid();
+	  //  H::printR($this->objR);exit();
+    $gridC = Herramientas::CargarDatosGrid($this,$this->objR);
+//    	$this->configGrid($grid[0],$grid[1]);
+
+         $this->configGrid();
+         $this->configGrid_Contacto();
+         $this->configGrid_Ramos();
+         $this->configGrid_Retenciones();
+
          }
          catch(Exception $ex){}
 
@@ -156,27 +184,28 @@ private static $coderror=-1;
 
          if ($this->caprovee->getId()!= "")
          {
-          $this->c = new Criteria();
-          $this->c->add(CarecaudPeer::CODTIPREC,$this->caprovee->getCodtiprec());
+	          $this->c = new Criteria();
+	          $this->c->add(CarecaudPeer::CODTIPREC,$this->caprovee->getCodtiprec());
 
-          $c = new Criteria();
-          $c->add(Contabc1Peer::CODCTA, $this->caprovee->getCodcta());
-          $rs=Contabc1Peer::doSelectOne($c);
-          if ($rs)
-          {
-            $this->encontrado=true;
-          }
-          else
-          {
-            $this->encontrado=false;
-          }
+	          $c = new Criteria();
+	          $c->add(Contabc1Peer::CODCTA, $this->caprovee->getCodcta());
+	          $rs=Contabc1Peer::doSelectOne($c);
+	          if ($rs)
+	          {
+	            $this->encontrado=true;
+	          }
+	          else
+	          {
+	            $this->encontrado=false;
+	          }
          }
          else
          {
            //esto se hizo asi, porque es un engaño para que cuando se registre un nuevo proveedor, la lista de recaudos salga en blanco
            //POR FAVOR NO MODIFICAR ESTAS LINEAS, GRACIAS.....
-           $this->c = new Criteria();
-           $this->c->add(CarecaudPeer::CODTIPREC,$this->getRequestParameter('caprovee[codtiprec]'));
+           //SE ELIMINO AL AGREGAR LOS RECAUDOS EN UN GRID
+           //$this->c = new Criteria();
+           //$this->c->add(CarecaudPeer::CODTIPREC,$this->getRequestParameter('caprovee[codtiprec]'));
           }
 
       if($this->getRequest()->getMethod() == sfRequest::POST)
@@ -190,6 +219,11 @@ private static $coderror=-1;
      }
 
 
+  /**
+   * Función principal para el manejo de las acciones create y edit
+   * del formulario.
+   *
+   */
   public function executeEdit()
   {
     if(SF_ENVIRONMENT=='dev'){
@@ -198,10 +232,13 @@ private static $coderror=-1;
     {
       $this->ent='';
     }
-
     $this->setVars();
     $this->caprovee = $this->getCaproveeOrCreate();
     $this->encontrado=false;
+    $this->configGrid();
+    $this->configGrid_Contacto();
+    $this->configGrid_Ramos();
+    $this->configGrid_Retenciones();
 
 
   if ($this->caprovee->getId()!= "")
@@ -257,6 +294,11 @@ $this->Bitacora('Guardo');
     }
   }
 
+  /**
+   * Actualiza la informacion que viene de la vista
+   * luego de un get/post en el objeto principal del modelo base del formulario.
+   *
+   */
   protected function updateCaproveeFromRequest()
   {
     $caprovee = $this->getRequestParameter('caprovee');
@@ -310,6 +352,10 @@ $this->Bitacora('Guardo');
     if (isset($caprovee['descta']))
     {
       $this->caprovee->setDescta($caprovee['descta']);
+    }
+    if (isset($caprovee['ramgen']))
+    {
+      $this->caprovee->setRamgen($caprovee['ramgen']);
     }
     if (isset($caprovee['codord']))
     {
@@ -507,11 +553,43 @@ $this->Bitacora('Guardo');
     {
       $this->caprovee->setTelrepleg($caprovee['telrepleg']);
     }
+
+   if (isset($caprovee['estpro']))
+    {
+      $this->caprovee->setEstpro($caprovee['estpro']);
+    }
+
+   if (isset($caprovee['codban']))
+    {
+      $this->caprovee->setCodban($caprovee['codban']);
+    }
+
+   if (isset($caprovee['numcue']))
+    {
+      $this->caprovee->setNumcue($caprovee['numcue']);
+    }
+
+   if (isset($caprovee['codtip']))
+    {
+      $this->caprovee->setCodtip($caprovee['codtip']);
+    }
+
   }
 
+  /**
+   * Función para manejar el salvado del formulario.
+   * cabe destacar que en las versiones nuevas del formulario (cidesaPropel)
+   * llama internamente a la función $this->saving
+   * Esta función saving siempre debe retornar un valor >=-1.
+   * En esta funcción se debe realizar el proceso de guardado de informacion
+   * del negocio en la base de datos. Este proceso debe ser realizado llamado
+   * a funciones de las clases del negocio que se encuentran en lib/bussines
+   * todos los procesos de guardado deben estar en la clases del negocio (lib/bussines/"modulo")
+   *
+   */
   protected function saveCaprovee($caprovee)
   {
-    $this->manprocor="";
+   $this->manprocor="";
     $varemp = $this->getUser()->getAttribute('configemp');
     if ($varemp)
 	if(array_key_exists('aplicacion',$varemp))
@@ -528,33 +606,62 @@ $this->Bitacora('Guardo');
 	       }
   }
 
-    Proveedor::salvarAlmregpro($caprovee,$this->manprocor,$this->mascararif);
+
+  	$grid = Herramientas::CargarDatosGridv2($this,$caprovee->getObjrecaudos());
+  	$gridC = Herramientas::CargarDatosGridv2($this,$caprovee->getObjcontactos());
+  	$gridR = Herramientas::CargarDatosGridv2($this,$caprovee->getObjramos());
+  	$gridRE = Herramientas::CargarDatosGridv2($this,$caprovee->getObjretenciones());
+
+    Proveedor::salvarAlmregpro($caprovee,$grid,$gridC,$gridR,$gridRE,$this->manprocor,$this->mascararif);
   }
 
-public function executeAjax()
+/**
+   * Función para procesar _todas_ las funciones Ajax del formulario
+   * Cada función esta identificada con el valor de la vista "ajax"
+   * el cual traerá el indice de lo que se quiere procesar.
+   *
+   */
+  public function executeAjax()
   {
-   $cajtexmos=$this->getRequestParameter('cajtexmos');
-     $cajtexcom=$this->getRequestParameter('cajtexcom');
+    $cajtexmos=$this->getRequestParameter('cajtexmos');
+    $cajtexcom=$this->getRequestParameter('cajtexcom');
+    $codigo   =$this->getRequestParameter('codigo');
     if ($this->getRequestParameter('ajax')=='1')
       {
         $dato=CaramartPeer::getDesramo($this->getRequestParameter('codigo'));
             $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$cajtexcom.'","6","c"]]';
+
+        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+        return sfView::HEADER_ONLY;
+
       }
       else  if ($this->getRequestParameter('ajax')=='2')
       {
         $dato=ContabbPeer::getDescta($this->getRequestParameter('codigo'));
             $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
             //,["'.$cajtexcom.'","20","c"]
+
+        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+        return sfView::HEADER_ONLY;
+
       }
      else  if ($this->getRequestParameter('ajax')=='3')
       {
         $dato=CadefubiPeer::getDesubicacion($this->getRequestParameter('codigo'));
             $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
+
+        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+        return sfView::HEADER_ONLY;
+
       }
      else  if ($this->getRequestParameter('ajax')=='4')
       {
         $dato=CatiprecPeer::getDestip($this->getRequestParameter('codigo'));
         $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$cajtexcom.'","4","c"]]';
+
+        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+        return sfView::HEADER_ONLY;
+
       }
      else  if ($this->getRequestParameter('ajax')=='5')
       {
@@ -562,6 +669,10 @@ public function executeAjax()
         $aux=CaproveePeer::getCodpro($codigo);
         $dato=$aux;
         $output = '[["codproaux","'.$dato.'",""]]';
+
+        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+        return sfView::HEADER_ONLY;
+
       }
       else  if ($this->getRequestParameter('ajax')=='6')
       {
@@ -569,15 +680,59 @@ public function executeAjax()
         $aux=CaproveePeer::getRifpro($codigo);
         $dato=$aux;
         $output = '[["rifproaux","'.$dato.'",""]]';
+
+        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+        return sfView::HEADER_ONLY;
+
       }
       else  if ($this->getRequestParameter('ajax')=='7')
       {
         $dato=CatipempsncPeer::getDestip($this->getRequestParameter('codigo'));
         $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$cajtexcom.'","4","c"]]';
-      }
 
         $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
         return sfView::HEADER_ONLY;
+
+      }
+	  else  if ($this->getRequestParameter('ajax')=='8')
+      {
+        $destiprec = Herramientas::getX('codtiprec','Catiprec','destiprec',$codigo);
+        $output = '[["'.$cajtexmos.'","'.$destiprec.'",""]]';
+        $this->caprovee = $this->getCaproveeOrCreate();
+        $this->configGrid();
+
+        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+      }
+      else  if ($this->getRequestParameter('ajax')=='9')
+      {
+        $dato=Herramientas::getX('ramart','caramart','nomram',$codigo);
+        $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
+
+        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+        return sfView::HEADER_ONLY;
+
+      }
+      else  if ($this->getRequestParameter('ajax')=='10')
+      {
+        $dato=Herramientas::getX('codrec','carecaud','desrec',$codigo);
+        $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
+
+        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+        return sfView::HEADER_ONLY;
+
+      }
+      else  if ($this->getRequestParameter('ajax')=='11')
+      {
+        $dato=Herramientas::getX('codtip','optipret','destip',$codigo);
+        $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
+
+        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+        return sfView::HEADER_ONLY;
+
+      }
+
+        //$this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+      //  return sfView::HEADER_ONLY;
   }
 
   public function executeAutocomplete()
@@ -668,5 +823,104 @@ public function executeAjax()
 	       }
   }
 
+  /**
+   * Función principal para procesar la eliminación de registros
+   * en el formulario.
+   *
+   */
+ 
+  /**
+   * Esta función permite definir la configuración del grid de datos
+   * que contiene el formulario. Esta función debe ser llamada
+   * en las acciones, create, edit y handleError para recargar en todo momento
+   * los datos del grid.
+   *
+   */
+  public function configGrid()  //Recaudos
+  {
+   $c = new Criteria();
+   $c->add(CarecproPeer::CODPRO,$this->caprovee->getCodpro());
+   $c->addAscendingOrderByColumn(CarecproPeer::CODREC);
+   $per = CarecproPeer::doSelect($c);
+
+   $this->columnas = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/almregpro/'.sfConfig::get('sf_app_module_config_dir_name').'/grid_recaudos');
+   $this->columnas[1][0]->setCatalogo('carecaud','sf_admin_edit_form', array('desrec'=>'2','codrec'=>'1'), 'Almregpro_Carecaud', array( 'param1'=>"'+$('caprovee_codtiprec').value+'" ));
+   $this->columnas[1][0]->setAjax('almregpro',10,2,1);
+
+
+   $this->objRec = $this->columnas[0]->getConfig($per);
+   $this->caprovee->setObjrecaudos($this->objRec);
+
+  }
+
+
+  /**
+   * Esta función permite definir la configuración del grid de datos
+   * que contiene el formulario. Esta función debe ser llamada
+   * en las acciones, create, edit y handleError para recargar en todo momento
+   * los datos del grid.
+   *
+   */
+  public function configGrid_Contacto()
+  {
+   $c = new Criteria();
+   $c->add(CaconproPeer::CODPRO,$this->caprovee->getCodpro());
+   $c->addAscendingOrderByColumn(CaconproPeer::CEDCON);
+   $per = CaconproPeer::doSelect($c);
+
+   $this->columnas = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/almregpro/'.sfConfig::get('sf_app_module_config_dir_name').'/grid_contactos');
+   $this->columnas[1][5]->setCombo(Constantes::Contacto_Proveedor());
+
+   $this->objC = $this->columnas[0]->getConfig($per);
+   $this->caprovee->setObjcontactos($this->objC);
+
+  }
+
+
+  /**
+   * Esta función permite definir la configuración del grid de datos
+   * que contiene el formulario. Esta función debe ser llamada
+   * en las acciones, create, edit y handleError para recargar en todo momento
+   * los datos del grid.
+   *
+   */
+  public function configGrid_Ramos()
+  {
+   $c = new Criteria();
+   $c->add(CaramproPeer::CODPRO,$this->caprovee->getCodpro());
+   $c->addAscendingOrderByColumn(CaramproPeer::RAMART);
+   $per = CaramproPeer::doSelect($c);
+
+   $this->columnas = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/almregpro/'.sfConfig::get('sf_app_module_config_dir_name').'/grid_ramos');
+   $this->columnas[1][0]->setCatalogo('caramart','sf_admin_edit_form', array('nomram'=>'2','ramart'=>'1'), 'Almregpro_Caramart');
+   $this->columnas[1][0]->setAjax('almregpro',9,2,1);
+
+   $this->objR = $this->columnas[0]->getConfig($per);
+   $this->caprovee->setObjramos($this->objR);
+
+  }
+
+  /**
+   * Esta función permite definir la configuración del grid de datos
+   * que contiene el formulario. Esta función debe ser llamada
+   * en las acciones, create, edit y handleError para recargar en todo momento
+   * los datos del grid.
+   *
+   */
+  public function configGrid_Retenciones()
+  {
+   $c = new Criteria();
+   $c->add(CaproretPeer::CODPRO,$this->caprovee->getCodpro());
+   $c->addAscendingOrderByColumn(CaproretPeer::CODRET);
+   $per = CaproretPeer::doSelect($c);
+
+   $this->columnas = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/almregpro/'.sfConfig::get('sf_app_module_config_dir_name').'/grid_retenciones');
+   $this->columnas[1][0]->setCatalogo('optipret','sf_admin_edit_form', array('destip'=>'2','codtip'=>'1'), 'Almregpro_Optipret');
+   $this->columnas[1][0]->setAjax('almregpro',11,2,1);
+
+   $this->objRet = $this->columnas[0]->getConfig($per);
+   $this->caprovee->setObjretenciones($this->objRet);
+
+  }
 
 }
