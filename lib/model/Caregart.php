@@ -18,6 +18,7 @@ class Caregart extends BaseCaregart
   protected $ubicacion = '';
   protected $gencorart="";
   protected $tiedatrel="";
+  protected $oculsave="";
 
 public function getNomram($val=false)
 	{
@@ -81,5 +82,28 @@ public function getNompar()
   public function setTiedatrel()
   {
   	return $this->tiedatrel;
+  }
+
+  public function getOculsave()
+  {
+
+    $dato="";
+    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('compras',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
+	     if(array_key_exists('almregart',$varemp['aplicacion']['compras']['modulos'])){
+	       if(array_key_exists('oculsave',$varemp['aplicacion']['compras']['modulos']['almregart']))
+	       {
+	       	$dato=$varemp['aplicacion']['compras']['modulos']['almregart']['oculsave'];
+	       }
+         }
+     return $dato;
+  }
+
+  public function setOculsave()
+  {
+  	return $this->oculsave;
   }
 }
