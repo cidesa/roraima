@@ -126,7 +126,7 @@ class Caartsol extends BaseCaartsol
   {
   	 $var="";
      if (self::getId()){
-    $var=self::getCodcat() ."-". self::getCodpar();
+    $var=self::getCodpar();
      }
     return $var;
   }
