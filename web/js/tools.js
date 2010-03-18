@@ -1376,3 +1376,10 @@ function convertirMayusculas(id) {
 
       return edad
   }
+  
+  function readonly(id) {	
+	if($('id').value!='')
+		$(id).readOnly=true;
+	else
+		$(id).readOnly=false;
+}

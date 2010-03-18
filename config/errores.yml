@@ -449,7 +449,13 @@
   msj: Debe seleccionar al menos una orden de Pago
 549:
   cod: 549
-  msj: Existe una Cuenta Contable no registrada en contabilidad  
+  msj: Existe una Cuenta Contable no registrada en contabilidad
+550:
+  cod: 550
+  msj: Debe Cargar las Cuentas
+551:
+  cod: 551
+  msj: Los Montos de Debitos y Creditos deben definirse correctamente   
 3:
   cod: 3
   msj: La contraseña es diferente.

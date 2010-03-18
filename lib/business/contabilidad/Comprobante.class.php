@@ -237,6 +237,155 @@ class Comprobante
     }else return false;
   }
 
-}
+	public static function salvarConfinactcom($contabc,$grid){
+		try{
+			$contabcs = $grid[0];
+			$j = 0;
 
+			foreach($contabcs as $ccontabc){
+				if($ccontabc->getCheck()=='1'){
+					$ccontabc->setStacom('A');
+					$ccontabc->save();
+				}
+			}
+			return -1;
+
+		}catch (Exception $ex){
+			exit($ex);
+			return 0;
+		}
+	}
+
+	public static function salvarConfinelicom($contabc,$grid) {
+		try {
+			$contabcs = $grid[0];
+
+			foreach($contabcs as $contabc) {
+				if($contabc->getCheck()=='1') {
+					$c = new Criteria();
+					$c->add(Contabc1Peer::NUMCOM,$contabc->getNumcom());
+					$c->add(Contabc1Peer::FECCOM,$contabc->getFeccom());
+					$reg = Contabc1Peer::doDelete($c);
+
+					$contabc->delete();
+				}
+			}
+			return -1;
+
+		}catch (Exception $ex) {
+			exit($ex);
+			return 0;
+		}
+	}
+
+	public static function salvarConfincom($contabc, $grid) {
+		self::SalvarComprobante($contabc->getNumcom(),$contabc->getReftra(),$contabc->getFeccom(),$contabc->getDescom(),$contabc->getTotdeb(),$contabc->getTotcre(),$grid,'S');
+
+		return -1;
+	}
+
+	public static function verificarEliminarConfincom($contabc) { //cuando vaya a colocar estatus anulado
+		$c = new Criteria();
+		$c->add(OpordpagPeer::NUMCOM,$contabc->getNumcom());
+		$reg = OpordpagPeer::doSelect($c);
+		if ($reg) {
+			return 623;
+		}
+
+		$c = new Criteria();
+		$c->add(TsmovlibPeer::NUMCOM,$contabc->getNumcom());
+		$reg = TsmovlibPeer::doSelect($c);
+		if ($reg) {
+			return 624;
+		}
+
+		return -1;
+	}
+
+	public static function validarEliminarConfincom($contabc){
+		if ($contabc->getStacom()=='N') {
+			return 616;
+		}
+		$c = new Criteria();
+		$c->add(Contaba1Peer::FECDES,$contabc->getFeccom(),Criteria::LESS_EQUAL);
+		$c->add(Contaba1Peer::FECHAS,$contabc->getFeccom(),Criteria::GREATER_EQUAL);
+		$reg = Contaba1Peer::doSelectOne($c);
+
+		if ($reg){
+			if ($reg->getStatus()=='C'){
+				return 621;
+			}else return -1;
+		}else return 622;
+	}
+
+	public static function eliminarConfincom($contabc) {
+
+	}
+	
+	public static function salvarConfincomnew($contabc, $grid) {
+
+		    $obj = ContabcPeer::retrieveByPk($contabc->getId());
+		    
+		    if($obj)
+		    {
+		    	$obj->setFeccom($contabc->getFeccom());
+		    	$obj->setDescom($contabc->getDescom());
+		    	$obj->save();
+		    }else
+		    {
+				$obj = new Contabc();
+				$obj->setNumcom($contabc->getNumcom());
+				$obj->setFeccom($contabc->getFeccom());
+				$obj->setDescom($contabc->getDescom());
+				$obj->setReftra($contabc->getReftra());
+			    if ($contabc->getTotdeb() == $contabc->getTotcre()) {
+			      $obj->setStacom('D');
+			    } else {
+			      $obj->setStacom('E');
+			    }
+			    $obj->setTipcom(null);
+			    $obj->setMoncom($contabc->getTotdeb());
+			    $obj->save();
+		    }
+			self::Salvar_asientosconfincom($contabc->getNumcom(),$contabc->getFeccom(),$contabc->getReftra(),$grid);
+			return -1;
+	}
+	
+	public static function Salvar_asientosconfincom($numcom, $feccom, $reftra, $grid)
+	{
+		
+		$j=0;
+		foreach($grid[0] as $reg)
+		{				
+			$reg->setNumcom($numcom);
+			$reg->setFeccom($feccom);
+			if (($reg->getMondebito() > 0) and ($reg->getMoncredito() <= 0)) {
+	          $cre = 'D';
+	          $monto = $reg->getMondebito();
+	        }
+	        if (($reg->getMoncredito() > 0) and ($reg->getMondebito() <= 0)) {
+	          $cre = 'C';
+	          $monto = $reg->getMoncredito();
+	        }
+	        $reg->setDesasi($reg->getDescta());
+	        $reg->setRefasi($reftra);
+	        $reg->setNumasi($j +1);
+	        $reg->setDebcre($cre);
+	        $reg->setMonasi($monto);
+	        $reg->save();
+	        $j++;	
+		}
+		$z = $grid[1];
+        $j = 0;
+        if (!empty($z[$j])) {
+          while ($j < count($z)) {
+            $z[$j]->delete();
+            $j++;
+          }	
+        }			
+				
+	    
+    }
+
+}
 ?>
