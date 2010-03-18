@@ -26,5 +26,6 @@
 
 <script language="JavaScript" type="text/javascript">
  var tieregrel='<?php echo $caregart->getTiedatrel(); ?>';
-  if (tieregrel=='S') $('save').hide();
+  var oculs='<?php echo $caregart->getOculsave(); ?>';
+  if (tieregrel=='S' && oculs=='S') $('save').hide();
 </script>
