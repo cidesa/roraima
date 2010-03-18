@@ -9,7 +9,7 @@
  * @subpackage lib.model
  * @author     $Author$ <desarrollo@cidesa.com.ve>
  * @version SVN: $Id$
- * 
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -124,7 +124,10 @@ class Caartsol extends BaseCaartsol
 
   public function getCodPre()
   {
-    $var = Herramientas::getX('CODART','Caregart','Codpar',self::getCodart());
+  	 $var="";
+     if (self::getId()){
+    $var=self::getCodcat() ."-". self::getCodpar();
+     }
     return $var;
   }
 
