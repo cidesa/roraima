@@ -1517,14 +1517,14 @@ $this->Bitacora('Guardo');
     $col10->setAlineacionObjeto(Columna::CENTRO);
     $col10->setAlineacionContenido(Columna::CENTRO);
     $col10->setNombreCampo('codgua');
-    $col10->setCatalogo('Npguarde','sf_admin_edit_form',array('codcon' => 10, 'nomgua' => 11),'Npguarde_nphojint');
+    $col10->setCatalogo('Npguarde','sf_admin_edit_form',array('codcon' => 11, 'nomgua' => 12),'Npguarde_nphojint');
     $col10->setHTML('type="text" size="6"');
 
-    $col13 = new Columna('Descripcion');
-    $col13->setTipo(Columna::TEXTO);
-    $col13->setEsGrabable(false);
-    $col13->setNombreCampo('nomgua');
-    $col13->setHTML('type="text" size="25"');
+    $col11 = new Columna('Descripcion');
+    $col11->setTipo(Columna::TEXTO);
+    $col11->setEsGrabable(false);
+    $col11->setNombreCampo('nomgua');
+    $col11->setHTML('type="text" size="25"');
 
     $col12 = new Columna('Valor Guarderia');
     $col12->setTipo(Columna::MONTO);
@@ -1532,11 +1532,11 @@ $this->Bitacora('Guardo');
     $col12->setNombreCampo('valgua');
     $col12->setHTML(' onBlur = "javascript:event.keyCode=13;return entermontootro(event,this.id)" ');
 
-    $col11 = new Columna('Seguro HCM');
-    $col11->setTipo(Columna::CHECK);
-    $col11->setEsGrabable(true);
-    $col11->setNombreCampo('seghcm');
-    $col11->setHTML(' ');
+    $col13 = new Columna('Seguro HCM');
+    $col13->setTipo(Columna::CHECK);
+    $col13->setEsGrabable(true);
+    $col13->setNombreCampo('seghcm');
+    $col13->setHTML(' ');
 
 	$col15 = new Columna('Porcentaje Seguro HCM');
     $col15->setTipo(Columna::MONTO);
@@ -1555,9 +1555,9 @@ $this->Bitacora('Guardo');
     $opciones->addColumna($col8);
     $opciones->addColumna($col9);
     $opciones->addColumna($col10);
-    $opciones->addColumna($col13);
-    $opciones->addColumna($col12);
     $opciones->addColumna($col11);
+    $opciones->addColumna($col12);
+    $opciones->addColumna($col13);
 	$opciones->addColumna($col15);
 
 
