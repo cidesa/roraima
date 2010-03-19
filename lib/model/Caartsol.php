@@ -124,9 +124,15 @@ class Caartsol extends BaseCaartsol
 
   public function getCodPre()
   {
-  	 $var="";
+     $var="";
      if (self::getId()){
-    $var=self::getCodpar();
+     	$dat=Herramientas::getX('CODEMP','Caregart','Asiparrec','001');
+     	if ($dat=='P')
+     	{
+     	  $var=self::getCodpar();
+     	}else {
+          $var=self::getCodcat() ."-". self::getCodpar();
+        }
      }
     return $var;
   }
