@@ -16,7 +16,7 @@
 <div id="sf_admin_container">
 <h1>
 <?php if ($cambiareti!="") {?>
-<?php echo __('Edición de Solicitud de Cotización',
+<?php echo __('Edición de '.$nometifor,
 array()) ?>
 <?php }else {?>
 <?php echo __('Edición de Requisiciones por Departamento.(Solicitud de Egresos)',
@@ -30,7 +30,7 @@ array()) ?>
 
 <div id="sf_admin_content">
 <?php include_partial('almsolegr/edit_messages', array('casolart' => $casolart, 'labels' => $labels)) ?>
-<?php include_partial('almsolegr/edit_form', array('casolart' => $casolart, 'moneda' => $moneda, 'listatipo' => $listatipo, 'mascaraarticulo' => $mascaraarticulo, 'mascaracategoria' => $mascaracategoria, 'mascarapresupuesto' => $mascarapresupuesto, 'loncat' => $loncat, 'obj' => $obj, 'obj2' => $obj2, 'obj3' => $obj3, 'haydespacho' => $haydespacho, 'precompromete' => $precompromete, 'autorizaprecom' => $autorizaprecom, 'tiporec' => $tiporec, 'modifico' => $modifico, 'cotiz' => $cotiz, 'cambiareti' => $cambiareti, 'numsoldesh' => $numsoldesh, 'mansolocor' => $mansolocor, 'bloqfec' => $bloqfec, 'oculeli' => $oculeli, 'labels' => $labels)) ?>
+<?php include_partial('almsolegr/edit_form', array('casolart' => $casolart, 'moneda' => $moneda, 'listatipo' => $listatipo, 'mascaraarticulo' => $mascaraarticulo, 'mascaracategoria' => $mascaracategoria, 'mascarapresupuesto' => $mascarapresupuesto, 'loncat' => $loncat, 'obj' => $obj, 'obj2' => $obj2, 'obj3' => $obj3, 'haydespacho' => $haydespacho, 'precompromete' => $precompromete, 'autorizaprecom' => $autorizaprecom, 'tiporec' => $tiporec, 'modifico' => $modifico, 'cotiz' => $cotiz, 'cambiareti' => $cambiareti, 'numsoldesh' => $numsoldesh, 'mansolocor' => $mansolocor, 'bloqfec' => $bloqfec, 'oculeli' => $oculeli, 'nometifor' => $nometifor, 'labels' => $labels)) ?>
 </div>
 
 <div id="sf_admin_footer">

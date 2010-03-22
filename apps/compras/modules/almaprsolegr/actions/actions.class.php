@@ -45,6 +45,18 @@ class almaprsolegrActions extends autoalmaprsolegrActions
   public function configGrid($reg = array(),$regelim = array())
   {
     $this->regelim = $regelim;
+    $this->nometiact="";
+    $varemp = $this->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('compras',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
+	     if(array_key_exists('almaprsolegr',$varemp['aplicacion']['compras']['modulos'])){
+	       if(array_key_exists('nometiact',$varemp['aplicacion']['compras']['modulos']['almaprsolegr']))
+	       {
+	       	$this->nometiact=$varemp['aplicacion']['compras']['modulos']['almaprsolegr']['nometiact'];
+	       }
+	     }
 
     if(!count($reg)>0)
     {
@@ -62,11 +74,13 @@ class almaprsolegrActions extends autoalmaprsolegrActions
     	$c->addAscendingOrderByColumn(CasolartPeer::FECREQ);
     	$reg = CasolartPeer::doSelect($c);
 
-	    $this->obj = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/almaprsolegr/'.sfConfig::get('sf_app_module_config_dir_name').'/grid_casolart',$reg);
+       $this->columnas = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/almaprsolegr/'.sfConfig::get('sf_app_module_config_dir_name').'/grid_casolart');
+
+	    if ($this->nometiact!="") $this->columnas[1][0]->setTitulo('Aprobación Presidencia');
+
+	    $this->obj =$this->columnas[0]->getConfig($reg);
 
         $this->casolart->setObj($this->obj);
-
-
   }
 
 

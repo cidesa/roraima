@@ -81,6 +81,10 @@ abstract class BaseCacotiza extends BaseObject  implements Persistent {
 
 
 	
+	protected $obscot;
+
+
+	
 	protected $id;
 
 	
@@ -242,6 +246,13 @@ abstract class BaseCacotiza extends BaseObject  implements Persistent {
 
     if($val) return number_format($this->porant,2,',','.');
     else return $this->porant;
+
+  }
+  
+  public function getObscot()
+  {
+
+    return trim($this->obscot);
 
   }
   
@@ -452,6 +463,16 @@ abstract class BaseCacotiza extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setObscot($v)
+	{
+
+    if ($this->obscot !== $v) {
+        $this->obscot = $v;
+        $this->modifiedColumns[] = CacotizaPeer::OBSCOT;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -502,7 +523,9 @@ abstract class BaseCacotiza extends BaseObject  implements Persistent {
 
       $this->porant = $rs->getFloat($startcol + 17);
 
-      $this->id = $rs->getInt($startcol + 18);
+      $this->obscot = $rs->getString($startcol + 18);
+
+      $this->id = $rs->getInt($startcol + 19);
 
       $this->resetModified();
 
@@ -510,7 +533,7 @@ abstract class BaseCacotiza extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 19; 
+            return $startcol + 20; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Cacotiza object", $e);
     }
@@ -742,6 +765,9 @@ abstract class BaseCacotiza extends BaseObject  implements Persistent {
 				return $this->getPorant();
 				break;
 			case 18:
+				return $this->getObscot();
+				break;
+			case 19:
 				return $this->getId();
 				break;
 			default:
@@ -772,7 +798,8 @@ abstract class BaseCacotiza extends BaseObject  implements Persistent {
 			$keys[15] => $this->getCorrel(),
 			$keys[16] => $this->getPorvan(),
 			$keys[17] => $this->getPorant(),
-			$keys[18] => $this->getId(),
+			$keys[18] => $this->getObscot(),
+			$keys[19] => $this->getId(),
 		);
 		return $result;
 	}
@@ -843,6 +870,9 @@ abstract class BaseCacotiza extends BaseObject  implements Persistent {
 				$this->setPorant($value);
 				break;
 			case 18:
+				$this->setObscot($value);
+				break;
+			case 19:
 				$this->setId($value);
 				break;
 		} 	}
@@ -870,7 +900,8 @@ abstract class BaseCacotiza extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[15], $arr)) $this->setCorrel($arr[$keys[15]]);
 		if (array_key_exists($keys[16], $arr)) $this->setPorvan($arr[$keys[16]]);
 		if (array_key_exists($keys[17], $arr)) $this->setPorant($arr[$keys[17]]);
-		if (array_key_exists($keys[18], $arr)) $this->setId($arr[$keys[18]]);
+		if (array_key_exists($keys[18], $arr)) $this->setObscot($arr[$keys[18]]);
+		if (array_key_exists($keys[19], $arr)) $this->setId($arr[$keys[19]]);
 	}
 
 	
@@ -896,6 +927,7 @@ abstract class BaseCacotiza extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CacotizaPeer::CORREL)) $criteria->add(CacotizaPeer::CORREL, $this->correl);
 		if ($this->isColumnModified(CacotizaPeer::PORVAN)) $criteria->add(CacotizaPeer::PORVAN, $this->porvan);
 		if ($this->isColumnModified(CacotizaPeer::PORANT)) $criteria->add(CacotizaPeer::PORANT, $this->porant);
+		if ($this->isColumnModified(CacotizaPeer::OBSCOT)) $criteria->add(CacotizaPeer::OBSCOT, $this->obscot);
 		if ($this->isColumnModified(CacotizaPeer::ID)) $criteria->add(CacotizaPeer::ID, $this->id);
 
 		return $criteria;
@@ -962,6 +994,8 @@ abstract class BaseCacotiza extends BaseObject  implements Persistent {
 		$copyObj->setPorvan($this->porvan);
 
 		$copyObj->setPorant($this->porant);
+
+		$copyObj->setObscot($this->obscot);
 
 
 		$copyObj->setNew(true);

@@ -1559,7 +1559,7 @@ class Orden_compra
           $caordcom_mod->setNotord($caordcom->getNotord());
           $caordcom_mod->save();
 
-
+        if ($caordcom_mod->getCompro()=='N') {
         // campos
         $total_detalle_orden=$arreglo_campos[0];
         $total_descuento=$arreglo_campos[1];
@@ -1575,6 +1575,7 @@ class Orden_compra
         self::Grabar_grid_entregas($caordcom,$grid_detalle_entrega_objetos);//grabo en el grid entrega
         self::grabarDistribucionRgo($caordcom,$grid_detalle_orden_arreglos);
         self::grabarRecargo($caordcom);
+        }
 
       }
       return false;
@@ -2234,6 +2235,21 @@ class Orden_compra
   {
 
   $arreglo_grid=$grid_detalle_orden_arreglos;
+      $t= new Criteria();
+      $t->add(CpdoccomPeer::TIPCOM,$caordcom->getDoccom());
+      $reg= CpdoccomPeer::doSelectOne($t);
+      if ($reg)
+      {
+      	$refprc=$reg->getRefprc();
+      	$afeprc=$reg->getAfeprc();
+      	$afecom=$reg->getAfecom();
+      	$afedis=$reg->getAfedis();
+      }else {
+      	$refprc="";
+      	$afeprc="";
+      	$afecom="";
+      	$afedis="";
+      }
 
   $j=0;
   while ($j<count($arreglo_grid))
@@ -2247,13 +2263,14 @@ class Orden_compra
     //si la orden de compra refiere a Solicitud de egreso, los recargos son iguales a los de la solicitud,
     //de lo contrario si es orden de compra directa los recargos son los que el usuario haya introducido
     {
-    $tipdoc=Compras::ObtenerTipoDocumentoPrecompromiso();
-    $c= new Criteria();
-    $c->add(CadisrgoPeer::REQART,$caordcom->getRefsol());
-    $c->add(CadisrgoPeer::CODART,$arreglo_grid[$j]["codart"]);
-    $c->add(CadisrgoPeer::CODCAT,$arreglo_grid[$j]["codcat"]);
-    $c->add(CadisrgoPeer::TIPDOC,$tipdoc);
-    $recargos= CadisrgoPeer::doSelect($c);
+    	if ($refprc!='N' && $afeprc!='S' && $afecom!='S' && $afedis!='R') {
+	    $tipdoc=Compras::ObtenerTipoDocumentoPrecompromiso();
+	    $c= new Criteria();
+	    $c->add(CadisrgoPeer::REQART,$caordcom->getRefsol());
+	    $c->add(CadisrgoPeer::CODART,$arreglo_grid[$j]["codart"]);
+	    $c->add(CadisrgoPeer::CODCAT,$arreglo_grid[$j]["codcat"]);
+	    $c->add(CadisrgoPeer::TIPDOC,$tipdoc);
+	    $recargos= CadisrgoPeer::doSelect($c);
          foreach ($recargos as $cadisrgo_ordcom)
          {
            $distribucion = new Cadisrgo();
@@ -2265,6 +2282,70 @@ class Orden_compra
            $distribucion->setMonrgo($cadisrgo_ordcom->getMonrgo());
            $distribucion->setTipdoc($caordcom->getDoccom());
            $distribucion->save();
+         }
+    	}
+
+         if ($refprc=='N' && $afeprc=='S' && $afecom=='S' && $afedis=='R')
+         {
+         	 if ($arreglo_grid[$j]["datosrecargo"]!='')
+		     {
+		    $cadenarec=split('!',$arreglo_grid[$j]["datosrecargo"]);
+		        $r=0;
+		        while ($r<(count($cadenarec)-1))
+		        {
+		          $aux=$cadenarec[$r];
+		          $aux2=split('_',$aux);
+		          if ($aux2[0]!="" && Herramientas::toFloat($aux2[4])>0)
+		          {
+		              $c= new Criteria();
+		        $c->add(CadisrgoPeer::REQART,$caordcom->getOrdcom());
+		        $c->add(CadisrgoPeer::CODART,$arreglo_grid[$j]["codart"]);
+		        $c->add(CadisrgoPeer::CODCAT,$arreglo_grid[$j]["codcat"]);
+		        $c->add(CadisrgoPeer::CODRGO,$aux2[0]);
+		        $c->add(CadisrgoPeer::TIPDOC,$caordcom->getDoccom());
+		        CadisrgoPeer::doDelete($c);
+
+		            $distribucion = new Cadisrgo();
+		          $distribucion->setReqart($caordcom->getOrdcom());
+		          $distribucion->setCodart(str_replace("'","",$arreglo_grid[$j]["codart"]));
+		          $distribucion->setCodcat(str_replace("'","",$arreglo_grid[$j]["codcat"]));
+		          $distribucion->setCodrgo($aux2[0]);
+
+		          $c = new Criteria();
+		          $tiporec = CadefartPeer::doSelectOne($c);
+		          if ($tiporec)
+		          {
+		          if ($tiporec->getAsiparrec()!='C')
+		          {
+		            $c = new Criteria();
+		            $c->add(CarecargPeer::CODRGO,$aux2[0]);
+		            $presupuesto = CarecargPeer::doSelectOne($c);
+		            if ($presupuesto)
+		            {
+		            if ($tiporec->getAsiparrec()=='P')
+		            {
+		            $distribucion->setCodpre($presupuesto->getCodpre());
+		            }
+		            else
+		            {
+		            $codigo= $unidad.'-'.$presupuesto->getCodpre();
+		            $distribucion->setCodpre($codigo);
+		            }
+		            }
+		          }
+		          else
+		          {
+		            $distribucion->setCodpre($codpresu);
+		          }
+		          }
+		          $montorecargo= Herramientas::toFloat($aux2[4]);
+		          $distribucion->setMonrgo($montorecargo);
+		          $distribucion->setTipdoc($caordcom->getDoccom());
+		          $distribucion->save();
+		          }
+		          $r++;
+		        }//while
+		     }//if ($x[$j]->getDatosrecargo()!="")
          }
     }
     else//if ($caordcom->getRefsol()!="")

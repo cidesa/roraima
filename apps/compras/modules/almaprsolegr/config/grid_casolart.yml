@@ -3,7 +3,7 @@ opciones:                  # Opciones generales
   eliminar:                false
   tabla:                   casolart
   anchogrid:               820
-  ancho:                   780
+  ancho:                   820
   filas:                   0
   titulo:                  ' '
   htmltotalfilas:          ' '
@@ -37,4 +37,22 @@ opciones:                  # Opciones generales
   nombrecampo:             monreq
   html:                    [size="10" ]
   esgrabable:              false
-
+6:       # Columna 6
+  titulo:                  Analista de Compras
+  tipo:                    t
+  nombrecampo:             codemp
+  html:                    [size="15" readonly=true]
+  esgrabable:              true
+  catalogo:                [nphojint, sf_admin_edit_form, {Codemp: 6, Nomemp: 7}, Nphojint_Almordcom ]
+7:       # Columna 7
+  titulo:                  Nombre
+  tipo:                    t
+  nombrecampo:             nomemp
+  html:                    [size="25" readonly=true]
+  esgrabable:              true
+8:       # Columna 8
+  titulo:                  Observación
+  tipo:                    a
+  nombrecampo:             obsreq
+  html:                    [size="40x2" ]
+  esgrabable:              true

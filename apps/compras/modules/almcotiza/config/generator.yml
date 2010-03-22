@@ -27,6 +27,7 @@ generator:
       monrec:    { name: Monto Recargo}
       porvan:    { name: % del VAN de las Ofertas}
       porant:    { name: % del Anticipo}
+      obscot:    { name: Observación}
     list:
       title:          Cotizaciones
       display:        [=refcot, feccot, descot, refsol]
@@ -41,7 +42,7 @@ generator:
 
     edit:
       title:          Edición de Cotizaciones
-      display:        [refcot, feccot, tipmon, valmon, codpro, rifpro, nompro, descot, refsol, desreq, refpro, moncot, conpag, desconpag, forent, desforent, mondes, monrec, tipo, porvan, porant]
+      display:        [refcot, feccot, tipmon, valmon, codpro, rifpro, nompro, descot, refsol, desreq, refpro, moncot, conpag, desconpag, forent, desforent, mondes, monrec, tipo, porvan, porant, obscot]
       actions:
         _list:        ~
         _save:        ~

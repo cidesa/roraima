@@ -709,6 +709,7 @@ class almordcomActions extends autoalmordcomActions
   public function configGrid($ordcom='',$referencia='',$tipo='')
   {
     $this->getUser()->getAttributeHolder()->remove('referencia');
+    $refcom="";
     $c = new Criteria();
     if ($referencia==0)
     {
@@ -725,9 +726,12 @@ class almordcomActions extends autoalmordcomActions
       $campo_col14='Unimed';//tabla Caartord
       $campo_col15='Codpre';//tabla Caartord
       $this->getUser()->setAttribute('referencia', '0');
-      if (Herramientas::getX_vacio('ordcom','Caartord','ordcom',$ordcom)!='')
-        //$filas_arreglo=0;
-        $filas_arreglo=150;
+      if (Herramientas::getX_vacio('ordcom','Caartord','ordcom',$ordcom)!=''){
+        $refcom=H::getX_vacio('REFCOM','Cpcompro','REFCOM',$ordcom);
+        if ($refcom!="")
+        $filas_arreglo=0;
+        else $filas_arreglo=150;
+        }
       else
         $filas_arreglo=150;
     }
@@ -2266,9 +2270,10 @@ class almordcomActions extends autoalmordcomActions
           	$codigopro=$result[0]["codpro"];
             $despro   = Herramientas::getX('codpro','Caprovee','nompro',$result[0]["codpro"]);
             $tippro   = Herramientas::getX('codpro','Caprovee','tipo',$result[0]["codpro"]);
-            $provee=',["caordcom_rifpro","'.$result[0]["codpro"].'",""],["caordcom_nompro","'.$despro.'",""],["caordcom_tipopro","'.$tippro.'",""]';
-          }else { $provee=''; $codigopro=""; $tippro="";}
-        }else { $provee=''; $codigopro=""; $tippro="";}
+            $rifpro   = Herramientas::getX('codpro','Caprovee','rifpro',$result[0]["codpro"]);
+            $provee=',["caordcom_rifpro","'.$rifpro.'",""],["caordcom_nompro","'.$despro.'",""],["caordcom_tipopro","'.$tippro.'",""],["caordcom_codigoproveedor","'.$codigopro.'",""]';
+          }else { $provee=''; $codigopro=""; $tippro=""; $rifpro="";}
+        }else { $provee=''; $codigopro=""; $tippro=""; $rifpro="";}
 
           $dato   = Herramientas::getX('reqart','Casolart','monreq',trim($this->getRequestParameter('ordcom')));
           $desreq = Herramientas::getX('reqart','Casolart','desreq',trim($this->getRequestParameter('ordcom')));
@@ -2277,11 +2282,12 @@ class almordcomActions extends autoalmordcomActions
           $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$filas_orden.'","'.$numero_filas.'",""],["'.$cajita.'","'.$validacion_fec_egresos.'",""],["caordcom_desord","'.$desreq.'",""],["caordcom_tipfin","'.$filas[0]->getTipfin().'",""],["caordcom_nomfin","'.$desfin.'",""]'.$provee.']';
           $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
           if ($codigopro!=""){
-          $tipopro=H::getX('RIFPRO','Caprovee','Tipo',$codigopro);
+          $tipopro=H::getX('CODPRO','Caprovee','Tipo',$codigopro);
           $this->configGrid($this->getRequestParameter('ordcom'),$this->getRequestParameter('referencia'),$tipopro);
           }else{
+          	$tipopro=H::getX('RIFPRO','Caprovee','Tipo',$this->getRequestParameter('rifpro'));
           	$this->setVars();
-          	$this->configGrid($this->getRequestParameter('ordcom'),$this->getRequestParameter('referencia'),'');
+          	$this->configGrid($this->getRequestParameter('ordcom'),$this->getRequestParameter('referencia'),$tipopro);
           }
       }
     }else{
@@ -2706,13 +2712,33 @@ class almordcomActions extends autoalmordcomActions
       $nuevo=$this->getRequestParameter('nuevo');
       $refsol=$this->getRequestParameter('refsol');
       $ordcom=$this->getRequestParameter('ordcom');
+      $doccom=$this->getRequestParameter('tipcom');
+      $t= new Criteria();
+      $t->add(CpdoccomPeer::TIPCOM,$doccom);
+      $reg= CpdoccomPeer::doSelectOne($t);
+      if ($reg)
+      {
+      	$refprc=$reg->getRefprc();
+      	$afeprc=$reg->getAfeprc();
+      	$afecom=$reg->getAfecom();
+      	$afedis=$reg->getAfedis();
+      }else {
+      	$refprc="";
+      	$afeprc="";
+      	$afecom="";
+      	$afedis="";
+      }
       $this->setVars();
 
 
       if ($nuevo=='S')
       {
-        if ($refsol!="")
-              $this->configGridRecargoConsulta($refsol,$articulo,$codunidad);
+        if ($refsol!=""){
+	    	if ($refprc=='N' && $afeprc=='S' && $afecom=='S' && $afedis=='R')
+	    	$this->configGridRecargo($ordcom,$articulo,$codunidad);
+	    	else
+	          $this->configGridRecargoConsulta($refsol,$articulo,$codunidad);
+        }
         else
             $this->configGridRecargo($ordcom,$articulo,$codunidad);
       }

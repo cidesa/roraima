@@ -336,6 +336,8 @@ class almreqActions extends autoalmreqActions
     $this->mansolocor="";
     $this->bloqfec="";
     $this->oculeli="";
+    $this->cambiaretiuni="";
+    $this->nometiuni="";
 	if ($varemp)
 	if(array_key_exists('aplicacion',$varemp))
 	 if(array_key_exists('compras',$varemp['aplicacion']))
@@ -345,17 +347,25 @@ class almreqActions extends autoalmreqActions
 	       {
 	       	$this->numdesh=$varemp['aplicacion']['compras']['modulos']['almreq']['reqartdesh'];
 	       }
-           if(array_key_exists('mansolocor',$varemp['aplicacion']['compras']['modulos']['almcotiza']))
+           if(array_key_exists('mansolocor',$varemp['aplicacion']['compras']['modulos']['almreq']))
 	       {
-	       	$this->mansolocor=$varemp['aplicacion']['compras']['modulos']['almcotiza']['mansolocor'];
+	       	$this->mansolocor=$varemp['aplicacion']['compras']['modulos']['almreq']['mansolocor'];
 	       }
-	       if(array_key_exists('bloqfec',$varemp['aplicacion']['compras']['modulos']['almcotiza']))
+	       if(array_key_exists('bloqfec',$varemp['aplicacion']['compras']['modulos']['almreq']))
 	       {
-	       	$this->bloqfec=$varemp['aplicacion']['compras']['modulos']['almcotiza']['bloqfec'];
+	       	$this->bloqfec=$varemp['aplicacion']['compras']['modulos']['almreq']['bloqfec'];
 	       }
-	       if(array_key_exists('oculeli',$varemp['aplicacion']['compras']['modulos']['almcotiza']))
+	       if(array_key_exists('oculeli',$varemp['aplicacion']['compras']['modulos']['almreq']))
 	       {
-	       	$this->oculeli=$varemp['aplicacion']['compras']['modulos']['almcotiza']['oculeli'];
+	       	$this->oculeli=$varemp['aplicacion']['compras']['modulos']['almreq']['oculeli'];
+	       }
+	       if(array_key_exists('cambiaretiuni',$varemp['aplicacion']['compras']['modulos']['almreq']))
+	       {
+	       	$this->cambiaretiuni=$varemp['aplicacion']['compras']['modulos']['almreq']['cambiaretiuni'];
+	       }
+	       if(array_key_exists('nometiuni',$varemp['aplicacion']['compras']['modulos']['almreq']))
+	       {
+	       	$this->nometiuni=$varemp['aplicacion']['compras']['modulos']['almreq']['nometiuni'];
 	       }
 	     }
   }
@@ -441,4 +451,45 @@ class almreqActions extends autoalmreqActions
      return sfView::HEADER_ONLY;
 
    }
+
+  protected function getLabels()
+  {
+    $this->cambiaretiuni="";
+    $this->nometiuni="";
+    $varemp = $this->getUser()->getAttribute('configemp');
+	if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('compras',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
+	     if(array_key_exists('almreq',$varemp['aplicacion']['compras']['modulos'])){
+	       if(array_key_exists('cambiaretiuni',$varemp['aplicacion']['compras']['modulos']['almreq']))
+	       {
+	       	$this->cambiaretiuni=$varemp['aplicacion']['compras']['modulos']['almreq']['cambiaretiuni'];
+	       }
+	       if(array_key_exists('nometiuni',$varemp['aplicacion']['compras']['modulos']['almreq']))
+	       {
+	       	$this->nometiuni=$varemp['aplicacion']['compras']['modulos']['almreq']['nometiuni'];
+	       }
+	     }
+
+  	if ($this->cambiaretiuni=='S'){
+    return array(
+      'careqart{reqart}' => 'Número:',
+      'careqart{fecreq}' => 'Fecha:',
+      'careqart{desreq}' => 'Descripción:',
+      'careqart{monreq}' => 'Monto:',
+      'careqart{codcatreq}' => $this->nometiuni,
+      'careqart{desubi}' => 'Descripción Unidad:',
+    );
+  	}else{
+  	return array(
+      'careqart{reqart}' => 'Número:',
+      'careqart{fecreq}' => 'Fecha:',
+      'careqart{desreq}' => 'Descripción:',
+      'careqart{monreq}' => 'Monto:',
+      'careqart{codcatreq}' => 'Unidad:',
+      'careqart{desubi}' => 'Descripción Unidad:',
+    );
+  	}
+  }
 }

@@ -651,6 +651,7 @@ class almsolegrActions extends autoalmsolegrActions
        $loncat=strlen($this->mascaracategoria);
        $mascarapresupuesto=$this->mascarapresupuesto;
        $lonpre=strlen($this->mascarapresupuesto);
+       $precom=$this->precompromete;
 
        $opciones = new OpcionesGrid();
        $opciones->setEliminar(true);
@@ -666,6 +667,7 @@ class almsolegrActions extends autoalmsolegrActions
        $col1->setNombreCampo('check');
        $col1->setEsGrabable(true);
        $col1->setHTML(' ');
+       if ($precom=='') $col1->setOculta(true);
        $col1->setJScript('onClick="totalmarcadas(this.id)"');
 
        $obj= array('codart' => 2, 'desart' => 3, 'unimed' => 4, 'cosult' => 9, 'codpar' => 13);
@@ -739,6 +741,7 @@ class almsolegrActions extends autoalmsolegrActions
        $col9->setNombreCampo('costo');
        $col9->setHTML('type="text" size="10"');
        $col9->setJScript('onKeypress="Total(event,this.id); recalcularecargos(event,this.id);"');
+       if ($precom=='') $col9->setOculta(true);
 
        $col10 = clone $col7;
        $col10->setTitulo('Descuento');
@@ -750,6 +753,7 @@ class almsolegrActions extends autoalmsolegrActions
        $col11->setTitulo('Recargo');
        $col11->setNombreCampo('monrgo');
        $col11->setHTML('type="text" size="10" readonly=true');
+       if ($precom=='') $col11->setOculta(true);
 
        $col12 = clone $col11;
        $col12->setTitulo('Total');
@@ -784,6 +788,7 @@ class almsolegrActions extends autoalmsolegrActions
 	   $col16->setNombreCampo('anadir');
 	   $col16->setHTML('type="text" size="1" style="border:none" class="imagenalmacen"');
 	   $col16->setJScript('onClick="mostrargridrecargos(this.id)"');
+	   if ($precom=='') $col16->setOculta(true);
 
 
 	  $col17 = new Columna('cadena_datos_recargo');
@@ -1245,6 +1250,7 @@ class almsolegrActions extends autoalmsolegrActions
     $this->mansolocor="";
     $this->bloqfec="";
     $this->oculeli="";
+    $this->nometifor="";
     $varemp = $this->getUser()->getAttribute('configemp');
     if ($varemp)
 	if(array_key_exists('aplicacion',$varemp))
@@ -1271,27 +1277,43 @@ class almsolegrActions extends autoalmsolegrActions
 	       {
 	       	$this->oculeli=$varemp['aplicacion']['compras']['modulos']['almsolegr']['oculeli'];
 	       }
+	       if(array_key_exists('nometifor',$varemp['aplicacion']['compras']['modulos']['almsolegr']))
+	       {
+	       	$this->nometifor=$varemp['aplicacion']['compras']['modulos']['almsolegr']['nometifor'];
+	       }
          }
   }
 
   public function executeGenerarcompromiso()
   {
      $this->casolart = $this->getCasolartOrCreate();
-     if (SolicituddeEgresos::generaPrecompromiso($this->casolart,$this->casolart->getReqart(),&$msj))
-     {
-       SolicituddeEgresos::generarImputacionesPrecompromiso($this->casolart->getReqart());
-       $totaimp=SolicituddeEgresos::totalImputacion($this->casolart->getReqart());
-        if (H::convnume($this->casolart->getMonreq())!=$totaimp)
-        {
-           $this->msj="El Monto de la Imputaciones Generadas no es igual al de la Solicitud, Por favor verificar esta solicitud";
-           $this->id=$this->casolart->getId();
-        }else{
-	       $this->msj="Se genero el Precompromiso satisfactoriamente";
-	       $this->id=$this->casolart->getId();
-        }
+      SolicituddeEgresos::verificarDispGenComp($this->casolart,&$msj1,&$cod1,&$msj2,&$cod2,&$cod3);
+      if ($msj1!="")
+      {
+      	if ($msj2!="") {
+	     if (SolicituddeEgresos::generaPrecompromiso($this->casolart,$this->casolart->getReqart(),&$msj))
+	     {
+	       SolicituddeEgresos::generarImputacionesPrecompromiso($this->casolart->getReqart());
+	       $totaimp=SolicituddeEgresos::totalImputacion($this->casolart->getReqart());
+	        if (H::convnume($this->casolart->getMonreq())!=$totaimp)
+	        {
+	           $this->msj="El Monto de la Imputaciones Generadas no es igual al de la Solicitud, Por favor verificar esta solicitud";
+	           $this->id=$this->casolart->getId();
+	        }else{
+		       $this->msj="Se genero el Precompromiso satisfactoriamente";
+		       $this->id=$this->casolart->getId();
+	        }
 
-     }else {$this->msj="No se pudo grabar el compromiso, ya que existe la referencia en la base de datos";
-     $this->id=$this->casolart->getId();}
+	     }else {$this->msj="No se pudo grabar el compromiso, ya que existe la referencia en la base de datos";
+	     $this->id=$this->casolart->getId();}
+      	}else {
+      		$this->msj=" No Existe Disponibilidad de Dinero para efectuar la Operación. Recargo ".$cod2;
+            $this->id=$this->casolart->getId();
+      	}
+      }else {
+      	$this->msj=" No Existe Disponibilidad de Dinero para efectuar la Operación. Articulo ".$cod1." de Codigo Presupuestario". $cod3;
+        $this->id=$this->casolart->getId();
+      }
    }
 
    public function executeAnular()
@@ -1414,11 +1436,16 @@ class almsolegrActions extends autoalmsolegrActions
 	if(array_key_exists('aplicacion',$varemp))
 	 if(array_key_exists('compras',$varemp['aplicacion']))
 	   if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
-	     if(array_key_exists('almsolegr',$varemp['aplicacion']['compras']['modulos']))
+	     if(array_key_exists('almsolegr',$varemp['aplicacion']['compras']['modulos'])){
 	       if(array_key_exists('cambiareti',$varemp['aplicacion']['compras']['modulos']['almsolegr']))
 	       {
 	       	$this->cambiareti=$varemp['aplicacion']['compras']['modulos']['almsolegr']['cambiareti'];
 	       }
+	       if(array_key_exists('nometifor',$varemp['aplicacion']['compras']['modulos']['almsolegr']))
+	       {
+	       	$this->nometifor=$varemp['aplicacion']['compras']['modulos']['almsolegr']['nometifor'];
+	       }
+	     }
 
 
      // 15    // pager

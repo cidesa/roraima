@@ -25,6 +25,8 @@ class Casolart extends BaseCasolart
   protected $porcostart='';
   protected $pormoncot='';
   protected $precom="";
+  protected $cambiareti="";
+  protected $nometifor="";
 
   public function getMonreq($val=false)
   {
@@ -107,5 +109,52 @@ class Casolart extends BaseCasolart
   {
   	return $this->precom;
   }
+
+    public function getCambiareti()
+  {
+
+    $dato="";
+    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('compras',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
+	     if(array_key_exists('almaprsolegr',$varemp['aplicacion']['compras']['modulos'])){
+	       if(array_key_exists('cambiareti',$varemp['aplicacion']['compras']['modulos']['almaprsolegr']))
+	       {
+	       	$dato=$varemp['aplicacion']['compras']['modulos']['almaprsolegr']['cambiareti'];
+	       }
+         }
+     return $dato;
+  }
+
+  public function setCambiareti()
+  {
+  	return $this->cambiareti;
+  }
+
+  public function getNometifor()
+  {
+
+    $dato="";
+    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('compras',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
+	     if(array_key_exists('almaprsolegr',$varemp['aplicacion']['compras']['modulos'])){
+	       if(array_key_exists('nometifor',$varemp['aplicacion']['compras']['modulos']['almaprsolegr']))
+	       {
+	       	$dato=$varemp['aplicacion']['compras']['modulos']['almaprsolegr']['nometifor'];
+	       }
+         }
+     return $dato;
+  }
+
+  public function setNometifor()
+  {
+  	return $this->nometifor;
+  }
+
 
 }

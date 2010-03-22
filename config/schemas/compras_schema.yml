@@ -1151,6 +1151,12 @@ propel:
     aprreq:
       type: VARCHAR
       size: 1
+    nummemo:
+      type: VARCHAR
+      size: 10
+    justif:
+      type: VARCHAR
+      size: 250
     id:
       type: INTEGER
       required: true
@@ -1339,6 +1345,9 @@ propel:
       size: 1
     fecapr:
       type: DATE
+    codemp:
+      type: VARCHAR
+      size: 16
     id:
       type: INTEGER
       required: true
@@ -2184,6 +2193,9 @@ propel:
       type: NUMERIC
       size: 14
       scale: 2
+    obscot:
+      type: VARCHAR
+      size: 250
     id:
       type: INTEGER
       required: true

@@ -1334,6 +1334,76 @@
   return porcentajeislr;
  }
 
+ function porcentajeIRSN(tipo,campo)
+ {
+   porcentajeirs=0;
+   total=totalregistros('ex',1,20);
+   j=0;
+   while (j<total)
+   {
+     var irs="ex"+"_"+j+"_15";
+     var unoxmil="ex"+"_"+j+"_13";
+     var base="ex"+"_"+j+"_4";
+     var porcen="ex"+"_"+j+"_5";
+
+     switch(tipo)
+     {
+       case "IRS":
+       trajo=$(irs).value;
+       break;
+
+       case "1*MIL":
+       trajo=$(unoxmil).value;
+       break;
+     }
+    if (trajo=="S")
+    {
+       if (campo=="BasImp")
+       {
+         porcentajeirs=$(base).value;
+       }else { porcentajeirs=$(porcen).value;}
+     break;
+    }
+    j++;
+  }
+  return porcentajeirs;
+ }
+
+  function porcentajeIRSC(tipo,campo)
+ {
+   var porcentajeirs=0;
+   var total=$('numgridret').value;
+   var j=0;
+   while (j<total)
+   {
+     var irs="dx"+"_"+j+"_13";
+     var unoxmil="dx"+"_"+j+"_11";
+     var base="dx"+"_"+j+"_4";
+     var porcen="dx"+"_"+j+"_5";
+
+     switch(tipo)
+     {
+       case "IRS":
+       trajo=$(irs).value;
+       break;
+
+       case "1*MIL":
+       trajo=$(unoxmil).value;
+       break;
+     }
+    if (trajo=="S")
+    {
+       if (campo=="BasImp")
+       {
+         porcentajeirs=$(base).value;
+       }else { porcentajeirs=$(porcen).value;}
+     break;
+    }
+    j++;
+  }
+  return porcentajeirs;
+ }
+
 /* function encontrarIva()
  {
    encontrariva=0;
@@ -1595,6 +1665,7 @@
      var baseimp="ex"+"_"+j+"_10";
      var islr="ex"+"_"+j+"_12";
      var unoxmil="ex"+"_"+j+"_13";
+     var irs="ex"+"_"+j+"_15";
 
      switch(tipo)
      {
@@ -1604,6 +1675,10 @@
 
        case "1*MIL":
        trajo=$(unoxmil).value;
+       break;
+
+       case "IRS":
+       trajo=$(irs).value;
        break;
      }
     if (trajo=="S")
@@ -1667,6 +1742,7 @@
     {
      var islr="dx"+"_"+j+"_10";
      var unoxmil="dx"+"_"+j+"_11";
+     var irs="dx"+"_"+j+"_13";
 
      switch(tipo)
      {
@@ -1676,6 +1752,10 @@
 
        case "1*MIL":
        trajo=$(unoxmil).value;
+       break;
+
+       case "IRS":
+       trajo=$(irs).value;
        break;
      }
     if (trajo=="S")
@@ -1696,6 +1776,12 @@
         if (montorecalculado!=$('eltimbre').value)
         {
          calcularbaseimponible=((calcularbaseimponible*$('eltimbre').value)/montorecalculado);
+        }
+      }else if (tipo=="IRS")
+      {
+        if (montorecalculado!=$('elirs').value)
+        {
+         calcularbaseimponible=redondear(((calcularbaseimponible*$('elirs').value)/montorecalculado),2);
         }
       }
      break;
@@ -2390,6 +2476,7 @@ function ajaxretenciones(e,id)
     var colestislr= col+11;
     var colest1xmil= col+12;
     var colmont= col+13;
+    var colestirs= col+14;
 
     var descripcion=name+"_"+fil+"_"+coldes;
     var contable=name+"_"+fil+"_"+colcon;
@@ -2400,6 +2487,7 @@ function ajaxretenciones(e,id)
     var unidad=name+"_"+fil+"_"+coluni;
     var esta=name+"_"+fil+"_"+colest;
     var estaislr=name+"_"+fil+"_"+colestislr;
+    var estairs=name+"_"+fil+"_"+colestirs;
     var esta1xmil=name+"_"+fil+"_"+colest1xmil;
     var montoiva=name+"_"+fil+"_"+colmont;
     var cod=$(id).value;
@@ -2408,7 +2496,7 @@ function ajaxretenciones(e,id)
 
      if (e.keyCode==13 || e.keyCode==9)
      {
-      new Ajax.Request('/tesoreria_dev.php/pagemiord/ajax', {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json), validaretencion(e,id);}, parameters:'ajax=10&cajtexmos='+descripcion+'&contable='+contable+'&base='+base+'&porretencion='+porretencion+'&factor='+factor+'&porsustra='+porsustra+'&unidad='+unidad+'&esta='+esta+'&estaislr='+estaislr+'&esta1xmil='+esta1xmil+'&montoiva='+montoiva+'&codigo='+cod})
+      new Ajax.Request('/tesoreria_dev.php/pagemiord/ajax', {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json), validaretencion(e,id);}, parameters:'ajax=10&cajtexmos='+descripcion+'&contable='+contable+'&base='+base+'&porretencion='+porretencion+'&factor='+factor+'&porsustra='+porsustra+'&unidad='+unidad+'&esta='+esta+'&estaislr='+estaislr+'&estairs='+estairs+'&esta1xmil='+esta1xmil+'&montoiva='+montoiva+'&codigo='+cod})
      }
    }//if ($(id).value1="")
   }
@@ -2830,4 +2918,140 @@ function monto1XMILN()
    }else{
 
    }
+  }
+
+  function irs(id)
+  {
+   var aux = id.split("_");
+   var name=aux[0];
+   var fil=aux[1];
+   var col=parseInt(aux[2]);
+
+   var bas=col+1;
+   var porcent=col+2;
+   var monto=col+3;
+   var total=col-16;
+   var imp=col-11;
+   var cod=col+4;
+
+   var baseirs=name+"_"+fil+"_26";
+   var porcentirs=name+"_"+fil+"_27";
+   var montoirs=name+"_"+fil+"_28";
+   var totalfac=name+"_"+fil+"_9";
+   var impuesto=name+"_"+fil+"_12";
+   var codirs=name+"_"+fil+"_29";
+
+  var montotfac=toFloat(totalfac);
+   if (montotfac>0)
+   {
+    if ($(porcentirs).value!='')
+    {
+   var monimpuesto=toFloat(impuesto);
+
+   var calcular=calcularBaseImponible('IRS');
+   var valor=String(calcular);
+    var calcularbi=toFloat2(valor);
+
+   if ($('elirs').value==0)
+   {
+     alert_('No hay Retenci&oacute;n de I.R.S');
+     $(id).checked=false;
+   }
+   else
+   {
+      if ($('id').value=="")
+      {
+        var baseimponible=porcentajeIRSN("IRS","BasImp");
+        var valor=String(baseimponible);
+        var basip=toFloat2(valor);
+        var porcentaje=porcentajeIRSN("IRS","PorRet");
+        var valor2=String(porcentaje);
+        var porcentajes=toFloat2(valor2);
+
+        var basiniislr=toFloat(baseirs);
+         if (basiniislr>0)
+         {
+           $(baseirs).value=format(basiniislr.toFixed(2),'.',',','.');
+         }else{
+         var calculo=(((montotfac-monimpuesto)*basip)/100);
+         $(baseirs).value=format(calculo.toFixed(2),'.',',','.');
+         }
+         $(baseirs).disabled=false;
+         $(porcentirs).value=format(porcentajes.toFixed(2),'.',',','.');
+      }
+      else
+      {
+        var baseimponible2=porcentajeIRSC("IRS","BasImp");
+        var valor=String(baseimponible2);
+        var basip=toFloat2(valor);
+
+        var porcentaje2=porcentajeIRSC("IRS","PorRet");
+
+        var valor2=String(porcentaje2);
+        var porcentajes=toFloat2(valor2);
+         var basiniislr=toFloat(baseirs);
+         if (basiniislr>0)
+         {
+           $(baseirs).value=format(basiniislr.toFixed(2),'.',',','.');
+         }else{
+         var calculo=(((montotfac-monimpuesto)*basip)/100);
+         $(baseirs).value=format(calculo.toFixed(2),'.',',','.');
+         }
+         $(baseirs).disabled=false;
+         $(porcentirs).value=format(porcentajes.toFixed(2),'.',',','.');
+      }
+      var base=toFloat(baseirs);
+
+      cal=((base*($('elirs').value))/calcularbi);
+      $(montoirs).value=format(cal.toFixed(2),'.',',','.');
+      index=$(porcentirs).selectedIndex;
+      var cod=$(porcentirs).options[index].text;
+      var codigo=cod.split("_");
+      $(codirs).value=codigo[0];
+      actualizarsaldos_b();
+   }
+   }
+   else
+   {
+    alert('Debe Seleccionar el Porcentaje de IRS a aplicar');
+     $(id).checked=false;
+   }
+   }
+   else
+   {
+    alert('El Total de la Factura debe ser mayor que cero');
+     $(id).checked=false;
+   }
+  }
+
+  function recalirs(id)
+  {
+   var aux = id.split("_");
+   var name=aux[0];
+   var fil=aux[1];
+   var col=parseInt(aux[2]);
+
+   var bas=col;
+   var porcent=col+1;
+   var monto=col+2;
+   var total=col-17;
+   var imp=col-14;
+   var cod=col+4;
+
+   var baseirs=name+"_"+fil+"_"+bas;
+   var porcentirs=name+"_"+fil+"_"+porcent;
+   var montoirs=name+"_"+fil+"_"+monto;
+   var totalfac=name+"_"+fil+"_"+total;
+   var impuesto=name+"_"+fil+"_"+imp;
+   var codirs=name+"_"+fil+"_"+cod;
+
+   var montobaseirs = toFloat(baseirs);
+   var montoporcentirs = toFloat(porcentirs);
+   var cal=montobaseirs*(montoporcentirs/100);
+
+   $(id).value = format(montobaseirs.toFixed(2),'.',',','.');
+
+   $(montoirs).value = format(cal.toFixed(2),'.',',','.');
+
+   actualizarsaldos_b();
   }

@@ -33,7 +33,7 @@
 <?php if ($cambiareti=="") {?>
 <?php echo __('Solicitud de Egreso') ?>
 <?php }else {?>
-<?php echo __('Solicitud de Cotización') ?>
+<?php echo __($nometifor) ?>
 <?php }?>
 </legend>
 <div class="form-row">
