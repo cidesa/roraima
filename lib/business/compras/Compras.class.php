@@ -476,7 +476,7 @@ class Compras {
               $gridnuevo[$indice -1][6] = 0;
             }
             $gridnuevo[$indice -1][7] = $monuni -$gridnuevo[$indice -1][3];
-            $gridnuevo[$indice -1][8] = $resul2->getCodcat().'-'.$resul2->getCodpre();
+            $gridnuevo[$indice -1][8] = $resul2->getCodpre();
             $gridnuevo[$indice -1][9] = $resul2->getMonrgo();
             $gridnuevo[$indice -1][10] = $resul2->getCodcat();
           	}
@@ -1081,7 +1081,7 @@ class Compras {
         self :: acumularUnidad($elmonto, $gridnuevo, & $gridunidad);
         $l = 0;
         while ($l < count($gridunidad)) {
-          $codigopresupuestario = $gridunidad[$l][0] . '-' . $data->getCodpre();
+          $codigopresupuestario = $data->getCodpre();//$gridunidad[$l][0] . '-' . $data->getCodpre();
           $mitotal = $gridunidad[$l][1];
           $c = new Criteria();
           $c->add(CpasiiniPeer :: PERPRE, '00');
@@ -2590,7 +2590,7 @@ class Compras {
               $gridnuevo[$indice -1][6] = 0;
             }
             $gridnuevo[$indice -1][7] = $monuni -$gridnuevo[$indice -1][3];
-            $gridnuevo[$indice -1][8] = $resul2->getCodcat().'-'.$resul2->getCodpre();
+            $gridnuevo[$indice -1][8] = $resul2->getCodpre();//$resul2->getCodcat().'-'.$resul2->getCodpre();
             $gridnuevo[$indice -1][9] = $resul2->getMonrgo();
             $gridnuevo[$indice -1][10] = $resul2->getCodcat();
           	}
@@ -2701,7 +2701,31 @@ class Compras {
      }else{
      	return 6;
      }
+  }
 
+  public static function validarRecaudosVen($rifpro,$fecha)
+  {
+     $dateFormat = new sfDateFormat('es_VE');
+     $fecval = $dateFormat->format($fecha, 'i', $dateFormat->getInputPattern('d'));
+
+     $codpro=H::getX('RIFPRO','Caprovee','Codpro',$rifpro);
+     $l= new Criteria();
+     $l->add(CarecproPeer::CODPRO,$codpro);
+     $resul= CarecproPeer::doSelect($l);
+     if ($resul)
+     {
+     	foreach ($resul as $obj)
+     	{
+           if ($obj->getFecven()<$fecval)
+           {
+           	return 20;
+           }
+     	}
+     }else {
+       return 21;
+     }
+
+     return -1;
   }
 
 }

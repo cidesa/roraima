@@ -892,8 +892,9 @@
       var calculo= (cantot*valcostos)-valcandes;
         $('totartsinrec').value=format(calculo.toFixed(2),'.',',','.');
         $('actualfila').value=fil;
+        var tipcom=$('caordcom_doccom').value;
 
-      new Ajax.Updater('grid_recargo', getUrlModulo()+'recargos', {asynchronous:true, evalScripts:true, onComplete:function(request, json){AjaxJSON(request, json); distribuirRecargosenGrid(); $("recargos").show(); $("botonesmarcar").hide(); }, parameters:'articulo='+articulo+'&refsol='+refsol+'&codunidad='+codunidad+'&ordcom='+ordcom+'&nuevo='+nuevo})
+      new Ajax.Updater('grid_recargo', getUrlModulo()+'recargos', {asynchronous:true, evalScripts:true, onComplete:function(request, json){AjaxJSON(request, json); distribuirRecargosenGrid(); $("recargos").show(); $("botonesmarcar").hide(); }, parameters:'articulo='+articulo+'&refsol='+refsol+'&codunidad='+codunidad+'&ordcom='+ordcom+'&tipcom='+tipcom+'&nuevo='+nuevo})
   }
   else
   {

@@ -17,6 +17,9 @@ class Careqart extends BaseCareqart
 {
 	protected $obj = array();
 	protected $check = '';
+	protected $check2 = '';
+	protected $check3 = '';
+	protected $totfil = '';
 
 	public function getDesubi()
 	{

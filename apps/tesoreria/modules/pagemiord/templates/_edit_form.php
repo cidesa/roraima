@@ -722,7 +722,7 @@ function num(e) {
 
  function actualizargrid()
  {
-   if (($('eliva').value!=0) || ($('elislr').value!=0) || ($('eltimbre')!=0))
+   if (($('eliva').value!=0) || ($('elislr').value!=0) || ($('eltimbre')!=0) || ($('elirs').value!=0))
     {
       $('divFac').show();
        n=0;

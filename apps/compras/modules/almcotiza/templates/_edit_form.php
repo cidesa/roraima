@@ -392,6 +392,24 @@
 
 </fieldset>
 
+<?php tabPageOpenClose("tp1", "tabPage5", 'Observaciones');?>
+<fieldset id="sf_fieldset_none" class="">
+<div class="form-row">
+  <?php echo label_for('cacotiza[obscot]', __($labels['cacotiza{obscot}']), 'class="required" Style="width:150px"') ?>
+  <div class="content<?php if ($sf_request->hasError('cacotiza{obscot}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('cacotiza{obscot}')): ?>
+    <?php echo form_error('cacotiza{obscot}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_textarea_tag($cacotiza, 'getObscot', array (
+  'size' => '90x3',
+  'maxlength'=>250,
+  'control_name' => 'cacotiza[obscot]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+</div>
+</fieldset>
+
 <?php tabInit();?>
 
 <?php include_partial('edit_actions', array('cacotiza' => $cacotiza)) ?>

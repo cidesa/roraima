@@ -94,6 +94,16 @@ class Optipret extends BaseOptipret
     { return 'S';} else { return 'N';}
    }
 
+  public function getEstairs()
+  {
+    $c = new Criteria();
+    $c->add(TsrepretPeer::CODREP,'005');
+    $c->add(TsrepretPeer::CODRET,self::getCodtip());
+    $datos = TsrepretPeer::doSelect($c);
+    if ($datos)
+    { return 'S';} else { return 'N';}
+  }
+
    public function getMontoiva()
    {
     $c = new Criteria();

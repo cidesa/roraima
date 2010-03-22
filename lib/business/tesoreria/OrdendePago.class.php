@@ -1111,6 +1111,10 @@ class OrdendePago
         $factura->setRifalt($orden->getCedrif());
         else
         $factura->setRifalt($x[$j]['rifalt']);
+        $factura->setBasirs($x[$j]['basirs']);
+        $factura->setPorirs($x[$j]['porirs']);
+        $factura->setMonirs($x[$j]['monirs']);
+        $factura->setCodirs($x[$j]['codirs']);
 
         $factura->save();
       }
@@ -1559,6 +1563,12 @@ class OrdendePago
          $c->add(TsrepretPeer::CODRET,$col1);
          $reg= TsrepretPeer::doSelectOne($c);
          break;
+       case "IRS":
+         $c= new Criteria();
+         $c->add(TsrepretPeer::CODREP,'005');
+         $c->add(TsrepretPeer::CODRET,$col1);
+         $reg= TsrepretPeer::doSelectOne($c);
+         break;
       }
       if ($reg)
       {
@@ -1843,30 +1853,85 @@ class OrdendePago
     return $comboboxislr;
   }
 
-  public static function facturar($numord,$id,$gridret,$arreglo,&$eliva,&$elislr,&$eltimbre,&$msj,&$comboiva,&$comboislr)
+  public static function llenarComboIrs($gridret,$colcod,$id)
+  {
+    $x=$gridret[0];
+    $comboboxirs=array();
+    $col1="";
+    $j=0;
+   if (count($x)>0)
+   {
+    while ($j<count($x))
+    {
+      $col1=$x[$j][$colcod];
+
+      $c= new Criteria();
+      $c->add(TsrepretPeer::CODREP,'005');
+      $c->add(TsrepretPeer::CODRET,$col1);
+      $resul= TsrepretPeer::doSelectOne($c);
+      if ($resul)
+      {
+        $b= new Criteria();
+        $b->add(OptipretPeer::CODTIP,$col1);
+        $result2= OptipretPeer::doSelectOne($b);
+        if ($result2)
+        {
+         if ($result2->getPorret()>0)
+         {
+           $comboboxirs[$result2->getPorret()] = $col1.'_'.$result2->getDestip();
+         }else{
+         	$comboboxirs[$result2->getPorsus()] = $col1.'_'.$result2->getDestip();
+         }
+        }
+      }
+     $j++;
+    }
+   }
+   else
+   {
+    $b= new Criteria();
+    $result2= OptipretPeer::doSelect($b);
+    if ($result2)
+    {
+      foreach ($result2 as $obj2)
+      {
+        $comboboxirs[$obj2->getPorret()] = $obj2->getCodtip().'_'.$obj2->getDestip();
+      }
+    }
+   }
+    return $comboboxirs;
+  }
+
+  public static function facturar($numord,$id,$gridret,$arreglo,&$eliva,&$elislr,&$elirs,&$eltimbre,&$msj,&$comboiva,&$comboislr,&$comboirs)
   {
     $eliva=0;
     $elislr=0;
     $eltimbre=0;
+    $elirs=0;
     $comboiva=array();
     $comboislr=array();
+    $comboirs=array();
     if ($numord!="")
     {
       if ($id=="")
       {
         $eliva=self::encontrarIva($gridret,'codtip',$id);
         $elislr=self::encontrarIslr($gridret,'codtip','montorete','ISLR',$id);
+        $elirs=self::encontrarIslr($gridret,'codtip','montorete','IRS',$id);
         $eltimbre=self::encontrarIslr($gridret,'codtip','montorete','1*MIL',$id);
         $comboiva=self::llenarComboIva($gridret,'codtip',$numord,$id,$arreglo);
         $comboislr=self::llenarComboIslr($gridret,'codtip','destip','porret',$id);
+        $comboirs=self::llenarComboIrs($gridret,'codtip','destip','porret',$id);
       }
       else
       {
         $eliva=self::encontrarIva($gridret,'codtip',$id);
         $elislr=self::encontrarIslr($gridret,'codtip','montoret','ISLR',$id);
         $eltimbre=self::encontrarIslr($gridret,'codtip','montoret','1*MIL',$id);
+        $elirs=self::encontrarIslr($gridret,'codtip','montoret','IRS',$id);
         $comboiva=self::llenarComboIva($gridret,'codtip',$numord,$id,$arreglo);
         $comboislr=self::llenarComboIslr($gridret,'codtip','destip','porret',$id);
+        $comboirs=self::llenarComboIrs($gridret,'codtip','destip','porret',$id);
       }
 
       /*if (($eliva!=0) or ($elislr!=0) or ($eltimbre)!=0)
@@ -3158,7 +3223,115 @@ class OrdendePago
     }
   }
 
-public static function actualizarOrdenPag($orden,$grid3)
+  public static function salvarPagodeRetenciones($opordpag,$gridoculret,$gridfac,$usuario)
+  {
+    if ($opordpag->getIncmod()=='I')
+    {
+      self::grabarFacturasPagret($opordpag,$gridfac);
+      self::grabarRetencionesPagret($opordpag,$gridoculret);
+      $opordpag->setUsuret($usuario);
+      $opordpag->save();
+    }
+    else
+    {
+      self::grabarFacturasPagret($opordpag,$gridfac);
+      $opordpag->save();
+    }
+  }
+
+  public static function grabarFacturasPagret($orden,$grid2)
+  {
+    $referencia=$orden->getNumord();
+    //primero elimino todas las facturas, para luego guardar las que el usuario haya dejado en el grid
+    Herramientas::EliminarRegistro('Opfactur','Numord',$orden->getNumord());
+    $x=$grid2[0];
+    if (count($x)!=0)
+    {
+    $j=0;
+    while ($j<count($x))
+    {
+      if (($x[$j]['fecfac']!='') and (($x[$j]['numfac']!='') or ($x[$j]['notdeb']!='') or ($x[$j]['notcrd']!='')))
+      {
+        $factura= new Opfactur();
+        $factura->setNumord($referencia);
+        if ($x[$j]['tiptra']=='01')
+        {
+          $factura->setNumfac($x[$j]['numfac']);
+        }
+        else if ($x[$j]['tiptra']=='02')
+        {
+          $factura->setNumfac($x[$j]['notdeb']);
+        }
+        else
+        {
+          $factura->setNumfac($x[$j]['notcrd']);
+        }
+
+        if ($x[$j]['tiptra']=='01')
+        {
+          $factura->setFacafe($x[$j]['facafe']);
+        }
+        $factura->setFecfac($x[$j]['fecfac']);
+        $factura->setNumctr($x[$j]['numctr']);
+        $factura->setTiptra($x[$j]['tiptra']);
+        $factura->setPoriva($x[$j]['poriva']);
+        $factura->setTotfac($x[$j]['totfac']);
+        $factura->setExeiva($x[$j]['exeiva']);
+        $factura->setBasimp($x[$j]['basimp']);
+        $factura->setMonret($x[$j]['monret']);
+        $factura->setMoniva($x[$j]['moniva']);
+        $factura->setBasltf($x[$j]['basltf']);
+        $factura->setPorltf($x[$j]['porltf']);
+        $factura->setMonltf($x[$j]['monltf']);
+        $factura->setBasislr($x[$j]['basislr']);
+        $factura->setPorislr($x[$j]['porislr']);
+        $factura->setMonislr($x[$j]['monislr']);
+        $factura->setCodislr($x[$j]['codislr']);
+        $factura->setAliadi($x[$j]['aliadi']);
+        $factura->setRifalt($x[$j]['rifalt']);
+        $factura->setObservacion($x[$j]['observacion']);
+        $factura->save();
+      }
+      $j++;
+    }
+   }
+  }
+
+  public static function grabarRetencionesPagret($orden,$grid3)
+  {
+    $referencia=$orden->getNumord();
+    $x=$grid3[0];
+    $j=0;
+    while ($j<count($x))
+    {
+      if ($x[$j]['codtip']!='')
+      {
+        $opretord= new Opretord();
+        $opretord->setNumord($referencia);
+        $opretord->setCodtip($x[$j]['codtip']);
+        $opretord->setMonret($x[$j]['monret']);
+        $opretord->setCodpre($x[$j]['codpre']);
+        $opretord->setNumret('NOASIGNA');
+        $opretord->setRefere($x[$j]['refere']);
+        $opretord->setCorrel(str_pad($j+1,3,'0',STR_PAD_LEFT));
+        $opretord->setMonbas(0);
+        $opretord->save();
+
+        $c= new Criteria();
+        $c->add(OpdetordPeer::NUMORD,$referencia);
+        $c->add(OpdetordPeer::CODPRE,$x[$j]['codpre']);
+        $resultado= OpdetordPeer::doSelectOne($c);
+        if ($resultado)
+        {
+        	$resultado->setMonret($x[$j]['monret']);
+        	$resultado->save();
+        }
+      }
+     $j++;
+    }
+  }
+
+   public static function actualizarOrdenPag($orden,$grid3)
   {
     $referencia=$orden->getNumord();
     $totalret=0;

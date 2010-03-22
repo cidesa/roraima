@@ -173,7 +173,8 @@ class Proveedor
             $reg = CaproveePeer::retrieveByPKs($caprovee->getId());
             $reg1 = array();
             $reg1 = $reg[0];
-            $caprovee->setNitpro($reg1->getNitpro());
+            if ($reg1->getNitpro()!="" && ($reg1->getNitpro()=='J' || $reg1->getNitpro()=='N' || $reg1->getNitpro()=='G'))
+            {$caprovee->setNitpro($reg1->getNitpro());}
          }
 
     if ($manprocor=='S' && (!$caprovee->getId())) {

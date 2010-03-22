@@ -21,6 +21,12 @@
 6:
   cod: 6
   msj: No se pudo borrar la registro seleccionado. Asegúrese de que no tiene ningún tipo de registros asociados.
+20:
+  cod: 20
+  msj: El proveedor tiene recaudos Vencidos.
+21:
+  cod: 21
+  msj: El proveedor No tiene Recaudos.
 100:
   cod: 100
   msj: Nivel Anterior No Existe

@@ -1062,7 +1062,7 @@ $this->Bitacora('Guardo');
    * los datos del grid.
    *
    */
-  public function configGridFactura($codigo='',$arreglo1=array(),$arreglo2=array())
+  public function configGridFactura($codigo='',$arreglo1=array(),$arreglo2=array(),$arreglo3=array())
   {
     $sql="SELECT b.fecfac as fecfac, (CASE when b.tiptra='01' THEN b.numfac
   else '' END) as numfac,b.numctr as numctr,(CASE when b.tiptra='02' THEN b.numfac
@@ -1070,7 +1070,7 @@ $this->Bitacora('Guardo');
   else '' END) as notcrd,b.tiptra as tiptra,b.facafe as facafe,b.poriva as poriva,b.totfac as totfac,b.exeiva as exeiva,
   b.basimp as basimp,b.monret as monret,b.moniva as moniva,(CASE when b.basltf!=0 THEN 1
   else 0 END) as unocien,b.basltf as basltf,b.porltf as porltf,b.monltf as monltf,(CASE when b.basislr!=0 THEN 1
-  else 0 END) as impusob,b.basislr as basislr,b.porislr as porislr,b.monislr as monislr,b.codislr as codislr,b.rifalt as rifalt,a.nomben as nomben,b.id as id
+  else 0 END) as impusob,b.basislr as basislr,b.porislr as porislr,b.monislr as monislr,b.codislr as codislr,b.rifalt as rifalt,a.nomben as nomben,b.basirs as basirs,b.porirs as porirs,b.monirs as monirs,b.codirs as codirs,b.id as id
   from opfactur b left outer join opbenefi a on b.rifalt=a.cedrif where b.numord='".$codigo."'";
 
     $resp = Herramientas::BuscarDatos($sql,&$reg);
@@ -1310,6 +1310,51 @@ $this->Bitacora('Guardo');
     $col24->setNombreCampo('nomben');
     $col24->setHTML('type="text" size="20" readonly="true"');
 
+    $col25 = new Columna('I.R.S');
+    $col25->setTipo(Columna::CHECK);
+    $col25->setNombreCampo('imprs');
+    $col25->setEsGrabable(true);
+    $col25->setHTML(' ');
+    $col25->setJScript('onClick="irs(this.id)"');
+
+    $col26 = new Columna('Base Imponible I.R.S');
+    $col26->setTipo(Columna::MONTO);
+    $col26->setEsGrabable(true);
+    $col26->setAlineacionContenido(Columna::DERECHA);
+    $col26->setAlineacionObjeto(Columna::DERECHA);
+    $col26->setNombreCampo('basirs');
+    $col26->setEsNumerico(true);
+    $col26->setJScript(' onblur="javascript:recalirs(this.id);"');
+    $col26->setHTML('size="15"');
+    $col26->setEsTotal(true,'totbasirs');
+
+    $col27 = new Columna('% I.R.S');
+    $col27->setTipo(Columna::COMBO);
+    $col27->setEsGrabable(true);
+    $col27->setNombreCampo('porirs');
+    $col27->setCombo($arreglo3);
+    $col27->setHTML(' ');
+
+    $col28 = new Columna('Monto I.R.S');
+    $col28->setTipo(Columna::MONTO);
+    $col28->setEsGrabable(true);
+    $col28->setAlineacionContenido(Columna::DERECHA);
+    $col28->setAlineacionObjeto(Columna::DERECHA);
+    $col28->setNombreCampo('monirs');
+    $col28->setEsNumerico(true);
+    $col28->setJScript(' ');
+    $col28->setHTML('readonly="true" size="15"');
+    $col28->setEsTotal(true,'totmontirs');
+
+    $col29 = new Columna('irs');
+    $col29->setTipo(Columna::TEXTO);
+    $col29->setEsGrabable(true);
+    $col29->setAlineacionObjeto(Columna::CENTRO);
+    $col29->setAlineacionContenido(Columna::CENTRO);
+    $col29->setNombreCampo('codirs');
+    $col29->setHTML('type="text" size="15"');
+    $col29->setOculta(true);
+
 
     $opciones->addColumna($col1);
     $opciones->addColumna($col2);
@@ -1335,6 +1380,11 @@ $this->Bitacora('Guardo');
     $opciones->addColumna($col22);
     $opciones->addColumna($col23);
     $opciones->addColumna($col24);
+    $opciones->addColumna($col25);
+    $opciones->addColumna($col26);
+    $opciones->addColumna($col27);
+    $opciones->addColumna($col28);
+    $opciones->addColumna($col29);
 
     $this->obj2 = $opciones->getConfig($reg);
   }
@@ -1626,6 +1676,11 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
     $col12->setHTML('type="text" size="15" readonly="true"');
     $col12->setEsTotal(true,'total');
 
+    $col13 = clone $col1;
+    $col13->setTitulo('EstaIRS');
+    $col13->setNombreCampo('estairs');
+    $col13->setOculta(true);
+
     $opciones->addColumna($col1);
     $opciones->addColumna($col2);
     $opciones->addColumna($col3);
@@ -1638,6 +1693,7 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
     $opciones->addColumna($col10);
     $opciones->addColumna($col11);
     $opciones->addColumna($col12);
+    $opciones->addColumna($col13);
 
     $this->obj3 = $opciones->getConfig($reg);
   }
@@ -1746,6 +1802,10 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
     $col14->setTitulo('Montoiva');
     $col14->setNombreCampo('montoiva');
 
+    $col15 = clone $col3;
+    $col15->setTitulo('EstaIRS');
+    $col15->setNombreCampo('estairs');
+
     $opciones->addColumna($col1);
     $opciones->addColumna($col2);
     $opciones->addColumna($col3);
@@ -1760,6 +1820,7 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
     $opciones->addColumna($col12);
     $opciones->addColumna($col13);
     $opciones->addColumna($col14);
+    $opciones->addColumna($col15);
 
     $this->obj5 = $opciones->getConfig($reg);
   }
@@ -2031,7 +2092,7 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
             $dato = $ccdetcuades->getNomter();
           }
         }
-        $this->cedrifdesh="";
+      	$this->cedrifdesh="";
         $varemp = $this->getUser()->getAttribute('configemp');
 		if ($varemp)
 		if(array_key_exists('aplicacion',$varemp))
@@ -2047,6 +2108,7 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
 		 {
 		 	$javascript=" $('opordpag_cedrif').readOnly=true; $('opordpag_nomben').readOnly=true; $$('.botoncat')[1].disabled=true;";
 		 }
+
         if ($this->getRequestParameter('observe')=="")
         {
          $output = '[["fecha","'.$fechas.'",""],["descripcion","'.$descripcions.'",""],["tipo","'.$tipos.'",""],["destipo","'.$destipos.'",""],["fila","'.$this->numfila.'",""],["mensaje","'.$msj.'",""],["ajaxs","6",""],["opordpag_desord","'.$descripcion2.'",""],["opordpag_cedrif","'.$elrif.'",""],["opordpag_nomben","'.$dato.'",""],["opordpag_ctapag","'.$dato1.'",""],["opordpag_descta","'.$dato2.'",""],["opordpag_tipfin","'.$financiamiento.'",""],["opordpag_nomext2","'.$dato3.'",""],["opordpag_observe","N",""],["javascript","'.$javascript.'",""]]';
@@ -2126,6 +2188,7 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
     $dato9=OptipretPeer::getEstaislr($this->getRequestParameter('codigo'));
     $dato10=OptipretPeer::getEsta1xmil($this->getRequestParameter('codigo'));
     $dato11=number_format(OptipretPeer::getMontoiva($this->getRequestParameter('codigo')),2,',','.');
+    $dato12=OptipretPeer::getEstairs($this->getRequestParameter('codigo'));
     }
     else
     {
@@ -2141,8 +2204,9 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
     $dato9='';
     $dato10='';
     $dato11='0,00';
+    $dato12='';
     }
-    $output = '[["existeretencion","'.$existe.'",""],["'.$cajtexmos.'","'.$dato1.'",""],["'.$this->getRequestParameter('contable').'","'.$dato2.'",""],["'.$this->getRequestParameter('base').'","'.$dato3.'",""],["'.$this->getRequestParameter('porretencion').'","'.$dato4.'",""],["'.$this->getRequestParameter('factor').'","'.$dato5.'",""],["'.$this->getRequestParameter('porsustra').'","'.$dato6.'",""],["'.$this->getRequestParameter('unidad').'","'.$dato7.'",""],["'.$this->getRequestParameter('esta').'","'.$dato8.'",""],["'.$this->getRequestParameter('estaislr').'","'.$dato9.'",""],["'.$this->getRequestParameter('esta1xmil').'","'.$dato10.'",""],["'.$this->getRequestParameter('montoiva').'","'.$dato11.'",""]]';
+    $output = '[["existeretencion","'.$existe.'",""],["'.$cajtexmos.'","'.$dato1.'",""],["'.$this->getRequestParameter('contable').'","'.$dato2.'",""],["'.$this->getRequestParameter('base').'","'.$dato3.'",""],["'.$this->getRequestParameter('porretencion').'","'.$dato4.'",""],["'.$this->getRequestParameter('factor').'","'.$dato5.'",""],["'.$this->getRequestParameter('porsustra').'","'.$dato6.'",""],["'.$this->getRequestParameter('unidad').'","'.$dato7.'",""],["'.$this->getRequestParameter('esta').'","'.$dato8.'",""],["'.$this->getRequestParameter('estaislr').'","'.$dato9.'",""],["'.$this->getRequestParameter('estairs').'","'.$dato12.'",""],["'.$this->getRequestParameter('esta1xmil').'","'.$dato10.'",""],["'.$this->getRequestParameter('montoiva').'","'.$dato11.'",""]]';
     $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
     return sfView::HEADER_ONLY;
   }
@@ -2362,10 +2426,10 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
     $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""]]';
     $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
     return sfView::HEADER_ONLY;
-  }else if ($this->getRequestParameter('ajax')=='99')
+  }
+  else if ($this->getRequestParameter('ajax')=='99')
   {
-    // Función ajax mantener la session abierta
-    $output = '[["","",""]]';
+      $output = '[["","",""]]';
     $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
     return sfView::HEADER_ONLY;
   }
@@ -2387,11 +2451,11 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
       $retenciones=Herramientas::CargarDatosGrid($this,$this->obj5,true);
       if ($this->getRequestParameter('opordpag[vacio]')=='')
       {
-      OrdendePago::facturar($this->getRequestParameter('opordpag[numord]'),$this->getRequestParameter('id'),$retenciones,$this->getRequestParameter('referencia2'),&$eliva,&$elislr,&$eltimbre,&$msj,&$arreglo1,&$arreglo2);
+      OrdendePago::facturar($this->getRequestParameter('opordpag[numord]'),$this->getRequestParameter('id'),$retenciones,$this->getRequestParameter('referencia2'),&$eliva,&$elislr,&$elirs,&$eltimbre,&$msj,&$arreglo1,&$arreglo2,&$arreglo3);
       if ($msj=='')
       { $this->div='Fac';
-        $this->configGridFactura('',$arreglo1,$arreglo2);
-        $output = '[["eliva","'.$eliva.'",""],["elislr","'.$elislr.'",""],["eltimbre","'.$eltimbre.'",""],["msj","'.$msj.'",""],["opordpag_vacio","1",""]]';
+        $this->configGridFactura('',$arreglo1,$arreglo2,$arreglo3);
+        $output = '[["eliva","'.$eliva.'",""],["elislr","'.$elislr.'",""],["elirs","'.$elirs.'",""],["eltimbre","'.$eltimbre.'",""],["msj","'.$msj.'",""],["opordpag_vacio","1",""]]';
         $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
       }else
       {
@@ -2413,11 +2477,11 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
       $retenciones=Herramientas::CargarDatosGrid($this,$this->obj3,true);
       if ($this->getRequestParameter('opordpag[vacio]')=='')
       {
-      OrdendePago::facturar($this->getRequestParameter('opordpag[numord]'),$this->getRequestParameter('id'),$retenciones,$this->getRequestParameter('referencia2'),&$eliva,&$elislr,&$eltimbre,&$msj,&$arreglo1,&$arreglo2);
+      OrdendePago::facturar($this->getRequestParameter('opordpag[numord]'),$this->getRequestParameter('id'),$retenciones,$this->getRequestParameter('referencia2'),&$eliva,&$elislr,&$elirs,&$eltimbre,&$msj,&$arreglo1,&$arreglo2,&$arreglo3);
       if ($msj=='')
       { $this->div='Fac';
-        $this->configGridFactura($this->getRequestParameter('opordpag[numord]'),$arreglo1,$arreglo2);
-        $output = '[["eliva","'.$eliva.'",""],["elislr","'.$elislr.'",""],["eltimbre","'.$eltimbre.'",""],["msj","'.$msj.'",""],["opordpag_vacio","1",""]]';
+        $this->configGridFactura($this->getRequestParameter('opordpag[numord]'),$arreglo1,$arreglo2,$arreglo3);
+        $output = '[["eliva","'.$eliva.'",""],["elislr","'.$elislr.'",""],["elirs","'.$elirs.'",""],["eltimbre","'.$eltimbre.'",""],["msj","'.$msj.'",""],["opordpag_vacio","1",""]]';
         $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
       }else
       {

@@ -1443,6 +1443,337 @@ class SolicituddeEgresos
     return $montodisponible;
   }
 
+   public static function verificarDispGenComp($solegreso,&$msjuno,&$codi1,&$msjdos,&$codi2,&$codi3)
+   {
+    $ultimochequeo=true;
+    $sobregiro=false;
+    $sobregirorecargo=false;
+    $msjuno=-1; $codi1="";
+    $msjdos=-1; $codi2="";
+    $j=0;
+    $c= new Criteria();
+    $regis= CadefartPeer::doSelectOne($c);
+    if ($regis)
+    {
+      $tiporec= $regis->getAsiparrec();
+    }
+
+
+    $l= new Criteria();
+    $l->add(CaartsolPeer::REQART,$solegreso->getReqart());
+    $objetos= CaartsolPeer::doSelect($l);
+    if ($objetos)
+    {
+       foreach ($objetos as $obj)
+       {
+           if (!self::chequearDisponibilidadPresupuesto3($solegreso,$objetos,$obj->getCodpre(),$tiporec,&$sobregiro))
+	       {
+	        $msjuno=113; $codi1=$obj->getCodart(); $codi3=$obj->getCodpre();
+	        break;
+	       }
+	       if ($sobregiro)
+	      {
+	       $ultimochequeo=false;
+	       break;
+	      }
+	      $j++;
+       }
+       if (!$ultimochequeo)
+       return $ultimochequeo;
+
+    $j=0;
+    $requi=$solegreso->getReqart();
+    $arr_recargo=array();
+    $indarr_rec=0;
+    foreach ($objetos as $datos)
+    {
+	    $marcado=$datos->getCheck();
+	    $unidad=$datos->getCodcat();
+	    $codpresu=$datos->getCodpre();
+	    if ($marcado=="1")
+	    {
+	      if ($datos->getDatosrecargo()!='')
+	      {
+	      $cadenarec=split('!',$datos->getDatosrecargo());
+	          $r=0;
+	          while ($r<(count($cadenarec)-1))
+	          {
+	            $aux=$cadenarec[$r];
+	            $aux2=split('_',$aux);
+	            if ($aux2[0]!="" && Herramientas::toFloat($aux2[4])>0)
+	            {
+	            $arr_recargo[$indarr_rec]['codart']=$datos->getCodart();
+	            $arr_recargo[$indarr_rec]['codcat']=$datos->getCodcat();
+	            $arr_recargo[$indarr_rec]['codrgo']=$aux2[0];
+	            $montorecargo= Herramientas::toFloat($aux2[4]);
+	            $arr_recargo[$indarr_rec]['monrgo']=$montorecargo;
+	            $indarr_rec++;
+	            }
+	            $r++;
+	          }
+	      }
+	    }
+    }
+
+    $h = 0;
+    $arrTotRec=array();
+    $cont=-1;
+    while ($h < count($arr_recargo))
+     {
+        $codrgo=$arr_recargo[$h]['codrgo'];
+        if (self::BuscarCodrgoenArreglo($arrTotRec,$codrgo,&$j))
+        {
+            $arrTotRec[$j]['monrgo']= $arrTotRec[$j]['monrgo'] + $arr_recargo[$h]['monrgo'];
+        }
+        else
+        {
+            $cont++;
+            $arrTotRec[$cont]['codrgo'] = $arr_recargo[$h]['codrgo'];//codrgo
+            $arrTotRec[$cont]['monrgo'] = $arr_recargo[$h]['monrgo'];//monrgo
+        }
+      $h++;
+     }
+
+     //Chequear disponibilidad por recargo
+      $z=0;
+      $gridunidad=array();
+      $procede=true;
+      while (($z<count($arrTotRec)) && ($procede==true))
+      {
+        $montouno=$arrTotRec[$z]['monrgo'];
+        $montodos=0;
+        if ($solegreso->getId())//Consulta/modificacion
+        {
+	      $tipdoc=Compras::ObtenerTipoDocumentoPrecompromiso();
+	      $c= new Criteria();
+	      $c->add(CargosolPeer::REQART,$solegreso->getReqart());
+	      $c->add(CargosolPeer::CODRGO,$arrTotRec[$z]['codrgo']);
+	      $c->add(CargosolPeer::TIPDOC,$tipdoc);
+	      $datrec=CargosolPeer::doSelectOne($c);
+	      if ($datrec)
+	          $montodos=$datrec->getMonrgo();
+        }
+
+        if ($montouno > $montodos)
+        {
+         $elmonto=$montouno - $montodos;
+         if (!self::chequearDisponibilidadRecargo3($arrTotRec[$z]['codrgo'],$elmonto,$tiporec,$objetos,$gridunidad,&$sobregirorecargo))
+         {
+           $procede=false;
+           $msjdos=114; $codi2=$arrTotRec[$z]['codrgo'];
+           break;
+         }else { $msjdos=-1; $codi2="";}
+        }
+        $z++;
+      }
+	}
+
+      if ($sobregirorecargo) $ultimochequeo=false;
+
+     return $ultimochequeo;
+   }
+
+   public static function chequearDisponibilidadPresupuesto3($solegreso,$objetos,$codpre,$tiporec,&$sobregiro)
+   {
+     $mitotal=0;
+     $z=0;
+
+     foreach ($objetos as $datos)
+     {
+     	$codigopresupuestario= $datos->getCodpre();
+     	if ($datos->getCodpre()==$codigopresupuestario)
+     	{
+     	  $cantidad=$datos->getCanreq();
+          $costo=$datos->getCosto();
+          $recargo=$datos->getMonrgo();
+          if ($tiporec!='C')
+	      {
+	        $mitotal= $mitotal + ($cantidad*$costo);
+	      }
+	      else
+	      {
+	        $mitotal= $mitotal + $recargo;
+	      }
+     	}
+
+     }
+
+    if ($codpre!="")
+    {
+     $anno=substr($solegreso->getFecreq(),0,4);
+
+      if (Herramientas::Monto_disponible_ejecucion($anno,$codpre,&$mondis))
+      {
+        if ($mitotal > $mondis)
+        {
+          $chequeardisponibilidadpresupuesto=false;
+          $sobregiro=true;
+        }
+        else
+        {
+          $chequeardisponibilidadpresupuesto=true;
+          $sobregiro=false;
+        }
+      }
+      else
+      {
+
+        $chequeardisponibilidadpresupuesto=false;
+        $sobregiro=true;
+      }
+    }
+    else
+    {
+      $chequeardisponibilidadpresupuesto=false;
+      $sobregiro=true;
+    }
+
+    return $chequeardisponibilidadpresupuesto;
+  }
+
+   public static function chequearDisponibilidadRecargo3($codigo,$elmonto,$eltipo,$objetos,$gridunidad,&$sobregirorecargo)
+   {
+     if ($codigo=="")
+     { $mitotal=0;}
+     else { $mitotal=$elmonto;}
+
+     $c= new Criteria();
+     $c->add(CarecargPeer::CODRGO,$codigo);
+     $data= CarecargPeer::doSelectOne($c);
+     if ($data)
+     {
+       if ($eltipo=='P')
+       {
+        $mitotal=$elmonto;
+        $codigopresupuestario=$data->getCodpre();
+        $a= new Criteria();
+        $a->add(CpasiiniPeer::PERPRE,'00');
+        $a->add(CpasiiniPeer::CODPRE,$codigopresupuestario);
+        $data2= CpasiiniPeer::doSelectOne($a);
+        if ($data2)
+        {
+          $mondis=self::montoDisponible($codigopresupuestario);
+          if ($mitotal > $mondis)
+          {
+            $chequeardisponibilidadrecargo=false;
+            $sobregirorecargo=true;
+          }
+          else
+          {
+            $chequeardisponibilidadrecargo=true;
+            $sobregirorecargo=false;
+          }
+        }
+        else
+        {
+          $chequeardisponibilidadrecargo=false;
+          $sobregirorecargo=true;
+        }
+       }
+       else
+       {
+         self::acumularUnidad3($elmonto,$objetos,&$gridunidad);
+         $l=0;
+         while ($l<count($gridunidad))
+         {
+          $codigopresupuestario=$gridunidad[$l][0].'-'.$data->getCodpre();
+          $mitotal=$gridunidad[$l][1];
+          $c= new Criteria();
+          $c->add(CpasiiniPeer::PERPRE,'00');
+          $c->add(CpasiiniPeer::CODPRE,$codigopresupuestario);
+          $data3= CpasiiniPeer::doSelectOne($c);
+          if ($data3)
+          {
+             $mondis=self::montoDisponible($codigopresupuestario);
+             if ($mitotal > $mondis)
+             {
+               $chequeardisponibilidadrecargo=false;
+               $sobregirorecargo=true;
+             }
+             else
+             {
+               $chequeardisponibilidadrecargo=true;
+               $sobregirorecargo=false;
+             }
+          }
+          else
+          {
+            $chequeardisponibilidadrecargo=false;
+            $sobregirorecargo=true;
+          }
+           $l++;
+         }
+       }
+     }
+    return $chequeardisponibilidadrecargo;
+   }
+
+   public static function acumularUnidad3($monto,$objetos,&$gridunidad)
+   {
+     $acum=0;
+     $r=0;
+     foreach ($objetos as $obj)
+     {
+       $cantidad=$obj->getCanreq();
+       $costo=$obj->getCosto();
+       $recargo=$obj->getMonrgo();
+      if ($obj->getCheck()=='1' && $recargo>0)
+      {
+        $acum=$acum + ($cantidad*$costo);
+      }
+       $r++;
+     }
+
+     $totalunidad=0;
+     $k=0;
+     foreach ($objetos as $obj1)
+     {
+       $cantidad=$obj1->getCanreq();
+       $costo=$obj1->getCosto();
+       $recargo=$obj1->getMonrgo();
+       $recargo2=$obj1->getMonrgo2();
+      if ($obj1->getCheck()=='1')
+      {
+        if ($recargo2>0)
+        {
+          $monto=$recargo - $recargo2;
+        }else { $monto=$recargo;}
+        $totart=$costo*$cantidad;
+        $j=0;
+        if (count($gridunidad) >0)
+        {
+          while ($j<count($gridunidad))
+          {
+            $encontrado=false;
+            if ($obj1->getCodcat()==$gridunidad[$j][0])
+            {
+             $encontrado=true;
+             $fila=$j;
+             break;
+            }
+            $j++;
+          }
+          if ($encontrado==true)
+          {
+            $mont=self::montoRecargo($acum,$monto,$totart);
+            $gridunidad[$fila][1]=$gridunidad[$fila][1]+ $mont;
+          }
+          else
+          {
+            $indice=count($gridunidad);
+            $gridunidad[$indice][0]=$obj1->getCodcat();
+            $gridunidad[$indice][1]=self::montoRecargo($acum,$monto,$totart);
+          }
+        }
+        else
+        {
+          $gridunidad[$j][0]=$e[$k]->getCodcat();
+          $gridunidad[$j][1]=self::montoRecargo($acum,$monto,$totart);
+        }
+      }
+       $k++;
+     }
+   }
 
 }
 ?>

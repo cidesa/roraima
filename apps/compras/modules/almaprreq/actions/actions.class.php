@@ -49,24 +49,28 @@ class almaprreqActions extends autoalmaprreqActions
 
     if(!count($reg)>0)
     {
-      // Aquí va el código para traernos los registros que contendrá el grid
       $reg = array();
-      // Aquí va el código para generar arreglo de configuración del grid
-    $this->obj = array();
+      $this->obj = array();
     }
     	$c = new Criteria();
-    	//$c->add(CareqartPeer::APRREQ,'S', Criteria :: NOT_EQUAL);
     	$c->add(CareqartPeer::STAREQ,'A');
-        $sql = "(careqart.APRREQ<>'S' or careqart.APRREQ isnull)";
+        $sql = "((careqart.APRREQ<>'A' and careqart.APRREQ<>'R') or careqart.APRREQ isnull or careqart.APRREQ='D')";
         $c->add(CareqartPeer::APRREQ, $sql, Criteria :: CUSTOM);
     	$c->addAscendingOrderByColumn(CareqartPeer::REQART);
     	$c->addAscendingOrderByColumn(CareqartPeer::FECREQ);
     	$reg = CareqartPeer::doSelect($c);
 
-	    $this->obj = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/almaprreq/'.sfConfig::get('sf_app_module_config_dir_name').'/grid_careqart',$reg);
+        $this->careqart->setTotfil(count($reg));
+
+        $this->columnas = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/almaprreq/'.sfConfig::get('sf_app_module_config_dir_name').'/grid_careqart');
+
+	    $this->columnas[1][0]->setHTML('onClick="verificar(this.id)"');
+	    $this->columnas[1][1]->setHTML('onClick="verificar(this.id)"');
+	    $this->columnas[1][2]->setHTML('onClick="verificar(this.id)"');
+
+	    $this->obj =$this->columnas[0]->getConfig($reg);
 
         $this->careqart->setObj($this->obj);
-
 
   }
 

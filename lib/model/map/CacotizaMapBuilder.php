@@ -70,6 +70,8 @@ class CacotizaMapBuilder {
 
 		$tMap->addColumn('PORANT', 'Porant', 'double', CreoleTypes::NUMERIC, false, 14);
 
+		$tMap->addColumn('OBSCOT', 'Obscot', 'string', CreoleTypes::VARCHAR, false, 250);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

@@ -50,6 +50,10 @@ class CareqartMapBuilder {
 
 		$tMap->addColumn('APRREQ', 'Aprreq', 'string', CreoleTypes::VARCHAR, false, 1);
 
+		$tMap->addColumn('NUMMEMO', 'Nummemo', 'string', CreoleTypes::VARCHAR, false, 10);
+
+		$tMap->addColumn('JUSTIF', 'Justif', 'string', CreoleTypes::VARCHAR, false, 250);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

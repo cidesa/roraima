@@ -49,11 +49,11 @@ class CaproveePeer extends BaseCaproveePeer
 
   public static function getNompro($codigo)
 	{
-    	return htmlspecialchars(Herramientas::getXx('Caprovee',array('rifpro','estpro'),array($codigo,'A'),'Nompro'));
+    	return eregi_replace("[\n|\r|\n\r]", "", Herramientas::getXx('Caprovee',array('rifpro','estpro'),array($codigo,'A'),'Nompro'));
 	}
   public static function getNompro_vacio($codigo)
 	{
-    	return htmlspecialchars(Herramientas::getX_vacio('rifpro','Caprovee','Nompro',$codigo));
+    	return eregi_replace("[\n|\r|\n\r]", "", Herramientas::getX_vacio('rifpro','Caprovee','Nompro',$codigo));
 	}
 
   public static function getProvee($codprovee)

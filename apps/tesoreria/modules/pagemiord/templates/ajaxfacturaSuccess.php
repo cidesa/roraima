@@ -13,6 +13,7 @@
 <?php echo input_hidden_tag('eliva', '') ?>
 <?php echo input_hidden_tag('elislr', '') ?>
 <?php echo input_hidden_tag('eltimbre', '') ?>
+<?php echo input_hidden_tag('elirs', '') ?>
 <?php echo input_hidden_tag('msj', '') ?>
 <?
   echo grid_tag($obj2);
@@ -44,6 +45,12 @@
 <br>
 <?php echo label_for('',__('Total Monto ISLR') , 'class="required" Style="width:100px"') ?>
 <?php echo input_tag('totmontislr','', 'size=15 class=grid_txtright readonly=true') ?>
+<br>
+<?php echo label_for('',__('Total Bas Imp IRS') , 'class="required" Style="width:100px"') ?>
+<?php echo input_tag('totbasirs','', 'size=15 class=grid_txtright readonly=true') ?>
+<br>
+<?php echo label_for('',__('Total Monto IRS') , 'class="required" Style="width:100px"') ?>
+<?php echo input_tag('totmontirs','', 'size=15 class=grid_txtright readonly=true') ?>
 
 <?php //echo input_hidden_tag('totfac', '') ?>
 <?php //echo input_hidden_tag('totexen', '') ?>
@@ -90,7 +97,7 @@ else
       {
       	var basimp="bx_"+l+"_11";
 		var moniva="bx_"+l+"_12";
-      	var monret="bx_"+l+"_13";      	
+      	var monret="bx_"+l+"_13";
       	var unomil="bx_"+l+"_14";
       	var basltf="bx_"+l+"_15";
       	var porltf="bx_"+l+"_16";
@@ -98,6 +105,8 @@ else
       	var islr="bx_"+l+"_18";
       	var basislr="bx_"+l+"_19";
       	var monislr="bx_"+l+"_21";
+      	var basirs="bx_"+l+"_25";
+      	var monirs="bx_"+l+"_27";
 
       	$(basimp).readOnly=false;
       	$(monret).readOnly=false;
@@ -109,6 +118,8 @@ else
       	$(islr).disabled=true;
       	$(basislr).readOnly=false;
       	$(monislr).readOnly=false;
+      	$(basirs).readOnly=false;
+      	$(monirs).readOnly=false;
 
       	l++;
       }

@@ -1103,6 +1103,7 @@ public static function Grabar_DetallesRetenciones($caretser,$grid)
      { $modifica_correl=true; }
      else { self::incluyePrimerRegistro(); $modifica_correl=true;}
 
+/*
      if ($modifica_correl==true)
      {
        if (is_numeric($orden))
@@ -1155,6 +1156,8 @@ public static function Grabar_DetallesRetenciones($caretser,$grid)
        else { $sql9="update cacorrel set corsal=0";}
       Herramientas::insertarRegistros($sql9);
     }
+
+    */
   }
 
   public static function incluyePrimerRegistro()
@@ -1282,10 +1285,12 @@ public static function Grabar_DetallesRetenciones($caretser,$grid)
     $x = $grid[0];
     $j = 0;
     while ($j < count($x)) {
-      if ($x[$j]->getCheck()=='1')
+      if ($x[$j]->getCheck()=='1' || $x[$j]->getCheck2()=='1' || $x[$j]->getCheck3()=='1')
       {
 
-      	$x[$j]->setAprreq('S');
+      	if ($x[$j]->getCheck()=='1') $x[$j]->setAprreq('A');
+      	else if ($x[$j]->getCheck2()=='1') $x[$j]->setAprreq('R');
+      	else $x[$j]->setAprreq('D');
       	$x[$j]->save();
       }
       $j++;
