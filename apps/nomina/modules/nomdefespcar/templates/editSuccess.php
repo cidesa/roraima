@@ -33,7 +33,7 @@ array()) ?></h1>
 
 </div>
 <?php echo javascript_tag("
-  salvar=function()
+  salvarsave=function()
 	{
       f=document.sf_admin_edit_form;
 	  ObjetosSelectMultiple(f.associated_profecargo);
