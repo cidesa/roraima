@@ -7,3 +7,9 @@ ALTER TABLE "casolart"
 
 ALTER TABLE "cacotiza"
   ADD COLUMN "obscot" character varying(250);
+
+  ALTER TABLE "opfactur"
+  ADD COLUMN "basirs" numeric(18,2),
+  ADD COLUMN "porirs" numeric(18,2),
+  ADD COLUMN "monirs" numeric(18,2),
+  ADD COLUMN "codirs" character varying(50);
