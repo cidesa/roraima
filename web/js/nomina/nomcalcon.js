@@ -1,4 +1,13 @@
-////
+/**
+ * Librerías Javascript
+ *
+ * @package    Roraima
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ *
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
+ */
 
     function Inicial()
     {
@@ -228,7 +237,7 @@
 					    var cod = cod1+cod2.toUpperCase();
 	  			    else
 						var cod = cod1+cod2;
-						
+
 					$('textooculto1').hide();
 					$('grid1').show();
 					$('idfunciones').disabled=false;
@@ -261,7 +270,7 @@
 				    var cod = cod1+cod2.toUpperCase();
   			    else
 					var cod = cod1+"("+cod2+")";
-				
+
 				$('textooculto1').hide();
 				$('grid1').show();
 				$('idfunciones').disabled=false;
@@ -284,7 +293,7 @@
 					    var cod = cod1+cod2.toUpperCase();
 	  			    else
 						var cod = cod1+cod2;
-					
+
 					$('textooculto1').hide();
 					$('grid1').show();
 					$('idfunciones').disabled=false;
@@ -482,17 +491,19 @@
 
 				dato = 'ACUC';
 			}
-			if (dato=='STAB')
+			if (dato=='STAB' || dato=='SC')
 			{
-				var param = cod.substr(4,(cod.length) - 4);
+				var param = cod.substr(2,(cod.length) - 2);
 				var parametro = param.substr(2,2)+"/"+param.substr(0,2)+"/"+param.substr(4,4);
 				var fecha = new Date();
 				var ano = fecha.getFullYear();
 
 				if (isDate(parametro))
 				   parametro = "0101"+ano;
-
-				dato = 'STAB';
+				if(dato=='STAB')
+					dato = 'STAB';
+				else
+					dato = 'SC';
 			}
 			if (dato=='CTAB')
 			{
@@ -607,7 +618,7 @@
 					$('cajoculabel').value='';
 					$('cajaux').value=cod;
 					return true;
-		     	}else if (cod=='STAB' || cod=='CTAB')
+		     	}else if (cod=='STAB' || cod=='CTAB' || cod=='SC')
 		     	{
 		     	    $('grid1').hide();
 					$('idfunciones').disabled=true;
