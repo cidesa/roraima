@@ -999,6 +999,17 @@ class Nomina {
       }
       $token = "STAB";
     }
+    
+  if (Herramientas :: StringPos($token, "SC", 0) != -1) {
+      $parametro = substr($token, 2, strlen($token) - 2);
+      $fecha = substr($parametro, 2, 2) . "/" . substr($parametro, 0, 2) . "/" . substr($parametro, 4, 4);
+      $rfec = strtotime($fecha);
+
+      if (($rfec === -1 || $rfec === false)) {
+        $parametro = "0101" . Date("Y");
+      }
+      $token = "SC";
+    }
 
     if (Herramientas :: StringPos($token, "CTAB", 0) != -1) {
 
@@ -1242,6 +1253,17 @@ class Nomina {
       }
       $token = "STAB";
     }
+    
+    if (Herramientas :: StringPos($token, "SC", 0) != -1) {
+      $parametro = substr($token, 2, strlen($token) - 2);
+      $fecha = substr($parametro, 2, 2) . "/" . substr($parametro, 0, 2) . "/" . substr($parametro, 4, 4);
+      $rfec = strtotime($fecha);
+
+      if (($rfec === -1 || $rfec === false)) {
+        $parametro = "0101" . Date("Y");
+      }
+      $token = "SC";
+    }
 
     if (Herramientas :: StringPos($token, "CTAB", 0) != -1) {
 
@@ -1358,10 +1380,36 @@ class Nomina {
         break;
 
       case "SC" :
-        $criterio = "Select coalesce(SUM(MONTO),0) as campo from NPASICONEMP where (CODCON IN (SELECT x.CODCON FROM NPCONSUELDO x) OR CODCON IN (SELECT y.CODCON FROM NPCONCOMP y)) AND codemp='" . $empleado . "' and codcar='" . $cargo . "'";
-        if (Herramientas :: BuscarDatos($criterio, & $tabla)) {
-          $valor = $tabla[0]["campo"];
-        }
+        $movconvar = substr($parametro, 0, 2) . "/" . substr($parametro, 2, 2) . "/" . substr($parametro, 4);
+        $sql = "Select * from npasicaremp where Status='V' and CodNom='" . $nomina . "' and codemp='" . $empleado . "'";
+
+        if (Herramientas :: BuscarDatos($sql, & $tabla)) {
+
+		  if($tabla[0]['codtipded']!='' && $tabla[0]['codtipcat']!='')
+		  {
+	          $sql = "Select A.* from NPCOMOCP A, NPCARGOS B  WHERE B.CODCAR='" . $tabla[0]["codcar"] . "' AND A.CODTIPCAR=B.CODTIP AND A.GRACAR='".$tabla[0]['codtipcat']."' and A.PASCAR='".$tabla[0]['codtipded']."' AND FECDES<=TO_DATE('" . $movconvar . "','DD/MM/YYYY') ORDER BY FECDES DESC";
+
+	          if (Herramientas :: BuscarDatos($sql, & $tablaescala)) {
+	            $valor = $tablaescala[0]["suecar"];
+	          } else {
+	            $valor = 0;
+	          }
+		  }else
+		  {
+	  		if ($token == "SC") {
+	            $sql = "Select A.* from NPCOMOCP A,NPCARGOS B WHERE B.CODCAR='" . $tabla[0]["codcar"] . "' AND A.CODTIPCAR=B.CODTIP AND A.GRACAR=B.GRAOCP AND A.PASCAR=coalesce('". $tabla[0]["pascar"] ."','001') AND FECDES<=TO_DATE('" . $movconvar . "','DD/MM/YYYY') ORDER BY FECDES DESC";
+	          } else {
+	            $sql = "Select ABS(SUM(case when a.pascar=coalesce('". $tabla[0]["pascar"] ."','001') then a.suecar else a.suecar*-1)) as suecar from NPCOMOCP A,NPCARGOS B WHERE B.CODCAR='" . $tabla[0]["codcar"] . "' AND A.CODTIPCAR=B.CODTIP AND A.GRACAR=B.GRAOCP AND (A.PASCAR=coalesce('". $tabla[0]["pascar"] ."','001') ) AND FECDES<=TO_DATE('" . $movconvar . "','DD/MM/YYYY') ORDER BY FECDES DESC";
+	          }
+
+	          if (Herramientas :: BuscarDatos($sql, & $tablaescala)) {
+	            $valor = $tablaescala[0]["suecar"];
+	          } else {
+	            $valor = 0;
+	          }
+		  }
+        } else
+          $valor = 0;
         break;
 
       case "SCAR" :
@@ -3371,6 +3419,17 @@ class Nomina {
       }
       $campo = "STAB";
     }
+    
+  if (Herramientas :: StringPos($campo, "SC", 0) != -1) {
+      $parametro = substr($campo, 2, strlen($campo) - 2);
+      $fecha = substr($parametro, 2, 2) . "/" . substr($parametro, 0, 2) . "/" . substr($parametro, 4, 4);
+      $rfec = strtotime($fecha);
+
+      if (($rfec === -1 || $rfec === false)) {
+        $parametro = "0101" . Date("Y");
+      }
+      $campo = "SC";
+    }
 
     if (Herramientas :: StringPos($campo, "CTAB", 0) != -1) {
 
@@ -3485,10 +3544,33 @@ class Nomina {
         }
         break;
       case "SC" :
-        $criterio = "Select coalesce(SUM(MONTO),0) as campo from NPASICONEMP where (CODCON IN (SELECT x.CODCON FROM NPCONSUELDO x) OR CODCON IN (SELECT y.CODCON FROM NPCONCOMP y)) AND codemp='" . $empleado . "' and codcar='" . $cargo . "'";
-        if (Herramientas :: BuscarDatos($criterio, & $tabla)) {
-          return $tabla[0]["campo"];
-        }
+        $movconvar = substr($parametro, 0, 2) . "/" . substr($parametro, 2, 2) . "/" . substr($parametro, 4);
+        $sql = "Select * from npasicaremp where Status='V' and CodNom='" . $nomina . "' and codemp='" . $empleado . "'";
+
+        if (Herramientas :: BuscarDatos($sql, & $tabla)) {
+          if($tabla[0]['codtipded']!='' && $tabla[0]['codtipcat']!='')
+		  {
+	          $sql = "Select A.* from NPCOMOCP A, NPCARGOS B  WHERE B.CODCAR='" . $tabla[0]["codcar"] . "' AND A.CODTIPCAR=B.CODTIP AND A.GRACAR='".$tabla[0]['codtipcat']."' and A.PASCAR='".$tabla[0]['codtipded']."' AND FECDES<=TO_DATE('" . $movconvar . "','DD/MM/YYYY') ORDER BY FECDES DESC";
+	          if (Herramientas :: BuscarDatos($sql, & $tablaescala)) {
+	            $valor = $tablaescala[0]["suecar"];
+	          } else {
+	            $valor = 0;
+	          }
+		  }else
+		  {
+		  	if ($campo = "SC") {
+	            $sql = "Select A.* from NPCOMOCP A,NPCARGOS B WHERE B.CODCAR='" . $tabla[0]["codcar"] . "' AND A.CODTIPCAR=B.CODTIP AND A.GRACAR=B.GRAOCP AND A.PASCAR=coalesce('".$tabla[0]["pascar"]."','001') AND FECDES<=TO_DATE('" . $movconvar . "','DD/MM/YYYY') ORDER BY FECDES DESC";
+	          } else {
+	            $sql = "Select ABS(SUM(case when a.pascar=coalesce('".$tabla[0]["pascar"]."','001') then a.suecar else a.suecar*-1)) as suecar from NPCOMOCP A,NPCARGOS B WHERE B.CODCAR='" . $tabla[0]["codcar"] . "' AND A.CODTIPCAR=B.CODTIP AND A.GRACAR=B.GRAOCP AND (A.PASCAR=coalesce('".$tabla[0]["pascar"]."','001') ) AND FECDES<=TO_DATE('" . $movconvar . "','DD/MM/YYYY') ORDER BY FECDES DESC";
+	          }
+	          if (Herramientas :: BuscarDatos($sql, & $tablaescala)) {
+	            $valor = $tablaescala[0]["suecar"];
+	         } else {
+	            $valor = 0;
+	          }
+		  }
+        } else
+          $valor = 0;
         break;
       case "SCAR" :
         $criterio = "Select suecar as campo from npcargos where  codcar='" . $cargo . "'";
