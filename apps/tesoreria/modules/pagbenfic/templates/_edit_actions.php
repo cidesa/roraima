@@ -24,5 +24,6 @@
   </ul>
 <script language="JavaScript" type="text/javascript">
  var tieregrel='<?php echo $opbenefi->getTiedatrel(); ?>';
-  if (tieregrel=='S') $('save').hide();
+  var oculs='<?php echo $opbenefi->getOculsave(); ?>';
+  if (tieregrel=='S' && oculs=='S') $('save').hide();
 </script>

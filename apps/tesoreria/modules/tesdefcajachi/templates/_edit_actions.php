@@ -29,5 +29,6 @@
   </ul>
   <script language="JavaScript" type="text/javascript">
  var tieregrel='<?php echo $tsdefcajchi->getTiedatrel(); ?>';
-  if (tieregrel=='S') $('save').hide();
+ var oculs='<?php echo $tsdefcajchi->getOculsave(); ?>';
+  if (tieregrel=='S' && oculs=='S') $('save').hide();
 </script>
