@@ -11,6 +11,7 @@ generator:
       actsolegr: { name: Actualizar Solicitud}
       porcostart: { name: Por menor Costo de Artículo}
       pormoncot: { name: Por menor Monto de la Cotización}
+      portimeent: { name: Por menor Tiempo de Entrega}
     list:
       title:          Análisis de Cotizaciones
       filters:        [reqart, fecreq]
@@ -22,11 +23,12 @@ generator:
 
     edit:
       title:         Análisis de Cotizaciones
-      display:       [reqart, fecreq , desreq, articulo, actsolegr, porcostart, pormoncot]
+      display:       [reqart, fecreq , desreq, articulo, actsolegr, porcostart, pormoncot, portimeent]
       fields:
         actsolegr:  {type: checkbox_tag}
         porcostart:  {type: checkbox_tag}
         pormoncot:  {type: checkbox_tag}
+        portimeent:  {type: checkbox_tag}
       actions:
         _list:        ~
         _save:        ~
