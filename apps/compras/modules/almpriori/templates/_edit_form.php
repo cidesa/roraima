@@ -278,9 +278,17 @@
 
   function desmarcar(valor)
   {
-    if (valor==1)
+    if (valor==1){
   	$('casolart_pormoncot').checked=false;
-  	else $('casolart_porcostart').checked=false;
+  	$('casolart_portimeent').checked=false;
+  	}else if (valor==2) {
+  	$('casolart_porcostart').checked=false;
+  	$('casolart_portimeent').checked=false;
+  	}
+  	else {
+  	 $('casolart_pormoncot').checked=false;
+  	 $('casolart_porcostart').checked=false;
+  	 }
   }
 
     function Mostrar_orden_preimpresa()

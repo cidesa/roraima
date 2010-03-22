@@ -429,7 +429,12 @@ class Compras {
     }else if ($casolart->getPormoncot()=='1')
     {
       self::asignarPrioridadMonCot($reqart);
-    }else {
+    }
+    else if ($casolart->getPortimeent()=='1')
+    {
+      self::asignarPrioridadTimEnt($reqart);
+    }
+    else {
 	    $x = $grid[0];
 	    $j = 0;
 	    while ($j < count($x)) {
@@ -2726,6 +2731,39 @@ class Compras {
      }
 
      return -1;
+  }
+
+  public static function asignarPrioridadTimEnt($reqart)
+  {
+      $c = new Criteria();
+      $c->add(CacotizaPeer :: REFSOL, $reqart);
+      $c->addJoin(CacotizaPeer :: REFCOT, CadetcotPeer :: REFCOT);
+      $c->addAscendingOrderByColumn(CadetcotPeer::CODART);
+      $c->addAscendingOrderByColumn(CadetcotPeer::FECENT);
+      $result = CadetcotPeer :: doSelect($c);
+      if ($result)
+      {
+      	$priori=0;
+      	$j=1;
+      	foreach ($result as $datos)
+      	{
+            if ($j==1) $codartori=$datos->getCodart();
+      	    if ($codartori==$datos->getCodart())
+            {
+              $priori++;
+            }
+            else
+            {
+             $codartori=$datos->getCodart();
+             $priori=1;
+            }
+		  	$datos->setPriori($priori);
+		  	$datos->setJustifica(null);
+		  	$datos->save();
+
+		   $j++;
+        }
+      }
   }
 
 }

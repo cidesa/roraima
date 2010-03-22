@@ -31,7 +31,7 @@ class almprioriActions extends autoalmprioriActions
        $this->casolart = $this->getCasolartOrCreate();
 
       $grids = Herramientas::CargarDatosGrid($this,$this->grid);
-      if ($this->getRequestParameter('casolart[porcostart]')!='1' && $this->getRequestParameter('casolart[pormoncot]')!='1')
+      if ($this->getRequestParameter('casolart[porcostart]')!='1' && $this->getRequestParameter('casolart[pormoncot]')!='1' && $this->getRequestParameter('casolart[portimeent]')!='1')
       {$error= Compras::validarAlmpriori($grids);}
       if ($error<>-1)
       {
@@ -255,6 +255,10 @@ $this->Bitacora('Guardo');
     if (isset($casolart['pormoncot']))
     {
       $this->casolart->setPormoncot($casolart['pormoncot']);
+    }
+    if (isset($casolart['portimeent']))
+    {
+      $this->casolart->setPortimeent($casolart['portimeent']);
     }
   }
 

@@ -27,6 +27,7 @@ class Casolart extends BaseCasolart
   protected $precom="";
   protected $cambiareti="";
   protected $nometifor="";
+  protected $portimeent='';
 
   public function getMonreq($val=false)
   {
