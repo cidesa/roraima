@@ -1397,9 +1397,9 @@ class Nomina {
 		  }else
 		  {
 	  		if ($token == "SC") {
-	            $sql = "Select A.* from NPCOMOCP A,NPCARGOS B WHERE B.CODCAR='" . $tabla[0]["codcar"] . "' AND A.CODTIPCAR=B.CODTIP AND A.GRACAR=B.GRAOCP AND A.PASCAR=coalesce('". $tabla[0]["pascar"] ."','001') AND FECDES<=TO_DATE('" . $movconvar . "','DD/MM/YYYY') ORDER BY FECDES DESC";
+	            $sql = "Select A.* from NPCOMOCP A,NPCARGOS B WHERE B.CODCAR='" . $tabla[0]["codcar"] . "' AND A.CODTIPCAR=B.CODTIP AND A.GRACAR=B.GRAOCP AND A.PASCAR=coalesce('". $tabla[0]["paso"] ."','001') AND FECDES<=TO_DATE('" . $movconvar . "','DD/MM/YYYY') ORDER BY FECDES DESC";
 	          } else {
-	            $sql = "Select ABS(SUM(case when a.pascar=coalesce('". $tabla[0]["pascar"] ."','001') then a.suecar else a.suecar*-1)) as suecar from NPCOMOCP A,NPCARGOS B WHERE B.CODCAR='" . $tabla[0]["codcar"] . "' AND A.CODTIPCAR=B.CODTIP AND A.GRACAR=B.GRAOCP AND (A.PASCAR=coalesce('". $tabla[0]["pascar"] ."','001') ) AND FECDES<=TO_DATE('" . $movconvar . "','DD/MM/YYYY') ORDER BY FECDES DESC";
+	            $sql = "Select ABS(SUM(case when a.pascar=coalesce('". $tabla[0]["paso"] ."','001') then a.suecar else a.suecar*-1)) as suecar from NPCOMOCP A,NPCARGOS B WHERE B.CODCAR='" . $tabla[0]["codcar"] . "' AND A.CODTIPCAR=B.CODTIP AND A.GRACAR=B.GRAOCP AND (A.PASCAR=coalesce('". $tabla[0]["paso"] ."','001') ) AND FECDES<=TO_DATE('" . $movconvar . "','DD/MM/YYYY') ORDER BY FECDES DESC";
 	          }
 
 	          if (Herramientas :: BuscarDatos($sql, & $tablaescala)) {
