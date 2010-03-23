@@ -384,7 +384,7 @@ echo grid_tag($obj_recargos);
 </fieldset>
 </div>
 
-<? if ($caordcom->getOrdcom()=='') { ?>
+<? if ($caordcom->getOrdcom()=='' || ($caordcom->getOrdcom()!='' && $caordcom->getCompro()=='N')) { ?>
 <div align="left" id="botonesmarcar">
 
 <table>
