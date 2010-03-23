@@ -368,7 +368,9 @@ echo grid_tag($obj_recargos);
   <div align="right">
     <?php if ($caordcom->getOrdcom()==''){ ?>
       <?php echo link_to_function(image_tag('/images/salir.gif'), "salvarmontorecargos()")?>
-    <?php } else {?>
+    <?php } else if ($caordcom->getOrdcom()!='' && $caordcom->getCompro()=='N') {?>
+    	<?php echo link_to_function(image_tag('/images/salir.gif'), "salvarmontorecargos()")?>
+    	<?php }else {?>
       <?php echo link_to_function(image_tag('/images/salir.gif'), "$('recargos').hide();")?>
     <?php }?>
   </div>
