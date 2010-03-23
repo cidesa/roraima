@@ -2744,6 +2744,10 @@ class almordcomActions extends autoalmordcomActions
       }
       else
       {
+      	$refcom=H::getX_vacio('REFCOM','Cpcompro','REFCOM',$ordcom);
+            if ($refcom=='')
+            $this->configGridRecargo($ordcom,$articulo,$codunidad);
+            else
             $this->configGridRecargoConsulta($ordcom,$articulo,$codunidad);
       }
       $output = '[["","",""]]';
