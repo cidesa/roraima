@@ -1155,6 +1155,9 @@ class Tesoreria {
       {
         $dateFormat = new sfDateFormat('es_VE');
         $fec = $dateFormat->format($feclib, 'i', $dateFormat->getInputPattern('d'));
+        $confcorcom=sfContext::getInstance()->getUser()->getAttribute('confcorcom');
+        if ($confcorcom=='N')
+         $numcom2="A".substr($numcom,1,7);
 
         $tcontabc= new Contabc();
         $tcontabc->setNumcom($numcom2);
@@ -1357,6 +1360,10 @@ class Tesoreria {
     $resulta=ContabcPeer::doSelectOne($c);
     if ($resulta)
     {
+       $confcorcom=sfContext::getInstance()->getUser()->getAttribute('confcorcom');
+      if ($confcorcom=='N')
+      $numcom= 'A'.substr($numerocomprobante,1,7);
+
       $contabc2 = new Contabc();
       $contabc2->setNumcom($numcom);
       $contabc2->setFeccom($fecanu);
