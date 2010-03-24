@@ -106,6 +106,21 @@
    <th>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
    </th>
+   <th>
+<?php echo label_for('casolart[portimeent]', __($labels['casolart{portimeent}']), 'class="required"  Style="width:150px"') ?>
+	  <div class="content<?php if ($sf_request->hasError('casolart{portimeent}')): ?> form-error<?php endif; ?>">
+	  <?php if ($sf_request->hasError('casolart{portimeent}')): ?>
+	    <?php echo form_error('casolart{portimeent}', array('class' => 'form-error-msg')) ?>
+	  <?php endif; ?>
+
+	<?php $value = object_checkbox_tag($casolart, 'getPortimeent', array (
+	  'control_name' => 'casolart[portimeent]',
+	  'onClick' => 'desmarcar(3)'
+	)); echo $value ? $value : '&nbsp;' ?>
+   </th>
+   <th>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   </th>
       <th>
 	   <?php echo label_for('casolart[actsolegr]', __($labels['casolart{actsolegr}']), 'class="required"  Style="width:150px"') ?>
 	  <div class="content<?php if ($sf_request->hasError('casolart{actsolegr}')): ?> form-error<?php endif; ?>">
