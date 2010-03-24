@@ -1086,7 +1086,7 @@ class Compras {
         self :: acumularUnidad($elmonto, $gridnuevo, & $gridunidad);
         $l = 0;
         while ($l < count($gridunidad)) {
-          $codigopresupuestario = $data->getCodpre();//$gridunidad[$l][0] . '-' . $data->getCodpre();
+          $codigopresupuestario = $gridunidad[$l][0] . '-' . $data->getCodpre();
           $mitotal = $gridunidad[$l][1];
           $c = new Criteria();
           $c->add(CpasiiniPeer :: PERPRE, '00');
