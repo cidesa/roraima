@@ -99,6 +99,18 @@ propel:
     nronot:
       type: VARCHAR
       size: 8
+    orddespacho:
+      type: VARCHAR
+      size: 8
+    guia:
+      type: VARCHAR
+      size: 10
+    contenedores:
+      type: VARCHAR
+      size: 100
+    billleading:
+      type: VARCHAR
+      size: 100
     id:
       type: INTEGER
       required: true

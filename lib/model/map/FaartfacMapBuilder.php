@@ -58,6 +58,14 @@ class FaartfacMapBuilder {
 
 		$tMap->addColumn('NRONOT', 'Nronot', 'string', CreoleTypes::VARCHAR, false, 8);
 
+		$tMap->addColumn('ORDDESPACHO', 'Orddespacho', 'string', CreoleTypes::VARCHAR, false, 8);
+
+		$tMap->addColumn('GUIA', 'Guia', 'string', CreoleTypes::VARCHAR, false, 10);
+
+		$tMap->addColumn('CONTENEDORES', 'Contenedores', 'string', CreoleTypes::VARCHAR, false, 100);
+
+		$tMap->addColumn('BILLLEADING', 'Billleading', 'string', CreoleTypes::VARCHAR, false, 100);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

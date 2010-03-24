@@ -57,6 +57,22 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 
 
 	
+	protected $orddespacho;
+
+
+	
+	protected $guia;
+
+
+	
+	protected $contenedores;
+
+
+	
+	protected $billleading;
+
+
+	
 	protected $id;
 
 	
@@ -154,6 +170,34 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
   {
 
     return trim($this->nronot);
+
+  }
+  
+  public function getOrddespacho()
+  {
+
+    return trim($this->orddespacho);
+
+  }
+  
+  public function getGuia()
+  {
+
+    return trim($this->guia);
+
+  }
+  
+  public function getContenedores()
+  {
+
+    return trim($this->contenedores);
+
+  }
+  
+  public function getBillleading()
+  {
+
+    return trim($this->billleading);
 
   }
   
@@ -284,6 +328,46 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setOrddespacho($v)
+	{
+
+    if ($this->orddespacho !== $v) {
+        $this->orddespacho = $v;
+        $this->modifiedColumns[] = FaartfacPeer::ORDDESPACHO;
+      }
+  
+	} 
+	
+	public function setGuia($v)
+	{
+
+    if ($this->guia !== $v) {
+        $this->guia = $v;
+        $this->modifiedColumns[] = FaartfacPeer::GUIA;
+      }
+  
+	} 
+	
+	public function setContenedores($v)
+	{
+
+    if ($this->contenedores !== $v) {
+        $this->contenedores = $v;
+        $this->modifiedColumns[] = FaartfacPeer::CONTENEDORES;
+      }
+  
+	} 
+	
+	public function setBillleading($v)
+	{
+
+    if ($this->billleading !== $v) {
+        $this->billleading = $v;
+        $this->modifiedColumns[] = FaartfacPeer::BILLLEADING;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -322,7 +406,15 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 
       $this->nronot = $rs->getString($startcol + 11);
 
-      $this->id = $rs->getInt($startcol + 12);
+      $this->orddespacho = $rs->getString($startcol + 12);
+
+      $this->guia = $rs->getString($startcol + 13);
+
+      $this->contenedores = $rs->getString($startcol + 14);
+
+      $this->billleading = $rs->getString($startcol + 15);
+
+      $this->id = $rs->getInt($startcol + 16);
 
       $this->resetModified();
 
@@ -330,7 +422,7 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 13; 
+            return $startcol + 17; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Faartfac object", $e);
     }
@@ -514,6 +606,18 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 				return $this->getNronot();
 				break;
 			case 12:
+				return $this->getOrddespacho();
+				break;
+			case 13:
+				return $this->getGuia();
+				break;
+			case 14:
+				return $this->getContenedores();
+				break;
+			case 15:
+				return $this->getBillleading();
+				break;
+			case 16:
 				return $this->getId();
 				break;
 			default:
@@ -538,7 +642,11 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 			$keys[9] => $this->getCanaju(),
 			$keys[10] => $this->getCandes(),
 			$keys[11] => $this->getNronot(),
-			$keys[12] => $this->getId(),
+			$keys[12] => $this->getOrddespacho(),
+			$keys[13] => $this->getGuia(),
+			$keys[14] => $this->getContenedores(),
+			$keys[15] => $this->getBillleading(),
+			$keys[16] => $this->getId(),
 		);
 		return $result;
 	}
@@ -591,6 +699,18 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 				$this->setNronot($value);
 				break;
 			case 12:
+				$this->setOrddespacho($value);
+				break;
+			case 13:
+				$this->setGuia($value);
+				break;
+			case 14:
+				$this->setContenedores($value);
+				break;
+			case 15:
+				$this->setBillleading($value);
+				break;
+			case 16:
 				$this->setId($value);
 				break;
 		} 	}
@@ -612,7 +732,11 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[9], $arr)) $this->setCanaju($arr[$keys[9]]);
 		if (array_key_exists($keys[10], $arr)) $this->setCandes($arr[$keys[10]]);
 		if (array_key_exists($keys[11], $arr)) $this->setNronot($arr[$keys[11]]);
-		if (array_key_exists($keys[12], $arr)) $this->setId($arr[$keys[12]]);
+		if (array_key_exists($keys[12], $arr)) $this->setOrddespacho($arr[$keys[12]]);
+		if (array_key_exists($keys[13], $arr)) $this->setGuia($arr[$keys[13]]);
+		if (array_key_exists($keys[14], $arr)) $this->setContenedores($arr[$keys[14]]);
+		if (array_key_exists($keys[15], $arr)) $this->setBillleading($arr[$keys[15]]);
+		if (array_key_exists($keys[16], $arr)) $this->setId($arr[$keys[16]]);
 	}
 
 	
@@ -632,6 +756,10 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(FaartfacPeer::CANAJU)) $criteria->add(FaartfacPeer::CANAJU, $this->canaju);
 		if ($this->isColumnModified(FaartfacPeer::CANDES)) $criteria->add(FaartfacPeer::CANDES, $this->candes);
 		if ($this->isColumnModified(FaartfacPeer::NRONOT)) $criteria->add(FaartfacPeer::NRONOT, $this->nronot);
+		if ($this->isColumnModified(FaartfacPeer::ORDDESPACHO)) $criteria->add(FaartfacPeer::ORDDESPACHO, $this->orddespacho);
+		if ($this->isColumnModified(FaartfacPeer::GUIA)) $criteria->add(FaartfacPeer::GUIA, $this->guia);
+		if ($this->isColumnModified(FaartfacPeer::CONTENEDORES)) $criteria->add(FaartfacPeer::CONTENEDORES, $this->contenedores);
+		if ($this->isColumnModified(FaartfacPeer::BILLLEADING)) $criteria->add(FaartfacPeer::BILLLEADING, $this->billleading);
 		if ($this->isColumnModified(FaartfacPeer::ID)) $criteria->add(FaartfacPeer::ID, $this->id);
 
 		return $criteria;
@@ -686,6 +814,14 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 		$copyObj->setCandes($this->candes);
 
 		$copyObj->setNronot($this->nronot);
+
+		$copyObj->setOrddespacho($this->orddespacho);
+
+		$copyObj->setGuia($this->guia);
+
+		$copyObj->setContenedores($this->contenedores);
+
+		$copyObj->setBillleading($this->billleading);
 
 
 		$copyObj->setNew(true);

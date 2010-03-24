@@ -135,7 +135,13 @@ class fafacturActions extends autofafacturActions {
 		$this->columnas[1][11]->setHTML(' size="10" readonly=true onKeyPress=montorecargo(event,this.id);');
 		$this->columnas[1][11]->setEsTotal(true, 'fafactur_totmonrgo');
 		$this->columnas[1][12]->setEsTotal(true, 'fafactur_tottotart');
-
+         if ($this->cambiolog!="S")
+         {
+         	$this->columnas[1][23]->setOculta(true);
+         	$this->columnas[1][24]->setOculta(true);
+         	$this->columnas[1][25]->setOculta(true);
+         	$this->columnas[1][26]->setOculta(true);
+         }else $this->columnas[0]->setAncho(1800);
 
 		$this->obj1 = $this->columnas[0]->getConfig($artfac);
 
@@ -1007,16 +1013,25 @@ class fafacturActions extends autofafacturActions {
 		$this->mascaraarticulo = Herramientas :: getMascaraArticulo();
 		$this->lonart = strlen($this->mascaraarticulo);
 		$this->despnotent="";
+		$this->cambiolog="";
 	    $varemp = $this->getUser()->getAttribute('configemp');
 	    if ($varemp)
 		if(array_key_exists('aplicacion',$varemp))
 		 if(array_key_exists('facturacion',$varemp['aplicacion']))
-		   if(array_key_exists('modulos',$varemp['aplicacion']['facturacion']))
-		     if(array_key_exists('fadesp',$varemp['aplicacion']['facturacion']['modulos']))
+		   if(array_key_exists('modulos',$varemp['aplicacion']['facturacion'])){
+		     if(array_key_exists('fadesp',$varemp['aplicacion']['facturacion']['modulos'])) {
 		       if(array_key_exists('despnotent',$varemp['aplicacion']['facturacion']['modulos']['fadesp']))
 		       {
 		       	$this->despnotent=$varemp['aplicacion']['facturacion']['modulos']['fadesp']['despnotent'];
 		       }
+		     }
+		     if(array_key_exists('fafactur',$varemp['aplicacion']['facturacion']['modulos'])) {
+		       if(array_key_exists('cambiolog',$varemp['aplicacion']['facturacion']['modulos']['fafactur']))
+		       {
+		       	$this->cambiolog=$varemp['aplicacion']['facturacion']['modulos']['fafactur']['cambiolog'];
+		       }
+		     }
+		   }
 	}
 
 	public function executeAnular() {

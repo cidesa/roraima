@@ -168,3 +168,27 @@ opciones:                  # Opciones generales
   nombrecampo:             nronot
   esgrabable:              true
   html:                    [size="10" maxlength=8]
+24:       # Columna 24
+  titulo:                  Orden de Despacho
+  tipo:                    t
+  nombrecampo:             orddespacho
+  esgrabable:              true
+  html:                    [size="15" maxlength=8]
+25:       # Columna 25
+  titulo:                  Guía
+  tipo:                    t
+  nombrecampo:             guia
+  esgrabable:              true
+  html:                    [size="15" maxlength=10]
+26:       # Columna 26
+  titulo:                  Contenedores
+  tipo:                    a
+  nombrecampo:             contenedores
+  esgrabable:              true
+  html:                    [size="15x1" maxlength=100]
+27:       # Columna 27
+  titulo:                  BL
+  tipo:                    a
+  nombrecampo:             billleading
+  esgrabable:              true
+  html:                    [size="15x1" maxlength=100]
