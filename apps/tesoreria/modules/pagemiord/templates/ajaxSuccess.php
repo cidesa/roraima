@@ -99,15 +99,29 @@
 <table>
   <tr>
     <th><?php echo label_for('refere',__('Referencia') , 'class="required" Style="width:100px"') ?>
-<?php echo input_auto_complete_tag('refere','',
-    'pagemiord/autocomplete?ajax=6',  array('autocomplete' => 'off','maxlength' => 8,'onBlur'=> remote_function(array(
+  <?php $value = input_tag('refere', '', array (
+  'size' => 20,
+  'maxlength' => 8,
+  'onBlur'=> remote_function(array(
        'update'   => 'divGrid2',
        'url'      => 'pagemiord/ajax',
+       'condition' => "$('refere').value != ''",
        'script'   => true,
        'complete' => 'AjaxJSON(request, json),actualizarsaldos(), mensajes();',
        'with' => "'ajax=6&codigo='+this.value+'&fecha='+$('fecha').value+'&arreglo='+$('opordpag_referencias').value+'&indice='+$('indref').value+'&tipcau='+$('opordpag_tipcau').value+'&fecha2='+$('opordpag_fecemi').value+'&observe='+$('opordpag_observe').value+'&causado='+$('total').value+'&refcre='+$('refcre').value"
-        ))),array('use_style' => 'true', 'with' => "'tipcau='+$('opordpag_tipcau').value")
-  )  ?></th>
+        ))
+)); echo $value ? $value : '&nbsp;' ?>
+
+<?php //echo input_auto_complete_tag('refere','',
+  //  'pagemiord/autocomplete?ajax=6'//,  array('autocomplete' => 'off','maxlength' => 8,'onBlur'=> remote_function(array(
+       //'update'   => 'divGrid2',
+       //'url'      => 'pagemiord/ajax',
+       //'script'   => true,
+       //'complete' => 'AjaxJSON(request, json),actualizarsaldos(), mensajes();',
+       //'with' => "'ajax=6&codigo='+this.value+'&fecha='+$('fecha').value+'&arreglo='+$('opordpag_referencias').value+'&indice='+$('indref').value+'&tipcau='+$('opordpag_tipcau').value+'&fecha2='+$('opordpag_fecemi').value+'&observe='+$('opordpag_observe').value+'&causado='+$('total').value+'&refcre='+$('refcre').value"
+        //))),array('use_style' => 'true', 'with' => "'tipcau='+$('opordpag_tipcau').value")
+  //)  ?>
+  </th>
 <th>
 <div id="cpprecom" style="display:none">
 <?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Cpprecom_Pagemiord/clase/Cpprecom/frame/sf_admin_edit_form/obj1/refere/campo1/refprc')?>
