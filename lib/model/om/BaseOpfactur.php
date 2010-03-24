@@ -89,6 +89,26 @@ abstract class BaseOpfactur extends BaseObject  implements Persistent {
 
 
 	
+	protected $observacion;
+
+
+	
+	protected $basirs;
+
+
+	
+	protected $porirs;
+
+
+	
+	protected $monirs;
+
+
+	
+	protected $codirs;
+
+
+	
 	protected $id;
 
 	
@@ -265,6 +285,44 @@ abstract class BaseOpfactur extends BaseObject  implements Persistent {
 
   }
   
+  public function getObservacion()
+  {
+
+    return trim($this->observacion);
+
+  }
+  
+  public function getBasirs($val=false)
+  {
+
+    if($val) return number_format($this->basirs,2,',','.');
+    else return $this->basirs;
+
+  }
+  
+  public function getPorirs($val=false)
+  {
+
+    if($val) return number_format($this->porirs,2,',','.');
+    else return $this->porirs;
+
+  }
+  
+  public function getMonirs($val=false)
+  {
+
+    if($val) return number_format($this->monirs,2,',','.');
+    else return $this->monirs;
+
+  }
+  
+  public function getCodirs()
+  {
+
+    return trim($this->codirs);
+
+  }
+  
   public function getId()
   {
 
@@ -284,6 +342,11 @@ abstract class BaseOpfactur extends BaseObject  implements Persistent {
 	
 	public function setFecfac($v)
 	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
@@ -479,6 +542,56 @@ abstract class BaseOpfactur extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setObservacion($v)
+	{
+
+    if ($this->observacion !== $v) {
+        $this->observacion = $v;
+        $this->modifiedColumns[] = OpfacturPeer::OBSERVACION;
+      }
+  
+	} 
+	
+	public function setBasirs($v)
+	{
+
+    if ($this->basirs !== $v) {
+        $this->basirs = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OpfacturPeer::BASIRS;
+      }
+  
+	} 
+	
+	public function setPorirs($v)
+	{
+
+    if ($this->porirs !== $v) {
+        $this->porirs = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OpfacturPeer::PORIRS;
+      }
+  
+	} 
+	
+	public function setMonirs($v)
+	{
+
+    if ($this->monirs !== $v) {
+        $this->monirs = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OpfacturPeer::MONIRS;
+      }
+  
+	} 
+	
+	public function setCodirs($v)
+	{
+
+    if ($this->codirs !== $v) {
+        $this->codirs = $v;
+        $this->modifiedColumns[] = OpfacturPeer::CODIRS;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -533,7 +646,17 @@ abstract class BaseOpfactur extends BaseObject  implements Persistent {
 
       $this->facafe = $rs->getString($startcol + 19);
 
-      $this->id = $rs->getInt($startcol + 20);
+      $this->observacion = $rs->getString($startcol + 20);
+
+      $this->basirs = $rs->getFloat($startcol + 21);
+
+      $this->porirs = $rs->getFloat($startcol + 22);
+
+      $this->monirs = $rs->getFloat($startcol + 23);
+
+      $this->codirs = $rs->getString($startcol + 24);
+
+      $this->id = $rs->getInt($startcol + 25);
 
       $this->resetModified();
 
@@ -541,7 +664,7 @@ abstract class BaseOpfactur extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 21; 
+            return $startcol + 26; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Opfactur object", $e);
     }
@@ -749,6 +872,21 @@ abstract class BaseOpfactur extends BaseObject  implements Persistent {
 				return $this->getFacafe();
 				break;
 			case 20:
+				return $this->getObservacion();
+				break;
+			case 21:
+				return $this->getBasirs();
+				break;
+			case 22:
+				return $this->getPorirs();
+				break;
+			case 23:
+				return $this->getMonirs();
+				break;
+			case 24:
+				return $this->getCodirs();
+				break;
+			case 25:
 				return $this->getId();
 				break;
 			default:
@@ -781,7 +919,12 @@ abstract class BaseOpfactur extends BaseObject  implements Persistent {
 			$keys[17] => $this->getCodislr(),
 			$keys[18] => $this->getRifalt(),
 			$keys[19] => $this->getFacafe(),
-			$keys[20] => $this->getId(),
+			$keys[20] => $this->getObservacion(),
+			$keys[21] => $this->getBasirs(),
+			$keys[22] => $this->getPorirs(),
+			$keys[23] => $this->getMonirs(),
+			$keys[24] => $this->getCodirs(),
+			$keys[25] => $this->getId(),
 		);
 		return $result;
 	}
@@ -858,6 +1001,21 @@ abstract class BaseOpfactur extends BaseObject  implements Persistent {
 				$this->setFacafe($value);
 				break;
 			case 20:
+				$this->setObservacion($value);
+				break;
+			case 21:
+				$this->setBasirs($value);
+				break;
+			case 22:
+				$this->setPorirs($value);
+				break;
+			case 23:
+				$this->setMonirs($value);
+				break;
+			case 24:
+				$this->setCodirs($value);
+				break;
+			case 25:
 				$this->setId($value);
 				break;
 		} 	}
@@ -887,7 +1045,12 @@ abstract class BaseOpfactur extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[17], $arr)) $this->setCodislr($arr[$keys[17]]);
 		if (array_key_exists($keys[18], $arr)) $this->setRifalt($arr[$keys[18]]);
 		if (array_key_exists($keys[19], $arr)) $this->setFacafe($arr[$keys[19]]);
-		if (array_key_exists($keys[20], $arr)) $this->setId($arr[$keys[20]]);
+		if (array_key_exists($keys[20], $arr)) $this->setObservacion($arr[$keys[20]]);
+		if (array_key_exists($keys[21], $arr)) $this->setBasirs($arr[$keys[21]]);
+		if (array_key_exists($keys[22], $arr)) $this->setPorirs($arr[$keys[22]]);
+		if (array_key_exists($keys[23], $arr)) $this->setMonirs($arr[$keys[23]]);
+		if (array_key_exists($keys[24], $arr)) $this->setCodirs($arr[$keys[24]]);
+		if (array_key_exists($keys[25], $arr)) $this->setId($arr[$keys[25]]);
 	}
 
 	
@@ -915,6 +1078,11 @@ abstract class BaseOpfactur extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(OpfacturPeer::CODISLR)) $criteria->add(OpfacturPeer::CODISLR, $this->codislr);
 		if ($this->isColumnModified(OpfacturPeer::RIFALT)) $criteria->add(OpfacturPeer::RIFALT, $this->rifalt);
 		if ($this->isColumnModified(OpfacturPeer::FACAFE)) $criteria->add(OpfacturPeer::FACAFE, $this->facafe);
+		if ($this->isColumnModified(OpfacturPeer::OBSERVACION)) $criteria->add(OpfacturPeer::OBSERVACION, $this->observacion);
+		if ($this->isColumnModified(OpfacturPeer::BASIRS)) $criteria->add(OpfacturPeer::BASIRS, $this->basirs);
+		if ($this->isColumnModified(OpfacturPeer::PORIRS)) $criteria->add(OpfacturPeer::PORIRS, $this->porirs);
+		if ($this->isColumnModified(OpfacturPeer::MONIRS)) $criteria->add(OpfacturPeer::MONIRS, $this->monirs);
+		if ($this->isColumnModified(OpfacturPeer::CODIRS)) $criteria->add(OpfacturPeer::CODIRS, $this->codirs);
 		if ($this->isColumnModified(OpfacturPeer::ID)) $criteria->add(OpfacturPeer::ID, $this->id);
 
 		return $criteria;
@@ -985,6 +1153,16 @@ abstract class BaseOpfactur extends BaseObject  implements Persistent {
 		$copyObj->setRifalt($this->rifalt);
 
 		$copyObj->setFacafe($this->facafe);
+
+		$copyObj->setObservacion($this->observacion);
+
+		$copyObj->setBasirs($this->basirs);
+
+		$copyObj->setPorirs($this->porirs);
+
+		$copyObj->setMonirs($this->monirs);
+
+		$copyObj->setCodirs($this->codirs);
 
 
 		$copyObj->setNew(true);

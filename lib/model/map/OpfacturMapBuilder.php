@@ -76,6 +76,14 @@ class OpfacturMapBuilder {
 
 		$tMap->addColumn('OBSERVACION', 'Observacion', 'string', CreoleTypes::VARCHAR, false, 250);
 
+		$tMap->addColumn('BASIRS', 'Basirs', 'double', CreoleTypes::NUMERIC, false, 18);
+
+		$tMap->addColumn('PORIRS', 'Porirs', 'double', CreoleTypes::NUMERIC, false, 18);
+
+		$tMap->addColumn('MONIRS', 'Monirs', 'double', CreoleTypes::NUMERIC, false, 18);
+
+		$tMap->addColumn('CODIRS', 'Codirs', 'string', CreoleTypes::VARCHAR, false, 50);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 
