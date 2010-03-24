@@ -2221,6 +2221,10 @@ class OrdendePago
     $resul= ContabcPeer::doSelectOne($c);
     if ($resul)
     {
+      $confcorcom=sfContext::getInstance()->getUser()->getAttribute('confcorcom');
+      if ($confcorcom=='N')
+      $numcom= 'RE'.substr($resul->getNumcom(),2,6);
+      else
       $numcom= Comprobante::Buscar_Correlativo();
       $fecha_aux=split("/",$fecha);
       $dateFormat = new sfDateFormat('es_VE');
