@@ -747,6 +747,21 @@ propel:
     observacion:
       type: VARCHAR
       size: 250
+    basirs:
+      type: NUMERIC
+      size: 18
+      scale: 2
+    porirs:
+      type: NUMERIC
+      size: 18
+      scale: 2
+    monirs:
+      type: NUMERIC
+      size: 18
+      scale: 2
+    codirs:
+      type: VARCHAR
+      size: 50
     id:
       type: INTEGER
       required: true

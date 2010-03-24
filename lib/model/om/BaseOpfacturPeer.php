@@ -13,7 +13,7 @@ abstract class BaseOpfacturPeer {
 	const CLASS_DEFAULT = 'lib.model.Opfactur';
 
 	
-	const NUM_COLUMNS = 21;
+	const NUM_COLUMNS = 26;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -80,6 +80,21 @@ abstract class BaseOpfacturPeer {
 	const FACAFE = 'opfactur.FACAFE';
 
 	
+	const OBSERVACION = 'opfactur.OBSERVACION';
+
+	
+	const BASIRS = 'opfactur.BASIRS';
+
+	
+	const PORIRS = 'opfactur.PORIRS';
+
+	
+	const MONIRS = 'opfactur.MONIRS';
+
+	
+	const CODIRS = 'opfactur.CODIRS';
+
+	
 	const ID = 'opfactur.ID';
 
 	
@@ -88,18 +103,18 @@ abstract class BaseOpfacturPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Numord', 'Fecfac', 'Numfac', 'Numctr', 'Tiptra', 'Totfac', 'Exeiva', 'Basimp', 'Poriva', 'Moniva', 'Monret', 'Basltf', 'Porltf', 'Monltf', 'Basislr', 'Porislr', 'Monislr', 'Codislr', 'Rifalt', 'Facafe', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (OpfacturPeer::NUMORD, OpfacturPeer::FECFAC, OpfacturPeer::NUMFAC, OpfacturPeer::NUMCTR, OpfacturPeer::TIPTRA, OpfacturPeer::TOTFAC, OpfacturPeer::EXEIVA, OpfacturPeer::BASIMP, OpfacturPeer::PORIVA, OpfacturPeer::MONIVA, OpfacturPeer::MONRET, OpfacturPeer::BASLTF, OpfacturPeer::PORLTF, OpfacturPeer::MONLTF, OpfacturPeer::BASISLR, OpfacturPeer::PORISLR, OpfacturPeer::MONISLR, OpfacturPeer::CODISLR, OpfacturPeer::RIFALT, OpfacturPeer::FACAFE, OpfacturPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('numord', 'fecfac', 'numfac', 'numctr', 'tiptra', 'totfac', 'exeiva', 'basimp', 'poriva', 'moniva', 'monret', 'basltf', 'porltf', 'monltf', 'basislr', 'porislr', 'monislr', 'codislr', 'rifalt', 'facafe', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, )
+		BasePeer::TYPE_PHPNAME => array ('Numord', 'Fecfac', 'Numfac', 'Numctr', 'Tiptra', 'Totfac', 'Exeiva', 'Basimp', 'Poriva', 'Moniva', 'Monret', 'Basltf', 'Porltf', 'Monltf', 'Basislr', 'Porislr', 'Monislr', 'Codislr', 'Rifalt', 'Facafe', 'Observacion', 'Basirs', 'Porirs', 'Monirs', 'Codirs', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (OpfacturPeer::NUMORD, OpfacturPeer::FECFAC, OpfacturPeer::NUMFAC, OpfacturPeer::NUMCTR, OpfacturPeer::TIPTRA, OpfacturPeer::TOTFAC, OpfacturPeer::EXEIVA, OpfacturPeer::BASIMP, OpfacturPeer::PORIVA, OpfacturPeer::MONIVA, OpfacturPeer::MONRET, OpfacturPeer::BASLTF, OpfacturPeer::PORLTF, OpfacturPeer::MONLTF, OpfacturPeer::BASISLR, OpfacturPeer::PORISLR, OpfacturPeer::MONISLR, OpfacturPeer::CODISLR, OpfacturPeer::RIFALT, OpfacturPeer::FACAFE, OpfacturPeer::OBSERVACION, OpfacturPeer::BASIRS, OpfacturPeer::PORIRS, OpfacturPeer::MONIRS, OpfacturPeer::CODIRS, OpfacturPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('numord', 'fecfac', 'numfac', 'numctr', 'tiptra', 'totfac', 'exeiva', 'basimp', 'poriva', 'moniva', 'monret', 'basltf', 'porltf', 'monltf', 'basislr', 'porislr', 'monislr', 'codislr', 'rifalt', 'facafe', 'observacion', 'basirs', 'porirs', 'monirs', 'codirs', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Numord' => 0, 'Fecfac' => 1, 'Numfac' => 2, 'Numctr' => 3, 'Tiptra' => 4, 'Totfac' => 5, 'Exeiva' => 6, 'Basimp' => 7, 'Poriva' => 8, 'Moniva' => 9, 'Monret' => 10, 'Basltf' => 11, 'Porltf' => 12, 'Monltf' => 13, 'Basislr' => 14, 'Porislr' => 15, 'Monislr' => 16, 'Codislr' => 17, 'Rifalt' => 18, 'Facafe' => 19, 'Id' => 20, ),
-		BasePeer::TYPE_COLNAME => array (OpfacturPeer::NUMORD => 0, OpfacturPeer::FECFAC => 1, OpfacturPeer::NUMFAC => 2, OpfacturPeer::NUMCTR => 3, OpfacturPeer::TIPTRA => 4, OpfacturPeer::TOTFAC => 5, OpfacturPeer::EXEIVA => 6, OpfacturPeer::BASIMP => 7, OpfacturPeer::PORIVA => 8, OpfacturPeer::MONIVA => 9, OpfacturPeer::MONRET => 10, OpfacturPeer::BASLTF => 11, OpfacturPeer::PORLTF => 12, OpfacturPeer::MONLTF => 13, OpfacturPeer::BASISLR => 14, OpfacturPeer::PORISLR => 15, OpfacturPeer::MONISLR => 16, OpfacturPeer::CODISLR => 17, OpfacturPeer::RIFALT => 18, OpfacturPeer::FACAFE => 19, OpfacturPeer::ID => 20, ),
-		BasePeer::TYPE_FIELDNAME => array ('numord' => 0, 'fecfac' => 1, 'numfac' => 2, 'numctr' => 3, 'tiptra' => 4, 'totfac' => 5, 'exeiva' => 6, 'basimp' => 7, 'poriva' => 8, 'moniva' => 9, 'monret' => 10, 'basltf' => 11, 'porltf' => 12, 'monltf' => 13, 'basislr' => 14, 'porislr' => 15, 'monislr' => 16, 'codislr' => 17, 'rifalt' => 18, 'facafe' => 19, 'id' => 20, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, )
+		BasePeer::TYPE_PHPNAME => array ('Numord' => 0, 'Fecfac' => 1, 'Numfac' => 2, 'Numctr' => 3, 'Tiptra' => 4, 'Totfac' => 5, 'Exeiva' => 6, 'Basimp' => 7, 'Poriva' => 8, 'Moniva' => 9, 'Monret' => 10, 'Basltf' => 11, 'Porltf' => 12, 'Monltf' => 13, 'Basislr' => 14, 'Porislr' => 15, 'Monislr' => 16, 'Codislr' => 17, 'Rifalt' => 18, 'Facafe' => 19, 'Observacion' => 20, 'Basirs' => 21, 'Porirs' => 22, 'Monirs' => 23, 'Codirs' => 24, 'Id' => 25, ),
+		BasePeer::TYPE_COLNAME => array (OpfacturPeer::NUMORD => 0, OpfacturPeer::FECFAC => 1, OpfacturPeer::NUMFAC => 2, OpfacturPeer::NUMCTR => 3, OpfacturPeer::TIPTRA => 4, OpfacturPeer::TOTFAC => 5, OpfacturPeer::EXEIVA => 6, OpfacturPeer::BASIMP => 7, OpfacturPeer::PORIVA => 8, OpfacturPeer::MONIVA => 9, OpfacturPeer::MONRET => 10, OpfacturPeer::BASLTF => 11, OpfacturPeer::PORLTF => 12, OpfacturPeer::MONLTF => 13, OpfacturPeer::BASISLR => 14, OpfacturPeer::PORISLR => 15, OpfacturPeer::MONISLR => 16, OpfacturPeer::CODISLR => 17, OpfacturPeer::RIFALT => 18, OpfacturPeer::FACAFE => 19, OpfacturPeer::OBSERVACION => 20, OpfacturPeer::BASIRS => 21, OpfacturPeer::PORIRS => 22, OpfacturPeer::MONIRS => 23, OpfacturPeer::CODIRS => 24, OpfacturPeer::ID => 25, ),
+		BasePeer::TYPE_FIELDNAME => array ('numord' => 0, 'fecfac' => 1, 'numfac' => 2, 'numctr' => 3, 'tiptra' => 4, 'totfac' => 5, 'exeiva' => 6, 'basimp' => 7, 'poriva' => 8, 'moniva' => 9, 'monret' => 10, 'basltf' => 11, 'porltf' => 12, 'monltf' => 13, 'basislr' => 14, 'porislr' => 15, 'monislr' => 16, 'codislr' => 17, 'rifalt' => 18, 'facafe' => 19, 'observacion' => 20, 'basirs' => 21, 'porirs' => 22, 'monirs' => 23, 'codirs' => 24, 'id' => 25, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, )
 	);
 
 	
@@ -192,6 +207,16 @@ abstract class BaseOpfacturPeer {
 		$criteria->addSelectColumn(OpfacturPeer::RIFALT);
 
 		$criteria->addSelectColumn(OpfacturPeer::FACAFE);
+
+		$criteria->addSelectColumn(OpfacturPeer::OBSERVACION);
+
+		$criteria->addSelectColumn(OpfacturPeer::BASIRS);
+
+		$criteria->addSelectColumn(OpfacturPeer::PORIRS);
+
+		$criteria->addSelectColumn(OpfacturPeer::MONIRS);
+
+		$criteria->addSelectColumn(OpfacturPeer::CODIRS);
 
 		$criteria->addSelectColumn(OpfacturPeer::ID);
 
