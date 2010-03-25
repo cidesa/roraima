@@ -667,7 +667,7 @@ class almsolegrActions extends autoalmsolegrActions
        $col1->setNombreCampo('check');
        $col1->setEsGrabable(true);
        $col1->setHTML(' ');
-       if ($precom=='') $col1->setOculta(true);
+       if ($precom=='' && $this->oculrecnoprc=='S') $col1->setOculta(true);
        $col1->setJScript('onClick="totalmarcadas(this.id)"');
 
        $obj= array('codart' => 2, 'desart' => 3, 'unimed' => 4, 'cosult' => 9, 'codpar' => 13);
@@ -753,7 +753,7 @@ class almsolegrActions extends autoalmsolegrActions
        $col11->setTitulo('Recargo');
        $col11->setNombreCampo('monrgo');
        $col11->setHTML('type="text" size="10" readonly=true');
-       if ($precom=='') $col11->setOculta(true);
+       if ($precom=='' && $this->oculrecnoprc=='S') $col11->setOculta(true);
 
        $col12 = clone $col11;
        $col12->setTitulo('Total');
@@ -788,7 +788,7 @@ class almsolegrActions extends autoalmsolegrActions
 	   $col16->setNombreCampo('anadir');
 	   $col16->setHTML('type="text" size="1" style="border:none" class="imagenalmacen"');
 	   $col16->setJScript('onClick="mostrargridrecargos(this.id)"');
-	   if ($precom=='') $col16->setOculta(true);
+	   if ($precom=='' && $this->oculrecnoprc=='S') $col16->setOculta(true);
 
 
 	  $col17 = new Columna('cadena_datos_recargo');
@@ -834,6 +834,7 @@ class almsolegrActions extends autoalmsolegrActions
        $loncat=strlen($this->mascaracategoria);
        $mascarapresupuesto=$this->mascarapresupuesto;
        $lonpre=strlen($this->mascarapresupuesto);
+       $precom=$this->precompromete;
 
        $opciones = new OpcionesGrid();
        $opciones->setEliminar(false);
@@ -849,6 +850,7 @@ class almsolegrActions extends autoalmsolegrActions
        $col1->setNombreCampo('check');
        $col1->setEsGrabable(true);
        $col1->setHTML(' ');
+	   if ($precom=='' && $this->oculrecnoprc=='S') $col1->setOculta(true);
        $col1->setJScript('onClick="totalmarcadas(this.id)"');
 
        $col2 = new Columna('Cód. Artículo');
@@ -924,7 +926,7 @@ class almsolegrActions extends autoalmsolegrActions
        $col11->setTitulo('Recargo');
        $col11->setNombreCampo('monrgo');
        $col11->setHTML('type="text" size="10" readonly=true');
-
+       if ($precom=='' && $this->oculrecnoprc=='S') $col11->setOculta(true);
        $col12 = clone $col11;
        $col12->setTitulo('Total');
        $col12->setNombreCampo('montot');
@@ -958,7 +960,6 @@ class almsolegrActions extends autoalmsolegrActions
 	   $col16->setNombreCampo('anadir');
 	   $col16->setHTML('type="text" size="1" style="border:none" class="imagenalmacen"');
 	   $col16->setJScript('onClick="mostrargridrecargos(this.id)"');
-
 
 	   $col17 = new Columna('cadena_datos_recargo');
        $col17->setTipo(Columna::TEXTO);
@@ -1251,6 +1252,7 @@ class almsolegrActions extends autoalmsolegrActions
     $this->bloqfec="";
     $this->oculeli="";
     $this->nometifor="";
+    $this->oculrecnoprc="";
     $varemp = $this->getUser()->getAttribute('configemp');
     if ($varemp)
 	if(array_key_exists('aplicacion',$varemp))
@@ -1280,6 +1282,10 @@ class almsolegrActions extends autoalmsolegrActions
 	       if(array_key_exists('nometifor',$varemp['aplicacion']['compras']['modulos']['almsolegr']))
 	       {
 	       	$this->nometifor=$varemp['aplicacion']['compras']['modulos']['almsolegr']['nometifor'];
+	       }
+		    if(array_key_exists('oculrecnoprc',$varemp['aplicacion']['compras']['modulos']['almsolegr']))
+	       {
+	       	$this->oculrecnoprc=$varemp['aplicacion']['compras']['modulos']['almsolegr']['oculrecnoprc'];
 	       }
          }
   }
