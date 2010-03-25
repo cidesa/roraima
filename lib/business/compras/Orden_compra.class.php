@@ -2263,7 +2263,7 @@ class Orden_compra
     //si la orden de compra refiere a Solicitud de egreso, los recargos son iguales a los de la solicitud,
     //de lo contrario si es orden de compra directa los recargos son los que el usuario haya introducido
     {
-    	if ($refprc!='N' && $afeprc!='S' && $afecom!='S' && $afedis!='R') {
+    	
 	    $tipdoc=Compras::ObtenerTipoDocumentoPrecompromiso();
 	    $c= new Criteria();
 	    $c->add(CadisrgoPeer::REQART,$caordcom->getRefsol());
@@ -2283,7 +2283,7 @@ class Orden_compra
            $distribucion->setTipdoc($caordcom->getDoccom());
            $distribucion->save();
          }
-    	}
+    	
 
          if ($refprc=='N' && $afeprc=='S' && $afecom=='S' && $afedis=='R')
          {
