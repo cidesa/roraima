@@ -331,11 +331,14 @@ class almordcomActions extends autoalmordcomActions
 	     {
 	       if($resul->getComasopre()=='S' && $resul->getComreqapr()!='S')
 	       {
-	        $totaimp=Orden_compra::totalImputacion($this->caordcom->getOrdcom());
-	        if (H::toFloat($this->caordcom->getMonord())!=$totaimp)
-	        {
-	        	$this->setFlash('notice', 'El Monto de la Imputaciones Generadas no es igual al de la Solicitud, Por favor verificar esta solicitud');
-	        }
+	        $tip=H::getX('CODPRO','Caprovee','Tipo',$this->caordcom->getCodpro());
+			 if ($tip=='P'){
+				$totaimp=Orden_compra::totalImputacion($this->caordcom->getOrdcom());
+		        if (H::toFloat($this->caordcom->getMonord())!=$totaimp)
+		        {
+		        	$this->setFlash('notice', 'El Monto de la Imputaciones Generadas no es igual al de la Solicitud, Por favor verificar esta solicitud');
+		        }
+			 }
 	       }
 	     }
 

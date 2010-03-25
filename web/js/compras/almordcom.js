@@ -1484,7 +1484,8 @@ function salvarmontorecargos()
 	                 var col_fila_despar_res = "zx_"+filaresumen+"_2";
 	                 var col_fila_monto_res = "zx_"+filaresumen+"_3";
 		             $(col_fila_codpar_res).value=ccodpar;
-	    	         $(col_fila_monto_res).value=cmonrgo;
+					 var totalart=toFloat2(cmonrgo);
+	    	         $(col_fila_monto_res).value=format(totalart.toFixed(2),'.',',','.');
 	    	         filaresumen++;
 	    	     }
 		        z++;
