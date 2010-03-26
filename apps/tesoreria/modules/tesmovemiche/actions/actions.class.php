@@ -449,7 +449,7 @@ class tesmovemicheActions extends autotesmovemicheActions
       	$resul=OpordpagPeer::doSelectOne($c);
       	$fecemi = $this->getRequestParameter('tscheemi_fecemi');
       	if ($resul)
-      	{ $dato=eregi_replace("[\n|\r|\n\r]", "", $resul->getDesord());}else{ $dato="";}
+      	{ $dato=eregi_replace("[\n|\r|\n\r]", "", htmlspecialchars($resul->getDesord()));}else{ $dato="";}
       	//print strtotime($resul->getFecemi()).'----'.strtotime($fecemi);
       	$dateFormat = new sfDateFormat('es_VE');
         $fecemi = $dateFormat->format($fecemi, 'i', $dateFormat->getInputPattern('d'));
