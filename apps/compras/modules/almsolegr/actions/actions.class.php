@@ -960,6 +960,7 @@ class almsolegrActions extends autoalmsolegrActions
 	   $col16->setNombreCampo('anadir');
 	   $col16->setHTML('type="text" size="1" style="border:none" class="imagenalmacen"');
 	   $col16->setJScript('onClick="mostrargridrecargos(this.id)"');
+	   if ($precom=='' && $this->oculrecnoprc=='S') $col16->setOculta(true);
 
 	   $col17 = new Columna('cadena_datos_recargo');
        $col17->setTipo(Columna::TEXTO);
@@ -1294,9 +1295,9 @@ class almsolegrActions extends autoalmsolegrActions
   {
      $this->casolart = $this->getCasolartOrCreate();
       SolicituddeEgresos::verificarDispGenComp($this->casolart,&$msj1,&$cod1,&$msj2,&$cod2,&$cod3);
-      if ($msj1!="")
+      if ($msj1==-1)
       {
-      	if ($msj2!="") {
+      	if ($msj2==-1) {
 	     if (SolicituddeEgresos::generaPrecompromiso($this->casolart,$this->casolart->getReqart(),&$msj))
 	     {
 	       SolicituddeEgresos::generarImputacionesPrecompromiso($this->casolart->getReqart());
