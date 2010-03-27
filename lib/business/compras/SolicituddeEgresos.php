@@ -1090,19 +1090,50 @@ class SolicituddeEgresos
 /*
  * Author: Actualiza la Solicitud de Egreso para poder generar la orden de compra
  */
-  public static function salvarAlmaprsolegr($clasemodelo,$grid,$login)
+  public static function salvarAlmaprsolegr($clasemodelo,$grid,$login,$aprobpresu)
   {
-    //$ordcom = $caordcom->getOrdcom();
+    $aprob=H::getX('CODEMP','Cadefart','Solreqapr','001');
     $x = $grid[0];
     $j = 0;
     while ($j < count($x)) {
       if ($x[$j]->getCheck()=='1')
       {
-      	$x[$j]->setUsuapr($login);
-      	$x[$j]->setFecapr(date('Y-m-d'));
-      	$x[$j]->setAprreq('S');
-
-      	$x[$j]->save();
+      	if ($aprobpresu=='S' && $aprob=='S')
+		{
+   		  $x[$j]->setUsuapr($login);
+      	  $x[$j]->setFecapr(date('Y-m-d'));
+      	  $x[$j]->setAprreq('S');
+      	  $x[$j]->save();
+		  
+		  $t= new Criteria();
+		  $t->add(CasolartPeer::REQART,$x[$j]->getReqart());
+		  $solegreso=CasolartPeer::doSelectOne($t);
+		  if ($solegreso){
+		    self::generaPrecompromiso($solegreso,$solegreso->getReqart(),&$msj);
+			if ($msj==-1)
+			{
+				self::generarImputacionesPrecompromiso($solegreso->getReqart());
+			}
+		  }
+		  
+		}else if ($aprobpresu=='S')
+		{
+		  $t= new Criteria();
+		  $t->add(CasolartPeer::REQART,$x[$j]->getReqart());
+		  $solegreso=CasolartPeer::doSelectOne($t);
+		  if ($solegreso){
+		    self::generaPrecompromiso($solegreso,$solegreso->getReqart(),&$msj);
+			if ($msj==-1)
+			{
+				self::generarImputacionesPrecompromiso($solegreso->getReqart());
+			}
+		  }
+		}else {
+			$x[$j]->setUsuapr($login);
+	      	$x[$j]->setFecapr(date('Y-m-d'));
+	      	$x[$j]->setAprreq('S');	
+	      	$x[$j]->save();
+		}
       }
       $j++;
     }
