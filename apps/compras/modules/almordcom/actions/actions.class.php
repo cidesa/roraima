@@ -398,14 +398,24 @@ class almordcomActions extends autoalmordcomActions
 
     $this->caordcom = $this->getCaordcomOrCreate();
     $this->updateCaordcomFromRequest();
-    Orden_compra::Grabar_compromiso($this->caordcom);
-    $totaimp=Orden_compra::totalImputacion($this->caordcom->getOrdcom());
-    if (H::toFloat($this->caordcom->getMonord())!=$totaimp)
-    {
-    	$msj="El Monto de la Imputaciones Generadas no es igual al de la Solicitud, Por favor verificar esta solicitud";
-    }else{
-        $msj="Se genero el Compromiso satisfactoriamente";
-    }
+	Orden_compra::verificarDispComprometer($this->caordcom,&$error1,&$cod1,&$error2);
+	if ($error1==-1)
+	{
+		if ($error2==-1)
+		{
+           Orden_compra::Grabar_compromiso($this->caordcom);
+		   $totaimp=Orden_compra::totalImputacion($this->caordcom->getOrdcom());
+		    if (H::toFloat($this->caordcom->getMonord())!=$totaimp)
+		    {
+		    	$msj="El Monto de la Imputaciones Generadas no es igual al de la Solicitud, Por favor verificar esta solicitud";
+		    }else{
+		        $msj="Se genero el Compromiso satisfactoriamente";
+		    }	   	
+		}
+		else{
+		  $msj="No hay disponibilidad para los Recargos";
+		}
+	}else $msj="No hay disponibilidad para el siguiente Código presupuestario: ".$cod1;    
 
     $javascript="alert('".$msj."')";
     $output = '[["javascript","'.$javascript.'",""]]';

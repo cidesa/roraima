@@ -46,6 +46,7 @@ class almaprsolegrActions extends autoalmaprsolegrActions
   {
     $this->regelim = $regelim;
     $this->nometiact="";
+	$this->aprobpresu="";
     $varemp = $this->getUser()->getAttribute('configemp');
     if ($varemp)
 	if(array_key_exists('aplicacion',$varemp))
@@ -56,6 +57,10 @@ class almaprsolegrActions extends autoalmaprsolegrActions
 	       {
 	       	$this->nometiact=$varemp['aplicacion']['compras']['modulos']['almaprsolegr']['nometiact'];
 	       }
+		   if(array_key_exists('aprobpresu',$varemp['aplicacion']['compras']['modulos']['almaprsolegr']))
+	       {
+	       	$this->aprobpresu=$varemp['aplicacion']['compras']['modulos']['almaprsolegr']['aprobpresu'];
+	       }
 	     }
 
     if(!count($reg)>0)
@@ -65,11 +70,21 @@ class almaprsolegrActions extends autoalmaprsolegrActions
       // Aquí va el código para generar arreglo de configuración del grid
     $this->obj = array();
     }
+    $aprob=H::getX('CODEMP','Cadefart','Solreqapr','001');	
     	$c = new Criteria();
-    	//$c->add(CasolartPeer::APRREQ,'S',Criteria::NOT_EQUAL);
-    	$c->add(CasolartPeer::STAREQ,'A');
-        $sql = "(casolart.APRREQ<>'S' or casolart.APRREQ isnull)";
-        $c->add(CasolartPeer::APRREQ, $sql, Criteria :: CUSTOM);
+		if ($this->aprobpresu=='S' && $aprob=='S'){
+	    	$c->add(CasolartPeer::STAREQ,'A');
+	        $sql = "(casolart.APRREQ<>'S' or casolart.APRREQ isnull) and casolart.reqart not in (select refprc from cpprecom)";
+	        $c->add(CasolartPeer::APRREQ, $sql, Criteria :: CUSTOM);			
+		}
+		else if ($this->aprobpresu=='S'){
+	        $sql = "casolart.STAREQ='A' and casolart.reqart not in (select refprc from cpprecom)";
+	        $c->add(CasolartPeer::STAREQ, $sql, Criteria :: CUSTOM);
+		}else {
+	    	$c->add(CasolartPeer::STAREQ,'A');			
+	        $sql = "(casolart.APRREQ<>'S' or casolart.APRREQ isnull)";
+	        $c->add(CasolartPeer::APRREQ, $sql, Criteria :: CUSTOM);			
+		}
     	$c->addAscendingOrderByColumn(CasolartPeer::REQART);
     	$c->addAscendingOrderByColumn(CasolartPeer::FECREQ);
     	$reg = CasolartPeer::doSelect($c);
@@ -96,36 +111,53 @@ class almaprsolegrActions extends autoalmaprsolegrActions
   public function validateEdit()
   {
     $this->coderr =-1;
-
-    // Se deben llamar a las funciones necesarias para cargar los
-    // datos de la vista que serán usados en las funciones de validación.
-    // Por ejemplo:
+	$this->sol="";
+	$this->art="";
+	$this->codp="";
+	$this->rec="";
 
     if($this->getRequest()->getMethod() == sfRequest::POST){
-
-      // $this->configGrid();
-      // $grid = Herramientas::CargarDatosGrid($this,$this->obj);
-
-      // Aqui van los llamados a los métodos de las clases del
-      // negocio para validar los datos.
-      // Los resultados de cada llamado deben ser analizados por ejemplo:
-
-      // $resp = Compras::validarAlmajuoc($this->caajuoc,$grid);
-
-       //$resp=Herramientas::ValidarCodigo($valor,$this->tstipmov,$campo);
-
-      // al final $resp es analizada en base al código que retorna
-      // Todas las funciones de validación y procesos del negocio
-      // deben retornar códigos >= -1. Estos código serám buscados en
-      // el archivo errors.yml en la función handleErrorEdit()
-
-      if($this->coderr!=-1){
-        return false;
-      } else return true;
+	      $this->casolart = $this->getCasolartOrCreate();
+	      try{ $this->updateCasolartFromRequest();}
+	      catch (Exception $ex){}
+		  $this->configGrid();
+		  
+	  if ($this->aprobpresu=='S')
+	  {
+          $grid = Herramientas::CargarDatosGridv2($this,$this->obj);
+	      $x=$grid[0];
+	      $i=0;
+		  	while ($i<count($x))
+			{
+			  if ($x[$i]->getCheck()=='1')
+			  {
+				  $r= new Criteria();
+				  $r->add(CasolartPeer::REQART,$x[$i]->getReqart());
+				  $solegreso= CasolartPeer::doSelectOne($r);
+				  if ($solegreso){
+			  	    SolicituddeEgresos::verificarDispGenComp($solegreso,&$msj1,&$cod1,&$msj2,&$cod2,&$cod3);
+					if ($msj1!=-1)
+					{
+				       $this->coderr=152; $this->sol=$x[$i]->getReqart(); $this->art=$cod1; $this->codp=$cod3;
+					   break;
+					}
+					if ($msj2!=-1)
+					{
+				       $this->coderr=$msj2; $this->rec=$cod2;
+					   break;
+					}
+				  }
+			  }
+			  $i++;			  
+			}
+		  }
+	      
+	  
+	      if($this->coderr!=-1){
+	        return false;
+	      } else return true;
 
     }else return true;
-
-
 
   }
 
@@ -136,12 +168,8 @@ class almaprsolegrActions extends autoalmaprsolegrActions
    */
   public function updateError()
   {
-    //$this->configGrid();
-
-    //$grid = Herramientas::CargarDatosGrid($this,$this->obj);
-
-    //$this->configGrid($grid[0],$grid[1]);
-
+    $this->configGrid();
+    $grid = Herramientas::CargarDatosGridv2($this,$this->obj);
   }
 
   /**
@@ -159,23 +187,29 @@ class almaprsolegrActions extends autoalmaprsolegrActions
 
     $grid = Herramientas::CargarDatosGridv2($this,$this->casolart->getObj());
     $login=$this->getUser()->getAttribute('loguse');
-    $coderr = SolicituddeEgresos::salvarAlmaprsolegr($clasemodelo,$grid,$login);
+    $coderr = SolicituddeEgresos::salvarAlmaprsolegr($clasemodelo,$grid,$login,	$this->aprobpresu);
 
     return $coderr;
   }
 
-  /**
-   * Función para colocar el codigo necesario para 
-   * el proceso de eliminar.
-   * Esta función debe retornar un valor igual a -1 si no hubo 
-   * Inconvenientes al guardar, y != de -1 si existe algún error.
-   * Si es diferente de -1 el valor devuelto debe ser un código de error
-   * Válido que exista en el archivo config/errores.yml
-   *
-   */
-  public function deleting($clasemodelo)
+  public function handleErrorEdit()
   {
-    return parent::deleting($clasemodelo);
+    $this->params=array();
+    $this->preExecute();
+    $this->casolart = $this->getCasolartOrCreate();
+    $this->updateCasolartFromRequest();
+	$this->updateError();
+    $this->labels = $this->getLabels();
+    if($this->getRequest()->getMethod() == sfRequest::POST)
+    {
+      if($this->coderr!=-1){
+        $err = Herramientas::obtenerMensajeError($this->coderr);
+		if ($this->coderr==152)
+        $this->getRequest()->setError('',$err. ' Solicitud N°: '.$this->sol.' Articulo: '.$this->art.' Códido Presup: '.$this->codp);
+        else $this->getRequest()->setError('',$err.' '.$this->rec);
+      }
+    }
+    return sfView::SUCCESS;
   }
 
 
