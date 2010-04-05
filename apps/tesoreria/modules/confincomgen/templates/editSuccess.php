@@ -24,7 +24,7 @@ array()) ?></h1>
 
 <div id="sf_admin_content">
 <?php include_partial('confincomgen/edit_messages', array('contabc' => $contabc, 'labels' => $labels)) ?>
-<?php include_partial('confincomgen/edit_form', array('arreglo_montos' => $arreglo_montos, 'arreglo_mov' => $arreglo_mov, 'monto' => $monto, 'reftra' => $reftra, 'numcom' => $numcom, 'fectra' => $fectra, 'destra' => $destra, 'obj' => $obj, 'contabc' => $contabc, 'labels' => $labels, 'ctas' => $ctas, 'desc_ctas' => $desc_ctas, 'gencorrel' => $gencorrel, 'formulario' => $formulario)) ?>
+<?php include_partial('confincomgen/edit_form', array('arreglo_montos' => $arreglo_montos, 'arreglo_mov' => $arreglo_mov, 'monto' => $monto, 'reftra' => $reftra, 'numcom' => $numcom, 'fectra' => $fectra, 'destra' => $destra, 'obj' => $obj, 'contabc' => $contabc, 'labels' => $labels, 'ctas' => $ctas, 'desc_ctas' => $desc_ctas, 'gencorrel' => $gencorrel, 'formulario' => $formulario, 'bloqfec' => $bloqfec)) ?>
 </div>
 
 <div id="sf_admin_footer">

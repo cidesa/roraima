@@ -142,7 +142,12 @@ $this->Bitacora('Guardo');
 
 	    if($reg_ordcom)
 	    {
+	    	if ($reg_ordcom->getStaord()!='N'){
 	      $output = '[["caajuoc_desord","'.$reg_ordcom->getDesord() .'",""],["caajuoc_codpro","'.$reg_ordcom->getCodpro().'",""],["caajuoc_nompro","'.$reg_ordcom->getNompro().'",""]]';
+	    	}else {
+	    		$this->mensaje="Orden de Compra esta Anulada...";
+ 	        $output = '[["caajuoc_desord","",""],["caajuoc_codpro","",""],["caajuoc_nompro","",""]]';
+	    	}
 	    }
 	    else
 	    {
@@ -155,7 +160,7 @@ $this->Bitacora('Guardo');
 
 	if ($this->mensaje!="")
 	   {
-	       $output = '[["caajuoc_desord","",""],["caajuoc_codpro","",""],["caajuoc_nompro","",""]]';
+	       $output = '[["caajuoc_desord","",""],["caajuoc_codpro","",""],["caajuoc_nompro","",""],["caajuoc_ordcom","",""]]';
 	   }
         $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
   }

@@ -2695,6 +2695,7 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
 
         $this->numdesh="";
         $this->mansolocor="";
+        $this->bloqfec="";
 	if ($varemp)
 	if(array_key_exists('aplicacion',$varemp))
 	 if(array_key_exists('tesoreria',$varemp['aplicacion']))
@@ -2704,9 +2705,13 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
 	       {
 	       	$this->numdesh=$varemp['aplicacion']['tesoreria']['modulos']['pagemiord']['numorddesh'];
 	       }
-               if(array_key_exists('mansolocor',$varemp['aplicacion']['tesoreria']['modulos']['pagemiord']))
+         if(array_key_exists('mansolocor',$varemp['aplicacion']['tesoreria']['modulos']['pagemiord']))
 	       {
 	       	$this->mansolocor=$varemp['aplicacion']['tesoreria']['modulos']['pagemiord']['mansolocor'];
+	       }
+	       if(array_key_exists('bloqfec',$varemp['aplicacion']['tesoreria']['modulos']['pagemiord']))
+	       {
+	       	$this->bloqfec=$varemp['aplicacion']['tesoreria']['modulos']['pagemiord']['bloqfec'];
 	       }
 	     }
 

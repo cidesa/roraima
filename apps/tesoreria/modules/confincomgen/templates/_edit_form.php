@@ -210,11 +210,17 @@ function llenar2()
     while (i<51)
     {
       fil= "ax_"+i+"_4";
+      var catfec="trigger_ax_"+i+"_4";
 
       if (document.getElementById(fil))
       {
         document.getElementById(fil).value=fecha;
-
+        var deshab='<?php echo $bloqfec; ?>';
+        if (deshab=='S')
+        {
+        	$(catfec).hide();
+        	$(fil).readOnly=true;
+        } 
       }
       i++;
     }
@@ -297,6 +303,13 @@ function llenar4()
 
 </form>
 <script type="text/javascript">
+var deshab='<?php echo $bloqfec; ?>';
+if (deshab=='S')
+{
+	$('trigger_contabc_feccom').hide();
+	$('contabc_feccom').readOnly=true;
+} 
+
 <!--
 actualizarsaldos();
 //-->

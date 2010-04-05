@@ -281,7 +281,7 @@
   'control_name' => 'tsmovlib[feccom]',
   'date_format' => 'dd/MM/yy',
   'onkeyup' => "javascript: mascara(this,'/',patron,true)",
-)); echo $value ? $value : '&nbsp;' ?>
+),date('Y-m-d')); echo $value ? $value : '&nbsp;' ?>
     </div>
 
 <br>
@@ -333,6 +333,15 @@ function deshabilitarbotones()
    	 $('trigger_tsmovlib_feclib').hide();
   	 $('trigger_tsmovlib_feccom').hide();
     }
+
+    var deshab='<?php echo $bloqfec; ?>';
+    if (deshab=='S')
+    {
+    	$('trigger_tsmovlib_fecing').hide();
+    	$('tsmovlib_fecing').readOnly=true;
+    	$('trigger_tsmovlib_feccom').hide();
+    	$('tsmovlib_feccom').readOnly=true;
+    }     
   }
 
 
@@ -418,9 +427,11 @@ if ($tsmovlib->getId()!='' && $anular=='S' && $tsmovlib->getTipmov()!='ANUC') { 
 <li class="float-rigth">
   <input type="button" name="Submit" value="Anular" class="sf_admin_action_delete" onclick="javascript:anular();" />
 </li>
+<?php if ($oculeli!="S") { ?>
 <li class="float-rigth">
   <input id="eliminarboton" type="button" name="Submit2" value="Eliminar" class="sf_admin_action_delete" onclick="javascript:eliminar();"/>
 </li>
+<?php } ?>
  <script type="text/javascript">
  	//$('eliminarboton').hide();
   //$('eliminarboton').hide();

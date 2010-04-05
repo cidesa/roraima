@@ -193,7 +193,20 @@
 
 ?>
 <script type="text/javascript">
+var deshab='<?php echo $bloqfec; ?>';
+if (deshab=='S')
+{
+	$('trigger_tscheemi_fecemi').hide();
+	$('tscheemi_fecemi').readOnly=true;
+} 
+
 var impche='<?php if($tscheemi->getEscheque()==true && $tscheemi->getId()!="") echo $impche; else echo 'N'?>';
+
+var numcomegr='<?php echo $numcomegr; ?>';
+if (numcomegr!="")
+{
+  alert_('El N&uacute;mero de Comprobante de Egresos es: '+numcomegr);
+}
 
 if (impche=='S')
 {

@@ -16,6 +16,7 @@ class CatalogoWeb extends BaseCatalogoWeb {
   public function Caordcom_Almajuoc($params = array ()) {
 
     $this->c = new Criteria();
+	$this->c->add(CaordcomPeer :: STAORD, 'N',Criteria::NOT_EQUAL);
     if (count($params) > 0)
       $this->c->add(CaordcomPeer :: ORDCOM, $params[0]);
     $this->c->addJoin(CaordcomPeer :: ORDCOM, CaartordPeer :: ORDCOM);
