@@ -38,20 +38,25 @@
   if(confirm('�Estas Seguro?'))
   {
     var valor = prompt('Desea Anular Orden con fecha: '+$('caordcom_fecord').value+' de C&oacute;digo:',motivo);
-    var fecha = prompt('Desea Anular Orden con fecha:',fecha);
+    if ($('fechaanuserv').value!='S') var fecha = prompt('Desea Anular Orden con fecha:',fecha);
       if (valor!=null)
       {
+    	if ($('fechaanuserv').value!='S') {
         if (fecha!=null)
         {
           if (Validar_fecha(fecha))
           {
             var fecha_valida=fecha;
-            new Ajax.Updater('anul', '/compras_dev.php/almordcom/salvaranu', {asynchronous:true, evalScripts:true, parameters:'ajax=1&valor='+valor+'&fecha='+fecha+'&ordcom='+document.getElementById('caordcom_ordcom').value+'&fecord='+document.getElementById('caordcom_fecord').value});
+            new Ajax.Updater('anul', '/compras_dev.php/almordcom/salvaranu', {asynchronous:true, evalScripts:true, parameters:'ajax=1&valor='+valor+'&fecha='+fecha+'&ordcom='+document.getElementById('caordcom_ordcom').value+'&fecord='+document.getElementById('caordcom_fecord').value+'&fecserv='+$('fechaanuserv').value});
         }
         else
         {
           alert_('Fecha de Anulaci&oacute;n Inv&aacute;lida');
         }
+      }
+      }else {
+    	  var fecha_valida=fecha;
+          new Ajax.Updater('anul', '/compras_dev.php/almordcom/salvaranu', {asynchronous:true, evalScripts:true, parameters:'ajax=1&valor='+valor+'&fecha='+fecha+'&ordcom='+document.getElementById('caordcom_ordcom').value+'&fecord='+document.getElementById('caordcom_fecord').value+'&fecserv='+$('fechaanuserv').value});
       }
     }
   }

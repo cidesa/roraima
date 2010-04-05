@@ -68,13 +68,25 @@ class tesmovemicheActions extends autotesmovemicheActions
     $this->numcues=$this->getRequestParameter('numcues');
     $this->getUser()->setAttribute('tschemi_operacion',"");
     $this->comprobaut="";
+    $this->bloqfec="";
     $varemp = $this->getUser()->getAttribute('configemp');
-    if ($varemp)
-	if(array_key_exists('generales',$varemp))
-     if(array_key_exists('comprobaut',$varemp['generales']))
-	 {
-	   $this->comprobaut=$varemp['generales']['comprobaut'];
-	 }
+    if ($varemp) {
+			if(array_key_exists('generales',$varemp)) {
+		     if(array_key_exists('comprobaut',$varemp['generales']))
+				 {
+				   $this->comprobaut=$varemp['generales']['comprobaut'];
+				 }
+			}
+	    if(array_key_exists('aplicacion',$varemp))
+			 if(array_key_exists('tesoreria',$varemp['aplicacion']))
+			   if(array_key_exists('modulos',$varemp['aplicacion']['tesoreria']))
+			     if(array_key_exists('tesmovemiche',$varemp['aplicacion']['tesoreria']['modulos'])){
+			       if(array_key_exists('bloqfec',$varemp['aplicacion']['tesoreria']['modulos']['tesmovemiche']))
+			       {
+			       	$this->bloqfec=$varemp['aplicacion']['tesoreria']['modulos']['tesmovemiche']['bloqfec'];
+			       }
+			     }
+    }
     if ($this->getRequest()->getMethod() == sfRequest::POST)
     {
          $this->updateTscheemiFromRequest();
@@ -578,6 +590,10 @@ class tesmovemicheActions extends autotesmovemicheActions
 		       if(array_key_exists('mancomegr',$varemp['aplicacion']['tesoreria']['modulos']['tesmovemiche']))
 		       {
 		       	$this->mancomegr=$varemp['aplicacion']['tesoreria']['modulos']['tesmovemiche']['mancomegr'];
+		       }
+		       if(array_key_exists('bloqfec',$varemp['aplicacion']['tesoreria']['modulos']['tesmovemiche']))
+		       {
+		       	$this->bloqfec=$varemp['aplicacion']['tesoreria']['modulos']['tesmovemiche']['bloqfec'];
 		       }
 		     }
 

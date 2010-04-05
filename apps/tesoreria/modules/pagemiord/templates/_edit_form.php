@@ -701,6 +701,13 @@ function num(e) {
       actualizarsaldos();
       netos();
    }
+
+    var deshab='<?php echo $bloqfec; ?>';
+    if (deshab=='S')
+    {
+    	$('trigger_opordpag_fecemi').hide();
+    	$('opordpag_fecemi').readOnly=true;
+    }    
   }
 
  function actualizarbenefi()

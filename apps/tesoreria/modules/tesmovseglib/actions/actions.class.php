@@ -207,16 +207,27 @@ class tesmovseglibActions extends autotesmovseglibActions
   {
     $this->tsmovlib = $this->getTsmovlibOrCreate();
     $this->cuentamov="";
+    $this->oculeli="";
+    $this->bloqfec="";
 	$varemp = $this->getUser()->getAttribute('configemp');
 	if ($varemp)
 	if(array_key_exists('aplicacion',$varemp))
 	 if(array_key_exists('tesoreria',$varemp['aplicacion']))
 	   if(array_key_exists('modulos',$varemp['aplicacion']['tesoreria']))
-	     if(array_key_exists('tesmovseglib',$varemp['aplicacion']['tesoreria']['modulos']))
+	     if(array_key_exists('tesmovseglib',$varemp['aplicacion']['tesoreria']['modulos'])){
 	       if(array_key_exists('cuentamov',$varemp['aplicacion']['tesoreria']['modulos']['tesmovseglib']))
 	       {
 	       	$this->cuentamov=$varemp['aplicacion']['tesoreria']['modulos']['tesmovseglib']['cuentamov'];
 	       }
+	     	 if(array_key_exists('oculeli',$varemp['aplicacion']['tesoreria']['modulos']['tesmovseglib']))
+	       {
+	       	$this->oculeli=$varemp['aplicacion']['tesoreria']['modulos']['tesmovseglib']['oculeli'];
+	       }
+	       if(array_key_exists('bloqfec',$varemp['aplicacion']['tesoreria']['modulos']['tesmovseglib']))
+	       {
+	       	$this->bloqfec=$varemp['aplicacion']['tesoreria']['modulos']['tesmovseglib']['bloqfec'];
+	       } 
+	     }
 
     ///////////////////////////////////
     /* CHEQUEO PARA VER SI PUEDE O NO ANU/ELIMINAR */
@@ -761,6 +772,28 @@ $this->Bitacora('Guardo');
     $this->compadic='';
     $this->eti='';
     $this->color='';
+  $this->cuentamov="";
+    $this->oculeli="";
+    $this->bloqfec="";
+	$varemp = $this->getUser()->getAttribute('configemp');
+	if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('tesoreria',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['tesoreria']))
+	     if(array_key_exists('tesmovseglib',$varemp['aplicacion']['tesoreria']['modulos'])){
+	       if(array_key_exists('cuentamov',$varemp['aplicacion']['tesoreria']['modulos']['tesmovseglib']))
+	       {
+	       	$this->cuentamov=$varemp['aplicacion']['tesoreria']['modulos']['tesmovseglib']['cuentamov'];
+	       }
+	     	 if(array_key_exists('oculeli',$varemp['aplicacion']['tesoreria']['modulos']['tesmovseglib']))
+	       {
+	       	$this->oculeli=$varemp['aplicacion']['tesoreria']['modulos']['tesmovseglib']['oculeli'];
+	       }
+	       if(array_key_exists('bloqfec',$varemp['aplicacion']['tesoreria']['modulos']['tesmovseglib']))
+	       {
+	       	$this->bloqfec=$varemp['aplicacion']['tesoreria']['modulos']['tesmovseglib']['bloqfec'];
+	       } 	        
+	     }
       $sql="select * from tsmovban where numcue='".$this->tsmovlib->getNumcue()."' and refban='".$this->tsmovlib->getReflib()."' and tipmov= '".$this->tsmovlib->getTipmov()."'";
     if (!Herramientas::BuscarDatos($sql,&$tsmovban))
   {

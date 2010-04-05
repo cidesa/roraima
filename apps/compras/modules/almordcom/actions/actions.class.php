@@ -1717,6 +1717,7 @@ class almordcomActions extends autoalmordcomActions
     $this->bloqfec="";
     $this->oculeli="";
     $this->oculsave="";
+    $this->fechaanuserv="";
     $varemp = $this->getUser()->getAttribute('configemp');
     if ($varemp)
 	if(array_key_exists('aplicacion',$varemp))
@@ -1747,6 +1748,10 @@ class almordcomActions extends autoalmordcomActions
 	       {
 	       	$this->oculsave=$varemp['aplicacion']['compras']['modulos']['almordcom']['oculsave'];
 	       }
+	     	 if(array_key_exists('fechaanuserv',$varemp['aplicacion']['compras']['modulos']['almordcom']))
+	       {
+	       	$this->fechaanuserv=$varemp['aplicacion']['compras']['modulos']['almordcom']['fechaanuserv'];
+	       }	       
          }
 
   }
@@ -2425,12 +2430,18 @@ class almordcomActions extends autoalmordcomActions
     $descripcion=$this->getRequestParameter('valor');//2
     $fecanu=$this->getRequestParameter('fecha');//3
     $fecanuvalidar=$this->getRequestParameter('fecha');//3
+    $fecserv=$this->getRequestParameter('fecserv');
 
     $dateFormat = new sfDateFormat('es_VE');
     $fecord = $dateFormat->format($fecord, 'i', $dateFormat->getInputPattern('d'));
     $fecanu = $dateFormat->format($fecanu, 'i', $dateFormat->getInputPattern('d'));
     $this->msgerr="";
     $this->btn="";
+
+    if ($fecserv=='S'){
+     $fecanu=date('Y-m-d');
+     $fecanuvalidar=date('d/m/Y');
+    }    
 
     if (Tesoreria::validaPeriodoCerrado($fecanuvalidar)==true)
     {

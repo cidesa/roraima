@@ -468,6 +468,18 @@ $this->Bitacora('Guardo');
     $this->monto = '';
     $this->formulario='';
     $this->gencorrel=$this->getUser()->getAttribute('confcorcom','S');
+    $this->bloqfec="";
+		$varemp = $this->getUser()->getAttribute('configemp');
+		if ($varemp)
+		if(array_key_exists('aplicacion',$varemp))
+		 if(array_key_exists('tesoreria',$varemp['aplicacion']))
+		   if(array_key_exists('modulos',$varemp['aplicacion']['tesoreria']))
+		     if(array_key_exists('confincomgen',$varemp['aplicacion']['tesoreria']['modulos'])){
+		       if(array_key_exists('bloqfec',$varemp['aplicacion']['tesoreria']['modulos']['confincomgen']))
+		       {
+		       	$this->bloqfec=$varemp['aplicacion']['tesoreria']['modulos']['confincomgen']['bloqfec'];
+		       } 
+		     }    
   }
 
 
