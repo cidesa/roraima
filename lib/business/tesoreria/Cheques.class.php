@@ -534,8 +534,22 @@ class Cheques
   public static function Grabar_Datos($tscheemi,$Monto,$cedrif,$numche,$reqfirma,$mancomegr)
   {
     $escheque=H::getX('CODTIP','Tstipmov','Escheque',$tscheemi->getTipdoc());
+    $gencheqnotdeb="";
+    $varemp=sfContext::getInstance()->getUser()->getAttribute('configemp');
+    if ($varemp)
+			if(array_key_exists('aplicacion',$varemp))
+			 if(array_key_exists('tesoreria',$varemp['aplicacion']))
+			   if(array_key_exists('modulos',$varemp['aplicacion']['tesoreria']))
+			     if(array_key_exists('tesmovemiche',$varemp['aplicacion']['tesoreria']['modulos'])){			       
+			       if(array_key_exists('gencheqnotdeb',$varemp['aplicacion']['tesoreria']['modulos']['tesmovemiche']))
+			       {
+			       	$gencheqnotdeb=$varemp['aplicacion']['tesoreria']['modulos']['tesmovemiche']['gencheqnotdeb'];
+			       }
+			     }
+	    
+    
     $numcomegr="";
-    if ($escheque==1)
+    if ($escheque==1 || $gencheqnotdeb=='S')
     {
       $tscheeminew= new Tscheemi();
       $tscheeminew->setTipdoc($tscheemi->getTipdoc());
