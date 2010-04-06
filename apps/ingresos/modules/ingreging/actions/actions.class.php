@@ -363,15 +363,15 @@ class ingregingActions extends autoingregingActions
   public function executeAnular()
   {
     $refing = $this->getRequestParameter('refing');
-    echo $fecing = $this->getRequestParameter('fecing');
-    exit();
-    $fectra = split('/', $fectra);
+    $fecing = $this->getRequestParameter('fecing');
+    
+    $fectra = split('/', $fecing);
     $fectra = $fectra[2] . "-" . $fectra[1] . "-" . $fectra[0];
 
     //Buscamos el movimiento a anular
     $c = new Criteria();
     $c->add(CiregingPeer::REFING,$refing);
-    $c->add(CiregingPeer::FECING,$fecing);
+    $c->add(CiregingPeer::FECING,$fectra);
     $this->cireging = CiregingPeer::doSelectOne($c);
 
     sfView::SUCCESS;
@@ -383,34 +383,39 @@ class ingregingActions extends autoingregingActions
     $refanu=$this->getRequestParameter('refanu');
     $fecanu=$this->getRequestParameter('fecanu');
     $desanu=$this->getRequestParameter('desanu');
+    $fecing=$this->getRequestParameter('fecing');
+    
+    $fectra = split('/', $fecanu);
+    $fectra = $fectra[2] . "-" . $fectra[1] . "-" . $fectra[0];    
 
+    
   //Buscamo el registro para su anulacion
     $c = new Criteria();
     $c->add(CiregingPeer::REFING,$refanu);
-    $c->add(CiregingPeer::FECING,$fecanu);
+    $c->add(CiregingPeer::FECING,$fecing);
     $this->cireging = CiregingPeer::doSelectOne($c);
-
+     if ($this->cireging) {
       $this->cireging->setDesanu($desanu);
-      $this->cireging->setFecanu($fecanu);
+      $this->cireging->setFecanu($fectra);
       $this->cireging->setStaing('N');
       $this->cireging->save();
+     }
 
   //Anular el detalle del movimiento Imp_Prc
     $c = new Criteria();
     $c->add(CiimpingPeer::REFING,$refanu);
-    $c->add(CiimpingPeer::FECING,$fecanu);
+    $c->add(CiimpingPeer::FECING,$fecing);
     $detalle= CiimpingPeer::doSelect($c);
-
-    //H::printR($detalle); exit;
-
-    foreach ($detalle as $imping){
-      $imping->setStaimp('N');
-      $imping->save();
-    }
+     if ($detalle) {
+	    foreach ($detalle as $imping){
+	      $imping->setStaimp('N');
+	      $imping->save();
+	    }
+     }
 
    ////////////////////////////
 
-  Ingresos::buscar_comprobante($this->cireging,'A',$fecanu);
+  Ingresos::buscar_comprobante($this->cireging,'A',$fectra);
 
   //Anulamos el comprobante
    $this->msg = Ingresos::generar_msl_anulado($this->cireging);
