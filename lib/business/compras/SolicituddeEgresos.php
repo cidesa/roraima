@@ -1612,7 +1612,7 @@ class SolicituddeEgresos
      foreach ($objetos as $datos)
      {
      	$codigopresupuestario= $datos->getCodpre();
-     	if ($datos->getCodpre()==$codigopresupuestario)
+     	if ($codpre==$codigopresupuestario)
      	{
      	  $cantidad=$datos->getCanreq();
           $costo=$datos->getCosto();
