@@ -3,7 +3,7 @@ opciones:                  # Opciones generales
   eliminar:                true
   tabla:                   ciimping
   ancho:                   1220
-  anchogrid:               600
+  anchogrid:               1000
   filas:                   1
   titulo:                  ' '
   htmltotalfilas:          ' '

@@ -36,16 +36,16 @@
 
 <br>
 
-    <?php echo label_for('cireging[fecing]', __('Fecha'), 'class="required" ') ?>
-    <div class="content<?php if ($sf_request->hasError('cireging{fecing}')): ?> form-error<?php endif; ?>">
-    <?php if ($sf_request->hasError('cireging{fecing}')): ?>
-      <?php echo form_error('cireging{fecing}', array('class' => 'form-error-msg')) ?>
+    <?php echo label_for('cireging[fecanu]', __('Fecha'), 'class="required" ') ?>
+    <div class="content<?php if ($sf_request->hasError('cireging{fecanu}')): ?> form-error<?php endif; ?>">
+    <?php if ($sf_request->hasError('cireging{fecanu}')): ?>
+      <?php echo form_error('cireging{fecanu}', array('class' => 'form-error-msg')) ?>
     <?php endif; ?>
 
-    <?php $value = object_input_date_tag($cireging, 'getFecing', array (
+    <?php $value = object_input_date_tag($cireging, 'getFecanu', array (
     'rich' => true,
   'calendar_button_img' => '/sf/sf_admin/images/date.png',
-  'control_name' => 'cireging[fecing]',
+  'control_name' => 'cireging[fecanu]',
   'date_format' => 'dd/MM/yyyy',
   'size' => 10,
   'maxlength' => 10,
@@ -86,12 +86,13 @@ document.getElementById('desanu').focus();
 function salvar()
 {
   var refanu = $('cireging_refing').value;
-  var fecanu = $('cireging_fecing').value;
+  var fecanu = $('cireging_fecanu').value;
   var desanu = $('desanu').value;
+  var fecing = $('fecing').value;
 
   if ((refanu!='') && (fecanu!='') && (desanu!='')){
     f = document.sf_admin_edit_form;
-    f.action = 'salvaranu?refanu='+refanu+'&fecanu='+fecanu+'&desanu='+desanu;
+    f.action = 'salvaranu?refanu='+refanu+'&fecanu='+fecanu+'&fecing='+fecing+'&desanu='+desanu;
     f.submit();
   }else{
     alert('Ante de Continuar, Debe llenar todos los datos');

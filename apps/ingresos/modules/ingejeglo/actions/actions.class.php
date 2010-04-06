@@ -13,6 +13,27 @@
  */
 class ingejegloActions extends autoingejegloActions
 {
+	
+  public function executeList()
+  {
+    $this->processSort();
+
+    $this->processFilters();
+
+    $this->filters = $this->getUser()->getAttributeHolder()->getAll('sf_admin/cideftit/filters');
+
+
+     // 15    // pager
+    $this->pager = new sfPropelPager('Cideftit', 15);
+    $c = new Criteria();
+		$this->sql = "length(cideftit.codpre) = length(cidefniv.forpre)";
+		$c->add(CidefnivPeer :: FORPRE, $this->sql, Criteria :: CUSTOM);    
+    $this->addSortCriteria($c);
+    $this->addFiltersCriteria($c);
+    $this->pager->setCriteria($c);
+    $this->pager->setPage($this->getRequestParameter('page', 1));
+    $this->pager->init();
+  }	
 
   // Para incluir funcionalidades al executeEdit()
   /**
@@ -55,10 +76,9 @@ class ingejegloActions extends autoingejegloActions
             coalesce(Sum(MonAdi),0) as monadi,Sum(MonDim) as mondim,Sum(MonDis) as mondis, '' as id
             From CIASIINI
             where
-            codpre like '".$codpre."%' and
+            codpre='".$codpre."' and
             perpre='".$perpre."' and
             anopre='".$anopre."' ";
-
 
 
     Herramientas :: BuscarDatos($sql, & $reg);

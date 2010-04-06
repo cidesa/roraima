@@ -422,7 +422,7 @@ class Ingresos
             $tsmovlibnew->setFeclib($cireging->getFecing());
             $tsmovlibnew->setTipmov("ANUD");
             $tsmovlibnew->setMonmov($datos->getMonmov());
-            $tsmovlibnew->setNumcom($cireging->getRefing());
+            $tsmovlibnew->setNumcom($cireging->getNumcom());
             $tsmovlibnew->setCodcta($datos->getCodcta());
             $tsmovlibnew->setFeccom($cireging->getFecing());
             $tsmovlibnew->setStatus('C');
@@ -608,24 +608,24 @@ public static function buscar_comprobante($cireging,$accion,$fecanu){
 
     $c= new Criteria();
     $c->add(ContabcPeer::NUMCOM,$cireging->getRefing());
-    $c->add(ContabcPeer::FECCOM,$cireging->getFeccom());
+    $c->add(ContabcPeer::FECCOM,$cireging->getFecing());
     $contabc=ContabcPeer::doSelect($c);
 
     if ($contabc){
 
       $c1= new Criteria();
       $c1->add(Contabc1Peer::NUMCOM,$cireging->getRefing());
-      $c1->add(Contabc1Peer::FECCOM,$cireging->getFeccom());
+      $c1->add(Contabc1Peer::FECCOM,$cireging->getFecing());
       $contabc1=Contabc1Peer::doSelect($c);
 
       if ($contabc1){
 
         $c1= new Criteria();
         $c1->add(Contabc1Peer::NUMCOM,$cireging->getRefing());
-        $c1->add(Contabc1Peer::FECCOM,$cireging->getFeccom());
+        $c1->add(Contabc1Peer::FECCOM,$cireging->getFecing());
         $asiento=Contabc1Peer::doSelect($c);
 
-        if(count($contabc)==count($contabc1)){
+        if(count($contabc1)==count($asiento)){
           $eliminar = true;
         }else{
           $eliminar = false;
@@ -633,13 +633,13 @@ public static function buscar_comprobante($cireging,$accion,$fecanu){
 
         $c1= new Criteria();
         $c1->add(Contabc1Peer::NUMCOM,$cireging->getRefing());
-        $c1->add(Contabc1Peer::FECCOM,$cireging->getFeccom());
+        $c1->add(Contabc1Peer::FECCOM,$cireging->getFecing());
         Contabc1Peer::doDelete($c);
 
         if ($eliminar){
           $c= new Criteria();
           $c->add(ContabcPeer::NUMCOM,$cireging->getRefing());
-          $c->add(ContabcPeer::FECCOM,$cireging->getFeccom());
+          $c->add(ContabcPeer::FECCOM,$cireging->getFecing());
           ContabcPeer::doDelete($c);
         }
 
@@ -655,9 +655,13 @@ public static function buscar_comprobante($cireging,$accion,$fecanu){
 
     if ($contabc){
 
-      $tcontabc= new Contabc();
+    	$confcorcom=sfContext::getInstance()->getUser()->getAttribute('confcorcom');
+        if ($confcorcom=='N')
+         $numcom2=$cireging->getRefing();
+        else $numcom2 = Comprobante::Buscar_Correlativo();
+      $tcontabc= new Contabc();      
 
-      $tcontabc->setNumcom($cireging->getRefing());
+      $tcontabc->setNumcom($numcom2);
       $tcontabc->setFeccom($fecanu);
       $tcontabc->setDescom($contabc->getDescom());
       $tcontabc->setStacom('D');
@@ -671,7 +675,7 @@ public static function buscar_comprobante($cireging,$accion,$fecanu){
 
       foreach ($contabc1 as $per){
         $tcontabc1= new Contabc1();
-        $tcontabc1->setNumcom($per->getRefing());
+        $tcontabc1->setNumcom($numcom2);
         $tcontabc1->setFeccom($fecanu);
         $tcontabc1->setCodcta($per->getCodcta());
         $tcontabc1->setNumasi($per->getNumasi());
@@ -707,15 +711,15 @@ public static function buscar_comprobante($cireging,$accion,$fecanu){
 
     if ($cireging->getRefing()=='########')
     {
-      if (Herramientas::getVerCorrelativo('cortras','cidefniv',&$r))
+      if (Herramientas::getVerCorrelativo('coring','cidefniv',&$r))
       {
          $encontrado=false;
          while (!$encontrado)
          {
           $numero=str_pad($r, 8, '0', STR_PAD_LEFT);
           $c= new Criteria();
-          $c->add(CitraslaPeer::REFTRA,$numero);
-          $resul= CitraslaPeer::doSelectOne($c);
+          $c->add(CiregingPeer::REFING,$numero);
+          $resul= CiregingPeer::doSelectOne($c);
           if ($resul)
           {
             $r=$r+1;
@@ -732,7 +736,12 @@ public static function buscar_comprobante($cireging,$accion,$fecanu){
     }
 
     //$numerocomprob = $numeroorden;
-    $numerocomprob=Comprobante::Buscar_Correlativo();
+    //$numerocomprob=Comprobante::Buscar_Correlativo();
+     $confcorcom=sfContext::getInstance()->getUser()->getAttribute('confcorcom');
+    if ($confcorcom=='N')
+    {
+      $numerocomprob= $numorden;
+    }else $numerocomprob= '########';
     $reftra=$numorden;
     $cuentaporpagarrendicion = "";
 

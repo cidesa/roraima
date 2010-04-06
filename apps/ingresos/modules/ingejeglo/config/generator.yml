@@ -26,7 +26,7 @@ generator:
       title:          Ejecución Global
       fields:
         codpre:  {params: size=32 readonly=true}
-        nompre:  {params: size=40 readonly=true}
+        nompre:  {params: size=80 readonly=true}
       display:
         Datos del Codigo Presupuestario:  [ codpre, nompre, _perpre ]
         NONE: [ _grid]
