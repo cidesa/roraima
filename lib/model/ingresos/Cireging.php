@@ -22,6 +22,8 @@ class Cireging extends BaseCireging
    protected $nomcue="";
    protected $tipmov="";
    protected $refere="";
+   protected $blocfec="";
+   protected $mansolocor="";
 
 
 
@@ -60,5 +62,50 @@ class Cireging extends BaseCireging
       {
     	return self::getRefing();
       }
+      
+  public function getBlocfec()
+  {
+
+    $dato="";
+    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+    if ($varemp)
+		if(array_key_exists('aplicacion',$varemp))
+		 if(array_key_exists('ingresos',$varemp['aplicacion']))
+		   if(array_key_exists('modulos',$varemp['aplicacion']['ingresos']))
+		     if(array_key_exists('ingreging',$varemp['aplicacion']['ingresos']['modulos'])){
+		       if(array_key_exists('bloqfec',$varemp['aplicacion']['ingresos']['modulos']['ingreging']))
+		       {
+		       	$dato=$varemp['aplicacion']['ingresos']['modulos']['ingreging']['bloqfec'];
+		       }
+         }
+     return $dato;
+  }
+
+  public function setBlocfec()
+  {
+  	return $this->blocfec;
+  }
+  
+  public function getMansolocor()  
+  {
+    $dato="";
+    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+    if ($varemp)
+		if(array_key_exists('aplicacion',$varemp))
+		 if(array_key_exists('ingresos',$varemp['aplicacion']))
+		   if(array_key_exists('modulos',$varemp['aplicacion']['ingresos']))
+		     if(array_key_exists('ingreging',$varemp['aplicacion']['ingresos']['modulos'])){
+		       if(array_key_exists('mansolocor',$varemp['aplicacion']['ingresos']['modulos']['ingreging']))
+		       {
+		       	$dato=$varemp['aplicacion']['ingresos']['modulos']['ingreging']['mansolocor'];
+		       }
+         }
+     return $dato;
+  }
+
+  public function setMansolocor()
+  {
+  	return $this->mansolocor;
+  }      
 
 }

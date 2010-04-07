@@ -266,7 +266,7 @@ class ingadidisActions extends autoingadidisActions
         }
         else
         {
-          $javascript="alert('Código presupuestario no existe');$(id).value='';";
+          $javascript="alert('Código presupuestario no existe'); $('$cajtexcom').value='';";
 
         $output = '[["javascript","'.$javascript.'",""]]';
       $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
@@ -279,6 +279,8 @@ class ingadidisActions extends autoingadidisActions
         $mon    = $this->getRequestParameter('monto');
         $ano    = $this->getRequestParameter('ano');
         $cajtexmos  = $this->getRequestParameter('cajtexmos');
+        $cajtexcom  = $this->getRequestParameter('cajtexcom');
+        $cajmon  = $this->getRequestParameter('cajmon');
         $tipo       = $this->getRequestParameter('tipo');
         $javascript = "";
 
@@ -298,7 +300,7 @@ class ingadidisActions extends autoingadidisActions
 
         if ($monto>$monaux){
 
-          $javascript="alert_('No existe disponibilidad para hacer esta disminuci&oacute;n');";
+          $javascript="alert_('No existe disponibilidad para hacer esta disminuci&oacute;n'); $('$cajmon').value='0,00'; $('$cajtexcom').value=''; ";
           $output = '[["javascript","'.$javascript.'",""]]';
           $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
 
@@ -319,6 +321,10 @@ class ingadidisActions extends autoingadidisActions
 
         }
 
+        }else{
+          $javascript="alert_('El C&oacute;digo Presupuestario no tiene asignaci&oacute;n Inicial'); $('$cajtexcom').value=''";
+          $output = '[["javascript","'.$javascript.'",""]]';
+          $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');        
         }
 
       return sfView::HEADER_ONLY;
