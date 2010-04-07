@@ -332,7 +332,8 @@ class ingregingActions extends autoingregingActions
 
      if ($this->msjtres=="")
      {
-      $x = Ingresos::grabarComprobante($this->cireging,$detalle,&$comprobante);
+      $x = Ingresos::grabarComprobante($this->cireging,$detalle,&$comprobante,&$msjuno);
+      if ($msjuno=="") {
       $concom = $concom + 1;
 
       $form = "sf_admin/ingreging/confincomgen";
@@ -354,6 +355,9 @@ class ingregingActions extends autoingregingActions
       }
       $this->i = $concom - 1;
       $this->formulario = $f;
+      }else {
+        $this->msjtres=$msjuno;
+      }
      }
 
       $output =  '[["","",""]]';

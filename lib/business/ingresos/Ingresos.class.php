@@ -4,8 +4,8 @@
  *
  * @package    Roraima
  * @subpackage ingresos
- * @author     $Author:lhernandez $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id:Ingresos.class.php 32397 2009-09-01 19:18:37Z lhernandez $
+ * @author     $Author: dmartinez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: Ingresos.class.php 37415 2010-04-07 22:24:38Z dmartinez $
  * 
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -707,7 +707,7 @@ public static function buscar_comprobante($cireging,$accion,$fecanu){
 }///Fin buscar_comprobante
 
 
-  public static function grabarComprobante($cireging,$grid,&$arrcompro)
+  public static function grabarComprobante($cireging,$grid,&$arrcompro,&$msjuno)
   {
     $mensaje="";
     $numeroorden="";
@@ -782,7 +782,7 @@ public static function buscar_comprobante($cireging,$accion,$fecanu){
         $c->add(CideftitPeer::CODPRE,$x[$j]->getCodpre());
         $regis = CideftitPeer::doSelectOne($c);
         if ($regis)
-        {
+        {  
           $cuenta = H::iif(!is_null($regis->getCodcta()),$regis->getCodcta(),'');
 
           $b= new Criteria();
@@ -795,7 +795,7 @@ public static function buscar_comprobante($cireging,$accion,$fecanu){
               $tipo='C';
               $des="";
               $monto=$moncau;
-          }else { $msjuno='El Código Presupuestario no tiene asociado Codigo Contable válido'; return true;}
+          }else { $msjuno='La Cuenta Contable asociada a El Código Presupuestario no existe'; return true;}
         }
          if ($j==0)
          {
@@ -815,20 +815,29 @@ public static function buscar_comprobante($cireging,$accion,$fecanu){
       }
 
     //Obtener cta asociada al banco
+        $codigo="";
         $codigocuenta2=$cireging->getCtaban();
         $b1= new Criteria();
         $b1->add(TsdefbanPeer::NUMCUE,$codigocuenta2);
         $regis3 = TsdefbanPeer::doSelectOne($b1);
-          $codigo = $regis3->getCodcta();
+        if ($regis3) {
+          $codigo = $regis3->getCodcta();          
+        }
 
         //Obtener la descripcion del codigo de cuenta
         $b2= new Criteria();
         $b2->add(ContabbPeer::CODCTA,$codigo);
         $regis4  = ContabbPeer::doSelectOne($b2);
+        if ($regis4) {
           $nomcta = $regis4->getDescta();
           $tipo2  = 'D';
           $des2   = $regis4->getDescta();
           $monto2 = $cireging->getMontot();
+        }else {        
+          	$msjuno='La Cuenta Contable asociada a Cuenta Bancaria no existe';
+          	return true;
+        
+        }
 
       $cuentas=$codigo.'_'.$codigocuentas;
       $descr=$des2.'_'.$desc;
