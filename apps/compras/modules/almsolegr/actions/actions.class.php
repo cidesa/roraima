@@ -748,7 +748,7 @@ class almsolegrActions extends autoalmsolegrActions
        $col9->setNombreCampo('costo');
        $col9->setHTML('type="text" size="10"');
        $col9->setJScript('onKeypress="Total(event,this.id); recalcularecargos(event,this.id);"');
-       if ($precom=='') $col9->setOculta(true);
+       if ($precom=='' && $this->oculrecnoprc=='S') $col9->setOculta(true);
 
        $col10 = clone $col7;
        $col10->setTitulo('Descuento');
