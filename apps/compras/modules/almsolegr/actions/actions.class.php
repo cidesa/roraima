@@ -90,6 +90,11 @@ class almsolegrActions extends autoalmsolegrActions
 		      	$this->salvarrecar=138;
 		      	return false;
 		      }*/
+		   $t= new Criteria();
+		   $result= CadefartPeer::doSelectOne($t);
+		   if ($result) {
+		      
+		     if($result->getPrcasopre()=='S' && $result->getPrcreqapr()!='S') {
 		      if (count($grid[0])!=0 || count($grid2[0])!=0)
 		      {
 		      SolicituddeEgresos::validarAlmsolegr($this->casolart,$grid,$grid2,$this->getRequestParameter('id'),$this->getRequestParameter('tiporecarg'),&$msj1,&$cod1,&$msj2,&$cod2,&$msj3,&$cod3);
@@ -114,6 +119,8 @@ class almsolegrActions extends autoalmsolegrActions
 		       return false;
 		      }else return true;
 		      }
+		     }else return true;
+		   }else return true;
     }else return true;
    }
 
