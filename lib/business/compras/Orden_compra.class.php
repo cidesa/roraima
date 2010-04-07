@@ -1210,6 +1210,12 @@ class Orden_compra
               $cpcompro_new->setCedrif($caordcom->getRifpro());
               $cpcompro_new->setStacom('A');
               $cpcompro_new->setTipo($caordcom->getTipo());
+              $reqaut=H::getX('TIPCOM','Cpdoccom','Reqaut',$caordcom->getDoccom());
+              if ($reqaut=='S')              
+                $cpcompro_new->setAprcom('N');
+              else 
+                $cpcompro_new->setAprcom('S');
+              
               $cpcompro_new->save();
         $result=array();
         $sql1='';
