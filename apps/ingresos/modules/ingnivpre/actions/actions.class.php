@@ -222,7 +222,7 @@ class ingnivpreActions extends autoingnivpreActions
     $this->columnas = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/ingnivpre/'.sfConfig::get('sf_app_module_config_dir_name').'/grid');
     $this->columnas[1][0]->setCombo(Ingresos::ListaCatpar());
     $this->columnas[1][0]->setHTML('onChange="validarcatpar()"');
-    $this->columnas[1][1]->setHTML('maxlength="2" onBlur="actualizarformato(this.id)"');
+    $this->columnas[1][1]->setHTML(' onBlur="actualizarformato(this.id)"');
 
   $valor=Ingresos::movimientos();
 

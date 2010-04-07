@@ -18,6 +18,7 @@
 
 <input id="refing" name="refing" type="hidden" value="<? print $cireging->getRefing(); ?>">
 <input id="fecing" name="fecing" type="hidden" value="<? print $cireging->getFecing(); ?>">
+<input id="blocfec" name="blocfec" type="hidden" value="<? print $cireging->getBlocfec(); ?>">
 
 
   <div class="form-row">
@@ -80,6 +81,11 @@
 </div>
 <script type="text/javascript">
 <!--
+if ($('blocfec').value=='S')
+{
+	 $('trigger_cireging_fecanu').hide();
+	 $('cireging_fecanu').readOnly=true;
+}
 document.getElementById('desanu').focus();
 //-->
 

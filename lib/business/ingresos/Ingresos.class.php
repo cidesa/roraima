@@ -45,6 +45,9 @@ class Ingresos
   //Guarda el detalle del nivel presupuestario
   public static function salvarNiveles($cidefniv, $grid){
 
+  	$t= new Criteria();
+  	CinivelesPeer::doDelete($t); 
+  	
     $x=$grid[0];
       $j=0;
       while ($j<count($x))
@@ -229,8 +232,9 @@ class Ingresos
   {
       $x = $grid[0];
       $j = 0;
-      $c = new Criteria();
-      CiperejePeer::doDelete($c);
+      
+      $sql="delete from cipereje";
+      H::insertarRegistros($sql);    
 
       while ($j<count($x))
       {

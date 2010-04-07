@@ -12,7 +12,7 @@
 function actualizarformato(id)//Actualiza el formato de los niveles presupuestarios
 {
    $('cidefniv_forpre').value='';
-   var totfil = objs_filas_a.size();
+   var totfil = obtener_filas_grid('a',2);//objs_filas_a.size();
   // alert(totfil);
    var fila = true;
    var fil=0;

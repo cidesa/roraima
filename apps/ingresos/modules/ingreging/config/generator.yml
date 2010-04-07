@@ -41,7 +41,7 @@ generator:
       display:
         Datos del Ingreso:   [ _estatus, _refing, _fecing, desing, _codtip, _rifcon, _ctaban, _tipmov, numdep, numofi, _previs ]
         Detalles del Ingreso: [ _grid, _moning, _monrec, _mondes, _montot, _comprobante ]
-      hide:  [ idrefer, staing, idrefer ]
+      hide:  [ idrefer, staing, idrefer, blocfec, mansolocor ]
       actions:
         _list:        ~
         _save:        ~

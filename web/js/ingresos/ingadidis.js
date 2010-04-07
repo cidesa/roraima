@@ -125,9 +125,10 @@
    var codigo=$(idcod).value;
 
    var disponible="ax_"+fila+"_3";
+   var cod="ax_"+fila+"_1";
 
    if ($('ciadidis_adidis_A').checked){ var tipo='A';}else{var tipo='D';}
 
-   new Ajax.Request(getUrlModuloAjax(), {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=3&monto='+monto+'&codigo='+codigo+'&ano='+ano+'&cajtexmos='+disponible+'&tipo='+tipo})
+   new Ajax.Request(getUrlModuloAjax(), {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=3&monto='+monto+'&codigo='+codigo+'&ano='+ano+'&cajtexmos='+disponible+'&cajtexcom='+cod+'&cajmon='+id+'&tipo='+tipo})
 
  }
