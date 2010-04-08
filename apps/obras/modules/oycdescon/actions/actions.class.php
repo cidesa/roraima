@@ -1291,14 +1291,18 @@ class oycdesconActions extends autooycdesconActions
        	   $javascript="$('$cajtexcom').readOnly=true;    $$('.botoncat')[2].disabled=true;";
        	 }
        	 else
-       	 { $javascript="alert('La Empresa Contratista no a ofertado para esta obra');$('". $cajtexmos ."').value='';$('". $cajtexcom ."').value='';";}
+       	 { 
+       	 	 $this->configGridPartidas();
+       	 	 $javascript="alert('La Empresa Contratista no a ofertado para esta obra');$('". $cajtexmos ."').value='';$('". $cajtexcom ."').value='';";}
 
         }else {
+        	$this->configGridPartidas();
          $javascript="alert('La Empresa Contratista no esta registrada');$('". $cajtexmos ."').value='';$('". $cajtexcom ."').value='';";
         }
        }
        else
        {
+       	 $this->configGridPartidas();
        	$javascript="alert('La Empresa Contratista no ganó la adjudicación de esta obra');";
        }
        $output = '[["'.$cajtexcom.'","'.$dato.'",""],["'.$cajtexmos.'","'.$dato1.'",""],["ocregcon_feclic","'.$feclici.'",""],["javascript","'.$javascript.'",""]]';
