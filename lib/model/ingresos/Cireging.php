@@ -24,6 +24,7 @@ class Cireging extends BaseCireging
    protected $refere="";
    protected $blocfec="";
    protected $mansolocor="";
+   protected $oculeli="";
 
 
 
@@ -106,6 +107,28 @@ class Cireging extends BaseCireging
   public function setMansolocor()
   {
   	return $this->mansolocor;
-  }      
+  }
+  
+  public function getOculeli()  
+  {
+    $dato="";
+    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+    if ($varemp)
+		if(array_key_exists('aplicacion',$varemp))
+		 if(array_key_exists('ingresos',$varemp['aplicacion']))
+		   if(array_key_exists('modulos',$varemp['aplicacion']['ingresos']))
+		     if(array_key_exists('ingreging',$varemp['aplicacion']['ingresos']['modulos'])){
+		       if(array_key_exists('oculeli',$varemp['aplicacion']['ingresos']['modulos']['ingreging']))
+		       {
+		       	$dato=$varemp['aplicacion']['ingresos']['modulos']['ingreging']['oculeli'];
+		       }
+         }
+     return $dato;
+  }
+
+  public function setOculeli()
+  {
+  	return $this->oculeli;
+  }
 
 }

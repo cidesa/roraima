@@ -642,6 +642,8 @@ propel:
     desliq:
       type: VARCHAR
       size: 250
+    fecdep:                   #fecha del Deposito
+      type: DATE      
     id:
       type: INTEGER
       required: true

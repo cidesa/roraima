@@ -130,6 +130,34 @@ class ingregingActions extends autoingregingActions
     {
       $this->cireging->setMontot($cireging['montot']);
     }
+  if (isset($cireging['fecdep']))
+    {
+      if ($cireging['fecdep'])
+      {
+        try
+        {
+          $dateFormat = new sfDateFormat($this->getUser()->getCulture());
+                              if (!is_array($cireging['fecdep']))
+          {
+            $value = $dateFormat->format($cireging['fecdep'], 'i', $dateFormat->getInputPattern('d'));
+          }
+          else
+          {
+            $value_array = $cireging['fecdep'];
+            $value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+          }
+          $this->cireging->setFecdep($value);
+        }
+        catch (sfException $e)
+        {
+          // not a date
+        }
+      }
+      else
+      {
+        $this->cireging->setFecdep(null);
+      }
+    }
 
   }
 

@@ -104,7 +104,10 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
 	protected $desliq;
 
 
-	
+	protected $fecdep;
+
+
+		
 	protected $id;
 
 	
@@ -330,6 +333,28 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
     return trim($this->desliq);
 
   }
+  public function getFecdep($format = 'Y-m-d')
+  {
+
+    if ($this->fecdep === null || $this->fecdep === '') {
+      return null;
+    } elseif (!is_int($this->fecdep)) {
+            $ts = adodb_strtotime($this->fecdep);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecdep] as date/time value: " . var_export($this->fecdep, true));
+      }
+    } else {
+      $ts = $this->fecdep;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
   
   public function getId()
   {
@@ -613,6 +638,27 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
       }
   
 	} 
+	public function setFecdep($v)
+	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecdep] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecdep !== $ts) {
+      $this->fecdep = $ts;
+      $this->modifiedColumns[] = CiregingPeer::FECDEP;
+    }
+
+	} 
 	
 	public function setId($v)
 	{
@@ -676,7 +722,10 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
 
       $this->desliq = $rs->getString($startcol + 23);
 
-      $this->id = $rs->getInt($startcol + 24);
+      $this->fecdep = $rs->getDate($startcol + 24, null);
+
+      $this->id = $rs->getInt($startcol + 25);
+      
 
       $this->resetModified();
 
@@ -684,7 +733,7 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 25; 
+            return $startcol + 26; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Cireging object", $e);
     }
@@ -904,6 +953,9 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
 				return $this->getDesliq();
 				break;
 			case 24:
+				return $this->getFecdep();
+				break;
+			case 25:			
 				return $this->getId();
 				break;
 			default:
@@ -940,7 +992,8 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
 			$keys[21] => $this->getFecliq(),
 			$keys[22] => $this->getRefliq(),
 			$keys[23] => $this->getDesliq(),
-			$keys[24] => $this->getId(),
+			$keys[24] => $this->getFecdep(),
+			$keys[25] => $this->getId(),
 		);
 		return $result;
 	}
@@ -1029,6 +1082,9 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
 				$this->setDesliq($value);
 				break;
 			case 24:
+				$this->setFecdep($value);
+				break;
+			case 25:			
 				$this->setId($value);
 				break;
 		} 	}
@@ -1062,7 +1118,8 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[21], $arr)) $this->setFecliq($arr[$keys[21]]);
 		if (array_key_exists($keys[22], $arr)) $this->setRefliq($arr[$keys[22]]);
 		if (array_key_exists($keys[23], $arr)) $this->setDesliq($arr[$keys[23]]);
-		if (array_key_exists($keys[24], $arr)) $this->setId($arr[$keys[24]]);
+		if (array_key_exists($keys[24], $arr)) $this->setFecdep($arr[$keys[24]]);
+		if (array_key_exists($keys[25], $arr)) $this->setId($arr[$keys[25]]);
 	}
 
 	
@@ -1094,6 +1151,7 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CiregingPeer::FECLIQ)) $criteria->add(CiregingPeer::FECLIQ, $this->fecliq);
 		if ($this->isColumnModified(CiregingPeer::REFLIQ)) $criteria->add(CiregingPeer::REFLIQ, $this->refliq);
 		if ($this->isColumnModified(CiregingPeer::DESLIQ)) $criteria->add(CiregingPeer::DESLIQ, $this->desliq);
+		if ($this->isColumnModified(CiregingPeer::FECDEP)) $criteria->add(CiregingPeer::FECDEP, $this->fecdep);		
 		if ($this->isColumnModified(CiregingPeer::ID)) $criteria->add(CiregingPeer::ID, $this->id);
 
 		return $criteria;
@@ -1173,6 +1231,7 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
 
 		$copyObj->setDesliq($this->desliq);
 
+		$copyObj->setFecdep($this->fecdep);		
 
 		$copyObj->setNew(true);
 
