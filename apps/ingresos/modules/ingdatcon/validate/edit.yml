@@ -19,17 +19,17 @@ names:
     validators: Validator_nomcon
 
   ciconrep{dircon}:
-    required:  Yes
-    required_msg: La dirección no puede estar en Blanco
-    validators: Validator_dircon
+    required:  No
+    #required_msg: La dirección no puede estar en Blanco
+    #validators: Validator_dircon
 
   ciconrep{ciucon}:
-    required:  Yes
-    required_msg: La ciudad no puede estar en Blanco
+    required:  No
+    #required_msg: La ciudad no puede estar en Blanco
 
   ciconrep{telcon}:
-    required:  Yes
-    required_msg: El teléfono no puede estar en Blanco
+    required:  No
+    #required_msg: El teléfono no puede estar en Blanco
 
 
 
