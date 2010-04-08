@@ -486,7 +486,7 @@ $this->Bitacora('Guardo');
           {
             $this->getUser()->getAttributeHolder()->remove('formulario');
             $grabar=$this->getRequestParameter('grabar');
-            $reftra=$this->getRequestParameter('reftra');
+            $reftra=substr($this->getRequestParameter('reftra'),0,8);
             //$numcom=$this->getRequestParameter('numcom');
             $fectra=$this->getRequestParameter('fectra');
             $destra= $this->getRequestParameter('destra');
@@ -1128,6 +1128,20 @@ $this->Bitacora('Guardo');
 
     $dateFormat = new sfDateFormat($this->getUser()->getCulture());
     $fec = $dateFormat->format($feclib, 'i', $dateFormat->getInputPattern('d'));
+    
+   $this->bloqfec="";
+		$varemp = $this->getUser()->getAttribute('configemp');
+		if ($varemp)
+		if(array_key_exists('aplicacion',$varemp))
+		 if(array_key_exists('tesoreria',$varemp['aplicacion']))
+		   if(array_key_exists('modulos',$varemp['aplicacion']['tesoreria']))
+		     if(array_key_exists('tesmovseglib',$varemp['aplicacion']['tesoreria']['modulos'])){
+		       if(array_key_exists('bloqfec',$varemp['aplicacion']['tesoreria']['modulos']['tesmovseglib']))
+		       {
+		       	$this->bloqfec=$varemp['aplicacion']['tesoreria']['modulos']['tesmovseglib']['bloqfec'];
+		       } 
+		     }    
+    
 
     $c = new Criteria();
     $c->add(TsmovlibPeer::NUMCUE,$numcue);

@@ -23,6 +23,7 @@ generator:
       estatus:        { name: . }
       #comprobante: { name: Generar Comprobante }
       numcom:        { name: numero del comprobante }
+      fecdep:      { name: Fecha del Deposito}
 
     list:
       title:          Ingresos
@@ -39,9 +40,9 @@ generator:
     edit:
       title:          Edición de Ingresos
       display:
-        Datos del Ingreso:   [ _estatus, _refing, _fecing, desing, _codtip, _rifcon, _ctaban, _tipmov, numdep, numofi, _previs ]
+        Datos del Ingreso:   [ _estatus, _refing, _fecing, desing, _codtip, _rifcon, _ctaban, _tipmov, numdep, fecdep, numofi, _previs ]
         Detalles del Ingreso: [ _grid, _moning, _monrec, _mondes, _montot, _comprobante ]
-      hide:  [ idrefer, staing, idrefer, blocfec, mansolocor ]
+      hide:  [ idrefer, staing, idrefer, blocfec, mansolocor, oculeli ]
       actions:
         _list:        ~
         _save:        ~

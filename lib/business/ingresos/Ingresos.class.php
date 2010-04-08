@@ -380,7 +380,9 @@ class Ingresos
     $tsmovlib->setNumcue($cireging->getCtaban());
     $tsmovlib->setReflib($cireging->getNumdep());
     $tsmovlib->setCedrif($cireging->getRifcon());
-    $tsmovlib->setFeclib($cireging->getFecing());
+    if ($cireging->getFecdep()!="")
+      $tsmovlib->setFeclib($cireging->getFecdep());
+    else $tsmovlib->setFeclib($cireging->getFecing());
     $tsmovlib->setFecing($cireging->getFecing());
     $tsmovlib->setTipmov($cireging->getTipmov());
     $tsmovlib->setMonmov($cireging->getMontot());
@@ -392,7 +394,7 @@ class Ingresos
     if ($grabocontabilidad){
       $tsmovlib->setStatus('C');   //Contabilizado
       $tsmovlib->setFeccom($cireging->getFecing());
-      $tsmovlib->setNumcom($cireging->getRefing());
+      $tsmovlib->setNumcom($cireging->getNumcom());
 
     }else{
       $tsmovlib->setStatus('N');
@@ -423,7 +425,9 @@ class Ingresos
             $tsmovlibnew->setNumcue($datos->getNumcue());
             $tsmovlibnew->setReflib('A'.$cireging->getRefing());
             $tsmovlibnew->setCedrif($cireging->getCedrif());
-            $tsmovlibnew->setFeclib($cireging->getFecing());
+            if ($cireging->getFecdep()!="")
+            $tsmovlibnew->setFeclib($cireging->getFecdep());
+            else $tsmovlibnew->setFeclib($cireging->getFecing());
             $tsmovlibnew->setTipmov("ANUD");
             $tsmovlibnew->setMonmov($datos->getMonmov());
             $tsmovlibnew->setNumcom($cireging->getNumcom());

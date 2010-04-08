@@ -82,6 +82,8 @@ class CiregingMapBuilder {
 
 		$tMap->addColumn('DESLIQ', 'Desliq', 'string', CreoleTypes::VARCHAR, false, 250);
 
+		$tMap->addColumn('FECDEP', 'Fecdep', 'int', CreoleTypes::DATE, false, null);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

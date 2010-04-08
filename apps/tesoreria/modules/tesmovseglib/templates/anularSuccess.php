@@ -24,6 +24,7 @@
 <input id="compadic" name="comapdic" type="hidden" value="<? print $compadic; ?>">
 <input id="fechacom" name="fechacom" type="hidden" value="<? print $tsmovlib->getFeccom(); ?>">
 <input id="numcom" name="numcom" type="hidden" value="<? print $tsmovlib->getNumcom(); ?>">
+<input id="bloqfec" name="bloqfec" type="hidden" value="<? print $bloqfec; ?>">
 
   <div class="form-row">
     <?php echo label_for('tsmovlib[reflib]', __('Referencia'), 'class="required" ') ?>
@@ -55,7 +56,7 @@
     'control_name' => 'tsmovlib[feclib]',
     'date_format' => 'dd/MM/yy',
     'value'=>date('d/m/Y'),
-  )); echo $value ? $value : '&nbsp;' ?>
+  ),date('Y-m-d')); echo $value ? $value : '&nbsp;' ?>
       </div>
   </div>
 
@@ -95,6 +96,11 @@
 <script type="text/javascript">
 <!--
 document.getElementById('desanu').focus();
+if ($('bloqfec').value=='S')
+{
+	$('trigger_tsmovlib_feclib').hide();
+	$('tsmovlib_feclib').readOnly=true;
+}  
 //-->
 
 function salvar()
