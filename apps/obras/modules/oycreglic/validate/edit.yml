@@ -5,6 +5,11 @@ methods:
    - "ocreglic{codfin}"
    - "ocreglic{codclacomp}"
    - "ocreglic{codobr}"
+   - "ocreglic{codtiplic}"
+   - "ocreglic{fecreg}"
+   - "ocreglic{fecdisdes}"
+   - "ocreglic{fecdishas}"
+   - "ocreglic{costo}"
 
 names:
   ocreglic{codlic}:
@@ -30,6 +35,30 @@ names:
     required:  Yes
     required_msg: El Codigo de la Obra no puedo estar en Blanco
     validators: Validator_Obra, Obra_Validator
+
+  ocreglic{codtiplic}:
+    required:  Yes
+    required_msg: Debe seleccionar un Tipo de Licitación
+
+  ocreglic{fecreg}:
+    required:  Yes
+    required_msg: La Fecha de Registro no puedo estar en Blanco
+    validators: FechaValidator
+
+  ocreglic{fecdisdes}:
+    required:  Yes
+    required_msg: La Fecha Desde de Disponibilidad de Pliegos no puedo estar en Blanco
+    validators: FechaValidator
+
+  ocreglic{fecdishas}:
+    required:  Yes
+    required_msg: La Fecha Hasta de Disponibilidad de Pliegos no puedo estar en Blanco
+    validators: FechaValidator
+
+  ocreglic{costo}:
+    required:  Yes
+    required_msg: El Costo de Disponibilidad de Pliegos no puedo estar en Blanco
+    validators: MontoValidator
 
 Validator_codlic:
     class: sfPropelUniqueValidator
@@ -73,3 +102,16 @@ Validator_Obra:
         class:    Ocreglic
         column:   codobr
         unique_error:   El Código ya existe. Por Favor, Intente con otro.
+
+FechaValidator:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha introducida es invalida
+
+MontoValidator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^([0-9]*(\.*([0-9]{2,}))*\,?[0-9]+|[0-9]+\,?[0-9]*)?$/' ]
+        values_error: El valor introducido no cumple con el formato para montos
