@@ -30,7 +30,7 @@
     <?php $value = object_input_tag($bnmotdis, 'getCodmot', array (
   'size' => 4,
   'maxlength' => 4,
-  'onBlur'  => "javascript: valor=this.value; valor=valor.pad(4, '0',0);document.getElementById('bnmotdis_codmot').value=valor;document.getElementById('bnmotdis_codmot').disabled=false;",
+  'onBlur'  => $sf_user->getAttribute('corraut','','biedefmotdis')=='S' ? "javascript: valor=this.value; if($(this.id).value=='') $(this.id).value='####'; else { valor=valor.pad(4, '0',0);$(this.id).value=valor };$(this.id).disabled=false;" : "javascript: valor=this.value; valor=valor.pad(4, '0',0);$(this.id).value=valor ;$(this.id).disabled=false;",
   'readonly' => $bnmotdis->getId()!='' ? true : false ,
    'control_name' => 'bnmotdis[codmot]',
 )); echo $value ? $value : '&nbsp;' ?>
