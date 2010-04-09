@@ -104,7 +104,7 @@
   'complete' => 'AjaxJSON(request, json)',
   'condition' => "$('cacotiza_rifpro').value != '' && $('id').value == ''",
   'script'   => true,
-  'with' => "'ajax=1&cajtexmos=cacotiza_nompro&cajtexcom=cacotiza_rifpro&codigo='+this.value"
+  'with' => "'ajax=1&cajtexmos=cacotiza_nompro&cajtexcom=cacotiza_rifpro&fecha='+$('cacotiza_feccot').value+'&codigo='+this.value"
       ))),
  array('use_style' => 'true')
   )
