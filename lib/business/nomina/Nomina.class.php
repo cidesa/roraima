@@ -1254,7 +1254,7 @@ class Nomina {
       $token = "STAB";
     }
     
-    if (Herramientas :: StringPos($token, "SC", 0) != -1) {
+    if (Herramientas :: StringPos($token, "SC", 0) != -1 && $token!='SCAR') {
       $parametro = substr($token, 2, strlen($token) - 2);
       $fecha = substr($parametro, 2, 2) . "/" . substr($parametro, 0, 2) . "/" . substr($parametro, 4, 4);
       $rfec = strtotime($fecha);
@@ -3420,7 +3420,7 @@ class Nomina {
       $campo = "STAB";
     }
     
-  if (Herramientas :: StringPos($campo, "SC", 0) != -1) {
+  if (Herramientas :: StringPos($campo, "SC", 0) != -1 && $campo!='SCAR') {
       $parametro = substr($campo, 2, strlen($campo) - 2);
       $fecha = substr($parametro, 2, 2) . "/" . substr($parametro, 0, 2) . "/" . substr($parametro, 4, 4);
       $rfec = strtotime($fecha);
