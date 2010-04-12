@@ -1798,7 +1798,7 @@ class SolicituddeEgresos
         }
         else
         {
-          $gridunidad[$j][0]=$e[$k]->getCodcat();
+          $gridunidad[$j][0]=$obj1->getCodcat();
           $gridunidad[$j][1]=self::montoRecargo($acum,$monto,$totart);
         }
       }
