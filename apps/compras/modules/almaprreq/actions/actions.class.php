@@ -54,7 +54,7 @@ class almaprreqActions extends autoalmaprreqActions
     }
     	$c = new Criteria();
     	$c->add(CareqartPeer::STAREQ,'A');
-        $sql = "((careqart.APRREQ<>'A' and careqart.APRREQ<>'R') or careqart.APRREQ isnull or careqart.APRREQ='D')";
+        $sql = "((careqart.APRREQ<>'S' and careqart.APRREQ<>'R') or careqart.APRREQ isnull or careqart.APRREQ='D')";
         $c->add(CareqartPeer::APRREQ, $sql, Criteria :: CUSTOM);
     	$c->addAscendingOrderByColumn(CareqartPeer::REQART);
     	$c->addAscendingOrderByColumn(CareqartPeer::FECREQ);
@@ -80,7 +80,8 @@ class almaprreqActions extends autoalmaprreqActions
   
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
