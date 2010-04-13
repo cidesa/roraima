@@ -1288,7 +1288,7 @@ public static function Grabar_DetallesRetenciones($caretser,$grid)
       if ($x[$j]->getCheck()=='1' || $x[$j]->getCheck2()=='1' || $x[$j]->getCheck3()=='1')
       {
 
-      	if ($x[$j]->getCheck()=='1') $x[$j]->setAprreq('A');
+      	if ($x[$j]->getCheck()=='1') $x[$j]->setAprreq('S');
       	else if ($x[$j]->getCheck2()=='1') $x[$j]->setAprreq('R');
       	else $x[$j]->setAprreq('D');
       	$x[$j]->save();
