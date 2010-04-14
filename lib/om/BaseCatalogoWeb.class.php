@@ -200,7 +200,7 @@ class BaseCatalogoWeb
               $this->c->add($criterion);
             }
           }
-         }else{
+         }elseif($creoletype == CreoleTypes::CHAR || $creoletype == CreoleTypes::VARCHAR || $creoletype == CreoleTypes::LONGVARCHAR){
           if (isset($this->filters[$key]) && $this->filters[$key] !== '')
           {
             $campos = array();
@@ -215,7 +215,23 @@ class BaseCatalogoWeb
               }
             }
           }
+         }else
+             {
+                if (isset($this->filters[$key]) && $this->filters[$key] !== '')
+                  {
+                    $campos = array();
+                    $campo = '';
+                    eval('$campos = '.$this->clase.'Peer::getFieldNames();');
+
+                    if(in_array(ucfirst(strtolower($key)),$campos)){
+                      eval('$campo = '.$this->clase.'Peer::'.strtoupper($key).';');
+                      if (array_key_exists($campo,$this->columnas)){
+                        $eval = '$this->c->add('.$this->clase.'Peer::'.strtoupper($key).', $this->filters[$key]);  $this->c->setIgnoreCase(true);';
+                        eval($eval);
          }
+                    }
+                  }
+             }
       } //
     } // foreach
     }
