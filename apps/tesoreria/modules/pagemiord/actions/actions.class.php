@@ -1583,7 +1583,8 @@ else 'N' END) as esta,
 else 'N' END) as estaislr,
 (CASE when c.codret=a.codtip and c.codrep='003' THEN 'S'
 else 'N' END) as esta1xmil,
-round(sum(a.monret),2 ) as montoret, 1 as id, count(d.codret) as valor
+round(sum(a.monret),2 ) as montoret, (CASE when c.codret=a.codtip and c.codrep='005' THEN 'S'
+else 'N' END) as estairs,1 as id, count(d.codret) as valor
  from  optipret b,(select distinct(codret) from tsretiva) d RIGHT outer join (opretord a left outer join tsrepret c on c.codret = a.codtip) on d.codret=a.codtip
  where a.numord = '".$codigo."'
  and a.codtip = b.codtip
