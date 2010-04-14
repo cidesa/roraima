@@ -24,4 +24,26 @@ class Npexplab extends BaseNpexplab
   {
     return Herramientas::getX('CODNOM','Npnomina','Nomnom',self::getCodnom());
   }
+
+  public function getDedica()
+  {
+    $r = Herramientas::getX('CODEMP','Npasicaremp','codtie',self::getCodemp());
+    return Herramientas::getX('CODTIE','Nptiempo','destie',$r);
+}
+  public function getCondic()
+  {
+    self::getFecini()==null ? $fecini = date('Y-m-d') : $fecini = self::getFecini();
+    self::getFecter()==null ? $fecter = date('Y-m-d') : $fecter = self::getFecter();
+
+    $c = new Criteria();
+    $c->add(NpasicarempPeer::CODEMP,self::getCodemp());
+    $c->add(NpasicarempPeer::FECASI,$fecini,Criteria::LESS_EQUAL);
+    $c->add(NpasicarempPeer::FECASI,$fecter,Criteria::GREATER_EQUAL);
+    $per = NpasicarempPeer::doSelectOne($c);
+    if($per) $r=$per->getStatus(); else $r='';
+
+    return $r=='V' ? 'VIGENTE' : 'NO VIGENTE';
+  }
+
+
 }

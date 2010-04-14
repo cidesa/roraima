@@ -4087,6 +4087,12 @@ propel:
     ocupac:
       type: VARCHAR
       size: 1
+    carben:
+      type: VARCHAR
+      size: 1
+    dissus:
+      type: VARCHAR
+      size: 1
     id:
       type: INTEGER
       required: true
