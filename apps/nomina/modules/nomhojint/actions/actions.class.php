@@ -20,7 +20,8 @@ class nomhojintActions extends autonomhojintActions
   
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -1218,6 +1219,22 @@ $this->Bitacora('Guardo');
     $col10->setNombreCampo('desniv');
     $col10->setHTML('type="text" size="25"');
 
+    $col11 = new Columna('Dedicación');
+    $col11->setTipo(Columna::TEXTO);
+    $col11->setAlineacionObjeto(Columna::IZQUIERDA);
+    $col11->setAlineacionContenido(Columna::IZQUIERDA);
+    $col11->setEsGrabable(false);
+    $col11->setNombreCampo('dedica');
+    $col11->setHTML('type="text" size="40"');
+
+    $col12 = new Columna('Condición');
+    $col12->setTipo(Columna::TEXTO);
+    $col12->setAlineacionObjeto(Columna::IZQUIERDA);
+    $col12->setAlineacionContenido(Columna::IZQUIERDA);
+    $col12->setEsGrabable(false);
+    $col12->setNombreCampo('condic');
+    $col12->setHTML('type="text" size="25"');
+
     $opciones->addColumna($col1);
     $opciones->addColumna($col2);
     $opciones->addColumna($col3);
@@ -1228,6 +1245,8 @@ $this->Bitacora('Guardo');
     $opciones->addColumna($col8);
     $opciones->addColumna($col9);
     $opciones->addColumna($col10);
+    $opciones->addColumna($col11);
+    $opciones->addColumna($col12);
 
     $this->obj2 = $opciones->getConfig($per);
   }
@@ -1544,6 +1563,20 @@ $this->Bitacora('Guardo');
     $col15->setNombreCampo('porseghcm');
     $col15->setHTML('type="text" size="10" onBlur = "javascript:event.keyCode=13;return entermontootro(event,this.id)"');
 
+    $col16 = new Columna('Tipo de Carga HCM');
+    $col16->setTipo(Columna::COMBO);
+    $col16->setEsGrabable(true);
+    $col16->setNombreCampo('carben');
+    $col16->setCombo(array(''=>'Seleccione...','B'=>'Básica','A'=>'Adicional'));
+    $col16->setHTML(' ');
+
+    $col17 = new Columna('Discapacitado - Suspendido');
+    $col17->setTipo(Columna::COMBO);
+    $col17->setEsGrabable(true);
+    $col17->setNombreCampo('dissus');
+    $col17->setCombo(array(''=>'Seleccione...','S'=>'SI','N'=>'NO'));
+    $col17->setHTML(' ');
+
     $opciones->addColumna($col1);
     $opciones->addColumna($col2);
     $opciones->addColumna($col3);
@@ -1558,7 +1591,9 @@ $this->Bitacora('Guardo');
     $opciones->addColumna($col11);
     $opciones->addColumna($col12);
     $opciones->addColumna($col13);
-	$opciones->addColumna($col15);
+    $opciones->addColumna($col15);
+    $opciones->addColumna($col16);
+    $opciones->addColumna($col17);
 
 
 

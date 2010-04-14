@@ -3,97 +3,103 @@
 
 abstract class BaseNpinffamPeer {
 
-	
+
 	const DATABASE_NAME = 'propel';
 
-	
+
 	const TABLE_NAME = 'npinffam';
 
-	
+
 	const CLASS_DEFAULT = 'lib.model.nomina.Npinffam';
 
-	
-	const NUM_COLUMNS = 16;
 
-	
+	const NUM_COLUMNS = 18;
+
+
 	const NUM_LAZY_LOAD_COLUMNS = 0;
 
 
-	
+
 	const CODEMP = 'npinffam.CODEMP';
 
-	
+
 	const CEDFAM = 'npinffam.CEDFAM';
 
-	
+
 	const NOMFAM = 'npinffam.NOMFAM';
 
-	
+
 	const SEXFAM = 'npinffam.SEXFAM';
 
-	
+
 	const FECNAC = 'npinffam.FECNAC';
 
-	
+
 	const EDAFAM = 'npinffam.EDAFAM';
 
-	
+
 	const PARFAM = 'npinffam.PARFAM';
 
-	
+
 	const EDOCIV = 'npinffam.EDOCIV';
 
-	
+
 	const GRAINS = 'npinffam.GRAINS';
 
-	
+
 	const TRAOFI = 'npinffam.TRAOFI';
 
-	
+
 	const CODGUA = 'npinffam.CODGUA';
 
-	
+
 	const VALGUA = 'npinffam.VALGUA';
 
-	
+
 	const SEGHCM = 'npinffam.SEGHCM';
 
-	
+
 	const PORSEGHCM = 'npinffam.PORSEGHCM';
 
-	
+
 	const OCUPAC = 'npinffam.OCUPAC';
 
-	
+
+	const CARBEN = 'npinffam.CARBEN';
+
+
+	const DISSUS = 'npinffam.DISSUS';
+
+
 	const ID = 'npinffam.ID';
 
-	
+
 	private static $phpNameMap = null;
 
 
-	
+
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codemp', 'Cedfam', 'Nomfam', 'Sexfam', 'Fecnac', 'Edafam', 'Parfam', 'Edociv', 'Grains', 'Traofi', 'Codgua', 'Valgua', 'Seghcm', 'Porseghcm', 'Ocupac', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (NpinffamPeer::CODEMP, NpinffamPeer::CEDFAM, NpinffamPeer::NOMFAM, NpinffamPeer::SEXFAM, NpinffamPeer::FECNAC, NpinffamPeer::EDAFAM, NpinffamPeer::PARFAM, NpinffamPeer::EDOCIV, NpinffamPeer::GRAINS, NpinffamPeer::TRAOFI, NpinffamPeer::CODGUA, NpinffamPeer::VALGUA, NpinffamPeer::SEGHCM, NpinffamPeer::PORSEGHCM, NpinffamPeer::OCUPAC, NpinffamPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codemp', 'cedfam', 'nomfam', 'sexfam', 'fecnac', 'edafam', 'parfam', 'edociv', 'grains', 'traofi', 'codgua', 'valgua', 'seghcm', 'porseghcm', 'ocupac', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, )
+		BasePeer::TYPE_PHPNAME => array ('Codemp', 'Cedfam', 'Nomfam', 'Sexfam', 'Fecnac', 'Edafam', 'Parfam', 'Edociv', 'Grains', 'Traofi', 'Codgua', 'Valgua', 'Seghcm', 'Porseghcm', 'Ocupac', 'Carben', 'Dissus', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (NpinffamPeer::CODEMP, NpinffamPeer::CEDFAM, NpinffamPeer::NOMFAM, NpinffamPeer::SEXFAM, NpinffamPeer::FECNAC, NpinffamPeer::EDAFAM, NpinffamPeer::PARFAM, NpinffamPeer::EDOCIV, NpinffamPeer::GRAINS, NpinffamPeer::TRAOFI, NpinffamPeer::CODGUA, NpinffamPeer::VALGUA, NpinffamPeer::SEGHCM, NpinffamPeer::PORSEGHCM, NpinffamPeer::OCUPAC, NpinffamPeer::CARBEN, NpinffamPeer::DISSUS, NpinffamPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codemp', 'cedfam', 'nomfam', 'sexfam', 'fecnac', 'edafam', 'parfam', 'edociv', 'grains', 'traofi', 'codgua', 'valgua', 'seghcm', 'porseghcm', 'ocupac', 'carben', 'dissus', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, )
 	);
 
-	
+
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codemp' => 0, 'Cedfam' => 1, 'Nomfam' => 2, 'Sexfam' => 3, 'Fecnac' => 4, 'Edafam' => 5, 'Parfam' => 6, 'Edociv' => 7, 'Grains' => 8, 'Traofi' => 9, 'Codgua' => 10, 'Valgua' => 11, 'Seghcm' => 12, 'Porseghcm' => 13, 'Ocupac' => 14, 'Id' => 15, ),
-		BasePeer::TYPE_COLNAME => array (NpinffamPeer::CODEMP => 0, NpinffamPeer::CEDFAM => 1, NpinffamPeer::NOMFAM => 2, NpinffamPeer::SEXFAM => 3, NpinffamPeer::FECNAC => 4, NpinffamPeer::EDAFAM => 5, NpinffamPeer::PARFAM => 6, NpinffamPeer::EDOCIV => 7, NpinffamPeer::GRAINS => 8, NpinffamPeer::TRAOFI => 9, NpinffamPeer::CODGUA => 10, NpinffamPeer::VALGUA => 11, NpinffamPeer::SEGHCM => 12, NpinffamPeer::PORSEGHCM => 13, NpinffamPeer::OCUPAC => 14, NpinffamPeer::ID => 15, ),
-		BasePeer::TYPE_FIELDNAME => array ('codemp' => 0, 'cedfam' => 1, 'nomfam' => 2, 'sexfam' => 3, 'fecnac' => 4, 'edafam' => 5, 'parfam' => 6, 'edociv' => 7, 'grains' => 8, 'traofi' => 9, 'codgua' => 10, 'valgua' => 11, 'seghcm' => 12, 'porseghcm' => 13, 'ocupac' => 14, 'id' => 15, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, )
+		BasePeer::TYPE_PHPNAME => array ('Codemp' => 0, 'Cedfam' => 1, 'Nomfam' => 2, 'Sexfam' => 3, 'Fecnac' => 4, 'Edafam' => 5, 'Parfam' => 6, 'Edociv' => 7, 'Grains' => 8, 'Traofi' => 9, 'Codgua' => 10, 'Valgua' => 11, 'Seghcm' => 12, 'Porseghcm' => 13, 'Ocupac' => 14, 'Carben' => 15, 'Dissus' => 16, 'Id' => 17, ),
+		BasePeer::TYPE_COLNAME => array (NpinffamPeer::CODEMP => 0, NpinffamPeer::CEDFAM => 1, NpinffamPeer::NOMFAM => 2, NpinffamPeer::SEXFAM => 3, NpinffamPeer::FECNAC => 4, NpinffamPeer::EDAFAM => 5, NpinffamPeer::PARFAM => 6, NpinffamPeer::EDOCIV => 7, NpinffamPeer::GRAINS => 8, NpinffamPeer::TRAOFI => 9, NpinffamPeer::CODGUA => 10, NpinffamPeer::VALGUA => 11, NpinffamPeer::SEGHCM => 12, NpinffamPeer::PORSEGHCM => 13, NpinffamPeer::OCUPAC => 14, NpinffamPeer::CARBEN => 15, NpinffamPeer::DISSUS => 16, NpinffamPeer::ID => 17, ),
+		BasePeer::TYPE_FIELDNAME => array ('codemp' => 0, 'cedfam' => 1, 'nomfam' => 2, 'sexfam' => 3, 'fecnac' => 4, 'edafam' => 5, 'parfam' => 6, 'edociv' => 7, 'grains' => 8, 'traofi' => 9, 'codgua' => 10, 'valgua' => 11, 'seghcm' => 12, 'porseghcm' => 13, 'ocupac' => 14, 'carben' => 15, 'dissus' => 16, 'id' => 17, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, )
 	);
 
-	
+
 	public static function getMapBuilder()
 	{
 		include_once 'lib/model/nomina/map/NpinffamMapBuilder.php';
 		return BasePeer::getMapBuilder('lib.model.nomina.map.NpinffamMapBuilder');
 	}
-	
+
 	public static function getPhpNameMap()
 	{
 		if (self::$phpNameMap === null) {
@@ -107,7 +113,7 @@ abstract class BaseNpinffamPeer {
 		}
 		return self::$phpNameMap;
 	}
-	
+
 	static public function translateFieldName($name, $fromType, $toType)
 	{
 		$toNames = self::getFieldNames($toType);
@@ -118,7 +124,7 @@ abstract class BaseNpinffamPeer {
 		return $toNames[$key];
 	}
 
-	
+
 
 	static public function getFieldNames($type = BasePeer::TYPE_PHPNAME)
 	{
@@ -128,13 +134,13 @@ abstract class BaseNpinffamPeer {
 		return self::$fieldNames[$type];
 	}
 
-	
+
 	public static function alias($alias, $column)
 	{
 		return str_replace(NpinffamPeer::TABLE_NAME.'.', $alias.'.', $column);
 	}
 
-	
+
 	public static function addSelectColumns(Criteria $criteria)
 	{
 
@@ -168,6 +174,10 @@ abstract class BaseNpinffamPeer {
 
 		$criteria->addSelectColumn(NpinffamPeer::OCUPAC);
 
+		$criteria->addSelectColumn(NpinffamPeer::CARBEN);
+
+		$criteria->addSelectColumn(NpinffamPeer::DISSUS);
+
 		$criteria->addSelectColumn(NpinffamPeer::ID);
 
 	}
@@ -175,7 +185,7 @@ abstract class BaseNpinffamPeer {
 	const COUNT = 'COUNT(npinffam.ID)';
 	const COUNT_DISTINCT = 'COUNT(DISTINCT npinffam.ID)';
 
-	
+
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
 	{
 				$criteria = clone $criteria;
@@ -199,7 +209,7 @@ abstract class BaseNpinffamPeer {
 						return 0;
 		}
 	}
-	
+
 	public static function doSelectOne(Criteria $criteria, $con = null)
 	{
 		$critcopy = clone $criteria;
@@ -210,12 +220,12 @@ abstract class BaseNpinffamPeer {
 		}
 		return null;
 	}
-	
+
 	public static function doSelect(Criteria $criteria, $con = null)
 	{
 		return NpinffamPeer::populateObjects(NpinffamPeer::doSelectRS($criteria, $con));
 	}
-	
+
 	public static function doSelectRS(Criteria $criteria, $con = null)
 	{
 		if ($con === null) {
@@ -231,35 +241,35 @@ abstract class BaseNpinffamPeer {
 
 						return BasePeer::doSelect($criteria, $con);
 	}
-	
+
 	public static function populateObjects(ResultSet $rs)
 	{
 		$results = array();
-	
+
 				$cls = NpinffamPeer::getOMClass();
 		$cls = Propel::import($cls);
 				while($rs->next()) {
-		
+
 			$obj = new $cls();
 			$obj->hydrate($rs);
 			$results[] = $obj;
-			
+
 		}
 		return $results;
 	}
-	
+
 	public static function getTableMap()
 	{
 		return Propel::getDatabaseMap(self::DATABASE_NAME)->getTable(self::TABLE_NAME);
 	}
 
-	
+
 	public static function getOMClass()
 	{
 		return NpinffamPeer::CLASS_DEFAULT;
 	}
 
-	
+
 	public static function doInsert($values, $con = null)
 	{
 		if ($con === null) {
@@ -270,7 +280,7 @@ abstract class BaseNpinffamPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
-		$criteria->remove(NpinffamPeer::ID); 
+		$criteria->remove(NpinffamPeer::ID);
 
 				$criteria->setDbName(self::DATABASE_NAME);
 
@@ -286,7 +296,7 @@ abstract class BaseNpinffamPeer {
 		return $pk;
 	}
 
-	
+
 	public static function doUpdate($values, $con = null)
 	{
 		if ($con === null) {
@@ -296,7 +306,7 @@ abstract class BaseNpinffamPeer {
 		$selectCriteria = new Criteria(self::DATABASE_NAME);
 
 		if ($values instanceof Criteria) {
-			$criteria = clone $values; 
+			$criteria = clone $values;
 			$comparison = $criteria->getComparison(NpinffamPeer::ID);
 			$selectCriteria->add(NpinffamPeer::ID, $criteria->remove(NpinffamPeer::ID), $comparison);
 
@@ -307,7 +317,7 @@ abstract class BaseNpinffamPeer {
 		return BasePeer::doUpdate($selectCriteria, $criteria, $con);
 	}
 
-	
+
 	public static function doDeleteAll($con = null)
 	{
 		if ($con === null) {
@@ -324,7 +334,7 @@ abstract class BaseNpinffamPeer {
 		}
 	}
 
-	
+
 	 public static function doDelete($values, $con = null)
 	 {
 		if ($con === null) {
@@ -342,10 +352,10 @@ abstract class BaseNpinffamPeer {
 
 				$criteria->setDbName(self::DATABASE_NAME);
 
-		$affectedRows = 0; 
+		$affectedRows = 0;
 		try {
 									$con->begin();
-			
+
 			$affectedRows += BasePeer::doDelete($criteria, $con);
 			$con->commit();
 			return $affectedRows;
@@ -355,7 +365,7 @@ abstract class BaseNpinffamPeer {
 		}
 	}
 
-	
+
 	public static function doValidate(Npinffam $obj, $cols = null)
 	{
 		$columns = array();
@@ -390,7 +400,7 @@ abstract class BaseNpinffamPeer {
     return $res;
 	}
 
-	
+
 	public static function retrieveByPK($pk, $con = null)
 	{
 		if ($con === null) {
@@ -407,7 +417,7 @@ abstract class BaseNpinffamPeer {
 		return !empty($v) > 0 ? $v[0] : null;
 	}
 
-	
+
 	public static function retrieveByPKs($pks, $con = null)
 	{
 		if ($con === null) {
@@ -425,7 +435,7 @@ abstract class BaseNpinffamPeer {
 		return $objs;
 	}
 
-} 
+}
 if (Propel::isInit()) {
 			try {
 		BaseNpinffamPeer::getMapBuilder();

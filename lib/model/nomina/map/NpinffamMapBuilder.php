@@ -64,6 +64,10 @@ class NpinffamMapBuilder {
 
 		$tMap->addColumn('OCUPAC', 'Ocupac', 'string', CreoleTypes::VARCHAR, false, 1);
 
+		$tMap->addColumn('CARBEN', 'Carben', 'string', CreoleTypes::VARCHAR, false, 1);
+
+		$tMap->addColumn('DISSUS', 'Dissus', 'string', CreoleTypes::VARCHAR, false, 1);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 
