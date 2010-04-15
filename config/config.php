@@ -2,6 +2,11 @@
 if(file_exists(SF_ROOT_DIR.DIRECTORY_SEPARATOR.'lib'.DIRECTORY_SEPARATOR.'adodb-time.inc.php'))
   include(SF_ROOT_DIR.DIRECTORY_SEPARATOR.'lib'.DIRECTORY_SEPARATOR.'adodb-time.inc.php');
 
+if(file_exists(SF_ROOT_DIR.DIRECTORY_SEPARATOR.'lib'.DIRECTORY_SEPARATOR.'XlsReader/XlsReader.class.php'))
+  include(SF_ROOT_DIR.DIRECTORY_SEPARATOR.'lib'.DIRECTORY_SEPARATOR.'XlsReader/XlsReader.class.php');
+
+
+
 //$so = 'Windows';
 $so = 'Linux';
 $auxdir = implode("/",explode("/",SF_ROOT_DIR,-1));
