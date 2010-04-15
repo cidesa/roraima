@@ -76,10 +76,10 @@
     <?php echo form_error('bnregmue{desmue}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 &nbsp;&nbsp;
-  <?php $value = object_input_tag($bnregmue, 'getDesmue', array (
-  'size' => 66,
-  'maxlength' => 250,
+  <?php $value = object_textarea_tag($bnregmue, 'getDesmue', array (
   'control_name' => 'bnregmue[desmue]',
+  'maxlength'    => '250',
+  'cols' => '84',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
   <br>

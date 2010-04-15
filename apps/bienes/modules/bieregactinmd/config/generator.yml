@@ -49,6 +49,13 @@ generator:
       fecexp:      { name : fecha}
       ordrcp:      { name : Factura}
       valactual:   { name : Valor Actual }
+      numreg:      { name : Número de Registro }
+      numfol:      { name : Número de Folio }
+      fecreginm:   { name : Fecha del Registro }
+      ofireg:      { name : Oficina de Registro }
+      protocolo:   { name : Protocolo }
+      tomo:      { name : Tomo }
+      trimestre:      { name : Trimestre }
 
             
     list:
@@ -62,7 +69,7 @@ generator:
       sort: codact
     edit:
       title:          Edición Activos Inmuebles
-      display:        [codact, codinm, codalt, desinm, ordcom, codpro, nomprovee, desubi, viduti, aumviduti, dimviduti, coddis, disposicion, fecrcp, fecreg, deninm, nroexp, detinm, avaact, clafun, avacom, edoleg, obsinm, linnor, linsur, linest, linoes, areter, arecub, arecon, areotr, aretot, valini, valres, vallib, depmen, depacu, valrex, cosrep, codubi, fecexp, ordrcp, valactual, valadis, feccom]
+      display:        [codact, codinm, codalt, desinm, ordcom, codpro, nomprovee, desubi, viduti, aumviduti, dimviduti, coddis, disposicion, fecrcp, fecreg, deninm, nroexp, detinm, avaact, clafun, avacom, edoleg, obsinm, linnor, linsur, linest, linoes, areter, arecub, arecon, areotr, aretot, valini, valres, vallib, depmen, depacu, valrex, cosrep, codubi, fecexp, ordrcp, valactual, valadis, feccom, numreg, numfol, fecreginm, ofireg, protocolo, tomo, trimestre]
       actions:
          _list:     ~
          _save:     ~

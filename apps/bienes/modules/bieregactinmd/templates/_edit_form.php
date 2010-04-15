@@ -4,14 +4,14 @@
  *
  * @package    Roraima
  * @subpackage vistas
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version    SVN: $Id$
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id: _edit_form.php 37631 2010-04-15 21:32:33Z cramirez $
  */
 // date: 2007/10/31 17:46:14
 ?>
 <?php echo form_tag('bieregactinmd/save', array(
   'id'        => 'sf_admin_edit_form',
-  'name'      => 'sf_admin_edit_form',
+  'name'      => 'sf_admin_edit_form', 'onsubmit'  => 'return false;',
   'multipart' => true,
 )) ?>
 <?php use_helper('Javascript','PopUp','Grid','Date','SubmitClick','tabs', 'Catalogo') ?>
@@ -69,10 +69,10 @@
     <?php echo form_error('bnreginm{desinm}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_input_tag($bnreginm, 'getDesinm', array (
-  'size' => 66,
+  <?php $value = object_textarea_tag($bnreginm, 'getDesinm', array (
   'maxlength' => 250,
   'control_name' => 'bnreginm[desinm]',
+      'cols' => '78'
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 
@@ -300,9 +300,9 @@
   'control_name' => 'bnreginm[deninm]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
-</div>
 
-<div class="form-row">
+    <br/>
+
   <?php echo label_for('bnreginm[nroexp]', __($labels['bnreginm{nroexp}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('bnreginm{nroexp}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('bnreginm{nroexp}')): ?>
@@ -316,9 +316,9 @@
   'control_name' => 'bnreginm[nroexp]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
-</div>
 
-<div class="form-row">
+    <br/>
+
   <?php echo label_for('bnreginm[detinm]', __($labels['bnreginm{detinm}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('bnreginm{detinm}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('bnreginm{detinm}')): ?>
@@ -332,9 +332,9 @@
   'control_name' => 'bnreginm[detinm]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
-</div>
 
-<div class="form-row">
+    <br/>
+
   <?php echo label_for('bnreginm[avaact]', __($labels['bnreginm{avaact}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('bnreginm{avaact}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('bnreginm{avaact}')): ?>
@@ -348,9 +348,9 @@
  'control_name' => 'bnreginm[avaact]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
-</div>
 
-<div class="form-row">
+    <br/>
+
   <?php echo label_for('bnreginm[avacom]', __($labels['bnreginm{avacom}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('bnreginm{avacom}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('bnreginm{avacom}')): ?>
@@ -364,9 +364,9 @@
   'control_name' => 'bnreginm[avacom]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
-</div>
 
-<div class="form-row">
+    <br/>
+
   <?php echo label_for('bnreginm[clafun]', __($labels['bnreginm{clafun}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('bnreginm{clafun}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('bnreginm{clafun}')): ?>
@@ -382,9 +382,9 @@
   ), 'Bieregactinmd_Bnclafun', 'bnclafun', '' );
 ?>
     </div>
-</div>
 
-<div class="form-row">
+    <br/>
+
   <?php echo label_for('bnreginm[edoleg]', __($labels['bnreginm{edoleg}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('bnreginm{edoleg}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('bnreginm{edoleg}')): ?>
@@ -397,9 +397,10 @@
   'control_name' => 'bnreginm[edoleg]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
-</div>
 
-<div class="form-row">
+<br/>
+    <br/>
+
   <?php echo label_for('bnreginm[obsinm]', __($labels['bnreginm{obsinm}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('bnreginm{obsinm}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('bnreginm{obsinm}')): ?>
@@ -412,8 +413,106 @@
   'control_name' => 'bnreginm[obsinm]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
-</div>
 
+  <br/>
+
+  <?php echo label_for('bnreginm[numreg]', __($labels['bnreginm{numreg}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('bnreginm{numreg}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('bnreginm{numreg}')): ?>
+    <?php echo form_error('bnreginm{numreg}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($bnreginm, 'getNumreg', array (
+  'size' => 20,
+  'control_name' => 'bnreginm[numreg]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+
+  <br/>
+
+  <?php echo label_for('bnreginm[numfol]', __($labels['bnreginm{numfol}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('bnreginm{numfol}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('bnreginm{numfol}')): ?>
+    <?php echo form_error('bnreginm{numfol}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($bnreginm, 'getNumfol', array (
+  'size' => 20,
+  'control_name' => 'bnreginm[numfol]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+
+  <br/>
+
+  <?php echo label_for('bnreginm[fecreginm]', __($labels['bnreginm{fecreginm}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('bnreginm{fecreginm}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('bnreginm{fecreginm}')): ?>
+    <?php echo form_error('bnreginm{fecreginm}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_date_tag($bnreginm, 'getFecreginm', array (
+  'rich' => true,
+  'calendar_button_img' => '/sf/sf_admin/images/date.png',
+  'control_name' => 'bnreginm[fecreginm]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+
+  <br/>
+
+  <?php echo label_for('bnreginm[ofireg]', __($labels['bnreginm{ofireg}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('bnreginm{ofireg}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('bnreginm{ofireg}')): ?>
+    <?php echo form_error('bnreginm{ofireg}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($bnreginm, 'getOfireg', array (
+  'size' => 50,
+  'control_name' => 'bnreginm[ofireg]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+
+  <br/>
+
+  <?php echo label_for('bnreginm[protocolo]', __($labels['bnreginm{protocolo}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('bnreginm{protocolo}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('bnreginm{protocolo}')): ?>
+    <?php echo form_error('bnreginm{protocolo}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($bnreginm, 'getProtocolo', array (
+  'size' => 20,
+  'control_name' => 'bnreginm[protocolo]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+
+  <br/>
+
+  <?php echo label_for('bnreginm[tomo]', __($labels['bnreginm{tomo}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('bnreginm{tomo}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('bnreginm{tomo}')): ?>
+    <?php echo form_error('bnreginm{tomo}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($bnreginm, 'getTomo', array (
+  'size' => 20,
+  'control_name' => 'bnreginm[tomo]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+
+  <br/>
+
+  <?php echo label_for('bnreginm[trimestre]', __($labels['bnreginm{trimestre}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('bnreginm{trimestre}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('bnreginm{trimestre}')): ?>
+    <?php echo form_error('bnreginm{trimestre}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($bnreginm, 'getTrimestre', array (
+  'size' => 20,
+  'control_name' => 'bnreginm[trimestre]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+</div>
 
 
 

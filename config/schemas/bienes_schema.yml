@@ -809,6 +809,26 @@ propel:
       type: NUMERIC
       size: 14
       scale: 2
+    numreg:
+      type: VARCHAR
+      size: 20
+    numfol:
+      type: VARCHAR
+      size: 20
+    fecreginm:
+      type: DATE
+    ofireg:
+      type: VARCHAR
+      size: 50
+    protocolo:
+      type: VARCHAR
+      size: 20
+    tomo:
+      type: VARCHAR
+      size: 20
+    trimestre:
+      type: VARCHAR
+      size: 20
     id:
       type: INTEGER
       required: true

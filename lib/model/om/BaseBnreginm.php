@@ -201,6 +201,34 @@ abstract class BaseBnreginm extends BaseObject  implements Persistent {
 
 
 	
+	protected $numreg;
+
+
+	
+	protected $numfol;
+
+
+	
+	protected $fecreginm;
+
+
+	
+	protected $ofireg;
+
+
+	
+	protected $protocolo;
+
+
+	
+	protected $tomo;
+
+
+	
+	protected $trimestre;
+
+
+	
 	protected $id;
 
 	
@@ -644,6 +672,70 @@ abstract class BaseBnreginm extends BaseObject  implements Persistent {
 
     if($val) return number_format($this->valadis,2,',','.');
     else return $this->valadis;
+
+  }
+  
+  public function getNumreg()
+  {
+
+    return trim($this->numreg);
+
+  }
+  
+  public function getNumfol()
+  {
+
+    return trim($this->numfol);
+
+  }
+  
+  public function getFecreginm($format = 'Y-m-d')
+  {
+
+    if ($this->fecreginm === null || $this->fecreginm === '') {
+      return null;
+    } elseif (!is_int($this->fecreginm)) {
+            $ts = adodb_strtotime($this->fecreginm);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecreginm] as date/time value: " . var_export($this->fecreginm, true));
+      }
+    } else {
+      $ts = $this->fecreginm;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getOfireg()
+  {
+
+    return trim($this->ofireg);
+
+  }
+  
+  public function getProtocolo()
+  {
+
+    return trim($this->protocolo);
+
+  }
+  
+  public function getTomo()
+  {
+
+    return trim($this->tomo);
+
+  }
+  
+  public function getTrimestre()
+  {
+
+    return trim($this->trimestre);
 
   }
   
@@ -1176,6 +1268,88 @@ abstract class BaseBnreginm extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setNumreg($v)
+	{
+
+    if ($this->numreg !== $v) {
+        $this->numreg = $v;
+        $this->modifiedColumns[] = BnreginmPeer::NUMREG;
+      }
+  
+	} 
+	
+	public function setNumfol($v)
+	{
+
+    if ($this->numfol !== $v) {
+        $this->numfol = $v;
+        $this->modifiedColumns[] = BnreginmPeer::NUMFOL;
+      }
+  
+	} 
+	
+	public function setFecreginm($v)
+	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecreginm] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecreginm !== $ts) {
+      $this->fecreginm = $ts;
+      $this->modifiedColumns[] = BnreginmPeer::FECREGINM;
+    }
+
+	} 
+	
+	public function setOfireg($v)
+	{
+
+    if ($this->ofireg !== $v) {
+        $this->ofireg = $v;
+        $this->modifiedColumns[] = BnreginmPeer::OFIREG;
+      }
+  
+	} 
+	
+	public function setProtocolo($v)
+	{
+
+    if ($this->protocolo !== $v) {
+        $this->protocolo = $v;
+        $this->modifiedColumns[] = BnreginmPeer::PROTOCOLO;
+      }
+  
+	} 
+	
+	public function setTomo($v)
+	{
+
+    if ($this->tomo !== $v) {
+        $this->tomo = $v;
+        $this->modifiedColumns[] = BnreginmPeer::TOMO;
+      }
+  
+	} 
+	
+	public function setTrimestre($v)
+	{
+
+    if ($this->trimestre !== $v) {
+        $this->trimestre = $v;
+        $this->modifiedColumns[] = BnreginmPeer::TRIMESTRE;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -1286,7 +1460,21 @@ abstract class BaseBnreginm extends BaseObject  implements Persistent {
 
       $this->valadis = $rs->getFloat($startcol + 47);
 
-      $this->id = $rs->getInt($startcol + 48);
+      $this->numreg = $rs->getString($startcol + 48);
+
+      $this->numfol = $rs->getString($startcol + 49);
+
+      $this->fecreginm = $rs->getDate($startcol + 50, null);
+
+      $this->ofireg = $rs->getString($startcol + 51);
+
+      $this->protocolo = $rs->getString($startcol + 52);
+
+      $this->tomo = $rs->getString($startcol + 53);
+
+      $this->trimestre = $rs->getString($startcol + 54);
+
+      $this->id = $rs->getInt($startcol + 55);
 
       $this->resetModified();
 
@@ -1294,7 +1482,7 @@ abstract class BaseBnreginm extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 49; 
+            return $startcol + 56; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Bnreginm object", $e);
     }
@@ -1586,6 +1774,27 @@ abstract class BaseBnreginm extends BaseObject  implements Persistent {
 				return $this->getValadis();
 				break;
 			case 48:
+				return $this->getNumreg();
+				break;
+			case 49:
+				return $this->getNumfol();
+				break;
+			case 50:
+				return $this->getFecreginm();
+				break;
+			case 51:
+				return $this->getOfireg();
+				break;
+			case 52:
+				return $this->getProtocolo();
+				break;
+			case 53:
+				return $this->getTomo();
+				break;
+			case 54:
+				return $this->getTrimestre();
+				break;
+			case 55:
 				return $this->getId();
 				break;
 			default:
@@ -1646,7 +1855,14 @@ abstract class BaseBnreginm extends BaseObject  implements Persistent {
 			$keys[45] => $this->getCodalt(),
 			$keys[46] => $this->getCoddis(),
 			$keys[47] => $this->getValadis(),
-			$keys[48] => $this->getId(),
+			$keys[48] => $this->getNumreg(),
+			$keys[49] => $this->getNumfol(),
+			$keys[50] => $this->getFecreginm(),
+			$keys[51] => $this->getOfireg(),
+			$keys[52] => $this->getProtocolo(),
+			$keys[53] => $this->getTomo(),
+			$keys[54] => $this->getTrimestre(),
+			$keys[55] => $this->getId(),
 		);
 		return $result;
 	}
@@ -1807,6 +2023,27 @@ abstract class BaseBnreginm extends BaseObject  implements Persistent {
 				$this->setValadis($value);
 				break;
 			case 48:
+				$this->setNumreg($value);
+				break;
+			case 49:
+				$this->setNumfol($value);
+				break;
+			case 50:
+				$this->setFecreginm($value);
+				break;
+			case 51:
+				$this->setOfireg($value);
+				break;
+			case 52:
+				$this->setProtocolo($value);
+				break;
+			case 53:
+				$this->setTomo($value);
+				break;
+			case 54:
+				$this->setTrimestre($value);
+				break;
+			case 55:
 				$this->setId($value);
 				break;
 		} 	}
@@ -1864,7 +2101,14 @@ abstract class BaseBnreginm extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[45], $arr)) $this->setCodalt($arr[$keys[45]]);
 		if (array_key_exists($keys[46], $arr)) $this->setCoddis($arr[$keys[46]]);
 		if (array_key_exists($keys[47], $arr)) $this->setValadis($arr[$keys[47]]);
-		if (array_key_exists($keys[48], $arr)) $this->setId($arr[$keys[48]]);
+		if (array_key_exists($keys[48], $arr)) $this->setNumreg($arr[$keys[48]]);
+		if (array_key_exists($keys[49], $arr)) $this->setNumfol($arr[$keys[49]]);
+		if (array_key_exists($keys[50], $arr)) $this->setFecreginm($arr[$keys[50]]);
+		if (array_key_exists($keys[51], $arr)) $this->setOfireg($arr[$keys[51]]);
+		if (array_key_exists($keys[52], $arr)) $this->setProtocolo($arr[$keys[52]]);
+		if (array_key_exists($keys[53], $arr)) $this->setTomo($arr[$keys[53]]);
+		if (array_key_exists($keys[54], $arr)) $this->setTrimestre($arr[$keys[54]]);
+		if (array_key_exists($keys[55], $arr)) $this->setId($arr[$keys[55]]);
 	}
 
 	
@@ -1920,6 +2164,13 @@ abstract class BaseBnreginm extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(BnreginmPeer::CODALT)) $criteria->add(BnreginmPeer::CODALT, $this->codalt);
 		if ($this->isColumnModified(BnreginmPeer::CODDIS)) $criteria->add(BnreginmPeer::CODDIS, $this->coddis);
 		if ($this->isColumnModified(BnreginmPeer::VALADIS)) $criteria->add(BnreginmPeer::VALADIS, $this->valadis);
+		if ($this->isColumnModified(BnreginmPeer::NUMREG)) $criteria->add(BnreginmPeer::NUMREG, $this->numreg);
+		if ($this->isColumnModified(BnreginmPeer::NUMFOL)) $criteria->add(BnreginmPeer::NUMFOL, $this->numfol);
+		if ($this->isColumnModified(BnreginmPeer::FECREGINM)) $criteria->add(BnreginmPeer::FECREGINM, $this->fecreginm);
+		if ($this->isColumnModified(BnreginmPeer::OFIREG)) $criteria->add(BnreginmPeer::OFIREG, $this->ofireg);
+		if ($this->isColumnModified(BnreginmPeer::PROTOCOLO)) $criteria->add(BnreginmPeer::PROTOCOLO, $this->protocolo);
+		if ($this->isColumnModified(BnreginmPeer::TOMO)) $criteria->add(BnreginmPeer::TOMO, $this->tomo);
+		if ($this->isColumnModified(BnreginmPeer::TRIMESTRE)) $criteria->add(BnreginmPeer::TRIMESTRE, $this->trimestre);
 		if ($this->isColumnModified(BnreginmPeer::ID)) $criteria->add(BnreginmPeer::ID, $this->id);
 
 		return $criteria;
@@ -2046,6 +2297,20 @@ abstract class BaseBnreginm extends BaseObject  implements Persistent {
 		$copyObj->setCoddis($this->coddis);
 
 		$copyObj->setValadis($this->valadis);
+
+		$copyObj->setNumreg($this->numreg);
+
+		$copyObj->setNumfol($this->numfol);
+
+		$copyObj->setFecreginm($this->fecreginm);
+
+		$copyObj->setOfireg($this->ofireg);
+
+		$copyObj->setProtocolo($this->protocolo);
+
+		$copyObj->setTomo($this->tomo);
+
+		$copyObj->setTrimestre($this->trimestre);
 
 
 		$copyObj->setNew(true);
