@@ -130,6 +130,20 @@ class BnreginmMapBuilder {
 
 		$tMap->addColumn('VALADIS', 'Valadis', 'double', CreoleTypes::NUMERIC, false, 14);
 
+		$tMap->addColumn('NUMREG', 'Numreg', 'string', CreoleTypes::VARCHAR, false, 20);
+
+		$tMap->addColumn('NUMFOL', 'Numfol', 'string', CreoleTypes::VARCHAR, false, 20);
+
+		$tMap->addColumn('FECREGINM', 'Fecreginm', 'int', CreoleTypes::DATE, false, null);
+
+		$tMap->addColumn('OFIREG', 'Ofireg', 'string', CreoleTypes::VARCHAR, false, 50);
+
+		$tMap->addColumn('PROTOCOLO', 'Protocolo', 'string', CreoleTypes::VARCHAR, false, 20);
+
+		$tMap->addColumn('TOMO', 'Tomo', 'string', CreoleTypes::VARCHAR, false, 20);
+
+		$tMap->addColumn('TRIMESTRE', 'Trimestre', 'string', CreoleTypes::VARCHAR, false, 20);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

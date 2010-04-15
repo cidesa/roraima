@@ -57,14 +57,25 @@ private static $coderror=-1;
       $cajtexmos_dos=$this->getRequestParameter('cajtexmos_dos');
       $cajtexmos_tres=$this->getRequestParameter('cajtexmos_tres');
       $result=array();
-      $sql="Select a.ordcom as orden,a.codpro as proveedor, to_char(a.fecord,'dd/mm/yyyy') as fecha, b.nompro as nompro from caordcom a, caprovee b  where  a.codpro=b.codpro and a.ordcom='".$this->getRequestParameter('codigo')."' order By ordcom";
+      $sql="Select a.ordcom as orden,a.codpro as proveedor, to_char(a.fecord,'dd/mm/yyyy') as fecha, b.nompro as nompro, a.desord from caordcom a, caprovee b  where  a.codpro=b.codpro and a.ordcom='".$this->getRequestParameter('codigo')."' order By ordcom";
     if (Herramientas::BuscarDatos($sql,&$result))
     {
       $dato=$result[0]['orden'];
       $dato1=$result[0]['proveedor'];
       $dato2=$result[0]['nompro'];
       $dato3=$result[0]['fecha'];
-          $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$cajtexmos_uno.'","'.$dato1.'",""],["'.$cajtexmos_dos.'","'.$dato2.'",""],["'.$cajtexmos_tres.'","'.$dato3.'",""]]';
+      $descripcion = H::getConfApp('descripcion','bienes','bieregactmued');
+      !$descripcion? $descripcion='' : '';
+      if($descripcion=='S')
+      {
+        $cajtexmos_cuatro='bnregmue_desmue';
+        $dato4=$result[0]['desord'];
+      }else
+      {
+        $cajtexmos_cuatro='';
+        $dato4='';
+      }      
+      $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$cajtexmos_uno.'","'.$dato1.'",""],["'.$cajtexmos_dos.'","'.$dato2.'",""],["'.$cajtexmos_tres.'","'.$dato3.'",""],["'.$cajtexmos_cuatro.'","'.$dato4.'",""]]';
     }
     else
     {
