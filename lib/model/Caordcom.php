@@ -201,6 +201,7 @@ class Caordcom extends BaseCaordcom
       }else{
         $c= new Criteria();
         $c->add(CpimpcauPeer::REFERE,self::getOrdcom());
+        $c->add(CpimpcauPeer::STAIMP,'N',Criteria::NOT_EQUAL);
         $data= CpimpcauPeer::doSelectOne($c);
         if ($data)
         {
