@@ -1,0 +1,21 @@
+Parametros:
+  modulo: ciudadanos
+  nomrep: atatipayu
+  titulo: LISTADO DE TIPO AYUDAS
+  orientacion: Vertical
+  tipopagina: Carta
+  width:210
+
+Filas:
+  CATALOGO CODCON:
+    tipotag:   inputcat_tag
+    label: N&uacute;mero de Expediente:
+    sql:   select min(nroexp) as codmin,max(nroexp) as codmax from atayudas
+    nomdes: codmin
+    campodes: codmin
+    catdes: 0
+    nomhas: codmax
+    campohas: codmax
+    cathas: 1
+    nomcat: atayudas
+    size: 20

@@ -1,0 +1,165 @@
+---
+sima_user:
+  _attributes: { noXsd: false, defaultIdMethod: native, package: lib.model.sima_user }
+  apli_user:
+    codapl:
+      type: VARCHAR
+      size: 3
+      required: true
+    loguse:
+      type: VARCHAR
+      size: 50
+      required: true
+    codemp:
+      type: VARCHAR
+      size: 3
+      required: true
+    nomopc:
+      type: VARCHAR
+      size: 50
+    priuse:
+      type: VARCHAR
+      size: 2
+    id:
+  empresa:
+    _attributes: { phpName: EmpresaUser }
+    codemp:
+      type: VARCHAR
+      size: 3
+      required: true
+    nomemp:
+      type: VARCHAR
+      size: 50
+      required: true
+    diremp:
+      type: VARCHAR
+      size: 50
+    tlfemp:
+      type: VARCHAR
+      size: 15
+    passemp:
+      type: VARCHAR
+      size: 10
+    id:
+  usuarios:
+    loguse:
+      type: VARCHAR
+      size: 50
+      required: true
+    nomuse:
+      type: VARCHAR
+      size: 250
+      required: true
+    apluse:
+      type: VARCHAR
+      size: 3
+      required: true
+    numemp:
+      type: VARCHAR
+      size: 12
+    pasuse:
+      type: VARCHAR
+      size: 10
+      required: true
+    diremp:
+      type: VARCHAR
+      size: 250
+    telemp:
+      type: VARCHAR
+      size: 50
+    cedemp:
+      type: VARCHAR
+      size: 10
+    numuni:
+      type: VARCHAR
+      size: 4
+    codcat:
+      type: VARCHAR
+      size: 16
+    codniv:
+      type: VARCHAR
+      size: 3
+    id:
+  aplifor:
+    codapl:
+      type: VARCHAR
+      size: 3
+      required: true
+    coddiv:
+      type: VARCHAR
+      size: 3
+      required: true
+    nomopc:
+      type: VARCHAR
+      size: 50
+      required: true
+    desocp:
+      type: VARCHAR
+      size: 1000
+      required: true
+    id:
+  aplicacion:
+    codapl:
+      type: VARCHAR
+      size: 3
+      required: true
+    nomapl:
+      type: VARCHAR
+      size: 50
+      required: true
+    nomuse:
+      type: VARCHAR
+      size: 30
+      required: true
+    aplact:
+      type: VARCHAR
+      size: 1
+      required: true
+    aplpri:
+      type: VARCHAR
+      size: 1
+      required: true
+    nomyml:
+      type: VARCHAR
+      size: 50
+      required: true
+    id:
+  division:
+    coddiv:
+      type: VARCHAR
+      size: 3
+      required: true
+    desdiv:
+      type: VARCHAR
+      size: 250
+      required: true
+    id:
+  segbitaco:
+    refmov:
+      type: VARCHAR
+      size: 10
+      required: true
+    codofi:
+      type: VARCHAR
+      size: 3
+    codapl:
+      type: VARCHAR
+      size: 3
+    codintusu:
+      type: VARCHAR
+      size: 8
+    fecope:
+      type: DATE
+    horope:
+      type: TIMESTAMP
+    valcla:
+      type: VARCHAR
+      size: 50
+    codmod:
+      type: VARCHAR
+      size: 50
+    tipope:
+      type: VARCHAR
+      size: 1
+    id:
+

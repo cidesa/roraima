@@ -1,0 +1,23 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Contaba
+    theme:            cidesaGenerator
+    fields:
+      codemp:         { name: Codigo, params: readonly= true size=3 , help: Codigo de la empresa}
+      nomemp:         { name: Nombre, params: readonly= true, help: Nombre de la empresa }
+      forcta:         { name: Formato, params: onkeypress=javascript:validaFormatoCuenta(this.id,event) }
+      fecini:         { name: Fecha Inicio, params: date_format='dd/MM/yyyy' size=10 maxlength=10 }
+      feccie:         { name: Fecha Cierre, params: date_format='dd/MM/yyyy' size=10 maxlength=10 }
+      boton: { name: . }
+      grid:   { name: . }
+
+    edit:
+      title:      Definiciones Específicas de Institución
+      display:
+        NONE:     [codemp, nomemp]
+        "Formato de Codigo contable": [forcta]
+        "Fecha de los Ejercicios":     [fecini, feccie, _boton	]
+        Distribución de los periodos: [_grid]
+      actions:
+        _save:        ~

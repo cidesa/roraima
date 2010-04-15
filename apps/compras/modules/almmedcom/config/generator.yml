@@ -1,0 +1,26 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Camedcom
+    theme:            default
+
+    fields:
+      codmedcom:        { name: Código }
+      desmedcom:        { name: Descripción }
+    list:
+      title:         Medios de Comunicacion
+      display:       [=codmedcom, desmedcom]
+      filters:       [codmedcom, desmedcom]
+      max_per_page:  10
+      sort:          codmedcom
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+    edit:
+      title:         Edición de Medios de Comunicacion
+      display:       [codmedcom, desmedcom]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

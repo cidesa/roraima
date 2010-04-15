@@ -1,0 +1,28 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Cpasiini
+    theme:            cidesaGenerator
+    fields:
+      codpre:  {name: Código Presupuestario, params: readOnly=true}
+      nompre:  {name: Descripción, params: readOnly=true size=50}
+      anopre:  {name: Año, params: readOnly=true size=5}
+      asiper:  {name: Asignación Períodica}
+      monasi:  {name: Monto Asignar, params: readOnly=true size=12}
+      grid:    { name: . }
+    list:
+      title:  	      Asignaciones Iniciales
+      display:        [=codpre, nompre]
+      filters:        [codpre, nompre]
+      actions:
+        NONE
+    edit:
+      title:  			                   Asignación Inicial
+      display:
+        Datos del Código Presupuestario:   [codpre, nompre]
+        Datos de la Asignación:            [anopre, _asiper, _monasi]
+        NONE:						  	   [_grid]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

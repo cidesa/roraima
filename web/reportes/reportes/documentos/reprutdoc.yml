@@ -1,0 +1,9 @@
+Parametros:
+  modulo: documentos
+  nomrep: reprutdoc
+  titulo: Ruta de Documentos
+  orientacion: Vertical
+  tipopagina: Carta
+  width:210
+
+Filas:

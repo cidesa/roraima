@@ -1,0 +1,76 @@
+Parametros:
+  modulo: bienes
+  nomrep: bnrlisactmue
+  titulo: Lista General de activos Por ubicación
+  orientacion: Horizontal
+  tipopagina: CARTA
+  width:210
+
+Filas:
+  CATALOGO UBICACION:
+    tipotag:   inputcat_tag
+    label: Ubicación:
+    sql:  SELECT DISTINCT min(a.codubi) as codmin, max(a.codubi) as codmax FROM bnregmue a, bnubibie b where a.codubi = b.codubi
+    nomdes: codubides
+    campodes: codmin
+    catdes: 0
+    nomhas: codubihas
+    campohas: codmax
+    cathas: 1
+    nomcat: codubi
+    size: 22
+
+  CATALOGO ACTIVO:
+    tipotag:   inputcat_tag
+    label: Código del Activo:
+    sql:  SELECT min(a.codact) as codactmin, max(a.codact) as codactmax  FROM bnregmue a, bndefact b where a.codact = b.codact
+    nomdes: codact1
+    campodes: codactmin
+    catdes: 2
+    nomhas: codact2
+    campohas: codactmax
+    cathas: 3
+    nomcat: codact
+    size: 22
+
+  TITULOS:
+    tipotag:    titulo_tag
+    nomdes:     NOMBRE
+    nomhas:     CARGO
+
+  CAJA PREPARADO:
+    tipotag:   input_tag
+    label: Preparado Por:
+    nomdes: prepardes
+    campodes: -1
+    nomhas: preparhas
+    campohas: REGISTRADOR DE BIENES Y MATERIALES
+    size: 30
+
+  CAJA CODIFICADO:
+    tipotag:   input_tag
+    label: Codificado Por:
+    nomdes: confordes
+    campodes: -1
+    nomhas: conforhas
+    campohas: REGISTRADOR DE BIENES Y MATERIALES
+    size: 30
+
+  CAJA RESPONSABLE:
+    tipotag:   input_tag
+    label: Responsable:
+    nomdes: respondes
+    campodes:  -1
+    nomhas: responhas
+    campohas: COORDINADOR DEL LABORATORIO DE HIGIENE
+    size: 30
+
+  CAJA ADSCRIPCION:
+    tipotag:   input_tag
+    label: Adscripción:
+    nomdes: abscrides
+    campodes:  -1
+    nomhas: abscrihas
+    campohas: DIRECTORA E LA O.G.A.
+    size: 30
+

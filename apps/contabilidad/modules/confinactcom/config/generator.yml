@@ -1,0 +1,15 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Contabc
+    theme:            cidesaGenerator
+
+    fields:
+      grid: { name: . }
+
+    edit:
+      title: Actualización de Comprobantes
+      display:
+        Comprobantes: [ _grid ]
+      actions:
+        _save:        ~

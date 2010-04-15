@@ -1,0 +1,67 @@
+Parametros:
+  modulo: nomina
+  nomrep: aportepatronal
+  titulo: Nomina Aporte Patronal
+  orientacion: Vertical
+  tipopagina: Horizontal
+  width:250
+
+Filas:
+  CATALOGO EMPLEADOS:
+    tipotag:   inputcat_tag
+    label: Código del  Empleado:
+    sql:   SELECT min(codemp) as codempmin,max (codemp) as codempmax FROM NPASICAREMP
+    nomdes: codempdes
+    campodes: codempmin
+    catdes: 0
+    nomhas: codemphas
+    campohas: codempmax
+    cathas: 1
+    nomcat: codemp
+    size: 20
+
+  CATALOGO CARGOS:
+    tipotag:   inputcat_tag
+    label: Código del Cargo:
+    sql:   SELECT min(codcar) as codcarmin,max (codcar) as codcarmax FROM NPASICAREMP
+    nomdes: codcardes
+    campodes: codcarmin
+    catdes: 2
+    nomhas: codcarhas
+    campohas: codcarmax
+    cathas: 3
+    nomcat: codcar
+    size: 20
+
+  CATALOGO NOMINA:
+    tipotag:   inputcat_tag
+    label: Código del Nómina:
+    sql:   SELECT min(codnom) as codnommin,max (codnom) as codnommax FROM NPASICAREMP
+    nomdes: codnomdes
+    campodes: codnommin
+    catdes: 6
+    nomhas: codnomhas
+    campohas: codnommax
+    cathas: 7
+    nomcat: codnom
+    size: 20
+
+  COMBO DE STATUS:
+    tipotag:   combof_tag
+    label: Especial:
+    nomdes: especial
+    campodes: [N=>N0, S=>SI]
+
+  CAJA ELABORADO POR:
+    tipotag:   input_tag
+    label: Cordinadora de Recursos Humanos:
+    nomdes: elaborado
+    campodes: Mairin Ramos F.
+    size: 60
+
+  CAJA REVISADO:
+    tipotag:   input_tag
+    label: Gerente de Administración de Operaciones:
+    nomdes: revisado
+    campodes: Juan José Gomez H.
+    size: 60

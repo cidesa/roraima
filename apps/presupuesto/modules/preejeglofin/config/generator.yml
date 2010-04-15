@@ -1,0 +1,32 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Cpdeftit
+    theme:            cidesaGenerator
+
+    fields:
+      codpre:       { name: Codigo , params: maxlength=32}
+      nompre:       { name: Descripcion, type: textarea_tag, params: maxlength=254 }
+      montot:       { name: Monto Disponible, params: size=10}
+      listaperiodo: { name: Periodo }
+      gripfuefin:   { name: .}
+
+    list:
+      title:          Ejecucion Global por Financiamiento
+      display:        [=codpre, nompre]
+      filters:        [codpre, nompre]
+      max_per_page:	  10
+      object_actions:
+        _edit:        ~
+
+    edit:
+      title:          Ejecucion Global por Financiamiento
+      fields:
+        codpre:       { name: Codigo , params: maxlength=32 size=32 readonly=true}
+        nompre:       { name: Descripcion, type: textarea_tag, params: size=30x2 maxlength=254  readonly=true}
+      display:
+        NONE:                          [ codpre, nompre, montot]
+        Fuente de Financiamiento:      [ _gripfuefin]
+      actions:
+        _list:        ~
+

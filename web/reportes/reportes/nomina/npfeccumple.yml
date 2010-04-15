@@ -1,0 +1,53 @@
+Parametros:
+  modulo: nomina
+  nomrep: npfeccumple
+  titulo: FECHA DE CUMPLEAÑOS
+  orientacion: Horizontal
+  tipopagina: Carta
+  width:210
+
+Filas:
+  CATALOGO CEDULA:
+    tipotag:   inputcat_tag
+    label: C.I Empleado:
+    sql:SELECT min(CEDEMP) as ced1, max(CEDEMP) as ced2 from nphojint
+    nomdes: ced1
+    campodes: ced1
+    catdes: 0
+    nomhas: ced2
+    campohas: ced2
+    cathas: 1
+    nomcat: cedemp
+    size: 15
+
+  COMBO DE MESES:
+    tipotag:   inputcat_tag
+    label: Meses:
+    sql: select min (to_char(fecnac,'MM')) as mes1, max (to_char(fecnac,'MM')) as mes2 from nphojint
+    nomdes: mes1
+    campodes: mes1
+    catdes: 2
+    nomhas: mes2
+    campohas: mes2
+    cathas: 3
+    nomcat: meses
+    size: 15
+
+  COMBO DE DIAS:
+    tipotag:   inputcat_tag
+    label: Dias:
+    sql: select min (to_char(fecnac,'DD')) as dia1, max (to_char(fecnac,'DD')) as dia2 from nphojint
+    nomdes: dia1
+    campodes: dia1
+    catdes: 4
+    nomhas: dia2
+    campohas: dia2
+    cathas: 5
+    nomcat: dias
+    size: 15
+
+
+
+
+
+

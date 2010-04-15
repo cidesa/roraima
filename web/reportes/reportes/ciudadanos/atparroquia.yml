@@ -1,0 +1,21 @@
+Parametros:
+  modulo: ciudadanos
+  nomrep: atparroquia
+  titulo: PARROQUIAS
+  orientacion: Horizontal
+  tipopagina: Carta
+  width:210
+Filas:
+  CATALOGO CODCON:
+    tipotag:   inputcat_tag
+    label: C&oacute;digo de la Parroquia:
+    sql:   select min(id) as codmin,max(id) as codmax from atparroquias
+    nomdes: iddes
+    campodes: codmin
+    catdes: 0
+    nomhas: idhas
+    campohas: codmax
+    cathas: 1
+    nomcat: atparroquia
+    size: 20
+

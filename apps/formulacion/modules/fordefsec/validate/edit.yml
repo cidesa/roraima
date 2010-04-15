@@ -1,0 +1,29 @@
+methods:
+  post:
+   - "fordefsec{codsec}"
+   - "fordefsec{nomsec}"   
+names: 
+  fordefsec{codsec}:
+    required:  Yes
+    required_msg: El código del Sector no puedo estar en Blanco
+    validators: Validator_codsec
+    
+  fordefsec{nomsec}:
+    required:  Yes
+    required_msg: El Nombre del Sector no puedo estar en Blanco
+    validators: Validator_nomsec      
+
+Validator_codsec:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Fordefsec
+        column:       codsec
+        unique_error: El registro ya Existe intente con otro.
+    
+Validator_nomsec:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El Nombre no puede tener menos de 2 caracteres
+        max:       100
+        max_error: El Nombre no puede pasar mas de 100 caracteres

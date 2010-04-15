@@ -1,0 +1,58 @@
+Parametros:
+  modulo: nomina
+  nomrep: nprcontra
+  titulo: CONSTANCIA DE TRABAJO
+  orientacion: Vertical
+  tipopagina: CARTA
+  width:210
+
+Filas:
+  CATALOGO CEDULAS:
+    tipotag:   inputcat_tag
+    label: Codigo Empleado:
+    sql:   SELECT min(codemp) as codemp FROM nphojint
+    nomdes: codemp
+    campodes: codemp
+    catdes: 0
+    nomcat: codemp
+    size: 20
+
+  CAJA FIRMA:
+    tipotag: input_tag
+    label: Directora RRHH:
+    nomdes: dirrec
+    campodes: SOC. DUBIS TILANO
+    size: 20
+
+  CAJA COPIA:
+    tipotag: input_tag
+    label: Iniciales:
+    nomdes: concop
+    campodes: DT/CN/af
+    size: 20
+
+  COMBO DE SUELDO:
+    tipotag:   combof_tag
+    label: Sueldo:
+    nomdes: sueldo
+    campodes: [N=>N0, S=>SI]
+
+  COMBO DE CESTA:
+    tipotag:   combof_tag
+    label: CestaTicket:
+    nomdes: cesta
+    campodes: [N=>N0, S=>SI]
+
+  CAJA CESTATICKET:
+    tipotag: input_tag
+    label: Monto CestaTicket:
+    nomdes: monces
+    campodes: 0
+    size: 20
+
+  CAJA VALIDEZ:
+    tipotag: input_tag
+    label: Validez en meses:
+    nomdes: valmes
+    campodes: 6
+    size: 10

@@ -1,0 +1,78 @@
+methods:
+  post:
+   - "casalalm{codsal}"
+   - "casalalm{fecsal}"
+   - "casalalm{rifpro}"
+   - "casalalm{dessal}"
+   - "casalalm{tipmov}"
+
+names:
+  casalalm{codsal}:
+    required:  Yes
+    required_msg: El Número de Salida no puedo estar en Blanco
+    validators: UniqueValidator
+
+  casalalm{fecsal}:
+    required:  Yes
+    required_msg: La Fecha no puedo estar en Blanco
+    validators: FechaValidator1, FechaValidator
+
+
+  casalalm{rifpro}:
+    required:  Yes
+    validators: ProveedorValidator
+    required_msg: CI/RIF de Contratistas de Bienes o Servicio y Cooperativas no puede estar en blanco
+
+  casalalm{dessal}:
+    required:  Yes
+    validators: DescripcionValidator
+    required_msg: La descripción de no puede estar en blanco
+
+  casalalm{tipmov}:
+    required:  Yes
+    validators: TipoValidator
+    required_msg: El Tipo de Movimiento no puede estar en blanco
+
+FechaValidator1:
+    class:         CidesaDateNow
+    param:
+        compare: 'now'
+        compare_error: La Fecha no puede ser menor a la Fecha Actual
+        operator: '>='
+        date_error:  Fecha Inválida
+
+FechaValidator:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha  introducida es invalida
+
+DescripcionValidator:
+    class: sfStringValidator
+    param:
+        min:       5
+        min_error: La Descripción de la Salida no puede tener menos de 5 caracteres
+        max:       100
+        max_error: La Descripción de la Salida no puede tener más de 100 caracteres
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Casalalm
+        column:   codsal
+        unique_error:   El Código de la Solicitud ya existe. Por Favor, Cambiélo por otro.
+
+ProveedorValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Caprovee
+        column:   rifpro
+        unique_error:   El Rif de la Contratistas de Bienes o Servicio y Cooperativas no existe.
+
+TipoValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Catipsal
+        column:   codtipsal
+        unique_error:   El Código del Tipo de Movimiento no existe.

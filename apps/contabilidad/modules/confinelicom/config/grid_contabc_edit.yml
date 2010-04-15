@@ -1,0 +1,35 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                false
+  tabla:                   contabc
+  anchogrid:               750
+  ancho:                   700
+  filas:                   0
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:
+  tipo:                    k
+  nombrecampo:             check
+  html:                    [size="01" ]
+  esgrabable:              true
+2:       # Columna 2
+  titulo:                  Numero del Comprobante
+  tipo:                    t
+  nombrecampo:             numcom
+  html:                    [size="8" readonly=true ]
+  oculta:                  false
+  esgrabable:              false
+3:       # Columna 3
+  titulo:                  Fecha
+  tipo:                    f
+  nombrecampo:             feccom
+  html:                    [size="10"  readonly=true ]
+  oculta:                  false
+  esgrabable:              false
+4:       # Columna 4
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             descom
+  html:                    [size="65"  readonly=true ]
+  esgrabable:              false

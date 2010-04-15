@@ -1,0 +1,63 @@
+Parametros:
+  modulo: bienes
+  nomrep: bnrlisbm4
+  titulo: RELACION DE BIENES MUEBLES FALTANTES
+  orientacion: Horizontal
+  tipopagina: Carta
+  width:210
+
+Filas:
+  CATALOGO CODEMP:
+    tipotag:   inputcat_tag
+    label: C&oacute;digo de Ubicacion:
+    sql: select min(codubi) as mincod, max(codubi) as maxcod from bnubibie where length(trim(codubi)) = (select max(length(trim(codubi))) from bnubibie)
+    nomdes: ubides
+    campodes: mincod
+    catdes: 0
+    nomhas: ubihas
+    campohas: maxcod
+    cathas: 1
+    nomcat: bnubibie
+    size: 20
+
+  CATALOGO MUNICIPIO:
+    tipotag:   inputcat_tag
+    label: Nombre del Municipio:
+    sql: select min(nommun) as nombre from ocmunici
+    nomdes: mun
+    campodes: nombre
+    catdes: 2
+    nomcat: municipio
+    size: 50
+
+  CATALOGO PARROQUIA:
+    tipotag:   inputcat_tag
+    label: Nombre de la Parroquia:
+    sql: select min(nompar) as nombre from ocparroq
+    nomdes: par
+    campodes: nombre
+    catdes: 4
+    nomcat: parroquia
+    size: 50
+
+  CAMPO DIRECCION:
+    tipotag:   input_tag
+    label: Direcci&oacute;n o Lugar:
+    nomdes: dirlug
+    campodes: -1
+    size: 50
+
+  CAMPO JEFE:
+    tipotag:   input_tag
+    label: Jefe de Unidad:
+    nomdes: jefuni
+    campodes: -1
+    size: 50
+
+
+  CAMPO Elaborado:
+    tipotag:   input_tag
+    label: Elaborado:
+    nomdes: elab
+    campodes: -1
+    size: 50

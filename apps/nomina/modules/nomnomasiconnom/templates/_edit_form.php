@@ -1,0 +1,195 @@
+<?php
+/**
+ * Funciones de la vista.
+ *
+ * @package    Roraima
+ * @subpackage vistas
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id$
+ */
+// date: 2007/12/07 17:18:17
+?>
+<?php echo form_tag('nomnomasiconnom/save', array(
+  'id'        => 'sf_admin_edit_form',
+  'name'      => 'sf_admin_edit_form',
+  'multipart' => true,
+)) ?>
+<?php use_helper('Javascript','PopUp','Grid','Date','SubmitClick','tabs') ?>
+<?php echo javascript_include_tag('dFilter','ajax','tools','observe') ?>
+<?php echo object_input_hidden_tag($npasiconemp, 'getId') ?>
+
+<fieldset id="sf_fieldset_none" class="">
+<div class="form-row">
+<?php echo input_hidden_tag('fila2', $numreg) ?>
+<fieldset id="sf_fieldset_none" class="">
+<legend><?php echo __('Definiciones Generales')?></legend>
+<div class="form-row">
+  <?php echo label_for('npasiconemp[codnom2]', __($labels['npasiconemp{codnom2}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('npasiconemp{codnom2}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npasiconemp{codnom2}')): ?>
+    <?php echo form_error('npasiconemp{codnom2}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($npasiconemp, 'getCodnom2', array (
+  'maxlength' => 3,
+  'readonly'  =>  $npasiconemp->getId()!='' ? true : false ,
+  'onKeyPress' => "javascript:cadena=this.value;cadena=cadena.toUpperCase();document.getElementById('npasiconemp_codnom2').value=cadena",
+  'control_name' => 'npasiconemp[codnom2]',
+  'onBlur'=> remote_function(array(
+        'url'      => 'nomnomasiconnom/ajax',
+        'complete' => 'AjaxJSON(request, json)',
+        'condition' => "$('npasiconemp_codnom2').value != '' && $('id').value == ''",
+        'with' => "'ajax=1&cajtexmos=npasiconemp_desnom&cajtexcom=npasiconemp_codnom2&codigo='+this.value"
+			  )),
+)); echo $value ? $value : '&nbsp;' ?>
+
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Npnomina_Nomtipo/clase/Npnomina/frame/sf_admin_edit_form/obj1/npasiconemp_codnom2/obj2/npasiconemp_desnom/obj3/frecal/campo1/codnom/campo2/nomnom/campo3/frecal/param1/','','','botoncat')?>
+<?php echo input_hidden_tag('frecal', '') ?>
+  <?php $value = object_input_tag($npasiconemp, 'getDesnom', array (
+  'disabled' => true,
+  'size' => 60,
+  'control_name' => 'npasiconemp[desnom]',
+)); echo $value ? $value : '&nbsp;' ?></div>
+
+<br>
+
+  <?php echo label_for('npasiconemp[codcon]', __($labels['npasiconemp{codcon}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('npasiconemp{codcon}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npasiconemp{codcon}')): ?>
+    <?php echo form_error('npasiconemp{codcon}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($npasiconemp, 'getCodcon', array (
+  'size' => 20,
+  'control_name' => 'npasiconemp[codcon]',
+  'readonly'  =>  $npasiconemp->getId()!='' ? true : false ,
+  'onKeyPress' => "javascript:cadena=this.value;cadena=cadena.toUpperCase();document.getElementById('npasiconemp_codcon').value=cadena",
+  'onBlur'=> remote_function(array(
+        'update'   => 'grid',
+        'url'      => 'nomnomasiconnom/ajax',
+        'complete' => 'AjaxJSON(request, json)',
+        'condition' => "$('npasiconemp_codcon').value != '' && $('id').value == ''",
+        'script' => true,
+        'with' => "'ajax=2&cajtexmos=npasiconemp_nomcon&codigonomina='+$('npasiconemp_codnom2').value+'&frecuencia='+$('frecal').value+'&codigoconcepto='+this.value")),
+)); echo $value ? $value : '&nbsp;' ?>
+
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo')."/metodo/Npasiconemp_Nomtipo/clase/Npdefcpt/frame/sf_admin_edit_form/obj1/npasiconemp_codcon/obj2/npasiconemp_nomcon/campo1/codcon/campo2/nomcon/param1/'+$('npasiconemp_codnom2').value+'",'','','botoncat')?>
+<?php echo input_hidden_tag('existecon', '') ?>
+  <?php $value = object_input_tag($npasiconemp, 'getNomcon', array (
+  'size' => 60,
+  'control_name' => 'npasiconemp[nomcon]',
+)); echo $value ? $value : '&nbsp;' ?>  </div>
+</div>
+</fieldset>
+
+<br>
+<fieldset id="sf_fieldset_none" class="">
+<legend><?php echo __('Asignaciones por trabajador')?></legend>
+<div class="form-row">
+<div align="center">
+<table>
+<tr>
+<th>
+<input type="button" name="Submit" value="Marcar Todo" onClick="marcarTodo();"/>
+</th>
+<th>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</th>
+<th>
+<input type="button" name="Submit" value="Desmarcar Todo" onClick="desmarcarTodo();"/>
+</th>
+</tr>
+</table>
+</div>
+<br>
+
+<div id="grid">
+<?php echo grid_tag($obj);?>
+</div>
+</div>
+</fieldset>
+
+</div>
+</fieldset>
+
+<?php include_partial('edit_actions', array('npasiconemp' => $npasiconemp)) ?>
+
+</form>
+
+<ul class="sf_admin_actions">
+  </ul>
+<script>
+var id='<?php echo $npasiconemp->getId()?>';
+if (id!="")
+{
+ $$('.botoncat')[0].disabled=true;
+ $$('.botoncat')[1].disabled=true;
+}
+
+
+
+function verificar_codigo_repetido(id)
+  {
+     f=0;
+     i=id.split('_');
+     i=i[1];
+     contador_repetido=0;
+     while (f<10)
+      {
+             var col_fila_codigo_car = "ax_"+f+"_1";
+             var col_fila_codigo_car_com = "ax_"+i+"_1";
+             if (col_fila_codigo_car_com!=col_fila_codigo_car)
+             {
+               if ($(col_fila_codigo_car_com).value==$(col_fila_codigo_car).value)
+               {
+                 contador_repetido++;
+                 break;
+               }
+             }
+           f++;
+      }
+      if (contador_repetido>0)
+      {
+        alert(contador_repetido + ' Código de cargo repetido, Verifique sus datos');
+      }
+       i=0;
+       f=0;
+  }
+
+
+  function marcarTodo()
+  {
+  	var id='<?php echo $npasiconemp->getId()?>';
+    if (id=="")
+    { var am=parseInt($('fila').value);}
+    else { var am=parseInt($('fila2').value);}
+   fil=0;
+   while (fil<am)
+   {
+     var id="ax"+"_"+fil+"_1";
+     $(id).checked=true;
+
+     fil++;
+   }
+  }
+
+  function desmarcarTodo()
+  {
+    var id='<?php echo $npasiconemp->getId()?>';
+    if (id=="")
+    { var am=parseInt($('fila').value);}
+    else { var am=parseInt($('fila2').value);}
+    fil=0;
+    while (fil<am)
+    {
+     var id="ax"+"_"+fil+"_1";
+     $(id).checked=false;
+
+     fil++;
+    }
+  }
+
+
+
+
+</script>

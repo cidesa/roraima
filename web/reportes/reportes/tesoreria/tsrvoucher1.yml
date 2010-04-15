@@ -1,0 +1,56 @@
+Parametros:
+  modulo: tesoreria
+  nomrep: tsrvoucher1
+  titulo: CHEQUES
+  orientacion: Vertical
+  tipopagina: Carta
+  width:210
+
+Filas:
+  CATALOGO NUMCHEQ:
+    tipotag:   inputcat_tag
+    label: Número Cheque:
+    sql:   SELECT min(numche) as codmin,max(numche) as codmax FROM tscheemi
+    nomdes: numchedes
+    campodes: codmin
+    catdes: 0
+    nomhas: numchehas
+    campohas: codmax
+    cathas: 1
+    nomcat: numche_tscheemi
+    size: 15
+
+  CAJA HECHO POR:
+    tipotag:   input_tag
+    label: Hecho por:
+    nomdes: hecho
+    campodes:
+    size: 40
+
+  CAJA REVISADO:
+    tipotag:   input_tag
+    label: Revisado por:
+    nomdes: revi
+    campodes:
+    size: 40
+
+  CAJA APROBADO:
+    tipotag:   input_tag
+    label: Aprobado por:
+    nomdes: apro
+    campodes:
+    size: 40
+
+  CAJA CONTADOR:
+    tipotag:   input_tag
+    label: Contador:
+    nomdes: conta
+    campodes:
+    size: 40
+    
+  CAJA AUDITOR:
+    tipotag:   input_tag
+    label: Auditor:
+    nomdes: audi
+    campodes:
+    size: 40

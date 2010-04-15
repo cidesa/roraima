@@ -1,0 +1,71 @@
+methods:
+  post:
+   - "npdefvar{codvar}"
+   - "npdefvar{desvar}"
+   - "npdefvar{codnom}"
+   - "npdefvar{valor1}"
+   - "npdefvar{valor2}"
+   - "npdefvar{valor3}"
+   - "npdefvar{valor4}"
+   - "npdefvar{valor5}"
+names:
+  npdefvar{codvar}:
+    required:  Yes
+    required_msg: El código no puede estar en Blanco
+    validators: Validator_codvar
+
+  npdefvar{desvar}:
+    required:  Yes
+    required_msg: La descripción no puede estar en Blanco
+    validators: Validator_desvar
+
+  npdefvar{codnom}:
+    required:  Yes
+    required_msg: El código de Nómina no puede estar en Blanco
+    validators: Validator_desvar
+
+  npdefvar{valor1}:
+    required:  Yes
+    required_msg: El Sueldo del Cargo no puede estar en igual a cero.
+    validators: MyNumberValidator
+
+  npdefvar{valor2}:
+    required:  Yes
+    required_msg: El Sueldo del Cargo no puede estar en igual a cero.
+    validators: MyNumberValidator
+
+  npdefvar{valor3}:
+    required:  Yes
+    required_msg: El Sueldo del Cargo no puede estar en igual a cero.
+    validators: MyNumberValidator
+
+  npdefvar{valor4}:
+    required:  Yes
+    required_msg: El Sueldo del Cargo no puede estar en igual a cero.
+    validators: MyNumberValidator
+
+  npdefvar{valor5}:
+    required:  Yes
+    required_msg: El Sueldo del Cargo no puede estar en igual a cero.
+    validators: MyNumberValidator
+
+Validator_codvar:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Npdefvar
+        column:       codvar
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_desvar:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       30
+        max_error: La descripción no puede pasar mas de 30 caracteres
+
+MyNumberValidator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^([0-9]*(\.*([0-9]{2,}))*\,?[0-9]+|[0-9]+\,?[0-9]*)?$/' ]
+        values_error: La Unidad Tributaria solo puede contener valores númericos

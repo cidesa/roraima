@@ -1,0 +1,38 @@
+Parametros:
+  modulo: tesoreria
+  nomrep: tsrmovcajachica
+  titulo: MOVIMIENTOS DE CAJA CHICA
+  orientacion: Vertical
+  tipopagina: Carta
+  width:210
+
+Filas:
+  CATALOGO PRIMERO:
+    tipotag:   inputcat_tag
+    label: Referencia:
+    sql:   SELECT min(refsal) as ref1, max(refsal) as ref2 FROM tssalcaj
+    #DESDE
+    nomdes: ref1
+    campodes: ref1
+    catdes: 0
+    #HASTA
+    nomhas: ref2
+    campohas: ref2
+    cathas: 1
+    nomcat: refmovcajchc
+    size: 25
+
+  fecha PRIMERA:
+    tipotag:   inputfec_tag
+    label: Fecha Salida:
+    sql:   SELECT to_char(min(fecemi),'dd/mm/yyyy') as fechamin, to_char(max(fecemi),'dd/mm/yyyy') as fechamax FROM tscheemi
+    #DESDE
+    nomdes: fechades
+    campodes: fechamin
+    #HASTA
+    nomhas: fechahas
+    campohas: fechamax
+    #PARAMETROS
+    size: 15
+
+

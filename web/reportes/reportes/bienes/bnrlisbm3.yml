@@ -1,0 +1,112 @@
+Parametros:
+  modulo: bienes
+  nomrep: bnrlisbm3
+  titulo: RELACION DE MOVIMIENTOS DE BIENES
+  orientacion: Horizontal
+  tipopagina: Carta
+  width:210
+
+Filas:
+  CATALOGO UBIDES:
+    tipotag:   inputcat_tag
+    label: C&oacute;digo de Ubicacion de Origen:
+    sql: select min(codubi) as mincod, max(codubi) as maxcod from bnubibie where length(trim(codubi)) = (select max(length(trim(codubi))) from bnubibie)
+    nomdes: ubiorides
+    campodes: mincod
+    catdes: 0
+    nomhas: ubiorihas
+    campohas: maxcod
+    cathas: 1
+    nomcat: bnubibie
+    size: 18
+
+  CATALOGO ACTIVOS:
+    tipotag:   inputcat_tag
+    label: Código del Activo:
+    sql:   SELECT min(a.codact) as codactmin,max(a.codact) as codactmax FROM bnregmue a, bndefact b where a.codact = b.codact
+    nomdes: codactmin
+    campodes: codactmin
+    catdes: 2
+    nomhas: codactmax
+    campohas: codactmax
+    cathas: 3
+    nomcat: codact
+    size: 25
+
+  CATALOGO MUEBLE:
+    tipotag:   inputcat_tag
+    label: Código del Bien:
+    sql:   SELECT min(codmue) as codmuemin,max(codmue) as codmuemax FROM bnregmue
+    nomdes: codmuemin
+    campodes: codmuemin
+    catdes: 4
+    nomhas: codmuemax
+    campohas: codmuemax
+    cathas: 5
+    nomcat: codmue
+    size: 25
+
+  CATALOGO TIPO:
+    tipotag:   inputcat_tag
+    label: Tipo Disposición:
+    sql:  select min(coddis) as coddisdes, max(coddis) as coddishas from bndisbie
+    nomdes: coddisdes
+    campodes: coddisdes
+    catdes: 6
+    nomhas:coddishas
+    campohas:coddishas
+    cathas: 7
+    nomcat: bndisbie_coddis
+    size: 22
+
+  CATALOGO DISPOSICION1:
+    tipotag:   inputcat_tag
+    label: Nro. Disposición:
+    sql:  select min(nrodismue) as nrodismuemin,max(nrodismue) as nrodismuemax  from bndismue where nrodismue<>''
+    nomdes: nrodismuemin
+    campodes: nrodismuemin
+    catdes: 8
+    nomhas: nrodismuemax
+    campohas: nrodismuemax
+    cathas: 9
+    nomcat: nrodismue
+    size: 22
+
+  FECHA MOV:
+    tipotag:   inputfec_tag
+    label: Fecha Cuenta:
+    sql: select to_char(min(fecdismue),'dd/mm/yyyy') as minfec, to_char(max(fecdismue),'dd/mm/yyyy') as maxfec from bndismue
+    nomdes: fecdes
+    campodes: minfec
+    catdes: 10
+    nomhas: fechas
+    campohas: maxfec
+    cathas: 11
+    size: 12
+
+  CAJA PREPARADO:
+    tipotag:   input_tag
+    label: Responsable:
+    nomdes: prepardes
+    campodes:-1
+    nomhas: preparhas
+    campohas:-1
+    size: 30
+
+  CAJA CONFORMADO:
+    tipotag:   input_tag
+    label: jefe de la unidad:
+    nomdes: confordes
+    campodes: -1
+    nomhas: conforhas
+    campohas:-1
+    size: 30
+
+  CAJA APROBADO:
+    tipotag:   input_tag
+    label: Registrador:
+    nomdes: aprobades
+    campodes:  -1
+    nomhas: aprobahas
+    campohas:-1
+    size: 30

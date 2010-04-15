@@ -1,0 +1,99 @@
+----- INSTALACIÓN DE RORAIMA 1.0.1 -------------
+
+1- Instalar los paquetes necesario (menos el manejador de base de datos):
+
+   # apt-get install apache2 php5 php5-pgsql php5-xsl libapache2-mod-php5
+
+2- Configurar PHP5
+ 
+   # nano /etc/php5/apache2/php.ini
+
+   Se modifican las siguientes líneas:
+
+   Memory_limit = 512M ; o 1/3 de la memoria de la maquina si el resultado es mayor a 512M ej. Si tengo 2GB 1/3 = 600M > 512
+   max_input_time = 120 ; 
+   max_execution_time = 500 ;
+   session.name = cidesa
+
+3- Descomprimir roraima_v1.0.1.tar.gz en /var/www:
+
+   # cd /var/www
+   # tar zxvf CARPETA_DESCARGA/roraima_v1.0.1.tar.gz
+
+4- Cambiar el dueño de la carpeta cidesa:
+
+   # chown -R www-data:root cidesa
+
+5- Copiar el archivo de configuracion de apache que trae el Roraima a la 
+carpeta site-available de apache2:
+
+   # cp cidesa/roraima/roraima.apache /etc/apache2/sites-available/roraima
+
+6- Configuración de apache2:
+
+   habilitamos la configuración que acabamos de copiar
+   # a2ensite roraima
+
+   Habilitamos el modulo speling para el case sensitive
+   # a2enmod speling
+
+   Deshabilitamos la configuración por defecto
+   # a2dissite default
+
+7- Reiniciar Apache2:
+
+   # /etc/init.d/apache2 restart
+
+8- Instalar PostgreSQL 8.1 u 8.2
+
+   NOTA: Algunas Funciones no trabajan en PostgresSQL 8.3, no se
+   recomienda su uso.
+
+9- Crear los siguientes usuarios en el servidor postgresql
+
+   "postgres" con contraseña "postgres"
+   "cidesa" con contraseña "cidesa"
+   
+   OJO: _sin_las_dobles_comillas_
+ 
+   NOTA: Si no quieres crear estos usuarios si no otros (o ya tienes otros creados), 
+   debes cambiar las opciones de conexion en el archivo /var/www/cidesa/roraima/config/database.yml
+
+10- Importar la base de datos:
+
+   Nos cambiamos al usuario postgresql
+   # su postgres
+
+   Restauramos la base de datos que contiene el código de Roraima
+   # pg_restore -i -h localhost -p 5432 -U postgres -d "SIMA" -v "/var/www/cidesa/roraima/data/roraima.backup"
+   
+   NOTA: la contraseña que te va a pedir es la contraseña del usuario postgres que es "postgres"
+   o como la configures en el paso 9
+   
+   NOTA2: la base de datos se llama SIMA, pero si la quieres cambiar debes configurar el nuevo
+   nombre en el archivo que indica el punto 11
+
+
+
+
+   LISTO ...... Verificamos la instalación:
+
+   En el mozilla firefox >=3.0:
+   http://localhost/
+
+   Si todo esta correcto te debe cargar el formulario de inicio de sesion.
+
+   Si te muestra el mensaje "Ha ocurrido una vicisitud", debes entrar en el entorno de desarrollo
+   de la siguiente manera:
+
+   http://localhost/autenticacion_dev.php/login
+   Al llamar a este formulario te debe aparecer la descripción del error ocurrido y en base a este 
+   debes verificar y solventar cualquier problema que se presente.
+
+
+
+
+
+
+
+

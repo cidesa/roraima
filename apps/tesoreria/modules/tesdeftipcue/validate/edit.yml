@@ -1,0 +1,33 @@
+methods:
+  post:
+   - "tstipcue{codtip}"
+   - "tstipcue{destip}"
+
+
+names:
+  tstipcue{codtip}:
+    required:  Yes
+    required_msg: Código no puedo estar en Blanco
+    validators: Validator_codtip
+
+  tstipcue{destip}:
+    required:  Yes
+    required_msg: El Descripción no puedo estar en Blanco
+    validators: DescripcionValidator
+
+Validator_codtip:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Tstipcue
+        column:       codtip
+        unique_error: El registro ya Existe intente con otro.
+
+
+DescripcionValidator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La Descripción no puede tener menos de 2 caracteres
+        max:       40
+        max_error: La Descripción no puede pasar mas de 40 caracteres
+

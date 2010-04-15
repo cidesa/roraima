@@ -1,0 +1,39 @@
+Parametros:
+  modulo: tesoreria
+  nomrep: tsrdisban
+  titulo: DISPONIBILIDAD BANCARIA
+  orientacion: Vertical
+  tipopagina: Carta
+  width:220
+
+Filas:
+  CATALOGO NUMCUE:
+    tipotag:   inputcat_tag
+    label: Numero de Cuenta:
+    sql:   SELECT min(numcue) as codmin,max(numcue) as codmax FROM TSDEFBAN
+    nomdes: numcuedes
+    campodes: codmin
+    catdes: 0
+    nomhas: numcuehas
+    campohas: codmax
+    cathas: 1
+    nomcat: numcue
+    size: 22
+
+  FECHA:
+    tipotag:   inputfec_tag
+    label: Fecha:
+    sql:   select to_char(MIN(feccom),'DD/MM/YYYY') as fechamin,to_char(MAX(feccom),'DD/MM/YYYY') as fechamax from contabc
+    nomdes: fecdes
+    campodes: fechamin
+    nomhas: fechas
+    campohas: fechamax
+    size: 15
+    
+  CAJA DISPONIBILIDAD:
+    tipotag:   input_tag
+    label: Disponibilidad Mayor o  Igual a:
+    nomdes: dispon
+    campodes:0,00
+    size: 40
+    parametros: onBlur='javascript:event.keyCode=13;return entermonto(event, this.id)'

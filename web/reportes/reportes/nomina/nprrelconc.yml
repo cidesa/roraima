@@ -1,0 +1,82 @@
+Parametros:
+  modulo: nomina
+  nomrep: nprreclconc
+  titulo: RELACION NOMINA CONCEPTO
+  orientacion: Vertical
+  tipopagina: Carta
+  width:210
+
+Filas:
+  COMBO CONCEPTO:
+    tipotag:   combof_tag
+    label: Tipo de Concepto:
+    nomdes: tipcon
+    campodes: [T=>Todos, A=>Asignaciones, D=>Deducciones, P=>Aportes]
+
+  CATALOGO CODCON:
+    tipotag:   inputcat_tag
+    label: Código Concepto:
+    sql:   SELECT min(codcon) as codconmin,max(codcon) as codconmax FROM NPASICONEMP
+    nomdes: codcondes
+    campodes: codconmin
+    catdes: 0
+    nomhas: codconhas
+    campohas: codconmax
+    cathas: 1
+    nomcat: codcon
+    size: 20
+
+  CATALOGO CODNOM:
+    tipotag:   inputcat_tag
+    label: Código Nomina:
+    sql:   SELECT min(codnom) as codnommin,max(codnom) as codnommax FROM NPASICAREMP
+    nomdes: codnomdes
+    campodes: codnommin
+    catdes: 2
+    nomhas: codnomhas
+    campohas: codnommax
+    cathas: 3
+    nomcat: codnom
+    size: 20
+      
+  COMBO DE STATUS:
+    tipotag:   combof_tag
+    label: Especial:
+    nomdes: especial
+    campodes: [NO=>NO, SI=>SI]
+
+  CATALOGO CODCTAESP:
+    tipotag:   inputcat_tag
+    label: Tipo de Nómina Especial:
+    sql:select min(codnomesp) as nomminesp, max(codnomesp) as nommaxesp from npnomcal
+    nomdes: nomminesp
+    campodes: nomminesp
+    catdes: 4
+    nomhas: nommaxesp
+    campohas: nommaxesp
+    cathas: 5
+    nomcat: tipnom_especial
+    size: 20
+    
+  CAJA ELAB0RADO:
+    tipotag:   input_tag
+    label: Elaborado Por:
+    nomdes: elapor
+    campodes:
+    size: 60
+
+  CAJA REVISADO:
+    tipotag:   input_tag
+    label: Revisado Por:
+    nomdes: revpor
+    campodes:
+    size: 60
+    
+  CAJA AUTORIZADO:
+    tipotag:   input_tag
+    label: Autorizado Por:
+    nomdes: autpor
+    campodes:
+    size: 60
+    
+    

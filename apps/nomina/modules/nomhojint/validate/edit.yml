@@ -1,0 +1,224 @@
+methods:
+  post:
+   - "nphojint{codemp}"
+   - "nphojint{fotemp}"
+#   - "nphojint{nomemp}"
+   - "nphojint{cedemp}"
+   - "nphojint{codniv}"
+#   - "nphojint{lugnac}"
+   - "nphojint{fecnac}"
+#   - "nphojint{obsgen}"
+#   - "nphojint{dirhab}"
+   - "nphojint{emaemp}"
+#   - "nphojint{codpos}"
+   - "nphojint{fecing}"
+   - "nphojint{fecret}"
+   - "nphojint{fecrei}"
+#   - "nphojint{obsemp}"
+   - "nphojint{staemp}"
+#   - "nphojint{codtippag}"
+#   - "nphojint{codban}"
+#   - "nphojint{numcue}"
+#   - "nphojint{tipcue}"
+   - "nphojint{fecadmpub}"
+#   - "nphojint{numsso}"
+#   - "nphojint{numpolseg}"
+   - "nphojint{feccotsso}"
+#   - "nphojint{anoadmpub}"
+#   - "nphojint{tiefid}"
+#   - "nphojint{talcam}"
+   - "nphojint{talpan}"
+#  - "nphojint{talcal}"
+#   - "nphojint{grusan}"
+#  - "nphojint{codregpai}"
+#  - "nphojint{codregest}"
+#   - "nphojint{codregciu}"
+#   - "nphojint{grulab}"
+#   - "nphojint{gruotr}"
+#   - "nphojint{traslado}"
+#   - "nphojint{traotr}"
+#   - "nphojint{numexp}"
+#   - "nphojint{detexp}"
+#   - "nphojint{derzur}"
+#   - "nphojint{tipviv}"
+#   - "nphojint{vivotr}"
+#   - "nphojint{forten}"
+#   - "nphojint{tenotr}"
+
+
+
+names:
+  nphojint{codemp}:
+    required:  Yes
+    required_msg: Datos Personales- El Código del Empleado no puedo estar en Blanco
+    validators: UniqueValidator
+
+#  nphojint{nomemp}:
+#    required:  Yes
+#    required_msg: Datos Personales- Los Apellido(s) y Nombre(s) no puedo estar en Blanco
+#    validators: DescripcionValidator
+
+  nphojint{cedemp}:
+    required:  Yes
+    required_msg: Datos Personales- La Cédula del Empleado no puedo estar en Blanco
+    validators: Unique2Validator
+
+  nphojint{staemp}:
+    required:  Yes
+    required_msg: Ingresos- La Situación del Empleado no puede estar en Blanco
+
+  nphojint{codniv}:
+    required:  No
+    validators: NivelValidator
+
+  nphojint{emaemp}:
+    required:  No
+    validators: EmailValidator
+
+  nphojint{talpan}:
+    required:  No
+    validators: PantalonValidator
+
+  nphojint{fotemp}:
+    required: false
+    file: true
+    validators: fotoValidator
+
+  nphojint{fecnac}:
+    required:  No
+    validators: FechaValidator, FechaValidatorNowNac
+
+  nphojint{fecing}:
+    required:  No
+    validators:FechaValidatorNowIng
+    # FechaValidator,
+
+  nphojint{fecret}:
+    required:  No
+    validators: FechaValidator, FechaValidatorNowRet
+
+  nphojint{fecrei}:
+    required:  No
+    validators: FechaValidator, FechaValidatorNowRei
+
+  nphojint{fecadmpub}:
+    required:  No
+    validators: FechaValidator, FechaValidatorNowAdmpub
+
+  nphojint{feccotsso}:
+    required:  No
+    validators: FechaValidator, FechaValidatorNowCotsso
+
+
+DescripcionValidator:
+    class: sfStringValidator
+    param:
+        min:       10
+        min_error: Datos Personales- Los Apellido(s) y Nombre(s) no puede tener menos de 10 caracteres
+        max:       100
+        max_error: Datos Personales- Los Apellido(s) y Nombre(s) no puede tener más de 100 caracteres
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Nphojint
+        column:   codemp
+        unique_error:   Datos Personales- El Código del Empleado ya existe. Por Favor, Cambiélo por otro.
+
+Unique2Validator:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Nphojint
+        column:   cedemp
+        unique_error:   Datos Personales- La Cédula del Empleado ya existe. Por Favor, Cambiélo por otro.
+
+NivelValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Npestorg
+        column:   codniv
+        unique_error:   Datos Personales- El Nivel Organizacional no existe.
+
+EmailValidator:
+    class: sfEmailValidator
+    param:
+        strict:       true
+        email_error:  Habitacion- La Dirección del Email es Inválida.
+
+PantalonValidator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^[0-9]*[0-9]+$/' ]
+        values_error: Otras Caracteristicas- La Talla de pantalón solo puede contener números
+        max:       2
+        max_error: Otras Caracteristicas- La Talla de pantalón no puede pasar mas de 2 caracteres
+
+fotoValidator:
+  class: sfFileValidator
+  param:
+    max_size: 1000000
+    max_size_error: Tamaño máximo 1 MB
+
+    mime_types:
+      - 'image/jpeg'
+      - 'image/png'
+      - 'image/gif'
+    mime_types_error: Datos Personales- Sólo puedes guardar archivos JPEG, PNG o GIF
+
+FechaValidator:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha  introducida es invalida
+
+
+FechaValidatorNowRet:
+    class:         CidesaDateNow
+    param:
+        compare: 'now'
+        compare_error: Ingresos- Esta Fecha no puede ser mayor a la Fecha Actual
+        operator: '<='
+        date_error:  Fecha Inválida
+
+FechaValidatorNowRei:
+    class:         CidesaDateNow
+    param:
+        compare: 'now'
+        compare_error: Ingresos- Esta Fecha no puede ser mayor a la Fecha Actual
+        operator: '<='
+        date_error:  Fecha Inválida
+
+FechaValidatorNowAdmpub:
+    class:         CidesaDateNow
+    param:
+        compare: 'now'
+        compare_error: Admon Publica- Esta Fecha no puede ser mayor a la Fecha Actual
+        operator: '<'
+        date_error:  Fecha Inválida
+
+
+FechaValidatorNowIng:
+  class:         CidesaDateNow
+  param:
+    compare: 'now'
+    compare_error: Ingresos- Esta Fecha no puede ser mayor a la Fecha Actual
+    operator: '<='
+    date_error:  Fecha Inválida
+
+FechaValidatorNowNac:
+    class:         CidesaDateNow
+    param:
+        compare: 'now'
+        compare_error: Datos Personales- Esta Fecha no puede ser mayor a la Fecha Actual
+        operator: '<='
+        date_error:  Fecha Inválida
+
+FechaValidatorNowCotsso:
+    class:         CidesaDateNow
+    param:
+        compare: 'now'
+        compare_error: Admon Publica- Esta Fecha no puede ser mayor a la Fecha Actual
+        operator: '<'
+        date_error:  Fecha Inválida
+

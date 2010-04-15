@@ -1,0 +1,28 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Npconaho
+    theme:            default
+    fields:
+      codnom: { name: Tipo Nomina, params: maxlength=3 }
+      nomnom: { name: Nombre Tipo Nomina }
+      tipnom: { name: Tipo}
+      codcon: { name: Deducción }
+      nomcon: { name: Descripción}
+    list:
+      title:          Definición de Conceptos de Ahorro Habitacional
+      filters:        [codnom, nomnom ]
+      display:        [=codnom, nomnom]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:  8
+      sort: codnom
+    edit:
+      title:          Edición de Conceptos de Ahorro Habitacional
+      display:        [=codnom, nomnom, tipnom, codcon, nomcon]
+      actions:
+        _list:        ~
+        _save:        ~
+        _create:      ~
+        _delete:      ~

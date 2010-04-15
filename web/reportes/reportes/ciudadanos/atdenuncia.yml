@@ -1,0 +1,34 @@
+Parametros:
+  modulo: ciudadanos
+  nomrep: atrecayu
+  titulo: DENUNCIAS
+  orientacion: Horizontal
+  tipopagina: Carta
+  width:210
+Filas:
+  CATALOGO CODCON:
+    tipotag:   inputcat_tag
+    label: C&oacute;digo de la Denuncia:
+    sql:   select min(id) as codmin,max(id) as codmax from atdenuncias
+    nomdes: iddes
+    campodes: codmin
+    catdes: 0
+    nomhas: idhas
+    campohas: codmax
+    cathas: 1
+    nomcat: atdenuncia
+    size: 20
+  FECHA ORDEN:
+    tipotag:   inputfec_tag
+    label: Fecha Ingreso:
+    sql:   select to_char(min(fechar),'dd/mm/yyyy') as fecingmin,to_char(max(fechar),'dd/mm/yyyy') as fecingmax from atdenuncias
+    nomdes: fechades
+    campodes: fecingmin
+    nomhas: fechahas
+    campohas: fecingmax
+    size: 22
+  CAJA REVISADO:
+    tipotag:   input_tag
+    label: C&eacute;dula:
+    nomdes: cedula
+    size: 20

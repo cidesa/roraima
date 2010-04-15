@@ -1,0 +1,21 @@
+Parametros:
+  modulo: ciudadanos
+  nomrep: atestados
+  titulo: ESTADOS
+  orientacion: Horizontal
+  tipopagina: Carta
+  width:210
+Filas:
+  CATALOGO CODCON:
+    tipotag:   inputcat_tag
+    label: C&oacute;digo del Estado:
+    sql:   select min(id) as codmin,max(id) as codmax from atestados
+    nomdes: iddes
+    campodes: codmin
+    catdes: 0
+    nomhas: idhas
+    campohas: codmax
+    cathas: 1
+    nomcat: atestado
+    size: 20
+

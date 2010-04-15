@@ -1,0 +1,32 @@
+methods:
+  post:
+   - "bndisbie{coddis}"
+   - "bndisbie{desdis}"
+   
+
+names: 
+  bndisbie{coddis}:
+    required:  Yes
+    required_msg: Referencia no puedo estar en Blanco
+    validators: UniqueValidator_coddis
+    
+  bndisbie{desdis}:
+    required:  Yes
+    required_msg: Fecha no puedo estar en Blanco
+    validators: Validator_desdis
+
+    
+UniqueValidator_coddis:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Bndisbie
+        column:   coddis
+        unique_error:   La Referencia ya existe. Por Favor, Cambiélo por otro.     
+
+Validator_desdis:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La Descripción no puede tener menos de 2 carácteres
+        max:       250
+        max_error: La Descripción no puede tener más de 250 carácteres

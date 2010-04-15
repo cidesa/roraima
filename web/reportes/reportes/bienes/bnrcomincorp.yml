@@ -1,0 +1,52 @@
+Parametros:
+  modulo: bienes
+  nomrep: bnrcomdesinc
+  titulo: COMPROBANTE DE INCORPORACIÓN
+  orientacion: Horizontal
+  tipopagina: Carta
+  width:210
+
+Filas:
+  CATALOGO CODUBI:
+    tipotag:   inputcat_tag
+    label: C&oacute;digo de Ubicacion:
+    sql: select min(codubi) as mincod, max(codubi) as maxcod from bnubibie where length(trim(codubi)) = (select max(length(trim(codubi))) from bnubibie)
+    nomdes: ubides
+    campodes: mincod
+    catdes: 0
+    nomhas: ubihas
+    campohas: maxcod
+    cathas: 1
+    nomcat: bnubibie
+    size: 20
+
+  CAMPO FECHA:
+    tipotag:   inputfec_tag
+    sql: Select to_char(min(fecdismue),'dd/mm/yyyy') as fecdes,to_char(max(fecdismue),'dd/mm/yyyy') as fechas from bndismue;
+    label: Fecha:
+    nomdes: fecdes
+    campodes: fecdes
+    nomhas: fechas
+    campohas: fechas
+    size: 15
+
+  CAJA NOMBRE RESPONSABLE:
+    tipotag:   input_tag
+    label: Apellidos y Nombres del RPP:
+    nomdes: nombre
+    campodes:-1
+    size: 30
+
+  CAJA CEDULA RESPONSABLE:
+    tipotag:   input_tag
+    label: C.I del RPP:
+    nomdes: cedula
+    campodes:-1
+    size: 15
+
+  CAJA CARGO RESPONSABLE:
+    tipotag:   input_tag
+    label: Cargo del RPP:
+    nomdes: cargo
+    campodes:-1
+    size: 30

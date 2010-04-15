@@ -1,0 +1,177 @@
+/****** estilos del layout *********/
+
+	
+  html,
+  body {
+    margin:0;
+    padding:0;
+    height:100%;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:12px;
+    font-weight:normal;
+}
+  #container {
+    min-height:100%;
+    position:relative;
+  }
+  #roraimaheader {
+    font-size:15px;
+
+    background: #888 url("images/bg_header.png") repeat-x scroll 0 0;
+    height:150px;
+    width:100%;		
+  }
+
+#main {
+ padding: 10px 10px 70px 10px;
+}
+
+  #roraimafooter {
+    position:absolute;
+    bottom:0;
+    width:100%;
+    height:60px;      
+    background: #333 url("images/bg_footer.png") repeat-x top;
+		font-size:small;
+}
+  
+  
+/****** estilos contenido del encabezado *********/
+#logo-app{
+  float:left;
+  width:20%;
+  font-size:12px !important;
+  font-size:12px
+}
+
+#logo-app span{
+  color:#fff;
+  font-style:oblique; 
+}
+
+#logo-app img, #logo-app span{
+  padding-left:40px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#ctmenu {
+  float:right;
+  padding-top:10px; 
+  width:80%;
+}
+
+.logo-cidesa{
+  float:right;
+  padding-right:40px;
+}
+
+
+.list {
+  clear:both;
+  float:right;
+  list-style-type:none;
+  list-style-image:none; 
+  padding:0;
+  margin:15px 0 0 0;
+  margin-right:40px;
+}
+
+.list li{
+  float:left;
+  padding-left:10px;
+  padding-right:10px;
+  line-height:29px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size:12px;
+  font-weight:normal;
+  
+}
+
+.menu-on{
+  background:url("images/bg_menu.png") repeat-x scroll 0 0;
+  font-weight:bold;
+}
+
+
+.list li a{
+   color:#FFF;
+   text-decoration:none;
+   font-size:12px;
+   font-weight:normal;
+   font-family: Arial, Helvetica, sans-serif;
+   
+}
+
+.list li a:hover{
+  color:#FFF;
+  font-weight:bold;
+  font-size:12px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.list li a:visited{
+  color:#FFF;
+  text-decoration:none;
+  font-size:12px;
+  font-weight:bold;
+  font-family: Arial, Helvetica, sans-serif;  
+}
+
+#info-user{
+  clear:both;
+  float:right;
+  padding-right:60px;
+  height:47px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size:12px;
+  font-weight:normal;
+  
+}
+
+#info-user span{
+  display:block;
+  width:100%;
+  line-height:23px;
+  padding-left:25px;
+  color:#271357;
+  font-weight:bold;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size:12px;
+  
+}
+
+#info-user span span{
+  color:#fff;
+  display:inline;
+  font-weight:bold;
+}
+
+.user{  
+  background: url("images/user.png") no-repeat top left;
+}
+
+.company{
+  background:url("images/company.png") no-repeat top left;
+}
+
+
+/****** estilos contenido del pie de pagina *********/
+.info-footer{
+	padding: 10px;
+	color:#ccc; 
+	float:left;
+}
+
+.info-footer span{	
+	display:block;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.logo-footer{
+	float:right;
+	padding:20px 0 0 0;
+}
+
+.logo-footer img{
+	padding-right:20px;
+}

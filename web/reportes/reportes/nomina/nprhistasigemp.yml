@@ -1,0 +1,104 @@
+Parametros:
+  modulo: nomina
+  nomrep: nprhistasigemp
+  titulo: Historico Asignaciones a Personal
+  orientacion: Vertical
+  tipopagina: Carta
+  width:210
+
+Filas:
+  CATALOGO EMPLEADOS:
+    tipotag:   inputcat_tag
+    label: C&oacute;digo del  Empleado:
+    sql:   SELECT min(codemp) as codempmin,max (codemp) as codempmax FROM NPASICAREMP
+    nomdes: codempdes
+    campodes: codempmin
+    catdes: 0
+    nomhas: codemphas
+    campohas: codempmax
+    cathas: 1
+    nomcat: codemp
+    size: 25
+
+  CATALOGO CARGOS:
+    tipotag:   inputcat_tag
+    label: C&oacute;digo del Cargo:
+    sql:   SELECT min(codcar) as codcarmin,max (codcar) as codcarmax FROM NPASICAREMP
+    nomdes: codcardes
+    campodes: codcarmin
+    catdes: 2
+    nomhas: codcarhas
+    campohas: codcarmax
+    cathas: 3
+    nomcat: codcar
+    size: 25
+
+    nivel
+  CATALOGO NIVEL:
+    tipotag:   inputcat_tag
+    label: C&oacute;digo del Nivel:
+    sql:   SELECT min(CODNIV) as codnivdes , max(CODNIV) as codnivhas FROM NPESTORG
+    nomdes: codnivdes
+    campodes: codnivdes
+    catdes: 4
+    nomhas: codnivhas
+    campohas: codnivhas
+    cathas: 5
+    nomcat:codniv
+    size: 25
+
+  CATALOGO CONCEPTO:
+    tipotag:   inputcat_tag
+    label: C&oacute;digo del Concepto:
+    sql:   SELECT min(codcon) as codconmin,max (codcon) as codconmax FROM NPASICONEMP
+    nomdes: codcondes
+    campodes: codconmin
+    catdes: 6
+    nomhas: codconhas
+    campohas: codconmax
+    cathas: 7
+    nomcat: codcon
+    size: 25
+
+  CATALOGO NOMINA:
+    tipotag:   inputcat_tag
+    label: C&oacute;digo de la N&oacute;mina:
+    sql:   SELECT min(codnom) as codnommin FROM NPASICAREMP
+    nomdes: tipnom
+    campodes: codnommin
+    catdes: 8
+    nomhas:
+    campohas:
+    cathas: 9
+    nomcat: codnom
+    size: 25
+
+  COMBO ESPECIAL:
+    tipotag:   combof_tag
+    label: Especial
+    nomdes: especial
+    campodes: [N=>NO, S=>SI, T=>AMBOS]
+    size: 25
+
+  CATALOGO CODCTAESP:
+    tipotag:   inputcat_tag
+    label: Tipo de Nómina Especial:
+    sql:select min(codnomesp) as nomminesp, max(codnomesp) as nommaxesp from npnomcal
+    nomdes: tipnomesp1
+    campodes: nomminesp
+    catdes: 10
+    nomhas: tipnomesp2
+    campohas: nommaxesp
+    cathas: 11
+    nomcat: tipnom_especial
+    size: 20
+
+  FECHA NOMINA:
+    tipotag:   inputfec_tag
+    label: Fecha:
+    sql:   SELECT to_char(MIN(fecnom),'DD/MM/YYYY') as fechamin,to_char(max(fecnom),'DD/MM/YYYY') as fechamax FROM nphiscon
+    nomdes: fechades
+    campodes: fechamin
+    nomhas: fechahas
+    campohas: fechamax
+    size: 10

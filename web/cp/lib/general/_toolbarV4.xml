@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='iso-8859-1'?>
+<toolbar disableType="image" absolutePosition="auto" toolbarAlign="right">
+
+	<divider id="div_2"/>
+	<!-- ImageButton src="../toolbar/imgs/cancelar.gif" height="10" width="10"  id="0_salir" tooltip="Go"/-->
+	<ImageButton src="../../lib/general/toolbar/imgs/borrar.gif" height="25" width="25" id="0_delete" tooltip="Borrar"/>
+</toolbar>

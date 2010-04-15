@@ -1,0 +1,51 @@
+Parametros:
+  modulo: compras
+  nomrep: carrescom
+  titulo: RESUMEN DE COMPRAS
+  orientacion: Horizontal
+  tipopagina: CARTA
+  width:210
+
+Filas:
+  CATALOGO ORDEN:
+    tipotag:   inputcat_tag
+    label: Nro. Orden:
+    sql:  Select min(ordcom) as ordmin,max(ordcom) as ordmax from CAORDCOM
+    nomdes: orddes
+    campodes: ordmin
+    catdes: 0
+    nomhas: ordhas
+    campohas: ordmax
+    cathas: 1
+    nomcat: caordcom_ordcom
+    size: 22
+
+  FECHA ORDEN:
+    tipotag:   inputfec_tag
+    label: Fecha Orden de Compra:
+    sql:   SELECT to_char(min(DISTINCT(fecord)),'dd/mm/YYYY') as fecordmin,to_char(max(DISTINCT(fecord)),'dd/mm/YYYY') as fecordmax FROM caordcom
+    nomdes: fecmin
+    campodes: fecordmin
+    nomhas: fecmax
+    campohas: fecordmax
+    size: 22
+
+  CATALOGO PROVEEDOR:
+    tipotag:   inputcat_tag
+    label: Proveedor:
+    sql:  Select min(rifpro) as rifmin,max(rifpro) as rifmax from CAPROVEE
+    nomdes: rifdes
+    campodes: rifmin
+    catdes: 2
+    nomhas: rifhas
+    campohas: rifmax
+    cathas: 3
+    nomcat: caordcom_rifpro
+    size: 22
+
+  COMBO ORDEN:
+    tipotag:   combof_tag
+    label: ORDERNAR POR:
+    nomdes: ordpor
+    campodes: [1=>ORDENES DE COMPRA, 2=>PROVEEDOR]
+    size: 22

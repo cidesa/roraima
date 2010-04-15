@@ -1,0 +1,148 @@
+methods:
+  post:
+   - "tsdefban{numcue}"
+   - "tsdefban{nomcue}"
+   - "tsdefban{tipcue}"
+   - "tsdefban{codcta}"
+   - "tsdefban{fecven}"
+   - "tsdefban{fecper}"
+   - "tsdefban{fecape}"
+   - "tsdefban{antban}"
+   - "tsdefban{debban}"
+   - "tsdefban{creban}"
+   - "tsdefban{antlib}"
+   - "tsdefban{deblib}"
+   - "tsdefban{crelib}"
+   - "tsdefban{tipren}"
+
+names:
+  tsdefban{numcue}:
+    required:  Yes
+    required_msg: El número de cuenta no puedo estar en Blanco
+    validators: Validator_numcue
+
+  tsdefban{nomcue}:
+    required:  Yes
+    required_msg: El nombre del banco no puedo estar en Blanco
+    validators: Validator_nomcue
+
+  tsdefban{tipcue}:
+    required:  Yes
+    required_msg: El tipo de cuenta no puedo estar en Blanco
+    validators: ExistValidator_tipcue
+
+  tsdefban{codcta}:
+    required:  Yes
+    required_msg: El Código Contable no puedo estar en Blanco
+    validators: ExistValidator_codcta
+
+  tsdefban{fecven}:
+    required:  Yes
+    required_msg: La fecha de vencimiento no puede estar en Blanco
+    validators: FechaValidator
+
+  tsdefban{fecper}:
+    required:  Yes
+    required_msg: La fecha del período no puede estar en blanco
+    validators: FechaValidator
+
+  tsdefban{fecape}:
+    required:  Yes
+    required_msg: La fecha de apertura no puede estar en blanco
+    validators: FechaValidator
+
+  tsdefban{antban}:
+    required:  Yes
+    required_msg: El Saldo Anterior según Bancos no puedo estar en Blanco
+    validators: MontoValidator, MyNumberValidator
+
+  tsdefban{debban}:
+    required:  Yes
+    required_msg: El Débito según Banco no puedo estar en Blanco
+    validators: MontoValidator, MyNumberValidator
+
+  tsdefban{creban}:
+    required:  Yes
+    required_msg: El Crédito según Banco no puedo estar en Blanco
+    validators: MontoValidator, MyNumberValidator
+
+  tsdefban{antlib}:
+    required:  Yes
+    required_msg: El Saldo Anterior según Libro no puedo estar en Blanco
+    validators: MontoValidator, MyNumberValidator
+
+  tsdefban{deblib}:
+    required:  Yes
+    required_msg: El Débito según Libro no puedo estar en Blanco
+    validators: MontoValidator, MyNumberValidator
+
+  tsdefban{crelib}:
+    required:  Yes
+    required_msg: El Crédito según Libro no puedo estar en Blanco
+    validators: MontoValidator, MyNumberValidator
+
+  tsdefban{tipren}:
+    required:  Yes
+    required_msg: El Tipo de Rendimiento no puedo estar en Blanco
+    validators: ExistValidator_tipren
+
+Validator_numcue:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Tsdefban
+        column:       numcue
+        unique_error: El registro ya Existe intente con otro.
+
+
+Validator_nomcue:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       250
+        max_error: La descripción no puede pasar mas de 250 caractere
+
+ExistValidator_tipcue:
+    class: CidesaExistValidator
+    param:
+        class:        Tstipcue
+        column:       codtip
+        unique_error: Tipo de Cuenta Existir.
+
+ExistValidator_codcta:
+    class: CidesaExistValidator
+    param:
+        class:        Contabb
+        column:       codcta
+        unique_error: El Código del Tipo de Compromiso debe Existir.
+
+ExistValidator_tipren:
+    class: CidesaExistValidator
+    param:
+        class:        Tstipren
+        column:       codtip
+        unique_error: El Código del Tipo de Rendimiento debe Existir.
+
+FechaValidator:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha  introducida es invalida
+
+MontoValidator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^([0-9]*(\.*([0-9]{2,}))*\,?[0-9]+|[0-9]+\,?[0-9]*)?$/' ]
+        values_error: El valor introducido no cumple con el formato para montos
+
+MyNumberValidator:
+    class: sfNumberValidator
+    param:
+        type:         decimal
+        type_error:   Por favor, Introduzca Números Decimales
+        nan_error:    Por Favor, introduzca un Número Decimal
+        min:          000000000000000000.00
+        min_error:    El valor tiene que ser mayor que cero
+        max:          999999999999999999.99
+        max_error:    El valor debe contener maximo 999999999999999999.99

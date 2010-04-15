@@ -1,0 +1,63 @@
+Parametros:
+  modulo: nomina
+  nomrep: nprhisnompre
+  titulo: HISTORICO LISTA DE NOMINA/PRESUPUESTO
+  orientacion: Vertical
+  tipopagina: Carta
+  width:210
+
+Filas:
+  CATALOGO CODEMP:
+    tipotag:   inputcat_tag
+    label: Código Empleado:
+    sql:   SELECT min(CODEMP) as codempmin,max(codemp) as codempmax FROM NPASICAREMP
+    nomdes: codempdes
+    campodes: codempmin
+    catdes: 0
+    nomhas: codemphas
+    campohas: codempmax
+    cathas: 1
+    nomcat: codemp
+    size: 20
+  
+  CATALOGO CODCON:
+    tipotag:   inputcat_tag
+    label: Código Concepto:
+    sql:   SELECT min(codcon) as codconmin,max(codcon) as codconmax FROM NPASICONEMP
+    nomdes: codcondes
+    campodes: codconmin
+    catdes: 2
+    nomhas: codconhas
+    campohas: codconmax
+    cathas: 3 
+    nomcat: codcon
+    size: 20
+
+  CATALOGO CODNOM:
+    tipotag:   inputcat_tag
+    label: Código Nomina:
+    sql:   SELECT min(codnom) as codnommin,max(codnom) as codnommax FROM NPASICAREMP
+    nomdes: codnomdes
+    campodes: codnommin
+    catdes: 4
+    nomhas: codnomhas
+    campohas: codnommax
+    cathas: 5
+    nomcat: codnom
+    size: 20
+    
+  COMBO DE STATUS:
+    tipotag:   combof_tag
+    label: Especial:
+    nomdes: especial
+    campodes: [NO=>NO, SI=>SI, A=>AMBAS]
+    
+  FECHA NOMINA:
+    tipotag:   inputfec_tag
+    label: Periodo de Nomina:
+    sql:   SELECT to_char(min(FECNOM),'dd/mm/yyyy') as fecnommin,to_char(max(FECNOM),'dd/mm/yyyy') as fecnommax FROM NPHISCON
+    nomdes: pernomdes
+    campodes: fecnommin
+    nomhas: pernomhas
+    campohas: fecnommax
+    size: 20

@@ -1,0 +1,66 @@
+<?php
+/**
+ * Funciones de la vista.
+ *
+ * @package    Roraima
+ * @subpackage vistas
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id$
+ */
+// date: 2007/11/19 11:37:32
+?>
+<?php use_helper('Object') ?>
+
+<div class="sf_admin_filters">
+<?php echo form_tag('nomasicarconnom/list', array('method' => 'get')) ?>
+
+  <fieldset>
+    <h2><?php echo __('filters') ?></h2>
+    <div class="form-row">
+    <label for="codemp"><?php echo __('Empleado:') ?></label>
+    <div class="content">
+    <?php echo input_tag('filters[codemp]', isset($filters['codemp']) ? $filters['codemp'] : null, array (
+  'size' => 15,
+  'maxlength' => 16,
+)) ?>
+    </div>
+
+ <br>
+     <label for="filters_nomemp"><?php echo __('Nombre:') ?></label>
+    <div class="content">
+    <?php echo input_tag('filters[nomemp]', isset($filters['nomemp']) ? $filters['nomemp'] : null, array (
+  'size' => 15,
+)) ?>
+    </div>
+ <br>
+
+    <label for="codnom"><?php echo __('Nómina:') ?></label>
+    <div class="content">
+    <?php echo input_tag('filters[codnom]', isset($filters['codnom']) ? $filters['codnom'] : null, array (
+  'size' => 3,
+  'maxlength' => 3,
+   'onKeyPress' => "javascript:cadena=this.value;cadena=cadena.toUpperCase();document.getElementById('filters_codnom').value=cadena",
+)) ?>
+    </div>
+
+ <br>
+
+
+    <label for="codcar"><?php echo __('Cargo:') ?></label>
+    <div class="content">
+    <?php echo input_tag('filters[codcar]', isset($filters['codcar']) ? $filters['codcar'] : null, array (
+  'size' => 15,
+  'onBlur'  => "javascript: valor=this.value; valor=valor.pad(5, '0',0);document.getElementById('filters_codcar').value=valor;",
+)) ?>
+    </div>
+    </div>
+
+      </fieldset>
+
+  <ul class="sf_admin_actions">
+    <li><?php echo button_to(__('reset'), 'nomasicarconnom/list?filter=filter', 'class=sf_admin_action_reset_filter') ?></li>
+    <li><?php echo submit_tag(__('filter'), 'name=filter class=sf_admin_action_filter') ?></li>
+  </ul>
+
+</form>
+</div>

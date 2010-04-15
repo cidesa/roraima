@@ -1,0 +1,77 @@
+Parametros:
+  modulo: tesoreria
+  nomrep: tsrcheemiconcepto
+  titulo: RESUMEN DE CHEQUES EMITIDOS POR CONCEPTOS
+  orientacion: Vertical
+  tipopagina: Carta
+  width:210
+
+Filas:
+  CATALOGO NUMCHEQ:
+    tipotag:   inputcat_tag
+    label: Numero de Cheque:
+    sql:   SELECT min(NUMCHE) as codmin,max(NUMCHE) as codmax FROM TSCHEEMI
+    nomdes: numche1
+    campodes: codmin
+    catdes: 0
+    nomhas: numche2
+    campohas: codmax
+    cathas: 1
+    nomcat: numche_tscheemi
+    size: 22
+
+  CATALOGO NUMCUE:
+    tipotag:   inputcat_tag
+    label: Numero de Cuenta:
+    sql:   SELECT min(NUMCUE) as codmin,max(NUMCUE) as codmax FROM TSCHEEMI
+    nomdes: numcue1
+    campodes: codmin
+    catdes: 2
+    nomhas: numcue2
+    campohas: codmax
+    cathas: 3
+    nomcat: numcue_tscheemi
+    size: 22
+
+  CATALOGO BENEFICIARIO:
+    tipotag:   inputcat_tag
+    label: Beneficiario:
+    sql:   SELECT min(cedrif)as codmin,max(cedrif)as codmax FROM OPBENEFI
+    nomdes: ben1
+    campodes: codmin 
+    catdes: 4
+    nomhas: ben2
+    campohas: codmax
+    cathas: 5
+    nomcat: benefi
+    size: 22
+
+  FECHA:
+    tipotag:   inputfec_tag
+    label: Fecha Emisión:
+    sql:   SELECT to_char(MIN(fecemi),'DD/MM/YYYY') as fechamin,to_char(max(fecemi),'DD/MM/YYYY') as fechamax FROM tscheemi
+    nomdes: fecreg1
+    campodes: fechamin
+    nomhas: fecreg2
+    campohas: fechamax
+    size: 15
+
+  CATALOGO DOCU:
+    tipotag:   inputcat_tag
+    label: Tipo Documento:
+    sql:   SELECT min(tipdoc) as codmin,max(tipdoc) as codmax FROM tscheemi
+    nomdes: tipdoc1
+    campodes: codmin
+    catdes: 6
+    nomhas: tipdoc2
+    campohas: codmax
+    cathas: 7
+    nomcat: tipdoc
+    size: 22
+    
+  COMBO DE STATUS:
+    tipotag:   combof_tag
+    label: Status
+    nomdes: status
+    campodes: [T=>Todos, E=>Entregados, A=>Anulados, C=>En Caja]
+    

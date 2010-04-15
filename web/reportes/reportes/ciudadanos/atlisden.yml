@@ -1,0 +1,74 @@
+#CONFIGURACION DE ARCHIVOS YML TEMPORALES
+#PARA LOS REPORTES
+#Los comentarios al final indican que debe llevar la siguiente linea despues del comentario
+
+Parametros:
+#PARAMETROS FIJOS
+  #Nombre del Modulo y del Reporte#
+  modulo: ciudadanos
+  nomrep: atlisden
+
+  #Titulo del Reporte (SIEMPRE APARECERA EN MAYUSCULA), Orientacion y Tipo de Pagina, Ancho de los tag <td>#
+  titulo: Listado de Audiencias
+  orientacion: Vertical
+  tipopagina: Carta
+  width:210
+
+#PARAMETRO FORMULARIO
+Filas:
+  CATALOGO PRIMERO:
+    tipotag:   inputcat_tag
+    label: Unidades
+    sql: select min(b.coduni) as codmin, max(b.coduni) as codmax from atreclamos as a, atunidades b where a.atunidades_id=b.id
+    nomdes: coddes
+    campodes: codmin
+    catdes: 0
+    nomhas: codhas
+    campohas: codmax
+    cathas: 1
+    nomcat: atreclamos_coduni
+    size: 10
+
+  CATALOGO SEGUNDO:
+    tipotag:   inputcat_tag
+    label: Audiencias
+    sql:   select min(a.coduni) as codunimin,max(a.coduni) as codunimax from atunidades a, ataudiencias b where b.atunidades_id=a.id
+    nomdes: codunides
+    campodes: codunimin
+    catdes: 2
+    nomhas: codunihas
+    campohas: codunimax
+    cathas: 3
+    nomcat: atunidades_coduni
+    size: 10
+    #parametros:  size="10" onclick="javascript:mostrarid(this.id)"
+
+  fecha SEGUNDA:
+    tipotag:   inputfec_tag
+    label: Fecha Atención
+    sql:   SELECT to_char(min(fechaa),'dd/mm/yyyy') as fechamin,to_char(max(fechaa),'dd/mm/yyyy') as fechamax FROM ataudiencias
+    nomdes: fechaades
+    campodes: fechamin
+    #HASTA
+    nomhas: fechaahas
+    campohas: fechamax
+    #PARAMETROS
+    size: 10
+
+  fecha TERCERA:
+    tipotag:   inputfec_tag
+    label: Fecha Registro
+    sql:   SELECT to_char(min(fechar),'dd/mm/yyyy') as fechamin,to_char(max(fechar),'dd/mm/yyyy') as fechamax FROM ataudiencias
+    nomdes: fechardes
+    campodes: fechamin
+    #HASTA
+    nomhas: fecharhas
+    campohas: fechamax
+    #PARAMETROS
+    size: 10
+
+  combo PRIMERO fijo:
+    tipotag: combof_tag
+    label: combostatus
+    nomdes: combostatus
+    campodes: [A=>Aprobado, E=>En Proceso, R =>Rechazado, T =>Todos]

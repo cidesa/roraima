@@ -1,0 +1,22 @@
+Parametros:
+  modulo: nomina
+  nomrep: nprpresemp
+  titulo: PRESTAMOS POR EMPLEADOS
+  orientacion: Vertical
+  tipopagina: CARTA
+  width:210
+
+Filas:
+  CATALOGO EMPLEADO:
+    tipotag:   inputcat_tag
+    label: Empleado:
+    sql:  SELECT MIN(codemp) as codmin,max(codemp) as codmax FROM NPHOJINT
+    nomdes: codempdes
+    campodes: codmin
+    catdes: 0
+    nomhas: codemphas
+    campohas: codmax
+    cathas: 1
+    nomcat: codemp
+    size: 22
+

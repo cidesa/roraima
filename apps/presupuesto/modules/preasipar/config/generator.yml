@@ -1,0 +1,20 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Cpdeftit
+    theme:            cidesaGenerator
+    fields:
+     codpre: { name: Código }
+     codpre1: { name: Código }
+     grid:   { name: . }
+
+
+    edit:
+      title: Asignar Clasificador de Partidas
+      display:
+        Catégoria Presupuestaria Orígen: [ _codpre]
+        Catégoria Presupuestaria Destino: [_codpre1]
+        Partidas Seleccionadas: [ _grid ]
+      actions:
+        _delete:      ~
+        _save:        ~

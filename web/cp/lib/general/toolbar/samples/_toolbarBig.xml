@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='iso-8859-1'?>
+<toolbar name="Demo toolbar" width="100%" disableType="image" absolutePosition="auto" toolbarAlign="left">
+	<ImageButton src="../imgs/iconSave.gif" height="25" width="25" id="0_save" tooltip="Save"/>
+	<ImageButton src="../imgs/iconPrint.gif" height="25" width="25" id="0_print" tooltip="Print"/>
+	<divider id="div_1"/>
+	<ImageButton src="../imgs/iconNewNewsEntry.gif" height="25" width="25" id="0_new" tooltip="New"/>		
+	<ImageButton src="../imgs/icon20.gif" height="25" width="25" id="0_form" tooltip="Form"/>			
+	<divider id="div_2"/>	
+	<ImageButton src="../imgs/iconSearch.gif" height="25" width="25" id="0_search" tooltip="Search"/>		
+	<ImageButton src="../imgs/iconFilter.gif" height="25" width="25" id="0_filter" tooltip="Filter"/>		
+	<divider id="div_3"/>
+	<ImageTextButton src="../imgs/iconDelete.gif" height="25" width="100px" id="0_delete" tooltip="Delete">Delete</ImageTextButton>				
+</toolbar>

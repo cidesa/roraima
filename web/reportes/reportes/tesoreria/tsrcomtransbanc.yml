@@ -1,0 +1,47 @@
+Parametros:
+  modulo: tesoreria
+  nomrep: tsrcomtransbanc
+  titulo: TRANSFERENCIA BANCARIA
+  orientacion: Vertical
+  tipopagina: Carta
+  width:210
+
+Filas:
+  CATALOGO NUMCUE:
+    tipotag:   inputcat_tag
+    label: Numero de Cuenta:
+    sql:   SELECT min(numcue) as codmin,max(numcue) as codmax FROM TSDEFBAN
+    nomdes: numcuedes
+    campodes: codmin
+    catdes: 0
+    nomhas: numcuehas
+    campohas: codmax
+    cathas: 1
+    nomcat: numcue
+    size: 22
+
+  FECHA TRANSFERENCIA:
+    tipotag:   inputfec_tag
+    label: Fecha Transferencia:
+    sql:   select to_char(MIN(fectra),'DD/MM/YYYY') as fechamin,to_char(MAX(fectra),'DD/MM/YYYY') as fechamax from TSMOVTRA
+    nomdes: fecdes
+    campodes: fechamin
+    nomhas: fechas
+    campohas: fechamax
+    size: 15
+    
+  CAJA DIRGENE:
+    tipotag:   input_tag
+    label: Directora Gral. De Administración y Finanzas:
+    nomdes: dirgen
+    campodes:
+    size: 35
+    
+  CAJA TESOGENE:
+    tipotag:   input_tag
+    label: Tesorera Gral. Del Estado:
+    nomdes: tesgen
+    campodes:
+    size: 35
+    
+    

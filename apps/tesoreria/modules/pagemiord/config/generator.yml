@@ -1,0 +1,56 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Opordpag
+    theme:            default
+
+    fields:
+      numord: { name: Referencia, params: maxlength = 8}
+      fecemi: { name: Fecha, params: date_format=dd/MM/yyyy}
+      tipcau: { name: Tipo}
+      nomext: { name: Nombre}
+      desord: { name: Concepto}
+      cedrif: { name: C.I o R.I.F}
+      nomben: { name: Beneficiario}
+      codctasec: { name: Tipo}
+      ctapag: { name: Codigo Contable}
+      descta: { name: Descripción}
+      coduni: { name: Unidad Origen}
+      desubi: { name: Descripción}
+      tipfin: { name: Financiamiento}
+      nomext2: { name: Nombre2}
+      obsord: { name: Observaciones}
+      monord: { name: Monto}
+      mondes: { name: Monto1}
+      monret: { name: Monto2}
+      numcom: { name: Número de Comprobante}
+      feccom: { name: Fecha del Comprobante}
+      status: { name: Estatus}
+      idrefer: { name: Id de Comprobante}
+      fecanu: { name: Fecha de Anulación}
+      desanu: { name: Descripción}
+      numsigecof: { name: Número}
+      fecsigecof: { name: Fecha}
+      expsigecof: { name: Expediente}
+      nombensus: { name: Cesionario Autorizado}
+      codconcepto: { name: Concepto de Pago}
+      numforpre: { name: N° de Forma Preimpresa}
+
+    list:
+      title:          Ordenes de Pago
+      display:        [=numord, fecemi, tipcau, desord, nomext, monord, cedrif, nomben]
+      filters:        [numord, fecemi, tipcau, cedrif, nomben, status, codconcepto]
+      max_per_page:   5
+      sort:  numord
+      object_actions:
+        _edit:        ~
+    edit:
+      title:          Edición de la Orden de Pago
+      display:        [=numord, fecemi, tipcau, nomext, desord, cedrif, nomben, codctasec, ctapag, descta, coduni, desubi, tipfin, nomext2, obsord, monord, mondes, monret, numcom, feccom, status, idrefer, fecanu, desanu, referencias, documento, afectapre, totalcomprobantes, cuentarendicion, vacio, presiono, numsigecof, fecsigecof, expsigecof, nombensus, codconcepto, observe, numforpre]
+      actions:
+        _list:        ~
+        _save:        ~
+        _create:      ~
+          params:     confirm='¿Desea crear un nuevo registro?. Perderá cualquier cambio en la ventana actual'
+        _delete:      ~
+

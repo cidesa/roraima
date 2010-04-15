@@ -1,0 +1,69 @@
+Parametros:
+  modulo: tesoreria
+  nomrep: tsrmovlib_det
+  titulo: MOVIMIENTOS SEGUN LIBROS
+  orientacion: Vertical
+  tipopagina: Carta
+  width:210
+
+Filas:
+  CATALOGO CTASBANCARIAS:
+    tipotag:   inputcat_tag
+    label: Nro. Cta Bancaria:
+    sql:   SELECT min(numcue) as codmin,max(numcue) as codmax FROM TSDEFBAN
+    nomdes: numcuedes
+    campodes: codmin
+    catdes: 0
+    nomhas: numcuehas
+    campohas: codmax
+    cathas: 1
+    nomcat: numcue
+    size: 22
+
+  CATALOGO TIPOMOVIMIENTO:
+    tipotag:   inputcat_tag
+    label: Tipo Movimiento
+    sql:   SELECT min(codtip) as codmin, max(codtip) as codmax from tstipmov
+    nomdes: tipmovdes
+    campodes: codmin
+    catdes: 2
+    nomhas: tipmovhas
+    campohas: codmax
+    cathas: 3
+    nomcat: tipmov
+    size: 22
+
+  CATALOGO REFERENCIAS:
+    tipotag:   inputcat_tag
+    label: Referencia
+    sql:   SELECT min(reflib) as codmin,max(reflib) as codmax FROM tsmovlib
+    nomdes: referedes
+    campodes: codmin
+    catdes: 4
+    nomhas: referehas
+    campohas: codmax
+    cathas: 5
+    nomcat: reflib
+    size: 22
+
+  FECHA TRANSCRIPCION:
+    tipotag:   inputfec_tag
+    label: Fecha Movimientos
+    sql:   select to_char(MIN(fecing),'DD/MM/YYYY') as fechamin, to_char(MAX(fecing),'DD/MM/YYYY') as fechamax from tsmovlib
+    nomdes: fectrades
+    campodes: fechamin
+    nomhas: fectrahas
+    campohas: fechamax
+    size: 15
+
+  COMBO DE ESTATUS:
+    tipotag:   combof_tag
+    label: Status Movimiento
+    nomdes: stamov
+    campodes: [T=>Todos, A=>Anulados, C=>Contabilizados, N=>No Contabilizados, TMA=>Todos menos Anulados]
+
+  COMBO DE MOVIMIENTO:
+    tipotag:   combof_tag
+    label: Status
+    nomdes: sta
+    campodes: [T=>Todos, N=>En Tránsito, C=>Conciliados]

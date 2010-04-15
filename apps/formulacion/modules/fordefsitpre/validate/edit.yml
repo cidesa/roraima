@@ -1,0 +1,29 @@
+methods:
+  post:
+   - "fordefsitpre{codsitpre}"
+   - "fordefsitpre{dessitpre}"   
+names: 
+  fordefsitpre{codsitpre}:
+    required:  Yes
+    required_msg: El código de la Situación Presupuestaria no puedo estar en Blanco
+    validators: Validator_codsitpre
+    
+  fordefsitpre{dessitpre}:
+    required:  Yes
+    required_msg: La Descripción de la Situación Presupuestaria no puedo estar en Blanco
+    validators: Validator_dessitpre       
+
+Validator_codsitpre:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Fordefsitpre
+        column:       codsitpre
+        unique_error: El registro ya Existe intente con otro.
+    
+Validator_dessitpre:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La Descripción no puede tener menos de 2 caracteres
+        max:       100
+        max_error: La Descripción no puede pasar mas de 100 caracteres

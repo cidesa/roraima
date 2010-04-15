@@ -1,0 +1,36 @@
+finanSuccess:
+  http_metas:
+    content-type: text/html
+
+  metas:
+    title:        Módulo Formulación
+    robots:       index, follow
+    description:  Módulo Formulación
+    keywords:     Módulo,Formulación
+    language:     en
+
+  stylesheets:    [main]
+
+  javascripts:    [%SF_PROTOTYPE_WEB_DIR%/js/prototype]
+
+  has_layout:     on
+  layout:         layout_generales
+
+
+gridSuccess:
+  http_metas:
+    content-type: text/html
+
+  metas:
+    title:        Módulo Formulación
+    robots:       index, follow
+    description:  Módulo Formulación
+    keywords:     Módulo,Formulación
+    language:     en
+
+  stylesheets:    [main]
+
+  javascripts:    [%SF_PROTOTYPE_WEB_DIR%/js/prototype]
+
+  has_layout:     on
+  layout:         layout_generales

@@ -1,0 +1,523 @@
+<?php
+/**
+ * Funciones de la vista.
+ *
+ * @package    Roraima
+ * @subpackage vistas
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id$
+ */
+// date: 2007/06/27 17:25:29
+?>
+<?php echo form_tag('fordefproyecto/edit', array(
+  'id'        => 'sf_admin_edit_form',
+  'name'      => 'sf_admin_edit_form',
+  'multipart' => true,
+)) ?>
+
+<?php echo object_input_hidden_tag($fordefpry, 'getId') ?>
+<?php echo javascript_include_tag('dFilter_string') ?>
+<?php echo javascript_include_tag('dFilter') ?>
+<?php echo javascript_include_tag('ajax') ?>
+<?php echo javascript_include_tag('tools') ?>
+
+<fieldset id="sf_fieldset_none" class="">
+<legend><?php echo __('Definición de Proyectos y Acciones Centralizadas')?></legend>
+<div class="form-row">
+  <table>
+   <tr>
+    <th> <?php echo label_for('fordefpry[codpro]', __($labels['fordefpry{codpro}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('fordefpry{codpro}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('fordefpry{codpro}')): ?>
+    <?php echo form_error('fordefpry{codpro}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($fordefpry, 'getCodpro', array (
+  'size' => 20,
+  'control_name' => 'fordefpry[codpro]',
+  'readonly'  =>  $fordefpry->getId()!='' ? true : false ,
+  'onKeyPress' => "javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById('fordefpry_codpro').value=cadena;}",
+  'onKeyDown' => "javascript:return dFilter (event.keyCode, this,'$mascaraproyecto')",
+)); echo $value ? $value : '&nbsp;' ?>
+    </div></th>
+
+    <th> <?php echo label_for('fordefpry[codpryonapre]', __($labels['fordefpry{codpryonapre}']), 'class="required" style="width: 150px"') ?>
+	  <div class="content<?php if ($sf_request->hasError('fordefpry{codpryonapre}')): ?> form-error<?php endif; ?>">
+	  <?php if ($sf_request->hasError('fordefpry{codpryonapre}')): ?>
+	    <?php echo form_error('fordefpry{codpryonapre}', array('class' => 'form-error-msg')) ?>
+	  <?php endif; ?>
+
+	  <?php $value = object_input_tag($fordefpry, 'getCodpryonapre', array (
+	  'size' => 20,
+	  'control_name' => 'fordefpry[codpryonapre]',
+	  'readonly'  =>  $fordefpry->getId()!='' ? true : false ,
+
+	)); echo $value ? $value : '&nbsp;' ?>
+    </div></th>
+
+
+    <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+    <th>
+     <?php echo label_for('fordefpry[proacc]', __($labels['fordefpry{proacc}']), 'class="required" style="width: 150px"') ?>
+  <div class="content<?php if ($sf_request->hasError('fordefpry{proacc}')): ?> form-error<?php endif; ?>">
+
+  <?php if ($sf_request->hasError('fordefpry{proacc}')): ?>
+    <?php echo form_error('fordefpry{proacc}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+ <?php echo select_tag('fordefpry[proacc]', options_for_select($pacc,$fordefpry->getProacc(),'include_custom=Seleccione Uno')); ?>
+    </div></th>
+   </tr>
+  </table>
+
+<br>
+
+  <?php echo label_for('fordefpry[nompro]', __($labels['fordefpry{nompro}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('fordefpry{nompro}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('fordefpry{nompro}')): ?>
+    <?php echo form_error('fordefpry{nompro}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_textarea_tag($fordefpry, 'getNompro', array (
+  'size' => '80x3',
+  'control_name' => 'fordefpry[nompro]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+</div>
+</fieldset>
+
+<?php tabMainJS("tp1","tabPane1", "tabPage1", 'Datos Generales');?>
+<fieldset id="sf_fieldset_none" class="">
+<div class="form-row">
+  <table>
+   <tr>
+    <th>  <?php echo label_for('fordefpry[codprg]', __($labels['fordefpry{codprg}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('fordefpry{codprg}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('fordefpry{codprg}')): ?>
+    <?php echo form_error('fordefpry{codprg}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php echo input_auto_complete_tag('fordefpry[codprg]', $fordefpry->getCodprg(),
+    'fordefproyecto/autocomplete?ajax=2',  array('autocomplete' => 'off','maxlength' => 3, 'onBlur'=> remote_function(array(
+			  'url'      => 'fordefproyecto/ajax',
+			  'complete' => 'AjaxJSON(request, json)',
+  			  'with' => "'ajax=2&cajtexmos=fordefpry_desprg&cajtexcom=fordefpry_codprg&codigo='+this.value"
+			  ))),
+     array('use_style' => 'true')
+  )
+?></div></th>
+    <th>&nbsp;&nbsp;&nbsp;<?php echo button_to_popup('...','generales/catalogo?clase=Fordefprg&frame=sf_admin_edit_form&obj1=fordefpry_codprg&obj2=fordefpry_desprg')?></th>
+    <th>  <?php $value = object_input_tag($fordefpry, 'getDesprg', array (
+  'disabled' => true,
+  'size' => 60,
+  'control_name' => 'fordefpry[desprg]',
+)); echo $value ? $value : '&nbsp;' ?></th>
+   </tr>
+  </table>
+
+<br>
+
+  <table>
+   <tr>
+    <th><?php echo label_for('fordefpry[fecini]', __($labels['fordefpry{fecini}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('fordefpry{fecini}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('fordefpry{fecini}')): ?>
+    <?php echo form_error('fordefpry{fecini}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_date_tag($fordefpry, 'getFecini', array (
+  'rich' => true,
+  'calendar_button_img' => '/sf/sf_admin/images/date.png',
+  'control_name' => 'fordefpry[fecini]',
+  'onKeyDown' => "javascript:return dFilter (event.keyCode, this,'##/##/####')",
+)); echo $value ? $value : '&nbsp;' ?>
+    </div></th>
+    <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+    <th>  <?php echo label_for('fordefpry[feccul]', __($labels['fordefpry{feccul}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('fordefpry{feccul}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('fordefpry{feccul}')): ?>
+    <?php echo form_error('fordefpry{feccul}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_date_tag($fordefpry, 'getFeccul', array (
+  'rich' => true,
+  'calendar_button_img' => '/sf/sf_admin/images/date.png',
+  'control_name' => 'fordefpry[feccul]',
+  'onKeyDown' => "javascript:return dFilter (event.keyCode, this,'##/##/####')",
+)); echo $value ? $value : '&nbsp;' ?>
+    </div></th>
+   </tr>
+  </table>
+
+<br>
+
+  <?php echo label_for('fordefpry[montotpry]', __($labels['fordefpry{montotpry}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('fordefpry{montotpry}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('fordefpry{montotpry}')): ?>
+    <?php echo form_error('fordefpry{montotpry}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($fordefpry, 'getMontotpry', array (
+  'size' => 15,
+  'control_name' => 'fordefpry[montotpry]',
+  'onKeyPress' => "javascript:return entermontootro(event, this.id,this.id)",
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+
+<br>
+
+  <?php echo label_for('fordefpry[ubigeo]', __($labels['fordefpry{ubigeo}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('fordefpry{ubigeo}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('fordefpry{ubigeo}')): ?>
+    <?php echo form_error('fordefpry{ubigeo}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_textarea_tag($fordefpry, 'getUbigeo', array (
+  'size' => '80x3',
+  'control_name' => 'fordefpry[ubigeo]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+
+<br>
+
+  <table>
+   <tr>
+    <th><?php echo label_for('fordefpry[codemp]', __($labels['fordefpry{codemp}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('fordefpry{codemp}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('fordefpry{codemp}')): ?>
+    <?php echo form_error('fordefpry{codemp}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+   <?php echo input_auto_complete_tag('fordefpry[codemp]', $fordefpry->getCodemp(),
+    'fordefproyecto/autocomplete?ajax=3',  array('autocomplete' => 'off','maxlength' => 16, 'onBlur'=> remote_function(array(
+			  'url'      => 'fordefproyecto/ajax',
+			  'complete' => 'AjaxJSON(request, json)',
+  			  'with' => "'ajax=3&cajtexmos=fordefpry_nomemp2&cajtexcom=fordefpry_codemp&codigo='+this.value"
+			  ))),
+     array('use_style' => 'true')
+  )
+?></div></th>
+    <th>&nbsp;&nbsp;&nbsp;<?php echo button_to_popup('...','generales/catalogo?clase=Nphojint&frame=sf_admin_edit_form&obj1=fordefpry_codemp&obj2=fordefpry_nomemp2')?></th>
+    <th><?php $value = object_input_tag($fordefpry, 'getNomemp2', array (
+  'size' => 60,
+  'disabled' => true,
+  'control_name' => 'fordefpry[nomemp2]',
+)); echo $value ? $value : '&nbsp;' ?></th>
+   </tr>
+  </table>
+
+<br>
+
+  <table>
+   <tr>
+    <th><?php echo label_for('fordefpry[uniejepri]', __($labels['fordefpry{uniejepri}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('fordefpry{uniejepri}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('fordefpry{uniejepri}')): ?>
+    <?php echo form_error('fordefpry{uniejepri}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+
+  <?php $value = object_input_tag($fordefpry, 'getUniejepri', array (
+  'size' => 32,
+  'control_name' => 'fordefpry[uniejepri]',
+  'onKeyPress' => "javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById('fordefpry_uniejepri').value=cadena;}",
+  'onKeyDown' => "javascript:return dFilter (event.keyCode, this,'$unidad')",
+  'onBlur'=> remote_function(array(
+			  'url'      => 'fordefproyecto/ajax',
+			  'complete' => 'AjaxJSON(request, json)',
+  			  'with' => "'ajax=4&cajtexmos=fordefpry_descat&codigo='+this.value"
+			  ))
+)); echo $value ? $value : '&nbsp;' ?>
+    </div></th>
+    <th>&nbsp;&nbsp;&nbsp;<?php echo button_to_popup('...','generales/catalogo?clase=Fordefcatpre&frame=sf_admin_edit_form&obj1=fordefpry_uniejepri&obj2=fordefpry_descat')?></th>
+    <th>  <?php $value = object_input_tag($fordefpry, 'getDescat', array (
+  'disabled' => true,
+  'size' => 60,
+  'control_name' => 'fordefpry[descat]',
+)); echo $value ? $value : '&nbsp;' ?></th>
+   </tr>
+  </table>
+</div>
+</fieldset>
+
+<?php tabPageOpenClose("tp1", "tabPage2", 'Objetivos');?>
+<fieldset id="sf_fieldset_none" class="">
+<div class="form-row">
+  <?php echo label_for('fordefpry[enupro]', __($labels['fordefpry{enupro}']), 'class="required" style="width: 150px"') ?>
+  <div class="content<?php if ($sf_request->hasError('fordefpry{enupro}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('fordefpry{enupro}')): ?>
+    <?php echo form_error('fordefpry{enupro}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_textarea_tag($fordefpry, 'getEnupro', array (
+  'size' => '80x3',
+  'control_name' => 'fordefpry[enupro]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+
+<br>
+
+  <?php echo label_for('fordefpry[objestnueeta]', __($labels['fordefpry{objestnueeta}']), 'class="required" style="width: 150px"') ?>
+  <div class="content<?php if ($sf_request->hasError('fordefpry{objestnueeta}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('fordefpry{objestnueeta}')): ?>
+    <?php echo form_error('fordefpry{objestnueeta}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_textarea_tag($fordefpry, 'getObjestnueeta', array (
+  'size' => '80x3',
+  'control_name' => 'fordefpry[objestnueeta]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+
+<br>
+
+  <?php echo label_for('fordefpry[objestins]', __($labels['fordefpry{objestins}']), 'class="required" style="width: 150px"') ?>
+  <div class="content<?php if ($sf_request->hasError('fordefpry{objestins}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('fordefpry{objestins}')): ?>
+    <?php echo form_error('fordefpry{objestins}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_textarea_tag($fordefpry, 'getObjestins', array (
+  'size' => '80x3',
+  'control_name' => 'fordefpry[objestins]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+
+<br>
+
+  <?php echo label_for('fordefpry[objeesppro]', __($labels['fordefpry{objeesppro}']), 'class="required" style="width: 150px"') ?>
+  <div class="content<?php if ($sf_request->hasError('fordefpry{objeesppro}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('fordefpry{objeesppro}')): ?>
+    <?php echo form_error('fordefpry{objeesppro}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_textarea_tag($fordefpry, 'getObjeesppro', array (
+  'size' => '80x3',
+  'control_name' => 'fordefpry[objeesppro]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+
+<br>
+
+  <?php echo label_for('fordefpry[objpndes]', __($labels['fordefpry{objpndes}']), 'class="required" style="width: 150px"') ?>
+  <div class="content<?php if ($sf_request->hasError('fordefpry{objpndes}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('fordefpry{objpndes}')): ?>
+    <?php echo form_error('fordefpry{objpndes}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_textarea_tag($fordefpry, 'getObjpndes', array (
+  'size' => '80x3',
+  'control_name' => 'fordefpry[objpndes]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+</div>
+</fieldset>
+
+<?php tabPageOpenClose("tp1", "tabPage3", 'Área Estratégica');?>
+<fieldset id="sf_fieldset_none" class="">
+<div class="form-row">
+  <?php echo label_for('fordefpry[codequ]', __($labels['fordefpry{codequ}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('fordefpry{codequ}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('fordefpry{codequ}')): ?>
+    <?php echo form_error('fordefpry{codequ}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+ <?php echo select_tag('fordefpry[codequ]', options_for_select($equilibrio,$fordefpry->getCodequ(),'include_custom=Seleccione Uno'),array('onChange'=> remote_function(array(
+		'update'   => 'divSubObjetivo',
+		'url'      => 'fordefproyecto/combo?par=1',
+        'complete' => 'AjaxJSON(request, json)',
+		'with' => "'equilibrio='+this.value"
+  ))));?>
+    </div>
+
+<br>
+
+  <?php echo label_for('fordefpry[desobj]', __($labels['fordefpry{desobj}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('fordefpry{desobj}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('fordefpry{desobj}')): ?>
+    <?php echo form_error('fordefpry{desequ}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_textarea_tag($fordefpry, 'getDesobj', array (
+  'disabled' => true,
+  'size' => '80x3',
+  'control_name' => 'fordefpry[desobj]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+
+<br>
+
+  <?php echo label_for('fordefpry[codsubobj]', __($labels['fordefpry{codsubobj}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('fordefpry{codsubobj}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('fordefpry{codsubobj}')): ?>
+    <?php echo form_error('fordefpry{codsubobj}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <div id="divSubObjetivo">
+<?php echo select_tag('fordefpry[codsubobj]', options_for_select($subobjetivo,$fordefpry->getCodsubobj(),'include_custom=Seleccione Uno'),array('onChange'=> remote_function(array(
+		'update'   => 'divSubSubObjetivo',
+		'url'      => 'fordefproyecto/combo?par=2',
+		'with' => "'equilibrio='+document.getElementById('fordefpry_codequ').value+'&subobjetivo='+this.value"
+  ))));?></div>
+   </div>
+
+<br>
+
+  <?php echo label_for('fordefpry[codsubsubobj]', __($labels['fordefpry{codsubsubobj}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('fordefpry{codsubsubobj}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('fordefpry{codsubsubobj}')): ?>
+    <?php echo form_error('fordefpry{codsubsubobj}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <div id="divSubSubObjetivo">
+<?php echo select_tag('fordefpry[codsubsubobj]', options_for_select($subsubobjetivo,$fordefpry->getCodsubsubobj(),'include_custom=Seleccione Uno'),array('onChange'=> remote_function(array(
+		'update'   => 'divOtro',
+		'url'      => 'fordefproyecto/combo?par=3',
+		'with' => "'equilibrio='+document.getElementById('fordefpry_codequ').value+'&subobjetivo='+document.getElementById('fordefpry_codsubobj').value+'&subsubobjetivo='+this.value"
+  ))));?></div>
+    </div>
+</div>
+</fieldset>
+
+<?php tabPageOpenClose("tp1", "tabPage4", 'Indicadores de Gestión');?>
+<fieldset id="sf_fieldset_none" class="">
+<div class="form-row">
+  <?php echo label_for('fordefpry[respro]', __($labels['fordefpry{respro}']), 'class="required" style="width:200px"') ?>
+  <div class="content<?php if ($sf_request->hasError('fordefpry{respro}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('fordefpry{respro}')): ?>
+    <?php echo form_error('fordefpry{respro}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_textarea_tag($fordefpry, 'getRespro', array (
+  'size' => '80x5',
+  'control_name' => 'fordefpry[respro]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+
+<br>
+
+  <table>
+   <tr>
+    <th><?php echo label_for('fordefpry[unimedres]', __($labels['fordefpry{unimedres}']), 'class="required" style="width:200px"') ?>
+  <div class="content<?php if ($sf_request->hasError('fordefpry{unimedres}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('fordefpry{unimedres}')): ?>
+    <?php echo form_error('fordefpry{unimedres}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php echo input_auto_complete_tag('fordefpry[unimedres]', $fordefpry->getUnimedres(),
+    'fordefproyecto/autocomplete?ajax=5',  array('autocomplete' => 'off','maxlength' => 3, 'onBlur'=> remote_function(array(
+			  'url'      => 'fordefproyecto/ajax',
+			  'complete' => 'AjaxJSON(request, json)',
+  			  'with' => "'ajax=5&cajtexmos=fordefpry_desunimed&cajtexcom=fordefpry_unimedres&codigo='+this.value"
+			  ))),
+     array('use_style' => 'true')
+  )
+?></div></th>
+    <th>&nbsp;&nbsp;&nbsp;<?php echo button_to_popup('...','generales/catalogo?clase=Fordefunimed&frame=sf_admin_edit_form&obj1=fordefpry_unimedres&obj2=fordefpry_desunimed')?></th>
+    <th>  <?php $value = object_input_tag($fordefpry, 'getDesunimed', array (
+  'disabled' => true,
+  'size' => 60,
+  'control_name' => 'fordefpry[desunimed]',
+)); echo $value ? $value : '&nbsp;' ?></th>
+   </tr>
+  </table>
+
+<br>
+
+  <?php echo label_for('fordefpry[benpro]', __($labels['fordefpry{benpro}']), 'class="required" style="width:200px"') ?>
+  <div class="content<?php if ($sf_request->hasError('fordefpry{benpro}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('fordefpry{benpro}')): ?>
+    <?php echo form_error('fordefpry{benpro}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($fordefpry, 'getBenpro', array (
+  'size' => 80,
+  'control_name' => 'fordefpry[benpro]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+
+<br>
+
+  <table>
+   <tr>
+    <th> <?php echo label_for('fordefpry[nroempdir]', __($labels['fordefpry{nroempdir}']), 'class="required" style="width:200px"') ?>
+  <div class="content<?php if ($sf_request->hasError('fordefpry{nroempdir}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('fordefpry{nroempdir}')): ?>
+    <?php echo form_error('fordefpry{nroempdir}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($fordefpry, 'getNroempdir', array (
+  'size' => 7,
+  'control_name' => 'fordefpry[nroempdir]',
+  'onKeyPress' => "javascript:return entermontootro(event, this.id,this.id)",
+)); echo $value ? $value : '&nbsp;' ?>
+    </div></th>
+    <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+    <th> <?php echo label_for('fordefpry[nroempind]', __($labels['fordefpry{nroempind}']), 'class="required" style="width:200px"') ?>
+  <div class="content<?php if ($sf_request->hasError('fordefpry{nroempind}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('fordefpry{nroempind}')): ?>
+    <?php echo form_error('fordefpry{nroempind}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($fordefpry, 'getNroempind', array (
+  'size' => 7,
+  'control_name' => 'fordefpry[nroempind]',
+  'onKeyPress' => "javascript:return entermontootro(event, this.id,this.id)",
+)); echo $value ? $value : '&nbsp;' ?>
+    </div></th>
+   </tr>
+  </table>
+
+<br>
+
+  <table>
+   <tr>
+    <th><?php echo label_for('fordefpry[codsta]', __($labels['fordefpry{codsta}']), 'class="required" style="width:200px"') ?>
+  <div class="content<?php if ($sf_request->hasError('fordefpry{codsta}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('fordefpry{codsta}')): ?>
+    <?php echo form_error('fordefpry{codsta}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php echo input_auto_complete_tag('fordefpry[codsta]', $fordefpry->getCodsta(),
+    'fordefproyecto/autocomplete?ajax=6',  array('autocomplete' => 'off','maxlength' => 2, 'onBlur'=> remote_function(array(
+			  'url'      => 'fordefproyecto/ajax',
+			  'complete' => 'AjaxJSON(request, json)',
+  			  'with' => "'ajax=6&cajtexmos=fordefpry_dessta&cajtexcom=fordefpry_codsta&codigo='+this.value"
+			  ))),
+     array('use_style' => 'true')
+  )
+?></div></th>
+    <th>&nbsp;&nbsp;&nbsp;<?php echo button_to_popup('...','generales/catalogo?clase=Fordefsta&frame=sf_admin_edit_form&obj1=fordefpry_codsta&obj2=fordefpry_dessta')?></th>
+    <th><?php $value = object_input_tag($fordefpry, 'getDessta', array (
+  'disabled' => true,
+  'size' => 60,
+  'control_name' => 'fordefpry[dessta]',
+)); echo $value ? $value : '&nbsp;' ?></th>
+   </tr>
+  </table>
+</div>
+</fieldset>
+
+<?php tabPageOpenClose("tp1", "tabPage5", 'Organismos Públicos');?>
+<fieldset id="sf_fieldset_none" class="">
+<form name="form1" id="form1">
+<?
+echo grid_tag($obj);
+?>
+</form>
+</fieldset>
+
+<?php tabInit('tp1','0');?>
+<?php include_partial('edit_actions', array('fordefpry' => $fordefpry)) ?>
+
+</form>
+
+<ul class="sf_admin_actions">
+      <li class="float-rigth"><?php if ($fordefpry->getId()): ?>
+<?php echo button_to(__('delete'), 'fordefproyecto/delete?id='.$fordefpry->getId(), array (
+  'post' => true,
+  'confirm' => __('Are you sure?'),
+  'class' => 'sf_admin_action_delete',
+)) ?><?php endif; ?>
+</li>
+  </ul>

@@ -1,0 +1,82 @@
+methods:
+  post:
+   - "casolpag{solpag}"
+   - "casolpag{fecsol}"
+   - "casolpag{tipcom}"
+   - "casolpag{dessol}"
+   - "casolpag{cedrif}"
+   - "casolpag{monsol}"
+
+names:
+  casolpag{solpag}:
+    required:  Yes
+    required_msg: La Referencia no puedo estar en Blanco
+    validators: UniqueValidator
+
+  casolpag{fecsol}:
+    required:  Yes
+    required_msg: La Fecha no puedo estar en Blanco
+    validators: FechaValidator, FechaValidator1
+
+  casolpag{tipcom}:
+    required:  Yes
+    required_msg: El tipo de Compromiso no puedo estar en Blanco
+    validators: CompromisoValidator
+
+  casolpag{dessol}:
+    required:  Yes
+    required_msg: El Descrición no puedo estar en Blanco
+    validators: DescripcionValidator
+
+  casolpag{cedrif}:
+    required:  Yes
+    required_msg: El Beneficiario no puedo estar en Blanco
+    validators: BeneficiarioValidator
+
+  casolpag{monsol}:
+    required:  Yes
+    required_msg: El Monto Total de la Orden no puedo estar en Blanco
+
+FechaValidator1:
+    class:         CidesaDateNow
+    param:
+        compare: 'now'
+        compare_error: La Fecha no puede ser mayor a la Fecha Actual
+        operator: '<='
+        date_error:  Fecha Inválida
+
+DescripcionValidator:
+    class: sfStringValidator
+    param:
+        min:       5
+        min_error: La Descripción no puede tener menos de 5 caracteres
+        max:       1000
+        max_error: La Descripción no puede tener más de 1000 caracteres
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Casolpag
+        column:   solpag
+        unique_error:   La Referencia ya existe. Por Favor, Cambiélo por otro.
+
+CompromisoValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Cpdoccom
+        column:   tipcom
+        unique_error:   El Tipo de Compromiso no existe.
+
+BeneficiarioValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Opbenefi
+        column:   cedrif
+        unique_error:   El Beneficiario no existe.
+
+FechaValidator:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha  introducida es invalida

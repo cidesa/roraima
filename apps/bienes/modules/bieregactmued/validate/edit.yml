@@ -1,0 +1,204 @@
+methods:
+  post:
+   - "bnregmue{marmue}"
+   - "bnregmue{desmue}"
+   - "bnregmue{ordcom}"
+   - "bnregmue{codpro}"
+   - "bnregmue{codact}"
+   - "bnregmue{codubi}"
+   - "bnregmue{coddis}"
+   - "bnregmue{feccom}"
+   - "bnregmue{fecreg}"
+   - "bnregmue{codmue}"
+   - "bnregmue{ancmue}"
+   - "bnregmue{altmue}"
+   - "bnregmue{larmue}"
+   - "bnregmue{valini}"
+   - "bnregmue{valres}"
+   - "bnregmue{depmen}"
+   - "bnregmue{depacu}"
+   - "bnregmue{vallib}"
+   - "bnregmue{valadi}"
+   - "bnregmue{valrex}"
+   - "bnregmue{cosrep}"
+   - "bnregmue{valactual}"
+
+
+
+names:
+  bnregmue{marmue}:
+    required:  no
+    required_msg: La marca del mueble no puede estar en Blanco
+    validators: Validator_marmue
+
+  bnregmue{desmue}:
+    required:  Yes
+    required_msg: La descripción del mueble no puede estar en Blanco
+    validators: Validator_desmue
+
+  bnregmue{ordcom}:
+    required:  no
+    validators: ExistValidator_ordcom
+
+  bnregmue{codpro}:
+    required:  no
+    validators: ExistValidator_codpro
+
+  bnregmue{codact}:
+    required:  Yes
+    required_msg: El Código del catalogo no puede estar en Blanco.
+    validators: ExistValidator_codact
+
+  bnregmue{codubi}:
+    required:  Yes
+    required_msg: El codigo de ubicación no puede estar en Blanco
+    validators: ExistValidator_codubi
+
+  bnregmue{coddis}:
+    required:  Yes
+    required_msg: El código de disposición no puede estar en Blanco.
+    validators: ExistValidator_coddis
+
+  bnregmue{feccom}:
+    required:  No
+    validators: FechaValidator
+
+  bnregmue{codmue}:
+    required:  Yes
+    required_msg: El Código del mueble no puede estar en Blanco.
+    validators:
+
+  bnregmue{fecreg}:
+    required:  No
+    validators: FechaValidator
+
+  bnregmue{ancmue}:
+    required:  No
+    validators: MyNumberValidator
+
+  bnregmue{altmue}:
+    required:  No
+    validators: MyNumberValidator
+
+  bnregmue{larmue}:
+    required:  No
+    validators: MyNumberValidator
+
+  bnregmue{valini}:
+    required:  No
+    validators: MyNumberValidator
+
+  bnregmue{valres}:
+    required:  No
+    validators: MyNumberValidator
+
+  bnregmue{depmen}:
+    required:  No
+    validators: MyNumberValidator
+
+  bnregmue{depacu}:
+    required:  No
+    validators: MyNumberValidator
+
+  bnregmue{vallib}:
+    required:  No
+    validators: MyNumberValidator
+
+  bnregmue{valadi}:
+    required:  No
+    validators: MyNumberValidator
+
+  bnregmue{valrex}:
+    required:  No
+    validators: MyNumberValidator
+
+  bnregmue{cosrep}:
+    required:  No
+    validators: MyNumberValidator
+
+  bnregmue{valactual}:
+    required:  No
+    validators: MyNumberValidator
+
+Validar2a:
+    class: UniqueValidator2
+    param:
+        class:        Bnregmue
+        column:       codact
+        column2:      codmue
+        value2:       'bnregmue[codmue]'
+        unique_error: El Código del Activo ya existe para este Catalogo.
+
+Validar2b:
+    class: UniqueValidator2
+    param:
+        class:        Bnregmue
+        column:       codmue
+        column2:      codact
+        value2:       'bnregmue[codact]'
+        unique_error:
+
+ExistValidator_ordcom:
+    class: CidesaExistValidator
+    param:
+        class:        Caordcom
+        column:       ordcom
+        unique_error: La Orden de Compra debe Existir.
+
+ExistValidator_codpro:
+    class: CidesaExistValidator
+    param:
+        class:        Caprovee
+        column:       codpro
+        unique_error: La Proveedor debe Existir.
+
+ExistValidator_codact:
+    class: CidesaExistValidator
+    param:
+        class:        Bndefact
+        column:       codact
+        unique_error: El catalogo debe Existir.
+
+ExistValidator_codubi:
+    class: CidesaExistValidator
+    param:
+        class:        Bnubibie
+        column:       codubi
+        unique_error: El codigo de ubicacion debe Existir.
+
+ExistValidator_coddis:
+    class: CidesaExistValidator
+    param:
+        class:        Bndisbie
+        column:       coddis
+        unique_error: El codigo de disposición debe Existir.
+
+Validator_desmue:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       250
+        max_error: La descripción no puede pasar mas de 250 caracteres
+
+
+Validator_marmue:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La marca no puede tener menos de 2 caracteres
+        max:       250
+        max_error: La marca no puede pasar mas de 250 caracteres
+
+MyNumberValidator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^([0-9]*(\.*([0-9]{2,}))*\,?[0-9]+|[0-9]+\,?[0-9]*)?$/' ]
+        values_error: El Campo solo puede contener valores númericos
+
+FechaValidator:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha  introducida es invalida

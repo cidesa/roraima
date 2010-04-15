@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?><templates><template autoinsert="true" context="php" deleted="false" description="Funcion de los Catalogos en los Reportes" enabled="true" name="rcatalogo"> 	public static function catalogo_numcom($$objhtml)
+	{
+		$$sql="and  ( a.codcta like '%V_0%' and b.descta like '%V_1%') order by a.codcta";
+
+		$$catalogo = array(
+		    $$sql,
+		    array('== campo1 ==','== campo2 =='),
+		    array($$objhtml),
+		    array('== campo de la vista =='),
+		    100
+		    );
+
+	    return $$catalogo;
+	}</template></templates>

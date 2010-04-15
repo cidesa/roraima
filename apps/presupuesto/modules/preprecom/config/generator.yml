@@ -1,0 +1,55 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Cpprecom
+    theme:            cidesaGenerator
+
+    fields:
+      refprc: { name: Referencia }
+      fecprc: { name: Fecha, params: date_format='dd/MM/yy' }
+      desprc: { name: Descripción, type: textarea_tag, params: size=80x5 }
+      monprc: { name: Total }
+      salaju: { name: Ajustado, params: readonly=true }
+      salcau: { name: Causado, params: readonly=true }
+      salpag: { name: Pagado, params: readonly=true }
+      salcom: { name: Comprometido, params: readonly=true }
+      salpre: { name: Precompromiso, params: readonly=true }
+      mensaje: {name: .}
+      tipprc:
+        name: Código
+        catalogo:
+          catalogoweb: Preprecom_Cpdocprc
+          clase: Cpdocprc
+          ajax: 0
+          parametros: getprincipal="getTipprc" getsecundario="getNomext" campoprincipal="tipprc" camposecundario="nomext" campobase = "id"
+      cedrif:
+        name: Cedula/Rif
+        catalogo:
+          catalogoweb: Cpprecom_Opbenefi
+          clase: Opbenefi
+          ajax: 0
+          parametros: getprincipal="getCedrif" getsecundario="getNomben" campoprincipal="cedrif" camposecundario="nomben" campobase = "id"
+      grid: {name: . }
+
+    list:
+      title:  Precompromisos
+      display:        [ =refprc, desprc, fecprc ]
+      filters:        [refprc, fecprc, desprc]
+
+    edit:
+      title:  Edición de Precompromisos
+      display:
+        Datos del documento:   [_mensaje, refprc, fecprc, desprc ]
+        Tipo Precompromiso:  [ tipprc ]
+        Datos del Beneficiario: [cedrif]
+        Saldos:                [salaju, _salpre, salcom, salcau, salpag, monprc]
+        Imputaciones Presupuestarias: [_grid]
+      actions:
+        _list:        ~
+        _save:        ~
+        _create:      ~
+        _delete:      ~
+        _anular:
+          name: Anular
+          only_for: edit
+          params: class="sf_admin_action_delete" onClick="anular()"

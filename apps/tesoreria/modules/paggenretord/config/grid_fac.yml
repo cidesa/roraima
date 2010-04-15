@@ -1,0 +1,179 @@
+opciones:                  # Opciones generales
+  eliminar:                factura
+  tabla:                   opfactur
+  name:                    b
+  anchogrid:               900
+  ancho:                   1800
+  filas:                   1
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Fecha Factura
+  tipo:                    f
+  nombrecampo:             fecfac
+  html:                    [ ]
+  vacia:                   true
+  esgrabable:              true
+2:       # Columna 2
+  titulo:                  Factura Nro.
+  tipo:                    t
+  nombrecampo:             numfac
+  esgrabable:              true
+  html:                    [size=15 maxlength=20]
+3:       # Columna 3
+  titulo:                  Nro. Control
+  tipo:                    t
+  nombrecampo:             numctr
+  esgrabable:              true
+  html:                    [size=15 maxlength=20]
+4:       # Columna 4
+  titulo:                  Nota Débito
+  tipo:                    t
+  nombrecampo:             notdeb
+  esgrabable:              true
+  html:                    [size=15 maxlength=20]
+5:       # Columna 5
+  titulo:                  Nota de Crédito
+  tipo:                    t
+  nombrecampo:             notcrd
+  esgrabable:              true
+  html:                    [size=15 maxlength=20]
+6:       # Columna 5
+  titulo:                  Tipo de Transacción
+  tipo:                    t
+  nombrecampo:             tiptra
+  esgrabable:              true
+  html:                    [size=4 readonly=true]
+7:       # Columna 7
+  titulo:                  Factura Afectada
+  tipo:                    t
+  nombrecampo:             facafe
+  esgrabable:              true
+  html:                    [size=15 maxlength=20]
+8:       # Columna 8
+  titulo:                  % Alícuota
+  tipo:                    c
+  nombrecampo:             poriva
+  html:                    [ ]
+  esgrabable:              true
+9:       # Columna 9
+  titulo:                  Total Factura
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             totfac
+  esnumerico:              true
+  html:                    [size="10"]
+10:       # Columna 10
+  titulo:                  Exento Iva
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             exeiva
+  esnumerico:              true
+  html:                    [size="10"]
+11:       # Columna 11
+  titulo:                  Base Imponible
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             basimp
+  esnumerico:              true
+  html:                    [size="10"]
+12:       # Columna 12
+  titulo:                  Impuesto
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             monret
+  esnumerico:              true
+  html:                    [size="10"]
+13:       # Columna 13
+  titulo:                  IVA Retenido
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             moniva
+  esnumerico:              true
+  html:                    [size="10"]
+14:       # Columna 14
+  titulo:                  1x100
+  tipo:                    k
+  nombrecampo:             unocien
+  html:                    [ ]
+  esgrabable:			   true
+15:       # Columna 15
+  titulo:                  Base Imponible 1xMil
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             basltf
+  esnumerico:              true
+  html:                    [size="10"]
+16:       # Columna 16
+  titulo:                  % 1xMil
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             porltf
+  esnumerico:              true
+  html:                    [size="10" readonly=true]
+17:       # Columna 17
+  titulo:                  Monto 1xMil
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             monltf
+  esnumerico:              true
+  html:                    [size="10" readonly=true]
+18:       # Columna 18
+  titulo:                  I.S.L.R
+  tipo:                    k
+  nombrecampo:             impusob
+  html:                    [ ]
+  esgrabable:			   true
+19:       # Columna 19
+  titulo:                  Base Imponible I.S.L.R
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             basislr
+  esnumerico:              true
+  html:                    [size="10"]
+20:       # Columna 20
+  titulo:                  % I.S.L.R
+  tipo:                    c
+  esgrabable:              true
+  nombrecampo:             porislr
+  html:                    [ ]
+21:       # Columna 21
+  titulo:                  Monto I.S.L.R
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             monislr
+  esnumerico:              true
+  html:                    [size="10" readonly=true]
+22:       # Columna 22
+  titulo:                  Codtip
+  tipo:                    t
+  nombrecampo:             codislr
+  esgrabable:              true
+  oculta:                  true
+  html:                    [size=15]
+23:       # Columna 23
+  titulo:                  Alicuota Adicional
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             aliadi
+  esnumerico:              true
+  html:                    [size="10"]
+24:       # Columna 24
+  titulo:                  C.I / R.I.F
+  tipo:                    t
+  nombrecampo:             rifalt
+  esgrabable:              true
+  html:                    [size=15]
+  catalogo:                [opbenefi, sf_admin_edit_form, {Cedrif: 24, Nomben: 25}, Opbenefi_Pagemiord ]
+25:       # Columna 25
+  titulo:                  Beneficiario
+  tipo:                    t
+  nombrecampo:             nomben
+  esgrabable:              true
+  html:                    [size=15 readonly=true]
+26:       # Columna 26
+  titulo:                  Observacion
+  tipo:                    t
+  nombrecampo:             observacion
+  esgrabable:              true
+  html:                    [size=15]

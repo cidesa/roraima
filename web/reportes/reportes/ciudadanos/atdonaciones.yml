@@ -1,0 +1,36 @@
+Parametros:
+  modulo: ciudadanos
+  nomrep: atdonaciones
+  titulo: DONACIONES POR GRUPOS
+  orientacion: Vertical
+  tipopagina: Carta
+  width:210
+
+Filas:
+  CATALOGO CODCON:
+    tipotag:   inputcat_tag
+    label: C&oacute;digo de la Donaci&oacute;n:
+    sql:   select min(coddon) as codmin,max(coddon) as codmax from atdonaciones
+    nomdes: coddondes
+    campodes: codmin
+    catdes: 0
+    nomhas: coddonhas
+    campohas: codmax
+    cathas: 1
+    nomcat: atdonaciones
+    size: 20
+
+  CATALOGO GRUPO:
+    tipotag:   inputcat_tag
+    label: Grupos:
+    sql:   select min(id) as codmin,max(id) as codmax from atgrudon
+    nomdes: codiddes
+    campodes: codmin
+    catdes: 2
+    nomhas: codidhas
+    campohas: codmax
+    cathas: 3
+    nomcat: atgrudon
+    size: 20
+
+

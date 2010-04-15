@@ -1,0 +1,36 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Dftabtip
+    theme:            cidesaGenerator
+    fields:
+      tipdoc:     { name : Tipo de Documento }
+      nomtab:     { name : Tabla Asociada }
+      vidutil:    { name : Vida Útil }
+      clvprm:     { name : Clave Principal, help: Código del Documento }
+      clvfrn:     { name : Clave Foranea, help: Tipo de Documento (Enlace con Presupuesto) }
+      mondoc:     { name : Monto, help: Monto del Documento }
+      fecdoc:     { name : Fecha, help: Fecha de Creación }
+      desdoc:     { name : Descripción, help: Descripción }
+      stadoc:     { name : Estado, help: Estado del Documento }
+      infdoc1:     { name : Inf. Adic 1, help: Información Adicional }
+      infdoc2:     { name : Inf. Adic 2 }
+      infdoc3:     { name : Inf. Adic 3 }
+      infdoc4:     { name : Inf. Adic 4 }
+      valact:      { name : Valor Estado Activo }
+      valanu:      { name : Valor Estado Anulado }
+      fecini:      { name : A partir de la Fecha }
+    list:
+      title:          Administración de Tablas
+      display:        [=destipdoc, nomtab ]
+      filters:      [tipdoc, nomtab ]
+      max_per_page:    5
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+    edit:
+      title:          Edición de Tablas
+      display:        [tipdoc, nomtab, vidutil, clvprm, clvfrn, mondoc, fecdoc, desdoc, stadoc, infdoc1, infdoc2, infdoc3, infdoc4, valact, valanu, fecini ]
+      actions:
+        _list:        ~
+        _save:        ~

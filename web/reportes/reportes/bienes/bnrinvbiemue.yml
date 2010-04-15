@@ -1,0 +1,99 @@
+Parametros:
+  modulo: bienes
+  nomrep: bnrinvbiemue
+  titulo: Inventario de Bienes Muebles
+  orientacion: Vertical
+  tipopagina: Carta
+  width:210
+
+Filas:
+  CATALOGO ACTIVOS:
+    tipotag:   inputcat_tag
+    label: Código del Activo:
+    sql:   SELECT min(a.codact) as codactmin,max(a.codact) as codactmax FROM bnregmue a, bndefact b where a.codact = b.codact
+    nomdes: codactdes
+    campodes: codactmin
+    catdes: 0
+    nomhas: codacthas
+    campohas: codactmax
+    cathas: 1
+    nomcat: codact
+    size: 25
+
+  CATALOGO BIENES:
+    tipotag:   inputcat_tag
+    label: Código del Bien:
+    sql:   SELECT min((codmue)) as codmuemin,max(codmue) as codmuemax FROM bnregmue
+    nomdes: codmuedes
+    campodes: codmuemin
+    catdes: 2
+    nomhas: codmuehas
+    campohas: codmuemax
+    cathas: 3
+    nomcat: codmue
+    size: 25
+
+  CATALOGO UBICACION:
+    tipotag:   inputcat_tag
+    label: Código Ubicación:
+    sql:   select min(codubi) as mincodubi,max(codubi) as maxcodubi  from BNUBIBIE
+    nomdes: codubides
+    campodes: mincodubi
+    catdes: 4
+    nomhas: codubihas
+    campohas: maxcodubi
+    cathas: 5
+    nomcat: codubi
+    size: 25
+
+  CATALOGO RESPONSABLE:
+    tipotag:   inputcat_tag
+    label: Responsable:
+    sql:
+    nomdes: responsable
+    campodes:
+    catdes: 6
+    nomhas:
+    campohas:
+    cathas: 7
+    nomcat: codemp
+    size: 25
+
+  FECHA REGISTRO:
+    tipotag:   inputfec_tag
+    label: Fechas de Registro:
+    sql:   SELECT to_char(MIN(fecreg),'DD/MM/YYYY') as fechamin,to_char(max(fecreg),'DD/MM/YYYY') as fechamax FROM bnregmue
+    nomdes: fecdes
+    campodes: fechamin
+    nomhas: fechas
+    campohas: fechamax
+    size: 15
+
+  CAJA PREPARADO:
+    tipotag:   input_tag
+    label: Responsable:
+    nomdes: prepardes
+    campodes:-1
+    nomhas: preparhas
+    campohas:-1
+    size: 30
+
+  CAJA CONFORMADO:
+    tipotag:   input_tag
+    label: jefe de la unidad:
+    nomdes: confordes
+    campodes: -1
+    nomhas: conforhas
+    campohas:-1
+    size: 30
+
+  CAJA APROBADO:
+    tipotag:   input_tag
+    label: Registrador:
+    nomdes: aprobades
+    campodes:  -1
+    nomhas: aprobahas
+    campohas:-1
+    size: 30
+
+

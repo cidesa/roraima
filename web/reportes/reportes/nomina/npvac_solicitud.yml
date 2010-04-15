@@ -1,0 +1,62 @@
+Parametros:
+  modulo: nomina
+  nomrep: npvac_solitud
+  titulo: Solicitud de Vacaciones
+  orientacion: Vertical
+  tipopagina: CARTA
+  width:210
+
+Filas:
+  CATALOGO EMPLEADO:
+    tipotag:   inputcat_tag
+    label: Empleado:
+    sql:  SELECT MIN(codemp) as codmin,max(codemp) as codmax FROM NPHOJINT
+    nomdes: codempdes
+    campodes: codmin
+    catdes: 0
+    nomhas: codemphas
+    campohas: codmax
+    cathas: 1
+    nomcat: codemp
+    size: 22
+
+  CATALOGO NOMINA:
+    tipotag:   inputcat_tag
+    label: Nomina:
+    sql:  Select min(codnom) as codmin,max(codnom) as codmax from npnomina
+    nomdes: codnomdes
+    campodes: codmin
+    catdes: 2
+    nomcat: codnom
+    size: 22
+
+  CAJA FECHA:
+    tipotag:   inputfec_tag
+    label: Fecha Salida:
+    sql:  Select to_char(min(fecdes),'dd/mm/yyyy') as valmin,to_char(max(fecdes),'dd/mm/yyyy') as valmax from npvacsalidas
+    nomdes: fecdes
+    campodes: valmin
+    nomhas: fechas
+    campohas: valmax
+
+  CAJA ELABORADO:
+    tipotag:   input_tag
+    label: Elaborado Por:
+    nomdes: elapor
+    campodes: -1
+    size: 50
+
+  CAJA REVISADO:
+    tipotag:   input_tag
+    label: Revisado Por:
+    nomdes: revpor
+    campodes: -1
+    size: 50
+
+  CAJA APROBADO:
+    tipotag:   input_tag
+    label: Aprobado Por:
+    nomdes: aprpor
+    campodes: -1
+    size: 50
+

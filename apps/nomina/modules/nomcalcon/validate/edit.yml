@@ -1,0 +1,29 @@
+methods:
+  post:
+   - "npcalcon{codcon}"
+   - "npcalcon{codnom}"
+
+names:
+  npcalcon{codcon}:
+    required:  Yes
+    required_msg: El Código del Concepto no puede estar en Blanco
+    validators: Validator_codcon
+
+  npcalcon{codnom}:
+    required:  Yes
+    required_msg: El Código de la Nomina no puede estar en Blanco
+    validators: Validator_codnom
+
+Validator_codnom:
+    class: CidesaExistValidator
+    param:
+        class:        Npnomina
+        column:       codnom
+        unique_error: El Código de la Nomina debe Existir.
+
+Validator_codcon:
+    class: CidesaExistValidator
+    param:
+        class:        Npdefcpt
+        column:       codcon
+        unique_error: El Código del Concepto debe Existir.

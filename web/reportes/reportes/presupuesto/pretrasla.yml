@@ -1,0 +1,43 @@
+Parametros:
+  modulo: presupuesto
+  nomrep: pretrasla
+  titulo: Traslados
+  orientacion: Vertical
+  width:210
+  tipopagina: Carta
+
+Filas:
+  CATALOGO NROTRASLADO:
+    tipotag:   inputcat_tag
+    label: Nro del Traslado:
+    sql:SELECT min(reftra) as refdes, max(reftra) as refhas from cptrasla
+    campodes: refdes
+    nomdes: refdes
+    catdes: 0
+    nomhas: refhas
+    campohas: refhas
+    cathas: 1
+    nomcat: cptrasla
+    size: 15
+
+  FECHA TRASLADO:
+    tipotag:   inputfec_tag
+    label: Fecha
+    sql:select to_char(min(fectra),'DD/MM/YYYY') as fecdes, to_char(max(fectra),'DD/MM/YYYY') as fechas from cptrasla
+    nomdes: fecdes
+    campodes: fecdes
+    nomhas: fechas
+    campohas: fechas
+    size: 15
+
+  REVISADO:
+    tipotag:   input_tag
+    label: Revisado por:
+    nomdes: revisado
+    size: 30
+
+  CONFORMADO:
+    tipotag:   input_tag
+    label: Conformado por:
+    nomdes: conformado
+    size: 30

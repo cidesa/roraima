@@ -1,0 +1,14 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Contabc
+    theme:            cidesaGenerator
+    fields:
+      grid:           { name: .}
+
+    edit:
+      title:          Eliminar comprobantes anulados
+      display:
+        Comprobantes: [ _grid ]
+      actions:
+        _save:      ~

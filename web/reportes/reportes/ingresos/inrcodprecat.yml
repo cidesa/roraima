@@ -1,0 +1,21 @@
+Parametros:
+  modulo: ingresos
+  nomrep: inrcodprecat
+  titulo: CATALOGO DE CODIGOS PRESUPUESTARIOS DE INGRESOS
+  orientacion: Vertical
+  tipopagina: CARTA
+  width:210
+
+Filas:
+  CATALOGO CODPRE:
+    tipotag:   inputcat_tag
+    label: Codigo Presupuestario:
+    sql:  Select min(codpre) as codmin,max(codpre) as codmax from cideftit
+    nomdes: codpredes
+    campodes: codmin
+    catdes: 0
+    nomhas: codprehas
+    campohas: codmax
+    cathas: 1
+    nomcat: cideftit
+    size: 22

@@ -1,0 +1,23 @@
+Parametros:
+  modulo: ciudadanos
+  nomrep: atunidades
+  titulo: UNIDADES
+  orientacion: Vertical
+  tipopagina: Carta
+  width:210
+
+Filas:
+  CATALOGO CODCON:
+    tipotag:   inputcat_tag
+    label: C&oacute;digo de la Unidad:
+    sql:   select min(coduni) as codmin,max(coduni) as codmax from atunidades
+    nomdes: codunides
+    campodes: codmin
+    catdes: 0
+    nomhas: codunihas
+    campohas: codmax
+    cathas: 1
+    nomcat: atunidades
+    size: 20
+
+

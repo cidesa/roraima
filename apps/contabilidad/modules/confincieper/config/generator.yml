@@ -1,0 +1,17 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Contaba1
+    theme:            cidesaGenerator
+    fields:
+      pereje:         {name: Periodo}
+      fecdes:         {name: Fecha desde, type: input_tag, params: size=10 readonly=true}
+      fechas:         {name: Fecha hasta, type: input_tag, params: size=10 readonly=true}
+      botones:	      {name: .}
+      mensaje:        {name: .}
+    edit:
+      title:                     Cierre de Periodo
+      display:
+        Cierre de Periodo:       [_pereje, fecdes, fechas, _botones]
+      actions:
+        NONE

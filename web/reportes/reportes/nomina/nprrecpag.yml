@@ -1,0 +1,87 @@
+Parametros:
+  modulo: nomina
+  nomrep: nprrecpag
+  titulo: Recibo de Pago
+  orientacion: Vertical
+  tipopagina: Carta
+  width:210
+
+Filas:
+  CATALOGO EMPLEADOS:
+    tipotag:   inputcat_tag
+    label: C&oacute;digo del  Empleado:
+    sql:   SELECT min(codemp) as codempmin,max (codemp) as codempmax FROM NPASICAREMP
+    nomdes: codempdes
+    campodes: codempmin
+    catdes: 0
+    nomhas: codemphas
+    campohas: codempmax
+    cathas: 1
+    nomcat: codemp
+    size: 25
+
+  CATALOGO CARGOS:
+    tipotag:   inputcat_tag
+    label: C&oacute;digo del Cargo:
+    sql:   SELECT min(codcar) as codcarmin,max (codcar) as codcarmax FROM NPASICAREMP
+    nomdes: codcardes
+    campodes: codcarmin
+    catdes: 2
+    nomhas: codcarhas
+    campohas: codcarmax
+    cathas: 3
+    nomcat: codcar
+    size: 25
+
+  CATALOGO CONCEPTO:
+    tipotag:   inputcat_tag
+    label: C&oacute;digo del Concepto:
+    sql:   SELECT min(codcon) as codconmin,max (codcon) as codconmax FROM NPASICONEMP
+    nomdes: codcondes
+    campodes: codconmin
+    catdes: 4
+    nomhas: codconhas
+    campohas: codconmax
+    cathas: 5
+    nomcat: codcon
+    size: 25
+
+  CATALOGO NOMINA:
+    tipotag:   inputcat_tag
+    label: C&oacute;digo de la N&oacute;mina:
+    sql:   SELECT min(codnom) as codnommin,max (codnom) as codnommax FROM NPASICAREMP
+    nomdes: codnomdes
+    campodes: codnommin
+    catdes: 6
+    #nomhas: codnomhas
+    #campohas: codnommax
+    #cathas: 7
+    nomcat: codnom
+    size: 25
+
+  COMBO CONSECUTIVO:
+    tipotag:   combof_tag
+    label: Generar Consecutivo
+    nomdes: consedes
+    campodes: [N=>NO, S=>SI]
+    size: 25
+
+  COMBO ESPECIAL:
+    tipotag:   combof_tag
+    label: Especial
+    nomdes: especial
+    campodes: [N=>NO, S=>SI]
+    size: 25
+
+  CATALOGO CODCTAESP:
+    tipotag:   inputcat_tag
+    label: Tipo de Nómina Especial:
+    sql:select min(codnomesp) as nomminesp, max(codnomesp) as nommaxesp from npnomcal
+    nomdes: nomminesp
+    campodes: nomminesp
+    catdes: 8
+    nomhas: nommaxesp
+    campohas: nommaxesp
+    cathas: 9
+    nomcat: tipnom_especial
+    size: 20

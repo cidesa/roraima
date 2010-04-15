@@ -1,0 +1,42 @@
+Parametros:
+  modulo: nomina
+  nomrep: nprregaseg
+  titulo: REGISTRO DE ASEGURADO FORMA 14-02
+  orientacion: Vertical
+  tipopagina: CARTA
+  width:210
+
+Filas:
+  CATALOGO CEDULAS:
+    tipotag:   inputcat_tag
+    label: Cedula Trabajador:
+    sql:   SELECT min(codemp) as codemp FROM nphojint
+    nomdes: codemp
+    campodes: codemp
+    catdes: 0
+    nomcat: codemp
+    size: 20
+
+
+  CAJA NUMSEG:
+    tipotag: input_tag
+    label: Nro. del Asegurado:
+    nomdes: numseg
+    campodes: -1
+    size: 20
+
+  CAJA SUCDPTO:
+    tipotag: input_tag
+    label: Suc. Dpto. Dpcia.:
+    nomdes: suc
+    campodes: -1
+    size: 20
+
+
+  COMBO CONSECUTIVO:
+    tipotag:   combof_tag
+    label: Tipo:
+    nomdes: causa
+    campodes: [1=>INSCRIPCION DE TRABAJADOR EN EL IVSS, 2=>MODIFICACION DE DATOS, 3=>CAMBIO DE NUMERO DE CEDULA DE IDENTIDAD, 4=>DECLARACION DE FAMILIARES]
+    size: 45
+

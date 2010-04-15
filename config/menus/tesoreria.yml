@@ -1,0 +1,103 @@
+tesoreria:
+  opciones:
+    activo: true #true/false
+    descripcion: Módulo de Tesorería
+    imagen: tesoreria.gif
+    nombre: Tesorería
+    urls:
+      Cambiar Contraseña:
+        modulo: autenticacion.php
+        modulo_dev: autenticacion_dev.php
+      default:
+        modulo: tesoreria.php
+        modulo_dev: tesoreria_dev.php
+      Catálogo de Tipos de Financiamiento:
+        absoluta: reportes/reportes/presupuesto
+      Reportes:
+        absoluta: reportes/reportes/tesoreria
+    imagenes:
+      default: OperatorClass.png
+  menu:
+    Definiciones Específicas:
+      Empresa:                                                pagdefemp
+      Tipos de Cuentas Bancarias:                             TesDefTipCue
+      Tipos de Movimientos Bancarios:                         TesDefTipMov
+      Tipos de Rendimiento:                                   TesDefTipRen
+      Tipos de Monedas:                                       TesDefTipMon
+      Tipos de Retenciones:                                   PagTipRet
+      Tipos de Financiamiento:                                PreTipFin
+      Conceptos de Pago:                                      tesconpag
+      Bancos:                                                 TesDefCueBan
+      Tipo de Beneficiario:                                   PagTipBen
+      Beneficiarios:                                          PagBenfic
+      Asociación Conceptos+Tipos de Retenciones:              PagRetCon
+      Definición de Ubicacion:                                TesDesUbi
+      Definición del IVA para Agentes de Retención:           PagRetIva
+      Definición de Cuentas Contab. para Rendición de Gastos: TesDefRenGas
+      Definición de Reportes de Comprobantes de Retención:    PagRepRet
+      Relación de Cuentas para los Asientos de Órdenes Aprobadas:      tsrelasiord
+      Motivos de Anulación:                                   tesmotanu
+      Aprobación de Órdenes de Pago(Módulo de Ordenamiento):  tesaprord
+      Recepción de Ordenes de Pago Aprobadas (Módulo de Tesoreria):     tesaprordtes
+      Desbloquear Cuentas Bancarias:                          tesdesbloqban
+    Ordenamiento de Pago:
+      Ordenes de Pago:                                        PagEmiOrd
+      Fondos a Terceros:                                      PagEmiRet
+      Enterar Retencion de ISLR:                              TesRetIslr
+    Bancos:
+      Emisión de Pagos:                                       TesMovEmiChe
+      Recepción de Cheques sin Firma:                         tesfirmascheq
+      Movimientos según Libros:                               TesMovSegLib
+      Movimientos según Libros Años Anteriores:               TesMovSegLibAnt
+      Movimientos según Bancos:                               TesMovSegBan
+      Movimientos según Bancos Años Anteriores:               TesMovSegBanAnt
+      Transferencias Bancarias:                               TesMovTraBan
+      Conciliación Bancaria:                                  TesMovConBan
+      Conciliar Movimientos en Libros:                        TesConMovLib
+      Conciliar Movimientos en Bancos:                        TesConMovBan
+      DesConciliar Movimientos en Libros:                     TesDesConMovLib
+      DesConciliar Movimientos en Bancos:                     TesDesConMovBan
+      Cierre de Periodo:                                      TesMovCieBan
+    Caja:
+      Cheques en Custodia:                                    TesCheCus
+    Caja Chica:
+      Salidas de Caja:                                        TesMovSalCaj
+      Rendición de Caja:                                      TesRenCajChi
+    Reportes:
+      Generales:
+        Catálogo de Tipos de Cuentas Bancarias:               tsrtipcue.php
+        Catálogo de Tipos de Movimientos Bancarios:           tsrtipmov.php
+        Catálogo de Tipos de Monedas:                         tsrdesmon.php
+        Catálogo de  Bancos:                                  tsrdefban.php
+        Catálogo de Tipos de Beneficiario:                    oprtipben.php
+        Catálogo de Beneficiarios:                            oprbenefi.php
+        Catálogo de Ubicación:                                oprdesubi.php
+        Catálogo de Tipos de Retenciones:                     oprtipret.php
+        Catálogo de Tipos de Financiamiento:                  precattipfin.php
+      Movimientos:
+        Listado de Ordenes de Pago:                           oprordpag.php
+        Listado de Ordenes de Pago Detallada:                 oprdetord.php
+        Listado de Ordenes de Pago por Beneficiario:          oprordpagporbeneficiario.php
+        Ordenes de Pagos con Retenciones:                     oprordret.php
+        #Ordenes de Pago con retenciones Pendientes por Pagar: falta
+        #Desglose de Ordenes de Pago por Código Presupuestario:falta
+        Desglose de Ordenes de Retenciones por Beneficiario:  oprordretben.php
+        Disponibilidad Bancaria:                              tsrdisban.php
+        Relación de Cuentas Bancarias:                        tsrrelban.php
+        Movimientos según Libros :                            tsrmovlib.php
+        Movimientos según Bancos:                             tsrmovban.php
+        Transferencias  Bancarias:                            tsrtraban.php
+        #Oficio para Autorización a Transferencias Bancarias:  oprtransferencia.php
+        Conciliación Bancaria:                                tsrconcil.php
+        Detalle de Conciliación:                              tsrrescon.php
+      Formas Preimpresas:
+        Orden de Pago Preimpresa:                             oprordpag_new.php
+        Voucher:                                              tsrvoucher1.php
+      Impuestos:
+        Comprobante de retención IVA:                         oprcompret_iva.php
+        Comprobante de retención ISLR:                        oprcompret_islr.php
+        Comprobante de retención LTF:                         oprcompret_ltf.php
+        Libro de Compras:                                     tsrlibcom.php
+    Mantenimiento:
+      Actualizar Monto de Retenciones por Orden:              pagmodret
+      Cambiar Contraseña:                                     cambiopasswd

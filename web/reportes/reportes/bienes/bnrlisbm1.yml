@@ -1,0 +1,57 @@
+Parametros:
+  modulo: bienes
+  nomrep: bnrlisbm1
+  titulo: INVENTARIO DE BIENES MUEBLES
+  orientacion: Horizontal
+  tipopagina: Carta
+  width:210
+
+Filas:
+  CATALOGO CODUBI:
+    tipotag:   inputcat_tag
+    label: C&oacute;digo de Ubicacion:
+    sql: select min(codubi) as mincod, max(codubi) as maxcod from bnubibie where length(trim(codubi)) = (select max(length(trim(codubi))) from bnubibie)
+    nomdes: ubides
+    campodes: mincod
+    catdes: 0
+    nomhas: ubihas
+    campohas: maxcod
+    cathas: 1
+    nomcat: bnubibie
+    size: 20
+
+  CAMPO FECHA:
+    tipotag:   inputfec_tag
+    sql: Select to_char(date(now()),'dd/mm/yyyy') as fecha from empresa;
+    label: Fecha:
+    nomdes: fecha
+    campodes: fecha
+    size: 15
+
+  CAMPO MAXAUT:
+    tipotag:   input_tag
+    label: Maxima Autoridad:
+    nomdes: maxaut
+    campodes: -1
+    size: 50
+
+  CAMPO JEFE:
+    tipotag:   input_tag
+    label: Jefe de Unidad:
+    nomdes: jefuni
+    campodes: -1
+    size: 50
+
+  CAMPO RESPON:
+    tipotag:   input_tag
+    label: Responsable:
+    nomdes: resinv
+    campodes: -1
+    size: 50
+
+  CAMPO DPTO:
+    tipotag:   input_tag
+    label: Dpto. Bienes Estadales:
+    nomdes: dptest
+    campodes: -1
+    size: 50

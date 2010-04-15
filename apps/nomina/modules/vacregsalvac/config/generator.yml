@@ -1,0 +1,24 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Nphojint
+    theme:            default
+    fields:
+      codemp: { name: Cédula }
+      nomemp: { name: Nombre }
+      fecing: { name: Fecha Ingreso }
+      codcar: { name: Código Cargo }
+      nomcar: { name: Cargo }
+      codnom: { name: Código Nómina }
+      nomnom: { name: Descripción Nómina }
+    list:
+      title:          Registro y control de Vacaciones
+      filters:        [codemp, nomemp, fecing, codcar, nomcar, codnom, nomnom ]
+      display:        [=codemp, nomemp, fecing, codcar, nomcar, codnom, nomnom ]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+    edit:
+      title:          Edición del Registro y control de Vacaciones
+      display:        [codemp, nomemp, fecing, codcar, nomcar, codnom, nomnom ]

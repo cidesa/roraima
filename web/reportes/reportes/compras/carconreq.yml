@@ -1,0 +1,44 @@
+Parametros:
+  modulo: compras
+  nomrep: carconreq
+  titulo: CONSULTA DE REQUISICIONES
+  orientacion: Vertical
+  tipopagina: Carta
+  width:210
+
+Filas:
+  CATALOGO NUMREQ:
+    tipotag:   inputcat_tag
+    label: Numero de Requisicion:
+    sql:   SELECT min(reqart) as codmin,max(reqart) as codmax FROM CAREQART
+    nomdes: numreqdes
+    campodes: codmin
+    catdes: 0
+    nomhas: numreqhas
+    campohas: codmax
+    cathas: 1
+    nomcat: careqart
+    size: 22
+
+  FECHAREQ:
+    tipotag:   inputfec_tag
+    label: Fecha de la Requisicion:
+    sql:   SELECT to_char(MIN(fecreq),'DD/MM/YYYY') as fechamin,to_char(MAX(fecreq),'DD/MM/YYYY') as fechamax FROM CAREQART
+    nomdes: fecreqdes
+    campodes: fechamin
+    nomhas: fecreqhas
+    campohas: fechamax
+    size: 22
+
+  CATALOGO UNIDAD:
+    tipotag:   inputcat_tag
+    label: Unidad:
+    sql:   SELECT min(codcat) as codmin,max(codcat) as codmax FROM caartreq
+    nomdes: unides
+    campodes: codmin
+    catdes: 2
+    nomhas: unihas
+    campohas: codmax
+    cathas: 3
+    nomcat: caartrequni
+    size: 22

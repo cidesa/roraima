@@ -1,0 +1,37 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Carcpart
+    theme:            default
+    fields:
+      rcpart:      { name : Número, params: maxlength=8}
+      ordcom:      { name : Nro. Orden Compra, params: maxlength=8 }
+      fecrcp:      { name : Fecha, params: date_format='dd/MM/yyyy'}
+      fecord:      { name : Fecha O/C, params: date_format='dd/MM/yyyy'}
+      desrcp:      { name : Descripción}
+      codpro:      { name : Código de la Contratistas de Bienes o Servicio y Cooperativas, params: maxlength=10}
+      numfac:      { name : Nro. Factura, params: maxlength=15 }
+      monrcp:      { name : Monto Total}
+      codalm:      { name : Código del Almacen, params: maxlength=6}
+      nroent:      { name : Nro. Nota de Entrega, params: maxlength=8}
+      desconpag:   { name : Condición de Pago}
+      desforent:   { name : Forma de Entrega}
+      codubi:      { name: Código de la Ubicación}
+      nomubi:      { name: Nombre Ubicación}
+    list:
+      title:          Recepción de Articulos por Orden de Compra
+      display:        [=rcpart, fecrcp, desrcp, ordcom]
+      filters:        [rcpart, fecrcp, ordcom]
+      sort:           rcpart
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   10
+    edit:
+      title:          Recepción de Articulos por Orden de Compra
+      display:        [=rcpart, fecrcp, codalm, nomalm, ordcom, fecord, desrcp, codpro, nompro, desconpag, desforent, numfac, nroent, monrcp, codubi, nomubi]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

@@ -1,0 +1,21 @@
+Parametros:
+  modulo: ciudadanos
+  nomrep: attipvivienda
+  titulo: TIPO DE VIVIENDA
+  orientacion: Vertical
+  tipopagina: Carta
+  width:210
+Filas:
+  CATALOGO CODCON:
+    tipotag:   inputcat_tag
+    label: C&oacute;digo del Ingreso:
+    sql:   select min(id) as codmin,max(id) as codmax from attipviv
+    nomdes: iddes
+    campodes: codmin
+    catdes: 0
+    nomhas: idhas
+    campohas: codmax
+    cathas: 1
+    nomcat: attipviv
+    size: 20
+

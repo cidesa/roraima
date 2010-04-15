@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='iso-8859-1'?>
+<toolbar disableType="image" absolutePosition="auto" toolbarAlign="right">
+	<ImageButton  src="../../lib/general/toolbar/imgs/iconSave.gif" height="25" width="25" id="0_save" tooltip="Save"/>
+
+	<divider id="div_1"/>
+	<ImageButton src="../../lib/general/toolbar/imgs/iconCancelar.gif" height="25" width="25" id="0_cancelar" tooltip="Cancelar"/>
+
+	<divider id="div_1"/>
+	<ImageButton src="../../lib/general/toolbar/imgs/borrar.gif" height="25" width="25" id="0_delete" tooltip="Borrar"/>
+</toolbar>

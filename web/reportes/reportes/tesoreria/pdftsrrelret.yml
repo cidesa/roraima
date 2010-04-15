@@ -1,0 +1,38 @@
+Parametros:
+  bussines: Tsrrelret
+  cfpdf : fpdf
+
+PDFreporte:
+  fpdf: [P, mm, Letter]
+  variablessql: [fechades, fechahas, numorddes, numordhas, facdes, fachas, cedrifdes, cedrifhas]
+  variablesgen: [index=0]
+  dinfunciones:  [llenartitulos()]
+  dingenerales:
+    setxy=> 10,45:
+    cell=>  10,5,'prueba de pdf',0,0,R:
+
+Header:
+  cabecera: true
+  variables: []
+  dinamica:
+    :setFont => arial,B,9
+    :setTextcolor=> 155,0,0
+    :MCplus=> 10,10,"-----".%index,0,0,"C"
+    :setTextcolor=> 0,0,0
+    :cell=> 10,10,"----lkjn-",0,0,"C"
+    :setTextcolor=> 155,0,0
+    :MCplus=> 10,10,"----paso la pruebad-",0,0,"C"
+
+Cuerpo:
+  variables: []
+  dinamica:
+
+
+Footer:
+  footer: true
+  variables: []
+  dinamica:
+    setFont=> arial,B,9:
+    setTextcolor=> 155,0,0:
+    cell=> 50,5,"_rr___________________",0,0,"C":
+    cell=> 50,5,"__________cc__________",0,0,"C":

@@ -1,0 +1,180 @@
+methods:
+  post:
+   - "caregart{codart}"
+   - "caregart{desart}"
+   - "caregart{ramart}"
+   - "caregart{codcta}"
+   - "caregart{unimed}"
+   - "caregart{unialt}"
+   - "caregart{relart}"
+   - "caregart{exitot}"
+   - "caregart{cosult}"
+   - "caregart{cospro}"
+   - "caregart{invini}"
+   - "caregart{fecult}"
+   - "caregart{codartsnc}"
+   - "caregart{codpar}"
+names:
+  caregart{codart}:
+    required:  Yes
+    required_msg: El Código del Articulo no puedo estar en Blanco
+    validators: [UniqueValidator]
+
+  caregart{desart}:
+    required:  Yes
+    required_msg: El Descripción no puedo estar en Blanco
+    validators: DescripcionValidator
+
+  caregart{ramart}:
+    required:  No
+    validators: RamoValidator
+
+  caregart{codartsnc}:
+    required:  No
+    validators: SncValidator
+
+  caregart{codcta}:
+    required:  No
+    validators: CuentaValidator
+
+  caregart{unimed}:
+    required:  No
+    validators: UnidadValidator
+
+  caregart{unialt}:
+    required:  No
+    validators: UnidadaltValidator
+
+  caregart{relart}:
+    required:  No
+    validators: RelacionValidator
+
+  caregart{exitot}:
+    required:  No
+    validators: MontoValidator, MyNumberValidator
+
+  caregart{cosult}:
+    required:  No
+    validators: MontoValidator, MyNumberValidator
+
+  caregart{cospro}:
+    required:  No
+    validators: MontoValidator, MyNumberValidator
+
+  caregart{invini}:
+    required:  No
+    validators: MontoValidator, MyNumberValidator
+
+  caregart{fecult}:
+    required:  No
+    validators: FechaValidator, FechaValidator1
+
+  caregart{codpar}:
+    required:  No
+    validators: PartidaValidator
+
+DescripcionValidator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La Descripción no puede tener menos de 2 caracteres
+        max:       1500
+        max_error: La Descripción no puede pasar mas de 1500 caracteres
+
+UnidadaltValidator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La Unidad Alternativa no puede tener menos de 2 caracteres
+        max:       15
+        max_error: La Unidad Alternativa no puede pasar mas de 15 caracteres
+
+UnidadValidator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La Unidad de Medida no puede tener menos de 2 caracteres
+        max:       15
+        max_error: La Unidad de Medida no puede pasar mas de 15 caracteres
+
+RelacionValidator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La Relación no puede tener menos de 2 caracteres
+        max:       25
+        max_error: La Relación no puede pasar mas de 25 caracteres
+
+MyCidesaMaskValidator:
+    class: CidesaMaskValidator
+    param:
+        class:        cadefart
+        columnmask:   forart
+        columndiv:    rupart
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Caregart
+        column:   codart
+        unique_error:   El Código del Articulo ya existe. Por Favor, Cambiélo por otro.
+
+RamoValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Caramart
+        column:   ramart
+        unique_error:   El Código del Ramo no existe.
+
+PartidaValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Nppartidas
+        column:   codpar
+        unique_error:   El Código de la Partida no existe.
+
+SncValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Cacatsnc
+        column:   codsnc
+        unique_error:   El Código del Catalogo SNC  no existe.
+
+CuentaValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Contabb
+        column:   codcta
+        unique_error:   El Código de la Cuenta Contable no existe.
+
+FechaValidator:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha  introducida es invalida
+
+MontoValidator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^([0-9]*(\.*([0-9]{2,}))*\,?[0-9]+|[0-9]+\,?[0-9]*)?$/' ]
+        values_error: El valor introducido no cumple con el formato para montos
+
+MyNumberValidator:
+    class: sfNumberValidator
+    param:
+        type:         decimal
+        type_error:   Por favor, Introduzca Números Decimales
+        nan_error:    Por Favor, introduzca un Número Decimal
+        min:          000000000000.00
+        min_error:    El valor tiene que ser mayor que cero
+        max:          999999999999.99
+        max_error:    El valor debe contener maximo 999.999.999.999,99
+
+FechaValidator1:
+    class:         CidesaDateNow
+    param:
+        compare: 'now'
+        compare_error: Esta Fecha no puede ser mayor a la Fecha Actual
+        operator: '<='
+        date_error:  Fecha Inválida

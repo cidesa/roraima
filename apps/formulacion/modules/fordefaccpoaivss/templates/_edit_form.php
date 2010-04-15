@@ -1,0 +1,205 @@
+<?php
+/**
+ * Funciones de la vista.
+ *
+ * @package    Roraima
+ * @subpackage vistas
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id$
+ */
+// date: 2007/03/27 17:06:37
+?>
+<?php echo form_tag('fordefaccpoaivss/edit', array(
+  'id'        => 'sf_admin_edit_form',
+  'name'      => 'sf_admin_edit_form',
+  'multipart' => true,
+)) ?>
+
+<?php echo object_input_hidden_tag($fordefaccpoa, 'getId') ?>
+
+<fieldset id="sf_fieldset_none" class="">
+<legend>Sub Accion</legend>
+<div class="form-row">
+  <?php echo label_for('fordefaccpoa[codsubacc]', __($labels['fordefaccpoa{codsubacc}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('fordefaccpoa{codsubacc}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('fordefaccpoa{codsubacc}')): ?>
+    <?php echo form_error('fordefaccpoa{codsubacc}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($fordefaccpoa, 'getCodsubacc', array (
+  'size' => 20,
+  'control_name' => 'fordefaccpoa[codsubacc]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+</div>
+
+<div class="form-row">
+  <?php echo label_for('fordefaccpoa[dessubacc]', __($labels['fordefaccpoa{dessubacc}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('fordefaccpoa{dessubacc}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('fordefaccpoa{dessubacc}')): ?>
+    <?php echo form_error('fordefaccpoa{dessubacc}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_textarea_tag($fordefaccpoa, 'getDessubacc', array (
+  'size' => '80x3',
+  'control_name' => 'fordefaccpoa[dessubacc]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+</div>
+</fieldset>
+
+<fieldset id="sf_fieldset_none" class="">
+<legend>Datos de la Meta</legend>
+<div class="form-row">
+  <?php echo label_for('fordefaccpoa[metsubacc]', __($labels['fordefaccpoa{metsubacc}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('fordefaccpoa{metsubacc}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('fordefaccpoa{metsubacc}')): ?>
+    <?php echo form_error('fordefaccpoa{metsubacc}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($fordefaccpoa, 'getMetsubacc', array (
+  'size' => 80,
+  'control_name' => 'fordefaccpoa[metsubacc]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+</div>
+
+<div class="form-row">
+  <?php echo label_for('fordefaccpoa[codunimed]', __($labels['fordefaccpoa{codunimed}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('fordefaccpoa{codunimed}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('fordefaccpoa{codunimed}')): ?>
+    <?php echo form_error('fordefaccpoa{codunimed}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($fordefaccpoa, 'getCodunimed', array (
+  'size' => 20,
+  'control_name' => 'fordefaccpoa[codunimed]',
+)); echo $value ? $value : '&nbsp;' ?>
+&nbsp;
+<?php echo button_to('...','#')?>
+&nbsp;&nbsp;
+<?php echo input_tag('unimed',$unimed,'size=30,disabled=true') ?>
+    </div>
+</div>
+
+<div class="form-row">
+  <?php echo label_for('fordefaccpoa[metpritri]', __($labels['fordefaccpoa{metpritri}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('fordefaccpoa{metpritri}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('fordefaccpoa{metpritri}')): ?>
+    <?php echo form_error('fordefaccpoa{metpritri}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+  
+&nbsp;&nbsp;&nbsp;&nbsp;
+  <strong>I</strong>
+  <?php $value = object_input_tag($fordefaccpoa, 'getMetpritri', array (
+  'size' => 7,
+  'control_name' => 'fordefaccpoa[metpritri]',
+)); echo $value ? $value : '&nbsp;' ?>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<strong>II</strong>
+<?php $value = object_input_tag($fordefaccpoa, 'getMetsegtri', array (
+  'size' => 7,
+  'control_name' => 'fordefaccpoa[metsegtri]',
+)); echo $value ? $value : '&nbsp;' ?>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<strong>III</strong>
+<?php $value = object_input_tag($fordefaccpoa, 'getMettertri', array (
+  'size' => 7,
+  'control_name' => 'fordefaccpoa[mettertri]',
+)); echo $value ? $value : '&nbsp;' ?>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<strong>IV</strong>
+<?php $value = object_input_tag($fordefaccpoa, 'getMetcuatri', array (
+  'size' => 7,
+  'control_name' => 'fordefaccpoa[metcuatri]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>&nbsp; &nbsp;&nbsp;&nbsp;
+</div>
+
+<div class="form-row">
+  <?php echo label_for('fordefaccpoa[mettot]', __($labels['fordefaccpoa{mettot}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('fordefaccpoa{mettot}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('fordefaccpoa{mettot}')): ?>
+    <?php echo form_error('fordefaccpoa{mettot}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+ <?php $value = object_input_tag($fordefaccpoa, 'getMettot', array (
+  'size' => 7,
+  'control_name' => 'fordefaccpoa[mettot]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+</div>
+</fieldset>
+
+<fieldset id="sf_fieldset_none" class="">
+<legend>Datos Generales</legend>
+<div class="form-row">
+  <?php echo label_for('fordefaccpoa[locsubacc]', __($labels['fordefaccpoa{locsubacc}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('fordefaccpoa{locsubacc}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('fordefaccpoa{locsubacc}')): ?>
+    <?php echo form_error('fordefaccpoa{locsubacc}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_textarea_tag($fordefaccpoa, 'getLocsubacc', array (
+  'size' => '80x5',
+  'control_name' => 'fordefaccpoa[locsubacc]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+</div>
+
+<div class="form-row">
+  <?php echo label_for('fordefaccpoa[indgessubacc]', __($labels['fordefaccpoa{indgessubacc}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('fordefaccpoa{indgessubacc}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('fordefaccpoa{indgessubacc}')): ?>
+    <?php echo form_error('fordefaccpoa{indgessubacc}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_textarea_tag($fordefaccpoa, 'getIndgessubacc', array (
+  'size' => '80x5',
+  'control_name' => 'fordefaccpoa[indgessubacc]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+</div>
+
+<div class="form-row">
+  <?php echo label_for('fordefaccpoa[medversubacc]', __($labels['fordefaccpoa{medversubacc}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('fordefaccpoa{medversubacc}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('fordefaccpoa{medversubacc}')): ?>
+    <?php echo form_error('fordefaccpoa{medversubacc}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_textarea_tag($fordefaccpoa, 'getMedversubacc', array (
+  'size' => '80x5',
+  'control_name' => 'fordefaccpoa[medversubacc]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+</div>
+
+<div class="form-row">
+  <?php echo label_for('fordefaccpoa[supsubacc]', __($labels['fordefaccpoa{supsubacc}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('fordefaccpoa{supsubacc}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('fordefaccpoa{supsubacc}')): ?>
+    <?php echo form_error('fordefaccpoa{supsubacc}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_textarea_tag($fordefaccpoa, 'getSupsubacc', array (
+  'size' => '80x5',
+  'control_name' => 'fordefaccpoa[supsubacc]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+</div>
+</fieldset>
+
+<?php include_partial('edit_actions', array('fordefaccpoa' => $fordefaccpoa)) ?>
+
+</form>
+
+<ul class="sf_admin_actions">
+      <li class="float-left"><?php if ($fordefaccpoa->getId()): ?>
+<?php echo button_to(__('delete'), 'fordefaccpoaivss/delete?id='.$fordefaccpoa->getId(), array (
+  'post' => true,
+  'confirm' => __('Are you sure?'),
+  'class' => 'sf_admin_action_delete',
+)) ?><?php endif; ?>
+</li>
+  </ul>

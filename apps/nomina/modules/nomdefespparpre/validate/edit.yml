@@ -1,0 +1,35 @@
+methods:
+  post:
+   - "npdefespparpre{codnom}"
+   - "npdefespparpre{numdiames}"
+   - "npdefespparpre{numdiamaxano}"
+
+names:
+  npdefespparpre{codnom}:
+    required:  Yes
+    required_msg: El Código de la Nómina no puede estar en Blanco.
+    validators: Validator_codnom
+
+  npdefespparpre{numdiames}:
+    required:  Yes
+    required_msg: El Número de Días por Mes no puede estar en blanco
+    validators: MyNumberValidator
+
+  npdefespparpre{numdiamaxano}:
+    required:  Yes
+    required_msg: El Número de Días Máximo por Año no puede estar en blanco
+    validators: MyNumberValidator
+
+MyNumberValidator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^([0-9]*(\.*([0-9]{2,}))*\,?[0-9]+|[0-9]+\,?[0-9]*)?$/' ]
+        values_error:El Campo solo puede contener valores númericos
+        
+Validator_codnom:
+    class: CidesaExistValidator
+    param:
+        class:        Npnomina
+        column:       codnom
+        unique_error: El Código de la Nómina debe Existir.        
+    

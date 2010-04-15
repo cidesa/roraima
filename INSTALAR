@@ -1,0 +1,241 @@
+----- INSTALACIÓN DE RORAIMA 1.0.1 -------------
+
+Roraima 1.0.1 es un sistema administrativo para entes gubernamentales
+basado en las premisas del software libre, amparado en la licencia GPL v2
+
+Este proyecto fue creado por CIDE S.A. (www.cidesa.com.ve) una empresa 
+venezolana comprometida con el software libre y el desarrollo venezolano
+
+Para instalar _Roraima_ necesitas los siguientes paquetes:
+
+* PHP5 (php5)
+* Apache2 (apache2)
+* Modulo de PHP5 para Apache2 (libapache2-mod-php5)
+* Modulo de Postgres para PHP5 (php5-pgsql)
+* Modulo de XSL para PHP5 (php5-xsl)
+* PostgreSQL 8.1 u 8.2 (postgresql-8.1 u postgresql-8.2) (no es compatible todavia con el 8.3)
+
+El proceso de instalación sería el siguiente:
+
+(Compatible con Debian, Ubuntu y Canaima)
+
+_NOTA_: todos los comandos deben ser ejecutados como root
+
+Para cambiarte a root:
+   * En debian y Canaima: 
+   # su
+
+   * En Ubuntu:
+   # sudo su
+
+1- Instalar los paquetes necesario (menos el manejador de base de datos):
+
+   # apt-get install apache2 php5 php5-pgsql php5-xsl libapache2-mod-php5
+
+2- Configurar PHP5
+ 
+   # nano /etc/php5/apache2/php.ini
+
+   Se modifican las siguientes líneas:
+
+   Memory_limit = 512M ; o 1/3 de la memoria de la maquina si el resultado es mayor a 512M ej. Si tengo 2GB 1/3 = 600M > 512
+   max_input_time = 120 ; 
+   max_execution_time = 500 ;
+   session.name = cidesa
+
+3- Copiar el código (archivo roraima_v1.0.1.tar.gz) en la carpeta /var/www:
+
+   # cp DIRECCION_DESCARGA/roraima_v1.0.1.tar.gz /var/www
+
+4- Movernos a la carpeta /var/www
+
+   # cd /var/www
+
+5- Descomprimir roraima_v1.0.1.tar.gz:
+
+   # tar zxvf roraima_v1.0.1.tar.gz
+
+6- Cambiar el dueño de la carpeta:
+
+   # chown -R www-data:root cidesa
+
+7- Copiar el archivo de configuracion de apache que trae el Roraima a la 
+carpeta site-available de apache2:
+
+   # cp cidesa/roraima/roraima.apache /etc/apache2/sites-available/roraima
+
+8- Configuración de apache2:
+
+   habilitamos la configuración que acabamos de copiar
+   # a2ensite roraima
+
+   Habilitamos el modulo speling para el case sensitive
+   # a2enmod speling
+
+   Deshabilitamos la configuración por defecto
+   # a2dissite default
+
+9- Reiniciar Apache2:
+
+   # /etc/init.d/apache2 restart
+
+10- Instalar PostgreSQL 8.1 u 8.2
+
+   Verificamos la version de PostgreSQL instalable
+   # apt-cache -n search postgresql-8
+
+   Para 8.1:
+   # apt-get install postgresql-8.1
+
+   Para 8.2:
+   # apt-get install postgresql-8.2
+
+NOTA: si tu distribución no contiene postgresql 8.1 u 8.2 (si no que tiene la 8.3), puedes 
+usar el repositorio de debian etch para instalar la version 8.1 de la siguiente manera:
+
+   * Agregar el repositorio de debian etch en el sources.list
+
+      # nano /etc/apt/sources.list
+
+      La siguiente línea:
+
+      deb http://ftp.de.debian.org/debian/ etch main contrib non-free
+
+      NOTA: Deshabilitar las demás líneas del sources.list mientras se instala el postgresql
+
+    * Actualizar el repositorio local:
+
+      # apt-get update
+
+    * Instalar postgresql 8.1
+
+      # apt-get install postgresql-8.1
+
+    * Remover o comentar la línea del repositorio de debian etch, y habilitar de nuevo
+      las lineas que originalmente trae el sources.list
+
+      # nano /etc/apt/sources.list
+
+11- Configurar PostgreSQL:
+
+    * Modificar la interfaz por la cual escuchará postgresql
+
+      Si instalaste postgresql 8.1
+      # nano /etc/postgresql/8.1/main/postgresql.conf
+
+      Si instalaste postgresql 8.2
+      # nano /etc/postgresql/8.2/main/postgresql.conf
+
+      Se debe _descomentar_ la linea con el valor "listen_addresses", y colocarlo de la 
+      siguiente manera:
+
+      listen_addresses = '*'
+
+      Esto le indica a postgresql que escuche la conexion de clientes conectados a 
+      cualquier interfaz que tenga el equipo.
+
+    * Modificar las ip que procesará el servidor:
+
+      Si instalaste postgresql 8.1
+      # nano /etc/postgresql/8.1/main/pg_hba.conf
+
+      Si instalaste postgresql 8.2
+      # nano /etc/postgresql/8.2/main/pg_hba.conf
+
+      Se debe configurar las conexiones locales de la siguiente forma:
+
+      # IPv4 local connections:
+      host    all         all         0.0.0.0 0.0.0.0       md5
+
+      Esto habilitará a postgresql a que escuche cualquier petición de cualquier ip de la red.
+
+    * Crear los usuarios de la base de datos:
+
+      Nos cambiamos a usuario postgres
+
+      # su postgres
+
+      Creamos el usuario postgres (aunque ya existe); esto se realiza para darle rol de adminstrador
+
+      # createuser postgres
+      NOTA: cuando te pregunte si quieres cambiar el rol del usuario a Administrador debes decir "S" de sí
+
+      Creando el usuario cidesa
+
+      # createuser cidesa
+      NOTA: cuando te pregunte si quieres cambiar el rol del usuario a Administrador debes decir "S" de sí
+
+    * Crear la base de datos:
+
+      Seguimos como usuario postgres
+      Creamos la base de datos
+      # createdb SIMA -E UTF8
+
+      Creamos el lenguaje procedural que usará la base de datos
+      # createlang plpgsql SIMA
+      
+    * Cambiamos las contraseñas de los usuarios creados:
+
+      Seguimos como usuario postgres
+      
+      # psql SIMA
+
+      Una vez dentro de la base de datos cambiamos las contraseñas
+
+      SIMA=# alter user postgres with  password 'postgres';
+      SIMA=# alter user cidesa with  password 'cidesa';
+
+      Nos salimos de la consola de postgresql
+      SIMA=# \q
+
+    * Cerramos la sesion del usuario postgres
+
+      # exit
+
+    * Reinciamos el postgresql
+
+      Si instalaste postgresql 8.1
+      # /etc/init.d/postgresql-8.1 restart
+
+      Si instalaste postgresql 8.2
+      # /etc/init.d/postgresql-8.2 restart
+
+12- Importar la base de datos:
+
+   Nos cambiamos al usuario postgresql
+   # su postgres
+
+   Restauramos la base de datos que contiene el código de Roraima
+   # pg_restore -i -h localhost -p 5432 -U postgres -d "SIMA" -v "/var/www/cidesa/roraima/data/roraima.backup"
+
+   NOTA: la contraseña que te va a pedir es la contraseña del usuario postgres que es "postgres"
+   como se configuro en el paso 11.
+
+13- Verificamos la instalación:
+
+   En el mozilla firefox:
+   http://localhost/
+
+   Si todo esta correcto te debe cargar el formulario de inicio de sesion.
+
+   Si te muestra el mensaje "Ha ocurrido una vicisitud", debes entrar en el entorno de desarrollo
+   de la siguiente manera:
+
+   http://localhost/autenticacion_dev.php/login
+   Al llamar a este formulario te debe aparecer la descripción del error ocurrido y en base a este 
+   debes verificar y solventar cualquier problema que se presente.
+
+14- Obtener ayuda:
+
+   Siempre puedes contactarnos por el correo desarrollo@cidesa.com.ve y gustosamente te atenderemos 
+   a la brevedad posible
+
+
+Gracias por usar Roraima.... esperamos tus comentarios a través del correo desarrollo@cidesa.com.ve
+
+
+
+
+
+
+

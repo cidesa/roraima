@@ -1,0 +1,34 @@
+<?php
+/**
+ * Funciones de la vista.
+ *
+ * @package    Roraima
+ * @subpackage vistas
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id$
+ */
+// date: 2007/03/22 10:46:45
+?>
+<?php use_helper('Object', 'Validation', 'ObjectAdmin', 'I18N', 'Date') ?>
+
+<?php use_stylesheet('/sf/sf_admin/css/main') ?>
+
+<div id="sf_admin_container">
+
+<h1><?php echo __('Edición de Conceptos', 
+array()) ?></h1>
+
+<div id="sf_admin_header">
+<?php include_partial('nomdefespcon/edit_header', array('npdefcpt' => $npdefcpt)) ?>
+</div>
+
+<div id="sf_admin_content">
+<?php include_partial('nomdefespcon/edit_messages', array('npdefcpt' => $npdefcpt, 'labels' => $labels)) ?>
+<?php include_partial('nomdefespcon/edit_form', array('npdefcpt' => $npdefcpt, 'formato' => $formato, 'longitud' => $longitud, 'labels' => $labels)) ?>
+</div>
+
+<div id="sf_admin_footer">
+<?php include_partial('nomdefespcon/edit_footer', array('npdefcpt' => $npdefcpt)) ?>
+</div>
+
+</div>

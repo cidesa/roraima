@@ -1,0 +1,28 @@
+Parametros:
+  modulo: ciudadanos
+  nomrep: atacta
+  titulo: ACTA DE DONACION
+  orientacion: Vertical
+  tipopagina: Carta
+  width:210
+
+Filas:
+  CATALOGO CODCON:
+    tipotag:   inputcat_tag
+    label: N&uacute;mero de Expediente:
+    sql:   select min(nroexp) as codmin,max(nroexp) as codmax from atayudas
+    nomdes: codexpdes
+    campodes: codmin
+    catdes: 0
+    #nomhas: codexphas
+    #campohas: codmax
+    #cathas: 1
+    nomcat: atayudas
+    size: 20
+  FIRMA:
+    tipotag:   input_tag
+    label: Director(a) de la Secretaria:
+    nomdes: dire
+    campodes: Lic. Eva Yazmin Martinez de Ramirez
+    size: 20
+

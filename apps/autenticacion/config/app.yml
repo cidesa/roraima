@@ -1,0 +1,8 @@
+all:
+   .apps:
+     autenticacion:    autenticacion
+     max_per_page:     15
+     contabilidadpresupuesto: /var/www/cidesa/roraima/web/cp/
+     reportes:         /var/www/cidesa/roraima/web/reportes/
+     this: autenticacion
+

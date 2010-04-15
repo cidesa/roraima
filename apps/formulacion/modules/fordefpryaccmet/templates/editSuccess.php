@@ -1,0 +1,34 @@
+<?php
+/**
+ * Funciones de la vista.
+ *
+ * @package    Roraima
+ * @subpackage vistas
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id$
+ */
+// date: 2007/06/19 12:42:22
+?>
+<?php use_helper('Object', 'Validation', 'ObjectAdmin', 'I18N', 'Date', 'Javascript', 'PopUp', 'Grid') ?>
+
+<?php use_stylesheet('/sf/sf_admin/css/main') ?>
+
+<div id="sf_admin_container">
+
+<h1><?php echo __('Edición de Metas Asociadas a Proyectos y Acciones Específicas', 
+array()) ?></h1>
+
+<div id="sf_admin_header">
+<?php include_partial('fordefpryaccmet/edit_header', array('fordefpryaccmet' => $fordefpryaccmet)) ?>
+</div>
+
+<div id="sf_admin_content">
+<?php include_partial('fordefpryaccmet/edit_messages', array('fordefpryaccmet' => $fordefpryaccmet, 'labels' => $labels)) ?>
+<?php include_partial('fordefpryaccmet/edit_form', array('fordefpryaccmet' => $fordefpryaccmet, 'mascaraproyecto' => $mascaraproyecto, 'mascaraaccion' => $mascaraaccion, 'obj' => $obj, 'obj2' => $obj2, 'lonpry' => $lonpry, 'lonacc' => $lonacc, 'labels' => $labels)) ?>
+</div>
+
+<div id="sf_admin_footer">
+<?php include_partial('fordefpryaccmet/edit_footer', array('fordefpryaccmet' => $fordefpryaccmet)) ?>
+</div>
+
+</div>

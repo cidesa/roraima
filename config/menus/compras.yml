@@ -1,0 +1,125 @@
+compras:
+  opciones:
+    activo: true #true/false
+    descripcion: Módulo de Compras y Almacen
+    imagen: compras.gif
+    nombre: Compras y Almacén
+    urls:
+      Cambiar Contraseña:
+        modulo: autenticacion.php
+        modulo_dev: autenticacion_dev.php
+      default:
+        modulo: compras.php
+        modulo_dev: compras_dev.php
+      División Territorial:
+        modulo: obras.php
+        modulo_dev: obras_dev.php
+      Reportes:
+        absoluta: reportes/reportes/compras
+    imagenes:
+      default: OperatorClass.png
+  menu:
+    Definiciones Generales:
+      Definición Generales:                                   Almcongen
+      Definición de Banco:                                    AlmBanco
+      Definición de Grupos de Recaudos:                       AlmTipRecPro
+      Definición de Recaudos:                                 AlmRegRec
+      Registro de Proveedores:                                AlmRegPro
+      Definición de Condiciones de Pago:                      AlmConPag
+      Definición de Formas de Entrega:                        AlmForEnt
+      Definición de Razones de Compra:                        AlmRazCom
+      Definición de Rangos de Cotizaciones:                   AlmDefCot
+      Definición de Motivos de Faltantes:                     AlmMotFal
+      Definición de Tipos de Entrada:                         AlmTipEnt
+      Definición de Tipos de Salida:                          AlmTipSal
+      Definición de Tipo de Proyecto:                         almtippro
+      Definición de Ubicaciones:                              AlmDefUbi
+      Ramos de Artículos:                                     AlmRamArt
+      División Territorial:
+        Pais:                                                 oycdefdivpai
+        Estado:                                               oycdefdivest
+        Municipio:                                            oycdefdivmun
+    Artículos:
+      Definición de Artículos:                                AlmDefArt
+      Registro de Artículos y+o Servicios:                    AlmRegArt
+      Registro de Recargos:                                   AlmRegRgo
+     # Asociación  de Retenciones a Servicios:                 AlmRetSer
+    Compras:
+      Requisiciones por Departamento (Solicitud de Egresos):  AlmSolEgr
+      Aprobación de Solicitud de Egresos:                     AlmAprSolEgr
+      Cotizaciones:                                           AlmCotiza
+      Asignación de Prioridades a Cotizaciones:               AlmPriori
+      Ordenes de Compra  y+o Servicio:                        AlmOrdCom
+      #Ordenes de Servicio:                                   AlmOrdSer
+      #Registro de Contratos:                                 AlmContrato
+      Ajuste a Ordenes de Compra:                             AlmAjuOC
+    Almacen:
+      Definiciones Generales:                                 AlmDefAlm
+      Requisiciones:                                          AlmReq
+      Aprobación de Requisiciones en Lote:                    AlmAprReq
+      Recepción de Ordenes de Compra:                         AlmOrdRec
+      #Recepción de Productos Terminados:                     AlmOrdRecTer
+      Despachos:                                              AlmDesp
+      Entradas a Almacen:                                     AlmEntAlm
+      Salidas de Almacen:                                     AlmSalAlm
+      Inventario Físico:                                      AlmInvFis
+      Traspaso entre Almacenes:                               AlmTraAlm
+      Requisición de Servicio:                                AlmReqSer
+      Prestación de Servicio:                                 AlmDespSer
+      #Despachos con Pistola:                                 AlmDespPist
+      #Devolución de Despacho:                                AlmDevDes
+    SNC:
+      Catalogo SNC:                                           almdefcatsnc
+      Tipos de Empresas Proveedoras:                          almtipemp
+      Medios de Comunicacion:                                 almmedcom
+      Procedimientos de Ejecucion de Compras:                 almprocom
+      Programar Compras de Articulos:                         almprocomart
+    Reportes:
+      Generales:
+        Catálogo de Artículos:                                CARCATART.php
+        Catálogo de Ramos:                                    CARRAMART.php
+        Catálogo de Ubicaciones:                              CARDEFUBI.php
+        Catálogo de Proveedores:                              CARPROVEE.php
+        Catálogo de Almacenes:                                CARDEFALM.php
+        Catálogo de Recaudos:                                 CARRECAUD.php
+        Catálogo de Recargos:                                 CARRECARG.php
+        Catálogo de Condiciones de Pago:                      CARCONPAG.php
+        Catálogo de Formas de Entrega:                        CARFORENT.php
+        Catálogo de Razones de Compra:                        CARRAZCOM.php
+        Catálogo de Rangos de Cotizaciones:                   CARDEFCOT.php
+        Ficha del Proveedor:                                  CARFICPRO.php
+        #Catálogo de Tipos de Entrada al Almacen:             cartipent.php
+      Movimientos:
+        Requisiciones:                                        CARREQART.php
+        Recepciones:                                          CARRCPART.php
+        Despachos:                                            CARDPHART.php
+        Ordenes de Compra:                                    CARDETORD.php
+        Ordenes de Servicio:                                  CARDETORDS.php
+        Recepciones y Diferencias:                            CARRCPORD.php
+        Despachos y Diferencias:                              CARREQDPH.php
+        Resumen de Movimientos:                               CARMOVART.php
+      Formas Preimpresas:
+        Etiquetas de Articulos:                               CARETIQUE.php
+        Requisiciones:                                        CARREQPRE.php
+        Solicitud de Autorización de Egreso:                  CARSOLEGR.php
+        Solicitud de Egreso                                   CARSOLEGRPRE.php
+        Recepciones:                                          CARRCPPRE.php
+        Despachos:                                            CARDPHPRE.php
+        Ordenes de Compra:                                    CARORDPRE.php
+        Ordenes de Servicio:                                  CARORDSER.php
+        Constancia de Inscripción Provisional De Proveedores: CARCONINSPRO.php
+      Almacén:
+        Valorización de Inventario:                           carvalinv.php
+        Relación Inventario Almacén:                          CARRELINVALM.php
+        Hoja de Conteo Físico:                                CARCONFIS.php
+        Inventario Físico Valorado:                           CARINVFIS.php
+        Stock Máximo:                                         CARSTOMAX.php
+        Stock Mínimo:                                         CARSTOMIN.php
+        Punto de Reorden:                                     CARPTOREO.php
+    Mantenimiento:
+      #Clasificador de Partidas Presupuestarias:               NomManClaPre.php
+      Traspaso de Inventario Fisico a Lógico:                 almtrainv
+      Cambiar Contraseña:                                     cambiopasswd
+      #Importar Productos:                                    ImportarProductos.php
+      #Actualizar Precios y Existencias:                      ActualizarProductos.php
+      #Cambiar Password de Usuario:                           PreCamPwd.php

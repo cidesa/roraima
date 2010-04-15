@@ -1,0 +1,7 @@
+methods:
+  post:
+   - "npliquidacion_det{codemp}"
+names:
+  npliquidacion_det{codemp}:
+    required:  Yes
+    required_msg: El Codigo del Empleado no puede estar en blanco    

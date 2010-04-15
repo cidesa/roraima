@@ -1,0 +1,73 @@
+Parametros:
+  modulo: nomina
+  nomrep: nprhistlistconc
+  titulo: HISTORICO DE CONCEPTOS
+  orientacion: Vertical
+  tipopagina: Carta
+  width:210
+
+Filas:
+  CATALOGO CODCON:
+    tipotag:   inputcat_tag
+    label:  Concepto:
+    sql:   SELECT min(codcon) as codconmin,max(codcon) as codconmax FROM NPASICONEMP
+    nomdes: codconmin
+    campodes: codconmin
+    catdes: 0
+    nomhas: codconmax
+    campohas: codconmax
+    cathas: 1
+    nomcat: codcon
+    size: 20
+
+  CATALOGO CODEMP:
+    tipotag:   inputcat_tag
+    label: Código Empleado:
+    sql:   SELECT min(CODEMP) as codempmin,max(codemp) as codempmax FROM NPASICAREMP
+    nomdes: codempmin
+    campodes: codempmin
+    catdes: 2
+    nomhas: codempmax
+    campohas: codempmax
+    cathas: 3
+    nomcat: codemp
+    size: 20
+
+  CATALOGO CODCAR:
+    tipotag:   inputcat_tag
+    label:  Cargo:
+    sql:   SELECT min(codcar) as codcarmin,max(codcar) as codcarmax FROM NPASICAREMP
+    nomdes: codcarmin
+    campodes: codcarmin
+    catdes: 4
+    nomhas: codcarmax
+    campohas: codcarmax
+    cathas: 5
+    nomcat: codcar
+    size: 20
+
+  CATALOGO CATPRE:
+    tipotag:   inputcat_tag
+    label: Categoria Presupuestaria:
+    sql:   SELECT min(CODCAT) as codcatmin,max(codcat) as codcatmax FROM npcatpre
+    nomdes: codcatmin
+    campodes: codcatmin
+    catdes: 6
+    nomhas: codcatmax
+    campohas: codcatmax
+    cathas: 7
+    nomcat: codcat
+    size: 20
+
+  CATALOGO CODNOM:
+    tipotag:   inputcat_tag
+    label: Nómina:
+    sql:   SELECT min(codnom) as codnommin,max(codnom) as codnommax FROM NPASICAREMP
+    nomdes: codnommin
+    campodes: codnommin
+    catdes: 8
+    nomhas: codnommax
+    campohas: codnommax
+    cathas: 9
+    nomcat: codnom
+    size: 20

@@ -1,0 +1,58 @@
+Parametros:
+  modulo: compras
+  nomrep: cainfrec
+  titulo: Informe de Recomendación
+  orientacion: Vertical
+  width:210
+  tipopagina: Carta
+
+Filas:
+  CATALOGO SOLICITUD:
+    tipotag:   inputcat_tag
+    label: Solicitud de Cotización:
+    sql:   SELECT min(refcot) as refmin, max(refcot) as refmax FROM cacotiza
+    nomdes: codrefdes
+    campodes: refmin
+    catdes: 0
+    nomhas:
+    campohas:
+    cathas: 1
+    nomcat: refcot
+    size: 30
+
+  CATALOGO PROVEEDOR:
+    tipotag:   inputcat_tag
+    label: Rif del Proveedor:
+    sql:   select min(rifpro) as rifmin, max(rifpro) as rifmax from caprovee
+    nomdes: rifpromin
+    campodes: rifmin
+    catdes: 2
+    nomhas: rifpromax
+    campohas:rifmax
+    cathas: 3
+    nomcat: caprovee
+    size: 30
+
+  CAJA MEMO:
+    tipotag:   input_tag
+    label: Memo:
+    nomdes: memo
+    campodes:
+    size: 30
+
+  FECHAREQ:
+    tipotag:   inputfec_tag
+    label: Fecha:
+    sql:select to_char(min(feccot),'dd/mm/yyyy') as fecreqdes from cacotiza
+    nomdes: fecreqdes
+    campodes:fecreqdes
+    nomhas:
+    campohas:
+    size: 22
+
+  CAJA JEFE:
+    tipotag:   input_tag
+    label: Jefe de la Division de Adquisicion de Bienes y Servicios:
+    nomdes: jefe
+    campodes:
+    size: 30

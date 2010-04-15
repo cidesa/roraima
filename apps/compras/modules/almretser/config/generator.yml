@@ -1,0 +1,32 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Caretser
+    theme:            default
+
+    fields:
+      codser: { name: Codigo de Servicio}
+      desart: { name: Nombre de Servicio}
+      codigo: { name: Nombre de Servicio}
+
+    list:
+      title:          Servicio
+      display:        [=codser]
+      filters:		  [codser]
+      max_per_page:	  10
+      sort:           codser
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+
+    edit:
+      title:          Edición de Servicio
+      display:        [codser, desart]
+      fields:
+        codser: { help: Máximo 4 caracteres}
+        desart: { help: Solo Texto}
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

@@ -1,0 +1,16 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Careqart
+    theme:            cidesaGenerator
+
+    fields:
+      grip:   { name: Listado }
+
+    edit:
+      title:          Aprobación de la Requisición por Lotes
+      display:
+        "Requisición":   [_grip]
+
+      actions:
+        _save:        ~

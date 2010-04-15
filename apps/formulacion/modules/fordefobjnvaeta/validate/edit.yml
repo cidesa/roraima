@@ -1,0 +1,29 @@
+methods:
+  post:
+   - "fordefobjestnvaeta{codobjnvaeta}"
+   - "fordefobjestnvaeta{desobjnvaeta}"
+names:
+  fordefobjestnvaeta{codobjnvaeta}:
+    required:  Yes
+    required_msg: El código del Objetivo Estrategico Nueva Etapa no puedo estar en Blanco
+    validators: Validator_codobjnvaeta
+
+  fordefobjestnvaeta{desobjnvaeta}:
+    required:  Yes
+    required_msg: La Descripción del Objetivo Estrategico Nueva Etapa no puedo estar en Blanco
+    validators: Validator_desobjnvaeta
+
+Validator_codobjnvaeta:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Fordefobjestnvaeta
+        column:       codobjnvaeta
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_desobjnvaeta:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La Descripción no puede tener menos de 2 caracteres
+        max:       250
+        max_error: La Descripción no puede pasar mas de 250 caracteres

@@ -1,0 +1,36 @@
+opciones:                  # Opciones generales
+  name:                    a #identificador del grid dentro del formulario
+  eliminar:                false #si kiero qaparezk el boton eliminar
+  tabla:                   contaba1
+  anchogrid:               750
+  ancho:                   700
+  filas:                   0 #filas vacias x defecto
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  id
+  tipo:                    t
+  nombrecampo:             id
+  html:                    [ '' ]
+  oculta:                  true #no c va a ver
+  esgrabable:              false
+2:       # Columna 2
+  titulo:                  Periodo
+  tipo:                    t
+  nombrecampo:             pereje
+  html:                    [size="10" readonly=true ]
+  oculta:                  false
+  esgrabable:              false
+3:       # Columna 3
+  titulo:                  Fecha de inicio
+  tipo:                    t
+  nombrecampo:             fecdes
+  html:                    [size="10"  readonly=true ]
+  oculta:                  false
+  esgrabable:              false
+4:       # Columna 4
+  titulo:                  Fecha de fin
+  tipo:                    t
+  nombrecampo:             fechas
+  html:                    [size="10"  readonly=true ]
+  esgrabable:              false

@@ -1,0 +1,78 @@
+Parametros:
+  modulo: bienes
+  nomrep: bnrmovbiemue
+  titulo: Movimiento de Bienes Muebles
+  orientacion: Vertical
+  tipopagina: Carta
+  width:210
+
+Filas:
+  CATALOGO ACTIVOS:
+    tipotag:   inputcat_tag
+    label: Código del Activo:
+    sql:   SELECT min(a.codact) as codactmin,max(a.codact) as codactmax FROM bnregmue a, bndefact b where a.codact = b.codact
+    nomdes: codactdes
+    campodes: codactmin
+    catdes: 0
+    nomhas: codacthas
+    campohas: codactmax
+    cathas: 1
+    nomcat: codact
+    size: 25
+
+  CATALOGO BIENES:
+    tipotag:   inputcat_tag
+    label: Código del Bien:
+    sql:   SELECT min((codmue)) as codmuemin,max(codmue) as codmuemax FROM bnregmue
+    nomdes: codmuedes
+    campodes: codmuemin
+    catdes: 2
+    nomhas: codmuehas
+    campohas: codmuemax
+    cathas: 3
+    nomcat: codmue
+    size: 25
+
+  FECHA REGISTRO:
+    tipotag:   inputfec_tag
+    label: Fechas de Registro:
+    sql:   SELECT to_char(MIN(fecreg),'DD/MM/YYYY') as fechamin,to_char(max(fecreg),'DD/MM/YYYY') as fechamax FROM bnregmue
+    #DESDE
+    nomdes: fecdes
+    campodes: fechamin
+    #HASTA
+    nomhas: fechas
+    campohas: fechamax
+    size: 15
+
+  TITULOS:
+    tipotag:    titulo_tag
+    nomdes:     NOMBRE
+    nomhas:     CARGO
+
+  CAJA PREPARADO:
+    tipotag:   input_tag
+    label: Preparado:
+    nomdes: prepardes
+    campodes:-1
+    nomhas: preparhas
+    campohas:-1
+    size: 30
+
+  CAJA CONFORMADO:
+    tipotag:   input_tag
+    label: Conformado:
+    nomdes: confordes
+    campodes: -1
+    nomhas: conforhas
+    campohas:-1
+    size: 30
+
+  CAJA APROBADO:
+    tipotag:   input_tag
+    label: Aprobado:
+    nomdes: aprobades
+    campodes:  -1
+    nomhas: aprobahas
+    campohas:-1
+    size: 30

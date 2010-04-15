@@ -1,0 +1,45 @@
+Parametros:
+  modulo: tesoreria
+  nomrep: tsrdetrelcajchi
+  titulo: RELACION DE SALIDA DE CAJA CHICA DETALLE
+  orientacion: Vertical
+  tipopagina: CARTA
+  width:210
+
+Filas:
+  CATALOGO CHEQUES:
+    tipotag:   inputcat_tag
+    label: Nro. Recibo:
+    sql:  Select min(refsal) as refsalmin,max(refsal) as refsalmax from tssalcaj
+    nomdes: refsalmin
+    campodes: refsalmin
+    catdes: 0
+    nomhas: refsalmax
+    campohas: refsalmax
+    cathas: 1
+    nomcat:refmovcajchc
+    size: 22
+
+  CATALOGO BANCO:
+    tipotag:   inputcat_tag
+    label: Beneficiario:
+    sql: Select min(cedrif) as cedrifmin,max(cedrif) as cedrifmax from opbenefi
+    nomdes: cedrifmin
+    campodes: cedrifmin
+    catdes: 2
+    nomhas: cedrifmax
+    campohas: cedrifmax
+    cathas: 3
+    nomcat:benefi
+    size: 22
+
+
+  FECHA ORDEN:
+    tipotag:   inputfec_tag
+    label: Fecha:
+    sql:   select to_char(min(a.fecsal),'dd/mm/yyyy') as fecmin, to_char(max(a.fecsal),'dd/mm/yyyy') as fecmax from tssalcaj a
+    nomdes: fecmin
+    campodes: fecmin
+    nomhas: fecmax
+    campohas: fecmax
+    size: 22

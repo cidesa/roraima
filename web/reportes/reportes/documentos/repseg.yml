@@ -1,0 +1,80 @@
+Parametros:
+  modulo: documentos
+  nomrep: repdoc
+  titulo: Seguimiento de Documentos
+  orientacion: Vertical
+  tipopagina: Carta
+  width:210
+
+Filas:
+  TIPO DE DOCUMENTOS:
+    tipotag:   combo_tag
+    label: Tipo de Documento:
+    sql:   select id, tipdoc from dftabtip union select 0 as id, 'Todos' as tipdoc from empresa order by id
+    nomdes: tipo
+    campodes: id-tipdoc
+    size: 20
+
+  CATALOGO DOCUMENTOS:
+    tipotag:   inputcat_tag
+    label: CATALOGO PRUEBA
+    sql:   SELECT min(coddoc) as coddocmin,max(coddoc) as coddocmax FROM dfatendoc
+    nomdes: codigodes
+    campodes: coddocmin
+    catdes: 0
+    nomhas: codigohas
+    campohas: coddocmax
+    cathas: 1
+    nomcat: coddoc_dfatendoc
+    size: 10
+
+  FECHA RECEPCION:
+    tipotag:   inputfec_tag
+    label: FECHA RECEPCION DOCUMENTO
+    sql:   SELECT min(fecrec) as fechamin, max(fecrec) as fechamax FROM dfatendocdet
+    #DESDE
+    nomdes: fechades
+    campodes: fechamin
+    #HASTA
+    nomhas: fechahas
+    campohas: fechamax
+    #PARAMETROS
+    size: 15
+#  FECHA DOCUMENTO:
+#    tipotag:   inputfec_tag
+#    label: FECHA CREACION DOCUMENTO
+#    sql:   SELECT min(fecdoc) as fechamin,max(fecdoc) as fechamax FROM dfatendoc
+#    #DESDE
+#    nomdes: fechadocdes
+#    campodes: fechamin
+#    #HASTA
+#    nomhas: fechadochas
+#    campohas: fechamax
+#    #PARAMETROS
+#    size: 15
+  FECHA ATENCION:
+    tipotag:   inputfec_tag
+    label: FECHA ATENCION DOCUMENTO
+    sql:   SELECT min(fecate) as fechamin,max(fecate) as fechamax FROM dfatendocdet
+    #DESDE
+    nomdes: fechaatedes
+    campodes: fechamin
+    #HASTA
+    nomhas: fechaatehas
+    campohas: fechamax
+    #PARAMETROS
+    size: 15
+
+  ESTADOS:
+    tipotag:   combof_tag
+    label: Estado de atención:
+    nomdes: estado
+    campodes: [99=>Todos, 0=>Nuevo, 1=>Atendido, 2=>Anulado, 3=>Culminado]
+    size: 20
+
+  ACTIVO ANULADO:
+    tipotag:   combof_tag
+    label: Estado del Documento:
+    nomdes: anulado
+    campodes: [99=>Todos, 0=>Activo, 1=>Anulado]
+    size: 20

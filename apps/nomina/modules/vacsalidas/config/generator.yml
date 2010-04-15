@@ -1,0 +1,52 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Npvacsalidas
+    theme:            cidesaGenerator    
+    fields:
+      display:  [codemp, fecing, fecvac, fecdes, fechas, diasdisfrutar, observa, diaspend, fecpagbonvac]
+      codemp:
+        name: Empleado
+        msj_error: Código de empleado es necesario
+        catalogo:  
+          catalogoweb: Nphispre_Presnomcalintpre
+          clase: Nphojint 
+          ajax: 1
+          parametros: getprincipal="getCodemp" getsecundario="getNomemp" campoprincipal="codemp" camposecundario="nomemp" campobase = "id"                 
+          divupdate: divgridvaca
+      fecing: { name: Fecha de Ingreso, params: date_format='dd/MM/yyyy'}
+      fecvac: { name: Fecha de la Solicitud, params: date_format='dd/MM/yyyy' }
+      fecdes: { name: Fecha de Salida, params: date_format='dd/MM/yyyy'}
+      fechas: { name: Fecha de Incorporaci&oacute;n, params: date_format='dd/MM/yyyy'}
+      fecpagbonvac: { name: Fecha del Pago de Vacaciones, params: date_format='dd/MM/yyyy'}
+      diasdisfrutar: { name: Días  de Vacaciones}
+      observa: { name: Observaciones}
+      diaspend: { name: Días Pendientes}
+      fecsalreg: { name: .}   
+      dias:      {name: .}
+      gridvacaciones: { name: .}
+
+
+    list:
+      title:           Lista de Solicitudes de Vacaciones
+      filters:         [codemp, fecvac, fecdes]
+      display:         [=codemp, nomemp, fecvac, fecdes]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   20
+    
+    
+    edit:
+      title:           Registro de Solicitud de Vacaciones
+      fields:
+        fecing:        { params: style="border:none"}
+        observa:       { type: textarea_tag, params: cols=60}
+      display:
+        Datos Empleados:       [codemp, fecing ]
+        Datos Solicitúd:       [fecvac, _fecsalreg, _dias, observa]
+        Relación Vacaciones:   [_gridvacaciones]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

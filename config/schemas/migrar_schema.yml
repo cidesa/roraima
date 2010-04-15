@@ -1,0 +1,30 @@
+propel:
+  _attributes: { noXsd: false, defaultIdMethod: native, package: lib.model }
+  migrar:
+    #_attributes:
+      #idMethod: native
+    codcta:
+      type: VARCHAR
+      size: 32
+    saldo:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  migrar2:
+    #_attributes:
+      #idMethod: native
+    codcta:
+      type: VARCHAR
+      size: 32
+    saldo:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true

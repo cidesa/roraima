@@ -1,0 +1,24 @@
+Parametros:
+  modulo: nomina
+  nomrep: nprrecpagci
+  titulo: Recibo de Pago
+  orientacion: Vertical
+  tipopagina: Carta
+  width: 210
+Filas:
+  CedulaTag:
+    tipotag:   input_tag
+    label: Cédula
+    nomdes: cedula
+    campodes: -1
+    size: 25
+  MesTag:
+    tipotag:   combof_tag
+    label: Mes
+    nomdes: mes
+    campodes: [01=>Enero, 02=>Febrero, 03=>Marzo, 04=>Abril]
+  AnoTag:
+    tipotag:   combof_tag
+    label: Año
+    nomdes: ano
+    campodes: [2008=>2008, 2009=>2009, 2010=>2010]

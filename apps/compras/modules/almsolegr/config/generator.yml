@@ -1,0 +1,43 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Casolart
+    theme:            default
+    fields:
+      reqart: { name: Número}
+      fecreq: { name: Fecha}
+      tipmon: { name: Moneda}
+      desreq: { name: Descripción}
+      monreq: { name: Monto Total}
+      unires: { name: Unidad Responsable}
+      nomcat: { name: Descripción}
+      #tipreq: { name: Tipo}
+      tipfin: { name: Financiamiento}
+      Nomext: { name: Descripción}
+      motreq: { name: Motivo}
+      benreq: { name: Beneficio}
+      obsreq: { name: Observaciones}
+      mondes: { name: Descripción}
+      valmon: { name: Valor}
+      stareq: { name: estatus}
+      fecanu: { name: Fecha de Anulación}
+    list:
+      title:          Requisiciones por Departamento.(Solicitud de Egresos)
+      filters:        [reqart, desreq, fecreq]
+      display:        [=reqart, desreq]
+      fields:
+        fecreq: { params: date_format='dd/MM/yy' }
+      object_actions:
+        _edit:        ~
+      max_per_page:   10
+      sort:  reqart
+    edit:
+      title:         Edicion de Requisiciones por Departamento.(Solicitud de Egresos)
+      display:        [reqart, fecreq, tipmon, desreq, monreq, unires, nomcat, tipreq, tipfin, Nomext, motreq, benreq, obsreq, mondes, valmon, stareq, fecanu]
+      fields:
+        fecreq: { params: date_format='dd/MM/yy' }
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

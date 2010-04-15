@@ -1,0 +1,51 @@
+opciones:                  # Opciones generales
+  name:                    compromiso
+  eliminar:                false
+  tabla:                   cpcompro
+  anchogrid:               900
+  ancho:                   780
+  filas:                   0
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Aprobar
+  tipo:                    k
+  nombrecampo:             check
+  html:                    [ ]
+  esgrabable:              true
+2:       # Columna 2
+  titulo:                  Rechazar
+  tipo:                    k
+  nombrecampo:             check2
+  html:                    [ ]
+  esgrabable:              true
+3:       # Columna 3
+  titulo:                  Referencia
+  tipo:                    t
+  nombrecampo:             refcom
+  html:                    [size="10" readonly="true"]
+  esgrabable:              true
+4:       # Columna 4
+  titulo:                  Descripcion
+  tipo:                    a
+  nombrecampo:             descom
+  html:                    [size="25x2" readonly="true"]
+  esgrabable:              false
+5:       # Columna 5
+  titulo:                  Fecha
+  tipo:                    f
+  nombrecampo:             feccom
+  html:                    [size="10" readonly="true"]
+  esgrabable:              false
+6:       # Columna 6
+  titulo:                  Monto
+  tipo:                    m
+  nombrecampo:             moncom
+  html:                    [size="10" readonly="true"]
+  esgrabable:              false
+7:       # Columna 7
+  titulo:                  Motivo de Rechazo
+  tipo:                    a
+  nombrecampo:             motrec
+  html:                    [size="20x2" ]
+  esgrabable:              true

@@ -1,0 +1,39 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Opordpag
+    theme:            cidesaGenerator
+    fields:
+      numord: { name: Referencia, params: maxlength=8 onBlur="javascript:event.keyCode=13; enter1(event,this.value);"}
+      fecemi: { name: Fecha de Emisión, params: date_format='dd/MM/yyyy' maxlength=10}
+      desord: { name: Concepto, type: textarea_tag, params: size=80x5 maxlength=1000 onkeyup="javascript:return ismaxlength(this)"}
+      coduni: { name: Unidad Origen}
+      desubi: { name: Descripción}
+      tipfin: { name: Financiamiento, params: maxlength=4}
+      nomext2: { name: Descripción}
+      monord: { name: Monto Total}
+      grid: { name: . }
+    list:
+      title:          Rendición de Caja
+      display:        [=numord, fecemi]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [numord, fecemi]
+      max_per_page:   10
+      sort:           numord
+    edit:
+      title:          Edición de Rendición de Caja
+      display:
+        "Datos": [numord, _fecemi, desord, _coduni, _tipfin, monord]
+        "Imputaciones Presupuestarias": [_grid]
+      hide: [tipcau, cedrif, mascaraubi, lonubi, codcat, idrefer, totalcomprobantes, numcom, filasord]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~
+        _anular:
+          name: Anular
+          only_for: edit
+          params: class="sf_admin_action_delete" onClick="anular()"

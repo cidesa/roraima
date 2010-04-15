@@ -1,0 +1,78 @@
+Parametros:
+  modulo: presupuesto
+  nomrep: preprc
+  titulo: Pagados
+  orientacion: Horizontal
+  width:210
+  tipopagina: Carta
+
+Filas:
+  CATALOGO NROPRECOMPRO:
+    tipotag:   inputcat_tag
+    label: Nro del Pagado:
+    sql:SELECT min(pre1) as pre1, max(pre2) as pre2 from (select min(a.refpag) as pre1 , max(a.refpag) as pre2 from cppagos a, cpdocpag b where a.tippag=b.tippag and b.afepag<>'N' )as j
+    nomdes: pre1
+    campodes: pre1
+    catdes: 0
+    nomhas: pre2
+    campohas: pre2
+    cathas: 1
+    nomcat: cppagos
+    size: 15
+
+  FECHA MOVIMIENTOS:
+    tipotag:   inputfec_tag
+    label: Fecha
+    sql:select to_char(min(fecprc1),'DD/MM/YYYY') as fecprc1, to_char(max(fecprc2 ),'DD/MM/YYYY') as fecprc2  from(SELECT MIN(FECPAG) as fecprc1,MAX(FECPAG) as fecprc2 FROM CPPAGOS) as j
+    #DESDE
+    nomdes: fecprc1
+    campodes: fecprc1
+    #HASTA
+    nomhas: fecprc2
+    campohas: fecprc2
+    #PARAMETROS
+    size: 15
+
+  CATALOGO TIPO:
+    tipotag:   inputcat_tag
+    label: Tipo
+    sql:select min(tipprc1) as tipprc1, max(tipprc2) as tipprc2  FROM (SELECT min(TIPPAG) as tipprc1, max(TIPPAG) as tipprc2 FROM CPDOCPAG WHERE AFEPAG<>'N') as j
+    nomdes: tipprc1
+    campodes: tipprc1
+    catdes: 2
+    nomhas: tipprc2
+    campohas: tipprc2
+    cathas: 3
+    nomcat: cpdocpag
+    size: 15
+
+  COMBO FIJO:
+    tipotag:   combof_tag
+    label: Status
+    nomdes: combodes
+    campodes: [T=>Todos, A=>Activos, N=>Anulados]
+    size: 15
+
+  CATALOGO CODIGO:
+    tipotag:   inputcat_tag
+    label: Codigo Presupuestario:
+    sql:select min(codpre) as valor,max(codpre) as valor2 from CPASIINI
+    nomdes: codpre1
+    campodes: valor
+    catdes: 4
+    nomhas: codpre2
+    campohas: valor2
+    cathas: 5
+    nomcat: cpimpprc
+    size: 15
+
+  COMODIN:
+    tipotag:   input_tag
+    label: Filtro:
+    nomdes: comodin
+    campodes:'%%'
+    size: 15
+
+
+
+

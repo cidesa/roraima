@@ -1,0 +1,32 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Dfatendoc
+    theme:            default
+    fields:
+      coddoc:         { name : Código }
+      desdoc:         { name : Descripción }
+      staate:         { name : Estatus }
+      anuate:         { name : Estado Atencion }
+      estado:         { name : Documento }
+      fecdoc:         { name : Fecha Documentos, type: input_date_tag }
+      id_dftabtip:    { name : Tipo Documento }
+      desate:         { name : Descripción de la Atención }
+      infdoc1:        { name : Inf. Adicional 1 }
+#      destra:         { name : Descripción del medio de transporte }
+#      desate:         { name : Descripción de la Atención/Observación }
+      diaent:         { name : Dias de Entregas }
+      id_dfmedtra:    { name : Medio de Transporte }
+    list:
+      title:          Revisión de Documentos
+      display:        [=coddoc, desdoc, _fecdoc, staate, anuate, estado, infdoc1 ]
+      filters:      [coddoc, desdoc, _staate ]
+      max_per_page:    10
+      object_actions:
+        _edit:        ~
+    edit:
+      title:          Atención de Documentos
+      display:        [coddoc, desdoc, staate, anuate, estado, id_dftabtip, desate, diaent, id_dfmedtra ]
+      actions:
+        _list:        ~
+        _save:        ~

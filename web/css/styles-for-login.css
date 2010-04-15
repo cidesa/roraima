@@ -1,0 +1,399 @@
+body {
+	background: #E5E5E5;
+	font-family: lucida grande, verdana, sans-serif;
+	font-size: 12px;
+	margin: 0;
+	text-align: center;
+}
+
+form {
+  margin: 0;
+  padding: 0;
+}
+
+a.donelink:link,
+a.donelink:visited {
+  color: #000;
+  background: #fc3;
+  font-size: 12px;
+  padding: 0 2px;
+}
+
+a.image img, a img {
+	border: none;
+}
+
+a:link, a:visited {
+	color: #00e;
+}
+
+small {
+  font-size: 9px;
+  color: #666;
+}
+
+dl {
+	margin: 0; padding: 0;
+}
+
+dt {
+	float: left;
+	clear: left;
+	text-align: right;
+	margin: 5px 10px 0 0;
+	width: 100px;
+	font-size: 11px;
+	font-weight: bold;
+}
+
+dd {
+	margin-bottom: 5px;
+	font-size: 11px;
+}
+
+table.form {
+  border-collapse: collapse;
+}
+
+table.form th {
+  text-align: right;
+  color: #666;
+  padding: 0px;
+  padding-right: 5px;
+}
+
+table.form td {
+  text-align: left;
+  padding: 0px;
+}
+
+table.form td input {
+  width: 335px;
+  font-size: 14px;
+  padding: 2px;
+}
+
+table.form tr.url th  {
+  vertical-align: top;
+  line-height: 28px;
+}
+
+table.form tr.url td  {
+  line-height: 14px;
+  font-size: 11px;
+  padding-bottom: 5px;
+}
+
+table.form tr.password td input {
+  width: 200px;
+}
+
+table.form tr.submit td {
+  font-size: 11px;
+}
+
+table.form tr.submit td input {
+  width: auto;
+}
+
+table.form tr.submit td a:link,
+table.form tr.submit td a:visited {
+  color: red;
+}
+
+div#Container,
+div#Header div#Tabs,
+div#Footer {
+  width: 750px;
+	margin: 0 20px 0 20px;
+	text-align: left;
+}
+
+.nosidebar div#Container,
+.nosidebar div#Footer {
+  width: 573px;
+}
+
+div#Header div#Tabs {
+  margin: 0 auto;
+  padding-left: 34px;
+}
+
+div#Wrapper {
+  padding: 0 20px 0 30px;
+  margin: 0 auto;
+}
+
+div#Container {
+  position: relative;
+  clear: right; /* in case the AccountTab <li>s wrap */
+	/* background: url(/images/page-bg.gif) left repeat-y; */
+  margin: 12px auto 0 auto;
+}
+
+div#Header {
+	margin: 0;
+	background: #c60;
+	/*padding: 15px 0 0 14px;*/
+	padding: 15px 0 0 0;
+	color: #ccc;
+}
+
+div#Main {
+  margin-right: 185px;
+}
+
+.nosidebar div#Main {
+  margin-right: 0;
+}
+
+div#Main div.inner {
+	padding: 10px 25px 10px 20px;
+}
+
+div#Sidebar {
+	background: url(/images/page-bg-flexi.gif) right repeat-y;
+  position: relative;
+  float: right;
+	width: 185px;
+	padding: 0;
+}
+
+
+div.section {
+	clear: left;
+	padding: 5px 0 10px 0;
+	margin: 0;
+	font-size: 16px;
+}
+
+div.section div.content {
+	margin-left: 5px;
+}
+
+
+div#flash {
+  margin: 0 0 20px 0;
+  padding: 5px 12px;
+  text-align: left;
+  color: #252;
+  border: 2px solid white;
+  font-size: 14px;
+}
+
+div#flash.notice {
+  background: #dfd;
+  border-color: #beb;
+  color: #252;
+}
+
+div#flash.progress {
+  border-color: #ddd;
+  background: #eee url(/images/indicator.gif) 10px 50% no-repeat;
+  color: #555;
+  padding-left: 35px;
+}
+
+div#flash.alert {
+  background: #fed;
+  border-color: #c33;
+  color: #c00;
+  font-weight: bold;
+}
+
+span.highlight {
+  background: #ffc;
+}
+
+span.blue {
+  color: blue;
+}
+
+cite {
+  font-size: 10px;
+  color: #666;
+  font-style: italic;
+}
+
+/*-------------------------------------------------
+MODAL DIALOG
+-------------------------------------------------*/
+
+.modal div#Container { background: none; }
+
+#Modal {
+	border: 10px solid #ccc;
+	background: #fff;
+  text-align: left;
+  width: 650px;
+	margin: 5px auto;
+}
+
+#Modal div.inner {
+  margin: 15px 20px 10px 20px;
+}
+
+#Modal div.submit {
+  border-top: 1px solid #ccc;
+  padding: 10px 0;
+  margin-top: 20px;
+  color: #999;
+}
+
+#Modal div.submit a:link,
+#Modal div.submit a:visited {
+  color: red;
+}
+
+#Modal div.submit input {
+  font-size: 16px;
+}
+
+/*-------------------------------------------------
+MODAL: LOGIN SCREEN
+-------------------------------------------------*/
+
+.login {
+  background: #f0f0f0;
+  padding-top: 50px;
+}
+
+.login div#Modal {
+  width: 500px;
+  margin: 0 auto 20px auto;
+}
+
+.login div#Modal div.inner {
+  margin-bottom: 15px;
+}
+
+.login img#logo {
+  float: left;
+}
+
+.login div#errorMessage, .login div#Message {
+	text-align: left;
+	font-weight: bold;
+	border-top: 1px solid #c99;
+	border-bottom: 1px solid #c99;
+	padding: 5px;
+	font-size: 11px;
+	margin: 0 0 0 80px;
+	background: #c00;
+	color: #fff;
+}
+
+.login div#errorMessage a:link,
+.login div#errorMessage a:visited {
+  color: #fff;
+}
+
+.login div#Message {
+  background: #080;
+}
+
+.login div.Container {
+	/*width: 500px;*/
+	margin: 60px auto 20px auto;
+}
+
+.login h1 {
+	margin-bottom: 20px;
+}
+
+.login dl {
+	margin: 10px 0 0 93px;
+}
+
+.login dt {
+	float: left;
+	clear: right;
+	width: 80px;
+	font-size: 14px;
+	line-height: 24px;
+	font-weight: normal;
+}
+
+.login dd {
+	margin: 0 0 5px 0px;
+	font-size: 11px;
+	line-height: 24px;
+	color: #666;
+	margin-left: 85px;
+}
+
+.login input {
+	font-size: 14px;
+}
+
+.login input#password {
+	width: 150px;
+}
+
+.login input#username {
+  width: 150px;
+}
+
+.login div#First {
+  width: 500px;
+  margin: 60px auto -30px auto;
+}
+
+.login div#First h1 {
+  font-size: 16px;
+  color: #c30;
+  margin: 0 0 3px 0;
+}
+
+.login div#First h2 {
+  font-size: 14px;
+  color: #000;
+  margin: 0 0 2px 0;
+  padding: 0;
+  font-weight: normal;
+}
+
+.login div#First p {
+  font-size: 12px;
+  margin: 0 0 10px 0;
+  padding: 0;
+}
+
+/*-------------------------------------------------
+NEW ACCOUNT FIRST LOGIN
+-------------------------------------------------*/
+
+div.new_account_welcome {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+div.new_account_welcome h1 {
+	color: #000;
+	font-size: 18px;
+	margin: 15px 0;
+	padding: 0;
+	line-height: 1.3em;
+}
+
+div.new_account_welcome h2 {
+	color: #000;
+	font-size: 14px;
+	margin: 0 0 5px 0;
+	padding: 0;
+	font-weight: bold;
+}
+
+div.new_account_welcome h3 {
+	color: #222;
+	font-weight: normal;
+	font-size: 12px;
+	margin: 0 0 10px 0;
+	padding: 0;
+	line-height: 1.3em;
+}
+
+div.new_account_welcome span.highlight {
+	background-color: yellow;
+	padding: 3px;
+}

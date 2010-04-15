@@ -1,0 +1,51 @@
+Parametros:
+  modulo: compras
+  nomrep: carrelordcomser
+  titulo: RELACION DE ORDENES DE COMPRA Y DE SERVICIO
+  orientacion: Vertical
+  tipopagina: CARTA
+  width:210
+
+Filas:
+  CATALOGO ORDEN:
+    tipotag:   inputcat_tag
+    label: Nro. Orden:
+    sql:  Select min(ordcom) as ordmin,max(ordcom) as ordmax from CAORDCOM
+    nomdes: orddes
+    campodes: ordmin
+    catdes: 0
+    nomhas: ordhas
+    campohas: ordmax
+    cathas: 1
+    nomcat: caordcom_ordcom
+    size: 22
+
+  FECHA ORDEN:
+    tipotag:   inputfec_tag
+    label: Fecha Orden de Compra:
+    sql:   SELECT to_char(min(DISTINCT(fecord)),'dd/mm/YYYY') as fecordmin,to_char(max(DISTINCT(fecord)),'dd/mm/YYYY') as fecordmax FROM caordcom
+    nomdes: fecmin
+    campodes: fecordmin
+    nomhas: fecmax
+    campohas: fecordmax
+    size: 22
+
+  CATALOGO PROVEEDOR:
+    tipotag:   inputcat_tag
+    label: Proveedor:
+    sql:  Select min(rifpro) as rifmin,max(rifpro) as rifmax from CAPROVEE
+    nomdes: rifdes
+    campodes: rifmin
+    catdes: 2
+    nomhas: rifhas
+    campohas: rifmax
+    cathas: 3
+    nomcat: caordcom_rifpro
+    size: 22
+
+  CAJA REALIZADO POR:
+    tipotag:   input_tag
+    label: Realizado Por:
+    nomdes: realizadopor
+    campodes:
+    size: 45

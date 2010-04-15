@@ -1,0 +1,21 @@
+opciones:                  # Opciones generales
+  name:                    c
+  eliminar:                true
+  tabla:                   carampro
+  anchogrid:               550
+  ancho:                   500
+  filas:                   1
+  titulo:                  ' Ramos '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Cod/Ramos
+  tipo:                    t
+  nombrecampo:             ramart
+  esgrabable:              true
+  html:                    [size="6" maxlength="6" ]
+2:       # Columna 2
+  titulo:                  Nombre
+  tipo:                    t
+  nombrecampo:             nomram
+  esgrabable:              false
+  html:                    [size="25" maxlength="250"]

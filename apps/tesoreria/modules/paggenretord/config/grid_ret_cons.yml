@@ -1,0 +1,95 @@
+opciones:                  # Opciones generales
+  eliminar:                false
+  tabla:                   opretord
+  name:                    d
+  anchogrid:               900
+  ancho:                   500
+  filas:                   0
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Num. Retención
+  tipo:                    t
+  nombrecampo:             numret
+  esgrabable:              true
+  html:                    [size="10" readonly=true]
+2:       # Columna 2
+  titulo:                  Código Retención
+  tipo:                    t
+  nombrecampo:             codtip
+  esgrabable:              true
+  html:                    [size="20" readonly=true]
+3:       # Columna 3
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             destip
+  esgrabable:			   false
+  html:                    [size=25 disabled=true]
+4:       # Columna 4
+  titulo:                  Monto
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             montoret
+  esnumerico:              true
+  html:                    [size="10" readonly=true]
+5:       # Columna 5
+  titulo:                  Esta
+  tipo:                    t
+  nombrecampo:             esta
+  esgrabable:              true
+  oculta:                  true
+  html:                    [size=10]
+6:       # Columna 6
+  titulo:                  EstaISLR
+  tipo:                    t
+  nombrecampo:             estaislr
+  esgrabable:              true
+  oculta:                  true
+  html:                    [size=10]
+7:       # Columna 7
+  titulo:                  Esta1xmil
+  tipo:                    t
+  nombrecampo:             esta1xmil
+  esgrabable:              true
+  oculta:                  true
+  html:                    [size=10]
+8:       # Columna 8
+  titulo:                  Porcentaje
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             porret
+  esnumerico:              true
+  oculta:                  true
+  html:                    [size="10" readonly=true]
+9:       # Columna 9
+  titulo:                  Base Imponible
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             basimp
+  esnumerico:              true
+  oculta:                  true
+  html:                    [size="10" readonly=true]
+10:       # Columna 10
+  titulo:                  Sustraendo
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             porsus
+  esnumerico:              true
+  oculta:                  true
+  html:                    [size="10" readonly=true]
+11:       # Columna 11
+  titulo:                  Factor
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             factor
+  esnumerico:              true
+  oculta:                  true
+  html:                    [size="10" readonly=true]
+12:       # Columna 12
+  titulo:                  Unidad Tributari
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             unitri
+  esnumerico:              true
+  oculta:                  true
+  html:                    [size="10" readonly=true]

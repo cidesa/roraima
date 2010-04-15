@@ -1,0 +1,18 @@
+default:
+  http_metas:
+    content-type: text/html
+
+  metas:
+    title:        Cidesa - Definición de Grupos de Recaudos
+    robots:       index, follow
+    description:  Cidesa - Definición de Grupos de Recaudos
+    keywords:     cidesa, menu, grupos, recaudos, definicion
+    language:     es_VE
+
+  stylesheets:    [main]
+
+  javascripts:    [ ]
+  
+  has_layout:     on
+  layout:         layout
+

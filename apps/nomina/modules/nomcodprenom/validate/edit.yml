@@ -1,0 +1,16 @@
+methods:
+  post:
+   - "npdefcpt{codcon}"
+
+names:
+  npdefcpt{codcon}:
+    required:  Yes
+    required_msg: El Código del Concepto no puede estar en blanco
+    validators: CodigoValidator
+
+CodigoValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Npdefcpt
+        column:   codcon
+        unique_error:   El Código del Concepto no existe

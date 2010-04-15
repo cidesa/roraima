@@ -1,0 +1,38 @@
+NameVirtualHost *
+ServerName localhost
+
+CheckSpelling on
+
+<VirtualHost * >
+
+  ServerName localhost
+
+  DocumentRoot "/var/www/cidesa/roraima/web"
+  DirectoryIndex auntenticacion.php/login
+
+  <Directory "/var/www/cidesa/roraima/web/">
+    Options FollowSymLinks
+    AllowOverride All
+    Allow from All
+  </Directory>
+
+  ##############################
+  # Presupuesto y Contabilidad #
+  ##############################
+  Alias /contabilidadpresupuesto /var/www/cidesa/roraima/web/cp/
+  <Directory "cidesa/roraima/web/cp/">
+    AllowOverride All
+    Allow from All
+  </Directory>
+
+  ############
+  # Reportes #
+  ############
+  Alias /reportes /var/www/cidesa/roraima/web/reportes
+  <Directory "/var/www/cidesa/roraima/web/reportes">
+    AllowOverride All
+    Allow from All
+  </Directory>
+
+</VirtualHost>
+

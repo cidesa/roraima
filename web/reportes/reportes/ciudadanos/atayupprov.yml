@@ -1,0 +1,32 @@
+Parametros:
+  modulo: ciudadanos
+  nomrep: atayupprov
+  titulo: PROYECCIÒN DE CASOS APOYADOS POR PRESUPUESTO
+  orientacion: Vertical
+  tipopagina: Carta
+  width:210
+
+Filas:
+  CATALOGO CODCON:
+    tipotag:   inputcat_tag
+    label: N&uacute;mero de Expediente:
+    sql:   select min(nroexp) as codmin,max(nroexp) as codmax from atayudas
+    nomdes: codmin
+    campodes: codmin
+    catdes: 0
+    nomhas: codmax
+    campohas: codmax
+    cathas: 1
+    nomcat: atayudas
+    size: 20
+  FECHA ORDEN:
+    tipotag:   inputfec_tag
+    label: Fecha :
+    sql:   Select to_char(min(fecsol),'dd/mm/yyyy') as fechades,to_char(max(fecsol),'dd/mm/yyyy') as fechahas from atayudas
+    nomdes: fechades
+    campodes: fechades
+    catdes: 2
+    nomhas: fechahas
+    campohas: fechahas
+    cathas: 3
+    size: 22

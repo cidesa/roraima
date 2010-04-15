@@ -1,0 +1,29 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Bnubibie
+    theme:            default
+
+    fields:
+      codubi: {name: Código, params: maxlength=32}
+      desubi: {name: Descripción, params: maxlength=250}
+      dirubi: {name: Dirección, params: maxlength=500}
+      codubiadm: {name: Cod. Ubicación Administrativa}
+
+    list:
+      title:          Definición de Ubicación
+      filters:        [codubi, desubi]
+      display:        [=codubi, desubi, dirubi]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   10
+      sort: codubi
+    edit:
+      title:          Edición de Ubicación
+      display:        [codubi, desubi, dirubi, codubiadm]
+      actions:
+         _list:     ~
+         _save:     ~
+         _delete:   ~
+         _create:   ~

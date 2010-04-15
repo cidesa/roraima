@@ -1,0 +1,49 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Cadphart
+    theme:            default
+    fields:
+      dphart: { name: Número}
+      fecdph: { name: Fecha}
+      codalm: { name: Código de Almacén}
+      nomalm: { name: Nombre Almacén}
+      reqart: { name: Refiere a Solicitud de Materiales}
+      desreq: { name: Descripción}
+      fecreq: { name: Fecha de Requisión}
+      desdph: { name: Descripción}
+      codori: { name: Unidad de Origen}
+      nomcat: { name: Descripción}
+      mondph: { name: Monto Total}
+      stadph: { name: Estatus}
+      numcom: { name: Numerocom}
+      refpag: { name: refpago}
+      tipdph: { name: Tipodesp}
+      codcli: { name: codigo}
+      obsdph: { name: Observacion}
+      fordesp: { name: fordes}
+      reapor: { name: reapor}
+      fecanu: { name: fechaanu}
+      codubi: { name: Código de la Ubicación}
+      nomubi: { name: Nombre Ubicación}
+    list:
+      title:          Despachos
+      filters:        [dphart]
+      display:        [=dphart, desdph, fecdph]
+      fields:
+        fecdph: { params: date_format='dd/MM/yy' }
+      object_actions:
+        _edit:        ~
+        _delete:        ~
+      max_per_page:   10
+      sort:    dphart
+    edit:
+      title:          Edicion de Despachos
+      display:       [=dphart, fecdph, reqart, desreq, fecreq, desdph, codori, nomcat, mondph, stadph, numcom, refpag, tipdph, codcli, obsdph, fordesp, reapor, fecanu, codubi, nomubi]
+      fields:
+        fecdph: { params: date_format='dd/MM/yy' }
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

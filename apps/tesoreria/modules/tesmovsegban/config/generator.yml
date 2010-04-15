@@ -1,0 +1,34 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Tsmovban
+    theme:            default
+    fields:
+      numcue:   { name: Cuenta del Banco, params: maxlength=20}
+      nombanco: { name: Nombre del Banco, params: maxlength=80}
+      codcta:   { name: Código de la cuenta}
+      refban:   { name: Referencia, params: maxlength=20}
+      fecban:   { name: Fecha del Movimiento, params: date_format='dd/MM/yyyy'}
+      tipmov:   { name: Tipo de Movimiento, params: maxlength=4}
+      nommovim:   { name: Nombre del Movimiento, params: maxlength=80}
+      desban:   { name: Descripción}
+      monmov:   { name: Monto}
+      status:   { name: Estatus}
+      stacon:   { name: Estatus Contable}
+    list:
+      title:          Movimientos Según Bancos
+      filters:        [numcue, refban, tipmov, fecban]
+      display:        [=numcue, nombanco, refban, tipmov, nommovim, fecban]
+      sort:           numcue
+      max_per_page:	  8
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+    edit:
+      title:          Edición Movimientos Según Bancos
+      display:        [numcue, nombanco, codcta, refban, tipmov, nommovim, fecban, desban, monmov]
+      actions:
+        _list:        ~
+        _save:        ~
+        _create:      ~
+        _delete:      ~

@@ -1,0 +1,33 @@
+Parametros:
+  modulo: tesoreria
+  nomrep: tsrcajchippto
+  titulo:  CAJA CHICA / PRESUPUESTO
+  orientacion: Vertical
+  tipopagina: CARTA
+  width:210
+
+Filas:
+  CATALOGO CHEQUES:
+    tipotag:   inputcat_tag
+    label: Codigo Presupuestario:
+    sql:  select min(codpre) as mincodpre, max(codpre) as maxcodpre  from cpasiini
+    nomdes: mincodpre
+    campodes: mincodpre
+    catdes: 0
+    nomhas: maxcodpre
+    campohas: maxcodpre
+    cathas: 1
+    nomcat:cpimpprct
+    size: 22
+
+  FECHA ORDEN:
+    tipotag:   inputfec_tag
+    label: Fecha:
+    sql:   select to_char(min(a.fecsal),'dd/mm/yyyy') as fecmin, to_char(max(a.fecsal),'dd/mm/yyyy') as fecmax from tssalcaj a
+    nomdes: fecmin
+    campodes: fecmin
+    nomhas: fecmax
+    campohas: fecmax
+    size: 22
+
+

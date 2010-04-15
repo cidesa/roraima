@@ -1,0 +1,19 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Contaba
+    theme:            cidesaGenerator
+
+    fields:
+      fecini: {name: Fecha de inicio }
+      feccie: {name: Fecha de cierre }
+      esqori: {name: Esquema Origen, params: size=3}
+      esqdes: {name: Esquema Destino, params: size=3}
+      botones: {name: .}
+    edit:
+      title: Cierre del Ejercicio
+      display:
+        Rango de Fecha para la Realización del Cierre del Ejercicio: [fecini, feccie]
+        Traslados de Saldos Contables: [_esqori, _esqdes, _botones]
+      actions:
+        NONE

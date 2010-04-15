@@ -1,0 +1,28 @@
+Parametros:
+  modulo: compras
+  nomrep: carinvpro
+  titulo: Invitacion al Proveedor
+  orientacion: Vertical
+  width:210
+  tipopagina: Carta
+
+Filas:
+  CATALOGO REQART:
+    tipotag:   inputcat_tag
+    label: No. de Pedido:
+    sql: select min(reqart) as minreqart, max(reqart) as maxreqart from casolart
+    nomdes: reqartdes
+    campodes: minreqart
+    catdes: 0
+    nomhas: reqarthas
+    campohas: maxreqart
+    cathas: 1
+    nomcat: casolart
+    size: 15
+
+  CAJA JEFE:
+    tipotag:   input_tag
+    label: Jefe de la Division de Adquisicion de Bienes y Servicios:
+    nomdes: jefe
+    campodes:
+    size: 30

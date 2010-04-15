@@ -1,0 +1,24 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Cpdocaju
+    theme:            cidesaGenerator
+    fields:
+      tipaju: {name: Tipo de Documento, params: onblur=convertirMayusculas(this.id) maxlength=4 size=5}
+      nomext: {name: Nombre Extendido}
+      nomabr: {name: Nombre Abreviado, params: onblur=convertirMayusculas(this.id) maxlength=4 size=5}
+      refier: {name: Refiere a}
+    list:
+      title:   Ajustes
+      display: [=tipaju, nomext]
+      filters: [tipaju, nomext]
+
+    edit:
+      title:                     Ajustes
+      display:
+        Datos del Documento:     [tipaju, nomext, nomabr, _refier]
+      actions:
+        _list:        ~
+        _create:      ~
+        _save:        ~
+        _delete:      ~

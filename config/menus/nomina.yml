@@ -1,0 +1,278 @@
+nomina:
+  opciones:
+    activo: true #true/false
+    descripcion: Módulo de Nómina
+    imagen: nomina.gif
+    nombre: Recursos Humanos
+    urls:
+      Cambiar Contraseña:
+        modulo: autenticacion.php
+        modulo_dev: autenticacion_dev.php
+      Históricos de Conceptos:
+        absoluta: reportes/reportes/nomina
+      default:
+        modulo: nomina.php
+        modulo_dev: nomina_dev.php
+      Reportes:
+        absoluta: reportes/reportes/nomina
+    imagenes:
+      default: OperatorClass.png
+  menu:
+    Definiciones Específicas:
+      Incapacidades:                                                 Nominc
+      Institución:                                                   NomDefEspGen
+      Tipos Nóminas:                                                 NomDefEspTipNom
+      Conceptos:                                                     NomDefEspCon
+      Niveles Organizacionales:                                      NomDefEspNivOrg
+      Niveles de Estudio:                                            NomDefEspNivEdu
+      Cargos:                                                        NomDefEspCar
+      Cargos Colaterales:                                            NomDefEspCargosCol      
+      Definición de Conceptos Variables:                             NomDefEspMovPer
+      Variables:                                                     NomDefEspVar
+      Bancos:                                                        NomDefEspBan
+      Profesiones:                                                   NomDefEspProFes
+      Perfiles:                                                      NomDefEspPerFil
+      Tipos de Parientes:                                            NomDefEspPar
+      Guarderías:                                                    NomDefEspGuarde
+      Tipos de Gastos:                                               NomDefTipGas
+      Tipo de Cargos:                                                NomTipCar      
+      Motivos de Faltas y/o Permisos:                                NomDefEspMotFalPre
+      Situacion del Empleado:                                        nomdefespsitemp
+      Definición de Condición Contractual:                           NomDefEspGruLab
+      Definición Seguro HCM:                                         NomDefEspSegHcm
+      Definición de Acumulador de Conceptos:                         Nomacumulacpt
+      #Conceptos para Reportes:                                      NomDefEspConSue
+      Conceptos para el Salario Integral:                            NomConceptosSalarioIntegral
+      Conceptos para el Sueldo:                                      NomConceptosSueldo
+      Conceptos para las Primas:                                     NomConceptosPrimas
+      Parametros Especiales para el Calculo de las Primas:            NomDefEspPrimas
+      Conceptos de Compensación por Nómina:                          NomConceptosCompensacion
+      Conceptos de Ahorro Habitacional:                              NomDefConAho
+      Conceptos para el Fondo de Jubilación y Pensiones:             NomDefConFon
+      Conceptos para Reportes:                                       nomdefespconsue
+      #Definición de Jornadas Laborales:                             NomJorLabLot
+      Jornadas Laborales por Empleado:                               NomJorLabInd
+      Definición de Concepto de Cesta Tickets:                       NomDefEspCesTic
+      Tipos de Retiros:                                              NomDefTipRet
+      Definición de Conceptos para Dias Adicionales:                 NomDefDiaAdicNom
+      Conceptos para el ISLR:                                        NomDefEspISLR      
+      Embargos:
+        Registro de Juzgados:                                        NomDefJuz
+        Registro de Beneficiarios por Embargos:                      NomDefBenEmb 
+        Registro de Embargos:                                        NomRegEmb      
+      Definición de Retenciones y Aportes:
+        Retenciones y Aportes:                                       NomDefAportes
+        Conceptos para Aportes:                                      NomDefConAportes
+        Conceptos para Retenciones:                                  NomDefConRetencion
+      División Territorial:
+        Estados:                                                     NomDefEspPai
+        Municipios:                                                  NomDefEspEst
+        Parroquias:                                                  NomDefEspCiu
+    Personal:
+      Datos Personales:                                              NomHojInt
+      Tipo de Cargos:                                                NomTipCar
+      #Categorías Presupuestarias para Formular Cargos:              ForDefCatPre
+      #Nominas a Formular:                                           ForNomFor
+      #Formulas de Conceptos:                                        ForCalCon
+      Tipo de Dedicación:                                            NomTipDed
+      Tipo de Categoria:                                             NomTipCat      
+      #Asignación de Conceptos a Cargos:                             ForAsoConCar
+      Tabla de Sueldos por Grado y Paso:                             NomComOCP
+      Asignación de Cargos y Conceptos a Empleados:                  NomAsiCarConNom
+      #Asignación de Cargos a Empleados en lote:                     NomAsiCarEmpLot
+      Cambio de Nómina y Cargos a Empleados:                         nomcamnomcar
+      #Formulación de Cargos Presupuestados:                         ForPreGasPer
+      #Archivo de Elegibles:                                         nomhojint
+      #Datos Personales:                                             NomPerEleDatPer
+      #Información Familiar:                                         NomPerEleInfFam
+      #Información Curricular:                                       NomPerEleInfCur
+      #Experiencia Laboral:                                          NomPerEleExpLab
+    Faltas y/o Permisos:
+      Permisos:                                                      NomFalPerPer
+      Salidas:                                                       NomFalPerSal
+      Llegadas:                                                      NomFalPerLle
+      Registro de Días Extras:                                       NomDiaExt
+      Registro de Faltas y/o Permisos Por Nómina en Lote:            NomFalPerLot
+      Registro de Días Extras Por Nómina en Lote:                    NomDiaExtLabLot
+    Vacaciones:
+      Parámetros para el Registro y Control de Vacaciones:           VacDefGen
+      Definición de Jornada Laboral:               VacDiasBonoVac
+      Tabla para los Días de Disfrute:                               VacDiaDis
+      Tabla para los Días Feriados:                                  VacDiaFer
+      Registro de Vacaciones Disfrutadas:                            VacHistorico
+      Registro de Vacaciones Disfrutadas en Lote:                    VacHistorico_Lote
+      Registro de Vacaciones Colectivas:                             Vaccolecti      
+      Registro de Solicitud de Vacaciones:                           VacSALIDAS
+      #Registro y Control de Vacaciones:                             VacRegSalVac
+      Liquidación de Vacaciones Por Egreso:                          VacLiquidacion
+    Prestaciones:
+      Definición de Parámetros para las Prestaciones Sociales:
+        Tipos de Contratos Colectivos:                               PresNomTipCon
+        Registro de Tipos de Asignaciones:                           presNomAsiConPre
+        Definición Presupuestaria de Liquidación:                    presNomDefPre
+        Definiciones Especiales para Prestaciones:                   NomDefEspParPre
+        Definición de Periodos por Meses:                            presNomSemMes
+        Parámetros para el Salario Integral:                         presnomparsalint
+      Registros Útiles para el Cálculo de Prestaciones Sociales:
+        Asignación de Trab. para Prestaciones Por Contr. Colect:     presNomAsiTrabCont
+        Registro de Tasas de Interes Periodicas:                     presNomIntFecRef
+        Registro de Salario Integral por Contrato:                   presNomRegSalInt
+        Registro de Salario Integral por Contrato Individual:        presNomRegSalIntInd
+      Registro Histórico de Anticipos Otorgados:                     PresNomRegHisAntPre
+      Registro Histórico de Adelanto de Intereses de Prestaciones:   PresNomRegHisAdeint
+      Solicitud de Anticipo Sobre Prestaciones:                      PresNomAntPre
+      Solicitud de Anticipo Sobre Intereses de Prestaciones:         PresNomAdeInt            
+      Cálculo de Antiguedad:                                         presNomCalIntPre
+      Liquidación Final de Prestaciones:                             presnomliquidacion
+      #Importar Datos Prestaciones Sociales:                         ImportarPrestaciones
+    Asignaciones Generales para el Cálculo de Nómina:
+      Asignación de Conceptos por Categ. Presup. Espec.:             AsignarConceptosCategoria
+      Asignación de Conceptos a Nómina:                              AsignarConceptosNomina
+      Asignación de Cargos a Nómina:                                 NomDefEspAsiCarTipNomLot
+      Asignación de Conceptos a Empleados:                           NomNomAsiConNom
+      Asignación de Cuentas Bancarias por Empleado:                  EmpleadosBanco
+      Asignación Modalidad Pago Cesta Ticket a Empl por Nómina:      ModalidadCestaTicketEmpleados
+      Asignación de Categorias por Empleados:                        AsignarCategoriasConceptosxEmpleado
+      Asignar  Partidas a un Concepto por Nomina:                    nomcodprenom
+      Asignacion de Partidas a Conceptos:                            asignarpartidasconceptos
+    Movimientos de Nómina:
+      Movimientos Por Concepto:                                      NomNomMovNomCon
+      Movimientos Por Concepto y Cargos:                             NomNomMovNomConCar
+      Movimientos Por Empleado:                                      NomNomMovNomEmp
+      #Modificar Monto/cantidad a Conceptos Según Formula:           ModificarMontoConcepto
+    Nominas Especiales:
+      Definición:                                                    NomEspDefinicion
+      Conceptos:                                                     NomEspConceptos
+      Cálculo:                                                       NomEspCalculo
+      Cierre de Nóminas Especiales:                                 NomNomCieNomEsp
+    Cálculos de Nomina:
+      Cálculo de Conceptos - Formulación:                            NomCalCon
+      Cálculo de Nómina:                                             NomNomCalNom
+      Cálculo de Nómina por Empleados:                               NomNomCalNomInd
+      Cierre de Nómina:                                              NomNomCieNom
+    Prestamos:
+      Tipos de Prestamos:                                            NomDefEspTipPre
+      Prestamos:                                                     NomPerPrestamos
+      Movimientos de Prestamos:                                      NomPerHisPre
+    Históricos:
+      Históricos de Conceptos:                                       nprhiscon.php
+    Reportes:
+      Definiciones Específicas:
+        Tipos Nóminas:                                           NPRNOMINA.php
+        Conceptos:                                               nprdefcpt.php
+        Conceptos por Nómina:                                    NPRCONNOM.php
+        Niveles Organizacionales:                                NPRNIVORG.php
+        Cargos:                                                  NPRCARGOS.php
+        Bancos:                                                  NPRBANCOS.php
+        Categorias Presupuestarias:                              NPRCATPRE.php
+        Municipios:                                              nprmunicipios.php
+      Personal:
+        Datos Personales:                                        nprResumen_curricular.php
+        Asignación de Cargos:                                    NPRASICAREMP.php
+      Nómina:
+        Listado de Nómina Definitiva por Categoría:              nprnomdefcat.php
+        Listado de Nómina Def. por Categ. y Tipo de Gasto:       nprnomdefcatgas.php
+        Listado de Nómina Definitiva por Nivel:                  nprnomdefniv.php
+        Listado de Nómina para la Firma por Categoría:           nprnomfircat.php
+        Listado de Nómina para la Firma por Nivel:               nprnomfirniv.php
+        Recibos de Pago:                                         NPRRECPAG.php  # En Amazonas
+        Relación de Conceptos:                                   NPRRELCONC.php # En Amazonas
+        Resumen General de Conceptos:                            nprresgencon.php
+        Resumen de Conceptos por Nomina:                         nprresconnom.php
+        Relación de Nómina/Presupuesto:                          NPRNOMPRE.php
+        Relación Deposito - Banco:                               nprrelbancdisc.php
+        Relación Cuentas Bancarias - Nomina:                     relnomban.php
+        Variaciones de Nóminas por Períodos:                     NPRVARPER.php
+        Relación Categorias/Conceptos:                           nprconniv.php
+        Desglose de Nómina:                                      nprdsgnomt.php
+        #Histórico de Conceptos:                                 nprhistrelcon.php
+        Histórico de Nómina/Presupuesto:                         NPRHISTPRE.php
+        Relación General de Asignaciones/Deducciones por Nomina: nprrelgenasided.php
+        Listado Por Conceptos Historicos:                        NPRHISTLISTCONC.php
+        Listado por Concepto 5% Ctas. de Ahorro de Docentes:     nprlistconcdoc.php
+        Fondo de Pensiones y Jubilados:                          his_np_fpj_disco.php
+        Ley de Politica Habitacional:                            his_np_lph_disco.php
+        APORTES PATRONALES :                                     hisnpaportesretenciones.php
+        DEFINICION DE CONCEPTOS:                                 nomina_definicion_conceptos.php
+        Nómina para la Firma:                                    nomina_firma_categoria.php
+        #RELACION NOMINA PRESUPUESTO:                                nomina_presupuesto.php
+        #RELACION NOMINA PRESUPUESTO POR GASTO:                      nomina_presupuestoxgasto_disp.php
+        #Fondo de Pensión y Jubilación:                              np_fpj_disco.php
+        #Ley de Politica Habitacional:                               np_lph_disco.php
+        #RELACION DE DE RETENCIONES - APORTES:                       npaporet.php
+        #APORTES PATRONALES:                                         npaportes.php
+        #APORTES PATRONALES:                                         npaportesretenciones.php
+        #APORTES PATRONALES x CATEGORIA:                             npaportesxcategoria.php
+        #HISTÓRICO DE NOMINA DEFINITIVA:                             nphis_nomina_definitiva_nivel.php
+        #HISTÓRICO DE RELACION DE RETENCIONES - APORTES:             nphisaporet.php
+        #HISTÓRICO DE RELACION DEPOSITO-BANCO:                       nphisrelbanc.php
+        #Relación de Ingreso Anual:                                  npr_arc_general.php
+        #Relación de Ingreso Anual por Trabajador /ARC:              npr_arc.php
+        #ACCION ADMINISTRATIVA:                                      npraccadm.php
+        #DECRETO DE RECTIFICACIONES:                                 nprcalcon1.php
+        #CALCULO DE CONCEPTOS:                                       nprcalculo_concepto.php
+        #CARGOS POR NOMINA:                                          nprcarnom.php
+        #Partidas Presupuestarias:                                   nprcatpar.php
+        #CONCEPTOS POR NOMINA:                                       nprconceptosxnomina.php
+        #REPORTE CONSOLIDADO:                                        nprconsolidado.php
+        #CUMPLEAÑOS POR MES:                                         nprcummes.php
+        #Datos Personales:                                           nprdatos_personales.php
+        #CONCEPTOS VARIABLES:                                        nprdefespmovper.php
+        #TIPOS DE PARIENTES:                                         nprdefesppar.php
+        #PERFIL:                                                     nprdefespperfil.php
+        #PROFESIONES:                                                nprdefespprofes.php
+        #SITUACION DEL EMPLEADO:                                     nprdefespsitemp.php
+        #Variables:                                                  nprdefespvar.php
+        #TIPOS DE GASTOS:                                            nprdeftipgas.php
+        #REGISTRO DE ASIGNACION DE CARGOS:                           nprdirectorio_empleados.php
+        #Relación de Conceptos Detallada:                            nprelacion_concepto_detalle.php
+        #Relación Nomina por Conceptos y Niveles Organizacionales:   nprelacionconceptoxnivel.php
+        #Estado:                                                     nprestado.php
+        #Resumen de Nomina:                                          npresumen_nomina_aporte.php
+        #Resumen de Nomina:                                          npresumen_nomina.php
+        #Experiencia Laboral:                                        nprexperiencia_laboral.php
+        #Histórico de Consolidado de Nomina Anual:                   nprhis_consolidado_anual.php
+        #Histórico de Consolidado de Nomina:                         nprhis_consolidado.php
+        #Histórico de Recibo de Pago:                                nprhis_recibo_pago.php
+        #Histórico de RELACION CATEGORIAS/CONCEPTO:                  nprhisconniv.php
+        #Histórico de NOMINA DE PAGO POR CATEGORIA DESDE HISTORICO:  nprhisnomdefcat.php
+        #Histórico de Nomina de Pago por Nivel Organizacional:       nprhisnomdefniv.php
+        #Histórico de PRESTAMOS:                                     nprhistpres.php
+        #Información Curricular:                                     nprinformacion_curr.php
+        #Información Familiar:                                       nprinformacion_familiar.php
+        #INGRESOS Y EGRESOS DE EMPLEADOS:                            npringegr.php
+        #Listado de Conceptos:                                       nprlistado_por_concepto.php
+        #Listado de Conceptos Históricos:                            nprlistado_por_conceptohis.php
+        #LISTADO DE CONCEPTOS:                                       nprlistconc.php
+        #Listado de Prenomina por Categoria:                         nprnomdefnivorg.php
+        #Nomina para la Firma:                                       nprnomfirniv.php
+        #Nomina para la Firma:                                       nprnomina_firma_nivel.php
+        #Definición de Países:                                       nprpaises.php
+        #Listado de Prenomina por Nivel Organizacional:              nprprenomina.php
+        #CARGOS POR CATEGORIA PRESUPUESTARIA:                        nprrelacion_cargos_unidades.php
+        #RELACION CONCEPTOS-CATEGORIAS Y PARTIDAS PRESUPUESTARIAS:   nprrelacion_concepto_cat_par.php
+        #CATEGORIAS PRESUPUESTARIAS POR NOMINA:                      nprrelacion_nomina_unidad.php
+        #RELACION CUENTAS BANCARIAS NOMINA:                          nprrelbanc.php
+        #RELACION NOMINA CONCEPTO:                                   nprrelconhis.php
+        #Resumen de Costos por Cargos:                               nprresumen_costos_cargos.php
+      Prestaciones:
+        Antiguedad Prestaciones Sociales Nuevo Régimen:              NPCALPRESOC_RN.php
+        Antiguedad Prestaciones Sociales Antiguo Régimen:            NPCALPRESOC_RV.php
+        Anticipos sobre Prestaciones Sociales:                       nprcalantpresoc.php
+        Compensación Bono Transferencia:                             nprbonotransf.php
+        Intereses sobre Prestaciones Sociales Nuevo Régimen:         NPRINTPRESOC_RN.php
+        Liquidación de Cuentas:                                      nprprestliquidacion.php
+      Vacaciones:
+        Solicitud de Vacaciones:                                     npvac_solicitud.php
+        Histórico de Vacaciones Disfrutadas por Empleado:            npvac_historico.php
+        Relación de Vacaciones Disfrutadas por Empleado en Lote:     npvac_relacionhistoricos.php
+        Relación de Vacaciones Procesadas:                           npvac_relacionsalidas.php
+    Mantenimiento:
+      Cambiar Contraseña:                                     cambiopasswd
+      #Clasificador de Partidas Presupuestarias:                     NomManClaPre.php
+      #Cambiar Password de Usuario:                                  NomCamPwd.php
+      #IMPORTAR ASIGNACION DE CARGOS:                                ImportarAsignarCargos.php
+      #IMPORTAR HOJA INTEGRAL:                                       ImportarHojaIntegral.php
+      #IMPORTAR VALORES DE CONCEPTOS:                                ImportarValoresConceptos.php
+      #Actualizar Saldos de Préstamos:                               NomActPre.php
+

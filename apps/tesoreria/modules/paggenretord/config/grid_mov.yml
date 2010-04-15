@@ -1,0 +1,56 @@
+opciones:                  # Opciones generales
+  eliminar:                false
+  name:                    a
+  tabla:                   opdetord
+  anchogrid:               900
+  ancho:                   700
+  filas:                   0
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Aplica Retención
+  tipo:                    k
+  nombrecampo:             check
+  html:                    [ ]
+  esgrabable:			   true
+2:       # Columna 2
+  titulo:                  Código Presupuestario
+  tipo:                    t
+  nombrecampo:             codpre
+  esgrabable:              true
+  html:                    [size="30" readonly=true]
+3:       # Columna 3
+  titulo:                  Monto a Causar
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             moncau
+  esnumerico:              true
+  html:                    [size="10" readonly=true]
+4:       # Columna 4
+  titulo:                  Retenciones
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             monret
+  esnumerico:              true
+  html:                    [size="10" readonly=true]
+5:       # Columna 5
+  titulo:                  Descuentos
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             mondes
+  esnumerico:              true
+  html:                    [size="10" readonly=true]
+6:       # Columna 6
+  titulo:                  Refere
+  tipo:                    t
+  nombrecampo:             refe
+  esgrabable:              true
+  oculta:                  true
+  html:                    [size="20" readonly=true]
+7:       # Columna 7
+  titulo:                  Aplica Iva
+  tipo:                    t
+  nombrecampo:             retiva
+  esgrabable:              true
+  oculta:                  true
+  html:                    [size="20" readonly=true]

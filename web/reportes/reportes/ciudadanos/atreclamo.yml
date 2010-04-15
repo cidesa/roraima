@@ -1,0 +1,35 @@
+Parametros:
+  modulo: ciudadanos
+  nomrep: atrecayu
+  titulo: RECLAMOS
+  orientacion: Horizontal
+  tipopagina: Carta
+  width:210
+Filas:
+  CATALOGO CODCON:
+    tipotag:   inputcat_tag
+    label: C&oacute;digo Reclamo:
+    sql:   select min(id) as codmin,max(id) as codmax from atreclamos
+    nomdes: iddes
+    campodes: codmin
+    catdes: 0
+    nomhas: idhas
+    campohas: codmax
+    cathas: 1
+    nomcat: atreclamo
+    size: 20
+  FECHA ORDEN:
+    tipotag:   inputfec_tag
+    label: Fecha Ingreso:
+    sql:   Select to_char(min(fechar),'dd/mm/yyyy') as fecingmin,to_char(max(fechar),'dd/mm/yyyy') as fecingmax from atreclamos
+    nomdes: fechades
+    campodes: fecingmin
+    nomhas: fechahas
+    campohas: fecingmax
+    size: 22
+  CAJA REVISADO:
+    tipotag:   input_tag
+    label: C&eacute;dula:
+    nomdes: cedula
+    campodes:
+    size: 20

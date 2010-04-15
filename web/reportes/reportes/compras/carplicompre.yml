@@ -1,0 +1,65 @@
+Parametros:
+  modulo: compras
+  nomrep: carplicompre
+  titulo: Pliego de Consulta de Precio
+  orientacion: Vertical
+  tipopagina: CARTA
+  width:210
+
+Filas:
+  CATALOGO SOLICITUD:
+    tipotag:   inputcat_tag
+    label: Solicitud de Cotización:
+    sql:   SELECT min(reqart) as reqmin, max(reqart) as reqmax FROM CASOLART
+    nomdes: codreqdes
+    campodes: reqmin
+    catdes: 0
+    nomhas:
+    campohas:
+    cathas: 1
+    nomcat: casolart
+    size: 30
+
+  CATALOGO PROVEEDOR:
+    tipotag:   inputcat_tag
+    label: Rif del Proveedor:
+    sql:   select min(rifpro) as rifmin from caprovee
+    nomdes: rifpro
+    campodes: rifmin
+    catdes: 2
+    nomhas:
+    campohas:
+    cathas: 3
+    nomcat: caprovee
+    size: 30
+
+  CAJA ATENCION POR:
+    tipotag:   input_tag
+    label: Asesor de Ventas:
+    nomdes: asesor
+    campodes:
+    size: 30
+
+  CAJA ANALIZADO POR:
+    tipotag:   input_tag
+    label: Analizado por:
+    nomdes: analizado
+    campodes:
+    size: 30
+
+  CAJA REVISADO POR:
+    tipotag:   input_tag
+    label: Revisado por:
+    nomdes: revisado
+    campodes:
+    size: 30
+
+  CAJA AUTORIZADO POR:
+    tipotag:   input_tag
+    label: Autorizado por:
+    nomdes: autorizado
+    campodes:
+    size: 30
+
+
+

@@ -1,0 +1,31 @@
+#CONFIGURACION DE ARCHIVOS YML TEMPORALES
+#PARA LOS REPORTES
+#Los comentarios al final indican que debe llevar la siguiente linea despues del comentario
+
+Parametros:
+#PARAMETROS FIJOS
+  #Nombre del Modulo y del Reporte #
+  modulo: ciudadanos
+  nomrep: atlisuni
+
+  #Titulo del Reporte (SIEMPRE APARECERA EN MAYUSCULA), Orientacion y Tipo de Pagina, Ancho de los tag <td>#
+  titulo: Listado de Unidades
+  orientacion: Vertical
+  tipopagina: Carta
+  width:210
+
+#PARAMETRO FORMULARIO
+Filas:
+  CATALOGO PRIMERO:
+    tipotag:   inputcat_tag
+    label: Código Unidades
+    sql:   SELECT min(coduni) as codunimin,max(coduni) as codunimax FROM atunidades
+    nomdes: codunides
+    campodes: codunimin
+    catdes: 0
+    nomhas: codunihas
+    campohas: codunimax
+    cathas: 1
+    nomcat: atunidades_coduni
+    size: 10
+    #parametros:  size="10" onclick="javascript:mostrarid(this.id)"

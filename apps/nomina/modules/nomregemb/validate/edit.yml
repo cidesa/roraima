@@ -1,0 +1,90 @@
+methods:
+  post:
+   - "npmaeemb{codemb}"
+   - "npmaeemb{desemb}"
+   - "npmaeemb{codjuz}"
+   - "npmaeemb{fecregemb}"
+   - "npmaeemb{codemp}"
+   - "npmaeemb{codcon}"   
+
+names:
+  npmaeemb{codemb}:
+    required:  Yes
+    required_msg: El Código del Embargo no puede estar en Blanco
+    validators: Validator_codemb
+
+  npmaeemb{desemb}:
+    required:  Yes
+    required_msg: La Descripción no puede estar en Blanco
+    validators: Validator_desemb
+
+  npmaeemb{codjuz}:
+    required:  Yes
+    required_msg: El Código de juzgado no puede estar en Blanco
+    validators: Validator_codjuz
+
+  npmaeemb{fecregemb}:
+    required:  Yes
+    required_msg: Debe ingresar la Fecha de Registro
+    validators: FechaValidator, FechaValidatorNow
+
+  npmaeemb{codemp}:
+    required:  Yes
+    required_msg: El Código del Empleado no puede estar en Blanco
+    validators: Validator_codemp
+
+  npmaeemb{codcon}:
+    required:  Yes
+    required_msg: El Código del Empleado no puede estar en Blanco
+    validators: Validator_codconemb
+
+Validator_codemb:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Npmaeemb
+        column:       codemb
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_desemb:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       200
+        max_error: La descripción no puede pasar mas de 200 caracteres
+        
+Validator_codjuz:
+    class: CidesaExistValidator
+    param:
+        class:    Npjuzgados
+        column:   codjuz
+        unique_error:   El Código del Juzgado no existe        
+
+Validator_codemp:
+    class: CidesaExistValidator
+    param:
+        class:    Nphojint
+        column:   codemp
+        unique_error:   El Código del Empleado no existe        
+        
+Validator_codconemb:
+    class: CidesaExistValidator
+    param:
+        class:    Npdefcpt
+        column:   codcon
+        unique_error:   El Código del Concepto no existe                
+        
+FechaValidator:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha  introducida es invalida
+        
+FechaValidatorNow:
+    class:         CidesaDateNow
+    param:
+        compare: 'now'
+        compare_error: Esta Fecha no puede ser mayor a la Fecha Actual
+        operator: '<='
+        date_error:  Fecha Inválida

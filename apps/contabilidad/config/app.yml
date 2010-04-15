@@ -1,0 +1,4 @@
+all:
+   .apps:
+     autenticacion:    autenticacion
+     max_per_page:     15

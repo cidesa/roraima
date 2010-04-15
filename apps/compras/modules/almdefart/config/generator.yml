@@ -1,0 +1,60 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Cadefart
+    theme:            default
+    fields:
+      codemp: { name: Código Empresa }
+      nomemp: { name: Nombre de la  Institucón }
+      diremp: { name: Dirección }
+      tlfemp: { name: Teléfono }
+      lonart: { name: Longitud del Código }
+      rupart: { name: Rupturas de Control }
+      forart: { name: Formato , params: maxlength=30 }
+      desart: { name: Descripción , params: maxlength=30 }
+      forubi: { name: Formato , params: maxlength=30 }
+      desubi: { name: Descripción , params: maxlength=30 }
+      generaop: { name: Generar Orden de Pago al Momento de la Recepción }
+      generacom: { name: Generar Comprobantes contables al momento de la Recepcion y el Despacho }
+      asiparrec: { name: Imputacón del Recargo }
+      corcom: { name: Orden de Compra }
+      correc2: { name: Recepciones }
+      correq2: { name: Requisiciones }
+      cordes2: { name: Despachos }
+      corser: { name: Ordenes de Servicio }
+      corsol: { name: Requisiciones por Departamento (Solicitud de Egreso) }
+      corcot2: { name: Cotizaciones}
+      almcorre:  { name: Traspaso de Artículos}
+      corent: { name: Entradas de Almacén }
+      corsal: { name: Salidas de Almacén }
+
+
+      prcasopre: { name: Afectación Presupuestaria (Precompromiso)}
+      prcreqapr: { name: Requiere Aprobación}
+      comasopre: { name: Afectación Presupuestaria (Compromiso)}
+      comreqapr: { name: Requiere Aprobación}
+
+      forsnc:    { name: Formato}
+      dessnc:    { name: Descripción}
+      reqreqapr:    { name: Aprobación de la Requisición para poder ser Despachada }
+      solreqapr:    { name: Aprobación de Solicitud de Egreso para poder realizar la Orden de Compra}
+       gencorart:  { name: Se genera correlativo en el Código del Artículo}
+      tipdocpre:  { name: Tipo de Documento}
+      cornac: { name: Nacionales}
+      corext: { name: Extranjeros}
+    edit:
+      title:         Definición de Artículos
+      display:        [codemp, nomemp, diremp, tlfemp, lonart, rupart, forart, desart, forubi, desubi, generaop, generacom, asiparrec, corcom, correc2, correq2, cordes2, corser, corsol, corcot2, prcasopre, prcreqapr, comasopre, comreqapr, almcorre, forsnc, dessnc, reqreqapr, solreqapr, corent, corsal, gencorart, tipdocpre, cornac, corext]
+      fields:
+        generaop:  {type: checkbox_tag}
+        generacom: {type: checkbox_tag}
+        prcasopre: {type: checkbox_tag}
+        prcreqapr: {type: checkbox_tag}
+        comasopre: {type: checkbox_tag}
+        comreqapr: {type: checkbox_tag}
+        gencorart: {type: checkbox_tag}
+      actions:
+        _save:        ~
+
+
+

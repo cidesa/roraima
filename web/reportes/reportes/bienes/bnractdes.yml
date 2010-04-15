@@ -1,0 +1,111 @@
+Parametros:
+  modulo: bienes
+  nomrep: bnractdes
+  titulo: ACTA DE DISPOSICION
+  orientacion: Vertical
+  width:210
+  tipopagina: Carta
+
+Filas:
+  CATALOGO DISPOSICION1:
+    tipotag:   inputcat_tag
+    label: Nro. Disposición:
+    sql:  select min(nrodismue) as nrodismuemin,max(nrodismue) as nrodismuemax  from bndismue
+    nomdes: coddisdes
+    campodes: nrodismuemin
+    catdes: 0
+    nomhas: coddishas
+    campohas: nrodismuemax
+    cathas: 1
+    nomcat: nrodismue
+    size: 22
+
+  CATALOGO UBICACION:
+    tipotag:   inputcat_tag
+    label: Ubicación Origen :
+    sql:  SELECT DISTINCT min(a.codubiori) as codmin, max(a.codubiori) as codmax FROM bndismue a, bnubibie b where a.codubiori = b.codubi and a.codubiori<>''
+    nomdes: codubides
+    campodes: codmin
+    catdes: 2
+    nomhas: codubihas
+    campohas: codmax
+    cathas: 3
+    nomcat: codubiori
+    size: 22
+
+  CATALOGO UBICACION2:
+    tipotag:   inputcat_tag
+    label: Ubicación Destino:
+    sql:  SELECT DISTINCT min(a.codubides) as codmin, max(a.codubides) as codmax FROM bndismue a, bnubibie b where a.codubiori = b.codubi and a.codubides<>''
+    nomdes: codubides2
+    campodes: codmin
+    catdes: 4
+    nomhas: codubihas2
+    campohas: codmax
+    cathas: 5
+    nomcat: codubides
+    size: 22
+
+  CATALOGO BIEN:
+    tipotag:   inputcat_tag
+    label: Código del Bien:
+    sql:  SELECT min(codmue) as codbiemin, max(codmue) as codbiemax FROM bnregmue
+    nomdes: codmue1
+    campodes: codbiemin
+    catdes: 6
+    nomhas: codmue2
+    campohas: codbiemax
+    cathas: 7
+    nomcat: codmue
+    size: 22
+
+  CAJA RESPONSABLE:
+    tipotag:   input_tag
+    label: Responsable:
+    nomdes: respnom
+    campodes: -1
+    nomhas: respci
+    campohas: -1
+    size: 30
+
+  TITULOS:
+    tipotag:    titulo_tag
+    nomdes:     NOMBRE
+    nomhas:     CARGO
+
+  CAJA PRESIDENTE:
+    tipotag:   input_tag
+    label: Preparado Por:
+    nomdes: presides
+    campodes: DR. JHONNY PICONE
+    nomhas: presihas
+    campohas: PRESIDENTE
+    size: 30
+
+  CAJA DIRGESTION:
+    tipotag:   input_tag
+    label: Codificado Por:
+    nomdes: dirgedes
+    campodes: LIC. OSWELLY GUÍA
+    nomhas: dirgehas
+    campohas: DIRECTORA DE LA OFICINA DE GESTIÓN ADMINISTRATIVA
+    size: 30
+
+  CAJA DIRESAT:
+    tipotag:   input_tag
+    label: Responsable:
+    nomdes: dirdes
+    campodes:  MERVIN VERA
+    nomhas: dishas
+    campohas: DIRECTORA DE LA DIRESAT CAPITAL
+    size: 30
+
+  CAJA ADSCRIPCION:
+    tipotag:   input_tag
+    label: Adscripción:
+    nomdes: abscrides
+    campodes:  T.S.U. VLADIMIR GALFIDEZ
+    nomhas: abscrihas
+    campohas: REGISTRADOR DE BIENES Y MATERIALES
+    size: 30
+

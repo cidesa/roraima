@@ -1,0 +1,237 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+	<title>DHTML Tree guide and samples</title>
+</head>
+
+<body>
+
+<div style="position:absolute;right:20"><a href="javascript:void(0)" onclick="expandAll(true)">expand</a>&nbsp;<a href="javascript:void(0)" onclick="expandAll(false)">collaps</a></div>
+<script>
+	function openFull(el){
+		el.nextSibling.style.display=='none'?el.nextSibling.style.display='block':el.nextSibling.style.display='none'
+	}
+	function expandAll(fl){
+		var elAr = document.getElementsByTagName("DIV");
+		for(var i=2;i<elAr.length;i++){
+			if(elAr[i].className=='block'){
+				if(fl)
+					elAr[i].style.display = "";
+				else
+					elAr[i].style.display = "none";
+			}
+		}
+	}
+</script>
+<style>
+	body {font-size:14px;line-height:18px;}
+	.{font-family:arial;}
+	h2 {cursor:pointer;font-size:16px;margin-left:10px;line-height:10px}
+	h3 {cursor:pointer;font-weight:normal;color:gray;text-decoration:underline;line-height:10px}
+	h4 {cursor:pointer;font-weight:normal;color:black;text-decoration:underline;line-height:10px}
+	.op {cursor:pointer;}
+	div.block {margin-left:30px;}
+	xmp {color:green;font-size:12px;margin:0px;font-family:courier;background-color:#e6e6fa;padding:2px}
+	li {margin-top:2px;}
+</style>
+<h2 onclick="openFull(this)">dhtmlxToolbar Guide and Samples</h2>
+<div class="block">
+<!---  --->
+	
+	<h3 onclick="openFull(this)">Main features</h3>
+	<div style="display:show" class="block">
+			<li>Multibrowser/Multiplatform support </li>
+			<li>Full controll with JavaScript API</li>
+			<li>Dynamic loading</li>
+			<li>XML support</li>
+			<li>different types of buttons</li> 
+			<li>customizable design</li>
+			<li>horisontal and vertical layout</li>
+			<li>high stability</li>
+	</div>
+	
+	<h3 onclick="openFull(this)">Supported browsers</h3
+	><div style="display:show" class="block">
+		<li>IE 5.x and above</li>
+		<li>Mac OS X Safari</li>
+		<li>Mozilla 1.4 and above</li>
+		<li>FireFox 0.9 and above</li>
+		<li>Opera (Xml loading depends on browser version)</li>
+	</div>
+
+	<h3 onclick="openFull(this)">Working with dhtmlxToolbar</h3
+	><div style="display:show" class="block">
+<!--- Initialize object on page --->
+		<h4 onclick="openFull(this)">Initialize object on page</h4
+		><div style="display:none" class="block">
+<XMP>
+<div id="toolbarBox" style="width:600;height:30"></div>
+<script>
+	//horisontal toolbar
+	toolbar=new dhtmlXToolbarObject("toolbarBox","100%","20","Demo");
+	toolbar.loadXML("config.xml");
+	toolbar.showBar();
+	
+	//vertical toolbar
+	toolbar=new dhtmlXToolbarObject("toolbarBox","100%","20","Demo",1);
+	toolbar.loadXML("config.xml");
+	toolbar.showBar();	
+</script>
+</XMP>
+		Parameters passed to the constructor are:
+			<li>object to attach toolbar to (should be loaded before calling constructor)</li>
+			<li>width of the toolbar</li>
+			<li>height of the toolbar</li>
+			<li>toolbar caption (optional)</li>
+			<li>vertical mode flag (optional)</li><br>			
+		Additional initialisation methods:
+			<li>loadXML(url) - load toolbar configuration from xml
+			<li>showBar() - show toolbar</li>
+		</div>
+<!--- Set Additional init parameters --->	
+		<h4 onclick="openFull(this)">Set Event Handlers</h4
+		><div style="display:none" class="block">
+<XMP>
+<div id="toolbarBox" style="width:200;height:200"></div>
+<script>
+	toolbar=new dhtmlXToolbarObject("toolbarBox","100%","20","Demo");
+	...
+	toolbar.setOnClickHandler(onClick);//set function object to call on toolbar button select
+	toolbar.setOnShowHandler(onShow);//set function to call on toolbar show
+	toolbar.setOnHideHandler(onHide);//set function to call on toolbar hide
+	
+	toolbar.setItemAction(itemId, itemOnClickAction); //set on select action for single button
+</script>
+</XMP>	
+		<li>Selected button ID will be passed to function specified as argument for setOnClickHandler(funcObj)</li>
+		</div>
+<!--- Adding nodes with Script --->
+		<h4 onclick="openFull(this)">Adding buttons with Script</h4
+		><div style="display:none" class="block">
+<XMP>
+<script>
+	toolbar=new dhtmlXToolbarObject("toolbarBox","100%","20","Demo");
+	...
+	toolbar.addItem(new dhtmlXImageButtonObject('icon21.gif',20,18,0,'new_Id','New tooltip'))
+	toolbar.addItem(new dhtmlXImageTextButtonObject('icon21.gif','New button',20,18,0,'new_Id','New tooltip'))
+</script>
+</XMP>	
+		<li>For list of initialisation parameters for different button types see documentation on relative objects</li>
+		</div>
+<!--- Using XML --->
+		<h4 onclick="openFull(this)">Configuring with XML</h4
+		><div style="display:none" class="block">
+<XMP>
+<script>
+	toolbar=new dhtmlXToolbarObject('treeBox',"100%","100%",0);
+	toolbar.loadXML("config.xml");
+</script>
+</XMP>	
+<XMP>
+XML Syntax:
+<?xml version='1.0' encoding='iso-8859-1'?>
+<toolbar name="Demo toolbar" width="100%" height="20" disableType="image" absolutePosition="auto" toolbarAlign="left">
+	<ImageButton src="../sysGfx/iconSave.gif" height="25" width="25" id="0_save" tooltip="Save" disableImage="sysGfx/iconPrint.gif"/>
+	<ImageTextButton src="../sysGfx/iconDelete.gif" height="25" width="100px" id="0_delete" tooltip="Delete">Delete</ImageTextButton>				
+	<divider id="div_4"/>		
+	<SelectButton id="0_select" width="150px" height="16px">
+		<option value="0">Mode 0</option>
+		<option value="1">Mode 1</option>
+		<option value="2">Mode 2</option>
+		<option value="3">Mode 3</option>						
+	</SelectButton>	
+</toolbar>
+</XMP>	
+		<strong>&lt;toolbar&gt;</strong> node is mandatory.<br>
+		Optional parameters for this tag are:<br>
+			<li>name - toolbar caption</li>
+			<li>width - toolbar width</li>
+			<li>height - toolbar height</li>
+			<li>disableType - if set to "image", then disabled buttons change their image, else only CSS changed</li>
+			<li>absolutePosition - positioning method of toolbar, allowed values: "absolute, relative, auto"</li>
+			<li>toolbarAlign - align of buttons on toolbar</li>
+			<li>globalCss - CSS class for buttons instead of default</li>
+			<li>globalTextCss - CSS class for buttons text instead of default</li>
+		<br>
+		
+		<strong>&lt;divider&gt;</strong> - toolbar divider <br>
+		Mandatory parameter for this tag is:<br>
+			<li>id - id of the item</li><br>
+			
+		<strong>&lt;ImageButton&gt;</strong> toolbar button with image<br>
+			Mandatory parameters for this tag are:<br>
+			<li>src - src of image</li>
+			<li>id - id of the button</li>
+			Optional parameters for this tag are:<br>
+			<li>width - button width</li>
+			<li>height - button height</li>
+			<li>disableImage - alternative image src, for disabled state</li>
+			<li>tooltip - button tooltip</li><br>
+			
+
+		<strong>&lt;ImageTextButton&gt;</strong> toolbar button with image and text<br>
+			Mandatory parameters for this tag are:<br>
+			<li>src - src of image</li>
+			<li>id - id of the button</li>
+			Optional parameters for this tag are:<br>
+			<li>width - button width</li>
+			<li>height - button height</li>
+			<li>disableImage - alternative image src, for disabled state</li>
+			<li>tooltip - button tooltip</li><br>
+			
+		
+		<strong>&lt;SelectButton&gt;</strong> button with select control, contain subitems - select options.<br>
+			Mandatory parameters for this tag are:<br>
+			<li>src - src of image</li>
+			<li>id - id of the button</li>
+			Optional parameters for this tag are:<br>
+			<li>width - button width</li>
+			<li>height - button height</li>
+			<li>disableImage - alternative image src, for disabled state</li>
+			<li>tooltip - button tooltip</li><br>
+
+		<strong>&lt;TwoStateButton&gt;</strong> toolbar button with image and text, which can be in two states (pressed and unpressed)<br>
+			Mandatory parameters for this tag are:<br>
+			<li>src - src of image</li>
+			<li>id - id of the button</li>
+			Optional parameters for this tag are:<br>
+			<li>width - button width</li>
+			<li>height - button height</li>
+			<li>disableImage - alternative image src, for disabled state</li>
+			<li>tooltip - button tooltip</li>
+			<li>state - button pressed state (false - unpressed, true - pressed)</li>			
+			<br>			
+			
+		<strong>&lt;option&gt;</strong> option data for select button<br>
+		Mandatory parameters for this tag are:<br>
+			<li>value - select option value</li>
+		</div>
+		
+<!--- Setting custom icons to nodes --->
+		<h4 onclick="openFull(this)">Examples of buttons manipulation</h4
+		><div style="display:none" class="block">
+<XMP>
+<script>
+
+
+	toolbar.hideButtons(listOfIds); //hide items, listOfIds - list of comma separated ids
+	toolbar.showItem(itemId); //show item
+	toolbar.disableItem(itemId); //disable item	
+	
+	or 
+	
+	var item=toolbar.getItem(itemId); //get item object by id
+	item.disable(); //disable
+	
+	item.setImage(newImageUrl); // set new image
+	item.setText(newButtonText); // set new image text (only for dhtmlxImageTextButton objects)
+</script>
+</XMP>	
+
+		</div>
+	</div>
+	
+
+</body>
+</html>

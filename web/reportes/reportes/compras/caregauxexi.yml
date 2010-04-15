@@ -1,0 +1,45 @@
+Parametros:
+  modulo: compras
+  nomrep: regauxexi
+  titulo: REGISTRO AUXILIAR DE EXISTENCIA EN ALMACEN
+  orientacion: Vertical
+  width:210
+  tipopagina: Carta
+
+Filas:
+  CATALOGO ARTICULO:
+    tipotag:   inputcat_tag
+    label: Código del Artículo:
+    sql:select  min(a.codart) as codartdes,max(a.codart) as codarthas from caregart a,cadetent b,cadetsal c,caartrcp d, caartdph e where a.codart=b.codart or a.codart=c.codart or a.codart=d.codart or a.codart=e.codart
+    nomdes: codartdes
+    campodes: codartdes
+    catdes: 0
+    nomhas: codarthas
+    campohas: codarthas
+    cathas: 1
+    nomcat: codartg
+    size: 20
+
+  FECHA:
+    tipotag:   inputfec_tag
+    label: Fecha:
+    sql:Select to_char(min(fecord),'dd/mm/yyyy') as fecordmin,to_char(max(fecord),'dd/mm/yyyy') as fecordmax from caordcom
+    nomdes: fecdes
+    campodes: fecordmin
+    nomhas: fechas
+    campohas: fecordmax
+    size: 15
+
+  CATALOGO ALMACENES:
+    tipotag:   inputcat_tag
+    label: Código del Almacén:
+    sql:select  min(codalm) as almdes,max(codalm) as almhas from cadefalm
+    nomdes: almdes
+    campodes: almdes
+    catdes: 2
+    nomhas: almhas
+    campohas: almhas
+    cathas: 3
+    nomcat: codalm
+    size: 20
+

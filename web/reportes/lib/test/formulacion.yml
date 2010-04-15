@@ -1,0 +1,13 @@
+formulacion:
+  Indice de categorias programaticas:								forcatpre
+  Clasificación Sectorial del gasto:								forrclasec
+  Descripción de Categorias Programáticas:							forrdescatpre
+  Cargos Presupuestados:											forrforcarpre
+  Costo de los Recursos Humanos por escala de Sueldos y Salarios:   forrforcosescsue
+  Obras Presupuestarias:											forrforobrpre
+  Formulacion Presupuestaria:										forrforpre
+  Resumen Formulación Presupuestaria:								forrforpreres
+  Transferencias Presupuestarias:									forrtrapre
+  Plan Operativo Anual:												forrpoa
+  Presupuesto de Ingresos:											forrpreing
+  Resumen General por Tipo de Gasto:								forrrestipgas

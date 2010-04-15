@@ -1,0 +1,47 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Tscomegrmes
+    theme:            cidesaGenerator
+    fields:
+      mes1:  { name: Mes, params: size=4 maxlength=2 readonly=true}
+      cormes1:  { name: Correlativo, params: size=4 maxlength=8}
+      mes2:  { name: Mes, params: size=4 maxlength=2 readonly=true}
+      cormes2:  { name: Correlativo, params: size=4 maxlength=8}
+      mes3:  { name: Mes, params: size=4 maxlength=2 readonly=true}
+      cormes3:  { name: Correlativo, params: size=4 maxlength=8}
+      mes4:  { name: Mes, params: size=4 maxlength=2 readonly=true}
+      cormes4:  { name: Correlativo, params: size=4 maxlength=8}
+      mes5:  { name: Mes, params: size=4 maxlength=2 readonly=true}
+      cormes5:  { name: Correlativo, params: size=4 maxlength=8}
+      mes6:  { name: Mes, params: size=4 maxlength=2 readonly=true}
+      cormes6:  { name: Correlativo, params: size=4 maxlength=8}
+      mes7:  { name: Mes, params: size=4 maxlength=2 readonly=true}
+      cormes7:  { name: Correlativo, params: size=4 maxlength=8}
+      mes8:  { name: Mes, params: size=4 maxlength=2 readonly=true}
+      cormes8:  { name: Correlativo, params: size=4 maxlength=8}
+      mes9:  { name: Mes, params: size=4 maxlength=2 readonly=true}
+      cormes9:  { name: Correlativo, params: size=4 maxlength=8}
+      mes10:  { name: Mes, params: size=4 maxlength=2 readonly=true}
+      cormes10:  { name: Correlativo, params: size=4 maxlength=8}
+      mes11:  { name: Mes, params: size=4 maxlength=2 readonly=true}
+      cormes11:  { name: Correlativo, params: size=4 maxlength=8}
+      mes12:  { name: Mes, params: size=4 maxlength=2 readonly=true}
+      cormes12:  { name: Correlativo, params: size=4 maxlength=8}
+    edit:
+      title: Correlativos de Comprobante de Egreso por Mes
+      display:
+        "Enero": [mes1, cormes1]
+        "Febrero": [mes2, cormes2]
+        "Marzo": [mes3, cormes3]
+        "Abril": [mes4, cormes4]
+        "Mayo": [mes5, cormes5]
+        "Junio": [mes6, cormes6]
+        "Julio": [mes7, cormes7]
+        "Agosto": [mes8, cormes8]
+        "Septiembre": [mes9, cormes9]
+        "Octubre": [mes10, cormes10]
+        "Noviembre": [mes11, cormes11]
+        "Diciembre": [mes12, cormes12]
+      actions:
+        _save:        ~

@@ -1,0 +1,80 @@
+Parametros:
+  modulo: nomina
+  nomrep: nprliqpresoc
+  titulo: LIQUIDACION DE PRESTACIÓN DE ANTIGUEDAD
+  orientacion: Vertical
+  tipopagina: CARTA
+  width:210
+
+Filas:
+  CATALOGO EMPLEADO:
+    tipotag:   inputcat_tag
+    label: Empleado:
+    sql:  select min(codemp) as codmin,max(codemp) as codmax from npliquidacion_det
+    nomdes: codempdes
+    campodes: codmin
+    catdes: 0
+    nomhas: codemphas
+    campohas: codmax
+    cathas: 1
+    nomcat: codempliq
+    size: 22
+
+  TITULOS:
+    tipotag:    titulo_tag
+    nomdes:     NOMBRE
+    nomhas:     C.I
+
+  CAJA ELAB1:
+    tipotag:   input_tag
+    label: Elaborado por:
+    nomdes: elab1
+    campodes:-1
+    size: 30
+    nomhas: cielab1
+    campohas:-1
+
+  CAJA ELAB2:
+    tipotag:   input_tag
+    label: Elaborado por:
+    nomdes: elab2
+    campodes:-1
+    size: 30
+    nomhas: cielab2
+    campohas:-1
+
+  CAJA DIRECTORA PLANIFICACION:
+    tipotag:   input_tag
+    label: Director(a) de Planificaci&oacute;n,Presupuesto y Control de Gesti&oacute;n:
+    nomdes: nomdirpla
+    campodes:-1
+    size: 30
+    nomhas: cidirpla
+    campohas:-1
+
+  CAJA DIRECTORA RECURSOS HUMANOS:
+    tipotag:   input_tag
+    label: Director(a) de Recursos Humanos:
+    nomdes: nomdirrec
+    campodes:-1
+    size: 30
+    nomhas: cidirrec
+    campohas:-1
+
+  CAJA DIRECTORA ADMINISTRACION:
+    tipotag:   input_tag
+    label: Director(a) de Administraci&oacute;n:
+    nomdes: nomdiradm
+    campodes:-1
+    size: 30
+    nomhas: cidiradm
+    campohas:-1
+
+  CAJA FUNCIONARIO:
+    tipotag:   input_tag
+    label: Funcionario(a):
+    nomdes: nomfunc
+    campodes:-1
+    size: 30
+    nomhas: cifunc
+    campohas:-1

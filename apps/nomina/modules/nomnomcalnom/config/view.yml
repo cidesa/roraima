@@ -1,0 +1,17 @@
+mensajeSuccess:
+  http_metas:
+    content-type: text/html
+
+  metas:
+    title:        Módulo Recursos Humanos
+    robots:       index, follow
+    description:  Módulo Recursos Humanos
+    keywords:     Módulo Recursos Humanos
+    language:     en
+
+  stylesheets:    [main]
+
+  javascripts:    [ %SF_PROTOTYPE_WEB_DIR%/js/prototype, %SF_PROTOTYPE_WEB_DIR%/js/scriptaculous, tools, ajax]
+
+  has_layout:     on
+  layout:         layout_generales

@@ -1,0 +1,79 @@
+<?php
+/**
+ * Funciones de la vista.
+ *
+ * @package    Roraima
+ * @subpackage vistas
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id$
+ */
+// date: 2007/03/19 13:25:21
+?>
+<?php echo form_tag('activarconceptos/edit', array(
+  'id'        => 'sf_admin_edit_form',
+  'name'      => 'sf_admin_edit_form',
+  'multipart' => true,
+)) ?>
+
+<?php echo object_input_hidden_tag($npdefcpt, 'getId') ?>
+
+<fieldset id="sf_fieldset_none" class="">
+
+<div class="form-row">
+  <?php echo label_for('npdefcpt[codcon]', __($labels['npdefcpt{codcon}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('npdefcpt{codcon}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npdefcpt{codcon}')): ?>
+    <?php echo form_error('npdefcpt{codcon}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($npdefcpt, 'getCodcon', array (
+  'size' => 10,
+  'control_name' => 'npdefcpt[codcon]',
+  )); echo $value ? $value : '&nbsp;' ?> <?php echo button_to('...','#') ?>
+    </div>
+</div>
+
+<div class="form-row">
+  <?php echo label_for('npdefcpt[nomcon]', __($labels['npdefcpt{nomcon}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('npdefcpt{nomcon}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npdefcpt{nomcon}')): ?>
+    <?php echo form_error('npdefcpt{nomcon}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($npdefcpt, 'getNomcon', array (
+  'size' => 80,
+  'control_name' => 'npdefcpt[nomcon]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+</div>
+
+<div class="form-row">
+	<?
+	echo "Estado: ".'&nbsp;&nbsp;';
+	if ($npdefcpt->getConact()=='S'){
+		echo radiobutton_tag('radio1', 'S', true)        ."  Activo".'&nbsp;&nbsp;';
+		echo radiobutton_tag('radio1', 'N', false)."   Inactivo";
+	
+	}else{
+		echo radiobutton_tag('radio1', 'S', false)        ."  Activo".'&nbsp;&nbsp;';
+		echo radiobutton_tag('radio1', 'N', true)."   Inactivo";
+	
+	}
+	?>
+</div>
+
+</fieldset>
+
+<?php include_partial('edit_actions', array('npdefcpt' => $npdefcpt)) ?>
+
+</form>
+
+<ul class="sf_admin_actions">
+      <li class="float-left"><?php if ($npdefcpt->getId()): ?>
+<?php echo button_to(__('delete'), 'activarconceptos/delete?id='.$npdefcpt->getId(), array (
+  'post' => true,
+  'confirm' => __('Are you sure?'),
+  'class' => 'sf_admin_action_delete',
+)) ?><?php endif; ?>
+</li>
+  </ul>

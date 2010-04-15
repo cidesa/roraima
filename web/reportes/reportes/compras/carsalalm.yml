@@ -1,0 +1,82 @@
+Parametros:
+  modulo: compras
+  nomrep: carsalalm
+  titulo: Salidas de Almacen
+  orientacion: Vertical
+  tipopagina: CARTA
+  width:210
+
+Filas:
+  CATALOGO SALIDA:
+    tipotag:   inputcat_tag
+    label: Numero Salida:
+    sql:  Select min(codsal) as codmin,max(codsal) as codmax from casalalm
+    nomdes: codsaldes
+    campodes: codmin
+    catdes: 0
+    nomhas: codsalhas
+    campohas: codmax
+    cathas: 1
+    nomcat:  codsal
+    size: 22
+
+  CATALOGO PROVEEDOR:
+    tipotag:   inputcat_tag
+    label: Proveedor:
+    sql:  Select min(codpro) as codmin,max(codpro) as codmax from caprovee
+    nomdes: codprodes
+    campodes: codmin
+    catdes: 2
+    nomhas: codprohas
+    campohas: codmax
+    cathas: 3
+    nomcat: codprosal
+    size: 22
+
+  CATALOGO RAMOS:
+    tipotag:   inputcat_tag
+    label: Ramo:
+    sql:  Select min(ramart) as codmin,max(ramart) as codmax from caramart
+    nomdes: codramdes
+    campodes: codmin
+    catdes: 4
+    nomhas: codramhas
+    campohas: codmax
+    cathas: 5
+    nomcat: ramart
+    size: 22
+
+  CAJA TRANSCRIPTOR:
+    tipotag:   input_tag
+    label: Transcrito por:
+    nomdes: transcrito
+    campodes:
+    size: 60
+
+  CAJA DESPACHADOR:
+    tipotag:   input_tag
+    label: Despachado por:
+    nomdes: despachado
+    campodes:
+    size: 60
+
+  CAJA BULTOS:
+    tipotag:   input_tag
+    label: Numero de Bultos:
+    nomdes: bultos
+    campodes:
+    size: 60
+
+  CAJA REVISADO:
+    tipotag:   input_tag
+    label: Revisado por:
+    nomdes: revisado
+    campodes:
+    size: 60
+
+  CAJA RECIBIDO:
+    tipotag:   input_tag
+    label: Recibido por:
+    nomdes: recibido
+    campodes:
+    size: 60

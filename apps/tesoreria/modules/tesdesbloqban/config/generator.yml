@@ -1,0 +1,28 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Tsbloqban
+    theme:            cidesaGenerator
+    fields:
+      numcue:      { name: Cuenta Bancaria, params: size=20 readonly=true}
+      nomcue:      { name: Banco, params: size=60}
+    list:
+      title:          Cuentas Bloqueadas
+      display:        [=numcue, nomcue]
+      filters:        [numcue]
+      sort:           numcue
+      max_per_page:   5
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+          name:  Desbloquear
+      actions:
+        _create:  NONE
+    edit:
+      title:          Desbloquear
+      display:        [numcue, nomcue]
+      actions:
+        _list:        ~
+        _delete:      ~
+          name:  Desbloquear
+          params:  confirm=Esta seguro de Desbloquear la Cuenta?

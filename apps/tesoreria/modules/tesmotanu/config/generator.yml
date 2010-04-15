@@ -1,0 +1,25 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Tsmotanu
+    theme:            cidesaGenerator
+    fields:
+      codmotanu: { name: Código, params: maxlength=4 onBlur="valor=this.value; valor=valor.pad(4, '0',0);document.getElementById('tsmotanu_codmotanu').value=valor;"}
+      desmotanu: { name: Descripción, params: maxlength=250}
+    list:
+      title:          Motivos de Anulación
+      display:        [=codmotanu, desmotanu]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [codmotanu, desmotanu]
+      max_per_page:   10
+      sort:           codmotanu
+    edit:
+      title:          Edición de Motivo de Anulación
+      display:  [codmotanu, desmotanu]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

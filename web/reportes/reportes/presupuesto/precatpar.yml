@@ -1,0 +1,28 @@
+Parametros:
+  modulo: presupuesto
+  nomrep: precatpar
+  titulo: CATALOGO DE PARTIDAS
+  orientacion: Vertical
+  tipopagina: Carta
+  width:210
+
+Filas:
+  CATALOGO CODIGO:
+    tipotag:   inputcat_tag
+    label: Código
+    sql:   select min(codpre) as codpredesde,max(codpre) as codprehasta from cpdeftit
+    nomdes: codpre1
+    campodes: codpredesde
+    catdes: 0
+    nomhas: codpre2
+    campohas: codprehasta
+    cathas: 1
+    nomcat: codprePrerasiini
+    size: 25
+
+  CAJA FILTRO:
+    tipotag:   input_tag
+    label: Filtro:
+    nomdes: comodin
+    campodes:%%
+    size: 60

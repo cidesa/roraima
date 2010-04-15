@@ -1,0 +1,8 @@
+modules/*/config/security.yml:
+  class:    cidesaSecurityConfigHandler
+modules/generales/config/security.yml:
+  class:    sfSecurityConfigHandler
+modules/confincomgen/config/security.yml:
+  class:    sfSecurityConfigHandler
+modules/tesmoslib/config/security.yml:
+  class:    sfSecurityConfigHandler

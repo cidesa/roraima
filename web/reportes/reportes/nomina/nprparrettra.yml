@@ -1,0 +1,41 @@
+Parametros:
+  modulo: nomina
+  nomrep: nprparrettra
+  titulo: PARTICIPACION DE RETIRO DEL TRABAJADOR
+  orientacion: Vertical
+  tipopagina: CARTA
+  width:210
+
+Filas:
+  CATALOGO CEDULAS:
+    tipotag:   inputcat_tag
+    label: Cedula Trabajador:
+    sql:   SELECT min(codemp) as codemp FROM nphojint
+    nomdes: codemp
+    campodes: codemp
+    catdes: 0
+    nomcat: codemp
+    size: 20
+
+  CAJA NUMSEG:
+    tipotag: input_tag
+    label: Nro. del Asegurado:
+    nomdes: numseg
+    campodes: -1
+    size: 20
+
+  CAJA NUMSEG2:
+    tipotag: input_tag
+    label: Nro. de la Empresa:
+    nomdes: numseg2
+    campodes: D19918993
+    size: 20
+
+
+  COMBO CONSECUTIVO:
+    tipotag:   combof_tag
+    label: Causa del retiro:
+    nomdes: causa
+    campodes: [1=>DESPIDO, 2=>RENUNCIA, 3=>JUBILADO, 4=>PENSIONADO, 5=>TRASLADO, 6=>FALLECIMIENTO]
+    size: 25
+

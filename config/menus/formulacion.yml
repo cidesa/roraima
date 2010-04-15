@@ -1,0 +1,79 @@
+formulacion:
+  opciones:
+    activo: true #true/false
+    descripcion: Módulo de Formulación
+    imagen: formulacion.gif
+    nombre: Formulación de Presupuesto
+    urls:
+      Cambiar Contraseña:
+        modulo: autenticacion.php
+        modulo_dev: autenticacion_dev.php
+      default:
+        modulo: formulacion.php
+        modulo_dev: formulacion_dev.php
+      Reportes:
+        absoluta: reportes/reportes/formulacion
+      Niveles Presupuestarios:
+        absoluta: contabilidadpresupuesto/aplicaciones/presupuesto
+    imagenes:
+      default: OperatorClass.png
+  menu:
+    DEFINICIONES GENERALES:
+      Definición de Empresa:                                  ForDefEmp
+      Niveles Presupuestarios:                                PreNivPreFor.php
+      Definiciones Generales:                                 ForDefGen
+      Definición de Cargos Formulados:                        Forcargos
+      Ubicación Geografica:
+        Estados:                                              ForDefEst
+        Municipios:                                           ForDefMun
+        Parroquias:                                           ForDefPar
+      Area Estrategicas:
+        Directrices:                                          fordefequ
+        Estrategias:                                          fordefsubobj
+        Políticas:                                            fordefsubsubobj
+      Unidades de Medidas:                                    ForDefUniMed
+      Definiciones de Estatus:                                ForDefStatus
+      Definición de Situaciones Presupuestarias:              ForDefSitPre
+      Definición de Objetivos Estrategicos Nueva Etapa:       ForDefObjNvaEta
+      Organismos Públicos:                                    ForDefOrgPub
+      Tipos de Contrib./Conexiones a Organi. Públi.:          ForDefTipCnx
+      Sectores:                                               ForDefSec
+      Subsectores:                                            ForDefSubSec
+      Definicion de Reportes:                                 Instructivos
+    INGRESOS:
+      Definiciones Especificas:
+        Clasificador Presupuestario (Recursos):               PreTitIng
+        Tipos de Financiamiento:                              pretitfin
+      Formulación:
+        Formulación Presupuesto de Ingresos Directa:          ForTitIng
+        Totales por Fuentes de Ing. Ord. y Extraord.:         ForTotFueIngGen
+    EGRESOS:
+      Definiciones Especificas:
+        Tipos de Crédito Presupuestario (Funcion./Invers.):   PreTipTit
+        Clasificador Presupuestario (Gastos):                 PreTitGas
+        Registro de Programas:                                ForDefPrg
+        Proyectos y Acciones Centralizadas:                   ForDefProyecto
+        Acciones Específicas:                                 ForDefAccEsp
+        Metas a Proyectos y Acciones Especificas:             ForDefPryAccMet
+        Unidades Ejecutoras:                                  fordefcatpre
+      Formulación:
+        Formulación POA:                                      ForPoa
+        #Formulación POA por Unidad Ejecutora:                 ForPoa_UAE
+        Crea Asignación Inicial:                              ForCreaAsiIni
+        Seguimientos Metas Formuladas en el POA:              ForSegPoa
+    Reportes:
+      Indice de categorias programaticas:                     forcatpre.php
+      Clasificación Sectorial del gasto:                      forrclasec.php
+      Descripción de Categorias Programáticas:                forrdescatpre.php
+      Cargos Presupuestados:                                  forrforcarpre.php
+      Costo de los Rec. Hum. por escala de Sueld. y Sal:      forrforcosescsue.php
+      Obras Presupuestarias:                                  forrforobrpre.php
+      Formulacion Presupuestaria:                             forrforpre.php
+      Resumen Formulación Presupuestaria:                     forrforpreres.php
+      Transferencias Presupuestarias:                         forrtrapre.php
+      Plan Operativo Anual:                                   forrpoa.php
+      Presupuesto de Ingresos:                                forrpreing.php
+      Resumen General por Tipo de Gasto:                      forrrestipgas.php
+    Mantenimiento:
+      Cambiar Contraseña:                                     cambiopasswd
+      Migrar Proyectos y Acciones Especificas:                formancreproacc

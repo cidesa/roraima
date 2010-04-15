@@ -1,0 +1,110 @@
+methods:
+  post:
+   - "cadefart{lonart}"
+   - "cadefart{rupart}"
+   - "cadefart{forart}"
+   - "cadefart{desart}"
+   - "cadefart{forubi}"
+   - "cadefart{desubi}"
+   - "cadefart{corcom}"
+   - "cadefart{correc2}"
+   - "cadefart{correq2}"
+   - "cadefart{cordes2}"
+   - "cadefart{corser}"
+   - "cadefart{corsol}"
+   - "cadefart{corcot2}"
+
+names: 
+
+  cadefart{lonart}:
+    required:  No
+    validators: CorrelValidator
+
+  cadefart{rupart}:
+    required:  No
+    validators: CorrelValidator
+	
+  cadefart{forart}:
+    required:  Yes
+    required_msg: El Formato del Artículo no puedo estar en Blanco
+    validators: StringValidator_forart
+
+  cadefart{desart}:
+    required:  No
+    validators: StringValidator_desart
+
+  cadefart{forubi}:
+    required:  Yes
+    required_msg: El Formato de la Ubicación no puedo estar en Blanco
+    validators: StringValidator_forubi
+
+  cadefart{desubi}:
+    required:  No
+    validators: StringValidator_desubi
+
+  cadefart{corcom}:
+    required:  No
+    validators: CorrelValidator
+
+  cadefart{correc2}:
+    required:  No
+    validators: CorrelValidator
+
+  cadefart{correq2}:
+    required:  No
+    validators: CorrelValidator
+
+  cadefart{cordes2}:
+    required:  No
+    validators: CorrelValidator
+
+  cadefart{corser}:
+    required:  No
+    validators: CorrelValidator
+
+  cadefart{corsol}:
+    required:  No
+    validators: CorrelValidator
+    
+  cadefart{corcot2}:
+    required:  No
+    validators: CorrelValidator 
+
+
+StringValidator_forart:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El formato del Artículo no puede tener menos de 1 caracter
+        max:       30
+        max_error: El formato del Artículo no puede pasar mas de 30 caracteres
+
+StringValidator_desart:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción del Artículo no puede tener menos de 1 caracter
+        max:       30
+        max_error: La descripción del Artículo no puede pasar mas de 30 caracteres
+
+StringValidator_forubi:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El formato de la Ubicación no puede tener menos de 1 caracter
+        max:       30
+        max_error: El formato de la Ubicación no puede pasar mas de 30 caracteres
+
+StringValidator_desubi:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción de la Ubicación no puede tener menos de 1 caracter
+        max:       30
+        max_error: La descripción de la Ubicación no puede pasar mas de 30 caracteres
+
+CorrelValidator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^[0-9]*$/' ]
+        values_error: Los Correlativos solo puede contener valores númericos 

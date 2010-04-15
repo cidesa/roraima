@@ -1,0 +1,78 @@
+Parametros:
+  modulo: nomina
+  nomrep: nprsuelbas
+  titulo: Listado de Sueldo Básico
+  orientacion: Vertical
+  tipopagina: Horizontal
+  width:250
+
+Filas:
+  CATALOGO EMPLEADOS:
+    tipotag:   inputcat_tag
+    label: Código del  Empleado:
+    sql:   SELECT min(codemp) as codempmin,max (codemp) as codempmax FROM NPASICAREMP
+    nomdes: codempdes
+    campodes: codempmin
+    catdes: 0
+    nomhas: codemphas
+    campohas: codempmax
+    cathas: 1
+    nomcat: codemp
+    size: 20
+
+  CATALOGO CARGOS:
+    tipotag:   inputcat_tag
+    label: Código del Cargo:
+    sql:   SELECT min(codcar) as codcarmin,max (codcar) as codcarmax FROM NPASICAREMP
+    nomdes: codcardes
+    campodes: codcarmin
+    catdes: 2
+    nomhas: codcarhas
+    campohas: codcarmax
+    cathas: 3
+    nomcat: codcar
+    size: 20
+
+  CATALOGO NOMINA:
+    tipotag:   inputcat_tag
+    label: Código del Nómina:
+    sql:   SELECT min(codnom) as codnommin,max (codnom) as codnommax FROM NPASICAREMP
+    nomdes: codnomdes
+    campodes: codnommin
+    catdes: 4
+    nomcat: codnom
+    size: 20
+
+  COMBO DE STATUS:
+    tipotag:   combof_tag
+    label: Especial:
+    nomdes: especial
+    campodes: [N=>N0, S=>SI]
+
+  CAJA TEXTAREA:
+    tipotag:   inputarea_tag
+    label: Observacion:
+    nomdes: observ
+    campodes:
+    size: 60
+
+  CAJA ELABORADO POR:
+    tipotag:   input_tag
+    label: Elaborado por:
+    nomdes: elaborado
+    campodes:
+    size: 60
+
+  CAJA REVISADO:
+    tipotag:   input_tag
+    label: Revisado por:
+    nomdes: revisado
+    campodes:
+    size: 60
+
+  CAJA APROBADO:
+    tipotag:   input_tag
+    label: Autorizado por:
+    nomdes: autorizado
+    campodes:
+    size: 60

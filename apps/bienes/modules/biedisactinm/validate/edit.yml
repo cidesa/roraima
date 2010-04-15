@@ -1,0 +1,67 @@
+methods:
+  post:
+   - "bndisinm{codact}"
+   - "bndisinm{codmue}"
+   - "bndisinm{nrodisinm}"
+   - "bndisinm{fecdisinm}"
+   - "bndisinm{fecdevdis}"
+   - "bndisinm{mondisinm}"
+
+names:
+  bndisinm{codact}:
+    required:  Yes
+    required_msg: El Código Catálogo no puede estar en Blanco.
+
+  bndisinm{codmue}:
+    required:  Yes
+    required_msg: El Código de Activo no puede estar en Blanco.
+    validators: CidesaExistValidator
+
+  bndisinm{nrodisinm}:
+    required:  Yes
+    required_msg: El Número de Orden no puede estar en Blanco.
+    validators: Validar3a
+
+  bndisinm{fecdisinm}:
+    required:  Yes
+    required_msg: La Fecha de Registro de Disposición de Inmuebles no puede estar en Blanco.
+    validators: FechaValidator
+
+  bndisinm{fecdevdis}:
+    required:  No
+    validators: FechaValidator
+
+  bndisinm{mondisinm}:
+    required:  No
+    validators: MyNumberValidator
+
+MyNumberValidator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^([0-9]*(\.*([0-9]{2,}))*\,?[0-9]+|[0-9]+\,?[0-9]*)?$/' ]
+        values_error:El Campo solo puede contener valores númericos
+
+Validar3a:
+    class: UniqueValidator3
+    param:
+        class:        Bndisinm
+        column:       nrodisinm
+        column2:      codact
+        column3:      codmue
+        value2:       'bndisinm[codact]'
+        value3:       'bndisinm[codmue]'
+        unique_error:  Ya existe este N° de Orden con este Código de Catálogo y Código Activo.
+
+CidesaExistValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Bnreginm
+        column:   codinm
+        unique_error:   El Código Activo no existe. Por Favor, Cambiélo por otro.
+
+FechaValidator:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha  introducida es invalida

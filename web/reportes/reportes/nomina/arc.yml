@@ -1,0 +1,50 @@
+Parametros:
+  modulo: nomina
+  nomrep: ARC
+  titulo: COMPROBANTE DE RETENCION
+  orientacion: Vertical
+  tipopagina: Horizontal
+  width:250
+
+Filas:
+  CATALOGO EMPLEADOS:
+    tipotag:   inputcat_tag
+    label: Código del  Empleado:
+    sql:   SELECT min(codemp) as codempmin,max (codemp) as codempmax FROM NPHOJINT
+    nomdes: codempdes
+    campodes: codempmin
+    catdes: 0
+    nomhas: codemphas
+    campohas: codempmax
+    cathas: 1
+    nomcat: codemph
+    size: 20
+
+  FECHA NOMINA:
+    tipotag:   inputfec_tag
+    label: Periodo de Nomina:
+    sql:   SELECT to_char((FECINI),'dd/mm/yyyy') as fecini,to_char(max(FECCIE),'dd/mm/yyyy') as feccie FROM CONTABA WHERE trim(CODEMP)='001' GROUP BY FECINI,FECCIE
+    nomdes: pernomdes
+    campodes: fecini
+    nomhas: pernomhas
+    campohas: feccie
+    size: 20
+
+  CAJA REVISADO:
+    tipotag:   input_tag
+    label: Funcionario Autorizado:
+    nomdes: revisado
+    campodes:
+    size: 60
+  CAJA RIF:
+    tipotag:   input_tag
+    label: Rif del Funcionario:
+    nomdes: rif
+    campodes:
+    size: 60
+  CAJA CEDULA:
+    tipotag:   input_tag
+    label: Cédula del Funcionario:
+    nomdes: cedula
+    campodes:
+    size: 60

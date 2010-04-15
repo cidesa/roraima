@@ -1,0 +1,42 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                true
+  tabla:                   carecpro
+  anchogrid:               780
+  ancho:                   780
+  filas:                   1
+  titulo:                  ' Recaudos '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Codigo
+  tipo:                    t
+  nombrecampo:             codrec
+  esgrabable:              true
+  html:                    [size="6" ]
+2:       # Columna 2
+  titulo:                  Descripcion
+  tipo:                    t
+  nombrecampo:             desrec
+  esgrabable:              false
+  html:                    [size="25" readonly="true"  ]
+       [size="15", readonly=true ]
+3:       # Columna 3
+  titulo:                  Fecha Entrega
+  tipo:                    f
+  nombrecampo:             fecent
+  esgrabable:              true
+  html:                    [size="10" ]
+
+4:       # Columna 4
+  titulo:                  Fecha Vencimiento
+  tipo:                    f
+  nombrecampo:             fecven
+  esgrabable:              true
+  html:                    [size="10" ]
+
+5:       # Columna 5
+  titulo:                  Grupo
+  tipo:                    t
+  nombrecampo:             grupo
+  esgrabable:              false
+  html:                    [ readonly="true" ]

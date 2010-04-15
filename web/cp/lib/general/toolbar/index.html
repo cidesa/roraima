@@ -1,0 +1,149 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+
+<!--#include virtual="/include/meta.inc" -->
+<META NAME="KEYWORDS" CONTENT="toolbar, javascript toolbar, dhtml toolbar, create toolbar, customizable toolbar, free toolbar, toolbar creator, toolbar builder, web toolbar, javascript navigation, javascript component, web development,toolbar make,scand,offshore,software,internet,development,company">
+<META NAME="DESCRIPTION" CONTENT="dhtmlxToolbar is a free customizable JavaScript Toolbar from Scand with high functionality, XML support, cross-browser compatibility and rich API">
+
+<!--#set var="title" value="dhtmlxToolbar - customizable Javascript toolbar with rich client side API" -->
+<!--#set var="picture" value="../../img/download/th_dhtmlxtoolbar.gif" -->
+<!--#set var="section" value="dhtmlxToolbar" -->
+
+<link rel="STYLESHEET" type="text/css" href="css/dhtmlXToolbar.css">
+<script language="JavaScript" src="js/dhtmlXProtobar.js"></script>
+<script language="JavaScript" src="js/dhtmlXToolbar.js"></script>
+<script language="JavaScript" src="js/dhtmlXCommon.js"></script>
+<script>
+	
+	var aToolBar = null;
+		function onButtonClick(itemId,itemValue)
+		{
+			alert("Button "+itemId+" was pressed"+(itemValue?("\n selected value : "+itemValue):""));
+		};
+	
+	function doOnLoad(){
+		preLoadImages();
+		//toolbar #1
+		aToolBar=new dhtmlXToolbarObject("toolbar_zone",'100%',20,"");
+		aToolBar.setOnClickHandler(onButtonClick);
+		aToolBar.loadXML("_toolbar.xml")
+		aToolBar.showBar();
+	}
+	function preLoadImages(){
+		var imSrcAr = new Array("")
+		var imAr = new Array(0);
+		for(var i=0;i<imSrcAr.length;i++){
+			imAr[imAr.length] = new Image();
+			imAr[imAr.length-1].src = "imgs/"+imSrcAr[i]
+		}
+	}
+</script>
+
+<!--#include virtual="/include/top.shtml" -->
+
+<body onload="doOnLoad()">
+<select onchange="document.location.href = this.value">
+	<option>dhtmlX Components
+	<option value="http://www.scbr.com/docs/products/dhtmlxMenu/index.shtml">Menu - dhtmlXMenu	
+	<option value="http://www.scbr.com/docs/products/dhtmlxToolbar/index.shtml">Toolbar - dhtmlXToolbar
+	<option value="http://www.scbr.com/docs/products/dhtmlxTree/index.shtml">Tree - dhtmlXTree
+</select>
+<p>dhtmlxToolbar is a completely <b>customizable free JavaScript toolbar</b> that allows to build a user friendly interface for a web application.
+</p>
+	
+<table width="600">
+	<tr>
+		<td>
+		<div 
+			id="toolbar_zone" 
+			style="width:600; border :1px solid Silver;">
+		</div>
+		</td>
+	</tr>
+</table>
+<br><br>
+<p>
+This <b>cross-browser JavaScript navigation component</b> enables to create an attractive <b>vertical</b> or <b>horizontal</b>  DHTML toolbar within minutes. dhtmlxToolbar is flexible, powerful, lightweight and easy to use.<br>
+You can freely define its visual appearance and complexity by simply changing  parameters (color, font, borders, padding, position, background images and more). <b>Dynamical loading</b> from <b>XML</b> gives an opportunity to change this JavaScript toolbar completely without reloading.<br>
+dhtmlxToolbar supports several buttons types (image pushButton, image/text pushButton, toggleButton, select box).
+It works perfectly in all main Web-browsers (<b>IE, Mozilla, FireFox, MacOS X Safari, Opera</b>).<br>
+Having great feature set, wide variety of options, flexibility, cross-browser compatibility, powerful <b>Javascript API</b> makes this component really useful for creating superior DHTML toolbar.<br>
+</p>
+<table width="600">
+	<tr>
+		<td valign="top">
+		<h3>Supported Browsers:</h3>
+			<li>IE 5.x and above</li>
+			<li>Mac OS X Safari</li>
+			<li>Mozilla 1.4 and above</li>
+			<li>FireFox 0.9 and above</li>
+			<li>Opera (Xml support depends on browser version)</li>
+		
+		<h3>Toolbar Features:</h3>
+			<li>Multibrowser/Multiplatform support </li>
+			<li>Full controll with JavaScript API</li>
+			<li>Dynamic loading</li>
+			<li>XML support</li>
+			<li>horisontal and vertical layout</li>
+			<li>different types of buttons</li> 
+			<li>customizable design</li>
+			<li>high stability</li>
+			<li>Macromedia ColdFusion support</li>
+		<h3>Licensing</h3>
+			<li><a target="_blank" href="License_Free.html">Free License</a></li>
+		</td>
+		<td valign="top" style="padding-left:20px">
+			<h3>Download Toolbar:</h3>
+				<a href="download/dhtmlxToolbar.zip"><li title="Scripts, Samples, Documentation">Full package</li></a>
+				<a href="download/dhtmlxToolbarDoc.zip"><li>Documentation only</li></a>
+			<h3>Examples:</h3>
+				<a target="_blank" href="samples/toolbarEx11.html"><li>Initialize object</li></a>
+				<a target="_blank" href="samples/toolbarEx12.html"><li>Add/Delete items</li></a>
+				<a target="_blank" href="samples/toolbarEx13.html"><li>Customisable layout</li></a>
+				<a target="_blank" href="samples/toolbarEx14.html"><li>Vertical layout</li></a>
+				<a target="_blank" href="samples/toolbarEx15.html"><li>Skinable design</li></a>
+				<a target="_blank" href="samples/toolbarEx16.html"><li>Button properties</li></a>
+				<a target="_blank" href="samples/toolbarEx17.html"><li>Two state buttons</li></a>				
+				
+			<h3>Documentation:</h3>
+				<a target="_blank" href="doc/index.html"><li>API Functions and Documentation</li></a>
+		</td>
+	</tr>
+</table>
+<br>
+<div align="center" style="width:600"><h3><a href="download/dhtmlxToolbar.zip">Download Toolbar source code</a></h3></div>
+<h3>Code Sample</h3>
+	
+<XMP style="color:green">
+
+<link rel="STYLESHEET" type="text/css" href="css/dhtmlXTree.css">
+<script language="JavaScript" src="js/dhtmlXProtobar.js"></script>
+<script language="JavaScript" src="js/dhtmlXToolbar.js"></script>
+<script language="JavaScript" src="js/dhtmlXCommon.js"></script>
+
+<script>
+	var tree1 = null;
+	function onButtonClick(itemId,itemValue)
+	{
+		//alert("Button "+itemId+" was pressed");
+	};
+	
+	function doOnLoad(){
+	aToolBar=new dhtmlXToolbarObject("toolbar_zone",'100%',20,"");
+	aToolBar.setOnClickHandler(onButtonClick);
+	aToolBar.loadXML("_toolbar.xml")
+	aToolBar.showBar();
+	}
+</script>
+<body onload="doOnLoad()">
+<div 
+			id="toolbar_zone" 
+			style="width:600;border :1px solid Silver;">
+</div>
+</XMP>	
+
+<p>See also our <a href="http://www.scand.com/products/awtx/toolbar/" target="_blank">Java toolbar applet - jToolbar</a>.</p>
+<center><a href="http://scbr.com/docs/company.shtml" class=menu><img width=468 height=60 border=0 alt="" src=/img/b2.gif></a></center>
+
+<!--#include virtual="/include/bottom.shtml" -->

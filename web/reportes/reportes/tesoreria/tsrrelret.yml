@@ -1,0 +1,57 @@
+Parametros:
+  modulo: tesoreria
+  nomrep: tsrrelret
+  titulo: RELACION DE RETENCIONES VARIAS (ISLR) Y TIMBRE FISCAL
+  orientacion: Vertical
+  tipopagina: Carta
+  width:210
+
+Filas:
+  CATALOGO NUMORDEN:
+    tipotag:   inputcat_tag
+    label: Numero de Orden:
+    sql:   SELECT min(numord) as nummin,max(numord) as nummax FROM opordpag
+    nomdes: numorddes
+    campodes: nummin
+    catdes: 0
+    nomhas: numordhas
+    campohas: nummax
+    cathas: 1
+    nomcat: numordpag
+    size: 22
+
+  CATALOGO NUMFAC:
+    tipotag:   inputcat_tag
+    label: Numero de Factura:
+    sql:   SELECT min(numfac) as nummin,max(numfac) as nummax FROM opfactur
+    nomdes: facdes
+    campodes: nummin
+    catdes: 2
+    nomhas: fachas
+    campohas: nummax
+    cathas: 3
+    nomcat: numfactura_opfactur
+    size: 22
+
+  CATALOGO BENEFICIARIO:
+    tipotag:   inputcat_tag
+    label: Beneficiario:
+    sql:   SELECT min(cedrif) as cedmin,max(cedrif) as cedmax FROM opordpag
+    nomdes: cedrifdes
+    campodes: cedmin
+    catdes: 4
+    nomhas: cedrifhas
+    campohas: cedmax
+    cathas: 5
+    nomcat: benefi_opordpag
+    size: 22
+
+  FECHA COMPROBANTE:
+    tipotag:   inputfec_tag
+    label: Fecha Orden:
+    sql:   SELECT to_char(min(fecemi),'dd/mm/yyyy') as fecmin,to_char(max(fecemi),'dd/mm/yyyy') as fecmax FROM opordpag
+    nomdes: fechades
+    campodes: fecmin
+    nomhas: fechahas
+    campohas: fecmax
+    size: 22

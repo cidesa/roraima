@@ -1,0 +1,28 @@
+Parametros:
+  modulo: ingresos
+  nomrep: inrliscon
+  titulo: LISTADO DE CONTRIBUYENTES
+  orientacion: Vertical
+  tipopagina: CARTA
+  width:210
+
+Filas:
+  CATALOGO INGRESOS:
+    tipotag: inputcat_tag
+    label: Contribuyente:
+    sql: Select min(rifcon) as rifmin, max(rifcon) as rifmax from ciconrep
+    nomdes: rifdes
+    campodes: rifmin
+    catdes: 0
+    nomhas: rifhas
+    campohas: rifmax
+    cathas: 1
+    nomcat: ciconrep_rifcon
+    size: 15
+
+  COMBO TIPO:
+    tipotag: combof_tag
+    label: Tipo de Salida:
+    nomdes: tipo
+    campodes: [0=>Todos los Contibuyentes Registrados, 1=>Contribuyentes con Movimientos]
+    #size: 22

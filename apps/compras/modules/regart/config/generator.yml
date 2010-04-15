@@ -1,0 +1,40 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Caregart
+    theme:            cidesaGenerator
+
+    fields:
+      codart:         {name: Código de Artículo}
+      grid:           {name: . }
+      desart:         {name: Descripción de Artículo}
+      fecult:         {name: Fecha Ultimo Costo}
+      codpar:
+        name: Código de Partida
+      ramart:
+        name: Ramo del Artículo
+        msj_error: El código del ramo es necesario
+        catalogo:  					# Configuración del catálogo
+          catalogoweb:   Caramart_Almregart	# Metodo de búsqueda
+          clase: caramart 				# Clase foránea
+          ajax: 0						# Indice del ajax
+          parametros: getprincipal="getRamart" getsecundario="getNomram" campoprincipal="ramart" camposecundario="nomram" campobase = "xx"
+
+    list:
+      display: [=codart, desart, codpar]
+
+      filters: [codart, desart, codpar]
+
+    edit:
+      save:           true
+      display:
+        Articulo: [codart, desart]
+        Información:  [codpar, ramart, fecult]
+        Almacenes: [_grid]
+      report:
+        url:         compras/r.php?m=compras&r=carramart.php
+        params:      { ramdes: codart, ramphas: codart }
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

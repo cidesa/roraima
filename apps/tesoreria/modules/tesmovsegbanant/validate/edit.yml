@@ -1,0 +1,30 @@
+methods:
+  post:
+   - "tsmovban{numcue}"
+   - "tsmovban{tipmov}"
+
+names: 
+  tsmovban{numcue}:
+    required:  Yes
+    required_msg: El Código de la Ubicación no puedo estar en Blanco
+    validators: ExistValidator_numcue 
+
+  tsmovban{tipmov}:
+    required:  No
+    validators: ExistValidator_tipmov
+    
+    
+ExistValidator_numcue:
+    class: CidesaExistValidator
+    param:
+        class:        Tsdefban
+        column:       numcue     
+        unique_error: El Código del Proveedor debe Existir.    
+        
+ExistValidator_tipmov:
+    class: CidesaExistValidator
+    param:
+        class:        Tstipmov
+        column:       codtip     
+        unique_error: El Código del Movimiento debe Existir.                
+    

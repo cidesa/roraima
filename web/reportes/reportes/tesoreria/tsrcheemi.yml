@@ -1,0 +1,64 @@
+Parametros:
+  modulo: tesoreria
+  nomrep: tsrcheemi
+  titulo: Listado de Cheques Emitidos
+  orientacion: Vertical
+  tipopagina: CARTA
+  width:210
+
+Filas:
+  CATALOGO CHEQUES:
+    tipotag:   inputcat_tag
+    label: Nro. Cheque:
+    sql:  Select min(numche) as numchemin,max(numche) as numchemax from TSCHEEMI
+    nomdes: che1
+    campodes: numchemin
+    catdes: 0
+    nomhas: che2
+    campohas: numchemax
+    cathas: 1
+    nomcat: tscheemi_numche
+    size: 22
+
+  CATALOGO BANCO:
+    tipotag:   inputcat_tag
+    label: Nro. cuenta:
+    sql:  SELECT min(a.numcue) as minnumcue,max(a.numcue) as maxnumcue from tscheemi a,tsdefban b where trim(a.numcue)=trim(b.numcue)
+    nomdes: cue1
+    campodes: minnumcue
+    catdes: 2
+    nomhas: cue2
+    campohas: maxnumcue
+    cathas: 3
+    nomcat: numcue_tscheemi
+    size: 22
+
+  CATALOGO BENEFICIARIO:
+    tipotag:   inputcat_tag
+    label: C.I/RIF  Beneficiario:
+    sql:  SELECT min(trim(CEDRIF)) as minced, max(trim(CEDRIF)) as maxced FROM tscheemi
+    nomdes: bendes
+    campodes: minced
+    catdes: 4
+    nomhas: benhas
+    campohas: maxced
+    cathas: 5
+    nomcat: benche
+    size: 22
+
+  FECHA ORDEN:
+    tipotag:   inputfec_tag
+    label: Fecha:
+    sql:   select to_char(min(a.fecemi),'dd/mm/yyyy') as fecmin, to_char(max(a.fecemi),'dd/mm/yyyy') as fecmax from tscheemi a
+    nomdes: fecmin
+    campodes: fecmin
+    nomhas: fecmax
+    campohas: fecmax
+    size: 22
+
+  COMBO STATUS:
+    tipotag:   combof_tag
+    label: Status:
+    nomdes: status
+    campodes: [T=>Todos, E=>Entregados, A=>Anulados, C=>En Caja]
+    size: 22

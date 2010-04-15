@@ -1,0 +1,35 @@
+opciones:                  # Opciones generales
+  name:                    a #identificador del grid dentro del formulario
+  eliminar:                false #si kiero qaparezk el boton eliminar
+  tabla:                   contabc
+  anchogrid:               750
+  ancho:                   700
+  filas:                   0 #filas vacias x defecto
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 2
+  titulo:
+  tipo:                    k
+  nombrecampo:             check
+  html:                    [size="01" ]
+  esgrabable:              true
+2:       # Columna 3
+  titulo:                  Numero
+  tipo:                    t
+  nombrecampo:             numcom
+  html:                    [size="8" readonly=true ]
+  oculta:                  false
+  esgrabable:              false
+3:       # Columna 4
+  titulo:                  Fecha
+  tipo:                    t
+  nombrecampo:             feccom
+  html:                    [size="10"  readonly=true ]
+  oculta:                  false
+  esgrabable:              false
+4:       # Columna 5
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             descom
+  html:                    [size="65"  readonly=true ]
+  esgrabable:              false

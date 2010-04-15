@@ -1,0 +1,36 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Contaba
+    theme:            cidesaGenerator
+
+    fields:
+     codtesact: { name: Cuentas de Activos, params: size=3 }
+     codtespas: { name: Cuentas de Pasivos, params: size=3 }
+     codind:   { name: Cuentas de Ingresos, params: size=3 }
+     codegd:   { name: Cuentas de Egresos, params: size=3 }
+     codctd:   { name: Cuentas de Resultado, params: size=3 }
+     codcta:   { name: Cuentas de Capital, params: size=3 }
+     codord:   { name: Cuentas de Orden, params: size=3 }
+     codresant:
+       name: Cuenta Resultado de Ejercicios Anteriores
+       catalogo:
+          catalogoweb: Contabb_Confintipcuecon
+          clase: Contabb
+          ajax: 1
+          parametros: getprincipal="getCodcta" getsecundario="getDescta" campoprincipal="codresant" camposecundario="descta" campobase = "id"
+     codres:
+       name: Cuenta Resultado de Ejercicio Actual
+       catalogo:
+          catalogoweb: Contabb_Confintipcuecon
+          clase: Contabb
+          ajax: 1
+          parametros: getprincipal="getCodcta" getsecundario="getDescta" campoprincipal="codres" camposecundario="descta2" campobase = "id"
+
+    edit:
+      title: Registro de Tipos de Cuenta - Cuentas Contables
+      display:
+        Tipos de Cuentas: [codtesact, codtespas, codind, codegd, codctd, codcta, codord ]
+        Cuentas Contables: [codresant, codres ]
+      actions:
+        _save:        ~

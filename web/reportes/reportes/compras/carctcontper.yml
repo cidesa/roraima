@@ -1,0 +1,86 @@
+Parametros:
+  modulo: compras
+  nomrep: carctcontper
+  titulo: ACTA DE CONTROL PERCEPTIVO
+  orientacion: Vertical
+  width:210
+  tipopagina: Carta
+
+Filas:
+  CATALOGO ORDEN:
+    tipotag:   inputcat_tag
+    label: Nro. Orden:
+    sql:  select min(a.ordcom) as ordmin, max (a.ordcom) as ordmax from caordcom a , carcpart c where a.ordcom=c.ordcom
+    nomdes: codorddes
+    campodes: ordmin
+    catdes: 0
+    nomhas: codordhas
+    campohas: ordmax
+    cathas: 1
+    nomcat: caordcom_ordcom
+    size: 22
+
+  CATALOGO PROVEEDOR:
+    tipotag:   inputcat_tag
+    label: R.I.F Proveedor :
+    sql:  select min(codpro) as codmin , max(codpro) as codmax  from caprovee
+    nomdes: codprodes
+    campodes: codmin
+    catdes: 2
+    nomhas: codprohas
+    campohas: codmax
+    cathas: 3
+    nomcat: caordcom_rifpro
+    size: 22
+
+  FECHA:
+    tipotag:   inputfec_tag
+    label: Fecha:
+    sql:   SELECT to_char(MIN(fecord),'DD/MM/YYYY') as fechamin, to_char(MAX(fecord),'DD/MM/YYYY') as fechamax FROM caordcom
+    nomdes: fecreg1
+    campodes: fechamin
+    nomhas: fecreg2
+    campohas: fechamax
+    size: 22
+
+
+  TITULOS:
+    tipotag:    titulo_tag
+    nomdes:     NOMBRE
+    nomhas:     CARGO
+
+  CAJA AUTORIZADO:
+    tipotag:   input_tag
+    label: Autorizado Por:
+    nomdes: auto
+    campodes: IRAIS LEÓN
+    nomhas: autocar
+    campohas: ANALISTA FINANCIERO I
+    size: 30
+
+  CAJA CEDULA:
+    tipotag:   input_tag
+    label: Cedula:
+    nomdes: ced1
+    campodes: -1
+    nomhas:
+    campohas:
+    size: 30
+
+  CAJA ELABORADO:
+    tipotag:   input_tag
+    label: Elaborado Por:
+    nomdes: elab
+    campodes: JÓSE SOLÓRZANO
+    nomhas: elabcar
+    campohas: ASISTENTE ADMINISTRATIVO II
+    size: 30
+
+  CAJA CEDULA2:
+    tipotag:   input_tag
+    label: Cedula:
+    nomdes: ced2
+    campodes: -1
+    nomhas:
+    campohas:
+    size: 30

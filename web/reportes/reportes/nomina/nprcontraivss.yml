@@ -1,0 +1,81 @@
+Parametros:
+  modulo: nomina
+  nomrep: nprcontraivss
+  titulo: CONSTANCIA DE TRABAJO PARA EL IVSS
+  orientacion: Vertical
+  tipopagina: CARTA
+  width:210
+
+Filas:
+  CATALOGO CEDULAS:
+    tipotag:   inputcat_tag
+    label: Cedula Trabajador:
+    sql:   SELECT min(codemp) as codemp FROM nphojint
+    nomdes: codemp
+    campodes: codemp
+    catdes: 0
+    nomcat: codemp
+    size: 20
+
+  #CAJA NUMSEG:
+   # tipotag: input_tag
+   # label: Nro. IVSS:
+   # nomdes: numseg
+   # campodes: -1
+   # size: 20
+
+  CAJA REPRE:
+    tipotag: input_tag
+    label: Representante Legal:
+    nomdes: repleg
+    campodes: -1
+    size: 60
+
+  CAJA CEDULA REPRE:
+    tipotag: input_tag
+    label: Cedula Representante Legal:
+    nomdes: cedrep
+    campodes: -1
+    size: 20
+
+  CAJA TELEFONO REPRE:
+    tipotag: input_tag
+    label: Telefono Representante Legal:
+    nomdes: telrep
+    campodes: -1
+    size: 20
+
+  CAJA FIRMATE:
+    tipotag: input_tag
+    label: Nombre Firmante:
+    nomdes: nomfir
+    campodes: -1
+    size: 60
+
+  CAJA CEDULA FIRMA:
+    tipotag: input_tag
+    label: Cedula Firmante:
+    nomdes: cedfir
+    campodes: -1
+    size: 20
+
+  CAJA CARGO FIRMAN:
+    tipotag: input_tag
+    label: Cargo Firmante:
+    nomdes: carfir
+    campodes: -1
+    size: 60
+
+  CAJA LUGAR:
+    tipotag: input_tag
+    label: Lugar:
+    nomdes: lugar
+    campodes: -1
+    size: 60
+
+  CAJA Observacion:
+    tipotag: inputarea_tag
+    label: Observacion:
+    nomdes: observ
+    campodes: -1
+    size: 60

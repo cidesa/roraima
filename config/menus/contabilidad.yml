@@ -1,0 +1,57 @@
+contabilidad:
+  opciones:
+    activo: true #true/false
+    descripcion: Módulo de Contabilidad
+    imagen: contabilidad.gif
+    nombre: Contabilidad Financiera
+    urls:
+      Cambiar Contraseña:
+        modulo: autenticacion.php
+        modulo_dev: autenticacion_dev.php
+      default:
+        modulo: contabilidadpresupuesto/aplicaciones/contabilidad
+        modulo_dev: contabilidadpresupuesto/aplicaciones/contabilidad
+      Configuraciones Generales:
+        modulo: contabilidad.php
+        modulo_dev: contabilidad_dev.php
+      Reportes:
+        absoluta: reportes/reportes/contabilidad
+    imagenes:
+      default: OperatorClass.png
+  menu:
+    Configuraciones Generales:                                confincongen
+    Definiciones Específicas de Institución:                  ConFinIns.php
+    Catálogo de Cuentas:                                      ConFinCue.php
+    Tipos de Cuentas:                                         ConFinTipCueCon.php
+    #Definición de Cuentas:                                   ConFinDefCue.php
+    #Cuentas Contables:                                       ConFinCueCon.php
+    Comprobantes:                                             ConFinCom.php
+    Actualizar Comprobantes:                                  ConFinActCom.php
+    Cierre de Período:                                        ConFinCiePer.php
+    #Abrir Período:                                           ConFinAbrPer.php
+    #Generar Comprobante de Cierre:                           ConFinComCie.php
+    Cierre de Ejercicio:                                      ConFinCie.php
+    #Definición para el Origen y Aplicación de Fondos:        ConOriApliFon.php
+    #Definición para el Balan. Gener. y Estado de Resultados: ConDefBalGen.php
+    #Trasladar Saldos:                                        BDSalActCon.php
+    Reportes:
+      Catálogo de Cuentas:                                    ConCatCue.php
+      Diario de Comprobantes:                                 ConDiaCom.php
+      Resumen de Comprobantes:                                ConResCom.php
+      Resumen de Diario:                                      ConResDia.php
+      Balance de Comprobación:                                ConBalCom.php
+      Balance General:                                        ConBalGen.php
+      Estado de Resultados:                                   ConEdoRes.php
+      Balance General y Estado de Resultado Resumidos:        ConBalGenFIJO.php
+      Mayor General:                                          ConMayGen.php
+      Mayor Analítico:                                        ConMayAna.php
+      Comprobante Individual:                                 Comprobante.php
+      #Flujo de Caja:                                         conrflucaj.php
+    Mantenimiento Específico:
+      #Actualizar Maestro:                                    ConFinActMae.php
+      #Actualizar Maestro por Cuentas:                        ConFinActMaeCue.php
+      Eliminar Comprobantes Anulados:                         ConFinEliCom.php
+      Cerrar Etapa de Definición:                             ConFinCieDef.php
+      Cambiar Contraseña:                                     cambiopasswd
+      #Cambiar Password de Usuario:                           PreCamPwd.php
+      #Trasladar Saldos Contables del Ejercicio Anterior:     BDActSalCon.php

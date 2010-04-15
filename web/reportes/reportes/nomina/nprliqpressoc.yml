@@ -1,0 +1,18 @@
+Parametros:
+  modulo: nomina
+  nomrep: nprliqpressoc
+  titulo: LIQUIDACION DE PRESTACIONES SOCIALES
+  orientacion: Vertical
+  tipopagina: CARTA
+  width:210
+
+Filas:
+  CATALOGO EMPLEADO:
+    tipotag:   inputcat_tag
+    label: Cedula Empleado:
+    sql:  Select min(codemp) as codemp  from npliquidacion_det
+    nomdes: codempdes
+    campodes: codemp
+    catdes: 0
+    nomcat: codempliq
+    size: 25

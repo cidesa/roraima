@@ -1,0 +1,14 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Contaba
+    theme:            cidesaGenerator
+    fields:
+      botones:	      {name: .}
+
+    edit:
+      title:                     Cierre de la etapa de definición
+      display:
+        Cierre de la etapa de definición:       [_botones]
+      actions:
+        NONE

@@ -1,0 +1,77 @@
+Parametros:
+  modulo: nomina
+  nomrep: nprhisrelcon
+  titulo: HISTORICO DE RELACION NOMINA CONCEPTO
+  orientacion: Vertical
+  tipopagina: Carta
+  width:210
+
+Filas:
+  COMBO DE CONCEPTO:
+    tipotag:   combof_tag
+    label: Tipo de Concepto:
+    nomdes: tipcon
+    campodes: [T=>Todos, A=>Asignaciones, D=>Deducciones, P=>Aportes]
+
+  CATALOGO CODCON:
+    tipotag:   inputcat_tag
+    label: Código Concepto:
+    sql:   SELECT min(codcon) as codconmin,max(codcon) as codconmax FROM NPASICONEMP
+    nomdes: codcondes
+    campodes: codconmin
+    catdes: 0
+    nomhas: codconhas
+    campohas: codconmax
+    cathas: 1
+    nomcat: codcon
+    size: 20
+
+  CATALOGO CODNOM:
+    tipotag:   inputcat_tag
+    label: Código Nomina:
+    sql:   SELECT min(codnom) as codnommin,max(codnom) as codnommax FROM NPASICAREMP
+    nomdes: codnomdes
+    campodes: codnommin
+    catdes: 2
+    nomhas: codnomhas
+    campohas: codnommax
+    cathas: 3
+    nomcat: codnom
+    size: 20
+
+  COMBO DE STATUS:
+    tipotag:   combof_tag
+    label: Especial:
+    nomdes: especial
+    campodes: [NO=>NO, SI=>SI, A=>AMBAS]
+
+  FECHA NOMINA:
+    tipotag:   inputfec_tag
+    label: Periodo de Nomina:
+    sql:   SELECT to_char(min(fecemi),'dd/mm/yyyy') as fechamin,to_char(max(fecemi),'dd/mm/yyyy') as fechamax FROM opordpag
+    nomdes: fechadesde
+    campodes: fechamin
+    nomhas: fechahasta
+    campohas: fechamax
+    size: 14
+
+  CAJA ELABORADO POR:
+    tipotag:   input_tag
+    label: Elaborado por:
+    nomdes: elapor
+    campodes:
+    size: 60
+
+  CAJA REVISADO:
+    tipotag:   input_tag
+    label: Revisado por:
+    nomdes: revpor
+    campodes:
+    size: 60
+
+  CAJA AUTORIZADO:
+    tipotag:   input_tag
+    label: Autorizado por:
+    nomdes: autpor
+    campodes:
+    size: 60

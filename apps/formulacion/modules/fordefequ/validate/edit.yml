@@ -1,0 +1,43 @@
+methods:
+  post:
+   - "fordefequ{codequ}"
+   - "fordefequ{desequ}"
+   - "fordefequ{desobj}"
+
+names:
+  fordefequ{codequ}:
+    required:  Yes
+    required_msg: El Código de la Directriz no puedo estar en Blanco.
+    validators: UniqueValidator
+
+  fordefequ{desequ}:
+    required:  Yes
+    required_msg: La Descripción de la Directriz no puede estar en Blanco
+    validators: DescripcionValidator
+
+  fordefequ{desobj}:
+    required:  No
+    validators: ObjetivoValidator
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Fordefequ
+        column:   codequ
+        unique_error:   El Código de la Directriz ya existe. Por Favor, Cambiélo por otro.
+
+DescripcionValidator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La Descripción de la Directriz no puede tener menos de 2 carácteres
+        max:       50
+        max_error: La Descripción de la Directriz no puede tener más de 50 carácteres
+
+ObjetivoValidator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La Descripción de la Directriz no puede tener menos de 2 carácteres
+        max:       1000
+        max_error: La Descripción de la Directriz no puede tener más de 1000 carácteres

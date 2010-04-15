@@ -1,0 +1,87 @@
+methods:
+  post:
+   - "catraalm{codtra}"
+   - "catraalm{destra}"
+   - "catraalm{almori}"
+   - "catraalm{almdes}"
+   - "catraalm{fectra}"
+   - "catraalm{codubiori}"
+   - "catraalm{codubides}"
+
+names:
+  catraalm{codtra}:
+    required:  Yes
+    required_msg: El Código no puedo estar en Blanco
+    validators: Validator_codtra
+
+  catraalm{destra}:
+    required:  Yes
+    required_msg: La descripción no puedo estar en Blanco
+    validators: Validator_destra
+
+  catraalm{almori}:
+    required:  Yes
+    required_msg: El Código del Almacen no puedo estar en Blanco
+    validators: ExistValidator
+
+  catraalm{almdes}:
+    required:  Yes
+    required_msg: El Código del Almacen no puedo estar en Blanco
+    validators: ExistValidator
+
+  catraalm{fectra}:
+    required:  Yes
+    required_msg: La Fecha no puedo estar en Blanco
+    validators: FechaValidator
+
+  catraalm{codubiori}:
+    required:  Yes
+    required_msg: La Ubicación Origen no puede estar en Blanco
+    validators: UbicacionValidator
+
+  catraalm{codubides}:
+    required:  Yes
+    required_msg: La Ubicación Destino no puede estar en Blanco
+    validators: UbicacionValidator
+
+Validator_codtra:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Catraalm
+        column:       codtra
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_destra:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       254
+        max_error: La descripción no puede pasar mas de 254 caracteres
+
+ExistValidator:
+    class: CidesaExistValidator
+    param:
+        class:        Cadefalm
+        column:       codalm
+        unique_error: El Código del Almacen debe Existir.
+
+CorrelValidator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^[0-9]*$/' ]
+        values_error: Los Correlativos solo puede contener valores númericos
+
+FechaValidator:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha introducida es invalida
+
+UbicacionValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Cadefubi
+        column:   codubi
+        unique_error:   El Código de Ubicación no existe.

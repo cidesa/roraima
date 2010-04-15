@@ -1,0 +1,72 @@
+Parametros:
+  modulo: presupuesto
+  nomrep: preprc2
+  titulo: PRECOMPROMISOS
+  orientacion: Horizontal
+  tipopagina: Carta
+  width:210
+
+Filas:
+  CATALOGO NROPRECOMPRO:
+    tipotag:   inputcat_tag
+    label: Nro del Precompromiso:
+    sql:SELECT min(refprc) as refprcdes, max(refprc) as refprchas from cpprecom
+    nomdes: refprcdes
+    campodes: refprcdes
+    catdes: 0
+    nomhas: refprchas
+    campohas: refprchas
+    cathas: 1
+    nomcat: cpprecom2
+    size: 15
+
+  FECHA MOVIMIENTOS:
+    tipotag:   inputfec_tag
+    label: Fecha
+    sql:select to_char(min(fecprc),'DD/MM/YYYY') as fecprcdes, to_char(max(fecprc),'DD/MM/YYYY') as fecprchas from cpprecom
+    #DESDE
+    nomdes: fecprcdes
+    campodes: fecprcdes
+    #HASTA
+    nomhas: fecprchas
+    campohas: fecprchas
+    #PARAMETROS
+    size: 15
+
+
+  CATALOGO CODIGO:
+    tipotag:   inputcat_tag
+    label: Codigo Presupuestario:
+    sql:select min(codpre) as codpredes,max(codpre) as codprehas from cpimpprc
+    nomdes: codpredes
+    campodes: codpredes
+    catdes: 2
+    nomhas: codprehas
+    campohas: codprehas
+    cathas: 3
+    nomcat: cpimpprc
+    size: 25
+
+  ELABORADO:
+    tipotag:   input_tag
+    label: Elaborado por:
+    nomdes: elaborado
+    size: 30
+
+  REVISADO:
+    tipotag:   input_tag
+    label: Revisado por:
+    nomdes: revisado
+    size: 30
+
+  REGISTRADO:
+    tipotag:   input_tag
+    label: Registrado por:
+    nomdes: registrado
+    size: 30
+
+  CONFORMADO:
+    tipotag:   input_tag
+    label: Conformado por:
+    nomdes: conformado
+    size: 30

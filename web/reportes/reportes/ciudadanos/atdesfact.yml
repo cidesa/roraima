@@ -1,0 +1,33 @@
+Parametros:
+  modulo: ciudadanos
+  nomrep: atdesfact
+  titulo: Desgloce de Facturas
+  orientacion: Horizontal
+  tipopagina: Carta
+  width: 210
+
+Filas:
+  CATALOGO CODCON:
+    tipotag:   inputcat_tag
+    label: N&uacute;mero Expediente:
+    sql:   select min(nroexp) as codmin,max(nroexp) as codmax from atayudas
+    nomdes: iddes
+    campodes: codmin
+    catdes: 0
+    nomhas: idhas
+    campohas: codmax
+    cathas: 1
+    nomcat: atdesfact
+    size: 20
+  CATALOGO CODCON:
+    tipotag:   inputcat_tag
+    label: N&uacute;mero Factura:
+    sql:   select min(nroexp) as codmin,max(nroexp) as codmax from atayudas
+    nomdes: iddes
+    campodes: codmin
+    catdes: 0
+    nomhas: idhas
+    campohas: codmax
+    cathas: 1
+    nomcat: atdesfact
+    size: 20

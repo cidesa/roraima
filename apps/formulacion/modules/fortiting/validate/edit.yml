@@ -1,0 +1,35 @@
+methods:
+  post:
+   - "forparing{codparing}"
+   - "forparing{montoing}"
+   - "forparing{codtipfin}"
+
+names: 
+
+  forparing{codparing}:
+    required:  Yes
+    required_msg: El Código de la Partida de Ingreso no puede estar en Blanco
+    validators: CodparingExistValidator
+
+  forparing{montoing}:
+    required:  Yes
+    required_msg: El Monto del Ingreso puede estar en blanco
+	
+  forparing{codtipfin}:
+    required:  Yes
+    required_msg: El Código de Tipo de Financiamiento no puede estar en blanco
+    validators: CodtipfinExistValidator
+
+CodparingExistValidator:
+    class: CidesaExistValidator
+    param:
+        class:        Fordefparing
+        column:       codparing     
+        unique_error: El Código de la partida debe Existir.
+
+CodtipfinExistValidator:
+    class: CidesaExistValidator
+    param:
+        class:        Fortipfin
+        column:       codfin     
+        unique_error: El Código del Tipo de Financiamiento debe Existir.

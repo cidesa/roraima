@@ -1,0 +1,35 @@
+Parametros:
+  modulo: tesoreria
+  nomrep: tsrrepfoncaj
+  titulo: Solicitud de Reposición de Fondos de Caja Chica
+  orientacion: Vertical
+  tipopagina: Carta
+  width:210
+
+Filas:
+
+  FECHA ORDENES:
+    tipotag:   inputfec_tag
+    label: Fecha
+    sql:   SELECT to_char(min(fecsal),'dd/mm/yyyy') as fecdes,to_char(max(fecsal),'dd/mm/yyyy') as fechas FROM tssalcaj
+    nomdes: fecdes
+    campodes: fecdes
+    nomhas: fechas
+    campohas: fechas
+    size: 15
+
+  CAJA ELABORADO:
+    tipotag:   input_tag
+    label:Elaborado por:
+    nomdes: elaborado
+    size: 40
+    nomhas: cielaborado
+    size: 20
+
+  CAJA AUTORIZADO:
+    tipotag:   input_tag
+    label:Autorizado por:
+    nomdes: autorizado
+    size: 40
+    nomhas: ciautorizado
+    size: 20

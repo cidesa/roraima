@@ -1,0 +1,77 @@
+methods:
+  post:
+   - "carecarg{codrgo}"
+   - "carecarg{nomrgo}"
+   - "carecarg{monrgo}"
+   - "carecarg{codpre}"
+   - "carecarg{codcta}"
+
+names:
+  carecarg{codrgo}:
+    required:  Yes
+    required_msg: El Código del Recargo no puedo estar en Blanco
+    validators: UniqueValidator, CorrelValidator
+
+  carecarg{nomrgo}:
+    required:  Yes
+    required_msg: La Descripción del Recargo no puede estar en Blanco
+    validators: StringValidator
+
+  carecarg{monrgo}:
+    required:  No
+    validators: MyNumberValidator
+
+  carecarg{codpre}:
+    required:  Yes
+    required_msg: El Código del Titulo Presupuestario no puedo estar en Blanco
+    validators: TituloValidator
+
+  carecarg{codcta}:
+    required:  Yes
+    required_msg: El Código de la Cuenta Contable no puedo estar en Blanco
+    validators: CuentaValidator
+
+StringValidator:
+    class: sfStringValidator
+    param:
+        min:       5
+        min_error: La Descripción del Recargo no puede tener menos de 5 caracteres
+        max:       100
+        max_error: La Descripción del Recargo no puede pasar mas de 100 caracteres
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Carecarg
+        column:   codrgo
+        unique_error:   El Código del Recargo ya existe. Por Favor, Cambiélo por otro.
+
+MyNumberValidator:
+    class: sfNumberValidator
+    param:
+        type:         decimal
+        type_error:   Por favor, Introduzca Números Decimales
+        nan_error:    Por Favor, introduzca un Número Decimal
+        min:          0000000000,00
+        min_error:    El valor tiene que ser mayor que cero
+        max:          9999999999,99
+
+CorrelValidator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^[0-9]*$/' ]
+        values_error: Los Correlativos solo puede contener valores númericos
+
+TituloValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Nppartidas
+        column:   codpar
+        unique_error:   El Código del Titulo Presupuestario no existe.
+
+CuentaValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Contabb
+        column:   codcta
+        unique_error:   El Código de la Cuenta Contable no existe.

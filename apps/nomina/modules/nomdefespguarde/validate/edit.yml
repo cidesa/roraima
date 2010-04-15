@@ -1,0 +1,30 @@
+methods:
+  post:
+   - "npguarde{codcon}"
+   - "npguarde{nomgua}"
+
+names:
+  npguarde{codcon}:
+    required:  Yes
+    required_msg: El Código no puede estar en Blanco
+    validators: ExistValidator
+
+  npguarde{nomgua}:
+    required:  Yes
+    required_msg: El Nombre de la Guarderia no puede estar en Blanco
+    validators: Validator_nomgua
+
+ExistValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Npdefcpt
+        column:   codcon
+        unique_error:   El Concepto no existe
+
+Validator_nomgua:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El nombre de la guardería no puede tener menos de 2 caracteres
+        max:       250
+        max_error: El nombre de la guardería no puede pasar mas de 250 caracteres

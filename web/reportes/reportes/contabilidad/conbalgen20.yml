@@ -1,0 +1,55 @@
+Parametros:
+  modulo: contabilidad
+  nomrep: conbalgen20
+  titulo: BALANCE GENERAL
+  orientacion: Horizintal
+  tipopagina: Carta
+  width:210
+
+Filas:
+  CATALOGO CUENTAS
+    tipotag: inputcat_tag
+    label: Codigo Cuenta:
+    sql:  Select min(codcta) as ctamin,max(codcta) as ctamax from contabb
+    nomdes: ctades
+    campodes: ctamin
+    catdes: 0
+    nomhas: ctahas
+    campohas: ctamax
+    cathas: 1
+    nomcat: codcta_balgen
+    size: 25
+
+  COMBO PERIODO:
+    tipotag:   combo_tag
+    label: Periodo
+    sql: Select distinct pereje from cppereje order by pereje
+    nomdes: perdesde
+    campodes: pereje-pereje
+
+  COMBO ACT:
+    tipotag:   combof_tag
+    label: Actualizar Saldos
+    nomdes: actualizar
+    campodes: [NO=>NO, SI=>SI]
+
+  CAJA DIRECTOR:
+    tipotag:  input_tag
+    label: Director Finanzas:
+    nomdes: diradm
+    campodes: Lic. Victor Espinoza
+    size: 40
+
+  CAJA JEFE CONTA:
+    tipotag:  input_tag
+    label: Jefe Fiscal:
+    nomdes: jefcon
+    campodes: Lic. Jose Maria Portillo
+    size: 40
+
+  CAJA FILTRO:
+    tipotag:  input_tag
+    label: Filtro Cuenta:
+    nomdes: comodin
+    campodes: %
+    size: 40

@@ -1,0 +1,67 @@
+Parametros:
+  modulo: compras
+  nomrep: carestcom
+  titulo: ESTATUS DE LOS COMPROMISOS
+  orientacion: Vertical
+  tipopagina: CARTA
+  width:210
+
+Filas:
+  CATALOGO COMPROMISOS:
+    tipotag:   inputcat_tag
+    label: Nro. Compromiso:
+    sql:   select min(refcom) as numcom1,max(refcom) as numcom2 from cpcompro
+    nomdes: numcom1
+    campodes: numcom1
+    catdes: 0
+    nomhas: numcom2
+    campohas: numcom2
+    cathas: 1
+    nomcat: cpcompro
+    size: 15
+
+  CATALOGO BENEFICIARIO:
+    tipotag:   inputcat_tag
+    label: Beneficiario:
+    sql:   SELECT min(cedrif)  as cedmin,max(cedrif) as cedmax from  OPBENEFI
+    nomdes: bendes
+    campodes: cedmin
+    catdes: 2
+    nomhas: benhas
+    campohas: cedmax
+    cathas: 3
+    nomcat: opbenefi_cedrif
+    size: 15
+
+  FECHA:
+    tipotag:   inputfec_tag
+    label: Fecha del Compromiso:
+    sql:   SELECT to_char(MIN(FECCOM),'DD/MM/YYYY') as fechamin,to_char(MAX(FECCOM),'DD/MM/YYYY') as fechamax FROM CPCOMPRO
+    nomdes: feccom1
+    campodes: fechamin
+    nomhas: feccom2
+    campohas: fechamax
+    size: 15
+
+  COMBO TIPO COMPRO:
+    tipotag:   combo_tag
+    sql: SELECT distinct a.TIPCOM as tip, a.NOMEXT as nom FROM CPDOCCOM a, caordcom b, cpcompro c where c.tipcom=a.tipcom and c.feccom=b.fecord  and trim(b.ordcom)=trim(c.refcom)  order by a.tipcom
+    label: Tipo de Compromiso:
+    nomdes: tipcom1
+    campodes: tip-nom=>Todos
+    size: 50
+
+  COMBO ESTATUS:
+    tipotag:   combof_tag
+    label: Estatus Reporte:
+    nomdes: estado
+    campodes: [ 0=>Todos, 1=>Solo Comprometido, 2=>Comprometido Causado, 3=>Comprometido Pagado]
+    size: 50
+
+  CAJA FILTRO:
+    tipotag:   input_tag
+    label: Filtro:
+    nomdes: comodin
+    campodes: %%
+    size: 45
+

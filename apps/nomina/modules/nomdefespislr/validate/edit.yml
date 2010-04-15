@@ -1,0 +1,26 @@
+methods:
+  post:
+   - "npislr{codnom}"
+   - "npislr{codconpor}"
+   - "npislr{codconimp}"
+
+names:
+  npislr{codnom}:
+    required:  Yes
+    required_msg: El Código Nómina no puede estar en Blanco
+    validators: Validator_codnom
+
+  npislr{codconpor}:
+    required:  Yes
+    required_msg: El Código del Concepto para el Porcentaje no puede estar en Blanco
+
+  npislr{codconimp}:
+    required:  Yes
+    required_msg: El Código del Concepto para el Monto de Retención no puede estar en Blanco
+
+Validator_codnom:
+   class: sfPropelUniqueValidator
+   param:
+        class:        Npislr
+        column:       codnom
+        unique_error: El Código de la Nómina ya Existe intente con otro.

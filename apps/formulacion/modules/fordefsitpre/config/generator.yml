@@ -1,0 +1,25 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Fordefsitpre
+    theme:            default    
+    fields:
+      codsitpre : { name: Código}
+      dessitpre : { name: Descripción}
+    list:
+      title:          Situaciones Presupuestarias
+      filters:        [codsitpre, dessitpre]
+      display:        [=codsitpre, dessitpre]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   10
+      sort:  codsitpre
+    edit:
+      title:        Definición de Situación Presupuestaria
+      display:      [=codsitpre, dessitpre]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

@@ -1,0 +1,58 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Cpcompro
+    theme:            cidesaGenerator
+
+    fields:
+      refcom: { name: Referencia }
+      feccom: { name: Fecha }
+      descom: { name: Descripción, type: textarea_tag, params: size=80x5 }
+      moncom: { name: Total Imputado }
+      salaju: { name: Ajustado, params: readonly=true }
+      salcau: { name: Causado, params: readonly=true }
+      salpag: { name: Pagado, params: readonly=true }
+      salcom: { name: Comprometido, params: readonly=true }
+      cedrif:
+        name: Cedula/Rif
+        catalogo:
+          catalogoweb: Preprecom_Opbenefi
+          clase: Opbenefi
+          ajax: 0
+          parametros: getprincipal="getCedrif" getsecundario="getNomben" campoprincipal="cedrif" camposecundario="nomben" campobase = "id"
+      nompro: { name: Nombre }
+      tipcom:
+        name: Tipo Compromiso
+        catalogo:
+          catalogoweb: Precompro_Cpdoccom
+          clase: Cpdoccom
+          ajax: 0
+          parametros: getprincipal="getTipcom" getsecundario="getNomext" campoprincipal="tipcom" camposecundario="nomext" campobase = "id"
+      refprc:
+        name: Ref. Precompromiso
+        catalogo:
+          catalogoweb: Cpprecom_Precompro
+          clase: Cpprecom
+          ajax: 0
+          parametros: getprincipal="getRefprc" getsecundario="getDesprc" campoprincipal="refprc" camposecundario="desprc" campobase = "id"
+          catalogoparams: param1/'."'+$('cpcompro_feccom').value+'".'
+
+      grid:   { name: . }
+
+    list:
+      title:  Compromisos
+      display:        [=refcom, feccom, descom, cedrif, nompro, moncom, salcau, salpag ]
+      filters:        [refcom, feccom, descom, cedrif]
+
+    edit:
+      title:  Edición de Compromisos
+      display:
+        Datos del documento:   [ refcom, feccom, descom ]
+        Datos del Compromiso:  [ tipcom, refprc  ]
+        Datos del Beneficiario: [cedrif]
+        Saldos:                [salaju, _salcom, salcau, salpag, moncom]
+        Imputaciones Presupuestarias: [_grid]
+      actions:
+        _list:        ~
+        _save:        ~
+        _create:      ~

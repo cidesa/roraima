@@ -1,0 +1,30 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Careqartser
+    theme:            default
+    fields:
+      reqart: { name: Número, params: maxlength=8 }
+      fecreq: { name: Fecha, params: date_format='dd/MM/yyyy' }
+      desreq: { name: Descripción, params: maxlength=255 }
+      stareq: { name: Estatus, params: maxlength=1 }
+      codcatreq:   { name : Unidad }
+    list:
+      title:          Solicitud de Servicio
+      filters:        [reqart, fecreq]
+      display:        [=reqart, desreq, fecreq]
+      sort: reqart
+      object_actions:
+        _edit:        ~
+        _delete:        ~
+      max_per_page:   5
+    edit:
+      title:         Solicitud de Servicio
+      display:       [reqart, fecreq , desreq, codcatreq]
+      fields:
+        reqart:      { help: Máximo 8 caracteres }
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

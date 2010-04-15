@@ -1,0 +1,25 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Empresa
+    theme:            cidesaGenerator
+    fields:
+      diremp:      { name : Dirección, params: size=100 maxlength=100 }
+      nomemp:     { name : Nombre, params: size=100 maxlength=250 }
+      tlfemp:     { name : Teléfono, params: size=30 maxlength=15 }
+      faxemp:     { name : Fax, params: size=30 maxlength=15 }
+      ciuemp:     { name : Ciudad, params: size=50 maxlength=50 }
+      codpos:     { name : Código Postal, params: size=15 maxlength=15 }
+    list:
+      title: Registro de Empresa
+      display: [=diremp, nomemp, tlfemp, faxemp, ciuemp, codpos]
+      filters: [diremp]
+      max_per_page:   10
+      object_actions:
+        _edit:        ~
+    edit:
+      title:          Registro de Empresa
+      display:
+        "Datos de la Empresa": [ nomemp, diremp, tlfemp, faxemp, ciuemp, codpos]
+      actions:
+        _save:        ~

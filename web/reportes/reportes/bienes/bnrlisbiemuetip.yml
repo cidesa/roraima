@@ -1,0 +1,60 @@
+Parametros:
+  modulo: bienes
+  nomrep: bnrlisbiemuetip
+  titulo: Inventario de Bienes Muebles Por Tipo
+  orientacion: Vertical
+  tipopagina: Carta
+  width:210
+
+Filas:
+  CATALOGO ACTIVOS:
+    tipotag:   inputcat_tag
+    label: Código del Activo:
+    sql:   SELECT min(a.codact) as codactmin,max(a.codact) as codactmax FROM bnregmue a, bndefact b where a.codact = b.codact
+    nomdes: codact1
+    campodes: codactmin
+    catdes: 0
+    nomhas: codact2
+    campohas: codactmax
+    cathas: 1
+    nomcat: codact
+    size: 25
+
+  CATALOGO BIENES:
+    tipotag:   inputcat_tag
+    label: Código del Bien:
+    sql:   SELECT min((codmue)) as codmuemin,max(codmue) as codmuemax FROM bnregmue
+    nomdes: codmue1
+    campodes: codmuemin
+    catdes: 2
+    nomhas: codmue2
+    campohas: codmuemax
+    cathas: 3
+    nomcat: codmue
+    size: 25
+
+  FECHA REGISTRO:
+    tipotag:   inputfec_tag
+    label: Fechas de Registro:
+    sql:   SELECT to_char(MIN(fecreg),'DD/MM/YYYY') as fechamin,to_char(max(fecreg),'DD/MM/YYYY') as fechamax FROM bnregmue
+    #DESDE
+    nomdes: fecreg1
+    campodes: fechamin
+    #HASTA
+    nomhas: fecreg2
+    campohas: fechamax
+    size: 15
+
+  TITULOS:
+    tipotag:    titulo_tag
+    nomdes:     NOMBRE
+    nomhas:     CARGO
+
+  CAJA RESPONSABLE:
+    tipotag:   input_tag
+    label: Responsable:
+    nomdes: respon
+    campodes:-1
+    nomhas: responcar
+    campohas:-1
+    size: 30

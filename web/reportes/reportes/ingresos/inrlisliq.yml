@@ -1,0 +1,31 @@
+Parametros:
+  modulo: ingresos
+  nomrep: inrlisliq
+  titulo: LISTADO DE LIQUIDACION
+  orientacion: Horizontal
+  tipopagina: CARTA
+  width:210
+
+Filas:
+  CATALOGO LIQUIDACION:
+    tipotag:   inputcat_tag
+    label: Referencia Liquidacion:
+    sql:  Select min(refliq) as refmin,max(refliq) as refmax from cireging where refliq<>''
+    nomdes: refdes
+    campodes: refmin
+    catdes: 0
+    nomhas: refhas
+    campohas: refmax
+    cathas: 1
+    nomcat: cireging_refliq
+    size: 22
+
+  FECHA ORDEN:
+    tipotag:   inputfec_tag
+    label: Fecha Liquidacion:
+    sql:   Select to_char(min(FECLIQ),'dd/mm/yyyy') as fecliqmin,to_char(max(FECLIQ),'dd/mm/yyyy') as fecliqmax from CIREGING
+    nomdes: fecmin
+    campodes: fecliqmin
+    nomhas: fecmax
+    campohas: fecliqmax
+    size: 22

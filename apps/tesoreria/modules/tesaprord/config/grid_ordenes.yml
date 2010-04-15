@@ -1,0 +1,40 @@
+opciones:                  # Opciones generales
+  eliminar:                false
+  tabla:                   Opordpag
+  anchogrid:               1050
+  ancho:                   1050
+  filas:                   0
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Aprobar
+  tipo:                    k
+  nombrecampo:             aprobadoord
+  esgrabable:			   true
+  html:                    []
+2:       # Columna 2
+  titulo:                  N° de Orden
+  tipo:                    t
+  nombrecampo:             numord
+  html:                    [size="10" readonly=true]
+3:       # Columna 3
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             desord
+  html:                    [size="40", readonly=true]
+4:       # Columna 4
+  titulo:                  Fecha
+  tipo:                    f
+  nombrecampo:             fecemi
+  html:                    [ ]
+5:       # Columna 5
+  titulo:                  Monto
+  tipo:                    m
+  nombrecampo:             monord
+  esnumerico:              true
+  html:                    [size="10" readonly="true"]
+6:       # Columna 6
+  titulo:                  Beneficiario
+  tipo:                    t
+  nombrecampo:             Nomben
+  html:                    [size="40", readonly=true]

@@ -1,0 +1,30 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Npsalint
+    theme:            default
+
+    fields:
+      codcon:       { name: Tipo de Contrato}
+      codnom:       { name: Tipo de Nómina}
+      codnomasi:       { name: Tipo de Nómina}
+      fecinicon:    { name: Período}
+      periodo:    { name: Período}
+      fecfincon:    { name: Hasta}
+      destipcon:    { name: Descripción}
+      nomnom:       { name: Nombre Nómina}
+    list:
+      title:          Salario Integral Por Contrato
+      filters:        [codcon]
+      display:        [=codcon, codnom, nomnom, destipcon]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+        _create:      none
+      max_per_page:   5
+    edit:
+      title:          Salario Integral Por Contrato
+      display:        [codcon, destipcon, codnomasi, nomnom, periodo, fecinicon, fecfincon]
+      actions:
+        _list:        none
+        _save:        ~

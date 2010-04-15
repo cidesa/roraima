@@ -1,0 +1,86 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Fordefpry
+    theme:            default
+    fields:
+      codpro: { name: Código}
+      proacc: { name: Proyecto o Acción Centralizada}
+      nompro: { name: Nombre}
+      codprg: { name: Programa}
+      desprg: { name: Descripción}
+      fecini: { name: Fecha Inicio}
+      feccul: { name: Fecha Culminación}
+      montotpry: { name: Monto Total del Proyecto}
+      ubigeo: { name: Ubicación Geográfica}
+      codemp: { name: Responsable}
+      nomemp2: { name: Nombre}
+      uniejepri: { name: Unid. Ejecut. Principal}
+      descat: { name: Descripción}
+      enupro: { name: Enunciado del Problema}
+      desobjnva: { name: Objetivo Estratégico Nueva Etapa}
+      objestins: { name: Objetivo Estratégico Institucional}
+      objeesppro: { name: Objetivo Específico del Proyecto}
+      objpndes: { name: Objetivo de PNDES}
+      codequ: { name: Directríz}
+      desobj: { name: Objetivo de la Directríz}
+      codsubobj: { name: Estrategia}
+      codsubsubobj: { name: Política}
+      respro: { name: Bien o Servicio}
+      unimedres: { name: Unidad de Medida }
+      desunimed: { name: Descripción}
+      benpro: { name: Beneficiarios Directos}
+      nroempdir: { name: Número Estimado de Empleos Directos}
+      nroempind: { name: Número Estimado de Empleos Indirectos}
+      dessta: { name: Descripción}
+      codpryonapre:  { name: Codigo Proyecto Onapre}
+      codsta:   { name: Estatus del Proyectos}
+      codsitpre:   { name: Situación Presupuestaria}
+      tieejeanopry:   { name: Tiempo de Ejecucion del Proyecto Año(s)}
+      tieejemespry:   { name: Mes(es)}
+      coddir:         { name: Programa}
+      codobjnvaeta:   { name: Objetivo Estratégico Nueva Etapa}
+      codsec:      { name: Sector }
+      codsub:      { name: Sub Sector}
+      indsitact:   { name: Indicacodor de la Gestión}
+      fecultdat:  { name: Fecha Ultima Data}
+      sitobjdes:  { name: Situacíon Objetivo Deseada}
+      forind:     { name: Fórmula del Indicador}
+      fueind:     { name: Fuente del Indicador}
+      indsitobj:  { name : Indicador de la Situación Objetivo}
+      tieimpano:  { name: Tiempo de Impacto Ano(s)}
+      tieimpmes:  { name: Mes(es) }
+      cantmet:     { name: Cantidad}
+      nucdesend:    { name: Nucleo de Desarrollo Endógeno}
+      zonecodes:    { name: Zonas Económicas de Desarrollo Sustentable (ZEDES)}
+      comindust:     {name: Complejo Industrial}
+      uniadsemp:      {name: Unidad de Adscripción}
+      caremp:        { name: Cargo }
+      telemp:        { name: Teléfono(s)}
+      faxemp:        { name: Fax}
+      emaemp:        { name: E-mail}
+      accinm:        { name: Acciones Inmediatas}
+      accdif:        { name: Acciones Diferidas}
+      placontin:     { name: Plan de Contingencia}
+      desbrepry:     { name: Descripcion Breve del Proyecto }
+      poravafis:     { name: Porcentaje de Avance Físico del Proyecto}
+      poravafin:     { name: Porcentaje de Avance Financiero del Proyecto}
+
+
+    list:
+      title:          Proyectos y Acciones Centralizadas
+      filters:        [codpro, proacc, fecini]
+      display:        [=codpro, nompro, proacc, fecini]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+      sort:    codpro
+    edit:
+      title:          Edición de Proyectos y Acciones Centralizadas
+      display:      [=codpro, proacc, nompro, codprg, desprg, fecini, feccul, montotpry, ubigeo, codemp, nomemp2, uniejepri, descat, enupro, desobjnva, objestins, objeesppro, objpndes, codequ, desobj, codsubobj, codsubsubobj, respro, unimedres, desunimed, benpro, nroempdir, nroempind, codsta, dessta, codpryonapre, tieejeanopry, tieejemespry, codobjnvaeta, sitobjdes, tieimpmes, tieimpano, accinm, accdif, codsitpre, tieejeanopry, tieejemespry, coddir, codobjnvaeta, codsec, codsubsec, indsitact, fecultdat, forind, fueind, indsitobj, cantmet,  nucdesend, zonecodes, comindust, uniadsemp, caremp, telemp, faxemp, emaemp, placontin, desbrepry, poravafis, poravafin]
+      actions:
+        _create:      ~
+        _list:        ~
+        _save:        ~
+        _delete:      ~

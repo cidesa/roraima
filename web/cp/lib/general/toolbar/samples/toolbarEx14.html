@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+	<title>Javascript Toolbar samples. dhtmlXToolbar - Vertical layout</title>
+</head>
+<style>
+	body {font-size:12px}
+	.{font-family:arial;font-size:12px}
+	h1 {cursor:hand;font-size:16px;margin-left:10px;line-height:10px}
+	xmp {color:green;font-size:12px;margin:0px;font-family:courier;background-color:#e6e6fa;padding:2px}
+</style>
+<body>
+	<h1>Vertical layout of javascript Toolbar</h1>
+	<link rel="STYLESHEET" type="text/css" href="../css/dhtmlXToolbar.css">
+	<script language="JavaScript" src="../js/dhtmlXProtobar.js"></script>
+	<script language="JavaScript" src="../js/dhtmlXToolbar.js"></script>
+	<script language="JavaScript" src="../js/dhtmlXCommon.js"></script>	
+	
+<table>
+  <tr> 
+   <!-- <td width="1" valign="top"> <span id="toolbar_zone" style="border :1px solid Silver;"/> 
+    </td> -->
+    <td width="12" valign="top"> <div align="right" id="toolbar_zone2" style="border :1px solid Silver;"/></td>
+  </tr>
+</table>
+<hr>
+<!--<XMP>
+<div id="toolbar_zone" style="width:600; height:50;"/>
+<script>
+	bToolBar=new dhtmlXToolbarObject('toolbar_zone2',25,200,"",1);
+	bToolBar.setOnClickHandler(onButtonClick);
+	bToolBar.loadXML("_toolbarV1.xml")
+	bToolBar.showBar();
+</script>
+</XMP> -->
+		Parameters passed to the constructor are:
+			<li>object to attach toolbar to (should be loaded before calling constructor)</li>
+			<li>width of the toolbar</li>
+			<li>height of the toolbar</li>
+			<li>title of toolbar</li>
+			<li>vertical mode flag</li><br>
+
+	<script>
+	
+		function onButtonClick(itemId,itemValue)
+		{
+			alert("Button "+itemId+" was pressed"+(itemValue?("\n select value : "+itemValue):""));
+		};
+		
+		
+		/*aToolBar=new dhtmlXToolbarObject('toolbar_zone',160,200,"Demo toolbar",1);
+		aToolBar.setOnClickHandler(onButtonClick);
+		aToolBar.loadXML("_toolbarV2.xml")
+		aToolBar.showBar();*/
+		
+		aToolBar=new dhtmlXToolbarObject('toolbar_zone2',25,200,"",1);
+		aToolBar.setOnClickHandler(onButtonClick);
+		aToolBar.loadXML("_toolbarV1.xml")
+		aToolBar.showBar();
+		
+	</script>
+<br><br>
+
+</body>
+</html>

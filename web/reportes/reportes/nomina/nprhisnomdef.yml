@@ -1,0 +1,98 @@
+Parametros:
+  modulo: nomina
+  nomrep: nprhisnomdef
+  titulo: LISTA DE NOMINA PAGO HISTORICO
+  orientacion: Vertical
+  tipopagina: Carta
+  width:210
+
+Filas:
+  CATALOGO CODEMP:
+    tipotag:   inputcat_tag
+    label: Código Empleado:
+    sql:   SELECT min(CODEMP) as codempmin,max(codemp) as codempmax FROM NPASICAREMP
+    nomdes: codempdes
+    campodes: codempmin
+    catdes: 0
+    nomhas: codemphas
+    campohas: codempmax
+    cathas: 1
+    nomcat: codemp
+    size: 20
+
+  CATALOGO CODCAR:
+    tipotag:   inputcat_tag
+    label:  Código Cargo:
+    sql:   SELECT min(codcar) as codcarmin,max(codcar) as codcarmax FROM NPASICAREMP
+    nomdes: codcardes
+    campodes: codcarmin
+    catdes: 2 
+    nomhas: codcarhas
+    campohas: codcarmax
+    cathas: 3
+    nomcat: codcar
+    size: 20
+
+  CATALOGO CODCON:
+    tipotag:   inputcat_tag
+    label:  Código Concepto:
+    sql:   SELECT min(codcon) as codconmin,max(codcon) as codconmax FROM NPASICONEMP
+    nomdes: codcondes
+    campodes: codconmin
+    catdes: 4 
+    nomhas: codconhas
+    campohas: codconmax
+    cathas: 5 
+    nomcat: codcon
+    size: 20
+  
+  CATALOGO CODNOM:
+    tipotag:   inputcat_tag
+    label: Código Nómina:
+    sql:   SELECT min(codnom) as codnommin,max(codnom) as codnommax FROM NPASICAREMP
+    nomdes: codnomdes
+    campodes: codnommin
+    catdes: 6
+    nomhas: codnomhas
+    campohas: codnommax
+    cathas: 7
+    nomcat: codnom
+    size: 20
+     
+  COMBO DE STATUS:
+    tipotag:   combof_tag
+    label: Especial:
+    nomdes: especial
+    campodes: [NO=>NO, SI=>SI, A=>AMBAS]
+    
+  FECHA NOMINA:
+    tipotag:   inputfec_tag
+    label: Periodo de Nomina:
+    sql:   SELECT to_char(min(FECNOM),'dd/mm/yyyy') as fecnommin,to_char(max(FECNOM),'dd/mm/yyyy') as fecnommax FROM NPHISCON
+    nomdes: pernomdes
+    campodes: fecnommin
+    nomhas: pernomhas
+    campohas: fecnommax
+    size: 20
+    
+  CAJA ELABORADO POR:
+    tipotag:   input_tag
+    label: Elaborado por:
+    nomdes: elapor
+    campodes:
+    size: 60
+
+  CAJA REVISADO:
+    tipotag:   input_tag
+    label: Revisado por:
+    nomdes: revpor
+    campodes:
+    size: 60
+
+  CAJA AUTORIZADO:
+    tipotag:   input_tag
+    label: Autorizado por:
+    nomdes: autpor
+    campodes:
+    size: 60
+    

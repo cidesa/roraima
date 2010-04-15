@@ -1,0 +1,65 @@
+Parametros:
+  modulo: compras
+  nomrep: carentalm
+  titulo: Entradas de Almacen
+  orientacion: Vertical
+  tipopagina: CARTA
+  width:210
+
+Filas:
+  CATALOGO Entrada:
+    tipotag:   inputcat_tag
+    label: Numero Entrada:
+    sql:  Select min(rcpart) as codmin,max(rcpart) as codmax from caentalm
+    nomdes: codentdes
+    campodes: codmin
+    catdes: 0
+    nomhas: codenthas
+    campohas: codmax
+    cathas: 1
+    nomcat:  codent
+    size: 22
+
+  CATALOGO PROVEEDOR:
+    tipotag:   inputcat_tag
+    label: Proveedor:
+    sql:  Select min(codpro) as codmin,max(codpro) as codmax from caprovee
+    nomdes: codprodes
+    campodes: codmin
+    catdes: 2
+    nomhas: codprohas
+    campohas: codmax
+    cathas: 3
+    nomcat: codprosal
+    size: 22
+
+
+
+  CAJA TRANSCRIPTOR:
+    tipotag:   input_tag
+    label: Transcrito por:
+    nomdes: transcrito
+    campodes:
+    size: 60
+
+  CAJA DESPACHADOR:
+    tipotag:   input_tag
+    label: Despachado por:
+    nomdes: despachado
+    campodes:
+    size: 60
+
+
+  CAJA REVISADO:
+    tipotag:   input_tag
+    label: Revisado por:
+    nomdes: revisado
+    campodes:
+    size: 60
+
+  CAJA RECIBIDO:
+    tipotag:   input_tag
+    label: Recibido por:
+    nomdes: recibido
+    campodes:
+    size: 60

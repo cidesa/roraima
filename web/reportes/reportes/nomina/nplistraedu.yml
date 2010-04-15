@@ -1,0 +1,50 @@
+Parametros:
+  modulo: nomina
+  nomrep: nplistraedu
+  titulo: LISTADO DE TRABAJADORES POR NIVEL ACADEMICO
+  orientacion: Horizontal
+  tipopagina: Carta
+  width:210
+
+Filas:
+  CATALOGO CEDULA:
+    tipotag:   inputcat_tag
+    label: Codigo Empleado:
+    sql: 	select min(cast(a.CODEMP as int )) as ced1, max(cast (a.CODEMP as int )) as ced2 	from 	nphojint a,npnivedu b , npinfcur c 	where 	a.codnivedu=b.codniv and 	a.codemp=c.codemp
+    nomdes: ced1
+    campodes: ced1
+    catdes: 0
+    nomhas: ced2
+    campohas: ced2
+    cathas: 1
+    nomcat: codemp
+    size: 15
+
+
+  CATALOGO NIVEL:
+    tipotag:   inputcat_tag
+    label: Nivel Academico:
+    sql:select min(codniv) as mincodniv , max(codniv) as maxcodniv from NPNIVEDU
+    nomdes: mincodniv
+    campodes: mincodniv
+    catdes: 2
+    nomhas: maxcodniv
+    campohas: maxcodniv
+    cathas: 3
+    nomcat: codnivedu
+    size: 15
+
+  CATALOGO PROFESION:
+    tipotag:   inputcat_tag
+    label: Profesión:
+    sql:select min(codprofes) as mincodprofes , max(codprofes) as maxcodprofes from NPPROFESION
+    nomdes: mincodprofes
+    campodes: mincodprofes
+    catdes: 4
+    nomhas: maxcodprofes
+    campohas: maxcodprofes
+    cathas: 5
+    nomcat: codprofes
+    size: 15
+
+

@@ -1,0 +1,62 @@
+Parametros:
+  modulo: tesoreria
+  nomrep: oprordpagporbeneficiario
+  titulo: ORDENES DE PAGO POR BENEFICIARIO
+  orientacion: Vertical
+  tipopagina: CARTA
+  width:210
+
+Filas:
+
+  CATALOGO BENEFICIARIO:
+    tipotag:   inputcat_tag
+    label: Beneficiario:
+    sql:  SELECT MIN(cedrif) as cedmin,max(cedrif) as cedmax FROM OPBENEFI
+    nomdes: bendes
+    campodes: cedmin
+    catdes: 0
+    nomhas: benhas
+    campohas: cedmax
+    cathas: 1
+    nomcat: benefi
+    size: 22
+
+  CATALOGO ORDENES:
+    tipotag:   inputcat_tag
+    label: Nro. Orden:
+    sql:  Select min(numord) as nummin,max(numord) as nummax from opordpag
+    nomdes: orddes
+    campodes: nummin
+    catdes: 2
+    nomhas: ordhas
+    campohas: nummax
+    cathas: 3
+    nomcat: numordpag
+    size: 22
+
+  FECHA ORDEN:
+    tipotag:   inputfec_tag
+    label: Fecha:
+    sql:   Select to_char(min(FECEMI),'dd/mm/yyyy') as fecemimin,to_char(max(FECEMI),'dd/mm/yyyy') as fecemimax from OPORDPAG
+    nomdes: fecdes
+    campodes: fecemimin
+    nomhas: fechas
+    campohas: fecemimax
+    size: 22
+
+  COMBO TIPO ORDEN:
+    tipotag:   combo_tag
+    label: Tipo Orden:
+    sql:  SELECT DISTINCT(TIPCAU) as tip FROM opordpag ORDER BY TIPCAU
+    nomdes: tipcau1
+    campodes: tip-tip
+    nomhas: tipcau2
+    campohas: tip-tip
+    size: 22
+
+  COMBO BANCO:
+    tipotag:   combof_tag
+    label: Estatus:
+    nomdes: status
+    campodes: [T=>Todas, I=>Pagadas, N=>No Pagadas, A=>Anuladas]
+    size: 22

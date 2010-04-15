@@ -1,0 +1,61 @@
+opciones:                  #
+  name:                    a
+  eliminar:                true
+  tabla:                   cpimpprc
+  anchogrid:               700
+  ancho:                   600
+  filas:                   7
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  id
+  tipo:                    t
+  nombrecampo:             id
+  html:                    [ '' ]
+  oculta:                  true
+  esgrabable:              true
+2:       # Columna 2
+  titulo:                  Código Presupuestario
+  tipo:                    t
+  nombrecampo:             codpre
+  html:                    [size="20" ]
+  oculta:                  false
+  esgrabable:              true
+  ajaxfila:                true
+  catalogo:                [ cpasiini, sf_admin_edit_form, { codpre: 1 }, PreCompro_Cpasiini ]
+3:       # Columna 3
+  titulo:                  Monto
+  tipo:                    m
+  nombrecampo:             monimp
+  html:                    [size="10" ]
+  oculta:                  false
+  esgrabable:              true
+  ajaxfila:                true
+  estotal:                 [ true, cpcompro_moncom ]
+4:       # Columna 4
+  titulo:                  Comprometido
+  tipo:                    m
+  nombrecampo:             moncom
+  html:                    [size="10" readonly="true" ]
+  esgrabable:              false
+5:       # Columna 5
+  titulo:                  Causado
+  tipo:                    m
+  nombrecampo:             moncau
+  html:                    [size="10" readonly="true" ]
+  esgrabable:              false
+6:       # Columna 6
+  titulo:                  Pagado
+  tipo:                    m
+  nombrecampo:             monpag
+  html:                    [size="10" readonly="true" ]
+  esgrabable:              false
+7:       # Columna 7
+  titulo:                  Ajuste
+  tipo:                    m
+  nombrecampo:             monaju
+  html:                    [size="10" readonly="true" ]
+  esgrabable:              false
+
+
+

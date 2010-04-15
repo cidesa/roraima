@@ -1,0 +1,41 @@
+Parametros:
+  modulo: nomina
+  nomrep: nprprescajaho
+  titulo: Prestamo Caja de Ahorro
+  orientacion: Vertical
+  tipopagina: Horizontal
+  width:250
+
+Filas:
+  CATALOGO EMPLEADOS:
+    tipotag:   inputcat_tag
+    label: Código del  Empleado:
+    sql:   SELECT min(codemp) as codempmin,max (codemp) as codempmax FROM NPHOJINT
+    nomdes: codempdes
+    campodes: codempmin
+    catdes: 0
+    nomhas: codemphas
+    campohas: codempmax
+    cathas: 1
+    nomcat: Nphojint_codemp
+    size: 20
+
+  CATALOGO NOMINA:
+    tipotag:   inputcat_tag
+    label: Código del Nómina:
+    sql:   SELECT min(codnom) as codnommin,max (codnom) as codnommax FROM NPNOMINA
+    nomdes: codnommin
+    campodes: codnommin
+    catdes: 3
+    nomcat: tipnom
+    size: 20
+
+  CATALOGO PRESTAMO:
+    tipotag:   inputcat_tag
+    label: Tipo de Préstamo:
+    sql:   SELECT min(codtippre) as codpremin,max (codtippre) as codpremax FROM NPTIPPRE
+    nomdes: codpremin
+    campodes: codpremin
+    catdes: 4
+    nomcat: tippre
+    size: 20

@@ -1,0 +1,22 @@
+Parametros:
+  modulo: tesoreria
+  nomrep: tsrposdiaban
+  titulo: POSICION DIARIA DE BANCOS
+  orientacion: Vertical
+  tipopagina: Carta
+  width:210
+
+Filas:
+  CATALOGO NUMCUEBAN:
+    tipotag:   inputcat_tag
+    label: Numero Cuenta Bancaria:
+    sql:   SELECT min(numcue) as codmin,max(numcue) as codmax FROM tsdefban
+    nomdes: numcuedes
+    campodes: codmin
+    catdes: 0
+    nomhas: numcuehas
+    campohas: codmax
+    cathas: 1
+    nomcat: numcue_tscheemi
+    size: 22
+

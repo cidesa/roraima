@@ -1,0 +1,44 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Tspararc
+    theme:            cidesaGenerator
+    fields:
+      numcue: { name: Número de Cuenta, params: size20 maxlength=20}
+      nomcue: { name: Descripción }
+      inicue: { name: Posición Inicial}
+      fincue: { name: Cantidad Caracteres}
+      iniref: { name: Posición Inicial}
+      finref: { name: Cantidad Caracteres}
+      inifec: { name: Posición Inicial}
+      finfec: { name: Cantidad Caracteres}
+      initip: { name: Posición Inicial}
+      fintip: { name: Cantidad Caracteres}
+      inides: { name: Posición Inicial}
+      findes: { name: Cantidad Caracteres}
+      inimon: { name: Posición Inicial}
+      finmon: { name: Cantidad Caracteres}
+    list:
+      title: Configuración de Archivos Bancarios
+      display: [=numcue, nomcue]
+      filters: [numcue]
+      object_actions:
+       _edit:        ~
+       _delete:      ~
+      max_per_page:	  10
+      sort:    numcue
+    edit:
+      title:          Edición de Configuración de Archivos Bancarios
+      display:
+        "Cuenta Bancaria":  [_numcue]
+        "Número de cuenta": [inicue, fincue]
+        "Referencia": [iniref, finref]
+        "Fecha Movimiento": [inifec, finfec]
+        "Tipo de Movimiento": [initip, fintip]
+        "Descripción": [inides, findes]
+        "Monto": [inimon, finmon]
+      actions:
+        _list:        ~
+        _save:        ~
+        _create:      ~
+        _delete:      ~

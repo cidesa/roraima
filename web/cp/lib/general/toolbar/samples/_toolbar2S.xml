@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='iso-8859-1'?>
+<toolbar name="Demo toolbar" width="100%" disableType="image" absolutePosition="auto" toolbarAlign="left">
+	<TwoStateButton src="../imgs/iconSave.gif" height="20" width="20" id="0_ts" tooltip="Save"  disableImage="../imgs/iconSave_dis.gif"/>
+	<TwoStateButton src="../imgs/iconPrint.gif,../imgs/iconFilter.gif" height="20" width="20" id="1_ts" tooltip="Print"  disableImage="../imgs/iconPrint_dis.gif"/>
+	<divider id="div_1"/>
+	<TwoStateButton src="../imgs/iconNewNewsEntry.gif" height="25" width="80" id="2_ts" tooltip="New"  disableImage="../imgs/iconNewNewsEntry_dis.gif">		
+	First
+	</TwoStateButton>
+	<TwoStateButton src="../imgs/icon20.gif" height="25" width="80" id="3_ts" tooltip="Form" disableImage="../imgs/icon20_dis.gif">			
+	First,Second
+	</TwoStateButton>
+	<divider/>
+	<TwoStateButton src="" height="25" width="80" id="4_ts" tooltip="Form" disableImage="../imgs/icon20_dis.gif">			
+	First,Second
+	</TwoStateButton>	
+	<TwoStateButton src="" height="25" width="80" id="5_ts" tooltip="Form" disableImage="../imgs/icon20_dis.gif" state="true">			
+	First
+	</TwoStateButton>		
+</toolbar>

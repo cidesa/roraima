@@ -1,0 +1,30 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Npacumulacpt
+    theme:            cidesaGenerator
+    fields:
+      codacu:         { name: Código Acumulador, params: maxlength=3 size=10}
+      nomacu:         { name: Descripción Acumulador, params: maxlength=250  }
+      gridcon:        { name: .}
+      
+    list:
+      title:          Listado de Acumuladores
+      display:        [=codacu, nomacu]   
+      filters:        [codacu, nomacu] 
+      sort:           codacu
+      object_actions:
+        _edit:      ~
+        _delete:    ~
+      actions:
+        _create:        ~
+
+    edit:
+      title:          Edición de Acumulador de Conceptos
+      display:
+        Datos Acumulador:   [codacu, nomacu]
+        Datos Conceptos:    [_gridcon]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

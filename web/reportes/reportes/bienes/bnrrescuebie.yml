@@ -1,0 +1,37 @@
+Parametros:
+  modulo: bienes
+  nomrep: bnrrescuebie
+  titulo: Resumen de la Cuenta de Bienes
+  orientacion: Vertical
+  tipopagina: Carta
+  width:210
+
+Filas:
+
+  CATALOGO UBIACION:
+    tipotag:   inputcat_tag
+    label: Código de Ubicacion:
+    sql:   SELECT min((codubi)) as codubimin,max(codubi) as codubimax FROM bnregmue where codubi<>''
+    nomdes: codubides
+    campodes: codubimin
+    catdes: 0
+    nomhas: codubihas
+    campohas: codubimax
+    cathas: 1
+    nomcat: codubi
+    size: 25
+
+  TITULOS:
+    tipotag:    titulo_tag
+    nomdes:     NOMBRE
+    nomhas:     CARGO
+
+  CAJA PREPARADO:
+    tipotag:   input_tag
+    label: Contralor Municipal:
+    nomdes: prepardes
+    campodes:-1
+    nomhas: preparhas
+    campohas:-1
+    size: 30
+

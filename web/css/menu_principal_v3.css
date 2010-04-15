@@ -1,0 +1,101 @@
+/**
+ * Clases Css
+ *
+ * @package    Roraima
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * 
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
+ */
+
+#menu {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  border: solid #000 1px;
+  border-width: 1px 0 0px 0;
+  background-color: #EEE;
+  height: 350px;
+}
+
+.panel-menu {
+  border: solid;
+  border-width: 0 0 0 0px;
+  border-left-color:  #777;
+  border-right-color: #777;
+  height: 100%;
+}
+
+
+#contenedor {
+  width:100%;
+  height:auto;
+  min-height:96%;
+  margin:0px auto;
+  /*background-color: #FFF;*/
+  background-color: #EEE;
+  padding: 0px;
+  border: solid #000;
+  border-width: 1px 1px 1px 1px;
+}
+
+.lista-central {
+  float: left;
+  height: 400%;
+  text-align: left;
+  padding: 10px;
+  font-family: Verdana;
+  width: 600px;
+}
+
+.panel-inicial {
+  float: left;
+  width: 25%;
+  padding: 5px;
+  font-family: Verdana;
+  height: 100%;
+  text-align: left;
+}
+
+.panel-central {
+  float: left;
+  /*width: 400%;*/
+  padding: 5px;
+  font-family: Verdana;
+  height: 100%;
+  text-align: left;
+}
+
+.lista-central li {
+  text-align: left;
+  /*width: 300px;*/
+  /*height: 200px;*/
+  margin: 5px;
+  margin-left: 20px;
+  padding: 2px;
+  text-align: left;
+  font-weight: normal;
+  font-size: 12px;
+  /*text-decoration: none;*/
+  list-style: disc;
+}
+
+.panel-final {
+  float: left
+  width: 25%;
+  padding: 5px;
+  font-family: Verdana;
+  height: 100%;
+  text-align: left;
+}
+
+
+.lista-menu {
+  float: left;
+  height: 400%;
+  text-align: left;
+  padding: 5px;
+  font-family: Verdana;
+  width: 300px;
+}

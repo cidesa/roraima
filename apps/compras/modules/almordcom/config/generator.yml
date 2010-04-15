@@ -1,0 +1,73 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Caordcom
+    theme:            default
+    fields:
+      refcom:      { name : Numero }
+      ordcom:      { name : Orden }
+      fecord:      { name : Fecha, params: date_format='dd/MM/yyyy'}
+      tipmon:      { name : Moneda }
+      codpro:      { name : Cod. de la Contratistas de Bienes o Servicio y Cooperativas }
+      rifpro:      { name : Rif. de la Contratistas de Bienes o Servicio y Cooperativas }
+      nompro:      { name : Nombre de la Contratistas de Bienes o Servicio y Cooperativas }
+      desord:      { name : Descripción }
+      crecon:      { name : Proveedor }
+      monord:      { name : Monto Total}
+      doccom:      { name : Tipo de Compromiso }
+      nomext:      { name : Compromiso }
+      refsol:      { name : Referencia }
+      tipord:      { name : Tipo }
+      tippro:      { name : Proyecto }
+      tipfin:      { name : Financiamiento }
+      tipo:        { name : Tipo Orden }
+      codconpag:   { name : Código Pago }
+      desconpag:   { name : Concepto Pago }
+      despro:      { name : Descripción Proyecto }
+      codforent:   { name : Código }
+      desforent:   { name : Descripción }
+      nomfin:      { name : Financiamiento }
+      coduni:      { name : Unidad }
+      desubi:      { name : Descripción Unidad }
+      codemp:      { name : Empleado }
+      notord:      { name : Nota }
+      refprc:      { name : Refiere S/C }
+      justif:      { name : Justificación }
+      codmedcom:   { name : Medio de Comunicación }
+      codprocom:   { name : Tipo de Procedimiento }
+      codpai:      { name : Pais }
+      codedo:      { name : Estado }
+      codmun:      { name : Municipio }
+      aplart:      { name : Articulo 30 }
+      aplart6:     { name : Articulo 6 }
+      refsol:      { name : Referencia }
+      numsigecof:  { name : Numero }
+      fecsigecof:  { name : Fecha }
+      expsigecof:  { name : Expediente }
+      codigoproveedor: { name : codigo oculto }
+      totrecargo: { name : Total Recargo }
+      totorden: { name : Total Orden}
+      staord: {name: Estatus A(Activo) y N(Anulado)}
+
+    list:
+      title:          Ordenes de Compra
+      display:        [=ordcom, fecord, desord, codpro, nompro, monord]
+      fields:
+        codpro:      { name : Código de la Contratistas}
+      filters:        [ordcom, desord, fecord, staord, codpro]
+      sort            ordcom
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   10
+      sort:    ordcom
+    edit:
+      save:           true
+      title:          Edición de Orden de Compra y/o Servicio
+      display:        [refcom, ordcom, fecord, tipmon, codpro, rifpro, nompro, desord, crecon, monord, doccom, nomext, refsol, tipord, tippro, tipfin, tipo, codconpag, desconpag, plaent, tiecan, dtoord, staord, afepre, conpag, forent, fecanu, valmon, tipcom, coduni, codemp, notord, tipdoc, afepro, justif, refprc, despro, codforent, desforent, nomfin, desubi, nomemp, codmedcom, codprocom, codpai, codedo, codmun, aplart, aplart6, staord, codigoproveedor, numsigecof, fecsigecof, expsigecof, totrecargo, totorden]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~
+

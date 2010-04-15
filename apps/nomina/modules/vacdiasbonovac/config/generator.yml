@@ -1,0 +1,24 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Npvacjorlab
+    theme:            default
+    fields:
+      codnom:      { name: Codigo Nomina}
+      nomnom:      { name: Nomina, params: maxlength=100}
+
+    list:
+      title:          Definición de Bono Vacacional y Jornada Laboral
+      filters:        [codnom]
+      display:        [=codnom, nomnom]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+    edit:
+      title:          Definición de Bono Vacacional y Jornada Laboral
+      display:        [codnom, nomnom, lunes, martes, miercoles, jueves, viernes, sabado, domingo]
+      actions:
+        _save:         ~
+        _create:       ~
+        _list:         ~

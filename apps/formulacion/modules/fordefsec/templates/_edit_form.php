@@ -1,0 +1,74 @@
+<?php
+/**
+ * Funciones de la vista.
+ *
+ * @package    Roraima
+ * @subpackage vistas
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id$
+ */
+// date: 2007/11/12 19:44:07
+?>
+<?php echo form_tag('fordefsec/save', array(
+  'id'        => 'sf_admin_edit_form',
+  'name'      => 'sf_admin_edit_form',
+  'multipart' => true,
+)) ?>
+
+<?php echo object_input_hidden_tag($fordefsec, 'getId') ?>
+
+<fieldset id="sf_fieldset_none" class="">
+<legend><?php echo __('Datos del Sector')?></legend>
+<div class="form-row">
+  <?php echo label_for('fordefsec[codsec]', __($labels['fordefsec{codsec}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('fordefsec{codsec}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('fordefsec{codsec}')): ?>
+    <?php echo form_error('fordefsec{codsec}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($fordefsec, 'getCodsec', array (
+  'size' => 20,
+  'readonly' => true,
+	'control_name' => 'fordefsec[codsec]',
+	 'onBlur'  => "javascript: valor=this.value; valor=valor.pad(4, '#',0);document.getElementById('fordefsec_codsec').value=valor;",
+	)); echo $value ? $value : '&nbsp;' ?>
+<div class="sf_admin_edit_help"><?php echo __('Haz Click Aqui para Obtener un Correlativo y Luego escribe la Descripción') ?></div>
+    </div>
+
+<br>
+
+  <?php echo label_for('fordefsec[nomsec]', __($labels['fordefsec{nomsec}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('fordefsec{nomsec}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('fordefsec{nomsec}')): ?>
+    <?php echo form_error('fordefsec{nomsec}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($fordefsec, 'getNomsec', array (
+  'size' => 80,
+  'maxlength' => 250,
+  'control_name' => 'fordefsec[nomsec]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+</div>
+
+</fieldset>
+
+<?php include_partial('edit_actions', array('fordefsec' => $fordefsec)) ?>
+
+</form>
+
+<ul class="sf_admin_actions">
+      <li class="float-rigth"><?php if ($fordefsec->getId()): ?>
+  <input id="eliminarboton" type="button" name="Submit2" value="Eliminar" class="sf_admin_action_delete" onclick="javascript:eliminar();"/>
+<?php endif; ?>
+</li>
+  </ul>
+<script type="text/javascript">
+  function eliminar()
+  {
+    var sector=$('fordefsec_codsec').value;    
+    var id=$('id').value;    
+
+    location.href='/formulacion_dev.php/fordefsec/eliminar?sector='+sector+'&id='+id;
+  }
+ </script>  

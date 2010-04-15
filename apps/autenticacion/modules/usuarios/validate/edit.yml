@@ -1,0 +1,115 @@
+methods:
+  post:
+   - "usuarios{cedemp}"
+   - "usuarios{nomuse}"
+   - "usuarios{diremp}"
+   - "usuarios{telemp}"
+   - "usuarios{loguse}"
+   - "usuarios{pasuse}"
+   - "usuarios{confirm}"
+
+names:
+  usuarios{cedemp}:
+    required:  Yes
+    required_msg: La Cédula del Usuario no puedo estar en Blanco
+    validators: MyStringValidator, Validator_Cedemp
+
+  usuarios{nomuse}:
+    required:  Yes
+    required_msg: El Nombre del Usuario no puede estar en Blanco
+    validators: MyStringValidator2
+
+  usuarios{diremp}:
+    required:  No
+    validators: MyStringValidator3
+
+  usuarios{telemp}:
+    required:  No
+    validators: MyStringValidator4
+
+  usuarios{loguse}:
+    required:  Yes
+    required_msg: El Usuario no puede estar en Blanco
+    validators: UniqueValidator,MyStringValidator5
+
+  usuarios{pasuse}:
+    required:  Yes
+    required_msg: Por favor, tipee la Contraseña
+    validators: MyStringValidator6
+
+  usuarios{confirm}:
+    required:  Yes
+    required_msg: Por Favor,confirme su contraseña.
+    validators: passwordValidator
+
+MyStringValidator:
+    class: sfStringValidator
+    param:
+        min:       7
+        min_error: La Cédula del Usuario no puede tener menos de 7 caracteres
+        max:       10
+        max_error: La Cédula del Usuario no puede tener mas de 10 caracteres
+
+MyStringValidator2:
+    class: sfStringValidator
+    param:
+        min:       5
+        min_error: El Nombre del Usuario no puede tener menos de 5 caracteres
+        max:       250
+        max_error: El Nombre del Usuario no puede tener mas de 250 caracteres
+
+MyStringValidator3:
+    class: sfStringValidator
+    param:
+        min:       5
+        min_error: La Dirección del Usuario no puede tener menos de 5 caracteres
+        max:       250
+        max_error: La Dirección del Usuario no puede tener mas de 250 caracteres
+
+MyStringValidator4:
+    class: sfStringValidator
+    param:
+        min:       5
+        min_error: El Teléfono del Usuario no puede tener menos de 5 caracteres
+        max:       50
+        max_error: El Teléfono del Usuario no puede tener mas de 50 caracteres
+
+MyStringValidator5:
+    class: sfStringValidator
+    param:
+        min:       5
+        min_error: El Login o Usuario no puede tener menos de 5 caracteres
+        max:       50
+        max_error: El Login o Usuario no puede tener mas de 50 caracteres
+
+MyStringValidator6:
+    class: sfStringValidator
+    param:
+        min:       3
+        min_error: La Contraseña no puede tener menos de 3 caracteres
+        max:       100
+        max_error: La Contraseña no puede tener mas de 100 caracteres
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Usuarios
+        column:   loguse
+        unique_error:   El Login o Usuario ya existe. Por Favor, Cambiélo por otro.
+
+passwordValidator:
+    class: sfCompareValidator
+    param:
+        check: 'usuarios[pasuse]'
+        compare_error: La Contraseña es incorrecta. Por Favor, tipeela otra vez.
+
+Validator_Cedemp:
+  class: sfPropelUniqueValidator
+  param:
+    class:        Usuarios
+    column:       cedemp
+    unique_error: La Cedula ya Existe intente con otro
+    min:       1
+    min_error: El Codigo no puede tener menos de 1 caracteres
+    max:       10
+    max_error: El Codigo no puede pasar mas de 10 caracteres

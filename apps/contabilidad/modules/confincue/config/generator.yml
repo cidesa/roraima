@@ -1,0 +1,26 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Contabb
+    theme:            cidesaGenerator
+    fields:
+      codcta: { name: Código, help: Código de la cuenta}
+      descta: { name: Descripción, help: Descripción de la cuenta}
+      cargab: { name: Cargable, help: Define si la cuenta es cargable o no}
+      debcre: { name: Tipo de saldo, help: Define el tipo de saldo de la cuenta}
+      grid:   { name: .}
+
+    list:
+      title:                    Catálogo de Cuentas
+      display:                  [=codcta, descta]
+      filters:                  [codcta, descta]
+    edit:
+      title:                    Catálogo de Cuentas
+      display:
+        Datos de la cuenta:     [codcta, descta, _cargab, _debcre]
+        NONE:                   [_grid]
+      actions:
+        _list:        ~
+        _create:      ~
+        _save:        ~
+        _delete:      ~

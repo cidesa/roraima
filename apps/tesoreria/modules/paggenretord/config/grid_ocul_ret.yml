@@ -1,0 +1,40 @@
+opciones:                  # Opciones generales
+  eliminar:                false
+  tabla:                   opretord
+  name:                    f
+  anchogrid:               900
+  ancho:                   500
+  filas:                   100
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Código Presupuestario
+  tipo:                    t
+  nombrecampo:             codpre
+  esgrabable:              true
+  html:                    [size="30" readonly=true]
+2:       # Columna 2
+  titulo:                  Código Retención
+  tipo:                    t
+  nombrecampo:             codtip
+  esgrabable:              true
+  html:                    [size="20" readonly=true]
+3:       # Columna 3
+  titulo:                  Monto
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             monret
+  esnumerico:              true
+  html:                    [size="10" readonly=true]
+4:       # Columna 4
+  titulo:                  Referencia
+  tipo:                    t
+  nombrecampo:             refere
+  esgrabable:              true
+  html:                    [size="10" readonly=true]
+5:       # Columna 5
+  titulo:                  Uno mil
+  tipo:                    t
+  nombrecampo:             estaunomil
+  esgrabable:              true
+  html:                    [size="10" readonly=true]

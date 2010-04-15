@@ -1,0 +1,21 @@
+opciones:                  # Opciones generales
+  name:                    d
+  eliminar:                true
+  tabla:                   caproret
+  anchogrid:               550
+  ancho:                   500
+  filas:                   1
+  titulo:                  ' Retenciones '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Cod/Retenciones
+  tipo:                    t
+  nombrecampo:             codret
+  esgrabable:              true
+  html:                    [size="3" maxlength="3" ]
+2:       # Columna 2
+  titulo:                  Descripcion
+  tipo:                    t
+  nombrecampo:             destip
+  esgrabable:              false
+  html:                    [size="25" maxlength="250" readonly="true"]

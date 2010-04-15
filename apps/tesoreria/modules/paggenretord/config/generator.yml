@@ -1,0 +1,54 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Opordpag
+    theme:            cidesaGenerator
+    fields:
+      numord: { name: Referencia, params: readonly=true}
+      fecemi: { name: Fecha de Emisión, params: date_format='dd/MM/yyyy' readonly=true}
+      fecret: { name: Fecha, params: date_format='dd/MM/yyyy' maxlength=10}
+      tipcau: { name: Tipo, params: readonly=true}
+      desord: { name: Concepto, type: textarea_tag, params: size=80x5 readonly=true}
+      cedrif: { name: C.I o R.I.F, params: readonly=true}
+      ctapag: { name: Codigo Contable, params: readonly=true}
+      coduni: { name: Unidad Origen, params: readonly=true}
+      numcue: { name: Banco, params: readonly=true}
+      tipfin: { name: Financiamiento, params: readonly=true}
+      numche: { name: N° del Cheque, params: size=15 readonly=true}
+      cedaut: { name: C:I, params: size=15 readonly=true}
+      peraut: { name: Autorizado, params: size=60 readonly=true}
+      monord: { name: Neto a Pagar, params: readonly=true}
+      monret: { name: Total Retenciones,, params: readonly=true}
+      gridret: { name: . }
+      gridfac: { name: . }
+      gridmov: { name: . }
+      gridoculret: { name: . }
+      gridconsulret: { name: . }
+      totmoncau:  { name: Total Causado, params: disabled=false}
+      totmonret:  { name: Total Retenido, params: readonly=true}
+      totmondes:  { name: Total Descuento, params: readonly=true}
+      botoncomprobante:  { name: Ver Comprobante}
+      botonfactura:  { name: Factura}
+    list:
+      title:          Ordenes de Pago
+      display:        [=numord, fecemi, cedrif, nomben]
+      object_actions:
+        _edit:        ~
+        _delete:      NONE
+      filters:        [numord, fecemi, cedrif]
+      max_per_page:   10
+      sort:           numord
+      actions:
+        _create:      NONE
+    edit:
+      title:          Generar Retenciones a Orden de Pago
+      display:
+        "Datos de la Orden": [numord, _fecemi, _fecret, _tipcau, desord, _cedrif, _ctapag, _coduni, _numcue, _tipfin, _botoncomprobante]
+        "Retenciones": [_gridret, _gridconsulret, monret, _gridoculret]
+        "Facturas": [_botonfactura, _gridfac]
+        "Movimientos de la Orden": [_gridmov, totmoncau, totmonret, totmondes, monord]
+        "Datos del Pago": [numche, cedaut, peraut]
+      hide: [codigoprovee, afectapresup, filasord, afectarecargo, iniciopar, formatopar, totmarcadas, datosret, modmonret, referencias2, documento, filasconsret, totfac, totbas, totiva, totimp, incmod, filasconsret, elislr, eltimbre, totbasmil, totmontmil, unidad, totbasislr, totmontislr, eliva, vacio, idrefer, presiono, partidas]
+      actions:
+        _list:        ~
+        _save:        ~

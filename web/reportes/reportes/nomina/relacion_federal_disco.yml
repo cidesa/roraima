@@ -1,0 +1,89 @@
+Parametros:
+  modulo: nomina
+  nomrep: relacion_banco_federal
+  titulo: RELACION BANCO-DISCO
+  orientacion: Vertical
+  tipopagina: Carta
+  width:210
+
+Filas:
+  CATALOGO CODCTA:
+    tipotag:   inputcat_tag
+    label: Tipo de Nómina:
+    sql:select min(codnom) as nommin, max(codnom) as nommax from npnomcal
+    nomdes: nommin
+    campodes: nommin
+    catdes: 0
+    nomhas: nommax
+    campohas: nommax
+    cathas: 1
+    nomcat: tipnom
+    size: 20
+
+  CATALOGO BANCO:
+    tipotag:   inputcat_tag
+    label: Banco:
+    sql:select (codban) as banco from NPBANCOS
+    nomdes: banco
+    campodes: banco
+    catdes: 2
+    nomcat: banco
+    size: 20
+
+  CATALOGO cuenta:
+    tipotag:   inputcat_tag
+    label: Cuenta Bancaria:
+    sql: select (numcue) as cuenta from TSDEFBAN where numcue='01330007121000053817'
+    nomdes: cuenta
+    campodes: cuenta
+    catdes: 4
+    nomcat: cuenta
+    size: 20
+
+  combo primero fijo:
+    tipotag:   combof_tag
+    label: NOMINA ESPECIAL
+    nomdes: especial
+    campodes: [N=>NO, S=>SI]
+
+  CATALOGO CODCTAESP:
+    tipotag:   inputcat_tag
+    label: Tipo de Nómina Especial:
+    sql:select min(codnomesp) as nomminesp, max(codnomesp) as nommaxesp from npnomcal
+    nomdes: nomminesp
+    campodes: nomminesp
+    catdes: 6
+    nomhas: nommaxesp
+    campohas: nommaxesp
+    cathas: 7
+    nomcat: tipnom_especial
+    size: 20
+
+  fecha PRIMERA:
+    tipotag:   inputfec_tag
+    label: Fecha Efectiva del Pago
+    sql:   select to_char(now(),'dd/mm/yyyy') as fecha
+    #DESDE
+    nomdes: fecha
+    campodes: fecha
+    size: 20
+
+  CATALOGO codfed:
+    tipotag:   input_tag
+    label: Código Banco Federal:
+    nomdes: codfederal
+    campodes: codfederal
+    size: 20
+
+
+  combo primero fijo1:
+    tipotag:   combof_tag
+    label: TIPO DE QUINCENA
+    nomdes: quincena
+    campodes: [01=>PRIMERA, 02=>SEGUNDA, 03=>SEMANAL, 04=>EVENTUAL]
+
+
+
+
+
+

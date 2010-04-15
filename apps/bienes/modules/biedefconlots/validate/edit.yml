@@ -1,0 +1,78 @@
+methods:
+  post:
+   - "bndefcons{codact}"
+   - "bndefcons{codact1}"   
+   - "bndefcons{ctadepcar}"
+   - "bndefcons{ctadepabo}"
+   - "bndefcons{ctaajucar}"
+   - "bndefcons{ctaajuabo}"
+   - "bndefcons{ctarevcar}"
+   - "bndefcons{ctarevabo}"
+   - "bndefcons{ctapercar}"
+   - "bndefcons{ctaperabo}"                        
+   
+names: 
+  bndefcons{codact}:
+    required:  Yes
+    required_msg: El Código no puede estar en Blanco.
+    validators: ExistValidator
+
+  bndefcons{codact1}:
+    required:  Yes
+    required_msg: El Código no puede estar en Blanco.
+    validators: ExistValidator
+
+  bndefcons{ctadepcar}:
+    required:  Yes
+    required_msg: El Código no puede estar en Blanco.
+    validators: ExistValidatorr
+
+  bndefcons{ctadepabo}:
+    required:  Yes
+    required_msg: El Código no puede estar en Blanco.
+    validators: ExistValidatorr
+    
+  bndefcons{ctaajucar}:
+    required:  Yes
+    required_msg: El Código no puede estar en Blanco.
+    validators: ExistValidatorr
+
+  bndefcons{ctaajuabo}:
+    required:  Yes
+    required_msg: El Código no puede estar en Blanco.
+    validators: ExistValidatorr
+
+  bndefcons{ctarevcar}:
+    required:  Yes
+    required_msg: El Código no puede estar en Blanco.
+    validators: ExistValidatorr
+
+  bndefcons{ctarevabo}:
+    required:  Yes
+    required_msg: El Código no puede estar en Blanco.
+    validators: ExistValidatorr
+
+  bndefcons{ctapercar}:
+    required:  Yes
+    required_msg: El Código no puede estar en Blanco.
+    validators: ExistValidatorr
+
+  bndefcons{ctaperabo}:
+    required:  Yes
+    required_msg: El Código no puede estar en Blanco.
+    validators: ExistValidatorr
+
+
+ExistValidator:
+    class: CidesaExistValidator
+    param:
+        class:        Bnregsem
+        column:       codact     
+        unique_error: El Código debe Existir.
+        
+ExistValidatorr:
+    class: CidesaExistValidator
+    param:
+        class:        Contabb
+        column:       codcta     
+        unique_error: El Código debe Existir.        

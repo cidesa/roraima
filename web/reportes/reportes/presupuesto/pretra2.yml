@@ -1,0 +1,59 @@
+Parametros:
+  modulo: presupuesto
+  nomrep: pretra2
+  titulo: Traspasos
+  orientacion: Horizontal
+  width:210
+  tipopagina: Carta
+
+Filas:
+  CATALOGO NROPRECOMPRO:
+    tipotag:   inputcat_tag
+    label: Codigo del Traslado:
+    sql: select min(reftra) as codtrades, max(reftra) as codtrahas  from cptrasla
+    nomdes: codtrades
+    campodes: codtrades
+    catdes: 0
+    nomhas: codtrahas
+    campohas: codtrahas
+    cathas: 1
+    nomcat:cptrasla
+    size: 15
+
+  FECHA MOVIMIENTOS:
+    tipotag:   inputfec_tag
+    label: Fecha
+    sql:SELECT to_char(MIN(FECTRA),'dd/mm/YYYY') as fecdes, to_char(max(fectra),'dd/mm/YYYY') as fechas FROM CPTRASLA
+    #DESDE
+    nomdes: fecdes
+    campodes: fecdes
+    #HASTA
+    nomhas: fechas
+    campohas: fechas
+    #PARAMETROS
+    size: 15
+
+  CATALOGO TIPO:
+    tipotag:   inputcat_tag
+    label: Periodo
+    sql:SELECT min(PERTRA) as pertrades, max(PERTRA) as pertrahas FROM CPTRASLA
+    nomdes: pertrades
+    campodes: pertrades
+    catdes: 2
+    nomhas: pertrahas
+    campohas: pertrahas
+    cathas: 3
+    nomcat: cppertra
+    size: 15
+
+  COMBO FIJO:
+    tipotag:   combof_tag
+    label: Status
+    nomdes: combodes
+    campodes: [T=>Todos, A=>Activos, N=>Anulados]
+    size: 15
+
+
+
+
+

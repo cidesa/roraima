@@ -1,0 +1,69 @@
+#CONFIGURACION DE ARCHIVOS YML TEMPORALES
+#PARA LOS REPORTES
+#Los comentarios al final indican que debe llevar la siguiente linea despues del comentario
+
+Parametros:
+#PARAMETROS FIJOS
+  #Nombre del Modulo y del Reporte #
+  modulo: ciudadanos
+  nomrep: atlisaud
+
+  #Titulo del Reporte (SIEMPRE APARECERA EN MAYUSCULA), Orientacion y Tipo de Pagina, Ancho de los tag <td>#
+  titulo: Listado de Audiencias
+  orientacion: Vertical
+  tipopagina: Carta
+  width:210
+
+#PARAMETRO FORMULARIO
+Filas:
+  CATALOGO PRIMERO:
+    tipotag:   inputcat_tag
+    label: Solicitantes
+    sql: select min(a.cedula) as cedmin,max(a.cedula) as cedmax  from atsolici a, ataudiencias b where b.atsolici_id=a.id
+    nomdes: ceddes
+    campodes: cedmin
+    catdes: 0
+    nomhas: cedhas
+    campohas: cedmax
+    cathas: 1
+    nomcat: atsolici_ceddes
+    size: 10
+
+  CATALOGO SEGUNDO:
+    tipotag:   inputcat_tag
+    label: Unidades
+    sql:   select min(a.coduni) as codunimin,max(a.coduni) as codunimax from atunidades a, ataudiencias b where b.atunidades_id=a.id
+    nomdes: codunides
+    campodes: codunimin
+    catdes: 2
+    nomhas: codunihas
+    campohas: codunimax
+    cathas: 3
+    nomcat: atunidades_coduni
+    size: 10
+    #parametros:  size="10" onclick="javascript:mostrarid(this.id)"
+
+  #El INPUTFEC_TAG es para determinar fechas, es similar al anterior solo q no lleva lo referente
+  #a catalogos, al igual que el anterior de querer una sola caja de fechas debe elimnar los referente al HASTA
+  fecha PRIMERA:
+    tipotag:   inputfec_tag
+    label: Fecha
+    sql:   select '01/01/'||to_char(date(now()),'yyyy') as fechamin, '31/12/'||to_char(date(now()),'yyyy') as fechamax from empresa
+    nomdes: fechades
+    campodes: fechamin
+    #HASTA
+    nomhas: fechahas
+    campohas: fechamax
+    size: 10
+
+  combo SEGUNDO fijo:
+    tipotag: combof_tag
+    label: Filtrar Fecha por:
+    nomdes: combofecha
+    campodes: [AU=>Audiencia, AT=>Atención, R=>Registro]
+
+  combo PRIMERO fijo:
+    tipotag: combof_tag
+    label: Estatus
+    nomdes: combostatus
+    campodes: [A=>Aprobado, E=>En Proceso, R =>Rechazado, T =>Todos]

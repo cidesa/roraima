@@ -1,0 +1,42 @@
+propel:
+  _attributes: { noXsd: false, defaultIdMethod: native, package: lib.model }
+  acdestina:
+    cedrif:
+      type: VARCHAR
+      size: 15
+      required: true
+      ##primaryKey: true
+    nomdes:
+      type: VARCHAR
+      size: 250
+      required: true
+    dirdes:
+      type: VARCHAR
+      size: 100
+    teldes:
+      type: VARCHAR
+      size: 20
+    nitdes:
+      type: VARCHAR
+      size: 15
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  acunidad:
+    numuni:
+      type: VARCHAR
+      size: 4
+      required: true
+      ##primaryKey: true
+    nomuni:
+      type: VARCHAR
+      size: 30
+      required: true
+    desuni:
+      type: VARCHAR
+      size: 200
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true

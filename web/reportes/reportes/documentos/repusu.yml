@@ -1,0 +1,16 @@
+Parametros:
+  modulo: documentos
+  nomrep: repasitab
+  titulo: Asignación de Tablas
+  orientacion: Vertical
+  tipopagina: Carta
+  width:210
+
+Filas:
+  UNIDADES:
+    tipotag:   combo_tag
+    label: Unidades:
+    sql:   select id, nomuni from acunidad union select 0 as id, 'Todos' as nomuni from empresa order by id
+    nomdes: unidad
+    campodes: id-nomuni
+    size: 20

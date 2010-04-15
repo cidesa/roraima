@@ -1,0 +1,94 @@
+Parametros:
+  modulo: nomina
+  nomrep: nprnomdefniv
+  titulo: Nómina de Pago por Nivel Organizacional
+  orientacion: Vertical
+  tipopagina: Carta
+  width:210
+
+Filas:
+  CATALOGO CODEMP:
+    tipotag:   inputcat_tag
+    label: Código Empleado:
+    sql:   SELECT min(CODEMP) as codempmin, max(CODEMP) as codempmax FROM NPASICAREMP
+    nomdes: empdes
+    campodes: codempmin
+    catdes: 0
+    nomhas: emphas
+    campohas: codempmax
+    cathas: 1
+    nomcat: codemp
+    size: 20
+
+  CATALOGO CARGO:
+    tipotag:   inputcat_tag
+    label: Código Cargo:
+    sql:   SELECT min(codcar) as codcarmin, max(codcar) as codcarmax FROM NPASICAREMP
+    nomdes: cardes
+    campodes: codcarmin
+    catdes: 2
+    nomhas: carhas
+    campohas: codcarmax
+    cathas: 3
+    nomcat: codcar
+    size: 20
+
+  CATALOGO NIVEL:
+    tipotag:   inputcat_tag
+    label: Código Nivel:
+    sql:   SELECT min(CODNIV) as codnivmin, max(CODNIV) as codnivmax  FROM NPESTORG where length(rtrim(codniv))=(SELECT MAX (LENGTH(CODNIV)) FROM NPESTORG)
+    nomdes: nivdes
+    campodes: codnivmin
+    catdes: 4
+    nomhas: nivhas
+    campohas: codnivmax
+    cathas: 5
+    nomcat: codniv
+    size: 20
+
+  CATALOGO CONCEPTO:
+    tipotag:   inputcat_tag
+    label: Código Concepto:
+    sql:   SELECT min(CODCON) as codconmin, max(CODCON) as codconmax FROM NPASICONEMP
+    nomdes: condes
+    campodes: codconmin
+    catdes: 6
+    nomhas: conhas
+    campohas: codconmax
+    cathas: 7
+    nomcat: codcon
+    size: 20
+
+  CATALOGO TIPNOM:
+    tipotag:   inputcat_tag
+    label: Tipo de Nomina:
+    sql:   SELECT min(CODNOM) as codnommin, max(CODNOM) as codnommax from NPASICAREMP where trim(codnom)!=''
+    nomdes: tipnomdes
+    campodes: codnommin
+    catdes: 8
+    nomhas: tipnomhas
+    campohas: codnommax
+    cathas: 9
+    nomcat: codnom
+    size: 20
+
+  CAJA ELABORADO POR:
+    tipotag:   input_tag
+    label: Elaborado por:
+    nomdes: elaborado
+    campodes:
+    size: 60
+
+  CAJA REVISADO:
+    tipotag:   input_tag
+    label: Revisado por:
+    nomdes: revisado
+    campodes:
+    size: 60
+
+  CAJA AUTORIZADO:
+    tipotag:   input_tag
+    label: Autorizado por:
+    nomdes: autorizado
+    campodes:
+    size: 60

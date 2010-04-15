@@ -1,0 +1,59 @@
+cabecera:
+  nropagina:  true
+  fecha:      true
+  logo:
+    img:       "../../img/logo.jpg"
+    x:
+      l:      10
+      p:      10
+    y:
+      l:      8
+      p:      8
+  empresa:
+    fuente:   Arial
+    tam:      12
+    x:
+      l:      42
+      p:      42
+    y:
+      l:      0
+      p:      0
+    pos:      L
+  detemp:
+    fuente:   Arial
+    tam:      8
+    x:
+      l:      42
+      p:      42
+    y:
+      l:      0
+      p:      0
+    pos:      L
+  departamento:
+    fuente:   Arial
+    tam:      10
+    x:
+      l:      0
+      p:      0
+    y:
+      l:      18
+      p:      18
+    pos:      C
+  titulo:
+    fuente:   Arial
+    tam:      12
+    x:
+      l:      0
+      p:      0
+    y:
+      l:      27
+      p:      27
+    pos:      C
+reportes:
+  fuente:     Arial
+  tippag:     Letter
+  tamletra:   8
+  orientacion: P
+  medtam:     mm
+
+

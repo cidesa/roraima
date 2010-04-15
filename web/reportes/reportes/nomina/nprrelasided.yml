@@ -1,0 +1,29 @@
+Parametros:
+  modulo: nomina
+  nomrep: nprrelasided
+  titulo: RELACION DE ASIGNACIONES Y DEDUCCIONES EJERCICIO FISCAL
+  orientacion: Vertical
+  tipopagina: Carta
+  width:210
+
+Filas:
+  CATALOGO CODEMP:
+    tipotag:   inputcat_tag
+    label: Codigo del empleado:
+    sql:   SELECT min(codemp) as codempmin, max(codemp) as codempmax FROM NPASICAREMP
+    nomdes: codempdes
+    campodes: codempmin
+    catdes: 0
+    nomhas: codemphas
+    campohas: codempmax
+    cathas: 1
+    nomcat: codemp
+    size: 20
+
+  COMBO DE ANO:
+    tipotag:   combof_tag
+    label: Ano
+    nomdes: ano
+    campodes: [2009] 
+    
+  

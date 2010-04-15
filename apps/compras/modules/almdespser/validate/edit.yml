@@ -1,0 +1,52 @@
+methods:
+  post:
+   - "cadphartser{dphart}"
+   - "cadphartser{fecdph}"
+   - "cadphartser{reqart}"
+   - "cadphartser{desdph}"
+
+names:
+  cadphartser{dphart}:
+    required:  Yes
+    required_msg: El Número del Despacho del Servicio no puedo estar en Blanco
+#    validators: Validator_dphart
+
+  cadphartser{fecdph}:
+    required: Yes
+    required_msg: La Fecha del Despacho del Servicio no puede estar en blanco
+    validators: dateValidator, FechaValidator
+
+  cadphartser{reqart}:
+    required:  Yes
+    required_msg: El Código de la Requisición no puede estar en blanco
+    validators: Validator_exist_reqart
+
+  cadphartser{desdph}:
+    required:  Yes
+    required_msg: La Descripción del Despacho del Servicio no puede estar en blanco
+
+Validator_dphart:
+    class: sfPropelUniqueValidator
+    param:
+        class:        cadphartser
+        column:       dphart
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_exist_reqart:
+    class: CidesaExistValidator
+    param:
+        class:    careqartser
+        column:   reqart
+        unique_error:   El Código de la Referencia no existe.
+
+dateValidator:
+    class: sfDateValidator
+    param:
+        date_error: "El formato de la fecha es erróneo"
+
+FechaValidator:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha introducida es invalida

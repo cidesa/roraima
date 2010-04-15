@@ -1,0 +1,29 @@
+methods:
+  post:
+   - "npprofesion{codprofes}"
+   - "npprofesion{desprofes}"  
+names: 
+  npprofesion{codprofes}:
+    required:  Yes
+    required_msg: El código no puede estar en Blanco
+    validators: Validator_codprofes
+    
+  npprofesion{desprofes}:
+    required:  Yes
+    required_msg: La descripción no puede estar en Blanco
+    validators: Validator_desprofes
+    
+Validator_codprofes:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Npprofesion
+        column:       codprofes
+        unique_error: El registro ya Existe intente con otro.
+    
+Validator_desprofes:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       255
+        max_error: La descripción no puede pasar mas de 255 caracteres

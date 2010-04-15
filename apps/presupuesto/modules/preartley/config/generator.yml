@@ -1,0 +1,26 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Cpartley
+    theme:            cidesaGenerator
+    fields:
+      codart:  {name: Código, params: onBlur=rellenar() maxlength=3 size=4 }
+      desart:  {name: Descripción}
+      nomabr:  {name: Nombre Abreviado, params: maxlength=4 size=5}
+      stacon:  {name: Nivel I (Dirección de Presupuesto), help: (S) si requiere la aprobación de Dirección de Presupuesto. (N) lo contrario }
+      stagob:  {name: Nivel II (Despacho de Alcalde), help: (S) si requiere la aprobación del Despacho de Alcalde. (N) lo contrario}
+      stapre:  {name: Nivel III (Camara Municipal), help: (S) si requiere la aprobación de la Camara Municipal. (N) lo contrario}
+      niveles: {name: Aprobación de}
+    list:
+      title:   Artículos de Ley
+      display: [=codart, desart]
+      filters: [codart, desart]
+    edit:
+      title:                       Artículos de Ley
+      display:
+        Datos del Documento:       [codart, desart, nomabr, _niveles]
+      actions:
+        _list:        ~
+        _create:      ~
+        _save:        ~
+        _delete:      ~

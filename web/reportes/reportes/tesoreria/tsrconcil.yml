@@ -1,0 +1,47 @@
+Parametros:
+  modulo: tesoreria
+  nomrep: tsrconcil
+  titulo: CONCILIACION BANCARIA
+  orientacion: Horizontal
+  tipopagina: CARTA
+  width:210
+
+Filas:
+
+  CATALOGO CUENTAS:
+    tipotag:   inputcat_tag
+    label: Nro. de Cuentas:
+    sql:  SELECT MIN(numcue) as numcuemin,max(numcue) as numcuemax FROM TSDEFBAN
+    nomdes: ctades
+    campodes: numcuemin
+    catdes: 0
+    nomcat: numcue
+    size: 22
+
+  #COMBO MES:
+   # tipotag:   combof_tag
+    #label: Mes:
+    #nomdes: mes
+    #campodes: [01=>Enero, 02=>Febrero, 03=>Marzo, 04=>Abril, 05=>Mayo, 06=>Junio, 07=>Julio, 08=>Agosto, 09=>Septiembre, 10=>Octubre, 11=>Noviembre, 12=>Diciembre]
+    #size: 22
+
+  CAJA ELABORADO:
+    tipotag:  input_tag
+    label: Elaborado:
+    nomdes: elaborado
+    campodes:
+    size: 40
+
+  CAJA REVISADO:
+    tipotag:  input_tag
+    label: Revisado:
+    nomdes: revisado
+    campodes:
+    size: 40
+
+  CAJA APROBADO:
+    tipotag:  input_tag
+    label: Aprobado:
+    nomdes: aprobado
+    campodes:
+    size: 40

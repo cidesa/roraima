@@ -1,0 +1,28 @@
+Parametros:
+  modulo: nomina
+  nomrep: vacperpormes
+  titulo: Personal a Optar por Vacaciones 
+  orientacion: Vertical
+  tipopagina: CARTA
+  width:210
+
+Filas:
+  CATALOGO EMPLEADO:
+    tipotag:   inputcat_tag
+    label: Empleado:
+    sql:  SELECT MIN(codemp) as codmin,max(codemp) as codmax FROM NPHOJINT
+    nomdes: codempdes
+    campodes: codmin
+    catdes: 0
+    nomhas: codemphas
+    campohas: codmax
+    cathas: 1
+    nomcat: codemp
+    size: 22
+
+  COMBO MES:
+    tipotag:   combof_tag
+    label: Mes:
+    nomdes: mes
+    campodes: [01=>Enero, 02=>Febrero, 03=>Marzo, 04=>Abril, 05=>Mayo, 06=>Junio, 07=>Julio, 08=>Agosto, 09=>Septiembre, 10=>Octubre, 11=>Noviembre, 12=>Diciembre]
+    size: 22

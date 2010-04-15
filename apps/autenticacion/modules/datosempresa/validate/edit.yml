@@ -1,0 +1,31 @@
+methods:
+  post:
+   - "empresa{nomemp}"
+   - "empresa{diremp}"
+
+names:
+  empresa{nomemp}:
+    required:  Yes
+    required_msg: El nombre de la empresa no puedo estar en Blanco
+    validators: MyStringValidator
+
+  empresa{diremp}:
+    required:  Yes
+    required_msg: La dirección no puede estar en Blanco
+    validators: MyStringValidator2
+
+MyStringValidator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El Nombre de la Empresa no puede tener menos de 2 caracteres
+        max:       250
+        max_error: La Nombre de la Empresa no puede tener mas de 250 caracteres
+
+MyStringValidator2:
+    class: sfStringValidator
+    param:
+        min:       5
+        min_error: La Dirección de la Empresa no puede tener menos de 5 caracteres
+        max:       100
+        max_error: La Dirección de la Empresa no puede tener mas de 250 caracteres

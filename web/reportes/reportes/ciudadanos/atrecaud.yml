@@ -1,0 +1,23 @@
+Parametros:
+  modulo: ciudadanos
+  nomrep: attipayu
+  titulo: RECAUDOS
+  orientacion: Vertical
+  tipopagina: Carta
+  width:210
+
+Filas:
+  CATALOGO CODCON:
+    tipotag:   inputcat_tag
+    label: C&oacute;digo del Recaudo:
+    sql:   select min(codrec) as codmin,max(codrec) as codmax from atrecaud
+    nomdes: codrecdes
+    campodes: codmin
+    catdes: 0
+    nomhas: codrechas
+    campohas: codmax
+    cathas: 1
+    nomcat: atrecaud
+    size: 20
+
+

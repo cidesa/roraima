@@ -1,0 +1,85 @@
+Parametros:
+  modulo: presupuesto
+  nomrep: preprc
+  titulo: PRECOMPROMISOS
+  orientacion: Horizontal
+  tipopagina: Carta
+  width:210
+
+Filas:
+  CATALOGO NROPRECOMPRO:
+    tipotag:   inputcat_tag
+    label: Nro del Precompromiso:
+    sql:SELECT min(pre1) as pre1, max(pre2) as pre2 from (select min(a.refprc ) as pre1, max(a.refprc) as pre2 from cpprecom a,cpdocprc b where a.tipprc=b.tipprc union select min(a.refcom ), max(a.refcom) from cpcompro a,cpdoccom b where a.tipcom=b.tipcom and b.afeprc='S' union select min(a.refcau ) , max(a.refcau) from cpcausad a ,cpdoccau b where a.tipcau=b.tipcau and b.afeprc='S' union select min(a.refpag) , max(a.refpag) from cppagos a, cpdocpag b where a.tippag=b.tippag and b.afeprc='S' )as j
+    nomdes: pre1
+    campodes: pre1
+    catdes: 0
+    nomhas: pre2
+    campohas: pre2
+    cathas: 1
+    nomcat: cpprecom
+    size: 15
+
+  FECHA MOVIMIENTOS:
+    tipotag:   inputfec_tag
+    label: Fecha
+
+    sql:select to_char(min(fecprc1),'DD/MM/YYYY') as fecprc1, to_char(max(fecprc2 ),'DD/MM/YYYY') as fecprc2  from (SELECT MIN(FECPRC) as fecprc1,MAX(FECPRC) as fecprc2 FROM CPPRECOM union SELECT miN(FECCOM) as fecprc1,mAX(FECCOM) as fecprc2 FROM CPCOMPRO Union SELECT MIN(FECCAU) as fecprc1,MAX(FECCAU) as fecprc2 FROM CPCAUSAD UNION SELECT MIN(FECPAG) as fecprc1,MAX(FECPAG) as fecprc2 FROM CPPAGOS) as j
+    #DESDE
+    nomdes: fecprc1
+    campodes: fecprc1
+    #HASTA
+    nomhas: fecprc2
+    campohas: fecprc2
+    #PARAMETROS
+    size: 15
+
+  CATALOGO TIPO:
+    tipotag:   inputcat_tag
+    label: Tipo
+    sql:select min(j.tipprc1) as tipprc1, max(j.tipprc2) as tipprc2  FROM (SELECT min(TIPPRC) as tipprc1 , max(TIPPRC) as tipprc2 FROM CPDOCPRC UNION SELECT min(TIPCOM) as tipprc1, max(TIPCOM) as tipprc2 FROM CPDOCCOM UNION  SELECT min(TIPCAU) as tipprc1, max(TIPCAU) as tipprc2 FROM CPDOCCAU WHERE AFEPRC='S' UNION SELECT min(TIPPAG), max(TIPPAG) FROM CPDOCPAG WHERE AFEPRC='S') as j
+    nomdes: tipprc1
+    campodes: tipprc1
+    catdes: 2
+    nomhas: tipprc2
+    campohas: tipprc2
+    cathas: 3
+    nomcat: cpdocprc
+    size: 15
+
+  COMBO FIJO1:
+    tipotag:   combof_tag
+    label: Status
+    nomdes: combodes
+    campodes: [T=>Todos, A=>Activos, N=>Anulados]
+    size: 15
+
+  COMBO FIJO2:
+    tipotag:   combof_tag
+    label: Afectación Del Movimiento
+    nomdes: combohas
+    campodes: [T=>Todos, R=>Precomprometido, O=>Comprometido, C=>Causado, P=>Pagado]
+    size: 15
+
+  CATALOGO CODIGO:
+    tipotag:   inputcat_tag
+    label: Codigo Presupuestario:
+    sql:select min(codpre) as valor,max(codpre) as valor2 from CPASIINI
+    nomdes: codpre1
+    campodes: valor
+    catdes: 4
+    nomhas: codpre2
+    campohas: valor2
+    cathas: 5
+    nomcat: cpimpprc
+    size: 15
+
+  COMODIN:
+    tipotag:   input_tag
+    label: Filtro:
+    nomdes: comodin
+    campodes:'%%'
+    size: 15
+
+
+

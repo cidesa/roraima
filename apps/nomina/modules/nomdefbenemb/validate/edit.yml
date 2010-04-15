@@ -1,0 +1,73 @@
+methods:
+  post:
+   - "npbenefiemb{cedrif}"
+   - "npbenefiemb{nomben}"
+   - "npbenefiemb{fecnacben}"
+   - "npbenefiemb{fecreg}"
+   - "npbenefiemb{dirben}"
+
+names:
+  npbenefiemb{cedrif}:
+    required:  Yes
+    required_msg: La Cédula no puede estar en Blanco
+    validators: Validator_cedrif
+
+  npbenefiemb{nomben}:
+    required:  Yes
+    required_msg: El nombre no puede estar en Blanco
+    validators: Validator_nomben
+
+  npbenefiemb{fecnacben}:
+    required:  Yes
+    required_msg: Debe ingresar la Fecha de Nacimiento
+    validators: FechaValidator, FechaValidatorNow
+
+  npbenefiemb{fecreg}:
+    required:  Yes
+    required_msg: Debe ingresar la Fecha de Registro
+    validators: FechaValidator, FechaValidatorNow
+
+  npbenefiemb{dirben}:
+    required:  Yes
+    required_msg: Debe ingresar la descripción del Juzgado
+    validators: Validator_dirben
+
+
+
+Validator_cedrif:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Npbenefiemb
+        column:       cedrif
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_nomben:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El nombre no puede tener menos de 2 caracteres
+        max:       100
+        max_error: El nombre no puede pasar mas de 100 caracteres
+        
+Validator_dirben:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La direccion no puede tener menos de 2 caracteres
+        max:       200
+        max_error: La direccion no puede pasar mas de 200 caracteres
+        
+FechaValidator:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha  introducida es invalida
+        
+FechaValidatorNow:
+    class:         CidesaDateNow
+    param:
+        compare: 'now'
+        compare_error: Esta Fecha no puede ser mayor a la Fecha Actual
+        operator: '<='
+        date_error:  Fecha Inválida

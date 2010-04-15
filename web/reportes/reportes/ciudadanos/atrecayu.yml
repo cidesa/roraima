@@ -1,0 +1,22 @@
+Parametros:
+  modulo: ciudadanos
+  nomrep: atrecayu
+  titulo: RECAUDOS POR DONACION
+  orientacion: Vertical
+  tipopagina: Carta
+  width:210
+
+Filas:
+  CATALOGO CODCON:
+    tipotag:   inputcat_tag
+    label: C&oacute;digo de la Donaci&oacute;n:
+    sql:   select min(desrub) as desmin,max(desrub) as desmax from atrubros
+    nomdes: desrubdes
+    campodes: desmin
+    catdes: 0
+    nomhas: desrubhas
+    campohas: desmax
+    cathas: 1
+    nomcat: atrubros
+    size: 20
+

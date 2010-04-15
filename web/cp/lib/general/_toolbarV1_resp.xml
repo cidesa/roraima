@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='iso-8859-1'?>
+<toolbar disableType="image" absolutePosition="auto" toolbarAlign="right">
+	<ImageButton  src="../../lib/general/toolbar/imgs/iconSave.gif" height="25" width="25" id="0_save" tooltip="Save"/>
+	<divider id="div_1"/>
+	<!-- ImageButton src="../toolbar/imgs/cancelar.gif" height="10" width="10"  id="0_salir" tooltip="Go"/-->
+	<ImageButton src="../../lib/general/toolbar/imgs/iconCancelar.gif" height="25" width="100px" id="0_cancelar" tooltip="Cancelar"/>
+	<divider id="div_2"/>			
+	<ImageButton src="../../lib/general/toolbar/imgs/borrar.gif" height="25" width="25" id="0_delete" tooltip="Delete"/>	
+	<divider id="div_3"/>					
+	<ImageButton src="../../lib/general/toolbar/imgs/ojo.gif" height="25" width="100px" id="0_ojo" tooltip="Look"/>	
+	<divider id="div_4"/>	
+	<ImageButton src="../../lib/general/toolbar/imgs/iconPrint.gif" height="25" width="25" id="0_print" tooltip="Print"/>	
+	<divider id="div_5"/>		
+	<ImageButton src="../../lib/general/toolbar/imgs/iconNewNewsEntry.gif" height="25" width="25" id="0_new" tooltip="New"/>		
+	<divider id="div_6"/>		
+	<ImageButton src="../../lib/general/toolbar/imgs/icon20.gif" height="25" width="25" id="0_form" tooltip="Form"/>
+	<divider id="div_7"/>		
+	<ImageButton src="../../lib/general/toolbar/imgs/iconSearch.gif" height="25" width="25" id="0_search" tooltip="Search"/>		
+	<divider id="div_8"/>		
+	<ImageButton src="../../lib/general/toolbar/imgs/iconFilter.gif" height="25" width="25" id="0_filter" tooltip="Filter"/>		
+	<divider id="div_9"/>
+	<ImageButton src="../../lib/general/toolbar/imgs/calc.gif" height="25" width="100px" id="0_calc" tooltip="Calculator"/>								
+	<divider id="div_10"/>		
+    <ImageButton src="../../lib/general/toolbar/imgs/calend2.gif" height="25" width="100px" id="0_calend" tooltip="Calendar"/>
+	<divider id="div_11"/>	
+	<ImageButton src="../../lib/general/toolbar/imgs/door.gif" height="25" width="100px" id="0_salir" tooltip="Go"/>												
+</toolbar>

@@ -1,0 +1,56 @@
+Parametros:
+  modulo: nomina
+  nomrep: nprantserv
+  titulo: ANTECEDENTES DE SERVICIOS
+  orientacion: Vertical
+  tipopagina: CARTA
+  width:210
+
+Filas:
+  CATALOGO EMPLEADO:
+    tipotag:   inputcat_tag
+    label: Empleado:
+    sql:  -1
+    nomdes: cedula
+    campodes: cedula
+    catdes: 0
+    nomcat: codempliq
+    size: 22
+
+  CATALOGO MOTIVOEGRESO:
+    tipotag:   inputcat_tag
+    label: Motivo de Egreso:
+    sql:  -1
+    nomdes: motmin
+    campodes: montmin
+    catdes: 2
+    nomcat: motliq
+    size: 22
+
+  CAJA FECHASOL:
+    tipotag:   inputfec_tag
+    label: Fecha Solicitud
+    sql:   SELECT to_char(CURRENT_DATE,'dd/mm/yyyy') as fecsol
+    nomdes: fecsol
+    campodes: fecsol
+    size: 22
+
+  TEXTO OBSERVACIONES:
+    tipotag:   inputarea_tag
+    label: Observaciones:
+    nomdes: observ
+    campodes: observ
+
+  TITULOS:
+    tipotag:    titulo_tag
+    nomdes: NOMBRE
+    nomhas: CARGO
+
+  CAJA DIRECTOR RECURSOS HUMANOS:
+    tipotag:   input_tag
+    label: Director(a) de Recursos Humanos:
+    nomdes: nomdirrec
+    campodes:-1
+    size: 30
+    nomhas: cardirrec
+    campohas: DIRECTOR(A) DE RECURSOS HUMANOS

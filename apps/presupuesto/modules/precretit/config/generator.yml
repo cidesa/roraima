@@ -1,0 +1,14 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Cpdeftit
+    theme:            cidesaGenerator
+    fields:
+      codpre:   { name: Código del Título, params: onkeydown='javascript:return dFilter (event.keyCode, this,formato_presupuesto)' , help: Inserte el código presupuestario a cualqueir nivel, validate: Vunico, msj_error: Debe colocar el código del título presupuestario }
+      nompre:   { name: Descripción, help: Los niveles que no exista (y deban ser creados) se le colocará la misma descripción, params: size=40, msj_error: Debe colocar la descripción del título presupuestario }
+      javascript: {name: .  }
+    edit:
+      title:    Crear Títulos Presupuestarios
+      display:  [codpre, nompre, _javascript]
+      actions:
+        _save:        ~

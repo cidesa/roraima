@@ -1,0 +1,27 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Fordefpar
+    theme:            default
+    fields:
+      codest: { name: Estado}
+      desest: { name: Estado}
+      codmun: { name: Municipio }
+      desmun: { name: Municipio }
+      codpar: { name: Codigo }
+      despar: { name: Descripción }
+    list:
+      title:          Parroquias
+      filters:        [codest, codmun, codpar, despar]
+      display:        [=desest, desmun, codpar, despar]
+      max_per_page:	  10
+      object_actions:
+        _edit:        ~
+      sort: codpar
+    edit:
+      title:          Edicion de Parroquias
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

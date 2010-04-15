@@ -1,0 +1,29 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Npnomina
+    theme:            default
+
+    fields:
+      codnom: { name : Código de la Nómina, params: size=3 }
+      nomnom: { name : Descripción, params: size=50 }
+      frecal: { name : Descripción }
+      ultfec: { name : Ultima Fecha, params: date_format='dd/MM/yy' }
+      profec: { name : Próxima Fecha, params: date_format='dd/MM/yy' }
+      numsem: { name : Nro. de Semanas }
+
+    list:
+      title: Asignación de Conceptos a Nómina
+      display: [=codnom, nomnom, frecal, ultfec, profec, numsem]
+      object_actions:
+        _edit:        ~
+      sort:  codnom
+      actions:
+
+    edit:
+      title: Editar Asignación de Conceptos a Nómina
+      display: [codnom, nomnom]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

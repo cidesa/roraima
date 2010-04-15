@@ -1,0 +1,57 @@
+methods:
+  post:
+  # - "contaba{codemp}"
+  # - "contaba{nomemp}"
+   - "contaba{forcta}"
+   - "contaba{fecini}"
+   - "contaba{feccie}"
+
+names:
+#  contaba{codemp}:
+#    required:  Yes
+#    required_msg: El codigo de la empresa no puede estar en blanco
+#    validators: Validator_existencia
+
+  contaba{forcta}:
+    required:  Yes
+    required_msg: El formato no puede estar en blanco
+    validators:  Validator_MyStringFor
+
+  contaba{fecini}:
+    required:  Yes
+    required_msg: La fecha de inicio es requerida
+    validators: Validator_Fecha
+
+  contaba{feccie}:
+    required:  Yes
+    required_msg: La fecha de cierre es requerida
+    validators: Validator_Fecha
+
+Validator_existencia:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Contaba
+        column:       codemp
+        unique_error: El codigo ya existe.
+
+
+Validator_MyString:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La referencia no puede tener menos de 2 caracteres
+        max:       8
+        max_error: La referencia no puede tener mas de 8 caracteres
+
+Validator_MyStringFor:
+    class: CidesaStringFormatValidator
+    param:
+      values:
+      values_error: Caracteres invalidos
+
+
+Validator_Fecha:
+    class: CidesaValidaDate
+    param:
+       class:        Contaba
+       date_error:   La fecha es inválida

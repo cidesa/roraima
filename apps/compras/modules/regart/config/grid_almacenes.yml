@@ -1,0 +1,17 @@
+opciones:
+  name:                a                  # Nombre del Grid
+  tabla:               Caartalm         # Tabla Asociada al Grid
+  anchogrid:           650                # Ancho Interno del Grid
+  ancho:               600                # Ancho Externo
+  filas:               5                    # Si filas es “0” no se coloca el botón de insertar
+  titulo:              'Existencia por Almacenes'        # Titulo del grid
+1:                                                # Columna 1
+  titulo:              Cod. Almacen          # Titulo de la columna
+  tipo:                t                     # Tipo de la columna, puede ser “t”, “k”, “m”, “f”, “a”, “c”
+  nombrecampo:         codalm            # Nombre del campo enlazado con la columna
+  catalogo:            [ cadefalm, sf_admin_edit_form, {Codalm: 1, Nomalm: 2} ]
+  ajaxfila:            true
+2:                                                # Columna 1
+  titulo:              Desc. Almacen          # Titulo de la columna
+  tipo:                t                     # Tipo de la columna, puede ser “t”, “k”, “m”, “f”, “a”, “c”
+  nombrecampo:         nomalm            # Nombre del campo enlazado con la columna

@@ -1,0 +1,39 @@
+#CONFIGURACION DE ARCHIVOS YML TEMPORALES
+#PARA LOS REPORTES
+#Los comentarios al final indican que debe llevar la siguiente linea despues del comentario
+
+Parametros:
+#PARAMETROS FIJOS
+  #Nombre del Modulo y del Reporte #
+  modulo: ciudadanos
+  nomrep: atlissol
+
+  #Titulo del Reporte (SIEMPRE APARECERA EN MAYUSCULA), Orientacion y Tipo de Pagina, Ancho de los tag <td>#
+  titulo: Listado de Solicitantes
+  orientacion: Vertical
+  tipopagina: Carta
+  width:200
+
+#PARAMETRO FORMULARIO
+Filas:
+  CATALOGO PRIMERO:
+    tipotag:   inputcat_tag
+    label: Cédula
+    sql:   SELECT min(cedula) as cedmin, max(cedula) as cedmax FROM atsolici
+    nomdes: cedsoldes
+    campodes: cedmin
+    catdes: 0
+    nomhas: cedsolhas
+    campohas: cedmax
+    cathas: 1
+    nomcat: atsolici_cedula
+    size: 10
+
+  Combo primero:
+    tipotag:   combo_tag
+    label: Estados
+    sql:   select id, desest from atestados order by desest
+    nomdes: comboestados
+    campodes: id-desest
+
+   # size: 10

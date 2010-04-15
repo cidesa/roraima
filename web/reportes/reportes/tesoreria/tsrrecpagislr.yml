@@ -1,0 +1,78 @@
+Parametros:
+  modulo: tesoreria
+  nomrep: tsrrecpagislr
+  titulo: Recibo de Pago
+  orientacion: Vertical
+  tipopagina: Carta
+  width:210
+
+Filas:
+  CATALOGO ORDENES:
+    tipotag:   inputcat_tag
+    label: Ordenes de Pago
+    sql:   select min(numord) as numordmin,max(numord) as numordmax from opordpag
+    nomdes: numorddes
+    campodes: numordmin
+    catdes: 0
+    nomhas: numordhas
+    campohas: numordmax
+    cathas: 1
+    nomcat: numordpag
+    size: 25
+
+  CATALOGO BENEFICIARIOS:
+    tipotag:   inputcat_tag
+    label: Beneficierios
+    sql:   select min(cedrif) as cedrifmin,max(cedrif) as cedrifmax from opbenefi
+    nomdes: bendes
+    campodes: cedrifmin
+    catdes: 2
+    nomhas: benhas
+    campohas: cedrifmax
+    cathas: 3
+    nomcat: benefi
+    size: 25
+
+  FECHA ORDENES:
+    tipotag:   inputfec_tag
+    label: Fecha Ordenes
+    sql:   SELECT to_char(min(fecemi),'dd/mm/yyyy') as fechamin,to_char(max(fecemi),'dd/mm/yyyy') as fechamax FROM opordpag
+    nomdes: fecdes
+    campodes: fechamin
+    nomhas: fechas
+    campohas: fechamax
+    size: 15
+
+  COMBO DE ESTATUS:
+    tipotag:   combof_tag
+    label: Estatus Orden
+    nomdes: stades
+    campodes: [Todas, Anuladas, Emitidas, Pagadas]
+
+  CAJA DIRECTOR COMPRAS:
+    tipotag:   input_tag
+    label: Director de Compras y Servicios:
+    nomdes: dircom
+    campodes:Ing. Gabriel Moreno
+    size: 40
+
+  CAJA TESORERO:
+    tipotag:   input_tag
+    label: Tesorera General del Estado:
+    nomdes: tesgen
+    campodes:Lic. Zuleica Zambrano
+    size: 40
+
+  CAJA DIRECTOR ADMINISTRACION:
+    tipotag:   input_tag
+    label: Director General de Administracion y Servicios:
+    nomdes: diradm
+    campodes:Econ. Carmencita Pérez Rodriguez
+    size: 40
+
+  CAJA DIRECTOR SERVICIOS:
+    tipotag:   input_tag
+    label: Director de Servicios Financieros/Contabilidad:
+    nomdes: dirser
+    campodes:Lic. Katiuska Navarro
+    size: 40

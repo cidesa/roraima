@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?><templates><template autoinsert="true" context="html" deleted="false" description="Plantilla Base para reporte" enabled="true" name="reportebase">&lt;?php session_start();
+include_once("../../lib/general/headhtml.php");
+require_once("../../lib/modelo/business/&lt;---miclase---&gt;.class.php");
+
+$$bd=new basedatosAdo();
+
+//AQUI SE CONFIGURAN LOS CATALOGOS PREGUNTAR A CARLOS
+//OBJETO CODIGO EMPLEADO
+$$catalogo[] = &lt;---mimodulo---&gt;::catalogo_&lt;---nombre---&gt;('&lt;---micampo---&gt;');
+
+$$_SESSION['&lt;---mireporte---&gt;'] = $$catalogo;
+
+$$titulo='TITULO DEL REPORTE';
+$$orientacion='VERTICAL';
+$$tipopagina='CARTA';
+?&gt;
+&lt;?php include_once("../../lib/general/formtop.php")?&gt;
+
+            &lt;!--AQUI SE COPIAN LAS CAJITAS DE TEXTO PERTENECIENTES AL REPORTE--&gt;
+
+
+
+
+
+            &lt;!-- HASTA AQUI SE COPIAN LAS CAJITAS DEL REPORTE --&gt;
+
+
+&lt;?php include_once("../../lib/general/formbottom.php")?&gt;</template></templates>

@@ -1,0 +1,307 @@
+<?php
+
+/**
+ * nomdefconaportes actions.
+ *
+ * @package    Roraima
+ * @subpackage nomdefconaportes
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * 
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
+ */
+class nomdefconaportesActions extends autonomdefconaportesActions
+{
+/**
+   * Función principal para el manejo de las acciones create y edit
+   * del formulario.
+   *
+   */
+  public function executeEdit()
+  {
+    $this->npcontipaporet = $this->getNpcontipaporetOrCreate();
+
+    if ($this->getRequest()->getMethod() == sfRequest::POST)
+    {
+      $this->updateNpcontipaporetFromRequest();
+
+      $this->saveNpcontipaporet($this->npcontipaporet);
+
+      $this->setFlash('notice', 'Your modifications have been saved');
+$this->Bitacora('Guardo');
+
+      if ($this->getRequestParameter('save_and_add'))
+      {
+        return $this->redirect('nomdefconaportes/create');
+      }
+      else if ($this->getRequestParameter('save_and_list'))
+      {
+        return $this->redirect('nomdefconaportes/list');
+      }
+      else
+      {
+        return $this->redirect('nomdefconaportes/edit?id='.$this->npcontipaporet->getId());
+      }
+    }
+    else
+    {
+      $this->labels = $this->getLabels();
+    }
+  }
+
+   /**
+   * Función para manejar la captura de errores del negocio, tanto que se
+   * produzcan por algún validator y por un valor false retornado por el validateEdit
+   * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
+   *
+   */
+  public function handleErrorEdit()
+  {
+    $this->preExecute();
+    $this->npcontipaporet = $this->getNpcontipaporetOrCreate();
+    $this->updateNpcontipaporetFromRequest();
+
+    $this->labels = $this->getLabels();
+
+    Herramientas::CargarDatosGrid($this,$this->grid);
+
+    return sfView::SUCCESS;
+  }
+
+protected function getNpcontipaporetOrCreate($id = 'id', $codigo = 'codigo')
+  {
+    if (!$this->getRequestParameter($codigo))
+    {
+      $npcontipaporet = new Npcontipaporet();
+      $this->configGrid();
+    }
+    else
+    {
+
+      $c = new Criteria();
+  	  $c->add(NpcontipaporetPeer::CODTIPAPO,$this->getRequestParameter($codigo));
+  	  $npcontipaporet = NpcontipaporetPeer::doSelectOne($c);
+
+      $this->configGrid($npcontipaporet->getCodtipapo());
+      $this->forward404Unless($npcontipaporet);
+    }
+
+    return $npcontipaporet;
+  }
+/**
+   * Función para procesar _todas_ las funciones Ajax del formulario
+   * Cada función esta identificada con el valor de la vista "ajax"
+   * el cual traerá el indice de lo que se quiere procesar.
+   *
+   */
+  public function executeAjax()
+	{
+	 $cajtexmos=$this->getRequestParameter('cajtexmos');
+     $cajtexcom=$this->getRequestParameter('cajtexcom');
+	   if ($this->getRequestParameter('ajax')=='1')
+	    {
+			$dato=NpnominaPeer::getDesnom($this->getRequestParameter('codigo'));
+            $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
+	    }
+	    else if ($this->getRequestParameter('ajax')=='2')
+	    {
+	      $dato="";
+		  $c= new Criteria();
+          $c->add(NpdefcptPeer::CODCON,$this->getRequestParameter('codigo'));
+          $datos= NpdefcptPeer::doSelectOne($c);
+          if ($datos)
+          {
+          	$c = new Criteria();
+            $c->add(NpasiconnomPeer::CODNOM,$this->getRequestParameter('nomina'));
+            $c->add(NpasiconnomPeer::CODCON,$this->getRequestParameter('codigo'));
+            $resul= NpasiconnomPeer::doSelectOne($c);
+            if ($resul)
+            {
+              $dato=NpdefcptPeer::getDescon($this->getRequestParameter('codigo'));
+              $existe='S';
+            }
+            else
+            {
+          	  $existe='N';
+            }
+          }
+          else
+          {
+            $existe='NN';
+          }
+          $output = '[["existecon","'.$existe.'",""],["'.$cajtexmos.'","'.$dato.'",""]]';
+	    }
+		else if ($this->getRequestParameter('ajax')=='3')
+	    {
+			$dato=NptipaportesPeer::getDestip($this->getRequestParameter('codigo'));
+            $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$cajtexcom.'","4","c"]]';
+	    }
+
+
+  	    $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+	    return sfView::HEADER_ONLY;
+	}
+
+  /**
+   * Esta función permite definir la configuración del grid de datos
+   * que contiene el formulario. Esta función debe ser llamada
+   * en las acciones, create, edit y handleError para recargar en todo momento
+   * los datos del grid.
+   *
+   */
+  public function configGrid($codigo='')
+  {
+	$c = new Criteria();
+	$c->add(NpcontipaporetPeer::CODTIPAPO,$codigo);
+	$c->add(NpcontipaporetPeer::TIPO,'A');
+	$per = NpcontipaporetPeer::doSelect($c);
+
+	$opciones = new OpcionesGrid();
+    $opciones->setEliminar(true);
+    $opciones->setTabla('Npcontipaporet');
+	$opciones->setAnchoGrid(850);
+	$opciones->setFilas(50);
+	$opciones->setTitulo('Conceptos para Aportes');
+	$opciones->setHTMLTotalFilas(' ');
+
+	$col1 = new Columna('Codigo de Nomina');
+	$col1->setTipo(Columna::TEXTO);
+	$col1->setEsGrabable(true);
+	$col1->setNombreCampo('codnom');
+	$col1->setAlineacionObjeto(Columna::CENTRO);
+	$col1->setAlineacionContenido(Columna::CENTRO);
+	$col1->setHTML('type="text" size="5" maxlength="3"');
+	$col1->setCatalogo('Npnomina','sf_admin_edit_form',array('codnom' => 1, 'nomnom' => 2),'Npnomina_Nomdefespasicartipnomlot');
+	$col1->setAjax('nomdefconaportes',1,2);
+
+	$col2 = new Columna('Descripción');
+	$col2->setTipo(Columna::TEXTO);
+	$col2->setNombreCampo('nomina');
+	$col2->setAlineacionObjeto(Columna::CENTRO);
+	$col2->setAlineacionContenido(Columna::CENTRO);
+	$col2->setHTML('type="text" size="40" readonly=true');
+
+    $params = array("'+$(this.id).up().previous(1).descendants()[0].value+'",'val2');
+	$col3 = new Columna('Codigo Concepto');
+    $col3->setTipo(Columna::TEXTO);
+    $col3->setEsGrabable(true);
+    $col3->setNombreCampo('codcon');
+    $col3->setAlineacionObjeto(Columna::CENTRO);
+	$col3->setAlineacionContenido(Columna::CENTRO);
+	$col3->setHTML('type="text" size="5" maxlength="3"');
+    $col3->setCatalogo('Npdefcpt','sf_admin_edit_form',array('codcon' => 3, 'nomcon' => 4),'Npdefcpt_Nomdefconaportes',$params);
+	$col3->setJScript('onBlur="javascript:event.keyCode=13; ajax(event,this.id);"');
+
+	$col4 = new Columna('Concepto');
+	$col4->setTipo(Columna::TEXTO);
+	$col4->setNombreCampo('concepto');
+	$col4->setAlineacionObjeto(Columna::CENTRO);
+	$col4->setAlineacionContenido(Columna::CENTRO);
+	$col4->setHTML('type="text" size="40" readonly=true');
+
+   	$opciones->addColumna($col1);
+	$opciones->addColumna($col2);
+	$opciones->addColumna($col3);
+	$opciones->addColumna($col4);
+
+	$this->grid = $opciones->getConfig($per);
+	}
+
+/**
+   * Función para manejar el salvado del formulario.
+   * cabe destacar que en las versiones nuevas del formulario (cidesaPropel)
+   * llama internamente a la función $this->saving
+   * Esta función saving siempre debe retornar un valor >=-1.
+   * En esta funcción se debe realizar el proceso de guardado de informacion
+   * del negocio en la base de datos. Este proceso debe ser realizado llamado
+   * a funciones de las clases del negocio que se encuentran en lib/bussines
+   * todos los procesos de guardado deben estar en la clases del negocio (lib/bussines/"modulo")
+   *
+   */
+  protected function saveNpcontipaporet($npcontipaporet)
+  {
+  	$grid2=Herramientas::CargarDatosGrid($this,$this->grid);
+	Nomina::salvarContipaporet($npcontipaporet,$grid2);
+  }
+
+
+public function executeAutocomplete()
+	{
+		if ($this->getRequestParameter('ajax')=='1')
+	    {
+		 	$this->tags=Herramientas::autocompleteAjax('CODNOM','Npnomina','CODNOM',$this->getRequestParameter('npconsalint[codnom]'));
+	    }
+	    else if ($this->getRequestParameter('ajax')=='2')
+	    {
+		 	$this->tags=Herramientas::autocompleteAjax('CODCON','Npdefcpt','CODCON',$this->getRequestParameter('npconsalint[codcon]'));
+	    }
+	    else if ($this->getRequestParameter('ajax')=='3')
+	    {
+		 	$this->tags=Herramientas::autocompleteAjax('CODTIPAPO','Nptipaportes','CODTIPAPO',$this->getRequestParameter('npcontipaporet[codtipapo]'));
+	    }
+	}
+
+
+  /**
+   * Función principal para el manejo de la accion list
+   * del formulario.
+   *
+   */
+  public function executeList()
+  {
+    $this->processSort();
+
+    $this->processFilters();
+
+    $this->filters = $this->getUser()->getAttributeHolder()->getAll('sf_admin/npcontipaporet/filters');
+
+    // pager
+    $this->pager = new sfPropelPager('Nptipaportes', 5);
+    $c = new Criteria();
+	$c->addJoin(NpcontipaporetPeer::CODTIPAPO,NptipaportesPeer::CODTIPAPO);
+	$c->Setdistinct();
+    $this->addSortCriteria($c);
+    $this->addFiltersCriteria($c);
+    $this->pager->setCriteria($c);
+    $this->pager->setPage($this->getRequestParameter('page', 1));
+    $this->pager->init();
+  }
+
+  protected function deleteNpcontipaporet($npcontipaporet)
+  {
+    $c = new Criteria();
+  	$c->add(NpcontipaporetPeer::CODTIPAPO,$npcontipaporet->getCodtipapo());
+  	NpcontipaporetPeer::doDelete($c);
+  }
+
+  /**
+   * Función principal para procesar la eliminación de registros 
+   * en el formulario.
+   *
+   */
+  public function executeDelete()
+  {
+    $c = new Criteria();
+  	$c->add(NpcontipaporetPeer::CODTIPAPO,$this->getRequestParameter('codigo'));
+    $this->npcontipaporet = NpcontipaporetPeer::doSelectOne($c);
+
+    $this->forward404Unless($this->npcontipaporet);
+
+    try
+    {
+      $this->deleteNpcontipaporet($this->npcontipaporet);
+      $this->Bitacora('Elimino');
+    }
+    catch (PropelException $e)
+    {
+      $this->getRequest()->setError('delete', 'Could not delete the selected Npcontipaporet. Make sure it does not have any associated items.');
+      return $this->forward('nomdefconaportes', 'list');
+    }
+
+    return $this->redirect('nomdefconaportes/list');
+  }
+
+
+
+}
