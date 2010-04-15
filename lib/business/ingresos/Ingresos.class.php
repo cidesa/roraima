@@ -412,18 +412,15 @@ class Ingresos
     try{
       $c= new Criteria();
       $c->add(TsmovlibPeer::NUMCUE,$cireging->getCtaban());
-      $c->add(TsmovlibPeer::REFLIB,$cireging->getRefing());
+      $c->add(TsmovlibPeer::REFLIB,$cireging->getNumdep());
       $c->add(TsmovlibPeer::TIPMOV,$cireging->getTipmov());
       $datos=TsmovlibPeer::doSelectOne($c);
-
-      //H::printR($datos);exit;
       if ($datos){
           if ($datos->getStacon()!='C'){
 
             $tsmovlibnew= new Tsmovlib();
-
             $tsmovlibnew->setNumcue($datos->getNumcue());
-            $tsmovlibnew->setReflib('A'.$cireging->getRefing());
+            $tsmovlibnew->setReflib('A'.$cireging->getNumdep());
             $tsmovlibnew->setCedrif($cireging->getCedrif());
             if ($cireging->getFecdep()!="")
             $tsmovlibnew->setFeclib($cireging->getFecdep());
@@ -460,7 +457,6 @@ class Ingresos
   $c= new Criteria();
   $c->add(TsdefbanPeer::NUMCUE,$cireging->getCtaban());
   $datos=TsdefbanPeer::doSelectOne($c);
-
   if ($debcre=='D'){
 
     if ($accion='A'){
@@ -612,25 +608,20 @@ public static function generar_comprobante($cireging,$arreglo=array()){
 
 public static function buscar_comprobante($cireging,$accion,$fecanu){
 
-  if ($accion='E'){
+  if ($accion=='E'){
 
     $c= new Criteria();
-    $c->add(ContabcPeer::NUMCOM,$cireging->getRefing());
-    $c->add(ContabcPeer::FECCOM,$cireging->getFecing());
-    $contabc=ContabcPeer::doSelect($c);
-
+    $c->add(ContabcPeer::NUMCOM,$cireging->getNumcom());
+    $contabc=ContabcPeer::doSelectOne($c);
     if ($contabc){
 
       $c1= new Criteria();
-      $c1->add(Contabc1Peer::NUMCOM,$cireging->getRefing());
-      $c1->add(Contabc1Peer::FECCOM,$cireging->getFecing());
+      $c1->add(Contabc1Peer::NUMCOM,$cireging->getNumcom());
       $contabc1=Contabc1Peer::doSelect($c);
-
       if ($contabc1){
 
         $c1= new Criteria();
-        $c1->add(Contabc1Peer::NUMCOM,$cireging->getRefing());
-        $c1->add(Contabc1Peer::FECCOM,$cireging->getFecing());
+        $c1->add(Contabc1Peer::NUMCOM,$cireging->getNumcom());
         $asiento=Contabc1Peer::doSelect($c);
 
         if(count($contabc1)==count($asiento)){
@@ -640,45 +631,43 @@ public static function buscar_comprobante($cireging,$accion,$fecanu){
         }
 
         $c1= new Criteria();
-        $c1->add(Contabc1Peer::NUMCOM,$cireging->getRefing());
-        $c1->add(Contabc1Peer::FECCOM,$cireging->getFecing());
+        $c1->add(Contabc1Peer::NUMCOM,$cireging->getNumcom());
         Contabc1Peer::doDelete($c);
 
         if ($eliminar){
           $c= new Criteria();
-          $c->add(ContabcPeer::NUMCOM,$cireging->getRefing());
-          $c->add(ContabcPeer::FECCOM,$cireging->getFecing());
+          $c->add(ContabcPeer::NUMCOM,$cireging->getNumcom());
           ContabcPeer::doDelete($c);
         }
 
       }
 
-      }else{ return 'El comprobante Nro. '.$cireging->getRefing().' no fué anulado'; }
+      }else{ return 'El comprobante Nro. '.$cireging->getNumcom().' no fué anulado'; }
 
   }else{
 
     $c= new Criteria();
-    $c->add(ContabcPeer::NUMCOM,$cireging->getRefing());
-    $contabc=ContabcPeer::doSelect($c);
-
+    $c->add(ContabcPeer::NUMCOM,$cireging->getNumcom());
+    $contabc=ContabcPeer::doSelectOne($c);
     if ($contabc){
 
     	$confcorcom=sfContext::getInstance()->getUser()->getAttribute('confcorcom');
         if ($confcorcom=='N')
          $numcom2=$cireging->getRefing();
         else $numcom2 = Comprobante::Buscar_Correlativo();
-      $tcontabc= new Contabc();      
+      $tcontabc= new Contabc();
 
       $tcontabc->setNumcom($numcom2);
       $tcontabc->setFeccom($fecanu);
+      $tcontabc->setReftra($contabc->getReftra());
       $tcontabc->setDescom($contabc->getDescom());
       $tcontabc->setStacom('D');
       $tcontabc->setTipcom('');
       $tcontabc->setMoncom($contabc->getMoncom());
-      $tscontabc->save();
+      $tcontabc->save();
 
       $c= new Criteria();
-      $c->add(Contabc1Peer::NUMCOM,$cireging->getRefing());
+      $c->add(Contabc1Peer::NUMCOM,$cireging->getNumcom());
       $contabc1=Contabc1Peer::doSelect($c);
 
       foreach ($contabc1 as $per){
@@ -698,15 +687,11 @@ public static function buscar_comprobante($cireging,$accion,$fecanu){
       }
 
     }else{
-
-      return 'El comprobante Nro. '.$cireging->getRefing().' no fué anulado';
-      ///arreglar
-    //  self::incluir_asiento();
-    //  self::cargar_comprobante();
+      return 'El comprobante Nro. '.$cireging->getNumcom().' no fué anulado';
     }
-
-
   }
+
+  return -1;
 
 }///Fin buscar_comprobante
 
@@ -786,7 +771,7 @@ public static function buscar_comprobante($cireging,$accion,$fecanu){
         $c->add(CideftitPeer::CODPRE,$x[$j]->getCodpre());
         $regis = CideftitPeer::doSelectOne($c);
         if ($regis)
-        {  
+        {
           $cuenta = H::iif(!is_null($regis->getCodcta()),$regis->getCodcta(),'');
 
           $b= new Criteria();
