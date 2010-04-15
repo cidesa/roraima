@@ -447,10 +447,12 @@ class ingregingActions extends autoingregingActions
 
    ////////////////////////////
 
-  Ingresos::buscar_comprobante($this->cireging,'A',$fectra);
-
-  //Anulamos el comprobante
-   $this->msg = Ingresos::generar_msl_anulado($this->cireging);
+  $this->msg=Ingresos::buscar_comprobante($this->cireging,'A',$fectra);
+  if ($this->msg==-1)
+  {
+    //Anulamos el comprobante
+    $this->msg = Ingresos::generar_msl_anulado($this->cireging);
+  }
 
     sfView::SUCCESS;
   }
