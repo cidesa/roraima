@@ -1253,6 +1253,7 @@ class Compras {
     // Debe retornar el código de error, si existe, si no retorna -1
     $t= new Criteria();
     $t->add(CpimpcauPeer::REFERE,$reg->getOrdcom());
+    $t->add(CpimpcauPeer::STAIMP,'N',Criteria::NOT_EQUAL);
     $resultado= CpimpcauPeer::doSelect($t);
     if ($resultado)
     {
