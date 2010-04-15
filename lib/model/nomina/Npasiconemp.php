@@ -7,8 +7,8 @@
  *
  * @package    Roraima
  * @subpackage lib.model.nomina
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: Npasiconemp.php 37599 2010-04-15 16:03:38Z cramirez $
  * 
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -21,7 +21,10 @@ class Npasiconemp extends BaseNpasiconemp
    protected $codnom = '';
    protected $codnom2='';
    protected $grid='';
+   protected $objcon=array('');
+   protected $archixls='';
    
+
 
    public function hydrate(ResultSet $rs, $startcol = 1)
    {
