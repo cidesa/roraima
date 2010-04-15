@@ -6,7 +6,7 @@
  * @subpackage compras
  * @author     $Author$ <desarrollo@cidesa.com.ve>
  * @version SVN: $Id$
- * 
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -1104,7 +1104,7 @@ class SolicituddeEgresos
       	  $x[$j]->setFecapr(date('Y-m-d'));
       	  $x[$j]->setAprreq('S');
       	  $x[$j]->save();
-		  
+
 		  $t= new Criteria();
 		  $t->add(CasolartPeer::REQART,$x[$j]->getReqart());
 		  $solegreso=CasolartPeer::doSelectOne($t);
@@ -1115,7 +1115,7 @@ class SolicituddeEgresos
 				self::generarImputacionesPrecompromiso($solegreso->getReqart());
 			}
 		  }
-		  
+
 		}else if ($aprobpresu=='S')
 		{
 		  $t= new Criteria();
@@ -1131,7 +1131,7 @@ class SolicituddeEgresos
 		}else {
 			$x[$j]->setUsuapr($login);
 	      	$x[$j]->setFecapr(date('Y-m-d'));
-	      	$x[$j]->setAprreq('S');	
+	      	$x[$j]->setAprreq('S');
 	      	$x[$j]->save();
 		}
       }
@@ -1497,7 +1497,7 @@ class SolicituddeEgresos
     {
        foreach ($objetos as $obj)
        {
-           if (!self::chequearDisponibilidadPresupuesto3($solegreso,$objetos,$obj->getCodpre(),$tiporec,&$sobregiro))
+           if (!self::chequearDisponibilidadPresupuesto3($solegreso,$objetos,$obj->getCodcat().'-'.$obj->getCodpre(),$tiporec,&$sobregiro))
 	       {
 	        $msjuno=113; $codi1=$obj->getCodart(); $codi3=$obj->getCodpre();
 	        break;
@@ -1611,7 +1611,7 @@ class SolicituddeEgresos
 
      foreach ($objetos as $datos)
      {
-     	$codigopresupuestario= $datos->getCodpre();
+     	$codigopresupuestario= $datos->getCodcat().'-'.$datos->getCodpre();
      	if ($codpre==$codigopresupuestario)
      	{
      	  $cantidad=$datos->getCanreq();
@@ -1684,7 +1684,7 @@ class SolicituddeEgresos
         if ($data2)
         {
           $mondis=self::montoDisponible($codigopresupuestario);
-          if ($mitotal > $mondis)
+          if (H::toFloat($mitotal) > H::toFloat($mondis))
           {
             $chequeardisponibilidadrecargo=false;
             $sobregirorecargo=true;
@@ -1716,7 +1716,7 @@ class SolicituddeEgresos
           if ($data3)
           {
              $mondis=self::montoDisponible($codigopresupuestario);
-             if ($mitotal > $mondis)
+             if (H::toFloat($mitotal) > H::toFloat($mondis))
              {
                $chequeardisponibilidadrecargo=false;
                $sobregirorecargo=true;
