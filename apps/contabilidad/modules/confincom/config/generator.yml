@@ -27,6 +27,9 @@ generator:
       fields:
         numcom:                 { help: Número del comprobante }
         descom:                 { help: Descripción del comprobante, params: size=80x3}  
+      report:
+        url:         contabilidad/rCOMPROBANTES.php?m=m
+        params:      { com1: numcom, com2: numcom }
       actions:
         _list:        ~
         _save:        ~
