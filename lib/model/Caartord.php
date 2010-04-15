@@ -39,6 +39,7 @@ class Caartord extends BaseCaartord
  protected $codubi="";
  protected $nomubi="";
  protected $nomalm="";
+ protected $codigopre="";
  protected $cancost="0,00";
 
   public function hydrate(ResultSet $rs, $startcol = 1)

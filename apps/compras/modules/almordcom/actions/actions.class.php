@@ -761,7 +761,7 @@ class almordcomActions extends autoalmordcomActions
       $campo_col12='Monrgo';//tabla Caartsol
       $campo_col13='Montot';//tabla Caartsol
       $campo_col14='Unimed';//tabla Caartsol
-      $campo_col15='Codpre';//tabla Caartsol
+      $campo_col15='codigopre';//tabla Caartsol
       $this->getUser()->setAttribute('referencia', '1');
       $filas_arreglo=0;
     }
