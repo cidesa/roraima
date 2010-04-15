@@ -122,7 +122,7 @@ class ingejegloActions extends autoingejegloActions
       $array_cod[7]["porc"] = '';
       $array_cod[7]["id"] = '';
 
-      $array_cod[8]["movimiento"] = 'Diferencia';
+      $array_cod[8]["movimiento"] = 'Recaudar';
       $array_cod[8]["montos"] = H::formatoMonto($reg[0]["mondis"]);
       $array_cod[8]["porc"] = self::CalcularPorcentaje($reg[0]["mondis"],$reg[0]["monasi"]);
       $array_cod[8]["id"] = '';
@@ -192,7 +192,8 @@ class ingejegloActions extends autoingejegloActions
   
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
