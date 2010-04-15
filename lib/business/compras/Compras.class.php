@@ -2595,7 +2595,7 @@ class Compras {
               $gridnuevo[$indice -1][6] = 0;
             }
             $gridnuevo[$indice -1][7] = $monuni -$gridnuevo[$indice -1][3];
-            $gridnuevo[$indice -1][8] = $resul2->getCodpre();//$resul2->getCodcat().'-'.$resul2->getCodpre();
+            $gridnuevo[$indice -1][8] = $resul2->getCodcat().'-'.$resul2->getCodpre();
             $gridnuevo[$indice -1][9] = $resul2->getMonrgo();
             $gridnuevo[$indice -1][10] = $resul2->getCodcat();
           	}

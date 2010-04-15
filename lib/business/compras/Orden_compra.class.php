@@ -1151,8 +1151,11 @@ class Orden_compra
                       else
                         $cadisrgo_new->setCodpre(str_replace("'","",$arreglo_grid[$j]["codcat"]).'-'.Herramientas::getX_vacio('codrgo','carecarg','codpre',str_replace("'","",$arreglo_grid_recargo[$i]["codrgo"])));
                    }
-                   else
-                      $cadisrgo_new->setCodpre(str_replace("'","",$arreglo_grid[$j]["codpre"]));
+                   else {
+                      if ($referencia==1)
+                      $cadisrgo_new->setCodpre(str_replace("'","",$arreglo_grid[$j]["codigopre"]));
+                      else $cadisrgo_new->setCodpre(str_replace("'","",$arreglo_grid[$j]["codpre"]));
+                   }
                 }
                 self::monto_recargo($acum, $arreglo_grid_recargo[$i]["recargototal"], $total_articulo,&$monto_recargo);
                 //$cadisrgo_new->setMonrgo(str_replace("'","",$arreglo_grid[$j][$campo11]));
@@ -2262,7 +2265,9 @@ class Orden_compra
   {
    $marcado=$arreglo_grid[$j]["check"];
    $unidad=$arreglo_grid[$j]["codcat"];
-   $codpresu=$arreglo_grid[$j]["codpre"];;
+   if ($caordcom->getRefsol()!="")
+   $codpresu=$arreglo_grid[$j]["codigopre"];
+   else $codpresu=$arreglo_grid[$j]["codpre"];
    if ($marcado=="1")
    {
     if ($caordcom->getRefsol()!="")
@@ -2455,7 +2460,9 @@ class Orden_compra
   {
    $marcado=$arreglo_grid[$j]["check"];
    $unidad=$arreglo_grid[$j]["codcat"];
-   $codpresu=$arreglo_grid[$j]["codpre"];;
+   if ($caordcom->getRefsol()!="")
+   $codpresu=$arreglo_grid[$j]["codigopre"];
+   else $codpresu=$arreglo_grid[$j]["codpre"];
    if ($marcado=="1")
    {
     if ($caordcom->getRefsol()!="")
