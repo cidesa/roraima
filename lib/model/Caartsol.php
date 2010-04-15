@@ -129,9 +129,9 @@ class Caartsol extends BaseCaartsol
      	$dat=Herramientas::getX('CODEMP','Cadefart','Asiparrec','001');
      	if ($dat=='P')
      	{
-     	  $var=self::getCodpar();
+     	  $var=self::getCodcat() ."-". self::getCodpar();
      	}else {
-          $var=self::getCodcat() ."-". self::getCodpar();
+          $var=self::getCodpar();
         }
      }
     return $var;
