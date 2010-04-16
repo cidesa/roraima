@@ -309,7 +309,7 @@ $this->Bitacora('Guardo');
    * del formulario.
    *
    */
-  public function executeList()
+/*  public function executeList()
   {
     $this->processSort();
 
@@ -327,6 +327,11 @@ $this->Bitacora('Guardo');
     $this->pager->setCriteria($c);
     $this->pager->setPage($this->getRequestParameter('page', 1));
     $this->pager->init();
+  }*/
+
+   public function executeIndex()
+  {
+    return $this->redirect('nomnomasiconnom/edit');
   }
 
  /**
