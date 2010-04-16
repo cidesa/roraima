@@ -156,7 +156,7 @@
  </div>
 </div>
 <?php }else{ ?>
-<?php if($sf_user->getAttribute('codcar','','nomasicarconnom')==$npasicaremp->getCodcar() && $sf_user->getAttribute('codcar','','nomasicarconnom')!='') {?>
+<?php if($sf_user->getAttribute('codcar','','nomasicarconnom')==$npasicaremp->getCodtipcar() && $sf_user->getAttribute('codcar','','nomasicarconnom')!='') {?>
 	<div class="form-row" id="gridcatded">
 <?php }else{?>
  	<div class="form-row" id="gridcatded" style="display:none">
