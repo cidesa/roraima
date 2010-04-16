@@ -7,8 +7,8 @@
  *
  * @package    Roraima
  * @subpackage lib.model.nomina
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: Npasicaremp.php 37651 2010-04-16 20:12:39Z cramirez $
  * 
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -23,6 +23,7 @@ class Npasicaremp extends BaseNpasicaremp
 	protected $nomcarnew="";
 	protected $nomcatnew="";
 	protected $fecing=null;
+        protected $codtipcar="";
 
 
 	public function getCodcon()
@@ -147,4 +148,9 @@ class Npasicaremp extends BaseNpasicaremp
   {
   	return date('d/m/Y',strtotime(H::Getx('Codemp','Nphojint','Fecing',self::getCodemp())));
   }
+
+  public function getCodtipcar()
+	{
+            return H::GetX('Codcar','Npcargos','codtip',self::getCodcar());
+}
 }

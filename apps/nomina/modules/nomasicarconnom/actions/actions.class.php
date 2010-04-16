@@ -6,7 +6,7 @@
  * @package    Roraima
  * @subpackage nomasicarconnom
  * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id: actions.class.php 37064 2010-03-12 15:24:10Z cramirez $
+ * @version SVN: $Id: actions.class.php 37652 2010-04-16 20:13:18Z cramirez $
  *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -105,7 +105,8 @@ class nomasicarconnomActions extends autonomasicarconnomActions
 
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -243,7 +244,7 @@ class nomasicarconnomActions extends autonomasicarconnomActions
         }
 		if($this->getUser()->getAttribute('codcar','','nomasicarconnom')!='')
 		{
-			if($this->getUser()->getAttribute('codcar','','nomasicarconnom')==$cod)
+			if($this->getUser()->getAttribute('codcar','','nomasicarconnom')==$codtipcar)
 				$js.="$('gridcatded').show()";
 			else
 				$js.="$('gridcatded').hide()";
@@ -487,7 +488,7 @@ public function executeAutocomplete()
     $this->formato= Herramientas::getMascaraCategoria();
     $this->lonfor=strlen($this->formato);
     $this->tipos=self::CargarTipoGasto();
-	if($this->npasicaremp->getCodcar())
+	/*if($this->npasicaremp->getCodcar())
 	  {
 	  	$c = new Criteria();
 		$c->add(NpcargosPeer::CODCAR,$this->npasicaremp->getCodcar());
@@ -501,7 +502,7 @@ public function executeAutocomplete()
 				$this->getUser()->setAttribute('codtipcar','','nomasicarconnom');
 			}
 		}
-	  }
+	  }*/
 
     if ($this->getRequest()->getMethod() == sfRequest::POST)
     {
