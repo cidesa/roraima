@@ -78,12 +78,37 @@ class almsolegrActions extends autoalmsolegrActions
 		      	return false;
 		      }
 
-				//Valida la Razon de Compra
-		      //if (count($grid3[0])==0)
-		      //{
-		      //	$this->razonvacia=127;
-		      //	return false;
-		      //}
+			 //Validad Unidad Responsable
+			  $this->catbnubica="";
+			    $varemp = $this->getUser()->getAttribute('configemp');
+			    if ($varemp)
+				if(array_key_exists('aplicacion',$varemp))
+				 if(array_key_exists('compras',$varemp['aplicacion']))
+				   if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
+				     if(array_key_exists('almsolegr',$varemp['aplicacion']['compras']['modulos'])){
+				       if(array_key_exists('catbnubica',$varemp['aplicacion']['compras']['modulos']['almsolegr']))
+				       {
+				       	$this->catbnubica=$varemp['aplicacion']['compras']['modulos']['almsolegr']['catbnubica'];
+				       }
+			         }
+		      if ($this->catbnubica=='S')
+		      {
+		      	$p= new Criteria();
+		      	$p->add(BnubicaPeer::CODUBI,$this->getRequestParameter('casolart[unires]'));
+		      	$reg= BnubicaPeer::doSelectOne($p);
+		      	if (!$reg) {
+		      	$this->razonvacia=127;
+		      	return false;
+		      	}
+		      }else {
+		      	$p= new Criteria();
+		      	$p->add(NpcatprePeer::CODCAT,$this->getRequestParameter('casolart[unires]'));
+		      	$reg= NpcatprePeer::doSelectOne($p);
+		      	if (!$reg) {
+		      	$this->razonvacia=127;
+		      	return false;
+		      	}
+		      }
 
 		    /*  if ((count($grid2[0])>0) && ($this->getUser()->getAttribute('presiono','','almsolegr'))!='S')
 		      {
@@ -276,7 +301,7 @@ class almsolegrActions extends autoalmsolegrActions
         if($this->razonvacia!=-1)
         {
          $err4 = Herramientas::obtenerMensajeError($this->razonvacia);
-         $this->getRequest()->setError('',$err4);
+         $this->getRequest()->setError('casolart{unires}',$err4);
         }
 
         if($this->detallevacia!=-1)

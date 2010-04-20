@@ -23,7 +23,7 @@ names:
   casolart{unires}:
     required:  Yes
     required_msg: La Unidad no puedo estar en Blanco
-    validators: UniresValidator
+    #validators: UniresValidator
 
   casolart{tipfin}:
     required:  Yes
