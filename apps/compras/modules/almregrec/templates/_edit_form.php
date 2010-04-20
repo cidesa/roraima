@@ -143,8 +143,14 @@ if ($carecaud->getLimrec()=='S')	{
 
 <script language="JavaScript" type="text/javascript">
   var idf='<?php echo $carecaud->getId()?>';
+  var mansolocor='<?php echo $mansolocor; ?>';
   if (idf!="")
   {
     $$('.botoncat')[0].disabled=true;
+  }else {
+  	if (mansolocor=='S')
+  	{
+  		$('carecaud_codrec').readOnly=true;
+  	}
   }
 </script>

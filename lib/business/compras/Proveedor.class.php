@@ -43,14 +43,29 @@ class Proveedor
 
     }
 
-    public static function BuscarCorrelativo_Proveedor($caprovee)
+    public static function BuscarCorrelativo_Proveedor(&$caprovee)
     {
     	if ($caprovee->getCodpro()=='########'){
     	 if (H::getVerCorrelativo('corpro','cacorrel',&$output)){
-    	 	$codpro = str_pad($output,8,0,STR_PAD_LEFT);
-    	 	$caprovee->setCodpro($codpro);
+    	 	$encontrado=false;
+	        while (!$encontrado)
+	        {
+	          $numero = str_pad($output,8,0,STR_PAD_LEFT);
 
-    	 	if (!(H::getSalvarCorrelativo('corpro','cacorrel','Proveedor',$codpro,&$msg)))
+	          $sql="select codpro from caprovee where codpro='".$numero."'";
+	          if (Herramientas::BuscarDatos($sql,&$result))
+	          {
+	            $output=$output+1;
+	          }
+	          else
+	          {
+	            $encontrado=true;
+	          }
+	        }
+
+    	 	$caprovee->setCodpro($numero);
+
+    	 	if (!(H::getSalvarCorrelativo('corpro','cacorrel','Proveedor',$output,&$msg)))
     	 	{
     	 		return 145;
     	 	}
@@ -189,6 +204,23 @@ class Proveedor
     	  $dat->save();
     	}
     }
+    $corcodpro="";
+    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('compras',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
+	     if(array_key_exists('almregpro',$varemp['aplicacion']['compras']['modulos'])){
+	       if(array_key_exists('corcodpro',$varemp['aplicacion']['compras']['modulos']['almregpro']))
+	       {
+	       	$corcodpro=$varemp['aplicacion']['compras']['modulos']['almregpro']['corcodpro'];
+	       }
+         }
+    if ($corcodpro=='S')
+    {
+       self::BuscarCorrelativo_Proveedor(&$caprovee);
+    }
+
     $caprovee->save();
 
     }

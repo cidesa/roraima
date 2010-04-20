@@ -53,7 +53,32 @@ class almregrecActions extends autoalmregrecActions
   public function executeEdit()
 	  {
 	    $this->carecaud = $this->getCarecaudOrCreate();
-	
+	    $this->mansolocor="";
+	    $varemp = $this->getUser()->getAttribute('configemp');
+	    if ($varemp)
+		if(array_key_exists('aplicacion',$varemp))
+		 if(array_key_exists('compras',$varemp['aplicacion']))
+		   if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
+		     if(array_key_exists('almregrec',$varemp['aplicacion']['compras']['modulos']))
+		       if(array_key_exists('mansolocor',$varemp['aplicacion']['compras']['modulos']['almregrec']))
+		       {
+		       	$this->mansolocor=$varemp['aplicacion']['compras']['modulos']['almregrec']['mansolocor'];
+		       }
+        if ($this->mansolocor=='S') {
+		    if (!$this->carecaud->getId())
+		    {
+		       $t= new Criteria();
+		       $t->setLimit(1);
+		       $t->addDescendingOrderByColumn(CarecaudPeer::CODREC);
+		       $reg= CarecaudPeer::doSelectOne($t);
+		       if ($reg)
+		       {
+		           $this->carecaud->setCodrec(str_pad(($reg->getCodrec()+1),10,'0',STR_PAD_LEFT));
+		       }else $this->carecaud->setCodrec('0000000001');
+		    }
+        }
+
+
 	    if ($this->getRequest()->getMethod() == sfRequest::POST)
 	    {
 	      $this->updateCarecaudFromRequest();
@@ -149,5 +174,51 @@ $this->Bitacora('Guardo');
 	      'carecaud{observ}' => 'Observación',
 	    );
 	  }
-  
+
+  protected function updateCarecaudFromRequest()
+  {
+    $carecaud = $this->getRequestParameter('carecaud');
+
+    $this->mansolocor="";
+    $varemp = $this->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('compras',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
+	     if(array_key_exists('almregrec',$varemp['aplicacion']['compras']['modulos']))
+	       if(array_key_exists('mansolocor',$varemp['aplicacion']['compras']['modulos']['almregrec']))
+	       {
+	       	$this->mansolocor=$varemp['aplicacion']['compras']['modulos']['almregrec']['mansolocor'];
+	       }
+
+    if (isset($carecaud['codrec']))
+    {
+      $this->carecaud->setCodrec($carecaud['codrec']);
+    }
+    if (isset($carecaud['desrec']))
+    {
+      $this->carecaud->setDesrec($carecaud['desrec']);
+    }
+    if (isset($carecaud['limrec']))
+    {
+      $this->carecaud->setLimrec($carecaud['limrec']);
+    }
+    if (isset($carecaud['canutr']))
+    {
+      $this->carecaud->setCanutr($carecaud['canutr']);
+    }
+    if (isset($carecaud['codtiprec']))
+    {
+    $this->carecaud->setCodtiprec($carecaud['codtiprec'] ? $carecaud['codtiprec'] : null);
+    }
+    if (isset($carecaud['destiprec']))
+    {
+      $this->carecaud->setDestiprec($carecaud['destiprec']);
+    }
+    if (isset($carecaud['observ']))
+    {
+      $this->carecaud->setObserv($carecaud['observ']);
+    }
+  }
+
 }
