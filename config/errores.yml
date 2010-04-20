@@ -98,7 +98,7 @@
   msj: No se pudo Grabar el Compromiso, ya que la Referencia ya Existe
 127:
   cod: 127
-  msj: No puede Grabar, sin llenar al menos una Razon de Compra.
+  msj: El Código de la Unidad Solicitante no existe.
 128:
   cod: 128
   msj: No puede Grabar, sin llenar el Detalle de la Solicitud.
