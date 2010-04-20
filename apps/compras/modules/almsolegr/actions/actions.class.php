@@ -498,7 +498,21 @@ class almsolegrActions extends autoalmsolegrActions
      $javascript="";
      if ($this->getRequestParameter('ajax')=='1')
       {
-        $dato=NpcatprePeer::getCategoria($this->getRequestParameter('codigo'));
+      	$catbnubica="";
+      	$varemp = $this->getUser()->getAttribute('configemp');
+	    if ($varemp)
+		if(array_key_exists('aplicacion',$varemp))
+		 if(array_key_exists('compras',$varemp['aplicacion']))
+		   if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
+		     if(array_key_exists('almsolegr',$varemp['aplicacion']['compras']['modulos'])){
+		       if(array_key_exists('catbnubica',$varemp['aplicacion']['compras']['modulos']['almsolegr']))
+		       {
+		       	$catbnubica=$varemp['aplicacion']['compras']['modulos']['almsolegr']['catbnubica'];
+		       }
+		     }
+      	if ($catbnubica=='S')
+      	$dato=BnubicaPeer::getDesubi($this->getRequestParameter('codigo'));
+        else $dato=NpcatprePeer::getCategoria($this->getRequestParameter('codigo'));
         $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
       }
       else  if ($this->getRequestParameter('ajax')=='2')
@@ -508,6 +522,20 @@ class almsolegrActions extends autoalmsolegrActions
       }
       else  if ($this->getRequestParameter('ajax')=='3')
       {
+	 	$catbnubica="";
+      	$varemp = $this->getUser()->getAttribute('configemp');
+	    if ($varemp)
+		if(array_key_exists('aplicacion',$varemp))
+		 if(array_key_exists('compras',$varemp['aplicacion']))
+		   if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
+		     if(array_key_exists('almsolegr',$varemp['aplicacion']['compras']['modulos'])){
+		       if(array_key_exists('catbnubica',$varemp['aplicacion']['compras']['modulos']['almsolegr']))
+		       {
+		       	$catbnubica=$varemp['aplicacion']['compras']['modulos']['almsolegr']['catbnubica'];
+		       }
+		     }
+
+
 	 	$c= new Criteria();
 		$c->add(CaregartPeer::CODART,$this->getRequestParameter('codigo'));
       	$reg=CaregartPeer::doSelectOne($c);
@@ -517,13 +545,17 @@ class almsolegrActions extends autoalmsolegrActions
 	        $dato1=$reg->getUnimed();
 	        $dato2=number_format($reg->getCosult(),2,',','.');
 	        $dato3=$reg->getCodpar();
+	        if ($catbnubica=='S')
+	        $valuni="";
+	        else $valuni=$this->getRequestParameter('valuni');
+
 	        $unires=$this->getRequestParameter('unires');
 	        $costo=$this->getRequestParameter('costo');
 	        $javascript="$('$unires').focus(); $('$costo').focus();";
-	        $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$this->getRequestParameter('unidad').'","'.$dato1.'",""],["'.$this->getRequestParameter('costo').'","'.$dato2.'",""],["'.$this->getRequestParameter('partida').'","'.$dato3.'",""],["'.$this->getRequestParameter('unires').'","'.$this->getRequestParameter('valuni').'",""],["javascript","'.$javascript.'",""]]';
+	        $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$this->getRequestParameter('unidad').'","'.$dato1.'",""],["'.$this->getRequestParameter('costo').'","'.$dato2.'",""],["'.$this->getRequestParameter('partida').'","'.$dato3.'",""],["'.$this->getRequestParameter('unires').'","'.$valuni.'",""],["javascript","'.$javascript.'",""]]';
   		}
   		else
-  		{
+  		{    $valuni="";
   			 $javascript="alert('Articulo no existe');$('". $cajtexmos ."').value='';$('". $cajtexcom ."').value='';$('". $this->getRequestParameter('unidad') ."').value='';$('". $this->getRequestParameter('costo') ."').value='0.00';$('". $this->getRequestParameter('partida') ."').value=''";
         	 $output = '[["javascript","'.$javascript.'",""]]';
   		}
@@ -704,7 +736,7 @@ class almsolegrActions extends autoalmsolegrActions
        $col4->setAlineacionContenido(Columna::IZQUIERDA);
        $col4->setNombreCampo('unimed');
        $col4->setEsGrabable(true);
-       $col4->setHTML('type="text" size="25" readonly=true');
+       $col4->setHTML('type="text" size="25" maxlength="50"');
 
        $obj2= array('codcat' => 5);
        $params2= array('param1' => $loncat);
@@ -1236,8 +1268,6 @@ class almsolegrActions extends autoalmsolegrActions
   {
   	$this->autoriza_solicutud_egreso = Herramientas::ObtenerFormato('Cadefart','solreqapr');
     $this->mascaraarticulo = Herramientas::getMascaraArticulo();
-    $this->mascaracategoria = Herramientas::getObtener_FormatoCategoria();
-    $this->loncat=strlen($this->mascaracategoria);
     $this->mascarapresupuesto = Herramientas::formatoPresupuesto();
     $c= new Criteria();
     $regis= CadefartPeer::doSelectOne($c);
@@ -1261,6 +1291,7 @@ class almsolegrActions extends autoalmsolegrActions
     $this->oculeli="";
     $this->nometifor="";
     $this->oculrecnoprc="";
+    $this->catbnubica="";
     $varemp = $this->getUser()->getAttribute('configemp');
     if ($varemp)
 	if(array_key_exists('aplicacion',$varemp))
@@ -1295,7 +1326,17 @@ class almsolegrActions extends autoalmsolegrActions
 	       {
 	       	$this->oculrecnoprc=$varemp['aplicacion']['compras']['modulos']['almsolegr']['oculrecnoprc'];
 	       }
+	       if(array_key_exists('catbnubica',$varemp['aplicacion']['compras']['modulos']['almsolegr']))
+	       {
+	       	$this->catbnubica=$varemp['aplicacion']['compras']['modulos']['almsolegr']['catbnubica'];
+	       }
          }
+    if ($this->catbnubica=='S'){
+    	$this->mascaracategoria=Herramientas::ObtenerFormato('Opdefemp','Forubi');
+    }else {
+    $this->mascaracategoria = Herramientas::getObtener_FormatoCategoria();
+    }
+    $this->loncat=strlen($this->mascaracategoria);
   }
 
   public function executeGenerarcompromiso()

@@ -143,8 +143,11 @@
 </div></th>
 <th>&nbsp;</th>
 <th>
-
+<?php if ($catbnubica!='S') {?>
 <?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Npcatpre_Almsolegr/clase/Npcatpre/frame/sf_admin_edit_form/obj1/casolart_unires/obj2/casolart_nomcat/campo1/codcat/campo2/nomcat/param1/'.$loncat)?>
+<?php } else  {?>
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Bnubica_Pagemiord/clase/Bnubica/frame/sf_admin_edit_form/obj1/casolart_unires/obj2/casolart_nomcat/campo1/codubi/campo2/desubi/param1/'.$loncat)?>
+<?php } ?>
 
     </th>
     <th>&nbsp;&nbsp;&nbsp;</th>

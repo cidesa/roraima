@@ -145,6 +145,31 @@
 </fieldset>
 
 <fieldset id="sf_fieldset_none" class="">
+<legend><h2><?php echo _('Asignación por Proveedores') ?></h2></legend>
+<div class="form-row">
+<?php echo label_for('casolart[porprovee]', __($labels['casolart{porprovee}']), 'class="required"  Style="width:150px"') ?>
+	  <div class="content<?php if ($sf_request->hasError('casolart{porprovee}')): ?> form-error<?php endif; ?>">
+	  <?php if ($sf_request->hasError('casolart{porprovee}')): ?>
+	    <?php echo form_error('casolart{porprovee}', array('class' => 'form-error-msg')) ?>
+	  <?php endif; ?>
+
+	<?php $value = object_checkbox_tag($casolart, 'getPorprovee', array (
+	  'control_name' => 'casolart[porprovee]',
+	  'onClick' => remote_function(array(
+		'update'   => 'divGrid2',
+	    'script'   => true,
+		'url'      => 'almpriori/ajax?ajax=2',
+		'with'   => "'reqart='+document.getElementById('casolart_reqart').value"
+	  )))); echo $value ? $value : '&nbsp;' ?>
+
+<br> <br>
+
+<div id="divGrid2">
+</div>
+</div>
+</fieldset>
+
+<fieldset id="sf_fieldset_none" class="">
 <legend><h2><?php echo _('Asignación de Prioridad Detallada') ?></h2></legend>
 <div class="form-row">
   <table>

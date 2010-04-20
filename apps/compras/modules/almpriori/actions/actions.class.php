@@ -32,7 +32,15 @@ class almprioriActions extends autoalmprioriActions
 
       $grids = Herramientas::CargarDatosGrid($this,$this->grid);
       if ($this->getRequestParameter('casolart[porcostart]')!='1' && $this->getRequestParameter('casolart[pormoncot]')!='1' && $this->getRequestParameter('casolart[portimeent]')!='1')
-      {$error= Compras::validarAlmpriori($grids);}
+      {
+      	if ($this->getRequestParameter('casolart[porprovee]')=='1')
+      	{
+      		$grid = Herramientas::CargarDatosGrid($this,$this->grid2);
+      		$error= Compras::validarAlmpriori2($grid);
+      	}else {
+      	   $error= Compras::validarAlmpriori($grids);
+      	}
+      }
       if ($error<>-1)
       {
         $this->error=$error;
@@ -260,6 +268,10 @@ $this->Bitacora('Guardo');
     {
       $this->casolart->setPortimeent($casolart['portimeent']);
     }
+    if (isset($casolart['porprovee']))
+    {
+      $this->casolart->setPorprovee($casolart['porprovee']);
+    }
   }
 
   /**
@@ -294,11 +306,13 @@ $this->Bitacora('Guardo');
     {
       $casolart = new Casolart();
       $this->configGrid($this->getRequestParameter('casolart[reqart]'),$this->getRequestParameter('casolart[articulo]'));
+      $this->configGrid2($this->getRequestParameter('casolart[reqart]'));
     }
     else
     {
       $casolart = CasolartPeer::retrieveByPk($this->getRequestParameter($id));
       $this->configGrid($casolart->getReqart(),$this->getRequestParameter('casolart[articulo]'));
+      $this->configGrid2($casolart->getReqart());
       $this->forward404Unless($casolart);
 
     }
@@ -447,7 +461,8 @@ $this->Bitacora('Guardo');
   protected function saveCasolart($casolart)
   {
     $grid2=Herramientas::CargarDatosGrid($this,$this->grid);
-	if (Compras::salvarPrioridadCotizaciones($grid2,$casolart->getReqart(), $casolart->getActsolegr(),$casolart,&$error))
+    $grid1=Herramientas::CargarDatosGrid($this,$this->grid2);
+	if (Compras::salvarPrioridadCotizaciones($grid2,$casolart->getReqart(), $casolart->getActsolegr(),$casolart,&$error,$grid1))
 	{
 	  $this->coderror=$error;
       return $this->coderror;
@@ -475,7 +490,7 @@ $this->Bitacora('Guardo');
 
     switch ($ajax){
       case '1':
-        $reqart=$this->getRequestParameter('reqart');
+         $reqart=$this->getRequestParameter('reqart');
         Compras::actualizacionSolicitudEgresos($reqart, $codigo, & $error);
         if ($error==133)
         {
@@ -494,7 +509,13 @@ $this->Bitacora('Guardo');
         $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
         return sfView::HEADER_ONLY;
         break;
+      case '2':
+         $this->ajax="as";
+         $reqart=$this->getRequestParameter('reqart');
+         $this->configGrid2($reqart);
+       break;
       default:
+         $this->ajax="";
          $reqart=$this->getRequestParameter('reqart');
 		 $c = new Criteria();
 		 $c->add(CaartsolPeer::REQART,$reqart);
@@ -548,5 +569,76 @@ $this->Bitacora('Guardo');
     }
     return $razones;
   }
+
+   /**
+   * Esta función permite definir la configuración del grid de datos
+   * que contiene el formulario. Esta función debe ser llamada
+   * en las acciones, create, edit y handleError para recargar en todo momento
+   * los datos del grid.
+   *
+   */
+  public function configGrid2($refsol=' ')
+   {
+	$c = new Criteria();
+	$c->add(CacotizaPeer::REFSOL,$refsol);
+	$per = CacotizaPeer::doSelect($c);
+
+	$this->fila=count($per);
+
+	$opciones = new OpcionesGrid();
+	$opciones->setEliminar(false);
+	$opciones->setTabla('Cacotiza');
+	$opciones->setAncho(600);
+	$opciones->setAnchoGrid(600);
+	$opciones->setTitulo('Cotizaciones');
+	$opciones->setName('b');
+	$opciones->setFilas(0);
+	$opciones->setHTMLTotalFilas(' ');
+
+	$col1 = new Columna('Contratistas de Bienes o Servicio y Cooperativas');
+	$col1->setTipo(Columna::TEXTO);
+	$col1->setEsGrabable(true);
+	$col1->setNombreCampo('nompro');
+	$col1->setAlineacionObjeto(Columna::IZQUIERDA);
+	$col1->setAlineacionContenido(Columna::IZQUIERDA);
+	$col1->setHTML('type="text" size="60" readonly=true');
+
+	$col2 = new Columna('Costo');
+    $col2->setTipo(Columna::MONTO);
+    $col2->setEsGrabable(true);
+    $col2->setNombreCampo('moncot');
+    $col2->setAlineacionContenido(Columna::IZQUIERDA);
+    $col2->setAlineacionObjeto(Columna::IZQUIERDA);
+    $col2->setEsNumerico(true);
+    $col2->setHTML('type="text" size="10" readonly=true');
+
+    $col3 = clone $col1;
+    $col3->setEsGrabable(true);
+    $col3->setTitulo('Prioridad');
+    $col3->setNombreCampo('priori2');
+    $col3->setHTML('type="text" size="5" maxlength="3"');
+    $col3->setJScript('onBlur="javascript:event.keyCode=13;verificar_prioridad();"');
+
+    $col4 = new Columna('Razón de Compra');
+    $col4->setTipo(Columna::COMBO);
+    $col4->setEsGrabable(true);
+    $col4->setNombreCampo('justifica');
+    $col4->setCombo(self::CargarRazon());
+    $col4->setHTML(' ');
+
+    $col5 = new Columna('refcot');
+    $col5->setTipo(Columna::TEXTO);
+    $col5->setEsGrabable(false);
+    $col5->setNombreCampo('refcot');
+    $col5->setOculta(true);
+
+    $opciones->addColumna($col1);
+	$opciones->addColumna($col2);
+	$opciones->addColumna($col3);
+	$opciones->addColumna($col4);
+	$opciones->addColumna($col5);
+
+	$this->grid2 = $opciones->getConfig($per);
+	}
 
 }

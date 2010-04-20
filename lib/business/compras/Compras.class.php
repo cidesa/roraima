@@ -419,7 +419,7 @@ class Compras {
    * @return void
    */
 
-  public static function salvarPrioridadCotizaciones($grid, $reqart, $actsolegr, $casolart, & $error) {
+  public static function salvarPrioridadCotizaciones($grid, $reqart, $actsolegr, $casolart, & $error, $grid1) {
     $gridnuevo = array ();
     $gridnuevo2 = array ();
     $gridnuevorec = array ();
@@ -433,6 +433,27 @@ class Compras {
     else if ($casolart->getPortimeent()=='1')
     {
       self::asignarPrioridadTimEnt($reqart);
+    }
+    else if ($casolart->getPorprovee()=='1')
+    {
+        $x = $grid1[0];
+	    $j = 0;
+	    while ($j < count($x)) {
+
+	      $t= new criteria();
+	      $t->add(CadetcotPeer::REFCOT,$x[$j]->getRefcot());
+	      $resul= CadetcotPeer::doSelect($t);
+	      if ($resul)
+	      {
+	      	foreach ($resul as $dat)
+	      	{
+	      		$dat->setPriori($x[$j]->getPriori2());
+	      		$dat->setJustifica($x[$j]->getJustifica());
+	      		$dat->save();
+	      	}
+	      }
+	      $j++;
+	    }
     }
     else {
 	    $x = $grid[0];
@@ -607,6 +628,29 @@ class Compras {
       self :: montoTotal($gridnuevo, & $montototal1, & $montototal2);
       $resul->setMonreq($montototal1);
       $resul->setMondes($montototal2);
+
+
+    $actdessol="";  // Se creo para actualizar la descripcion de la solicitud cuando gane un unico proveedor
+    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('compras',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
+	     if(array_key_exists('almpriori',$varemp['aplicacion']['compras']['modulos'])){
+	       if(array_key_exists('actdessol',$varemp['aplicacion']['compras']['modulos']['almpriori']))
+	       {
+	       	$actdessol=$varemp['aplicacion']['compras']['modulos']['almpriori']['actdessol'];
+	       }
+         }
+      if ($actdessol=='S') {
+        $sql = "select a.refsol, a.codpro, b.priori, a.descot from cacotiza a inner join cadetcot b on a.refcot=b.refcot where b.priori=1 and a.refsol='".$reqart."'
+        group by a.refsol, a.codpro, b.priori, a.descot";
+        if (Herramientas::BuscarDatos($sql,&$result)){
+          if(count($result)==1){
+             $resul->setDesreq($result[0]["descot"]);
+          }
+        }
+      }
       $resul->save();
     }
 
@@ -2315,6 +2359,40 @@ class Compras {
     while ($j<count($x))
     {
       if ($x[$j]->getPriori()==1)
+      {
+        $total1=$total1 +1;
+      }
+      else
+      {
+        $total2=$total2 +1;
+      }
+      $j++;
+    }
+
+    if ($total1==0)
+    {
+      return 164;
+    }
+    else if ($total1>1)
+    {
+     return 165;
+    }
+    else
+    {
+      return -1;
+    }
+  }
+
+    public static function validarAlmpriori2($grid)
+  {
+    $x=$grid[0];
+    $j=0;
+    $total1=0;
+    $total2=0;
+
+    while ($j<count($x))
+    {
+      if ($x[$j]->getPriori2()==1)
       {
         $total1=$total1 +1;
       }
