@@ -214,16 +214,30 @@ class Articulos
       	$datos["ramart"]=$caregart->getRamart();
       }
      //validacion partida este informado si el articulo/servicio es de ultimo nivel
+    $novalpar="";  // Se creo para que no valide si tiene partida cuando el articulo sea de ultimo nivel
+    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('compras',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
+	     if(array_key_exists('almregart',$varemp['aplicacion']['compras']['modulos'])){
+	       if(array_key_exists('novalpar',$varemp['aplicacion']['compras']['modulos']['almregart']))
+	       {
+	       	$novalpar=$varemp['aplicacion']['compras']['modulos']['almregart']['novalpar'];
+	       }
+         }
+
      $cant=0;
      if ($valgrid=="S")
      {
         $lonart=strlen($codart);
         $lonmas=strlen($formato);
-
+       if ($novalpar!="S") {
         if (($lonart==$lonmas) && $articulo->getCodpar()=="")
         {
           return 117;
         }
+       }
 
      }//if ($valgrid=="S")
   return -1;

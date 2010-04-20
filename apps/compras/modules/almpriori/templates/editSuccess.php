@@ -24,7 +24,7 @@ array()) ?></h1>
 
 <div id="sf_admin_content">
 <?php include_partial('almpriori/edit_messages', array('casolart' => $casolart, 'labels' => $labels)) ?>
-<?php include_partial('almpriori/edit_form', array('casolart' => $casolart, 'labels' => $labels, 'articulos' => $articulos, 'grid' => $grid, 'elimina' => $elimina)) ?>
+<?php include_partial('almpriori/edit_form', array('casolart' => $casolart, 'labels' => $labels, 'articulos' => $articulos, 'grid' => $grid, 'elimina' => $elimina, 'grid2' => $grid2)) ?>
 </div>
 
 <div id="sf_admin_footer">

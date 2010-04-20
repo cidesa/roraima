@@ -28,6 +28,7 @@ class Casolart extends BaseCasolart
   protected $cambiareti="";
   protected $nometifor="";
   protected $portimeent='';
+  protected $porprovee="";
 
   public function getMonreq($val=false)
   {
@@ -36,6 +37,22 @@ class Casolart extends BaseCasolart
 
   public function getNomcat()
   {
+    $catbnubica="";
+    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('compras',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
+	     if(array_key_exists('almsolegr',$varemp['aplicacion']['compras']['modulos'])){
+	       if(array_key_exists('catbnubica',$varemp['aplicacion']['compras']['modulos']['almsolegr']))
+	       {
+	       	$catbnubica=$varemp['aplicacion']['compras']['modulos']['almsolegr']['catbnubica'];
+	       }
+         }
+
+  	if ($catbnubica=='S')
+  	 return Herramientas::getX('CODUBI','Bnubica','Desubi',self::getUnires());
+  	else
 	return Herramientas::getX('CODCAT','Npcatpre','Nomcat',self::getUnires());
   }
 
