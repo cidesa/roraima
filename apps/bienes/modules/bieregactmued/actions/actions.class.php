@@ -147,6 +147,27 @@ private static $coderror=-1;
      $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
      return sfView::HEADER_ONLY;
    }
+   elseif ($this->getRequestParameter('ajax')=='7')
+   {
+    $cajtexmos=$this->getRequestParameter('cajtexmos');
+    $cajtexcom=$this->getRequestParameter('cajtexcom');
+
+    $l= new Criteria();
+    $l->add(CatipproPeer::CODPRO,$this->getRequestParameter('codigo'));
+    $reg= CatipproPeer::doSelectOne($l);
+    if ($reg)
+    {
+      $dato=$reg->getDespro();
+      $javascript="";
+    }
+     else {
+     	$javascript="alert('El Proyecto no existe'); $('$cajtexcom').value='';"; $dato="";
+     }
+    $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""]]';
+    $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+    return sfView::HEADER_ONLY;
+
+   }
 
   }
 
@@ -543,6 +564,10 @@ private static $coderror=-1;
     if (isset($bnregmue['codresuso']))
     {
       $this->bnregmue->setCodresuso($bnregmue['codresuso']);
+    }
+    if (isset($bnregmue['tippro']))
+    {
+      $this->bnregmue->setTippro($bnregmue['tippro']);
     }
   }
 

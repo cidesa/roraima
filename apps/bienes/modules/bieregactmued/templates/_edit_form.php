@@ -281,6 +281,30 @@
   'tamanoprincipal' => '10',
   'campobase' => 'id_codresuso',
   ), 'Nphojint_Almdespser', 'Nphojint', ''); ?>
+  <br>
+<?php echo label_for('bnregmue[tippro]', __($labels['bnregmue{tippro}']), 'class="required"') ?>
+<div class="content<?php if ($sf_request->hasError('bnregmue{tippro}')): ?> form-error<?php endif; ?>">
+<?php if ($sf_request->hasError('bnregmue{tippro}')): ?> <?php echo form_error('bnregmue{tippro}', array('class' => 'form-error-msg')) ?>
+<?php endif; ?>
+
+  <?php $value = object_input_tag($bnregmue, 'getTippro', array (
+  'size' => 8,
+  'maxlength' => 4,
+  'control_name' => 'bnregmue[tippro]',
+  'onBlur'=> remote_function(array(
+       'url' => 'bieregactmued/ajax',
+       'complete' => 'AjaxJSON(request, json)',
+       'with' => "'ajax=7&cajtexmos=bnregmue_despro&cajtexcom=bnregmue_tippro&codigo='+this.value",
+        )),
+)); echo $value ? $value : '&nbsp;' ?>
+
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Catippro_Almordcom/clase/Catippro/frame/sf_admin_edit_form/obj1/bnregmue_tippro/obj2/bnregmue_despro/campo1/codpro/campo2/despro')?></th>
+
+<?php $value = object_input_tag($bnregmue, 'getDespro', array (
+'size' => 60,
+'disabled' => true,
+'control_name' => 'bnregmue[despro]',
+)); echo $value ? $value : '&nbsp;' ?>
 </div>
 </fielset>
 </div>

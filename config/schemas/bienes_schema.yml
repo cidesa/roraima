@@ -1002,6 +1002,9 @@ propel:
     codrespat:
       type: VARCHAR
       size: 30
+    tippro:
+      type: VARCHAR
+      size: 4
     id:
       type: INTEGER
       required: true

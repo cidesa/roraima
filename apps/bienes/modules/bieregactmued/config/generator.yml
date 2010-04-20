@@ -39,6 +39,7 @@ generator:
       codubi:      { name : Cod. Ubicación }
       codrespat:   { name : Responsable Patrimonial Primario }
       codresuso:   { name : Responsable de Uso }
+      tippro:      { name : Proyecto }
 
     list:
       title:          Registro de Activos Muebles
@@ -51,7 +52,7 @@ generator:
       sort:    codact
     edit:
       title:          Registro de Activos Muebles
-      display:        [codact, codmue, desmue, codalt, ordcom, codpro, feccom, fecreg, fecrcp, marmue, modmue, anomue, colmue, capmue, tipmue, nropie, sermue, usomue, pesmue, larmue, ancmue, altmue, coddis, valini, valres, valres, vallib, valadi, valactual, depmen, depacu, valrex, cosrep, codubi, codrespat, codresuso ]
+      display:        [codact, codmue, desmue, codalt, ordcom, codpro, feccom, fecreg, fecrcp, marmue, modmue, anomue, colmue, capmue, tipmue, nropie, sermue, usomue, pesmue, larmue, ancmue, altmue, coddis, valini, valres, valres, vallib, valadi, valactual, depmen, depacu, valrex, cosrep, codubi, codrespat, codresuso, tippro ]
       fields:
          desmue:
            type: textarea_tag

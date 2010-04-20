@@ -53,6 +53,12 @@ class Bnregmue extends BaseBnregmue
   {
   	 return Herramientas::getX('CODEMP','Nphojint','Nomemp',self::getCodresuso());
   }
+
+	public function getDespro()
+	{
+	  return Herramientas::getX('CODPRO','Catippro','Despro',self::getTippro());
+	}
+
 }
 
 
