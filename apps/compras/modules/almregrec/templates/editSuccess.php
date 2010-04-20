@@ -24,7 +24,7 @@ array()) ?></h1>
 
 <div id="sf_admin_content">
 <?php include_partial('almregrec/edit_messages', array('carecaud' => $carecaud, 'labels' => $labels)) ?>
-<?php include_partial('almregrec/edit_form', array('carecaud' => $carecaud, 'labels' => $labels)) ?>
+<?php include_partial('almregrec/edit_form', array('carecaud' => $carecaud, 'labels' => $labels, 'mansolocor' => $mansolocor)) ?>
 </div>
 
 <div id="sf_admin_footer">
