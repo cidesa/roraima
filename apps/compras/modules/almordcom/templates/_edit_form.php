@@ -26,7 +26,7 @@
 <input id="parcial" name="parcial" value="N" type="hidden">
 <input id="cancotpril" name="cancotpril" value="0" type="hidden">
 <input id="numero_filas_recargos" name="numero_filas_recargos" value="10" type="hidden">
-<input id="numero_filas_orden" name="numero_filas_orden" value="50" type="hidden">
+<input id="numero_filas_orden" name="numero_filas_orden" value="150" type="hidden">
 <input id="sumatoria_recargos" name="sumatoria_recargos" type="hidden">
 <input id="sumatoria_detalle_orden" name="sumatoria_detalle_orden" type="hidden">
 <input id="sumatoria_recargos" name="sumatoria_recargos" type="hidden">
