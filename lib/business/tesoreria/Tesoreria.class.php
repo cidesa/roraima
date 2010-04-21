@@ -2132,10 +2132,10 @@ public static function validarCuentasGrid($grid)
 
     $opordpag->setMonret(0);
     $opordpag->setMondes(0);
-    $opordpag->setNomben(H::getX('Cedrif','Opbenefi','Nomben',$opordpag->getCedrif()));
+    $opordpag->setNomben(H::getX_vacio('Cedrif','Opbenefi','Nomben',$opordpag->getCedrif()));
     $opordpag->setNumche(null);
     $opordpag->setCtaban(null);
-    $opordpag->setCtapag(H::getX('Cedrif','Opbenefi','Codcta',$opordpag->getCedrif()));
+    $opordpag->setCtapag(H::getX_vacio('Cedrif','Opbenefi','Codcta',$opordpag->getCedrif()));
     $opordpag->setNumcom($numerocomp);
     $opordpag->setStatus('N');
     $opordpag->save();
