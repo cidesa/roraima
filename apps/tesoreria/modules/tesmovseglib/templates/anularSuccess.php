@@ -116,7 +116,7 @@ function salvar()
 	var feccomadi=document.getElementById('feccomadi').value;
 	var compadic=document.getElementById('compadic').value;
 	var fechacom=document.getElementById('fechacom').value;
-	var numcom=document.getElementById('numcom').value.replace(/#/gi,'*');
+	var numcom=document.getElementById('numcom').value;
 	var numcom2=document.getElementById('tsmovlib_numcom').value.replace(/#/gi,'*');
 	var id='<? print $tsmovlib->getId(); ?>';
 	var numcue='<? print $tsmovlib->getNumcue(); ?>';

@@ -1087,18 +1087,18 @@ class Tesoreria {
     }
   }
 
-  public static function anular_Eliminar($accion, $numcomadi, $feccomadi, $compadic, $fechacom, $numcom, $numcom2, $feclib,$reflib2='') {
+  public static function anular_Eliminar($accion, $numcomadi, $feccomadi, $compadic, $fechacom, $numcom, &$numcom2, $feclib,$reflib2='') {
     $msj='';
     if ($accion == 'E') {
       $msj=self :: buscar_Comprobante('E', $numcomadi, $feccomadi, $compadic, $fechacom, $numcom, $numcom2, $feclib, $reflib2);
     }
     if ($accion == 'A') {
-      $msj=self :: buscar_Comprobante('A', $numcomadi, $feccomadi, $compadic, $fechacom, $numcom, $numcom2, $feclib, $reflib2);
+      $msj=self :: buscar_Comprobante('A', $numcomadi, $feccomadi, $compadic, $fechacom, $numcom, &$numcom2, $feclib, $reflib2);
     }
     return $msj;
   }
 
-  public static function buscar_Comprobante($accion,$numcomadi,$feccomadi,$compadic,$fechacom,$numcom,$numcom2,$feclib, $reflib2='')
+  public static function buscar_Comprobante($accion,$numcomadi,$feccomadi,$compadic,$fechacom,$numcom,&$numcom2,$feclib, $reflib2='')
   {
     if ($accion=='E')
     {
@@ -1147,9 +1147,9 @@ class Tesoreria {
     }
     else
     {
-      if($numcom2=='########') $numcom2 = Comprobante::Buscar_Correlativo();
+     // if($numcom2=='########') $numcom2 = Comprobante::Buscar_Correlativo();
 
-      if ($numcom2!='' && $numcom2!='########' && $numcom2!='********'){
+      if ($numcom!='' && $numcom!='########' && $numcom!='********'){
       $sql="Select descom,moncom from CONTABC where NumCom = '".$numcom."'";
       if (Herramientas::BuscarDatos($sql,&$contabc))
       {
@@ -1158,6 +1158,7 @@ class Tesoreria {
         $confcorcom=sfContext::getInstance()->getUser()->getAttribute('confcorcom');
         if ($confcorcom=='N')
          $numcom2="A".substr($numcom,1,7);
+         else $numcom2 = Comprobante::Buscar_Correlativo();
 
         $tcontabc= new Contabc();
         $tcontabc->setNumcom($numcom2);
