@@ -90,6 +90,7 @@ class Casolart extends BaseCasolart
         else $eti="";
   	  	  $z= new Criteria();
 	  	  $z->add(CaordcomPeer::REFSOL,self::getReqart());
+	  	  $z->add(CaordcomPeer::STAORD,'N',Criteria::NOT_EQUAL);
 	  	  $resul2= CaordcomPeer::doSelectOne($z);
 	  	  if ($resul2)
 	  	  {
