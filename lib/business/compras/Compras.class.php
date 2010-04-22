@@ -2765,7 +2765,7 @@ class Compras {
             $datos->save();
           }
         }
-        $error = 135;
+        $error = 164;
       }
     }
     return true;
