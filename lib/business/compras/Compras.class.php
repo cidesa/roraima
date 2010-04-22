@@ -7,7 +7,7 @@
  * @subpackage compras
  * @author     $Author$ <desarrollo@cidesa.com.ve>
  * @version SVN: $Id$
- * 
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -2697,6 +2697,7 @@ class Compras {
           $gridnuevorec[$indice2 -1][6] = $resultado->getCodcat();
         }
       }
+      $nopuedeaumentar=true;
       $z = 0;
       while ($z < count($gridnuevo)) {
         if ($gridnuevo[$z][2] != "") {
