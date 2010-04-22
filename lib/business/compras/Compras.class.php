@@ -2845,4 +2845,30 @@ class Compras {
       }
   }
 
+  public static function salvarUnidadesUsuari($clasemodelo,$grid)
+  {
+    $x=$grid[0];
+    $j=0;
+    while ($j<count($x))
+    {
+      if ($x[$j]->getCodcat()!='')
+      {
+      	$x[$j]->setLoguse($clasemodelo->getloguse());
+        $x[$j]->save();
+      }
+      $j++;
+    }
+
+    $z=$grid[1];
+    $j=0;
+    if (!empty($z[$j]))
+    {
+      while ($j<count($z))
+      {
+        $z[$j]->delete();
+        $j++;
+      }
+    }
+  }
+
 }

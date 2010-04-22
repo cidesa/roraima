@@ -1,0 +1,36 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Caunifor
+    theme:            cidesaGenerator
+    fields:
+      codcat:
+        name: Código de Unidad
+        params: maxlength=32
+        catalogo:
+          catalogoweb: Npcatpre2_Almsolegr
+          clase: Npcatpre
+          ajax: 0
+          parametros: getprincipal="getCodcat" getsecundario="getNomcat" campoprincipal="codcat" camposecundario="nomcat" campobase = "id"
+          catalogoparams: /param1/'."'+$('caunifor_longitud').value+'".'
+      prefij: { name: Prefijo, params: size=10 maxlength=2}
+      coruni:  {name: Correlativo}
+      nomcat:  {name: Descripción}
+    list:
+      title:          Configuraciones de Unidades Solicitantes
+      display:        [=codcat, nomcat]
+      filters:        [codcat, prefij]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+      sort: codcat
+    edit:
+      title:          Configuración de Unidad Solicitante
+      display:       [codcat, prefij, coruni]
+      hide:   [longitud]
+      actions:
+        _list:                 ~
+        _save:                 ~
+        _create:               ~
+        _delete:               ~

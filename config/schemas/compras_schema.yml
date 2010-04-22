@@ -2802,3 +2802,53 @@ propel:
       required: true
       primaryKey: true
       autoIncrement: true
+  caunifor:
+    coduni:
+      type: VARCHAR
+      size: 32
+      required: true
+    prefij:
+      type: VARCHAR
+      size: 2
+      required: true
+    coruni:
+      type: NUMERIC
+      size: 8
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+  caunifor:
+    codcat:
+      type: VARCHAR
+      size: 32
+      required: true
+    prefij:
+      type: VARCHAR
+      size: 2
+      required: true
+    coruni:
+      type: NUMERIC
+      size: 8
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+  causuuni:
+    loguse:
+      type: VARCHAR
+      size: 50
+      required: true
+    codcat:
+      type: VARCHAR
+      size: 32
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true

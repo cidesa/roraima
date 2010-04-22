@@ -18,7 +18,9 @@ class Usuarios extends BaseUsuarios
   protected $confirm = '';
   protected $password = '';
   protected $repassword = '';
-
+  protected $grid=array();
+  protected $mascaracat = "";
+  protected $loncat = 0;
 
   public function getNomuni(){
 

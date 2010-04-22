@@ -38,6 +38,21 @@ class SolicituddeEgresos
 
   public static function grabarSolicitudEgreso($solegreso,$grid,$grid2,$grid3,$generar,&$msj)
   {
+
+    $fornumuni="";
+    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('compras',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
+	     if(array_key_exists('almsolegr',$varemp['aplicacion']['compras']['modulos'])){
+	       if(array_key_exists('fornumuni',$varemp['aplicacion']['compras']['modulos']['almsolegr']))
+	       {
+	       	$fornumuni=$varemp['aplicacion']['compras']['modulos']['almsolegr']['fornumuni'];
+	       }
+	     }
+      $loguse= sfContext::getInstance()->getUser()->getAttribute('loguse');
+
     $msj=-1;
     if ($solegreso->getId()!="")
       $nuevoregistro="N";
@@ -48,38 +63,87 @@ class SolicituddeEgresos
     {
       if ($solegreso->getReqart()=='########')
       {
-        $encontrado=false;
-        while (!$encontrado)
-        {
-          $numero=str_pad($r, 8, '0', STR_PAD_LEFT);
-          $numsol='SC'.(substr($numero,2,strlen($numero)));
-          $numsol2='SS'.(substr($numero,2,strlen($numero)));
+        if ($fornumuni!="S") {
+	        $encontrado=false;
+	        while (!$encontrado)
+	        {
+	          $numero=str_pad($r, 8, '0', STR_PAD_LEFT);
+	          $numsol='SC'.(substr($numero,2,strlen($numero)));
+	          $numsol2='SS'.(substr($numero,2,strlen($numero)));
 
-          $sql="select reqart from casolart where reqart='".$numsol."' or reqart='".$numsol2."'";
-          if (Herramientas::BuscarDatos($sql,&$result))
-          {
-            $r=$r+1;
-          }
-          else
-          {
-            $encontrado=true;
-          }
-        }
+	          $sql="select reqart from casolart where reqart='".$numsol."' or reqart='".$numsol2."'";
+	          if (Herramientas::BuscarDatos($sql,&$result))
+	          {
+	            $r=$r+1;
+	          }
+	          else
+	          {
+	            $encontrado=true;
+	          }
+	        }
 
-        if($solegreso->getTipo()=='C')
-        {
-          $numero=str_pad($r, 8, '0', STR_PAD_LEFT);
-          $numsol='SC'.(substr($numero,2,strlen($numero)));
-        }
-        else if($solegreso->getTipo()=='S')
-        {
-          $numero=str_pad($r, 8, '0', STR_PAD_LEFT);
-          $numsol='SS'.(substr($numero,2,strlen($numero)));
-        }
-        else
-        {
-          $numero=str_pad($r, 8, '0', STR_PAD_LEFT);
-          $numsol='SC'.(substr($numero,2,strlen($numero)));
+	        if($solegreso->getTipo()=='C')
+	        {
+	          $numero=str_pad($r, 8, '0', STR_PAD_LEFT);
+	          $numsol='SC'.(substr($numero,2,strlen($numero)));
+	        }
+	        else if($solegreso->getTipo()=='S')
+	        {
+	          $numero=str_pad($r, 8, '0', STR_PAD_LEFT);
+	          $numsol='SS'.(substr($numero,2,strlen($numero)));
+	        }
+	        else
+	        {
+	          $numero=str_pad($r, 8, '0', STR_PAD_LEFT);
+	          $numsol='SC'.(substr($numero,2,strlen($numero)));
+	        }
+        }else {
+
+        	$t= new Criteria();
+        	$t->add(CauniforPeer::CODCAT,$solegreso->getUnires());
+        	$reg= CauniforPeer::doSelectOne($t);
+        	if ($reg)
+        	{
+        		$pref=$reg->getPrefij();
+        		$r=$reg->getCoruni();
+        	}else{
+        		$pref=substr(Herramientas::getX('CODCAT','Npcatpre','Nomcat',$solegreso->getUnires()),0,2);
+        		$r=1;
+        	}
+
+        	$encontrado=false;
+	        while (!$encontrado)
+	        {
+	          $numero=str_pad($r, 8, '0', STR_PAD_LEFT);
+	          $numsol='SC'.$pref.(substr($numero,4,strlen($numero)));
+	          $numsol2='SS'.$pref.(substr($numero,4,strlen($numero)));
+
+	          $sql="select reqart from casolart where reqart='".$numsol."' or reqart='".$numsol2."'";
+	          if (Herramientas::BuscarDatos($sql,&$result))
+	          {
+	            $r=$r+1;
+	          }
+	          else
+	          {
+	            $encontrado=true;
+	          }
+	        }
+
+	        if($solegreso->getTipo()=='C')
+	        {
+	          $numero=str_pad($r, 8, '0', STR_PAD_LEFT);
+	          $numsol='SC'.$pref.(substr($numero,4,strlen($numero)));
+	        }
+	        else if($solegreso->getTipo()=='S')
+	        {
+	          $numero=str_pad($r, 8, '0', STR_PAD_LEFT);
+	          $numsol='SS'.$pref.(substr($numero,4,strlen($numero)));
+	        }
+	        else
+	        {
+	          $numero=str_pad($r, 8, '0', STR_PAD_LEFT);
+	          $numsol='SC'.$pref.(substr($numero,4,strlen($numero)));
+	        }
         }
       }
       else
@@ -110,7 +174,24 @@ class SolicituddeEgresos
      {
       if ($solegreso->getReqart()=='########')
       {
-      Herramientas::getSalvarCorrelativo('corsol','cacorrel','Solicitud',$r,$msg);
+      	 if ($fornumuni!="S") {
+           Herramientas::getSalvarCorrelativo('corsol','cacorrel','Solicitud',$r,$msg);
+      	 }else {
+            $t= new Criteria();
+        	$t->add(CauniforPeer::CODCAT,$solegreso->getUnires());
+        	$reg= CauniforPeer::doSelectOne($t);
+        	if ($reg)
+        	{
+        		$reg->setCoruni($r);
+        		$reg->save();
+        	}else {
+        		$caunifor= new Caunifor();
+        		$caunifor->setCodcat($solegreso->getUnires());
+        		$caunifor->setPrefij(substr(Herramientas::getX('CODCAT','Npcatpre','Nomcat',$solegreso->getUnires()),0,2));
+                $caunifor->setCoruni($r);
+                $caunifor->save();
+        	}
+      	 }
       }
       $solegreso->setReqart($numsol);
       $mon=$solegreso->getTipmon();
