@@ -13,7 +13,7 @@ abstract class BaseNptipconPeer {
 	const CLASS_DEFAULT = 'lib.model.nomina.Nptipcon';
 
 	
-	const NUM_COLUMNS = 12;
+	const NUM_COLUMNS = 13;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -53,6 +53,9 @@ abstract class BaseNptipconPeer {
 	const FECDES = 'nptipcon.FECDES';
 
 	
+	const CONDIA = 'nptipcon.CONDIA';
+
+	
 	const ID = 'nptipcon.ID';
 
 	
@@ -61,18 +64,18 @@ abstract class BaseNptipconPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codtipcon', 'Destipcon', 'Frepagcon', 'Alicuocon', 'Diabonfinano', 'Diabonvac', 'Fecinireg', 'Art146', 'Diaano', 'Fid', 'Fecdes', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (NptipconPeer::CODTIPCON, NptipconPeer::DESTIPCON, NptipconPeer::FREPAGCON, NptipconPeer::ALICUOCON, NptipconPeer::DIABONFINANO, NptipconPeer::DIABONVAC, NptipconPeer::FECINIREG, NptipconPeer::ART146, NptipconPeer::DIAANO, NptipconPeer::FID, NptipconPeer::FECDES, NptipconPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codtipcon', 'destipcon', 'frepagcon', 'alicuocon', 'diabonfinano', 'diabonvac', 'fecinireg', 'art146', 'diaano', 'fid', 'fecdes', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
+		BasePeer::TYPE_PHPNAME => array ('Codtipcon', 'Destipcon', 'Frepagcon', 'Alicuocon', 'Diabonfinano', 'Diabonvac', 'Fecinireg', 'Art146', 'Diaano', 'Fid', 'Fecdes', 'Condia', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (NptipconPeer::CODTIPCON, NptipconPeer::DESTIPCON, NptipconPeer::FREPAGCON, NptipconPeer::ALICUOCON, NptipconPeer::DIABONFINANO, NptipconPeer::DIABONVAC, NptipconPeer::FECINIREG, NptipconPeer::ART146, NptipconPeer::DIAANO, NptipconPeer::FID, NptipconPeer::FECDES, NptipconPeer::CONDIA, NptipconPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codtipcon', 'destipcon', 'frepagcon', 'alicuocon', 'diabonfinano', 'diabonvac', 'fecinireg', 'art146', 'diaano', 'fid', 'fecdes', 'condia', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codtipcon' => 0, 'Destipcon' => 1, 'Frepagcon' => 2, 'Alicuocon' => 3, 'Diabonfinano' => 4, 'Diabonvac' => 5, 'Fecinireg' => 6, 'Art146' => 7, 'Diaano' => 8, 'Fid' => 9, 'Fecdes' => 10, 'Id' => 11, ),
-		BasePeer::TYPE_COLNAME => array (NptipconPeer::CODTIPCON => 0, NptipconPeer::DESTIPCON => 1, NptipconPeer::FREPAGCON => 2, NptipconPeer::ALICUOCON => 3, NptipconPeer::DIABONFINANO => 4, NptipconPeer::DIABONVAC => 5, NptipconPeer::FECINIREG => 6, NptipconPeer::ART146 => 7, NptipconPeer::DIAANO => 8, NptipconPeer::FID => 9, NptipconPeer::FECDES => 10, NptipconPeer::ID => 11, ),
-		BasePeer::TYPE_FIELDNAME => array ('codtipcon' => 0, 'destipcon' => 1, 'frepagcon' => 2, 'alicuocon' => 3, 'diabonfinano' => 4, 'diabonvac' => 5, 'fecinireg' => 6, 'art146' => 7, 'diaano' => 8, 'fid' => 9, 'fecdes' => 10, 'id' => 11, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
+		BasePeer::TYPE_PHPNAME => array ('Codtipcon' => 0, 'Destipcon' => 1, 'Frepagcon' => 2, 'Alicuocon' => 3, 'Diabonfinano' => 4, 'Diabonvac' => 5, 'Fecinireg' => 6, 'Art146' => 7, 'Diaano' => 8, 'Fid' => 9, 'Fecdes' => 10, 'Condia' => 11, 'Id' => 12, ),
+		BasePeer::TYPE_COLNAME => array (NptipconPeer::CODTIPCON => 0, NptipconPeer::DESTIPCON => 1, NptipconPeer::FREPAGCON => 2, NptipconPeer::ALICUOCON => 3, NptipconPeer::DIABONFINANO => 4, NptipconPeer::DIABONVAC => 5, NptipconPeer::FECINIREG => 6, NptipconPeer::ART146 => 7, NptipconPeer::DIAANO => 8, NptipconPeer::FID => 9, NptipconPeer::FECDES => 10, NptipconPeer::CONDIA => 11, NptipconPeer::ID => 12, ),
+		BasePeer::TYPE_FIELDNAME => array ('codtipcon' => 0, 'destipcon' => 1, 'frepagcon' => 2, 'alicuocon' => 3, 'diabonfinano' => 4, 'diabonvac' => 5, 'fecinireg' => 6, 'art146' => 7, 'diaano' => 8, 'fid' => 9, 'fecdes' => 10, 'condia' => 11, 'id' => 12, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, )
 	);
 
 	
@@ -147,6 +150,8 @@ abstract class BaseNptipconPeer {
 		$criteria->addSelectColumn(NptipconPeer::FID);
 
 		$criteria->addSelectColumn(NptipconPeer::FECDES);
+
+		$criteria->addSelectColumn(NptipconPeer::CONDIA);
 
 		$criteria->addSelectColumn(NptipconPeer::ID);
 

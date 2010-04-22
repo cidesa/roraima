@@ -53,6 +53,10 @@ abstract class BaseNptipcon extends BaseObject  implements Persistent {
 
 
 	
+	protected $condia;
+
+
+	
 	protected $id;
 
 	
@@ -173,6 +177,13 @@ abstract class BaseNptipcon extends BaseObject  implements Persistent {
     }
   }
 
+  
+  public function getCondia()
+  {
+
+    return trim($this->condia);
+
+  }
   
   public function getId()
   {
@@ -315,6 +326,16 @@ abstract class BaseNptipcon extends BaseObject  implements Persistent {
 
 	} 
 	
+	public function setCondia($v)
+	{
+
+    if ($this->condia !== $v) {
+        $this->condia = $v;
+        $this->modifiedColumns[] = NptipconPeer::CONDIA;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -351,7 +372,9 @@ abstract class BaseNptipcon extends BaseObject  implements Persistent {
 
       $this->fecdes = $rs->getDate($startcol + 10, null);
 
-      $this->id = $rs->getInt($startcol + 11);
+      $this->condia = $rs->getString($startcol + 11);
+
+      $this->id = $rs->getInt($startcol + 12);
 
       $this->resetModified();
 
@@ -359,7 +382,7 @@ abstract class BaseNptipcon extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 12; 
+            return $startcol + 13; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Nptipcon object", $e);
     }
@@ -540,6 +563,9 @@ abstract class BaseNptipcon extends BaseObject  implements Persistent {
 				return $this->getFecdes();
 				break;
 			case 11:
+				return $this->getCondia();
+				break;
+			case 12:
 				return $this->getId();
 				break;
 			default:
@@ -563,7 +589,8 @@ abstract class BaseNptipcon extends BaseObject  implements Persistent {
 			$keys[8] => $this->getDiaano(),
 			$keys[9] => $this->getFid(),
 			$keys[10] => $this->getFecdes(),
-			$keys[11] => $this->getId(),
+			$keys[11] => $this->getCondia(),
+			$keys[12] => $this->getId(),
 		);
 		return $result;
 	}
@@ -613,6 +640,9 @@ abstract class BaseNptipcon extends BaseObject  implements Persistent {
 				$this->setFecdes($value);
 				break;
 			case 11:
+				$this->setCondia($value);
+				break;
+			case 12:
 				$this->setId($value);
 				break;
 		} 	}
@@ -633,7 +663,8 @@ abstract class BaseNptipcon extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[8], $arr)) $this->setDiaano($arr[$keys[8]]);
 		if (array_key_exists($keys[9], $arr)) $this->setFid($arr[$keys[9]]);
 		if (array_key_exists($keys[10], $arr)) $this->setFecdes($arr[$keys[10]]);
-		if (array_key_exists($keys[11], $arr)) $this->setId($arr[$keys[11]]);
+		if (array_key_exists($keys[11], $arr)) $this->setCondia($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setId($arr[$keys[12]]);
 	}
 
 	
@@ -652,6 +683,7 @@ abstract class BaseNptipcon extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(NptipconPeer::DIAANO)) $criteria->add(NptipconPeer::DIAANO, $this->diaano);
 		if ($this->isColumnModified(NptipconPeer::FID)) $criteria->add(NptipconPeer::FID, $this->fid);
 		if ($this->isColumnModified(NptipconPeer::FECDES)) $criteria->add(NptipconPeer::FECDES, $this->fecdes);
+		if ($this->isColumnModified(NptipconPeer::CONDIA)) $criteria->add(NptipconPeer::CONDIA, $this->condia);
 		if ($this->isColumnModified(NptipconPeer::ID)) $criteria->add(NptipconPeer::ID, $this->id);
 
 		return $criteria;
@@ -704,6 +736,8 @@ abstract class BaseNptipcon extends BaseObject  implements Persistent {
 		$copyObj->setFid($this->fid);
 
 		$copyObj->setFecdes($this->fecdes);
+
+		$copyObj->setCondia($this->condia);
 
 
 		$copyObj->setNew(true);
