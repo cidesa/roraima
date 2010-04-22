@@ -133,6 +133,16 @@ else
 </div>
 <br>	
 
+<?php echo label_for('nptipcon[condia]', __($labels['nptipcon{condia}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('nptipcon{condia}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('nptipcon{condia}')): ?>
+    <?php echo form_error('nptipcon{condia}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php echo select_tag('nptipcon[condia]', options_for_select(array('N'=>'NO','S'=>'SI'),$nptipcon->getCondia()),array(
+	    ));?>
+</div>
+<br>
 </div>
 
 <div id="div_alicuota" class="form-row" style="display:none">

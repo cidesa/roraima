@@ -5831,7 +5831,11 @@ propel:
     fid:
       type: VARCHAR
       size: 1
-    fecdes: DATE
+    fecdes:
+      type: DATE
+    condia:
+      type: VARCHAR
+      size: 1
     id:
       type: INTEGER
       required: true

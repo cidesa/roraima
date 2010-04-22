@@ -21,7 +21,8 @@ class presnomtipconActions extends autopresnomtipconActions
 
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -730,6 +731,10 @@ class presnomtipconActions extends autopresnomtipconActions
     {
       $fid = 'S';
       $this->nptipcon->setFid(1);
+    }
+    if (isset($nptipcon['condia']))
+    {
+      $this->nptipcon->setCondia($nptipcon['condia']);
     }
 	if (isset($nptipcon['fecdes']))
     {

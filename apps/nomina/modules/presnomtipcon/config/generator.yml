@@ -17,6 +17,7 @@ generator:
       anovighas:    { name: fecha de Vigencia Hasta, params: date_format='dd/MM/yyyy'  }
       fid:          { name: Aplica Fideicomiso }      
       fecdes:       { name: Fecha Desde (Deposito Fideicomiso), params: date_format='dd/MM/yyyy'  }
+      condia:       { name: Conversion de Dias (Habiles/Continuos) }
 
 
     list:
@@ -30,7 +31,7 @@ generator:
       sort:    codtipcon
     edit:
       title:          Tipos de Contratos Colectivos
-      display:        [codtipcon, destipcon, frepagcon, fecinireg, art146, alicuocon, fid, fecdes]
+      display:        [codtipcon, destipcon, frepagcon, fecinireg, art146, alicuocon, fid, fecdes, condia]
       actions:
         _list:        ~
         _save:        ~
