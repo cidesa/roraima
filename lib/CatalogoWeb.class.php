@@ -324,9 +324,32 @@ class CatalogoWeb extends BaseCatalogoWeb {
 
   /**********************************Solicitud de Egresos**********************************/
   public function Npcatpre_Almsolegr($mascara) {
-    $mask = $mascara[0];
-    $this->c = new Criteria();
-    $this->sql = "length(CodCat) = '" . $mask . "'";
+	//Cambios Solicitado por Monagas
+    $fornumuni="";
+    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('compras',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
+	     if(array_key_exists('almsolegr',$varemp['aplicacion']['compras']['modulos'])){
+	       if(array_key_exists('fornumuni',$varemp['aplicacion']['compras']['modulos']['almsolegr']))
+	       {
+	       	$fornumuni=$varemp['aplicacion']['compras']['modulos']['almsolegr']['fornumuni'];
+	       }
+	     }
+      $loguse= sfContext::getInstance()->getUser()->getAttribute('loguse');
+
+
+
+
+		$mask = $mascara[0];
+		$this->c = new Criteria();
+		if ($fornumuni=='S')
+		{
+		  $this->sql = "length(npcatpre.codcat) = '" . $mask . "' and npcatpre.codcat in (select codcat from causuuni where loguse='".$loguse."')";
+		}else {
+			$this->sql = "length(CodCat) = '" . $mask . "'";
+		}
     $this->c->add(NpcatprePeer :: CODCAT, $this->sql, Criteria :: CUSTOM);
     //   $this->c->addAscendingOrderByColumn(NpcatprePeer::CODCAT);
 
@@ -4374,7 +4397,7 @@ public function Tsmovlib_tesmovdeglib2()
     $mascaraarticulo = Herramientas::getMascaraArticulo();
     $longitud = strlen($mascaraarticulo);
     $this->c = new Criteria();
-    $this->c->add(CaregartPeer :: TIPO, 'A');
+    //$this->c->add(CaregartPeer :: TIPO, 'A');
     $this->sql = "length(Codart) = '" . $longitud . "'";
     $this->c->add(CaregartPeer :: CODART, $this->sql, Criteria :: CUSTOM);
 
@@ -5844,6 +5867,29 @@ public function Catdefcatman_Cattramo($params = '') {
 			FordefparegrPeer :: NOMPAREGR => 'Descripción',
 
 
+		);
+	}
+
+	public function Usuarios_Compras() {
+		$this->c = new Criteria();
+		$this->columnas = array (
+			UsuariosPeer :: LOGUSE => 'Usuario',
+			UsuariosPeer :: NOMUSE => 'Nombre'
+
+		);
+	}
+
+	public function Npcatpre2_Almsolegr($mascara) {
+		$mask = $mascara[0];
+		$this->c = new Criteria();
+		$this->sql = "length(CodCat) = '" . $mask . "'";
+
+		$this->c->add(NpcatprePeer :: CODCAT, $this->sql, Criteria :: CUSTOM);
+		//   $this->c->addAscendingOrderByColumn(NpcatprePeer::CODCAT);
+
+		$this->columnas = array (
+			NpcatprePeer :: CODCAT => 'Código',
+			NpcatprePeer :: NOMCAT => 'Descripción'
 		);
 	}
 
