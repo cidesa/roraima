@@ -306,6 +306,7 @@
 'control_name' => 'bnregmue[despro]',
 )); echo $value ? $value : '&nbsp;' ?>
 </div>
+</div>
 </fielset>
 </div>
 </fieldset>
