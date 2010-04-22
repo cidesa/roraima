@@ -258,8 +258,27 @@ class CatalogoWeb extends BaseCatalogoWeb {
     );
   }
 
-  public function Optipret_Pagemiret() {
-    $this->c = new Criteria();
+  public function Optipret_Pagemiret($proveedor=array()) {
+    $filretpro="";
+    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('tesoreria',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['tesoreria']))
+	     if(array_key_exists('pagemiord',$varemp['aplicacion']['tesoreria']['modulos'])){
+	       if(array_key_exists('filretpro',$varemp['aplicacion']['tesoreria']['modulos']['pagemiord']))
+	       {
+	       	$filretpro=$varemp['aplicacion']['tesoreria']['modulos']['pagemiord']['filretpro'];
+	       }
+	     }
+         if ($filretpro=='S' && count($proveedor)>0) {
+			$provee=$proveedor[0];
+	        $codpro=H::getX_vacio('RIFPRO','Caprovee','CODPRO',$provee);
+			$this->c = new Criteria();
+			$this->sql = "optipret.codtip in (select codret from caproret where codpro='".$codpro."')";
+			$this->c->add(OptipretPeer :: CODTIP, $this->sql, Criteria :: CUSTOM);
+         }
+
     $this->c->addAscendingOrderByColumn(OptipretPeer::CODTIP);
 
     $this->columnas = array (
@@ -339,24 +358,25 @@ class CatalogoWeb extends BaseCatalogoWeb {
 	     }
       $loguse= sfContext::getInstance()->getUser()->getAttribute('loguse');
 
-
+           if (array_key_exists('1',$mascara)) $mask2=$mascara[1];
+           else $mask2="";
 
 
 		$mask = $mascara[0];
 		$this->c = new Criteria();
-		if ($fornumuni=='S')
+		if ($fornumuni=='S' && $mask2=='almsolegr')
 		{
 		  $this->sql = "length(npcatpre.codcat) = '" . $mask . "' and npcatpre.codcat in (select codcat from causuuni where loguse='".$loguse."')";
 		}else {
 			$this->sql = "length(CodCat) = '" . $mask . "'";
 		}
-    $this->c->add(NpcatprePeer :: CODCAT, $this->sql, Criteria :: CUSTOM);
-    //   $this->c->addAscendingOrderByColumn(NpcatprePeer::CODCAT);
+		$this->c->add(NpcatprePeer :: CODCAT, $this->sql, Criteria :: CUSTOM);
+		//   $this->c->addAscendingOrderByColumn(NpcatprePeer::CODCAT);
 
-    $this->columnas = array (
-      NpcatprePeer :: CODCAT => 'Código',
-      NpcatprePeer :: NOMCAT => 'Descripción'
-    );
+		$this->columnas = array (
+			NpcatprePeer :: CODCAT => 'Código',
+			NpcatprePeer :: NOMCAT => 'Descripción'
+		);
   }
 
   public function Npcatpre_Categoriaxemp() {

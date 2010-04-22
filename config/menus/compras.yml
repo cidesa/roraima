@@ -37,6 +37,8 @@ compras:
       Registro de Artículos y+o Servicios:                    AlmRegArt
       Registro de Recargos:                                   AlmRegRgo
      # Asociación  de Retenciones a Servicios:                 AlmRetSer
+      Configuración de Unidad Solicitante:                    almconfuni
+      Asignación de Unidad Solicitante a Usuarios:            almusuuni
     Compras:
       Requisiciones por Departamento (Solicitud de Egresos):  AlmSolEgr
       Aprobación de Solicitud de Egresos:                     AlmAprSolEgr

@@ -520,10 +520,11 @@ class almsolegrActions extends autoalmsolegrActions
      $cajtexmos=$this->getRequestParameter('cajtexmos');
      $cajtexcom=$this->getRequestParameter('cajtexcom');
      $output=array();
-     $javascript="";
+     $javascript=""; $dato="";
      if ($this->getRequestParameter('ajax')=='1')
       {
       	$catbnubica="";
+      	$fornumuni="";
       	$varemp = $this->getUser()->getAttribute('configemp');
 	    if ($varemp)
 		if(array_key_exists('aplicacion',$varemp))
@@ -534,11 +535,30 @@ class almsolegrActions extends autoalmsolegrActions
 		       {
 		       	$catbnubica=$varemp['aplicacion']['compras']['modulos']['almsolegr']['catbnubica'];
 		       }
+		       if(array_key_exists('fornumuni',$varemp['aplicacion']['compras']['modulos']['almsolegr']))
+		       {
+		       	$fornumuni=$varemp['aplicacion']['compras']['modulos']['almsolegr']['fornumuni'];
+		       }
 		     }
-      	if ($catbnubica=='S')
-      	$dato=BnubicaPeer::getDesubi($this->getRequestParameter('codigo'));
-        else $dato=NpcatprePeer::getCategoria($this->getRequestParameter('codigo'));
-        $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
+      	if ($catbnubica=='S') {
+      	$dato=BnubicaPeer::getDesubi($this->getRequestParameter('codigo')); }
+        else {
+         $t= new Criteria();
+         if ($fornumuni!="S") {$t->add(NpcatprePeer::CODCAT,$this->getRequestParameter('codigo')); }
+         else {
+         	$loguse= $this->getUser()->getAttribute('loguse');
+         	$sql="npcatpre.codcat='".$this->getRequestParameter('codigo')."' and npcatpre.codcat in (select codcat from causuuni where loguse='".$loguse."')";
+         	$t->add(NpcatprePeer::CODCAT,$sql,Criteria::CUSTOM);
+         }
+         $reg= NpcatprePeer::doSelectOne($t);
+         if ($reg)
+         {
+         	$dato=$reg->getNomcat();
+         }else $javascript="alert('La Categoria no existe')";
+
+        }
+
+        $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""]]';
       }
       else  if ($this->getRequestParameter('ajax')=='2')
       {
@@ -764,7 +784,7 @@ class almsolegrActions extends autoalmsolegrActions
        $col4->setHTML('type="text" size="25" maxlength="50"');
 
        $obj2= array('codcat' => 5);
-       $params2= array('param1' => $loncat);
+       $params2= array('param1' => $loncat, 'param2' => 'almsolegr');
 
        $col5 = new Columna('Cód. Unidad');
        $col5->setTipo(Columna::TEXTO);
@@ -1511,6 +1531,7 @@ class almsolegrActions extends autoalmsolegrActions
     $this->filters = $this->getUser()->getAttributeHolder()->getAll('sf_admin/casolart/filters');
 
     $this->cambiareti="";
+    $this->fornumuni="";
     $varemp = $this->getUser()->getAttribute('configemp');
     if ($varemp)
 	if(array_key_exists('aplicacion',$varemp))
@@ -1525,12 +1546,23 @@ class almsolegrActions extends autoalmsolegrActions
 	       {
 	       	$this->nometifor=$varemp['aplicacion']['compras']['modulos']['almsolegr']['nometifor'];
 	       }
+	       if(array_key_exists('fornumuni',$varemp['aplicacion']['compras']['modulos']['almsolegr']))
+	       {
+	       	$this->fornumuni=$varemp['aplicacion']['compras']['modulos']['almsolegr']['fornumuni'];
+	       }
 	     }
+   $loguse= $this->getUser()->getAttribute('loguse');
 
 
      // 15    // pager
     $this->pager = new sfPropelPager('Casolart', 15);
     $c = new Criteria();
+    if ($this->fornumuni=='S')
+    {
+      $this->sql="casolart.unires in (select codcat from causuuni where loguse='".$loguse."')";
+      $c->add(CasolartPeer::UNIRES,$this->sql,Criteria::CUSTOM);
+    }
+
     $this->addSortCriteria($c);
     $this->addFiltersCriteria($c);
     $this->pager->setCriteria($c);
