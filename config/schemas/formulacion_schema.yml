@@ -1433,7 +1433,7 @@ propel:
       type: VARCHAR
       size: 250
       required: true
-     id:
+    id:
       type: integer
       required: true
       primaryKey: true
