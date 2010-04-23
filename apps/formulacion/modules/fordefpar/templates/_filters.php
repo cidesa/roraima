@@ -30,7 +30,7 @@
 ?>
     <?php echo select_tag('filters[codest]', options_for_select($estado,'','include_custom=Seleccione'),array('onChange'=> remote_function(array(
     'update'   => 'divMunicipiosFiltros',
-    'url'      => 'fordefpar/combo?par=1',
+    'url'      => 'fordefpar/combofilter?par=1',
     'complete' => 'AjaxJSON(request, json)',
     'with' => "'estado='+this.value"
   ))));?>

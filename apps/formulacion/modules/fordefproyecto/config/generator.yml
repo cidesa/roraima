@@ -67,6 +67,8 @@ generator:
       poravafin:     { name: Porcentaje de Avance Financiero del Proyecto}
       numempfem:     { name: Nro de Empleado Femenino}
       numempmas:     { name: Nro de Empleado Masculino}
+      codsubsec:     { name: Sub-Programas}
+
 
     list:
       title:          Proyectos y Acciones Centralizadas
