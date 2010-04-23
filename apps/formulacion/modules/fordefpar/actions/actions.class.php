@@ -155,6 +155,14 @@ $this->Bitacora('Guardo');
 
   }
 
+  public function executeCombofilter()
+  {
+    if ($this->getRequestParameter('par')=='1')
+    {
+      $this->municipios = $this->Cargarmunicipio($this->getRequestParameter('estado'));
+    }
+
+  }
   public function CargarEstado()
   {
     $tablas=array('fordefest');
