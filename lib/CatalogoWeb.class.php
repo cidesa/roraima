@@ -271,10 +271,11 @@ class CatalogoWeb extends BaseCatalogoWeb {
 	       	$filretpro=$varemp['aplicacion']['tesoreria']['modulos']['pagemiord']['filretpro'];
 	       }
 	     }
+
+			$this->c = new Criteria();
          if ($filretpro=='S' && count($proveedor)>0) {
 			$provee=$proveedor[0];
 	        $codpro=H::getX_vacio('RIFPRO','Caprovee','CODPRO',$provee);
-			$this->c = new Criteria();
 			$this->sql = "optipret.codtip in (select codret from caproret where codpro='".$codpro."')";
 			$this->c->add(OptipretPeer :: CODTIP, $this->sql, Criteria :: CUSTOM);
          }
