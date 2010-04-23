@@ -340,7 +340,7 @@ class nomnommovnomconActions extends autonomnommovnomconActions
    */
   protected function saveNpasiconemp($npasiconemp)
   {
-	$grid=Herramientas::CargarDatosGrid($this,$this->obj);
+	$grid=Herramientas::CargarDatosGridv2($this,$this->obj);
 	Nomina::salvarNomnommovnomcon($npasiconemp,$grid);
   }
 
