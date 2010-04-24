@@ -2746,6 +2746,12 @@ propel:
       type: NUMERIC
       size: 14
       scale: 2
+    codniv:
+      type: VARCHAR
+      size: 16
+    codnom:
+      type: VARCHAR
+      size: 3
     id:
       type: INTEGER
       required: true

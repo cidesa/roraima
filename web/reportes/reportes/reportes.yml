@@ -59,7 +59,6 @@ compras:
     Recepciones:                                          CARRCPART.php
     Despachos:                                            CARDPHART.php
     Ordenes de Compra:                                    CARDETORD.php
-    Ordenes de Servicio:                                  CARDETORDSER.php
     Listado Resumen de Ordenes de Compra:                 carordres.php
     Listado Resumen Ordenes de Servicio:                  carordsres.php
     Recepciones y Diferencias:                            CARRCPORD.php
@@ -75,7 +74,6 @@ compras:
     Recepciones:                                          CARRCPPRE.php
     Despachos:                                            CARDPHPRE.php
     Ordenes de Compra:                                    CARORDPRE.php
-    Ordenes de Servicio:                                  CARORDSER.php
     Ajuste Orden de Compra:                               carajuord.php
   Almacén:
     Valorización de Inventario:                           carvalinv.php

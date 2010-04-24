@@ -142,7 +142,7 @@ propel:
     codctaingdev:
       type: VARCHAR
       size: 32
-    unidad:unidad
+    unidad:
       type: VARCHAR
       size: 10
     corcomp:    #Correlativo Comprobante
