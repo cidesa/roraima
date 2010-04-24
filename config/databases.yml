@@ -4,7 +4,7 @@ all:
     param:
       phptype:            pgsql
       hostspec:           localhost
-      database:           RORAIMA
+      database:           SIMA
       username:           postgres
       password:           postgres
       schema:             SIMA003
@@ -13,7 +13,7 @@ all:
     param:
       phptype:            pgsql
       hostspec:           localhost
-      database:           RORAIMA
+      database:           SIMA
       username:           cidesa
       password:           cidesa
       schema:             SIMA_USER

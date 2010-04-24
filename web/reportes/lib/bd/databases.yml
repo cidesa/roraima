@@ -4,7 +4,7 @@ SIMA3:
   host:     localhost
   usuario:  postgres
   password: postgres
-  bd:       RORAIMA
+  bd:       SIMA
   schema:   SIMA003
   port:     5432
   empresa:  003
