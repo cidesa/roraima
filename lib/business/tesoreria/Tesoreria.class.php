@@ -1898,12 +1898,15 @@ public static function validarCuentasGrid($grid)
     $cpcausad->setTipcau($opordpag->getTipcau());
     $cpcausad->setRefcom(null);
     $cpcausad->setTipcom(null);
+    $cpcausad->setDescau($opordpag->getDesord());
+    $cpcausad->setCedrif($opordpag->getCedrif());
     $cpcausad->setFeccau($opordpag->getFecemi());
     $cpcausad->setAnocau(substr($opordpag->getFecemi(),0,4));
     $cpcausad->setDesanu(null);
     $cpcausad->setMoncau($opordpag->getMonord());
     $cpcausad->setSalaju(0);
-    $cpcausad->setStaanu('A');
+    $cpcausad->setSalpag(0);
+    $cpcausad->setStacau('A');
     $cpcausad->save();
   }
 
@@ -1925,6 +1928,7 @@ public static function validarCuentasGrid($grid)
         $cpimpcau->setCodpre($x[$j]["codpre"]);
         $cpimpcau->setMonimp($x[$j]["moncau"]);
         $cpimpcau->setMonaju(0);
+        $cpimpcau->setMonpag(0);
         $cpimpcau->setStaimp('A');
         $cpimpcau->setRefere('NULO');
         $cpimpcau->setRefprc('NULO');
