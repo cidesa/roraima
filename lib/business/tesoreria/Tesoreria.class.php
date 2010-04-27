@@ -1917,16 +1917,16 @@ public static function validarCuentasGrid($grid)
   	$g->add(CpimpcauPeer::REFCAU,$referencia);
   	CpimpcauPeer::doDelete($g);
 
-    $x=$grid[0];
+    $arreglo=self::Arreglodet($grid);
     $j=0;
-    while ($j<count($x))
+    while ($j<count($arreglo))
     {
-      if ($x[$j]["codpre"]!='' && $x[$j]["moncau"]!=0)
+      if ($arreglo[$j]["codpre"]!='' && $arreglo[$j]["moncau"]!=0)
       {
         $cpimpcau= new Cpimpcau();
         $cpimpcau->setRefcau($referencia);
-        $cpimpcau->setCodpre($x[$j]["codpre"]);
-        $cpimpcau->setMonimp($x[$j]["moncau"]);
+        $cpimpcau->setCodpre($arreglo[$j]["codpre"]);
+        $cpimpcau->setMonimp($arreglo[$j]["moncau"]);
         $cpimpcau->setMonaju(0);
         $cpimpcau->setMonpag(0);
         $cpimpcau->setStaimp('A');
@@ -2145,20 +2145,63 @@ public static function validarCuentasGrid($grid)
     $opordpag->save();
   }
 
-  public static function grabarDetalleOrden($opordpag,$grid)
+  public static function posicion_en_el_grid($arreglo,$codigo)
   {
-    $referencia=$opordpag->getNumord();
-    $x=$grid[0];
+    $enc=false;
+    $ind=0;
+    while (($ind<count($arreglo)) && (!$enc))
+    {
+        if ($arreglo[$ind]["codpre"]==$codigo)
+        { $enc=true; }
+      $ind++;
+    }
+
+    if ($enc)
+    { $posicionenelgrid=$ind;}else{ $posicionenelgrid=0;}
+
+   return $posicionenelgrid;
+  }
+
+  public static function Arreglodet($grid)
+  {
+  	$arreglodet=array();
+  	$x=$grid[0];
     $j=0;
     while ($j<count($x))
     {
-      if ($x[$j]["codpre"]!='')
+  	    $pos=self::posicion_en_el_grid($arreglodet,$x[$j]["codpre"]);
+        if ($pos==0)
+        {
+         $l=count($arreglodet)+1;
+         $arreglodet[$l-1]["codpre"]=$x[$j]["codpre"];
+         $arreglodet[$l-1]["moncau"]=$x[$j]["moncau"];
+        }
+        else
+        {
+          $valor=H::toFloat($arreglodet[$pos-1]["moncau"]);
+          $arreglodet[$pos-1]["moncau"]=($valor+$x[$j]["moncau"]);
+        }
+
+        $j++;
+    }
+
+    return $arreglodet;
+  }
+
+  public static function grabarDetalleOrden($opordpag,$grid)
+  {
+    $referencia=$opordpag->getNumord();
+    $arreglo=self::Arreglodet($grid);
+    $j=0;
+    while ($j<count($arreglo))
+    {
+      if ($arreglo[$j]["codpre"]!='')
       {
         $opdetord= new Opdetord();
         $opdetord->setNumord($referencia);
         $opdetord->setRefcom('NULO');
-        $opdetord->setCodpre($x[$j]["codpre"]);
-        $opdetord->setMoncau($x[$j]["moncau"]);
+        $opdetord->setCodpre($arreglo[$j]["codpre"]);
+        $opdetord->setMoncau($arreglo[$j]["moncau"]);
         $opdetord->setMonret(0);
         $opdetord->setMondes(0);
         $opdetord->save();
