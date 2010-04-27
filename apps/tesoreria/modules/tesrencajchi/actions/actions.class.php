@@ -230,9 +230,9 @@ class tesrencajchiActions extends autotesrencajchiActions
         $javascript="";
         $arredes=split('/',$this->getRequestParameter('fecdes'));
         $arrehas=split('/',$codigo);
-        $fechades=$arredes[2]."-".$arredes[1]."-".$arredes[0];
-        $fechahas=$arrehas[2]."-".$arrehas[1]."-".$arrehas[0];
-        
+        $fechades=$this->getRequestParameter('fecdes'); //$arredes[2]."-".$arredes[1]."-".$arredes[0];
+        $fechahas=$codigo; //$arrehas[2]."-".$arrehas[1]."-".$arrehas[0];
+
         $this->params=array();
         $this->labels = $this->getLabels();
         $this->opordpag = $this->getOpordpagOrCreate();
