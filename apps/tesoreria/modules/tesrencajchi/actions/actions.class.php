@@ -82,8 +82,16 @@ class tesrencajchiActions extends autotesrencajchiActions
    */
   public function configGridSalida($fechades='', $fechahas='')
   {
-    if ($fechades=='') $fechades=date('Y-m-d');
-    if ($fechahas=='') $fechahas=date('Y-m-d');
+    if ($fechades=='') { $fechades=date('Y-m-d');}
+    else {
+    	$dateFormat = new sfDateFormat('es_VE');
+        $fechades = $dateFormat->format($fechades, 'i', $dateFormat->getInputPattern('d'));
+    }
+    if ($fechahas=='') { $fechahas=date('Y-m-d'); }
+    else {
+    	$dateFormat = new sfDateFormat('es_VE');
+        $fechahas = $dateFormat->format($fechahas, 'i', $dateFormat->getInputPattern('d'));
+    }
     $sql="tssalcaj.fecsal>='".$fechades."'  and tssalcaj.fecsal<='".$fechahas."'";
 
     $a= new Criteria();
