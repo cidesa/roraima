@@ -74,7 +74,7 @@ else
 	var totalfac="bx"+"_0_9";
    	actualizarsaldos_b();
    	var am=totalregistros('ex',1,10);
-    var cm=totalregistros('bx',2,30);
+    var cm=totalregistros('bx',2,150);
     if (cm==0)
     {
       $(totalfac).value=$('opordpag_monord').value;
@@ -93,7 +93,7 @@ else
     if (($('id').value=="" && am==0 && cm==0) || ($('id').value!='' && bm==0))
     {
       var l=0;
-      while(l<30)
+      while(l<150)
       {
       	var basimp="bx_"+l+"_11";
 		var moniva="bx_"+l+"_12";

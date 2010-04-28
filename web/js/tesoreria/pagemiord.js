@@ -1547,7 +1547,7 @@
    var numfac=$(id).value;
 
    var numfacrepetido=false;
-   var am=totalregistros('bx',2,100);
+   var am=totalregistros('bx',2,150);
    var i=0;
    while (i<am)
    {
