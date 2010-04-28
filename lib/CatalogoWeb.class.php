@@ -296,7 +296,7 @@ class CatalogoWeb extends BaseCatalogoWeb {
 
   public function Cpprecom_Pagemiord() {
     $this->c = new Criteria();
-    $this->c->add(CpprecomPeer :: MONPRC, CpprecomPeer :: SALCAU, Criteria :: GREATHER_THAN);
+    $this->c->add(CpprecomPeer :: MONPRC, CpprecomPeer :: SALCAU, Criteria :: GREATER_THAN);
     $this->c->add(CpprecomPeer :: STAPRC, 'N', Criteria :: NOT_EQUAL);
     //    $this->c->addAscendingOrderByColumn(CpprecomPeer::REFPRC);
 
