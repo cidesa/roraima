@@ -238,13 +238,16 @@
 
     var colcomprc=col-3;
     var colcausa=col-1;
+    var colajus=col+1;
     var comprc=name+"_"+fil+"_"+colcomprc;
     var causa=name+"_"+fil+"_"+colcausa;
+    var ajusta=name+"_"+fil+"_"+colajus;
 
     var num3=toFloat(comprc);
     var num4=toFloat(causa);
     var num5=toFloat(id);
-    var calculo= num3 - num4;
+    var num6=toFloat(ajusta);
+    var calculo= num6 - num4;
 
     if (num5>calculo)
     {
