@@ -18,6 +18,7 @@ class Cpimpprc extends BaseCpimpprc
   protected $mondis='';
   private $montrue = '';
   private $check = '';
+  private $monimpaju="";
 
   private $monporpag = 0.00;
 
@@ -31,8 +32,19 @@ class Cpimpprc extends BaseCpimpprc
 
   public function getMontrue()
   {
-  	$montrue= self::getMonimp() - self::getMoncau() - self::getMonaju() + self::getMoncau();
+  	$montrue= self::getMonimp() - self::getMoncau() - self::getMonaju();
 	return $montrue;
+  }
+
+  public function setMonimpaju($val)
+  {
+	$this->monimpaju = $val;
+  }
+
+  public function getMonimpaju()
+  {
+  	$monimpaju= self::getMonimp() - self::getMonaju();
+	return $monimpaju;
   }
 
   public function setCheck($val)
