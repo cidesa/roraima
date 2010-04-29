@@ -295,10 +295,10 @@ class CatalogoWeb extends BaseCatalogoWeb {
   }
 
   public function Cpprecom_Pagemiord() {
-    $this->c = new Criteria();
-    $this->c->add(CpprecomPeer :: MONPRC, CpprecomPeer :: SALCAU, Criteria :: GREATER_THAN);
-    $this->c->add(CpprecomPeer :: STAPRC, 'N', Criteria :: NOT_EQUAL);
-    //    $this->c->addAscendingOrderByColumn(CpprecomPeer::REFPRC);
+	$this->c = new Criteria();
+    $this->sql = "cpprecom.staprc <>'N'  and (Select Sum(monimp-monaju) as monprc from cpimpprc where refprc=cpprecom.refprc) > (Select Sum(moncau) as moncau from cpimpprc where refprc=cpprecom.refprc)";
+
+	$this->c->add(CpprecomPeer :: STAPRC, $this->sql, Criteria :: CUSTOM);
 
     $this->columnas = array (
       CpprecomPeer :: TIPPRC => 'Tipo',
@@ -310,25 +310,18 @@ class CatalogoWeb extends BaseCatalogoWeb {
 
   public function Cpcompro_Pagemiord()
   {
+		$this->sql = "cpcompro.stacom <>'N'  and (Select Sum(monimp-monaju) as moncom from cpimpcom where refcom=cpcompro.refcom) > (Select Sum(moncau) as moncau from cpimpcom where refcom=cpcompro.refcom)";
 
-  	$this->sql = "cpcompro.moncom > ((Select Sum(MonCau) as moncau from cpimpcom where refcom=cpcompro.refcom)+(Select Sum(monaju) as monaju from cpimpcom where refcom=cpcompro.refcom))";
+		$this->c = new Criteria();
 
-    $this->c = new Criteria();
-    $this->c->add(CpcomproPeer :: MONCOM, $this->sql, Criteria :: CUSTOM);  //$this->c->add(CpcomproPeer :: MONCOM, CpcomproPeer :: SALCAU, Criteria :: NOT_EQUAL);
-
-
-    $a= new Criteria();
-    $dato=CadefartPeer::doSelectOne($a);
-    if ($dato)
-    {
-    	if ($dato->getComreqapr()=='S')
-    	{
-    		$this->c->add(CpcomproPeer :: APRCOM, 'S');
-    	}
-    }
-    $this->sql2="";
-    $this->c->add(CpcomproPeer :: STACOM, 'N', Criteria :: NOT_EQUAL);
-    //   $this->c->addAscendingOrderByColumn(CpcomproPeer::REFCOM);
+		$a = new Criteria();
+		$dato = CadefartPeer :: doSelectOne($a);
+		if ($dato) {
+			if ($dato->getComreqapr() == 'S') {
+				$this->c->add(CpcomproPeer :: APRCOM, 'S');
+			}
+		}
+		$this->c->add(CpcomproPeer :: STACOM, $this->sql, Criteria :: CUSTOM);
 
     $this->columnas = array (
       CpcomproPeer :: TIPCOM => 'Tipo',

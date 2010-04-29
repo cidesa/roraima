@@ -1233,7 +1233,20 @@ class OrdendePago
     {
       if ($datos->getStaprc()=='A')
       {
-        if ($datos->getMonprc()> $datos->getSalcau())
+      	  $SQL = "Select Sum(MonCau) as moncau from cpimpprc where refprc='".$codigo."'";
+          if (Herramientas::BuscarDatos($SQL,&$reg))
+          {
+            $montocausado= $reg[0]['moncau'];
+          }
+
+          $SQL1 = "Select Sum(monimp - monaju) as monprc from cpimpprc where refprc='".$codigo."'";
+          if (Herramientas::BuscarDatos($SQL1,&$reg2))
+          {
+            $montoprc= $reg2[0]['monprc'];
+          }
+
+
+        if ($montoprc > $montocausado)
         {
           $dateFormat = new sfDateFormat('es_VE');
           $fec1 = $dateFormat->format($fec, 'i', $dateFormat->getInputPattern('d'));
@@ -1307,13 +1320,13 @@ class OrdendePago
             $montocausado= $reg[0]['moncau'];
           }
 
-          $SQL1 = "Select Sum(monaju) as monaju from cpimpcom where refcom='".$codigo."'";
+          $SQL1 = "Select Sum(monimp-monaju) as moncom from cpimpcom where refcom='".$codigo."'";
           if (Herramientas::BuscarDatos($SQL1,&$reg2))
           {
-            $montoajustado= $reg2[0]['monaju'];
+            $montocom= $reg2[0]['moncom'];
           }
 
-          if (($datos->getMoncom()) > ($montocausado+$montoajustado))
+          if ($montocom > $montocausado)
           {
             $dateFormat = new sfDateFormat('es_VE');
             $fec2 = $dateFormat->format($fec, 'i', $dateFormat->getInputPattern('d'));
@@ -1389,13 +1402,13 @@ class OrdendePago
             $montocausado= $reg[0]['moncau'];
           }
 
-          $SQL1 = "Select Sum(monaju) as monaju from cpimpcom where refcom='".$codigo."'";
+          $SQL1 = "Select Sum(monimp-monaju) as moncom from cpimpcom where refcom='".$codigo."'";
           if (Herramientas::BuscarDatos($SQL1,&$reg2))
           {
-            $montoajustado= $reg2[0]['monaju'];
+            $montocom= $reg2[0]['moncom'];
           }
 
-          if (($datos->getMoncom()) > ($montocausado+$montoajustado))
+          if (($montocom) > ($montocausado))
           {
             $dateFormat = new sfDateFormat('es_VE');
             $fec2 = $dateFormat->format($fec, 'i', $dateFormat->getInputPattern('d'));

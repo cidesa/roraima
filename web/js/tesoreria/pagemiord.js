@@ -247,7 +247,7 @@
     var num4=toFloat(causa);
     var num5=toFloat(id);
     var num6=toFloat(ajusta);
-    var calculo= num6 - num4;
+    var calculo= num6;
 
     if (num5>calculo)
     {
