@@ -1427,7 +1427,7 @@ $this->Bitacora('Guardo');
     $col2->setEsGrabable(true);
     $col2->setAlineacionContenido(Columna::DERECHA);
     $col2->setAlineacionObjeto(Columna::DERECHA);
-    $col2->setNombreCampo('monimp');
+    $col2->setNombreCampo('monimpaju');
     $col2->setEsNumerico(true);
     $col2->setJScript('onKeypress="entermonto_c(event,this.id)"');
     $col2->setHTML('type="text" size="15" readonly=true');
