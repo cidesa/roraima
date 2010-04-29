@@ -224,6 +224,7 @@ class OrdendePago
         {
           $c = new Criteria();
           $c->add(OpretordPeer::NUMORD,$x[$j]['numord']);
+          $c->add(OpretordPeer::CODPRE,$x[$j]['codpre']);
           $c->add(OpretordPeer::CODTIP,$fondos->getCodtip());
           $numero= OpretordPeer::doSelectOne($c);
           if ($numero)
