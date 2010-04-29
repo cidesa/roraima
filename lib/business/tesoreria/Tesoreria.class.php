@@ -2493,7 +2493,7 @@ public static function validarCuentasGrid($grid)
     $resul= TsmovlibPeer::doSelectOne($c);
     if ($resul){
 
-    $reftra=$reflib;
+    $reftra="A".substr($reflib,1,7);
     $confcorcom=sfContext::getInstance()->getUser()->getAttribute('confcorcom');
     if ($confcorcom=='N')
     {

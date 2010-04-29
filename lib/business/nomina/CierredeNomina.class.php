@@ -268,8 +268,8 @@ class CierredeNomina
  {
 //Para Conceptos que no estan asociados a Categorias Especiales
   $sql1="Insert into Nphiscon    (codnom,codemp, codcar, codcon, fecnom, monto, codcat, codpar, codescuela, codniv, codtipgas, nomcon, numrec, cantidad, fecnomdes, especial, fecnomespdes, fecnomesphas,
-			     codnomesp, nomnomesp )
-  		(SELECT A.CodNom,A.CodEmp,A.CodCar,A.CodCon,A.FecNom,A.Saldo,categoriaemp(A.CodNom,A.CodEmp,A.CodCar,A.CodCon),partidaconcepto(A.CodCon,A.CodNom,A.CodCar),'',D.CodNiv,B.CODTIPGAS,C.NOMCON,A.NUMREC,A.CANTIDAD,A.FECNOMDES,A.ESPECIAL,A.FECNOMESPDES,A.FECNOMESPHAS,'',''
+			     codnomesp, nomnomesp, codban )
+  		(SELECT A.CodNom,A.CodEmp,A.CodCar,A.CodCon,A.FecNom,A.Saldo,categoriaemp(A.CodNom,A.CodEmp,A.CodCar,A.CodCon),partidaconcepto(A.CodCon,A.CodNom,A.CodCar),'',D.CodNiv,B.CODTIPGAS,C.NOMCON,A.NUMREC,A.CANTIDAD,A.FECNOMDES,A.ESPECIAL,A.FECNOMESPDES,A.FECNOMESPHAS,'','',(CASE when D.CodTipPag='01' then D.Codban else D.Codemp end) as codigobancario
    FROM NPNOMCAL A,NPASICAREMP B,NPDEFCPT C,NPHOJINT D
    WHERE A.CODNOM='".$codnomina."' AND A.ESPECIAL='N' AND
    A.SALDO>0 AND A.CODEMP=B.CODEMP AND
@@ -283,7 +283,7 @@ class CierredeNomina
 
 //Para Conceptos que estan asociados a Categorias Especiales
   $sql2="Insert into Nphiscon  (codnom,codemp, codcar, codcon, fecnom, monto, codcat, codpar, codescuela, codniv, codtipgas, nomcon, numrec, cantidad, fecnomdes, especial, fecnomespdes, fecnomesphas,
-			     codnomesp, nomnomesp )   (SELECT A.CodNom,A.CodEmp,A.CodCar,A.CodCon,A.FecNom,A.Saldo,categoriaemp(A.CodNom,A.CodEmp,A.CodCar,A.CodCon),partidaconcepto(A.CodCon,A.CodNom,A.CodCar),'',D.CodNiv,B.CODTIPGAS,C.NOMCON,A.NUMREC,A.CANTIDAD,A.FECNOMDES,A.ESPECIAL,A.FECNOMESPDES,A.FECNOMESPHAS,'',''
+			     codnomesp, nomnomesp, codban )   (SELECT A.CodNom,A.CodEmp,A.CodCar,A.CodCon,A.FecNom,A.Saldo,categoriaemp(A.CodNom,A.CodEmp,A.CodCar,A.CodCon),partidaconcepto(A.CodCon,A.CodNom,A.CodCar),'',D.CodNiv,B.CODTIPGAS,C.NOMCON,A.NUMREC,A.CANTIDAD,A.FECNOMDES,A.ESPECIAL,A.FECNOMESPDES,A.FECNOMESPHAS,'','',(CASE when D.CodTipPag='01' then D.Codban else D.Codemp end) as codigobancario
      FROM NPNOMCAL A,NPASICAREMP B,NPDEFCPT C,NPHOJINT D,NPCONCEPTOSCATEGORIA E
        WHERE A.CODNOM='".$codnomina."' AND A.ESPECIAL='N' AND
        A.SALDO>0 AND A.CODEMP=B.CODEMP AND
@@ -296,7 +296,7 @@ class CierredeNomina
 
  //Para Conceptos que estan asociados a Categorias Especiales
  $sql3="Insert into Nphiscon (codnom,codemp, codcar, codcon, fecnom, monto, codcat, codpar, codescuela, codniv, codtipgas, nomcon, numrec, cantidad, fecnomdes, especial, fecnomespdes, fecnomesphas,
-			     codnomesp, nomnomesp ) (SELECT A.CodNom,A.CodEmp,A.CodCar,A.CodCon,A.FecNom,A.Saldo,categoriaemp(A.CodNom,A.CodEmp,A.CodCar,A.CodCon),partidaconcepto(A.CodCon,A.CodNom,A.CodCar),'',D.CodNiv,B.CODTIPGAS,C.NOMCON,A.NUMREC,A.CANTIDAD,A.FECNOMDES,A.ESPECIAL, A.FECNOMESPDES,A.FECNOMESPHAS,'',''
+			     codnomesp, nomnomesp, codban ) (SELECT A.CodNom,A.CodEmp,A.CodCar,A.CodCon,A.FecNom,A.Saldo,categoriaemp(A.CodNom,A.CodEmp,A.CodCar,A.CodCon),partidaconcepto(A.CodCon,A.CodNom,A.CodCar),'',D.CodNiv,B.CODTIPGAS,C.NOMCON,A.NUMREC,A.CANTIDAD,A.FECNOMDES,A.ESPECIAL, A.FECNOMESPDES,A.FECNOMESPHAS,'','',(CASE when D.CodTipPag='01' then D.Codban else D.Codemp end) as codigobancario
      FROM NPNOMCAL A,NPASICAREMP B,NPDEFCPT C,NPHOJINT D,NPASICATCONEMP E
        WHERE A.CODNOM='".$codnomina."' AND A.ESPECIAL='N' AND
        A.SALDO>0 AND A.CODEMP=B.CODEMP AND
