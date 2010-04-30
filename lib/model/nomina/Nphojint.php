@@ -23,6 +23,7 @@ class Nphojint extends BaseNphojint
   private $incapacidades ='';
   protected $ultsue="0.00";
   protected $edaact=0;
+  protected $grid=array();
 
   public function getCodnom()
   {
