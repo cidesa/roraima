@@ -7163,4 +7163,32 @@ propel:
       required: true
       primaryKey: true
       autoIncrement: true
-      description: Identificador Único del registro                
+      description: Identificador Único del registro
+  npfalperemp:
+    codemp:                #codigo empleaado
+      type: VARCHAR
+      size: 16
+      required: true
+    fecini:                #Fecha de Inicio
+      type: DATE
+      required: true
+    fecret:                #Fecha de Retorno
+      type: DATE
+      required: true
+    horas:                 #Fecha de Retorno
+      type: NUMERIC
+      size: 3
+    codmot:                #Motivo
+      type: VARCHAR
+      size: 4
+    observ:                #Observacion
+      type: VARCHAR
+      size: 1000
+    feccon:                #Fecha de Consignacion Soporte
+      type: DATE
+    ivss:                  #Ivss
+      type: BOOLEAN
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
