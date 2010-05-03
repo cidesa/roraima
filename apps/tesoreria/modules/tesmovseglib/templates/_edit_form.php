@@ -446,12 +446,16 @@ $mod=false;
 function reflib(v)
 {
   var mod='<? print $mod;?>';
+  var genco='<?php echo $gencorrel?>';
   if (mod)
   {
   	valor=v;
   	valor=valor.pad(8, '0',0);
   	document.getElementById('tsmovlib_reflib').value=valor;
-  	//document.getElementById('tsmovlib_numcom').value= document.getElementById('tsmovlib_reflib').value;
+  	if (genco!='S') {
+            document.getElementById('tsmovlib_numcom').value= document.getElementById('tsmovlib_reflib').value;
+            document.getElementById('tsmovlib_numcom').readOnly=true;
+        }
 
   }
 }
@@ -459,7 +463,8 @@ function reflib(v)
  function fecmov(v)
 {
   var mod='<? print $mod;?>';
-  if (mod)
+  var deshab='<?php echo $bloqfec; ?>';
+  if (mod && deshab!="S")
   {
   	document.getElementById('tsmovlib_feccom').value= document.getElementById('tsmovlib_feclib').value;
   	$('tsmovlib_tipmov').focus();
