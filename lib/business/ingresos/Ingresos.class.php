@@ -653,7 +653,7 @@ public static function buscar_comprobante($cireging,$accion,$fecanu){
 
     	$confcorcom=sfContext::getInstance()->getUser()->getAttribute('confcorcom');
         if ($confcorcom=='N')
-         $numcom2=$cireging->getRefing();
+         $numcom2="A".substr($cireging->getRefing(),1,7);
         else $numcom2 = Comprobante::Buscar_Correlativo();
       $tcontabc= new Contabc();
 
