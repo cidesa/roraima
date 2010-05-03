@@ -1255,6 +1255,7 @@ $this->Bitacora('Guardo');
           $tsmovlibA->setReflib($reflib2);
           $tsmovlibA->setRefpag($refpag);
           $tsmovlibA->setFeclib($fec);
+          $tsmovlibA->setFecing(date('Y-m-d'));
           if ($afecta=='C')
           {
             $tsmovlibA->setTipmov('ANUC');
@@ -1399,6 +1400,7 @@ $this->Bitacora('Guardo');
           $tsmovlibA->setReflib($reflib2);
           $tsmovlibA->setRefpag($refpag);
           $tsmovlibA->setFeclib($fec);
+          $tsmovlibA->setFecing(date('Y-m-d'));
           if ($afecta=='C')
           {
             $tsmovlibA->setTipmov('ANUC');
