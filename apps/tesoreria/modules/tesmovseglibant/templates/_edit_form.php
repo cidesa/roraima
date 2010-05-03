@@ -208,5 +208,12 @@
     $$('.botoncat')[0].disabled=true;
   	$$('.botoncat')[1].disabled=true;
   }
+
+  var deshab='<?php echo $bloqfec; ?>';
+    if (deshab=='S')
+    {
+    	$('trigger_tsmovlib_fecing').hide();
+    	$('tsmovlib_fecing').readOnly=true;
+    }
 </script>
 
