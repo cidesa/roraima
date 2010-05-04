@@ -104,7 +104,8 @@ class almaprsolegrActions extends autoalmaprsolegrActions
   
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -135,7 +136,12 @@ class almaprsolegrActions extends autoalmaprsolegrActions
 				  $r->add(CasolartPeer::REQART,$x[$i]->getReqart());
 				  $solegreso= CasolartPeer::doSelectOne($r);
 				  if ($solegreso){
-			  	    SolicituddeEgresos::verificarDispGenComp($solegreso,&$msj1,&$cod1,&$msj2,&$cod2,&$cod3);
+			  	    SolicituddeEgresos::verificarDispGenComp($solegreso,&$msj1,&$cod1,&$msj2,&$cod2,&$cod3,&$msj3);
+				    if ($msj3!=-1)
+                                    {
+                                     $this->coderr=142;
+                                       break;
+                                    }
 					if ($msj1!=-1)
 					{
 				       $this->coderr=152; $this->sol=$x[$i]->getReqart(); $this->art=$cod1; $this->codp=$cod3;
@@ -206,6 +212,8 @@ class almaprsolegrActions extends autoalmaprsolegrActions
         $err = Herramientas::obtenerMensajeError($this->coderr);
 		if ($this->coderr==152)
         $this->getRequest()->setError('',$err. ' Solicitud N°: '.$this->sol.' Articulo: '.$this->art.' Códido Presup: '.$this->codp);
+        elseif ($this->coderr==142)
+           $this->getRequest()->setError('',$err);
         else $this->getRequest()->setError('',$err.' '.$this->rec);
       }
     }

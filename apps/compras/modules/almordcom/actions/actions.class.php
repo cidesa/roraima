@@ -24,7 +24,8 @@ class almordcomActions extends autoalmordcomActions
   
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -398,7 +399,8 @@ class almordcomActions extends autoalmordcomActions
 
     $this->caordcom = $this->getCaordcomOrCreate();
     $this->updateCaordcomFromRequest();
-	Orden_compra::verificarDispComprometer($this->caordcom,&$error1,&$cod1,&$error2);
+	Orden_compra::verificarDispComprometer($this->caordcom,&$error1,&$cod1,&$error2,&$error3);
+      if ($error3==-1) {
 	if ($error1==-1)
 	{
 		if ($error2==-1)
@@ -416,6 +418,7 @@ class almordcomActions extends autoalmordcomActions
 		  $msj="No hay disponibilidad para los Recargos";
 		}
 	}else $msj="No hay disponibilidad para el siguiente Código presupuestario: ".$cod1;    
+      }else $msj="La Fecha no se encuentra dentro de un Perido Abierto.";
 
     $javascript="alert('".$msj."')";
     $output = '[["javascript","'.$javascript.'",""]]';

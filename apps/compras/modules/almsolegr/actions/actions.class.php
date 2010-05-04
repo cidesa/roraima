@@ -34,7 +34,8 @@ class almsolegrActions extends autoalmsolegrActions
 
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -1387,7 +1388,8 @@ class almsolegrActions extends autoalmsolegrActions
   public function executeGenerarcompromiso()
   {
      $this->casolart = $this->getCasolartOrCreate();
-      SolicituddeEgresos::verificarDispGenComp($this->casolart,&$msj1,&$cod1,&$msj2,&$cod2,&$cod3);
+      SolicituddeEgresos::verificarDispGenComp($this->casolart,&$msj1,&$cod1,&$msj2,&$cod2,&$cod3,&$msj3);
+     if ($msj3==-1) {
       if ($msj1==-1)
       {
       	if ($msj2==-1) {
@@ -1414,6 +1416,11 @@ class almsolegrActions extends autoalmsolegrActions
       	$this->msj=" No Existe Disponibilidad de Dinero para efectuar la Operación. Articulo ".$cod1." de Codigo Presupuestario". $cod3;
         $this->id=$this->casolart->getId();
       }
+     }else {
+        $this->msj="La Fecha se encuentra dentro un Período Cerrado";
+        $this->id=$this->casolart->getId();
+
+   }
    }
 
    public function executeAnular()

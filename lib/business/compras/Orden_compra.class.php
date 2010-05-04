@@ -2928,12 +2928,20 @@ class Orden_compra
   	return $total;
   }
   
-  public static function verificarDispComprometer($caordcom,&$error1,&$cod1,&$error2)
+  public static function verificarDispComprometer($caordcom,&$error1,&$cod1,&$error2,&$error3)
   {
     $hay_disponibilidad=false;
   	$error1=-1;
   	$error2=-1;	
+        $error3=-1;
 	$cod1="";
+        $fec=split('-',$caordcom->getFecord());
+        $feccom=$fec[2].'/'.$fec[1].'/'.$fec[0];
+      if (!Herramientas::validarPeriodoPresuesto($feccom))
+      {
+        $error3=151;
+        return false;
+      }
   	if ($caordcom->AfectaDisponibilidad())
 	{
 		$l= new Criteria();
@@ -2979,6 +2987,7 @@ class Orden_compra
 			}
 		}
 	}
+
   }
   
   
