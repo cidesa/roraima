@@ -85,7 +85,7 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 			(case when B.PERDES=B.PERDES then 'PRESTACIONES DE ANTIGUEDAD 'else 'PRESTACIONES DE ANTIGUEDAD '||B.PERDES||' - '||B.PERHAS end),B.CODPAR
 			HAVING
 			SUM(A.VALART108)<>0
-			
+
 			Union All
 			select 1 as orden,
 			SUM(0) as DIAS,
@@ -112,7 +112,7 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 			GROUP BY B.CODPAR
 			HAVING
 			SUM(A.VALART108)<>0
-			
+
 
 			Union All
 			select 2 as orden,
@@ -151,7 +151,7 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 			Group By B.CODPAR
 			HAVING
 			SUM(A.VALART108)<>0
-			
+
 			Union All
 			SELECT 3 as orden,
 			SUM(0) as DIAS,
@@ -168,73 +168,81 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 			GROUP BY (case when B.PERDES=B.PERHAS then 'INTERESES SOBRE PREST. SOCIALES ART. 108 '||B.PERDES else 'INTERESES SOBRE PREST. SOCIALES ART. 108 '||B.PERDES||' - '||B.PERHAS end ),B.CODPAR
 			HAVING
 			SUM(A.INTDEV)<>0
-			
+
 			UNION ALL
 			select 4 as orden,
 			A.DIASBONO as DIAS,
 			(A.MONTOINCI/30*A.DIASBONO) AS MONTO,
 			'BONO VACACIONAL FRACCIONADO AÑO '||A.PERINI||'-'||A.PERFIN AS DESCRIPCION,
 			B.CODPAR AS PARTIDA
-			From NPVACLIQUIDACION A,NPDEFPRELIQ B,CONTABA C
+			From NPVACLIQUIDACION A,NPDEFPRELIQ B,CONTABA C,NPHOJINT D
 			WHERE
 			A.CODEMP='$codemp' AND
 			A.DIASBONO>0 AND
 			B.CODNOM='$codnom' AND
 			B.CODCON='004' AND
+                        A.CODEMP=D.CODEMP AND
 			A.PERINI>=B.PERDES AND
 			A.PERINI<=B.PERHAS AND
-			A.PERINI=TO_CHAR(C.FECINI,'YYYY') AND             
+			(CASE WHEN TO_DATE(TO_CHAR(D.FECING,'DD/MM/'||A.PERFIN),'DD/MM/YYYY')<=D.FECRET  THEN A.PERINI
+                         ELSE A.PERFIN END)=TO_CHAR(C.FECINI,'YYYY') AND
 			(A.MONTOINCI/30*A.DIASBONO)<>0
-			
-			UNION ALL            
+
+			UNION ALL
 			select 4 as orden,
 			A.DIASBONO as DIAS,
 			(A.MONTOINCI/30*A.DIASBONO) AS MONTO,
 			'BONO VACACIONAL VENCIDO AÑO '||A.PERINI||'-'||A.PERFIN AS DESCRIPCION,
 			B.CODPAR AS PARTIDA
-			From NPVACLIQUIDACION A,NPDEFPRELIQ B,CONTABA C
+			From NPVACLIQUIDACION A,NPDEFPRELIQ B,CONTABA C,NPHOJINT D
 			WHERE
 			A.CODEMP='$codemp' AND
 			A.DIASBONO>0 AND
 			B.CODNOM='$codnom' AND
 			B.CODCON='004' AND
+                        A.CODEMP=D.CODEMP AND
 			A.PERINI>=B.PERDES AND
 			A.PERINI<=B.PERHAS AND
-			            A.PERINI<>TO_CHAR(C.FECINI,'YYYY') AND             
-			(A.MONTOINCI/30*A.DIASBONO)<>0            
-			            
-			UNION ALL            
+			(CASE WHEN TO_DATE(TO_CHAR(D.FECING,'DD/MM/'||A.PERFIN),'DD/MM/YYYY')<=D.FECRET  THEN A.PERINI
+                         ELSE A.PERFIN END)<>TO_CHAR(C.FECINI,'YYYY') AND
+			(A.MONTOINCI/30*A.DIASBONO)<>0
+
+			UNION ALL
 			select 5 as orden,
 			A.DIADIS as DIAS,(A.ULTSUE/30*A.DIADIS) AS MONTO,
 			'VACACIONES FRACCIONADAS '||A.PERINI||'-'||A.PERFIN AS DESCRIPCION,
 			B.CODPAR AS PARTIDA
-			From NPVACLIQUIDACION A,NPDEFPRELIQ B,CONTABA C
+			From NPVACLIQUIDACION A,NPDEFPRELIQ B,CONTABA C, NPHOJINT D
 			WHERE
 			A.CODEMP='$codemp' AND
 			A.DIADIS<>0 AND
 			B.CODNOM='$codnom' AND
 			B.CODCON='003' AND
+                        A.CODEMP=D.CODEMP AND
 			A.PERINI>=B.PERDES AND
 			A.PERINI<=B.PERHAS AND
-			            A.PERINI=TO_CHAR(C.FECINI,'YYYY') AND 
+			(CASE WHEN TO_DATE(TO_CHAR(D.FECING,'DD/MM/'||A.PERFIN),'DD/MM/YYYY')<=D.FECRET  THEN A.PERINI
+                         ELSE A.PERFIN END)=TO_CHAR(C.FECINI,'YYYY') AND
 			(A.ULTSUE/30*A.DIADIS)<>0
-			
+
 			UNION ALL
 			select 5 as orden,
 			A.DIADIS as DIAS,(A.ULTSUE/30*A.DIADIS) AS MONTO,
 			'VACACIONES VENCIDAS '||A.PERINI||'-'||A.PERFIN AS DESCRIPCION,
 			B.CODPAR AS PARTIDA
-			From NPVACLIQUIDACION A,NPDEFPRELIQ B,CONTABA C
+			From NPVACLIQUIDACION A,NPDEFPRELIQ B,CONTABA C, NPHOJINT D
 			WHERE
 			A.CODEMP='$codemp' AND
 			A.DIADIS<>0 AND
 			B.CODNOM='$codnom' AND
 			B.CODCON='003' AND
+                        A.CODEMP=D.CODEMP AND
 			A.PERFIN>=B.PERDES AND
 			A.PERFIN<=B.PERHAS AND
-			A.PERINI<>TO_CHAR(C.FECINI,'YYYY') AND 
-			(A.ULTSUE/30*A.DIADIS)<>0      
-			      
+			(CASE WHEN TO_DATE(TO_CHAR(D.FECING,'DD/MM/'||A.PERFIN),'DD/MM/YYYY')<=D.FECRET  THEN A.PERINI
+                         ELSE A.PERFIN END)<>TO_CHAR(C.FECINI,'YYYY') AND
+			(A.ULTSUE/30*A.DIADIS)<>0
+
 			UNION All
 			SELECT 1 as orden,
 			SUM(0) as DIAS,
@@ -251,7 +259,7 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 			GROUP BY A.FECANT,B.CODPAR
 			HAVING
 			SUM(A.MONANT)<>0
-			
+
 			Union All
 			SELECT 2 as orden,
 			SUM(0) as DIAS,
@@ -323,8 +331,8 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 					   $perdeduc[$j]['codcon']='AUT';
 					   $perdeduc[$j]['dias']=$arr[$cont]['dias'];
 					   $perdeduc[$j]['id']=9;
-					   $j++;	
-				  }			  	   
+					   $j++;
+				  }
 			  }
 			  $cont++;
 			}
