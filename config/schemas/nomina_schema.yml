@@ -2659,7 +2659,7 @@ propel:
       scale: 2
     codniv:
       type: VARCHAR
-      size: 16
+      size: 32
     codnom:
       type: VARCHAR
       size: 3
