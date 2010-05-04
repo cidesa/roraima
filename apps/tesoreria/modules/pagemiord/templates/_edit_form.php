@@ -883,7 +883,7 @@ function num(e) {
 
  function generar()
  {
-   var y=totalregistros('ax',2,50);
+   var y=totalregistros('ax',2,100);
   if ($('opordpag_cedrif').value=="" || $('opordpag_ctapag').value=="" || y<=0)
   {
     alert('Verique si introdujo los Datos del Beneficiario, el Código Contable y las Imputaciones Presupuestarias, para luego generar el comprobante');
