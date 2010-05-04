@@ -1107,7 +1107,7 @@ $this->Bitacora('Guardo');
     $col3->setAlineacionObjeto(Columna::CENTRO);
     $col3->setAlineacionContenido(Columna::CENTRO);
     $col3->setNombreCampo('observ');
-    $col3->setHTML('type="text" size="30" readonly="true"');
+    $col3->setHTML('type="text" size="30" ');
 
     $opciones->addColumna($col1);
     $opciones->addColumna($col2);
