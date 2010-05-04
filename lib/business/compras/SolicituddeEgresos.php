@@ -1555,13 +1555,14 @@ class SolicituddeEgresos
     return $montodisponible;
   }
 
-   public static function verificarDispGenComp($solegreso,&$msjuno,&$codi1,&$msjdos,&$codi2,&$codi3)
+   public static function verificarDispGenComp($solegreso,&$msjuno,&$codi1,&$msjdos,&$codi2,&$codi3,&$msjtres)
    {
     $ultimochequeo=true;
     $sobregiro=false;
     $sobregirorecargo=false;
     $msjuno=-1; $codi1="";
     $msjdos=-1; $codi2="";
+    $msjtres=-1;
     $j=0;
     $c= new Criteria();
     $regis= CadefartPeer::doSelectOne($c);
@@ -1569,7 +1570,13 @@ class SolicituddeEgresos
     {
       $tiporec= $regis->getAsiparrec();
     }
-
+    $fec=split('-',$solegreso->getFecreq());
+    $fecprc=$fec[2].'/'.$fec[1].'/'.$fec[0];
+    if (!Herramientas::validarPeriodoPresuesto($fecprc))
+    {
+      $msjtres=142;
+      return false;
+    }
 
     $l= new Criteria();
     $l->add(CaartsolPeer::REQART,$solegreso->getReqart());
