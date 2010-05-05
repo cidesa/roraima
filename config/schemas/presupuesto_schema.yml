@@ -1113,6 +1113,10 @@ propel:
     stapre:
       type: VARCHAR
       size: 1
+    portra:
+      type: NUMERIC
+      size: 14
+      scale: 2
     id:
       type: INTEGER
       required: true

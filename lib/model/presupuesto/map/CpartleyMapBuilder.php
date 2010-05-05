@@ -46,6 +46,8 @@ class CpartleyMapBuilder {
 
 		$tMap->addColumn('STAPRE', 'Stapre', 'string', CreoleTypes::VARCHAR, false, 1);
 
+		$tMap->addColumn('PORTRA', 'Portra', 'double', CreoleTypes::NUMERIC, false, 14);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

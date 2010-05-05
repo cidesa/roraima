@@ -33,6 +33,10 @@ abstract class BaseCpartley extends BaseObject  implements Persistent {
 
 
 	
+	protected $portra;
+
+
+
 	protected $id;
 
 	
@@ -96,6 +100,14 @@ abstract class BaseCpartley extends BaseObject  implements Persistent {
 
   }
   
+  public function getPortra($val=false)
+  {
+
+    if($val) return number_format($this->portra,2,',','.');
+    else return $this->portra;
+
+  }
+
   public function getId()
   {
 
@@ -163,6 +175,16 @@ abstract class BaseCpartley extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setPortra($v)
+	{
+
+    if ($this->portra !== $v) {
+        $this->portra = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpartleyPeer::PORTRA;
+      }
+
+	}
+
 	public function setId($v)
 	{
 
@@ -189,7 +211,9 @@ abstract class BaseCpartley extends BaseObject  implements Persistent {
 
       $this->stapre = $rs->getString($startcol + 5);
 
-      $this->id = $rs->getInt($startcol + 6);
+      $this->portra = $rs->getFloat($startcol + 6);
+
+      $this->id = $rs->getInt($startcol + 7);
 
       $this->resetModified();
 
@@ -197,7 +221,7 @@ abstract class BaseCpartley extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 7; 
+            return $startcol + 8;
     } catch (Exception $e) {
       throw new PropelException("Error populating Cpartley object", $e);
     }
@@ -395,6 +419,9 @@ abstract class BaseCpartley extends BaseObject  implements Persistent {
 				return $this->getStapre();
 				break;
 			case 6:
+				return $this->getPortra();
+				break;
+			case 7:
 				return $this->getId();
 				break;
 			default:
@@ -413,7 +440,8 @@ abstract class BaseCpartley extends BaseObject  implements Persistent {
 			$keys[3] => $this->getStacon(),
 			$keys[4] => $this->getStagob(),
 			$keys[5] => $this->getStapre(),
-			$keys[6] => $this->getId(),
+			$keys[6] => $this->getPortra(),
+			$keys[7] => $this->getId(),
 		);
 		return $result;
 	}
@@ -448,6 +476,9 @@ abstract class BaseCpartley extends BaseObject  implements Persistent {
 				$this->setStapre($value);
 				break;
 			case 6:
+				$this->setPortra($value);
+				break;
+			case 7:
 				$this->setId($value);
 				break;
 		} 	}
@@ -463,7 +494,8 @@ abstract class BaseCpartley extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[3], $arr)) $this->setStacon($arr[$keys[3]]);
 		if (array_key_exists($keys[4], $arr)) $this->setStagob($arr[$keys[4]]);
 		if (array_key_exists($keys[5], $arr)) $this->setStapre($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setId($arr[$keys[6]]);
+		if (array_key_exists($keys[6], $arr)) $this->setPortra($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setId($arr[$keys[7]]);
 	}
 
 	
@@ -477,6 +509,7 @@ abstract class BaseCpartley extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CpartleyPeer::STACON)) $criteria->add(CpartleyPeer::STACON, $this->stacon);
 		if ($this->isColumnModified(CpartleyPeer::STAGOB)) $criteria->add(CpartleyPeer::STAGOB, $this->stagob);
 		if ($this->isColumnModified(CpartleyPeer::STAPRE)) $criteria->add(CpartleyPeer::STAPRE, $this->stapre);
+		if ($this->isColumnModified(CpartleyPeer::PORTRA)) $criteria->add(CpartleyPeer::PORTRA, $this->portra);
 		if ($this->isColumnModified(CpartleyPeer::ID)) $criteria->add(CpartleyPeer::ID, $this->id);
 
 		return $criteria;
@@ -519,6 +552,8 @@ abstract class BaseCpartley extends BaseObject  implements Persistent {
 		$copyObj->setStagob($this->stagob);
 
 		$copyObj->setStapre($this->stapre);
+
+		$copyObj->setPortra($this->portra);
 
 
 		if ($deepCopy) {
