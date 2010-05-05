@@ -259,6 +259,18 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 			GROUP BY A.FECANT,B.CODPAR
 			HAVING
 			SUM(A.MONANT)<>0
+                        UNION All
+			SELECT 1 as orden,
+			SUM(0) as DIAS,
+			SUM(A.ANTACU)*-1 AS MONTO,
+			'ANTICIPO DE PRESTACIONES SOCIALES  ' AS DESCRIPCION,
+			B.CODPAR AS PARTIDA
+			From Nphojint A,NPDEFPRELIQ B
+			WHERE
+			A.CODEMP='$codemp' AND
+			B.CODNOM='$codnom' AND
+			B.CODCON='000'
+                        group by b.codpar
 
 			Union All
 			SELECT 2 as orden,
