@@ -13,7 +13,7 @@ abstract class BaseCpartleyPeer {
 	const CLASS_DEFAULT = 'lib.model.presupuesto.Cpartley';
 
 	
-	const NUM_COLUMNS = 7;
+	const NUM_COLUMNS = 8;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -38,6 +38,9 @@ abstract class BaseCpartleyPeer {
 	const STAPRE = 'cpartley.STAPRE';
 
 	
+	const PORTRA = 'cpartley.PORTRA';
+
+
 	const ID = 'cpartley.ID';
 
 	
@@ -46,18 +49,18 @@ abstract class BaseCpartleyPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codart', 'Desart', 'Nomabr', 'Stacon', 'Stagob', 'Stapre', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (CpartleyPeer::CODART, CpartleyPeer::DESART, CpartleyPeer::NOMABR, CpartleyPeer::STACON, CpartleyPeer::STAGOB, CpartleyPeer::STAPRE, CpartleyPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codart', 'desart', 'nomabr', 'stacon', 'stagob', 'stapre', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
+		BasePeer::TYPE_PHPNAME => array ('Codart', 'Desart', 'Nomabr', 'Stacon', 'Stagob', 'Stapre', 'Portra', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (CpartleyPeer::CODART, CpartleyPeer::DESART, CpartleyPeer::NOMABR, CpartleyPeer::STACON, CpartleyPeer::STAGOB, CpartleyPeer::STAPRE, CpartleyPeer::PORTRA, CpartleyPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codart', 'desart', 'nomabr', 'stacon', 'stagob', 'stapre', 'portra', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codart' => 0, 'Desart' => 1, 'Nomabr' => 2, 'Stacon' => 3, 'Stagob' => 4, 'Stapre' => 5, 'Id' => 6, ),
-		BasePeer::TYPE_COLNAME => array (CpartleyPeer::CODART => 0, CpartleyPeer::DESART => 1, CpartleyPeer::NOMABR => 2, CpartleyPeer::STACON => 3, CpartleyPeer::STAGOB => 4, CpartleyPeer::STAPRE => 5, CpartleyPeer::ID => 6, ),
-		BasePeer::TYPE_FIELDNAME => array ('codart' => 0, 'desart' => 1, 'nomabr' => 2, 'stacon' => 3, 'stagob' => 4, 'stapre' => 5, 'id' => 6, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
+		BasePeer::TYPE_PHPNAME => array ('Codart' => 0, 'Desart' => 1, 'Nomabr' => 2, 'Stacon' => 3, 'Stagob' => 4, 'Stapre' => 5, 'Portra' => 6, 'Id' => 7, ),
+		BasePeer::TYPE_COLNAME => array (CpartleyPeer::CODART => 0, CpartleyPeer::DESART => 1, CpartleyPeer::NOMABR => 2, CpartleyPeer::STACON => 3, CpartleyPeer::STAGOB => 4, CpartleyPeer::STAPRE => 5, CpartleyPeer::PORTRA => 6, CpartleyPeer::ID => 7, ),
+		BasePeer::TYPE_FIELDNAME => array ('codart' => 0, 'desart' => 1, 'nomabr' => 2, 'stacon' => 3, 'stagob' => 4, 'stapre' => 5, 'portra' => 6, 'id' => 7, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
 	);
 
 	
@@ -122,6 +125,8 @@ abstract class BaseCpartleyPeer {
 		$criteria->addSelectColumn(CpartleyPeer::STAGOB);
 
 		$criteria->addSelectColumn(CpartleyPeer::STAPRE);
+
+		$criteria->addSelectColumn(CpartleyPeer::PORTRA);
 
 		$criteria->addSelectColumn(CpartleyPeer::ID);
 
