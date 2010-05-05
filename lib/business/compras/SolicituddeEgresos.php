@@ -689,7 +689,7 @@ class SolicituddeEgresos
        $recargo2=$e[$k]->getMonrgo2();
       if ($e[$k]->getCheck()=='1')
       {
-        if ($recargo2>0)
+        if ($recargo2>0 && $recargo2!=$recargo)
         {
           $monto=$recargo - $recargo2;
         }else { $monto=$recargo;}
@@ -941,6 +941,7 @@ class SolicituddeEgresos
       $z=0;
       $gridunidad=array();
       $procede=true;
+      $montodos=0;
       while (($z<count($arrTotRec)) && ($procede==true))
       {
         $montouno=$arrTotRec[$z]['monrgo'];
@@ -960,6 +961,14 @@ class SolicituddeEgresos
         if ($montouno > $montodos)
         {
          $elmonto=$montouno - $montodos;
+         if (!self::chequearDisponibilidadRecargo($arrTotRec[$z]['codrgo'],$elmonto,$tiporec,$grid,$gridunidad,&$sobregirorecargo))
+         {
+           $procede=false;
+           $msjdos=114; $codi2=$arrTotRec[$z]['codrgo'];
+           break;
+         }else { $msjdos=-1; $codi2="";}
+        }else {
+         $elmonto=$montouno;
          if (!self::chequearDisponibilidadRecargo($arrTotRec[$z]['codrgo'],$elmonto,$tiporec,$grid,$gridunidad,&$sobregirorecargo))
          {
            $procede=false;
@@ -1000,7 +1009,7 @@ class SolicituddeEgresos
       $j++;
     }
 
-   if (!self::UltimoChequeo($solegreso,$grid,$grid2,$id,$tiporec,&$msjuno,&$codi1,&$msjdos,&$codi2))
+   if (!self::ultimoChequeo($solegreso,$grid,$grid2,$id,$tiporec,&$msjuno,&$codi1,&$msjdos,&$codi2))
       {
         $msj2=$msjuno;  $cod2=$codi1; $msj3=$msjdos; $cod3=$codi2;
       }else { $msj2=-1; $cod2=""; $msj3=-1; $cod3="";}
@@ -1334,6 +1343,7 @@ class SolicituddeEgresos
       $z=0;
       $gridunidad=array();
       $procede=true;
+      $montodos=0;
       while (($z<count($arrTotRec)) && ($procede==true))
       {
         $montouno=$arrTotRec[$z]['monrgo'];
@@ -1359,6 +1369,14 @@ class SolicituddeEgresos
            $msjdos=114; $codi2=$arrTotRec[$z]['codrgo'];
            break;
          }else { $msjdos=-1; $codi2="";}
+        }else {
+            $elmonto=$montouno;
+             if (!self::chequearDisponibilidadRecargo2($arrTotRec[$z]['codrgo'],$elmonto,$tiporec,$grid,$gridunidad,&$sobregirorecargo))
+             {
+               $procede=false;
+               $msjdos=114; $codi2=$arrTotRec[$z]['codrgo'];
+               break;
+             }else { $msjdos=-1; $codi2="";}
         }
         $z++;
       }
@@ -1657,6 +1675,7 @@ class SolicituddeEgresos
       $z=0;
       $gridunidad=array();
       $procede=true;
+      $montodos=0;
       while (($z<count($arrTotRec)) && ($procede==true))
       {
         $montouno=$arrTotRec[$z]['monrgo'];
@@ -1676,6 +1695,14 @@ class SolicituddeEgresos
         if ($montouno > $montodos)
         {
          $elmonto=$montouno - $montodos;
+         if (!self::chequearDisponibilidadRecargo3($arrTotRec[$z]['codrgo'],$elmonto,$tiporec,$objetos,$gridunidad,&$sobregirorecargo))
+         {
+           $procede=false;
+           $msjdos=114; $codi2=$arrTotRec[$z]['codrgo'];
+           break;
+         }else { $msjdos=-1; $codi2="";}
+        }else {
+          $elmonto=$montouno;
          if (!self::chequearDisponibilidadRecargo3($arrTotRec[$z]['codrgo'],$elmonto,$tiporec,$objetos,$gridunidad,&$sobregirorecargo))
          {
            $procede=false;
@@ -1853,7 +1880,7 @@ class SolicituddeEgresos
        $recargo2=$obj1->getMonrgo2();
       if ($obj1->getCheck()=='1')
       {
-        if ($recargo2>0)
+        if ($recargo2>0 && $recargo2!=$recargo)
         {
           $monto=$recargo - $recargo2;
         }else { $monto=$recargo;}
