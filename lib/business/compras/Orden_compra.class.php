@@ -1566,9 +1566,10 @@ class Orden_compra
 		  $caordcom_mod->setExpsigecof($caordcom->getExpsigecof());
           $caordcom_mod->setDesord($caordcom->getDesord());
           $caordcom_mod->setNotord($caordcom->getNotord());
-          $caordcom_mod->save();
 
         if ($caordcom_mod->getCompro()=='N') {
+         $caordcom_mod->setMonord($caordcom->getMonord());
+          $caordcom_mod->save();
         // campos
         $total_detalle_orden=$arreglo_campos[0];
         $total_descuento=$arreglo_campos[1];
@@ -1584,7 +1585,7 @@ class Orden_compra
         self::Grabar_grid_entregas($caordcom,$grid_detalle_entrega_objetos);//grabo en el grid entrega
         self::grabarDistribucionRgo($caordcom,$grid_detalle_orden_arreglos);
         self::grabarRecargo($caordcom);
-        }
+        }else  { $caordcom_mod->save(); }
 
       }
       return false;
