@@ -1,3 +1,4 @@
 ../configurations/databases.yml:
   class:    cidesaDatabaseConfigHandler
-  
+config/databases.yml:
+  class:    cidesaDatabaseConfigHandler
