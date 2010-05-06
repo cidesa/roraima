@@ -48,7 +48,7 @@ class Caartord extends BaseCaartord
       $this->canrecgri= self::getCanord() - self::getCanaju() - self::getCanrec();
       $this->canfal=0.0;
       $this->montot = ($this->canrecgri * self::getPreart()) -  self::getDtoart() +  self::getRgoart();
-      $calculo= self::getCanord() * self::getPreart();
+      $calculo= self::getTotart() - self::getRgoart() + self::getDtoart();
       $this->cancost=number_format($calculo,2,',','.');
       $this->datosrecargo="";
       $c= new Criteria();
