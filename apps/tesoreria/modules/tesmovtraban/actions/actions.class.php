@@ -222,6 +222,7 @@ $this->Bitacora('Guardo');
 		   }
 		   }
  	   Tesoreria :: Salvartesmovtraban($tsmovtra, $tsmovtra2['tipmovdesd'], $tsmovtra2['tipmovhast'],$this->comprobaut);
+           $this->getUser()->getAttributeHolder()->remove('grabo',$this->getUser()->getAttribute('formulario'));
 
    }//if ($modifica=="N")
 	}
@@ -333,7 +334,8 @@ $this->Bitacora('Guardo');
   
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
