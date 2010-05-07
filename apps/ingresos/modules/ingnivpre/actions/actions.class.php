@@ -314,16 +314,17 @@ class ingnivpreActions extends autoingnivpreActions
   $this->incmes=12/$numper;
   $this->contador=1;
   $per=new Cipereje();
-  $this->per1=array();
+  $per1=array();
     $j=0;
 
   while ($i<=$numper){
   //print $fecha.$incmes.$fecfinal.$numper.$contador;
        $datos=Ingresos::generarperiodos($fecha,$this->incmes,$fecfinal,$numper,$this->contador);
-     $this->per1[$j]["pereje"]=$datos[0];
-     $this->per1[$j]["fecdes"]=$datos[1];
-     $this->per1[$j]["fechas"]=$datos[2];
-     $this->per1[$j]["id"]='9';
+     $per1[$j]["pereje"]=$datos[0];
+     $per1[$j]["fecdes"]=$datos[1];
+     $per1[$j]["fechas"]=$datos[2];
+     $per1[$j]["id"]='9';
+     $this->per1 = $per1;
      $this->contador=$this->contador+1;
      $fec=substr($datos[2],6,4)."-".substr($datos[2],3,2)."-".substr($datos[2],0,2);
      $fech=H::dateAdd('d',1,$fec,'+');
@@ -359,7 +360,8 @@ class ingnivpreActions extends autoingnivpreActions
   
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
