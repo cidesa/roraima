@@ -120,6 +120,8 @@ class OpdefempMapBuilder {
 
 		$tMap->addColumn('ORDCRE', 'Ordcre', 'string', CreoleTypes::VARCHAR, false, 4);
 
+		$tMap->addColumn('MONCHE', 'Monche', 'double', CreoleTypes::NUMERIC, false, 14);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

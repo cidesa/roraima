@@ -17,6 +17,7 @@ class Bnreginm extends BaseBnreginm
 {
 	protected $codcla='';
 	protected $descla='';
+	protected $etifeccal="";
 	
 	public function hydrate(ResultSet $rs, $startcol = 1)
     {
@@ -50,5 +51,28 @@ class Bnreginm extends BaseBnreginm
 	    $des = $this->getValini()+ $this->getValadis();
 	    return $des;
 	  }
+
+  public function getEtifeccal()
+  {
+
+    $dato="";
+    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('bienes',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['bienes']))
+	     if(array_key_exists('bieregactinmd',$varemp['aplicacion']['bienes']['modulos'])){
+	       if(array_key_exists('etifeccal',$varemp['aplicacion']['bienes']['modulos']['bieregactinmd']))
+	       {
+	       	$dato=$varemp['aplicacion']['bienes']['modulos']['bieregactinmd']['etifeccal'];
+}
+         }
+     return $dato;
+  }
+
+  public function setEtifeccal()
+  {
+  	return $this->etifeccal;
+  }
 
 }

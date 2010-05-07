@@ -69,7 +69,7 @@ class tesrencajchiActions extends autotesrencajchiActions
    */
   public function configGrid()
   {
-    $this->configGridSalida($this->opordpag->getFecdes(),$this->opordpag->getFechas());
+    $this->configGridSalida();
     $this->configGridDetalle($this->opordpag->getNumord());
   }
 
@@ -80,23 +80,17 @@ class tesrencajchiActions extends autotesrencajchiActions
    * los datos del grid.
    *
    */
-  public function configGridSalida($fechades='', $fechahas='')
+  public function configGridSalida($fechades='', $fechahas='', $codcaj='')
   {
-    if ($fechades=='') { $fechades=date('Y-m-d');}
-    else {
-    	$dateFormat = new sfDateFormat('es_VE');
-        $fechades = $dateFormat->format($fechades, 'i', $dateFormat->getInputPattern('d'));
-    }
-    if ($fechahas=='') { $fechahas=date('Y-m-d'); }
-    else {
-    	$dateFormat = new sfDateFormat('es_VE');
-        $fechahas = $dateFormat->format($fechahas, 'i', $dateFormat->getInputPattern('d'));
-    }
-    $sql="tssalcaj.fecsal>='".$fechades."'  and tssalcaj.fecsal<='".$fechahas."'";
+    if ($fechades=='')  $fechades=date('Y-m-d');
+    if ($fechahas=='') $fechahas=date('Y-m-d');
+
+    $sql="tssalcaj.fecsal>=to_date('".$fechades."','yyyy-mm-dd')  and tssalcaj.fecsal<= to_date('".$fechahas."','yyyy-mm-dd')";
 
     $a= new Criteria();
     $a->add(TssalcajPeer::FECSAL,$sql,Criteria::CUSTOM);
     $a->add(TssalcajPeer::STASAL,'P');
+    $a->add(TssalcajPeer::CODCAJ,$codcaj);
     $det= TssalcajPeer::doSelect($a);
 
     $this->filsal=count($det);
@@ -230,14 +224,14 @@ class tesrencajchiActions extends autotesrencajchiActions
         $javascript="";
         $arredes=split('/',$this->getRequestParameter('fecdes'));
         $arrehas=split('/',$codigo);
-        $fechades=$this->getRequestParameter('fecdes'); //$arredes[2]."-".$arredes[1]."-".$arredes[0];
-        $fechahas=$codigo; //$arrehas[2]."-".$arrehas[1]."-".$arrehas[0];
+        $fechades=$arredes[2]."-".$arredes[1]."-".$arredes[0];
+        $fechahas=$arrehas[2]."-".$arrehas[1]."-".$arrehas[0];
 
         $this->params=array();
         $this->labels = $this->getLabels();
         $this->opordpag = $this->getOpordpagOrCreate();
         $this->setVars();        
-        $this->configGridSalida($fechades,$fechahas);
+        $this->configGridSalida($fechades,$fechahas,$this->getRequestParameter('codcajchi'));
         $filsal=$this->filsal;
         $output = '[["javascript","'.$javascript.'",""],["opordpag_filassal","'.$filsal.'",""],["","",""]]';        
         $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
@@ -256,7 +250,8 @@ class tesrencajchiActions extends autotesrencajchiActions
   
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */

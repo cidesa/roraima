@@ -162,6 +162,10 @@ class OpordpagMapBuilder {
 
 		$tMap->addColumn('CODCAJCHI', 'Codcajchi', 'string', CreoleTypes::VARCHAR, false, 3);
 
+		$tMap->addColumn('NUMCTA', 'Numcta', 'string', CreoleTypes::VARCHAR, false, 20);
+
+		$tMap->addColumn('TIPDOC', 'Tipdoc', 'string', CreoleTypes::VARCHAR, false, 4);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

@@ -13,7 +13,7 @@ abstract class BaseTsdefbanPeer {
 	const CLASS_DEFAULT = 'lib.model.Tsdefban';
 
 	
-	const NUM_COLUMNS = 35;
+	const NUM_COLUMNS = 36;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -122,6 +122,9 @@ abstract class BaseTsdefbanPeer {
 	const ENDOSABLE = 'tsdefban.ENDOSABLE';
 
 	
+	const SALMIN = 'tsdefban.SALMIN';
+
+
 	const ID = 'tsdefban.ID';
 
 	
@@ -130,18 +133,18 @@ abstract class BaseTsdefbanPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Numcue', 'Nomcue', 'Tipcue', 'Codcta', 'Fecreg', 'Fecven', 'Fecper', 'Renaut', 'Porint', 'Tipint', 'Numche', 'Antban', 'Debban', 'Creban', 'Antlib', 'Deblib', 'Crelib', 'Valche', 'Concil', 'Plazo', 'Fecape', 'Usocue', 'Tipren', 'Desenl', 'Porsalmin', 'Monsalmin', 'Codctaprecoo', 'Codctapreord', 'Trasitoria', 'Salact', 'Fecaper', 'Temnumcue', 'Cantdig', 'Endosable', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (TsdefbanPeer::NUMCUE, TsdefbanPeer::NOMCUE, TsdefbanPeer::TIPCUE, TsdefbanPeer::CODCTA, TsdefbanPeer::FECREG, TsdefbanPeer::FECVEN, TsdefbanPeer::FECPER, TsdefbanPeer::RENAUT, TsdefbanPeer::PORINT, TsdefbanPeer::TIPINT, TsdefbanPeer::NUMCHE, TsdefbanPeer::ANTBAN, TsdefbanPeer::DEBBAN, TsdefbanPeer::CREBAN, TsdefbanPeer::ANTLIB, TsdefbanPeer::DEBLIB, TsdefbanPeer::CRELIB, TsdefbanPeer::VALCHE, TsdefbanPeer::CONCIL, TsdefbanPeer::PLAZO, TsdefbanPeer::FECAPE, TsdefbanPeer::USOCUE, TsdefbanPeer::TIPREN, TsdefbanPeer::DESENL, TsdefbanPeer::PORSALMIN, TsdefbanPeer::MONSALMIN, TsdefbanPeer::CODCTAPRECOO, TsdefbanPeer::CODCTAPREORD, TsdefbanPeer::TRASITORIA, TsdefbanPeer::SALACT, TsdefbanPeer::FECAPER, TsdefbanPeer::TEMNUMCUE, TsdefbanPeer::CANTDIG, TsdefbanPeer::ENDOSABLE, TsdefbanPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('numcue', 'nomcue', 'tipcue', 'codcta', 'fecreg', 'fecven', 'fecper', 'renaut', 'porint', 'tipint', 'numche', 'antban', 'debban', 'creban', 'antlib', 'deblib', 'crelib', 'valche', 'concil', 'plazo', 'fecape', 'usocue', 'tipren', 'desenl', 'porsalmin', 'monsalmin', 'codctaprecoo', 'codctapreord', 'trasitoria', 'salact', 'fecaper', 'temnumcue', 'cantdig', 'endosable', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, )
+		BasePeer::TYPE_PHPNAME => array ('Numcue', 'Nomcue', 'Tipcue', 'Codcta', 'Fecreg', 'Fecven', 'Fecper', 'Renaut', 'Porint', 'Tipint', 'Numche', 'Antban', 'Debban', 'Creban', 'Antlib', 'Deblib', 'Crelib', 'Valche', 'Concil', 'Plazo', 'Fecape', 'Usocue', 'Tipren', 'Desenl', 'Porsalmin', 'Monsalmin', 'Codctaprecoo', 'Codctapreord', 'Trasitoria', 'Salact', 'Fecaper', 'Temnumcue', 'Cantdig', 'Endosable', 'Salmin', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (TsdefbanPeer::NUMCUE, TsdefbanPeer::NOMCUE, TsdefbanPeer::TIPCUE, TsdefbanPeer::CODCTA, TsdefbanPeer::FECREG, TsdefbanPeer::FECVEN, TsdefbanPeer::FECPER, TsdefbanPeer::RENAUT, TsdefbanPeer::PORINT, TsdefbanPeer::TIPINT, TsdefbanPeer::NUMCHE, TsdefbanPeer::ANTBAN, TsdefbanPeer::DEBBAN, TsdefbanPeer::CREBAN, TsdefbanPeer::ANTLIB, TsdefbanPeer::DEBLIB, TsdefbanPeer::CRELIB, TsdefbanPeer::VALCHE, TsdefbanPeer::CONCIL, TsdefbanPeer::PLAZO, TsdefbanPeer::FECAPE, TsdefbanPeer::USOCUE, TsdefbanPeer::TIPREN, TsdefbanPeer::DESENL, TsdefbanPeer::PORSALMIN, TsdefbanPeer::MONSALMIN, TsdefbanPeer::CODCTAPRECOO, TsdefbanPeer::CODCTAPREORD, TsdefbanPeer::TRASITORIA, TsdefbanPeer::SALACT, TsdefbanPeer::FECAPER, TsdefbanPeer::TEMNUMCUE, TsdefbanPeer::CANTDIG, TsdefbanPeer::ENDOSABLE, TsdefbanPeer::SALMIN, TsdefbanPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('numcue', 'nomcue', 'tipcue', 'codcta', 'fecreg', 'fecven', 'fecper', 'renaut', 'porint', 'tipint', 'numche', 'antban', 'debban', 'creban', 'antlib', 'deblib', 'crelib', 'valche', 'concil', 'plazo', 'fecape', 'usocue', 'tipren', 'desenl', 'porsalmin', 'monsalmin', 'codctaprecoo', 'codctapreord', 'trasitoria', 'salact', 'fecaper', 'temnumcue', 'cantdig', 'endosable', 'salmin', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Numcue' => 0, 'Nomcue' => 1, 'Tipcue' => 2, 'Codcta' => 3, 'Fecreg' => 4, 'Fecven' => 5, 'Fecper' => 6, 'Renaut' => 7, 'Porint' => 8, 'Tipint' => 9, 'Numche' => 10, 'Antban' => 11, 'Debban' => 12, 'Creban' => 13, 'Antlib' => 14, 'Deblib' => 15, 'Crelib' => 16, 'Valche' => 17, 'Concil' => 18, 'Plazo' => 19, 'Fecape' => 20, 'Usocue' => 21, 'Tipren' => 22, 'Desenl' => 23, 'Porsalmin' => 24, 'Monsalmin' => 25, 'Codctaprecoo' => 26, 'Codctapreord' => 27, 'Trasitoria' => 28, 'Salact' => 29, 'Fecaper' => 30, 'Temnumcue' => 31, 'Cantdig' => 32, 'Endosable' => 33, 'Id' => 34, ),
-		BasePeer::TYPE_COLNAME => array (TsdefbanPeer::NUMCUE => 0, TsdefbanPeer::NOMCUE => 1, TsdefbanPeer::TIPCUE => 2, TsdefbanPeer::CODCTA => 3, TsdefbanPeer::FECREG => 4, TsdefbanPeer::FECVEN => 5, TsdefbanPeer::FECPER => 6, TsdefbanPeer::RENAUT => 7, TsdefbanPeer::PORINT => 8, TsdefbanPeer::TIPINT => 9, TsdefbanPeer::NUMCHE => 10, TsdefbanPeer::ANTBAN => 11, TsdefbanPeer::DEBBAN => 12, TsdefbanPeer::CREBAN => 13, TsdefbanPeer::ANTLIB => 14, TsdefbanPeer::DEBLIB => 15, TsdefbanPeer::CRELIB => 16, TsdefbanPeer::VALCHE => 17, TsdefbanPeer::CONCIL => 18, TsdefbanPeer::PLAZO => 19, TsdefbanPeer::FECAPE => 20, TsdefbanPeer::USOCUE => 21, TsdefbanPeer::TIPREN => 22, TsdefbanPeer::DESENL => 23, TsdefbanPeer::PORSALMIN => 24, TsdefbanPeer::MONSALMIN => 25, TsdefbanPeer::CODCTAPRECOO => 26, TsdefbanPeer::CODCTAPREORD => 27, TsdefbanPeer::TRASITORIA => 28, TsdefbanPeer::SALACT => 29, TsdefbanPeer::FECAPER => 30, TsdefbanPeer::TEMNUMCUE => 31, TsdefbanPeer::CANTDIG => 32, TsdefbanPeer::ENDOSABLE => 33, TsdefbanPeer::ID => 34, ),
-		BasePeer::TYPE_FIELDNAME => array ('numcue' => 0, 'nomcue' => 1, 'tipcue' => 2, 'codcta' => 3, 'fecreg' => 4, 'fecven' => 5, 'fecper' => 6, 'renaut' => 7, 'porint' => 8, 'tipint' => 9, 'numche' => 10, 'antban' => 11, 'debban' => 12, 'creban' => 13, 'antlib' => 14, 'deblib' => 15, 'crelib' => 16, 'valche' => 17, 'concil' => 18, 'plazo' => 19, 'fecape' => 20, 'usocue' => 21, 'tipren' => 22, 'desenl' => 23, 'porsalmin' => 24, 'monsalmin' => 25, 'codctaprecoo' => 26, 'codctapreord' => 27, 'trasitoria' => 28, 'salact' => 29, 'fecaper' => 30, 'temnumcue' => 31, 'cantdig' => 32, 'endosable' => 33, 'id' => 34, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, )
+		BasePeer::TYPE_PHPNAME => array ('Numcue' => 0, 'Nomcue' => 1, 'Tipcue' => 2, 'Codcta' => 3, 'Fecreg' => 4, 'Fecven' => 5, 'Fecper' => 6, 'Renaut' => 7, 'Porint' => 8, 'Tipint' => 9, 'Numche' => 10, 'Antban' => 11, 'Debban' => 12, 'Creban' => 13, 'Antlib' => 14, 'Deblib' => 15, 'Crelib' => 16, 'Valche' => 17, 'Concil' => 18, 'Plazo' => 19, 'Fecape' => 20, 'Usocue' => 21, 'Tipren' => 22, 'Desenl' => 23, 'Porsalmin' => 24, 'Monsalmin' => 25, 'Codctaprecoo' => 26, 'Codctapreord' => 27, 'Trasitoria' => 28, 'Salact' => 29, 'Fecaper' => 30, 'Temnumcue' => 31, 'Cantdig' => 32, 'Endosable' => 33, 'Salmin' => 34, 'Id' => 35, ),
+		BasePeer::TYPE_COLNAME => array (TsdefbanPeer::NUMCUE => 0, TsdefbanPeer::NOMCUE => 1, TsdefbanPeer::TIPCUE => 2, TsdefbanPeer::CODCTA => 3, TsdefbanPeer::FECREG => 4, TsdefbanPeer::FECVEN => 5, TsdefbanPeer::FECPER => 6, TsdefbanPeer::RENAUT => 7, TsdefbanPeer::PORINT => 8, TsdefbanPeer::TIPINT => 9, TsdefbanPeer::NUMCHE => 10, TsdefbanPeer::ANTBAN => 11, TsdefbanPeer::DEBBAN => 12, TsdefbanPeer::CREBAN => 13, TsdefbanPeer::ANTLIB => 14, TsdefbanPeer::DEBLIB => 15, TsdefbanPeer::CRELIB => 16, TsdefbanPeer::VALCHE => 17, TsdefbanPeer::CONCIL => 18, TsdefbanPeer::PLAZO => 19, TsdefbanPeer::FECAPE => 20, TsdefbanPeer::USOCUE => 21, TsdefbanPeer::TIPREN => 22, TsdefbanPeer::DESENL => 23, TsdefbanPeer::PORSALMIN => 24, TsdefbanPeer::MONSALMIN => 25, TsdefbanPeer::CODCTAPRECOO => 26, TsdefbanPeer::CODCTAPREORD => 27, TsdefbanPeer::TRASITORIA => 28, TsdefbanPeer::SALACT => 29, TsdefbanPeer::FECAPER => 30, TsdefbanPeer::TEMNUMCUE => 31, TsdefbanPeer::CANTDIG => 32, TsdefbanPeer::ENDOSABLE => 33, TsdefbanPeer::SALMIN => 34, TsdefbanPeer::ID => 35, ),
+		BasePeer::TYPE_FIELDNAME => array ('numcue' => 0, 'nomcue' => 1, 'tipcue' => 2, 'codcta' => 3, 'fecreg' => 4, 'fecven' => 5, 'fecper' => 6, 'renaut' => 7, 'porint' => 8, 'tipint' => 9, 'numche' => 10, 'antban' => 11, 'debban' => 12, 'creban' => 13, 'antlib' => 14, 'deblib' => 15, 'crelib' => 16, 'valche' => 17, 'concil' => 18, 'plazo' => 19, 'fecape' => 20, 'usocue' => 21, 'tipren' => 22, 'desenl' => 23, 'porsalmin' => 24, 'monsalmin' => 25, 'codctaprecoo' => 26, 'codctapreord' => 27, 'trasitoria' => 28, 'salact' => 29, 'fecaper' => 30, 'temnumcue' => 31, 'cantdig' => 32, 'endosable' => 33, 'salmin' => 34, 'id' => 35, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, )
 	);
 
 	
@@ -262,6 +265,8 @@ abstract class BaseTsdefbanPeer {
 		$criteria->addSelectColumn(TsdefbanPeer::CANTDIG);
 
 		$criteria->addSelectColumn(TsdefbanPeer::ENDOSABLE);
+
+		$criteria->addSelectColumn(TsdefbanPeer::SALMIN);
 
 		$criteria->addSelectColumn(TsdefbanPeer::ID);
 

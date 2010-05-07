@@ -180,8 +180,11 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<?php if ($bnreginm->getEtifeccal()=='S') {?>
+<strong><? echo __('Fecha de Recepción del Bien:  ') ?></strong>
+<?php } else {?>
 <strong><? echo __('Fecha Cálculo:  ') ?></strong>
-
+<?php }?>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
   <?php $value = object_input_date_tag($bnreginm, 'getFecreg', array (

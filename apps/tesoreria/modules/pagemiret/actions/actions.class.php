@@ -21,7 +21,8 @@ class pagemiretActions extends autopagemiretActions
   
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -406,6 +407,9 @@ $this->Bitacora('Guardo');
     	$sqlfechas = "";
     }
 
+    $sqlche = "";
+    $sqltabla = "";
+
     $c =  new Criteria();
     $datos = OpdefempPeer::doSelectOne($c);
     if($datos){
@@ -421,9 +425,18 @@ $this->Bitacora('Guardo');
     	$emichepag = "";
     }
 
+    $filordfac=H::getConfApp('filordfac', 'pagemiret', 'tesoreria');
+    if ($filordfac=='S')
+    {
+        $sqltabla = $sqltabla.", OPFACTUR D";
+        $sqlche = $sqlche." AND A.NUMORD = D.NUMORD";
+    }
+
     $SQL="SELECT 0 as check, A.NUMORD as numord,A.FECEMI as fecemi,B.CODPRE as codpre,B.MONRET as monret, nomben as nomben, 9 as id FROM OPORDPAG A,OPRETORD B".$sqltabla." WHERE A.NUMORD = B.NUMORD AND B.CODTIP = '".$codigo."' AND B.NUMRET = 'NOASIGNA' ".$sqlche.$sqlfecdes.$sqlfechas ." order by a.fecemi, a.numord";
 
     $resp = Herramientas::BuscarDatos($SQL,&$all);
+    $this->numfila=count($all);
+
     $opciones = new OpcionesGrid();
     $opciones->setEliminar(false);
     $opciones->setTabla('Opretord');

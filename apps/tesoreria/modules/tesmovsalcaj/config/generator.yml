@@ -11,6 +11,7 @@ generator:
       dessal: { name: Concepto, type: textarea_tag, params: size=80x5 maxlength=250 onkeyup="javascript:return ismaxlength(this)"}
       monsal: { name: Neto a Pagar}
       grid: { name: . }
+      codcaj: { name: Caja Chica }
     list:
       title:          Salidas de Caja
       display:        [=refsal, fecsal, cedrif]
@@ -23,7 +24,7 @@ generator:
     edit:
       title:          Edición de Salidas de Caja
       display:
-        "Datos del Recibo": [refsal, _fecsal, _cedrif]
+        "Datos del Recibo": [refsal, _fecsal, _cedrif, _codcaj]
         "Detalle del Pago": [dessal, _grid, monsal]
       hide: [ctapag, agregabenefi, numcue, tipdoc]
       actions:

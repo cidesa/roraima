@@ -26,6 +26,8 @@ class Tsdefban extends BaseTsdefban
         protected $debbandis=0;
         protected $crebandis=0;
         protected $tiedatrel="";
+    protected $mossalmin="";
+    protected $etiqueta="";
 
    public function __toString()
   {
@@ -197,5 +199,42 @@ class Tsdefban extends BaseTsdefban
   {
   	return $this->tiedatrel;
   }
+
+
+  public function getMossalmin()
+  {
+    $dato="";
+    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('tesoreria',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['tesoreria']))
+	     if(array_key_exists('tesdefcueban',$varemp['aplicacion']['tesoreria']['modulos'])){
+	       if(array_key_exists('mossalmin',$varemp['aplicacion']['tesoreria']['modulos']['tesdefcueban']))
+	       {
+	       	$dato=$varemp['aplicacion']['tesoreria']['modulos']['tesdefcueban']['mossalmin'];
+ }
+         }
+     return $dato;
+  }
+
+  public function setMossalmin()
+  {
+  	return $this->mossalmin;
+  }
+
+  public function getEtiqueta()
+  {
+  	if (H::toFloat(self::getSaltotlib()) < H::toFloat(self::getSalmin()))
+  	{
+  		$eti="EL SALDO ACTUAL EN LIBROS ES MENOR AL SALDO MÍNIMO DE LA CUENTA BANCARIA";
+  	}
+  	else
+  	{
+  	 $eti="";
+  	}
+  	return $eti;
+  }
+
 
  }

@@ -18,6 +18,8 @@ class Optipret extends BaseOptipret
   private $base = '';
   private $montorete = '';
   protected $tiedatrel="";
+  protected $limbaseret="";
+  private $monbasmin='';
 
   public function getDescta()
   {
@@ -178,4 +180,37 @@ class Optipret extends BaseOptipret
   {
   	return $this->tiedatrel;
   }
+
+  public function getLimbaseret()
+  {
+    $dato="";
+    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('tesoreria',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['tesoreria']))
+	     if(array_key_exists('pagtipret',$varemp['aplicacion']['tesoreria']['modulos'])){
+	       if(array_key_exists('limbaseret',$varemp['aplicacion']['tesoreria']['modulos']['pagtipret']))
+	       {
+	       	$dato=$varemp['aplicacion']['tesoreria']['modulos']['pagtipret']['limbaseret'];
+}
+         }
+     return $dato;
+  }
+
+  public function setLimbaseret()
+  {
+  	return $this->limbaseret;
+  }
+
+  public function setMonbasmin($val)
+  {
+      $this->monbasmin = $val;
+  }
+
+  public function getMonbasmin()
+  {
+      return $this->monbasmin;
+  }
+
 }

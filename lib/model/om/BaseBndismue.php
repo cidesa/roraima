@@ -69,6 +69,10 @@ abstract class BaseBndismue extends BaseObject  implements Persistent {
 
 
 	
+	protected $logusu;
+
+
+
 	protected $id;
 
 	
@@ -215,6 +219,13 @@ abstract class BaseBndismue extends BaseObject  implements Persistent {
 
   }
   
+  public function getLogusu()
+  {
+
+    return trim($this->logusu);
+
+  }
+
   public function getId()
   {
 
@@ -386,6 +397,16 @@ abstract class BaseBndismue extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setLogusu($v)
+	{
+
+    if ($this->logusu !== $v) {
+        $this->logusu = $v;
+        $this->modifiedColumns[] = BndismuePeer::LOGUSU;
+      }
+
+	}
+
 	public function setId($v)
 	{
 
@@ -430,7 +451,9 @@ abstract class BaseBndismue extends BaseObject  implements Persistent {
 
       $this->vidutil = $rs->getFloat($startcol + 14);
 
-      $this->id = $rs->getInt($startcol + 15);
+      $this->logusu = $rs->getString($startcol + 15);
+
+      $this->id = $rs->getInt($startcol + 16);
 
       $this->resetModified();
 
@@ -438,7 +461,7 @@ abstract class BaseBndismue extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 16; 
+            return $startcol + 17;
     } catch (Exception $e) {
       throw new PropelException("Error populating Bndismue object", $e);
     }
@@ -631,6 +654,9 @@ abstract class BaseBndismue extends BaseObject  implements Persistent {
 				return $this->getVidutil();
 				break;
 			case 15:
+				return $this->getLogusu();
+				break;
+			case 16:
 				return $this->getId();
 				break;
 			default:
@@ -658,7 +684,8 @@ abstract class BaseBndismue extends BaseObject  implements Persistent {
 			$keys[12] => $this->getStadismue(),
 			$keys[13] => $this->getCodmot(),
 			$keys[14] => $this->getVidutil(),
-			$keys[15] => $this->getId(),
+			$keys[15] => $this->getLogusu(),
+			$keys[16] => $this->getId(),
 		);
 		return $result;
 	}
@@ -720,6 +747,9 @@ abstract class BaseBndismue extends BaseObject  implements Persistent {
 				$this->setVidutil($value);
 				break;
 			case 15:
+				$this->setLogusu($value);
+				break;
+			case 16:
 				$this->setId($value);
 				break;
 		} 	}
@@ -744,7 +774,8 @@ abstract class BaseBndismue extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[12], $arr)) $this->setStadismue($arr[$keys[12]]);
 		if (array_key_exists($keys[13], $arr)) $this->setCodmot($arr[$keys[13]]);
 		if (array_key_exists($keys[14], $arr)) $this->setVidutil($arr[$keys[14]]);
-		if (array_key_exists($keys[15], $arr)) $this->setId($arr[$keys[15]]);
+		if (array_key_exists($keys[15], $arr)) $this->setLogusu($arr[$keys[15]]);
+		if (array_key_exists($keys[16], $arr)) $this->setId($arr[$keys[16]]);
 	}
 
 	
@@ -767,6 +798,7 @@ abstract class BaseBndismue extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(BndismuePeer::STADISMUE)) $criteria->add(BndismuePeer::STADISMUE, $this->stadismue);
 		if ($this->isColumnModified(BndismuePeer::CODMOT)) $criteria->add(BndismuePeer::CODMOT, $this->codmot);
 		if ($this->isColumnModified(BndismuePeer::VIDUTIL)) $criteria->add(BndismuePeer::VIDUTIL, $this->vidutil);
+		if ($this->isColumnModified(BndismuePeer::LOGUSU)) $criteria->add(BndismuePeer::LOGUSU, $this->logusu);
 		if ($this->isColumnModified(BndismuePeer::ID)) $criteria->add(BndismuePeer::ID, $this->id);
 
 		return $criteria;
@@ -827,6 +859,8 @@ abstract class BaseBndismue extends BaseObject  implements Persistent {
 		$copyObj->setCodmot($this->codmot);
 
 		$copyObj->setVidutil($this->vidutil);
+
+		$copyObj->setLogusu($this->logusu);
 
 
 		$copyObj->setNew(true);

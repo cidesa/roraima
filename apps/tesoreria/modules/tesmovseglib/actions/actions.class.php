@@ -1271,7 +1271,7 @@ $this->Bitacora('Guardo');
           $tsmovlibA->setFeccom($fec);
           $tsmovlibA->setStatus('C');
           $tsmovlibA->setStacon('C');
-          $tsmovlibA->setDeslib('Cheque Anulado');
+          $tsmovlibA->setDeslib('Movimiento Anulado');
           $tsmovlibA->setReflibpad($reflib);
           $tsmovlibA->setTipmovpad($tipmov);
           $tsmovlibA->save();

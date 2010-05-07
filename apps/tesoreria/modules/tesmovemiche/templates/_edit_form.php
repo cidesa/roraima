@@ -110,7 +110,7 @@
          'url'      => 'tesmovemiche/ajax',
          'script'   => true,
           'complete' => 'AjaxJSON(request, json)',
-          'with' => "'ajax=2&cajtexmos=tscheemi_nomben&cajtexcom=tscheemi_cedrif&mostrardato=S&operacion='+document.getElementById('tscheemi_operacion').value+'&tipdoc='+document.getElementById('tscheemi_tipdoc').value+'&fecemi='+document.getElementById('tscheemi_fecemi').value+'&cedrif='+this.value"
+          'with' => "'ajax=2&cajtexmos=tscheemi_nomben&cajtexcom=tscheemi_cedrif&mostrardato=S&operacion='+document.getElementById('tscheemi_operacion').value+'&tipdoc='+document.getElementById('tscheemi_tipdoc').value+'&numcue='+document.getElementById('tscheemi_numcue').value+'&fecemi='+document.getElementById('tscheemi_fecemi').value+'&cedrif='+this.value"
      ))),
      array('use_style' => 'true')
   )

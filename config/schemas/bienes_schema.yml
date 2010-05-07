@@ -496,6 +496,9 @@ propel:
     vidutil:
       type: NUMERIC
       size: 4
+    logusu:
+      type: VARCHAR
+      size: 50
     id:
       type: INTEGER
       required: true
@@ -1005,6 +1008,12 @@ propel:
     tippro:
       type: VARCHAR
       size: 4
+    logusu:
+      type: VARCHAR
+      size: 50
+    numord:
+      type: VARCHAR
+      size: 8
     id:
       type: INTEGER
       required: true

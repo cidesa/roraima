@@ -13,7 +13,7 @@ abstract class BaseTssalcajPeer {
 	const CLASS_DEFAULT = 'lib.model.Tssalcaj';
 
 	
-	const NUM_COLUMNS = 7;
+	const NUM_COLUMNS = 8;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -38,6 +38,9 @@ abstract class BaseTssalcajPeer {
 	const STASAL = 'tssalcaj.STASAL';
 
 	
+	const CODCAJ = 'tssalcaj.CODCAJ';
+
+
 	const ID = 'tssalcaj.ID';
 
 	
@@ -46,18 +49,18 @@ abstract class BaseTssalcajPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Refsal', 'Fecsal', 'Cedrif', 'Dessal', 'Monsal', 'Stasal', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (TssalcajPeer::REFSAL, TssalcajPeer::FECSAL, TssalcajPeer::CEDRIF, TssalcajPeer::DESSAL, TssalcajPeer::MONSAL, TssalcajPeer::STASAL, TssalcajPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('refsal', 'fecsal', 'cedrif', 'dessal', 'monsal', 'stasal', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
+		BasePeer::TYPE_PHPNAME => array ('Refsal', 'Fecsal', 'Cedrif', 'Dessal', 'Monsal', 'Stasal', 'Codcaj', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (TssalcajPeer::REFSAL, TssalcajPeer::FECSAL, TssalcajPeer::CEDRIF, TssalcajPeer::DESSAL, TssalcajPeer::MONSAL, TssalcajPeer::STASAL, TssalcajPeer::CODCAJ, TssalcajPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('refsal', 'fecsal', 'cedrif', 'dessal', 'monsal', 'stasal', 'codcaj', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Refsal' => 0, 'Fecsal' => 1, 'Cedrif' => 2, 'Dessal' => 3, 'Monsal' => 4, 'Stasal' => 5, 'Id' => 6, ),
-		BasePeer::TYPE_COLNAME => array (TssalcajPeer::REFSAL => 0, TssalcajPeer::FECSAL => 1, TssalcajPeer::CEDRIF => 2, TssalcajPeer::DESSAL => 3, TssalcajPeer::MONSAL => 4, TssalcajPeer::STASAL => 5, TssalcajPeer::ID => 6, ),
-		BasePeer::TYPE_FIELDNAME => array ('refsal' => 0, 'fecsal' => 1, 'cedrif' => 2, 'dessal' => 3, 'monsal' => 4, 'stasal' => 5, 'id' => 6, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
+		BasePeer::TYPE_PHPNAME => array ('Refsal' => 0, 'Fecsal' => 1, 'Cedrif' => 2, 'Dessal' => 3, 'Monsal' => 4, 'Stasal' => 5, 'Codcaj' => 6, 'Id' => 7, ),
+		BasePeer::TYPE_COLNAME => array (TssalcajPeer::REFSAL => 0, TssalcajPeer::FECSAL => 1, TssalcajPeer::CEDRIF => 2, TssalcajPeer::DESSAL => 3, TssalcajPeer::MONSAL => 4, TssalcajPeer::STASAL => 5, TssalcajPeer::CODCAJ => 6, TssalcajPeer::ID => 7, ),
+		BasePeer::TYPE_FIELDNAME => array ('refsal' => 0, 'fecsal' => 1, 'cedrif' => 2, 'dessal' => 3, 'monsal' => 4, 'stasal' => 5, 'codcaj' => 6, 'id' => 7, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
 	);
 
 	
@@ -122,6 +125,8 @@ abstract class BaseTssalcajPeer {
 		$criteria->addSelectColumn(TssalcajPeer::MONSAL);
 
 		$criteria->addSelectColumn(TssalcajPeer::STASAL);
+
+		$criteria->addSelectColumn(TssalcajPeer::CODCAJ);
 
 		$criteria->addSelectColumn(TssalcajPeer::ID);
 

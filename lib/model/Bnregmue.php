@@ -15,6 +15,9 @@
  */
 class Bnregmue extends BaseBnregmue
 {
+	protected $savenumord="";
+        protected $etifeccal="";
+
 	public function getNomprovee()
 	{
 		return Herramientas::getX('codpro','caprovee','nompro',trim(self::getCodpro()));
@@ -58,6 +61,52 @@ class Bnregmue extends BaseBnregmue
 	{
 	  return Herramientas::getX('CODPRO','Catippro','Despro',self::getTippro());
 	}
+
+  public function getSavenumord()
+  {
+
+    $dato="";
+    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('bienes',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['bienes']))
+	     if(array_key_exists('bieregactmued',$varemp['aplicacion']['bienes']['modulos'])){
+	       if(array_key_exists('savenumord',$varemp['aplicacion']['bienes']['modulos']['bieregactmued']))
+	       {
+	       	$dato=$varemp['aplicacion']['bienes']['modulos']['bieregactmued']['savenumord'];
+}
+         }
+     return $dato;
+  }
+
+  public function setSavenumord()
+  {
+  	return $this->savenumord;
+  }
+
+  public function getEtifeccal()
+  {
+
+    $dato="";
+    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('bienes',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['bienes']))
+	     if(array_key_exists('bieregactmued',$varemp['aplicacion']['bienes']['modulos'])){
+	       if(array_key_exists('etifeccal',$varemp['aplicacion']['bienes']['modulos']['bieregactmued']))
+	       {
+	       	$dato=$varemp['aplicacion']['bienes']['modulos']['bieregactmued']['etifeccal'];
+	       }
+         }
+     return $dato;
+  }
+
+  public function setEtifeccal()
+  {
+  	return $this->etifeccal;
+  }
 
 }
 

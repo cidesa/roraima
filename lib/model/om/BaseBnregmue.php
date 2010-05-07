@@ -229,6 +229,14 @@ abstract class BaseBnregmue extends BaseObject  implements Persistent {
 
 
 	
+	protected $logusu;
+
+
+
+	protected $numord;
+
+
+
 	protected $id;
 
 	
@@ -739,6 +747,20 @@ abstract class BaseBnregmue extends BaseObject  implements Persistent {
 
   }
   
+  public function getLogusu()
+  {
+
+    return trim($this->logusu);
+
+  }
+
+  public function getNumord()
+  {
+
+    return trim($this->numord);
+
+  }
+
   public function getId()
   {
 
@@ -1345,6 +1367,26 @@ abstract class BaseBnregmue extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setLogusu($v)
+	{
+
+    if ($this->logusu !== $v) {
+        $this->logusu = $v;
+        $this->modifiedColumns[] = BnregmuePeer::LOGUSU;
+      }
+
+	}
+
+	public function setNumord($v)
+	{
+
+    if ($this->numord !== $v) {
+        $this->numord = $v;
+        $this->modifiedColumns[] = BnregmuePeer::NUMORD;
+      }
+
+	}
+
 	public function setId($v)
 	{
 
@@ -1469,7 +1511,11 @@ abstract class BaseBnregmue extends BaseObject  implements Persistent {
 
       $this->tippro = $rs->getString($startcol + 54);
 
-      $this->id = $rs->getInt($startcol + 55);
+      $this->logusu = $rs->getString($startcol + 55);
+
+      $this->numord = $rs->getString($startcol + 56);
+
+      $this->id = $rs->getInt($startcol + 57);
 
       $this->resetModified();
 
@@ -1477,7 +1523,7 @@ abstract class BaseBnregmue extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 56; 
+            return $startcol + 58;
     } catch (Exception $e) {
       throw new PropelException("Error populating Bnregmue object", $e);
     }
@@ -1790,6 +1836,12 @@ abstract class BaseBnregmue extends BaseObject  implements Persistent {
 				return $this->getTippro();
 				break;
 			case 55:
+				return $this->getLogusu();
+				break;
+			case 56:
+				return $this->getNumord();
+				break;
+			case 57:
 				return $this->getId();
 				break;
 			default:
@@ -1857,7 +1909,9 @@ abstract class BaseBnregmue extends BaseObject  implements Persistent {
 			$keys[52] => $this->getCodresuso(),
 			$keys[53] => $this->getCodrespat(),
 			$keys[54] => $this->getTippro(),
-			$keys[55] => $this->getId(),
+			$keys[55] => $this->getLogusu(),
+			$keys[56] => $this->getNumord(),
+			$keys[57] => $this->getId(),
 		);
 		return $result;
 	}
@@ -2039,6 +2093,12 @@ abstract class BaseBnregmue extends BaseObject  implements Persistent {
 				$this->setTippro($value);
 				break;
 			case 55:
+				$this->setLogusu($value);
+				break;
+			case 56:
+				$this->setNumord($value);
+				break;
+			case 57:
 				$this->setId($value);
 				break;
 		} 	}
@@ -2103,7 +2163,9 @@ abstract class BaseBnregmue extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[52], $arr)) $this->setCodresuso($arr[$keys[52]]);
 		if (array_key_exists($keys[53], $arr)) $this->setCodrespat($arr[$keys[53]]);
 		if (array_key_exists($keys[54], $arr)) $this->setTippro($arr[$keys[54]]);
-		if (array_key_exists($keys[55], $arr)) $this->setId($arr[$keys[55]]);
+		if (array_key_exists($keys[55], $arr)) $this->setLogusu($arr[$keys[55]]);
+		if (array_key_exists($keys[56], $arr)) $this->setNumord($arr[$keys[56]]);
+		if (array_key_exists($keys[57], $arr)) $this->setId($arr[$keys[57]]);
 	}
 
 	
@@ -2166,6 +2228,8 @@ abstract class BaseBnregmue extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(BnregmuePeer::CODRESUSO)) $criteria->add(BnregmuePeer::CODRESUSO, $this->codresuso);
 		if ($this->isColumnModified(BnregmuePeer::CODRESPAT)) $criteria->add(BnregmuePeer::CODRESPAT, $this->codrespat);
 		if ($this->isColumnModified(BnregmuePeer::TIPPRO)) $criteria->add(BnregmuePeer::TIPPRO, $this->tippro);
+		if ($this->isColumnModified(BnregmuePeer::LOGUSU)) $criteria->add(BnregmuePeer::LOGUSU, $this->logusu);
+		if ($this->isColumnModified(BnregmuePeer::NUMORD)) $criteria->add(BnregmuePeer::NUMORD, $this->numord);
 		if ($this->isColumnModified(BnregmuePeer::ID)) $criteria->add(BnregmuePeer::ID, $this->id);
 
 		return $criteria;
@@ -2306,6 +2370,10 @@ abstract class BaseBnregmue extends BaseObject  implements Persistent {
 		$copyObj->setCodrespat($this->codrespat);
 
 		$copyObj->setTippro($this->tippro);
+
+		$copyObj->setLogusu($this->logusu);
+
+		$copyObj->setNumord($this->numord);
 
 
 		$copyObj->setNew(true);
