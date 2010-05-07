@@ -46,7 +46,7 @@ function convert_yml_schema($check_schema = true, $prefix = '')
     throw new Exception('You must create a schema.yml file.');
   }
 
-  $db_schema = new sfPropelDatabaseSchema();
+  $db_schema = new cidesaPropelDatabaseSchema();
   $ymls = array();
   foreach ($schemas as $schema)
   {
@@ -77,7 +77,7 @@ function _propel_cidesa_convert_yml_schema($check_schema = true, $prefix = '')
     throw new Exception('You must create a schema.yml file.');
   }
 
-  $db_schema = new sfPropelDatabaseSchema();
+  $db_schema = new cidesaPropelDatabaseSchema();
   foreach ($schemas as $schema)
   {
     $db_schema->loadYAML($schema);
@@ -115,7 +115,7 @@ function _propel_cidesa_convert_xml_schema($check_schema = true, $prefix = '')
     throw new Exception('You must create a schema.xml file.');
   }
 
-  $db_schema = new sfPropelDatabaseSchema();
+  $db_schema = new cidesaPropelDatabaseSchema();
   foreach ($schemas as $schema)
   {
     $db_schema->loadXML($schema);
@@ -241,7 +241,7 @@ function run_propel_check_database($task, $args)
   _propel_cidesa_build_schema($task,$args);
 
   pake_echo_action('check_database', 'Cargando Modelo de la Base de Datos');
-  $ymlsremoto = sfYaml::load('config/schema.yml');
+  $ymlsremoto = sfYamlNew::load('config/schema.yml');
   $ymlsremoto = $ymlsremoto['propel'];
   
   $checktablas = $ymlsremoto;
