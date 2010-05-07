@@ -570,6 +570,21 @@
   'onBlur' => "javascript:event.keyCode=13;return entermontootro(event, this.id)",
 )); echo $value ? $value : '&nbsp;' ?></div>
 
+<?php if ($opdefemp->getAprmonche()=='S') {?>
+<br>
+<?php echo label_for('opdefemp[monche]', __($labels['opdefemp{monche}']), 'class="required" Style="width:200px"') ?>
+<div class="content<?php if ($sf_request->hasError('opdefemp{monche}')): ?> form-error<?php endif; ?>">
+<?php if ($sf_request->hasError('opdefemp{monche}')): ?> <?php echo form_error('opdefemp{monche}', array('class' => 'form-error-msg')) ?>
+<?php endif; ?>
+
+  <?php $value = object_input_tag($opdefemp, array('getMonche',true), array (
+  'size' => 12,
+  'control_name' => 'opdefemp[monche]',
+  'onBlur' => "javascript:event.keyCode=13;return entermontootro(event, this.id)",
+)); echo $value ? $value : '&nbsp;' ?>
+ </div>
+<?php } ?>
+
 <br>
 
   <?php echo label_for('opdefemp[manbloqban]', __($labels['opdefemp{manbloqban}']), 'class="required" style="width:350px"') ?>

@@ -26,6 +26,41 @@ if ( $sf_user->getAttribute('tschemi_operacion','vacio')=='ordpag' )
 <fieldset id="sf_fieldset_none" class="">
 <legend><?php echo __('Ordenes de Pago')?></legend>
 <div class="form-row">
+<?php if ($tscheemi->getFilnumordfec()=='S') {?>
+  <?php echo label_for('numeroord', __("N° Orden de Pago"), 'class="required" ') ?>
+  <?php echo input_tag('tscheemi[numeroord]', $tscheemi->getNumeroord(), array (
+         'size' => 15,
+          'maxlength' => 8,
+          'onBlur'=> remote_function(array(
+            'update'   => 'divGrid',
+	        'url'      => 'tesmovemiche/ajax',
+	        'complete' => 'AjaxJSON(request, json)',
+	        'script'   => true,
+	        'condition' => "$('tscheemi_numeroord').value != ''",
+	        'with' => "'ajax=7&cajtexmos=tscheemi_numeroord&mostrardato=S&operacion='+document.getElementById('tscheemi_operacion').value+'&numord='+$('tscheemi_numeroord').value+'&tipdoc='+$('tscheemi_tipdoc').value+'&numcue='+document.getElementById('tscheemi_numcue').value+'&fecord='+$('tscheemi_fecord').value"
+	        ))
+          ))?>
+<br><br>
+
+  <?php echo label_for('fecord', __("Fecha de Emisión"), 'class="required" ') ?>
+  <?php echo input_date_tag('tscheemi[fecord]', $tscheemi->getFecord(), array (
+         'size' => 10,
+          'rich' => true,
+          'calendar_button_img' => '/sf/sf_admin/images/date.png',
+          'date_format' => 'date_format',
+          'maxlength' => 10,
+          'onkeyup' => "javascript: mascara(this,'/',patron,true)",
+          'onBlur'=> remote_function(array(
+            'update'   => 'divGrid',
+	        'url'      => 'tesmovemiche/ajax',
+	        'complete' => 'AjaxJSON(request, json)',
+	        'script'   => true,
+	        'condition' => "$('tscheemi_fecord').value != ''",
+	        'with' => "'ajax=7&cajtexmos=tscheemi_fecord&mostrardato=S&operacion='+document.getElementById('tscheemi_operacion').value+'&numord='+$('tscheemi_numeroord').value+'&tipdoc='+$('tscheemi_tipdoc').value+'&numcue='+document.getElementById('tscheemi_numcue').value+'&fecord='+this.value"
+	        ))
+          ))?>
+<br><br>
+<?php } ?>
 <?php if ($tscheemi->getTippagordpag()=='S') $val=true; else $val=false ?>
    <?php echo label_for('tipopagosop', __("Tipo de Pago(s)"), 'class="required" ') ?>
  <?php if ($bloqueaopc=="S")

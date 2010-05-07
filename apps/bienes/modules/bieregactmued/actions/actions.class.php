@@ -75,6 +75,7 @@ private static $coderror=-1;
         $cajtexmos_cuatro='';
         $dato4='';
       }      
+
       $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$cajtexmos_uno.'","'.$dato1.'",""],["'.$cajtexmos_dos.'","'.$dato2.'",""],["'.$cajtexmos_tres.'","'.$dato3.'",""],["'.$cajtexmos_cuatro.'","'.$dato4.'",""]]';
     }
     else
@@ -168,6 +169,21 @@ private static $coderror=-1;
     return sfView::HEADER_ONLY;
 
    }
+   elseif ($this->getRequestParameter('ajax')=='8')
+   {
+    $cajtexmos=$this->getRequestParameter('cajtexmos');
+    $cajtexcom=$this->getRequestParameter('cajtexcom');
+    $javascript="";
+    $c= new Criteria();
+    $c->add(OpordpagPeer::NUMORD,$this->getRequestParameter('codigo'));
+    $reg= OpordpagPeer::doSelectOne($c);
+    if (!$reg)
+      $javascript="alert('El Numero de Orden de Pago no existe'); $('$cajtexcom').value=''; ";
+
+    $output = '[["javascript","'.$javascript.'",""]]';
+    $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+    return sfView::HEADER_ONLY;
+  }
 
   }
 
@@ -569,6 +585,14 @@ private static $coderror=-1;
     {
       $this->bnregmue->setTippro($bnregmue['tippro']);
     }
+    if (isset($bnregmue['numord']))
+    {
+      $this->bnregmue->setNumord($bnregmue['numord']);
+  }
+    if (isset($bnregmue['savenumord']))
+    {
+      $this->bnregmue->setSavenumord($bnregmue['savenumord']);
+    }
   }
 
   public function setVars()
@@ -689,7 +713,8 @@ private static $coderror=-1;
   
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */

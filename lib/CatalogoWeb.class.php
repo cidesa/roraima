@@ -5907,6 +5907,16 @@ public function Catdefcatman_Cattramo($params = '') {
 		);
 	}
 
+	public function Opordpag_Bieregactmued() {
+		$this->c = new Criteria();
+		$this->columnas = array (
+			OpordpagPeer :: NUMORD => 'N° de Orden',
+			OpordpagPeer :: FECEMI => 'Fecha de Emisión',
+			OpordpagPeer :: DESORD => 'Descripción'
+
+		);
+	}
+
 }
 
 ?>

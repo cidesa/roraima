@@ -13,7 +13,7 @@ abstract class BaseOptipretPeer {
 	const CLASS_DEFAULT = 'lib.model.Optipret';
 
 	
-	const NUM_COLUMNS = 10;
+	const NUM_COLUMNS = 11;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -47,6 +47,9 @@ abstract class BaseOptipretPeer {
 	const CODTIPSEN = 'optipret.CODTIPSEN';
 
 	
+	const MBASMI = 'optipret.MBASMI';
+
+
 	const ID = 'optipret.ID';
 
 	
@@ -55,10 +58,10 @@ abstract class BaseOptipretPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codtip', 'Destip', 'Codcon', 'Basimp', 'Porret', 'Unitri', 'Porsus', 'Factor', 'Codtipsen', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (OptipretPeer::CODTIP, OptipretPeer::DESTIP, OptipretPeer::CODCON, OptipretPeer::BASIMP, OptipretPeer::PORRET, OptipretPeer::UNITRI, OptipretPeer::PORSUS, OptipretPeer::FACTOR, OptipretPeer::CODTIPSEN, OptipretPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codtip', 'destip', 'codcon', 'basimp', 'porret', 'unitri', 'porsus', 'factor', 'codtipsen', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
+		BasePeer::TYPE_PHPNAME => array ('Codtip', 'Destip', 'Codcon', 'Basimp', 'Porret', 'Unitri', 'Porsus', 'Factor', 'Codtipsen', 'Mbasmi', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (OptipretPeer::CODTIP, OptipretPeer::DESTIP, OptipretPeer::CODCON, OptipretPeer::BASIMP, OptipretPeer::PORRET, OptipretPeer::UNITRI, OptipretPeer::PORSUS, OptipretPeer::FACTOR, OptipretPeer::CODTIPSEN, OptipretPeer::MBASMI, OptipretPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codtip', 'destip', 'codcon', 'basimp', 'porret', 'unitri', 'porsus', 'factor', 'codtipsen', 'mbasmi', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
 	);
 
 	
@@ -137,6 +140,8 @@ abstract class BaseOptipretPeer {
 		$criteria->addSelectColumn(OptipretPeer::FACTOR);
 
 		$criteria->addSelectColumn(OptipretPeer::CODTIPSEN);
+
+		$criteria->addSelectColumn(OptipretPeer::MBASMI);
 
 		$criteria->addSelectColumn(OptipretPeer::ID);
 

@@ -46,6 +46,8 @@ class TssalcajMapBuilder {
 
 		$tMap->addColumn('STASAL', 'Stasal', 'string', CreoleTypes::VARCHAR, false, 1);
 
+		$tMap->addColumn('CODCAJ', 'Codcaj', 'string', CreoleTypes::VARCHAR, true, 3);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

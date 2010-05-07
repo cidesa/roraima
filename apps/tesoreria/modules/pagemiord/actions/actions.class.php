@@ -784,6 +784,14 @@ $this->Bitacora('Guardo');
     {
       $this->opordpag->setNumforpre($opordpag['numforpre']);
     }
+    if (isset($opordpag['numcta']))
+    {
+      $this->opordpag->setNumcta($opordpag['numcta']);
+  }
+    if (isset($opordpag['tipdoc']))
+    {
+      $this->opordpag->setTipdoc($opordpag['tipdoc']);
+    }
   }
 
   protected function getOpordpagOrCreate($id = 'id')
@@ -1721,6 +1729,8 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
     $opciones->setName('e');
     $opciones->setHTMLTotalFilas(' ');
 
+    $params= array('param1' => "'+$('opordpag_cedrif').value+'", 'val2');
+
     $col1 = new Columna('Tipo');
     $col1->setTipo(Columna::TEXTO);
     $col1->setAlineacionObjeto(Columna::CENTRO);
@@ -1728,7 +1738,7 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
     $col1->setEsGrabable(true);
     $col1->setNombreCampo('codtip');
     $objs= array('codtip' => 1,'destip' => 2,'codcon' => 3,'basimp' => 4, 'porret' => 5,'factor' => 6,'porsus' => 7,'unitri' => 8,'esta' => 9,'estaislr' => 12,'esta1xmil' => 13,'montoiva' => 14);
-    $col1->setCatalogo('Optipret','sf_admin_edit_form', $objs,'Optipret_Pagemiret');
+    $col1->setCatalogo('Optipret','sf_admin_edit_form', $objs,'Optipret_Pagemiret',$params);
     $col1->setHTML('type="text" size="10" maxlength="3"');
     $col1->setJScript('onKeypress="perderfocus(event,this.id,14);" onBlur="javascript:event.keyCode=13; ajaxretenciones(event,this.id);"');
 
@@ -1807,6 +1817,10 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
     $col15->setTitulo('EstaIRS');
     $col15->setNombreCampo('estairs');
 
+    $col16 = clone $col4;
+    $col16->setTitulo('Monto Base Minimo');
+    $col16->setNombreCampo('monbasmin');
+
     $opciones->addColumna($col1);
     $opciones->addColumna($col2);
     $opciones->addColumna($col3);
@@ -1822,6 +1836,7 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
     $opciones->addColumna($col13);
     $opciones->addColumna($col14);
     $opciones->addColumna($col15);
+    $opciones->addColumna($col16);
 
     $this->obj5 = $opciones->getConfig($reg);
   }
@@ -2172,8 +2187,36 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
   }
   else if ($this->getRequestParameter('ajax')=='10')
   {
+    $this->filretpro="";
+    $this->limbaseret="";
+    $varemp = $this->getUser()->getAttribute('configemp');
+	if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('tesoreria',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['tesoreria'])) {
+	     if(array_key_exists('pagemiord',$varemp['aplicacion']['tesoreria']['modulos'])){
+	       if(array_key_exists('filretpro',$varemp['aplicacion']['tesoreria']['modulos']['pagemiord']))
+	       {
+	       	$this->filretpro=$varemp['aplicacion']['tesoreria']['modulos']['pagemiord']['filretpro'];
+	       }
+	     }
+             if(array_key_exists('pagtipret',$varemp['aplicacion']['tesoreria']['modulos'])){
+               if(array_key_exists('limbaseret',$varemp['aplicacion']['tesoreria']['modulos']['pagtipret']))
+	       {
+	       	$this->limbaseret=$varemp['aplicacion']['tesoreria']['modulos']['pagtipret']['limbaseret'];
+	       }
+	     }
+           }
+
+
     $c= new Criteria();
+    if ($this->filretpro=='S'){
+    	$codpro=H::getX_vacio('RIFPRO','Caprovee','Codpro',$this->getRequestParameter('codprovee'));
+    	$sql="optipret.codtip='".$this->getRequestParameter('codigo')."' and optipret.codtip in (select codret from caproret where codpro='".$codpro."')";
+      $c->add(OptipretPeer::CODTIP,$sql,Criteria::CUSTOM);
+    }else {
     $c->add(OptipretPeer::CODTIP,$this->getRequestParameter('codigo'));
+    }
     $resul=OptipretPeer::doSelectOne($c);
     if ($resul)
     {
@@ -2190,6 +2233,18 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
     $dato10=OptipretPeer::getEsta1xmil($this->getRequestParameter('codigo'));
     $dato11=number_format(OptipretPeer::getMontoiva($this->getRequestParameter('codigo')),2,',','.');
     $dato12=OptipretPeer::getEstairs($this->getRequestParameter('codigo'));
+
+    if ($this->limbaseret=='S') {
+        $t = new Criteria();
+        $resultado=OpdefempPeer::doSelectOne($t);
+        if ($resultado)
+        {
+         $unitri=$resultado->getUnitri();
+        }else $unitri=0;
+        $montobasmin=$resul->getMbasmi()*$unitri;
+        $dato13=number_format($montobasmin,2,',','.');
+    }else $dato13='0,00';
+
     }
     else
     {
@@ -2206,8 +2261,9 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
     $dato10='';
     $dato11='0,00';
     $dato12='';
+    $dato13='0,00';
     }
-    $output = '[["existeretencion","'.$existe.'",""],["'.$cajtexmos.'","'.$dato1.'",""],["'.$this->getRequestParameter('contable').'","'.$dato2.'",""],["'.$this->getRequestParameter('base').'","'.$dato3.'",""],["'.$this->getRequestParameter('porretencion').'","'.$dato4.'",""],["'.$this->getRequestParameter('factor').'","'.$dato5.'",""],["'.$this->getRequestParameter('porsustra').'","'.$dato6.'",""],["'.$this->getRequestParameter('unidad').'","'.$dato7.'",""],["'.$this->getRequestParameter('esta').'","'.$dato8.'",""],["'.$this->getRequestParameter('estaislr').'","'.$dato9.'",""],["'.$this->getRequestParameter('estairs').'","'.$dato12.'",""],["'.$this->getRequestParameter('esta1xmil').'","'.$dato10.'",""],["'.$this->getRequestParameter('montoiva').'","'.$dato11.'",""]]';
+    $output = '[["existeretencion","'.$existe.'",""],["'.$cajtexmos.'","'.$dato1.'",""],["'.$this->getRequestParameter('contable').'","'.$dato2.'",""],["'.$this->getRequestParameter('base').'","'.$dato3.'",""],["'.$this->getRequestParameter('porretencion').'","'.$dato4.'",""],["'.$this->getRequestParameter('factor').'","'.$dato5.'",""],["'.$this->getRequestParameter('porsustra').'","'.$dato6.'",""],["'.$this->getRequestParameter('unidad').'","'.$dato7.'",""],["'.$this->getRequestParameter('esta').'","'.$dato8.'",""],["'.$this->getRequestParameter('estaislr').'","'.$dato9.'",""],["'.$this->getRequestParameter('estairs').'","'.$dato12.'",""],["'.$this->getRequestParameter('esta1xmil').'","'.$dato10.'",""],["'.$this->getRequestParameter('montoiva').'","'.$dato11.'",""],["'.$this->getRequestParameter('monbasmin').'","'.$dato13.'",""]]';
     $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
     return sfView::HEADER_ONLY;
   }
@@ -2434,6 +2490,34 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
     $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
     return sfView::HEADER_ONLY;
   }
+  else if ($this->getRequestParameter('ajax')=='25')
+  {
+  	$javascript=""; $dato="";
+  	$c= new Criteria();
+  	$c->add(TsdefbanPeer::NUMCUE,$this->getRequestParameter('codigo'));
+  	$reg= TsdefbanPeer::doSelectOne($c);
+  	if ($reg)
+  	{
+       $dato=$reg->getNomcue();
+  	}else $javascript="alert('La Cuenta Bancaria no Existe'); $('$cajtexcom').value=''; ";
+    $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""]]';
+    $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+    return sfView::HEADER_ONLY;
+  }
+  else if ($this->getRequestParameter('ajax')=='26')
+  {
+  	$javascript=""; $dato="";
+  	$c= new Criteria();
+  	$c->add(CpdocpagPeer::TIPPAG,$this->getRequestParameter('codigo'));
+  	$reg= CpdocpagPeer::doSelectOne($c);
+  	if ($reg)
+  	{
+       $dato=$reg->getNomext();
+  	}else $javascript="alert('El Tipo de Pagado no Existe'); $('$cajtexcom').value=''; ";
+    $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""]]';
+    $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+    return sfView::HEADER_ONLY;
+  }
 
  }
 
@@ -2644,6 +2728,14 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
     else  if ($this->getRequestParameter('ajax')=='7')
     {
       $this->tags=Herramientas::autocompleteAjax('CODMOTANU','Tsmotanu','Codmotanu',$this->getRequestParameter('opordpag[codmotanu]'));
+    }
+    else  if ($this->getRequestParameter('ajax')=='8')
+    {
+      $this->tags=Herramientas::autocompleteAjax('NUMCUE','Tsdefban','Numcue',$this->getRequestParameter('opordpag[numcta]'));
+  }
+    else  if ($this->getRequestParameter('ajax')=='9')
+    {
+      $this->tags=Herramientas::autocompleteAjax('TIPPAG','Cpdocpag','Tippag',$this->getRequestParameter('opordpag[tipdoc]'));
     }
   }
 

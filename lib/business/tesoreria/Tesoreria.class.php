@@ -688,6 +688,7 @@ class Tesoreria {
   /********************************************************************************************************/
 
   public static function Salvartesmovtraban($objeto, $tipmovdesd, $tipmovhast,$comprobaut) {
+
     if ($comprobaut=='S')
     {
      self::generaComprobanteAutomatico($objeto, $tipmovdesd, $tipmovhast,&$numcom);
@@ -1403,11 +1404,14 @@ class Tesoreria {
   public static function validarTesdefcueban($grid)
   {
     $x=$grid[0];
+    if (self::chequeraRepetida($grid))
+        return 552;
     $j=0;
     $total1=0;
     $total2=0;
     while ($j<count($x))
     {
+
       if ($x[$j]->getActiva()=='SI')
       {
         $total1=$total1 +1;
@@ -1431,6 +1435,37 @@ class Tesoreria {
     {
       return -1;
     }
+  }
+
+  public static function chequeraRepetida($grid)
+  {
+    $chequerarepetida=false;
+    $x=$grid[0];
+    $j=0;
+    while ($j<count($x))
+    {
+
+      $cheq1=$x[$j]->getCodchq().'-'.$x[$j]->getNumchedes().'-'.$x[$j]->getNumchehas();
+      $l=0;
+      while ($l<count($x))
+      {
+        $cheq2=$x[$l]->getCodchq().'-'.$x[$l]->getNumchedes().'-'.$x[$l]->getNumchehas();
+        if ($l!=$j)
+        {
+        	if ($cheq1==$cheq2)
+        	{
+              $chequerarepetida=true;
+              break;
+        	}
+        }
+    	$l++;
+      }
+      if ($chequerarepetida) break;
+
+      $j++;
+    }
+
+   return $chequerarepetida;
   }
 
   public static function validarComprobanteDescuadrado($grid)

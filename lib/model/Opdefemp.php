@@ -15,6 +15,8 @@
  */
 class Opdefemp extends BaseOpdefemp
 {
+	protected $aprmonche="";
+
 	public function getNomemp()
 	{
 		return Herramientas::getX('codemp','empresa','nomemp',self::getCodemp());
@@ -97,4 +99,26 @@ class Opdefemp extends BaseOpdefemp
 	{
 		return Herramientas::getX('tipcau','cpdoccau','nomext',self::getOrdtba());
 	}
+
+  public function getAprmonche()
+  {
+    $dato="";
+    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('tesoreria',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['tesoreria']))
+	     if(array_key_exists('tesmovemiche',$varemp['aplicacion']['tesoreria']['modulos'])){
+	       if(array_key_exists('aprmonche',$varemp['aplicacion']['tesoreria']['modulos']['tesmovemiche']))
+	       {
+	       	$dato=$varemp['aplicacion']['tesoreria']['modulos']['tesmovemiche']['aprmonche'];
+	       }
+         }
+     return $dato;
+  }
+
+  public function setAprmonche()
+  {
+  	return $this->aprmonche;
+  }
 }

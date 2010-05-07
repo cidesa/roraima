@@ -160,6 +160,12 @@ public static function Validar_biedisactmuenew($valor1,$valor2)
 	  }
 
       $clase->setValini($clase->getMondismue());
+      $saveusu=H::getConfApp('saveusu','bienes','biedisactmuenew');
+     if ($saveusu=='S') {
+	     $loguse= sfContext::getInstance()->getUser()->getAttribute('loguse');
+	  	 $clase->setLogusu($loguse);
+     }
+
       $clase->save();
       return -1;
 

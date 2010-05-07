@@ -507,6 +507,10 @@ propel:
     ordcre:
       type: VARCHAR
       size: 4
+    monche:
+      type: NUMERIC
+      size: 14
+      scale: 2
     id:
       type: INTEGER
       required: true
@@ -989,6 +993,12 @@ propel:
     codcajchi:
       type: VARCHAR
       size: 3
+    numcta:
+      type: VARCHAR
+      size: 20
+    tipdoc:
+      type: VARCHAR
+      size: 4
     id:
       type: INTEGER
       required: true
@@ -1187,6 +1197,10 @@ propel:
     codtipsen:
       type: VARCHAR
       size: 3
+    mbasmi:
+      type: NUMERIC
+      size: 14
+      scale: 2
     id:
       type: INTEGER
       required: true
@@ -1617,6 +1631,10 @@ propel:
     endosable:
       type: VARCHAR
       size: 1
+    salmin:
+      type: NUMERIC
+      size: 20
+      scale: 2
     id:
       type: INTEGER
       required: true
@@ -2360,6 +2378,10 @@ propel:
     stasal:
       type: VARCHAR
       size: 1
+    codcaj:
+      type: VARCHAR
+      size: 3
+      required: true
     id:
       type: INTEGER
       required: true

@@ -33,7 +33,7 @@ class tesmovemicheActions extends autotesmovemicheActions
     if (!$this->getRequestParameter($id))
     {
       $tscheemi = new Tscheemi();
-      $this->configGridOrdPag('S',$this->getRequestParameter('tscheemi[cedrif]'),$this->getRequestParameter('tscheemi[fecemi]'));
+      $this->configGridOrdPag('S',$this->getRequestParameter('tscheemi[cedrif]'),$this->getRequestParameter('tscheemi[fecemi]'),$this->getRequestParameter('tscheemi[numeroord]'),$this->getRequestParameter('tscheemi[fecord]'),$this->getRequestParameter('tscheemi[numcue]'),$this->getRequestParameter('tscheemi[tipdoc]'));
       $this->configGridCompro('S',$this->getRequestParameter('tscheemi[cedrif]'));
       $this->configGridPrecom('S',$this->getRequestParameter('tscheemi[cedrif]'));
       $this->configGridPagDir();
@@ -258,6 +258,15 @@ class tesmovemicheActions extends autotesmovemicheActions
     {
       $this->tscheemi->setNombensus($tscheemi['nombensus']);
     }
+     if (isset($tscheemi['numeroord']))
+    {
+      $this->tscheemi->setNumeroord($tscheemi['numeroord']);
+    }
+     if (isset($tscheemi['fecord']))
+    {
+      $this->tscheemi->setFecord($tscheemi['fecord']);
+    }
+
      //Se guarda el nombre del usuario actual del sistema
      $this->tscheemi->setCodemi($this->getUser()->getAttribute('usuario'));
   }
@@ -505,6 +514,12 @@ class tesmovemicheActions extends autotesmovemicheActions
         return sfView::HEADER_ONLY;
 
       }
+	  else if ($this->getRequestParameter('ajax')=='7')//Filtro por NUMERO DE ORDEN
+	  {
+         $dato=$this->getRequestParameter('cedrif');
+         $valormayuscula=$this->getRequestParameter('cedrif');
+         $jstscheemi = ',["tscheemi_numeroord","'.$this->getRequestParameter('numord').'",""],["tscheemi_fecord","'.$this->getRequestParameter('fecord').'",""]';
+	  }
 
 
       $refiere="";
@@ -525,7 +540,7 @@ class tesmovemicheActions extends autotesmovemicheActions
         if ($refiere=="A")
           {
              $operacion="ordpag";
-             $this->configGridOrdPag($mostrardato,$this->getRequestParameter('cedrif'),$this->getRequestParameter('fecemi'));
+             $this->configGridOrdPag($mostrardato,$this->getRequestParameter('cedrif'),$this->getRequestParameter('fecemi'),$this->getRequestParameter('numord'),$this->getRequestParameter('fecord'),$this->getRequestParameter('numcue'),$this->getRequestParameter('tipdoc'));
           }
 
           if ($refiere=="C")
@@ -745,7 +760,7 @@ class tesmovemicheActions extends autotesmovemicheActions
    * los datos del grid.
    *
    */
-  public function configGridOrdPag($mostrardatos, $cedrif=' ', $fecemi='31/12/2020')
+  public function configGridOrdPag($mostrardatos, $cedrif=' ', $fecemi='31/12/2020', $numord='', $fecord='31/12/2020', $numcue='',$tipdoc='')
    {
   //////////////////////
   //GRID
@@ -765,6 +780,8 @@ class tesmovemicheActions extends autotesmovemicheActions
 	            $fecemi = $dateFormat->format($fecemi, 'i', $dateFormat->getInputPattern('d'));
 	        }
         }
+
+
             /////////////////////////////////
         $c = new Criteria();
         if (trim($cedrif)!="") { $c->add(OpordpagPeer::CEDRIF,$cedrif);};
@@ -782,18 +799,55 @@ class tesmovemicheActions extends autotesmovemicheActions
         }//////////////////////
 
         $this->aprorddir="";
+        $this->filnumordfec="";
+        $this->filordcbtp="";
 		$varemp = $this->getUser()->getAttribute('configemp');
 		if ($varemp)
 		if(array_key_exists('aplicacion',$varemp))
 		 if(array_key_exists('tesoreria',$varemp['aplicacion']))
-		   if(array_key_exists('modulos',$varemp['aplicacion']['tesoreria']))
+		   if(array_key_exists('modulos',$varemp['aplicacion']['tesoreria'])) {
 		     if(array_key_exists('tesmovemiche',$varemp['aplicacion']['tesoreria']['modulos'])){
 		       if(array_key_exists('aprorddirec',$varemp['aplicacion']['tesoreria']['modulos']['tesmovemiche']))
 		       {
 		       	$this->aprorddir=$varemp['aplicacion']['tesoreria']['modulos']['tesmovemiche']['aprorddirec'];
 		       }
+		       if(array_key_exists('filnumordfec',$varemp['aplicacion']['tesoreria']['modulos']['tesmovemiche']))
+		       {
+		       	$this->filnumordfec=$varemp['aplicacion']['tesoreria']['modulos']['tesmovemiche']['filnumordfec'];
 		     }
+		     }
+		     if(array_key_exists('pagemiord',$varemp['aplicacion']['tesoreria']['modulos'])){
+		       if(array_key_exists('filordcbtp',$varemp['aplicacion']['tesoreria']['modulos']['pagemiord']))
+		       {
+		       	$this->filordcbtp=$varemp['aplicacion']['tesoreria']['modulos']['pagemiord']['filordcbtp'];
+		       }
+		     }
+
+		   }
+            if ($this->filnumordfec=='S'){
+		        //darle formato a la fecha de la orden de pago
+		        $valor=split("/",$fecord);
+		        if (count($valor)>1)
+		        {
+			        if (trim($fecord)!="")
+			        {
+			            $dateFormat = new sfDateFormat($this->getUser()->getCulture());
+			            $fecord = $dateFormat->format($fecord, 'i', $dateFormat->getInputPattern('d'));
+			        }
+		        }
+
+		        if (trim($numord)!="") { $c->add(OpordpagPeer::NUMORD,$numord);};
+		        if (trim($fecord)!="") { $c->add(OpordpagPeer::FECEMI,$fecord);}
+            }
+
+           if ($this->filordcbtp=='S')
+           {
+           	 if (trim($numcue)!="") { $c->add(OpordpagPeer::NUMCTA,$numcue);};
+		     if (trim($tipdoc)!="") { $c->add(OpordpagPeer::TIPDOC,$tipdoc);}
+           }
+
     $c->add(OpordpagPeer::STATUS,"N");
+
 		if ($this->aprorddir=="S")
 		{
 		  if (trim($cedrif)!="") {
@@ -1373,13 +1427,25 @@ class tesmovemicheActions extends autotesmovemicheActions
     $this->numches="";
     $this->numcues="";
     $this->comprobaut="";
+    $this->bloqfec="";
     $varemp = $this->getUser()->getAttribute('configemp');
-    if ($varemp)
-	if(array_key_exists('generales',$varemp))
+    if ($varemp) {
+			if(array_key_exists('generales',$varemp)) {
      if(array_key_exists('comprobaut',$varemp['generales']))
 	 {
 	   $this->comprobaut=$varemp['generales']['comprobaut'];
 	 }
+			}
+	    if(array_key_exists('aplicacion',$varemp))
+			 if(array_key_exists('tesoreria',$varemp['aplicacion']))
+			   if(array_key_exists('modulos',$varemp['aplicacion']['tesoreria']))
+			     if(array_key_exists('tesmovemiche',$varemp['aplicacion']['tesoreria']['modulos'])){
+			       if(array_key_exists('bloqfec',$varemp['aplicacion']['tesoreria']['modulos']['tesmovemiche']))
+			       {
+			       	$this->bloqfec=$varemp['aplicacion']['tesoreria']['modulos']['tesmovemiche']['bloqfec'];
+			       }
+			     }
+    }
 
     $this->labels = $this->getLabels();
 
@@ -1447,6 +1513,31 @@ class tesmovemicheActions extends autotesmovemicheActions
       {
         $this->coderror5=142;
         return false;
+      }
+      $aprmonche=H::getConfApp('aprmonche','tesoreria','tesmovemiche');
+      if ($aprmonche=='S')
+      {
+        $t= new Criteria();
+        $reg= OpdefempPeer::doSelectOne($t);
+        if ($reg)
+        {
+        	if ($this->getUser()->getAttribute('tschemi_operacion','vacio')=='ordpag')
+        	  $monto=H::toFloat($this->getRequestParameter('tscheemi[montotordpag]'));
+        	else if ($this->getUser()->getAttribute('tschemi_operacion','vacio')=='compro')
+        	   $monto=H::toFloat($this->getRequestParameter('tscheemi[montotcompro]'));
+        	else if ($this->getUser()->getAttribute('tschemi_operacion','vacio')=='precom')
+        	  $monto=H::toFloat($this->getRequestParameter('tscheemi[montotprecom]'));
+        	else if ($this->getUser()->getAttribute('tschemi_operacion','vacio')=='pagdir')
+              $monto=H::toFloat($this->getRequestParameter('tscheemi[totnetpagdir]'));
+            else if ($this->getUser()->getAttribute('tschemi_operacion','vacio')=='pagnopre')
+              $monto=H::toFloat($this->getRequestParameter('tscheemi[totnetpagnap]'));
+
+        	if ($monto > H::toFloat($reg->getMonche()))
+        	{
+               $this->coderror4=553;
+               return false;
+        	}
+        }
       }
 
 

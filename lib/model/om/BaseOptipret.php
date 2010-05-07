@@ -45,6 +45,10 @@ abstract class BaseOptipret extends BaseObject  implements Persistent {
 
 
 	
+	protected $mbasmi;
+
+
+
 	protected $id;
 
 	
@@ -146,6 +150,14 @@ abstract class BaseOptipret extends BaseObject  implements Persistent {
 
   }
   
+  public function getMbasmi($val=false)
+  {
+
+    if($val) return number_format($this->mbasmi,2,',','.');
+    else return $this->mbasmi;
+
+  }
+
   public function getId()
   {
 
@@ -243,6 +255,16 @@ abstract class BaseOptipret extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setMbasmi($v)
+	{
+
+    if ($this->mbasmi !== $v) {
+        $this->mbasmi = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OptipretPeer::MBASMI;
+      }
+
+	}
+
 	public function setId($v)
 	{
 
@@ -275,7 +297,9 @@ abstract class BaseOptipret extends BaseObject  implements Persistent {
 
       $this->codtipsen = $rs->getString($startcol + 8);
 
-      $this->id = $rs->getInt($startcol + 9);
+      $this->mbasmi = $rs->getFloat($startcol + 9);
+
+      $this->id = $rs->getInt($startcol + 10);
 
       $this->resetModified();
 
@@ -283,7 +307,7 @@ abstract class BaseOptipret extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 10; 
+            return $startcol + 11;
     } catch (Exception $e) {
       throw new PropelException("Error populating Optipret object", $e);
     }
@@ -522,6 +546,9 @@ abstract class BaseOptipret extends BaseObject  implements Persistent {
 				return $this->getCodtipsen();
 				break;
 			case 9:
+				return $this->getMbasmi();
+				break;
+			case 10:
 				return $this->getId();
 				break;
 			default:
@@ -543,7 +570,8 @@ abstract class BaseOptipret extends BaseObject  implements Persistent {
 			$keys[6] => $this->getPorsus(),
 			$keys[7] => $this->getFactor(),
 			$keys[8] => $this->getCodtipsen(),
-			$keys[9] => $this->getId(),
+			$keys[9] => $this->getMbasmi(),
+			$keys[10] => $this->getId(),
 		);
 		return $result;
 	}
@@ -587,6 +615,9 @@ abstract class BaseOptipret extends BaseObject  implements Persistent {
 				$this->setCodtipsen($value);
 				break;
 			case 9:
+				$this->setMbasmi($value);
+				break;
+			case 10:
 				$this->setId($value);
 				break;
 		} 	}
@@ -605,7 +636,8 @@ abstract class BaseOptipret extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[6], $arr)) $this->setPorsus($arr[$keys[6]]);
 		if (array_key_exists($keys[7], $arr)) $this->setFactor($arr[$keys[7]]);
 		if (array_key_exists($keys[8], $arr)) $this->setCodtipsen($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setId($arr[$keys[9]]);
+		if (array_key_exists($keys[9], $arr)) $this->setMbasmi($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setId($arr[$keys[10]]);
 	}
 
 	
@@ -622,6 +654,7 @@ abstract class BaseOptipret extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(OptipretPeer::PORSUS)) $criteria->add(OptipretPeer::PORSUS, $this->porsus);
 		if ($this->isColumnModified(OptipretPeer::FACTOR)) $criteria->add(OptipretPeer::FACTOR, $this->factor);
 		if ($this->isColumnModified(OptipretPeer::CODTIPSEN)) $criteria->add(OptipretPeer::CODTIPSEN, $this->codtipsen);
+		if ($this->isColumnModified(OptipretPeer::MBASMI)) $criteria->add(OptipretPeer::MBASMI, $this->mbasmi);
 		if ($this->isColumnModified(OptipretPeer::ID)) $criteria->add(OptipretPeer::ID, $this->id);
 
 		return $criteria;
@@ -670,6 +703,8 @@ abstract class BaseOptipret extends BaseObject  implements Persistent {
 		$copyObj->setFactor($this->factor);
 
 		$copyObj->setCodtipsen($this->codtipsen);
+
+		$copyObj->setMbasmi($this->mbasmi);
 
 
 		if ($deepCopy) {

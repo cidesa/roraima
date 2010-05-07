@@ -322,6 +322,18 @@
 			 'with' => "'ajax=5&cajtexmos=opordpag_destip&cajtexcom=opordpag_codtip&tipo=opordpag_tipcau&codigo='+document.getElementById('opordpag_codtip').value+'&codigo2='+document.getElementById('opordpag_tipcau').value+'&fecdes='+document.getElementById('opordpag_fecdes').value+'&fechas='+document.getElementById('opordpag_fechas').value"
          )) ?>
     	</th>
+    	<th>
+    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    	</th>
+    	<th>
+    	<input type="button" name="Submit" value="Marcar Todos" onClick="marcarTodo();"/>
+    	</th>
+    	<th>
+    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    	</th>
+    	<th>
+    	<input type="button" name="Submit" value="Desmarcar Todos" onClick="desmarcarTodo();"/>
+    	</th>
       </tr>
     </table>
     </th>
@@ -459,6 +471,38 @@ function totalmarcadas(id)
  	  $('opordpag_destip').value="";
  	}
  }
+
+ function marcarTodo()
+ {   var fil=0;
+ 	 var acum=0;
+ 	 var numfil=parseInt($('fila').value);
+ 	 while (fil<numfil)
+     {
+      var marca="ax"+"_"+fil+"_1";
+      var num="ax"+"_"+fil+"_6";
+      num1=toFloat(num);
+
+      $(marca).checked=true;
+       acum= acum + num1;
+      fil++;
+    }
+    $('opordpag_monord').value=format(acum.toFixed(2),'.',',','.');
+ }
+
+ function desmarcarTodo()
+ {   var fil=0;
+ 	 var acum=0;
+ 	 var num=parseInt($('fila').value);
+ 	 while (fil<num)
+     {
+      var marca="ax"+"_"+fil+"_1";
+      $(marca).checked=false;
+
+      fil++;
+    }
+    $('opordpag_monord').value="0,00";
+ }
+
 </script>
 
 <?php include_partial('edit_actions', array('opordpag' => $opordpag)) ?>

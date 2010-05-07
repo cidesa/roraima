@@ -102,6 +102,8 @@ class TsdefbanMapBuilder {
 
 		$tMap->addColumn('ENDOSABLE', 'Endosable', 'string', CreoleTypes::VARCHAR, false, 1);
 
+		$tMap->addColumn('SALMIN', 'Salmin', 'double', CreoleTypes::NUMERIC, false, 20);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

@@ -462,6 +462,12 @@
 551:
   cod: 551
   msj: Los Montos de Debitos y Creditos deben definirse correctamente   
+552:
+  cod: 552
+  msj: Existe una Chequera Repetida. No debe existir Chequeras iguales, Por favor Cambielas.
+553:
+  cod: 553
+  msj: El Monto Total del Cheque sobrepasa el Límite definido para Cheques.
 3:
   cod: 3
   msj: La contraseña es diferente.
@@ -471,6 +477,7 @@
 5:
   cod: 5
   msj: Ya existe ese Recargo Asociado a esa Retención. Por favor, Cambiélo por otro.
+
 ################### BIENES ####################
 200:
   cod: 200
@@ -502,7 +509,9 @@
 207:
   cod: 207
   msj: Estos Muebles no se encuentra Registrado
-
+208:
+  cod: 208
+  msj: El Valor Inicial del Mueble debe ser mayor a cero.
 ################### FORMULACION ####################
 # Definiciones Generales (Fordefgen)
 300:

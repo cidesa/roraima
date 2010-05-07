@@ -111,7 +111,7 @@
   'control_name' => 'bnregmue[ordcom]',
   'onBlur'=> remote_function(array(
         'url' => 'bieregactmued/ajax',
-        'condition' => "$('bnregmue_ordcom').value != '' && $('id').value == ''",
+        'condition' => "$('bnregmue_ordcom').value != '' ",
         'complete' => 'AjaxJSON(request, json)',
         'with' => "'ajax=2&cajtexmos=bnregmue_ordcom&cajtexmos_uno=bnregmue_codpro&cajtexmos_dos=nomprovee&cajtexmos_tres=bnregmue_feccom&codigo='+this.value",
         )),
@@ -150,6 +150,31 @@
 &nbsp;
   <? echo input_tag('nomprovee',$bnregmue->getNomprovee(),'disabled=true,size=41')?>
     </div>
+<?php if ($bnregmue->getSavenumord()=='S') {?>
+<br>
+<?php echo label_for('bnregmue[numord]', __($labels['bnregmue{numord}']),'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('bnregmue{numord}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('bnregmue{numord}')): ?>
+    <?php echo form_error('bnregmue{numord}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($bnregmue, 'getNumord', array (
+  'size' => 15,
+  'maxlength' => 8,
+  'control_name' => 'bnregmue[numord]',
+  'onBlur'=> remote_function(array(
+        'url' => 'bieregactmued/ajax',
+        'condition' => "$('bnregmue_numord').value != ''",
+        'complete' => 'AjaxJSON(request, json)',
+        'with' => "'ajax=8&cajtexmos=bnregmue_numord&cajtexmos=bnregmue_numord&codigo='+this.value",
+        )),
+)); echo $value ? $value : '&nbsp;' ?>
+
+&nbsp;
+
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Opordpag_Bieregactmued/clase/Opordpag/frame/sf_admin_edit_form/obj1/bnregmue_numord/campo1/numord')?>
+</div>
+<?php } ?>
 </div>
 </fieldset>
 </div>
@@ -173,7 +198,11 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<?php if ($bnregmue->getEtifeccal()=='S') {?>
+<strong><? echo __('Fecha de Recepción del Bien:  ') ?></strong>
+<?php } else {?>
 <strong><? echo __('Fecha Cálculo:  ') ?></strong>
+<?php }?>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <?php $value = object_input_date_tag($bnregmue, 'getFecreg', array (
   'rich' => true,

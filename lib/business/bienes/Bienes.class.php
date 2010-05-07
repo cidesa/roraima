@@ -24,7 +24,7 @@ class Bienes
   {
          $codact=$articulo->getCodact();
          $codmue=$articulo->getCodmue();
-
+    if (!$articulo->getId()) {
      $c = new Criteria();
      $c->add(BnregmuePeer::CODACT,$codact);
      $c->add(BnregmuePeer::CODMUE,$codmue);
@@ -32,7 +32,11 @@ class Bienes
 
      if ($objBnregmue)
        return 203;
-     else
+    }
+
+	 if ($articulo->getValini()<=0)
+	  return 208;
+
         return -1;
 
   }
@@ -646,10 +650,12 @@ class Bienes
 
   public static function salvarSaveBnregmue($clase)
   {
-  	if ($clase->getId()==''){
-	 	//self::GrabarMovimiento($clase);
+     $saveusu=H::getConfApp('saveusu','bienes','bieregactmued');
+     if ($saveusu=='S') {
+	     $loguse= sfContext::getInstance()->getUser()->getAttribute('loguse');
+	  	 $clase->setLogusu($loguse);
   	}
-     $clase->save();
+     $clase->save(); // La Disposición se Graba despues que Graba el Mueble pregunta si desea generarla.
      return -1;
   }
 
@@ -658,21 +664,7 @@ class Bienes
   	$c = new Criteria();
   	$c->add(BnregmuePeer::ID,$id);
   	$clase = BnregmuePeer::doselectone($c);
-
-
   	if ($clase){
-	  //	$tipoinc='';
-	  //	$c = new Criteria();
-	 // 	$per = BndefinsPeer::doselectone($c);
-	 // 	if ($per){
-	//		if ($per->getCodinc()){
-			//  	$c = new Criteria();
-			//  	$c->add(BndisbiePeer::CODDIS,$per->getCodinc());
-			//  	$per2 = BndisbiePeer::doselectone($c);
-		//		if ($per2){
-		//			$tipoinc = $per->getCodinc().' - '.$per2->getDesdis();
-		//		}
-
 			  	$c = new Criteria();
 			  	$c->add(BndisbiePeer::CODDIS,$clase->getCoddis());
 			  	$per2 = BndisbiePeer::doselectone($c);
@@ -681,7 +673,24 @@ class Bienes
 				}
 
 				if (H::getVerCorrelativo('corrmue','bndefins',&$output)){
+        $encontrado=false;
+        while (!$encontrado)
+        {
+          $numero=str_pad($output, 10, '0', STR_PAD_LEFT);
+
+          $sql="select nrodismue from bndismue where codact='".$clase->getCodact()."' and codmue='".$clase->getCodmue()."' and nrodismue='".$numero."'";
+          if (Herramientas::BuscarDatos($sql,&$result))
+          {
+            $output=$output+1;
+          }
+          else
+          {
+            $encontrado=true;
+          }
+        }
+
 			        $ref = str_pad($output, 10, '0', STR_PAD_LEFT);
+        $saveusu=H::getConfApp('saveusu','bienes','bieregactmued');
 	          		if (H::getSalvarCorrelativo('corrmue','bndefins','Registo de Disposicion de Bienes',$output,&$msg)){
 						$c = new Bndismue();
 						$c->setCodact($clase->getCodact());
@@ -692,6 +701,10 @@ class Bienes
 						$c->setMotdismue(Herramientas::getX('coddis','Bndisbie','desdis',$clase->getCoddis()));
 						$c->setCodubiori($clase->getCodubi());
 						$c->setMondismue($clase->getValini());
+                        if ($saveusu=='S') {
+                          $loguse= sfContext::getInstance()->getUser()->getAttribute('loguse');
+                          $c->setLogusu($loguse);
+                        }
 						$c->setStadismue('A');
 						$c->save();
 						return 'Se Genero una Incorporacion con el numero '.$ref;
@@ -700,12 +713,6 @@ class Bienes
 				}else{
 					return 'Error al Buscar el Correlativo';
 				}
-	//		}else{
-		//		return 'No esta definido El Codigo de la Incorporacion, Verifique en el modulo de Definicion de Empresa.';
-			//}
-	 // 	}else{
-	 // 		return 'No esta definido El Codigo de la Incorporacion, Verifique en el modulo de Definicion de Empresa.';
-	 // 	}
   	}
   }
 

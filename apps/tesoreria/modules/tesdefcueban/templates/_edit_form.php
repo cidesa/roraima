@@ -23,6 +23,14 @@
 <?php echo input_hidden_tag('tsdefban[creban]', $tsdefban->getCreban()) ?>
 <?php echo input_hidden_tag('tsdefban[deblib]', $tsdefban->getDeblib()) ?>
 <?php echo input_hidden_tag('tsdefban[crelib]', $tsdefban->getCrelib()) ?>
+<?php if ($tsdefban->getMossalmin()=='S' && $tsdefban->getId()!="") { ?>
+<table width="100%">
+  <tr>
+    <th><strong><font color="#CC0000" size="2" face="Verdana, Arial, Helvetica, sans-serif"> <?php echo $tsdefban->getEtiqueta() ;?></font></strong></th>
+  </tr>
+</table>
+<?php } ?>
+
 <fieldset id="sf_fieldset_none" class="">
 <legend><? echo __('Datos del Banco') ?></legend>
 <div class="form-row">
@@ -227,6 +235,26 @@
 ),date('Y-m-d')); echo $value ? $value : '&nbsp;' ?><?php echo input_hidden_tag('valida', '') ?>
     </div>
 </th>
+<?php if ($tsdefban->getMossalmin()=='S') {?>
+<th>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</th>
+<th>
+<div class="content<?php if ($sf_request->hasError('tsdefban{salmin}')): ?> form-error<?php endif; ?>">
+  <?php echo label_for('tsdefban[salmin]', __($labels['tsdefban{salmin}']), 'class="required" Style="width:110px"') ?>
+  <div class="content<?php if ($sf_request->hasError('tsdefban{salmin}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('tsdefban{salmin}')): ?>
+    <?php echo form_error('tsdefban{salmin}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($tsdefban, array('getSalmin',true), array (
+  'size' => 15,  
+  'control_name' => 'tsdefban[salmin]',
+  'onBlur' => "javascript:event.keyCode=13; return mientermonto(event, this.id)",
+)); echo $value ? $value : '&nbsp;' ?>
+  </div>
+</th>
+<?php } ?>
 </tr>
 </table>
 </div>

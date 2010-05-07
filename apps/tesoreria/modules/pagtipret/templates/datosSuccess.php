@@ -40,6 +40,20 @@
 <th>
   <?php echo label_for('montot', __('% del Monto Total'),'class="required"') ?>
 </th>
+<?php if ($limbaseret=='S') { ?>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
+<th>
+   <?php echo label_for('monbasmin', __('Monto Base Mínimo'),'class="required"') ?>
+  <?php $value = input_tag('optipret[mbasmi]', $mbasmi, array (
+  'size' => 7,
+  'control_name' => 'optipret[mbasmi]',
+  'onBlur' => "javascript:event.keyCode=13; return entermontootro(event, this.id)",
+)); echo $value ? $value : '&nbsp;' ?>
+</th>
+<th>
+  <?php echo label_for('expre', __('expresado en Unidades Tributarias'),'class="required"') ?>
+</th>
+<?php } ?>
 </tr>
 </table>
 </div>
@@ -114,6 +128,20 @@
 <?php echo '&nbsp;&nbsp;&nbsp;&nbsp;'.'% del Monto Total'?>
    </div>
 </th>
+<?php if ($limbaseret=='S') { ?>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
+<th>
+   <?php echo label_for('monbasmin', __('Monto Base Mínimo'),'class="required"') ?>
+  <?php $value = input_tag('optipret[mbasmi1]', $mbasmi1, array (
+  'size' => 7,
+  'control_name' => 'optipret[mbasmi1]',
+  'onBlur' => "javascript:event.keyCode=13; return entermontootro(event, this.id)",
+)); echo $value ? $value : '&nbsp;' ?>
+</th>
+<th>
+  <?php echo label_for('expre', __('expresado en Unidades Tributarias'),'class="required"') ?>
+</th>
+<?php } ?>
 </tr>
 </table>
 </div>

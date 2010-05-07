@@ -17,7 +17,7 @@
         'url'      => 'tesrencajchi/ajax',
         'complete' => 'AjaxJSON(request, json)',
         'condition' => "$('opordpag_fechas').value != '' && $('id').value == ''",
-        'with' => "'ajax=5&fecdes='+$('opordpag_fecdes').value+'&codigo='+this.value"
+        'with' => "'ajax=5&codcajchi='+$('opordpag_codcajchi').value+'&fecdes='+$('opordpag_fecdes').value+'&codigo='+this.value"
         ))
 ),date('Y-m-d')); echo $value ? $value : '&nbsp;' ?>
 

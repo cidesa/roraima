@@ -730,9 +730,14 @@
     var colbase=col+9;
     var colmonret=col+10;
     var colesta=col+8;
+    var colmonbasmin=col+15; //monto base minimo a utilizar para la retencion
+    var coldescrip=col+1;
     var base=name+"_"+fil+"_"+colbase;
     var montoret=name+"_"+fil+"_"+colmonret;
     var esta=name+"_"+fil+"_"+colesta;
+    var monbasmin=name+"_"+fil+"_"+colmonbasmin;
+    var descrip=name+"_"+fil+"_"+coldescrip;
+    var sigue=true;
 
   if ($('opordpag_afectapre').value==1)
   {
@@ -779,32 +784,116 @@
         }
        fila++;
       }
+      if ($('opordpag_limbaseret').value=='S') // Configuracion para validar que monto base sea mayor al dfinido para la retencion
+      {
+         var monbasemin=toFloat(monbasmin);
+         if (monbase >= monbasemin)
+         {
      $(base).value=format(monbase.toFixed(2),'.',',','.');
+
+         }else {
+           alert('El Monto Base para el Calculo no es el mínimo requerido para esta retención.');
+           sigue=false;
+    }
+      }else {
+       $(base).value=format(monbase.toFixed(2),'.',',','.');
+      }
     }
     else
     {
       if (verificarmarcas('ax',1))
       {
         var montbase=sumarbase(true);
+        if ($('opordpag_limbaseret').value=='S') // Configuracion para validar que monto base sea mayor al dfinido para la retencion
+        {
+             var formontbase=toFloat2(montbase);
+             var monbasemin=toFloat(monbasmin);
+             if (formontbase >= monbasemin)
+             {
         $(base).value=montbase;
+             }else {
+               alert('El Monto Base para el Calculo no es el mínimo requerido para esta retención.');
+               sigue=false;
+      }
+        }else {
+              $(base).value=montbase;
+        }
       }
       else
       {
         if (($('afectarec').value=='R') || ($('afectarec').value=='S') || ($('afectarec').value=='P'))
         {
           var montbase=sumarbase(false);
+          if ($('opordpag_limbaseret').value=='S') // Configuracion para validar que monto base sea mayor al dfinido para la retencion
+            {
+                 var formontbase=toFloat2(montbase);
+                 var monbasemin=toFloat(monbasmin);
+                 if (formontbase >= monbasemin)
+                 {
           $(base).value=montbase;
+                 }else {
+                   alert('El Monto Base para el Calculo no es el mínimo requerido para esta retención.');
+                   sigue=false;
+        }
+            }else {
+                  $(base).value=montbase;
+            }
         }
         else
-        { $(base).value=$('opordpag_monord').value;}
+        {
+          if ($('opordpag_limbaseret').value=='S') // Configuracion para validar que monto base sea mayor al dfinido para la retencion
+            {
+                 var formontbase=toFloat('opordpag_monord');
+                 var monbasemin=toFloat(monbasmin);
+                 if (formontbase >= monbasemin)
+                 {
+                   $(base).value=$('opordpag_monord').value;
+                 }else {
+                   alert('El Monto Base para el Calculo no es el mínimo requerido para esta retención.');
+                   sigue=false;
+      }
+            }else {
+                  $(base).value=$('opordpag_monord').value;
+    }
+        }
       }
     }
-  }else {$(base).value=$('opordpag_neto').value;}
-
+  }else {
+    if ($('opordpag_limbaseret').value=='S') // Configuracion para validar que monto base sea mayor al dfinido para la retencion
+    {
+         var formontbase=toFloat('opordpag_neto');
+         var monbasemin=toFloat(monbasmin);
+         if (formontbase >= monbasemin)
+         {
+           $(base).value=$('opordpag_neto').value;
+         }else {
+           alert('El Monto Base para el Calculo no es el mínimo requerido para esta retención.');
+           sigue=false;
+         }
+    }else {
+          $(base).value=$('opordpag_neto').value;
+    }
+  }
+  if ($('opordpag_limbaseret').value=='S') // Configuracion para validar que monto base sea mayor al dfinido para la retencion
+  {
+    if (sigue)
+    {
    if (posiciontiporetencion($(id).value,fil)!=0)
    { alert('El Tipo de Retencion ya fue Registrado');}
    else
    { calcularetencion(fil); actualizarsaldos();}
+    }else {
+        $(id).value='';
+        $(descrip).value='';
+        $(base).value='0,00';
+        $(motoret).value='0,00';
+  }
+  }else {
+   if (posiciontiporetencion($(id).value,fil)!=0)
+   { alert('El Tipo de Retencion ya fue Registrado');}
+   else
+   { calcularetencion(fil); actualizarsaldos();}
+ }
   }
  }
 
@@ -2480,6 +2569,7 @@ function ajaxretenciones(e,id)
     var colest1xmil= col+12;
     var colmont= col+13;
     var colestirs= col+14;
+    var colmonbasmin= col+15;
 
     var descripcion=name+"_"+fil+"_"+coldes;
     var contable=name+"_"+fil+"_"+colcon;
@@ -2493,13 +2583,15 @@ function ajaxretenciones(e,id)
     var estairs=name+"_"+fil+"_"+colestirs;
     var esta1xmil=name+"_"+fil+"_"+colest1xmil;
     var montoiva=name+"_"+fil+"_"+colmont;
+    var monbasmin=name+"_"+fil+"_"+colmonbasmin;
     var cod=$(id).value;
+    var proveedor=$('opordpag_cedrif').value
 
      document.getElementById('modifico2').value=true;
 
      if (e.keyCode==13 || e.keyCode==9)
      {
-      new Ajax.Request('/tesoreria_dev.php/pagemiord/ajax', {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json), validaretencion(e,id);}, parameters:'ajax=10&cajtexmos='+descripcion+'&contable='+contable+'&base='+base+'&porretencion='+porretencion+'&factor='+factor+'&porsustra='+porsustra+'&unidad='+unidad+'&esta='+esta+'&estaislr='+estaislr+'&estairs='+estairs+'&esta1xmil='+esta1xmil+'&montoiva='+montoiva+'&codigo='+cod})
+      new Ajax.Request('/tesoreria_dev.php/pagemiord/ajax', {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json), validaretencion(e,id);}, parameters:'ajax=10&cajtexmos='+descripcion+'&contable='+contable+'&base='+base+'&porretencion='+porretencion+'&factor='+factor+'&porsustra='+porsustra+'&unidad='+unidad+'&esta='+esta+'&estaislr='+estaislr+'&estairs='+estairs+'&esta1xmil='+esta1xmil+'&montoiva='+montoiva+'&codprovee='+proveedor+'&monbasmin='+monbasmin+'&codigo='+cod})
      }
    }//if ($(id).value1="")
   }
@@ -2516,7 +2608,7 @@ function ajaxretenciones(e,id)
 
   if ($('existeretencion').value!='S' && $(id).value!="")
   {
-    alert('El Codigo de la Retencion no Existe');
+    alert('El Codigo de la Retencion no Existe. Si es su caso el Beneficiario no tiene retenciones asociadas (Proveedores)');
   $(id).value="";
   $(descripcion).value="";
 

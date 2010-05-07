@@ -33,6 +33,10 @@ abstract class BaseTssalcaj extends BaseObject  implements Persistent {
 
 
 	
+	protected $codcaj;
+
+
+
 	protected $id;
 
 	
@@ -100,6 +104,13 @@ abstract class BaseTssalcaj extends BaseObject  implements Persistent {
 
   }
   
+  public function getCodcaj()
+  {
+
+    return trim($this->codcaj);
+
+  }
+
   public function getId()
   {
 
@@ -174,6 +185,16 @@ abstract class BaseTssalcaj extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setCodcaj($v)
+	{
+
+    if ($this->codcaj !== $v) {
+        $this->codcaj = $v;
+        $this->modifiedColumns[] = TssalcajPeer::CODCAJ;
+      }
+
+	}
+
 	public function setId($v)
 	{
 
@@ -200,7 +221,9 @@ abstract class BaseTssalcaj extends BaseObject  implements Persistent {
 
       $this->stasal = $rs->getString($startcol + 5);
 
-      $this->id = $rs->getInt($startcol + 6);
+      $this->codcaj = $rs->getString($startcol + 6);
+
+      $this->id = $rs->getInt($startcol + 7);
 
       $this->resetModified();
 
@@ -208,7 +231,7 @@ abstract class BaseTssalcaj extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 7; 
+            return $startcol + 8;
     } catch (Exception $e) {
       throw new PropelException("Error populating Tssalcaj object", $e);
     }
@@ -374,6 +397,9 @@ abstract class BaseTssalcaj extends BaseObject  implements Persistent {
 				return $this->getStasal();
 				break;
 			case 6:
+				return $this->getCodcaj();
+				break;
+			case 7:
 				return $this->getId();
 				break;
 			default:
@@ -392,7 +418,8 @@ abstract class BaseTssalcaj extends BaseObject  implements Persistent {
 			$keys[3] => $this->getDessal(),
 			$keys[4] => $this->getMonsal(),
 			$keys[5] => $this->getStasal(),
-			$keys[6] => $this->getId(),
+			$keys[6] => $this->getCodcaj(),
+			$keys[7] => $this->getId(),
 		);
 		return $result;
 	}
@@ -427,6 +454,9 @@ abstract class BaseTssalcaj extends BaseObject  implements Persistent {
 				$this->setStasal($value);
 				break;
 			case 6:
+				$this->setCodcaj($value);
+				break;
+			case 7:
 				$this->setId($value);
 				break;
 		} 	}
@@ -442,7 +472,8 @@ abstract class BaseTssalcaj extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[3], $arr)) $this->setDessal($arr[$keys[3]]);
 		if (array_key_exists($keys[4], $arr)) $this->setMonsal($arr[$keys[4]]);
 		if (array_key_exists($keys[5], $arr)) $this->setStasal($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setId($arr[$keys[6]]);
+		if (array_key_exists($keys[6], $arr)) $this->setCodcaj($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setId($arr[$keys[7]]);
 	}
 
 	
@@ -456,6 +487,7 @@ abstract class BaseTssalcaj extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(TssalcajPeer::DESSAL)) $criteria->add(TssalcajPeer::DESSAL, $this->dessal);
 		if ($this->isColumnModified(TssalcajPeer::MONSAL)) $criteria->add(TssalcajPeer::MONSAL, $this->monsal);
 		if ($this->isColumnModified(TssalcajPeer::STASAL)) $criteria->add(TssalcajPeer::STASAL, $this->stasal);
+		if ($this->isColumnModified(TssalcajPeer::CODCAJ)) $criteria->add(TssalcajPeer::CODCAJ, $this->codcaj);
 		if ($this->isColumnModified(TssalcajPeer::ID)) $criteria->add(TssalcajPeer::ID, $this->id);
 
 		return $criteria;
@@ -498,6 +530,8 @@ abstract class BaseTssalcaj extends BaseObject  implements Persistent {
 		$copyObj->setMonsal($this->monsal);
 
 		$copyObj->setStasal($this->stasal);
+
+		$copyObj->setCodcaj($this->codcaj);
 
 
 		$copyObj->setNew(true);

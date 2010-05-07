@@ -40,6 +40,8 @@ generator:
       codrespat:   { name : Responsable Patrimonial Primario }
       codresuso:   { name : Responsable de Uso }
       tippro:      { name : Proyecto }
+      numord:      { name : N° de Orden de Pago}
+
 
     list:
       title:          Registro de Activos Muebles
@@ -52,7 +54,7 @@ generator:
       sort:    codact
     edit:
       title:          Registro de Activos Muebles
-      display:        [codact, codmue, desmue, codalt, ordcom, codpro, feccom, fecreg, fecrcp, marmue, modmue, anomue, colmue, capmue, tipmue, nropie, sermue, usomue, pesmue, larmue, ancmue, altmue, coddis, valini, valres, valres, vallib, valadi, valactual, depmen, depacu, valrex, cosrep, codubi, codrespat, codresuso, tippro ]
+      display:        [codact, codmue, desmue, codalt, ordcom, codpro, feccom, fecreg, fecrcp, marmue, modmue, anomue, colmue, capmue, tipmue, nropie, sermue, usomue, pesmue, larmue, ancmue, altmue, coddis, valini, valres, valres, vallib, valadi, valactual, depmen, depacu, valrex, cosrep, codubi, codrespat, codresuso, tippro, numord ]
       fields:
          desmue:
            type: textarea_tag
