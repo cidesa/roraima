@@ -63,6 +63,7 @@ nomina:
       Conceptos para el ISLR:                                        NomDefEspISLR
       Motivos de Cambios de Cargos:                                  NomDefEspMotCamCar      
       Definición de Documentos consignados por el Empleado:          NomDefEspDocEnt            
+      Definicion de Reporte - Conceptos:                             nomdefrepcon
       Embargos:
         Registro de Juzgados:                                        NomDefJuz
         Registro de Beneficiarios por Embargos:                      NomDefBenEmb

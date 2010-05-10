@@ -1,0 +1,30 @@
+methods:
+  post:
+   - "npdefrepcon{codrep}"
+   - "npdefrepcon{desrep}"
+
+names:
+  npdefrepcon{codrep}:
+    required:  Yes
+    required_msg: El cÃ³digo no puede estar en Blanco
+    validators: Validator_codrep
+
+  npdefrepcon{desrep}:
+    required:  Yes
+    required_msg: La descripciÃ³n no puede estar en Blanco
+    validators: Validator_desrep
+
+Validator_codrep:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Npdefrepcon
+        column:       codrep
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_desrep:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripciÃ³n no puede tener menos de 2 caracteres
+        max:       100
+        max_error: La descripciÃ³n no puede pasar mas de 100 caracteres

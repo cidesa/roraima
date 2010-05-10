@@ -124,7 +124,7 @@ class NphojintMapBuilder {
 
 		$tMap->addColumn('TENOTR', 'Tenotr', 'string', CreoleTypes::VARCHAR, false, 30);
 
-		$tMap->addColumn('SERCON', 'Sercon', 'string', CreoleTypes::VARCHAR, false, 16);
+		$tMap->addColumn('SERCON', 'Sercon', 'string', CreoleTypes::VARCHAR, false, 32);
 
 		$tMap->addColumn('DIROTR', 'Dirotr', 'string', CreoleTypes::VARCHAR, false, 1000);
 
