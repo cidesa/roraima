@@ -911,6 +911,7 @@ class Orden_compra
       $campo11='dtoart';//tabla Caartord
       $campo9='preart';//tabla Caartord
       $campo13='totart';//tabla Caartord
+      $campo15='Codpre';//tabla Caartord
     }
     else
     {
@@ -918,6 +919,7 @@ class Orden_compra
       $campo11='dondes';//tabla Caartsol
       $campo9='costo';//tabla Caartsol
       $campo13='montot';//tabla Caartsol
+      $campo15='codigopre';//tabla Caartsol
     }
     $mitotal = 0;
     $codigo_presupuestario='';
@@ -929,7 +931,7 @@ class Orden_compra
         $j=0;
           while ($j<count($grid_detalle_orden_arreglos))
           {
-            if (str_replace("'","",$grid_detalle_orden_arreglos[$fila]['codpre'])==str_replace("'","",$grid_detalle_orden_arreglos[$j]['codpre']))
+            if (str_replace("'","",$grid_detalle_orden_arreglos[$fila][$campo15])==str_replace("'","",$grid_detalle_orden_arreglos[$j][$campo15]))
             {
               if ($tiporec=='C')
                 $elmonto=str_replace("'","",$grid_detalle_orden_arreglos[$j][$campo13]);
@@ -942,7 +944,7 @@ class Orden_compra
         if ($caordcom->getId()!='')
            $mitotal = $mitotal - $grid_detalle_orden_arreglos[$fila][$campo11];
 
-        if ($grid_detalle_orden_arreglos[$fila]['codpre']!='')
+        if ($grid_detalle_orden_arreglos[$fila][$campo15]!='')
         {
            $codigo_presupuestario =  $grid_detalle_orden_arreglos[$fila]['codcat']."-".$grid_detalle_orden_arreglos[$fila]['codpar'];
            $mondis=Herramientas::Monto_disponible($codigo_presupuestario);
