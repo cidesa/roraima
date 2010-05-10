@@ -59,6 +59,7 @@ class Columna
   private $ajaxgrid = false;
   private $ajaxadicionales = array();
   private $anchogrid='900';
+  private $valida='';
 
   /**
    * Estable el nombre de la cabecera de la columna
@@ -656,6 +657,28 @@ class Columna
   public function getAnchogrid(){
 
     return $this->anchogrid;
+
+  }
+  /**
+   * Retorna el valor por defecto para el grid
+   *
+   * @return void
+   */
+  public function getValida(){
+
+    return $this->valida;
+
+}
+
+  /**
+   * Valida si la columna retorna vacio
+   *
+   * @param $val string con el valor por defecto
+   * @return void
+   */
+  public function setValida($val){
+
+    $this->valida = $val;
 
   }
 

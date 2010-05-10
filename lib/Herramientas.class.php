@@ -2262,6 +2262,28 @@ public static function obtenerDiaMesOAno($fecha,$formato,$dmoa)
       return false;
    }
 
+   public static function ValidarGridVacio($grid,$objvalida,$arr=false)
+  {
+    $err = self::ValidarGrid($grid);
+    if ($err=='-1')
+    {
+      foreach($grid[0] as $x)
+      {
+         if(!$arr)
+         {
+            foreach($objvalida as $r)
+             {
+                 eval('$campo=$x->get'.ucfirst($r).'();');
+                 if($campo=='')
+                     return 411;
+}
+         }
+      }
+      return -1;
+    }else
+      return $err;
+  }
+
 }
 
 class H extends Herramientas

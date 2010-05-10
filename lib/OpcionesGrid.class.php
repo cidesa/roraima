@@ -187,6 +187,7 @@ class OpcionesGrid
     $ajaxgrid  =    array();
     $ajaxadicionales=array();
     $anchogrid =    (string)$this->anchogrid;
+    $valida=array();
 
     foreach ($this->colums as $key => $col){
 
@@ -201,6 +202,7 @@ class OpcionesGrid
       $ajaxcolumna[]=  $col->getAjaxcolumna();
       $ajaxgrid[] =    $col->getAjaxgrid();
       $ajaxadicionales[] = $col->getAjaxadicionales();
+      if($col->getValida()) $valida[]=$col->getNombreCampo();
 
     if($col->isGrabable()){
       $t = $col->getTipo();
@@ -278,7 +280,7 @@ class OpcionesGrid
   'ajax' => $ajax, 'tipos' => $tipos, 'montos'=> $montos, 'filatotal' => $filatotal, 'totales'=> $totales,
   'html'=> $html, 'js'=> $js, 'datos'=> $per, 'grabar'=> $grabar, 'tabla' => $this->tabla, 'vacia' => $vacia, 'oculta' => $oculta,
   'tiposobj' => $tiposobj, 'combo' => $combo, 'checkbox' => $checkbox, 'boton' => $boton, 'default' => $default, 'funcionajax' => $funcionajax,
-  'jseliminar' => $this->jseliminar, 'ajaxfila' => $ajaxfila, 'ajaxcolumna' => $ajaxcolumna, 'ajaxgrid' => $ajaxgrid, 'ajaxadicionales' => $ajaxadicionales, 'anchogrid' => $anchogrid);
+  'jseliminar' => $this->jseliminar, 'ajaxfila' => $ajaxfila, 'ajaxcolumna' => $ajaxcolumna, 'ajaxgrid' => $ajaxgrid, 'ajaxadicionales' => $ajaxadicionales, 'anchogrid' => $anchogrid, 'valida' => $valida);
 
     return $obj;
 
