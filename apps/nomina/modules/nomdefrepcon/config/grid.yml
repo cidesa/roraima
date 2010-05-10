@@ -1,0 +1,37 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                true
+  tabla:                   npdefrepcon
+  anchogrid:               900
+  ancho:                   850
+  filas:                   1
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  NÂ° Columna
+  tipo:                    t
+  nombrecampo:             numcol
+  esgrabable:              true
+  valida:                  true
+  html:                    [ size=5 maxlength=3 onKeyDown="if(!((event.keyCode>=48 && event.keyCode<=57) || (event.keyCode==8) || (event.keyCode==9) || (event.keyCode==13) ))return false"]
+2:       # Columna 2
+  titulo:                  Nombre Columna
+  tipo:                    t
+  nombrecampo:             descol
+  esgrabable:              true
+  valida:                  true
+  html:                    [ size=40 maxlength=250]
+3:       # Columna 5
+  titulo:                  Concepto
+  tipo:                    t
+  nombrecampo:             codcon
+  esgrabable:              true
+  valida:                  true
+  html:                    [ size=3 maxlength=3]
+  catalogo:                [npdefcpt, sf_admin_edit_form, {Codcon: 3, Nomcon: 4}, Npdefcpt_codcon ]
+4:       # Columna 6
+  titulo:                  DescripciÃ³n
+  tipo:                    t
+  nombrecampo:             nomcon
+  esgrabable:              false
+  html:                    [ readonly=true size=50]

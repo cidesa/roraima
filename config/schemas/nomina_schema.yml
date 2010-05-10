@@ -427,7 +427,7 @@ propel:
       required: true
     nomemp:
       type: VARCHAR
-      size: 31
+      size: 100
       required: true
     nomcon:
       type: VARCHAR
@@ -3450,7 +3450,7 @@ propel:
       size: 30
     sercon:
       type: VARCHAR
-      size: 16
+      size: 32
     dirotr:
       type: VARCHAR
       size: 1000
@@ -7164,31 +7164,24 @@ propel:
       primaryKey: true
       autoIncrement: true
       description: Identificador Único del registro
-  npfalperemp:
-    codemp:                #codigo empleaado
-      type: VARCHAR
-      size: 16
-      required: true
-    fecini:                #Fecha de Inicio
-      type: DATE
-      required: true
-    fecret:                #Fecha de Retorno
-      type: DATE
-      required: true
-    horas:                 #Fecha de Retorno
-      type: NUMERIC
-      size: 3
-    codmot:                #Motivo
-      type: VARCHAR
-      size: 4
-    observ:                #Observacion
-      type: VARCHAR
-      size: 1000
-    feccon:                #Fecha de Consignacion Soporte
-      type: DATE
-    ivss:                  #Ivss
-      type: BOOLEAN
+  npdefrepcon:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
+    codrep:
+      type: VARCHAR
+      size: 3
+    desrep:
+      type: VARCHAR
+      size: 1000
+    numcol:
+      type: INTEGER
+    descol:
+      type: VARCHAR
+      size: 1000
+    codcon:
+      type: VARCHAR
+      size: 3
