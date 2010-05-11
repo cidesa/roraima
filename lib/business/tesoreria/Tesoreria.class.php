@@ -1973,6 +1973,24 @@ public static function validarCuentasGrid($grid)
     }
   }
 
+  public static function validarDisponibilidadPresuCajChi($grid,$afecta,&$codigo)
+  {
+    $validardisponibilidad=true;
+    $arreglo=self::Arreglodet($grid);
+    $j=0;
+    while ($j<count($arreglo))
+    {
+     $codigo=$arreglo[$j]["codpre"];
+     if (!OrdendePago::montoValido($j,H::toFloat($arreglo[$j]["moncau"]),'N',$codigo,$afecta,&$msj,&$mondis,&$sobregiro))
+     {
+      $validardisponibilidad=false;
+      break;
+     }
+     $j++;
+    }
+    return $validardisponibilidad;
+  }
+
   public static function grabarComprobante($opordpag,$grid,&$msjuno,&$arrcompro)
   {
     if ($opordpag->getNumord()=='########')

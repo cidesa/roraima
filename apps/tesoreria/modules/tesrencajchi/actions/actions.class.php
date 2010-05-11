@@ -18,6 +18,8 @@ class tesrencajchiActions extends autotesrencajchiActions
    * del formulario.
    *
    */
+protected $codigo = -1;
+
   public function executeList()
   {
     $this->processSort();
@@ -258,6 +260,7 @@ class tesrencajchiActions extends autotesrencajchiActions
   public function validateEdit()
   {
     $this->coderr =-1;
+    $this->codigo =-1;
 
     if($this->getRequest()->getMethod() == sfRequest::POST){
      $this->opordpag = $this->getOpordpagOrCreate();
@@ -285,6 +288,13 @@ class tesrencajchiActions extends autotesrencajchiActions
         $this->coderr=508;
         return false;
       }
+
+        if (!Tesoreria::validarDisponibilidadPresuCajChi($grid,1,&$cod))
+        {
+          $this->codigo=$cod;
+          $this->coderr=118;
+          return false;
+        }
 
       if($this->coderr!=-1){
         return false;
@@ -570,6 +580,31 @@ class tesrencajchiActions extends autotesrencajchiActions
     if ($grabo=='')
     { return true;}
     else { return false;}
+  }
+
+  /**
+   * Función para manejar la captura de errores del negocio, tanto que se
+   * produzcan por algún validator y por un valor false retornado por el validateEdit
+   *
+   */
+  public function handleErrorEdit()
+  {
+    $this->params=array();
+    $this->preExecute();
+    $this->opordpag = $this->getOpordpagOrCreate();
+    $this->updateOpordpagFromRequest();
+	$this->updateError();
+    $this->labels = $this->getLabels();
+    if($this->getRequest()->getMethod() == sfRequest::POST)
+    {
+      if($this->coderr!=-1){
+        $err = Herramientas::obtenerMensajeError($this->coderr);
+        if ($this->coderr==118)
+        $this->getRequest()->setError('',$err.' '.$this->codigo);
+        else $this->getRequest()->setError('',$err);
+      }
+    }
+    return sfView::SUCCESS;
   }
 
 
