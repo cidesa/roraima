@@ -20,7 +20,8 @@ class almprioriActions extends autoalmprioriActions
   
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -97,7 +98,7 @@ class almprioriActions extends autoalmprioriActions
     }else $this->elimina='N';
 
 
-    /*$sql="select codart as codart from caartsol where reqart='".$this->casolart->getReqart()."' group by codart";
+    $sql="select codart as codart from caartsol where reqart='".$this->casolart->getReqart()."' group by codart";
     if (Herramientas::BuscarDatos($sql,&$result))
     {
      $contador=0;
@@ -108,8 +109,8 @@ class almprioriActions extends autoalmprioriActions
       $c->addJoin(CacotizaPeer::REFCOT,CadetcotPeer::REFCOT);
       $c->add(CacotizaPeer::REFSOL,$this->casolart->getReqart());
       $c->add(CadetcotPeer::CODART,$result[$i]["codart"]);
-      $c->add(CadetcotPeer::PRIORI,'1');
-      $resul= CadetcotPeer::doSelect($c);
+      $c->add(CadetcotPeer::PRIORI,'',Criteria::NOT_EQUAL);
+      $resul= CadetcotPeer::doSelectOne($c);
       if ($resul)
       {
       	$contador= $contador + 1;
@@ -117,15 +118,15 @@ class almprioriActions extends autoalmprioriActions
       $i++;
      }
 
-     if ((count($result)-$contador)==1)
+     if ((count($result)==$contador))
      {
-     	$this->actualiza=true;
+     	$this->actualiza='S';
      }
      else
      {
-     	$this->actualiza=false;
+     	$this->actualiza='N';
      }
-    }*/
+    }
     if ($this->getRequest()->getMethod() == sfRequest::POST)
     {
       $this->updateCasolartFromRequest();

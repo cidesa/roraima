@@ -130,11 +130,11 @@
 
 	<?php $value = object_checkbox_tag($casolart, 'getActsolegr', array (
 	  'control_name' => 'casolart[actsolegr]',
-      'onBlur'=> remote_function(array(
+      /*'onBlur'=> remote_function(array(
         'url'      => 'almpriori/ajax',
         'complete' => 'AjaxJSON(request, json)',
         'with' => "'ajax=1&reqart='+$('casolart_reqart').value+'&codigo='+this.value"
-        ))
+        ))*/
 	)); echo $value ? $value : '&nbsp;' ?>
     </div>
    </th>
