@@ -911,7 +911,7 @@ class Orden_compra
       $campo11='dtoart';//tabla Caartord
       $campo9='preart';//tabla Caartord
       $campo13='totart';//tabla Caartord
-      $campo15='Codpre';//tabla Caartord
+      $campo15='codpre';//tabla Caartord
     }
     else
     {
