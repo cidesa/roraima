@@ -504,7 +504,7 @@ class Orden_compra
             }
             if (!$espro1)
             {
-                  $msg="La Contratistas de Bienes o Servicio y Cooperativas de la Orden de Compra es :".$rif." y no es mismo al de la Cotización seleccionada como Nro 1, se cambiara por la Contratistas de Bienes o Servicio y Cooperativas que posee la Prioridad 1";
+                  $msg="La Contratistas de Bienes o Servicio y Cooperativas de la cotizacion asociada a la  Solicitud no se le ha asignado Prioridad";
                   $rifpro=$strrifpro;
             }
         }
