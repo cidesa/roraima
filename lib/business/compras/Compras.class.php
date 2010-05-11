@@ -459,7 +459,9 @@ class Compras {
 	    $x = $grid[0];
 	    $j = 0;
 	    while ($j < count($x)) {
+              if ($x[$j]->getPriori()!='') {
 	      $x[$j]->save();
+              }
 	      $j++;
 	    }
     }
@@ -502,28 +504,13 @@ class Compras {
               $gridnuevo[$indice -1][6] = 0;
             }
             $gridnuevo[$indice -1][7] = $monuni -$gridnuevo[$indice -1][3];
-            $gridnuevo[$indice -1][8] = $resul2->getCodpre();
+            $gridnuevo[$indice -1][8] = $resul2->getCodcat().'-'.$resul2->getCodpre();
             $gridnuevo[$indice -1][9] = $resul2->getMonrgo();
             $gridnuevo[$indice -1][10] = $resul2->getCodcat();
           	}
           }
         }
       }
-
- /*     $c = new Criteria();
-      $c->add(CargosolPeer :: REQART, $reqart);
-      $dat = CargosolPeer :: doSelect($c);
-      if ($dat) {
-        foreach ($dat as $resultado) {
-          $indice2 = count($gridnuevo2) + 1;
-          $gridnuevo2[$indice2 -1][0] = $resultado->getCodrgo();
-          $gridnuevo2[$indice2 -1][1] = $resultado->getMonrgo();
-          $gridnuevo2[$indice2 -1][2] = $resultado->getTipdoc();
-          $gridnuevo2[$indice2 -1][3] = "";
-          $gridnuevo2[$indice2 -1][4] = $resultado->getMonrgo();
-        }
-      }
-*/
 
       $c = new Criteria();
       $c->add(CadisrgoPeer :: REQART, $reqart);
@@ -540,6 +527,7 @@ class Compras {
           $gridnuevorec[$indice2 -1][6] = $resultado->getCodcat();
         }
       }
+      $nopuedeaumentar=false;
       $z = 0;
       while ($z < count($gridnuevo)) {
         if ($gridnuevo[$z][2] != "") {
@@ -556,7 +544,8 @@ class Compras {
               }
             }
             $error = 133;
-            break;
+            return true;
+            //break;
           } else
             if ($gridnuevo[$z][2] < 0) {
               $c = new Criteria();
@@ -571,18 +560,12 @@ class Compras {
                 }
               }
               $error = 134;
-              break;
+              return true;
+              //break;
             } else {
               if ($gridnuevo[$z][1] != "") {
                 $r = 0;
-           /*     while ($r < count($gridnuevo2)) {
-                  self :: distribuirRecargos(& $gridnuevo2, & $gridnuevo, $r, 'R');
-                  $r++;
-                }*/
-
                 self :: distribuirRecargos(& $gridnuevo2, & $gridnuevo,'S',&$gridnuevorec);
-               /* $producto = ($gridnuevo[$z][2] * $gridnuevo[$z][1]);
-                $gridnuevo[$z][5] = $producto - $gridnuevo[$z][3];*/
                 self :: recalcularRecargos(&$gridnuevo2, &$gridnuevo, &$nopuedeaumentar, $reqart,&$gridnuevorec);
                 if ($gridnuevo[$z][5] > $gridnuevo[$z][7]) {
                   $tiporec = Herramientas :: getX('CODEMP', 'Cadefart', 'Asiparrec', '001');
@@ -613,6 +596,7 @@ class Compras {
             $datos->setJustifica(null);
             $datos->save();
           }
+          $error = 164;
         }
         $error = 135;
       }
@@ -2714,7 +2698,8 @@ class Compras {
               }
             }
             $error = 133;
-            break;
+            return true;
+            //break;
           } else
             if ($gridnuevo[$z][2] < 0) {
               $c = new Criteria();
@@ -2729,7 +2714,8 @@ class Compras {
                 }
               }
               $error = 134;
-              break;
+              return true;
+              //break;
             } else {
               if ($gridnuevo[$z][1] != "") {
                 $r = 0;
@@ -2764,9 +2750,10 @@ class Compras {
             $datos->setJustifica(null);
             $datos->save();
           }
-        }
         $error = 164;
       }
+        $error = 135;
+    }
     }
     return true;
   }
