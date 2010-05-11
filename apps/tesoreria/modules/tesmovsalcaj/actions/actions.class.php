@@ -194,7 +194,15 @@ class tesmovsalcajActions extends autotesmovsalcajActions
          if(!$reg)
          {
          	$javascript="alert('La Código Presupuestario formado por la Categoria y la Partida del articulo no existe --> $codpre'); $('$cajtexcom').value=''; $('$cajtexcom').focus();";
+         }else {
+           $r1= new Criteria();
+           $r1->add(CpasiiniPeer::CODPRE,$codpre);
+           $reg1= CpasiiniPeer::doSelectOne($r1);
+            if(!$reg1)
+             {
+               $javascript="alert('La Código Presupuestario formado por la Categoria y la Partida del articulo no tiene asignación Inicial --> $codpre'); $('$cajtexcom').value=''; $('$cajtexcom').focus();";
          }
+       }
        }
         $output = '[["javascript","'.$javascript.'",""],["","",""],["","",""]]';
        break;
@@ -212,7 +220,8 @@ class tesmovsalcajActions extends autotesmovsalcajActions
   
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
