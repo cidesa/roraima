@@ -36,7 +36,7 @@ class nomdefrepconActions extends autonomdefrepconActions
      $reg = NpdefrepconPeer::doSelect($c);
      $this->obj = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/nomdefrepcon/'.sfConfig::get('sf_app_module_config_dir_name').'/grid');
      $this->obj[1][0]->setCombo(array('1'=>'N°1','2'=>'N°2','3'=>'N°3','4'=>'N°4','5'=>'N°5','6'=>'N°6','7'=>'N°7','8'=>'N°8','9'=>'N°9','10'=>'N°10','11'=>'N°11','12'=>'N°12','13'=>'N°13'));
-     $this->obj[1][1]->setHtml('size=40 maxlength=250 onBlur="cambiardescripcion(this.id)"');
+     $this->obj[1][1]->setHtml('size=40 maxlength=250 onBlur="if($(id).value!=\'\')cambiardescripcion(this.id)"');
      
      $this->obj = $this->obj[0]->getConfig($reg);
      $this->npdefrepcon->setGrid($this->obj);
