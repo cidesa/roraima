@@ -8,19 +8,19 @@ opciones:                  # Opciones generales
   titulo:                  ' '
   htmltotalfilas:          ' '
 1:       # Columna 1
-  titulo:                  NÂ° Columna
-  tipo:                    t
+  titulo:                  N° Columna
+  tipo:                    c
   nombrecampo:             numcol
   esgrabable:              true
   valida:                  true
-  html:                    [ size=5 maxlength=3 onKeyDown="if(!((event.keyCode>=48 && event.keyCode<=57) || (event.keyCode==8) || (event.keyCode==9) || (event.keyCode==13) ))return false"]
+  html:                    [ ]
 2:       # Columna 2
   titulo:                  Nombre Columna
   tipo:                    t
   nombrecampo:             descol
   esgrabable:              true
   valida:                  true
-  html:                    [ size=40 maxlength=250]
+  html:                    [ ]
 3:       # Columna 5
   titulo:                  Concepto
   tipo:                    t
@@ -30,7 +30,7 @@ opciones:                  # Opciones generales
   html:                    [ size=3 maxlength=3]
   catalogo:                [npdefcpt, sf_admin_edit_form, {Codcon: 3, Nomcon: 4}, Npdefcpt_codcon ]
 4:       # Columna 6
-  titulo:                  DescripciÃ³n
+  titulo:                  Descripción
   tipo:                    t
   nombrecampo:             nomcon
   esgrabable:              false

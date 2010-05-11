@@ -25,9 +25,9 @@ class nomdefrepconActions extends autonomdefrepconActions
 
     if(!count($reg)>0)
     {
-      // AquÃ­ va el cÃ³digo para traernos los registros que contendrÃ¡ el grid
+      // Aquí va el código para traernos los registros que contendrá el grid
       $reg = array();
-      // AquÃ­ va el cÃ³digo para generar arreglo de configuraciÃ³n del grid
+      // Aquí va el código para generar arreglo de configuración del grid
     $this->obj = array();
     }
 
@@ -35,7 +35,8 @@ class nomdefrepconActions extends autonomdefrepconActions
      $c->add(NpdefrepconPeer::CODREP,$this->npdefrepcon->getCodrep());
      $reg = NpdefrepconPeer::doSelect($c);
      $this->obj = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/nomdefrepcon/'.sfConfig::get('sf_app_module_config_dir_name').'/grid');
-     //$this->obj = $this->columnas[0]->getConfig($reg);
+     $this->obj[1][0]->setCombo(array('1'=>'N°1','2'=>'N°2','3'=>'N°3','4'=>'N°4','5'=>'N°5','6'=>'N°6','7'=>'N°7','8'=>'N°8','9'=>'N°9','10'=>'N°10','11'=>'N°11','12'=>'N°12','13'=>'N°13'));
+     $this->obj[1][1]->setHtml('size=40 maxlength=250 onBlur="cambiardescripcion(this.id)"');
      
      $this->obj = $this->obj[0]->getConfig($reg);
      $this->npdefrepcon->setGrid($this->obj);
@@ -47,11 +48,11 @@ class nomdefrepconActions extends autonomdefrepconActions
 
     $codigo = $this->getRequestParameter('codigo','');
     // Esta variable ajax debe ser usada en cada llamado para identificar
-    // que objeto hace el llamado y por consiguiente ejecutar el cÃ³digo necesario
+    // que objeto hace el llamado y por consiguiente ejecutar el código necesario
     $ajax = $this->getRequestParameter('ajax','');
 
-    // Se debe enviar en la peticiÃ³n ajax desde el cliente los datos que necesitemos
-    // para generar el cÃ³digo de retorno, esto porque en un llamado Ajax no se devuelven
+    // Se debe enviar en la petición ajax desde el cliente los datos que necesitemos
+    // para generar el código de retorno, esto porque en un llamado Ajax no se devuelven
     // los datos de los objetos de la vista como pasa en un submit normal.
 
     switch ($ajax){
@@ -69,7 +70,7 @@ class nomdefrepconActions extends autonomdefrepconActions
     $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
 
     // Si solo se va usar ajax para actualziar datos en objetos ya existentes se debe
-    // mantener habilitar esta instrucciÃ³n
+    // mantener habilitar esta instrucción
     return sfView::HEADER_ONLY;
 
     // Si por el contrario se quiere reemplazar un div en la vista, se debe deshabilitar
@@ -80,9 +81,9 @@ class nomdefrepconActions extends autonomdefrepconActions
 
   /**
    *
-   * FunciÃ³n que se ejecuta luego los validadores del negocio (validators)
-   * Para realizar validaciones especÃ­ficas del negocio del formulario
-   * Para mayor informaciÃ³n vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
+   * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
   public function validateEdit()
@@ -90,7 +91,7 @@ class nomdefrepconActions extends autonomdefrepconActions
     $this->coderr =-1;
 
     // Se deben llamar a las funciones necesarias para cargar los
-    // datos de la vista que serÃ¡n usados en las funciones de validaciÃ³n.
+    // datos de la vista que serán usados en las funciones de validación.
     // Por ejemplo:
 
     if($this->getRequest()->getMethod() == sfRequest::POST){
@@ -103,7 +104,7 @@ class nomdefrepconActions extends autonomdefrepconActions
       $this->coderr = H::ValidarGridVacio($grid,$this->obj['valida']);
 
 
-      // Aqui van los llamados a los mÃ©todos de las clases del
+      // Aqui van los llamados a los métodos de las clases del
       // negocio para validar los datos.
       // Los resultados de cada llamado deben ser analizados por ejemplo:
 
@@ -111,10 +112,10 @@ class nomdefrepconActions extends autonomdefrepconActions
 
        //$resp=Herramientas::ValidarCodigo($valor,$this->tstipmov,$campo);
 
-      // al final $resp es analizada en base al cÃ³digo que retorna
-      // Todas las funciones de validaciÃ³n y procesos del negocio
-      // deben retornar cÃ³digos >= -1. Estos cÃ³digo serÃ¡m buscados en
-      // el archivo errors.yml en la funciÃ³n handleErrorEdit()
+      // al final $resp es analizada en base al código que retorna
+      // Todas las funciones de validación y procesos del negocio
+      // deben retornar códigos >= -1. Estos código serám buscados en
+      // el archivo errors.yml en la función handleErrorEdit()
 
       if($this->coderr!=-1){
         return false;
@@ -127,7 +128,7 @@ class nomdefrepconActions extends autonomdefrepconActions
   }
 
   /**
-   * FunciÃ³n para actualziar el grid en el post si ocurre un error
+   * Función para actualziar el grid en el post si ocurre un error
    * Se pueden colocar aqui los grids adicionales
    *
    */
