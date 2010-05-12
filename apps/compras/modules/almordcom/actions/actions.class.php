@@ -1105,7 +1105,8 @@ class almordcomActions extends autoalmordcomActions
     $col15->setTipo(Columna::TEXTO);
     $col15->setAlineacionObjeto(Columna::CENTRO);
     $col15->setAlineacionContenido(Columna::CENTRO);
-    $col15->setNombreCampo('Codpre');
+    if ($refsol!="") $col15->setNombreCampo('codigopre');
+    else $col15->setNombreCampo('codpre');
     $col15->setHTML('type="text" size="32" readonly=true');
 
     $col16 = new Columna('Codigo Partida');
