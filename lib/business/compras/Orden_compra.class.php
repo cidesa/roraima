@@ -427,10 +427,17 @@ class Orden_compra
                   else
                       $grid['montot'] = "0.00";
 
-                    if (($result[$i]['codpar']!='') and ($result[$i]['codcat']))
+                  if ($refsol!="") {
+                  if (($result[$i]['codpar']!='') and ($result[$i]['codcat']))
+                        $grid['codigopre']=$result[$i]['codcat'].'-'.$result[$i]['codpar'];
+                    else
+                        $grid['codigopre']=$partidaregart;
+                  }else {
+                      if (($result[$i]['codpar']!='') and ($result[$i]['codcat']))
                         $grid['codpre']=$result[$i]['codcat'].'-'.$result[$i]['codpar'];
                     else
                         $grid['codpre']=$partidaregart;
+                  }
 
                     if ($result[$i]['codpar']!='')
                         $grid['codpar']=$result[$i]['codpar'];
