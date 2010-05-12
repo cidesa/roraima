@@ -5247,7 +5247,8 @@ A.CODREDE"
 	public function Cpcompro_PreAjuste($params = array ()) {
 		$this->c = new Criteria();
 		$this->c->add(CpcomproPeer :: STACOM, 'A');
-		$this->sql = "feccom <= to_date('".$params[0]."','dd/mm/yyyy') and (moncom-salaju-salcau) > 0";
+	        $this->sql = "cpcompro.feccom <= to_date('".$params[0]."','dd/mm/yyyy') and (Select Sum(monimp-monaju-moncau) as moncom from cpimpcom where refcom=cpcompro.refcom) > 0";
+		//$this->sql = "feccom <= to_date('".$params[0]."','dd/mm/yyyy') and (moncom-salaju-salcau) > 0";
 		$this->c->add(CpcomproPeer :: FECCOM, $this->sql, Criteria :: CUSTOM);
 		$this->c->addAscendingOrderByColumn(CpcomproPeer :: REFCOM);
 
@@ -5262,7 +5263,8 @@ A.CODREDE"
 	public function Cpcausad_PreAjuste($params = array ()) {
 		$this->c = new Criteria();
 		$this->c->add(CpcausadPeer :: STACAU, 'A');
-		$this->sql = "feccau <= to_date('".$params[0]."','dd/mm/yyyy') and (moncau-salaju-salpag) > 0";
+		$this->sql = "cpcausad.feccau <= to_date('".$params[0]."','dd/mm/yyyy') and (Select Sum(monimp-monaju-monpag) as moncau from cpimpcau where refcau=cpcausad.refcau) > 0";
+		//$this->sql = "feccau <= to_date('".$params[0]."','dd/mm/yyyy') and (moncau-salaju-salpag) > 0";
 		$this->c->add(CpcausadPeer :: FECCAU, $this->sql, Criteria :: CUSTOM);
 		$this->c->addAscendingOrderByColumn(CpcausadPeer :: REFCAU);
 
@@ -5277,7 +5279,8 @@ A.CODREDE"
 	public function Cppagos_PreAjuste($params = array ()) {
 		$this->c = new Criteria();
 		$this->c->add(CppagosPeer :: STAPAG, 'A');
-		$this->sql = "fecpag <= to_date('".$params[0]."','dd/mm/yyyy') and (monpag-salaju) > 0";
+		$this->sql = "cppagos.fecpag <= to_date('".$params[0]."','dd/mm/yyyy') and (Select Sum(monimp-monaju) as monpag from cpimppag where refpag=cppagos.refpag) > 0";
+		//$this->sql = "fecpag <= to_date('".$params[0]."','dd/mm/yyyy') and (monpag-salaju) > 0";
 		$this->c->add(CppagosPeer :: FECPAG, $this->sql, Criteria :: CUSTOM);
 		$this->c->addAscendingOrderByColumn(CppagosPeer :: REFPAG);
 
@@ -5292,7 +5295,8 @@ A.CODREDE"
 	public function Cpprecom_PreAjuste($params = array ()) {
 		$this->c = new Criteria();
 		$this->c->add(CpprecomPeer :: STAPRC, 'A');
-		$this->sql = "fecprc <= to_date('".$params[0]."','dd/mm/yyyy') and (monprc-salaju-salcom) > 0";
+		$this->sql = "cpprecom.fecprc <= to_date('".$params[0]."','dd/mm/yyyy') and (Select Sum(monimp-monaju-moncom) as monprc from cpimpprc where refprc=cpprecom.refprc) > 0";
+		//$this->sql = "fecprc <= to_date('".$params[0]."','dd/mm/yyyy') and (monprc-salaju-salcom) > 0";
 		$this->c->add(CpprecomPeer :: FECPRC, $this->sql, Criteria :: CUSTOM);
 		$this->c->addAscendingOrderByColumn(CpprecomPeer :: REFPRC);
 
