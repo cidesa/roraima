@@ -847,7 +847,7 @@ $this->Bitacora('Guardo');
     $opciones->setTabla('Opdetord');
     $opciones->setAnchoGrid(850);
     $opciones->setAncho(850);
-    $opciones->setFilas(100);
+    $opciones->setFilas(150);
     $opciones->setTitulo('Imputaciones Presupuestarias');
     $opciones->setHTMLTotalFilas(' ');
 
@@ -931,7 +931,7 @@ $this->Bitacora('Guardo');
     $opciones->setTabla('Opdetord');
     $opciones->setAnchoGrid(850);
     $opciones->setAncho(850);
-    $opciones->setFilas(100);
+    $opciones->setFilas(150);
     $opciones->setTitulo('Imputaciones Presupuestarias');
     $opciones->setHTMLTotalFilas(' ');
 
