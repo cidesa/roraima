@@ -1352,7 +1352,7 @@ class Cheques
         $movs="D";
         if ($monpagado==0 || is_null($monpagado))
         $montos=$Monto+$MontDcto+$MonRet;
-        else $montos=$Monto+$MonRet;
+        else $montos=$Monto; //+$MonRet;
       }
       else if ($tippag=='C')//pagos compuestos
       {
@@ -1373,7 +1373,7 @@ class Cheques
              if (trim($movs)!="") $movs=$movs."_"."D"; else  $movs = "D";
              if ($monpagado==0 || is_null($monpagado))
                $montot=$x[$j]->getMontotalGrid()+$x[$j]->getMondes() + $x[$j]->getMonret();
-             else $montot=$x[$j]->getMontotalGrid() + $x[$j]->getMonret();
+             else $montot=$x[$j]->getMontotalGrid(); //+ $x[$j]->getMonret();
              if (trim($montos)!="") $montos=$montos."_".$montot; else $montos=$montot;
           }
           $j++;
@@ -1440,11 +1440,15 @@ class Cheques
                   $strsql = "Select codcon,destip From OPTipRet where CodTip= '". trim($result[$k]['codtip']) ."'";
                   if (Herramientas::BuscarDatos($strsql,&$optipret))
                   {
+
+                   if ($monpagado==0 || is_null($monpagado)) //Para que incluya la cuenta las retenciones solo en primer pago
+                   {
                     //Comprobante.IncluirAsiento $optipret[0]['codcon'], $optipret[0]['destip'], Comprob, "C", $result[0]['montoret'])
                     if (trim($ctas)!="") $ctas=$ctas."_".$optipret[0]['codcon']; else  $ctas = $optipret[0]['codcon'];
                     if (trim($desc)!="") $desc=$desc."_".$optipret[0]['destip']; else  $desc = $optipret[0]['destip'];
                     if (trim($movs)!="") $movs=$movs."_"."C"; else  $movs = "C";
                     if (trim($montos)!="") $montos=$montos."_".$result[$k]['montoret']; else $montos=$result[$k]['montoret'];
+                  }
                   }
                 $k++;
               } //while ($k<count($result))
@@ -1467,11 +1471,14 @@ class Cheques
                     $strsql = "Select codcon,destip From OPTipRet where CodTip= '". trim($resultado[$k]['codtip']) ."'";
                     if (Herramientas::BuscarDatos($strsql,&$optipret))
                     {
+
+                     if ($monpagado==0 || is_null($monpagado)) { //Para que incluya la cuenta las retenciones solo en primer pago
                       //Comprobante.IncluirAsiento $toptipret[0]['codcon'], $toptipret[0]['destip'], Comprob, "C", $resultado[0]['montoret'])
                       if (trim($ctas)!="") $ctas=$ctas."_".$optipret[0]['codcon']; else  $ctas = $optipret[0]['codcon'];
                       if (trim($desc)!="") $desc=$desc."_".$optipret[0]['destip']; else  $desc = $optipret[0]['destip'];
                       if (trim($movs)!="") $movs=$movs."_"."C"; else  $movs = "C";
                       if (trim($montos)!="") $montos=$montos."_".$resultado[$k]['montoret']; else $montos=$resultado[$k]['montoret'];
+                    }
                     }
                   $k++;
                 } //while ($k<count($result))

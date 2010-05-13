@@ -38,7 +38,8 @@
   'maxlength' => 8,
   'size' => 20,
   'control_name' => 'contabc[numcom]',
-  'readonly'  =>  $gencorrel=='S' ? true : false ,
+  //'readonly'  =>  $gencorrel=='S' ? true : false ,
+  'readonly'  =>  true,
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 
