@@ -202,6 +202,7 @@ class OrdendePago
   public static function actualizarRetenciones($fondos,$grid)
   {
     $referencia=$fondos->getNumord();
+    $traeallord=H::getConfApp('traeallord', 'pagemiret', 'tesoreria');
     $x=$grid[0];
     $j=0;
     while ($j<count($x))
@@ -213,7 +214,9 @@ class OrdendePago
           $c = new Criteria();
           $c->add(OpretordPeer::NUMORD,$x[$j]['numord']);
           $c->add(OpretordPeer::CODPRE,$x[$j]['codpre']);
+          if ($traeallord!="S")
           $c->add(OpretordPeer::CODTIP,$fondos->getCodtip());
+          else $c->add(OpretordPeer::CODTIP,$x[$j]['codtip']);
           $numero= OpretordPeer::doSelectOne($c);
           if ($numero)
           {
@@ -225,7 +228,9 @@ class OrdendePago
           $c = new Criteria();
           $c->add(OpretordPeer::NUMORD,$x[$j]['numord']);
           $c->add(OpretordPeer::CODPRE,$x[$j]['codpre']);
+          if ($traeallord!="S")
           $c->add(OpretordPeer::CODTIP,$fondos->getCodtip());
+          else $c->add(OpretordPeer::CODTIP,$x[$j]['codtip']);
           $numero= OpretordPeer::doSelectOne($c);
           if ($numero)
           {
