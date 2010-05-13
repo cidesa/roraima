@@ -2199,6 +2199,15 @@ class OrdendePago
          $opretord->setNumret($opretord->getNumord());
          $opretord->save();
        }
+     }else {
+         $h= new Criteria();
+         $h->add(OpretordPeer::NUMRET,$numero);
+         $result3= OpretordPeer::doSelectOne($h);
+         if ($result3)
+         {
+           $result3->setNumret('NOASIGNA');
+           $result3->save();
+         }
      }
     }
     return true;
