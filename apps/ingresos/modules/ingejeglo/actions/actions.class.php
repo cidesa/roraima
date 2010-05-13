@@ -140,7 +140,8 @@ class ingejegloActions extends autoingejegloActions
     $monto = 0;
     if (($monto1!=0) and ($monto1!=0))
     {
-      $monto = (( $monto1 * 100) / $monto2);
+      if($monto2>0) $monto = (( $monto1 * 100) / $monto2);
+      else $monto = (( $monto1 * 100));
     }
     return H::FormatoMonto($monto).$signo;
   }
