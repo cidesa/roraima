@@ -219,10 +219,12 @@ class Comprobante
   
   public static function ActualizarReferenciaComprobante($numcom, $refasi)
   {
+    $confcorcom=sfContext::getInstance()->getUser()->getAttribute('confcorcom');
     $c = new Criteria();
     $c->add(ContabcPeer::NUMCOM,$numcom);
     $contabc = ContabcPeer::doSelectOne($c);
     if($contabc){
+     if ($confcorcom=='N') $contabc->setNumcom("OP".substr($refasi,2,6));
       $contabc->setReftra($refasi);
       $contabc->save();
       $c = new Criteria();
@@ -230,6 +232,7 @@ class Comprobante
       $contabc1 = Contabc1Peer::doSelect($c);
       foreach($contabc1 as $det)
       {
+          if ($confcorcom=='N') $det->setNumcom("OP".substr($refasi,2,6));
         $det->setRefasi($refasi);
         $det->save();
       }

@@ -684,7 +684,7 @@ if ( ($opordpag->getId()!='')) //ES CONSULTA
 <?php }?>
 </li>
 <li class="float-rigth">
-<?php if ($opordpag->getId() && $opordpag->getStatus()!='A'): ?>
+<?php if ($opordpag->getId() && $opordpag->getStatus()!='A' && $oculeli!='S'): ?>
   <input id="eliminarboton" type="button" name="Submit2" value="Eliminar" class="sf_admin_action_delete" onclick="javascript:eliminar();"/>
 <?php endif; ?>
 </li>
