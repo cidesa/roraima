@@ -592,7 +592,8 @@ $this->Bitacora('Guardo');
 
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -668,8 +669,23 @@ $this->Bitacora('Guardo');
     $cajtexcom=$this->getRequestParameter('cajtexcom');
     if ($this->getRequestParameter('ajax')=='1')
     {
-      $dato=ContabbPeer::getDescta($this->getRequestParameter('codigo'));
-      $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
+      $r= new Criteria();
+      $r->add(ContabbPeer::CODCTA,$this->getRequestParameter('codigo'));
+      $reg= ContabbPeer::doSelectOne($r);
+      if ($reg)
+       {
+         if ($reg->getCargab()=='C')
+         {
+            $dato=$reg->getDescta(); $javascript="";
+         }else {
+             $javascript="alert('La Cuenta Contable no es cargable'); $('$cajtexcom').value=''; $('$cajtexcom').focus();";
+             $dato="";
+    }
+       }else {
+           $javascript="alert('La Cuenta Contable no existe'); $('$cajtexcom').value=''; $('$cajtexcom').focus();";
+           $dato="";
+       }
+      $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""]]';
     }
     $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
     return sfView::HEADER_ONLY;
