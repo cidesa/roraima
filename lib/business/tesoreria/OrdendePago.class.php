@@ -2202,13 +2202,16 @@ class OrdendePago
      }else {
          $h= new Criteria();
          $h->add(OpretordPeer::NUMRET,$numero);
-         $result3= OpretordPeer::doSelectOne($h);
+         $result3= OpretordPeer::doSelect($h);
          if ($result3)
          {
-           $result3->setNumret('NOASIGNA');
-           $result3->save();
+           foreach ($result3 as $opretord)
+           {
+             $opretord->setNumret('NOASIGNA');
+             $opretord->save();
          }
      }
+    }
     }
     return true;
   }
