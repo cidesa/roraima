@@ -432,7 +432,11 @@ $this->Bitacora('Guardo');
         $sqlche = $sqlche." AND A.NUMORD = D.NUMORD";
     }
 
+    $traeallord=H::getConfApp('traeallord', 'pagemiret', 'tesoreria');
+    if ($traeallord!='S')
     $SQL="SELECT 0 as check, A.NUMORD as numord,A.FECEMI as fecemi,B.CODPRE as codpre,B.MONRET as monret, nomben as nomben, 9 as id FROM OPORDPAG A,OPRETORD B".$sqltabla." WHERE A.NUMORD = B.NUMORD AND B.CODTIP = '".$codigo."' AND B.NUMRET = 'NOASIGNA' ".$sqlche.$sqlfecdes.$sqlfechas ." order by a.fecemi, a.numord";
+    else
+      $SQL="SELECT 0 as check, A.NUMORD as numord,A.FECEMI as fecemi,B.CODPRE as codpre,B.MONRET as monret, nomben as nomben, B.CODTIP as codtip, C.DESTIP as destip, 9 as id FROM OPORDPAG A,OPRETORD B, OPTIPRET C".$sqltabla." WHERE A.NUMORD = B.NUMORD AND B.CODTIP=C.CODTIP AND B.NUMRET = 'NOASIGNA' ".$sqlche.$sqlfecdes.$sqlfechas ." order by a.fecemi, a.numord";
 
     $resp = Herramientas::BuscarDatos($SQL,&$all);
     $this->numfila=count($all);
@@ -496,12 +500,33 @@ $this->Bitacora('Guardo');
     $col6->setHTML('type="text" size="10" readonly=true');
     //$col6->setEsTotal(true,'opordpag_monord');
 
+  if ($traeallord=='S') {
+    $col7 = new Columna('Retención');
+    $col7->setTipo(Columna::TEXTO);
+    $col7->setEsGrabable(true);
+    $col7->setAlineacionObjeto(Columna::IZQUIERDA);
+    $col7->setAlineacionContenido(Columna::IZQUIERDA);
+    $col7->setNombreCampo('codtip');
+    $col7->setHTML('type="text" size="10" readonly=true');
+
+    $col8 = new Columna('Descripción');
+    $col8->setTipo(Columna::TEXTO);
+    $col8->setEsGrabable(true);
+    $col8->setAlineacionObjeto(Columna::IZQUIERDA);
+    $col8->setAlineacionContenido(Columna::IZQUIERDA);
+    $col8->setNombreCampo('destip');
+    $col8->setHTML('type="text" size="20" readonly=true');
+  }
     $opciones->addColumna($col1);
     $opciones->addColumna($col2);
     $opciones->addColumna($col3);
     $opciones->addColumna($col4);
     $opciones->addColumna($col5);
     $opciones->addColumna($col6);
+   if ($traeallord=='S') {
+    $opciones->addColumna($col7);
+    $opciones->addColumna($col8);
+   }
 
     $this->obj = $opciones->getConfig($all);
    }
