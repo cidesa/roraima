@@ -9,3 +9,37 @@
 <?php use_helper('Object', 'ObjectAdmin', 'I18N', 'Grid', 'Validation') ?>
 
 <?php echo grid_tag_v2($casolart->getObj()); ?>
+
+<div id="gendet"></div>
+
+
+<script type="text/javascript">
+
+function ajaxmostrardetalle(e,id)
+{
+    var aux = id.split("_");
+    var name=aux[0];
+    var fil=parseInt(aux[1]);
+    var col=parseInt(aux[2]);
+
+    var codigo=$(id).value;
+
+  if(confirm("Â¿Desea visualizar el detalle de la Solicitud de Egresos?"))
+  {
+
+    if (e.keyCode==13 || e.keyCode==9)
+    {
+      if ($(id).value!="")
+      {
+       new Ajax.Updater('gendet', getUrlModuloAjax(), {asynchronous:true, evalScripts:true, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=1&codigo='+codigo});
+      }
+    }
+  }
+}
+
+ function detalle(formulario)
+ {
+   window.open('/compras_dev.php/almdetsol/edit/?formulario='+formulario,formulario,'menubar=no,toolbar=no,scrollbars=yes,width=1200,height=800,resizable=yes,left=1000,top=80');
+ }
+
+</script>

@@ -92,6 +92,7 @@ class almaprsolegrActions extends autoalmaprsolegrActions
        $this->columnas = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/almaprsolegr/'.sfConfig::get('sf_app_module_config_dir_name').'/grid_casolart');
 
 	    if ($this->nometiact!="") $this->columnas[1][0]->setTitulo('Aprobación Presidencia');
+            $this->columnas[1][1]->setHTML('type="text" size="10" readOnly=true onBlur="javascript:event.keyCode=13; ajaxmostrardetalle(event,this.id);"');
 
 	    $this->obj =$this->columnas[0]->getConfig($reg);
 
@@ -218,6 +219,41 @@ class almaprsolegrActions extends autoalmaprsolegrActions
       }
     }
     return sfView::SUCCESS;
+  }
+
+  /**
+   * Función para procesar _todas_ las funciones Ajax del formulario
+   * Cada función esta identificada con el valor de la vista "ajax"
+   * el cual traerá el indice de lo que se quiere procesar.
+   *
+   */
+  public function executeAjax()
+  {
+    $codigo = $this->getRequestParameter('codigo','');
+    $ajax = $this->getRequestParameter('ajax','');
+    $cajtexmos = $this->getRequestParameter('cajtexmos','');
+    $cajtexcom = $this->getRequestParameter('cajtexcom','');
+    $javascript="";
+    switch ($ajax){
+      case '1':
+        $this->formulario=array();
+        $this->i="";
+        $i=0;
+        $form="sf_admin/almaprsolegr/almdetsol";
+        $f[$i]=$form.$i;
+        $this->getUser()->setAttribute('refsol',$codigo,$f[$i]);
+        $this->formulario=$f;
+        $this->i=$i;
+
+        $output = '[["","",""],["","",""],["","",""]]';
+        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+        break;
+      default:
+        $output = '[["","",""],["","",""],["","",""]]';
+        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+        return sfView::HEADER_ONLY;
+        break;
+}
   }
 
 
