@@ -113,7 +113,7 @@ propel:
       foreignReference: codpre
     nompre:
       type: VARCHAR
-      size: 250
+      size: 500
     perpre:
       type: VARCHAR
       size: 2
@@ -385,7 +385,7 @@ propel:
       required: true
     nompre:
       type: VARCHAR
-      size: 250
+      size: 500
       required: true
     codcta:
       type: VARCHAR
