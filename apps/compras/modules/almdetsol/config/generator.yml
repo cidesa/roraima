@@ -1,0 +1,15 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Casolart
+    theme:            cidesaGenerator
+    fields:
+      grid:   { name: .}
+
+    edit:
+      title:          Detalle de Solicitud
+      display:        [_grid]
+      actions:
+        _cerrar:
+          name: Cerrar
+          params: class="sf_admin_action_delete" onClick="self.close()"
