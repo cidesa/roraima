@@ -12,8 +12,11 @@ new Form.Element.Observer("filter_text", 1, function(input, value) {
   <?php if(isset($model_files)): ?>
   <ul>
     <?php foreach ($model_files as $model): ?>
+    <?php $name = substr($model, 0, strlen($model)-8) ?>
     <?php $model = substr($model, 0, strlen($model)-8) ?>
-    <li id=<?php echo strtolower($model)  ?>  class="data parameter"><?php echo link_to($model, 'sfControlPanel/tableManager?class='.$model) ?></li>
+    <?php $model = split('/', $model) ?>
+    <?php if(count($model)>1) $model = $model[1]; else $model = $model[0]; ?>
+    <li id=<?php echo strtolower($name)  ?>  class="data parameter"><?php echo link_to($name, 'sfControlPanel/tableManager?class='.$model) ?></li>
     <?php endforeach; ?>
   </ul>
   <?php else: ?>

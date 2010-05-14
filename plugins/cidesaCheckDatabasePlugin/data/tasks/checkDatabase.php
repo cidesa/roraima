@@ -372,7 +372,7 @@ function _propel_cidesa_build_schema($task, $args)
 
 function _call_cidesa_phing($task, $task_name, $check_schema = true)
 {
-  $schemas = pakeFinder::type('file')->ignore_version_control()->name('*schema.yml')->relative()->follow_link()->in('config/schemas/');
+  $schemas = pakeFinder::type('file')->ignore_version_control()->name('*schema.yml')->not_name('sima_user_schema.yml')->relative()->follow_link()->in('config/schemas/');
 
   if ($check_schema && !$schemas)
   {
