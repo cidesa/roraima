@@ -13,7 +13,7 @@ abstract class BaseNpdefrepconPeer {
 	const CLASS_DEFAULT = 'lib.model.nomina.Npdefrepcon';
 
 	
-	const NUM_COLUMNS = 6;
+	const NUM_COLUMNS = 8;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -38,23 +38,29 @@ abstract class BaseNpdefrepconPeer {
 	const CODCON = 'npdefrepcon.CODCON';
 
 	
+	const SUMTOT = 'npdefrepcon.SUMTOT';
+
+	
+	const SUMVAL = 'npdefrepcon.SUMVAL';
+
+	
 	private static $phpNameMap = null;
 
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Id', 'Codrep', 'Desrep', 'Numcol', 'Descol', 'Codcon', ),
-		BasePeer::TYPE_COLNAME => array (NpdefrepconPeer::ID, NpdefrepconPeer::CODREP, NpdefrepconPeer::DESREP, NpdefrepconPeer::NUMCOL, NpdefrepconPeer::DESCOL, NpdefrepconPeer::CODCON, ),
-		BasePeer::TYPE_FIELDNAME => array ('id', 'codrep', 'desrep', 'numcol', 'descol', 'codcon', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
+		BasePeer::TYPE_PHPNAME => array ('Id', 'Codrep', 'Desrep', 'Numcol', 'Descol', 'Codcon', 'Sumtot', 'Sumval', ),
+		BasePeer::TYPE_COLNAME => array (NpdefrepconPeer::ID, NpdefrepconPeer::CODREP, NpdefrepconPeer::DESREP, NpdefrepconPeer::NUMCOL, NpdefrepconPeer::DESCOL, NpdefrepconPeer::CODCON, NpdefrepconPeer::SUMTOT, NpdefrepconPeer::SUMVAL, ),
+		BasePeer::TYPE_FIELDNAME => array ('id', 'codrep', 'desrep', 'numcol', 'descol', 'codcon', 'sumtot', 'sumval', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'Codrep' => 1, 'Desrep' => 2, 'Numcol' => 3, 'Descol' => 4, 'Codcon' => 5, ),
-		BasePeer::TYPE_COLNAME => array (NpdefrepconPeer::ID => 0, NpdefrepconPeer::CODREP => 1, NpdefrepconPeer::DESREP => 2, NpdefrepconPeer::NUMCOL => 3, NpdefrepconPeer::DESCOL => 4, NpdefrepconPeer::CODCON => 5, ),
-		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'codrep' => 1, 'desrep' => 2, 'numcol' => 3, 'descol' => 4, 'codcon' => 5, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
+		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'Codrep' => 1, 'Desrep' => 2, 'Numcol' => 3, 'Descol' => 4, 'Codcon' => 5, 'Sumtot' => 6, 'Sumval' => 7, ),
+		BasePeer::TYPE_COLNAME => array (NpdefrepconPeer::ID => 0, NpdefrepconPeer::CODREP => 1, NpdefrepconPeer::DESREP => 2, NpdefrepconPeer::NUMCOL => 3, NpdefrepconPeer::DESCOL => 4, NpdefrepconPeer::CODCON => 5, NpdefrepconPeer::SUMTOT => 6, NpdefrepconPeer::SUMVAL => 7, ),
+		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'codrep' => 1, 'desrep' => 2, 'numcol' => 3, 'descol' => 4, 'codcon' => 5, 'sumtot' => 6, 'sumval' => 7, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
 	);
 
 	
@@ -119,6 +125,10 @@ abstract class BaseNpdefrepconPeer {
 		$criteria->addSelectColumn(NpdefrepconPeer::DESCOL);
 
 		$criteria->addSelectColumn(NpdefrepconPeer::CODCON);
+
+		$criteria->addSelectColumn(NpdefrepconPeer::SUMTOT);
+
+		$criteria->addSelectColumn(NpdefrepconPeer::SUMVAL);
 
 	}
 

@@ -31,6 +31,14 @@ abstract class BaseNpdefrepcon extends BaseObject  implements Persistent {
 	
 	protected $codcon;
 
+
+	
+	protected $sumtot;
+
+
+	
+	protected $sumval;
+
 	
 	protected $alreadyInSave = false;
 
@@ -77,6 +85,20 @@ abstract class BaseNpdefrepcon extends BaseObject  implements Persistent {
   {
 
     return trim($this->codcon);
+
+  }
+  
+  public function getSumtot()
+  {
+
+    return trim($this->sumtot);
+
+  }
+  
+  public function getSumval()
+  {
+
+    return trim($this->sumval);
 
   }
 	
@@ -139,6 +161,26 @@ abstract class BaseNpdefrepcon extends BaseObject  implements Persistent {
       }
   
 	} 
+	
+	public function setSumtot($v)
+	{
+
+    if ($this->sumtot !== $v) {
+        $this->sumtot = $v;
+        $this->modifiedColumns[] = NpdefrepconPeer::SUMTOT;
+      }
+  
+	} 
+	
+	public function setSumval($v)
+	{
+
+    if ($this->sumval !== $v) {
+        $this->sumval = $v;
+        $this->modifiedColumns[] = NpdefrepconPeer::SUMVAL;
+      }
+  
+	} 
   
   public function hydrate(ResultSet $rs, $startcol = 1)
   {
@@ -156,13 +198,17 @@ abstract class BaseNpdefrepcon extends BaseObject  implements Persistent {
 
       $this->codcon = $rs->getString($startcol + 5);
 
+      $this->sumtot = $rs->getString($startcol + 6);
+
+      $this->sumval = $rs->getString($startcol + 7);
+
       $this->resetModified();
 
       $this->setNew(false);
 
       $this->afterHydrate();
 
-            return $startcol + 6; 
+            return $startcol + 8; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Npdefrepcon object", $e);
     }
@@ -327,6 +373,12 @@ abstract class BaseNpdefrepcon extends BaseObject  implements Persistent {
 			case 5:
 				return $this->getCodcon();
 				break;
+			case 6:
+				return $this->getSumtot();
+				break;
+			case 7:
+				return $this->getSumval();
+				break;
 			default:
 				return null;
 				break;
@@ -343,6 +395,8 @@ abstract class BaseNpdefrepcon extends BaseObject  implements Persistent {
 			$keys[3] => $this->getNumcol(),
 			$keys[4] => $this->getDescol(),
 			$keys[5] => $this->getCodcon(),
+			$keys[6] => $this->getSumtot(),
+			$keys[7] => $this->getSumval(),
 		);
 		return $result;
 	}
@@ -376,6 +430,12 @@ abstract class BaseNpdefrepcon extends BaseObject  implements Persistent {
 			case 5:
 				$this->setCodcon($value);
 				break;
+			case 6:
+				$this->setSumtot($value);
+				break;
+			case 7:
+				$this->setSumval($value);
+				break;
 		} 	}
 
 	
@@ -389,6 +449,8 @@ abstract class BaseNpdefrepcon extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[3], $arr)) $this->setNumcol($arr[$keys[3]]);
 		if (array_key_exists($keys[4], $arr)) $this->setDescol($arr[$keys[4]]);
 		if (array_key_exists($keys[5], $arr)) $this->setCodcon($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setSumtot($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setSumval($arr[$keys[7]]);
 	}
 
 	
@@ -402,6 +464,8 @@ abstract class BaseNpdefrepcon extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(NpdefrepconPeer::NUMCOL)) $criteria->add(NpdefrepconPeer::NUMCOL, $this->numcol);
 		if ($this->isColumnModified(NpdefrepconPeer::DESCOL)) $criteria->add(NpdefrepconPeer::DESCOL, $this->descol);
 		if ($this->isColumnModified(NpdefrepconPeer::CODCON)) $criteria->add(NpdefrepconPeer::CODCON, $this->codcon);
+		if ($this->isColumnModified(NpdefrepconPeer::SUMTOT)) $criteria->add(NpdefrepconPeer::SUMTOT, $this->sumtot);
+		if ($this->isColumnModified(NpdefrepconPeer::SUMVAL)) $criteria->add(NpdefrepconPeer::SUMVAL, $this->sumval);
 
 		return $criteria;
 	}
@@ -441,6 +505,10 @@ abstract class BaseNpdefrepcon extends BaseObject  implements Persistent {
 		$copyObj->setDescol($this->descol);
 
 		$copyObj->setCodcon($this->codcon);
+
+		$copyObj->setSumtot($this->sumtot);
+
+		$copyObj->setSumval($this->sumval);
 
 
 		$copyObj->setNew(true);
