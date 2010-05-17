@@ -21,4 +21,15 @@ class Npdefrepcon extends BaseNpdefrepcon
     {
         return H::GetX('Codcon','Npdefcpt','Nomcon',$this->codcon);
     }
+    public function getSumtot()
+    {
+        if($this->sumtot=='0' || $this->sumtot=='' )
+        {
+            return null;
+        }else
+        {
+            return $this->sumtot;
+        }
+    }
+
 }

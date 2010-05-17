@@ -13,15 +13,15 @@ opciones:                  # Opciones generales
   nombrecampo:             numcol
   esgrabable:              true
   valida:                  true
-  html:                    [ ]
+  html:                    [  ]
 2:       # Columna 2
   titulo:                  Nombre Columna
   tipo:                    t
   nombrecampo:             descol
   esgrabable:              true
   valida:                  true
-  html:                    [ ]
-3:       # Columna 5
+  html:                    [ size=40 ]
+3:       # Columna 3
   titulo:                  Concepto
   tipo:                    t
   nombrecampo:             codcon
@@ -29,9 +29,21 @@ opciones:                  # Opciones generales
   valida:                  true
   html:                    [ size=3 maxlength=3]
   catalogo:                [npdefcpt, sf_admin_edit_form, {Codcon: 3, Nomcon: 4}, Npdefcpt_codcon ]
-4:       # Columna 6
+4:       # Columna 4
   titulo:                  Descripción
   tipo:                    t
   nombrecampo:             nomcon
   esgrabable:              false
-  html:                    [ readonly=true size=50]
+  html:                    [ readonly=true size=40]
+5:       # Columna 5
+  titulo:                  Suma Total
+  tipo:                    k
+  nombrecampo:             sumtot
+  esgrabable:              true
+  html:                    [ ]
+6:       # Columna 6
+  titulo:                  Valor a Sumar
+  tipo:                    c
+  nombrecampo:             sumval
+  esgrabable:              true
+  html:                    [ ]

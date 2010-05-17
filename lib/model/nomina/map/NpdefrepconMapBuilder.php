@@ -46,5 +46,9 @@ class NpdefrepconMapBuilder {
 
 		$tMap->addColumn('CODCON', 'Codcon', 'string', CreoleTypes::VARCHAR, false, 3);
 
+		$tMap->addColumn('SUMTOT', 'Sumtot', 'string', CreoleTypes::VARCHAR, false, 1);
+
+		$tMap->addColumn('SUMVAL', 'Sumval', 'string', CreoleTypes::VARCHAR, false, 1);
+
 	} 
 } 
