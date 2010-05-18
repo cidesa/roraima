@@ -2642,14 +2642,14 @@ class Nomina {
 			if(strtotime($fecha1)<strtotime($fechaing))
 				$fecha1=$fechaing;
 
-	         $fecha2 = $fecha1 = date("Y-m",strtotime($fecnom))."-30";
+                        $fecha2 =  date("Y-m",strtotime($fecnom))."-30";
 			$sqld = "select last_day('$fecha1') as ultday";
 			if (Herramientas :: BuscarDatos($sqld, & $rd))
 				$fecha2=$rd[0]['ultday'];
 
 			#Buscamos los permisos para restarlos
 			$diaspermiso = 0;
-			$criterio3 = "Select coalesce(Sum(A.NroDia),0) as Cuantos from NPFalPer A where A.CodEmp='".$empledo."' and A.FecDes>=TO_DATE('".$fecha1."','YYYY-MM-DD') and A.FecHas<=TO_DATE('".$fecha2."','YYYY-MM-DD')";
+			$criterio3 = "Select coalesce(Sum(A.NroDia),0) as Cuantos from NPFalPer A where A.CodEmp='".$empleado."' and A.FecDes>=TO_DATE('".$fecha1."','YYYY-MM-DD') and A.FecHas<=TO_DATE('".$fecha2."','YYYY-MM-DD')";
 			if (Herramientas :: BuscarDatos($criterio3, & $result3))
 				$diaspermiso = $result3[0]['cuantos'];
 
@@ -2722,7 +2722,7 @@ class Nomina {
 					if (Herramientas :: BuscarDatos($criterio4, & $result4))
 					{
 						$fecha1 = date('Y-m-',strtotime($result4[0]['profec']))."01";
-				        $fecha2 = $fecha1 = date("Y-m",strtotime($result4[0]['profec']))."-30";
+                                                $fecha2 = date("Y-m",strtotime($result4[0]['profec']))."-30";
 						$sqld = "select last_day('$fecha1') as ultday";
 						if (Herramientas :: BuscarDatos($sqld, & $rd))
 							$fecha2=$rd[0]['ultday'];
@@ -2753,7 +2753,7 @@ class Nomina {
 							#Si $calculasab=true sumamos los dias sabados
 							if($calculasab)
 							{
-								if($fechainid=7)
+								if($fechainid==7)
 								{
 									$criterio5="Select * from NPVacDiaFer where Dia=TO_NUMBER(TO_CHAR(to_date('$fechaini','yyyy-mm-dd'),'DD'),'99') and Mes=TO_NUMBER(TO_CHAR(to_date('$fechaini','yyyy-mm-dd'),'DD'),'99')";
 									if (!(Herramientas :: BuscarDatos($criterio5, & $result5)))
@@ -2764,7 +2764,7 @@ class Nomina {
 							#Si $calculadom=true sumamos los dias domingos
 							if($calculadom)
 							{
-								if($fechainid=1)
+								if($fechainid==1)
 								{
 									$criterio5="Select * from NPVacDiaFer where Dia=TO_NUMBER(TO_CHAR(to_date('$fechaini','yyyy-mm-dd'),'DD'),'99') and Mes=TO_NUMBER(TO_CHAR(to_date('$fechaini','yyyy-mm-dd'),'DD'),'99')";
 									if (!(Herramientas :: BuscarDatos($criterio5, & $result5)))
@@ -4781,14 +4781,14 @@ class Nomina {
 			if(strtotime($fecha1)<strtotime($fechaing))
 				$fecha1=$fechaing;
 
-	         $fecha2 = $fecha1 = date("Y-m",strtotime($fechanom))."-30";
+                        $fecha2 = date("Y-m",strtotime($fechanom))."-30";
 			$sqld = "select last_day('$fecha1') as ultday";
 			if (Herramientas :: BuscarDatos($sqld, & $rd))
 				$fecha2=$rd[0]['ultday'];
 
 			#Buscamos los permisos para restarlos
 			$diaspermiso = 0;
-			$criterio3 = "Select coalesce(Sum(A.NroDia),0) as Cuantos from NPFalPer A where A.CodEmp='".$empledo."' and A.FecDes>=TO_DATE('".$fecha1."','YYYY-MM-DD') and A.FecHas<=TO_DATE('".$fecha2."','YYYY-MM-DD')";
+			$criterio3 = "Select coalesce(Sum(A.NroDia),0) as Cuantos from NPFalPer A where A.CodEmp='".$empleado."' and A.FecDes>=TO_DATE('".$fecha1."','YYYY-MM-DD') and A.FecHas<=TO_DATE('".$fecha2."','YYYY-MM-DD')";
 			if (Herramientas :: BuscarDatos($criterio3, & $result3))
 				$diaspermiso = $result3[0]['cuantos'];
 
@@ -4861,7 +4861,7 @@ class Nomina {
 					if (Herramientas :: BuscarDatos($criterio4, & $result4))
 					{
 						$fecha1 = date('Y-m-',strtotime($result4[0]['profec']))."01";
-				        $fecha2 = $fecha1 = date("Y-m",strtotime($result4[0]['profec']))."-30";
+                                                $fecha2 = date("Y-m",strtotime($result4[0]['profec']))."-30";
 						$sqld = "select last_day('$fecha1') as ultday";
 						if (Herramientas :: BuscarDatos($sqld, & $rd))
 							$fecha2=$rd[0]['ultday'];
