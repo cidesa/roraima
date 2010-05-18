@@ -136,7 +136,7 @@ class alminvfisActions extends autoalminvfisActions
 
       $sql="select a.codalm, b.nomubi,coalesce((select c.exiact from cainvfisubi c where to_char(FecInv,'dd/mm/yyyy')='".$fecinv."'  and c.codart='".$codart."' and c.codalm='".$codalm."'  and c.codubi=a.codubi),0) as exiact," .
       		"coalesce((select c.exiact2 from cainvfisubi c where to_char(FecInv,'dd/mm/yyyy')='".$fecinv."'  and c.codart='".$codart."' and c.codalm='".$codalm."' and c.codubi=a.codubi),0) as exiact2," .
-   		    "a.codubi,a.id
+   		    "a.codubi,coalesce((select c.exiact from caartalmubi c where c.codart='".$codart."' and c.codalm='".$codalm."' and c.codubi=a.codubi),0) as totalm,a.id
 			FROM  caalmubi a,cadefubi b
 			where a.codubi=b.codubi
 			AND a.Codalm='".$codalm."' order by a.codubi";
@@ -190,10 +190,22 @@ class alminvfisActions extends autoalminvfisActions
       $col4->setJScript('onKeypress="entermonto_c(event,this.id)"');
       $col4->setEsTotal(true,'totalubi2');
 
+      $col5 = new Columna('Total por Ubicación');
+      $col5->setNombreCampo('totalm');
+      $col5->setTipo(Columna::MONTO);
+      $col5->setEsGrabable(true);
+      $col5->setEsNumerico(true);
+      $col5->setAlineacionObjeto(Columna::DERECHA);
+      $col5->setAlineacionContenido(Columna::DERECHA);
+      $col5->setHTML('type="text" size=10 ');
+      $col5->setJScript('onKeypress="entermonto(event,this.id)" readonly=true');
+      $col5->setEsTotal(true,'totalm2');
+
       $opciones->addColumna($col1);
       $opciones->addColumna($col2);
       $opciones->addColumna($col3);
       $opciones->addColumna($col4);
+      $opciones->addColumna($col5);
 
       $this->objAlmUbi = $opciones->getConfig($per);
   }
@@ -322,6 +334,16 @@ class alminvfisActions extends autoalminvfisActions
 		        $col8->setNombreCampo('ubicacion');
 		        $col8->setOculta(true);
 
+		        $col9 = new Columna('Total por Almacén');
+		        $col9->setNombreCampo('totalm');
+		        $col9->setTipo(Columna::MONTO);
+		        $col9->setEsGrabable(true);
+		        $col9->setEsNumerico(true);
+		        $col9->setAlineacionObjeto(Columna::DERECHA);
+		        $col9->setAlineacionContenido(Columna::DERECHA);
+		        $col9->setHTML('type="text" size=10 ');
+		        $col9->setJScript('onKeypress="entermonto(event,this.id)" readonly=true');
+
 		        $opciones->addColumna($col1);
 		        $opciones->addColumna($col2);
 		        $opciones->addColumna($col3);
@@ -330,6 +352,7 @@ class alminvfisActions extends autoalminvfisActions
 		        $opciones->addColumna($col6);
 		        $opciones->addColumna($col7);
 		        $opciones->addColumna($col8);
+                        $opciones->addColumna($col9);
 		        $this->obj = $opciones->getConfig($per);
 		}
 

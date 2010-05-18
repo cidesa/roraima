@@ -34,7 +34,8 @@ function salvarmontos()
     var desubi="cx"+"_"+fil+"_2";
     var monact="cx"+"_"+fil+"_3";
     var monact2="cx"+"_"+fil+"_4";
-    var cadena=cadena + $(codubi).value+'_' + $(desubi).value+'_' + $(monact).value+'_' + $(monact2).value + '!';
+    var totalm="cx"+"_"+fil+"_5";
+    var cadena=cadena + $(codubi).value+'_' + $(desubi).value+'_' + $(monact).value+'_' + $(monact2).value + '_' + $(totalm).value + '!';
     fil++;
   }
 
@@ -42,10 +43,12 @@ function salvarmontos()
   var infubi="ax"+"_"+filas+"_8";
   var exiact="ax"+"_"+filas+"_3";
   var exiact2="ax"+"_"+filas+"_4";
+  var totalalm2="ax"+"_"+filas+"_9";
 
   $(infubi).value=cadena;
   $(exiact).value=$('totalubi').value;
   $(exiact2).value=$('totalubi2').value;
+  $(totalalm2).value=$('totalm2').value;
   $('periodos').hide();
   actualizarsaldos();
 }
