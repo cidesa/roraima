@@ -486,7 +486,7 @@ class OrdendePago
    }//////////////////////
 
    $orden->save();
-   Comprobante::ActualizarReferenciaComprobante($numerocomp,$orden->getNumord());
+   Comprobante::ActualizarReferenciaComprobante($numerocomp,$orden->getNumord(),'OP');
 
   }
 
