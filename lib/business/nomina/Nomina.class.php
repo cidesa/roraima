@@ -622,11 +622,11 @@ class Nomina {
           } else {
             while (self :: prioridad(self :: array_peek($operadores, count($operadores) - 1)) >= self :: prioridad($token)) {
               if($operadores)
-              $cadena = $cadena . array_pop($operadores) . " ";
+                $cadena = $cadena . array_pop($operadores) . " ";
               else
               {
                 return $cadena = '';
-            }
+              }
 
             }
             if ($token == ',' || $token == ';') {
@@ -1005,7 +1005,7 @@ class Nomina {
       }
       $token = "STAB";
     }
-    
+
   if (Herramientas :: StringPos($token, "SC", 0) != -1) {
       $parametro = substr($token, 2, strlen($token) - 2);
       $fecha = substr($parametro, 2, 2) . "/" . substr($parametro, 0, 2) . "/" . substr($parametro, 4, 4);
@@ -1259,7 +1259,7 @@ class Nomina {
       }
       $token = "STAB";
     }
-    
+
     if (Herramientas :: StringPos($token, "SC", 0) != -1 && $token!='SCAR') {
       $parametro = substr($token, 2, strlen($token) - 2);
       $fecha = substr($parametro, 2, 2) . "/" . substr($parametro, 0, 2) . "/" . substr($parametro, 4, 4);
@@ -1554,7 +1554,7 @@ class Nomina {
           $fechaini = $fecha1;
           $salir = true;
         }
-        
+
         $fechafin="";
         $criterio = "Select fecret as fecret from nphojint where codemp='" . $empleado . "'";
         if (Herramientas :: BuscarDatos($criterio, & $datosper)) {
@@ -1567,12 +1567,12 @@ class Nomina {
             }*/
           }
         }
-    	if($fechafin)
-	        if (strtotime($fechafin) < strtotime($fecha2)) {
-	          $salir = false;
-	          $fecha2=$fechafin;
-	         }
-        
+        if($fechafin)
+          if (strtotime($fechafin) < strtotime($fecha2)) {
+	        $salir = false;
+	        $fecha2=$fechafin;
+	      }
+
 
         /*if (Herramientas::dia_semana($fechaini_mod[2],$fechaini_mod[1],$fechaini_mod[0])=='Lunes')
         {
@@ -1982,15 +1982,15 @@ class Nomina {
 		  }
         } else
           $valor = 0;
-        #CODIGO QUE REALIZA OPERACIONES SOBRE EL SUELDO SEGUN SU TIEMPO   
+        #CODIGO QUE REALIZA OPERACIONES SOBRE EL SUELDO SEGUN SU TIEMPO
         if($tabla[0]['codtie']!='' && $valor!=0)
         {
         	$sqlf="select factor from nptiempo where codtie='".$tabla[0]['codtie']."'";
 	       	if (Herramientas :: BuscarDatos($sqlf, & $rsf))
-	       		if($rsf[0]["factor"]!='') 
+	       		if($rsf[0]["factor"]!='')
 		            eval('$valor = $valor'.$rsf[0]["factor"].';');
-		          
-        }            
+
+        }
         break;
 
       case "CTAF" :
@@ -2616,11 +2616,11 @@ class Nomina {
               $fechades = Herramientas :: dateAdd('d', 1, $fechades, '+');
             }
             $valor = $numerosemanas;
-        }        
+        }
         return $valor;
 	  case "MCES" :
         $valor=0;
-        #Calculamos los dias del mes        
+        #Calculamos los dias del mes
         $criterio = "Select A.* from NPCestaTickets A, NpAsiConEmp B where A.CodNom='".$nomina."' and B.CodCar = '".$cargo."' And
 		B.CodEmp='".$empleado."' And  A.CodCon=B.CodCon";
 		if (Herramientas :: BuscarDatos($criterio, & $result))
@@ -2634,34 +2634,34 @@ class Nomina {
 				$valorticket = $valorut * ($result[0]['valtic']/100);
 				$valorticket = $valorticket * $result[0]['numtic'];
 			}else
-				$valorut = 0;			
+				$valorut = 0;
 		  }else
-		   	$valorticket = $result[0]['valtic'] * $result[0]['numtic'];		  
-			
+		   	$valorticket = $result[0]['valtic'] * $result[0]['numtic'];
+
 			$fecha1 = date("Y-m",strtotime($fecnom))."-01";
 			if(strtotime($fecha1)<strtotime($fechaing))
 				$fecha1=$fechaing;
-				
-	         $fecha2 = $fecha1 = date("Y-m",strtotime($fecnom))."-30";		
+
+	         $fecha2 = $fecha1 = date("Y-m",strtotime($fecnom))."-30";
 			$sqld = "select last_day('$fecha1') as ultday";
 			if (Herramientas :: BuscarDatos($sqld, & $rd))
 				$fecha2=$rd[0]['ultday'];
-		
-			#Buscamos los permisos para restarlos	
+
+			#Buscamos los permisos para restarlos
 			$diaspermiso = 0;
 			$criterio3 = "Select coalesce(Sum(A.NroDia),0) as Cuantos from NPFalPer A where A.CodEmp='".$empledo."' and A.FecDes>=TO_DATE('".$fecha1."','YYYY-MM-DD') and A.FecHas<=TO_DATE('".$fecha2."','YYYY-MM-DD')";
 			if (Herramientas :: BuscarDatos($criterio3, & $result3))
 				$diaspermiso = $result3[0]['cuantos'];
-			
+
 			#Buscamos los dias Extras
 			$diasextras = 0;
 	        $criterio3 = "Select coalesce(Count(A.CodEmp),0) as Cuantos from NPDiaExt A where A.CodEmp='".$empleado."' and A.Fecha>=TO_DATE('".$fecha1."','YYYY-MM-DD') and A.Fecha<=TO_DATE('".$fecha2."','YYYY-MM-DD') and A.CodNom='".$nomina."'";
 			if (Herramientas :: BuscarDatos($criterio3, & $result3))
-				$diasextras = $result3[0]['cuantos'];	
-			
+				$diasextras = $result3[0]['cuantos'];
+
 		    #Ahora comparamos el Comportamiento del concepto de Cesta Ticket
             #Dependiendo si es por "J" - Jornadas Laborales, "V" - Variable ó  "F" - Monto Fijo
-            
+
             #calculamos tipo J=Jornadas Laborales
             if($result[0]['tippag']=='J')
 			{
@@ -2669,71 +2669,71 @@ class Nomina {
 				$sqlj = "Select IdeJor From  NpEmpJorLab Where CodEmp = '".$empleado."' And CodNom = '".$nomina."'";
 				if (Herramientas :: BuscarDatos($sqlj, & $rj))
 					$jornada = $rj[0]['idejor'];
-					
+
 				if($result[0]['diafer']=='S' || $result[0]['diafer']==1)
 					$diafer="S";
 				else
 				    $diafer='N'	;
-				$diaslabor=0;	
-				$sql="select diaslaborados('$nomina','$diafer',to_date('$fecha1','yyyy-mm-dd'),to_date('$fecha2','yyyy-mm-dd'),'$idejor')";	
+				$diaslabor=0;
+				$sql="select diaslaborados('$nomina','$diafer',to_date('$fecha1','yyyy-mm-dd'),to_date('$fecha2','yyyy-mm-dd'),'$idejor')";
 				if (Herramientas :: BuscarDatos($sql, & $rsql))
 					$diaslabor=$rsql[0]['diaslaborados'];
-				
+
 				$valorcesta = ($diaslabor - $diaspermiso + $diasextras) * $valorticket;
 				$valor = $valorcesta;
-				
+
 				#Actualizando la cantidad
-				$sql1="Update NpAsiConEmp Set Cantidad = ".$diaslabor - $diaspermiso + $diasextras." Where 
+				$sql1="Update NpAsiConEmp Set Cantidad = ".$diaslabor - $diaspermiso + $diasextras." Where
 				CodEmp = '".$empleado."' And CodCon = '".$result[0]['codcon']."' And CodCar = '".$cargo."'";
-				Herramientas::insertarRegistros($sql1);          
-				
-				$sql1="Update NpNOMCAL Set Cantidad = ".$diaslabor - $diaspermiso + $diasextras." Where 
+				Herramientas::insertarRegistros($sql1);
+
+				$sql1="Update NpNOMCAL Set Cantidad = ".$diaslabor - $diaspermiso + $diasextras." Where
                 CodEmp = '".$empleado."' And CodCon = '".$result[0]['codcon']."' And CodCar = '".$cargo."'";
-				Herramientas::insertarRegistros($sql1);          
-				
-				
-				
-			#calculamos tipo V=Variable	
+				Herramientas::insertarRegistros($sql1);
+
+
+
+			#calculamos tipo V=Variable
 			}elseif($result[0]['tippag']=='V')
 			{
 				if($result[0]['diahab']=='S' || $result[0]['diahab']==1)
 					$calculahab=true;
 				else
 					$calculahab=false;
-					
+
 				if($result[0]['sabado']=='S' || $result[0]['sabado']==1)
 					$calculasab=true;
 				else
-					$calculasab=false;		
-				
+					$calculasab=false;
+
 				if($result[0]['doming']=='S' || $result[0]['doming']==1)
 					$calculadom=true;
 				else
 					$calculadom=false;
-				
+
 				if($result[0]['diafer']=='S' || $result[0]['diafer']==1)
 					$calculafer=true;
 				else
-					$calculafer=false;	
-					
+					$calculafer=false;
+
 				if($calculahab || $calculasab || $calculadom || $calculafer)
 				{
 					$criterio4 = "SELECT PROFEC,ULTFEC FROM NPNOMINA WHERE  codnom='".$nomina."'";
 					if (Herramientas :: BuscarDatos($criterio4, & $result4))
 					{
 						$fecha1 = date('Y-m-',strtotime($result4[0]['profec']))."01";
-				        $fecha2 = $fecha1 = date("Y-m",strtotime($result4[0]['profec']))."-30";		
+				        $fecha2 = $fecha1 = date("Y-m",strtotime($result4[0]['profec']))."-30";
 						$sqld = "select last_day('$fecha1') as ultday";
 						if (Herramientas :: BuscarDatos($sqld, & $rd))
 							$fecha2=$rd[0]['ultday'];
 						$fechaini = $fecha1;
-						$numerodias = 0;	
-						
+						$numerodias = 0;
+
 						while(strtotime($fechaini) <= strtotime($fecha2))
 						{
 							$fechainid = 0;
 							$fecha2d  = 0;
-							$sqld="select to_char('$fechaini','d') as fechainid, to_char('$fecha2','d') as fecha2d;";
+							$sqld="select to_char(to_date('$fechaini','yyyy-mm-dd'),'d') as fechainid, to_char(to_date('$fecha2','yyyy-mm-dd'),'d') as fecha2d;";
 							if (Herramientas :: BuscarDatos($sqld, & $rd))
 							{
 								$fechainid = intval($rd[0]['fechainid']);
@@ -2741,62 +2741,62 @@ class Nomina {
 							}
 							#Si $calculahab=true sumamos los dias habiles
 							if($calculahab)
-							{							
+							{
 								if($fechainid>=2 && $fechainid<=6)
 								{
-									$criterio5="Select * from NPVacDiaFer where Dia=TO_NUMBER(TO_CHAR('$fechaini','DD'),'99') and Mes=TO_NUMBER(TO_CHAR('$fechaini','DD'),'99')";
+									$criterio5="Select * from NPVacDiaFer where Dia=TO_NUMBER(TO_CHAR(to_date('$fechaini','yyyy-mm-dd'),'DD'),'99') and Mes=TO_NUMBER(TO_CHAR(to_date('$fechaini','yyyy-mm-dd'),'DD'),'99')";
 									if (!(Herramientas :: BuscarDatos($criterio5, & $result5)))
-										$numerodias+=1;									
+										$numerodias+=1;
 								}
 							}
-							
+
 							#Si $calculasab=true sumamos los dias sabados
 							if($calculasab)
-							{							
+							{
 								if($fechainid=7)
 								{
-									$criterio5="Select * from NPVacDiaFer where Dia=TO_NUMBER(TO_CHAR('$fechaini','DD'),'99') and Mes=TO_NUMBER(TO_CHAR('$fechaini','DD'),'99')";
+									$criterio5="Select * from NPVacDiaFer where Dia=TO_NUMBER(TO_CHAR(to_date('$fechaini','yyyy-mm-dd'),'DD'),'99') and Mes=TO_NUMBER(TO_CHAR(to_date('$fechaini','yyyy-mm-dd'),'DD'),'99')";
 									if (!(Herramientas :: BuscarDatos($criterio5, & $result5)))
-										$numerodias+=1;									
+										$numerodias+=1;
 								}
 							}
-							
+
 							#Si $calculadom=true sumamos los dias domingos
 							if($calculadom)
-							{							
+							{
 								if($fechainid=1)
 								{
-									$criterio5="Select * from NPVacDiaFer where Dia=TO_NUMBER(TO_CHAR('$fechaini','DD'),'99') and Mes=TO_NUMBER(TO_CHAR('$fechaini','DD'),'99')";
+									$criterio5="Select * from NPVacDiaFer where Dia=TO_NUMBER(TO_CHAR(to_date('$fechaini','yyyy-mm-dd'),'DD'),'99') and Mes=TO_NUMBER(TO_CHAR(to_date('$fechaini','yyyy-mm-dd'),'DD'),'99')";
 									if (!(Herramientas :: BuscarDatos($criterio5, & $result5)))
-										$numerodias+=1;									
+										$numerodias+=1;
 								}
 							}
-							
+
 							#Si $calculafer=true sumamos los dias feriados
 							if($calculafer)
-							{	
-								$criterio5="Select * from NPVacDiaFer where Dia=TO_NUMBER(TO_CHAR('$fechaini','DD'),'99') and Mes=TO_NUMBER(TO_CHAR('$fechaini','DD'),'99')";
+							{
+								$criterio5="Select * from NPVacDiaFer where Dia=TO_NUMBER(TO_CHAR(to_date('$fechaini','yyyy-mm-dd'),'DD'),'99') and Mes=TO_NUMBER(TO_CHAR(to_date('$fechaini','yyyy-mm-dd'),'DD'),'99')";
 								if (Herramientas :: BuscarDatos($criterio5, & $result5))
-									$numerodias+=1;																	
+									$numerodias+=1;
 							}
 							$sqlini ="select to_date('$fechaini','yyyy-mm-dd')+1 as fechaini";
 							Herramientas :: BuscarDatos($sqlini, & $rini);
-							$fechaini = $rini[0]['fechaini'];														
+							$fechaini = $rini[0]['fechaini'];
 						}
-					}					
+					}
 				}else
 					$numerodias =0;
-				
+
 				$valorcesta = ($numerodias - $diaspermiso + $diasextras) * $valorticket;
-				$valor = $valorcesta;				
+				$valor = $valorcesta;
 			}else
 			{
 				$numerodias = $result[0]['numdia'];
 				$valorcesta = ($numerodias - $diaspermiso + $diasextras) * $valorticket;
-				$valor = $valorcesta;				
+				$valor = $valorcesta;
 			}
 		}
-                
+
         return $valor;
       default :
         $aux = 0;
@@ -3425,7 +3425,7 @@ class Nomina {
       }
       $campo = "STAB";
     }
-    
+
   if (Herramientas :: StringPos($campo, "SC", 0) != -1 && $campo!='SCAR') {
       $parametro = substr($campo, 2, strlen($campo) - 2);
       $fecha = substr($parametro, 2, 2) . "/" . substr($parametro, 0, 2) . "/" . substr($parametro, 4, 4);
@@ -3719,7 +3719,7 @@ class Nomina {
           $fechaini = $fecha1;
           $salir = true;
         }
-        
+
         $fechafin="";
         $criterio = "Select fecret as fecret from nphojint where codemp='" . $empleado . "'";
         if (Herramientas :: BuscarDatos($criterio, & $datosper)) {
@@ -3732,13 +3732,13 @@ class Nomina {
             }*/
           }
         }
-    	if($fechafin)
+        if($fechafin)
 	        if (strtotime($fechafin) < strtotime($fecha2)) {
 	          $salir = false;
 	          $fecha2=$fechafin;
-	         } 
-        
-        
+	         }
+
+
         $numerosemanas = 0;
         while (strtotime($fechaini) <= strtotime($fecha2)) {
           $fechaini_mod = split('-', $fechaini);
@@ -4130,15 +4130,15 @@ class Nomina {
 		  }
         } else
           $valor = 0;
-        #CODIGO QUE REALIZA OPERACIONES SOBRE EL SUELDO SEGUN SU TIEMPO   
+        #CODIGO QUE REALIZA OPERACIONES SOBRE EL SUELDO SEGUN SU TIEMPO
         if($tabla[0]['codtie']!='' && $valor!=0)
         {
         	$sqlf="select factor from nptiempo where codtie='".$tabla[0]['codtie']."'";
 	       	if (Herramientas :: BuscarDatos($sqlf, & $rsf))
-	       		if($rsf[0]["factor"]!='') 
+	       		if($rsf[0]["factor"]!='')
 		            eval('$valor = $valor'.$rsf[0]["factor"].';');
-		          
-        }    
+
+        }
         break;
 
       case "CTAF" :
@@ -4742,7 +4742,7 @@ class Nomina {
         $sql = "select ultfec from npnomina where codnom='$nomina'";
         if (Herramientas :: BuscarDatos($sql, & $res))
         {
-            $fechades = $result[0]['ultfec'];			
+            $fechades = $result[0]['ultfec'];
             $fechahas = $fechanom;
             $numerosemanas = 0;
             while (strtotime($fechades) <= strtotime($fechahas)) {
@@ -4753,14 +4753,14 @@ class Nomina {
               $fechades = Herramientas :: dateAdd('d', 1, $fechades, '+');
             }
             $valor = $numerosemanas;
-        }        
+        }
         return $valor;
 	  case "MCES" :
         $valor=0;
 		$auxfec = split("/",$hasta);
        	$fechanom = $auxfec[2].'-'.$auxfec[1].'-'.$auxfec[0];
-        #Calculamos los dias del mes        
-        $criterio = "Select A.* from NPCestaTickets A, NpAsiConEmp B where A.CodNom='".$nomina."' B.CodCar = '".$cargo."' And  
+        #Calculamos los dias del mes
+        $criterio = "Select A.* from NPCestaTickets A, NpAsiConEmp B where A.CodNom='".$nomina."' and B.CodCar = '".$cargo."' And
 		B.CodEmp='".$empleado."' And  A.CodCon=B.CodCon";
 		if (Herramientas :: BuscarDatos($criterio, & $result))
         {
@@ -4773,34 +4773,34 @@ class Nomina {
 				$valorticket = $valorut * ($result[0]['valtic']/100);
 				$valorticket = $valorticket * $result[0]['numtic'];
 			}else
-				$valorut = 0;			
+				$valorut = 0;
 		  }else
-		   	$valorticket = $result[0]['valtic'] * $result[0]['numtic'];		  
-			
+		   	$valorticket = $result[0]['valtic'] * $result[0]['numtic'];
+
 			$fecha1 = date("Y-m",strtotime($fechanom))."-01";
 			if(strtotime($fecha1)<strtotime($fechaing))
 				$fecha1=$fechaing;
-				
-	         $fecha2 = $fecha1 = date("Y-m",strtotime($fechanom))."-30";		
+
+	         $fecha2 = $fecha1 = date("Y-m",strtotime($fechanom))."-30";
 			$sqld = "select last_day('$fecha1') as ultday";
 			if (Herramientas :: BuscarDatos($sqld, & $rd))
 				$fecha2=$rd[0]['ultday'];
-		
-			#Buscamos los permisos para restarlos	
+
+			#Buscamos los permisos para restarlos
 			$diaspermiso = 0;
 			$criterio3 = "Select coalesce(Sum(A.NroDia),0) as Cuantos from NPFalPer A where A.CodEmp='".$empledo."' and A.FecDes>=TO_DATE('".$fecha1."','YYYY-MM-DD') and A.FecHas<=TO_DATE('".$fecha2."','YYYY-MM-DD')";
 			if (Herramientas :: BuscarDatos($criterio3, & $result3))
 				$diaspermiso = $result3[0]['cuantos'];
-			
+
 			#Buscamos los dias Extras
 			$diasextras = 0;
 	        $criterio3 = "Select coalesce(Count(A.CodEmp),0) as Cuantos from NPDiaExt A where A.CodEmp='".$empleado."' and A.Fecha>=TO_DATE('".$fecha1."','YYYY-MM-DD') and A.Fecha<=TO_DATE('".$fecha2."','YYYY-MM-DD') and A.CodNom='".$nomina."'";
 			if (Herramientas :: BuscarDatos($criterio3, & $result3))
-				$diasextras = $result3[0]['cuantos'];	
-			
+				$diasextras = $result3[0]['cuantos'];
+
 		    #Ahora comparamos el Comportamiento del concepto de Cesta Ticket
             #Dependiendo si es por "J" - Jornadas Laborales, "V" - Variable ó  "F" - Monto Fijo
-            
+
             #calculamos tipo J=Jornadas Laborales
             if($result[0]['tippag']=='J')
 			{
@@ -4808,71 +4808,71 @@ class Nomina {
 				$sqlj = "Select IdeJor From  NpEmpJorLab Where CodEmp = '".$empleado."' And CodNom = '".$nomina."'";
 				if (Herramientas :: BuscarDatos($sqlj, & $rj))
 					$jornada = $rj[0]['idejor'];
-					
+
 				if($result[0]['diafer']=='S' || $result[0]['diafer']==1)
 					$diafer="S";
 				else
 				    $diafer='N'	;
-				$diaslabor=0;	
-				$sql="select diaslaborados('$nomina','$diafer',to_date('$fecha1','yyyy-mm-dd'),to_date('$fecha2','yyyy-mm-dd'),'$idejor')";	
+				$diaslabor=0;
+				$sql="select diaslaborados('$nomina','$diafer',to_date('$fecha1','yyyy-mm-dd'),to_date('$fecha2','yyyy-mm-dd'),'$idejor')";
 				if (Herramientas :: BuscarDatos($sql, & $rsql))
 					$diaslabor=$rsql[0]['diaslaborados'];
-				
+
 				$valorcesta = ($diaslabor - $diaspermiso + $diasextras) * $valorticket;
 				$valor = $valorcesta;
-				
+
 				#Actualizando la cantidad
-				$sql1="Update NpAsiConEmp Set Cantidad = ".$diaslabor - $diaspermiso + $diasextras." Where 
+				$sql1="Update NpAsiConEmp Set Cantidad = ".$diaslabor - $diaspermiso + $diasextras." Where
 				CodEmp = '".$empleado."' And CodCon = '".$result[0]['codcon']."' And CodCar = '".$cargo."'";
-				Herramientas::insertarRegistros($sql1);          
-				
-				$sql1="Update NpNOMCAL Set Cantidad = ".$diaslabor - $diaspermiso + $diasextras." Where 
+				Herramientas::insertarRegistros($sql1);
+
+				$sql1="Update NpNOMCAL Set Cantidad = ".$diaslabor - $diaspermiso + $diasextras." Where
                 CodEmp = '".$empleado."' And CodCon = '".$result[0]['codcon']."' And CodCar = '".$cargo."'";
-				Herramientas::insertarRegistros($sql1);          
-				
-				
-				
-			#calculamos tipo V=Variable	
+				Herramientas::insertarRegistros($sql1);
+
+
+
+			#calculamos tipo V=Variable
 			}elseif($result[0]['tippag']=='V')
 			{
 				if($result[0]['diahab']=='S' || $result[0]['diahab']==1)
 					$calculahab=true;
 				else
 					$calculahab=false;
-					
+
 				if($result[0]['sabado']=='S' || $result[0]['sabado']==1)
 					$calculasab=true;
 				else
-					$calculasab=false;		
-				
+					$calculasab=false;
+
 				if($result[0]['doming']=='S' || $result[0]['doming']==1)
 					$calculadom=true;
 				else
 					$calculadom=false;
-				
+
 				if($result[0]['diafer']=='S' || $result[0]['diafer']==1)
 					$calculafer=true;
 				else
-					$calculafer=false;	
-					
+					$calculafer=false;
+
 				if($calculahab || $calculasab || $calculadom || $calculafer)
 				{
 					$criterio4 = "SELECT PROFEC,ULTFEC FROM NPNOMINA WHERE  codnom='".$nomina."'";
 					if (Herramientas :: BuscarDatos($criterio4, & $result4))
 					{
 						$fecha1 = date('Y-m-',strtotime($result4[0]['profec']))."01";
-				        $fecha2 = $fecha1 = date("Y-m",strtotime($result4[0]['profec']))."-30";		
+				        $fecha2 = $fecha1 = date("Y-m",strtotime($result4[0]['profec']))."-30";
 						$sqld = "select last_day('$fecha1') as ultday";
 						if (Herramientas :: BuscarDatos($sqld, & $rd))
 							$fecha2=$rd[0]['ultday'];
 						$fechaini = $fecha1;
-						$numerodias = 0;	
-						
+						$numerodias = 0;
+
 						while(strtotime($fechaini) <= strtotime($fecha2))
 						{
 							$fechainid = 0;
 							$fecha2d  = 0;
-							$sqld="select to_char('$fechaini','d') as fechainid, to_char('$fecha2','d') as fecha2d;";
+							$sqld="select to_char(to_date('$fechaini','yyyy-mm-dd'),'d') as fechainid, to_char('$fecha2','d') as fecha2d;";
 							if (Herramientas :: BuscarDatos($sqld, & $rd))
 							{
 								$fechainid = intval($rd[0]['fechainid']);
@@ -4880,63 +4880,63 @@ class Nomina {
 							}
 							#Si $calculahab=true sumamos los dias habiles
 							if($calculahab)
-							{							
+							{
 								if($fechainid>=2 && $fechainid<=6)
 								{
-									$criterio5="Select * from NPVacDiaFer where Dia=TO_NUMBER(TO_CHAR('$fechaini','DD'),'99') and Mes=TO_NUMBER(TO_CHAR('$fechaini','DD'),'99')";
+									$criterio5="Select * from NPVacDiaFer where Dia=TO_NUMBER(to_char(to_date('$fechaini','yyyy-mm-dd'),'DD'),'99') and Mes=TO_NUMBER(to_char(to_date('$fechaini','yyyy-mm-dd'),'DD'),'99')";
 									if (!(Herramientas :: BuscarDatos($criterio5, & $result5)))
-										$numerodias+=1;									
+										$numerodias+=1;
 								}
 							}
-							
+
 							#Si $calculasab=true sumamos los dias sabados
 							if($calculasab)
-							{							
+							{
 								if($fechainid=7)
 								{
-									$criterio5="Select * from NPVacDiaFer where Dia=TO_NUMBER(TO_CHAR('$fechaini','DD'),'99') and Mes=TO_NUMBER(TO_CHAR('$fechaini','DD'),'99')";
+									$criterio5="Select * from NPVacDiaFer where Dia=TO_NUMBER(to_char(to_date('$fechaini','yyyy-mm-dd'),'DD'),'99') and Mes=TO_NUMBER(to_char(to_date('$fechaini','yyyy-mm-dd'),'DD'),'99')";
 									if (!(Herramientas :: BuscarDatos($criterio5, & $result5)))
-										$numerodias+=1;									
+										$numerodias+=1;
 								}
 							}
-							
+
 							#Si $calculadom=true sumamos los dias domingos
 							if($calculadom)
-							{							
+							{
 								if($fechainid=1)
 								{
-									$criterio5="Select * from NPVacDiaFer where Dia=TO_NUMBER(TO_CHAR('$fechaini','DD'),'99') and Mes=TO_NUMBER(TO_CHAR('$fechaini','DD'),'99')";
+									$criterio5="Select * from NPVacDiaFer where Dia=TO_NUMBER(to_char(to_date('$fechaini','yyyy-mm-dd'),'DD'),'99') and Mes=TO_NUMBER(to_char(to_date('$fechaini','yyyy-mm-dd'),'DD'),'99')";
 									if (!(Herramientas :: BuscarDatos($criterio5, & $result5)))
-										$numerodias+=1;									
+										$numerodias+=1;
 								}
 							}
-							
+
 							#Si $calculafer=true sumamos los dias feriados
 							if($calculafer)
-							{	
-								$criterio5="Select * from NPVacDiaFer where Dia=TO_NUMBER(TO_CHAR('$fechaini','DD'),'99') and Mes=TO_NUMBER(TO_CHAR('$fechaini','DD'),'99')";
+							{
+								$criterio5="Select * from NPVacDiaFer where Dia=TO_NUMBER(to_char(to_date('$fechaini','yyyy-mm-dd'),'DD'),'99') and Mes=TO_NUMBER(to_char(to_date('$fechaini','yyyy-mm-dd'),'DD'),'99')";
 								if (Herramientas :: BuscarDatos($criterio5, & $result5))
-									$numerodias+=1;																	
+									$numerodias+=1;
 							}
 							$sqlini ="select to_date('$fechaini','yyyy-mm-dd')+1 as fechaini";
 							Herramientas :: BuscarDatos($sqlini, & $rini);
-							$fechaini = $rini[0]['fechaini'];														
+							$fechaini = $rini[0]['fechaini'];
 						}
-					}					
+					}
 				}else
 					$numerodias =0;
-				
+
 				$valorcesta = ($numerodias - $diaspermiso + $diasextras) * $valorticket;
-				$valor = $valorcesta;				
+				$valor = $valorcesta;
 			}else
 			{
 				$numerodias = $result[0]['numdia'];
 				$valorcesta = ($numerodias - $diaspermiso + $diasextras) * $valorticket;
-				$valor = $valorcesta;				
+				$valor = $valorcesta;
 			}
 		}
-                
-        return $valor;	
+
+        return $valor;
         break;
       default :
         /////// FFRAC
@@ -8430,12 +8430,12 @@ public static function salvarNpsalintind($npsalint, $grid) {
         $npcargos = NpcargosPeer :: doSelectOne($c);
         if (!$npcargos)
           return 444;
-          
+
         $c = new Criteria();
         $c->add(NpasicarempPeer :: CODEMP, $npasicaremp->getCodemp());
         $c->add(NpasicarempPeer :: CODNOM, $codnom);
         $c->add(NpasicarempPeer :: CODCAR, $codcar);
-        $c->add(NpasicarempPeer :: STATUS, 'V');        
+        $c->add(NpasicarempPeer :: STATUS, 'V');
         $objnew = NpasicarempPeer :: doSelectOne($c);
         if ($objnew)
           return 498;
