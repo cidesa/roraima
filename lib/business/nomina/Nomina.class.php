@@ -621,7 +621,13 @@ class Nomina {
             }
           } else {
             while (self :: prioridad(self :: array_peek($operadores, count($operadores) - 1)) >= self :: prioridad($token)) {
+              if($operadores)
               $cadena = $cadena . array_pop($operadores) . " ";
+              else
+              {
+                return $cadena = '';
+            }
+
             }
             if ($token == ',' || $token == ';') {
               $opeant = false;
@@ -2615,7 +2621,7 @@ class Nomina {
 	  case "MCES" :
         $valor=0;
         #Calculamos los dias del mes        
-        $criterio = "Select A.* from NPCestaTickets A, NpAsiConEmp B where A.CodNom='".$nomina."' B.CodCar = '".$cargo."' And  
+        $criterio = "Select A.* from NPCestaTickets A, NpAsiConEmp B where A.CodNom='".$nomina."' and B.CodCar = '".$cargo."' And
 		B.CodEmp='".$empleado."' And  A.CodCon=B.CodCon";
 		if (Herramientas :: BuscarDatos($criterio, & $result))
         {
