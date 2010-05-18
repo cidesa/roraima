@@ -224,7 +224,7 @@ class Comprobante
     $c->add(ContabcPeer::NUMCOM,$numcom);
     $contabc = ContabcPeer::doSelectOne($c);
     if($contabc){
-     if ($confcorcom=='N') $contabc->setNumcom("OP".substr($refasi,2,6));
+     if ($confcorcom=='N') $contabc->setNumcom($refasi);
       $contabc->setReftra($refasi);
       $contabc->save();
       $c = new Criteria();
@@ -232,7 +232,7 @@ class Comprobante
       $contabc1 = Contabc1Peer::doSelect($c);
       foreach($contabc1 as $det)
       {
-          if ($confcorcom=='N') $det->setNumcom("OP".substr($refasi,2,6));
+          if ($confcorcom=='N') $det->setNumcom($refasi);
         $det->setRefasi($refasi);
         $det->save();
       }

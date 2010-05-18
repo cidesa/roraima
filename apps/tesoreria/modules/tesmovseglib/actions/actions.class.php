@@ -1199,14 +1199,18 @@ $this->Bitacora('Guardo');
     $sql="Select stacon,tipmov,monmov,codcta,numcue From TsMovLib Where NumCue = '".$numcue."' And RefLib = '".$reflib."' and TipMov = '".$tipmov."' ";
     if (Herramientas::BuscarDatos($sql,&$tsmovlib))
       {
-        if (!$tsmovlib[0]["stacon"]!='C')
+        if ($tsmovlib[0]["stacon"]!='C')
         {
           $escheque=H::getX('CODTIP','Tstipmov','Escheque',$tsmovlib[0]["tipmov"]);
           if ($escheque==1)
           {
             $this->msg=$this->msg.Tesoreria::anular_Eliminar_Cheque('A',$numcue,$reflib);
+            if ($this->msg==''){
             $this->msg=$this->msg.Tesoreria::actualiza_Orden_De_Pago($reflib,$numcue,$tipmov);
+            if ($this->msg==''){
             $this->msg=$this->msg.Tesoreria::anular_Eliminar_Imppag('A',$reflib,$numcue,$fecanu, $refpag);
+          }
+            }
           }
           else
           {
@@ -1216,12 +1220,14 @@ $this->Bitacora('Guardo');
               if ($tabla[0]["refier"]=='A')
               {
                 $this->msg=$this->msg.Tesoreria::actualiza_Orden_De_Pago($reflib,$numcue,$tipmov);
+                if ($this->msg==''){
                 $this->msg=$this->msg.Tesoreria::anular_Eliminar_Imppag('A',$reflib,$numcue,$fecanu,$refpag);
+              }
               }
               else
               {
                 $this->msg=$this->msg.Tesoreria::anular_Eliminar_Imppag('A',$reflib,$numcue,$fecanu,$refpag);
-
+             if ($this->msg==''){
               $c = new Criteria();
               $c->add(OpdetperPeer::NUMCHE,$reflib);
               $c->add(OpdetperPeer::CTABAN,$numcue);
@@ -1236,16 +1242,17 @@ $this->Bitacora('Guardo');
               }
             }
           }
+          }
           $sql3="select debcre from tstipmov where codtip='".$tipmov."'";
           if (Herramientas::BuscarDatos($sql3,&$tstipmov))
           {
             $afecta=$tstipmov[0]["debcre"];
           }
-
+          if ($this->msg==''){
           // Generar Nuevo comprobante contable
           //if($numcom2=='########') $numcom2=Comprobante::Buscar_Correlativo();
           $this->msg=$this->msg.Tesoreria::anular_Eliminar('A',$numcomadi,$feccomadi,$compadic,$fechacom,$numcom,&$numcom2,$fecanu,$reflib2);
-
+          if ($this->msg==''){
           // GENERAR NUEVO MOVIMIENTO SEGUN LIBRO
           $tsmovlibA= new Tsmovlib();
           $dateFormat = new sfDateFormat($this->getUser()->getCulture());
@@ -1277,6 +1284,8 @@ $this->Bitacora('Guardo');
           $tsmovlibA->save();
 
           Tesoreria::actualiza_Bancos('A','D',$numcue,$monmov);
+          }
+          }
         }//if (!$tsmovlib[0]["stacon"]!='C')
       }//  if (Herramientas::BuscarDatos($sql,&$tsmovlib))
      }//else if (Tesoreria::validaPeriodoCerrado($this->getRequestParameter('tsmovlib[feclib]'))==true)
@@ -1318,14 +1327,18 @@ $this->Bitacora('Guardo');
     $sql="Select stacon,tipmov,monmov,codcta,numcue From TsMovLib Where NumCue = '".$numcue."' And RefLib = '".$reflib."' and TipMov = '".$tipmov."' ";
     if (Herramientas::BuscarDatos($sql,&$tsmovlib))
       {
-        if (!$tsmovlib[0]["stacon"]!='C')
+        if ($tsmovlib[0]["stacon"]!='C')
         {
           $escheque=H::getX('CODTIP','Tstipmov','Escheque',$tsmovlib[0]["tipmov"]);
           if ($escheque==1)
           {
             $this->msg=$this->msg.Tesoreria::anular_Eliminar_Cheque('A',$numcue,$reflib);
+            if ($this->msg==''){
             $this->msg=$this->msg.Tesoreria::actualiza_Orden_De_Pago($reflib,$numcue,$tipmov);
+            if ($this->msg==''){
             $this->msg=$this->msg.Tesoreria::anular_Eliminar_Imppag('A',$reflib,$numcue,$fecanu, $refpag);
+          }
+            }
           }
           else
           {
@@ -1335,12 +1348,14 @@ $this->Bitacora('Guardo');
               if ($tabla[0]["refier"]=='A')
               {
                 $this->msg=$this->msg.Tesoreria::actualiza_Orden_De_Pago($reflib,$numcue,$tipmov);
+                if ($this->msg==''){
                 $this->msg=$this->msg.Tesoreria::anular_Eliminar_Imppag('A',$reflib,$numcue,$fecanu,$refpag);
+              }
               }
               else
               {
                 $this->msg=$this->msg.Tesoreria::anular_Eliminar_Imppag('A',$reflib,$numcue,$fecanu,$refpag);
-
+              if ($this->msg==''){
               $c = new Criteria();
               $c->add(OpdetperPeer::NUMCHE,$reflib);
               $c->add(OpdetperPeer::CTABAN,$numcue);
@@ -1355,12 +1370,13 @@ $this->Bitacora('Guardo');
               }
             }
           }
+          }
           $sql3="select debcre from tstipmov where codtip='".$tipmov."'";
           if (Herramientas::BuscarDatos($sql3,&$tstipmov))
           {
             $afecta=$tstipmov[0]["debcre"];
           }
-
+         if ($this->msg==''){
           // Grabar Nuevo comprobante contable
           if ($this->getUser()->getAttribute('grabo',null,$this->getUser()->getAttribute('formulario'))=='S')
 	      {
@@ -1422,6 +1438,7 @@ $this->Bitacora('Guardo');
           $tsmovlibA->save();
 
           Tesoreria::actualiza_Bancos('A','D',$numcue,$monmov);
+          }
         }//if (!$tsmovlib[0]["stacon"]!='C')
       }//  if (Herramientas::BuscarDatos($sql,&$tsmovlib))
     }
