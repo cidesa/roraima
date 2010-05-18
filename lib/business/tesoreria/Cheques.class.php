@@ -57,7 +57,7 @@ class Cheques
       $tsmovlib->setFecing(date("Y-m-d"));
       $tsmovlib->save();
 
-      Comprobante::ActualizarReferenciaComprobante($Comprobante,$numche);
+      Comprobante::ActualizarReferenciaComprobante($Comprobante,$numche,'');
 
     }
     else
