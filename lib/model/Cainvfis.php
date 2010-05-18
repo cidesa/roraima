@@ -17,6 +17,7 @@ class Cainvfis extends BaseCainvfis
 {
   private $unialter ='';
   protected $ubicacion = '';
+  protected $totalm="0,00";
 
   public function getDesart()
   {
@@ -104,5 +105,24 @@ class Cainvfis extends BaseCainvfis
   public function setUnialter($val)
   {
 	$this->unialter = $val;
+  }
+
+  public function getTotalm()
+  {
+    $e= new Criteria();
+    $e->add(CaartalmPeer::CODALM,self::getCodalm());
+    $e->add(CaartalmPeer::CODART,self::getCodart());
+    $reg= CaartalmPeer::doSelectOne($e);
+    if ($reg)
+    {
+        $totalm=number_format($reg->getExiact(),2,',','.');
+    }else $totalm="0,00";
+
+    return $totalm;
+}
+
+  public function setTotalm(){
+
+    return $this->totalm;
   }
 }

@@ -19,6 +19,7 @@ class Caregart extends BaseCaregart
   protected $gencorart="";
   protected $tiedatrel="";
   protected $oculsave="";
+  protected $totalm="0,00";
 
 public function getNomram($val=false)
 	{
