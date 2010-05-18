@@ -2655,7 +2655,7 @@ class Nomina {
 
 			#Buscamos los dias Extras
 			$diasextras = 0;
-	        $criterio3 = "Select coalesce(Count(A.CodEmp),0) as Cuantos from NPDiaExt A where A.CodEmp='".$empleado."' and A.Fecha>=TO_DATE('".$fecha1."','YYYY-MM-DD') and A.Fecha<=TO_DATE('".$fecha2."','YYYY-MM-DD') and A.CodNom='".$nomina."'";
+                        $criterio3 = "Select coalesce(Count(A.CodEmp),0) as Cuantos from NPDiaExt A where A.CodEmp='".$empleado."' and A.Fecha>=TO_DATE('".$fecha1."','YYYY-MM-DD') and A.Fecha<=TO_DATE('".$fecha2."','YYYY-MM-DD') and A.CodNom='".$nomina."'";
 			if (Herramientas :: BuscarDatos($criterio3, & $result3))
 				$diasextras = $result3[0]['cuantos'];
 
@@ -2683,13 +2683,13 @@ class Nomina {
 				$valor = $valorcesta;
 
 				#Actualizando la cantidad
-				$sql1="Update NpAsiConEmp Set Cantidad = ".$diaslabor - $diaspermiso + $diasextras." Where
-				CodEmp = '".$empleado."' And CodCon = '".$result[0]['codcon']."' And CodCar = '".$cargo."'";
-				Herramientas::insertarRegistros($sql1);
-
-				$sql1="Update NpNOMCAL Set Cantidad = ".$diaslabor - $diaspermiso + $diasextras." Where
-                CodEmp = '".$empleado."' And CodCon = '".$result[0]['codcon']."' And CodCar = '".$cargo."'";
-				Herramientas::insertarRegistros($sql1);
+				#$sql1="Update NpAsiConEmp Set Cantidad = ".$diaslabor - $diaspermiso + $diasextras." Where
+				#CodEmp = '".$empleado."' And CodCon = '".$result[0]['codcon']."' And CodCar = '".$cargo."'";
+				#Herramientas::insertarRegistros($sql1);
+                                $numerodias=$diaslabor;
+				#$sql1="Update NpNOMCAL Set Cantidad = ".$diaslabor - $diaspermiso + $diasextras." Where
+                                #CodEmp = '".$empleado."' And CodCon = '".$result[0]['codcon']."' And CodCar = '".$cargo."'";
+				#Herramientas::insertarRegistros($sql1);
 
 
 
@@ -2789,12 +2789,16 @@ class Nomina {
 
 				$valorcesta = ($numerodias - $diaspermiso + $diasextras) * $valorticket;
 				$valor = $valorcesta;
+
 			}else
 			{
 				$numerodias = $result[0]['numdia'];
 				$valorcesta = ($numerodias - $diaspermiso + $diasextras) * $valorticket;
 				$valor = $valorcesta;
 			}
+                        $sql1="Update npasiconemp Set Cantidad = ".($numerodias - $diaspermiso + $diasextras)." Where
+                        CodEmp = '".$empleado."' And CodCon = '".$result[0]['codcon']."' And CodCar = '".$cargo."'";
+                        Herramientas::insertarRegistros($sql1);
 		}
 
         return $valor;
