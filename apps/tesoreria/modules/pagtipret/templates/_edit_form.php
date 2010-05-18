@@ -118,20 +118,23 @@
 <th>
   <?php echo label_for('montot', __('% del Monto Total'),'class="required"') ?>
 </th>
-<?php if ($optipret->getLimbaseret()=='S') { ?>
+
 <th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
 <th>
+<div id="montoocul" style="display:none">
    <?php echo label_for('monbasmin', __('Monto Base Mínimo'),'class="required"') ?>
   <?php $value = object_input_tag($optipret, array('getMbasmi',true), array (
   'size' => 7,
   'control_name' => 'optipret[mbasmi]',
   'onBlur' => "javascript:event.keyCode=13; return entermontootro(event, this.id)",
 )); echo $value ? $value : '&nbsp;' ?>
+</div>
 </th>
 <th>
+<div id="montoocul2" style="display:none">
   <?php echo label_for('expre', __('expresado en Unidades Tributarias'),'class="required"') ?>
+</div>
 </th>
-<?php } ?>
 </tr>
 </table>
 </div>
@@ -206,18 +209,22 @@
 <?php echo '&nbsp;&nbsp;&nbsp;&nbsp;'.'% del Monto Total'?>
    </div>
 </th>
-<?php if ($optipret->getLimbaseret()=='S') { ?>
+
 <th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
 <th>
+<div id="montoocula" style="display:none">
    <?php echo label_for('monbasmin', __('Monto Base Mínimo'),'class="required"') ?>
   <?php $value = object_input_tag($optipret, array('getMbasmi',true), array (
   'size' => 7,
   'control_name' => 'optipret[mbasmi1]',
   'onBlur' => "javascript:event.keyCode=13; return entermontootro(event, this.id)",
 )); echo $value ? $value : '&nbsp;' ?>
+</div>
 </th>
 <th>
+<div id="montoocula2" style="display:none">
   <?php echo label_for('expre', __('expresado en Unidades Tributarias'),'class="required"') ?>
+</div>
 </th>
 <?php } ?>
 </tr>
@@ -291,4 +298,18 @@ function verificar()
   	$('optipret_descta').value="";
   }
 }
+ var limbast='<?php echo $optipret->getLimbaseret(); ?>';
+ var consus='<?php echo $optipret->getConsustra(); ?>';
+ if (limbast=='S')
+ {
+     if (consus=='S')
+     {
+         $('montoocula').show();
+         $('montoocula2').show();
+     }else {
+         $('montoocul').show();
+         $('montoocul2').show();
+     }
+ }
+
 </script>
