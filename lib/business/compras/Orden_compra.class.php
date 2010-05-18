@@ -2275,12 +2275,12 @@ class Orden_compra
   {
    $marcado=$arreglo_grid[$j]["check"];
    $unidad=$arreglo_grid[$j]["codcat"];
-   if ($caordcom->getRefsol()!="")
+   if ($caordcom->getRefsol()!="" && $caordcom->getId()=="")
    $codpresu=$arreglo_grid[$j]["codigopre"];
    else $codpresu=$arreglo_grid[$j]["codpre"];
    if ($marcado=="1")
    {
-    if ($caordcom->getRefsol()!="")
+    if ($caordcom->getRefsol()!="" && $caordcom->getId()=="")
     //si la orden de compra refiere a Solicitud de egreso, los recargos son iguales a los de la solicitud,
     //de lo contrario si es orden de compra directa los recargos son los que el usuario haya introducido
     {
