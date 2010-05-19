@@ -2311,6 +2311,13 @@ class Orden_compra
          	 if ($arreglo_grid[$j]["datosrecargo"]!='')
 		     {
 		    $cadenarec=split('!',$arreglo_grid[$j]["datosrecargo"]);
+	              $c= new Criteria();
+		        $c->add(CadisrgoPeer::REQART,$caordcom->getOrdcom());
+		        $c->add(CadisrgoPeer::CODART,$arreglo_grid[$j]["codart"]);
+		        $c->add(CadisrgoPeer::CODCAT,$arreglo_grid[$j]["codcat"]);
+		        //$c->add(CadisrgoPeer::CODRGO,$aux2[0]);
+		        $c->add(CadisrgoPeer::TIPDOC,$caordcom->getDoccom());
+		        CadisrgoPeer::doDelete($c);
 		        $r=0;
 		        while ($r<(count($cadenarec)-1))
 		        {
@@ -2318,14 +2325,6 @@ class Orden_compra
 		          $aux2=split('_',$aux);
 		          if ($aux2[0]!="" && Herramientas::toFloat($aux2[4])>0)
 		          {
-		              $c= new Criteria();
-		        $c->add(CadisrgoPeer::REQART,$caordcom->getOrdcom());
-		        $c->add(CadisrgoPeer::CODART,$arreglo_grid[$j]["codart"]);
-		        $c->add(CadisrgoPeer::CODCAT,$arreglo_grid[$j]["codcat"]);
-		        $c->add(CadisrgoPeer::CODRGO,$aux2[0]);
-		        $c->add(CadisrgoPeer::TIPDOC,$caordcom->getDoccom());
-		        CadisrgoPeer::doDelete($c);
-
 		            $distribucion = new Cadisrgo();
 		          $distribucion->setReqart($caordcom->getOrdcom());
 		          $distribucion->setCodart(str_replace("'","",$arreglo_grid[$j]["codart"]));
@@ -2374,6 +2373,13 @@ class Orden_compra
      if ($arreglo_grid[$j]["datosrecargo"]!='')
      {
     $cadenarec=split('!',$arreglo_grid[$j]["datosrecargo"]);
+        $c= new Criteria();
+        $c->add(CadisrgoPeer::REQART,$caordcom->getOrdcom());
+        $c->add(CadisrgoPeer::CODART,$arreglo_grid[$j]["codart"]);
+        $c->add(CadisrgoPeer::CODCAT,$arreglo_grid[$j]["codcat"]);
+        //$c->add(CadisrgoPeer::CODRGO,$aux2[0]);
+        $c->add(CadisrgoPeer::TIPDOC,$caordcom->getDoccom());
+        CadisrgoPeer::doDelete($c);
         $r=0;
         while ($r<(count($cadenarec)-1))
         {
@@ -2381,14 +2387,6 @@ class Orden_compra
           $aux2=split('_',$aux);
           if ($aux2[0]!="" && Herramientas::toFloat($aux2[4])>0)
           {
-              $c= new Criteria();
-        $c->add(CadisrgoPeer::REQART,$caordcom->getOrdcom());
-        $c->add(CadisrgoPeer::CODART,$arreglo_grid[$j]["codart"]);
-        $c->add(CadisrgoPeer::CODCAT,$arreglo_grid[$j]["codcat"]);
-        $c->add(CadisrgoPeer::CODRGO,$aux2[0]);
-        $c->add(CadisrgoPeer::TIPDOC,$caordcom->getDoccom());
-        CadisrgoPeer::doDelete($c);
-
             $distribucion = new Cadisrgo();
           $distribucion->setReqart($caordcom->getOrdcom());
           $distribucion->setCodart(str_replace("'","",$arreglo_grid[$j]["codart"]));
