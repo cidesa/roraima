@@ -404,7 +404,14 @@ H::printR($per);
   public static function validarPreasifuefin($clasemodelo,$grid)
   {
     $monmov = H::QuitarMontov2($clasemodelo->getMonmov());  //Total
-      $monasi = Herramientas::getXx('cpasiini',array('codpre','perpre'),array($clasemodelo->getCodpre(),'00'),'monasi');  //Monto Asignado
+    $a= new Criteria();
+    $a->add(CpasiiniPeer::PERPRE,'00');
+    $a->add(CpasiiniPeer::CODPRE,$clasemodelo->getCodpre());
+    $data2= CpasiiniPeer::doSelectOne($a);
+    if ($data2)
+    {
+      $monasi=$data2->getMonasi();
+    }
 
     if ($monmov > $monasi)
     {
