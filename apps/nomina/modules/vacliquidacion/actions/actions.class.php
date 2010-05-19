@@ -7,13 +7,13 @@
  * @subpackage vacliquidacion
  * @author     $Author$ <desarrollo@cidesa.com.ve>
  * @version SVN: $Id$
- * 
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
 class vacliquidacionActions extends autovacliquidacionActions
 {
-	// variable donde se debe colocar el código de error generado en el validateEdit 
+	// variable donde se debe colocar el código de error generado en el validateEdit
   // para que sea procesado por el handleErrorEdit.
 private static $coderror=-1;
 
@@ -57,6 +57,7 @@ private static $coderror=-1;
     $cajsuenor=$this->getRequestParameter('cajsuenor');
     $cajcodemp=$this->getRequestParameter('cajcodemp');
     $codigo=$this->getRequestParameter('codigo');
+
 
     if ($this->getRequestParameter('ajax')=='1')
     {
@@ -121,24 +122,26 @@ private static $coderror=-1;
 		   $suedia=0;
 		   $suediario=0;
 	       $javascript="alert('El Empleado no Existe');";
-		  
-	   }
 
+	   }
+           if($this->ex){
+                $javascript.="alert('".$this->ex->getNativeError().", Vista Npliqvacacion')";
+           }
 	   $output = '[["'.$cajnomemp.'","'.$nomemp.'",""], ["'.$cajfecing.'","'.$fecing.'",""], ["'.$cajfecret.'","'.$fecret.'",""],["'.$cajultsue.'","'.$sueldonormal.'",""],["'.$cajsuenor.'","'.$ultimosueldo.'",""],["nphojint_sueult","'.$sueult.'",""],["nphojint_suepro","'.$suepro.'",""],["nphojint_suedia","'.$suedia.'",""],["nphojint_suediario","'.$suediario.'",""],["javascript","'.$javascript.'",""] ]';
     }
     if ($this->getRequestParameter('ajax')=='2')
     {
        if(strpos($cajultsue,'.') && strpos($cajultsue,','))
 	    	$cajultsue = H::convnume($cajultsue);
-	   else   
+	   else
 	   	 if(strpos($cajultsue,'.'))
            $cajultsue = str_replace('.',',',$cajultsue);
-	   
+
 	   if(strpos($cajsuenor,'.') && strpos($cajsuenor,','))
 	   	   	$cajsuenor = H::convnume($cajsuenor);
 	   else
 	   	 if(strpos($cajsuenor,'.'))
-           $cajsuenor = str_replace('.',',',$cajsuenor);	   
+           $cajsuenor = str_replace('.',',',$cajsuenor);
 
        $c=new Criteria();
        $c->add(NphojintPeer::CODEMP,$cajcodemp);
@@ -184,14 +187,14 @@ private static $coderror=-1;
 		$codnom='';
 		$sqlnom="select codnom from npasicaremp where codemp='$codemp' and status='V'";
 		if (H::BuscarDatos($sqlnom,$arrnom))
-			$codnom=$arrnom[0]['codnom'];			
-	
+			$codnom=$arrnom[0]['codnom'];
+
 		$porcion=0;
-		$sqlpor="SELECT SUM(A.MONTO)/12 as porcion FROM NPHISCON A , NPHOJINT B WHERE A.CODEMP='$codemp' AND A.CODNOM='$codnom' 
+		$sqlpor="SELECT SUM(A.MONTO)/12 as porcion FROM NPHISCON A , NPHOJINT B WHERE A.CODEMP='$codemp' AND A.CODNOM='$codnom'
 				AND A.CODCON in (select codcon from npparamsalint where codnom='$codnom' and afecta='ABV')
 				AND A.FECNOM >=
 				to_date((case when to_date(to_char(fecing,'dd/mm'),'dd/mm')>to_date(to_char(coalesce(fecret,now()),'dd/mm'),'dd/mm')
-				then to_char(fecing,'dd/mm')||'/'||(to_number(to_char(now(),'yyyy'),'9999')-1) 
+				then to_char(fecing,'dd/mm')||'/'||(to_number(to_char(now(),'yyyy'),'9999')-1)
 				else '01/01/'||TO_CHAR(coalesce(FECRET,now()),'YYYY')
 				end),'DD/MM/YYYY')
 				AND A.FECNOM <=coalesce(FECRET,now())
@@ -199,7 +202,7 @@ private static $coderror=-1;
 
 		if (H::BuscarDatos($sqlpor,$arrpor))
 			$porcion=$arrpor[0]['porcion'];
-	###	
+	###
     $tipsalbonvf='';
 	$tipsalvacven='';
 	########SUELDOS OTROS##########
@@ -210,16 +213,16 @@ private static $coderror=-1;
 		$sueult=$rs[0]["sueult"];
 	else
 		$sueult= 0;
-		
+
 	#Sueldo Promedio
 	$sql =  "select coalesce(avg(salemp),0) as suepro from (
-				select distinct salemp,fecini from npimppresoc where codemp='$codemp' 
+				select distinct salemp,fecini from npimppresoc where codemp='$codemp'
 				order by fecini desc limit 12
 				)a";
 	if (H::BuscarDatos($sql,$rs))
 		$suepro=$rs[0]["suepro"];
 	else
-		$suepro= 0;	
+		$suepro= 0;
 
 	###############################
     $sqlparam="select * from npdefespparpre  where codnom='$codnom'";
@@ -236,18 +239,26 @@ private static $coderror=-1;
     $this->sueldonormal=$ultsue;
     $per=array();
     $perHis=array();
-	$salario=0;	
+	$salario=0;
 	$salarionor=0;
     if ($nuevo=="S" and $codemp!="")
     {
       $arr=array();
       $sql="select a.*,dcontinuos((corresponde-disfrutados)::int,obtenerjornada(codemp,antiguedad),(select codtipcon from npasiempcont where codemp='$codemp' and status='A' limit 1) ) as diasdif
 			from NPLIQVACACION a WHERE CODEMP='$codemp' ORDER BY DESDE desc";
-      if (H::BuscarDatos($sql,$arr))
+      try{
+         $result=H::BuscarDatos($sql,$arr);
+
+      }catch(Exception $ex){
+         $result='';
+         $this->ex=$ex;
+      }
+
+      if ($result)
       {
       //  H::PrintR($arr);
         $i=0;
-        $cont=0;				
+        $cont=0;
         while ($cont<count($arr))
         {
           #if ((H::tofloat($arr[$cont]['corresponde'])-H::tofloat($arr[$cont]['disfrutados']))!=0)
@@ -261,7 +272,7 @@ private static $coderror=-1;
            		#$per[$i]['diadis']=H::tofloat($arr[$cont]['corresponde']-$arr[$cont]['disfrutados']);
            		$per[$i]['diadis']=H::tofloat($arr[$cont]['diasdif']);
            }
-           		
+
            $per[$i]['diasbono']=H::tofloat($arr[$cont]['fraccionbono']);
            $per[$i]['diacan']=$per[$i]['diadis']+$per[$i]['diasbono'];
 
@@ -273,7 +284,7 @@ private static $coderror=-1;
            if($suenor==0)
             $salint=$arr[$cont]['salint']+$porcion;
            else
-            $salint=$suenor;          
+            $salint=$suenor;
 
 		   if($sal=='')
 		   {
@@ -282,9 +293,9 @@ private static $coderror=-1;
 			   elseif($tipsalbonvf=='SP')
 			   	   $salario=$suepro;
 			   elseif($tipsalbonvf=='SN')
-			   	   $salario=$salnor;	   
-			   else	   
-			   	   $salario=$salint;	
+			   	   $salario=$salnor;
+			   else
+			   	   $salario=$salint;
 		   }else
 		   {
 		   	   $salario=$salint;
@@ -297,9 +308,9 @@ private static $coderror=-1;
 			   elseif($tipsalvacven=='SP')
 			   	   $salarionor=$suepro;
 			   elseif($tipsalvacven=='SI')
-			   	   $salarionor=$salint;	   
-			   else	   
-			   	   $salarionor=$salnor;	
+			   	   $salarionor=$salint;
+			   else
+			   	   $salarionor=$salnor;
 		   }else
 		   {
 		   	   $salarionor=$salnor;
@@ -307,12 +318,12 @@ private static $coderror=-1;
 
 		   if($factorbonvf!=0 && (!is_null($factorbonvf)))
 		   		$salario=($salario*$factorbonvf)/365;
-		   else 
+		   else
 		        $salario=$salario/30;
 
 		   if($factorvacv!=0 && (!is_null($factorvacv)))
 		   		$salarionor=($salarionor*$factorvacv)/365;
-		   else 
+		   else
 		        $salarionor=$salarionor/30;
 
 		   $monto=($per[$i]['diadis']*($salarionor))+($per[$i]['diasbono']*($salario));
@@ -349,8 +360,8 @@ private static $coderror=-1;
 	        	#$ultimosueldo=number_format(((($arr[$i-1]['salint']+$porcion)*$factor)/365)*30,2,',','.');
 	        	$ultimosueldo=$arr[$cont-1]['salint']+$porcion;
 	        else
-			    #$ultimosueldo=number_format(((($suenor+$porcion)*$factor)/365)*30,2,',','.');	
-	        	$ultimosueldo=$suenor+$porcion;	
+			    #$ultimosueldo=number_format(((($suenor+$porcion)*$factor)/365)*30,2,',','.');
+	        	$ultimosueldo=$suenor+$porcion;
 		}
 		else{*/
 		if($suenor==0)
@@ -360,12 +371,12 @@ private static $coderror=-1;
 		    #$ultimosueldo=number_format($suenor+$porcion,2,',','.');
         	$ultimosueldo=$suenor;
 		#}
-        
+
         if($ultsue==0)
         	$this->sueldonormal=$arr[$cont-1]['salnor'];
         else
         	$this->sueldonormal=$ultsue;
-					
+
       }
     }
     else
@@ -380,8 +391,8 @@ private static $coderror=-1;
 		{
 			$salarionor=$per[0]->getUltsue()/30;
 			$salario=$per[0]->getMontoinci()/30;
-		}		
-    }	
+		}
+    }
 	/*if($factorbonvf!=0 && (!is_null($factorbonvf)))
 	{
 		if($tipsalbonvf=='UD')
@@ -391,10 +402,10 @@ private static $coderror=-1;
 	    elseif($tipsalbonvf=='SN')
 	   	   $this->suedia = H::FormatoMonto((($this->sueldonormal*$factorbonvf)/365));
 	    else
-		   $this->suedia = H::FormatoMonto((($ultimosueldo*$factorbonvf)/365));	
+		   $this->suedia = H::FormatoMonto((($ultimosueldo*$factorbonvf)/365));
 	}else
 	{
-		$this->suedia = H::FormatoMonto(0);	
+		$this->suedia = H::FormatoMonto(0);
 	}
 
 	if($tipsalbonvf=='UD')
@@ -554,9 +565,9 @@ private static $coderror=-1;
       	$sal1=0;
         $sal2=0;
       }
-      $this->configGrid($this->getRequestParameter('nphojint[codemp]'),"S",&$ultimosueldo,&$sal2,&$sal1);	  
+      $this->configGrid($this->getRequestParameter('nphojint[codemp]'),"S",&$ultimosueldo,&$sal2,&$sal1);
       $this->ultsue=$this->suedia2*30;
-      $this->suenor=$this->suediario2*30;      	
+      $this->suenor=$this->suediario2*30;
       #$this->suenor=$this->sueldonormal;
 	  #$this->sueult=$this->sueult;
 	  #$this->suepro=$this->suepro;
@@ -577,8 +588,8 @@ private static $coderror=-1;
       if($this->factorbonvf!=$this->factorvacv)
 	  {
 	  	$this->ultsue=$this->sueldonormal;
-      	$this->suenor=$this->sueldonormal;	
-	  }      
+      	$this->suenor=$this->sueldonormal;
+	  }
 	  #$this->sueult=$this->sueult;
 	  #$this->suepro=$this->suepro;
       $this->forward404Unless($nphojint);
@@ -598,13 +609,13 @@ private static $coderror=-1;
    */
   protected function saveNphojint($nphojint)
   {
-    $grid=Herramientas::CargarDatosGrid($this,$this->objVac,true);//0       
+    $grid=Herramientas::CargarDatosGrid($this,$this->objVac,true);//0
     V::salvarnpvacliquidacion($nphojint,$grid,$this->ultsue,$this->suenor);
   }
 
-   
-  
-  
+
+
+
   /**
    *
    * Función que se ejecuta luego los validadores del negocio (validators)
@@ -667,7 +678,7 @@ private static $coderror=-1;
   }
 
     /**
-   * Función principal para procesar la eliminación de registros 
+   * Función principal para procesar la eliminación de registros
    * en el formulario.
    *
    */
