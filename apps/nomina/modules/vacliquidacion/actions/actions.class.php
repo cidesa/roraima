@@ -131,6 +131,7 @@ private static $coderror=-1;
     }
     if ($this->getRequestParameter('ajax')=='2')
     {
+        $javascript="";
        if(strpos($cajultsue,'.') && strpos($cajultsue,','))
 	    	$cajultsue = H::convnume($cajultsue);
 	   else
@@ -166,8 +167,10 @@ private static $coderror=-1;
 		   $suedia=0;
 		   $suediario=0;
 	   }
-
-	   $output = '[["javascritp","",""]]';
+           if($this->ex){
+                $javascript.="alert('".$this->ex->getNativeError().", Vista Npliqvacacion')";
+           }
+	   $output = '[["javascript","'.$javascript.'",""]]';
     }
 
     $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
