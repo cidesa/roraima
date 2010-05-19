@@ -5,8 +5,8 @@
  *
  * @package    Roraima
  * @subpackage presnomtipcon
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: actions.class.php 38276 2010-05-19 19:30:38Z cramirez $
  *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -289,7 +289,7 @@ class presnomtipconActions extends autopresnomtipconActions
 		$col2->setHTML('');
 		$col2->setEsGrabable(true);
 
-		$col3 = new Columna('Rango Desde');
+		$col3 = new Columna('Rango Desde >=');
 		$col3->setTipo(Columna::TEXTO);
 		$col3->setEsGrabable(true);
 		$col3->setAlineacionObjeto(Columna::CENTRO);
@@ -297,7 +297,7 @@ class presnomtipconActions extends autopresnomtipconActions
 		$col3->setNombreCampo('Desde');
 		$col3->setHTML('type="text" size="10"');
 
-		$col4 = new Columna('Rango Hasta');
+		$col4 = new Columna('Rango Hasta <=');
 		$col4->setTipo(Columna::TEXTO);
 		$col4->setEsGrabable(true);
 		$col4->setAlineacionObjeto(Columna::CENTRO);
