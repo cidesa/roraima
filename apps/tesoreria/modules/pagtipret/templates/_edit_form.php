@@ -226,7 +226,6 @@
   <?php echo label_for('expre', __('expresado en Unidades Tributarias'),'class="required"') ?>
 </div>
 </th>
-<?php } ?>
 </tr>
 </table>
 </div>
