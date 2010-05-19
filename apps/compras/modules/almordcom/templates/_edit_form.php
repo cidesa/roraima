@@ -315,7 +315,7 @@ else
          'submit' => 'sf_admin_edit_form',
          )) ?>
 <? } ?> <div id="comp"></div>
-<? if (($caordcom->getId()!='') and ($aprobacion=='S') and $caordcom->getCompro()=='N') { ?>
+<? if ($caordcom->getId()!='' and $aprobacion=='S' and $caordcom->getCompro()=='N') { ?>
 &nbsp;&nbsp;&nbsp;&nbsp;
 <?php echo submit_to_remote('Submit2', 'Generar Compromiso', array(
          'url'      => 'almordcom/ajaxcompromiso',
