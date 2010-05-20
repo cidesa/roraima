@@ -426,13 +426,18 @@ public static function CalculoPorFormula($grid,$codemp,$cargo,$conceptos,$codnom
 {
 	$especial='NO';
 	$valor1=Nomina::evaluar_Campo($grid["campo"],&$resecu,&$error,&$guardar,$codemp,$cargo,$conceptos["codcon"],$codnom,&$fecnom,$fechanac,$fechaing,$sexo,$especial,$desde,$hasta,$ultfec,$profec);
+        $valor2=$grid["valor"];
+
+        if(strtoupper(substr($valor2,0,1))>='A' && strtoupper(substr($valor2,0,1))<='Z' && intval(strlen($valor2))>1)
+            $valor2=Nomina::evaluar_Campo($valor2,&$resecu,&$error,&$guardar,$codemp,$cargo,$conceptos["codcon"],$codnom,&$fecnom,$fechanac,$fechaing,$sexo,$especial,$desde,$hasta,$ultfec,$profec);
+
 	if ($nroope==0)
 	{
-		$booleanos[0]=Nomina::evaluar_Cond($valor1,$grid["operador"],$grid["valor"]);
+		$booleanos[0]=Nomina::evaluar_Cond($valor1,$grid["operador"],$valor2);
 	}
 	else
 	{
-		$booleanos[1]=Nomina::evaluar_Cond($valor1,$grid["operador"],$grid["valor"]);
+		$booleanos[1]=Nomina::evaluar_Cond($valor1,$grid["operador"],$valor2);
 		$booleanos[0]=Nomina::evaluar_Opelog($booleanos[0],$booleanos[1],$opelog);
 
 		$nroope=0;

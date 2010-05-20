@@ -784,9 +784,14 @@
 
 		     var fil2=0;
 		     var cuentafil=0;
+                 var col=1;
+                 var valcajgrid5=$('cajgrid5').value;
+                 if(valcajgrid5=='3')
+                     col=3;
+
 		     while (fil2<150)
 	         {
-	            var ida="ax"+"_"+fil2+"_1";
+	            var ida="ax"+"_"+fil2+"_"+col;
 	            if ($(ida).value=="")
 	            {
 	               cuentafil=fil2;
@@ -794,7 +799,7 @@
 	            }
 	            fil2++;
 	         }
-	         var caj1="ax"+"_"+cuentafil+"_1";
+	         var caj1="ax"+"_"+cuentafil+"_"+col;
 	         $(caj1).value=cod;
 	}
 
@@ -959,10 +964,11 @@
 
         if ($(idnew).value=='' &&  $(id).value!='')
 		{
+                        $(id).value='';
 			alert('Debe Introducir Primero el Campo');
-			$(id).value='';
 		}
         else
+        if($(id).value!='')
         {
         	if ($(idnew).value=="E03" &&  $(id).value!='')
         	{
@@ -1097,3 +1103,18 @@
 		}
 
 	}
+    function Capturarfoco(id)
+    {
+        var aux = id.split("_");
+        var name=aux[0];
+        var fila=aux[1];
+        var col=parseInt(aux[2]);
+
+        if(col==3)
+        {
+            $('cajgrid5').value="3";
+        }else
+        {
+            $('cajgrid5').value="1";
+        }
+    }
