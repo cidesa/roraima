@@ -1833,7 +1833,30 @@ class Nomina {
         }
         break;
       case "DNLAB" :
-        $valor = 0;
+
+        $criterio = "SELECT profec,ultfec FROM NPNOMINA WHERE  codnom='" . $nomina . "'";
+        if (Herramientas :: BuscarDatos($criterio, & $tabla)) {
+          $fecha1 = $tabla[0]["ultfec"];
+          $fecha2 = $tabla[0]["profec"];
+        }
+        #$fecha1 = date("Y-m",strtotime($fecnom))."-01";
+        if(strtotime($fecha1)<strtotime($fechaing))
+                $fecha1=$fechaing;
+
+        #$fecha2 =  date("Y-m",strtotime($fecnom))."-30";
+        #$sqld = "select last_day('$fecha1') as ultday";
+        #if (Herramientas :: BuscarDatos($sqld, & $rd))
+        #        $fecha2=$rd[0]['ultday'];
+
+        #Buscamos los permisos para restarlos
+        $diaspermiso = 0;
+        $criterio3 = "Select coalesce(Sum(A.NroDia),0) as Cuantos from NPFalPer A, npmotfal B where A.CodEmp='$empleado' and
+                        A.FecDes>=TO_DATE('$fecha1','YYYY-MM-DD') and A.FecHas<=TO_DATE('$fecha2','YYYY-MM-DD') and
+                        b.causa='I' and a.codmot=b.codmotfal";
+
+        if (Herramientas :: BuscarDatos($criterio3, & $result3))
+            $diaspermiso = $result3[0]['cuantos'];
+        $valor = $diaspermiso;
         break;
       case "AAP" :
         if (strrpos($fecnom, "/")) {
@@ -2623,7 +2646,7 @@ class Nomina {
         #Calculamos los dias del mes
         $criterio = "Select A.* from NPCestaTickets A, NpAsiConEmp B where A.CodNom='".$nomina."' and B.CodCar = '".$cargo."' And
 		B.CodEmp='".$empleado."' And  A.CodCon=B.CodCon";
-		if (Herramientas :: BuscarDatos($criterio, & $result))
+		if ( Herramientas :: BuscarDatos($criterio, & $result))
         {
           $criterio2 = "Select UniTrib from NPDefGen";
 		  if($result[0]['monpor']=='P')
@@ -3898,6 +3921,33 @@ class Nomina {
 		$valor = ($valorano*12)+$valormes;
 		return $valor;
         #$valor = Herramientas :: dateDiff('m', $fechaing, $fecnom);
+        break;
+      case "DNLAB" :
+
+        $criterio = "SELECT profec,ultfec FROM NPNOMINA WHERE  codnom='" . $nomina . "'";
+        if (Herramientas :: BuscarDatos($criterio, & $tabla)) {
+          $fecha1 = $tabla[0]["ultfec"];
+          $fecha2 = $tabla[0]["profec"];
+        }
+
+        #$fecha1 = date("Y-m",strtotime($profec))."-01";
+        if(strtotime($fecha1)<strtotime($fechaing))
+                $fecha1=$fechaing;
+
+        #$fecha2 =  date("Y-m",strtotime($profec))."-30";
+        #$sqld = "select last_day('$fecha1') as ultday";
+        #if (Herramientas :: BuscarDatos($sqld, & $rd))
+        #        $fecha2=$rd[0]['ultday'];
+
+        #Buscamos los permisos para restarlos
+        $diaspermiso = 0;
+        $criterio3 = "Select coalesce(Sum(A.NroDia),0) as Cuantos from NPFalPer A, npmotfal B where A.CodEmp='$empleado' and
+                        A.FecDes>=TO_DATE('$fecha1','YYYY-MM-DD') and A.FecHas<=TO_DATE('$fecha2','YYYY-MM-DD') and
+                        b.causa='I' and a.codmot=b.codmotfal";
+
+        if (Herramientas :: BuscarDatos($criterio3, & $result3))
+            $diaspermiso = $result3[0]['cuantos'];
+        $valor = $diaspermiso;
         break;
       case "AAP" :
 

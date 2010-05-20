@@ -5,9 +5,9 @@
  *
  * @package    Roraima
  * @subpackage nomcalcon
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: actions.class.php 38290 2010-05-20 16:24:56Z cramirez $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -415,20 +415,23 @@ $this->Bitacora('Guardo');
           $lismov = $this->getUser()->getAttribute('lismov');
           $lishis = $this->getUser()->getAttribute('lishis');
 
+        $dato='-1';
         $ecuacion = Nomina::posfix($cadena);
-        Nomina::evalEcua(&$ecuacion,&$resecu,&$error,"","","",$nomina,$liscon,$lismov,$lisvar,$lisfun,$lisemp,$lishis,date("d/m/Y"),"","","",$vars='',$especial='NO');
-
-        if ($vars != "")
-            $vars = "Con" . $vars;
-
-        if ($error && $cadena!="" )
+        if($ecuacion!='')
         {
-          $dato = '-1';
-        }else
-        {
-          $dato='';
+            Nomina::evalEcua(&$ecuacion,&$resecu,&$error,"","","",$nomina,$liscon,$lismov,$lisvar,$lisfun,$lisemp,$lishis,date("d/m/Y"),"","","",$vars='',$especial='NO');
+
+            if ($vars != "")
+                $vars = "Con" . $vars;
+
+            if ($error && $cadena!="" )
+            {
+              $dato = '-1';
+            }else
+            {
+              $dato='';
+            }
         }
-
         $output = '[["cajgrid2","'.$dato.'",""]]';
         $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
         return sfView::HEADER_ONLY;
@@ -615,9 +618,9 @@ $this->Bitacora('Guardo');
 
   }
 
-  
-  
-  
+
+
+
   /**
    *
    * Función que se ejecuta luego los validadores del negocio (validators)
@@ -757,7 +760,7 @@ $this->Bitacora('Guardo');
       $col1->setAlineacionObjeto(Columna::CENTRO);
       $col1->setAlineacionContenido(Columna::CENTRO);
       $col1->setNombreCampo('campo');
-      $col1->setHTML('type="text" size="20" maxlength="35"  readonly=true');
+      $col1->setHTML('onFocus="Capturarfoco(this.id);" type="text" size="20" maxlength="35"  readonly=true' );
 
 
     $col2 = new Columna('Operador');
@@ -775,7 +778,7 @@ $this->Bitacora('Guardo');
       $col3->setAlineacionObjeto(Columna::CENTRO);
       $col3->setAlineacionContenido(Columna::CENTRO);
       $col3->setNombreCampo('valor');
-      $col3->setJScript('onFocus="condicionValor(this.id)"  onBlur="event.keyCode=13; condicionValor2(event,this.id)" onKeyUp="condicionValor3(this,this.id)" ');
+      $col3->setJScript('onFocus="condicionValor(this.id);Capturarfoco(this.id);"  onBlur="event.keyCode=13; condicionValor2(event,this.id)" onKeyUp="condicionValor3(this,this.id)" ');
       $col3->setHTML('type="text" size="25" maxlength="30" ');
 
     $col4 = new Columna('Definicion Fórmula');
