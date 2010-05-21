@@ -431,6 +431,9 @@ public static function CalculoPorFormula($grid,$codemp,$cargo,$conceptos,$codnom
         if(strtoupper(substr($valor2,0,1))>='A' && strtoupper(substr($valor2,0,1))<='Z' && intval(strlen($valor2))>1)
             $valor2=Nomina::evaluar_Campo($valor2,&$resecu,&$error,&$guardar,$codemp,$cargo,$conceptos["codcon"],$codnom,&$fecnom,$fechanac,$fechaing,$sexo,$especial,$desde,$hasta,$ultfec,$profec);
 
+        if($valor2==0 || $valor2=='')
+            $valor2=$grid["valor"];
+
 	if ($nroope==0)
 	{
 		$booleanos[0]=Nomina::evaluar_Cond($valor1,$grid["operador"],$valor2);
