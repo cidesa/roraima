@@ -3,7 +3,7 @@ methods:
    - "carecarg{codrgo}"
    - "carecarg{nomrgo}"
    - "carecarg{monrgo}"
-   - "carecarg{codpre}"
+#   - "carecarg{codpre}"
    - "carecarg{codcta}"
 
 names:
@@ -21,10 +21,10 @@ names:
     required:  No
     validators: MyNumberValidator
 
-  carecarg{codpre}:
-    required:  Yes
-    required_msg: El Código del Titulo Presupuestario no puedo estar en Blanco
-    validators: TituloValidator
+#  carecarg{codpre}:
+#    required:  Yes
+#    required_msg: El Código del Titulo Presupuestario no puedo estar en Blanco
+#    validators: TituloValidator
 
   carecarg{codcta}:
     required:  Yes

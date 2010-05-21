@@ -131,7 +131,8 @@ class almregrgoActions extends autoalmregrgoActions
   
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -151,16 +152,31 @@ class almregrgoActions extends autoalmregrgoActions
 
        //Para que el codigo no se pueda cambiar al editar el registro:
        $this->carecarg= $this->getCarecargOrCreate();
+       $this->setVars();
        $carecarg = $this->getRequestParameter('carecarg');
        $valor = $carecarg['codrgo'];
+       $codpre = $carecarg['codpre'];
        $campo='codrgo';
 
        $resp=Herramientas::ValidarCodigo($valor,$this->carecarg,$campo);
+
+       if($this->tipoformato=='R'){
+        $respcodpre = H::getX('codpar', 'Nppartidas', 'codpar', $codpre);
+       }else{
+         $respcodpre = H::getX('codpre', 'Cpdeftit', 'codpre', $codpre);
+       }
+       
+       if($respcodpre==H::REGVACIO){
+         $resp1 = 499;
+       }else $resp1 = -1;
 
       if($resp!=-1)
       {
         $this->coderror = $resp;
         return false;
+      }elseif($resp1!=-1){
+        $this->coderror = $resp1;
+        return false;        
       }
       else return true;
     }else return true;
