@@ -91,5 +91,9 @@ class Fafactur extends BaseFafactur
    return Herramientas::getX('ID','Faconpag','Desconpag',self::getCodconpag());
   }
 
+  public function getTipconpag()
+  {
+   return Herramientas::getX('ID','Faconpag','Tipconpag',self::getCodconpag());
+  }
 
 }
