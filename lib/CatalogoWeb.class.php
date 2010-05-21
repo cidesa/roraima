@@ -4508,6 +4508,8 @@ public function Tsmovlib_tesmovdeglib2()
     $this->c = new Criteria();
     $this->sql = "fapedido.status <> 'N' and fapedido.NROPED not in (select faartfac.codref from faartfac where faartfac.codref = fapedido.nroped and faartfac.reffac in (select fafactur.reffac from fafactur where fafactur.reffac = faartfac.reffac and fafactur.tipref = 'P' and fafactur.status <> 'N'))";
     $this->c->add(FapedidoPeer::NROPED,$this->sql,Criteria :: CUSTOM);
+    $sql = "(select sum(cantot) from faartped where nroped=Fapedido.nroped)>(select sum(coalesce(candes,0)) from faartped where nroped=Fapedido.nroped) ";
+    $this->c->add(FapedidoPeer :: NROPED, $sql, Criteria :: CUSTOM);
 
       $this->columnas = array (
       FapedidoPeer::NROPED => 'Número',
@@ -4533,6 +4535,8 @@ public function Tsmovlib_tesmovdeglib2()
     $this->c = new Criteria();
     $this->c->add(FafacturPeer::STATUS, 'N', Criteria::NOT_EQUAL);
     $this->c->add(FafacturPeer::TIPREF, 'D', Criteria::NOT_EQUAL);
+    $sql = "(select sum(cantot) from faartfac where reffac=Fafactur.reffac)>(select sum(coalesce(candes,0)) from faartfac where reffac=Fafactur.reffac) ";
+    $this->c->add(FafacturPeer :: REFFAC, $sql, Criteria :: CUSTOM);
 
     $this->columnas = array (
       FafacturPeer::REFFAC => 'Número',
