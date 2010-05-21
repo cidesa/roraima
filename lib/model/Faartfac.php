@@ -124,5 +124,24 @@ class Faartfac extends BaseFaartfac
     $val=self::getPrecio() * self::getCantot();
     $this->montot=number_format($val, 2, ',', '.');
   }
+    public function getCodalm()
+    {
+	  return Herramientas::getX('CODART','Caartalm','Codalm',$this->getCodart());
+    }
+
+    public function getCodubi()
+    {
+          return Herramientas::getX('CODALM','Caalmubi','Codubi',$this->getCodalm());
+}
+
+    public function getNomalm()
+    {
+	  return Herramientas::getX('CODALM','Cadefalm','Nomalm',$this->getCodalm());
+    }
+
+    public function getNomubi()
+    {
+            return Herramientas::getX('CODUBI','Cadefubi','Nomubi',$this->getCodubi());
+    }
 
 }
