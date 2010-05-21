@@ -537,6 +537,7 @@ class almordcomActions extends autoalmordcomActions
   else  if ($this->getRequestParameter('ajax')=='3')
   {
   	$tipord = $this->getRequestParameter('tipord');
+    $longitudart=strlen(Herramientas::getMascaraArticulo());
   	//print $tipord;
     $c= new Criteria();
     $c->add(CaregartPeer::CODART,$this->getRequestParameter('codigo'));
@@ -544,12 +545,18 @@ class almordcomActions extends autoalmordcomActions
     $reg=CaregartPeer::doSelectOne($c);
     if ($reg)
     {
+      if ($longitudart==strlen($this->getRequestParameter('codigo')))
+      {
       $dato=eregi_replace("[\n|\r|\n\r]", "", $reg->getDesart());
       $dato1=$reg->getUnimed();
       $dato2=number_format($reg->getCosult(),2,',','.');
       $dato3=$reg->getCodpar();
 //    $dato4=NppartidasPeer::getNompar($dato3);
       $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$this->getRequestParameter('unidad').'","'.$dato1.'",""],["'.$this->getRequestParameter('costo').'","'.$dato2.'",""],["'.$this->getRequestParameter('partida').'","'.$dato3.'",""]]';
+      }else {
+        $javascript="alert('El Codigo del Articulo no es de Ultimo Nivel');$('". $cajtexmos ."').value='';$('". $cajtexcom ."').value='';$('". $this->getRequestParameter('unidad') ."').value='';$('". $this->getRequestParameter('costo') ."').value='0.00';$('". $this->getRequestParameter('partida') ."').value=''";
+        $output = '[["javascript","'.$javascript.'",""]]';
+    }
     }
     else
     {

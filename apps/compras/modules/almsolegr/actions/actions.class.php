@@ -581,12 +581,16 @@ class almsolegrActions extends autoalmsolegrActions
 		       }
 		     }
 
+            $longitudart=strlen(Herramientas::getMascaraArticulo());
+
 
 	 	$c= new Criteria();
 		$c->add(CaregartPeer::CODART,$this->getRequestParameter('codigo'));
       	$reg=CaregartPeer::doSelectOne($c);
   		if ($reg)
   		{
+                  if ($longitudart==strlen($this->getRequestParameter('codigo')))
+                  {
 	        $dato=htmlspecialchars($reg->getDesart());
 	        $dato1=$reg->getUnimed();
 	        $dato2=number_format($reg->getCosult(),2,',','.');
@@ -599,6 +603,11 @@ class almsolegrActions extends autoalmsolegrActions
 	        $costo=$this->getRequestParameter('costo');
 	        $javascript="$('$unires').focus(); $('$costo').focus();";
 	        $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$this->getRequestParameter('unidad').'","'.$dato1.'",""],["'.$this->getRequestParameter('costo').'","'.$dato2.'",""],["'.$this->getRequestParameter('partida').'","'.$dato3.'",""],["'.$this->getRequestParameter('unires').'","'.$valuni.'",""],["javascript","'.$javascript.'",""]]';
+                  }else {
+                    $valuni="";
+  	            $javascript="alert('Articulo no es de Ultimo Nivel');$('". $cajtexmos ."').value='';$('". $cajtexcom ."').value='';$('". $this->getRequestParameter('unidad') ."').value='';$('". $this->getRequestParameter('costo') ."').value='0.00';$('". $this->getRequestParameter('partida') ."').value=''";
+        	    $output = '[["javascript","'.$javascript.'",""]]';
+  		}
   		}
   		else
   		{    $valuni="";
