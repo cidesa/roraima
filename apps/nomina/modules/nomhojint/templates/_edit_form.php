@@ -1641,7 +1641,9 @@ function nivel(e,numero)
 
   function validaregreso(valor)
   {
-      if (valor=='R' && $('nphojint_fecret').value=="")
+     var estatusegre='<?php echo $nphojint->getStatusegr(); ?>'; //Estatus que se define en el app que sera de egreso retirado en que se defina en el cliente
+
+      if (valor==estatusegre && $('nphojint_fecret').value=="")
       {
           alert('Para cambiar el estatus a Retirado debe introducir la Fecha de Egreso');
           $('nphojint_staemp').value='';
