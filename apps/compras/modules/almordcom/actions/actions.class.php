@@ -413,6 +413,7 @@ class almordcomActions extends autoalmordcomActions
 		    }else{
 		        $msj="Se genero el Compromiso satisfactoriamente";
 		    }	   	
+                    $this->getUser()->getAttributeHolder()->remove('genero_compromiso');
 		}
 		else{
 		  $msj="No hay disponibilidad para los Recargos";
