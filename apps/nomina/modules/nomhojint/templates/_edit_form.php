@@ -890,7 +890,7 @@ echo grid_tag($obj);
     <?php echo form_error('nphojint{staemp}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php echo select_tag('nphojint[staemp]', options_for_select($listaestatus,$nphojint->getStaemp(),'include_custom=Seleccione Uno')) ?>
+  <?php echo select_tag('nphojint[staemp]', options_for_select($listaestatus,$nphojint->getStaemp(),'include_custom=Seleccione Uno'),array('onChange' => "validaregreso(this.value);")) ?>
     </div>
     <br>
 <?php echo label_for('nphojint[situac]', __($labels['nphojint{situac}']), 'class="required" style="width: 150px"') ?>
@@ -1637,6 +1637,15 @@ function nivel(e,numero)
       new Ajax.Request(getUrlModuloAjax(), {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=4&cajtexmos='+descrip+'&cajtexcom='+id+'&codigo='+cod})
     }
   }
+  }
+
+  function validaregreso(valor)
+  {
+      if (valor=='R' && $('nphojint_fecret').value=="")
+      {
+          alert('Para cambiar el estatus a Retirado debe introducir la Fecha de Egreso');
+          $('nphojint_staemp').value='';
+      }
   }
 
 </script>
