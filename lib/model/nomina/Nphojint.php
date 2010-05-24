@@ -24,6 +24,7 @@ class Nphojint extends BaseNphojint
   protected $ultsue="0.00";
   protected $edaact=0;
   protected $grid=array();
+    protected $statusegr="";
 
   public function getCodnom()
   {
@@ -294,4 +295,27 @@ class Nphojint extends BaseNphojint
 
 	}
 
+          public function getStatusegr()
+  {
+
+    $dato="";
+    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('nomina',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['nomina']))
+	     if(array_key_exists('nomhojint',$varemp['aplicacion']['nomina']['modulos'])){
+	       if(array_key_exists('statusegr',$varemp['aplicacion']['nomina']['modulos']['nomhojint']))
+	       {
+	       	$dato=$varemp['aplicacion']['nomina']['modulos']['nomhojint']['statusegr'];
+	       }
+         }
+     return $dato;
+  }
+
+  public function setStatusegr()
+  {
+  	return $this->statusegr;
+  }
+  
 }
