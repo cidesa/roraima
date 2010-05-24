@@ -1684,6 +1684,22 @@ class CatalogoWeb extends BaseCatalogoWeb {
 
   public function Nphojint_Nomasicarconnom() {
     $this->c = new Criteria();
+    $filtro="";
+    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+    if ($varemp)
+        if(array_key_exists('aplicacion',$varemp))
+         if(array_key_exists('nomina',$varemp['aplicacion']))
+           if(array_key_exists('modulos',$varemp['aplicacion']['nomina']))
+             if(array_key_exists('nomasicarconnom',$varemp['aplicacion']['nomina']['modulos'])){
+               if(array_key_exists('filasicar',$varemp['aplicacion']['nomina']['modulos']['nomasicarconnom']))
+               {
+                $filtro=$varemp['aplicacion']['nomina']['modulos']['nomasicarconnom']['filasicar'];
+               }
+         }
+    if ($filtro=='S') {
+        $this->sql="nphojint.codemp not in (select codemp from npasicaremp)";
+        $this->c->add(NphojintPeer::CODEMP,$this->sql,Criteria::CUSTOM);
+    }
 
     $this->columnas = array (
       NphojintPeer :: CODEMP => 'Código',
