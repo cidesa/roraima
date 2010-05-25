@@ -67,6 +67,7 @@ class almaprreqActions extends autoalmaprreqActions
 	    $this->columnas[1][0]->setHTML('onClick="verificar(this.id)"');
 	    $this->columnas[1][1]->setHTML('onClick="verificar(this.id)"');
 	    $this->columnas[1][2]->setHTML('onClick="verificar(this.id)"');
+            $this->columnas[1][3]->setHTML('type="text" size="10" readOnly=true onBlur="javascript:event.keyCode=13; ajaxmostrardetallereq(event,this.id);"');
 
 	    $this->obj =$this->columnas[0]->getConfig($reg);
 
@@ -168,6 +169,41 @@ class almaprreqActions extends autoalmaprreqActions
   public function deleting($clasemodelo)
   {
     return parent::deleting($clasemodelo);
+  }
+
+  /**
+   * FunciÃ³n para procesar _todas_ las funciones Ajax del formulario
+   * Cada funciÃ³n esta identificada con el valor de la vista "ajax"
+   * el cual traerÃ¡ el indice de lo que se quiere procesar.
+   *
+   */
+  public function executeAjax()
+  {
+    $codigo = $this->getRequestParameter('codigo','');
+    $ajax = $this->getRequestParameter('ajax','');
+    $cajtexmos = $this->getRequestParameter('cajtexmos','');
+    $cajtexcom = $this->getRequestParameter('cajtexcom','');
+    $javascript="";
+    switch ($ajax){
+      case '1':
+        $this->formulario=array();
+        $this->i="";
+        $i=0;
+        $form="sf_admin/almaprreq/almdetsolreq";
+        $f[$i]=$form.$i;
+        $this->getUser()->setAttribute('reqart',$codigo,$f[$i]);
+        $this->formulario=$f;
+        $this->i=$i;
+
+        $output = '[["","",""],["","",""],["","",""]]';
+        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+        break;
+      default:
+        $output = '[["","",""],["","",""],["","",""]]';
+        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+        return sfView::HEADER_ONLY;
+        break;
+    }
   }
 
 
