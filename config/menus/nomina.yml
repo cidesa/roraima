@@ -40,6 +40,7 @@ nomina:
       Tipo de Cargos:                                                NomTipCar
       Tiempos del Cargo:                                             NomDefEspTieCar
       Tipo de Empleado:                                              nomtipemp
+      Tipos de Documentos:                                           nomdocemp
       Motivos de Faltas y/o Permisos:                                NomDefEspMotFalPre
       Estatus del Empleado:                                          nomdefestemp
       Situacion del Empleado:                                        nomdefespsitemp

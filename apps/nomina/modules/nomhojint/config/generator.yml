@@ -93,6 +93,8 @@ generator:
       codtipemp: { name: Tipo de Empleado}
       desniv: { name: Descripción}
       desniv2: { name: Descripción}
+      fecinicon: { name: Fecha de Inicio del Contrato}
+      fecfincon: { name: Fecha Fin del Contrato}
 
     list:
       title:          Datos Personales
@@ -111,7 +113,7 @@ generator:
       sort: codemp
     edit:
       title:          Edición de Datos Personales
-      display:       [=codemp, nomemp, cedemp, rifemp, edociv, numcon, nacemp, sexemp, codniv, _fotemp, fotemp, lugnac, fecnac, edaemp, obsgen, dirhab, codpai, codest, codciu, telhab, telotr, celemp, dirotr, codpa2, codes2, codci2, telha2, telot2, emaemp, codpos, fecing, fecret, fecrei, obsemp, staemp, codtippag, codban, numcue, tipcue, numcueaho, tipcueaho, fecadmpub, numsso, numpolseg, feccotsso, anoadmpub, tiefid, talcam, talpan, talcal, grusan, codregpai, codregest, codregciu, grulab, gruotr, traslado, traotr, numexp, detexp, derzur, tipviv, vivotr, forten, tenotr, sercon, temporal, incapacidades, situac, profes, codnivedu, prinom, segnom, priape, segape, ubifis, codempant, feccoracu, capactacu, intacu, antacu, diaacu, diaadiacu, codtipemp, desniv, desniv2]
+      display:       [=codemp, nomemp, cedemp, rifemp, edociv, numcon, nacemp, sexemp, codniv, _fotemp, fotemp, lugnac, fecnac, edaemp, obsgen, dirhab, codpai, codest, codciu, telhab, telotr, celemp, dirotr, codpa2, codes2, codci2, telha2, telot2, emaemp, codpos, fecing, fecret, fecrei, obsemp, staemp, codtippag, codban, numcue, tipcue, numcueaho, tipcueaho, fecadmpub, numsso, numpolseg, feccotsso, anoadmpub, tiefid, talcam, talpan, talcal, grusan, codregpai, codregest, codregciu, grulab, gruotr, traslado, traotr, numexp, detexp, derzur, tipviv, vivotr, forten, tenotr, sercon, temporal, incapacidades, situac, profes, codnivedu, prinom, segnom, priape, segape, ubifis, codempant, feccoracu, capactacu, intacu, antacu, diaacu, diaadiacu, codtipemp, desniv, desniv2, fecinicon, fecfincon]
       fields:
         fecnac: { params: date_format='dd/MM/yy' }
         fecing: { params: date_format='dd/MM/yy' }

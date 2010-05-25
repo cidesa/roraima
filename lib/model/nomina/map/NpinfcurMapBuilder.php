@@ -52,6 +52,10 @@ class NpinfcurMapBuilder {
 
 		$tMap->addColumn('FECENTTIT', 'Fecenttit', 'int', CreoleTypes::DATE, false, null);
 
+		$tMap->addColumn('FECINI', 'Fecini', 'int', CreoleTypes::DATE, false, null);
+
+		$tMap->addColumn('FECFIN', 'Fecfin', 'int', CreoleTypes::DATE, false, null);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

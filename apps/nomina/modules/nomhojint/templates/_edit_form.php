@@ -20,7 +20,11 @@
 <?php echo javascript_include_tag('dFilter', 'ajax', 'tools', 'observe') ?>
 <?php use_helper('PopUp', 'tabs', 'DoubleList', 'Javascript') ?>
 <?php echo input_hidden_tag('fecha', '') ?>
-
+<table width="100%">
+  <tr>
+    <th><strong><font color="#CC0000" size="2" face="Verdana, Arial, Helvetica, sans-serif"> <?php echo $nphojint->getEtiqueta() ;?></font></strong></th>
+  </tr>
+</table>
 <fieldset id="sf_fieldset_none" class="">
 <div class="form-row">
   <table>
@@ -901,6 +905,38 @@ echo grid_tag($obj);
 
   <?php echo select_tag('nphojint[situac]', options_for_select($listasituacion,$nphojint->getSituac(),'include_custom=Seleccione Uno')) ?>
     </div>
+    <br>
+    <?php echo label_for('nphojint[fecinicon]', __($labels['nphojint{fecinicon}']), 'class="required" ') ?>
+      <div class="content<?php if ($sf_request->hasError('nphojint{fecinicon}')): ?> form-error<?php endif; ?>">
+      <?php if ($sf_request->hasError('nphojint{fecinicon}')): ?>
+        <?php echo form_error('nphojint{fecinicon}', array('class' => 'form-error-msg')) ?>
+      <?php endif; ?>
+
+      <?php $value = object_input_date_tag($nphojint, 'getFecinicon', array (
+      'rich' => true,
+      'maxlength' => 10,
+      'calendar_button_img' => '/sf/sf_admin/images/date.png',
+      'control_name' => 'nphojint[fecinicon]',
+      'date_format' => 'dd/MM/yy',
+      'onkeyup' => "javascript: mascara(this,'/',patron,true)",
+    )); echo $value ? $value : '&nbsp;' ?>
+        </div>
+    <br>
+    <?php echo label_for('nphojint[fecfincon]', __($labels['nphojint{fecfincon}']), 'class="required" ') ?>
+      <div class="content<?php if ($sf_request->hasError('nphojint{fecfincon}')): ?> form-error<?php endif; ?>">
+      <?php if ($sf_request->hasError('nphojint{fecfincon}')): ?>
+        <?php echo form_error('nphojint{fecfincon}', array('class' => 'form-error-msg')) ?>
+      <?php endif; ?>
+
+      <?php $value = object_input_date_tag($nphojint, 'getFecfincon', array (
+      'rich' => true,
+      'maxlength' => 10,
+      'calendar_button_img' => '/sf/sf_admin/images/date.png',
+      'control_name' => 'nphojint[fecfincon]',
+      'date_format' => 'dd/MM/yy',
+      'onkeyup' => "javascript: mascara(this,'/',patron,true)",
+    )); echo $value ? $value : '&nbsp;' ?>
+        </div>
 </div>
 </fieldset>
 </div>
@@ -1469,6 +1505,14 @@ echo grid_tag($obj5);
 </div>
 </fieldset>
 
+<?php tabPageOpenClose("tp1", "tabPage12", 'Documentos Consignados');?>
+<fieldset id="sf_fieldset_none" class="">
+<div class="form-row">
+<?
+echo grid_tag($obj6);
+?>
+</div>
+</fieldset>
 
 <?php tabInit('tp1','0');?>
 

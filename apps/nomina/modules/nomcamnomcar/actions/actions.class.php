@@ -248,6 +248,10 @@ class nomcamnomcarActions extends autonomcamnomcarActions
     {
       $this->npasicaremp->setCodmotcamcar($npasicaremp['codmotcamcar']);
     }
+    if (isset($npasicaremp['juscam']))
+    {
+      $this->npasicaremp->setJuscam($npasicaremp['juscam']);
+    }
 
   }
 

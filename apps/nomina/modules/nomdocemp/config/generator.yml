@@ -1,0 +1,25 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Npdocemp
+    theme:            cidesaGenerator
+    fields:
+      coddoc: { name: CÃ³digo, params: size=5 maxlength=4 }
+      desdoc: { name: DescripciÃ³n, params: maxlength=250  }
+    list:
+      title:          Documentos 
+      filters:        [coddoc, desdoc ]
+      display:        [=coddoc, desdoc]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:  8
+      sort: coddoc
+    edit:
+      title:          EdiciÃ³n de Documentos
+      display:        [=coddoc, desdoc]
+      actions:
+        _list:        ~
+        _save:        ~
+        _create:      ~
+        _delete:      ~

@@ -5941,6 +5941,37 @@ public function Catdefcatman_Cattramo($params = '') {
 		);
 	}
 
+	public function Npdocemp_nonhojint() {
+            $this->c = new Criteria();
+            $this->columnas = array (
+                    NpdocempPeer :: CODDOC => 'Código',
+                    NpdocempPeer :: DESDOC => 'Descripción'
+            );
+	}
+
+	public function Codefcencos_Conasigcencos() {
+            $this->c = new Criteria();
+            $this->columnas = array (
+                    CodefcencosPeer :: CODCENCOS => 'Código',
+                    CodefcencosPeer :: DESCENCOS => 'Descripción'
+            );
+	}
+
+	public function Contabb_Conasigcencos($param = array ()) {
+		$this->c = new Criteria();
+
+                $this->c->add(ContabbPeer :: CARGAB, 'C');
+                $this->c->add(Contabc1Peer :: NUMCOM, $param[0]);
+                $this->c->addJoin(ContabbPeer :: CODCTA, Contabc1Peer :: CODCTA);
+
+
+		$this->columnas = array (
+			ContabbPeer :: CODCTA => 'Código',
+			ContabbPeer :: DESCTA => 'Descripción',
+
+		);
+	}
+
 }
 
 ?>

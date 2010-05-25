@@ -186,7 +186,7 @@ class Nomina {
     }
   }
 
-  public static function salvarNomhojint($datos, $grid, $grid2, $grid3, $grid4, $grid5, $arreglo) {
+  public static function salvarNomhojint($datos, $grid, $grid2, $grid3, $grid4, $grid5, $arreglo,$grid6) {
     $cadena = "";
     if ($arreglo != "") {
       foreach ($arreglo as $val) {
@@ -206,6 +206,7 @@ class Nomina {
     self :: grabarExplabfue($datos, $grid4);
     self :: grabarIngegr($datos, $grid5);
     self :: grabarIncapa($datos);
+    self :: grabarDocumentos($datos,$grid6);
   }
 
   /**
@@ -243,9 +244,30 @@ class Nomina {
     $x = $grid[0];
     $j = 0;
     while ($j < count($x)) {
-      if ($x[$j]->getCedfam() != "" || $x[$j]->getNomfam() != "") {
+      if ($x[$j]->getCedfam() != "" && ($x[$j]->getPrinom() != "" && $x[$j]->getPriape() != "")) {
+
+        if ($x[$j]->getPrinom()!="" && $x[$j]->getPriape()!="")
+	{
+		$segnom='';
+		$segape='';
+		$nombres='';
+		$apellidos='';
+            if ($x[$j]->getSegnom()!="")
+	    {
+	      $segnom=$x[$j]->getSegnom();
+	    }
+            if ($x[$j]->getSegape()!="")
+	    {
+	      $segape=$x[$j]->getSegape();
+	    }
+            $nombres=implode(' ',array(trim($x[$j]->getPrinom()),trim($segnom)));
+            $apellidos=implode(' ',array(trim($x[$j]->getPriape()),trim($segape)));
+            $x[$j]->setNomfam(implode(', ',array($apellidos,$nombres)));
+	}
+
+
         $x[$j]->setCodemp($codigo);
-                $x[$j]->setEdafam($x[$j]->getEdafamact());
+        $x[$j]->setEdafam($x[$j]->getEdafamact());
         if ($x[$j]->getSeghcm() == "1") {
           $x[$j]->setSeghcm('S');
         } else {
@@ -356,7 +378,7 @@ class Nomina {
     }
   }
 
-  public static function actualizarNomhojint($datos, $grid, $grid2, $grid3, $grid4, $grid5, $arreglo, $fecha) {
+  public static function actualizarNomhojint($datos, $grid, $grid2, $grid3, $grid4, $grid5, $arreglo, $fecha,$grid6) {
     $cadena = "";
     if ($arreglo != "") {
       foreach ($arreglo as $val) {
@@ -402,6 +424,7 @@ class Nomina {
     self :: grabarExplabfue($datos, $grid4);
     self :: grabarIngegr($datos, $grid5);
     self :: grabarIncapa($datos);
+    self :: grabarDocumentos($datos, $grid6);
   }
 
   /**************************************************************************************************/
@@ -9399,6 +9422,28 @@ exit();
       $d->add(NpconsuelaporetPeer::CODTIPAPO,$objNptipaportes->getCodtipapo());
       $d->add(NpconsuelaporetPeer::TIPO,'R');
       NpconsuelaporetPeer::doDelete($d);
+  }
+
+  public static function grabarDocumentos($datos, $grid6) {
+    $codigo = $datos->getCodemp();
+    $l = $grid6[0];
+    $j = 0;
+    while ($j < count($l)) {
+      if ($l[$j]->getCoddoc() != "") {
+        $l[$j]->setCodemp($codigo);
+        $l[$j]->save();
+      }
+      $j++;
+    }
+
+    $z = $grid6[1];
+    $j = 0;
+    if (!empty ($z[$j])) {
+      while ($j < count($z)) {
+        $z[$j]->delete();
+        $j++;
+      }
+    }
   }
 
 } // fin clase
