@@ -1674,7 +1674,7 @@ $this->Bitacora('Guardo');
     $col19->setTipo(Columna::COMBO);
     $col19->setEsGrabable(true);
     $col19->setNombreCampo('carben');
-    $col19->setCombo(array(''=>'Seleccione...','B'=>'Básica','A'=>'Adicional'));
+    $col19->setCombo(array(''=>'Seleccione...','B'=>'Básica','A'=>'Adicional','S'=>'Segundo Adicional'));
     $col19->setHTML(' ');
 
     $col20 = new Columna('Discapacitado - Suspendido');
