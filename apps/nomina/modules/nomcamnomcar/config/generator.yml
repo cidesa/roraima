@@ -21,6 +21,7 @@ generator:
       fecing:    { name: Fecha de Ingreso}
       codmotcamcar: { name: Motivo de cambio}
       pdesmotcamcar: { name: .}
+      juscam: { name: Justificación de cambio, type: textarea_tag, params: size=60x5 maxlength=250 }
     list:
       title:    Empleados a aplicar el cambio
       display:        [=codemp, nomemp, codnom, nomnom, codcar, nomcar]
@@ -42,7 +43,7 @@ generator:
       display:
         Información Empleado: [codemp, cedemp, nomemp, fecing]
         Información de Nomina Actual del Empleado: [_codnom, _codcar, _codcat]
-        Información de Cambio: [_fecha, _pdesmotcamcar, _codnomnew, _codcarnew, _codcatnew]
+        Información de Cambio: [_fecha, _pdesmotcamcar, _codnomnew, _codcarnew, _codcatnew, juscam]
       actions:
         _list:        ~
         _save:        ~

@@ -45,6 +45,14 @@ abstract class BaseNpinfcur extends BaseObject  implements Persistent {
 
 
 	
+	protected $fecini;
+
+
+	
+	protected $fecfin;
+
+
+	
 	protected $id;
 
 	
@@ -121,6 +129,50 @@ abstract class BaseNpinfcur extends BaseObject  implements Persistent {
       }
     } else {
       $ts = $this->fecenttit;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getFecini($format = 'Y-m-d')
+  {
+
+    if ($this->fecini === null || $this->fecini === '') {
+      return null;
+    } elseif (!is_int($this->fecini)) {
+            $ts = adodb_strtotime($this->fecini);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecini] as date/time value: " . var_export($this->fecini, true));
+      }
+    } else {
+      $ts = $this->fecini;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getFecfin($format = 'Y-m-d')
+  {
+
+    if ($this->fecfin === null || $this->fecfin === '') {
+      return null;
+    } elseif (!is_int($this->fecfin)) {
+            $ts = adodb_strtotime($this->fecfin);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecfin] as date/time value: " . var_export($this->fecfin, true));
+      }
+    } else {
+      $ts = $this->fecfin;
     }
     if ($format === null) {
       return $ts;
@@ -241,6 +293,50 @@ abstract class BaseNpinfcur extends BaseObject  implements Persistent {
 
 	} 
 	
+	public function setFecini($v)
+	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecini] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecini !== $ts) {
+      $this->fecini = $ts;
+      $this->modifiedColumns[] = NpinfcurPeer::FECINI;
+    }
+
+	} 
+	
+	public function setFecfin($v)
+	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecfin] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecfin !== $ts) {
+      $this->fecfin = $ts;
+      $this->modifiedColumns[] = NpinfcurPeer::FECFIN;
+    }
+
+	} 
+	
 	public function setId($v)
 	{
 
@@ -273,7 +369,11 @@ abstract class BaseNpinfcur extends BaseObject  implements Persistent {
 
       $this->fecenttit = $rs->getDate($startcol + 8, null);
 
-      $this->id = $rs->getInt($startcol + 9);
+      $this->fecini = $rs->getDate($startcol + 9, null);
+
+      $this->fecfin = $rs->getDate($startcol + 10, null);
+
+      $this->id = $rs->getInt($startcol + 11);
 
       $this->resetModified();
 
@@ -281,7 +381,7 @@ abstract class BaseNpinfcur extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 10; 
+            return $startcol + 12; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Npinfcur object", $e);
     }
@@ -456,6 +556,12 @@ abstract class BaseNpinfcur extends BaseObject  implements Persistent {
 				return $this->getFecenttit();
 				break;
 			case 9:
+				return $this->getFecini();
+				break;
+			case 10:
+				return $this->getFecfin();
+				break;
+			case 11:
 				return $this->getId();
 				break;
 			default:
@@ -477,7 +583,9 @@ abstract class BaseNpinfcur extends BaseObject  implements Persistent {
 			$keys[6] => $this->getCodprofes(),
 			$keys[7] => $this->getActivo(),
 			$keys[8] => $this->getFecenttit(),
-			$keys[9] => $this->getId(),
+			$keys[9] => $this->getFecini(),
+			$keys[10] => $this->getFecfin(),
+			$keys[11] => $this->getId(),
 		);
 		return $result;
 	}
@@ -521,6 +629,12 @@ abstract class BaseNpinfcur extends BaseObject  implements Persistent {
 				$this->setFecenttit($value);
 				break;
 			case 9:
+				$this->setFecini($value);
+				break;
+			case 10:
+				$this->setFecfin($value);
+				break;
+			case 11:
 				$this->setId($value);
 				break;
 		} 	}
@@ -539,7 +653,9 @@ abstract class BaseNpinfcur extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[6], $arr)) $this->setCodprofes($arr[$keys[6]]);
 		if (array_key_exists($keys[7], $arr)) $this->setActivo($arr[$keys[7]]);
 		if (array_key_exists($keys[8], $arr)) $this->setFecenttit($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setId($arr[$keys[9]]);
+		if (array_key_exists($keys[9], $arr)) $this->setFecini($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setFecfin($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setId($arr[$keys[11]]);
 	}
 
 	
@@ -556,6 +672,8 @@ abstract class BaseNpinfcur extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(NpinfcurPeer::CODPROFES)) $criteria->add(NpinfcurPeer::CODPROFES, $this->codprofes);
 		if ($this->isColumnModified(NpinfcurPeer::ACTIVO)) $criteria->add(NpinfcurPeer::ACTIVO, $this->activo);
 		if ($this->isColumnModified(NpinfcurPeer::FECENTTIT)) $criteria->add(NpinfcurPeer::FECENTTIT, $this->fecenttit);
+		if ($this->isColumnModified(NpinfcurPeer::FECINI)) $criteria->add(NpinfcurPeer::FECINI, $this->fecini);
+		if ($this->isColumnModified(NpinfcurPeer::FECFIN)) $criteria->add(NpinfcurPeer::FECFIN, $this->fecfin);
 		if ($this->isColumnModified(NpinfcurPeer::ID)) $criteria->add(NpinfcurPeer::ID, $this->id);
 
 		return $criteria;
@@ -604,6 +722,10 @@ abstract class BaseNpinfcur extends BaseObject  implements Persistent {
 		$copyObj->setActivo($this->activo);
 
 		$copyObj->setFecenttit($this->fecenttit);
+
+		$copyObj->setFecini($this->fecini);
+
+		$copyObj->setFecfin($this->fecfin);
 
 
 		$copyObj->setNew(true);

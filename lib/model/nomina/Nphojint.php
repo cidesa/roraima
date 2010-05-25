@@ -7,9 +7,9 @@
  *
  * @package    Roraima
  * @subpackage lib.model.nomina
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
+ * @author     $Author: dmartinez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: Nphojint.php 38370 2010-05-24 19:54:25Z dmartinez $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -18,13 +18,14 @@ class Nphojint extends BaseNphojint
   protected $prinom="";
   protected $segnom="";
   protected $priape="";
-  protected $segape="";	
+  protected $segape="";
   protected $check=false;
   private $incapacidades ='';
   protected $ultsue="0.00";
   protected $edaact=0;
   protected $grid=array();
-    protected $statusegr="";
+  protected $etiqueta="";
+  protected $statusegr="";
 
   public function getCodnom()
   {
@@ -101,11 +102,9 @@ class Nphojint extends BaseNphojint
     $registro = NpasicarempPeer::doSelectOne($c);
     if($registro) return $registro->getNomnom();
     else return null;
-
-
   }
 
-  public function getCodnom_duplicado()
+  public function getCodnom2()
   {
     // Se obtiene Nomnom de la tabla Npasicaremp
 
@@ -197,13 +196,13 @@ class Nphojint extends BaseNphojint
 			}else
 			{
 				$auxnom=split(' ',self::getNomemp());
-				return  count($auxnom)==2 ? $auxnom[1] : (count($auxnom)>2 ? $auxnom[2] : ' ');	
+				return  count($auxnom)==2 ? $auxnom[1] : (count($auxnom)>2 ? $auxnom[2] : ' ');
 			}
 		}else
 		{
 			$auxnom=split(' ',self::getNomemp());
-			return  count($auxnom)==2 ? $auxnom[1] : (count($auxnom)>2 ? $auxnom[2] : ' ');	
-		}		    	
+			return  count($auxnom)==2 ? $auxnom[1] : (count($auxnom)>2 ? $auxnom[2] : ' ');
+		}
     }
 	public function getSegnom()
     {
@@ -222,7 +221,7 @@ class Nphojint extends BaseNphojint
           }
           return trim($segnom);
         }else return ' ';
-				
+
 			}else
 			{
 				$auxnom=split(' ',self::getNomemp());
@@ -242,6 +241,7 @@ class Nphojint extends BaseNphojint
 			return  count($auxnom)>3 ? $auxnom[3] : ' ';
 		}
     }
+
 	public function getPriape()
     {
     	if(strrpos(self::getNomemp(),','))
@@ -254,12 +254,12 @@ class Nphojint extends BaseNphojint
 			}else
 			{
 				$auxnom=split(' ',self::getNomemp());
-				return  count($auxnom)==2 ? $auxnom[0] : (count($auxnom)>2 ? $auxnom[0] : ' ');	
+				return  count($auxnom)==2 ? $auxnom[0] : (count($auxnom)>2 ? $auxnom[0] : ' ');
 			}
 		}else
 		{
 			$auxnom=split(' ',self::getNomemp());
-			return  count($auxnom)==2 ? $auxnom[0] : (count($auxnom)>2 ? $auxnom[0] : ' ');	
+			return  count($auxnom)==2 ? $auxnom[0] : (count($auxnom)>2 ? $auxnom[0] : ' ');
 		}
     }
 	public function getSegape()
@@ -274,7 +274,7 @@ class Nphojint extends BaseNphojint
 			}else
 			{
 				$auxnom=split(' ',self::getNomemp());
-				return  count($auxnom)>2 ? $auxnom[1] : ' ';	
+				return  count($auxnom)>2 ? $auxnom[1] : ' ';
 			}
 		}else
 		{
@@ -295,7 +295,33 @@ class Nphojint extends BaseNphojint
 
 	}
 
-          public function getStatusegr()
+  public function getEtiqueta()
+  {
+    if (self::getFecfincon()!='')
+    {
+      if (self::getFecfincon()>=date('Y-m-d')){
+           $sql="select to_char((fecfincon-now()),'dd')::integer as dias from nphojint where codemp='".self::getCodemp()."'";
+          if (Herramientas::BuscarDatos($sql,&$result))
+          {
+            $dias=$result[0]['dias'];
+          }
+          $diasmesact=date('t');
+          if ($dias<$diasmesact)
+          {
+            $eti="El Contrato esta próximo a Vencerce";
+          }
+          else if ($dias==$diasmesact)
+          {
+            $eti="El Contrato Esta Vencido";
+          }
+          else $eti="";
+
+        }else $eti="El Contrato Esta Vencido";
+    }else $eti="";
+    return $eti;
+  }
+
+  public function getStatusegr()
   {
 
     $dato="";
@@ -317,5 +343,5 @@ class Nphojint extends BaseNphojint
   {
   	return $this->statusegr;
   }
-  
+
 }

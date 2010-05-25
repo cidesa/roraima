@@ -5,9 +5,9 @@
  *
  * @package    Roraima
  * @subpackage nomhojint
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
+ * @author     $Author: dmartinez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: actions.class.php 38281 2010-05-19 21:05:34Z dmartinez $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -15,9 +15,9 @@ class nomhojintActions extends autonomhojintActions
 {
   protected $coderr = -1;
 
-  
-  
-  
+
+
+
   /**
    *
    * Función que se ejecuta luego los validadores del negocio (validators)
@@ -218,7 +218,7 @@ class nomhojintActions extends autonomhojintActions
     }
     return $tipemp;
   }
-  
+
   public function CargarEstatus()
   {
     $c = new Criteria();
@@ -326,6 +326,7 @@ class nomhojintActions extends autonomhojintActions
     $this->configGrid3();
     $this->configGrid4();
     $this->configGrid5();
+    $this->configGrid6();
     $this->listatalla= Constantes::ListaTalla();
     $this->listagruposanguineo= Constantes::ListaGrupoSanguineo();
     $this->funciones_combos3();
@@ -384,6 +385,7 @@ $this->Bitacora('Guardo');
     $grid3 = Herramientas::CargarDatosGrid($this,$this->obj3);
     $grid4 = Herramientas::CargarDatosGrid($this,$this->obj4);
     $grid = Herramientas::CargarDatosGrid($this,$this->obj5);
+    $grid6  = Herramientas::CargarDatosGrid($this,$this->obj6);
 
     $this->setVars();
 
@@ -418,10 +420,11 @@ $this->Bitacora('Guardo');
       $grid3=Herramientas::CargarDatosGrid($this,$this->obj2);
       $grid4=Herramientas::CargarDatosGrid($this,$this->obj3);
       $grid5=Herramientas::CargarDatosGrid($this,$this->obj);
+      $grid6=Herramientas::CargarDatosGrid($this,$this->obj6);
 
      /* try
       {*/
-        Nomina::actualizarNomhojint($nphojint,$grid,$grid2,$grid3,$grid4,$grid5,$this->getRequestParameter('arreglo'),$this->getRequestParameter('fecha'));
+        Nomina::actualizarNomhojint($nphojint,$grid,$grid2,$grid3,$grid4,$grid5,$this->getRequestParameter('arreglo'),$this->getRequestParameter('fecha'),$grid6);
 
      /* }
       catch (Exception $ex)
@@ -439,10 +442,11 @@ $this->Bitacora('Guardo');
       $grid3=Herramientas::CargarDatosGrid($this,$this->obj2);
       $grid4=Herramientas::CargarDatosGrid($this,$this->obj3);
       $grid5=Herramientas::CargarDatosGrid($this,$this->obj);
+      $grid6=Herramientas::CargarDatosGrid($this,$this->obj6);
 
       /*try
       {*/
-       Nomina::salvarNomhojint($nphojint,$grid,$grid2,$grid3,$grid4,$grid5,$this->getRequestParameter('arreglo'));
+       Nomina::salvarNomhojint($nphojint,$grid,$grid2,$grid3,$grid4,$grid5,$this->getRequestParameter('arreglo'),$grid6);
 
       /*}
       catch (Exception $ex)
@@ -457,7 +461,7 @@ $this->Bitacora('Guardo');
 
 
   /**
-   * Actualiza la informacion que viene de la vista 
+   * Actualiza la informacion que viene de la vista
    * luego de un get/post en el objeto principal del modelo base del formulario.
    *
    */
@@ -479,6 +483,7 @@ $this->Bitacora('Guardo');
     $this->configGrid3();
     $this->configGrid4();
     $this->configGrid5();
+    $this->configGrid6();
     $this->listatalla= Constantes::ListaTalla();
     $this->listagruposanguineo= Constantes::ListaGrupoSanguineo();
     $this->funciones_combos3();
@@ -1026,6 +1031,62 @@ $this->Bitacora('Guardo');
     {
       $this->nphojint->setDesniv2($nphojint['desniv2']);
     }
+    if (isset($nphojint['fecinicon']))
+    {
+      if ($nphojint['fecinicon'])
+      {
+        try
+        {
+          $dateFormat = new sfDateFormat($this->getUser()->getCulture());
+                              if (!is_array($nphojint['fecinicon']))
+          {
+            $value = $dateFormat->format($nphojint['fecinicon'], 'i', $dateFormat->getInputPattern('d'));
+          }
+          else
+          {
+            $value_array = $nphojint['fecinicon'];
+            $value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+          }
+          $this->nphojint->setFecinicon($value);
+        }
+        catch (sfException $e)
+        {
+          // not a date
+        }
+      }
+      else
+      {
+        $this->nphojint->setFecinicon(null);
+      }
+    }
+    if (isset($nphojint['fecfincon']))
+    {
+      if ($nphojint['fecfincon'])
+      {
+        try
+        {
+          $dateFormat = new sfDateFormat($this->getUser()->getCulture());
+                              if (!is_array($nphojint['fecfincon']))
+          {
+            $value = $dateFormat->format($nphojint['fecfincon'], 'i', $dateFormat->getInputPattern('d'));
+          }
+          else
+          {
+            $value_array = $nphojint['fecfincon'];
+            $value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+          }
+          $this->nphojint->setFecfincon($value);
+        }
+        catch (sfException $e)
+        {
+          // not a date
+        }
+      }
+      else
+      {
+        $this->nphojint->setFecfincon(null);
+      }
+    }
   }
 
   protected function getNphojintOrCreate($id = 'id')
@@ -1401,25 +1462,45 @@ $this->Bitacora('Guardo');
     $col5->setAlineacionContenido(Columna::CENTRO);
     $col5->setHTML('type="text" size="10"');
 
-    $col6 = clone $col5;
-    $col6->setTitulo('Año Culminación');
-    $col6->setNombreCampo('anocul');
+    $col6 = new Columna('Fecha de Inicio');
+    $col6->setTipo(Columna::FECHA);
+    $col6->setAlineacionObjeto(Columna::CENTRO);
+    $col6->setAlineacionContenido(Columna::CENTRO);
+    $col6->setEsGrabable(true);
+    $col6->setHTML(' ');
+    $col6->setVacia(true);
+    $col6->setNombreCampo('fecini');
 
-    $col7 = new Columna('Activo');
-    $col7->setTipo(Columna::CHECK);
+    $col7 = new Columna('Fecha Fin');
+    $col7->setTipo(Columna::FECHA);
+    $col7->setAlineacionObjeto(Columna::CENTRO);
+    $col7->setAlineacionContenido(Columna::CENTRO);
     $col7->setEsGrabable(true);
-    $col7->setNombreCampo('activo');
     $col7->setHTML(' ');
-    $col7->setJScript('onClick= "activar_check(this.id)"');
+    $col7->setVacia(true);
+    $col7->setNombreCampo('fecfin');
 
-    $col8 = new Columna('Fecha de Entrega Titulo');
-    $col8->setTipo(Columna::FECHA);
-    $col8->setAlineacionObjeto(Columna::CENTRO);
-    $col8->setAlineacionContenido(Columna::CENTRO);
-    $col8->setEsGrabable(true);
-    $col8->setHTML(' ');
-    $col8->setVacia(true);
-    $col8->setNombreCampo('fecenttit');
+    $col8 = clone $col5;
+    $col8->setTitulo('Año Culminación');
+    $col8->setNombreCampo('anocul');
+
+    $col9 = new Columna('Activo');
+    $col9->setTipo(Columna::CHECK);
+    $col9->setEsGrabable(true);
+    $col9->setNombreCampo('activo');
+    $col9->setHTML(' ');
+    $col9->setJScript('onClick= "activar_check(this.id)"');
+
+    $col10 = new Columna('Fecha de Entrega Titulo');
+    $col10->setTipo(Columna::FECHA);
+    $col10->setAlineacionObjeto(Columna::CENTRO);
+    $col10->setAlineacionContenido(Columna::CENTRO);
+    $col10->setEsGrabable(true);
+    $col10->setHTML(' ');
+    $col10->setVacia(true);
+    $col10->setNombreCampo('fecenttit');
+
+
 
     $opciones->addColumna($col1);
     $opciones->addColumna($col2);
@@ -1429,6 +1510,8 @@ $this->Bitacora('Guardo');
     $opciones->addColumna($col6);
     $opciones->addColumna($col7);
     $opciones->addColumna($col8);
+    $opciones->addColumna($col9);
+    $opciones->addColumna($col10);
 
     $this->obj4 = $opciones->getConfig($per);
   }
@@ -1464,118 +1547,142 @@ $this->Bitacora('Guardo');
     $col1->setAlineacionContenido(Columna::CENTRO);
     $col1->setNombreCampo('cedfam');
 
-    $col2 = new Columna('Nombre del Familiar');
+    $col2 = new Columna('Primer Nombre Fam.');
     $col2->setTipo(Columna::TEXTO);
     $col2->setAlineacionObjeto(Columna::IZQUIERDA);
     $col2->setAlineacionContenido(Columna::IZQUIERDA);
     $col2->setEsGrabable(true);
-    $col2->setNombreCampo('nomfam');
-    $col2->setHTML('type="text" size="25"');
+    $col2->setNombreCampo('prinom');
+    $col2->setHTML('type="text" size="25" maxlength="25"');
 
-    $col3 = new Columna('Sexo');
-    $col3->setTipo(Columna::COMBO);
+    $col3 = new Columna('Segundo Nombre Fam.');
+    $col3->setTipo(Columna::TEXTO);
+    $col3->setAlineacionObjeto(Columna::IZQUIERDA);
+    $col3->setAlineacionContenido(Columna::IZQUIERDA);
     $col3->setEsGrabable(true);
-    $col3->setNombreCampo('sexfam');
-    $col3->setCombo(Constantes::ListaSexo());
-    $col3->setHTML(' ');
+    $col3->setNombreCampo('segnom');
+    $col3->setHTML('type="text" size="25" maxlength="25"');
 
-    $col4 = new Columna('Fecha Nacimiento');
-    $col4->setTipo(Columna::FECHA);
-    $col4->setAlineacionObjeto(Columna::CENTRO);
-    $col4->setAlineacionContenido(Columna::CENTRO);
+    $col4 = new Columna('Primer Apellido Fam.');
+    $col4->setTipo(Columna::TEXTO);
+    $col4->setAlineacionObjeto(Columna::IZQUIERDA);
+    $col4->setAlineacionContenido(Columna::IZQUIERDA);
     $col4->setEsGrabable(true);
-    $col4->setNombreCampo('fecnac');
-    $col4->setVacia(true);
-    $col4->setJScript('event.keyCode=13; ajax(event,this.id);');
+    $col4->setNombreCampo('priape');
+    $col4->setHTML('type="text" size="25" maxlength="25"');
 
-    $col5 = clone $col1;
-    $col5->setTitulo('Edad');
-    $col5->setNombreCampo('edafamact');
-    $col5->setHTML('type="text" size="10" readonly="true"');
+    $col5 = new Columna('Segundo Apellido Fam.');
+    $col5->setTipo(Columna::TEXTO);
+    $col5->setAlineacionObjeto(Columna::IZQUIERDA);
+    $col5->setAlineacionContenido(Columna::IZQUIERDA);
+    $col5->setEsGrabable(true);
+    $col5->setNombreCampo('segape');
+    $col5->setHTML('type="text" size="25" maxlength="25"');
 
-    $col6 = new Columna('Parentesco');
+    $col6 = new Columna('Sexo');
     $col6->setTipo(Columna::COMBO);
     $col6->setEsGrabable(true);
-    $col6->setNombreCampo('parfam');
-    $col6->setCombo(self::cargarParentesco());
+    $col6->setNombreCampo('sexfam');
+    $col6->setCombo(Constantes::ListaSexo());
     $col6->setHTML(' ');
 
-    $col7 = new Columna('Estado Civil');
-    $col7->setTipo(Columna::COMBO);
+    $col7 = new Columna('Fecha Nacimiento');
+    $col7->setTipo(Columna::FECHA);
+    $col7->setAlineacionObjeto(Columna::CENTRO);
+    $col7->setAlineacionContenido(Columna::CENTRO);
     $col7->setEsGrabable(true);
-    $col7->setNombreCampo('edociv');
-    $col7->setCombo(Constantes::ListaEstadoCivil());
-    $col7->setHTML(' ');
+    $col7->setNombreCampo('fecnac');
+    $col7->setVacia(true);
+    $col7->setJScript('event.keyCode=13; ajax(event,this.id);');
 
-    $col14 = new Columna('Ocupacion');
-    $col14->setTipo(Columna::COMBO);
-    $col14->setEsGrabable(true);
-    $col14->setNombreCampo('ocupac');
-    $col14->setCombo(Constantes::ListaOcupacion());
-    $col14->setHTML(' ');
+    $col8 = clone $col1;
+    $col8->setTitulo('Edad');
+    $col8->setNombreCampo('edafamact');
+    $col8->setHTML('type="text" size="10" readonly="true"');
 
-    $col8 = new Columna('Grado de Instrucción');
-    $col8->setTipo(Columna::TEXTO);
-    $col8->setAlineacionObjeto(Columna::IZQUIERDA);
-    $col8->setAlineacionContenido(Columna::IZQUIERDA);
-    $col8->setEsGrabable(true);
-    $col8->setNombreCampo('nivins');
-    $col8->setHTML('type="text" size="25"');
-
-    $col9 = new Columna('Trabajo u/o Oficio/Lugar de Trabajo');
-    $col9->setTipo(Columna::TEXTO);
-    $col9->setAlineacionObjeto(Columna::IZQUIERDA);
-    $col9->setAlineacionContenido(Columna::IZQUIERDA);
+    $col9 = new Columna('Parentesco');
+    $col9->setTipo(Columna::COMBO);
     $col9->setEsGrabable(true);
-    $col9->setNombreCampo('traofi');
-    $col9->setHTML('type="text" size="25"');
+    $col9->setNombreCampo('parfam');
+    $col9->setCombo(self::cargarParentesco());
+    $col9->setHTML(' ');
 
-    $col10 = new Columna('Guarderia');
-    $col10->setTipo(Columna::TEXTO);
+    $col10 = new Columna('Estado Civil');
+    $col10->setTipo(Columna::COMBO);
     $col10->setEsGrabable(true);
-    $col10->setAlineacionObjeto(Columna::CENTRO);
-    $col10->setAlineacionContenido(Columna::CENTRO);
-    $col10->setNombreCampo('codgua');
-    $col10->setCatalogo('Npguarde','sf_admin_edit_form',array('codcon' => 11, 'nomgua' => 12),'Npguarde_nphojint');
-    $col10->setHTML('type="text" size="6"');
+    $col10->setNombreCampo('edociv');
+    $col10->setCombo(Constantes::ListaEstadoCivil());
+    $col10->setHTML(' ');
 
-    $col11 = new Columna('Descripcion');
-    $col11->setTipo(Columna::TEXTO);
-    $col11->setEsGrabable(false);
-    $col11->setNombreCampo('nomgua');
-    $col11->setHTML('type="text" size="25"');
+    $col11 = new Columna('Ocupacion');
+    $col11->setTipo(Columna::COMBO);
+    $col11->setEsGrabable(true);
+    $col11->setNombreCampo('ocupac');
+    $col11->setCombo(Constantes::ListaOcupacion());
+    $col11->setHTML(' ');
 
-    $col12 = new Columna('Valor Guarderia');
-    $col12->setTipo(Columna::MONTO);
+    $col12 = new Columna('Grado de Instrucción');
+    $col12->setTipo(Columna::TEXTO);
+    $col12->setAlineacionObjeto(Columna::IZQUIERDA);
+    $col12->setAlineacionContenido(Columna::IZQUIERDA);
     $col12->setEsGrabable(true);
-    $col12->setNombreCampo('valgua');
-    $col12->setHTML(' onBlur = "javascript:event.keyCode=13;return entermontootro(event,this.id)" ');
+    $col12->setNombreCampo('nivins');
+    $col12->setHTML('type="text" size="25"');
 
-    $col13 = new Columna('Seguro HCM');
-    $col13->setTipo(Columna::CHECK);
+    $col13 = new Columna('Trabajo u/o Oficio/Lugar de Trabajo');
+    $col13->setTipo(Columna::TEXTO);
+    $col13->setAlineacionObjeto(Columna::IZQUIERDA);
+    $col13->setAlineacionContenido(Columna::IZQUIERDA);
     $col13->setEsGrabable(true);
-    $col13->setNombreCampo('seghcm');
-    $col13->setHTML(' ');
+    $col13->setNombreCampo('traofi');
+    $col13->setHTML('type="text" size="25"');
 
-	$col15 = new Columna('Porcentaje Seguro HCM');
-    $col15->setTipo(Columna::MONTO);
-    $col15->setEsGrabable(true);
-    $col15->setNombreCampo('porseghcm');
-    $col15->setHTML('type="text" size="10" onBlur = "javascript:event.keyCode=13;return entermontootro(event,this.id)"');
+    $col14 = new Columna('Guarderia');
+    $col14->setTipo(Columna::TEXTO);
+    $col14->setEsGrabable(true);
+    $col14->setAlineacionObjeto(Columna::CENTRO);
+    $col14->setAlineacionContenido(Columna::CENTRO);
+    $col14->setNombreCampo('codgua');
+    $col14->setCatalogo('Npguarde','sf_admin_edit_form',array('codcon' => 14, 'nomgua' => 15),'Npguarde_nphojint');
+    $col14->setHTML('type="text" size="6"');
 
-    $col16 = new Columna('Tipo de Carga HCM');
-    $col16->setTipo(Columna::COMBO);
+    $col15 = new Columna('Descripcion');
+    $col15->setTipo(Columna::TEXTO);
+    $col15->setEsGrabable(false);
+    $col15->setNombreCampo('nomgua');
+    $col15->setHTML('type="text" size="25"');
+
+    $col16 = new Columna('Valor Guarderia');
+    $col16->setTipo(Columna::MONTO);
     $col16->setEsGrabable(true);
-    $col16->setNombreCampo('carben');
-    $col16->setCombo(array(''=>'Seleccione...','B'=>'Básica','A'=>'Adicional'));
-    $col16->setHTML(' ');
+    $col16->setNombreCampo('valgua');
+    $col16->setHTML(' onBlur = "javascript:event.keyCode=13;return entermontootro(event,this.id)" ');
 
-    $col17 = new Columna('Discapacitado - Suspendido');
-    $col17->setTipo(Columna::COMBO);
+    $col17 = new Columna('Seguro HCM');
+    $col17->setTipo(Columna::CHECK);
     $col17->setEsGrabable(true);
-    $col17->setNombreCampo('dissus');
-    $col17->setCombo(array(''=>'Seleccione...','S'=>'SI','N'=>'NO'));
+    $col17->setNombreCampo('seghcm');
     $col17->setHTML(' ');
+
+    $col18 = new Columna('Porcentaje Seguro HCM');
+    $col18->setTipo(Columna::MONTO);
+    $col18->setEsGrabable(true);
+    $col18->setNombreCampo('porseghcm');
+    $col18->setHTML('type="text" size="10" onBlur = "javascript:event.keyCode=13;return entermontootro(event,this.id)"');
+
+    $col19 = new Columna('Tipo de Carga HCM');
+    $col19->setTipo(Columna::COMBO);
+    $col19->setEsGrabable(true);
+    $col19->setNombreCampo('carben');
+    $col19->setCombo(array(''=>'Seleccione...','B'=>'Básica','A'=>'Adicional'));
+    $col19->setHTML(' ');
+
+    $col20 = new Columna('Discapacitado - Suspendido');
+    $col20->setTipo(Columna::COMBO);
+    $col20->setEsGrabable(true);
+    $col20->setNombreCampo('dissus');
+    $col20->setCombo(array(''=>'Seleccione...','S'=>'SI','N'=>'NO'));
+    $col20->setHTML(' ');
 
     $opciones->addColumna($col1);
     $opciones->addColumna($col2);
@@ -1594,10 +1701,60 @@ $this->Bitacora('Guardo');
     $opciones->addColumna($col15);
     $opciones->addColumna($col16);
     $opciones->addColumna($col17);
+    $opciones->addColumna($col18);
+    $opciones->addColumna($col19);
+    $opciones->addColumna($col20);
 
 
 
     $this->obj5 = $opciones->getConfig($per);
+  }
+
+  /**
+   * Esta función permite definir la configuración del grid de datos
+   * que contiene el formulario. Esta función debe ser llamada
+   * en las acciones, create, edit y handleError para recargar en todo momento
+   * los datos del grid.
+   *
+   */
+  public function configGrid6()
+  {
+    $c = new Criteria();
+    $c->add(NpinfdocPeer::CODEMP,$this->nphojint->getCodemp());
+    $per = NpinfdocPeer::doSelect($c);
+
+    $opciones = new OpcionesGrid();
+    $opciones->setEliminar(true);
+    $opciones->setTabla('Npinfdoc');
+    $opciones->setAnchoGrid(600);
+    $opciones->setAncho(600);
+    $opciones->setFilas(20);
+    $opciones->setName('g');
+    $opciones->setTitulo('');
+    $opciones->setHTMLTotalFilas(' ');
+
+    $col1 = new Columna('Código de Documento');
+    $col1->setTipo(Columna::TEXTO);
+    $col1->setEsGrabable(true);
+    $col1->setAlineacionObjeto(Columna::CENTRO);
+    $col1->setAlineacionContenido(Columna::CENTRO);
+    $col1->setNombreCampo('coddoc');
+    $col1->setCatalogo('Npdocemp','sf_admin_edit_form',array('coddoc' => 1, 'desdoc' => 2),'Npdocemp_nonhojint');
+    $col1->setHTML('type="text" size="25" maxlength=4');
+    $col1->setAjax('nomhojint',7,2);
+
+    $col2 = new Columna('Descripción');
+    $col2->setTipo(Columna::TEXTO);
+    $col2->setEsGrabable(true);
+    $col2->setAlineacionObjeto(Columna::CENTRO);
+    $col2->setAlineacionContenido(Columna::CENTRO);
+    $col2->setNombreCampo('desdoc');
+    $col2->setHTML('type="text" size="25" readonly=true');
+
+    $opciones->addColumna($col1);
+    $opciones->addColumna($col2);
+
+    $this->obj6 = $opciones->getConfig($per);
   }
 
   /**
@@ -1675,6 +1832,20 @@ $this->Bitacora('Guardo');
     }else
   	{  $dato="";
   		$javascript="alert('La Ubicaci&oacute;n F&iacute;sica no existe'); $('$cajtexcom').value=''; ";
+  	}
+  	$output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""]]';
+  }
+   else if ($this->getRequestParameter('ajax')=='7')
+  {
+  	$r= new Criteria();
+  	$r->add(NpdocempPeer::CODDOC,$this->getRequestParameter('codigo'));
+  	$datos= NpdocempPeer::doSelectOne($r);
+  	if ($datos)
+  	{
+      $dato=$datos->getDesdoc();
+    }else
+  	{  $dato="";
+  		$javascript="alert_('El C&oacute;digo del Documento no existe'); $('$cajtexcom').value=''; ";
   	}
   	$output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""]]';
   }
@@ -1781,6 +1952,8 @@ $this->Bitacora('Guardo');
       'nphojint{diaadiacu}' => 'Dias Adicionales Acumulados:',
       'nphojint{codtipemp}' => 'Tipo de Empleado:',
 	  'nphojint{numpuncue}' => 'Punto de Cuenta:',
+        'nphojint{fecinicon}' => 'Fecha Inicio del Contrato:',
+        'nphojint{fecfincon}' => 'Fecha Fin del Contrato:',
 
 
     );

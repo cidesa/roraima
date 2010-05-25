@@ -194,7 +194,10 @@ propel:
     codtie:
       type: VARCHAR
       size: 3
-      ##required: true        
+      ##required: true  
+    juscam:
+      type: VARCHAR
+      size: 250
     id:
       type: INTEGER
       required: true
@@ -3601,7 +3604,11 @@ propel:
       size: 3
     numpuncue:
       type: VARCHAR
-      size: 20  
+      size: 20
+    fecinicon:
+      type: DATE
+    fecfincon:
+      type: DATE
     id:
       type: INTEGER
       required: true
@@ -3975,6 +3982,10 @@ propel:
       size: 1
     fecenttit:
       type: DATE
+    fecini:
+      type: DATE
+    fecfin:
+      type: DATE   
     id:
       type: INTEGER
       required: true
@@ -7189,4 +7200,34 @@ propel:
       size: 1
     sumval:
       type: VARCHAR
-      size: 1  
+      size: 1
+  npdocemp:
+    coddoc:
+      type: VARCHAR
+      size: 10
+      required: true
+    desdoc:
+      type: VARCHAR
+      size: 100
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Ãnico del registro
+  npinfdoc:
+    codemp:
+      type: VARCHAR
+      size: 16
+      required: true
+    coddoc:
+      type: VARCHAR
+      size: 40
+      required: true   
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Ãnico del registro

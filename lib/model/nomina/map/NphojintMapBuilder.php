@@ -228,6 +228,10 @@ class NphojintMapBuilder {
 
 		$tMap->addColumn('NUMPUNCUE', 'Numpuncue', 'string', CreoleTypes::VARCHAR, false, 20);
 
+		$tMap->addColumn('FECINICON', 'Fecinicon', 'int', CreoleTypes::DATE, false, null);
+
+		$tMap->addColumn('FECFINCON', 'Fecfincon', 'int', CreoleTypes::DATE, false, null);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 
