@@ -104,7 +104,7 @@ class NphojintMapBuilder {
 
 		$tMap->addColumn('NUMCUE', 'Numcue', 'string', CreoleTypes::VARCHAR, false, 31);
 
-		$tMap->addColumn('OBSEMP', 'Obsemp', 'string', CreoleTypes::VARCHAR, false, 100);
+		$tMap->addColumn('OBSEMP', 'Obsemp', 'string', CreoleTypes::VARCHAR, false, 300);
 
 		$tMap->addColumn('TIEFID', 'Tiefid', 'string', CreoleTypes::VARCHAR, false, 1);
 

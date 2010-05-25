@@ -763,8 +763,9 @@ $value = object_input_tag($nphojint, 'getPorseghcm', array (
   <?php $value = object_textarea_tag($nphojint, 'getObsemp', array (
   'size' => '80x3',
   'readonly' => true,
-  'maxlength' => 100,
+  'maxlength' => 300,
   'control_name' => 'nphojint[obsemp]',
+  'onkeyup' => "javascript:return ismaxlength(this)",
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 
