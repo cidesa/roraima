@@ -64,16 +64,16 @@
 </div>
 
 <div class="form-row">
-  <?php echo label_for('dfatendoc[staate]', __($labels['dfatendoc{staate}']), '') ?>
-  <div class="content<?php if ($sf_request->hasError('dfatendoc{staate}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('dfatendoc{staate}')): ?>
-    <?php echo form_error('dfatendoc{staate}', array('class' => 'form-error-msg')) ?>
+  <?php echo label_for('dfatendoc[status]', __($labels['dfatendoc{status}']), '') ?>
+  <div class="content<?php if ($sf_request->hasError('dfatendoc{status}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('dfatendoc{status}')): ?>
+    <?php echo form_error('dfatendoc{status}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_input_tag($dfatendoc, 'getStaate', array (
+  <?php $value = object_input_tag($dfatendoc, 'getStatus', array (
   'readonly' => true,
   'size' => 50,
-  'control_name' => 'dfatendoc[staate]',
+  'control_name' => 'dfatendoc[status]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>

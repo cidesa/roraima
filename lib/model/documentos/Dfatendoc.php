@@ -52,7 +52,7 @@ class Dfatendoc extends BaseDfatendoc
 
   }
 
-  public function getStaate()
+  public function getStatus()
   {
 
     $lista = Constantes::listaAtencion();

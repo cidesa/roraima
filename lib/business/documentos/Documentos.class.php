@@ -435,7 +435,7 @@ class Documentos
 
           // Si ya es el último paso en la ruta
           if((count($dfrutasdocs))==(count($dfatendocdet)) && $dfatendoc->getStaate()!=self::CULMINADO){
-            $dfatendoc->setStaate(2);
+            $dfatendoc->setStaate('2');
             $dfatendoc->save();
           }
           
@@ -470,7 +470,7 @@ class Documentos
           }
 
           if($dfatendoc->getStaate()==self::NUEVO){
-            $dfatendoc->setStaate(1);
+            $dfatendoc->setStaate('1');
             $dfatendoc->save();
           }
 
