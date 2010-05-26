@@ -3422,7 +3422,7 @@ propel:
       size: 31
     obsemp:
       type: VARCHAR
-      size: 100
+      size: 300
     tiefid:
       type: VARCHAR
       size: 1

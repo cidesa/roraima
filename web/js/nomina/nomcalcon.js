@@ -1064,7 +1064,7 @@
 				   alert('Debe introducir un valor numerico');
 				   $(id).value="";
 				}
-        	}else if ($(idnew).value!="E00" && $(idnew).value!="E02")
+        	}else if ($(idnew).value!="E00" && $(idnew).value!="E02" && $(idnew).value!="CARG")
         	{
         		var val = $(id).value.replace(',','.');
 	        	if (!(isNaN(val)))
