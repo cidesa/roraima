@@ -168,6 +168,7 @@
 			  <?php $value = object_input_tag($npcargos, array('getCanmuj',true), array (
 			  'size' => 7,
 			  'maxlength' => 21,
+                          'readonly'  =>  true,
 			  'onBlur' => "javascript:event.keyCode=13; calcularo(event,this.id)",
 			  'control_name' => 'npcargos[canmuj]',
 			)); echo $value ? $value : '&nbsp;' ?>
@@ -181,6 +182,7 @@
 			  <?php $value = object_input_tag($npcargos, array('getCanhom',true), array (
 			  'size' => 7,
 			  'maxlength' => 21,
+                          'readonly'  =>  true,
 			  'onBlur' => "javascript:event.keyCode=13; calcularo(event,this.id)",
 			  'control_name' => 'npcargos[canhom]',
 			)); echo $value ? $value : '&nbsp;'?>
@@ -194,6 +196,7 @@
 			  <?php $value = object_input_tag($npcargos, array('getCanmix',true), array (
 			  'size' => 7,
 			  'maxlength' => 21,
+                          'readonly'  =>  true,
 			  'onBlur' => "javascript:event.keyCode=13; calcularo(event,this.id)",
 			  'control_name' => 'npcargos[canmix]',
 			)); echo $value ? $value : '&nbsp;'?>
@@ -211,7 +214,8 @@
 			  <?php $value = object_input_tag($npcargos, array('getCarvan',true), array (
 			  'size' => 6,
 			  'maxlength' => 6,
-			  'readonly' => true,
+                          'readonly'  =>  $npcargos->getId()!='' ? true : false ,
+			  'onBlur' => "javascript:event.keyCode=13;return entermontootro(event,this.id)",
 			  'control_name' => 'npcargos[carvan]',
 			)); echo $value ? $value : '&nbsp;' ?>
 		</td>
