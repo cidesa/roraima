@@ -2115,6 +2115,17 @@ class Nomina {
         }
         break;
 
+      case "PORHCM" :
+        $sql="select porcentaje_hcm(codemp,codnom) as porcen from npasicaremp where codemp='".$empleado."' and codnom='".$nomina."';";
+        if (Herramientas :: BuscarDatos($sql, & $result)) {
+          $valor = $result[0]["porcen"];
+        }
+        else
+        {
+          $valor = 0;
+        }
+        break;
+
       case "NHMENEDA" :
           $aux="%HIJ%";
           $codhijo="001";
@@ -4291,6 +4302,17 @@ class Nomina {
         else
         {
           $valor = "";
+        }
+        break;
+
+      case "PORHCM" :
+        $sql="select porcentaje_hcm(codemp,codnom) as porcen from npasicaremp where codemp='".$empleado."' and codnom='".$nomina."';";
+        if (Herramientas :: BuscarDatos($sql, & $result)) {
+          $valor = $result[0]["porcen"];
+        }
+        else
+        {
+          $valor = 0;
         }
         break;
 
@@ -9437,6 +9459,29 @@ exit();
     }
 
     $z = $grid6[1];
+    $j = 0;
+    if (!empty ($z[$j])) {
+      while ($j < count($z)) {
+        $z[$j]->delete();
+        $j++;
+      }
+    }
+  }
+
+  public static function salvarDefHcmNom($clasemodelo,$grid)
+  {
+    $codigonomina = $clasemodelo->getCodnom();
+    $l = $grid[0];
+    $j = 0;
+    while ($j < count($l)) {
+      if ($l[$j]->getTipcar() != "" && $l[$j]->getTippar() != "" && $l[$j]->getPorcub() >0) {
+        $l[$j]->setCodnom($codigonomina);
+        $l[$j]->save();
+      }
+      $j++;
+    }
+
+    $z = $grid[1];
     $j = 0;
     if (!empty ($z[$j])) {
       while ($j < count($z)) {
