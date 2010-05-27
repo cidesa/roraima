@@ -1,0 +1,56 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                true
+  tabla:                   npporhcm
+  anchogrid:               1000
+  ancho:                   900
+  filas:                   1
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Tipo de Cobertura
+  tipo:                    c
+  nombrecampo:             tipcar
+  html:                    [ ]
+  esgrabable:              true
+2:       # Columna 2
+  titulo:                  Tipo de Pariente
+  tipo:                    t
+  nombrecampo:             tippar
+  html:                    ["size=10 maxlength=3 onBlur='toAjax(1,getUrlModuloAjax(),this.value,0,'&cajtxtmos='+$(this.id).up().next(0).descendants()[0].id+'&ides='+this.id)'"]
+  esgrabable:              true
+  catalogo:                [ nptippar, sf_admin_edit_form, { tippar : 2 , despar : 3 }, Nptippar_Nomdefhcmnom ]
+3:       # Columna 3
+  titulo:                  DescripciÃ³n
+  tipo:                    t
+  nombrecampo:             despar
+  html:                    [size="30" readOnly=true]
+  esgrabable:              true
+4:       # Columna 4
+  titulo:                  Edad Desde
+  tipo:                    m
+  nombrecampo:             edades
+  html:                    [size="10"]
+  esnumerico:              true
+  esgrabable:              true
+5:       # Columna 5
+  titulo:                  Edad Hasta
+  tipo:                    m
+  nombrecampo:             edahas
+  html:                    [size="10"]
+  esnumerico:              true
+  esgrabable:              true
+6:       # Columna 6
+  titulo:                  Incapacitado
+  tipo:                    c
+  nombrecampo:             dissus
+  html:                    [ ]
+  esgrabable:              true
+7:       # Columna 7
+  titulo:                  Porcentaje
+  tipo:                    m
+  nombrecampo:             porcub
+  html:                    [size="10"]
+  esnumerico:              true
+  esgrabable:              true
+

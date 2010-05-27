@@ -5972,6 +5972,22 @@ public function Catdefcatman_Cattramo($params = '') {
 		);
 	}
 
+	public function Cadefcen_Almsolegr() {
+            $this->c = new Criteria();
+            $this->columnas = array (
+                    CadefcenPeer :: CODCEN => 'Código',
+                    CadefcenPeer :: DESCEN => 'Descripción'
+            );
+	}
+
+	public function Nptippar_Nomdefhcmnom() {
+            $this->c = new Criteria();
+            $this->columnas = array (
+                    NptipparPeer::TIPPAR => 'Tipo',
+                    NptipparPeer::DESPAR => 'Descripción'
+            );
+	
+
 }
 
 ?>

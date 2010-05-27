@@ -7231,3 +7231,37 @@ propel:
       primaryKey: true
       autoIncrement: true
       description: Identificador Ãnico del registro
+  npporhcm:
+    codnom:
+      type: VARCHAR
+      size: 3
+      required: true
+    tipcar:
+      type: VARCHAR
+      size: 1
+      required: true   
+    tippar:
+      type: VARCHAR
+      size: 3
+      required: true   
+    edades:
+      type: NUMERIC
+      size: 14
+      scale: 2   
+    edahas:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    porcub:
+      type: NUMERIC
+      size: 14
+      scale: 2    
+    dissus:
+      type: VARCHAR
+      size: 1      
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Ãnico del registro

@@ -1941,3 +1941,58 @@ END;
 $BODY$
   LANGUAGE 'plpgsql' VOLATILE;
 ALTER FUNCTION saldocta1(tipo character varying, cta character varying, periodo1 character varying, periodo2 character varying, rup character varying) OWNER TO postgres;
+
+CREATE OR REPLACE FUNCTION porcentaje_hcm(empleado "varchar",nomina "varchar")
+  RETURNS "numeric" AS
+$BODY$
+DECLARE
+
+REG RECORD;
+Familiares CURSOR IS SELECT * FROM npinffam WHERE CodEmp=Empleado;
+PORCENTAJEHCM NUMERIC(14,2);
+PORCENTAJEFAMILIAR NUMERIC(14,2);
+BEGIN
+
+
+   PORCENTAJEHCM=0;
+   OPEN Familiares;
+   FETCH Familiares INTO REG;
+   IF FOUND THEN
+      LOOP
+         IF REG.SEGHCM='S' THEN
+            IF REG.porseghcm=0 Then
+               SELECT COALESCE(sum(coalesce(A.PORCUB,0)),0)
+                 INTO PORCENTAJEFAMILIAR
+                 FROM NPPORHCM A
+                WHERE A.TIPPAR=REG.PARFAM AND
+                      A.TIPCAR=REG.CARBEN  AND
+                      REG.EDAFAM>=A.EDADES AND
+                      REG.EDAFAM<=A.EDAHAS AND
+                      A.CODNOM=nomina AND
+                      A.DISSUS=REG.DISSUS;
+
+                PORCENTAJEHCM=PORCENTAJEHCM+PORCENTAJEFAMILIAR;
+
+                UPDATE NPINFFAM SET PORSEGHCM=PORCENTAJEFAMILIAR WHERE CODEMP=EMPLEADO AND CEDFAM=REG.CEDFAM AND NOMFAM=REG.NOMFAM AND PARFAM=REG.PARFAM;
+
+            ELSE
+               PORCENTAJEHCM=PORCENTAJEHCM+REG.porseghcm;
+            END IF;
+
+         END IF;
+
+
+         FETCH Familiares INTO REG;
+         IF NOT FOUND THEN
+            EXIT;
+         END IF;
+      END LOOP;
+   END IF;
+   CLOSE Familiares;
+
+
+   RETURN PORCENTAJEHCM;
+END;
+$BODY$
+  LANGUAGE 'plpgsql' VOLATILE;
+ALTER FUNCTION porcentaje_hcm(codemp "varchar",nomina "varchar") OWNER TO postgres;
