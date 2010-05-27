@@ -1,0 +1,5 @@
+svnSettings:
+  workingCopyPath:  <?php echo sfConfig::get('sf_root_dir') ?> 
+  logPath:          <?php echo sfConfig::get('sf_plugins_dir').DIRECTORY_SEPARATOR.'scSvnManagementPlugin'.DIRECTORY_SEPARATOR.'log' ?> 
+  username:         lhernandez
+  password:         cidesa0951
