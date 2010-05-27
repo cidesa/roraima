@@ -90,7 +90,7 @@ all:
 
 #
 #    # Activated modules from plugins or from the symfony core
-    enabled_modules:        [default, sfControlPanel]
+    enabled_modules:        [default, sfControlPanel, scSvnManagementUI]
 #
 #    # Charset used for the response
 #    charset:                utf-8
