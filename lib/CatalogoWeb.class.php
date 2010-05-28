@@ -5990,4 +5990,6 @@ public function Catdefcatman_Cattramo($params = '') {
 
 }
 
+}
+
 ?>
