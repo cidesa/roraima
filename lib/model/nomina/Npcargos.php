@@ -19,6 +19,7 @@ class Npcargos extends BaseNpcargos
 	protected $porcen="0,00";
 	protected $codnom="";	
 	protected $objcar=array();
+        protected $carvan2="0,00";
 
 	public function getNomtip()
 	{
@@ -71,6 +72,15 @@ class Npcargos extends BaseNpcargos
 
             return $sum;
 	}
+
+	public function getCarvan2()
+	{
+            if (self::getId()) {
+            $sum= self::getCarvan()-self::getCarasi();
+            }else $sum=self::getCarvan();
+
+            return $sum;
+}
 
 
 }
