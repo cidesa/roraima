@@ -370,6 +370,13 @@ echo grid_tag($obj);
   </ul>
 
 <script language="JavaScript" type="text/javascript">
+    var nuevo='<?php echo $npcargos->getId(); ?>';
+    valorvaccon='<?php echo $npcargos->getCarvan2(); ?>';
+    if (nuevo!=""){
+    $('npcargos_carvan').value=valorvaccon;
+    $('npcargos_carvan').readOnly=true;
+    }
+
    function validargrid(id)
  {
     var aux = id.split("_");

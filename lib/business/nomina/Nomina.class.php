@@ -6030,6 +6030,12 @@ class Nomina {
   //////////////////Registro de Cargos////////////////
 
   public static function salvarNomdefespcar($cargos, $ids, $grid) {
+    if ($cargos->getId())
+    {
+        $carvanreal=H::getX('CODCAR','Npcargos','Carvan',$cargos->getCodcar());
+        $cargos->setCarvan($carvanreal);
+    }
+
     $cargos->save();
     $c = new Criteria();
     $c->add(NpasiconempPeer :: CODCAR, $cargos->getCodcar());
