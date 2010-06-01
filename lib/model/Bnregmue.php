@@ -108,6 +108,11 @@ class Bnregmue extends BaseBnregmue
   	return $this->etifeccal;
   }
 
+    public function getNomuse()
+    {
+            return Herramientas::getX('loguse','Usuarios','Nomuse',trim(self::getLogusu()));
+}
+
 }
 
 

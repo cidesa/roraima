@@ -320,6 +320,19 @@
   'control_name' => 'bndismue[obsdismue]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
+
+    <br>
+<?php echo label_for('bndismue[logusu]', __($labels['bndismue{logusu}']), 'class="required"') ?>
+<div class="content<?php if ($sf_request->hasError('bndismue{logusu}')): ?> form-error<?php endif; ?>">
+<?php if ($sf_request->hasError('bndismue{logusu}')): ?> <?php echo form_error('bndismue{logusu}', array('class' => 'form-error-msg')) ?>
+<?php endif; ?>
+
+  <?php $value = object_input_tag($bndismue, 'getNomuse', array (
+'size' => 60,
+'disabled' => true,
+'control_name' => 'bndismue[nomuse]',
+)); echo $value ? $value : '&nbsp;' ?>
+</div>
 </div>
 
 
