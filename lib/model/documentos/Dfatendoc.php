@@ -52,6 +52,15 @@ class Dfatendoc extends BaseDfatendoc
 
   }
 
+  public function estaAnulado()
+  {
+
+    if($this->anuate==0) return false;
+    else return true;
+
+  }
+
+
   public function getStatus()
   {
 

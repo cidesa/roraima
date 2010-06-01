@@ -62,7 +62,7 @@ class docpenActions extends autodocpenActions
     $this->dfatendocdet = new Dfatendocdet();
     
     $list = Constantes::listaEstadoDocumento();
-    if($this->dfatendoc->getAnuate()==$list[1]){
+    if($this->dfatendoc->estaAnulado()){
       $this->setFlash('info', 'Información');
       $this->getRequest()->setError('','Documento Anulado.');
     }

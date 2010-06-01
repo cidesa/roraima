@@ -6,22 +6,24 @@ generator:
     fields:
       coddoc:         { name : Código }
       desdoc:         { name : Descripción }
-      staate:         { name : Estatus }
-      status:         { name : Estatus }
-      anuate:         { name : Estado Atencion }
+      staate:         { name : Seguimiento }
+      status:         { name : Seguimiento }
+      anuate:         { name : Estado Seguimiento }
       estado:         { name : Documento }
+      elestado:         { name : Estado Documento }
       fecdoc:         { name : Fecha Documentos, type: input_date_tag }
       id_dftabtip:    { name : Tipo Documento }
       desate:         { name : Descripción de la Atención }
       infdoc1:        { name : Inf. Adicional 1 }
+      infdoc2:        { name : Inf. Adicional 2 }
 #      destra:         { name : Descripción del medio de transporte }
 #      desate:         { name : Descripción de la Atención/Observación }
       diaent:         { name : Dias de Entregas }
       id_dfmedtra:    { name : Medio de Transporte }
     list:
       title:          Revisión de Documentos
-      display:        [=coddoc, desdoc, _fecdoc, status, anuate, estado, infdoc1 ]
-      filters:      [coddoc, desdoc, _staate ]
+      display:        [=coddoc, desdoc, _fecdoc, status, anuate, elestado, infdoc1, infdoc2 ]
+      filters:      [coddoc, desdoc, _staate, infdoc1, infdoc2 ]
       max_per_page:    10
       object_actions:
         _edit:        ~

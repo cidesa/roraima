@@ -322,7 +322,7 @@ class Documentos
         $sql = "SELECT $tabla.$stadoc AS STADOC, DFATENDOC.ID
             FROM $tabla INNER JOIN DFATENDOC ON rtrim($tabla.$coddoc) = DFATENDOC.coddoc
             where $tabla.$stadoc <> DFATENDOC.ESTADO ";
-//print $sql;exit;            
+//print $sql;exit;
         if(Herramientas::BuscarDatos($sql, &$regs)){
           foreach($regs as $reg){
             $id = $reg['id'];
@@ -400,7 +400,7 @@ class Documentos
    */
   public static function salvarDocpen($dfatendoc,$idusuario,$dfatendocdet_in)
   {
-    if($dfatendoc->getAnuate()==0){
+    if(!$dfatendoc->estaAnulado()){
 
       $c = new Criteria();
       $c->add(DfrutadocPeer::ID_DFTABTIP, $dfatendoc->getIdDftabtip());
