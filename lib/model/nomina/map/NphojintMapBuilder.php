@@ -232,6 +232,8 @@ class NphojintMapBuilder {
 
 		$tMap->addColumn('FECFINCON', 'Fecfincon', 'int', CreoleTypes::DATE, false, null);
 
+		$tMap->addColumn('OBSEMBRET', 'Obsembret', 'string', CreoleTypes::VARCHAR, false, 1000);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

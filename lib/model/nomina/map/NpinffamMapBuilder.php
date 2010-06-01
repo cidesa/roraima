@@ -68,6 +68,8 @@ class NpinffamMapBuilder {
 
 		$tMap->addColumn('DISSUS', 'Dissus', 'string', CreoleTypes::VARCHAR, false, 1);
 
+		$tMap->addColumn('FECING', 'Fecing', 'int', CreoleTypes::DATE, false, null);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

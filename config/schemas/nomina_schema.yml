@@ -2666,6 +2666,9 @@ propel:
     codnom:
       type: VARCHAR
       size: 3
+    dedica:
+      type: VARCHAR
+      size: 100
     id:
       type: INTEGER
       required: true
@@ -3609,6 +3612,9 @@ propel:
       type: DATE
     fecfincon:
       type: DATE
+    obsembret:
+      type: VARCHAR
+      size: 1000
     id:
       type: INTEGER
       required: true
@@ -4103,6 +4109,8 @@ propel:
     dissus:
       type: VARCHAR
       size: 1
+    fecing:
+      type: DATE
     id:
       type: INTEGER
       required: true

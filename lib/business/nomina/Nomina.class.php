@@ -273,6 +273,10 @@ class Nomina {
         } else {
           $x[$j]->setSeghcm('N');
         }
+        if ($x[$j]->getFecing()=="")
+        {
+            $x[$j]->setFecing(date('Y-m-d'));
+        }
         $x[$j]->save();
       }
       $j++;

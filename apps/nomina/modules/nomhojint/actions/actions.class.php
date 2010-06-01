@@ -1087,6 +1087,10 @@ $this->Bitacora('Guardo');
         $this->nphojint->setFecfincon(null);
       }
     }
+    if (isset($nphojint['obsembret']))
+    {
+      $this->nphojint->setObsembret($nphojint['obsembret']);
+    }
   }
 
   protected function getNphojintOrCreate($id = 'id')
@@ -1284,7 +1288,7 @@ $this->Bitacora('Guardo');
     $col11->setTipo(Columna::TEXTO);
     $col11->setAlineacionObjeto(Columna::IZQUIERDA);
     $col11->setAlineacionContenido(Columna::IZQUIERDA);
-    $col11->setEsGrabable(false);
+    $col11->setEsGrabable(true);
     $col11->setNombreCampo('dedica');
     $col11->setHTML('type="text" size="40"');
 
@@ -1500,8 +1504,6 @@ $this->Bitacora('Guardo');
     $col10->setVacia(true);
     $col10->setNombreCampo('fecenttit');
 
-
-
     $opciones->addColumna($col1);
     $opciones->addColumna($col2);
     $opciones->addColumna($col3);
@@ -1684,6 +1686,16 @@ $this->Bitacora('Guardo');
     $col20->setCombo(array(''=>'Seleccione...','S'=>'SI','N'=>'NO'));
     $col20->setHTML(' ');
 
+    $col21 = new Columna('Fecha de Registro');
+    $col21->setTipo(Columna::FECHA);
+    $col21->setAlineacionObjeto(Columna::CENTRO);
+    $col21->setAlineacionContenido(Columna::CENTRO);
+    $col21->setEsGrabable(true);
+    $col21->setHTML(' ');
+    $col21->setNombreCampo('fecing');
+    $col21->setVacia(true);
+    $col21->setOculta(true);
+
     $opciones->addColumna($col1);
     $opciones->addColumna($col2);
     $opciones->addColumna($col3);
@@ -1704,6 +1716,7 @@ $this->Bitacora('Guardo');
     $opciones->addColumna($col18);
     $opciones->addColumna($col19);
     $opciones->addColumna($col20);
+    $opciones->addColumna($col21);
 
 
 
@@ -1954,6 +1967,7 @@ $this->Bitacora('Guardo');
 	  'nphojint{numpuncue}' => 'Punto de Cuenta:',
         'nphojint{fecinicon}' => 'Fecha Inicio del Contrato:',
         'nphojint{fecfincon}' => 'Fecha Fin del Contrato:',
+        'nphojint{obsembret}' => 'Datos:',
 
 
     );

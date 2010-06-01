@@ -1515,6 +1515,25 @@ echo grid_tag($obj6);
 </div>
 </fieldset>
 
+<?php tabPageOpenClose("tp1", "tabPage13", 'Información Embargos de Sueldos y otros');?>
+<fieldset id="sf_fieldset_none" class="">
+<div class="form-row">
+ <?php echo label_for('nphojint[obsembret]', __($labels['nphojint{obsembret}']), 'class="required" style="width: 150px"') ?>
+  <div class="content<?php if ($sf_request->hasError('nphojint{obsembret}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('nphojint{obsembret}')): ?>
+    <?php echo form_error('nphojint{obsembret}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_textarea_tag($nphojint, 'getObsembret', array (
+  'size' => '80x3',
+  'maxlength' => 1000,
+  'control_name' => 'nphojint[obsembret]',
+  'onkeyup' => "javascript:return ismaxlength(this)",
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+</div>
+</fieldset>
+
 <?php tabInit('tp1','0');?>
 
 <?php include_partial('edit_actions', array('nphojint' => $nphojint)) ?>
