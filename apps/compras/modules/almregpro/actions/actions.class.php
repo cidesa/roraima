@@ -166,16 +166,15 @@ private static $coderror=-1;
 
          try{
          $this->updateCaproveeFromRequest();
-         //$grid = Herramientas::CargarDatosGridv2($this,$this->obj);
-	    //	$this->configGrid();
-	  //  H::printR($this->objR);exit();
-    $gridC = Herramientas::CargarDatosGrid($this,$this->objR);
-//    	$this->configGrid($grid[0],$grid[1]);
 
          $this->configGrid();
          $this->configGrid_Contacto();
          $this->configGrid_Ramos();
          $this->configGrid_Retenciones();
+         $gridRamos = Herramientas::CargarDatosGridv2($this,$this->objR);
+         $gridcontca = Herramientas::CargarDatosGridv2($this,$this->objC);
+         $gridret = Herramientas::CargarDatosGridv2($this,$this->objRet);
+         $gridrec = Herramientas::CargarDatosGridv2($this,$this->objRec);
 
          }
          catch(Exception $ex){}
