@@ -335,6 +335,19 @@
 'control_name' => 'bnregmue[despro]',
 )); echo $value ? $value : '&nbsp;' ?>
 </div>
+  <br>
+
+<?php echo label_for('bnregmue[logusu]', __($labels['bnregmue{logusu}']), 'class="required"') ?>
+<div class="content<?php if ($sf_request->hasError('bnregmue{logusu}')): ?> form-error<?php endif; ?>">
+<?php if ($sf_request->hasError('bnregmue{logusu}')): ?> <?php echo form_error('bnregmue{logusu}', array('class' => 'form-error-msg')) ?>
+<?php endif; ?>
+
+  <?php $value = object_input_tag($bnregmue, 'getNomuse', array (
+'size' => 60,
+'disabled' => true,
+'control_name' => 'bnregmue[nomuse]',
+)); echo $value ? $value : '&nbsp;' ?>
+</div>
 </div>
 </fielset>
 </div>
