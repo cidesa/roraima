@@ -12,7 +12,7 @@ opciones:                  # Opciones generales
   tipo:                    t
   nombrecampo:             codret
   esgrabable:              true
-  html:                    [size="3" maxlength="3" ]
+  html:                    [size="3" maxlength=3 ]
 2:       # Columna 2
   titulo:                  Descripcion
   tipo:                    t

@@ -12,10 +12,10 @@ opciones:                  # Opciones generales
   tipo:                    t
   nombrecampo:             ramart
   esgrabable:              true
-  html:                    [size="6" maxlength="6" ]
+  html:                    [size="6" maxlength=6 ]
 2:       # Columna 2
   titulo:                  Nombre
   tipo:                    t
   nombrecampo:             nomram
   esgrabable:              false
-  html:                    [size="25" maxlength="250"]
+  html:                    [size="25" maxlength=250]
