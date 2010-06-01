@@ -25,11 +25,11 @@ class Npexplab extends BaseNpexplab
     return Herramientas::getX('CODNOM','Npnomina','Nomnom',self::getCodnom());
   }
 
-  public function getDedica()
+  /*public function getDedica()
   {
     $r = Herramientas::getX('CODEMP','Npasicaremp','codtie',self::getCodemp());
     return Herramientas::getX('CODTIE','Nptiempo','destie',$r);
-}
+  }*/
   public function getCondic()
   {
     self::getFecini()==null ? $fecini = date('Y-m-d') : $fecini = self::getFecini();
@@ -44,6 +44,15 @@ class Npexplab extends BaseNpexplab
 
     return $r=='V' ? 'VIGENTE' : 'NO VIGENTE';
   }
+
+ /*  public function hydrate(ResultSet $rs, $startcol = 1)
+   {
+      parent::hydrate($rs, $startcol);
+
+      $r = Herramientas::getX('CODEMP','Npasicaremp','codtie',self::getCodemp());
+      $this->dedica= 'aaaaaa';//Herramientas::getX('CODTIE','Nptiempo','destie',$r);
+
+   }*/
 
 
 }

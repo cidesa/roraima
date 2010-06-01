@@ -405,6 +405,10 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 
 
 	
+	protected $obsembret;
+
+
+	
 	protected $id;
 
 	
@@ -1285,6 +1289,13 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
     }
   }
 
+  
+  public function getObsembret()
+  {
+
+    return trim($this->obsembret);
+
+  }
   
   public function getId()
   {
@@ -2415,6 +2426,16 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 
 	} 
 	
+	public function setObsembret($v)
+	{
+
+    if ($this->obsembret !== $v) {
+        $this->obsembret = $v;
+        $this->modifiedColumns[] = NphojintPeer::OBSEMBRET;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -2627,7 +2648,9 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 
       $this->fecfincon = $rs->getDate($startcol + 98, null);
 
-      $this->id = $rs->getInt($startcol + 99);
+      $this->obsembret = $rs->getString($startcol + 99);
+
+      $this->id = $rs->getInt($startcol + 100);
 
       $this->resetModified();
 
@@ -2635,7 +2658,7 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 100; 
+            return $startcol + 101; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Nphojint object", $e);
     }
@@ -3096,6 +3119,9 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 				return $this->getFecfincon();
 				break;
 			case 99:
+				return $this->getObsembret();
+				break;
+			case 100:
 				return $this->getId();
 				break;
 			default:
@@ -3207,7 +3233,8 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 			$keys[96] => $this->getNumpuncue(),
 			$keys[97] => $this->getFecinicon(),
 			$keys[98] => $this->getFecfincon(),
-			$keys[99] => $this->getId(),
+			$keys[99] => $this->getObsembret(),
+			$keys[100] => $this->getId(),
 		);
 		return $result;
 	}
@@ -3521,6 +3548,9 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 				$this->setFecfincon($value);
 				break;
 			case 99:
+				$this->setObsembret($value);
+				break;
+			case 100:
 				$this->setId($value);
 				break;
 		} 	}
@@ -3629,7 +3659,8 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[96], $arr)) $this->setNumpuncue($arr[$keys[96]]);
 		if (array_key_exists($keys[97], $arr)) $this->setFecinicon($arr[$keys[97]]);
 		if (array_key_exists($keys[98], $arr)) $this->setFecfincon($arr[$keys[98]]);
-		if (array_key_exists($keys[99], $arr)) $this->setId($arr[$keys[99]]);
+		if (array_key_exists($keys[99], $arr)) $this->setObsembret($arr[$keys[99]]);
+		if (array_key_exists($keys[100], $arr)) $this->setId($arr[$keys[100]]);
 	}
 
 	
@@ -3736,6 +3767,7 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(NphojintPeer::NUMPUNCUE)) $criteria->add(NphojintPeer::NUMPUNCUE, $this->numpuncue);
 		if ($this->isColumnModified(NphojintPeer::FECINICON)) $criteria->add(NphojintPeer::FECINICON, $this->fecinicon);
 		if ($this->isColumnModified(NphojintPeer::FECFINCON)) $criteria->add(NphojintPeer::FECFINCON, $this->fecfincon);
+		if ($this->isColumnModified(NphojintPeer::OBSEMBRET)) $criteria->add(NphojintPeer::OBSEMBRET, $this->obsembret);
 		if ($this->isColumnModified(NphojintPeer::ID)) $criteria->add(NphojintPeer::ID, $this->id);
 
 		return $criteria;
@@ -3964,6 +3996,8 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 		$copyObj->setFecinicon($this->fecinicon);
 
 		$copyObj->setFecfincon($this->fecfincon);
+
+		$copyObj->setObsembret($this->obsembret);
 
 
 		if ($deepCopy) {

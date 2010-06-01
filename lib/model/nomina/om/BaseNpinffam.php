@@ -77,6 +77,10 @@ abstract class BaseNpinffam extends BaseObject  implements Persistent {
 
 
 
+	protected $fecing;
+
+
+	
 	protected $id;
 
 
@@ -223,6 +227,28 @@ abstract class BaseNpinffam extends BaseObject  implements Persistent {
 
   }
 
+  public function getFecing($format = 'Y-m-d')
+  {
+
+    if ($this->fecing === null || $this->fecing === '') {
+      return null;
+    } elseif (!is_int($this->fecing)) {
+            $ts = adodb_strtotime($this->fecing);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecing] as date/time value: " . var_export($this->fecing, true));
+      }
+    } else {
+      $ts = $this->fecing;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
   public function getId()
   {
 
@@ -412,6 +438,28 @@ abstract class BaseNpinffam extends BaseObject  implements Persistent {
 
 	}
 
+	public function setFecing($v)
+	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecing] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecing !== $ts) {
+      $this->fecing = $ts;
+      $this->modifiedColumns[] = NpinffamPeer::FECING;
+    }
+
+	} 
+	
 	public function setId($v)
 	{
 
@@ -460,7 +508,9 @@ abstract class BaseNpinffam extends BaseObject  implements Persistent {
 
       $this->dissus = $rs->getString($startcol + 16);
 
-      $this->id = $rs->getInt($startcol + 17);
+      $this->fecing = $rs->getDate($startcol + 17, null);
+
+      $this->id = $rs->getInt($startcol + 18);
 
       $this->resetModified();
 
@@ -468,7 +518,7 @@ abstract class BaseNpinffam extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 18;
+            return $startcol + 19; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Npinffam object", $e);
     }
@@ -667,6 +717,9 @@ abstract class BaseNpinffam extends BaseObject  implements Persistent {
 				return $this->getDissus();
 				break;
 			case 17:
+				return $this->getFecing();
+				break;
+			case 18:
 				return $this->getId();
 				break;
 			default:
@@ -696,7 +749,8 @@ abstract class BaseNpinffam extends BaseObject  implements Persistent {
 			$keys[14] => $this->getOcupac(),
 			$keys[15] => $this->getCarben(),
 			$keys[16] => $this->getDissus(),
-			$keys[17] => $this->getId(),
+			$keys[17] => $this->getFecing(),
+			$keys[18] => $this->getId(),
 		);
 		return $result;
 	}
@@ -764,6 +818,9 @@ abstract class BaseNpinffam extends BaseObject  implements Persistent {
 				$this->setDissus($value);
 				break;
 			case 17:
+				$this->setFecing($value);
+				break;
+			case 18:
 				$this->setId($value);
 				break;
 		} 	}
@@ -790,7 +847,8 @@ abstract class BaseNpinffam extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[14], $arr)) $this->setOcupac($arr[$keys[14]]);
 		if (array_key_exists($keys[15], $arr)) $this->setCarben($arr[$keys[15]]);
 		if (array_key_exists($keys[16], $arr)) $this->setDissus($arr[$keys[16]]);
-		if (array_key_exists($keys[17], $arr)) $this->setId($arr[$keys[17]]);
+		if (array_key_exists($keys[17], $arr)) $this->setFecing($arr[$keys[17]]);
+		if (array_key_exists($keys[18], $arr)) $this->setId($arr[$keys[18]]);
 	}
 
 
@@ -815,6 +873,7 @@ abstract class BaseNpinffam extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(NpinffamPeer::OCUPAC)) $criteria->add(NpinffamPeer::OCUPAC, $this->ocupac);
 		if ($this->isColumnModified(NpinffamPeer::CARBEN)) $criteria->add(NpinffamPeer::CARBEN, $this->carben);
 		if ($this->isColumnModified(NpinffamPeer::DISSUS)) $criteria->add(NpinffamPeer::DISSUS, $this->dissus);
+		if ($this->isColumnModified(NpinffamPeer::FECING)) $criteria->add(NpinffamPeer::FECING, $this->fecing);
 		if ($this->isColumnModified(NpinffamPeer::ID)) $criteria->add(NpinffamPeer::ID, $this->id);
 
 		return $criteria;
@@ -879,6 +938,8 @@ abstract class BaseNpinffam extends BaseObject  implements Persistent {
 		$copyObj->setCarben($this->carben);
 
 		$copyObj->setDissus($this->dissus);
+
+		$copyObj->setFecing($this->fecing);
 
 
 		$copyObj->setNew(true);

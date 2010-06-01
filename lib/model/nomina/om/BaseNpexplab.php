@@ -65,6 +65,10 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
 
 
 	
+	protected $dedica;
+
+
+	
 	protected $id;
 
 	
@@ -202,6 +206,13 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
   {
 
     return trim($this->codnom);
+
+  }
+  
+  public function getDedica()
+  {
+
+    return trim($this->dedica);
 
   }
   
@@ -366,6 +377,16 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setDedica($v)
+	{
+
+    if ($this->dedica !== $v) {
+        $this->dedica = $v;
+        $this->modifiedColumns[] = NpexplabPeer::DEDICA;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -408,7 +429,9 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
 
       $this->codnom = $rs->getString($startcol + 13);
 
-      $this->id = $rs->getInt($startcol + 14);
+      $this->dedica = $rs->getString($startcol + 14);
+
+      $this->id = $rs->getInt($startcol + 15);
 
       $this->resetModified();
 
@@ -416,7 +439,7 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 15; 
+            return $startcol + 16; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Npexplab object", $e);
     }
@@ -606,6 +629,9 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
 				return $this->getCodnom();
 				break;
 			case 14:
+				return $this->getDedica();
+				break;
+			case 15:
 				return $this->getId();
 				break;
 			default:
@@ -632,7 +658,8 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
 			$keys[11] => $this->getMontopres(),
 			$keys[12] => $this->getCodniv(),
 			$keys[13] => $this->getCodnom(),
-			$keys[14] => $this->getId(),
+			$keys[14] => $this->getDedica(),
+			$keys[15] => $this->getId(),
 		);
 		return $result;
 	}
@@ -691,6 +718,9 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
 				$this->setCodnom($value);
 				break;
 			case 14:
+				$this->setDedica($value);
+				break;
+			case 15:
 				$this->setId($value);
 				break;
 		} 	}
@@ -714,7 +744,8 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[11], $arr)) $this->setMontopres($arr[$keys[11]]);
 		if (array_key_exists($keys[12], $arr)) $this->setCodniv($arr[$keys[12]]);
 		if (array_key_exists($keys[13], $arr)) $this->setCodnom($arr[$keys[13]]);
-		if (array_key_exists($keys[14], $arr)) $this->setId($arr[$keys[14]]);
+		if (array_key_exists($keys[14], $arr)) $this->setDedica($arr[$keys[14]]);
+		if (array_key_exists($keys[15], $arr)) $this->setId($arr[$keys[15]]);
 	}
 
 	
@@ -736,6 +767,7 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(NpexplabPeer::MONTOPRES)) $criteria->add(NpexplabPeer::MONTOPRES, $this->montopres);
 		if ($this->isColumnModified(NpexplabPeer::CODNIV)) $criteria->add(NpexplabPeer::CODNIV, $this->codniv);
 		if ($this->isColumnModified(NpexplabPeer::CODNOM)) $criteria->add(NpexplabPeer::CODNOM, $this->codnom);
+		if ($this->isColumnModified(NpexplabPeer::DEDICA)) $criteria->add(NpexplabPeer::DEDICA, $this->dedica);
 		if ($this->isColumnModified(NpexplabPeer::ID)) $criteria->add(NpexplabPeer::ID, $this->id);
 
 		return $criteria;
@@ -794,6 +826,8 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
 		$copyObj->setCodniv($this->codniv);
 
 		$copyObj->setCodnom($this->codnom);
+
+		$copyObj->setDedica($this->dedica);
 
 
 		$copyObj->setNew(true);

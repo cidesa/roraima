@@ -62,6 +62,8 @@ class NpexplabMapBuilder {
 
 		$tMap->addColumn('CODNOM', 'Codnom', 'string', CreoleTypes::VARCHAR, false, 3);
 
+		$tMap->addColumn('DEDICA', 'Dedica', 'string', CreoleTypes::VARCHAR, false, 100);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 
