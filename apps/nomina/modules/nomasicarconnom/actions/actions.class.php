@@ -268,6 +268,23 @@ class nomasicarconnomActions extends autonomasicarconnomActions
             $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
           return sfView::HEADER_ONLY;
       }
+     else if ($this->getRequestParameter('ajax')=='7')
+      {
+        $q= new Criteria();
+        $q->add(CadefcenPeer::CODCEN,$this->getRequestParameter('codigo'));
+        $reg= CadefcenPeer::doSelectOne($q);
+        if ($reg)
+        {
+           $dato=$reg->getDescen(); $javascript="";
+        }else {
+            $dato="";
+            $javascript="alert('El Centro de Costo no existe'); $('$cajtexcom').value=''; $('$cajtexcom').focus();";
+        }
+
+        $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""]]';
+        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+        return sfView::HEADER_ONLY;
+      }
   }
 
 public function executeAutocomplete()
@@ -677,6 +694,10 @@ public function executeAutocomplete()
     if (isset($npasicaremp['codtie']))
     {
       $this->npasicaremp->setCodtie($npasicaremp['codtie']);
+    }
+    if (isset($npasicaremp['codcen']))
+    {
+      $this->npasicaremp->setCodcen($npasicaremp['codcen']);
     }
   }
 

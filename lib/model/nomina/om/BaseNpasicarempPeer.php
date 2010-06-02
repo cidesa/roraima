@@ -13,7 +13,7 @@ abstract class BaseNpasicarempPeer {
 	const CLASS_DEFAULT = 'lib.model.nomina.Npasicaremp';
 
 	
-	const NUM_COLUMNS = 25;
+	const NUM_COLUMNS = 26;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -92,6 +92,9 @@ abstract class BaseNpasicarempPeer {
 	const JUSCAM = 'npasicaremp.JUSCAM';
 
 	
+	const CODCEN = 'npasicaremp.CODCEN';
+
+	
 	const ID = 'npasicaremp.ID';
 
 	
@@ -100,18 +103,18 @@ abstract class BaseNpasicarempPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codemp', 'Codcar', 'Codnom', 'Codcat', 'Fecasi', 'Nomemp', 'Nomcar', 'Nomnom', 'Nomcat', 'Unieje', 'Sueldo', 'Status', 'Nronom', 'Montonomina', 'Codtip', 'Codtipgas', 'Codniv', 'Grado', 'Paso', 'Codtipded', 'Codtipcat', 'Codmotcamcar', 'Codtie', 'Juscam', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (NpasicarempPeer::CODEMP, NpasicarempPeer::CODCAR, NpasicarempPeer::CODNOM, NpasicarempPeer::CODCAT, NpasicarempPeer::FECASI, NpasicarempPeer::NOMEMP, NpasicarempPeer::NOMCAR, NpasicarempPeer::NOMNOM, NpasicarempPeer::NOMCAT, NpasicarempPeer::UNIEJE, NpasicarempPeer::SUELDO, NpasicarempPeer::STATUS, NpasicarempPeer::NRONOM, NpasicarempPeer::MONTONOMINA, NpasicarempPeer::CODTIP, NpasicarempPeer::CODTIPGAS, NpasicarempPeer::CODNIV, NpasicarempPeer::GRADO, NpasicarempPeer::PASO, NpasicarempPeer::CODTIPDED, NpasicarempPeer::CODTIPCAT, NpasicarempPeer::CODMOTCAMCAR, NpasicarempPeer::CODTIE, NpasicarempPeer::JUSCAM, NpasicarempPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codemp', 'codcar', 'codnom', 'codcat', 'fecasi', 'nomemp', 'nomcar', 'nomnom', 'nomcat', 'unieje', 'sueldo', 'status', 'nronom', 'montonomina', 'codtip', 'codtipgas', 'codniv', 'grado', 'paso', 'codtipded', 'codtipcat', 'codmotcamcar', 'codtie', 'juscam', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, )
+		BasePeer::TYPE_PHPNAME => array ('Codemp', 'Codcar', 'Codnom', 'Codcat', 'Fecasi', 'Nomemp', 'Nomcar', 'Nomnom', 'Nomcat', 'Unieje', 'Sueldo', 'Status', 'Nronom', 'Montonomina', 'Codtip', 'Codtipgas', 'Codniv', 'Grado', 'Paso', 'Codtipded', 'Codtipcat', 'Codmotcamcar', 'Codtie', 'Juscam', 'Codcen', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (NpasicarempPeer::CODEMP, NpasicarempPeer::CODCAR, NpasicarempPeer::CODNOM, NpasicarempPeer::CODCAT, NpasicarempPeer::FECASI, NpasicarempPeer::NOMEMP, NpasicarempPeer::NOMCAR, NpasicarempPeer::NOMNOM, NpasicarempPeer::NOMCAT, NpasicarempPeer::UNIEJE, NpasicarempPeer::SUELDO, NpasicarempPeer::STATUS, NpasicarempPeer::NRONOM, NpasicarempPeer::MONTONOMINA, NpasicarempPeer::CODTIP, NpasicarempPeer::CODTIPGAS, NpasicarempPeer::CODNIV, NpasicarempPeer::GRADO, NpasicarempPeer::PASO, NpasicarempPeer::CODTIPDED, NpasicarempPeer::CODTIPCAT, NpasicarempPeer::CODMOTCAMCAR, NpasicarempPeer::CODTIE, NpasicarempPeer::JUSCAM, NpasicarempPeer::CODCEN, NpasicarempPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codemp', 'codcar', 'codnom', 'codcat', 'fecasi', 'nomemp', 'nomcar', 'nomnom', 'nomcat', 'unieje', 'sueldo', 'status', 'nronom', 'montonomina', 'codtip', 'codtipgas', 'codniv', 'grado', 'paso', 'codtipded', 'codtipcat', 'codmotcamcar', 'codtie', 'juscam', 'codcen', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codemp' => 0, 'Codcar' => 1, 'Codnom' => 2, 'Codcat' => 3, 'Fecasi' => 4, 'Nomemp' => 5, 'Nomcar' => 6, 'Nomnom' => 7, 'Nomcat' => 8, 'Unieje' => 9, 'Sueldo' => 10, 'Status' => 11, 'Nronom' => 12, 'Montonomina' => 13, 'Codtip' => 14, 'Codtipgas' => 15, 'Codniv' => 16, 'Grado' => 17, 'Paso' => 18, 'Codtipded' => 19, 'Codtipcat' => 20, 'Codmotcamcar' => 21, 'Codtie' => 22, 'Juscam' => 23, 'Id' => 24, ),
-		BasePeer::TYPE_COLNAME => array (NpasicarempPeer::CODEMP => 0, NpasicarempPeer::CODCAR => 1, NpasicarempPeer::CODNOM => 2, NpasicarempPeer::CODCAT => 3, NpasicarempPeer::FECASI => 4, NpasicarempPeer::NOMEMP => 5, NpasicarempPeer::NOMCAR => 6, NpasicarempPeer::NOMNOM => 7, NpasicarempPeer::NOMCAT => 8, NpasicarempPeer::UNIEJE => 9, NpasicarempPeer::SUELDO => 10, NpasicarempPeer::STATUS => 11, NpasicarempPeer::NRONOM => 12, NpasicarempPeer::MONTONOMINA => 13, NpasicarempPeer::CODTIP => 14, NpasicarempPeer::CODTIPGAS => 15, NpasicarempPeer::CODNIV => 16, NpasicarempPeer::GRADO => 17, NpasicarempPeer::PASO => 18, NpasicarempPeer::CODTIPDED => 19, NpasicarempPeer::CODTIPCAT => 20, NpasicarempPeer::CODMOTCAMCAR => 21, NpasicarempPeer::CODTIE => 22, NpasicarempPeer::JUSCAM => 23, NpasicarempPeer::ID => 24, ),
-		BasePeer::TYPE_FIELDNAME => array ('codemp' => 0, 'codcar' => 1, 'codnom' => 2, 'codcat' => 3, 'fecasi' => 4, 'nomemp' => 5, 'nomcar' => 6, 'nomnom' => 7, 'nomcat' => 8, 'unieje' => 9, 'sueldo' => 10, 'status' => 11, 'nronom' => 12, 'montonomina' => 13, 'codtip' => 14, 'codtipgas' => 15, 'codniv' => 16, 'grado' => 17, 'paso' => 18, 'codtipded' => 19, 'codtipcat' => 20, 'codmotcamcar' => 21, 'codtie' => 22, 'juscam' => 23, 'id' => 24, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, )
+		BasePeer::TYPE_PHPNAME => array ('Codemp' => 0, 'Codcar' => 1, 'Codnom' => 2, 'Codcat' => 3, 'Fecasi' => 4, 'Nomemp' => 5, 'Nomcar' => 6, 'Nomnom' => 7, 'Nomcat' => 8, 'Unieje' => 9, 'Sueldo' => 10, 'Status' => 11, 'Nronom' => 12, 'Montonomina' => 13, 'Codtip' => 14, 'Codtipgas' => 15, 'Codniv' => 16, 'Grado' => 17, 'Paso' => 18, 'Codtipded' => 19, 'Codtipcat' => 20, 'Codmotcamcar' => 21, 'Codtie' => 22, 'Juscam' => 23, 'Codcen' => 24, 'Id' => 25, ),
+		BasePeer::TYPE_COLNAME => array (NpasicarempPeer::CODEMP => 0, NpasicarempPeer::CODCAR => 1, NpasicarempPeer::CODNOM => 2, NpasicarempPeer::CODCAT => 3, NpasicarempPeer::FECASI => 4, NpasicarempPeer::NOMEMP => 5, NpasicarempPeer::NOMCAR => 6, NpasicarempPeer::NOMNOM => 7, NpasicarempPeer::NOMCAT => 8, NpasicarempPeer::UNIEJE => 9, NpasicarempPeer::SUELDO => 10, NpasicarempPeer::STATUS => 11, NpasicarempPeer::NRONOM => 12, NpasicarempPeer::MONTONOMINA => 13, NpasicarempPeer::CODTIP => 14, NpasicarempPeer::CODTIPGAS => 15, NpasicarempPeer::CODNIV => 16, NpasicarempPeer::GRADO => 17, NpasicarempPeer::PASO => 18, NpasicarempPeer::CODTIPDED => 19, NpasicarempPeer::CODTIPCAT => 20, NpasicarempPeer::CODMOTCAMCAR => 21, NpasicarempPeer::CODTIE => 22, NpasicarempPeer::JUSCAM => 23, NpasicarempPeer::CODCEN => 24, NpasicarempPeer::ID => 25, ),
+		BasePeer::TYPE_FIELDNAME => array ('codemp' => 0, 'codcar' => 1, 'codnom' => 2, 'codcat' => 3, 'fecasi' => 4, 'nomemp' => 5, 'nomcar' => 6, 'nomnom' => 7, 'nomcat' => 8, 'unieje' => 9, 'sueldo' => 10, 'status' => 11, 'nronom' => 12, 'montonomina' => 13, 'codtip' => 14, 'codtipgas' => 15, 'codniv' => 16, 'grado' => 17, 'paso' => 18, 'codtipded' => 19, 'codtipcat' => 20, 'codmotcamcar' => 21, 'codtie' => 22, 'juscam' => 23, 'codcen' => 24, 'id' => 25, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, )
 	);
 
 	
@@ -212,6 +215,8 @@ abstract class BaseNpasicarempPeer {
 		$criteria->addSelectColumn(NpasicarempPeer::CODTIE);
 
 		$criteria->addSelectColumn(NpasicarempPeer::JUSCAM);
+
+		$criteria->addSelectColumn(NpasicarempPeer::CODCEN);
 
 		$criteria->addSelectColumn(NpasicarempPeer::ID);
 

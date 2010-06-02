@@ -15,6 +15,38 @@ class nomdefespnivorgActions extends autonomdefespnivorgActions
 {
   public $coderror1=-1;
 
+  public function executeList()
+  {
+    $this->processSort();
+
+    $this->processFilters();
+
+    $this->cambiareti="";
+    $varemp = $this->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('nomina',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['nomina']))
+	     if(array_key_exists('nomdefespnivorg',$varemp['aplicacion']['nomina']['modulos'])){
+	       if(array_key_exists('cambiareti',$varemp['aplicacion']['nomina']['modulos']['nomdefespnivorg']))
+	       {
+	       	$this->cambiareti=$varemp['aplicacion']['nomina']['modulos']['nomdefespnivorg']['cambiareti'];
+	       }
+	     }
+
+    $this->filters = $this->getUser()->getAttributeHolder()->getAll('sf_admin/npestorg/filters');
+
+
+     // 15    // pager
+    $this->pager = new sfPropelPager('Npestorg', 15);
+    $c = new Criteria();
+    $this->addSortCriteria($c);
+    $this->addFiltersCriteria($c);
+    $this->pager->setCriteria($c);
+    $this->pager->setPage($this->getRequestParameter('page', 1));
+    $this->pager->init();
+  }
+
   /**
    * Función principal para el manejo de las acciones create y edit
    * del formulario.
@@ -89,7 +121,8 @@ $this->Bitacora('Guardo');
   
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */

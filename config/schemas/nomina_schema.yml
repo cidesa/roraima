@@ -198,6 +198,9 @@ propel:
     juscam:
       type: VARCHAR
       size: 250
+    codcen:
+      type: VARCHAR
+      size: 4
     id:
       type: INTEGER
       required: true

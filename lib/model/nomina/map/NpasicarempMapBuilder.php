@@ -82,6 +82,8 @@ class NpasicarempMapBuilder {
 
 		$tMap->addColumn('JUSCAM', 'Juscam', 'string', CreoleTypes::VARCHAR, false, 250);
 
+		$tMap->addColumn('CODCEN', 'Codcen', 'string', CreoleTypes::VARCHAR, false, 4);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 
