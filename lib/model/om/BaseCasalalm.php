@@ -49,6 +49,10 @@ abstract class BaseCasalalm extends BaseObject  implements Persistent {
 
 
 	
+	protected $codcen;
+
+
+	
 	protected $id;
 
 	
@@ -144,6 +148,13 @@ abstract class BaseCasalalm extends BaseObject  implements Persistent {
   {
 
     return trim($this->observ);
+
+  }
+  
+  public function getCodcen()
+  {
+
+    return trim($this->codcen);
 
   }
   
@@ -270,6 +281,16 @@ abstract class BaseCasalalm extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setCodcen($v)
+	{
+
+    if ($this->codcen !== $v) {
+        $this->codcen = $v;
+        $this->modifiedColumns[] = CasalalmPeer::CODCEN;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -304,7 +325,9 @@ abstract class BaseCasalalm extends BaseObject  implements Persistent {
 
       $this->observ = $rs->getString($startcol + 9);
 
-      $this->id = $rs->getInt($startcol + 10);
+      $this->codcen = $rs->getString($startcol + 10);
+
+      $this->id = $rs->getInt($startcol + 11);
 
       $this->resetModified();
 
@@ -312,7 +335,7 @@ abstract class BaseCasalalm extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 11; 
+            return $startcol + 12; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Casalalm object", $e);
     }
@@ -507,6 +530,9 @@ abstract class BaseCasalalm extends BaseObject  implements Persistent {
 				return $this->getObserv();
 				break;
 			case 10:
+				return $this->getCodcen();
+				break;
+			case 11:
 				return $this->getId();
 				break;
 			default:
@@ -529,7 +555,8 @@ abstract class BaseCasalalm extends BaseObject  implements Persistent {
 			$keys[7] => $this->getCodubi(),
 			$keys[8] => $this->getTipmov(),
 			$keys[9] => $this->getObserv(),
-			$keys[10] => $this->getId(),
+			$keys[10] => $this->getCodcen(),
+			$keys[11] => $this->getId(),
 		);
 		return $result;
 	}
@@ -576,6 +603,9 @@ abstract class BaseCasalalm extends BaseObject  implements Persistent {
 				$this->setObserv($value);
 				break;
 			case 10:
+				$this->setCodcen($value);
+				break;
+			case 11:
 				$this->setId($value);
 				break;
 		} 	}
@@ -595,7 +625,8 @@ abstract class BaseCasalalm extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[7], $arr)) $this->setCodubi($arr[$keys[7]]);
 		if (array_key_exists($keys[8], $arr)) $this->setTipmov($arr[$keys[8]]);
 		if (array_key_exists($keys[9], $arr)) $this->setObserv($arr[$keys[9]]);
-		if (array_key_exists($keys[10], $arr)) $this->setId($arr[$keys[10]]);
+		if (array_key_exists($keys[10], $arr)) $this->setCodcen($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setId($arr[$keys[11]]);
 	}
 
 	
@@ -613,6 +644,7 @@ abstract class BaseCasalalm extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CasalalmPeer::CODUBI)) $criteria->add(CasalalmPeer::CODUBI, $this->codubi);
 		if ($this->isColumnModified(CasalalmPeer::TIPMOV)) $criteria->add(CasalalmPeer::TIPMOV, $this->tipmov);
 		if ($this->isColumnModified(CasalalmPeer::OBSERV)) $criteria->add(CasalalmPeer::OBSERV, $this->observ);
+		if ($this->isColumnModified(CasalalmPeer::CODCEN)) $criteria->add(CasalalmPeer::CODCEN, $this->codcen);
 		if ($this->isColumnModified(CasalalmPeer::ID)) $criteria->add(CasalalmPeer::ID, $this->id);
 
 		return $criteria;
@@ -664,6 +696,8 @@ abstract class BaseCasalalm extends BaseObject  implements Persistent {
 
 		$copyObj->setObserv($this->observ);
 
+		$copyObj->setCodcen($this->codcen);
+
 
 		$copyObj->setNew(true);
 
@@ -710,7 +744,10 @@ abstract class BaseCasalalm extends BaseObject  implements Persistent {
 		if ($this->aCatipsal === null && (($this->tipmov !== "" && $this->tipmov !== null))) {
 						include_once 'lib/model/om/BaseCatipsalPeer.php';
 
-			$this->aCatipsal = CatipsalPeer::retrieveByPK($this->tipmov, $con);
+      $c = new Criteria();
+      $c->add(CatipsalPeer::CODTIPSAL,$this->tipmov);
+      
+			$this->aCatipsal = CatipsalPeer::doSelectOne($c, $con);
 
 			
 		}

@@ -19,10 +19,11 @@ generator:
       staalm: { name: estatus}
       codubi:      { name: Código de la Ubicación}
       observ:      { name: Observaciones, type: textarea_tag, params: size=60x5 maxlength=1000 onkeyup="ismaxlength(this)}
+      codcen: { name : Centro de Costo}
 
     list:
       title:          Salidas de Almacén
-      filters:        [codsal, codlam, fecsal]
+      filters:        [codsal, codlam, fecsal, codcen]
       display:        [=codsal, dessal, codalm, rifpro, nompro, monsal, fecsal]
       fields:
       object_actions:
@@ -32,7 +33,7 @@ generator:
       sort:           codsal
     edit:
       title:          Edición de Salidas de Almacén
-      display:       [=codsal, fecsal, codpro, rifpro, nompro, dessal, tipo, tipmov, destipsal, monsal, staalm, observ]
+      display:       [=codsal, fecsal, codpro, rifpro, nompro, dessal, tipo, tipmov, destipsal, monsal, staalm, observ, codcen]
       fields:
         fecsal: { params: date_format='dd/MM/yy' }
       actions:

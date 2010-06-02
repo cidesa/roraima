@@ -656,6 +656,35 @@ echo grid_tag($obj_recargos);
 'control_name' => 'caordcom[nomemp]',
 )); echo $value ? $value : '&nbsp;' ?>
 <div class="sf_admin_edit_help"><?php echo __('Máximo 16 caracteres') ?></div></div>
+
+<br>
+<?php echo label_for('caordcom[codcen]', __($labels['caordcom{codcen}']), 'class="required"') ?>
+<div
+  class="content<?php if ($sf_request->hasError('caordcom{codcen}')): ?> form-error<?php endif; ?>">
+<?php if ($sf_request->hasError('caordcom{codcen}')): ?> <?php echo form_error('caordcom{codcen}', array('class' => 'form-error-msg')) ?>
+<?php endif; ?>
+
+  <?php $value = object_input_tag($caordcom, 'getCodcen', array (
+  'size' => 10,
+  'maxlength' => 4,
+  'control_name' => 'caordcom[codcen]',
+  'onBlur'=> remote_function(array(
+              'url' => 'almordcom/ajax',
+        'complete' => 'AjaxJSON(request, json)',
+          'with' => "'ajax=17&cajtexmos=caordcom_descen&cajtexcom=caordcom_codcen&codigo='+this.value",
+        )),
+)); echo $value ? $value : '&nbsp;' ?>
+
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Cadefcen_Almsolegr/clase/Cadefcen/frame/sf_admin_edit_form/obj1/caordcom_codcen/obj2/caordcom_descen/campo1/codcen/campo2/descen')?>
+
+<?php $value = object_input_tag($caordcom, 'getDescen', array (
+'size' => 50,
+'maxlength' => 50,
+'disabled' => true,
+'control_name' => 'caordcom[descen]',
+)); echo $value ? $value : '&nbsp;' ?>
+<div class="sf_admin_edit_help"><?php echo __('Máximo 4 caracteres') ?></div></div>
+
 </div>
 </fieldset>
 

@@ -11,10 +11,11 @@ generator:
       stareq:      { name : Estatus }
       codcatreq:   { name : Unidad }
       desubi:      { name : Descripción Unidad }
+      codcen:      { name : Centro de Costo }
     list:
       title:          Requisiciones
       display:        [=reqart, fecreq, desreq, monreq, stareq, codcatreq, desubi]
-      filters:        [reqart, fecreq]
+      filters:        [reqart, fecreq, codcen]
       max_per_page:	  5
       sort:           reqart
       object_actions:
@@ -22,7 +23,7 @@ generator:
         _delete:      NONE
     edit:
       title:          Edición de Requisiciones
-      display:        [reqart, fecreq, desreq, monreq, codcatreq, desubi]
+      display:        [reqart, fecreq, desreq, monreq, codcatreq, desubi, codcen]
       fields:
         fecreq: { params: date_format='dd/MM/yy' }
         reqart: { help: Máximo 8 caracteres}

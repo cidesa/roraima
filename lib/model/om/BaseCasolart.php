@@ -93,12 +93,14 @@ abstract class BaseCasolart extends BaseObject  implements Persistent {
 
 
 	
-	protected $id;
+	protected $codcen;
 
 	
 	protected $aTsdesmon;
 
+	protected $id;
 	
+
 	protected $alreadyInSave = false;
 
 	
@@ -300,6 +302,13 @@ abstract class BaseCasolart extends BaseObject  implements Persistent {
 
   }
   
+  public function getCodcen()
+  {
+
+    return trim($this->codcen);
+
+  }
+
   public function getId()
   {
 
@@ -557,6 +566,16 @@ abstract class BaseCasolart extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setCodcen($v)
+	{
+
+    if ($this->codcen !== $v) {
+        $this->codcen = $v;
+        $this->modifiedColumns[] = CasolartPeer::CODCEN;
+      }
+
+	}
+
 	public function setId($v)
 	{
 
@@ -613,7 +632,9 @@ abstract class BaseCasolart extends BaseObject  implements Persistent {
 
       $this->codemp = $rs->getString($startcol + 20);
 
-      $this->id = $rs->getInt($startcol + 21);
+      $this->codcen = $rs->getString($startcol + 21);
+
+      $this->id = $rs->getInt($startcol + 22);
 
       $this->resetModified();
 
@@ -621,7 +642,7 @@ abstract class BaseCasolart extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 22; 
+            return $startcol + 23;
     } catch (Exception $e) {
       throw new PropelException("Error populating Casolart object", $e);
     }
@@ -849,6 +870,9 @@ abstract class BaseCasolart extends BaseObject  implements Persistent {
 				return $this->getCodemp();
 				break;
 			case 21:
+				return $this->getCodcen();
+				break;
+			case 22:
 				return $this->getId();
 				break;
 			default:
@@ -882,7 +906,8 @@ abstract class BaseCasolart extends BaseObject  implements Persistent {
 			$keys[18] => $this->getUsuapr(),
 			$keys[19] => $this->getFecapr(),
 			$keys[20] => $this->getCodemp(),
-			$keys[21] => $this->getId(),
+			$keys[21] => $this->getCodcen(),
+			$keys[22] => $this->getId(),
 		);
 		return $result;
 	}
@@ -962,6 +987,9 @@ abstract class BaseCasolart extends BaseObject  implements Persistent {
 				$this->setCodemp($value);
 				break;
 			case 21:
+				$this->setCodcen($value);
+				break;
+			case 22:
 				$this->setId($value);
 				break;
 		} 	}
@@ -992,7 +1020,8 @@ abstract class BaseCasolart extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[18], $arr)) $this->setUsuapr($arr[$keys[18]]);
 		if (array_key_exists($keys[19], $arr)) $this->setFecapr($arr[$keys[19]]);
 		if (array_key_exists($keys[20], $arr)) $this->setCodemp($arr[$keys[20]]);
-		if (array_key_exists($keys[21], $arr)) $this->setId($arr[$keys[21]]);
+		if (array_key_exists($keys[21], $arr)) $this->setCodcen($arr[$keys[21]]);
+		if (array_key_exists($keys[22], $arr)) $this->setId($arr[$keys[22]]);
 	}
 
 	
@@ -1021,6 +1050,7 @@ abstract class BaseCasolart extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CasolartPeer::USUAPR)) $criteria->add(CasolartPeer::USUAPR, $this->usuapr);
 		if ($this->isColumnModified(CasolartPeer::FECAPR)) $criteria->add(CasolartPeer::FECAPR, $this->fecapr);
 		if ($this->isColumnModified(CasolartPeer::CODEMP)) $criteria->add(CasolartPeer::CODEMP, $this->codemp);
+		if ($this->isColumnModified(CasolartPeer::CODCEN)) $criteria->add(CasolartPeer::CODCEN, $this->codcen);
 		if ($this->isColumnModified(CasolartPeer::ID)) $criteria->add(CasolartPeer::ID, $this->id);
 
 		return $criteria;
@@ -1093,6 +1123,8 @@ abstract class BaseCasolart extends BaseObject  implements Persistent {
 		$copyObj->setFecapr($this->fecapr);
 
 		$copyObj->setCodemp($this->codemp);
+
+		$copyObj->setCodcen($this->codcen);
 
 
 		$copyObj->setNew(true);

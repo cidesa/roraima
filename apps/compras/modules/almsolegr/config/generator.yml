@@ -21,9 +21,10 @@ generator:
       valmon: { name: Valor}
       stareq: { name: estatus}
       fecanu: { name: Fecha de Anulación}
+      codcen: { name: Centro de Costo}
     list:
       title:          Requisiciones por Departamento.(Solicitud de Egresos)
-      filters:        [reqart, desreq, fecreq]
+      filters:        [reqart, desreq, fecreq, codcen]
       display:        [=reqart, desreq]
       fields:
         fecreq: { params: date_format='dd/MM/yy' }
@@ -33,7 +34,7 @@ generator:
       sort:  reqart
     edit:
       title:         Edicion de Requisiciones por Departamento.(Solicitud de Egresos)
-      display:        [reqart, fecreq, tipmon, desreq, monreq, unires, nomcat, tipreq, tipfin, Nomext, motreq, benreq, obsreq, mondes, valmon, stareq, fecanu]
+      display:        [reqart, fecreq, tipmon, desreq, monreq, unires, nomcat, tipreq, tipfin, Nomext, motreq, benreq, obsreq, mondes, valmon, stareq, fecanu, codcen]
       fields:
         fecreq: { params: date_format='dd/MM/yy' }
       actions:

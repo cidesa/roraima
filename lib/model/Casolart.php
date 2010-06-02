@@ -175,5 +175,9 @@ class Casolart extends BaseCasolart
   	return $this->nometifor;
   }
 
+  public function getDescen()
+  {
+	return Herramientas::getX('CODCEN','Cadefcen','Descen',self::getCodcen());
+  }
 
 }

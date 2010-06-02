@@ -1,0 +1,34 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Cadefcen
+    theme:            cidesaGenerator
+    fields:
+      codcen: { name: Código, params: size=10 maxlength=4 }
+      descen: { name: Descripción, params: maxlength=250  }
+      dircen: { name: Dirección, params: maxlength=500  }
+      codpai:
+        name: Estado
+        params: maxlength=4
+        catalogo:
+          catalogoweb: Nppais_Nomdefespest
+          clase: Nppais
+          ajax: 0
+          parametros: getprincipal="getCodpai" getsecundario="getNompai" campoprincipal="codpai" camposecundario="nompai" campobase = "id"
+    list:
+      title:          Centros de Costo
+      filters:        [codcen, descen, codpai ]
+      display:        [=codcen, descen, dircen ]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:  8
+      sort: codcen
+    edit:
+      title:          Edición de Centro de Costo
+      display:        [=codcen, descen, dircen, codpai]
+      actions:
+        _list:        ~
+        _save:        ~
+        _create:      ~
+        _delete:      ~

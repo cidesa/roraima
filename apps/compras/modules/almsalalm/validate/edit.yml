@@ -5,6 +5,7 @@ methods:
    - "casalalm{rifpro}"
    - "casalalm{dessal}"
    - "casalalm{tipmov}"
+   - "casalalm{codcen}"
 
 names:
   casalalm{codsal}:
@@ -32,6 +33,10 @@ names:
     required:  Yes
     validators: TipoValidator
     required_msg: El Tipo de Movimiento no puede estar en blanco
+
+  casalalm{codcen}:
+    required:  No
+    validators: CentroValidator
 
 FechaValidator1:
     class:         CidesaDateNow
@@ -76,3 +81,10 @@ TipoValidator:
         class:    Catipsal
         column:   codtipsal
         unique_error:   El Código del Tipo de Movimiento no existe.
+
+CentroValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Cadefcen
+        column:   codcen
+        unique_error:   El Centro de Costo no existe.

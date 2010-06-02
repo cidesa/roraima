@@ -1539,6 +1539,7 @@ class Orden_compra
               $caordcom_new->setNumsigecof($caordcom->getNumsigecof());
               $caordcom_new->setFecsigecof($caordcom->getFecsigecof());
               $caordcom_new->setExpsigecof($caordcom->getExpsigecof());
+              $caordcom_new->setCodcen($caordcom->getCodcen());
               $caordcom_new->setForent($codforent);
               $caordcom_new->setConpag($codconpag);
               $caordcom_new->getMonord();
@@ -1573,6 +1574,7 @@ class Orden_compra
 		  $caordcom_mod->setNumsigecof($caordcom->getNumsigecof());
 		  $caordcom_mod->setFecsigecof($caordcom->getFecsigecof());
 		  $caordcom_mod->setExpsigecof($caordcom->getExpsigecof());
+                  $caordcom_mod->setCodcen($caordcom->getCodcen());
           $caordcom_mod->setDesord($caordcom->getDesord());
           $caordcom_mod->setNotord($caordcom->getNotord());
 

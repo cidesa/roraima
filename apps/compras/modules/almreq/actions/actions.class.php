@@ -20,7 +20,8 @@ class almreqActions extends autoalmreqActions
   
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -152,6 +153,10 @@ class almreqActions extends autoalmreqActions
     {
       $this->careqart->setDesubi($careqart['desubi']);
     }
+    if (isset($careqart['codcen']))
+    {
+      $this->careqart->setCodcen($careqart['codcen']);
+    }
 
   }
 
@@ -180,6 +185,20 @@ class almreqActions extends autoalmreqActions
       $dato=NpcatprePeer::getCategoria($this->getRequestParameter('codigo'));
       $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
     }
+    else  if ($this->getRequestParameter('ajax')=='4')
+      {
+        $q= new Criteria();
+        $q->add(CadefcenPeer::CODCEN,$this->getRequestParameter('codigo'));
+        $reg= CadefcenPeer::doSelectOne($q);
+        if ($reg)
+        {
+           $dato=$reg->getDescen(); $javascript="";
+        }else {
+            $dato="";
+            $javascript="alert('El Centro de Costo no existe'); $('$cajtexcom').value=''; $('$cajtexcom').focus();";
+        }
+        $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""]]';
+      }
 
     $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
     return sfView::HEADER_ONLY;
@@ -480,6 +499,7 @@ class almreqActions extends autoalmreqActions
       'careqart{monreq}' => 'Monto:',
       'careqart{codcatreq}' => $this->nometiuni,
       'careqart{desubi}' => 'Descripción Unidad:',
+      'careqart{codcen}' => 'Centro de Costo:',
     );
   	}else{
   	return array(
@@ -489,6 +509,7 @@ class almreqActions extends autoalmreqActions
       'careqart{monreq}' => 'Monto:',
       'careqart{codcatreq}' => 'Unidad:',
       'careqart{desubi}' => 'Descripción Unidad:',
+      'careqart{codcen}' => 'Centro de Costo:',
     );
   	}
   }

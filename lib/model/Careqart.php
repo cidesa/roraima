@@ -26,5 +26,9 @@ class Careqart extends BaseCareqart
 		return  Herramientas::getX('codubi','bnubibie','desubi',self::getCodcatreq());
 	}
 
+  public function getDescen()
+  {
+	return Herramientas::getX('CODCEN','Cadefcen','Descen',self::getCodcen());
+  }
 
 }

@@ -212,7 +212,9 @@ class almordrecActions extends autoalmordrecActions
 				  		$monord=$datos->getMonord();//CaordcomPeer::getDato($this->getRequestParameter('codigo'),'Monord');
 				  		$monord=number_format($monord,2,',','.');
 				  		$des="RECEP. ".$this->getRequestParameter('numero');
-			            $output = '[["carcpart_fecord","'.$fecha.'",""],["carcpart_codpro","'.$codpro.'",""],["carcpart_nompro","'.$nompro.'",""],["carcpart_desconpag","'.$conpag.'",""],["carcpart_desforent","'.$forent.'",""],["carcpart_desrcp","'.$des.'",""],["carcpart_monrcp","'.$monord.'",""],["'.$cajtexcom.'","8","c"]]';
+                                                $codcen=$datos->getCodcen();
+                                                $descen=H::getX_vacio('CODCEN', 'Cadefcen', 'Descen', $codcen);
+			            $output = '[["carcpart_fecord","'.$fecha.'",""],["carcpart_codpro","'.$codpro.'",""],["carcpart_nompro","'.$nompro.'",""],["carcpart_desconpag","'.$conpag.'",""],["carcpart_desforent","'.$forent.'",""],["carcpart_desrcp","'.$des.'",""],["carcpart_monrcp","'.$monord.'",""],["carcpart_codcen","'.$codcen.'",""],["carcpart_descen","'.$descen.'",""],["'.$cajtexcom.'","8","c"]]';
 			            $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
 			            ////
 			            $this->configGrid($this->getRequestParameter('codigo'));
@@ -822,6 +824,10 @@ $this->Bitacora('Guardo');
     {
       $this->carcpart->setCancaj($carcpart['cancaj']);
     }
+    if (isset($carcpart['codcen']))
+    {
+      $this->carcpart->setCodcen($carcpart['codcen']);
+    }
 
   }
 
@@ -897,7 +903,8 @@ $this->Bitacora('Guardo');
   
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */

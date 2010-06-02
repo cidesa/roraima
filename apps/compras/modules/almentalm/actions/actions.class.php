@@ -192,6 +192,10 @@ $this->Bitacora('Guardo');
         $this->caentalm->setFecrcp(null);
       }
     }
+    if (isset($caentalm['codcen']))
+    {
+      $this->caentalm->setCodcen($caentalm['codcen']);
+    }
 
     $this->caentalm->setStarcp('A');
 
@@ -325,6 +329,21 @@ $this->Bitacora('Guardo');
 	      }
 
 	    }
+   else  if ($this->getRequestParameter('ajax')=='7')
+      {
+        $q= new Criteria();
+        $q->add(CadefcenPeer::CODCEN,$this->getRequestParameter('codigo'));
+        $reg= CadefcenPeer::doSelectOne($q);
+        if ($reg)
+        {
+           $dato=$reg->getDescen(); $javascript="";
+        }else {
+            $dato="";
+            $javascript="alert('El Centro de Costo no existe'); $('$cajtexcom').value=''; $('$cajtexcom').focus();";
+        }
+
+        $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""]]';
+      }
 
   	    $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
 	    return sfView::HEADER_ONLY;
@@ -567,7 +586,8 @@ $this->Bitacora('Guardo');
 
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */

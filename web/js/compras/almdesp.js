@@ -5,6 +5,7 @@
       $('trigger_cadphart_fecdph').hide();
      $$('.botoncat')[0].disabled=true;
   	 $$('.botoncat')[1].disabled=true;
+         $$('.botoncat')[2].disabled=true;
    }
   }
 

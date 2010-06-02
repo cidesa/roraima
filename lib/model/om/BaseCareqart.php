@@ -49,6 +49,10 @@ abstract class BaseCareqart extends BaseObject  implements Persistent {
 
 
 	
+	protected $codcen;
+
+
+	
 	protected $id;
 
 	
@@ -141,6 +145,13 @@ abstract class BaseCareqart extends BaseObject  implements Persistent {
   {
 
     return trim($this->justif);
+
+  }
+  
+  public function getCodcen()
+  {
+
+    return trim($this->codcen);
 
   }
   
@@ -263,6 +274,16 @@ abstract class BaseCareqart extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setCodcen($v)
+	{
+
+    if ($this->codcen !== $v) {
+        $this->codcen = $v;
+        $this->modifiedColumns[] = CareqartPeer::CODCEN;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -297,7 +318,9 @@ abstract class BaseCareqart extends BaseObject  implements Persistent {
 
       $this->justif = $rs->getString($startcol + 9);
 
-      $this->id = $rs->getInt($startcol + 10);
+      $this->codcen = $rs->getString($startcol + 10);
+
+      $this->id = $rs->getInt($startcol + 11);
 
       $this->resetModified();
 
@@ -305,7 +328,7 @@ abstract class BaseCareqart extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 11; 
+            return $startcol + 12; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Careqart object", $e);
     }
@@ -483,6 +506,9 @@ abstract class BaseCareqart extends BaseObject  implements Persistent {
 				return $this->getJustif();
 				break;
 			case 10:
+				return $this->getCodcen();
+				break;
+			case 11:
 				return $this->getId();
 				break;
 			default:
@@ -505,7 +531,8 @@ abstract class BaseCareqart extends BaseObject  implements Persistent {
 			$keys[7] => $this->getAprreq(),
 			$keys[8] => $this->getNummemo(),
 			$keys[9] => $this->getJustif(),
-			$keys[10] => $this->getId(),
+			$keys[10] => $this->getCodcen(),
+			$keys[11] => $this->getId(),
 		);
 		return $result;
 	}
@@ -552,6 +579,9 @@ abstract class BaseCareqart extends BaseObject  implements Persistent {
 				$this->setJustif($value);
 				break;
 			case 10:
+				$this->setCodcen($value);
+				break;
+			case 11:
 				$this->setId($value);
 				break;
 		} 	}
@@ -571,7 +601,8 @@ abstract class BaseCareqart extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[7], $arr)) $this->setAprreq($arr[$keys[7]]);
 		if (array_key_exists($keys[8], $arr)) $this->setNummemo($arr[$keys[8]]);
 		if (array_key_exists($keys[9], $arr)) $this->setJustif($arr[$keys[9]]);
-		if (array_key_exists($keys[10], $arr)) $this->setId($arr[$keys[10]]);
+		if (array_key_exists($keys[10], $arr)) $this->setCodcen($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setId($arr[$keys[11]]);
 	}
 
 	
@@ -589,6 +620,7 @@ abstract class BaseCareqart extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CareqartPeer::APRREQ)) $criteria->add(CareqartPeer::APRREQ, $this->aprreq);
 		if ($this->isColumnModified(CareqartPeer::NUMMEMO)) $criteria->add(CareqartPeer::NUMMEMO, $this->nummemo);
 		if ($this->isColumnModified(CareqartPeer::JUSTIF)) $criteria->add(CareqartPeer::JUSTIF, $this->justif);
+		if ($this->isColumnModified(CareqartPeer::CODCEN)) $criteria->add(CareqartPeer::CODCEN, $this->codcen);
 		if ($this->isColumnModified(CareqartPeer::ID)) $criteria->add(CareqartPeer::ID, $this->id);
 
 		return $criteria;
@@ -639,6 +671,8 @@ abstract class BaseCareqart extends BaseObject  implements Persistent {
 		$copyObj->setNummemo($this->nummemo);
 
 		$copyObj->setJustif($this->justif);
+
+		$copyObj->setCodcen($this->codcen);
 
 
 		$copyObj->setNew(true);

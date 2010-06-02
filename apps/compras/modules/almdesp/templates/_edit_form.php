@@ -132,6 +132,35 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 <br>
+  <?php echo label_for('cadphart[codcen]', __($labels['cadphart{codcen}']), 'class="required" style="width: 150px"') ?>
+  <div class="content<?php if ($sf_request->hasError('cadphart{codcen}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('cadphart{codcen}')): ?>
+    <?php echo form_error('cadphart{codcen}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+<?php $value = object_input_tag($cadphart, 'getCodcen', array (
+  'size' => 20,
+  'control_name' => 'cadphart[codcen]',
+  'maxlength' => 4,
+  'readonly'  =>  $cadphart->getId()!='' ? true : false,
+  'onBlur'=> remote_function(array(
+       'url'      => 'almdesp/ajax',
+       'script'   => true,
+       'condition' => "$('cadphart_codcen').value != '' && $('id').value == ''",
+       'complete' => 'AjaxJSON(request, json)',
+       'with' => "'ajax=7&cajtexmos=cadphart_descen&cajtexcom=cadphart_codcen&codigo='+this.value"
+        ))
+)); echo $value ? $value : '&nbsp;' ?>
+
+&nbsp;
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Cadefcen_Almsolegr/clase/Cadefcen/frame/sf_admin_edit_form/obj1/cadphart_codcen/obj2/cadphart_descen/campo1/codcen/campo2/descen','','','botoncat')?>
+&nbsp;&nbsp;
+ <?php $value = object_input_tag($cadphart, 'getDescen', array (
+  'size' => 60,
+  'disabled' => true,
+  'control_name' => 'cadphart[descen]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+<br>
   <?php echo label_for('cadphart[mondph]', __($labels['cadphart{mondph}']), 'class="required" style="width: 150px"') ?>
   <div class="content<?php if ($sf_request->hasError('cadphart{mondph}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('cadphart{mondph}')): ?>

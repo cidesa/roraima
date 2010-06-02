@@ -21,9 +21,10 @@ compras:
       Definición de Banco:                                    AlmBanco
       Definición de Grupos de Recaudos:                       AlmTipRecPro
       Definición de Recaudos:                                 AlmRegRec
+      Definición de Centros de Costo:                         almdefcen
       Registro de Contratistas de Bienes o Servicio y Cooperativas:                  AlmRegPro
       Definición de Condiciones de Pago:                      AlmConPag
-      Definición de Formas de Entrega:                        AlmForEnt
+      Definición de Tiempo de Entrega:                        AlmForEnt
       Definición de Razones de Compra:                        AlmRazCom
       Definición de Rangos de Cotizaciones:                   AlmDefCot
       Definición de Motivos de Faltantes:                     AlmMotFal

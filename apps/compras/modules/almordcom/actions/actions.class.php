@@ -720,6 +720,23 @@ class almordcomActions extends autoalmordcomActions
         $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
         return sfView::HEADER_ONLY;
       }
+      else  if ($this->getRequestParameter('ajax')=='17')
+      {
+        $q= new Criteria();
+        $q->add(CadefcenPeer::CODCEN,$this->getRequestParameter('codigo'));
+        $reg= CadefcenPeer::doSelectOne($q);
+        if ($reg)
+        {
+           $dato=$reg->getDescen(); $javascript="";
+        }else {
+            $dato="";
+            $javascript="alert('El Centro de Costo no existe'); $('$cajtexcom').value=''; $('$cajtexcom').focus();";
+        }
+
+        $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""]]';
+        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+        return sfView::HEADER_ONLY;
+      }
   }
 
 
@@ -2175,6 +2192,10 @@ class almordcomActions extends autoalmordcomActions
     {
       $this->caordcom->setEti($caordcom['eti']);
     }
+    if (isset($caordcom['codcen']))
+    {
+      $this->caordcom->setCodcen($caordcom['codcen']);
+    }
 
   }
 
@@ -2308,8 +2329,10 @@ class almordcomActions extends autoalmordcomActions
           $dato   = Herramientas::getX('reqart','Casolart','monreq',trim($this->getRequestParameter('ordcom')));
           $desreq = Herramientas::getX('reqart','Casolart','desreq',trim($this->getRequestParameter('ordcom')));
           $desfin = Herramientas::getX('codfin','Fortipfin','nomext',$filas[0]->getTipfin());
+          $codcen = Herramientas::getX('reqart','Casolart','codcen',trim($this->getRequestParameter('ordcom')));
+          $descen = Herramientas::getX('codcen','Cadefcen','descen',$codcen);
 
-          $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$filas_orden.'","'.$numero_filas.'",""],["'.$cajita.'","'.$validacion_fec_egresos.'",""],["caordcom_desord","'.$desreq.'",""],["caordcom_tipfin","'.$filas[0]->getTipfin().'",""],["caordcom_nomfin","'.$desfin.'",""]'.$provee.']';
+          $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$filas_orden.'","'.$numero_filas.'",""],["'.$cajita.'","'.$validacion_fec_egresos.'",""],["caordcom_desord","'.$desreq.'",""],["caordcom_tipfin","'.$filas[0]->getTipfin().'",""],["caordcom_nomfin","'.$desfin.'",""],["caordcom_codcen","'.$codcen.'",""],["caordcom_descen","'.$descen.'",""]'.$provee.']';
           $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
           if ($codigopro!=""){
           $tipopro=H::getX('CODPRO','Caprovee','Tipo',$codigopro);

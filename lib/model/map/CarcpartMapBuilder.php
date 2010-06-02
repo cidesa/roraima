@@ -72,6 +72,8 @@ class CarcpartMapBuilder {
 
 		$tMap->addColumn('CANJAU', 'Canjau', 'double', CreoleTypes::NUMERIC, false, 10);
 
+		$tMap->addColumn('CODCEN', 'Codcen', 'string', CreoleTypes::VARCHAR, false, 4);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

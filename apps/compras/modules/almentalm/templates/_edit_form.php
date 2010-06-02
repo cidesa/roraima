@@ -139,6 +139,38 @@
 	    </div>
     </th>
 </tr>
+<tr>
+    <th>
+<?php echo label_for('caentalm[codcen]', __($labels['caentalm{codcen}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('caentalm{codcen}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('caentalm{codcen}')): ?>
+    <?php echo form_error('caentalm{codcen}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+<?php $value = object_input_tag($caentalm, 'getCodcen', array (
+  'size' => 20,
+  'control_name' => 'caentalm[codcen]',
+  'maxlength' => 4,
+  'readonly'  =>  $caentalm->getId()!='' ? true : false,
+  'onBlur'=> remote_function(array(
+       'url'      => 'almdesp/ajax',
+       'script'   => true,
+       'condition' => "$('caentalm_codcen').value != '' && $('id').value == ''",
+       'complete' => 'AjaxJSON(request, json)',
+       'with' => "'ajax=7&cajtexmos=caentalm_descen&cajtexcom=caentalm_codcen&codigo='+this.value"
+        ))
+)); echo $value ? $value : '&nbsp;' ?>
+
+&nbsp;
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Cadefcen_Almsolegr/clase/Cadefcen/frame/sf_admin_edit_form/obj1/caentalm_codcen/obj2/caentalm_descen/campo1/codcen/campo2/descen','','','botoncat')?>
+&nbsp;&nbsp;
+ <?php $value = object_input_tag($caentalm, 'getDescen', array (
+  'size' => 60,
+  'disabled' => true,
+  'control_name' => 'caentalm[descen]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+    </th>
+</tr>
 </table>
 </div>
 </fieldset>
