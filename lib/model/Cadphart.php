@@ -68,5 +68,11 @@ class Cadphart extends BaseCadphart
 		return Herramientas::getX('CODUBI','Cadefubi','Nomubi',self::getCodubi());
 	}
 
+  public function getDescen()
+  {
+	return Herramientas::getX('CODCEN','Cadefcen','Descen',self::getCodcen());
+  }
+
+
 }
 

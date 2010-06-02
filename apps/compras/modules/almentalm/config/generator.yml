@@ -13,10 +13,11 @@ generator:
       fecrcp:  {  name: Fecha, params: date_format='dd/MM/yyyy' }
       monrcp:  {  name: Monto Total}
       codubi:      { name: Código de la Ubicación}
+      codcen: { name : Centro de Costo}
     list:
       title:   Entradas en el Almacen
       display:        [=rcpart, desrcp, monrcp, fecrcp]
-      filters: [rcpart, rifpro, fecrcp]
+      filters: [rcpart, rifpro, fecrcp, codcen]
       object_actions:
         _edit:        ~
         _delete:      NONE
@@ -24,7 +25,7 @@ generator:
       sort:    rcpart
     edit:
       title:   Entradas en el Almacen
-      display:        [=rcpart, codalm, codpro, desrcp, monrcp, tipmov, fecrcp, codubi]
+      display:        [=rcpart, codalm, codpro, desrcp, monrcp, tipmov, fecrcp, codubi, codcen]
       actions:
         _list:        ~
         _save:        ~

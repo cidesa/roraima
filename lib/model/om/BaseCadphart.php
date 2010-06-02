@@ -81,6 +81,10 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
 
 
 	
+	protected $codcen;
+
+
+	
 	protected $id;
 
 	
@@ -244,6 +248,13 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
   {
 
     return trim($this->tipref);
+
+  }
+  
+  public function getCodcen()
+  {
+
+    return trim($this->codcen);
 
   }
   
@@ -458,6 +469,16 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setCodcen($v)
+	{
+
+    if ($this->codcen !== $v) {
+        $this->codcen = $v;
+        $this->modifiedColumns[] = CadphartPeer::CODCEN;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -508,7 +529,9 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
 
       $this->tipref = $rs->getString($startcol + 17);
 
-      $this->id = $rs->getInt($startcol + 18);
+      $this->codcen = $rs->getString($startcol + 18);
+
+      $this->id = $rs->getInt($startcol + 19);
 
       $this->resetModified();
 
@@ -516,7 +539,7 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 19; 
+            return $startcol + 20; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Cadphart object", $e);
     }
@@ -718,6 +741,9 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
 				return $this->getTipref();
 				break;
 			case 18:
+				return $this->getCodcen();
+				break;
+			case 19:
 				return $this->getId();
 				break;
 			default:
@@ -748,7 +774,8 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
 			$keys[15] => $this->getFecanu(),
 			$keys[16] => $this->getCodubi(),
 			$keys[17] => $this->getTipref(),
-			$keys[18] => $this->getId(),
+			$keys[18] => $this->getCodcen(),
+			$keys[19] => $this->getId(),
 		);
 		return $result;
 	}
@@ -819,6 +846,9 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
 				$this->setTipref($value);
 				break;
 			case 18:
+				$this->setCodcen($value);
+				break;
+			case 19:
 				$this->setId($value);
 				break;
 		} 	}
@@ -846,7 +876,8 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[15], $arr)) $this->setFecanu($arr[$keys[15]]);
 		if (array_key_exists($keys[16], $arr)) $this->setCodubi($arr[$keys[16]]);
 		if (array_key_exists($keys[17], $arr)) $this->setTipref($arr[$keys[17]]);
-		if (array_key_exists($keys[18], $arr)) $this->setId($arr[$keys[18]]);
+		if (array_key_exists($keys[18], $arr)) $this->setCodcen($arr[$keys[18]]);
+		if (array_key_exists($keys[19], $arr)) $this->setId($arr[$keys[19]]);
 	}
 
 	
@@ -872,6 +903,7 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CadphartPeer::FECANU)) $criteria->add(CadphartPeer::FECANU, $this->fecanu);
 		if ($this->isColumnModified(CadphartPeer::CODUBI)) $criteria->add(CadphartPeer::CODUBI, $this->codubi);
 		if ($this->isColumnModified(CadphartPeer::TIPREF)) $criteria->add(CadphartPeer::TIPREF, $this->tipref);
+		if ($this->isColumnModified(CadphartPeer::CODCEN)) $criteria->add(CadphartPeer::CODCEN, $this->codcen);
 		if ($this->isColumnModified(CadphartPeer::ID)) $criteria->add(CadphartPeer::ID, $this->id);
 
 		return $criteria;
@@ -938,6 +970,8 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
 		$copyObj->setCodubi($this->codubi);
 
 		$copyObj->setTipref($this->tipref);
+
+		$copyObj->setCodcen($this->codcen);
 
 
 		$copyObj->setNew(true);

@@ -742,6 +742,9 @@ propel:
     tipref:
       type: VARCHAR
       size: 1
+    codcen:
+      type: VARCHAR
+      size: 4
     id:
       type: INTEGER
       required: true
@@ -1020,6 +1023,9 @@ propel:
       type: NUMERIC
       size: 10
       scale: 2
+    codcen:
+      type: VARCHAR
+      size: 4
     id:
       type: INTEGER
       required: true
@@ -1157,6 +1163,9 @@ propel:
     justif:
       type: VARCHAR
       size: 250
+    codcen:
+      type: VARCHAR
+      size: 4
     id:
       type: INTEGER
       required: true
@@ -1348,6 +1357,9 @@ propel:
     codemp:
       type: VARCHAR
       size: 16
+    codcen:
+      type: VARCHAR
+      size: 4
     id:
       type: INTEGER
       required: true
@@ -1719,6 +1731,9 @@ propel:
     expsigecof:
       type: VARCHAR
       size: 8
+    codcen:
+      type: VARCHAR
+      size: 4
     id:
       type: INTEGER
       required: true
@@ -2277,6 +2292,9 @@ propel:
       required: true
       foreignTable: catipent
       foreignReference: codtipent
+    codcen:
+      type: VARCHAR
+      size: 4
     id:
       type: INTEGER
       required: true
@@ -2319,6 +2337,9 @@ propel:
     observ:
       type: VARCHAR
       size: 1000
+    codcen:
+      type: VARCHAR
+      size: 4
     id:
       type: INTEGER
       required: true
@@ -2852,3 +2873,24 @@ propel:
       required: true
       primaryKey: true
       autoIncrement: true
+  cadefcen:
+    codcen:
+      type: VARCHAR
+      size: 4
+      required: true
+    descen:
+      type: VARCHAR
+      size: 250
+      required: true
+    dircen:
+      type: VARCHAR
+      size: 500
+    codpai:
+      type: VARCHAR
+      size: 4
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Ãnico del registro

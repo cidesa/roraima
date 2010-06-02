@@ -141,6 +141,27 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 <br>
+
+  <?php echo label_for('carcpart[codcen]', __($labels['carcpart{codcen}']), 'class="required" Style="width:200px"') ?>
+  <div class="content<?php if ($sf_request->hasError('carcpart{codcen}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('carcpart{codcen}')): ?>
+    <?php echo form_error('carcpart{codcen}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($carcpart, 'getCodcen', array (
+  'size' => 20,
+  'control_name' => 'carcpart[codcen]',
+  'maxlength' => 4,
+  'readonly' => true,
+)); echo $value ? $value : '&nbsp;' ?>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <?php $value = object_input_tag($carcpart, 'getDescen', array (
+  'disabled' => true,
+  'size' => 57,
+  'control_name' => 'carcpart[descen]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+<br>
 <table>
 <tr>
 <th>

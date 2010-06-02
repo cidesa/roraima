@@ -206,6 +206,42 @@
    </tr>
   </table>
 
+<br>
+
+<table>
+    <tr>
+   <th> <?php echo label_for('casolart[codcen]', __($labels['casolart{codcen}']), 'class="required" style="width:100px') ?>
+  <div class="content<?php if ($sf_request->hasError('casolart{codcen}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('casolart{codcen}')): ?>
+    <?php echo form_error('casolart{codcen}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($casolart, 'getCodcen', array (
+  'size' => 10,
+  'maxlength' => 4,
+  'control_name' => 'casolart[codcen]',
+  'onBlur'=> remote_function(array(
+        'url'      => 'almsolegr/ajax',
+        'complete' => 'AjaxJSON(request, json)',
+        'with' => "'ajax=10&cajtexmos=casolart_descen&cajtexcom=casolart_codcen&codigo='+this.value"
+        ))
+)); echo $value ? $value : '&nbsp;' ?>
+  </div></th>
+<th>
+&nbsp;</th>
+<th>
+<?php echo  button_to_popup_('...','/metodo/Cadefcen_Almsolegr/clase/Cadefcen/frame/sf_admin_edit_form/obj1/casolart_codcen/obj2/casolart_descen/campo1/codcen/campo2/descen')?>
+    </th>
+   <th>&nbsp;&nbsp;&nbsp;</th>
+   <th>  <?php $value = object_input_tag($casolart, 'getDescen', array (
+  'size' => 50,
+  'disabled' => true,
+  'control_name' => 'casolart[descen]',
+)); echo $value ? $value : '&nbsp;' ?></th>
+    </tr>
+
+</table>
+
 </div>
 </fieldset>
 

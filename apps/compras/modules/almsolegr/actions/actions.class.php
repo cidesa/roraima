@@ -511,6 +511,10 @@ class almsolegrActions extends autoalmsolegrActions
       {
         $this->casolart->setValmon($casolart['valmon']);
       }
+      if (isset($casolart['codcen']))
+      {
+        $this->casolart->setCodcen($casolart['codcen']);
+      }
 
         $this->casolart->setStareq('A');
 
@@ -699,6 +703,21 @@ class almsolegrActions extends autoalmsolegrActions
         }
 
         $output = '[["'.$cajtexmos.'","'.$desrgo.'",""],["'.$cajtexcom.'","4","c"],["'.$this->getRequestParameter('monto').'","'.$monrgo.'",""],["'.$this->getRequestParameter('tipo').'","'.$tiprgo.'",""],["'.$this->getRequestParameter('moncal').'","'.$reccalformat.'",""],["javascript","'.$javascript.'",""]]';
+      }
+      else  if ($this->getRequestParameter('ajax')=='10')
+      {
+        $q= new Criteria();
+        $q->add(CadefcenPeer::CODCEN,$this->getRequestParameter('codigo'));
+        $reg= CadefcenPeer::doSelectOne($q);
+        if ($reg)
+        {
+           $dato=$reg->getDescen(); $javascript="";
+        }else {
+            $dato="";
+            $javascript="alert('El Centro de Costo no existe'); $('$cajtexcom').value=''; $('$cajtexcom').focus();";
+        }
+
+        $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""]]';
       }
         $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
         return sfView::HEADER_ONLY;
@@ -1518,6 +1537,7 @@ class almsolegrActions extends autoalmsolegrActions
         'casolart{mondes}' => 'Descripción',
         'casolart{valmon}' => 'Valor',
         'casolart{stareq}' => 'estatus',
+        'casolart{codcen}' => 'Centro de Costo',
       );
     }
 
@@ -1568,7 +1588,6 @@ class almsolegrActions extends autoalmsolegrActions
 	       }
 	     }
    $loguse= $this->getUser()->getAttribute('loguse');
-
 
      // 15    // pager
     $this->pager = new sfPropelPager('Casolart', 15);

@@ -21,7 +21,8 @@ class almdespActions extends autoalmdespActions
   
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -336,6 +337,10 @@ class almdespActions extends autoalmdespActions
     if (isset($cadphart['nomubi']))
     {
       $this->cadphart->setNomubi($cadphart['nomubi']);
+    }
+    if (isset($cadphart['codcen']))
+    {
+      $this->cadphart->setCodcen($cadphart['codcen']);
     }
   }
 
@@ -726,6 +731,24 @@ class almdespActions extends autoalmdespActions
   		$this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
   		return sfView::HEADER_ONLY;
    }
+   else  if ($this->getRequestParameter('ajax')=='7')
+      {
+        $q= new Criteria();
+        $q->add(CadefcenPeer::CODCEN,$this->getRequestParameter('codigo'));
+        $reg= CadefcenPeer::doSelectOne($q);
+        if ($reg)
+        {
+           $dato=$reg->getDescen(); $javascript=""; 
+        }else {
+            $dato="";
+            $javascript="alert('El Centro de Costo no existe'); $('$cajtexcom').value=''; $('$cajtexcom').focus();";
+        }
+
+        $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""]]';
+        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+        return sfView::HEADER_ONLY;
+      }
+
 
 	}
 
@@ -763,7 +786,9 @@ class almdespActions extends autoalmdespActions
 		      		$desreq=$datos->getDesreq();
 			  	    $uniori=$datos->getCodcatreq();
 			  	    $desuniori=BnubibiePeer::getDesubicacion($uniori);
-		            $output = '[["'.$cajtexmos.'","'.$desreq.'",""],["cadphart_codori","'.$uniori.'",""],["cadphart_nomcat","'.$desuniori.'",""],["'.$cajtexcom.'","8","c"]]';
+                                    $codcen=$datos->getCodcen();
+                                    $descen=H::getX_vacio('CODCEN', 'Cadefcen', 'Descen', $codcen);
+		            $output = '[["'.$cajtexmos.'","'.$desreq.'",""],["cadphart_codori","'.$uniori.'",""],["cadphart_nomcat","'.$desuniori.'",""],["cadphart_codcen","'.$codcen.'",""],["cadphart_descen","'.$descen.'",""],["'.$cajtexcom.'","8","c"]]';
 		         	$this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
 		            ////
 		            $this->configGrid($codigo);

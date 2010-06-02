@@ -13,7 +13,7 @@ abstract class BaseCadphartPeer {
 	const CLASS_DEFAULT = 'lib.model.Cadphart';
 
 	
-	const NUM_COLUMNS = 19;
+	const NUM_COLUMNS = 20;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -74,6 +74,9 @@ abstract class BaseCadphartPeer {
 	const TIPREF = 'cadphart.TIPREF';
 
 	
+	const CODCEN = 'cadphart.CODCEN';
+
+	
 	const ID = 'cadphart.ID';
 
 	
@@ -82,18 +85,18 @@ abstract class BaseCadphartPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Dphart', 'Fecdph', 'Reqart', 'Desdph', 'Codori', 'Stadph', 'Numcom', 'Refpag', 'Codalm', 'Tipdph', 'Codcli', 'Mondph', 'Obsdph', 'Fordesp', 'Reapor', 'Fecanu', 'Codubi', 'Tipref', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (CadphartPeer::DPHART, CadphartPeer::FECDPH, CadphartPeer::REQART, CadphartPeer::DESDPH, CadphartPeer::CODORI, CadphartPeer::STADPH, CadphartPeer::NUMCOM, CadphartPeer::REFPAG, CadphartPeer::CODALM, CadphartPeer::TIPDPH, CadphartPeer::CODCLI, CadphartPeer::MONDPH, CadphartPeer::OBSDPH, CadphartPeer::FORDESP, CadphartPeer::REAPOR, CadphartPeer::FECANU, CadphartPeer::CODUBI, CadphartPeer::TIPREF, CadphartPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('dphart', 'fecdph', 'reqart', 'desdph', 'codori', 'stadph', 'numcom', 'refpag', 'codalm', 'tipdph', 'codcli', 'mondph', 'obsdph', 'fordesp', 'reapor', 'fecanu', 'codubi', 'tipref', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, )
+		BasePeer::TYPE_PHPNAME => array ('Dphart', 'Fecdph', 'Reqart', 'Desdph', 'Codori', 'Stadph', 'Numcom', 'Refpag', 'Codalm', 'Tipdph', 'Codcli', 'Mondph', 'Obsdph', 'Fordesp', 'Reapor', 'Fecanu', 'Codubi', 'Tipref', 'Codcen', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (CadphartPeer::DPHART, CadphartPeer::FECDPH, CadphartPeer::REQART, CadphartPeer::DESDPH, CadphartPeer::CODORI, CadphartPeer::STADPH, CadphartPeer::NUMCOM, CadphartPeer::REFPAG, CadphartPeer::CODALM, CadphartPeer::TIPDPH, CadphartPeer::CODCLI, CadphartPeer::MONDPH, CadphartPeer::OBSDPH, CadphartPeer::FORDESP, CadphartPeer::REAPOR, CadphartPeer::FECANU, CadphartPeer::CODUBI, CadphartPeer::TIPREF, CadphartPeer::CODCEN, CadphartPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('dphart', 'fecdph', 'reqart', 'desdph', 'codori', 'stadph', 'numcom', 'refpag', 'codalm', 'tipdph', 'codcli', 'mondph', 'obsdph', 'fordesp', 'reapor', 'fecanu', 'codubi', 'tipref', 'codcen', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Dphart' => 0, 'Fecdph' => 1, 'Reqart' => 2, 'Desdph' => 3, 'Codori' => 4, 'Stadph' => 5, 'Numcom' => 6, 'Refpag' => 7, 'Codalm' => 8, 'Tipdph' => 9, 'Codcli' => 10, 'Mondph' => 11, 'Obsdph' => 12, 'Fordesp' => 13, 'Reapor' => 14, 'Fecanu' => 15, 'Codubi' => 16, 'Tipref' => 17, 'Id' => 18, ),
-		BasePeer::TYPE_COLNAME => array (CadphartPeer::DPHART => 0, CadphartPeer::FECDPH => 1, CadphartPeer::REQART => 2, CadphartPeer::DESDPH => 3, CadphartPeer::CODORI => 4, CadphartPeer::STADPH => 5, CadphartPeer::NUMCOM => 6, CadphartPeer::REFPAG => 7, CadphartPeer::CODALM => 8, CadphartPeer::TIPDPH => 9, CadphartPeer::CODCLI => 10, CadphartPeer::MONDPH => 11, CadphartPeer::OBSDPH => 12, CadphartPeer::FORDESP => 13, CadphartPeer::REAPOR => 14, CadphartPeer::FECANU => 15, CadphartPeer::CODUBI => 16, CadphartPeer::TIPREF => 17, CadphartPeer::ID => 18, ),
-		BasePeer::TYPE_FIELDNAME => array ('dphart' => 0, 'fecdph' => 1, 'reqart' => 2, 'desdph' => 3, 'codori' => 4, 'stadph' => 5, 'numcom' => 6, 'refpag' => 7, 'codalm' => 8, 'tipdph' => 9, 'codcli' => 10, 'mondph' => 11, 'obsdph' => 12, 'fordesp' => 13, 'reapor' => 14, 'fecanu' => 15, 'codubi' => 16, 'tipref' => 17, 'id' => 18, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, )
+		BasePeer::TYPE_PHPNAME => array ('Dphart' => 0, 'Fecdph' => 1, 'Reqart' => 2, 'Desdph' => 3, 'Codori' => 4, 'Stadph' => 5, 'Numcom' => 6, 'Refpag' => 7, 'Codalm' => 8, 'Tipdph' => 9, 'Codcli' => 10, 'Mondph' => 11, 'Obsdph' => 12, 'Fordesp' => 13, 'Reapor' => 14, 'Fecanu' => 15, 'Codubi' => 16, 'Tipref' => 17, 'Codcen' => 18, 'Id' => 19, ),
+		BasePeer::TYPE_COLNAME => array (CadphartPeer::DPHART => 0, CadphartPeer::FECDPH => 1, CadphartPeer::REQART => 2, CadphartPeer::DESDPH => 3, CadphartPeer::CODORI => 4, CadphartPeer::STADPH => 5, CadphartPeer::NUMCOM => 6, CadphartPeer::REFPAG => 7, CadphartPeer::CODALM => 8, CadphartPeer::TIPDPH => 9, CadphartPeer::CODCLI => 10, CadphartPeer::MONDPH => 11, CadphartPeer::OBSDPH => 12, CadphartPeer::FORDESP => 13, CadphartPeer::REAPOR => 14, CadphartPeer::FECANU => 15, CadphartPeer::CODUBI => 16, CadphartPeer::TIPREF => 17, CadphartPeer::CODCEN => 18, CadphartPeer::ID => 19, ),
+		BasePeer::TYPE_FIELDNAME => array ('dphart' => 0, 'fecdph' => 1, 'reqart' => 2, 'desdph' => 3, 'codori' => 4, 'stadph' => 5, 'numcom' => 6, 'refpag' => 7, 'codalm' => 8, 'tipdph' => 9, 'codcli' => 10, 'mondph' => 11, 'obsdph' => 12, 'fordesp' => 13, 'reapor' => 14, 'fecanu' => 15, 'codubi' => 16, 'tipref' => 17, 'codcen' => 18, 'id' => 19, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, )
 	);
 
 	
@@ -182,6 +185,8 @@ abstract class BaseCadphartPeer {
 		$criteria->addSelectColumn(CadphartPeer::CODUBI);
 
 		$criteria->addSelectColumn(CadphartPeer::TIPREF);
+
+		$criteria->addSelectColumn(CadphartPeer::CODCEN);
 
 		$criteria->addSelectColumn(CadphartPeer::ID);
 

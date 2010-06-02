@@ -149,6 +149,35 @@
    </tr>
   </table>
 <br>
+<?php echo label_for('casalalm[codcen]', __($labels['casalalm{codcen}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('casalalm{codcen}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('casalalm{codcen}')): ?>
+    <?php echo form_error('casalalm{codcen}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+<?php $value = object_input_tag($casalalm, 'getCodcen', array (
+  'size' => 20,
+  'control_name' => 'casalalm[codcen]',
+  'maxlength' => 4,
+  'readonly'  =>  $casalalm->getId()!='' ? true : false,
+  'onBlur'=> remote_function(array(
+       'url'      => 'almdesp/ajax',
+       'script'   => true,
+       'condition' => "$('casalalm_codcen').value != '' && $('id').value == ''",
+       'complete' => 'AjaxJSON(request, json)',
+       'with' => "'ajax=8&cajtexmos=casalalm_descen&cajtexcom=casalalm_codcen&codigo='+this.value"
+        ))
+)); echo $value ? $value : '&nbsp;' ?>
+
+&nbsp;
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Cadefcen_Almsolegr/clase/Cadefcen/frame/sf_admin_edit_form/obj1/casalalm_codcen/obj2/casalalm_descen/campo1/codcen/campo2/descen','','','botoncat')?>
+&nbsp;&nbsp;
+ <?php $value = object_input_tag($casalalm, 'getDescen', array (
+  'size' => 60,
+  'disabled' => true,
+  'control_name' => 'casalalm[descen]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+<br>
   <?php echo label_for('casalalm[observ]', __($labels['casalalm{observ}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('casalalm{observ}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('casalalm{observ}')): ?>

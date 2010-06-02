@@ -85,6 +85,10 @@ abstract class BaseCarcpart extends BaseObject  implements Persistent {
 
 
 	
+	protected $codcen;
+
+
+	
 	protected $id;
 
 	
@@ -257,6 +261,13 @@ abstract class BaseCarcpart extends BaseObject  implements Persistent {
 
     if($val) return number_format($this->canjau,2,',','.');
     else return $this->canjau;
+
+  }
+  
+  public function getCodcen()
+  {
+
+    return trim($this->codcen);
 
   }
   
@@ -481,6 +492,16 @@ abstract class BaseCarcpart extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setCodcen($v)
+	{
+
+    if ($this->codcen !== $v) {
+        $this->codcen = $v;
+        $this->modifiedColumns[] = CarcpartPeer::CODCEN;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -533,7 +554,9 @@ abstract class BaseCarcpart extends BaseObject  implements Persistent {
 
       $this->canjau = $rs->getFloat($startcol + 18);
 
-      $this->id = $rs->getInt($startcol + 19);
+      $this->codcen = $rs->getString($startcol + 19);
+
+      $this->id = $rs->getInt($startcol + 20);
 
       $this->resetModified();
 
@@ -541,7 +564,7 @@ abstract class BaseCarcpart extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 20; 
+            return $startcol + 21; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Carcpart object", $e);
     }
@@ -746,6 +769,9 @@ abstract class BaseCarcpart extends BaseObject  implements Persistent {
 				return $this->getCanjau();
 				break;
 			case 19:
+				return $this->getCodcen();
+				break;
+			case 20:
 				return $this->getId();
 				break;
 			default:
@@ -777,7 +803,8 @@ abstract class BaseCarcpart extends BaseObject  implements Persistent {
 			$keys[16] => $this->getNomcli(),
 			$keys[17] => $this->getCancaj(),
 			$keys[18] => $this->getCanjau(),
-			$keys[19] => $this->getId(),
+			$keys[19] => $this->getCodcen(),
+			$keys[20] => $this->getId(),
 		);
 		return $result;
 	}
@@ -851,6 +878,9 @@ abstract class BaseCarcpart extends BaseObject  implements Persistent {
 				$this->setCanjau($value);
 				break;
 			case 19:
+				$this->setCodcen($value);
+				break;
+			case 20:
 				$this->setId($value);
 				break;
 		} 	}
@@ -879,7 +909,8 @@ abstract class BaseCarcpart extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[16], $arr)) $this->setNomcli($arr[$keys[16]]);
 		if (array_key_exists($keys[17], $arr)) $this->setCancaj($arr[$keys[17]]);
 		if (array_key_exists($keys[18], $arr)) $this->setCanjau($arr[$keys[18]]);
-		if (array_key_exists($keys[19], $arr)) $this->setId($arr[$keys[19]]);
+		if (array_key_exists($keys[19], $arr)) $this->setCodcen($arr[$keys[19]]);
+		if (array_key_exists($keys[20], $arr)) $this->setId($arr[$keys[20]]);
 	}
 
 	
@@ -906,6 +937,7 @@ abstract class BaseCarcpart extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CarcpartPeer::NOMCLI)) $criteria->add(CarcpartPeer::NOMCLI, $this->nomcli);
 		if ($this->isColumnModified(CarcpartPeer::CANCAJ)) $criteria->add(CarcpartPeer::CANCAJ, $this->cancaj);
 		if ($this->isColumnModified(CarcpartPeer::CANJAU)) $criteria->add(CarcpartPeer::CANJAU, $this->canjau);
+		if ($this->isColumnModified(CarcpartPeer::CODCEN)) $criteria->add(CarcpartPeer::CODCEN, $this->codcen);
 		if ($this->isColumnModified(CarcpartPeer::ID)) $criteria->add(CarcpartPeer::ID, $this->id);
 
 		return $criteria;
@@ -974,6 +1006,8 @@ abstract class BaseCarcpart extends BaseObject  implements Persistent {
 		$copyObj->setCancaj($this->cancaj);
 
 		$copyObj->setCanjau($this->canjau);
+
+		$copyObj->setCodcen($this->codcen);
 
 
 		$copyObj->setNew(true);

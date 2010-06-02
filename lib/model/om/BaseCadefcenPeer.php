@@ -1,59 +1,38 @@
 <?php
 
 
-abstract class BaseCareqartPeer {
+abstract class BaseCadefcenPeer {
 
 	
 	const DATABASE_NAME = 'propel';
 
 	
-	const TABLE_NAME = 'careqart';
+	const TABLE_NAME = 'cadefcen';
 
 	
-	const CLASS_DEFAULT = 'lib.model.Careqart';
+	const CLASS_DEFAULT = 'lib.model.Cadefcen';
 
 	
-	const NUM_COLUMNS = 12;
+	const NUM_COLUMNS = 5;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
 
 
 	
-	const REQART = 'careqart.REQART';
+	const CODCEN = 'cadefcen.CODCEN';
 
 	
-	const FECREQ = 'careqart.FECREQ';
+	const DESCEN = 'cadefcen.DESCEN';
 
 	
-	const DESREQ = 'careqart.DESREQ';
+	const DIRCEN = 'cadefcen.DIRCEN';
 
 	
-	const MONREQ = 'careqart.MONREQ';
+	const CODPAI = 'cadefcen.CODPAI';
 
 	
-	const STAREQ = 'careqart.STAREQ';
-
-	
-	const UNISOL = 'careqart.UNISOL';
-
-	
-	const CODCATREQ = 'careqart.CODCATREQ';
-
-	
-	const APRREQ = 'careqart.APRREQ';
-
-	
-	const NUMMEMO = 'careqart.NUMMEMO';
-
-	
-	const JUSTIF = 'careqart.JUSTIF';
-
-	
-	const CODCEN = 'careqart.CODCEN';
-
-	
-	const ID = 'careqart.ID';
+	const ID = 'cadefcen.ID';
 
 	
 	private static $phpNameMap = null;
@@ -61,31 +40,31 @@ abstract class BaseCareqartPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Reqart', 'Fecreq', 'Desreq', 'Monreq', 'Stareq', 'Unisol', 'Codcatreq', 'Aprreq', 'Nummemo', 'Justif', 'Codcen', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (CareqartPeer::REQART, CareqartPeer::FECREQ, CareqartPeer::DESREQ, CareqartPeer::MONREQ, CareqartPeer::STAREQ, CareqartPeer::UNISOL, CareqartPeer::CODCATREQ, CareqartPeer::APRREQ, CareqartPeer::NUMMEMO, CareqartPeer::JUSTIF, CareqartPeer::CODCEN, CareqartPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('reqart', 'fecreq', 'desreq', 'monreq', 'stareq', 'unisol', 'codcatreq', 'aprreq', 'nummemo', 'justif', 'codcen', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
+		BasePeer::TYPE_PHPNAME => array ('Codcen', 'Descen', 'Dircen', 'Codpai', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (CadefcenPeer::CODCEN, CadefcenPeer::DESCEN, CadefcenPeer::DIRCEN, CadefcenPeer::CODPAI, CadefcenPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codcen', 'descen', 'dircen', 'codpai', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Reqart' => 0, 'Fecreq' => 1, 'Desreq' => 2, 'Monreq' => 3, 'Stareq' => 4, 'Unisol' => 5, 'Codcatreq' => 6, 'Aprreq' => 7, 'Nummemo' => 8, 'Justif' => 9, 'Codcen' => 10, 'Id' => 11, ),
-		BasePeer::TYPE_COLNAME => array (CareqartPeer::REQART => 0, CareqartPeer::FECREQ => 1, CareqartPeer::DESREQ => 2, CareqartPeer::MONREQ => 3, CareqartPeer::STAREQ => 4, CareqartPeer::UNISOL => 5, CareqartPeer::CODCATREQ => 6, CareqartPeer::APRREQ => 7, CareqartPeer::NUMMEMO => 8, CareqartPeer::JUSTIF => 9, CareqartPeer::CODCEN => 10, CareqartPeer::ID => 11, ),
-		BasePeer::TYPE_FIELDNAME => array ('reqart' => 0, 'fecreq' => 1, 'desreq' => 2, 'monreq' => 3, 'stareq' => 4, 'unisol' => 5, 'codcatreq' => 6, 'aprreq' => 7, 'nummemo' => 8, 'justif' => 9, 'codcen' => 10, 'id' => 11, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
+		BasePeer::TYPE_PHPNAME => array ('Codcen' => 0, 'Descen' => 1, 'Dircen' => 2, 'Codpai' => 3, 'Id' => 4, ),
+		BasePeer::TYPE_COLNAME => array (CadefcenPeer::CODCEN => 0, CadefcenPeer::DESCEN => 1, CadefcenPeer::DIRCEN => 2, CadefcenPeer::CODPAI => 3, CadefcenPeer::ID => 4, ),
+		BasePeer::TYPE_FIELDNAME => array ('codcen' => 0, 'descen' => 1, 'dircen' => 2, 'codpai' => 3, 'id' => 4, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
 	);
 
 	
 	public static function getMapBuilder()
 	{
-		include_once 'lib/model/map/CareqartMapBuilder.php';
-		return BasePeer::getMapBuilder('lib.model.map.CareqartMapBuilder');
+		include_once 'lib/model/map/CadefcenMapBuilder.php';
+		return BasePeer::getMapBuilder('lib.model.map.CadefcenMapBuilder');
 	}
 	
 	public static function getPhpNameMap()
 	{
 		if (self::$phpNameMap === null) {
-			$map = CareqartPeer::getTableMap();
+			$map = CadefcenPeer::getTableMap();
 			$columns = $map->getColumns();
 			$nameMap = array();
 			foreach ($columns as $column) {
@@ -119,41 +98,27 @@ abstract class BaseCareqartPeer {
 	
 	public static function alias($alias, $column)
 	{
-		return str_replace(CareqartPeer::TABLE_NAME.'.', $alias.'.', $column);
+		return str_replace(CadefcenPeer::TABLE_NAME.'.', $alias.'.', $column);
 	}
 
 	
 	public static function addSelectColumns(Criteria $criteria)
 	{
 
-		$criteria->addSelectColumn(CareqartPeer::REQART);
+		$criteria->addSelectColumn(CadefcenPeer::CODCEN);
 
-		$criteria->addSelectColumn(CareqartPeer::FECREQ);
+		$criteria->addSelectColumn(CadefcenPeer::DESCEN);
 
-		$criteria->addSelectColumn(CareqartPeer::DESREQ);
+		$criteria->addSelectColumn(CadefcenPeer::DIRCEN);
 
-		$criteria->addSelectColumn(CareqartPeer::MONREQ);
+		$criteria->addSelectColumn(CadefcenPeer::CODPAI);
 
-		$criteria->addSelectColumn(CareqartPeer::STAREQ);
-
-		$criteria->addSelectColumn(CareqartPeer::UNISOL);
-
-		$criteria->addSelectColumn(CareqartPeer::CODCATREQ);
-
-		$criteria->addSelectColumn(CareqartPeer::APRREQ);
-
-		$criteria->addSelectColumn(CareqartPeer::NUMMEMO);
-
-		$criteria->addSelectColumn(CareqartPeer::JUSTIF);
-
-		$criteria->addSelectColumn(CareqartPeer::CODCEN);
-
-		$criteria->addSelectColumn(CareqartPeer::ID);
+		$criteria->addSelectColumn(CadefcenPeer::ID);
 
 	}
 
-	const COUNT = 'COUNT(careqart.ID)';
-	const COUNT_DISTINCT = 'COUNT(DISTINCT careqart.ID)';
+	const COUNT = 'COUNT(cadefcen.ID)';
+	const COUNT_DISTINCT = 'COUNT(DISTINCT cadefcen.ID)';
 
 	
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
@@ -162,9 +127,9 @@ abstract class BaseCareqartPeer {
 
 				$criteria->clearSelectColumns()->clearOrderByColumns();
 		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(CareqartPeer::COUNT_DISTINCT);
+			$criteria->addSelectColumn(CadefcenPeer::COUNT_DISTINCT);
 		} else {
-			$criteria->addSelectColumn(CareqartPeer::COUNT);
+			$criteria->addSelectColumn(CadefcenPeer::COUNT);
 		}
 
 				foreach($criteria->getGroupByColumns() as $column)
@@ -172,7 +137,7 @@ abstract class BaseCareqartPeer {
 			$criteria->addSelectColumn($column);
 		}
 
-		$rs = CareqartPeer::doSelectRS($criteria, $con);
+		$rs = CadefcenPeer::doSelectRS($criteria, $con);
 		if ($rs->next()) {
 			return $rs->getInt(1);
 		} else {
@@ -184,7 +149,7 @@ abstract class BaseCareqartPeer {
 	{
 		$critcopy = clone $criteria;
 		$critcopy->setLimit(1);
-		$objects = CareqartPeer::doSelect($critcopy, $con);
+		$objects = CadefcenPeer::doSelect($critcopy, $con);
 		if ($objects) {
 			return $objects[0];
 		}
@@ -193,7 +158,7 @@ abstract class BaseCareqartPeer {
 	
 	public static function doSelect(Criteria $criteria, $con = null)
 	{
-		return CareqartPeer::populateObjects(CareqartPeer::doSelectRS($criteria, $con));
+		return CadefcenPeer::populateObjects(CadefcenPeer::doSelectRS($criteria, $con));
 	}
 	
 	public static function doSelectRS(Criteria $criteria, $con = null)
@@ -204,7 +169,7 @@ abstract class BaseCareqartPeer {
 
 		if (!$criteria->getSelectColumns()) {
 			$criteria = clone $criteria;
-			CareqartPeer::addSelectColumns($criteria);
+			CadefcenPeer::addSelectColumns($criteria);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -216,7 +181,7 @@ abstract class BaseCareqartPeer {
 	{
 		$results = array();
 	
-				$cls = CareqartPeer::getOMClass();
+				$cls = CadefcenPeer::getOMClass();
 		$cls = Propel::import($cls);
 				while($rs->next()) {
 		
@@ -236,7 +201,7 @@ abstract class BaseCareqartPeer {
 	
 	public static function getOMClass()
 	{
-		return CareqartPeer::CLASS_DEFAULT;
+		return CadefcenPeer::CLASS_DEFAULT;
 	}
 
 	
@@ -250,7 +215,7 @@ abstract class BaseCareqartPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
-		$criteria->remove(CareqartPeer::ID); 
+		$criteria->remove(CadefcenPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 
@@ -277,8 +242,8 @@ abstract class BaseCareqartPeer {
 
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; 
-			$comparison = $criteria->getComparison(CareqartPeer::ID);
-			$selectCriteria->add(CareqartPeer::ID, $criteria->remove(CareqartPeer::ID), $comparison);
+			$comparison = $criteria->getComparison(CadefcenPeer::ID);
+			$selectCriteria->add(CadefcenPeer::ID, $criteria->remove(CadefcenPeer::ID), $comparison);
 
 		} else { 			$criteria = $values->buildCriteria(); 			$selectCriteria = $values->buildPkeyCriteria(); 		}
 
@@ -295,7 +260,7 @@ abstract class BaseCareqartPeer {
 		}
 		$affectedRows = 0; 		try {
 									$con->begin();
-			$affectedRows += BasePeer::doDeleteAll(CareqartPeer::TABLE_NAME, $con);
+			$affectedRows += BasePeer::doDeleteAll(CadefcenPeer::TABLE_NAME, $con);
 			$con->commit();
 			return $affectedRows;
 		} catch (PropelException $e) {
@@ -308,16 +273,16 @@ abstract class BaseCareqartPeer {
 	 public static function doDelete($values, $con = null)
 	 {
 		if ($con === null) {
-			$con = Propel::getConnection(CareqartPeer::DATABASE_NAME);
+			$con = Propel::getConnection(CadefcenPeer::DATABASE_NAME);
 		}
 
 		if ($values instanceof Criteria) {
-			$criteria = clone $values; 		} elseif ($values instanceof Careqart) {
+			$criteria = clone $values; 		} elseif ($values instanceof Cadefcen) {
 
 			$criteria = $values->buildPkeyCriteria();
 		} else {
 						$criteria = new Criteria(self::DATABASE_NAME);
-			$criteria->add(CareqartPeer::ID, (array) $values, Criteria::IN);
+			$criteria->add(CadefcenPeer::ID, (array) $values, Criteria::IN);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -336,13 +301,13 @@ abstract class BaseCareqartPeer {
 	}
 
 	
-	public static function doValidate(Careqart $obj, $cols = null)
+	public static function doValidate(Cadefcen $obj, $cols = null)
 	{
 		$columns = array();
 
 		if ($cols) {
-			$dbMap = Propel::getDatabaseMap(CareqartPeer::DATABASE_NAME);
-			$tableMap = $dbMap->getTable(CareqartPeer::TABLE_NAME);
+			$dbMap = Propel::getDatabaseMap(CadefcenPeer::DATABASE_NAME);
+			$tableMap = $dbMap->getTable(CadefcenPeer::TABLE_NAME);
 
 			if (! is_array($cols)) {
 				$cols = array($cols);
@@ -358,11 +323,11 @@ abstract class BaseCareqartPeer {
 
 		}
 
-		$res =  BasePeer::doValidate(CareqartPeer::DATABASE_NAME, CareqartPeer::TABLE_NAME, $columns);
+		$res =  BasePeer::doValidate(CadefcenPeer::DATABASE_NAME, CadefcenPeer::TABLE_NAME, $columns);
     if ($res !== true) {
         $request = sfContext::getInstance()->getRequest();
         foreach ($res as $failed) {
-            $col = CareqartPeer::translateFieldname($failed->getColumn(), BasePeer::TYPE_COLNAME, BasePeer::TYPE_PHPNAME);
+            $col = CadefcenPeer::translateFieldname($failed->getColumn(), BasePeer::TYPE_COLNAME, BasePeer::TYPE_PHPNAME);
             $request->setError($col, $failed->getMessage());
         }
     }
@@ -377,12 +342,12 @@ abstract class BaseCareqartPeer {
 			$con = Propel::getConnection(self::DATABASE_NAME);
 		}
 
-		$criteria = new Criteria(CareqartPeer::DATABASE_NAME);
+		$criteria = new Criteria(CadefcenPeer::DATABASE_NAME);
 
-		$criteria->add(CareqartPeer::ID, $pk);
+		$criteria->add(CadefcenPeer::ID, $pk);
 
 
-		$v = CareqartPeer::doSelect($criteria, $con);
+		$v = CadefcenPeer::doSelect($criteria, $con);
 
 		return !empty($v) > 0 ? $v[0] : null;
 	}
@@ -399,8 +364,8 @@ abstract class BaseCareqartPeer {
 			$objs = array();
 		} else {
 			$criteria = new Criteria();
-			$criteria->add(CareqartPeer::ID, $pks, Criteria::IN);
-			$objs = CareqartPeer::doSelect($criteria, $con);
+			$criteria->add(CadefcenPeer::ID, $pks, Criteria::IN);
+			$objs = CadefcenPeer::doSelect($criteria, $con);
 		}
 		return $objs;
 	}
@@ -408,11 +373,11 @@ abstract class BaseCareqartPeer {
 } 
 if (Propel::isInit()) {
 			try {
-		BaseCareqartPeer::getMapBuilder();
+		BaseCadefcenPeer::getMapBuilder();
 	} catch (Exception $e) {
 		Propel::log('Could not initialize Peer: ' . $e->getMessage(), Propel::LOG_ERR);
 	}
 } else {
-			require_once 'lib/model/map/CareqartMapBuilder.php';
-	Propel::registerMapBuilder('lib.model.map.CareqartMapBuilder');
+			require_once 'lib/model/map/CadefcenMapBuilder.php';
+	Propel::registerMapBuilder('lib.model.map.CadefcenMapBuilder');
 }

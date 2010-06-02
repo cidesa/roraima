@@ -264,4 +264,9 @@ class Caordcom extends BaseCaordcom
   	return $this->oculsave;
   }
 
+  public function getDescen()
+  {
+	return Herramientas::getX('CODCEN','Cadefcen','Descen',self::getCodcen());
+  }
+
 }

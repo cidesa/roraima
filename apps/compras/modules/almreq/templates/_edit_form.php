@@ -102,6 +102,34 @@
 )); echo $value ? $value : '&nbsp;' ?></div>
 <br>
 
+<?php echo label_for('careqart[codcen]', __($labels['careqart{codcen}']), 'class="required" ') ?>
+<div
+  class="content<?php if ($sf_request->hasError('careqart{codcen}')): ?> form-error<?php endif; ?>">
+<?php if ($sf_request->hasError('careqart{codcen}')): ?> <?php echo form_error('careqart{codcen}', array('class' => 'form-error-msg')) ?>
+<?php endif; ?>
+
+ <?php $value = object_input_tag($careqart, 'getCodcen', array (
+  'size' => 10,
+  'control_name' => 'careqart[codcen]',
+  'maxlength' => 4,
+  'readonly'  =>  $careqart->getId()!='' ? true : false ,
+  'onBlur'=> remote_function(array(
+       'url'      => 'almreq/ajax',
+       'script'   => true,
+       'complete' => 'AjaxJSON(request, json)',
+       'condition' => "$('careqart_codcen').value != ''",
+       'with' => "'ajax=4&cajtexmos=careqart_descen&cajtexcom=careqart_codcen&codigo='+this.value"
+        ))
+)); echo $value ? $value : '&nbsp;' ?>
+  &nbsp;
+   <?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Cadefcen_Almsolegr/clase/Cadefcen/frame/sf_admin_edit_form/obj1/careqart_codcen/obj2/careqart_descen/campo1/codcen/campo2/descen','','','botoncat')?>
+<?php $value = object_input_tag($careqart, 'getDescen', array (
+'disabled' => true,
+'size' => 65,
+'control_name' => 'careqart[descen]',
+)); echo $value ? $value : '&nbsp;' ?></div>
+<br>
+
 <?php echo label_for('careqart[monreq]', __($labels['careqart{monreq}']), 'class="required" ') ?>
 <div
   class="content<?php if ($sf_request->hasError('careqart{monreq}')): ?> form-error<?php endif; ?>">
@@ -157,6 +185,7 @@ if ($careqart->getId()!="" &&  $autorizareq=='S' && $careqart->getAprreq()!='S')
     if (id!="")
     {
      $$('.botoncat')[0].disabled=true;
+     $$('.botoncat')[1].disabled=true;
    }else{
    	     var manesolcorr='<?php echo $mansolocor; ?>';
      if (manesolcorr=='S')

@@ -70,6 +70,8 @@ class CadphartMapBuilder {
 
 		$tMap->addColumn('TIPREF', 'Tipref', 'string', CreoleTypes::VARCHAR, false, 1);
 
+		$tMap->addColumn('CODCEN', 'Codcen', 'string', CreoleTypes::VARCHAR, false, 4);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

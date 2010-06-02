@@ -26,9 +26,10 @@ generator:
       fecanu: { name: fechaanu}
       codubi: { name: Código de la Ubicación}
       nomubi: { name: Nombre Ubicación}
+      codcen: { name : Centro de Costo}
     list:
       title:          Despachos
-      filters:        [dphart]
+      filters:        [dphart, codcen]
       display:        [=dphart, desdph, fecdph]
       fields:
         fecdph: { params: date_format='dd/MM/yy' }
@@ -39,7 +40,7 @@ generator:
       sort:    dphart
     edit:
       title:          Edicion de Despachos
-      display:       [=dphart, fecdph, reqart, desreq, fecreq, desdph, codori, nomcat, mondph, stadph, numcom, refpag, tipdph, codcli, obsdph, fordesp, reapor, fecanu, codubi, nomubi]
+      display:       [=dphart, fecdph, reqart, desreq, fecreq, desdph, codori, nomcat, mondph, stadph, numcom, refpag, tipdph, codcli, obsdph, fordesp, reapor, fecanu, codubi, nomubi, codcen]
       fields:
         fecdph: { params: date_format='dd/MM/yy' }
       actions:
