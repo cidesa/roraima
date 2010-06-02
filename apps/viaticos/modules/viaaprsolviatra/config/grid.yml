@@ -1,0 +1,66 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                true
+  tabla:                   viasolviatra
+  anchogrid:               900
+  ancho:                   870
+  filas:                   0
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 2
+  titulo:                  Aprobar
+  tipo:                    k
+  nombrecampo:             check
+  esgrabable:              true  
+  html:                    [ size=4 ]
+2:       # Columna 3
+  titulo:                  Nro. Solicitud
+  tipo:                    t
+  nombrecampo:             numsol
+  esgrabable:              true
+  html:                    [ readonly=true size=8]
+3:       # Columna 4
+  titulo:                  Fecha Solicitud
+  tipo:                    t
+  nombrecampo:             fecsol
+  esgrabable:              true
+  html:                    [ readonly=true size=10]
+4:       # Columna 5
+  titulo:                  Empleado Solicitante
+  tipo:                    t
+  nombrecampo:             empleado
+  esgrabable:              true
+  html:                    [ readonly=true size=35]
+5:       # Columna 6
+  titulo:                  Codigo Nivel Actual
+  tipo:                    t
+  nombrecampo:             codnivapract
+  esgrabable:              true
+  oculta:                  true
+  html:                    [ readonly=true size=15]
+6:       # Columna 7
+  titulo:                  Nivel Aprobacion Actual
+  tipo:                    t
+  nombrecampo:             nivact
+  esgrabable:              true
+  html:                    [ readonly=true size=20]
+7:       # Columna 8
+  titulo:                  Codigo Nivel Siguiente
+  tipo:                    t
+  nombrecampo:             codnivaprsig
+  esgrabable:              true
+  oculta:                  true
+  html:                    [ readonly=true size=15]
+8:       # Columna 9
+  titulo:                  Nivel Aprobacion Siguiente
+  tipo:                    t
+  nombrecampo:             nivsig
+  esgrabable:              true
+  html:                    [ readonly=true size=20]
+9:       # Columna 10
+  titulo:                  Procedencia
+  tipo:                    t
+  nombrecampo:             codproced
+  esgrabable:              true
+  oculta:                  true
+  html:                    [ readonly=true size=15]

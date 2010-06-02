@@ -1,0 +1,70 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Viacalviatra
+    theme:            cidesaGenerator
+    fields:
+      numcal:         { name: Nro. Calculo, params: maxlength=10 size=10  onBlur="rellenarcorr(this.id)"}
+      feccal:         { name: Fecha de Calculo}
+      tipcom:
+        name: Compromiso
+        msj_error: El Código es necesario
+        catalogo:
+          catalogoweb: Cpdoccom_Predoccom
+          clase: Cpdoccom
+          ajax: 0
+          parametros: getprincipal="getTipcom" getsecundario="getNomext" campoprincipal="tipcom" camposecundario="nomext" campobase = "id"
+      refsol:
+        name: Solicitud
+        msj_error: El Código es necesario
+        catalogo:
+          catalogoweb: viasolviatra_numsol
+          clase: Viasolviatra
+          ajax: 1
+          parametros: getprincipal="getRefsol" getsecundario="getFecha" campoprincipal="refsol" camposecundario="fecha" campobase = "id"
+          divupdate: div1
+      codcat:
+        name: Categoria
+        msj_error: El Código es necesario
+        catalogo:
+          catalogoweb: NconceptosCat_Asignar
+          clase: Npcatpre
+          ajax: 0
+          parametros: getprincipal="getCodcat" getsecundario="getNomcat" campoprincipal="codcat" camposecundario="nomcat" campobase = "id"
+      diaconper:        { name: Dias Con Pernocta}
+      diasinper:        { name: Dias sin Pernocta}
+      observaciones:    { name: Observaciones, type: textarea_tag, params: cols=65}
+      grid:             { name: .}
+      js:               { name: .}
+      fecsol:           { name: Fecha Solicitud, params: style="border:none" }
+      tipvia:           { name: Tipo Viático, params: style="border:none"}
+      dessol:           { name: Descripción, type: textarea_tag, params: style="border:none" cols=70}
+      empleado:         { name: Empleado, params: style="border:none" size=80}
+      nivel:            { name: Nivel, params: style="border:none" size=80}
+      empleadoaco:      { name: Empleado Acompañante, params: style="border:none" size=80}
+      nivelaco:         { name: Nivel, params: style="border:none" size=80}
+      proced:           { name: Procedencia, params: style="border:none" size=80}
+      fortra:           { name: Forma Traslado, params: style="border:none" size=80}
+      fecdes:           { name: Fecha Desde, params: style="border:none" }
+      fechas:           { name: Fecha Hasta, params: style="border:none" }
+      numdia:           { name: Nro Dias, params: style="border:none" }
+      empleadoaut:      { name: Empleado que Autoriza, params: style="border:none" size=80}
+      totvia:           { name: Total Viaticos, params: style="border:none"  readonly=true}
+      totviaenletras:   { name:  En Letras , type: textarea_tag, params: cols=65 style="border:none" readonly=true}
+      
+
+    list:
+      title:            Listado de Calculo de Viaticos
+      display:          [=numcal, feccal, tipcom, refsol]
+      filters:          [numcal, feccal, tipcon, refsol]
+      sort:             numcal
+
+    edit:
+      title:            Edición de Calculo de Viaticos
+      display:
+        Datos Básicos del Calculo de Viaticos:     [numcal, feccal, tipcom, refsol, fecsol, tipvia, empleado, nivel, empleadoaco, nivelaco, proced, fortra, fecdes, fechas, numdia, empleadoaut, dessol, codcat, diaconper, diasinper, observaciones]
+        Datos Detalle del Calculo:                 [_grid, totvia, totviaenletras, _js]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

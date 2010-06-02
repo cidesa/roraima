@@ -1,0 +1,25 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Viadefnivapr
+    theme:            cidesaGenerator
+    fields:
+      codnivapr:         { name: Código Nivel, params: maxlegth=2 size=5 onBlur="$(this.id).value=$(this.id).value.pad(2,'0',0)"}
+      desnivapr:         { name: Descripción, params: maxlegth=250 }
+
+    list:
+      title: Listado de Niveles de Aprobación
+      display: [=codnivapr, desnivapr]
+      filters: [codnivapr, desnivapr]
+      sort:    codnivapr
+      objects_actions:
+        _edit:        ~
+        _delete:        ~
+    edit:
+      title: Edición de Niveles de Aprobación
+      display:
+        Datos Generales del Nivel de Niveles de Aprobación: [codnivapr, desnivapr]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

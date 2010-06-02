@@ -1,0 +1,33 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Viacalrub
+    theme:            cidesaGenerator
+    fields:
+      codrub:
+        name: Rubro
+        msj_error: El Código es necesario
+        catalogo:
+          catalogoweb: Viadefrub_codrub_cal
+          clase: Viadefrub
+          ajax: 1
+          parametros: getprincipal="getCodrub" getsecundario="getDesrub" campoprincipal="codrub" camposecundario="desrub" campobase = "id"
+          divupdate: div1
+      grid:           { name: .}
+      desrub:         { name: Descripción}
+
+    list:
+      title:           Listado de Tabla de Calculo para Rubro
+      display:         [=codrub, desrub]
+      filters:         [codrub]
+      sort:            codrub
+
+    edit:
+      title:                   Edicion de Tabla para le Calculo de Rubro
+      display:
+        Datos Rubros:          [codrub]
+        Datos para el Calculo: [_grid]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

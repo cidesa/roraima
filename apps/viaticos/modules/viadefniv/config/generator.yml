@@ -1,0 +1,25 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Viadefniv
+    theme:            cidesaGenerator
+    fields:
+      codniv:         { name: Código Nivel, params: maxlegth=2 size=5 onBlur="$(this.id).value=$(this.id).value.pad(2,'0',0)"}
+      desniv:         { name: Descripción, params: maxlegth=250 }
+      
+    list:
+      title: Listado de Niveles(Rangos del Trabajador)
+      display: [=codniv, desniv]
+      filters: [codniv, desniv]
+      sort:    codniv
+      objects_actions:
+        _edit:        ~
+        _delete:        ~
+    edit:
+      title: Edición de Niveles(Rangos del Trabajador)
+      display:
+        Datos Generales del Nivel: [codniv, desniv]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

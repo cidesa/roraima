@@ -1,0 +1,23 @@
+methods:
+  post:
+   - "viacalrub{codrub}"
+
+names:
+  viacalrub{codrub}:
+    required:  Yes
+    required_msg: Este campo no puede estar en Blanco
+    validators: Validator_codrub, Validator_codrub2
+
+Validator_codrub:
+    class: CidesaExistValidator
+    param:
+        class:    Viadefrub
+        column:   codrub
+        unique_error:   El Código del Rubro no existe
+
+Validator_codrub2:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Viacalrub
+        column:   codrub
+        unique_error:   El Código del Rubro ya esta definido

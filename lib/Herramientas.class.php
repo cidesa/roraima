@@ -2283,6 +2283,270 @@ public static function obtenerDiaMesOAno($fecha,$formato,$dmoa)
     }else
       return $err;
   }
+  /////////////////////////////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////FUNCION MONTO ESCRITO//////////////////////////////////////
+  public static function obtenermontoescrito($numero)
+  {
+  $poscoma=0;
+  $nombre='';
+  $contmil=0;
+  $nrochar=1;
+  $tira="";
+  $primero="";
+  $segundo="";
+  $tercero="";
+  $cuarto="";
+  $quinto="";
+  $sexto="";
+  $sepmil1="";
+  $sepmil2="";
+  $sepmil3="";
+  $sepmil4="";
+  $sepmil5="";
+  $sepmil6="";
+  $tira3="";
+  $melones=" MILLONES ";
+  $billones=" BILLONES ";
+  //Formatear el N�mero en Estudio
+  $monchar=number_format($numero,2,".",",")."";
+  $monchar=trim($monchar);
+  $pospunto=strpos($monchar,'.'); //Posici�n del Punto Decimal
+  $indchar=$pospunto;             //Comienzo del recorrido de lectura
+                                  //Se determina directamente
+                                  //la parte decimal del n�mero
+  $decimal=" CON ".substr($monchar,$pospunto+1)."/100";
+  while($indchar>=0)        //Comienza el ciclo m�s externo
+  {
+     $contmil=$contmil+1;
+     $indchar=$indchar - 1;
+     $contchar=1;
+     $tira3="";
+     $num1="";
+     $num2="";
+     $num3="";
+     $nro=substr($monchar,$indchar,1);
+     while(($indchar>=0)&&($contchar<=3))
+     {
+         $sql="SELECT coalesce(NOMNUM,' ')  as nomnum
+               FROM NUMEROS
+               WHERE NUM = ".$nro." AND
+               POS=".$contchar.";";
+         self::BuscarDatos($sql, $arrsql);
+         #$arrsql=$conn->select($sql);
+         if (count($arrsql)>0)
+         {
+            $nombre=$arrsql[0]["nomnum"];
+         }
+         else
+         {
+         	$nombre="";
+         }
+
+         if ($contchar==1)
+	     {
+	            $numant=$nro+0;
+	            $num1=$nombre;
+	     }//if ($contchar=1)
+         elseif ($contchar==2)
+     {
+            $num2=$nombre;
+      $nro=$nro+0;
+            if($nro==1)
+      {
+         $nro=$nro+"";
+               if ($numant==1)
+         {
+                  $num1="";
+                  $num2="ONCE";
+               }//if ($numant=1)
+         elseif ($numant==2)
+         {
+                  $num1="";
+                  $num2="DOCE";
+               }//elseif ($numant=2)
+         elseif ($numant==3)
+         {
+                  $num1="";
+                  $num2="TRECE";
+               }//elseif ($numant=3)
+         elseif ($numant==4)
+         {
+                  $num1="";
+                  $num2="CATORCE";
+               }//elseif ($numant=4)
+               elseif ($numant==5)
+         {
+                  $num1="";
+                  $num2="QUINCE";
+               }//elseif ($numant=5)
+            }//if($nro=1)
+     }//elseif ($contchar=2)
+         elseif ($contchar==3)
+     {
+            $num3=$nombre;
+         }//elseif ($contchar=3)
+         $indchar=$indchar -1;
+         $contchar=$contchar + 1;
+         $nro=substr($monchar,$indchar,$nrochar);
+     if (trim($nro)==",")
+     {
+       $nro="-1";
+     } //if ($nro=",")
+
+     }//while(($indchar>=0)&&($contchar<=3))
+    if (trim($num2)<>"")
+    {
+        if ($numant<>0)
+        {
+         $operador = " Y ";
+        }//if ($numant<>0)
+        else
+        {
+         $operador ="";
+        }//else
+    }//if ($num2<>"")
+    else
+    {
+       $operador="";
+    }//else
+
+     if (trim($num2)=="ONCE" || trim($num2)=="DOCE" || trim($num2)=="TRECE" || trim($num2)=="CATORCE" || trim($num2)=="QUINCE")
+     {
+      $operador="";
+     }//if ($num2="ONCE" || $num2="DOCE" || $num2="TRECE" || $num2="CATORCE" || $num2="QUINCE")
+
+      if (trim($num1)=="CERO")
+    {
+       if (trim($num2)<>"" || trim($num3)<>"")
+       {
+         $num1="";
+         $operador="";
+       }//if ($num2<>"" || $num3<>"")
+    }//if ($num1="CERO")
+
+    if (trim($num3)=="CIENTO")
+    {
+       if (trim($num2)=="" && trim($num1)=="")
+       {
+        $num3="CIEN";
+        $num2="";
+        $operador="";
+        $num1="";
+       }//if ($num2="" && $num1="")
+    }//if ($num3="CIENTO")
+
+    if (trim($num1)=="UNO")
+    {
+       if ($contmil>1)
+       {
+        $num1="UN";
+       }//if ($contmil>1)
+    }//if ($num1="UNO")
+
+        $tira3= $num3." ".$num2.$operador.$num1;
+      if ($contmil==1)
+    {
+          $primero=$tira3;
+    }//if ($contmil=1)
+      elseif ($contmil==2)
+    {
+          $segundo=$tira3;
+          if (trim($segundo)=="CERO")
+      {
+             $segundo="";
+             if (trim($primero)=="CERO")
+       {
+                $primero="";
+             }//if ($primero="CERO")
+          }//if ($segundo="CERO")
+      else
+      {
+             $sepmil2=" MIL ";
+             if (trim($primero)=="CERO")
+       {
+                $primero="";
+             }//if ($primero="CERO")
+          }//else
+       }//elseif ($contmil=2)
+    elseif ($contmil==3)
+    {
+          $tercero= $tira3;
+          if (trim($num1)=="UN")
+      {
+             $sepmil3=" MILLON ";
+          }//if ($num1="UN")
+      else
+      {
+             $sepmil3=" MILLONES ";
+          }//else
+          if (trim($tercero)=="CERO")
+      {
+             $tercero="";
+          }//if ($tercero="CERO")
+    }//elseif ($contmil=3)
+      elseif ($contmil==4)
+    {
+         $cuarto=$tira3;
+         if (trim($cuarto)<>"CERO")
+     {
+            if (trim($sepmil3)=="MILLON")
+      {
+               $sepmil3=" MILLONES ";
+            }//if ($sepmil3="MILLON")
+            $sepmil4=" MIL ";
+     }//if ($cuarto<>"CERO")
+         else
+     {
+            $cuarto="";
+         }//else
+      }//elseif ($contmil=4)
+    elseif ($contmil==5)
+     {
+         $quinto=$tira3;
+         if (trim($num1)=="UN")
+     {
+            $sepmil5=" BILLON ";
+         }//if ($num1="UN")
+     else
+     {
+            $sepmil5=" BILLONES ";
+         }//else
+
+         if (trim($tercero)=="" && trim($cuarto)=="")
+     {
+            $sepmil3="";
+         }//if ($tercero="" && $cuarto="")
+
+
+         if (trim($quinto)<>"CERO")
+     {
+             if (trim($cuarto)=="CERO")
+       {
+                $cuarto="";
+                $sepmil4="";
+             }//if ($cuarto="CERO")
+         }//if ($quinto<>"CERO")
+     }//elseif ($contmil=5)
+     elseif ($contmil==6)
+   {
+         $sexto=$tira3;
+         if (trim($sexto)<>"CERO")
+     {
+            $sepmil6=" MIL ";
+            if (trim($sepmil5)=="BILLON")
+      {
+               $sepmil5=" BILLONES ";
+            }//if ($sepmil5="BILLON")
+            if (trim($quinto)=="CERO")
+      {
+                $quinto="";
+            }//if ($quinto="CERO")
+         }//if ($sexto<>"CERO")
+     }//elseif ($contmil=6)
+  } // while($indchar>=0)
+  return $sexto.$sepmil6.$quinto.$sepmil5.$cuarto.$sepmil4.$tercero.$sepmil3.$segundo.$sepmil2.$primero.$sepmil1.$decimal;
+  }//function montoescrito($numero)
+  /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 }
 

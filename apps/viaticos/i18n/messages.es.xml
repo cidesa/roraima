@@ -2,7 +2,7 @@
    <xliff version="1.0">
        <file orginal="global" source-language="en" datatype="plaintext">
          <body>
-         <trans-unit id="1">
+               <trans-unit id="1">
            <source>create</source>
            <target>Nuevo</target>
          </trans-unit>
@@ -67,10 +67,34 @@
            <target>Resultados</target>
          </trans-unit>
          <trans-unit id="17">
+           <source>There are some errors that prevent the form to validate</source>
+           <target>Hay algunos Errores en el Formulario</target>
+         </trans-unit>
+         <trans-unit id="18">
+           <source>Could not delete the selected Catiprec</source>
+           <target>No puede eliminar el registro seleccionado</target>
+         </trans-unit>
+         <trans-unit id="19">
+           <source>Could not delete the selected Catiprec. Make sure it does not have any associated items.</source>
+           <target>Tiene Registros Asociados</target>
+         </trans-unit>
+         <trans-unit id="20">
+           <source>[show file]</source>
+           <target>Mostrar archivo</target>
+         </trans-unit>
+         <trans-unit id="21">
+           <source>remove file</source>
+           <target>Eliminar archivo</target>
+         </trans-unit>
+         <trans-unit id="22">
+           <source>Browser...</source>
+           <target>Buscar</target>
+         </trans-unit>
+         <trans-unit id="23">
            <source>[show file]</source>
            <target>Ver Imagen</target>
          </trans-unit>
-         <trans-unit id="18">
+         <trans-unit id="24">
            <source>remove file</source>
            <target>Eliminar Imagen</target>
          </trans-unit>

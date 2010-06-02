@@ -1,0 +1,162 @@
+methods:
+  post:
+   - "viasolviatra{numsol}"
+   - "viasolviatra{fecsol}"
+   - "viasolviatra{dessol}"
+   - "viasolviatra{codemp}"
+   - "viasolviatra{codcat}"
+   - "viasolviatra{codniv}"
+   - "viasolviatra{codempaco}"
+   - "viasolviatra{codnivaco}"
+   - "viasolviatra{codproced}"
+   - "viasolviatra{fecdes}"
+   - "viasolviatra{fechas}"
+   - "viasolviatra{numdia}"
+   - "viasolviatra{codfortra}"
+   - "viasolviatra{codempaut}"
+
+names:
+  viasolviatra{numsol}:
+    required:  Yes
+    required_msg: Este campo no puede estar en Blanco
+    validators: Validator_numsol
+
+  viasolviatra{fecsol}:
+    required:  Yes
+    required_msg: Este campo no puede estar en Blanco
+    validators: FechaValidator
+
+  viasolviatra{dessol}:
+    required:  Yes
+    required_msg: Este campo no puede estar en Blanco
+    validators: DescripcionValidator
+
+  viasolviatra{codemp}:
+    required:  Yes
+    required_msg: Este campo no puede estar en Blanco
+    validators: Validator_codemp
+
+  viasolviatra{codcat}:
+    required:  Yes
+    required_msg: Este campo no puede estar en Blanco
+    validators: Validator_codcat
+
+  viasolviatra{codniv}:
+    required:  Yes
+    required_msg: Este campo no puede estar en Blanco
+    validators: Validator_codniv
+
+  viasolviatra{codempaco}:
+    required:  No
+    required_msg: Este campo no puede estar en Blanco
+    validators: Validator_codemp
+
+  viasolviatra{codnivaco}:
+    required:  No
+    required_msg: Este campo no puede estar en Blanco
+    validators: Validator_codniv
+
+  viasolviatra{codproced}:
+    required:  Yes
+    required_msg: Este campo no puede estar en Blanco
+    validators: Validator_codproced
+
+  viasolviatra{fecdes}:
+    required:  Yes
+    required_msg: Este campo no puede estar en Blanco
+    validators: FechaValidator, FechaValidatorMenor
+
+  viasolviatra{fechas}:
+    required:  Yes
+    required_msg: Este campo no puede estar en Blanco
+    validators: FechaValidator, FechaValidatorMenor
+
+  viasolviatra{codfortra}:
+    required:  Yes
+    required_msg: Este campo no puede estar en Blanco
+    validators: Validator_codfortra
+
+  viasolviatra{codempaut}:
+    required:  Yes
+    required_msg: Este campo no puede estar en Blanco
+    validators: Validator_codemp
+
+  viasolviatra{numdia}:
+    required:  Yes
+    required_msg: Este campo no puede estar en Blanco
+    validators: MyNumberValidator
+
+Validator_numsol:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Viasolviatra
+        column:   numsol
+        unique_error:   El Numero de Solicitud ya existe
+
+FechaValidator:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha  introducida es invalida
+
+DescripcionValidator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La Descripcion debe tener minimo 2 caracteres
+        max:       1000
+        max_error: La Descripcion debe tener maximo 1000 caracteres
+
+Validator_codemp:
+    class: CidesaExistValidator
+    param:
+        class:    Nphojint
+        column:   codemp
+        unique_error:   El Empleado no existe
+
+Validator_codcat:
+    class: CidesaExistValidator
+    param:
+        class:    Npcatpre
+        column:   codcat
+        unique_error:   La Categoria no existe
+
+Validator_codniv:
+    class: CidesaExistValidator
+    param:
+        class:    Viadefniv
+        column:   codniv
+        unique_error:   El Nivel del Trabajador no existe
+
+Validator_codproced:
+    class: CidesaExistValidator
+    param:
+        class:    Viadefproced
+        column:   codproced
+        unique_error:   La Procedencia no existe
+
+Validator_codfortra:
+    class: CidesaExistValidator
+    param:
+        class:    Viadeffortra
+        column:   codfortra
+        unique_error:   La Forma de Traslado no existe
+
+FechaValidatorMenor:
+  class:         CidesaDateNow
+  param:
+    compare: 'now'
+    compare_error: Esta Fecha no puede ser menor a la Fecha Actual
+    operator: '>'
+    date_error:  Fecha Inválida
+
+MyNumberValidator:
+    class: sfNumberValidator
+    param:
+        type:         decimal
+        type_error:   Debe ser un Numero Valido
+        nan_error:    Debe ser un Numero Valido
+        min:          0000000001,00
+        min_error:    Los rangos de Fechas estan Incorrectos
+        max:          9999999999,99

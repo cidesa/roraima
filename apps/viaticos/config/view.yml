@@ -11,7 +11,7 @@ default:
 
   stylesheets:    [main]
 
-  javascripts:    [ %SF_PROTOTYPE_WEB_DIR%/js/prototype, %SF_PROTOTYPE_WEB_DIR%/js/scriptaculous, tools, observe, ajax, dFilter]
+  javascripts:    [ %SF_PROTOTYPE_WEB_DIR%/js/prototype, %SF_PROTOTYPE_WEB_DIR%/js/scriptaculous, tools, observe, ajax, dFilter, grid, numberformat]
 
   has_layout:     on
   layout:         layout

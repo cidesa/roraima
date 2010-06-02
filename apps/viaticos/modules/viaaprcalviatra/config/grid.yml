@@ -1,0 +1,45 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                false
+  tabla:                   viacalviatra
+  anchogrid:               900
+  ancho:                   860
+  filas:                   0
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 2
+  titulo:                  Aprobar
+  tipo:                    k
+  nombrecampo:             check
+  esgrabable:              true  
+  html:                    [ size=4 ]
+2:       # Columna 3
+  titulo:                  Nro. Calculo de Solicitud
+  tipo:                    t
+  nombrecampo:             numcal
+  esgrabable:              true
+  html:                    [ readonly=true size=8]
+3:       # Columna 4
+  titulo:                  Fecha Calculo de Solicitud
+  tipo:                    t
+  nombrecampo:             feccal
+  esgrabable:              true
+  html:                    [ readonly=true size=8]
+4:       # Columna 5
+  titulo:                  Referencia de Solicitud
+  tipo:                    t
+  nombrecampo:             refsol
+  esgrabable:              true
+  html:                    [ readonly=true size=8]
+5:       # Columna6
+  titulo:                  Empleado Solicitante
+  tipo:                    t
+  nombrecampo:             empleado
+  esgrabable:              true
+  html:                    [ readonly=true size=40]
+7:       # Columna7
+  titulo:                  Monto Viaticos
+  tipo:                    t
+  nombrecampo:             montot
+  esgrabable:              true
+  html:                    [ readonly=true size=20]

@@ -1,0 +1,54 @@
+methods:
+  post:
+   - "viadefgen{numsolvia}"
+   - "viadefgen{numcalvianac}"
+   - "viadefgen{numcalviaint}"
+   - "viadefgen{numrelgasadi}"
+   - "viadefgen{valunitri}"
+   - "viadefgen{codpar}"
+
+names:
+  viadefgen{numsolvia}:
+    required:  Yes
+    required_msg: Este campo no puede estar en Blanco
+    
+
+  viadefgen{numcalvianac}:
+    required:  Yes
+    required_msg: Este campo no puede estar en Blanco
+    
+
+  viadefgen{numcalviaint}:
+    required:  Yes
+    required_msg: Este campo no puede estar en Blanco    
+
+  viadefgen{numrelgasadi}:
+    required:  Yes
+    required_msg: Este campo no puede estar en Blanco
+    
+  viadefgen{valunitri}:
+    required:  Yes
+    required_msg: Este campo no puede estar en Blanco
+    validators: MyNumberValidator
+  
+  viadefgen{codpar}:
+    required:  Yes
+    required_msg: Este campo no puede estar en Blanco
+    validators: Validator_codpar
+
+Validator_codpar:
+    class: CidesaExistValidator
+    param:
+        class:    Nppartidas
+        column:   codpar
+        unique_error:   El Código de la Partida no existe
+
+MyNumberValidator:
+    class: sfNumberValidator
+    param:
+        type:         decimal
+        type_error:   Por favor, Introduzca Números Decimales
+        nan_error:    Por Favor, introduzca un Número Decimal
+        min:          0000000001,00
+        min_error:    El valor tiene que ser mayor que cero
+        max:          9999999999,99

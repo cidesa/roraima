@@ -1,0 +1,72 @@
+methods:
+  post:
+   - "viacalviatra{numcal}"
+   - "viacalviatra{feccal}"
+   - "viacalviatra{tipcom}"
+   - "viacalviatra{refsol}"
+   - "viacalviatra{diaconper}"
+   - "viacalviatra{diasinper}"
+  
+names:
+  viacalviatra{numcal}:
+    required:  Yes
+    required_msg: Este campo no puede estar en Blanco
+    validators: Validator_numcal
+
+  viacalviatra{feccal}:
+    required:  Yes
+    required_msg: Este campo no puede estar en Blanco
+    validators: FechaValidator
+
+  viacalviatra{tipcom}:
+    required:  Yes
+    required_msg: Este campo no puede estar en Blanco
+    validators: Validator_tipcom
+
+  viacalviatra{refsol}:
+    required:  Yes
+    required_msg: Este campo no puede estar en Blanco
+    validators: Validator_refsol, Validator_refsol2
+
+  viacalviatra{diaconper}:
+    required:  Yes
+    required_msg: Este campo no puede estar en Blanco
+
+  viacalviatra{diasinper}:
+    required:  Yes
+    required_msg: Este campo no puede estar en Blanco
+  
+Validator_numcal:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Viacalviatra
+        column:   numcal
+        unique_error:   El Numero de Calculo ya existe
+
+FechaValidator:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha  introducida es invalida
+
+Validator_tipcom:
+    class: CidesaExistValidator
+    param:
+        class:    Cpdoccom
+        column:   tipcom
+        unique_error:   El Compromiso no existe
+
+Validator_refsol:
+    class: CidesaExistValidator
+    param:
+        class:    Viasolviatra
+        column:   numsol
+        unique_error:   La solicitud de Viaticos no existe
+
+Validator_refsol2:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Viacalviatra
+        column:   refsol
+        unique_error:   La solicitud de Viaticos ya fue calculada

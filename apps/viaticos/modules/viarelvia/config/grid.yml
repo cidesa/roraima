@@ -1,0 +1,85 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                true
+  tabla:                   viadetrelvia
+  anchogrid:               900
+  ancho:                   850
+  filas:                   1
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 2
+  titulo:                  Código Proveedor
+  tipo:                    t
+  nombrecampo:             codpro
+  esgrabable:              true
+  catalogo:                [opbenefi, sf_admin_edit_form, {Cedrif: 1, Nomben: 2}, Opbenefi_Pagemiord ]
+  html:                    [ size=10 ]
+2:       # Columna 3
+  titulo:                  Descripcion
+  tipo:                    t
+  nombrecampo:             nomben
+  esgrabable:              false
+  html:                    [ readonly=true size=30 ]
+3:       # Columna 4
+  titulo:                  Numero de Factura
+  tipo:                    t
+  nombrecampo:             numfac
+  esgrabable:              true
+  html:                    [ ]
+4:       # Columna 5
+  titulo:                  Fecha de Factura
+  tipo:                    f
+  nombrecampo:             fecfac
+  esgrabable:              true
+  html:                    [  ]
+5:       # Columna 5
+  titulo:                  Monto Neto
+  tipo:                    m
+  nombrecampo:             montonet
+  esgrabable:              true
+  html:                    [ ]
+6:       # Columna 6
+  titulo:                  Monto Recargo
+  tipo:                    m
+  nombrecampo:             montorec
+  esgrabable:              true
+  html:                    [ ]
+7:       # Columna 7
+  titulo:                  Categoria
+  tipo:                    t
+  nombrecampo:             codcat
+  esgrabable:              true
+  catalogo:                [npcatpre, sf_admin_edit_form, {Codcat: 7, Nomcat: 8}, NconceptosCat_Asignar ]
+  html:                    [ size=10]
+8:       # Columna 8
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             nomcat
+  esgrabable:              false
+  html:                    [ readonly=true size=20]
+9:       # Columna 9
+  titulo:                  Partida
+  tipo:                    t
+  nombrecampo:             codpar
+  esgrabable:              true
+  catalogo:                [nppartidas, sf_admin_edit_form, {Codpar: 9, Nompar: 10}, Nppartidas_Almregart ]
+  html:                    [ ]
+10:       # Columna 10
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             nompar
+  esgrabable:              false
+  html:                    [ readonly=true ]
+11:       # Columna 11
+  titulo:                  Referencia Solicitud
+  tipo:                    t
+  nombrecampo:             refsol
+  esgrabable:              true
+  catalogo:                [viasolviatra, sf_admin_edit_form, {Numsol: 11, Empleado: 12}, Viacalviatra_numsolvia ]
+  html:                    [ ]
+12:       # Columna 12
+  titulo:                  Empleado
+  tipo:                    t
+  nombrecampo:             empleado
+  esgrabable:              true
+  html:                    [ readonly=true ]

@@ -1,0 +1,30 @@
+methods:
+  post:
+   - "viadeftiptra{codtiptra}"
+   - "viadeftiptra{destiptra}"
+   
+names:
+  viadeftiptra{codtiptra}:
+    required:  Yes
+    required_msg: Este campo no puede estar en Blanco
+    validators: Validator_codtiptra
+
+  viadeftiptra{destiptra}:
+    required:  Yes
+    required_msg: Este campo no puede estar en Blanco
+    validators: Validator_destiptra
+  
+Validator_codtiptra:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Viadeftiptra
+        column:       codtiptra
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_destiptra:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       250
+        max_error: La descripción no puede pasar mas de 100 caracteres

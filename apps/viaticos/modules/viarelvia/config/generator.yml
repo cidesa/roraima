@@ -1,0 +1,35 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Viarelvia
+    theme:            cidesaGenerator
+    fields:
+      numrel:         { name: Nro. de Relación, params: maxlength=10 size=10  onBlur="rellenarcorr(this.id)"  }
+      fecrel:         { name: Fecha Relación }
+      tipcom:
+        name: Compromiso
+        msj_error: El Código es necesario
+        catalogo:
+          catalogoweb: Cpdoccom_Predoccom
+          clase: Cpdoccom
+          ajax: 0
+          parametros: getprincipal="getTipcom" getsecundario="getNomext" campoprincipal="tipcom" camposecundario="nomext" campobase = "id"
+      desrel:         { name: Descripción }
+      grid:           { name: .}
+      js:             { name: .}
+
+    list:
+      title:          Listado de Relaciones de Gastos Adicionales
+      display:        [=numrel, fecrel, tipcom]
+      filters:        [numrel, fecrel, tipcom]
+      sort:           numrel
+
+    edit:             
+      title:          Edición de Relaciones de Gastos Adicionales
+      display:
+        Datos Generales de la Relación:     [numrel, fecrel, tipcom, desrel]
+        Detalle de la Relación:             [_grid, _js]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

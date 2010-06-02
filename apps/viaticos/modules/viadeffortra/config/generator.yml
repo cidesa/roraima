@@ -1,0 +1,29 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Viadeffortra
+    theme:            cidesaGenerator
+    fields:
+      codfortra:         { name: Código Forma Traslado, params: maxlength=2 size=5 onBlur="$(this.id).value=$(this.id).value.pad(2,'0',0)"}
+      desfortra:         { name: Descripción, params: maxlegth=250 }
+      codtiptra:         { name: Tipo Traslado}
+      destiptra:         { name: Descripción }
+      grid:              { name: .}
+
+    list:
+      title: Listado de Forma de Traslado
+      display: [=codfortra, desfortra, codtiptra, destiptra]
+      filters: [codfortra, desfortra]
+      sort:    codfortra
+      objects_actions:
+        _edit:        ~
+        _delete:        ~
+    edit:
+      title: Edición de Forma de Tralado
+      display:
+        Datos Generales de la Forma de Traslado: [codfortra, desfortra]
+        Tipos de Traslados que Incluye: [_grid]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

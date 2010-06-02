@@ -1632,3 +1632,22 @@
 99999999:
   cod: 99999999
   msj: Número de Orden de Pago ya Existe, intento con otro.
+#VIATICOS V2
+V001:
+  cod: V001
+  msj: Debe seleccionar al menos un rubro
+V002:
+  cod: V002
+  msj: No hay disponibilidad presupuestaria para la Categoria
+V003:
+  cod: V003
+  msj: No se puede Eliminar una Solicitud Aprobada
+V004:
+  cod: V004
+  msj: No se puede Eliminar un Proceso de Calculo ya  Aprobado
+V005:
+  cod: V005
+  msj: Debe Ingresar Datos de Proveedores y Facturas
+V006:
+  cod: V006
+  msj: Faltan datos en el Grid
