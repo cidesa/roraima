@@ -1189,7 +1189,7 @@ $this->Bitacora('Guardo');
     $anofeclib=substr($feclib_m,0,4);
   if ($anofeclib==$anoactual)
   {
-   if (Tesoreria::validaPeriodoCerrado($feclib)==true)
+   if (Tesoreria::validaPeriodoCerrado($fecanu)==true)
    {
      $coderror=529;
      $this->msgpercer = Herramientas::obtenerMensajeError($coderror);
