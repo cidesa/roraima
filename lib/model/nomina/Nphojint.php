@@ -343,5 +343,23 @@ class Nphojint extends BaseNphojint
   {
   	return $this->statusegr;
   }
+    public function getNomempaco()
+    {
+    	return self::getNomemp();
+    }
+
+  public function getCodempaco()
+    {
+    	return self::getCodemp();
+}
+  public function getNomempaut()
+    {
+    	return self::getNomemp();
+    }
+
+  public function getCodempaut()
+    {
+    	return self::getCodemp();
+    }
 
 }

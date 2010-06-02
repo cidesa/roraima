@@ -1,0 +1,42 @@
+viaticosv2:
+  opciones:
+    activo: true #true/false
+    descripcion: Módulo de Viaticos
+    imagen: viaticos.gif
+    nombre: Viaticos
+    urls:
+      Cambiar Contraseña:
+        modulo: autenticacion.php
+        modulo_dev: autenticacion_dev.php
+      default:
+        modulo: viaticos.php
+        modulo_dev: viaticos_dev.php
+      #Definicion de Proveedores:
+        #modulo: compras.php
+        #modulo_dev: compras_dev.php
+      Reportes:
+        absoluta: reportes/reportes/viaticos
+    imagenes:
+      default: OperatorClass.png
+  menu:
+    Definiciones:
+      Definiciones Generales:                             viadefgen
+      Definición de Rubros:                               viadefrub
+      Definición de Niveles:                              viadefniv
+      Definición de Tipos de Traslado:                    viadeftiptra
+      Definición de Formas de Traslado:                   viadeffortra
+      Definición de Niveles de Aprobación:                viadefnivapr
+      Definición de Procedencias:                         viadefproced
+      Asociar Niveles de Aprobacion a Procedencias:       viaasoproniv
+      Tabla para el Cálculo:                              viacalrub
+    Procesos para Viaticos:
+      Solicitud de Viaticos:                              viasolviatra
+      Aprobación Solicitud de Viaticos:                   viaaprsolviatra
+      Calculo de Viaticos:                                viacalviatra      
+      Aprobacion Calculo de Viaticos:                     viaaprcalviatra
+      Relacion de Viaticos:                               viarelvia
+    #Reportes:
+      #Listados:
+        #Listado de Rubros:                                viarlisrub.php
+    Mantenimiento:
+      Cambiar Contraseña:                                     cambiopasswd

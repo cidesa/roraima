@@ -1,0 +1,28 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Viadeftiptra
+    theme:            cidesaGenerator
+    fields:
+      codtiptra:         { name: Código Tipo Traslado, params: maxlength=2 size=5 onBlur="$(this.id).value=$(this.id).value.pad(2,'0',0)"}
+      destiptra:         { name: Descripción,  params: maxlength=250 }
+      tipo:              { name: Tipo de Tralado}
+      ltipo:              { name: Tipo de Tralado}
+      ptipo:             { name: .}
+
+    list:
+      title: Listado de Tipo de Traslado
+      display: [=codtiptra, destiptra, ltipo]
+      filters: [codtiptra, destiptra]
+      sort:    codtiptra
+      objects_actions:
+        _edit:        ~
+        _delete:        ~
+    edit:
+      title: Edición de Tipo de Traslado
+      display:
+        Datos Generales del Tipo de Traslado: [codtiptra, destiptra, _ptipo]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

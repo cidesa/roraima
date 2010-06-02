@@ -1,0 +1,30 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Viadefgen
+    theme:            cidesaGenerator
+    fields:
+      numsolvia:      { name: Nro. Solicitud de Viaticos}
+      numcalvianac:   { name: Nro. Calculo de Viatico Nacional}
+      numcalviaint:   { name: Nro. Calculo de Viatico Internacional}
+      valunitri:      { name: Valor Unidad Tributaria}
+      numrelgasadi:   { name: Nro. Relacion de Gastos Adicionales de Viaticos}
+      codpar:
+        name: Partida Viaticos Internacional
+        msj_error: El Código es necesario
+        catalogo:
+          catalogoweb: Nppartidas_Almregart
+          clase: Nppartidas
+          ajax: 0
+          parametros: getprincipal="getCodpar" getsecundario="getNompar" campoprincipal="codpar" camposecundario="nompar" campobase = "id"
+
+
+    edit:
+      title: Definiciones Generales
+      display:
+        Correlativos:    [numsolvia, numcalvianac, numcalviaint, numrelgasadi]
+        Datos Generales: [valunitri, codpar]
+      actions:
+        _list:        none
+        _save:        ~
+        _delete:      none

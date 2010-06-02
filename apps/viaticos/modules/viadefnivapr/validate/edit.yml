@@ -1,0 +1,30 @@
+methods:
+  post:
+   - "viadefnivapr{codnivapr}"
+   - "viadefnivapr{desnivapr}"
+   
+names:
+  viadefnivapr{codnivapr}:
+    required:  Yes
+    required_msg: Este campo no puede estar en Blanco
+    validators: Validator_codnivapr
+
+  viadefnivapr{desnivapr}:
+    required:  Yes
+    required_msg: Este campo no puede estar en Blanco
+    validators: Validator_desnivapr
+  
+Validator_codnivapr:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Viadefnivapr
+        column:       codnivapr
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_desnivapr:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       250
+        max_error: La descripción no puede pasar mas de 100 caracteres

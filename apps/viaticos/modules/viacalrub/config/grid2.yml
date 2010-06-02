@@ -1,0 +1,41 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                true
+  tabla:                   viacalrub
+  anchogrid:               900
+  ancho:                   850
+  filas:                   1
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 2
+  titulo:                  Codigo de Nivel o Tipo Traslado
+  tipo:                    t
+  nombrecampo:             codnivtra
+  esgrabable:              true
+  valida:                  true
+  catalogo:                [viadeftiptra, sf_admin_edit_form, {Codtiptra: 1, Destiptra: 2}, Viadeftiptra_codtiptra ]
+  html:                    [ ]
+2:       # Columna 3
+  titulo:                  Descripcion
+  tipo:                    t
+  nombrecampo:             desnivtra
+  esgrabable:              false
+  html:                    [ readonly=true]
+3:       # Columna 4
+  titulo:                  Cantidad de Unidades Tributarias
+  tipo:                    m
+  nombrecampo:             canunitri
+  esgrabable:              true
+  html:                    [  ]
+4:       # Columna 5
+  titulo:                  Valor Unidad Tributaria
+  tipo:                    m
+  nombrecampo:             valunitri
+  esgrabable:              true
+  html:                    [ ]
+5:       # Columna 5
+  titulo:                  Monto Final
+  tipo:                    m
+  nombrecampo:             monto
+  esgrabable:              true
+  html:                    [ readonly=true ]

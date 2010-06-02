@@ -1,0 +1,341 @@
+propel:
+  _attributes:
+    package: lib.model    
+  viadefgen:
+    numsolvia:
+      type: INTEGER
+    numcalvianac:
+      type: INTEGER
+    numcalviaint:
+      type: INTEGER
+    valunitri:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    numrelgasadi:
+      type: INTEGER
+    codpar:
+      type: VARCHAR
+      size: 32
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  viadefrub:
+    codrub:
+      type: VARCHAR
+      size: 2
+    desrub:
+      type: VARCHAR
+      size: 250
+    tipo:
+      type: VARCHAR
+      size: 1
+    tiprub:
+      type: VARCHAR
+      size: 1
+    codpar:
+      type: VARCHAR
+      size: 32
+    tipdia:
+      type: VARCHAR
+      size: 1
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  viadefniv:
+    codniv:
+      type: VARCHAR
+      size: 2
+    desniv:
+      type: VARCHAR
+      size: 250
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  viadeftiptra:
+    codtiptra:
+      type: VARCHAR
+      size: 2
+    destiptra:
+      type: VARCHAR
+      size: 250
+    tipo:
+      type: VARCHAR
+      size: 1
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  viadeffortra:
+    codfortra:
+      type: VARCHAR
+      size: 2
+    desfortra:
+      type: VARCHAR
+      size: 250
+    codtiptra:
+      type: VARCHAR
+      size: 2
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  viadefnivapr:
+    codnivapr:
+      type: VARCHAR
+      size: 2
+    desnivapr:
+      type: VARCHAR
+      size: 250    
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  viadefproced:
+    codproced:
+      type: VARCHAR
+      size: 2
+    desproced:
+      type: VARCHAR
+      size: 250
+    aprobacion:
+      type: VARCHAR
+      size: 1
+    codnivapr:
+      type: VARCHAR
+      size: 2
+    prioriapr:
+      type: INTEGER
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  viaasoproniv:
+    codproced:
+      type: VARCHAR
+      size: 2
+    codnivapr:
+      type: VARCHAR
+      size: 2
+    prioriapr:
+      type: INTEGER
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  viacalrub:
+    codrub:
+      type: VARCHAR
+      size: 2
+    codnivtra:
+      type: VARCHAR
+      size: 2
+    canunitri:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    valunitri:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monto:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  viasolviatra:
+    numsol:
+      type: VARCHAR
+      size: 10
+    fecsol:
+      type: DATE
+    tipvia:
+      type: VARCHAR
+      size: 1
+    codemp:
+      type: VARCHAR
+      size: 16
+    codcat:
+      type: VARCHAR
+      size: 32
+    codniv:
+      type: VARCHAR
+      size: 2
+    codempaco:
+      type: VARCHAR
+      size: 16
+    codnivaco:
+      type: VARCHAR
+      size: 2
+    dessol:
+      type: VARCHAR
+      size: 1000
+    codest:
+      type: VARCHAR
+      size: 4
+    codnivapr:
+      type: VARCHAR
+      size: 2
+    codproced:
+      type: VARCHAR
+      size: 2
+    status:
+      type: VARCHAR
+      size: 1
+    fecdes:
+      type: DATE
+    fechas:
+      type: DATE
+    numdia:
+      type: INTEGER
+    codfortra:
+      type: VARCHAR
+      size: 2
+    codempaut:
+      type: VARCHAR
+      size: 16
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  viacalviatra:
+    numcal:
+      type: VARCHAR
+      size: 10
+    feccal:
+      type: DATE
+    tipcom:
+      type: VARCHAR
+      size: 4
+    refsol:
+      type: VARCHAR
+      size: 10
+    codcat:
+      type: VARCHAR
+      size: 32
+    diaconper:
+      type: INTEGER
+    diasinper:
+      type: INTEGER
+    status:
+      type: VARCHAR
+      size: 1
+    observaciones:
+      type: VARCHAR
+      size: 250
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  viadetcalviatra:
+    numcal:
+      type: VARCHAR
+      size: 10
+    feccal:
+      type: DATE
+    codrub:
+      type: VARCHAR
+      size: 2
+    numdia:
+      type: INTEGER
+    mondia:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    montot:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    tipo:
+      type: VARCHAR
+      size: 2    
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  viarelvia:
+    numrel:
+      type: VARCHAR
+      size: 10
+    fecrel:
+      type: DATE
+    tipcom:
+      type: VARCHAR
+      size: 4
+    desrel:
+      type: VARCHAR
+      size: 250
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  viadetrelvia:
+    numrel:
+      type: VARCHAR
+      size: 10
+    fecrel:
+      type: DATE
+    codpro:
+      type: VARCHAR
+      size: 16
+    numfac:
+      type: VARCHAR
+      size: 50
+    fecfac:
+      type: DATE
+    montonet:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    montorec:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    codcat:
+      type: VARCHAR
+      size: 32
+    codpar:
+      type: VARCHAR
+      size: 32
+    refsol:
+      type: VARCHAR
+      size: 10
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+

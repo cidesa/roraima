@@ -5988,7 +5988,103 @@ public function Catdefcatman_Cattramo($params = '') {
             );
 	
 
-}
+        }
+        public function Viadeftiptra_codtiptra() {
+		$this->c = new Criteria();
+		$this->columnas = array (
+			ViadeftiptraPeer :: CODTIPTRA => 'Código',
+			ViadeftiptraPeer :: DESTIPTRA => 'Descripción',
+
+		);
+	}
+
+        public function Viadefnivapr_codnivapr() {
+		$this->c = new Criteria();
+		$this->columnas = array (
+			ViadefnivaprPeer :: CODNIVAPR => 'Código',
+			ViadefnivaprPeer :: DESNIVAPR => 'Descripción',
+
+		);
+	}
+
+        public function Viadefproced_codproced() {
+		$this->c = new Criteria();
+		$this->columnas = array (
+			ViadefprocedPeer :: CODPROCED => 'Código',
+			ViadefprocedPeer :: DESPROCED => 'Descripción',
+
+		);
+	}
+
+        public function Viadefniv_codniv() {
+		$this->c = new Criteria();
+		$this->columnas = array (
+			ViadefnivPeer :: CODNIV => 'Código',
+			ViadefnivPeer :: DESNIV => 'Descripción',
+
+		);
+	}
+
+        public function Viadefrub_codrub() {
+		$this->c = new Criteria();
+		$this->columnas = array (
+			ViadefrubPeer :: CODRUB => 'Código',
+			ViadefrubPeer :: DESRUB => 'Descripción',
+
+		);
+	}
+
+        public function Viadeffortra_codfortra() {
+		$this->c = new Criteria();
+		$this->columnas = array (
+			ViadeffortraPeer :: CODFORTRA => 'Código',
+			ViadeffortraPeer :: DESFORTRA => 'Descripción',
+
+		);
+	}
+
+        public function Viasolviatra_numsol() {
+		$this->c = new Criteria();
+                $this->c->add(ViasolviatraPeer::STATUS,'A');
+                $sql = "Viasolviatra.numsol not in  (select refsol from viacalviatra) ";
+		$this->c->add(ViasolviatraPeer :: NUMSOL, $sql, Criteria :: CUSTOM);
+		$this->columnas = array (
+			ViasolviatraPeer :: NUMSOL => 'Código',
+                        ViasolviatraPeer :: FECSOL => 'Fecha',
+			ViasolviatraPeer :: DESSOL => 'Descripción',
+
+
+		);
+	}
+        public function Viadefproced_codproced_apr() {
+		$this->c = new Criteria();
+                $this->c->add(ViadefprocedPeer::APROBACION,'S');
+		$this->columnas = array (
+			ViadefprocedPeer :: CODPROCED => 'Código',
+			ViadefprocedPeer :: DESPROCED => 'Descripción',
+
+		);
+	}
+
+        public function Viadefrub_codrub_cal() {
+		$this->c = new Criteria();
+                $this->c->add(ViadefrubPeer::TIPO,'C');
+		$this->columnas = array (
+			ViadefrubPeer :: CODRUB => 'Código',
+			ViadefrubPeer :: DESRUB => 'Descripción',
+
+		);
+	}
+        public function Viacalviatra_numsolvia() {
+		$this->c = new Criteria();
+                $this->c->addJoin(ViasolviatraPeer::NUMSOL,ViacalviatraPeer::REFSOL);
+                $this->c->add(ViacalviatraPeer::STATUS,'A');
+		$this->columnas = array (
+			ViasolviatraPeer :: NUMSOL => 'Referencia',
+                        ViasolviatraPeer :: CODEMP => 'Empleado',
+
+		);
+	}
 
 }
 
