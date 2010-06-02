@@ -1862,6 +1862,17 @@ $this->Bitacora('Guardo');
   	}
   	$output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""]]';
   }
+   else if ($this->getRequestParameter('ajax')=='8')
+  {
+  	$r= new Criteria();
+  	$r->add(NphojintPeer::CODEMP,$this->getRequestParameter('codigo'));
+  	$datos= NphojintPeer::doSelectOne($r);
+  	if ($datos)
+  	{
+  	   $javascript="alert_('El Empleado ya se encuentra registrado'); $('$cajtexcom').value=''; $('$cajtexcom').focus();";
+  	}
+  	$output = '[["javascript","'.$javascript.'",""]]';
+  }
 
   $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
   return sfView::HEADER_ONLY;
@@ -1881,6 +1892,8 @@ $this->Bitacora('Guardo');
 
   protected function getLabels()
   {
+    $cambiareti=H::getConfApp('cambiareti', 'nomina', 'nomdefespnivorg');
+    if ($cambiareti!="") {
     return array(
       'nphojint{codemp}' => 'No. Empleado:',
       'nphojint{nomemp}' => 'Apellido(s) y Nombre(s):',
@@ -1890,6 +1903,98 @@ $this->Bitacora('Guardo');
       'nphojint{numcon}' => 'No. Contrato:',
       'nphojint{nacemp}' => 'Nacionalidad:',
       'nphojint{sexemp}' => 'Sexo:',
+          'nphojint{codniv}' => $cambiareti.':',
+          'nphojint{codnivedu}' => 'Nivel Estudio:',
+          'nphojint{fotemp}' => 'Foto:',
+          'nphojint{lugnac}' => 'Lugar de Nacimiento:',
+          'nphojint{fecnac}' => 'Fecha de Nacimiento:',
+          'nphojint{edaemp}' => 'Edad:',
+          'nphojint{obsgen}' => 'Observaciones:',
+          'nphojint{dirhab}' => 'Dirección:',
+          'nphojint{codpai}' => 'Estado:',
+          'nphojint{codest}' => 'Municipio:',
+          'nphojint{codciu}' => 'Parroquia:',
+          'nphojint{telhab}' => 'Tlf. Hab:',
+          'nphojint{telotr}' => 'Otro Tlf.:',
+          'nphojint{celemp}' => 'Celular:',
+          'nphojint{dirotr}' => 'Dirección:',
+          'nphojint{codpa2}' => 'Estado:',
+          'nphojint{codes2}' => 'Municipio:',
+          'nphojint{codci2}' => 'Parroquia:',
+          'nphojint{telha2}' => 'Teléfono:',
+          'nphojint{telot2}' => 'Otro Tlf.:',
+          'nphojint{emaemp}' => 'Email:',
+          'nphojint{codpos}' => 'Código Postal:',
+          'nphojint{fecing}' => 'Ingreso:',
+          'nphojint{fecret}' => 'Egreso:',
+          'nphojint{fecrei}' => 'Reingreso:',
+          'nphojint{obsemp}' => 'Motivo de Egreso:',
+          'nphojint{staemp}' => 'Situación del Empleado:',
+          'nphojint{codtippag}' => 'Forma de Pago:',
+          'nphojint{codban}' => 'Banco:',
+          'nphojint{numcue}' => 'Número de Cuenta Nómina:',
+          'nphojint{tipcue}' => 'Tipo de Cuenta:',
+          'nphojint{numcueaho}' => 'Número de Cuenta Caja de Ahorro:',
+          'nphojint{tipcueaho}' => 'Tipo de Cuenta:',
+          'nphojint{fecadmpub}' => 'Fecha en la Administración Pública:',
+          'nphojint{numsso}' => 'Número de S.S.O:',
+          'nphojint{numpolseg}' => 'Número dde Póliza de Seguro:',
+          'nphojint{feccotsso}' => 'Fecha de Cotización de S.S.O:',
+          'nphojint{anoadmpub}' => 'Años de Continuidad en la Administración Pública:',
+          'nphojint{tiefid}' => 'Fideicomiso:',
+          'nphojint{talcam}' => 'Talla Camisa:',
+          'nphojint{talpan}' => 'Talla Pantalón:',
+          'nphojint{talcal}' => 'No. de Calzado:',
+          'nphojint{grusan}' => 'Grupo Sanguineo:',
+          'nphojint{codregpai}' => 'Estado:',
+          'nphojint{codregest}' => 'Municipio:',
+          'nphojint{codregciu}' => 'Parroquia:',
+          'nphojint{grulab}' => 'Grupo Laboral:',
+          'nphojint{gruotr}' => 'Descripción:',
+          'nphojint{traslado}' => 'Forma de Translado:',
+          'nphojint{traotr}' => 'Descripción:',
+          'nphojint{numexp}' => 'Número:',
+          'nphojint{detexp}' => 'Contenido:',
+          'nphojint{derzur}' => 'DerechoZurdo:',
+          'nphojint{tipviv}' => 'Tipo de Vivienda:',
+          'nphojint{vivotr}' => 'Descripción:',
+          'nphojint{forten}' => 'Forma de Tenencia:',
+          'nphojint{tenotr}' => 'Descripción:',
+          'nphojint{sercon}' => 'Servicios:',
+          'nphojint{temporal}' => 'Temporal:',
+          'nphojint{situac}' => 'Estatus del Empleado:',
+          'nphojint{profes}' => 'Profesional:',
+              'nphojint{prinom}' => 'Primer Nombre:',
+          'nphojint{segnom}' => 'Segundo Nombre:',
+          'nphojint{priape}' => 'Primer Apellido:',
+          'nphojint{segape}' => 'Segundo Apellido:',
+          'nphojint{ubifis}' => 'Ubicacion Fisica:',
+          'nphojint{codempant}' => 'No. Empleado Anterior:',
+              'nphojint{feccoracu}' => 'Fecha de Corte Acumulado:',
+          'nphojint{capactacu}' => 'Capital Actual Acumulado:',
+          'nphojint{intacu}' => 'Interes Acumulado:',
+          'nphojint{antacu}' => 'Anticipos Acumulados:',
+          'nphojint{diaacu}' => 'Dias Acumulados:',
+          'nphojint{diaadiacu}' => 'Dias Adicionales Acumulados:',
+          'nphojint{codtipemp}' => 'Tipo de Empleado:',
+              'nphojint{numpuncue}' => 'Punto de Cuenta:',
+            'nphojint{fecinicon}' => 'Fecha Inicio del Contrato:',
+            'nphojint{fecfincon}' => 'Fecha Fin del Contrato:',
+            'nphojint{obsembret}' => 'Datos:',
+
+
+        );
+
+  }else {
+    return array(
+          'nphojint{codemp}' => 'No. Empleado:',
+          'nphojint{nomemp}' => 'Apellido(s) y Nombre(s):',
+          'nphojint{cedemp}' => 'C.I.:',
+          'nphojint{rifemp}' => 'RIF:',
+          'nphojint{edociv}' => 'Estado Civil:',
+          'nphojint{numcon}' => 'No. Contrato:',
+          'nphojint{nacemp}' => 'Nacionalidad:',
+          'nphojint{sexemp}' => 'Sexo:',
       'nphojint{codniv}' => 'Nivel Organizacional:',
       'nphojint{codnivedu}' => 'Nivel Estudio:',
       'nphojint{fotemp}' => 'Foto:',
@@ -1972,4 +2077,5 @@ $this->Bitacora('Guardo');
 
     );
   }
+}
 }

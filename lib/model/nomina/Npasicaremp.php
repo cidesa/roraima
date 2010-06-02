@@ -24,6 +24,7 @@ class Npasicaremp extends BaseNpasicaremp
 	protected $nomcatnew="";
 	protected $fecing=null;
         protected $codtipcar="";
+        protected $mancencos="";
 
 
 	public function getCodcon()
@@ -150,7 +151,34 @@ class Npasicaremp extends BaseNpasicaremp
   }
 
   public function getCodtipcar()
-	{
-            return H::GetX('Codcar','Npcargos','codtip',self::getCodcar());
-}
+    {
+        return H::GetX('Codcar','Npcargos','codtip',self::getCodcar());
+    }
+
+  public function getDescen()
+  {
+	return Herramientas::getX('CODCEN','Cadefcen','Descen',self::getCodcen());
+  }
+
+  public function getMancencos()
+  {
+    $dato="";
+    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('nomina',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['nomina']))
+	     if(array_key_exists('nomasicarconnom',$varemp['aplicacion']['nomina']['modulos'])){
+	       if(array_key_exists('mancencos',$varemp['aplicacion']['nomina']['modulos']['nomasicarconnom']))
+	       {
+	       	$dato=$varemp['aplicacion']['nomina']['modulos']['nomasicarconnom']['mancencos'];
+	       }
+         }
+     return $dato;
+  }
+
+  public function setMancencos()
+  {
+  	return $this->mancencos;
+  }
 }

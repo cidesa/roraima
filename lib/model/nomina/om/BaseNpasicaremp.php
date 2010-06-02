@@ -105,6 +105,10 @@ abstract class BaseNpasicaremp extends BaseObject  implements Persistent {
 
 
 	
+	protected $codcen;
+
+
+	
 	protected $id;
 
 	
@@ -296,6 +300,13 @@ abstract class BaseNpasicaremp extends BaseObject  implements Persistent {
   {
 
     return trim($this->juscam);
+
+  }
+  
+  public function getCodcen()
+  {
+
+    return trim($this->codcen);
 
   }
   
@@ -558,6 +569,16 @@ abstract class BaseNpasicaremp extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setCodcen($v)
+	{
+
+    if ($this->codcen !== $v) {
+        $this->codcen = $v;
+        $this->modifiedColumns[] = NpasicarempPeer::CODCEN;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -620,7 +641,9 @@ abstract class BaseNpasicaremp extends BaseObject  implements Persistent {
 
       $this->juscam = $rs->getString($startcol + 23);
 
-      $this->id = $rs->getInt($startcol + 24);
+      $this->codcen = $rs->getString($startcol + 24);
+
+      $this->id = $rs->getInt($startcol + 25);
 
       $this->resetModified();
 
@@ -628,7 +651,7 @@ abstract class BaseNpasicaremp extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 25; 
+            return $startcol + 26; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Npasicaremp object", $e);
     }
@@ -848,6 +871,9 @@ abstract class BaseNpasicaremp extends BaseObject  implements Persistent {
 				return $this->getJuscam();
 				break;
 			case 24:
+				return $this->getCodcen();
+				break;
+			case 25:
 				return $this->getId();
 				break;
 			default:
@@ -884,7 +910,8 @@ abstract class BaseNpasicaremp extends BaseObject  implements Persistent {
 			$keys[21] => $this->getCodmotcamcar(),
 			$keys[22] => $this->getCodtie(),
 			$keys[23] => $this->getJuscam(),
-			$keys[24] => $this->getId(),
+			$keys[24] => $this->getCodcen(),
+			$keys[25] => $this->getId(),
 		);
 		return $result;
 	}
@@ -973,6 +1000,9 @@ abstract class BaseNpasicaremp extends BaseObject  implements Persistent {
 				$this->setJuscam($value);
 				break;
 			case 24:
+				$this->setCodcen($value);
+				break;
+			case 25:
 				$this->setId($value);
 				break;
 		} 	}
@@ -1006,7 +1036,8 @@ abstract class BaseNpasicaremp extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[21], $arr)) $this->setCodmotcamcar($arr[$keys[21]]);
 		if (array_key_exists($keys[22], $arr)) $this->setCodtie($arr[$keys[22]]);
 		if (array_key_exists($keys[23], $arr)) $this->setJuscam($arr[$keys[23]]);
-		if (array_key_exists($keys[24], $arr)) $this->setId($arr[$keys[24]]);
+		if (array_key_exists($keys[24], $arr)) $this->setCodcen($arr[$keys[24]]);
+		if (array_key_exists($keys[25], $arr)) $this->setId($arr[$keys[25]]);
 	}
 
 	
@@ -1038,6 +1069,7 @@ abstract class BaseNpasicaremp extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(NpasicarempPeer::CODMOTCAMCAR)) $criteria->add(NpasicarempPeer::CODMOTCAMCAR, $this->codmotcamcar);
 		if ($this->isColumnModified(NpasicarempPeer::CODTIE)) $criteria->add(NpasicarempPeer::CODTIE, $this->codtie);
 		if ($this->isColumnModified(NpasicarempPeer::JUSCAM)) $criteria->add(NpasicarempPeer::JUSCAM, $this->juscam);
+		if ($this->isColumnModified(NpasicarempPeer::CODCEN)) $criteria->add(NpasicarempPeer::CODCEN, $this->codcen);
 		if ($this->isColumnModified(NpasicarempPeer::ID)) $criteria->add(NpasicarempPeer::ID, $this->id);
 
 		return $criteria;
@@ -1116,6 +1148,8 @@ abstract class BaseNpasicaremp extends BaseObject  implements Persistent {
 		$copyObj->setCodtie($this->codtie);
 
 		$copyObj->setJuscam($this->juscam);
+
+		$copyObj->setCodcen($this->codcen);
 
 
 		$copyObj->setNew(true);

@@ -41,6 +41,12 @@
   'size' => 16,
   'maxlength' => 16,
   'control_name' => 'nphojint[codemp]',
+  'onBlur'=> remote_function(array(
+  'url'      => 'nomhojint/ajax',
+  'condition' => "$('nphojint_codemp').value != '' && $('id').value == ''",
+  'complete' => 'AjaxJSON(request, json)',
+  'with' => "'ajax=8&cajtexcom=nphojint_codemp&codigo='+this.value",
+  ))
 )); echo $value ? $value : '&nbsp;' ?>
 
 <? }else{ ?>

@@ -15,22 +15,23 @@ generator:
       paso:     { name: Paso, params: maxlength=3 }
       despaso:  { name: Descripción Paso }
       fecasi:   { name: Fecha de Asignación, params: date_format='dd/MM/yyyy'}
-      codtipgas:{ name: Tipo de Gasto, params: maxlength=3 }
+      codtipgas: { name: Tipo de Gasto, params: maxlength=3 }
       codtipded:{ name: Dedicacion }
       codtipcat:{ name: Categoria del Profesor }
       destipgas:{ name: Tipo de Gasto }
       codtie:   { name: Tiempo }
+      codcen: { name: Centro de Costo}
 
     list:
       title:          Asignación de Cargos y Conceptos a Empleados
-      filters:        [codemp, codnom, nomemp, codcar]
+      filters:        [codemp, codnom, nomemp, codcar, codcen]
       display:        [=codemp, nomemp, codnom, nomnom, codcar, nomcar]
       object_actions:
         _edit:        ~
       max_per_page:  8
     edit:
       title:          Asignación de Cargos y Conceptos a Empleados
-      display:        [codemp, nomemp, codnom, nomnom, codcar, nomcar, paso, despaso, fecasi, codtipgas, destipgas, codcat, nomcat, codtipded, codtipcat, codtie]
+      display:        [codemp, nomemp, codnom, nomnom, codcar, nomcar, paso, despaso, fecasi, codtipgas, destipgas, codcat, nomcat, codtipded, codtipcat, codtie, codcen]
       actions:
         _list:          ~
         _save:          ~

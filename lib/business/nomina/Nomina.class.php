@@ -5825,6 +5825,7 @@ class Nomina {
 	  $r->setCodtipded($registro->getCodtipded());
 	  $r->setCodtipcat($registro->getCodtipcat());
 	  $r->setCodtie($registro->getCodtie());
+          $r->setCodcen($registro->getCodcen());
       $r->setUnieje(null);
       $r->setSueldo($sueldo);
       $r->setStatus('V');
@@ -5870,6 +5871,7 @@ class Nomina {
       $npasicaremp->setStatus('V');
       $npasicaremp->setCodtipgas($registro->getCodtipgas());
       $npasicaremp->setCodgrunom($registro->getCodgrunom());
+      $npasicaremp->setCodcen($registro->getCodcen());
       if ($grado != "") {
         $npasicaremp->setGrado($grado);
       }

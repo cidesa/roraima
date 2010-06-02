@@ -274,6 +274,38 @@
 </th>
 </tr>
 </table>
+
+<div id="divcencos" style="display:none">
+<br>
+<?php echo label_for('npasicaremp[codcen]', __($labels['npasicaremp{codcen}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('npasicaremp{codcen}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npasicaremp{codcen}')): ?>
+    <?php echo form_error('npasicaremp{codcen}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+<?php $value = object_input_tag($npasicaremp, 'getCodcen', array (
+  'size' => 20,
+  'control_name' => 'npasicaremp[codcen]',
+  'maxlength' => 4,
+  'readonly'  =>  $npasicaremp->getId()!='' ? true : false,
+  'onBlur'=> remote_function(array(
+       'url'      => 'nomasicarconnom/ajax',
+       'script'   => true,
+       'condition' => "$('npasicaremp_codcen').value != '' && $('id').value == ''",
+       'complete' => 'AjaxJSON(request, json)',
+       'with' => "'ajax=7&cajtexmos=npasicaremp_descen&cajtexcom=npasicaremp_codcen&codigo='+this.value"
+        ))
+)); echo $value ? $value : '&nbsp;' ?>
+
+&nbsp;
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Cadefcen_Almsolegr/clase/Cadefcen/frame/sf_admin_edit_form/obj1/npasicaremp_codcen/obj2/npasicaremp_descen/campo1/codcen/campo2/descen','','','botoncat')?>
+&nbsp;&nbsp;
+ <?php $value = object_input_tag($npasicaremp, 'getDescen', array (
+  'size' => 60,
+  'disabled' => true,
+  'control_name' => 'npasicaremp[descen]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+</div>
 </div>
 
 </fieldset>
@@ -329,5 +361,11 @@
     {
 	    $$('.botoncat')[0].disabled=true;
 	    $$('.botoncat')[1].disabled=true;
+            $$('.botoncat')[2].disabled=true;
+   }
+   var mancencos='<?php echo $npasicaremp->getMancencos(); ?>';
+   if (mancencos=='S')
+   {
+       $('divcencos').show();
    }
 </script>

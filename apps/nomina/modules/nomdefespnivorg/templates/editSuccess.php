@@ -15,8 +15,15 @@
 
 <div id="sf_admin_container">
 
-<h1><?php echo __('Edición de Niveles Organizacionales',
-array()) ?></h1>
+<h1>
+<?php if ($npestorg->getCambiareti()!="") {?>
+<?php echo __($npestorg->getCambiareti(),
+array()) ?>
+<?php }else {?>
+<?php echo __('Edición de Niveles Organizacionales',
+array()) ?>
+<?php }?>
+</h1>
 
 <div id="sf_admin_header">
 <?php include_partial('nomdefespnivorg/edit_header', array('npestorg' => $npestorg)) ?>
