@@ -38,7 +38,7 @@ class ViadetrelviaMapBuilder {
 
 		$tMap->addColumn('FECREL', 'Fecrel', 'int', CreoleTypes::DATE, false, null);
 
-		$tMap->addColumn('CODPRO', 'Codpro', 'string', CreoleTypes::VARCHAR, false, 16);
+		$tMap->addColumn('CODEMP', 'Codemp', 'string', CreoleTypes::VARCHAR, false, 16);
 
 		$tMap->addColumn('NUMFAC', 'Numfac', 'string', CreoleTypes::VARCHAR, false, 50);
 

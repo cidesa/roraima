@@ -98,12 +98,12 @@ class viacalviatraActions extends autoviacalviatraActions
         {
             $sql="select '1' as check, a.codrub,case when trim(a.tipo)='' then b.desrub else (select destiptra from viadeftiptra where codtiptra=a.tipo limit 1) end as desrub, numdia, mondia, montot, a.tipo, b.tipo as calculo
                     from viadetcalviatra a, viadefrub b
-                    where a.codrub=b.codrub
+                    where a.codrub=b.codrub and numcal='".$this->viacalviatra->getNumcal()."'
                     union all
                     select * from (
                     select null as check, a.codrub, a.desrub, 0,0,0,'',tipo
                     from viadefrub a
-                    where a.codrub not in (select codrub from viadetcalviatra where numcal='".$this->viacalviatra->getNumcal()."')
+                    where a.codrub not in (select codrub from viadetcalviatra where numcal='".$this->viacalviatra->getNumcal()."') and tiprub<>'2'
                     union all
                     select null as check, (select codrub from viadefrub where tiprub='2' limit 1), a.destiptra, 0,0,0,a.codtiptra,'C'
                     from viadeftiptra a
@@ -186,8 +186,8 @@ class viacalviatraActions extends autoviacalviatraActions
 
      $this->obj = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/viacalviatra/'.sfConfig::get('sf_app_module_config_dir_name').'/grid');
      #$this->obj[1][1]->setHtml('size=40 maxlength=250 onBlur="if($(id).value!=\'\')cambiardescripcion(this.id)"');
-     $this->obj[1][3]->setHtml('size=10 readonly=true onBlur="calculamontofinal(this.id,3);ValidarMontoGridv2(this.id);"');
-     $this->obj[1][4]->setHtml('size=10 readonly=true onBlur="calculamontofinal(this.id,4);ValidarMontoGridv2(this.id);"');
+     $this->obj[1][3]->setHtml('size=10 readonly=true onBlur="ValidarMontoGridv2(this.id);calculamontofinal(this.id,3);"');
+     $this->obj[1][4]->setHtml('size=10 readonly=true onBlur="ValidarMontoGridv2(this.id);calculamontofinal(this.id,4);"');
      $this->obj[1][0]->setHtml('size=5 onclick="Calculartotal();"');
 
      $this->obj = $this->obj[0]->getConfig($per);
@@ -236,6 +236,7 @@ class viacalviatraActions extends autoviacalviatraActions
                     $desniv = $obj->getDesniv();
                 $cedempaco = NphojintPeer::getCedemp($per->getCodempaco());
                 $nomempaco = NphojintPeer::getNomemp($per->getCodempaco());
+                $desnivaco = '';
                 $c = new Criteria();
                 $c->add(ViadefnivPeer::CODNIV,$per->getCodnivaco());
                 $obj= ViadefnivPeer::doSelectOne($c);

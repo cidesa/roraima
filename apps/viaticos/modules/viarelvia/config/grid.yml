@@ -8,16 +8,16 @@ opciones:                  # Opciones generales
   titulo:                  ' '
   htmltotalfilas:          ' '
 1:       # Columna 2
-  titulo:                  Código Proveedor
+  titulo:                  Código Empleado
   tipo:                    t
-  nombrecampo:             codpro
+  nombrecampo:             codemp
   esgrabable:              true
-  catalogo:                [opbenefi, sf_admin_edit_form, {Cedrif: 1, Nomben: 2}, Opbenefi_Pagemiord ]
+  catalogo:                [Nphojint, sf_admin_edit_form, {Codemp: 1, Nomemp: 2}, Nphojint_Nomfalperper ]
   html:                    [ size=10 ]
 2:       # Columna 3
   titulo:                  Descripcion
   tipo:                    t
-  nombrecampo:             nomben
+  nombrecampo:             nomemp
   esgrabable:              false
   html:                    [ readonly=true size=30 ]
 3:       # Columna 4
@@ -75,11 +75,5 @@ opciones:                  # Opciones generales
   tipo:                    t
   nombrecampo:             refsol
   esgrabable:              true
-  catalogo:                [viasolviatra, sf_admin_edit_form, {Numsol: 11, Empleado: 12}, Viacalviatra_numsolvia ]
+  catalogo:                [viasolviatra, sf_admin_edit_form, {Numsol: 11}, Viacalviatra_numsolvia ]
   html:                    [ ]
-12:       # Columna 12
-  titulo:                  Empleado
-  tipo:                    t
-  nombrecampo:             empleado
-  esgrabable:              true
-  html:                    [ readonly=true ]

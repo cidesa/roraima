@@ -21,4 +21,16 @@ class Viarelvia extends BaseViarelvia
     {
         return H::GetX('Tipcom','Cpdoccom','Nomext',$this->tipcom);
     }
+    public function getFecha()
+    {
+        return self::getFecrel();
+    }
+    public function getDescrip()
+    {
+        return self::getDesrel();
+    }
+    public function getCompromiso()
+    {
+        return $this->refcom ? 'COMPROMISO NRO '.$this->refcom : '';
+    }
 }

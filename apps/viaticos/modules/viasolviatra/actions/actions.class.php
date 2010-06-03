@@ -186,7 +186,7 @@ class viasolviatraActions extends autoviasolviatraActions
          if(count($auxfecd)==3 && count($auxfech)==3)
              if(strtotime($auxfecd[2].'-'.$auxfecd[1].'-'.$auxfecd[0]) && strtotime($auxfech[2].'-'.$auxfech[1].'-'.$auxfech[0]))
              {
-                $sql="select to_date('$fechas','dd/mm/yyyy')-to_date('$fecdes','dd/mm/yyyy') as dias";
+                $sql="select (to_date('$fechas','dd/mm/yyyy')-to_date('$fecdes','dd/mm/yyyy'))+1 as dias";
                 if(H::BuscarDatos($sql, $rs))
                   $numdia=$rs[0]['dias']      ;
              }

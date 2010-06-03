@@ -107,7 +107,7 @@ class viarelviaActions extends autoviarelviaActions
       }
       foreach($grid[0] as $reg)
       {
-        if($reg->getCodpro()=='')
+        if($reg->getCodemp()=='')
         {
             $this->coderr='V006';
             return false;

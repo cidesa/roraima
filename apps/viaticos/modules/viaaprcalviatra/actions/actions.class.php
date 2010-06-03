@@ -163,11 +163,16 @@ class viaaprcalviatraActions extends autoviaaprcalviatraActions
             $per = ViacalviatraPeer::doSelectOne($c);            
             if($per)
             {
+                #GENERAMOS COMPROMISO
+                Viaticos::GenerarCompromisov2($per,$dat->getMontot(),&$refcom);;
+                if($refcom)
+                {
+                    $per->setRefcom($refcom);
                 $per->setStatus('A');
                 $per->save();
-                #GENERAMOS COMPROMISO                
             }
         }
+    }
     }
 
     return '-1';

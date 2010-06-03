@@ -4,3 +4,9 @@
 <?php echo grid_tag_v2($viarelvia->getGrid()); ?>
 
 </div>
+<script language="Javascript">
+    if('<?php echo $viarelvia->getRefcom()?>'=='')
+    {
+        $('divcompromiso').hide();
+    }
+</script>

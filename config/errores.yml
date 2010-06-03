@@ -1651,3 +1651,6 @@ V005:
 V006:
   cod: V006
   msj: Faltan datos en el Grid
+V007:
+  cod: V007
+  msj: Hay errores al formar el codigo de la imputacion, verifique la categoria del empleado o las partidas de los rubros

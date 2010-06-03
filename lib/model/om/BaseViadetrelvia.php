@@ -17,7 +17,7 @@ abstract class BaseViadetrelvia extends BaseObject  implements Persistent {
 
 
 	
-	protected $codpro;
+	protected $codemp;
 
 
 	
@@ -87,10 +87,10 @@ abstract class BaseViadetrelvia extends BaseObject  implements Persistent {
   }
 
   
-  public function getCodpro()
+  public function getCodemp()
   {
 
-    return trim($this->codpro);
+    return trim($this->codemp);
 
   }
   
@@ -199,12 +199,12 @@ abstract class BaseViadetrelvia extends BaseObject  implements Persistent {
 
 	} 
 	
-	public function setCodpro($v)
+	public function setCodemp($v)
 	{
 
-    if ($this->codpro !== $v) {
-        $this->codpro = $v;
-        $this->modifiedColumns[] = ViadetrelviaPeer::CODPRO;
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = ViadetrelviaPeer::CODEMP;
       }
   
 	} 
@@ -309,7 +309,7 @@ abstract class BaseViadetrelvia extends BaseObject  implements Persistent {
 
       $this->fecrel = $rs->getDate($startcol + 1, null);
 
-      $this->codpro = $rs->getString($startcol + 2);
+      $this->codemp = $rs->getString($startcol + 2);
 
       $this->numfac = $rs->getString($startcol + 3);
 
@@ -487,7 +487,7 @@ abstract class BaseViadetrelvia extends BaseObject  implements Persistent {
 				return $this->getFecrel();
 				break;
 			case 2:
-				return $this->getCodpro();
+				return $this->getCodemp();
 				break;
 			case 3:
 				return $this->getNumfac();
@@ -525,7 +525,7 @@ abstract class BaseViadetrelvia extends BaseObject  implements Persistent {
 		$result = array(
 			$keys[0] => $this->getNumrel(),
 			$keys[1] => $this->getFecrel(),
-			$keys[2] => $this->getCodpro(),
+			$keys[2] => $this->getCodemp(),
 			$keys[3] => $this->getNumfac(),
 			$keys[4] => $this->getFecfac(),
 			$keys[5] => $this->getMontonet(),
@@ -556,7 +556,7 @@ abstract class BaseViadetrelvia extends BaseObject  implements Persistent {
 				$this->setFecrel($value);
 				break;
 			case 2:
-				$this->setCodpro($value);
+				$this->setCodemp($value);
 				break;
 			case 3:
 				$this->setNumfac($value);
@@ -591,7 +591,7 @@ abstract class BaseViadetrelvia extends BaseObject  implements Persistent {
 
 		if (array_key_exists($keys[0], $arr)) $this->setNumrel($arr[$keys[0]]);
 		if (array_key_exists($keys[1], $arr)) $this->setFecrel($arr[$keys[1]]);
-		if (array_key_exists($keys[2], $arr)) $this->setCodpro($arr[$keys[2]]);
+		if (array_key_exists($keys[2], $arr)) $this->setCodemp($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setNumfac($arr[$keys[3]]);
 		if (array_key_exists($keys[4], $arr)) $this->setFecfac($arr[$keys[4]]);
 		if (array_key_exists($keys[5], $arr)) $this->setMontonet($arr[$keys[5]]);
@@ -609,7 +609,7 @@ abstract class BaseViadetrelvia extends BaseObject  implements Persistent {
 
 		if ($this->isColumnModified(ViadetrelviaPeer::NUMREL)) $criteria->add(ViadetrelviaPeer::NUMREL, $this->numrel);
 		if ($this->isColumnModified(ViadetrelviaPeer::FECREL)) $criteria->add(ViadetrelviaPeer::FECREL, $this->fecrel);
-		if ($this->isColumnModified(ViadetrelviaPeer::CODPRO)) $criteria->add(ViadetrelviaPeer::CODPRO, $this->codpro);
+		if ($this->isColumnModified(ViadetrelviaPeer::CODEMP)) $criteria->add(ViadetrelviaPeer::CODEMP, $this->codemp);
 		if ($this->isColumnModified(ViadetrelviaPeer::NUMFAC)) $criteria->add(ViadetrelviaPeer::NUMFAC, $this->numfac);
 		if ($this->isColumnModified(ViadetrelviaPeer::FECFAC)) $criteria->add(ViadetrelviaPeer::FECFAC, $this->fecfac);
 		if ($this->isColumnModified(ViadetrelviaPeer::MONTONET)) $criteria->add(ViadetrelviaPeer::MONTONET, $this->montonet);
@@ -652,7 +652,7 @@ abstract class BaseViadetrelvia extends BaseObject  implements Persistent {
 
 		$copyObj->setFecrel($this->fecrel);
 
-		$copyObj->setCodpro($this->codpro);
+		$copyObj->setCodemp($this->codemp);
 
 		$copyObj->setNumfac($this->numfac);
 

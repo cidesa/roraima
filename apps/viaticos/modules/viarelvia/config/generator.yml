@@ -17,6 +17,7 @@ generator:
       desrel:         { name: Descripción }
       grid:           { name: .}
       js:             { name: .}
+      compromiso:     { name: ., params: size=100 style="border:none;text-align:center;color:red;font-size:medium;font-weight:bold"}
 
     list:
       title:          Listado de Relaciones de Gastos Adicionales
@@ -27,7 +28,7 @@ generator:
     edit:             
       title:          Edición de Relaciones de Gastos Adicionales
       display:
-        Datos Generales de la Relación:     [numrel, fecrel, tipcom, desrel]
+        Datos Generales de la Relación:     [compromiso, numrel, fecrel, tipcom, desrel]
         Detalle de la Relación:             [_grid, _js]
       actions:
         _list:        ~

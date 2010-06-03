@@ -13,7 +13,7 @@ abstract class BaseViacalviatraPeer {
 	const CLASS_DEFAULT = 'lib.model.Viacalviatra';
 
 	
-	const NUM_COLUMNS = 10;
+	const NUM_COLUMNS = 11;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -47,6 +47,9 @@ abstract class BaseViacalviatraPeer {
 	const OBSERVACIONES = 'viacalviatra.OBSERVACIONES';
 
 	
+	const REFCOM = 'viacalviatra.REFCOM';
+
+	
 	const ID = 'viacalviatra.ID';
 
 	
@@ -55,18 +58,18 @@ abstract class BaseViacalviatraPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Numcal', 'Feccal', 'Tipcom', 'Refsol', 'Codcat', 'Diaconper', 'Diasinper', 'Status', 'Observaciones', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (ViacalviatraPeer::NUMCAL, ViacalviatraPeer::FECCAL, ViacalviatraPeer::TIPCOM, ViacalviatraPeer::REFSOL, ViacalviatraPeer::CODCAT, ViacalviatraPeer::DIACONPER, ViacalviatraPeer::DIASINPER, ViacalviatraPeer::STATUS, ViacalviatraPeer::OBSERVACIONES, ViacalviatraPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('numcal', 'feccal', 'tipcom', 'refsol', 'codcat', 'diaconper', 'diasinper', 'status', 'observaciones', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
+		BasePeer::TYPE_PHPNAME => array ('Numcal', 'Feccal', 'Tipcom', 'Refsol', 'Codcat', 'Diaconper', 'Diasinper', 'Status', 'Observaciones', 'Refcom', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (ViacalviatraPeer::NUMCAL, ViacalviatraPeer::FECCAL, ViacalviatraPeer::TIPCOM, ViacalviatraPeer::REFSOL, ViacalviatraPeer::CODCAT, ViacalviatraPeer::DIACONPER, ViacalviatraPeer::DIASINPER, ViacalviatraPeer::STATUS, ViacalviatraPeer::OBSERVACIONES, ViacalviatraPeer::REFCOM, ViacalviatraPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('numcal', 'feccal', 'tipcom', 'refsol', 'codcat', 'diaconper', 'diasinper', 'status', 'observaciones', 'refcom', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Numcal' => 0, 'Feccal' => 1, 'Tipcom' => 2, 'Refsol' => 3, 'Codcat' => 4, 'Diaconper' => 5, 'Diasinper' => 6, 'Status' => 7, 'Observaciones' => 8, 'Id' => 9, ),
-		BasePeer::TYPE_COLNAME => array (ViacalviatraPeer::NUMCAL => 0, ViacalviatraPeer::FECCAL => 1, ViacalviatraPeer::TIPCOM => 2, ViacalviatraPeer::REFSOL => 3, ViacalviatraPeer::CODCAT => 4, ViacalviatraPeer::DIACONPER => 5, ViacalviatraPeer::DIASINPER => 6, ViacalviatraPeer::STATUS => 7, ViacalviatraPeer::OBSERVACIONES => 8, ViacalviatraPeer::ID => 9, ),
-		BasePeer::TYPE_FIELDNAME => array ('numcal' => 0, 'feccal' => 1, 'tipcom' => 2, 'refsol' => 3, 'codcat' => 4, 'diaconper' => 5, 'diasinper' => 6, 'status' => 7, 'observaciones' => 8, 'id' => 9, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
+		BasePeer::TYPE_PHPNAME => array ('Numcal' => 0, 'Feccal' => 1, 'Tipcom' => 2, 'Refsol' => 3, 'Codcat' => 4, 'Diaconper' => 5, 'Diasinper' => 6, 'Status' => 7, 'Observaciones' => 8, 'Refcom' => 9, 'Id' => 10, ),
+		BasePeer::TYPE_COLNAME => array (ViacalviatraPeer::NUMCAL => 0, ViacalviatraPeer::FECCAL => 1, ViacalviatraPeer::TIPCOM => 2, ViacalviatraPeer::REFSOL => 3, ViacalviatraPeer::CODCAT => 4, ViacalviatraPeer::DIACONPER => 5, ViacalviatraPeer::DIASINPER => 6, ViacalviatraPeer::STATUS => 7, ViacalviatraPeer::OBSERVACIONES => 8, ViacalviatraPeer::REFCOM => 9, ViacalviatraPeer::ID => 10, ),
+		BasePeer::TYPE_FIELDNAME => array ('numcal' => 0, 'feccal' => 1, 'tipcom' => 2, 'refsol' => 3, 'codcat' => 4, 'diaconper' => 5, 'diasinper' => 6, 'status' => 7, 'observaciones' => 8, 'refcom' => 9, 'id' => 10, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
 	);
 
 	
@@ -137,6 +140,8 @@ abstract class BaseViacalviatraPeer {
 		$criteria->addSelectColumn(ViacalviatraPeer::STATUS);
 
 		$criteria->addSelectColumn(ViacalviatraPeer::OBSERVACIONES);
+
+		$criteria->addSelectColumn(ViacalviatraPeer::REFCOM);
 
 		$criteria->addSelectColumn(ViacalviatraPeer::ID);
 
