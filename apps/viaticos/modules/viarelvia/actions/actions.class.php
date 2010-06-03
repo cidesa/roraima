@@ -193,6 +193,8 @@ class viarelviaActions extends autoviarelviaActions
     $arrget=array('Numrel','Fecrel');
     H::Guardar_Grid($grid, $arrget, $clasemodelo);
     #GENERA COMPROMISO
+    Viaticos::GenerarCompromisoviarelvia($clasemodelo, $grid, &$refcom);
+    $clasemodelo->setRefcom($refcom);
     return parent::saving($clasemodelo);
   }
 
