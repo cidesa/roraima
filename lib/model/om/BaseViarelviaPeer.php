@@ -13,7 +13,7 @@ abstract class BaseViarelviaPeer {
 	const CLASS_DEFAULT = 'lib.model.Viarelvia';
 
 	
-	const NUM_COLUMNS = 5;
+	const NUM_COLUMNS = 6;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -32,6 +32,9 @@ abstract class BaseViarelviaPeer {
 	const DESREL = 'viarelvia.DESREL';
 
 	
+	const REFCOM = 'viarelvia.REFCOM';
+
+	
 	const ID = 'viarelvia.ID';
 
 	
@@ -40,18 +43,18 @@ abstract class BaseViarelviaPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Numrel', 'Fecrel', 'Tipcom', 'Desrel', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (ViarelviaPeer::NUMREL, ViarelviaPeer::FECREL, ViarelviaPeer::TIPCOM, ViarelviaPeer::DESREL, ViarelviaPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('numrel', 'fecrel', 'tipcom', 'desrel', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
+		BasePeer::TYPE_PHPNAME => array ('Numrel', 'Fecrel', 'Tipcom', 'Desrel', 'Refcom', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (ViarelviaPeer::NUMREL, ViarelviaPeer::FECREL, ViarelviaPeer::TIPCOM, ViarelviaPeer::DESREL, ViarelviaPeer::REFCOM, ViarelviaPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('numrel', 'fecrel', 'tipcom', 'desrel', 'refcom', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Numrel' => 0, 'Fecrel' => 1, 'Tipcom' => 2, 'Desrel' => 3, 'Id' => 4, ),
-		BasePeer::TYPE_COLNAME => array (ViarelviaPeer::NUMREL => 0, ViarelviaPeer::FECREL => 1, ViarelviaPeer::TIPCOM => 2, ViarelviaPeer::DESREL => 3, ViarelviaPeer::ID => 4, ),
-		BasePeer::TYPE_FIELDNAME => array ('numrel' => 0, 'fecrel' => 1, 'tipcom' => 2, 'desrel' => 3, 'id' => 4, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
+		BasePeer::TYPE_PHPNAME => array ('Numrel' => 0, 'Fecrel' => 1, 'Tipcom' => 2, 'Desrel' => 3, 'Refcom' => 4, 'Id' => 5, ),
+		BasePeer::TYPE_COLNAME => array (ViarelviaPeer::NUMREL => 0, ViarelviaPeer::FECREL => 1, ViarelviaPeer::TIPCOM => 2, ViarelviaPeer::DESREL => 3, ViarelviaPeer::REFCOM => 4, ViarelviaPeer::ID => 5, ),
+		BasePeer::TYPE_FIELDNAME => array ('numrel' => 0, 'fecrel' => 1, 'tipcom' => 2, 'desrel' => 3, 'refcom' => 4, 'id' => 5, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
 	);
 
 	
@@ -112,6 +115,8 @@ abstract class BaseViarelviaPeer {
 		$criteria->addSelectColumn(ViarelviaPeer::TIPCOM);
 
 		$criteria->addSelectColumn(ViarelviaPeer::DESREL);
+
+		$criteria->addSelectColumn(ViarelviaPeer::REFCOM);
 
 		$criteria->addSelectColumn(ViarelviaPeer::ID);
 

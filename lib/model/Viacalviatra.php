@@ -126,5 +126,21 @@ class Viacalviatra extends BaseViacalviatra
         }
         return H::FormatoMonto($monto);
     }
+    public function getFecha()
+    {
+        return self::getFeccal();
+    }
+    public function getDescrip()
+    {
+        return H::GetX('Numsol','Viasolviatra','Dessol',$this->refsol);
+    }
+    public function getCodemp()
+    {
+        return H::getX('Numsol','Viasolviatra','Codemp',$this->refsol);
+    }
+    public function getCompromiso()
+    {
+        return $this->refcom ? 'COMPROMISO NRO '.$this->refcom : '';
+    }
 
 }

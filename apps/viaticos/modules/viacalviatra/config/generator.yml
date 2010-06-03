@@ -51,6 +51,7 @@ generator:
       empleadoaut:      { name: Empleado que Autoriza, params: style="border:none" size=80}
       totvia:           { name: Total Viaticos, params: style="border:none"  readonly=true}
       totviaenletras:   { name:  En Letras , type: textarea_tag, params: cols=65 style="border:none" readonly=true}
+      compromiso:       { name: ., params: size=100 style="border:none;text-align:center;color:red;font-size:medium;font-weight:bold"}
       
 
     list:
@@ -62,7 +63,7 @@ generator:
     edit:
       title:            Edición de Calculo de Viaticos
       display:
-        Datos Básicos del Calculo de Viaticos:     [numcal, feccal, tipcom, refsol, fecsol, tipvia, empleado, nivel, empleadoaco, nivelaco, proced, fortra, fecdes, fechas, numdia, empleadoaut, dessol, codcat, diaconper, diasinper, observaciones]
+        Datos Básicos del Calculo de Viaticos:     [compromiso, numcal, feccal, tipcom, refsol, fecsol, tipvia, empleado, nivel, empleadoaco, nivelaco, proced, fortra, fecdes, fechas, numdia, empleadoaut, dessol, codcat, diaconper, diasinper, observaciones]
         Datos Detalle del Calculo:                 [_grid, totvia, totviaenletras, _js]
       actions:
         _list:        ~

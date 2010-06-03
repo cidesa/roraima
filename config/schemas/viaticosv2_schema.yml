@@ -249,6 +249,9 @@ propel:
     observaciones:
       type: VARCHAR
       size: 250
+    refcom:
+      type: VARCHAR
+      size: 8
     id:
       type: INTEGER
       required: true
@@ -295,6 +298,9 @@ propel:
     desrel:
       type: VARCHAR
       size: 250
+    refcom:
+      type: VARCHAR
+      size: 8
     id:
       type: INTEGER
       required: true
@@ -307,7 +313,7 @@ propel:
       size: 10
     fecrel:
       type: DATE
-    codpro:
+    codemp:
       type: VARCHAR
       size: 16
     numfac:

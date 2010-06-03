@@ -25,6 +25,10 @@ abstract class BaseViarelvia extends BaseObject  implements Persistent {
 
 
 	
+	protected $refcom;
+
+
+	
 	protected $id;
 
 	
@@ -74,6 +78,13 @@ abstract class BaseViarelvia extends BaseObject  implements Persistent {
   {
 
     return trim($this->desrel);
+
+  }
+  
+  public function getRefcom()
+  {
+
+    return trim($this->refcom);
 
   }
   
@@ -136,6 +147,16 @@ abstract class BaseViarelvia extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setRefcom($v)
+	{
+
+    if ($this->refcom !== $v) {
+        $this->refcom = $v;
+        $this->modifiedColumns[] = ViarelviaPeer::REFCOM;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -158,7 +179,9 @@ abstract class BaseViarelvia extends BaseObject  implements Persistent {
 
       $this->desrel = $rs->getString($startcol + 3);
 
-      $this->id = $rs->getInt($startcol + 4);
+      $this->refcom = $rs->getString($startcol + 4);
+
+      $this->id = $rs->getInt($startcol + 5);
 
       $this->resetModified();
 
@@ -166,7 +189,7 @@ abstract class BaseViarelvia extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 5; 
+            return $startcol + 6; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Viarelvia object", $e);
     }
@@ -326,6 +349,9 @@ abstract class BaseViarelvia extends BaseObject  implements Persistent {
 				return $this->getDesrel();
 				break;
 			case 4:
+				return $this->getRefcom();
+				break;
+			case 5:
 				return $this->getId();
 				break;
 			default:
@@ -342,7 +368,8 @@ abstract class BaseViarelvia extends BaseObject  implements Persistent {
 			$keys[1] => $this->getFecrel(),
 			$keys[2] => $this->getTipcom(),
 			$keys[3] => $this->getDesrel(),
-			$keys[4] => $this->getId(),
+			$keys[4] => $this->getRefcom(),
+			$keys[5] => $this->getId(),
 		);
 		return $result;
 	}
@@ -371,6 +398,9 @@ abstract class BaseViarelvia extends BaseObject  implements Persistent {
 				$this->setDesrel($value);
 				break;
 			case 4:
+				$this->setRefcom($value);
+				break;
+			case 5:
 				$this->setId($value);
 				break;
 		} 	}
@@ -384,7 +414,8 @@ abstract class BaseViarelvia extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[1], $arr)) $this->setFecrel($arr[$keys[1]]);
 		if (array_key_exists($keys[2], $arr)) $this->setTipcom($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setDesrel($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setId($arr[$keys[4]]);
+		if (array_key_exists($keys[4], $arr)) $this->setRefcom($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setId($arr[$keys[5]]);
 	}
 
 	
@@ -396,6 +427,7 @@ abstract class BaseViarelvia extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(ViarelviaPeer::FECREL)) $criteria->add(ViarelviaPeer::FECREL, $this->fecrel);
 		if ($this->isColumnModified(ViarelviaPeer::TIPCOM)) $criteria->add(ViarelviaPeer::TIPCOM, $this->tipcom);
 		if ($this->isColumnModified(ViarelviaPeer::DESREL)) $criteria->add(ViarelviaPeer::DESREL, $this->desrel);
+		if ($this->isColumnModified(ViarelviaPeer::REFCOM)) $criteria->add(ViarelviaPeer::REFCOM, $this->refcom);
 		if ($this->isColumnModified(ViarelviaPeer::ID)) $criteria->add(ViarelviaPeer::ID, $this->id);
 
 		return $criteria;
@@ -434,6 +466,8 @@ abstract class BaseViarelvia extends BaseObject  implements Persistent {
 		$copyObj->setTipcom($this->tipcom);
 
 		$copyObj->setDesrel($this->desrel);
+
+		$copyObj->setRefcom($this->refcom);
 
 
 		$copyObj->setNew(true);

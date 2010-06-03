@@ -26,7 +26,7 @@ abstract class BaseViadetrelviaPeer {
 	const FECREL = 'viadetrelvia.FECREL';
 
 	
-	const CODPRO = 'viadetrelvia.CODPRO';
+	const CODEMP = 'viadetrelvia.CODEMP';
 
 	
 	const NUMFAC = 'viadetrelvia.NUMFAC';
@@ -58,17 +58,17 @@ abstract class BaseViadetrelviaPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Numrel', 'Fecrel', 'Codpro', 'Numfac', 'Fecfac', 'Montonet', 'Montorec', 'Codcat', 'Codpar', 'Refsol', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (ViadetrelviaPeer::NUMREL, ViadetrelviaPeer::FECREL, ViadetrelviaPeer::CODPRO, ViadetrelviaPeer::NUMFAC, ViadetrelviaPeer::FECFAC, ViadetrelviaPeer::MONTONET, ViadetrelviaPeer::MONTOREC, ViadetrelviaPeer::CODCAT, ViadetrelviaPeer::CODPAR, ViadetrelviaPeer::REFSOL, ViadetrelviaPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('numrel', 'fecrel', 'codpro', 'numfac', 'fecfac', 'montonet', 'montorec', 'codcat', 'codpar', 'refsol', 'id', ),
+		BasePeer::TYPE_PHPNAME => array ('Numrel', 'Fecrel', 'Codemp', 'Numfac', 'Fecfac', 'Montonet', 'Montorec', 'Codcat', 'Codpar', 'Refsol', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (ViadetrelviaPeer::NUMREL, ViadetrelviaPeer::FECREL, ViadetrelviaPeer::CODEMP, ViadetrelviaPeer::NUMFAC, ViadetrelviaPeer::FECFAC, ViadetrelviaPeer::MONTONET, ViadetrelviaPeer::MONTOREC, ViadetrelviaPeer::CODCAT, ViadetrelviaPeer::CODPAR, ViadetrelviaPeer::REFSOL, ViadetrelviaPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('numrel', 'fecrel', 'codemp', 'numfac', 'fecfac', 'montonet', 'montorec', 'codcat', 'codpar', 'refsol', 'id', ),
 		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Numrel' => 0, 'Fecrel' => 1, 'Codpro' => 2, 'Numfac' => 3, 'Fecfac' => 4, 'Montonet' => 5, 'Montorec' => 6, 'Codcat' => 7, 'Codpar' => 8, 'Refsol' => 9, 'Id' => 10, ),
-		BasePeer::TYPE_COLNAME => array (ViadetrelviaPeer::NUMREL => 0, ViadetrelviaPeer::FECREL => 1, ViadetrelviaPeer::CODPRO => 2, ViadetrelviaPeer::NUMFAC => 3, ViadetrelviaPeer::FECFAC => 4, ViadetrelviaPeer::MONTONET => 5, ViadetrelviaPeer::MONTOREC => 6, ViadetrelviaPeer::CODCAT => 7, ViadetrelviaPeer::CODPAR => 8, ViadetrelviaPeer::REFSOL => 9, ViadetrelviaPeer::ID => 10, ),
-		BasePeer::TYPE_FIELDNAME => array ('numrel' => 0, 'fecrel' => 1, 'codpro' => 2, 'numfac' => 3, 'fecfac' => 4, 'montonet' => 5, 'montorec' => 6, 'codcat' => 7, 'codpar' => 8, 'refsol' => 9, 'id' => 10, ),
+		BasePeer::TYPE_PHPNAME => array ('Numrel' => 0, 'Fecrel' => 1, 'Codemp' => 2, 'Numfac' => 3, 'Fecfac' => 4, 'Montonet' => 5, 'Montorec' => 6, 'Codcat' => 7, 'Codpar' => 8, 'Refsol' => 9, 'Id' => 10, ),
+		BasePeer::TYPE_COLNAME => array (ViadetrelviaPeer::NUMREL => 0, ViadetrelviaPeer::FECREL => 1, ViadetrelviaPeer::CODEMP => 2, ViadetrelviaPeer::NUMFAC => 3, ViadetrelviaPeer::FECFAC => 4, ViadetrelviaPeer::MONTONET => 5, ViadetrelviaPeer::MONTOREC => 6, ViadetrelviaPeer::CODCAT => 7, ViadetrelviaPeer::CODPAR => 8, ViadetrelviaPeer::REFSOL => 9, ViadetrelviaPeer::ID => 10, ),
+		BasePeer::TYPE_FIELDNAME => array ('numrel' => 0, 'fecrel' => 1, 'codemp' => 2, 'numfac' => 3, 'fecfac' => 4, 'montonet' => 5, 'montorec' => 6, 'codcat' => 7, 'codpar' => 8, 'refsol' => 9, 'id' => 10, ),
 		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
 	);
 
@@ -127,7 +127,7 @@ abstract class BaseViadetrelviaPeer {
 
 		$criteria->addSelectColumn(ViadetrelviaPeer::FECREL);
 
-		$criteria->addSelectColumn(ViadetrelviaPeer::CODPRO);
+		$criteria->addSelectColumn(ViadetrelviaPeer::CODEMP);
 
 		$criteria->addSelectColumn(ViadetrelviaPeer::NUMFAC);
 

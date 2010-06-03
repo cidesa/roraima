@@ -15,9 +15,9 @@
  */ 
 class Viadetrelvia extends BaseViadetrelvia
 {
-    public function getNomben()
+    public function getNomemp()
     {
-        return H::GetX('Cedrif','Opbenefi','Nomben',$this->codpro);
+        return H::GetX('Codemp','Nphojint','Nomemp',$this->codemp);
     }
     public function getNomcat()
     {
@@ -26,11 +26,5 @@ class Viadetrelvia extends BaseViadetrelvia
     public function getNompar()
     {
         return H::GetX('Codpar','Nppartidas','Nompar',$this->codpar);
-    }
-    public function getEmpleado()
-    {
-        $codemp=H::getX('Numsol','Viasolviatra','codemp',$this->refsol);
-        $nomemp=H::getX('Codemp','Nphojint','Nomemp',$codemp);
-        return  $codemp!='' ? $codemp.'  -  '.$nomemp : '';
-    }
+    }    
 }

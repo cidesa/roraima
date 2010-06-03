@@ -16,4 +16,9 @@
 class Viadetcalviatra extends BaseViadetcalviatra
 {
     protected $check=0;
+
+    public function getPartida()
+    {
+        return H::GetX('Codrub','Viadefrub','Codpar',$this->codrub);
+    }
 }

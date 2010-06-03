@@ -45,6 +45,10 @@ abstract class BaseViacalviatra extends BaseObject  implements Persistent {
 
 
 	
+	protected $refcom;
+
+
+	
 	protected $id;
 
 	
@@ -129,6 +133,13 @@ abstract class BaseViacalviatra extends BaseObject  implements Persistent {
   {
 
     return trim($this->observaciones);
+
+  }
+  
+  public function getRefcom()
+  {
+
+    return trim($this->refcom);
 
   }
   
@@ -241,6 +252,16 @@ abstract class BaseViacalviatra extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setRefcom($v)
+	{
+
+    if ($this->refcom !== $v) {
+        $this->refcom = $v;
+        $this->modifiedColumns[] = ViacalviatraPeer::REFCOM;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -273,7 +294,9 @@ abstract class BaseViacalviatra extends BaseObject  implements Persistent {
 
       $this->observaciones = $rs->getString($startcol + 8);
 
-      $this->id = $rs->getInt($startcol + 9);
+      $this->refcom = $rs->getString($startcol + 9);
+
+      $this->id = $rs->getInt($startcol + 10);
 
       $this->resetModified();
 
@@ -281,7 +304,7 @@ abstract class BaseViacalviatra extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 10; 
+            return $startcol + 11; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Viacalviatra object", $e);
     }
@@ -456,6 +479,9 @@ abstract class BaseViacalviatra extends BaseObject  implements Persistent {
 				return $this->getObservaciones();
 				break;
 			case 9:
+				return $this->getRefcom();
+				break;
+			case 10:
 				return $this->getId();
 				break;
 			default:
@@ -477,7 +503,8 @@ abstract class BaseViacalviatra extends BaseObject  implements Persistent {
 			$keys[6] => $this->getDiasinper(),
 			$keys[7] => $this->getStatus(),
 			$keys[8] => $this->getObservaciones(),
-			$keys[9] => $this->getId(),
+			$keys[9] => $this->getRefcom(),
+			$keys[10] => $this->getId(),
 		);
 		return $result;
 	}
@@ -521,6 +548,9 @@ abstract class BaseViacalviatra extends BaseObject  implements Persistent {
 				$this->setObservaciones($value);
 				break;
 			case 9:
+				$this->setRefcom($value);
+				break;
+			case 10:
 				$this->setId($value);
 				break;
 		} 	}
@@ -539,7 +569,8 @@ abstract class BaseViacalviatra extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[6], $arr)) $this->setDiasinper($arr[$keys[6]]);
 		if (array_key_exists($keys[7], $arr)) $this->setStatus($arr[$keys[7]]);
 		if (array_key_exists($keys[8], $arr)) $this->setObservaciones($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setId($arr[$keys[9]]);
+		if (array_key_exists($keys[9], $arr)) $this->setRefcom($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setId($arr[$keys[10]]);
 	}
 
 	
@@ -556,6 +587,7 @@ abstract class BaseViacalviatra extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(ViacalviatraPeer::DIASINPER)) $criteria->add(ViacalviatraPeer::DIASINPER, $this->diasinper);
 		if ($this->isColumnModified(ViacalviatraPeer::STATUS)) $criteria->add(ViacalviatraPeer::STATUS, $this->status);
 		if ($this->isColumnModified(ViacalviatraPeer::OBSERVACIONES)) $criteria->add(ViacalviatraPeer::OBSERVACIONES, $this->observaciones);
+		if ($this->isColumnModified(ViacalviatraPeer::REFCOM)) $criteria->add(ViacalviatraPeer::REFCOM, $this->refcom);
 		if ($this->isColumnModified(ViacalviatraPeer::ID)) $criteria->add(ViacalviatraPeer::ID, $this->id);
 
 		return $criteria;
@@ -604,6 +636,8 @@ abstract class BaseViacalviatra extends BaseObject  implements Persistent {
 		$copyObj->setStatus($this->status);
 
 		$copyObj->setObservaciones($this->observaciones);
+
+		$copyObj->setRefcom($this->refcom);
 
 
 		$copyObj->setNew(true);
