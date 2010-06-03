@@ -85,8 +85,24 @@ generator:
       nivelaco:            { name: Nivel Organizacional, params: style="border:none" size=80}
       cedempaut:           { name: Cedula, params: style="border:none"}
       nivelaut:            { name: Nivel Organizacional, params: style="border:none" size=80}
+      codest:
+        name: Estado
+        msj_error: El Código es necesario
+        catalogo:
+          catalogoweb: viaestado_codest
+          clase: Viaestado
+          ajax: 6
+          parametros: getprincipal="getCodest" getsecundario="getNomest" campoprincipal="codest" camposecundario="nomest" campobase = "id"
+      codciu:
+        name: Ciudad
+        msj_error: El Código es necesario
+        catalogo:
+          catalogoweb: viaciudad_codciu
+          clase: Viaciudad
+          ajax: 0
+          parametros: getprincipal="getCodciu" getsecundario="getNomciu" campoprincipal="codciu" camposecundario="nomciu" campobase = "id"
+          catalogoparams: /param1/'."'+$('viasolviatra_codest').value+'".'
       
-
 
     list:
       title:        Listado de Solicitudes de Viaticos
@@ -99,7 +115,7 @@ generator:
       display:
         Datos Generales de la Solicitud:      [numsol, fecsol, _ptipvia, dessol]
         Datos Empleado Solicitante:           [codemp, cedemp, cargo, nivel, codcat, codniv, codempaco, cedempaco, cargoaco, nivelaco, codnivaco]
-        Detalle de la Solicitd:               [codproced, fecdes, fechas, numdia, codfortra, codempaut, cedempaut, nivelaut, _js]
+        Detalle de la Solicitd:               [codest, codciu, codproced, fecdes, fechas, numdia, codfortra, codempaut, cedempaut, nivelaut, _js]
       actions:
         _list:        ~
         _save:        ~

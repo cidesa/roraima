@@ -45,7 +45,7 @@ abstract class BaseViasolviatra extends BaseObject  implements Persistent {
 
 
 	
-	protected $codest;
+	protected $codciu;
 
 
 	
@@ -168,10 +168,10 @@ abstract class BaseViasolviatra extends BaseObject  implements Persistent {
 
   }
   
-  public function getCodest()
+  public function getCodciu()
   {
 
-    return trim($this->codest);
+    return trim($this->codciu);
 
   }
   
@@ -370,12 +370,12 @@ abstract class BaseViasolviatra extends BaseObject  implements Persistent {
   
 	} 
 	
-	public function setCodest($v)
+	public function setCodciu($v)
 	{
 
-    if ($this->codest !== $v) {
-        $this->codest = $v;
-        $this->modifiedColumns[] = ViasolviatraPeer::CODEST;
+    if ($this->codciu !== $v) {
+        $this->codciu = $v;
+        $this->modifiedColumns[] = ViasolviatraPeer::CODCIU;
       }
   
 	} 
@@ -516,7 +516,7 @@ abstract class BaseViasolviatra extends BaseObject  implements Persistent {
 
       $this->dessol = $rs->getString($startcol + 8);
 
-      $this->codest = $rs->getString($startcol + 9);
+      $this->codciu = $rs->getString($startcol + 9);
 
       $this->codnivapr = $rs->getString($startcol + 10);
 
@@ -717,7 +717,7 @@ abstract class BaseViasolviatra extends BaseObject  implements Persistent {
 				return $this->getDessol();
 				break;
 			case 9:
-				return $this->getCodest();
+				return $this->getCodciu();
 				break;
 			case 10:
 				return $this->getCodnivapr();
@@ -765,7 +765,7 @@ abstract class BaseViasolviatra extends BaseObject  implements Persistent {
 			$keys[6] => $this->getCodempaco(),
 			$keys[7] => $this->getCodnivaco(),
 			$keys[8] => $this->getDessol(),
-			$keys[9] => $this->getCodest(),
+			$keys[9] => $this->getCodciu(),
 			$keys[10] => $this->getCodnivapr(),
 			$keys[11] => $this->getCodproced(),
 			$keys[12] => $this->getStatus(),
@@ -818,7 +818,7 @@ abstract class BaseViasolviatra extends BaseObject  implements Persistent {
 				$this->setDessol($value);
 				break;
 			case 9:
-				$this->setCodest($value);
+				$this->setCodciu($value);
 				break;
 			case 10:
 				$this->setCodnivapr($value);
@@ -863,7 +863,7 @@ abstract class BaseViasolviatra extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[6], $arr)) $this->setCodempaco($arr[$keys[6]]);
 		if (array_key_exists($keys[7], $arr)) $this->setCodnivaco($arr[$keys[7]]);
 		if (array_key_exists($keys[8], $arr)) $this->setDessol($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setCodest($arr[$keys[9]]);
+		if (array_key_exists($keys[9], $arr)) $this->setCodciu($arr[$keys[9]]);
 		if (array_key_exists($keys[10], $arr)) $this->setCodnivapr($arr[$keys[10]]);
 		if (array_key_exists($keys[11], $arr)) $this->setCodproced($arr[$keys[11]]);
 		if (array_key_exists($keys[12], $arr)) $this->setStatus($arr[$keys[12]]);
@@ -889,7 +889,7 @@ abstract class BaseViasolviatra extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(ViasolviatraPeer::CODEMPACO)) $criteria->add(ViasolviatraPeer::CODEMPACO, $this->codempaco);
 		if ($this->isColumnModified(ViasolviatraPeer::CODNIVACO)) $criteria->add(ViasolviatraPeer::CODNIVACO, $this->codnivaco);
 		if ($this->isColumnModified(ViasolviatraPeer::DESSOL)) $criteria->add(ViasolviatraPeer::DESSOL, $this->dessol);
-		if ($this->isColumnModified(ViasolviatraPeer::CODEST)) $criteria->add(ViasolviatraPeer::CODEST, $this->codest);
+		if ($this->isColumnModified(ViasolviatraPeer::CODCIU)) $criteria->add(ViasolviatraPeer::CODCIU, $this->codciu);
 		if ($this->isColumnModified(ViasolviatraPeer::CODNIVAPR)) $criteria->add(ViasolviatraPeer::CODNIVAPR, $this->codnivapr);
 		if ($this->isColumnModified(ViasolviatraPeer::CODPROCED)) $criteria->add(ViasolviatraPeer::CODPROCED, $this->codproced);
 		if ($this->isColumnModified(ViasolviatraPeer::STATUS)) $criteria->add(ViasolviatraPeer::STATUS, $this->status);
@@ -947,7 +947,7 @@ abstract class BaseViasolviatra extends BaseObject  implements Persistent {
 
 		$copyObj->setDessol($this->dessol);
 
-		$copyObj->setCodest($this->codest);
+		$copyObj->setCodciu($this->codciu);
 
 		$copyObj->setCodnivapr($this->codnivapr);
 

@@ -142,5 +142,16 @@ class Viacalviatra extends BaseViacalviatra
     {
         return $this->refcom ? 'COMPROMISO NRO '.$this->refcom : '';
     }
+    public function getCiudad()
+    {        
+        $codciu = H::GetX('Numsol','Viasolviatra','Codciu',$this->refsol);
+        return $codciu.'  -  '.H::getX('Codciu','Viaciudad','Nomciu',$codciu);
+    }
+    public function getEstado()
+    {
+        $codciu = H::GetX('Numsol','Viasolviatra','Codciu',$this->refsol);
+        $codest = H::getX('Codciu','Viaciudad','Codest',$codciu);
+        return $codest.'  -  '.H::getX('Codest','Viaestado','Nomest',$codest);
+    }
 
 }

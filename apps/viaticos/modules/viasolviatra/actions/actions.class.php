@@ -214,6 +214,11 @@ class viasolviatraActions extends autoviasolviatraActions
         $output = '[["viasolviatra_nomempaut","'.$nomemp.'",""],["viasolviatra_cedempaut","'.$cedemp.'",""],
                    ["viasolviatra_nivelaut","'.$codniv.' - '.$nomniv.'",""]]';
         break;
+      case '6':
+          $js="$('viasolviatra_codciu').value='';";
+          $dato=H::GetX('Codest','Viaestado','Nomest',$codigo);
+          $output = '[["javascript","'.$js.'",""],["viasolviatra_nomest","'.$dato.'",""],["","",""]]';
+        break;
       default:
         $output = '[["","",""],["","",""],["","",""]]';
     }
