@@ -39,8 +39,8 @@ viaticosv2:
       Calculo de Viaticos:                                viacalviatra      
       Aprobacion Calculo de Viaticos:                     viaaprcalviatra
       Relacion de Viaticos:                               viarelvia
-    #Reportes:
-      #Listados:
-        #Listado de Rubros:                                viarlisrub.php
+    Reportes:
+      Listados:
+        Listado de Rubros:                                viarlisrub.php
     Mantenimiento:
       Cambiar Contraseña:                                     cambiopasswd
