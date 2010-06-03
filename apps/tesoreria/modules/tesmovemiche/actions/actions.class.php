@@ -865,6 +865,9 @@ class tesmovemicheActions extends autotesmovemicheActions
 		  }
 		  $c->add(OpordpagPeer::APRORDDIR,$this->sql2,Criteria::CUSTOM);
 		}
+    $c->addAscendingOrderByColumn(OpordpagPeer::FECEMI);
+    $c->addAscendingOrderByColumn(OpordpagPeer::NUMORD);
+    
 
         $per = OpordpagPeer::doSelect($c);
         if (!$per)
