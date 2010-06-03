@@ -1018,6 +1018,8 @@ recordSalida REGPRESTACIONES%ROWTYPE;
 capital numeric;
 capitalint numeric;
 capitalactint numeric;
+diasadic numeric;
+diasadicacum numeric;
 tasa numeric;
 interesacum numeric;
 fechareal varchar;
@@ -1028,7 +1030,8 @@ BEGIN
 capital:=0;
 capitalint=0;
 interesacum:=0;
-SELECT INTO fechaegreso COALESCE(TO_CHAR(fecret,'DD/MM/YYYY'),fecha)
+diasadic:=0;
+SELECT INTO fechaegreso,diasadicacum COALESCE(TO_CHAR(fecret,'DD/MM/YYYY'),fecha),COALESCE(DIAADIACU,0)
 FROM NPHOJINT
 WHERE CODEMP=codigo;
 IF TO_DATE(fecha,'DD/MM/YYYY')>TO_DATE(fechaegreso,'DD/MM/YYYY') THEN
@@ -1151,10 +1154,12 @@ COALESCE((CASE WHEN A.ANNOANTIG>0 THEN
                                             TO_CHAR(TO_NUMBER(SUBSTR('''||fechareal||''',7),''9999'')-1,''9999''),''DD/MM/YYYY'')
                                END)
                 AND FECFIN <= TO_DATE('''||fechareal||''',''DD/MM/YYYY''))
-       ELSE (A.MESANTIGTOT*5)-(SELECT COALESCE(SUM(5),0)
-                FROM NPPRESTACIONES
-                WHERE CODEMP='''||codigo||'''
-                AND FECINI >= (CASE WHEN TO_DATE(TO_CHAR(FECING,''DD/MM/'')||
+       ELSE 
+             (CASE WHEN A.MESANTIGTOT> 0 THEN   
+                 (A.MESANTIGTOT*5)-(SELECT COALESCE(SUM(5),0)
+                  FROM NPPRESTACIONES
+                  WHERE CODEMP='''||codigo||'''
+                  AND FECINI >= (CASE WHEN TO_DATE(TO_CHAR(FECING,''DD/MM/'')||
                                                  SUBSTR('''||fechareal||''',7),''DD/MM/YYYY'')<=
                                          TO_DATE('''||fechareal||''',''DD/MM/YYYY'')
                                THEN (CASE WHEN TO_CHAR(FECING,''MM'')=SUBSTR('''||fechareal||''',4,2)
@@ -1167,7 +1172,9 @@ COALESCE((CASE WHEN A.ANNOANTIG>0 THEN
                                ELSE TO_DATE(TO_CHAR(FECING,''DD/MM/'')||
                                             TO_CHAR(TO_NUMBER(SUBSTR('''||fechareal||''',7),''9999'')-1,''9999''),''DD/MM/YYYY'')
                                END)
-                AND FECFIN <= TO_DATE('''||fechareal||''',''DD/MM/YYYY'')) END)
+                AND FECFIN <= TO_DATE('''||fechareal||''',''DD/MM/YYYY''))
+                ELSE 0 END)
+ END)
  ELSE (CASE WHEN (A.MESANTIGTOT=6 AND A.DIAANTIGTOT>0) OR A.MESANTIGTOT>6
        THEN 45-(SELECT COALESCE(SUM(5),0)
                 FROM NPPRESTACIONES
@@ -1178,7 +1185,8 @@ COALESCE((CASE WHEN A.ANNOANTIG>0 THEN
        THEN 15-(SELECT COALESCE(SUM(5),0)
                 FROM NPPRESTACIONES
                 WHERE CODEMP='''||codigo||'''
-                AND FECFIN <= TO_DATE('''||fechareal||''',''DD/MM/YYYY'')) END) END),0)::INTEGER AS DIAS,
+                AND FECFIN <= TO_DATE('''||fechareal||''',''DD/MM/YYYY'')) 
+       WHEN A.MESANTIGTOT=0 THEN 0 END) END),0)::INTEGER AS DIAS,
  (CASE WHEN A.ANNOANTIGTOT>0 THEN
       (CASE WHEN (A.MESANTIGTOT=6 AND A.DIAANTIGTOT>0) OR A.MESANTIGTOT>6
        THEN 60-(SELECT COALESCE(SUM(5),0)
@@ -1198,7 +1206,7 @@ COALESCE((CASE WHEN A.ANNOANTIG>0 THEN
                                             TO_CHAR(TO_NUMBER(SUBSTR('''||fechareal||''',7),''9999'')-1,''9999''),''DD/MM/YYYY'')
                                END)
                 AND FECFIN <= TO_DATE('''||fechareal||''',''DD/MM/YYYY''))
-       ELSE (A.MESANTIGTOT*5)-(SELECT COALESCE(SUM(5),0)
+       ELSE     (CASE WHEN A.MESANTIGTOT> 0 THEN (A.MESANTIGTOT*5)-(SELECT COALESCE(SUM(5),0)
                 FROM NPPRESTACIONES
                 WHERE CODEMP='''||codigo||'''
                 AND FECINI >= (CASE WHEN TO_DATE(TO_CHAR(FECING,''DD/MM/'')||
@@ -1214,7 +1222,8 @@ COALESCE((CASE WHEN A.ANNOANTIG>0 THEN
                                ELSE TO_DATE(TO_CHAR(FECING,''DD/MM/'')||
                                             TO_CHAR(TO_NUMBER(SUBSTR('''||fechareal||''',7),''9999'')-1,''9999''),''DD/MM/YYYY'')
                                END)
-                AND FECFIN <= TO_DATE('''||fechareal||''',''DD/MM/YYYY'')) END)
+                AND FECFIN <= TO_DATE('''||fechareal||''',''DD/MM/YYYY'')) 
+                ELSE 0 END) END)
  ELSE (CASE WHEN (A.MESANTIGTOT=6 AND A.DIAANTIGTOT>0) OR A.MESANTIGTOT>6
        THEN 45-(SELECT COALESCE(SUM(5),0)
                 FROM NPPRESTACIONES
@@ -1225,7 +1234,8 @@ COALESCE((CASE WHEN A.ANNOANTIG>0 THEN
        THEN 15-(SELECT COALESCE(SUM(5),0)
                 FROM NPPRESTACIONES
                 WHERE CODEMP='''||codigo||'''
-                AND FECFIN <= TO_DATE('''||fechareal||''',''DD/MM/YYYY'')) END) END)*
+                AND FECFIN <= TO_DATE('''||fechareal||''',''DD/MM/YYYY'')) 
+       WHEN A.MESANTIGTOT=0 THEN 0 END) END)*
                 (CASE WHEN COALESCE(B.TIPSALAJUNODEP,'' '')=''SN'' THEN ROUND(A.SALNOR/30,2)
 		       WHEN COALESCE(B.TIPSALAJUNODEP,'' '')=''SI'' THEN ROUND(A.SALINT/30,2)
 		       WHEN COALESCE(B.TIPSALAJUNODEP,'' '')=''UD'' THEN A.MONDIA
@@ -1260,14 +1270,17 @@ A.FECING::DATE,A.FECINI::DATE,A.FECFIN::DATE,
 A.MONTO::NUMERIC,A.MONDIA::NUMERIC,
 COALESCE((SELECT ROUND(AVG(MONDIA),2) FROM NPPRESTACIONES
  WHERE CODEMP='''||codigo||'''
- AND FECINI > (CASE WHEN TO_DATE(TO_CHAR(FECING,''DD/MM/'')||
+ AND FECINI > (CASE WHEN TO_CHAR(FECING,''MM'')<> SUBSTR('''||fechareal||''',4,2) THEN
+                    (CASE WHEN TO_DATE(TO_CHAR(FECING,''DD/MM/'')||
                                   SUBSTR('''||fechareal||''',7),''DD/MM/YYYY'')<=
-                          TO_DATE('''||fechareal||''',''DD/MM/YYYY'')
-                THEN TO_DATE(TO_CHAR(FECING,''DD/MM/'')||
-                             SUBSTR('''||fechareal||''',7),''DD/MM/YYYY'')
-                ELSE TO_DATE(TO_CHAR(FECING,''DD/MM/'')||
-                             TO_CHAR(TO_NUMBER(SUBSTR('''||fechareal||''',7),''9999'')-1,''9999''),''DD/MM/YYYY'')
-                END)
+                                  TO_DATE('''||fechareal||''',''DD/MM/YYYY'')
+                      THEN TO_DATE(TO_CHAR(FECING,''DD/MM/'')||
+                                  SUBSTR('''||fechareal||''',7),''DD/MM/YYYY'')
+                      ELSE TO_DATE(TO_CHAR(FECING,''DD/MM/'')||
+                                   TO_CHAR(TO_NUMBER(SUBSTR('''||fechareal||''',7),''9999'')-1,''9999''),''DD/MM/YYYY'')
+                    END)
+               ELSE TO_DATE(TO_CHAR(FECING,''DD/MM/'')||
+                    TO_CHAR(TO_NUMBER(SUBSTR('''||fechareal||''',7),''9999'')-1,''9999''),''DD/MM/YYYY'') END) 
 AND FECFIN <= TO_DATE('''||fechareal||''',''DD/MM/YYYY'')),0)::NUMERIC AS MONDIAPRO,
 (CASE WHEN (A.ANNOANTIGTOT>=1 AND A.MESANTIGTOT=6 AND A.DIAANTIGTOT>0) OR
            (A.ANNOANTIGTOT>=1 AND A.MESANTIGTOT>6) THEN
@@ -1278,14 +1291,17 @@ AND FECFIN <= TO_DATE('''||fechareal||''',''DD/MM/YYYY'')),0)::NUMERIC AS MONDIA
 COALESCE((CASE WHEN '''||salpro||'''=''P'' THEN
 	(SELECT ROUND(AVG(MONDIA),2) FROM NPPRESTACIONES
  	WHERE CODEMP='''||codigo||'''
- 	AND FECINI > (CASE WHEN TO_DATE(TO_CHAR(FECING,''DD/MM/'')||
-                                  	SUBSTR('''||fechareal||''',7),''DD/MM/YYYY'')<=
-                          	TO_DATE('''||fechareal||''',''DD/MM/YYYY'')
-                	THEN TO_DATE(TO_CHAR(FECING,''DD/MM/'')||
-                             	SUBSTR('''||fechareal||''',7),''DD/MM/YYYY'')
-                	ELSE TO_DATE(TO_CHAR(FECING,''DD/MM/'')||
-                             	TO_CHAR(TO_NUMBER(SUBSTR('''||fechareal||''',7),''9999'')-1,''9999''),''DD/MM/YYYY'')
-                	END)
+ 	AND FECINI > (CASE WHEN TO_CHAR(FECING,''MM'')<> SUBSTR('''||fechareal||''',4,2) THEN
+                          (CASE WHEN TO_DATE(TO_CHAR(FECING,''DD/MM/'')||
+                                  SUBSTR('''||fechareal||''',7),''DD/MM/YYYY'')<=
+                                  TO_DATE('''||fechareal||''',''DD/MM/YYYY'')
+                          THEN TO_DATE(TO_CHAR(FECING,''DD/MM/'')||
+                                  SUBSTR('''||fechareal||''',7),''DD/MM/YYYY'')
+                          ELSE TO_DATE(TO_CHAR(FECING,''DD/MM/'')||
+                                   TO_CHAR(TO_NUMBER(SUBSTR('''||fechareal||''',7),''9999'')-1,''9999''),''DD/MM/YYYY'')
+                          END)
+                  ELSE TO_DATE(TO_CHAR(FECING,''DD/MM/'')||
+                       TO_CHAR(TO_NUMBER(SUBSTR('''||fechareal||''',7),''9999'')-1,''9999''),''DD/MM/YYYY'') END) 
 	AND FECFIN <= TO_DATE('''||fechareal||''',''DD/MM/YYYY''))
 ELSE A.MONDIA END) *
 (CASE WHEN (A.ANNOANTIGTOT>=1 AND A.MESANTIGTOT=6 AND A.DIAANTIGTOT>0) OR
@@ -1411,7 +1427,54 @@ loop
 
 
   	recordSalida.tasa:=tasa;
+        IF recordSalida.tipo='DEPOSITADOS' THEN        
+           IF recordSalida.dias>5 THEN 
+              diasadic:=diasadic+(recordSalida.dias-5);
+           END IF;  
+        ELSE
+           IF recordSalida.tipo='AJUSTE DIAS ADICIONALES NO DEPOSITADOS' THEN    
+              diasadic:=diasadic+(recordSalida.dias);
+              IF recordSalida.antannos >=1 THEN
+                 IF recordSalida.antmeses >6 THEN
+                    IF (recordSalida.antannos + 1) * 2 > diasadic THEN
+                       recordSalida.dias:= (recordSalida.antannos + 1) * 2 - diasadic;
+                       IF salpro='P' THEN
+                          recordSalida.monpres:=recordSalida.dias*recordSalida.mondiapro;
+                       ELSE
+                          recordSalida.monpres:=recordSalida.dias*recordSalida.mondia;
+                       END IF;
+                       capital:=capital+recordSalida.monpres;
+                    END IF; 
+                 ELSE
+                    IF recordSalida.antmeses =6 THEN
+                       IF recordSalida.antdias >=1 THEN 
+                           IF (recordSalida.antannos + 1) * 2 > diasadic THEN
+		              recordSalida.dias:= (recordSalida.antannos + 1) * 2 - diasadic;
+                              IF salpro='P' THEN
+		                 recordSalida.monpres:=recordSalida.dias*recordSalida.mondiapro;
+		              ELSE
+		                 recordSalida.monpres:=recordSalida.dias*recordSalida.mondia;
+		              END IF;
+                              capital:=capital+recordSalida.monpres; 
+		           END IF; 
+                       END IF;
+                    ELSE
+                       IF (recordSalida.antannos) * 2 > diasadic THEN
+		          recordSalida.dias:= (recordSalida.antannos + 1) * 2 - diasadic;
+                          IF salpro='P' THEN
+	                     recordSalida.monpres:=recordSalida.dias*recordSalida.mondiapro;
+	  	          ELSE
+		             recordSalida.monpres:=recordSalida.dias*recordSalida.mondia;
+		          END IF;
+                          capital:=capital+recordSalida.monpres;
+		       END IF;   
+                    END IF;
+                 END IF;
+              END IF;      
+           END IF;    
+        END IF; 
   ELSE
+        diasadic:=diasadic+diasadicacum;
         recordSalida.tasa:=0;
         capital:=recordSalida.capitalact;
         capitalint:=capital;
@@ -1422,6 +1485,7 @@ loop
   ELSE
      recordSalida.monint:=0;
   END IF;
+  
   interesacum:=interesacum+recordSalida.monint-recordSalida.monadeint;
   recordSalida.intacu=interesacum;
   recordSalida.capitalact:=capital;
@@ -1434,6 +1498,8 @@ return;
 END;
 $body$
 LANGUAGE 'plpgsql' VOLATILE CALLED ON NULL INPUT SECURITY INVOKER;
+
+
 
 
 
