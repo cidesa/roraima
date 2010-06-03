@@ -344,4 +344,64 @@ propel:
       primaryKey: true
       autoIncrement: true
       description: Identificador Único del registro
-
+  viapais:
+    codpai:
+      type: VARCHAR
+      size: 4
+      required: true
+    nompai:
+      type: VARCHAR
+      size: 100
+      required: true
+    monto:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  viaestado:
+    codest:
+      type: VARCHAR
+      size: 4
+      required: true
+    nomest:
+      type: VARCHAR
+      size: 100
+      required: true
+    codpai:
+      type: VARCHAR
+      size: 4
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  viaciudad:
+    codciu:
+      type: VARCHAR
+      size: 4
+      required: true
+    nomciu:
+      type: VARCHAR
+      size: 100
+      required: true
+    codest:
+      type: VARCHAR
+      size: 4
+      required: true
+    codpai:
+      type: VARCHAR
+      size: 4
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro

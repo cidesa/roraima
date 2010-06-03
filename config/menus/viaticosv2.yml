@@ -29,6 +29,10 @@ viaticosv2:
       Definición de Procedencias:                         viadefproced
       Asociar Niveles de Aprobacion a Procedencias:       viaasoproniv
       Tabla para el Cálculo:                              viacalrub
+      Definicion Territorial:
+        Países:                                           viapais
+        Estados:                                          viaestado
+        Ciudades:                                         viaciudad
     Procesos para Viaticos:
       Solicitud de Viaticos:                              viasolviatra
       Aprobación Solicitud de Viaticos:                   viaaprsolviatra

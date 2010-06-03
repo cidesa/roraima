@@ -1,0 +1,26 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Viapais
+    theme:            cidesaGenerator
+    fields:
+      codpai:         { name: CÃ³digo PaÃ­s, params: maxlegth=4 size=5 onBlur="$(this.id).value=$(this.id).value.pad(4,'0',0)"}
+      nompai:         { name: DescripciÃ³n, params: maxlegth=100 }
+      monto:          { name: Monto Viatico Diario }
+
+    list:
+      title: Listado de PaÃ­ses
+      display: [=codpai, nompai, monto]
+      filters: [codpai, nompai]
+      sort:    codpai
+      objects_actions:
+        _edit:        ~
+        _delete:        ~
+    edit:
+      title: EdiciÃ³n de PaÃ­ses
+      display:
+        Registro Paises: [codpai, nompai, monto]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

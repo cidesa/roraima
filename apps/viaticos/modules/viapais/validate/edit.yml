@@ -1,0 +1,30 @@
+methods:
+  post:
+   - "viapais{codpai}"
+   - "viapais{nompai}"
+   
+names:
+  viapais{codpai}:
+    required:  Yes
+    required_msg: Este campo no puede estar en Blanco
+    validators: Validator_codpai
+
+  viapais{nompai}:
+    required:  Yes
+    required_msg: Este campo no puede estar en Blanco
+    validators: Validator_nompai
+  
+Validator_codpai:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Viapais
+        column:       codpai
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_nompai:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripciÃ³n no puede tener menos de 2 caracteres
+        max:       100
+        max_error: La descripciÃ³n no puede pasar mas de 100 caracteres
