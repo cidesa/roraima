@@ -635,8 +635,9 @@ class CatalogoWeb extends BaseCatalogoWeb {
   public function Opdefemp_pagdefemp($params) {
     $longitud = $params[0];
     $this->c = new Criteria();
-    $this->sql = "length(Codcta) = '" . $longitud . "'";
-    $this->c->add(ContabbPeer :: CODCTA, $this->sql, Criteria :: CUSTOM);
+    //$this->sql = "length(Codcta) = '" . $longitud . "'";
+    //$this->c->add(ContabbPeer :: CODCTA, $this->sql, Criteria :: CUSTOM);
+    $this->c->add(ContabbPeer :: CARGAB, 'C');
 
     $this->columnas = array (
       ContabbPeer :: DESCTA => 'Descripcion',
