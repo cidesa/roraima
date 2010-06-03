@@ -194,7 +194,7 @@ propel:
     dessol:
       type: VARCHAR
       size: 1000
-    codest:
+    codciu:
       type: VARCHAR
       size: 4
     codnivapr:

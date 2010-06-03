@@ -149,4 +149,16 @@ class Viasolviatra extends BaseViasolviatra
         $desniv=H::getX('Codnivapr','Viadefnivapr','Desnivapr',self::getCodnivaprsig());
         return  $desniv ? $desniv : 'NIVEL ACTUAL ES ULTIMO' ;
     }
+    public function getNomciu()
+    {
+        return H::GetX('Codciu','Viaciudad','Nomciu',$this->codciu);
+    }
+    public function getCodest()
+    {
+        return H::GetX('Codciu','Viaciudad','Codest',$this->codciu);
+    }
+    public function getNomest()
+    {
+        return H::GetX('Codest','Viaestado','Nomest',self::getCodest());
+    }
 }

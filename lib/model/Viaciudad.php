@@ -15,4 +15,12 @@
  */ 
 class Viaciudad extends BaseViaciudad
 {
+    public function getNompai()
+    {
+        return H::GetX('Codpai','Viapais','Nompai',$this->codpai);
+    }
+    public function getNomest()
+    {
+        return H::GetX('Codest','Viaestado','Nomest',$this->codest);
+    }
 }

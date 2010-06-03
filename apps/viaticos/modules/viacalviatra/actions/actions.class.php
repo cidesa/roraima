@@ -266,17 +266,25 @@ class viacalviatraActions extends autoviacalviatraActions
                 else
                   $this->nivtra= $per->getCodniv();
                 $sw=true;
+                $codciu = H::GetX('Numsol','Viasolviatra','Codciu',$codigo);
+                $codest = H::getX('Codciu','Viaciudad','Codest',$codciu);
+                $ciudad = $codciu.'  -  '.H::getX('Codciu','Viaciudad','Nomciu',$codciu);
+                $estado = $codest.'  -  '.H::getX('Codest','Viaestado','Nomest',$codest);
             }else
             {
                 $js.="$('viacalviatra_refsol').value='';
                   alert('Numero de Solicitud ya fue Calculada');";
                 $sw=false;
+                $estado='';
+                $ciudad='';
             }
         }else
         {
             $js.="$('viacalviatra_refsol').value='';
                   alert('Numero de Solicitud No esta Aprobado');";
             $sw=false;
+            $estado='';
+            $ciudad='';
         }        
         $this->viacalviatra = $this->getViacalviatraOrCreate();
         $this->updateViacalviatraFromRequest();
@@ -288,7 +296,7 @@ class viacalviatraActions extends autoviacalviatraActions
                        ["viacalviatra_proced","'.$per->getCodproced().'  -  '.$desproced.'",""],["viacalviatra_fortra","'.$per->getCodfortra().'  -  '.$desfortra.'",""],
                        ["viacalviatra_fecdes","'.date('d/m/Y',strtotime($per->getFecdes())).'",""],["viacalviatra_fechas","'.date('d/m/Y',strtotime($per->getFechas())).'",""],["viacalviatra_numdia","'.$per->getNumdia().'",""],
                        ["viacalviatra_empleadoaut","'.$cedempaut.'  -  '.$nomempaut.'",""],["viacalviatra_diaconper","'.($per->getNumdia()-1).'",""],["viacalviatra_diasinper","1",""],
-                       ["viacalviatra_codcat","'.$per->getCodcat().'",""],["viacalviatra_nomcat","'.$nomcat.'",""]    ]';
+                       ["viacalviatra_codcat","'.$per->getCodcat().'",""],["viacalviatra_nomcat","'.$nomcat.'",""],["viacalviatra_ciudad","'.$ciudad.'",""],,["viacalviatra_estado","'.$estado.'",""]]';
         else
             $output = '[["javascript","'.$js.'",""],["","",""],["","",""]]';
         break;
