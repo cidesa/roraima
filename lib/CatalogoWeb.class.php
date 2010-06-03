@@ -6086,6 +6086,25 @@ public function Catdefcatman_Cattramo($params = '') {
 
 		);
 	}
+        public function viaestado_codest() {
+		$this->c = new Criteria();
+		$this->columnas = array (
+			ViaestadoPeer :: CODEST => 'Código',
+                        ViaestadoPeer :: NOMEST => 'Nombre',
+
+		);
+	}
+        public function viaciudad_codciu($params = array ()) {
+		$this->c = new Criteria();
+                if($params)
+                    $this->c->add(ViaciudadPeer :: CODEST, $params[0]);
+		$this->columnas = array (
+			ViaciudadPeer :: CODCIU => 'Código',
+                        ViaciudadPeer :: NOMCIU => 'Nombre',
+
+		);
+	}
+        
 
 }
 
