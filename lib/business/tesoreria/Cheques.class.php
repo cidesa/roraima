@@ -54,6 +54,8 @@ class Cheques
       $tsmovlib->setFeccom($tscheemi->getFecemi());
       $tsmovlib->setStatus("C");
       $tsmovlib->setStacon("N");
+      $loguse= sfContext::getInstance()->getUser()->getAttribute('loguse');
+      $tsmovlib->setLoguse($loguse);
       $tsmovlib->setFecing(date("Y-m-d"));
       $tsmovlib->save();
 

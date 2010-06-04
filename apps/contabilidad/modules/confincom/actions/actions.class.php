@@ -56,8 +56,13 @@ class confincomActions extends autoconfincomActions
       $c->addAscendingOrderByColumn(Contabc1Peer::NUMASI);
       $reg = Contabc1Peer::doSelect($c);
   	} 
+      $mascara = Herramientas::ObtenerFormato('Contaba','Forcta');
+      $loncta=strlen($mascara);
 
-    $this->obj = H::getConfigGrid('grid_contabc1',$reg);
+     $this->columnas = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/confincom/'.sfConfig::get('sf_app_module_config_dir_name').'/grid_contabc1');
+     $this->columnas[1][0]->setHTML('type="text" size="17" maxlength="'.chr(39).$loncta.chr(39).'" onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascara.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;} perderfocus(event,this.id,3);" onBlur="toAjax(\'2\',getUrlModulo()+\'ajax\',this.value,\'\',\'&idcaja=\'+this.id);"');
+
+     $this->obj =$this->columnas[0]->getConfig($reg);
 
     $this->params =array('grid'=>$this->obj);
   }
@@ -72,6 +77,7 @@ class confincomActions extends autoconfincomActions
   {
     $codigo = $this->getRequestParameter('codigo','');
     $ajax = $this->getRequestParameter('ajax','');
+    $javascript=""; $dato="";
 
     switch ($ajax){
       case '1':      	  
@@ -114,6 +120,32 @@ class confincomActions extends autoconfincomActions
       	$js.="window.location.reload();";
         $output = '[["javascript","'.$js.'",""],["","",""],["","",""]]';
         break;      
+      case '2':
+        $idcaja = $this->getRequestParameter('idcaja','');
+        $auxid= split("_", $idcaja);
+
+        $c = new Criteria();
+        $c->add(ContabbPeer::CODCTA,$codigo);
+        $per = ContabbPeer::doSelectOne($c);
+        if($per)
+        {
+           if ($per->getCargab()=='C')
+           {
+             $dato=$per->getDescta();
+           }else {
+               $javascript="alert('La Cuenta Contable no es Cargable'); $('$idcaja').value=''; $('$idcaja').focus();";
+           }
+        }else {
+          $javascript="alert('La Cuenta Contable no existe'); $('$idcaja').value=''; $('$idcaja').focus();";
+        }
+
+        $output = '[["'.$auxid[0].'_'.$auxid[1].'_2","'.$dato.'",""],["javascript","'.$javascript.'",""],["","",""]]';
+       break;
+      case '3':
+        $idcaja = $this->getRequestParameter('ides','');
+        $javascript="actualizarDiferencia('$idcaja');";
+        $output = '[["javascript","'.$javascript.'",""]]';
+       break;
       default:
       	$js="";
       	$status = $this->getRequestParameter('status','');
@@ -203,7 +235,8 @@ class confincomActions extends autoconfincomActions
 
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -324,6 +357,10 @@ class confincomActions extends autoconfincomActions
   public function saving($clasemodelo)
   {
   	$grid = Herramientas::CargarDatosGridv2($this,$this->obj);  	
+        if ($clasemodelo->getNumcom()=='########'){
+           $numcom = Comprobante::Buscar_Correlativo();
+           $clasemodelo->setNumcom($numcom);
+        }
     return Comprobante::salvarConfincomnew($clasemodelo,$grid);
   }
 

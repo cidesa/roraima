@@ -13,7 +13,7 @@ abstract class BaseCpadidisPeer {
 	const CLASS_DEFAULT = 'lib.model.presupuesto.Cpadidis';
 
 	
-	const NUM_COLUMNS = 13;
+	const NUM_COLUMNS = 14;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -56,6 +56,9 @@ abstract class BaseCpadidisPeer {
 	const TIPGAS = 'cpadidis.TIPGAS';
 
 	
+	const LOGUSE = 'cpadidis.LOGUSE';
+
+	
 	const ID = 'cpadidis.ID';
 
 	
@@ -64,18 +67,18 @@ abstract class BaseCpadidisPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Refadi', 'Fecadi', 'Anoadi', 'Desadi', 'Desanu', 'Adidis', 'Totadi', 'Staadi', 'Numcom', 'Fecanu', 'Peradi', 'Tipgas', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (CpadidisPeer::REFADI, CpadidisPeer::FECADI, CpadidisPeer::ANOADI, CpadidisPeer::DESADI, CpadidisPeer::DESANU, CpadidisPeer::ADIDIS, CpadidisPeer::TOTADI, CpadidisPeer::STAADI, CpadidisPeer::NUMCOM, CpadidisPeer::FECANU, CpadidisPeer::PERADI, CpadidisPeer::TIPGAS, CpadidisPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('refadi', 'fecadi', 'anoadi', 'desadi', 'desanu', 'adidis', 'totadi', 'staadi', 'numcom', 'fecanu', 'peradi', 'tipgas', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, )
+		BasePeer::TYPE_PHPNAME => array ('Refadi', 'Fecadi', 'Anoadi', 'Desadi', 'Desanu', 'Adidis', 'Totadi', 'Staadi', 'Numcom', 'Fecanu', 'Peradi', 'Tipgas', 'Loguse', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (CpadidisPeer::REFADI, CpadidisPeer::FECADI, CpadidisPeer::ANOADI, CpadidisPeer::DESADI, CpadidisPeer::DESANU, CpadidisPeer::ADIDIS, CpadidisPeer::TOTADI, CpadidisPeer::STAADI, CpadidisPeer::NUMCOM, CpadidisPeer::FECANU, CpadidisPeer::PERADI, CpadidisPeer::TIPGAS, CpadidisPeer::LOGUSE, CpadidisPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('refadi', 'fecadi', 'anoadi', 'desadi', 'desanu', 'adidis', 'totadi', 'staadi', 'numcom', 'fecanu', 'peradi', 'tipgas', 'loguse', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Refadi' => 0, 'Fecadi' => 1, 'Anoadi' => 2, 'Desadi' => 3, 'Desanu' => 4, 'Adidis' => 5, 'Totadi' => 6, 'Staadi' => 7, 'Numcom' => 8, 'Fecanu' => 9, 'Peradi' => 10, 'Tipgas' => 11, 'Id' => 12, ),
-		BasePeer::TYPE_COLNAME => array (CpadidisPeer::REFADI => 0, CpadidisPeer::FECADI => 1, CpadidisPeer::ANOADI => 2, CpadidisPeer::DESADI => 3, CpadidisPeer::DESANU => 4, CpadidisPeer::ADIDIS => 5, CpadidisPeer::TOTADI => 6, CpadidisPeer::STAADI => 7, CpadidisPeer::NUMCOM => 8, CpadidisPeer::FECANU => 9, CpadidisPeer::PERADI => 10, CpadidisPeer::TIPGAS => 11, CpadidisPeer::ID => 12, ),
-		BasePeer::TYPE_FIELDNAME => array ('refadi' => 0, 'fecadi' => 1, 'anoadi' => 2, 'desadi' => 3, 'desanu' => 4, 'adidis' => 5, 'totadi' => 6, 'staadi' => 7, 'numcom' => 8, 'fecanu' => 9, 'peradi' => 10, 'tipgas' => 11, 'id' => 12, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, )
+		BasePeer::TYPE_PHPNAME => array ('Refadi' => 0, 'Fecadi' => 1, 'Anoadi' => 2, 'Desadi' => 3, 'Desanu' => 4, 'Adidis' => 5, 'Totadi' => 6, 'Staadi' => 7, 'Numcom' => 8, 'Fecanu' => 9, 'Peradi' => 10, 'Tipgas' => 11, 'Loguse' => 12, 'Id' => 13, ),
+		BasePeer::TYPE_COLNAME => array (CpadidisPeer::REFADI => 0, CpadidisPeer::FECADI => 1, CpadidisPeer::ANOADI => 2, CpadidisPeer::DESADI => 3, CpadidisPeer::DESANU => 4, CpadidisPeer::ADIDIS => 5, CpadidisPeer::TOTADI => 6, CpadidisPeer::STAADI => 7, CpadidisPeer::NUMCOM => 8, CpadidisPeer::FECANU => 9, CpadidisPeer::PERADI => 10, CpadidisPeer::TIPGAS => 11, CpadidisPeer::LOGUSE => 12, CpadidisPeer::ID => 13, ),
+		BasePeer::TYPE_FIELDNAME => array ('refadi' => 0, 'fecadi' => 1, 'anoadi' => 2, 'desadi' => 3, 'desanu' => 4, 'adidis' => 5, 'totadi' => 6, 'staadi' => 7, 'numcom' => 8, 'fecanu' => 9, 'peradi' => 10, 'tipgas' => 11, 'loguse' => 12, 'id' => 13, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, )
 	);
 
 	
@@ -152,6 +155,8 @@ abstract class BaseCpadidisPeer {
 		$criteria->addSelectColumn(CpadidisPeer::PERADI);
 
 		$criteria->addSelectColumn(CpadidisPeer::TIPGAS);
+
+		$criteria->addSelectColumn(CpadidisPeer::LOGUSE);
 
 		$criteria->addSelectColumn(CpadidisPeer::ID);
 

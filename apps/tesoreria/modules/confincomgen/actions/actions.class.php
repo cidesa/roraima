@@ -367,7 +367,7 @@ $this->Bitacora('Guardo');
     $opciones->setAncho(870);
     $opciones->setAnchoGrid(900);
     $opciones->setTitulo('Asientos Contable');
-	  $opciones->setFilas(50);
+    $opciones->setFilas($this->contabc->getNumfilas());
     $opciones->setHTMLTotalFilas(' ');
 
     $col1 = new Columna('Código de Cuenta');

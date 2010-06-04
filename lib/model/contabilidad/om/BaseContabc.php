@@ -37,6 +37,10 @@ abstract class BaseContabc extends BaseObject  implements Persistent {
 
 
 	
+	protected $loguse;
+
+
+
 	protected $id;
 
 	
@@ -117,6 +121,13 @@ abstract class BaseContabc extends BaseObject  implements Persistent {
 
   }
   
+  public function getLoguse()
+  {
+
+    return trim($this->loguse);
+
+  }
+
   public function getId()
   {
 
@@ -201,6 +212,16 @@ abstract class BaseContabc extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setLoguse($v)
+	{
+
+    if ($this->loguse !== $v) {
+        $this->loguse = $v;
+        $this->modifiedColumns[] = ContabcPeer::LOGUSE;
+      }
+
+	}
+
 	public function setId($v)
 	{
 
@@ -229,7 +250,9 @@ abstract class BaseContabc extends BaseObject  implements Persistent {
 
       $this->reftra = $rs->getString($startcol + 6);
 
-      $this->id = $rs->getInt($startcol + 7);
+      $this->loguse = $rs->getString($startcol + 7);
+
+      $this->id = $rs->getInt($startcol + 8);
 
       $this->resetModified();
 
@@ -237,7 +260,7 @@ abstract class BaseContabc extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 8; 
+            return $startcol + 9;
     } catch (Exception $e) {
       throw new PropelException("Error populating Contabc object", $e);
     }
@@ -422,6 +445,9 @@ abstract class BaseContabc extends BaseObject  implements Persistent {
 				return $this->getReftra();
 				break;
 			case 7:
+				return $this->getLoguse();
+				break;
+			case 8:
 				return $this->getId();
 				break;
 			default:
@@ -441,7 +467,8 @@ abstract class BaseContabc extends BaseObject  implements Persistent {
 			$keys[4] => $this->getStacom(),
 			$keys[5] => $this->getTipcom(),
 			$keys[6] => $this->getReftra(),
-			$keys[7] => $this->getId(),
+			$keys[7] => $this->getLoguse(),
+			$keys[8] => $this->getId(),
 		);
 		return $result;
 	}
@@ -479,6 +506,9 @@ abstract class BaseContabc extends BaseObject  implements Persistent {
 				$this->setReftra($value);
 				break;
 			case 7:
+				$this->setLoguse($value);
+				break;
+			case 8:
 				$this->setId($value);
 				break;
 		} 	}
@@ -495,7 +525,8 @@ abstract class BaseContabc extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[4], $arr)) $this->setStacom($arr[$keys[4]]);
 		if (array_key_exists($keys[5], $arr)) $this->setTipcom($arr[$keys[5]]);
 		if (array_key_exists($keys[6], $arr)) $this->setReftra($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setId($arr[$keys[7]]);
+		if (array_key_exists($keys[7], $arr)) $this->setLoguse($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setId($arr[$keys[8]]);
 	}
 
 	
@@ -510,6 +541,7 @@ abstract class BaseContabc extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(ContabcPeer::STACOM)) $criteria->add(ContabcPeer::STACOM, $this->stacom);
 		if ($this->isColumnModified(ContabcPeer::TIPCOM)) $criteria->add(ContabcPeer::TIPCOM, $this->tipcom);
 		if ($this->isColumnModified(ContabcPeer::REFTRA)) $criteria->add(ContabcPeer::REFTRA, $this->reftra);
+		if ($this->isColumnModified(ContabcPeer::LOGUSE)) $criteria->add(ContabcPeer::LOGUSE, $this->loguse);
 		if ($this->isColumnModified(ContabcPeer::ID)) $criteria->add(ContabcPeer::ID, $this->id);
 
 		return $criteria;
@@ -554,6 +586,8 @@ abstract class BaseContabc extends BaseObject  implements Persistent {
 		$copyObj->setTipcom($this->tipcom);
 
 		$copyObj->setReftra($this->reftra);
+
+		$copyObj->setLoguse($this->loguse);
 
 
 		if ($deepCopy) {

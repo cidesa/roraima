@@ -763,6 +763,8 @@ class Tesoreria {
         $tsmov->setStatus('N');
         $tsmov->setFeccom(null);
       }
+      $loguse= sfContext::getInstance()->getUser()->getAttribute('loguse');
+      $tsmov->setLoguse($loguse);
       $tsmov->setStacon('N');
       $tsmov->save();
 
@@ -803,6 +805,8 @@ class Tesoreria {
         $tsmov2->setStatus('N');
         $tsmov2->setFeccom(null);
       }
+      $loguse= sfContext::getInstance()->getUser()->getAttribute('loguse');
+      $tsmov2->setLoguse($loguse);
       $tsmov2->setStacon('N');
       $tsmov2->save();
 
@@ -1644,6 +1648,8 @@ public static function validarCuentasGrid($grid)
     $tsmovlib->setStatus('C');
     $tsmovlib->setStacon('N');
     $tsmovlib->setStacon1('N');
+    $loguse= sfContext::getInstance()->getUser()->getAttribute('loguse');
+    $tsmovlib->setLoguse($loguse);
     $tsmovlib->save();
 
   }
@@ -1710,6 +1716,7 @@ public static function validarCuentasGrid($grid)
     $deb=0;
     $cre=0;
     $contaba = ContabaPeer::doSelectOne(new Criteria());
+    $fechah=date('Y-m-d');
 
     if($contaba){
       $fechainicio = $contaba->getFecini();

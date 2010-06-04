@@ -105,6 +105,10 @@ abstract class BaseTsmovlib extends BaseObject  implements Persistent {
 
 
 	
+	protected $loguse;
+
+
+	
 	protected $id;
 
 	
@@ -362,6 +366,13 @@ abstract class BaseTsmovlib extends BaseObject  implements Persistent {
   {
 
     return trim($this->refpag);
+
+  }
+  
+  public function getLoguse()
+  {
+
+    return trim($this->loguse);
 
   }
   
@@ -680,6 +691,16 @@ abstract class BaseTsmovlib extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setLoguse($v)
+	{
+
+    if ($this->loguse !== $v) {
+        $this->loguse = $v;
+        $this->modifiedColumns[] = TsmovlibPeer::LOGUSE;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -742,7 +763,9 @@ abstract class BaseTsmovlib extends BaseObject  implements Persistent {
 
       $this->refpag = $rs->getString($startcol + 23);
 
-      $this->id = $rs->getInt($startcol + 24);
+      $this->loguse = $rs->getString($startcol + 24);
+
+      $this->id = $rs->getInt($startcol + 25);
 
       $this->resetModified();
 
@@ -750,7 +773,7 @@ abstract class BaseTsmovlib extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 25; 
+            return $startcol + 26; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Tsmovlib object", $e);
     }
@@ -1000,6 +1023,9 @@ abstract class BaseTsmovlib extends BaseObject  implements Persistent {
 				return $this->getRefpag();
 				break;
 			case 24:
+				return $this->getLoguse();
+				break;
+			case 25:
 				return $this->getId();
 				break;
 			default:
@@ -1036,7 +1062,8 @@ abstract class BaseTsmovlib extends BaseObject  implements Persistent {
 			$keys[21] => $this->getStacon1(),
 			$keys[22] => $this->getMotanu(),
 			$keys[23] => $this->getRefpag(),
-			$keys[24] => $this->getId(),
+			$keys[24] => $this->getLoguse(),
+			$keys[25] => $this->getId(),
 		);
 		return $result;
 	}
@@ -1125,6 +1152,9 @@ abstract class BaseTsmovlib extends BaseObject  implements Persistent {
 				$this->setRefpag($value);
 				break;
 			case 24:
+				$this->setLoguse($value);
+				break;
+			case 25:
 				$this->setId($value);
 				break;
 		} 	}
@@ -1158,7 +1188,8 @@ abstract class BaseTsmovlib extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[21], $arr)) $this->setStacon1($arr[$keys[21]]);
 		if (array_key_exists($keys[22], $arr)) $this->setMotanu($arr[$keys[22]]);
 		if (array_key_exists($keys[23], $arr)) $this->setRefpag($arr[$keys[23]]);
-		if (array_key_exists($keys[24], $arr)) $this->setId($arr[$keys[24]]);
+		if (array_key_exists($keys[24], $arr)) $this->setLoguse($arr[$keys[24]]);
+		if (array_key_exists($keys[25], $arr)) $this->setId($arr[$keys[25]]);
 	}
 
 	
@@ -1190,6 +1221,7 @@ abstract class BaseTsmovlib extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(TsmovlibPeer::STACON1)) $criteria->add(TsmovlibPeer::STACON1, $this->stacon1);
 		if ($this->isColumnModified(TsmovlibPeer::MOTANU)) $criteria->add(TsmovlibPeer::MOTANU, $this->motanu);
 		if ($this->isColumnModified(TsmovlibPeer::REFPAG)) $criteria->add(TsmovlibPeer::REFPAG, $this->refpag);
+		if ($this->isColumnModified(TsmovlibPeer::LOGUSE)) $criteria->add(TsmovlibPeer::LOGUSE, $this->loguse);
 		if ($this->isColumnModified(TsmovlibPeer::ID)) $criteria->add(TsmovlibPeer::ID, $this->id);
 
 		return $criteria;
@@ -1269,6 +1301,8 @@ abstract class BaseTsmovlib extends BaseObject  implements Persistent {
 
 		$copyObj->setRefpag($this->refpag);
 
+		$copyObj->setLoguse($this->loguse);
+
 
 		$copyObj->setNew(true);
 
@@ -1315,7 +1349,10 @@ abstract class BaseTsmovlib extends BaseObject  implements Persistent {
 		if ($this->aTsdefban === null && (($this->numcue !== "" && $this->numcue !== null))) {
 						include_once 'lib/model/om/BaseTsdefbanPeer.php';
 
-			$this->aTsdefban = TsdefbanPeer::retrieveByPK($this->numcue, $con);
+      $c = new Criteria();
+      $c->add(TsdefbanPeer::NUMCUE,$this->numcue);
+      
+			$this->aTsdefban = TsdefbanPeer::doSelectOne($c, $con);
 
 			
 		}
@@ -1344,7 +1381,10 @@ abstract class BaseTsmovlib extends BaseObject  implements Persistent {
 		if ($this->aTstipmov === null && (($this->tipmov !== "" && $this->tipmov !== null))) {
 						include_once 'lib/model/om/BaseTstipmovPeer.php';
 
-			$this->aTstipmov = TstipmovPeer::retrieveByPK($this->tipmov, $con);
+      $c = new Criteria();
+      $c->add(TstipmovPeer::CODTIP,$this->tipmov);
+      
+			$this->aTstipmov = TstipmovPeer::doSelectOne($c, $con);
 
 			
 		}

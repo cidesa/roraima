@@ -38,6 +38,9 @@ propel:
     tipgas:
       type: VARCHAR
       size: 250
+    loguse:
+      type: VARCHAR
+      size: 50
     id:
       type: INTEGER
       required: true
@@ -248,6 +251,9 @@ propel:
     motrec:
       type: VARCHAR
       size: 1000
+    loguse:
+      type: VARCHAR
+      size: 50
     id:
       type: INTEGER
       required: true
@@ -1425,6 +1431,9 @@ propel:
     nrodec:
       type: VARCHAR
       size: 8
+    loguse:
+      type: VARCHAR
+      size: 50
     id:
       type: INTEGER
       required: true

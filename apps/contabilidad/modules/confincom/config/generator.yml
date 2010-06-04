@@ -11,6 +11,7 @@ generator:
       reftra:  {name: Referencia, params: readOnly=true}
       totdeb:  {name: Débitos, params: disabled=false readOnly=true}
       totcre:  {name: Créditos , params: disabled=false readOnly=true}
+      totdif:  {name: Diferencia , params: disabled=false readOnly=true}
       mensaje: {name: .}
       grid:    {name: .}
       btnactualizar: { name: .}
@@ -21,9 +22,9 @@ generator:
     edit:
       title:                    Comprobantes
       display:
-        Datos del comprobante:  [_mensaje, _btnactualizar, numcom, feccom, descom, reftra]
+        Datos del comprobante:  [_mensaje, _btnactualizar, numcom, _feccom, descom, reftra]
         Asientos:               [_grid]
-        Totales:                [totdeb, totcre]
+        Totales:                [totdeb, totcre, _totdif]
       fields:
         numcom:                 { help: Número del comprobante }
         descom:                 { help: Descripción del comprobante, params: size=80x3}  

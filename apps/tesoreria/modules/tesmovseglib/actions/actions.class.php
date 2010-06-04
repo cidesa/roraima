@@ -288,8 +288,10 @@ class tesmovseglibActions extends autotesmovseglibActions
 
     if ($this->tsmovlib->getId()!='')
     {
+       $agreeti=H::getConfApp('agrstausu', 'tesoreria', 'tesmovseglib');
+       $nomusu=H::getX('LOGUSE','Usuarios','Nomuse',$this->tsmovlib->getLoguse());
       if (strtoupper($this->tsmovlib->getStatus())=='A')
-      {
+      {        
         $this->eti="ANULADO";
         $this->color='#CC0000';
         $this->anular='N';
@@ -298,12 +300,14 @@ class tesmovseglibActions extends autotesmovseglibActions
       {
         if (strtoupper($this->tsmovlib->getStacon())=='C')
         {
-          $this->eti="CONCILIADO";
+          if ($agreeti=='S') $this->eti="CONCILIADO. REALIZADO POR EL USUARIO ".$nomusu;
+          else $this->eti="CONCILIADO";
           $this->color='#0000CC';
         }
         if (strtoupper($this->tsmovlib->getStacon())=='N')
         {
-          $this->eti="NO CONCILIADO";
+          if ($agreeti=='S') $this->eti="NO CONCILIADO. REALIZADO POR EL USUARIO ".$nomusu;
+          else  $this->eti="NO CONCILIADO";
           $this->color='#0000CC';
         }
       }

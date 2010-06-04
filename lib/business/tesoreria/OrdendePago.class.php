@@ -467,6 +467,9 @@ class OrdendePago
    $orden->setNumche(null);
    $orden->setCtaban(null);
    $orden->setNumcom($numerocomp);
+   $loguse= sfContext::getInstance()->getUser()->getAttribute('loguse');
+   $orden->setLoguse($loguse);
+
    if ($cuentaporpagarrendicion!="")
    {
      $orden->setCtapag($cuentaporpagarrendicion);
@@ -487,6 +490,20 @@ class OrdendePago
 
    $orden->save();
    Comprobante::ActualizarReferenciaComprobante($numerocomp,$orden->getNumord(),'OP');
+   $confcorcom=sfContext::getInstance()->getUser()->getAttribute('confcorcom');
+   $y = new Criteria();
+   $y->add(OpordpagPeer::NUMORD,$orden->getNumord());
+   $onedato=OpordpagPeer::doSelectOne($y);
+   if ($onedato)
+   {
+     if ($confcorcom=='N') {
+        $onedato->setNumcom("OP".substr($orden->getNumord(),2,6));
+        $onedato->save();
+     }
+
+
+   }
+
 
   }
 

@@ -13,7 +13,7 @@ abstract class BaseTsmovlibPeer {
 	const CLASS_DEFAULT = 'lib.model.Tsmovlib';
 
 	
-	const NUM_COLUMNS = 25;
+	const NUM_COLUMNS = 26;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -92,6 +92,9 @@ abstract class BaseTsmovlibPeer {
 	const REFPAG = 'tsmovlib.REFPAG';
 
 	
+	const LOGUSE = 'tsmovlib.LOGUSE';
+
+	
 	const ID = 'tsmovlib.ID';
 
 	
@@ -100,18 +103,18 @@ abstract class BaseTsmovlibPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Numcue', 'Reflib', 'Feclib', 'Tipmov', 'Deslib', 'Monmov', 'Codcta', 'Numcom', 'Feccom', 'Status', 'Stacon', 'Fecing', 'Fecanu', 'Tipmovpad', 'Reflibpad', 'Transito', 'Numcomadi', 'Feccomadi', 'Nombensus', 'Orden', 'Horing', 'Stacon1', 'Motanu', 'Refpag', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (TsmovlibPeer::NUMCUE, TsmovlibPeer::REFLIB, TsmovlibPeer::FECLIB, TsmovlibPeer::TIPMOV, TsmovlibPeer::DESLIB, TsmovlibPeer::MONMOV, TsmovlibPeer::CODCTA, TsmovlibPeer::NUMCOM, TsmovlibPeer::FECCOM, TsmovlibPeer::STATUS, TsmovlibPeer::STACON, TsmovlibPeer::FECING, TsmovlibPeer::FECANU, TsmovlibPeer::TIPMOVPAD, TsmovlibPeer::REFLIBPAD, TsmovlibPeer::TRANSITO, TsmovlibPeer::NUMCOMADI, TsmovlibPeer::FECCOMADI, TsmovlibPeer::NOMBENSUS, TsmovlibPeer::ORDEN, TsmovlibPeer::HORING, TsmovlibPeer::STACON1, TsmovlibPeer::MOTANU, TsmovlibPeer::REFPAG, TsmovlibPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('numcue', 'reflib', 'feclib', 'tipmov', 'deslib', 'monmov', 'codcta', 'numcom', 'feccom', 'status', 'stacon', 'fecing', 'fecanu', 'tipmovpad', 'reflibpad', 'transito', 'numcomadi', 'feccomadi', 'nombensus', 'orden', 'horing', 'stacon1', 'motanu', 'refpag', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, )
+		BasePeer::TYPE_PHPNAME => array ('Numcue', 'Reflib', 'Feclib', 'Tipmov', 'Deslib', 'Monmov', 'Codcta', 'Numcom', 'Feccom', 'Status', 'Stacon', 'Fecing', 'Fecanu', 'Tipmovpad', 'Reflibpad', 'Transito', 'Numcomadi', 'Feccomadi', 'Nombensus', 'Orden', 'Horing', 'Stacon1', 'Motanu', 'Refpag', 'Loguse', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (TsmovlibPeer::NUMCUE, TsmovlibPeer::REFLIB, TsmovlibPeer::FECLIB, TsmovlibPeer::TIPMOV, TsmovlibPeer::DESLIB, TsmovlibPeer::MONMOV, TsmovlibPeer::CODCTA, TsmovlibPeer::NUMCOM, TsmovlibPeer::FECCOM, TsmovlibPeer::STATUS, TsmovlibPeer::STACON, TsmovlibPeer::FECING, TsmovlibPeer::FECANU, TsmovlibPeer::TIPMOVPAD, TsmovlibPeer::REFLIBPAD, TsmovlibPeer::TRANSITO, TsmovlibPeer::NUMCOMADI, TsmovlibPeer::FECCOMADI, TsmovlibPeer::NOMBENSUS, TsmovlibPeer::ORDEN, TsmovlibPeer::HORING, TsmovlibPeer::STACON1, TsmovlibPeer::MOTANU, TsmovlibPeer::REFPAG, TsmovlibPeer::LOGUSE, TsmovlibPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('numcue', 'reflib', 'feclib', 'tipmov', 'deslib', 'monmov', 'codcta', 'numcom', 'feccom', 'status', 'stacon', 'fecing', 'fecanu', 'tipmovpad', 'reflibpad', 'transito', 'numcomadi', 'feccomadi', 'nombensus', 'orden', 'horing', 'stacon1', 'motanu', 'refpag', 'loguse', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Numcue' => 0, 'Reflib' => 1, 'Feclib' => 2, 'Tipmov' => 3, 'Deslib' => 4, 'Monmov' => 5, 'Codcta' => 6, 'Numcom' => 7, 'Feccom' => 8, 'Status' => 9, 'Stacon' => 10, 'Fecing' => 11, 'Fecanu' => 12, 'Tipmovpad' => 13, 'Reflibpad' => 14, 'Transito' => 15, 'Numcomadi' => 16, 'Feccomadi' => 17, 'Nombensus' => 18, 'Orden' => 19, 'Horing' => 20, 'Stacon1' => 21, 'Motanu' => 22, 'Refpag' => 23, 'Id' => 24, ),
-		BasePeer::TYPE_COLNAME => array (TsmovlibPeer::NUMCUE => 0, TsmovlibPeer::REFLIB => 1, TsmovlibPeer::FECLIB => 2, TsmovlibPeer::TIPMOV => 3, TsmovlibPeer::DESLIB => 4, TsmovlibPeer::MONMOV => 5, TsmovlibPeer::CODCTA => 6, TsmovlibPeer::NUMCOM => 7, TsmovlibPeer::FECCOM => 8, TsmovlibPeer::STATUS => 9, TsmovlibPeer::STACON => 10, TsmovlibPeer::FECING => 11, TsmovlibPeer::FECANU => 12, TsmovlibPeer::TIPMOVPAD => 13, TsmovlibPeer::REFLIBPAD => 14, TsmovlibPeer::TRANSITO => 15, TsmovlibPeer::NUMCOMADI => 16, TsmovlibPeer::FECCOMADI => 17, TsmovlibPeer::NOMBENSUS => 18, TsmovlibPeer::ORDEN => 19, TsmovlibPeer::HORING => 20, TsmovlibPeer::STACON1 => 21, TsmovlibPeer::MOTANU => 22, TsmovlibPeer::REFPAG => 23, TsmovlibPeer::ID => 24, ),
-		BasePeer::TYPE_FIELDNAME => array ('numcue' => 0, 'reflib' => 1, 'feclib' => 2, 'tipmov' => 3, 'deslib' => 4, 'monmov' => 5, 'codcta' => 6, 'numcom' => 7, 'feccom' => 8, 'status' => 9, 'stacon' => 10, 'fecing' => 11, 'fecanu' => 12, 'tipmovpad' => 13, 'reflibpad' => 14, 'transito' => 15, 'numcomadi' => 16, 'feccomadi' => 17, 'nombensus' => 18, 'orden' => 19, 'horing' => 20, 'stacon1' => 21, 'motanu' => 22, 'refpag' => 23, 'id' => 24, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, )
+		BasePeer::TYPE_PHPNAME => array ('Numcue' => 0, 'Reflib' => 1, 'Feclib' => 2, 'Tipmov' => 3, 'Deslib' => 4, 'Monmov' => 5, 'Codcta' => 6, 'Numcom' => 7, 'Feccom' => 8, 'Status' => 9, 'Stacon' => 10, 'Fecing' => 11, 'Fecanu' => 12, 'Tipmovpad' => 13, 'Reflibpad' => 14, 'Transito' => 15, 'Numcomadi' => 16, 'Feccomadi' => 17, 'Nombensus' => 18, 'Orden' => 19, 'Horing' => 20, 'Stacon1' => 21, 'Motanu' => 22, 'Refpag' => 23, 'Loguse' => 24, 'Id' => 25, ),
+		BasePeer::TYPE_COLNAME => array (TsmovlibPeer::NUMCUE => 0, TsmovlibPeer::REFLIB => 1, TsmovlibPeer::FECLIB => 2, TsmovlibPeer::TIPMOV => 3, TsmovlibPeer::DESLIB => 4, TsmovlibPeer::MONMOV => 5, TsmovlibPeer::CODCTA => 6, TsmovlibPeer::NUMCOM => 7, TsmovlibPeer::FECCOM => 8, TsmovlibPeer::STATUS => 9, TsmovlibPeer::STACON => 10, TsmovlibPeer::FECING => 11, TsmovlibPeer::FECANU => 12, TsmovlibPeer::TIPMOVPAD => 13, TsmovlibPeer::REFLIBPAD => 14, TsmovlibPeer::TRANSITO => 15, TsmovlibPeer::NUMCOMADI => 16, TsmovlibPeer::FECCOMADI => 17, TsmovlibPeer::NOMBENSUS => 18, TsmovlibPeer::ORDEN => 19, TsmovlibPeer::HORING => 20, TsmovlibPeer::STACON1 => 21, TsmovlibPeer::MOTANU => 22, TsmovlibPeer::REFPAG => 23, TsmovlibPeer::LOGUSE => 24, TsmovlibPeer::ID => 25, ),
+		BasePeer::TYPE_FIELDNAME => array ('numcue' => 0, 'reflib' => 1, 'feclib' => 2, 'tipmov' => 3, 'deslib' => 4, 'monmov' => 5, 'codcta' => 6, 'numcom' => 7, 'feccom' => 8, 'status' => 9, 'stacon' => 10, 'fecing' => 11, 'fecanu' => 12, 'tipmovpad' => 13, 'reflibpad' => 14, 'transito' => 15, 'numcomadi' => 16, 'feccomadi' => 17, 'nombensus' => 18, 'orden' => 19, 'horing' => 20, 'stacon1' => 21, 'motanu' => 22, 'refpag' => 23, 'loguse' => 24, 'id' => 25, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, )
 	);
 
 	
@@ -212,6 +215,8 @@ abstract class BaseTsmovlibPeer {
 		$criteria->addSelectColumn(TsmovlibPeer::MOTANU);
 
 		$criteria->addSelectColumn(TsmovlibPeer::REFPAG);
+
+		$criteria->addSelectColumn(TsmovlibPeer::LOGUSE);
 
 		$criteria->addSelectColumn(TsmovlibPeer::ID);
 
@@ -460,10 +465,10 @@ abstract class BaseTsmovlibPeer {
 			$criteria->addSelectColumn($column);
 		}
 
-		$criteria->addJoin(TsmovlibPeer::NUMCUE, TsdefbanPeer::NUMCUE);
-
-		$criteria->addJoin(TsmovlibPeer::TIPMOV, TstipmovPeer::CODTIP);
-
+			$criteria->addJoin(TsmovlibPeer::NUMCUE, TsdefbanPeer::NUMCUE);
+	
+			$criteria->addJoin(TsmovlibPeer::TIPMOV, TstipmovPeer::CODTIP);
+	
 		$rs = TsmovlibPeer::doSelectRS($criteria, $con);
 		if ($rs->next()) {
 			return $rs->getInt(1);
@@ -485,16 +490,16 @@ abstract class BaseTsmovlibPeer {
 		TsmovlibPeer::addSelectColumns($c);
 		$startcol2 = (TsmovlibPeer::NUM_COLUMNS - TsmovlibPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		TsdefbanPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + TsdefbanPeer::NUM_COLUMNS;
-
-		TstipmovPeer::addSelectColumns($c);
-		$startcol4 = $startcol3 + TstipmovPeer::NUM_COLUMNS;
-
-		$c->addJoin(TsmovlibPeer::NUMCUE, TsdefbanPeer::NUMCUE);
-
-		$c->addJoin(TsmovlibPeer::TIPMOV, TstipmovPeer::CODTIP);
-
+			TsdefbanPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + TsdefbanPeer::NUM_COLUMNS;
+	
+			TstipmovPeer::addSelectColumns($c);
+			$startcol4 = $startcol3 + TstipmovPeer::NUM_COLUMNS;
+	
+			$c->addJoin(TsmovlibPeer::NUMCUE, TsdefbanPeer::NUMCUE);
+	
+			$c->addJoin(TsmovlibPeer::TIPMOV, TstipmovPeer::CODTIP);
+	
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
 
@@ -508,112 +513,112 @@ abstract class BaseTsmovlibPeer {
 			$obj1->hydrate($rs);
 
 
-					
-			$omClass = TsdefbanPeer::getOMClass();
+							
+				$omClass = TsdefbanPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2 = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2 = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getTsdefban(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addTsmovlib($obj1); 					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getTsdefban(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addTsmovlib($obj1); 						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initTsmovlibs();
-				$obj2->addTsmovlib($obj1);
-			}
-
-
-					
-			$omClass = TstipmovPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj3 = new $cls();
-			$obj3->hydrate($rs, $startcol3);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj3 = $temp_obj1->getTstipmov(); 				if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj3->addTsmovlib($obj1); 					break;
+				if ($newObject) {
+					$obj2->initTsmovlibs();
+					$obj2->addTsmovlib($obj1);
 				}
-			}
+	
 
-			if ($newObject) {
-				$obj3->initTsmovlibs();
-				$obj3->addTsmovlib($obj1);
-			}
+							
+				$omClass = TstipmovPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj3 = new $cls();
+				$obj3->hydrate($rs, $startcol3);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj3 = $temp_obj1->getTstipmov(); 					if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj3->addTsmovlib($obj1); 						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj3->initTsmovlibs();
+					$obj3->addTsmovlib($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;
 	}
 
 
-	
-	public static function doCountJoinAllExceptTsdefban(Criteria $criteria, $distinct = false, $con = null)
-	{
-				$criteria = clone $criteria;
-
-				$criteria->clearSelectColumns()->clearOrderByColumns();
-		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(TsmovlibPeer::COUNT_DISTINCT);
-		} else {
-			$criteria->addSelectColumn(TsmovlibPeer::COUNT);
-		}
-
-				foreach($criteria->getGroupByColumns() as $column)
+		
+		public static function doCountJoinAllExceptTsdefban(Criteria $criteria, $distinct = false, $con = null)
 		{
-			$criteria->addSelectColumn($column);
-		}
+						$criteria = clone $criteria;
 
-		$criteria->addJoin(TsmovlibPeer::TIPMOV, TstipmovPeer::CODTIP);
+						$criteria->clearSelectColumns()->clearOrderByColumns();
+			if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+				$criteria->addSelectColumn(TsmovlibPeer::COUNT_DISTINCT);
+			} else {
+				$criteria->addSelectColumn(TsmovlibPeer::COUNT);
+			}
 
-		$rs = TsmovlibPeer::doSelectRS($criteria, $con);
-		if ($rs->next()) {
-			return $rs->getInt(1);
-		} else {
-						return 0;
-		}
-	}
-
-
+						foreach($criteria->getGroupByColumns() as $column)
+			{
+				$criteria->addSelectColumn($column);
+			}
 	
-	public static function doCountJoinAllExceptTstipmov(Criteria $criteria, $distinct = false, $con = null)
-	{
-				$criteria = clone $criteria;
-
-				$criteria->clearSelectColumns()->clearOrderByColumns();
-		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(TsmovlibPeer::COUNT_DISTINCT);
-		} else {
-			$criteria->addSelectColumn(TsmovlibPeer::COUNT);
+				$criteria->addJoin(TsmovlibPeer::TIPMOV, TstipmovPeer::CODTIP);
+		
+			$rs = TsmovlibPeer::doSelectRS($criteria, $con);
+			if ($rs->next()) {
+				return $rs->getInt(1);
+			} else {
+								return 0;
+			}
 		}
+	
 
-				foreach($criteria->getGroupByColumns() as $column)
+		
+		public static function doCountJoinAllExceptTstipmov(Criteria $criteria, $distinct = false, $con = null)
 		{
-			$criteria->addSelectColumn($column);
+						$criteria = clone $criteria;
+
+						$criteria->clearSelectColumns()->clearOrderByColumns();
+			if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+				$criteria->addSelectColumn(TsmovlibPeer::COUNT_DISTINCT);
+			} else {
+				$criteria->addSelectColumn(TsmovlibPeer::COUNT);
+			}
+
+						foreach($criteria->getGroupByColumns() as $column)
+			{
+				$criteria->addSelectColumn($column);
+			}
+	
+				$criteria->addJoin(TsmovlibPeer::NUMCUE, TsdefbanPeer::NUMCUE);
+		
+			$rs = TsmovlibPeer::doSelectRS($criteria, $con);
+			if ($rs->next()) {
+				return $rs->getInt(1);
+			} else {
+								return 0;
+			}
 		}
-
-		$criteria->addJoin(TsmovlibPeer::NUMCUE, TsdefbanPeer::NUMCUE);
-
-		$rs = TsmovlibPeer::doSelectRS($criteria, $con);
-		if ($rs->next()) {
-			return $rs->getInt(1);
-		} else {
-						return 0;
-		}
-	}
-
+	
 
 	
 	public static function doSelectJoinAllExceptTsdefban(Criteria $c, $con = null)
@@ -627,11 +632,11 @@ abstract class BaseTsmovlibPeer {
 		TsmovlibPeer::addSelectColumns($c);
 		$startcol2 = (TsmovlibPeer::NUM_COLUMNS - TsmovlibPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		TstipmovPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + TstipmovPeer::NUM_COLUMNS;
-
-		$c->addJoin(TsmovlibPeer::TIPMOV, TstipmovPeer::CODTIP);
-
+			TstipmovPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + TstipmovPeer::NUM_COLUMNS;
+	
+			$c->addJoin(TsmovlibPeer::TIPMOV, TstipmovPeer::CODTIP);
+	
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
@@ -644,28 +649,28 @@ abstract class BaseTsmovlibPeer {
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
 
-			$omClass = TstipmovPeer::getOMClass();
+				$omClass = TstipmovPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2  = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2  = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getTstipmov(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addTsmovlib($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getTstipmov(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addTsmovlib($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initTsmovlibs();
-				$obj2->addTsmovlib($obj1);
-			}
-
+				if ($newObject) {
+					$obj2->initTsmovlibs();
+					$obj2->addTsmovlib($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;
@@ -684,11 +689,11 @@ abstract class BaseTsmovlibPeer {
 		TsmovlibPeer::addSelectColumns($c);
 		$startcol2 = (TsmovlibPeer::NUM_COLUMNS - TsmovlibPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		TsdefbanPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + TsdefbanPeer::NUM_COLUMNS;
-
-		$c->addJoin(TsmovlibPeer::NUMCUE, TsdefbanPeer::NUMCUE);
-
+			TsdefbanPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + TsdefbanPeer::NUM_COLUMNS;
+	
+			$c->addJoin(TsmovlibPeer::NUMCUE, TsdefbanPeer::NUMCUE);
+	
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
@@ -701,28 +706,28 @@ abstract class BaseTsmovlibPeer {
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
 
-			$omClass = TsdefbanPeer::getOMClass();
+				$omClass = TsdefbanPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2  = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2  = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getTsdefban(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addTsmovlib($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getTsdefban(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addTsmovlib($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initTsmovlibs();
-				$obj2->addTsmovlib($obj1);
-			}
-
+				if ($newObject) {
+					$obj2->initTsmovlibs();
+					$obj2->addTsmovlib($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;

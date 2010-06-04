@@ -13,7 +13,7 @@ abstract class BaseCptraslaPeer {
 	const CLASS_DEFAULT = 'lib.model.presupuesto.Cptrasla';
 
 	
-	const NUM_COLUMNS = 11;
+	const NUM_COLUMNS = 12;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -50,6 +50,9 @@ abstract class BaseCptraslaPeer {
 	const NRODEC = 'cptrasla.NRODEC';
 
 	
+	const LOGUSE = 'cptrasla.LOGUSE';
+
+	
 	const ID = 'cptrasla.ID';
 
 	
@@ -58,18 +61,18 @@ abstract class BaseCptraslaPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Reftra', 'Fectra', 'Anotra', 'Pertra', 'Destra', 'Desanu', 'Tottra', 'Statra', 'Fecanu', 'Nrodec', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (CptraslaPeer::REFTRA, CptraslaPeer::FECTRA, CptraslaPeer::ANOTRA, CptraslaPeer::PERTRA, CptraslaPeer::DESTRA, CptraslaPeer::DESANU, CptraslaPeer::TOTTRA, CptraslaPeer::STATRA, CptraslaPeer::FECANU, CptraslaPeer::NRODEC, CptraslaPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('reftra', 'fectra', 'anotra', 'pertra', 'destra', 'desanu', 'tottra', 'statra', 'fecanu', 'nrodec', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
+		BasePeer::TYPE_PHPNAME => array ('Reftra', 'Fectra', 'Anotra', 'Pertra', 'Destra', 'Desanu', 'Tottra', 'Statra', 'Fecanu', 'Nrodec', 'Loguse', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (CptraslaPeer::REFTRA, CptraslaPeer::FECTRA, CptraslaPeer::ANOTRA, CptraslaPeer::PERTRA, CptraslaPeer::DESTRA, CptraslaPeer::DESANU, CptraslaPeer::TOTTRA, CptraslaPeer::STATRA, CptraslaPeer::FECANU, CptraslaPeer::NRODEC, CptraslaPeer::LOGUSE, CptraslaPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('reftra', 'fectra', 'anotra', 'pertra', 'destra', 'desanu', 'tottra', 'statra', 'fecanu', 'nrodec', 'loguse', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Reftra' => 0, 'Fectra' => 1, 'Anotra' => 2, 'Pertra' => 3, 'Destra' => 4, 'Desanu' => 5, 'Tottra' => 6, 'Statra' => 7, 'Fecanu' => 8, 'Nrodec' => 9, 'Id' => 10, ),
-		BasePeer::TYPE_COLNAME => array (CptraslaPeer::REFTRA => 0, CptraslaPeer::FECTRA => 1, CptraslaPeer::ANOTRA => 2, CptraslaPeer::PERTRA => 3, CptraslaPeer::DESTRA => 4, CptraslaPeer::DESANU => 5, CptraslaPeer::TOTTRA => 6, CptraslaPeer::STATRA => 7, CptraslaPeer::FECANU => 8, CptraslaPeer::NRODEC => 9, CptraslaPeer::ID => 10, ),
-		BasePeer::TYPE_FIELDNAME => array ('reftra' => 0, 'fectra' => 1, 'anotra' => 2, 'pertra' => 3, 'destra' => 4, 'desanu' => 5, 'tottra' => 6, 'statra' => 7, 'fecanu' => 8, 'nrodec' => 9, 'id' => 10, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
+		BasePeer::TYPE_PHPNAME => array ('Reftra' => 0, 'Fectra' => 1, 'Anotra' => 2, 'Pertra' => 3, 'Destra' => 4, 'Desanu' => 5, 'Tottra' => 6, 'Statra' => 7, 'Fecanu' => 8, 'Nrodec' => 9, 'Loguse' => 10, 'Id' => 11, ),
+		BasePeer::TYPE_COLNAME => array (CptraslaPeer::REFTRA => 0, CptraslaPeer::FECTRA => 1, CptraslaPeer::ANOTRA => 2, CptraslaPeer::PERTRA => 3, CptraslaPeer::DESTRA => 4, CptraslaPeer::DESANU => 5, CptraslaPeer::TOTTRA => 6, CptraslaPeer::STATRA => 7, CptraslaPeer::FECANU => 8, CptraslaPeer::NRODEC => 9, CptraslaPeer::LOGUSE => 10, CptraslaPeer::ID => 11, ),
+		BasePeer::TYPE_FIELDNAME => array ('reftra' => 0, 'fectra' => 1, 'anotra' => 2, 'pertra' => 3, 'destra' => 4, 'desanu' => 5, 'tottra' => 6, 'statra' => 7, 'fecanu' => 8, 'nrodec' => 9, 'loguse' => 10, 'id' => 11, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
 	);
 
 	
@@ -142,6 +145,8 @@ abstract class BaseCptraslaPeer {
 		$criteria->addSelectColumn(CptraslaPeer::FECANU);
 
 		$criteria->addSelectColumn(CptraslaPeer::NRODEC);
+
+		$criteria->addSelectColumn(CptraslaPeer::LOGUSE);
 
 		$criteria->addSelectColumn(CptraslaPeer::ID);
 

@@ -156,6 +156,9 @@
 146:
   cod: 146
   msj:  Se ha guardado solamente la Descripcion ya que la solicitud tiene asociada una Orden de Compra.
+147:
+  cod: 147
+  msj:  Las Solicitudes Precompromenten puede aprobar solo una.
 
 ####### Ajuste OC ##########
 148:

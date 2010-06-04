@@ -349,8 +349,10 @@ class Comprobante
 			    } else {
 			      $obj->setStacom('E');
 			    }
-			    $obj->setTipcom(null);
+			    $obj->setTipcom('CON');
 			    $obj->setMoncom($contabc->getTotdeb());
+                            $loguse= sfContext::getInstance()->getUser()->getAttribute('loguse');
+                            $obj->setLoguse($loguse);
 			    $obj->save();
 		    }
 			self::Salvar_asientosconfincom($contabc->getNumcom(),$contabc->getFeccom(),$contabc->getReftra(),$grid);
@@ -374,7 +376,7 @@ class Comprobante
 	          $monto = $reg->getMoncredito();
 	        }
 	        $reg->setDesasi($reg->getDescta());
-	        $reg->setRefasi($reftra);
+	        $reg->setRefasi($reg->getRefasi());
 	        $reg->setNumasi($j +1);
 	        $reg->setDebcre($cre);
 	        $reg->setMonasi($monto);
