@@ -54,7 +54,7 @@ class Tscheemi extends BaseTscheemi
 	{
 		$sql="SELECT A.NUMORD as numord
 				FROM OPORDCHE A,OPORDPAG B
-				WHERE A.NUMCHE='".self::getNumche()."' AND A.NUMORD=B.NUMORD ORDER BY A.NUMORD";
+				WHERE A.NUMCHE='".self::getNumche()."' AND A.CODCTA='".self::getNumcue()."' AND A.TIPMOV='".self::getTipdoc()."' AND A.NUMORD=B.NUMORD ORDER BY A.NUMORD";
 		if (Herramientas::BuscarDatos($sql,&$result))
 		{
 			$numord='';
@@ -84,7 +84,7 @@ class Tscheemi extends BaseTscheemi
 	{
 		$sql="SELECT B.NUMCOM as numcom
 				FROM OPORDCHE A,OPORDPAG B
-				WHERE A.NUMCHE='".self::getNumche()."' AND A.NUMORD=B.NUMORD ORDER BY A.NUMORD";
+				WHERE A.NUMCHE='".self::getNumche()."' AND A.CODCTA='".self::getNumcue()."' AND A.TIPMOV='".self::getTipdoc()."' AND A.NUMORD=B.NUMORD ORDER BY A.NUMORD";
 		if (Herramientas::BuscarDatos($sql,&$result))
 		{
 			$numcom='';
