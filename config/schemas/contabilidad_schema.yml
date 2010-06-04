@@ -299,6 +299,9 @@ propel:
     reftra:
       type: VARCHAR
       size: 8
+    loguse:
+      type: VARCHAR
+      size: 50
     id:
       type: INTEGER
       required: true

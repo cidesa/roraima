@@ -6105,8 +6105,39 @@ public function Catdefcatman_Cattramo($params = '') {
 
 		);
 	}
-        
 
+	public function Segnivapr_Usuarios() {
+		$this->c = new Criteria();
+
+		$this->columnas = array (
+			SegnivaprPeer :: CODNIV => 'Código',
+			SegnivaprPeer :: DESNIV => 'Nombre'
+		);
+	}
+
+	public function Contabb_Confintipcuecon() {
+		$this->c = new Criteria();
+		$this->c->add(ContabbPeer :: CARGAB, 'N', Criteria :: NOT_EQUAL);
+
+		$this->columnas = array (
+			ContabbPeer :: CODCTA => 'Codigo',
+			ContabbPeer :: DESCTA => 'Descripción',
+
+		);
+	}
+
+	public function Contabb_Confincom($param = array ()) {
+		$this->c = new Criteria();
+		$this->c->add(ContabbPeer :: CARGAB, 'C');
+		$this->c->addAscendingOrderByColumn(ContabbPeer :: CODCTA);
+
+		$this->columnas = array (
+			ContabbPeer :: CODCTA => 'Código',
+			ContabbPeer :: DESCTA => 'Descripción',
+
+		);
+	}
+        
 }
 
 ?>

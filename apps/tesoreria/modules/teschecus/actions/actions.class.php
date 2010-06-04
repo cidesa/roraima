@@ -203,12 +203,12 @@ $this->Bitacora('Guardo');
 
   protected function saveTscheemi($tscheemi)
   {
-    if ($tscheemi->getStatus()=='C')
+    if ($tscheemi->getStatus()=='D')
     {
-      $tscheemi->setFecent(null);
-      $tscheemi->setObsent(null);
-      $tscheemi->setNomrec(null);
-      $tscheemi->setCodent(null);
+      //$tscheemi->setFecent(null);
+      //$tscheemi->setObsent(null);
+      //$tscheemi->setNomrec(null);
+      //$tscheemi->setCodent(null);
 }
     $tscheemi->save();
 

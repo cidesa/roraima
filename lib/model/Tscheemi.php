@@ -147,6 +147,10 @@ class Tscheemi extends BaseTscheemi
   	{
   		$estatus='ANULADO';
   	}
+        else if (self::getStatus()=='D')
+  	{
+  		$estatus='DEVUELTO';
+  	}
   	return $estatus;
   }
 

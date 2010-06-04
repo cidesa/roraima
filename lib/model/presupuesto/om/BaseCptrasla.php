@@ -49,6 +49,10 @@ abstract class BaseCptrasla extends BaseObject  implements Persistent {
 
 
 	
+	protected $loguse;
+
+
+	
 	protected $id;
 
 	
@@ -168,6 +172,13 @@ abstract class BaseCptrasla extends BaseObject  implements Persistent {
   {
 
     return trim($this->nrodec);
+
+  }
+  
+  public function getLoguse()
+  {
+
+    return trim($this->loguse);
 
   }
   
@@ -302,6 +313,16 @@ abstract class BaseCptrasla extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setLoguse($v)
+	{
+
+    if ($this->loguse !== $v) {
+        $this->loguse = $v;
+        $this->modifiedColumns[] = CptraslaPeer::LOGUSE;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -336,7 +357,9 @@ abstract class BaseCptrasla extends BaseObject  implements Persistent {
 
       $this->nrodec = $rs->getString($startcol + 9);
 
-      $this->id = $rs->getInt($startcol + 10);
+      $this->loguse = $rs->getString($startcol + 10);
+
+      $this->id = $rs->getInt($startcol + 11);
 
       $this->resetModified();
 
@@ -344,7 +367,7 @@ abstract class BaseCptrasla extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 11; 
+            return $startcol + 12; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Cptrasla object", $e);
     }
@@ -554,6 +577,9 @@ abstract class BaseCptrasla extends BaseObject  implements Persistent {
 				return $this->getNrodec();
 				break;
 			case 10:
+				return $this->getLoguse();
+				break;
+			case 11:
 				return $this->getId();
 				break;
 			default:
@@ -576,7 +602,8 @@ abstract class BaseCptrasla extends BaseObject  implements Persistent {
 			$keys[7] => $this->getStatra(),
 			$keys[8] => $this->getFecanu(),
 			$keys[9] => $this->getNrodec(),
-			$keys[10] => $this->getId(),
+			$keys[10] => $this->getLoguse(),
+			$keys[11] => $this->getId(),
 		);
 		return $result;
 	}
@@ -623,6 +650,9 @@ abstract class BaseCptrasla extends BaseObject  implements Persistent {
 				$this->setNrodec($value);
 				break;
 			case 10:
+				$this->setLoguse($value);
+				break;
+			case 11:
 				$this->setId($value);
 				break;
 		} 	}
@@ -642,7 +672,8 @@ abstract class BaseCptrasla extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[7], $arr)) $this->setStatra($arr[$keys[7]]);
 		if (array_key_exists($keys[8], $arr)) $this->setFecanu($arr[$keys[8]]);
 		if (array_key_exists($keys[9], $arr)) $this->setNrodec($arr[$keys[9]]);
-		if (array_key_exists($keys[10], $arr)) $this->setId($arr[$keys[10]]);
+		if (array_key_exists($keys[10], $arr)) $this->setLoguse($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setId($arr[$keys[11]]);
 	}
 
 	
@@ -660,6 +691,7 @@ abstract class BaseCptrasla extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CptraslaPeer::STATRA)) $criteria->add(CptraslaPeer::STATRA, $this->statra);
 		if ($this->isColumnModified(CptraslaPeer::FECANU)) $criteria->add(CptraslaPeer::FECANU, $this->fecanu);
 		if ($this->isColumnModified(CptraslaPeer::NRODEC)) $criteria->add(CptraslaPeer::NRODEC, $this->nrodec);
+		if ($this->isColumnModified(CptraslaPeer::LOGUSE)) $criteria->add(CptraslaPeer::LOGUSE, $this->loguse);
 		if ($this->isColumnModified(CptraslaPeer::ID)) $criteria->add(CptraslaPeer::ID, $this->id);
 
 		return $criteria;
@@ -710,6 +742,8 @@ abstract class BaseCptrasla extends BaseObject  implements Persistent {
 		$copyObj->setFecanu($this->fecanu);
 
 		$copyObj->setNrodec($this->nrodec);
+
+		$copyObj->setLoguse($this->loguse);
 
 
 		if ($deepCopy) {

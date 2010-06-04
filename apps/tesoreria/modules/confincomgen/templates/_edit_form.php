@@ -151,8 +151,8 @@ function llenar_codigo(e)
     //num = document.getElementById('contabc_numcom').value;
     num = document.getElementById('contabc_reftra').value;
     i=0;
-
-    while (i<51)
+    var numfil=parseInt('<?php echo $contabc->getNumfilas()?>') +1;
+    while (i<numfil)
     {
       fil= "ax_"+i+"_3";
 
@@ -172,7 +172,8 @@ function llenar_fecha(e)
     fecha = document.getElementById('contabc_feccom').value;
     fecha=(fecha.substr(6,4)) + "-" + (fecha.substr(3,2))+ "-" + (fecha.substr(0,2));
     i=0;
-    while (i<51)
+    var numfil=parseInt('<?php echo $contabc->getNumfilas()?>') +1;
+    while (i<numfil)
     {
       fil= "ax_"+i+"_4";
 
@@ -192,8 +193,8 @@ function llenar2()
     num = document.getElementById('contabc_reftra').value;
     n = 7;
     i=0;
-
-    while (i<51)
+    var numfil=parseInt('<?php echo $contabc->getNumfilas()?>') +1;
+    while (i<numfil)
     {
       fil= "ax_"+i+"_3";
 
@@ -208,7 +209,8 @@ function llenar2()
     //fecha=(fecha.substr(6,4)) + "-" + (fecha.substr(3,2))+ "-" + (fecha.substr(0,2));
     n = 7;
     i=0;
-    while (i<51)
+    var numfil=parseInt('<?php echo $contabc->getNumfilas()?>') +1;
+    while (i<numfil)
     {
       fil= "ax_"+i+"_4";
       var catfec="trigger_ax_"+i+"_4";

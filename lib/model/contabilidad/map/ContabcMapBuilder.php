@@ -48,6 +48,8 @@ class ContabcMapBuilder {
 
 		$tMap->addColumn('REFTRA', 'Reftra', 'string', CreoleTypes::VARCHAR, false, 8);
 
+		$tMap->addColumn('LOGUSE', 'Loguse', 'string', CreoleTypes::VARCHAR, false, 50);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

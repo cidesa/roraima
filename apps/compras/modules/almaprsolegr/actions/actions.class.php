@@ -126,38 +126,52 @@ class almaprsolegrActions extends autoalmaprsolegrActions
 		  
 	  if ($this->aprobpresu=='S')
 	  {
-          $grid = Herramientas::CargarDatosGridv2($this,$this->obj);
-	      $x=$grid[0];
-	      $i=0;
-		  	while ($i<count($x))
-			{
-			  if ($x[$i]->getCheck()=='1')
-			  {
-				  $r= new Criteria();
-				  $r->add(CasolartPeer::REQART,$x[$i]->getReqart());
-				  $solegreso= CasolartPeer::doSelectOne($r);
-				  if ($solegreso){
-			  	    SolicituddeEgresos::verificarDispGenComp($solegreso,&$msj1,&$cod1,&$msj2,&$cod2,&$cod3,&$msj3);
-				    if ($msj3!=-1)
-                                    {
-                                     $this->coderr=142;
-                                       break;
-                                    }
-					if ($msj1!=-1)
-					{
-				       $this->coderr=152; $this->sol=$x[$i]->getReqart(); $this->art=$cod1; $this->codp=$cod3;
-					   break;
-					}
-					if ($msj2!=-1)
-					{
-				       $this->coderr=$msj2; $this->rec=$cod2;
-					   break;
-					}
-				  }
-			  }
-			  $i++;			  
-			}
-		  }
+            $grid = Herramientas::CargarDatosGridv2($this,$this->obj);
+            $x=$grid[0];
+            $i=0;
+            $l=0;
+            $acum=0;
+            while ($l<count($x))
+            {
+              if ($x[$l]->getCheck()=='1')
+              {
+               $acum=$acum +1;
+              }
+              $l++;
+            }
+            if ($acum==1){
+                while ($i<count($x))
+                {
+                  if ($x[$i]->getCheck()=='1')
+                  {
+                          $r= new Criteria();
+                          $r->add(CasolartPeer::REQART,$x[$i]->getReqart());
+                          $solegreso= CasolartPeer::doSelectOne($r);
+                          if ($solegreso){
+                            SolicituddeEgresos::verificarDispGenComp($solegreso,&$msj1,&$cod1,&$msj2,&$cod2,&$cod3,&$msj3);
+                            if ($msj3!=-1)
+                            {
+                             $this->coderr=142;
+                               break;
+                            }
+                            if ($msj1!=-1)
+                                {
+                               $this->coderr=152; $this->sol=$x[$i]->getReqart(); $this->art=$cod1; $this->codp=$cod3;
+                                   break;
+                                }
+                                if ($msj2!=-1)
+                                {
+                               $this->coderr=$msj2; $this->rec=$cod2;
+                                   break;
+                                }
+                          }
+                  }
+                  $i++;
+                }
+          }else {
+            $this->coderr=147;
+          }
+          }
 	      
 	  
 	      if($this->coderr!=-1){

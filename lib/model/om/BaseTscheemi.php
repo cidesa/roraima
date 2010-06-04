@@ -101,6 +101,14 @@ abstract class BaseTscheemi extends BaseObject  implements Persistent {
 
 
 	
+	protected $motdev;
+
+
+	
+	protected $fecdev;
+
+
+	
 	protected $id;
 
 	
@@ -331,6 +339,35 @@ abstract class BaseTscheemi extends BaseObject  implements Persistent {
     return trim($this->numcomegr);
 
   }
+  
+  public function getMotdev()
+  {
+
+    return trim($this->motdev);
+
+  }
+  
+  public function getFecdev($format = 'Y-m-d')
+  {
+
+    if ($this->fecdev === null || $this->fecdev === '') {
+      return null;
+    } elseif (!is_int($this->fecdev)) {
+            $ts = adodb_strtotime($this->fecdev);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecdev] as date/time value: " . var_export($this->fecdev, true));
+      }
+    } else {
+      $ts = $this->fecdev;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
   
   public function getId()
   {
@@ -597,6 +634,38 @@ abstract class BaseTscheemi extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setMotdev($v)
+	{
+
+    if ($this->motdev !== $v) {
+        $this->motdev = $v;
+        $this->modifiedColumns[] = TscheemiPeer::MOTDEV;
+      }
+  
+	} 
+	
+	public function setFecdev($v)
+	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecdev] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecdev !== $ts) {
+      $this->fecdev = $ts;
+      $this->modifiedColumns[] = TscheemiPeer::FECDEV;
+    }
+
+	} 
+	
 	public function setId($v)
 	{
 
@@ -657,7 +726,11 @@ abstract class BaseTscheemi extends BaseObject  implements Persistent {
 
       $this->numcomegr = $rs->getString($startcol + 22);
 
-      $this->id = $rs->getInt($startcol + 23);
+      $this->motdev = $rs->getString($startcol + 23);
+
+      $this->fecdev = $rs->getDate($startcol + 24, null);
+
+      $this->id = $rs->getInt($startcol + 25);
 
       $this->resetModified();
 
@@ -665,7 +738,7 @@ abstract class BaseTscheemi extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 24; 
+            return $startcol + 26; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Tscheemi object", $e);
     }
@@ -882,6 +955,12 @@ abstract class BaseTscheemi extends BaseObject  implements Persistent {
 				return $this->getNumcomegr();
 				break;
 			case 23:
+				return $this->getMotdev();
+				break;
+			case 24:
+				return $this->getFecdev();
+				break;
+			case 25:
 				return $this->getId();
 				break;
 			default:
@@ -917,7 +996,9 @@ abstract class BaseTscheemi extends BaseObject  implements Persistent {
 			$keys[20] => $this->getCedaut(),
 			$keys[21] => $this->getPeraut(),
 			$keys[22] => $this->getNumcomegr(),
-			$keys[23] => $this->getId(),
+			$keys[23] => $this->getMotdev(),
+			$keys[24] => $this->getFecdev(),
+			$keys[25] => $this->getId(),
 		);
 		return $result;
 	}
@@ -1003,6 +1084,12 @@ abstract class BaseTscheemi extends BaseObject  implements Persistent {
 				$this->setNumcomegr($value);
 				break;
 			case 23:
+				$this->setMotdev($value);
+				break;
+			case 24:
+				$this->setFecdev($value);
+				break;
+			case 25:
 				$this->setId($value);
 				break;
 		} 	}
@@ -1035,7 +1122,9 @@ abstract class BaseTscheemi extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[20], $arr)) $this->setCedaut($arr[$keys[20]]);
 		if (array_key_exists($keys[21], $arr)) $this->setPeraut($arr[$keys[21]]);
 		if (array_key_exists($keys[22], $arr)) $this->setNumcomegr($arr[$keys[22]]);
-		if (array_key_exists($keys[23], $arr)) $this->setId($arr[$keys[23]]);
+		if (array_key_exists($keys[23], $arr)) $this->setMotdev($arr[$keys[23]]);
+		if (array_key_exists($keys[24], $arr)) $this->setFecdev($arr[$keys[24]]);
+		if (array_key_exists($keys[25], $arr)) $this->setId($arr[$keys[25]]);
 	}
 
 	
@@ -1066,6 +1155,8 @@ abstract class BaseTscheemi extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(TscheemiPeer::CEDAUT)) $criteria->add(TscheemiPeer::CEDAUT, $this->cedaut);
 		if ($this->isColumnModified(TscheemiPeer::PERAUT)) $criteria->add(TscheemiPeer::PERAUT, $this->peraut);
 		if ($this->isColumnModified(TscheemiPeer::NUMCOMEGR)) $criteria->add(TscheemiPeer::NUMCOMEGR, $this->numcomegr);
+		if ($this->isColumnModified(TscheemiPeer::MOTDEV)) $criteria->add(TscheemiPeer::MOTDEV, $this->motdev);
+		if ($this->isColumnModified(TscheemiPeer::FECDEV)) $criteria->add(TscheemiPeer::FECDEV, $this->fecdev);
 		if ($this->isColumnModified(TscheemiPeer::ID)) $criteria->add(TscheemiPeer::ID, $this->id);
 
 		return $criteria;
@@ -1142,6 +1233,10 @@ abstract class BaseTscheemi extends BaseObject  implements Persistent {
 		$copyObj->setPeraut($this->peraut);
 
 		$copyObj->setNumcomegr($this->numcomegr);
+
+		$copyObj->setMotdev($this->motdev);
+
+		$copyObj->setFecdev($this->fecdev);
 
 
 		$copyObj->setNew(true);

@@ -1605,7 +1605,7 @@ class SolicituddeEgresos
        {
            if (!self::chequearDisponibilidadPresupuesto3($solegreso,$objetos,$obj->getCodcat().'-'.$obj->getCodpre(),$tiporec,&$sobregiro))
 	       {
-	        $msjuno=113; $codi1=$obj->getCodart(); $codi3=$obj->getCodpre();
+	        $msjuno=113; $codi1=$obj->getCodart(); $codi3=$obj->getCodcat().'-'.$obj->getCodpre();
 	        break;
 	       }
 	       if ($sobregiro)

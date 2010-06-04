@@ -4,7 +4,7 @@ opciones:                  # Opciones generales
   tabla:                   contabc1
   anchogrid:               1000
   ancho:                   900
-  filas:                   7
+  filas:                   2
   titulo:                  ' '
   htmltotalfilas:          ' '
 1:       # Columna 1
@@ -12,22 +12,20 @@ opciones:                  # Opciones generales
   tipo:                    t
   nombrecampo:             codcta
   html:                    [size="15"]
-  oculta:                  false
   esgrabable:              true
-  #ajaxfila:               true
   catalogo:                [ contabb, sf_admin_edit_form, { codcta : 1 , descta : 2 }, Contabb_Confincom ]
 2:       # Columna 2
   titulo:                  Descripción del asiento
   tipo:                    t
   nombrecampo:             desasi
-  html:                    [size="30"]
+  html:                    ["size=30 readonly=true"]
   oculta:                  false
   esgrabable:              true
 3:       # Columna 3
   titulo:                  Referencia
   tipo:                    t
   nombrecampo:             refasi
-  html:                    [size="10"]
+  html:                    ["size=10 maxlength=8"]
   esgrabable:              true
 4:       # Columna 4
   titulo:                  Debito/Credito
@@ -40,15 +38,14 @@ opciones:                  # Opciones generales
   titulo:                  Débitos
   tipo:                    m
   nombrecampo:             mondebito
-  html:                    [size="10" ]
+  html:                    ["size=10  onBlur='toAjax(3,getUrlModuloAjax(),this.value,0,'&ides='+this.id)'" ]
   esgrabable:              true
-  #ajaxfila:               true
   estotal:                 [true, contabc_totdeb]
 6:       # Columna 6
   titulo:                  Créditos
   tipo:                    m
   nombrecampo:             moncredito
-  html:                    [size="10" ]
+  html:                    ["size=10 onBlur='toAjax(3,getUrlModuloAjax(),this.value,0,'&ides='+this.id)'" ]
   esgrabable:              true
   estotal:                 [true, contabc_totcre]
 

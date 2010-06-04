@@ -196,13 +196,17 @@ if (($status=='E' || $status=='A') && $tscheemi->getFaldat()!='S')
     <?php echo form_error('tscheemi{status}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-<?php  $val1=""; $val2=""; $val3=""; ?>
-<?php if($tscheemi->getStatus()=='A'){ $val1=true; $val2=false; $val3=false;} ?>
-<?php if($tscheemi->getStatus()=='E'){ $val2=true; $val1=false; $val3=false;} ?>
-<?php if($tscheemi->getStatus()=='C'){ $val3=true; $val1=false; $val2=false;} ?>
+<?php  $val1=""; $val2=""; $val3=""; $val4=""; ?>
+<?php if($tscheemi->getStatus()=='A'){ $val1=true; $val2=false; $val3=false; $val4=false;} ?>
+<?php if($tscheemi->getStatus()=='E'){ $val2=true; $val1=false; $val3=false; $val4=false;} ?>
+<?php if($tscheemi->getStatus()=='C'){ $val3=true; $val1=false; $val2=false; $val4=false;} ?>
+<?php if($tscheemi->getStatus()=='D'){ $val4=true; $val1=false; $val2=false; $val3=false;} ?>
 
 <?php echo " Anulado " . radiobutton_tag('tscheemi[status]', 'A',
 $val1, array('onClick' => 'push1();')); ?>
+&nbsp;&nbsp;&nbsp;
+<?php echo " Devuelto " . radiobutton_tag('tscheemi[status]', 'D',
+$val4, array('onClick' => 'push4();')); ?>
 &nbsp;&nbsp;&nbsp;
 <?php echo " Entregado " . radiobutton_tag('tscheemi[status]', 'E',
 $val2, array('onClick' => 'push2();')); ?>
@@ -213,9 +217,9 @@ $val3, array('onClick' => 'push3();')); ?></div>
 </fieldset>
 
 <br>
-
+<div id="divent" style="display : none">
 <fieldset>
-<div class="form-row">
+    <div class="form-row">
   <?php echo label_for('tscheemi[fecent]', __($labels['tscheemi{fecent}']), 'class="required" style="width: 110px"') ?>
   <div class="content<?php if ($sf_request->hasError('tscheemi{fecent}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('tscheemi{fecent}')): ?>
@@ -228,6 +232,7 @@ $val3, array('onClick' => 'push3();')); ?></div>
 	  'calendar_button_img' => '/sf/sf_admin/images/date.png',
 	  'control_name' => 'tscheemi[fecent]',
 	  'date_format' => 'dd/MM/yyyy',
+          'onkeyup' => "javascript: mascara(this,'/',patron,true)",
 	)); echo $value ? $value : '&nbsp;' ?>
 <?php } else { ?>
 	  <?php $value = object_input_date_tag($tscheemi, 'getFecent', array (
@@ -308,6 +313,44 @@ $val3, array('onClick' => 'push3();')); ?></div>
     </div>
 </div>
 </fieldset>
+</div>
+
+<div id="divdev" style="display : none">
+<fieldset>
+    <div class="form-row">
+  <?php echo label_for('tscheemi[fecdev]', __($labels['tscheemi{fecdev}']), 'class="required" style="width: 110px"') ?>
+  <div class="content<?php if ($sf_request->hasError('tscheemi{fecdev}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('tscheemi{fecdev}')): ?>
+    <?php echo form_error('tscheemi{fecdev}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_date_tag($tscheemi, 'getFecdev', array (
+  'rich' => true,
+  'calendar_button_img' => '/sf/sf_admin/images/date.png',
+  'control_name' => 'tscheemi[fecdev]',
+  'date_format' => 'dd/MM/yyyy',
+  'onkeyup' => "javascript: mascara(this,'/',patron,true)",
+  'readonly' => $status=='D' ? true : false,
+  'maxlength' => 10,
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+<br>
+  <?php echo label_for('tscheemi[motdev]', __($labels['tscheemi{motdev}']), 'class="required" style="width: 110px"') ?>
+  <div class="content<?php if ($sf_request->hasError('tscheemi{motdev}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('tscheemi{motdev}')): ?>
+    <?php echo form_error('tscheemi{motdev}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($tscheemi, 'getMotdev', array (
+  'size' => 80,
+  'control_name' => 'tscheemi[motdev]',
+  'readonly' => $status=='D' ? true : false,
+  'maxlength' => 100,
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+</div>
+</fieldset>
+</div>
 
 </div>
 </fieldset>
@@ -319,8 +362,18 @@ $val3, array('onClick' => 'push3();')); ?></div>
 <script type="text/javascript">
 	var status='<?php print $status; ?>';
 	var faldat='<?php print $tscheemi->getFaldat()?>';
-    if (status=='E' && faldat=='S')
+    if ((status=='E' && faldat=='S') || (status=='D' && faldat=='S'))
 	  {document.getElementById('divx').style.display="block";}
+
+   if (status=='E')
+   {
+     document.getElementById('divent').style.display="block";
+     $('trigger_tscheemi_fecent').hide();
+   }else if (status=='D')
+   {
+     document.getElementById('divdev').style.display="block";
+     $('trigger_tscheemi_fecdev').hide();
+   }
 
 function push1()
 {
@@ -329,6 +382,10 @@ function push1()
 	{document.sf_admin_edit_form.tscheemi_status_C.checked=true;}
 	else if (status=='E')
 	{document.sf_admin_edit_form.tscheemi_status_E.checked=true;}
+        else if (status=='D')
+	{document.sf_admin_edit_form.tscheemi_status_D.checked=true;}
+        else if (status=='A')
+	{document.sf_admin_edit_form.tscheemi_status_A.checked=true;}
 }
 
 function push2()
@@ -336,8 +393,18 @@ function push2()
 	var status='<?php print $status; ?>'
 	if (status=='A')
 	{document.sf_admin_edit_form.tscheemi_status_A.checked=true;}
+        else if (status=='D')
+	{document.sf_admin_edit_form.tscheemi_status_D.checked=true;}
+        else if (status=='E')
+	{
+           document.sf_admin_edit_form.tscheemi_status_E.checked=true;
+           document.getElementById('divent').style.display="block";
+        }
 	else if (status=='C')
-	{document.getElementById('divx').style.display="block";}
+	{
+          document.getElementById('divx').style.display="block";
+          document.getElementById('divent').style.display="block";
+        }
 }
 function push3()
 {
@@ -345,14 +412,39 @@ function push3()
 	if (status=='A')
 	{document.sf_admin_edit_form.tscheemi_status_A.checked=true;}
 	else if (status=='E')
-	{//document.sf_admin_edit_form.tscheemi_status_E.checked=true;
-	document.getElementById('divx').style.display="block";
+	{
+            document.sf_admin_edit_form.tscheemi_status_E.checked=true;
+	}
+        else if (status=='D')
+	{
+            document.sf_admin_edit_form.tscheemi_status_D.checked=true;
 	}
 	else if (status=='C')
 	{document.getElementById('divx').display="none";}
 }
 
+function push4()
+{
+	var status='<?php print $status; ?>'
+	if (status=='A')
+	{document.sf_admin_edit_form.tscheemi_status_A.checked=true;}
+	else if (status=='E')
+	{
+	 document.getElementById('divx').style.display="block";
+         document.getElementById('divdev').style.display="block";
+         document.getElementById('divent').style.display="none";
+	}
+        else if (status=='C')
+	{
+         document.sf_admin_edit_form.tscheemi_status_C.checked=true;
+        }
+	else if (status=='D')
+	{
+         document.getElementById('divx').display="none";
+         document.getElementById('divdev').style.display="block";
+        }
 
+}
 
 </script>
 

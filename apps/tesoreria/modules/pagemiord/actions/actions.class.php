@@ -239,6 +239,8 @@ class pagemiordActions extends autopagemiordActions
     $this->opordpag = $this->getOpordpagOrCreate();
     $this->grabo=$this->getRequestParameter('grabo');
     $this->setVars();
+    $agreeti=H::getConfApp('agrstausu', 'tesoreria', 'pagemiord');
+    $nomusu=H::getX('LOGUSE','Usuarios','Nomuse',$this->opordpag->getLoguse());
     if ($this->opordpag->getId()!='')
     {
        switch ($this->opordpag->getStatus()) {
@@ -271,11 +273,13 @@ class pagemiordActions extends autopagemiordActions
            break;
          case 'E':
            $this->color='#CC0000';
-           $this->eti="ELABORADA";
+           if ($agreeti=='S') $this->eti="ELABORADA POR EL USUARIO ".$nomusu;
+           else $this->eti="ELABORADA";
            break;
          case 'C':
            $this->color='#CC0000';
-           $this->eti="EN CONTRALORIA";
+           if ($agreeti=='S') $this->eti="EN CONTRALORIA. REALIZADO POR EL USUARIO ".$nomusu;
+           else $this->eti="EN CONTRALORIA";
            break;
          case ('I' || 'N'):
           $sql="select a.numche as numche,b.feclib as fecemi,b.tipmov as tipo,d.destip as destip,c.nomcue as nomcue, a.tipmov as tipmovche
@@ -325,8 +329,8 @@ class pagemiordActions extends autopagemiordActions
                $this->eti=$this->eti.$datos["destip"]." N° ".$datos["numche"]." EL ".date('d/m/Y',strtotime($datos["fecemi"]))." - ".$datos["nomcue"].", ";
              }
 			}
-
-             $this->eti=substr($this->eti,0,strlen($this->eti)-2);
+             if ($agreeti=='S') $this->eti=substr($this->eti,0,strlen($this->eti)-2).' REALIZADO POR '.$nomusu;
+             else $this->eti=substr($this->eti,0,strlen($this->eti)-2);
            }
            else
            {
@@ -342,18 +346,21 @@ class pagemiordActions extends autopagemiordActions
                 if(Herramientas::BuscarDatos($sql1,$result2))
                 {
                   $this->color='#0000CC';
-                  $this->eti="PAGADA CON ".$result2[0]["destip"]." N° ".$result2[0]["reflib"]." EL ".date('d/m/Y',strtotime($result2[0]["feclib"]))." - ".$result2[0]["nomcue"];
+                  if ($agreeti=='S')  $this->eti="PAGADA CON ".$result2[0]["destip"]." N° ".$result2[0]["reflib"]." EL ".date('d/m/Y',strtotime($result2[0]["feclib"]))." - ".$result2[0]["nomcue"].' REALIZADO POR '.$nomusu;
+                  else $this->eti="PAGADA CON ".$result2[0]["destip"]." N° ".$result2[0]["reflib"]." EL ".date('d/m/Y',strtotime($result2[0]["feclib"]))." - ".$result2[0]["nomcue"];
                 }
                 else
                 {
                   $this->color='#0000CC';
-                  $this->eti="PAGADA SIN CHEQUE ASOCIADO";
+                  if ($agreeti=='S') $this->eti="PAGADA SIN CHEQUE ASOCIADO. REALIZADO POR ".$nomusu;
+                  else $this->eti="PAGADA SIN CHEQUE ASOCIADO";
                 }
               }
               else
               {
                 $this->color='#CC0000';
-                $this->eti="PENDIENTE POR PAGAR";
+                if ($agreeti=='S') $this->eti="PENDIENTE POR PAGAR. REALIZADO POR ".$nomusu;
+                else $this->eti="PENDIENTE POR PAGAR";
               }
           }
        }

@@ -273,6 +273,10 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 
 
 
+	protected $loguse;
+
+
+	
 	protected $id;
 
 	
@@ -976,6 +980,13 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 
   }
 
+  public function getLoguse()
+  {
+
+    return trim($this->loguse);
+
+  }
+  
   public function getId()
   {
 
@@ -1827,6 +1838,16 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 
 	}
 
+	public function setLoguse($v)
+	{
+
+    if ($this->loguse !== $v) {
+        $this->loguse = $v;
+        $this->modifiedColumns[] = OpordpagPeer::LOGUSE;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -1973,7 +1994,9 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 
       $this->tipdoc = $rs->getString($startcol + 65);
 
-      $this->id = $rs->getInt($startcol + 66);
+      $this->loguse = $rs->getString($startcol + 66);
+
+      $this->id = $rs->getInt($startcol + 67);
 
       $this->resetModified();
 
@@ -1981,7 +2004,7 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 67;
+            return $startcol + 68; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Opordpag object", $e);
     }
@@ -2344,6 +2367,9 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 				return $this->getTipdoc();
 				break;
 			case 66:
+				return $this->getLoguse();
+				break;
+			case 67:
 				return $this->getId();
 				break;
 			default:
@@ -2422,7 +2448,8 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 			$keys[63] => $this->getCodcajchi(),
 			$keys[64] => $this->getNumcta(),
 			$keys[65] => $this->getTipdoc(),
-			$keys[66] => $this->getId(),
+			$keys[66] => $this->getLoguse(),
+			$keys[67] => $this->getId(),
 		);
 		return $result;
 	}
@@ -2637,6 +2664,9 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 				$this->setTipdoc($value);
 				break;
 			case 66:
+				$this->setLoguse($value);
+				break;
+			case 67:
 				$this->setId($value);
 				break;
 		} 	}
@@ -2712,7 +2742,8 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[63], $arr)) $this->setCodcajchi($arr[$keys[63]]);
 		if (array_key_exists($keys[64], $arr)) $this->setNumcta($arr[$keys[64]]);
 		if (array_key_exists($keys[65], $arr)) $this->setTipdoc($arr[$keys[65]]);
-		if (array_key_exists($keys[66], $arr)) $this->setId($arr[$keys[66]]);
+		if (array_key_exists($keys[66], $arr)) $this->setLoguse($arr[$keys[66]]);
+		if (array_key_exists($keys[67], $arr)) $this->setId($arr[$keys[67]]);
 	}
 
 	
@@ -2786,6 +2817,7 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(OpordpagPeer::CODCAJCHI)) $criteria->add(OpordpagPeer::CODCAJCHI, $this->codcajchi);
 		if ($this->isColumnModified(OpordpagPeer::NUMCTA)) $criteria->add(OpordpagPeer::NUMCTA, $this->numcta);
 		if ($this->isColumnModified(OpordpagPeer::TIPDOC)) $criteria->add(OpordpagPeer::TIPDOC, $this->tipdoc);
+		if ($this->isColumnModified(OpordpagPeer::LOGUSE)) $criteria->add(OpordpagPeer::LOGUSE, $this->loguse);
 		if ($this->isColumnModified(OpordpagPeer::ID)) $criteria->add(OpordpagPeer::ID, $this->id);
 
 		return $criteria;
@@ -2948,6 +2980,8 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 		$copyObj->setNumcta($this->numcta);
 
 		$copyObj->setTipdoc($this->tipdoc);
+
+		$copyObj->setLoguse($this->loguse);
 
 
 		$copyObj->setNew(true);

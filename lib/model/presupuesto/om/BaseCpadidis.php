@@ -57,6 +57,10 @@ abstract class BaseCpadidis extends BaseObject  implements Persistent {
 
 
 	
+	protected $loguse;
+
+
+	
 	protected $id;
 
 	
@@ -190,6 +194,13 @@ abstract class BaseCpadidis extends BaseObject  implements Persistent {
   {
 
     return trim($this->tipgas);
+
+  }
+  
+  public function getLoguse()
+  {
+
+    return trim($this->loguse);
 
   }
   
@@ -344,6 +355,16 @@ abstract class BaseCpadidis extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setLoguse($v)
+	{
+
+    if ($this->loguse !== $v) {
+        $this->loguse = $v;
+        $this->modifiedColumns[] = CpadidisPeer::LOGUSE;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -382,7 +403,9 @@ abstract class BaseCpadidis extends BaseObject  implements Persistent {
 
       $this->tipgas = $rs->getString($startcol + 11);
 
-      $this->id = $rs->getInt($startcol + 12);
+      $this->loguse = $rs->getString($startcol + 12);
+
+      $this->id = $rs->getInt($startcol + 13);
 
       $this->resetModified();
 
@@ -390,7 +413,7 @@ abstract class BaseCpadidis extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 13; 
+            return $startcol + 14; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Cpadidis object", $e);
     }
@@ -606,6 +629,9 @@ abstract class BaseCpadidis extends BaseObject  implements Persistent {
 				return $this->getTipgas();
 				break;
 			case 12:
+				return $this->getLoguse();
+				break;
+			case 13:
 				return $this->getId();
 				break;
 			default:
@@ -630,7 +656,8 @@ abstract class BaseCpadidis extends BaseObject  implements Persistent {
 			$keys[9] => $this->getFecanu(),
 			$keys[10] => $this->getPeradi(),
 			$keys[11] => $this->getTipgas(),
-			$keys[12] => $this->getId(),
+			$keys[12] => $this->getLoguse(),
+			$keys[13] => $this->getId(),
 		);
 		return $result;
 	}
@@ -683,6 +710,9 @@ abstract class BaseCpadidis extends BaseObject  implements Persistent {
 				$this->setTipgas($value);
 				break;
 			case 12:
+				$this->setLoguse($value);
+				break;
+			case 13:
 				$this->setId($value);
 				break;
 		} 	}
@@ -704,7 +734,8 @@ abstract class BaseCpadidis extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[9], $arr)) $this->setFecanu($arr[$keys[9]]);
 		if (array_key_exists($keys[10], $arr)) $this->setPeradi($arr[$keys[10]]);
 		if (array_key_exists($keys[11], $arr)) $this->setTipgas($arr[$keys[11]]);
-		if (array_key_exists($keys[12], $arr)) $this->setId($arr[$keys[12]]);
+		if (array_key_exists($keys[12], $arr)) $this->setLoguse($arr[$keys[12]]);
+		if (array_key_exists($keys[13], $arr)) $this->setId($arr[$keys[13]]);
 	}
 
 	
@@ -724,6 +755,7 @@ abstract class BaseCpadidis extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CpadidisPeer::FECANU)) $criteria->add(CpadidisPeer::FECANU, $this->fecanu);
 		if ($this->isColumnModified(CpadidisPeer::PERADI)) $criteria->add(CpadidisPeer::PERADI, $this->peradi);
 		if ($this->isColumnModified(CpadidisPeer::TIPGAS)) $criteria->add(CpadidisPeer::TIPGAS, $this->tipgas);
+		if ($this->isColumnModified(CpadidisPeer::LOGUSE)) $criteria->add(CpadidisPeer::LOGUSE, $this->loguse);
 		if ($this->isColumnModified(CpadidisPeer::ID)) $criteria->add(CpadidisPeer::ID, $this->id);
 
 		return $criteria;
@@ -778,6 +810,8 @@ abstract class BaseCpadidis extends BaseObject  implements Persistent {
 		$copyObj->setPeradi($this->peradi);
 
 		$copyObj->setTipgas($this->tipgas);
+
+		$copyObj->setLoguse($this->loguse);
 
 
 		if ($deepCopy) {
