@@ -244,7 +244,7 @@ class Nomina {
     $x = $grid[0];
     $j = 0;
     while ($j < count($x)) {
-      if ($x[$j]->getCedfam() != "" && ($x[$j]->getPrinom() != "" && $x[$j]->getPriape() != "")) {
+      if (($x[$j]->getPrinom() != "" && $x[$j]->getPriape() != "")) {
 
         if ($x[$j]->getPrinom()!="" && $x[$j]->getPriape()!="")
 	{
