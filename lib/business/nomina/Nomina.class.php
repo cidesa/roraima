@@ -1989,6 +1989,13 @@ class Nomina {
         }
         break;
 
+      case "NOEMP" :
+        $sql = "Select codniv from nphojint where codemp='" . $empleado . "'";
+        if (Herramientas :: BuscarDatos($sql, & $tabla)) {
+          $valor = $tabla[0]["codniv"];
+        }
+        break;
+
       case "ED" :
         $dias = intval(Herramientas :: dateDiff('d', $fechanac, $fecnom));
         $fecha = Herramientas :: dateAdd('d', $dias, '1900-01-01', '+');
@@ -4182,6 +4189,12 @@ class Nomina {
         $sql = "Select * from npasicaremp where Status='V' and CodNom='" . $nomina . "' and codemp='" . $empleado . "'";
         if (Herramientas :: BuscarDatos($sql, & $tabla)) {
           return count($tabla);
+        }
+        break;
+      case "NOEMP" :
+        $sql = "Select codniv from nphojint where codemp='" . $empleado . "'";
+        if (Herramientas :: BuscarDatos($sql, & $tabla)) {
+          $valor = $tabla[0]["codniv"];
         }
         break;
       case "ED" :
