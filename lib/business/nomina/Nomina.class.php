@@ -243,9 +243,11 @@ class Nomina {
     $codigo = $datos->getCodemp();
     $x = $grid[0];
     $j = 0;
+    $inffamnomdes=H::getConfApp('inffamnomdes', 'nomhojint', 'nomina');
     while ($j < count($x)) {
-      if (($x[$j]->getPrinom() != "" && $x[$j]->getPriape() != "")) {
+      if (($x[$j]->getPrinom() != "" && $x[$j]->getPriape() != "") || $x[$j]->getNomfam() != "") {
 
+       if ($inffamnomdes=='S') {
         if ($x[$j]->getPrinom()!="" && $x[$j]->getPriape()!="")
 	{
 		$segnom='';
