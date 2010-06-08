@@ -14,7 +14,7 @@ methods:
    - "nphojint{fecing}"
    - "nphojint{fecret}"
    - "nphojint{fecrei}"
-#   - "nphojint{obsemp}"
+   - "nphojint{codmot}"
    - "nphojint{staemp}"
 #   - "nphojint{codtippag}"
 #   - "nphojint{codban}"
@@ -109,6 +109,9 @@ names:
     required:  No
     validators: FechaValidator, FechaValidatorNowCotsso
 
+  nphojint{codmot}:
+    required:  No
+    validators: MotivoValidator
 
 DescripcionValidator:
     class: sfStringValidator
@@ -222,3 +225,9 @@ FechaValidatorNowCotsso:
         operator: '<'
         date_error:  Fecha Inválida
 
+MotivoValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Npmotegr
+        column:   codmot
+        unique_error:   Ingresos- El Motivo de Egreso no existe.

@@ -23,6 +23,13 @@ class Npasiconemp extends BaseNpasiconemp
    protected $grid='';
    protected $objcon=array('');
    protected $archixls='';
+   protected $codcar2 = '';
+   protected $tipo = '';
+   protected $aumento = '';
+   protected $mon2 = '0,00';
+   protected $can2 = '0,00';
+   protected $filas = '';
+
    
 
 
@@ -124,4 +131,15 @@ class Npasiconemp extends BaseNpasiconemp
 	return $nomnom->getNomnom();
 	else return '';
   }
+
+    public function getNomcar2()
+    {
+            $c = new Criteria();
+            $c->add(NpcargosPeer::CODCAR,self::getCodcar2());
+            $nomcar = NpcargosPeer::doSelectone($c);
+            if ($nomcar)
+            return $nomcar->getNomcar();
+            else
+            return ' ';
+    }
 }
