@@ -89,8 +89,14 @@ class Factura {
 
     if ($monto>0)
     {
-      $correl=OrdendePago::Buscar_Correlativo();
       $numcomord="FO".substr($fafactur->getReffac(),2,6);
+       $confcorcom=sfContext::getInstance()->getUser()->getAttribute('confcorcom');
+        if ($confcorcom=='N')
+        {
+          $correl=$numcomord;
+        }else {
+      $correl=OrdendePago::Buscar_Correlativo();
+        }
       $fafactur->setNumcomord($correl);
 
       $contabc= new Contabc();
@@ -609,7 +615,13 @@ class Factura {
   public static function grabarComprobanteMaestro(&$fafactur,$arrasientos,&$pos)
   {
     $reftra="FA".substr($fafactur->getReffac(),2,6);
+    $confcorcom=sfContext::getInstance()->getUser()->getAttribute('confcorcom');
+    if ($confcorcom=='N')
+    {
+      $correl3=$reftra;
+    }else {
     $correl3=OrdendePago::Buscar_Correlativo();
+    }
     $contabc = new Contabc();
     $contabc->setNumcom($correl3);
     $contabc->setReftra($reftra);
@@ -669,8 +681,15 @@ class Factura {
 
     if ($montotot>0)
     {
+       $numcomprobinv="FI".substr($fafactur->getReffac(),2,6);
+      $confcorcom=sfContext::getInstance()->getUser()->getAttribute('confcorcom');
+        if ($confcorcom=='N')
+        {
+          $correl2=$numcomprobinv;
+        }else {
       $correl2=OrdendePago::Buscar_Correlativo();
-      $numcomprobinv="FI".substr($fafactur->getReffac(),2,6);
+        }
+
       $fafactur->setNumcominv($correl2);
       $contabc= new Contabc();
       $contabc->setNumcom($correl2);
