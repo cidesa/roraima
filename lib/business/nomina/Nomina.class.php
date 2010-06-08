@@ -266,6 +266,7 @@ class Nomina {
             $apellidos=implode(' ',array(trim($x[$j]->getPriape()),trim($segape)));
             $x[$j]->setNomfam(implode(', ',array($apellidos,$nombres)));
 	}
+       }
 
 
         $x[$j]->setCodemp($codigo);
@@ -9515,6 +9516,30 @@ exit();
         $z[$j]->delete();
         $j++;
       }
+    }
+  }
+
+  public static function actualizarSueldosporNominaCargosConcepto($npasiconemp,$grid)
+  {
+    $x=$grid[0];
+    $j=0;
+    while ($j<count($x))
+    {
+      if ($x[$j]["check"]=="1")
+      {
+        $t= new Criteria();
+        $t->add(NpasiconempPeer::CODEMP,$x[$j]["codemp"]);
+        $t->add(NpasiconempPeer::CODCON,$npasiconemp->getCodcon());
+        $t->add(NpasiconempPeer::CODCAR,$x[$j]["codcar"]);
+        $registro= NpasiconempPeer::doSelectOne($t);
+        if ($registro)
+        {
+          $registro->setMonto($x[$j]["monto"]) ;
+          $registro->setCantidad($x[$j]["cantidad"]) ;
+          $registro->save() ;
+        }
+      }
+      $j++;
     }
   }
 
