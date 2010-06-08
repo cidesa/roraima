@@ -61,6 +61,7 @@ tesoreria:
       Cierre de Periodo:                                      TesMovCieBan
     Caja:
       Cheques en Custodia:                                    TesCheCus
+      Recepción de Cheques sin Firma:                         tesfirmascheq
     Caja Chica:
       Salidas de Caja:                                        TesMovSalCaj
       Rendición de Caja:                                      TesRenCajChi

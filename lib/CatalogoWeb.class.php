@@ -6137,6 +6137,26 @@ public function Catdefcatman_Cattramo($params = '') {
 
 		);
 	}
+
+        public function Npmotegr_Nomhojint() {
+            $this->c = new Criteria();
+            $this->columnas = array (
+                    NpmotegrPeer :: CODMOT => 'Código',
+                    NpmotegrPeer :: DESMOT => 'Descripción',
+
+            );
+	}
+
+	public function Npdefcpt_Npasiconemp($params) {
+		$this->c = new Criteria();
+		$this->c->add(NpasiconnomPeer :: CODNOM, $params[0]);
+		$this->c->addJoin(NpdefcptPeer :: CODCON, NpasiconnomPeer :: CODCON);
+
+		$this->columnas = array (
+			NpdefcptPeer :: CODCON => 'Código',
+                        NpdefcptPeer :: NOMCON => 'Nombre'
+		);
+	}
         
 }
 

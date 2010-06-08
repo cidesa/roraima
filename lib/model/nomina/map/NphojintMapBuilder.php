@@ -234,6 +234,8 @@ class NphojintMapBuilder {
 
 		$tMap->addColumn('OBSEMBRET', 'Obsembret', 'string', CreoleTypes::VARCHAR, false, 1000);
 
+		$tMap->addColumn('CODMOT', 'Codmot', 'string', CreoleTypes::VARCHAR, false, 4);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

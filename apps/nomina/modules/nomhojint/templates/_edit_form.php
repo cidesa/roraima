@@ -760,23 +760,6 @@ $value = object_input_tag($nphojint, 'getPorseghcm', array (
 
 <br>
 
-  <?php echo label_for('nphojint[obsemp]', __($labels['nphojint{obsemp}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('nphojint{obsemp}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('nphojint{obsemp}')): ?>
-    <?php echo form_error('nphojint{obsemp}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_textarea_tag($nphojint, 'getObsemp', array (
-  'size' => '80x3',
-  'readonly' => true,
-  'maxlength' => 300,
-  'control_name' => 'nphojint[obsemp]',
-  'onkeyup' => "javascript:return ismaxlength(this)",
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-
-<br>
-
 <?php echo label_for('nphojint[fecrei]', __($labels['nphojint{fecrei}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('nphojint{fecrei}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('nphojint{fecrei}')): ?>
@@ -833,17 +816,30 @@ $value = object_input_tag($nphojint, 'getPorseghcm', array (
 
 <br>
 
-  <?php echo label_for('nphojint[obsemp]', __($labels['nphojint{obsemp}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('nphojint{obsemp}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('nphojint{obsemp}')): ?>
-    <?php echo form_error('nphojint{obsemp}', array('class' => 'form-error-msg')) ?>
+<?php echo label_for('nphojint[codmot]', __($labels['nphojint{codmot}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('nphojint{codmot}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('nphojint{codmot}')): ?>
+    <?php echo form_error('nphojint{codmot}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_textarea_tag($nphojint, 'getObsemp', array (
-  'size' => '80x3',
-  'maxlength' => 100,
-  'onKeypress' => "javascript:egreso(event,this)",
-  'control_name' => 'nphojint[obsemp]',
+ <?php $value = object_input_tag($nphojint, 'getCodmot', array (
+  'size' => 20,
+  'maxlength' => 4,
+  'control_name' => 'nphojint[codmot]',
+  'onBlur'=> remote_function(array(
+        'url'      => 'nomhojint/ajax', 
+	'condition' => "$('nphojint_codmot').value!='' ",
+        'complete' => 'AjaxJSON(request, json)',
+        'with' => "'ajax=9&cajtexmos=nphojint_desmot&cajtexcom=nphojint_codmot&codigo='+this.value",
+        ))
+)); echo $value ? $value : '&nbsp;' ?>
+
+  &nbsp;&nbsp;&nbsp;<?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Npmotegr_Nomhojint/clase/Npmotegr/frame/sf_admin_edit_form/obj1/nphojint_codmot/obj2/nphojint_desmot/campo1/codmot/campo2/desmot')?>
+&nbsp;&nbsp;&nbsp;
+ <?php $value = object_input_tag($nphojint, 'getDesmot', array (
+  'readonly' => true,
+  'size' => 60,
+  'control_name' => 'nphojint[desmot]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 

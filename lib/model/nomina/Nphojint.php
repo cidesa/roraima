@@ -362,4 +362,8 @@ class Nphojint extends BaseNphojint
     	return self::getCodemp();
     }
 
+  public function getDesmot()
+  {
+	return Herramientas::getX('CODMOT','Npmotegr','Desmot',self::getCodmot());
+  }
 }

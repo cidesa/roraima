@@ -756,9 +756,9 @@ $this->Bitacora('Guardo');
         $this->nphojint->setFecrei(null);
       }
     }
-    if (isset($nphojint['obsemp']))
+    if (isset($nphojint['codmot']))
     {
-      $this->nphojint->setObsemp($nphojint['obsemp']);
+      $this->nphojint->setCodmot($nphojint['codmot']);
     }
     if (isset($nphojint['staemp']))
     {
@@ -1887,6 +1887,20 @@ $this->Bitacora('Guardo');
   	}
   	$output = '[["javascript","'.$javascript.'",""]]';
   }
+   else if ($this->getRequestParameter('ajax')=='9')
+  {
+  	$r= new Criteria();
+  	$r->add(NpmotegrPeer::CODMOT,$this->getRequestParameter('codigo'));
+  	$datos= NpmotegrPeer::doSelectOne($r);
+  	if ($datos)
+  	{
+  	   $dato=$datos->getDesmot();
+  	}else {
+         $dato="";
+         $javascript="alert_('El Motivo de Egreso no existe'); $('$cajtexcom').value=''; $('$cajtexcom').focus();";}
+
+        $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""]]';
+  }
 
   $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
   return sfView::HEADER_ONLY;
@@ -1942,7 +1956,7 @@ $this->Bitacora('Guardo');
           'nphojint{fecing}' => 'Ingreso:',
           'nphojint{fecret}' => 'Egreso:',
           'nphojint{fecrei}' => 'Reingreso:',
-          'nphojint{obsemp}' => 'Motivo de Egreso:',
+          'nphojint{codmot}' => 'Motivo de Egreso:',
           'nphojint{staemp}' => 'Situación del Empleado:',
           'nphojint{codtippag}' => 'Forma de Pago:',
           'nphojint{codban}' => 'Banco:',
@@ -2034,7 +2048,7 @@ $this->Bitacora('Guardo');
       'nphojint{fecing}' => 'Ingreso:',
       'nphojint{fecret}' => 'Egreso:',
       'nphojint{fecrei}' => 'Reingreso:',
-      'nphojint{obsemp}' => 'Motivo de Egreso:',
+          'nphojint{codmot}' => 'Motivo de Egreso:',
       'nphojint{staemp}' => 'Situación del Empleado:',
       'nphojint{codtippag}' => 'Forma de Pago:',
       'nphojint{codban}' => 'Banco:',

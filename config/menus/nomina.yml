@@ -42,6 +42,7 @@ nomina:
       Tipo de Empleado:                                              nomtipemp
       Tipos de Documentos:                                           nomdocemp
       Motivos de Faltas y/o Permisos:                                NomDefEspMotFalPre
+      Motivos de Egreso:                                             nomdefmotegr
       Estatus del Empleado:                                          nomdefestemp
       Situacion del Empleado:                                        nomdefespsitemp
       Definición de Condición Contractual:                           NomDefEspGruLab
@@ -178,7 +179,7 @@ nomina:
       Movimientos Por Concepto:                                      NomNomMovNomCon
       Movimientos Por Concepto y Cargos:                             NomNomMovNomConCar
       Movimientos Por Empleado:                                      NomNomMovNomEmp
-      #Modificar Monto/cantidad a Conceptos Según Formula:           ModificarMontoConcepto
+      Aumento de Sueldos por Nómina Cargos y Conceptos:              nomaumsue
       Aumento de Sueldos por Cargos:                                 NomAumSueCar
     Nominas Especiales:
       Definición:                                                    NomEspDefinicion

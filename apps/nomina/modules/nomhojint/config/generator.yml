@@ -42,7 +42,7 @@ generator:
       fecing: { name: Ingreso}
       fecret: { name: Egreso}
       fecrei: { name: Reingreso}
-      obsemp: { name: Motivo de Egreso}
+      codmot: { name: Motivo de Egreso}
       staemp: { name: Estatus del Empleado}
       codtippag: { name: Forma de Pago}
       codban: { name: Banco}
@@ -114,7 +114,7 @@ generator:
       sort: codemp
     edit:
       title:          Edición de Datos Personales
-      display:       [=codemp, nomemp, cedemp, rifemp, edociv, numcon, nacemp, sexemp, codniv, _fotemp, fotemp, lugnac, fecnac, edaemp, obsgen, dirhab, codpai, codest, codciu, telhab, telotr, celemp, dirotr, codpa2, codes2, codci2, telha2, telot2, emaemp, codpos, fecing, fecret, fecrei, obsemp, staemp, codtippag, codban, numcue, tipcue, numcueaho, tipcueaho, fecadmpub, numsso, numpolseg, feccotsso, anoadmpub, tiefid, talcam, talpan, talcal, grusan, codregpai, codregest, codregciu, grulab, gruotr, traslado, traotr, numexp, detexp, derzur, tipviv, vivotr, forten, tenotr, sercon, temporal, incapacidades, situac, profes, codnivedu, prinom, segnom, priape, segape, ubifis, codempant, feccoracu, capactacu, intacu, antacu, diaacu, diaadiacu, codtipemp, desniv, desniv2, fecinicon, fecfincon, obsembret]
+      display:       [=codemp, nomemp, cedemp, rifemp, edociv, numcon, nacemp, sexemp, codniv, _fotemp, fotemp, lugnac, fecnac, edaemp, obsgen, dirhab, codpai, codest, codciu, telhab, telotr, celemp, dirotr, codpa2, codes2, codci2, telha2, telot2, emaemp, codpos, fecing, fecret, fecrei, codmot, staemp, codtippag, codban, numcue, tipcue, numcueaho, tipcueaho, fecadmpub, numsso, numpolseg, feccotsso, anoadmpub, tiefid, talcam, talpan, talcal, grusan, codregpai, codregest, codregciu, grulab, gruotr, traslado, traotr, numexp, detexp, derzur, tipviv, vivotr, forten, tenotr, sercon, temporal, incapacidades, situac, profes, codnivedu, prinom, segnom, priape, segape, ubifis, codempant, feccoracu, capactacu, intacu, antacu, diaacu, diaadiacu, codtipemp, desniv, desniv2, fecinicon, fecfincon, obsembret]
       fields:
         fecnac: { params: date_format='dd/MM/yy' }
         fecing: { params: date_format='dd/MM/yy' }
