@@ -555,7 +555,6 @@ class cobtransaActions extends autocobtransaActions
       try{ $this->updateCobtransaFromRequest();}
       catch (Exception $ex){}
 
-    
     $this->configGrid();
 
     $grid1 = Herramientas::CargarDatosGridv2($this,$this->objdocumentos);
@@ -600,7 +599,11 @@ class cobtransaActions extends autocobtransaActions
           $this->getUser()->getAttributeHolder()->remove('debito',$formulario[$i]);
           $this->getUser()->getAttributeHolder()->remove('credito',$formulario[$i]);
           $this->getUser()->getAttributeHolder()->remove('grid',$formulario[$i]);
-
+          $confcorcom=sfContext::getInstance()->getUser()->getAttribute('confcorcom');
+          if ($confcorcom=='N')
+          {
+            $numcom=$reftra;
+          }
           $numcom = Comprobante::SalvarComprobante($numcom,$reftra,$feccom,$descom,$debito,$credito,$grid,$this->getUser()->getAttribute('grabar',null,$formulario[$i]));
          }
          $i++;
