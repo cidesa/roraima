@@ -187,7 +187,7 @@
 
   <?php $value = object_input_tag($tsmovlib, 'getDeslib', array (
   'size' => 120,
-  'readonly'  =>  $tsmovlib->getId()!='' ? true : false ,
+  //'readonly'  =>  $tsmovlib->getId()!='' ? true : false ,
   'maxlength' => 4000,
   'control_name' => 'tsmovlib[deslib]',
   'onBlur'  => "javascript: deslib()",
