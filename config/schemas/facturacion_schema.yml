@@ -22,7 +22,7 @@ propel:
       required: true
       ##primaryKey: true
     codart:
-      type: VARCHAR
+      type: fafVARCHAR
       size: 20
       required: true
       ##primaryKey: true
@@ -391,6 +391,12 @@ propel:
       type: NUMERIC
       size: 8
       required: true
+    codpro:
+      type: NUMERIC
+      size: 8
+    proform:
+      type: VARCHAR
+      size: 1
     id:
       type: INTEGER
       required: true

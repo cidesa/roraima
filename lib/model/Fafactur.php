@@ -95,5 +95,14 @@ class Fafactur extends BaseFafactur
   {
    return Herramientas::getX('ID','Faconpag','Tipconpag',self::getCodconpag());
   }
+  public function getRefproform()
+  {
+       $c = new Criteria();
+       $per = FacorrelatPeer::doSelectOne($c);
+       if($per->getProform()=='S')
+          return true;
+       else
+          return false;
+  }
 
 }

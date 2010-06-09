@@ -137,4 +137,12 @@ class Facorrelat extends BaseFacorrelat
 	  return Herramientas::getX('CODEMP','Cadefart','Asiparrec','001');
 	}
 
+        public function getProform()
+	{
+          if($this->proform=='S' or $this->proform=='1')
+            return $this->proform;
+          else
+            return null;
+	}
+
 }

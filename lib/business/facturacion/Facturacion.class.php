@@ -1207,9 +1207,9 @@ public static function entregas($nroped)
 		}
 	}
 
-    public static function salvarFacorrelat($fadefcaj, $grid)
+    public static function salvarFacorrelat($fadefcaj, $grid,$proform)
     {
-        if (self :: Grabar_Fadefcaj($fadefcaj) != -1) {
+        if (self :: Grabar_Fadefcaj($fadefcaj,$proform) != -1) {
           return 0;
         }
         if (self :: Grabar_Correlativos($grid) != -1) {
@@ -1218,9 +1218,13 @@ public static function entregas($nroped)
 		return -1;
     }
 
-  public static function Grabar_Fadefcaj($fadefcaj) {
+  public static function Grabar_Fadefcaj($fadefcaj,$proform) {
     try {
-
+     if ($proform == 1)
+            $proform = 'S';
+     else
+            $proform = 'N';
+     $fadefcaj->setProform($proform);
      $fadefcaj->save();
       return -1;
     } catch (Exception $ex) {

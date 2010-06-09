@@ -2,10 +2,10 @@
 
 
 
-class FafacturMapBuilder {
+class FafacturproMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.FafacturMapBuilder';
+	const CLASS_NAME = 'lib.model.map.FafacturproMapBuilder';
 
 	
 	private $dbMap;
@@ -27,12 +27,12 @@ class FafacturMapBuilder {
 	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
 
-		$tMap = $this->dbMap->addTable('fafactur');
-		$tMap->setPhpName('Fafactur');
+		$tMap = $this->dbMap->addTable('fafacturpro');
+		$tMap->setPhpName('Fafacturpro');
 
 		$tMap->setUseIdGenerator(true);
 
-		$tMap->setPrimaryKeyMethodInfo('fafactur_SEQ');
+		$tMap->setPrimaryKeyMethodInfo('fafacturpro_SEQ');
 
 		$tMap->addColumn('REFFAC', 'Reffac', 'string', CreoleTypes::VARCHAR, true, 8);
 
@@ -77,8 +77,6 @@ class FafacturMapBuilder {
 		$tMap->addColumn('CODCAJ', 'Codcaj', 'int', CreoleTypes::INTEGER, false, null);
 
 		$tMap->addColumn('NUMCONTROL', 'Numcontrol', 'string', CreoleTypes::VARCHAR, false, 10);
-
-		$tMap->addColumn('PROFORM', 'Proform', 'string', CreoleTypes::VARCHAR, false, 10);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 

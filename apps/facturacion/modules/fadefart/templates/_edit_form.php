@@ -4,7 +4,7 @@
 ?>
 <?php echo form_tag('fadefart/save', array(
   'id'        => 'sf_admin_edit_form',
-  'name'      => 'sf_admin_edit_form',
+  'name'      => 'sf_admin_edit_form', 'onsubmit'  => 'return false;',
   'multipart' => true,
 )) ?>
 
@@ -381,6 +381,21 @@ if ($facorrelat->getAsiparrec()=='P')  {
     </div>
 </div>
 <br/>
+<div id="divcodpro">
+  <?php echo label_for('facorrelat[codpro]', __($labels['facorrelat{codpro}' ]), 'class="required" Style="text-align:left; width:150px"') ?>
+  <div class="content<?php if ($sf_request->hasError('facorrelat{codpro}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('facorrelat{codpro}')): ?>
+    <?php echo form_error('facorrelat{codpro}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($facorrelat, 'getCodpro', array (
+  'size' => 7,
+  'maxlength' => 8,
+  'control_name' => 'facorrelat[codpro]',
+)); echo $value ? $value : '&nbsp;' ?>
+</div>
+</div>
+<br/>
 </div>
 </fieldset>
 
@@ -517,7 +532,7 @@ if ($facorrelat->getAsiparrec()=='P')  {
   <table width="100%">
   <tr>
   <th>
-      <?php echo label_for('facorrelat[apliclades]', __($labels['facorrelat{apliclades}']), 'class="" style="width: 300px"') ?>
+      <?php echo label_for('facorrelat[apliclades]', __($labels['facorrelat{apliclades}']), 'class="required" style="width: 300px"') ?>
       <div class="content<?php if ($sf_request->hasError('facorrelat{apliclades}')): ?> form-error<?php endif; ?>">
       <?php if ($sf_request->hasError('facorrelat{apliclades}')): ?>
         <?php echo form_error('facorrelat{apliclades}', array('class' => 'form-error-msg')) ?>
@@ -533,7 +548,7 @@ if ($facorrelat->getAsiparrec()=='P')  {
 
   <tr>
   <th>
-      <?php echo label_for('facorrelat[generaop]', __($labels['facorrelat{generaop}']), 'class="" style="width: 300px"') ?>
+      <?php echo label_for('facorrelat[generaop]', __($labels['facorrelat{generaop}']), 'class="required" style="width: 300px"') ?>
       <div class="content<?php if ($sf_request->hasError('facorrelat{generaop}')): ?> form-error<?php endif; ?>">
       <?php if ($sf_request->hasError('facorrelat{generaop}')): ?>
         <?php echo form_error('facorrelat{generaop}', array('class' => 'form-error-msg')) ?>
@@ -549,7 +564,7 @@ if ($facorrelat->getAsiparrec()=='P')  {
 
   <tr>
   <th>
-      <?php echo label_for('facorrelat[generacom]', __($labels['facorrelat{generacom}']), 'class="" style="width: 300px"') ?>
+      <?php echo label_for('facorrelat[generacom]', __($labels['facorrelat{generacom}']), 'class="required" style="width: 300px"') ?>
       <div class="content<?php if ($sf_request->hasError('facorrelat{generacom}')): ?> form-error<?php endif; ?>">
       <?php if ($sf_request->hasError('facorrelat{generacom}')): ?>
         <?php echo form_error('facorrelat{generacom}', array('class' => 'form-error-msg')) ?>
@@ -563,6 +578,22 @@ if ($facorrelat->getAsiparrec()=='P')  {
   </th>
   </tr>
 
+  <tr>
+  <th>
+      <?php echo label_for('facorrelat[proform]', __($labels['facorrelat{proform}']), 'class="required" style="width: 300px"') ?>
+      <div class="content<?php if ($sf_request->hasError('facorrelat{proform}')): ?> form-error<?php endif; ?>">
+      <?php if ($sf_request->hasError('facorrelat{proform}')): ?>
+        <?php echo form_error('facorrelat{proform}', array('class' => 'form-error-msg')) ?>
+      <?php endif; ?>
+
+      <?php $value = object_checkbox_tag($facorrelat, 'getProform', array (
+      'control_name' => 'facorrelat[proform]',
+        'onClick' => 'proform()',
+    )); echo $value ? $value : '&nbsp;' ?>
+        </div>
+  </th>
+  </tr>
+
   </table>
   </div>
 
@@ -570,7 +601,6 @@ if ($facorrelat->getAsiparrec()=='P')  {
 <?php include_partial('edit_actions', array('facorrelat' => $facorrelat)) ?>
 
 </form>
-
 
 <script type="text/javascript">
   function colocar(e,id)
@@ -812,6 +842,14 @@ if ($facorrelat->getAsiparrec()=='P')  {
     if (!$('facorrelat_generacom').checked)
     {
         $('facorrelat_generacom').checked=false;
+    }
+  }
+
+  function proform()
+  {
+    if (!$('facorrelat_proform').checked)
+    {
+        $('facorrelat_proform').checked=false;
     }
   }
 

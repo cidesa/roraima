@@ -1,7 +1,7 @@
 <?php
 
 
-abstract class BaseFaartfac extends BaseObject  implements Persistent {
+abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
 
 
 	
@@ -367,7 +367,7 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 
     if ($this->reffac !== $v) {
         $this->reffac = $v;
-        $this->modifiedColumns[] = FaartfacPeer::REFFAC;
+        $this->modifiedColumns[] = FaartfacproPeer::REFFAC;
       }
   
 	} 
@@ -377,7 +377,7 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 
     if ($this->codart !== $v) {
         $this->codart = $v;
-        $this->modifiedColumns[] = FaartfacPeer::CODART;
+        $this->modifiedColumns[] = FaartfacproPeer::CODART;
       }
   
 	} 
@@ -387,7 +387,7 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 
     if ($this->desart !== $v) {
         $this->desart = $v;
-        $this->modifiedColumns[] = FaartfacPeer::DESART;
+        $this->modifiedColumns[] = FaartfacproPeer::DESART;
       }
   
 	} 
@@ -397,7 +397,7 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 
     if ($this->codref !== $v) {
         $this->codref = $v;
-        $this->modifiedColumns[] = FaartfacPeer::CODREF;
+        $this->modifiedColumns[] = FaartfacproPeer::CODREF;
       }
   
 	} 
@@ -407,7 +407,7 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 
     if ($this->cantot !== $v) {
         $this->cantot = Herramientas::toFloat($v);
-        $this->modifiedColumns[] = FaartfacPeer::CANTOT;
+        $this->modifiedColumns[] = FaartfacproPeer::CANTOT;
       }
   
 	} 
@@ -417,7 +417,7 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 
     if ($this->precio !== $v) {
         $this->precio = Herramientas::toFloat($v);
-        $this->modifiedColumns[] = FaartfacPeer::PRECIO;
+        $this->modifiedColumns[] = FaartfacproPeer::PRECIO;
       }
   
 	} 
@@ -427,7 +427,7 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 
     if ($this->monrgo !== $v) {
         $this->monrgo = Herramientas::toFloat($v);
-        $this->modifiedColumns[] = FaartfacPeer::MONRGO;
+        $this->modifiedColumns[] = FaartfacproPeer::MONRGO;
       }
   
 	} 
@@ -437,7 +437,7 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 
     if ($this->mondes !== $v) {
         $this->mondes = Herramientas::toFloat($v);
-        $this->modifiedColumns[] = FaartfacPeer::MONDES;
+        $this->modifiedColumns[] = FaartfacproPeer::MONDES;
       }
   
 	} 
@@ -447,7 +447,7 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 
     if ($this->totart !== $v) {
         $this->totart = Herramientas::toFloat($v);
-        $this->modifiedColumns[] = FaartfacPeer::TOTART;
+        $this->modifiedColumns[] = FaartfacproPeer::TOTART;
       }
   
 	} 
@@ -457,7 +457,7 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 
     if ($this->canaju !== $v) {
         $this->canaju = Herramientas::toFloat($v);
-        $this->modifiedColumns[] = FaartfacPeer::CANAJU;
+        $this->modifiedColumns[] = FaartfacproPeer::CANAJU;
       }
   
 	} 
@@ -467,7 +467,7 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 
     if ($this->candes !== $v) {
         $this->candes = Herramientas::toFloat($v);
-        $this->modifiedColumns[] = FaartfacPeer::CANDES;
+        $this->modifiedColumns[] = FaartfacproPeer::CANDES;
       }
   
 	} 
@@ -477,7 +477,7 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 
     if ($this->nronot !== $v) {
         $this->nronot = $v;
-        $this->modifiedColumns[] = FaartfacPeer::NRONOT;
+        $this->modifiedColumns[] = FaartfacproPeer::NRONOT;
       }
   
 	} 
@@ -487,7 +487,7 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 
     if ($this->orddespacho !== $v) {
         $this->orddespacho = $v;
-        $this->modifiedColumns[] = FaartfacPeer::ORDDESPACHO;
+        $this->modifiedColumns[] = FaartfacproPeer::ORDDESPACHO;
       }
   
 	} 
@@ -497,7 +497,7 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 
     if ($this->guia !== $v) {
         $this->guia = $v;
-        $this->modifiedColumns[] = FaartfacPeer::GUIA;
+        $this->modifiedColumns[] = FaartfacproPeer::GUIA;
       }
   
 	} 
@@ -507,7 +507,7 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 
     if ($this->contenedores !== $v) {
         $this->contenedores = $v;
-        $this->modifiedColumns[] = FaartfacPeer::CONTENEDORES;
+        $this->modifiedColumns[] = FaartfacproPeer::CONTENEDORES;
       }
   
 	} 
@@ -517,7 +517,7 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 
     if ($this->billleading !== $v) {
         $this->billleading = $v;
-        $this->modifiedColumns[] = FaartfacPeer::BILLLEADING;
+        $this->modifiedColumns[] = FaartfacproPeer::BILLLEADING;
       }
   
 	} 
@@ -527,7 +527,7 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 
     if ($this->numtransp !== $v) {
         $this->numtransp = $v;
-        $this->modifiedColumns[] = FaartfacPeer::NUMTRANSP;
+        $this->modifiedColumns[] = FaartfacproPeer::NUMTRANSP;
       }
   
 	} 
@@ -537,7 +537,7 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 
     if ($this->placa !== $v) {
         $this->placa = $v;
-        $this->modifiedColumns[] = FaartfacPeer::PLACA;
+        $this->modifiedColumns[] = FaartfacproPeer::PLACA;
       }
   
 	} 
@@ -547,7 +547,7 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 
     if ($this->chofer !== $v) {
         $this->chofer = $v;
-        $this->modifiedColumns[] = FaartfacPeer::CHOFER;
+        $this->modifiedColumns[] = FaartfacproPeer::CHOFER;
       }
   
 	} 
@@ -569,7 +569,7 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
     }
     if ($this->fecsal !== $ts) {
       $this->fecsal = $ts;
-      $this->modifiedColumns[] = FaartfacPeer::FECSAL;
+      $this->modifiedColumns[] = FaartfacproPeer::FECSAL;
     }
 
 	} 
@@ -591,7 +591,7 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
     }
     if ($this->feclleg !== $ts) {
       $this->feclleg = $ts;
-      $this->modifiedColumns[] = FaartfacPeer::FECLLEG;
+      $this->modifiedColumns[] = FaartfacproPeer::FECLLEG;
     }
 
 	} 
@@ -601,7 +601,7 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 
     if ($this->prod !== $v) {
         $this->prod = $v;
-        $this->modifiedColumns[] = FaartfacPeer::PROD;
+        $this->modifiedColumns[] = FaartfacproPeer::PROD;
       }
   
 	} 
@@ -611,7 +611,7 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 
     if ($this->kg !== $v) {
         $this->kg = Herramientas::toFloat($v);
-        $this->modifiedColumns[] = FaartfacPeer::KG;
+        $this->modifiedColumns[] = FaartfacproPeer::KG;
       }
   
 	} 
@@ -621,7 +621,7 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 
     if ($this->cajas !== $v) {
         $this->cajas = Herramientas::toFloat($v);
-        $this->modifiedColumns[] = FaartfacPeer::CAJAS;
+        $this->modifiedColumns[] = FaartfacproPeer::CAJAS;
       }
   
 	} 
@@ -631,7 +631,7 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 
     if ($this->estatus !== $v) {
         $this->estatus = $v;
-        $this->modifiedColumns[] = FaartfacPeer::ESTATUS;
+        $this->modifiedColumns[] = FaartfacproPeer::ESTATUS;
       }
   
 	} 
@@ -641,7 +641,7 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 
     if ($this->observaciones !== $v) {
         $this->observaciones = $v;
-        $this->modifiedColumns[] = FaartfacPeer::OBSERVACIONES;
+        $this->modifiedColumns[] = FaartfacproPeer::OBSERVACIONES;
       }
   
 	} 
@@ -651,7 +651,7 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 
     if ($this->tm !== $v) {
         $this->tm = Herramientas::toFloat($v);
-        $this->modifiedColumns[] = FaartfacPeer::TM;
+        $this->modifiedColumns[] = FaartfacproPeer::TM;
       }
   
 	} 
@@ -661,7 +661,7 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 
     if ($this->id !== $v) {
         $this->id = $v;
-        $this->modifiedColumns[] = FaartfacPeer::ID;
+        $this->modifiedColumns[] = FaartfacproPeer::ID;
       }
   
 	} 
@@ -734,7 +734,7 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 
             return $startcol + 28; 
     } catch (Exception $e) {
-      throw new PropelException("Error populating Faartfac object", $e);
+      throw new PropelException("Error populating Faartfacpro object", $e);
     }
   }
 
@@ -766,12 +766,12 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 		}
 
 		if ($con === null) {
-			$con = Propel::getConnection(FaartfacPeer::DATABASE_NAME);
+			$con = Propel::getConnection(FaartfacproPeer::DATABASE_NAME);
 		}
 
 		try {
 			$con->begin();
-			FaartfacPeer::doDelete($this, $con);
+			FaartfacproPeer::doDelete($this, $con);
 			$this->setDeleted(true);
 			$con->commit();
 		} catch (PropelException $e) {
@@ -788,7 +788,7 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 		}
 
 		if ($con === null) {
-			$con = Propel::getConnection(FaartfacPeer::DATABASE_NAME);
+			$con = Propel::getConnection(FaartfacproPeer::DATABASE_NAME);
 		}
 
 		try {
@@ -811,12 +811,12 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 
 						if ($this->isModified()) {
 				if ($this->isNew()) {
-					$pk = FaartfacPeer::doInsert($this, $con);
+					$pk = FaartfacproPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
 					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
-					$affectedRows += FaartfacPeer::doUpdate($this, $con);
+					$affectedRows += FaartfacproPeer::doUpdate($this, $con);
 				}
 				$this->resetModified(); 			}
 
@@ -856,7 +856,7 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 			$failureMap = array();
 
 
-			if (($retval = FaartfacPeer::doValidate($this, $columns)) !== true) {
+			if (($retval = FaartfacproPeer::doValidate($this, $columns)) !== true) {
 				$failureMap = array_merge($failureMap, $retval);
 			}
 
@@ -871,7 +871,7 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 	
 	public function getByName($name, $type = BasePeer::TYPE_PHPNAME)
 	{
-		$pos = FaartfacPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
+		$pos = FaartfacproPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->getByPosition($pos);
 	}
 
@@ -971,7 +971,7 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 	
 	public function toArray($keyType = BasePeer::TYPE_PHPNAME)
 	{
-		$keys = FaartfacPeer::getFieldNames($keyType);
+		$keys = FaartfacproPeer::getFieldNames($keyType);
 		$result = array(
 			$keys[0] => $this->getReffac(),
 			$keys[1] => $this->getCodart(),
@@ -1008,7 +1008,7 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 	
 	public function setByName($name, $value, $type = BasePeer::TYPE_PHPNAME)
 	{
-		$pos = FaartfacPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
+		$pos = FaartfacproPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->setByPosition($pos, $value);
 	}
 
@@ -1105,7 +1105,7 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 	
 	public function fromArray($arr, $keyType = BasePeer::TYPE_PHPNAME)
 	{
-		$keys = FaartfacPeer::getFieldNames($keyType);
+		$keys = FaartfacproPeer::getFieldNames($keyType);
 
 		if (array_key_exists($keys[0], $arr)) $this->setReffac($arr[$keys[0]]);
 		if (array_key_exists($keys[1], $arr)) $this->setCodart($arr[$keys[1]]);
@@ -1140,36 +1140,36 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 	
 	public function buildCriteria()
 	{
-		$criteria = new Criteria(FaartfacPeer::DATABASE_NAME);
+		$criteria = new Criteria(FaartfacproPeer::DATABASE_NAME);
 
-		if ($this->isColumnModified(FaartfacPeer::REFFAC)) $criteria->add(FaartfacPeer::REFFAC, $this->reffac);
-		if ($this->isColumnModified(FaartfacPeer::CODART)) $criteria->add(FaartfacPeer::CODART, $this->codart);
-		if ($this->isColumnModified(FaartfacPeer::DESART)) $criteria->add(FaartfacPeer::DESART, $this->desart);
-		if ($this->isColumnModified(FaartfacPeer::CODREF)) $criteria->add(FaartfacPeer::CODREF, $this->codref);
-		if ($this->isColumnModified(FaartfacPeer::CANTOT)) $criteria->add(FaartfacPeer::CANTOT, $this->cantot);
-		if ($this->isColumnModified(FaartfacPeer::PRECIO)) $criteria->add(FaartfacPeer::PRECIO, $this->precio);
-		if ($this->isColumnModified(FaartfacPeer::MONRGO)) $criteria->add(FaartfacPeer::MONRGO, $this->monrgo);
-		if ($this->isColumnModified(FaartfacPeer::MONDES)) $criteria->add(FaartfacPeer::MONDES, $this->mondes);
-		if ($this->isColumnModified(FaartfacPeer::TOTART)) $criteria->add(FaartfacPeer::TOTART, $this->totart);
-		if ($this->isColumnModified(FaartfacPeer::CANAJU)) $criteria->add(FaartfacPeer::CANAJU, $this->canaju);
-		if ($this->isColumnModified(FaartfacPeer::CANDES)) $criteria->add(FaartfacPeer::CANDES, $this->candes);
-		if ($this->isColumnModified(FaartfacPeer::NRONOT)) $criteria->add(FaartfacPeer::NRONOT, $this->nronot);
-		if ($this->isColumnModified(FaartfacPeer::ORDDESPACHO)) $criteria->add(FaartfacPeer::ORDDESPACHO, $this->orddespacho);
-		if ($this->isColumnModified(FaartfacPeer::GUIA)) $criteria->add(FaartfacPeer::GUIA, $this->guia);
-		if ($this->isColumnModified(FaartfacPeer::CONTENEDORES)) $criteria->add(FaartfacPeer::CONTENEDORES, $this->contenedores);
-		if ($this->isColumnModified(FaartfacPeer::BILLLEADING)) $criteria->add(FaartfacPeer::BILLLEADING, $this->billleading);
-		if ($this->isColumnModified(FaartfacPeer::NUMTRANSP)) $criteria->add(FaartfacPeer::NUMTRANSP, $this->numtransp);
-		if ($this->isColumnModified(FaartfacPeer::PLACA)) $criteria->add(FaartfacPeer::PLACA, $this->placa);
-		if ($this->isColumnModified(FaartfacPeer::CHOFER)) $criteria->add(FaartfacPeer::CHOFER, $this->chofer);
-		if ($this->isColumnModified(FaartfacPeer::FECSAL)) $criteria->add(FaartfacPeer::FECSAL, $this->fecsal);
-		if ($this->isColumnModified(FaartfacPeer::FECLLEG)) $criteria->add(FaartfacPeer::FECLLEG, $this->feclleg);
-		if ($this->isColumnModified(FaartfacPeer::PROD)) $criteria->add(FaartfacPeer::PROD, $this->prod);
-		if ($this->isColumnModified(FaartfacPeer::KG)) $criteria->add(FaartfacPeer::KG, $this->kg);
-		if ($this->isColumnModified(FaartfacPeer::CAJAS)) $criteria->add(FaartfacPeer::CAJAS, $this->cajas);
-		if ($this->isColumnModified(FaartfacPeer::ESTATUS)) $criteria->add(FaartfacPeer::ESTATUS, $this->estatus);
-		if ($this->isColumnModified(FaartfacPeer::OBSERVACIONES)) $criteria->add(FaartfacPeer::OBSERVACIONES, $this->observaciones);
-		if ($this->isColumnModified(FaartfacPeer::TM)) $criteria->add(FaartfacPeer::TM, $this->tm);
-		if ($this->isColumnModified(FaartfacPeer::ID)) $criteria->add(FaartfacPeer::ID, $this->id);
+		if ($this->isColumnModified(FaartfacproPeer::REFFAC)) $criteria->add(FaartfacproPeer::REFFAC, $this->reffac);
+		if ($this->isColumnModified(FaartfacproPeer::CODART)) $criteria->add(FaartfacproPeer::CODART, $this->codart);
+		if ($this->isColumnModified(FaartfacproPeer::DESART)) $criteria->add(FaartfacproPeer::DESART, $this->desart);
+		if ($this->isColumnModified(FaartfacproPeer::CODREF)) $criteria->add(FaartfacproPeer::CODREF, $this->codref);
+		if ($this->isColumnModified(FaartfacproPeer::CANTOT)) $criteria->add(FaartfacproPeer::CANTOT, $this->cantot);
+		if ($this->isColumnModified(FaartfacproPeer::PRECIO)) $criteria->add(FaartfacproPeer::PRECIO, $this->precio);
+		if ($this->isColumnModified(FaartfacproPeer::MONRGO)) $criteria->add(FaartfacproPeer::MONRGO, $this->monrgo);
+		if ($this->isColumnModified(FaartfacproPeer::MONDES)) $criteria->add(FaartfacproPeer::MONDES, $this->mondes);
+		if ($this->isColumnModified(FaartfacproPeer::TOTART)) $criteria->add(FaartfacproPeer::TOTART, $this->totart);
+		if ($this->isColumnModified(FaartfacproPeer::CANAJU)) $criteria->add(FaartfacproPeer::CANAJU, $this->canaju);
+		if ($this->isColumnModified(FaartfacproPeer::CANDES)) $criteria->add(FaartfacproPeer::CANDES, $this->candes);
+		if ($this->isColumnModified(FaartfacproPeer::NRONOT)) $criteria->add(FaartfacproPeer::NRONOT, $this->nronot);
+		if ($this->isColumnModified(FaartfacproPeer::ORDDESPACHO)) $criteria->add(FaartfacproPeer::ORDDESPACHO, $this->orddespacho);
+		if ($this->isColumnModified(FaartfacproPeer::GUIA)) $criteria->add(FaartfacproPeer::GUIA, $this->guia);
+		if ($this->isColumnModified(FaartfacproPeer::CONTENEDORES)) $criteria->add(FaartfacproPeer::CONTENEDORES, $this->contenedores);
+		if ($this->isColumnModified(FaartfacproPeer::BILLLEADING)) $criteria->add(FaartfacproPeer::BILLLEADING, $this->billleading);
+		if ($this->isColumnModified(FaartfacproPeer::NUMTRANSP)) $criteria->add(FaartfacproPeer::NUMTRANSP, $this->numtransp);
+		if ($this->isColumnModified(FaartfacproPeer::PLACA)) $criteria->add(FaartfacproPeer::PLACA, $this->placa);
+		if ($this->isColumnModified(FaartfacproPeer::CHOFER)) $criteria->add(FaartfacproPeer::CHOFER, $this->chofer);
+		if ($this->isColumnModified(FaartfacproPeer::FECSAL)) $criteria->add(FaartfacproPeer::FECSAL, $this->fecsal);
+		if ($this->isColumnModified(FaartfacproPeer::FECLLEG)) $criteria->add(FaartfacproPeer::FECLLEG, $this->feclleg);
+		if ($this->isColumnModified(FaartfacproPeer::PROD)) $criteria->add(FaartfacproPeer::PROD, $this->prod);
+		if ($this->isColumnModified(FaartfacproPeer::KG)) $criteria->add(FaartfacproPeer::KG, $this->kg);
+		if ($this->isColumnModified(FaartfacproPeer::CAJAS)) $criteria->add(FaartfacproPeer::CAJAS, $this->cajas);
+		if ($this->isColumnModified(FaartfacproPeer::ESTATUS)) $criteria->add(FaartfacproPeer::ESTATUS, $this->estatus);
+		if ($this->isColumnModified(FaartfacproPeer::OBSERVACIONES)) $criteria->add(FaartfacproPeer::OBSERVACIONES, $this->observaciones);
+		if ($this->isColumnModified(FaartfacproPeer::TM)) $criteria->add(FaartfacproPeer::TM, $this->tm);
+		if ($this->isColumnModified(FaartfacproPeer::ID)) $criteria->add(FaartfacproPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -1177,9 +1177,9 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 	
 	public function buildPkeyCriteria()
 	{
-		$criteria = new Criteria(FaartfacPeer::DATABASE_NAME);
+		$criteria = new Criteria(FaartfacproPeer::DATABASE_NAME);
 
-		$criteria->add(FaartfacPeer::ID, $this->id);
+		$criteria->add(FaartfacproPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -1273,7 +1273,7 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 	public function getPeer()
 	{
 		if (self::$peer === null) {
-			self::$peer = new FaartfacPeer();
+			self::$peer = new FaartfacproPeer();
 		}
 		return self::$peer;
 	}
