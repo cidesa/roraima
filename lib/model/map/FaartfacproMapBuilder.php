@@ -2,10 +2,10 @@
 
 
 
-class FaartfacMapBuilder {
+class FaartfacproMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.FaartfacMapBuilder';
+	const CLASS_NAME = 'lib.model.map.FaartfacproMapBuilder';
 
 	
 	private $dbMap;
@@ -27,12 +27,12 @@ class FaartfacMapBuilder {
 	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
 
-		$tMap = $this->dbMap->addTable('faartfac');
-		$tMap->setPhpName('Faartfac');
+		$tMap = $this->dbMap->addTable('faartfacpro');
+		$tMap->setPhpName('Faartfacpro');
 
 		$tMap->setUseIdGenerator(true);
 
-		$tMap->setPrimaryKeyMethodInfo('faartfac_SEQ');
+		$tMap->setPrimaryKeyMethodInfo('faartfacpro_SEQ');
 
 		$tMap->addColumn('REFFAC', 'Reffac', 'string', CreoleTypes::VARCHAR, true, 8);
 

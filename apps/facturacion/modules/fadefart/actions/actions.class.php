@@ -176,7 +176,8 @@ class fadefartActions extends autofadefartActions
 
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -194,10 +195,15 @@ class fadefartActions extends autofadefartActions
       } else return true;
 
     }else return true;
-
   }
 
-  public function handleErrorEdit()
+  /**
+   * Función para manejar la captura de errores del negocio, tanto que se
+   * produzcan por algún validator y por un valor false retornado por el validateEdit
+   * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
+   *
+   */
+ /* public function handleErrorEdit()
   {
     $this->preExecute();
     $this->setVars();
@@ -215,7 +221,7 @@ class fadefartActions extends autofadefartActions
       }
         }
     return sfView::SUCCESS;
-  }
+  }*/
 
 
   /**
@@ -263,14 +269,13 @@ class fadefartActions extends autofadefartActions
     }
 
     $grid=Herramientas::CargarDatosGrid($this,$this->obj);
-    $resp=Facturacion::salvarFacorrelat($fadefcaj,$grid);
+    $resp=Facturacion::salvarFacorrelat($fadefcaj,$grid,$this->getRequestParameter('facorrelat[proform]'));
     if($resp!=-1){
       $this->coderror = $resp;
       return $this->coderror;
     }
     return -1;
   }
-
 
   public function setVars()
   {

@@ -1,16 +1,16 @@
 <?php
 
 
-abstract class BaseFaartfacPeer {
+abstract class BaseFaartfacproPeer {
 
 	
 	const DATABASE_NAME = 'propel';
 
 	
-	const TABLE_NAME = 'faartfac';
+	const TABLE_NAME = 'faartfacpro';
 
 	
-	const CLASS_DEFAULT = 'lib.model.Faartfac';
+	const CLASS_DEFAULT = 'lib.model.Faartfacpro';
 
 	
 	const NUM_COLUMNS = 28;
@@ -20,88 +20,88 @@ abstract class BaseFaartfacPeer {
 
 
 	
-	const REFFAC = 'faartfac.REFFAC';
+	const REFFAC = 'faartfacpro.REFFAC';
 
 	
-	const CODART = 'faartfac.CODART';
+	const CODART = 'faartfacpro.CODART';
 
 	
-	const DESART = 'faartfac.DESART';
+	const DESART = 'faartfacpro.DESART';
 
 	
-	const CODREF = 'faartfac.CODREF';
+	const CODREF = 'faartfacpro.CODREF';
 
 	
-	const CANTOT = 'faartfac.CANTOT';
+	const CANTOT = 'faartfacpro.CANTOT';
 
 	
-	const PRECIO = 'faartfac.PRECIO';
+	const PRECIO = 'faartfacpro.PRECIO';
 
 	
-	const MONRGO = 'faartfac.MONRGO';
+	const MONRGO = 'faartfacpro.MONRGO';
 
 	
-	const MONDES = 'faartfac.MONDES';
+	const MONDES = 'faartfacpro.MONDES';
 
 	
-	const TOTART = 'faartfac.TOTART';
+	const TOTART = 'faartfacpro.TOTART';
 
 	
-	const CANAJU = 'faartfac.CANAJU';
+	const CANAJU = 'faartfacpro.CANAJU';
 
 	
-	const CANDES = 'faartfac.CANDES';
+	const CANDES = 'faartfacpro.CANDES';
 
 	
-	const NRONOT = 'faartfac.NRONOT';
+	const NRONOT = 'faartfacpro.NRONOT';
 
 	
-	const ORDDESPACHO = 'faartfac.ORDDESPACHO';
+	const ORDDESPACHO = 'faartfacpro.ORDDESPACHO';
 
 	
-	const GUIA = 'faartfac.GUIA';
+	const GUIA = 'faartfacpro.GUIA';
 
 	
-	const CONTENEDORES = 'faartfac.CONTENEDORES';
+	const CONTENEDORES = 'faartfacpro.CONTENEDORES';
 
 	
-	const BILLLEADING = 'faartfac.BILLLEADING';
+	const BILLLEADING = 'faartfacpro.BILLLEADING';
 
 	
-	const NUMTRANSP = 'faartfac.NUMTRANSP';
+	const NUMTRANSP = 'faartfacpro.NUMTRANSP';
 
 	
-	const PLACA = 'faartfac.PLACA';
+	const PLACA = 'faartfacpro.PLACA';
 
 	
-	const CHOFER = 'faartfac.CHOFER';
+	const CHOFER = 'faartfacpro.CHOFER';
 
 	
-	const FECSAL = 'faartfac.FECSAL';
+	const FECSAL = 'faartfacpro.FECSAL';
 
 	
-	const FECLLEG = 'faartfac.FECLLEG';
+	const FECLLEG = 'faartfacpro.FECLLEG';
 
 	
-	const PROD = 'faartfac.PROD';
+	const PROD = 'faartfacpro.PROD';
 
 	
-	const KG = 'faartfac.KG';
+	const KG = 'faartfacpro.KG';
 
 	
-	const CAJAS = 'faartfac.CAJAS';
+	const CAJAS = 'faartfacpro.CAJAS';
 
 	
-	const ESTATUS = 'faartfac.ESTATUS';
+	const ESTATUS = 'faartfacpro.ESTATUS';
 
 	
-	const OBSERVACIONES = 'faartfac.OBSERVACIONES';
+	const OBSERVACIONES = 'faartfacpro.OBSERVACIONES';
 
 	
-	const TM = 'faartfac.TM';
+	const TM = 'faartfacpro.TM';
 
 	
-	const ID = 'faartfac.ID';
+	const ID = 'faartfacpro.ID';
 
 	
 	private static $phpNameMap = null;
@@ -110,7 +110,7 @@ abstract class BaseFaartfacPeer {
 	
 	private static $fieldNames = array (
 		BasePeer::TYPE_PHPNAME => array ('Reffac', 'Codart', 'Desart', 'Codref', 'Cantot', 'Precio', 'Monrgo', 'Mondes', 'Totart', 'Canaju', 'Candes', 'Nronot', 'Orddespacho', 'Guia', 'Contenedores', 'Billleading', 'Numtransp', 'Placa', 'Chofer', 'Fecsal', 'Feclleg', 'Prod', 'Kg', 'Cajas', 'Estatus', 'Observaciones', 'Tm', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (FaartfacPeer::REFFAC, FaartfacPeer::CODART, FaartfacPeer::DESART, FaartfacPeer::CODREF, FaartfacPeer::CANTOT, FaartfacPeer::PRECIO, FaartfacPeer::MONRGO, FaartfacPeer::MONDES, FaartfacPeer::TOTART, FaartfacPeer::CANAJU, FaartfacPeer::CANDES, FaartfacPeer::NRONOT, FaartfacPeer::ORDDESPACHO, FaartfacPeer::GUIA, FaartfacPeer::CONTENEDORES, FaartfacPeer::BILLLEADING, FaartfacPeer::NUMTRANSP, FaartfacPeer::PLACA, FaartfacPeer::CHOFER, FaartfacPeer::FECSAL, FaartfacPeer::FECLLEG, FaartfacPeer::PROD, FaartfacPeer::KG, FaartfacPeer::CAJAS, FaartfacPeer::ESTATUS, FaartfacPeer::OBSERVACIONES, FaartfacPeer::TM, FaartfacPeer::ID, ),
+		BasePeer::TYPE_COLNAME => array (FaartfacproPeer::REFFAC, FaartfacproPeer::CODART, FaartfacproPeer::DESART, FaartfacproPeer::CODREF, FaartfacproPeer::CANTOT, FaartfacproPeer::PRECIO, FaartfacproPeer::MONRGO, FaartfacproPeer::MONDES, FaartfacproPeer::TOTART, FaartfacproPeer::CANAJU, FaartfacproPeer::CANDES, FaartfacproPeer::NRONOT, FaartfacproPeer::ORDDESPACHO, FaartfacproPeer::GUIA, FaartfacproPeer::CONTENEDORES, FaartfacproPeer::BILLLEADING, FaartfacproPeer::NUMTRANSP, FaartfacproPeer::PLACA, FaartfacproPeer::CHOFER, FaartfacproPeer::FECSAL, FaartfacproPeer::FECLLEG, FaartfacproPeer::PROD, FaartfacproPeer::KG, FaartfacproPeer::CAJAS, FaartfacproPeer::ESTATUS, FaartfacproPeer::OBSERVACIONES, FaartfacproPeer::TM, FaartfacproPeer::ID, ),
 		BasePeer::TYPE_FIELDNAME => array ('reffac', 'codart', 'desart', 'codref', 'cantot', 'precio', 'monrgo', 'mondes', 'totart', 'canaju', 'candes', 'nronot', 'orddespacho', 'guia', 'contenedores', 'billleading', 'numtransp', 'placa', 'chofer', 'fecsal', 'feclleg', 'prod', 'kg', 'cajas', 'estatus', 'observaciones', 'tm', 'id', ),
 		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, )
 	);
@@ -118,7 +118,7 @@ abstract class BaseFaartfacPeer {
 	
 	private static $fieldKeys = array (
 		BasePeer::TYPE_PHPNAME => array ('Reffac' => 0, 'Codart' => 1, 'Desart' => 2, 'Codref' => 3, 'Cantot' => 4, 'Precio' => 5, 'Monrgo' => 6, 'Mondes' => 7, 'Totart' => 8, 'Canaju' => 9, 'Candes' => 10, 'Nronot' => 11, 'Orddespacho' => 12, 'Guia' => 13, 'Contenedores' => 14, 'Billleading' => 15, 'Numtransp' => 16, 'Placa' => 17, 'Chofer' => 18, 'Fecsal' => 19, 'Feclleg' => 20, 'Prod' => 21, 'Kg' => 22, 'Cajas' => 23, 'Estatus' => 24, 'Observaciones' => 25, 'Tm' => 26, 'Id' => 27, ),
-		BasePeer::TYPE_COLNAME => array (FaartfacPeer::REFFAC => 0, FaartfacPeer::CODART => 1, FaartfacPeer::DESART => 2, FaartfacPeer::CODREF => 3, FaartfacPeer::CANTOT => 4, FaartfacPeer::PRECIO => 5, FaartfacPeer::MONRGO => 6, FaartfacPeer::MONDES => 7, FaartfacPeer::TOTART => 8, FaartfacPeer::CANAJU => 9, FaartfacPeer::CANDES => 10, FaartfacPeer::NRONOT => 11, FaartfacPeer::ORDDESPACHO => 12, FaartfacPeer::GUIA => 13, FaartfacPeer::CONTENEDORES => 14, FaartfacPeer::BILLLEADING => 15, FaartfacPeer::NUMTRANSP => 16, FaartfacPeer::PLACA => 17, FaartfacPeer::CHOFER => 18, FaartfacPeer::FECSAL => 19, FaartfacPeer::FECLLEG => 20, FaartfacPeer::PROD => 21, FaartfacPeer::KG => 22, FaartfacPeer::CAJAS => 23, FaartfacPeer::ESTATUS => 24, FaartfacPeer::OBSERVACIONES => 25, FaartfacPeer::TM => 26, FaartfacPeer::ID => 27, ),
+		BasePeer::TYPE_COLNAME => array (FaartfacproPeer::REFFAC => 0, FaartfacproPeer::CODART => 1, FaartfacproPeer::DESART => 2, FaartfacproPeer::CODREF => 3, FaartfacproPeer::CANTOT => 4, FaartfacproPeer::PRECIO => 5, FaartfacproPeer::MONRGO => 6, FaartfacproPeer::MONDES => 7, FaartfacproPeer::TOTART => 8, FaartfacproPeer::CANAJU => 9, FaartfacproPeer::CANDES => 10, FaartfacproPeer::NRONOT => 11, FaartfacproPeer::ORDDESPACHO => 12, FaartfacproPeer::GUIA => 13, FaartfacproPeer::CONTENEDORES => 14, FaartfacproPeer::BILLLEADING => 15, FaartfacproPeer::NUMTRANSP => 16, FaartfacproPeer::PLACA => 17, FaartfacproPeer::CHOFER => 18, FaartfacproPeer::FECSAL => 19, FaartfacproPeer::FECLLEG => 20, FaartfacproPeer::PROD => 21, FaartfacproPeer::KG => 22, FaartfacproPeer::CAJAS => 23, FaartfacproPeer::ESTATUS => 24, FaartfacproPeer::OBSERVACIONES => 25, FaartfacproPeer::TM => 26, FaartfacproPeer::ID => 27, ),
 		BasePeer::TYPE_FIELDNAME => array ('reffac' => 0, 'codart' => 1, 'desart' => 2, 'codref' => 3, 'cantot' => 4, 'precio' => 5, 'monrgo' => 6, 'mondes' => 7, 'totart' => 8, 'canaju' => 9, 'candes' => 10, 'nronot' => 11, 'orddespacho' => 12, 'guia' => 13, 'contenedores' => 14, 'billleading' => 15, 'numtransp' => 16, 'placa' => 17, 'chofer' => 18, 'fecsal' => 19, 'feclleg' => 20, 'prod' => 21, 'kg' => 22, 'cajas' => 23, 'estatus' => 24, 'observaciones' => 25, 'tm' => 26, 'id' => 27, ),
 		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, )
 	);
@@ -126,14 +126,14 @@ abstract class BaseFaartfacPeer {
 	
 	public static function getMapBuilder()
 	{
-		include_once 'lib/model/map/FaartfacMapBuilder.php';
-		return BasePeer::getMapBuilder('lib.model.map.FaartfacMapBuilder');
+		include_once 'lib/model/map/FaartfacproMapBuilder.php';
+		return BasePeer::getMapBuilder('lib.model.map.FaartfacproMapBuilder');
 	}
 	
 	public static function getPhpNameMap()
 	{
 		if (self::$phpNameMap === null) {
-			$map = FaartfacPeer::getTableMap();
+			$map = FaartfacproPeer::getTableMap();
 			$columns = $map->getColumns();
 			$nameMap = array();
 			foreach ($columns as $column) {
@@ -167,73 +167,73 @@ abstract class BaseFaartfacPeer {
 	
 	public static function alias($alias, $column)
 	{
-		return str_replace(FaartfacPeer::TABLE_NAME.'.', $alias.'.', $column);
+		return str_replace(FaartfacproPeer::TABLE_NAME.'.', $alias.'.', $column);
 	}
 
 	
 	public static function addSelectColumns(Criteria $criteria)
 	{
 
-		$criteria->addSelectColumn(FaartfacPeer::REFFAC);
+		$criteria->addSelectColumn(FaartfacproPeer::REFFAC);
 
-		$criteria->addSelectColumn(FaartfacPeer::CODART);
+		$criteria->addSelectColumn(FaartfacproPeer::CODART);
 
-		$criteria->addSelectColumn(FaartfacPeer::DESART);
+		$criteria->addSelectColumn(FaartfacproPeer::DESART);
 
-		$criteria->addSelectColumn(FaartfacPeer::CODREF);
+		$criteria->addSelectColumn(FaartfacproPeer::CODREF);
 
-		$criteria->addSelectColumn(FaartfacPeer::CANTOT);
+		$criteria->addSelectColumn(FaartfacproPeer::CANTOT);
 
-		$criteria->addSelectColumn(FaartfacPeer::PRECIO);
+		$criteria->addSelectColumn(FaartfacproPeer::PRECIO);
 
-		$criteria->addSelectColumn(FaartfacPeer::MONRGO);
+		$criteria->addSelectColumn(FaartfacproPeer::MONRGO);
 
-		$criteria->addSelectColumn(FaartfacPeer::MONDES);
+		$criteria->addSelectColumn(FaartfacproPeer::MONDES);
 
-		$criteria->addSelectColumn(FaartfacPeer::TOTART);
+		$criteria->addSelectColumn(FaartfacproPeer::TOTART);
 
-		$criteria->addSelectColumn(FaartfacPeer::CANAJU);
+		$criteria->addSelectColumn(FaartfacproPeer::CANAJU);
 
-		$criteria->addSelectColumn(FaartfacPeer::CANDES);
+		$criteria->addSelectColumn(FaartfacproPeer::CANDES);
 
-		$criteria->addSelectColumn(FaartfacPeer::NRONOT);
+		$criteria->addSelectColumn(FaartfacproPeer::NRONOT);
 
-		$criteria->addSelectColumn(FaartfacPeer::ORDDESPACHO);
+		$criteria->addSelectColumn(FaartfacproPeer::ORDDESPACHO);
 
-		$criteria->addSelectColumn(FaartfacPeer::GUIA);
+		$criteria->addSelectColumn(FaartfacproPeer::GUIA);
 
-		$criteria->addSelectColumn(FaartfacPeer::CONTENEDORES);
+		$criteria->addSelectColumn(FaartfacproPeer::CONTENEDORES);
 
-		$criteria->addSelectColumn(FaartfacPeer::BILLLEADING);
+		$criteria->addSelectColumn(FaartfacproPeer::BILLLEADING);
 
-		$criteria->addSelectColumn(FaartfacPeer::NUMTRANSP);
+		$criteria->addSelectColumn(FaartfacproPeer::NUMTRANSP);
 
-		$criteria->addSelectColumn(FaartfacPeer::PLACA);
+		$criteria->addSelectColumn(FaartfacproPeer::PLACA);
 
-		$criteria->addSelectColumn(FaartfacPeer::CHOFER);
+		$criteria->addSelectColumn(FaartfacproPeer::CHOFER);
 
-		$criteria->addSelectColumn(FaartfacPeer::FECSAL);
+		$criteria->addSelectColumn(FaartfacproPeer::FECSAL);
 
-		$criteria->addSelectColumn(FaartfacPeer::FECLLEG);
+		$criteria->addSelectColumn(FaartfacproPeer::FECLLEG);
 
-		$criteria->addSelectColumn(FaartfacPeer::PROD);
+		$criteria->addSelectColumn(FaartfacproPeer::PROD);
 
-		$criteria->addSelectColumn(FaartfacPeer::KG);
+		$criteria->addSelectColumn(FaartfacproPeer::KG);
 
-		$criteria->addSelectColumn(FaartfacPeer::CAJAS);
+		$criteria->addSelectColumn(FaartfacproPeer::CAJAS);
 
-		$criteria->addSelectColumn(FaartfacPeer::ESTATUS);
+		$criteria->addSelectColumn(FaartfacproPeer::ESTATUS);
 
-		$criteria->addSelectColumn(FaartfacPeer::OBSERVACIONES);
+		$criteria->addSelectColumn(FaartfacproPeer::OBSERVACIONES);
 
-		$criteria->addSelectColumn(FaartfacPeer::TM);
+		$criteria->addSelectColumn(FaartfacproPeer::TM);
 
-		$criteria->addSelectColumn(FaartfacPeer::ID);
+		$criteria->addSelectColumn(FaartfacproPeer::ID);
 
 	}
 
-	const COUNT = 'COUNT(faartfac.ID)';
-	const COUNT_DISTINCT = 'COUNT(DISTINCT faartfac.ID)';
+	const COUNT = 'COUNT(faartfacpro.ID)';
+	const COUNT_DISTINCT = 'COUNT(DISTINCT faartfacpro.ID)';
 
 	
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
@@ -242,9 +242,9 @@ abstract class BaseFaartfacPeer {
 
 				$criteria->clearSelectColumns()->clearOrderByColumns();
 		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(FaartfacPeer::COUNT_DISTINCT);
+			$criteria->addSelectColumn(FaartfacproPeer::COUNT_DISTINCT);
 		} else {
-			$criteria->addSelectColumn(FaartfacPeer::COUNT);
+			$criteria->addSelectColumn(FaartfacproPeer::COUNT);
 		}
 
 				foreach($criteria->getGroupByColumns() as $column)
@@ -252,7 +252,7 @@ abstract class BaseFaartfacPeer {
 			$criteria->addSelectColumn($column);
 		}
 
-		$rs = FaartfacPeer::doSelectRS($criteria, $con);
+		$rs = FaartfacproPeer::doSelectRS($criteria, $con);
 		if ($rs->next()) {
 			return $rs->getInt(1);
 		} else {
@@ -264,7 +264,7 @@ abstract class BaseFaartfacPeer {
 	{
 		$critcopy = clone $criteria;
 		$critcopy->setLimit(1);
-		$objects = FaartfacPeer::doSelect($critcopy, $con);
+		$objects = FaartfacproPeer::doSelect($critcopy, $con);
 		if ($objects) {
 			return $objects[0];
 		}
@@ -273,7 +273,7 @@ abstract class BaseFaartfacPeer {
 	
 	public static function doSelect(Criteria $criteria, $con = null)
 	{
-		return FaartfacPeer::populateObjects(FaartfacPeer::doSelectRS($criteria, $con));
+		return FaartfacproPeer::populateObjects(FaartfacproPeer::doSelectRS($criteria, $con));
 	}
 	
 	public static function doSelectRS(Criteria $criteria, $con = null)
@@ -284,7 +284,7 @@ abstract class BaseFaartfacPeer {
 
 		if (!$criteria->getSelectColumns()) {
 			$criteria = clone $criteria;
-			FaartfacPeer::addSelectColumns($criteria);
+			FaartfacproPeer::addSelectColumns($criteria);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -296,7 +296,7 @@ abstract class BaseFaartfacPeer {
 	{
 		$results = array();
 	
-				$cls = FaartfacPeer::getOMClass();
+				$cls = FaartfacproPeer::getOMClass();
 		$cls = Propel::import($cls);
 				while($rs->next()) {
 		
@@ -316,7 +316,7 @@ abstract class BaseFaartfacPeer {
 	
 	public static function getOMClass()
 	{
-		return FaartfacPeer::CLASS_DEFAULT;
+		return FaartfacproPeer::CLASS_DEFAULT;
 	}
 
 	
@@ -330,7 +330,7 @@ abstract class BaseFaartfacPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
-		$criteria->remove(FaartfacPeer::ID); 
+		$criteria->remove(FaartfacproPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 
@@ -357,8 +357,8 @@ abstract class BaseFaartfacPeer {
 
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; 
-			$comparison = $criteria->getComparison(FaartfacPeer::ID);
-			$selectCriteria->add(FaartfacPeer::ID, $criteria->remove(FaartfacPeer::ID), $comparison);
+			$comparison = $criteria->getComparison(FaartfacproPeer::ID);
+			$selectCriteria->add(FaartfacproPeer::ID, $criteria->remove(FaartfacproPeer::ID), $comparison);
 
 		} else { 			$criteria = $values->buildCriteria(); 			$selectCriteria = $values->buildPkeyCriteria(); 		}
 
@@ -375,7 +375,7 @@ abstract class BaseFaartfacPeer {
 		}
 		$affectedRows = 0; 		try {
 									$con->begin();
-			$affectedRows += BasePeer::doDeleteAll(FaartfacPeer::TABLE_NAME, $con);
+			$affectedRows += BasePeer::doDeleteAll(FaartfacproPeer::TABLE_NAME, $con);
 			$con->commit();
 			return $affectedRows;
 		} catch (PropelException $e) {
@@ -388,16 +388,16 @@ abstract class BaseFaartfacPeer {
 	 public static function doDelete($values, $con = null)
 	 {
 		if ($con === null) {
-			$con = Propel::getConnection(FaartfacPeer::DATABASE_NAME);
+			$con = Propel::getConnection(FaartfacproPeer::DATABASE_NAME);
 		}
 
 		if ($values instanceof Criteria) {
-			$criteria = clone $values; 		} elseif ($values instanceof Faartfac) {
+			$criteria = clone $values; 		} elseif ($values instanceof Faartfacpro) {
 
 			$criteria = $values->buildPkeyCriteria();
 		} else {
 						$criteria = new Criteria(self::DATABASE_NAME);
-			$criteria->add(FaartfacPeer::ID, (array) $values, Criteria::IN);
+			$criteria->add(FaartfacproPeer::ID, (array) $values, Criteria::IN);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -416,13 +416,13 @@ abstract class BaseFaartfacPeer {
 	}
 
 	
-	public static function doValidate(Faartfac $obj, $cols = null)
+	public static function doValidate(Faartfacpro $obj, $cols = null)
 	{
 		$columns = array();
 
 		if ($cols) {
-			$dbMap = Propel::getDatabaseMap(FaartfacPeer::DATABASE_NAME);
-			$tableMap = $dbMap->getTable(FaartfacPeer::TABLE_NAME);
+			$dbMap = Propel::getDatabaseMap(FaartfacproPeer::DATABASE_NAME);
+			$tableMap = $dbMap->getTable(FaartfacproPeer::TABLE_NAME);
 
 			if (! is_array($cols)) {
 				$cols = array($cols);
@@ -438,11 +438,11 @@ abstract class BaseFaartfacPeer {
 
 		}
 
-		$res =  BasePeer::doValidate(FaartfacPeer::DATABASE_NAME, FaartfacPeer::TABLE_NAME, $columns);
+		$res =  BasePeer::doValidate(FaartfacproPeer::DATABASE_NAME, FaartfacproPeer::TABLE_NAME, $columns);
     if ($res !== true) {
         $request = sfContext::getInstance()->getRequest();
         foreach ($res as $failed) {
-            $col = FaartfacPeer::translateFieldname($failed->getColumn(), BasePeer::TYPE_COLNAME, BasePeer::TYPE_PHPNAME);
+            $col = FaartfacproPeer::translateFieldname($failed->getColumn(), BasePeer::TYPE_COLNAME, BasePeer::TYPE_PHPNAME);
             $request->setError($col, $failed->getMessage());
         }
     }
@@ -457,12 +457,12 @@ abstract class BaseFaartfacPeer {
 			$con = Propel::getConnection(self::DATABASE_NAME);
 		}
 
-		$criteria = new Criteria(FaartfacPeer::DATABASE_NAME);
+		$criteria = new Criteria(FaartfacproPeer::DATABASE_NAME);
 
-		$criteria->add(FaartfacPeer::ID, $pk);
+		$criteria->add(FaartfacproPeer::ID, $pk);
 
 
-		$v = FaartfacPeer::doSelect($criteria, $con);
+		$v = FaartfacproPeer::doSelect($criteria, $con);
 
 		return !empty($v) > 0 ? $v[0] : null;
 	}
@@ -479,8 +479,8 @@ abstract class BaseFaartfacPeer {
 			$objs = array();
 		} else {
 			$criteria = new Criteria();
-			$criteria->add(FaartfacPeer::ID, $pks, Criteria::IN);
-			$objs = FaartfacPeer::doSelect($criteria, $con);
+			$criteria->add(FaartfacproPeer::ID, $pks, Criteria::IN);
+			$objs = FaartfacproPeer::doSelect($criteria, $con);
 		}
 		return $objs;
 	}
@@ -488,11 +488,11 @@ abstract class BaseFaartfacPeer {
 } 
 if (Propel::isInit()) {
 			try {
-		BaseFaartfacPeer::getMapBuilder();
+		BaseFaartfacproPeer::getMapBuilder();
 	} catch (Exception $e) {
 		Propel::log('Could not initialize Peer: ' . $e->getMessage(), Propel::LOG_ERR);
 	}
 } else {
-			require_once 'lib/model/map/FaartfacMapBuilder.php';
-	Propel::registerMapBuilder('lib.model.map.FaartfacMapBuilder');
+			require_once 'lib/model/map/FaartfacproMapBuilder.php';
+	Propel::registerMapBuilder('lib.model.map.FaartfacproMapBuilder');
 }
