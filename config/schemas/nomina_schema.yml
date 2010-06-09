@@ -7294,3 +7294,50 @@ propel:
       primaryKey: true
       autoIncrement: true
       description: Identificador Ãnico del registro
+  npasiconpar:
+    codnom:
+      type: VARCHAR
+      size: 3
+      required: true
+      description: NÃ³mina
+    codtipcar:
+      type: VARCHAR
+      size: 3
+      required: true
+      description: Tipo de Cargo
+    gracar:
+      type: VARCHAR
+      size: 3
+      description: NivelEscala
+    codtip:
+      type: VARCHAR
+      size: 4
+      description: DedicaciÃ³n
+    codtipcat:
+      type: VARCHAR
+      size: 4
+      description: CategorÃ­a
+    codtie:
+      type: VARCHAR
+      size: 3
+      description: CondiciÃ³n
+    codestemp:
+      type: VARCHAR
+      size: 1
+      description: Estatus
+    codcon:
+      type: VARCHAR
+      size: 3
+      required: true
+      description: Concepto
+    codpar:
+      type: VARCHAR
+      size: 16
+      required: true
+      description: Partida
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Ãnico del registro

@@ -15,4 +15,17 @@
  */ 
 class NptiempoPeer extends BaseNptiempoPeer
 {
+  public static function getCondiciones()
+  {
+    $resp = array();
+
+    $c = new Criteria();
+    $m = NptiempoPeer::doSelect($c);
+    if($m){
+      foreach($m as $mon){
+        $resp[$mon->getCodtie()] = $mon->getDestie();
+      }
+    }
+    return $resp;
+  }
 }

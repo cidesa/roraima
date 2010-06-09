@@ -15,4 +15,17 @@
  */ 
 class NptipcatPeer extends BaseNptipcatPeer
 {
+  public static function getCategorias()
+  {
+    $resp = array();
+
+    $c = new Criteria();
+    $m = NptipcatPeer::doSelect($c);
+    if($m){
+      foreach($m as $mon){
+        $resp[$mon->getCodtipcat()] = $mon->getDestipcat();
+      }
+    }
+    return $resp;
+  }
 }

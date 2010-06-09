@@ -15,4 +15,17 @@
  */ 
 class NpestempPeer extends BaseNpestempPeer
 {
+  public static function getEstatus()
+  {
+    $resp = array();
+
+    $c = new Criteria();
+    $m = NpestempPeer::doSelect($c);
+    if($m){
+      foreach($m as $mon){
+        $resp[$mon->getCodestemp()] = $mon->getDesestemp();
+      }
+    }
+    return $resp;
+  }
 }

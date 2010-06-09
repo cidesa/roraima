@@ -175,6 +175,7 @@ nomina:
       Asignación de Categorias por Empleados:                        AsignarCategoriasConceptosxEmpleado
       Asignar  Partidas a un Concepto por Nomina:                    nomcodprenom
       Asignacion de Partidas a Conceptos:                            asignarpartidasconceptos
+      Asignación de Partidas a Conceptos por Tipo de Cargo:          nomasiconpar
     Movimientos de Nómina:
       Movimientos Por Concepto:                                      NomNomMovNomCon
       Movimientos Por Concepto y Cargos:                             NomNomMovNomConCar
