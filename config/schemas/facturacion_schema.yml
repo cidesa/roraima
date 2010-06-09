@@ -111,6 +111,40 @@ propel:
     billleading:
       type: VARCHAR
       size: 100
+    numtransp:
+      type: VARCHAR
+      size: 10
+    placa:
+      type: VARCHAR
+      size: 10
+    chofer:
+      type: VARCHAR
+      size: 200
+    fecsal:
+      type: TIMESTAMP
+    feclleg:
+      type: TIMESTAMP
+    prod:
+      type: VARCHAR
+      size: 100
+    kg:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    cajas:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    estatus:
+      type: VARCHAR
+      size: 1
+    observaciones:
+      type: VARCHAR
+      size: 500
+    tm:
+      type: NUMERIC
+      size: 14
+      scale: 2
     id:
       type: INTEGER
       required: true
@@ -662,6 +696,12 @@ propel:
       scale: 2
     codcaj:
       type: INTEGER
+    numcontrol:
+      type: VARCHAR
+      size: 10
+    proform:
+      type: VARCHAR
+      size: 10
     id:
       type: INTEGER
       required: true
@@ -1528,3 +1568,178 @@ propel:
       type: INTEGER
       required: true
       autoIncrement: true
+  fafacturpro:
+    reffac:
+      type: VARCHAR
+      size: 8
+      required: true
+    fecfac:
+      type: DATE
+      required: true
+    codcli:
+      type: VARCHAR
+      size: 10
+      required: true
+    desfac:
+      type: VARCHAR
+      size: 255
+    tipref:
+      type: VARCHAR
+      size: 2
+      required: true
+    monfac:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    mondesc:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    codconpag:
+      type: INTEGER
+    numcom:
+      type: VARCHAR
+      size: 8
+    reapor:
+      type: VARCHAR
+      size: 50
+    fecanu:
+      type: DATE
+    status:
+      type: VARCHAR
+      size: 1
+    observ:
+      type: VARCHAR
+      size: 500
+    tipmon:
+      type: VARCHAR
+      size: 3
+    valmon:
+      type: NUMERIC
+      size: 12
+      scale: 2
+    numcomord:
+      type: VARCHAR
+      size: 8
+    numcominv:
+      type: VARCHAR
+      size: 32
+    sucursal:
+      type: VARCHAR
+      size: 50
+    motanu:
+      type: VARCHAR
+      size: 250
+    vuelto:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    codcaj:
+      type: INTEGER
+    numcontrol:
+      type: VARCHAR
+      size: 10
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  faartfacpro:
+    reffac:
+      type: VARCHAR
+      size: 8
+      required: true
+    codart:
+      type: VARCHAR
+      size: 20
+      required: true
+    desart:
+      type: VARCHAR
+      size: 1500
+    codref:
+      type: VARCHAR
+      size: 8
+    cantot:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    precio:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monrgo:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    mondes:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    totart:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    canaju:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    candes:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    nronot:
+      type: VARCHAR
+      size: 8
+    orddespacho:
+      type: VARCHAR
+      size: 8
+    guia:
+      type: VARCHAR
+      size: 10
+    contenedores:
+      type: VARCHAR
+      size: 100
+    billleading:
+      type: VARCHAR
+      size: 100
+    numtransp:
+      type: VARCHAR
+      size: 10
+    placa:
+      type: VARCHAR
+      size: 10
+    chofer:
+      type: VARCHAR
+      size: 200
+    fecsal:
+      type: TIMESTAMP
+    feclleg:
+      type: TIMESTAMP
+    prod:
+      type: VARCHAR
+      size: 100
+    kg:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    cajas:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    estatus:
+      type: VARCHAR
+      size: 1
+    observaciones:
+      type: VARCHAR
+      size: 500
+    tm:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
