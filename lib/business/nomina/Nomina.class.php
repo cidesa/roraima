@@ -9543,5 +9543,56 @@ exit();
     }
   }
 
+  public static function grabarConceptoPartidas($clasemodelo,$grid)
+  {
+    $cardoc="";
+    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+    if ($varemp)
+        if(array_key_exists('aplicacion',$varemp))
+         if(array_key_exists('nomina',$varemp['aplicacion']))
+           if(array_key_exists('modulos',$varemp['aplicacion']['nomina']))
+             if(array_key_exists('nomcomocp',$varemp['aplicacion']['nomina']['modulos'])){
+               if(array_key_exists('codtipcar',$varemp['aplicacion']['nomina']['modulos']['nomcomocp']))
+               {
+                $cardoc=$varemp['aplicacion']['nomina']['modulos']['nomcomocp']['codtipcar'];
+               }}
+
+    $x=$grid[0];
+    $j=0;
+    while ($j<count($x))
+    {
+        $t= new Criteria();
+        $t->add(NpasiconparPeer::CODTIPCAR,$clasemodelo->getCodtipcar());
+        if ($cardoc!=$clasemodelo->getCodtipcar()) { $t->add(NpasiconparPeer::GRACAR,$clasemodelo->getGracar()); }
+        else  { $t->add(NpasiconparPeer::CODTIP,$clasemodelo->getCodtip());
+        $t->add(NpasiconparPeer::CODTIPCAT,$clasemodelo->getCodtipcat()); }
+        $t->add(NpasiconparPeer::CODTIE,$clasemodelo->getCodtie());
+        $t->add(NpasiconparPeer::CODESTEMP,$clasemodelo->getCodestemp());
+        $t->add(NpasiconparPeer::CODNOM,$clasemodelo->getCodnom());
+        $t->add(NpasiconparPeer::CODCON,$x[$j]["codcon"]);        
+        $registro= NpasiconparPeer::doSelectOne($t);
+        if ($registro)
+        {          
+          $registro->setCodpar($x[$j]["codpar"]) ;
+          $registro->save() ;
+        }else {
+            
+          $regnuevo= new Npasiconpar();
+          $regnuevo->setCodnom($clasemodelo->getCodnom());
+          $regnuevo->setCodtipcar($clasemodelo->getCodtipcar());
+          $regnuevo->setGracar($clasemodelo->getGracar());
+          $regnuevo->setCodtip($clasemodelo->getCodtip());
+          $regnuevo->setCodtipcat($clasemodelo->getCodtipcat());
+          $regnuevo->setCodtie($clasemodelo->getCodtie());
+          $regnuevo->setCodestemp($clasemodelo->getCodestemp());
+          $regnuevo->setCodcon($x[$j]["codcon"]);
+          $regnuevo->setCodpar($x[$j]["codpar"]);
+          $regnuevo->save();
+        }
+
+      $j++;
+    }
+  }
+
 } // fin clase
 ?>

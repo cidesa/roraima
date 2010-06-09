@@ -15,4 +15,17 @@
  */ 
 class NptipdedPeer extends BaseNptipdedPeer
 {
+  public static function getDedicaciones()
+  {
+    $resp = array();
+
+    $c = new Criteria();
+    $m = NptipdedPeer::doSelect($c);
+    if($m){
+      foreach($m as $mon){
+        $resp[$mon->getCodtip()] = $mon->getDestip();
+      }
+    }
+    return $resp;
+  }
 }
