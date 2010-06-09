@@ -22,7 +22,7 @@ propel:
       required: true
       ##primaryKey: true
     codart:
-      type: fafVARCHAR
+      type: VARCHAR
       size: 20
       required: true
       ##primaryKey: true
