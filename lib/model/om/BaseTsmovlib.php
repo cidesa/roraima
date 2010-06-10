@@ -109,6 +109,10 @@ abstract class BaseTsmovlib extends BaseObject  implements Persistent {
 
 
 	
+	protected $cedrif;
+
+
+	
 	protected $id;
 
 	
@@ -373,6 +377,13 @@ abstract class BaseTsmovlib extends BaseObject  implements Persistent {
   {
 
     return trim($this->loguse);
+
+  }
+  
+  public function getCedrif()
+  {
+
+    return trim($this->cedrif);
 
   }
   
@@ -701,6 +712,16 @@ abstract class BaseTsmovlib extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setCedrif($v)
+	{
+
+    if ($this->cedrif !== $v) {
+        $this->cedrif = $v;
+        $this->modifiedColumns[] = TsmovlibPeer::CEDRIF;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -765,7 +786,9 @@ abstract class BaseTsmovlib extends BaseObject  implements Persistent {
 
       $this->loguse = $rs->getString($startcol + 24);
 
-      $this->id = $rs->getInt($startcol + 25);
+      $this->cedrif = $rs->getString($startcol + 25);
+
+      $this->id = $rs->getInt($startcol + 26);
 
       $this->resetModified();
 
@@ -773,7 +796,7 @@ abstract class BaseTsmovlib extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 26; 
+            return $startcol + 27; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Tsmovlib object", $e);
     }
@@ -1026,6 +1049,9 @@ abstract class BaseTsmovlib extends BaseObject  implements Persistent {
 				return $this->getLoguse();
 				break;
 			case 25:
+				return $this->getCedrif();
+				break;
+			case 26:
 				return $this->getId();
 				break;
 			default:
@@ -1063,7 +1089,8 @@ abstract class BaseTsmovlib extends BaseObject  implements Persistent {
 			$keys[22] => $this->getMotanu(),
 			$keys[23] => $this->getRefpag(),
 			$keys[24] => $this->getLoguse(),
-			$keys[25] => $this->getId(),
+			$keys[25] => $this->getCedrif(),
+			$keys[26] => $this->getId(),
 		);
 		return $result;
 	}
@@ -1155,6 +1182,9 @@ abstract class BaseTsmovlib extends BaseObject  implements Persistent {
 				$this->setLoguse($value);
 				break;
 			case 25:
+				$this->setCedrif($value);
+				break;
+			case 26:
 				$this->setId($value);
 				break;
 		} 	}
@@ -1189,7 +1219,8 @@ abstract class BaseTsmovlib extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[22], $arr)) $this->setMotanu($arr[$keys[22]]);
 		if (array_key_exists($keys[23], $arr)) $this->setRefpag($arr[$keys[23]]);
 		if (array_key_exists($keys[24], $arr)) $this->setLoguse($arr[$keys[24]]);
-		if (array_key_exists($keys[25], $arr)) $this->setId($arr[$keys[25]]);
+		if (array_key_exists($keys[25], $arr)) $this->setCedrif($arr[$keys[25]]);
+		if (array_key_exists($keys[26], $arr)) $this->setId($arr[$keys[26]]);
 	}
 
 	
@@ -1222,6 +1253,7 @@ abstract class BaseTsmovlib extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(TsmovlibPeer::MOTANU)) $criteria->add(TsmovlibPeer::MOTANU, $this->motanu);
 		if ($this->isColumnModified(TsmovlibPeer::REFPAG)) $criteria->add(TsmovlibPeer::REFPAG, $this->refpag);
 		if ($this->isColumnModified(TsmovlibPeer::LOGUSE)) $criteria->add(TsmovlibPeer::LOGUSE, $this->loguse);
+		if ($this->isColumnModified(TsmovlibPeer::CEDRIF)) $criteria->add(TsmovlibPeer::CEDRIF, $this->cedrif);
 		if ($this->isColumnModified(TsmovlibPeer::ID)) $criteria->add(TsmovlibPeer::ID, $this->id);
 
 		return $criteria;
@@ -1302,6 +1334,8 @@ abstract class BaseTsmovlib extends BaseObject  implements Persistent {
 		$copyObj->setRefpag($this->refpag);
 
 		$copyObj->setLoguse($this->loguse);
+
+		$copyObj->setCedrif($this->cedrif);
 
 
 		$copyObj->setNew(true);

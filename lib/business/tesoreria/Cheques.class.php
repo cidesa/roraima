@@ -34,7 +34,7 @@ class Cheques
     return $total;
   }
 
-  public static function Genera_MovLib($tscheemi,$Descrip,$Monto,$Comprobante,$numche,$refpago='')
+  public static function Genera_MovLib($tscheemi,$Descrip,$Monto,$Comprobante,$numche,$refpago='', $cedrif)
   {
     $result=array();
     $criterio = "Select * From TSMOVLIB Where NumCue = '".$tscheemi->getNumcue()."' AND RefLib = '".$numche."' And TipMov='".$tscheemi->getTipdoc()."'";
@@ -57,6 +57,7 @@ class Cheques
       $loguse= sfContext::getInstance()->getUser()->getAttribute('loguse');
       $tsmovlib->setLoguse($loguse);
       $tsmovlib->setFecing(date("Y-m-d"));
+      $tsmovlib->setCedrif($cedrif);
       $tsmovlib->save();
 
       Comprobante::ActualizarReferenciaComprobante($Comprobante,$numche,'');
@@ -783,7 +784,7 @@ class Cheques
 
               self::Actualiza_Bancos($tscheemi,"A","C",$Monto,$numche);
               $refpago = self::Genera_Pagos($tscheemi,$x[$j]->getNumord(),$x[$j]->getCedrif(),$TipCausad,$DescOp,$montoreal,"O",$Porcentaje,$numche,$x);
-              self::Genera_MovLib($tscheemi,$DescOp,$Monto,$numcom,$numche,$refpago);
+              self::Genera_MovLib($tscheemi,$DescOp,$Monto,$numcom,$numche,$refpago,$x[$j]->getCedrif());
               self::Grabar_Datos($tscheemi,$Monto,$x[$j]->getCedrif(),$numche,$reqfirma,$mancomegr);
               //Actualizar arreglos de Cheques, necesario para imprimir luego los cheques emitidos;
               if (trim($arraynumche)!=""){
@@ -964,7 +965,7 @@ class Cheques
           	}
 
             $refpago = self::Genera_Pagos_Compuesto($tscheemi,$numord,$cedrif,$TipCausad,$DescOp,$numche,$x);
-            self::Genera_MovLib($tscheemi,$DescOp,$Monto,$numcom,$numche,$refpago);
+            self::Genera_MovLib($tscheemi,$DescOp,$Monto,$numcom,$numche,$refpago,$cedrif);
             self::Actualiza_Bancos($tscheemi,"A","C",$Monto,$numche);
             self::Grabar_Datos($tscheemi,$Monto,$cedrif,$numche,$reqfirma,$mancomegr);
             $arraynumche=$numche;
@@ -1053,7 +1054,7 @@ class Cheques
 
          self::Actualiza_Bancos($tscheemi,"A","C",$MontOP,$numche);
          $refpago = self::Genera_Pagos($tscheemi,$NumCompro,$tscheemi->getCedrif(),$TipCompro,$DescOp,$MontOP,"C",100,$numche,$x);
-         self::Genera_MovLib($tscheemi,$DescOp,$MontOP,$numcom,$numche, $refpago);
+         self::Genera_MovLib($tscheemi,$DescOp,$MontOP,$numcom,$numche, $refpago,$tscheemi->getCedrif());
          self::Grabar_Datos($tscheemi,$MontOP,$tscheemi->getCedrif(),$numche,$reqfirma,$mancomegr);
          $arraynumche=$numche;
          $arraynumcue=$numcue;
@@ -1136,10 +1137,10 @@ class Cheques
 			   }
        	 }
 
-            self::Genera_MovLib($tscheemi,$DescOp,$MontOP,$numcom,$numche);
+            self::Genera_MovLib($tscheemi,$DescOp,$MontOP,$numcom,$numche,'', $tscheemi->getCedrif());
             self::Actualiza_Bancos($tscheemi,"A","C",$MontOP,$numche);
             $refpago = self::Genera_Pagos($tscheemi,$NumPreCom,$tscheemi->getCedrif(),$TipPreCom,$DescOp,$MontOP,"P",100,$numche,$x);
-            self::Genera_MovLib($tscheemi,$DescOp,$MontOP,$numcom,$numche,$refpago);
+            self::Genera_MovLib($tscheemi,$DescOp,$MontOP,$numcom,$numche,$refpago,$tscheemi->getCedrif());
             self::Grabar_Datos($tscheemi,$MontOP,$tscheemi->getCedrif(),$numche,$reqfirma,$mancomegr);
             $arraynumche=$numche;
             $arraynumcue=$numcue;
@@ -1228,7 +1229,7 @@ class Cheques
 
            self::Actualiza_Bancos($tscheemi,"A","C",$total,$numche);
            $refpago = self::Genera_Pagos($tscheemi,"",$tscheemi->getCedrif(),"",$DescOp,$MontOP,"D",100,$numche,$x);
-           self::Genera_MovLib($tscheemi,$DescOp,$total,$numcom,$numche,$refpago);
+           self::Genera_MovLib($tscheemi,$DescOp,$total,$numcom,$numche,$refpago,$tscheemi->getCedrif());
            self::Grabar_Datos($tscheemi,$total,$tscheemi->getCedrif(),$numche,$reqfirma,$mancomegr);
            $arraynumche=$numche;
            $arraynumcue=$numcue;
@@ -1302,7 +1303,7 @@ class Cheques
 			   }
        	 }
 
-           self::Genera_MovLib($tscheemi,$DescOp,$total,$numcom,$numche);
+           self::Genera_MovLib($tscheemi,$DescOp,$total,$numcom,$numche,'', $tscheemi->getCedrif());
            self::Actualiza_Bancos($tscheemi,"A","C",$total,$numche);
            self::Grabar_Datos($tscheemi,$total,$tscheemi->getCedrif(),$numche,$reqfirma,$mancomegr);
            $arraynumche=$numche;

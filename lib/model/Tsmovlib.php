@@ -19,6 +19,7 @@ class Tsmovlib extends BaseTsmovlib
   protected $debcre = '';
   protected $check = '';
   protected $codcon="";
+  protected $savecedrif="";
 
 	public function getNomcue()
     {
@@ -45,5 +46,32 @@ class Tsmovlib extends BaseTsmovlib
 		return $this->getReflib();
     }
 
+  public function getSavecedrif()
+  {
+
+    $dato="";
+    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('tesoreria',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['tesoreria']))
+	     if(array_key_exists('tesmovseglib',$varemp['aplicacion']['tesoreria']['modulos'])){
+	       if(array_key_exists('savecedrif',$varemp['aplicacion']['tesoreria']['modulos']['tesmovseglib']))
+	       {
+	       	$dato=$varemp['aplicacion']['tesoreria']['modulos']['tesmovseglib']['savecedrif'];
+	       }
+         }
+     return $dato;
+  }
+
+  public function setSavecedrif()
+  {
+  	return $this->savecedrif;
+  }
+
+    public function getNomben()
+    {
+       return Herramientas::getX('CEDRIF','Opbenefi','Nomben',self::getCedrif());
+    }
 
 }

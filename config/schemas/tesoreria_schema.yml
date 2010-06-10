@@ -1002,6 +1002,9 @@ propel:
     loguse:
       type: VARCHAR
       size: 50
+    cedrif:
+      type: VARCHAR
+      size: 15
     id:
       type: INTEGER
       required: true

@@ -18,12 +18,13 @@ generator:
       status: { name: Estatus}
       stacon: { name: Estatus Contable}
       refpag: { name: Referencia del Pagado}
+      cedrif: { name: C.I. o Rif Beneficiario, params: maxlength=15}
 
 
 
     list:
       title:          Movimientos Segun Libros
-      filters:        [numcue, reflib, feclib, tipmov, deslib]
+      filters:        [numcue, reflib, feclib, tipmov, deslib, cedrif]
       display:        [=numcue, reflib, tipmov, deslib, feclib]
       sort:           numcue
       object_actions:
@@ -32,7 +33,7 @@ generator:
       options:        [ tipmov, numcue]
     edit:
       title:          Movimientos Segun Libros
-      display:       [=numcue, nomcue, reflib, feclib, tipmov, destip, deslib, monmov, fecing, numcom, feccom, debcre, codcta, status, stacon, refpag]
+      display:       [=numcue, nomcue, reflib, feclib, tipmov, destip, deslib, monmov, fecing, numcom, feccom, debcre, codcta, status, stacon, refpag, cedrif]
       actions:
         _list:        ~
         _save:        ~
