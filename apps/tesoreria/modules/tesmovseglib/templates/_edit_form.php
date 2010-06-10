@@ -122,6 +122,36 @@
   </tr>
   </table>
 
+<div id="divbene" style="display:none">
+<br>
+<?php echo label_for('tsmovlib[cedrif]', __($labels['tsmovlib{cedrif}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('tsmovlib{cedrif}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('tsmovlib{cedrif}')): ?>
+    <?php echo form_error('tsmovlib{cedrif}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+<?php $value = object_input_tag($tsmovlib, 'getCedrif', array (
+  'size' => 10,
+  'maxlength' => 15,
+  'readonly'  =>  $tsmovlib->getId()!='' ? true : false ,
+  'control_name' => 'tsmovlib[cedrif]',  
+  'onBlur'=> remote_function(array(
+        'url'      => 'tesmovseglib/ajax',
+        'condition' => "$('tsmovlib_cedrif').value != '' && $('id').value == ''",
+        'complete' => 'AjaxJSON(request, json)',
+        'with' => "'ajax=6&cajtexmos=tsmovlib_nomben&codigo='+this.value"
+        ))
+)); echo $value ? $value : '&nbsp;' ?>
+ &nbsp;
+ <?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Opbenefi_Pagemiord/clase/Opbenefi/frame/sf_admin_edit_form/obj1/tsmovlib_cedrif/obj2/tsmovlib_nomben/campo1/cedrif/campo2/nomben','','','botoncat')?>
+&nbsp;
+ <?php $value = object_input_tag($tsmovlib, 'getNomben', array (
+  'disabled' => true,
+  'size' => 60,
+  'control_name' => 'tsmovlib[nomben]',
+)); echo $value ? $value : '&nbsp;' ?>
+</div>
+</div>
 
 <?php if ($tsmovlib->getId()!='')
     {?>
@@ -326,10 +356,13 @@ deshabilitarbotones();
 function deshabilitarbotones()
   { var id="";
     var id='<?php echo $tsmovlib->getId()?>';
+    var savecedrif='<?php echo $tsmovlib->getSavecedrif()?>';
+    if (savecedrif=='S') $('divbene').show();
     if (id!="")
     {
      $$('.botoncat')[0].disabled=true;
   	 $$('.botoncat')[1].disabled=true;
+         $$('.botoncat')[2].disabled=true;
    	 $('trigger_tsmovlib_feclib').hide();
   	 $('trigger_tsmovlib_feccom').hide();
     }

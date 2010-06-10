@@ -13,7 +13,7 @@ abstract class BaseTsmovlibPeer {
 	const CLASS_DEFAULT = 'lib.model.Tsmovlib';
 
 	
-	const NUM_COLUMNS = 26;
+	const NUM_COLUMNS = 27;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -95,6 +95,9 @@ abstract class BaseTsmovlibPeer {
 	const LOGUSE = 'tsmovlib.LOGUSE';
 
 	
+	const CEDRIF = 'tsmovlib.CEDRIF';
+
+	
 	const ID = 'tsmovlib.ID';
 
 	
@@ -103,18 +106,18 @@ abstract class BaseTsmovlibPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Numcue', 'Reflib', 'Feclib', 'Tipmov', 'Deslib', 'Monmov', 'Codcta', 'Numcom', 'Feccom', 'Status', 'Stacon', 'Fecing', 'Fecanu', 'Tipmovpad', 'Reflibpad', 'Transito', 'Numcomadi', 'Feccomadi', 'Nombensus', 'Orden', 'Horing', 'Stacon1', 'Motanu', 'Refpag', 'Loguse', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (TsmovlibPeer::NUMCUE, TsmovlibPeer::REFLIB, TsmovlibPeer::FECLIB, TsmovlibPeer::TIPMOV, TsmovlibPeer::DESLIB, TsmovlibPeer::MONMOV, TsmovlibPeer::CODCTA, TsmovlibPeer::NUMCOM, TsmovlibPeer::FECCOM, TsmovlibPeer::STATUS, TsmovlibPeer::STACON, TsmovlibPeer::FECING, TsmovlibPeer::FECANU, TsmovlibPeer::TIPMOVPAD, TsmovlibPeer::REFLIBPAD, TsmovlibPeer::TRANSITO, TsmovlibPeer::NUMCOMADI, TsmovlibPeer::FECCOMADI, TsmovlibPeer::NOMBENSUS, TsmovlibPeer::ORDEN, TsmovlibPeer::HORING, TsmovlibPeer::STACON1, TsmovlibPeer::MOTANU, TsmovlibPeer::REFPAG, TsmovlibPeer::LOGUSE, TsmovlibPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('numcue', 'reflib', 'feclib', 'tipmov', 'deslib', 'monmov', 'codcta', 'numcom', 'feccom', 'status', 'stacon', 'fecing', 'fecanu', 'tipmovpad', 'reflibpad', 'transito', 'numcomadi', 'feccomadi', 'nombensus', 'orden', 'horing', 'stacon1', 'motanu', 'refpag', 'loguse', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, )
+		BasePeer::TYPE_PHPNAME => array ('Numcue', 'Reflib', 'Feclib', 'Tipmov', 'Deslib', 'Monmov', 'Codcta', 'Numcom', 'Feccom', 'Status', 'Stacon', 'Fecing', 'Fecanu', 'Tipmovpad', 'Reflibpad', 'Transito', 'Numcomadi', 'Feccomadi', 'Nombensus', 'Orden', 'Horing', 'Stacon1', 'Motanu', 'Refpag', 'Loguse', 'Cedrif', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (TsmovlibPeer::NUMCUE, TsmovlibPeer::REFLIB, TsmovlibPeer::FECLIB, TsmovlibPeer::TIPMOV, TsmovlibPeer::DESLIB, TsmovlibPeer::MONMOV, TsmovlibPeer::CODCTA, TsmovlibPeer::NUMCOM, TsmovlibPeer::FECCOM, TsmovlibPeer::STATUS, TsmovlibPeer::STACON, TsmovlibPeer::FECING, TsmovlibPeer::FECANU, TsmovlibPeer::TIPMOVPAD, TsmovlibPeer::REFLIBPAD, TsmovlibPeer::TRANSITO, TsmovlibPeer::NUMCOMADI, TsmovlibPeer::FECCOMADI, TsmovlibPeer::NOMBENSUS, TsmovlibPeer::ORDEN, TsmovlibPeer::HORING, TsmovlibPeer::STACON1, TsmovlibPeer::MOTANU, TsmovlibPeer::REFPAG, TsmovlibPeer::LOGUSE, TsmovlibPeer::CEDRIF, TsmovlibPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('numcue', 'reflib', 'feclib', 'tipmov', 'deslib', 'monmov', 'codcta', 'numcom', 'feccom', 'status', 'stacon', 'fecing', 'fecanu', 'tipmovpad', 'reflibpad', 'transito', 'numcomadi', 'feccomadi', 'nombensus', 'orden', 'horing', 'stacon1', 'motanu', 'refpag', 'loguse', 'cedrif', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Numcue' => 0, 'Reflib' => 1, 'Feclib' => 2, 'Tipmov' => 3, 'Deslib' => 4, 'Monmov' => 5, 'Codcta' => 6, 'Numcom' => 7, 'Feccom' => 8, 'Status' => 9, 'Stacon' => 10, 'Fecing' => 11, 'Fecanu' => 12, 'Tipmovpad' => 13, 'Reflibpad' => 14, 'Transito' => 15, 'Numcomadi' => 16, 'Feccomadi' => 17, 'Nombensus' => 18, 'Orden' => 19, 'Horing' => 20, 'Stacon1' => 21, 'Motanu' => 22, 'Refpag' => 23, 'Loguse' => 24, 'Id' => 25, ),
-		BasePeer::TYPE_COLNAME => array (TsmovlibPeer::NUMCUE => 0, TsmovlibPeer::REFLIB => 1, TsmovlibPeer::FECLIB => 2, TsmovlibPeer::TIPMOV => 3, TsmovlibPeer::DESLIB => 4, TsmovlibPeer::MONMOV => 5, TsmovlibPeer::CODCTA => 6, TsmovlibPeer::NUMCOM => 7, TsmovlibPeer::FECCOM => 8, TsmovlibPeer::STATUS => 9, TsmovlibPeer::STACON => 10, TsmovlibPeer::FECING => 11, TsmovlibPeer::FECANU => 12, TsmovlibPeer::TIPMOVPAD => 13, TsmovlibPeer::REFLIBPAD => 14, TsmovlibPeer::TRANSITO => 15, TsmovlibPeer::NUMCOMADI => 16, TsmovlibPeer::FECCOMADI => 17, TsmovlibPeer::NOMBENSUS => 18, TsmovlibPeer::ORDEN => 19, TsmovlibPeer::HORING => 20, TsmovlibPeer::STACON1 => 21, TsmovlibPeer::MOTANU => 22, TsmovlibPeer::REFPAG => 23, TsmovlibPeer::LOGUSE => 24, TsmovlibPeer::ID => 25, ),
-		BasePeer::TYPE_FIELDNAME => array ('numcue' => 0, 'reflib' => 1, 'feclib' => 2, 'tipmov' => 3, 'deslib' => 4, 'monmov' => 5, 'codcta' => 6, 'numcom' => 7, 'feccom' => 8, 'status' => 9, 'stacon' => 10, 'fecing' => 11, 'fecanu' => 12, 'tipmovpad' => 13, 'reflibpad' => 14, 'transito' => 15, 'numcomadi' => 16, 'feccomadi' => 17, 'nombensus' => 18, 'orden' => 19, 'horing' => 20, 'stacon1' => 21, 'motanu' => 22, 'refpag' => 23, 'loguse' => 24, 'id' => 25, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, )
+		BasePeer::TYPE_PHPNAME => array ('Numcue' => 0, 'Reflib' => 1, 'Feclib' => 2, 'Tipmov' => 3, 'Deslib' => 4, 'Monmov' => 5, 'Codcta' => 6, 'Numcom' => 7, 'Feccom' => 8, 'Status' => 9, 'Stacon' => 10, 'Fecing' => 11, 'Fecanu' => 12, 'Tipmovpad' => 13, 'Reflibpad' => 14, 'Transito' => 15, 'Numcomadi' => 16, 'Feccomadi' => 17, 'Nombensus' => 18, 'Orden' => 19, 'Horing' => 20, 'Stacon1' => 21, 'Motanu' => 22, 'Refpag' => 23, 'Loguse' => 24, 'Cedrif' => 25, 'Id' => 26, ),
+		BasePeer::TYPE_COLNAME => array (TsmovlibPeer::NUMCUE => 0, TsmovlibPeer::REFLIB => 1, TsmovlibPeer::FECLIB => 2, TsmovlibPeer::TIPMOV => 3, TsmovlibPeer::DESLIB => 4, TsmovlibPeer::MONMOV => 5, TsmovlibPeer::CODCTA => 6, TsmovlibPeer::NUMCOM => 7, TsmovlibPeer::FECCOM => 8, TsmovlibPeer::STATUS => 9, TsmovlibPeer::STACON => 10, TsmovlibPeer::FECING => 11, TsmovlibPeer::FECANU => 12, TsmovlibPeer::TIPMOVPAD => 13, TsmovlibPeer::REFLIBPAD => 14, TsmovlibPeer::TRANSITO => 15, TsmovlibPeer::NUMCOMADI => 16, TsmovlibPeer::FECCOMADI => 17, TsmovlibPeer::NOMBENSUS => 18, TsmovlibPeer::ORDEN => 19, TsmovlibPeer::HORING => 20, TsmovlibPeer::STACON1 => 21, TsmovlibPeer::MOTANU => 22, TsmovlibPeer::REFPAG => 23, TsmovlibPeer::LOGUSE => 24, TsmovlibPeer::CEDRIF => 25, TsmovlibPeer::ID => 26, ),
+		BasePeer::TYPE_FIELDNAME => array ('numcue' => 0, 'reflib' => 1, 'feclib' => 2, 'tipmov' => 3, 'deslib' => 4, 'monmov' => 5, 'codcta' => 6, 'numcom' => 7, 'feccom' => 8, 'status' => 9, 'stacon' => 10, 'fecing' => 11, 'fecanu' => 12, 'tipmovpad' => 13, 'reflibpad' => 14, 'transito' => 15, 'numcomadi' => 16, 'feccomadi' => 17, 'nombensus' => 18, 'orden' => 19, 'horing' => 20, 'stacon1' => 21, 'motanu' => 22, 'refpag' => 23, 'loguse' => 24, 'cedrif' => 25, 'id' => 26, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, )
 	);
 
 	
@@ -217,6 +220,8 @@ abstract class BaseTsmovlibPeer {
 		$criteria->addSelectColumn(TsmovlibPeer::REFPAG);
 
 		$criteria->addSelectColumn(TsmovlibPeer::LOGUSE);
+
+		$criteria->addSelectColumn(TsmovlibPeer::CEDRIF);
 
 		$criteria->addSelectColumn(TsmovlibPeer::ID);
 

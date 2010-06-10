@@ -653,6 +653,22 @@ $this->Bitacora('Guardo');
 
       $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
       return sfView::HEADER_ONLY;
+    }elseif ($this->getRequestParameter('ajax')=='6'){
+
+      $javascript=""; $dato="";
+      $q= new Criteria();
+      $q->add(OpbenefiPeer::CEDRIF,$this->getRequestParameter('codigo'));
+      $result= OpbenefiPeer::doSelectOne($q);
+      if ($result)
+       {
+         $dato=$result->getNomben();
+       }else{
+           $javascript="alert('El Beneficiario no existe'); $('tsmovlib_cedrif').value=''; $('tsmovlib_cedrif').focus();";
+       }
+
+      $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""]]';
+      $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+      return sfView::HEADER_ONLY;
     }
   }
 
@@ -989,6 +1005,10 @@ $this->Bitacora('Guardo');
     {
       $this->tsmovlib->setDebcre($tsmovlib['debcre']);
     }
+    if (isset($tsmovlib['cedrif']))
+    {
+      $this->tsmovlib->setCedrif($tsmovlib['cedrif']);
+    }
 
   }
 
@@ -1200,7 +1220,7 @@ $this->Bitacora('Guardo');
    }
    else
    {
-    $sql="Select stacon,tipmov,monmov,codcta,numcue From TsMovLib Where NumCue = '".$numcue."' And RefLib = '".$reflib."' and TipMov = '".$tipmov."' ";
+    $sql="Select stacon,tipmov,monmov,codcta,numcue,cedrif From TsMovLib Where NumCue = '".$numcue."' And RefLib = '".$reflib."' and TipMov = '".$tipmov."' ";
     if (Herramientas::BuscarDatos($sql,&$tsmovlib))
       {
         if ($tsmovlib[0]["stacon"]!='C')
@@ -1285,6 +1305,7 @@ $this->Bitacora('Guardo');
           $tsmovlibA->setDeslib('Movimiento Anulado');
           $tsmovlibA->setReflibpad($reflib);
           $tsmovlibA->setTipmovpad($tipmov);
+          $tsmovlibA->setCedrif($tsmovlib[0]["cedrif"]);
           $tsmovlibA->save();
 
           Tesoreria::actualiza_Bancos('A','D',$numcue,$monmov);
@@ -1328,7 +1349,7 @@ $this->Bitacora('Guardo');
       }
     }else{ ///Grabar el comprobante y generar la anulacion
 
-    $sql="Select stacon,tipmov,monmov,codcta,numcue From TsMovLib Where NumCue = '".$numcue."' And RefLib = '".$reflib."' and TipMov = '".$tipmov."' ";
+    $sql="Select stacon,tipmov,monmov,codcta,numcue,cedrif From TsMovLib Where NumCue = '".$numcue."' And RefLib = '".$reflib."' and TipMov = '".$tipmov."' ";
     if (Herramientas::BuscarDatos($sql,&$tsmovlib))
       {
         if ($tsmovlib[0]["stacon"]!='C')
@@ -1439,6 +1460,7 @@ $this->Bitacora('Guardo');
           $tsmovlibA->setDeslib('Cheque Anulado');
           $tsmovlibA->setReflibpad($reflib);
           $tsmovlibA->setTipmovpad($tipmov);
+          $tsmovlibA->setCedrif($tsmovlib[0]["cedrif"]);
           $tsmovlibA->save();
 
           Tesoreria::actualiza_Bancos('A','D',$numcue,$monmov);
