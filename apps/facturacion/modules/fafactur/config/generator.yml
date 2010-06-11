@@ -38,6 +38,9 @@ generator:
       listaart: { name: Artículos}
       codtip: { name: Tipo de Movimiento}
       destip: { name: Descripción}
+      refproform: { name: Refiere Proforma}
+      numcontrol: { name: Nro. Control}
+      proform: { name: Nro. Proforma}
     list:
       title:          Facturas
       display:        [=reffac, fecfac]
@@ -50,11 +53,14 @@ generator:
     edit:
       title: Edición de Factura
       display:
-        "Datos de la Factura": [codcaj, reffac, fecfac, _tipref, _tipmon, _rifpro, telpro, dirpro, tipper, _codconpag, desfac, monto, monrgo, mondesc, monfac, combo]
+        "Datos de la Factura": [codcaj, reffac, fecfac, _tipref, _tipmon, _rifpro, telpro, dirpro, tipper, _codconpag, desfac, monto, monrgo, mondesc, monfac, combo, refproform, proform, numcontrol]
         "Detalle": [listaart, _grid_fapeddes, _grid_faartfac, _grid_fadescart, totdesc, _grid_fargoart, totrec]
         "Forma de Pago": [_codtip, _grid_faforpag, moncan, monres, vuelto]
         "Descripción Detallada/Sucursal": [observ, sucursal, usuarios, password]
       hide: [codcli, reapor, status, valmon, numcom, numcomord, numcominv, incluircliente, tipconpag, tipo, apliclades, docrefiera, esretencion, tottotart, totmonrgo, monedaanterior, trajo, porcentajedescto, totcanpreart, totprecio, ctasociada, ctacli, filgenmov, limitecredito]
+      report:
+        url:         facturacion/rfarfacpreimp.php?m=m
+        params:      { codfacdes: reffac, codfachas: reffac }
       actions:
         _list:        ~
         _save:        ~

@@ -1657,3 +1657,6 @@ V006:
 V007:
   cod: V007
   msj: Hay errores al formar el codigo de la imputacion, verifique la categoria del empleado o las partidas de los rubros
+F001:
+  cod: F001
+  msj: No se puede borrar la Proforma porque ya esta relacionada con una Factura

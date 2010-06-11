@@ -85,11 +85,17 @@ class fafacturActions extends autofafacturActions {
    * los datos del grid.
    *
    */
-  public function configGridArtFac($reffac = '', $tipref='') {
+  public function configGridArtFac($reffac = '', $tipref='',$tipo='') {
 		$c = new Criteria();
+                if($tipo=='PROFORMA')
+                {
+                    $c->add(FaartfacproPeer :: REFFAC, $reffac);
+                    $artfac = FaartfacproPeer :: doSelect($c);
+                }else
+                {
 		$c->add(FaartfacPeer :: REFFAC, $reffac);
 		$artfac = FaartfacPeer :: doSelect($c);
-
+                }
 		$mascara = $this->mascaraarticulo;
 		$lonarti = $this->lonart;
 		$obj = array (
@@ -101,7 +107,7 @@ class fafacturActions extends autofafacturActions {
 			'val2'
 		);
 
-		$this->columnas = Herramientas :: getConfigGrid(sfConfig :: get('sf_app_module_dir') . '/fafactur/' . sfConfig :: get('sf_app_module_config_dir_name') . '/grid_faartfac');
+		$this->columnas = Herramientas :: getConfigGrid(sfConfig :: get('sf_app_module_dir') . '/fafactur/' . sfConfig :: get('sf_app_module_config_dir_name') . '/grid_faartfacv2');
 
 		if ($tipref!="" && ($tipref=='P'))
 		{
@@ -838,6 +844,65 @@ class fafacturActions extends autofafacturActions {
 		        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
 		        return sfView::HEADER_ONLY;
              break;
+            case '19':
+                        $javascript="";
+		        $c = new Criteria();
+                        $c->add(FafacturproPeer::REFFAC,$codigo);
+                        $per = FafacturproPeer::doSelectOne($c);
+                        if($per)
+                        {
+                            $tipref=$per->getTipref();
+                            $tipmon=$per->getTipmon();
+                            $rifpro=$per->getRifpro();
+                            $nompro=$per->getNompro();
+                            $telpro=$per->getTelpro();
+                            $dirpro=$per->getDirpro();
+                            $tipper=$per->getTipper();
+                            $codconpag=$per->getCodconpag();
+                            $desconpag=$per->getDesconpag();
+                            $desfac=$per->getDesfac();
+                            $monfac=$per->getMonfac();
+                            $tipconpag=H::GetX('Id','Faconpag','Tipconpag',$codconpag);
+                            if($tipper=='N')
+                                $javascript.="$('fafactur_tipper_N').disabled=false;
+                                              $('fafactur_tipper_J').disabled=false;
+                                              $('fafactur_tipper_N').checked=true;
+                                              $('fafactur_tipper_J').checked=false;
+                                              $('fafactur_tipper_N').disabled=true;
+                                              $('fafactur_tipper_J').disabled=true";
+                             else
+                                 $javascript.="$('fafactur_tipper_N').disabled=false;
+                                              $('fafactur_tipper_J').disabled=false;
+                                              $('fafactur_tipper_N').checked=false;
+                                              $('fafactur_tipper_J').checked=true;
+                                              $('fafactur_tipper_N').disabled=true;
+                                              $('fafactur_tipper_J').disabled=true";
+
+                        }else
+                        {
+                            $tipref="";
+                            $tipmon="";
+                            $rifpro="";
+                            $nompro="";
+                            $telpro="";
+                            $dirpro="";
+                            $tipper="";
+                            $codconpag="";
+                            $desconpag="";
+                            $desfac="";
+                            $monfac="";
+                            $tipconpag="";
+                        }
+                        $this->ajaxs = '16';
+			$this->fafactur = $this->getFafacturOrCreate();
+                        $this->configGridArtFac($codigo, 'V','PROFORMA');
+
+		        $output = '[["fafactur_tipref","'.$tipref.'",""],["fafactur_tipmon","'.$tipmon.'",""],["fafactur_rifpro","'.$rifpro.'",""],["fafactur_nompro","'.$nompro.'",""],
+                                    ["fafactur_telpro","'.$telpro.'",""],["fafactur_dirpro","'.$dirpro.'",""],["fafactur_codconpag","'.$codconpag.'",""],["fafactur_desconpag","'.$desconpag.'",""],
+                                    ["fafactur_desfac","'.$desfac.'",""],["fafactur_monto","'.H::FormatoMonto($monfac).'",""],["fafactur_monfac","'.H::FormatoMonto($monfac).'",""],["fafactur_tipconpag","'.$tipconpag.'",""],["javascript","'.$javascript.'",""]]';
+		        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+		        #return sfView::HEADER_ONLY;
+             break;
 			default :
 				$output = '[["","",""],["","",""],["","",""]]';
 				$this->getResponse()->setHttpHeader("X-JSON", '(' . $output . ')');
@@ -851,7 +916,8 @@ class fafacturActions extends autofafacturActions {
 
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -1139,6 +1205,11 @@ class fafacturActions extends autofafacturActions {
 		return -1;
 	}
 
+  /**
+   * Actualiza la informacion que viene de la vista
+   * luego de un get/post en el objeto principal del modelo base del formulario.
+   *
+   */
   protected function updateError()
   {
     $this->configGrid();

@@ -23,7 +23,7 @@ facturacion:
       Salidas:
         modulo: compras.php
         modulo_dev: compras_dev.php
-      Traspaso:bienes
+      Traspaso: bienes
         modulo: compras.php
         modulo_dev: compras_dev.php
       Registro Artículos/Productos:
@@ -87,6 +87,7 @@ facturacion:
     Movimientos:
       Presupuestos:                                         fapresup
       Pedidos:                                              fapedido
+      Proforma:                                             fafacturpro
       Emisión de Factura:                                   fafactur
       Nota de Entrega:                                      fanotent
       Autorización de Notas de Entrega:                     faautdes

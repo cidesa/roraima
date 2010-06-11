@@ -1,0 +1,54 @@
+methods:
+  post:
+   - "fafacturpro{reffac}"
+   - "fafacturpro{fecfac}"
+   - "fafacturpro{rifpro}"
+   - "fafacturpro{codconpag}"
+
+names:
+  fafacturpro{reffac}:
+    required:  Yes
+    required_msg: El NÃºmero de la Factura no puedo estar en Blanco
+    validators: Validator_reffac #, CorrelValidator
+
+  fafacturpro{fecfac}:
+    required:  Yes
+    required_msg: La Fecha de la Factura no puede estar blanco
+
+  fafacturpro{rifpro}:
+    required:  Yes
+    required_msg: El rif de cliente no puede estar en blanco
+    validators: Cliente_Validator
+
+  fafacturpro{codconpag}:
+    required:  Yes
+    required_msg: La Condicion de Pago no puede estar en blanco
+    validators: Condpago_Validator
+
+Validator_reffac:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Fafacturpro
+        column:       reffac
+        unique_error: El registro ya Existe intente con otro.
+
+Cliente_Validator:
+    class: CidesaExistValidator
+    param:
+        class:    Facliente
+        column:   rifpro
+        unique_error:  El Cliente no Existe.
+
+Condpago_Validator:
+    class: CidesaExistValidator
+    param:
+        class:    Faconpag
+        column:   id
+        unique_error:  La CondiciÃ³n de Pago no existe.
+
+
+CorrelValidator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^[0-9]*$/' ]
+        values_error: Los Correlativos solo puede contener valores nÃºmericos

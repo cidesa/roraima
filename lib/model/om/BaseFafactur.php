@@ -93,6 +93,14 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
 
 
 	
+	protected $numcontrol;
+
+
+	
+	protected $proform;
+
+
+	
 	protected $id;
 
 	
@@ -283,6 +291,20 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
 
   }
   
+  public function getNumcontrol()
+  {
+
+    return trim($this->numcontrol);
+
+  }
+  
+  public function getProform()
+  {
+
+    return trim($this->proform);
+
+  }
+  
   public function getId()
   {
 
@@ -302,6 +324,11 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
 	
 	public function setFecfac($v)
 	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
@@ -399,6 +426,11 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
 	
 	public function setFecanu($v)
 	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
@@ -514,6 +546,26 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setNumcontrol($v)
+	{
+
+    if ($this->numcontrol !== $v) {
+        $this->numcontrol = $v;
+        $this->modifiedColumns[] = FafacturPeer::NUMCONTROL;
+      }
+  
+	} 
+	
+	public function setProform($v)
+	{
+
+    if ($this->proform !== $v) {
+        $this->proform = $v;
+        $this->modifiedColumns[] = FafacturPeer::PROFORM;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -570,7 +622,11 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
 
       $this->codcaj = $rs->getInt($startcol + 20);
 
-      $this->id = $rs->getInt($startcol + 21);
+      $this->numcontrol = $rs->getString($startcol + 21);
+
+      $this->proform = $rs->getString($startcol + 22);
+
+      $this->id = $rs->getInt($startcol + 23);
 
       $this->resetModified();
 
@@ -578,7 +634,7 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 22; 
+            return $startcol + 24; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Fafactur object", $e);
     }
@@ -789,6 +845,12 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
 				return $this->getCodcaj();
 				break;
 			case 21:
+				return $this->getNumcontrol();
+				break;
+			case 22:
+				return $this->getProform();
+				break;
+			case 23:
 				return $this->getId();
 				break;
 			default:
@@ -822,7 +884,9 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
 			$keys[18] => $this->getMotanu(),
 			$keys[19] => $this->getVuelto(),
 			$keys[20] => $this->getCodcaj(),
-			$keys[21] => $this->getId(),
+			$keys[21] => $this->getNumcontrol(),
+			$keys[22] => $this->getProform(),
+			$keys[23] => $this->getId(),
 		);
 		return $result;
 	}
@@ -902,6 +966,12 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
 				$this->setCodcaj($value);
 				break;
 			case 21:
+				$this->setNumcontrol($value);
+				break;
+			case 22:
+				$this->setProform($value);
+				break;
+			case 23:
 				$this->setId($value);
 				break;
 		} 	}
@@ -932,7 +1002,9 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[18], $arr)) $this->setMotanu($arr[$keys[18]]);
 		if (array_key_exists($keys[19], $arr)) $this->setVuelto($arr[$keys[19]]);
 		if (array_key_exists($keys[20], $arr)) $this->setCodcaj($arr[$keys[20]]);
-		if (array_key_exists($keys[21], $arr)) $this->setId($arr[$keys[21]]);
+		if (array_key_exists($keys[21], $arr)) $this->setNumcontrol($arr[$keys[21]]);
+		if (array_key_exists($keys[22], $arr)) $this->setProform($arr[$keys[22]]);
+		if (array_key_exists($keys[23], $arr)) $this->setId($arr[$keys[23]]);
 	}
 
 	
@@ -961,6 +1033,8 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(FafacturPeer::MOTANU)) $criteria->add(FafacturPeer::MOTANU, $this->motanu);
 		if ($this->isColumnModified(FafacturPeer::VUELTO)) $criteria->add(FafacturPeer::VUELTO, $this->vuelto);
 		if ($this->isColumnModified(FafacturPeer::CODCAJ)) $criteria->add(FafacturPeer::CODCAJ, $this->codcaj);
+		if ($this->isColumnModified(FafacturPeer::NUMCONTROL)) $criteria->add(FafacturPeer::NUMCONTROL, $this->numcontrol);
+		if ($this->isColumnModified(FafacturPeer::PROFORM)) $criteria->add(FafacturPeer::PROFORM, $this->proform);
 		if ($this->isColumnModified(FafacturPeer::ID)) $criteria->add(FafacturPeer::ID, $this->id);
 
 		return $criteria;
@@ -1033,6 +1107,10 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
 		$copyObj->setVuelto($this->vuelto);
 
 		$copyObj->setCodcaj($this->codcaj);
+
+		$copyObj->setNumcontrol($this->numcontrol);
+
+		$copyObj->setProform($this->proform);
 
 
 		$copyObj->setNew(true);
