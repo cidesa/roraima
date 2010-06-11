@@ -94,21 +94,21 @@ class fafacturproActions extends autofafacturproActions
 
     $codigo = $this->getRequestParameter('codigo','');
     // Esta variable ajax debe ser usada en cada llamado para identificar
-    // que objeto hace el llamado y por consiguiente ejecutar el cÃ³digo necesario
+    // que objeto hace el llamado y por consiguiente ejecutar el código necesario
     $ajax = $this->getRequestParameter('ajax','');
 
-    // Se debe enviar en la peticiÃ³n ajax desde el cliente los datos que necesitemos
-    // para generar el cÃ³digo de retorno, esto porque en un llamado Ajax no se devuelven
+    // Se debe enviar en la petición ajax desde el cliente los datos que necesitemos
+    // para generar el código de retorno, esto porque en un llamado Ajax no se devuelven
     // los datos de los objetos de la vista como pasa en un submit normal.
    $sw=true;
-    switch ($ajax){      
+    switch ($ajax){
       case '1' :
         $sw=false;
         $this->precios = array ();
         $javascript = "";
         $precioe=$this->getRequestParameter('precio2');
         $desc=$this->getRequestParameter('desc');
-        $this->precios = FaartpvpPeer :: getPrecios($codigo);        
+        $this->precios = FaartpvpPeer :: getPrecios($codigo);
         if (count($this->precios)==0)
         {
           $javascript=$javascript."$('$precioe').readOnly=false;";
@@ -117,7 +117,7 @@ class fafacturproActions extends autofafacturproActions
         $output = '[["javascript","' . $javascript . '",""],["'.$desc.'","' . $dato . '",""]]';
         $this->getResponse()->setHttpHeader("X-JSON", '(' . $output . ')');
         break;
-      case '2' :        
+      case '2' :
         $javascript='';
         $this->param = "";
         $this->ajaxs = "";
@@ -191,7 +191,7 @@ class fafacturproActions extends autofafacturproActions
                         $cant_entregada = $this->getRequestParameter('canent');
                         $exist = $dato->getDistot() - $cant_entregada;
                         $existencia = number_format($exist, 2, ',', '.');
-                        $cantidad = number_format($dato->getDistot(), 2, ',', '.');                        
+                        $cantidad = number_format($dato->getDistot(), 2, ',', '.');
                         if ($docrefiere == 'V') {
                                 $precio = "0,00";
                                 $cantot = "0,00";
@@ -208,10 +208,10 @@ class fafacturproActions extends autofafacturproActions
                         }
                         #$javascript=$javascript." datosRecargos(); ";
                 } else {
-                        $javascript = "alert('El ArtÃ­culo no posee Cuenta de Venta asociada'); $('$cajtexcom').value=''; ";
+                        $javascript = "alert('El Artículo no posee Cuenta de Venta asociada'); $('$cajtexcom').value=''; ";
                 }
         } else {
-                $javascript = "alert('El CÃ³digo del ArtÃ­culo no Existe'); $('$cajtexcom').value='';";
+                $javascript = "alert('El Código del Artículo no Existe'); $('$cajtexcom').value='';";
         }
         #$javascript.="new Ajax.Updater(precio, getUrlModulo()+'ajax', {asynchronous:true, evalScripts:true, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=1&id='+$('id').value+'&desc='+".$desc."+'&precio2='+".$precioe."+'&codigo='+".$codigo."});";
         if($docrefiere=='V')
@@ -252,16 +252,17 @@ class fafacturproActions extends autofafacturproActions
                 if ($result) {
                     $dato1 = $result->getTipconpag();
                     $dato2 = $result->getDesconpag();
-                }   
+                }
         }
         $output = '[["fafactur_tipconpag","' . $dato1 . '",""],["fafactur_desconpag","' . $dato2 . '",""],["javascript","' . $javascript . '",""]]';
         $this->getResponse()->setHttpHeader("X-JSON", '(' . $output . ')');
         return sfView :: HEADER_ONLY;
         break;
       case '5' :
+        $fecha = $this->getRequestParameter('fecha') ? $this->getRequestParameter('fecha') : date('d/m/Y');
         $c = new Criteria();
         $c->add(TsdesmonPeer :: CODMON, $codigo);
-        $c->add(TsdesmonPeer :: FECMON, $this->getRequestParameter('fecha'));
+        $c->add(TsdesmonPeer :: FECMON, $fecha);
         $result = TsdesmonPeer :: doSelectOne($c);
         if ($result) {
                 $moneda = $result->getValmon();
@@ -299,8 +300,8 @@ class fafacturproActions extends autofafacturproActions
     $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
 
     // Si solo se va usar ajax para actualziar datos en objetos ya existentes se debe
-    // mantener habilitar esta instrucciÃ³n
-    
+    // mantener habilitar esta instrucción
+
     if($sw)
         return sfView::HEADER_ONLY;
 
@@ -312,9 +313,9 @@ class fafacturproActions extends autofafacturproActions
 
   /**
    *
-   * FunciÃ³n que se ejecuta luego los validadores del negocio (validators)
-   * Para realizar validaciones especÃ­ficas del negocio del formulario
-   * Para mayor informaciÃ³n vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
+   * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
   public function validateEdit()
@@ -322,7 +323,7 @@ class fafacturproActions extends autofafacturproActions
     $this->coderr =-1;
 
     // Se deben llamar a las funciones necesarias para cargar los
-    // datos de la vista que serÃ¡n usados en las funciones de validaciÃ³n.
+    // datos de la vista que serán usados en las funciones de validación.
     // Por ejemplo:
 
     if($this->getRequest()->getMethod() == sfRequest::POST){
@@ -349,7 +350,7 @@ class fafacturproActions extends autofafacturproActions
           return false;
       }
 
-      // Aqui van los llamados a los mÃ©todos de las clases del
+      // Aqui van los llamados a los métodos de las clases del
       // negocio para validar los datos.
       // Los resultados de cada llamado deben ser analizados por ejemplo:
 
@@ -357,10 +358,10 @@ class fafacturproActions extends autofafacturproActions
 
        //$resp=Herramientas::ValidarCodigo($valor,$this->tstipmov,$campo);
 
-      // al final $resp es analizada en base al cÃ³digo que retorna
-      // Todas las funciones de validaciÃ³n y procesos del negocio
-      // deben retornar cÃ³digos >= -1. Estos cÃ³digo serÃ¡m buscados en
-      // el archivo errors.yml en la funciÃ³n handleErrorEdit()
+      // al final $resp es analizada en base al código que retorna
+      // Todas las funciones de validación y procesos del negocio
+      // deben retornar códigos >= -1. Estos código serám buscados en
+      // el archivo errors.yml en la función handleErrorEdit()
 
       if($this->coderr!=-1){
         return false;
@@ -373,7 +374,7 @@ class fafacturproActions extends autofafacturproActions
   }
 
   /**
-   * FunciÃ³n para actualziar el grid en el post si ocurre un error
+   * Función para actualziar el grid en el post si ocurre un error
    * Se pueden colocar aqui los grids adicionales
    *
    */

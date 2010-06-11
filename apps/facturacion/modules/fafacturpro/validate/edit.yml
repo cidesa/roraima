@@ -8,7 +8,7 @@ methods:
 names:
   fafacturpro{reffac}:
     required:  Yes
-    required_msg: El NÃºmero de la Factura no puedo estar en Blanco
+    required_msg: El Número de la Factura no puedo estar en Blanco
     validators: Validator_reffac #, CorrelValidator
 
   fafacturpro{fecfac}:
@@ -44,11 +44,11 @@ Condpago_Validator:
     param:
         class:    Faconpag
         column:   id
-        unique_error:  La CondiciÃ³n de Pago no existe.
+        unique_error:  La Condición de Pago no existe.
 
 
 CorrelValidator:
     class: CidesaStringValidator
     param:
         values:    [ '/^[0-9]*$/' ]
-        values_error: Los Correlativos solo puede contener valores nÃºmericos
+        values_error: Los Correlativos solo puede contener valores númericos
