@@ -867,7 +867,11 @@ public static function buscar_comprobante($cireging,$accion,$fecanu){
     $c->add(CiimpingPeer::CODPRE,$codpre);
     $ingresos = CiimpingPeer::doSelect($c);
 
-  if ($ingresos or $adiciones or $ajustes or $traslados){
+    $c = new Criteria();
+    $c->add(CiasiiniPeer::CODPRE,$codpre);
+    $asignacion = CiasiiniPeer::doSelect($c);
+
+  if ($ingresos or $adiciones or $ajustes or $traslados or $asignacion){
 
     return 1;
   }else{
