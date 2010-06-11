@@ -4,25 +4,25 @@
 
 class FaartfacproMapBuilder {
 
-	
+
 	const CLASS_NAME = 'lib.model.map.FaartfacproMapBuilder';
 
-	
+
 	private $dbMap;
 
-	
+
 	public function isBuilt()
 	{
 		return ($this->dbMap !== null);
 	}
 
-	
+
 	public function getDatabaseMap()
 	{
 		return $this->dbMap;
 	}
 
-	
+
 	public function doBuild()
 	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
@@ -74,7 +74,11 @@ class FaartfacproMapBuilder {
 
 		$tMap->addColumn('FECSAL', 'Fecsal', 'int', CreoleTypes::TIMESTAMP, false, null);
 
+		$tMap->addColumn('HORSAL', 'Horsal', 'string', CreoleTypes::VARCHAR, false, null);
+
 		$tMap->addColumn('FECLLEG', 'Feclleg', 'int', CreoleTypes::TIMESTAMP, false, null);
+
+		$tMap->addColumn('HORLLEG', 'Horlleg', 'string', CreoleTypes::VARCHAR, false, null);
 
 		$tMap->addColumn('PROD', 'Prod', 'string', CreoleTypes::VARCHAR, false, 100);
 
@@ -90,5 +94,5 @@ class FaartfacproMapBuilder {
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
-	} 
-} 
+	}
+}

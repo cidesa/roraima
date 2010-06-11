@@ -3,133 +3,139 @@
 
 abstract class BaseFaartfacproPeer {
 
-	
+
 	const DATABASE_NAME = 'propel';
 
-	
+
 	const TABLE_NAME = 'faartfacpro';
 
-	
+
 	const CLASS_DEFAULT = 'lib.model.Faartfacpro';
 
-	
-	const NUM_COLUMNS = 28;
 
-	
+	const NUM_COLUMNS = 30;
+
+
 	const NUM_LAZY_LOAD_COLUMNS = 0;
 
 
-	
+
 	const REFFAC = 'faartfacpro.REFFAC';
 
-	
+
 	const CODART = 'faartfacpro.CODART';
 
-	
+
 	const DESART = 'faartfacpro.DESART';
 
-	
+
 	const CODREF = 'faartfacpro.CODREF';
 
-	
+
 	const CANTOT = 'faartfacpro.CANTOT';
 
-	
+
 	const PRECIO = 'faartfacpro.PRECIO';
 
-	
+
 	const MONRGO = 'faartfacpro.MONRGO';
 
-	
+
 	const MONDES = 'faartfacpro.MONDES';
 
-	
+
 	const TOTART = 'faartfacpro.TOTART';
 
-	
+
 	const CANAJU = 'faartfacpro.CANAJU';
 
-	
+
 	const CANDES = 'faartfacpro.CANDES';
 
-	
+
 	const NRONOT = 'faartfacpro.NRONOT';
 
-	
+
 	const ORDDESPACHO = 'faartfacpro.ORDDESPACHO';
 
-	
+
 	const GUIA = 'faartfacpro.GUIA';
 
-	
+
 	const CONTENEDORES = 'faartfacpro.CONTENEDORES';
 
-	
+
 	const BILLLEADING = 'faartfacpro.BILLLEADING';
 
-	
+
 	const NUMTRANSP = 'faartfacpro.NUMTRANSP';
 
-	
+
 	const PLACA = 'faartfacpro.PLACA';
 
-	
+
 	const CHOFER = 'faartfacpro.CHOFER';
 
-	
+
 	const FECSAL = 'faartfacpro.FECSAL';
 
-	
+
+	const HORSAL = 'faartfacpro.HORSAL';
+
+
 	const FECLLEG = 'faartfacpro.FECLLEG';
 
-	
+
+	const HORLLEG = 'faartfacpro.HORLLEG';
+
+
 	const PROD = 'faartfacpro.PROD';
 
-	
+
 	const KG = 'faartfacpro.KG';
 
-	
+
 	const CAJAS = 'faartfacpro.CAJAS';
 
-	
+
 	const ESTATUS = 'faartfacpro.ESTATUS';
 
-	
+
 	const OBSERVACIONES = 'faartfacpro.OBSERVACIONES';
 
-	
+
 	const TM = 'faartfacpro.TM';
 
-	
+
 	const ID = 'faartfacpro.ID';
 
-	
+
 	private static $phpNameMap = null;
 
 
-	
+
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Reffac', 'Codart', 'Desart', 'Codref', 'Cantot', 'Precio', 'Monrgo', 'Mondes', 'Totart', 'Canaju', 'Candes', 'Nronot', 'Orddespacho', 'Guia', 'Contenedores', 'Billleading', 'Numtransp', 'Placa', 'Chofer', 'Fecsal', 'Feclleg', 'Prod', 'Kg', 'Cajas', 'Estatus', 'Observaciones', 'Tm', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (FaartfacproPeer::REFFAC, FaartfacproPeer::CODART, FaartfacproPeer::DESART, FaartfacproPeer::CODREF, FaartfacproPeer::CANTOT, FaartfacproPeer::PRECIO, FaartfacproPeer::MONRGO, FaartfacproPeer::MONDES, FaartfacproPeer::TOTART, FaartfacproPeer::CANAJU, FaartfacproPeer::CANDES, FaartfacproPeer::NRONOT, FaartfacproPeer::ORDDESPACHO, FaartfacproPeer::GUIA, FaartfacproPeer::CONTENEDORES, FaartfacproPeer::BILLLEADING, FaartfacproPeer::NUMTRANSP, FaartfacproPeer::PLACA, FaartfacproPeer::CHOFER, FaartfacproPeer::FECSAL, FaartfacproPeer::FECLLEG, FaartfacproPeer::PROD, FaartfacproPeer::KG, FaartfacproPeer::CAJAS, FaartfacproPeer::ESTATUS, FaartfacproPeer::OBSERVACIONES, FaartfacproPeer::TM, FaartfacproPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('reffac', 'codart', 'desart', 'codref', 'cantot', 'precio', 'monrgo', 'mondes', 'totart', 'canaju', 'candes', 'nronot', 'orddespacho', 'guia', 'contenedores', 'billleading', 'numtransp', 'placa', 'chofer', 'fecsal', 'feclleg', 'prod', 'kg', 'cajas', 'estatus', 'observaciones', 'tm', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, )
+		BasePeer::TYPE_PHPNAME => array ('Reffac', 'Codart', 'Desart', 'Codref', 'Cantot', 'Precio', 'Monrgo', 'Mondes', 'Totart', 'Canaju', 'Candes', 'Nronot', 'Orddespacho', 'Guia', 'Contenedores', 'Billleading', 'Numtransp', 'Placa', 'Chofer', 'Fecsal', 'Horsal', 'Feclleg', 'Horlleg', 'Prod', 'Kg', 'Cajas', 'Estatus', 'Observaciones', 'Tm', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (FaartfacproPeer::REFFAC, FaartfacproPeer::CODART, FaartfacproPeer::DESART, FaartfacproPeer::CODREF, FaartfacproPeer::CANTOT, FaartfacproPeer::PRECIO, FaartfacproPeer::MONRGO, FaartfacproPeer::MONDES, FaartfacproPeer::TOTART, FaartfacproPeer::CANAJU, FaartfacproPeer::CANDES, FaartfacproPeer::NRONOT, FaartfacproPeer::ORDDESPACHO, FaartfacproPeer::GUIA, FaartfacproPeer::CONTENEDORES, FaartfacproPeer::BILLLEADING, FaartfacproPeer::NUMTRANSP, FaartfacproPeer::PLACA, FaartfacproPeer::CHOFER, FaartfacproPeer::FECSAL, FaartfacproPeer::HORSAL, FaartfacproPeer::FECLLEG, FaartfacproPeer::HORLLEG, FaartfacproPeer::PROD, FaartfacproPeer::KG, FaartfacproPeer::CAJAS, FaartfacproPeer::ESTATUS, FaartfacproPeer::OBSERVACIONES, FaartfacproPeer::TM, FaartfacproPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('reffac', 'codart', 'desart', 'codref', 'cantot', 'precio', 'monrgo', 'mondes', 'totart', 'canaju', 'candes', 'nronot', 'orddespacho', 'guia', 'contenedores', 'billleading', 'numtransp', 'placa', 'chofer', 'fecsal', 'horsal', 'feclleg', 'horlleg', 'prod', 'kg', 'cajas', 'estatus', 'observaciones', 'tm', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, )
 	);
 
-	
+
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Reffac' => 0, 'Codart' => 1, 'Desart' => 2, 'Codref' => 3, 'Cantot' => 4, 'Precio' => 5, 'Monrgo' => 6, 'Mondes' => 7, 'Totart' => 8, 'Canaju' => 9, 'Candes' => 10, 'Nronot' => 11, 'Orddespacho' => 12, 'Guia' => 13, 'Contenedores' => 14, 'Billleading' => 15, 'Numtransp' => 16, 'Placa' => 17, 'Chofer' => 18, 'Fecsal' => 19, 'Feclleg' => 20, 'Prod' => 21, 'Kg' => 22, 'Cajas' => 23, 'Estatus' => 24, 'Observaciones' => 25, 'Tm' => 26, 'Id' => 27, ),
-		BasePeer::TYPE_COLNAME => array (FaartfacproPeer::REFFAC => 0, FaartfacproPeer::CODART => 1, FaartfacproPeer::DESART => 2, FaartfacproPeer::CODREF => 3, FaartfacproPeer::CANTOT => 4, FaartfacproPeer::PRECIO => 5, FaartfacproPeer::MONRGO => 6, FaartfacproPeer::MONDES => 7, FaartfacproPeer::TOTART => 8, FaartfacproPeer::CANAJU => 9, FaartfacproPeer::CANDES => 10, FaartfacproPeer::NRONOT => 11, FaartfacproPeer::ORDDESPACHO => 12, FaartfacproPeer::GUIA => 13, FaartfacproPeer::CONTENEDORES => 14, FaartfacproPeer::BILLLEADING => 15, FaartfacproPeer::NUMTRANSP => 16, FaartfacproPeer::PLACA => 17, FaartfacproPeer::CHOFER => 18, FaartfacproPeer::FECSAL => 19, FaartfacproPeer::FECLLEG => 20, FaartfacproPeer::PROD => 21, FaartfacproPeer::KG => 22, FaartfacproPeer::CAJAS => 23, FaartfacproPeer::ESTATUS => 24, FaartfacproPeer::OBSERVACIONES => 25, FaartfacproPeer::TM => 26, FaartfacproPeer::ID => 27, ),
-		BasePeer::TYPE_FIELDNAME => array ('reffac' => 0, 'codart' => 1, 'desart' => 2, 'codref' => 3, 'cantot' => 4, 'precio' => 5, 'monrgo' => 6, 'mondes' => 7, 'totart' => 8, 'canaju' => 9, 'candes' => 10, 'nronot' => 11, 'orddespacho' => 12, 'guia' => 13, 'contenedores' => 14, 'billleading' => 15, 'numtransp' => 16, 'placa' => 17, 'chofer' => 18, 'fecsal' => 19, 'feclleg' => 20, 'prod' => 21, 'kg' => 22, 'cajas' => 23, 'estatus' => 24, 'observaciones' => 25, 'tm' => 26, 'id' => 27, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, )
+		BasePeer::TYPE_PHPNAME => array ('Reffac' => 0, 'Codart' => 1, 'Desart' => 2, 'Codref' => 3, 'Cantot' => 4, 'Precio' => 5, 'Monrgo' => 6, 'Mondes' => 7, 'Totart' => 8, 'Canaju' => 9, 'Candes' => 10, 'Nronot' => 11, 'Orddespacho' => 12, 'Guia' => 13, 'Contenedores' => 14, 'Billleading' => 15, 'Numtransp' => 16, 'Placa' => 17, 'Chofer' => 18, 'Fecsal' => 19, 'Horsal' => 20, 'Feclleg' => 21, 'Horlleg' => 22, 'Prod' => 23, 'Kg' => 24, 'Cajas' => 25, 'Estatus' => 26, 'Observaciones' => 27, 'Tm' => 28, 'Id' => 29, ),
+		BasePeer::TYPE_COLNAME => array (FaartfacproPeer::REFFAC => 0, FaartfacproPeer::CODART => 1, FaartfacproPeer::DESART => 2, FaartfacproPeer::CODREF => 3, FaartfacproPeer::CANTOT => 4, FaartfacproPeer::PRECIO => 5, FaartfacproPeer::MONRGO => 6, FaartfacproPeer::MONDES => 7, FaartfacproPeer::TOTART => 8, FaartfacproPeer::CANAJU => 9, FaartfacproPeer::CANDES => 10, FaartfacproPeer::NRONOT => 11, FaartfacproPeer::ORDDESPACHO => 12, FaartfacproPeer::GUIA => 13, FaartfacproPeer::CONTENEDORES => 14, FaartfacproPeer::BILLLEADING => 15, FaartfacproPeer::NUMTRANSP => 16, FaartfacproPeer::PLACA => 17, FaartfacproPeer::CHOFER => 18, FaartfacproPeer::FECSAL => 19, FaartfacproPeer::HORSAL => 20, FaartfacproPeer::FECLLEG => 21, FaartfacproPeer::HORLLEG => 22, FaartfacproPeer::PROD => 23, FaartfacproPeer::KG => 24, FaartfacproPeer::CAJAS => 25, FaartfacproPeer::ESTATUS => 26, FaartfacproPeer::OBSERVACIONES => 27, FaartfacproPeer::TM => 28, FaartfacproPeer::ID => 29, ),
+		BasePeer::TYPE_FIELDNAME => array ('reffac' => 0, 'codart' => 1, 'desart' => 2, 'codref' => 3, 'cantot' => 4, 'precio' => 5, 'monrgo' => 6, 'mondes' => 7, 'totart' => 8, 'canaju' => 9, 'candes' => 10, 'nronot' => 11, 'orddespacho' => 12, 'guia' => 13, 'contenedores' => 14, 'billleading' => 15, 'numtransp' => 16, 'placa' => 17, 'chofer' => 18, 'fecsal' => 19, 'horsal' => 20, 'feclleg' => 21, 'horlleg' => 22, 'prod' => 23, 'kg' => 24, 'cajas' => 25, 'estatus' => 26, 'observaciones' => 27, 'tm' => 28, 'id' => 29, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, )
 	);
 
-	
+
 	public static function getMapBuilder()
 	{
 		include_once 'lib/model/map/FaartfacproMapBuilder.php';
 		return BasePeer::getMapBuilder('lib.model.map.FaartfacproMapBuilder');
 	}
-	
+
 	public static function getPhpNameMap()
 	{
 		if (self::$phpNameMap === null) {
@@ -143,7 +149,7 @@ abstract class BaseFaartfacproPeer {
 		}
 		return self::$phpNameMap;
 	}
-	
+
 	static public function translateFieldName($name, $fromType, $toType)
 	{
 		$toNames = self::getFieldNames($toType);
@@ -154,7 +160,7 @@ abstract class BaseFaartfacproPeer {
 		return $toNames[$key];
 	}
 
-	
+
 
 	static public function getFieldNames($type = BasePeer::TYPE_PHPNAME)
 	{
@@ -164,13 +170,13 @@ abstract class BaseFaartfacproPeer {
 		return self::$fieldNames[$type];
 	}
 
-	
+
 	public static function alias($alias, $column)
 	{
 		return str_replace(FaartfacproPeer::TABLE_NAME.'.', $alias.'.', $column);
 	}
 
-	
+
 	public static function addSelectColumns(Criteria $criteria)
 	{
 
@@ -214,7 +220,11 @@ abstract class BaseFaartfacproPeer {
 
 		$criteria->addSelectColumn(FaartfacproPeer::FECSAL);
 
+		$criteria->addSelectColumn(FaartfacproPeer::HORSAL);
+
 		$criteria->addSelectColumn(FaartfacproPeer::FECLLEG);
+
+		$criteria->addSelectColumn(FaartfacproPeer::HORLLEG);
 
 		$criteria->addSelectColumn(FaartfacproPeer::PROD);
 
@@ -235,7 +245,7 @@ abstract class BaseFaartfacproPeer {
 	const COUNT = 'COUNT(faartfacpro.ID)';
 	const COUNT_DISTINCT = 'COUNT(DISTINCT faartfacpro.ID)';
 
-	
+
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
 	{
 				$criteria = clone $criteria;
@@ -259,7 +269,7 @@ abstract class BaseFaartfacproPeer {
 						return 0;
 		}
 	}
-	
+
 	public static function doSelectOne(Criteria $criteria, $con = null)
 	{
 		$critcopy = clone $criteria;
@@ -270,12 +280,12 @@ abstract class BaseFaartfacproPeer {
 		}
 		return null;
 	}
-	
+
 	public static function doSelect(Criteria $criteria, $con = null)
 	{
 		return FaartfacproPeer::populateObjects(FaartfacproPeer::doSelectRS($criteria, $con));
 	}
-	
+
 	public static function doSelectRS(Criteria $criteria, $con = null)
 	{
 		if ($con === null) {
@@ -291,35 +301,35 @@ abstract class BaseFaartfacproPeer {
 
 						return BasePeer::doSelect($criteria, $con);
 	}
-	
+
 	public static function populateObjects(ResultSet $rs)
 	{
 		$results = array();
-	
+
 				$cls = FaartfacproPeer::getOMClass();
 		$cls = Propel::import($cls);
 				while($rs->next()) {
-		
+
 			$obj = new $cls();
 			$obj->hydrate($rs);
 			$results[] = $obj;
-			
+
 		}
 		return $results;
 	}
-	
+
 	public static function getTableMap()
 	{
 		return Propel::getDatabaseMap(self::DATABASE_NAME)->getTable(self::TABLE_NAME);
 	}
 
-	
+
 	public static function getOMClass()
 	{
 		return FaartfacproPeer::CLASS_DEFAULT;
 	}
 
-	
+
 	public static function doInsert($values, $con = null)
 	{
 		if ($con === null) {
@@ -330,7 +340,7 @@ abstract class BaseFaartfacproPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
-		$criteria->remove(FaartfacproPeer::ID); 
+		$criteria->remove(FaartfacproPeer::ID);
 
 				$criteria->setDbName(self::DATABASE_NAME);
 
@@ -346,7 +356,7 @@ abstract class BaseFaartfacproPeer {
 		return $pk;
 	}
 
-	
+
 	public static function doUpdate($values, $con = null)
 	{
 		if ($con === null) {
@@ -356,7 +366,7 @@ abstract class BaseFaartfacproPeer {
 		$selectCriteria = new Criteria(self::DATABASE_NAME);
 
 		if ($values instanceof Criteria) {
-			$criteria = clone $values; 
+			$criteria = clone $values;
 			$comparison = $criteria->getComparison(FaartfacproPeer::ID);
 			$selectCriteria->add(FaartfacproPeer::ID, $criteria->remove(FaartfacproPeer::ID), $comparison);
 
@@ -367,7 +377,7 @@ abstract class BaseFaartfacproPeer {
 		return BasePeer::doUpdate($selectCriteria, $criteria, $con);
 	}
 
-	
+
 	public static function doDeleteAll($con = null)
 	{
 		if ($con === null) {
@@ -384,7 +394,7 @@ abstract class BaseFaartfacproPeer {
 		}
 	}
 
-	
+
 	 public static function doDelete($values, $con = null)
 	 {
 		if ($con === null) {
@@ -402,10 +412,10 @@ abstract class BaseFaartfacproPeer {
 
 				$criteria->setDbName(self::DATABASE_NAME);
 
-		$affectedRows = 0; 
+		$affectedRows = 0;
 		try {
 									$con->begin();
-			
+
 			$affectedRows += BasePeer::doDelete($criteria, $con);
 			$con->commit();
 			return $affectedRows;
@@ -415,7 +425,7 @@ abstract class BaseFaartfacproPeer {
 		}
 	}
 
-	
+
 	public static function doValidate(Faartfacpro $obj, $cols = null)
 	{
 		$columns = array();
@@ -450,7 +460,7 @@ abstract class BaseFaartfacproPeer {
     return $res;
 	}
 
-	
+
 	public static function retrieveByPK($pk, $con = null)
 	{
 		if ($con === null) {
@@ -467,7 +477,7 @@ abstract class BaseFaartfacproPeer {
 		return !empty($v) > 0 ? $v[0] : null;
 	}
 
-	
+
 	public static function retrieveByPKs($pks, $con = null)
 	{
 		if ($con === null) {
@@ -485,7 +495,7 @@ abstract class BaseFaartfacproPeer {
 		return $objs;
 	}
 
-} 
+}
 if (Propel::isInit()) {
 			try {
 		BaseFaartfacproPeer::getMapBuilder();
