@@ -80,7 +80,7 @@ class fafacturproActions extends autofafacturproActions
          	$this->columnas[1][26]->setOculta(true);*/
          }else $this->columnas[0]->setAncho(1800);
 
-         $this->columnas[1][36]->setCombo(array('N'=>'No Procesado','A'=>'Activo'));
+         $this->columnas[1][38]->setCombo(array('N'=>'No Procesado','A'=>'Activo'));
 
 		$this->obj1 = $this->columnas[0]->getConfig($artfac);
 

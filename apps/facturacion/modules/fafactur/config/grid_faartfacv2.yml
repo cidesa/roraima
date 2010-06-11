@@ -211,48 +211,64 @@ opciones:                  # Opciones generales
   esgrabable:              true
   html:                    [size="60" maxlength=200]
 31:       # Columna 31
-  titulo:                  Fecha y Hora de Salida
+  titulo:                  Fecha de Salida
   tipo:                    f
   nombrecampo:             fecsal
   esgrabable:              true
   html:                    [size="15" maxlength=20]
-32:       # Columna 33
-  titulo:                  Fecha y Hora de Llegada
+32:       # Columna 31
+  titulo:                  Hora de Salida
+  tipo:                    t
+  nombrecampo:             horsal
+  esgrabable:              true
+  html:                    [size="15" maxlength=20]
+33:       # Columna 33
+  titulo:                  Fecha de Llegada
   tipo:                    f
   nombrecampo:             feclleg
   esgrabable:              true
   html:                    [size="15" maxlength=20]
-33:       # Columna 33
+34:       # Columna 31
+  titulo:                  Hora de Llegada
+  tipo:                    t
+  nombrecampo:             horlleg
+  esgrabable:              true
+  html:                    [size="15" maxlength=20]
+35:       # Columna 33
   titulo:                  Producto
   tipo:                    t
   nombrecampo:             prod
   esgrabable:              true
   html:                    [size="15" maxlength=100]
-34:       # Columna 34
+36:       # Columna 34
   titulo:                  Cantidad KG
   tipo:                    m
   nombrecampo:             kg
   esgrabable:              true
-  html:                    [size="15" maxlength=10]
-35:       # Columna 35
+  esnumerico:              true
+  html:                    ["size=15 maxlength=10"]
+37:       # Columna 35
   titulo:                  Cajas
   tipo:                    m
   nombrecampo:             cajas
   esgrabable:              true
-  html:                    [size="15" maxlength=10]
-36:       # Columna 36
+  esnumerico:              true
+  html:                    ["size=15 maxlength=10"]
+38:       # Columna 36
   titulo:                  Toneladas
   tipo:                    m
   nombrecampo:             tm
   esgrabable:              true
-  html:                    [size="15" maxlength=10]
-37:       # Columna 37
+  esnumerico:              true
+  html:                    ["size=15 maxlength=10"]
+39:       # Columna 37
   titulo:                  Estatus
   tipo:                    t
-  nombrecampo:             estatus  
+  nombrecampo:             estatus
   esgrabable:              true
+  oculta:                  true
   html:                    [ ]
-38:       # Columna 38
+40:       # Columna 38
   titulo:                  Observaciones
   tipo:                    t
   nombrecampo:             observaciones

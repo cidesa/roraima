@@ -4,156 +4,164 @@
 abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
 
 
-	
+
 	protected static $peer;
 
 
-	
+
 	protected $reffac;
 
 
-	
+
 	protected $codart;
 
 
-	
+
 	protected $desart;
 
 
-	
+
 	protected $codref;
 
 
-	
+
 	protected $cantot;
 
 
-	
+
 	protected $precio;
 
 
-	
+
 	protected $monrgo;
 
 
-	
+
 	protected $mondes;
 
 
-	
+
 	protected $totart;
 
 
-	
+
 	protected $canaju;
 
 
-	
+
 	protected $candes;
 
 
-	
+
 	protected $nronot;
 
 
-	
+
 	protected $orddespacho;
 
 
-	
+
 	protected $guia;
 
 
-	
+
 	protected $contenedores;
 
 
-	
+
 	protected $billleading;
 
 
-	
+
 	protected $numtransp;
 
 
-	
+
 	protected $placa;
 
 
-	
+
 	protected $chofer;
 
 
-	
+
 	protected $fecsal;
 
 
-	
+
+	protected $horsal;
+
+
+
 	protected $feclleg;
 
 
-	
+
+	protected $horlleg;
+
+
+
 	protected $prod;
 
 
-	
+
 	protected $kg;
 
 
-	
+
 	protected $cajas;
 
 
-	
+
 	protected $estatus;
 
 
-	
+
 	protected $observaciones;
 
 
-	
+
 	protected $tm;
 
 
-	
+
 	protected $id;
 
-	
+
 	protected $alreadyInSave = false;
 
-	
+
 	protected $alreadyInValidation = false;
 
-  
+
   public function getReffac()
   {
 
     return trim($this->reffac);
 
   }
-  
+
   public function getCodart()
   {
 
     return trim($this->codart);
 
   }
-  
+
   public function getDesart()
   {
 
     return trim($this->desart);
 
   }
-  
+
   public function getCodref()
   {
 
     return trim($this->codref);
 
   }
-  
+
   public function getCantot($val=false)
   {
 
@@ -161,7 +169,7 @@ abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
     else return $this->cantot;
 
   }
-  
+
   public function getPrecio($val=false)
   {
 
@@ -169,7 +177,7 @@ abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
     else return $this->precio;
 
   }
-  
+
   public function getMonrgo($val=false)
   {
 
@@ -177,7 +185,7 @@ abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
     else return $this->monrgo;
 
   }
-  
+
   public function getMondes($val=false)
   {
 
@@ -185,7 +193,7 @@ abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
     else return $this->mondes;
 
   }
-  
+
   public function getTotart($val=false)
   {
 
@@ -193,7 +201,7 @@ abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
     else return $this->totart;
 
   }
-  
+
   public function getCanaju($val=false)
   {
 
@@ -201,7 +209,7 @@ abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
     else return $this->canaju;
 
   }
-  
+
   public function getCandes($val=false)
   {
 
@@ -209,63 +217,63 @@ abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
     else return $this->candes;
 
   }
-  
+
   public function getNronot()
   {
 
     return trim($this->nronot);
 
   }
-  
+
   public function getOrddespacho()
   {
 
     return trim($this->orddespacho);
 
   }
-  
+
   public function getGuia()
   {
 
     return trim($this->guia);
 
   }
-  
+
   public function getContenedores()
   {
 
     return trim($this->contenedores);
 
   }
-  
+
   public function getBillleading()
   {
 
     return trim($this->billleading);
 
   }
-  
+
   public function getNumtransp()
   {
 
     return trim($this->numtransp);
 
   }
-  
+
   public function getPlaca()
   {
 
     return trim($this->placa);
 
   }
-  
+
   public function getChofer()
   {
 
     return trim($this->chofer);
 
   }
-  
+
   public function getFecsal($format = 'Y-m-d H:i:s')
   {
 
@@ -287,7 +295,14 @@ abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
     }
   }
 
-  
+
+  public function getHorsal()
+  {
+
+    return trim($this->horsal);
+
+  }
+
   public function getFeclleg($format = 'Y-m-d H:i:s')
   {
 
@@ -309,14 +324,21 @@ abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
     }
   }
 
-  
+
+  public function getHorlleg()
+  {
+
+    return trim($this->horlleg);
+
+  }
+
   public function getProd()
   {
 
     return trim($this->prod);
 
   }
-  
+
   public function getKg($val=false)
   {
 
@@ -324,7 +346,7 @@ abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
     else return $this->kg;
 
   }
-  
+
   public function getCajas($val=false)
   {
 
@@ -332,21 +354,21 @@ abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
     else return $this->cajas;
 
   }
-  
+
   public function getEstatus()
   {
 
     return trim($this->estatus);
 
   }
-  
+
   public function getObservaciones()
   {
 
     return trim($this->observaciones);
 
   }
-  
+
   public function getTm($val=false)
   {
 
@@ -354,14 +376,14 @@ abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
     else return $this->tm;
 
   }
-  
+
   public function getId()
   {
 
     return $this->id;
 
   }
-	
+
 	public function setReffac($v)
 	{
 
@@ -369,9 +391,9 @@ abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
         $this->reffac = $v;
         $this->modifiedColumns[] = FaartfacproPeer::REFFAC;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCodart($v)
 	{
 
@@ -379,9 +401,9 @@ abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
         $this->codart = $v;
         $this->modifiedColumns[] = FaartfacproPeer::CODART;
       }
-  
-	} 
-	
+
+	}
+
 	public function setDesart($v)
 	{
 
@@ -389,9 +411,9 @@ abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
         $this->desart = $v;
         $this->modifiedColumns[] = FaartfacproPeer::DESART;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCodref($v)
 	{
 
@@ -399,9 +421,9 @@ abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
         $this->codref = $v;
         $this->modifiedColumns[] = FaartfacproPeer::CODREF;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCantot($v)
 	{
 
@@ -409,9 +431,9 @@ abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
         $this->cantot = Herramientas::toFloat($v);
         $this->modifiedColumns[] = FaartfacproPeer::CANTOT;
       }
-  
-	} 
-	
+
+	}
+
 	public function setPrecio($v)
 	{
 
@@ -419,9 +441,9 @@ abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
         $this->precio = Herramientas::toFloat($v);
         $this->modifiedColumns[] = FaartfacproPeer::PRECIO;
       }
-  
-	} 
-	
+
+	}
+
 	public function setMonrgo($v)
 	{
 
@@ -429,9 +451,9 @@ abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
         $this->monrgo = Herramientas::toFloat($v);
         $this->modifiedColumns[] = FaartfacproPeer::MONRGO;
       }
-  
-	} 
-	
+
+	}
+
 	public function setMondes($v)
 	{
 
@@ -439,9 +461,9 @@ abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
         $this->mondes = Herramientas::toFloat($v);
         $this->modifiedColumns[] = FaartfacproPeer::MONDES;
       }
-  
-	} 
-	
+
+	}
+
 	public function setTotart($v)
 	{
 
@@ -449,9 +471,9 @@ abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
         $this->totart = Herramientas::toFloat($v);
         $this->modifiedColumns[] = FaartfacproPeer::TOTART;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCanaju($v)
 	{
 
@@ -459,9 +481,9 @@ abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
         $this->canaju = Herramientas::toFloat($v);
         $this->modifiedColumns[] = FaartfacproPeer::CANAJU;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCandes($v)
 	{
 
@@ -469,9 +491,9 @@ abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
         $this->candes = Herramientas::toFloat($v);
         $this->modifiedColumns[] = FaartfacproPeer::CANDES;
       }
-  
-	} 
-	
+
+	}
+
 	public function setNronot($v)
 	{
 
@@ -479,9 +501,9 @@ abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
         $this->nronot = $v;
         $this->modifiedColumns[] = FaartfacproPeer::NRONOT;
       }
-  
-	} 
-	
+
+	}
+
 	public function setOrddespacho($v)
 	{
 
@@ -489,9 +511,9 @@ abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
         $this->orddespacho = $v;
         $this->modifiedColumns[] = FaartfacproPeer::ORDDESPACHO;
       }
-  
-	} 
-	
+
+	}
+
 	public function setGuia($v)
 	{
 
@@ -499,9 +521,9 @@ abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
         $this->guia = $v;
         $this->modifiedColumns[] = FaartfacproPeer::GUIA;
       }
-  
-	} 
-	
+
+	}
+
 	public function setContenedores($v)
 	{
 
@@ -509,9 +531,9 @@ abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
         $this->contenedores = $v;
         $this->modifiedColumns[] = FaartfacproPeer::CONTENEDORES;
       }
-  
-	} 
-	
+
+	}
+
 	public function setBillleading($v)
 	{
 
@@ -519,9 +541,9 @@ abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
         $this->billleading = $v;
         $this->modifiedColumns[] = FaartfacproPeer::BILLLEADING;
       }
-  
-	} 
-	
+
+	}
+
 	public function setNumtransp($v)
 	{
 
@@ -529,9 +551,9 @@ abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
         $this->numtransp = $v;
         $this->modifiedColumns[] = FaartfacproPeer::NUMTRANSP;
       }
-  
-	} 
-	
+
+	}
+
 	public function setPlaca($v)
 	{
 
@@ -539,9 +561,9 @@ abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
         $this->placa = $v;
         $this->modifiedColumns[] = FaartfacproPeer::PLACA;
       }
-  
-	} 
-	
+
+	}
+
 	public function setChofer($v)
 	{
 
@@ -549,9 +571,9 @@ abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
         $this->chofer = $v;
         $this->modifiedColumns[] = FaartfacproPeer::CHOFER;
       }
-  
-	} 
-	
+
+	}
+
 	public function setFecsal($v)
 	{
 
@@ -572,8 +594,18 @@ abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
       $this->modifiedColumns[] = FaartfacproPeer::FECSAL;
     }
 
-	} 
-	
+	}
+
+	public function setHorsal($v)
+	{
+
+    if ($this->horsal !== $v) {
+        $this->horsal = $v;
+        $this->modifiedColumns[] = FaartfacproPeer::HORSAL;
+      }
+
+	}
+
 	public function setFeclleg($v)
 	{
 
@@ -594,8 +626,18 @@ abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
       $this->modifiedColumns[] = FaartfacproPeer::FECLLEG;
     }
 
-	} 
-	
+	}
+
+	public function setHorlleg($v)
+	{
+
+    if ($this->horlleg !== $v) {
+        $this->horlleg = $v;
+        $this->modifiedColumns[] = FaartfacproPeer::HORLLEG;
+      }
+
+	}
+
 	public function setProd($v)
 	{
 
@@ -603,9 +645,9 @@ abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
         $this->prod = $v;
         $this->modifiedColumns[] = FaartfacproPeer::PROD;
       }
-  
-	} 
-	
+
+	}
+
 	public function setKg($v)
 	{
 
@@ -613,9 +655,9 @@ abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
         $this->kg = Herramientas::toFloat($v);
         $this->modifiedColumns[] = FaartfacproPeer::KG;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCajas($v)
 	{
 
@@ -623,9 +665,9 @@ abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
         $this->cajas = Herramientas::toFloat($v);
         $this->modifiedColumns[] = FaartfacproPeer::CAJAS;
       }
-  
-	} 
-	
+
+	}
+
 	public function setEstatus($v)
 	{
 
@@ -633,9 +675,9 @@ abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
         $this->estatus = $v;
         $this->modifiedColumns[] = FaartfacproPeer::ESTATUS;
       }
-  
-	} 
-	
+
+	}
+
 	public function setObservaciones($v)
 	{
 
@@ -643,9 +685,9 @@ abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
         $this->observaciones = $v;
         $this->modifiedColumns[] = FaartfacproPeer::OBSERVACIONES;
       }
-  
-	} 
-	
+
+	}
+
 	public function setTm($v)
 	{
 
@@ -653,9 +695,9 @@ abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
         $this->tm = Herramientas::toFloat($v);
         $this->modifiedColumns[] = FaartfacproPeer::TM;
       }
-  
-	} 
-	
+
+	}
+
 	public function setId($v)
 	{
 
@@ -663,9 +705,9 @@ abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
         $this->id = $v;
         $this->modifiedColumns[] = FaartfacproPeer::ID;
       }
-  
-	} 
-  
+
+	}
+
   public function hydrate(ResultSet $rs, $startcol = 1)
   {
     try {
@@ -710,21 +752,25 @@ abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
 
       $this->fecsal = $rs->getTimestamp($startcol + 19, null);
 
-      $this->feclleg = $rs->getTimestamp($startcol + 20, null);
+      $this->horsal = $rs->getString($startcol + 20);
 
-      $this->prod = $rs->getString($startcol + 21);
+      $this->feclleg = $rs->getTimestamp($startcol + 21, null);
 
-      $this->kg = $rs->getFloat($startcol + 22);
+      $this->horlleg = $rs->getString($startcol + 22);
 
-      $this->cajas = $rs->getFloat($startcol + 23);
+      $this->prod = $rs->getString($startcol + 23);
 
-      $this->estatus = $rs->getString($startcol + 24);
+      $this->kg = $rs->getFloat($startcol + 24);
 
-      $this->observaciones = $rs->getString($startcol + 25);
+      $this->cajas = $rs->getFloat($startcol + 25);
 
-      $this->tm = $rs->getFloat($startcol + 26);
+      $this->estatus = $rs->getString($startcol + 26);
 
-      $this->id = $rs->getInt($startcol + 27);
+      $this->observaciones = $rs->getString($startcol + 27);
+
+      $this->tm = $rs->getFloat($startcol + 28);
+
+      $this->id = $rs->getInt($startcol + 29);
 
       $this->resetModified();
 
@@ -732,7 +778,7 @@ abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 28; 
+            return $startcol + 30;
     } catch (Exception $e) {
       throw new PropelException("Error populating Faartfacpro object", $e);
     }
@@ -743,8 +789,8 @@ abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
   {
 
   }
-    
-  
+
+
   public function __call($m, $a)
     {
       $prefijo = substr($m,0,3);
@@ -758,7 +804,7 @@ abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
 
     }
 
-	
+
 	public function delete($con = null)
 	{
 		if ($this->isDeleted()) {
@@ -780,7 +826,7 @@ abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	public function save($con = null)
 	{
 		if ($this->isDeleted()) {
@@ -802,7 +848,7 @@ abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	protected function doSave($con)
 	{
 		$affectedRows = 0; 		if (!$this->alreadyInSave) {
@@ -812,8 +858,8 @@ abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
 						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = FaartfacproPeer::doInsert($this, $con);
-					$affectedRows += 1; 										 										 
-					$this->setId($pk);  
+					$affectedRows += 1;
+					$this->setId($pk);
 					$this->setNew(false);
 				} else {
 					$affectedRows += FaartfacproPeer::doUpdate($this, $con);
@@ -823,17 +869,17 @@ abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
-	} 
-	
+	}
+
 	protected $validationFailures = array();
 
-	
+
 	public function getValidationFailures()
 	{
 		return $this->validationFailures;
 	}
 
-	
+
 	public function validate($columns = null)
 	{
 		$res = $this->doValidate($columns);
@@ -846,7 +892,7 @@ abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	protected function doValidate($columns = null)
 	{
 		if (!$this->alreadyInValidation) {
@@ -868,14 +914,14 @@ abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
 		return (!empty($failureMap) ? $failureMap : true);
 	}
 
-	
+
 	public function getByName($name, $type = BasePeer::TYPE_PHPNAME)
 	{
 		$pos = FaartfacproPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->getByPosition($pos);
 	}
 
-	
+
 	public function getByPosition($pos)
 	{
 		switch($pos) {
@@ -940,27 +986,33 @@ abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
 				return $this->getFecsal();
 				break;
 			case 20:
-				return $this->getFeclleg();
+				return $this->getHorsal();
 				break;
 			case 21:
-				return $this->getProd();
+				return $this->getFeclleg();
 				break;
 			case 22:
-				return $this->getKg();
+				return $this->getHorlleg();
 				break;
 			case 23:
-				return $this->getCajas();
+				return $this->getProd();
 				break;
 			case 24:
-				return $this->getEstatus();
+				return $this->getKg();
 				break;
 			case 25:
-				return $this->getObservaciones();
+				return $this->getCajas();
 				break;
 			case 26:
-				return $this->getTm();
+				return $this->getEstatus();
 				break;
 			case 27:
+				return $this->getObservaciones();
+				break;
+			case 28:
+				return $this->getTm();
+				break;
+			case 29:
 				return $this->getId();
 				break;
 			default:
@@ -968,7 +1020,7 @@ abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
 				break;
 		} 	}
 
-	
+
 	public function toArray($keyType = BasePeer::TYPE_PHPNAME)
 	{
 		$keys = FaartfacproPeer::getFieldNames($keyType);
@@ -993,26 +1045,28 @@ abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
 			$keys[17] => $this->getPlaca(),
 			$keys[18] => $this->getChofer(),
 			$keys[19] => $this->getFecsal(),
-			$keys[20] => $this->getFeclleg(),
-			$keys[21] => $this->getProd(),
-			$keys[22] => $this->getKg(),
-			$keys[23] => $this->getCajas(),
-			$keys[24] => $this->getEstatus(),
-			$keys[25] => $this->getObservaciones(),
-			$keys[26] => $this->getTm(),
-			$keys[27] => $this->getId(),
+			$keys[20] => $this->getHorsal(),
+			$keys[21] => $this->getFeclleg(),
+			$keys[22] => $this->getHorlleg(),
+			$keys[23] => $this->getProd(),
+			$keys[24] => $this->getKg(),
+			$keys[25] => $this->getCajas(),
+			$keys[26] => $this->getEstatus(),
+			$keys[27] => $this->getObservaciones(),
+			$keys[28] => $this->getTm(),
+			$keys[29] => $this->getId(),
 		);
 		return $result;
 	}
 
-	
+
 	public function setByName($name, $value, $type = BasePeer::TYPE_PHPNAME)
 	{
 		$pos = FaartfacproPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->setByPosition($pos, $value);
 	}
 
-	
+
 	public function setByPosition($pos, $value)
 	{
 		switch($pos) {
@@ -1077,32 +1131,38 @@ abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
 				$this->setFecsal($value);
 				break;
 			case 20:
-				$this->setFeclleg($value);
+				$this->setHorsal($value);
 				break;
 			case 21:
-				$this->setProd($value);
+				$this->setFeclleg($value);
 				break;
 			case 22:
-				$this->setKg($value);
+				$this->setHorlleg($value);
 				break;
 			case 23:
-				$this->setCajas($value);
+				$this->setProd($value);
 				break;
 			case 24:
-				$this->setEstatus($value);
+				$this->setKg($value);
 				break;
 			case 25:
-				$this->setObservaciones($value);
+				$this->setCajas($value);
 				break;
 			case 26:
-				$this->setTm($value);
+				$this->setEstatus($value);
 				break;
 			case 27:
+				$this->setObservaciones($value);
+				break;
+			case 28:
+				$this->setTm($value);
+				break;
+			case 29:
 				$this->setId($value);
 				break;
 		} 	}
 
-	
+
 	public function fromArray($arr, $keyType = BasePeer::TYPE_PHPNAME)
 	{
 		$keys = FaartfacproPeer::getFieldNames($keyType);
@@ -1127,17 +1187,19 @@ abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[17], $arr)) $this->setPlaca($arr[$keys[17]]);
 		if (array_key_exists($keys[18], $arr)) $this->setChofer($arr[$keys[18]]);
 		if (array_key_exists($keys[19], $arr)) $this->setFecsal($arr[$keys[19]]);
-		if (array_key_exists($keys[20], $arr)) $this->setFeclleg($arr[$keys[20]]);
-		if (array_key_exists($keys[21], $arr)) $this->setProd($arr[$keys[21]]);
-		if (array_key_exists($keys[22], $arr)) $this->setKg($arr[$keys[22]]);
-		if (array_key_exists($keys[23], $arr)) $this->setCajas($arr[$keys[23]]);
-		if (array_key_exists($keys[24], $arr)) $this->setEstatus($arr[$keys[24]]);
-		if (array_key_exists($keys[25], $arr)) $this->setObservaciones($arr[$keys[25]]);
-		if (array_key_exists($keys[26], $arr)) $this->setTm($arr[$keys[26]]);
-		if (array_key_exists($keys[27], $arr)) $this->setId($arr[$keys[27]]);
+		if (array_key_exists($keys[20], $arr)) $this->setHorsal($arr[$keys[20]]);
+		if (array_key_exists($keys[21], $arr)) $this->setFeclleg($arr[$keys[21]]);
+		if (array_key_exists($keys[22], $arr)) $this->setHorlleg($arr[$keys[22]]);
+		if (array_key_exists($keys[23], $arr)) $this->setProd($arr[$keys[23]]);
+		if (array_key_exists($keys[24], $arr)) $this->setKg($arr[$keys[24]]);
+		if (array_key_exists($keys[25], $arr)) $this->setCajas($arr[$keys[25]]);
+		if (array_key_exists($keys[26], $arr)) $this->setEstatus($arr[$keys[26]]);
+		if (array_key_exists($keys[27], $arr)) $this->setObservaciones($arr[$keys[27]]);
+		if (array_key_exists($keys[28], $arr)) $this->setTm($arr[$keys[28]]);
+		if (array_key_exists($keys[29], $arr)) $this->setId($arr[$keys[29]]);
 	}
 
-	
+
 	public function buildCriteria()
 	{
 		$criteria = new Criteria(FaartfacproPeer::DATABASE_NAME);
@@ -1162,7 +1224,9 @@ abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(FaartfacproPeer::PLACA)) $criteria->add(FaartfacproPeer::PLACA, $this->placa);
 		if ($this->isColumnModified(FaartfacproPeer::CHOFER)) $criteria->add(FaartfacproPeer::CHOFER, $this->chofer);
 		if ($this->isColumnModified(FaartfacproPeer::FECSAL)) $criteria->add(FaartfacproPeer::FECSAL, $this->fecsal);
+		if ($this->isColumnModified(FaartfacproPeer::HORSAL)) $criteria->add(FaartfacproPeer::HORSAL, $this->horsal);
 		if ($this->isColumnModified(FaartfacproPeer::FECLLEG)) $criteria->add(FaartfacproPeer::FECLLEG, $this->feclleg);
+		if ($this->isColumnModified(FaartfacproPeer::HORLLEG)) $criteria->add(FaartfacproPeer::HORLLEG, $this->horlleg);
 		if ($this->isColumnModified(FaartfacproPeer::PROD)) $criteria->add(FaartfacproPeer::PROD, $this->prod);
 		if ($this->isColumnModified(FaartfacproPeer::KG)) $criteria->add(FaartfacproPeer::KG, $this->kg);
 		if ($this->isColumnModified(FaartfacproPeer::CAJAS)) $criteria->add(FaartfacproPeer::CAJAS, $this->cajas);
@@ -1174,7 +1238,7 @@ abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
 		return $criteria;
 	}
 
-	
+
 	public function buildPkeyCriteria()
 	{
 		$criteria = new Criteria(FaartfacproPeer::DATABASE_NAME);
@@ -1184,19 +1248,19 @@ abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
 		return $criteria;
 	}
 
-	
+
 	public function getPrimaryKey()
 	{
 		return $this->getId();
 	}
 
-	
+
 	public function setPrimaryKey($key)
 	{
 		$this->setId($key);
 	}
 
-	
+
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
@@ -1240,7 +1304,11 @@ abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
 
 		$copyObj->setFecsal($this->fecsal);
 
+		$copyObj->setHorsal($this->horsal);
+
 		$copyObj->setFeclleg($this->feclleg);
+
+		$copyObj->setHorlleg($this->horlleg);
 
 		$copyObj->setProd($this->prod);
 
@@ -1257,10 +1325,10 @@ abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
 
 		$copyObj->setNew(true);
 
-		$copyObj->setId(NULL); 
+		$copyObj->setId(NULL);
 	}
 
-	
+
 	public function copy($deepCopy = false)
 	{
 				$clazz = get_class($this);
@@ -1269,7 +1337,7 @@ abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
 		return $copyObj;
 	}
 
-	
+
 	public function getPeer()
 	{
 		if (self::$peer === null) {
@@ -1278,4 +1346,4 @@ abstract class BaseFaartfacpro extends BaseObject  implements Persistent {
 		return self::$peer;
 	}
 
-} 
+}
