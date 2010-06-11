@@ -144,10 +144,10 @@ class fafacturActions extends autofafacturActions {
 		$this->columnas[1][12]->setEsTotal(true, 'fafactur_tottotart');
          if ($this->cambiolog!="S")
          {
-         	$this->columnas[1][23]->setOculta(true);
+         	/*$this->columnas[1][23]->setOculta(true);
          	$this->columnas[1][24]->setOculta(true);
          	$this->columnas[1][25]->setOculta(true);
-         	$this->columnas[1][26]->setOculta(true);
+         	$this->columnas[1][26]->setOculta(true);*/
          }else $this->columnas[0]->setAncho(1800);
 
 		$this->obj1 = $this->columnas[0]->getConfig($artfac);
