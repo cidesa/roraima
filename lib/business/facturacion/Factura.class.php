@@ -899,6 +899,15 @@ class Factura {
 	     {
 	     	$x[$j]->setPrecio($x[$j]->getPrecioe());
 	     }
+             $c = new Criteria();
+             $c->add(FaartfacproPeer::REFFAC,$fafactur->getReffac());
+             $c->add(FaartfacproPeer::CODART,$x[$j]->getCodart());
+             $per = FaartfacproPeer::doSelectOne($c);
+             if($per)
+             {
+                 $per->setEstatus('P');
+                 $per->save();
+             }
 	     $x[$j]->setCantot($cantot);
 	     $x[$j]->save();
 
