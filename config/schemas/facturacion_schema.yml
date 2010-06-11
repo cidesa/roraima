@@ -122,8 +122,12 @@ propel:
       size: 200
     fecsal:
       type: TIMESTAMP
+    horsal:
+      type: VARCHAR
     feclleg:
       type: TIMESTAMP
+    horlleg:
+      type: VARCHAR
     prod:
       type: VARCHAR
       size: 100
@@ -1714,8 +1718,12 @@ propel:
       size: 200
     fecsal:
       type: TIMESTAMP
+    horsal:
+      type: VARCHAR
     feclleg:
       type: TIMESTAMP
+    horlleg:
+      type: VARCHAR
     prod:
       type: VARCHAR
       size: 100
