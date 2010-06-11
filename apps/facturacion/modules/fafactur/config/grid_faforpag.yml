@@ -2,7 +2,7 @@ opciones:                  # Opciones generales
   name:                    d
   eliminar:                true
   tabla:                   faforpag
-  anchogrid:               900
+  anchogrid:               750
   ancho:                   1250
   filas:                   10
   titulo:                  ' '

@@ -1,7 +1,7 @@
 opciones:                  # Opciones generales
   eliminar:                true
   tabla:                   faartfac
-  anchogrid:               900
+  anchogrid:               750
   ancho:                   1400
   filas:                   25
   titulo:                  ' '
