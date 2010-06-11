@@ -6157,6 +6157,14 @@ public function Catdefcatman_Cattramo($params = '') {
                         NpdefcptPeer :: NOMCON => 'Nombre'
 		);
 	}
+        public function Fafacturpro_reffac() {
+            $this->c = new Criteria();
+            $this->columnas = array (
+                    FafacturproPeer :: REFFAC => 'Proforma',
+                    FafacturproPeer :: FECFAC => 'Fecha',
+
+            );
+	}
         
 }
 
