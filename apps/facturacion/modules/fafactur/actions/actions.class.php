@@ -90,6 +90,7 @@ class fafacturActions extends autofafacturActions {
                 if($tipo=='PROFORMA')
                 {
                     $c->add(FaartfacproPeer :: REFFAC, $reffac);
+                    $c->add(FaartfacproPeer :: ESTATUS, 'A');
                     $artfac = FaartfacproPeer :: doSelect($c);
                 }else
                 {
