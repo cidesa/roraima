@@ -1,0 +1,60 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Fafacturpro
+    theme:            cidesaGenerator
+    display:   [reffac, fecfac, tipref, tipmon, rifpro, nompro, telpro, dirpro, tipper, codconpag, desconpag, desfac, monfac, observ, lonart, monant, valmon ]
+    fields:
+      reffac:  { name: NÃºmero, params: maxlength=8 size=10 onBlur="rellenarcorr(this.id)"}
+      fecfac:  { name: Fecha EmisiÃ³n, params: date_format='dd/MM/yyyy' size=10 maxlength=10}
+      tipref:  { name: Refiere a}
+      tipmon:  { name: Tipo de Moneda}      
+      rifpro:  { name: C.I/R.I.F Cliente, params: maxlength=8 disabled=false}
+      nompro:  { name: Nombre, params: readonly=true}
+      telpro:  { name: TelÃ©fono(s), params: readonly=true style=border:none size=10}
+      dirpro:  { name: DirecciÃ³n, params: readonly=true style=border:none size=65}
+      tipper:  { name: Tipo de Persona, params: readonly=true style=border:none size=10}
+      codconpag:  { name: CondiciÃ³n de Pago, params: maxlength=4}
+      desconpag:  { name: DescripciÃ³n}
+      desfac:  { name: DescripciÃ³n, type: textarea_tag , params: maxlength=255 cols=66}
+      monto:   { name: Monto}      
+      monfac:  { name: Total, params: readonly=true}
+      observ:  { name: DescripciÃ³n Detallada, type: textarea_tag, params: size=80x5 maxlength=500 onkeyup=" return ismaxlength(this)"}
+      lonart:  { name: ., params: style=display:none}
+      monant:  { name: ., params: style=display:none}
+      valmon:  { name: ., params: style=display:none}
+      grid_faartfacpro:    { name: .}
+      js:     { name: .}
+      
+    list:
+      title:          Proforma
+      display:        [=reffac, fecfac, rifpro, nompro]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [reffac, fecfac, rifpro]
+      max_per_page:   10
+      sort:           reffac
+    edit:
+      title: EdiciÃ³n de Proforma
+      display:
+        Datos de la Proforma: [reffac, fecfac, _tipref, _tipmon, _rifpro, telpro, tipper, dirpro, _codconpag, desfac, monfac, _js]
+        Detalle de la Proforma: [_grid_faartfacpro, lonart, monant, valmon ]
+        #"Datos de la Factura": [codcaj, reffac, fecfac, _tipref, _tipmon, _rifpro, telpro, dirpro, tipper, _codconpag, desfac, monto, monrgo, mondesc, monfac, combo, refproform, proform, numcontrol]
+        #"Detalle": [listaart, _grid_fapeddes, _grid_faartfac, _grid_fadescart, totdesc, _grid_fargoart, totrec]
+        #"Forma de Pago": [_codtip, _grid_faforpag, moncan, monres, vuelto]
+        #"DescripciÃ³n Detallada/Sucursal": [observ, sucursal, usuarios, password]
+      #fields:
+        #reffac:
+        #  divclass:       divlado
+        #  label_width:    none
+        #fecfac:
+        #  divclass:   divotro
+      report:
+        url:         facturacion/rfarfacpreimp.php?m=m
+        params:      { codfacdes: reffac, codfachas: reffac }
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

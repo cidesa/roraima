@@ -152,9 +152,6 @@ echo $value ? $value : '&nbsp;'
 </div>
 </th>
 <th>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</th>
-<th>
 <div id="divfecfac">
   <?php echo label_for('fafactur[fecfac]', __($labels['fafactur{fecfac}' ]), 'class="required" Style="text-align:left; width:150px"') ?>
   <div class="content<?php if ($sf_request->hasError('fafactur{fecfac}')): ?> form-error<?php endif; ?>">
@@ -183,7 +180,64 @@ echo $value ? $value : '&nbsp;'
     </div>
 </div>
 </th>
+<th>
+<div id="divnumcontrol">
+  <?php echo label_for('fafactur[numcontrol]', __($labels['fafactur{numcontrol}' ]), 'class="required" Style="text-align:left; width:150px"') ?>
+  <div class="content<?php if ($sf_request->hasError('fafactur{numcontrol}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('fafactur{numcontrol}')): ?>
+    <?php echo form_error('fafactur{numcontrol}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($fafactur, 'getNumcontrol', array (
+	'size' => 20,
+	'control_name' => 'fafactur[numcontrol]',
+	'maxlength' => 8,
+	'readonly'  =>  $fafactur->getId()!='' ? true : false ,
+    #'onKeyPress' => "javascript:if (event.keyCode==13 || event.keyCode==9){document.getElementById('fafactur_fecfac').focus();}",
+    #'onBlur'  => "javascript:event.keyCode=13; enter(event,this.value);",
+));
+echo $value ? $value : '&nbsp;'
+?>
+ </div>
+</div>
+</th>
 </tr>
+
+  <tr style="display:<?php if($fafactur->getId()) echo 'none'; else echo '';?>">
+  <th>
+      <?php echo label_for('fafactur[refproform]', __($labels['fafactur{refproform}']), 'class="required" style="width: 150px"') ?>
+      <div class="content<?php if ($sf_request->hasError('fafactur{refproform}')): ?> form-error<?php endif; ?>">
+      <?php if ($sf_request->hasError('fafactur{refproform}')): ?>
+        <?php echo form_error('fafactur{refproform}', array('class' => 'form-error-msg')) ?>
+      <?php endif; ?>
+
+      <?php $value = object_checkbox_tag($fafactur, 'getRefproform', array (
+      'control_name' => 'fafactur[refproform]',
+        'onClick' => 'refproform()',
+    )); echo $value ? $value : '&nbsp;' ?>
+        </div>
+  </th>
+  <th id="thproform" style="display:<?php if(!$fafactur->getRefproform()) echo 'none'; else echo '';?>">
+      <?php echo label_for('fafactur[proform]', __($labels['fafactur{proform}']), 'class="required" style="width: 150px"') ?>
+      <div class="content<?php if ($sf_request->hasError('fafactur{proform}')): ?> form-error<?php endif; ?>">
+      <?php if ($sf_request->hasError('fafactur{proform}')): ?>
+        <?php echo form_error('fafactur{proform}', array('class' => 'form-error-msg')) ?>
+      <?php endif; ?>
+
+      <?php $value = object_input_tag($fafactur, 'getProform', array (
+      'control_name' => 'fafactur[proform]',
+       'onBlur'=> remote_function(array(
+        'update'  =>       'divgrid_faartfac',
+        'url'      => 'fafactur/ajax',
+        'complete' => 'AjaxJSON(request, json)',
+        'condition' => "$('fafactur_fecfac').value != '' && $('id').value == ''",
+        'with' => "'ajax=19&codigo='+this.value"))
+    )); echo $value ? $value : '&nbsp;' ?>
+        <?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Fafacturpro_reffac/clase/Fafacturpro/frame/sf_admin_edit_form/obj1/fafactur_proform/campo1/reffac/campo2/fecfac','','','buttoncat')?>
+        </div>
+
+  </th>
+  </tr>
 </table>
 
 <br/>
@@ -871,5 +925,18 @@ if (consul!="")
       if (!$(siguiente).readOnly) $(siguiente).focus();
      }
    }
+  }
+
+  function refproform()
+  {
+    if (!$('fafactur_refproform').checked)
+    {
+        $('fafactur_refproform').checked=false;
+        $('thproform').hide();
+    }else
+    {
+        $('thproform').show();
+    }
+
   }
 </script>

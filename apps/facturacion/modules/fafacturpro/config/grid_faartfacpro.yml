@@ -1,0 +1,269 @@
+opciones:                  # Opciones generales
+  eliminar:                true
+  tabla:                   faartfacpro
+  anchogrid:               900
+  ancho:                   900
+  filas:                   1
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Marque
+  tipo:                    k
+  nombrecampo:             check
+  esgrabable:			   true
+  html:                    [ ]
+2:       # Columna 2
+  titulo:                  Cod. Referencia
+  tipo:                    t
+  nombrecampo:             codref
+  esgrabable:              true
+  oculta:                  true
+  html:                    [size="10"]
+3:       # Columna 3
+  titulo:                  Cod. ArtÃ­culo
+  tipo:                    t
+  nombrecampo:             codart
+  esgrabable:              true
+  html:                    [size="20"]
+4:       # Columna 4
+  titulo:                  DescripciÃ³n
+  tipo:                    a
+  nombrecampo:             desart
+  esgrabable:              true
+  html:                    [size="30x1"]
+5:       # Columna 5
+  titulo:                  Unidad Medida
+  tipo:                    t
+  nombrecampo:             unimed
+  oculta:                  true
+  html:                    [size="15", readonly=true ]
+6:      # Columna 6
+  titulo:                  Existencia
+  tipo:                    m
+  nombrecampo:             exiart
+  oculta:                  true
+  html:                    [size="50", readonly=true  ]
+7:      # Columna 7
+  titulo:                  Cant. Solicitada
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             cantot
+  esnumerico:              true
+  oculta:                  false
+  html:                    [size="10"]
+8:      # Columna 8
+  titulo:                  Cant. a Entregar
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             canent
+  esnumerico:              true
+  oculta:                  true
+  html:                    [size="10"]
+9:     # Columna 9
+  titulo:                  Cant. Despachada
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             candesp
+  esnumerico:              true
+  oculta:                  true
+  html:                    [size="10"]
+10:     # Columna 10
+  titulo:                  Precio Precargado
+  tipo:                    c
+  nombrecampo:             precio
+  html:                    [ ]
+  esgrabable:              true
+11:      # Columna 11
+  titulo:                  Precio Editable
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             precioe
+  esnumerico:              true
+  oculta:                  false
+  html:                    [size="10" readonly=true]
+12:     # Columna 12
+  titulo:                  Monto Recargo
+  tipo:                    m
+  esgrabable:              true
+  oculta:                  true
+  nombrecampo:             monrgo
+  esnumerico:              true
+  html:                    [size="10"]
+13:     # Columna 13
+  titulo:                  Total
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             totart
+  esnumerico:              true
+  html:                    [size="10"]
+14:     # Columna 14
+  titulo:                  Cantidad
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             distot
+  esnumerico:              true
+  oculta:                  true
+  html:                    [size="10"]
+15:     # Columna 15
+  titulo:                  Precio Ant
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             preant
+  esnumerico:              true
+  oculta:                  true
+  html:                    [size="10"]
+16:     # Columna 16
+  titulo:                  Cant. Entre Art
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             canpreart
+  esnumerico:              true
+  oculta:                  true
+  html:                    [size="10"]
+17:     # Columna 17
+  titulo:                  Cta. Provee
+  tipo:                    t
+  esgrabable:              true
+  nombrecampo:             codctapro
+  oculta:                  true
+  html:                    [size="10"]
+18:     # Columna 18
+  titulo:                  Monto Descuento
+  tipo:                    m
+  esgrabable:              true
+  oculta:                  true
+  nombrecampo:             mondes
+  esnumerico:              true
+  html:                    [size="10" readonly=true]
+19:     # Columna 19
+  titulo:                  R
+  tipo:                    t
+  esgrabable:              true
+  nombrecampo:             recar
+  oculta:                  true
+  html:                    [size="10"]
+20:     # Columna 20
+  titulo:                  D
+  tipo:                    k
+  esgrabable:              true
+  nombrecampo:             desc
+  oculta:                  true
+  html:                    [ ]
+21:     # Columna 21
+  titulo:                  Blanco
+  tipo:                    t
+  esgrabable:              true
+  nombrecampo:             blanco1
+  oculta:                  true
+  html:                    [size="10"]
+22:     # Columna 22
+  titulo:                  Blanco2
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             blanco2
+  esnumerico:              true
+  oculta:                  true
+  html:                    [size="10"]
+23:       # Columna 23
+  titulo:                  NÂ° de Entrega
+  tipo:                    t
+  nombrecampo:             nronot
+  esgrabable:              true
+  html:                    [size="10" maxlength=8]
+24:       # Columna 24
+  titulo:                  Orden de Despacho
+  tipo:                    t
+  nombrecampo:             orddespacho
+  esgrabable:              true
+  oculta:                  true
+  html:                    [size="15" maxlength=8]
+25:       # Columna 25
+  titulo:                  GuÃ­a
+  tipo:                    t
+  nombrecampo:             guia
+  esgrabable:              true
+  oculta:                  true
+  html:                    [size="15" maxlength=10]
+26:       # Columna 26
+  titulo:                  Contenedores
+  tipo:                    a
+  nombrecampo:             contenedores
+  esgrabable:              true
+  oculta:                  true
+  html:                    [size="15x1" maxlength=100]
+27:       # Columna 27
+  titulo:                  BL
+  tipo:                    a
+  nombrecampo:             billleading
+  esgrabable:              true
+  oculta:                  true
+  html:                    [size="15x1" maxlength=100]
+28:       # Columna 28
+  titulo:                  Nro. de Transporte
+  tipo:                    t
+  nombrecampo:             numtransp
+  esgrabable:              true
+  html:                    [size="15" maxlength=10]
+29:       # Columna 29
+  titulo:                  Placa
+  tipo:                    t
+  nombrecampo:             placa
+  esgrabable:              true
+  html:                    [size="15" maxlength=10]
+30:       # Columna 30
+  titulo:                  Nombre del Conductor
+  tipo:                    t
+  nombrecampo:             chofer
+  esgrabable:              true
+  html:                    [size="60" maxlength=200]
+31:       # Columna 31
+  titulo:                  Fecha y Hora de Salida
+  tipo:                    f
+  nombrecampo:             fecsal
+  esgrabable:              true
+  html:                    [size="15" maxlength=20]
+32:       # Columna 33
+  titulo:                  Fecha y Hora de Llegada
+  tipo:                    f
+  nombrecampo:             feclleg
+  esgrabable:              true
+  html:                    [size="15" maxlength=20]
+33:       # Columna 33
+  titulo:                  Producto
+  tipo:                    t
+  nombrecampo:             prod
+  esgrabable:              true
+  html:                    [size="15" maxlength=100]
+34:       # Columna 34
+  titulo:                  Cantidad KG
+  tipo:                    m
+  nombrecampo:             kg
+  esgrabable:              true
+  esnumerico:              true
+  html:                    ["size=15 maxlength=10"]
+35:       # Columna 35
+  titulo:                  Cajas
+  tipo:                    m
+  nombrecampo:             cajas
+  esgrabable:              true
+  esnumerico:              true
+  html:                    ["size=15 maxlength=10"]
+36:       # Columna 36
+  titulo:                  Toneladas
+  tipo:                    m
+  nombrecampo:             tm
+  esgrabable:              true
+  esnumerico:              true
+  html:                    ["size=15 maxlength=10"]
+37:       # Columna 37
+  titulo:                  Estatus
+  tipo:                    c
+  nombrecampo:             estatus
+  esgrabable:              true
+  html:                    [ ]
+38:       # Columna 38
+  titulo:                  Observaciones
+  tipo:                    t
+  nombrecampo:             observaciones
+  esgrabable:              true
+  html:                    [ size="80" maxlength=500 ]
