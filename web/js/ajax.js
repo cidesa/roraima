@@ -1,3 +1,14 @@
+/**
+ * Librerías Javascript para el manejo del Ajax
+ *
+ * @package    Roraima
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ *
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
+ */
+
   //////////////////////////////////////////////////
   // Cargar una imagen de espera al ejecutar Ajax //
   //////////////////////////////////////////////////
@@ -103,13 +114,13 @@
 
   function toAjaxUpdater(div,indiceAjax,accion,valor,funcion,params)
   {
-    p='';
-    if (params!='')
+    /*p='';
+    if (params)
     {
 	  	for (key in params){
 	  	  p = p+'&'+key+'='+params[key];
 	  	}
-  	}
+  	}*/
     new Ajax.Updater(div, accion, {
         asynchronous:true,
         evalScripts:true,
@@ -119,7 +130,7 @@
                 try{eval(funcion);}
                 catch(ex){}
             },
-        parameters: 'ajax='+indiceAjax+'&id='+$('id').value+'&codigo='+valor+p
+        parameters: 'ajax='+indiceAjax+'&id='+$('id').value+'&codigo='+valor+params
         });
   }
 
