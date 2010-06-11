@@ -1167,7 +1167,7 @@ class fafacturActions extends autofafacturActions {
 			if ((date(('m'), strtotime($resul->getFecanu())) > date(('m'), strtotime($resul->getFecfac()))) || (date(('Y'), strtotime($resul->getFecanu())) > date(('Y'), strtotime($resul->getFecfac())))) {
 				Factura :: generarNotaCredito($resul->getReffac(), $fec, $resul->getMonfac());
 			}
-			Factura :: anularCxC($resul->getReffac(), $fec, $motanu);
+			Factura :: anularCxC(str_pad($resul->getReffac(),10,'0',STR_PAD_LEFT), $fec, $motanu);
 			Factura :: devolverArticulosExist($resul->getReffac());
 		}
 	   }

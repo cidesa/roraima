@@ -2,7 +2,7 @@ opciones:                  # Opciones generales
   eliminar:                false
   name:                    e
   tabla:                   Fapedido
-  anchogrid:               800
+  anchogrid:               750
   ancho:                   600
   filas:                   20
   titulo:                  ' '

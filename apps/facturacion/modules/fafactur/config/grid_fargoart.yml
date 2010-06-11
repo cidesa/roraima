@@ -2,7 +2,7 @@ opciones:                  # Opciones generales
   name:                    c
   eliminar:                true
   tabla:                   fargoart
-  anchogrid:               900
+  anchogrid:               750
   ancho:                   900
   filas:                   10
   titulo:                  ' '
