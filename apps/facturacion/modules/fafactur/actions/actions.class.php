@@ -6,15 +6,15 @@
  *
  * @package    Roraima
  * @subpackage fafactur
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: actions.class.php 38788 2010-06-11 20:59:55Z cramirez $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
 class fafacturActions extends autofafacturActions {
 	/**
-   * Función para colocar el codigo necesario en  
+   * Función para colocar el codigo necesario en
    * el proceso de edición.
    * Aquí se pueden buscar datos adicionales que necesite la vista
    * Esta función es parte de la acción executeEdit, que maneja tanto
@@ -94,8 +94,8 @@ class fafacturActions extends autofafacturActions {
                     $artfac = FaartfacproPeer :: doSelect($c);
                 }else
                 {
-		$c->add(FaartfacPeer :: REFFAC, $reffac);
-		$artfac = FaartfacPeer :: doSelect($c);
+                    $c->add(FaartfacPeer :: REFFAC, $reffac);
+                    $artfac = FaartfacPeer :: doSelect($c);
                 }
 		$mascara = $this->mascaraarticulo;
 		$lonarti = $this->lonart;
@@ -847,6 +847,7 @@ class fafacturActions extends autofafacturActions {
              break;
             case '19':
                         $javascript="";
+                        $monfac=0;
 		        $c = new Criteria();
                         $c->add(FafacturproPeer::REFFAC,$codigo);
                         $per = FafacturproPeer::doSelectOne($c);
@@ -862,7 +863,12 @@ class fafacturActions extends autofafacturActions {
                             $codconpag=$per->getCodconpag();
                             $desconpag=$per->getDesconpag();
                             $desfac=$per->getDesfac();
-                            $monfac=$per->getMonfac();
+                            $c = new Criteria();
+                            $c->add(FaartfacproPeer::REFFAC,$codigo);
+                            $c->add(FaartfacproPeer::ESTATUS,'A');
+                            $per2 = FaartfacproPeer::doSelect($c);
+                            foreach($per2 as $r)
+                                $monfac+=$r->getTotart();
                             $tipconpag=H::GetX('Id','Faconpag','Tipconpag',$codconpag);
                             if($tipper=='N')
                                 $javascript.="$('fafactur_tipper_N').disabled=false;
