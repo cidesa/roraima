@@ -175,28 +175,24 @@ opciones:                  # Opciones generales
   tipo:                    t
   nombrecampo:             orddespacho
   esgrabable:              true
-  oculta:                  true
   html:                    [size="15" maxlength=8]
 25:       # Columna 25
   titulo:                  Guía
   tipo:                    t
   nombrecampo:             guia
   esgrabable:              true
-  oculta:                  true
   html:                    [size="15" maxlength=10]
 26:       # Columna 26
   titulo:                  Contenedores
   tipo:                    a
   nombrecampo:             contenedores
   esgrabable:              true
-  oculta:                  true
   html:                    [size="15x1" maxlength=100]
 27:       # Columna 27
   titulo:                  BL
   tipo:                    a
   nombrecampo:             billleading
   esgrabable:              true
-  oculta:                  true
   html:                    [size="15x1" maxlength=100]
 28:       # Columna 28
   titulo:                  Nro. de Transporte
