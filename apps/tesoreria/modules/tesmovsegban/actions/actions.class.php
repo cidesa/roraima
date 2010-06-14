@@ -20,7 +20,8 @@ class tesmovsegbanActions extends autotesmovsegbanActions
   
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -155,8 +156,18 @@ $this->Bitacora('Guardo');
 	public function executeAnular()
 	{
 		$obj1=$this->getRequestParameter('obj1');
+                $obj2=$this->getRequestParameter('refban');
+                $obj3=$this->getRequestParameter('fecban');
+                $obj4=$this->getRequestParameter('tipmov');
+
+                $dateFormat = new sfDateFormat($this->getUser()->getCulture());
+                $fec = $dateFormat->format($obj3, 'i', $dateFormat->getInputPattern('d'));
+
 		$c = new Criteria();
 		$c->add(TsmovbanPeer::NUMCUE,$obj1);
+                $c->add(TsmovbanPeer::REFBAN,$obj2);
+                $c->add(TsmovbanPeer::FECBAN,$fec);
+                $c->add(TsmovbanPeer::TIPMOV,$obj4);
 		$this->tsmovban = TsmovbanPeer::doSelectOne($c);
 		sfView::SUCCESS;
 
@@ -164,18 +175,35 @@ $this->Bitacora('Guardo');
 
 	public function executeSalvaranu()
 	{
+            $this->msgpercer="";
+            $mes = substr($this->getRequestParameter('fecban'),5,2);
+            $ano = substr($this->getRequestParameter('fecban'),0,4);
+            if (Tesoreria::el_Banco_Esta_Cerrado($this->getRequestParameter('numcue'),$mes,$ano))
+            {
+              $this->msgpercer="El Movimiento no puede ser Eliminado ya que el periodo se encuentra cerrado.";
+            }
+            else
+            {
 		$c = new Criteria();
 		$c->add(TsmovbanPeer::NUMCUE,$this->getRequestParameter('numcue'));
+                $c->add(TsmovbanPeer::REFBAN,$this->getRequestParameter('refban'));
+                $c->add(TsmovbanPeer::FECBAN,$this->getRequestParameter('fecban'));
 		$tsmovban = TsmovbanPeer::doSelectOne($c);
 		if ($tsmovban)
 		{
+                    if ($tsmovban->getStacon()!='C') {
 			if ($tsmovban->getStatus()=='C')
 			{
 				$tsmovban->setStatus('A');
 				$tsmovban->save();
 			}
 		}
-		sfView::SUCCESS;
+                    else {
+                       $this->msgpercer="El Movimiento está Conciliado.";
+	}
+		}
+            }
+         return sfView::SUCCESS;
 	}
 
 
@@ -316,6 +344,39 @@ $this->Bitacora('Guardo');
     }
 
     return sfView::SUCCESS;
+  }
+
+  public function executeDelete()
+  {
+    $this->tsmovban = TsmovbanPeer::retrieveByPk($this->getRequestParameter('id'));
+    $this->forward404Unless($this->tsmovban);
+
+    try
+    {
+      $mes = substr($this->tsmovban->getFecban(),5,2);
+      $ano = substr($this->tsmovban->getFecban(),0,4);
+      if (Tesoreria::el_Banco_Esta_Cerrado($this->tsmovban->getNumcue(),$mes,$ano))
+      {
+        $this->getRequest()->setError('delete', 'El Movimiento no puede ser Eliminado ya que el periodo se encuentra cerrado.');
+        return $this->forward('tesmovsegban', 'list');
+      }else {
+          if ($this->tsmovban->getStacon()!='C')
+          {
+             $this->deleteTsmovban($this->tsmovban);
+             $this->Bitacora('Elimino');
+          }else {
+             $this->getRequest()->setError('delete', 'El Movimiento está Conciliado.');
+        return $this->forward('tesmovsegban', 'list');
+}
+      }
+    }
+    catch (PropelException $e)
+    {
+      $this->getRequest()->setError('delete', 'No se pudo borrar la registro seleccionado. Asegúrese de que no tiene ningún tipo de registros asociados.');
+      return $this->forward('tesmovsegban', 'list');
+    }
+
+    return $this->redirect('tesmovsegban/list');
   }
 
 }

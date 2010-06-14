@@ -21,7 +21,10 @@
   function CatalogoGrid()
   {
   	var obj1=document.getElementById('tsmovban_numcue').value;
-  	window.open('/tesoreria_dev.php/tesmovsegban/anular?obj1='+obj1,'...','menubar=no,toolbar=no,scrollbars=yes,width=500,height=300,resizable=yes,left=500,top=80')
+        var obj2=document.getElementById('tsmovban_refban').value;
+        var obj3=document.getElementById('tsmovban_fecban').value;
+        var obj4=document.getElementById('tsmovban_tipmov').value;
+  	window.open('/tesoreria_dev.php/tesmovsegban/anular?obj1='+obj1+'&refban='+obj2+'&fecban='+obj3+'&tipmov='+obj4,'...','menubar=no,toolbar=no,scrollbars=yes,width=500,height=300,resizable=yes,left=500,top=80')
   }
 </script>
 
@@ -178,12 +181,12 @@
 	<ul class="sf_admin_actions">
 		<li class="float-rigth"><?php if ($tsmovban->getId()): ?> <?php echo button_to(__('delete'), 'tesmovsegban/delete?id='.$tsmovban->getId(), array (
 	'post' => true,
-	'confirm' => __('Are you sure'),
+	'confirm' => __('Está seguro de Eliminar'),
 	'class' => 'sf_admin_action_delete',
 	)) ?><?php endif; ?></li>
 	 <li class="float-rigth">
       <?php if ($tsmovban->getId()!='') { ?>
-	<input type="button" name="Submit" value="Anular" onclick="javascript:CatalogoGrid();" />
+	<input type="button" name="Submit" value="Anular" class="sf_admin_action_delete" onclick="javascript:CatalogoGrid();" />
 <? } ?>
 	 </li>
 	</ul>
