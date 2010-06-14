@@ -7,7 +7,7 @@
  * @package    Roraima
  * @subpackage fafactur
  * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id: actions.class.php 38898 2010-06-14 17:33:13Z cramirez $
+ * @version SVN: $Id: actions.class.php 38941 2010-06-14 22:08:39Z cramirez $
  *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -140,8 +140,8 @@ class fafacturActions extends autofafacturActions {
 		$this->columnas[1][9]->setHTML('onChange=Precio3(this.id);');
 		$this->columnas[1][10]->setHTML('size="10" readonly=true onKeyPress=Precio2(event,this.id);');
 		$this->columnas[1][11]->setHTML(' size="10" onKeyPress=montorecargo(event,this.id);');
-		$this->columnas[1][11]->setEsTotal(true, 'fafactur_totmonrgo');
-		$this->columnas[1][12]->setEsTotal(true, 'fafactur_tottotart');
+		#$this->columnas[1][11]->setEsTotal(true, 'fafactur_totmonrgo');
+		#$this->columnas[1][12]->setEsTotal(true, 'fafactur_tottotart');
          if ($this->cambiolog!="S")
          {
          	/*$this->columnas[1][23]->setOculta(true);
