@@ -1015,7 +1015,7 @@
        if (!ValidarNumeroV2VE(precioe)) {$(precioe).value="0,00";}
        if (!ValidarNumeroV2VE(montrec)) {$(montrec).value="0,00";}
 
-       if ($(precio).value!="")
+       if ($(precio).value!="" && $(precio).value!="0,00")
        {var nprecio= toFloat(precio);}
        else {var nprecio= toFloat(precioe);}
 
@@ -1066,6 +1066,8 @@
     $('fafactur_monto').value=format(cal.toFixed(2),'.',',','.');
     $('fafactur_monrgo').value= format(totmonrec.toFixed(2),'.',',','.');
     $('fafactur_monres').value=format(montot.toFixed(2),'.',',','.');
+    $('fafactur_totmonrgo').value= format(totmonrec.toFixed(2),'.',',','.');
+    $('fafactur_tottotart').value=format(montot.toFixed(2),'.',',','.');
   }
 
   function marcados(tipo)
@@ -1127,7 +1129,7 @@
 
       if (($(precio).value!="" || $(precio).value!="0,00") && (ValidarNumeroV2VE(precio)==true || ValidarNumeroV2VE(precioe)==true))
       {
-        if ($(precio).value!="") {var nprecio= toFloat(precio);} else {var nprecio= toFloat(precioe);}
+        if ($(precio).value!="" && $(precio).value!="0,00") {var nprecio= toFloat(precio);} else {var nprecio= toFloat(precioe);}
         if (nprecio>0)
         {
          precios= precios + nprecio;
@@ -2562,12 +2564,17 @@
 				      var cant="ax_"+fi+"_"+colum;
 
                     if ($(precios)){
-				      if ($(precios).value!="") {var nprecio=toFloat(precios);}else {var nprecio=toFloat(precios2);}
+				      if ($(precios).value!="" && $(precios).value!='0,00') {var nprecio=toFloat(precios);}else {var nprecio=toFloat(precios2);}
 				      var ncant=toFloat(cant);
 
 				     var sumtot=nprecio*ncant;
                       $(monreg).value="0,00";
                       $(totales).value=format(sumtot.toFixed(2),'.',',','.');
+                      if(($(precios).value!='' && $(precios).value!='0,00') && $(precios2).readOnly==true)
+                         {
+                            var val= toFloat(precios);
+                            $(precios2).value=format(val.toFixed(2),'.',',','.');
+                         }
                       }
 					 fi++;
 					}
@@ -3081,13 +3088,18 @@
 		      var cant="ax_"+fi+"_"+colum;
 
              if ($(precio)){
-		      if ($(precio).value!=""){var nprecio=toFloat(precio);}else {var nprecio=toFloat(precio2);}
+		      if ($(precio).value!="" && $(precio).value!="0,00"){var nprecio=toFloat(precio);}else {var nprecio=toFloat(precio2);}
 		      var ncant=toFloat(cant);
 
 		     var sumtot=nprecio*ncant;
 	         $(monreg).value="0,00";
 	         $(totales).value=format(sumtot.toFixed(2),'.',',','.');
-	         }
+                 if(($(precio).value!='' && $(precio).value!='0,00') && $(precio2).readOnly==true)
+                 {
+                    var val= toFloat(precio);
+                    $(precio2).value=format(val.toFixed(2),'.',',','.');
+                 }
+             }
 			 fi++;
 			}
           }
@@ -3149,6 +3161,7 @@
           var productot=num0*num4;
           var resta=num1+productot;
           $(precio2).value=format(resta.toFixed(2),'.',',','.');
+          $(id).value=format(num1.toFixed(2),'.',',','.');
           montoTotal();
         }
 
@@ -3276,13 +3289,18 @@
 		         var precio2="ax_"+fi+"_11";
 		         var cant="ax_"+fi+"_"+colum;
                  if ($(precio)){
-		         if ($(precio).value!="") {var nprecio=toFloat(precio);}else {var nprecio=toFloat(precio2);}
+		         if ($(precio).value!="" && $(precio).value!="0,00") {var nprecio=toFloat(precio);}else {var nprecio=toFloat(precio2);}
 		         var ncant=toFloat(cant);
 
  		         var sumtot=nprecio*ncant;
 	             $(monreg).value="0,00";
 	             $(totales).value=format(sumtot.toFixed(2),'.',',','.');
-	             }
+                     if(($(precio).value!='' && $(precio).value!='0,00') && $(precio2).readOnly==true)
+                     {
+                        var val= toFloat(precio);
+                        $(precio2).value=format(val.toFixed(2),'.',',','.');
+                     }
+	          }
 			    fi++;
 			   }
             }
