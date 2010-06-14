@@ -4,9 +4,9 @@
  *
  * @package    Roraima
  * @subpackage facturacion
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: Factura.class.php 38899 2010-06-14 17:33:45Z cramirez $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -95,7 +95,7 @@ class Factura {
         {
           $correl=$numcomord;
         }else {
-      $correl=OrdendePago::Buscar_Correlativo();
+           $correl=OrdendePago::Buscar_Correlativo();
         }
       $fafactur->setNumcomord($correl);
 
@@ -687,7 +687,7 @@ class Factura {
         {
           $correl2=$numcomprobinv;
         }else {
-      $correl2=OrdendePago::Buscar_Correlativo();
+        $correl2=OrdendePago::Buscar_Correlativo();
         }
 
       $fafactur->setNumcominv($correl2);
@@ -875,10 +875,10 @@ class Factura {
     $fafactur->setCodcaj($tipocaja);
     $fafactur->save();
 
-    self::grabarDetalleFactura($fafactur,$grid1);
     self::grabarDescuentoArticulo($fafactur,$grid1,$grid2);
     self::grabarRecargoArticulo($fafactur,$grid1,$grid4);
     self::grabarFormaPago($fafactur,$grid3);
+    self::grabarDetalleFactura($fafactur,$grid1);
   }
 
   public static function grabarDetalleFactura($fafactur,$grid1)
@@ -923,6 +923,9 @@ class Factura {
 	     	}
 	     }
 	    }
+            $sqlrec="update fargoart set monrgo='".$x[$j]->getMonrgo()."'
+                     where codart='".$x[$j]->getCodart()."'";
+            H::insertarRegistros($sqlrec);
 	    $j++;
 	  }
     }

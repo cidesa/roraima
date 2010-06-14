@@ -38,9 +38,9 @@
     var num5=toFloat(porcrgo);
 
     if ($(precio).value!="")
-    { var num1=toFloat(precio); }
+    {var num1=toFloat(precio);}
     else
-    { var num1=toFloat(precioe); }
+    {var num1=toFloat(precioe);}
     var num2=toFloat(id);
 
    if (!validarnumero(id))
@@ -713,8 +713,8 @@
 	       var monrecar="cx_"+fila+"_4";
           if ($(precio)){
 	       if ($(precio).value!="")
-	       { var nprecio= toFloat(precio); }
-	       else { var nprecio= toFloat(precioe); }
+	       {var nprecio= toFloat(precio);}
+	       else {var nprecio= toFloat(precioe);}
            var ncant= toFloat(cant);
 
 	       if ($(precio).value!="" || $(precioe).value!="0,00")
@@ -738,8 +738,8 @@
 	                  var cant2="ax_"+i+"_"+colum;
                      if ($(precio2)){
 	                  if ($(precio2).value!="")
-	                  { var nprecio2= toFloat(precio2); }
-	                  else { nprecio2= toFloat(precioe2); }
+	                  {var nprecio2= toFloat(precio2);}
+	                  else {nprecio2= toFloat(precioe2);}
 	                  var ncant2= toFloat(cant2);
 
 	                  new Ajax.Request(getUrlModuloAjax(), {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=6&articulo='+codart+'&recargo='+codrgo})
@@ -807,8 +807,8 @@
 	                 }
 
                    }
-	             } else { monuni=0;}
-	           }else { monuni=0;}
+	             } else {monuni=0;}
+	           }else {monuni=0;}
 	         }
 	         else
 	         {
@@ -825,8 +825,8 @@
                   var cant2="ax_"+i+"_"+colum;
                   if ($(precio2)){
                   if ($(precio2).value!="")
-                  { var nprecio2= toFloat(precio2); }
-                  else { nprecio2= toFloat(precioe2); }
+                  {var nprecio2= toFloat(precio2);}
+                  else {nprecio2= toFloat(precioe2);}
                   var ncant2= toFloat(cant2);
 
                   new Ajax.Request(getUrlModuloAjax(), {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=6&articulo='+codart+'&recargo='+codrgo})
@@ -901,8 +901,8 @@
 
          if ($(precio)){
          if ($(precio).value!="")
-         { var nprecio= toFloat(precio); }
-         else { var nprecio= toFloat(precioe); }
+         {var nprecio= toFloat(precio);}
+         else {var nprecio= toFloat(precioe);}
 
          var ncant= toFloat(cant);
 
@@ -934,8 +934,8 @@
 
       if ($(precio)){
        if ($(precio).value!="")
-       { var nprecio= toFloat(precio); }
-       else { var nprecio= toFloat(precioe); }
+       {var nprecio= toFloat(precio);}
+       else {var nprecio= toFloat(precioe);}
 
        var ncant= toFloat(cant);
 
@@ -970,8 +970,8 @@
        var cant="ax_"+fil+"_"+colum;
       if ($(precio)){
        if ($(precio).value!="")
-       { var nprecio= toFloat(precio); }
-       else { var nprecio= toFloat(precioe); }
+       {var nprecio= toFloat(precio);}
+       else {var nprecio= toFloat(precioe);}
 
        var ncant= toFloat(cant);
 
@@ -1010,14 +1010,14 @@
 
       if ($(totart).value!="" && (ValidarNumeroV2VE(totart)==true))
       {
-       if (!ValidarNumeroV2VE(cant)) { $(cant).value="0,00";}
-       if (!ValidarNumeroV2VE(precio)) { $(precio).value="0,00";}
-       if (!ValidarNumeroV2VE(precioe)) { $(precioe).value="0,00";}
-       if (!ValidarNumeroV2VE(montrec)) { $(montrec).value="0,00";}
+       if (!ValidarNumeroV2VE(cant)) {$(cant).value="0,00";}
+       if (!ValidarNumeroV2VE(precio)) {$(precio).value="0,00";}
+       if (!ValidarNumeroV2VE(precioe)) {$(precioe).value="0,00";}
+       if (!ValidarNumeroV2VE(montrec)) {$(montrec).value="0,00";}
 
        if ($(precio).value!="")
-       { var nprecio= toFloat(precio); }
-       else { var nprecio= toFloat(precioe); }
+       {var nprecio= toFloat(precio);}
+       else {var nprecio= toFloat(precioe);}
 
        var ncant= toFloat(cant);
        var nmonrec= toFloat(montrec);
@@ -1056,7 +1056,7 @@
 		  }
       }
       montot= montot - totaldesc;
-    }else { montot=0;}
+    }else {montot=0;}
 
     $('fafactur_monfac').value=format(montot.toFixed(2),'.',',','.');
     var ntotmonrgo=toFloat('fafactur_totmonrgo');
@@ -1064,7 +1064,7 @@
 
     var cal= tottotal - totmonrec
     $('fafactur_monto').value=format(cal.toFixed(2),'.',',','.');
-    $('fafactur_monrgo').value= format(ntotmonrgo.toFixed(2),'.',',','.');
+    $('fafactur_monrgo').value= format(totmonrec.toFixed(2),'.',',','.');
     $('fafactur_monres').value=format(montot.toFixed(2),'.',',','.');
   }
 
@@ -1074,7 +1074,7 @@
     if (tipo=='R')
     {
       var indice='1';
-    } else { var indice='20';}
+    } else {var indice='20';}
 
     var regart=totalregistros2('ax',3,25);
     var fil=0;
@@ -1127,7 +1127,7 @@
 
       if (($(precio).value!="" || $(precio).value!="0,00") && (ValidarNumeroV2VE(precio)==true || ValidarNumeroV2VE(precioe)==true))
       {
-        if ($(precio).value!="") { var nprecio= toFloat(precio); } else { var nprecio= toFloat(precioe); }
+        if ($(precio).value!="") {var nprecio= toFloat(precio);} else {var nprecio= toFloat(precioe);}
         if (nprecio>0)
         {
          precios= precios + nprecio;
@@ -1277,7 +1277,7 @@
 	      var cant2="ax_"+i+"_"+colum;
 	      if ($(codart)){
 
-	      if ($(precio2).value!="") { var nprecio2= toFloat(precio2); }else { nprecio2= toFloat(precioe2); }
+	      if ($(precio2).value!="") {var nprecio2= toFloat(precio2);}else {nprecio2= toFloat(precioe2);}
 	      var ncant2= toFloat(cant2);
 
 	      new Ajax.Request(getUrlModuloAjax(), {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=6&articulo='+codart+'&recargo='+codrgo})
@@ -1310,7 +1310,7 @@
       var cant2="ax_"+i+"_"+colum;
 
      if ($(codart)){
-      if ($(precio2).value!="") { var nprecio2= toFloat(precio2); }else { nprecio2= toFloat(precioe2); }
+      if ($(precio2).value!="") {var nprecio2= toFloat(precio2);}else {nprecio2= toFloat(precioe2);}
       var ncant2= toFloat(cant2);
 
       if ($(check).checked==true)
@@ -1510,7 +1510,7 @@
 	     var cant="ax_"+fil+"_"+colum;
 
        if ($(precio)){
-	     if ($(precio).value!="") { var col9=toFloat(precio); }else { var col9=toFloat(precioe);}
+	     if ($(precio).value!="") {var col9=toFloat(precio);}else {var col9=toFloat(precioe);}
          var colcant=toFloat(cant);
 
          var calculo= colcant * col9;
@@ -1684,7 +1684,7 @@
     if (cuantos>0)
     {
       $('fafactur_totdesc').value=format(miTot.toFixed(2),'.',',','.');
-    }else { $('fafactur_totdesc').value="0,00"; }
+    }else {$('fafactur_totdesc').value="0,00";}
 
 
 
@@ -1716,9 +1716,9 @@
       var precioe2="ax_"+fila+"_11";
      if ($(cant)){
       var ncant= toFloat(cant);
-      if ($(precio).value!="") { var nprecio= toFloat(precio); }else { var nprecio= toFloat(precioe); }
+      if ($(precio).value!="") {var nprecio= toFloat(precio);}else {var nprecio= toFloat(precioe);}
       var ncant2= toFloat(cant2);
-      if ($(precio2).value!="") { var nprecio2= toFloat(precio2); }else { var nprecio2= toFloat(precioe2); }
+      if ($(precio2).value!="") {var nprecio2= toFloat(precio2);}else {var nprecio2= toFloat(precioe2);}
 
       if ($(totart).value!="" && (!ValidarNumeroV2VE(totart)))
       {
@@ -1942,7 +1942,7 @@
       }
       var cuantos=marcados("D");
 
-      if (cuantos==0) { cuantos=1;}
+      if (cuantos==0) {cuantos=1;}
       if ($(tipdesc).value=='M')
       {
         var totfac=totalFactura();
@@ -1992,9 +1992,9 @@
      if ($(totart)){
       if ($(totart).value!="" && (ValidarNumeroV2VE(totart)==true))
       {
-       if (!ValidarNumeroV2VE(cant)) { $(cant).value="0,00";}
+       if (!ValidarNumeroV2VE(cant)) {$(cant).value="0,00";}
 
-       if ($(precio).value!="") { var nprecio= toFloat(precio); }else { var nprecio= toFloat(precioe); }
+       if ($(precio).value!="") {var nprecio= toFloat(precio);}else {var nprecio= toFloat(precioe);}
        var ncant= toFloat(cant);
         montot= montot + (nprecio * cant);
       }
@@ -2490,7 +2490,7 @@
 
    var am=totalregistros2('ax',3,25);
 
-     if ($(precio).value!="") { var num4= toFloat(precio); }else { var num4= toFloat(precioe); }
+     if ($(precio).value!="") {var num4= toFloat(precio);}else {var num4= toFloat(precioe);}
      var num1=toFloat(id);
      var num3=toFloat(distot);
  if (am>0)
@@ -2562,7 +2562,7 @@
 				      var cant="ax_"+fi+"_"+colum;
 
                     if ($(precios)){
-				      if ($(precios).value!="") { var nprecio=toFloat(precios); }else {  var nprecio=toFloat(precios2);}
+				      if ($(precios).value!="") {var nprecio=toFloat(precios);}else {var nprecio=toFloat(precios2);}
 				      var ncant=toFloat(cant);
 
 				     var sumtot=nprecio*ncant;
@@ -2775,7 +2775,7 @@
 
    var am=totalregistros('ax',3,25);
 
-   if ($(precio).value!="") { var num4=toFloat(precio); }else { var num4=toFloat(precio2);}
+   if ($(precio).value!="") {var num4=toFloat(precio);}else {var num4=toFloat(precio2);}
    var num1=toFloat(id);
    var num0=toFloat(cansol);
    var num3=toFloat(distot);
@@ -2877,7 +2877,7 @@
 				      var cant="ax_"+fi+"_"+colum;
 
                      if ($(precios)){
-				      if ($(precios).value!="") { var nprecio=toFloat(precios); }else{ var nprecio=toFloat(precios2); }
+				      if ($(precios).value!="") {var nprecio=toFloat(precios);}else{var nprecio=toFloat(precios2);}
 				      var ncant=toFloat(cant);
 
 				      var sumtot=nprecio*ncant;
@@ -2946,7 +2946,7 @@
     var precio=name+"_"+fil+"_"+colprec;
     var precio2=name+"_"+fil+"_"+colprec2;
 
-   if ($(precio).value!="") { var num4=toFloat(precio); }else { var num4=toFloat(precio2);}
+   if ($(precio).value!="") {var num4=toFloat(precio);}else {var num4=toFloat(precio2);}
    var num1=toFloat(id);
    var num0=toFloat(cansol);
    var num3=toFloat(distot);
@@ -2988,7 +2988,7 @@
 		      var cant="ax_"+fi+"_"+colum;
 
              if ($(precios)){
-              if ($(precios).value!="") { nprecio=toFloat(precios); }else { var nprecio=toFloat(precios2);}
+              if ($(precios).value!="") {nprecio=toFloat(precios);}else {var nprecio=toFloat(precios2);}
 		      var ncant=toFloat(cant);
 
 		     var sumtot=nprecio*ncant;
@@ -3081,7 +3081,7 @@
 		      var cant="ax_"+fi+"_"+colum;
 
              if ($(precio)){
-		      if ($(precio).value!=""){ var nprecio=toFloat(precio); }else { var nprecio=toFloat(precio2);}
+		      if ($(precio).value!=""){var nprecio=toFloat(precio);}else {var nprecio=toFloat(precio2);}
 		      var ncant=toFloat(cant);
 
 		     var sumtot=nprecio*ncant;
@@ -3122,34 +3122,33 @@
 	    var colcanpreart=col+7;
 	    var colcansol=col-2;
 	    var colart=col-6;
+            var colprecf=col-2;
 	    var colprec=col-1;
 	    var colprec2=col+1;
 	    var colexis=col-3;
+            var num4=0;
 
 	    var total=name+"_"+fil+"_"+coltotal;
 	    var codart=name+"_"+fil+"_"+colart;
 	    var exist=name+"_"+fil+"_"+colexis;
 	    var cod=$(codart).value;
+            var preciof=name+"_"+fil+"_"+colprecf;
 	    var precio=name+"_"+fil+"_"+colprec;
 	    var precio2=name+"_"+fil+"_"+colprec2;
 
         var colum=determinarReferenciaDoc($('fafactur_tipref').value);
 	    var canti=name+"_"+fil+"_"+colum;
 
-        if ($(precio).value!="") { var num4=toFloat(precio); }else { var num4=toFloat(precio2); }
+        if ($(precio).value!="" && $(precio).value!="0,00") { num4=toFloat(precio);}else { num4=toFloat(preciof);}
         var num1=toFloat(id);
         var num0=toFloat(canti);
 
         if (($(precio).value!="" || $(precio2).value!="0,00") && $(canti).value!="")
         {
-        //cambio de moneda
-          var producto=num0*num4;
-          $(precio).value=format(producto.toFixed(2),'.',',','.');
-          producto=$(id).value;
-          var num2=toFloat(precio);
-          var resta=num2+num1;
-          $(id).value=format(producto.toFixed(2),'.',',','.');
-          $(precio).value=format(resta.toFixed(2),'.',',','.');
+         //cambio de moneda
+          var productot=num0*num4;
+          var resta=num1+productot;
+          $(precio2).value=format(resta.toFixed(2),'.',',','.');
           montoTotal();
         }
 
@@ -3277,7 +3276,7 @@
 		         var precio2="ax_"+fi+"_11";
 		         var cant="ax_"+fi+"_"+colum;
                  if ($(precio)){
-		         if ($(precio).value!="") { var nprecio=toFloat(precio); }else { var nprecio=toFloat(precio2);}
+		         if ($(precio).value!="") {var nprecio=toFloat(precio);}else {var nprecio=toFloat(precio2);}
 		         var ncant=toFloat(cant);
 
  		         var sumtot=nprecio*ncant;
