@@ -66,10 +66,10 @@ abstract class BaseOptipretPeer {
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codtip' => 0, 'Destip' => 1, 'Codcon' => 2, 'Basimp' => 3, 'Porret' => 4, 'Unitri' => 5, 'Porsus' => 6, 'Factor' => 7, 'Codtipsen' => 8, 'Id' => 9, ),
-		BasePeer::TYPE_COLNAME => array (OptipretPeer::CODTIP => 0, OptipretPeer::DESTIP => 1, OptipretPeer::CODCON => 2, OptipretPeer::BASIMP => 3, OptipretPeer::PORRET => 4, OptipretPeer::UNITRI => 5, OptipretPeer::PORSUS => 6, OptipretPeer::FACTOR => 7, OptipretPeer::CODTIPSEN => 8, OptipretPeer::ID => 9, ),
-		BasePeer::TYPE_FIELDNAME => array ('codtip' => 0, 'destip' => 1, 'codcon' => 2, 'basimp' => 3, 'porret' => 4, 'unitri' => 5, 'porsus' => 6, 'factor' => 7, 'codtipsen' => 8, 'id' => 9, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
+		BasePeer::TYPE_PHPNAME => array ('Codtip' => 0, 'Destip' => 1, 'Codcon' => 2, 'Basimp' => 3, 'Porret' => 4, 'Unitri' => 5, 'Porsus' => 6, 'Factor' => 7, 'Codtipsen' => 8, 'Mbasmi' => 9, 'Id' => 10, ),
+		BasePeer::TYPE_COLNAME => array (OptipretPeer::CODTIP => 0, OptipretPeer::DESTIP => 1, OptipretPeer::CODCON => 2, OptipretPeer::BASIMP => 3, OptipretPeer::PORRET => 4, OptipretPeer::UNITRI => 5, OptipretPeer::PORSUS => 6, OptipretPeer::FACTOR => 7, OptipretPeer::CODTIPSEN => 8, OptipretPeer::MBASMI => 9, OptipretPeer::ID => 10, ),
+		BasePeer::TYPE_FIELDNAME => array ('codtip' => 0, 'destip' => 1, 'codcon' => 2, 'basimp' => 3, 'porret' => 4, 'unitri' => 5, 'porsus' => 6, 'factor' => 7, 'codtipsen' => 8, 'mbasmi' => 9, 'id' => 10, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
 	);
 
 	
