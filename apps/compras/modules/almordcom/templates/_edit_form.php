@@ -11,7 +11,7 @@
 ?>
 <?php echo form_tag('almordcom/edit', array(
   'id'        => 'sf_admin_edit_form',
-  'name'      => 'sf_admin_edit_form',
+  'name'      => 'sf_admin_edit_form',don
   'multipart' => true,
 )) ?>
 
@@ -43,6 +43,7 @@
 <?php echo input_hidden_tag('caordcom[tipopro]', $caordcom->getTipopro()) ?>
 <?php echo input_hidden_tag('caordcom[compro]', $caordcom->getCompro()) ?>
 <?php echo input_hidden_tag('fechaanuserv', $fechaanuserv) ?>
+<?php echo input_hidden_tag('caordcom[manorddon]', $caordcom->getManorddon()) ?>
 
 <input id="codigo_presupuestario_sin_disponibilidad" name="codigo_presupuestario_sin_disponibilidad" type="hidden">
 <script language="JavaScript" type="text/javascript">
@@ -891,12 +892,133 @@ echo grid_tag($obj_recargos);
 </div>
 
 </fieldset>
+
 <?php tabPageOpenClose("tp1", "tabPage10", 'Resumen por Partida Presupuestaria');?>
 <fieldset>
 <div class="form-row">
 <?php echo grid_tag($obj_respartidas);?>
 </div>
 </fieldset>
+
+<?php if ($caordcom->getManorddon()=='S') tabPageOpenClose("tp1", "tabPage11", 'Datos del Beneficiario de la Donación');?>
+<div id="datbendon" style="display:none">
+<fieldset>
+<div class="form-row">
+<?php echo label_for('caordcom[tipocom]', __($labels['caordcom{tipocom}']), 'class="required" style="width: 150px"') ?>
+  <div class="content<?php if ($sf_request->hasError('caordcom{tipocom}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('caordcom{tipocom}')): ?>
+    <?php echo form_error('caordcom{tipocom}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($caordcom, 'getTipocom', array (
+  'size' => 60,
+  'maxlength' => 50,
+  'control_name' => 'caordcom[tipocom]',
+)); echo $value ? $value : '&nbsp;' ?>
+</div>
+
+<br>
+
+<?php echo label_for('caordcom[ceddon]', __($labels['caordcom{ceddon}']), 'class="required" style="width: 150px"') ?>
+  <div class="content<?php if ($sf_request->hasError('caordcom{ceddon}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('caordcom{ceddon}')): ?>
+    <?php echo form_error('caordcom{ceddon}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($caordcom, 'getCeddon', array (
+  'size' => 15,
+  'maxlength' => 15,
+  'control_name' => 'caordcom[ceddon]',
+)); echo $value ? $value : '&nbsp;' ?>
+</div>
+
+<br>
+
+<?php echo label_for('caordcom[nomdon]', __($labels['caordcom{nomdon}']), 'class="required" style="width: 150px"') ?>
+  <div class="content<?php if ($sf_request->hasError('caordcom{nomdon}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('caordcom{nomdon}')): ?>
+    <?php echo form_error('caordcom{nomdon}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($caordcom, 'getNomdon', array (
+  'size' => 60,
+  'maxlength' => 50,
+  'control_name' => 'caordcom[nomdon]',
+)); echo $value ? $value : '&nbsp;' ?>
+</div>
+
+<br>
+
+<?php echo label_for('caordcom[sexdon]', __($labels['caordcom{sexdon}']), 'class="required" style="width: 150px"') ?>
+  <div class="content<?php if ($sf_request->hasError('caordcom{sexdon}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('caordcom{sexdon}')): ?>
+    <?php echo form_error('caordcom{sexdon}', array('class' => 'form-error-msg')) ?>
+    <?php endif; ?>
+
+    <? if ($caordcom->getSexdon()=='M')  {
+      ?><?php echo radiobutton_tag('caordcom[sexdon]', 'M', true)        ."   Masculino".'&nbsp;&nbsp;';
+          echo radiobutton_tag('caordcom[sexdon]', 'F', false)."     Femenino";?>
+        <?
+    }else{
+      echo radiobutton_tag('caordcom[sexdon]', 'M', false)        ."Masculino".'&nbsp;&nbsp;';
+      echo radiobutton_tag('caordcom[sexdon]', 'F', true)."   Femenino";
+
+    } ?>
+  </div>
+
+<br>
+
+<?php echo label_for('caordcom[fecdon]', __($labels['caordcom{fecdon}']), 'class="required" style="width: 150px"') ?>
+  <div class="content<?php if ($sf_request->hasError('caordcom{fecdon}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('caordcom{fecdon}')): ?>
+    <?php echo form_error('caordcom{fecdon}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_date_tag($caordcom, 'getFecdon', array (
+  'rich' => true,
+  'maxlength' => 10,
+  'size' => 10,
+  'calendar_button_img' => '/sf/sf_admin/images/date.png',
+  'control_name' => 'caordcom[fecdon]',
+  'date_format' => 'dd/MM/yy',
+  'onkeyup' => "javascript: mascara(this,'/',patron,true)",
+  'onChange'=> remote_function(array(
+        'url'      => 'almordcom/ajax',
+        'complete' => 'AjaxJSON(request, json)',
+          'with' => "'ajax=18&cajtexmos=caordcom_edadon&codigo='+this.value"
+        ))
+)); echo $value ? $value : '&nbsp;' ?>
+</div>
+
+<br>
+
+<?php echo label_for('caordcom[edadon]', __($labels['caordcom{edadon}']), 'class="required" style="width: 150px"') ?>
+  <div class="content<?php if ($sf_request->hasError('caordcom{edadon}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('caordcom{edadon}')): ?>
+    <?php echo form_error('caordcom{edadon}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($caordcom, 'getEdaact', array (
+  'size' => 3,
+  'readonly' => true,
+  'control_name' => 'caordcom[edadon]',
+)); echo $value ? $value : '&nbsp;' ?>
+</div>
+
+<br>
+
+ <?php echo label_for('caordcom[serdon]', __($labels['caordcom{serdon}']), 'class="required" style="width: 150px"') ?>
+  <div class="content<?php if ($sf_request->hasError('caordcom{serdon}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('caordcom{serdon}')): ?>
+    <?php echo form_error('caordcom{serdon}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php echo select_tag('caordcom[serdon]', options_for_select(array('M' => 'Medicina', 'T' => 'Materiales', 'O' => 'Otro'),$caordcom->getSerdon(),'include_custom=Seleccione Uno')) ?>
+  </div>
+</div>
+</fieldset>
+</div>
+
 <?php tabInit();?>
 <?php include_partial('edit_actions', array('caordcom' => $caordcom)) ?>
 </form>
@@ -946,7 +1068,9 @@ if (nuevo!="")
   	$('caordcom_fecord').readOnly=true;
   }
 
-
+  var manorddon='<?php echo $caordcom->getManorddon();?>';
+  if (manorddon=='S')
+      $('datbendon').show();
 
  // if ($('caordcom_refsol').value=='') $('div_solicitud').hide();
    if ($('id').value=='' ||  $('caordcom_refsol').value=='')  $('div_solicitud').hide();

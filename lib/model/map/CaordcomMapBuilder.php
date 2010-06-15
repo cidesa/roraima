@@ -118,6 +118,20 @@ class CaordcomMapBuilder {
 
 		$tMap->addColumn('CODCEN', 'Codcen', 'string', CreoleTypes::VARCHAR, false, 4);
 
+		$tMap->addColumn('TIPOCOM', 'Tipocom', 'string', CreoleTypes::VARCHAR, false, 50);
+
+		$tMap->addColumn('CEDDON', 'Ceddon', 'string', CreoleTypes::VARCHAR, false, 15);
+
+		$tMap->addColumn('NOMDON', 'Nomdon', 'string', CreoleTypes::VARCHAR, false, 50);
+
+		$tMap->addColumn('FECDON', 'Fecdon', 'int', CreoleTypes::DATE, false, null);
+
+		$tMap->addColumn('SEXDON', 'Sexdon', 'string', CreoleTypes::VARCHAR, false, 1);
+
+		$tMap->addColumn('EDADON', 'Edadon', 'double', CreoleTypes::NUMERIC, false, 2);
+
+		$tMap->addColumn('SERDON', 'Serdon', 'string', CreoleTypes::VARCHAR, false, 1);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

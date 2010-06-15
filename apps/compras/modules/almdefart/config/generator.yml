@@ -27,7 +27,7 @@ generator:
       almcorre:  { name: Traspaso de Artículos}
       corent: { name: Entradas de Almacén }
       corsal: { name: Salidas de Almacén }
-
+      tipodoc: { name: Tipo OC de Donación }
 
       prcasopre: { name: Afectación Presupuestaria (Precompromiso)}
       prcreqapr: { name: Requiere Aprobación}
@@ -44,7 +44,7 @@ generator:
       corext: { name: Extranjeros}
     edit:
       title:         Definición de Artículos
-      display:        [codemp, nomemp, diremp, tlfemp, lonart, rupart, forart, desart, forubi, desubi, generaop, generacom, asiparrec, corcom, correc2, correq2, cordes2, corser, corsol, corcot2, prcasopre, prcreqapr, comasopre, comreqapr, almcorre, forsnc, dessnc, reqreqapr, solreqapr, corent, corsal, gencorart, tipdocpre, cornac, corext]
+      display:        [codemp, nomemp, diremp, tlfemp, lonart, rupart, forart, desart, forubi, desubi, generaop, generacom, asiparrec, corcom, correc2, correq2, cordes2, corser, corsol, corcot2, prcasopre, prcreqapr, comasopre, comreqapr, almcorre, forsnc, dessnc, reqreqapr, solreqapr, corent, corsal, gencorart, tipdocpre, cornac, corext, tipodoc]
       fields:
         generaop:  {type: checkbox_tag}
         generacom: {type: checkbox_tag}

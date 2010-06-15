@@ -177,6 +177,34 @@ abstract class BaseCaordcom extends BaseObject  implements Persistent {
 
 
 
+	protected $tipocom;
+
+
+	
+	protected $ceddon;
+
+
+	
+	protected $nomdon;
+
+
+	
+	protected $fecdon;
+
+
+	
+	protected $sexdon;
+
+
+	
+	protected $edadon;
+
+
+	
+	protected $serdon;
+
+
+	
 	protected $id;
 
 	
@@ -540,6 +568,71 @@ abstract class BaseCaordcom extends BaseObject  implements Persistent {
 
   }
 
+  public function getTipocom()
+  {
+
+    return trim($this->tipocom);
+
+  }
+  
+  public function getCeddon()
+  {
+
+    return trim($this->ceddon);
+
+  }
+  
+  public function getNomdon()
+  {
+
+    return trim($this->nomdon);
+
+  }
+  
+  public function getFecdon($format = 'Y-m-d')
+  {
+
+    if ($this->fecdon === null || $this->fecdon === '') {
+      return null;
+    } elseif (!is_int($this->fecdon)) {
+            $ts = adodb_strtotime($this->fecdon);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecdon] as date/time value: " . var_export($this->fecdon, true));
+      }
+    } else {
+      $ts = $this->fecdon;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getSexdon()
+  {
+
+    return trim($this->sexdon);
+
+  }
+  
+  public function getEdadon($val=false)
+  {
+
+    if($val) return number_format($this->edadon,2,',','.');
+    else return $this->edadon;
+
+  }
+  
+  public function getSerdon()
+  {
+
+    return trim($this->serdon);
+
+  }
+  
   public function getId()
   {
 
@@ -1019,6 +1112,88 @@ abstract class BaseCaordcom extends BaseObject  implements Persistent {
 
 	}
 
+	public function setTipocom($v)
+	{
+
+    if ($this->tipocom !== $v) {
+        $this->tipocom = $v;
+        $this->modifiedColumns[] = CaordcomPeer::TIPOCOM;
+      }
+  
+	} 
+	
+	public function setCeddon($v)
+	{
+
+    if ($this->ceddon !== $v) {
+        $this->ceddon = $v;
+        $this->modifiedColumns[] = CaordcomPeer::CEDDON;
+      }
+  
+	} 
+	
+	public function setNomdon($v)
+	{
+
+    if ($this->nomdon !== $v) {
+        $this->nomdon = $v;
+        $this->modifiedColumns[] = CaordcomPeer::NOMDON;
+      }
+  
+	} 
+	
+	public function setFecdon($v)
+	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecdon] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecdon !== $ts) {
+      $this->fecdon = $ts;
+      $this->modifiedColumns[] = CaordcomPeer::FECDON;
+    }
+
+	} 
+	
+	public function setSexdon($v)
+	{
+
+    if ($this->sexdon !== $v) {
+        $this->sexdon = $v;
+        $this->modifiedColumns[] = CaordcomPeer::SEXDON;
+      }
+  
+	} 
+	
+	public function setEdadon($v)
+	{
+
+    if ($this->edadon !== $v) {
+        $this->edadon = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaordcomPeer::EDADON;
+      }
+  
+	} 
+	
+	public function setSerdon($v)
+	{
+
+    if ($this->serdon !== $v) {
+        $this->serdon = $v;
+        $this->modifiedColumns[] = CaordcomPeer::SERDON;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -1117,7 +1292,21 @@ abstract class BaseCaordcom extends BaseObject  implements Persistent {
 
       $this->codcen = $rs->getString($startcol + 41);
 
-      $this->id = $rs->getInt($startcol + 42);
+      $this->tipocom = $rs->getString($startcol + 42);
+
+      $this->ceddon = $rs->getString($startcol + 43);
+
+      $this->nomdon = $rs->getString($startcol + 44);
+
+      $this->fecdon = $rs->getDate($startcol + 45, null);
+
+      $this->sexdon = $rs->getString($startcol + 46);
+
+      $this->edadon = $rs->getFloat($startcol + 47);
+
+      $this->serdon = $rs->getString($startcol + 48);
+
+      $this->id = $rs->getInt($startcol + 49);
 
       $this->resetModified();
 
@@ -1125,7 +1314,7 @@ abstract class BaseCaordcom extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 43;
+            return $startcol + 50; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Caordcom object", $e);
     }
@@ -1455,6 +1644,27 @@ abstract class BaseCaordcom extends BaseObject  implements Persistent {
 				return $this->getCodcen();
 				break;
 			case 42:
+				return $this->getTipocom();
+				break;
+			case 43:
+				return $this->getCeddon();
+				break;
+			case 44:
+				return $this->getNomdon();
+				break;
+			case 45:
+				return $this->getFecdon();
+				break;
+			case 46:
+				return $this->getSexdon();
+				break;
+			case 47:
+				return $this->getEdadon();
+				break;
+			case 48:
+				return $this->getSerdon();
+				break;
+			case 49:
 				return $this->getId();
 				break;
 			default:
@@ -1509,7 +1719,14 @@ abstract class BaseCaordcom extends BaseObject  implements Persistent {
 			$keys[39] => $this->getFecsigecof(),
 			$keys[40] => $this->getExpsigecof(),
 			$keys[41] => $this->getCodcen(),
-			$keys[42] => $this->getId(),
+			$keys[42] => $this->getTipocom(),
+			$keys[43] => $this->getCeddon(),
+			$keys[44] => $this->getNomdon(),
+			$keys[45] => $this->getFecdon(),
+			$keys[46] => $this->getSexdon(),
+			$keys[47] => $this->getEdadon(),
+			$keys[48] => $this->getSerdon(),
+			$keys[49] => $this->getId(),
 		);
 		return $result;
 	}
@@ -1652,6 +1869,27 @@ abstract class BaseCaordcom extends BaseObject  implements Persistent {
 				$this->setCodcen($value);
 				break;
 			case 42:
+				$this->setTipocom($value);
+				break;
+			case 43:
+				$this->setCeddon($value);
+				break;
+			case 44:
+				$this->setNomdon($value);
+				break;
+			case 45:
+				$this->setFecdon($value);
+				break;
+			case 46:
+				$this->setSexdon($value);
+				break;
+			case 47:
+				$this->setEdadon($value);
+				break;
+			case 48:
+				$this->setSerdon($value);
+				break;
+			case 49:
 				$this->setId($value);
 				break;
 		} 	}
@@ -1703,7 +1941,14 @@ abstract class BaseCaordcom extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[39], $arr)) $this->setFecsigecof($arr[$keys[39]]);
 		if (array_key_exists($keys[40], $arr)) $this->setExpsigecof($arr[$keys[40]]);
 		if (array_key_exists($keys[41], $arr)) $this->setCodcen($arr[$keys[41]]);
-		if (array_key_exists($keys[42], $arr)) $this->setId($arr[$keys[42]]);
+		if (array_key_exists($keys[42], $arr)) $this->setTipocom($arr[$keys[42]]);
+		if (array_key_exists($keys[43], $arr)) $this->setCeddon($arr[$keys[43]]);
+		if (array_key_exists($keys[44], $arr)) $this->setNomdon($arr[$keys[44]]);
+		if (array_key_exists($keys[45], $arr)) $this->setFecdon($arr[$keys[45]]);
+		if (array_key_exists($keys[46], $arr)) $this->setSexdon($arr[$keys[46]]);
+		if (array_key_exists($keys[47], $arr)) $this->setEdadon($arr[$keys[47]]);
+		if (array_key_exists($keys[48], $arr)) $this->setSerdon($arr[$keys[48]]);
+		if (array_key_exists($keys[49], $arr)) $this->setId($arr[$keys[49]]);
 	}
 
 	
@@ -1753,6 +1998,13 @@ abstract class BaseCaordcom extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CaordcomPeer::FECSIGECOF)) $criteria->add(CaordcomPeer::FECSIGECOF, $this->fecsigecof);
 		if ($this->isColumnModified(CaordcomPeer::EXPSIGECOF)) $criteria->add(CaordcomPeer::EXPSIGECOF, $this->expsigecof);
 		if ($this->isColumnModified(CaordcomPeer::CODCEN)) $criteria->add(CaordcomPeer::CODCEN, $this->codcen);
+		if ($this->isColumnModified(CaordcomPeer::TIPOCOM)) $criteria->add(CaordcomPeer::TIPOCOM, $this->tipocom);
+		if ($this->isColumnModified(CaordcomPeer::CEDDON)) $criteria->add(CaordcomPeer::CEDDON, $this->ceddon);
+		if ($this->isColumnModified(CaordcomPeer::NOMDON)) $criteria->add(CaordcomPeer::NOMDON, $this->nomdon);
+		if ($this->isColumnModified(CaordcomPeer::FECDON)) $criteria->add(CaordcomPeer::FECDON, $this->fecdon);
+		if ($this->isColumnModified(CaordcomPeer::SEXDON)) $criteria->add(CaordcomPeer::SEXDON, $this->sexdon);
+		if ($this->isColumnModified(CaordcomPeer::EDADON)) $criteria->add(CaordcomPeer::EDADON, $this->edadon);
+		if ($this->isColumnModified(CaordcomPeer::SERDON)) $criteria->add(CaordcomPeer::SERDON, $this->serdon);
 		if ($this->isColumnModified(CaordcomPeer::ID)) $criteria->add(CaordcomPeer::ID, $this->id);
 
 		return $criteria;
@@ -1867,6 +2119,20 @@ abstract class BaseCaordcom extends BaseObject  implements Persistent {
 		$copyObj->setExpsigecof($this->expsigecof);
 
 		$copyObj->setCodcen($this->codcen);
+
+		$copyObj->setTipocom($this->tipocom);
+
+		$copyObj->setCeddon($this->ceddon);
+
+		$copyObj->setNomdon($this->nomdon);
+
+		$copyObj->setFecdon($this->fecdon);
+
+		$copyObj->setSexdon($this->sexdon);
+
+		$copyObj->setEdadon($this->edadon);
+
+		$copyObj->setSerdon($this->serdon);
 
 
 		$copyObj->setNew(true);

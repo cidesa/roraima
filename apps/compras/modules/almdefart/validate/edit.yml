@@ -13,6 +13,7 @@ methods:
    - "cadefart{corser}"
    - "cadefart{corsol}"
    - "cadefart{corcot2}"
+   - "cadefart{tipodoc}"
 
 names:
 
@@ -70,6 +71,10 @@ names:
     required:  No
     validators: CorrelValidator
 
+  cadefart{tipodoc}:
+    required:  No
+    validators: TipodocValidator
+
 
 StringValidator_forart:
     class: sfStringValidator
@@ -108,3 +113,10 @@ CorrelValidator:
     param:
         values:    [ '/^[0-9]*$/' ]
         values_error: Los Correlativos solo puede contener valores númericos
+
+TipodocValidator:
+    class: CidesaExistValidator
+    param:
+        class:        Cpdoccom
+        column:       tipcom
+        unique_error: El Tipo de OC Donación debe Existir.
