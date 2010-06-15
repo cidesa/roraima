@@ -737,6 +737,13 @@ class almordcomActions extends autoalmordcomActions
         $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
         return sfView::HEADER_ONLY;
       }
+      else if ($this->getRequestParameter('ajax')=='18')
+      {
+        $edad=Nomina::obtenerEdad($this->getRequestParameter('codigo'));
+        $output = '[["'.$cajtexmos.'","'.$edad.'",""]]';
+        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+        return sfView::HEADER_ONLY;
+      }
   }
 
 
@@ -2195,6 +2202,62 @@ class almordcomActions extends autoalmordcomActions
     if (isset($caordcom['codcen']))
     {
       $this->caordcom->setCodcen($caordcom['codcen']);
+    }
+    if (isset($caordcom['tipocom']))
+    {
+      $this->caordcom->setTipocom($caordcom['tipocom']);
+    }
+    if (isset($caordcom['ceddon']))
+    {
+      $this->caordcom->setCeddon($caordcom['ceddon']);
+    }
+    if (isset($caordcom['nomdon']))
+    {
+      $this->caordcom->setNomdon($caordcom['nomdon']);
+    }
+    if (isset($caordcom['fecdon']))
+    {
+        if ($caordcom['fecdon'])
+      {
+        try
+        {
+        $dateFormat = new sfDateFormat($this->getUser()->getCulture());
+        if (!is_array($caordcom['fecdon']))
+        {
+        $value = $dateFormat->format($caordcom['fecdon'], 'i', $dateFormat->getInputPattern('d'));
+                  }
+                  else
+                    {
+                    $value_array = $caordcom['fecdon'];
+                    $value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+                  }
+                  $this->caordcom->setFecdon($value);
+                  }
+                  catch (sfException $e)
+                    {
+                    // not a date
+                  }
+      }
+      else
+      {
+        $this->caordcom->setFecdon(null);
+      }
+    }
+    if (isset($caordcom['sexdon']))
+    {
+      $this->caordcom->setSexdon($caordcom['sexdon']);
+    }
+    if (isset($caordcom['edadon']))
+    {
+      $this->caordcom->setEdadon($caordcom['edadon']);
+    }
+    if (isset($caordcom['serdon']))
+    {
+      $this->caordcom->setSerdon($caordcom['serdon']);
+    }
+    if (isset($caordcom['manorddon']))
+    {
+      $this->caordcom->setManorddon($caordcom['manorddon']);
     }
 
   }

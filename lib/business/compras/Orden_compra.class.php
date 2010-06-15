@@ -1544,6 +1544,18 @@ class Orden_compra
               $caordcom_new->setConpag($codconpag);
               $caordcom_new->getMonord();
               $caordcom->getOrdcom();
+
+              if ($caordcom->getManorddon()=='S')  // En Caso de una OC de DonaciÃ³n
+              {
+                  $caordcom_new->setTipocom($caordcom->getTipocom());
+                  $caordcom_new->setCeddon($caordcom->getCeddon());
+                  $caordcom_new->setNomdon($caordcom->getNomdon());
+                  $caordcom_new->setFecdon($caordcom->getFecdon());
+                  $caordcom_new->setSexdon($caordcom->getSexdon());
+                  $caordcom_new->setEdadon($caordcom->getEdadon());
+                  $caordcom_new->setSerdon($caordcom->getSerdon());
+              }
+
               $caordcom_new->save();
               self::Grabar_detalles_orden_compra($caordcom,$grid_detalle_orden_objetos,$grid_detalle_recargo,$total_recargo,$referencia,$codconpag,$codforent);//grabo en el grid general de detalle de la orden
               self::Grabar_grid_resumen($caordcom,$grid_detalle_resumen_objetos);//grabo en el grid resumen
@@ -1575,8 +1587,19 @@ class Orden_compra
 		  $caordcom_mod->setFecsigecof($caordcom->getFecsigecof());
 		  $caordcom_mod->setExpsigecof($caordcom->getExpsigecof());
                   $caordcom_mod->setCodcen($caordcom->getCodcen());
-          $caordcom_mod->setDesord($caordcom->getDesord());
-          $caordcom_mod->setNotord($caordcom->getNotord());
+                  $caordcom_mod->setDesord($caordcom->getDesord());
+                  $caordcom_mod->setNotord($caordcom->getNotord());
+
+                  if ($caordcom->getManorddon()=='S') // En Caso de una OC de DonaciÃ³n
+                  {
+                      $caordcom_mod->setTipocom($caordcom->getTipocom());
+                      $caordcom_mod->setCeddon($caordcom->getCeddon());
+                      $caordcom_mod->setNomdon($caordcom->getNomdon());
+                      $caordcom_mod->setFecdon($caordcom->getFecdon());
+                      $caordcom_mod->setSexdon($caordcom->getSexdon());
+                      $caordcom_mod->setEdadon($caordcom->getEdadon());
+                      $caordcom_mod->setSerdon($caordcom->getSerdon());
+                  }
 
         if ($caordcom_mod->getCompro()=='N') {
          $caordcom_mod->setMonord($caordcom->getMonord());

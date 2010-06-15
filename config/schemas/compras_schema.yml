@@ -1734,6 +1734,33 @@ propel:
     codcen:
       type: VARCHAR
       size: 4
+    tipocom:
+      type: VARCHAR
+      size: 50
+      description: OC DonaciÃ³n Tipo de Compra
+    ceddon:
+      type: VARCHAR
+      size: 15
+      description: OC DonaciÃ³n CÃ©dula
+    nomdon:
+      type: VARCHAR
+      size: 50
+      description: OC DonaciÃ³n Nombre
+    fecdon:
+      type: DATE
+      description: OC DonaciÃ³n Fecha de Nacimiento
+    sexdon:
+      type: VARCHAR
+      size: 1
+      description: OC DonaciÃ³n Sexo
+    edadon:
+      type: NUMERIC
+      size: 2
+      description: OC DonaciÃ³n Edad
+    serdon:
+      type: VARCHAR
+      size: 1
+      description: OC DonaciÃ³n Servicio Prestado Medicina Materiales Otro
     id:
       type: INTEGER
       required: true
@@ -2133,6 +2160,10 @@ propel:
       type: INTEGER
     corext:
       type: INTEGER
+    tipodoc:
+      type: VARCHAR
+      size: 4
+      description: Se usa para definir el tipo de OC de DonaciÃ³n
     id:
       type: INTEGER
       required: true

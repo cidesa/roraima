@@ -49,6 +49,13 @@ generator:
       totorden: { name : Total Orden}
       staord: {name: Estatus A(Activo) y N(Anulado)}
       codcen: { name : Centro de Costo}
+      tipocom: { name : Tipo de Compra}
+      ceddon: { name : Cédula/R.I.F}
+      nomdon: { name : Nombre}
+      fecdon: { name : Fecha de Nacimiento}
+      sexdon: { name : Sexo}
+      edadon: { name : Edad}
+      serdon: { name : Servicio Prestado}
 
     list:
       title:          Ordenes de Compra
@@ -65,7 +72,7 @@ generator:
     edit:
       save:           true
       title:          Edición de Orden de Compra y/o Servicio
-      display:        [refcom, ordcom, fecord, tipmon, codpro, rifpro, nompro, desord, crecon, monord, doccom, nomext, refsol, tipord, tippro, tipfin, tipo, codconpag, desconpag, plaent, tiecan, dtoord, staord, afepre, conpag, forent, fecanu, valmon, tipcom, coduni, codemp, notord, tipdoc, afepro, justif, refprc, despro, codforent, desforent, nomfin, desubi, nomemp, codmedcom, codprocom, codpai, codedo, codmun, aplart, aplart6, staord, codigoproveedor, numsigecof, fecsigecof, expsigecof, totrecargo, totorden, codcen]
+      display:        [refcom, ordcom, fecord, tipmon, codpro, rifpro, nompro, desord, crecon, monord, doccom, nomext, refsol, tipord, tippro, tipfin, tipo, codconpag, desconpag, plaent, tiecan, dtoord, staord, afepre, conpag, forent, fecanu, valmon, tipcom, coduni, codemp, notord, tipdoc, afepro, justif, refprc, despro, codforent, desforent, nomfin, desubi, nomemp, codmedcom, codprocom, codpai, codedo, codmun, aplart, aplart6, staord, codigoproveedor, numsigecof, fecsigecof, expsigecof, totrecargo, totorden, codcen, tipocom, ceddon, nomdon, fecdon, sexdon, edadon, serdon]
       actions:
         _list:        ~
         _save:        ~

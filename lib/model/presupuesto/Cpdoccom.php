@@ -29,4 +29,13 @@ class Cpdoccom extends BaseCpdoccom
         return $this->etadef;
     }
 
+   public function getTipodoc()
+  {
+  	return self::getTipcom();
+  }
+
+  public function getNomdoc()
+  {
+  	return self::getNomext();
+  }
 }

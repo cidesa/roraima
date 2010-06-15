@@ -28,6 +28,7 @@ class Caordcom extends BaseCaordcom
     protected $tipopro="";
     protected $compro="";
     protected $oculsave="";
+    protected $manorddon="";
 
 
     public function getReptipcom()
@@ -267,6 +268,42 @@ class Caordcom extends BaseCaordcom
   public function getDescen()
   {
 	return Herramientas::getX('CODCEN','Cadefcen','Descen',self::getCodcen());
+  }
+
+    public function getEdaact()
+  {
+  	if (self::getFecdon())
+  	{
+		$sql = "select  Extract(year from age(now(),'" . self::getFecdon() . "')) as edad";
+		if (Herramientas :: BuscarDatos($sql, & $result))
+			return $result[0]['edad'];
+		else
+		    return self::getEdadon();
+  	}
+  	else
+  	    return 0;
+  }
+
+  public function getManorddon()
+  {
+    $dato="";
+    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('compras',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
+	     if(array_key_exists('almdefart',$varemp['aplicacion']['compras']['modulos'])){
+	       if(array_key_exists('manorddon',$varemp['aplicacion']['compras']['modulos']['almdefart']))
+	       {
+	       	$dato=$varemp['aplicacion']['compras']['modulos']['almdefart']['manorddon'];
+	       }
+         }
+     return $dato;
+  }
+
+  public function setManorddon()
+  {
+  	return $this->manorddon;
   }
 
 }
