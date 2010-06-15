@@ -43,6 +43,9 @@ class Tscheemi extends BaseTscheemi
 	protected $objeto=array();
 	protected $grid=array();
 	protected $check="";
+	protected $numeroord="";
+	protected $fecord="";
+	protected $filnumordfec="";
 
     public function getNomben()
 	{
@@ -169,5 +172,27 @@ class Tscheemi extends BaseTscheemi
   	return $fecha;
   }
 
+  public function getFilnumordfec()
+  {
+
+    $dato="";
+    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('tesoreria',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['tesoreria']))
+	     if(array_key_exists('tesmovemiche',$varemp['aplicacion']['tesoreria']['modulos'])){
+	       if(array_key_exists('filnumordfec',$varemp['aplicacion']['tesoreria']['modulos']['tesmovemiche']))
+	       {
+	       	$dato=$varemp['aplicacion']['tesoreria']['modulos']['tesmovemiche']['filnumordfec'];
+}
+         }
+     return $dato;
+  }
+
+  public function setFilnumordfec()
+  {
+  	return $this->filnumordfec;
+  }
 
 }
