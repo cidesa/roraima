@@ -18,6 +18,7 @@ class Bnreginm extends BaseBnreginm
 	protected $codcla='';
 	protected $descla='';
 	protected $etifeccal="";
+        protected $savenumord="";
 	
 	public function hydrate(ResultSet $rs, $startcol = 1)
     {
@@ -29,7 +30,7 @@ class Bnreginm extends BaseBnreginm
 	{
 		 return Herramientas::getX('codcla','bnclafun','descla',trim(self::getClafun()));
 	}
-	
+
 	public function getNomprovee()
 	{
 		 return Herramientas::getX('codpro','caprovee','nompro',trim(self::getCodpro()));
@@ -73,6 +74,29 @@ class Bnreginm extends BaseBnreginm
   public function setEtifeccal()
   {
   	return $this->etifeccal;
+  }
+
+    public function getSavenumord()
+  {
+
+    $dato="";
+    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('bienes',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['bienes']))
+	     if(array_key_exists('bieregactinmd',$varemp['aplicacion']['bienes']['modulos'])){
+	       if(array_key_exists('savenumord',$varemp['aplicacion']['bienes']['modulos']['bieregactinmd']))
+	       {
+	       	$dato=$varemp['aplicacion']['bienes']['modulos']['bieregactinmd']['savenumord'];
+	       }
+         }
+     return $dato;
+  }
+
+  public function setSavenumord()
+  {
+  	return $this->savenumord;
   }
 
 }

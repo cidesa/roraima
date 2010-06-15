@@ -178,7 +178,11 @@ private static $coderror=-1;
     $c->add(OpordpagPeer::NUMORD,$this->getRequestParameter('codigo'));
     $reg= OpordpagPeer::doSelectOne($c);
     if (!$reg)
-      $javascript="alert('El Numero de Orden de Pago no existe'); $('$cajtexcom').value=''; ";
+     { $javascript="alert('El Numero de Orden de Pago no existe'); $('$cajtexcom').value=''; "; }
+    else {
+      $numfac=H::getX_vacio('NUMORD', 'Opfactur', 'Numfac', $reg->getNumord());
+      $javascript="$('bnregmue_ordrcp').value='$numfac'; "; 
+    }
 
     $output = '[["javascript","'.$javascript.'",""]]';
     $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');

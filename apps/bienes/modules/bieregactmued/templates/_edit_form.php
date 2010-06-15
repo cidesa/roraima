@@ -150,7 +150,7 @@
 &nbsp;
   <? echo input_tag('nomprovee',$bnregmue->getNomprovee(),'disabled=true,size=41')?>
     </div>
-<?php if ($bnregmue->getSavenumord()=='S') {?>
+<div id="divnumord" style="display:none">
 <br>
 <?php echo label_for('bnregmue[numord]', __($labels['bnregmue{numord}']),'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('bnregmue{numord}')): ?> form-error<?php endif; ?>">
@@ -174,7 +174,7 @@
 
 <?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Opordpag_Bieregactmued/clase/Opordpag/frame/sf_admin_edit_form/obj1/bnregmue_numord/campo1/numord')?>
 </div>
-<?php } ?>
+</div>
 </div>
 </fieldset>
 </div>
@@ -812,7 +812,11 @@
 </li>
   </ul>
   <script type="text/javascript">
-
+   var savenumord='<?php echo $bnregmue->getSavenumord()?>';
+   if (savenumord=='S')
+   {
+      $('divnumord').show();
+   }
 function num(e) {
     evt = e ? e : event;
     tcl = (window.Event) ? evt.which : evt.keyCode;
