@@ -5,7 +5,7 @@
  * @package    Roraima
  * @subpackage facturacion
  * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id: Factura.class.php 38902 2010-06-14 17:45:24Z cramirez $
+ * @version SVN: $Id: Factura.class.php 38948 2010-06-15 14:29:20Z cramirez $
  *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -472,7 +472,15 @@ class Factura {
             $cuencon=$w[$l]->getCodcta();
             if ($cuencon!=""){
              $descrip=H::getX('codcta','Contabb','Descta',$cuencon);
-             self::guardarAsientos($cuencon,$descrip,'C',$w[$l]->getMonrgo(),&$arrasientos,&$pos);
+             $c = new Criteria();
+             $c->add(FargoartPeer::REFDOC,$fafactur->getReffac());
+             $c->add(FargoartPeer::CODRGO,$w[$l]->getCodrgo());
+             $per = FargoartPeer::doSelectOne($c);
+             if($per)
+                $monrgo=$per->getMonrgo();
+             else
+                $monrgo=$w[$l]->getMonrgo();
+             self::guardarAsientos($cuencon,$descrip,'C',$monrgo,&$arrasientos,&$pos);
             }else{
               $msj3=1152;
       	      return false;
