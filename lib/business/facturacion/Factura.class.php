@@ -14,6 +14,18 @@ class Factura {
 
   public static function salvarFactura($fafactur,$grid1,$grid2,$grid3,$grid4,$tipocaja,&$msj,&$msj2,&$msj3)
   {
+    if ($fafactur->getIncluircliente()=='S')
+    {
+      $facliente= new Facliente();
+      $facliente->setCodpro($fafactur->getRifpro());
+      $facliente->setRifpro($fafactur->getRifpro());
+      $facliente->setNompro($fafactur->getNompro());
+      if ($fafactur->getTelpro()!="") $facliente->setTelpro($fafactur->getTelpro());
+      if ($fafactur->getDirpro()!="") $facliente->setDirpro($fafactur->getDirpro());
+      $facliente->setTipper($fafactur->getTipper());
+      $facliente->save();
+    }
+
     if (!self::grabarComprobanteOrden(&$fafactur,$grid1,&$msj))
     {
       return true;
@@ -27,26 +39,14 @@ class Factura {
       }
     }
 
+    self::grabarFactura($fafactur,$grid1,$grid2,$grid3,$grid4,$tipocaja);
+
     if (!self::generarAsientos(&$fafactur,$grid1,$grid2,$grid3,$grid4,&$arrasientos,&$pos,&$msj3))
     {
       return true;
     }
 
-    if ($fafactur->getIncluircliente()=='S')
-    {
-      $facliente= new Facliente();
-      $facliente->setCodpro($fafactur->getRifpro());
-      $facliente->setRifpro($fafactur->getRifpro());
-      $facliente->setNompro($fafactur->getNompro());
-      if ($fafactur->getTelpro()!="") $facliente->setTelpro($fafactur->getTelpro());
-      if ($fafactur->getDirpro()!="") $facliente->setDirpro($fafactur->getDirpro());
-      $facliente->setTipper($fafactur->getTipper());
-      $facliente->save();
-    }
-
     self::grabarComprobanteMaestro(&$fafactur,$arrasientos,&$pos);
-
-    self::grabarFactura($fafactur,$grid1,$grid2,$grid3,$grid4,$tipocaja);
 
     if ($fafactur->getTipconpag()=='R') //Pago a Crédito
     {
@@ -1238,7 +1238,15 @@ class Factura {
           $cobrecdoc->setCodcli($fafactur->getCodcli());
           $cobrecdoc->setCodrec($x[$j]->getCodrgo());
           $cobrecdoc->setFecdoc($fafactur->getFecfac());
-          $cobrecdoc->setMonrec($x[$j]->getMonrgo());
+          $c = new Criteria();
+          $c->add(FargoartPeer::REFDOC,$fafactur->getReffac());
+          $c->add(FargoartPeer::CODRGO,$x[$j]->getCodrgo());
+          $per = FargoartPeer::doSelectOne($c);
+          if($per)
+            $monrgo=$per->getMonrgo();
+          else
+            $monrgo=$x[$j]->getMonrgo();
+          $cobrecdoc->setMonrec($monrgo);
           $cobrecdoc->save();
         }
       	$j++;
