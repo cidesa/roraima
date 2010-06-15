@@ -5,7 +5,7 @@
  * @package    Roraima
  * @subpackage facturacion
  * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id: Factura.class.php 38948 2010-06-15 14:29:20Z cramirez $
+ * @version SVN: $Id: Factura.class.php 38960 2010-06-15 19:04:48Z cramirez $
  *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -931,9 +931,12 @@ class Factura {
 	     	}
 	     }
 	    }
-            $sqlrec="update fargoart set monrgo='".$x[$j]->getMonrgo()."'
+            if($x[$j]->getMonrgo()!='')
+            {
+                $sqlrec="update fargoart set monrgo='".$x[$j]->getMonrgo()."'
                      where codart='".$x[$j]->getCodart()."' and refdoc='".$fafactur->getReffac()."'";
-            H::insertarRegistros($sqlrec);
+                H::insertarRegistros($sqlrec);
+            }
 	    $j++;
 	  }
     }
