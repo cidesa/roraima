@@ -142,6 +142,24 @@ private static $coderror=-1;
     $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
     return sfView::HEADER_ONLY;
    }
+    elseif ($this->getRequestParameter('ajax')=='6')
+   {
+    $cajtexmos=$this->getRequestParameter('cajtexmos');
+    $cajtexcom=$this->getRequestParameter('cajtexcom');
+    $javascript="";
+    $c= new Criteria();
+    $c->add(OpordpagPeer::NUMORD,$this->getRequestParameter('codigo'));
+    $reg= OpordpagPeer::doSelectOne($c);
+    if (!$reg)
+     { $javascript="alert('El Numero de Orden de Pago no existe'); $('$cajtexcom').value=''; "; }
+    else {
+      $numfac=H::getX_vacio('NUMORD', 'Opfactur', 'Numfac', $reg->getNumord());
+      $javascript="$('bnreginm_ordrcp').value='$numfac'; ";
+    }
+    $output = '[["javascript","'.$javascript.'",""]]';
+    $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+    return sfView::HEADER_ONLY;
+   }
   }
 
     /**

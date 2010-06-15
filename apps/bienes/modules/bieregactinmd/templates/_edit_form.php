@@ -156,6 +156,32 @@
 &nbsp;
   <? echo input_tag('nomprovee',$bnreginm->getNomprovee(),'disabled=true,size=41')?>
     </div>
+
+<div id="divnumord" style="display:none">
+<br>
+<?php echo label_for('bnreginm[numord]', __($labels['bnreginm{numord}']),'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('bnreginm{numord}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('bnreginm{numord}')): ?>
+    <?php echo form_error('bnreginm{numord}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($bnreginm, 'getNumord', array (
+  'size' => 15,
+  'maxlength' => 8,
+  'control_name' => 'bnreginm[numord]',
+  'onBlur'=> remote_function(array(
+        'url' => 'bieregactinmd/ajax',
+        'condition' => "$('bnreginm_numord').value != ''",
+        'complete' => 'AjaxJSON(request, json)',
+        'with' => "'ajax=6&cajtexmos=bnreginm_numord&cajtexmos=bnreginm_numord&codigo='+this.value",
+        )),
+)); echo $value ? $value : '&nbsp;' ?>
+
+&nbsp;
+
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Opordpag_Bieregactmued/clase/Opordpag/frame/sf_admin_edit_form/obj1/bnreginm_numord/campo1/numord')?>
+</div>
+</div>
 </div>
 
 </fieldset>
@@ -885,6 +911,12 @@
 </li>
   </ul>
   <script type="text/javascript">
+   var savenumord='<?php echo $bnreginm->getSavenumord()?>';
+   if (savenumord=='S')
+   {
+      $('divnumord').show();
+   }
+
 function num(e) {
     evt = e ? e : event;
     tcl = (window.Event) ? evt.which : evt.keyCode;

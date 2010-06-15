@@ -832,6 +832,9 @@ propel:
     trimestre:
       type: VARCHAR
       size: 20
+    numord:
+      type: VARCHAR
+      size: 8
     id:
       type: INTEGER
       required: true
