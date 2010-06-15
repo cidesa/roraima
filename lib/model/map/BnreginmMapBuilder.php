@@ -144,6 +144,8 @@ class BnreginmMapBuilder {
 
 		$tMap->addColumn('TRIMESTRE', 'Trimestre', 'string', CreoleTypes::VARCHAR, false, 20);
 
+		$tMap->addColumn('NUMORD', 'Numord', 'string', CreoleTypes::VARCHAR, false, 8);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

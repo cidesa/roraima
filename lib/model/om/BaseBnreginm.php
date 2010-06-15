@@ -229,6 +229,10 @@ abstract class BaseBnreginm extends BaseObject  implements Persistent {
 
 
 	
+	protected $numord;
+
+
+
 	protected $id;
 
 	
@@ -739,6 +743,13 @@ abstract class BaseBnreginm extends BaseObject  implements Persistent {
 
   }
   
+  public function getNumord()
+  {
+
+    return trim($this->numord);
+
+  }
+
   public function getId()
   {
 
@@ -1350,6 +1361,16 @@ abstract class BaseBnreginm extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setNumord($v)
+	{
+
+    if ($this->numord !== $v) {
+        $this->numord = $v;
+        $this->modifiedColumns[] = BnreginmPeer::NUMORD;
+      }
+
+	}
+
 	public function setId($v)
 	{
 
@@ -1474,7 +1495,9 @@ abstract class BaseBnreginm extends BaseObject  implements Persistent {
 
       $this->trimestre = $rs->getString($startcol + 54);
 
-      $this->id = $rs->getInt($startcol + 55);
+      $this->numord = $rs->getString($startcol + 55);
+
+      $this->id = $rs->getInt($startcol + 56);
 
       $this->resetModified();
 
@@ -1482,7 +1505,7 @@ abstract class BaseBnreginm extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 56; 
+            return $startcol + 57;
     } catch (Exception $e) {
       throw new PropelException("Error populating Bnreginm object", $e);
     }
@@ -1795,6 +1818,9 @@ abstract class BaseBnreginm extends BaseObject  implements Persistent {
 				return $this->getTrimestre();
 				break;
 			case 55:
+				return $this->getNumord();
+				break;
+			case 56:
 				return $this->getId();
 				break;
 			default:
@@ -1862,7 +1888,8 @@ abstract class BaseBnreginm extends BaseObject  implements Persistent {
 			$keys[52] => $this->getProtocolo(),
 			$keys[53] => $this->getTomo(),
 			$keys[54] => $this->getTrimestre(),
-			$keys[55] => $this->getId(),
+			$keys[55] => $this->getNumord(),
+			$keys[56] => $this->getId(),
 		);
 		return $result;
 	}
@@ -2044,6 +2071,9 @@ abstract class BaseBnreginm extends BaseObject  implements Persistent {
 				$this->setTrimestre($value);
 				break;
 			case 55:
+				$this->setNumord($value);
+				break;
+			case 56:
 				$this->setId($value);
 				break;
 		} 	}
@@ -2108,7 +2138,8 @@ abstract class BaseBnreginm extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[52], $arr)) $this->setProtocolo($arr[$keys[52]]);
 		if (array_key_exists($keys[53], $arr)) $this->setTomo($arr[$keys[53]]);
 		if (array_key_exists($keys[54], $arr)) $this->setTrimestre($arr[$keys[54]]);
-		if (array_key_exists($keys[55], $arr)) $this->setId($arr[$keys[55]]);
+		if (array_key_exists($keys[55], $arr)) $this->setNumord($arr[$keys[55]]);
+		if (array_key_exists($keys[56], $arr)) $this->setId($arr[$keys[56]]);
 	}
 
 	
@@ -2171,6 +2202,7 @@ abstract class BaseBnreginm extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(BnreginmPeer::PROTOCOLO)) $criteria->add(BnreginmPeer::PROTOCOLO, $this->protocolo);
 		if ($this->isColumnModified(BnreginmPeer::TOMO)) $criteria->add(BnreginmPeer::TOMO, $this->tomo);
 		if ($this->isColumnModified(BnreginmPeer::TRIMESTRE)) $criteria->add(BnreginmPeer::TRIMESTRE, $this->trimestre);
+		if ($this->isColumnModified(BnreginmPeer::NUMORD)) $criteria->add(BnreginmPeer::NUMORD, $this->numord);
 		if ($this->isColumnModified(BnreginmPeer::ID)) $criteria->add(BnreginmPeer::ID, $this->id);
 
 		return $criteria;
@@ -2311,6 +2343,8 @@ abstract class BaseBnreginm extends BaseObject  implements Persistent {
 		$copyObj->setTomo($this->tomo);
 
 		$copyObj->setTrimestre($this->trimestre);
+
+		$copyObj->setNumord($this->numord);
 
 
 		$copyObj->setNew(true);
