@@ -897,6 +897,7 @@ class Factura {
     $cantot=0;
     if ($x[$j]->getCodart()!="")
     {
+        $monto=0;
       while ($j<count($x))
 	  {
 	  	eval('$cantot = $x[$j]->get'.ucfirst(strtolower($col)).'();');
@@ -933,12 +934,13 @@ class Factura {
 	    }
             if($x[$j]->getMonrgo()!='')
             {
-                $sqlrec="update fargoart set monrgo='".$x[$j]->getMonrgo()."'
-                     where codart='".$x[$j]->getCodart()."' and refdoc='".$fafactur->getReffac()."'";
-                H::insertarRegistros($sqlrec);
+                $monto+=$x[$j]->getMonrgo();
             }
 	    $j++;
 	  }
+          $sqlrec="update fargoart set monrgo='".$monto."'
+                     where  refdoc='".$fafactur->getReffac()."'";
+          H::insertarRegistros($sqlrec);
     }
 
     $z=$grid1[1];
