@@ -36,9 +36,10 @@ viaticosv2:
     Procesos para Viaticos:
       Solicitud de Viaticos:                              viasolviatra
       Aprobación Solicitud de Viaticos:                   viaaprsolviatra
-      Calculo de Viaticos:                                viacalviatra      
+      Calculo de Viaticos:                                viacalviatra
       Aprobacion Calculo de Viaticos:                     viaaprcalviatra
       Relacion de Viaticos:                               viarelvia
+      Extencion de Viaticos:                              viaextviatra
     Reportes:
       Listados:
         Listado de Rubros:                                viarlisrub.php

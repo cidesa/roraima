@@ -1,0 +1,59 @@
+methods:
+  post:
+   - "viaextviatra{numext}"
+   - "viaextviatra{fecext}"
+   - "viaextviatra{refcal}"
+   - "viaextviatra{diaconper}"
+   - "viaextviatra{diasinper}"
+  
+names:
+  viaextviatra{numext}:
+    required:  Yes
+    required_msg: Este campo no puede estar en Blanco
+    validators: Validator_numext
+
+  viaextviatra{fecext}:
+    required:  Yes
+    required_msg: Este campo no puede estar en Blanco
+    validators: FechaValidator
+
+  viaextviatra{refcal}:
+    required:  Yes
+    required_msg: Este campo no puede estar en Blanco
+    validators: Validator_refcal, Validator_refcal2
+
+  viaextviatra{diaconper}:
+    required:  Yes
+    required_msg: Este campo no puede estar en Blanco
+
+  viaextviatra{diasinper}:
+    required:  Yes
+    required_msg: Este campo no puede estar en Blanco
+  
+Validator_numext:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Viaextviatra
+        column:   numext
+        unique_error:   El Numero de Calculo ya existe
+
+FechaValidator:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha  introducida es invalida
+
+Validator_refcal:
+    class: CidesaExistValidator
+    param:
+        class:    Viacalviatra
+        column:   numcal
+        unique_error:   La solicitud de Viaticos no existe
+
+Validator_refcal2:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Viaextviatra
+        column:   refcal
+        unique_error:   La solicitud de Viaticos ya fue calculada

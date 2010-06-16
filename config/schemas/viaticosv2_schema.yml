@@ -409,3 +409,62 @@ propel:
       primaryKey: true
       autoIncrement: true
       description: Identificador Único del registro
+  viaextviatra:
+    numext:
+      type: VARCHAR
+      size: 10
+    fecext:
+      type: DATE
+    refcal:
+      type: VARCHAR
+      size: 10
+    codcat:
+      type: VARCHAR
+      size: 32
+    diaconper:
+      type: INTEGER
+    diasinper:
+      type: INTEGER
+    status:
+      type: VARCHAR
+      size: 1
+    observaciones:
+      type: VARCHAR
+      size: 250
+    refcom:
+      type: VARCHAR
+      size: 8
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  viadetextviatra:
+    numext:
+      type: VARCHAR
+      size: 10
+    fecext:
+      type: DATE
+    codrub:
+      type: VARCHAR
+      size: 2
+    numdia:
+      type: INTEGER
+    mondia:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    montot:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    tipo:
+      type: VARCHAR
+      size: 2
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
