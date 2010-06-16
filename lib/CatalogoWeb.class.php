@@ -6173,6 +6173,14 @@ public function Catdefcatman_Cattramo($params = '') {
 
             );
 	}
+        public function viacalviatra_numcal() {
+		$this->c = new Criteria();
+		$this->columnas = array (
+			ViacalviatraPeer :: NUMCAL => 'Número Viatico',
+                        ViacalviatraPeer :: FECCAL => 'Fecha',
+
+		);
+	}
         
 }
 
