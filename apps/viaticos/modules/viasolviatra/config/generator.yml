@@ -77,7 +77,7 @@ generator:
           clase: Nphojint
           ajax: 5
           parametros: getprincipal="getCodempaut" getsecundario="getNomempaut" campoprincipal="codempaut" camposecundario="nomempaut" campobase = "id"
-      cedemp:           { name: Cedula, params: style="border:none"}      
+      cedemp:           { name: Cedula, params: style="border:none"}
       cargo:            { name: Cargo, params: style="border:none" size=80}
       nivel:            { name: Nivel Organizacional, params: style="border:none" size=80}
       cedempaco:           { name: Cedula, params: style="border:none"}
@@ -85,6 +85,14 @@ generator:
       nivelaco:            { name: Nivel Organizacional, params: style="border:none" size=80}
       cedempaut:           { name: Cedula, params: style="border:none"}
       nivelaut:            { name: Nivel Organizacional, params: style="border:none" size=80}
+      codpai:
+        name: Pais
+        msj_error: El Código es necesario
+        catalogo:
+          catalogoweb: viaestado_codpai
+          clase: Viapais
+          ajax: 7
+          parametros: getprincipal="getCodpai" getsecundario="getNompai" campoprincipal="codpai" camposecundario="nompai" campobase = "id"
       codest:
         name: Estado
         msj_error: El Código es necesario
@@ -93,6 +101,7 @@ generator:
           clase: Viaestado
           ajax: 6
           parametros: getprincipal="getCodest" getsecundario="getNomest" campoprincipal="codest" camposecundario="nomest" campobase = "id"
+          catalogoparams: /param1/'."'+$('viasolviatra_codpai').value+'".'
       codciu:
         name: Ciudad
         msj_error: El Código es necesario
@@ -102,7 +111,7 @@ generator:
           ajax: 0
           parametros: getprincipal="getCodciu" getsecundario="getNomciu" campoprincipal="codciu" camposecundario="nomciu" campobase = "id"
           catalogoparams: /param1/'."'+$('viasolviatra_codest').value+'".'
-      
+
 
     list:
       title:        Listado de Solicitudes de Viaticos
@@ -115,7 +124,7 @@ generator:
       display:
         Datos Generales de la Solicitud:      [numsol, fecsol, _ptipvia, dessol]
         Datos Empleado Solicitante:           [codemp, cedemp, cargo, nivel, codcat, codniv, codempaco, cedempaco, cargoaco, nivelaco, codnivaco]
-        Detalle de la Solicitd:               [codest, codciu, codproced, fecdes, fechas, numdia, codfortra, codempaut, cedempaut, nivelaut, _js]
+        Detalle de la Solicitd:               [codpai, codest, codciu, codproced, fecdes, fechas, numdia, codfortra, codempaut, cedempaut, nivelaut, _js]
       actions:
         _list:        ~
         _save:        ~

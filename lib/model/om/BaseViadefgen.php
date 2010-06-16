@@ -4,65 +4,69 @@
 abstract class BaseViadefgen extends BaseObject  implements Persistent {
 
 
-	
+
 	protected static $peer;
 
 
-	
+
 	protected $numsolvia;
 
 
-	
+
 	protected $numcalvianac;
 
 
-	
+
 	protected $numcalviaint;
 
 
-	
+
 	protected $valunitri;
 
 
-	
+
+	protected $valdolar;
+
+
+
 	protected $numrelgasadi;
 
 
-	
+
 	protected $codpar;
 
 
-	
+
 	protected $id;
 
-	
+
 	protected $alreadyInSave = false;
 
-	
+
 	protected $alreadyInValidation = false;
 
-  
+
   public function getNumsolvia()
   {
 
     return $this->numsolvia;
 
   }
-  
+
   public function getNumcalvianac()
   {
 
     return $this->numcalvianac;
 
   }
-  
+
   public function getNumcalviaint()
   {
 
     return $this->numcalviaint;
 
   }
-  
+
   public function getValunitri($val=false)
   {
 
@@ -70,28 +74,36 @@ abstract class BaseViadefgen extends BaseObject  implements Persistent {
     else return $this->valunitri;
 
   }
-  
+
+  public function getValdolar($val=false)
+  {
+
+    if($val) return number_format($this->valdolar,2,',','.');
+    else return $this->valdolar;
+
+  }
+
   public function getNumrelgasadi()
   {
 
     return $this->numrelgasadi;
 
   }
-  
+
   public function getCodpar()
   {
 
     return trim($this->codpar);
 
   }
-  
+
   public function getId()
   {
 
     return $this->id;
 
   }
-	
+
 	public function setNumsolvia($v)
 	{
 
@@ -99,9 +111,9 @@ abstract class BaseViadefgen extends BaseObject  implements Persistent {
         $this->numsolvia = $v;
         $this->modifiedColumns[] = ViadefgenPeer::NUMSOLVIA;
       }
-  
-	} 
-	
+
+	}
+
 	public function setNumcalvianac($v)
 	{
 
@@ -109,9 +121,9 @@ abstract class BaseViadefgen extends BaseObject  implements Persistent {
         $this->numcalvianac = $v;
         $this->modifiedColumns[] = ViadefgenPeer::NUMCALVIANAC;
       }
-  
-	} 
-	
+
+	}
+
 	public function setNumcalviaint($v)
 	{
 
@@ -119,9 +131,9 @@ abstract class BaseViadefgen extends BaseObject  implements Persistent {
         $this->numcalviaint = $v;
         $this->modifiedColumns[] = ViadefgenPeer::NUMCALVIAINT;
       }
-  
-	} 
-	
+
+	}
+
 	public function setValunitri($v)
 	{
 
@@ -129,9 +141,19 @@ abstract class BaseViadefgen extends BaseObject  implements Persistent {
         $this->valunitri = Herramientas::toFloat($v);
         $this->modifiedColumns[] = ViadefgenPeer::VALUNITRI;
       }
-  
-	} 
-	
+
+	}
+
+	public function setValdolar($v)
+	{
+
+    if ($this->valdolar !== $v) {
+        $this->valdolar = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = ViadefgenPeer::VALDOLAR;
+      }
+
+	}
+
 	public function setNumrelgasadi($v)
 	{
 
@@ -139,9 +161,9 @@ abstract class BaseViadefgen extends BaseObject  implements Persistent {
         $this->numrelgasadi = $v;
         $this->modifiedColumns[] = ViadefgenPeer::NUMRELGASADI;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCodpar($v)
 	{
 
@@ -149,9 +171,9 @@ abstract class BaseViadefgen extends BaseObject  implements Persistent {
         $this->codpar = $v;
         $this->modifiedColumns[] = ViadefgenPeer::CODPAR;
       }
-  
-	} 
-	
+
+	}
+
 	public function setId($v)
 	{
 
@@ -159,9 +181,9 @@ abstract class BaseViadefgen extends BaseObject  implements Persistent {
         $this->id = $v;
         $this->modifiedColumns[] = ViadefgenPeer::ID;
       }
-  
-	} 
-  
+
+	}
+
   public function hydrate(ResultSet $rs, $startcol = 1)
   {
     try {
@@ -174,11 +196,13 @@ abstract class BaseViadefgen extends BaseObject  implements Persistent {
 
       $this->valunitri = $rs->getFloat($startcol + 3);
 
-      $this->numrelgasadi = $rs->getInt($startcol + 4);
+      $this->valdolar = $rs->getFloat($startcol + 4);
 
-      $this->codpar = $rs->getString($startcol + 5);
+      $this->numrelgasadi = $rs->getInt($startcol + 5);
 
-      $this->id = $rs->getInt($startcol + 6);
+      $this->codpar = $rs->getString($startcol + 6);
+
+      $this->id = $rs->getInt($startcol + 7);
 
       $this->resetModified();
 
@@ -186,7 +210,7 @@ abstract class BaseViadefgen extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 7; 
+            return $startcol + 8;
     } catch (Exception $e) {
       throw new PropelException("Error populating Viadefgen object", $e);
     }
@@ -197,8 +221,8 @@ abstract class BaseViadefgen extends BaseObject  implements Persistent {
   {
 
   }
-    
-  
+
+
   public function __call($m, $a)
     {
       $prefijo = substr($m,0,3);
@@ -212,7 +236,7 @@ abstract class BaseViadefgen extends BaseObject  implements Persistent {
 
     }
 
-	
+
 	public function delete($con = null)
 	{
 		if ($this->isDeleted()) {
@@ -234,7 +258,7 @@ abstract class BaseViadefgen extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	public function save($con = null)
 	{
 		if ($this->isDeleted()) {
@@ -256,7 +280,7 @@ abstract class BaseViadefgen extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	protected function doSave($con)
 	{
 		$affectedRows = 0; 		if (!$this->alreadyInSave) {
@@ -266,8 +290,8 @@ abstract class BaseViadefgen extends BaseObject  implements Persistent {
 						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = ViadefgenPeer::doInsert($this, $con);
-					$affectedRows += 1; 										 										 
-					$this->setId($pk);  
+					$affectedRows += 1;
+					$this->setId($pk);
 					$this->setNew(false);
 				} else {
 					$affectedRows += ViadefgenPeer::doUpdate($this, $con);
@@ -277,17 +301,17 @@ abstract class BaseViadefgen extends BaseObject  implements Persistent {
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
-	} 
-	
+	}
+
 	protected $validationFailures = array();
 
-	
+
 	public function getValidationFailures()
 	{
 		return $this->validationFailures;
 	}
 
-	
+
 	public function validate($columns = null)
 	{
 		$res = $this->doValidate($columns);
@@ -300,7 +324,7 @@ abstract class BaseViadefgen extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	protected function doValidate($columns = null)
 	{
 		if (!$this->alreadyInValidation) {
@@ -322,14 +346,14 @@ abstract class BaseViadefgen extends BaseObject  implements Persistent {
 		return (!empty($failureMap) ? $failureMap : true);
 	}
 
-	
+
 	public function getByName($name, $type = BasePeer::TYPE_PHPNAME)
 	{
 		$pos = ViadefgenPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->getByPosition($pos);
 	}
 
-	
+
 	public function getByPosition($pos)
 	{
 		switch($pos) {
@@ -346,12 +370,15 @@ abstract class BaseViadefgen extends BaseObject  implements Persistent {
 				return $this->getValunitri();
 				break;
 			case 4:
-				return $this->getNumrelgasadi();
+				return $this->getValdolar();
 				break;
 			case 5:
-				return $this->getCodpar();
+				return $this->getNumrelgasadi();
 				break;
 			case 6:
+				return $this->getCodpar();
+				break;
+			case 7:
 				return $this->getId();
 				break;
 			default:
@@ -359,7 +386,7 @@ abstract class BaseViadefgen extends BaseObject  implements Persistent {
 				break;
 		} 	}
 
-	
+
 	public function toArray($keyType = BasePeer::TYPE_PHPNAME)
 	{
 		$keys = ViadefgenPeer::getFieldNames($keyType);
@@ -368,21 +395,22 @@ abstract class BaseViadefgen extends BaseObject  implements Persistent {
 			$keys[1] => $this->getNumcalvianac(),
 			$keys[2] => $this->getNumcalviaint(),
 			$keys[3] => $this->getValunitri(),
-			$keys[4] => $this->getNumrelgasadi(),
-			$keys[5] => $this->getCodpar(),
-			$keys[6] => $this->getId(),
+			$keys[4] => $this->getValdolar(),
+			$keys[5] => $this->getNumrelgasadi(),
+			$keys[6] => $this->getCodpar(),
+			$keys[7] => $this->getId(),
 		);
 		return $result;
 	}
 
-	
+
 	public function setByName($name, $value, $type = BasePeer::TYPE_PHPNAME)
 	{
 		$pos = ViadefgenPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->setByPosition($pos, $value);
 	}
 
-	
+
 	public function setByPosition($pos, $value)
 	{
 		switch($pos) {
@@ -399,17 +427,20 @@ abstract class BaseViadefgen extends BaseObject  implements Persistent {
 				$this->setValunitri($value);
 				break;
 			case 4:
-				$this->setNumrelgasadi($value);
+				$this->setValdolar($value);
 				break;
 			case 5:
-				$this->setCodpar($value);
+				$this->setNumrelgasadi($value);
 				break;
 			case 6:
+				$this->setCodpar($value);
+				break;
+			case 7:
 				$this->setId($value);
 				break;
 		} 	}
 
-	
+
 	public function fromArray($arr, $keyType = BasePeer::TYPE_PHPNAME)
 	{
 		$keys = ViadefgenPeer::getFieldNames($keyType);
@@ -418,12 +449,13 @@ abstract class BaseViadefgen extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[1], $arr)) $this->setNumcalvianac($arr[$keys[1]]);
 		if (array_key_exists($keys[2], $arr)) $this->setNumcalviaint($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setValunitri($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setNumrelgasadi($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setCodpar($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setId($arr[$keys[6]]);
+		if (array_key_exists($keys[4], $arr)) $this->setValdolar($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setNumrelgasadi($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setCodpar($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setId($arr[$keys[7]]);
 	}
 
-	
+
 	public function buildCriteria()
 	{
 		$criteria = new Criteria(ViadefgenPeer::DATABASE_NAME);
@@ -432,6 +464,7 @@ abstract class BaseViadefgen extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(ViadefgenPeer::NUMCALVIANAC)) $criteria->add(ViadefgenPeer::NUMCALVIANAC, $this->numcalvianac);
 		if ($this->isColumnModified(ViadefgenPeer::NUMCALVIAINT)) $criteria->add(ViadefgenPeer::NUMCALVIAINT, $this->numcalviaint);
 		if ($this->isColumnModified(ViadefgenPeer::VALUNITRI)) $criteria->add(ViadefgenPeer::VALUNITRI, $this->valunitri);
+		if ($this->isColumnModified(ViadefgenPeer::VALDOLAR)) $criteria->add(ViadefgenPeer::VALDOLAR, $this->valdolar);
 		if ($this->isColumnModified(ViadefgenPeer::NUMRELGASADI)) $criteria->add(ViadefgenPeer::NUMRELGASADI, $this->numrelgasadi);
 		if ($this->isColumnModified(ViadefgenPeer::CODPAR)) $criteria->add(ViadefgenPeer::CODPAR, $this->codpar);
 		if ($this->isColumnModified(ViadefgenPeer::ID)) $criteria->add(ViadefgenPeer::ID, $this->id);
@@ -439,7 +472,7 @@ abstract class BaseViadefgen extends BaseObject  implements Persistent {
 		return $criteria;
 	}
 
-	
+
 	public function buildPkeyCriteria()
 	{
 		$criteria = new Criteria(ViadefgenPeer::DATABASE_NAME);
@@ -449,19 +482,19 @@ abstract class BaseViadefgen extends BaseObject  implements Persistent {
 		return $criteria;
 	}
 
-	
+
 	public function getPrimaryKey()
 	{
 		return $this->getId();
 	}
 
-	
+
 	public function setPrimaryKey($key)
 	{
 		$this->setId($key);
 	}
 
-	
+
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
@@ -473,6 +506,8 @@ abstract class BaseViadefgen extends BaseObject  implements Persistent {
 
 		$copyObj->setValunitri($this->valunitri);
 
+		$copyObj->setValdolar($this->valdolar);
+
 		$copyObj->setNumrelgasadi($this->numrelgasadi);
 
 		$copyObj->setCodpar($this->codpar);
@@ -480,10 +515,10 @@ abstract class BaseViadefgen extends BaseObject  implements Persistent {
 
 		$copyObj->setNew(true);
 
-		$copyObj->setId(NULL); 
+		$copyObj->setId(NULL);
 	}
 
-	
+
 	public function copy($deepCopy = false)
 	{
 				$clazz = get_class($this);
@@ -492,7 +527,7 @@ abstract class BaseViadefgen extends BaseObject  implements Persistent {
 		return $copyObj;
 	}
 
-	
+
 	public function getPeer()
 	{
 		if (self::$peer === null) {
@@ -501,4 +536,4 @@ abstract class BaseViadefgen extends BaseObject  implements Persistent {
 		return self::$peer;
 	}
 
-} 
+}

@@ -1,6 +1,6 @@
 propel:
   _attributes:
-    package: lib.model    
+    package: lib.model
   viadefgen:
     numsolvia:
       type: INTEGER
@@ -9,6 +9,10 @@ propel:
     numcalviaint:
       type: INTEGER
     valunitri:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    valdolar:
       type: NUMERIC
       size: 14
       scale: 2
@@ -99,7 +103,7 @@ propel:
       size: 2
     desnivapr:
       type: VARCHAR
-      size: 250    
+      size: 250
     id:
       type: INTEGER
       required: true
@@ -279,7 +283,7 @@ propel:
       scale: 2
     tipo:
       type: VARCHAR
-      size: 2    
+      size: 2
     id:
       type: INTEGER
       required: true

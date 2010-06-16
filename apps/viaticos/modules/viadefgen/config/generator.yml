@@ -8,6 +8,7 @@ generator:
       numcalvianac:   { name: Nro. Calculo de Viatico Nacional}
       numcalviaint:   { name: Nro. Calculo de Viatico Internacional}
       valunitri:      { name: Valor Unidad Tributaria}
+      valdolar:       { name: Tasa del Dolar}
       numrelgasadi:   { name: Nro. Relacion de Gastos Adicionales de Viaticos}
       codpar:
         name: Partida Viaticos Internacional
@@ -23,7 +24,7 @@ generator:
       title: Definiciones Generales
       display:
         Correlativos:    [numsolvia, numcalvianac, numcalviaint, numrelgasadi]
-        Datos Generales: [valunitri, codpar]
+        Datos Generales: [valunitri, valdolar, codpar]
       actions:
         _list:        none
         _save:        ~

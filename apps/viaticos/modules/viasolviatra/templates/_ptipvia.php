@@ -10,9 +10,9 @@
   <?php endif; }?>
 
 
-  <?php echo select_tag('viasolviatra[tipvia]', options_for_select($opciones,$viasolviatra->getTipvia(), array (
-
-))); ?>
+  <?php echo select_tag('viasolviatra[tipvia]', options_for_select($opciones,$viasolviatra->getTipvia()), array (
+      'onChange' => 'javascript: if($(this.id).value=="I") $("divcodpai").show(); else $("divcodpai").hide();',
+)); ?>
 
 
   <?php if($labels['viasolviatra{tipvia}']!='.:') { ?>

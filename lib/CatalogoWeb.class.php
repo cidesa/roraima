@@ -6087,6 +6087,14 @@ public function Catdefcatman_Cattramo($params = '') {
 
 		);
 	}
+        public function viaestado_codpai() {
+		$this->c = new Criteria();
+		$this->columnas = array (
+			ViapaisPeer :: CODPAI => 'Código',
+                        ViapaisPeer :: NOMPAI => 'Nombre',
+
+		);
+	}
         public function viaestado_codest() {
 		$this->c = new Criteria();
 		$this->columnas = array (

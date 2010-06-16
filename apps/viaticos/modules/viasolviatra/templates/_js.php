@@ -1,4 +1,8 @@
 <script language="Javascript">
+    if($('viasolviatra_tipvia').value=='N')
+        $('divcodpai').hide();
+    else
+        $('divcodpai').show();
     function rellenar(id)
     {
         if($(id).value=='')
@@ -8,7 +12,7 @@
     }
 
     function CalculaDias(id)
-    {   
+    {
         toAjax(4,getUrlModulo()+'ajax',$(id).value,'','&fecdes='+$('viasolviatra_fecdes').value+'&fechas='+$('viasolviatra_fechas').value);
     }
 
