@@ -3,16 +3,16 @@
 /**
  * Subclase para representar una fila de la tabla 'viasolviatra'.
  *
- * 
+ *
  *
  * @package    Roraima
  * @subpackage lib.model
  * @author     $ <desarrollo@cidesa.com.ve>
  * @version SVN: $
- * 
+ *
  * @copyright  Copyright 2007, Cide S.A.
- * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2 
- */ 
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
+ */
 class Viasolviatra extends BaseViasolviatra
 {
     protected $grid=array();
@@ -113,7 +113,7 @@ class Viasolviatra extends BaseViasolviatra
         return self::getNumsol();
     }
     public function getEmpleado()
-    {        
+    {
         $nomemp=H::getX('Codemp','Nphojint','Nomemp',$this->codemp);
         return  $this->codemp!='' ? $this->codemp.'  -  '.$nomemp : '';
     }
@@ -130,7 +130,7 @@ class Viasolviatra extends BaseViasolviatra
         $priori=0;
         $c = new Criteria();
         $c->add(ViaasopronivPeer::CODPROCED,$this->codproced);
-        $c->add(ViaasopronivPeer::CODNIVAPR,$this->codnivapr);        
+        $c->add(ViaasopronivPeer::CODNIVAPR,$this->codnivapr);
         $per = ViaasopronivPeer::doSelectOne($c);
         if($per)
           $priori=$per->getPrioriapr();
@@ -160,5 +160,24 @@ class Viasolviatra extends BaseViasolviatra
     public function getNomest()
     {
         return H::GetX('Codest','Viaestado','Nomest',self::getCodest());
+    }
+    public function getCodpai()
+    {
+        if($this->codciu!='')
+            return H::GetX('Codciu','Viaciudad','Codpai',$this->codciu);
+        else
+        {
+           $c = new Criteria();
+           $c->addAscendingOrderByColumn(ViapaisPeer::CODPAI);
+           $per = ViapaisPeer::doSelectOne($c);
+           if($per)
+             return $per->getCodpai();
+           else
+             return '0001';
+        }
+    }
+    public function getNompai()
+    {
+        return H::GetX('Codpai','Viapais','Nompai',self::getCodpai());
     }
 }

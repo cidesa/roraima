@@ -3,20 +3,21 @@
 /**
  * Subclase para representar una fila de la tabla 'viacalviatra'.
  *
- * 
+ *
  *
  * @package    Roraima
  * @subpackage lib.model
  * @author     $ <desarrollo@cidesa.com.ve>
  * @version SVN: $
- * 
+ *
  * @copyright  Copyright 2007, Cide S.A.
- * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2 
- */ 
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
+ */
 class Viacalviatra extends BaseViacalviatra
 {
     protected $grid=array();
     protected $check='';
+    protected $tipvia='';
 
     public function getNomext()
     {
@@ -44,7 +45,7 @@ class Viacalviatra extends BaseViacalviatra
         $codemp=H::getX('Numsol','Viasolviatra','Codemp',$this->refsol);
         $nomemp=H::getX('Codemp','Nphojint','Nomemp',$codemp);
         return  $codemp!='' ? $codemp.'  -  '.$nomemp : '';
-        
+
     }
     public function getNivel()
     {
@@ -143,7 +144,7 @@ class Viacalviatra extends BaseViacalviatra
         return $this->refcom ? 'COMPROMISO NRO '.$this->refcom : '';
     }
     public function getCiudad()
-    {        
+    {
         $codciu = H::GetX('Numsol','Viasolviatra','Codciu',$this->refsol);
         return $codciu.'  -  '.H::getX('Codciu','Viaciudad','Nomciu',$codciu);
     }
@@ -152,6 +153,12 @@ class Viacalviatra extends BaseViacalviatra
         $codciu = H::GetX('Numsol','Viasolviatra','Codciu',$this->refsol);
         $codest = H::getX('Codciu','Viaciudad','Codest',$codciu);
         return $codest.'  -  '.H::getX('Codest','Viaestado','Nomest',$codest);
+    }
+    public function getPais()
+    {
+        $codciu = H::GetX('Numsol','Viasolviatra','Codciu',$this->refsol);
+        $codpai = H::getX('Codciu','Viaciudad','Codpai',$codciu);
+        return $codpai.'  -  '.H::getX('Codpai','Viapais','Nompai',$codpai);
     }
 
 }

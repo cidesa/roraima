@@ -43,6 +43,7 @@ generator:
       nivel:            { name: Nivel, params: style="border:none" size=80}
       empleadoaco:      { name: Empleado Acompañante, params: style="border:none" size=80}
       nivelaco:         { name: Nivel, params: style="border:none" size=80}
+      pais:             { name: Pais, params: style="border:none" size=80}
       estado:           { name: Estado, params: style="border:none" size=80}
       ciudad:           { name: Ciudad, params: style="border:none" size=80}
       proced:           { name: Procedencia, params: style="border:none" size=80}
@@ -54,7 +55,7 @@ generator:
       totvia:           { name: Total Viaticos, params: style="border:none"  readonly=true}
       totviaenletras:   { name:  En Letras , type: textarea_tag, params: cols=65 style="border:none" readonly=true}
       compromiso:       { name: ., params: size=100 style="border:none;text-align:center;color:red;font-size:medium;font-weight:bold"}
-      
+
 
     list:
       title:            Listado de Calculo de Viaticos
@@ -65,7 +66,7 @@ generator:
     edit:
       title:            Edición de Calculo de Viaticos
       display:
-        Datos Básicos del Calculo de Viaticos:     [compromiso, numcal, feccal, tipcom, refsol, fecsol, tipvia, empleado, nivel, empleadoaco, nivelaco, estado, ciudad, proced, fortra, fecdes, fechas, numdia, empleadoaut, dessol, codcat, diaconper, diasinper, observaciones]
+        Datos Básicos del Calculo de Viaticos:     [compromiso, numcal, feccal, tipcom, refsol, fecsol, tipvia, empleado, nivel, empleadoaco, nivelaco, pais, estado, ciudad, proced, fortra, fecdes, fechas, numdia, empleadoaut, dessol, codcat, diaconper, diasinper, observaciones]
         Datos Detalle del Calculo:                 [_grid, totvia, totviaenletras, _js]
       actions:
         _list:        ~

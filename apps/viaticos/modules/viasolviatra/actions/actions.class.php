@@ -111,7 +111,7 @@ class viasolviatraActions extends autoviasolviatraActions
         $codcat = '';
         $nomcat = '';
         $c = new Criteria();
-        $c->add(NphojintPeer::CODEMP,$codigo);        
+        $c->add(NphojintPeer::CODEMP,$codigo);
         $per = NphojintPeer::doSelectOne($c);
         if($per)
         {
@@ -135,7 +135,7 @@ class viasolviatraActions extends autoviasolviatraActions
             $nomcat = $per2->getNomcat();
          }
         }
-        
+
         $output = '[["viasolviatra_nomemp","'.$nomemp.'",""],["viasolviatra_cedemp","'.$cedemp.'",""],["viasolviatra_cargo","'.$codcar.' - '.$nomcar.'",""],
                    ["viasolviatra_nivel","'.$codniv.' - '.$nomniv.'",""],["viasolviatra_codcat","'.$codcat.'",""],["viasolviatra_nomcat","'.$nomcat.'",""]]';
         break;
@@ -148,7 +148,7 @@ class viasolviatraActions extends autoviasolviatraActions
         $codniv = '';
         $nomniv = '';
         $codcar = '';
-        $nomcar = '';        
+        $nomcar = '';
         $c = new Criteria();
         $c->add(NphojintPeer::CODEMP,$codigo);
         $per = NphojintPeer::doSelectOne($c);
@@ -163,7 +163,7 @@ class viasolviatraActions extends autoviasolviatraActions
          $c2->add(NpestorgPeer::CODNIV,$codniv);
          $per2 = NpestorgPeer::doSelectOne($c2);
          if($per2)
-             $nomniv=$per2->getDesniv();         
+             $nomniv=$per2->getDesniv();
         }
         $output = '[["viasolviatra_nomempaco","'.$nomemp.'",""],["viasolviatra_cedempaco","'.$cedemp.'",""],["viasolviatra_cargoaco","'.$codcar.' - '.$nomcar.'",""],
                    ["viasolviatra_nivelaco","'.$codniv.' - '.$nomniv.'",""]]';
@@ -196,7 +196,7 @@ class viasolviatraActions extends autoviasolviatraActions
         $nomemp = '';
         $cedemp = '';
         $codniv = '';
-        $nomniv = '';        
+        $nomniv = '';
         $c = new Criteria();
         $c->add(NphojintPeer::CODEMP,$codigo);
         $per = NphojintPeer::doSelectOne($c);
@@ -204,7 +204,7 @@ class viasolviatraActions extends autoviasolviatraActions
         {
          $nomemp = $per->getNomemp();
          $cedemp = $per->getCedemp();
-         $codniv = $per->getCodniv();         
+         $codniv = $per->getCodniv();
          $c2 = new Criteria();
          $c2->add(NpestorgPeer::CODNIV,$codniv);
          $per2 = NpestorgPeer::doSelectOne($c2);
@@ -218,6 +218,12 @@ class viasolviatraActions extends autoviasolviatraActions
           $js="$('viasolviatra_codciu').value='';";
           $dato=H::GetX('Codest','Viaestado','Nomest',$codigo);
           $output = '[["javascript","'.$js.'",""],["viasolviatra_nomest","'.$dato.'",""],["","",""]]';
+        break;
+      case '7':
+          $js="$('viasolviatra_codciu').value='';
+               $('viasolviatra_codest').value='';";
+          $dato=H::GetX('Codpai','Viapais','Nompai',$codigo);
+          $output = '[["javascript","'.$js.'",""],["viasolviatra_nompai","'.$dato.'",""],["","",""]]';
         break;
       default:
         $output = '[["","",""],["","",""],["","",""]]';
@@ -301,7 +307,7 @@ class viasolviatraActions extends autoviasolviatraActions
     if($clasemodelo->getNumsol()=='##########')
     {
         $c = new Criteria();
-        $per = ViadefgenPeer::doSelectOne($c);        
+        $per = ViadefgenPeer::doSelectOne($c);
         $numsol = str_pad($per->getNumsolvia(),10,'0',STR_PAD_LEFT);
         $clasemodelo->setNumsol($numsol);
         $sql="update viadefgen set numsolvia='".($per->getNumsolvia()+1)."'";
@@ -325,7 +331,7 @@ class viasolviatraActions extends autoviasolviatraActions
         $clasemodelo->setStatus('P');
     else
         $clasemodelo->setStatus('A');
-    $clasemodelo->setNumsol(str_pad($clasemodelo->getNumsol(),10,'0',STR_PAD_LEFT));    
+    $clasemodelo->setNumsol(str_pad($clasemodelo->getNumsol(),10,'0',STR_PAD_LEFT));
     return parent::saving($clasemodelo);
   }
 

@@ -3,70 +3,73 @@
 
 abstract class BaseViadefgenPeer {
 
-	
+
 	const DATABASE_NAME = 'propel';
 
-	
+
 	const TABLE_NAME = 'viadefgen';
 
-	
+
 	const CLASS_DEFAULT = 'lib.model.Viadefgen';
 
-	
-	const NUM_COLUMNS = 7;
 
-	
+	const NUM_COLUMNS = 8;
+
+
 	const NUM_LAZY_LOAD_COLUMNS = 0;
 
 
-	
+
 	const NUMSOLVIA = 'viadefgen.NUMSOLVIA';
 
-	
+
 	const NUMCALVIANAC = 'viadefgen.NUMCALVIANAC';
 
-	
+
 	const NUMCALVIAINT = 'viadefgen.NUMCALVIAINT';
 
-	
+
 	const VALUNITRI = 'viadefgen.VALUNITRI';
 
-	
+
+	const VALDOLAR = 'viadefgen.VALDOLAR';
+
+
 	const NUMRELGASADI = 'viadefgen.NUMRELGASADI';
 
-	
+
 	const CODPAR = 'viadefgen.CODPAR';
 
-	
+
 	const ID = 'viadefgen.ID';
 
-	
+
 	private static $phpNameMap = null;
 
 
-	
+
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Numsolvia', 'Numcalvianac', 'Numcalviaint', 'Valunitri', 'Numrelgasadi', 'Codpar', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (ViadefgenPeer::NUMSOLVIA, ViadefgenPeer::NUMCALVIANAC, ViadefgenPeer::NUMCALVIAINT, ViadefgenPeer::VALUNITRI, ViadefgenPeer::NUMRELGASADI, ViadefgenPeer::CODPAR, ViadefgenPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('numsolvia', 'numcalvianac', 'numcalviaint', 'valunitri', 'numrelgasadi', 'codpar', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
+		BasePeer::TYPE_PHPNAME => array ('Numsolvia', 'Numcalvianac', 'Numcalviaint', 'Valunitri', 'Valdolar', 'Numrelgasadi', 'Codpar', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (ViadefgenPeer::NUMSOLVIA, ViadefgenPeer::NUMCALVIANAC, ViadefgenPeer::NUMCALVIAINT, ViadefgenPeer::VALUNITRI, ViadefgenPeer::VALDOLAR, ViadefgenPeer::NUMRELGASADI, ViadefgenPeer::CODPAR, ViadefgenPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('numsolvia', 'numcalvianac', 'numcalviaint', 'valunitri', 'valdolar', 'numrelgasadi', 'codpar', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
 	);
 
-	
+
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Numsolvia' => 0, 'Numcalvianac' => 1, 'Numcalviaint' => 2, 'Valunitri' => 3, 'Numrelgasadi' => 4, 'Codpar' => 5, 'Id' => 6, ),
-		BasePeer::TYPE_COLNAME => array (ViadefgenPeer::NUMSOLVIA => 0, ViadefgenPeer::NUMCALVIANAC => 1, ViadefgenPeer::NUMCALVIAINT => 2, ViadefgenPeer::VALUNITRI => 3, ViadefgenPeer::NUMRELGASADI => 4, ViadefgenPeer::CODPAR => 5, ViadefgenPeer::ID => 6, ),
-		BasePeer::TYPE_FIELDNAME => array ('numsolvia' => 0, 'numcalvianac' => 1, 'numcalviaint' => 2, 'valunitri' => 3, 'numrelgasadi' => 4, 'codpar' => 5, 'id' => 6, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
+		BasePeer::TYPE_PHPNAME => array ('Numsolvia' => 0, 'Numcalvianac' => 1, 'Numcalviaint' => 2, 'Valunitri' => 3, 'Valdolar' => 4, 'Numrelgasadi' => 5, 'Codpar' => 6, 'Id' => 7, ),
+		BasePeer::TYPE_COLNAME => array (ViadefgenPeer::NUMSOLVIA => 0, ViadefgenPeer::NUMCALVIANAC => 1, ViadefgenPeer::NUMCALVIAINT => 2, ViadefgenPeer::VALUNITRI => 3, ViadefgenPeer::VALDOLAR => 4, ViadefgenPeer::NUMRELGASADI => 5, ViadefgenPeer::CODPAR => 6, ViadefgenPeer::ID => 7, ),
+		BasePeer::TYPE_FIELDNAME => array ('numsolvia' => 0, 'numcalvianac' => 1, 'numcalviaint' => 2, 'valunitri' => 3, 'valdolar' => 4, 'numrelgasadi' => 5, 'codpar' => 6, 'id' => 7, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
 	);
 
-	
+
 	public static function getMapBuilder()
 	{
 		include_once 'lib/model/map/ViadefgenMapBuilder.php';
 		return BasePeer::getMapBuilder('lib.model.map.ViadefgenMapBuilder');
 	}
-	
+
 	public static function getPhpNameMap()
 	{
 		if (self::$phpNameMap === null) {
@@ -80,7 +83,7 @@ abstract class BaseViadefgenPeer {
 		}
 		return self::$phpNameMap;
 	}
-	
+
 	static public function translateFieldName($name, $fromType, $toType)
 	{
 		$toNames = self::getFieldNames($toType);
@@ -91,7 +94,7 @@ abstract class BaseViadefgenPeer {
 		return $toNames[$key];
 	}
 
-	
+
 
 	static public function getFieldNames($type = BasePeer::TYPE_PHPNAME)
 	{
@@ -101,13 +104,13 @@ abstract class BaseViadefgenPeer {
 		return self::$fieldNames[$type];
 	}
 
-	
+
 	public static function alias($alias, $column)
 	{
 		return str_replace(ViadefgenPeer::TABLE_NAME.'.', $alias.'.', $column);
 	}
 
-	
+
 	public static function addSelectColumns(Criteria $criteria)
 	{
 
@@ -118,6 +121,8 @@ abstract class BaseViadefgenPeer {
 		$criteria->addSelectColumn(ViadefgenPeer::NUMCALVIAINT);
 
 		$criteria->addSelectColumn(ViadefgenPeer::VALUNITRI);
+
+		$criteria->addSelectColumn(ViadefgenPeer::VALDOLAR);
 
 		$criteria->addSelectColumn(ViadefgenPeer::NUMRELGASADI);
 
@@ -130,7 +135,7 @@ abstract class BaseViadefgenPeer {
 	const COUNT = 'COUNT(viadefgen.ID)';
 	const COUNT_DISTINCT = 'COUNT(DISTINCT viadefgen.ID)';
 
-	
+
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
 	{
 				$criteria = clone $criteria;
@@ -154,7 +159,7 @@ abstract class BaseViadefgenPeer {
 						return 0;
 		}
 	}
-	
+
 	public static function doSelectOne(Criteria $criteria, $con = null)
 	{
 		$critcopy = clone $criteria;
@@ -165,12 +170,12 @@ abstract class BaseViadefgenPeer {
 		}
 		return null;
 	}
-	
+
 	public static function doSelect(Criteria $criteria, $con = null)
 	{
 		return ViadefgenPeer::populateObjects(ViadefgenPeer::doSelectRS($criteria, $con));
 	}
-	
+
 	public static function doSelectRS(Criteria $criteria, $con = null)
 	{
 		if ($con === null) {
@@ -186,35 +191,35 @@ abstract class BaseViadefgenPeer {
 
 						return BasePeer::doSelect($criteria, $con);
 	}
-	
+
 	public static function populateObjects(ResultSet $rs)
 	{
 		$results = array();
-	
+
 				$cls = ViadefgenPeer::getOMClass();
 		$cls = Propel::import($cls);
 				while($rs->next()) {
-		
+
 			$obj = new $cls();
 			$obj->hydrate($rs);
 			$results[] = $obj;
-			
+
 		}
 		return $results;
 	}
-	
+
 	public static function getTableMap()
 	{
 		return Propel::getDatabaseMap(self::DATABASE_NAME)->getTable(self::TABLE_NAME);
 	}
 
-	
+
 	public static function getOMClass()
 	{
 		return ViadefgenPeer::CLASS_DEFAULT;
 	}
 
-	
+
 	public static function doInsert($values, $con = null)
 	{
 		if ($con === null) {
@@ -225,7 +230,7 @@ abstract class BaseViadefgenPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
-		$criteria->remove(ViadefgenPeer::ID); 
+		$criteria->remove(ViadefgenPeer::ID);
 
 				$criteria->setDbName(self::DATABASE_NAME);
 
@@ -241,7 +246,7 @@ abstract class BaseViadefgenPeer {
 		return $pk;
 	}
 
-	
+
 	public static function doUpdate($values, $con = null)
 	{
 		if ($con === null) {
@@ -251,7 +256,7 @@ abstract class BaseViadefgenPeer {
 		$selectCriteria = new Criteria(self::DATABASE_NAME);
 
 		if ($values instanceof Criteria) {
-			$criteria = clone $values; 
+			$criteria = clone $values;
 			$comparison = $criteria->getComparison(ViadefgenPeer::ID);
 			$selectCriteria->add(ViadefgenPeer::ID, $criteria->remove(ViadefgenPeer::ID), $comparison);
 
@@ -262,7 +267,7 @@ abstract class BaseViadefgenPeer {
 		return BasePeer::doUpdate($selectCriteria, $criteria, $con);
 	}
 
-	
+
 	public static function doDeleteAll($con = null)
 	{
 		if ($con === null) {
@@ -279,7 +284,7 @@ abstract class BaseViadefgenPeer {
 		}
 	}
 
-	
+
 	 public static function doDelete($values, $con = null)
 	 {
 		if ($con === null) {
@@ -297,10 +302,10 @@ abstract class BaseViadefgenPeer {
 
 				$criteria->setDbName(self::DATABASE_NAME);
 
-		$affectedRows = 0; 
+		$affectedRows = 0;
 		try {
 									$con->begin();
-			
+
 			$affectedRows += BasePeer::doDelete($criteria, $con);
 			$con->commit();
 			return $affectedRows;
@@ -310,7 +315,7 @@ abstract class BaseViadefgenPeer {
 		}
 	}
 
-	
+
 	public static function doValidate(Viadefgen $obj, $cols = null)
 	{
 		$columns = array();
@@ -345,7 +350,7 @@ abstract class BaseViadefgenPeer {
     return $res;
 	}
 
-	
+
 	public static function retrieveByPK($pk, $con = null)
 	{
 		if ($con === null) {
@@ -362,7 +367,7 @@ abstract class BaseViadefgenPeer {
 		return !empty($v) > 0 ? $v[0] : null;
 	}
 
-	
+
 	public static function retrieveByPKs($pks, $con = null)
 	{
 		if ($con === null) {
@@ -380,7 +385,7 @@ abstract class BaseViadefgenPeer {
 		return $objs;
 	}
 
-} 
+}
 if (Propel::isInit()) {
 			try {
 		BaseViadefgenPeer::getMapBuilder();

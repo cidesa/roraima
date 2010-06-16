@@ -4,25 +4,25 @@
 
 class ViadefgenMapBuilder {
 
-	
+
 	const CLASS_NAME = 'lib.model.map.ViadefgenMapBuilder';
 
-	
+
 	private $dbMap;
 
-	
+
 	public function isBuilt()
 	{
 		return ($this->dbMap !== null);
 	}
 
-	
+
 	public function getDatabaseMap()
 	{
 		return $this->dbMap;
 	}
 
-	
+
 	public function doBuild()
 	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
@@ -42,11 +42,13 @@ class ViadefgenMapBuilder {
 
 		$tMap->addColumn('VALUNITRI', 'Valunitri', 'double', CreoleTypes::NUMERIC, false, 14);
 
+		$tMap->addColumn('VALDOLAR', 'Valdolar', 'double', CreoleTypes::NUMERIC, false, 14);
+
 		$tMap->addColumn('NUMRELGASADI', 'Numrelgasadi', 'int', CreoleTypes::INTEGER, false, null);
 
 		$tMap->addColumn('CODPAR', 'Codpar', 'string', CreoleTypes::VARCHAR, false, 32);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
-	} 
-} 
+	}
+}
