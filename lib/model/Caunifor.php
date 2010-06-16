@@ -29,7 +29,7 @@ class Caunifor extends BaseCaunifor
 
     public function getNomcat()
     {
-        return Herramientas::getX('codcat','Npcatpre','nomcat',self::getCoduni());
+        return Herramientas::getX('codcat','Npcatpre','nomcat',self::getCodcat());
     }
 
 }
