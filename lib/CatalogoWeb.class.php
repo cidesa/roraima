@@ -6095,8 +6095,10 @@ public function Catdefcatman_Cattramo($params = '') {
 
 		);
 	}
-        public function viaestado_codest() {
+        public function viaestado_codest($params = array()) {
 		$this->c = new Criteria();
+                if($params)
+                    $this->c->add(ViaestadoPeer :: CODPAI, $params[0]);
 		$this->columnas = array (
 			ViaestadoPeer :: CODEST => 'Código',
                         ViaestadoPeer :: NOMEST => 'Nombre',
