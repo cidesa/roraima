@@ -1,0 +1,57 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Viaextviatra
+    theme:            cidesaGenerator
+    fields:
+      numext:         { name: Codigo, params: maxlength=10 size=10  onBlur="rellenarcorr(this.id)"}
+      fecext:         { name: Fecha}
+      refcal:
+        name: Viaticos
+        msj_error: El CÃ³digo es necesario
+        catalogo:
+          catalogoweb: viacalviatra_numcal
+          clase: Viacalviatra
+          ajax: 1
+          parametros: getprincipal="getRefcal" getsecundario="getFecha" campoprincipal="refcal" camposecundario="fecha" campobase = "id"
+          divupdate: div1
+      codcat:
+        name: Categoria
+        msj_error: El CÃ³digo es necesario
+        catalogo:
+          catalogoweb: NconceptosCat_Asignar
+          clase: Npcatpre
+          ajax: 0
+          parametros: getprincipal="getCodcat" getsecundario="getNomcat" campoprincipal="codcat" camposecundario="nomcat" campobase = "id"
+      diaconper:        { name: Dias Con Pernocta}
+      diasinper:        { name: Dias sin Pernocta}
+      observaciones:    { name: Observaciones, type: textarea_tag, params: cols=65}
+      grid:             { name: .}
+      js:               { name: .}
+      feccal:           { name: Fecha Calculo, params: style="border:none" }      
+      empleado:         { name: Empleado, params: style="border:none" size=80}
+      nivel:            { name: Nivel, params: style="border:none" size=80}      
+      fecdes:           { name: Fecha Desde, params: style="border:none" }
+      fechas:           { name: Fecha Hasta, params: style="border:none" }
+      numdia:           { name: Nro Dias, params: style="border:none" }      
+      totvia:           { name: Total Viaticos, params: style="border:none"  readonly=true}
+      totviaenletras:   { name:  En Letras , type: textarea_tag, params: cols=65 style="border:none" readonly=true}
+      compromiso:       { name: ., params: size=100 style="border:none;text-align:center;color:red;font-size:medium;font-weight:bold"}
+      numdiaext:        { name: NÃºmero de Dias ExtenciÃ³n, params: size=5 disabled=false onblur="RecalcularDias(this.id);"}
+
+
+    list:
+      title:            Listado de Extenciones de Viaticos
+      display:          [=numext, fecext, refcal]
+      filters:          [numext, fecext, refcal]
+      sort:             numext
+
+    edit:
+      title:            EdiciÃ³n de Extenciones de Viaticos
+      display:
+        Datos Extencion de Viaticos:     [compromiso, numext, fecext, refcal, feccal, empleado, nivel, fecdes, fechas, numdia, codcat, diaconper, diasinper, observaciones]
+        Datos Detalle :                  [numdiaext, _grid, totvia, totviaenletras, _js]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

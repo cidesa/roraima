@@ -160,5 +160,15 @@ class Viacalviatra extends BaseViacalviatra
         $codpai = H::getX('Codciu','Viaciudad','Codpai',$codciu);
         return $codpai.'  -  '.H::getX('Codpai','Viapais','Nompai',$codpai);
     }
+    public function getRefcal()
+    {
+        return $this->numcal;
+    }
+    public function getCategoria()
+    {
+        $nomcat=H::getX('Codcat','Npcatpre','Nomcat',$this->codcat);
+        return  $this->codcat!='' ? $this->codcat.'  -  '.$nomcat : '';
+
+    }
 
 }
