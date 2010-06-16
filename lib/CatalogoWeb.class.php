@@ -2776,6 +2776,7 @@ $this->c= new Criteria();
     $this->c->addSelectColumn("'' as APRREQ");
     $this->c->addSelectColumn("'' as USUAPR");
     $this->c->addSelectColumn("'1937-01-01' as FECAPR");
+    $this->c->addSelectColumn("'' as CODEMP");
     $this->c->addSelectColumn("'' as CODCEN");
     $this->c->addSelectColumn("'' as ID");
 
