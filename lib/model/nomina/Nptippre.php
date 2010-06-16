@@ -16,6 +16,7 @@
 class Nptippre extends BaseNptippre
 {
   protected $obj=array();
+  protected $codnom="";
 
   public function getNomcon()
   {
@@ -24,6 +25,17 @@ class Nptippre extends BaseNptippre
   	  $nombre = NpdefcptPeer::doSelectone($c);
 	  if ($nombre)
 	  	return $nombre->getNomcon();
+	  else
+	    return ' ';
+  }
+
+  public function getNomnom()
+  {
+  	  $c = new Criteria();
+  	  $c->add(NpnominaPeer::CODNOM,self::getCodnom());
+  	  $nombre = NpnominaPeer::doSelectone($c);
+	  if ($nombre)
+	  	return $nombre->getNomnom();
 	  else
 	    return ' ';
   }
