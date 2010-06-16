@@ -37,19 +37,19 @@ generator:
       totvia:           { name: Total Viaticos, params: style="border:none"  readonly=true}
       totviaenletras:   { name:  En Letras , type: textarea_tag, params: cols=65 style="border:none" readonly=true}
       compromiso:       { name: ., params: size=100 style="border:none;text-align:center;color:red;font-size:medium;font-weight:bold"}
-      numdiaext:        { name: Número de Dias Extención, params: size=5 disabled=false onblur="RecalcularDias(this.id);"}
+      numdiaext:        { name: Número de Dias Extensión, params: size=5 disabled=false onblur="RecalcularDias(this.id);"}
 
 
     list:
-      title:            Listado de Extenciones de Viaticos
+      title:            Listado de Extensiones de Viaticos
       display:          [=numext, fecext, refcal]
       filters:          [numext, fecext, refcal]
       sort:             numext
 
     edit:
-      title:            Edición de Extenciones de Viaticos
+      title:            Edición de Extensiones de Viaticos
       display:
-        Datos Extencion de Viaticos:     [compromiso, numext, fecext, refcal, feccal, empleado, nivel, fecdes, fechas, numdia, codcat, diaconper, diasinper, observaciones]
+        Datos Extension de Viaticos:     [compromiso, numext, fecext, refcal, feccal, empleado, nivel, fecdes, fechas, numdia, codcat, diaconper, diasinper, observaciones]
         Datos Detalle :                  [numdiaext, _grid, totvia, totviaenletras, _js]
       actions:
         _list:        ~
