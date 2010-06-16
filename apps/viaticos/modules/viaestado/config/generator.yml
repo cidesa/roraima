@@ -4,10 +4,10 @@ generator:
     model_class:      Viaestado
     theme:            cidesaGenerator
     fields:
-      codest:         { name: CÃ³digo Estado, params: maxlegth=4 size=5 onBlur="$(this.id).value=$(this.id).value.pad(4,'0',0)"}
-      nomest:         { name: DescripciÃ³n, params: maxlegth=100 }
-      codpai:         { name: CÃ³digo PaÃ­s}
-      nompai:         { name: DescripciÃ³n}
+      codest:         { name: Código Estado, params: maxlegth=4 size=5 onBlur="$(this.id).value=$(this.id).value.pad(4,'0',0)"}
+      nomest:         { name: Descripción, params: maxlegth=100 }
+      codpai:         { name: Código País}
+      nompai:         { name: Descripción}
       pais:          { name: .}
 
     list:
@@ -19,7 +19,7 @@ generator:
         _edit:        ~
         _delete:        ~
     edit:
-      title: EdiciÃ³n de Estados
+      title: Edición de Estados
       display:
         Registro Estados: [_pais, codest, nomest ]
       actions:
