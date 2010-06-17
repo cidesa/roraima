@@ -32,7 +32,7 @@ class Nptippre extends BaseNptippre
   public function getNomnom()
   {
   	  $c = new Criteria();
-  	  $c->add(NpnominaPeer::CODNOM,self::getCodnom());
+  	  $c->add(NpnominaPeer::CODNOM,$this->codnom());
   	  $nombre = NpnominaPeer::doSelectone($c);
 	  if ($nombre)
 	  	return $nombre->getNomnom();
