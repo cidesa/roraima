@@ -3968,9 +3968,14 @@ public function Tsmovlib_tesmovdeglib2()
 
       if ($params){
       	if (count($params) > 1) {
-		  if ($params[1]!="") $this->c->add(NpcargosPeer :: CARVAN, 0,Criteria::GREATER_THAN);
+		  if ($params[1]!="") 
+                   {   
+                      $sql="(npcargos.carvan -(select coalesce(count(codcar),0) as codcar from npasicaremp where codcar=npcargos.codcar group by codcar)) >0";
+                      $this->c->add(NpcargosPeer :: CARVAN, $sql,Criteria::CUSTOM);
+                   }
       	}
-			$this->c->add(NpasicarnomPeer :: CODNOM, $params[0]);
+
+        $this->c->add(NpasicarnomPeer :: CODNOM, $params[0]);
 		}
 
       $this->columnas = array (
