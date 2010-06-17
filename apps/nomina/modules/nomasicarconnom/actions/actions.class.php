@@ -217,7 +217,7 @@ class nomasicarconnomActions extends autonomasicarconnomActions
         $npcargos = NpcargosPeer::doSelectOne($c);
         if($npcargos){
         	if ($this->filvac!="") {
-        	if ($npcargos->getCarvan()>0){
+        	if ($npcargos->getCarvan2()>0){
           $dato=$npcargos->getNomcar();
           $cod = $npcargos->getCodcar();
 		  $codtipcar=$npcargos->getCodtip();
