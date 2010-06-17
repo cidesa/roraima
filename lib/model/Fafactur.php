@@ -86,7 +86,7 @@ class Fafactur extends BaseFafactur
    return Herramientas::getX('CODPRO','Facliente','Dirpro',self::getCodcli());
   }
 
-    public function getDesconpag()
+  public function getDesconpag()
   {
    return Herramientas::getX('ID','Faconpag','Desconpag',self::getCodconpag());
   }
@@ -103,6 +103,14 @@ class Fafactur extends BaseFafactur
           return true;
        else
           return false;
+  }
+  public function getNumcom()
+  {
+       if($this->numcom=='' && $this->id!='')
+       {
+           return H::GetX('Reftra','Contabc','Numcom','FA'.substr($this->reffac,2));
+       }
+       return $this->numcom;
   }
 
 }
