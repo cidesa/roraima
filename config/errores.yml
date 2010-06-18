@@ -71,7 +71,7 @@
   msj: No puede salvar sin Introducir el Código de Partida
 118:
   cod: 118
-  msj: No hay disponibilidad en el siguiente Código presupuestario 
+  msj: No hay disponibilidad en el siguiente Código presupuestario
 119:
   cod: 119
   msj: No hay disponibilidad para los Recargos
@@ -464,7 +464,7 @@
   msj: Debe Cargar las Cuentas
 551:
   cod: 551
-  msj: Los Montos de Debitos y Creditos deben definirse correctamente   
+  msj: Los Montos de Debitos y Creditos deben definirse correctamente
 552:
   cod: 552
   msj: Existe una Chequera Repetida. No debe existir Chequeras iguales, Por favor Cambielas.
@@ -567,6 +567,16 @@
 315:
   cod: 315
   msj: Hay un Registro sin Orden asociado
+316:
+  cod: 316
+  msj: Existe un Monto de Asignación Presupuestaria igual a cero, este debe ser mayor.
+317:
+  cod: 317
+  msj: Existe un cantidad igual a cero, esta debe ser mayor.
+  msj: Existe un Monto de Asignación Presupuestaria igual a cero, este debe ser mayor.
+318:
+  cod: 318
+  msj: El Monto Total de la Formulación realizada al Proyecto debe ser Menor o Igual al Monto del Proyecto .
 
 ################# Control de Documentos #################
 # docpen
@@ -1201,18 +1211,12 @@
 1400:
     cod: 1400
     msj: Debe existir al menos un item a donar.
-
 1401:
     cod: 1401
     msj: No se puede guardar la solicitud si existen recaudos no consignados.
-
 1402:
   cod: 1402
   msj: Los precios o cantidades aprobadas en los items no pueden ser cero (0.0)
-
-1403:
-  cod: 1403
-  msj: La cédula del beneficiario sólo puede contener el prefijo "R" que significa que es el representante legal del no cedulado.
 
   ########## Viaticos ########
 1600:
@@ -1423,6 +1427,15 @@
 707:
   cod: 707
   msj: Existen Código de Actividad en la Declaración que no pertenecen al Año de la misma
+708:
+  cod: 708
+  msj: Ya existe una declaracion para la Propaganda en el Periodo.
+709:
+  cod: 709
+  msj: Ya existe una declaracion para el Espectaculo en el Periodo.
+710:
+  cod: 710
+  msj: Ya existe una declaracion para la Apuestas Lícitas
 
 
 ############Cuentas x Cobrar#########
@@ -1538,6 +1551,9 @@
 625:
   cod: 625
   msj: El Código Padre de esta Cuenta ya es Cargable, no puede tener mas hijos.
+626:
+  cod: 626
+  msj: El Total de Monto Centro de Costo sobrepasa el Monto asignado a la cuenta contable.
 
 
  #MODULO DE GESTION DE INDICADORES
@@ -1660,3 +1676,7 @@ V007:
 F001:
   cod: F001
   msj: No se puede borrar la Proforma porque ya esta relacionada con una Factura
+#OTROS FACTURAS
+F002:
+  cod: F002
+  msj: Debe ingresar formatos de hora validos hh:mmAM ó hh:mmPM
