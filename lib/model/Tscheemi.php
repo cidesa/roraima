@@ -46,6 +46,8 @@ class Tscheemi extends BaseTscheemi
 	protected $numeroord="";
 	protected $fecord="";
 	protected $filnumordfec="";
+        protected $aprmonche="";
+
 
     public function getNomben()
 	{
@@ -194,5 +196,39 @@ class Tscheemi extends BaseTscheemi
   {
   	return $this->filnumordfec;
   }
+
+  public function getAprmonche()
+  {
+    $dato="";
+    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('tesoreria',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['tesoreria']))
+	     if(array_key_exists('tesmovemiche',$varemp['aplicacion']['tesoreria']['modulos'])){
+	       if(array_key_exists('aprmonche',$varemp['aplicacion']['tesoreria']['modulos']['tesmovemiche']))
+	       {
+	       	$dato=$varemp['aplicacion']['tesoreria']['modulos']['tesmovemiche']['aprmonche'];
+}
+         }
+     return $dato;
+  }
+
+  public function setAprmonche()
+  {
+  	return $this->aprmonche;
+  }
+
+    public function getMontominche()
+    {
+        $t= new Criteria();
+        $reg= OpdefempPeer::doSelectOne($t);
+        if ($reg)
+        {
+            $montoche=$reg->getMonche();
+        }else $montoche=0;
+
+        return $montoche;
+    }
 
 }

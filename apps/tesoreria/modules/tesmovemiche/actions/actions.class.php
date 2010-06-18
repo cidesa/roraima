@@ -1517,7 +1517,7 @@ class tesmovemicheActions extends autotesmovemicheActions
         $this->coderror5=142;
         return false;
       }
-      $aprmonche=H::getConfApp('aprmonche','tesoreria','tesmovemiche');
+     /* $aprmonche=H::getConfApp('aprmonche','tesoreria','tesmovemiche');
       if ($aprmonche=='S')
       {
         $t= new Criteria();
@@ -1541,7 +1541,7 @@ class tesmovemicheActions extends autotesmovemicheActions
                return false;
         	}
         }
-      }
+      }*/
 
 
       if (Tesoreria::validaPeriodoCerrado($this->getRequestParameter('tscheemi[fecemi]'))==true)
