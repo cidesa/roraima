@@ -20,6 +20,18 @@ class Tsmovlib extends BaseTsmovlib
   protected $check = '';
   protected $codcon="";
   protected $savecedrif="";
+  protected $ctaeje="";
+
+
+  public function afterHydrate()
+  {
+    $c=new Criteria();
+    $contaba = ContabaPeer::doSelectOne($c);
+    if($contaba)
+    {
+    	$this->ctaeje=$contaba->getCodctapageje();
+    }   
+  }
 
 	public function getNomcue()
     {

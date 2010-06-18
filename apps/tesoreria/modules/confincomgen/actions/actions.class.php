@@ -376,7 +376,7 @@ $this->Bitacora('Guardo');
     $col1->setAlineacionObjeto(Columna::IZQUIERDA);
     $col1->setAlineacionContenido(Columna::IZQUIERDA);
     $col1->setNombreCampo('codcta');
-    $col1->setHTML('type="text" size="15" maxlength="25"');
+    $col1->setHTML('type="text" size="25" maxlength="25"');
     $col1->setCatalogo('contabb','sf_admin_edit_form', array('codcta' => 1,'descta' => 2,),'Confincomgen_Contabb');
     $col1->setJScript('onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$formatocontable.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}"');
     $col1->setAjax('confincomgen',1,2);
@@ -386,7 +386,7 @@ $this->Bitacora('Guardo');
     $col2->setAlineacionObjeto(Columna::IZQUIERDA);
     $col2->setAlineacionContenido(Columna::IZQUIERDA);
     $col2->setNombreCampo('Descta');
-    $col2->setHTML('type="text" size="40" disabled=true  maxlength="250" ');
+    $col2->setHTML('type="text" size="50" disabled=true  maxlength="250" ');
 
     $col3 = new Columna('Referencia');
     $col3->setTipo(Columna::TEXTO);

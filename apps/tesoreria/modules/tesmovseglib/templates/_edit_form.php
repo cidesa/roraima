@@ -205,6 +205,7 @@
   'maxlength' => 80,
   'control_name' => 'tsmovlib[destip]',
    )); echo $value ? $value : '&nbsp;' ?><?php echo input_hidden_tag('tsmovlib[debcre]', $tsmovlib->getDebcre()) ?> <?php echo input_hidden_tag('tsmovlib[codcon]', $tsmovlib->getCodcon()) ?>
+  <?php echo input_hidden_tag('tsmovlib[ctaeje]', $tsmovlib->getCtaeje()) ?>
     </div>
 
 <br>
@@ -331,7 +332,7 @@
          'before'   => 'if ($("tsmovlib_debcre").value=="C"){ var dc="D"}else { var dc="C"}',
          'script'   => true,
          'complete' => 'AjaxJSON(request, json)',
-         'with' => "'ajax=3&reftra='+document.getElementById('tsmovlib_reflib').value+'&tipo='+document.getElementById('tsmovlib_tipmov').value+'&fectra='+document.getElementById('tsmovlib_feccom').value+'&grabar=N'+'&destra='+document.getElementById('descom').value+'&ctas='+document.getElementById('tsmovlib_ctacon').value+'_'+document.getElementById('ctaeje').value+'&tipmov=X&mov='+document.getElementById('tsmovlib_debcre').value+'_'+dc+'&montos='+document.getElementById('tsmovlib_monmov').value+'_'+document.getElementById('tsmovlib_monmov').value+'&formulario=sf_admin/tesmovseglib/confincomgen&numcom='+$('tsmovlib_numcom').value.replace(/#/gi,'*')")
+         'with' => "'ajax=3&reftra='+document.getElementById('tsmovlib_reflib').value+'&tipo='+document.getElementById('tsmovlib_tipmov').value+'&fectra='+document.getElementById('tsmovlib_feccom').value+'&grabar=N'+'&destra='+document.getElementById('descom').value+'&ctas='+document.getElementById('tsmovlib_ctacon').value+'_'+document.getElementById('tsmovlib_ctaeje').value+'&tipmov=X&mov='+document.getElementById('tsmovlib_debcre').value+'_'+dc+'&montos='+document.getElementById('tsmovlib_monmov').value+'_'+document.getElementById('tsmovlib_monmov').value+'&formulario=sf_admin/tesmovseglib/confincomgen&numcom='+$('tsmovlib_numcom').value.replace(/#/gi,'*')")
          ,array('id' => 'btncompro',)) ?>
 <? }?>
 </div>
