@@ -695,6 +695,38 @@ $this->Bitacora('Guardo');
       Tesoreria::Grabar_Chequeras($tsdefban,$grid);
    }
 
+public function executeDelete()
+  {
+    $this->tsdefban = TsdefbanPeer::retrieveByPk($this->getRequestParameter('id'));
+    $this->forward404Unless($this->tsdefban);
+
+    try
+    {
+      $libros=H::getX_vacio('NUMCUE','Tsmovlib','Numcue',$this->tsdefban->getNumcue());
+      $bancos=H::getX_vacio('NUMCUE','Tsmovban','Numcue',$this->tsdefban->getNumcue());
+
+      if ($libros==''){
+        if ($bancos=='') {
+            $this->deleteTsdefban($this->tsdefban);
+            $this->Bitacora('Elimino');
+        }else {
+            $this->getRequest()->setError('delete', 'El Banco No Puede Ser Eliminado, Porque tiene Movimientos en Banco Asociados.');
+            return $this->forward('tesdefcueban', 'list');
+        }
+      }else{
+          $this->getRequest()->setError('delete', 'El Banco No Puede Ser Eliminado, Porque tiene Movimientos en Libro Asociados.');
+          return $this->forward('tesdefcueban', 'list');
+      }
+    }
+    catch (PropelException $e)
+    {
+      $this->getRequest()->setError('delete', 'El Banco No Puede Ser Eliminado, Porque tiene Movimientos Asociados.');
+      return $this->forward('tesdefcueban', 'list');
+    }
+
+    return $this->redirect('tesdefcueban/list');
+  }
+
    protected function deleteTsdefban($tsdefban)
    {
      $c= new Criteria();
