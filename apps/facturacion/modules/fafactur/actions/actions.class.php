@@ -7,7 +7,7 @@
  * @package    Roraima
  * @subpackage fafactur
  * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id: actions.class.php 38941 2010-06-14 22:08:39Z cramirez $
+ * @version SVN: $Id: actions.class.php 39065 2010-06-18 14:30:15Z cramirez $
  *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -994,6 +994,24 @@ class fafacturActions extends autofafacturActions {
 	       {
 	       	  $this->coderr=1141;
 	       	  return false;
+	       }
+               if ($x[$i]->getHorsal()!="")
+	       {
+                  if(!H::ValidarHora($x[$i]->getHorsal()))
+                  {
+                    $this->coderr='F002';
+                    return false;
+                  }
+
+	       }
+               if ($x[$i]->getHorlleg()!="")
+	       {
+                  if(!H::ValidarHora($x[$i]->getHorlleg()))
+                  {
+                    $this->coderr='F002';
+                    return false;
+                  }
+
 	       }
 	       $i++;
 	      }

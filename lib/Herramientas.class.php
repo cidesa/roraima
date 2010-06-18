@@ -2547,6 +2547,36 @@ public static function obtenerDiaMesOAno($fecha,$formato,$dmoa)
   return $sexto.$sepmil6.$quinto.$sepmil5.$cuarto.$sepmil4.$tercero.$sepmil3.$segundo.$sepmil2.$primero.$sepmil1.$decimal;
   }//function montoescrito($numero)
   /////////////////////////////////////////////////////////////////////////////////////////////////////
+  public static function ValidarHora($hora)
+  {
+    $auxhora = split(":",$hora);
+    $separadorhora=substr($hora,2,1);
+    $formatohora=substr($hora,5);
+    if(count($auxhora)>1 && strlen($hora)==7 && $separadorhora==':')
+        if(strtoupper($formatohora)=="AM" || strtoupper($formatohora)=="PM")
+        {
+            $phoras=$auxhora[0];
+            $pmin=substr($auxhora[1],0,2);
+            if(is_numeric($phoras))
+                if(intval($phoras)>=1 && intval($phoras)<=12)
+                    return true;
+                else
+                    return false;
+            else
+                return false;
+            if(is_numeric($pmin))
+                if(intval($pmin)>=0 && intval($pmin)<=59)
+                    return true;
+                else
+                    return false;
+            else
+                return false;
+        }else
+            return false;
+     else
+        return false;
+
+}
 
 }
 
