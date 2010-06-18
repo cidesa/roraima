@@ -456,8 +456,8 @@ $this->Bitacora('Guardo');
 		       	$this->cuentamov=$varemp['aplicacion']['tesoreria']['modulos']['tesmovseglib']['cuentamov'];
 		       }
          if ($this->cuentamov=='S')
-           $output = '[["'.$cajtexmos.'","'.$dato.'",""],["tsmovlib_debcre","'.$dato2.'",""],["ctaeje","'.$dato3.'",""]]';
-          else $output = '[["'.$cajtexmos.'","'.$dato.'",""],["tsmovlib_debcre","'.$dato2.'",""],["tstipmov_codcon","'.$dato3.'",""]]';
+           $output = '[["'.$cajtexmos.'","'.$dato.'",""],["tsmovlib_debcre","'.$dato2.'",""],["tsmovlib_ctaeje","'.$dato3.'",""]]';
+          else $output = '[["'.$cajtexmos.'","'.$dato.'",""],["tsmovlib_debcre","'.$dato2.'",""],["tsmovlib_codcon","'.$dato3.'",""]]';
             $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
         return sfView::HEADER_ONLY;
       }
@@ -1008,6 +1008,10 @@ $this->Bitacora('Guardo');
     if (isset($tsmovlib['cedrif']))
     {
       $this->tsmovlib->setCedrif($tsmovlib['cedrif']);
+    }
+    if (isset($tsmovlib['ctaeje']))
+    {
+      $this->tsmovlib->setCtaeje($tsmovlib['ctaeje']);
     }
 
   }
