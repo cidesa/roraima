@@ -21,6 +21,7 @@ class Tsmovlib extends BaseTsmovlib
   protected $codcon="";
   protected $savecedrif="";
   protected $ctaeje="";
+  protected $savemovcero="";
 
 
   public function afterHydrate()
@@ -85,5 +86,27 @@ class Tsmovlib extends BaseTsmovlib
     {
        return Herramientas::getX('CEDRIF','Opbenefi','Nomben',self::getCedrif());
     }
+
+  public function getSavemovcero()
+  {
+    $dato="";
+    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('tesoreria',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['tesoreria']))
+	     if(array_key_exists('tesmovseglib',$varemp['aplicacion']['tesoreria']['modulos'])){
+	       if(array_key_exists('savemovcero',$varemp['aplicacion']['tesoreria']['modulos']['tesmovseglib']))
+	       {
+	       	$dato=$varemp['aplicacion']['tesoreria']['modulos']['tesmovseglib']['savemovcero'];
+	       }
+         }
+     return $dato;
+  }
+
+  public function setSavemovcero()
+  {
+  	return $this->savemovcero;
+  }
 
 }

@@ -30,6 +30,7 @@
 <input id="numcom" name="numcom" type="hidden" value="<? print $tsmovlib->getNumcom(); ?>">
 <input id="refpag" name="refpag" type="hidden" value="<? print $tsmovlib->getRefpag(); ?>">
 <input id="formulario" name="formulario" type="hidden">
+<?php echo input_hidden_tag('tsmovlib[savemovcero]', $tsmovlib->getSavemovcero()) ?>
 
 <table width="100%">
   <tr>
@@ -133,7 +134,6 @@
 <?php $value = object_input_tag($tsmovlib, 'getCedrif', array (
   'size' => 10,
   'maxlength' => 15,
-  'readonly'  =>  $tsmovlib->getId()!='' ? true : false ,
   'control_name' => 'tsmovlib[cedrif]',  
   'onBlur'=> remote_function(array(
         'url'      => 'tesmovseglib/ajax',
@@ -218,7 +218,7 @@
 
   <?php $value = object_input_tag($tsmovlib, 'getDeslib', array (
   'size' => 120,
-  //'readonly'  =>  $tsmovlib->getId()!='' ? true : false ,
+  'readonly'  =>  ($tsmovlib->getId()!='' && $tsmovlib->getSavecedrif()!='S') ? true : false ,
   'maxlength' => 4000,
   'control_name' => 'tsmovlib[deslib]',
   'onBlur'  => "javascript: deslib()",
@@ -362,7 +362,7 @@ function deshabilitarbotones()
     if (id!="")
     {
      $$('.botoncat')[0].disabled=true;
-  	 $$('.botoncat')[1].disabled=true;
+  	 //$$('.botoncat')[1].disabled=true;
          $$('.botoncat')[2].disabled=true;
    	 $('trigger_tsmovlib_feclib').hide();
   	 $('trigger_tsmovlib_feccom').hide();
