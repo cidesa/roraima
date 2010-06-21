@@ -1645,8 +1645,14 @@ public static function validarCuentasGrid($grid)
     {
       $tsmovlib->setRefpag("NULO");
     }
-    $tsmovlib->setStatus('C');
-    $tsmovlib->setStacon('N');
+    if ($tsmovlib->getSavemovcero()=='S')
+    {
+       $tsmovlib->setStatus('N');
+       $tsmovlib->setStacon('C');
+    }else {
+      $tsmovlib->setStatus('C');
+      $tsmovlib->setStacon('N');
+    }
     $tsmovlib->setStacon1('N');
     $loguse= sfContext::getInstance()->getUser()->getAttribute('loguse');
     $tsmovlib->setLoguse($loguse);

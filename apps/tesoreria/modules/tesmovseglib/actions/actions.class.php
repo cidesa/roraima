@@ -80,10 +80,13 @@ class tesmovseglibActions extends autotesmovseglibActions
     return false;
     }
 
+    if ($this->getRequestParameter('tsmovlib[savemovcero]')!='S')
+    {
       if (self::validarGeneraComprobante())
       {
     $this->coderror4=508;
     return false;
+    }
     }
 
       return true;
@@ -157,6 +160,7 @@ class tesmovseglibActions extends autotesmovseglibActions
       if ($this->getUser()->getAttribute('grabo',null,$this->getUser()->getAttribute('formulario'))=='S')
       {
         $numcom='';
+        if ($tsmovlib->getSavemovcero()!='S') {
         $getform=$this->getRequestParameter('formulario');
         $formulario=split('!',$getform);
 
@@ -190,10 +194,16 @@ class tesmovseglibActions extends autotesmovseglibActions
         }
 
         $this->getUser()->getAttributeHolder()->remove('grabo',$this->getUser()->getAttribute('formulario'));
+        }
         Tesoreria::salvarTesmovseglib($tsmovlib,$numcom);
         Tesoreria::actualiza_Bancos('A', $tsmovlib->getDebcre(), $tsmovlib->getNumcue(), $tsmovlib->getMonmov());
 
+      }else {
+        if ($tsmovlib->getSavemovcero()=='S') {
+          Tesoreria::salvarTesmovseglib($tsmovlib,"");
+          Tesoreria::actualiza_Bancos('A', $tsmovlib->getDebcre(), $tsmovlib->getNumcue(), $tsmovlib->getMonmov());
       }
+    }
     }
 
   }
@@ -1013,7 +1023,10 @@ $this->Bitacora('Guardo');
     {
       $this->tsmovlib->setCtaeje($tsmovlib['ctaeje']);
     }
-
+    if (isset($tsmovlib['savemovcero']))
+    {
+      $this->tsmovlib->setSavemovcero($tsmovlib['savemovcero']);
+  }
   }
 
     public function executeEliminar()

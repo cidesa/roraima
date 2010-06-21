@@ -13,7 +13,7 @@
   <li><?php echo button_to(__('list'), 'tesmovseglib/list?id='.$tsmovlib->getId(), array (
   'class' => 'sf_admin_action_list',
 )) ?></li>
-<? if ($tsmovlib->getId()=='') { ?>
+<? if ($tsmovlib->getId()==''|| $tsmovlib->getSavemovcero()=='S') { ?>
   <li><?php echo submit_tag_click(__('save'), array (
   'name' => 'save',
   'form' => 'sf_admin_edit_form',
