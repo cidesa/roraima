@@ -9537,6 +9537,23 @@ exit();
           $registro->setMonto($x[$j]["monto"]) ;
           $registro->setCantidad($x[$j]["cantidad"]) ;
           $registro->save() ;
+
+          $t= new Criteria();
+          $t->add(NpconsueldoPeer::CODNOM,$npasiconemp->getCodnom());
+          $t->add(NpconsueldoPeer::CODCON,$npasiconemp->getCodcon());
+          $res= NpconsueldoPeer::doSelectOne($t);
+          if ($res)
+          {
+             $w= new Criteria();
+             $w->add(NpcargosPeer::CODCAR,$x[$j]["codcar"]);
+             $reg=NpcargosPeer::doSelectOne($w);
+             if ($reg)
+             {
+                if ($npasiconemp->getTipo()=='M') $reg->setSuecar($x[$j]["monto"]);
+                else $reg->setSuecar($x[$j]["cantidad"]);
+                $reg->save();
+        }
+      }
         }
       }
       $j++;
