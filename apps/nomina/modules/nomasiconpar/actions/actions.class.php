@@ -44,7 +44,7 @@ class nomasiconparActions extends autonomasiconparActions
     $u->add(NpasiconparPeer::CODTIPCAR,$codtipcar);
     if ($cardoc!=$codtipcar) { $u->add(NpasiconparPeer::GRACAR,$gracar); }  //Nivel - Escala
     else {
-        $u->add(NpasiconparPeer::CODTIP,$codtip);  //DedicaciÃ³n
+        $u->add(NpasiconparPeer::CODTIP,$codtip);  //Dedicación
         $u->add(NpasiconparPeer::CODTIPCAT,$codtipcat);  // Categoria
     }
     $u->add(NpasiconparPeer::CODTIE,$codtie);
@@ -53,8 +53,8 @@ class nomasiconparActions extends autonomasiconparActions
     if (!$manyresults)
     {
       $sql="select a.codcon as codcon, b.nomcon as nomcon, b.codpar as codpar, c.nompar as nompar, 9 as id
-          from npasiconnom a, npdefcpt b, nppartidas c where a.codnom='".$codnom."'
-          and  a.codcon=b.codcon and b.codpar=c.codpar order by a.codcon";
+          from npasiconnom a, npdefcpt b left outer join nppartidas c  on b.codpar=c.codpar where a.codnom='".$codnom."'
+          and  a.codcon=b.codcon order by a.codcon";
       Herramientas::BuscarDatos($sql,&$manyresults);
     }
 
@@ -194,9 +194,9 @@ class nomasiconparActions extends autonomasiconparActions
 
   /**
    *
-   * FunciÃ³n que se ejecuta luego los validadores del negocio (validators)
-   * Para realizar validaciones especÃ­ficas del negocio del formulario
-   * Para mayor informaciÃ³n vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
+   * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
   public function validateEdit()
@@ -216,7 +216,7 @@ class nomasiconparActions extends autonomasiconparActions
   }
 
   /**
-   * FunciÃ³n para actualziar el grid en el post si ocurre un error
+   * Función para actualziar el grid en el post si ocurre un error
    * Se pueden colocar aqui los grids adicionales
    *
    */
