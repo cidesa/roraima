@@ -293,9 +293,9 @@ public static function Validar_biedisactmuenew($valor1,$valor2)
     $msjuno = "";
     $msjdos = "";
 
-    $depacu   = H::FormatoMonto($bnregmue->getDepacu(),0);
-    $valini   = H::FormatoMonto($bnregmue->getValini(),0);
-    $valadi   = H::FormatoMonto($bnregmue->getValadi(),0);;
+    $depacu   = $bnregmue->getDepacu();
+    $valini   = $bnregmue->getValini();
+    $valadi   = $bnregmue->getValadi();
     $descri = split('-',$clase->getTipdismue());
     $descripC = $descri[1];
     $ctadepcar= $bndefcon->getCtadepcar();  //CuentaCar
