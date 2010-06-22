@@ -1638,7 +1638,7 @@ public static function validarCuentasGrid($grid)
   {
     if (!$tsmovlib->getId())
     {
-      $tsmovlib->setNumcon($numcom);
+      $tsmovlib->setNumcom($numcom);
       $tsmovlib->setCodcta($tsmovlib->getCtacon());
     }
     if (!$tsmovlib->getRefpag())
