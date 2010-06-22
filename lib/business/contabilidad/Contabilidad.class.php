@@ -760,5 +760,99 @@ class Contabilidad
 			else return -1;
 		}
     }
+
+    public static function salvarAsigCentroCosto($contabc,$grid)
+    {
+        $x=$grid[0];
+        $j=0;
+        $r = new Criteria();
+        $r->add(CodetcencosPeer::NUMCOM,$contabc->getNumcom());
+        $datos=CodetcencosPeer::doSelect($r);
+        if (!$datos)
+        {            
+            while ($j<count($x))
+            {
+             if ($x[$j]->getCodcencos()!="" && $x[$j]->getMoncencos()>0) {
+              $detcencos= new Codetcencos();
+              $detcencos->setNumcom($contabc->getNumcom());
+              $detcencos->setCodcta($x[$j]->getCodcta());
+              $detcencos->setCodcencos($x[$j]->getCodcencos());
+              $detcencos->setMoncencos($x[$j]->getMoncencos());
+              $detcencos->save();
+             }
+              $j++;
+            }
+        }else {
+            while ($j<count($x))
+            {
+             if ($x[$j]->getCodcencos()!="" && $x[$j]->getMoncencos()>0) {
+              $x[$j]->setNumcom($contabc->getNumcom());
+              $x[$j]->save();
+             }
+              $j++;
+            }
+        }
+    }
+
+  public static function posicion_en_el_grid($arreglo,$codigo)
+  {
+    $enc=false;
+    $ind=0;
+    while (($ind<count($arreglo)) && (!$enc))
+    {
+        if ($arreglo[$ind]["codcta"]==$codigo)
+        { $enc=true; }
+      $ind++;
+    }
+
+    if ($enc)
+    { $posicionenelgrid=$ind;}else{ $posicionenelgrid=0;}
+
+   return $posicionenelgrid;
+  }
+
+  public static function ArregloCuentas($grid)
+  {
+    $arreglocta=array();
+    $x=$grid[0];
+    $j=0;
+    while ($j<count($x))
+    {
+  	$pos=self::posicion_en_el_grid($arreglocta,$x[$j]->getCodcta());
+        if ($pos==0)
+        {
+         $l=count($arreglocta)+1;
+         $arreglocta[$l-1]["codcta"]=$x[$j]->getCodcta();
+         $arreglocta[$l-1]["monasi"]=$x[$j]->getMonasi();
+         $arreglocta[$l-1]["moncencos"]=$x[$j]->getMoncencos();
+        }
+        else
+        {
+          $valor=H::toFloat($arreglocta[$pos-1]["moncencos"]);
+          $arreglocta[$pos-1]["moncencos"]=($valor+$x[$j]->getMoncencos());
+        }
+        $j++;
+    }
+
+    return $arreglocta;
+  }
+
+  public static function validarMontoTotalCuenta($grid,&$cod)
+  {
+    $arreglo=self::ArregloCuentas($grid);
+    $j=0;
+    while ($j<count($arreglo))
+    {
+      if (H::toFloat($arreglo[$j]["moncencos"])>H::toFloat($arreglo[$j]["monasi"]))
+      {
+        $cod=$arreglo[$j]["codcta"];
+        return 626;
+      }
+     $j++;
+    }
+    return -1;
+  }
+
+
 }
 ?>
