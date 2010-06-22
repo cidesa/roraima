@@ -1134,7 +1134,8 @@ $this->Bitacora('Guardo');
             }
             else
             {
-              if ($tsmovlib[0]["tipmov"]=='ANUC')
+               $savemovcero=H::getConfApp('savemovcero', 'tesoreria', 'tesmovseglib');
+              if ($tsmovlib[0]["tipmov"]=='ANUC' || $savemovcero=='S')
               {
 
               $c = new Criteria();
