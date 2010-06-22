@@ -949,6 +949,7 @@ class fafacturActions extends autofafacturActions {
       	  $this->coderr=1136;
           return false;
         }
+        
         $grid2=Herramientas::CargarDatosGridv2($this,$this->obj3);
         if (Factura::Verificar_pago($grid2,H::tofloat($this->getRequestParameter('fafactur[monfac]')),$this->getRequestParameter('fafactur[tipconpag]'))==false)
         {
