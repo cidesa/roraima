@@ -1204,6 +1204,7 @@ propel:
     tipcnx:
       type: VARCHAR
       size: 3
+      required: true
     detobs:
       type: VARCHAR
       size: 250
