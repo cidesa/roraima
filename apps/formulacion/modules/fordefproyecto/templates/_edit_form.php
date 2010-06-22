@@ -1235,18 +1235,18 @@
 	 }
   }
  function validargrid(id)
- {
-    var aux = id.split("_");
+ {     
+   var aux = id.split("_");
    var name=aux[0];
    var fila=aux[1];
    var col=parseInt(aux[2]);
 
-   var coldes=col+1;
+    var coldes=col+1;
     var descripcion=name+"_"+fila+"_"+coldes;
 
 	if (organismo_repetido(id))
 	{
-		alert('El organismo se encuentra repetido');
+		alert('El organismo se encuentra asociado a ese Tipo de Contribucion');
 		$(id).value="";
 		$(descripcion).value="";
 
@@ -1261,20 +1261,24 @@
    var fila=aux[1];
    var col=parseInt(aux[2]);
 
-   var organismo=$(id).value;
+   var coltip=col-1;
+   var tipcont=name+"_"+fila+"_"+coltip;
+
+   var tipo_org=$(tipcont).value+'_'+$(id).value;
 
    var organismorepetido=false;
    var am=totalregistros('bx',1,50);
    var i=0;
    while (i<am)
    {
-    var codigo="bx"+"_"+i+"_1";
+    var tipo="bx"+"_"+i+"_1";
+    var codigo="bx"+"_"+i+"_2";
 
-    var organismo2=$(codigo).value;
+    var tipo_org2=$(tipo).value+'_'+$(codigo).value;
 
     if (i!=fila)
     {
-      if (organismo==organismo2)
+      if (tipo_org==tipo_org2)
       {
         organismorepetido=true;
         break;
