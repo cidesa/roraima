@@ -400,7 +400,7 @@ class Formulacion
     $j=0;
   while ($j<count($x))
   {
-   if ($x[$j]->getCodorg()!='')
+   if ($x[$j]->getCodorg()!='' && $x[$j]->getTipcnx()!='')
    {
     $x[$j]->setCodpro($codproyec);
     $x[$j]->save();
@@ -594,12 +594,55 @@ class Formulacion
     $result = -1;
 
 	  $registro=$grid[0];
-		  if (empty($registro[0]))
-		   {
-		   	//No se guardo el encabezado de la Fomulacion.
-		   	//El grid debe contener datos
-		  	return 302;
-		   }
+          if (count($registro)==0)
+           {
+                //No se guardo el encabezado de la Fomulacion.
+                //El grid debe contener datos
+                return 302;
+           }else {
+             $l=0;
+             $acummon=0;
+             while ($l<count($registro))
+             {
+               if  ($registro[$l]->getCodunije()!="" && $registro[$l]->getCodpar()!="" && $registro[$l]->getDisper()!=""){
+                   if ($registro[$l]->getMonpre()==0)
+                   {
+                     return 316;
+                   }
+                   
+                   if ($registro[$l]->getCanins()==0)
+                   {
+                       return 317;
+                   }
+
+                   if ($registro[$l]->getMonpre()>0)
+                   {
+                       $acummon= $acummon + $registro[$l]->getMonpre();
+                   }
+               }
+               $l++;
+              }
+
+              $totmonto=0;
+              $t= new Criteria();
+              $t->add(FordetpryaccespmetPeer::CODPRO,$reg->getCodpro());
+              $t->add(FordetpryaccespmetPeer::CODACCESP,$reg->getCodaccesp());
+              $t->add(FordetpryaccespmetPeer::CODMET,$reg->getCodmet());
+              $resultado= FordetpryaccespmetPeer::doSelect($t);
+              if ($resultado)
+              {
+                  foreach ($resultado as $obj)
+                  {
+                     $totmonto= $totmonto + $obj->getMonpre();
+                  }
+              }
+
+              if ($acummon>$totmonto)
+              {
+                return 318;
+              }
+
+           }
 	return $result;
   }
 

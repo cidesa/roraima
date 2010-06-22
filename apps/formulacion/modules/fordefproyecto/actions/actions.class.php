@@ -758,33 +758,29 @@ $this->Bitacora('Guardo');
     $opciones->setTitulo('Conexiones Inter-Institucionales');
     $opciones->setHTMLTotalFilas(' ');
 
-    $col1 = new Columna('Codigo');
-    $col1->setTipo(Columna::TEXTO);
+    $col1 = new Columna('Tipo de Contribución');
+    $col1->setTipo(Columna::COMBO);
     $col1->setEsGrabable(true);
-    $col1->setAlineacionObjeto(Columna::CENTRO);
-    $col1->setAlineacionContenido(Columna::CENTRO);
-    $col1->setNombreCampo('codorg');
-    //$col1->setAjax('almcotiza',3,2);
-    $col1->setJScript('onBlur="ajax(this.id)"');
-    //$col1->setCatalogo('Caregart','sf_admin_edit_form',$obj,'Caregart_Almcotiza',$params);
-    $col1->setCatalogo('fordeforgpub','sf_admin_edit_form',array('codorg' => 1,'nomorg' => 2));
-    $col1->setHTML('type="text" size="5" maxlength="4" ');
+    $col1->setNombreCampo('tipcnx');
+    $col1->setCombo(self::cargarTipoCont());
+    $col1->setHTML(' ');
 
-
-	$col2 = new Columna('Descripción');
+    $col2 = new Columna('Codigo');
     $col2->setTipo(Columna::TEXTO);
+    $col2->setEsGrabable(true);
     $col2->setAlineacionObjeto(Columna::CENTRO);
     $col2->setAlineacionContenido(Columna::CENTRO);
-    $col2->setNombreCampo('nomorg');
-    $col2->setHTML('type="text" size="25" readonly=true');
+    $col2->setNombreCampo('codorg');
+    $col2->setJScript('onBlur="ajax(this.id)"');
+    $col2->setCatalogo('fordeforgpub','sf_admin_edit_form',array('codorg' => 2,'nomorg' => 3));
+    $col2->setHTML('type="text" size="5" maxlength="4" ');
 
-	$col3 = new Columna('Tipo de Contribución');
-    $col3->setTipo(Columna::COMBO);
-    $col3->setEsGrabable(true);
-    $col3->setNombreCampo('tipcnx');
-    $col3->setCombo(self::cargarTipoCont());
-    $col3->setHTML(' ');
-
+    $col3 = new Columna('Descripción');
+    $col3->setTipo(Columna::TEXTO);
+    $col3->setAlineacionObjeto(Columna::CENTRO);
+    $col3->setAlineacionContenido(Columna::CENTRO);
+    $col3->setNombreCampo('nomorg');
+    $col3->setHTML('type="text" size="25" readonly=true');
 
 	$col4 = new Columna('Detalles/Observaciones');
     $col4->setTipo(Columna::TEXTO);
@@ -935,6 +931,8 @@ $this->Bitacora('Guardo');
     $this->updateFordefpryFromRequest();
     }catch(Exception $ex){}
 
+    $grid=Herramientas::CargarDatosGrid($this, $this->obj);
+    $grid2=Herramientas::CargarDatosGrid($this, $this->obj2);
 
     $this->labels = $this->getLabels();
 
