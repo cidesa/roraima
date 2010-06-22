@@ -1,0 +1,25 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Codefcencos
+    theme:            cidesaGenerator
+    fields:
+      codcencos: { name: Código, params: size=10 maxlength=32 }
+      descencos: { name: Descripción, params: maxlength=500  }
+    list:
+      title:          Centros de Costo
+      filters:        [codcencos, descencos ]
+      display:        [=codcencos, descencos]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:  8
+      sort: codcencos
+    edit:
+      title:          Edición de Centros de Costo
+      display:        [=codcencos, descencos]
+      actions:
+        _list:        ~
+        _save:        ~
+        _create:      ~
+        _delete:      ~

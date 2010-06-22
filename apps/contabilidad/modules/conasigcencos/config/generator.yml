@@ -1,0 +1,30 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Contabc
+    theme:            cidesaGenerator
+    fields:
+      numcom:  {name: Número, params: size=10 readOnly=true}
+      feccom:  {name: Fecha, params: date_format='dd/MM/yyyy' readOnly=true}
+      descom:  {name: Descripción, type: textarea_tag , params: readOnly=true}
+      reftra:  {name: Referencia, params: readOnly=true}
+      moncom:  {name: Monto, params: readOnly=true}
+      grid:    {name: .}
+    list:
+      title:          Comprobantes Contables
+      display:        [=numcom, feccom, descom]
+      filters:        [numcom, feccom, reftra]
+      object_actions:
+        _edit:        ~
+      actions:
+        _create:        NONE
+      max_per_page:  10
+      sort: numcom
+    edit:
+      title:          Asignación de Centros de Costo a Cuentas Contables
+      display:
+        "Datos de Comprobante":       [=numcom, feccom, descom, reftra, moncom]
+        "Asignación":       [ _grid ]
+      actions:
+        _list:        ~
+        _save:        ~

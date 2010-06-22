@@ -357,3 +357,41 @@ propel:
       description: Identificador Único de la tabla
     _indexes:
       contabc1_index_01: [numcon, codcta, feccom]
+  codefcencos:
+    codcencos:
+      type: VARCHAR
+      size: 32
+      required: true
+    descencos:
+      type: VARCHAR
+      size: 500
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  codetcencos:
+    numcom:
+      type: VARCHAR
+      size: 8
+      required: true
+    codcta:
+      type: VARCHAR
+      size: 32
+      required: true
+    codcencos:
+      type: VARCHAR
+      size: 32
+      required: true
+    moncencos:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
