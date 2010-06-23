@@ -489,7 +489,7 @@ class Compras {
             if ($costonew != $resul2->getCosto()) {
               $gridnuevo[$indice -1][2] = $costonew;
             } else {
-              $gridnuevo[$indice -1][2] = $resul2->getCosto();
+              $gridnuevo[$indice -1][2] = $resul2->getCosto(); //Costo nuevo
             }
             $monuni = ($gridnuevo[$indice -1][2] * $gridnuevo[$indice -1][1]);
             $gridnuevo[$indice -1][3] = $datos->getMondes();
@@ -503,10 +503,11 @@ class Compras {
             } else {
               $gridnuevo[$indice -1][6] = 0;
             }
-            $gridnuevo[$indice -1][7] = $monuni -$gridnuevo[$indice -1][3];
+            $gridnuevo[$indice -1][7] = $resul2->getMontot();//$monuni -$gridnuevo[$indice -1][3];
             $gridnuevo[$indice -1][8] = $resul2->getCodcat().'-'.$resul2->getCodpre();
             $gridnuevo[$indice -1][9] = $resul2->getMonrgo();
             $gridnuevo[$indice -1][10] = $resul2->getCodcat();
+            $gridnuevo[$indice -1][11] = $resul2->getCosto(); //Costo viejo
           	}
           }
         }
@@ -563,7 +564,7 @@ class Compras {
               return true;
               //break;
             } else {
-              if ($gridnuevo[$z][1] != "") {
+              if ($gridnuevo[$z][1] != "" && ($gridnuevo[$z][2]>$gridnuevo[$z][11])) {
                 $r = 0;
                 self :: distribuirRecargos(& $gridnuevo2, & $gridnuevo,'S',&$gridnuevorec);
                 self :: recalcularRecargos(&$gridnuevo2, &$gridnuevo, &$nopuedeaumentar, $reqart,&$gridnuevorec);
