@@ -597,7 +597,7 @@
   msj: El usuario actual no pertenece a la unidad que puede atender este documento
 1216:
   cod: 1216
-  msj: El usuario actual no pertenece a ninguna unidad y no puede atender ningún documento
+  msj: El usuario actual no pertenece a ninguna unidad y no puede atender ningún documento o Documento Anulado
 1402:
   cod: 1402
   msj: Los precios o cantidades aprobadas en los items no pueden ser cero (0.0)
@@ -821,7 +821,7 @@
   msj: Nose pudo borrar el Registro
 475:
   cod: 475
-  msj: Debe introducir la Descripción del Cargo.
+  msj: Faltan datos en el grid de información curricular.
 476:
   cod: 476
   msj: Si el tipo de Distribucion es Monto Fijo, el Tipo de Calculo no puede ser Porcentual
@@ -894,6 +894,10 @@
 499:
   cod: 499
   msj:  El Código del Titulo/Categoria/Partida Presupuestaria no existe.
+2400:
+  cod: 2400
+  msj: Faltan datos en el grid de información familiar.
+
 ###############OBRAS################
 1000:
     cod: 1000
