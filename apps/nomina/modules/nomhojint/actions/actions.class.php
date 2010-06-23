@@ -31,9 +31,11 @@ class nomhojintActions extends autonomhojintActions
 
     if($this->getRequest()->getMethod() == sfRequest::POST){
      $this->nphojint = $this->getNphojintOrCreate();
-      $this->configGrid3();
+     $this->configGrid2();
+     $this->configGrid3();
       $this->configGrid4();
       $this->configGrid5();
+      $grid2=Herramientas::CargarDatosGrid($this,$this->obj2);
       $grid3=Herramientas::CargarDatosGrid($this,$this->obj3);
       $grid4=Herramientas::CargarDatosGrid($this,$this->obj4);
       $grid5=Herramientas::CargarDatosGrid($this,$this->obj5);
@@ -86,6 +88,22 @@ class nomhojintActions extends autonomhojintActions
 		  }
 
 	  }
+
+      if (count($grid2[0])>0)
+      {
+        $i=0;
+        $x=$grid3[0];
+        while ($i<count($x))
+        {
+          if ($x[$i]->getDescar()=="" || $x[$i]->getStacar()=="")
+          {
+          	$this->coderr=475;
+          	return false;
+          	break;
+          }
+        $i++;
+        }
+      }
 
       if (count($grid3[0])>0)
       {
