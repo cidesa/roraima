@@ -31,11 +31,11 @@ class nomhojintActions extends autonomhojintActions
 
     if($this->getRequest()->getMethod() == sfRequest::POST){
      $this->nphojint = $this->getNphojintOrCreate();
-      $this->configGrid2();
       $this->configGrid3();
+      $this->configGrid4();
       $this->configGrid5();
-      $grid3=Herramientas::CargarDatosGrid($this,$this->obj2);
-      $grid4=Herramientas::CargarDatosGrid($this,$this->obj3);
+      $grid3=Herramientas::CargarDatosGrid($this,$this->obj3);
+      $grid4=Herramientas::CargarDatosGrid($this,$this->obj4);
       $grid5=Herramientas::CargarDatosGrid($this,$this->obj5);
 
      $nphojint = $this->getRequestParameter('nphojint');
@@ -109,7 +109,7 @@ class nomhojintActions extends autonomhojintActions
         $y=$grid4[0];
         while ($l<count($y))
         {
-          if ($y[$l]->getNomtit()=="" || $y[$l]->getDescur()=="" || $y[$l]->getInstit()=="" || $y[$l]->getDurcur()=="")
+          if ($y[$l]->getCodprofes()=="" || $y[$l]->getDescur()=="" || $y[$l]->getInstit()=="" || $y[$l]->getDurcur()=="")
           {
           	$this->coderr=475;
           	return false;
