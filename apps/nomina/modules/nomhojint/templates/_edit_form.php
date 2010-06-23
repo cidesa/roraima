@@ -1614,7 +1614,7 @@ function nivel(e,numero)
     var fil=parseInt(aux[1]);
     var col=parseInt(aux[2]);
 
-    var coledad=col+2;
+    var coledad=col+1;
     var edad=name+"_"+fil+"_"+coledad;
     var cod=$(id).value;
 
