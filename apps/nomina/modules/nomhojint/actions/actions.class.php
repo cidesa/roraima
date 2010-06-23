@@ -125,7 +125,7 @@ class nomhojintActions extends autonomhojintActions
         $y=$grid5[0];
         while ($l<count($y))
         {
-          if ($y[$l]->getNomfam()=="" || $y[$l]->getSexfam()=="" || $y[$l]->getFecfam()=="" || $y[$l]->getParfam()=="")
+          if ($y[$l]->getNomfam()=="" || $y[$l]->getSexfam()=="" || $y[$l]->getFecnac()=="" || $y[$l]->getParfam()=="")
           {
           	$this->coderr=2400;
           	return false;
