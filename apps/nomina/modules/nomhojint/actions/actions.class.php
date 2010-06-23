@@ -33,8 +33,10 @@ class nomhojintActions extends autonomhojintActions
      $this->nphojint = $this->getNphojintOrCreate();
       $this->configGrid2();
       $this->configGrid3();
+      $this->configGrid5();
       $grid3=Herramientas::CargarDatosGrid($this,$this->obj2);
       $grid4=Herramientas::CargarDatosGrid($this,$this->obj3);
+      $grid5=Herramientas::CargarDatosGrid($this,$this->obj5);
 
      $nphojint = $this->getRequestParameter('nphojint');
      $nomemp='';
@@ -107,7 +109,7 @@ class nomhojintActions extends autonomhojintActions
         $y=$grid4[0];
         while ($l<count($y))
         {
-          if ($y[$l]->getNomemp()=="" || $y[$l]->getDescar()=="")
+          if ($y[$l]->getNomtit()=="" || $y[$l]->getDescur()=="" || $y[$l]->getInstit()=="" || $y[$l]->getDurcur()=="")
           {
           	$this->coderr=475;
           	return false;
@@ -116,6 +118,23 @@ class nomhojintActions extends autonomhojintActions
         $l++;
         }
       }
+
+      if (count($grid5[0])>0)
+      {
+        $l=0;
+        $y=$grid5[0];
+        while ($l<count($y))
+        {
+          if ($y[$l]->getNomfam()=="" || $y[$l]->getSexfam()=="" || $y[$l]->getFecfam()=="" || $y[$l]->getEdafam()==""|| $y[$l]->getParfam()=="")
+          {
+          	$this->coderr=2400;
+          	return false;
+          	break;
+          }
+        $l++;
+        }
+      }
+
 
            if($this->coderr!=-1){
         return false;
