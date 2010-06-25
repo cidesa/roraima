@@ -11,13 +11,14 @@
 
 function actualizarformato(id)//Actualiza el formato de los niveles presupuestarios
 {
-   $('cidefniv_forpre').value='';
-   var totfil = obtener_filas_grid('a',2);//objs_filas_a.size();
-  // alert(totfil);
+
+   var totfil = inputs_filas_a.size();
+
    var fila = true;
    var fil=0;
    if ($F(obtenerColumnaAnterior(id))!='')
    {
+     $('cidefniv_forpre').value='';
      //while (fila==true)
      while (fil <= totfil)
      {

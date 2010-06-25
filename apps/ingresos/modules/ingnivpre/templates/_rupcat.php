@@ -11,9 +11,7 @@
 
 <?php
 $hay=Ingresos::movimientos();
-echo select_tag('cidefniv[rupcat]', options_for_select(Array(' ','1','2','3','4','5','6','7','8'),$cidefniv->getRupcat()),array(
-   'disabled' => $hay == 1 ? true : false ,
-)); ?>
+echo select_tag('cidefniv[rupcat]', options_for_select(Array('0' ,'1','2','3','4','5','6','7','8'),$cidefniv->getRupcat()),array( 'disabled' => $hay == 1 ? true : false )); ?>
 
 
 
