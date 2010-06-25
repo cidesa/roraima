@@ -99,10 +99,12 @@ class Fafactur extends BaseFafactur
   {
        $c = new Criteria();
        $per = FacorrelatPeer::doSelectOne($c);
-       if($per->getProform()=='S')
-          return true;
-       else
-          return false;
+       if($per){
+         if($per->getProform()=='S')
+            return true;
+         else
+            return false;
+       }else return false;
   }
   public function getNumcom()
   {
