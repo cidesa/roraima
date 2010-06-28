@@ -29,6 +29,7 @@ class Caordcom extends BaseCaordcom
     protected $compro="";
     protected $oculsave="";
     protected $manorddon="";
+    protected $traemot="";
 
 
     public function getReptipcom()
@@ -304,6 +305,28 @@ class Caordcom extends BaseCaordcom
   public function setManorddon()
   {
   	return $this->manorddon;
+  }
+
+  public function getTraemot()
+  {
+    $dato="";
+    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('compras',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
+	     if(array_key_exists('almordcom',$varemp['aplicacion']['compras']['modulos'])){
+	       if(array_key_exists('traemot',$varemp['aplicacion']['compras']['modulos']['almordcom']))
+	       {
+	       	$dato=$varemp['aplicacion']['compras']['modulos']['almordcom']['traemot'];
+	       }
+         }
+     return $dato;
+  }
+
+  public function setTraemot()
+  {
+  	return $this->traemot;
   }
 
 }

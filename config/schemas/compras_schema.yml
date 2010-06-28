@@ -1761,6 +1761,12 @@ propel:
       type: VARCHAR
       size: 1
       description: OC DonaciÃ³n Servicio Prestado Medicina Materiales Otro
+    motanu:
+      type: VARCHAR
+      size: 500
+    usuanu:
+      type: VARCHAR
+      size: 250
     id:
       type: INTEGER
       required: true

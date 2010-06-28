@@ -37,6 +37,20 @@
 )); echo $value ? $value : '&nbsp;' ?></div>
 
 <br>
+<div id="motivo" style="display:none">
+  <?php echo label_for('caordcom[motanu]', __('Motivo de AnulaciÃ³n'), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('caordcom{motanu}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('caordcom{motanu}')): ?>
+    <?php echo form_error('caordcom{motanu}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($caordcom, 'getMotanu', array (
+  'size' => 80,
+  'control_name' => 'caordcom[motanu]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+<br>
+</div>
 <br>
 <div class="form-row" align="center">
    <input type="button" value="Salvar" onClick="salvar();">
@@ -44,15 +58,21 @@
 </div>
 </form>
 <script type="text/javascript">
+ var traemot='<?php echo $caordcom->getTraemot() ?>';
+ if (traemot)
+ {
+     $('motivo').show();
+ }
 function salvar()
 {
   var id='<? print $caordcom->getId(); ?>';
   var ordcom=$('caordcom_ordcom').value;
   var desord=$('caordcom_desord').value;
   var fecord=$('caordcom_fecord').value;
+  var motanu=$('caordcom_motanu').value;
 
   f=document.sf_admin_edit_form;
-  f.action='salvaranu?id='+id+'&ordcom='+ordcom+'&desord='+desord+'&fecord='+fecord;
+  f.action='salvaranu?id='+id+'&ordcom='+ordcom+'&desord='+desord+'&motanu='+motanu+'&fecord='+fecord;
   f.submit();
 }
 </script>

@@ -205,6 +205,14 @@ abstract class BaseCaordcom extends BaseObject  implements Persistent {
 
 
 	
+	protected $motanu;
+
+
+	
+	protected $usuanu;
+
+
+	
 	protected $id;
 
 	
@@ -630,6 +638,20 @@ abstract class BaseCaordcom extends BaseObject  implements Persistent {
   {
 
     return trim($this->serdon);
+
+  }
+  
+  public function getMotanu()
+  {
+
+    return trim($this->motanu);
+
+  }
+  
+  public function getUsuanu()
+  {
+
+    return trim($this->usuanu);
 
   }
   
@@ -1194,6 +1216,26 @@ abstract class BaseCaordcom extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setMotanu($v)
+	{
+
+    if ($this->motanu !== $v) {
+        $this->motanu = $v;
+        $this->modifiedColumns[] = CaordcomPeer::MOTANU;
+      }
+  
+	} 
+	
+	public function setUsuanu($v)
+	{
+
+    if ($this->usuanu !== $v) {
+        $this->usuanu = $v;
+        $this->modifiedColumns[] = CaordcomPeer::USUANU;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -1306,7 +1348,11 @@ abstract class BaseCaordcom extends BaseObject  implements Persistent {
 
       $this->serdon = $rs->getString($startcol + 48);
 
-      $this->id = $rs->getInt($startcol + 49);
+      $this->motanu = $rs->getString($startcol + 49);
+
+      $this->usuanu = $rs->getString($startcol + 50);
+
+      $this->id = $rs->getInt($startcol + 51);
 
       $this->resetModified();
 
@@ -1314,7 +1360,7 @@ abstract class BaseCaordcom extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 50; 
+            return $startcol + 52; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Caordcom object", $e);
     }
@@ -1665,6 +1711,12 @@ abstract class BaseCaordcom extends BaseObject  implements Persistent {
 				return $this->getSerdon();
 				break;
 			case 49:
+				return $this->getMotanu();
+				break;
+			case 50:
+				return $this->getUsuanu();
+				break;
+			case 51:
 				return $this->getId();
 				break;
 			default:
@@ -1726,7 +1778,9 @@ abstract class BaseCaordcom extends BaseObject  implements Persistent {
 			$keys[46] => $this->getSexdon(),
 			$keys[47] => $this->getEdadon(),
 			$keys[48] => $this->getSerdon(),
-			$keys[49] => $this->getId(),
+			$keys[49] => $this->getMotanu(),
+			$keys[50] => $this->getUsuanu(),
+			$keys[51] => $this->getId(),
 		);
 		return $result;
 	}
@@ -1890,6 +1944,12 @@ abstract class BaseCaordcom extends BaseObject  implements Persistent {
 				$this->setSerdon($value);
 				break;
 			case 49:
+				$this->setMotanu($value);
+				break;
+			case 50:
+				$this->setUsuanu($value);
+				break;
+			case 51:
 				$this->setId($value);
 				break;
 		} 	}
@@ -1948,7 +2008,9 @@ abstract class BaseCaordcom extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[46], $arr)) $this->setSexdon($arr[$keys[46]]);
 		if (array_key_exists($keys[47], $arr)) $this->setEdadon($arr[$keys[47]]);
 		if (array_key_exists($keys[48], $arr)) $this->setSerdon($arr[$keys[48]]);
-		if (array_key_exists($keys[49], $arr)) $this->setId($arr[$keys[49]]);
+		if (array_key_exists($keys[49], $arr)) $this->setMotanu($arr[$keys[49]]);
+		if (array_key_exists($keys[50], $arr)) $this->setUsuanu($arr[$keys[50]]);
+		if (array_key_exists($keys[51], $arr)) $this->setId($arr[$keys[51]]);
 	}
 
 	
@@ -2005,6 +2067,8 @@ abstract class BaseCaordcom extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CaordcomPeer::SEXDON)) $criteria->add(CaordcomPeer::SEXDON, $this->sexdon);
 		if ($this->isColumnModified(CaordcomPeer::EDADON)) $criteria->add(CaordcomPeer::EDADON, $this->edadon);
 		if ($this->isColumnModified(CaordcomPeer::SERDON)) $criteria->add(CaordcomPeer::SERDON, $this->serdon);
+		if ($this->isColumnModified(CaordcomPeer::MOTANU)) $criteria->add(CaordcomPeer::MOTANU, $this->motanu);
+		if ($this->isColumnModified(CaordcomPeer::USUANU)) $criteria->add(CaordcomPeer::USUANU, $this->usuanu);
 		if ($this->isColumnModified(CaordcomPeer::ID)) $criteria->add(CaordcomPeer::ID, $this->id);
 
 		return $criteria;
@@ -2133,6 +2197,10 @@ abstract class BaseCaordcom extends BaseObject  implements Persistent {
 		$copyObj->setEdadon($this->edadon);
 
 		$copyObj->setSerdon($this->serdon);
+
+		$copyObj->setMotanu($this->motanu);
+
+		$copyObj->setUsuanu($this->usuanu);
 
 
 		$copyObj->setNew(true);
