@@ -597,7 +597,7 @@ class Orden_compra
  *esta se ejecuta en el executeSalvaranu
  *ya su ves esta es llamada en un javascript en el js almordcom
  */
-  public static function Salvar_anular($caordcom,$descripcion,$fecanu, &$coderror)
+  public static function Salvar_anular($caordcom,$descripcion,$fecanu,&$coderror)
   {
     $coderror=-1;
     $result=array();
@@ -653,6 +653,11 @@ class Orden_compra
               $sql4 = "select * from cpimpcau where refere='".$result3[0]['ordcom']."' and STAIMP<>'N'";
           if (!Herramientas::BuscarDatos($sql4,&$result4))
           {
+              $traemot=H::getConfApp('traemot', 'almordcom', 'compras');
+              $loguse=sfContext::getInstance()->getUser()->getAttribute('loguse');
+              if ($traemot=='S')
+                $sql5="Update Caordcom set fecanu='".$fecanu."',staord='N',motanu='".$descripcion."',usuanu='".$loguse."'  where ordcom='".$caordcom->getOrdcom()."'";
+              else
                 $sql5="Update Caordcom set fecanu='".$fecanu."',staord='N'  where ordcom='".$caordcom->getOrdcom()."'";
               Herramientas::insertarRegistros($sql5);
                       $referenciacomp = $result3[0]['refcom'];

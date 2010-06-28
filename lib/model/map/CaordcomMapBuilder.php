@@ -132,6 +132,10 @@ class CaordcomMapBuilder {
 
 		$tMap->addColumn('SERDON', 'Serdon', 'string', CreoleTypes::VARCHAR, false, 1);
 
+		$tMap->addColumn('MOTANU', 'Motanu', 'string', CreoleTypes::VARCHAR, false, 500);
+
+		$tMap->addColumn('USUANU', 'Usuanu', 'string', CreoleTypes::VARCHAR, false, 250);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

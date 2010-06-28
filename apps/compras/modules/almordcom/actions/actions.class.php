@@ -2529,6 +2529,7 @@ class almordcomActions extends autoalmordcomActions
     $fecanu=$this->getRequestParameter('fecha');//3
     $fecanuvalidar=$this->getRequestParameter('fecha');//3
     $fecserv=$this->getRequestParameter('fecserv');
+    $motanu=$this->getRequestParameter('motanu');
 
     $dateFormat = new sfDateFormat('es_VE');
     $fecord = $dateFormat->format($fecord, 'i', $dateFormat->getInputPattern('d'));
