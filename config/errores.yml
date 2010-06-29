@@ -471,6 +471,9 @@
 553:
   cod: 553
   msj: El Monto Total del Cheque sobrepasa el Límite definido para Cheques.
+554:
+  cod: 554
+  msj: Faltan datos en el grid de Experiencia Laboral Fuera de la Institución.
 3:
   cod: 3
   msj: La contraseña es diferente.
@@ -597,7 +600,7 @@
   msj: El usuario actual no pertenece a la unidad que puede atender este documento
 1216:
   cod: 1216
-  msj: El usuario actual no pertenece a ninguna unidad y no puede atender ningún documento o Documento Anulado
+  msj: El usuario actual no pertenece a ninguna unidad y no puede atender ningún documento
 1402:
   cod: 1402
   msj: Los precios o cantidades aprobadas en los items no pueden ser cero (0.0)
