@@ -89,31 +89,15 @@ class nomhojintActions extends autonomhojintActions
 
 	  }
 
-      if (count($grid2[0])>0)
-      {
-        $i=0;
-        $x=$grid3[0];
-        while ($i<count($x))
-        {
-          if ($x[$i]->getDescar()=="" || $x[$i]->getStacar()=="")
-          {
-          	$this->coderr=475;
-          	return false;
-          	break;
-          }
-        $i++;
-        }
-      }
-
       if (count($grid3[0])>0)
       {
         $i=0;
         $x=$grid3[0];
         while ($i<count($x))
         {
-          if ($x[$i]->getCodcar()=="" || $x[$i]->getDescar()=="")
+          if ($x[$i]->getNomemp()=="" || $x[$i]->getDescar()=="")
           {
-          	$this->coderr=475;
+          	$this->coderr=554;
           	return false;
           	break;
           }
