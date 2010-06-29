@@ -80,7 +80,7 @@ class tesmovseglibActions extends autotesmovseglibActions
     return false;
     }
 
-    if ($this->getRequestParameter('tsmovlib[savemovcero]')!='S')
+    if ($this->getRequestParameter('tsmovlib[savemovcero]')!='S' || (H::toFloat($this->getRequestParameter('tsmovlib[monmov]'))>0))
     {
       if (self::validarGeneraComprobante())
       {
@@ -160,7 +160,7 @@ class tesmovseglibActions extends autotesmovseglibActions
       if ($this->getUser()->getAttribute('grabo',null,$this->getUser()->getAttribute('formulario'))=='S')
       {
         $numcom='';
-        if ($tsmovlib->getSavemovcero()!='S') {
+        if ($tsmovlib->getSavemovcero()!='S' || $tsmovlib->getMonmov()>0) {
         $getform=$this->getRequestParameter('formulario');
         $formulario=split('!',$getform);
 
