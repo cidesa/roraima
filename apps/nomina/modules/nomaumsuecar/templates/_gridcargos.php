@@ -13,7 +13,8 @@
 	   	$('npcargos_cantidad').value='0,00';
 	  for(i=0;i<totfil;i++)
 	  {
-	  	celda = $('ax_'+i+'_3').value;
+            if ($('ax_'+i+'_4').checked==true) {
+                celda = $('ax_'+i+'_3').value;
 		celda = celda.replace('.','');
 		celda = celda.replace(',','.');
         
@@ -30,7 +31,8 @@
 			}				
 			else
 			    break;	
-		}		
+		}
+            }
 	  }
   }	
 	

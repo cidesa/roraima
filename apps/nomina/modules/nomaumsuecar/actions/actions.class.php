@@ -44,7 +44,7 @@ class nomaumsuecarActions extends autonomaumsuecarActions
   public function configGridCargos($codigo='')
   {
     $c = new Criteria();
-	if($codigo)
+    if ($codigo)
 	{
 		$c->add(NpasicarnomPeer::CODNOM,$codigo);
 		$c->addJoin(NpcargosPeer::CODCAR,NpasicarnomPeer::CODCAR);
@@ -55,7 +55,7 @@ class nomaumsuecarActions extends autonomaumsuecarActions
     // Se crea el objeto principal de la clase OpcionesGrid
     $opciones = new OpcionesGrid();
     // Se configuran las opciones globales del Grid
-    $opciones->setEliminar(true);
+    $opciones->setEliminar(false);
     $opciones->setFilas(0);
     $opciones->setTabla('Npcargos');
     $opciones->setName('a');
@@ -89,11 +89,18 @@ class nomaumsuecarActions extends autonomaumsuecarActions
     $col3->setNombreCampo('suecar');
     $col3->setHTML('type="text" size="10" ');
 
+    $col4 = new Columna('Marque');
+    $col4->setTipo(Columna::CHECK);
+    $col4->setNombreCampo('check');
+    $col4->setEsGrabable(true);
+    $col4->setHTML(' ');
+
 
     // Se guardan las columnas en el objetos de opciones
     $opciones->addColumna($col1);
     $opciones->addColumna($col2);
 	$opciones->addColumna($col3);
+    $opciones->addColumna($col4);
 
     // Ee genera el arreglo de opciones necesario para generar el grid
     $this->obj = $opciones->getConfig($per);
@@ -207,7 +214,8 @@ class nomaumsuecarActions extends autonomaumsuecarActions
 
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -268,8 +276,25 @@ class nomaumsuecarActions extends autonomaumsuecarActions
   	$grid = Herramientas::CargarDatosGridv2($this,$this->obj);
   	
 	foreach($grid[0] as $g)
+    {
+      if ($g->getCheck()=='1')
+      {
+        $dateFormat = new sfDateFormat('es_VE');
+        $fec1 = $dateFormat->format($clasemodelo->getFecaum(), 'i', $dateFormat->getInputPattern('d'));
+
+        $npaumcargos= new Npaumcar();
+        $npaumcargos->setCodnom($clasemodelo->getCodnom());
+        $npaumcargos->setCantidad($clasemodelo->getCantidad());
+        $npaumcargos->setPorcentaje($clasemodelo->getPorcentaje());
+        $npaumcargos->setCodcar($g->getCodcar());
+        $npaumcargos->setSuecar($g->getSuecar());
+        $npaumcargos->setFecaum($fec1);
+        $npaumcargos->setMotaum($clasemodelo->getMotaum());
+        $npaumcargos->save();
+
 		$g->save();
-		
+      }
+    }
     return '-1';
   }
 

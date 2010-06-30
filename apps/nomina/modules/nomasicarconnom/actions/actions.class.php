@@ -179,10 +179,25 @@ class nomasicarconnomActions extends autonomasicarconnomActions
      $cajtexcom=$this->getRequestParameter('cajtexcom');
     if ($this->getRequestParameter('ajax')=='1')
       {
-        $dato=NphojintPeer::getNomemp($this->getRequestParameter('codigo'));
-        $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
-            $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
-             return sfView::HEADER_ONLY;
+        $l= new Criteria();
+        $l->add(NphojintPeer::CODEMP,$this->getRequestParameter('codigo'));
+        $reg= NphojintPeer::doSelectOne($l);
+        if ($reg)
+        {
+           if ($reg->getStaemp()!='R')
+            {
+               $dato=$reg->getNomemp(); $javascript="";
+            }else {
+              $dato=""; $javascript="alert('El Empleado se encuentra Retirado'); $('npasicaremp_codemp').value=''; $('npasicaremp_codemp').focus();";
+            }
+        }else{
+           $dato=""; $javascript="alert('El Empleado no existe'); $('npasicaremp_codemp').value=''; $('npasicaremp_codemp').focus();";
+        }
+
+
+        $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""]]';
+        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+        return sfView::HEADER_ONLY;
       }
     else if ($this->getRequestParameter('ajax')=='2')
       { $this->div='';
