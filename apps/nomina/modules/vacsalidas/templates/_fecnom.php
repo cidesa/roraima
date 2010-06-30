@@ -7,10 +7,10 @@
   <div class="divlado<?php if ($sf_request->hasError('npvacsalidas{fecsalnom}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('npvacsalidas{fecsalnom}')): ?>
     <?php echo form_error('npvacsalidas{fecsalnom}', array('class' => 'form-error-msg')) ?>
-  <?php endif; }?>  
-  
-   
-  
+  <?php endif; }?>
+
+
+
   <?php $value = object_input_date_tag($npvacsalidas, 'getFecsalnom', array (
   'rich' => true,
   'onkeyup' => 'javascript: mascara(this,\'/\',patron,true)',
@@ -19,22 +19,21 @@
   'date_format' => 'dd/MM/yyyy',
   'readonly' => $npvacsalidas->getId()== '' ? false : true,
   'onBlur'=> remote_function(array(
-  'update'   => 'divgridvaca',
   'url'      => 'vacsalidas/ajax',
   'condition' => "$('npvacsalidas_codemp').value != '' && $('id').value == ''",
   'complete' => 'AjaxJSON(request, json)',
   'script' => true,
-  'with' => "'ajax=2&codigo='+$('npvacsalidas_codemp').value+'&fecdes='+this.value+'&diavac='+$('npvacsalidas_diasdisfrutar').value+'&diaspend='+$('npvacsalidas_diaspend').value",
+  'with' => "'ajax=3&codigo='+$('npvacsalidas_codemp').value+'&fecsalnom='+this.value+'&fecdes='+$('npvacsalidas_fecdes').value",
         )),
 )); echo $value ? $value : '&nbsp;' ?>
-      
-		
-  <?php if($labels['npvacsalidas{fecsalnom}']!='.:') { ?>
-  
 
-   
+
+  <?php if($labels['npvacsalidas{fecsalnom}']!='.:') { ?>
+
+
+
   </div>
-  <?php  } ?> 
+  <?php  } ?>
 
 </div></th>
 		<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
@@ -44,10 +43,10 @@
   <div class="divlado<?php if ($sf_request->hasError('npvacsalidas{fecreinom}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('npvacsalidas{fecreinom}')): ?>
     <?php echo form_error('npvacsalidas{fecreinom}', array('class' => 'form-error-msg')) ?>
-  <?php endif; }?>  
-  
-   
-  
+  <?php endif; }?>
+
+
+
   <?php $value = object_input_date_tag($npvacsalidas, 'getFecreinom', array (
   'rich' => true,
   'onkeyup' => 'javascript: mascara(this,\'/\',patron,true)',
@@ -56,14 +55,14 @@
   'date_format' => 'dd/MM/yyyy',
   'readonly' =>  true,
 )); echo $value ? $value : '&nbsp;' ?>
-      
-		
-  <?php if($labels['npvacsalidas{fecreinom}']!='.:') { ?>
-  
 
-   
+
+  <?php if($labels['npvacsalidas{fecreinom}']!='.:') { ?>
+
+
+
   </div>
-  <?php  } ?> 
+  <?php  } ?>
 
 </div></th>
 
