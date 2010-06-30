@@ -7341,3 +7341,46 @@ propel:
       primaryKey: true
       autoIncrement: true
       description: Identificador Ãnico del registro
+  npaumcar:
+    codnom:
+      type: VARCHAR
+      size: 3
+      required: true
+      description: NÃ³mina
+    cantidad:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+      description: Aumento por cantidad
+    porcentaje:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+      description: Aumento por Porcentaje
+    codcar:
+      type: VARCHAR
+      size: 16
+      required: true
+      description: Cargo
+    suecar:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+      description: Sueldo con Aumento
+    fecaum:
+      type: DATE
+      required: true
+      description: Fecha Aumento
+    motaum:
+      type: VARCHAR
+      size: 250
+      description: Motivo de Aumento
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Ãnico del registro

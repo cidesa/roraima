@@ -1685,6 +1685,7 @@ class CatalogoWeb extends BaseCatalogoWeb {
 
   public function Nphojint_Nomasicarconnom() {
     $this->c = new Criteria();
+    $this->c->add(NphojintPeer::STAEMP,'R',Criteria::NOT_EQUAL);
     $filtro="";
     $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
     if ($varemp)

@@ -20,6 +20,11 @@ class Npcargos extends BaseNpcargos
 	protected $codnom="";	
 	protected $objcar=array();
         protected $carvan2="0,00";
+        protected $check="";
+        protected $fecaum="";
+        protected $motaum="";
+        protected $porcentaje="0,00";
+        protected $cantidad="0,00";
 
 	public function getNomtip()
 	{
