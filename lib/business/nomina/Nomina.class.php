@@ -2563,7 +2563,7 @@ class Nomina {
 
       case "DIAVACCON" :
         $valor = 0;
-        $criterio = "select ((fechas-fecdes)) as dias from npvacsalidas where codemp='$empleado' order by fecvac desc";
+        $criterio = "select ((fechas-fecdes)) as dias from npvacsalidas where codemp='$empleado' and fecsalnom=to_date('$fecnom','yyyy-mm-dd') order by fecvac desc";
         if (Herramientas :: BuscarDatos($criterio, & $result))
         {
            $valor = $result[0]['dias'];
@@ -2590,7 +2590,7 @@ class Nomina {
                             case when to_date('$fecnomdes','yyyy-mm-dd')>a.fecdes then to_date('$fecnomdes','yyyy-mm-dd') else a.fecdes end
                             +1
                         ) end as dias
-                        from npvacsalidas a where codemp='$empleado' order by fecvac desc";
+                        from npvacsalidas a where codemp='$empleado' and fecsalnom=to_date('$fecnom','yyyy-mm-dd') order by fecvac desc";
         if (Herramientas :: BuscarDatos($criterio, & $result))
         {
            $valor = $result[0]['dias'];
@@ -2598,7 +2598,7 @@ class Nomina {
         return $valor;
       case "NSVAC" :
         $valor = 0;
-        $criterio = "select fecdes,fechas from npvacsalidas a where codemp='$empleado' order by fecvac desc";
+        $criterio = "select fecdes,fechas from npvacsalidas a where codemp='$empleado' and fecsalnom=to_date('$fecnom','yyyy-mm-dd')  order by fecvac desc";
         if (Herramientas :: BuscarDatos($criterio, & $result))
         {
             $fechades = $result[0]['fecdes'];
@@ -2616,7 +2616,7 @@ class Nomina {
         return $valor;
       case "NDVAC" :
         $valor = 0;
-        $criterio = "select fecdes,fechas from npvacsalidas a where codemp='$empleado' order by fecvac desc";
+        $criterio = "select fecdes,fechas from npvacsalidas a where codemp='$empleado' and fecsalnom=to_date('$fecnom','yyyy-mm-dd')  order by fecvac desc";
         if (Herramientas :: BuscarDatos($criterio, & $result))
         {
             $fechades = $result[0]['fecdes'];
@@ -2634,7 +2634,7 @@ class Nomina {
         return $valor;
        case "NFVAC" :
         $valor = 0;
-        $criterio = "select fecdes,fechas from npvacsalidas a where codemp='$empleado' order by fecvac desc";
+        $criterio = "select fecdes,fechas from npvacsalidas a where codemp='$empleado' and fecsalnom=to_date('$fecnom','yyyy-mm-dd')  order by fecvac desc";
         if (Herramientas :: BuscarDatos($criterio, & $result))
         {
             $fechades = $result[0]['fecdes'];
@@ -2654,7 +2654,7 @@ class Nomina {
         return $valor;
       case "NLVAC" :
         $valor = 0;
-        $criterio = "select fecdes,fechas from npvacsalidas a where codemp='$empleado' order by fecvac desc";
+        $criterio = "select fecdes,fechas from npvacsalidas a where codemp='$empleado' and fecsalnom=to_date('$fecnom','yyyy-mm-dd')  order by fecvac desc";
         if (Herramientas :: BuscarDatos($criterio, & $result))
         {
             $fechades = $result[0]['fecdes'];
@@ -4766,7 +4766,7 @@ class Nomina {
         return $valor;
 	  case "DIAVACCON" :
         $valor = 0;
-        $criterio = "select ((fechas-fecdes)) as dias from npvacsalidas where codemp='$empleado' order by fecvac desc";
+        $criterio = "select ((fechas-fecdes)) as dias from npvacsalidas where codemp='$empleado' and fecsalnom=to_date('$hasta','dd/mm/yyyy')  order by fecvac desc";
         if (Herramientas :: BuscarDatos($criterio, & $result))
         {
            $valor = $result[0]['dias'];
@@ -4795,7 +4795,7 @@ class Nomina {
                             case when to_date('$fecnomdes','yyyy-mm-dd')>a.fecdes then to_date('$fecnomdes','yyyy-mm-dd') else a.fecdes end
                             +1
                         ) end as dias
-                        from npvacsalidas a where codemp='$empleado' order by fecvac desc";
+                        from npvacsalidas a where codemp='$empleado' and fecsalnom=to_date('$hasta','dd/mm/yyyy')  order by fecvac desc";
         if (Herramientas :: BuscarDatos($criterio, & $result))
         {
            $valor = $result[0]['dias'];
@@ -4803,7 +4803,7 @@ class Nomina {
         return $valor;
       case "NSVAC" :
         $valor = 0;
-        $criterio = "select fecdes,fechas from npvacsalidas a where codemp='$empleado' order by fecvac desc";
+        $criterio = "select fecdes,fechas from npvacsalidas a where codemp='$empleado' and fecsalnom=to_date('$hasta','dd/mm/yyyy')  order by fecvac desc";
         if (Herramientas :: BuscarDatos($criterio, & $result))
         {
             $fechades = $result[0]['fecdes'];
@@ -4821,7 +4821,7 @@ class Nomina {
         return $valor;
       case "NDVAC" :
         $valor = 0;
-        $criterio = "select fecdes,fechas from npvacsalidas a where codemp='$empleado' order by fecvac desc";
+        $criterio = "select fecdes,fechas from npvacsalidas a where codemp='$empleado' and fecsalnom=to_date('$hasta','dd/mm/yyyy')  order by fecvac desc";
         if (Herramientas :: BuscarDatos($criterio, & $result))
         {
             $fechades = $result[0]['fecdes'];
@@ -4839,7 +4839,7 @@ class Nomina {
         return $valor;
        case "NFVAC" :
         $valor = 0;
-        $criterio = "select fecdes,fechas from npvacsalidas a where codemp='$empleado' order by fecvac desc";
+        $criterio = "select fecdes,fechas from npvacsalidas a where codemp='$empleado' and fecsalnom=to_date('$hasta','dd/mm/yyyy')  order by fecvac desc";
         if (Herramientas :: BuscarDatos($criterio, & $result))
         {
             $fechades = $result[0]['fecdes'];
@@ -4859,7 +4859,7 @@ class Nomina {
         return $valor;
       case "NLVAC" :
         $valor = 0;
-        $criterio = "select fecdes,fechas from npvacsalidas a where codemp='$empleado' order by fecvac desc";
+        $criterio = "select fecdes,fechas from npvacsalidas a where codemp='$empleado' and fecsalnom=to_date('$hasta','dd/mm/yyyy')  order by fecvac desc";
         if (Herramientas :: BuscarDatos($criterio, & $result))
         {
             $fechades = $result[0]['fecdes'];
@@ -9597,8 +9597,8 @@ exit();
                 if ($npasiconemp->getTipo()=='M') $reg->setSuecar($x[$j]["monto"]);
                 else $reg->setSuecar($x[$j]["cantidad"]);
                 $reg->save();
-        }
-      }
+             }
+          }
         }
       }
       $j++;
@@ -9631,14 +9631,14 @@ exit();
         $t->add(NpasiconparPeer::CODTIE,$clasemodelo->getCodtie());
         $t->add(NpasiconparPeer::CODESTEMP,$clasemodelo->getCodestemp());
         $t->add(NpasiconparPeer::CODNOM,$clasemodelo->getCodnom());
-        $t->add(NpasiconparPeer::CODCON,$x[$j]["codcon"]);        
+        $t->add(NpasiconparPeer::CODCON,$x[$j]["codcon"]);
         $registro= NpasiconparPeer::doSelectOne($t);
         if ($registro)
-        {          
+        {
           $registro->setCodpar($x[$j]["codpar"]) ;
           $registro->save() ;
         }else {
-            
+
           $regnuevo= new Npasiconpar();
           $regnuevo->setCodnom($clasemodelo->getCodnom());
           $regnuevo->setCodtipcar($clasemodelo->getCodtipcar());
