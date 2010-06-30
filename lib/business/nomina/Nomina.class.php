@@ -2573,7 +2573,7 @@ class Nomina {
         $valor = 0;
         $fecnomdes=null;
         $sql = "select ultfec from npnomina where codnom='$nomina'";
-        if (Herramientas :: BuscarDatos(sql, & $res))
+        if (Herramientas :: BuscarDatos($sql, & $res))
         {
             $fecnomdes=$res[0]['ultfec'];
         }
@@ -4756,7 +4756,7 @@ class Nomina {
         $fechanom = $auxfec[2].'-'.$auxfec[1].'-'.$auxfec[0];
         $fecnomdes=null;
         $sql = "select ultfec from npnomina where codnom='$nomina'";
-        if (Herramientas :: BuscarDatos(sql, & $res))
+        if (Herramientas :: BuscarDatos($sql, & $res))
         {
             $fecnomdes=$res[0]['ultfec'];
         }
