@@ -2873,6 +2873,28 @@ class Nomina {
 		}
 
         return $valor;
+      case "NLNOM" :
+        $valor = 0;
+        $fecnomdes=null;
+        $sql = "select ultfec from npnomina where codnom='$nomina'";
+        if (Herramientas :: BuscarDatos($sql, & $res))
+        {
+            $fecnomdes=$res[0]['ultfec'];
+        }
+        $fechades = $fecnomdes;
+        $fechahas = $fecnom;
+        $numerosemanas = 0;
+        while (strtotime($fechades) <= strtotime($fechahas)) {
+          $auxfechades = split('-', $fechades);
+          if (Herramientas :: dia_semana($auxfechades[2], $auxfechades[1], $auxfechades[0]) == 'Lunes') {
+            $numerosemanas += 1;
+          }
+          $fechades = Herramientas :: dateAdd('d', 1, $fechades, '+');
+        }
+        if($numerosemanas && $numerosemanas!=0)
+            $valor = $numerosemanas;
+
+        return $valor;
       default :
         $aux = 0;
 
@@ -5057,6 +5079,29 @@ class Nomina {
 
         return $valor;
         break;
+      case "NLNOM" :
+        $valor = 0;
+        $fecnomdes=null;
+        $sql = "select ultfec from npnomina where codnom='$nomina'";
+        if (Herramientas :: BuscarDatos($sql, & $res))
+        {
+            $fecnomdes=$res[0]['ultfec'];
+        }
+        $auxfec = split("/",$hasta);
+        $fechades = $auxfec[2].'-'.$auxfec[1].'-'.$auxfec[0];
+        $fechahas = $fecnom;
+        $numerosemanas = 0;
+        while (strtotime($fechades) <= strtotime($fechahas)) {
+          $auxfechades = split('-', $fechades);
+          if (Herramientas :: dia_semana($auxfechades[2], $auxfechades[1], $auxfechades[0]) == 'Lunes') {
+            $numerosemanas += 1;
+          }
+          $fechades = Herramientas :: dateAdd('d', 1, $fechades, '+');
+        }
+        if($numerosemanas && $numerosemanas!=0)
+            $valor = $numerosemanas;
+
+        return $valor;
       default :
         /////// FFRAC
 
