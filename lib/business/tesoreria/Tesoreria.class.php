@@ -1645,7 +1645,7 @@ public static function validarCuentasGrid($grid)
     {
       $tsmovlib->setRefpag("NULO");
     }
-    if ($tsmovlib->getSavemovcero()=='S')
+    if ($tsmovlib->getSavemovcero()=='S' && $tsmovlib->getMonmov()==0)
     {
        $tsmovlib->setStatus('N');
        $tsmovlib->setStacon('C');
