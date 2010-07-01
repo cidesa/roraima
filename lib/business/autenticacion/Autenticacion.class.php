@@ -93,6 +93,15 @@ class Autenticacion {
     $apliuser->setNomopc('catalogo');
     $apliuser->setPriuse('15');
     $apliuser->save();
+
+    $apliuser= new ApliUser();
+    $apliuser->setLoguse($login);
+    $apliuser->setCodemp($empresa);
+    $apliuser->setCodapl($codigoapli[1]);
+    $apliuser->setNomopc('confincomgen');
+    $apliuser->setPriuse('15');
+    $apliuser->save();
+
     }
     }
    else
@@ -121,6 +130,14 @@ class Autenticacion {
    $apliuser->setNomopc('catalogo');
    $apliuser->setPriuse('15');
    $apliuser->save();
+
+    $apliuser= new ApliUser();
+    $apliuser->setLoguse($login);
+    $apliuser->setCodemp($empresa);
+    $apliuser->setCodapl($codigoapli[1]);
+    $apliuser->setNomopc('confincomgen');
+    $apliuser->setPriuse('15');
+    $apliuser->save();
    }
 
   }
