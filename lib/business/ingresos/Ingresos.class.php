@@ -5,8 +5,8 @@
  * @package    Roraima
  * @subpackage ingresos
  * @author     $Author: dmartinez $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id: Ingresos.class.php 37415 2010-04-07 22:24:38Z dmartinez $
- * 
+ * @version SVN: $Id: Ingresos.class.php 38785 2010-06-11 19:39:38Z dmartinez $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -46,8 +46,8 @@ class Ingresos
   public static function salvarNiveles($cidefniv, $grid){
 
   	$t= new Criteria();
-  	CinivelesPeer::doDelete($t); 
-  	
+  	CinivelesPeer::doDelete($t);
+
     $x=$grid[0];
       $j=0;
       while ($j<count($x))
@@ -232,9 +232,9 @@ class Ingresos
   {
       $x = $grid[0];
       $j = 0;
-      
+
       $sql="delete from cipereje";
-      H::insertarRegistros($sql);    
+      H::insertarRegistros($sql);
 
       while ($j<count($x))
       {
@@ -322,8 +322,14 @@ class Ingresos
 
   $datos=array();
   $datos='';
-    if($fecha<$fecfinal && $contador<=$numper){
+    //if($fecha<$fecfinal && $contador<=$numper){
 
+
+      $fecha1=$fecha;
+      $fecini=substr($fecha,6,4)."-".substr($fecha,3,2)."-".substr($fecha,0,2);
+      $fecfin=H::dateAdd('d',-1,(H::dateAdd('m',(int)$incmes,$fecini,'+')),'+');
+
+    //}
 
       if ($contador<10){
         $per="0".(string)$contador;
@@ -331,11 +337,7 @@ class Ingresos
       }else{
         $per=(string)$contador;
       }
-      $fecha1=$fecha;
-      $fecini=substr($fecha,6,4)."-".substr($fecha,3,2)."-".substr($fecha,0,2);
-      $fecfin=H::dateAdd('d',-1,(H::dateAdd('m',(int)$incmes,$fecini,'+')),'+');
 
-    }
 
     $datos[0]=$per;
     $datos[1]=$fecha1;
@@ -810,7 +812,7 @@ public static function buscar_comprobante($cireging,$accion,$fecanu){
         $b1->add(TsdefbanPeer::NUMCUE,$codigocuenta2);
         $regis3 = TsdefbanPeer::doSelectOne($b1);
         if ($regis3) {
-          $codigo = $regis3->getCodcta();          
+          $codigo = $regis3->getCodcta();
         }
 
         //Obtener la descripcion del codigo de cuenta
@@ -822,10 +824,10 @@ public static function buscar_comprobante($cireging,$accion,$fecanu){
           $tipo2  = 'D';
           $des2   = $regis4->getDescta();
           $monto2 = $cireging->getMontot();
-        }else {        
+        }else {
           	$msjuno='La Cuenta Contable asociada a Cuenta Bancaria no existe';
           	return true;
-        
+
         }
 
       $cuentas=$codigo.'_'.$codigocuentas;
@@ -1022,6 +1024,11 @@ public static function buscar_comprobante($cireging,$accion,$fecanu){
       $ano = substr(date('d/m/YY'),6,4);
       $ciadidis->setAnoadi($ano);
       $ciadidis->setStaadi('A');
+      if ($ciadidis->getRefadi()=='00000000')
+      {
+          $num = H::getNextvalSecuencia('ciadidis_refadi_seq');
+          $ciadidis->setRefadi(str_pad($num,8,'0',STR_PAD_LEFT));
+      }
       $ciadidis->save();
 
       return Ingresos::salvarMovadi($ciadidis, $grid);

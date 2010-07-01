@@ -5,9 +5,9 @@
  *
  * @package    Roraima
  * @subpackage ingtrasla
- * @author     $Author:lhernandez $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id:actions.class.php 32380 2009-09-01 17:11:59Z lhernandez $
- * 
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: actions.class.php 39288 2010-07-01 14:51:47Z cramirez $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -16,7 +16,7 @@ class ingtraslaActions extends autoingtraslaActions
 
   // Para incluir funcionalidades al executeEdit()
   /**
-   * Función para colocar el codigo necesario en  
+   * Función para colocar el codigo necesario en
    * el proceso de edición.
    * Aquí se pueden buscar datos adicionales que necesite la vista
    * Esta función es parte de la acción executeEdit, que maneja tanto
@@ -278,12 +278,13 @@ class ingtraslaActions extends autoingtraslaActions
   }
 
 
-  
-  
-  
+
+
+
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -316,6 +317,12 @@ class ingtraslaActions extends autoingtraslaActions
       $citrasla->setPertra($dato[0]["pereje"]);
       $citrasla->setAnotra(substr($fecha,0,4));
       $citrasla->setStatra(H::iif(($citrasla->getStatra()==''),'A',$citrasla->getStatra()));
+      if ($citrasla->getReftra()=='00000000')
+      {
+          $num = H::getNextvalSecuencia('citrasla_reftra_seq');
+          $citrasla->setReftra(str_pad($num,8,'0',STR_PAD_LEFT));
+      }
+
       $citrasla->save();
       $grid = Herramientas::CargarDatosGridv2($this,$this->grid);
       return Ingresos::salvarDetalletraslado($citrasla, $grid);
