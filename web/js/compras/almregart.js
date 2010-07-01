@@ -25,13 +25,17 @@ function salvarmontos()
 {
   var fil=0;
   var cadena='';
-  var totalfilas=$('totalfilas').value;
+  var totalfilas=totalregistros('cx',1,10);//$('totalfilas').value;
   while (fil<totalfilas)
   {
     var codubi="cx"+"_"+fil+"_1";
     var desubi="cx"+"_"+fil+"_2";
     var monact="cx"+"_"+fil+"_3";
+    var num1=toFloat(monact);
+
+    if ($(codubi).value!="" && num1>0) {
     var cadena=cadena + $(codubi).value+'_' + $(desubi).value+'_' + $(monact).value + '!';
+    }
     fil++;
   }
 
@@ -48,7 +52,7 @@ function salvarmontos()
 
 function distribuirExistencia()
 {
-   var totalfilas=$('totalfilas').value;
+   var totalfilas=totalregistros('cx',1,10);//$('totalfilas').value;
    if (totalfilas>0)
    {
 		 var j=$('fila').value;
@@ -167,3 +171,64 @@ function distribuirExistencia()
     entermonto(e,id)
 
 }
+
+function ajax(e,id)
+ {
+    var aux = id.split("_");
+    var name=aux[0];
+    var fil=parseInt(aux[1]);
+    var col=parseInt(aux[2]);
+
+    var coldes=col+1;
+    filaalm=$('fila').value;
+    var idcodalm="ax_"+filaalm+"_1";
+    var cajtexmos=name+"_"+fil+"_"+coldes;
+    var codalm=$(idcodalm).value;
+    var cod=$(id).value;
+
+    if (e.keyCode==13 || e.keyCode==9)
+    {
+    if ($(id).value!='')
+    {
+     if (!ubicacion_repetida(id))
+     {
+       new Ajax.Request(getUrlModuloAjax(), {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=3&cajtexmos='+cajtexmos+'&codalm='+codalm+'&cajtexcom='+id+'&codigo='+cod})
+     }else {
+       alert_('La Ubicaci&oacute;n esta Repetida');
+       $(id).value="";
+       $(id).focus();
+     }
+    }
+  }
+ }
+
+ function ubicacion_repetida(id)
+ {
+   var aux = id.split("_");
+   var name=aux[0];
+   var fila=aux[1];
+   var col=parseInt(aux[2]);
+
+   var ubicacion=$(id).value;
+
+   var ubicacionrepetido=false;
+   var am=totalregistros('cx',1,10);
+   var i=0;
+   while (i<am)
+   {
+    var codigo="cx"+"_"+i+"_1";
+
+    var ubicacion2=$(codigo).value;
+
+    if (i!=fila)
+    {
+      if (ubicacion==ubicacion2)
+      {
+        ubicacionrepetido=true;
+        break;
+      }
+    }
+   i++;
+   }
+   return ubicacionrepetido;
+ }

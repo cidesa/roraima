@@ -22,7 +22,8 @@ private static $coderror=-1;
   
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -382,38 +383,39 @@ $this->Bitacora('Guardo');
    {
       $c = new Criteria();
 
-      $sql="select a.codalm, b.nomubi,coalesce((select c.exiact from caartalmubi c where c.codart='".$codart."' and c.codalm='".$codalm."' and c.codubi=a.codubi),0) as exiact, a.codubi,a.id
-      FROM  caalmubi a,cadefubi b
+      $sql="select a.codubi, b.nomubi, a.exiact, a.codalm, a.id
+            FROM  caartalmubi a, cadefubi b
       where a.codubi=b.codubi
-      AND a.Codalm='".$codalm."' order by a.codubi";
+            and a.codalm='".$codalm."'and a.codart='".$codart."'
+            order by a.codubi";
     $resp = Herramientas::BuscarDatos($sql,&$per);
     $filas=count($per);
-  /*  $this->setVars();
+      $this->setVars();
 
       $mascaraubicacion=$this->mascaraubicacion;
-      $longmas=strlen($this->mascaraubicacion);*/
+      $longmas=strlen($this->mascaraubicacion);
 
       $opciones = new OpcionesGrid();
       $opciones->setEliminar(false);
       $opciones->setTabla('Caartalmubi');
-      $opciones->setAnchoGrid(600);
-    $opciones->setAncho(600);
+      $opciones->setAnchoGrid(650);
+      $opciones->setAncho(650);
       $opciones->setTitulo('Existencia por Almacen y Ubicación');
       $opciones->setName('c');
-      $opciones->setFilas(0);
+      $opciones->setFilas(10);
       $opciones->setHTMLTotalFilas(' ');
 
+      $params = array($codalm,'val2');
       $col1 = new Columna('Cod. Ubicacion');
       $col1->setTipo(Columna::TEXTO);
       $col1->setEsGrabable(true);
       $col1->setAlineacionObjeto(Columna::CENTRO);
       $col1->setAlineacionContenido(Columna::CENTRO);
       $col1->setNombreCampo('codubi');
-      //$col1->setCatalogo('cadefubi','sf_admin_edit_form', array('codubi'=> 1, 'nomubi'=> 2));
-      //$col1->setJScript('onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascaraubicacion.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}"');
+      $col1->setCatalogo('cadefubi','sf_admin_edit_form', array('codubi'=> 1, 'nomubi'=> 2),'Cadefubi_Almdes',$params);
+      $col1->setJScript('onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascaraubicacion.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}"  onBlur="javascript:event.keyCode=13; ajax(event,this.id);"');
       //$col1->setAjax('almregart',3,2);
-      //$col1->setHTML('type="text" size="25" maxlength='.chr(39).$longmas.chr(39).'');
-      $col1->setHTML('type="text" size="20" readonly=true');
+      $col1->setHTML('type="text" size="20" maxlength='.chr(39).$longmas.chr(39).'');
 
       $col2 = new Columna('Ubicación');
       $col2->setTipo(Columna::TEXTO);
@@ -546,8 +548,18 @@ $this->Bitacora('Guardo');
       }
      else  if ($this->getRequestParameter('ajax')=='3')
       {
-          $dato=CadefubiPeer::getDesubicacion($this->getRequestParameter('codigo'));
-            $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
+         $javascript=""; $dato="";
+         $c = new Criteria();
+	 $c->addJoin(CadefubiPeer :: CODUBI, CaalmubiPeer :: CODUBI);
+	 $c->add(CaalmubiPeer :: CODALM, $this->getRequestParameter('codalm'));
+         $c->add(CadefubiPeer :: CODUBI, $this->getRequestParameter('codigo'));
+         $result= CadefubiPeer ::doSelectOne($c);
+         if ($result)
+         {
+            $dato=$result->getNomubi();
+         }else $javascript="alert('La Ubicación no se encuentra asociada al almacen'); $('$cajtexcom').value=''; $('$cajtexcom').focus();";
+
+         $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""]]';
             $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
           return sfView::HEADER_ONLY;
       }
