@@ -1394,7 +1394,7 @@ class Orden_compra
   {
     if (Herramientas::getX_vacio('ordcom','caordcom','ordcom',$caordcom->getOrdcom())=='')
     {
-        if (($caordcom->getTipord()=='S') || ($caordcom->getTipord()=='T'))
+        if (($caordcom->getTipord()=='S') || ($caordcom->getTipord()=='M') || ($caordcom->getTipord()=='T'))
               $tipord='corser';
            else
               $tipord='corcom';
@@ -1460,7 +1460,7 @@ class Orden_compra
 	            while (!$encontrado)
 	            {
 	              $numero=str_pad($r, 8, '0', STR_PAD_LEFT);
-	                  if (($caordcom->getTipord()=='S') || ($caordcom->getTipord()=='T'))
+	                  if (($caordcom->getTipord()=='S') || ($caordcom->getTipord()=='M') || ($caordcom->getTipord()=='T'))
 	                  $numero='OS'.(substr($numero,2,strlen($numero)));
 	                else
 	                    $numero='OC'.(substr($numero,2,strlen($numero)));
@@ -1478,7 +1478,7 @@ class Orden_compra
                 Herramientas::getSalvarCorrelativo($tipord,'cacorrel','cacorrel',$r,&$msg);
                 //$caordcom->setOrdcom(Herramientas::getBuscar_correlativo($caordcom->getOrdcom(),'cadefart',$tipord,'caordcom','ordcom'));
 
-                if (($caordcom->getTipord()=='S') || ($caordcom->getTipord()=='T'))
+                if (($caordcom->getTipord()=='S') || ($caordcom->getTipord()=='M') || ($caordcom->getTipord()=='T'))
                  $caordcom->setOrdcom('OS'.substr($caordcom->getOrdcom(), 2, 6));
                 else
                  $caordcom->setOrdcom('OC'.substr($caordcom->getOrdcom(), 2, 6));
@@ -1490,7 +1490,7 @@ class Orden_compra
                 $caordcom->setOrdcom(str_pad($caordcom->getOrdcom(), 8, '0', STR_PAD_LEFT));
                 //$caordcom->setOrdcom(Herramientas::getBuscar_correlativo($caordcom->getOrdcom(),'cadefart',$tipord,'caordcom','ordcom'));
 
-                if (($caordcom->getTipord()=='S') || ($caordcom->getTipord()=='T'))
+                if (($caordcom->getTipord()=='S') || ($caordcom->getTipord()=='M') || ($caordcom->getTipord()=='T'))
 		          $caordcom->setOrdcom('OS'.substr($caordcom->getOrdcom(), 2, 6));
 		        else
 		          $caordcom->setOrdcom('OC'.substr($caordcom->getOrdcom(), 2, 6));
@@ -1550,7 +1550,7 @@ class Orden_compra
               $caordcom_new->getMonord();
               $caordcom->getOrdcom();
 
-              if ($caordcom->getManorddon()=='S')  // En Caso de una OC de DonaciÃ³n
+              if ($caordcom->getManorddon()=='S')  // En Caso de una OC de Donación
               {
                   $caordcom_new->setTipocom($caordcom->getTipocom());
                   $caordcom_new->setCeddon($caordcom->getCeddon());
@@ -1595,7 +1595,7 @@ class Orden_compra
                   $caordcom_mod->setDesord($caordcom->getDesord());
                   $caordcom_mod->setNotord($caordcom->getNotord());
 
-                  if ($caordcom->getManorddon()=='S') // En Caso de una OC de DonaciÃ³n
+                  if ($caordcom->getManorddon()=='S') // En Caso de una OC de Donación
                   {
                       $caordcom_mod->setTipocom($caordcom->getTipocom());
                       $caordcom_mod->setCeddon($caordcom->getCeddon());
