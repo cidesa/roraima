@@ -709,6 +709,12 @@ H::printR($per);
 		$cpasiini->setStatus('A');
 		$cpasiini->save();
 
+      $c= new Criteria();
+      $c->add(CpasiiniPeer::CODPRE,$cpasiini->getCodpre());
+      $c->add(CpasiiniPeer::ANOPRE,$cpasiini->getAnopre());
+      $c->add(CpasiiniPeer::PERPRE,'00',Criteria::NOT_EQUAL);
+      CpasiiniPeer::doDelete($c);
+
 		foreach ($cpasiinis as $cpasiini_) {
 			$tablacpasiini= new Cpasiini();
 			$tablacpasiini->setCodpre($cpasiini->getCodpre());
