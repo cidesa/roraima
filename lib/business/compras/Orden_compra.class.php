@@ -1392,6 +1392,7 @@ class Orden_compra
 
   public static function Grabar_orden_compra($caordcom,$grid_detalle_orden_arreglos,$grid_detalle_recargo,$arreglo_objetos,$arreglo_campos,$moneda,$codigomoneda,$codigo_proveedor,$referencia,$codconpag,$codforent)
   {
+    $prefijomixto=H::getConfApp('prefijomixto', 'compras', 'almordcom');
     if (Herramientas::getX_vacio('ordcom','caordcom','ordcom',$caordcom->getOrdcom())=='')
     {
         if (($caordcom->getTipord()=='S') || ($caordcom->getTipord()=='M') || ($caordcom->getTipord()=='T'))
@@ -1479,9 +1480,13 @@ class Orden_compra
                 //$caordcom->setOrdcom(Herramientas::getBuscar_correlativo($caordcom->getOrdcom(),'cadefart',$tipord,'caordcom','ordcom'));
 
                 if (($caordcom->getTipord()=='S') || ($caordcom->getTipord()=='M') || ($caordcom->getTipord()=='T'))
-                 $caordcom->setOrdcom('OS'.substr($caordcom->getOrdcom(), 2, 6));
-                else
-                 $caordcom->setOrdcom('OC'.substr($caordcom->getOrdcom(), 2, 6));
+                 {
+                   if ($prefijomixto!="" && $caordcom->getTipord()=='M')
+                      $caordcom->setOrdcom($prefijomixto.substr($caordcom->getOrdcom(), 2, 6));
+                   else $caordcom->setOrdcom('OS'.substr($caordcom->getOrdcom(), 2, 6));
+              }
+                else {
+                 $caordcom->setOrdcom('OC'.substr($caordcom->getOrdcom(), 2, 6)); }
               }
               }
               else
@@ -1491,10 +1496,15 @@ class Orden_compra
                 //$caordcom->setOrdcom(Herramientas::getBuscar_correlativo($caordcom->getOrdcom(),'cadefart',$tipord,'caordcom','ordcom'));
 
                 if (($caordcom->getTipord()=='S') || ($caordcom->getTipord()=='M') || ($caordcom->getTipord()=='T'))
-		          $caordcom->setOrdcom('OS'.substr($caordcom->getOrdcom(), 2, 6));
-		        else
-		          $caordcom->setOrdcom('OC'.substr($caordcom->getOrdcom(), 2, 6));
+		 {
+                     if ($prefijomixto!="" && $caordcom->getTipord()=='M')
+                        $caordcom->setOrdcom($prefijomixto.substr($caordcom->getOrdcom(), 2, 6));
+                     else $caordcom->setOrdcom('OS'.substr($caordcom->getOrdcom(), 2, 6));
+
               }
+		 else {
+		  $caordcom->setOrdcom('OC'.substr($caordcom->getOrdcom(), 2, 6)); }
+           }
            }
 
           // campos
