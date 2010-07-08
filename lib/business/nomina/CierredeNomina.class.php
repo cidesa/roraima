@@ -4,8 +4,8 @@
  *
  * @package    Roraima
  * @subpackage nomina
- * @author     $Author: jlobaton $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id: CierredeNomina.class.php 34776 2009-11-16 20:48:32Z jlobaton $
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: CierredeNomina.class.php 39374 2010-07-08 18:56:59Z cramirez $
  *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -230,11 +230,12 @@ class CierredeNomina
 	   	 if ($intpre=='S')
 	   	 {
 	   	 	//$sql = "select mondis from cpasiini where perpre='00' and codpre='".$grabar->getCodpre()."'";
+
 	   		  //if (Herramientas::BuscarDatos($sql,&$resul))
 		      if (Herramientas::Monto_disponible_ejecucion($anopresu,$grabar->getCodpre(),&$mondis))
 		      {
 		        if ($grabar->getMonto() > $mondis){
-		          $sobregiro = true;
+                            $sobregiro = true;
 		          break;
 		        }
 		       }else{
@@ -495,6 +496,7 @@ class CierredeNomina
    $resultados= NpnomcalPeer::doSelect($c);
    if ($resultados)
    {
+        $fechanom=$resultados[0]->getFecnom();
    	foreach ($resultados as $npnomcal)
    	{
    	 $sql="Select A.codemp as codemp,A.codcar as codcar,A.codnom as codnom,A.codcat as codcat,A.fecasi as fecasi,A.nomemp as nomemp,A.nomcar as nomcar,A.nomnom as nomnom,A.nomcat as nomcat,A.unieje as unieje,A.sueldo as sueldo,A.status as status,A.nronom as nronom,A.montonomina as montonomina,A.codtip as codtip,A.codtipgas as codtipgas,A.codniv as codniv,A.grado as grado,A.paso as paso,
@@ -624,6 +626,11 @@ class CierredeNomina
       	$sobregiro = true; //Esto nunca deberia suceder, pero se coloco para su validacion
       }
      }
+    $sql="update nphojint set staemp='V'
+                where codemp in (select codemp from npvacsalidas where fecsalnom=to_date('$fechanom','dd/mm/yyyy')) and
+                      StaEmp='A' and
+                      (select vacant from npvacdefgen where codnomvac='$codnom' limit 1)='S'";
+    H::insertarRegistros($sql);
 
     unset($npnomcal);
     unset($result);
