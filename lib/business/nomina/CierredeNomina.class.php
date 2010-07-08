@@ -5,7 +5,7 @@
  * @package    Roraima
  * @subpackage nomina
  * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id: CierredeNomina.class.php 39374 2010-07-08 18:56:59Z cramirez $
+ * @version SVN: $Id: CierredeNomina.class.php 39386 2010-07-08 20:48:25Z cramirez $
  *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -629,7 +629,7 @@ class CierredeNomina
     $sql="update nphojint set staemp='V'
                 where codemp in (select codemp from npvacsalidas where fecsalnom=to_date('$fechanom','dd/mm/yyyy')) and
                       StaEmp='A' and
-                      (select vacant from npvacdefgen where codnomvac='$codnom' limit 1)='S'";
+                      (select pagoad from npvacdefgen where codnomvac='$codnom' limit 1)='S'";
     H::insertarRegistros($sql);
 
     unset($npnomcal);

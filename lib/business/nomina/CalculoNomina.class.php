@@ -125,7 +125,7 @@ public static function ValidicionPorEmpleado($codnom,$desde,$hasta,$opsi,$msem,&
         $sql = "update nphojint set staemp='A'
                 where codemp in (select codemp from npvacsalidas where fecreinom=to_date('$profec','yyyy-mm-dd')) and
                       StaEmp='V' and
-                      (select vacant from npvacdefgen where codnomvac='$codnom' limit 1)='S'";
+                      (select pagoad from npvacdefgen where codnomvac='$codnom' limit 1)='S'";
         Herramientas::insertarRegistros($sql);
 
 	$sql="Select distinct a.codemp,b.nomemp,a.codcar,b.staemp,b.fecnac,b.fecing,b.sexemp
