@@ -42,6 +42,24 @@ class nomhojintActions extends autonomhojintActions
 
      $nphojint = $this->getRequestParameter('nphojint');
      $nomemp='';
+     $valifecing = H::getConfApp('valifecing','nomina','nomhojint');
+     if(isset($nphojint['fecing']))
+     {
+        if($valifecing!='S')
+        {
+            $auxfec = split("/",$nphojint['fecing']);
+            $fecha = $auxfec[2].'-'.$auxfec[1].'-'.$auxfec[0];
+            if(strtotime($fecha)>strtotime(date("Y-m-d")))
+            {
+              $this->coderr='N0002';
+              return false;
+            }
+        }
+     }
+     else
+         $this->coderr='N0001';
+         return false;
+
      if (isset($nphojint['prinom']) && isset($nphojint['prinom']))
 	 {
 		$segnom='';
