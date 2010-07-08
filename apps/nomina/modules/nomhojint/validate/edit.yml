@@ -90,7 +90,7 @@ names:
 
   nphojint{fecing}:
     required:  No
-    validators: FechaValidatorNowIng
+    #validators: FechaValidatorNowIng
     # FechaValidator,
 
   nphojint{fecret}:

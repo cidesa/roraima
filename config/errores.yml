@@ -1687,3 +1687,10 @@ F001:
 F002:
   cod: F002
   msj: Debe ingresar formatos de hora validos hh:mmAM ó hh:mmPM
+#NOMINA
+N0001:
+  cod: N0001
+  msj: Debe escribir una Fecha de Ingresos
+N0002:
+  cod: N0002
+  msj: Ingresos- La Fecha de Ingresos no puede ser mayor a la Fecha Actual
