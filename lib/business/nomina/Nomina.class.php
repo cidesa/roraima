@@ -2873,13 +2873,13 @@ class Nomina {
 		}
 
         return $valor;
-      case "NLNOM" :
+      case "NLVACNOM" :
         $valor = 0;
         $fecnomdes=null;
-        $sql = "select ultfec from npnomina where codnom='$nomina'";
+        $sql = "select fecdes,fechas from npvacsalidas a where codemp='$empleado' and fecsalnom=to_date('$fecnom','yyyy-mm-dd')  order by fecvac desc";
         if (Herramientas :: BuscarDatos($sql, & $res))
         {
-            $fecnomdes=$res[0]['ultfec'];
+            $fecnomdes=$res[0]['fecdes'];
         }
         $fechades = $fecnomdes;
         $fechahas = $fecnom;
@@ -5079,13 +5079,13 @@ class Nomina {
 
         return $valor;
         break;
-      case "NLNOM" :
+      case "NLVACNOM" :
         $valor = 0;
         $fecnomdes=null;
-        $sql = "select ultfec from npnomina where codnom='$nomina'";
+        $sql = "select fecdes,fechas from npvacsalidas a where codemp='$empleado' and fecsalnom=to_date('$hasta','dd/mm/yyyy')  order by fecvac desc";
         if (Herramientas :: BuscarDatos($sql, & $res))
         {
-            $fecnomdes=$res[0]['ultfec'];
+            $fecnomdes=$res[0]['fecdes'];
         }
         $auxfec = split("/",$hasta);
         $fechades = $auxfec[2].'-'.$auxfec[1].'-'.$auxfec[0];
