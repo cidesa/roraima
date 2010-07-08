@@ -47,7 +47,7 @@ generator:
         observa:       { type: textarea_tag, params: cols=60}
       display:
         Datos Empleados:       [codemp, fecing ]
-        Datos Solicitúd:       [fecvac, _fecsalreg, _fecnom, _dias, observa]
+        Datos Solicitúd:       [fecvac, _fecsalreg, _dias, _fecnom, observa]
         Relación Vacaciones:   [_gridvacaciones]
       actions:
         _list:        ~
