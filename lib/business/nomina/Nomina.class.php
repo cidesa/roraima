@@ -2879,20 +2879,19 @@ class Nomina {
         $sql = "select fecdes,fechas from npvacsalidas a where codemp='$empleado' and fecsalnom=to_date('$fecnom','yyyy-mm-dd')  order by fecvac desc";
         if (Herramientas :: BuscarDatos($sql, & $res))
         {
-            $fecnomdes=$res[0]['fecdes'];
+            $fechades = $res[0]['fecdes'];
+            $fechahas = $fecnom;
+            $numerosemanas = 0;
+            while (strtotime($fechades) <= strtotime($fechahas)) {
+              $auxfechades = split('-', $fechades);
+              if (Herramientas :: dia_semana($auxfechades[2], $auxfechades[1], $auxfechades[0]) == 'Lunes') {
+                $numerosemanas += 1;
+              }
+              $fechades = Herramientas :: dateAdd('d', 1, $fechades, '+');
+            }
+            if($numerosemanas && $numerosemanas!=0)
+                $valor = $numerosemanas;
         }
-        $fechades = $fecnomdes;
-        $fechahas = $fecnom;
-        $numerosemanas = 0;
-        while (strtotime($fechades) <= strtotime($fechahas)) {
-          $auxfechades = split('-', $fechades);
-          if (Herramientas :: dia_semana($auxfechades[2], $auxfechades[1], $auxfechades[0]) == 'Lunes') {
-            $numerosemanas += 1;
-          }
-          $fechades = Herramientas :: dateAdd('d', 1, $fechades, '+');
-        }
-        if($numerosemanas && $numerosemanas!=0)
-            $valor = $numerosemanas;
 
         return $valor;
       default :
@@ -5086,20 +5085,20 @@ class Nomina {
         if (Herramientas :: BuscarDatos($sql, & $res))
         {
             $fecnomdes=$res[0]['fecdes'];
+            $auxfec = split("/",$hasta);
+            $fechades = $auxfec[2].'-'.$auxfec[1].'-'.$auxfec[0];
+            $fechahas = $fecnom;
+            $numerosemanas = 0;
+            while (strtotime($fechades) <= strtotime($fechahas)) {
+              $auxfechades = split('-', $fechades);
+              if (Herramientas :: dia_semana($auxfechades[2], $auxfechades[1], $auxfechades[0]) == 'Lunes') {
+                $numerosemanas += 1;
+              }
+              $fechades = Herramientas :: dateAdd('d', 1, $fechades, '+');
+            }
+            if($numerosemanas && $numerosemanas!=0)
+                $valor = $numerosemanas;
         }
-        $auxfec = split("/",$hasta);
-        $fechades = $auxfec[2].'-'.$auxfec[1].'-'.$auxfec[0];
-        $fechahas = $fecnom;
-        $numerosemanas = 0;
-        while (strtotime($fechades) <= strtotime($fechahas)) {
-          $auxfechades = split('-', $fechades);
-          if (Herramientas :: dia_semana($auxfechades[2], $auxfechades[1], $auxfechades[0]) == 'Lunes') {
-            $numerosemanas += 1;
-          }
-          $fechades = Herramientas :: dateAdd('d', 1, $fechades, '+');
-        }
-        if($numerosemanas && $numerosemanas!=0)
-            $valor = $numerosemanas;
 
         return $valor;
       default :
