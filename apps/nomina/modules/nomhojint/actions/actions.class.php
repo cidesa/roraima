@@ -57,8 +57,10 @@ class nomhojintActions extends autonomhojintActions
         }
      }
      else
+     {
          $this->coderr='N0001';
          return false;
+     }
 
      if (isset($nphojint['prinom']) && isset($nphojint['prinom']))
 	 {
