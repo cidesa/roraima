@@ -909,7 +909,7 @@ class Nomina {
           //$ident[$token]=$valor;
           $vars = $vars . chr(13) . $token . "=" . $valor; // no se que hacen con esto.
         }
-        if ($valor != '') {
+        if ($valor != '' || $valor==0) {
           $error = false;
           array_push($pila, $valor);
         } else {
