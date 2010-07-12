@@ -1732,7 +1732,7 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
     $opciones->setAnchoGrid(850);
     $opciones->setAncho(850);
     $opciones->setTitulo('Datos de las Retenciones');
-    $opciones->setFilas(20);
+    $opciones->setFilas(30);
     $opciones->setName('e');
     $opciones->setHTMLTotalFilas(' ');
 

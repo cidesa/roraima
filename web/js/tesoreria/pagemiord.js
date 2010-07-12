@@ -414,7 +414,7 @@
   {
     var ind=0;
     var enc=false;
-    var total=totalregistros('ex',1,20);
+    var total=totalregistros('ex',1,30);
     while ((ind<total) && (!enc)) //grid aplicaret
     {
       var id="ex"+"_"+ind+"_1";
@@ -931,7 +931,7 @@
     cienxcien=xcien;
    }
 
-  var ww=totalregistros('ex',1,20);
+  var ww=totalregistros('ex',1,30);
   var ab=totalregistros('ax',2,150);
   var fil=0;
   while (fil<ww)
@@ -1335,7 +1335,7 @@
      fi++;
    }
 
-  var axx=totalregistros('ex',1,20);
+  var axx=totalregistros('ex',1,30);
   var o=0;
   while (o<axx)
   {
@@ -1359,7 +1359,7 @@
  function porcentajeISLRN(tipo,campo)
  {
    porcentajeislr=0;
-   total=totalregistros('ex',1,20);
+   total=totalregistros('ex',1,30);
    j=0;
    while (j<total)
    {
@@ -1429,7 +1429,7 @@
  function porcentajeIRSN(tipo,campo)
  {
    porcentajeirs=0;
-   total=totalregistros('ex',1,20);
+   total=totalregistros('ex',1,30);
    j=0;
    while (j<total)
    {
@@ -1750,7 +1750,7 @@
  var calcularbaseimponible=0;
   if ($('id').value=="")
   {
-    total=totalregistros('ex',1,20);
+    total=totalregistros('ex',1,30);
     j=0;
     while (j<total)
     {
@@ -1976,7 +1976,7 @@
 
   function recalunoxmil(id)
   {
-   var am=totalregistros('ex',2,10);
+   var am=totalregistros('ex',2,30);
    var filas=parseInt($('numgridret').value);
    var bm=totalregistros('dx',12,filas);
    if (($('id').value=='' && am!=0) || ($('id').value!='' && bm!=0))
@@ -2158,7 +2158,7 @@
    function calculaRetiva(monto,codigo)
    {
      var calcularetiva=0;
-     var ax=totalregistros('ex',1,20);
+     var ax=totalregistros('ex',1,30);
      var i=0;
      while (i<ax)
      {
@@ -2310,7 +2310,7 @@ function totalizar(e,id)
     {
       $(name+"_"+fil+"_"+colum).value=format(cal.toFixed(2),'.',',','.');
     }
-    var am=totalregistros('ex',2,10);
+    var am=totalregistros('ex',2,30);
     var filas=parseInt($('numgridret').value);
     var bm=totalregistros('dx',12,filas);
     if (($('id').value=='' && am!=0) || ($('id').value!='' && bm!=0))
@@ -2638,7 +2638,7 @@ function ajaxretenciones(e,id)
    var codret=$(id).value;
 
    var codretrepetido=false;
-   var am=totalregistros('ex',1,20);
+   var am=totalregistros('ex',1,30);
    var i=0;
    while (i<am)
    {
@@ -2941,7 +2941,7 @@ function monto1XMILN()
     {
       $(name+"_"+fil+"_"+colum).value=format(cal.toFixed(2),'.',',','.');
     }
-    var am=totalregistros('ex',2,10);
+    var am=totalregistros('ex',2,30);
     var filas=parseInt($('numgridret').value);
     var bm=totalregistros('dx',12,filas);
     if (($('id').value=='' && am!=0) || ($('id').value!='' && bm!=0))
