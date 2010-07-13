@@ -88,13 +88,13 @@ class ingejegloActions extends autoingejegloActions
       $array_cod[0]["id"] = '';
 
       $array_cod[1]["movimiento"] = 'Ajustado';
-      $array_cod[1]["montos"] = H::formatoMonto($reg[0]["monprc"]);
-      $array_cod[1]["porc"] = self::CalcularPorcentaje($reg[0]["monprc"],$reg[0]["monasi"]);
+      $array_cod[1]["montos"] = H::formatoMonto($reg[0]["monaju"]);
+      $array_cod[1]["porc"] = self::CalcularPorcentaje($reg[0]["monaju"],$reg[0]["monasi"]);
       $array_cod[1]["id"] = '';
 
       $array_cod[2]["movimiento"] = 'Ejecutado';
-      $array_cod[2]["montos"] = H::formatoMonto($reg[0]["monaju"]);
-      $array_cod[2]["porc"] = self::CalcularPorcentaje($reg[0]["monaju"],$reg[0]["monasi"]);
+      $array_cod[2]["montos"] = H::formatoMonto($reg[0]["monprc"]);
+      $array_cod[2]["porc"] = self::CalcularPorcentaje($reg[0]["monprc"],$reg[0]["monasi"]);
       $array_cod[2]["id"] = '';
 
       $array_cod[3]["movimiento"] = 'Traslado(+)';
