@@ -1082,6 +1082,22 @@ propel:
       type: NUMERIC
       size: 6
       scale: 0      
+    canphom:
+      type: NUMERIC
+      size: 6
+      scale: 0
+    canpmuj:
+      type: NUMERIC
+      size: 6
+      scale: 0
+    canvhom:
+      type: NUMERIC
+      size: 6
+      scale: 0
+    canvmuj:
+      type: NUMERIC
+      size: 6
+      scale: 0
     id:
       type: INTEGER
       required: true

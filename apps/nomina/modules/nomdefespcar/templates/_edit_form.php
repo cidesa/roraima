@@ -5,13 +5,13 @@
  * @package    Roraima
  * @subpackage vistas
  * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
- * @version    SVN: $Id: _edit_form.php 36298 2010-02-04 16:51:58Z cramirez $
+ * @version    SVN: $Id: _edit_form.php 39450 2010-07-14 17:13:14Z cramirez $
  */
 // date: 2007/08/17 17:53:42
 ?>
 <?php echo form_tag('nomdefespcar/save', array(
   'id'        => 'sf_admin_edit_form',
-  'name'      => 'sf_admin_edit_form',
+  'name'      => 'sf_admin_edit_form', 'onsubmit'  => 'return false;',
   'multipart' => true,
   'onsubmit'  => 'double_list_submit(); return true;'
 )) ?>
@@ -157,6 +157,64 @@
 			    </div>
 		</td>
 	</tr>
+    </table>
+        <fieldset id="sf_fieldset_none" class="">
+        <legend><h2><?php echo __('Cargos Presupuestados')?></h2></legend>
+        <div class="form-row" >
+        <table>
+            <tr>
+		<td>
+			<?php echo label_for('npcargos[canpmuj]', __($labels['npcargos{canpmuj}']), 'class="required" ') ?>
+			  <div class="content<?php if ($sf_request->hasError('npcargos{canpmuj}')): ?> form-error<?php endif; ?>">
+			  <?php if ($sf_request->hasError('npcargos{canpmuj}')): ?>
+			    <?php echo form_error('npcargos{canpmuj}', array('class' => 'form-error-msg')) ?>
+			  <?php endif; ?>
+
+			  <?php $value = object_input_tag($npcargos, array('getCanpmuj',true), array (
+			  'size' => 7,
+			  'maxlength' => 6,
+			  'onBlur' => "javascript:event.keyCode=13; if($('id').value=='') calcularo(event,this.id)",
+			  'control_name' => 'npcargos[canpmuj]',
+			)); echo $value ? $value : '&nbsp;' ?>
+                              </div>
+		</td>
+		<td><?php echo label_for('npcargos[canphom]', __($labels['npcargos{canphom}']), 'class="required" ') ?>
+			  <div class="content<?php if ($sf_request->hasError('npcargos{canphom}')): ?> form-error<?php endif; ?>">
+			  <?php if ($sf_request->hasError('npcargos{canphom}')): ?>
+			    <?php echo form_error('npcargos{canphom}', array('class' => 'form-error-msg')) ?>
+			  <?php endif; ?>
+
+			  <?php $value = object_input_tag($npcargos, array('getCanphom',true), array (
+			  'size' => 7,
+			  'maxlength' => 6,
+			  'onBlur' => "javascript:event.keyCode=13; if($('id').value=='') calcularo(event,this.id)",
+			  'control_name' => 'npcargos[canphom]',
+			)); echo $value ? $value : '&nbsp;'?>
+                              </div>
+		</td>
+		<td><?php echo label_for('npcargos[canpmix]', __($labels['npcargos{canpmix}']), 'class="required" ') ?>
+			  <div class="content<?php if ($sf_request->hasError('npcargos{canpmix}')): ?> form-error<?php endif; ?>">
+			  <?php if ($sf_request->hasError('npcargos{canpmix}')): ?>
+			    <?php echo form_error('npcargos{canpmix}', array('class' => 'form-error-msg')) ?>
+			  <?php endif; ?>
+
+			  <?php $value = object_input_tag($npcargos, array('getCanpmix',true), array (
+			  'size' => 7,
+			  'maxlength' => 6,
+                          'readonly'  =>  true,
+			  'control_name' => 'npcargos[canpmix]',
+			)); echo $value ? $value : '&nbsp;'?>
+                              </div>
+		</td>
+	</tr>
+        </table>
+     </div>
+    </fieldset>
+
+    <fieldset id="sf_fieldset_none" class="">
+        <legend><h2><?php echo __('Cargos Asignados')?></h2></legend>
+        <div class="form-row" >
+        <table>
 	<tr>
 		<td>
 			<?php echo label_for('npcargos[canmuj]', __($labels['npcargos{canmuj}']), 'class="required" ') ?>
@@ -167,11 +225,11 @@
 
 			  <?php $value = object_input_tag($npcargos, array('getCanmuj',true), array (
 			  'size' => 7,
-			  'maxlength' => 21,
+			  'maxlength' => 6,
                           'readonly'  =>  true,
-			  'onBlur' => "javascript:event.keyCode=13; calcularo(event,this.id)",
 			  'control_name' => 'npcargos[canmuj]',
 			)); echo $value ? $value : '&nbsp;' ?>
+                              </div>
 		</td>
 		<td><?php echo label_for('npcargos[canhom]', __($labels['npcargos{canhom}']), 'class="required" ') ?>
 			  <div class="content<?php if ($sf_request->hasError('npcargos{canhom}')): ?> form-error<?php endif; ?>">
@@ -181,11 +239,11 @@
 
 			  <?php $value = object_input_tag($npcargos, array('getCanhom',true), array (
 			  'size' => 7,
-			  'maxlength' => 21,
+			  'maxlength' => 6,
                           'readonly'  =>  true,
-			  'onBlur' => "javascript:event.keyCode=13; calcularo(event,this.id)",
 			  'control_name' => 'npcargos[canhom]',
 			)); echo $value ? $value : '&nbsp;'?>
+                              </div>
 		</td>
 		<td><?php echo label_for('npcargos[canmix]', __($labels['npcargos{canmix}']), 'class="required" ') ?>
 			  <div class="content<?php if ($sf_request->hasError('npcargos{canmix}')): ?> form-error<?php endif; ?>">
@@ -195,49 +253,69 @@
 
 			  <?php $value = object_input_tag($npcargos, array('getCanmix',true), array (
 			  'size' => 7,
-			  'maxlength' => 21,
+			  'maxlength' => 6,
                           'readonly'  =>  true,
-			  'onBlur' => "javascript:event.keyCode=13; calcularo(event,this.id)",
 			  'control_name' => 'npcargos[canmix]',
 			)); echo $value ? $value : '&nbsp;'?>
+                              </div>
 		</td>
 	</tr>
-
+    </table>
+    </div>
+    </fieldset>
+<fieldset id="sf_fieldset_none" class="">
+        <legend><h2><?php echo __('Cargos Vacantes')?></h2></legend>
+        <div class="form-row" >
+        <table>
 	<tr>
+		<tr>
 		<td>
-			<?php echo label_for('npcargos[carvan]', __($labels['npcargos{carvan}']), 'class="required" ') ?>
-			  <div class="content<?php if ($sf_request->hasError('npcargos{carvan}')): ?> form-error<?php endif; ?>">
-			  <?php if ($sf_request->hasError('npcargos{carvan}')): ?>
-			    <?php echo form_error('npcargos{carvan}', array('class' => 'form-error-msg')) ?>
+			<?php echo label_for('npcargos[canvmuj]', __($labels['npcargos{canvmuj}']), 'class="required" ') ?>
+			  <div class="content<?php if ($sf_request->hasError('npcargos{canvmuj}')): ?> form-error<?php endif; ?>">
+			  <?php if ($sf_request->hasError('npcargos{canvmuj}')): ?>
+			    <?php echo form_error('npcargos{canvmuj}', array('class' => 'form-error-msg')) ?>
 			  <?php endif; ?>
 
-			  <?php $value = object_input_tag($npcargos, array('getCarvan',true), array (
-			  'size' => 6,
+			  <?php $value = object_input_tag($npcargos, array('getCanvmuj',true), array (
+			  'size' => 7,
 			  'maxlength' => 6,
-                          'readonly'  =>  $npcargos->getId()!='' ? true : false ,
-			  'onBlur' => "javascript:event.keyCode=13;return entermontootro(event,this.id)",
-			  'control_name' => 'npcargos[carvan]',
+                          'readonly'  =>  true,
+			  'control_name' => 'npcargos[canvmuj]',
 			)); echo $value ? $value : '&nbsp;' ?>
+                          </div>
 		</td>
-		<td><?php echo label_for('npcargos[carasi]', __($labels['npcargos{carasi}']), 'class="required" ') ?>
-			  <div class="content<?php if ($sf_request->hasError('npcargos{carasi}')): ?> form-error<?php endif; ?>">
-			  <?php if ($sf_request->hasError('npcargos{carasi}')): ?>
-			    <?php echo form_error('npcargos{carasi}', array('class' => 'form-error-msg')) ?>
+		<td><?php echo label_for('npcargos[canvhom]', __($labels['npcargos{canvhom}']), 'class="required" ') ?>
+			  <div class="content<?php if ($sf_request->hasError('npcargos{canvhom}')): ?> form-error<?php endif; ?>">
+			  <?php if ($sf_request->hasError('npcargos{canvhom}')): ?>
+			    <?php echo form_error('npcargos{canvhom}', array('class' => 'form-error-msg')) ?>
 			  <?php endif; ?>
 
-			  <?php $value = object_input_tag($npcargos, array('getCarasi',true), array (
-			  'size' => 6,
+			  <?php $value = object_input_tag($npcargos, array('getCanvhom',true), array (
+			  'size' => 7,
 			  'maxlength' => 6,
-			  'readonly' => true,
-			  'control_name' => 'npcargos[carasi]',
+                          'readonly'  =>  true,
+			  'control_name' => 'npcargos[canvhom]',
 			)); echo $value ? $value : '&nbsp;'?>
+                          </div>
+		</td>
+		<td><?php echo label_for('npcargos[canvmix]', __($labels['npcargos{canvmix}']), 'class="required" ') ?>
+			  <div class="content<?php if ($sf_request->hasError('npcargos{canvmix}')): ?> form-error<?php endif; ?>">
+			  <?php if ($sf_request->hasError('npcargos{canvmix}')): ?>
+			    <?php echo form_error('npcargos{canvmix}', array('class' => 'form-error-msg')) ?>
+			  <?php endif; ?>
+
+			  <?php $value = object_input_tag($npcargos, array('getCanvmix',true), array (
+			  'size' => 7,
+			  'maxlength' => 6,
+                          'readonly'  =>  true,
+			  'control_name' => 'npcargos[canvmix]',
+			)); echo $value ? $value : '&nbsp;'?>
+                          </div>
 		</td>
 	</tr>
-
 </table>
-
-
-
+</div>
+    </fieldset>
 <br>
 <table>
 <tr>
@@ -371,10 +449,9 @@ echo grid_tag($obj);
 
 <script language="JavaScript" type="text/javascript">
     var nuevo='<?php echo $npcargos->getId(); ?>';
-    valorvaccon='<?php echo $npcargos->getCarvan2(); ?>';
     if (nuevo!=""){
-    $('npcargos_carvan').value=valorvaccon;
-    $('npcargos_carvan').readOnly=true;
+    $('npcargos_canphom').readOnly=true;
+    $('npcargos_canpmuj').readOnly=true;
     }
 
    function validargrid(id)
@@ -403,13 +480,16 @@ echo grid_tag($obj);
  	{
        if (IsNumeric($(id).value))
        {
-       	  var canmuj=parseInt($('npcargos_canmuj').value);
+       	  var canpmuj=parseInt($('npcargos_canpmuj').value);
+       	  var canphom=parseInt($('npcargos_canphom').value);
+          $('npcargos_canpmix').value=canpmuj+canphom;
+          var canpmix=parseInt($('npcargos_canpmix').value);
+          var canmuj=parseInt($('npcargos_canmuj').value);
        	  var canhom=parseInt($('npcargos_canhom').value);
-		  var canmix=parseInt($('npcargos_canmix').value);
-       	  var carasi=parseInt($('npcargos_carasi').value);
-
-          var cuenta= canmuj + canhom + canmix - carasi;
-          $('npcargos_carvan').value=cuenta;
+          var canmix=parseInt($('npcargos_canmix').value);
+          $('npcargos_canvmuj').value=canpmuj-canmuj;
+          $('npcargos_canvhom').value=canphom-canhom;
+          $('npcargos_canvmix').value=canpmix-canmix;
        }else{
        	alert('Debe introducir un valor entero');
        	$(id).value='';

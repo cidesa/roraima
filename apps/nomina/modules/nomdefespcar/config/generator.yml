@@ -17,17 +17,27 @@ generator:
       pricar:                          { name: Prima }
       canmuj:                          { name: Cargos para Mujeres }
       canhom:                          { name: Cargos para Hombres  }
+      canpmuj:                          { name: Cargos para Mujeres }
+      canphom:                          { name: Cargos para Hombres  }
+      canvmuj:                          { name: Cargos para Mujeres }
+      canvhom:                          { name: Cargos para Hombres  }
       carvan:                          { name: Cargos Vacantes  }
       carasi:                          { name: Cargos Asignados  }
       porcen:                          { name: Porcentaje }
       canmix:                          { name: Cargos Mixtos  }
+      canpmix:                          { name: Cargos Mixtos  }
+      canvmix:                          { name: Cargos Mixtos  }
       carvan2:                          { name: Cargos Vacantes  }
 
     list:
       title:                           Cargos
-      display:                         [=codcar, nomcar, carvan2, carasi]
+      display:                         [=codcar, nomcar, canpmix, canmix, canvmix]
       sort:  codcar
       filters:                         [codcar, nomcar]
+      fields:
+        canpmix:                       { name: Cargos Prespuestados}
+        canmix:                        { name: Cargos Asignados}
+        canvmix:                       { name: Cargos Vacantes}
       max_per_page:                    10
       object_actions:
         _edit:        ~
@@ -36,7 +46,7 @@ generator:
       fields:
         profecargo:                    { type: admin_double_list, params: through_class=Npprocar}
       title:                           Edición de Cargos
-      display:                         [=codcar, nomcar, codtip, graocp, suecar, punmin, stacar, profecargo, comcar, pricar, canmuj, canhom, carvan, carasi, porcen, canmix]
+      display:                         [=codcar, nomcar, codtip, graocp, suecar, punmin, stacar, profecargo, comcar, pricar, canmuj, canhom, canpmuj, canphom, canvmuj, canvhom, carvan, carasi, porcen, canmix, canpmix, canvmix]
       actions:
         _list:                 ~
         _save:                 ~

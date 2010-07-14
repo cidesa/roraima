@@ -3,97 +3,109 @@
 
 abstract class BaseNpcargosPeer {
 
-	
+
 	const DATABASE_NAME = 'propel';
 
-	
+
 	const TABLE_NAME = 'npcargos';
 
-	
+
 	const CLASS_DEFAULT = 'lib.model.nomina.Npcargos';
 
-	
-	const NUM_COLUMNS = 16;
 
-	
+	const NUM_COLUMNS = 20;
+
+
 	const NUM_LAZY_LOAD_COLUMNS = 0;
 
 
-	
+
 	const CODCAR = 'npcargos.CODCAR';
 
-	
+
 	const NOMCAR = 'npcargos.NOMCAR';
 
-	
+
 	const SUECAR = 'npcargos.SUECAR';
 
-	
+
 	const STACAR = 'npcargos.STACAR';
 
-	
+
 	const CODOCP = 'npcargos.CODOCP';
 
-	
+
 	const PUNMIN = 'npcargos.PUNMIN';
 
-	
+
 	const GRAOCP = 'npcargos.GRAOCP';
 
-	
+
 	const COMCAR = 'npcargos.COMCAR';
 
-	
+
 	const PASOCP = 'npcargos.PASOCP';
 
-	
+
 	const CODTIP = 'npcargos.CODTIP';
 
-	
+
 	const PRICAR = 'npcargos.PRICAR';
 
-	
+
 	const CANHOM = 'npcargos.CANHOM';
 
-	
+
 	const CANMUJ = 'npcargos.CANMUJ';
 
-	
+
 	const CARVAN = 'npcargos.CARVAN';
 
-	
+
 	const CANMIX = 'npcargos.CANMIX';
 
-	
+
+	const CANPHOM = 'npcargos.CANPHOM';
+
+
+	const CANPMUJ = 'npcargos.CANPMUJ';
+
+
+	const CANVHOM = 'npcargos.CANVHOM';
+
+
+	const CANVMUJ = 'npcargos.CANVMUJ';
+
+
 	const ID = 'npcargos.ID';
 
-	
+
 	private static $phpNameMap = null;
 
 
-	
+
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codcar', 'Nomcar', 'Suecar', 'Stacar', 'Codocp', 'Punmin', 'Graocp', 'Comcar', 'Pasocp', 'Codtip', 'Pricar', 'Canhom', 'Canmuj', 'Carvan', 'Canmix', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (NpcargosPeer::CODCAR, NpcargosPeer::NOMCAR, NpcargosPeer::SUECAR, NpcargosPeer::STACAR, NpcargosPeer::CODOCP, NpcargosPeer::PUNMIN, NpcargosPeer::GRAOCP, NpcargosPeer::COMCAR, NpcargosPeer::PASOCP, NpcargosPeer::CODTIP, NpcargosPeer::PRICAR, NpcargosPeer::CANHOM, NpcargosPeer::CANMUJ, NpcargosPeer::CARVAN, NpcargosPeer::CANMIX, NpcargosPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codcar', 'nomcar', 'suecar', 'stacar', 'codocp', 'punmin', 'graocp', 'comcar', 'pasocp', 'codtip', 'pricar', 'canhom', 'canmuj', 'carvan', 'canmix', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, )
+		BasePeer::TYPE_PHPNAME => array ('Codcar', 'Nomcar', 'Suecar', 'Stacar', 'Codocp', 'Punmin', 'Graocp', 'Comcar', 'Pasocp', 'Codtip', 'Pricar', 'Canhom', 'Canmuj', 'Carvan', 'Canmix', 'Canphom', 'Canpmuj', 'Canvhom', 'Canvmuj', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (NpcargosPeer::CODCAR, NpcargosPeer::NOMCAR, NpcargosPeer::SUECAR, NpcargosPeer::STACAR, NpcargosPeer::CODOCP, NpcargosPeer::PUNMIN, NpcargosPeer::GRAOCP, NpcargosPeer::COMCAR, NpcargosPeer::PASOCP, NpcargosPeer::CODTIP, NpcargosPeer::PRICAR, NpcargosPeer::CANHOM, NpcargosPeer::CANMUJ, NpcargosPeer::CARVAN, NpcargosPeer::CANMIX, NpcargosPeer::CANPHOM, NpcargosPeer::CANPMUJ, NpcargosPeer::CANVHOM, NpcargosPeer::CANVMUJ, NpcargosPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codcar', 'nomcar', 'suecar', 'stacar', 'codocp', 'punmin', 'graocp', 'comcar', 'pasocp', 'codtip', 'pricar', 'canhom', 'canmuj', 'carvan', 'canmix', 'canphom', 'canpmuj', 'canvhom', 'canvmuj', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, )
 	);
 
-	
+
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codcar' => 0, 'Nomcar' => 1, 'Suecar' => 2, 'Stacar' => 3, 'Codocp' => 4, 'Punmin' => 5, 'Graocp' => 6, 'Comcar' => 7, 'Pasocp' => 8, 'Codtip' => 9, 'Pricar' => 10, 'Canhom' => 11, 'Canmuj' => 12, 'Carvan' => 13, 'Canmix' => 14, 'Id' => 15, ),
-		BasePeer::TYPE_COLNAME => array (NpcargosPeer::CODCAR => 0, NpcargosPeer::NOMCAR => 1, NpcargosPeer::SUECAR => 2, NpcargosPeer::STACAR => 3, NpcargosPeer::CODOCP => 4, NpcargosPeer::PUNMIN => 5, NpcargosPeer::GRAOCP => 6, NpcargosPeer::COMCAR => 7, NpcargosPeer::PASOCP => 8, NpcargosPeer::CODTIP => 9, NpcargosPeer::PRICAR => 10, NpcargosPeer::CANHOM => 11, NpcargosPeer::CANMUJ => 12, NpcargosPeer::CARVAN => 13, NpcargosPeer::CANMIX => 14, NpcargosPeer::ID => 15, ),
-		BasePeer::TYPE_FIELDNAME => array ('codcar' => 0, 'nomcar' => 1, 'suecar' => 2, 'stacar' => 3, 'codocp' => 4, 'punmin' => 5, 'graocp' => 6, 'comcar' => 7, 'pasocp' => 8, 'codtip' => 9, 'pricar' => 10, 'canhom' => 11, 'canmuj' => 12, 'carvan' => 13, 'canmix' => 14, 'id' => 15, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, )
+		BasePeer::TYPE_PHPNAME => array ('Codcar' => 0, 'Nomcar' => 1, 'Suecar' => 2, 'Stacar' => 3, 'Codocp' => 4, 'Punmin' => 5, 'Graocp' => 6, 'Comcar' => 7, 'Pasocp' => 8, 'Codtip' => 9, 'Pricar' => 10, 'Canhom' => 11, 'Canmuj' => 12, 'Carvan' => 13, 'Canmix' => 14, 'Canphom' => 15, 'Canpmuj' => 16, 'Canvhom' => 17, 'Canvmuj' => 18, 'Id' => 19, ),
+		BasePeer::TYPE_COLNAME => array (NpcargosPeer::CODCAR => 0, NpcargosPeer::NOMCAR => 1, NpcargosPeer::SUECAR => 2, NpcargosPeer::STACAR => 3, NpcargosPeer::CODOCP => 4, NpcargosPeer::PUNMIN => 5, NpcargosPeer::GRAOCP => 6, NpcargosPeer::COMCAR => 7, NpcargosPeer::PASOCP => 8, NpcargosPeer::CODTIP => 9, NpcargosPeer::PRICAR => 10, NpcargosPeer::CANHOM => 11, NpcargosPeer::CANMUJ => 12, NpcargosPeer::CARVAN => 13, NpcargosPeer::CANMIX => 14, NpcargosPeer::CANPHOM => 15, NpcargosPeer::CANPMUJ => 16, NpcargosPeer::CANVHOM => 17, NpcargosPeer::CANVMUJ => 18, NpcargosPeer::ID => 19, ),
+		BasePeer::TYPE_FIELDNAME => array ('codcar' => 0, 'nomcar' => 1, 'suecar' => 2, 'stacar' => 3, 'codocp' => 4, 'punmin' => 5, 'graocp' => 6, 'comcar' => 7, 'pasocp' => 8, 'codtip' => 9, 'pricar' => 10, 'canhom' => 11, 'canmuj' => 12, 'carvan' => 13, 'canmix' => 14, 'canphom' => 15, 'canpmuj' => 16, 'canvhom' => 17, 'canvmuj' => 18, 'id' => 19, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, )
 	);
 
-	
+
 	public static function getMapBuilder()
 	{
 		include_once 'lib/model/nomina/map/NpcargosMapBuilder.php';
 		return BasePeer::getMapBuilder('lib.model.nomina.map.NpcargosMapBuilder');
 	}
-	
+
 	public static function getPhpNameMap()
 	{
 		if (self::$phpNameMap === null) {
@@ -107,7 +119,7 @@ abstract class BaseNpcargosPeer {
 		}
 		return self::$phpNameMap;
 	}
-	
+
 	static public function translateFieldName($name, $fromType, $toType)
 	{
 		$toNames = self::getFieldNames($toType);
@@ -118,7 +130,7 @@ abstract class BaseNpcargosPeer {
 		return $toNames[$key];
 	}
 
-	
+
 
 	static public function getFieldNames($type = BasePeer::TYPE_PHPNAME)
 	{
@@ -128,13 +140,13 @@ abstract class BaseNpcargosPeer {
 		return self::$fieldNames[$type];
 	}
 
-	
+
 	public static function alias($alias, $column)
 	{
 		return str_replace(NpcargosPeer::TABLE_NAME.'.', $alias.'.', $column);
 	}
 
-	
+
 	public static function addSelectColumns(Criteria $criteria)
 	{
 
@@ -168,6 +180,14 @@ abstract class BaseNpcargosPeer {
 
 		$criteria->addSelectColumn(NpcargosPeer::CANMIX);
 
+		$criteria->addSelectColumn(NpcargosPeer::CANPHOM);
+
+		$criteria->addSelectColumn(NpcargosPeer::CANPMUJ);
+
+		$criteria->addSelectColumn(NpcargosPeer::CANVHOM);
+
+		$criteria->addSelectColumn(NpcargosPeer::CANVMUJ);
+
 		$criteria->addSelectColumn(NpcargosPeer::ID);
 
 	}
@@ -175,7 +195,7 @@ abstract class BaseNpcargosPeer {
 	const COUNT = 'COUNT(npcargos.ID)';
 	const COUNT_DISTINCT = 'COUNT(DISTINCT npcargos.ID)';
 
-	
+
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
 	{
 				$criteria = clone $criteria;
@@ -199,7 +219,7 @@ abstract class BaseNpcargosPeer {
 						return 0;
 		}
 	}
-	
+
 	public static function doSelectOne(Criteria $criteria, $con = null)
 	{
 		$critcopy = clone $criteria;
@@ -210,12 +230,12 @@ abstract class BaseNpcargosPeer {
 		}
 		return null;
 	}
-	
+
 	public static function doSelect(Criteria $criteria, $con = null)
 	{
 		return NpcargosPeer::populateObjects(NpcargosPeer::doSelectRS($criteria, $con));
 	}
-	
+
 	public static function doSelectRS(Criteria $criteria, $con = null)
 	{
 		if ($con === null) {
@@ -231,35 +251,35 @@ abstract class BaseNpcargosPeer {
 
 						return BasePeer::doSelect($criteria, $con);
 	}
-	
+
 	public static function populateObjects(ResultSet $rs)
 	{
 		$results = array();
-	
+
 				$cls = NpcargosPeer::getOMClass();
 		$cls = Propel::import($cls);
 				while($rs->next()) {
-		
+
 			$obj = new $cls();
 			$obj->hydrate($rs);
 			$results[] = $obj;
-			
+
 		}
 		return $results;
 	}
-	
+
 	public static function getTableMap()
 	{
 		return Propel::getDatabaseMap(self::DATABASE_NAME)->getTable(self::TABLE_NAME);
 	}
 
-	
+
 	public static function getOMClass()
 	{
 		return NpcargosPeer::CLASS_DEFAULT;
 	}
 
-	
+
 	public static function doInsert($values, $con = null)
 	{
 		if ($con === null) {
@@ -270,7 +290,7 @@ abstract class BaseNpcargosPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
-		$criteria->remove(NpcargosPeer::ID); 
+		$criteria->remove(NpcargosPeer::ID);
 
 				$criteria->setDbName(self::DATABASE_NAME);
 
@@ -286,7 +306,7 @@ abstract class BaseNpcargosPeer {
 		return $pk;
 	}
 
-	
+
 	public static function doUpdate($values, $con = null)
 	{
 		if ($con === null) {
@@ -296,7 +316,7 @@ abstract class BaseNpcargosPeer {
 		$selectCriteria = new Criteria(self::DATABASE_NAME);
 
 		if ($values instanceof Criteria) {
-			$criteria = clone $values; 
+			$criteria = clone $values;
 			$comparison = $criteria->getComparison(NpcargosPeer::ID);
 			$selectCriteria->add(NpcargosPeer::ID, $criteria->remove(NpcargosPeer::ID), $comparison);
 
@@ -307,7 +327,7 @@ abstract class BaseNpcargosPeer {
 		return BasePeer::doUpdate($selectCriteria, $criteria, $con);
 	}
 
-	
+
 	public static function doDeleteAll($con = null)
 	{
 		if ($con === null) {
@@ -324,7 +344,7 @@ abstract class BaseNpcargosPeer {
 		}
 	}
 
-	
+
 	 public static function doDelete($values, $con = null)
 	 {
 		if ($con === null) {
@@ -342,10 +362,10 @@ abstract class BaseNpcargosPeer {
 
 				$criteria->setDbName(self::DATABASE_NAME);
 
-		$affectedRows = 0; 
+		$affectedRows = 0;
 		try {
 									$con->begin();
-			
+
 			$affectedRows += BasePeer::doDelete($criteria, $con);
 			$con->commit();
 			return $affectedRows;
@@ -355,7 +375,7 @@ abstract class BaseNpcargosPeer {
 		}
 	}
 
-	
+
 	public static function doValidate(Npcargos $obj, $cols = null)
 	{
 		$columns = array();
@@ -390,7 +410,7 @@ abstract class BaseNpcargosPeer {
     return $res;
 	}
 
-	
+
 	public static function retrieveByPK($pk, $con = null)
 	{
 		if ($con === null) {
@@ -407,7 +427,7 @@ abstract class BaseNpcargosPeer {
 		return !empty($v) > 0 ? $v[0] : null;
 	}
 
-	
+
 	public static function retrieveByPKs($pks, $con = null)
 	{
 		if ($con === null) {
@@ -425,7 +445,7 @@ abstract class BaseNpcargosPeer {
 		return $objs;
 	}
 
-} 
+}
 if (Propel::isInit()) {
 			try {
 		BaseNpcargosPeer::getMapBuilder();

@@ -6,7 +6,7 @@
  * @package    Roraima
  * @subpackage nomasicarconnom
  * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id: actions.class.php 37652 2010-04-16 20:13:18Z cramirez $
+ * @version SVN: $Id: actions.class.php 39448 2010-07-14 17:12:18Z cramirez $
  *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -58,7 +58,7 @@ class nomasicarconnomActions extends autonomasicarconnomActions
 
     return $frecuencia;
   }
-  
+
   public function CargarTiempo()
   {
     $c = new Criteria();
@@ -119,6 +119,34 @@ class nomasicarconnomActions extends autonomasicarconnomActions
     	$this->lonfor=strlen($this->formato);
    		$this->tipos=self::CargarTipoGasto();
         $this->updateNpasicarempFromRequest();
+
+        if($this->npasicaremp->getCodcar())
+        {
+            $c = new Criteria();
+            $c->add(NpcargosPeer::CODCAR,$this->npasicaremp->getCodcar());
+            $p = NpcargosPeer::doSelectOne($c);
+            if($p)
+            {
+                if($p->getCanphom()+$p->getCanpmuj()>=0)
+                {
+                    $c = new Criteria();
+                    $c->add(NphojintPeer::CODEMP,$this->npasicaremp->getCodemp());
+                    $r = NphojintPeer::doSelectOne($c);
+                    if($r)
+                    {
+                        if($r->getSexemp()=='M')
+                        {
+                            if($p->getCanvhom()<=0)
+                                    $this->coderr='N0003';
+                        }else
+                        {
+                            if($p->getCanvmuj()<=0)
+                                    $this->coderr='N0003';
+                        }
+                    }
+                }
+            }
+        }
 	    if (!$this->npasicaremp->getId())
 	    {
 			$cc = new Criteria();
