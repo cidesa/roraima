@@ -5862,6 +5862,23 @@ class Nomina {
     if ($resul) {
       $sueldo = $resul->getSuecar();
       $grado = $resul->getGraocp();
+        $c = new Criteria();
+        $c->add(NphojintPeer::CODEMP,$registro->getCodemp());
+        $r = NphojintPeer::doSelectOne($c);
+        if($r)
+        {
+            if($r->getSexemp()=='M')
+            {
+                $resul->setCanhom(intval($resul->getCanhom())+1);
+                $resul->setCanvhom(intval($resul->getCanvhom())-1);
+            }
+            else
+            {
+                $resul->setCanmuj(intval($resul->getCanmuj())+1);
+                $resul->setCanvmuj(intval($resul->getCanvmuj())-1);
+            }
+            $resul->setCarvan($resul->getCanvmuj()+$resul->getCanvhom());
+        }
     } else {
       $sueldo = 0;
       $grado = "";
@@ -6096,11 +6113,10 @@ class Nomina {
   //////////////////Registro de Cargos////////////////
 
   public static function salvarNomdefespcar($cargos, $ids, $grid) {
-    if ($cargos->getId())
-    {
-        $carvanreal=H::getX('CODCAR','Npcargos','Carvan',$cargos->getCodcar());
-        $cargos->setCarvan($carvanreal);
-    }
+
+    $carvanreal=$cargos->getCanvhom()+$cargos->getCanvmuj();
+    $cargos->setCarvan($carvanreal);
+
 
     $cargos->save();
     $c = new Criteria();
@@ -8601,6 +8617,27 @@ public static function salvarNpsalintind($npsalint, $grid) {
         $npcargos = NpcargosPeer :: doSelectOne($c);
         if (!$npcargos)
           return 444;
+        else
+        {
+          if($npcargos->getCanphom()+$npcargos->getCanpmuj()>=0)
+          {
+            $c = new Criteria();
+            $c->add(NphojintPeer::CODEMP,$npasicaremp->getCodemp());
+            $r = NphojintPeer::doSelectOne($c);
+            if($r)
+            {
+                if($r->getSexemp()=='M')
+                {
+                    if($npcargos->getCanvhom()<=0)
+                            $this->coderr='N0003';
+                }else
+                {
+                    if($npcargos->getCanvmuj()<=0)
+                            $this->coderr='N0003';
+                }
+            }
+          }
+        }
 
         $c = new Criteria();
         $c->add(NpasicarempPeer :: CODEMP, $npasicaremp->getCodemp());
@@ -8658,10 +8695,47 @@ public static function salvarNpsalintind($npsalint, $grid) {
       $c->add(NpnominaPeer::CODNOM, $codnom);
       $npnomina = NpnominaPeer :: doSelectOne($c);
 
-      // Registro del Cargo
+      // Registro del Cargo NUEVO
       $c = new Criteria();
       $c->add(NpcargosPeer::CODCAR, $codcar);
       $npcargos = NpcargosPeer :: doSelectOne($c);
+
+      if($nphojint && $npcargos)
+      {
+        if($nphojint->getSexemp()=='M')
+        {
+            $npcargos->setCanhom(intval($npcargos->getCanhom())+1);
+            $npcargos->setCanvhom(intval($npcargos->getCanvhom())-1);
+        }
+        else
+        {
+            $npcargos->setCanmuj(intval($npcargos->getCanmuj())+1);
+            $npcargos->setCanvmuj(intval($npcargos->getCanvmuj())-1);
+        }
+        $npcargos->setCarvan($npcargos->getCanvmuj()+$npcargos->getCanvhom());
+        $npcargos->save();
+      }
+
+      // Registro del Cargo VIEJO
+      $c = new Criteria();
+      $c->add(NpcargosPeer::CODCAR, $npasicaremp->getCodcar());
+      $npcargos = NpcargosPeer :: doSelectOne($c);
+
+      if($nphojint && $npcargos)
+      {
+        if($nphojint->getSexemp()=='M')
+        {
+            $npcargos->setCanhom(intval($npcargos->getCanhom())-1);
+            $npcargos->setCanvhom(intval($npcargos->getCanvhom())+1);
+        }
+        else
+        {
+            $npcargos->setCanmuj(intval($npcargos->getCanmuj())-1);
+            $npcargos->setCanvmuj(intval($npcargos->getCanvmuj())+1);
+        }
+        $npcargos->setCarvan($npcargos->getCanvmuj()+$npcargos->getCanvhom());
+        $npcargos->save();
+      }
 
       // Registro del Cargo Anterior
       $c = new Criteria();

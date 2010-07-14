@@ -1694,3 +1694,6 @@ N0001:
 N0002:
   cod: N0002
   msj: Ingresos- La Fecha de Ingresos no puede ser mayor a la Fecha Actual
+N0003:
+  cod: N0003
+  msj: No existen cargos Vacantes

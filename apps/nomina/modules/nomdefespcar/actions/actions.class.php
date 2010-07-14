@@ -6,7 +6,7 @@
  * @package    Roraima
  * @subpackage nomdefespcar
  * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id: actions.class.php 36298 2010-02-04 16:51:58Z cramirez $
+ * @version SVN: $Id: actions.class.php 39449 2010-07-14 17:12:50Z cramirez $
  *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -130,6 +130,22 @@ $this->Bitacora('Guardo');
 	if (isset($npcargos['carvan']))
     {
       $this->npcargos->setCarvan($npcargos['carvan']);
+    }
+    if (isset($npcargos['canpmuj']))
+    {
+      $this->npcargos->setCanpmuj($npcargos['canpmuj']);
+    }
+	if (isset($npcargos['canphom']))
+    {
+      $this->npcargos->setCanphom($npcargos['canphom']);
+    }
+    if (isset($npcargos['canvmuj']))
+    {
+      $this->npcargos->setCanvmuj($npcargos['canvmuj']);
+    }
+	if (isset($npcargos['canvhom']))
+    {
+      $this->npcargos->setCanvhom($npcargos['canvhom']);
     }
 
   }
@@ -276,7 +292,8 @@ $this->Bitacora('Guardo');
 
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
