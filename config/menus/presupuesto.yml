@@ -97,6 +97,7 @@ presupuesto:
         Pagados:                                              prepag.php
         Traslados:                                            pretra2.php
         Ajustes:                                              preaju.php
+        Solicitud de Adiciones y Disminuciones:               prersoladidis.php
         Créditos Adicionales/Disminuciones (Por Aprobación):  preadidispre.php
 
       Ejecución Presupuestaria:
