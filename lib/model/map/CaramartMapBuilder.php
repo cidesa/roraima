@@ -34,7 +34,7 @@ class CaramartMapBuilder {
 
 		$tMap->setPrimaryKeyMethodInfo('caramart_SEQ');
 
-		$tMap->addPrimaryKey('RAMART', 'Ramart', 'string', CreoleTypes::VARCHAR, true, 6);
+		$tMap->addColumn('RAMART', 'Ramart', 'string', CreoleTypes::VARCHAR, true, 6);
 
 		$tMap->addColumn('NOMRAM', 'Nomram', 'string', CreoleTypes::VARCHAR, true, 100);
 

@@ -907,7 +907,7 @@ propel:
       type: VARCHAR
       size: 6
       required: true
-      primaryKey: true
+      #primaryKey: true
     nomram:
       type: VARCHAR
       size: 100
