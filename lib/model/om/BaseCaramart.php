@@ -4,49 +4,49 @@
 abstract class BaseCaramart extends BaseObject  implements Persistent {
 
 
-	
+
 	protected static $peer;
 
 
-	
+
 	protected $ramart;
 
 
-	
+
 	protected $nomram;
 
 
-	
+
 	protected $id;
 
-	
+
 	protected $alreadyInSave = false;
 
-	
+
 	protected $alreadyInValidation = false;
 
-  
+
   public function getRamart()
   {
 
     return trim($this->ramart);
 
   }
-  
+
   public function getNomram()
   {
 
     return trim($this->nomram);
 
   }
-  
+
   public function getId()
   {
 
     return $this->id;
 
   }
-	
+
 	public function setRamart($v)
 	{
 
@@ -54,9 +54,9 @@ abstract class BaseCaramart extends BaseObject  implements Persistent {
         $this->ramart = $v;
         $this->modifiedColumns[] = CaramartPeer::RAMART;
       }
-  
-	} 
-	
+
+	}
+
 	public function setNomram($v)
 	{
 
@@ -64,9 +64,9 @@ abstract class BaseCaramart extends BaseObject  implements Persistent {
         $this->nomram = $v;
         $this->modifiedColumns[] = CaramartPeer::NOMRAM;
       }
-  
-	} 
-	
+
+	}
+
 	public function setId($v)
 	{
 
@@ -74,9 +74,9 @@ abstract class BaseCaramart extends BaseObject  implements Persistent {
         $this->id = $v;
         $this->modifiedColumns[] = CaramartPeer::ID;
       }
-  
-	} 
-  
+
+	}
+
   public function hydrate(ResultSet $rs, $startcol = 1)
   {
     try {
@@ -93,7 +93,7 @@ abstract class BaseCaramart extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 3; 
+            return $startcol + 3;
     } catch (Exception $e) {
       throw new PropelException("Error populating Caramart object", $e);
     }
@@ -104,8 +104,8 @@ abstract class BaseCaramart extends BaseObject  implements Persistent {
   {
 
   }
-    
-  
+
+
   public function __call($m, $a)
     {
       $prefijo = substr($m,0,3);
@@ -119,7 +119,7 @@ abstract class BaseCaramart extends BaseObject  implements Persistent {
 
     }
 
-	
+
 	public function delete($con = null)
 	{
 		if ($this->isDeleted()) {
@@ -141,7 +141,7 @@ abstract class BaseCaramart extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	public function save($con = null)
 	{
 		if ($this->isDeleted()) {
@@ -163,7 +163,7 @@ abstract class BaseCaramart extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	protected function doSave($con)
 	{
 		$affectedRows = 0; 		if (!$this->alreadyInSave) {
@@ -173,8 +173,8 @@ abstract class BaseCaramart extends BaseObject  implements Persistent {
 						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = CaramartPeer::doInsert($this, $con);
-					$affectedRows += 1; 										 										 
-					$this->setId($pk);  
+					$affectedRows += 1;
+					$this->setId($pk);
 					$this->setNew(false);
 				} else {
 					$affectedRows += CaramartPeer::doUpdate($this, $con);
@@ -184,17 +184,17 @@ abstract class BaseCaramart extends BaseObject  implements Persistent {
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
-	} 
-	
+	}
+
 	protected $validationFailures = array();
 
-	
+
 	public function getValidationFailures()
 	{
 		return $this->validationFailures;
 	}
 
-	
+
 	public function validate($columns = null)
 	{
 		$res = $this->doValidate($columns);
@@ -207,7 +207,7 @@ abstract class BaseCaramart extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	protected function doValidate($columns = null)
 	{
 		if (!$this->alreadyInValidation) {
@@ -229,14 +229,14 @@ abstract class BaseCaramart extends BaseObject  implements Persistent {
 		return (!empty($failureMap) ? $failureMap : true);
 	}
 
-	
+
 	public function getByName($name, $type = BasePeer::TYPE_PHPNAME)
 	{
 		$pos = CaramartPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->getByPosition($pos);
 	}
 
-	
+
 	public function getByPosition($pos)
 	{
 		switch($pos) {
@@ -254,7 +254,7 @@ abstract class BaseCaramart extends BaseObject  implements Persistent {
 				break;
 		} 	}
 
-	
+
 	public function toArray($keyType = BasePeer::TYPE_PHPNAME)
 	{
 		$keys = CaramartPeer::getFieldNames($keyType);
@@ -266,14 +266,14 @@ abstract class BaseCaramart extends BaseObject  implements Persistent {
 		return $result;
 	}
 
-	
+
 	public function setByName($name, $value, $type = BasePeer::TYPE_PHPNAME)
 	{
 		$pos = CaramartPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->setByPosition($pos, $value);
 	}
 
-	
+
 	public function setByPosition($pos, $value)
 	{
 		switch($pos) {
@@ -288,7 +288,7 @@ abstract class BaseCaramart extends BaseObject  implements Persistent {
 				break;
 		} 	}
 
-	
+
 	public function fromArray($arr, $keyType = BasePeer::TYPE_PHPNAME)
 	{
 		$keys = CaramartPeer::getFieldNames($keyType);
@@ -298,7 +298,7 @@ abstract class BaseCaramart extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[2], $arr)) $this->setId($arr[$keys[2]]);
 	}
 
-	
+
 	public function buildCriteria()
 	{
 		$criteria = new Criteria(CaramartPeer::DATABASE_NAME);
@@ -310,53 +310,43 @@ abstract class BaseCaramart extends BaseObject  implements Persistent {
 		return $criteria;
 	}
 
-	
+
 	public function buildPkeyCriteria()
 	{
 		$criteria = new Criteria(CaramartPeer::DATABASE_NAME);
 
-		$criteria->add(CaramartPeer::RAMART, $this->ramart);
 		$criteria->add(CaramartPeer::ID, $this->id);
 
 		return $criteria;
 	}
 
-	
+
 	public function getPrimaryKey()
 	{
-		$pks = array();
-
-		$pks[0] = $this->getRamart();
-
-		$pks[1] = $this->getId();
-
-		return $pks;
+		return $this->getId();
 	}
 
-	
-	public function setPrimaryKey($keys)
+
+	public function setPrimaryKey($key)
 	{
-
-		$this->setRamart($keys[0]);
-
-		$this->setId($keys[1]);
-
+		$this->setId($key);
 	}
 
-	
+
 	public function copyInto($copyObj, $deepCopy = false)
 	{
+
+		$copyObj->setRamart($this->ramart);
 
 		$copyObj->setNomram($this->nomram);
 
 
 		$copyObj->setNew(true);
 
-		$copyObj->setRamart(NULL); 
-		$copyObj->setId(NULL); 
+		$copyObj->setId(NULL);
 	}
 
-	
+
 	public function copy($deepCopy = false)
 	{
 				$clazz = get_class($this);
@@ -365,7 +355,7 @@ abstract class BaseCaramart extends BaseObject  implements Persistent {
 		return $copyObj;
 	}
 
-	
+
 	public function getPeer()
 	{
 		if (self::$peer === null) {
@@ -374,4 +364,4 @@ abstract class BaseCaramart extends BaseObject  implements Persistent {
 		return self::$peer;
 	}
 
-} 
+}
