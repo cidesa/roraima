@@ -37,9 +37,11 @@ class tesmoslibActions extends autotesmoslibActions
     {
       $this->updateTsmovbanFromRequest();
 
-      $this->saveTsmovban($this->tsmovban);
-
+      $save=$this->saveTsmovban($this->tsmovban);
+      if ($save=="")
       $this->setFlash('notice', 'Your modifications have been saved');
+      else $this->setFlash('notice', $save);
+
 $this->Bitacora('Guardo');
 
       if ($this->getRequestParameter('save_and_add'))
@@ -214,9 +216,9 @@ $this->Bitacora('Guardo');
     $lista= $this->getRequestParameter('associated_libros_selec');
 	$numcue = $this->getUser()->getAttribute('tes_numcue');
     $cadena= $this->getRequestParameter('cadfecban');
+    $mensajes="";
 	if ($lista)
 	{
-
 	  foreach ($lista as $list)
 	  {
 			$objlist = TsmovlibPeer::retrieveByPK($list);
@@ -230,9 +232,10 @@ $this->Bitacora('Guardo');
 
 			if (count($objs)==0)
 			{
-				self::incluirBancos($objlist,$cadena);
+				self::incluirBancos($objlist,&$msj,$cadena);
 			}
 
+                      if ($msj=="") {
 			$c = new Criteria();
 			$c->add(TsdefbanPeer::NUMCUE,$numcue);
 			$objs2 = TsdefbanPeer::doSelectOne($c);
@@ -254,8 +257,14 @@ $this->Bitacora('Guardo');
 				}
 				$this->actualizaBancos('A',$debcre,$id,$objlist);
 			}
+                      }else{
+                        $mensajes=$mensajes.$msj." ";
 	  }
 	}
+          if ($mensajes!="") $mensajes="Los Movimientos según Libros siguientes, no se incluyeron en Banco, debido a que se encuentran dentro de un periodo cerrado: ".$mensajes;
+	}
+
+      return $mensajes;
 
   }
   public function actualizaBancos($accion,$debcre,$id,$objlis)
@@ -298,9 +307,13 @@ $this->Bitacora('Guardo');
 		$tsdefban->save();
   }
 
-  public function incluirBancos($obj,$cadena="")
+  public function incluirBancos($obj,&$msj,$cadena="")
   {
     $fecha=$obj->getFeclib();
+    $auxf=split('-',$obj->getFeclib());
+    $fecaux=$auxf[2]."/".$auxf[1]."/".$auxf[0];
+
+    $msj="";
     $cadena=split('!',$cadena);
 	$r=0;
 	$seguir=true;
@@ -311,6 +324,7 @@ $this->Bitacora('Guardo');
    	  if ($auxfec[0]==$obj->getId())
    	  {
    	  	$fec=$auxfec[1];
+            $fecaux=$auxfec[1];
    	  	$dateFormat = new sfDateFormat(sfContext::getInstance()->getUser()->getCulture());
         $fecha = $dateFormat->format($fec, 'i', $dateFormat->getInputPattern('d'));
         $seguir=false;
@@ -318,6 +332,8 @@ $this->Bitacora('Guardo');
    	  $r++;
    	}//while ($r<(count($cadena)-1))
 
+     if (Tesoreria::validaPeriodoCerrado($fecaux)!=true)
+     {
 	 $tsmovban = new Tsmovban();
      $tsmovban->setNumcue($this->getRequestParameter('nrocta'));
      $tsmovban->setRefban($obj->getReflib());
@@ -329,6 +345,11 @@ $this->Bitacora('Guardo');
      $tsmovban->setStatus('C');
      $tsmovban->setStacon('N');
      $tsmovban->save();
+     }
+     else
+     {
+        $msj=$obj->getReflib();
+     }
 
   }
 
