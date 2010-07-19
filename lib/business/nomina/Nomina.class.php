@@ -8619,7 +8619,7 @@ public static function salvarNpsalintind($npsalint, $grid) {
           return 444;
         else
         {
-          if($npcargos->getCanphom()+$npcargos->getCanpmuj()>=0)
+          if($npcargos->getCanphom()+$npcargos->getCanpmuj()>0)
           {
             $c = new Criteria();
             $c->add(NphojintPeer::CODEMP,$npasicaremp->getCodemp());

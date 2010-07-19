@@ -6,7 +6,7 @@
  * @package    Roraima
  * @subpackage nomasicarconnom
  * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id: actions.class.php 39448 2010-07-14 17:12:18Z cramirez $
+ * @version SVN: $Id: actions.class.php 39508 2010-07-19 20:24:31Z cramirez $
  *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -127,7 +127,7 @@ class nomasicarconnomActions extends autonomasicarconnomActions
             $p = NpcargosPeer::doSelectOne($c);
             if($p)
             {
-                if($p->getCanphom()+$p->getCanpmuj()>=0)
+                if($p->getCanphom()+$p->getCanpmuj()>0)
                 {
                     $c = new Criteria();
                     $c->add(NphojintPeer::CODEMP,$this->npasicaremp->getCodemp());
