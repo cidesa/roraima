@@ -17,6 +17,7 @@
 
 <?php use_helper('Javascript','Grid','wait','tabs') ?>
 <?php echo javascript_include_tag('tools','ajax','dFilter','Observe') ?>
+<?php echo input_hidden_tag('tsconcil[ano]', $tsconcil->getAno()) ?>
 
 <?php echo object_input_hidden_tag($tsconcil, 'getId') ?>
 <fieldset id="sf_fieldset_none" class="">
@@ -107,6 +108,8 @@
 </form>
 
 <script type="text/javascript">
+    var ano='<?php echo $tsconcil->getAno() ?>';
+    $('ano').value=ano;
 <!--
 function hacer()
 {
