@@ -1737,30 +1737,30 @@ propel:
     tipocom:
       type: VARCHAR
       size: 50
-      description: OC DonaciÃ³n Tipo de Compra
+      description: OC Donación Tipo de Compra
     ceddon:
       type: VARCHAR
       size: 15
-      description: OC DonaciÃ³n CÃ©dula
+      description: OC Donación Cédula
     nomdon:
       type: VARCHAR
       size: 50
-      description: OC DonaciÃ³n Nombre
+      description: OC Donación Nombre
     fecdon:
       type: DATE
-      description: OC DonaciÃ³n Fecha de Nacimiento
+      description: OC Donación Fecha de Nacimiento
     sexdon:
       type: VARCHAR
       size: 1
-      description: OC DonaciÃ³n Sexo
+      description: OC Donación Sexo
     edadon:
       type: NUMERIC
       size: 2
-      description: OC DonaciÃ³n Edad
+      description: OC Donación Edad
     serdon:
       type: VARCHAR
       size: 1
-      description: OC DonaciÃ³n Servicio Prestado Medicina Materiales Otro
+      description: OC Donación Servicio Prestado Medicina Materiales Otro
     motanu:
       type: VARCHAR
       size: 500
