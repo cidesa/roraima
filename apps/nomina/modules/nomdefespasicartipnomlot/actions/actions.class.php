@@ -5,9 +5,9 @@
  *
  * @package    Roraima
  * @subpackage nomdefespasicartipnomlot
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: actions.class.php 39539 2010-07-20 17:05:26Z cramirez $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  * Manufacturado por JJSG
@@ -126,7 +126,7 @@ $this->Bitacora('Guardo');
     $c = new Criteria();
     $c->add(NpasicarnomPeer::CODNOM,$codigo);
     $per = NpasicarnomPeer::doSelect($c);
-    $filas_arreglo=200;
+    $filas_arreglo=300;
     //print $codigo;
 
   	$filvac="";
