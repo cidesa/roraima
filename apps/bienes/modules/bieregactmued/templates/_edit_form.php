@@ -483,16 +483,15 @@
 <tr>
 <th>
 <br>
-  <?php echo label_for('bnregmue[altmue]', __($labels['bnregmue{altmue}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('bnregmue{altmue}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('bnregmue{altmue}')): ?>
-    <?php echo form_error('bnregmue{altmue}', array('class' => 'form-error-msg')) ?>
+<?php echo label_for('bnregmue[usomue]', __($labels['bnregmue{usomue}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('bnregmue{usomue}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('bnregmue{usomue}')): ?>
+    <?php echo form_error('bnregmue{usomue}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
   <?php $value = object_input_tag($bnregmue, array('getUsomue',true), array (
   'size' => 20,
   'maxlength' =>25,
-  'onBlur' => "javascript:event.keyCode=13;return entermontootro(event,this.id)",
   'control_name' => 'bnregmue[usomue]',
 )); echo $value ? $value : '&nbsp;' ?></div>
 </th>
@@ -501,16 +500,16 @@
 </th>
 <th>
 <br>
-<?php echo label_for('bnregmue[usomue]', __($labels['bnregmue{usomue}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('bnregmue{usomue}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('bnregmue{usomue}')): ?>
-    <?php echo form_error('bnregmue{usomue}', array('class' => 'form-error-msg')) ?>
+  <?php echo label_for('bnregmue[altmue]', __($labels['bnregmue{altmue}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('bnregmue{altmue}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('bnregmue{altmue}')): ?>
+    <?php echo form_error('bnregmue{altmue}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
   <?php $value = object_input_tag($bnregmue, 'getAltmue', array (
   'size' => 20,
    'maxlength' =>45,
-     'onkeypress' =>"javascript:return num(event)",
+   'onBlur' => "javascript:event.keyCode=13;return entermontootro(event,this.id)",
   'control_name' => 'bnregmue[altmue]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
