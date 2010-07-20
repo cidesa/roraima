@@ -383,11 +383,10 @@ $this->Bitacora('Guardo');
    {
       $c = new Criteria();
 
-      $sql="select a.codubi, b.nomubi, a.exiact, a.codalm, a.id
-            FROM  caartalmubi a, cadefubi b
+      $sql="select a.codalm, b.nomubi,coalesce((select c.exiact from caartalmubi c where c.codart='".$codart."' and c.codalm='".$codalm."' and c.codubi=a.codubi),0) as exiact, a.codubi,a.id
+      FROM  caalmubi a,cadefubi b
       where a.codubi=b.codubi
-            and a.codalm='".$codalm."'and a.codart='".$codart."'
-            order by a.codubi";
+      AND a.Codalm='".$codalm."' order by a.codubi";
     $resp = Herramientas::BuscarDatos($sql,&$per);
     $filas=count($per);
       $this->setVars();
