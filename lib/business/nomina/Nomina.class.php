@@ -2577,20 +2577,19 @@ class Nomina {
         {
             $fecnomdes=$res[0]['ultfec'];
         }
-        $criterio = "select
-                        case when to_char(last_day(to_date('$fecnom','yyyy-mm-dd')),'dd')='31'
-                        then (
-                            case when to_date('$fecnom','yyyy-mm-dd')>a.fechas then a.fechas else to_date('$fecnom','yyyy-mm-dd') end
-                            -
-                            case when to_date('$fecnomdes','yyyy-mm-dd')>a.fecdes then to_date('$fecnomdes','yyyy-mm-dd') else a.fecdes end
-                        )
-                        else(
-                            case when to_date('$fecnom','yyyy-mm-dd')>a.fechas then a.fechas else to_date('$fecnom','yyyy-mm-dd') end
-                            -
-                            case when to_date('$fecnomdes','yyyy-mm-dd')>a.fecdes then to_date('$fecnomdes','yyyy-mm-dd') else a.fecdes end
-                            +1
-                        ) end as dias
-                        from npvacsalidas a where codemp='$empleado' and fecsalnom=to_date('$fecnom','yyyy-mm-dd') order by fecvac desc";
+        #QUERY HECHO POR OSWALDO SE COPIO Y SE PEGO
+        $criterio = "select FECDES,FECHAS,ULTFEC,
+                    (case when a.fechas<c.profec then a.fechas else c.profec end)- --dia inicio
+                    (case when a.fecdes>c.ultfec then a.fecdes else c.ultfec end)-- dia final
+                    + (case when to_char(last_day(c.profec),'dd')='31' and last_day(c.profec)=c.profec  then 0 else 1 end)
+                       as Dias -- si la nomina es la ultima del mes y ese mes tiene 31 dias no le sumo el ultimo dia, deberia hacerse algo similar para febrero  que sume 2 o 3 segun sea el caso
+                    from npvacsalidas a,npasicaremp b, npnomina c
+                    where
+                    a.codemp=b.codemp and
+                    b.status='V' and
+                    c.codnom=b.codnom and
+                    ((C.ULTFEC BETWEEN A.FECDES AND A.FECHAS) OR (C.PROFEC BETWEEN A.FECDES AND A.FECHAS)) AND -- ASI SOLO ME TRAIGO LOS LAPSOS QUE AFECTAN LA NOMINA QUE ESTOY CALCULANDO (Y NO ME TRAIGO VACACIONES VIEJAS)
+                    a.codemp='$empleado' -- ESTE SERIA MI UNICO PARAMETRO";
         if (Herramientas :: BuscarDatos($criterio, & $result))
         {
            $valor = $result[0]['dias'];
@@ -4781,20 +4780,18 @@ class Nomina {
         {
             $fecnomdes=$res[0]['ultfec'];
         }
-        $criterio = "select
-                        case when to_char(last_day(to_date('$fechanom','yyyy-mm-dd')),'dd')='31'
-                        then (
-                            case when to_date('$fechanom','yyyy-mm-dd')>a.fechas then a.fechas else to_date('$fechanom','yyyy-mm-dd') end
-                            -
-                            case when to_date('$fecnomdes','yyyy-mm-dd')>a.fecdes then to_date('$fecnomdes','yyyy-mm-dd') else a.fecdes end
-                        )
-                        else(
-                            case when to_date('$fechanom','yyyy-mm-dd')>a.fechas then a.fechas else to_date('$fechanom','yyyy-mm-dd') end
-                            -
-                            case when to_date('$fecnomdes','yyyy-mm-dd')>a.fecdes then to_date('$fecnomdes','yyyy-mm-dd') else a.fecdes end
-                            +1
-                        ) end as dias
-                        from npvacsalidas a where codemp='$empleado' and fecsalnom=to_date('$hasta','dd/mm/yyyy')  order by fecvac desc";
+       $criterio = "select FECDES,FECHAS,ULTFEC,
+                    (case when a.fechas<c.profec then a.fechas else c.profec end)- --dia inicio
+                    (case when a.fecdes>c.ultfec then a.fecdes else c.ultfec end)-- dia final
+                    + (case when to_char(last_day(c.profec),'dd')='31' and last_day(c.profec)=c.profec  then 0 else 1 end)
+                       as Dias -- si la nomina es la ultima del mes y ese mes tiene 31 dias no le sumo el ultimo dia, deberia hacerse algo similar para febrero  que sume 2 o 3 segun sea el caso
+                    from npvacsalidas a,npasicaremp b, npnomina c
+                    where
+                    a.codemp=b.codemp and
+                    b.status='V' and
+                    c.codnom=b.codnom and
+                    ((C.ULTFEC BETWEEN A.FECDES AND A.FECHAS) OR (C.PROFEC BETWEEN A.FECDES AND A.FECHAS)) AND -- ASI SOLO ME TRAIGO LOS LAPSOS QUE AFECTAN LA NOMINA QUE ESTOY CALCULANDO (Y NO ME TRAIGO VACACIONES VIEJAS)
+                    a.codemp='$empleado' -- ESTE SERIA MI UNICO PARAMETRO";
         if (Herramientas :: BuscarDatos($criterio, & $result))
         {
            $valor = $result[0]['dias'];
