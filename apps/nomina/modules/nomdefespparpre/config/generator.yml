@@ -11,21 +11,20 @@ generator:
           catalogoweb: Npnomina_nomdefespvar
           clase: Npnomina
           ajax: 0
-          parametros: getprincipal="getCodnom" getsecundario="getNomnom" campoprincipal="codnom" camposecundario="nomnom" campobase = "id"                
-        params:  maxlength=3  
+          parametros: getprincipal="getCodnom" getsecundario="getNomnom" campoprincipal="codnom" camposecundario="nomnom" campobase = "id"
+        params:  maxlength=3
       nomnom:            { name: Nombre Nómina}
       numdiames:         { name: Número de dias por Mes, params: maxlength=2 size=5}
       numdiamaxano:      { name: Número de dias Máximo por Año, params: maxlength=3 size=5}
       tipsalajunodep:    { name: Tipo de Salario Ajustes  no Depositados}
       ptipsalajunodep:   { name: .}
-      tipsalbonfinanofra: { name: Tipo de Salario Bonificación de Fin de Año Fraccionado}
-      ptipsalbonfinanofra: { name: Tipo de Salario Bonificación de Fin de Año Fraccionado}
-      factorbonfinanofra: { name: Factor}
+      tipsalbonfinanofra:{ name: Tipo de Salario Bonificación de Fin de Año Fraccionado}
+      factorbonfinanofra:{ name: Factor}
       ptipsalbonfinanofra: {name: .}
-      tipsalbonvacfra: { name: Tipo de Salario Bono Vacacional Fraccionado}
-      factorbonvacfra: { name: Factor}
-      tipsalvacven: { name: Tipo de Salario Vacaciones Vencidas}
-      factorvacven: { name: Factor}
+      tipsalbonvacfra:{ name: Tipo de Salario Bono Vacacional Fraccionado}
+      factorbonvacfra:{ name: Factor}
+      tipsalvacven:{ name: Tipo de Salario Vacaciones Vencidas}
+      factorvacven:{ name: Factor}
       ptipsalbonvacfra: { name: .}
       descripclau:      { name:  Descripcion clausula }
       codpar:
@@ -35,7 +34,7 @@ generator:
           catalogoweb: Nppartidas_Almregart
           clase: Nppartidas
           ajax: 0
-          parametros: getprincipal="getCodpar" getsecundario="getNompar" campoprincipal="codpar" camposecundario="nompar" campobase = "id"                
+          parametros: getprincipal="getCodpar" getsecundario="getNompar" campoprincipal="codpar" camposecundario="nompar" campobase = "id"
         params:  maxlength=32
       codret:
         name:  Tipo Retiro
@@ -44,9 +43,9 @@ generator:
           catalogoweb: Nptipret_codret
           clase: Nptipret
           ajax: 0
-          parametros: getprincipal="getCodret" getsecundario="getDesret" campoprincipal="codret" camposecundario="desret" campobase = "id"                
+          parametros: getprincipal="getCodret" getsecundario="getDesret" campoprincipal="codret" camposecundario="desret" campobase = "id"
         params:  maxlength=2
-      numdiaant:        { name: Numero de Dias}  
+      numdiaant:        { name: Numero de Dias}
       poranoant:        { name: Por ano Antiguedad, type: checkbox_tag}
       tipsaldiaant:     { name: Tipo Salario Dias Antiguedad}
       aguicom:          { name: Aguinaldos Completos}
@@ -54,10 +53,12 @@ generator:
       ptipsaldiaant:    { name: .}
       paguinaldosmes:   { name: .}
       ptipsalvacven:    { name: .}
-      
+      totret:           { name: Todos los Retiros , type: checkbox_tag}
+      pormesant:        { name: Por Meses Antiguedad, type: checkbox_tag}
+
     list:
       title:          Lista de Parametros para Prestaciones
-      display:        [=codnom, nomnom, numdiames, numdiamaxano]  
+      display:        [=codnom, nomnom, numdiames, numdiamaxano]
       filters:        [codnom]
       obj_actions:
         _edit:        ~
@@ -68,13 +69,14 @@ generator:
     edit:
       title:          Edicion de Parametros para Prestaciones
       display:
-        NONE:              [codnom]        
+        NONE:              [codnom]
         Dias para Vacaciones:   [numdiames, numdiamaxano, _ptipsalajunodep]
         Bono Fin de Año Fraccionado: [_ptipsalbonfinanofra, factorbonfinanofra, _paguinaldosmes]
         Bono Vacacional Fraccionado: [_ptipsalbonvacfra, factorbonvacfra]
         Vacaciones Vencidas:         [_ptipsalvacven, factorvacven]
         Liquidacion de Prestaciones: [descripclau, codpar, codret, _ptipsaldiaant]
-        
+
+
       actions:
         _list:        ~
         _save:        ~
