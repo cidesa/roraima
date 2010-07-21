@@ -974,7 +974,12 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 					if($per1->getPoranoant()=='S')
 					   $numdia=$per1->getNumdiaant()*$anoefec;
 					else
-					   $numdia=$per1->getNumdiaant();
+                                        {
+                                           if($per1->getPormesant()=='S')
+                                                $numdia=$per1->getNumdiaant()*$mesefec;
+                                           else
+                                                $numdia=$per1->getNumdiaant();
+                                        }
 					$partida = $per1->getCodpar();
 					$descripclau = $per1->getDescripclau();
 				}
