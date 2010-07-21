@@ -6,7 +6,7 @@
  * @package    Roraima
  * @subpackage nomasicarconnom
  * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id: actions.class.php 39508 2010-07-19 20:24:31Z cramirez $
+ * @version SVN: $Id: actions.class.php 39557 2010-07-21 14:50:30Z cramirez $
  *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -120,7 +120,7 @@ class nomasicarconnomActions extends autonomasicarconnomActions
    		$this->tipos=self::CargarTipoGasto();
         $this->updateNpasicarempFromRequest();
 
-        if($this->npasicaremp->getCodcar())
+        if($this->npasicaremp->getCodcar() && ($this->npasicaremp->getId()==''))
         {
             $c = new Criteria();
             $c->add(NpcargosPeer::CODCAR,$this->npasicaremp->getCodcar());

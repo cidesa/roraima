@@ -5859,6 +5859,8 @@ class Nomina {
     if ($resul) {
       $sueldo = $resul->getSuecar();
       $grado = $resul->getGraocp();
+      if($registro->getId()!='')
+      {
         $c = new Criteria();
         $c->add(NphojintPeer::CODEMP,$registro->getCodemp());
         $r = NphojintPeer::doSelectOne($c);
@@ -5876,6 +5878,7 @@ class Nomina {
             }
             $resul->setCarvan($resul->getCanvmuj()+$resul->getCanvhom());
         }
+      }
     } else {
       $sueldo = 0;
       $grado = "";
