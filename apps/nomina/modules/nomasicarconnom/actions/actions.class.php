@@ -6,7 +6,7 @@
  * @package    Roraima
  * @subpackage nomasicarconnom
  * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id: actions.class.php 39557 2010-07-21 14:50:30Z cramirez $
+ * @version SVN: $Id: actions.class.php 39563 2010-07-21 15:43:43Z cramirez $
  *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -218,12 +218,15 @@ class nomasicarconnomActions extends autonomasicarconnomActions
             }else {
               $dato=""; $javascript="alert('El Empleado se encuentra Retirado'); $('npasicaremp_codemp').value=''; $('npasicaremp_codemp').focus();";
             }
+            $codniv = H::GetX('Codemp','Nphojint','Codniv',$reg->getCodemp());
+            $nomniv = H::GetX('Codniv','Npestorg','Desniv',$codniv);
+            $nivel = $codniv.'  '.$nomniv;
         }else{
            $dato=""; $javascript="alert('El Empleado no existe'); $('npasicaremp_codemp').value=''; $('npasicaremp_codemp').focus();";
         }
 
 
-        $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""]]';
+        $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""],["npasicaremp_nivel","'.$nivel.'",""]]';
         $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
         return sfView::HEADER_ONLY;
       }

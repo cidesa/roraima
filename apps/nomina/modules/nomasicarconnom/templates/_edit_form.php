@@ -4,8 +4,8 @@
  *
  * @package    Roraima
  * @subpackage vistas
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version    SVN: $Id$
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id: _edit_form.php 39564 2010-07-21 15:44:04Z cramirez $
  */
 // date: 2007/03/29 17:49:48
 ?>
@@ -137,6 +137,25 @@
 </th>
 </tr>
 </table>
+<table>
+<tr>
+    <th colspan="2">
+<?php echo label_for('npasicaremp[nivel]', __($labels['npasicaremp{nivel}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('npasicaremp{nivel}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npasicaremp{nivel}')): ?>
+    <?php echo form_error('npasicaremp{nivel}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($npasicaremp, 'getNivel', array (
+  'size' => 87,
+  'readonly' => true,
+  'control_name' => 'npasicaremp[nivel]',
+)); echo $value ? $value : '&nbsp;' ?>
+ </div>
+</th>
+
+</tr>
+</table>
 </div>
 
 <?php if($sf_user->getAttribute('varforma','','nomasicarconnom')!='S') {?>
@@ -230,7 +249,7 @@
 
   <?php echo select_tag('npasicaremp[codtie]', options_for_select($listatiempo,$npasicaremp->getCodtie(),'include_custom=Seleccione Uno')) ?>
     </div>
-<?php }?>    
+<?php }?>
 </th>
 </tr>
 </table>

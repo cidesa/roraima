@@ -8,14 +8,15 @@
  * @package    Roraima
  * @subpackage lib.model.nomina
  * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id: Npasicaremp.php 37651 2010-04-16 20:12:39Z cramirez $
- * 
+ * @version SVN: $Id: Npasicaremp.php 39562 2010-07-21 15:43:08Z cramirez $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
 class Npasicaremp extends BaseNpasicaremp
 {
 	private $codcon = '';
+        private $nivel = '';
 	protected $codnomnew="";
 	protected $codcarnew="";
 	protected $codcatnew="";
@@ -52,6 +53,7 @@ class Npasicaremp extends BaseNpasicaremp
 			return ' ';
 		}
 	}
+
 
 	public function getNomnom()
 	{
@@ -181,4 +183,10 @@ class Npasicaremp extends BaseNpasicaremp
   {
   	return $this->mancencos;
   }
+  public function getNivel()
+    {
+         $codniv = H::GetX('Codemp','Nphojint','Codniv',$this->codemp);
+         $nomniv = H::GetX('Codniv','Npestorg','Desniv',$codniv);
+         return $codniv.'  '.$nomniv;
+    }
 }
