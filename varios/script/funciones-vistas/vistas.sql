@@ -259,157 +259,214 @@ AND A.FECINI>=C.FECINIREG)
 ORDER BY A.CODEMP,A.FECFIN,A.ID;
 
 
-CREATE OR REPLACE VIEW NPLIQVACACION AS
-(SELECT
-(CASE WHEN SUM(A.HIST)=0 THEN 'NO' ELSE 'SI' END) AS HISTORICO,SUM(A.ANTIGUEDAD) AS ANTIGUEDAD,
-A.DESDE,A.HASTA,SUM(A.DISFRUTADOS) AS DISFRUTADOS,
-(CASE WHEN SUM(A.HIST)=0 THEN SUM(A.CORRESPONDE) ELSE SUM(A.CORRESPONDEHIS) END) AS CORRESPONDE,
-A.CODEMP,A.FECRET,
-ROUND((CASE WHEN
-         (CASE WHEN TO_DATE(TO_CHAR(A.FECRET,'DD/MM/')||TO_CHAR(A.FECING,'YYYY'),'DD/MM/YYYY')<=A.FECING THEN
-          TO_NUMBER(TO_CHAR(A.FECRET,'YYYY'),'9999')-1
-          ELSE
-          TO_NUMBER(TO_CHAR(A.FECRET,'YYYY'),'9999') END)>=TO_NUMBER(A.DESDE,'9999')
-       AND (CASE WHEN TO_DATE(TO_CHAR(A.FECRET,'DD/MM/')||TO_CHAR(A.FECING,'YYYY'),'DD/MM/YYYY')<=A.FECING THEN
-            TO_NUMBER(TO_CHAR(A.FECRET,'YYYY'),'9999')-1
+CREATE OR REPLACE VIEW  npliqvacacion AS
+ SELECT
+        CASE
+            WHEN sum(a.hist) = 0 THEN 'NO'::text
+            ELSE 'SI'::text
+        END AS historico, sum(a.antiguedad) AS antiguedad, a.desde, a.hasta, sum(a.disfrutados) AS disfrutados,
+        CASE
+            WHEN sum(a.hist) = 0 THEN sum(a.corresponde)
+            ELSE sum(a.correspondehis)
+        END AS corresponde, a.codemp, a.fecret, round(
+        CASE
+            WHEN
+            CASE
+                WHEN to_date(to_char(a.fecret::timestamp with time zone, 'DD/MM/'::text) || to_char(a.fecing::timestamp with time zone, 'YYYY'::text), 'DD/MM/YYYY'::text) <= a.fecing THEN to_number(to_char(a.fecret::timestamp with time zone, 'YYYY'::text), '9999'::text) - 1::numeric
+                ELSE to_number(to_char(a.fecret::timestamp with time zone, 'YYYY'::text), '9999'::text)
+            END >= to_number(a.desde::text, '9999'::text) AND
+            CASE
+                WHEN to_date(to_char(a.fecret::timestamp with time zone, 'DD/MM/'::text) || to_char(a.fecing::timestamp with time zone, 'YYYY'::text), 'DD/MM/YYYY'::text) <= a.fecing THEN to_number(to_char(a.fecret::timestamp with time zone, 'YYYY'::text), '9999'::text) - 1::numeric
+                ELSE to_number(to_char(a.fecret::timestamp with time zone, 'YYYY'::text), '9999'::text)
+            END < to_number(a.hasta::text, '9999'::text) THEN
+            CASE
+                WHEN (
+                CASE
+                    WHEN COALESCE(a.numdiames, 0) = 0 THEN
+                    CASE
+                        WHEN sum(a.hist) = 0 THEN sum( dcontinuos(a.corresponde,  obtenerjornada(a.codemp, a.antiguedad), a.codtipcon))
+                        ELSE sum( dcontinuos(a.correspondehis,  obtenerjornada(a.codemp, a.antiguedad), a.codtipcon))
+                    END / 12::numeric
+                    ELSE a.numdiames::numeric
+                END *  cuantotiempo(
+                CASE
+                    WHEN to_date(to_char(a.fecing::timestamp with time zone, 'DD/MM/'::text) || to_char(a.fecret::timestamp with time zone, 'YYYY'::text), 'DD/MM/YYYY'::text) > a.fecret THEN to_date(to_char(a.fecing::timestamp with time zone, 'DD/MM/'::text) || (to_number(to_char(a.fecret::timestamp with time zone, 'YYYY'::text), '9999'::text) - 1::numeric)::text, 'DD/MM/YYYY'::text)
+                    ELSE to_date(to_char(a.fecing::timestamp with time zone, 'DD/MM/'::text) || to_char(a.fecret::timestamp with time zone, 'YYYY'::text), 'DD/MM/YYYY'::text)
+                END, a.fecret, 'CM'::character varying, '0'::character varying)) <= COALESCE(a.numdiamaxano, 0)::numeric OR COALESCE(a.numdiames, 0) = 0 THEN
+                CASE
+                    WHEN COALESCE(a.numdiames, 0) = 0 THEN
+                    CASE
+                        WHEN sum(a.hist) = 0 THEN sum( dcontinuos(a.corresponde,  obtenerjornada(a.codemp, a.antiguedad), a.codtipcon))
+                        ELSE sum( dcontinuos(a.correspondehis,  obtenerjornada(a.codemp, a.antiguedad), a.codtipcon))
+                    END / 12::numeric
+                    ELSE a.numdiames::numeric
+                END *  cuantotiempo(
+                CASE
+                    WHEN to_date(to_char(a.fecing::timestamp with time zone, 'DD/MM/'::text) || to_char(a.fecret::timestamp with time zone, 'YYYY'::text), 'DD/MM/YYYY'::text) > a.fecret THEN to_date(to_char(a.fecing::timestamp with time zone, 'DD/MM/'::text) || (to_number(to_char(a.fecret::timestamp with time zone, 'YYYY'::text), '9999'::text) - 1::numeric)::text, 'DD/MM/YYYY'::text)
+                    ELSE to_date(to_char(a.fecing::timestamp with time zone, 'DD/MM/'::text) || to_char(a.fecret::timestamp with time zone, 'YYYY'::text), 'DD/MM/YYYY'::text)
+                END, a.fecret, 'CM'::character varying, '0'::character varying)
+                ELSE COALESCE(a.numdiamaxano, 0)::numeric
+            END
+            ELSE 0::numeric
+        END, 2) AS fracciondia, round(
+        CASE
+            WHEN
+            CASE
+                WHEN to_date(to_char(a.fecret::timestamp with time zone, 'DD/MM/'::text) || to_char(a.fecing::timestamp with time zone, 'YYYY'::text), 'DD/MM/YYYY'::text) <= a.fecing THEN to_number(to_char(a.fecret::timestamp with time zone, 'YYYY'::text), '9999'::text) - 1::numeric
+                ELSE to_number(to_char(a.fecret::timestamp with time zone, 'YYYY'::text), '9999'::text)
+            END >= to_number(a.desde::text, '9999'::text) AND
+            CASE
+                WHEN to_date(to_char(a.fecret::timestamp with time zone, 'DD/MM/'::text) || to_char(a.fecing::timestamp with time zone, 'YYYY'::text), 'DD/MM/YYYY'::text) <= a.fecing THEN to_number(to_char(a.fecret::timestamp with time zone, 'YYYY'::text), '9999'::text) - 1::numeric
+                ELSE to_number(to_char(a.fecret::timestamp with time zone, 'YYYY'::text), '9999'::text)
+            END < to_number(a.hasta::text, '9999'::text) THEN
+            CASE
+                WHEN COALESCE(a.numdiames, 0) = 0 THEN max(COALESCE(b.diavac, 0::numeric) / 12::numeric)
+                ELSE 0::numeric
+            END *  cuantotiempo(
+            CASE
+                WHEN to_date(to_char(a.fecing::timestamp with time zone, 'DD/MM/'::text) || to_char(a.fecret::timestamp with time zone, 'YYYY'::text), 'DD/MM/YYYY'::text) > a.fecret THEN to_date(to_char(a.fecing::timestamp with time zone, 'DD/MM/'::text) || (to_number(to_char(a.fecret::timestamp with time zone, 'YYYY'::text), '9999'::text) - 1::numeric)::text, 'DD/MM/YYYY'::text)
+                ELSE to_date(to_char(a.fecing::timestamp with time zone, 'DD/MM/'::text) || to_char(a.fecret::timestamp with time zone, 'YYYY'::text), 'DD/MM/YYYY'::text)
+            END, a.fecret, 'CM'::character varying, '0'::character varying)
+            ELSE sum(a.bonopendiente)
+        END, 2) AS fraccionbono,
+        CASE
+            WHEN
+            CASE
+                WHEN to_date(to_char(a.fecret::timestamp with time zone, 'DD/MM/'::text) || to_char(a.fecing::timestamp with time zone, 'YYYY'::text), 'DD/MM/YYYY'::text) <= a.fecing THEN to_number(to_char(a.fecret::timestamp with time zone, 'YYYY'::text), '9999'::text) - 1::numeric
+                ELSE to_number(to_char(a.fecret::timestamp with time zone, 'YYYY'::text), '9999'::text)
+            END >= to_number(a.desde::text, '9999'::text) AND
+            CASE
+                WHEN to_date(to_char(a.fecret::timestamp with time zone, 'DD/MM/'::text) || to_char(a.fecing::timestamp with time zone, 'YYYY'::text), 'DD/MM/YYYY'::text) <= a.fecing THEN to_number(to_char(a.fecret::timestamp with time zone, 'YYYY'::text), '9999'::text) - 1::numeric
+                ELSE to_number(to_char(a.fecret::timestamp with time zone, 'YYYY'::text), '9999'::text)
+            END < to_number(a.hasta::text, '9999'::text) THEN 'SI'::text
+            ELSE 'NO'::text
+        END AS fraccion, a.codtipcon,
+        CASE
+            WHEN COALESCE(avg(d.monhis), 0::numeric) = 0::numeric THEN avg(c.monasi)
+            ELSE avg(d.monhis)
+        END AS salnor,
+        CASE
+            WHEN max(COALESCE(b.calinc, 'N'::character varying)::text) = 'N'::text THEN
+            CASE
+                WHEN COALESCE(avg(d.monhis), 0::numeric) = 0::numeric THEN avg(c.monasi)
+                ELSE avg(d.monhis)
+            END
             ELSE
-            TO_NUMBER(TO_CHAR(A.FECRET,'YYYY'),'9999') END)<TO_NUMBER(A.HASTA,'9999')
- THEN (CASE WHEN (CASE WHEN COALESCE(A.NUMDIAMES,0)=0 THEN ((CASE WHEN SUM(A.HIST)=0 THEN SUM(A.CORRESPONDE) ELSE SUM(A.CORRESPONDEHIS) END)/12) ELSE A.NUMDIAMES END)*
-      cuantotiempo((CASE WHEN
-                    TO_DATE(TO_CHAR(A.FECING,'DD/MM/')||TO_CHAR(A.FECRET,'YYYY'),'DD/MM/YYYY')>A.FECRET
-                    THEN
-                    TO_DATE(TO_CHAR(A.FECING,'DD/MM/')||TO_CHAR(TO_NUMBER(TO_CHAR(A.FECRET,'YYYY'),'9999')-1,'YYYY'),'DD/MM/YYYY')
-                    ELSE
-                    TO_DATE(TO_CHAR(A.FECING,'DD/MM/')||TO_CHAR(A.FECRET,'YYYY'),'DD/MM/YYYY')
-                    END),A.FECRET,'CM','0')<= COALESCE(A.NUMDIAMAXANO,0) OR A.NUMDIAMES IS NULL THEN
-       (CASE WHEN COALESCE(A.NUMDIAMES,0)=0 THEN ((CASE WHEN SUM(A.HIST)=0 THEN SUM(A.CORRESPONDE) ELSE SUM(A.CORRESPONDEHIS) END)/12) ELSE A.NUMDIAMES END)*
-      cuantotiempo((CASE WHEN
-                    TO_DATE(TO_CHAR(A.FECING,'DD/MM/')||TO_CHAR(A.FECRET,'YYYY'),'DD/MM/YYYY')>A.FECRET
-                    THEN
-                    TO_DATE(TO_CHAR(A.FECING,'DD/MM/')||TO_CHAR(TO_NUMBER(TO_CHAR(A.FECRET,'YYYY'),'9999')-1,'YYYY'),'DD/MM/YYYY')
-                    ELSE
-                    TO_DATE(TO_CHAR(A.FECING,'DD/MM/')||TO_CHAR(A.FECRET,'YYYY'),'DD/MM/YYYY')
-                    END),A.FECRET,'CM','0')
-       ELSE COALESCE(A.NUMDIAMAXANO,0) END)
- ELSE 0  END),2) AS FRACCIONDIA,
-ROUND((CASE WHEN
-         (CASE WHEN TO_DATE(TO_CHAR(A.FECRET,'DD/MM/')||TO_CHAR(A.FECING,'YYYY'),'DD/MM/YYYY')<=A.FECING THEN
-          TO_NUMBER(TO_CHAR(A.FECRET,'YYYY'),'9999')-1
-          ELSE
-          TO_NUMBER(TO_CHAR(A.FECRET,'YYYY'),'9999') END)>=TO_NUMBER(A.DESDE,'9999')
-       AND (CASE WHEN TO_DATE(TO_CHAR(A.FECRET,'DD/MM/')||TO_CHAR(A.FECING,'YYYY'),'DD/MM/YYYY')<=A.FECING THEN
-            TO_NUMBER(TO_CHAR(A.FECRET,'YYYY'),'9999')-1
-            ELSE
-            TO_NUMBER(TO_CHAR(A.FECRET,'YYYY'),'9999') END)<TO_NUMBER(A.HASTA,'9999')
- THEN (CASE WHEN COALESCE(A.NUMDIAMES,0)=0 THEN MAX(COALESCE(B.DIAVAC,0)/12) ELSE 0 END)*
-      cuantotiempo((CASE WHEN
-                    TO_DATE(TO_CHAR(A.FECING,'DD/MM/')||TO_CHAR(A.FECRET,'YYYY'),'DD/MM/YYYY')>A.FECRET
-                    THEN
-                    TO_DATE(TO_CHAR(A.FECING,'DD/MM/')||TO_CHAR(TO_NUMBER(TO_CHAR(A.FECRET,'YYYY'),'9999')-1,'YYYY'),'DD/MM/YYYY')
-                    ELSE
-                    TO_DATE(TO_CHAR(A.FECING,'DD/MM/')||TO_CHAR(A.FECRET,'YYYY'),'DD/MM/YYYY')
-                    END),A.FECRET,'CM','0')
- ELSE 0  END),2) AS FRACCIONBONO,
-(CASE WHEN
-         (CASE WHEN TO_DATE(TO_CHAR(A.FECRET,'DD/MM/')||TO_CHAR(A.FECING,'YYYY'),'DD/MM/YYYY')<=A.FECING THEN
-          TO_NUMBER(TO_CHAR(A.FECRET,'YYYY'),'9999')-1
-          ELSE
-          TO_NUMBER(TO_CHAR(A.FECRET,'YYYY'),'9999') END)>=TO_NUMBER(A.DESDE,'9999')
-       AND (CASE WHEN TO_DATE(TO_CHAR(A.FECRET,'DD/MM/')||TO_CHAR(A.FECING,'YYYY'),'DD/MM/YYYY')<=A.FECING THEN
-            TO_NUMBER(TO_CHAR(A.FECRET,'YYYY'),'9999')-1
-            ELSE
-            TO_NUMBER(TO_CHAR(A.FECRET,'YYYY'),'9999') END)<TO_NUMBER(A.HASTA,'9999')
- THEN 'SI'
- ELSE 'NO'  END) as Fraccion,
-A.CodTipCon,(Case When Coalesce(AVG(D.MonHis),0)=0 then AVG(C.MonAsi) else AVG(D.MonHis) end) as SalNor,
-(CASE WHEN MAX(COALESCE(B.CalInc,'N'))='N' THEN (Case When Coalesce(AVG(D.MonHis),0)=0 then AVG(C.MonAsi) else AVG(D.MonHis) end)
- ELSE (Case When Coalesce(AVG(D.MonHis),0)=0 then AVG(C.MonAsi) else AVG(D.MonHis) end)+
-      ((Case When Coalesce(AVG(D.MonHisBV),0)=0 then AVG(C.MonAsi) else AVG(D.MonHisBV) end)/30)*ROUND(MAX(COALESCE(B.DIAVAC,0)/12),2)+
-      ((Case When Coalesce(AVG(D.MonHisBF),0)=0 then AVG(C.MonAsi) else AVG(D.MonHisBF) end)/30)*ROUND(MAX(COALESCE(B.DIAUTI,0)/12),2) END) AS SalInt,
-A.NumDiaMes,A.NumDiaMaxAno
-FROM  (Select 0 AS HIST,
-              antpub('A',C.CODEMP,to_date(TO_CHAR(C.FECRET,'DD/MM/')||((TO_NUMBER(TO_CHAR(C.FecIng,'YYYY'),'9999')+1)+((TO_NUMBER(TO_CHAR(C.FecRet,'YYYY'),'9999')+1)-B.Ano)-1)::VARCHAR,'dd/mm/yyyy'),'S')::NUMERIC AS Antiguedad,
-              (CASE WHEN TO_DATE(TO_CHAR(C.FECRET,'DD/MM/')||TO_CHAR(C.FECING,'YYYY'),'DD/MM/YYYY')<=C.FECING THEN
-              ((TO_NUMBER(TO_CHAR(C.FecIng,'YYYY'),'9999')+1)+((TO_NUMBER(TO_CHAR(C.FecRet,'YYYY'),'9999')+1)-B.Ano-1)-2)::VARCHAR
-              ELSE ((TO_NUMBER(TO_CHAR(C.FecIng,'YYYY'),'9999')+1)+((TO_NUMBER(TO_CHAR(C.FecRet,'YYYY'),'9999')+1)-B.Ano-1)-1)::VARCHAR END) as Desde,
-              (CASE WHEN TO_DATE(TO_CHAR(C.FECRET,'DD/MM/')||TO_CHAR(C.FECING,'YYYY'),'DD/MM/YYYY')<=C.FECING THEN
-                ((TO_NUMBER(TO_CHAR(C.FecIng,'YYYY'),'9999')+1)+((TO_NUMBER(TO_CHAR(C.FecRet,'YYYY'),'9999')+1)-B.Ano)-2)::VARCHAR
-              ELSE
-              ((TO_NUMBER(TO_CHAR(C.FecIng,'YYYY'),'9999')+1)+((TO_NUMBER(TO_CHAR(C.FecRet,'YYYY'),'9999')+1)-B.Ano)-1)::VARCHAR END) as Hasta,0 as Disfrutados,
-              A.DIADIS as CORRESPONDE,0 as CORRESPONDEHIS,C.CodEmp,C.FecRet,C.FecIng,D.CodTipCon,F.NumDiaMes,F.NumDiaMaxAno
-       from NPvacdiadis A left outer join NPDefEspParPre F on A.CodNom=F.CodNom,NPAnos B,NPHojInt C,NPASINOMCONT D
-       Where A.codnom=COALESCE((SELECT CODNOM FROM NPASIEMPCONT WHERE CODEMP=C.CODEMP
-                       AND FECDES<=TO_DATE(TO_CHAR(C.FECING,'DD/MM/')||
-                       (CASE WHEN TO_DATE(TO_CHAR(C.FECRET,'DD/MM/')||TO_CHAR(C.FECING,'YYYY'),'DD/MM/YYYY')<=C.FECING
- THEN ((TO_NUMBER(TO_CHAR(C.FecIng,'YYYY'),'9999')+1)+((TO_NUMBER(TO_CHAR(C.FecRet,'YYYY'),'9999')+1)-B.Ano)-2)::VARCHAR
- ELSE ((TO_NUMBER(TO_CHAR(C.FecIng,'YYYY'),'9999')+1)+((TO_NUMBER(TO_CHAR(C.FecRet,'YYYY'),'9999')+1)-B.Ano)-1)::VARCHAR END),'DD/MM/YYYY')
-                       AND FECHAS>=TO_DATE(TO_CHAR(C.FECING,'DD/MM/')||
-                       (CASE WHEN TO_DATE(TO_CHAR(C.FECRET,'DD/MM/')||TO_CHAR(C.FECING,'YYYY'),'DD/MM/YYYY')<=C.FECING
- THEN ((TO_NUMBER(TO_CHAR(C.FecIng,'YYYY'),'9999')+1)+((TO_NUMBER(TO_CHAR(C.FecRet,'YYYY'),'9999')+1)-B.Ano)-2)::VARCHAR
- ELSE ((TO_NUMBER(TO_CHAR(C.FecIng,'YYYY'),'9999')+1)+((TO_NUMBER(TO_CHAR(C.FecRet,'YYYY'),'9999')+1)-B.Ano)-1)::VARCHAR END),'DD/MM/YYYY')),
-                       (SELECT MAX(CODNOM) FROM NPHISCON
-                       WHERE CODEMP=C.CODEMP
-                       AND FECNOM=(SELECT MAX(FECNOM) FROM NPHISCON WHERE CODEMP=C.CODEMP
-                       AND TO_CHAR(FECNOM,'YYYY')=TO_CHAR((TO_NUMBER(TO_CHAR(C.FecIng,'YYYY'),'9999')+1)+((TO_NUMBER(TO_CHAR(C.FecRet,'YYYY'),'9999')+1)-B.Ano)-1,'9999'))),
-                       COALESCE((SELECT MAX(CODNOM) FROM NPHISCON WHERE CODEMP=C.CODEMP
-                       AND FECNOM=(SELECT MAX(FECNOM) FROM NPHISCON WHERE CODEMP=C.CODEMP))))
-             And B.Ano Between TO_NUMBER(TO_CHAR(C.FecIng,'YYYY'),'9999')
-                       and (CASE WHEN TO_DATE(TO_CHAR(C.FECRET,'DD/MM/')||TO_CHAR(C.FECING,'YYYY'),'DD/MM/YYYY')>C.FECING THEN TO_NUMBER(TO_CHAR(C.FecRet,'YYYY'),'9999')
-                            ELSE TO_NUMBER(TO_CHAR(C.FecRet,'YYYY'),'9999')-1 END)
-             And C.FecRet is Not NUll
-             And antpub('A',C.CODEMP,to_date(TO_CHAR(C.FECRET,'DD/MM/')||((TO_NUMBER(TO_CHAR(C.FecIng,'YYYY'),'9999')+1)+((TO_NUMBER(TO_CHAR(C.FecRet,'YYYY'),'9999')+1)-B.Ano))::VARCHAR,'dd/mm/yyyy'),'S')
-             between A.rangodesde and A.rangohasta
-             And A.CODNOM=D.CODNOM
-       UNION ALL
-       Select 1 AS HIST, 0 AS Antiguedad,C.PERINI as Desde,C.PERFIN as Hasta,
-              C.DIASDISFRUTADOS as Disfrutados,
-              0 as CORRESPONDE,C.diasdisfutar AS CORRESPONDEHIS,D.CodEmp,D.FecRet,D.FecIng,E.CodTipCon,F.NumDiaMes,F.NumDiaMaxAno
-       from NPvacdiadis A left outer join NPDefEspParPre F on A.CodNom=F.CodNom,NPAnos B,Npvacdisfrute C,NPHojInt D,NPAsiNomCont E
-       Where A.codnom=COALESCE((SELECT CODNOM FROM NPASIEMPCONT WHERE CODEMP=C.CODEMP
-                       AND FECDES<=TO_DATE(TO_CHAR(D.FECING,'DD/MM/')||C.PERFIN,'DD/MM/YYYY')
-                       AND FECHAS>=TO_DATE(TO_CHAR(D.FECING,'DD/MM/')||C.PERFIN,'DD/MM/YYYY')),
-                       (SELECT MAX(CODNOM) FROM NPHISCON
-                       WHERE CODEMP=C.CODEMP
-                       AND FECNOM=(SELECT MAX(FECNOM) FROM NPHISCON WHERE CODEMP=C.CODEMP
-                       AND TO_CHAR(FECNOM,'YYYY')=TO_CHAR((TO_NUMBER(TO_CHAR(D.FecIng,'YYYY'),'9999')+1)+((TO_NUMBER(TO_CHAR(D.FecRet,'YYYY'),'9999')+1)-B.Ano)-1,'9999'))),
-                       COALESCE((SELECT MAX(CODNOM) FROM NPHISCON
-                       WHERE CODEMP=C.CODEMP
-                       AND FECNOM=(SELECT MAX(FECNOM) FROM NPHISCON WHERE CODEMP=C.CODEMP))))
-             And B.Ano Between TO_NUMBER(TO_CHAR(D.FecIng,'YYYY'),'9999') and (TO_NUMBER(TO_CHAR(D.FecRet,'YYYY'),'9999')+1)
-             And (TO_NUMBER(TO_CHAR(D.FecRet,'YYYY'),'9999')+1)-B.ano between A.rangodesde and A.rangohasta
-             And C.PERINI=B.ANO::VARCHAR And D.FecRet is Not NUll And C.CODEMP=D.CodEmp
-             And A.CodNom=E.CodNom) AS A LEFT OUTER JOIN NPBONOCONT B ON
-             A.CodTipCon=B.CodTipCon
-             And A.Antiguedad between B.Desde and B.Hasta
-             And (CASE WHEN TO_DATE(TO_CHAR(A.FecIng,'DD/MM/')||A.Hasta::VARCHAR,'DD/MM/YYYY')>A.FECRET THEN
-                      A.FECRET
-                  ELSE
-                      TO_DATE(TO_CHAR(A.FecIng,'DD/MM/')||A.Hasta::VARCHAR,'DD/MM/YYYY')
-                  END)
-             BETWEEN B.AnoVig and B.AnoVigHas left outer join
-             (Select w.CodEmp,Sum((CASE WHEN v.TipAsi='S' then w.MONASI else 0 end)) as MONASI,
-	      Sum((CASE WHEN v.AfeAliBV='S' then w.MONASI else 0 end)) as MONBV,
-	      Sum((CASE WHEN v.AfeAliBF='S' then w.MONASI else 0 end)) as MONBF
-              from NPSalInt w, NPAsiPre v
-              where w.CodCon=(Select CodTipCon from NPAsiEmpCont where CodEmp=w.CodEmp and Status='A')
-              And to_char(w.FecFinCon,'mm/yyyy')=(Select to_char(MAX(FecFin),'mm/yyyy') From NPImpPreSoc where CodEmp=w.CodEmp and ValArt108>0 and Tipo='')
-              And v.CodCon=w.CodCon AND w.CodAsi=v.CodAsi
-              group by w.CodEmp) C on A.CodEmp=C.CodEmp left outer join
-             (Select w.CodEmp,SUM((CASE WHEN v.TipAsi='S' THEN w.Monto ELSE 0 END)) as MonHis,
-	      SUM((CASE WHEN t.AfeAliBV='S' THEN w.Monto ELSE 0 END)) as MonHisBV,
-	      SUM((CASE WHEN t.AfeAliBF='S' THEN w.Monto ELSE 0 END)) as MonHisBF
-	      from NPHisCon w,NPAsiPre v,NPConAsi t,NPAsiNomCont r
-	      where to_char(w.FecNom,'mm/yyyy')=(Select to_char(MAX(FecFin),'mm/yyyy') From NPImpPreSoc where CodEmp=w.CodEmp and ValArt108>0 and Tipo='')
-	      And v.CodCon=(Select CodTipCon from NPAsiEmpCont where CodEmp=w.CodEmp and Status='A')
-	      and v.TipAsi='S'
-	      and v.CodCon=t.CodCon
-	      and v.CodAsi=t.CodAsi
-	      And r.CodTipCon=v.CodCon
-	      And w.CodNom=r.CodNom
-	      AND w.CodCon=t.CodCpt
-	      group by w.CodEmp) D on A.CodEmp=D.CodEmp
-GROUP BY A.DESDE,A.HASTA,A.CODEMP,A.FECRET,A.FECING,A.CodTipCon,A.NumDiaMes,A.NumDiaMaxAno
-ORDER BY A.CODEMP,A.DESDE);
+            CASE
+                WHEN COALESCE(avg(d.monhis), 0::numeric) = 0::numeric THEN avg(c.monasi)
+                ELSE avg(d.monhis)
+            END +
+            CASE
+                WHEN COALESCE(avg(d.monhisbv), 0::numeric) = 0::numeric THEN avg(c.monasi)
+                ELSE avg(d.monhisbv)
+            END / 30::numeric * round(max(COALESCE(b.diavac, 0::numeric) / 12::numeric), 2) +
+            CASE
+                WHEN COALESCE(avg(d.monhisbf), 0::numeric) = 0::numeric THEN avg(c.monasi)
+                ELSE avg(d.monhisbf)
+            END / 30::numeric * round(max(COALESCE(b.diauti, 0::numeric) / 12::numeric), 2)
+        END AS salint, a.numdiames, a.numdiamaxano
+   FROM ( SELECT 0 AS bonopendiente, 0 AS hist,  antpub2('A'::bpchar, c.codemp, to_date(to_char(c.fecret::timestamp with time zone, 'DD/MM/'::text) || (to_number(to_char(c.fecing::timestamp with time zone, 'YYYY'::text), '9999'::text) + 1::numeric + (to_number(to_char(c.fecret::timestamp with time zone, 'YYYY'::text), '9999'::text) + 1::numeric - b.ano) - 1::numeric)::character varying::text, 'dd/mm/yyyy'::text), 'S'::bpchar)::numeric AS antiguedad,
+                CASE
+                    WHEN to_date(to_char(c.fecret::timestamp with time zone, 'DD/MM/'::text) || to_char(c.fecing::timestamp with time zone, 'YYYY'::text), 'DD/MM/YYYY'::text) <= c.fecing THEN (to_number(to_char(c.fecing::timestamp with time zone, 'YYYY'::text), '9999'::text) + 1::numeric + (to_number(to_char(c.fecret::timestamp with time zone, 'YYYY'::text), '9999'::text) + 1::numeric - b.ano - 1::numeric) - 2::numeric)::character varying
+                    ELSE (to_number(to_char(c.fecing::timestamp with time zone, 'YYYY'::text), '9999'::text) + 1::numeric + (to_number(to_char(c.fecret::timestamp with time zone, 'YYYY'::text), '9999'::text) + 1::numeric - b.ano - 1::numeric) - 1::numeric)::character varying
+                END AS desde,
+                CASE
+                    WHEN to_date(to_char(c.fecret::timestamp with time zone, 'DD/MM/'::text) || to_char(c.fecing::timestamp with time zone, 'YYYY'::text), 'DD/MM/YYYY'::text) <= c.fecing THEN (to_number(to_char(c.fecing::timestamp with time zone, 'YYYY'::text), '9999'::text) + 1::numeric + (to_number(to_char(c.fecret::timestamp with time zone, 'YYYY'::text), '9999'::text) + 1::numeric - b.ano) - 2::numeric)::character varying
+                    ELSE (to_number(to_char(c.fecing::timestamp with time zone, 'YYYY'::text), '9999'::text) + 1::numeric + (to_number(to_char(c.fecret::timestamp with time zone, 'YYYY'::text), '9999'::text) + 1::numeric - b.ano) - 1::numeric)::character varying
+                END AS hasta, 0 AS disfrutados, a.diadis AS corresponde, 0 AS correspondehis, c.codemp, c.fecret, c.fecing, d.codtipcon, f.numdiames, f.numdiamaxano
+           FROM  npvacdiadis a
+      LEFT JOIN  npdefespparpre f ON a.codnom::text = f.codnom::text,  npanos b,  nphojint c,  npasinomcont d
+     WHERE a.codnom::text = COALESCE(( SELECT npasiempcont.codnom
+              FROM  npasiempcont
+             WHERE npasiempcont.codemp::text = c.codemp::text AND npasiempcont.fecdes <= to_date(to_char(c.fecing::timestamp with time zone, 'DD/MM/'::text) ||
+                   CASE
+                       WHEN to_date(to_char(c.fecret::timestamp with time zone, 'DD/MM/'::text) || to_char(c.fecing::timestamp with time zone, 'YYYY'::text), 'DD/MM/YYYY'::text) <= c.fecing THEN (to_number(to_char(c.fecing::timestamp with time zone, 'YYYY'::text), '9999'::text) + 1::numeric + (to_number(to_char(c.fecret::timestamp with time zone, 'YYYY'::text), '9999'::text) + 1::numeric - b.ano) - 2::numeric)::character varying
+                       ELSE (to_number(to_char(c.fecing::timestamp with time zone, 'YYYY'::text), '9999'::text) + 1::numeric + (to_number(to_char(c.fecret::timestamp with time zone, 'YYYY'::text), '9999'::text) + 1::numeric - b.ano) - 1::numeric)::character varying
+                   END::text, 'DD/MM/YYYY'::text) AND npasiempcont.fechas >= to_date(to_char(c.fecing::timestamp with time zone, 'DD/MM/'::text) ||
+                   CASE
+                       WHEN to_date(to_char(c.fecret::timestamp with time zone, 'DD/MM/'::text) || to_char(c.fecing::timestamp with time zone, 'YYYY'::text), 'DD/MM/YYYY'::text) <= c.fecing THEN (to_number(to_char(c.fecing::timestamp with time zone, 'YYYY'::text), '9999'::text) + 1::numeric + (to_number(to_char(c.fecret::timestamp with time zone, 'YYYY'::text), '9999'::text) + 1::numeric - b.ano) - 2::numeric)::character varying
+                       ELSE (to_number(to_char(c.fecing::timestamp with time zone, 'YYYY'::text), '9999'::text) + 1::numeric + (to_number(to_char(c.fecret::timestamp with time zone, 'YYYY'::text), '9999'::text) + 1::numeric - b.ano) - 1::numeric)::character varying
+                   END::text, 'DD/MM/YYYY'::text)), (( SELECT max(nphiscon.codnom::text) AS max
+              FROM  nphiscon
+             WHERE nphiscon.codemp::text = c.codemp::text AND nphiscon.fecnom = (( SELECT max(nphiscon.fecnom) AS max
+                      FROM  nphiscon
+                     WHERE nphiscon.codemp::text = c.codemp::text AND to_char(nphiscon.fecnom::timestamp with time zone, 'YYYY'::text) = to_char(to_number(to_char(c.fecing::timestamp with time zone, 'YYYY'::text), '9999'::text) + 1::numeric + (to_number(to_char(c.fecret::timestamp with time zone, 'YYYY'::text), '9999'::text) + 1::numeric - b.ano) - 1::numeric, '9999'::text)))))::character varying, COALESCE(( SELECT max(nphiscon.codnom::text) AS max
+              FROM  nphiscon
+             WHERE nphiscon.codemp::text = c.codemp::text AND nphiscon.fecnom = (( SELECT max(nphiscon.fecnom) AS max
+                      FROM  nphiscon
+                     WHERE nphiscon.codemp::text = c.codemp::text))))::character varying)::text AND b.ano >= to_number(to_char(c.fecing::timestamp with time zone, 'YYYY'::text), '9999'::text) AND b.ano <=
+           CASE
+               WHEN to_date(to_char(c.fecret::timestamp with time zone, 'DD/MM/'::text) || to_char(c.fecing::timestamp with time zone, 'YYYY'::text), 'DD/MM/YYYY'::text) > c.fecing THEN to_number(to_char(c.fecret::timestamp with time zone, 'YYYY'::text), '9999'::text)
+               ELSE to_number(to_char(c.fecret::timestamp with time zone, 'YYYY'::text), '9999'::text) - 1::numeric
+           END AND c.fecret IS NOT NULL AND  antpub2('A'::bpchar, c.codemp, to_date(to_char(c.fecret::timestamp with time zone, 'DD/MM/'::text) || (to_number(to_char(c.fecing::timestamp with time zone, 'YYYY'::text), '9999'::text) + 1::numeric + (to_number(to_char(c.fecret::timestamp with time zone, 'YYYY'::text), '9999'::text) + 1::numeric - b.ano) - 1::numeric)::character varying::text, 'dd/mm/yyyy'::text), 'S'::bpchar)::numeric >= a.rangodesde AND  antpub2('A'::bpchar, c.codemp, to_date(to_char(c.fecret::timestamp with time zone, 'DD/MM/'::text) || (to_number(to_char(c.fecing::timestamp with time zone, 'YYYY'::text), '9999'::text) + 1::numeric + (to_number(to_char(c.fecret::timestamp with time zone, 'YYYY'::text), '9999'::text) + 1::numeric - b.ano) - 1::numeric)::character varying::text, 'dd/mm/yyyy'::text), 'S'::bpchar)::numeric <= a.rangohasta AND a.codnom::text = d.codnom::text
+UNION ALL
+         SELECT c.diasbonovac - c.diasbonovacpag AS bonopendiente, 1 AS hist, 0 AS antiguedad, c.perini AS desde, c.perfin AS hasta, c.diasdisfrutados AS disfrutados, 0 AS corresponde, c.diasdisfutar AS correspondehis, d.codemp, d.fecret, d.fecing, e.codtipcon, f.numdiames, f.numdiamaxano
+           FROM  npvacdiadis a
+      LEFT JOIN  npdefespparpre f ON a.codnom::text = f.codnom::text,  npanos b,  npvacdisfrute c,  nphojint d,  npasinomcont e
+     WHERE a.codnom::text = COALESCE(( SELECT npasiempcont.codnom
+              FROM  npasiempcont
+             WHERE npasiempcont.codemp::text = c.codemp::text AND npasiempcont.fecdes <= to_date(to_char(d.fecing::timestamp with time zone, 'DD/MM/'::text) || c.perfin::text, 'DD/MM/YYYY'::text) AND npasiempcont.fechas >= to_date(to_char(d.fecing::timestamp with time zone, 'DD/MM/'::text) || c.perfin::text, 'DD/MM/YYYY'::text)), (( SELECT max(nphiscon.codnom::text) AS max
+              FROM  nphiscon
+             WHERE nphiscon.codemp::text = c.codemp::text AND nphiscon.fecnom = (( SELECT max(nphiscon.fecnom) AS max
+                      FROM  nphiscon
+                     WHERE nphiscon.codemp::text = c.codemp::text AND to_char(nphiscon.fecnom::timestamp with time zone, 'YYYY'::text) = to_char(to_number(to_char(d.fecing::timestamp with time zone, 'YYYY'::text), '9999'::text) + 1::numeric + (to_number(to_char(d.fecret::timestamp with time zone, 'YYYY'::text), '9999'::text) + 1::numeric - b.ano) - 1::numeric, '9999'::text)))))::character varying, COALESCE(( SELECT max(nphiscon.codnom::text) AS max
+              FROM  nphiscon
+             WHERE nphiscon.codemp::text = c.codemp::text AND nphiscon.fecnom = (( SELECT max(nphiscon.fecnom) AS max
+                      FROM  nphiscon
+                     WHERE nphiscon.codemp::text = c.codemp::text))))::character varying)::text AND b.ano >= to_number(to_char(d.fecing::timestamp with time zone, 'YYYY'::text), '9999'::text) AND b.ano <= (to_number(to_char(d.fecret::timestamp with time zone, 'YYYY'::text), '9999'::text) + 1::numeric) AND (to_number(to_char(d.fecret::timestamp with time zone, 'YYYY'::text), '9999'::text) + 1::numeric - b.ano) >= a.rangodesde AND (to_number(to_char(d.fecret::timestamp with time zone, 'YYYY'::text), '9999'::text) + 1::numeric - b.ano) <= a.rangohasta AND c.perini::text = b.ano::character varying::text AND d.fecret IS NOT NULL AND c.codemp::text = d.codemp::text AND a.codnom::text = e.codnom::text) a
+   LEFT JOIN  npbonocont b ON a.codtipcon::text = b.codtipcon::text AND a.antiguedad >= b.desde AND a.antiguedad <= b.hasta AND
+   CASE
+       WHEN to_date(to_char(a.fecing::timestamp with time zone, 'DD/MM/'::text) || a.hasta::text, 'DD/MM/YYYY'::text) > a.fecret THEN a.fecret
+       ELSE to_date(to_char(a.fecing::timestamp with time zone, 'DD/MM/'::text) || a.hasta::text, 'DD/MM/YYYY'::text)
+   END >= b.anovig AND
+   CASE
+       WHEN to_date(to_char(a.fecing::timestamp with time zone, 'DD/MM/'::text) || a.hasta::text, 'DD/MM/YYYY'::text) > a.fecret THEN a.fecret
+       ELSE to_date(to_char(a.fecing::timestamp with time zone, 'DD/MM/'::text) || a.hasta::text, 'DD/MM/YYYY'::text)
+   END <= b.anovighas
+   LEFT JOIN ( SELECT w.codemp, sum(
+           CASE
+               WHEN v.tipasi::text = 'S'::text THEN w.monasi
+               ELSE 0::numeric
+           END) AS monasi, sum(
+           CASE
+               WHEN v.afealibv::text = 'S'::text THEN w.monasi
+               ELSE 0::numeric
+           END) AS monbv, sum(
+           CASE
+               WHEN v.afealibf::text = 'S'::text THEN w.monasi
+               ELSE 0::numeric
+           END) AS monbf
+      FROM  npsalint w,  npasipre v
+     WHERE w.codcon::text = ((( SELECT npasiempcont.codtipcon
+              FROM  npasiempcont
+             WHERE npasiempcont.codemp::text = w.codemp::text AND npasiempcont.status::text = 'A'::text))::text) AND to_char(w.fecfincon::timestamp with time zone, 'mm/yyyy'::text) = (( SELECT to_char(max(npimppresoc.fecfin)::timestamp with time zone, 'mm/yyyy'::text) AS to_char
+              FROM  npimppresoc
+             WHERE npimppresoc.codemp::text = w.codemp::text AND npimppresoc.valart108 > 0::numeric AND npimppresoc.tipo::text = ''::text)) AND v.codcon::text = w.codcon::text AND w.codasi::text = v.codasi::text
+     GROUP BY w.codemp) c ON a.codemp::text = c.codemp::text
+   LEFT JOIN ( SELECT w.codemp, sum(
+        CASE
+            WHEN v.tipasi::text = 'S'::text THEN w.monto
+            ELSE 0::numeric
+        END) AS monhis, sum(
+        CASE
+            WHEN t.afealibv::text = 'S'::text THEN w.monto
+            ELSE 0::numeric
+        END) AS monhisbv, sum(
+        CASE
+            WHEN t.afealibf::text = 'S'::text THEN w.monto
+            ELSE 0::numeric
+        END) AS monhisbf
+   FROM  nphiscon w,  npasipre v,  npconasi t,  npasinomcont r
+  WHERE to_char(w.fecnom::timestamp with time zone, 'mm/yyyy'::text) = (( SELECT to_char(max(npimppresoc.fecfin)::timestamp with time zone, 'mm/yyyy'::text) AS to_char
+           FROM  npimppresoc
+          WHERE npimppresoc.codemp::text = w.codemp::text AND npimppresoc.valart108 > 0::numeric AND npimppresoc.tipo::text = ''::text)) AND v.codcon::text = ((( SELECT npasiempcont.codtipcon
+           FROM  npasiempcont
+          WHERE npasiempcont.codemp::text = w.codemp::text AND npasiempcont.status::text = 'A'::text))::text) AND v.tipasi::text = 'S'::text AND v.codcon::text = t.codcon::text AND v.codasi::text = t.codasi::text AND r.codtipcon::text = v.codcon::text AND w.codnom::text = r.codnom::text AND w.codcon::text = t.codcpt::text
+  GROUP BY w.codemp) d ON a.codemp::text = d.codemp::text
+  GROUP BY a.codemp, a.desde, a.hasta, a.fecret, a.fecing, a.codtipcon, a.numdiames, a.numdiamaxano
+  ORDER BY a.codemp, a.desde;
+
+
 
 
 
