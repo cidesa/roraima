@@ -6831,7 +6831,9 @@ propel:
       type: VARCHAR
       size: 2
     numdiaant:
-      type: INTEGER
+      type: NUMERIC
+      size: 14
+      scale: 2
     poranoant:
       type: VARCHAR
       size: 1
@@ -6846,6 +6848,12 @@ propel:
       size: 1
     apartirmes:
       type: INTEGER
+    totret:
+      type: VARCHAR
+      size: 1
+    pormesant:
+      type: VARCHAR
+      size: 1
     id:
       type: INTEGER
       required: true

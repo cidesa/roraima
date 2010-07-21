@@ -4,127 +4,135 @@
 abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
 
 
-	
+
 	protected static $peer;
 
 
-	
+
 	protected $codnom;
 
 
-	
+
 	protected $numdiames;
 
 
-	
+
 	protected $numdiamaxano;
 
 
-	
+
 	protected $tipsalajunodep;
 
 
-	
+
 	protected $tipsalbonfinanofra;
 
 
-	
+
 	protected $factorbonfinanofra;
 
 
-	
+
 	protected $tipsalbonvacfra;
 
 
-	
+
 	protected $factorbonvacfra;
 
 
-	
+
 	protected $tipsalvacven;
 
 
-	
+
 	protected $factorvacven;
 
 
-	
+
 	protected $descripclau;
 
 
-	
+
 	protected $codret;
 
 
-	
+
 	protected $numdiaant;
 
 
-	
+
 	protected $poranoant;
 
 
-	
+
 	protected $tipsaldiaant;
 
 
-	
+
 	protected $codpar;
 
 
-	
+
 	protected $aguicom;
 
 
-	
+
 	protected $apartirmes;
 
 
-	
+
+	protected $totret;
+
+
+
+	protected $pormesant;
+
+
+
 	protected $id;
 
-	
+
 	protected $alreadyInSave = false;
 
-	
+
 	protected $alreadyInValidation = false;
 
-  
+
   public function getCodnom()
   {
 
     return trim($this->codnom);
 
   }
-  
+
   public function getNumdiames()
   {
 
     return $this->numdiames;
 
   }
-  
+
   public function getNumdiamaxano()
   {
 
     return $this->numdiamaxano;
 
   }
-  
+
   public function getTipsalajunodep()
   {
 
     return trim($this->tipsalajunodep);
 
   }
-  
+
   public function getTipsalbonfinanofra()
   {
 
     return trim($this->tipsalbonfinanofra);
 
   }
-  
+
   public function getFactorbonfinanofra($val=false)
   {
 
@@ -132,14 +140,14 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
     else return $this->factorbonfinanofra;
 
   }
-  
+
   public function getTipsalbonvacfra()
   {
 
     return trim($this->tipsalbonvacfra);
 
   }
-  
+
   public function getFactorbonvacfra($val=false)
   {
 
@@ -147,14 +155,14 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
     else return $this->factorbonvacfra;
 
   }
-  
+
   public function getTipsalvacven()
   {
 
     return trim($this->tipsalvacven);
 
   }
-  
+
   public function getFactorvacven($val=false)
   {
 
@@ -162,70 +170,85 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
     else return $this->factorvacven;
 
   }
-  
+
   public function getDescripclau()
   {
 
     return trim($this->descripclau);
 
   }
-  
+
   public function getCodret()
   {
 
     return trim($this->codret);
 
   }
-  
-  public function getNumdiaant()
+
+  public function getNumdiaant($val=false)
   {
 
-    return $this->numdiaant;
+    if($val) return number_format($this->numdiaant,2,',','.');
+    else return $this->numdiaant;
 
   }
-  
+
   public function getPoranoant()
   {
 
     return trim($this->poranoant);
 
   }
-  
+
   public function getTipsaldiaant()
   {
 
     return trim($this->tipsaldiaant);
 
   }
-  
+
   public function getCodpar()
   {
 
     return trim($this->codpar);
 
   }
-  
+
   public function getAguicom()
   {
 
     return trim($this->aguicom);
 
   }
-  
+
   public function getApartirmes()
   {
 
     return $this->apartirmes;
 
   }
-  
+
+  public function getTotret()
+  {
+
+    return trim($this->totret);
+
+  }
+
+  public function getPormesant()
+  {
+
+    return trim($this->pormesant);
+
+  }
+
   public function getId()
   {
 
     return $this->id;
 
   }
-	
+
 	public function setCodnom($v)
 	{
 
@@ -233,9 +256,9 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
         $this->codnom = $v;
         $this->modifiedColumns[] = NpdefespparprePeer::CODNOM;
       }
-  
-	} 
-	
+
+	}
+
 	public function setNumdiames($v)
 	{
 
@@ -243,9 +266,9 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
         $this->numdiames = $v;
         $this->modifiedColumns[] = NpdefespparprePeer::NUMDIAMES;
       }
-  
-	} 
-	
+
+	}
+
 	public function setNumdiamaxano($v)
 	{
 
@@ -253,9 +276,9 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
         $this->numdiamaxano = $v;
         $this->modifiedColumns[] = NpdefespparprePeer::NUMDIAMAXANO;
       }
-  
-	} 
-	
+
+	}
+
 	public function setTipsalajunodep($v)
 	{
 
@@ -263,9 +286,9 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
         $this->tipsalajunodep = $v;
         $this->modifiedColumns[] = NpdefespparprePeer::TIPSALAJUNODEP;
       }
-  
-	} 
-	
+
+	}
+
 	public function setTipsalbonfinanofra($v)
 	{
 
@@ -273,9 +296,9 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
         $this->tipsalbonfinanofra = $v;
         $this->modifiedColumns[] = NpdefespparprePeer::TIPSALBONFINANOFRA;
       }
-  
-	} 
-	
+
+	}
+
 	public function setFactorbonfinanofra($v)
 	{
 
@@ -283,9 +306,9 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
         $this->factorbonfinanofra = Herramientas::toFloat($v);
         $this->modifiedColumns[] = NpdefespparprePeer::FACTORBONFINANOFRA;
       }
-  
-	} 
-	
+
+	}
+
 	public function setTipsalbonvacfra($v)
 	{
 
@@ -293,9 +316,9 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
         $this->tipsalbonvacfra = $v;
         $this->modifiedColumns[] = NpdefespparprePeer::TIPSALBONVACFRA;
       }
-  
-	} 
-	
+
+	}
+
 	public function setFactorbonvacfra($v)
 	{
 
@@ -303,9 +326,9 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
         $this->factorbonvacfra = Herramientas::toFloat($v);
         $this->modifiedColumns[] = NpdefespparprePeer::FACTORBONVACFRA;
       }
-  
-	} 
-	
+
+	}
+
 	public function setTipsalvacven($v)
 	{
 
@@ -313,9 +336,9 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
         $this->tipsalvacven = $v;
         $this->modifiedColumns[] = NpdefespparprePeer::TIPSALVACVEN;
       }
-  
-	} 
-	
+
+	}
+
 	public function setFactorvacven($v)
 	{
 
@@ -323,9 +346,9 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
         $this->factorvacven = Herramientas::toFloat($v);
         $this->modifiedColumns[] = NpdefespparprePeer::FACTORVACVEN;
       }
-  
-	} 
-	
+
+	}
+
 	public function setDescripclau($v)
 	{
 
@@ -333,9 +356,9 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
         $this->descripclau = $v;
         $this->modifiedColumns[] = NpdefespparprePeer::DESCRIPCLAU;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCodret($v)
 	{
 
@@ -343,19 +366,19 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
         $this->codret = $v;
         $this->modifiedColumns[] = NpdefespparprePeer::CODRET;
       }
-  
-	} 
-	
+
+	}
+
 	public function setNumdiaant($v)
 	{
 
     if ($this->numdiaant !== $v) {
-        $this->numdiaant = $v;
+        $this->numdiaant = Herramientas::toFloat($v);
         $this->modifiedColumns[] = NpdefespparprePeer::NUMDIAANT;
       }
-  
-	} 
-	
+
+	}
+
 	public function setPoranoant($v)
 	{
 
@@ -363,9 +386,9 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
         $this->poranoant = $v;
         $this->modifiedColumns[] = NpdefespparprePeer::PORANOANT;
       }
-  
-	} 
-	
+
+	}
+
 	public function setTipsaldiaant($v)
 	{
 
@@ -373,9 +396,9 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
         $this->tipsaldiaant = $v;
         $this->modifiedColumns[] = NpdefespparprePeer::TIPSALDIAANT;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCodpar($v)
 	{
 
@@ -383,9 +406,9 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
         $this->codpar = $v;
         $this->modifiedColumns[] = NpdefespparprePeer::CODPAR;
       }
-  
-	} 
-	
+
+	}
+
 	public function setAguicom($v)
 	{
 
@@ -393,9 +416,9 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
         $this->aguicom = $v;
         $this->modifiedColumns[] = NpdefespparprePeer::AGUICOM;
       }
-  
-	} 
-	
+
+	}
+
 	public function setApartirmes($v)
 	{
 
@@ -403,9 +426,29 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
         $this->apartirmes = $v;
         $this->modifiedColumns[] = NpdefespparprePeer::APARTIRMES;
       }
-  
-	} 
-	
+
+	}
+
+	public function setTotret($v)
+	{
+
+    if ($this->totret !== $v) {
+        $this->totret = $v;
+        $this->modifiedColumns[] = NpdefespparprePeer::TOTRET;
+      }
+
+	}
+
+	public function setPormesant($v)
+	{
+
+    if ($this->pormesant !== $v) {
+        $this->pormesant = $v;
+        $this->modifiedColumns[] = NpdefespparprePeer::PORMESANT;
+      }
+
+	}
+
 	public function setId($v)
 	{
 
@@ -413,9 +456,9 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
         $this->id = $v;
         $this->modifiedColumns[] = NpdefespparprePeer::ID;
       }
-  
-	} 
-  
+
+	}
+
   public function hydrate(ResultSet $rs, $startcol = 1)
   {
     try {
@@ -444,7 +487,7 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
 
       $this->codret = $rs->getString($startcol + 11);
 
-      $this->numdiaant = $rs->getInt($startcol + 12);
+      $this->numdiaant = $rs->getFloat($startcol + 12);
 
       $this->poranoant = $rs->getString($startcol + 13);
 
@@ -456,7 +499,11 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
 
       $this->apartirmes = $rs->getInt($startcol + 17);
 
-      $this->id = $rs->getInt($startcol + 18);
+      $this->totret = $rs->getString($startcol + 18);
+
+      $this->pormesant = $rs->getString($startcol + 19);
+
+      $this->id = $rs->getInt($startcol + 20);
 
       $this->resetModified();
 
@@ -464,7 +511,7 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 19; 
+            return $startcol + 21;
     } catch (Exception $e) {
       throw new PropelException("Error populating Npdefespparpre object", $e);
     }
@@ -475,8 +522,8 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
   {
 
   }
-    
-  
+
+
   public function __call($m, $a)
     {
       $prefijo = substr($m,0,3);
@@ -490,7 +537,7 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
 
     }
 
-	
+
 	public function delete($con = null)
 	{
 		if ($this->isDeleted()) {
@@ -512,7 +559,7 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	public function save($con = null)
 	{
 		if ($this->isDeleted()) {
@@ -534,7 +581,7 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	protected function doSave($con)
 	{
 		$affectedRows = 0; 		if (!$this->alreadyInSave) {
@@ -544,8 +591,8 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
 						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = NpdefespparprePeer::doInsert($this, $con);
-					$affectedRows += 1; 										 										 
-					$this->setId($pk);  
+					$affectedRows += 1;
+					$this->setId($pk);
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpdefespparprePeer::doUpdate($this, $con);
@@ -555,17 +602,17 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
-	} 
-	
+	}
+
 	protected $validationFailures = array();
 
-	
+
 	public function getValidationFailures()
 	{
 		return $this->validationFailures;
 	}
 
-	
+
 	public function validate($columns = null)
 	{
 		$res = $this->doValidate($columns);
@@ -578,7 +625,7 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	protected function doValidate($columns = null)
 	{
 		if (!$this->alreadyInValidation) {
@@ -600,14 +647,14 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
 		return (!empty($failureMap) ? $failureMap : true);
 	}
 
-	
+
 	public function getByName($name, $type = BasePeer::TYPE_PHPNAME)
 	{
 		$pos = NpdefespparprePeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->getByPosition($pos);
 	}
 
-	
+
 	public function getByPosition($pos)
 	{
 		switch($pos) {
@@ -666,6 +713,12 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
 				return $this->getApartirmes();
 				break;
 			case 18:
+				return $this->getTotret();
+				break;
+			case 19:
+				return $this->getPormesant();
+				break;
+			case 20:
 				return $this->getId();
 				break;
 			default:
@@ -673,7 +726,7 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
 				break;
 		} 	}
 
-	
+
 	public function toArray($keyType = BasePeer::TYPE_PHPNAME)
 	{
 		$keys = NpdefespparprePeer::getFieldNames($keyType);
@@ -696,19 +749,21 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
 			$keys[15] => $this->getCodpar(),
 			$keys[16] => $this->getAguicom(),
 			$keys[17] => $this->getApartirmes(),
-			$keys[18] => $this->getId(),
+			$keys[18] => $this->getTotret(),
+			$keys[19] => $this->getPormesant(),
+			$keys[20] => $this->getId(),
 		);
 		return $result;
 	}
 
-	
+
 	public function setByName($name, $value, $type = BasePeer::TYPE_PHPNAME)
 	{
 		$pos = NpdefespparprePeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->setByPosition($pos, $value);
 	}
 
-	
+
 	public function setByPosition($pos, $value)
 	{
 		switch($pos) {
@@ -767,11 +822,17 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
 				$this->setApartirmes($value);
 				break;
 			case 18:
+				$this->setTotret($value);
+				break;
+			case 19:
+				$this->setPormesant($value);
+				break;
+			case 20:
 				$this->setId($value);
 				break;
 		} 	}
 
-	
+
 	public function fromArray($arr, $keyType = BasePeer::TYPE_PHPNAME)
 	{
 		$keys = NpdefespparprePeer::getFieldNames($keyType);
@@ -794,10 +855,12 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[15], $arr)) $this->setCodpar($arr[$keys[15]]);
 		if (array_key_exists($keys[16], $arr)) $this->setAguicom($arr[$keys[16]]);
 		if (array_key_exists($keys[17], $arr)) $this->setApartirmes($arr[$keys[17]]);
-		if (array_key_exists($keys[18], $arr)) $this->setId($arr[$keys[18]]);
+		if (array_key_exists($keys[18], $arr)) $this->setTotret($arr[$keys[18]]);
+		if (array_key_exists($keys[19], $arr)) $this->setPormesant($arr[$keys[19]]);
+		if (array_key_exists($keys[20], $arr)) $this->setId($arr[$keys[20]]);
 	}
 
-	
+
 	public function buildCriteria()
 	{
 		$criteria = new Criteria(NpdefespparprePeer::DATABASE_NAME);
@@ -820,12 +883,14 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(NpdefespparprePeer::CODPAR)) $criteria->add(NpdefespparprePeer::CODPAR, $this->codpar);
 		if ($this->isColumnModified(NpdefespparprePeer::AGUICOM)) $criteria->add(NpdefespparprePeer::AGUICOM, $this->aguicom);
 		if ($this->isColumnModified(NpdefespparprePeer::APARTIRMES)) $criteria->add(NpdefespparprePeer::APARTIRMES, $this->apartirmes);
+		if ($this->isColumnModified(NpdefespparprePeer::TOTRET)) $criteria->add(NpdefespparprePeer::TOTRET, $this->totret);
+		if ($this->isColumnModified(NpdefespparprePeer::PORMESANT)) $criteria->add(NpdefespparprePeer::PORMESANT, $this->pormesant);
 		if ($this->isColumnModified(NpdefespparprePeer::ID)) $criteria->add(NpdefespparprePeer::ID, $this->id);
 
 		return $criteria;
 	}
 
-	
+
 	public function buildPkeyCriteria()
 	{
 		$criteria = new Criteria(NpdefespparprePeer::DATABASE_NAME);
@@ -835,19 +900,19 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
 		return $criteria;
 	}
 
-	
+
 	public function getPrimaryKey()
 	{
 		return $this->getId();
 	}
 
-	
+
 	public function setPrimaryKey($key)
 	{
 		$this->setId($key);
 	}
 
-	
+
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
@@ -887,13 +952,17 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
 
 		$copyObj->setApartirmes($this->apartirmes);
 
+		$copyObj->setTotret($this->totret);
+
+		$copyObj->setPormesant($this->pormesant);
+
 
 		$copyObj->setNew(true);
 
-		$copyObj->setId(NULL); 
+		$copyObj->setId(NULL);
 	}
 
-	
+
 	public function copy($deepCopy = false)
 	{
 				$clazz = get_class($this);
@@ -902,7 +971,7 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
 		return $copyObj;
 	}
 
-	
+
 	public function getPeer()
 	{
 		if (self::$peer === null) {
@@ -911,4 +980,4 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
 		return self::$peer;
 	}
 
-} 
+}

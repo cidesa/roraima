@@ -5,9 +5,9 @@
  *
  * @package    Roraima
  * @subpackage nomdefespparpre
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: actions.class.php 39571 2010-07-21 17:05:33Z cramirez $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -16,7 +16,7 @@ class nomdefespparpreActions extends autonomdefespparpreActions
 
   // Para incluir funcionalidades al executeEdit()
   /**
-   * Función para colocar el codigo necesario en  
+   * Función para colocar el codigo necesario en
    * el proceso de edición.
    * Aquí se pueden buscar datos adicionales que necesite la vista
    * Esta función es parte de la acción executeEdit, que maneja tanto
@@ -148,12 +148,13 @@ class nomdefespparpreActions extends autonomdefespparpreActions
   }
 
 
-  
-  
-  
+
+
+
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -214,9 +215,9 @@ class nomdefespparpreActions extends autonomdefespparpreActions
   }
 
   /**
-   * Función para colocar el codigo necesario para 
+   * Función para colocar el codigo necesario para
    * el proceso de guardar.
-   * Esta función debe retornar un valor igual a -1 si no hubo 
+   * Esta función debe retornar un valor igual a -1 si no hubo
    * Inconvenientes al guardar, y != de -1 si existe algún error.
    * Si es diferente de -1 el valor devuelto debe ser un código de error
    * Válido que exista en el archivo config/errores.yml
@@ -226,13 +227,15 @@ class nomdefespparpreActions extends autonomdefespparpreActions
   {
   	$clasemodelo->getPoranoant()==1 ? $clasemodelo->setPoranoant('S') : $clasemodelo->setPoranoant('N');
 	$clasemodelo->getAguicom()==1 ? $clasemodelo->setAguicom('S') : $clasemodelo->setAguicom('N');
+        $clasemodelo->getTotret()==1 ? $clasemodelo->setTotret('S') : $clasemodelo->setTotret('N');
+        $clasemodelo->getPormesant()==1 ? $clasemodelo->setPormesant('S') : $clasemodelo->setPormesant('N');
     return parent::saving($clasemodelo);
   }
 
   /**
-   * Función para colocar el codigo necesario para 
+   * Función para colocar el codigo necesario para
    * el proceso de eliminar.
-   * Esta función debe retornar un valor igual a -1 si no hubo 
+   * Esta función debe retornar un valor igual a -1 si no hubo
    * Inconvenientes al guardar, y != de -1 si existe algún error.
    * Si es diferente de -1 el valor devuelto debe ser un código de error
    * Válido que exista en el archivo config/errores.yml
