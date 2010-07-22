@@ -334,6 +334,8 @@ $this->Bitacora('Guardo');
 
      if (Tesoreria::validaPeriodoCerrado($fecaux)!=true)
      {
+       if (Tesoreria::validaPeriodoCerradoBanco($fecaux,$this->getRequestParameter('nrocta'))!=false)
+       {
 	 $tsmovban = new Tsmovban();
      $tsmovban->setNumcue($this->getRequestParameter('nrocta'));
      $tsmovban->setRefban($obj->getReflib());
@@ -345,6 +347,9 @@ $this->Bitacora('Guardo');
      $tsmovban->setStatus('C');
      $tsmovban->setStacon('N');
      $tsmovban->save();
+       }else {
+           $msj=$obj->getReflib();
+     }
      }
      else
      {
