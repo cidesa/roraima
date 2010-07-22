@@ -7,6 +7,8 @@
   {
      var monto=toFloat('nphispre_monpre');
      var moncuo=toFloat('nphispre_moncuota');
+     var nrocuo=toFloat('nphispre_nrocuota');
+     if (nrocuo==0){
       if (monto>0 && moncuo>0)
       {
       	var motmod=monto%moncuo;
@@ -18,5 +20,6 @@
 
       	$('nphispre_nrocuota').value=final;
       }
+     }
   }
 </script>
