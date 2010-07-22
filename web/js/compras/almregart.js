@@ -33,7 +33,7 @@ function salvarmontos()
     var monact="cx"+"_"+fil+"_3";
     var num1=toFloat(monact);
 
-    if ($(codubi).value!="" && num1>0) {
+    if ($(codubi).value!="" && num1>=0) {
     var cadena=cadena + $(codubi).value+'_' + $(desubi).value+'_' + $(monact).value + '!';
     }
     fil++;
@@ -53,8 +53,9 @@ function salvarmontos()
 function distribuirExistencia()
 {
    var totalfilas=totalregistros('cx',1,10);//$('totalfilas').value;
-   if (totalfilas>0)
+   if ($('totalfilas').value!=0) //para chequear que el almacen tenga asociado ubicaciones
    {
+       $('divGrid').show();
 		 var j=$('fila').value;
 		 var haydist="ax"+"_"+j+"_8";
 		 if ($(haydist).value!="")
@@ -85,6 +86,7 @@ function distribuirExistencia()
   }
   else
   {
+    $('divGrid').hide();
   		alert("Este almacen no tiene ubicaciones asociadas...");
   }
 }
