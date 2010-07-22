@@ -383,10 +383,11 @@ $this->Bitacora('Guardo');
    {
       $c = new Criteria();
 
-      $sql="select a.codalm, b.nomubi,coalesce((select c.exiact from caartalmubi c where c.codart='".$codart."' and c.codalm='".$codalm."' and c.codubi=a.codubi),0) as exiact, a.codubi,a.id
-      FROM  caalmubi a,cadefubi b
+      $sql="select a.codubi, b.nomubi, a.exiact, a.codalm, a.id
+            FROM  caartalmubi a, cadefubi b
       where a.codubi=b.codubi
-      AND a.Codalm='".$codalm."' order by a.codubi";
+            and a.codalm='".$codalm."'and a.codart='".$codart."'
+            order by a.codubi";
     $resp = Herramientas::BuscarDatos($sql,&$per);
     $filas=count($per);
       $this->setVars();
@@ -661,13 +662,19 @@ $this->Bitacora('Guardo');
       $articulo=$this->getRequestParameter('articulo');
       $almacen=$this->getRequestParameter('almacen');
           $fila=$this->getRequestParameter('fil');
-         $totalfilas=0;
          $javascript="";
+
       $this->configGridAlmUbi($articulo,$almacen,$totalfilas);
+
+      $t= new Criteria();
+      $t->add(CaalmubiPeer::CODALM,$almacen);
+      $reg= CaalmubiPeer::doSelectOne($t);
+      if (!$reg) $totalfilas=0;
+      else $totalfilas=1;
 
       if ($totalfilas!=0)
       {
-      	$javascript="$('divGrid').show();";
+      	//$javascript="$('divGrid').show();";
       }
       $output = '[["javascript","'.$javascript.'",""],["fila","'.$fila.'",""],["totalfilas","'.$totalfilas.'",""]]';
       $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
