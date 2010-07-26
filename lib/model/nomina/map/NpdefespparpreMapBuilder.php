@@ -25,7 +25,7 @@ class NpdefespparpreMapBuilder {
 
 	public function doBuild()
 	{
-		$this->dbMap = Propel::getDatabaseMap('propel');
+		$this->dbMap = Propel::getDatabaseMap('npdefesppaprepropel');
 
 		$tMap = $this->dbMap->addTable('npdefespparpre');
 		$tMap->setPhpName('Npdefespparpre');
@@ -69,10 +69,6 @@ class NpdefespparpreMapBuilder {
 		$tMap->addColumn('AGUICOM', 'Aguicom', 'string', CreoleTypes::VARCHAR, false, 1);
 
 		$tMap->addColumn('APARTIRMES', 'Apartirmes', 'int', CreoleTypes::INTEGER, false, null);
-
-		$tMap->addColumn('TOTRET', 'Totret', 'string', CreoleTypes::VARCHAR, false, 1);
-
-		$tMap->addColumn('PORMESANT', 'Pormesant', 'string', CreoleTypes::VARCHAR, false, 1);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 

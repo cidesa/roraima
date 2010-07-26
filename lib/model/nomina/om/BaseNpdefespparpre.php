@@ -81,14 +81,6 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
 
 
 
-	protected $totret;
-
-
-
-	protected $pormesant;
-
-
-
 	protected $id;
 
 
@@ -225,20 +217,6 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
   {
 
     return $this->apartirmes;
-
-  }
-
-  public function getTotret()
-  {
-
-    return trim($this->totret);
-
-  }
-
-  public function getPormesant()
-  {
-
-    return trim($this->pormesant);
 
   }
 
@@ -429,26 +407,6 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
 
 	}
 
-	public function setTotret($v)
-	{
-
-    if ($this->totret !== $v) {
-        $this->totret = $v;
-        $this->modifiedColumns[] = NpdefespparprePeer::TOTRET;
-      }
-
-	}
-
-	public function setPormesant($v)
-	{
-
-    if ($this->pormesant !== $v) {
-        $this->pormesant = $v;
-        $this->modifiedColumns[] = NpdefespparprePeer::PORMESANT;
-      }
-
-	}
-
 	public function setId($v)
 	{
 
@@ -499,11 +457,7 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
 
       $this->apartirmes = $rs->getInt($startcol + 17);
 
-      $this->totret = $rs->getString($startcol + 18);
-
-      $this->pormesant = $rs->getString($startcol + 19);
-
-      $this->id = $rs->getInt($startcol + 20);
+      $this->id = $rs->getInt($startcol + 18);
 
       $this->resetModified();
 
@@ -511,7 +465,7 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 21;
+            return $startcol + 19;
     } catch (Exception $e) {
       throw new PropelException("Error populating Npdefespparpre object", $e);
     }
@@ -713,12 +667,6 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
 				return $this->getApartirmes();
 				break;
 			case 18:
-				return $this->getTotret();
-				break;
-			case 19:
-				return $this->getPormesant();
-				break;
-			case 20:
 				return $this->getId();
 				break;
 			default:
@@ -749,9 +697,7 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
 			$keys[15] => $this->getCodpar(),
 			$keys[16] => $this->getAguicom(),
 			$keys[17] => $this->getApartirmes(),
-			$keys[18] => $this->getTotret(),
-			$keys[19] => $this->getPormesant(),
-			$keys[20] => $this->getId(),
+			$keys[18] => $this->getId(),
 		);
 		return $result;
 	}
@@ -822,12 +768,6 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
 				$this->setApartirmes($value);
 				break;
 			case 18:
-				$this->setTotret($value);
-				break;
-			case 19:
-				$this->setPormesant($value);
-				break;
-			case 20:
 				$this->setId($value);
 				break;
 		} 	}
@@ -855,9 +795,7 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[15], $arr)) $this->setCodpar($arr[$keys[15]]);
 		if (array_key_exists($keys[16], $arr)) $this->setAguicom($arr[$keys[16]]);
 		if (array_key_exists($keys[17], $arr)) $this->setApartirmes($arr[$keys[17]]);
-		if (array_key_exists($keys[18], $arr)) $this->setTotret($arr[$keys[18]]);
-		if (array_key_exists($keys[19], $arr)) $this->setPormesant($arr[$keys[19]]);
-		if (array_key_exists($keys[20], $arr)) $this->setId($arr[$keys[20]]);
+		if (array_key_exists($keys[18], $arr)) $this->setId($arr[$keys[18]]);
 	}
 
 
@@ -883,8 +821,6 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(NpdefespparprePeer::CODPAR)) $criteria->add(NpdefespparprePeer::CODPAR, $this->codpar);
 		if ($this->isColumnModified(NpdefespparprePeer::AGUICOM)) $criteria->add(NpdefespparprePeer::AGUICOM, $this->aguicom);
 		if ($this->isColumnModified(NpdefespparprePeer::APARTIRMES)) $criteria->add(NpdefespparprePeer::APARTIRMES, $this->apartirmes);
-		if ($this->isColumnModified(NpdefespparprePeer::TOTRET)) $criteria->add(NpdefespparprePeer::TOTRET, $this->totret);
-		if ($this->isColumnModified(NpdefespparprePeer::PORMESANT)) $criteria->add(NpdefespparprePeer::PORMESANT, $this->pormesant);
 		if ($this->isColumnModified(NpdefespparprePeer::ID)) $criteria->add(NpdefespparprePeer::ID, $this->id);
 
 		return $criteria;
@@ -951,10 +887,6 @@ abstract class BaseNpdefespparpre extends BaseObject  implements Persistent {
 		$copyObj->setAguicom($this->aguicom);
 
 		$copyObj->setApartirmes($this->apartirmes);
-
-		$copyObj->setTotret($this->totret);
-
-		$copyObj->setPormesant($this->pormesant);
 
 
 		$copyObj->setNew(true);

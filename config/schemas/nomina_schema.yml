@@ -6848,12 +6848,6 @@ propel:
       size: 1
     apartirmes:
       type: INTEGER
-    totret:
-      type: VARCHAR
-      size: 1
-    pormesant:
-      type: VARCHAR
-      size: 1
     id:
       type: INTEGER
       required: true
