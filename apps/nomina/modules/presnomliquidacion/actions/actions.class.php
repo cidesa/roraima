@@ -54,7 +54,7 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
    * los datos del grid.
    *
    */
-  public function configGridAsigDeduc($codemp="",$codnom="",$categoria="",$fecegr="",$arrclau=array(),$salariointegral="",$estaliquidado=false)
+  public function configGridAsigDeduc($codemp="",$codnom="",$categoria="",$fecegr="",$arrclau=array(),$salariointegral="",$estaliquidado=false,$sp=0,$sn=0,$us=0,$si=0,$codret='')
   {
     $perasig=array();
     $perdeduc=array();
@@ -1026,7 +1026,7 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 				if(!$estaliquidado)
 				{
 					# NO TIENE LIQUIDACIONES CALCULADAS
-					$this->configGridAsigDeduc($codemp,$codnom,$categoria,$fechae,$arrclau,$salarioaguinaldos,$estaliquidado);
+					$this->configGridAsigDeduc($codemp,$codnom,$categoria,$fechae,$arrclau,$salarioaguinaldos,$estaliquidado,$sue311296,$sue180697,$ultimosueldo,$salariointegral,$tipret);
 					$this->getUser()->setAttribute('objasig',$this->npliquidacion_det->getObjasig());
 					$this->getUser()->setAttribute('objdeduc',$this->npliquidacion_det->getObjdeduc());
 					$js.="toAjaxUpdater('divgridasig',2,getUrlModulo()+'ajax','2');
@@ -1047,7 +1047,7 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 						$delemp=$codemp;
 					}
 
-					$this->configGridAsigDeduc($codemp,$codnom,$categoria,$fechae,$arrclau,$salarioaguinaldos,$estaliquidado);
+					$this->configGridAsigDeduc($codemp,$codnom,$categoria,$fechae,$arrclau,$salarioaguinaldos,$estaliquidado,$sue311296,$sue180697,$ultimosueldo,$salariointegral,$tipret);
 					$this->getUser()->setAttribute('objasig',$this->npliquidacion_det->getObjasig());
 					$this->getUser()->setAttribute('objdeduc',$this->npliquidacion_det->getObjdeduc());
 					$js.="toAjaxUpdater('divgridasig',2,getUrlModulo()+'ajax','2');
