@@ -7433,3 +7433,6 @@ propel:
     tipsaldiaant:
       type: VARCHAR
       size: 2
+    admpub:
+      type: VARCHAR
+      size: 1

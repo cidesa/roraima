@@ -4,95 +4,99 @@
 abstract class BaseNpdefespclaudet extends BaseObject  implements Persistent {
 
 
-	
+
 	protected static $peer;
 
 
-	
+
 	protected $codnom;
 
 
-	
+
 	protected $descripclau;
 
 
-	
+
 	protected $codpar;
 
 
-	
+
 	protected $codret;
 
 
-	
+
 	protected $totret;
 
 
-	
+
 	protected $numdiaant;
 
 
-	
+
 	protected $poranoant;
 
 
-	
+
 	protected $apartirmes;
 
 
-	
+
 	protected $pormesant;
 
 
-	
+
 	protected $tipsaldiaant;
 
 
-	
+
+	protected $admpub;
+
+
+
 	protected $id;
 
-	
+
 	protected $alreadyInSave = false;
 
-	
+
 	protected $alreadyInValidation = false;
 
-  
+
   public function getCodnom()
   {
 
     return trim($this->codnom);
 
   }
-  
+
   public function getDescripclau()
   {
 
     return trim($this->descripclau);
 
   }
-  
+
   public function getCodpar()
   {
 
     return trim($this->codpar);
 
   }
-  
+
   public function getCodret()
   {
 
     return trim($this->codret);
 
   }
-  
+
   public function getTotret()
   {
 
     return trim($this->totret);
 
   }
-  
+
   public function getNumdiaant($val=false)
   {
 
@@ -100,42 +104,49 @@ abstract class BaseNpdefespclaudet extends BaseObject  implements Persistent {
     else return $this->numdiaant;
 
   }
-  
+
   public function getPoranoant()
   {
 
     return trim($this->poranoant);
 
   }
-  
+
   public function getApartirmes()
   {
 
     return $this->apartirmes;
 
   }
-  
+
   public function getPormesant()
   {
 
     return trim($this->pormesant);
 
   }
-  
+
   public function getTipsaldiaant()
   {
 
     return trim($this->tipsaldiaant);
 
   }
-  
+
+  public function getAdmpub()
+  {
+
+    return trim($this->admpub);
+
+  }
+
   public function getId()
   {
 
     return $this->id;
 
   }
-	
+
 	public function setCodnom($v)
 	{
 
@@ -143,9 +154,9 @@ abstract class BaseNpdefespclaudet extends BaseObject  implements Persistent {
         $this->codnom = $v;
         $this->modifiedColumns[] = NpdefespclaudetPeer::CODNOM;
       }
-  
-	} 
-	
+
+	}
+
 	public function setDescripclau($v)
 	{
 
@@ -153,9 +164,9 @@ abstract class BaseNpdefespclaudet extends BaseObject  implements Persistent {
         $this->descripclau = $v;
         $this->modifiedColumns[] = NpdefespclaudetPeer::DESCRIPCLAU;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCodpar($v)
 	{
 
@@ -163,9 +174,9 @@ abstract class BaseNpdefespclaudet extends BaseObject  implements Persistent {
         $this->codpar = $v;
         $this->modifiedColumns[] = NpdefespclaudetPeer::CODPAR;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCodret($v)
 	{
 
@@ -173,9 +184,9 @@ abstract class BaseNpdefespclaudet extends BaseObject  implements Persistent {
         $this->codret = $v;
         $this->modifiedColumns[] = NpdefespclaudetPeer::CODRET;
       }
-  
-	} 
-	
+
+	}
+
 	public function setTotret($v)
 	{
 
@@ -183,9 +194,9 @@ abstract class BaseNpdefespclaudet extends BaseObject  implements Persistent {
         $this->totret = $v;
         $this->modifiedColumns[] = NpdefespclaudetPeer::TOTRET;
       }
-  
-	} 
-	
+
+	}
+
 	public function setNumdiaant($v)
 	{
 
@@ -193,9 +204,9 @@ abstract class BaseNpdefespclaudet extends BaseObject  implements Persistent {
         $this->numdiaant = Herramientas::toFloat($v);
         $this->modifiedColumns[] = NpdefespclaudetPeer::NUMDIAANT;
       }
-  
-	} 
-	
+
+	}
+
 	public function setPoranoant($v)
 	{
 
@@ -203,9 +214,9 @@ abstract class BaseNpdefespclaudet extends BaseObject  implements Persistent {
         $this->poranoant = $v;
         $this->modifiedColumns[] = NpdefespclaudetPeer::PORANOANT;
       }
-  
-	} 
-	
+
+	}
+
 	public function setApartirmes($v)
 	{
 
@@ -213,9 +224,9 @@ abstract class BaseNpdefespclaudet extends BaseObject  implements Persistent {
         $this->apartirmes = $v;
         $this->modifiedColumns[] = NpdefespclaudetPeer::APARTIRMES;
       }
-  
-	} 
-	
+
+	}
+
 	public function setPormesant($v)
 	{
 
@@ -223,9 +234,9 @@ abstract class BaseNpdefespclaudet extends BaseObject  implements Persistent {
         $this->pormesant = $v;
         $this->modifiedColumns[] = NpdefespclaudetPeer::PORMESANT;
       }
-  
-	} 
-	
+
+	}
+
 	public function setTipsaldiaant($v)
 	{
 
@@ -233,9 +244,19 @@ abstract class BaseNpdefespclaudet extends BaseObject  implements Persistent {
         $this->tipsaldiaant = $v;
         $this->modifiedColumns[] = NpdefespclaudetPeer::TIPSALDIAANT;
       }
-  
-	} 
-	
+
+	}
+
+	public function setAdmpub($v)
+	{
+
+    if ($this->admpub !== $v) {
+        $this->admpub = $v;
+        $this->modifiedColumns[] = NpdefespclaudetPeer::ADMPUB;
+      }
+
+	}
+
 	public function setId($v)
 	{
 
@@ -243,9 +264,9 @@ abstract class BaseNpdefespclaudet extends BaseObject  implements Persistent {
         $this->id = $v;
         $this->modifiedColumns[] = NpdefespclaudetPeer::ID;
       }
-  
-	} 
-  
+
+	}
+
   public function hydrate(ResultSet $rs, $startcol = 1)
   {
     try {
@@ -270,7 +291,9 @@ abstract class BaseNpdefespclaudet extends BaseObject  implements Persistent {
 
       $this->tipsaldiaant = $rs->getString($startcol + 9);
 
-      $this->id = $rs->getInt($startcol + 10);
+      $this->admpub = $rs->getString($startcol + 10);
+
+      $this->id = $rs->getInt($startcol + 11);
 
       $this->resetModified();
 
@@ -278,7 +301,7 @@ abstract class BaseNpdefespclaudet extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 11; 
+            return $startcol + 12;
     } catch (Exception $e) {
       throw new PropelException("Error populating Npdefespclaudet object", $e);
     }
@@ -289,8 +312,8 @@ abstract class BaseNpdefespclaudet extends BaseObject  implements Persistent {
   {
 
   }
-    
-  
+
+
   public function __call($m, $a)
     {
       $prefijo = substr($m,0,3);
@@ -304,7 +327,7 @@ abstract class BaseNpdefespclaudet extends BaseObject  implements Persistent {
 
     }
 
-	
+
 	public function delete($con = null)
 	{
 		if ($this->isDeleted()) {
@@ -326,7 +349,7 @@ abstract class BaseNpdefespclaudet extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	public function save($con = null)
 	{
 		if ($this->isDeleted()) {
@@ -348,7 +371,7 @@ abstract class BaseNpdefespclaudet extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	protected function doSave($con)
 	{
 		$affectedRows = 0; 		if (!$this->alreadyInSave) {
@@ -358,8 +381,8 @@ abstract class BaseNpdefespclaudet extends BaseObject  implements Persistent {
 						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = NpdefespclaudetPeer::doInsert($this, $con);
-					$affectedRows += 1; 										 										 
-					$this->setId($pk);  
+					$affectedRows += 1;
+					$this->setId($pk);
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpdefespclaudetPeer::doUpdate($this, $con);
@@ -369,17 +392,17 @@ abstract class BaseNpdefespclaudet extends BaseObject  implements Persistent {
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
-	} 
-	
+	}
+
 	protected $validationFailures = array();
 
-	
+
 	public function getValidationFailures()
 	{
 		return $this->validationFailures;
 	}
 
-	
+
 	public function validate($columns = null)
 	{
 		$res = $this->doValidate($columns);
@@ -392,7 +415,7 @@ abstract class BaseNpdefespclaudet extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	protected function doValidate($columns = null)
 	{
 		if (!$this->alreadyInValidation) {
@@ -414,14 +437,14 @@ abstract class BaseNpdefespclaudet extends BaseObject  implements Persistent {
 		return (!empty($failureMap) ? $failureMap : true);
 	}
 
-	
+
 	public function getByName($name, $type = BasePeer::TYPE_PHPNAME)
 	{
 		$pos = NpdefespclaudetPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->getByPosition($pos);
 	}
 
-	
+
 	public function getByPosition($pos)
 	{
 		switch($pos) {
@@ -456,6 +479,9 @@ abstract class BaseNpdefespclaudet extends BaseObject  implements Persistent {
 				return $this->getTipsaldiaant();
 				break;
 			case 10:
+				return $this->getAdmpub();
+				break;
+			case 11:
 				return $this->getId();
 				break;
 			default:
@@ -463,7 +489,7 @@ abstract class BaseNpdefespclaudet extends BaseObject  implements Persistent {
 				break;
 		} 	}
 
-	
+
 	public function toArray($keyType = BasePeer::TYPE_PHPNAME)
 	{
 		$keys = NpdefespclaudetPeer::getFieldNames($keyType);
@@ -478,19 +504,20 @@ abstract class BaseNpdefespclaudet extends BaseObject  implements Persistent {
 			$keys[7] => $this->getApartirmes(),
 			$keys[8] => $this->getPormesant(),
 			$keys[9] => $this->getTipsaldiaant(),
-			$keys[10] => $this->getId(),
+			$keys[10] => $this->getAdmpub(),
+			$keys[11] => $this->getId(),
 		);
 		return $result;
 	}
 
-	
+
 	public function setByName($name, $value, $type = BasePeer::TYPE_PHPNAME)
 	{
 		$pos = NpdefespclaudetPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->setByPosition($pos, $value);
 	}
 
-	
+
 	public function setByPosition($pos, $value)
 	{
 		switch($pos) {
@@ -525,11 +552,14 @@ abstract class BaseNpdefespclaudet extends BaseObject  implements Persistent {
 				$this->setTipsaldiaant($value);
 				break;
 			case 10:
+				$this->setAdmpub($value);
+				break;
+			case 11:
 				$this->setId($value);
 				break;
 		} 	}
 
-	
+
 	public function fromArray($arr, $keyType = BasePeer::TYPE_PHPNAME)
 	{
 		$keys = NpdefespclaudetPeer::getFieldNames($keyType);
@@ -544,10 +574,11 @@ abstract class BaseNpdefespclaudet extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[7], $arr)) $this->setApartirmes($arr[$keys[7]]);
 		if (array_key_exists($keys[8], $arr)) $this->setPormesant($arr[$keys[8]]);
 		if (array_key_exists($keys[9], $arr)) $this->setTipsaldiaant($arr[$keys[9]]);
-		if (array_key_exists($keys[10], $arr)) $this->setId($arr[$keys[10]]);
+		if (array_key_exists($keys[10], $arr)) $this->setAdmpub($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setId($arr[$keys[11]]);
 	}
 
-	
+
 	public function buildCriteria()
 	{
 		$criteria = new Criteria(NpdefespclaudetPeer::DATABASE_NAME);
@@ -562,12 +593,13 @@ abstract class BaseNpdefespclaudet extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(NpdefespclaudetPeer::APARTIRMES)) $criteria->add(NpdefespclaudetPeer::APARTIRMES, $this->apartirmes);
 		if ($this->isColumnModified(NpdefespclaudetPeer::PORMESANT)) $criteria->add(NpdefespclaudetPeer::PORMESANT, $this->pormesant);
 		if ($this->isColumnModified(NpdefespclaudetPeer::TIPSALDIAANT)) $criteria->add(NpdefespclaudetPeer::TIPSALDIAANT, $this->tipsaldiaant);
+		if ($this->isColumnModified(NpdefespclaudetPeer::ADMPUB)) $criteria->add(NpdefespclaudetPeer::ADMPUB, $this->admpub);
 		if ($this->isColumnModified(NpdefespclaudetPeer::ID)) $criteria->add(NpdefespclaudetPeer::ID, $this->id);
 
 		return $criteria;
 	}
 
-	
+
 	public function buildPkeyCriteria()
 	{
 		$criteria = new Criteria(NpdefespclaudetPeer::DATABASE_NAME);
@@ -577,19 +609,19 @@ abstract class BaseNpdefespclaudet extends BaseObject  implements Persistent {
 		return $criteria;
 	}
 
-	
+
 	public function getPrimaryKey()
 	{
 		return $this->getId();
 	}
 
-	
+
 	public function setPrimaryKey($key)
 	{
 		$this->setId($key);
 	}
 
-	
+
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
@@ -613,13 +645,15 @@ abstract class BaseNpdefespclaudet extends BaseObject  implements Persistent {
 
 		$copyObj->setTipsaldiaant($this->tipsaldiaant);
 
+		$copyObj->setAdmpub($this->admpub);
+
 
 		$copyObj->setNew(true);
 
-		$copyObj->setId(NULL); 
+		$copyObj->setId(NULL);
 	}
 
-	
+
 	public function copy($deepCopy = false)
 	{
 				$clazz = get_class($this);
@@ -628,7 +662,7 @@ abstract class BaseNpdefespclaudet extends BaseObject  implements Persistent {
 		return $copyObj;
 	}
 
-	
+
 	public function getPeer()
 	{
 		if (self::$peer === null) {
@@ -637,4 +671,4 @@ abstract class BaseNpdefespclaudet extends BaseObject  implements Persistent {
 		return self::$peer;
 	}
 
-} 
+}

@@ -6,7 +6,7 @@
  * @package    Roraima
  * @subpackage nomdefespparpre
  * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id: actions.class.php 39676 2010-07-26 17:52:05Z cramirez $
+ * @version SVN: $Id: actions.class.php 39700 2010-07-26 22:03:07Z cramirez $
  *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -49,6 +49,7 @@ class nomdefespparpreActions extends autonomdefespparpreActions
       $reg = NpdefespclaudetPeer::doSelect($c);
       $this->obj = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/nomdefespparpre/'.sfConfig::get('sf_app_module_config_dir_name').'/gridclau');
       $this->obj[1][10]->setCombo($this->arrsal);
+      $this->obj[1][11]->setCombo(array('N'=>'NO','S'=>'SI'));
       $this->obj = $this->obj[0]->getConfig($reg);
       $this->npdefespparpre->setObjclau($this->obj);
 
