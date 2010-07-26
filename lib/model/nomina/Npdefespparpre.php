@@ -17,6 +17,7 @@ class Npdefespparpre extends BaseNpdefespparpre
 {
 	protected $nomnom='';
 	protected $desret='';
+        protected $objclau=array();
 	
 	public  function getNomnom()
 	{
