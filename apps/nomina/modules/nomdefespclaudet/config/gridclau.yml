@@ -1,0 +1,98 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                true
+  tabla:                   npdefespclaudet
+  anchogrid:               900
+  ancho:                   500
+  filas:                   1
+  titulo:                  ' Clausulas '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  DescripciÃ³n
+  tipo:                    t
+  nombrecampo:             descripclau
+  html:                    [size=24 ]
+  oculta:                  false
+  esgrabable:              true
+
+2:       # Columna 2
+  titulo:                  Partida
+  tipo:                    t
+  nombrecampo:             codpar
+  html:                    [size=24 ]
+  oculta:                  false
+  esgrabable:              true
+  #ajaxfila:                true
+  catalogo:                [nppartidas, sf_admin_edit_form, { codpar: 2, nompar: 3 }, Fordefgen_Nppartidas]
+3:       # Columna 3
+  titulo:                  Nombre Partida
+  tipo:                    t
+  nombrecampo:             nompar
+  html:                    [size=24 ]
+  oculta:                  false
+  esgrabable:              false
+4:       # Columna 4
+  titulo:                  Retiro
+  tipo:                    t
+  nombrecampo:             codret
+  html:                    [size=24 ]
+  oculta:                  false
+  esgrabable:              true
+  #ajaxfila:                true
+  catalogo:                [nptipret, sf_admin_edit_form, { codret: 4, desret: 5 }, Nptipret_codret]
+5:       # Columna 5
+  titulo:                  DescripciÃ³n Retiro
+  tipo:                    t
+  nombrecampo:             desret
+  html:                    [size=24 ]
+  oculta:                  false
+  esgrabable:              false
+6:       # Columna 6
+  titulo:                  Todos los Retiros
+  tipo:                    k
+  nombrecampo:             totret
+  html:                    [size=24 ]
+  oculta:                  false
+  esgrabable:              true
+7:       # Columna 7
+  titulo:                  Nro Dias Antiguedad
+  tipo:                    m
+  nombrecampo:             numdiaant
+  html:                    [size=8 ]
+  oculta:                  false
+  esgrabable:              true  
+8:       # Columna 8
+  titulo:                  Por aÃ±o Antiguedad
+  tipo:                    k
+  nombrecampo:             poranoant
+  html:                    [size=24 ]
+  oculta:                  false
+  esgrabable:              true
+9:       # Columna 9
+  titulo:                  Apartir Mes
+  tipo:                    m
+  nombrecampo:             apartirmes
+  html:                    [size=8 ]
+  oculta:                  false
+  esgrabable:              true
+10:       # Columna 10
+  titulo:                  Por Meses Antiguedad
+  tipo:                    k
+  nombrecampo:             pormesant
+  html:                    [size=24 ]
+  oculta:                  false
+  esgrabable:              true
+11:       # Columna 11
+  titulo:                  Tipo Salario
+  tipo:                    c
+  nombrecampo:             tipsaldiaant
+  html:                    [ ]
+  oculta:                  false
+  esgrabable:              true
+12:       # Columna 12
+  titulo:                  Antiguedad Administracion PÃºblica
+  tipo:                    c
+  nombrecampo:             admpub
+  html:                    [ ]
+  oculta:                  false
+  esgrabable:              true

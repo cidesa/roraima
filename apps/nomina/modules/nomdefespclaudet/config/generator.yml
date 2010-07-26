@@ -1,0 +1,37 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Npdefespclaudet
+    theme:            cidesaGenerator
+    fields:
+      codnom:
+        name:  NÃ³mina
+        msj_error: Debe Ingresar la Nomina
+        catalogo:
+          catalogoweb: Npnomina_nomdefespvar
+          clase: Npnomina
+          ajax: 0
+          parametros: getprincipal="getCodnom" getsecundario="getNomnom" campoprincipal="codnom" camposecundario="nomnom" campobase = "id"
+        params:  maxlength=3
+      gridclau:        { name: .}
+
+    list:
+      title:          Lista de Parametros para Prestaciones
+      display:        [=codnom, nomnom ]
+      filters:        [codnom]
+      fields:
+        nomnom:       { name: Nombre Nomina}
+      obj_actions:
+        _edit:        ~
+        _delete:      ~
+      max_pers:       5
+      sort:           codnom
+
+    edit:
+      title:          Edicion de Clausulas para Prestaciones
+      display:
+        Liquidacion de Prestaciones: [codnom, _gridclau ]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

@@ -76,7 +76,7 @@ generator:
         Bono Vacacional Fraccionado: [_ptipsalbonvacfra, factorbonvacfra]
         Vacaciones Vencidas:         [_ptipsalvacven, factorvacven]
         #Liquidacion de Prestaciones: [descripclau, codpar, codret, _ptipsaldiaant]
-        Liquidacion de Prestaciones: [_gridclau ]
+        #Liquidacion de Prestaciones: [_gridclau ]
 
 
 

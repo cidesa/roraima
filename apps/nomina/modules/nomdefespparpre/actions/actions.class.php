@@ -6,7 +6,7 @@
  * @package    Roraima
  * @subpackage nomdefespparpre
  * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id: actions.class.php 39700 2010-07-26 22:03:07Z cramirez $
+ * @version SVN: $Id: actions.class.php 39707 2010-07-26 23:02:39Z cramirez $
  *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -176,7 +176,7 @@ class nomdefespparpreActions extends autonomdefespparpreActions
    */
   public function saving($clasemodelo)
   {
-        $grid = Herramientas::CargarDatosGridv2($this,$this->obj);
+        /*$grid = Herramientas::CargarDatosGridv2($this,$this->obj);
         $objupdate = $grid[0];
             foreach($objupdate as $x)
             {
@@ -190,7 +190,7 @@ class nomdefespparpreActions extends autonomdefespparpreActions
             foreach($objdelete as $z)
             {
                     $z->delete();
-            }
+            }*/
 	$clasemodelo->getAguicom()==1 ? $clasemodelo->setAguicom('S') : $clasemodelo->setAguicom('N');
     return parent::saving($clasemodelo);
   }
