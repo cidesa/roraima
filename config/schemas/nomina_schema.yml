@@ -7407,4 +7407,35 @@ propel:
       required: true
       primaryKey: true
       autoIncrement: true
-      description: Identificador Ãnico del registro
+      description: Identificador Único del registro
+  npdefespclaudet:
+    codnom:
+      type: VARCHAR
+      size: 3
+    descripclau:
+      type: VARCHAR
+      size: 250
+    codpar:
+      type: VARCHAR
+      size: 32
+    codret:
+      type: VARCHAR
+      size: 2
+    totret:
+      type: VARCHAR
+      size: 1
+    numdiaant:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    poranoant:
+      type: VARCHAR
+      size: 1
+    apartirmes:
+      type: INTEGER
+    pormesant:
+      type: VARCHAR
+      size: 1
+    tipsaldiaant:
+      type: VARCHAR
+      size: 2

@@ -55,6 +55,7 @@ generator:
       ptipsalvacven:    { name: .}
       totret:           { name: Todos los Retiros , type: checkbox_tag}
       pormesant:        { name: Por Meses Antiguedad, type: checkbox_tag}
+      gridclau:        { name: .}
 
     list:
       title:          Lista de Parametros para Prestaciones
@@ -74,7 +75,9 @@ generator:
         Bono Fin de Año Fraccionado: [_ptipsalbonfinanofra, factorbonfinanofra, _paguinaldosmes]
         Bono Vacacional Fraccionado: [_ptipsalbonvacfra, factorbonvacfra]
         Vacaciones Vencidas:         [_ptipsalvacven, factorvacven]
-        Liquidacion de Prestaciones: [descripclau, codpar, codret, _ptipsaldiaant]
+        #Liquidacion de Prestaciones: [descripclau, codpar, codret, _ptipsaldiaant]
+        Liquidacion de Prestaciones: [_gridclau ]
+
 
 
       actions:
