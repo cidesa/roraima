@@ -25,7 +25,7 @@ class NpdefespparpreMapBuilder {
 
 	public function doBuild()
 	{
-		$this->dbMap = Propel::getDatabaseMap('npdefesppaprepropel');
+		$this->dbMap = Propel::getDatabaseMap('propel');
 
 		$tMap = $this->dbMap->addTable('npdefespparpre');
 		$tMap->setPhpName('Npdefespparpre');

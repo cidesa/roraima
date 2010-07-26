@@ -4,7 +4,7 @@
 abstract class BaseNpdefespparprePeer {
 
 
-	const DATABASE_NAME = 'npdefesppaprepropel';
+	const DATABASE_NAME = 'propel';
 
 
 	const TABLE_NAME = 'npdefespparpre';
