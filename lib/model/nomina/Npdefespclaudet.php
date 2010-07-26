@@ -15,6 +15,13 @@
  */ 
 class Npdefespclaudet extends BaseNpdefespclaudet
 {
+    protected $objclau=array();
+
+    public function getNomnom()
+    {
+        return H::GetX('Codnom','Npnomina','Nomnom',$this->codnom);
+    }
+
     public function getNompar()
     {
         return H::GetX('Codpar','Nppartidas','Nompar',$this->codpar);

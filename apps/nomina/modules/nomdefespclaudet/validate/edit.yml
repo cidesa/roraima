@@ -1,0 +1,18 @@
+methods:
+  post:
+   - "npdefespclaudet{codnom}"
+   
+names:
+  npdefespclaudet{codnom}:
+    required:  Yes
+    required_msg: El CÃ³digo de la NÃ³mina no puede estar en Blanco.
+    validators: Validator_codnom
+  
+
+Validator_codnom:
+    class: CidesaExistValidator
+    param:
+        class:        Npnomina
+        column:       codnom
+        unique_error: El CÃ³digo de la NÃ³mina debe Existir.
+
