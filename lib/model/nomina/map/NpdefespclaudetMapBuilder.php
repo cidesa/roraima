@@ -4,25 +4,25 @@
 
 class NpdefespclaudetMapBuilder {
 
-	
+
 	const CLASS_NAME = 'lib.model.nomina.map.NpdefespclaudetMapBuilder';
 
-	
+
 	private $dbMap;
 
-	
+
 	public function isBuilt()
 	{
 		return ($this->dbMap !== null);
 	}
 
-	
+
 	public function getDatabaseMap()
 	{
 		return $this->dbMap;
 	}
 
-	
+
 	public function doBuild()
 	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
@@ -54,7 +54,9 @@ class NpdefespclaudetMapBuilder {
 
 		$tMap->addColumn('TIPSALDIAANT', 'Tipsaldiaant', 'string', CreoleTypes::VARCHAR, false, 2);
 
+		$tMap->addColumn('ADMPUB', 'Admpub', 'string', CreoleTypes::VARCHAR, false, 1);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
-	} 
-} 
+	}
+}
