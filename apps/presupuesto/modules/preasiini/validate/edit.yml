@@ -6,7 +6,7 @@ names:
   cpasiini{codpre}:
     required:  Yes
     required_msg: El código presupuestario no puede estar en blanco
-    validators: Validator_existe
+    validators: Validator_existencia, Validator_existe
 
 Validator_existe:
     class: CidesaExistValidator
@@ -14,4 +14,11 @@ Validator_existe:
         class:        Cpdeftit
         column:       codpre
         unique_error: El código presupuestario no existe.
+
+Validator_existencia:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Cpasiini
+        column:       codpre
+        unique_error: El código ya Existe intente con otro
 

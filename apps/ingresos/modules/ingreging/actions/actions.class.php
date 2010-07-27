@@ -13,6 +13,7 @@
  */
 class ingregingActions extends autoingregingActions
 {
+    protected $codigo="";
 
   // Para incluir funcionalidades al executeEdit()
   /**
@@ -234,19 +235,26 @@ class ingregingActions extends autoingregingActions
         $c= new Criteria();
         $c->add(CideftitPeer::CODPRE,$codigo);
         $reg=CideftitPeer::doSelectOne($c);
-
         if ($reg)
         {
-          $output = '[["","",""]]';
+          $cc= new Criteria();
+          $cc->add(CiasiiniPeer::CODPRE,$codigo);
+          $reg2=CiasiiniPeer::doSelect($cc);
+            if ($reg2){
+                $javascript="";
+            }else{
+                $javascript="alert('Código presupuestario no tiene asignacion inicial');$(id).value=''; $(id).focus();";
+        }
         }
         else
         {
-          $javascript="alert('Código presupuestario no existe');$(id).value='';";
+          $javascript="alert('Código presupuestario no existe');$(id).value=''; $(id).focus();";
+        }
 
         $output = '[["javascript","'.$javascript.'",""]]';
         $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
         return sfView::HEADER_ONLY;
-        }
+
       break;
 
       case '3':
@@ -278,13 +286,15 @@ class ingregingActions extends autoingregingActions
   
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
   public function validateEdit()
   {
     $this->coderr =-1;
+    $this->codigo ="";
     if($this->getRequest()->getMethod() == sfRequest::POST){
 
        $this->cireging  =  $this->getCiregingOrCreate();
@@ -293,14 +303,50 @@ class ingregingActions extends autoingregingActions
 
        $this->coderr = Herramientas::ValidarGrid($grid);
 
+       $x=$grid[0];
+        $j=0;
+        while ($j<count($x))
+        {
+           if ($x[$j]->getCodpre()!="")
+           {
+              $this->codigo=$x[$j]->getCodpre();
+              $c= new Criteria();
+              $c->add(CideftitPeer::CODPRE,$x[$j]->getCodpre());
+              $c->addJoin(CideftitPeer::CODPRE,CiasiiniPeer::CODPRE);
+              $reg=CideftitPeer::doSelectOne($c);
+              if (!$reg)
+              {
+                $this->coderr=1509;
+                break;
+              }
+           }
+           $j++;
+        }
+
       if($this->coderr!=-1){
         return false;
       } else return true;
 
     }else return true;
+  }
 
-
-
+  public function handleErrorEdit()
+  {
+    $this->params=array();
+    $this->preExecute();
+    $this->cireging = $this->getCiregingOrCreate();
+    $this->updateCiregingFromRequest();
+	$this->updateError();
+    $this->labels = $this->getLabels();
+    if($this->getRequest()->getMethod() == sfRequest::POST)
+    {
+      if($this->coderr!=-1){
+        $err = Herramientas::obtenerMensajeError($this->coderr);
+        if($this->coderr==1509) $this->getRequest()->setError('',$err.' '.$this->codigo);
+        else $this->getRequest()->setError('',$err);
+  }
+    }
+    return sfView::SUCCESS;
   }
 
   /**
