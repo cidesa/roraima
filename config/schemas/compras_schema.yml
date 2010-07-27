@@ -483,7 +483,6 @@ propel:
       size: 8
     corpag:
       type: INTEGER
-      size: 8
     id:
       type: INTEGER
       required: true
