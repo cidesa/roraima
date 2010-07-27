@@ -1,0 +1,34 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                true
+  tabla:                   forniveles
+  anchogrid:               700
+  ancho:                   600
+  filas:                   1
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Tipo
+  tipo:                    c
+  nombrecampo:             catpar
+  html:                    [onChange=validarCmbTipo(this.id);]
+  esgrabable:              true
+2:       # Columna 2
+  titulo:                  Longitud
+  tipo:                    t
+  nombrecampo:             lonniv
+  html:                    [size="3" maxlength=2 ]
+  esgrabable:              true
+  ajaxgrid:                true
+3:       # Columna 3
+  titulo:                  Nombre Abreviado
+  tipo:                    t
+  nombrecampo:             nomabr
+  html:                    [size=3 maxlength=10 onBlur=convertirMayusculas(this.id)]
+  esgrabable:              true
+4:       # Columna 4
+  titulo:                  Nombre Extendido
+  tipo:                    t
+  nombrecampo:             nomext
+  html:                    [size=25 maxlength=50 onBlur=convertirMayusculas(this.id)]
+  esgrabable:              true

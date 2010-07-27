@@ -42,6 +42,8 @@ formulacion:
       Definicion de Reportes:                                 Instructivos
     INGRESOS:
       Definiciones Especificas:
+        Niveles Presupuestarios (Ingresos):                   prenivpreing
+        Niveles Presupuestarios (Egresos):                    PreNivPreFor
         Clasificador Presupuestario (Recursos):               PreTitIng
         Tipos de Financiamiento:                              pretitfin
       Formulación:
