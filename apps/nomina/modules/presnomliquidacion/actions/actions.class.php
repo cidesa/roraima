@@ -288,7 +288,55 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 			GROUP BY (case when B.PERDES=B.PERHAS then 'ADELANTO DE INTERESES SOBRE PREST. SOCIALES ART. 108 '||B.PERDES else 'INTERESES SOBRE PREST. SOCIALES ART. 108 '||B.PERDES||' - '||B.PERHAS end ),B.CODPAR
 			HAVING
 			SUM(A.ADEPRE)<>0
-			ORDER BY orden,DESCRIPCION DESC;";
+
+                        UNION ALL
+                        select 10 as orden,
+                        (case when a.poranoant='S' or a.pormesant='S' then
+                                (case when a.admpub='S'
+                                 then antpub((case when a.poranoant='S' then 'A'
+                                              when a.pormesant='S' then 'M' end),c.codemp,c.fecret,'S')+
+                                             (case when coalesce(a.apartirmes,0)>0 and
+                                                        antpub('M',c.codemp,c.fecret,'S')>=coalesce(a.apartirmes,0) and
+                                                        antpub('D',c.codemp,c.fecret,'S')>=1 then 1
+                                              else 0 end)
+                                 else antpub((case when a.poranoant='S' then 'A'
+                                              when a.pormesant='S' then 'M' end),c.codemp,c.fecret,'N')+
+                                              (case when coalesce(a.apartirmes,0)>0 and
+                                                        antpub('M',c.codemp,c.fecret,'N')>=coalesce(a.apartirmes,0) and
+                                                        antpub('D',c.codemp,c.fecret,'N')>=1 then 1
+                                               else 0 end) end)*a.numdiaant
+                        else a.numdiaant end) as dias,
+                        (case when a.poranoant='S' or a.pormesant='S' then
+                                (case when a.admpub='S'
+                                 then antpub((case when a.poranoant='S' then 'A'
+                                              when a.pormesant='S' then 'M' end),c.codemp,c.fecret,'S')+
+                                             (case when coalesce(a.apartirmes,0)>0 and
+                                                        antpub('M',c.codemp,c.fecret,'S')>=coalesce(a.apartirmes,0) and
+                                                        antpub('D',c.codemp,c.fecret,'S')>=1 then 1
+                                              else 0 end)
+                                 else antpub((case when a.poranoant='S' then 'A'
+                                              when a.pormesant='S' then 'M' end),c.codemp,c.fecret,'N')+
+                                              (case when coalesce(a.apartirmes,0)>0 and
+                                                        antpub('M',c.codemp,c.fecret,'N')>=coalesce(a.apartirmes,0) and
+                                                        antpub('D',c.codemp,c.fecret,'N')>=1 then 1
+                                               else 0 end) end)*a.numdiaant
+                        else a.numdiaant end)*
+                        ((case when a.tipsaldiaant='UD' then $us
+                          when a.tipsaldiaant='SI' then $si
+                          when a.tipsaldiaant='SN' then $sn
+                          when a.tipsaldiaant='SP' then $sp end)/30) as monto,
+                        a.descripclau as descripcion,
+                        a.codpar as partida
+                        from npdefespclaudet a
+                        left outer join nptipret b on a.codret=b.codret,
+                        nphojint c
+                        where
+                        (a.totret='S' or a.codret='$codret') and a.codnom='$codnom'
+                        and c.codemp='$codemp'
+
+			ORDER BY orden,DESCRIPCION DESC
+
+            ";
 
 	      if (H::BuscarDatos($sql,$arr))
 	      {
@@ -349,10 +397,10 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 			  $cont++;
 			}
 			#CALCULO DE LA CLAUSULA
-			if($arrclau)
+			/*if($arrclau)
 			{
 				$perasig[$i]=$arrclau;
-			}
+			}*/
 
 		  }
 	}else
