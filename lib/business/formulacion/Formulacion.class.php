@@ -2614,13 +2614,13 @@ public static function chequearDispIngresosCos($monfin,$codfin)
 		$fordefniv->setStaprc('N');
 		$fordefniv->save();
 
-		self::salvarNiveles($grid);
-		self::salvarPeriodos($fordefniv, $gridPer);
+		self::salvarNivelesfor($grid);
+		self::salvarPeriodosfor($fordefniv, $gridPer);
 
 		return -1;
 	}
 
-        public static function salvarNiveles($grid) {
+        public static function salvarNivelesfor($grid) {
 		$forniveles=$grid[0];
 
 		foreach($forniveles as $key => $fornivel) {
@@ -2635,7 +2635,7 @@ public static function chequearDispIngresosCos($monfin,$codfin)
 		}
 	}
 
-	 public static function salvarPeriodos($fordefniv, $gridPer) {
+	 public static function salvarPeriodosfor($fordefniv, $gridPer) {
 	 	$forperejes = $gridPer[0];
 
 		foreach ($forperejes as $forpereje) {
