@@ -385,19 +385,22 @@ ALTER TABLE ".$this->quoteIdentifier($table->getName())." ADD CONSTRAINT ".$this
         }
     }
 
-    protected function addColumn($colname, &$script) {
+    protected function addColumn($colname, &$script, $notnull=true) {
 
         $table = $this->getTable();
         $platform = $this->getPlatform();
 
         foreach ($table->getColumns() as $col) {
             if($col->getName() == $colname) {
-                if($col->getName()=='id') {
-                    $lines = $this->getColumnDDL($col)." DEFAULT nextval('".(strtolower($table->getSequenceName()))."'::regclass)";
-                }
-                else $lines = $this->getColumnDDL($col);
 
-                $script .= "
+              if(!$notnull) $col->setNotNull(false);
+
+              if($col->getName()=='id') {
+                  $lines = $this->getColumnDDL($col)." DEFAULT nextval('".(strtolower($table->getSequenceName()))."'::regclass)";
+              }
+              else $lines = $this->getColumnDDL($col);
+
+              $script .= "
 ALTER TABLE ".$this->quoteIdentifier($table->getName())." ADD ".$lines.";
         ";
 
@@ -488,7 +491,7 @@ COMMENT ON COLUMN ".$this->quoteIdentifier($table->getName()).".".$this->quoteId
 
                     // El campo no existe en la base de datos
                     // Se debe crear el campo nuevos en la tabla
-                    $this->addColumn($columnname,&$script);
+                    $this->addColumn($columnname,&$script, false);
                 }
                 else {
                     
