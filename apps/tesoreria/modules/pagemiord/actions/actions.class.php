@@ -1210,7 +1210,7 @@ $this->Bitacora('Guardo');
     $col12->setEsNumerico(true);
     $col12->setJScript('onKeypress="entermonto_b(event,this.id)"');
     $col12->setHTML('size="15"');
-    $col12->setEsTotal(true,'totiva');
+    $col12->setEsTotal(true,'totimp');
 
     $col13 = new Columna('IVA Retenido');
     $col13->setTipo(Columna::MONTO);
@@ -1221,7 +1221,7 @@ $this->Bitacora('Guardo');
     $col13->setEsNumerico(true);
     $col13->setJScript('onKeypress="entermonto_b(event,this.id)"');
     $col13->setHTML(' size="15"');
-    $col13->setEsTotal(true,'totimp');
+    $col13->setEsTotal(true,'totiva');
 
     $col14 = new Columna('1x100');
     $col14->setTipo(Columna::CHECK);
