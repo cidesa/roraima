@@ -1213,6 +1213,9 @@
 1508:
     cod: 1508
     msj: La referencia no puede estar en Blanco
+1509:
+    cod: 1509
+    msj: EL Codigo Presupuestario no existe o no Tiene Asignacion Inicial
 
 ########## Atencion al Ciudadano ########
 1400:

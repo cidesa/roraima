@@ -13,7 +13,7 @@
  */
 class ingtraslaActions extends autoingtraslaActions
 {
-
+   protected $codigo="";
   // Para incluir funcionalidades al executeEdit()
   /**
    * Función para colocar el codigo necesario en
@@ -291,6 +291,7 @@ class ingtraslaActions extends autoingtraslaActions
   public function validateEdit()
   {
     $this->coderr =-1;
+    $this->codigo="";
     if($this->getRequest()->getMethod() == sfRequest::POST){
 
        $this->citrasla  =  $this->getCitraslaOrCreate();
@@ -299,6 +300,38 @@ class ingtraslaActions extends autoingtraslaActions
 
        $this->coderr = Herramientas::ValidarGrid($grid);
 
+       $x=$grid[0];
+        $j=0;
+        while ($j<count($x))
+        {
+           if ($x[$j]->getCodori()!="")
+           {
+              $this->codigo=$x[$j]->getCodori();
+              $c= new Criteria();
+              $c->add(CideftitPeer::CODPRE,$x[$j]->getCodori());
+              $c->addJoin(CideftitPeer::CODPRE,CiasiiniPeer::CODPRE);
+              $reg=CideftitPeer::doSelectOne($c);
+              if (!$reg)
+              {
+                $this->coderr=1509;
+                break;
+              }
+           }
+           if ($x[$j]->getCoddes()!="")
+           {
+              $this->codigo=$x[$j]->getCoddes();
+              $c= new Criteria();
+              $c->add(CideftitPeer::CODPRE,$x[$j]->getCoddes());
+              $reg=CideftitPeer::doSelectOne($c);
+              if (!$reg)
+              {
+                $this->coderr=1340;
+                break;
+              }
+           }
+           $j++;
+        }
+
       if($this->coderr!=-1){
         return false;
       } else return true;
@@ -306,7 +339,29 @@ class ingtraslaActions extends autoingtraslaActions
     }else return true;
   }
 
-
+  /**
+   * Función para manejar la captura de errores del negocio, tanto que se
+   * produzcan por algún validator y por un valor false retornado por el validateEdit
+   *
+   */
+  public function handleErrorEdit()
+  {
+    $this->params=array();
+    $this->preExecute();
+    $this->citrasla = $this->getCitraslaOrCreate();
+    $this->updateCitraslaFromRequest();
+	$this->updateError();
+    $this->labels = $this->getLabels();
+    if($this->getRequest()->getMethod() == sfRequest::POST)
+    {
+      if($this->coderr!=-1){
+        $err = Herramientas::obtenerMensajeError($this->coderr);
+       if ($this->coderr==1509 || $this->coderr==1340) $this->getRequest()->setError('',$err.' '.$this->codigo);
+       else $this->getRequest()->setError('',$err);
+      }
+    }
+    return sfView::SUCCESS;
+  }
 
   protected function saving($citrasla)
   {
