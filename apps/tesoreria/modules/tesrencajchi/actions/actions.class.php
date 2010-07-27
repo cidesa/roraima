@@ -412,6 +412,7 @@ protected $codigo = -1;
    }//if ($opordpag)
 
    $a= new Criteria();
+   $a->add(TssalcajPeer::CODCAJ,$opordpag->getCodcajchi());
    $a->add(TssalcajPeer::FECSAL,$opordpag->getFecemi(),Criteria::LESS_EQUAL);
    $data= TssalcajPeer::doSelect($a);
    if ($data)
@@ -561,6 +562,20 @@ protected $codigo = -1;
          { $resul->setFecanu($fec);}
          $resul->setDesanu($desanu);
          $resul->setStatus('A');
+
+           $a= new Criteria();
+           $a->add(TssalcajPeer::CODCAJ,$resul->getCodcajchi());
+           $a->add(TssalcajPeer::FECSAL,$resul->getFecemi(),Criteria::LESS_EQUAL);
+           $data= TssalcajPeer::doSelect($a);
+           if ($data)
+           {
+             foreach ($data as $obj)
+             {
+               $obj->setStasal('P');
+               $obj->save();
+             }
+            }
+
          $resul->save();
       }
       else
