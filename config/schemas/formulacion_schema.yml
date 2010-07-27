@@ -1513,3 +1513,32 @@ propel:
       type: INTEGER
       required: true
       autoIncrement: true
+  forpereje:
+    fecini:
+      type: DATE
+      required: true
+    feccie:
+      type: DATE
+      required: true
+    pereje:
+      type: VARCHAR
+      size: 2
+      required: true
+    fecdes:
+      type: DATE
+      required: true
+    fechas:
+      type: DATE
+      required: true
+    cerrado:
+      type: VARCHAR
+      size: 1
+    estper:
+      type: VARCHAR
+      size: 1
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro

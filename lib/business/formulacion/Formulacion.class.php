@@ -4,9 +4,9 @@
  *
  * @package    Roraima
  * @subpackage facturacion
- * @author     $Author:lhernandez $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id:Formulacion.class.php 32397 2009-09-01 19:18:37Z lhernandez $
- * 
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: Formulacion.class.php 39726 2010-07-27 16:34:04Z cramirez $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -609,7 +609,7 @@ class Formulacion
                    {
                      return 316;
                    }
-                   
+
                    if ($registro[$l]->getCanins()==0)
                    {
                        return 317;
@@ -1743,6 +1743,911 @@ public static function salvarFordefest($estado)
       }
     }
   }
+
+ public static function cargarPeriodos($codcat,$codpar,$cadena,&$acum)
+ {
+   $periodos=array();
+   $acum=0;
+
+   if ($cadena==''){
+       $c = new Criteria();
+       $c->add(ForperotrcrePeer::CODCAT,$codcat);
+       $c->add(ForperotrcrePeer::CODPAREGR,$codpar);
+       $reg= ForperotrcrePeer::doSelect($c);
+       if ($reg)
+       {
+           $i=0;
+           foreach ($reg as $obj)
+           {
+             $periodos[$i]["perpre"]=$obj->getPerpre();
+             $periodos[$i]["monper"]=number_format($obj->getMonper(),2,',','.');
+             $periodos[$i]["id"]=9;
+
+             $acum=$acum+ $obj->getMonper();
+             $i++;
+
+           }
+       }else {
+           $i=0;
+           while ($i<12)
+           {
+             $periodos[$i]["perpre"]=str_pad($i+1,2,'0',STR_PAD_LEFT);
+             $periodos[$i]["monper"]="0,00";
+             $periodos[$i]["id"]=9;
+             $i++;
+           }
+       }
+   }else {
+      $cadenaubi=split('!',$cadena);
+      $r=0;
+      while ($r<(count($cadenaubi)-1))
+      {
+        $aux=$cadenaubi[$r];
+        $aux2=split('_',$aux);
+
+        $periodos[$r]["perpre"]=$aux2[0];
+        $periodos[$r]["monper"]=$aux2[1];
+        $periodos[$r]["id"]=9;
+
+        $acum=$acum + H::toFloat($aux2[1]);
+        $r++;
+      }
+   }
+
+   return $periodos;
+ }
+
+ public static function cargarFuentes($codcat,$codpar,$cadena)
+ {
+   $fuentes=array();
+   $result=array();
+
+   if ($cadena==''){
+     $sql="select a.codfin as codigo,b.nomext as nombre , sum(a.montoing)as monto from foringdisfuefin a, fortipfin b where a.codfin = b.codfin group by a.codfin,b.nomext order by a.codfin";
+     if (Herramientas::BuscarDatos($sql,&$result))
+     {
+       $i=0;
+       $resul=array();
+          while ($i<count($result))
+          {
+            //Codigo y descripcion de la fuente de financiamiento
+            $fuentes[$i]["codparing"]=$result[$i]["codigo"];
+            $fuentes[$i]["nomext"]=$result[$i]["nombre"];
+            $fuentes[$i]["monfin"]="0,00";
+
+            // Buscar lo asignado a la fuente de financiamiento
+            $asignado=0;
+            $sql1="select sum(montoing) as  asignado From ForIngDisfuefin Where Codfin  = '".$result[$i]["codigo"]."'";
+            if (Herramientas::BuscarDatos($sql1,&$resul))
+            {
+              $asignado=$resul[0]["asignado"];
+            }
+
+            //Calcular lo gastado
+            $gastadootr=0;
+            $sql2="select sum(b.monfin) as gastado from forfinotrcre b where b.codparing='".$result[$i]["codigo"]."' and concat(b.codcat,b.codparegr) in (select concat(codcat,codparegr) from forotrcrepre) group by b.codparing";
+            if (Herramientas::BuscarDatos($sql2,&$resul))
+            {
+              $gastadootr=$resul[0]["gastado"];
+            }
+
+            $gastadoobras=0;
+            $sql3="select sum(b.monfin) as gastado from forfinobr b Where b.codparing='".$result[$i]["codigo"]."' and concat(b.codcat,b.codparegr) in (select concat(codcat,codparegr) from forpreobr) group by b.codparing";
+            if (Herramientas::BuscarDatos($sql3,&$resul))
+            {
+              $gastadoobras=$resul[0]["gastado"];
+            }
+
+            $disponible=$asignado - ($gastadootr + $gastadoobras);
+
+            $fuentes[$i]["mondis"]=number_format($disponible,2,',','.');
+            $fuentes[$i]["monasi"]=number_format($asignado,2,',','.');
+
+            $fuentes[$i]["id"]=8;
+            $i++;
+          }
+     }
+   }else {
+      $cadenafue=split('!',$cadena);
+      $r=0;
+      while ($r<(count($cadenafue)-1))
+      {
+        $aux=$cadenafue[$r];
+        $aux2=split('_',$aux);
+
+        $fuentes[$r]["codparing"]=$aux2[0];
+        $fuentes[$r]["nomext"]=$aux2[1];
+        $fuentes[$r]["monfin"]=$aux2[2];
+        $fuentes[$r]["mondis"]=$aux2[3];
+        $fuentes[$r]["monasi"]=$aux2[4];
+        $fuentes[$r]["id"]=8;
+
+        $r++;
+      }
+   }
+
+   return $fuentes;
+ }
+
+ public static function chequearDispIngresos($monfin,$codfin,$codcat)
+ {
+   $chequeardispingresos=false;
+   if ($monfin!='')
+   {
+      $asignado=0;
+      $sql="select sum(montoing) as  asignado From foringdisfuefin where codfin='".$codfin."'";
+      if (Herramientas::BuscarDatos($sql,&$resul))
+      {
+        $asignado=$resul[0]["asignado"];
+      }
+
+      $gastado=0;
+      $sql1="select sum(b.monfin) as gastado from forfinotrcre b where b.codparing='".$codfin."' and concat(b.codcat,b.codparegr) in (select concat(codcat,codparegr) from forotrcrepre) group by b.codparing";
+      if (Herramientas::BuscarDatos($sql1,&$resul))
+      {
+        $gastado=$resul[0]["gastado"];
+      }
+
+      $gastadootr=0;
+      $sql2="select sum(b.monfin) as gastado from forfinotrcre b Where b.CodParIng = '".$codfin."' and b.codcat='".$codcat."' and concat(b.codcat,b.codparegr) not in (select concat(codcat,codparegr) from forotrcrepre) group by b.codparing";
+      if (Herramientas::BuscarDatos($sql2,&$resul))
+      {
+        $gastadotmpotr=$resul[0]["gastado"];
+      }
+
+      $gastadoobras=0;
+      $sql3="select sum(b.monfin) as gastado from forfinobr b Where b.codparing='".$codfin."' and concat(b.codcat,b.codparegr) in (select concat(codcat,codparegr) from forpreobr) group by b.codparing";
+      if (Herramientas::BuscarDatos($sql3,&$resul))
+      {
+        $gastadoobras=$resul[0]["gastado"];
+      }
+
+      $diferencia = $asignado - ($gastado + $gastadoobras + $gastadootr);
+
+      if ($diferencia>=$monfin)
+      {
+        $chequeardispingresos=true;
+      }else {
+        $chequeardispingresos=false;
+      }
+   }
+
+   return $chequeardispingresos;
+ }
+
+
+  public static function validarCodcat($codcat)
+  {
+     $formato=H::getObtener_FormatoCategoria_Formulacion();
+     $posrup1=Herramientas::instr($formato,'-',0,1);
+     $posrup1=$posrup1-1;
+     if (strlen(trim($codcat))<$posrup1)
+     {
+       return 101;
+     }
+
+    Herramientas::FormarCodigoPadre($codcat,&$nivelcodigo,&$ultimo,$formato);
+
+    $c= new Criteria();
+    $c->add(FordefcatprePeer::CODCAT,$ultimo);
+    $fordefcatpre = FordefcatprePeer::doSelectOne($c);
+    if (!$fordefcatpre)
+    {
+      if ($nivelcodigo == 0)
+            return 100;
+    }
+
+  return -1;
+
+  }
+
+public static function cargarPeriodosMet($codmet,$codpro,$cadena,&$acum)
+ {
+   $periodos=array();
+   $acum=0;
+
+   if ($cadena==''){
+       $c = new Criteria();
+       $c->add(FordisperproPeer::CODMET,$codmet);
+       $c->add(FordisperproPeer::CODPRO,$codpro);
+       $reg= FordisperproPeer::doSelect($c);
+       if ($reg)
+       {
+           $i=0;
+           foreach ($reg as $obj)
+           {
+             $periodos[$i]["perpre"]=$obj->getPerpre();
+             $periodos[$i]["canper"]=number_format($obj->getCanper(),2,',','.');
+             $periodos[$i]["id"]=9;
+
+             $acum=$acum+ $obj->getCanper();
+             $i++;
+
+           }
+       }else {
+           $i=0;
+           while ($i<12)
+           {
+             $periodos[$i]["perpre"]=str_pad($i+1,2,'0',STR_PAD_LEFT);
+             $periodos[$i]["canper"]="0,00";
+             $periodos[$i]["id"]=9;
+             $i++;
+           }
+       }
+   }else {
+      $cadenaper=split('!',$cadena);
+      $r=0;
+      while ($r<(count($cadenaper)-1))
+      {
+        $aux=$cadenaper[$r];
+        $aux2=split('_',$aux);
+
+        $periodos[$r]["perpre"]=$aux2[0];
+        $periodos[$r]["canper"]=$aux2[1];
+        $periodos[$r]["id"]=9;
+
+        $acum=$acum + H::toFloat($aux2[1]);
+        $r++;
+      }
+   }
+
+   return $periodos;
+ }
+
+ public static function grabarMetasProductos($clasemodelo,$grid)
+ {
+   $clasemodelo->save();
+
+   $x=$grid[0];
+   $j=0;
+   while ($j<count($x))
+   {
+       if ($x[$j]->getCodpro()!='' && $x[$j]->getCanpro()>0)
+       {
+            $x[$j]->setCodmet($clasemodelo->getCodmet());
+
+           if ($x[$j]->getCantidades()!='')
+           {
+            $c = new Criteria();
+            $c->add(FordisperproPeer::CODMET,$clasemodelo->getCodmet());
+            $c->add(FordisperproPeer::CODPRO,$x[$j]->getCodpro());
+            FordisperproPeer::doDelete($c);
+
+            $cadenaper=split('!',$x[$j]->getCantidades());
+            $r=0;
+            while ($r<(count($cadenaper)-1))
+            {
+                $aux=$cadenaper[$r];
+                $aux2=split('_',$aux);
+                if ($aux2[0]!="")
+                {
+                  $fordisperpro= new Fordisperpro();
+                  $fordisperpro->setCodmet($clasemodelo->getCodmet());
+                  $fordisperpro->setCodpro($x[$j]->getCodpro());
+                  $fordisperpro->setPerpre($aux2[0]);
+                  $fordisperpro->setCanper($aux2[1]);
+                  $fordisperpro->save();
+                }
+                $r++;
+            }
+          }
+
+            $x[$j]->save();
+       }
+
+      $j++;
+    }
+
+    $z=$grid[1];
+    $j=0;
+    if (!empty($z[$j]))
+    {
+        while ($j<count($z))
+        {
+            $c = new Criteria();
+            $c->add(FordisperproPeer::CODMET,$clasemodelo->getCodmet());
+            $c->add(FordisperproPeer::CODPRO,$z[$j]->getCodpro());
+            FordisperproPeer::doDelete($c);
+
+            $z[$j]->delete();
+          $j++;
+        }
+    }
+ }
+
+ public static function grabarCategoriaUnidades($clasemodelo,$grid)
+ {
+   $x=$grid[0];
+   $j=0;
+   while ($j<count($x))
+   {
+       if ($x[$j]->getCoduni()!='')
+       {
+            $x[$j]->setCodcat($clasemodelo->getCodcat());
+            $x[$j]->save();
+       }
+
+      $j++;
+    }
+
+    $z=$grid[1];
+    $j=0;
+    if (!empty($z[$j]))
+    {
+        while ($j<count($z))
+        {
+          $y= new Criteria();
+          $y->add(ForasounicatPeer::CODCAT,$clasemodelo->getCodcat());
+          $y->add(ForasounicatPeer::CODUNI,$z[$j]->getCoduni());
+          ForasounicatPeer::doDelete($y);
+            //$z[$j]->delete();
+          $j++;
+        }
+    }
+ }
+
+
+ public static function grabarMetasObjetivos($clasemodelo,$grid)
+ {
+   $x=$grid[0];
+   $j=0;
+   while ($j<count($x))
+   {
+       if ($x[$j]->getCodmet()!='')
+       {
+            $x[$j]->setCodobj($clasemodelo->getCodobj());
+            $x[$j]->save();
+       }
+
+      $j++;
+    }
+
+    $z=$grid[1];
+    $j=0;
+    if (!empty($z[$j]))
+    {
+        while ($j<count($z))
+        {
+          $y= new Criteria();
+          $y->add(ForasometobjPeer::CODOBJ,$clasemodelo->getCodobj());
+          $y->add(ForasometobjPeer::CODMET,$z[$j]->getCodmet());
+          ForasometobjPeer::doDelete($y);
+            //$z[$j]->delete();
+          $j++;
+        }
+    }
+ }
+
+ public static function grabarMetasCategorias($clasemodelo,$grid)
+ {
+   $x=$grid[0];
+   $j=0;
+   while ($j<count($x))
+   {
+       if ($x[$j]->getCodmet()!='')
+       {
+            $x[$j]->setCodcat($clasemodelo->getCodcat());
+            $x[$j]->save();
+       }
+
+      $j++;
+    }
+
+    $z=$grid[1];
+    $j=0;
+    if (!empty($z[$j]))
+    {
+        while ($j<count($z))
+        {
+          $y= new Criteria();
+          $y->add(ForasometcrePeer::CODCAT,$clasemodelo->getCodcat());
+          $y->add(ForasometcrePeer::CODMET,$z[$j]->getCodmet());
+          ForasometcrePeer::doDelete($y);
+            //$z[$j]->delete();
+          $j++;
+        }
+    }
+ }
+
+ public static function grabarMetasProductosActividades($clasemodelo,$grid)
+ {
+   $x=$grid[0];
+   $j=0;
+   while ($j<count($x))
+   {
+       if ($x[$j]->getCodact()!='')
+       {
+            $x[$j]->setCodmet($clasemodelo->getCodmet());
+            $x[$j]->setCodpro($clasemodelo->getCodpro());
+            $x[$j]->save();
+       }
+
+      $j++;
+    }
+
+    $z=$grid[1];
+    $j=0;
+    if (!empty($z[$j]))
+    {
+        while ($j<count($z))
+        {
+          $y= new Criteria();
+          $y->add(ForasoactproPeer::CODMET,$clasemodelo->getCodmet());
+          $y->add(ForasoactproPeer::CODPRO,$clasemodelo->getCodpro());
+          $y->add(ForasoactproPeer::CODACT,$z[$j]->getCodact());
+          ForasoactproPeer::doDelete($y);
+            //$z[$j]->delete();
+          $j++;
+        }
+    }
+ }
+
+ public static function cargarPeriodosCos($meta,$producto,$actividad,$articulo,$cadena,&$acum)
+ {
+   $periodos=array();
+   $acum=0;
+
+   if ($cadena==''){
+       $c = new Criteria();
+       $c->add(ForestdisperPeer::CODMET,$meta);
+       $c->add(ForestdisperPeer::CODPRO,$producto);
+       $c->add(ForestdisperPeer::CODACT,$actividad);
+       $c->add(ForestdisperPeer::CODART,$articulo);
+       $reg= ForestdisperPeer::doSelect($c);
+       if ($reg)
+       {
+           $i=0;
+           foreach ($reg as $obj)
+           {
+             $periodos[$i]["perpre"]=$obj->getPerpre();
+             $periodos[$i]["canper"]=number_format($obj->getCanper(),2,',','.');
+             $periodos[$i]["id"]=9;
+
+             $acum=$acum+ $obj->getCanper();
+             $i++;
+
+           }
+       }else {
+           $i=0;
+           while ($i<12)
+           {
+             $periodos[$i]["perpre"]=str_pad($i+1,2,'0',STR_PAD_LEFT);
+             $periodos[$i]["canper"]="0,00";
+             $periodos[$i]["id"]=9;
+             $i++;
+           }
+       }
+   }else {
+      $cadenaubi=split('!',$cadena);
+      $r=0;
+      while ($r<(count($cadenaubi)-1))
+      {
+        $aux=$cadenaubi[$r];
+        $aux2=split('_',$aux);
+
+        $periodos[$r]["perpre"]=$aux2[0];
+        $periodos[$r]["canper"]=$aux2[1];
+        $periodos[$r]["id"]=9;
+
+        $acum=$acum + H::toFloat($aux2[1]);
+        $r++;
+      }
+   }
+
+   return $periodos;
+ }
+
+ public static function cargarFuentesCos($meta, $producto, $actividad, $articulo, $cadena)
+{
+   $fuentes=array();
+   $result=array();
+
+   if ($cadena==''){
+       $c = new Criteria();
+       $c->add(ForestfuefinPeer::CODMET,$meta);
+       $c->add(ForestfuefinPeer::CODPRO,$producto);
+       $c->add(ForestfuefinPeer::CODACT,$actividad);
+       $c->add(ForestfuefinPeer::CODART,$articulo);
+       $reg= ForestfuefinPeer::doSelect($c);
+       if ($reg)
+       {
+           $i=0;
+           foreach ($reg as $obj)
+           {
+             $fuentes[$i]["codparing"]=$obj->getCodparing();
+             $fuentes[$i]["nomparing"]=H::getX('CODPARING','Fordefparing','Nomparing',$obj->getCodparing());
+             $fuentes[$i]["monfin"]=number_format($obj->getMonfin(),2,',','.');
+             $periodos[$i]["id"]=9;
+             $i++;
+
+           }
+       }else {
+         $sql="Select a.codparing as codparing,b.nomparing as nomparing from forparing a, fordefparing b where a.codparing = b.codparing order by a.codparing";
+         if (Herramientas::BuscarDatos($sql,&$result))
+         {
+           $i=0;
+              while ($i<count($result))
+              {
+                //Codigo y descripcion de la fuente de financiamiento
+                $fuentes[$i]["codparing"]=$result[$i]["codparing"];
+                $fuentes[$i]["nomparing"]=$result[$i]["nomparing"];
+                $fuentes[$i]["monfin"]="0,00";
+                $fuentes[$i]["id"]=8;
+                $i++;
+              }
+         }
+       }
+   }else {
+      $cadenafue=split('!',$cadena);
+      $r=0;
+      while ($r<(count($cadenafue)-1))
+      {
+        $aux=$cadenafue[$r];
+        $aux2=split('_',$aux);
+
+        $fuentes[$r]["codparing"]=$aux2[0];
+        $fuentes[$r]["nomparing"]=$aux2[1];
+        $fuentes[$r]["monfin"]=$aux2[2];
+        $fuentes[$r]["id"]=8;
+
+        $r++;
+      }
+   }
+
+   return $fuentes;
+}
+
+public static function chequearDispIngresosCos($monfin,$codfin)
+ {
+   $chequeardispingresos=false;
+   if ($monfin!='')
+   {
+      $t= new Criteria();
+      $t->add(ForparingPeer::CODPARING,$codfin);
+      $reg=ForparingPeer::doSelectOne($t);
+      if ($reg)
+      {
+          if ($monfin>$reg->getMontodis())
+             $chequeardispingresos=false;
+          else $chequeardispingresos=true;
+      }else  $chequeardispingresos=false;
+   }else  $chequeardispingresos=false;
+
+   return $chequeardispingresos;
+ }
+
+ public static function grabarEstructuraCostos($clasemodelo,$grid)
+ {
+    $t= new Criteria();
+    $t->add(ForestcosPeer::CODMET,$clasemodelo->getCodmet());
+    $t->add(ForestcosPeer::CODPRO,$clasemodelo->getCodpro());
+    $reg=ForestcosPeer::doSelect($t);
+    if (!$reg) {
+
+       $x=$grid[0];
+       $j=0;
+       while ($j<count($x))
+       {
+           if ($x[$j]->getCodact()!='')
+           {
+               $forestcos= new Forestcos();
+               $forestcos->setCodmet($clasemodelo->getCodmet());
+               $forestcos->setCodpro($clasemodelo->getCodpro());
+               $forestcos->setCodact($x[$j]->getCodact());
+               $forestcos->setCanuni($x[$j]->getCanuni());
+               $forestcos->setCodart($x[$j]->getCodart());
+               $forestcos->setCodpar($x[$j]->getCodpar());
+               $forestcos->setCanart($x[$j]->getCanart());
+               if ($x[$j]->getCadenaper()!='')
+               {
+                  $f= new Criteria();
+                  $f->add(ForestdisperPeer::CODMET,$clasemodelo->getCodmet());
+                  $f->add(ForestdisperPeer::CODPRO,$clasemodelo->getCodpro());
+                  $f->add(ForestdisperPeer::CODACT,$x[$j]->getCodact());
+                  $f->add(ForestdisperPeer::CODART,$x[$j]->getCodart());
+                  ForestdisperPeer::doDelete($f);
+
+                  $cadenaper=split('!',$x[$j]->getCadenaper());
+                  $r=0;
+                  while ($r<(count($cadenaper)-1))
+                  {
+                    $aux=$cadenaper[$r];
+                    $aux2=split('_',$aux);
+
+                    $forestdisper= new Forestdisper();
+                    $forestdisper->setCodmet($clasemodelo->getCodmet());
+                    $forestdisper->setCodpro($clasemodelo->getCodpro());
+                    $forestdisper->setCodact($x[$j]->getCodact());
+                    $forestdisper->setCodart($x[$j]->getCodart());
+                    $forestdisper->setPerpre($aux2[0]);
+                    $forestdisper->setCanper(H::toFloat($aux2[1]));
+                    $forestdisper->save();
+
+                    $r++;
+                  }
+               }
+               $forestcos->setMonart($x[$j]->getMonart());
+               $forestcos->setTotpre($x[$j]->getTotpre());
+               $forestcos->setCodfin($x[$j]->getCodfin());
+               if ($x[$j]->getCadenafin()!='')
+               {
+                  $f= new Criteria();
+                  $f->add(ForestfuefinPeer::CODMET,$clasemodelo->getCodmet());
+                  $f->add(ForestfuefinPeer::CODPRO,$clasemodelo->getCodpro());
+                  $f->add(ForestfuefinPeer::CODACT,$x[$j]->getCodact());
+                  $f->add(ForestfuefinPeer::CODART,$x[$j]->getCodart());
+                  ForestfuefinPeer::doDelete($f);
+
+                  $cadenafin=split('!',$x[$j]->getCadenafin());
+                  $r=0;
+                  while ($r<(count($cadenafin)-1))
+                  {
+                    $aux=$cadenafin[$r];
+                    $aux2=split('_',$aux);
+
+                    $forestfuefin= new Forestfuefin();
+                    $forestfuefin->setCodmet($clasemodelo->getCodmet());
+                    $forestfuefin->setCodpro($clasemodelo->getCodpro());
+                    $forestfuefin->setCodact($x[$j]->getCodact());
+                    $forestfuefin->setCodart($x[$j]->getCodart());
+                    $forestfuefin->setCodparing($aux2[0]);
+                    $forestfuefin->setMonfin(H::toFloat($aux2[2]));
+                    $forestfuefin->save();
+
+                    $r++;
+                  }
+               }
+               $forestcos->setCodtip($x[$j]->getCodtip());
+               $forestcos->setObserv($x[$j]->getObserv());
+               $forestcos->save();
+           }
+
+          $j++;
+        }
+    }else {
+       $x=$grid[0];
+       $j=0;
+       while ($j<count($x))
+       {
+           if ($x[$j]->getCodact()!='')
+           {
+                $x[$j]->setCodmet($clasemodelo->getCodmet());
+                $x[$j]->setCodpro($clasemodelo->getCodpro());
+                $x[$j]->setCodact($x[$j]->getCodact());
+                $x[$j]->setCodart($x[$j]->getCodart());
+                if ($x[$j]->getCadenaper()!='')
+               {
+                  $f= new Criteria();
+                  $f->add(ForestdisperPeer::CODMET,$clasemodelo->getCodmet());
+                  $f->add(ForestdisperPeer::CODPRO,$clasemodelo->getCodpro());
+                  $f->add(ForestdisperPeer::CODACT,$x[$j]->getCodact());
+                  $f->add(ForestdisperPeer::CODART,$x[$j]->getCodart());
+                  ForestdisperPeer::doDelete($f);
+
+                  $cadenaper=split('!',$x[$j]->getCadenaper());
+                  $r=0;
+                  while ($r<(count($cadenaper)-1))
+                  {
+                    $aux=$cadenaper[$r];
+                    $aux2=split('_',$aux);
+
+                    $forestdisper= new Forestdisper();
+                    $forestdisper->setCodmet($clasemodelo->getCodmet());
+                    $forestdisper->setCodpro($clasemodelo->getCodpro());
+                    $forestdisper->setCodact($x[$j]->getCodact());
+                    $forestdisper->setCodart($x[$j]->getCodart());
+                    $forestdisper->setPerpre($aux2[0]);
+                    $forestdisper->setCanper(H::toFloat($aux2[1]));
+                    $forestdisper->save();
+
+                    $r++;
+                  }
+               }
+
+               if ($x[$j]->getCadenafin()!='')
+               {
+                  $f= new Criteria();
+                  $f->add(ForestfuefinPeer::CODMET,$clasemodelo->getCodmet());
+                  $f->add(ForestfuefinPeer::CODPRO,$clasemodelo->getCodpro());
+                  $f->add(ForestfuefinPeer::CODACT,$x[$j]->getCodact());
+                  $f->add(ForestfuefinPeer::CODART,$x[$j]->getCodart());
+                  ForestfuefinPeer::doDelete($f);
+
+                  $cadenafin=split('!',$x[$j]->getCadenafin());
+                  $r=0;
+                  while ($r<(count($cadenafin)-1))
+                  {
+                    $aux=$cadenafin[$r];
+                    $aux2=split('_',$aux);
+
+                    $forestfuefin= new Forestfuefin();
+                    $forestfuefin->setCodmet($clasemodelo->getCodmet());
+                    $forestfuefin->setCodpro($clasemodelo->getCodpro());
+                    $forestfuefin->setCodact($x[$j]->getCodact());
+                    $forestfuefin->setCodart($x[$j]->getCodart());
+                    $forestfuefin->setCodparing($aux2[0]);
+                    $forestfuefin->setMonfin(H::toFloat($aux2[2]));
+                    $forestfuefin->save();
+
+                    $r++;
+                  }
+               }
+               $x[$j]->save();
+           }
+
+          $j++;
+        }
+    }
+ }
+
+  public static function salvarNiveles($foringdefniv, $grid){
+    $t= new Criteria();
+    ForingnivelesPeer::doDelete($t);
+
+      $x=$grid[0];
+      $j=0;
+      while ($j<count($x))
+      {
+        $x[$j]->setConsec($j+1);
+        $x[$j]->setStaniv('A');
+        $x[$j]->save();
+
+        $j++;
+      }
+
+      $z=$grid[1];
+      $j=0;
+      while ($j<count($z))
+      {
+        $z[$j]->delete();
+        $j++;
+      }
+
+  }
+
+  public static function salvarPereje($foringdefniv, $grid)
+  {
+      $x = $grid[0];
+      $j = 0;
+
+      $sql="delete from foringpereje";
+      H::insertarRegistros($sql);
+
+      while ($j<count($x))
+      {
+       if ($x[$j]["pereje"]!=''){
+        $foringpereje= new Foringpereje();
+        $foringpereje->setPereje($x[$j]["pereje"]);
+        $foringpereje->setFecdes($x[$j]["fecdes"]);
+        $foringpereje->setFechas($x[$j]["fechas"]);
+        $foringpereje->setFecini($foringdefniv->getFecini());
+        $foringpereje->setFeccie($foringdefniv->getFeccie());
+
+        $foringpereje->save();
+        }
+        $j++;
+      }
+  }
+
+  public static function movimientos(){
+
+    $c = new Criteria();
+    $defpar = FordefparingPeer::doSelect($c);
+
+    $c = new Criteria();
+    $ingresos = ForparingPeer::doSelect($c);
+
+  if ($defpar or $ingresos ){
+
+    return 1;
+  }else{
+
+    return 0 ;
+  }
+
+  }
+
+  public static function validarPrenivprefor($fordefniv,$grid) {
+		$codE1=self::validarNivel($fordefniv);
+		if ($codE1==-1) {
+			$codE2=self::chequeaNiveles($fordefniv,$grid);
+			if ($codE2==-1) {
+				$codE3=self::validarFechas($fordefniv);
+				if ($codE3==-1) {
+					return -1;
+				}else return $codE3;
+			}else return $codE2;
+		}else return $codE1;
+	}
+
+        public static function validarNivel($fordefniv) {
+		$suma=$fordefniv->getRupcat()+$fordefniv->getRuppar();
+  		if ($fordefniv->getNivdis()>$suma) {
+			return 1308;
+  		} else {
+  			return -1;
+  		}
+  	}
+
+  	public static function chequeaNiveles($fordefniv,$grid) {
+  		$contC=0;
+  		$contP=0;
+  		$forniveles = $grid[0];
+
+  		foreach($forniveles as $fornivel) {
+  		if($fornivel->getCatpar()!="") {
+			if($fornivel->getCatpar()=='C') {
+				$contC++;
+			}else {
+				$contP++;
+			}
+  		}
+  		}
+  		if ($fordefniv->getRupcat()!=$contC) {
+			return 1323;
+  		}
+  		if ($fordefniv->getRuppar()!=$contP) {
+			return 1324;
+  		}
+
+  		return -1;
+  	}
+
+	public static function validarFechas($fordefniv) {
+		if (strtotime($fordefniv->getFeccie()) < strtotime($fordefniv->getFecini())) {
+			return 1319;
+		}
+		if (strtotime($fordefniv->getFecini()) > strtotime($fordefniv->getFecper())) {
+			return 1320;
+		}
+		if (strtotime($fordefniv->getFeccie()) < strtotime($fordefniv->getFecper())) {
+			return 1321;
+		}
+		return -1;
+	}
+
+        public static function salvarPrenivprefor($fordefniv,$grid,$gridPer) {
+		$fordefniv->setLoncod(strlen($fordefniv->getForpre()));
+		$fordefniv->setCodemp('001');
+                $fordefniv->setPeract('01');
+		$fordefniv->setEtadef('A');
+		$fordefniv->setStaprc('N');
+		$fordefniv->save();
+
+		self::salvarNiveles($grid);
+		self::salvarPeriodos($fordefniv, $gridPer);
+
+		return -1;
+	}
+
+        public static function salvarNiveles($grid) {
+		$forniveles=$grid[0];
+
+		foreach($forniveles as $key => $fornivel) {
+			$fornivel->setConsec($key+1);
+			$fornivel->setStaniv('A');
+			$fornivel->save();
+		}
+
+		$datos=$grid[1];
+		foreach($datos as $dato) {
+			$dato->delete();
+		}
+	}
+
+	 public static function salvarPeriodos($fordefniv, $gridPer) {
+	 	$forperejes = $gridPer[0];
+
+		foreach ($forperejes as $forpereje) {
+			$tablaforpereje= new Forpereje();
+                        $tablaforpereje->setFecini($fordefniv->getFecini());
+                        $tablaforpereje->setFeccie($fordefniv->getFeccie());
+                        $tablaforpereje->setPereje($forpereje["pereje"]);
+                        $tablaforpereje->setFecdes($forpereje["fecdes2"]);
+                        $tablaforpereje->setFechas($forpereje["fechas2"]);
+                        $tablaforpereje->save();
+        }
+  	}
 
 }
 ?>
