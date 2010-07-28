@@ -2241,11 +2241,13 @@ public static function validarCuentasGrid($grid)
          $l=count($arreglodet)+1;
          $arreglodet[$l-1]["codpre"]=$x[$j]["codpre"];
          $arreglodet[$l-1]["moncau"]=$x[$j]["moncau"];
+         $arreglodet[$l-1]["refsal"]=$x[$j]["refsal"];
         }
         else
         {
           $valor=H::toFloat($arreglodet[$pos-1]["moncau"]);
           $arreglodet[$pos-1]["moncau"]=($valor+$x[$j]["moncau"]);
+          $arreglodet[$pos-1]["refsal"]=$x[$j]["refsal"].",".$arreglodet[$pos-1]["refsal"];
         }
 
         $j++;
@@ -2268,6 +2270,7 @@ public static function validarCuentasGrid($grid)
         $opdetord->setRefcom('NULO');
         $opdetord->setCodpre($arreglo[$j]["codpre"]);
         $opdetord->setMoncau($arreglo[$j]["moncau"]);
+        $opdetord->setRefsal($arreglo[$j]["refsal"]);
         $opdetord->setMonret(0);
         $opdetord->setMondes(0);
         $opdetord->save();
@@ -2532,7 +2535,7 @@ public static function validarCuentasGrid($grid)
     $p=1;
     while ($p<=$ind)
     {
-      $sql = "Select A.Codcat||'-'||B.CodPar as codpre,Sum(A.MonSal) as moncau, '' as id From TSDetSal A,CARegArt B Where A.RefSal='".$arre[$p]."' And A.CodArt=B.CodArt Group By A.Codcat,B.CodPar";
+      $sql = "Select A.Codcat||'-'||B.CodPar as codpre,Sum(A.MonSal) as moncau, A.refsal as refsal, '' as id From TSDetSal A,CARegArt B Where A.RefSal='".$arre[$p]."' And A.CodArt=B.CodArt Group By A.Codcat,B.CodPar,A.refsal";
       if (Herramientas :: BuscarDatos($sql, & $reg)){      
          $i=0;
          while ($i<count($reg)) {
@@ -2540,6 +2543,7 @@ public static function validarCuentasGrid($grid)
           $j=count($arregloimp)+1;
           $arregloimp[$j-1]["codpre"]=$reg[$i]["codpre"];
           $arregloimp[$j-1]["moncau"]=number_format($reg[$i]["moncau"],2,',','.');
+          $arregloimp[$j-1]["refsal"]=$reg[$i]["refsal"];
           $arregloimp[$j-1]["id"]=$reg[$i]["id"];
           $i++;
          }

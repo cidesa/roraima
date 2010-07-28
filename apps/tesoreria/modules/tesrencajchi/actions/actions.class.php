@@ -403,7 +403,43 @@ protected $codigo = -1;
                 return $this->msj="El Comprobante no puede ser Eliminado, ya que se perdio la asociacion con Contabilidad";
               }
           }*/
+         // Actualizar salidas de Caja Chica
+           $t= new Criteria();
+           $t->add(OpdetordPeer::NUMORD,$opordpag->getNumord());
+           $datos=OpdetordPeer::doSelect($t);
+           if ($datos)
+           {
+               foreach ($datos as $objdat)
+               {
+                   $cadenarefe=split(',',$objdat->getRefsal());
+                    $r=0;
+                    while ($r<(count($cadenarefe)))
+                    {
+                        $aux=$cadenarefe[$r];
+                        $a= new Criteria();
+                        $a->add(TssalcajPeer::REFSAL,$aux);
+                        $data= TssalcajPeer::doSelectOne($a);
+                        if ($data)
+                        {
+                           $data->setStasal('P');
+                           $data->save();
+                        }
 
+                        $r++;
+                    }
+                    if ($r==0)
+                    {
+                       $a= new Criteria();
+                       $a->add(TssalcajPeer::REFSAL,$objdat->getRefsal());
+                       $data= TssalcajPeer::doSelectOne($a);
+                       if ($data)
+                       {
+                           $data->setStasal('P');
+                           $data->save();
+                       }
+                    }
+               }
+           }
           Herramientas::EliminarRegistro('Opdetord','Numord',$data->getNumord());
           OrdendePago::eliminarCausado($data->getNumord());
         }else { return 527;}
@@ -411,18 +447,6 @@ protected $codigo = -1;
     }else { return 526;}
    }//if ($opordpag)
 
-   $a= new Criteria();
-   $a->add(TssalcajPeer::CODCAJ,$opordpag->getCodcajchi());
-   $a->add(TssalcajPeer::FECSAL,$opordpag->getFecemi(),Criteria::LESS_EQUAL);
-   $data= TssalcajPeer::doSelect($a);
-   if ($data)
-   {
-     foreach ($data as $obj)
-     {
-       $obj->setStasal('P');
-       $obj->save();
-     }
-    }
     $opordpag->delete();
     return -1;
   }
@@ -563,18 +587,45 @@ protected $codigo = -1;
          $resul->setDesanu($desanu);
          $resul->setStatus('A');
 
-           $a= new Criteria();
-           $a->add(TssalcajPeer::CODCAJ,$resul->getCodcajchi());
-           $a->add(TssalcajPeer::FECSAL,$resul->getFecemi(),Criteria::LESS_EQUAL);
-           $data= TssalcajPeer::doSelect($a);
-           if ($data)
+
+         // Actualizar salidas de Caja Chica
+           $t= new Criteria();
+           $t->add(OpdetordPeer::NUMORD,$resul->getNumord());
+           $datos=OpdetordPeer::doSelect($t);
+           if ($datos)
            {
-             foreach ($data as $obj)
-             {
-               $obj->setStasal('P');
-               $obj->save();
-             }
-            }
+               foreach ($datos as $objdat)
+               {
+                   $cadenarefe=split(',',$objdat->getRefsal());
+                    $r=0;
+                    while ($r<(count($cadenarefe)))
+                    {
+                        $aux=$cadenarefe[$r];
+                        $a= new Criteria();
+                        $a->add(TssalcajPeer::REFSAL,$aux);
+                        $data= TssalcajPeer::doSelectOne($a);
+                        if ($data)
+                        {
+                           $data->setStasal('P');
+                           $data->save();
+                        }
+                        
+                        $r++;
+                    }
+                    if ($r==0)
+                    {
+                       $a= new Criteria();
+                       $a->add(TssalcajPeer::REFSAL,$objdat->getRefsal());
+                       $data= TssalcajPeer::doSelectOne($a);
+                       if ($data)
+                       {
+                           $data->setStasal('P');
+                           $data->save();
+                       }
+                    }
+               }
+           }
+           
 
          $resul->save();
       }
