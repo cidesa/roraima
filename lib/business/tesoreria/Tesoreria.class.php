@@ -266,7 +266,7 @@ class Tesoreria {
         $tsconcil->setResult('CONCILIADO');
         $tsconcil->save();
 
-        Tesoreria :: actualizar_Status($nro, $tstemigu["reflib"], 'C');
+        Tesoreria :: actualizar_Status($nro, $tstemigu["reflib"], 'C',$tstemigu["tipmov1"]);
       }
     }
 
@@ -311,7 +311,9 @@ class Tesoreria {
                  From TSMovLib
                  Where NumCue = '" . $nro . "' And
                        FecLib <= To_Date('" . $fechas . "','DD/MM/YYYY') And
-                       TipMov='ANUC'";
+                       (TipMov='ANUC')
+                       		";
+
     if (Herramientas :: BuscarDatos($sql, & $result)) {
       foreach ($result as $tstemigu) {
         $c = new Criteria();
@@ -337,7 +339,7 @@ class Tesoreria {
       foreach ($result as $tsmovlib) {
         $sql2 = "SELECT REFBAN From TSMOVBAN
                          WHERE NUMCUE= '" . $nro . "' And
-                            RefBan ='" . $tsmovlib["reflib"] . "' And
+                            RefBan ='" . $tsmovlib["reflib"] . "' And Tipmov ='" . $tsmovlib["tipmov"] . "' And
                             FecBan <= To_Date('" . $fechas . "','DD/MM/YYYY')";
         if  (!Herramientas :: BuscarDatos($sql2, & $result2)) {
           $tsconcil = new Tsconcil();
@@ -385,7 +387,7 @@ class Tesoreria {
       foreach ($result as $tsmovban) {
         $sql2 = "SELECT * From TSMOVLIB
                              WHERE NUMCUE = '" . $nro . "' And
-                             RefLib = '" . $tsmovban["refban"] . "' And
+                             RefLib = '" . $tsmovban["refban"] . "' And Tipmov = '" . $tsmovban["tipmov"] . "' And
                              FecLib <= To_Date('" . $fechas . "','DD/MM/YYYY')";
 
         if (!Herramientas :: BuscarDatos($sql2, & $result2)) {
@@ -551,10 +553,11 @@ class Tesoreria {
 
   }
 
-  public static function actualizar_Status($nro, $refere, $status) {
+  public static function actualizar_Status($nro, $refere, $status,$tipmov) {
     $c = new Criteria();
     $c->add(TsmovlibPeer :: NUMCUE, $nro);
     $c->add(TsmovlibPeer :: REFLIB, $refere);
+    $c->add(TsmovlibPeer :: TIPMOV, $tipmov);
     $tsmovlib = TsmovlibPeer :: doSelectOne($c);
 
     if ($tsmovlib) {    
@@ -565,6 +568,7 @@ class Tesoreria {
     $c = new Criteria();
     $c->add(TsmovbanPeer :: NUMCUE, $nro);
     $c->add(TsmovbanPeer :: REFBAN, $refere);
+    $c->add(TsmovbanPeer :: TIPMOV, $tipmov);
     $tsmovban = TsmovbanPeer :: doSelectOne($c);
 
     if ($tsmovban) {    
