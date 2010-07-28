@@ -19,3 +19,10 @@ opciones:                  # Opciones generales
   nombrecampo:             moncau
   esnumerico:              true
   html:                    [size="10" readonly=true]
+3:       # Columna 3
+  titulo:                  Referencia Salida
+  tipo:                    t
+  nombrecampo:             refsal
+  esgrabable:              true
+  html:                    [size="50" readonly=true]
+  oculta:                  true
