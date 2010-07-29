@@ -6,6 +6,7 @@ methods:
    - "bnregmue{codpro}"
    - "bnregmue{codact}"
    - "bnregmue{codubi}"
+   - "bnregmue{codubiadm}"
    - "bnregmue{coddis}"
    - "bnregmue{feccom}"
    - "bnregmue{fecreg}"
@@ -51,8 +52,12 @@ names:
 
   bnregmue{codubi}:
     required:  Yes
-    required_msg: El codigo de ubicación no puede estar en Blanco
+    required_msg: El codigo de ubicación Fisica no puede estar en Blanco
     validators: ExistValidator_codubi
+
+  bnregmue{codubiadm}:
+    required:  No
+    validators: ExistValidator_codubiadm
 
   bnregmue{coddis}:
     required:  Yes
@@ -164,7 +169,15 @@ ExistValidator_codubi:
     param:
         class:        Bnubibie
         column:       codubi
-        unique_error: El codigo de ubicacion debe Existir.
+        unique_error: El codigo de ubicacion Física debe Existir.
+
+ExistValidator_codubiadm:
+    class: CidesaExistValidator
+    param:
+        class:        Bnubica
+        column:       codubi
+        unique_error: El codigo de ubicacion Administrativa debe Existir.
+
 
 ExistValidator_coddis:
     class: CidesaExistValidator
