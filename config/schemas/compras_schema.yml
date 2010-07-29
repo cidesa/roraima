@@ -350,7 +350,7 @@ propel:
       required: true
     desart:
       type: VARCHAR
-      size: 250
+      size: 2000
     codcat:
       type: VARCHAR
       size: 32
