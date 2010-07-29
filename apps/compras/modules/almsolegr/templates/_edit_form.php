@@ -224,6 +224,7 @@
         'url'      => 'almsolegr/ajax',
         'complete' => 'AjaxJSON(request, json)',
          'condition' => "$('casolart_codcen').value != ''",
+         'script' => true,
         'with' => "'ajax=10&cajtexmos=casolart_descen&cajtexcom=casolart_codcen&codigo='+this.value"
         ))
 )); echo $value ? $value : '&nbsp;' ?>
