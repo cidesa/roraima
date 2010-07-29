@@ -148,6 +148,8 @@ class BnregmueMapBuilder {
 
 		$tMap->addColumn('NUMORD', 'Numord', 'string', CreoleTypes::VARCHAR, false, 8);
 
+		$tMap->addColumn('CODUBIADM', 'Codubiadm', 'string', CreoleTypes::VARCHAR, false, 30);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

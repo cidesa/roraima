@@ -245,6 +245,34 @@
 &nbsp;&nbsp;
   <? echo input_tag('desubi',$bnregmue->getNomubicac(),'size=41')?>
     </div>
+
+    <br>
+
+<?php echo label_for('bnregmue[codubiadm]', __($labels['bnregmue{codubiadm}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('bnregmue{codubiadm}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('bnregmue{codubiadm}')): ?>
+    <?php echo form_error('bnregmue{codubiadm}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($bnregmue, 'getCodubiadm', array (
+  'size' => $lonubiadm,
+  'control_name' => 'bnregmue[codubiadm]',
+  'maxlength' => $lonubiadm,
+  'onKeyPress' => "javascript:return dFilter (event.keyCode, this,'$forubiadm')",
+  'onBlur'=> remote_function(array(
+        'url'      => 'bieregactmued/ajax',
+        'condition' => "$('bnregmue_codubiadm').value != ''",
+        'complete' => 'AjaxJSON(request, json)',
+        'script' => true,
+        'with' => "'ajax=9&cajtexmos=bnregmue_codubiadm&cajtexcom=desubiadm&codigo='+this.value"
+        ))
+)); echo $value ? $value : '&nbsp;' ?>
+
+&nbsp;
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Bnubica_Pagemiord/clase/Bnubica/frame/sf_admin_edit_form/obj1/bnregmue_codubiadm/obj2/desubiadm/campo1/codubi/campo2/desubi/param1/'.$lonubiadm,'','','botoncat')?>
+&nbsp;&nbsp;
+  <? echo input_tag('desubiadm',$bnregmue->getDesubiadm(),'size=41')?>
+    </div>
  </div>
 </fieldset>
 </div>

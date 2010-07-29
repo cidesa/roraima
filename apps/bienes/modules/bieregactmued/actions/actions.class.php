@@ -90,9 +90,17 @@ private static $coderror=-1;
    {
     $cajtexmos=$this->getRequestParameter('cajtexmos');
     $cajtexcom=$this->getRequestParameter('cajtexcom');
-        $dato=BnubibiePeer::getDesubicacion(trim($this->getRequestParameter('codigo')));
-
-    $output = '[["'.$cajtexcom.'","'.$dato.'",""]]';
+    $dato=""; $dato1=""; $javascript=""; $dato2="";
+    $t= new Criteria();
+    $t->add(BnubibiePeer::CODUBI,$this->getRequestParameter('codigo'));
+    $reg= BnubibiePeer::doSelectOne($t);
+    if ($reg)
+    {
+     $dato=$reg->getDesubi();
+     $dato1=$reg->getCodubiadm();
+     $dato2=H::getX('CODUBI','Bnubica','Desubi',$dato1);
+    }else {$javascript="alert('La Ubicacion Fisica no existe'); $('bnregmue_codubi').value=''; $('bnregmue_codubi').focus();";}
+    $output = '[["'.$cajtexcom.'","'.$dato.'",""],["bnregmue_codubiadm","'.$dato1.'",""],["desubiadm","'.$dato2.'",""],["javascript","'.$javascript.'",""]]';
     $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
     return sfView::HEADER_ONLY;
    }
@@ -188,6 +196,16 @@ private static $coderror=-1;
     $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
     return sfView::HEADER_ONLY;
   }
+   elseif ($this->getRequestParameter('ajax')=='9')
+   {
+    $cajtexmos=$this->getRequestParameter('cajtexmos');
+    $cajtexcom=$this->getRequestParameter('cajtexcom');
+    $dato=BnubicaPeer::getDesubi($this->getRequestParameter('codigo'));
+
+    $output = '[["'.$cajtexcom.'","'.$dato.'",""]]';
+    $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+    return sfView::HEADER_ONLY;
+   }
 
   }
 
@@ -597,6 +615,10 @@ private static $coderror=-1;
     {
       $this->bnregmue->setSavenumord($bnregmue['savenumord']);
     }
+    if (isset($bnregmue['codubiadm']))
+    {
+      $this->bnregmue->setCodubiadm(trim($bnregmue['codubiadm']));
+    }
   }
 
   public function setVars()
@@ -605,6 +627,8 @@ private static $coderror=-1;
     $this->lonubi= Herramientas::ObtenerFormato('Bndefins','lonubi');
     $this->foract = Herramientas::ObtenerFormato('Bndefins','foract');
     $this->lonact=Herramientas::ObtenerFormato('Bndefins','lonact');
+    $this->forubiadm = Herramientas::ObtenerFormato('Opdefemp','Forubi');
+    $this->lonubiadm=strlen($this->forubiadm);
     $this->incorporacion='';
 
   }

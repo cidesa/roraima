@@ -113,6 +113,11 @@ class Bnregmue extends BaseBnregmue
             return Herramientas::getX('loguse','Usuarios','Nomuse',trim(self::getLogusu()));
 }
 
+    public function getDesubiadm()
+    {
+            return Herramientas::getX('codubi','Bnubica','Desubi',trim(self::getCodubiadm()));
+    }
+
 }
 
 
