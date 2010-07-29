@@ -223,6 +223,7 @@
   'onBlur'=> remote_function(array(
         'url'      => 'almsolegr/ajax',
         'complete' => 'AjaxJSON(request, json)',
+         'condition' => "$('casolart_codcen').value != ''",
         'with' => "'ajax=10&cajtexmos=casolart_descen&cajtexcom=casolart_codcen&codigo='+this.value"
         ))
 )); echo $value ? $value : '&nbsp;' ?>
