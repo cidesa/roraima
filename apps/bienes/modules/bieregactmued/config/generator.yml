@@ -36,7 +36,8 @@ generator:
       depacu:      { name : Depreciación Acumulada }
       valrex:      { name : Valor Reexpresado }
       cosrep:      { name : Costo Reposición }
-      codubi:      { name : Cod. Ubicación }
+      codubi:      { name : Cod. Ubi. Física}
+      codubiadm:      { name : Cod. Ubi. Administrativa}
       codrespat:   { name : Responsable Patrimonial Primario }
       codresuso:   { name : Responsable de Uso }
       tippro:      { name : Proyecto }
@@ -54,7 +55,7 @@ generator:
       sort:    codact
     edit:
       title:          Registro de Activos Muebles
-      display:        [codact, codmue, desmue, codalt, ordcom, codpro, feccom, fecreg, fecrcp, marmue, modmue, anomue, colmue, capmue, tipmue, nropie, sermue, usomue, pesmue, larmue, ancmue, altmue, coddis, valini, valres, valres, vallib, valadi, valactual, depmen, depacu, valrex, cosrep, codubi, codrespat, codresuso, tippro, numord, logusu]
+      display:        [codact, codmue, desmue, codalt, ordcom, codpro, feccom, fecreg, fecrcp, marmue, modmue, anomue, colmue, capmue, tipmue, nropie, sermue, usomue, pesmue, larmue, ancmue, altmue, coddis, valini, valres, valres, vallib, valadi, valactual, depmen, depacu, valrex, cosrep, codubi, codrespat, codresuso, tippro, numord, logusu, codubiadm]
       fields:
          desmue:
            type: textarea_tag

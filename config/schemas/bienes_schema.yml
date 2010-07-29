@@ -1017,6 +1017,9 @@ propel:
     numord:
       type: VARCHAR
       size: 8
+    codubiadm:
+      type: VARCHAR
+      size: 30
     id:
       type: INTEGER
       required: true
