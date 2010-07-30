@@ -511,9 +511,6 @@ propel:
       type: NUMERIC
       size: 14
       scale: 2
-    refsal:
-      type: VARCHAR
-      size: 1000
     id:
       type: INTEGER
       required: true
@@ -596,6 +593,9 @@ propel:
       type: NUMERIC
       size: 14
       scale: 2
+    refsal:
+      type: VARCHAR
+      size: 1000
     id:
       type: INTEGER
       required: true
