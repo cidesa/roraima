@@ -26,10 +26,3 @@ opciones:                  # Opciones generales
   esgrabable:              true
   html:                    [size="50" readonly=true]
   oculta:                  true
-3:       # Columna 3
-  titulo:                  Referencia Salida
-  tipo:                    t
-  nombrecampo:             refsal
-  esgrabable:              true
-  html:                    [size="50" readonly=true]
-  oculta:                  true
