@@ -46,7 +46,7 @@ class Npcargos extends BaseNpcargos
 	public function getCarasi()
 	{
 		$result=array();
-		$sql = "select coalesce(count(codcar),0) as codcar from npasicaremp where codcar='".self::getCodcar()."'group by codcar";
+		$sql = "select coalesce(count(codcar),0) as codcar from npasicaremp where codcar='".self::getCodcar()."'  AND STATUS='V' group by codcar";
 		if (H::BuscarDatos($sql,$result))
 		{
 			return $result[0]["codcar"];
@@ -56,7 +56,7 @@ class Npcargos extends BaseNpcargos
 	public function getCanmuj($va=false)
 	{
 		$result=array();
-		$sql = "select coalesce(count(a.codcar),0) as codcar from npasicaremp a, nphojint b where a.codcar='".self::getCodcar()."' and a.codemp=b.codemp and b.sexemp='F' group by codcar";
+		$sql = "select coalesce(count(a.codcar),0) as codcar from npasicaremp a, nphojint b where a.codcar='".self::getCodcar()."' and a.codemp=b.codemp and b.sexemp='F'  AND STATUS='V' group by codcar";
 		if (H::BuscarDatos($sql,$result))
 		{
 			return H::FormatoMonto($result[0]["codcar"]);
@@ -66,7 +66,7 @@ class Npcargos extends BaseNpcargos
 	public function getCanhom($va=false)
 	{
 		$result=array();
-		$sql = "select coalesce(count(a.codcar),0) as codcar from npasicaremp a, nphojint b where a.codcar='".self::getCodcar()."' and a.codemp=b.codemp and b.sexemp='M' group by codcar";
+		$sql = "select coalesce(count(a.codcar),0) as codcar from npasicaremp a, nphojint b where a.codcar='".self::getCodcar()."' and a.codemp=b.codemp and b.sexemp='M'  AND STATUS='V' group by codcar";
 		if (H::BuscarDatos($sql,$result))
 		{
 			return H::FormatoMonto($result[0]["codcar"]);
