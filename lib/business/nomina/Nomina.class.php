@@ -9657,21 +9657,36 @@ exit();
           $registro->save() ;
 
           $t= new Criteria();
-          $t->add(NpconsueldoPeer::CODNOM,$npasiconemp->getCodnom());
-          $t->add(NpconsueldoPeer::CODCON,$npasiconemp->getCodcon());
-          $res= NpconsueldoPeer::doSelectOne($t);
+
+
+          $t->add(NpasicarempPeer::CODEMP,$x[$j]["codemp"]);
+          $t->add(NpasicarempPeer::CODCAR,$x[$j]["codcar"]);
+          $res= NpasicarempPeer::doSelectOne($t);
+
           if ($res)
           {
-             $w= new Criteria();
-             $w->add(NpcargosPeer::CODCAR,$x[$j]["codcar"]);
-             $reg=NpcargosPeer::doSelectOne($w);
-             if ($reg)
-             {
-                if ($npasiconemp->getTipo()=='M') $reg->setSuecar($x[$j]["monto"]);
-                else $reg->setSuecar($x[$j]["cantidad"]);
-                $reg->save();
-             }
+             $res->setSueldo($x[$j]["monto"]);
+             $res->save();
           }
+
+
+          //$t->add(NpconsueldoPeer::CODNOM,$npasiconemp->getCodnom());
+          //$t->add(NpconsueldoPeer::CODCON,$npasiconemp->getCodcon());
+          //$res= NpconsueldoPeer::doSelectOne($t);
+
+          //if ($res)
+          //{
+          //   $w= new Criteria();
+          //   $w->add(NpcargosPeer::CODCAR,$x[$j]["codcar"]);
+          //   $reg=NpcargosPeer::doSelectOne($w);
+          //   if ($reg)
+
+          //   {
+          //      if ($npasiconemp->getTipo()=='M') $reg->setSuecar($x[$j]["monto"]);
+          //      else $reg->setSuecar($x[$j]["cantidad"]);
+          //      $reg->save();
+          //   }
+          //}
         }
       }
       $j++;
