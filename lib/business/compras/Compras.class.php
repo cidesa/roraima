@@ -494,7 +494,7 @@ class Compras {
             $monuni = ($gridnuevo[$indice -1][2] * $gridnuevo[$indice -1][1]);
             $gridnuevo[$indice -1][3] = $datos->getMondes();
             $gridnuevo[$indice -1][4] = $resul2->getMonrgo();
-            $gridnuevo[$indice -1][5] = $monuni -$gridnuevo[$indice -1][3];
+            $gridnuevo[$indice -1][5] = $monuni -$gridnuevo[$indice -1][3]+$gridnuevo[$indice -1][4];
             $c=new Criteria();
             $c->add(CadisrgoPeer::REQART,$reqart);
             $reg= CadisrgoPeer::doSelect($c);
@@ -564,7 +564,7 @@ class Compras {
               return true;
               //break;
             } else {
-              if ($gridnuevo[$z][1] != "" && ($gridnuevo[$z][2]>$gridnuevo[$z][11])) {
+              if ($gridnuevo[$z][1] != "") { //&& ($gridnuevo[$z][2]>$gridnuevo[$z][11])) {
                 $r = 0;
                 self :: distribuirRecargos(& $gridnuevo2, & $gridnuevo,'S',&$gridnuevorec);
                 self :: recalcularRecargos(&$gridnuevo2, &$gridnuevo, &$nopuedeaumentar, $reqart,&$gridnuevorec);
