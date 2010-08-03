@@ -312,6 +312,10 @@ $this->Bitacora('Guardo');
     {
       $this->opdefemp->setOrdcre($opdefemp['ordcre']);
     }
+    if (isset($opdefemp['ordsolpag']))
+    {
+      $this->opdefemp->setOrdsolpag($opdefemp['ordsolpag']);
+    }
     if (isset($opdefemp['monche']))
     {
       $this->opdefemp->setMonche($opdefemp['monche']);

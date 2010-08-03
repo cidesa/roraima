@@ -1,50 +1,56 @@
 <?php
 
 
-abstract class BaseOpretordPeer {
+abstract class BaseOpsolpagPeer {
 
 	
 	const DATABASE_NAME = 'propel';
 
 	
-	const TABLE_NAME = 'opretord';
+	const TABLE_NAME = 'opsolpag';
 
 	
-	const CLASS_DEFAULT = 'lib.model.Opretord';
+	const CLASS_DEFAULT = 'lib.model.Opsolpag';
 
 	
-	const NUM_COLUMNS = 9;
+	const NUM_COLUMNS = 11;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
 
 
 	
-	const NUMORD = 'opretord.NUMORD';
+	const REFSOL = 'opsolpag.REFSOL';
 
 	
-	const CODTIP = 'opretord.CODTIP';
+	const FECSOL = 'opsolpag.FECSOL';
 
 	
-	const MONRET = 'opretord.MONRET';
+	const REFCOM = 'opsolpag.REFCOM';
 
 	
-	const CODPRE = 'opretord.CODPRE';
+	const DESSOL = 'opsolpag.DESSOL';
 
 	
-	const NUMRET = 'opretord.NUMRET';
+	const MONSOL = 'opsolpag.MONSOL';
 
 	
-	const REFERE = 'opretord.REFERE';
+	const STASOL = 'opsolpag.STASOL';
 
 	
-	const CORREL = 'opretord.CORREL';
+	const CEDRIF = 'opsolpag.CEDRIF';
 
 	
-	const MONBAS = 'opretord.MONBAS';
+	const NOMBEN = 'opsolpag.NOMBEN';
 
 	
-	const ID = 'opretord.ID';
+	const NUMSOLCRE = 'opsolpag.NUMSOLCRE';
+
+	
+	const NUMCRE = 'opsolpag.NUMCRE';
+
+	
+	const ID = 'opsolpag.ID';
 
 	
 	private static $phpNameMap = null;
@@ -52,31 +58,31 @@ abstract class BaseOpretordPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Numord', 'Codtip', 'Monret', 'Codpre', 'Numret', 'Refere', 'Correl', 'Monbas', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (OpretordPeer::NUMORD, OpretordPeer::CODTIP, OpretordPeer::MONRET, OpretordPeer::CODPRE, OpretordPeer::NUMRET, OpretordPeer::REFERE, OpretordPeer::CORREL, OpretordPeer::MONBAS, OpretordPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('numord', 'codtip', 'monret', 'codpre', 'numret', 'refere', 'correl', 'monbas', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
+		BasePeer::TYPE_PHPNAME => array ('Refsol', 'Fecsol', 'Refcom', 'Dessol', 'Monsol', 'Stasol', 'Cedrif', 'Nomben', 'Numsolcre', 'Numcre', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (OpsolpagPeer::REFSOL, OpsolpagPeer::FECSOL, OpsolpagPeer::REFCOM, OpsolpagPeer::DESSOL, OpsolpagPeer::MONSOL, OpsolpagPeer::STASOL, OpsolpagPeer::CEDRIF, OpsolpagPeer::NOMBEN, OpsolpagPeer::NUMSOLCRE, OpsolpagPeer::NUMCRE, OpsolpagPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('refsol', 'fecsol', 'refcom', 'dessol', 'monsol', 'stasol', 'cedrif', 'nomben', 'numsolcre', 'numcre', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Numord' => 0, 'Codtip' => 1, 'Monret' => 2, 'Codpre' => 3, 'Numret' => 4, 'Refere' => 5, 'Correl' => 6, 'Monbas' => 7, 'Id' => 8, ),
-		BasePeer::TYPE_COLNAME => array (OpretordPeer::NUMORD => 0, OpretordPeer::CODTIP => 1, OpretordPeer::MONRET => 2, OpretordPeer::CODPRE => 3, OpretordPeer::NUMRET => 4, OpretordPeer::REFERE => 5, OpretordPeer::CORREL => 6, OpretordPeer::MONBAS => 7, OpretordPeer::ID => 8, ),
-		BasePeer::TYPE_FIELDNAME => array ('numord' => 0, 'codtip' => 1, 'monret' => 2, 'codpre' => 3, 'numret' => 4, 'refere' => 5, 'correl' => 6, 'monbas' => 7, 'id' => 8, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
+		BasePeer::TYPE_PHPNAME => array ('Refsol' => 0, 'Fecsol' => 1, 'Refcom' => 2, 'Dessol' => 3, 'Monsol' => 4, 'Stasol' => 5, 'Cedrif' => 6, 'Nomben' => 7, 'Numsolcre' => 8, 'Numcre' => 9, 'Id' => 10, ),
+		BasePeer::TYPE_COLNAME => array (OpsolpagPeer::REFSOL => 0, OpsolpagPeer::FECSOL => 1, OpsolpagPeer::REFCOM => 2, OpsolpagPeer::DESSOL => 3, OpsolpagPeer::MONSOL => 4, OpsolpagPeer::STASOL => 5, OpsolpagPeer::CEDRIF => 6, OpsolpagPeer::NOMBEN => 7, OpsolpagPeer::NUMSOLCRE => 8, OpsolpagPeer::NUMCRE => 9, OpsolpagPeer::ID => 10, ),
+		BasePeer::TYPE_FIELDNAME => array ('refsol' => 0, 'fecsol' => 1, 'refcom' => 2, 'dessol' => 3, 'monsol' => 4, 'stasol' => 5, 'cedrif' => 6, 'nomben' => 7, 'numsolcre' => 8, 'numcre' => 9, 'id' => 10, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
 	);
 
 	
 	public static function getMapBuilder()
 	{
-		include_once 'lib/model/map/OpretordMapBuilder.php';
-		return BasePeer::getMapBuilder('lib.model.map.OpretordMapBuilder');
+		include_once 'lib/model/map/OpsolpagMapBuilder.php';
+		return BasePeer::getMapBuilder('lib.model.map.OpsolpagMapBuilder');
 	}
 	
 	public static function getPhpNameMap()
 	{
 		if (self::$phpNameMap === null) {
-			$map = OpretordPeer::getTableMap();
+			$map = OpsolpagPeer::getTableMap();
 			$columns = $map->getColumns();
 			$nameMap = array();
 			foreach ($columns as $column) {
@@ -110,35 +116,39 @@ abstract class BaseOpretordPeer {
 	
 	public static function alias($alias, $column)
 	{
-		return str_replace(OpretordPeer::TABLE_NAME.'.', $alias.'.', $column);
+		return str_replace(OpsolpagPeer::TABLE_NAME.'.', $alias.'.', $column);
 	}
 
 	
 	public static function addSelectColumns(Criteria $criteria)
 	{
 
-		$criteria->addSelectColumn(OpretordPeer::NUMORD);
+		$criteria->addSelectColumn(OpsolpagPeer::REFSOL);
 
-		$criteria->addSelectColumn(OpretordPeer::CODTIP);
+		$criteria->addSelectColumn(OpsolpagPeer::FECSOL);
 
-		$criteria->addSelectColumn(OpretordPeer::MONRET);
+		$criteria->addSelectColumn(OpsolpagPeer::REFCOM);
 
-		$criteria->addSelectColumn(OpretordPeer::CODPRE);
+		$criteria->addSelectColumn(OpsolpagPeer::DESSOL);
 
-		$criteria->addSelectColumn(OpretordPeer::NUMRET);
+		$criteria->addSelectColumn(OpsolpagPeer::MONSOL);
 
-		$criteria->addSelectColumn(OpretordPeer::REFERE);
+		$criteria->addSelectColumn(OpsolpagPeer::STASOL);
 
-		$criteria->addSelectColumn(OpretordPeer::CORREL);
+		$criteria->addSelectColumn(OpsolpagPeer::CEDRIF);
 
-		$criteria->addSelectColumn(OpretordPeer::MONBAS);
+		$criteria->addSelectColumn(OpsolpagPeer::NOMBEN);
 
-		$criteria->addSelectColumn(OpretordPeer::ID);
+		$criteria->addSelectColumn(OpsolpagPeer::NUMSOLCRE);
+
+		$criteria->addSelectColumn(OpsolpagPeer::NUMCRE);
+
+		$criteria->addSelectColumn(OpsolpagPeer::ID);
 
 	}
 
-	const COUNT = 'COUNT(opretord.ID)';
-	const COUNT_DISTINCT = 'COUNT(DISTINCT opretord.ID)';
+	const COUNT = 'COUNT(opsolpag.ID)';
+	const COUNT_DISTINCT = 'COUNT(DISTINCT opsolpag.ID)';
 
 	
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
@@ -147,9 +157,9 @@ abstract class BaseOpretordPeer {
 
 				$criteria->clearSelectColumns()->clearOrderByColumns();
 		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(OpretordPeer::COUNT_DISTINCT);
+			$criteria->addSelectColumn(OpsolpagPeer::COUNT_DISTINCT);
 		} else {
-			$criteria->addSelectColumn(OpretordPeer::COUNT);
+			$criteria->addSelectColumn(OpsolpagPeer::COUNT);
 		}
 
 				foreach($criteria->getGroupByColumns() as $column)
@@ -157,7 +167,7 @@ abstract class BaseOpretordPeer {
 			$criteria->addSelectColumn($column);
 		}
 
-		$rs = OpretordPeer::doSelectRS($criteria, $con);
+		$rs = OpsolpagPeer::doSelectRS($criteria, $con);
 		if ($rs->next()) {
 			return $rs->getInt(1);
 		} else {
@@ -169,7 +179,7 @@ abstract class BaseOpretordPeer {
 	{
 		$critcopy = clone $criteria;
 		$critcopy->setLimit(1);
-		$objects = OpretordPeer::doSelect($critcopy, $con);
+		$objects = OpsolpagPeer::doSelect($critcopy, $con);
 		if ($objects) {
 			return $objects[0];
 		}
@@ -178,7 +188,7 @@ abstract class BaseOpretordPeer {
 	
 	public static function doSelect(Criteria $criteria, $con = null)
 	{
-		return OpretordPeer::populateObjects(OpretordPeer::doSelectRS($criteria, $con));
+		return OpsolpagPeer::populateObjects(OpsolpagPeer::doSelectRS($criteria, $con));
 	}
 	
 	public static function doSelectRS(Criteria $criteria, $con = null)
@@ -189,7 +199,7 @@ abstract class BaseOpretordPeer {
 
 		if (!$criteria->getSelectColumns()) {
 			$criteria = clone $criteria;
-			OpretordPeer::addSelectColumns($criteria);
+			OpsolpagPeer::addSelectColumns($criteria);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -201,7 +211,7 @@ abstract class BaseOpretordPeer {
 	{
 		$results = array();
 	
-				$cls = OpretordPeer::getOMClass();
+				$cls = OpsolpagPeer::getOMClass();
 		$cls = Propel::import($cls);
 				while($rs->next()) {
 		
@@ -214,15 +224,15 @@ abstract class BaseOpretordPeer {
 	}
 
 	
-	public static function doCountJoinOptipret(Criteria $criteria, $distinct = false, $con = null)
+	public static function doCountJoinCpcompro(Criteria $criteria, $distinct = false, $con = null)
 	{
 				$criteria = clone $criteria;
 
 				$criteria->clearSelectColumns()->clearOrderByColumns();
 		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(OpretordPeer::COUNT_DISTINCT);
+			$criteria->addSelectColumn(OpsolpagPeer::COUNT_DISTINCT);
 		} else {
-			$criteria->addSelectColumn(OpretordPeer::COUNT);
+			$criteria->addSelectColumn(OpsolpagPeer::COUNT);
 		}
 
 				foreach($criteria->getGroupByColumns() as $column)
@@ -230,9 +240,9 @@ abstract class BaseOpretordPeer {
 			$criteria->addSelectColumn($column);
 		}
 
-		$criteria->addJoin(OpretordPeer::CODTIP, OptipretPeer::CODTIP);
+		$criteria->addJoin(OpsolpagPeer::REFCOM, CpcomproPeer::REFCOM);
 
-		$rs = OpretordPeer::doSelectRS($criteria, $con);
+		$rs = OpsolpagPeer::doSelectRS($criteria, $con);
 		if ($rs->next()) {
 			return $rs->getInt(1);
 		} else {
@@ -242,7 +252,7 @@ abstract class BaseOpretordPeer {
 
 
 	
-	public static function doSelectJoinOptipret(Criteria $c, $con = null)
+	public static function doSelectJoinCpcompro(Criteria $c, $con = null)
 	{
 		$c = clone $c;
 
@@ -250,23 +260,23 @@ abstract class BaseOpretordPeer {
 			$c->setDbName(self::DATABASE_NAME);
 		}
 
-		OpretordPeer::addSelectColumns($c);
-		$startcol = (OpretordPeer::NUM_COLUMNS - OpretordPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
-		OptipretPeer::addSelectColumns($c);
+		OpsolpagPeer::addSelectColumns($c);
+		$startcol = (OpsolpagPeer::NUM_COLUMNS - OpsolpagPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+		CpcomproPeer::addSelectColumns($c);
 
-		$c->addJoin(OpretordPeer::CODTIP, OptipretPeer::CODTIP);
+		$c->addJoin(OpsolpagPeer::REFCOM, CpcomproPeer::REFCOM);
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
 
 		while($rs->next()) {
 
-			$omClass = OpretordPeer::getOMClass();
+			$omClass = OpsolpagPeer::getOMClass();
 
 			$cls = Propel::import($omClass);
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
 
-			$omClass = OptipretPeer::getOMClass();
+			$omClass = CpcomproPeer::getOMClass();
 
 			$cls = Propel::import($omClass);
 			$obj2 = new $cls();
@@ -274,14 +284,14 @@ abstract class BaseOpretordPeer {
 
 			$newObject = true;
 			foreach($results as $temp_obj1) {
-				$temp_obj2 = $temp_obj1->getOptipret(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+				$temp_obj2 = $temp_obj1->getCpcompro(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
 					$newObject = false;
-										$temp_obj2->addOpretord($obj1); 					break;
+										$temp_obj2->addOpsolpag($obj1); 					break;
 				}
 			}
 			if ($newObject) {
-				$obj2->initOpretords();
-				$obj2->addOpretord($obj1); 			}
+				$obj2->initOpsolpags();
+				$obj2->addOpsolpag($obj1); 			}
 			$results[] = $obj1;
 		}
 		return $results;
@@ -295,9 +305,9 @@ abstract class BaseOpretordPeer {
 
 				$criteria->clearSelectColumns()->clearOrderByColumns();
 		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(OpretordPeer::COUNT_DISTINCT);
+			$criteria->addSelectColumn(OpsolpagPeer::COUNT_DISTINCT);
 		} else {
-			$criteria->addSelectColumn(OpretordPeer::COUNT);
+			$criteria->addSelectColumn(OpsolpagPeer::COUNT);
 		}
 
 				foreach($criteria->getGroupByColumns() as $column)
@@ -305,9 +315,9 @@ abstract class BaseOpretordPeer {
 			$criteria->addSelectColumn($column);
 		}
 
-			$criteria->addJoin(OpretordPeer::CODTIP, OptipretPeer::CODTIP);
+			$criteria->addJoin(OpsolpagPeer::REFCOM, CpcomproPeer::REFCOM);
 	
-		$rs = OpretordPeer::doSelectRS($criteria, $con);
+		$rs = OpsolpagPeer::doSelectRS($criteria, $con);
 		if ($rs->next()) {
 			return $rs->getInt(1);
 		} else {
@@ -325,20 +335,20 @@ abstract class BaseOpretordPeer {
 			$c->setDbName(self::DATABASE_NAME);
 		}
 
-		OpretordPeer::addSelectColumns($c);
-		$startcol2 = (OpretordPeer::NUM_COLUMNS - OpretordPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+		OpsolpagPeer::addSelectColumns($c);
+		$startcol2 = (OpsolpagPeer::NUM_COLUMNS - OpsolpagPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-			OptipretPeer::addSelectColumns($c);
-			$startcol3 = $startcol2 + OptipretPeer::NUM_COLUMNS;
+			CpcomproPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + CpcomproPeer::NUM_COLUMNS;
 	
-			$c->addJoin(OpretordPeer::CODTIP, OptipretPeer::CODTIP);
+			$c->addJoin(OpsolpagPeer::REFCOM, CpcomproPeer::REFCOM);
 	
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
 
 		while($rs->next()) {
 
-			$omClass = OpretordPeer::getOMClass();
+			$omClass = OpsolpagPeer::getOMClass();
 
 
 			$cls = Propel::import($omClass);
@@ -347,7 +357,7 @@ abstract class BaseOpretordPeer {
 
 
 							
-				$omClass = OptipretPeer::getOMClass();
+				$omClass = CpcomproPeer::getOMClass();
 	
 
 				$cls = Propel::import($omClass);
@@ -357,15 +367,15 @@ abstract class BaseOpretordPeer {
 				$newObject = true;
 				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 					$temp_obj1 = $results[$j];
-					$temp_obj2 = $temp_obj1->getOptipret(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$temp_obj2 = $temp_obj1->getCpcompro(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
 						$newObject = false;
-						$temp_obj2->addOpretord($obj1); 						break;
+						$temp_obj2->addOpsolpag($obj1); 						break;
 					}
 				}
 
 				if ($newObject) {
-					$obj2->initOpretords();
-					$obj2->addOpretord($obj1);
+					$obj2->initOpsolpags();
+					$obj2->addOpsolpag($obj1);
 				}
 	
 			$results[] = $obj1;
@@ -382,7 +392,7 @@ abstract class BaseOpretordPeer {
 	
 	public static function getOMClass()
 	{
-		return OpretordPeer::CLASS_DEFAULT;
+		return OpsolpagPeer::CLASS_DEFAULT;
 	}
 
 	
@@ -396,7 +406,7 @@ abstract class BaseOpretordPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
-		$criteria->remove(OpretordPeer::ID); 
+		$criteria->remove(OpsolpagPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 
@@ -423,8 +433,8 @@ abstract class BaseOpretordPeer {
 
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; 
-			$comparison = $criteria->getComparison(OpretordPeer::ID);
-			$selectCriteria->add(OpretordPeer::ID, $criteria->remove(OpretordPeer::ID), $comparison);
+			$comparison = $criteria->getComparison(OpsolpagPeer::ID);
+			$selectCriteria->add(OpsolpagPeer::ID, $criteria->remove(OpsolpagPeer::ID), $comparison);
 
 		} else { 			$criteria = $values->buildCriteria(); 			$selectCriteria = $values->buildPkeyCriteria(); 		}
 
@@ -441,7 +451,7 @@ abstract class BaseOpretordPeer {
 		}
 		$affectedRows = 0; 		try {
 									$con->begin();
-			$affectedRows += BasePeer::doDeleteAll(OpretordPeer::TABLE_NAME, $con);
+			$affectedRows += BasePeer::doDeleteAll(OpsolpagPeer::TABLE_NAME, $con);
 			$con->commit();
 			return $affectedRows;
 		} catch (PropelException $e) {
@@ -454,16 +464,16 @@ abstract class BaseOpretordPeer {
 	 public static function doDelete($values, $con = null)
 	 {
 		if ($con === null) {
-			$con = Propel::getConnection(OpretordPeer::DATABASE_NAME);
+			$con = Propel::getConnection(OpsolpagPeer::DATABASE_NAME);
 		}
 
 		if ($values instanceof Criteria) {
-			$criteria = clone $values; 		} elseif ($values instanceof Opretord) {
+			$criteria = clone $values; 		} elseif ($values instanceof Opsolpag) {
 
 			$criteria = $values->buildPkeyCriteria();
 		} else {
 						$criteria = new Criteria(self::DATABASE_NAME);
-			$criteria->add(OpretordPeer::ID, (array) $values, Criteria::IN);
+			$criteria->add(OpsolpagPeer::ID, (array) $values, Criteria::IN);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -482,13 +492,13 @@ abstract class BaseOpretordPeer {
 	}
 
 	
-	public static function doValidate(Opretord $obj, $cols = null)
+	public static function doValidate(Opsolpag $obj, $cols = null)
 	{
 		$columns = array();
 
 		if ($cols) {
-			$dbMap = Propel::getDatabaseMap(OpretordPeer::DATABASE_NAME);
-			$tableMap = $dbMap->getTable(OpretordPeer::TABLE_NAME);
+			$dbMap = Propel::getDatabaseMap(OpsolpagPeer::DATABASE_NAME);
+			$tableMap = $dbMap->getTable(OpsolpagPeer::TABLE_NAME);
 
 			if (! is_array($cols)) {
 				$cols = array($cols);
@@ -504,11 +514,11 @@ abstract class BaseOpretordPeer {
 
 		}
 
-		$res =  BasePeer::doValidate(OpretordPeer::DATABASE_NAME, OpretordPeer::TABLE_NAME, $columns);
+		$res =  BasePeer::doValidate(OpsolpagPeer::DATABASE_NAME, OpsolpagPeer::TABLE_NAME, $columns);
     if ($res !== true) {
         $request = sfContext::getInstance()->getRequest();
         foreach ($res as $failed) {
-            $col = OpretordPeer::translateFieldname($failed->getColumn(), BasePeer::TYPE_COLNAME, BasePeer::TYPE_PHPNAME);
+            $col = OpsolpagPeer::translateFieldname($failed->getColumn(), BasePeer::TYPE_COLNAME, BasePeer::TYPE_PHPNAME);
             $request->setError($col, $failed->getMessage());
         }
     }
@@ -523,12 +533,12 @@ abstract class BaseOpretordPeer {
 			$con = Propel::getConnection(self::DATABASE_NAME);
 		}
 
-		$criteria = new Criteria(OpretordPeer::DATABASE_NAME);
+		$criteria = new Criteria(OpsolpagPeer::DATABASE_NAME);
 
-		$criteria->add(OpretordPeer::ID, $pk);
+		$criteria->add(OpsolpagPeer::ID, $pk);
 
 
-		$v = OpretordPeer::doSelect($criteria, $con);
+		$v = OpsolpagPeer::doSelect($criteria, $con);
 
 		return !empty($v) > 0 ? $v[0] : null;
 	}
@@ -545,8 +555,8 @@ abstract class BaseOpretordPeer {
 			$objs = array();
 		} else {
 			$criteria = new Criteria();
-			$criteria->add(OpretordPeer::ID, $pks, Criteria::IN);
-			$objs = OpretordPeer::doSelect($criteria, $con);
+			$criteria->add(OpsolpagPeer::ID, $pks, Criteria::IN);
+			$objs = OpsolpagPeer::doSelect($criteria, $con);
 		}
 		return $objs;
 	}
@@ -554,11 +564,11 @@ abstract class BaseOpretordPeer {
 } 
 if (Propel::isInit()) {
 			try {
-		BaseOpretordPeer::getMapBuilder();
+		BaseOpsolpagPeer::getMapBuilder();
 	} catch (Exception $e) {
 		Propel::log('Could not initialize Peer: ' . $e->getMessage(), Propel::LOG_ERR);
 	}
 } else {
-			require_once 'lib/model/map/OpretordMapBuilder.php';
-	Propel::registerMapBuilder('lib.model.map.OpretordMapBuilder');
+			require_once 'lib/model/map/OpsolpagMapBuilder.php';
+	Propel::registerMapBuilder('lib.model.map.OpsolpagMapBuilder');
 }

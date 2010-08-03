@@ -122,6 +122,9 @@ abstract class BaseTsmovlib extends BaseObject  implements Persistent {
 	protected $aTstipmov;
 
 	
+	protected $aContabb;
+
+	
 	protected $alreadyInSave = false;
 
 	
@@ -421,11 +424,6 @@ abstract class BaseTsmovlib extends BaseObject  implements Persistent {
 	public function setFeclib($v)
 	{
 
-		if (is_array($v)){
-        	$value_array = $v;
-        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-		}
-
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [feclib] from input: " . var_export($v, true));
@@ -482,6 +480,10 @@ abstract class BaseTsmovlib extends BaseObject  implements Persistent {
         $this->modifiedColumns[] = TsmovlibPeer::CODCTA;
       }
   
+		if ($this->aContabb !== null && $this->aContabb->getCodcta() !== $v) {
+			$this->aContabb = null;
+		}
+
 	} 
 	
 	public function setNumcom($v)
@@ -496,11 +498,6 @@ abstract class BaseTsmovlib extends BaseObject  implements Persistent {
 	
 	public function setFeccom($v)
 	{
-
-		if (is_array($v)){
-        	$value_array = $v;
-        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-		}
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
@@ -539,11 +536,6 @@ abstract class BaseTsmovlib extends BaseObject  implements Persistent {
 	public function setFecing($v)
 	{
 
-		if (is_array($v)){
-        	$value_array = $v;
-        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-		}
-
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecing] from input: " . var_export($v, true));
@@ -560,11 +552,6 @@ abstract class BaseTsmovlib extends BaseObject  implements Persistent {
 	
 	public function setFecanu($v)
 	{
-
-		if (is_array($v)){
-        	$value_array = $v;
-        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-		}
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
@@ -622,11 +609,6 @@ abstract class BaseTsmovlib extends BaseObject  implements Persistent {
 	
 	public function setFeccomadi($v)
 	{
-
-		if (is_array($v)){
-        	$value_array = $v;
-        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-		}
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
@@ -888,6 +870,13 @@ abstract class BaseTsmovlib extends BaseObject  implements Persistent {
 				$this->setTstipmov($this->aTstipmov);
 			}
 
+			if ($this->aContabb !== null) {
+				if ($this->aContabb->isModified()) {
+					$affectedRows += $this->aContabb->save($con);
+				}
+				$this->setContabb($this->aContabb);
+			}
+
 
 						if ($this->isModified()) {
 				if ($this->isNew()) {
@@ -946,6 +935,12 @@ abstract class BaseTsmovlib extends BaseObject  implements Persistent {
 			if ($this->aTstipmov !== null) {
 				if (!$this->aTstipmov->validate($columns)) {
 					$failureMap = array_merge($failureMap, $this->aTstipmov->getValidationFailures());
+				}
+			}
+
+			if ($this->aContabb !== null) {
+				if (!$this->aContabb->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aContabb->getValidationFailures());
 				}
 			}
 
@@ -1423,6 +1418,38 @@ abstract class BaseTsmovlib extends BaseObject  implements Persistent {
 			
 		}
 		return $this->aTstipmov;
+	}
+
+	
+	public function setContabb($v)
+	{
+
+
+		if ($v === null) {
+			$this->setCodcta(NULL);
+		} else {
+			$this->setCodcta($v->getCodcta());
+		}
+
+
+		$this->aContabb = $v;
+	}
+
+
+	
+	public function getContabb($con = null)
+	{
+		if ($this->aContabb === null && (($this->codcta !== "" && $this->codcta !== null))) {
+						include_once 'lib/model/contabilidad/om/BaseContabbPeer.php';
+
+      $c = new Criteria();
+      $c->add(ContabbPeer::CODCTA,$this->codcta);
+      
+			$this->aContabb = ContabbPeer::doSelectOne($c, $con);
+
+			
+		}
+		return $this->aContabb;
 	}
 
 } 

@@ -13,7 +13,7 @@ abstract class BaseOpdetautPeer {
 	const CLASS_DEFAULT = 'lib.model.Opdetaut';
 
 	
-	const NUM_COLUMNS = 7;
+	const NUM_COLUMNS = 8;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -38,6 +38,9 @@ abstract class BaseOpdetautPeer {
 	const MONRET = 'opdetaut.MONRET';
 
 	
+	const REFSAL = 'opdetaut.REFSAL';
+
+	
 	const ID = 'opdetaut.ID';
 
 	
@@ -46,18 +49,18 @@ abstract class BaseOpdetautPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Numord', 'Refcom', 'Codpre', 'Moncau', 'Mondes', 'Monret', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (OpdetautPeer::NUMORD, OpdetautPeer::REFCOM, OpdetautPeer::CODPRE, OpdetautPeer::MONCAU, OpdetautPeer::MONDES, OpdetautPeer::MONRET, OpdetautPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('numord', 'refcom', 'codpre', 'moncau', 'mondes', 'monret', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
+		BasePeer::TYPE_PHPNAME => array ('Numord', 'Refcom', 'Codpre', 'Moncau', 'Mondes', 'Monret', 'Refsal', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (OpdetautPeer::NUMORD, OpdetautPeer::REFCOM, OpdetautPeer::CODPRE, OpdetautPeer::MONCAU, OpdetautPeer::MONDES, OpdetautPeer::MONRET, OpdetautPeer::REFSAL, OpdetautPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('numord', 'refcom', 'codpre', 'moncau', 'mondes', 'monret', 'refsal', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Numord' => 0, 'Refcom' => 1, 'Codpre' => 2, 'Moncau' => 3, 'Mondes' => 4, 'Monret' => 5, 'Id' => 6, ),
-		BasePeer::TYPE_COLNAME => array (OpdetautPeer::NUMORD => 0, OpdetautPeer::REFCOM => 1, OpdetautPeer::CODPRE => 2, OpdetautPeer::MONCAU => 3, OpdetautPeer::MONDES => 4, OpdetautPeer::MONRET => 5, OpdetautPeer::ID => 6, ),
-		BasePeer::TYPE_FIELDNAME => array ('numord' => 0, 'refcom' => 1, 'codpre' => 2, 'moncau' => 3, 'mondes' => 4, 'monret' => 5, 'id' => 6, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
+		BasePeer::TYPE_PHPNAME => array ('Numord' => 0, 'Refcom' => 1, 'Codpre' => 2, 'Moncau' => 3, 'Mondes' => 4, 'Monret' => 5, 'Refsal' => 6, 'Id' => 7, ),
+		BasePeer::TYPE_COLNAME => array (OpdetautPeer::NUMORD => 0, OpdetautPeer::REFCOM => 1, OpdetautPeer::CODPRE => 2, OpdetautPeer::MONCAU => 3, OpdetautPeer::MONDES => 4, OpdetautPeer::MONRET => 5, OpdetautPeer::REFSAL => 6, OpdetautPeer::ID => 7, ),
+		BasePeer::TYPE_FIELDNAME => array ('numord' => 0, 'refcom' => 1, 'codpre' => 2, 'moncau' => 3, 'mondes' => 4, 'monret' => 5, 'refsal' => 6, 'id' => 7, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
 	);
 
 	
@@ -122,6 +125,8 @@ abstract class BaseOpdetautPeer {
 		$criteria->addSelectColumn(OpdetautPeer::MONDES);
 
 		$criteria->addSelectColumn(OpdetautPeer::MONRET);
+
+		$criteria->addSelectColumn(OpdetautPeer::REFSAL);
 
 		$criteria->addSelectColumn(OpdetautPeer::ID);
 

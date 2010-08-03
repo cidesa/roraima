@@ -108,7 +108,7 @@
        'condition' => "$('refere').value != ''",
        'script'   => true,
        'complete' => 'AjaxJSON(request, json),actualizarsaldos(), mensajes();',
-       'with' => "'ajax=6&codigo='+this.value+'&fecha='+$('fecha').value+'&arreglo='+$('opordpag_referencias').value+'&indice='+$('indref').value+'&tipcau='+$('opordpag_tipcau').value+'&fecha2='+$('opordpag_fecemi').value+'&observe='+$('opordpag_observe').value+'&causado='+$('total').value+'&refcre='+$('refcre').value"
+       'with' => "'ajax=6&codigo='+this.value+'&fecha='+$('fecha').value+'&arreglo='+$('opordpag_referencias').value+'&indice='+$('indref').value+'&tipcau='+$('opordpag_tipcau').value+'&fecha2='+$('opordpag_fecemi').value+'&observe='+$('opordpag_observe').value+'&causado='+$('total').value+'&refcre='+$('refcre').value+'&refsolpag='+$('refsolpag').value"
         ))
 )); echo $value ? $value : '&nbsp;' ?>
 
@@ -129,9 +129,12 @@
 <div id="cpcompro" style="display:none">
     <?php if($tipcau==$ordpagcre) { // Orden de pago de creditos ?>
         <?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Ccsoldescuades_Pagemiord/clase/Ccdetcuades/frame/sf_admin_edit_form/obj1/refere/campo1/refcom/obj2/refcre/campo2/codigo')?>
+    <?php } elseif($tipcau==$ordpagsolpag) { ?>
+        <?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Opsolpag_Pagemiord/clase/Opsolpag/frame/sf_admin_edit_form/obj1/refere/campo1/refcom/obj2/refsolpag/campo2/refsol')?>
     <?php } else { ?>
         <?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Cpcompro_Pagemiord/clase/Cpcompro/frame/sf_admin_edit_form/obj1/refere/campo1/refcom')?>
     <?php } ?>
+
 </div>
 </th>
 <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
@@ -173,6 +176,7 @@
  <?php echo input_hidden_tag('totalcomprometido', '') ?><?php echo input_hidden_tag('totalcau', '') ?><?php echo input_hidden_tag('mensaje', '') ?>
 <?php echo input_hidden_tag('ajaxs', '') ?>
 <?php echo input_hidden_tag('refcre', '') ?>
+  <?php echo input_hidden_tag('refsolpag', '') ?>
 </th>
  <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
  <th>

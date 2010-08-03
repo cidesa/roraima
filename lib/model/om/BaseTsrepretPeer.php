@@ -275,8 +275,8 @@ abstract class BaseTsrepretPeer {
 			$criteria->addSelectColumn($column);
 		}
 
-		$criteria->addJoin(TsrepretPeer::CODRET, OptipretPeer::CODTIP);
-
+			$criteria->addJoin(TsrepretPeer::CODRET, OptipretPeer::CODTIP);
+	
 		$rs = TsrepretPeer::doSelectRS($criteria, $con);
 		if ($rs->next()) {
 			return $rs->getInt(1);
@@ -298,11 +298,11 @@ abstract class BaseTsrepretPeer {
 		TsrepretPeer::addSelectColumns($c);
 		$startcol2 = (TsrepretPeer::NUM_COLUMNS - TsrepretPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		OptipretPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + OptipretPeer::NUM_COLUMNS;
-
-		$c->addJoin(TsrepretPeer::CODRET, OptipretPeer::CODTIP);
-
+			OptipretPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + OptipretPeer::NUM_COLUMNS;
+	
+			$c->addJoin(TsrepretPeer::CODRET, OptipretPeer::CODTIP);
+	
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
 
@@ -316,28 +316,28 @@ abstract class BaseTsrepretPeer {
 			$obj1->hydrate($rs);
 
 
-					
-			$omClass = OptipretPeer::getOMClass();
+							
+				$omClass = OptipretPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2 = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2 = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getOptipret(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addTsrepret($obj1); 					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getOptipret(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addTsrepret($obj1); 						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initTsreprets();
-				$obj2->addTsrepret($obj1);
-			}
-
+				if ($newObject) {
+					$obj2->initTsreprets();
+					$obj2->addTsrepret($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;

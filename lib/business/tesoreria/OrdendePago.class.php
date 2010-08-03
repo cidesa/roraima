@@ -545,7 +545,7 @@ class OrdendePago
     }
   }
 
-  public static function formload(&$afectarecargo,&$ordpagnom,&$ordpagapo,&$ordpagliq,&$ordpagfid,&$ordpagval,&$compadic,&$genctaord,&$ordpagcre = '')
+  public static function formload(&$afectarecargo,&$ordpagnom,&$ordpagapo,&$ordpagliq,&$ordpagfid,&$ordpagval,&$compadic,&$genctaord,&$ordpagcre = '', &$ordpagsolpag = '')
   {
     $c = new Criteria();
     $reg= CadefartPeer::doSelectOne($c);
@@ -567,6 +567,7 @@ class OrdendePago
       $compadic=$reg2->getGencomadi();
       $genctaord=$reg2->getGenctaord();
       $ordpagcre = $reg2->getOrdcre();
+      $ordpagsolpag = $reg2->getOrdsolpag();
     }
     else
     {

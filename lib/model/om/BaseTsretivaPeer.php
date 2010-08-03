@@ -280,8 +280,8 @@ abstract class BaseTsretivaPeer {
 			$criteria->addSelectColumn($column);
 		}
 
-		$criteria->addJoin(TsretivaPeer::CODRET, OptipretPeer::CODTIP);
-
+			$criteria->addJoin(TsretivaPeer::CODRET, OptipretPeer::CODTIP);
+	
 		$rs = TsretivaPeer::doSelectRS($criteria, $con);
 		if ($rs->next()) {
 			return $rs->getInt(1);
@@ -303,11 +303,11 @@ abstract class BaseTsretivaPeer {
 		TsretivaPeer::addSelectColumns($c);
 		$startcol2 = (TsretivaPeer::NUM_COLUMNS - TsretivaPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		OptipretPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + OptipretPeer::NUM_COLUMNS;
-
-		$c->addJoin(TsretivaPeer::CODRET, OptipretPeer::CODTIP);
-
+			OptipretPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + OptipretPeer::NUM_COLUMNS;
+	
+			$c->addJoin(TsretivaPeer::CODRET, OptipretPeer::CODTIP);
+	
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
 
@@ -321,28 +321,28 @@ abstract class BaseTsretivaPeer {
 			$obj1->hydrate($rs);
 
 
-					
-			$omClass = OptipretPeer::getOMClass();
+							
+				$omClass = OptipretPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2 = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2 = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getOptipret(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addTsretiva($obj1); 					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getOptipret(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addTsretiva($obj1); 						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initTsretivas();
-				$obj2->addTsretiva($obj1);
-			}
-
+				if ($newObject) {
+					$obj2->initTsretivas();
+					$obj2->addTsretiva($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;

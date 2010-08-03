@@ -1372,6 +1372,7 @@ class tesmovemicheActions extends autotesmovemicheActions
            $concom="";
            $grid=Herramientas::CargarDatosGrid($this,$this->gridOrdPag);
            Cheques::ActualizaOrdPag($tscheemi,$grid,$tippag,$despag,$numcomche,"N",&$this->arraynumche,$concom,$comprobante,$this->reqfirma,$this->mancomegr,$this->comprobaut,&$this->arraynumcue);
+           if(H::getConfApp('entpaggebos', 'tesoreria', 'tsmovemiche')=='S')  Cheques::EnterarPagoGeBOS($tscheemi,$grid);
         }
         //compromisos
       else if ($tscheemi->getOperacion()=='compro')

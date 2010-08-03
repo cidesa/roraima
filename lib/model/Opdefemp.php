@@ -100,6 +100,16 @@ class Opdefemp extends BaseOpdefemp
 		return Herramientas::getX('tipcau','cpdoccau','nomext',self::getOrdtba());
 	}
 
+	public function getNomtipcre()
+	{
+		return Herramientas::getX('tipcau','cpdoccau','nomext',self::getOrdcre());
+	}
+
+  public function getNomsolpag()
+	{
+		return Herramientas::getX('tipcau','cpdoccau','nomext',self::getOrdsolpag());
+	}
+
   public function getAprmonche()
   {
     $dato="";

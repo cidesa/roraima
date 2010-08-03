@@ -148,7 +148,7 @@ abstract class BaseTsdefban extends BaseObject  implements Persistent {
 	protected $salmin;
 
 
-
+	
 	protected $id;
 
 	
@@ -509,7 +509,7 @@ abstract class BaseTsdefban extends BaseObject  implements Persistent {
     else return $this->salmin;
 
   }
-
+  
   public function getId()
   {
 
@@ -564,11 +564,6 @@ abstract class BaseTsdefban extends BaseObject  implements Persistent {
 	public function setFecreg($v)
 	{
 
-		if (is_array($v)){
-        	$value_array = $v;
-        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-		}
-
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecreg] from input: " . var_export($v, true));
@@ -586,11 +581,6 @@ abstract class BaseTsdefban extends BaseObject  implements Persistent {
 	public function setFecven($v)
 	{
 
-		if (is_array($v)){
-        	$value_array = $v;
-        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-		}
-
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecven] from input: " . var_export($v, true));
@@ -607,11 +597,6 @@ abstract class BaseTsdefban extends BaseObject  implements Persistent {
 	
 	public function setFecper($v)
 	{
-
-		if (is_array($v)){
-        	$value_array = $v;
-        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-		}
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
@@ -760,11 +745,6 @@ abstract class BaseTsdefban extends BaseObject  implements Persistent {
 	public function setFecape($v)
 	{
 
-		if (is_array($v)){
-        	$value_array = $v;
-        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-		}
-
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecape] from input: " . var_export($v, true));
@@ -876,11 +856,6 @@ abstract class BaseTsdefban extends BaseObject  implements Persistent {
 	public function setFecaper($v)
 	{
 
-		if (is_array($v)){
-        	$value_array = $v;
-        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-		}
-
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecaper] from input: " . var_export($v, true));
@@ -932,9 +907,9 @@ abstract class BaseTsdefban extends BaseObject  implements Persistent {
         $this->salmin = Herramientas::toFloat($v);
         $this->modifiedColumns[] = TsdefbanPeer::SALMIN;
       }
-
-	}
-
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -1027,7 +1002,7 @@ abstract class BaseTsdefban extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 36;
+            return $startcol + 36; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Tsdefban object", $e);
     }
@@ -1758,7 +1733,10 @@ abstract class BaseTsdefban extends BaseObject  implements Persistent {
 		if ($this->aTstipcue === null && (($this->tipcue !== "" && $this->tipcue !== null))) {
 						include_once 'lib/model/om/BaseTstipcuePeer.php';
 
-			$this->aTstipcue = TstipcuePeer::retrieveByPK($this->tipcue, $con);
+      $c = new Criteria();
+      $c->add(TstipcuePeer::CODTIP,$this->tipcue);
+      
+			$this->aTstipcue = TstipcuePeer::doSelectOne($c, $con);
 
 			
 		}
@@ -1787,7 +1765,10 @@ abstract class BaseTsdefban extends BaseObject  implements Persistent {
 		if ($this->aTstipren === null && (($this->tipren !== "" && $this->tipren !== null))) {
 						include_once 'lib/model/om/BaseTstiprenPeer.php';
 
-			$this->aTstipren = TstiprenPeer::retrieveByPK($this->tipren, $con);
+      $c = new Criteria();
+      $c->add(TstiprenPeer::CODTIP,$this->tipren);
+      
+			$this->aTstipren = TstiprenPeer::doSelectOne($c, $con);
 
 			
 		}
@@ -1997,6 +1978,41 @@ abstract class BaseTsdefban extends BaseObject  implements Persistent {
 
 			if (!isset($this->lastTsmovlibCriteria) || !$this->lastTsmovlibCriteria->equals($criteria)) {
 				$this->collTsmovlibs = TsmovlibPeer::doSelectJoinTstipmov($criteria, $con);
+			}
+		}
+		$this->lastTsmovlibCriteria = $criteria;
+
+		return $this->collTsmovlibs;
+	}
+
+
+	
+	public function getTsmovlibsJoinContabb($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseTsmovlibPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collTsmovlibs === null) {
+			if ($this->isNew()) {
+				$this->collTsmovlibs = array();
+			} else {
+
+				$criteria->add(TsmovlibPeer::NUMCUE, $this->getNumcue());
+
+				$this->collTsmovlibs = TsmovlibPeer::doSelectJoinContabb($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(TsmovlibPeer::NUMCUE, $this->getNumcue());
+
+			if (!isset($this->lastTsmovlibCriteria) || !$this->lastTsmovlibCriteria->equals($criteria)) {
+				$this->collTsmovlibs = TsmovlibPeer::doSelectJoinContabb($criteria, $con);
 			}
 		}
 		$this->lastTsmovlibCriteria = $criteria;

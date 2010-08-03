@@ -48,7 +48,7 @@ abstract class BaseOptipret extends BaseObject  implements Persistent {
 	protected $mbasmi;
 
 
-
+	
 	protected $id;
 
 	
@@ -157,7 +157,7 @@ abstract class BaseOptipret extends BaseObject  implements Persistent {
     else return $this->mbasmi;
 
   }
-
+  
   public function getId()
   {
 
@@ -262,9 +262,9 @@ abstract class BaseOptipret extends BaseObject  implements Persistent {
         $this->mbasmi = Herramientas::toFloat($v);
         $this->modifiedColumns[] = OptipretPeer::MBASMI;
       }
-
-	}
-
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -307,7 +307,7 @@ abstract class BaseOptipret extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 11;
+            return $startcol + 11; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Optipret object", $e);
     }
