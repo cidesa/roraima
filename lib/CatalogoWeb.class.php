@@ -5856,7 +5856,6 @@ public function Catdefcatman_Cattramo($params = '') {
 
 	public function Ccsoldescuades_Pagemiord() {
 
-
     // XX = ccsoldescuades c inner join ccsoldes e on c.ccsoldes_id=e.id
     // YY = (XX) inner join ccdetcuades d on c.cccuades_id=d.cccuades_id
     // ZZ = (YY) inner join cccredit b on e.cccredit_id=b.id
@@ -5864,9 +5863,6 @@ public function Catdefcatman_Cattramo($params = '') {
     // Y = (X) inner join ccdetcuades d on c.cccuades_id=d.cccuades_id
     // Z = (Y) inner join cccredit b on e.cccredit_id=b.id
     // (Z) inner join cpcompro f on b.cpcompro_id=f.id
-
-
-
 
 		$this->sql = "cpcompro.moncom > ((Select case when Sum(moncau) isnull then 0 else Sum(moncau) end as moncau from cpimpcom where refcom=cpcompro.refcom)+(Select case when Sum(monaju) isnull then 0 else Sum(monaju) end as monaju from cpimpcom where refcom=cpcompro.refcom))";
 
@@ -6199,6 +6195,25 @@ public function Catdefcatman_Cattramo($params = '') {
 
 		);
 	}
+
+	public function Opsolpag_Pagemiord() {
+
+		$this->c = new Criteria();
+
+    $this->c->add(OpsolpagPeer::STASOL,'A');
+
+		$this->columnas = array (
+			OpsolpagPeer::REFSOL => 'Nro. Solicitud',
+      OpsolpagPeer::MONSOL => 'Monto',
+      OpsolpagPeer::CEDRIF => 'Cedula/Rif',
+      OpsolpagPeer::NOMBEN => 'Nombre',
+      OpsolpagPeer::REFCOM => 'Compromiso',
+      //OpsolpagPeer::NUMSOLCRE => 'Nro. Sol. Cred.',
+      //OpsolpagPeer::NUMCRE => 'Nro. Credito',
+		);
+
+	}
+
         
 }
 
