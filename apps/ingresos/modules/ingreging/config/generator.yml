@@ -44,7 +44,7 @@ generator:
         Detalles del Ingreso: [ _grid, _moning, _monrec, _mondes, _montot, _comprobante ]
       hide:  [ idrefer, staing, idrefer, blocfec, mansolocor, oculeli ]
       report:
-        url:         ingresos/r.php?m=ingresos&r=inrplarei.php
+        url:         ingresos/r.php?m=ingresos&r=inrplaliq.php
         params:      { referencia: refing }
       actions:
         _list:        ~
