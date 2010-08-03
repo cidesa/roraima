@@ -205,11 +205,6 @@ abstract class BaseTsmovban extends BaseObject  implements Persistent {
 	public function setFecban($v)
 	{
 
-		if (is_array($v)){
-        	$value_array = $v;
-        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-		}
-
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecban] from input: " . var_export($v, true));
@@ -764,7 +759,10 @@ abstract class BaseTsmovban extends BaseObject  implements Persistent {
 		if ($this->aTsdefban === null && (($this->numcue !== "" && $this->numcue !== null))) {
 						include_once 'lib/model/om/BaseTsdefbanPeer.php';
 
-			$this->aTsdefban = TsdefbanPeer::retrieveByPK($this->numcue, $con);
+      $c = new Criteria();
+      $c->add(TsdefbanPeer::NUMCUE,$this->numcue);
+      
+			$this->aTsdefban = TsdefbanPeer::doSelectOne($c, $con);
 
 			
 		}
@@ -793,7 +791,10 @@ abstract class BaseTsmovban extends BaseObject  implements Persistent {
 		if ($this->aTstipmov === null && (($this->tipmov !== "" && $this->tipmov !== null))) {
 						include_once 'lib/model/om/BaseTstipmovPeer.php';
 
-			$this->aTstipmov = TstipmovPeer::retrieveByPK($this->tipmov, $con);
+      $c = new Criteria();
+      $c->add(TstipmovPeer::CODTIP,$this->tipmov);
+      
+			$this->aTstipmov = TstipmovPeer::doSelectOne($c, $con);
 
 			
 		}

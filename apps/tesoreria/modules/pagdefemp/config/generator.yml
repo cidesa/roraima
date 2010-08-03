@@ -48,6 +48,7 @@ generator:
       ordtna:    { name: Tesoreria Nacional  }
       ordtba:    { name: Transferencias Bancarias  }
       ordcre:    { name: Desembolsos de Creditos  }
+      ordsolpag:    { name: Solicitudes de Pago  }  
       monche:    { name: Monto Max. Emitir un Cheque  }
     list:
       title:          Definición de Empresa
@@ -57,7 +58,7 @@ generator:
       max_per_page:   10
     edit:
       title:          Definición de Empresa
-      display:        [codemp, nomemp, diremp, ctapag, nomctapag, ctades, nomctades, numini, forubi, ordnom, ordobr, tipeje, ordliq, ordfid, ordval, unitri, genctaord, gencomadi, gencaubon, vercomret, genordret, emichepag, cuecajchi, nomcuecajchi, tipcajchi, nomtipcajchi, monapecajchi, porrepcajchi, tiprencajchi, nomtiprencajchi, numinicajchi, cedrifcajchi, nomben, codcatcajchi, nomcat, gencomalc, reqaprord, ordcomptot, ordmotanu, manbloqban, ordret, ordconpre, ordtna, ordtba, ordcre, monche]
+      display:        [codemp, nomemp, diremp, ctapag, nomctapag, ctades, nomctades, numini, forubi, ordnom, ordobr, tipeje, ordliq, ordfid, ordval, unitri, genctaord, gencomadi, gencaubon, vercomret, genordret, emichepag, cuecajchi, nomcuecajchi, tipcajchi, nomtipcajchi, monapecajchi, porrepcajchi, tiprencajchi, nomtiprencajchi, numinicajchi, cedrifcajchi, nomben, codcatcajchi, nomcat, gencomalc, reqaprord, ordcomptot, ordmotanu, manbloqban, ordret, ordconpre, ordtna, ordtba, ordcre, monche, ordsolpag]
       fields:
         genctaord:  {type: checkbox_tag}
         gencomadi: {type: checkbox_tag}

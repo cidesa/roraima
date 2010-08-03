@@ -43,7 +43,7 @@ abstract class BaseContabcPeer {
 	
 	const LOGUSE = 'contabc.LOGUSE';
 
-
+	
 	const ID = 'contabc.ID';
 
 	

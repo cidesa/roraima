@@ -444,7 +444,10 @@ abstract class BaseOpretcon extends BaseObject  implements Persistent {
 		if ($this->aOptipret === null && (($this->codtip !== "" && $this->codtip !== null))) {
 						include_once 'lib/model/om/BaseOptipretPeer.php';
 
-			$this->aOptipret = OptipretPeer::retrieveByPK($this->codtip, $con);
+      $c = new Criteria();
+      $c->add(OptipretPeer::CODTIP,$this->codtip);
+      
+			$this->aOptipret = OptipretPeer::doSelectOne($c, $con);
 
 			
 		}

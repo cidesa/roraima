@@ -46,6 +46,8 @@ class OpdetautMapBuilder {
 
 		$tMap->addColumn('MONRET', 'Monret', 'double', CreoleTypes::NUMERIC, false, 14);
 
+		$tMap->addColumn('REFSAL', 'Refsal', 'string', CreoleTypes::VARCHAR, false, 1000);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

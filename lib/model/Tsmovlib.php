@@ -109,4 +109,11 @@ class Tsmovlib extends BaseTsmovlib
   	return $this->savemovcero;
   }
 
+
+  public function getInf()
+  {
+    return "Hola Mundo";
+  }
+
+
 }

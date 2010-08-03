@@ -507,6 +507,9 @@ propel:
     ordcre:
       type: VARCHAR
       size: 4
+    ordsolpag:
+      type: VARCHAR
+      size: 4
     monche:
       type: NUMERIC
       size: 14
@@ -1979,6 +1982,8 @@ propel:
     codcta:
       type: VARCHAR
       size: 32
+      foreignTable: contabb
+      foreignReference: codcta
     numcom:
       type: VARCHAR
       size: 8
@@ -2618,3 +2623,83 @@ propel:
     _uniques:
       unique_tsdefcajchi_codcaj:
         - codcaj
+  opsolpag:
+    refsol:
+      type: VARCHAR
+      size: 8
+      required: true
+    fecsol:
+      type: DATE
+    refcom:
+      type: VARCHAR
+      size: 8
+      foreignTable: cpcompro
+      foreignReference: refcom
+    dessol:
+      type: VARCHAR
+      size: 1000
+    monsol:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    stasol:
+      type: VARCHAR
+      size: 1
+    cedrif:
+      type: VARCHAR
+      size: 15
+    nomben:
+      type: VARCHAR
+      size: 1000
+    numsolcre:
+      type: VARCHAR
+      size: 15
+    numcre:
+      type: VARCHAR
+      size: 15
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  opdetsolpag:
+    refsol:
+      type: VARCHAR
+      size: 8
+      required: true
+      foreignTable: opsolpag
+      foreignReference: refsol
+    codpre:
+      type: VARCHAR
+      size: 32
+      required: true
+    monimp:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    staimp:
+      type: VARCHAR
+      size: 1
+    reford:
+      type: VARCHAR
+      size: 8
+      foreignTable: opordpag
+      foreignReference: numord
+    refere:
+      type: VARCHAR
+      size: 8
+    refprc:
+      type: VARCHAR
+      size: 8
+    refcom:
+      type: VARCHAR
+      size: 8
+      foreignTable: cpcompro
+      foreignReference: refcom
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro

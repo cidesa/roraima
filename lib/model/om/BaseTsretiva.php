@@ -444,7 +444,10 @@ abstract class BaseTsretiva extends BaseObject  implements Persistent {
 		if ($this->aOptipret === null && (($this->codret !== "" && $this->codret !== null))) {
 						include_once 'lib/model/om/BaseOptipretPeer.php';
 
-			$this->aOptipret = OptipretPeer::retrieveByPK($this->codret, $con);
+      $c = new Criteria();
+      $c->add(OptipretPeer::CODTIP,$this->codret);
+      
+			$this->aOptipret = OptipretPeer::doSelectOne($c, $con);
 
 			
 		}

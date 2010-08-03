@@ -767,4 +767,39 @@ abstract class BaseTstipmov extends BaseObject  implements Persistent {
 		return $this->collTsmovlibs;
 	}
 
+
+	
+	public function getTsmovlibsJoinContabb($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseTsmovlibPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collTsmovlibs === null) {
+			if ($this->isNew()) {
+				$this->collTsmovlibs = array();
+			} else {
+
+				$criteria->add(TsmovlibPeer::TIPMOV, $this->getCodtip());
+
+				$this->collTsmovlibs = TsmovlibPeer::doSelectJoinContabb($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(TsmovlibPeer::TIPMOV, $this->getCodtip());
+
+			if (!isset($this->lastTsmovlibCriteria) || !$this->lastTsmovlibCriteria->equals($criteria)) {
+				$this->collTsmovlibs = TsmovlibPeer::doSelectJoinContabb($criteria, $con);
+			}
+		}
+		$this->lastTsmovlibCriteria = $criteria;
+
+		return $this->collTsmovlibs;
+	}
+
 } 

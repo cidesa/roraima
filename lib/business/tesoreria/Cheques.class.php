@@ -2202,5 +2202,39 @@ class Cheques
 		 return 0;
 	}
   }
+
+  public static function EnterarPagoGeBOS($tscheemi,$grid)
+  {
+    $grid = $grid[0];
+    
+    foreach($grid as $g){
+      $c = new Criteria();
+      $c->add(OpdetsolpagPeer::REFORD,$g->getNumord());
+      $opdetsolpag = OpdetsolpagPeer::doSelectOne($c);
+      if($opdetsolpag) // existe la solicitud de pago
+      {
+        $opsolpag = $opdetsolpag->getOpsolpag();
+        // Entero al GeBos mediante el servicio web
+        $urlws = H::getConfApp('urlwsdlgebos', 'tesoreria', 'tesmovemiche');
+        if($urlws){
+          try{
+            $client = new SoapClient($urlws);
+            $det = array(array($opsolpag->getNomben(),$tscheemi->getNomcue(),$tscheemi->getNumche(),$tscheemi->getFecemi(),$tscheemi->getMonche()));
+            $result = $client->__call('notificarPago', array('',$opsolpag->getNumsolcre(),$opsolpag->getNumcre(),$opdetsolpag->getReford(),$det));
+            
+          }catch(Exception $ex){
+            
+          }
+
+
+        }
+        
+      }
+
+
+    }
+
+  }
+
 }
 ?>

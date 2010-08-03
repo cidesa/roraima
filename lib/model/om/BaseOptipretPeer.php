@@ -49,7 +49,7 @@ abstract class BaseOptipretPeer {
 	
 	const MBASMI = 'optipret.MBASMI';
 
-
+	
 	const ID = 'optipret.ID';
 
 	

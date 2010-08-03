@@ -36,7 +36,7 @@ abstract class BaseTssalcaj extends BaseObject  implements Persistent {
 	protected $codcaj;
 
 
-
+	
 	protected $id;
 
 	
@@ -110,7 +110,7 @@ abstract class BaseTssalcaj extends BaseObject  implements Persistent {
     return trim($this->codcaj);
 
   }
-
+  
   public function getId()
   {
 
@@ -192,9 +192,9 @@ abstract class BaseTssalcaj extends BaseObject  implements Persistent {
         $this->codcaj = $v;
         $this->modifiedColumns[] = TssalcajPeer::CODCAJ;
       }
-
-	}
-
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -231,7 +231,7 @@ abstract class BaseTssalcaj extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 8;
+            return $startcol + 8; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Tssalcaj object", $e);
     }

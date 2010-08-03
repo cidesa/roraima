@@ -18,8 +18,8 @@ class Atmunicipios extends BaseAtmunicipios
 
   public function afterHydrate()
   {
-    $estado = $this->getAtestados();
-    if($estado!='') $this->desest = $estado->getDesest();
+    //$estado = $this->getAtestados();
+    //if($estado!='') $this->desest = $estado->getDesest();
 
   }
 

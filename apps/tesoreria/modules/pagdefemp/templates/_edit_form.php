@@ -528,7 +528,7 @@
 
  <?php echo input_auto_complete_tag('opdefemp[ordcre]', $opdefemp->getOrdcre(),
   'pagdefemp/autocomplete?ajax=5',  array('autocomplete' => 'off','maxlength' => 4,
-  'onKeyPress' => "javascript:cadena=this.value;cadena=cadena.toUpperCase();document.getElementById('opdefemp_ordtba').value=cadena",
+  'onKeyPress' => "javascript:cadena=this.value;cadena=cadena.toUpperCase();document.getElementById('opdefemp_ordcre').value=cadena",
   'onBlur'=> remote_function(array(
         'url'      => 'pagdefemp/ajax',
         'complete' => 'AjaxJSON(request, json)',
@@ -550,6 +550,43 @@
   'disabled' => true,
   'control_name' => 'opdefemp[nomtipcre]',
   )); echo $value ? $value : '&nbsp;' ?>
+
+
+<table>
+<tr>
+<th>
+  <?php echo label_for('opdefemp[ordsolpag]', __($labels['opdefemp{ordsolpag}']), 'class="required" Style="width:40px"') ?>
+  <div class="content<?php if ($sf_request->hasError('opdefemp{ordsolpag}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('opdefemp{ordsolpag}')): ?>
+    <?php echo form_error('opdefemp{ordsolpag}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+ <?php echo input_auto_complete_tag('opdefemp[ordsolpag]', $opdefemp->getOrdsolpag(),
+  'pagdefemp/autocomplete?ajax=5',  array('autocomplete' => 'off','maxlength' => 4,
+  'onKeyPress' => "javascript:cadena=this.value;cadena=cadena.toUpperCase();document.getElementById('opdefemp_ordsolpag').value=cadena",
+  'onBlur'=> remote_function(array(
+        'url'      => 'pagdefemp/ajax',
+        'complete' => 'AjaxJSON(request, json)',
+        'condition' => "$('opdefemp_ordsolpag').value != '' ",
+        'script' => true,
+        'with' => "'ajax=1&cajtexmos=opdefemp_nomsolpag&codigo='+this.value"
+        ))),
+     array('use_style' => 'true',)
+  )
+?></div>
+</th>
+<th>
+&nbsp;&nbsp;&nbsp; <?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Opdefemp_pagdefemp2/clase/Cpdoccau/frame/sf_admin_edit_form/obj1/opdefemp_nomsolpag/obj2/opdefemp_ordsolpag/campo1/nomext/campo2/tipcau/param1/1')?>
+</th>
+</tr>
+</table>
+<?php $value = object_input_tag($opdefemp, 'getNomsolpag', array (
+  'size' => 60,
+  'disabled' => true,
+  'control_name' => 'opdefemp[nomsolpag]',
+  )); echo $value ? $value : '&nbsp;' ?>
+
+
 </div>
   </fieldset>
  </th>

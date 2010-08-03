@@ -268,11 +268,11 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 	protected $numcta;
 
 
-
+	
 	protected $tipdoc;
 
 
-
+	
 	protected $loguse;
 
 
@@ -280,7 +280,10 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 	protected $id;
 
 	
-	protected $aOpbenefi;
+	protected $collOpdetsolpags;
+
+	
+	protected $lastOpdetsolpagCriteria = null;
 
 	
 	protected $alreadyInSave = false;
@@ -972,14 +975,14 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
     return trim($this->numcta);
 
   }
-
+  
   public function getTipdoc()
   {
 
     return trim($this->tipdoc);
 
   }
-
+  
   public function getLoguse()
   {
 
@@ -1017,11 +1020,6 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 	public function setFecemi($v)
 	{
 
-		if (is_array($v)){
-        	$value_array = $v;
-        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-		}
-
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecemi] from input: " . var_export($v, true));
@@ -1044,10 +1042,6 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
         $this->modifiedColumns[] = OpordpagPeer::CEDRIF;
       }
   
-		if ($this->aOpbenefi !== null && $this->aOpbenefi->getCedrif() !== $v) {
-			$this->aOpbenefi = null;
-		}
-
 	} 
 	
 	public function setNomben($v)
@@ -1163,11 +1157,6 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 	public function setFecenvcon($v)
 	{
 
-		if (is_array($v)){
-        	$value_array = $v;
-        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-		}
-
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecenvcon] from input: " . var_export($v, true));
@@ -1184,11 +1173,6 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 	
 	public function setFecenvfin($v)
 	{
-
-		if (is_array($v)){
-        	$value_array = $v;
-        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-		}
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
@@ -1227,11 +1211,6 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 	public function setFecven($v)
 	{
 
-		if (is_array($v)){
-        	$value_array = $v;
-        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-		}
-
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecven] from input: " . var_export($v, true));
@@ -1248,11 +1227,6 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 	
 	public function setFecanu($v)
 	{
-
-		if (is_array($v)){
-        	$value_array = $v;
-        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-		}
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
@@ -1311,11 +1285,6 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 	public function setFecrecfin($v)
 	{
 
-		if (is_array($v)){
-        	$value_array = $v;
-        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-		}
-
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecrecfin] from input: " . var_export($v, true));
@@ -1342,11 +1311,6 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 	
 	public function setFecpag($v)
 	{
-
-		if (is_array($v)){
-        	$value_array = $v;
-        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-		}
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
@@ -1425,11 +1389,6 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 	public function setFeccon($v)
 	{
 
-		if (is_array($v)){
-        	$value_array = $v;
-        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-		}
-
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [feccon] from input: " . var_export($v, true));
@@ -1487,11 +1446,6 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 	public function setFechafac($v)
 	{
 
-		if (is_array($v)){
-        	$value_array = $v;
-        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-		}
-
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fechafac] from input: " . var_export($v, true));
@@ -1508,11 +1462,6 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 	
 	public function setFecfac($v)
 	{
-
-		if (is_array($v)){
-        	$value_array = $v;
-        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-		}
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
@@ -1551,11 +1500,6 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 	public function setFeccomret($v)
 	{
 
-		if (is_array($v)){
-        	$value_array = $v;
-        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-		}
-
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [feccomret] from input: " . var_export($v, true));
@@ -1582,11 +1526,6 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 	
 	public function setFeccomretislr($v)
 	{
-
-		if (is_array($v)){
-        	$value_array = $v;
-        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-		}
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
@@ -1615,11 +1554,6 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 	public function setFeccomretltf($v)
 	{
 
-		if (is_array($v)){
-        	$value_array = $v;
-        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-		}
-
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [feccomretltf] from input: " . var_export($v, true));
@@ -1646,11 +1580,6 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 	
 	public function setFecsigecof($v)
 	{
-
-		if (is_array($v)){
-        	$value_array = $v;
-        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-		}
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
@@ -1718,11 +1647,6 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 	
 	public function setFecret($v)
 	{
-
-		if (is_array($v)){
-        	$value_array = $v;
-        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-		}
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
@@ -1825,9 +1749,9 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
         $this->numcta = $v;
         $this->modifiedColumns[] = OpordpagPeer::NUMCTA;
       }
-
-	}
-
+  
+	} 
+	
 	public function setTipdoc($v)
 	{
 
@@ -1835,9 +1759,9 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
         $this->tipdoc = $v;
         $this->modifiedColumns[] = OpordpagPeer::TIPDOC;
       }
-
-	}
-
+  
+	} 
+	
 	public function setLoguse($v)
 	{
 
@@ -2081,15 +2005,6 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 			$this->alreadyInSave = true;
 
 
-												
-			if ($this->aOpbenefi !== null) {
-				if ($this->aOpbenefi->isModified()) {
-					$affectedRows += $this->aOpbenefi->save($con);
-				}
-				$this->setOpbenefi($this->aOpbenefi);
-			}
-
-
 						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = OpordpagPeer::doInsert($this, $con);
@@ -2100,6 +2015,14 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 					$affectedRows += OpordpagPeer::doUpdate($this, $con);
 				}
 				$this->resetModified(); 			}
+
+			if ($this->collOpdetsolpags !== null) {
+				foreach($this->collOpdetsolpags as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
 
 			$this->alreadyInSave = false;
 		}
@@ -2137,18 +2060,18 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 			$failureMap = array();
 
 
-												
-			if ($this->aOpbenefi !== null) {
-				if (!$this->aOpbenefi->validate($columns)) {
-					$failureMap = array_merge($failureMap, $this->aOpbenefi->getValidationFailures());
-				}
-			}
-
-
 			if (($retval = OpordpagPeer::doValidate($this, $columns)) !== true) {
 				$failureMap = array_merge($failureMap, $retval);
 			}
 
+
+				if ($this->collOpdetsolpags !== null) {
+					foreach($this->collOpdetsolpags as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
 
 
 			$this->alreadyInValidation = false;
@@ -2984,6 +2907,15 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 		$copyObj->setLoguse($this->loguse);
 
 
+		if ($deepCopy) {
+									$copyObj->setNew(false);
+
+			foreach($this->getOpdetsolpags() as $relObj) {
+				$copyObj->addOpdetsolpag($relObj->copy($deepCopy));
+			}
+
+		} 
+
 		$copyObj->setNew(true);
 
 		$copyObj->setId(NULL); 
@@ -3008,32 +2940,143 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 	}
 
 	
-	public function setOpbenefi($v)
+	public function initOpdetsolpags()
 	{
+		if ($this->collOpdetsolpags === null) {
+			$this->collOpdetsolpags = array();
+		}
+	}
 
-
-		if ($v === null) {
-			$this->setCedrif(NULL);
-		} else {
-			$this->setCedrif($v->getCedrif());
+	
+	public function getOpdetsolpags($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseOpdetsolpagPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
 		}
 
+		if ($this->collOpdetsolpags === null) {
+			if ($this->isNew()) {
+			   $this->collOpdetsolpags = array();
+			} else {
 
-		$this->aOpbenefi = $v;
+				$criteria->add(OpdetsolpagPeer::REFORD, $this->getNumord());
+
+				OpdetsolpagPeer::addSelectColumns($criteria);
+				$this->collOpdetsolpags = OpdetsolpagPeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(OpdetsolpagPeer::REFORD, $this->getNumord());
+
+				OpdetsolpagPeer::addSelectColumns($criteria);
+				if (!isset($this->lastOpdetsolpagCriteria) || !$this->lastOpdetsolpagCriteria->equals($criteria)) {
+					$this->collOpdetsolpags = OpdetsolpagPeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastOpdetsolpagCriteria = $criteria;
+		return $this->collOpdetsolpags;
+	}
+
+	
+	public function countOpdetsolpags($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/om/BaseOpdetsolpagPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(OpdetsolpagPeer::REFORD, $this->getNumord());
+
+		return OpdetsolpagPeer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addOpdetsolpag(Opdetsolpag $l)
+	{
+		$this->collOpdetsolpags[] = $l;
+		$l->setOpordpag($this);
 	}
 
 
 	
-	public function getOpbenefi($con = null)
+	public function getOpdetsolpagsJoinOpsolpag($criteria = null, $con = null)
 	{
-		if ($this->aOpbenefi === null && (($this->cedrif !== "" && $this->cedrif !== null))) {
-						include_once 'lib/model/om/BaseOpbenefiPeer.php';
-
-			$this->aOpbenefi = OpbenefiPeer::retrieveByPK($this->cedrif, $con);
-
-			
+				include_once 'lib/model/om/BaseOpdetsolpagPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
 		}
-		return $this->aOpbenefi;
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collOpdetsolpags === null) {
+			if ($this->isNew()) {
+				$this->collOpdetsolpags = array();
+			} else {
+
+				$criteria->add(OpdetsolpagPeer::REFORD, $this->getNumord());
+
+				$this->collOpdetsolpags = OpdetsolpagPeer::doSelectJoinOpsolpag($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(OpdetsolpagPeer::REFORD, $this->getNumord());
+
+			if (!isset($this->lastOpdetsolpagCriteria) || !$this->lastOpdetsolpagCriteria->equals($criteria)) {
+				$this->collOpdetsolpags = OpdetsolpagPeer::doSelectJoinOpsolpag($criteria, $con);
+			}
+		}
+		$this->lastOpdetsolpagCriteria = $criteria;
+
+		return $this->collOpdetsolpags;
+	}
+
+
+	
+	public function getOpdetsolpagsJoinCpcompro($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseOpdetsolpagPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collOpdetsolpags === null) {
+			if ($this->isNew()) {
+				$this->collOpdetsolpags = array();
+			} else {
+
+				$criteria->add(OpdetsolpagPeer::REFORD, $this->getNumord());
+
+				$this->collOpdetsolpags = OpdetsolpagPeer::doSelectJoinCpcompro($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(OpdetsolpagPeer::REFORD, $this->getNumord());
+
+			if (!isset($this->lastOpdetsolpagCriteria) || !$this->lastOpdetsolpagCriteria->equals($criteria)) {
+				$this->collOpdetsolpags = OpdetsolpagPeer::doSelectJoinCpcompro($criteria, $con);
+			}
+		}
+		$this->lastOpdetsolpagCriteria = $criteria;
+
+		return $this->collOpdetsolpags;
 	}
 
 } 

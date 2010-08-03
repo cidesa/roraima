@@ -46,7 +46,7 @@ class TsmovlibMapBuilder {
 
 		$tMap->addColumn('MONMOV', 'Monmov', 'double', CreoleTypes::NUMERIC, true, 14);
 
-		$tMap->addColumn('CODCTA', 'Codcta', 'string', CreoleTypes::VARCHAR, false, 32);
+		$tMap->addForeignKey('CODCTA', 'Codcta', 'string', CreoleTypes::VARCHAR, 'contabb', 'CODCTA', false, 32);
 
 		$tMap->addColumn('NUMCOM', 'Numcom', 'string', CreoleTypes::VARCHAR, false, 8);
 

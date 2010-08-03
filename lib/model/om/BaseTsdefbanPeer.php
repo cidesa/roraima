@@ -124,7 +124,7 @@ abstract class BaseTsdefbanPeer {
 	
 	const SALMIN = 'tsdefban.SALMIN';
 
-
+	
 	const ID = 'tsdefban.ID';
 
 	
@@ -515,10 +515,10 @@ abstract class BaseTsdefbanPeer {
 			$criteria->addSelectColumn($column);
 		}
 
-		$criteria->addJoin(TsdefbanPeer::TIPCUE, TstipcuePeer::CODTIP);
-
-		$criteria->addJoin(TsdefbanPeer::TIPREN, TstiprenPeer::CODTIP);
-
+			$criteria->addJoin(TsdefbanPeer::TIPCUE, TstipcuePeer::CODTIP);
+	
+			$criteria->addJoin(TsdefbanPeer::TIPREN, TstiprenPeer::CODTIP);
+	
 		$rs = TsdefbanPeer::doSelectRS($criteria, $con);
 		if ($rs->next()) {
 			return $rs->getInt(1);
@@ -540,16 +540,16 @@ abstract class BaseTsdefbanPeer {
 		TsdefbanPeer::addSelectColumns($c);
 		$startcol2 = (TsdefbanPeer::NUM_COLUMNS - TsdefbanPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		TstipcuePeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + TstipcuePeer::NUM_COLUMNS;
-
-		TstiprenPeer::addSelectColumns($c);
-		$startcol4 = $startcol3 + TstiprenPeer::NUM_COLUMNS;
-
-		$c->addJoin(TsdefbanPeer::TIPCUE, TstipcuePeer::CODTIP);
-
-		$c->addJoin(TsdefbanPeer::TIPREN, TstiprenPeer::CODTIP);
-
+			TstipcuePeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + TstipcuePeer::NUM_COLUMNS;
+	
+			TstiprenPeer::addSelectColumns($c);
+			$startcol4 = $startcol3 + TstiprenPeer::NUM_COLUMNS;
+	
+			$c->addJoin(TsdefbanPeer::TIPCUE, TstipcuePeer::CODTIP);
+	
+			$c->addJoin(TsdefbanPeer::TIPREN, TstiprenPeer::CODTIP);
+	
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
 
@@ -563,112 +563,112 @@ abstract class BaseTsdefbanPeer {
 			$obj1->hydrate($rs);
 
 
-					
-			$omClass = TstipcuePeer::getOMClass();
+							
+				$omClass = TstipcuePeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2 = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2 = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getTstipcue(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addTsdefban($obj1); 					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getTstipcue(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addTsdefban($obj1); 						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initTsdefbans();
-				$obj2->addTsdefban($obj1);
-			}
-
-
-					
-			$omClass = TstiprenPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj3 = new $cls();
-			$obj3->hydrate($rs, $startcol3);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj3 = $temp_obj1->getTstipren(); 				if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj3->addTsdefban($obj1); 					break;
+				if ($newObject) {
+					$obj2->initTsdefbans();
+					$obj2->addTsdefban($obj1);
 				}
-			}
+	
 
-			if ($newObject) {
-				$obj3->initTsdefbans();
-				$obj3->addTsdefban($obj1);
-			}
+							
+				$omClass = TstiprenPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj3 = new $cls();
+				$obj3->hydrate($rs, $startcol3);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj3 = $temp_obj1->getTstipren(); 					if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj3->addTsdefban($obj1); 						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj3->initTsdefbans();
+					$obj3->addTsdefban($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;
 	}
 
 
-	
-	public static function doCountJoinAllExceptTstipcue(Criteria $criteria, $distinct = false, $con = null)
-	{
-				$criteria = clone $criteria;
-
-				$criteria->clearSelectColumns()->clearOrderByColumns();
-		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(TsdefbanPeer::COUNT_DISTINCT);
-		} else {
-			$criteria->addSelectColumn(TsdefbanPeer::COUNT);
-		}
-
-				foreach($criteria->getGroupByColumns() as $column)
+		
+		public static function doCountJoinAllExceptTstipcue(Criteria $criteria, $distinct = false, $con = null)
 		{
-			$criteria->addSelectColumn($column);
-		}
+						$criteria = clone $criteria;
 
-		$criteria->addJoin(TsdefbanPeer::TIPREN, TstiprenPeer::CODTIP);
+						$criteria->clearSelectColumns()->clearOrderByColumns();
+			if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+				$criteria->addSelectColumn(TsdefbanPeer::COUNT_DISTINCT);
+			} else {
+				$criteria->addSelectColumn(TsdefbanPeer::COUNT);
+			}
 
-		$rs = TsdefbanPeer::doSelectRS($criteria, $con);
-		if ($rs->next()) {
-			return $rs->getInt(1);
-		} else {
-						return 0;
-		}
-	}
-
-
+						foreach($criteria->getGroupByColumns() as $column)
+			{
+				$criteria->addSelectColumn($column);
+			}
 	
-	public static function doCountJoinAllExceptTstipren(Criteria $criteria, $distinct = false, $con = null)
-	{
-				$criteria = clone $criteria;
-
-				$criteria->clearSelectColumns()->clearOrderByColumns();
-		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(TsdefbanPeer::COUNT_DISTINCT);
-		} else {
-			$criteria->addSelectColumn(TsdefbanPeer::COUNT);
+				$criteria->addJoin(TsdefbanPeer::TIPREN, TstiprenPeer::CODTIP);
+		
+			$rs = TsdefbanPeer::doSelectRS($criteria, $con);
+			if ($rs->next()) {
+				return $rs->getInt(1);
+			} else {
+								return 0;
+			}
 		}
+	
 
-				foreach($criteria->getGroupByColumns() as $column)
+		
+		public static function doCountJoinAllExceptTstipren(Criteria $criteria, $distinct = false, $con = null)
 		{
-			$criteria->addSelectColumn($column);
+						$criteria = clone $criteria;
+
+						$criteria->clearSelectColumns()->clearOrderByColumns();
+			if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+				$criteria->addSelectColumn(TsdefbanPeer::COUNT_DISTINCT);
+			} else {
+				$criteria->addSelectColumn(TsdefbanPeer::COUNT);
+			}
+
+						foreach($criteria->getGroupByColumns() as $column)
+			{
+				$criteria->addSelectColumn($column);
+			}
+	
+				$criteria->addJoin(TsdefbanPeer::TIPCUE, TstipcuePeer::CODTIP);
+		
+			$rs = TsdefbanPeer::doSelectRS($criteria, $con);
+			if ($rs->next()) {
+				return $rs->getInt(1);
+			} else {
+								return 0;
+			}
 		}
-
-		$criteria->addJoin(TsdefbanPeer::TIPCUE, TstipcuePeer::CODTIP);
-
-		$rs = TsdefbanPeer::doSelectRS($criteria, $con);
-		if ($rs->next()) {
-			return $rs->getInt(1);
-		} else {
-						return 0;
-		}
-	}
-
+	
 
 	
 	public static function doSelectJoinAllExceptTstipcue(Criteria $c, $con = null)
@@ -682,11 +682,11 @@ abstract class BaseTsdefbanPeer {
 		TsdefbanPeer::addSelectColumns($c);
 		$startcol2 = (TsdefbanPeer::NUM_COLUMNS - TsdefbanPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		TstiprenPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + TstiprenPeer::NUM_COLUMNS;
-
-		$c->addJoin(TsdefbanPeer::TIPREN, TstiprenPeer::CODTIP);
-
+			TstiprenPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + TstiprenPeer::NUM_COLUMNS;
+	
+			$c->addJoin(TsdefbanPeer::TIPREN, TstiprenPeer::CODTIP);
+	
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
@@ -699,28 +699,28 @@ abstract class BaseTsdefbanPeer {
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
 
-			$omClass = TstiprenPeer::getOMClass();
+				$omClass = TstiprenPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2  = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2  = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getTstipren(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addTsdefban($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getTstipren(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addTsdefban($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initTsdefbans();
-				$obj2->addTsdefban($obj1);
-			}
-
+				if ($newObject) {
+					$obj2->initTsdefbans();
+					$obj2->addTsdefban($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;
@@ -739,11 +739,11 @@ abstract class BaseTsdefbanPeer {
 		TsdefbanPeer::addSelectColumns($c);
 		$startcol2 = (TsdefbanPeer::NUM_COLUMNS - TsdefbanPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		TstipcuePeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + TstipcuePeer::NUM_COLUMNS;
-
-		$c->addJoin(TsdefbanPeer::TIPCUE, TstipcuePeer::CODTIP);
-
+			TstipcuePeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + TstipcuePeer::NUM_COLUMNS;
+	
+			$c->addJoin(TsdefbanPeer::TIPCUE, TstipcuePeer::CODTIP);
+	
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
@@ -756,28 +756,28 @@ abstract class BaseTsdefbanPeer {
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
 
-			$omClass = TstipcuePeer::getOMClass();
+				$omClass = TstipcuePeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2  = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2  = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getTstipcue(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addTsdefban($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getTstipcue(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addTsdefban($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initTsdefbans();
-				$obj2->addTsdefban($obj1);
-			}
-
+				if ($newObject) {
+					$obj2->initTsdefbans();
+					$obj2->addTsdefban($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;

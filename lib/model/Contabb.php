@@ -9,6 +9,9 @@
  */
 class Contabb extends BaseContabb
 {
+  public function __toString() {
+    return $this->codcta;
+  }
   public function getCodigo1()
   {
    return self::getCodcta();

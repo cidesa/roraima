@@ -40,7 +40,7 @@ abstract class BaseContabc extends BaseObject  implements Persistent {
 	protected $loguse;
 
 
-
+	
 	protected $id;
 
 	
@@ -127,7 +127,7 @@ abstract class BaseContabc extends BaseObject  implements Persistent {
     return trim($this->loguse);
 
   }
-
+  
   public function getId()
   {
 
@@ -219,9 +219,9 @@ abstract class BaseContabc extends BaseObject  implements Persistent {
         $this->loguse = $v;
         $this->modifiedColumns[] = ContabcPeer::LOGUSE;
       }
-
-	}
-
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -260,7 +260,7 @@ abstract class BaseContabc extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 9;
+            return $startcol + 9; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Contabc object", $e);
     }

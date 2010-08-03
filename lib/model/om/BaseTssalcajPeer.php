@@ -40,7 +40,7 @@ abstract class BaseTssalcajPeer {
 	
 	const CODCAJ = 'tssalcaj.CODCAJ';
 
-
+	
 	const ID = 'tssalcaj.ID';
 
 	

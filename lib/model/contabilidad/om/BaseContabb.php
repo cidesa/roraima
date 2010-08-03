@@ -52,6 +52,12 @@ abstract class BaseContabb extends BaseObject  implements Persistent {
 	protected $id;
 
 	
+	protected $collTsmovlibs;
+
+	
+	protected $lastTsmovlibCriteria = null;
+
+	
 	protected $collCpdeftits;
 
 	
@@ -68,18 +74,6 @@ abstract class BaseContabb extends BaseObject  implements Persistent {
 
 	
 	protected $lastContabc1Criteria = null;
-
-	
-	protected $collCcfuefins;
-
-	
-	protected $lastCcfuefinCriteria = null;
-
-	
-	protected $collCcparpros;
-
-	
-	protected $lastCcparproCriteria = null;
 
 	
 	protected $alreadyInSave = false;
@@ -443,6 +437,14 @@ abstract class BaseContabb extends BaseObject  implements Persistent {
 				}
 				$this->resetModified(); 			}
 
+			if ($this->collTsmovlibs !== null) {
+				foreach($this->collTsmovlibs as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
+
 			if ($this->collCpdeftits !== null) {
 				foreach($this->collCpdeftits as $referrerFK) {
 					if (!$referrerFK->isDeleted()) {
@@ -461,22 +463,6 @@ abstract class BaseContabb extends BaseObject  implements Persistent {
 
 			if ($this->collContabc1s !== null) {
 				foreach($this->collContabc1s as $referrerFK) {
-					if (!$referrerFK->isDeleted()) {
-						$affectedRows += $referrerFK->save($con);
-					}
-				}
-			}
-
-			if ($this->collCcfuefins !== null) {
-				foreach($this->collCcfuefins as $referrerFK) {
-					if (!$referrerFK->isDeleted()) {
-						$affectedRows += $referrerFK->save($con);
-					}
-				}
-			}
-
-			if ($this->collCcparpros !== null) {
-				foreach($this->collCcparpros as $referrerFK) {
 					if (!$referrerFK->isDeleted()) {
 						$affectedRows += $referrerFK->save($con);
 					}
@@ -524,6 +510,14 @@ abstract class BaseContabb extends BaseObject  implements Persistent {
 			}
 
 
+				if ($this->collTsmovlibs !== null) {
+					foreach($this->collTsmovlibs as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
+
 				if ($this->collCpdeftits !== null) {
 					foreach($this->collCpdeftits as $referrerFK) {
 						if (!$referrerFK->validate($columns)) {
@@ -542,22 +536,6 @@ abstract class BaseContabb extends BaseObject  implements Persistent {
 
 				if ($this->collContabc1s !== null) {
 					foreach($this->collContabc1s as $referrerFK) {
-						if (!$referrerFK->validate($columns)) {
-							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
-						}
-					}
-				}
-
-				if ($this->collCcfuefins !== null) {
-					foreach($this->collCcfuefins as $referrerFK) {
-						if (!$referrerFK->validate($columns)) {
-							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
-						}
-					}
-				}
-
-				if ($this->collCcparpros !== null) {
-					foreach($this->collCcparpros as $referrerFK) {
 						if (!$referrerFK->validate($columns)) {
 							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
 						}
@@ -774,6 +752,10 @@ abstract class BaseContabb extends BaseObject  implements Persistent {
 		if ($deepCopy) {
 									$copyObj->setNew(false);
 
+			foreach($this->getTsmovlibs() as $relObj) {
+				$copyObj->addTsmovlib($relObj->copy($deepCopy));
+			}
+
 			foreach($this->getCpdeftits() as $relObj) {
 				$copyObj->addCpdeftit($relObj->copy($deepCopy));
 			}
@@ -784,14 +766,6 @@ abstract class BaseContabb extends BaseObject  implements Persistent {
 
 			foreach($this->getContabc1s() as $relObj) {
 				$copyObj->addContabc1($relObj->copy($deepCopy));
-			}
-
-			foreach($this->getCcfuefins() as $relObj) {
-				$copyObj->addCcfuefin($relObj->copy($deepCopy));
-			}
-
-			foreach($this->getCcparpros() as $relObj) {
-				$copyObj->addCcparpro($relObj->copy($deepCopy));
 			}
 
 		} 
@@ -817,6 +791,146 @@ abstract class BaseContabb extends BaseObject  implements Persistent {
 			self::$peer = new ContabbPeer();
 		}
 		return self::$peer;
+	}
+
+	
+	public function initTsmovlibs()
+	{
+		if ($this->collTsmovlibs === null) {
+			$this->collTsmovlibs = array();
+		}
+	}
+
+	
+	public function getTsmovlibs($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseTsmovlibPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collTsmovlibs === null) {
+			if ($this->isNew()) {
+			   $this->collTsmovlibs = array();
+			} else {
+
+				$criteria->add(TsmovlibPeer::CODCTA, $this->getCodcta());
+
+				TsmovlibPeer::addSelectColumns($criteria);
+				$this->collTsmovlibs = TsmovlibPeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(TsmovlibPeer::CODCTA, $this->getCodcta());
+
+				TsmovlibPeer::addSelectColumns($criteria);
+				if (!isset($this->lastTsmovlibCriteria) || !$this->lastTsmovlibCriteria->equals($criteria)) {
+					$this->collTsmovlibs = TsmovlibPeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastTsmovlibCriteria = $criteria;
+		return $this->collTsmovlibs;
+	}
+
+	
+	public function countTsmovlibs($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/om/BaseTsmovlibPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(TsmovlibPeer::CODCTA, $this->getCodcta());
+
+		return TsmovlibPeer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addTsmovlib(Tsmovlib $l)
+	{
+		$this->collTsmovlibs[] = $l;
+		$l->setContabb($this);
+	}
+
+
+	
+	public function getTsmovlibsJoinTsdefban($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseTsmovlibPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collTsmovlibs === null) {
+			if ($this->isNew()) {
+				$this->collTsmovlibs = array();
+			} else {
+
+				$criteria->add(TsmovlibPeer::CODCTA, $this->getCodcta());
+
+				$this->collTsmovlibs = TsmovlibPeer::doSelectJoinTsdefban($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(TsmovlibPeer::CODCTA, $this->getCodcta());
+
+			if (!isset($this->lastTsmovlibCriteria) || !$this->lastTsmovlibCriteria->equals($criteria)) {
+				$this->collTsmovlibs = TsmovlibPeer::doSelectJoinTsdefban($criteria, $con);
+			}
+		}
+		$this->lastTsmovlibCriteria = $criteria;
+
+		return $this->collTsmovlibs;
+	}
+
+
+	
+	public function getTsmovlibsJoinTstipmov($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseTsmovlibPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collTsmovlibs === null) {
+			if ($this->isNew()) {
+				$this->collTsmovlibs = array();
+			} else {
+
+				$criteria->add(TsmovlibPeer::CODCTA, $this->getCodcta());
+
+				$this->collTsmovlibs = TsmovlibPeer::doSelectJoinTstipmov($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(TsmovlibPeer::CODCTA, $this->getCodcta());
+
+			if (!isset($this->lastTsmovlibCriteria) || !$this->lastTsmovlibCriteria->equals($criteria)) {
+				$this->collTsmovlibs = TsmovlibPeer::doSelectJoinTstipmov($criteria, $con);
+			}
+		}
+		$this->lastTsmovlibCriteria = $criteria;
+
+		return $this->collTsmovlibs;
 	}
 
 	
@@ -1062,321 +1176,6 @@ abstract class BaseContabb extends BaseObject  implements Persistent {
 		$this->lastContabc1Criteria = $criteria;
 
 		return $this->collContabc1s;
-	}
-
-	
-	public function initCcfuefins()
-	{
-		if ($this->collCcfuefins === null) {
-			$this->collCcfuefins = array();
-		}
-	}
-
-	
-	public function getCcfuefins($criteria = null, $con = null)
-	{
-				include_once 'lib/model/creditos/om/BaseCcfuefinPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		if ($this->collCcfuefins === null) {
-			if ($this->isNew()) {
-			   $this->collCcfuefins = array();
-			} else {
-
-				$criteria->add(CcfuefinPeer::CONTABB_ID, $this->getId());
-
-				CcfuefinPeer::addSelectColumns($criteria);
-				$this->collCcfuefins = CcfuefinPeer::doSelect($criteria, $con);
-			}
-		} else {
-						if (!$this->isNew()) {
-												
-
-				$criteria->add(CcfuefinPeer::CONTABB_ID, $this->getId());
-
-				CcfuefinPeer::addSelectColumns($criteria);
-				if (!isset($this->lastCcfuefinCriteria) || !$this->lastCcfuefinCriteria->equals($criteria)) {
-					$this->collCcfuefins = CcfuefinPeer::doSelect($criteria, $con);
-				}
-			}
-		}
-		$this->lastCcfuefinCriteria = $criteria;
-		return $this->collCcfuefins;
-	}
-
-	
-	public function countCcfuefins($criteria = null, $distinct = false, $con = null)
-	{
-				include_once 'lib/model/creditos/om/BaseCcfuefinPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		$criteria->add(CcfuefinPeer::CONTABB_ID, $this->getId());
-
-		return CcfuefinPeer::doCount($criteria, $distinct, $con);
-	}
-
-	
-	public function addCcfuefin(Ccfuefin $l)
-	{
-		$this->collCcfuefins[] = $l;
-		$l->setContabb($this);
-	}
-
-	
-	public function initCcparpros()
-	{
-		if ($this->collCcparpros === null) {
-			$this->collCcparpros = array();
-		}
-	}
-
-	
-	public function getCcparpros($criteria = null, $con = null)
-	{
-				include_once 'lib/model/creditos/om/BaseCcparproPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		if ($this->collCcparpros === null) {
-			if ($this->isNew()) {
-			   $this->collCcparpros = array();
-			} else {
-
-				$criteria->add(CcparproPeer::CONTABB_ID, $this->getId());
-
-				CcparproPeer::addSelectColumns($criteria);
-				$this->collCcparpros = CcparproPeer::doSelect($criteria, $con);
-			}
-		} else {
-						if (!$this->isNew()) {
-												
-
-				$criteria->add(CcparproPeer::CONTABB_ID, $this->getId());
-
-				CcparproPeer::addSelectColumns($criteria);
-				if (!isset($this->lastCcparproCriteria) || !$this->lastCcparproCriteria->equals($criteria)) {
-					$this->collCcparpros = CcparproPeer::doSelect($criteria, $con);
-				}
-			}
-		}
-		$this->lastCcparproCriteria = $criteria;
-		return $this->collCcparpros;
-	}
-
-	
-	public function countCcparpros($criteria = null, $distinct = false, $con = null)
-	{
-				include_once 'lib/model/creditos/om/BaseCcparproPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		$criteria->add(CcparproPeer::CONTABB_ID, $this->getId());
-
-		return CcparproPeer::doCount($criteria, $distinct, $con);
-	}
-
-	
-	public function addCcparpro(Ccparpro $l)
-	{
-		$this->collCcparpros[] = $l;
-		$l->setContabb($this);
-	}
-
-
-	
-	public function getCcparprosJoinCcpartid($criteria = null, $con = null)
-	{
-				include_once 'lib/model/creditos/om/BaseCcparproPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		if ($this->collCcparpros === null) {
-			if ($this->isNew()) {
-				$this->collCcparpros = array();
-			} else {
-
-				$criteria->add(CcparproPeer::CONTABB_ID, $this->getId());
-
-				$this->collCcparpros = CcparproPeer::doSelectJoinCcpartid($criteria, $con);
-			}
-		} else {
-									
-			$criteria->add(CcparproPeer::CONTABB_ID, $this->getId());
-
-			if (!isset($this->lastCcparproCriteria) || !$this->lastCcparproCriteria->equals($criteria)) {
-				$this->collCcparpros = CcparproPeer::doSelectJoinCcpartid($criteria, $con);
-			}
-		}
-		$this->lastCcparproCriteria = $criteria;
-
-		return $this->collCcparpros;
-	}
-
-
-	
-	public function getCcparprosJoinCcprogra($criteria = null, $con = null)
-	{
-				include_once 'lib/model/creditos/om/BaseCcparproPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		if ($this->collCcparpros === null) {
-			if ($this->isNew()) {
-				$this->collCcparpros = array();
-			} else {
-
-				$criteria->add(CcparproPeer::CONTABB_ID, $this->getId());
-
-				$this->collCcparpros = CcparproPeer::doSelectJoinCcprogra($criteria, $con);
-			}
-		} else {
-									
-			$criteria->add(CcparproPeer::CONTABB_ID, $this->getId());
-
-			if (!isset($this->lastCcparproCriteria) || !$this->lastCcparproCriteria->equals($criteria)) {
-				$this->collCcparpros = CcparproPeer::doSelectJoinCcprogra($criteria, $con);
-			}
-		}
-		$this->lastCcparproCriteria = $criteria;
-
-		return $this->collCcparpros;
-	}
-
-
-	
-	public function getCcparprosJoinCctipint($criteria = null, $con = null)
-	{
-				include_once 'lib/model/creditos/om/BaseCcparproPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		if ($this->collCcparpros === null) {
-			if ($this->isNew()) {
-				$this->collCcparpros = array();
-			} else {
-
-				$criteria->add(CcparproPeer::CONTABB_ID, $this->getId());
-
-				$this->collCcparpros = CcparproPeer::doSelectJoinCctipint($criteria, $con);
-			}
-		} else {
-									
-			$criteria->add(CcparproPeer::CONTABB_ID, $this->getId());
-
-			if (!isset($this->lastCcparproCriteria) || !$this->lastCcparproCriteria->equals($criteria)) {
-				$this->collCcparpros = CcparproPeer::doSelectJoinCctipint($criteria, $con);
-			}
-		}
-		$this->lastCcparproCriteria = $criteria;
-
-		return $this->collCcparpros;
-	}
-
-
-	
-	public function getCcparprosJoinCcdeducc($criteria = null, $con = null)
-	{
-				include_once 'lib/model/creditos/om/BaseCcparproPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		if ($this->collCcparpros === null) {
-			if ($this->isNew()) {
-				$this->collCcparpros = array();
-			} else {
-
-				$criteria->add(CcparproPeer::CONTABB_ID, $this->getId());
-
-				$this->collCcparpros = CcparproPeer::doSelectJoinCcdeducc($criteria, $con);
-			}
-		} else {
-									
-			$criteria->add(CcparproPeer::CONTABB_ID, $this->getId());
-
-			if (!isset($this->lastCcparproCriteria) || !$this->lastCcparproCriteria->equals($criteria)) {
-				$this->collCcparpros = CcparproPeer::doSelectJoinCcdeducc($criteria, $con);
-			}
-		}
-		$this->lastCcparproCriteria = $criteria;
-
-		return $this->collCcparpros;
-	}
-
-
-	
-	public function getCcparprosJoinCcperiod($criteria = null, $con = null)
-	{
-				include_once 'lib/model/creditos/om/BaseCcparproPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		if ($this->collCcparpros === null) {
-			if ($this->isNew()) {
-				$this->collCcparpros = array();
-			} else {
-
-				$criteria->add(CcparproPeer::CONTABB_ID, $this->getId());
-
-				$this->collCcparpros = CcparproPeer::doSelectJoinCcperiod($criteria, $con);
-			}
-		} else {
-									
-			$criteria->add(CcparproPeer::CONTABB_ID, $this->getId());
-
-			if (!isset($this->lastCcparproCriteria) || !$this->lastCcparproCriteria->equals($criteria)) {
-				$this->collCcparpros = CcparproPeer::doSelectJoinCcperiod($criteria, $con);
-			}
-		}
-		$this->lastCcparproCriteria = $criteria;
-
-		return $this->collCcparpros;
 	}
 
 } 
