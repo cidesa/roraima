@@ -77,6 +77,8 @@ class Opordpag extends BaseOpordpag
   protected $filassal=0;
   protected $filordcbtp="";
   protected $limbaseret="";
+  protected $refcre='';
+  protected $refsolpag='';
 
    public function afterHydrate()
    {
