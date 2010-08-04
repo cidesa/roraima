@@ -2192,21 +2192,21 @@
       {
        if (londefart <= lonart)
        {
-        if (!articulo_repetido(id))
-        {
+        //if (!articulo_repetido(id))
+        //{
           new Ajax.Updater('lista',getUrlModuloAjax(), {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=11&cajtexmos='+descripcion+'&cajtexcom='+id+'&canent='+canent+'&docref='+docrefiere+'&ctaprove='+ctaprove+'&blanco2='+blanco2+'&unidad='+unidad+'&cantidad='+cantidad+'&existencia='+existencia+'&montrgo='+montrgo+'&cantot='+cantot+'&total='+total+'&filagrid='+filagrid+'&blanco='+blanco+'&precio='+precio+'&precio2='+precio2+'&codigo='+cod})
           if (docrefiere=='V')
           {
             new Ajax.Updater(precio, getUrlModulo()+'ajax', {asynchronous:true, evalScripts:true, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=12&id='+$('id').value+'&precio2='+precio2+'&codigo='+cod});
 
           }
-        }
+        /*}
         else
         {
           alert('C�digo del Art�culo est� Repetido');
           $(id).value="";
+        }*/
         }
-      }
       else
       {
         alert('El Articulo debe ser de Ultimo Nivel');

@@ -31,7 +31,19 @@ class fafacturActions extends autofafacturActions {
 			$c->add(FadefcajPeer :: ID, $this->getUser()->getAttribute('clavecaja', null, 'fafactur'));
 			$reg = FadefcajPeer :: doSelectOne($c);
 			if ($reg) {
-				$correl = str_pad($reg->getCorcaj(), 8, '0', STR_PAD_LEFT);
+				$r = $reg->getCorcaj();
+                                $enc=false;
+                                while (!$enc)
+                                {
+                                    $correl = str_pad($r, 8, '0', STR_PAD_LEFT);
+                                    $t= new Criteria();
+                                    $t->add(FafacturPeer::REFFAC,$correl);
+                                    $res=FafacturPeer::doSelectOne($t);
+                                    if ($res)
+                                    {
+                                      $r=$r+1;
+                                    }else $enc=true;
+                                }
 				$this->fafactur->setReffac($correl);
 			}
 	        }
@@ -62,6 +74,81 @@ class fafacturActions extends autofafacturActions {
 
 		$this->configGrid();
 	}
+
+	/**
+   * Función principal para el manejo de las acciones create y edit
+   * del formulario.
+   *
+   */
+  public function executeEdit()
+  {
+    $this->params=array();
+    $this->fafactur = $this->getFafacturOrCreate();
+
+    $this->editing();
+
+    if ($this->getRequest()->getMethod() == sfRequest::POST)
+    {
+      $this->updateFafacturFromRequest();
+
+      if($this->saveFafactur($this->fafactur) ==-1){
+        {
+          if ($this->fafactur->getTipconpag()=='R')
+          {
+          	$sql="Select coalesce(Sum(MonDoc+RecDoc-DscDoc-AboDoc),0) as monto from CobDocume where CodCli='".$this->fafactur->getCodcli()."' Group by CodCli";
+            if (Herramientas::BuscarDatos($sql,&$result))
+            {
+            	if (count($result)>0)
+            	{
+                    $cal=H::tofloat($result[0]["monto"]) + $this->fafactur->getMonfac() - $this->fafactur->getMondesc();
+                    if ($cal>H::tofloat($this->fafactur->getLimitecredito()))
+                    {
+                          $this->setFlash('notice', 'Tus Modificaciones han sido Salvadas. El Cliente Sobrepaso el Límite de Credito');
+                    }else $this->setFlash('notice', 'Your modifications have been saved');
+            	}else{
+            	  $cal=$this->fafactur->getMonfac() - $this->fafactur->getMondesc();
+	            	if ($cal>H::tofloat($this->fafactur->getLimitecredito()))
+	            	{
+	            	   $this->setFlash('notice', 'Tus Modificaciones han sido Salvadas. El Cliente Sobrepaso el Límite de Credito');
+	            	}else $this->setFlash('notice', 'Your modifications have been saved');
+            	}
+            }
+            else
+            {
+               $cal=$this->fafactur->getMonfac() - $this->fafactur->getMondesc();
+            	if ($cal>H::tofloat($this->fafactur->getLimitecredito()))
+            	{
+            	   $this->setFlash('notice', 'Tus Modificaciones han sido Salvadas. El Cliente Sobrepaso el Límite de Credito');
+            	}else $this->setFlash('notice', 'Your modifications have been saved');
+            }
+          }else $this->setFlash('notice', 'Your modifications have been saved');
+
+         $id= $this->fafactur->getId();
+         $this->SalvarBitacora($id ,'Guardo');}
+
+        if ($this->getRequestParameter('save_and_add'))
+        {
+          return $this->redirect('fafactur/create');
+        }
+        else if ($this->getRequestParameter('save_and_list'))
+        {
+          return $this->redirect('fafactur/list');
+        }
+        else
+        {
+            return $this->redirect('fafactur/edit?id='.$this->fafactur->getId());
+        }
+
+      }else{
+        $this->labels = $this->getLabels();
+      }
+
+    }
+    else
+    {
+      $this->labels = $this->getLabels();
+    }
+  }
 
 	/**
    * Esta función permite definir la configuración del grid de datos
@@ -949,7 +1036,6 @@ class fafacturActions extends autofafacturActions {
       	  $this->coderr=1136;
           return false;
         }
-        
         $grid2=Herramientas::CargarDatosGridv2($this,$this->obj3);
         if (Factura::Verificar_pago($grid2,H::tofloat($this->getRequestParameter('fafactur[monfac]')),$this->getRequestParameter('fafactur[tipconpag]'))==false)
         {
@@ -1034,7 +1120,7 @@ class fafacturActions extends autofafacturActions {
 
 	      	$l++;
 	      }
-          if ($this->getRequestParameter('fafactur[tipconpag]')=='R')
+         /* if ($this->getRequestParameter('fafactur[tipconpag]')=='R')
           {
           	$sql="Select coalesce(Sum(MonDoc+RecDoc-DscDoc-AboDoc),0) as monto from CobDocume where CodCli='".$this->getRequestParameter('fafactur[codcli]')."' Group by CodCli";
             if (Herramientas::BuscarDatos($sql,&$result))
@@ -1065,7 +1151,7 @@ class fafacturActions extends autofafacturActions {
 	       	       return false;
             	}
             }
-          }
+          }*/
 
 		if ($this->coderr != -1) {
 			return false;
