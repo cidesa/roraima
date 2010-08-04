@@ -50,18 +50,6 @@ abstract class BaseCpdoccom extends BaseObject  implements Persistent {
 	protected $lastCpcomproCriteria = null;
 
 	
-	protected $collCcopcgens;
-
-	
-	protected $lastCcopcgenCriteria = null;
-
-	
-	protected $collCcprogras;
-
-	
-	protected $lastCcprograCriteria = null;
-
-	
 	protected $alreadyInSave = false;
 
 	
@@ -345,22 +333,6 @@ abstract class BaseCpdoccom extends BaseObject  implements Persistent {
 				}
 			}
 
-			if ($this->collCcopcgens !== null) {
-				foreach($this->collCcopcgens as $referrerFK) {
-					if (!$referrerFK->isDeleted()) {
-						$affectedRows += $referrerFK->save($con);
-					}
-				}
-			}
-
-			if ($this->collCcprogras !== null) {
-				foreach($this->collCcprogras as $referrerFK) {
-					if (!$referrerFK->isDeleted()) {
-						$affectedRows += $referrerFK->save($con);
-					}
-				}
-			}
-
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
@@ -404,22 +376,6 @@ abstract class BaseCpdoccom extends BaseObject  implements Persistent {
 
 				if ($this->collCpcompros !== null) {
 					foreach($this->collCpcompros as $referrerFK) {
-						if (!$referrerFK->validate($columns)) {
-							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
-						}
-					}
-				}
-
-				if ($this->collCcopcgens !== null) {
-					foreach($this->collCcopcgens as $referrerFK) {
-						if (!$referrerFK->validate($columns)) {
-							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
-						}
-					}
-				}
-
-				if ($this->collCcprogras !== null) {
-					foreach($this->collCcprogras as $referrerFK) {
 						if (!$referrerFK->validate($columns)) {
 							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
 						}
@@ -618,14 +574,6 @@ abstract class BaseCpdoccom extends BaseObject  implements Persistent {
 				$copyObj->addCpcompro($relObj->copy($deepCopy));
 			}
 
-			foreach($this->getCcopcgens() as $relObj) {
-				$copyObj->addCcopcgen($relObj->copy($deepCopy));
-			}
-
-			foreach($this->getCcprogras() as $relObj) {
-				$copyObj->addCcprogra($relObj->copy($deepCopy));
-			}
-
 		} 
 
 		$copyObj->setNew(true);
@@ -789,216 +737,6 @@ abstract class BaseCpdoccom extends BaseObject  implements Persistent {
 		$this->lastCpcomproCriteria = $criteria;
 
 		return $this->collCpcompros;
-	}
-
-	
-	public function initCcopcgens()
-	{
-		if ($this->collCcopcgens === null) {
-			$this->collCcopcgens = array();
-		}
-	}
-
-	
-	public function getCcopcgens($criteria = null, $con = null)
-	{
-				include_once 'lib/model/creditos/om/BaseCcopcgenPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		if ($this->collCcopcgens === null) {
-			if ($this->isNew()) {
-			   $this->collCcopcgens = array();
-			} else {
-
-				$criteria->add(CcopcgenPeer::TIPCOM, $this->getTipcom());
-
-				CcopcgenPeer::addSelectColumns($criteria);
-				$this->collCcopcgens = CcopcgenPeer::doSelect($criteria, $con);
-			}
-		} else {
-						if (!$this->isNew()) {
-												
-
-				$criteria->add(CcopcgenPeer::TIPCOM, $this->getTipcom());
-
-				CcopcgenPeer::addSelectColumns($criteria);
-				if (!isset($this->lastCcopcgenCriteria) || !$this->lastCcopcgenCriteria->equals($criteria)) {
-					$this->collCcopcgens = CcopcgenPeer::doSelect($criteria, $con);
-				}
-			}
-		}
-		$this->lastCcopcgenCriteria = $criteria;
-		return $this->collCcopcgens;
-	}
-
-	
-	public function countCcopcgens($criteria = null, $distinct = false, $con = null)
-	{
-				include_once 'lib/model/creditos/om/BaseCcopcgenPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		$criteria->add(CcopcgenPeer::TIPCOM, $this->getTipcom());
-
-		return CcopcgenPeer::doCount($criteria, $distinct, $con);
-	}
-
-	
-	public function addCcopcgen(Ccopcgen $l)
-	{
-		$this->collCcopcgens[] = $l;
-		$l->setCpdoccom($this);
-	}
-
-	
-	public function initCcprogras()
-	{
-		if ($this->collCcprogras === null) {
-			$this->collCcprogras = array();
-		}
-	}
-
-	
-	public function getCcprogras($criteria = null, $con = null)
-	{
-				include_once 'lib/model/creditos/om/BaseCcprograPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		if ($this->collCcprogras === null) {
-			if ($this->isNew()) {
-			   $this->collCcprogras = array();
-			} else {
-
-				$criteria->add(CcprograPeer::TIPCOM, $this->getTipcom());
-
-				CcprograPeer::addSelectColumns($criteria);
-				$this->collCcprogras = CcprograPeer::doSelect($criteria, $con);
-			}
-		} else {
-						if (!$this->isNew()) {
-												
-
-				$criteria->add(CcprograPeer::TIPCOM, $this->getTipcom());
-
-				CcprograPeer::addSelectColumns($criteria);
-				if (!isset($this->lastCcprograCriteria) || !$this->lastCcprograCriteria->equals($criteria)) {
-					$this->collCcprogras = CcprograPeer::doSelect($criteria, $con);
-				}
-			}
-		}
-		$this->lastCcprograCriteria = $criteria;
-		return $this->collCcprogras;
-	}
-
-	
-	public function countCcprogras($criteria = null, $distinct = false, $con = null)
-	{
-				include_once 'lib/model/creditos/om/BaseCcprograPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		$criteria->add(CcprograPeer::TIPCOM, $this->getTipcom());
-
-		return CcprograPeer::doCount($criteria, $distinct, $con);
-	}
-
-	
-	public function addCcprogra(Ccprogra $l)
-	{
-		$this->collCcprogras[] = $l;
-		$l->setCpdoccom($this);
-	}
-
-
-	
-	public function getCcprograsJoinCcperiod($criteria = null, $con = null)
-	{
-				include_once 'lib/model/creditos/om/BaseCcprograPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		if ($this->collCcprogras === null) {
-			if ($this->isNew()) {
-				$this->collCcprogras = array();
-			} else {
-
-				$criteria->add(CcprograPeer::TIPCOM, $this->getTipcom());
-
-				$this->collCcprogras = CcprograPeer::doSelectJoinCcperiod($criteria, $con);
-			}
-		} else {
-									
-			$criteria->add(CcprograPeer::TIPCOM, $this->getTipcom());
-
-			if (!isset($this->lastCcprograCriteria) || !$this->lastCcprograCriteria->equals($criteria)) {
-				$this->collCcprogras = CcprograPeer::doSelectJoinCcperiod($criteria, $con);
-			}
-		}
-		$this->lastCcprograCriteria = $criteria;
-
-		return $this->collCcprogras;
-	}
-
-
-	
-	public function getCcprograsJoinCcfuefin($criteria = null, $con = null)
-	{
-				include_once 'lib/model/creditos/om/BaseCcprograPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		if ($this->collCcprogras === null) {
-			if ($this->isNew()) {
-				$this->collCcprogras = array();
-			} else {
-
-				$criteria->add(CcprograPeer::TIPCOM, $this->getTipcom());
-
-				$this->collCcprogras = CcprograPeer::doSelectJoinCcfuefin($criteria, $con);
-			}
-		} else {
-									
-			$criteria->add(CcprograPeer::TIPCOM, $this->getTipcom());
-
-			if (!isset($this->lastCcprograCriteria) || !$this->lastCcprograCriteria->equals($criteria)) {
-				$this->collCcprogras = CcprograPeer::doSelectJoinCcfuefin($criteria, $con);
-			}
-		}
-		$this->lastCcprograCriteria = $criteria;
-
-		return $this->collCcprogras;
 	}
 
 } 

@@ -209,6 +209,81 @@ abstract class BaseCpdeftitPeer {
 	}
 
 	
+	public static function doCountJoinContabb(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(CpdeftitPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(CpdeftitPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(CpdeftitPeer::CODCTA, ContabbPeer::CODCTA);
+
+		$rs = CpdeftitPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinContabb(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		CpdeftitPeer::addSelectColumns($c);
+		$startcol = (CpdeftitPeer::NUM_COLUMNS - CpdeftitPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+		ContabbPeer::addSelectColumns($c);
+
+		$c->addJoin(CpdeftitPeer::CODCTA, ContabbPeer::CODCTA);
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = CpdeftitPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = ContabbPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol);
+
+			$newObject = true;
+			foreach($results as $temp_obj1) {
+				$temp_obj2 = $temp_obj1->getContabb(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+										$temp_obj2->addCpdeftit($obj1); 					break;
+				}
+			}
+			if ($newObject) {
+				$obj2->initCpdeftits();
+				$obj2->addCpdeftit($obj1); 			}
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
 	public static function doCountJoinAll(Criteria $criteria, $distinct = false, $con = null)
 	{
 		$criteria = clone $criteria;
@@ -225,6 +300,8 @@ abstract class BaseCpdeftitPeer {
 			$criteria->addSelectColumn($column);
 		}
 
+			$criteria->addJoin(CpdeftitPeer::CODCTA, ContabbPeer::CODCTA);
+	
 		$rs = CpdeftitPeer::doSelectRS($criteria, $con);
 		if ($rs->next()) {
 			return $rs->getInt(1);
@@ -246,6 +323,11 @@ abstract class BaseCpdeftitPeer {
 		CpdeftitPeer::addSelectColumns($c);
 		$startcol2 = (CpdeftitPeer::NUM_COLUMNS - CpdeftitPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
+			ContabbPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + ContabbPeer::NUM_COLUMNS;
+	
+			$c->addJoin(CpdeftitPeer::CODCTA, ContabbPeer::CODCTA);
+	
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
 
@@ -258,6 +340,29 @@ abstract class BaseCpdeftitPeer {
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
 
+
+							
+				$omClass = ContabbPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj2 = new $cls();
+				$obj2->hydrate($rs, $startcol2);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getContabb(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addCpdeftit($obj1); 						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj2->initCpdeftits();
+					$obj2->addCpdeftit($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;
