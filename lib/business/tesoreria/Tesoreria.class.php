@@ -2620,4 +2620,88 @@ public static function validarCuentasGrid($grid)
     return true;
   }
 
+public static function reversarMovSegLib($clasemodelo)
+{
+  $t= new Criteria();
+  $t->add(TsmovlibPeer::NUMCUE,$clasemodelo->getNumcue());
+  $t->add(TsmovlibPeer::REFLIB,$clasemodelo->getReflib());
+  $t->add(TsmovlibPeer::TIPMOV,$clasemodelo->getCodtip());
+  $result=TsmovlibPeer::doSelectOne($t);
+  if ($result)
+  {
+    $g= new Criteria();
+    $g->add(TsmovlibPeer::NUMCUE,$clasemodelo->getNumcue());
+    $g->add(TsmovlibPeer::REFLIBPAD,$clasemodelo->getReflib());
+    $g->add(TsmovlibPeer::TIPMOVPAD,$clasemodelo->getCodtip());
+    $result2=TsmovlibPeer::doSelectOne($g);
+    if ($result2)
+    {
+        $escheque=H::getX('CODTIP','Tstipmov','Escheque',$result->getTipmov());
+        if ($escheque==1)
+        {
+            $c = new Criteria();
+            $c->add(TscheemiPeer :: NUMCUE, $result->getNumcue());
+            $c->add(TscheemiPeer :: NUMCHE, $result->getReflib());
+            $tscheemi = TscheemiPeer :: doSelectOne($c);
+            if ($tscheemi)
+            {
+             $tscheemi->setStatus('C');
+             $tscheemi->save();
+            }
+
+            $c = new Criteria();
+            $c->add(CpimppagPeer :: REFPAG, $result->getRefpag());
+            $cpimppag = CpimppagPeer :: doSelect($c);
+            foreach($cpimppag as $imppag){
+             $imppag->setStaimp('A');
+             $imppag->save();
+            }
+
+            
+        }else{
+            $e= new Criteria();
+            $e->add(CpdocpagPeer::TIPPAG,$result->getTipmov());
+            $result3=CpdocpagPeer::doSelectOne($e);
+            if ($result3)
+            {
+              if ($result3->getRefier()=='A')
+              {
+                $c = new Criteria();
+                $c->add(CpimppagPeer :: REFPAG, $result->getRefpag());
+                $cpimppag = CpimppagPeer :: doSelect($c);
+                foreach($cpimppag as $imppag){
+                 $imppag->setStaimp('A');
+                 $imppag->save();
+                }
+              }else {
+                $c = new Criteria();
+                $c->add(CpimppagPeer :: REFPAG, $result->getRefpag());
+                $cpimppag = CpimppagPeer :: doSelect($c);
+                foreach($cpimppag as $imppag){
+                 $imppag->setStaimp('A');
+                 $imppag->save();
+                }
+              }
+                    
+            }
+        }
+
+        $c = new Criteria();
+        $c->add(Contabc1Peer::NUMCOM,$result2->getNumcom());
+        Contabc1Peer::doDelete($c);
+
+        $c = new Criteria();
+        $c->add(ContabcPeer::NUMCOM,$result2->getNumcom());
+        ContabcPeer::doDelete($c);
+   
+        $result2->delete();
+
+    }else return 1511;
+    
+  }else{
+    return 1510;
+  }
+  return -1;
+}
+
 }
