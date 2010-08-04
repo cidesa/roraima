@@ -86,6 +86,11 @@ class Fafactur extends BaseFafactur
    return Herramientas::getX('CODPRO','Facliente','Dirpro',self::getCodcli());
   }
 
+    public function getLimitecredito()
+  {
+   return Herramientas::getX('CODPRO','Facliente','Limcre',self::getCodcli());
+  }
+
   public function getDesconpag()
   {
    return Herramientas::getX('ID','Faconpag','Desconpag',self::getCodconpag());
