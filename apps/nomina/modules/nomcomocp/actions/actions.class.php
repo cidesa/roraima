@@ -165,27 +165,28 @@ $this->Bitacora('Guardo');
    * los datos del grid.
    *
    */
-  public function configGrid($codtipcar='',$fecdes='',$pascar='')
+  public function configGrid($codtipcar='',$fecdes='',$pascar='',$numfil=100)
   {
-  	$varforma = $this->getUser()->getAttribute('varforma','','nomcomocp');
-	$tipcar = $this->getUser()->getAttribute('codtipcar','','nomcomocp');
+    $varforma = $this->getUser()->getAttribute('varforma','','nomcomocp');
+    $tipcar = $this->getUser()->getAttribute('codtipcar','','nomcomocp');
 
     $result=array();
     if ($fecdes=='') $fecdes=date('Y-m-d');
     if ($codtipcar=='') $codtipcar='0';
-  $sql = "Select Distinct(gracar) as gracar from NPComOcp where CodTipCar='".$codtipcar."' and Fecdes='".$fecdes."'";
+    $sql = "Select Distinct(gracar) as gracar from NPComOcp where CodTipCar='".$codtipcar."' and Fecdes='".$fecdes."'";
     if (Herramientas::BuscarDatos($sql,&$result))
     {
           $gracar=$result[0]['gracar'];
     }
 
+    $filas_arreglo=$numfil;
+
     $c = new Criteria();
     $c->add(NpcomocpPeer::FECDES,$fecdes);
     $c->add(NpcomocpPeer::CODTIPCAR,$codtipcar);
-    //$c->add(NpcomocpPeer::GRACAR,$gracar);
     $c->addAscendingOrderByColumn(NpcomocpPeer::GRACAR);
     $per = NpcomocpPeer::doSelect($c);
-    $filas_arreglo=100;
+    if ($per) $filas_arreglo=0;
 	
     // Se crea el objeto principal de la clase OpcionesGrid
     $opciones = new OpcionesGrid();
@@ -196,15 +197,15 @@ $this->Bitacora('Guardo');
     $opciones->setName('a');
     $opciones->setAncho(800);
     $opciones->setAnchoGrid(800);	
-	if($varforma=='S')	
-	{
-	  if($tipcar==$codtipcar)	  
-	  	$opciones->setTitulo('Categoria y Dedicacion');
-	  else
-	  	$opciones->setTitulo('Nivel');
-	}	
-	else	
-		$opciones->setTitulo('Cargo');	
+    if($varforma=='S')
+    {
+      if($tipcar==$codtipcar)
+            $opciones->setTitulo('Categoria y Dedicacion');
+      else
+            $opciones->setTitulo('Nivel');
+    }
+    else
+            $opciones->setTitulo('Cargo');
     $opciones->setHTMLTotalFilas(' ');	
 	
     // Se generan las columnas
@@ -358,10 +359,18 @@ $this->Bitacora('Guardo');
 	 {
 	 	$dato=NptipcarPeer::getNomtip(trim($this->getRequestParameter('codigo')));
 	 	$this->configGrid($this->getRequestParameter('codigo'));	
-	 }     
+	 }
+         $this->ajax='1';
      $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$js.'",""]]';	 
      $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
      #return sfView::HEADER_ONLY;
+   }
+   else if ($this->getRequestParameter('ajax')=='2')
+   {
+     $this->configGrid('','','',$this->getRequestParameter('codigo'));
+     $this->ajax='2';
+     $output = '[["","",""],["","",""]]';
+     $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
    }
   }
 
@@ -422,7 +431,8 @@ $this->Bitacora('Guardo');
   
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */

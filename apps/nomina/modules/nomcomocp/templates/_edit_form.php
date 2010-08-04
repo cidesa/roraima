@@ -52,7 +52,34 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
+
 <?php if($sf_user->getAttribute('varforma','','nomcomocp')!='S'){?>
+<div class="form-row">
+<?php echo label_for('npcomocp[grades]', __($labels['npcomocp{grades}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('npcomocp{grades}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npcomocp{grades}')): ?>
+    <?php echo form_error('npcomocp{grades}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($npcomocp, 'getGrades', array (
+  'size' => 7,
+  'control_name' => 'npcomocp[grades]',
+)); echo $value ? $value : '&nbsp;' ?>
+</div>
+&nbsp;
+
+<?php echo label_for('npcomocp[grahas]', __($labels['npcomocp{grahas}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('npcomocp{grahas}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npcomocp{grahas}')): ?>
+    <?php echo form_error('npcomocp{grahas}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($npcomocp, 'getGrahas', array (
+  'size' => 7,
+  'control_name' => 'npcomocp[grahas]',
+)); echo $value ? $value : '&nbsp;' ?>
+</div>
+</div>
 <div class="form-row">
   <?php echo label_for('npcomocp[pascar]', __($labels['npcomocp{pascar}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('npcomocp{pascar}')): ?> form-error<?php endif; ?>">
@@ -65,13 +92,14 @@
 'size' => 8,
 'maxlength' => 4,
 'control_name' => 'npcomocp[pascar]',
-'onBlur' => "javascript: actualizar_grid(); valor=this.value; valor=valor.pad(3, '0',0);document.getElementById('npcomocp_pascar').value=valor;document.getElementById('npcomocp_pascar').disabled=false;",
+'onBlur' => "javascript: cambiarfilas();",
 
 )); echo $value ? $value : '&nbsp;' ?>
 <?php }else {?>
 <?php echo input_tag('npcomocp[pascar]',$maxpas, array(
  'size' => 5,
- 'onBlur' => "javascript: actualizar_grid(); valor=this.value; valor=valor.pad(3, '0',0);document.getElementById('npcomocp_pascar').value=valor;document.getElementById('npcomocp_pascar').disabled=false;",))?>
+ 'onBlur' => "javascript: cambiarfilas(); ",
+ ))?>
 <?php }?>
 
     </div>
