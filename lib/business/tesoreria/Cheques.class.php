@@ -2221,17 +2221,12 @@ class Cheques
             $client = new SoapClient($urlws);
             $det = array(array($opsolpag->getNomben(),$tscheemi->getNomcue(),$tscheemi->getNumche(),$tscheemi->getFecemi(),$tscheemi->getMonche()));
             $result = $client->__call('notificarPago', array('',$opsolpag->getNumsolcre(),$opsolpag->getNumcre(),$opdetsolpag->getReford(),$det));
-            
+            return 'Pago Enterado Satisfactoriamente al GeBos';
           }catch(Exception $ex){
-            
+            return 'NO se pudo enterar el pago al GeBos';
           }
-
-
         }
-        
       }
-
-
     }
 
   }
