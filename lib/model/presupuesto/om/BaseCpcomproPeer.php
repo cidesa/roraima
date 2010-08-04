@@ -330,6 +330,34 @@ abstract class BaseCpcomproPeer {
 
 
 	
+	public static function doCountJoinOpbenefi(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(CpcomproPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(CpcomproPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(CpcomproPeer::CEDRIF, OpbenefiPeer::CEDRIF);
+
+		$rs = CpcomproPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
 	public static function doSelectJoinCpdoccom(Criteria $c, $con = null)
 	{
 		$c = clone $c;
@@ -424,6 +452,53 @@ abstract class BaseCpcomproPeer {
 
 
 	
+	public static function doSelectJoinOpbenefi(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		CpcomproPeer::addSelectColumns($c);
+		$startcol = (CpcomproPeer::NUM_COLUMNS - CpcomproPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+		OpbenefiPeer::addSelectColumns($c);
+
+		$c->addJoin(CpcomproPeer::CEDRIF, OpbenefiPeer::CEDRIF);
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = CpcomproPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = OpbenefiPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol);
+
+			$newObject = true;
+			foreach($results as $temp_obj1) {
+				$temp_obj2 = $temp_obj1->getOpbenefi(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+										$temp_obj2->addCpcompro($obj1); 					break;
+				}
+			}
+			if ($newObject) {
+				$obj2->initCpcompros();
+				$obj2->addCpcompro($obj1); 			}
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
 	public static function doCountJoinAll(Criteria $criteria, $distinct = false, $con = null)
 	{
 		$criteria = clone $criteria;
@@ -443,6 +518,8 @@ abstract class BaseCpcomproPeer {
 			$criteria->addJoin(CpcomproPeer::TIPCOM, CpdoccomPeer::TIPCOM);
 	
 			$criteria->addJoin(CpcomproPeer::REFPRC, CpprecomPeer::REFPRC);
+	
+			$criteria->addJoin(CpcomproPeer::CEDRIF, OpbenefiPeer::CEDRIF);
 	
 		$rs = CpcomproPeer::doSelectRS($criteria, $con);
 		if ($rs->next()) {
@@ -471,9 +548,14 @@ abstract class BaseCpcomproPeer {
 			CpprecomPeer::addSelectColumns($c);
 			$startcol4 = $startcol3 + CpprecomPeer::NUM_COLUMNS;
 	
+			OpbenefiPeer::addSelectColumns($c);
+			$startcol5 = $startcol4 + OpbenefiPeer::NUM_COLUMNS;
+	
 			$c->addJoin(CpcomproPeer::TIPCOM, CpdoccomPeer::TIPCOM);
 	
 			$c->addJoin(CpcomproPeer::REFPRC, CpprecomPeer::REFPRC);
+	
+			$c->addJoin(CpcomproPeer::CEDRIF, OpbenefiPeer::CEDRIF);
 	
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
@@ -533,6 +615,29 @@ abstract class BaseCpcomproPeer {
 					$obj3->addCpcompro($obj1);
 				}
 	
+
+							
+				$omClass = OpbenefiPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj4 = new $cls();
+				$obj4->hydrate($rs, $startcol4);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj4 = $temp_obj1->getOpbenefi(); 					if ($temp_obj4->getPrimaryKey() === $obj4->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj4->addCpcompro($obj1); 						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj4->initCpcompros();
+					$obj4->addCpcompro($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;
@@ -557,6 +662,8 @@ abstract class BaseCpcomproPeer {
 			}
 	
 				$criteria->addJoin(CpcomproPeer::REFPRC, CpprecomPeer::REFPRC);
+		
+				$criteria->addJoin(CpcomproPeer::CEDRIF, OpbenefiPeer::CEDRIF);
 		
 			$rs = CpcomproPeer::doSelectRS($criteria, $con);
 			if ($rs->next()) {
@@ -586,6 +693,38 @@ abstract class BaseCpcomproPeer {
 	
 				$criteria->addJoin(CpcomproPeer::TIPCOM, CpdoccomPeer::TIPCOM);
 		
+				$criteria->addJoin(CpcomproPeer::CEDRIF, OpbenefiPeer::CEDRIF);
+		
+			$rs = CpcomproPeer::doSelectRS($criteria, $con);
+			if ($rs->next()) {
+				return $rs->getInt(1);
+			} else {
+								return 0;
+			}
+		}
+	
+
+		
+		public static function doCountJoinAllExceptOpbenefi(Criteria $criteria, $distinct = false, $con = null)
+		{
+						$criteria = clone $criteria;
+
+						$criteria->clearSelectColumns()->clearOrderByColumns();
+			if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+				$criteria->addSelectColumn(CpcomproPeer::COUNT_DISTINCT);
+			} else {
+				$criteria->addSelectColumn(CpcomproPeer::COUNT);
+			}
+
+						foreach($criteria->getGroupByColumns() as $column)
+			{
+				$criteria->addSelectColumn($column);
+			}
+	
+				$criteria->addJoin(CpcomproPeer::TIPCOM, CpdoccomPeer::TIPCOM);
+		
+				$criteria->addJoin(CpcomproPeer::REFPRC, CpprecomPeer::REFPRC);
+		
 			$rs = CpcomproPeer::doSelectRS($criteria, $con);
 			if ($rs->next()) {
 				return $rs->getInt(1);
@@ -610,7 +749,12 @@ abstract class BaseCpcomproPeer {
 			CpprecomPeer::addSelectColumns($c);
 			$startcol3 = $startcol2 + CpprecomPeer::NUM_COLUMNS;
 	
+			OpbenefiPeer::addSelectColumns($c);
+			$startcol4 = $startcol3 + OpbenefiPeer::NUM_COLUMNS;
+	
 			$c->addJoin(CpcomproPeer::REFPRC, CpprecomPeer::REFPRC);
+	
+			$c->addJoin(CpcomproPeer::CEDRIF, OpbenefiPeer::CEDRIF);
 	
 
 		$rs = BasePeer::doSelect($c, $con);
@@ -646,6 +790,28 @@ abstract class BaseCpcomproPeer {
 					$obj2->addCpcompro($obj1);
 				}
 	
+				$omClass = OpbenefiPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj3  = new $cls();
+				$obj3->hydrate($rs, $startcol3);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj3 = $temp_obj1->getOpbenefi(); 					if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj3->addCpcompro($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj3->initCpcompros();
+					$obj3->addCpcompro($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;
@@ -667,7 +833,12 @@ abstract class BaseCpcomproPeer {
 			CpdoccomPeer::addSelectColumns($c);
 			$startcol3 = $startcol2 + CpdoccomPeer::NUM_COLUMNS;
 	
+			OpbenefiPeer::addSelectColumns($c);
+			$startcol4 = $startcol3 + OpbenefiPeer::NUM_COLUMNS;
+	
 			$c->addJoin(CpcomproPeer::TIPCOM, CpdoccomPeer::TIPCOM);
+	
+			$c->addJoin(CpcomproPeer::CEDRIF, OpbenefiPeer::CEDRIF);
 	
 
 		$rs = BasePeer::doSelect($c, $con);
@@ -701,6 +872,112 @@ abstract class BaseCpcomproPeer {
 				if ($newObject) {
 					$obj2->initCpcompros();
 					$obj2->addCpcompro($obj1);
+				}
+	
+				$omClass = OpbenefiPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj3  = new $cls();
+				$obj3->hydrate($rs, $startcol3);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj3 = $temp_obj1->getOpbenefi(); 					if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj3->addCpcompro($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj3->initCpcompros();
+					$obj3->addCpcompro($obj1);
+				}
+	
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doSelectJoinAllExceptOpbenefi(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+								if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		CpcomproPeer::addSelectColumns($c);
+		$startcol2 = (CpcomproPeer::NUM_COLUMNS - CpcomproPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+
+			CpdoccomPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + CpdoccomPeer::NUM_COLUMNS;
+	
+			CpprecomPeer::addSelectColumns($c);
+			$startcol4 = $startcol3 + CpprecomPeer::NUM_COLUMNS;
+	
+			$c->addJoin(CpcomproPeer::TIPCOM, CpdoccomPeer::TIPCOM);
+	
+			$c->addJoin(CpcomproPeer::REFPRC, CpprecomPeer::REFPRC);
+	
+
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = CpcomproPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+				$omClass = CpdoccomPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj2  = new $cls();
+				$obj2->hydrate($rs, $startcol2);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getCpdoccom(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addCpcompro($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj2->initCpcompros();
+					$obj2->addCpcompro($obj1);
+				}
+	
+				$omClass = CpprecomPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj3  = new $cls();
+				$obj3->hydrate($rs, $startcol3);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj3 = $temp_obj1->getCpprecom(); 					if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj3->addCpcompro($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj3->initCpcompros();
+					$obj3->addCpcompro($obj1);
 				}
 	
 			$results[] = $obj1;

@@ -40,6 +40,9 @@ abstract class BaseCpdeftit extends BaseObject  implements Persistent {
 	protected $id;
 
 	
+	protected $aContabb;
+
+	
 	protected $collCpasiinis;
 
 	
@@ -172,6 +175,10 @@ abstract class BaseCpdeftit extends BaseObject  implements Persistent {
         $this->modifiedColumns[] = CpdeftitPeer::CODCTA;
       }
   
+		if ($this->aContabb !== null && $this->aContabb->getCodcta() !== $v) {
+			$this->aContabb = null;
+		}
+
 	} 
 	
 	public function setStacod($v)
@@ -328,11 +335,11 @@ abstract class BaseCpdeftit extends BaseObject  implements Persistent {
 
 
 												
-			if ($this->aTableError !== null) {
-				if ($this->aTableError->isModified()) {
-					$affectedRows += $this->aTableError->save($con);
+			if ($this->aContabb !== null) {
+				if ($this->aContabb->isModified()) {
+					$affectedRows += $this->aContabb->save($con);
 				}
-				$this->setTableError($this->aTableError);
+				$this->setContabb($this->aContabb);
 			}
 
 
@@ -440,9 +447,9 @@ abstract class BaseCpdeftit extends BaseObject  implements Persistent {
 
 
 												
-			if ($this->aTableError !== null) {
-				if (!$this->aTableError->validate($columns)) {
-					$failureMap = array_merge($failureMap, $this->aTableError->getValidationFailures());
+			if ($this->aContabb !== null) {
+				if (!$this->aContabb->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aContabb->getValidationFailures());
 				}
 			}
 
@@ -736,6 +743,38 @@ abstract class BaseCpdeftit extends BaseObject  implements Persistent {
 			self::$peer = new CpdeftitPeer();
 		}
 		return self::$peer;
+	}
+
+	
+	public function setContabb($v)
+	{
+
+
+		if ($v === null) {
+			$this->setCodcta(NULL);
+		} else {
+			$this->setCodcta($v->getCodcta());
+		}
+
+
+		$this->aContabb = $v;
+	}
+
+
+	
+	public function getContabb($con = null)
+	{
+		if ($this->aContabb === null && (($this->codcta !== "" && $this->codcta !== null))) {
+						include_once 'lib/model/contabilidad/om/BaseContabbPeer.php';
+
+      $c = new Criteria();
+      $c->add(ContabbPeer::CODCTA,$this->codcta);
+      
+			$this->aContabb = ContabbPeer::doSelectOne($c, $con);
+
+			
+		}
+		return $this->aContabb;
 	}
 
 	

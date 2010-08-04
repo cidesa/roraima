@@ -36,7 +36,7 @@ abstract class BaseCpartley extends BaseObject  implements Persistent {
 	protected $portra;
 
 
-
+	
 	protected $id;
 
 	
@@ -107,7 +107,7 @@ abstract class BaseCpartley extends BaseObject  implements Persistent {
     else return $this->portra;
 
   }
-
+  
   public function getId()
   {
 
@@ -182,9 +182,9 @@ abstract class BaseCpartley extends BaseObject  implements Persistent {
         $this->portra = Herramientas::toFloat($v);
         $this->modifiedColumns[] = CpartleyPeer::PORTRA;
       }
-
-	}
-
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -221,7 +221,7 @@ abstract class BaseCpartley extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 8;
+            return $startcol + 8; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Cpartley object", $e);
     }
