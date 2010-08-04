@@ -795,15 +795,18 @@ propel:
       required: true
     diauti:
       type: NUMERIC
-      size: 3
+      size: 10
+      scale: 5
       required: true
     diavac:
       type: NUMERIC
-      size: 3
+      size: 10
+      scale: 5
       required: true
     diapro:
       type: NUMERIC
-      size: 3
+      size: 10
+      scale: 5
     anovighas:
       type: DATE
     calinc:
@@ -1253,7 +1256,35 @@ propel:
       type: NUMERIC
       size: 6
       required: true
+    canhpre:
+      type: NUMERIC
+      size: 6
+      required: true
+    canmpre:
+      type: NUMERIC
+      size: 6
+      required: true
     canasi:
+      type: NUMERIC
+      size: 6
+      required: true
+    canhom:
+      type: NUMERIC
+      size: 6
+      required: true
+    canmuj:
+      type: NUMERIC
+      size: 6
+      required: true
+    canvac:
+      type: NUMERIC
+      size: 6
+      required: true
+    canhvac:
+      type: NUMERIC
+      size: 6
+      required: true
+    canmvac:
       type: NUMERIC
       size: 6
       required: true
