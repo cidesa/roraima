@@ -39,6 +39,8 @@
 <?php echo input_hidden_tag('opordpag[observe]', $opordpag->getObserve()) ?>
 <?php echo input_hidden_tag('opordpag[modbasimpiva]', $opordpag->getModbasimpiva()) ?>
 <?php echo input_hidden_tag('opordpag[limbaseret]', $opordpag->getLimbaseret()) ?>
+<?php echo input_hidden_tag('opordpag[refcre]', $opordpag->getRefcre()) ?>
+<?php echo input_hidden_tag('opordpag[refsolpag]', $opordpag->getRefsolpag()) ?>
 <table width="100%">
   <tr>
     <th><strong><font color="<? print $color;?>" size="2" face="Verdana, Arial, Helvetica, sans-serif"> <? print $eti;?></font></strong></th>

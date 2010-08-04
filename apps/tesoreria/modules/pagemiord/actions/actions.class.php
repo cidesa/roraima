@@ -528,10 +528,10 @@ class pagemiordActions extends autopagemiordActions {
         }
       }
       if($opordpag->getTipcau()==$this->ordpagcre) {
-        CreditosIntegracion::actualizarLiquidacionCreditos($opordpag, $this->getRequestParameter('refcre',''));
+        CreditosIntegracion::actualizarLiquidacionCreditos($opordpag, $opordpag->getRefcre());
       }
       if($opordpag->getTipcau()==$this->ordpagsolpag) {
-        $refsolpag = $this->getRequestParameter('refsolpag','');
+        $refsolpag = $opordpag->getRefsolpag();
         if($refsolpag){
           $c = new Criteria();
           $c->add(OpsolpagPeer::REFSOL,$refsolpag);
@@ -706,6 +706,12 @@ class pagemiordActions extends autopagemiordActions {
     }
     if (isset($opordpag['tipdoc'])) {
       $this->opordpag->setTipdoc($opordpag['tipdoc']);
+    }
+    if (isset($opordpag['refcre'])) {
+      $this->opordpag->setRefcre($opordpag['refcre']);
+    }
+    if (isset($opordpag['refsolpag'])) {
+      $this->opordpag->setRefsolpag($opordpag['refsolpag']);
     }
   }
 

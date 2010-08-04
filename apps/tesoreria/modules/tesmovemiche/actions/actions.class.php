@@ -22,6 +22,7 @@ class tesmovemicheActions extends autotesmovemicheActions
  private $arraynumche="";
  private $arraynumcue="";
  private $form="sf_admin/tesmovemiche/confincomgen";
+ private $infogebos='';
 
   public function executeIndex()
   {
@@ -101,7 +102,7 @@ class tesmovemicheActions extends autotesmovemicheActions
           if ($r) {$this->tscheemi->setId($r->getId()); $this->tscheemi->setNumcomegr($r->getNumcomegr());}
 
           if ($this->arraynumche!=""){
-              $this->setFlash('notice', 'Your modifications have been saved');
+              $this->setFlash('notice', 'Tus modificaciones han sido guardadas. '.$this->infogebos);
               $this->Bitacora('Guardo');
           }else {
           	  $this->setFlash('notice', $this->arraynumcue);
@@ -1372,7 +1373,9 @@ class tesmovemicheActions extends autotesmovemicheActions
            $concom="";
            $grid=Herramientas::CargarDatosGrid($this,$this->gridOrdPag);
            Cheques::ActualizaOrdPag($tscheemi,$grid,$tippag,$despag,$numcomche,"N",&$this->arraynumche,$concom,$comprobante,$this->reqfirma,$this->mancomegr,$this->comprobaut,&$this->arraynumcue);
-           if(H::getConfApp('entpaggebos', 'tesoreria', 'tsmovemiche')=='S')  Cheques::EnterarPagoGeBOS($tscheemi,$grid);
+           if(H::getConfApp('entpaggebos', 'tesoreria', 'tsmovemiche')=='S'){
+             $this->infogebos = Cheques::EnterarPagoGeBOS($tscheemi,$grid);
+           }
         }
         //compromisos
       else if ($tscheemi->getOperacion()=='compro')
