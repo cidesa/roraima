@@ -22,6 +22,7 @@ class Tsmovlib extends BaseTsmovlib
   protected $savecedrif="";
   protected $ctaeje="";
   protected $savemovcero="";
+  protected $codtip="";
 
 
   public function afterHydrate()
@@ -41,7 +42,10 @@ class Tsmovlib extends BaseTsmovlib
 
 	public function getDestip()
     {
-		return Herramientas::getX('CODTIP','Tstipmov','Destip',self::getTipmov());
+	if (self::getCodtip()!='')
+            return Herramientas::getX('CODTIP','Tstipmov','Destip',self::getCodtip());
+        else
+            return Herramientas::getX('CODTIP','Tstipmov','Destip',self::getTipmov());
     }
 
 	public function getIdrefer()

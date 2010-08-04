@@ -1216,6 +1216,12 @@
 1509:
     cod: 1509
     msj: EL Codigo Presupuestario no existe o no Tiene Asignacion Inicial
+1510:
+    cod: 1510
+    msj: EL Movimiento Según Libro no existe
+1511:
+    cod: 1511
+    msj: EL Movimiento Según Libro no está Anulado
 
 ########## Atencion al Ciudadano ########
 1400:
