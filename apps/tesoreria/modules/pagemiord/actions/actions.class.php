@@ -2759,6 +2759,15 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
               }
 
             }
+          if ($resul->getNumcomapr()!="")
+          {
+            OrdendePago::anularComprobTes($resul->getNumcomapr(),$fecanu,$desanu,&$msjs);
+            if ($msjs!="")
+            {
+              $this->msg=$msjs;
+              return sfView::SUCCESS;
+            }
+          }
             OrdendePago::eliminarOPP($numord);
             Herramientas::EliminarRegistro('Opfactur','Numord',$numord);
             if (checkdate(intval($fecha_aux[1]),intval($fecha_aux[0]),intval($fecha_aux[2]))) {
@@ -2910,6 +2919,15 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
                   }
                 }
               }
+            if ($opordpag->getNumcomapr()!='') {
+              if (OrdendePago::verificarStatusComprobante($opordpag->getNumcomapr()))
+              {
+                Herramientas::EliminarRegistro('Contabc1','Numcom',$opordpag->getNumcomapr());
+                Herramientas::EliminarRegistro('Contabc','Numcom',$opordpag->getNumcomapr());
+              }
+              else { return $this->msj="No se eliminar ya que el comprobante de Aprobacion asociado esta actualizado";}
+            }
+
               OrdendePago::eliminarRetenciones($numord,&$puedeeliminar,&$msjs);
               if ($msjs!="") {
                 return $this->msj=$msjs;

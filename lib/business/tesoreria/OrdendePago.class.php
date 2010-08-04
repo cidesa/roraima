@@ -3114,7 +3114,7 @@ class OrdendePago
   {
     $numeroorden="";
 
-    $numeroorden3="OP".substr($numord,2,6);
+    $numeroorden3="OA".substr($numord,2,6);
     $confcorcom=sfContext::getInstance()->getUser()->getAttribute('confcorcom');
     if ($confcorcom=='N')
     {
@@ -3244,13 +3244,13 @@ class OrdendePago
           if ($comprobaut=='S')
 		    {
 		      self::grabarComprobanteAlcAutomatico($x[$j]->getNumord(),&$numcom,&$reftra);
-		      $orden1="OP".substr($x[$j]->getNumord(),2,6);
+		      $orden1="OA".substr($x[$j]->getNumord(),2,6);
 		        if ($orden1==$reftra)
 		        {
 			      $x[$j]->setNumcomapr($numcom);
 		        }
 		    }else{
-           $orden1="OP".substr($x[$j]->getNumord(),2,6);
+           $orden1="OA".substr($x[$j]->getNumord(),2,6);
 	        if ($orden1==$numord[$l+1])
 	        {
 	          $x[$j]->setNumcomapr($numcom[$l+1]);
@@ -3974,7 +3974,12 @@ class OrdendePago
 
   public static function grabarComprobanteAlcAutomatico($numord,&$correl2,&$reftra)
   {
-    $numeroorden3="OP".substr($numord,2,6);
+    $numeroorden3="OA".substr($numord,2,6);
+    $confcorcom=sfContext::getInstance()->getUser()->getAttribute('confcorcom');
+    if ($confcorcom=='N')
+    {
+      $numerocomprob= $numeroorden3;
+    }else $numerocomprob= OrdendePago::Buscar_Correlativo();
     $t= new Criteria();
     $t->add(OpordpagPeer::NUMORD,$numord);
     $data= OpordpagPeer::doSelectOne($t);
@@ -4115,7 +4120,7 @@ class OrdendePago
 	  	$i++;
 	  }
 
-        $correl2=OrdendePago::Buscar_Correlativo();
+        $correl2=$numerocomprob;//OrdendePago::Buscar_Correlativo();
 	    $contabc = new Contabc();
 	    $contabc->setNumcom($correl2);
 	    $contabc->setReftra($reftra);
@@ -4182,6 +4187,70 @@ class OrdendePago
       }
       $j++;
     }
+  }
+
+  public static function anularComprobTes($numero,$fecha,$desc,&$msj)
+  {
+    $msj="";
+    $c= new Criteria();
+    $c->add(ContabcPeer::NUMCOM,$numero);
+    $resul= ContabcPeer::doSelectOne($c);
+    if ($resul)
+    {
+      $confcorcom=sfContext::getInstance()->getUser()->getAttribute('confcorcom');
+      if ($confcorcom=='N')
+      $numcom= 'RA'.substr($resul->getNumcomapr(),2,6);
+      else
+      $numcom= Comprobante::Buscar_Correlativo();
+      $fecha_aux=split("/",$fecha);
+      $dateFormat = new sfDateFormat('es_VE');
+      $fec = $dateFormat->format($fecha, 'i', $dateFormat->getInputPattern('d'));
+
+      $contabc= new Contabc();
+      $contabc->setNumcom($numcom);
+      if (checkdate(intval($fecha_aux[1]),intval($fecha_aux[0]),intval($fecha_aux[2])))
+      { $contabc->setFeccom($fec);}
+      else { $contabc->setFeccom(date('Y-m-d'));}
+      //$contabc->setDescom($desc);
+      $contabc->setDescom($resul->getDescom());
+      $contabc->setStacom('D');
+      $contabc->setTipcom(null);
+      $contabc->setReftra($resul->getReftra());
+      $contabc->setMoncom($resul->getMoncom());
+      $contabc->save();
+
+      $a= new Criteria();
+      $a->add(Contabc1Peer::NUMCOM,$numero);
+      $a->addAscendingOrderByColumn(Contabc1Peer::DEBCRE);
+      $resul2= Contabc1Peer::doSelect($a);
+      if ($resul2)
+      {
+        foreach ($resul2 as $datos)
+        {
+          $numcom1= $numcom;
+          $contabc1= new Contabc1();
+          $contabc1->setNumcom($numcom1);
+          if (checkdate(intval($fecha_aux[1]),intval($fecha_aux[0]),intval($fecha_aux[2])))
+          { $contabc1->setFeccom($fec);}
+          $contabc1->setCodcta($datos->getCodcta());
+          $contabc1->setNumasi($datos->getNumasi());
+          $contabc1->setRefasi($datos->getRefasi());
+          $contabc1->setDesasi($datos->getDesasi());
+          if ($datos->getDebcre()=='D')
+          {  $contabc1->setDebcre('C');}
+          else { $contabc1->setDebcre('D');}
+          $contabc1->setMonasi($datos->getMonasi());
+          $contabc1->save();
+        }
+      }
+    }
+    else
+    {
+      $msj="El Comprobante Nro. ".$numero."no fue Anulado";
+      return true;
+    }
+
+  return true;
   }
 
 }
