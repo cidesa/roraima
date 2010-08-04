@@ -9,6 +9,8 @@ generator:
       suecar:    { name: Paso 1 }
       codtipcar: { name: Cod. Tipo Cargo, params: maxlength=3 }
       fecdes:    { name: Vigencia, params: date_format='dd/MM/yyyy'}
+      grades:    { name: Grado Desde }
+      grahas:    { name: Grado Hasta}
     list:
       title:          Tablas de Sueldos por Tipo de Cargos
       filters:        [codtipcar, fecdes]
@@ -20,7 +22,7 @@ generator:
       codtipcar:    ordcom
     edit:
       title:          Edicion de Tablas de Sueldos por Tipo de Cargos
-      display:        [codtipcar, pascar, fecdes]
+      display:        [codtipcar, pascar, fecdes, grades, grahas]
       actions:
         _list:         ~
         _save:         ~
