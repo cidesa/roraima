@@ -13,7 +13,7 @@ abstract class BaseCadetcotPeer {
 	const CLASS_DEFAULT = 'lib.model.Cadetcot';
 
 	
-	const NUM_COLUMNS = 10;
+	const NUM_COLUMNS = 11;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -47,6 +47,9 @@ abstract class BaseCadetcotPeer {
 	const MONDES = 'cadetcot.MONDES';
 
 	
+	const OBSERVACIONES = 'cadetcot.OBSERVACIONES';
+
+
 	const ID = 'cadetcot.ID';
 
 	
@@ -55,18 +58,18 @@ abstract class BaseCadetcotPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Refcot', 'Codart', 'Canord', 'Costo', 'Totdet', 'Fecent', 'Priori', 'Justifica', 'Mondes', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (CadetcotPeer::REFCOT, CadetcotPeer::CODART, CadetcotPeer::CANORD, CadetcotPeer::COSTO, CadetcotPeer::TOTDET, CadetcotPeer::FECENT, CadetcotPeer::PRIORI, CadetcotPeer::JUSTIFICA, CadetcotPeer::MONDES, CadetcotPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('refcot', 'codart', 'canord', 'costo', 'totdet', 'fecent', 'priori', 'justifica', 'mondes', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
+		BasePeer::TYPE_PHPNAME => array ('Refcot', 'Codart', 'Canord', 'Costo', 'Totdet', 'Fecent', 'Priori', 'Justifica', 'Mondes', 'Observaciones', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (CadetcotPeer::REFCOT, CadetcotPeer::CODART, CadetcotPeer::CANORD, CadetcotPeer::COSTO, CadetcotPeer::TOTDET, CadetcotPeer::FECENT, CadetcotPeer::PRIORI, CadetcotPeer::JUSTIFICA, CadetcotPeer::MONDES, CadetcotPeer::OBSERVACIONES, CadetcotPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('refcot', 'codart', 'canord', 'costo', 'totdet', 'fecent', 'priori', 'justifica', 'mondes', 'observaciones', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Refcot' => 0, 'Codart' => 1, 'Canord' => 2, 'Costo' => 3, 'Totdet' => 4, 'Fecent' => 5, 'Priori' => 6, 'Justifica' => 7, 'Mondes' => 8, 'Id' => 9, ),
-		BasePeer::TYPE_COLNAME => array (CadetcotPeer::REFCOT => 0, CadetcotPeer::CODART => 1, CadetcotPeer::CANORD => 2, CadetcotPeer::COSTO => 3, CadetcotPeer::TOTDET => 4, CadetcotPeer::FECENT => 5, CadetcotPeer::PRIORI => 6, CadetcotPeer::JUSTIFICA => 7, CadetcotPeer::MONDES => 8, CadetcotPeer::ID => 9, ),
-		BasePeer::TYPE_FIELDNAME => array ('refcot' => 0, 'codart' => 1, 'canord' => 2, 'costo' => 3, 'totdet' => 4, 'fecent' => 5, 'priori' => 6, 'justifica' => 7, 'mondes' => 8, 'id' => 9, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
+		BasePeer::TYPE_PHPNAME => array ('Refcot' => 0, 'Codart' => 1, 'Canord' => 2, 'Costo' => 3, 'Totdet' => 4, 'Fecent' => 5, 'Priori' => 6, 'Justifica' => 7, 'Mondes' => 8, 'Observaciones' => 9, 'Id' => 10, ),
+		BasePeer::TYPE_COLNAME => array (CadetcotPeer::REFCOT => 0, CadetcotPeer::CODART => 1, CadetcotPeer::CANORD => 2, CadetcotPeer::COSTO => 3, CadetcotPeer::TOTDET => 4, CadetcotPeer::FECENT => 5, CadetcotPeer::PRIORI => 6, CadetcotPeer::JUSTIFICA => 7, CadetcotPeer::MONDES => 8, CadetcotPeer::OBSERVACIONES => 9, CadetcotPeer::ID => 10, ),
+		BasePeer::TYPE_FIELDNAME => array ('refcot' => 0, 'codart' => 1, 'canord' => 2, 'costo' => 3, 'totdet' => 4, 'fecent' => 5, 'priori' => 6, 'justifica' => 7, 'mondes' => 8, 'observaciones' => 9, 'id' => 10, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
 	);
 
 	
@@ -137,6 +140,8 @@ abstract class BaseCadetcotPeer {
 		$criteria->addSelectColumn(CadetcotPeer::JUSTIFICA);
 
 		$criteria->addSelectColumn(CadetcotPeer::MONDES);
+
+		$criteria->addSelectColumn(CadetcotPeer::OBSERVACIONES);
 
 		$criteria->addSelectColumn(CadetcotPeer::ID);
 

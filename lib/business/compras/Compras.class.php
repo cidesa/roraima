@@ -449,6 +449,7 @@ class Compras {
 	      	{
 	      		$dat->setPriori($x[$j]->getPriori2());
 	      		$dat->setJustifica($x[$j]->getJustifica());
+                        $dat->setObservaciones($x[$j]->getObservaciones());
 	      		$dat->save();
 	      	}
 	      }
