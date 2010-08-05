@@ -429,12 +429,21 @@ $this->Bitacora('Guardo');
     $col6->setNombreCampo('codart');
     $col6->setOculta(true);
 
+    $col7 = new Columna('Observaciones');
+    $col7->setTipo(Columna::TEXTO);
+    $col7->setEsGrabable(true);
+    $col7->setNombreCampo('observaciones');
+    $col7->setAlineacionObjeto(Columna::IZQUIERDA);
+    $col7->setAlineacionContenido(Columna::IZQUIERDA);
+    $col7->setHTML('type="text" size="60"');
+
 	$opciones->addColumna($col1);
 	$opciones->addColumna($col2);
 	$opciones->addColumna($col3);
 	$opciones->addColumna($col4);
 	$opciones->addColumna($col5);
 	$opciones->addColumna($col6);
+        $opciones->addColumna($col7);
 
 	$this->grid = $opciones->getConfig($per);
 	}
@@ -633,11 +642,20 @@ $this->Bitacora('Guardo');
     $col5->setNombreCampo('refcot');
     $col5->setOculta(true);
 
-    $opciones->addColumna($col1);
+    $col6 = new Columna('Observaciones');
+    $col6->setTipo(Columna::TEXTO);
+    $col6->setEsGrabable(true);
+    $col6->setNombreCampo('observaciones');
+    $col6->setAlineacionObjeto(Columna::IZQUIERDA);
+    $col6->setAlineacionContenido(Columna::IZQUIERDA);
+    $col6->setHTML('type="text" size="60"');
+
+        $opciones->addColumna($col1);
 	$opciones->addColumna($col2);
 	$opciones->addColumna($col3);
 	$opciones->addColumna($col4);
 	$opciones->addColumna($col5);
+        $opciones->addColumna($col6);
 
 	$this->grid2 = $opciones->getConfig($per);
 	}

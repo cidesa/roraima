@@ -597,6 +597,9 @@ propel:
       type: NUMERIC
       size: 14
       scale: 2
+    observaciones:
+      type: VARCHAR
+      size: 1000
     id:
       type: INTEGER
       required: true
