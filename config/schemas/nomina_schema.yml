@@ -1908,7 +1908,7 @@ propel:
     codpar:
       type: VARCHAR
       size: 16
-      required: true
+      #required: true
     opecon:
       type: VARCHAR
       size: 1

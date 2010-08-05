@@ -17,8 +17,8 @@ names:
     validators: Validator_codcon
     
   npdefcpt{codpar}:
-    required:  Yes
-    required_msg: El código de la partida no puede estar en Blanco
+    required:  No
+    #required_msg: El código de la partida no puede estar en Blanco
     validators: PartidaValidator
     
   npdefcpt{nomcon}:
