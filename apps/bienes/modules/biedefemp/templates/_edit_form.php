@@ -398,6 +398,36 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 
+    <br>
+
+  <?php echo label_for('bndefins[coractmue]', __($labels['bndefins{coractmue}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('bndefins{coractmue}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('bndefins{coractmue}')): ?>
+    <?php echo form_error('bndefins{coractmue}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($bndefins,array('getCoractmue',true), array (
+  'size' => 8,
+  'maxlength'=>8,
+  'control_name' => 'bndefins[coractmue]',
+)); echo $value ? $value : '&nbsp;' ?>
+</div>
+
+    <br>
+
+  <?php echo label_for('bndefins[coractinm]', __($labels['bndefins{coractinm}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('bndefins{coractinm}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('bndefins{coractinm}')): ?>
+    <?php echo form_error('bndefins{coractinm}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($bndefins,array('getCoractinm',true), array (
+  'size' => 8,
+  'maxlength'=>8,
+  'control_name' => 'bndefins[coractinm]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+
 </div>
 </fieldset>
 <?php tabInit('tp1','0');?>

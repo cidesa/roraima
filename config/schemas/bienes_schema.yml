@@ -244,6 +244,12 @@ propel:
     corrmue:
       type: NUMERIC
       size: 8
+    coractmue:
+      type: NUMERIC
+      size: 8
+    coractinm:
+      type: NUMERIC
+      size: 8
     id:
       type: INTEGER
       required: true

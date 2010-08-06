@@ -32,7 +32,7 @@ private static $coderror=-1;
     $cajtexmos=$this->getRequestParameter('cajtexmos');
     $cajtexcom=$this->getRequestParameter('cajtexcom');
       $result=array();
-      $sql="select a.codact as codigo_nivel,a.DesAct as activo From bndefact a, bndefins b where length(RTrim(a.CodAct))=b.LonAct and a.codact='".$this->getRequestParameter('codigo')."' Order By codact";
+      $sql="select a.codact as codigo_nivel,a.DesAct as activo From bndefact a, bndefins b where length(RTrim(a.CodAct))=cast(b.LonAct as integer) and a.codact='".$this->getRequestParameter('codigo')."' Order By codact";
     if (Herramientas::BuscarDatos($sql,&$result))
     {
       $dato=$result[0]['codigo_nivel'];

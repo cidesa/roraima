@@ -57,7 +57,7 @@ private static $coderror=-1;
     $cajtexmos=$this->getRequestParameter('cajtexmos');
     $cajtexcom=$this->getRequestParameter('cajtexcom');
       $result=array();
-      $sql="select a.codact as codigo_nivel,a.DesAct as activo From bndefact a, bndefins b where length(RTrim(a.CodAct))=b.LonAct and a.codact='".$this->getRequestParameter('codigo')."' and (codact like '1%%' or codact like '01%%') Order By codact";
+      $sql="select a.codact as codigo_nivel,a.DesAct as activo From bndefact a, bndefins b where length(RTrim(a.CodAct))=cast(b.LonAct as integer) and a.codact='".$this->getRequestParameter('codigo')."' and (codact like '1%%' or codact like '01%%') Order By codact";
     if (Herramientas::BuscarDatos($sql,&$result))
     {
       $dato=$result[0]['codigo_nivel'];
@@ -222,5 +222,32 @@ private static $coderror=-1;
       }else return true;
     }
 
+  protected function saveBnreginm($bnreginm)
+  {
+    if ($bnreginm->getCodinm()=='########')
+    {
+      if (Herramientas::getVerCorrelativo('coractinm','bndefins',&$r))
+      {
+        $encontrado=false;
+        while (!$encontrado)
+        {
+          $numero=str_pad($r, 8, '0', STR_PAD_LEFT);
+          $sql="select codinm from bnreginm where codinm='".$numero."'";
+          if (Herramientas::BuscarDatos($sql,&$result))
+          {
+             $r=$r+1;
+          }
+          else
+          {
+            $encontrado=true;
+          }
+        }
+        $bnreginm->setCodinm(str_pad($r, 8, '0', STR_PAD_LEFT));
+       }
+       Herramientas::getSalvarCorrelativo('coractinm','bndefins','RegistroInMuebles',$r,&$msg);
+    }
 
+      $bnreginm->save();
+
+}
 }

@@ -650,7 +650,30 @@ class Bienes
 
   public static function salvarSaveBnregmue($clase)
   {
-     $saveusu=H::getConfApp('saveusu','bienes','bieregactmued');
+     if ($clase->getCodmue()=='########')
+     {
+      if (Herramientas::getVerCorrelativo('coractmue','bndefins',&$r))
+      {
+        $encontrado=false;
+        while (!$encontrado)
+        {
+          $numero=str_pad($r, 8, '0', STR_PAD_LEFT);
+          $sql="select codmue from bnregmue where codmue='".$numero."'";
+          if (Herramientas::BuscarDatos($sql,&$result))
+          {
+             $r=$r+1;
+          }
+          else
+          {
+            $encontrado=true;
+          }
+        }
+        $clase->setCodmue(str_pad($r, 8, '0', STR_PAD_LEFT));
+       }
+       Herramientas::getSalvarCorrelativo('coractmue','bndefins','RegistroMuebles',$r,&$msg);
+    }
+     
+      $saveusu=H::getConfApp('saveusu','bienes','bieregactmued');
      if ($saveusu=='S') {
 	     $loguse= sfContext::getInstance()->getUser()->getAttribute('loguse');
 	  	 $clase->setLogusu($loguse);
