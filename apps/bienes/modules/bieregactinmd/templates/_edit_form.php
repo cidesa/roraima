@@ -34,6 +34,7 @@
   'size' => $lonact,
   'control_name' => 'bnreginm[codact]',
   'maxlength' => $lonact,
+  'readonly'  =>  $bnreginm->getId()!='' ? true : false ,
   'onKeyPress' => "javascript:return dFilter (event.keyCode, this,'$foract')",
   'onBlur'=> remote_function(array(
         'url'      => 'bieregactinmd/ajax',
@@ -58,6 +59,7 @@
   'size' => 12,
   'maxlength' => 20,
   'control_name' => 'bnreginm[codinm]',
+  'readonly'  =>  $bnreginm->getId()!='' ? true : false ,
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 
@@ -916,7 +918,14 @@
    {
       $('divnumord').show();
    }
-
+   if ($('id').value=='') {
+   var mansolcor='<?php echo $bnreginm->getMansolcor()?>';
+   if (mansolcor=='S')
+   {
+      $('bnreginm_codinm').value='########';
+      $('bnreginm_codinm').readOnly=true;
+   }
+   }
 function num(e) {
     evt = e ? e : event;
     tcl = (window.Event) ? evt.which : evt.keyCode;

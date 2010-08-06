@@ -844,6 +844,14 @@
    {
       $('divnumord').show();
    }
+  if ($('id').value=='') {
+   var mansolcor='<?php echo $bnregmue->getMansolcor()?>';
+   if (mansolcor=='S')
+   {
+      $('bnregmue_codmue').value='########';
+      $('bnregmue_codmue').readOnly=true;
+   }
+   }
 function num(e) {
     evt = e ? e : event;
     tcl = (window.Event) ? evt.which : evt.keyCode;

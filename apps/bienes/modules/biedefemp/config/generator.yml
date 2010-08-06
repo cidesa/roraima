@@ -27,7 +27,8 @@ generator:
       corrmue: { name: Muebles}
       corrinm: { name: Inmuebles}
       corrsem: { name: Semovientes}
-
+      coractmue:  { name: Activo Mueble}
+      coractinm:  { name: Activo Inmueble}
     list:
       title:          Definición de Empresa
       display:        [=codins, nomins]
@@ -38,7 +39,7 @@ generator:
         _edit:        ~
     edit:
       title:          Edición de Empresa
-      display:       [codins, nomins, dirins, telins, faxins, email, edoins, munins, paqins, foract, desact, forubi, desubi, fecper, feceje, coddes, porrev, corrmue, corrinm, corrsem, codinc]
+      display:       [codins, nomins, dirins, telins, faxins, email, edoins, munins, paqins, foract, desact, forubi, desubi, fecper, feceje, coddes, porrev, corrmue, corrinm, corrsem, codinc, coractmue, coractinm]
       actions:
         _save:        ~
       fields:

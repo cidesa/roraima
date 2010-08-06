@@ -232,6 +232,14 @@ class biedefempActions extends autobiedefempActions
     {
       $this->bndefins->setCodinc($bndefins['codinc']);
     }
+    if (isset($bndefins['coractmue']))
+    {
+      $this->bndefins->setCoractmue($bndefins['coractmue']);
+    }
+    if (isset($bndefins['coractinm']))
+    {
+      $this->bndefins->setCoractinm($bndefins['coractinm']);
+    }
   }
 
 }

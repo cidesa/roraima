@@ -74,7 +74,11 @@ class BndefinsMapBuilder {
 
 		$tMap->addColumn('PORREV', 'Porrev', 'string', CreoleTypes::VARCHAR, false, 5);
 
-		$tMap->addColumn('CORRMUE', 'Corrmue', 'int', CreoleTypes::INTEGER, false, 8);
+		$tMap->addColumn('CORRMUE', 'Corrmue', 'double', CreoleTypes::NUMERIC, false, 8);
+
+		$tMap->addColumn('CORACTMUE', 'Coractmue', 'double', CreoleTypes::NUMERIC, false, 8);
+
+		$tMap->addColumn('CORACTINM', 'Coractinm', 'double', CreoleTypes::NUMERIC, false, 8);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 

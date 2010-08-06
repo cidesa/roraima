@@ -118,6 +118,28 @@ class Bnregmue extends BaseBnregmue
             return Herramientas::getX('codubi','Bnubica','Desubi',trim(self::getCodubiadm()));
     }
 
+  public function getMansolcor()
+  {
+    $dato="";
+    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('bienes',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['bienes']))
+	     if(array_key_exists('bieregactmued',$varemp['aplicacion']['bienes']['modulos'])){
+	       if(array_key_exists('mansolcor',$varemp['aplicacion']['bienes']['modulos']['bieregactmued']))
+	       {
+	       	$dato=$varemp['aplicacion']['bienes']['modulos']['bieregactmued']['mansolcor'];
+	       }
+         }
+     return $dato;
+  }
+
+  public function setMansolcor()
+  {
+  	return $this->mansolcor;
+  }
+
 }
 
 

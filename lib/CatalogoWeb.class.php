@@ -2880,9 +2880,20 @@ $this->c= new Criteria();
 
   public function Bndefact_Bieregactmued() {
     //$sql="select a.CodAct as codigo_nivel,a.DesAct as activo From BNDEFACT a, BNDEFINS b where length(RTrim(a.CodAct))=b.LonAct And codact like '2%%' Order By CodAct";
-
+            $filcat="";
+            $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+            if ($varemp)
+                if(array_key_exists('aplicacion',$varemp))
+                 if(array_key_exists('bienes',$varemp['aplicacion']))
+                   if(array_key_exists('modulos',$varemp['aplicacion']['bienes']))
+                     if(array_key_exists('bieregactmued',$varemp['aplicacion']['bienes']['modulos'])){
+                       if(array_key_exists('filcat',$varemp['aplicacion']['bienes']['modulos']['bieregactmued']))
+                       {
+                        $filcat=$varemp['aplicacion']['bienes']['modulos']['bieregactmued']['filcat'];
+                       }
+                     }
     $this->c = new Criteria();
-    $this->sql = "cast (BNDEFINS.LonAct as integer)=length(RTrim(BNDEFACT.CodAct)) and  (codact like '%%' or codact like '%%')";
+		$this->sql = "cast (BNDEFINS.LonAct as integer)=length(RTrim(BNDEFACT.CodAct)) and  (codact like '".$filcat."%%')";
     $this->c->add(BndefinsPeer :: LONACT, $this->sql, Criteria :: CUSTOM);
     $this->c->addAscendingOrderByColumn(BndefactPeer :: CODACT);
 
@@ -2895,9 +2906,20 @@ $this->c= new Criteria();
 
   public function Bndefact_Bieregactinm() {
     //$sql="select a.CodAct as codigo_nivel,a.DesAct as activo From BNDEFACT a, BNDEFINS b where length(RTrim(a.CodAct))=b.LonAct And codact like '1%%' Order By CodAct";
-
+            $filcat="";
+            $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+            if ($varemp)
+                if(array_key_exists('aplicacion',$varemp))
+                 if(array_key_exists('bienes',$varemp['aplicacion']))
+                   if(array_key_exists('modulos',$varemp['aplicacion']['bienes']))
+                     if(array_key_exists('bieregactinmd',$varemp['aplicacion']['bienes']['modulos'])){
+                       if(array_key_exists('filcat',$varemp['aplicacion']['bienes']['modulos']['bieregactinmd']))
+                       {
+                        $filcat=$varemp['aplicacion']['bienes']['modulos']['bieregactinmd']['filcat'];
+                       }
+                     }
     $this->c = new Criteria();
-    $this->sql = "cast (BNDEFINS.LonAct as integer)=length(RTrim(BNDEFACT.CodAct)) and  (codact like '%%' or codact like '%%')";
+		$this->sql = "cast (BNDEFINS.LonAct as integer)=length(RTrim(BNDEFACT.CodAct)) and  (codact like '".$filcat."%%')";
     $this->c->add(BndefinsPeer :: LONACT, $this->sql, Criteria :: CUSTOM);
     $this->c->addAscendingOrderByColumn(BndefactPeer :: CODACT);
 
