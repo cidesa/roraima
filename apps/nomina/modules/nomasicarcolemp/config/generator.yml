@@ -1,0 +1,41 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Npasicarcolemp
+    theme:            cidesaGenerator
+    fields:
+      codemp:
+        name: Empleado
+        msj_error: El CÃ³digo del Empleado es necesario
+        catalogo:
+          catalogoweb: Nphojint_Nomfalperper
+          clase: Nphojint
+          ajax: 0
+          parametros: getprincipal="getCodemp" getsecundario="getNomemp" campoprincipal="codemp" camposecundario="nomemp" campobase = "id"
+      codcar:
+        name: Cargo
+        msj_error: El CÃ³digo del Cargo es necesario
+        catalogo:
+          catalogoweb: Viadettabcar_Npcargos
+          clase: Npcargos
+          ajax: 0
+          parametros: getprincipal="getCodcar" getsecundario="getNomcar" campoprincipal="codcar" camposecundario="nomcar" campobase = "id"
+      fecdes:      {name: Fecha Desde}
+      fechas:      {name: Fecha Hasta}
+      descrip:     {name: Descripcion, type: textarea_tag, params: size=65x3 }
+
+
+    list:
+      title:         Listado de Cargo Colaterales Asignados
+      display:       [=codemp, codcar, fecdes, fechas, descrip]
+      filters:       [codemp, codcar, fecdes, fechas]
+
+    edit:
+      title:          EdiciÃ³n de AsignaciÃ³n de Cargos Colaterales
+      display:
+        Datos Empleado:   [codemp]
+        Datos Cargos:     [codcar, fecdes, fechas, descrip]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

@@ -7466,3 +7466,29 @@ propel:
     admpub:
       type: VARCHAR
       size: 1
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  npasicarcolemp:
+    codemp:
+      type: VARCHAR
+      size: 16
+    codcar:
+      type: VARCHAR
+      size: 16
+    fecdes:
+      type: DATE
+    fechas:
+      type: DATE
+    descrip:
+      type: VARCHAR
+      size: 1000
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
