@@ -2997,9 +2997,22 @@ class Nomina {
             {
                 $fecnomdes = $res[0]['ultfec'];
             }
-          $sql="select count(codemp) as canpar from npinffam where fecing>=to_date('$fecnomdes','yyyy-mm-dd') and fecing<=to_date('$fecnom','yyyy-mm-dd') and codemp=''";
+          $sql="select count(codemp) as canpar from npinffam where fecing>=to_date('$fecnomdes','yyyy-mm-dd') and fecing<=to_date('$fecnom','yyyy-mm-dd') and codemp='$empleado'";
           if (Herramientas :: BuscarDatos($sql, & $rspar)) {
                 $valor = $rspar[0]['canpar'];
+          }
+        break;
+      case "MATNOM":
+            $valor = 'N';
+            $fecnomdes=null;
+            $sql = "select ultfec from npnomina where codnom='$nomina'";
+            if (Herramientas :: BuscarDatos($sql, & $res))
+            {
+                $fecnomdes = $res[0]['ultfec'];
+            }
+          $sql="select * from nphojint where fecmat>=to_date('$fecnomdes','yyyy-mm-dd') and fecmat<=to_date('$fecnom','yyyy-mm-dd') and codemp='$empleado' ";
+          if (Herramientas :: BuscarDatos($sql, & $rspar)) {
+                $valor = 'S';
           }
         break;
       default :
@@ -5312,11 +5325,26 @@ class Nomina {
             if (Herramientas :: BuscarDatos($sql, & $res))
             {
                 $fecnomdes = $res[0]['ultfec'];
-                $fecnomconstantes = $res[0]['profec'];
+                $fecnom = $res[0]['profec'];
             }
-          $sql="select count(codemp) as canpar from npinffam where fecing>=to_date('$fecnomdes','yyyy-mm-dd') and fecing<=to_date('$fecnom','yyyy-mm-dd') and codemp=''";
+          $sql="select count(codemp) as canpar from npinffam where fecing>=to_date('$fecnomdes','yyyy-mm-dd') and fecing<=to_date('$fecnom','yyyy-mm-dd') and codemp='$empleado'";
           if (Herramientas :: BuscarDatos($sql, & $rspar)) {
                 $valor = $rspar[0]['canpar'];
+          }
+        break;
+      case "MATNOM":
+            $valor = 'N';
+            $fecnomdes=null;
+            $fecnom=null;
+            $sql = "select ultfec from npnomina where codnom='$nomina'";
+            if (Herramientas :: BuscarDatos($sql, & $res))
+            {
+                $fecnomdes = $res[0]['ultfec'];
+                $fecnom = $res[0]['profec'];
+            }
+          $sql="select * from nphojint where fecmat>=to_date('$fecnomdes','yyyy-mm-dd') and fecmat<=to_date('$fecnom','yyyy-mm-dd') and codemp='$empleado' ";
+          if (Herramientas :: BuscarDatos($sql, & $rspar)) {
+                $valor = 'S';
           }
         break;
       default :
