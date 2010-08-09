@@ -413,6 +413,10 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 
 
 	
+	protected $fecmat;
+
+
+
 	protected $id;
 
 	
@@ -1308,6 +1312,28 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 
   }
   
+  public function getFecmat($format = 'Y-m-d')
+  {
+
+    if ($this->fecmat === null || $this->fecmat === '') {
+      return null;
+    } elseif (!is_int($this->fecmat)) {
+            $ts = adodb_strtotime($this->fecmat);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecmat] as date/time value: " . var_export($this->fecmat, true));
+      }
+    } else {
+      $ts = $this->fecmat;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+
   public function getId()
   {
 
@@ -2457,6 +2483,28 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setFecmat($v)
+	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecmat] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecmat !== $ts) {
+      $this->fecmat = $ts;
+      $this->modifiedColumns[] = NphojintPeer::FECMAT;
+    }
+
+	}
+
 	public function setId($v)
 	{
 
@@ -2673,7 +2721,9 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 
       $this->codmot = $rs->getString($startcol + 100);
 
-      $this->id = $rs->getInt($startcol + 101);
+      $this->fecmat = $rs->getDate($startcol + 101, null);
+
+      $this->id = $rs->getInt($startcol + 102);
 
       $this->resetModified();
 
@@ -2681,7 +2731,7 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 102; 
+            return $startcol + 103;
     } catch (Exception $e) {
       throw new PropelException("Error populating Nphojint object", $e);
     }
@@ -3148,6 +3198,9 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 				return $this->getCodmot();
 				break;
 			case 101:
+				return $this->getFecmat();
+				break;
+			case 102:
 				return $this->getId();
 				break;
 			default:
@@ -3261,7 +3314,8 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 			$keys[98] => $this->getFecfincon(),
 			$keys[99] => $this->getObsembret(),
 			$keys[100] => $this->getCodmot(),
-			$keys[101] => $this->getId(),
+			$keys[101] => $this->getFecmat(),
+			$keys[102] => $this->getId(),
 		);
 		return $result;
 	}
@@ -3581,6 +3635,9 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 				$this->setCodmot($value);
 				break;
 			case 101:
+				$this->setFecmat($value);
+				break;
+			case 102:
 				$this->setId($value);
 				break;
 		} 	}
@@ -3691,7 +3748,8 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[98], $arr)) $this->setFecfincon($arr[$keys[98]]);
 		if (array_key_exists($keys[99], $arr)) $this->setObsembret($arr[$keys[99]]);
 		if (array_key_exists($keys[100], $arr)) $this->setCodmot($arr[$keys[100]]);
-		if (array_key_exists($keys[101], $arr)) $this->setId($arr[$keys[101]]);
+		if (array_key_exists($keys[101], $arr)) $this->setFecmat($arr[$keys[101]]);
+		if (array_key_exists($keys[102], $arr)) $this->setId($arr[$keys[102]]);
 	}
 
 	
@@ -3800,6 +3858,7 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(NphojintPeer::FECFINCON)) $criteria->add(NphojintPeer::FECFINCON, $this->fecfincon);
 		if ($this->isColumnModified(NphojintPeer::OBSEMBRET)) $criteria->add(NphojintPeer::OBSEMBRET, $this->obsembret);
 		if ($this->isColumnModified(NphojintPeer::CODMOT)) $criteria->add(NphojintPeer::CODMOT, $this->codmot);
+		if ($this->isColumnModified(NphojintPeer::FECMAT)) $criteria->add(NphojintPeer::FECMAT, $this->fecmat);
 		if ($this->isColumnModified(NphojintPeer::ID)) $criteria->add(NphojintPeer::ID, $this->id);
 
 		return $criteria;
@@ -4032,6 +4091,8 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 		$copyObj->setObsembret($this->obsembret);
 
 		$copyObj->setCodmot($this->codmot);
+
+		$copyObj->setFecmat($this->fecmat);
 
 
 		if ($deepCopy) {

@@ -173,7 +173,7 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div></th>
 
-    <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+    <th>&nbsp;&nbsp;&nbsp;&nbsp</th>
 
     <th><?php echo label_for('nphojint[rifemp]', __($labels['nphojint{rifemp}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('nphojint{rifemp}')): ?> form-error<?php endif; ?>">
@@ -189,7 +189,7 @@
 
     </div></th>
 
-    <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+    <th>&nbsp;&nbsp;&nbsp;&nbsp</th>
 
     <th><?php echo label_for('nphojint[edociv]', __($labels['nphojint{edociv}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('nphojint{edociv}')): ?> form-error<?php endif; ?>">
@@ -197,7 +197,23 @@
     <?php echo form_error('nphojint{edociv}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php echo select_tag('nphojint[edociv]', options_for_select($listaestadocivil,$nphojint->getEdociv(),'include_custom=Seleccione Uno')) ?>
+  <?php echo select_tag('nphojint[edociv]', options_for_select($listaestadocivil,$nphojint->getEdociv(),'include_custom=Seleccione Uno'),array(
+     'onChange' => "javascript: if(this.value=='C') $('thfecmat').show(); else $('thfecmat').hide() ;"
+
+  )) ?>
+    </div></th>
+
+    <th id='thfecmat'<?php if($nphojint->getEdociv()!='C') echo 'style="display:none"' ?>><?php echo label_for('nphojint[fecmat]', __($labels['nphojint{fecmat}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('nphojint{fecmat}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('nphojint{fecmat}')): ?>
+    <?php echo form_error('nphojint{fecmat}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_date_tag($nphojint, 'getFecmat', array (
+  'rich' => true,
+  'calendar_button_img' => '/sf/sf_admin/images/date.png',
+  'control_name' => 'nphojint[fecmat]',
+)); echo $value ? $value : '&nbsp;' ?>
     </div></th>
    </tr>
   </table>

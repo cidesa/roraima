@@ -4,25 +4,25 @@
 
 class NphojintMapBuilder {
 
-	
+
 	const CLASS_NAME = 'lib.model.nomina.map.NphojintMapBuilder';
 
-	
+
 	private $dbMap;
 
-	
+
 	public function isBuilt()
 	{
 		return ($this->dbMap !== null);
 	}
 
-	
+
 	public function getDatabaseMap()
 	{
 		return $this->dbMap;
 	}
 
-	
+
 	public function doBuild()
 	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
@@ -236,7 +236,9 @@ class NphojintMapBuilder {
 
 		$tMap->addColumn('CODMOT', 'Codmot', 'string', CreoleTypes::VARCHAR, false, 4);
 
+		$tMap->addColumn('FECMAT', 'Fecmat', 'int', CreoleTypes::DATE, false, null);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
-	} 
-} 
+	}
+}
