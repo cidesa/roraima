@@ -491,7 +491,7 @@
 
 				dato = 'ACUC';
 			}
-			if (dato=='STAB' || dato=='SC')
+			if (dato=='STAB' || dato=='SC' || dato=='DIFSUECARCOL')
 			{
 				var param = cod.substr(2,(cod.length) - 2);
 				var parametro = param.substr(2,2)+"/"+param.substr(0,2)+"/"+param.substr(4,4);
@@ -502,8 +502,10 @@
 				   parametro = "0101"+ano;
 				if(dato=='STAB')
 					dato = 'STAB';
-				else
+				else if(dato=='SC')
 					dato = 'SC';
+                                else
+                                       dato = 'DIFSUECARCOL';
 			}
 			if (dato=='CTAB')
 			{
@@ -618,7 +620,7 @@
 					$('cajoculabel').value='';
 					$('cajaux').value=cod;
 					return true;
-		     	}else if (cod=='STAB' || cod=='CTAB' || cod=='SC')
+		     	}else if (cod=='STAB' || cod=='CTAB' || cod=='SC' || cod=='DIFSUECARCOL')
 		     	{
 		     	    $('grid1').hide();
 					$('idfunciones').disabled=true;
