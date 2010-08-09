@@ -3667,6 +3667,8 @@ propel:
     codmot:
       type: VARCHAR
       size: 4
+    fecmat:
+      type: DATE
     id:
       type: INTEGER
       required: true
