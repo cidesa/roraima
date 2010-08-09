@@ -42,7 +42,7 @@ class Tsmovlib extends BaseTsmovlib
 
 	public function getDestip()
     {
-	if (self::getCodtip()!='')
+	if ($this->codtip!='')
             return Herramientas::getX('CODTIP','Tstipmov','Destip',self::getCodtip());
         else
             return Herramientas::getX('CODTIP','Tstipmov','Destip',self::getTipmov());
