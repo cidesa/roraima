@@ -2983,13 +2983,25 @@ class Nomina {
                 }else
                     $valor=0;
             }
-              
+
         }else
             $valor=0;
 
-        
-        break;
 
+        break;
+      case "NPARINC":
+            $valor = 0;
+            $fecnomdes=null;
+            $sql = "select ultfec from npnomina where codnom='$nomina'";
+            if (Herramientas :: BuscarDatos($sql, & $res))
+            {
+                $fecnomdes = $res[0]['ultfec'];
+            }
+          $sql="select count(codemp) as canpar from npinffam where fecing>=to_date('$fecnomdes','yyyy-mm-dd') and fecing<=to_date('$fecnom','yyyy-mm-dd') and codemp=''";
+          if (Herramientas :: BuscarDatos($sql, & $rspar)) {
+                $valor = $rspar[0]['canpar'];
+          }
+        break;
       default :
         $aux = 0;
 
@@ -5292,7 +5304,21 @@ class Nomina {
 
 
         break;
-
+      case "NPARINC":
+            $valor = 0;
+            $fecnomdes=null;
+            $fecnom=null;
+            $sql = "select ultfec from npnomina where codnom='$nomina'";
+            if (Herramientas :: BuscarDatos($sql, & $res))
+            {
+                $fecnomdes = $res[0]['ultfec'];
+                $fecnomconstantes = $res[0]['profec'];
+            }
+          $sql="select count(codemp) as canpar from npinffam where fecing>=to_date('$fecnomdes','yyyy-mm-dd') and fecing<=to_date('$fecnom','yyyy-mm-dd') and codemp=''";
+          if (Herramientas :: BuscarDatos($sql, & $rspar)) {
+                $valor = $rspar[0]['canpar'];
+          }
+        break;
       default :
         /////// FFRAC
 
