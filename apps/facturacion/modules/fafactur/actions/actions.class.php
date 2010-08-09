@@ -1170,6 +1170,41 @@ class fafacturActions extends autofafacturActions {
 	protected function saving($fafactur) {
 		if ($fafactur->getId()) {
 			$fafactur->save();
+
+                        $grid = Herramientas :: CargarDatosGridv2($this, $this->obj1);
+
+                        $x=$grid[0];
+                        $j=0;
+                        while ($j<count($x))
+                        {
+                            $y= new Criteria();
+                            $y->add(FaartfacPeer::REFFAC,$fafactur->getReffac());
+                            $y->add(FaartfacPeer::CODART,$x[$j]->getCodart());
+                            $result= FaartfacPeer::doSelectOne($y);
+                            if ($result)
+                            {
+                                $result->setNronot($x[$j]->getNronot());
+                                $result->setOrddespacho($x[$j]->getOrddespacho());
+                                $result->setGuia($x[$j]->getGuia());
+                                $result->setContenedores($x[$j]->getContenedores());
+                                $result->setBillleading($x[$j]->getBillleading());
+                                $result->setNumtransp($x[$j]->getNumtransp());
+                                $result->setPlaca($x[$j]->getPlaca());
+                                $result->setChofer($x[$j]->getChofer());
+                                $result->setFecsal($x[$j]->getFecsal());
+                                $result->setHorsal($x[$j]->getHorsal());
+                                $result->setFeclleg($x[$j]->getFeclleg());
+                                $result->setHorlleg($x[$j]->getHorlleg());
+                                $result->setProd($x[$j]->getProd());
+                                $result->setKg($x[$j]->getKg());
+                                $result->setCajas($x[$j]->getCajas());
+                                $result->setTm($x[$j]->getTm());
+                                $result->setObservaciones($x[$j]->getObservaciones());
+                                $result->save();
+                            }
+                          $j++;
+                        }
+
 	    return -1;
 		} else {
 			$tipocaja = $this->getUser()->getAttribute('clavecaja', null, 'fafactur');
