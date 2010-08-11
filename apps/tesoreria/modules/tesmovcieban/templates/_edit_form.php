@@ -4,8 +4,8 @@
  *
  * @package    Roraima
  * @subpackage vistas
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version    SVN: $Id$
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id: _edit_form.php 40081 2010-08-11 13:09:35Z cramirez $
  */
 // date: 2007/07/17 15:34:16
 ?>
@@ -89,6 +89,7 @@
   'control_name' => 'ano',
   'size' => 5,
   'maxlength' => 4,
+  'value'=> $sf_user->getAttribute('anofis','','tesmovcieban') ,
 )); ?>
 
     </div>

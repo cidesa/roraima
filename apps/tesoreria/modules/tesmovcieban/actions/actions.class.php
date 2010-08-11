@@ -5,8 +5,8 @@
  *
  * @package    Roraima
  * @subpackage tesmovcieban
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: actions.class.php 40080 2010-08-11 13:09:03Z cramirez $
  * 
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -29,7 +29,10 @@ class tesmovciebanActions extends autotesmovciebanActions
    */
   public function executeEdit()
   {
-
+    $c = new Criteria();
+    $per = ContabaPeer::doSelectOne($c);
+    $ano = $per->getFeccie2('Y');
+    $this->getUser()->setAttribute('anofis',$ano,'tesmovcieban');
     parent::executeEdit();
 
   }
@@ -76,7 +79,8 @@ class tesmovciebanActions extends autotesmovciebanActions
   
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
