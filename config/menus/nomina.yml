@@ -151,6 +151,7 @@ nomina:
         Registro de Tipos de Asignaciones:                           presNomAsiConPre
         Definición Presupuestaria de Liquidación:                    presNomDefPre
         Definiciones Especiales para Prestaciones:                   NomDefEspParPre
+        Definiciones de Clausulas para Prestaciones:                 NomDefEspClauDet
         Definición de Periodos por Meses:                            presNomSemMes
         Parámetros para el Salario Integral:                         presnomparsalint
       Registros Útiles para el Cálculo de Prestaciones Sociales:
