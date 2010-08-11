@@ -1750,7 +1750,7 @@ class SolicituddeEgresos
 
       if (Herramientas::Monto_disponible_ejecucion($anno,$codpre,&$mondis))
       {
-        if (H::toFloat($mitotal) > H::toFloat($mondis))
+        if ($mitotal > $mondis)
         {
           $chequeardisponibilidadpresupuesto=false;
           $sobregiro=true;
