@@ -1229,6 +1229,26 @@ public static function CargarDatosGrid(&$form,$obj,$arreglo = false)
     return $json .= '["","",""]]';
   }
 
+  public static function array_to_json($arra = array())
+  {
+    $json = '[';
+    foreach($arra as $key0 => $value0){
+
+      if(strstr($key0, 'grid') && is_array($value0)){
+          $gridname = substr($key0, 4);
+          foreach($value0 as $gkey0 => $gvalue0){
+            foreach($gvalue0 as $gkey1 => $gvalue1){
+              $json .= '["'.$gridname.'x_'.$gkey0.'_'.($gkey1+1).'","'.$gvalue1.'",""], ';
+            }
+          }
+      }else{
+          $json .= '["'.$key0.'","'.$value0.'",""], ';
+      }
+
+    }
+    return $json .= '["","",""]]';
+  }
+
 
   public function recorrerArreglo($carmodulo=array(),&$mod)
   {
