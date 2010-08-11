@@ -3704,9 +3704,9 @@ $this->c= new Criteria();
       $this->c->addjoin(NpdefcptPeer::CODCON,NpasiconnomPeer::CODCON);
       $this->c->addjoin(NPasiconnomPeer::CODNOM,NpasinomcontPeer::CODNOM);
       $this->c->add(NpasinomcontPeer::CODTIPCON,$params[0]);
-      $sub = $this->c->getNewCriterion(NpdefcptPeer :: OPECON, "A", Criteria :: EQUAL);
-      $sub->addOr($this->c->getNewCriterion(NpdefcptPeer :: OPECON, "D", Criteria :: EQUAL));
-      $this->c->add($sub);
+      #$sub = $this->c->getNewCriterion(NpdefcptPeer :: OPECON, "A", Criteria :: EQUAL);
+      #$sub->addOr($this->c->getNewCriterion(NpdefcptPeer :: OPECON, "D", Criteria :: EQUAL));
+      #$this->c->add($sub);
       $this->c->setDistinct();
       $this->c->addAscendingOrderByColumn(NpdefcptPeer::CODCON);
       $this->columnas = array (
