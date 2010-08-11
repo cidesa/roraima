@@ -13,7 +13,7 @@ abstract class BaseNpcarprePeer {
 	const CLASS_DEFAULT = 'lib.model.nomina.Npcarpre';
 
 	
-	const NUM_COLUMNS = 7;
+	const NUM_COLUMNS = 14;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -29,7 +29,28 @@ abstract class BaseNpcarprePeer {
 	const CANPRE = 'npcarpre.CANPRE';
 
 	
+	const CANHPRE = 'npcarpre.CANHPRE';
+
+	
+	const CANMPRE = 'npcarpre.CANMPRE';
+
+	
 	const CANASI = 'npcarpre.CANASI';
+
+	
+	const CANHOM = 'npcarpre.CANHOM';
+
+	
+	const CANMUJ = 'npcarpre.CANMUJ';
+
+	
+	const CANVAC = 'npcarpre.CANVAC';
+
+	
+	const CANHVAC = 'npcarpre.CANHVAC';
+
+	
+	const CANMVAC = 'npcarpre.CANMVAC';
 
 	
 	const MONPRE = 'npcarpre.MONPRE';
@@ -46,18 +67,18 @@ abstract class BaseNpcarprePeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codcat', 'Codcar', 'Canpre', 'Canasi', 'Monpre', 'Monasi', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (NpcarprePeer::CODCAT, NpcarprePeer::CODCAR, NpcarprePeer::CANPRE, NpcarprePeer::CANASI, NpcarprePeer::MONPRE, NpcarprePeer::MONASI, NpcarprePeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codcat', 'codcar', 'canpre', 'canasi', 'monpre', 'monasi', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
+		BasePeer::TYPE_PHPNAME => array ('Codcat', 'Codcar', 'Canpre', 'Canhpre', 'Canmpre', 'Canasi', 'Canhom', 'Canmuj', 'Canvac', 'Canhvac', 'Canmvac', 'Monpre', 'Monasi', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (NpcarprePeer::CODCAT, NpcarprePeer::CODCAR, NpcarprePeer::CANPRE, NpcarprePeer::CANHPRE, NpcarprePeer::CANMPRE, NpcarprePeer::CANASI, NpcarprePeer::CANHOM, NpcarprePeer::CANMUJ, NpcarprePeer::CANVAC, NpcarprePeer::CANHVAC, NpcarprePeer::CANMVAC, NpcarprePeer::MONPRE, NpcarprePeer::MONASI, NpcarprePeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codcat', 'codcar', 'canpre', 'canhpre', 'canmpre', 'canasi', 'canhom', 'canmuj', 'canvac', 'canhvac', 'canmvac', 'monpre', 'monasi', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codcat' => 0, 'Codcar' => 1, 'Canpre' => 2, 'Canasi' => 3, 'Monpre' => 4, 'Monasi' => 5, 'Id' => 6, ),
-		BasePeer::TYPE_COLNAME => array (NpcarprePeer::CODCAT => 0, NpcarprePeer::CODCAR => 1, NpcarprePeer::CANPRE => 2, NpcarprePeer::CANASI => 3, NpcarprePeer::MONPRE => 4, NpcarprePeer::MONASI => 5, NpcarprePeer::ID => 6, ),
-		BasePeer::TYPE_FIELDNAME => array ('codcat' => 0, 'codcar' => 1, 'canpre' => 2, 'canasi' => 3, 'monpre' => 4, 'monasi' => 5, 'id' => 6, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
+		BasePeer::TYPE_PHPNAME => array ('Codcat' => 0, 'Codcar' => 1, 'Canpre' => 2, 'Canhpre' => 3, 'Canmpre' => 4, 'Canasi' => 5, 'Canhom' => 6, 'Canmuj' => 7, 'Canvac' => 8, 'Canhvac' => 9, 'Canmvac' => 10, 'Monpre' => 11, 'Monasi' => 12, 'Id' => 13, ),
+		BasePeer::TYPE_COLNAME => array (NpcarprePeer::CODCAT => 0, NpcarprePeer::CODCAR => 1, NpcarprePeer::CANPRE => 2, NpcarprePeer::CANHPRE => 3, NpcarprePeer::CANMPRE => 4, NpcarprePeer::CANASI => 5, NpcarprePeer::CANHOM => 6, NpcarprePeer::CANMUJ => 7, NpcarprePeer::CANVAC => 8, NpcarprePeer::CANHVAC => 9, NpcarprePeer::CANMVAC => 10, NpcarprePeer::MONPRE => 11, NpcarprePeer::MONASI => 12, NpcarprePeer::ID => 13, ),
+		BasePeer::TYPE_FIELDNAME => array ('codcat' => 0, 'codcar' => 1, 'canpre' => 2, 'canhpre' => 3, 'canmpre' => 4, 'canasi' => 5, 'canhom' => 6, 'canmuj' => 7, 'canvac' => 8, 'canhvac' => 9, 'canmvac' => 10, 'monpre' => 11, 'monasi' => 12, 'id' => 13, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, )
 	);
 
 	
@@ -117,7 +138,21 @@ abstract class BaseNpcarprePeer {
 
 		$criteria->addSelectColumn(NpcarprePeer::CANPRE);
 
+		$criteria->addSelectColumn(NpcarprePeer::CANHPRE);
+
+		$criteria->addSelectColumn(NpcarprePeer::CANMPRE);
+
 		$criteria->addSelectColumn(NpcarprePeer::CANASI);
+
+		$criteria->addSelectColumn(NpcarprePeer::CANHOM);
+
+		$criteria->addSelectColumn(NpcarprePeer::CANMUJ);
+
+		$criteria->addSelectColumn(NpcarprePeer::CANVAC);
+
+		$criteria->addSelectColumn(NpcarprePeer::CANHVAC);
+
+		$criteria->addSelectColumn(NpcarprePeer::CANMVAC);
 
 		$criteria->addSelectColumn(NpcarprePeer::MONPRE);
 

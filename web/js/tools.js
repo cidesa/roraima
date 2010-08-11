@@ -1036,7 +1036,6 @@ function totalregistros(letra,posicion,filas)
       celda[3] = parseInt(celda[3])+pos;
 
       c = $(celda[1]+'x_'+celda[2]+'_'+celda[3]);
-
       return c.value;
 
     }else{
@@ -1044,9 +1043,28 @@ function totalregistros(letra,posicion,filas)
       celda[1] = parseInt(celda[1])+1;
 
       c = $(celda[0]+'_'+celda[1]+'_'+celda[2]);
-
       return c.value;
 
+    }
+   }
+
+  function getCeldaObjv2(id, pos)
+  {
+
+    celda = id.split('_');
+
+    if(celda[0]=='popup'){  //"popup_b_0_4"
+
+      celda[3] = parseInt(celda[3])+pos;
+
+      c = $(celda[1]+'x_'+celda[2]+'_'+celda[3]);
+      return c;
+
+    }else{
+
+      celda[2] = parseInt(celda[2])+pos;
+      c = $(celda[0]+'_'+celda[1]+'_'+celda[2]);
+      return c;
 
     }
    }

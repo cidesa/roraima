@@ -21,7 +21,35 @@ abstract class BaseNpcarpre extends BaseObject  implements Persistent {
 
 
 	
+	protected $canhpre;
+
+
+	
+	protected $canmpre;
+
+
+	
 	protected $canasi;
+
+
+	
+	protected $canhom;
+
+
+	
+	protected $canmuj;
+
+
+	
+	protected $canvac;
+
+
+	
+	protected $canhvac;
+
+
+	
+	protected $canmvac;
 
 
 	
@@ -64,11 +92,67 @@ abstract class BaseNpcarpre extends BaseObject  implements Persistent {
 
   }
   
+  public function getCanhpre($val=false)
+  {
+
+    if($val) return number_format($this->canhpre,2,',','.');
+    else return $this->canhpre;
+
+  }
+  
+  public function getCanmpre($val=false)
+  {
+
+    if($val) return number_format($this->canmpre,2,',','.');
+    else return $this->canmpre;
+
+  }
+  
   public function getCanasi($val=false)
   {
 
     if($val) return number_format($this->canasi,2,',','.');
     else return $this->canasi;
+
+  }
+  
+  public function getCanhom($val=false)
+  {
+
+    if($val) return number_format($this->canhom,2,',','.');
+    else return $this->canhom;
+
+  }
+  
+  public function getCanmuj($val=false)
+  {
+
+    if($val) return number_format($this->canmuj,2,',','.');
+    else return $this->canmuj;
+
+  }
+  
+  public function getCanvac($val=false)
+  {
+
+    if($val) return number_format($this->canvac,2,',','.');
+    else return $this->canvac;
+
+  }
+  
+  public function getCanhvac($val=false)
+  {
+
+    if($val) return number_format($this->canhvac,2,',','.');
+    else return $this->canhvac;
+
+  }
+  
+  public function getCanmvac($val=false)
+  {
+
+    if($val) return number_format($this->canmvac,2,',','.');
+    else return $this->canmvac;
 
   }
   
@@ -125,12 +209,82 @@ abstract class BaseNpcarpre extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setCanhpre($v)
+	{
+
+    if ($this->canhpre !== $v) {
+        $this->canhpre = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpcarprePeer::CANHPRE;
+      }
+  
+	} 
+	
+	public function setCanmpre($v)
+	{
+
+    if ($this->canmpre !== $v) {
+        $this->canmpre = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpcarprePeer::CANMPRE;
+      }
+  
+	} 
+	
 	public function setCanasi($v)
 	{
 
     if ($this->canasi !== $v) {
         $this->canasi = Herramientas::toFloat($v);
         $this->modifiedColumns[] = NpcarprePeer::CANASI;
+      }
+  
+	} 
+	
+	public function setCanhom($v)
+	{
+
+    if ($this->canhom !== $v) {
+        $this->canhom = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpcarprePeer::CANHOM;
+      }
+  
+	} 
+	
+	public function setCanmuj($v)
+	{
+
+    if ($this->canmuj !== $v) {
+        $this->canmuj = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpcarprePeer::CANMUJ;
+      }
+  
+	} 
+	
+	public function setCanvac($v)
+	{
+
+    if ($this->canvac !== $v) {
+        $this->canvac = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpcarprePeer::CANVAC;
+      }
+  
+	} 
+	
+	public function setCanhvac($v)
+	{
+
+    if ($this->canhvac !== $v) {
+        $this->canhvac = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpcarprePeer::CANHVAC;
+      }
+  
+	} 
+	
+	public function setCanmvac($v)
+	{
+
+    if ($this->canmvac !== $v) {
+        $this->canmvac = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpcarprePeer::CANMVAC;
       }
   
 	} 
@@ -175,13 +329,27 @@ abstract class BaseNpcarpre extends BaseObject  implements Persistent {
 
       $this->canpre = $rs->getFloat($startcol + 2);
 
-      $this->canasi = $rs->getFloat($startcol + 3);
+      $this->canhpre = $rs->getFloat($startcol + 3);
 
-      $this->monpre = $rs->getFloat($startcol + 4);
+      $this->canmpre = $rs->getFloat($startcol + 4);
 
-      $this->monasi = $rs->getFloat($startcol + 5);
+      $this->canasi = $rs->getFloat($startcol + 5);
 
-      $this->id = $rs->getInt($startcol + 6);
+      $this->canhom = $rs->getFloat($startcol + 6);
+
+      $this->canmuj = $rs->getFloat($startcol + 7);
+
+      $this->canvac = $rs->getFloat($startcol + 8);
+
+      $this->canhvac = $rs->getFloat($startcol + 9);
+
+      $this->canmvac = $rs->getFloat($startcol + 10);
+
+      $this->monpre = $rs->getFloat($startcol + 11);
+
+      $this->monasi = $rs->getFloat($startcol + 12);
+
+      $this->id = $rs->getInt($startcol + 13);
 
       $this->resetModified();
 
@@ -189,7 +357,7 @@ abstract class BaseNpcarpre extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 7; 
+            return $startcol + 14; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Npcarpre object", $e);
     }
@@ -346,15 +514,36 @@ abstract class BaseNpcarpre extends BaseObject  implements Persistent {
 				return $this->getCanpre();
 				break;
 			case 3:
-				return $this->getCanasi();
+				return $this->getCanhpre();
 				break;
 			case 4:
-				return $this->getMonpre();
+				return $this->getCanmpre();
 				break;
 			case 5:
-				return $this->getMonasi();
+				return $this->getCanasi();
 				break;
 			case 6:
+				return $this->getCanhom();
+				break;
+			case 7:
+				return $this->getCanmuj();
+				break;
+			case 8:
+				return $this->getCanvac();
+				break;
+			case 9:
+				return $this->getCanhvac();
+				break;
+			case 10:
+				return $this->getCanmvac();
+				break;
+			case 11:
+				return $this->getMonpre();
+				break;
+			case 12:
+				return $this->getMonasi();
+				break;
+			case 13:
 				return $this->getId();
 				break;
 			default:
@@ -370,10 +559,17 @@ abstract class BaseNpcarpre extends BaseObject  implements Persistent {
 			$keys[0] => $this->getCodcat(),
 			$keys[1] => $this->getCodcar(),
 			$keys[2] => $this->getCanpre(),
-			$keys[3] => $this->getCanasi(),
-			$keys[4] => $this->getMonpre(),
-			$keys[5] => $this->getMonasi(),
-			$keys[6] => $this->getId(),
+			$keys[3] => $this->getCanhpre(),
+			$keys[4] => $this->getCanmpre(),
+			$keys[5] => $this->getCanasi(),
+			$keys[6] => $this->getCanhom(),
+			$keys[7] => $this->getCanmuj(),
+			$keys[8] => $this->getCanvac(),
+			$keys[9] => $this->getCanhvac(),
+			$keys[10] => $this->getCanmvac(),
+			$keys[11] => $this->getMonpre(),
+			$keys[12] => $this->getMonasi(),
+			$keys[13] => $this->getId(),
 		);
 		return $result;
 	}
@@ -399,15 +595,36 @@ abstract class BaseNpcarpre extends BaseObject  implements Persistent {
 				$this->setCanpre($value);
 				break;
 			case 3:
-				$this->setCanasi($value);
+				$this->setCanhpre($value);
 				break;
 			case 4:
-				$this->setMonpre($value);
+				$this->setCanmpre($value);
 				break;
 			case 5:
-				$this->setMonasi($value);
+				$this->setCanasi($value);
 				break;
 			case 6:
+				$this->setCanhom($value);
+				break;
+			case 7:
+				$this->setCanmuj($value);
+				break;
+			case 8:
+				$this->setCanvac($value);
+				break;
+			case 9:
+				$this->setCanhvac($value);
+				break;
+			case 10:
+				$this->setCanmvac($value);
+				break;
+			case 11:
+				$this->setMonpre($value);
+				break;
+			case 12:
+				$this->setMonasi($value);
+				break;
+			case 13:
 				$this->setId($value);
 				break;
 		} 	}
@@ -420,10 +637,17 @@ abstract class BaseNpcarpre extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[0], $arr)) $this->setCodcat($arr[$keys[0]]);
 		if (array_key_exists($keys[1], $arr)) $this->setCodcar($arr[$keys[1]]);
 		if (array_key_exists($keys[2], $arr)) $this->setCanpre($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setCanasi($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setMonpre($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setMonasi($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setId($arr[$keys[6]]);
+		if (array_key_exists($keys[3], $arr)) $this->setCanhpre($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setCanmpre($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setCanasi($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setCanhom($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setCanmuj($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setCanvac($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setCanhvac($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setCanmvac($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setMonpre($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setMonasi($arr[$keys[12]]);
+		if (array_key_exists($keys[13], $arr)) $this->setId($arr[$keys[13]]);
 	}
 
 	
@@ -434,7 +658,14 @@ abstract class BaseNpcarpre extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(NpcarprePeer::CODCAT)) $criteria->add(NpcarprePeer::CODCAT, $this->codcat);
 		if ($this->isColumnModified(NpcarprePeer::CODCAR)) $criteria->add(NpcarprePeer::CODCAR, $this->codcar);
 		if ($this->isColumnModified(NpcarprePeer::CANPRE)) $criteria->add(NpcarprePeer::CANPRE, $this->canpre);
+		if ($this->isColumnModified(NpcarprePeer::CANHPRE)) $criteria->add(NpcarprePeer::CANHPRE, $this->canhpre);
+		if ($this->isColumnModified(NpcarprePeer::CANMPRE)) $criteria->add(NpcarprePeer::CANMPRE, $this->canmpre);
 		if ($this->isColumnModified(NpcarprePeer::CANASI)) $criteria->add(NpcarprePeer::CANASI, $this->canasi);
+		if ($this->isColumnModified(NpcarprePeer::CANHOM)) $criteria->add(NpcarprePeer::CANHOM, $this->canhom);
+		if ($this->isColumnModified(NpcarprePeer::CANMUJ)) $criteria->add(NpcarprePeer::CANMUJ, $this->canmuj);
+		if ($this->isColumnModified(NpcarprePeer::CANVAC)) $criteria->add(NpcarprePeer::CANVAC, $this->canvac);
+		if ($this->isColumnModified(NpcarprePeer::CANHVAC)) $criteria->add(NpcarprePeer::CANHVAC, $this->canhvac);
+		if ($this->isColumnModified(NpcarprePeer::CANMVAC)) $criteria->add(NpcarprePeer::CANMVAC, $this->canmvac);
 		if ($this->isColumnModified(NpcarprePeer::MONPRE)) $criteria->add(NpcarprePeer::MONPRE, $this->monpre);
 		if ($this->isColumnModified(NpcarprePeer::MONASI)) $criteria->add(NpcarprePeer::MONASI, $this->monasi);
 		if ($this->isColumnModified(NpcarprePeer::ID)) $criteria->add(NpcarprePeer::ID, $this->id);
@@ -474,7 +705,21 @@ abstract class BaseNpcarpre extends BaseObject  implements Persistent {
 
 		$copyObj->setCanpre($this->canpre);
 
+		$copyObj->setCanhpre($this->canhpre);
+
+		$copyObj->setCanmpre($this->canmpre);
+
 		$copyObj->setCanasi($this->canasi);
+
+		$copyObj->setCanhom($this->canhom);
+
+		$copyObj->setCanmuj($this->canmuj);
+
+		$copyObj->setCanvac($this->canvac);
+
+		$copyObj->setCanhvac($this->canhvac);
+
+		$copyObj->setCanmvac($this->canmvac);
 
 		$copyObj->setMonpre($this->monpre);
 
