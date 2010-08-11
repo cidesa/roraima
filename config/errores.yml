@@ -1706,3 +1706,6 @@ N0002:
 N0003:
   cod: N0003
   msj: No existen cargos Vacantes
+FR001:
+  cod: FR001
+  msj: El Grid de Conceptos no puede estar Vacio

@@ -15,4 +15,19 @@
  */ 
 class Npcarpre extends BaseNpcarpre
 {
+    protected $dispo='0,00';
+    protected $objasig=array();
+
+    public function getNomcat()
+    {
+        return H::GetX('Codcat','Fordefcatpre','Nomcat',$this->codcat);
+    }
+    public function getNomcar()
+    {
+        return H::GetX('Codcar','Npcargos','Nomcar',$this->codcar);
+    }
+    public function getDispo()
+    {
+        return H::FormatoMonto($this->monpre-$this->monasi);
+    }
 }

@@ -1,0 +1,39 @@
+methods:
+  post:
+   - "npcarpre{codcat}"
+   - "npcarpre{codcar}"
+
+names:
+
+  npcarpre{codcat}:
+    required:  Yes
+    required_msg: El CÃ³digo de la Categoria no puede estar en Blanco
+    validators: codcatExistValidator
+
+  npcarpre{codcar}:
+    required:  Yes
+    required_msg: EL Codigo del Cargo puede estar en blanco
+    validators: codcarExistValidator, UniqueValidator2
+
+codcatExistValidator:
+    class: CidesaExistValidator
+    param:
+        class:        Fordefcatpre
+        column:       codcat
+        unique_error: El CÃ³digo de la categoria debe Existir.
+
+codcarExistValidator:
+    class: CidesaExistValidator
+    param:
+        class:        Npcargos
+        column:       codcar
+        unique_error: El CÃ³digo del Cargo debe Existir.
+
+UniqueValidator2:
+    class: UniqueValidator2
+    param:
+        class:        Npcarpre
+        column:       codcar
+        column2:      codcat
+        value2:       'npcarpre[codcat]'
+        unique_error: El Cargo y la Categoria ya estan Registrados.

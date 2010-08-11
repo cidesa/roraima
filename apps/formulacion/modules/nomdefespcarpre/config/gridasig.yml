@@ -1,0 +1,69 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                true
+  tabla:                   npasicon
+  anchogrid:               900
+  ancho:                   900
+  filas:                   1
+  titulo:                  ' Conceptos '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  CÃ³digo Concepto
+  tipo:                    t
+  nombrecampo:             codcon
+  html:                    [size=5 ]
+  oculta:                  false
+  esgrabable:              true
+  catalogo:                [Npdefcpt, sf_admin_edit_form, { codcon: 1, nomcon: 2 }, Npdefcpt_nomdefespguarde]
+  ajaxfila:                true
+2:       # Columna 2
+  titulo:                  Nombre
+  tipo:                    t
+  nombrecampo:             nompar
+  html:                    [size=40 readonly=true ]
+  oculta:                  false
+  esgrabable:              true
+3:       # Columna 3
+  titulo:                  CÃ³digo PÃ¡rtida
+  tipo:                    t
+  nombrecampo:             codpar
+  html:                    [size=10 readonly=true]
+  oculta:                  false
+  esgrabable:              true  
+4:       # Columna 4
+  titulo:                  Nombre
+  tipo:                    t
+  nombrecampo:             nompar
+  html:                    [size=40 readonly=true]
+  oculta:                  false
+  esgrabable:              false
+5:       # Columna 5
+  titulo:                  Monto Presupuestado
+  tipo:                    m
+  nombrecampo:             monmen
+  html:                    [size=10 ]
+  oculta:                  false
+  esgrabable:              true
+  #ajaxfila:                true
+  ajaxGrid:                true
+  #jscript:                 obj=getCeldaObjv2(this.id,2); ValidarMontoGridv2(obj);
+  ajaxadicionales:         [ npcarpre_canpre, npcarpre_canasi ]
+6:       # Columna 6
+  titulo:                  Frecuencia del Concepto
+  tipo:                    m
+  nombrecampo:             frecue
+  html:                    [size=10 ]
+  oculta:                  false
+  esgrabable:              true
+  #ajaxfila:                true
+  ajaxGrid:                true
+  #jscript:                 obj=getCeldaObjv2(this.id,1); ValidarMontoGridv2(obj);
+  ajaxadicionales:         [ npcarpre_canpre, npcarpre_canasi ]
+7:       # Columna 7
+  titulo:                  Total Anual
+  tipo:                    m
+  nombrecampo:             monpre
+  html:                    [size=10 readonly=true]
+  oculta:                  false
+  esgrabable:              true
+  #estotal:                 [true, npcarpre_monpre]

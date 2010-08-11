@@ -1,0 +1,66 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Npcarpre
+    theme:            cidesaGenerator
+    fields:
+      display:      [dispo, canpre, canhpre, canmpre, canasi, canhom, canmuj, canvac, canhvac, canmvac, canpres, canasig, vacvaca, montos, monpre, monasi]
+      codcat:
+        name:    Categoria
+        params: size=5 maxlength=5  onFocus=readonly(this.id) onBlur="this.value=this.value.pad(5, '0',0);"
+        catalogo:
+          catalogoweb: Fordefcatpre_Codcat
+          clase: Fordefcatpre
+          ajax: 1
+          parametros: getprincipal="getCodcat" getsecundario="getNomcat" campoprincipal="codcat" camposecundario="nomcat" campobase = "id"
+      codcar:
+        name: Cargo
+        params: size=20  maxlength=5  onFocus=readonly(this.id) onBlur="this.value=this.value.pad(5, '0',0);"
+        catalogo:
+          catalogoweb: Viadettabcar_Npcargos
+          clase: Npcargos
+          ajax: 2
+          parametros: getprincipal="getCodcar" getsecundario="getNomcar" campoprincipal="codcar" camposecundario="nomcar" campobase = "id"
+          ajaxparams: +'."'".'&codcat='."'+$('npcarpre_codcat').value".'
+      canpre:     {name: Presupuestados}
+      canhpre:    {name: Hombres}
+      canmpre:    {name: Mujeres}
+      canasi:     {name: Asignados}
+      canhom:     {name: Hombres}
+      canmuj:     {name: Mujeres}
+      canvac:     {name: Vacantes}
+      canhvac:    {name: Hombres}
+      canmvac:    {name: Mujeres}
+      canpres:    {name: .}
+      canasig:    {name: .}
+      canvaca:    {name: .}
+      cancar:     {name: .}
+      montos:     {name: .}
+      grid_asig:  {name: .}
+      monpre:     {name: Monto Presupuestado}
+      monasi:     {name: Monto Asignado}
+      dispo:      {name: Disponible}
+
+
+    list:
+      title:      Listado de Cargos Formulados
+      display:    [=codcat, nomcat, codcar, nomcar]
+      filters:    [codcat, codcar]
+      sort: codcat
+      objects_actions:
+        _edit:        ~
+        _delete:      ~
+
+    edit:
+      title: FormulaciÃ³n de Cargos Presupuestados
+      display:
+        Categoria y Cargo:     [codcat, codcar]
+        Cantidad de Cargos:    [_cancar ]
+        Asignaciones:          [_grid_asig]      
+        #Cargos Asignados:      [_canasig ]
+        #Cargos Vacantes:       [_canvaca ]
+        #Montos de los Cargos:  [_montos ]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
