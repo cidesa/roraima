@@ -227,6 +227,22 @@
 <table>
   <tr>
     <th>
+      <div id="divtipo">
+		  <?php echo label_for('faajuste[tipo]', __($labels['faajuste{tipo}' ]), 'class="required" Style="text-align:left; width:150px"') ?>
+		  <div class="content<?php if ($sf_request->hasError('faajuste{tipo}')): ?> form-error<?php endif; ?>">
+		  <?php if ($sf_request->hasError('faajuste{tipo}')): ?>
+		    <?php echo form_error('faajuste{tipo}', array('class' => 'form-error-msg')) ?>
+		  <?php endif; ?>
+
+           <?php echo select_tag('faajuste[tipo]', options_for_select(Constantes::ListaTipoAjuste(),$faajuste->getTipo(),'include_custom=Seleccione Uno'),array(
+             'onFocus'  =>  $faajuste->getId()!='' ? "this.blur()" : false ,
+	       )) ?>
+		  </div>
+	  </div>
+  </th>
+  </tr>
+  <tr>
+    <th>
 		<div id="divmonaju">
 		  <?php echo label_for('faajuste[monaju]', __($labels['faajuste{monaju}' ]), 'class="required" Style="text-align:left; width:150px"') ?>
 		  <div class="content<?php if ($sf_request->hasError('faajuste{monaju}')): ?> form-error<?php endif; ?>">
