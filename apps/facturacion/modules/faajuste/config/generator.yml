@@ -18,6 +18,7 @@ generator:
       obsaju: { name: Observación}
       grid:   { name: Detalle del Ajuste}
       tipaju: { name: Refiere a}
+      tipo: { name: Tipo Ajuste}
     list:
       title:          Ajustes
       display:        [=refaju, codpro]
@@ -30,7 +31,7 @@ generator:
     edit:
       title:          Ajustes
       display:
-        "Datos del Ajuste": [refaju, fecaju, tipaju, codref, codpro, rifpro, dirpro, telpro, desaju, _codalm, monaju]
+        "Datos del Ajuste": [refaju, fecaju, tipaju, codref, codpro, rifpro, dirpro, telpro, desaju, _codalm, tipo, monaju]
         "Observación": [obsaju]
       fields:
         desaju:
