@@ -2589,8 +2589,7 @@ class Nomina {
             $fecnomdes=$res[0]['ultfec'];
         }
         #QUERY HECHO POR OSWALDO SE COPIO Y SE PEGO
-        #MAL HECHO ES UN QUERY PERO NO ESTA EN PHP EN QUE MUNDO VIVIMOS?
-        $criterio = "select (case when a.fechas<c.profec then a.fechas else c.profec end)-(case when a.fecdes>c.ultfec then a.fecdes else c.ultfec end) + (case when to_char(last_day(c.profec),'dd')='31' and last_day(c.profec)=c.profec  then 0 else 1 end) as dias from npvacsalidas a,npasicaremp b, npnomina c where a.codemp=b.codemp and b.status='V' and c.codnom=b.codnom and ((C.ULTFEC BETWEEN A.FECDES AND A.FECHAS) OR (C.PROFEC BETWEEN A.FECDES AND A.FECHAS)) AND a.codemp='$empleado'";
+        $criterio = "select (case when a.fechas<c.profec then a.fechas else c.profec end)-(case when a.fecdes>c.ultfec then a.fecdes else c.ultfec end) +(case when a.fecdes<c.profec and a.fecdes>c.ultfec and a.fecdes>a.fecsalnom then a.fecdes-a.fecsalnom-1 else 0 end)+ (case when to_char(last_day(c.profec),'dd')='31' and last_day(c.profec)=c.profec  then 0 else 1 end) as dias from npvacsalidas a,npasicaremp b, npnomina c where a.codemp=b.codemp and b.status='V' and c.codnom=b.codnom and ((C.ULTFEC BETWEEN A.FECDES AND A.FECHAS) OR (C.PROFEC BETWEEN A.FECDES AND A.FECHAS)) AND a.codemp='$empleado'";
         //print $criterio;exit;
 
         if (Herramientas :: BuscarDatos($criterio, & $result))
