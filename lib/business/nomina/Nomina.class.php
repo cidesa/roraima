@@ -2886,7 +2886,7 @@ class Nomina {
       case "NLVACNOM" :
         $valor = 0;
         $fecnomdes=null;
-        $sql = "select fecdes,fechas from npvacsalidas a where codemp='$empleado' and fecsalnom=to_date('$fecnom','yyyy-mm-dd')  order by fecvac desc";
+        $sql = "select fecdes,fechas from npvacsalidas a where codemp='$empleado' and fecsalnom<=to_date('$fecnom','yyyy-mm-dd') and fecreinom>=to_date('$fecnom','yyyy-mm-dd')  order by fecvac desc";
         if (Herramientas :: BuscarDatos($sql, & $res))
         {
             $fechades = $res[0]['fecdes'];
@@ -3015,6 +3015,15 @@ class Nomina {
                 $valor = 'S';
           }
         break;
+      case "DIFDIASAL" :
+        $valor = 0;
+        $sql = "select fecsalnom-to_date('$fecnom','yyyy-mm-dd') as diadif from npvacsalidas a where codemp='$empleado' and fecsalnom>to_date('$fecnom','yyyy-mm-dd')  order by fecvac desc";
+        if (Herramientas :: BuscarDatos($sql, & $res))
+        {
+            $valor = $res[0]['diadif'];
+        }
+
+        return $valor;
       default :
         $aux = 0;
 
@@ -5211,7 +5220,7 @@ class Nomina {
       case "NLVACNOM" :
         $valor = 0;
         $fecnomdes=null;
-        $sql = "select fecdes,fechas from npvacsalidas a where codemp='$empleado' and fecsalnom=to_date('$hasta','dd/mm/yyyy')  order by fecvac desc";
+        $sql = "select fecdes,fechas from npvacsalidas a where codemp='$empleado' and fecsalnom<=to_date('$hasta','dd/mm/yyyy') and fecreinom>=to_date('$hasta','dd/mm/yyyy')  order by fecvac desc";
         if (Herramientas :: BuscarDatos($sql, & $res))
         {
             $fecnomdes=$res[0]['fecdes'];
@@ -5347,6 +5356,15 @@ class Nomina {
                 $valor = 'S';
           }
         break;
+      case "DIFDIASAL" :
+        $valor = 0;
+        $sql = "select fecsalnom-to_date('$hasta','dd/mm/yyyy') as diadif from npvacsalidas a where codemp='$empleado' and fecsalnom>to_date('$hasta','dd/mm/yyyy')  order by fecvac desc";
+        if (Herramientas :: BuscarDatos($sql, & $res))
+        {
+            $valor = $res[0]['diadif'];
+        }
+
+        return $valor;
       default :
         /////// FFRAC
 
