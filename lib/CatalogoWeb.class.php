@@ -6147,6 +6147,8 @@ public function Catdefcatman_Cattramo($params = '') {
 		$this->c = new Criteria();
                 if($params)
                     $this->c->add(ViaciudadPeer :: CODEST, $params[0]);
+                if(count($params)>1)
+                    $this->c->add(ViaciudadPeer :: CODPAI, $params[1]);
 		$this->columnas = array (
 			ViaciudadPeer :: CODCIU => 'Código',
                         ViaciudadPeer :: NOMCIU => 'Nombre',
