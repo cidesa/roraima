@@ -37,7 +37,8 @@ class tesmovseglibActions extends autotesmovseglibActions
     {
       $this->tsmovlib = $this->getTsmovlibOrCreate();
       try{ $this->updateTsmovlibFromRequest();}catch(Exception $ex){}
-
+    if ($this->tsmovlib->getId()=="")
+    {
       if (Tesoreria::validaPeriodoCerrado($this->getRequestParameter('tsmovlib[feclib]'))==true)
   	{
       $this->coderror6=529;
@@ -86,6 +87,7 @@ class tesmovseglibActions extends autotesmovseglibActions
       {
     $this->coderror4=508;
     return false;
+    }
     }
     }
 
