@@ -38,6 +38,7 @@ opciones:                  # Opciones generales
   nombrecampo:             montonet
   esgrabable:              true
   html:                    [ ]
+  estotal:                 [true, viarelvia_totfac]
 6:       # Columna 6
   titulo:                  Monto Recargo
   tipo:                    m

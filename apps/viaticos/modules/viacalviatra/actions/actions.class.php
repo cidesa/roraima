@@ -65,7 +65,7 @@ class viacalviatraActions extends autoviacalviatraActions
                             else
                                 $per[$i]['numdia']=2;
                         }
-                        $per[$i]['numdia']=H::FormatoMonto($per[$i]['numdia']);
+                        $per[$i]['numdia']=($per[$i]['numdia']);
 
                         if($r['ord']=='2')
                         {
@@ -120,7 +120,7 @@ class viacalviatraActions extends autoviacalviatraActions
                         $per[$i]['check']=$r['check'];
                         $per[$i]['codrub']=$r['codrub'];
                         $per[$i]['desrub']=$r['desrub'];
-                        $per[$i]['numdia']=H::formatoMonto($r['numdia']);
+                        $per[$i]['numdia']=($r['numdia']);
                         $per[$i]['mondia']=H::FormatoMonto($r['mondia']);
                         $per[$i]['montot']=H::FormatoMonto($r['montot']);
                         $per[$i]['tipo']=$r['tipo'];
@@ -154,7 +154,7 @@ class viacalviatraActions extends autoviacalviatraActions
                                     }else
                                         $per[$i]['numdia']=0;
                                 }
-                                $per[$i]['numdia']=H::FormatoMonto($per[$i]['numdia']);
+                                $per[$i]['numdia']=($per[$i]['numdia']);
                             }
                             if($r['tipo']!='')
                             {
@@ -187,6 +187,24 @@ class viacalviatraActions extends autoviacalviatraActions
             }
      }else
      {
+         $valdol=0;
+         $cambio=1;
+         if($this->codpai)
+         {
+             $c = new Criteria();
+             $c->add(ViapaisPeer::CODPAI,$this->codpai);
+             $op = ViapaisPeer::doSelectOne($c);
+             if($op)
+             {
+                 $valdol=$op->getMonto();
+             }
+             $c = new Criteria();
+             $op = ViadefgenPeer::doSelectOne($c);
+             if($op)
+             {
+                 $cambio=$op->getValdolar();
+             }
+         }
          if($this->numsol!='')
          {
             $sql="select '1' as ord,1 as check,'VI' as codrub, 'VIATICO DIARIO INTERNACIONAL' as desrub, (fechas-fecdes)+1 as numdia,c.monto*d.valdolar as mondia,
@@ -229,11 +247,14 @@ class viacalviatraActions extends autoviacalviatraActions
                     $per[$i]['check']=$rs['check'];
                     $per[$i]['codrub']=$rs['codrub'];
                     $per[$i]['desrub']=$rs['desrub'];
-                    $per[$i]['numdia']=H::formatoMonto($rs['numdia']);
+                    $per[$i]['numdia']=($rs['numdia']);
                     $per[$i]['mondia']=H::FormatoMonto($rs['mondia']);
                     $per[$i]['montot']=H::FormatoMonto($rs['numdia']*$rs['mondia']);
                     $per[$i]['tipo']=$rs['tipo'];
                     $per[$i]['calculo']=$rs['calculo'];
+                    $per[$i]['mondiadol']=H::FormatoMonto(($rs['mondia']/$cambio));
+                    #$per[$i]['cambio']=H::FormatoMonto($cambio);
+                    $per[$i]['montotdol']=H::FormatoMonto(($rs['mondia']/$cambio)*$rs['numdia']);
                     $per[$i]['id']=9;
                     $i++;
                  }
@@ -266,11 +287,14 @@ class viacalviatraActions extends autoviacalviatraActions
                     $per[$i]['check']=$rs['check'];
                     $per[$i]['codrub']=$rs['codrub'];
                     $per[$i]['desrub']=$rs['desrub'];
-                    $per[$i]['numdia']=H::formatoMonto($rs['numdia']);
+                    $per[$i]['numdia']=($rs['numdia']);
                     $per[$i]['mondia']=H::FormatoMonto($rs['mondia']);
                     $per[$i]['montot']=H::FormatoMonto($rs['montot']);
                     $per[$i]['tipo']=$rs['tipo'];
                     $per[$i]['calculo']=$rs['calculo'];
+                    $per[$i]['mondiadol']=H::FormatoMonto(($rs['mondia']/$cambio));
+                    #$per[$i]['cambio']=H::FormatoMonto($cambio);
+                    $per[$i]['montotdol']=H::FormatoMonto(($rs['mondia']/$cambio)*$rs['numdia']);
                     $per[$i]['id']=9;
                     $i++;
                  }
@@ -280,9 +304,14 @@ class viacalviatraActions extends autoviacalviatraActions
 
      $this->obj = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/viacalviatra/'.sfConfig::get('sf_app_module_config_dir_name').'/grid');
      #$this->obj[1][1]->setHtml('size=40 maxlength=250 onBlur="if($(id).value!=\'\')cambiardescripcion(this.id)"');
-     $this->obj[1][3]->setHtml('size=10 readonly=true onBlur="ValidarMontoGridv2(this.id);calculamontofinal(this.id,3);"');
+     $this->obj[1][3]->setHtml('size=10 readonly=true onBlur="calculamontofinal(this.id,3);" onkeyPress="return validaEntero(event)"');
      $this->obj[1][4]->setHtml('size=10 readonly=true onBlur="ValidarMontoGridv2(this.id);calculamontofinal(this.id,4);"');
      $this->obj[1][0]->setHtml('size=5 onclick="Calculartotal();"');
+     if($this->tipvia=='NACIONAL' || substr($this->viacalviatra->getNumcal(),0,2)=='VN')
+     {
+         $this->obj[1][8]->setOculta(true);
+         $this->obj[1][9]->setOculta(true);
+     }
 
      $this->obj = $this->obj[0]->getConfig($per);
      $this->viacalviatra->setGrid($this->obj);
@@ -297,6 +326,7 @@ class viacalviatraActions extends autoviacalviatraActions
     // que objeto hace el llamado y por consiguiente ejecutar el código necesario
     $ajax = $this->getRequestParameter('ajax','');
     $js='';
+    $nomcat='';
     // Se debe enviar en la petición ajax desde el cliente los datos que necesitemos
     // para generar el código de retorno, esto porque en un llamado Ajax no se devuelven
     // los datos de los objetos de la vista como pasa en un submit normal.
@@ -364,6 +394,7 @@ class viacalviatraActions extends autoviacalviatraActions
                 $codciu = H::GetX('Numsol','Viasolviatra','Codciu',$codigo);
                 $codest = H::getX('Codciu','Viaciudad','Codest',$codciu);
                 $codpai = H::getX('Codciu','Viaciudad','Codpai',$codciu);
+                $this->codpai=$codpai;
                 $ciudad = $codciu.'  -  '.H::getX('Codciu','Viaciudad','Nomciu',$codciu);
                 $estado = $codest.'  -  '.H::getX('Codest','Viaestado','Nomest',$codest);
                 $pais= $codpai.'  -  '.H::getX('Codpai','Viapais','Nompai',$codpai);
@@ -389,6 +420,13 @@ class viacalviatraActions extends autoviacalviatraActions
         $this->updateViacalviatraFromRequest();
         $this->numsol=$codigo;
         $this->tipvia=$tipvia;
+        if($tipvia=='NACIONAL')
+        {
+            $js.="$('divtotviadol').hide();";
+        }else
+        {
+            $js.="$('divtotviadol').show();";
+        }
         $this->configGrid(array('1'));
         if($sw)
             $output = '[["javascript","'.$js.'",""],["viacalviatra_fecsol","'.$fecsol.'",""],["viacalviatra_tipvia","'.$tipvia.'",""],["viacalviatra_dessol","'.$dessol.'",""],

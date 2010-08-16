@@ -18,6 +18,7 @@ generator:
       grid:           { name: .}
       js:             { name: .}
       compromiso:     { name: ., params: size=100 style="border:none;text-align:center;color:red;font-size:medium;font-weight:bold"}
+      totfac:         { name: Total Facturas, params: disabled=false readonly=true}
 
     list:
       title:          Listado de Relaciones de Gastos Adicionales
@@ -25,11 +26,11 @@ generator:
       filters:        [numrel, fecrel, tipcom]
       sort:           numrel
 
-    edit:             
+    edit:
       title:          Edición de Relaciones de Gastos Adicionales
       display:
         Datos Generales de la Relación:     [compromiso, numrel, fecrel, tipcom, desrel]
-        Detalle de la Relación:             [_grid, _js]
+        Detalle de la Relación:             [totfac, _grid, _js]
       actions:
         _list:        ~
         _save:        ~

@@ -11,7 +11,7 @@ generator:
       ptipo:             { name: .}
 
     list:
-      title: Listado de Tipo de Traslado
+      title: Listado de Tipo de Traslados
       display: [=codtiptra, destiptra, ltipo]
       filters: [codtiptra, destiptra]
       sort:    codtiptra
@@ -19,7 +19,7 @@ generator:
         _edit:        ~
         _delete:        ~
     edit:
-      title: Edición de Tipo de Traslado
+      title: Edición de Tipo de Traslados
       display:
         Datos Generales del Tipo de Traslado: [codtiptra, destiptra, _ptipo]
       actions:

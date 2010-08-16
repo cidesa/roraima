@@ -9,4 +9,11 @@
     {
         $('divcompromiso').hide();
     }
+    if('<?php echo $viacalviatra->getTipvia()?>'=='NACIONAL')
+    {
+        $('divtotviadol').hide();
+    }else
+    {
+        $('divtotviadol').show();
+    }
 </script>

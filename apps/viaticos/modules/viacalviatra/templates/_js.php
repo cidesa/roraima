@@ -80,7 +80,10 @@
             cold = 'ax_'+filsuple+'_4';
             colmd = 'ax_'+filsuple+'_5';
             colt = 'ax_'+filsuple+'_6';
+            colmddol = 'ax_'+filsuple+'_9';
+            coltdol = 'ax_'+filsuple+'_10';
             $(colmd).value=number_format(total2*0.3,2,',','.');
+            $(colmddol).value=number_format((total2*0.3)/4.3,2,',','.');
             var val3=$(colmd).value;
             val3 = val3.replace('.','');
             val3 = val3.replace(',','.');
@@ -88,6 +91,7 @@
             val4 = val4.replace('.','');
             val4 = val4.replace(',','.');
             $(colt).value=number_format(parseFloat(val3)*parseFloat(val4),2,',','.');
+            $(coltdol).value=number_format((parseFloat(val3)*parseFloat(val4))/4.3,2,',','.');
         }
         ReCalculartotal();
     }
@@ -120,6 +124,7 @@
 
         }
         $('viacalviatra_totvia').value=number_format(total,2,',','.');
+        $('viacalviatra_totviadol').value=number_format(total/4.3,2,',','.');
         toAjax(2,getUrlModulo()+'ajax','1','','&monto='+total);
     }
 
