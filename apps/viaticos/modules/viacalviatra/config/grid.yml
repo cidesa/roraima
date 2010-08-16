@@ -28,7 +28,7 @@ opciones:                  # Opciones generales
   html:                    [ readonly=true size=50]
 4:       # Columna 4
   titulo:                  Numero de Dias a Pagar
-  tipo:                    m
+  tipo:                    t
   nombrecampo:             numdia
   esgrabable:              true
   html:                    [ size=10 readonly=true]
@@ -58,3 +58,21 @@ opciones:                  # Opciones generales
   esgrabable:              false
   oculta:                  true
   html:                    [ ]
+9:       # Columna 9
+  titulo:                  Diario en $
+  tipo:                    m
+  nombrecampo:             mondiadol
+  esgrabable:              false
+  html:                    [ size=10 readonly=true]
+#10:       # Columna 10
+#  titulo:                  CAMBIO
+#  tipo:                    m
+#  nombrecampo:             cambio
+#  esgrabable:              false
+#  html:                    [ size=10 readonly=true]
+10:       # Columna 10
+  titulo:                  Total en $
+  tipo:                    m
+  nombrecampo:             montotdol
+  esgrabable:              false
+  html:                    [ size=10 readonly=true]

@@ -40,7 +40,7 @@ class viadeffortraActions extends autoviadeffortraActions
         from viadeftiptra a
         where
         a.codtiptra not in (select coalesce(codtiptra,'0') from viadeffortra where codfortra='".$this->viadeffortra->getCodfortra()."')";
-     
+
      H::BuscarDatos($sql, $reg);
      $this->obj = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/viadeffortra/'.sfConfig::get('sf_app_module_config_dir_name').'/grid');
      #$this->obj[1][1]->setHtml('size=40 maxlength=250 onBlur="if($(id).value!=\'\')cambiardescripcion(this.id)"');
@@ -166,11 +166,11 @@ class viadeffortraActions extends autoviadeffortraActions
             $obj->save();
             $sw=true;
         }
-        
+
     }
     if(!$sw)
         $clasemodelo->save();
-    return $this->redirect('viadeffortra/edit');
+    return $this->redirect('viadeffortra/list');
   }
 
   public function deleting($clasemodelo)

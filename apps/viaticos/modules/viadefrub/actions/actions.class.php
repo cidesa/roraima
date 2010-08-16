@@ -18,7 +18,7 @@ class viadefrubActions extends autoviadefrubActions
   {
 
     $arrtipo=array('C'=>'Calculable por Tabla','F'=>'Monto Manual');
-    $arrtiprub=array('1'=>'Alojamiento y Hospedaje','2'=>'Transporte', '3'=>'Otros');
+    $arrtiprub=array('1'=>'Alimentación y Hospedaje','2'=>'Transporte', '3'=>'Otros');
     $arrtipdia=array('1'=>'Completos','2'=>'Menos un Dia','3'=>'Otros');
     $this->params=array('arrtipo'=>$arrtipo,'arrtiprub'=>$arrtiprub,'arrtipdia'=>$arrtipdia);
   }
@@ -174,7 +174,7 @@ class viadefrubActions extends autoviadefrubActions
   public function updateError()
   {
     $arrtipo=array('C'=>'Calculable por Tabla','F'=>'Monto Manual');
-    $arrtiprub=array('1'=>'Alojamiento y Hospedaje','2'=>'Transporte', '3'=>'Otros');
+    $arrtiprub=array('1'=>'Alimentación y Hospedaje','2'=>'Transporte', '3'=>'Otros');
     $arrtipdia=array('1'=>'Completos','2'=>'Menos un Dia','3'=>'Otros');
     $this->params=array('arrtipo'=>$arrtipo,'arrtiprub'=>$arrtiprub,'arrtipdia'=>$arrtipdia);
 

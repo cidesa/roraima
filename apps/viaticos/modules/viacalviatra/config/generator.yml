@@ -52,7 +52,8 @@ generator:
       fechas:           { name: Fecha Hasta, params: style="border:none" }
       numdia:           { name: Nro Dias, params: style="border:none" }
       empleadoaut:      { name: Empleado que Autoriza, params: style="border:none" size=80}
-      totvia:           { name: Total Viaticos, params: style="border:none"  readonly=true}
+      totviadol:        { name: Total Viaticos($), params: style="border:none"  readonly=true}
+      totvia:           { name: Total Viaticos(Bsf), params: style="border:none"  readonly=true}
       totviaenletras:   { name:  En Letras , type: textarea_tag, params: cols=65 style="border:none" readonly=true}
       compromiso:       { name: ., params: size=100 style="border:none;text-align:center;color:red;font-size:medium;font-weight:bold"}
 
@@ -66,8 +67,8 @@ generator:
     edit:
       title:            Edición de Calculo de Viaticos
       display:
-        Datos Básicos del Calculo de Viaticos:     [compromiso, numcal, feccal, tipcom, refsol, fecsol, tipvia, empleado, nivel, empleadoaco, nivelaco, pais, estado, ciudad, proced, fortra, fecdes, fechas, numdia, empleadoaut, dessol, codcat, diaconper, diasinper, observaciones]
-        Datos Detalle del Calculo:                 [_grid, totvia, totviaenletras, _js]
+        Datos Básicos del Calculo de Viaticos:     [compromiso, numcal, feccal, tipcom, refsol, fecsol, tipvia, empleado, nivel, empleadoaco, nivelaco, pais, estado, ciudad, proced, fortra, fecdes, fechas, numdia, empleadoaut, dessol, diaconper, diasinper, observaciones]
+        Datos Detalle del Calculo:                 [_grid, totviadol, totvia, totviaenletras, _js]
       actions:
         _list:        ~
         _save:        ~

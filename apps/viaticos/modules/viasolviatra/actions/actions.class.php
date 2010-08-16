@@ -309,6 +309,9 @@ class viasolviatraActions extends autoviasolviatraActions
         $c = new Criteria();
         $per = ViadefgenPeer::doSelectOne($c);
         $numsol = str_pad($per->getNumsolvia(),10,'0',STR_PAD_LEFT);
+        $val = H::GetX('Numsol','Viasolviatra','Numsol',$numsol);
+        if($val==$numsol)
+            return 'V008';
         $clasemodelo->setNumsol($numsol);
         $sql="update viadefgen set numsolvia='".($per->getNumsolvia()+1)."'";
         H::insertarRegistros($sql);

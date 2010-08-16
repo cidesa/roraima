@@ -180,4 +180,8 @@ class Viasolviatra extends BaseViasolviatra
     {
         return H::GetX('Codpai','Viapais','Nompai',self::getCodpai());
     }
+    public function getStatus2()
+    {
+        return $this->getStatus()=='P' ? 'Por Aprobar' : ($this->getStatus()=='A' ? 'Aprobado' : '');
+    }
 }
