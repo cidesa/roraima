@@ -125,7 +125,7 @@ generator:
       title:        Edición de Solicitudes de Viaticos
       display:
         Datos Generales de la Solicitud:      [numsol, fecsol, _ptipvia, dessol]
-        Datos Empleado Solicitante:           [codemp, cedemp, cargo, nivel, codniv, codempaco, cedempaco, cargoaco, nivelaco, codnivaco]
+        Datos Empleado Solicitante:           [codemp, cedemp, cargo, nivel, codcat, codniv, codempaco, cedempaco, cargoaco, nivelaco, codnivaco]
         Detalle de la Solicitd:               [codpai, codest, codciu, codproced, fecdes, fechas, numdia, codfortra, codempaut, cedempaut, nivelaut, _js]
       actions:
         _list:        ~
