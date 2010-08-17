@@ -189,6 +189,11 @@ class viacalviatraActions extends autoviacalviatraActions
      {
          $valdol=0;
          $cambio=1;
+         if(!$this->codpai)
+         {
+            $codciu = H::GetX('Numsol','Viasolviatra','Codciu',$this->viacalviatra->getRefsol());
+            $this->codpai = H::getX('Codciu','Viaciudad','Codpai',$codciu);
+         }
          if($this->codpai)
          {
              $c = new Criteria();
