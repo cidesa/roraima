@@ -26,6 +26,6 @@ class Viadefrub extends BaseViadefrub
 
     public function getLtiprub()
     {
-        return $this->tiprub=='1' ? 'Alojamiento y Hospedaje' : ($this->tiprub=='2' ? 'Transporte' : 'Otros') ;
+        return $this->tiprub=='1' ? 'Alimentación y Hospedaje' : ($this->tiprub=='2' ? 'Transporte' : 'Otros') ;
     }
 }
