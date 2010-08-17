@@ -80,7 +80,10 @@
             cold = 'ax_'+filsuple+'_4';
             colmd = 'ax_'+filsuple+'_5';
             colt = 'ax_'+filsuple+'_6';
+            colmddol = 'ax_'+filsuple+'_9';
+            coltdol = 'ax_'+filsuple+'_10';
             $(colmd).value=number_format(total2*0.3,2,',','.');
+            $(colmddol).value=number_format((total2*0.3)/4.3,2,',','.');
             var val3=$(colmd).value;
             val3 = val3.replace('.','');
             val3 = val3.replace(',','.');
@@ -88,6 +91,7 @@
             val4 = val4.replace('.','');
             val4 = val4.replace(',','.');
             $(colt).value=number_format(parseFloat(val3)*parseFloat(val4),2,',','.');
+            $(coltdol).value=number_format((parseFloat(val3)*parseFloat(val4))/4.3,2,',','.');
         }
         ReCalculartotal();
     }
@@ -119,6 +123,7 @@
             }
 
         }
+        $('viaextviatra_totviadol').value=number_format(total/4.3,2,',','.');
         $('viaextviatra_totvia').value=number_format(total,2,',','.');
         toAjax(2,getUrlModulo()+'ajax','1','','&monto='+total);
     }
@@ -133,7 +138,7 @@
             {
                 if($('ax_'+i+'_1').checked==true)
                 {
-                    $('ax_'+i+'_4').value=number_format($(id).value,2,',','.');
+                    $('ax_'+i+'_4').value=$(id).value;
                     var val = $('ax_'+i+'_4').value
                     val = val.replace('.','');
                     val = val.replace(',','.');
@@ -143,8 +148,10 @@
                     total = parseFloat(val)*parseFloat(val1);
                     total2 = parseFloat(total2)+parseFloat(total);
                     $('ax_'+i+'_6').value=number_format(total,2,',','.');
+                    $('ax_'+i+'_10').value=number_format(total/4.3,2,',','.');
                 }                
             }
+            $('viaextviatra_totviadol').value=number_format(total2/4.3,2,',','.');
             $('viaextviatra_totvia').value=number_format(total2,2,',','.');
             toAjax(2,getUrlModulo()+'ajax','1','','&monto='+total2);
         }else
@@ -153,5 +160,11 @@
             alert('Debe Intruducir un valor Numerico');
         }
     }
-
+    if('<?php echo $viaextviatra->getTipvia()?>'=='NACIONAL' || '<?php echo $viaextviatra->getTipvia()?>'=='')
+    {
+        $('divtotviadol').hide();
+    }else
+    {
+        $('divtotviadol').show();
+    }    
 </script>

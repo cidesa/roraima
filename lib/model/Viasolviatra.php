@@ -184,4 +184,8 @@ class Viasolviatra extends BaseViasolviatra
     {
         return $this->getStatus()=='P' ? 'Por Aprobar' : ($this->getStatus()=='A' ? 'Aprobado' : '');
     }
+    public function getTipvia2()
+    {
+        return $this->getTipvia()=='N' ? 'NACIONAL' : ($this->getTipvia()=='I' ? 'INTERNACIONAL' : '');
+    }
 }

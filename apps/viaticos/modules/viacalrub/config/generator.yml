@@ -15,11 +15,13 @@ generator:
           divupdate: div1
       grid:           { name: .}
       desrub:         { name: Descripción}
+      codnivtra:         { name: Codigo Nivel o Traslado}
+      desnivtra:         { name: Descripción}
 
     list:
       title:           Listado de Tabla de Calculo para Rubro
-      display:         [=codrub, desrub]
-      filters:         [codrub]
+      display:         [=codrub, desrub, codnivtra, desnivtra]
+      filters:         [codrub, codnivtra]
       sort:            codrub
 
     edit:

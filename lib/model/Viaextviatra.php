@@ -60,4 +60,14 @@ class Viaextviatra extends BaseViaextviatra
     {
         return H::getX('Codcat','Npcatpre','Nomcat',$this->codcat);
     }
+    public function getTipvia()
+    {
+        $refsol=H::getX('Numcal','Viacalviatra','Refsol',$this->refcal);
+        if(H::getX('Numsol','Viasolviatra','Tipvia',$refsol)=='N')
+            return 'NACIONAL';
+        elseif(H::getX('Numsol','Viasolviatra','Tipvia',$refsol)=='I')
+            return 'INTERNACIONAL';
+        else
+            return '';
+    }
 }
