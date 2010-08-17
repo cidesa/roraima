@@ -50,7 +50,7 @@ generator:
     edit:
       title:            Edición de Extensiones de Viaticos
       display:
-        Datos Extension de Viaticos:     [compromiso, numext, fecext, refcal, feccal, empleado, nivel, fecdes, fechas, numdia, diaconper, diasinper, observaciones]
+        Datos Extension de Viaticos:     [compromiso, numext, fecext, refcal, feccal, empleado, nivel, codcat, fecdes, fechas, numdia, diaconper, diasinper, observaciones]
         Datos Detalle :                  [numdiaext, _grid, totviadol, totvia, totviaenletras, _js]
       actions:
         _list:        ~

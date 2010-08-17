@@ -67,7 +67,7 @@ generator:
     edit:
       title:            Edición de Calculo de Viaticos
       display:
-        Datos Básicos del Calculo de Viaticos:     [compromiso, numcal, feccal, tipcom, refsol, fecsol, tipvia, empleado, nivel, empleadoaco, nivelaco, pais, estado, ciudad, proced, fortra, fecdes, fechas, numdia, empleadoaut, dessol, diaconper, diasinper, observaciones]
+        Datos Básicos del Calculo de Viaticos:     [compromiso, numcal, feccal, tipcom, refsol, fecsol, tipvia, empleado, nivel, codcat, empleadoaco, nivelaco, pais, estado, ciudad, proced, fortra, fecdes, fechas, numdia, empleadoaut, dessol, diaconper, diasinper, observaciones]
         Datos Detalle del Calculo:                 [_grid, totviadol, totvia, totviaenletras, _js]
       actions:
         _list:        ~

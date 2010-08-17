@@ -22,5 +22,6 @@
             $(id).readOnly=true;
 
     }
+    $('divcodcat').hide();
 
 </script>
