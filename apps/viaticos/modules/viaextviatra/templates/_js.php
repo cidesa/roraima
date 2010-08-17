@@ -37,6 +37,8 @@
             var idval = name+'_'+fil+'_'+colval;
             var idotr = name+'_'+fil+'_'+colotr;
             var idmon = name+'_'+fil+'_6';
+            var idcamdol = name+'_'+fil+'_9';
+            var idmondol = name+'_'+fil+'_10';
             var val = $(idval).value
             val = val.replace('.','');
             val = val.replace(',','.');
@@ -46,6 +48,8 @@
             valor = valor.replace(',','.');
 
             $(idmon).value=number_format(parseFloat(valor)*parseFloat(val),2,',','.');
+            $(idcamdol).value=number_format(parseFloat(valor)/4.3,2,',','.');
+            $(idmondol).value=number_format((parseFloat(valor)*parseFloat(val))/4.3,2,',','.');
             Calculartotal();
         }
 
@@ -149,7 +153,7 @@
                     total2 = parseFloat(total2)+parseFloat(total);
                     $('ax_'+i+'_6').value=number_format(total,2,',','.');
                     $('ax_'+i+'_10').value=number_format(total/4.3,2,',','.');
-                }                
+                }
             }
             $('viaextviatra_totviadol').value=number_format(total2/4.3,2,',','.');
             $('viaextviatra_totvia').value=number_format(total2,2,',','.');
@@ -166,5 +170,5 @@
     }else
     {
         $('divtotviadol').show();
-    }    
+    }
 </script>

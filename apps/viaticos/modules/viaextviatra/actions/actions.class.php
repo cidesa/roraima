@@ -33,6 +33,13 @@ class viaextviatraActions extends autoviaextviatraActions
     $per=array();
     $valdol=0;
      $cambio=1;
+     if(!$this->codpai)
+     {
+        $numsol = H::GetX('Numcal','Viacalviatra','Refsol',$this->viaextviatra->getRefcal());
+        $codciu = H::GetX('Numsol','Viasolviatra','Codciu',$numsol);
+        $this->codpai = H::getX('Codciu','Viaciudad','Codpai',$codciu);
+
+     }
      if($this->codpai)
      {
          $c = new Criteria();
@@ -52,7 +59,7 @@ class viaextviatraActions extends autoviaextviatraActions
      if($this->viaextviatra->getId()=='')
      {
          if($this->tipvia=='INTERNACIONAL')
-         {             
+         {
             $sql="select 1 as check,codrub,numdia,mondia, montot,tipo,
                   case when tipo='I1' then 'VIATICO DIARIO INTERNACIONAL'
                   when tipo='I2' then 'PRIMA ADICIONAL 100%'
@@ -175,7 +182,7 @@ class viaextviatraActions extends autoviaextviatraActions
     $codigo = $this->getRequestParameter('codigo','');
     // Esta variable ajax debe ser usada en cada llamado para identificar
     // que objeto hace el llamado y por consiguiente ejecutar el cÃ³digo necesario
-    $ajax = $this->getRequestParameter('ajax','');    
+    $ajax = $this->getRequestParameter('ajax','');
 
     // Se debe enviar en la peticiÃ³n ajax desde el cliente los datos que necesitemos
     // para generar el cÃ³digo de retorno, esto porque en un llamado Ajax no se devuelven
@@ -234,7 +241,7 @@ class viaextviatraActions extends autoviaextviatraActions
         {
             $js.="$('divtotviadol').show();";
         }
-        $this->configGrid();        
+        $this->configGrid();
         $output = '[["viaextviatra_feccal","'.$feccal.'",""],["viaextviatra_empleado","'.$empleado.'",""],["viaextviatra_nivel","'.$nivel.'",""],
                     ["viaextviatra_fecdes","'.$fecdes.'",""],["viaextviatra_fechas","'.$fechas.'",""],["viaextviatra_numdia","'.$numdia.'",""],
                     ["viaextviatra_diaconper","'.$dconper.'",""],["viaextviatra_diasinper","'.$dsinper.'",""],["viaextviatra_codcat","'.$codcat.'",""],
