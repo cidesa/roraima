@@ -31,10 +31,28 @@ class viaextviatraActions extends autoviaextviatraActions
     $this->obj = array();
     }
     $per=array();
+    $valdol=0;
+     $cambio=1;
+     if($this->codpai)
+     {
+         $c = new Criteria();
+         $c->add(ViapaisPeer::CODPAI,$this->codpai);
+         $op = ViapaisPeer::doSelectOne($c);
+         if($op)
+         {
+             $valdol=$op->getMonto();
+         }
+         $c = new Criteria();
+         $op = ViadefgenPeer::doSelectOne($c);
+         if($op)
+         {
+             $cambio=$op->getValdolar();
+         }
+     }
      if($this->viaextviatra->getId()=='')
      {
          if($this->tipvia=='INTERNACIONAL')
-         {
+         {             
             $sql="select 1 as check,codrub,numdia,mondia, montot,tipo,
                   case when tipo='I1' then 'VIATICO DIARIO INTERNACIONAL'
                   when tipo='I2' then 'PRIMA ADICIONAL 100%'
@@ -54,11 +72,14 @@ class viaextviatraActions extends autoviaextviatraActions
                     $per[$i]['check']=$rs['check'];
                     $per[$i]['codrub']=$rs['codrub'];
                     $per[$i]['desrub']=$rs['desrub'];
-                    $per[$i]['numdia']=H::formatoMonto($rs['numdia']);
+                    $per[$i]['numdia']=($rs['numdia']);
                     $per[$i]['mondia']=H::FormatoMonto($rs['mondia']);
                     $per[$i]['montot']=H::FormatoMonto($rs['montot']);
                     $per[$i]['tipo']=$rs['tipo'];
                     $per[$i]['calculo']=$rs['calculo'];
+                    $per[$i]['mondiadol']=H::FormatoMonto(($rs['mondia']/$cambio));
+                    #$per[$i]['cambio']=H::FormatoMonto($cambio);
+                    $per[$i]['montotdol']=H::FormatoMonto(($rs['mondia']/$cambio)*$rs['numdia']);
                     $per[$i]['id']=9;
                     $i++;
                  }
@@ -82,7 +103,7 @@ class viaextviatraActions extends autoviaextviatraActions
                     $per[$i]['check']=$rs['check'];
                     $per[$i]['codrub']=$rs['codrub'];
                     $per[$i]['desrub']=$rs['desrub'];
-                    $per[$i]['numdia']=H::formatoMonto($rs['numdia']);
+                    $per[$i]['numdia']=($rs['numdia']);
                     $per[$i]['mondia']=H::FormatoMonto($rs['mondia']);
                     $per[$i]['montot']=H::FormatoMonto($rs['montot']);
                     $per[$i]['tipo']=$rs['tipo'];
@@ -116,11 +137,14 @@ class viaextviatraActions extends autoviaextviatraActions
                     $per[$i]['check']=$rs['check'];
                     $per[$i]['codrub']=$rs['codrub'];
                     $per[$i]['desrub']=$rs['desrub'];
-                    $per[$i]['numdia']=H::formatoMonto($rs['numdia']);
+                    $per[$i]['numdia']=($rs['numdia']);
                     $per[$i]['mondia']=H::FormatoMonto($rs['mondia']);
                     $per[$i]['montot']=H::FormatoMonto($rs['montot']);
                     $per[$i]['tipo']=$rs['tipo'];
                     $per[$i]['calculo']=$rs['calculo'];
+                    $per[$i]['mondiadol']=H::FormatoMonto(($rs['mondia']/$cambio));
+                    #$per[$i]['cambio']=H::FormatoMonto($cambio);
+                    $per[$i]['montotdol']=H::FormatoMonto(($rs['mondia']/$cambio)*$rs['numdia']);
                     $per[$i]['id']=9;
                     $i++;
                  }
@@ -129,9 +153,16 @@ class viaextviatraActions extends autoviaextviatraActions
 
      $this->obj = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/viaextviatra/'.sfConfig::get('sf_app_module_config_dir_name').'/grid');
      #$this->obj[1][1]->setHtml('size=40 maxlength=250 onBlur="if($(id).value!=\'\')cambiardescripcion(this.id)"');
-     $this->obj[1][3]->setHtml('size=10 onBlur="ValidarMontoGridv2(this.id);calculamontofinal(this.id,3);"');
+     $this->obj[1][3]->setHtml('size=10 onBlur="calculamontofinal(this.id,3);" onKeyPress="return validaEntero(event)"');
      $this->obj[1][4]->setHtml('size=10 readonly=true onBlur="ValidarMontoGridv2(this.id);calculamontofinal(this.id,4);"');
      $this->obj[1][0]->setHtml('size=5 onclick="Calculartotal();"');
+
+
+     if($this->tipvia=='NACIONAL' || substr($this->viaextviatra->getRefcal(),0,2)=='VN')
+     {
+         $this->obj[1][8]->setOculta(true);
+         $this->obj[1][9]->setOculta(true);
+     }
 
      $this->obj = $this->obj[0]->getConfig($per);
      $this->viaextviatra->setGrid($this->obj);
@@ -144,7 +175,7 @@ class viaextviatraActions extends autoviaextviatraActions
     $codigo = $this->getRequestParameter('codigo','');
     // Esta variable ajax debe ser usada en cada llamado para identificar
     // que objeto hace el llamado y por consiguiente ejecutar el cÃ³digo necesario
-    $ajax = $this->getRequestParameter('ajax','');
+    $ajax = $this->getRequestParameter('ajax','');    
 
     // Se debe enviar en la peticiÃ³n ajax desde el cliente los datos que necesitemos
     // para generar el cÃ³digo de retorno, esto porque en un llamado Ajax no se devuelven
@@ -155,6 +186,7 @@ class viaextviatraActions extends autoviaextviatraActions
         // La variable $output es usada para retornar datos en formato de arreglo para actualizar
         // objetos en la vista. mas informacion en
         // http://201.210.211.26:8080/www/wiki/index.php/Agregar_Ajax_para_buscar_una_descripcion
+        $js='';
         $head=false;
         $c = new Criteria();
         $c->add(ViacalviatraPeer::NUMCAL,$codigo);
@@ -172,6 +204,11 @@ class viaextviatraActions extends autoviaextviatraActions
             $dconper=$per->getDiaconper();
             $dsinper=$per->getDiasinper();
             $tipvia=$per->getTipvia();
+            $numsol = H::GetX('Numcal','Viacalviatra','Refsol',$codigo);
+            $codciu = H::GetX('Numsol','Viasolviatra','Codciu',$numsol);
+            $codest = H::getX('Codciu','Viaciudad','Codest',$codciu);
+            $codpai = H::getX('Codciu','Viaciudad','Codpai',$codciu);
+            $this->codpai=$codpai;
         }else
         {
             $feccal="";
@@ -190,10 +227,18 @@ class viaextviatraActions extends autoviaextviatraActions
         $this->updateViaextviatraFromRequest();
         $this->numcal=$codigo;
         $this->tipvia=$tipvia;
+        if($tipvia=='NACIONAL')
+        {
+            $js.="$('divtotviadol').hide();";
+        }else
+        {
+            $js.="$('divtotviadol').show();";
+        }
         $this->configGrid();        
         $output = '[["viaextviatra_feccal","'.$feccal.'",""],["viaextviatra_empleado","'.$empleado.'",""],["viaextviatra_nivel","'.$nivel.'",""],
                     ["viaextviatra_fecdes","'.$fecdes.'",""],["viaextviatra_fechas","'.$fechas.'",""],["viaextviatra_numdia","'.$numdia.'",""],
-                    ["viaextviatra_diaconper","'.$dconper.'",""],["viaextviatra_diasinper","'.$dsinper.'",""],["viaextviatra_codcat","'.$codcat.'",""],["viaextviatra_nomcat","'.$nomcat.'",""]]';
+                    ["viaextviatra_diaconper","'.$dconper.'",""],["viaextviatra_diasinper","'.$dsinper.'",""],["viaextviatra_codcat","'.$codcat.'",""],
+                    ["viaextviatra_nomcat","'.$nomcat.'",""],["javascript","'.$js.'",""]]';
         break;
       case '2':
             $js='';

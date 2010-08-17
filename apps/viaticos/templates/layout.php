@@ -25,7 +25,7 @@
                 </tr>
                 <tr>
                   <td rowspan="3" valign="bottom" background="/images/borrar_05.jpg"><span class="Quote Order">Usuario: <?php echo $sf_user->getAttribute('usuario','Sin Autenticar') ?> | Empresa: <?php echo $_SESSION["nomemp"] ?>  <br>
-                    M&oacute;dulo: <?php echo $sf_context->getModuleName() ?></span></td>
+                    M&oacute;dulo: Vi&aacute;ticos</span></td>
           <td colspan="2" valign="middle" background=" /images/borrar_06.jpg" height="22" align="right">
 
             <a href="<?php echo "javascript:self.close()"; ?>" style="color:#8B0000;" >[ Cerrar Ventana ]</a>&nbsp;

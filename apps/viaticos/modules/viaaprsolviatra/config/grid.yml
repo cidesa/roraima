@@ -64,3 +64,10 @@ opciones:                  # Opciones generales
   esgrabable:              true
   oculta:                  true
   html:                    [ readonly=true size=15]
+10:       # Columna 11
+  titulo:                  Tipo
+  tipo:                    t
+  nombrecampo:             tipvia2
+  esgrabable:              false
+  oculta:                  false
+  html:                    [ readonly=true size=15]

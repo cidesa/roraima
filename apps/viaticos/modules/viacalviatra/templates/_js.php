@@ -127,5 +127,11 @@
         $('viacalviatra_totviadol').value=number_format(total/4.3,2,',','.');
         toAjax(2,getUrlModulo()+'ajax','1','','&monto='+total);
     }
-
+    if('<?php echo $viacalviatra->getTipvia()?>'=='NACIONAL' || '<?php echo $viacalviatra->getTipvia()?>'=='')
+    {
+        $('divtotviadol').hide();
+    }else
+    {
+        $('divtotviadol').show();
+    }    
 </script>

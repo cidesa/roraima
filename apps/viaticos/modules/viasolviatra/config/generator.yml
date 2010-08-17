@@ -112,11 +112,12 @@ generator:
           parametros: getprincipal="getCodciu" getsecundario="getNomciu" campoprincipal="codciu" camposecundario="nomciu" campobase = "id"
           catalogoparams: /param1/'."'+$('viasolviatra_codest').value+'".'/param2/'."'+$('viasolviatra_codpai').value+'".'
       status2:   { name: Status}
+      tipvia2:   { name: Tipo}
 
 
     list:
       title:        Listado de Solicitudes de Viaticos
-      display:      [=numsol, fecsol, codemp, nomemp, codniv, desniv, status2]
+      display:      [=numsol, fecsol, codemp, nomemp, nivel, status2, tipvia2]
       filters:      [numsol, fecsol, codemp, codniv]
       sort:         numsol
 
