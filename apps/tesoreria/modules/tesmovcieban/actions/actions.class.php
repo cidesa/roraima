@@ -31,8 +31,22 @@ class tesmovciebanActions extends autotesmovciebanActions
   {
     $c = new Criteria();
     $per = ContabaPeer::doSelectOne($c);
-    $ano = $per->getFeccie2('Y');
+    $ano = $per->getFecini2('Y');
     $this->getUser()->setAttribute('anofis',$ano,'tesmovcieban');
+
+    $r= new Criteria();
+    $r->addDescendingOrderByColumn(TsconcilhisPeer::MESCON);
+    $reg= TsconcilhisPeer::doSelectOne($r);
+    if ($reg)
+    {
+        $aux=(integer)$reg->getMescon();
+        if ($aux!=12)
+          $aux2=$aux+1;
+        else $aux2=1;
+        $valor=str_pad($aux2,2,'0',STR_PAD_LEFT);
+        $this->getUser()->setAttribute('mescer',$valor,'tesmovcieban');
+    }else $this->getUser()->setAttribute('mescer','','tesmovcieban');
+
     parent::executeEdit();
 
   }

@@ -52,33 +52,33 @@ names:
     validators: FechaValidator
 
   tsdefban{antban}:
-    required:  Yes
-    required_msg: El Saldo Anterior según Bancos no puedo estar en Blanco
+    required:  No
+    #required_msg: El Saldo Anterior según Bancos no puedo estar en Blanco
     validators: MontoValidator, MyNumberValidator
 
   tsdefban{debban}:
-    required:  Yes
-    required_msg: El Débito según Banco no puedo estar en Blanco
+    required:  No
+    #required_msg: El Débito según Banco no puedo estar en Blanco
     validators:  MyNumberValidator
 
   tsdefban{creban}:
-    required:  Yes
-    required_msg: El Crédito según Banco no puedo estar en Blanco
+    required:  No
+    #required_msg: El Crédito según Banco no puedo estar en Blanco
     validators:  MyNumberValidator
 
   tsdefban{antlib}:
-    required:  Yes
-    required_msg: El Saldo Anterior según Libro no puedo estar en Blanco
+    required:  No
+    #required_msg: El Saldo Anterior según Libro no puedo estar en Blanco
     validators: MontoValidator, MyNumberValidator
 
   tsdefban{deblib}:
-    required:  Yes
-    required_msg: El Débito según Libro no puedo estar en Blanco
+    required:  No
+    #required_msg: El Débito según Libro no puedo estar en Blanco
     validators: MyNumberValidator
 
   tsdefban{crelib}:
-    required:  Yes
-    required_msg: El Crédito según Libro no puedo estar en Blanco
+    required:  No
+    #required_msg: El Crédito según Libro no puedo estar en Blanco
     validators: MyNumberValidator
 
   tsdefban{tipren}:

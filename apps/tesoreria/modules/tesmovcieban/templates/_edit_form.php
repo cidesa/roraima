@@ -115,6 +115,10 @@
 
 <script type="text/javascript">
 <!--
+ var valor='<?php echo $sf_user->getAttribute('mescer','','tesmovcieban')?>';
+ if (valor!='') {
+    $('combomes').value=valor;
+ }
 function cerrar()
 {
 	f=document.sf_admin_edit_form;
