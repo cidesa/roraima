@@ -3026,7 +3026,7 @@ class Nomina {
         return $valor;
       case "NLDIFVAC" :
         $valor = 0;
-        $sql = "select coalesce(sum((case when fecsalnom=profec and fecdes>fecsalnom then numsemanas(profec,fecdes,'lunes') when (fecsalnom<b.profec and c.fecdes>=ultfec and c.fecdes<=profec) then numsemanas(fecdes,profec,'lunes')*-1 end)),0) cuantas from npasicaremp a, npnomina b,npvacsalidas c where
+        $sql = "select coalesce(sum((case when fecsalnom=profec and fecdes>fecsalnom then numsemanas(profec,fecdes,'lunes') when (fecsalnom<b.profec and c.fecdes>=ultfec and c.fecdes<=profec) then numsemanas(fecdes,profec,'lunes')*-1 end)),0) as cuantas from npasicaremp a, npnomina b,npvacsalidas c where
                 a.codnom=b.codnom
                 and a.codemp=c.codemp
                 and a.codemp='$empleado'
