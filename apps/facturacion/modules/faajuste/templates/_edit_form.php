@@ -39,9 +39,26 @@
 		</div>
 	</th>
 	<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-	<th>
+    <th>
+		<div id="divnrocon">
+		  <?php echo label_for('faajuste[nrocon]', __($labels['faajuste{nrocon}' ]), 'class="required" Style="text-align:left; width:150px"') ?>
+		  <div class="content<?php if ($sf_request->hasError('faajuste{nrocon}')): ?> form-error<?php endif; ?>">
+		  <?php if ($sf_request->hasError('faajuste{nrocon}')): ?>
+		    <?php echo form_error('faajuste{nrocon}', array('class' => 'form-error-msg')) ?>
+		  <?php endif; ?>
+
+		  <?php $value = object_input_tag($faajuste, 'getNrocon', array (
+		  'size' => 10,
+		  'control_name' => 'faajuste[nrocon]',
+		  'maxlength' => 10,		  		  
+		)); echo $value ? $value : '&nbsp;' ?>
+		    </div>
+		</div>
+	</th>
+	<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+        <th>
 		<div id="divfecaju">
-		  <?php echo label_for('faajuste[fecaju]', __($labels['faajuste{fecaju}' ]), 'class="required" Style="text-align:left; width:100px"') ?>
+		  <?php echo label_for('faajuste[fecaju]', __($labels['faajuste{fecaju}' ]), 'class="required" Style="text-align:left; width:150px"') ?>
 		  <div class="content<?php if ($sf_request->hasError('faajuste{fecaju}')): ?> form-error<?php endif; ?>">
 		  <?php if ($sf_request->hasError('faajuste{fecaju}')): ?>
 		    <?php echo form_error('faajuste{fecaju}', array('class' => 'form-error-msg')) ?>

@@ -17,10 +17,10 @@ class Faartped extends BaseFaartped
 {
 	protected $obj = array();
     protected $desart="";
-	protected $canord="0,00";
+//	protected $canord="0,00";
 	protected $canent="0,00";
 	protected $canentregar="0,00";
-	protected $canaju="0,00";
+	///protected $canaju="0,00";
 	protected $canajustada="0,00";
 	protected $candes="0,00";
 	protected $candesp="0,00";
@@ -32,6 +32,17 @@ class Faartped extends BaseFaartped
 	protected $precioe="0,00";
 	protected $porrgo="0,00";
 	protected $mondes="0,00";
+        protected $monaju="0,00";
+        protected $canlotreal="0,00";
+        protected $canpuedaju="0,00";
+        protected $canrealped="0,00";
+        protected $canrealdes="0,00";
+        protected $candistrib="0,00";
+        protected $tipo="";
+        protected $preaju="0,00";
+        protected $recaju="0,00";
+        protected $fecven="";
+        protected $exist="0,00";
 
 	public $codfal = '';
 	public $costo=0.0;
@@ -77,6 +88,7 @@ class Faartped extends BaseFaartped
       $this->cannodesaux=self::getCanord() - ($candes + $canent);
       $valor=self::getPreart() * self::getCanord();
       $this->montot=number_format($valor, 2, ',', '.');
+      $this->preaju=number_format(self::getPreart(), 2, ',', '.');
       //$this->costo=$costodes + $costoent;
       if (self::getPreart()!=0)
       {
@@ -138,5 +150,10 @@ class Faartped extends BaseFaartped
     {
             return Herramientas::getX('CODUBI','Cadefubi','Nomubi',$this->getCodubi());
     }
+
+  public function getTipo()
+  {
+   return Herramientas::getX('CODART','Caregart','Tipo',self::getCodart());
+  }
 
 }

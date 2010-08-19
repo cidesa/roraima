@@ -1146,6 +1146,15 @@
 1155:
     cod: 1155
     msj: El Monto del Pedido debe ser mayor a cero.
+1156:
+    cod: 1156
+    msj: No puede salvar sin introducir al menos un Artículo a Ajustar.
+1157:
+    cod: 1157
+    msj: No puede salvar sin introducir la Cantidad a Ajustar.
+1158:
+    cod: 1158
+    msj: No puede salvar sin introducir el Número del Lote.
 ########## Licitaciones ########
 901:
     cod: 901

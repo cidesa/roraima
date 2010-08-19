@@ -829,6 +829,14 @@ propel:
       type: NUMERIC
       size: 14
       scale: 2
+    preaju:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    recaju:
+      type: NUMERIC
+      size: 14
+      scale: 2
     montot:
       type: NUMERIC
       size: 14
@@ -1467,6 +1475,9 @@ propel:
     tipo:
       type: VARCHAR
       size: 8
+    nrocon:
+      type: VARCHAR
+      size: 10
     id:
       type: integer
       required: true

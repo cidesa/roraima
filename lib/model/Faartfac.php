@@ -48,6 +48,17 @@ class Faartfac extends BaseFaartfac
   protected $canord="0,00";
   protected $preart="0,00";
   protected $numlot="";
+    protected $preaju="0,00";
+    protected $monaju="0,00";
+    protected $canlotreal="0,00";
+    protected $canpuedaju="0,00";
+    protected $canrealped="0,00";
+    protected $canrealdes="0,00";
+    protected $candistrib="0,00";
+    protected $tipo="0,00";
+    protected $recaju="0,00";
+    protected $fecven="";
+    protected $exist="0,00";
 
    public function hydrate(ResultSet $rs, $startcol = 1)
    {
@@ -123,6 +134,7 @@ class Faartfac extends BaseFaartfac
     $this->preart=number_format(self::getPrecio(), 2, ',', '.');
     $val=self::getPrecio() * self::getCantot();
     $this->montot=number_format($val, 2, ',', '.');
+    $this->preaju=number_format(self::getPrecio(), 2, ',', '.');
   }
     public function getCodalm()
     {
@@ -144,4 +156,8 @@ class Faartfac extends BaseFaartfac
             return Herramientas::getX('CODUBI','Cadefubi','Nomubi',$this->getCodubi());
     }
 
+  public function getTipo()
+  {
+   return Herramientas::getX('CODART','Caregart','Tipo',self::getCodart());
+  }
 }
