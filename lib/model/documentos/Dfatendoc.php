@@ -41,7 +41,8 @@ class Dfatendoc extends BaseDfatendoc
   {
     
     $lista = Constantes::listaEstadoDocumento();
-    $ret = $lista[$this->anuate];
+    if($this->anuate) $ret = $lista[$this->anuate];
+    else $ret=''; 
 
     if(!$val){
         if($ret==$lista['1']) return "<font color=\"#FF0000\">$ret</font>";

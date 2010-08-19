@@ -294,8 +294,7 @@ class Columna
    */
   public function setCombo($val){
 
-    if(is_array($val)) $this->combo = $val;
-    else $this->combo = array();
+    $this->combo = $val;
 
   }
 

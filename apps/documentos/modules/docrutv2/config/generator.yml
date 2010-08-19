@@ -1,0 +1,21 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Dftabtip
+    theme:            cidesaGenerator
+
+    fields:
+      tipdoc:         {name: Tipo de Documento}
+      grid:           {name: .}
+    list:
+      title:          Ruta del Documento
+      display:        [ =destipdoc ]
+    edit:
+      title:          EdiciÃ³n de la Ruta del Documento
+      display:
+        Documento:    [ _tipdoc ]
+        Ruta:         [ _grid ]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

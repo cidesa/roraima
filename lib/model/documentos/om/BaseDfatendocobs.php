@@ -64,7 +64,7 @@ abstract class BaseDfatendocobs extends BaseObject  implements Persistent {
     if ($this->fecobs === null || $this->fecobs === '') {
       return null;
     } elseif (!is_int($this->fecobs)) {
-            $ts = adodb_strtotime($this->fecobs);
+            $ts = strtotime($this->fecobs);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecobs] as date/time value: " . var_export($this->fecobs, true));
       }
     } else {
@@ -73,9 +73,9 @@ abstract class BaseDfatendocobs extends BaseObject  implements Persistent {
     if ($format === null) {
       return $ts;
     } elseif (strpos($format, '%') !== false) {
-      return adodb_strftime($format, $ts);
+      return strftime($format, $ts);
     } else {
-      return @adodb_date($format, $ts);
+      return date($format, $ts);
     }
   }
 
@@ -124,8 +124,13 @@ abstract class BaseDfatendocobs extends BaseObject  implements Persistent {
 	public function setFecobs($v)
 	{
 
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
     if ($v !== null && !is_int($v)) {
-      $ts = adodb_strtotime($v);
+      $ts = strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecobs] from input: " . var_export($v, true));
       }
     } else {
@@ -252,6 +257,14 @@ abstract class BaseDfatendocobs extends BaseObject  implements Persistent {
 				}
 				$this->setDfatendocdet($this->aDfatendocdet);
 			}
+
+			if ($this->aTableError !== null) {
+				if ($this->aTableError->isModified()) {
+					$affectedRows += $this->aTableError->save($con);
+				}
+				$this->setTableError($this->aTableError);
+			}
+
 
 						if ($this->isModified()) {
 				if ($this->isNew()) {

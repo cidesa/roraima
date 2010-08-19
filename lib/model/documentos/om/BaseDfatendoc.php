@@ -9,6 +9,10 @@ abstract class BaseDfatendoc extends BaseObject  implements Persistent {
 
 
 	
+	protected $nroexp;
+
+
+	
 	protected $coddoc;
 
 
@@ -57,6 +61,10 @@ abstract class BaseDfatendoc extends BaseObject  implements Persistent {
 
 
 	
+	protected $refdoc;
+
+
+	
 	protected $id;
 
 	
@@ -74,6 +82,13 @@ abstract class BaseDfatendoc extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
+  
+  public function getNroexp()
+  {
+
+    return $this->nroexp;
+
+  }
   
   public function getCoddoc()
   {
@@ -159,12 +174,29 @@ abstract class BaseDfatendoc extends BaseObject  implements Persistent {
 
   }
   
+  public function getRefdoc()
+  {
+
+    return trim($this->refdoc);
+
+  }
+  
   public function getId()
   {
 
     return $this->id;
 
   }
+	
+	public function setNroexp($v)
+	{
+
+    if ($this->nroexp !== $v) {
+        $this->nroexp = $v;
+        $this->modifiedColumns[] = DfatendocPeer::NROEXP;
+      }
+  
+	} 
 	
 	public function setCoddoc($v)
 	{
@@ -290,6 +322,16 @@ abstract class BaseDfatendoc extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setRefdoc($v)
+	{
+
+    if ($this->refdoc !== $v) {
+        $this->refdoc = $v;
+        $this->modifiedColumns[] = DfatendocPeer::REFDOC;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -304,31 +346,35 @@ abstract class BaseDfatendoc extends BaseObject  implements Persistent {
   {
     try {
 
-      $this->coddoc = $rs->getString($startcol + 0);
+      $this->nroexp = $rs->getInt($startcol + 0);
 
-      $this->desdoc = $rs->getString($startcol + 1);
+      $this->coddoc = $rs->getString($startcol + 1);
 
-      $this->mondoc = $rs->getString($startcol + 2);
+      $this->desdoc = $rs->getString($startcol + 2);
 
-      $this->fecdoc = $rs->getString($startcol + 3);
+      $this->mondoc = $rs->getString($startcol + 3);
 
-      $this->staate = $rs->getString($startcol + 4);
+      $this->fecdoc = $rs->getString($startcol + 4);
 
-      $this->anuate = $rs->getInt($startcol + 5);
+      $this->staate = $rs->getString($startcol + 5);
 
-      $this->estado = $rs->getString($startcol + 6);
+      $this->anuate = $rs->getInt($startcol + 6);
 
-      $this->id_dftabtip = $rs->getInt($startcol + 7);
+      $this->estado = $rs->getString($startcol + 7);
 
-      $this->infdoc1 = $rs->getString($startcol + 8);
+      $this->id_dftabtip = $rs->getInt($startcol + 8);
 
-      $this->infdoc2 = $rs->getString($startcol + 9);
+      $this->infdoc1 = $rs->getString($startcol + 9);
 
-      $this->infdoc3 = $rs->getString($startcol + 10);
+      $this->infdoc2 = $rs->getString($startcol + 10);
 
-      $this->infdoc4 = $rs->getString($startcol + 11);
+      $this->infdoc3 = $rs->getString($startcol + 11);
 
-      $this->id = $rs->getInt($startcol + 12);
+      $this->infdoc4 = $rs->getString($startcol + 12);
+
+      $this->refdoc = $rs->getString($startcol + 13);
+
+      $this->id = $rs->getInt($startcol + 14);
 
       $this->resetModified();
 
@@ -336,7 +382,7 @@ abstract class BaseDfatendoc extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 13; 
+            return $startcol + 15; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Dfatendoc object", $e);
     }
@@ -517,42 +563,48 @@ abstract class BaseDfatendoc extends BaseObject  implements Persistent {
 	{
 		switch($pos) {
 			case 0:
-				return $this->getCoddoc();
+				return $this->getNroexp();
 				break;
 			case 1:
-				return $this->getDesdoc();
+				return $this->getCoddoc();
 				break;
 			case 2:
-				return $this->getMondoc();
+				return $this->getDesdoc();
 				break;
 			case 3:
-				return $this->getFecdoc();
+				return $this->getMondoc();
 				break;
 			case 4:
-				return $this->getStaate();
+				return $this->getFecdoc();
 				break;
 			case 5:
-				return $this->getAnuate();
+				return $this->getStaate();
 				break;
 			case 6:
-				return $this->getEstado();
+				return $this->getAnuate();
 				break;
 			case 7:
-				return $this->getIdDftabtip();
+				return $this->getEstado();
 				break;
 			case 8:
-				return $this->getInfdoc1();
+				return $this->getIdDftabtip();
 				break;
 			case 9:
-				return $this->getInfdoc2();
+				return $this->getInfdoc1();
 				break;
 			case 10:
-				return $this->getInfdoc3();
+				return $this->getInfdoc2();
 				break;
 			case 11:
-				return $this->getInfdoc4();
+				return $this->getInfdoc3();
 				break;
 			case 12:
+				return $this->getInfdoc4();
+				break;
+			case 13:
+				return $this->getRefdoc();
+				break;
+			case 14:
 				return $this->getId();
 				break;
 			default:
@@ -565,19 +617,21 @@ abstract class BaseDfatendoc extends BaseObject  implements Persistent {
 	{
 		$keys = DfatendocPeer::getFieldNames($keyType);
 		$result = array(
-			$keys[0] => $this->getCoddoc(),
-			$keys[1] => $this->getDesdoc(),
-			$keys[2] => $this->getMondoc(),
-			$keys[3] => $this->getFecdoc(),
-			$keys[4] => $this->getStaate(),
-			$keys[5] => $this->getAnuate(),
-			$keys[6] => $this->getEstado(),
-			$keys[7] => $this->getIdDftabtip(),
-			$keys[8] => $this->getInfdoc1(),
-			$keys[9] => $this->getInfdoc2(),
-			$keys[10] => $this->getInfdoc3(),
-			$keys[11] => $this->getInfdoc4(),
-			$keys[12] => $this->getId(),
+			$keys[0] => $this->getNroexp(),
+			$keys[1] => $this->getCoddoc(),
+			$keys[2] => $this->getDesdoc(),
+			$keys[3] => $this->getMondoc(),
+			$keys[4] => $this->getFecdoc(),
+			$keys[5] => $this->getStaate(),
+			$keys[6] => $this->getAnuate(),
+			$keys[7] => $this->getEstado(),
+			$keys[8] => $this->getIdDftabtip(),
+			$keys[9] => $this->getInfdoc1(),
+			$keys[10] => $this->getInfdoc2(),
+			$keys[11] => $this->getInfdoc3(),
+			$keys[12] => $this->getInfdoc4(),
+			$keys[13] => $this->getRefdoc(),
+			$keys[14] => $this->getId(),
 		);
 		return $result;
 	}
@@ -594,42 +648,48 @@ abstract class BaseDfatendoc extends BaseObject  implements Persistent {
 	{
 		switch($pos) {
 			case 0:
-				$this->setCoddoc($value);
+				$this->setNroexp($value);
 				break;
 			case 1:
-				$this->setDesdoc($value);
+				$this->setCoddoc($value);
 				break;
 			case 2:
-				$this->setMondoc($value);
+				$this->setDesdoc($value);
 				break;
 			case 3:
-				$this->setFecdoc($value);
+				$this->setMondoc($value);
 				break;
 			case 4:
-				$this->setStaate($value);
+				$this->setFecdoc($value);
 				break;
 			case 5:
-				$this->setAnuate($value);
+				$this->setStaate($value);
 				break;
 			case 6:
-				$this->setEstado($value);
+				$this->setAnuate($value);
 				break;
 			case 7:
-				$this->setIdDftabtip($value);
+				$this->setEstado($value);
 				break;
 			case 8:
-				$this->setInfdoc1($value);
+				$this->setIdDftabtip($value);
 				break;
 			case 9:
-				$this->setInfdoc2($value);
+				$this->setInfdoc1($value);
 				break;
 			case 10:
-				$this->setInfdoc3($value);
+				$this->setInfdoc2($value);
 				break;
 			case 11:
-				$this->setInfdoc4($value);
+				$this->setInfdoc3($value);
 				break;
 			case 12:
+				$this->setInfdoc4($value);
+				break;
+			case 13:
+				$this->setRefdoc($value);
+				break;
+			case 14:
 				$this->setId($value);
 				break;
 		} 	}
@@ -639,19 +699,21 @@ abstract class BaseDfatendoc extends BaseObject  implements Persistent {
 	{
 		$keys = DfatendocPeer::getFieldNames($keyType);
 
-		if (array_key_exists($keys[0], $arr)) $this->setCoddoc($arr[$keys[0]]);
-		if (array_key_exists($keys[1], $arr)) $this->setDesdoc($arr[$keys[1]]);
-		if (array_key_exists($keys[2], $arr)) $this->setMondoc($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setFecdoc($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setStaate($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setAnuate($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setEstado($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setIdDftabtip($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setInfdoc1($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setInfdoc2($arr[$keys[9]]);
-		if (array_key_exists($keys[10], $arr)) $this->setInfdoc3($arr[$keys[10]]);
-		if (array_key_exists($keys[11], $arr)) $this->setInfdoc4($arr[$keys[11]]);
-		if (array_key_exists($keys[12], $arr)) $this->setId($arr[$keys[12]]);
+		if (array_key_exists($keys[0], $arr)) $this->setNroexp($arr[$keys[0]]);
+		if (array_key_exists($keys[1], $arr)) $this->setCoddoc($arr[$keys[1]]);
+		if (array_key_exists($keys[2], $arr)) $this->setDesdoc($arr[$keys[2]]);
+		if (array_key_exists($keys[3], $arr)) $this->setMondoc($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setFecdoc($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setStaate($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setAnuate($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setEstado($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setIdDftabtip($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setInfdoc1($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setInfdoc2($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setInfdoc3($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setInfdoc4($arr[$keys[12]]);
+		if (array_key_exists($keys[13], $arr)) $this->setRefdoc($arr[$keys[13]]);
+		if (array_key_exists($keys[14], $arr)) $this->setId($arr[$keys[14]]);
 	}
 
 	
@@ -659,6 +721,7 @@ abstract class BaseDfatendoc extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(DfatendocPeer::DATABASE_NAME);
 
+		if ($this->isColumnModified(DfatendocPeer::NROEXP)) $criteria->add(DfatendocPeer::NROEXP, $this->nroexp);
 		if ($this->isColumnModified(DfatendocPeer::CODDOC)) $criteria->add(DfatendocPeer::CODDOC, $this->coddoc);
 		if ($this->isColumnModified(DfatendocPeer::DESDOC)) $criteria->add(DfatendocPeer::DESDOC, $this->desdoc);
 		if ($this->isColumnModified(DfatendocPeer::MONDOC)) $criteria->add(DfatendocPeer::MONDOC, $this->mondoc);
@@ -671,6 +734,7 @@ abstract class BaseDfatendoc extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(DfatendocPeer::INFDOC2)) $criteria->add(DfatendocPeer::INFDOC2, $this->infdoc2);
 		if ($this->isColumnModified(DfatendocPeer::INFDOC3)) $criteria->add(DfatendocPeer::INFDOC3, $this->infdoc3);
 		if ($this->isColumnModified(DfatendocPeer::INFDOC4)) $criteria->add(DfatendocPeer::INFDOC4, $this->infdoc4);
+		if ($this->isColumnModified(DfatendocPeer::REFDOC)) $criteria->add(DfatendocPeer::REFDOC, $this->refdoc);
 		if ($this->isColumnModified(DfatendocPeer::ID)) $criteria->add(DfatendocPeer::ID, $this->id);
 
 		return $criteria;
@@ -702,6 +766,8 @@ abstract class BaseDfatendoc extends BaseObject  implements Persistent {
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
+		$copyObj->setNroexp($this->nroexp);
+
 		$copyObj->setCoddoc($this->coddoc);
 
 		$copyObj->setDesdoc($this->desdoc);
@@ -725,6 +791,8 @@ abstract class BaseDfatendoc extends BaseObject  implements Persistent {
 		$copyObj->setInfdoc3($this->infdoc3);
 
 		$copyObj->setInfdoc4($this->infdoc4);
+
+		$copyObj->setRefdoc($this->refdoc);
 
 
 		if ($deepCopy) {

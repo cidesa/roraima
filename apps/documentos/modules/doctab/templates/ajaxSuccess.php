@@ -3,4 +3,8 @@
 
 <?php use_stylesheet('/sf/sf_admin/css/main') ?>
 
-<?php include_partial('doctab/combos', array('dftabtip' => $dftabtip, 'labels' => $labels, 'campos' => $campos, 'tablas' => $tablas)) ?>
+<?php if($sf_request->getParameter('par')=='1') : ?>
+  <?php include_partial('doctab/combos', array('dftabtip' => $dftabtip, 'labels' => $labels, 'params' => $params )) ?>
+<?php elseif($sf_request->getParameter('par')=='2') : ?>
+  <?php include_partial('doctab/infadic', array('dftabtip' => $dftabtip, 'labels' => $labels, 'params' => $params )) ?>
+<?php endif; ?>

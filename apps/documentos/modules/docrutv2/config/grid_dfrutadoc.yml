@@ -1,0 +1,68 @@
+opciones:                  # Opciones generales
+  name:                    b
+  eliminar:                true
+  tabla:                   dfrutadoc
+  anchogrid:               860
+  ancho:                   830
+  filas:                   2
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Orden
+  tipo:                    c
+  nombrecampo:             rutdoc
+  html:                    [ '' ]
+  oculta:                  false
+  esgrabable:              true
+  combo:
+    1: 1
+    2: 2
+    3: 3
+    4: 4
+    5: 5
+    6: 6
+    7: 7
+    8: 8
+    9: 9
+    10: 10
+2:       # Columna 2
+  titulo:                  Unidad
+  tipo:                    c
+  nombrecampo:             id_acunidad
+  html:                    [ '' ]
+  oculta:                  false
+  esgrabable:              true
+  combo:                   'getAcunidades'
+3:       # Columna 3
+  titulo:                  Sub Unidad
+  tipo:                    t
+  nombrecampo:             desuni
+  html:                    [ size="38" ]
+  oculta:                  false
+  esgrabable:              true
+4:       # Columna 4
+  titulo:                  Dias
+  tipo:                    c
+  nombrecampo:             diadoc
+  html:                    [ '' ]
+  esgrabable:              true
+  combo:
+    1: 1
+    2: 2
+    3: 3
+    4: 4
+    5: 5
+    6: 6
+    7: 7
+    8: 8
+    9: 9
+    10: 10
+5:       # Columna 5
+  titulo:                  DescripciÃ³n
+  tipo:                    t
+  nombrecampo:             desrut
+  html:                    [ size="38" ]
+  oculta:                  false
+  esgrabable:              true
+
+
