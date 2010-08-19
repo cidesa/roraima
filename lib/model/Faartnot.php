@@ -19,6 +19,17 @@ class Faartnot extends BaseFaartnot
 	protected $canajustada="0,00";
 	protected $montot="0,00";
 	protected $canord="0,00";
+        protected $monaju="0,00";
+        protected $canlotreal="0,00";
+        protected $canpuedaju="0,00";
+        protected $canrealped="0,00";
+        protected $canrealdes="0,00";
+        protected $candistrib="0,00";
+        protected $tipo="";
+        protected $preaju="0,00";
+        protected $recaju="0,00";
+        protected $fecven="";
+        protected $exist="0,00";
 
 
   public function getDesart()
@@ -29,6 +40,11 @@ class Faartnot extends BaseFaartnot
   public function getNomalm()
   {
    return Herramientas::getX('CODALM','Cadefalm','Nomalm',self::getCodalm());
+  }
+
+  public function getTipo()
+  {
+   return Herramientas::getX('CODART','Caregart','Tipo',self::getCodart());
   }
 
   /*public function getCanord()
@@ -42,6 +58,24 @@ class Faartnot extends BaseFaartnot
     $this->canord=number_format(self::getCanent(), 2, ',', '.');
     $val=self::getPreart() * self::getCanent();
     $this->montot=number_format($val, 2, ',', '.');
+    $this->preaju=number_format(self::getPreart(), 2, ',', '.');
+
+    $t= new Criteria();
+    $t->add(FadeflotPeer::NUMLOT,self::getNumlot());
+    $t->add(FadeflotPeer::CODALM,self::getCodalm());
+    $t->add(FadeflotPeer::CODART,self::getCodart());
+    $reg= FadeflotPeer::doSelectOne($t);
+    if ($reg)
+    {
+        $this->fecven=$reg->getFecven();
+        $this->canlotreal=$reg->getCanlot();
+        if ($this->canord<=$reg->getCanlot())
+        {  $this->exist=$reg->getCanlot()-$this->canord; }
+        else {
+          $this->exist=0;
+          $this->canord=$reg->getCanlot();
+        }
+    }
 
   }
 }

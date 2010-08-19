@@ -6,6 +6,7 @@ methods:
    - "faajuste{tipaju}"
    - "faajuste{desaju}"
    - "faajuste{obsaju}"
+   - "faajuste{nrocon}"
 
 names:
   faajuste{refaju}:
@@ -26,6 +27,10 @@ names:
     required:  Yes
     required_msg: El número de Referencia no puede estar en Blanco.
 
+  faajuste{nrocon}:
+    required:  Yes
+    required_msg: El Número de Control no puede estar en Blanco.
+
   faajuste{desaju}:
     required:  No
     validators: DescripcionValidator
@@ -40,13 +45,6 @@ Validator_refaju:
         class:        Faajuste
         column:       refaju
         unique_error: El registro ya Existe intente con otro.
-#FechaValidator:
-#    class:         CidesaDateNow
-#    param:
-#        compare: 'now'
-#        compare_error: La Fecha no puede ser menor a la Fecha Actual
-#        operator: '>='
-#        date_error:  Fecha Inválida
 
 FechaValidator:
     class: sfRegexValidator

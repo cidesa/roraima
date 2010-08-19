@@ -13,7 +13,7 @@ abstract class BaseFamovajuPeer {
 	const CLASS_DEFAULT = 'lib.model.Famovaju';
 
 	
-	const NUM_COLUMNS = 7;
+	const NUM_COLUMNS = 9;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -35,6 +35,12 @@ abstract class BaseFamovajuPeer {
 	const CANAJU = 'famovaju.CANAJU';
 
 	
+	const PREAJU = 'famovaju.PREAJU';
+
+	
+	const RECAJU = 'famovaju.RECAJU';
+
+	
 	const MONTOT = 'famovaju.MONTOT';
 
 	
@@ -46,18 +52,18 @@ abstract class BaseFamovajuPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Refaju', 'Codart', 'Numlot', 'Canord', 'Canaju', 'Montot', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (FamovajuPeer::REFAJU, FamovajuPeer::CODART, FamovajuPeer::NUMLOT, FamovajuPeer::CANORD, FamovajuPeer::CANAJU, FamovajuPeer::MONTOT, FamovajuPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('refaju', 'codart', 'numlot', 'canord', 'canaju', 'montot', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
+		BasePeer::TYPE_PHPNAME => array ('Refaju', 'Codart', 'Numlot', 'Canord', 'Canaju', 'Preaju', 'Recaju', 'Montot', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (FamovajuPeer::REFAJU, FamovajuPeer::CODART, FamovajuPeer::NUMLOT, FamovajuPeer::CANORD, FamovajuPeer::CANAJU, FamovajuPeer::PREAJU, FamovajuPeer::RECAJU, FamovajuPeer::MONTOT, FamovajuPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('refaju', 'codart', 'numlot', 'canord', 'canaju', 'preaju', 'recaju', 'montot', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Refaju' => 0, 'Codart' => 1, 'Numlot' => 2, 'Canord' => 3, 'Canaju' => 4, 'Montot' => 5, 'Id' => 6, ),
-		BasePeer::TYPE_COLNAME => array (FamovajuPeer::REFAJU => 0, FamovajuPeer::CODART => 1, FamovajuPeer::NUMLOT => 2, FamovajuPeer::CANORD => 3, FamovajuPeer::CANAJU => 4, FamovajuPeer::MONTOT => 5, FamovajuPeer::ID => 6, ),
-		BasePeer::TYPE_FIELDNAME => array ('refaju' => 0, 'codart' => 1, 'numlot' => 2, 'canord' => 3, 'canaju' => 4, 'montot' => 5, 'id' => 6, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
+		BasePeer::TYPE_PHPNAME => array ('Refaju' => 0, 'Codart' => 1, 'Numlot' => 2, 'Canord' => 3, 'Canaju' => 4, 'Preaju' => 5, 'Recaju' => 6, 'Montot' => 7, 'Id' => 8, ),
+		BasePeer::TYPE_COLNAME => array (FamovajuPeer::REFAJU => 0, FamovajuPeer::CODART => 1, FamovajuPeer::NUMLOT => 2, FamovajuPeer::CANORD => 3, FamovajuPeer::CANAJU => 4, FamovajuPeer::PREAJU => 5, FamovajuPeer::RECAJU => 6, FamovajuPeer::MONTOT => 7, FamovajuPeer::ID => 8, ),
+		BasePeer::TYPE_FIELDNAME => array ('refaju' => 0, 'codart' => 1, 'numlot' => 2, 'canord' => 3, 'canaju' => 4, 'preaju' => 5, 'recaju' => 6, 'montot' => 7, 'id' => 8, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
 	);
 
 	
@@ -120,6 +126,10 @@ abstract class BaseFamovajuPeer {
 		$criteria->addSelectColumn(FamovajuPeer::CANORD);
 
 		$criteria->addSelectColumn(FamovajuPeer::CANAJU);
+
+		$criteria->addSelectColumn(FamovajuPeer::PREAJU);
+
+		$criteria->addSelectColumn(FamovajuPeer::RECAJU);
 
 		$criteria->addSelectColumn(FamovajuPeer::MONTOT);
 
