@@ -13,7 +13,7 @@ abstract class BaseDftabtipPeer {
 	const CLASS_DEFAULT = 'lib.model.documentos.Dftabtip';
 
 	
-	const NUM_COLUMNS = 17;
+	const NUM_COLUMNS = 21;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -47,6 +47,15 @@ abstract class BaseDftabtipPeer {
 	const STADOC = 'dftabtip.STADOC';
 
 	
+	const NOMTABFK = 'dftabtip.NOMTABFK';
+
+	
+	const NOMCOLLOC = 'dftabtip.NOMCOLLOC';
+
+	
+	const NOMCOLFOR = 'dftabtip.NOMCOLFOR';
+
+	
 	const INFDOC1 = 'dftabtip.INFDOC1';
 
 	
@@ -68,6 +77,9 @@ abstract class BaseDftabtipPeer {
 	const FECINI = 'dftabtip.FECINI';
 
 	
+	const REFDOC = 'dftabtip.REFDOC';
+
+	
 	const ID = 'dftabtip.ID';
 
 	
@@ -76,18 +88,18 @@ abstract class BaseDftabtipPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Tipdoc', 'Nomtab', 'Vidutil', 'Clvprm', 'Clvfrn', 'Mondoc', 'Fecdoc', 'Desdoc', 'Stadoc', 'Infdoc1', 'Infdoc2', 'Infdoc3', 'Infdoc4', 'Valact', 'Valanu', 'Fecini', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (DftabtipPeer::TIPDOC, DftabtipPeer::NOMTAB, DftabtipPeer::VIDUTIL, DftabtipPeer::CLVPRM, DftabtipPeer::CLVFRN, DftabtipPeer::MONDOC, DftabtipPeer::FECDOC, DftabtipPeer::DESDOC, DftabtipPeer::STADOC, DftabtipPeer::INFDOC1, DftabtipPeer::INFDOC2, DftabtipPeer::INFDOC3, DftabtipPeer::INFDOC4, DftabtipPeer::VALACT, DftabtipPeer::VALANU, DftabtipPeer::FECINI, DftabtipPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('tipdoc', 'nomtab', 'vidutil', 'clvprm', 'clvfrn', 'mondoc', 'fecdoc', 'desdoc', 'stadoc', 'infdoc1', 'infdoc2', 'infdoc3', 'infdoc4', 'valact', 'valanu', 'fecini', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, )
+		BasePeer::TYPE_PHPNAME => array ('Tipdoc', 'Nomtab', 'Vidutil', 'Clvprm', 'Clvfrn', 'Mondoc', 'Fecdoc', 'Desdoc', 'Stadoc', 'Nomtabfk', 'Nomcolloc', 'Nomcolfor', 'Infdoc1', 'Infdoc2', 'Infdoc3', 'Infdoc4', 'Valact', 'Valanu', 'Fecini', 'Refdoc', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (DftabtipPeer::TIPDOC, DftabtipPeer::NOMTAB, DftabtipPeer::VIDUTIL, DftabtipPeer::CLVPRM, DftabtipPeer::CLVFRN, DftabtipPeer::MONDOC, DftabtipPeer::FECDOC, DftabtipPeer::DESDOC, DftabtipPeer::STADOC, DftabtipPeer::NOMTABFK, DftabtipPeer::NOMCOLLOC, DftabtipPeer::NOMCOLFOR, DftabtipPeer::INFDOC1, DftabtipPeer::INFDOC2, DftabtipPeer::INFDOC3, DftabtipPeer::INFDOC4, DftabtipPeer::VALACT, DftabtipPeer::VALANU, DftabtipPeer::FECINI, DftabtipPeer::REFDOC, DftabtipPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('tipdoc', 'nomtab', 'vidutil', 'clvprm', 'clvfrn', 'mondoc', 'fecdoc', 'desdoc', 'stadoc', 'nomtabfk', 'nomcolloc', 'nomcolfor', 'infdoc1', 'infdoc2', 'infdoc3', 'infdoc4', 'valact', 'valanu', 'fecini', 'refdoc', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Tipdoc' => 0, 'Nomtab' => 1, 'Vidutil' => 2, 'Clvprm' => 3, 'Clvfrn' => 4, 'Mondoc' => 5, 'Fecdoc' => 6, 'Desdoc' => 7, 'Stadoc' => 8, 'Infdoc1' => 9, 'Infdoc2' => 10, 'Infdoc3' => 11, 'Infdoc4' => 12, 'Valact' => 13, 'Valanu' => 14, 'Fecini' => 15, 'Id' => 16, ),
-		BasePeer::TYPE_COLNAME => array (DftabtipPeer::TIPDOC => 0, DftabtipPeer::NOMTAB => 1, DftabtipPeer::VIDUTIL => 2, DftabtipPeer::CLVPRM => 3, DftabtipPeer::CLVFRN => 4, DftabtipPeer::MONDOC => 5, DftabtipPeer::FECDOC => 6, DftabtipPeer::DESDOC => 7, DftabtipPeer::STADOC => 8, DftabtipPeer::INFDOC1 => 9, DftabtipPeer::INFDOC2 => 10, DftabtipPeer::INFDOC3 => 11, DftabtipPeer::INFDOC4 => 12, DftabtipPeer::VALACT => 13, DftabtipPeer::VALANU => 14, DftabtipPeer::FECINI => 15, DftabtipPeer::ID => 16, ),
-		BasePeer::TYPE_FIELDNAME => array ('tipdoc' => 0, 'nomtab' => 1, 'vidutil' => 2, 'clvprm' => 3, 'clvfrn' => 4, 'mondoc' => 5, 'fecdoc' => 6, 'desdoc' => 7, 'stadoc' => 8, 'infdoc1' => 9, 'infdoc2' => 10, 'infdoc3' => 11, 'infdoc4' => 12, 'valact' => 13, 'valanu' => 14, 'fecini' => 15, 'id' => 16, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, )
+		BasePeer::TYPE_PHPNAME => array ('Tipdoc' => 0, 'Nomtab' => 1, 'Vidutil' => 2, 'Clvprm' => 3, 'Clvfrn' => 4, 'Mondoc' => 5, 'Fecdoc' => 6, 'Desdoc' => 7, 'Stadoc' => 8, 'Nomtabfk' => 9, 'Nomcolloc' => 10, 'Nomcolfor' => 11, 'Infdoc1' => 12, 'Infdoc2' => 13, 'Infdoc3' => 14, 'Infdoc4' => 15, 'Valact' => 16, 'Valanu' => 17, 'Fecini' => 18, 'Refdoc' => 19, 'Id' => 20, ),
+		BasePeer::TYPE_COLNAME => array (DftabtipPeer::TIPDOC => 0, DftabtipPeer::NOMTAB => 1, DftabtipPeer::VIDUTIL => 2, DftabtipPeer::CLVPRM => 3, DftabtipPeer::CLVFRN => 4, DftabtipPeer::MONDOC => 5, DftabtipPeer::FECDOC => 6, DftabtipPeer::DESDOC => 7, DftabtipPeer::STADOC => 8, DftabtipPeer::NOMTABFK => 9, DftabtipPeer::NOMCOLLOC => 10, DftabtipPeer::NOMCOLFOR => 11, DftabtipPeer::INFDOC1 => 12, DftabtipPeer::INFDOC2 => 13, DftabtipPeer::INFDOC3 => 14, DftabtipPeer::INFDOC4 => 15, DftabtipPeer::VALACT => 16, DftabtipPeer::VALANU => 17, DftabtipPeer::FECINI => 18, DftabtipPeer::REFDOC => 19, DftabtipPeer::ID => 20, ),
+		BasePeer::TYPE_FIELDNAME => array ('tipdoc' => 0, 'nomtab' => 1, 'vidutil' => 2, 'clvprm' => 3, 'clvfrn' => 4, 'mondoc' => 5, 'fecdoc' => 6, 'desdoc' => 7, 'stadoc' => 8, 'nomtabfk' => 9, 'nomcolloc' => 10, 'nomcolfor' => 11, 'infdoc1' => 12, 'infdoc2' => 13, 'infdoc3' => 14, 'infdoc4' => 15, 'valact' => 16, 'valanu' => 17, 'fecini' => 18, 'refdoc' => 19, 'id' => 20, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, )
 	);
 
 	
@@ -159,6 +171,12 @@ abstract class BaseDftabtipPeer {
 
 		$criteria->addSelectColumn(DftabtipPeer::STADOC);
 
+		$criteria->addSelectColumn(DftabtipPeer::NOMTABFK);
+
+		$criteria->addSelectColumn(DftabtipPeer::NOMCOLLOC);
+
+		$criteria->addSelectColumn(DftabtipPeer::NOMCOLFOR);
+
 		$criteria->addSelectColumn(DftabtipPeer::INFDOC1);
 
 		$criteria->addSelectColumn(DftabtipPeer::INFDOC2);
@@ -172,6 +190,8 @@ abstract class BaseDftabtipPeer {
 		$criteria->addSelectColumn(DftabtipPeer::VALANU);
 
 		$criteria->addSelectColumn(DftabtipPeer::FECINI);
+
+		$criteria->addSelectColumn(DftabtipPeer::REFDOC);
 
 		$criteria->addSelectColumn(DftabtipPeer::ID);
 

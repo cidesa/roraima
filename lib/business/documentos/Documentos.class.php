@@ -257,6 +257,16 @@ class Documentos
         $stadoc = $tabtip->getStadoc();
         $stadoc = strtolower($stadoc);
 
+        // Tabla Foranea
+        $nomtabfk = $tabtip->getNomtabfk();
+        $nomtabfk = strtoupper($nomtabfk);
+
+        $nomcolloc = $tabtip->getNomcolloc();
+        $nomcolloc = strtolower($nomcolloc);
+
+        $nomcolfor = $tabtip->getNomcolfor();
+        $nomcolfor = strtolower($nomcolfor);
+
         $infdoc1 = $tabtip->getInfdoc1();
         $infdoc1 = strtolower($infdoc1);
 
@@ -269,8 +279,11 @@ class Documentos
         $infdoc4 = $tabtip->getInfdoc4();
         $infdoc4 = strtolower($infdoc4);
 
-        $sql = "SELECT rtrim($tabla.$coddoc) AS CODDOC, rtrim($tabla.$tipodoc) as TIPDOC , $tabla.$mondoc AS MONDOC, $tabla.$fecdoc AS FECDOC, rtrim($tabla.$desdoc) AS DESDOC, rtrim($tabla.$stadoc) as STADOC, ".($infdoc1!='' ? "$tabla.$infdoc1" : "''")." as INFDOC1, ".($infdoc2!='' ? "$tabla.$infdoc2" : "''")." as INFDOC2, ".($infdoc3!='' ? "$tabla.$infdoc3" : "''")." as INFDOC3, ".($infdoc4!='' ? "$tabla.$infdoc4" : "''")." as INFDOC4
-            FROM $tabla left OUTER JOIN DFATENDOC ON
+        $refdoc = $tabtip->getRefdoc();
+        $refdoc = strtolower($refdoc);
+
+        $sql = "SELECT rtrim($tabla.$coddoc) AS CODDOC, rtrim($tabla.$tipodoc) as TIPDOC , $tabla.$mondoc AS MONDOC, $tabla.$fecdoc AS FECDOC, rtrim($tabla.$desdoc) AS DESDOC, rtrim($tabla.$stadoc) as STADOC, ".($nomtabfk!='' ? ($infdoc1!='' ? "$nomtabfk.$infdoc1" : "''") : "''")." as INFDOC1, ".($nomtabfk!='' ? ($infdoc2!='' ? "$nomtabfk.$infdoc2" : "''") : "''")." as INFDOC2, ".($nomtabfk!='' ? ($infdoc3!='' ? "$nomtabfk.$infdoc3" : "''") : "''")." as INFDOC3, ".($nomtabfk!='' ? ($infdoc4!='' ? "$nomtabfk.$infdoc4" : "''") : "''")." as INFDOC4, ".($refdoc!='' ? "$tabla.$refdoc" : "''")." as REFDOC
+            FROM  ".(($nomtabfk!='') ? "($tabla INNER JOIN $nomtabfk ON $tabla.$nomcolloc = $nomtabfk.$nomcolfor)" : "$tabla")." left OUTER JOIN DFATENDOC ON
             rtrim($tabla.$coddoc) = DFATENDOC.coddoc
             where (DFATENDOC.coddoc is NULL) AND rtrim($tabla.$tipodoc) = '$nomdoc' AND $tabla.$fecdoc > '".$tabtip->getFecini()."' AND $tabla.$stadoc = '".$tabtip->getValact()."'";
 //print $sql;exit;
@@ -290,6 +303,7 @@ class Documentos
               $dfatendoc->setInfdoc2(substr(trim($reg['infdoc2']),0,50));
               $dfatendoc->setInfdoc3(substr(trim($reg['infdoc3']),0,50));
               $dfatendoc->setInfdoc4(substr(trim($reg['infdoc4']),0,50));
+              $dfatendoc->setRefdoc(substr(trim($reg['refdoc']),0,50));
               $dfatendoc->save();
 
               $c = new Criteria();
@@ -337,6 +351,11 @@ class Documentos
             }
           }
         }
+
+        // Actualizar nroexp en base a la referencia
+        $sql = "update dfatendoc a set nroexp = (select nroexp from dfatendoc b where a.refdoc=b.coddoc ) where refdoc in (select coddoc from dfatendoc)";
+        Herramientas::BuscarDatos($sql, &$regs);
+
       }
       return true;
     }else return false;
@@ -591,6 +610,52 @@ class Documentos
 
     }
 
+  }
+
+  public static function validarDocrutv2($dftabtip, $grid)
+  {
+    if(!$dftabtip->getId()) if($dftabtip->getTipdoc()=='') return 1404;
+
+    if($dftabtip->getId()) $tabtip = DftabtipPeer::retrieveByPK($dftabtip->getId());
+    else $tabtip = DftabtipPeer::retrieveByPK($dftabtip->getTipdoc());
+
+    if(!$dftabtip->getId()){
+      if($tabtip){
+        $c = new Criteria();
+        $c->add(DfrutadocPeer::ID_DFTABTIP,$tabtip->getId());
+        $rutadoc = DfrutadocPeer::doSelectOne($c);
+        if($rutadoc) return 1405;
+      }else return 1404;
+    }
+
+    $grid = $grid[0];
+
+    if(count($grid)>0){
+      foreach($grid as $g){
+        if($g->getIdAcunidad()=='' || $g->getDesrut()=='' || $g->getDiadoc()=='' || $g->getDesuni()=='' || $g->getRutdoc()=='') return 1403;
+      }
+    }else return 1406;
+    
+    return -1;
+
+  }
+
+  public static function salvarDocrutv2($dftabtip, $grid)
+  {
+    $grid = $grid[0];
+
+    if($dftabtip->getId()) $tabtip = DftabtipPeer::retrieveByPK($dftabtip->getId());
+    else $tabtip = DftabtipPeer::retrieveByPK($dftabtip->getTipdoc());
+
+    try{
+      foreach($grid as $dfrutadoc){
+        $dfrutadoc->setIdDftabtip($tabtip->getId());
+        $dfrutadoc->save();
+      }
+      return -1;
+    }catch(Exception $ex){
+      return 0;
+    }
   }
 
 

@@ -45,6 +45,18 @@ abstract class BaseDftabtip extends BaseObject  implements Persistent {
 
 
 	
+	protected $nomtabfk;
+
+
+	
+	protected $nomcolloc;
+
+
+	
+	protected $nomcolfor;
+
+
+	
 	protected $infdoc1;
 
 
@@ -70,6 +82,10 @@ abstract class BaseDftabtip extends BaseObject  implements Persistent {
 
 	
 	protected $fecini;
+
+
+	
+	protected $refdoc;
 
 
 	
@@ -157,6 +173,27 @@ abstract class BaseDftabtip extends BaseObject  implements Persistent {
 
   }
   
+  public function getNomtabfk()
+  {
+
+    return trim($this->nomtabfk);
+
+  }
+  
+  public function getNomcolloc()
+  {
+
+    return trim($this->nomcolloc);
+
+  }
+  
+  public function getNomcolfor()
+  {
+
+    return trim($this->nomcolfor);
+
+  }
+  
   public function getInfdoc1()
   {
 
@@ -220,6 +257,13 @@ abstract class BaseDftabtip extends BaseObject  implements Persistent {
     }
   }
 
+  
+  public function getRefdoc()
+  {
+
+    return trim($this->refdoc);
+
+  }
   
   public function getId()
   {
@@ -318,6 +362,36 @@ abstract class BaseDftabtip extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setNomtabfk($v)
+	{
+
+    if ($this->nomtabfk !== $v) {
+        $this->nomtabfk = $v;
+        $this->modifiedColumns[] = DftabtipPeer::NOMTABFK;
+      }
+  
+	} 
+	
+	public function setNomcolloc($v)
+	{
+
+    if ($this->nomcolloc !== $v) {
+        $this->nomcolloc = $v;
+        $this->modifiedColumns[] = DftabtipPeer::NOMCOLLOC;
+      }
+  
+	} 
+	
+	public function setNomcolfor($v)
+	{
+
+    if ($this->nomcolfor !== $v) {
+        $this->nomcolfor = $v;
+        $this->modifiedColumns[] = DftabtipPeer::NOMCOLFOR;
+      }
+  
+	} 
+	
 	public function setInfdoc1($v)
 	{
 
@@ -381,6 +455,11 @@ abstract class BaseDftabtip extends BaseObject  implements Persistent {
 	public function setFecini($v)
 	{
 
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecini] from input: " . var_export($v, true));
@@ -393,6 +472,16 @@ abstract class BaseDftabtip extends BaseObject  implements Persistent {
       $this->modifiedColumns[] = DftabtipPeer::FECINI;
     }
 
+	} 
+	
+	public function setRefdoc($v)
+	{
+
+    if ($this->refdoc !== $v) {
+        $this->refdoc = $v;
+        $this->modifiedColumns[] = DftabtipPeer::REFDOC;
+      }
+  
 	} 
 	
 	public function setId($v)
@@ -427,21 +516,29 @@ abstract class BaseDftabtip extends BaseObject  implements Persistent {
 
       $this->stadoc = $rs->getString($startcol + 8);
 
-      $this->infdoc1 = $rs->getString($startcol + 9);
+      $this->nomtabfk = $rs->getString($startcol + 9);
 
-      $this->infdoc2 = $rs->getString($startcol + 10);
+      $this->nomcolloc = $rs->getString($startcol + 10);
 
-      $this->infdoc3 = $rs->getString($startcol + 11);
+      $this->nomcolfor = $rs->getString($startcol + 11);
 
-      $this->infdoc4 = $rs->getString($startcol + 12);
+      $this->infdoc1 = $rs->getString($startcol + 12);
 
-      $this->valact = $rs->getString($startcol + 13);
+      $this->infdoc2 = $rs->getString($startcol + 13);
 
-      $this->valanu = $rs->getString($startcol + 14);
+      $this->infdoc3 = $rs->getString($startcol + 14);
 
-      $this->fecini = $rs->getDate($startcol + 15, null);
+      $this->infdoc4 = $rs->getString($startcol + 15);
 
-      $this->id = $rs->getInt($startcol + 16);
+      $this->valact = $rs->getString($startcol + 16);
+
+      $this->valanu = $rs->getString($startcol + 17);
+
+      $this->fecini = $rs->getDate($startcol + 18, null);
+
+      $this->refdoc = $rs->getString($startcol + 19);
+
+      $this->id = $rs->getInt($startcol + 20);
 
       $this->resetModified();
 
@@ -449,7 +546,7 @@ abstract class BaseDftabtip extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 17; 
+            return $startcol + 21; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Dftabtip object", $e);
     }
@@ -656,27 +753,39 @@ abstract class BaseDftabtip extends BaseObject  implements Persistent {
 				return $this->getStadoc();
 				break;
 			case 9:
-				return $this->getInfdoc1();
+				return $this->getNomtabfk();
 				break;
 			case 10:
-				return $this->getInfdoc2();
+				return $this->getNomcolloc();
 				break;
 			case 11:
-				return $this->getInfdoc3();
+				return $this->getNomcolfor();
 				break;
 			case 12:
-				return $this->getInfdoc4();
+				return $this->getInfdoc1();
 				break;
 			case 13:
-				return $this->getValact();
+				return $this->getInfdoc2();
 				break;
 			case 14:
-				return $this->getValanu();
+				return $this->getInfdoc3();
 				break;
 			case 15:
-				return $this->getFecini();
+				return $this->getInfdoc4();
 				break;
 			case 16:
+				return $this->getValact();
+				break;
+			case 17:
+				return $this->getValanu();
+				break;
+			case 18:
+				return $this->getFecini();
+				break;
+			case 19:
+				return $this->getRefdoc();
+				break;
+			case 20:
 				return $this->getId();
 				break;
 			default:
@@ -698,14 +807,18 @@ abstract class BaseDftabtip extends BaseObject  implements Persistent {
 			$keys[6] => $this->getFecdoc(),
 			$keys[7] => $this->getDesdoc(),
 			$keys[8] => $this->getStadoc(),
-			$keys[9] => $this->getInfdoc1(),
-			$keys[10] => $this->getInfdoc2(),
-			$keys[11] => $this->getInfdoc3(),
-			$keys[12] => $this->getInfdoc4(),
-			$keys[13] => $this->getValact(),
-			$keys[14] => $this->getValanu(),
-			$keys[15] => $this->getFecini(),
-			$keys[16] => $this->getId(),
+			$keys[9] => $this->getNomtabfk(),
+			$keys[10] => $this->getNomcolloc(),
+			$keys[11] => $this->getNomcolfor(),
+			$keys[12] => $this->getInfdoc1(),
+			$keys[13] => $this->getInfdoc2(),
+			$keys[14] => $this->getInfdoc3(),
+			$keys[15] => $this->getInfdoc4(),
+			$keys[16] => $this->getValact(),
+			$keys[17] => $this->getValanu(),
+			$keys[18] => $this->getFecini(),
+			$keys[19] => $this->getRefdoc(),
+			$keys[20] => $this->getId(),
 		);
 		return $result;
 	}
@@ -749,27 +862,39 @@ abstract class BaseDftabtip extends BaseObject  implements Persistent {
 				$this->setStadoc($value);
 				break;
 			case 9:
-				$this->setInfdoc1($value);
+				$this->setNomtabfk($value);
 				break;
 			case 10:
-				$this->setInfdoc2($value);
+				$this->setNomcolloc($value);
 				break;
 			case 11:
-				$this->setInfdoc3($value);
+				$this->setNomcolfor($value);
 				break;
 			case 12:
-				$this->setInfdoc4($value);
+				$this->setInfdoc1($value);
 				break;
 			case 13:
-				$this->setValact($value);
+				$this->setInfdoc2($value);
 				break;
 			case 14:
-				$this->setValanu($value);
+				$this->setInfdoc3($value);
 				break;
 			case 15:
-				$this->setFecini($value);
+				$this->setInfdoc4($value);
 				break;
 			case 16:
+				$this->setValact($value);
+				break;
+			case 17:
+				$this->setValanu($value);
+				break;
+			case 18:
+				$this->setFecini($value);
+				break;
+			case 19:
+				$this->setRefdoc($value);
+				break;
+			case 20:
 				$this->setId($value);
 				break;
 		} 	}
@@ -788,14 +913,18 @@ abstract class BaseDftabtip extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[6], $arr)) $this->setFecdoc($arr[$keys[6]]);
 		if (array_key_exists($keys[7], $arr)) $this->setDesdoc($arr[$keys[7]]);
 		if (array_key_exists($keys[8], $arr)) $this->setStadoc($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setInfdoc1($arr[$keys[9]]);
-		if (array_key_exists($keys[10], $arr)) $this->setInfdoc2($arr[$keys[10]]);
-		if (array_key_exists($keys[11], $arr)) $this->setInfdoc3($arr[$keys[11]]);
-		if (array_key_exists($keys[12], $arr)) $this->setInfdoc4($arr[$keys[12]]);
-		if (array_key_exists($keys[13], $arr)) $this->setValact($arr[$keys[13]]);
-		if (array_key_exists($keys[14], $arr)) $this->setValanu($arr[$keys[14]]);
-		if (array_key_exists($keys[15], $arr)) $this->setFecini($arr[$keys[15]]);
-		if (array_key_exists($keys[16], $arr)) $this->setId($arr[$keys[16]]);
+		if (array_key_exists($keys[9], $arr)) $this->setNomtabfk($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setNomcolloc($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setNomcolfor($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setInfdoc1($arr[$keys[12]]);
+		if (array_key_exists($keys[13], $arr)) $this->setInfdoc2($arr[$keys[13]]);
+		if (array_key_exists($keys[14], $arr)) $this->setInfdoc3($arr[$keys[14]]);
+		if (array_key_exists($keys[15], $arr)) $this->setInfdoc4($arr[$keys[15]]);
+		if (array_key_exists($keys[16], $arr)) $this->setValact($arr[$keys[16]]);
+		if (array_key_exists($keys[17], $arr)) $this->setValanu($arr[$keys[17]]);
+		if (array_key_exists($keys[18], $arr)) $this->setFecini($arr[$keys[18]]);
+		if (array_key_exists($keys[19], $arr)) $this->setRefdoc($arr[$keys[19]]);
+		if (array_key_exists($keys[20], $arr)) $this->setId($arr[$keys[20]]);
 	}
 
 	
@@ -812,6 +941,9 @@ abstract class BaseDftabtip extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(DftabtipPeer::FECDOC)) $criteria->add(DftabtipPeer::FECDOC, $this->fecdoc);
 		if ($this->isColumnModified(DftabtipPeer::DESDOC)) $criteria->add(DftabtipPeer::DESDOC, $this->desdoc);
 		if ($this->isColumnModified(DftabtipPeer::STADOC)) $criteria->add(DftabtipPeer::STADOC, $this->stadoc);
+		if ($this->isColumnModified(DftabtipPeer::NOMTABFK)) $criteria->add(DftabtipPeer::NOMTABFK, $this->nomtabfk);
+		if ($this->isColumnModified(DftabtipPeer::NOMCOLLOC)) $criteria->add(DftabtipPeer::NOMCOLLOC, $this->nomcolloc);
+		if ($this->isColumnModified(DftabtipPeer::NOMCOLFOR)) $criteria->add(DftabtipPeer::NOMCOLFOR, $this->nomcolfor);
 		if ($this->isColumnModified(DftabtipPeer::INFDOC1)) $criteria->add(DftabtipPeer::INFDOC1, $this->infdoc1);
 		if ($this->isColumnModified(DftabtipPeer::INFDOC2)) $criteria->add(DftabtipPeer::INFDOC2, $this->infdoc2);
 		if ($this->isColumnModified(DftabtipPeer::INFDOC3)) $criteria->add(DftabtipPeer::INFDOC3, $this->infdoc3);
@@ -819,6 +951,7 @@ abstract class BaseDftabtip extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(DftabtipPeer::VALACT)) $criteria->add(DftabtipPeer::VALACT, $this->valact);
 		if ($this->isColumnModified(DftabtipPeer::VALANU)) $criteria->add(DftabtipPeer::VALANU, $this->valanu);
 		if ($this->isColumnModified(DftabtipPeer::FECINI)) $criteria->add(DftabtipPeer::FECINI, $this->fecini);
+		if ($this->isColumnModified(DftabtipPeer::REFDOC)) $criteria->add(DftabtipPeer::REFDOC, $this->refdoc);
 		if ($this->isColumnModified(DftabtipPeer::ID)) $criteria->add(DftabtipPeer::ID, $this->id);
 
 		return $criteria;
@@ -868,6 +1001,12 @@ abstract class BaseDftabtip extends BaseObject  implements Persistent {
 
 		$copyObj->setStadoc($this->stadoc);
 
+		$copyObj->setNomtabfk($this->nomtabfk);
+
+		$copyObj->setNomcolloc($this->nomcolloc);
+
+		$copyObj->setNomcolfor($this->nomcolfor);
+
 		$copyObj->setInfdoc1($this->infdoc1);
 
 		$copyObj->setInfdoc2($this->infdoc2);
@@ -881,6 +1020,8 @@ abstract class BaseDftabtip extends BaseObject  implements Persistent {
 		$copyObj->setValanu($this->valanu);
 
 		$copyObj->setFecini($this->fecini);
+
+		$copyObj->setRefdoc($this->refdoc);
 
 
 		if ($deepCopy) {

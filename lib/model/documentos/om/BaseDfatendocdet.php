@@ -110,7 +110,7 @@ abstract class BaseDfatendocdet extends BaseObject  implements Persistent {
     if ($this->fecrec === null || $this->fecrec === '') {
       return null;
     } elseif (!is_int($this->fecrec)) {
-            $ts = adodb_strtotime($this->fecrec);
+            $ts = strtotime($this->fecrec);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecrec] as date/time value: " . var_export($this->fecrec, true));
       }
     } else {
@@ -119,9 +119,9 @@ abstract class BaseDfatendocdet extends BaseObject  implements Persistent {
     if ($format === null) {
       return $ts;
     } elseif (strpos($format, '%') !== false) {
-      return adodb_strftime($format, $ts);
+      return strftime($format, $ts);
     } else {
-      return @adodb_date($format, $ts);
+      return date($format, $ts);
     }
   }
 
@@ -132,7 +132,7 @@ abstract class BaseDfatendocdet extends BaseObject  implements Persistent {
     if ($this->fecate === null || $this->fecate === '') {
       return null;
     } elseif (!is_int($this->fecate)) {
-            $ts = adodb_strtotime($this->fecate);
+            $ts = strtotime($this->fecate);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecate] as date/time value: " . var_export($this->fecate, true));
       }
     } else {
@@ -141,9 +141,9 @@ abstract class BaseDfatendocdet extends BaseObject  implements Persistent {
     if ($format === null) {
       return $ts;
     } elseif (strpos($format, '%') !== false) {
-      return adodb_strftime($format, $ts);
+      return strftime($format, $ts);
     } else {
-      return @adodb_date($format, $ts);
+      return date($format, $ts);
     }
   }
 
@@ -234,8 +234,13 @@ abstract class BaseDfatendocdet extends BaseObject  implements Persistent {
 	public function setFecrec($v)
 	{
 
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
     if ($v !== null && !is_int($v)) {
-      $ts = adodb_strtotime($v);
+      $ts = strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecrec] from input: " . var_export($v, true));
       }
     } else {
@@ -251,8 +256,13 @@ abstract class BaseDfatendocdet extends BaseObject  implements Persistent {
 	public function setFecate($v)
 	{
 
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
     if ($v !== null && !is_int($v)) {
-      $ts = adodb_strtotime($v);
+      $ts = strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecate] from input: " . var_export($v, true));
       }
     } else {
@@ -558,12 +568,6 @@ abstract class BaseDfatendocdet extends BaseObject  implements Persistent {
 			if ($this->aDfatendoc !== null) {
 				if (!$this->aDfatendoc->validate($columns)) {
 					$failureMap = array_merge($failureMap, $this->aDfatendoc->getValidationFailures());
-				}
-			}
-
-			if ($this->aTableError !== null) {
-				if (!$this->aTableError->validate($columns)) {
-					$failureMap = array_merge($failureMap, $this->aTableError->getValidationFailures());
 				}
 			}
 

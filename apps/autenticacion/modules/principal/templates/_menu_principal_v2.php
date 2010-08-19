@@ -209,7 +209,7 @@ dojo.require("dojo.widget.TreeContextMenu");
 
 ?>
 
-<?php echo javascript_tag("ancho=screen.availWidth; alto=screen.availHeight; nombre = ''; params = 'dependent=1,toolbar=0,directories=0,status=0,menubar=0,scrollbars=1,resizable=1,width=ancho,height=alto';") ?>
+<?php echo javascript_tag("ancho=screen.availWidth; alto=screen.availHeight; nombre = ''; params = 'width='+ancho+',height='+alto+',dependent=1,toolbar=0,directories=0,status=0,menubar=0,scrollbars=1,resizable=1';") ?>
 
 
 <div name="contenedor">

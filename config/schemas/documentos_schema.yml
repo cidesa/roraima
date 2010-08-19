@@ -6,6 +6,10 @@ propel:
       size: 100
     id:
   dfatendoc:
+    nroexp:
+      type: INTEGER
+      required: true
+      autoIncrement: true
     coddoc:
       type: VARCHAR
       size: 30
@@ -42,6 +46,9 @@ propel:
       type: VARCHAR
       size: 100
     infdoc4:
+      type: VARCHAR
+      size: 100
+    refdoc:
       type: VARCHAR
       size: 100
     id:
@@ -161,6 +168,15 @@ propel:
     stadoc:
       type: VARCHAR
       size: 20
+    nomtabfk:
+      type: VARCHAR
+      size: 30
+    nomcolloc:
+      type: VARCHAR
+      size: 30
+    nomcolfor:
+      type: VARCHAR
+      size: 30
     infdoc1:
       type: VARCHAR
       size: 100
@@ -181,6 +197,9 @@ propel:
       size: 1
     fecini:
       type: DATE
+    refdoc:
+      type: VARCHAR
+      size: 100
     id:
   dfdiafer:
     diafer:
