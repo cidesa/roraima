@@ -133,7 +133,7 @@
 <?php endif; ?>
 
  <?php $value = object_input_tag($tsmovban, array('getMonmov',true), array (
-'size' => 7,
+'size' => 20,
 'onBlur' => "javascript:event.keyCode=13;return entermontootro(event, this.id)",
 'control_name' => 'tsmovban[monmov]',
 )); echo $value ? $value : '&nbsp;' ?></div>
