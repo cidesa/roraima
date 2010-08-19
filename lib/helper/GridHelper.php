@@ -1123,7 +1123,7 @@ function grid_tag_v2($obj,$objelim = array())
              break;
            case 'c':  //Combo
              $tagw = '     <td class="grid_fila g_'.$name.'_c '.$name.'c'.$j.'" >';
-             $tagw .= select_tag($name.'x_'.$i.'_'.$jmasuno, options_for_select( (is_array($combo[$j]) && $combo[$j]!='') ? $combo[$j] : eval($combo[$j]) ,$get,'include_custom=Seleccione...'), 'name="grid'.$name.'['.$i.']['.$j.']" style="border:none" onBlur=" '.$blur.' '.$js[$j].' " '.$taghtml.' '.$js[$j].' '.$blur);
+             $tagw .= select_tag($name.'x_'.$i.'_'.$jmasuno, options_for_select( (is_array($combo[$j]) && $combo[$j]!='') ? $combo[$j] : call_user_func(array(ucfirst($tabla).'Peer',$combo[$j])) ,$get,'include_custom=Seleccione...'), 'name="grid'.$name.'['.$i.']['.$j.']" style="border:none" onBlur=" '.$blur.' '.$js[$j].' " '.$taghtml.' '.$js[$j].' '.$blur);
              $tagw .= $catobj.$btnobj.$tagId.'</td>';
              break;
            case 'k':   //check
