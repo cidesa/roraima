@@ -2062,3 +2062,95 @@ END;
 $BODY$
   LANGUAGE 'plpgsql' VOLATILE;
 ALTER FUNCTION porcentaje_hcm(codemp "varchar",nomina "varchar") OWNER TO postgres;
+
+--FUNCIONES NUEVAS GENERADAS POR OSWALDO PARA EL USO D LA FUNCION NLDEFVAC de NOMINA
+
+--tabla de dias
+CREATE TABLE npdias (
+  dia VARCHAR(2)
+) WITH OIDS;
+--la llenamos
+insert into npdias values ('01');
+insert into npdias values ('02');
+insert into npdias values ('03');
+insert into npdias values ('04');
+insert into npdias values ('05');
+insert into npdias values ('06');
+insert into npdias values ('07');
+insert into npdias values ('08');
+insert into npdias values ('09');
+insert into npdias values ('10');
+insert into npdias values ('11');
+insert into npdias values ('12');
+insert into npdias values ('13');
+insert into npdias values ('14');
+insert into npdias values ('15');
+insert into npdias values ('16');
+insert into npdias values ('17');
+insert into npdias values ('18');
+insert into npdias values ('19');
+insert into npdias values ('20');
+insert into npdias values ('21');
+insert into npdias values ('22');
+insert into npdias values ('23');
+insert into npdias values ('24');
+insert into npdias values ('25');
+insert into npdias values ('26');
+insert into npdias values ('27');
+insert into npdias values ('28');
+insert into npdias values ('29');
+insert into npdias values ('30');
+insert into npdias values ('31');
+
+--vista con todas las fecha del año en curso
+--util para conteo de intervalos y como cursor de dias
+create or replace view npfechas as
+select  to_date(dia||'/'||pereje||'/'||to_char(fecini,'yyyy') ,'dd/mm/yyyy')  as fecha, dia,pereje as mes,to_char(fecini,'yyyy')  as ano from npdias a, contaba1 b where  to_number(dia,'99')<=to_number(to_char(fechas,'dd'),'99') order by pereje,dia;
+
+--funcion para obtener el dia de la semana
+CREATE OR REPLACE FUNCTION nomsemana (date Date) RETURNS Character Varying(15) AS $$
+DECLARE
+	DAY_OF_WEEK_CONST Character Varying(15) := 'dow';
+
+	dayOfWeek Integer := 0;
+	dayName Character Varying(15) := 'Test';
+BEGIN
+
+	dayOfWeek := date_part(DAY_OF_WEEK_CONST, Date);
+
+	IF dayOfWeek = 0 THEN
+		dayName := 'domingo';
+	ELSEIF dayOfWeek = 1 THEN
+		dayName := 'lunes';
+	ELSEIF dayOfWeek = 2 THEN
+		dayName := 'martes';
+	ELSEIF dayOfWeek = 3 THEN
+		dayName := 'miercoles';
+	ELSEIF dayOfWeek = 4 THEN
+		dayName := 'jueves';
+	ELSEIF dayOfWeek = 5 THEN
+		dayName := 'viernes';
+	ELSEIF dayOfWeek = 6 THEN
+		dayName := 'sabado';
+	END IF;
+	RETURN dayName;
+END;
+$$ LANGUAGE plpgsql;
+
+
+--cuenta la cantidad de lunes (o cualquier otro dia ) en un rango de fechas, lamentablemente por mi pereza solo toma --las fechas del año en curso, se pudiese buscar modificar la vista npfechas haciendo un join con npanos
+
+CREATE OR REPLACE FUNCTION numsemanas(fecini date, fecfin date, diasem varchar)
+  RETURNS numeric AS $BODY$Declare
+dias numeric(3);
+BEGIN
+	select  count(dia)  into dias from npfechas where fecha>=fecini  and  fecha<=fecfin  and nomsemana(fecha)=diasem;
+
+	RETURN dias;
+END
+$BODY$
+  LANGUAGE 'plpgsql' VOLATILE;
+
+ALTER FUNCTION numsemanas(fecini date, fecfin date, diasem varchar)  owner to postgres;
+
+--FIN FUNCIONES CREADAS POR OSWALDO
