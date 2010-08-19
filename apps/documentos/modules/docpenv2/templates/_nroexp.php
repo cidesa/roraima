@@ -1,3 +1,4 @@
 
-  <?php echo input_tag('dfatendoc[nroexp]',$dfatendoc->getNroexp(),'size=6 style="font-size:18px;"'); ?>
+  <?php echo label_for('dfatendoc[nroexp]',$dfatendoc->getNroexp(),'style="font-size:18px;"'); ?>
+<br>
 

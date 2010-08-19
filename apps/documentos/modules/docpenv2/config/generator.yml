@@ -16,8 +16,8 @@ generator:
       fecdoc:         { name : Fecha del Documento, params: readonly=true, params: size=10 }
       id_dftabtip:    { name : Tipo Documento, params: disabled=true }
       desate:         { name : Descripción de la Atención }
-      infdoc1:        { name : Inf. Adicional 1, params: size=40 }
-      infdoc2:        { name : Inf. Adicional 2, params: size=40 }
+      infdoc1:        { name : Ced. / Rif / Inf.Adic.1, params: size=40 }
+      infdoc2:        { name : Beneficiario / Inf.Adic.2, params: size=40 }
       infdoc3:        { name : Inf. Adicional 3, params: size=40 }
       infdoc4:        { name : Inf. Adicional 4, params: size=40 }
       mondoc:         { name : Monto, params: size=10 }
@@ -28,8 +28,8 @@ generator:
       dfatendocdet:   { name: . }
     list:
       title:          Revisión de Documentos
-      display:        [=nroexp, =coddoc, desdoc, _fecdoc, staate, anuate, estado, infdoc1 ]
-      filters:      [nroexp, coddoc, desdoc, _staate ]
+      display:        [=nroexp, =coddoc, desdoc, _fecdoc, staate, anuate, estado, infdoc1, infdoc2 ]
+      filters:      [nroexp, coddoc, desdoc, _staate, infdoc1, infdoc2 ]
       fields:
         desdoc:         { name : Descripción, params: size=15 }
       max_per_page:    10
