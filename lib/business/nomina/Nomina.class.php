@@ -2589,9 +2589,18 @@ class Nomina {
             $fecnomdes=$res[0]['ultfec'];
         }
         #QUERY HECHO POR OSWALDO SE COPIO Y SE PEGO
-        $criterio = "select (case when a.fechas<c.profec then a.fechas else c.profec end)-(case when a.fecdes>c.ultfec then a.fecdes else c.ultfec end) +(case when a.fecdes<c.profec and a.fecdes>c.ultfec and a.fecdes>a.fecsalnom then a.fecdes-a.fecsalnom-1 else 0 end)+ (case when to_char(last_day(c.profec),'dd')='31' and last_day(c.profec)=c.profec  then 0 else 1 end) as dias from npvacsalidas a,npasicaremp b, npnomina c where a.codemp=b.codemp and b.status='V' and c.codnom=b.codnom and ((C.ULTFEC BETWEEN A.FECDES AND A.FECHAS) OR (C.PROFEC BETWEEN A.FECDES AND A.FECHAS)) AND a.codemp='$empleado'";
-        //print $criterio;exit;
-
+        $criterio = "select FECDES,FECHAS,ULTFEC,
+                    (case when a.fechas<c.profec then a.fechas else c.profec end)- --dia inicio
+                    (case when a.fecdes>c.ultfec then a.fecdes else c.ultfec end)-- dia final
+                    + (case when to_char(last_day(c.profec),'dd')='31' and last_day(c.profec)=c.profec  then 0 else 1 end)
+                       as Dias -- si la nomina es la ultima del mes y ese mes tiene 31 dias no le sumo el ultimo dia, deberia hacerse algo similar para febrero  que sume 2 o 3 segun sea el caso
+                    from npvacsalidas a,npasicaremp b, npnomina c
+                    where
+                    a.codemp=b.codemp and
+                    b.status='V' and
+                    c.codnom=b.codnom and
+                    ((C.ULTFEC BETWEEN A.FECDES AND A.FECHAS) OR (C.PROFEC BETWEEN A.FECDES AND A.FECHAS)) AND -- ASI SOLO ME TRAIGO LOS LAPSOS QUE AFECTAN LA NOMINA QUE ESTOY CALCULANDO (Y NO ME TRAIGO VACACIONES VIEJAS)
+                    a.codemp='$empleado' -- ESTE SERIA MI UNICO PARAMETRO";
         if (Herramientas :: BuscarDatos($criterio, & $result))
         {
            $valor = $result[0]['dias'];
@@ -3008,10 +3017,23 @@ class Nomina {
         break;
       case "DIFDIASAL" :
         $valor = 0;
-        $sql = "select fecdes-fecsalnom as diadif from npvacsalidas a where codemp='$empleado' and fecdes>fecsalnom and fecsalnom=to_date('$fecnom','yyyy-mm-dd')  order by fecvac desc";
+        $sql = "select fecsalnom-to_date('$fecnom','yyyy-mm-dd') as diadif from npvacsalidas a where codemp='$empleado' and fecsalnom>to_date('$fecnom','yyyy-mm-dd')  order by fecvac desc";
         if (Herramientas :: BuscarDatos($sql, & $res))
         {
             $valor = $res[0]['diadif'];
+        }
+
+        return $valor;
+      case "NLDIFVAC" :
+        $valor = 0;
+        $sql = "select coalesce(sum((case when fecsalnom=profec and fecdes>fecsalnom then numsemanas(profec,fecdes,'lunes') when (fecsalnom<b.profec and c.fecdes>=ultfec and c.fecdes<=profec) then numsemanas(fecdes,profec,'lunes')*-1 end)),0) cuantas from npasicaremp a, npnomina b,npvacsalidas c where
+                a.codnom=b.codnom
+                and a.codemp=c.codemp
+                and a.codemp='$empleado'
+                and (fecsalnom=b.profec or (fecsalnom<b.profec and c.fecdes>=ultfec and c.fecdes<=profec))";
+        if (Herramientas :: BuscarDatos($sql, & $res))
+        {
+            $valor = $res[0]['cuantas'];
         }
 
         return $valor;
@@ -4913,11 +4935,21 @@ class Nomina {
         {
             $fecnomdes=$res[0]['ultfec'];
         }
-       $criterio = "select (case when a.fechas<c.profec then a.fechas else c.profec end)- (case when a.fecdes>c.ultfec then a.fecdes else c.ultfec end) + (case when to_char(last_day(c.profec),'dd')='31' and last_day(c.profec)=c.profec  then 0 else 1 end) as Dias from npvacsalidas a,npasicaremp b, npnomina c  where a.codemp=b.codemp and b.status='V' and c.codnom=b.codnom and ((C.ULTFEC BETWEEN A.FECDES AND A.FECHAS) OR (C.PROFEC BETWEEN A.FECDES AND A.FECHAS)) AND a.codemp='$empleado'";
-       H::PrintR($grid); exit;
+       $criterio = "select FECDES,FECHAS,ULTFEC,
+                    (case when a.fechas<c.profec then a.fechas else c.profec end)- --dia inicio
+                    (case when a.fecdes>c.ultfec then a.fecdes else c.ultfec end)-- dia final
+                    + (case when to_char(last_day(c.profec),'dd')='31' and last_day(c.profec)=c.profec  then 0 else 1 end)
+                       as Dias -- si la nomina es la ultima del mes y ese mes tiene 31 dias no le sumo el ultimo dia, deberia hacerse algo similar para febrero  que sume 2 o 3 segun sea el caso
+                    from npvacsalidas a,npasicaremp b, npnomina c
+                    where
+                    a.codemp=b.codemp and
+                    b.status='V' and
+                    c.codnom=b.codnom and
+                    ((C.ULTFEC BETWEEN A.FECDES AND A.FECHAS) OR (C.PROFEC BETWEEN A.FECDES AND A.FECHAS)) AND -- ASI SOLO ME TRAIGO LOS LAPSOS QUE AFECTAN LA NOMINA QUE ESTOY CALCULANDO (Y NO ME TRAIGO VACACIONES VIEJAS)
+                    a.codemp='$empleado' -- ESTE SERIA MI UNICO PARAMETRO";
         if (Herramientas :: BuscarDatos($criterio, & $result))
         {
-           $valor = 9;//$result[0]['dias'];
+           $valor = $result[0]['dias'];
         }
         return $valor;
       case "NSVAC" :
@@ -5343,6 +5375,19 @@ class Nomina {
         if (Herramientas :: BuscarDatos($sql, & $res))
         {
             $valor = $res[0]['diadif'];
+        }
+
+        return $valor;
+      case "NLDIFVAC" :
+        $valor = 0;
+        $sql = "select coalesce(sum((case when fecsalnom=profec and fecdes>fecsalnom then numsemanas(profec,fecdes,'lunes') when (fecsalnom<b.profec and c.fecdes>=ultfec and c.fecdes<=profec) then numsemanas(fecdes,profec,'lunes')*-1 end)),0) cuantas from npasicaremp a, npnomina b,npvacsalidas c where
+                a.codnom=b.codnom
+                and a.codemp=c.codemp
+                and a.codemp='$empleado'
+                and (fecsalnom=b.profec or (fecsalnom<b.profec and c.fecdes>=ultfec and c.fecdes<=profec))";
+        if (Herramientas :: BuscarDatos($sql, & $res))
+        {
+            $valor = $res[0]['cuantas'];
         }
 
         return $valor;
