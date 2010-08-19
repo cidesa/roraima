@@ -1,0 +1,47 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Dftabtip
+    theme:            cidesaGenerator
+    fields:
+      tipdoc:     { name : Tipo de Documento }
+      nomtab:     { name : Tabla Asociada }
+      vidutil:    { name : Vida Útil }
+      clvprm:     { name : Clave Principal, help: Código del Documento }
+      clvfrn:     { name : Clave Tipo Documento, help: Tipo de Documento (Enlace con Presupuesto) }
+      mondoc:     { name : Monto, help: Monto del Documento }
+      fecdoc:     { name : Fecha, help: Fecha de Creación }
+      desdoc:     { name : Descripción, help: Descripción }
+      stadoc:     { name : Estado, help: Estado del Documento }
+      infdoc1:    { name : Inf. Adic 1, help: Información Adicional }
+      infdoc2:    { name : Inf. Adic 2 }
+      infdoc3:    { name : Inf. Adic 3 }
+      infdoc4:    { name : Inf. Adic 4 }
+      valact:     { name : Valor Estado Activo, params: size=3 }
+      valanu:     { name : Valor Estado Anulado, params: size=3 }
+      fecini:     { name : A partir de la Fecha }
+      nomtabfk:   { name : Tabla Foránea (Inf. Adicional) }
+      nomcolfor:  { name : Campo FK Tabla Foranea }
+      nomcolloc:  { name : Campo FK Tabla Local }
+      refdoc:     { name: Referencia del Documento }
+      combos:     { name: .}
+      infadic:    { name: .}
+    list:
+      title:          Administración de Tablas
+      display:        [=destipdoc, nomtab ]
+      filters:      [tipdoc, nomtab ]
+      max_per_page:    5
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+    edit:
+      title:          Edición de Tablas
+      display:
+        Documento:    [_tipdoc, _vidutil, _nomtab]
+        Campos: [_combos ]
+        Relacion: [ _nomtabfk, _nomcolfor, _nomcolloc ]
+        Inf. Adiconal: [ _infadic ]
+        Opciones Adicionales: [valact, valanu, fecini]
+      actions:
+        _list:        ~
+        _save:        ~

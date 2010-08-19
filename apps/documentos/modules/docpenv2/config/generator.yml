@@ -1,0 +1,58 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Dfatendoc
+    theme:            cidesaGenerator
+
+
+    fields:
+      nroexp:         { name : Expediente }
+      coddoc:         { name : Código }
+      desdoc:         { name : Descripción, type: textarea_tag, params: size=70x2 }
+      staate:         { name : Estado de Atención, params: size=20, type: plain }
+      anuate:         { name : Estado del Documento, type: plain }
+      estado:         { name : Estado }
+      elestado:       { name : Estado, type: plain }
+      fecdoc:         { name : Fecha del Documento, params: readonly=true, params: size=10 }
+      id_dftabtip:    { name : Tipo Documento, params: disabled=true }
+      desate:         { name : Descripción de la Atención }
+      infdoc1:        { name : Inf. Adicional 1, params: size=40 }
+      infdoc2:        { name : Inf. Adicional 2, params: size=40 }
+      infdoc3:        { name : Inf. Adicional 3, params: size=40 }
+      infdoc4:        { name : Inf. Adicional 4, params: size=40 }
+      mondoc:         { name : Monto, params: size=10 }
+#      destra:         { name : Descripción del medio de transporte }
+      desate:         { name : Descripción de la Atención/Observación, type: textarea_tag, params: size=70x2 }
+      diaent:         { name : Dias de Entregas }
+      dfmedtra:       { name : Medio de Transporte }
+      dfatendocdet:   { name: . }
+    list:
+      title:          Revisión de Documentos
+      display:        [=nroexp, =coddoc, desdoc, _fecdoc, staate, anuate, estado, infdoc1 ]
+      filters:      [nroexp, coddoc, desdoc, _staate ]
+      fields:
+        desdoc:         { name : Descripción, params: size=15 }
+      max_per_page:    10
+      object_actions:
+        _edit:        ~
+      actions:
+        ~
+
+    edit:
+      title:          Atención de Documentos
+      display:
+        Información del Documento: [_nroexp, id_dftabtip, coddoc, desdoc, fecdoc, mondoc, elestado, infdoc1, infdoc2, infdoc3, infdoc4 ]
+        Información de Atención: [staate, anuate, desate, _diaent, _dfmedtra ]
+        Detalle y Observaciones: [_dfatendocdet]
+      actions:
+        _list:        ~
+        _save:
+          name: Atender
+          params: confirm=¿Desea Atender el Documento?
+        observaciones:
+          name: Observaciones
+          action: observacion
+          params: confirm=¿Desea Guardar la Observación?
+        _delete:
+          name: Anular
+          #params: onclick=alert('Hola Mundo')
