@@ -15,7 +15,7 @@ EmailValidator:
     class: sfEmailValidator
     param:
         strict:       true
-        email_error:  Habitacion- La Dirección del Email es Inválida.
+        email_error:  La Dirección del Email es Inválida.
 
 
 
