@@ -118,7 +118,8 @@ $this->Bitacora('Guardo');
       		  $this->c->add(TsmovlibPeer::STACON,'N');
       		  $this->sql="numcue=('".$nrocta."') and to_date(to_char(FecLib,'mm/yyyy'),'mm/yyyy') <= to_date('".$fechacon."','mm/yyyy') and NumCue||RefLib||TipMov NOT IN (Select NumCue||RefBan||TipMov From TsMovBan Where NumCue= ('".$nrocta."'))";
             $this->c->add(TsmovlibPeer::NUMCUE,$this->sql,Criteria::CUSTOM);
-      		  $this->c->addAscendingOrderByColumn(' SUBSTR('.TsmovlibPeer::REFLIB.',4,4'.')');
+      		  //$this->c->addAscendingOrderByColumn(' SUBSTR('.TsmovlibPeer::REFLIB.',4,4'.')');
+                  $this->c->addAscendingOrderByColumn(TsmovlibPeer::REFLIB);
       		  $reg= TsmovlibPeer::doSelect($this->c);
       		  if (!$reg)
       		  {
@@ -132,7 +133,8 @@ $this->Bitacora('Guardo');
         		  $this->c->add(TsmovlibPeer::STACON,'N');
         		  $this->sql="numcue=trim('".$nrocta."') and NumCue||RefLib||TipMov NOT IN (Select NumCue||RefBan||TipMov From TsMovBan Where NumCue= trim('".$nrocta."'))";
                   $this->c->add(TsmovlibPeer::NUMCUE,$this->sql,Criteria::CUSTOM);
-        		  $this->c->addAscendingOrderByColumn(' SUBSTR('.TsmovlibPeer::REFLIB.',4,4'.')');
+        		  //$this->c->addAscendingOrderByColumn(' SUBSTR('.TsmovlibPeer::REFLIB.',4,4'.')');
+                          $this->c->addAscendingOrderByColumn(TsmovlibPeer::REFLIB);
         		  $reg= TsmovlibPeer::doSelect($this->c);
         		  if (!$reg)
         		  {
