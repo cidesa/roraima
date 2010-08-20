@@ -6,4 +6,12 @@ names:
   dfmedtra{destra}:
     required:  Yes
     required_msg: Debe insertar la descripcion del medio de transporte.
+    validators: UniqueValidator
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:    dfmedtra
+        column:   destra
+        unique_error:   El medio de transporte ya existe.
 
