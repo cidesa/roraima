@@ -1,0 +1,21 @@
+methods:
+  post:
+   - "lidefemp{emaemp}"
+
+names:
+  lidefemp{emaemp}:
+    required:  No
+    validators: EmailValidator
+
+
+
+
+
+EmailValidator:
+    class: sfEmailValidator
+    param:
+        strict:       true
+        email_error:  Habitacion- La Dirección del Email es Inválida.
+
+
+
