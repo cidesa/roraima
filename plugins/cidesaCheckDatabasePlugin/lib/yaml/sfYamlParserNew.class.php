@@ -194,7 +194,7 @@ class sfYamlParserNew
         // one liner?
         if (1 == count(explode("\n", rtrim($this->value, "\n"))))
         {
-          $value = sfYamlInline::load($this->lines[0]);
+          $value = sfYamlInlineNew::load($this->lines[0]);
           if (is_array($value))
           {
             $first = reset($value);
