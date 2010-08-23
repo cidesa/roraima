@@ -86,6 +86,7 @@ propel:
       foreignTable: dfrutadoc
       foreignReference: id
     id_dfmedtra:     # Medio de Transporte
+      type: INTEGER
       foreignTable: dfmedtra
       foreignReference: id
     diaent:          # Dias de entrega
