@@ -47,6 +47,10 @@ propel:
       type: NUMERIC
       size: 14
       scale: 2
+    preaju:
+      type: NUMERIC
+      size: 14
+      scale: 2
     id:
       type: INTEGER
       required: true

@@ -483,6 +483,8 @@ class Facturacion {
 	  	$numlot = $reg->getNumlot();
 
       $x=$grid[0];
+      $totalajus=0;
+      $totalrec=0;
       $j=0;
       while ($j<count($x))
       {
@@ -493,20 +495,26 @@ class Facturacion {
          $famovaju->setRefaju($faajuste->getRefaju());
          $famovaju->setCodart($codarti);
          if ($faajuste->getTipaju() == 'NE'){
-         $famovaju->setNumlot($x[$j]->getNumlot());}
+             $famovaju->setNumlot($x[$j]->getNumlot());
+         }
          $famovaju->setCanord($x[$j]->getCanord());
          if ($faajuste->getTipo()=='CREDITO')
          {
            $famovaju->setCanaju($x[$j]->getCanaju());
            $facantaju=$x[$j]->getCanaju();
+           $famovaju->setPreaju($x[$j]->getAjupre());
+           $fapreaju=$x[$j]->getAjupre();
          }
          else {
          	$famovaju->setCanaju($x[$j]->getCanaju()*(-1));
          	$facantaju=$x[$j]->getCanaju()*(-1);
+           $famovaju->setPreaju($x[$j]->getAjupre()*(-1));
+           $fapreaju=$x[$j]->getAjupre()*(-1);
          }
          $famovaju->setMontot($x[$j]->getMontot());
-         $famovaju->setPreaju($x[$j]->getPreaju());
+         $totalajus=$totalajus+$x[$j]->getMontot();
          $famovaju->setRecaju($x[$j]->getRecaju());
+         $totalrec=$totalrec + $x[$j]->getRecaju();
          $famovaju->save();
          $tipo=H::getX('CODART','Caregart','Tipo',$codarti);
 
@@ -531,10 +539,7 @@ class Facturacion {
               	$data->save();
               }
 		 	}
-
-                             //$datos->setCantot($x[$j]->getCanaju());
-                             //$datos->setTotart($x[$j]->getCanaju()*$x[$j]->getPreart());
-	         $datos->setCanaju($datos->getCanaju() + $x[$j]->getCanaju());
+                             $datos->setCanaju($datos->getCanaju() + $facantaju);
 	         $datos->save();
 			}
 		 }
@@ -544,9 +549,7 @@ class Facturacion {
 			 $p->add(FaartpedPeer::CODART,$codarti);
   			 $datos= FaartpedPeer::doSelectOne($p);
   			 if ($datos){
-                          // $datos->setCantot($x[$j]->getCanaju());
-                           //$datos->setTotart($x[$j]->getCanaju()*$x[$j]->getPreart());
-	           $datos->setCanaju($datos->getCanaju() + $x[$j]->getCanaju());
+                           $datos->setCanaju($datos->getCanaju() + $facantaju);
 	           $datos->save();
 			 }
 		 }
@@ -570,9 +573,11 @@ class Facturacion {
               	$data->save();
               }
 		 	}
-                           //$datos->setCantot($x[$j]->getCanaju());
-                           //$datos->setTotart($x[$j]->getCanaju()*$x[$j]->getPreart());
+                           if ($x[$j]->getAjupre()==0)
 	           $datos->setCanaju($datos->getCanaju() + $facantaju);
+                           else
+                            $datos->setPreaju($datos->getPreaju() +$fapreaju);
+
 	           $datos->save();
 			 }
 		 }
@@ -581,6 +586,8 @@ class Facturacion {
        $j++;
       }
       if ($faajuste->getTipaju() == 'F'){
+         self::ajusteDocumentoxCobrar($faajuste,$totalajus,$totalrec);
+
           if (self::generarAsientos($faajuste, $grid,&$arrasientos,&$pos,&$msj3))
             {
               self::grabarComprobanteMaestro(&$faajuste,$arrasientos,&$pos);
@@ -1572,14 +1579,14 @@ public static function entregas($nroped)
       }
       if ($reg)
       {
-        if ($faajuste->getTipaju()=='P')
+        /*if ($faajuste->getTipaju()=='P')
         {
-          $reg->setCantot($reg->getCantot() + $resul->getCanaju());
+          $reg->setCanaju($reg->getCanaju() + $resul->getCanaju());
         }else if ($faajuste->getTipaju()=='NE'){
-        	$reg->setCantot($resul->getCanord());
+                $reg->setCanaju($resul->getCanord());
         }else{
-        	$reg->setCantot($reg->getCantot() + $resul->getCanaju());
-        }
+           $reg->setCanaju($reg->getCanaju() + $resul->getCanaju());
+        }*/
 
         $tipo=H::getX('CODART','Caregart','Tipo',$resul->getCodart());
         if ($tipo=='A')
@@ -1616,9 +1623,9 @@ public static function entregas($nroped)
               }
 		 	}
         }
-        if ($faajuste->getTipaju() == 'F'){
+        /*if ($faajuste->getTipaju() == 'F'){
         $reg->setTotart($reg->getCantot()*$reg->getPrecio());
-        }else $reg->setTotart($reg->getCantot()*$reg->getPreart());
+        }else $reg->setTotart($reg->getCantot()*$reg->getPreart());*/
         $reg->setCanaju($reg->getCanaju()-$resul->getCanaju());
         $reg->save();
       }
@@ -1766,7 +1773,12 @@ public static function entregas($nroped)
   public static function grabarComprobanteMaestro($faajuste,$arrasientos,&$pos)
   {
     $periodocon=substr($faajuste->getFecaju(),0,4);
-    $correl=OrdendePago::Buscar_Correlativo();
+    $numcomp="AJ".substr($faajuste->getCodref(),2,6);
+    $confcorcom=sfContext::getInstance()->getUser()->getAttribute('confcorcom');
+    if ($confcorcom=='N')
+    {
+      $correl= $numcomp;
+    }else $correl=OrdendePago::Buscar_Correlativo();
 
     $contabc = new Contabc();
     $contabc->setNumcom($correl);
@@ -1814,6 +1826,20 @@ public static function entregas($nroped)
             $i++;
       }
     }
+  }
+
+  public static function ajusteDocumentoxCobrar($faajuste,$totalajus,$totalrec)
+  {
+      $q= new Criteria();
+      $q->add(CobdocumePeer::REFFAC,$faajuste->getCodref());
+      $registro= CobdocumePeer::doSelectOne($q);
+      if ($registro)
+      {
+          $registro->setMondoc($registro->getMondoc()-($totalajus-$totalrec));
+          $registro->setRecdoc($registro->getRecdoc() - $totalrec);
+          $registro->setSaldoc($registro->getMondoc() + $registro->getRecdoc()-$registro->getDscdoc()-$registro->getAdodoc());
+          $registro->save();
+      }
   }
 
 

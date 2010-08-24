@@ -334,6 +334,7 @@ $this->Bitacora('Guardo');
         $col4->setEsGrabable(true);
         $col4->setVacia(true);
         $col4->setNombreCampo('fecven');
+        $col4->setOculta(true);
 
         $col5 = new Columna('Existencia');
         $col5->setEsNumerico(true);
@@ -343,6 +344,7 @@ $this->Bitacora('Guardo');
         $col5->setAlineacionObjeto(Columna::IZQUIERDA);
         $col5->setNombreCampo('exist');
         $col5->setHTML('type="text" size="10" readonly=true');
+        $col5->setOculta(true);
 
         if ($tipaju == 'P') $col6 = new Columna('Cant. Solicitada');
         else if ($tipaju == 'NE') $col6 = new Columna('Cant. Entregada');
@@ -381,26 +383,31 @@ $this->Bitacora('Guardo');
         $col10->setTitulo('Canlotreal');
         $col10->setNombreCampo('canlotreal');
         $col10->setHTML('type="text" size="10" readonly=true');
+        $col10->setOculta(true);
 
         $col11 = clone $col6;
         $col11->setTitulo('Canpuedoaju');
         $col11->setNombreCampo('canpuedaju');
         $col11->setHTML('type="text" size="10" readonly=true');
+        $col11->setOculta(true);
 
         $col12 = clone $col6;
         $col12->setTitulo('CanRealPed');
         $col12->setNombreCampo('canrealdes');
         $col12->setHTML('type="text" size="10" readonly=true');
+        $col12->setOculta(true);
 
         $col13 = clone $col6;
         $col13->setTitulo('CanRealPed');
         $col13->setNombreCampo('canrealdes');
         $col13->setHTML('type="text" size="10" readonly=true');
+        $col13->setOculta(true);
 
         $col14 = clone $col3;
         $col14->setTitulo('CaDistrib');
         $col14->setNombreCampo('candistrib');
         $col14->setHTML('type="text" size="10" readonly=true');
+        $col14->setOculta(true);
 
         $col15 = clone $col6;
         $col15->setTitulo('Tipo Articulo');
@@ -412,11 +419,13 @@ $this->Bitacora('Guardo');
         $col16->setTitulo('Precio Original');
         $col16->setNombreCampo('preart');
         $col16->setHTML('type="text" size="10" readonly=true');
+        $col16->setOculta(true);
 
         $col17 = clone $col6;
         $col17->setTitulo('Ajuste Precio');
         $col17->setNombreCampo('ajupre');
         $col17->setHTML('type="text" size="10" readonly=true');
+        $col17->setOculta(true);
 
         $col18 = clone $col6;
         $col18->setTitulo('Ajuste Recargo');
@@ -493,7 +502,7 @@ $this->Bitacora('Guardo');
 
 
         $cantival=false;
-        $cantaju=0;
+        $cantaju=H::tofloat($this->getRequestParameter('valorcol7'));
         $existen=0;
         $colum11=0;
         $canrealped=0;
@@ -511,18 +520,18 @@ $this->Bitacora('Guardo');
             $cantaju=H::tofloat($this->getRequestParameter('solicit')); //7
             $precioaju=$this->getRequestParameter('precioreal');
         }else {
-            $difpreaju=$precioaju;
+            $difpreaju=0;
             $precioaju=$this->getRequestParameter('precioreal');
         }
 
-        if (($difpreaju<0 && $this->getRequestParameter('tipo')=='DEBITO') || ($difpreaju>0 && $this->getRequestParameter('tipo')=='CREDITO'))
+      /*  if (($difpreaju<0 && $this->getRequestParameter('tipo')=='DEBITO') || ($difpreaju>0 && $this->getRequestParameter('tipo')=='CREDITO'))
         {
             $difpreaju=$this->getRequestParameter('precioreal');
             $precioaju=$this->getRequestParameter('precioreal');
-        }
+        }*/
 
-        if (H::tofloat($codigo)>0)
-        {
+        //if (H::tofloat($codigo)>0)
+        //{
           $canent=0;
           $c = new Criteria();
 		  $c->add(EmpresaPeer::CODEMP,'001');
@@ -534,9 +543,9 @@ $this->Bitacora('Guardo');
 
           if ($this->getRequestParameter('tipref')=='P')
           {
-             $cantival=Facturacion::chequearCantPedido($this->getRequestParameter('referencia'),$this->getRequestParameter('articuloaju'),$codigo,$this->getRequestParameter('solicit'),$this->getRequestParameter('valorcol7'),$precioaju,&$cantidadaju,&$canent);
+             $cantival=Facturacion::chequearCantPedido($this->getRequestParameter('referencia'),$this->getRequestParameter('articuloaju'),$codigo,$this->getRequestParameter('solicit'),$cantaju,$precioaju,&$cantidadaju,&$canent);
           }else if ($this->getRequestParameter('tipref')=='NE'){
-             $cantival=Facturacion::chequearCantNota($this->getRequestParameter('referencia'),$this->getRequestParameter('articuloaju'),$codigo,$this->getRequestParameter('solicit'),$this->getRequestParameter('tipref'),$this->getRequestParameter('canentart'),$this->getRequestParameter('valorcol7'),&$cantidadaju,&$canent,&$canrealped,&$canrealdes,&$canpuedoaju);
+             $cantival=Facturacion::chequearCantNota($this->getRequestParameter('referencia'),$this->getRequestParameter('articuloaju'),$codigo,$this->getRequestParameter('solicit'),$this->getRequestParameter('tipref'),$this->getRequestParameter('canentart'),$cantaju,&$cantidadaju,&$canent,&$canrealped,&$canrealdes,&$canpuedoaju);
              $cantidadaju=0;
           }else{
             $cantival=true;
@@ -545,29 +554,35 @@ $this->Bitacora('Guardo');
           $colum11=$cantidadaju;
           if ($cantival)
           {
-           if (H::tofloat($this->getRequestParameter('valorcol7'))>H::tofloat($this->getRequestParameter('solicit'))) //Ajuste por arriba
+           if ($cantaju>H::tofloat($this->getRequestParameter('solicit'))) //Ajuste por arriba
            {
-           	 if ((H::tofloat($this->getRequestParameter('valorcol7')) <= $numlot) || (H::getX('CODART','Caregart','Tipo',$this->getRequestParameter('articuloaju'))=='S'))
+           	 if (($cantaju <= $numlot) || (H::getX('CODART','Caregart','Tipo',$this->getRequestParameter('articuloaju'))=='S'))
            	 {
                    $rerec=Facturacion::ajusteRecargo($this->getRequestParameter('articuloaju'),$this->getRequestParameter('referencia'));
-                   $producto=H::tofloat($this->getRequestParameter('valorcol7')) * H::tofloat($this->getRequestParameter('precioart'));
+                   if ($difpreaju==0)
+                       $producto=$cantaju * H::tofloat($this->getRequestParameter('precioart'));
+                   else
+                       $producto=$cantaju * $difpreaju;
                    $monaju=number_format($producto,2,',','.');
                    $ajurec=number_format($producto*$rerec,2,',','.');
                    $cal=$producto +($producto*$rerec);
                    $total=number_format($cal,2,',','.');
-                   if (H::tofloat($this->getRequestParameter('solicit'))>H::tofloat($this->getRequestParameter('valorcol7')))
+                   if (H::tofloat($this->getRequestParameter('solicit'))>$cantaju)
                    {
-                       $calculo=$numlot+H::tofloat($this->getRequestParameter('solicit'))-H::tofloat($this->getRequestParameter('valorcol7'));
+                       $calculo=$numlot+H::tofloat($this->getRequestParameter('solicit'))-$cantaju;
                        $existen=number_format($calculo,2,',','.');
                    }else {
-                       $calculo=$numlot-H::tofloat($this->getRequestParameter('valorcol7'))-H::tofloat($this->getRequestParameter('solicit'));
+                       $calculo=$numlot-$cantaju-H::tofloat($this->getRequestParameter('solicit'));
                        $existen=number_format($calculo,2,',','.');
                    }
            	 }else{
            	 	$javascript="alert('La cantidad del Ajuste excede la existencia del Lote');";
            	 	$catajuste=$numlot + H::tofloat($this->getRequestParameter('solicit'));
                         $cantaju=number_format($catajuste,2,',','.');
-           	 	$producto=$catajuste * H::tofloat($this->getRequestParameter('precioart'));
+                        if ($difpreaju==0)
+           	 	  $producto=$cantaju * H::tofloat($this->getRequestParameter('precioart'));
+                        else
+                          $producto=$cantaju * $difpreaju;
                         $monaju=number_format($producto,2,',','.');
                 $total=number_format($producto,2,',','.');
                         $existen='0,00';
@@ -575,9 +590,12 @@ $this->Bitacora('Guardo');
            }
            else
            {
-           	 if (H::tofloat($this->getRequestParameter('valorcol7'))==H::tofloat($this->getRequestParameter('solicit')))
+           	 if ($cantaju==H::tofloat($this->getRequestParameter('solicit')))
            	 {
-                   $producto=H::tofloat($this->getRequestParameter('valorcol7')) * H::tofloat($this->getRequestParameter('precioart'));
+                   if ($difpreaju==0)
+                     $producto=$cantaju * H::tofloat($this->getRequestParameter('precioart'));
+                   else
+                     $producto=$cantaju * $difpreaju;
                    $rerec=Facturacion::ajusteRecargo($this->getRequestParameter('articuloaju'),$this->getRequestParameter('referencia'));
                    $ajurec=number_format($producto*$rerec,2,',','.');
                    $cal=$producto +($producto*$rerec);
@@ -590,8 +608,11 @@ $this->Bitacora('Guardo');
            	 }
            	 else
            	 {
-           	   $cantaju=$this->getRequestParameter('valorcol7');
-                   $producto=H::tofloat($this->getRequestParameter('valorcol7')) * H::tofloat($this->getRequestParameter('precioart'));
+           	   $cantaju=$cantaju;
+                   if ($difpreaju==0)
+                     $producto=$cantaju * H::tofloat($this->getRequestParameter('precioart'));
+                   else
+                     $producto=$cantaju * $difpreaju;
                    $rerec=Facturacion::ajusteRecargo($this->getRequestParameter('articuloaju'),$this->getRequestParameter('referencia'));
                    $ajurec=number_format($producto*$rerec,2,',','.');
                    $cal=$producto +($producto*$rerec);
@@ -599,10 +620,10 @@ $this->Bitacora('Guardo');
                    $monaju=number_format($producto,2,',','.');
 
                    if ($this->getRequestParameter('tipref')=='NE'){
-                       $diferencia=$numlot+H::tofloat($this->getRequestParameter('solicit'))-H::tofloat($this->getRequestParameter('valorcol7'));
+                       $diferencia=$numlot+H::tofloat($this->getRequestParameter('solicit'))-$cantaju;
                        $existen=number_format($diferencia,2,',','.');
                    }else if ($this->getRequestParameter('tipref')=='F'){
-                       $diferencia=H::tofloat($this->getRequestParameter('solicit'))-H::tofloat($this->getRequestParameter('valorcol7'));
+                       $diferencia=H::tofloat($this->getRequestParameter('solicit'))-$cantaju;
                        $existen=number_format($diferencia,2,',','.');
            	 }
            }
@@ -622,7 +643,7 @@ $this->Bitacora('Guardo');
                     $monaju="0,00";
            	 	    $total="0,00";
             	}else{
-                    if (($cantidadaju!=H::tofloat($this->getRequestParameter('valorcol7'))) && ($canent!=H::tofloat($this->getRequestParameter('valorcol7'))))
+                    if (($cantidadaju!=$cantaju) && ($canent!=$cantaju))
             		{
                       if ($this->getRequestParameter('tipref')=='NE'){
                       	$javascript="alert('No puede Ajustar por esa Cantidad. La misma debe ser mayor a $canent y menor o igual a $cantaju');";
@@ -635,8 +656,12 @@ $this->Bitacora('Guardo');
            	 	        $total="0,00";
                       }
             		}else{
-                       $cantaju=$this->getRequestParameter('valorcol7');
-                       $producto=H::tofloat($this->getRequestParameter('valorcol7')) * H::tofloat($this->getRequestParameter('precioart'));
+                       $cantaju=$cantaju;
+                       if ($difpreaju==0)
+                         $producto=$cantaju * H::tofloat($this->getRequestParameter('precioart'));
+                       else
+                         $producto=$cantaju * $difpreaju;
+
                        $monaju=number_format($producto,2,',','.');
                        $total=$monaju;
             		}
@@ -653,7 +678,10 @@ $this->Bitacora('Guardo');
                         if ($cantidadaju<=$canevaluar)
                         {
                           $cantaju=number_format($cantidadaju,2,',','.');
+                          if ($difpreaju==0)
                           $producto=H::tofloat($cantidadaju) * H::tofloat($this->getRequestParameter('precioart'));
+                          else
+                            $producto=H::tofloat($cantidadaju) * $difpreaju;
                           $monaju=number_format($producto,2,',','.');
                           $total=$monaju;
                           if ($this->getRequestParameter('tipref')=='NE'){
@@ -677,12 +705,20 @@ $this->Bitacora('Guardo');
             		  	  }else{
                                     $cantaju="0,00";
             		  	  }
+                              if ($difpreaju==0)
                               $producto=H::tofloat($cantaju) * H::tofloat($this->getRequestParameter('precioart'));
+                              else
+                                $producto=H::tofloat($cantaju) * $difpreaju;
+
                               $monaju=number_format($producto,2,',','.');
                               $total=$monaju;
             		  	}else{
                               $cantaju=$cantaju;
+                              if ($difpreaju==0)
                               $producto=H::tofloat($cantaju) * H::tofloat($this->getRequestParameter('precioart'));
+                              else
+                                $producto=H::tofloat($cantaju) * $difpreaju;
+
                               $monaju=number_format($producto,2,',','.');
                               $total=$monaju;
             		  	}
@@ -699,7 +735,7 @@ $this->Bitacora('Guardo');
 
           $javascript=$javascript."actualizarsaldos();";
           $output = '[["'.$col5.'","'.$existen.'",""],["'.$col7.'","'.$cantaju.'",""],["'.$col8.'","'.$precioaju.'",""],["'.$col9.'","'.$monaju.'",""],["'.$col11.'","'.$colum11.'",""],["'.$col12.'","'.$canrealped.'",""],["'.$col13.'","'.$canrealdes.'",""],["'.$col17.'","'.$difpreaju.'",""],["'.$col18.'","'.$ajurec.'",""],["'.$col19.'","'.$total.'",""],["javascript","'.$javascript.'",""]]';
-        }
+        //}
        break;
       case '4':
         $valor7=H::toFloat($this->getRequestParameter('valor7'));

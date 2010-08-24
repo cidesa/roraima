@@ -2420,11 +2420,11 @@ public static function validarCuentasGrid($grid)
 
   public static function MigrarMovimientosBancarios($tspararc,&$total,&$rechazado)
   {
-  	$val=-1;
+    $val=-1;
     if ($file = fopen(sfConfig::get('sf_upload_dir')."//".$tspararc->getArchivo(),  "r")) {
-	$i=0;
-	$total=0;
-	$rechazado=0;
+    $i=0;
+    $total=0;
+    $rechazado=0;
     $t= new Criteria();
     $t->add(TspararcPeer::NUMCUE,$tspararc->getNumcue());
     $regis= TspararcPeer::doSelectOne($t);
@@ -2432,40 +2432,102 @@ public static function validarCuentasGrid($grid)
     {
 	  while(!feof($file)) {
 	    $cuenta=fgets($file, 255);
-		if (trim($cuenta)!='' && trim($cuenta)!='/n'){
-		    $numcue=substr($cuenta,$regis->getInicue(),$regis->getFincue());
-		    $referencia= substr($cuenta,$regis->getIniref(),$regis->getFinref());
-		    $fecha= substr($cuenta,$regis->getInifec(),$regis->getFinfec());
+            if (trim($cuenta)!='' && trim($cuenta)!='/n'){
+                $numcue=substr($cuenta,$regis->getInicue(),$regis->getFincue());
+                $ref= substr($cuenta,$regis->getIniref(),$regis->getFinref());
+
+
+
+                $fecha= substr($cuenta,$regis->getInifec(),$regis->getFinfec());
+                if ($regis->getForfec()=='dd/mm/yyyy')    {
 		    $dateFormat = new sfDateFormat('es_VE');
-            $fec1 = $dateFormat->format($fecha, 'i', $dateFormat->getInputPattern('d'));
-		    $tipo= substr($cuenta,$regis->getInitip(),$regis->getFintip());
-		    $descrip= substr($cuenta,$regis->getInides(),$regis->getFindes());
-             if (is_numeric(H::toFloat(substr($cuenta,$regis->getInimon(),$regis->getFinmon()))))
+                    $fec1 = $dateFormat->format($fecha, 'i', $dateFormat->getInputPattern('d'));
+                }else if ($regis->getForfec()=='yyyy-mm-dd') {
+                    $fec1=$fecha;
+                }
+
+                $mes=substr($fec1,5,2);
+                $sql="select refban from tsmovban where numcue='".$numcue."' and refban='".$ref."'and to_char(fecban,'MM')='".$mes."'";
+                if (Herramientas::BuscarDatos($sql,&$resul))
+                {                    
+                    $correl="";
+                    $campo="";
+                    $a= new Criteria();
+                    $a->add(TscormestxtPeer::NUMCUE,$numcue);
+                    $reg=TscormestxtPeer::doSelectOne($a);
+                    if ($reg)
+                    {   $ames=intval($mes);
+                        eval('$correl=$reg->getCormes'.$ames.'();');
+                        eval('$campo="cormes'.$ames.'";');
+                    
+                     $formato = date('ym');
+                     $longitud='4';
+                     $encontrado=false;
+                     while (!$encontrado)
+                     {
+                      $numero=$formato.str_pad((string)$correl, $longitud, "0", STR_PAD_LEFT);
+                      $sql="select refban from tsmovban where numcue='".$numcue."' and refban='".$numero."'and to_char(fecban,'MM')='".$mes."'";
+                      if (Herramientas::BuscarDatos($sql,&$result))
+                      {
+                        $correl=$correl+1;
+                      }
+                      else
+                      {
+                        $encontrado=true;
+                      }
+                     }
+                     $referencia=$numero;
+
+                     eval('$reg->set'.ucfirst(strtolower($campo)).'('.$correl.');');
+                     eval('$reg->save();');
+                     
+                    }
+                }else $referencia=$ref;
+
+
+                $signomonto=substr(substr($cuenta,$regis->getInimon(),$regis->getFinmon()),0,1);
+                if ($regis->getFintip()!=0)
+                {
+                   $tipo= substr($cuenta,$regis->getInitip(),$regis->getFintip());
+                }else {
+                    if ($signomonto=='+')
+                      $tipo=$regis->getValdefp();
+                    else $tipo=$regis->getValdefn();
+                }
+
+                if ($regis->getFindes()!=0)
+		   $descrip= substr($cuenta,$regis->getInides(),$regis->getFindes());
+                else 
+                   $descrip= $regis->getValdefd();
+                
+             $valormon=substr($cuenta,$regis->getInimon(),$regis->getFinmon());
+             $montor=substr($valormon,1,strlen($valormon));
+             if (is_numeric(H::toFloat($montor)))
              {
-               $monto=H::toFloat(substr($cuenta,$regis->getInimon(),$regis->getFinmon()));
+               $monto=H::toFloat($montor);
              }else $monto=0;
 
-			$d= new Criteria();
-			$d->add(TsmovbanPeer::NUMCUE, $tspararc->getNumcue());
-			$d->add(TsmovbanPeer::REFBAN, $referencia);
-			$d->add(TsmovbanPeer::TIPMOV, $tipo);
-			$reg1= TsmovbanPeer::doSelectOne($d);
-			if (!$reg1)
-			{
-                $tsmovban = new Tsmovban();
-				$tsmovban->setNumcue($tspararc->getNumcue());
-				$tsmovban->setCodcta(H::getX_Vacio('Numcue','Tsdefban','Codcta',$tspararc->getNumcue()));
-				$tsmovban->setRefban($referencia);
-				$tsmovban->setFecban($fec1);
-				$tsmovban->setTipmov($tipo);
-				$tsmovban->setDesban($descrip);
-				$tsmovban->setMonmov($monto);
-				$tsmovban->setStatus('C');
-				$tsmovban->setStacon('N');
-				$tsmovban->save();
-			}else{
-			  $rechazado= $rechazado + 1;
-			}
+                $d= new Criteria();
+                $d->add(TsmovbanPeer::NUMCUE, $tspararc->getNumcue());
+                $d->add(TsmovbanPeer::REFBAN, $referencia);
+                $d->add(TsmovbanPeer::TIPMOV, $tipo);
+                $reg1= TsmovbanPeer::doSelectOne($d);
+                if (!$reg1)
+                {
+                        $tsmovban = new Tsmovban();
+                        $tsmovban->setNumcue($tspararc->getNumcue());
+                        $tsmovban->setCodcta(H::getX_Vacio('Numcue','Tsdefban','Codcta',$tspararc->getNumcue()));
+                        $tsmovban->setRefban($referencia);
+                        $tsmovban->setFecban($fec1);
+                        $tsmovban->setTipmov($tipo);
+                        $tsmovban->setDesban($descrip);
+                        $tsmovban->setMonmov($monto);
+                        $tsmovban->setStatus('C');
+                        $tsmovban->setStacon('N');
+                        $tsmovban->save();
+                }else{
+                  $rechazado= $rechazado + 1;
+                }
 		$total= $total + 1;
 	    }
 	  $i++;
