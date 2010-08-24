@@ -32,7 +32,7 @@ generator:
     edit:
       title:          Ajustes
       display:
-        "Datos del Ajuste": [refaju, nrocon, fecaju, tipaju, codref, codpro, rifpro, dirpro, telpro, desaju, _codalm, tipo, monaj, nroconu]
+        "Datos del Ajuste": [refaju, nrocon, fecaju, tipaju, codref, codpro, rifpro, dirpro, telpro, desaju, _codalm, tipo, monaj, nrocon]
         "Observación": [obsaju]
       fields:
         desaju:
