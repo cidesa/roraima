@@ -92,6 +92,8 @@ class FaartfacMapBuilder {
 
 		$tMap->addColumn('TM', 'Tm', 'double', CreoleTypes::NUMERIC, false, 14);
 
+		$tMap->addColumn('PREAJU', 'Preaju', 'double', CreoleTypes::NUMERIC, false, 14);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	}
