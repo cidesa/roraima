@@ -371,7 +371,9 @@ $this->Bitacora('Guardo');
         $col8 = clone $col6;
         $col8->setTitulo('Precio');
         $col8->setNombreCampo('preaju');
+        if ($tipaju == 'F')
         $col8->setHTML('type="text" size="10" ');
+        else $col8->setHTML('type="text" size="10" readOnly=true');
         $col8->setJScript('onKeypress="cantidadaju(event,this.id)"');
 
         $col9 = clone $col6;

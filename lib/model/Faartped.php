@@ -40,6 +40,7 @@ class Faartped extends BaseFaartped
         protected $candistrib="0,00";
         protected $tipo="";
         protected $preaju="0,00";
+        protected $ajupre="0,00";
         protected $recaju="0,00";
         protected $fecven="";
         protected $exist="0,00";
