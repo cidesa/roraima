@@ -56,6 +56,7 @@ class Faartfac extends BaseFaartfac
     protected $canrealdes="0,00";
     protected $candistrib="0,00";
     protected $tipo="0,00";
+    protected $ajupre="0,00";
     protected $recaju="0,00";
     protected $fecven="";
     protected $exist="0,00";

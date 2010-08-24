@@ -573,10 +573,15 @@ class Facturacion {
               	$data->save();
               }
 		 	}
+                            $sql="select preaju as preajureal from faartfac where reffac='".$faajuste->getCodref()."' and codart='".$codarti."'";
+                            if (Herramientas::BuscarDatos($sql,&$result))
+                              {
+                                $precioajureal=$result[0]["preajureal"];
+                              }
                            if ($x[$j]->getAjupre()==0)
 	           $datos->setCanaju($datos->getCanaju() + $facantaju);
                            else
-                            $datos->setPreaju($datos->getPreaju() +$fapreaju);
+                            $datos->setPreaju($precioajureal + $fapreaju);
 
 	           $datos->save();
 			 }
@@ -590,7 +595,7 @@ class Facturacion {
 
           if (self::generarAsientos($faajuste, $grid,&$arrasientos,&$pos,&$msj3))
             {
-              self::grabarComprobanteMaestro(&$faajuste,$arrasientos,&$pos);
+              self::grabarComprobanteMaestro($faajuste,$arrasientos,&$pos);
             }
       }
 
@@ -1554,12 +1559,16 @@ public static function entregas($nroped)
 
   public static function devolverArticulosAju($faajuste)
   {
+    $totalajus=0;
+    $totalrec=0;
     $r= new Criteria();
     $r->add(FamovajuPeer::REFAJU,$faajuste->getRefaju());
     $resu= FamovajuPeer::doSelect($r);
     if ($resu)
     {
       foreach ($resu as $resul) {
+      $totalrec=$totalrec+$resul->getRecaju();
+      $totalajus=$totalajus + $resul->getMontot();
       if ($faajuste->getTipaju()=='P')
       {
          $p= new Criteria();
@@ -1579,15 +1588,6 @@ public static function entregas($nroped)
       }
       if ($reg)
       {
-        /*if ($faajuste->getTipaju()=='P')
-        {
-          $reg->setCanaju($reg->getCanaju() + $resul->getCanaju());
-        }else if ($faajuste->getTipaju()=='NE'){
-                $reg->setCanaju($resul->getCanord());
-        }else{
-           $reg->setCanaju($reg->getCanaju() + $resul->getCanaju());
-        }*/
-
         $tipo=H::getX('CODART','Caregart','Tipo',$resul->getCodart());
         if ($tipo=='A')
         {
@@ -1623,13 +1623,49 @@ public static function entregas($nroped)
               }
 		 	}
         }
-        /*if ($faajuste->getTipaju() == 'F'){
-        $reg->setTotart($reg->getCantot()*$reg->getPrecio());
-        }else $reg->setTotart($reg->getCantot()*$reg->getPreart());*/
-        $reg->setCanaju($reg->getCanaju()-$resul->getCanaju());
+        if ($faajuste->getTipaju()=='F'){
+        $sql="select preaju as preajureal from faartfac where reffac='".$faajuste->getCodref()."' and codart='".$resul->getCodart()."'";
+        if (Herramientas::BuscarDatos($sql,&$result))
+      {
+        $precioajureal=$result[0]["preajureal"];
+      }
+            if ($resul->getPreaju()==0)
+                $reg->setCanaju($reg->getCanaju()-$resul->getCanaju());
+            else
+                $reg->setPreaju($precioajureal-$resul->getPreaju());
+        }else {
+            $reg->setCanaju($reg->getCanaju()-$resul->getCanaju());
+        }
         $reg->save();
       }
      }
+
+     if ($faajuste->getTipaju()=='F'){
+        $numcomp="AJ".substr($faajuste->getCodref(),2,6);
+        $confcorcom=sfContext::getInstance()->getUser()->getAttribute('confcorcom');
+        if ($confcorcom=='N')
+        {
+          $numcom=$numcomp;
+        }else $numcom='';
+
+        if ($numcom!='')
+        {
+            Herramientas :: EliminarRegistro('Contabc1', 'numcom', $numcom);
+            Herramientas :: EliminarRegistro('Contabc', 'numcom', $numcom);
+        }
+
+      $q= new Criteria();
+      $q->add(CobdocumePeer::REFFAC,$faajuste->getCodref());
+      $registro= CobdocumePeer::doSelectOne($q);
+      if ($registro)
+      {
+          $registro->setMondoc($registro->getMondoc()+($totalajus-$totalrec));
+          $registro->setRecdoc($registro->getRecdoc() + $totalrec);
+          $registro->setSaldoc($registro->getMondoc() + $registro->getRecdoc()-$registro->getDscdoc()-$registro->getAdodoc());
+          $registro->save();
+      }
+     }
+
     }
   }
 
@@ -1674,13 +1710,13 @@ public static function entregas($nroped)
 
           //Recargos
           $cta_vta2=self::cuentaRecargo($x[$j]->getCodart(),$faajuste->getCodref());
-          $monto_ingreso2=$x[$j]->getMontot();
+          $monto_ingreso2=$x[$j]->getRecaju();
           if ($cta_vta2!="")
           {
-            if (!Factura::buscarAsientos($cta_vta2,'D',$monto_ingreso2,&$arrasientos,&$pos))
+            if (!Factura::buscarAsientos($cta_vta2,'C',$monto_ingreso2,&$arrasientos,&$pos))
             {
               $descrip=H::getX('codcta','Contabb','Descta',$cta_vta2);
-              Factura::guardarAsientos($cta_vta2,$descrip,'D',$monto_ingreso2,&$arrasientos,&$pos);
+              Factura::guardarAsientos($cta_vta2,$descrip,'C',$monto_ingreso2,&$arrasientos,&$pos);
             }
           }else{
               $msj3=1153;
@@ -1703,7 +1739,7 @@ public static function entregas($nroped)
             if (!Factura::buscarAsientos($cta_vta,'D',$monto_ingreso,&$arrasientos,&$pos))
             {
               $descrip=H::getX('codcta','Contabb','Descta',$cta_vta);
-              Factura::guardarAsientos($cta_vta,$descrip,'C',$monto_ingreso,&$arrasientos,&$pos);
+              Factura::guardarAsientos($cta_vta,$descrip,'D',$monto_ingreso,&$arrasientos,&$pos);
             }
           }else{
               $msj3=1153;
@@ -1712,7 +1748,7 @@ public static function entregas($nroped)
 
           //Recargos
           $cta_vta2=self::cuentaRecargo($x[$j]->getCodart(),$faajuste->getCodref());
-          $monto_ingreso2=$x[$j]->getMontot();
+          $monto_ingreso2=$x[$j]->getRecaju();
           if ($cta_vta2!="")
           {
             if (!Factura::buscarAsientos($cta_vta2,'D',$monto_ingreso2,&$arrasientos,&$pos))
@@ -1804,7 +1840,7 @@ public static function entregas($nroped)
 	  	if ($arrasientos[$i]["2"]!="")
 	  	{
                   $contabc1= new Contabc1();
-                  $contabc1->setNumcom($correl3);
+                  $contabc1->setNumcom($correl);
                   $contabc1->setFeccom($faajuste->getFecaju());
                   $contabc1->setCodcta($arrasientos[$i]["0"]);
                   $numasi= $i +1;
