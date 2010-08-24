@@ -125,6 +125,10 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 
 
 
+	protected $preaju;
+
+
+
 	protected $id;
 
 
@@ -374,6 +378,14 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 
     if($val) return number_format($this->tm,2,',','.');
     else return $this->tm;
+
+  }
+
+  public function getPreaju($val=false)
+  {
+
+    if($val) return number_format($this->preaju,2,',','.');
+    else return $this->preaju;
 
   }
 
@@ -698,6 +710,16 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 
 	}
 
+	public function setPreaju($v)
+	{
+
+    if ($this->preaju !== $v) {
+        $this->preaju = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FaartfacPeer::PREAJU;
+      }
+
+	}
+
 	public function setId($v)
 	{
 
@@ -770,7 +792,9 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 
       $this->tm = $rs->getFloat($startcol + 28);
 
-      $this->id = $rs->getInt($startcol + 29);
+      $this->preaju = $rs->getFloat($startcol + 29);
+
+      $this->id = $rs->getInt($startcol + 30);
 
       $this->resetModified();
 
@@ -778,7 +802,7 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 30;
+            return $startcol + 31;
     } catch (Exception $e) {
       throw new PropelException("Error populating Faartfac object", $e);
     }
@@ -1013,6 +1037,9 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 				return $this->getTm();
 				break;
 			case 29:
+				return $this->getPreaju();
+				break;
+			case 30:
 				return $this->getId();
 				break;
 			default:
@@ -1054,7 +1081,8 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 			$keys[26] => $this->getEstatus(),
 			$keys[27] => $this->getObservaciones(),
 			$keys[28] => $this->getTm(),
-			$keys[29] => $this->getId(),
+			$keys[29] => $this->getPreaju(),
+			$keys[30] => $this->getId(),
 		);
 		return $result;
 	}
@@ -1158,6 +1186,9 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 				$this->setTm($value);
 				break;
 			case 29:
+				$this->setPreaju($value);
+				break;
+			case 30:
 				$this->setId($value);
 				break;
 		} 	}
@@ -1196,7 +1227,8 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[26], $arr)) $this->setEstatus($arr[$keys[26]]);
 		if (array_key_exists($keys[27], $arr)) $this->setObservaciones($arr[$keys[27]]);
 		if (array_key_exists($keys[28], $arr)) $this->setTm($arr[$keys[28]]);
-		if (array_key_exists($keys[29], $arr)) $this->setId($arr[$keys[29]]);
+		if (array_key_exists($keys[29], $arr)) $this->setPreaju($arr[$keys[29]]);
+		if (array_key_exists($keys[30], $arr)) $this->setId($arr[$keys[30]]);
 	}
 
 
@@ -1233,6 +1265,7 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(FaartfacPeer::ESTATUS)) $criteria->add(FaartfacPeer::ESTATUS, $this->estatus);
 		if ($this->isColumnModified(FaartfacPeer::OBSERVACIONES)) $criteria->add(FaartfacPeer::OBSERVACIONES, $this->observaciones);
 		if ($this->isColumnModified(FaartfacPeer::TM)) $criteria->add(FaartfacPeer::TM, $this->tm);
+		if ($this->isColumnModified(FaartfacPeer::PREAJU)) $criteria->add(FaartfacPeer::PREAJU, $this->preaju);
 		if ($this->isColumnModified(FaartfacPeer::ID)) $criteria->add(FaartfacPeer::ID, $this->id);
 
 		return $criteria;
@@ -1321,6 +1354,8 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 		$copyObj->setObservaciones($this->observaciones);
 
 		$copyObj->setTm($this->tm);
+
+		$copyObj->setPreaju($this->preaju);
 
 
 		$copyObj->setNew(true);

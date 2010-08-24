@@ -28,6 +28,7 @@ class Tsdefban extends BaseTsdefban
         protected $tiedatrel="";
     protected $mossalmin="";
     protected $etiqueta="";
+    protected $obj=array();
 
    public function __toString()
   {

@@ -1,0 +1,71 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Tscormestxt
+    theme:            cidesaGenerator
+    fields:
+      numcue:
+        name: Código
+        params: maxlength=20
+        catalogo:
+          catalogoweb: Ingreging_tsdefban
+          clase: Tsdefban
+          ajax: 1
+          parametros: getprincipal="getNumcue" getsecundario="getNomcue" campoprincipal="numcue" camposecundario="nomcue" campobase = "id"
+      nomcue:  { name: Descripción, params: size=60 readonly=true}
+      mes1:  { name: Mes, params: size=4 maxlength=2 readonly=true}
+      cormes1:  { name: Correlativo, params: size=4 maxlength=3}
+      mes2:  { name: Mes, params: size=4 maxlength=2 readonly=true}
+      cormes2:  { name: Correlativo, params: size=4 maxlength=3}
+      mes3:  { name: Mes, params: size=4 maxlength=2 readonly=true}
+      cormes3:  { name: Correlativo, params: size=4 maxlength=3}
+      mes4:  { name: Mes, params: size=4 maxlength=2 readonly=true}
+      cormes4:  { name: Correlativo, params: size=4 maxlength=3}
+      mes5:  { name: Mes, params: size=4 maxlength=2 readonly=true}
+      cormes5:  { name: Correlativo, params: size=4 maxlength=3}
+      mes6:  { name: Mes, params: size=4 maxlength=2 readonly=true}
+      cormes6:  { name: Correlativo, params: size=4 maxlength=3}
+      mes7:  { name: Mes, params: size=4 maxlength=2 readonly=true}
+      cormes7:  { name: Correlativo, params: size=4 maxlength=3}
+      mes8:  { name: Mes, params: size=4 maxlength=2 readonly=true}
+      cormes8:  { name: Correlativo, params: size=4 maxlength=3}
+      mes9:  { name: Mes, params: size=4 maxlength=2 readonly=true}
+      cormes9:  { name: Correlativo, params: size=4 maxlength=3}
+      mes10:  { name: Mes, params: size=4 maxlength=2 readonly=true}
+      cormes10:  { name: Correlativo, params: size=4 maxlength=3}
+      mes11:  { name: Mes, params: size=4 maxlength=2 readonly=true}
+      cormes11:  { name: Correlativo, params: size=4 maxlength=3}
+      mes12:  { name: Mes, params: size=4 maxlength=2 readonly=true}
+      cormes12:  { name: Correlativo, params: size=4 maxlength=3}
+    list:
+      title:          Definición de Correlativos por Cuenta Bancaria
+      filters:        [numcue]
+      display:        [=numcue, nomcue]
+      fields:
+        numcue: { name: Cuenta Bancaria}
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   10
+      sort:      numcue
+    edit:
+      title:          Edición  de Correlativos por Cuenta Bancaria
+      display:
+        "Cuenta Bancaria": [numcue]
+        "Enero": [mes1, cormes1]
+        "Febrero": [mes2, cormes2]
+        "Marzo": [mes3, cormes3]
+        "Abril": [mes4, cormes4]
+        "Mayo": [mes5, cormes5]
+        "Junio": [mes6, cormes6]
+        "Julio": [mes7, cormes7]
+        "Agosto": [mes8, cormes8]
+        "Septiembre": [mes9, cormes9]
+        "Octubre": [mes10, cormes10]
+        "Noviembre": [mes11, cormes11]
+        "Diciembre": [mes12, cormes12]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

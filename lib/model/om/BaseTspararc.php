@@ -29,11 +29,23 @@ abstract class BaseTspararc extends BaseObject  implements Persistent {
 
 
 	
+	protected $digsigp;
+
+
+	
+	protected $digsign;
+
+
+	
 	protected $inifec;
 
 
 	
 	protected $finfec;
+
+
+	
+	protected $forfec;
 
 
 	
@@ -45,11 +57,23 @@ abstract class BaseTspararc extends BaseObject  implements Persistent {
 
 
 	
+	protected $valdefp;
+
+
+	
+	protected $valdefn;
+
+
+	
 	protected $inides;
 
 
 	
 	protected $findes;
+
+
+	
+	protected $valdefd;
 
 
 	
@@ -109,6 +133,20 @@ abstract class BaseTspararc extends BaseObject  implements Persistent {
 
   }
   
+  public function getDigsigp()
+  {
+
+    return $this->digsigp;
+
+  }
+  
+  public function getDigsign()
+  {
+
+    return $this->digsign;
+
+  }
+  
   public function getInifec($val=false)
   {
 
@@ -122,6 +160,13 @@ abstract class BaseTspararc extends BaseObject  implements Persistent {
 
     if($val) return number_format($this->finfec,2,',','.');
     else return $this->finfec;
+
+  }
+  
+  public function getForfec()
+  {
+
+    return trim($this->forfec);
 
   }
   
@@ -141,6 +186,20 @@ abstract class BaseTspararc extends BaseObject  implements Persistent {
 
   }
   
+  public function getValdefp()
+  {
+
+    return trim($this->valdefp);
+
+  }
+  
+  public function getValdefn()
+  {
+
+    return trim($this->valdefn);
+
+  }
+  
   public function getInides($val=false)
   {
 
@@ -154,6 +213,13 @@ abstract class BaseTspararc extends BaseObject  implements Persistent {
 
     if($val) return number_format($this->findes,2,',','.');
     else return $this->findes;
+
+  }
+  
+  public function getValdefd()
+  {
+
+    return trim($this->valdefd);
 
   }
   
@@ -230,6 +296,26 @@ abstract class BaseTspararc extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setDigsigp($v)
+	{
+
+    if ($this->digsigp !== $v) {
+        $this->digsigp = $v;
+        $this->modifiedColumns[] = TspararcPeer::DIGSIGP;
+      }
+  
+	} 
+	
+	public function setDigsign($v)
+	{
+
+    if ($this->digsign !== $v) {
+        $this->digsign = $v;
+        $this->modifiedColumns[] = TspararcPeer::DIGSIGN;
+      }
+  
+	} 
+	
 	public function setInifec($v)
 	{
 
@@ -246,6 +332,16 @@ abstract class BaseTspararc extends BaseObject  implements Persistent {
     if ($this->finfec !== $v) {
         $this->finfec = Herramientas::toFloat($v);
         $this->modifiedColumns[] = TspararcPeer::FINFEC;
+      }
+  
+	} 
+	
+	public function setForfec($v)
+	{
+
+    if ($this->forfec !== $v) {
+        $this->forfec = $v;
+        $this->modifiedColumns[] = TspararcPeer::FORFEC;
       }
   
 	} 
@@ -270,6 +366,26 @@ abstract class BaseTspararc extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setValdefp($v)
+	{
+
+    if ($this->valdefp !== $v) {
+        $this->valdefp = $v;
+        $this->modifiedColumns[] = TspararcPeer::VALDEFP;
+      }
+  
+	} 
+	
+	public function setValdefn($v)
+	{
+
+    if ($this->valdefn !== $v) {
+        $this->valdefn = $v;
+        $this->modifiedColumns[] = TspararcPeer::VALDEFN;
+      }
+  
+	} 
+	
 	public function setInides($v)
 	{
 
@@ -286,6 +402,16 @@ abstract class BaseTspararc extends BaseObject  implements Persistent {
     if ($this->findes !== $v) {
         $this->findes = Herramientas::toFloat($v);
         $this->modifiedColumns[] = TspararcPeer::FINDES;
+      }
+  
+	} 
+	
+	public function setValdefd($v)
+	{
+
+    if ($this->valdefd !== $v) {
+        $this->valdefd = $v;
+        $this->modifiedColumns[] = TspararcPeer::VALDEFD;
       }
   
 	} 
@@ -334,23 +460,35 @@ abstract class BaseTspararc extends BaseObject  implements Persistent {
 
       $this->finref = $rs->getFloat($startcol + 4);
 
-      $this->inifec = $rs->getFloat($startcol + 5);
+      $this->digsigp = $rs->getInt($startcol + 5);
 
-      $this->finfec = $rs->getFloat($startcol + 6);
+      $this->digsign = $rs->getInt($startcol + 6);
 
-      $this->initip = $rs->getFloat($startcol + 7);
+      $this->inifec = $rs->getFloat($startcol + 7);
 
-      $this->fintip = $rs->getFloat($startcol + 8);
+      $this->finfec = $rs->getFloat($startcol + 8);
 
-      $this->inides = $rs->getFloat($startcol + 9);
+      $this->forfec = $rs->getString($startcol + 9);
 
-      $this->findes = $rs->getFloat($startcol + 10);
+      $this->initip = $rs->getFloat($startcol + 10);
 
-      $this->inimon = $rs->getFloat($startcol + 11);
+      $this->fintip = $rs->getFloat($startcol + 11);
 
-      $this->finmon = $rs->getFloat($startcol + 12);
+      $this->valdefp = $rs->getString($startcol + 12);
 
-      $this->id = $rs->getInt($startcol + 13);
+      $this->valdefn = $rs->getString($startcol + 13);
+
+      $this->inides = $rs->getFloat($startcol + 14);
+
+      $this->findes = $rs->getFloat($startcol + 15);
+
+      $this->valdefd = $rs->getString($startcol + 16);
+
+      $this->inimon = $rs->getFloat($startcol + 17);
+
+      $this->finmon = $rs->getFloat($startcol + 18);
+
+      $this->id = $rs->getInt($startcol + 19);
 
       $this->resetModified();
 
@@ -358,7 +496,7 @@ abstract class BaseTspararc extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 14; 
+            return $startcol + 20; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Tspararc object", $e);
     }
@@ -521,30 +659,48 @@ abstract class BaseTspararc extends BaseObject  implements Persistent {
 				return $this->getFinref();
 				break;
 			case 5:
-				return $this->getInifec();
+				return $this->getDigsigp();
 				break;
 			case 6:
-				return $this->getFinfec();
+				return $this->getDigsign();
 				break;
 			case 7:
-				return $this->getInitip();
+				return $this->getInifec();
 				break;
 			case 8:
-				return $this->getFintip();
+				return $this->getFinfec();
 				break;
 			case 9:
-				return $this->getInides();
+				return $this->getForfec();
 				break;
 			case 10:
-				return $this->getFindes();
+				return $this->getInitip();
 				break;
 			case 11:
-				return $this->getInimon();
+				return $this->getFintip();
 				break;
 			case 12:
-				return $this->getFinmon();
+				return $this->getValdefp();
 				break;
 			case 13:
+				return $this->getValdefn();
+				break;
+			case 14:
+				return $this->getInides();
+				break;
+			case 15:
+				return $this->getFindes();
+				break;
+			case 16:
+				return $this->getValdefd();
+				break;
+			case 17:
+				return $this->getInimon();
+				break;
+			case 18:
+				return $this->getFinmon();
+				break;
+			case 19:
 				return $this->getId();
 				break;
 			default:
@@ -562,15 +718,21 @@ abstract class BaseTspararc extends BaseObject  implements Persistent {
 			$keys[2] => $this->getFincue(),
 			$keys[3] => $this->getIniref(),
 			$keys[4] => $this->getFinref(),
-			$keys[5] => $this->getInifec(),
-			$keys[6] => $this->getFinfec(),
-			$keys[7] => $this->getInitip(),
-			$keys[8] => $this->getFintip(),
-			$keys[9] => $this->getInides(),
-			$keys[10] => $this->getFindes(),
-			$keys[11] => $this->getInimon(),
-			$keys[12] => $this->getFinmon(),
-			$keys[13] => $this->getId(),
+			$keys[5] => $this->getDigsigp(),
+			$keys[6] => $this->getDigsign(),
+			$keys[7] => $this->getInifec(),
+			$keys[8] => $this->getFinfec(),
+			$keys[9] => $this->getForfec(),
+			$keys[10] => $this->getInitip(),
+			$keys[11] => $this->getFintip(),
+			$keys[12] => $this->getValdefp(),
+			$keys[13] => $this->getValdefn(),
+			$keys[14] => $this->getInides(),
+			$keys[15] => $this->getFindes(),
+			$keys[16] => $this->getValdefd(),
+			$keys[17] => $this->getInimon(),
+			$keys[18] => $this->getFinmon(),
+			$keys[19] => $this->getId(),
 		);
 		return $result;
 	}
@@ -602,30 +764,48 @@ abstract class BaseTspararc extends BaseObject  implements Persistent {
 				$this->setFinref($value);
 				break;
 			case 5:
-				$this->setInifec($value);
+				$this->setDigsigp($value);
 				break;
 			case 6:
-				$this->setFinfec($value);
+				$this->setDigsign($value);
 				break;
 			case 7:
-				$this->setInitip($value);
+				$this->setInifec($value);
 				break;
 			case 8:
-				$this->setFintip($value);
+				$this->setFinfec($value);
 				break;
 			case 9:
-				$this->setInides($value);
+				$this->setForfec($value);
 				break;
 			case 10:
-				$this->setFindes($value);
+				$this->setInitip($value);
 				break;
 			case 11:
-				$this->setInimon($value);
+				$this->setFintip($value);
 				break;
 			case 12:
-				$this->setFinmon($value);
+				$this->setValdefp($value);
 				break;
 			case 13:
+				$this->setValdefn($value);
+				break;
+			case 14:
+				$this->setInides($value);
+				break;
+			case 15:
+				$this->setFindes($value);
+				break;
+			case 16:
+				$this->setValdefd($value);
+				break;
+			case 17:
+				$this->setInimon($value);
+				break;
+			case 18:
+				$this->setFinmon($value);
+				break;
+			case 19:
 				$this->setId($value);
 				break;
 		} 	}
@@ -640,15 +820,21 @@ abstract class BaseTspararc extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[2], $arr)) $this->setFincue($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setIniref($arr[$keys[3]]);
 		if (array_key_exists($keys[4], $arr)) $this->setFinref($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setInifec($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setFinfec($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setInitip($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setFintip($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setInides($arr[$keys[9]]);
-		if (array_key_exists($keys[10], $arr)) $this->setFindes($arr[$keys[10]]);
-		if (array_key_exists($keys[11], $arr)) $this->setInimon($arr[$keys[11]]);
-		if (array_key_exists($keys[12], $arr)) $this->setFinmon($arr[$keys[12]]);
-		if (array_key_exists($keys[13], $arr)) $this->setId($arr[$keys[13]]);
+		if (array_key_exists($keys[5], $arr)) $this->setDigsigp($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setDigsign($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setInifec($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setFinfec($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setForfec($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setInitip($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setFintip($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setValdefp($arr[$keys[12]]);
+		if (array_key_exists($keys[13], $arr)) $this->setValdefn($arr[$keys[13]]);
+		if (array_key_exists($keys[14], $arr)) $this->setInides($arr[$keys[14]]);
+		if (array_key_exists($keys[15], $arr)) $this->setFindes($arr[$keys[15]]);
+		if (array_key_exists($keys[16], $arr)) $this->setValdefd($arr[$keys[16]]);
+		if (array_key_exists($keys[17], $arr)) $this->setInimon($arr[$keys[17]]);
+		if (array_key_exists($keys[18], $arr)) $this->setFinmon($arr[$keys[18]]);
+		if (array_key_exists($keys[19], $arr)) $this->setId($arr[$keys[19]]);
 	}
 
 	
@@ -661,12 +847,18 @@ abstract class BaseTspararc extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(TspararcPeer::FINCUE)) $criteria->add(TspararcPeer::FINCUE, $this->fincue);
 		if ($this->isColumnModified(TspararcPeer::INIREF)) $criteria->add(TspararcPeer::INIREF, $this->iniref);
 		if ($this->isColumnModified(TspararcPeer::FINREF)) $criteria->add(TspararcPeer::FINREF, $this->finref);
+		if ($this->isColumnModified(TspararcPeer::DIGSIGP)) $criteria->add(TspararcPeer::DIGSIGP, $this->digsigp);
+		if ($this->isColumnModified(TspararcPeer::DIGSIGN)) $criteria->add(TspararcPeer::DIGSIGN, $this->digsign);
 		if ($this->isColumnModified(TspararcPeer::INIFEC)) $criteria->add(TspararcPeer::INIFEC, $this->inifec);
 		if ($this->isColumnModified(TspararcPeer::FINFEC)) $criteria->add(TspararcPeer::FINFEC, $this->finfec);
+		if ($this->isColumnModified(TspararcPeer::FORFEC)) $criteria->add(TspararcPeer::FORFEC, $this->forfec);
 		if ($this->isColumnModified(TspararcPeer::INITIP)) $criteria->add(TspararcPeer::INITIP, $this->initip);
 		if ($this->isColumnModified(TspararcPeer::FINTIP)) $criteria->add(TspararcPeer::FINTIP, $this->fintip);
+		if ($this->isColumnModified(TspararcPeer::VALDEFP)) $criteria->add(TspararcPeer::VALDEFP, $this->valdefp);
+		if ($this->isColumnModified(TspararcPeer::VALDEFN)) $criteria->add(TspararcPeer::VALDEFN, $this->valdefn);
 		if ($this->isColumnModified(TspararcPeer::INIDES)) $criteria->add(TspararcPeer::INIDES, $this->inides);
 		if ($this->isColumnModified(TspararcPeer::FINDES)) $criteria->add(TspararcPeer::FINDES, $this->findes);
+		if ($this->isColumnModified(TspararcPeer::VALDEFD)) $criteria->add(TspararcPeer::VALDEFD, $this->valdefd);
 		if ($this->isColumnModified(TspararcPeer::INIMON)) $criteria->add(TspararcPeer::INIMON, $this->inimon);
 		if ($this->isColumnModified(TspararcPeer::FINMON)) $criteria->add(TspararcPeer::FINMON, $this->finmon);
 		if ($this->isColumnModified(TspararcPeer::ID)) $criteria->add(TspararcPeer::ID, $this->id);
@@ -710,17 +902,29 @@ abstract class BaseTspararc extends BaseObject  implements Persistent {
 
 		$copyObj->setFinref($this->finref);
 
+		$copyObj->setDigsigp($this->digsigp);
+
+		$copyObj->setDigsign($this->digsign);
+
 		$copyObj->setInifec($this->inifec);
 
 		$copyObj->setFinfec($this->finfec);
+
+		$copyObj->setForfec($this->forfec);
 
 		$copyObj->setInitip($this->initip);
 
 		$copyObj->setFintip($this->fintip);
 
+		$copyObj->setValdefp($this->valdefp);
+
+		$copyObj->setValdefn($this->valdefn);
+
 		$copyObj->setInides($this->inides);
 
 		$copyObj->setFindes($this->findes);
+
+		$copyObj->setValdefd($this->valdefd);
 
 		$copyObj->setInimon($this->inimon);
 

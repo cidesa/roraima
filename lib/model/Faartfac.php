@@ -131,7 +131,7 @@ class Faartfac extends BaseFaartfac
     }
 
     $this->canord=number_format((self::getCantot() - self::getCanaju()), 2, ',', '.');
-    $this->preart=number_format(self::getPrecio(), 2, ',', '.');
+    $this->preart=number_format(self::getPrecio() - self::getPreaju(), 2, ',', '.');
     $val=self::getPrecio() * self::getCantot();
     $this->montot=number_format($val, 2, ',', '.');
     $this->preaju=number_format(self::getPrecio(), 2, ',', '.');
