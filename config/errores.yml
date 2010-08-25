@@ -297,6 +297,9 @@
   cod: 199
   msj: La Cuenta Contable No existe.
 
+2100:
+  cod: 2100
+  msj: No se puede eliminar la Requisición debido a que existe un despacho (compra o servicio)
 ################### NOMINA ####################
 4400:
   cod: 4400
