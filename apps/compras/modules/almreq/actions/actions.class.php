@@ -332,12 +332,34 @@ class almreqActions extends autoalmreqActions
      return -1;
   }
 
+  public function executeDelete()
+  {
+    $this->careqart = CareqartPeer::retrieveByPk($this->getRequestParameter('id'));
+    $this->forward404Unless($this->careqart);
+
+    try
+    {
+      $this->deleteCareqart($this->careqart);
+      $this->Bitacora('Elimino');
+    }
+    catch (PropelException $e)
+    {
+      $this->getRequest()->setError('delete', 'No se pudo borrar la registro seleccionado. Asegúrese de que no tiene ningún tipo de registros asociados.');
+      return $this->forward('almreq', 'list');
+    }
+
+    return $this->forward('almreq', 'list');
+  }
+
   protected function deleteCareqart($careqart)
   {
     if (!Herramientas::getHay_Despacho($this->careqart->getReqart()))
     {
       $careqart->delete();
       Herramientas::EliminarRegistro('Caartreq','reqart',$this->careqart->getReqart());
+    }else{
+      $err = Herramientas::obtenerMensajeError(2100);
+      $this->getRequest()->setError('delete', $err);
     }
   }
 
