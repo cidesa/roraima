@@ -44,6 +44,26 @@ class almordcomActions extends autoalmordcomActions
 
         $grid_resumen=Herramientas::CargarDatosGrid($this,$this->obj_resumen,true);//0
 
+        // Validacion del nro de la orden de compra
+        $numord = str_replace('#','0',$this->caordcom->getOrdcom());
+        $numord = str_pad($numord, 8, '0', STR_PAD_LEFT);
+
+        $prefijomixto=H::getConfApp('prefijomixto', 'compras', 'almordcom');
+        if (($this->caordcom->getTipord()=='S') || ($this->caordcom->getTipord()=='M') || ($this->caordcom->getTipord()=='T'))
+        {
+          if ($prefijomixto!="" && $this->caordcom->getTipord()=='M')
+            $numord = $prefijomixto.substr($numord, 2, 6);
+          else $numord = 'OS'.substr($numord, 2, 6);
+        }else{
+          $numord = 'OC'.substr($numord, 2, 6);
+        }
+
+        if(Herramientas::getX_vacio('ordcom','caordcom','ordcom',$numord)!=''){
+          $this->coderror1 = 102;
+          $this->caordcom->setOrdcom($numord);
+          return false;
+        }
+
         $this->mannivelapr="";
 	    $varemp = $this->getUser()->getAttribute('configemp');
 	    if ($varemp)
