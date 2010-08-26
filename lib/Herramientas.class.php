@@ -2274,7 +2274,7 @@ public static function obtenerDiaMesOAno($fecha,$formato,$dmoa)
      if($aplicacion) $aplicacion= sfConfig::get('sf_app');
      if($modulo) $modulo= sfContext::getInstance()->getModuleName();
      $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
-		  if ($varemp){
+		  if ($varemp && is_array($varemp)){
         if(array_key_exists('aplicacion',$varemp))
          if(array_key_exists($aplicacion,$varemp['aplicacion']))
            if(array_key_exists('modulos',$varemp['aplicacion'][$aplicacion]))
