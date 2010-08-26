@@ -262,15 +262,7 @@ class CatalogoWeb extends BaseCatalogoWeb {
     $filretpro="";
     $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
     if ($varemp)
-	if(array_key_exists('aplicacion',$varemp))
-	 if(array_key_exists('tesoreria',$varemp['aplicacion']))
-	   if(array_key_exists('modulos',$varemp['aplicacion']['tesoreria']))
-	     if(array_key_exists('pagemiord',$varemp['aplicacion']['tesoreria']['modulos'])){
-	       if(array_key_exists('filretpro',$varemp['aplicacion']['tesoreria']['modulos']['pagemiord']))
-	       {
-	       	$filretpro=$varemp['aplicacion']['tesoreria']['modulos']['pagemiord']['filretpro'];
-	       }
-	     }
+      $filretpro = H::getConfApp ('filretpro', 'tesoreria', 'pagemiord');
 
 			$this->c = new Criteria();
          if ($filretpro=='S' && count($proveedor)>0) {
