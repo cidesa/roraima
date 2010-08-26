@@ -736,8 +736,13 @@ public static function CargarDatosGrid(&$form,$obj,$arreglo = false)
   {
     $c = new Criteria();
     $c->add(CadphartserPeer::REQART,$campo);
-    $reg = CadphartserPeer::doSelectone($c);
-    if ($reg) return true; else return false;
+    $reg_servicios = CadphartserPeer::doSelectone($c);
+
+    $c = new Criteria();
+    $c->add(CadphartPeer::REQART,$campo);
+    $reg_compras = CadphartPeer::doSelectone($c);
+
+    if ($reg_servicios || $reg_compras) return true; else return false;
   }
 
   public static function getMascaraCategoria(){
