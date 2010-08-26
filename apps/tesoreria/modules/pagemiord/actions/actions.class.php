@@ -2627,25 +2627,12 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
     $this->mansolocor="";
     $this->bloqfec="";
     $this->oculeli="";
-    if ($varemp)
-      if(array_key_exists('aplicacion',$varemp))
-        if(array_key_exists('tesoreria',$varemp['aplicacion']))
-          if(array_key_exists('modulos',$varemp['aplicacion']['tesoreria']))
-            if(array_key_exists('pagemiord',$varemp['aplicacion']['tesoreria']['modulos'])) {
-              if(array_key_exists('numorddesh',$varemp['aplicacion']['tesoreria']['modulos']['pagemiord'])) {
-                $this->numdesh=$varemp['aplicacion']['tesoreria']['modulos']['pagemiord']['numorddesh'];
-              }
-              if(array_key_exists('mansolocor',$varemp['aplicacion']['tesoreria']['modulos']['pagemiord'])) {
-                $this->mansolocor=$varemp['aplicacion']['tesoreria']['modulos']['pagemiord']['mansolocor'];
-              }
-              if(array_key_exists('bloqfec',$varemp['aplicacion']['tesoreria']['modulos']['pagemiord'])) {
-                $this->bloqfec=$varemp['aplicacion']['tesoreria']['modulos']['pagemiord']['bloqfec'];
-              }
-              if(array_key_exists('oculeli',$varemp['aplicacion']['tesoreria']['modulos']['pagemiord'])) {
-                $this->oculeli=$varemp['aplicacion']['tesoreria']['modulos']['pagemiord']['oculeli'];
-              }
-            }
-
+    if ($varemp){
+      $this->numdesh = H::getConfApp('numorddesh', 'tesoreria', 'pagemiord');
+      $this->mansolocor = H::getConfApp('mansolocor', 'tesoreria', 'pagemiord');
+      $this->bloqfec = H::getConfApp('bloqfec', 'tesoreria', 'pagemiord');
+      $this->oculeli = H::getConfApp('oculeli', 'tesoreria', 'pagemiord');
+    }
 
   }
 
