@@ -2020,14 +2020,8 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
         $this->cedrifdesh="";
         $varemp = $this->getUser()->getAttribute('configemp');
         if ($varemp)
-          if(array_key_exists('aplicacion',$varemp))
-            if(array_key_exists('tesoreria',$varemp['aplicacion']))
-              if(array_key_exists('modulos',$varemp['aplicacion']['tesoreria']))
-                if(array_key_exists('pagemiord',$varemp['aplicacion']['tesoreria']['modulos'])) {
-                  if(array_key_exists('cedrifdesh',$varemp['aplicacion']['tesoreria']['modulos']['pagemiord'])) {
-                    $this->cedrifdesh=$varemp['aplicacion']['tesoreria']['modulos']['pagemiord']['cedrifdesh'];
-                  }
-                }
+          $this->cedrifdesh = H::getConfApp ('cedrifdesh', 'tesoreria', 'pagemiord');
+        
         if ($this->cedrifdesh=='S') {
           $javascript=" $('opordpag_cedrif').readOnly=true; $('opordpag_nomben').readOnly=true; $$('.botoncat')[1].disabled=true;";
         }
