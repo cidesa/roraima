@@ -197,8 +197,6 @@ echo $value ? $value : '&nbsp;'
 	'control_name' => 'fafactur[numcontrol]',
 	'maxlength' => 8,
 	'readonly'  =>  $fafactur->getId()!='' ? true : false ,
-    #'onKeyPress' => "javascript:if (event.keyCode==13 || event.keyCode==9){document.getElementById('fafactur_fecfac').focus();}",
-    #'onBlur'  => "javascript:event.keyCode=13; enter(event,this.value);",
 ));
 echo $value ? $value : '&nbsp;'
 ?>
@@ -525,6 +523,35 @@ echo $value ? $value : '&nbsp;'
  <?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Fadefcom_Fafactur/clase/Fadefcom/frame/sf_admin_edit_form/obj1/fafactur_combo/campo1/codcom','','','botoncat')?>
     </div>
 </div>
+<div id="marcarrecargos" style="display:none">
+  <?php echo label_for('fafactur[marrec]', __($labels['fafactur{marrec}']), 'class="required" Style="text-align:left; width:150px"') ?>
+  <div class="content<?php if ($sf_request->hasError('fafactur{marrec}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('fafactur{marrec}')): ?>
+    <?php echo form_error('fafactur{marrec}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_checkbox_tag($fafactur, 'getMarrec', array (
+  'control_name' => 'fafactur[marrec]',
+  'onClick' => 'marcarTodo()',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+
+<br>
+
+  <?php echo label_for('fafactur[desrec]', __($labels['fafactur{desrec}']), 'class="required" Style="text-align:left; width:150px"') ?>
+  <div class="content<?php if ($sf_request->hasError('fafactur{desrec}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('fafactur{desrec}')): ?>
+    <?php echo form_error('fafactur{desrec}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_checkbox_tag($fafactur, 'getDesrec', array (
+  'control_name' => 'fafactur[desrec]',
+  'onClick' => 'desmarcarTodo()',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+
+<br>
+</div>
 <ul class="sf_admin_actions">
 <li>
 <input id="pedid" class="sf_admin_action_save" type="button" value="Pedidos Emitidos" onClick="despachos_pedido();">
@@ -713,6 +740,29 @@ echo $value ? $value : '&nbsp;'
 </th></tr></table>
 <br/>
 </div>
+<br/>
+<div id="divgrid_fafaclib">
+  <?php if($labels['fafactur{grid_fafaclib}']!='.:') { ?>
+  <?php echo label_for('fafactur[grid_fafaclib]', __($labels['fafactur{grid_fafaclib}' ]), 'class="required" Style="text-align:left; width:150px"') ?>
+  <div class="content<?php if ($sf_request->hasError('fafactur{grid_fafaclib}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('fafactur{grid_fafaclib}')): ?>
+    <?php echo form_error('fafactur{grid_fafaclib}', array('class' => 'form-error-msg')) ?>
+  <?php endif; }?>
+
+
+
+  <?php $value = get_partial('grid_fafaclib', array('type' => 'edit', 'fafactur' => $fafactur,'labels' => $labels,'params' => $params)); echo $value ? $value : '&nbsp;' ?>
+
+
+  <?php if($labels['fafactur{grid_fafaclib}']!='.:') { ?>
+
+
+
+</div>
+  <?php  } ?>
+
+</div>
+<br/>
 </div>
 </fieldset>
 <h2 class="h2" onclick="javascript: return $('divForma de Pago').toggle();"><?php echo __('Forma de Pago') ?></h2>
@@ -913,7 +963,21 @@ if (consul!="")
   mostrarPromedio();
   calcularPago();
   mostrarPromedio();
+}else {
+    var mansolcor='<?php echo $fafactur->getMansolcor()?>';
+    if (mansolcor=='S')
+    {
+        $('fafactur_numcontrol').value='##########';
+        $('fafactur_numcontrol').readOnly=true;
 }
+    $('marcarrecargos').show();
+}
+
+var gridfaclib='<?php echo $fafactur->getGridfaclib()?>';
+if (gridfaclib=='S')
+{
+    $('divgrid_fafaclib').show();
+}else { $('divgrid_fafaclib').hide(); }
 
  $('fafactur_tipper_J').disabled=true;
  $('fafactur_tipper_N').disabled=true;

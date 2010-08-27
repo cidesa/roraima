@@ -226,6 +226,20 @@
   'control_name' => 'facliente[email]',
 )); echo $value ? $value : '&nbsp;' ?></div>
 </th>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+<th>
+    <br>
+  <?php echo label_for('facliente[escontrib]', __($labels['facliente{escontrib}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('facliente{escontrib}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('facliente{escontrib}')): ?>
+    <?php echo form_error('facliente{escontrib}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_checkbox_tag($facliente, 'getEscontrib', array (
+  'control_name' => 'facliente[escontrib]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+</th>
 </tr>
 </table>
 

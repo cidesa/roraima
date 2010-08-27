@@ -4,7 +4,7 @@ generator:
     model_class:      Fadescripfac
     theme:            cidesaGenerator
     fields:
-      desfac:  { name: DescripciÃ³n, type: textarea_tag, params: size=80x5 maxlength=500 onkeyup=" return ismaxlength(this)"}
+      desfac:  { name: Descripción, type: textarea_tag, params: size=80x5 maxlength=500 onkeyup=" return ismaxlength(this)"}
     list:
       title:          Descripciones de Facturas
       display:        [=desfac]
@@ -15,7 +15,7 @@ generator:
       max_per_page:   10
       sort:           desfac
     edit:
-      title:   EdiciÃ³n de DescripciÃ³n de Factura
+      title:   Edición de Descripción de Factura
       display:
         "NONE": [desfac]
       actions:

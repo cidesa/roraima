@@ -12,7 +12,7 @@
  */
 class Factura {
 
-  public static function salvarFactura($fafactur,$grid1,$grid2,$grid3,$grid4,$tipocaja,&$msj,&$msj2,&$msj3)
+  public static function salvarFactura($fafactur,$grid1,$grid2,$grid3,$grid4,$tipocaja,&$msj,&$msj2,&$msj3,$grid6)
   {
     if ($fafactur->getIncluircliente()=='S')
     {
@@ -47,6 +47,12 @@ class Factura {
     }
 
     self::grabarComprobanteMaestro(&$fafactur,$arrasientos,&$pos);
+
+    $usalib=H::getConfApp('gridfaclib', 'facturacion', 'fafactur');
+    if ($usalib=='S')
+    {
+        self::grabarFacturaLibro($fafactur,$grid6);
+    }
 
     if ($fafactur->getTipconpag()=='R') //Pago a Crédito
     {
@@ -881,6 +887,31 @@ class Factura {
 
     $fafactur->setStatus('A');
     $fafactur->setCodcaj($tipocaja);
+    if ($fafactur->getNumcontrol()=='##########')
+    {
+       if (Herramientas::getVerCorrelativo('corfaccont','facorrelat',&$r))
+       {
+           $encontrado=false;
+            while (!$encontrado)
+            {
+              $numero=str_pad($r, 10, '0', STR_PAD_LEFT);
+
+              $sql="select numcontrol from fafactur where numcontrol='".$numero."'";
+              if (Herramientas::BuscarDatos($sql,&$result))
+              {
+                $r=$r+1;
+              }
+              else
+              {
+                $encontrado=true;
+              }
+            }
+            $fafactur->setNumcontrol(str_pad($r, 10, '0', STR_PAD_LEFT));
+
+         Herramientas::getSalvarCorrelativo('corfaccont','facorrelat','Referencia',$r,$msg);
+       }
+    }
+
     $fafactur->save();
 
     self::grabarDescuentoArticulo($fafactur,$grid1,$grid2);
@@ -2084,6 +2115,33 @@ class Factura {
 	  }
     }
     return $pago_mayor_igual;
+  }
+
+  public static function grabarFacturaLibro($fafactur,$grid6)
+  {
+      $x=$grid6[0];
+      $i=0;
+      while ($i<count($x))
+      {
+        if ($x[$i]->getFecfac()!="" && $x[$i]->getRifpro()!="" && $x[$i]->getTotfac()>0)
+        {
+           $x[$i]->setReffac($fafactur->getReffac());
+           $x[$i]->setCodcli(H::getX('RIFPRO','Facliente','CODPRO',$x[$i]->getRifpro()));
+           $x[$i]->save();
+}
+       $i++;
+      }
+
+    $z=$grid6[1];
+    $j=0;
+    if (!empty($z[$j]))
+    {
+        while ($j<count($z))
+        {
+          $z[$j]->delete();
+          $j++;
+        }
+    }
   }
 
 }

@@ -4,7 +4,7 @@ generator:
     model_class:      Faobservafac
     theme:            cidesaGenerator
     fields:
-      obsfac:  { name: ObservaciÃ³n, type: textarea_tag, params: size=80x5 maxlength=500 onkeyup=" return ismaxlength(this)"}
+      obsfac:  { name: Observación, type: textarea_tag, params: size=80x5 maxlength=500 onkeyup=" return ismaxlength(this)"}
     list:
       title:          Observaciones de Facturas
       display:        [=obsfac]
@@ -15,7 +15,7 @@ generator:
       max_per_page:   10
       sort:           obsfac
     edit:
-      title:   EdiciÃ³n de ObservaciÃ³n de Factura
+      title:   Edición de Observación de Factura
       display:
         "NONE": [obsfac]
       actions:
