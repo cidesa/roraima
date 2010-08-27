@@ -20,6 +20,7 @@ class Fafactur extends BaseFafactur
 	protected $obj3=array();
 	protected $obj4=array();
 	protected $obj5=array();
+        protected $obj6=array();
 	protected $incluircliente="N";
 	protected $rifpro="";
 	protected $nompro="";
@@ -60,6 +61,12 @@ class Fafactur extends BaseFafactur
     protected $codtip="";
 	protected $destip="";
 	protected $filgenmov="";
+        protected $mansolcor="";
+        protected $marrec="";
+        protected $desrec="";
+        protected $gridfaclib="";
+        protected $mancatdes="";
+        protected $notacredito="";
 
   public function getRifpro()
   {
@@ -118,6 +125,79 @@ class Fafactur extends BaseFafactur
            return H::GetX('Reftra','Contabc','Numcom','FA'.substr($this->reffac,2));
        }
        return $this->numcom;
+  }
+
+  public function getMansolcor()
+  {
+
+    $dato="";
+    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('facturacion',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['facturacion']))
+	     if(array_key_exists('fafactur',$varemp['aplicacion']['facturacion']['modulos'])){
+	       if(array_key_exists('mansolcor',$varemp['aplicacion']['facturacion']['modulos']['fafactur']))
+	       {
+	       	$dato=$varemp['aplicacion']['facturacion']['modulos']['fafactur']['mansolcor'];
+}
+         }
+     return $dato;
+  }
+
+  public function setMansolcor()
+  {
+  	return $this->mansolcor;
+  }
+
+  public function getGridfaclib()
+  {
+    $dato="";
+    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('facturacion',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['facturacion']))
+	     if(array_key_exists('fafactur',$varemp['aplicacion']['facturacion']['modulos'])){
+	       if(array_key_exists('gridfaclib',$varemp['aplicacion']['facturacion']['modulos']['fafactur']))
+	       {
+	       	$dato=$varemp['aplicacion']['facturacion']['modulos']['fafactur']['gridfaclib'];
+	       }
+         }
+     return $dato;
+  }
+
+  public function setGridfaclib()
+  {
+  	return $this->gridfaclib;
+  }
+
+public function getMancatdes()
+  {
+
+    $dato="";
+    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('facturacion',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['facturacion']))
+	     if(array_key_exists('fafactur',$varemp['aplicacion']['facturacion']['modulos'])){
+	       if(array_key_exists('mancatdes',$varemp['aplicacion']['facturacion']['modulos']['fafactur']))
+	       {
+	       	$dato=$varemp['aplicacion']['facturacion']['modulos']['fafactur']['mancatdes'];
+	       }
+         }
+     return $dato;
+  }
+
+  public function setMancatdes()
+  {
+  	return $this->mancatdes;
+  }
+
+  public function getDesubi()
+  {
+   return Herramientas::getX('CODUBI','Bnubica','Desubi',self::getCodubi());
   }
 
 }

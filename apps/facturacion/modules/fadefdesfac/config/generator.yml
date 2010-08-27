@@ -1,0 +1,25 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Fadescripfac
+    theme:            cidesaGenerator
+    fields:
+      desfac:  { name: DescripciÃ³n, type: textarea_tag, params: size=80x5 maxlength=500 onkeyup=" return ismaxlength(this)"}
+    list:
+      title:          Descripciones de Facturas
+      display:        [=desfac]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [desfac]
+      max_per_page:   10
+      sort:           desfac
+    edit:
+      title:   EdiciÃ³n de DescripciÃ³n de Factura
+      display:
+        "NONE": [desfac]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

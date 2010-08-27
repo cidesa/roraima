@@ -3420,3 +3420,197 @@
       $('fafactur_codtip').focus();
     }
   }
+
+ function marcarTodo()
+  {
+   $('fafactur_marrec').checked=false;
+   var infrecargos="ax"+"_0_12";
+   var distrib=toFloat(infrecargos);
+   var articulo="ax"+"_0_3";
+   var valorarticulo=$(articulo).value;
+   if (valorarticulo!="")
+   {
+    if (distrib>0)
+    {
+        var fil=0;
+        var facart=totalregistros2('ax',3,25);
+        while (fil<facart)
+        {
+	     var codart="ax_"+fil+"_3";
+             var check="ax_"+fil+"_1";
+
+             if ($(codart).value!="")
+             {
+               $(check).checked=true;
+	     }
+	   fil++;
+	}
+        actualizarRecargos();
+        recalcularRecargos();
+        montoTotal();
+
+   }// if (distrib!="")
+   else
+   {
+    alert_("No han sido aplicados Recargos al primer Art&iacute;culo del Detalle, C&oacute;digo: "+ valorarticulo+". Deben ser definidos estos Recargos para poder replicarlos al resto de los Art&iacute;culo del Detalle de la Factura ")
+   }
+  }
+  }
+
+  function desmarcarTodo()
+  {
+     $('fafactur_desrec').checked=false;
+     var fil=1;
+     var facart=totalregistros2('ax',3,25);
+     var colum=determinarReferenciaDoc($('fafactur_tipref').value);
+     while (fil<facart)
+     {
+      var codart="ax"+"_"+fil+"_3";
+      if ($(codart).value!="")
+      {
+       var id="ax"+"_"+fil+"_1";
+       var precio="ax_"+fil+"_10";
+       var precioe="ax_"+fil+"_11";
+       var cant="ax_"+fil+"_"+colum;
+       var dest="ax"+"_"+fil+"_18";
+       var recargo="ax_"+fil+"_12";
+       var total="ax"+"_"+fil+"_13";
+
+         if ($(precio)){
+	     if ($(precio).value!="") {var col9=toFloat(precio);}else {var col9=toFloat(precioe);}
+         }
+         var colcant=toFloat(cant);
+
+         var monuni= colcant * col9;
+	 var mondto=toFloat(dest);
+
+	 var monrgotot=0;
+
+         $(recargo).value=format(monrgotot.toFixed(2),'.',',','.');
+         montottot=monuni-mondto;
+	 $(total).value=format(montottot.toFixed(2),'.',',','.');
+	 $(id).checked=false;
+
+      }//if ($(codart).value!="")
+      else
+      {
+       fil=facart;
+      }
+      fil++;
+    }//while (fil<facart)
+    montoTotal();
+
+  }
+
+function aplicarBL(id)
+{
+    var aux = id.split("_");
+    var name=aux[0];
+    var fil=aux[1];
+    var col=parseInt(aux[2]);
+
+   if (fil==0) {
+       reg=totalregistros2('ax',3,25);
+        var j=1;
+        while (j<reg)
+        {
+          var billindg="ax_"+j+"_27";
+          $(billindg).value=$(id).value;
+         j++;
+        }
+   }
+  }
+
+  function calculardif(id)
+  {
+    var aux = id.split("_");
+    var name=aux[0];
+    var fil=aux[1];
+    var col=parseInt(aux[2]);
+
+    var num=toFloat(id);
+
+    if (num>0) {
+
+    if (col==45 || col==46)
+    {
+        var ko=name+"_"+fil+"_45";
+        var ke=name+"_"+fil+"_46";
+        var dk=name+"_"+fil+"_47";
+        var to=name+"_"+fil+"_51";
+        var te=name+"_"+fil+"_52";
+        var dt=name+"_"+fil+"_53";
+
+        var num1=toFloat(ko);
+        var num2=toFloat(ke);
+        var resta= num1 - num2;
+        if (col==45)
+        {
+            var cal=num1/1000;
+            $(to).value=format(cal.toFixed(2),'.',',','.');
+        }
+
+        if (col==46)
+        {
+          var cal2=num2/1000;
+            $(te).value=format(cal2.toFixed(2),'.',',','.');
+        }
+
+        var num5=toFloat(to);
+        var num6=toFloat(te);
+        var resta2= num5 - num6;
+
+        $(dt).value=format(resta2.toFixed(2),'.',',','.'); //diferencia Toneladas
+        $(dk).value=format(resta.toFixed(2),'.',',','.'); //diferencia kilogramos
+    }
+
+    if (col==48 || col==49)
+    {
+        var co=name+"_"+fil+"_48";
+        var ce=name+"_"+fil+"_49";
+        var dc=name+"_"+fil+"_50";
+
+        var num3=toFloat(co);
+        var num4=toFloat(ce);
+        var resta1= num3 - num4;
+
+        $(dc).value=format(resta1.toFixed(2),'.',',','.');
+    }
+
+    if (col==51 || col==52)
+    {
+        var to=name+"_"+fil+"_51";
+        var te=name+"_"+fil+"_52";
+        var dt=name+"_"+fil+"_53";
+        var ko=name+"_"+fil+"_45";
+        var ke=name+"_"+fil+"_46";
+        var dk=name+"_"+fil+"_47";
+
+        var num5=toFloat(to);
+        var num6=toFloat(te);
+        var resta2= num5 - num6;
+
+        if (col==51)
+        {
+            var cal=num5*1000;
+            $(ko).value=format(cal.toFixed(2),'.',',','.');
+        }
+        if (col==52)
+        {
+            var cal2=num6*1000;
+            $(ke).value=format(cal2.toFixed(2),'.',',','.');
+        }
+
+        var num1=toFloat(ko);
+        var num2=toFloat(ke);
+        var resta= num1 - num2;
+
+        $(dk).value=format(resta.toFixed(2),'.',',','.'); //diferencia kilogramos
+        $(dt).value=format(resta2.toFixed(2),'.',',','.'); //diferencia Toneladas
+    }
+  }else {
+      alert("El Valor introducido debe ser mayor a cero");
+      $(id).value="0,00";
+  }
+
+}

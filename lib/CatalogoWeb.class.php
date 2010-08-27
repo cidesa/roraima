@@ -6234,6 +6234,203 @@ public function Catdefcatman_Cattramo($params = '') {
 
 	}
 
+	public function Fordefcatpre_Forotrcrepre($params = array ()) {
+
+		$this->c = new Criteria();
+		$this->sql = "length(codcat) = '" . $params[0] . "'";
+		$this->c->add(FordefcatprePeer :: CODCAT, $this->sql, Criteria :: CUSTOM);
+
+		$this->columnas = array (
+			FordefcatprePeer :: CODCAT => 'Código',
+			FordefcatprePeer :: NOMCAT => 'Nombre'
+		);
+
+	}
+
+	public function Fordeforgpub_Forotrcrepre($params = array ()) {
+
+		$this->c = new Criteria();
+
+		$this->columnas = array (
+			FordeforgpubPeer :: CODORG => 'Código',
+			FordeforgpubPeer :: NOMORG => 'Nombre'
+		);
+
+	}
+
+	public function Fordefunieje_Forcatprogra() {
+
+		$this->c = new Criteria();
+
+		$this->columnas = array (
+			FordefuniejePeer :: CODUNI => 'Código',
+			FordefuniejePeer :: NOMUNI => 'Nombre'
+		);
+
+	}
+
+	public function Fordefpro_Fordefmet() {
+
+		$this->c = new Criteria();
+
+		$this->columnas = array (
+			FordefproPeer :: CODPRO => 'Código',
+			FordefproPeer :: DESPRO => 'Descripción'
+		);
+
+	}
+
+	public function Fordefproble_Forasoproobj() {
+
+		$this->c = new Criteria();
+
+		$this->columnas = array (
+			FordefproblePeer :: CODPRO => 'Código',
+			FordefproblePeer :: NOMPRO => 'Descripción'
+		);
+
+	}
+
+	public function Fordefobj_Forasoproobj() {
+
+		$this->c = new Criteria();
+
+		$this->columnas = array (
+			FordefobjPeer :: CODOBJ => 'Código',
+			FordefobjPeer :: DESOBJ => 'Descripción'
+		);
+
+	}
+
+	public function Fordefmet_Forasometobj() {
+
+		$this->c = new Criteria();
+
+		$this->columnas = array (
+			FordefmetPeer :: CODMET => 'Código',
+			FordefmetPeer :: DESMET => 'Descripción'
+		);
+
+	}
+
+	public function Fordefact_Forasoactmet() {
+
+		$this->c = new Criteria();
+
+		$this->columnas = array (
+			FordefactPeer :: CODACT => 'Código',
+			FordefactPeer :: DESACT => 'Descripción'
+		);
+
+	}
+
+	public function Fordefpro_Forasoactmet($params = array ()) {
+
+		$this->c = new Criteria();
+                $this->c->add( ForasoprometPeer::CODMET,$params[0]);
+                $this->c->addJoin(FordefproPeer::CODPRO, ForasoprometPeer::CODPRO);
+
+		$this->columnas = array (
+			FordefproPeer :: CODPRO => 'Código',
+			FordefproPeer :: DESPRO => 'Descripción'
+		);
+
+	}
+
+	public function Caregart_Forestcos($params = array ()) {
+		$this->c = new Criteria();
+		$longitud = $params[0];
+		$this->c = new Criteria();
+		$this->sql = "length(Codart) = '" . $longitud . "'";
+		$this->c->add(CaregartPeer :: CODART, $this->sql, Criteria :: CUSTOM);
+
+		$this->columnas = array (
+			CaregartPeer :: CODART => 'Codigo',
+			CaregartPeer :: DESART => 'Descripcion',
+			CaregartPeer :: UNIMED => 'Unidad',
+			CaregartPeer :: CODPAR => 'Partida',
+                        CaregartPeer :: COSULT => 'Costo'
+		);
+	}
+
+	public function Seggrupo_Segasigpergru() {
+
+		$this->c = new Criteria();
+
+		$this->columnas = array (
+			SeggrupoPeer :: CODGRU => 'Código',
+			SeggrupoPeer :: DESGRU => 'Descripción'
+		);
+
+	}
+
+	public function Fordefobr_Forpreobr() {
+
+		$this->c = new Criteria();
+
+		$this->columnas = array (
+			FordefobrPeer :: CODOBR => 'Código',
+			FordefobrPeer :: NOMOBR => 'Descripción',
+                        FordefobrPeer :: CODPAREGR => 'Partida'
+		);
+
+	}
+
+	public function Fadescripfac_Fafacturpro() {
+
+		$this->c = new Criteria();
+
+		$this->columnas = array (
+			FadescripfacPeer :: DESFAC => 'Descripción'
+		);
+
+}
+
+	public function Caprovee_Faregots() {
+		$this->c = new Criteria();
+		$this->c->add(CaproveePeer :: TIPO, 'P');
+
+		$this->columnas = array (
+			CaproveePeer :: RIFPRO => 'Código',
+			CaproveePeer :: NOMPRO => 'Descripción',
+			CaproveePeer :: CODPRO => 'Codigo'
+		);
+
+	}
+
+	public function Faregots_Fafacturpro() {
+		$this->c = new Criteria();
+
+		$this->columnas = array (
+			FaregotsPeer :: CEDRIF => 'Cédula',
+			FaregotsPeer :: NOMOTS => 'Nombre',
+			FaregotsPeer :: RIFPRO => 'Cooperativa',
+                        FaregotsPeer :: PLACA => 'Placa'
+		);
+
+	}
+
+	public function Faobservafac_Fafacturpro() {
+
+		$this->c = new Criteria();
+
+		$this->columnas = array (
+			FaobservafacPeer :: OBSFAC => 'Observación'
+		);
+
+	}
+
+	public function Fadefpro_Fafacturpro() {
+		$this->c = new Criteria();
+
+		$this->columnas = array (
+			FadefproPeer :: CODPROD => 'Código',
+			FadefproPeer :: DESPROD => 'Descripción'
+		);
+
+	}
+
+
         
 }
 

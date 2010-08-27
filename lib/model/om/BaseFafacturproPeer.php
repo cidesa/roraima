@@ -13,7 +13,7 @@ abstract class BaseFafacturproPeer {
 	const CLASS_DEFAULT = 'lib.model.Fafacturpro';
 
 	
-	const NUM_COLUMNS = 23;
+	const NUM_COLUMNS = 24;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -86,6 +86,9 @@ abstract class BaseFafacturproPeer {
 	const NUMCONTROL = 'fafacturpro.NUMCONTROL';
 
 	
+	const CODUBI = 'fafacturpro.CODUBI';
+
+	
 	const ID = 'fafacturpro.ID';
 
 	
@@ -94,18 +97,18 @@ abstract class BaseFafacturproPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Reffac', 'Fecfac', 'Codcli', 'Desfac', 'Tipref', 'Monfac', 'Mondesc', 'Codconpag', 'Numcom', 'Reapor', 'Fecanu', 'Status', 'Observ', 'Tipmon', 'Valmon', 'Numcomord', 'Numcominv', 'Sucursal', 'Motanu', 'Vuelto', 'Codcaj', 'Numcontrol', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (FafacturproPeer::REFFAC, FafacturproPeer::FECFAC, FafacturproPeer::CODCLI, FafacturproPeer::DESFAC, FafacturproPeer::TIPREF, FafacturproPeer::MONFAC, FafacturproPeer::MONDESC, FafacturproPeer::CODCONPAG, FafacturproPeer::NUMCOM, FafacturproPeer::REAPOR, FafacturproPeer::FECANU, FafacturproPeer::STATUS, FafacturproPeer::OBSERV, FafacturproPeer::TIPMON, FafacturproPeer::VALMON, FafacturproPeer::NUMCOMORD, FafacturproPeer::NUMCOMINV, FafacturproPeer::SUCURSAL, FafacturproPeer::MOTANU, FafacturproPeer::VUELTO, FafacturproPeer::CODCAJ, FafacturproPeer::NUMCONTROL, FafacturproPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('reffac', 'fecfac', 'codcli', 'desfac', 'tipref', 'monfac', 'mondesc', 'codconpag', 'numcom', 'reapor', 'fecanu', 'status', 'observ', 'tipmon', 'valmon', 'numcomord', 'numcominv', 'sucursal', 'motanu', 'vuelto', 'codcaj', 'numcontrol', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, )
+		BasePeer::TYPE_PHPNAME => array ('Reffac', 'Fecfac', 'Codcli', 'Desfac', 'Tipref', 'Monfac', 'Mondesc', 'Codconpag', 'Numcom', 'Reapor', 'Fecanu', 'Status', 'Observ', 'Tipmon', 'Valmon', 'Numcomord', 'Numcominv', 'Sucursal', 'Motanu', 'Vuelto', 'Codcaj', 'Numcontrol', 'Codubi', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (FafacturproPeer::REFFAC, FafacturproPeer::FECFAC, FafacturproPeer::CODCLI, FafacturproPeer::DESFAC, FafacturproPeer::TIPREF, FafacturproPeer::MONFAC, FafacturproPeer::MONDESC, FafacturproPeer::CODCONPAG, FafacturproPeer::NUMCOM, FafacturproPeer::REAPOR, FafacturproPeer::FECANU, FafacturproPeer::STATUS, FafacturproPeer::OBSERV, FafacturproPeer::TIPMON, FafacturproPeer::VALMON, FafacturproPeer::NUMCOMORD, FafacturproPeer::NUMCOMINV, FafacturproPeer::SUCURSAL, FafacturproPeer::MOTANU, FafacturproPeer::VUELTO, FafacturproPeer::CODCAJ, FafacturproPeer::NUMCONTROL, FafacturproPeer::CODUBI, FafacturproPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('reffac', 'fecfac', 'codcli', 'desfac', 'tipref', 'monfac', 'mondesc', 'codconpag', 'numcom', 'reapor', 'fecanu', 'status', 'observ', 'tipmon', 'valmon', 'numcomord', 'numcominv', 'sucursal', 'motanu', 'vuelto', 'codcaj', 'numcontrol', 'codubi', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Reffac' => 0, 'Fecfac' => 1, 'Codcli' => 2, 'Desfac' => 3, 'Tipref' => 4, 'Monfac' => 5, 'Mondesc' => 6, 'Codconpag' => 7, 'Numcom' => 8, 'Reapor' => 9, 'Fecanu' => 10, 'Status' => 11, 'Observ' => 12, 'Tipmon' => 13, 'Valmon' => 14, 'Numcomord' => 15, 'Numcominv' => 16, 'Sucursal' => 17, 'Motanu' => 18, 'Vuelto' => 19, 'Codcaj' => 20, 'Numcontrol' => 21, 'Id' => 22, ),
-		BasePeer::TYPE_COLNAME => array (FafacturproPeer::REFFAC => 0, FafacturproPeer::FECFAC => 1, FafacturproPeer::CODCLI => 2, FafacturproPeer::DESFAC => 3, FafacturproPeer::TIPREF => 4, FafacturproPeer::MONFAC => 5, FafacturproPeer::MONDESC => 6, FafacturproPeer::CODCONPAG => 7, FafacturproPeer::NUMCOM => 8, FafacturproPeer::REAPOR => 9, FafacturproPeer::FECANU => 10, FafacturproPeer::STATUS => 11, FafacturproPeer::OBSERV => 12, FafacturproPeer::TIPMON => 13, FafacturproPeer::VALMON => 14, FafacturproPeer::NUMCOMORD => 15, FafacturproPeer::NUMCOMINV => 16, FafacturproPeer::SUCURSAL => 17, FafacturproPeer::MOTANU => 18, FafacturproPeer::VUELTO => 19, FafacturproPeer::CODCAJ => 20, FafacturproPeer::NUMCONTROL => 21, FafacturproPeer::ID => 22, ),
-		BasePeer::TYPE_FIELDNAME => array ('reffac' => 0, 'fecfac' => 1, 'codcli' => 2, 'desfac' => 3, 'tipref' => 4, 'monfac' => 5, 'mondesc' => 6, 'codconpag' => 7, 'numcom' => 8, 'reapor' => 9, 'fecanu' => 10, 'status' => 11, 'observ' => 12, 'tipmon' => 13, 'valmon' => 14, 'numcomord' => 15, 'numcominv' => 16, 'sucursal' => 17, 'motanu' => 18, 'vuelto' => 19, 'codcaj' => 20, 'numcontrol' => 21, 'id' => 22, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, )
+		BasePeer::TYPE_PHPNAME => array ('Reffac' => 0, 'Fecfac' => 1, 'Codcli' => 2, 'Desfac' => 3, 'Tipref' => 4, 'Monfac' => 5, 'Mondesc' => 6, 'Codconpag' => 7, 'Numcom' => 8, 'Reapor' => 9, 'Fecanu' => 10, 'Status' => 11, 'Observ' => 12, 'Tipmon' => 13, 'Valmon' => 14, 'Numcomord' => 15, 'Numcominv' => 16, 'Sucursal' => 17, 'Motanu' => 18, 'Vuelto' => 19, 'Codcaj' => 20, 'Numcontrol' => 21, 'Codubi' => 22, 'Id' => 23, ),
+		BasePeer::TYPE_COLNAME => array (FafacturproPeer::REFFAC => 0, FafacturproPeer::FECFAC => 1, FafacturproPeer::CODCLI => 2, FafacturproPeer::DESFAC => 3, FafacturproPeer::TIPREF => 4, FafacturproPeer::MONFAC => 5, FafacturproPeer::MONDESC => 6, FafacturproPeer::CODCONPAG => 7, FafacturproPeer::NUMCOM => 8, FafacturproPeer::REAPOR => 9, FafacturproPeer::FECANU => 10, FafacturproPeer::STATUS => 11, FafacturproPeer::OBSERV => 12, FafacturproPeer::TIPMON => 13, FafacturproPeer::VALMON => 14, FafacturproPeer::NUMCOMORD => 15, FafacturproPeer::NUMCOMINV => 16, FafacturproPeer::SUCURSAL => 17, FafacturproPeer::MOTANU => 18, FafacturproPeer::VUELTO => 19, FafacturproPeer::CODCAJ => 20, FafacturproPeer::NUMCONTROL => 21, FafacturproPeer::CODUBI => 22, FafacturproPeer::ID => 23, ),
+		BasePeer::TYPE_FIELDNAME => array ('reffac' => 0, 'fecfac' => 1, 'codcli' => 2, 'desfac' => 3, 'tipref' => 4, 'monfac' => 5, 'mondesc' => 6, 'codconpag' => 7, 'numcom' => 8, 'reapor' => 9, 'fecanu' => 10, 'status' => 11, 'observ' => 12, 'tipmon' => 13, 'valmon' => 14, 'numcomord' => 15, 'numcominv' => 16, 'sucursal' => 17, 'motanu' => 18, 'vuelto' => 19, 'codcaj' => 20, 'numcontrol' => 21, 'codubi' => 22, 'id' => 23, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, )
 	);
 
 	
@@ -202,6 +205,8 @@ abstract class BaseFafacturproPeer {
 		$criteria->addSelectColumn(FafacturproPeer::CODCAJ);
 
 		$criteria->addSelectColumn(FafacturproPeer::NUMCONTROL);
+
+		$criteria->addSelectColumn(FafacturproPeer::CODUBI);
 
 		$criteria->addSelectColumn(FafacturproPeer::ID);
 

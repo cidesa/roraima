@@ -66,21 +66,19 @@ class FaartfacproMapBuilder {
 
 		$tMap->addColumn('BILLLEADING', 'Billleading', 'string', CreoleTypes::VARCHAR, false, 100);
 
-		$tMap->addColumn('NUMTRANSP', 'Numtransp', 'string', CreoleTypes::VARCHAR, false, 10);
-
 		$tMap->addColumn('PLACA', 'Placa', 'string', CreoleTypes::VARCHAR, false, 10);
 
-		$tMap->addColumn('CHOFER', 'Chofer', 'string', CreoleTypes::VARCHAR, false, 200);
+		$tMap->addColumn('RIFPRO', 'Rifpro', 'string', CreoleTypes::VARCHAR, false, 15);
 
 		$tMap->addColumn('FECSAL', 'Fecsal', 'int', CreoleTypes::TIMESTAMP, false, null);
 
-		$tMap->addColumn('HORSAL', 'Horsal', 'string', CreoleTypes::VARCHAR, false, null);
+		$tMap->addColumn('HORSAL', 'Horsal', 'string', CreoleTypes::VARCHAR, false, 10);
 
 		$tMap->addColumn('FECLLEG', 'Feclleg', 'int', CreoleTypes::TIMESTAMP, false, null);
 
-		$tMap->addColumn('HORLLEG', 'Horlleg', 'string', CreoleTypes::VARCHAR, false, null);
+		$tMap->addColumn('HORLLEG', 'Horlleg', 'string', CreoleTypes::VARCHAR, false, 10);
 
-		$tMap->addColumn('PROD', 'Prod', 'string', CreoleTypes::VARCHAR, false, 100);
+		$tMap->addColumn('CODPROD', 'Codprod', 'string', CreoleTypes::VARCHAR, false, 8);
 
 		$tMap->addColumn('KG', 'Kg', 'double', CreoleTypes::NUMERIC, false, 14);
 
@@ -91,6 +89,36 @@ class FaartfacproMapBuilder {
 		$tMap->addColumn('OBSERVACIONES', 'Observaciones', 'string', CreoleTypes::VARCHAR, false, 500);
 
 		$tMap->addColumn('TM', 'Tm', 'double', CreoleTypes::NUMERIC, false, 14);
+
+		$tMap->addColumn('CEDRIF', 'Cedrif', 'string', CreoleTypes::VARCHAR, false, 15);
+
+		$tMap->addColumn('NOTENTDIG', 'Notentdig', 'string', CreoleTypes::VARCHAR, false, 15);
+
+		$tMap->addColumn('TIPOV', 'Tipov', 'string', CreoleTypes::VARCHAR, false, 1);
+
+		$tMap->addColumn('FECLLCA', 'Fecllca', 'int', CreoleTypes::TIMESTAMP, false, null);
+
+		$tMap->addColumn('HORLLCA', 'Horllca', 'string', CreoleTypes::VARCHAR, false, 10);
+
+		$tMap->addColumn('FECDESC', 'Fecdesc', 'int', CreoleTypes::TIMESTAMP, false, null);
+
+		$tMap->addColumn('HORDESC', 'Hordesc', 'string', CreoleTypes::VARCHAR, false, 10);
+
+		$tMap->addColumn('KGENT', 'Kgent', 'double', CreoleTypes::NUMERIC, false, 14);
+
+		$tMap->addColumn('DIFKG', 'Difkg', 'double', CreoleTypes::NUMERIC, false, 14);
+
+		$tMap->addColumn('CAJASENT', 'Cajasent', 'double', CreoleTypes::NUMERIC, false, 14);
+
+		$tMap->addColumn('DIFCAJ', 'Difcaj', 'double', CreoleTypes::NUMERIC, false, 14);
+
+		$tMap->addColumn('TMENT', 'Tment', 'double', CreoleTypes::NUMERIC, false, 14);
+
+		$tMap->addColumn('DIFTON', 'Difton', 'double', CreoleTypes::NUMERIC, false, 14);
+
+		$tMap->addColumn('IER', 'Ier', 'string', CreoleTypes::VARCHAR, false, 15);
+
+		$tMap->addColumn('NUMFAC', 'Numfac', 'string', CreoleTypes::VARCHAR, false, 8);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 

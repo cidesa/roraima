@@ -17,6 +17,9 @@ class Faartfacpro extends BaseFaartfacpro
 {
     protected $rifpro='';
     protected $check='';
+    protected $precioe="0,00";
+    protected $estatus2="";
+
     public function getEstatus()
     {
         if($this->estatus=='')
@@ -31,6 +34,28 @@ class Faartfacpro extends BaseFaartfacpro
             $this->check=true;
         else
             $this->check=false;
+
+        if (self::getPrecio()!=0)
+        {
+          $this->precioe=number_format(self::getPrecio(), 2, ',', '.');
+        }
+
+        $this->estatus2=self::getEstatus();
+    }
+
+    public function getNomots()
+    {
+      return Herramientas::getX('CEDRIF','Faregots','Nomots',self::getCedrif());
+    }
+
+    public function getNompro()
+    {
+      return Herramientas::getX('RIFPRO','Caprovee','Nompro',self::getRifpro());
+    }
+
+    public function getDesprod()
+    {
+      return Herramientas::getX('CODPROD','Fadefpro','Desprod',self::getCodprod());
     }
 
 }

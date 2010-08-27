@@ -1,0 +1,48 @@
+methods:
+  post:
+   - "faregots{cedrif}"
+   - "faregots{nomots}"
+   - "faregots{rifpro}"
+   - "faregots{placa}"
+
+names:
+  faregots{cedrif}:
+    required:  Yes
+    required_msg: No puede salvar sin Introducir la CÃ©dula del Operador
+    validators: UniqueValidator
+
+  faregots{nomots}:
+    required:  Yes
+    required_msg: No puede salvar sin Introducir el Nombre del Operador
+    validators: DescripcionValidator
+
+  faregots{rifpro}:
+    required:  Yes
+    required_msg: No puede salvar sin Introducir la Constratista
+    validators: ContratistaValidator
+
+  faregots{placa}:
+    required:  Yes
+    required_msg: No puede salvar sin Introducir la Placa del Transporte
+
+DescripcionValidator:
+    class: sfStringValidator
+    param:
+        min:       5
+        min_error: El Nombre del Operador no puede tener menos de 5 caracteres
+        max:       250
+        max_error: El Nombre del Operador no puede tener mÃ¡s de 250 caracteres
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Faregots
+        column:   cedrif
+        unique_error:   La CÃ©dula del Operador ya existe. Por Favor, CambiÃ©lo por otro.
+
+ContratistaValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Caprovee
+        column:   rifpro
+        unique_error:  La Contratista no Existe.

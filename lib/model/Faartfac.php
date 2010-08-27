@@ -161,4 +161,19 @@ class Faartfac extends BaseFaartfac
   {
    return Herramientas::getX('CODART','Caregart','Tipo',self::getCodart());
   }
+
+    public function getNomots()
+    {
+      return Herramientas::getX('CEDRIF','Faregots','Nomots',self::getCedrif());
+    }
+
+    public function getNompro()
+    {
+      return Herramientas::getX('RIFPRO','Caprovee','Nompro',self::getRifpro());
+    }
+
+    public function getDesprod()
+    {
+      return Herramientas::getX('CODPROD','Fadefpro','Desprod',self::getCodprod());
+    }
 }

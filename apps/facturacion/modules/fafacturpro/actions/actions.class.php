@@ -25,7 +25,7 @@ class fafacturproActions extends autofafacturproActions
   public function configGrid($reffac = '', $tipref='')
   {             $c = new Criteria();
 		$c->add(FaartfacproPeer :: REFFAC, $reffac);
-                $c->add(FaartfacproPeer :: ESTATUS, 'P',Criteria::NOT_EQUAL);
+                //$c->add(FaartfacproPeer :: ESTATUS, 'P',Criteria::NOT_EQUAL);
 		$artfac = FaartfacproPeer :: doSelect($c);
 
 		$mascara = $this->mascaraarticulo;
@@ -70,7 +70,7 @@ class fafacturproActions extends autofafacturproActions
 		$this->columnas[1][9]->setCombo(FaartpvpPeer :: getPrecios());
 		$this->columnas[1][9]->setHTML('onChange=Precio3(this.id);');
 		$this->columnas[1][10]->setHTML('size="10" readonly=true onKeyPress=Precio2(event,this.id);');
-		#$this->columnas[1][11]->setHTML(' size="10" readonly=true onKeyPress=montorecargo(event,this.id);');
+		$this->columnas[1][11]->setHTML(' size="10" readonly=true onKeyPress=montorecargo(event,this.id);');
 		#$this->columnas[1][12]->setEsTotal(true, 'fafacturpro_monfac');
          if ($this->cambiolog!="S")
          {
@@ -80,7 +80,9 @@ class fafacturproActions extends autofafacturproActions
          	$this->columnas[1][26]->setOculta(true);*/
          }else $this->columnas[0]->setAncho(1800);
 
-         $this->columnas[1][38]->setCombo(array('N'=>'No Procesado','A'=>'Activo'));
+         $this->columnas[1][33]->setCombo(array('L'=>'Largo','C'=>'Corto'));
+         $this->columnas[1][54]->setCombo(array('N'=>'En Proceso','A'=>'Administración','P'=>'Facturado'));
+         $this->columnas[1][54]->setHTML('onChange=validarEstatus(this.id);');
 
 		$this->obj1 = $this->columnas[0]->getConfig($artfac);
 
@@ -292,6 +294,71 @@ class fafacturproActions extends autofafacturproActions
         $this->getResponse()->setHttpHeader("X-JSON", '(' . $output . ')');
         return sfView :: HEADER_ONLY;
         break;
+      case '6' :
+        $javascript="";
+        $dato1 = "";
+        $dato2 = "";
+        $dato3 = "";
+        $dato4 = "";
+        $cajtxtmos = $this->getRequestParameter('cajtxtmos');
+        $rif = $this->getRequestParameter('rif');
+        $nomrif = $this->getRequestParameter('nomrif');
+        $placa = $this->getRequestParameter('placa');
+        $cajtxtcom = $this->getRequestParameter('cajtxtcom');
+        if ($codigo != "") {
+                $c = new Criteria();
+                $c->add(FaregotsPeer :: CEDRIF, $codigo);
+                $result = FaregotsPeer :: doSelectOne($c);
+                if ($result) {
+                    $dato1 = $result->getNomots();
+                    $dato2 = $result->getRifpro();
+                    $dato3 = H::getX('RIFPRO','Caprovee','Nompro',$result->getRifpro());
+                    $dato4 = $result->getPlaca();
+                }else{
+                    $javascript="alert('El Operador de Transporte no existe'); $('$cajtxtcom').value=''; $('$cajtxtcom').focus();";
+                }
+        }
+        $output = '[["'.$cajtxtmos.'","' . $dato1 . '",""],["'.$rif.'","' . $dato2 . '",""],["'.$nomrif.'","' . $dato3 . '",""],["'.$placa.'","' . $dato4 . '",""],["javascript","' . $javascript . '",""]]';
+        $this->getResponse()->setHttpHeader("X-JSON", '(' . $output . ')');
+        return sfView :: HEADER_ONLY;
+        break;
+      case '7' :
+        $javascript="";
+        $dato1 = "";
+        $cajtexmos = $this->getRequestParameter('cajtexmos');
+        if ($codigo != "") {
+                $c = new Criteria();
+                $c->add(BnubicaPeer :: CODUBI, $codigo);
+                $result = BnubicaPeer :: doSelectOne($c);
+                if ($result) {
+                    $dato1 = $result->getDesubi();
+                }else{
+                    $javascript="alert('La Unidad no existe'); $('fafacturpro_codubi').value=''; $('fafacturpro_codubi').focus();";
+                }
+        }
+        $output = '[["'.$cajtexmos.'","' . $dato1 . '",""],["javascript","' . $javascript . '",""]]';
+        $this->getResponse()->setHttpHeader("X-JSON", '(' . $output . ')');
+        return sfView :: HEADER_ONLY;
+        break;
+      case '8' :
+        $javascript="";
+        $dato1 = "";
+        $cajtexmos = $this->getRequestParameter('cajtxtmos');
+        $cajtexcom = $this->getRequestParameter('cajtxtcom');
+        if ($codigo != "") {
+                $c = new Criteria();
+                $c->add(FadefproPeer :: CODPROD, $codigo);
+                $result = FadefproPeer :: doSelectOne($c);
+                if ($result) {
+                    $dato1 = $result->getDesprod();
+                }else{
+                    $javascript="alert('El Producto no existe'); $('$cajtexcom').value=''; $('$cajtexcom').focus();";
+                }
+        }
+        $output = '[["'.$cajtexmos.'","' . $dato1 . '",""],["javascript","' . $javascript . '",""]]';
+        $this->getResponse()->setHttpHeader("X-JSON", '(' . $output . ')');
+        return sfView :: HEADER_ONLY;
+        break;
       default:
         $output = '[["","",""],["","",""],["","",""]]';
     }
@@ -343,25 +410,45 @@ class fafacturproActions extends autofafacturproActions
       {
         if($reg->getCheck()==1)
             $sw=true;
+
+        if ($reg->getHorsal()!="")
+        {
+          if(!H::ValidarHora($reg->getHorsal()))
+          {
+            $this->coderr='F002';
+            return false;
+      }
+        }
+       if ($reg->getHorlleg()!="")
+       {
+          if(!H::ValidarHora($reg->getHorlleg()))
+          {
+            $this->coderr='F002';
+            return false;
+          }
+       }
+       if ($reg->getHorllca()!="")
+       {
+          if(!H::ValidarHora($reg->getHorllca()))
+          {
+            $this->coderr='F002';
+            return false;
+          }
+       }
+       if ($reg->getHordesc()!="")
+       {
+          if(!H::ValidarHora($reg->getHordesc()))
+          {
+            $this->coderr='F002';
+            return false;
+          }
+       }
       }
       if(!$sw)
       {
           $this->coderr=140;
           return false;
       }
-
-      // Aqui van los llamados a los métodos de las clases del
-      // negocio para validar los datos.
-      // Los resultados de cada llamado deben ser analizados por ejemplo:
-
-      // $resp = Compras::validarAlmajuoc($this->caajuoc,$grid);
-
-       //$resp=Herramientas::ValidarCodigo($valor,$this->tstipmov,$campo);
-
-      // al final $resp es analizada en base al código que retorna
-      // Todas las funciones de validación y procesos del negocio
-      // deben retornar códigos >= -1. Estos código serám buscados en
-      // el archivo errors.yml en la función handleErrorEdit()
 
       if($this->coderr!=-1){
         return false;
@@ -416,6 +503,10 @@ class fafacturproActions extends autofafacturproActions
       if($r->getCheck()==1)
       {
         $r->setReffac($clasemodelo->getReffac());
+        if ($r->getPrecio()==0)
+        {
+          $r->setPrecio($r->getPrecioe());
+        }
         $r->save();
       }
     }

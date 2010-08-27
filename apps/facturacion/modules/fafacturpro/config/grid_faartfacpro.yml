@@ -85,7 +85,7 @@ opciones:                  # Opciones generales
   titulo:                  Monto Recargo
   tipo:                    m
   esgrabable:              true
-  oculta:                  true
+  #oculta:                  true
   nombrecampo:             monrgo
   esnumerico:              true
   html:                    [size="10"]
@@ -131,7 +131,7 @@ opciones:                  # Opciones generales
   titulo:                  Monto Descuento
   tipo:                    m
   esgrabable:              true
-  oculta:                  true
+  #oculta:                  true
   nombrecampo:             mondes
   esnumerico:              true
   html:                    [size="10" readonly=true]
@@ -171,107 +171,225 @@ opciones:                  # Opciones generales
   esgrabable:              true
   html:                    [size="10" maxlength=8]
 24:       # Columna 24
+  titulo:                  N/E Digital
+  tipo:                    t
+  nombrecampo:             notentdig
+  esgrabable:              true
+  html:                    ["size=10 maxlength=15"]
+25:       # Columna 25
   titulo:                  Orden de Despacho
   tipo:                    t
   nombrecampo:             orddespacho
   esgrabable:              true
   html:                    [size="15" maxlength=8]
-25:       # Columna 25
+26:       # Columna 26
   titulo:                  Guía
   tipo:                    t
   nombrecampo:             guia
   esgrabable:              true
   html:                    [size="15" maxlength=10]
-26:       # Columna 26
+27:       # Columna 27
   titulo:                  Contenedores
   tipo:                    a
   nombrecampo:             contenedores
   esgrabable:              true
   html:                    [size="15x1" maxlength=100]
-27:       # Columna 27
+28:       # Columna 28
   titulo:                  BL
   tipo:                    a
   nombrecampo:             billleading
   esgrabable:              true
-  html:                    [size="15x1" maxlength=100]
-28:       # Columna 28
-  titulo:                  Nro. de Transporte
-  tipo:                    t
-  nombrecampo:             numtransp
-  esgrabable:              true
-  html:                    [size="15" maxlength=10]
+  html:                    ["size=15x1 maxlength=100 onBlur='aplicarBL(this.id)'"]
 29:       # Columna 29
-  titulo:                  Placa
+  titulo:                  Operador de Transporte(OTS)
+  tipo:                    t
+  nombrecampo:             cedrif
+  esgrabable:              true
+  html:                    ["size=15 maxlength=15 onBlur='toAjax(6,getUrlModuloAjax(),this.value,0,'&cajtxtmos='+$(this.id).up().next(0).descendants()[0].id+'&rif='+$(this.id).up().next(1).descendants()[0].id+'&nomrif='+$(this.id).up().next(2).descendants()[0].id+'&placa='+$(this.id).up().next(3).descendants()[0].id+'&cajtxtcom='+this.id)'"]
+  catalogo:                [faregots, sf_admin_edit_form, {Cedrif: 29, Nomots: 30, Rifpro: 31, Placa: 33}, Faregots_Fafacturpro ]
+30:       # Columna 30
+  titulo:                  Nombre del OTS
+  tipo:                    t
+  nombrecampo:             nomots
+  esgrabable:              true
+  html:                    ["size=40 readOnly=true"]
+31:       # Columna 31
+  titulo:                  Cooperativa
+  tipo:                    t
+  nombrecampo:             rifpro
+  esgrabable:              true
+  html:                    ["size=15 readOnly=true"]
+32:       # Columna 32
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             nompro
+  esgrabable:              true
+  html:                    ["size=40 readOnly=true"]
+33:       # Columna 33
+  titulo:                  Placa del Chuto
   tipo:                    t
   nombrecampo:             placa
   esgrabable:              true
-  html:                    [size="15" maxlength=10]
-30:       # Columna 30
-  titulo:                  Nombre del Conductor
-  tipo:                    t
-  nombrecampo:             chofer
+  html:                    ["size=15 readOnly=true"]
+34:       # Columna 34
+  titulo:                  Tipo de Viajes
+  tipo:                    c
+  nombrecampo:             tipov
   esgrabable:              true
-  html:                    [size="60" maxlength=200]
-31:       # Columna 31
+  html:                    [ ]
+35:       # Columna 35
   titulo:                  Fecha de Salida
   tipo:                    f
   nombrecampo:             fecsal
   esgrabable:              true
   html:                    [size="15" maxlength=20]
-32:       # Columna 31
+36:       # Columna 36
   titulo:                  Hora de Salida
   tipo:                    t
   nombrecampo:             horsal
   esgrabable:              true
   html:                    [size="15" maxlength=20]
-33:       # Columna 33
+37:       # Columna 37
+  titulo:                  Fecha de Llegada CA
+  tipo:                    f
+  nombrecampo:             fecllca
+  esgrabable:              true
+  html:                    [size="15" maxlength=20]
+38:       # Columna 38
+  titulo:                  Hora de Llegada CA
+  tipo:                    t
+  nombrecampo:             horllca
+  esgrabable:              true
+  html:                    [size="15" maxlength=20]
+39:       # Columna 39
+  titulo:                  Fecha de Descarga
+  tipo:                    f
+  nombrecampo:             fecdesc
+  esgrabable:              true
+  html:                    [size="15" maxlength=20]
+40:       # Columna 40
+  titulo:                  Hora de Descarga
+  tipo:                    t
+  nombrecampo:             hordesc
+  esgrabable:              true
+  html:                    [size="15" maxlength=20]
+41:       # Columna 41
   titulo:                  Fecha de Llegada
   tipo:                    f
   nombrecampo:             feclleg
   esgrabable:              true
   html:                    [size="15" maxlength=20]
-34:       # Columna 31
+42:       # Columna 42
   titulo:                  Hora de Llegada
   tipo:                    t
   nombrecampo:             horlleg
   esgrabable:              true
   html:                    [size="15" maxlength=20]
-35:       # Columna 33
+43:       # Columna 43
   titulo:                  Producto
   tipo:                    t
-  nombrecampo:             prod
+  nombrecampo:             codprod
   esgrabable:              true
-  html:                    [size="15" maxlength=100]
-36:       # Columna 34
-  titulo:                  Cantidad KG
+  html:                    ["size=15 maxlength=8 onBlur='toAjax(8,getUrlModuloAjax(),this.value,0,'&cajtxtmos='+$(this.id).up().next(0).descendants()[0].id+'&cajtxtcom='+this.id)'"]
+  catalogo:                [fadefpro, sf_admin_edit_form, {Codprod: 43, Desprod: 44}, Fadefpro_Fafacturpro ]
+44:       # Columna 44
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             desprod
+  esgrabable:              true
+  html:                    ["size=40 readOnly=true"]
+45:       # Columna 45
+  titulo:                  Origen KG
   tipo:                    m
   nombrecampo:             kg
   esgrabable:              true
   esnumerico:              true
-  html:                    ["size=15 maxlength=10"]
-37:       # Columna 35
-  titulo:                  Cajas
+  html:                    ["size=15 onBlur='ValidarMontoGridv2(this); calculardif(this.id);'"]
+46:       # Columna 46
+  titulo:                  KG Entregados
+  tipo:                    m
+  nombrecampo:             kgent
+  esgrabable:              true
+  esnumerico:              true
+  html:                    ["size=15 onBlur='ValidarMontoGridv2(this); calculardif(this.id);'"]
+47:       # Columna 47
+  titulo:                  Diferencia KG
+  tipo:                    m
+  nombrecampo:             difkg
+  esgrabable:              true
+  esnumerico:              true
+  html:                    ["size=15 readOnly=true"]
+48:       # Columna 48
+  titulo:                  Cajas Origen
   tipo:                    m
   nombrecampo:             cajas
   esgrabable:              true
   esnumerico:              true
-  html:                    ["size=15 maxlength=10"]
-38:       # Columna 36
+  html:                    ["size=15 onBlur='ValidarMontoGridv2(this); calculardif(this.id);'"]
+49:       # Columna 49
+  titulo:                  Cajas Entregadas
+  tipo:                    m
+  nombrecampo:             cajasent
+  esgrabable:              true
+  esnumerico:              true
+  html:                    ["size=15 onBlur='ValidarMontoGridv2(this); calculardif(this.id);'"]
+50:       # Columna 50
+  titulo:                  Diferencia Cajas
+  tipo:                    m
+  nombrecampo:             difcaj
+  esgrabable:              true
+  esnumerico:              true
+  html:                    ["size=15 readOnly=true"]
+51:       # Columna 51
   titulo:                  Toneladas
   tipo:                    m
   nombrecampo:             tm
   esgrabable:              true
   esnumerico:              true
-  html:                    ["size=15 maxlength=10"]
-39:       # Columna 37
+  html:                    ["size=15 onBlur='ValidarMontoGridv2(this); calculardif(this.id);'"]
+52:       # Columna 52
+  titulo:                  Toneladas Entregadas
+  tipo:                    m
+  nombrecampo:             tment
+  esgrabable:              true
+  esnumerico:              true
+  html:                    ["size=15 onBlur='ValidarMontoGridv2(this); calculardif(this.id);'"]
+53:       # Columna 53
+  titulo:                  Diferencia Toneladas
+  tipo:                    m
+  nombrecampo:             difton
+  esgrabable:              true
+  esnumerico:              true
+  html:                    ["size=15 readOnly=true"]
+54:       # Columna 54
+  titulo:                  IER
+  tipo:                    t
+  nombrecampo:             ier
+  esgrabable:              true
+  html:                    ["size=15 maxlength=15"]
+55:       # Columna 55
   titulo:                  Estatus
   tipo:                    c
   nombrecampo:             estatus
   esgrabable:              true
   html:                    [ ]
-40:       # Columna 38
+56:       # Columna 56
   titulo:                  Observaciones
   tipo:                    t
   nombrecampo:             observaciones
   esgrabable:              true
   html:                    [ size="80" maxlength=500 ]
+  catalogo:                [faobservafac, sf_admin_edit_form, {Obsfac: 56}, Faobservafac_Fafacturpro ]
+57:       # Columna 57
+  titulo:                  N° Factura Asociada
+  tipo:                    t
+  nombrecampo:             numfac
+  esgrabable:              true
+  html:                    ["size=15 readOnly=true"]
+58:       # Columna 58
+  titulo:                  Estatus verdadero
+  tipo:                    t
+  nombrecampo:             estatus2
+  esgrabable:              true
+  oculta:                  true
+  html:                    ["size=15 readOnly=true"]

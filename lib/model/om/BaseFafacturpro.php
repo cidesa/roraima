@@ -97,6 +97,10 @@ abstract class BaseFafacturpro extends BaseObject  implements Persistent {
 
 
 	
+	protected $codubi;
+
+
+	
 	protected $id;
 
 	
@@ -291,6 +295,13 @@ abstract class BaseFafacturpro extends BaseObject  implements Persistent {
   {
 
     return trim($this->numcontrol);
+
+  }
+  
+  public function getCodubi()
+  {
+
+    return trim($this->codubi);
 
   }
   
@@ -545,6 +556,16 @@ abstract class BaseFafacturpro extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setCodubi($v)
+	{
+
+    if ($this->codubi !== $v) {
+        $this->codubi = $v;
+        $this->modifiedColumns[] = FafacturproPeer::CODUBI;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -603,7 +624,9 @@ abstract class BaseFafacturpro extends BaseObject  implements Persistent {
 
       $this->numcontrol = $rs->getString($startcol + 21);
 
-      $this->id = $rs->getInt($startcol + 22);
+      $this->codubi = $rs->getString($startcol + 22);
+
+      $this->id = $rs->getInt($startcol + 23);
 
       $this->resetModified();
 
@@ -611,7 +634,7 @@ abstract class BaseFafacturpro extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 23; 
+            return $startcol + 24; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Fafacturpro object", $e);
     }
@@ -825,6 +848,9 @@ abstract class BaseFafacturpro extends BaseObject  implements Persistent {
 				return $this->getNumcontrol();
 				break;
 			case 22:
+				return $this->getCodubi();
+				break;
+			case 23:
 				return $this->getId();
 				break;
 			default:
@@ -859,7 +885,8 @@ abstract class BaseFafacturpro extends BaseObject  implements Persistent {
 			$keys[19] => $this->getVuelto(),
 			$keys[20] => $this->getCodcaj(),
 			$keys[21] => $this->getNumcontrol(),
-			$keys[22] => $this->getId(),
+			$keys[22] => $this->getCodubi(),
+			$keys[23] => $this->getId(),
 		);
 		return $result;
 	}
@@ -942,6 +969,9 @@ abstract class BaseFafacturpro extends BaseObject  implements Persistent {
 				$this->setNumcontrol($value);
 				break;
 			case 22:
+				$this->setCodubi($value);
+				break;
+			case 23:
 				$this->setId($value);
 				break;
 		} 	}
@@ -973,7 +1003,8 @@ abstract class BaseFafacturpro extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[19], $arr)) $this->setVuelto($arr[$keys[19]]);
 		if (array_key_exists($keys[20], $arr)) $this->setCodcaj($arr[$keys[20]]);
 		if (array_key_exists($keys[21], $arr)) $this->setNumcontrol($arr[$keys[21]]);
-		if (array_key_exists($keys[22], $arr)) $this->setId($arr[$keys[22]]);
+		if (array_key_exists($keys[22], $arr)) $this->setCodubi($arr[$keys[22]]);
+		if (array_key_exists($keys[23], $arr)) $this->setId($arr[$keys[23]]);
 	}
 
 	
@@ -1003,6 +1034,7 @@ abstract class BaseFafacturpro extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(FafacturproPeer::VUELTO)) $criteria->add(FafacturproPeer::VUELTO, $this->vuelto);
 		if ($this->isColumnModified(FafacturproPeer::CODCAJ)) $criteria->add(FafacturproPeer::CODCAJ, $this->codcaj);
 		if ($this->isColumnModified(FafacturproPeer::NUMCONTROL)) $criteria->add(FafacturproPeer::NUMCONTROL, $this->numcontrol);
+		if ($this->isColumnModified(FafacturproPeer::CODUBI)) $criteria->add(FafacturproPeer::CODUBI, $this->codubi);
 		if ($this->isColumnModified(FafacturproPeer::ID)) $criteria->add(FafacturproPeer::ID, $this->id);
 
 		return $criteria;
@@ -1077,6 +1109,8 @@ abstract class BaseFafacturpro extends BaseObject  implements Persistent {
 		$copyObj->setCodcaj($this->codcaj);
 
 		$copyObj->setNumcontrol($this->numcontrol);
+
+		$copyObj->setCodubi($this->codubi);
 
 
 		$copyObj->setNew(true);

@@ -25,7 +25,14 @@ generator:
       valmon:  { name: ., params: style=display:none}
       grid_faartfacpro:    { name: .}
       js:     { name: .}
-
+      codubi:
+        name: Unidad
+        params: maxlength=30
+        catalogo:
+          catalogoweb: Bnubica_Almordcom
+          clase: Bnubica
+          ajax: 7
+          parametros: getprincipal="getCodubi" getsecundario="getDesubi" campoprincipal="codubi" camposecundario="desubi" campobase = "id"
     list:
       title:          Proforma
       display:        [=reffac, fecfac, rifpro, nompro]
@@ -38,7 +45,7 @@ generator:
     edit:
       title: Edición de Proforma
       display:
-        Datos de la Proforma: [reffac, fecfac, _tipref, _tipmon, _rifpro, telpro, tipper, dirpro, _codconpag, desfac, monfac, _js]
+        Datos de la Proforma: [reffac, fecfac, _tipref, _tipmon, _rifpro, telpro, tipper, dirpro, _codconpag, _desfac, codubi, monfac, _js]
         Detalle de la Proforma: [_grid_faartfacpro, lonart, monant, valmon ]
         #"Datos de la Factura": [codcaj, reffac, fecfac, _tipref, _tipmon, _rifpro, telpro, dirpro, tipper, _codconpag, desfac, monto, monrgo, mondesc, monfac, combo, refproform, proform, numcontrol]
         #"Detalle": [listaart, _grid_fapeddes, _grid_faartfac, _grid_fadescart, totdesc, _grid_fargoart, totrec]
@@ -50,6 +57,7 @@ generator:
         #  label_width:    none
         #fecfac:
         #  divclass:   divotro
+      hide: [mancatdes]
       report:
         url:         facturacion/rfarfacpreimp.php?m=m
         params:      { codfacdes: reffac, codfachas: reffac }

@@ -38,6 +38,7 @@ echo form_tag('fafactur/save', array (
 <?php echo object_input_hidden_tag($fafactur, 'getRgofijos', array('id' => 'fafactur_rgofijos', 'name' => 'fafactur[rgofijos]')) ?>
 <?php echo object_input_hidden_tag($fafactur, 'getCtasociada', array('id' => 'fafactur_ctasociada', 'name' => 'fafactur[ctasociada]')) ?>
 <?php echo object_input_hidden_tag($fafactur, 'getFilgenmov', array('id' => 'fafactur_filgenmov', 'name' => 'fafactur[filgenmov]')) ?>
+<?php echo object_input_hidden_tag($fafactur, 'getMancatdes', array('id' => 'fafactur_mancatdes', 'name' => 'fafactur[mancatdes]')) ?>
 
 
 <div id="CajaPrinc" style="display:none">
@@ -119,6 +120,9 @@ echo $value ? $value : '&nbsp;'
 <ul class="sf_admin_actions">
 <li class="float-left">
 <strong><font color="#CC0000" size="3" face="Verdana, Arial, Helvetica, sans-serif"> <? print $fafactur->getEstatus();?></font></strong>
+</li>
+<li class="float-left">
+<strong><font color="#CC0000" size="2" face="Verdana, Arial, Helvetica, sans-serif"> <? print $fafactur->getNotacredito();?></font></strong>
 </li>
 <li>
 <input id="cerrar" type="button" name="Submit2" value="Cerrar Caja" class="sf_admin_action_delete" onclick="cerrar2();"/>
@@ -375,6 +379,32 @@ echo $value ? $value : '&nbsp;'
 ));
 echo $value ? $value : '&nbsp;'
 ?>
+&nbsp;
+<?php if ($fafactur->getMancatdes()=='S' && $fafactur->getId()=='') { ?>
+<?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Fadescripfac_Fafacturpro/clase/Fadescripfac/frame/sf_admin_edit_form/obj1/fafactur_desfac/campo1/desfac')?>
+<?php } ?>
+    </div>
+</div>
+<br/>
+<div id="divcodubi">
+  <?php echo label_for('fafactur[codubi]', __($labels['fafactur{codubi}' ]), 'class="required" Style="text-align:left; width:150px"') ?>
+  <div class="content<?php if ($sf_request->hasError('fafactur{codubi}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('fafactur{codubi}')): ?>
+    <?php echo form_error('fafactur{codubi}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = get_partial('codubi', array('type' => 'edit', 'fafactur' => $fafactur)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+</div>
+<br/>
+<div id="divtipoven">
+  <?php echo label_for('fafactur[tipoven]', __($labels['fafactur{tipoven}' ]), 'class="required" Style="text-align:left; width:150px"') ?>
+  <div class="content<?php if ($sf_request->hasError('fafactur{tipoven}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('fafactur{tipoven}')): ?>
+    <?php echo form_error('fafactur{tipoven}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = get_partial('tipoven', array('type' => 'edit', 'fafactur' => $fafactur)); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
 <br/>
@@ -826,6 +856,26 @@ echo $value ? $value : '&nbsp;'
 	'size' => 50,
 	'control_name' => 'fafactur[sucursal]',
 	'maxlength' => 50,
+
+));
+echo $value ? $value : '&nbsp;'
+?>
+    </div>
+</div>
+<br/>
+<div id="divobsfac">
+  <?php echo label_for('fafactur[obsfac]', __($labels['fafactur{obsfac}' ]), 'class="required" Style="text-align:left; width:150px"') ?>
+  <div class="content<?php if ($sf_request->hasError('fafactur{obsfac}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('fafactur{obsfac}')): ?>
+    <?php echo form_error('fafactur{obsfac}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php
+ $value = object_textarea_tag($fafactur, 'getObsfac', array (
+	'control_name' => 'fafactur[obsfac]',
+	'size' => '80x5',
+	'maxlength' => 500,
+	'onkeyup' => 'return ismaxlength(this)',
 
 ));
 echo $value ? $value : '&nbsp;'

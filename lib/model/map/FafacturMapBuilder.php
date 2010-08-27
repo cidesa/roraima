@@ -80,6 +80,12 @@ class FafacturMapBuilder {
 
 		$tMap->addColumn('PROFORM', 'Proform', 'string', CreoleTypes::VARCHAR, false, 10);
 
+		$tMap->addColumn('CODUBI', 'Codubi', 'string', CreoleTypes::VARCHAR, false, 30);
+
+		$tMap->addColumn('TIPOVEN', 'Tipoven', 'string', CreoleTypes::VARCHAR, false, 1);
+
+		$tMap->addColumn('OBSFAC', 'Obsfac', 'string', CreoleTypes::VARCHAR, false, 500);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

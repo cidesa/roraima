@@ -47,10 +47,6 @@ propel:
       type: NUMERIC
       size: 14
       scale: 2
-    preaju:
-      type: NUMERIC
-      size: 14
-      scale: 2
     id:
       type: INTEGER
       required: true
@@ -115,26 +111,26 @@ propel:
     billleading:
       type: VARCHAR
       size: 100
-    numtransp:
-      type: VARCHAR
-      size: 10
     placa:
       type: VARCHAR
       size: 10
-    chofer:
+    rifpro:
       type: VARCHAR
-      size: 200
+      size: 15
+      description: Rif del la Coperativa del OTS
     fecsal:
       type: TIMESTAMP
     horsal:
       type: VARCHAR
+      size: 10
     feclleg:
       type: TIMESTAMP
     horlleg:
       type: VARCHAR
-    prod:
+      size: 10
+    codprod:
       type: VARCHAR
-      size: 100
+      size: 8
     kg:
       type: NUMERIC
       size: 14
@@ -153,6 +149,60 @@ propel:
       type: NUMERIC
       size: 14
       scale: 2
+    preaju:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    cedrif:
+      type: VARCHAR
+      size: 15
+      description: Cedula Rif del OTS
+    notentdig:
+      type: VARCHAR
+      size: 15
+      description: Nota de Entrega Digital
+    tipov:
+      type: VARCHAR
+      size: 1
+      description: Tipo de Viaje
+    fecllca:
+      type: TIMESTAMP
+    horllca:
+      type: VARCHAR
+      size: 10
+    fecdesc:
+      type: TIMESTAMP
+    hordesc:
+      type: VARCHAR
+      size: 10
+    kgent:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    difkg:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    cajasent:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    difcaj:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    tment:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    difton:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    ier:
+      type: VARCHAR
+      size: 15
+      description: IER
     id:
       type: INTEGER
       required: true
@@ -439,6 +489,10 @@ propel:
     proform:
       type: VARCHAR
       size: 1
+    corfaccont:
+      type: NUMERIC
+      size: 10
+      required: true
     id:
       type: INTEGER
       required: true
@@ -710,6 +764,16 @@ propel:
     proform:
       type: VARCHAR
       size: 10
+    codubi:
+      type: VARCHAR
+      size: 30
+    tipoven:
+      type: VARCHAR
+      size: 1
+      description: Tipo de Venta Internas o Exportaciones
+    obsfac:
+      type: VARCHAR
+      size: 500
     id:
       type: INTEGER
       required: true
@@ -1375,6 +1439,8 @@ propel:
     corpercon:
       type: VARCHAR
       size: 100
+    escontrib:
+      type: BOOLEAN
     fatipcte_id:
     id:
       type: integer
@@ -1658,6 +1724,9 @@ propel:
     numcontrol:
       type: VARCHAR
       size: 10
+    codubi:
+      type: VARCHAR
+      size: 30
     id:
       type: INTEGER
       required: true
@@ -1722,26 +1791,26 @@ propel:
     billleading:
       type: VARCHAR
       size: 100
-    numtransp:
-      type: VARCHAR
-      size: 10
     placa:
       type: VARCHAR
       size: 10
-    chofer:
+    rifpro:
       type: VARCHAR
-      size: 200
+      size: 15
+      description: Rif del la Coperativa del OTS
     fecsal:
       type: TIMESTAMP
     horsal:
       type: VARCHAR
+      size: 10
     feclleg:
       type: TIMESTAMP
     horlleg:
       type: VARCHAR
-    prod:
+      size: 10
+    codprod:
       type: VARCHAR
-      size: 100
+      size: 8
     kg:
       type: NUMERIC
       size: 14
@@ -1760,6 +1829,182 @@ propel:
       type: NUMERIC
       size: 14
       scale: 2
+    cedrif:
+      type: VARCHAR
+      size: 15
+      description: Cedrif del OTS
+    notentdig:
+      type: VARCHAR
+      size: 15
+      description: Nota de Entrega Digital
+    tipov:
+      type: VARCHAR
+      size: 1
+      description: Tipo de Viaje
+    fecllca:
+      type: TIMESTAMP
+    horllca:
+      type: VARCHAR
+      size: 10
+    fecdesc:
+      type: TIMESTAMP
+    hordesc:
+      type: VARCHAR
+      size: 10
+    kgent:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    difkg:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    cajasent:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    difcaj:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    tment:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    difton:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    ier:
+      type: VARCHAR
+      size: 15
+      description: IER
+    numfac:
+      type: VARCHAR
+      size: 8
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  fafaclib:
+    reffac:
+      type: VARCHAR
+      size: 8
+      required: true
+    fecfac:
+      type: DATE
+      required: true
+    numfac:
+      type: VARCHAR
+      size: 50
+    numctr:
+      type: VARCHAR
+      size: 50
+    codcli:
+      type: VARCHAR
+      size: 10
+      required: true
+    totfac:
+      type: NUMERIC
+      size: 18
+      scale: 2
+    valfob:
+      type: NUMERIC
+      size: 18
+      scale: 2
+    venexec:
+      type: NUMERIC
+      size: 18
+      scale: 2
+    venexon:
+      type: NUMERIC
+      size: 18
+      scale: 2
+    basimp:
+      type: NUMERIC
+      size: 18
+      scale: 2
+    poriva:
+      type: NUMERIC
+      size: 18
+      scale: 2
+    crefis:
+      type: NUMERIC
+      size: 18
+      scale: 2
+    moniva:
+      type: NUMERIC
+      size: 18
+      scale: 2
+    numcom:
+      type: VARCHAR
+      size: 10
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  fadescripfac:
+    desfac:
+      type: VARCHAR
+      size: 500
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  faregots:
+    cedrif:
+      type: VARCHAR
+      size: 15
+      required: true
+    nomots:
+      type: VARCHAR
+      size: 250
+      required: true
+    rifpro:
+      type: VARCHAR
+      size: 15
+      required: true
+    placa:
+      type: VARCHAR
+      size: 10
+      required: true
+    estatus:
+      type: VARCHAR
+      size: 1
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  faobservafac:
+    obsfac:
+      type: VARCHAR
+      size: 500
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  fadefpro:
+    codprod:
+      type: VARCHAR
+      size: 8
+      required: true
+    desprod:
+      type: VARCHAR
+      size: 20
+      required: true
     id:
       type: INTEGER
       required: true
