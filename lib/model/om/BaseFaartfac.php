@@ -73,15 +73,11 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 
 
 
-	protected $numtransp;
-
-
-
 	protected $placa;
 
 
 
-	protected $chofer;
+	protected $rifpro;
 
 
 
@@ -101,7 +97,7 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 
 
 
-	protected $prod;
+	protected $codprod;
 
 
 
@@ -129,6 +125,62 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 
 
 
+	protected $cedrif;
+
+
+	
+	protected $notentdig;
+
+
+	
+	protected $tipov;
+
+
+	
+	protected $fecllca;
+
+
+	
+	protected $horllca;
+
+
+	
+	protected $fecdesc;
+
+
+	
+	protected $hordesc;
+
+
+	
+	protected $kgent;
+
+
+	
+	protected $difkg;
+
+
+	
+	protected $cajasent;
+
+
+	
+	protected $difcaj;
+
+
+	
+	protected $tment;
+
+
+	
+	protected $difton;
+
+
+	
+	protected $ier;
+
+
+	
 	protected $id;
 
 
@@ -257,13 +309,6 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 
   }
 
-  public function getNumtransp()
-  {
-
-    return trim($this->numtransp);
-
-  }
-
   public function getPlaca()
   {
 
@@ -271,10 +316,10 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 
   }
 
-  public function getChofer()
+  public function getRifpro()
   {
 
-    return trim($this->chofer);
+    return trim($this->rifpro);
 
   }
 
@@ -336,10 +381,10 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 
   }
 
-  public function getProd()
+  public function getCodprod()
   {
 
-    return trim($this->prod);
+    return trim($this->codprod);
 
   }
 
@@ -389,6 +434,140 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 
   }
 
+  public function getCedrif()
+  {
+
+    return trim($this->cedrif);
+
+  }
+  
+  public function getNotentdig()
+  {
+
+    return trim($this->notentdig);
+
+  }
+  
+  public function getTipov()
+  {
+
+    return trim($this->tipov);
+
+  }
+  
+  public function getFecllca($format = 'Y-m-d H:i:s')
+  {
+
+    if ($this->fecllca === null || $this->fecllca === '') {
+      return null;
+    } elseif (!is_int($this->fecllca)) {
+            $ts = strtotime($this->fecllca);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecllca] as date/time value: " . var_export($this->fecllca, true));
+      }
+    } else {
+      $ts = $this->fecllca;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return strftime($format, $ts);
+    } else {
+      return date($format, $ts);
+    }
+  }
+
+  
+  public function getHorllca()
+  {
+
+    return trim($this->horllca);
+
+  }
+  
+  public function getFecdesc($format = 'Y-m-d H:i:s')
+  {
+
+    if ($this->fecdesc === null || $this->fecdesc === '') {
+      return null;
+    } elseif (!is_int($this->fecdesc)) {
+            $ts = strtotime($this->fecdesc);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecdesc] as date/time value: " . var_export($this->fecdesc, true));
+      }
+    } else {
+      $ts = $this->fecdesc;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return strftime($format, $ts);
+    } else {
+      return date($format, $ts);
+    }
+  }
+
+  
+  public function getHordesc()
+  {
+
+    return trim($this->hordesc);
+
+  }
+  
+  public function getKgent($val=false)
+  {
+
+    if($val) return number_format($this->kgent,2,',','.');
+    else return $this->kgent;
+
+  }
+  
+  public function getDifkg($val=false)
+  {
+
+    if($val) return number_format($this->difkg,2,',','.');
+    else return $this->difkg;
+
+  }
+  
+  public function getCajasent($val=false)
+  {
+
+    if($val) return number_format($this->cajasent,2,',','.');
+    else return $this->cajasent;
+
+  }
+  
+  public function getDifcaj($val=false)
+  {
+
+    if($val) return number_format($this->difcaj,2,',','.');
+    else return $this->difcaj;
+
+  }
+  
+  public function getTment($val=false)
+  {
+
+    if($val) return number_format($this->tment,2,',','.');
+    else return $this->tment;
+
+  }
+  
+  public function getDifton($val=false)
+  {
+
+    if($val) return number_format($this->difton,2,',','.');
+    else return $this->difton;
+
+  }
+  
+  public function getIer()
+  {
+
+    return trim($this->ier);
+
+  }
+  
   public function getId()
   {
 
@@ -556,16 +735,6 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 
 	}
 
-	public function setNumtransp($v)
-	{
-
-    if ($this->numtransp !== $v) {
-        $this->numtransp = $v;
-        $this->modifiedColumns[] = FaartfacPeer::NUMTRANSP;
-      }
-
-	}
-
 	public function setPlaca($v)
 	{
 
@@ -576,12 +745,12 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 
 	}
 
-	public function setChofer($v)
+	public function setRifpro($v)
 	{
 
-    if ($this->chofer !== $v) {
-        $this->chofer = $v;
-        $this->modifiedColumns[] = FaartfacPeer::CHOFER;
+    if ($this->rifpro !== $v) {
+        $this->rifpro = $v;
+        $this->modifiedColumns[] = FaartfacPeer::RIFPRO;
       }
 
 	}
@@ -650,12 +819,12 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 
 	}
 
-	public function setProd($v)
+	public function setCodprod($v)
 	{
 
-    if ($this->prod !== $v) {
-        $this->prod = $v;
-        $this->modifiedColumns[] = FaartfacPeer::PROD;
+    if ($this->codprod !== $v) {
+        $this->codprod = $v;
+        $this->modifiedColumns[] = FaartfacPeer::CODPROD;
       }
 
 	}
@@ -720,6 +889,170 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 
 	}
 
+	public function setCedrif($v)
+	{
+
+    if ($this->cedrif !== $v) {
+        $this->cedrif = $v;
+        $this->modifiedColumns[] = FaartfacPeer::CEDRIF;
+      }
+  
+	} 
+	
+	public function setNotentdig($v)
+	{
+
+    if ($this->notentdig !== $v) {
+        $this->notentdig = $v;
+        $this->modifiedColumns[] = FaartfacPeer::NOTENTDIG;
+      }
+  
+	} 
+	
+	public function setTipov($v)
+	{
+
+    if ($this->tipov !== $v) {
+        $this->tipov = $v;
+        $this->modifiedColumns[] = FaartfacPeer::TIPOV;
+      }
+  
+	} 
+	
+	public function setFecllca($v)
+	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
+    if ($v !== null && !is_int($v)) {
+      $ts = strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecllca] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecllca !== $ts) {
+      $this->fecllca = $ts;
+      $this->modifiedColumns[] = FaartfacPeer::FECLLCA;
+    }
+
+	} 
+	
+	public function setHorllca($v)
+	{
+
+    if ($this->horllca !== $v) {
+        $this->horllca = $v;
+        $this->modifiedColumns[] = FaartfacPeer::HORLLCA;
+      }
+  
+	} 
+	
+	public function setFecdesc($v)
+	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
+    if ($v !== null && !is_int($v)) {
+      $ts = strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecdesc] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecdesc !== $ts) {
+      $this->fecdesc = $ts;
+      $this->modifiedColumns[] = FaartfacPeer::FECDESC;
+    }
+
+	} 
+	
+	public function setHordesc($v)
+	{
+
+    if ($this->hordesc !== $v) {
+        $this->hordesc = $v;
+        $this->modifiedColumns[] = FaartfacPeer::HORDESC;
+      }
+  
+	} 
+	
+	public function setKgent($v)
+	{
+
+    if ($this->kgent !== $v) {
+        $this->kgent = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FaartfacPeer::KGENT;
+      }
+  
+	} 
+	
+	public function setDifkg($v)
+	{
+
+    if ($this->difkg !== $v) {
+        $this->difkg = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FaartfacPeer::DIFKG;
+      }
+  
+	} 
+	
+	public function setCajasent($v)
+	{
+
+    if ($this->cajasent !== $v) {
+        $this->cajasent = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FaartfacPeer::CAJASENT;
+      }
+  
+	} 
+	
+	public function setDifcaj($v)
+	{
+
+    if ($this->difcaj !== $v) {
+        $this->difcaj = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FaartfacPeer::DIFCAJ;
+      }
+  
+	} 
+	
+	public function setTment($v)
+	{
+
+    if ($this->tment !== $v) {
+        $this->tment = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FaartfacPeer::TMENT;
+      }
+  
+	} 
+	
+	public function setDifton($v)
+	{
+
+    if ($this->difton !== $v) {
+        $this->difton = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FaartfacPeer::DIFTON;
+      }
+  
+	} 
+	
+	public function setIer($v)
+	{
+
+    if ($this->ier !== $v) {
+        $this->ier = $v;
+        $this->modifiedColumns[] = FaartfacPeer::IER;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -766,35 +1099,61 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 
       $this->billleading = $rs->getString($startcol + 15);
 
-      $this->numtransp = $rs->getString($startcol + 16);
+      $this->placa = $rs->getString($startcol + 16);
 
-      $this->placa = $rs->getString($startcol + 17);
+      $this->rifpro = $rs->getString($startcol + 17);
 
-      $this->chofer = $rs->getString($startcol + 18);
+      $this->fecsal = $rs->getTimestamp($startcol + 18, null);
 
-      $this->fecsal = $rs->getTimestamp($startcol + 19, null);
+      $this->horsal = $rs->getString($startcol + 19);
 
-      $this->horsal = $rs->getString($startcol + 20);
+      $this->feclleg = $rs->getTimestamp($startcol + 20, null);
 
-      $this->feclleg = $rs->getTimestamp($startcol + 21, null);
+      $this->horlleg = $rs->getString($startcol + 21);
 
-      $this->horlleg = $rs->getString($startcol + 22);
+      $this->codprod = $rs->getString($startcol + 22);
 
-      $this->prod = $rs->getString($startcol + 23);
+      $this->kg = $rs->getFloat($startcol + 23);
 
-      $this->kg = $rs->getFloat($startcol + 24);
+      $this->cajas = $rs->getFloat($startcol + 24);
 
-      $this->cajas = $rs->getFloat($startcol + 25);
+      $this->estatus = $rs->getString($startcol + 25);
 
-      $this->estatus = $rs->getString($startcol + 26);
+      $this->observaciones = $rs->getString($startcol + 26);
 
-      $this->observaciones = $rs->getString($startcol + 27);
+      $this->tm = $rs->getFloat($startcol + 27);
 
-      $this->tm = $rs->getFloat($startcol + 28);
+      $this->preaju = $rs->getFloat($startcol + 28);
 
-      $this->preaju = $rs->getFloat($startcol + 29);
+      $this->cedrif = $rs->getString($startcol + 29);
 
-      $this->id = $rs->getInt($startcol + 30);
+      $this->notentdig = $rs->getString($startcol + 30);
+
+      $this->tipov = $rs->getString($startcol + 31);
+
+      $this->fecllca = $rs->getTimestamp($startcol + 32, null);
+
+      $this->horllca = $rs->getString($startcol + 33);
+
+      $this->fecdesc = $rs->getTimestamp($startcol + 34, null);
+
+      $this->hordesc = $rs->getString($startcol + 35);
+
+      $this->kgent = $rs->getFloat($startcol + 36);
+
+      $this->difkg = $rs->getFloat($startcol + 37);
+
+      $this->cajasent = $rs->getFloat($startcol + 38);
+
+      $this->difcaj = $rs->getFloat($startcol + 39);
+
+      $this->tment = $rs->getFloat($startcol + 40);
+
+      $this->difton = $rs->getFloat($startcol + 41);
+
+      $this->ier = $rs->getString($startcol + 42);
+
+      $this->id = $rs->getInt($startcol + 43);
 
       $this->resetModified();
 
@@ -802,7 +1161,7 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 31;
+            return $startcol + 44; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Faartfac object", $e);
     }
@@ -998,48 +1357,87 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 				return $this->getBillleading();
 				break;
 			case 16:
-				return $this->getNumtransp();
-				break;
-			case 17:
 				return $this->getPlaca();
 				break;
-			case 18:
-				return $this->getChofer();
+			case 17:
+				return $this->getRifpro();
 				break;
-			case 19:
+			case 18:
 				return $this->getFecsal();
 				break;
-			case 20:
+			case 19:
 				return $this->getHorsal();
 				break;
-			case 21:
+			case 20:
 				return $this->getFeclleg();
 				break;
-			case 22:
+			case 21:
 				return $this->getHorlleg();
 				break;
-			case 23:
-				return $this->getProd();
+			case 22:
+				return $this->getCodprod();
 				break;
-			case 24:
+			case 23:
 				return $this->getKg();
 				break;
-			case 25:
+			case 24:
 				return $this->getCajas();
 				break;
-			case 26:
+			case 25:
 				return $this->getEstatus();
 				break;
-			case 27:
+			case 26:
 				return $this->getObservaciones();
 				break;
-			case 28:
+			case 27:
 				return $this->getTm();
 				break;
-			case 29:
+			case 28:
 				return $this->getPreaju();
 				break;
+			case 29:
+				return $this->getCedrif();
+				break;
 			case 30:
+				return $this->getNotentdig();
+				break;
+			case 31:
+				return $this->getTipov();
+				break;
+			case 32:
+				return $this->getFecllca();
+				break;
+			case 33:
+				return $this->getHorllca();
+				break;
+			case 34:
+				return $this->getFecdesc();
+				break;
+			case 35:
+				return $this->getHordesc();
+				break;
+			case 36:
+				return $this->getKgent();
+				break;
+			case 37:
+				return $this->getDifkg();
+				break;
+			case 38:
+				return $this->getCajasent();
+				break;
+			case 39:
+				return $this->getDifcaj();
+				break;
+			case 40:
+				return $this->getTment();
+				break;
+			case 41:
+				return $this->getDifton();
+				break;
+			case 42:
+				return $this->getIer();
+				break;
+			case 43:
 				return $this->getId();
 				break;
 			default:
@@ -1068,21 +1466,34 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 			$keys[13] => $this->getGuia(),
 			$keys[14] => $this->getContenedores(),
 			$keys[15] => $this->getBillleading(),
-			$keys[16] => $this->getNumtransp(),
-			$keys[17] => $this->getPlaca(),
-			$keys[18] => $this->getChofer(),
-			$keys[19] => $this->getFecsal(),
-			$keys[20] => $this->getHorsal(),
-			$keys[21] => $this->getFeclleg(),
-			$keys[22] => $this->getHorlleg(),
-			$keys[23] => $this->getProd(),
-			$keys[24] => $this->getKg(),
-			$keys[25] => $this->getCajas(),
-			$keys[26] => $this->getEstatus(),
-			$keys[27] => $this->getObservaciones(),
-			$keys[28] => $this->getTm(),
-			$keys[29] => $this->getPreaju(),
-			$keys[30] => $this->getId(),
+			$keys[16] => $this->getPlaca(),
+			$keys[17] => $this->getRifpro(),
+			$keys[18] => $this->getFecsal(),
+			$keys[19] => $this->getHorsal(),
+			$keys[20] => $this->getFeclleg(),
+			$keys[21] => $this->getHorlleg(),
+			$keys[22] => $this->getCodprod(),
+			$keys[23] => $this->getKg(),
+			$keys[24] => $this->getCajas(),
+			$keys[25] => $this->getEstatus(),
+			$keys[26] => $this->getObservaciones(),
+			$keys[27] => $this->getTm(),
+			$keys[28] => $this->getPreaju(),
+			$keys[29] => $this->getCedrif(),
+			$keys[30] => $this->getNotentdig(),
+			$keys[31] => $this->getTipov(),
+			$keys[32] => $this->getFecllca(),
+			$keys[33] => $this->getHorllca(),
+			$keys[34] => $this->getFecdesc(),
+			$keys[35] => $this->getHordesc(),
+			$keys[36] => $this->getKgent(),
+			$keys[37] => $this->getDifkg(),
+			$keys[38] => $this->getCajasent(),
+			$keys[39] => $this->getDifcaj(),
+			$keys[40] => $this->getTment(),
+			$keys[41] => $this->getDifton(),
+			$keys[42] => $this->getIer(),
+			$keys[43] => $this->getId(),
 		);
 		return $result;
 	}
@@ -1147,48 +1558,87 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 				$this->setBillleading($value);
 				break;
 			case 16:
-				$this->setNumtransp($value);
-				break;
-			case 17:
 				$this->setPlaca($value);
 				break;
-			case 18:
-				$this->setChofer($value);
+			case 17:
+				$this->setRifpro($value);
 				break;
-			case 19:
+			case 18:
 				$this->setFecsal($value);
 				break;
-			case 20:
+			case 19:
 				$this->setHorsal($value);
 				break;
-			case 21:
+			case 20:
 				$this->setFeclleg($value);
 				break;
-			case 22:
+			case 21:
 				$this->setHorlleg($value);
 				break;
-			case 23:
-				$this->setProd($value);
+			case 22:
+				$this->setCodprod($value);
 				break;
-			case 24:
+			case 23:
 				$this->setKg($value);
 				break;
-			case 25:
+			case 24:
 				$this->setCajas($value);
 				break;
-			case 26:
+			case 25:
 				$this->setEstatus($value);
 				break;
-			case 27:
+			case 26:
 				$this->setObservaciones($value);
 				break;
-			case 28:
+			case 27:
 				$this->setTm($value);
 				break;
-			case 29:
+			case 28:
 				$this->setPreaju($value);
 				break;
+			case 29:
+				$this->setCedrif($value);
+				break;
 			case 30:
+				$this->setNotentdig($value);
+				break;
+			case 31:
+				$this->setTipov($value);
+				break;
+			case 32:
+				$this->setFecllca($value);
+				break;
+			case 33:
+				$this->setHorllca($value);
+				break;
+			case 34:
+				$this->setFecdesc($value);
+				break;
+			case 35:
+				$this->setHordesc($value);
+				break;
+			case 36:
+				$this->setKgent($value);
+				break;
+			case 37:
+				$this->setDifkg($value);
+				break;
+			case 38:
+				$this->setCajasent($value);
+				break;
+			case 39:
+				$this->setDifcaj($value);
+				break;
+			case 40:
+				$this->setTment($value);
+				break;
+			case 41:
+				$this->setDifton($value);
+				break;
+			case 42:
+				$this->setIer($value);
+				break;
+			case 43:
 				$this->setId($value);
 				break;
 		} 	}
@@ -1214,21 +1664,34 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[13], $arr)) $this->setGuia($arr[$keys[13]]);
 		if (array_key_exists($keys[14], $arr)) $this->setContenedores($arr[$keys[14]]);
 		if (array_key_exists($keys[15], $arr)) $this->setBillleading($arr[$keys[15]]);
-		if (array_key_exists($keys[16], $arr)) $this->setNumtransp($arr[$keys[16]]);
-		if (array_key_exists($keys[17], $arr)) $this->setPlaca($arr[$keys[17]]);
-		if (array_key_exists($keys[18], $arr)) $this->setChofer($arr[$keys[18]]);
-		if (array_key_exists($keys[19], $arr)) $this->setFecsal($arr[$keys[19]]);
-		if (array_key_exists($keys[20], $arr)) $this->setHorsal($arr[$keys[20]]);
-		if (array_key_exists($keys[21], $arr)) $this->setFeclleg($arr[$keys[21]]);
-		if (array_key_exists($keys[22], $arr)) $this->setHorlleg($arr[$keys[22]]);
-		if (array_key_exists($keys[23], $arr)) $this->setProd($arr[$keys[23]]);
-		if (array_key_exists($keys[24], $arr)) $this->setKg($arr[$keys[24]]);
-		if (array_key_exists($keys[25], $arr)) $this->setCajas($arr[$keys[25]]);
-		if (array_key_exists($keys[26], $arr)) $this->setEstatus($arr[$keys[26]]);
-		if (array_key_exists($keys[27], $arr)) $this->setObservaciones($arr[$keys[27]]);
-		if (array_key_exists($keys[28], $arr)) $this->setTm($arr[$keys[28]]);
-		if (array_key_exists($keys[29], $arr)) $this->setPreaju($arr[$keys[29]]);
-		if (array_key_exists($keys[30], $arr)) $this->setId($arr[$keys[30]]);
+		if (array_key_exists($keys[16], $arr)) $this->setPlaca($arr[$keys[16]]);
+		if (array_key_exists($keys[17], $arr)) $this->setRifpro($arr[$keys[17]]);
+		if (array_key_exists($keys[18], $arr)) $this->setFecsal($arr[$keys[18]]);
+		if (array_key_exists($keys[19], $arr)) $this->setHorsal($arr[$keys[19]]);
+		if (array_key_exists($keys[20], $arr)) $this->setFeclleg($arr[$keys[20]]);
+		if (array_key_exists($keys[21], $arr)) $this->setHorlleg($arr[$keys[21]]);
+		if (array_key_exists($keys[22], $arr)) $this->setCodprod($arr[$keys[22]]);
+		if (array_key_exists($keys[23], $arr)) $this->setKg($arr[$keys[23]]);
+		if (array_key_exists($keys[24], $arr)) $this->setCajas($arr[$keys[24]]);
+		if (array_key_exists($keys[25], $arr)) $this->setEstatus($arr[$keys[25]]);
+		if (array_key_exists($keys[26], $arr)) $this->setObservaciones($arr[$keys[26]]);
+		if (array_key_exists($keys[27], $arr)) $this->setTm($arr[$keys[27]]);
+		if (array_key_exists($keys[28], $arr)) $this->setPreaju($arr[$keys[28]]);
+		if (array_key_exists($keys[29], $arr)) $this->setCedrif($arr[$keys[29]]);
+		if (array_key_exists($keys[30], $arr)) $this->setNotentdig($arr[$keys[30]]);
+		if (array_key_exists($keys[31], $arr)) $this->setTipov($arr[$keys[31]]);
+		if (array_key_exists($keys[32], $arr)) $this->setFecllca($arr[$keys[32]]);
+		if (array_key_exists($keys[33], $arr)) $this->setHorllca($arr[$keys[33]]);
+		if (array_key_exists($keys[34], $arr)) $this->setFecdesc($arr[$keys[34]]);
+		if (array_key_exists($keys[35], $arr)) $this->setHordesc($arr[$keys[35]]);
+		if (array_key_exists($keys[36], $arr)) $this->setKgent($arr[$keys[36]]);
+		if (array_key_exists($keys[37], $arr)) $this->setDifkg($arr[$keys[37]]);
+		if (array_key_exists($keys[38], $arr)) $this->setCajasent($arr[$keys[38]]);
+		if (array_key_exists($keys[39], $arr)) $this->setDifcaj($arr[$keys[39]]);
+		if (array_key_exists($keys[40], $arr)) $this->setTment($arr[$keys[40]]);
+		if (array_key_exists($keys[41], $arr)) $this->setDifton($arr[$keys[41]]);
+		if (array_key_exists($keys[42], $arr)) $this->setIer($arr[$keys[42]]);
+		if (array_key_exists($keys[43], $arr)) $this->setId($arr[$keys[43]]);
 	}
 
 
@@ -1252,20 +1715,33 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(FaartfacPeer::GUIA)) $criteria->add(FaartfacPeer::GUIA, $this->guia);
 		if ($this->isColumnModified(FaartfacPeer::CONTENEDORES)) $criteria->add(FaartfacPeer::CONTENEDORES, $this->contenedores);
 		if ($this->isColumnModified(FaartfacPeer::BILLLEADING)) $criteria->add(FaartfacPeer::BILLLEADING, $this->billleading);
-		if ($this->isColumnModified(FaartfacPeer::NUMTRANSP)) $criteria->add(FaartfacPeer::NUMTRANSP, $this->numtransp);
 		if ($this->isColumnModified(FaartfacPeer::PLACA)) $criteria->add(FaartfacPeer::PLACA, $this->placa);
-		if ($this->isColumnModified(FaartfacPeer::CHOFER)) $criteria->add(FaartfacPeer::CHOFER, $this->chofer);
+		if ($this->isColumnModified(FaartfacPeer::RIFPRO)) $criteria->add(FaartfacPeer::RIFPRO, $this->rifpro);
 		if ($this->isColumnModified(FaartfacPeer::FECSAL)) $criteria->add(FaartfacPeer::FECSAL, $this->fecsal);
 		if ($this->isColumnModified(FaartfacPeer::HORSAL)) $criteria->add(FaartfacPeer::HORSAL, $this->horsal);
 		if ($this->isColumnModified(FaartfacPeer::FECLLEG)) $criteria->add(FaartfacPeer::FECLLEG, $this->feclleg);
 		if ($this->isColumnModified(FaartfacPeer::HORLLEG)) $criteria->add(FaartfacPeer::HORLLEG, $this->horlleg);
-		if ($this->isColumnModified(FaartfacPeer::PROD)) $criteria->add(FaartfacPeer::PROD, $this->prod);
+		if ($this->isColumnModified(FaartfacPeer::CODPROD)) $criteria->add(FaartfacPeer::CODPROD, $this->codprod);
 		if ($this->isColumnModified(FaartfacPeer::KG)) $criteria->add(FaartfacPeer::KG, $this->kg);
 		if ($this->isColumnModified(FaartfacPeer::CAJAS)) $criteria->add(FaartfacPeer::CAJAS, $this->cajas);
 		if ($this->isColumnModified(FaartfacPeer::ESTATUS)) $criteria->add(FaartfacPeer::ESTATUS, $this->estatus);
 		if ($this->isColumnModified(FaartfacPeer::OBSERVACIONES)) $criteria->add(FaartfacPeer::OBSERVACIONES, $this->observaciones);
 		if ($this->isColumnModified(FaartfacPeer::TM)) $criteria->add(FaartfacPeer::TM, $this->tm);
 		if ($this->isColumnModified(FaartfacPeer::PREAJU)) $criteria->add(FaartfacPeer::PREAJU, $this->preaju);
+		if ($this->isColumnModified(FaartfacPeer::CEDRIF)) $criteria->add(FaartfacPeer::CEDRIF, $this->cedrif);
+		if ($this->isColumnModified(FaartfacPeer::NOTENTDIG)) $criteria->add(FaartfacPeer::NOTENTDIG, $this->notentdig);
+		if ($this->isColumnModified(FaartfacPeer::TIPOV)) $criteria->add(FaartfacPeer::TIPOV, $this->tipov);
+		if ($this->isColumnModified(FaartfacPeer::FECLLCA)) $criteria->add(FaartfacPeer::FECLLCA, $this->fecllca);
+		if ($this->isColumnModified(FaartfacPeer::HORLLCA)) $criteria->add(FaartfacPeer::HORLLCA, $this->horllca);
+		if ($this->isColumnModified(FaartfacPeer::FECDESC)) $criteria->add(FaartfacPeer::FECDESC, $this->fecdesc);
+		if ($this->isColumnModified(FaartfacPeer::HORDESC)) $criteria->add(FaartfacPeer::HORDESC, $this->hordesc);
+		if ($this->isColumnModified(FaartfacPeer::KGENT)) $criteria->add(FaartfacPeer::KGENT, $this->kgent);
+		if ($this->isColumnModified(FaartfacPeer::DIFKG)) $criteria->add(FaartfacPeer::DIFKG, $this->difkg);
+		if ($this->isColumnModified(FaartfacPeer::CAJASENT)) $criteria->add(FaartfacPeer::CAJASENT, $this->cajasent);
+		if ($this->isColumnModified(FaartfacPeer::DIFCAJ)) $criteria->add(FaartfacPeer::DIFCAJ, $this->difcaj);
+		if ($this->isColumnModified(FaartfacPeer::TMENT)) $criteria->add(FaartfacPeer::TMENT, $this->tment);
+		if ($this->isColumnModified(FaartfacPeer::DIFTON)) $criteria->add(FaartfacPeer::DIFTON, $this->difton);
+		if ($this->isColumnModified(FaartfacPeer::IER)) $criteria->add(FaartfacPeer::IER, $this->ier);
 		if ($this->isColumnModified(FaartfacPeer::ID)) $criteria->add(FaartfacPeer::ID, $this->id);
 
 		return $criteria;
@@ -1329,11 +1805,9 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 
 		$copyObj->setBillleading($this->billleading);
 
-		$copyObj->setNumtransp($this->numtransp);
-
 		$copyObj->setPlaca($this->placa);
 
-		$copyObj->setChofer($this->chofer);
+		$copyObj->setRifpro($this->rifpro);
 
 		$copyObj->setFecsal($this->fecsal);
 
@@ -1343,7 +1817,7 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 
 		$copyObj->setHorlleg($this->horlleg);
 
-		$copyObj->setProd($this->prod);
+		$copyObj->setCodprod($this->codprod);
 
 		$copyObj->setKg($this->kg);
 
@@ -1356,6 +1830,34 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 		$copyObj->setTm($this->tm);
 
 		$copyObj->setPreaju($this->preaju);
+
+		$copyObj->setCedrif($this->cedrif);
+
+		$copyObj->setNotentdig($this->notentdig);
+
+		$copyObj->setTipov($this->tipov);
+
+		$copyObj->setFecllca($this->fecllca);
+
+		$copyObj->setHorllca($this->horllca);
+
+		$copyObj->setFecdesc($this->fecdesc);
+
+		$copyObj->setHordesc($this->hordesc);
+
+		$copyObj->setKgent($this->kgent);
+
+		$copyObj->setDifkg($this->difkg);
+
+		$copyObj->setCajasent($this->cajasent);
+
+		$copyObj->setDifcaj($this->difcaj);
+
+		$copyObj->setTment($this->tment);
+
+		$copyObj->setDifton($this->difton);
+
+		$copyObj->setIer($this->ier);
 
 
 		$copyObj->setNew(true);

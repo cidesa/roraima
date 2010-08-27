@@ -13,7 +13,7 @@ abstract class BaseFaartfacPeer {
 	const CLASS_DEFAULT = 'lib.model.Faartfac';
 
 
-	const NUM_COLUMNS = 31;
+	const NUM_COLUMNS = 44;
 
 
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -68,13 +68,10 @@ abstract class BaseFaartfacPeer {
 	const BILLLEADING = 'faartfac.BILLLEADING';
 
 
-	const NUMTRANSP = 'faartfac.NUMTRANSP';
-
-
 	const PLACA = 'faartfac.PLACA';
 
 
-	const CHOFER = 'faartfac.CHOFER';
+	const RIFPRO = 'faartfac.RIFPRO';
 
 
 	const FECSAL = 'faartfac.FECSAL';
@@ -89,7 +86,7 @@ abstract class BaseFaartfacPeer {
 	const HORLLEG = 'faartfac.HORLLEG';
 
 
-	const PROD = 'faartfac.PROD';
+	const CODPROD = 'faartfac.CODPROD';
 
 
 	const KG = 'faartfac.KG';
@@ -110,6 +107,48 @@ abstract class BaseFaartfacPeer {
 	const PREAJU = 'faartfac.PREAJU';
 
 
+	const CEDRIF = 'faartfac.CEDRIF';
+
+	
+	const NOTENTDIG = 'faartfac.NOTENTDIG';
+
+	
+	const TIPOV = 'faartfac.TIPOV';
+
+	
+	const FECLLCA = 'faartfac.FECLLCA';
+
+	
+	const HORLLCA = 'faartfac.HORLLCA';
+
+	
+	const FECDESC = 'faartfac.FECDESC';
+
+	
+	const HORDESC = 'faartfac.HORDESC';
+
+	
+	const KGENT = 'faartfac.KGENT';
+
+	
+	const DIFKG = 'faartfac.DIFKG';
+
+	
+	const CAJASENT = 'faartfac.CAJASENT';
+
+	
+	const DIFCAJ = 'faartfac.DIFCAJ';
+
+	
+	const TMENT = 'faartfac.TMENT';
+
+	
+	const DIFTON = 'faartfac.DIFTON';
+
+	
+	const IER = 'faartfac.IER';
+
+	
 	const ID = 'faartfac.ID';
 
 
@@ -118,18 +157,18 @@ abstract class BaseFaartfacPeer {
 
 
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Reffac', 'Codart', 'Desart', 'Codref', 'Cantot', 'Precio', 'Monrgo', 'Mondes', 'Totart', 'Canaju', 'Candes', 'Nronot', 'Orddespacho', 'Guia', 'Contenedores', 'Billleading', 'Numtransp', 'Placa', 'Chofer', 'Fecsal', 'Horsal', 'Feclleg', 'Horlleg', 'Prod', 'Kg', 'Cajas', 'Estatus', 'Observaciones', 'Tm', 'Preaju', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (FaartfacPeer::REFFAC, FaartfacPeer::CODART, FaartfacPeer::DESART, FaartfacPeer::CODREF, FaartfacPeer::CANTOT, FaartfacPeer::PRECIO, FaartfacPeer::MONRGO, FaartfacPeer::MONDES, FaartfacPeer::TOTART, FaartfacPeer::CANAJU, FaartfacPeer::CANDES, FaartfacPeer::NRONOT, FaartfacPeer::ORDDESPACHO, FaartfacPeer::GUIA, FaartfacPeer::CONTENEDORES, FaartfacPeer::BILLLEADING, FaartfacPeer::NUMTRANSP, FaartfacPeer::PLACA, FaartfacPeer::CHOFER, FaartfacPeer::FECSAL, FaartfacPeer::HORSAL, FaartfacPeer::FECLLEG, FaartfacPeer::HORLLEG, FaartfacPeer::PROD, FaartfacPeer::KG, FaartfacPeer::CAJAS, FaartfacPeer::ESTATUS, FaartfacPeer::OBSERVACIONES, FaartfacPeer::TM, FaartfacPeer::PREAJU, FaartfacPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('reffac', 'codart', 'desart', 'codref', 'cantot', 'precio', 'monrgo', 'mondes', 'totart', 'canaju', 'candes', 'nronot', 'orddespacho', 'guia', 'contenedores', 'billleading', 'numtransp', 'placa', 'chofer', 'fecsal', 'horsal', 'feclleg', 'horlleg', 'prod', 'kg', 'cajas', 'estatus', 'observaciones', 'tm', 'preaju', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, )
+		BasePeer::TYPE_PHPNAME => array ('Reffac', 'Codart', 'Desart', 'Codref', 'Cantot', 'Precio', 'Monrgo', 'Mondes', 'Totart', 'Canaju', 'Candes', 'Nronot', 'Orddespacho', 'Guia', 'Contenedores', 'Billleading', 'Placa', 'Rifpro', 'Fecsal', 'Horsal', 'Feclleg', 'Horlleg', 'Codprod', 'Kg', 'Cajas', 'Estatus', 'Observaciones', 'Tm', 'Preaju', 'Cedrif', 'Notentdig', 'Tipov', 'Fecllca', 'Horllca', 'Fecdesc', 'Hordesc', 'Kgent', 'Difkg', 'Cajasent', 'Difcaj', 'Tment', 'Difton', 'Ier', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (FaartfacPeer::REFFAC, FaartfacPeer::CODART, FaartfacPeer::DESART, FaartfacPeer::CODREF, FaartfacPeer::CANTOT, FaartfacPeer::PRECIO, FaartfacPeer::MONRGO, FaartfacPeer::MONDES, FaartfacPeer::TOTART, FaartfacPeer::CANAJU, FaartfacPeer::CANDES, FaartfacPeer::NRONOT, FaartfacPeer::ORDDESPACHO, FaartfacPeer::GUIA, FaartfacPeer::CONTENEDORES, FaartfacPeer::BILLLEADING, FaartfacPeer::PLACA, FaartfacPeer::RIFPRO, FaartfacPeer::FECSAL, FaartfacPeer::HORSAL, FaartfacPeer::FECLLEG, FaartfacPeer::HORLLEG, FaartfacPeer::CODPROD, FaartfacPeer::KG, FaartfacPeer::CAJAS, FaartfacPeer::ESTATUS, FaartfacPeer::OBSERVACIONES, FaartfacPeer::TM, FaartfacPeer::PREAJU, FaartfacPeer::CEDRIF, FaartfacPeer::NOTENTDIG, FaartfacPeer::TIPOV, FaartfacPeer::FECLLCA, FaartfacPeer::HORLLCA, FaartfacPeer::FECDESC, FaartfacPeer::HORDESC, FaartfacPeer::KGENT, FaartfacPeer::DIFKG, FaartfacPeer::CAJASENT, FaartfacPeer::DIFCAJ, FaartfacPeer::TMENT, FaartfacPeer::DIFTON, FaartfacPeer::IER, FaartfacPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('reffac', 'codart', 'desart', 'codref', 'cantot', 'precio', 'monrgo', 'mondes', 'totart', 'canaju', 'candes', 'nronot', 'orddespacho', 'guia', 'contenedores', 'billleading', 'placa', 'rifpro', 'fecsal', 'horsal', 'feclleg', 'horlleg', 'codprod', 'kg', 'cajas', 'estatus', 'observaciones', 'tm', 'preaju', 'cedrif', 'notentdig', 'tipov', 'fecllca', 'horllca', 'fecdesc', 'hordesc', 'kgent', 'difkg', 'cajasent', 'difcaj', 'tment', 'difton', 'ier', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, )
 	);
 
 
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Reffac' => 0, 'Codart' => 1, 'Desart' => 2, 'Codref' => 3, 'Cantot' => 4, 'Precio' => 5, 'Monrgo' => 6, 'Mondes' => 7, 'Totart' => 8, 'Canaju' => 9, 'Candes' => 10, 'Nronot' => 11, 'Orddespacho' => 12, 'Guia' => 13, 'Contenedores' => 14, 'Billleading' => 15, 'Numtransp' => 16, 'Placa' => 17, 'Chofer' => 18, 'Fecsal' => 19, 'Horsal' => 20, 'Feclleg' => 21, 'Horlleg' => 22, 'Prod' => 23, 'Kg' => 24, 'Cajas' => 25, 'Estatus' => 26, 'Observaciones' => 27, 'Tm' => 28, 'Preaju' => 29, 'Id' => 30, ),
-		BasePeer::TYPE_COLNAME => array (FaartfacPeer::REFFAC => 0, FaartfacPeer::CODART => 1, FaartfacPeer::DESART => 2, FaartfacPeer::CODREF => 3, FaartfacPeer::CANTOT => 4, FaartfacPeer::PRECIO => 5, FaartfacPeer::MONRGO => 6, FaartfacPeer::MONDES => 7, FaartfacPeer::TOTART => 8, FaartfacPeer::CANAJU => 9, FaartfacPeer::CANDES => 10, FaartfacPeer::NRONOT => 11, FaartfacPeer::ORDDESPACHO => 12, FaartfacPeer::GUIA => 13, FaartfacPeer::CONTENEDORES => 14, FaartfacPeer::BILLLEADING => 15, FaartfacPeer::NUMTRANSP => 16, FaartfacPeer::PLACA => 17, FaartfacPeer::CHOFER => 18, FaartfacPeer::FECSAL => 19, FaartfacPeer::HORSAL => 20, FaartfacPeer::FECLLEG => 21, FaartfacPeer::HORLLEG => 22, FaartfacPeer::PROD => 23, FaartfacPeer::KG => 24, FaartfacPeer::CAJAS => 25, FaartfacPeer::ESTATUS => 26, FaartfacPeer::OBSERVACIONES => 27, FaartfacPeer::TM => 28, FaartfacPeer::PREAJU => 29, FaartfacPeer::ID => 30, ),
-		BasePeer::TYPE_FIELDNAME => array ('reffac' => 0, 'codart' => 1, 'desart' => 2, 'codref' => 3, 'cantot' => 4, 'precio' => 5, 'monrgo' => 6, 'mondes' => 7, 'totart' => 8, 'canaju' => 9, 'candes' => 10, 'nronot' => 11, 'orddespacho' => 12, 'guia' => 13, 'contenedores' => 14, 'billleading' => 15, 'numtransp' => 16, 'placa' => 17, 'chofer' => 18, 'fecsal' => 19, 'horsal' => 20, 'feclleg' => 21, 'horlleg' => 22, 'prod' => 23, 'kg' => 24, 'cajas' => 25, 'estatus' => 26, 'observaciones' => 27, 'tm' => 28, 'preaju' => 29, 'id' => 30, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, )
+		BasePeer::TYPE_PHPNAME => array ('Reffac' => 0, 'Codart' => 1, 'Desart' => 2, 'Codref' => 3, 'Cantot' => 4, 'Precio' => 5, 'Monrgo' => 6, 'Mondes' => 7, 'Totart' => 8, 'Canaju' => 9, 'Candes' => 10, 'Nronot' => 11, 'Orddespacho' => 12, 'Guia' => 13, 'Contenedores' => 14, 'Billleading' => 15, 'Placa' => 16, 'Rifpro' => 17, 'Fecsal' => 18, 'Horsal' => 19, 'Feclleg' => 20, 'Horlleg' => 21, 'Codprod' => 22, 'Kg' => 23, 'Cajas' => 24, 'Estatus' => 25, 'Observaciones' => 26, 'Tm' => 27, 'Preaju' => 28, 'Cedrif' => 29, 'Notentdig' => 30, 'Tipov' => 31, 'Fecllca' => 32, 'Horllca' => 33, 'Fecdesc' => 34, 'Hordesc' => 35, 'Kgent' => 36, 'Difkg' => 37, 'Cajasent' => 38, 'Difcaj' => 39, 'Tment' => 40, 'Difton' => 41, 'Ier' => 42, 'Id' => 43, ),
+		BasePeer::TYPE_COLNAME => array (FaartfacPeer::REFFAC => 0, FaartfacPeer::CODART => 1, FaartfacPeer::DESART => 2, FaartfacPeer::CODREF => 3, FaartfacPeer::CANTOT => 4, FaartfacPeer::PRECIO => 5, FaartfacPeer::MONRGO => 6, FaartfacPeer::MONDES => 7, FaartfacPeer::TOTART => 8, FaartfacPeer::CANAJU => 9, FaartfacPeer::CANDES => 10, FaartfacPeer::NRONOT => 11, FaartfacPeer::ORDDESPACHO => 12, FaartfacPeer::GUIA => 13, FaartfacPeer::CONTENEDORES => 14, FaartfacPeer::BILLLEADING => 15, FaartfacPeer::PLACA => 16, FaartfacPeer::RIFPRO => 17, FaartfacPeer::FECSAL => 18, FaartfacPeer::HORSAL => 19, FaartfacPeer::FECLLEG => 20, FaartfacPeer::HORLLEG => 21, FaartfacPeer::CODPROD => 22, FaartfacPeer::KG => 23, FaartfacPeer::CAJAS => 24, FaartfacPeer::ESTATUS => 25, FaartfacPeer::OBSERVACIONES => 26, FaartfacPeer::TM => 27, FaartfacPeer::PREAJU => 28, FaartfacPeer::CEDRIF => 29, FaartfacPeer::NOTENTDIG => 30, FaartfacPeer::TIPOV => 31, FaartfacPeer::FECLLCA => 32, FaartfacPeer::HORLLCA => 33, FaartfacPeer::FECDESC => 34, FaartfacPeer::HORDESC => 35, FaartfacPeer::KGENT => 36, FaartfacPeer::DIFKG => 37, FaartfacPeer::CAJASENT => 38, FaartfacPeer::DIFCAJ => 39, FaartfacPeer::TMENT => 40, FaartfacPeer::DIFTON => 41, FaartfacPeer::IER => 42, FaartfacPeer::ID => 43, ),
+		BasePeer::TYPE_FIELDNAME => array ('reffac' => 0, 'codart' => 1, 'desart' => 2, 'codref' => 3, 'cantot' => 4, 'precio' => 5, 'monrgo' => 6, 'mondes' => 7, 'totart' => 8, 'canaju' => 9, 'candes' => 10, 'nronot' => 11, 'orddespacho' => 12, 'guia' => 13, 'contenedores' => 14, 'billleading' => 15, 'placa' => 16, 'rifpro' => 17, 'fecsal' => 18, 'horsal' => 19, 'feclleg' => 20, 'horlleg' => 21, 'codprod' => 22, 'kg' => 23, 'cajas' => 24, 'estatus' => 25, 'observaciones' => 26, 'tm' => 27, 'preaju' => 28, 'cedrif' => 29, 'notentdig' => 30, 'tipov' => 31, 'fecllca' => 32, 'horllca' => 33, 'fecdesc' => 34, 'hordesc' => 35, 'kgent' => 36, 'difkg' => 37, 'cajasent' => 38, 'difcaj' => 39, 'tment' => 40, 'difton' => 41, 'ier' => 42, 'id' => 43, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, )
 	);
 
 
@@ -215,11 +254,9 @@ abstract class BaseFaartfacPeer {
 
 		$criteria->addSelectColumn(FaartfacPeer::BILLLEADING);
 
-		$criteria->addSelectColumn(FaartfacPeer::NUMTRANSP);
-
 		$criteria->addSelectColumn(FaartfacPeer::PLACA);
 
-		$criteria->addSelectColumn(FaartfacPeer::CHOFER);
+		$criteria->addSelectColumn(FaartfacPeer::RIFPRO);
 
 		$criteria->addSelectColumn(FaartfacPeer::FECSAL);
 
@@ -229,7 +266,7 @@ abstract class BaseFaartfacPeer {
 
 		$criteria->addSelectColumn(FaartfacPeer::HORLLEG);
 
-		$criteria->addSelectColumn(FaartfacPeer::PROD);
+		$criteria->addSelectColumn(FaartfacPeer::CODPROD);
 
 		$criteria->addSelectColumn(FaartfacPeer::KG);
 
@@ -242,6 +279,34 @@ abstract class BaseFaartfacPeer {
 		$criteria->addSelectColumn(FaartfacPeer::TM);
 
 		$criteria->addSelectColumn(FaartfacPeer::PREAJU);
+
+		$criteria->addSelectColumn(FaartfacPeer::CEDRIF);
+
+		$criteria->addSelectColumn(FaartfacPeer::NOTENTDIG);
+
+		$criteria->addSelectColumn(FaartfacPeer::TIPOV);
+
+		$criteria->addSelectColumn(FaartfacPeer::FECLLCA);
+
+		$criteria->addSelectColumn(FaartfacPeer::HORLLCA);
+
+		$criteria->addSelectColumn(FaartfacPeer::FECDESC);
+
+		$criteria->addSelectColumn(FaartfacPeer::HORDESC);
+
+		$criteria->addSelectColumn(FaartfacPeer::KGENT);
+
+		$criteria->addSelectColumn(FaartfacPeer::DIFKG);
+
+		$criteria->addSelectColumn(FaartfacPeer::CAJASENT);
+
+		$criteria->addSelectColumn(FaartfacPeer::DIFCAJ);
+
+		$criteria->addSelectColumn(FaartfacPeer::TMENT);
+
+		$criteria->addSelectColumn(FaartfacPeer::DIFTON);
+
+		$criteria->addSelectColumn(FaartfacPeer::IER);
 
 		$criteria->addSelectColumn(FaartfacPeer::ID);
 

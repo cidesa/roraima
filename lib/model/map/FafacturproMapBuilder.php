@@ -78,6 +78,8 @@ class FafacturproMapBuilder {
 
 		$tMap->addColumn('NUMCONTROL', 'Numcontrol', 'string', CreoleTypes::VARCHAR, false, 10);
 
+		$tMap->addColumn('CODUBI', 'Codubi', 'string', CreoleTypes::VARCHAR, false, 30);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

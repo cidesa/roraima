@@ -57,6 +57,16 @@ class fafacturActions extends autofafacturActions {
            	else $eti="ANULADA ";
           	$this->fafactur->setEstatus($eti);
           }
+
+              $t= new Criteria();
+              $t->add(FaajustePeer::CODREF,$this->fafactur->getReffac());
+              $resultado= FaajustePeer::doSelectOne($t);
+              if ($resultado)
+              {
+                $etinc="N° N/C: ".$resultado->getRefaju().", Fecha: ".date('d/m/Y',strtotime($resultado->getFecaju()));
+                $this->fafactur->setNotacredito($etinc);
+	    }
+
 	    }
 		$c = new Criteria();
 		$dato = CadefartPeer :: doSelectOne($c);
@@ -163,6 +173,7 @@ class fafacturActions extends autofafacturActions {
 		$this->configGridForPag($this->fafactur->getReffac());
 		$this->configGridRgoArt($this->fafactur->getReffac());
 		$this->configGridPedDes($this->fafactur->getTipref(), $this->fafactur->getCodcli());
+                $this->configGridFaclib($this->fafactur->getReffac());
 	}
 
 	/**
@@ -237,6 +248,7 @@ class fafacturActions extends autofafacturActions {
          	$this->columnas[1][26]->setOculta(true);*/
          }else $this->columnas[0]->setAncho(1800);
 
+         $this->columnas[1][33]->setCombo(array('L'=>'Largo','C'=>'Corto'));
 		$this->obj1 = $this->columnas[0]->getConfig($artfac);
 
 		$this->fafactur->setObj1($this->obj1);
@@ -283,6 +295,25 @@ class fafacturActions extends autofafacturActions {
 		$this->obj3 = $this->columnas[0]->getConfig($forpag);
 
 		$this->fafactur->setObj3($this->obj3);
+	}
+
+	/**
+   * Esta función permite definir la configuración del grid de datos
+   * que contiene el formulario. Esta función debe ser llamada
+   * en las acciones, create, edit y handleError para recargar en todo momento
+   * los datos del grid.
+   *
+   */
+  public function configGridFaclib($reffac = '') {
+        $c = new Criteria();
+        $c->add(FafaclibPeer :: REFFAC, $reffac);
+        $faclib = FafaclibPeer :: doSelect($c);
+
+        $this->columnas = Herramientas :: getConfigGrid(sfConfig :: get('sf_app_module_dir') . '/fafactur/' . sfConfig :: get('sf_app_module_config_dir_name') . '/grid_fafaclib');
+//		$this->columnas[1][5]->setHTML('size=10 onKeyPress=calcularmontopago(event,this.id);');
+        $this->obj6 = $this->columnas[0]->getConfig($faclib);
+
+        $this->fafactur->setObj6($this->obj6);
 	}
 
 	/**
@@ -997,6 +1028,87 @@ class fafacturActions extends autofafacturActions {
 		        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
 		        #return sfView::HEADER_ONLY;
              break;
+            case '20':
+                $dato="";
+                $t= new Criteria();
+                $t->add(FaclientePeer::RIFPRO,$codigo);
+                $reg= FaclientePeer::doSelectOne($t);
+                if ($reg)
+                {
+                    $dato=$reg->getNompro();
+                }
+                else
+                {
+                    $javascript="alert('El Cliente no existe'); $('$cajtexcom').value=''; $('$cajtexcom').focus();";
+                }
+                $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""]]';
+                $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+                return sfView::HEADER_ONLY;
+             break;
+      case '21' :
+        $dato1 = "";
+        $dato2 = "";
+        $dato3 = "";
+        $dato4 = "";
+        $cajtxtmos = $this->getRequestParameter('cajtxtmos');
+        $rif = $this->getRequestParameter('rif');
+        $nomrif = $this->getRequestParameter('nomrif');
+        $placa = $this->getRequestParameter('placa');
+        $cajtxtcom = $this->getRequestParameter('cajtxtcom');
+        if ($codigo != "") {
+                $c = new Criteria();
+                $c->add(FaregotsPeer :: CEDRIF, $codigo);
+                $result = FaregotsPeer :: doSelectOne($c);
+                if ($result) {
+                    $dato1 = $result->getNomots();
+                    $dato2 = $result->getRifpro();
+                    $dato3 = H::getX('RIFPRO','Caprovee','Nompro',$result->getRifpro());
+                    $dato4 = $result->getPlaca();
+                }else{
+                    $javascript="alert('El Operador de Transporte no existe'); $('$cajtxtcom').value=''; $('$cajtxtcom').focus();";
+                }
+        }
+        $output = '[["'.$cajtxtmos.'","' . $dato1 . '",""],["'.$rif.'","' . $dato2 . '",""],["'.$nomrif.'","' . $dato3 . '",""],["'.$placa.'","' . $dato4 . '",""],["javascript","' . $javascript . '",""]]';
+        $this->getResponse()->setHttpHeader("X-JSON", '(' . $output . ')');
+        return sfView :: HEADER_ONLY;
+      break;
+      case '22' :
+        $javascript="";
+        $dato1 = "";
+        $cajtexmos = $this->getRequestParameter('cajtexmos');
+        if ($codigo != "") {
+                $c = new Criteria();
+                $c->add(BnubicaPeer :: CODUBI, $codigo);
+                $result = BnubicaPeer :: doSelectOne($c);
+                if ($result) {
+                    $dato1 = $result->getDesubi();
+                }else{
+                    $javascript="alert('La Unidad no existe'); $('fafactur_codubi').value=''; $('fafactur_codubi').focus();";
+                }
+        }
+        $output = '[["'.$cajtexmos.'","' . $dato1 . '",""],["javascript","' . $javascript . '",""]]';
+        $this->getResponse()->setHttpHeader("X-JSON", '(' . $output . ')');
+        return sfView :: HEADER_ONLY;
+        break;
+      case '23' :
+        $javascript="";
+        $dato1 = "";
+        $cajtexmos = $this->getRequestParameter('cajtxtmos');
+        $cajtexcom = $this->getRequestParameter('cajtxtcom');
+        if ($codigo != "") {
+                $c = new Criteria();
+                $c->add(FadefproPeer :: CODPROD, $codigo);
+                $result = FadefproPeer :: doSelectOne($c);
+                if ($result) {
+                    $dato1 = $result->getDesprod();
+                }else{
+                    $javascript="alert('El Producto no existe'); $('$cajtexcom').value=''; $('$cajtexcom').focus();";
+                }
+        }
+        $output = '[["'.$cajtexmos.'","' . $dato1 . '",""],["javascript","' . $javascript . '",""]]';
+        $this->getResponse()->setHttpHeader("X-JSON", '(' . $output . ')');
+        return sfView :: HEADER_ONLY;
+        break;
 			default :
 				$output = '[["","",""],["","",""],["","",""]]';
 				$this->getResponse()->setHttpHeader("X-JSON", '(' . $output . ')');
@@ -1100,6 +1212,23 @@ class fafacturActions extends autofafacturActions {
                   }
 
 	       }
+               if ($x[$i]->getHorllca()!="")
+	       {
+                  if(!H::ValidarHora($x[$i]->getHorllca()))
+                  {
+                    $this->coderr='F002';
+                    return false;
+                  }
+	       }
+               if ($x[$i]->getHordesc()!="")
+	       {
+                  if(!H::ValidarHora($x[$i]->getHordesc()))
+                  {
+                    $this->coderr='F002';
+                    return false;
+                  }
+	       }
+
 	       $i++;
 	      }
 
@@ -1184,21 +1313,34 @@ class fafacturActions extends autofafacturActions {
                             if ($result)
                             {
                                 $result->setNronot($x[$j]->getNronot());
+                                $result->setNotentdig($x[$j]->getNotentdig());
                                 $result->setOrddespacho($x[$j]->getOrddespacho());
                                 $result->setGuia($x[$j]->getGuia());
                                 $result->setContenedores($x[$j]->getContenedores());
                                 $result->setBillleading($x[$j]->getBillleading());
-                                $result->setNumtransp($x[$j]->getNumtransp());
+                                $result->setCedrif($x[$j]->getCedrif()); //Operador de Transporte
                                 $result->setPlaca($x[$j]->getPlaca());
-                                $result->setChofer($x[$j]->getChofer());
+                                $result->setRifpro($x[$j]->getRifpro()); //Contratista
+                                $result->setTipov($x[$j]->getTipov());
                                 $result->setFecsal($x[$j]->getFecsal());
                                 $result->setHorsal($x[$j]->getHorsal());
+                                $result->setFecllca($x[$j]->getFecllca());
+                                $result->setHorllca($x[$j]->getHorllca());
+                                $result->setFecdesc($x[$j]->getFecdesc());
+                                $result->setHordesc($x[$j]->getHordesc());
                                 $result->setFeclleg($x[$j]->getFeclleg());
                                 $result->setHorlleg($x[$j]->getHorlleg());
-                                $result->setProd($x[$j]->getProd());
+                                $result->setCodprod($x[$j]->getCodprod());
                                 $result->setKg($x[$j]->getKg());
+                                $result->setKgent($x[$j]->getKgent());
+                                $result->setDifkg($x[$j]->getDifkg());
                                 $result->setCajas($x[$j]->getCajas());
+                                $result->setCajasent($x[$j]->getCajasent());
+                                $result->setDifcaj($x[$j]->getDifcaj());
                                 $result->setTm($x[$j]->getTm());
+                                $result->setTment($x[$j]->getTment());
+                                $result->setDifton($x[$j]->getDifton());
+                                $result->setIer($x[$j]->getIer());
                                 $result->setObservaciones($x[$j]->getObservaciones());
                                 $result->save();
                             }
@@ -1212,7 +1354,8 @@ class fafacturActions extends autofafacturActions {
 			$grid2 = Herramientas :: CargarDatosGridv2($this, $this->obj2);
 			$grid3 = Herramientas :: CargarDatosGridv2($this, $this->obj3);
 			$grid4 = Herramientas :: CargarDatosGridv2($this, $this->obj4);
-			Factura :: salvarFactura($fafactur, $grid, $grid2, $grid3, $grid4, $tipocaja,&$msj,&$msj2,&$msj3);
+                        $grid6 = Herramientas :: CargarDatosGridv2($this, $this->obj6);
+			Factura :: salvarFactura($fafactur, $grid, $grid2, $grid3, $grid4, $tipocaja,&$msj,&$msj2,&$msj3,$grid6);
 
 			if ($msj!=-1) return $msj;
 			if ($msj3!=-1) return $msj3;
@@ -1325,6 +1468,10 @@ class fafacturActions extends autofafacturActions {
 		Herramientas :: EliminarRegistro('Fargoart', 'Refdoc', $fafactur->getReffac());
 		Herramientas :: EliminarRegistro('Fadescart', 'Refdoc', $fafactur->getReffac());
 		Herramientas :: EliminarRegistro('Faforpag', 'Reffac', $fafactur->getReffac());
+                $usalib=H::getConfApp('gridfaclib', 'facturacion', 'fafactur');
+                if ($usalib=='S') {
+                    Herramientas :: EliminarRegistro('Fafaclib', 'Reffac', $fafactur->getReffac());
+                }
 		Herramientas :: EliminarRegistro('Cobrecdoc', 'Refdoc', str_pad($fafactur->getReffac(),10,'0',STR_PAD_LEFT));
 		Herramientas :: EliminarRegistro('Cobdesdoc', 'Refdoc', str_pad($fafactur->getReffac(),10,'0',STR_PAD_LEFT));
 		Herramientas :: EliminarRegistro('Cobdocume', 'Refdoc', str_pad($fafactur->getReffac(),10,'0',STR_PAD_LEFT));
@@ -1364,6 +1511,7 @@ class fafacturActions extends autofafacturActions {
     $grid3=Herramientas::CargarDatosGridv2($this,$this->obj2);
     $grid2=Herramientas::CargarDatosGridv2($this,$this->obj3);
     $grid4=Herramientas::CargarDatosGridv2($this,$this->obj4);
+    $grid6=Herramientas::CargarDatosGridv2($this,$this->obj6);
     return true;
   }
 }

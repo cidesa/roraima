@@ -559,6 +559,21 @@ public static function PagoDoble()
     return array('cont' => 'Contabilidad','cp' => 'Presupuesto','ci' => 'Presupuesto Ingresos','op' => 'Tesoreria','ts' => 'Bancos','ca' => 'Compras y Almacén');
   }
 
+  public static function TipoDocumento()   //Hacienda
+  {
+    return array('SR' => 'Sin Referencia','IC' => 'Industria y Comercio','V' => 'Vehiculos','I' => 'Inmuebles','PC' => 'Propaganda Comercial','EP' => 'Espectaculos Publicos','AL' => 'Apuestas Licitas');
+  }
+
+  public static function Porciones()   //Hacienda
+  {
+  	return array('1' => '1 Anualidad','2' => '2 Semestral','4' => '4 Trimestre','6' => '6 Bimestre','12' => '12 Mensualidad','24' => '24 Quincenal','52' => '52 Semanal','365' => '365 Diario');
+//    return "1 Anualidad,2 Semestral,3 Cuatrimestre,4 Trimestre,6 Bimestre,12 Mensualidad,24 Quincenal,52 Semanal,365 Diario";
+  }
+
+    public static function ListaEstatusOTS()
+  {
+    return array('A' => 'Activo', 'N' => 'Inactivo');
+}
 
 
 }

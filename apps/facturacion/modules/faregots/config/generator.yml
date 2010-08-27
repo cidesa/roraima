@@ -1,0 +1,36 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Faregots
+    theme:            cidesaGenerator
+    fields:
+      cedrif: { name: CÃ©dula de Identidad, params : size=15 maxlength=15  onFocus=readonly(this.id)}
+      nomots: { name: Nombre, params : size=60 maxlength=250 }
+      rifpro:
+        name: Cooperativa
+        params: maxlength=15
+        catalogo:
+          catalogoweb: Caprovee_Faregots
+          clase: Caprovee
+          ajax: 1
+          parametros: getprincipal="getRifpro" getsecundario="getNompro" campoprincipal="rifpro" camposecundario="nompro" campobase = "id"
+      placa: { name: Placa del Chuto, params : size=20 maxlength=10}
+      estatus: { name: Estatus}
+    list:
+      title:          Operadores de Transporte (OTS)
+      filters:        [cedrif, rifpro, placa, estatus]
+      display:        [=cedrif, nomots, placa]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   10
+      sort:      cedrif
+    edit:
+      title:          EdiciÃ³n de Operador de Transporte
+      display:
+        "Datos":   [cedrif, nomots, rifpro, placa, _estatus]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

@@ -22,6 +22,7 @@ class Fafacturpro extends BaseFafacturpro
   protected $tipper="";
   protected $desconpag="";
   protected $grid=array();
+  protected $mancatdes="";
 
   protected function afterHydrate()
   {
@@ -64,5 +65,31 @@ class Fafacturpro extends BaseFafacturpro
    return Herramientas::getX('ID','Faconpag','Desconpag',self::getCodconpag());
   }
 
+public function getMancatdes()
+  {
 
+    $dato="";
+    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('facturacion',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['facturacion']))
+	     if(array_key_exists('fafacturpro',$varemp['aplicacion']['facturacion']['modulos'])){
+	       if(array_key_exists('mancatdes',$varemp['aplicacion']['facturacion']['modulos']['fafacturpro']))
+	       {
+	       	$dato=$varemp['aplicacion']['facturacion']['modulos']['fafacturpro']['mancatdes'];
+	       }
+         }
+     return $dato;
+  }
+
+  public function setMancatdes()
+  {
+  	return $this->mancatdes;
+  }
+
+  public function getDesubi()
+  {
+   return Herramientas::getX('CODUBI','Bnubica','Desubi',self::getCodubi());
+  }
 }

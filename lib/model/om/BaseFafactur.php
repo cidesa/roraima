@@ -101,6 +101,18 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
 
 
 	
+	protected $codubi;
+
+
+	
+	protected $tipoven;
+
+
+	
+	protected $obsfac;
+
+
+	
 	protected $id;
 
 	
@@ -302,6 +314,27 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
   {
 
     return trim($this->proform);
+
+  }
+  
+  public function getCodubi()
+  {
+
+    return trim($this->codubi);
+
+  }
+  
+  public function getTipoven()
+  {
+
+    return trim($this->tipoven);
+
+  }
+  
+  public function getObsfac()
+  {
+
+    return trim($this->obsfac);
 
   }
   
@@ -566,6 +599,36 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setCodubi($v)
+	{
+
+    if ($this->codubi !== $v) {
+        $this->codubi = $v;
+        $this->modifiedColumns[] = FafacturPeer::CODUBI;
+      }
+  
+	} 
+	
+	public function setTipoven($v)
+	{
+
+    if ($this->tipoven !== $v) {
+        $this->tipoven = $v;
+        $this->modifiedColumns[] = FafacturPeer::TIPOVEN;
+      }
+  
+	} 
+	
+	public function setObsfac($v)
+	{
+
+    if ($this->obsfac !== $v) {
+        $this->obsfac = $v;
+        $this->modifiedColumns[] = FafacturPeer::OBSFAC;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -626,7 +689,13 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
 
       $this->proform = $rs->getString($startcol + 22);
 
-      $this->id = $rs->getInt($startcol + 23);
+      $this->codubi = $rs->getString($startcol + 23);
+
+      $this->tipoven = $rs->getString($startcol + 24);
+
+      $this->obsfac = $rs->getString($startcol + 25);
+
+      $this->id = $rs->getInt($startcol + 26);
 
       $this->resetModified();
 
@@ -634,7 +703,7 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 24; 
+            return $startcol + 27; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Fafactur object", $e);
     }
@@ -851,6 +920,15 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
 				return $this->getProform();
 				break;
 			case 23:
+				return $this->getCodubi();
+				break;
+			case 24:
+				return $this->getTipoven();
+				break;
+			case 25:
+				return $this->getObsfac();
+				break;
+			case 26:
 				return $this->getId();
 				break;
 			default:
@@ -886,7 +964,10 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
 			$keys[20] => $this->getCodcaj(),
 			$keys[21] => $this->getNumcontrol(),
 			$keys[22] => $this->getProform(),
-			$keys[23] => $this->getId(),
+			$keys[23] => $this->getCodubi(),
+			$keys[24] => $this->getTipoven(),
+			$keys[25] => $this->getObsfac(),
+			$keys[26] => $this->getId(),
 		);
 		return $result;
 	}
@@ -972,6 +1053,15 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
 				$this->setProform($value);
 				break;
 			case 23:
+				$this->setCodubi($value);
+				break;
+			case 24:
+				$this->setTipoven($value);
+				break;
+			case 25:
+				$this->setObsfac($value);
+				break;
+			case 26:
 				$this->setId($value);
 				break;
 		} 	}
@@ -1004,7 +1094,10 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[20], $arr)) $this->setCodcaj($arr[$keys[20]]);
 		if (array_key_exists($keys[21], $arr)) $this->setNumcontrol($arr[$keys[21]]);
 		if (array_key_exists($keys[22], $arr)) $this->setProform($arr[$keys[22]]);
-		if (array_key_exists($keys[23], $arr)) $this->setId($arr[$keys[23]]);
+		if (array_key_exists($keys[23], $arr)) $this->setCodubi($arr[$keys[23]]);
+		if (array_key_exists($keys[24], $arr)) $this->setTipoven($arr[$keys[24]]);
+		if (array_key_exists($keys[25], $arr)) $this->setObsfac($arr[$keys[25]]);
+		if (array_key_exists($keys[26], $arr)) $this->setId($arr[$keys[26]]);
 	}
 
 	
@@ -1035,6 +1128,9 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(FafacturPeer::CODCAJ)) $criteria->add(FafacturPeer::CODCAJ, $this->codcaj);
 		if ($this->isColumnModified(FafacturPeer::NUMCONTROL)) $criteria->add(FafacturPeer::NUMCONTROL, $this->numcontrol);
 		if ($this->isColumnModified(FafacturPeer::PROFORM)) $criteria->add(FafacturPeer::PROFORM, $this->proform);
+		if ($this->isColumnModified(FafacturPeer::CODUBI)) $criteria->add(FafacturPeer::CODUBI, $this->codubi);
+		if ($this->isColumnModified(FafacturPeer::TIPOVEN)) $criteria->add(FafacturPeer::TIPOVEN, $this->tipoven);
+		if ($this->isColumnModified(FafacturPeer::OBSFAC)) $criteria->add(FafacturPeer::OBSFAC, $this->obsfac);
 		if ($this->isColumnModified(FafacturPeer::ID)) $criteria->add(FafacturPeer::ID, $this->id);
 
 		return $criteria;
@@ -1111,6 +1207,12 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
 		$copyObj->setNumcontrol($this->numcontrol);
 
 		$copyObj->setProform($this->proform);
+
+		$copyObj->setCodubi($this->codubi);
+
+		$copyObj->setTipoven($this->tipoven);
+
+		$copyObj->setObsfac($this->obsfac);
 
 
 		$copyObj->setNew(true);
