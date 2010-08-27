@@ -132,6 +132,8 @@ class FaclienteMapBuilder {
 
 		$tMap->addColumn('CORPERCON', 'Corpercon', 'string', CreoleTypes::VARCHAR, false, 100);
 
+		$tMap->addColumn('ESCONTRIB', 'Escontrib', 'boolean', CreoleTypes::BOOLEAN, false, null);
+
 		$tMap->addForeignKey('FATIPCTE_ID', 'FatipcteId', 'int', CreoleTypes::INTEGER, 'fatipcte', 'ID', false, null);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);

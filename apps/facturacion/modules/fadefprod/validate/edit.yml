@@ -6,25 +6,25 @@ methods:
 names:
   fadefpro{codprod}:
     required:  Yes
-    required_msg: No puede salvar sin Introducir la CÃ³digo del Producto
+    required_msg: No puede salvar sin Introducir la Código del Producto
     validators: UniqueValidator
 
   fadefpro{desprod}:
     required:  Yes
-    required_msg: No puede salvar sin Introducir la descripciÃ³n del Producto
+    required_msg: No puede salvar sin Introducir la descripción del Producto
     validators: DescripcionValidator
 
 DescripcionValidator:
     class: sfStringValidator
     param:
         min:       5
-        min_error: La descripciÃ³n del Producto no puede tener menos de 5 caracteres
+        min_error: La descripción del Producto no puede tener menos de 5 caracteres
         max:       500
-        max_error: La descripciÃ³n del Producto no puede tener mÃ¡s de 500 caracteres
+        max_error: La descripción del Producto no puede tener más de 500 caracteres
 
 UniqueValidator:
     class: sfPropelUniqueValidator
     param:
         class:    Fadefpro
         column:   codprod
-        unique_error:   El CÃ³digo del Producto ya existe. Por Favor, CambiÃ©lo por otro.
+        unique_error:   El Código del Producto ya existe. Por Favor, Cambiélo por otro.

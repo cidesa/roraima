@@ -25,7 +25,8 @@ private static $coderror=-1;
   
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -530,6 +531,7 @@ $this->Bitacora('Guardo');
     {
       $this->facliente->setTipper($facliente['tipper']);
     }
+    $this->facliente->setEscontrib(isset($facliente['escontrib']) ? $facliente['escontrib'] : 0);
   }
 
   /**
@@ -704,5 +706,11 @@ $this->Bitacora('Guardo');
 
 
   }
+
+    public function Bitacora($acc)
+  {
+    $id= $this->facliente->getId();
+    $this->SalvarBitacora($id ,$acc);
+}
 
 }

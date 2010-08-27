@@ -4,7 +4,7 @@ generator:
     model_class:      Faregots
     theme:            cidesaGenerator
     fields:
-      cedrif: { name: CÃ©dula de Identidad, params : size=15 maxlength=15  onFocus=readonly(this.id)}
+      cedrif: { name: Cédula de Identidad, params : size=15 maxlength=15  onFocus=readonly(this.id)}
       nomots: { name: Nombre, params : size=60 maxlength=250 }
       rifpro:
         name: Cooperativa
@@ -26,7 +26,7 @@ generator:
       max_per_page:   10
       sort:      cedrif
     edit:
-      title:          EdiciÃ³n de Operador de Transporte
+      title:          Edición de Operador de Transporte
       display:
         "Datos":   [cedrif, nomots, rifpro, placa, _estatus]
       actions:
