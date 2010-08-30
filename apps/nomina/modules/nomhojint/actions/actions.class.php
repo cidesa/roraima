@@ -131,7 +131,7 @@ class nomhojintActions extends autonomhojintActions
         $y=$grid4[0];
         while ($l<count($y))
         {
-          if ($y[$l]->getCodprofes()=="" || $y[$l]->getDescur()=="" || $y[$l]->getInstit()=="" || $y[$l]->getDurcur()=="")
+          if ($y[$l]->getCodprofes()=="" || $y[$l]->getInstit()=="" || $y[$l]->getDurcur()=="")
           {
           	$this->coderr=475;
           	return false;
