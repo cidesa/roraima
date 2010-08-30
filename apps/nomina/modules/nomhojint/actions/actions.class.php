@@ -2093,7 +2093,7 @@ $this->Bitacora('Guardo');
           'nphojint{numcon}' => 'No. Contrato:',
           'nphojint{nacemp}' => 'Nacionalidad:',
           'nphojint{sexemp}' => 'Sexo:',
-      'nphojint{codniv}' => 'Nivel Organizacional:',
+      'nphojint{codniv}' => 'Ubicación Administrativa:',
       'nphojint{codnivedu}' => 'Nivel Estudio:',
       'nphojint{fotemp}' => 'Foto:',
       'nphojint{lugnac}' => 'Lugar de Nacimiento:',
