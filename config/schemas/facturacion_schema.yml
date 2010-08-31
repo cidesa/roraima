@@ -2011,3 +2011,59 @@ propel:
       primaryKey: true
       autoIncrement: true
       description: Identificador Único del registro
+  fargoartpro:
+    codrgo:
+      type: VARCHAR
+      size: 4
+      required: true
+    codart:
+      type: VARCHAR
+      size: 20
+      required: true
+    refdoc:
+      type: VARCHAR
+      size: 8
+      required: true
+    monrgo:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    tipdoc:
+      type: VARCHAR
+      size: 1
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  fadescartpro:
+    coddesc:
+      type: VARCHAR
+      size: 4
+      required: true
+    refdoc:
+      type: VARCHAR
+      size: 8
+      required: true
+    codart:
+      type: VARCHAR
+      size: 20
+      required: true
+    mondesc:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    mondetdesc:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    tipdoc:
+      type: VARCHAR
+      size: 1
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro

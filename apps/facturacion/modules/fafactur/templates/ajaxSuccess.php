@@ -12,6 +12,10 @@ echo options_for_select($precios,'');
   <?php echo object_input_hidden_tag($fafactur, 'getTottotart', array('id' => 'fafactur_tottotart', 'name' => 'fafactur[tottotart]')) ?>
   <?php echo object_input_hidden_tag($fafactur, 'getTotmonrgo', array('id' => 'fafactur_totmonrgo', 'name' => 'fafactur[totmonrgo]')) ?>
   <?php echo object_input_hidden_tag($fafactur, 'getTotprecio', array('id' => 'fafactur_totprecio', 'name' => 'fafactur[totprecio]')) ?>
+<?php } else if ($ajaxs=='17') { ?>
+<?php $value = get_partial('grid_fadescart', array('fafactur' => $fafactur)); echo $value ? $value : '&nbsp;'; ?>
+<?php } else if ($ajaxs=='18') { ?>
+<?php $value = get_partial('grid_fargoart', array('fafactur' => $fafactur)); echo $value ? $value : '&nbsp;'; ?>
 <?php } else{ ?>
 <?php echo select_tag('fafactur[listaart]', options_for_select($arreglo,''),array(
   'onfocus' => "colocarengrid(this.value,'$filagrid');",

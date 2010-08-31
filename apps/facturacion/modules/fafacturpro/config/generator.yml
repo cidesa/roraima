@@ -18,13 +18,20 @@ generator:
       desconpag:  { name: Descripción}
       desfac:  { name: Descripción, type: textarea_tag , params: maxlength=255 cols=66}
       monto:   { name: Monto}
+      monrgo:   { name: Recargo}
+      mondesc:   { name: Descuento}
       monfac:  { name: Total, params: readonly=true}
       observ:  { name: Descripción Detallada, type: textarea_tag, params: size=80x5 maxlength=500 onkeyup=" return ismaxlength(this)"}
       lonart:  { name: ., params: style=display:none}
       monant:  { name: ., params: style=display:none}
       valmon:  { name: ., params: style=display:none}
       grid_faartfacpro:    { name: .}
+      grid_fargoartpro:    { name: .}
+      grid_fadescartpro:    { name: .}
+      totrec:  { name: Total Recargos}
+      totdesc:  { name: Total Descuentos}
       js:     { name: .}
+      botones:     { name: .}
       codubi:
         name: Unidad
         params: maxlength=30
@@ -45,8 +52,9 @@ generator:
     edit:
       title: Edición de Proforma
       display:
-        Datos de la Proforma: [reffac, fecfac, _tipref, _tipmon, _rifpro, telpro, tipper, dirpro, _codconpag, _desfac, codubi, monfac, _js]
-        Detalle de la Proforma: [_grid_faartfacpro, lonart, monant, valmon ]
+        Datos de la Proforma: [reffac, fecfac, _tipref, _tipmon, _rifpro, telpro, tipper, dirpro, _codconpag, _desfac, codubi, monto, monrgo, mondesc, monfac]
+        Detalle de la Proforma: [_botones, _grid_fargoartpro, _totrec, _grid_fadescartpro, _totdesc, _grid_faartfacpro, lonart, monant, valmon]
+        "NONE":  [_js]
         #"Datos de la Factura": [codcaj, reffac, fecfac, _tipref, _tipmon, _rifpro, telpro, dirpro, tipper, _codconpag, desfac, monto, monrgo, mondesc, monfac, combo, refproform, proform, numcontrol]
         #"Detalle": [listaart, _grid_fapeddes, _grid_faartfac, _grid_fadescart, totdesc, _grid_fargoart, totrec]
         #"Forma de Pago": [_codtip, _grid_faforpag, moncan, monres, vuelto]
@@ -57,7 +65,7 @@ generator:
         #  label_width:    none
         #fecfac:
         #  divclass:   divotro
-      hide: [mancatdes]
+      hide: [mancatdes, esretencion, trajo, totmonrgo, tottotart, porcentajedescto, apliclades, rgofijos]
       report:
         url:         facturacion/rfarfacpreimp.php?m=m
         params:      { codfacdes: reffac, codfachas: reffac }

@@ -22,7 +22,20 @@ class Fafacturpro extends BaseFafacturpro
   protected $tipper="";
   protected $desconpag="";
   protected $grid=array();
+  protected $obj2=array();
+  protected $obj4=array();
   protected $mancatdes="";
+  protected $monto="0,00";
+  protected $monrgo="0,00";
+  protected $totdesc="0,00";
+  protected $totrec="0,00";
+  protected $apliclades="";
+  protected $esretencion="";
+  protected $tottotart="0,00";
+  protected $totmonrgo="0,00";
+  protected $trajo="";
+  protected $porcentajedescto="0";
+  protected $rgofijos="";
 
   protected function afterHydrate()
   {
