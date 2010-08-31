@@ -261,13 +261,32 @@ class fafacturActions extends autofafacturActions {
    * los datos del grid.
    *
    */
-  public function configGridDescFac($reffac = '', $tipcliente = '', $arreglo = array ()) {
+  public function configGridDescFac($reffac = '', $tipo='', $tipcliente = '', $arreglo = array ()) {
 		if ($tipcliente != '') {
 			$descart = $arreglo;
 		} else {
-			$c = new Criteria();
-			$c->add(FadescartPeer :: REFDOC, $reffac);
-			$descart = FadescartPeer :: doSelect($c);
+                    $c = new Criteria();
+		    if ($tipo=='PROFORMA')
+                    {                        
+                        $c->add(FadescartproPeer :: REFDOC, $reffac);
+                        $dreg = FadescartproPeer :: doSelect($c);
+                        foreach ($dreg as $obj)
+                        {
+                          $fadescart2= new Fadescart();
+                          $fadescart2->setCoddesc($obj->getCoddesc());
+                          $fadescart2->setDesdesc($obj->getDesdesc());
+                          $fadescart2->setMondesc($obj->getMondesc());
+                          $fadescart2->setCodcta($obj->getCodcta());
+                          $fadescart2->setCantidad(0);
+                          $fadescart2->setMontdesc($obj->getMontdesc());
+                          $fadescart2->setTipdesc($obj->getTipdesc());
+                          $fadescart2->setTipret($obj->getTipret());                          
+                          $descart[]=$fadescart2;
+                        }
+                    }else {                        
+                        $c->add(FadescartPeer :: REFDOC, $reffac);
+                        $descart = FadescartPeer :: doSelect($c);
+                    }
 		}
 
 		$this->columnas = Herramientas :: getConfigGrid(sfConfig :: get('sf_app_module_dir') . '/fafactur/' . sfConfig :: get('sf_app_module_config_dir_name') . '/grid_fadescart');
@@ -323,10 +342,29 @@ class fafacturActions extends autofafacturActions {
    * los datos del grid.
    *
    */
-  public function configGridRgoArt($reffac = '') {
-		$c = new Criteria();
-		$c->add(FargoartPeer :: REFDOC, $reffac);
-		$rgoart = FargoartPeer :: doSelect($c);
+  public function configGridRgoArt($reffac = '', $tipo='') {
+
+       $c = new Criteria();
+       if($tipo=='PROFORMA')
+        {           
+           $c->add(FargoartproPeer :: REFDOC, $reffac);
+           $rreg = FargoartproPeer :: doSelect($c);
+           foreach ($rreg as $obj)
+            {
+              $fargoart2= new Fargoart();
+              $fargoart2->setCodrgo($obj->getCodrgo());
+              $fargoart2->setNomrgo($obj->getNomrgo());
+              $fargoart2->setRecfij($obj->getRecfij());
+              $fargoart2->setMonrgo($obj->getMonrgo());
+              $fargoart2->setCodcta($obj->getCodcta());
+              $fargoart2->setTipo($obj->getTipo());
+              $fargoart2->setMonrgo2($obj->getMonrgo2());
+              $rgoart[]=$fargoart2;
+            }
+        }else {            
+            $c->add(FargoartPeer :: REFDOC, $reffac);
+            $rgoart = FargoartPeer :: doSelect($c);
+        }
 
 		$this->columnas = Herramientas :: getConfigGrid(sfConfig :: get('sf_app_module_dir') . '/fafactur/' . sfConfig :: get('sf_app_module_config_dir_name') . '/grid_fargoart');
 		$this->columnas[1][0]->setHTML('onBlur="javascript:event.keyCode=13; ajaxrecargos(event,this.id);"');
@@ -978,6 +1016,8 @@ class fafacturActions extends autofafacturActions {
                             $telpro=$per->getTelpro();
                             $dirpro=$per->getDirpro();
                             $tipper=$per->getTipper();
+                            $codcli=H::getX('RIFPRO','Facliente','Codpro',$per->getRifpro());
+                            $ctacli = H::getX('RIFPRO','Facliente','Codcta',$per->getRifpro());
                             $codconpag=$per->getCodconpag();
                             $desconpag=$per->getDesconpag();
                             $desfac=$per->getDesfac();
@@ -994,14 +1034,14 @@ class fafacturActions extends autofafacturActions {
                                               $('fafactur_tipper_N').checked=true;
                                               $('fafactur_tipper_J').checked=false;
                                               $('fafactur_tipper_N').disabled=true;
-                                              $('fafactur_tipper_J').disabled=true";
+                                              $('fafactur_tipper_J').disabled=true;";
                              else
                                  $javascript.="$('fafactur_tipper_N').disabled=false;
                                               $('fafactur_tipper_J').disabled=false;
                                               $('fafactur_tipper_N').checked=false;
                                               $('fafactur_tipper_J').checked=true;
                                               $('fafactur_tipper_N').disabled=true;
-                                              $('fafactur_tipper_J').disabled=true";
+                                              $('fafactur_tipper_J').disabled=true;";
 
                         }else
                         {
@@ -1012,6 +1052,8 @@ class fafacturActions extends autofafacturActions {
                             $telpro="";
                             $dirpro="";
                             $tipper="";
+                            $ctacli="";
+                            $codcli="";
                             $codconpag="";
                             $desconpag="";
                             $desfac="";
@@ -1021,10 +1063,11 @@ class fafacturActions extends autofafacturActions {
                         $this->ajaxs = '16';
 			$this->fafactur = $this->getFafacturOrCreate();
                         $this->configGridArtFac($codigo, 'V','PROFORMA');
+                        $javascript.=" CargarRecDesc(); montoTotal();";
 
 		        $output = '[["fafactur_tipref","'.$tipref.'",""],["fafactur_tipmon","'.$tipmon.'",""],["fafactur_rifpro","'.$rifpro.'",""],["fafactur_nompro","'.$nompro.'",""],
                                     ["fafactur_telpro","'.$telpro.'",""],["fafactur_dirpro","'.$dirpro.'",""],["fafactur_codconpag","'.$codconpag.'",""],["fafactur_desconpag","'.$desconpag.'",""],
-                                    ["fafactur_desfac","'.$desfac.'",""],["fafactur_monto","'.H::FormatoMonto($monfac).'",""],["fafactur_monfac","'.H::FormatoMonto($monfac).'",""],["fafactur_tipconpag","'.$tipconpag.'",""],["javascript","'.$javascript.'",""]]';
+                                    ["fafactur_desfac","'.$desfac.'",""],["fafactur_monto","'.H::FormatoMonto($monfac).'",""],["fafactur_monfac","'.H::FormatoMonto($monfac).'",""],["fafactur_tipconpag","'.$tipconpag.'",""],["fafactur_ctacli","'.$ctacli.'",""],["fafactur_codcli","'.$codcli.'",""],["javascript","'.$javascript.'",""]]';
 		        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
 		        #return sfView::HEADER_ONLY;
              break;
@@ -1109,6 +1152,20 @@ class fafacturActions extends autofafacturActions {
         $this->getResponse()->setHttpHeader("X-JSON", '(' . $output . ')');
         return sfView :: HEADER_ONLY;
         break;
+        case '24' :
+            $this->ajaxs = '17';
+            $this->fafactur = $this->getFafacturOrCreate();
+            $this->configGridDescFac($codigo,'PROFORMA');
+            $output = '[["","",""],["","",""],["","",""]]';
+            $this->getResponse()->setHttpHeader("X-JSON", '(' . $output . ')');
+            break;
+        case '25' :
+            $this->ajaxs = '18';
+            $this->fafactur = $this->getFafacturOrCreate();
+            $this->configGridRgoArt($codigo,'PROFORMA');
+            $output = '[["","",""],["","",""],["","",""]]';
+            $this->getResponse()->setHttpHeader("X-JSON", '(' . $output . ')');
+            break;
 			default :
 				$output = '[["","",""],["","",""],["","",""]]';
 				$this->getResponse()->setHttpHeader("X-JSON", '(' . $output . ')');
@@ -1141,14 +1198,15 @@ class fafacturActions extends autofafacturActions {
          $this->coderr=1137;
          return false;
         }
-
+        $grid4=Herramientas::CargarDatosGridv2($this,$this->obj4);
         $grid=Herramientas::CargarDatosGridv2($this,$this->obj1);
         if (Factura::PreciosRepetidos($grid))
         {
       	  $this->coderr=1136;
           return false;
-        }
+        }        
         $grid2=Herramientas::CargarDatosGridv2($this,$this->obj3);
+            
         if (Factura::Verificar_pago($grid2,H::tofloat($this->getRequestParameter('fafactur[monfac]')),$this->getRequestParameter('fafactur[tipconpag]'))==false)
         {
           $this->coderr=1146;
@@ -1464,7 +1522,32 @@ class fafacturActions extends autofafacturActions {
 	}
 
 	protected function deleting($fafactur) {
-		Herramientas :: EliminarRegistro('Faartfac', 'Reffac', $fafactur->getReffac());
+		if ($fafactur->getProform()!='')
+                {
+                    $t= new Criteria();
+                    $t->add(FaartfacPeer::REFFAC,$fafactur->getReffac());
+                    $resulta= FaartfacPeer::doSelect($t);
+                    if ($resulta)
+                    {
+                        foreach ($resulta as $objdet)
+                        {
+                            $c = new Criteria();
+                            $c->add(FaartfacproPeer::REFFAC,$fafactur->getProform());
+                            $c->add(FaartfacproPeer::CODART,$objdet->getCodart());
+                            $per = FaartfacproPeer::doSelectOne($c);
+                            if($per)
+                            {
+                                 $per->setEstatus('A');
+                                 $per->setNumfac(null);
+                                 $per->save();
+                            }        
+                        }
+                      Herramientas :: EliminarRegistro('Faartfac', 'Reffac', $fafactur->getReffac());
+                    }                    
+                }else{
+                  Herramientas :: EliminarRegistro('Faartfac', 'Reffac', $fafactur->getReffac());
+                }
+                
 		Herramientas :: EliminarRegistro('Fargoart', 'Refdoc', $fafactur->getReffac());
 		Herramientas :: EliminarRegistro('Fadescart', 'Refdoc', $fafactur->getReffac());
 		Herramientas :: EliminarRegistro('Faforpag', 'Reffac', $fafactur->getReffac());
@@ -1495,6 +1578,7 @@ class fafacturActions extends autofafacturActions {
 		if ($fafactur->getNumcominv() != "") {
 			Factura :: eliminarComprob($fafactur->getNumcominv());
 		}
+                
     $fafactur->delete();
 		return -1;
 	}

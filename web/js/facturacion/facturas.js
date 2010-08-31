@@ -3614,3 +3614,12 @@ function aplicarBL(id)
   }
 
 }
+
+function CargarRecDesc()
+{
+    var codigo=$('fafactur_proform').value;
+    new Ajax.Updater('divgrid_fadescart', getUrlModuloAjax(), {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=24&codigo='+codigo});
+    new Ajax.Updater('divgrid_fargoart', getUrlModuloAjax(), {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=25&codigo='+codigo});
+
+
+}

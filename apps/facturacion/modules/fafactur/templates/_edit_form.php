@@ -205,7 +205,7 @@ echo $value ? $value : '&nbsp;'
 </th>
 </tr>
 
-  <tr style="display:<?php if($fafactur->getId()) echo 'none'; else echo '';?>">
+  <tr style="display:<?php if($fafactur->getId() && $fafactur->getProform()=='') echo 'none'; else echo '';?>">
   <th>
       <?php echo label_for('fafactur[refproform]', __($labels['fafactur{refproform}']), 'class="required" style="width: 150px"') ?>
       <div class="content<?php if ($sf_request->hasError('fafactur{refproform}')): ?> form-error<?php endif; ?>">
@@ -219,7 +219,7 @@ echo $value ? $value : '&nbsp;'
     )); echo $value ? $value : '&nbsp;' ?>
         </div>
   </th>
-  <th id="thproform" style="display:<?php if(!$fafactur->getRefproform()) echo 'none'; else echo '';?>">
+  <th id="thproform" style="display:<?php if((!$fafactur->getRefproform()) && $fafactur->getProform()=='') echo 'none'; else echo '';?>">
       <?php echo label_for('fafactur[proform]', __($labels['fafactur{proform}']), 'class="required" style="width: 150px"') ?>
       <div class="content<?php if ($sf_request->hasError('fafactur{proform}')): ?> form-error<?php endif; ?>">
       <?php if ($sf_request->hasError('fafactur{proform}')): ?>

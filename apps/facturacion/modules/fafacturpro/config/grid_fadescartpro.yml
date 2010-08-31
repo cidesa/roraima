@@ -1,11 +1,11 @@
 opciones:                  # Opciones generales
   name:                    b
   eliminar:                true
-  tabla:                   fadescart
+  tabla:                   fadescartpro
   anchogrid:               750
   ancho:                   900
-  filas:                   10
-  titulo:                  ' '
+  filas:                   1
+  titulo:                  'Descuentos '
   htmltotalfilas:          ' '
 1:       # Columna 1
   titulo:                  Código
@@ -26,7 +26,7 @@ opciones:                  # Opciones generales
   nombrecampo:             mondesc
   esnumerico:              true
   html:                    [size="10"]
-  estotal:                 [true, fafactur_totdesc]
+  estotal:                 [true, fafacturpro_totdesc]
 4:       #columana 4
   titulo:                  Codcta
   tipo:                    t

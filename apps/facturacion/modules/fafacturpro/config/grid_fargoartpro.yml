@@ -1,11 +1,11 @@
 opciones:                  # Opciones generales
   name:                    c
   eliminar:                true
-  tabla:                   fargoart
-  anchogrid:               750
+  tabla:                   fargoartpro
+  anchogrid:               900
   ancho:                   900
-  filas:                   10
-  titulo:                  ' '
+  filas:                   1
+  titulo:                  'Recargos '
   htmltotalfilas:          ' '
 1:       # Columna 1
   titulo:                  Código
@@ -32,7 +32,7 @@ opciones:                  # Opciones generales
   nombrecampo:             monrgo
   esnumerico:              true
   html:                    [size="10"]
-  estotal:                 [true, fafactur_totrec]
+  estotal:                 [true, fafacturpro_totrec]
 5:       #columana 5
   titulo:                  Codcta
   tipo:                    t
