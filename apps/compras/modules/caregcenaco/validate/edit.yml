@@ -10,12 +10,12 @@ methods:
 names:
   cadefcenaco{codcenaco}:
     required:  Yes
-    required_msg: El CÃ³digo del Centro de Acopio no puedo estar en Blanco
+    required_msg: El Código del Centro de Acopio no puedo estar en Blanco
     validators: UniqueValidator
 
   cadefcenaco{descenaco}:
     required:  Yes
-    required_msg: La DescripciÃ³n del Centro de Acopio no puedo estar en Blanco
+    required_msg: La Descripción del Centro de Acopio no puedo estar en Blanco
     validators: DescripcionValidator
 
   cadefcenaco{codpai}:
@@ -35,23 +35,23 @@ UniqueValidator:
     param:
         class:    Cadefcenaco
         column:   codcenaco
-        unique_error:   El CÃ³digo del Centro de Acopio ya existe. Por Favor, CambiÃ©lo por otro.
+        unique_error:   El Código del Centro de Acopio ya existe. Por Favor, Cambiélo por otro.
 
 DescripcionValidator:
     class: sfStringValidator
     param:
         min:       5
-        min_error: La DescripciÃ³n del Centro de Acopio no puede tener menos de 5 caracteres
+        min_error: La Descripción del Centro de Acopio no puede tener menos de 5 caracteres
         max:       250
-        max_error: La DescripciÃ³n del Centro de Acopio no puede tener mÃ¡s de 250 caracteres
+        max_error: La Descripción del Centro de Acopio no puede tener más de 250 caracteres
 
 DireccionValidator:
     class: sfStringValidator
     param:
         min:       5
-        min_error: La DirecciÃ³n asociada al Centro de Acopio no puede tener menos de 5 caracteres
+        min_error: La Dirección asociada al Centro de Acopio no puede tener menos de 5 caracteres
         max:       500
-        max_error: La DirecciÃ³n asociada al Centro de Acopio no puede tener mÃ¡s de 500 caracteres
+        max_error: La Dirección asociada al Centro de Acopio no puede tener más de 500 caracteres
 
 EstadoValidator:
     class: CidesaExistValidator

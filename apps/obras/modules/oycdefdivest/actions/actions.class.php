@@ -49,7 +49,7 @@ class oycdefdivestActions extends autooycdefdivestActions
 		{
 			$this->updateOcestadoFromRequest();
 
-			$this->saveOcestado($this->ocestado);
+			if ($this->saveOcestado($this->ocestado)==-1) {
 
 			$this->setFlash('notice', 'Your modifications have been saved');
 $this->Bitacora('Guardo');
@@ -66,6 +66,13 @@ $this->Bitacora('Guardo');
 			{
 				return $this->redirect('oycdefdivest/edit?id='.$this->ocestado->getId());
 			}
+                        }else
+                        {
+                            $this->labels = $this->getLabels();
+                           $err = Herramientas::obtenerMensajeError($this->coderror);
+                               $this->getRequest()->setError('',$err);
+                           return sfView::SUCCESS;
+		}
 		}
 		else
 		{
@@ -142,6 +149,27 @@ $this->Bitacora('Guardo');
     }
 
     return $this->redirect('oycdefdivest/list');
+  }
+
+    protected function saveOcestado($ocestado)
+  {
+
+    $c= new Criteria();
+    $c->add(OcestadoPeer::CODPAI,$ocestado->getCodpai());
+    $c->add(OcestadoPeer::CODEDO,$ocestado->getCodedo());
+    $data= OcestadoPeer::doSelectOne($c);
+    if (!$data)
+    {
+      $ocestado->save();
+      $this->coderror=-1;
+      return $this->coderror;
+}
+    else
+    {
+    	$this->coderror=1029;
+    	return $this->coderror;
+    }
+
   }
 
 

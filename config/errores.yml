@@ -992,6 +992,9 @@
 1028:
     cod: 1028
     msj: El Sector ya se Encuentra asociada a ese Pais, Estado, Municipio y Parroquia.
+1029:
+    cod: 1029
+    msj: El Estado ya se Encuentra asociada a ese Pais.
 
 ###############FACTURACION################
 1100:

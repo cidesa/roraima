@@ -8,7 +8,7 @@ names:
   ocestado{codedo}:
     required:  Yes
     required_msg: El Código de Estado no puedo estar en Blanco
-    validators: Validator_codedo
+    #validators: Validator_codedo
 
   ocestado{codpai}:
     required:  Yes
