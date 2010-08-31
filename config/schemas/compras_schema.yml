@@ -1589,6 +1589,9 @@ propel:
     codartsnc:
       type: VARCHAR
       size: 20
+    tipreg:
+      type: VARCHAR
+      size: 1
     id:
       type: INTEGER
       required: true
@@ -1769,6 +1772,9 @@ propel:
     usuanu:
       type: VARCHAR
       size: 250
+    codcenaco:
+      type: VARCHAR
+      size: 4
     id:
       type: INTEGER
       required: true
@@ -2171,7 +2177,7 @@ propel:
     tipodoc:
       type: VARCHAR
       size: 4
-      description: Se usa para definir el tipo de OC de DonaciÃ³n
+      description: Se usa para definir el tipo de OC de Donación
     id:
       type: INTEGER
       required: true
@@ -2932,4 +2938,44 @@ propel:
       required: true
       primaryKey: true
       autoIncrement: true
-      description: Identificador Ãnico del registro
+      description: Identificador Único del registro
+  cadefcenaco:
+    codcenaco:
+      type: VARCHAR
+      size: 4
+      required: true
+    descenaco:
+      type: VARCHAR
+      size: 250
+      required: true
+    codpai:
+      type: VARCHAR
+      size: 4
+      foreignTable: ocpais
+      foreignReference: codpai
+      description: Código del país donde reside el organismo.
+    codedo:
+      type: VARCHAR
+      size: 4
+      foreignTable: ocestado
+      foreignReference: codedo
+      description: Código del estado donde reside el organismo.
+    codciu:
+      type: VARCHAR
+      size: 4
+      foreignTable: occiudad
+      foreignReference: codciu
+      description: Código del ciudad donde reside el organismo.
+    codmun:
+      type: VARCHAR
+      size: 4
+      foreignTable: ocmunici
+      foreignReference: codmun
+      description: Código del municipio donde reside el organismo.
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+

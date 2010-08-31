@@ -24,7 +24,7 @@ array()) ?></h1>
 
 <div id="sf_admin_content">
 <?php include_partial('oycdefdivmun/edit_messages', array('ocmunici' => $ocmunici, 'labels' => $labels)) ?>
-<?php include_partial('oycdefdivmun/edit_form', array('ocmunici' => $ocmunici, 'labels' => $labels, 'pais' => $pais, 'estados' => $estados)) ?>
+<?php include_partial('oycdefdivmun/edit_form', array('ocmunici' => $ocmunici, 'labels' => $labels, 'pais' => $pais, 'estados' => $estados, 'ciudades' => $ciudades)) ?>
 </div>
 
 <div id="sf_admin_footer">

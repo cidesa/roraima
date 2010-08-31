@@ -6430,7 +6430,13 @@ public function Catdefcatman_Cattramo($params = '') {
 
 	}
 
-
+	public function Cadefcenaco_Almsolegr() {
+            $this->c = new Criteria();
+            $this->columnas = array (
+                    CadefcenacoPeer :: CODCENACO => 'Código',
+                    CadefcenacoPeer :: DESCENACO => 'Descripción'
+            );
+	}
         
 }
 

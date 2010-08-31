@@ -271,6 +271,11 @@ class Caordcom extends BaseCaordcom
 	return Herramientas::getX('CODCEN','Cadefcen','Descen',self::getCodcen());
   }
 
+  public function getDescenaco()
+  {
+	return Herramientas::getX('CODCENACO','Cadefcenaco','Descenaco',self::getCodcenaco());
+  }
+
     public function getEdaact()
   {
   	if (self::getFecdon())
