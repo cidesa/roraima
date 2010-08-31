@@ -983,6 +983,16 @@
 1025:
     cod: 1025
     msj: Selecciones el Tipo de Compromiso
+1026:
+    cod: 1026
+    msj: El Municipio ya se Encuentra asociada a ese Pais, Estado y Ciudad.
+1027:
+    cod: 1027
+    msj: La Parroquia ya se Encuentra asociada a ese Pais, Estado y Municipio.
+1028:
+    cod: 1028
+    msj: El Sector ya se Encuentra asociada a ese Pais, Estado, Municipio y Parroquia.
+
 ###############FACTURACION################
 1100:
     cod: 1100

@@ -15,6 +15,11 @@
  */
 class Ocpais extends BaseOcpais
 {
+  public function __toString()
+  {
+    return $this->codpai;
+  }
+
   public static function getEstados()
   {
     $e = OcpaisPeer::doSelect(new Criteria());

@@ -15,6 +15,11 @@
  */
 class Occiudad extends BaseOcciudad
 {
+       public function __toString()
+  {
+    return $this->codciu;
+  }
+
 	public function getNompai()
 	{
 		return Herramientas::getX('codpai','ocpais','nompai',self::getCodpai());
@@ -23,4 +28,19 @@ class Occiudad extends BaseOcciudad
 	{
 		return Herramientas::getX('codedo','ocestado','nomedo',self::getCodedo());
 	}
+
+  public static function getCiudades($pais='',$estado='')
+  {
+    $t= new Criteria();
+    $t->add(OcciudadPeer::CODPAI,$pais);
+    $t->add(OcciudadPeer::CODEDO,$estado);
+    $e = OcciudadPeer::doSelect($t);
+    if($e){
+      $resp = array();
+      foreach($e as $esta){
+        $resp[$esta->getCodciu()] = $esta->getNomciu();
+      }
+      return $resp;
+    }else return array();
+  }
 }

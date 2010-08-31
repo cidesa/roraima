@@ -44,6 +44,16 @@
   ))));?></div>
 </div>
 <br>
+<?php echo label_for('ocmunici[codciu]', __($labels['ocmunici{codciu}']), 'class="required" ') ?>
+<div
+	class="content<?php if ($sf_request->hasError('ocmunici{codciu}')): ?> form-error<?php endif; ?>">
+<?php if ($sf_request->hasError('ocmunici{codciu}')): ?> <?php echo form_error('ocmunici{codciu}', array('class' => 'form-error-msg')) ?>
+<?php endif; ?>
+<div id="divCiudad">
+<?php echo select_tag('ocmunici[codciu]', options_for_select($ciudades,$ocmunici->getCodciu(),'include_custom=Seleccione'),array());?>
+</div>
+</div>
+<br>
   <?php echo label_for('ocmunici[codmun]', __($labels['ocmunici{codmun}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('ocmunici{codmun}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('ocmunici{codmun}')): ?>

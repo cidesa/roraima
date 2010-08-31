@@ -6,6 +6,7 @@ generator:
     fields:
       codpai:       { name: Código Paìs }
       codedo:       { name: Código Estado }
+      codciu:       { name: Código Ciudad }
       codmun:       { name: Código Municipio}
       nommun:       { name: Nombre Municipio}
       nompai:       { name: País}
@@ -13,7 +14,7 @@ generator:
 
     list:
       title:          Municipios
-      filters:        [codciu]
+      filters:        [codmun]
       display:        [=codmun, nommun, nomedo, nompai]
       object_actions:
         _edit:        ~
@@ -21,7 +22,7 @@ generator:
       max_per_page:   5
     edit:
       title:          Edición de Municipio
-      display:        [codpai, codedo, codmun, nommun]
+      display:        [codpai, codedo, codciu, codmun, nommun]
       actions:
         _list:        ~
         _save:        ~

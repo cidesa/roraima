@@ -29,9 +29,8 @@ class oycdefdivmunActions extends autooycdefdivmunActions
     {
       $this->updateOcmuniciFromRequest();
 
-      $this->saveOcmunici($this->ocmunici);
-
-
+      if ($this->saveOcmunici($this->ocmunici)==-1)
+      {
       $this->setFlash('notice', 'Your modifications have been saved');
 $this->Bitacora('Guardo');
 
@@ -46,6 +45,13 @@ $this->Bitacora('Guardo');
       else
       {
         return $this->redirect('oycdefdivmun/edit?id='.$this->ocmunici->getId());
+      }
+      }else
+      {
+         $this->labels = $this->getLabels();
+         $err = Herramientas::obtenerMensajeError($this->coderror);
+         $this->getRequest()->setError('',$err);
+         return sfView::SUCCESS;
       }
     }
     else
@@ -72,6 +78,10 @@ $this->Bitacora('Guardo');
     {
       $this->ocmunici->setCodedo($ocmunici['codedo']);
     }
+    if (isset($ocmunici['codciu']))
+    {
+      $this->ocmunici->setCodciu($ocmunici['codciu']);
+    }
     if (isset($ocmunici['codmun']))
     {
       $this->ocmunici->setCodmun($ocmunici['codmun']);
@@ -95,7 +105,24 @@ $this->Bitacora('Guardo');
    */
   protected function saveOcmunici($ocmunici)
   {
-     $ocmunici->save();
+     $c= new Criteria();
+    $c->add(OcmuniciPeer::CODPAI,$ocmunici->getCodpai());
+    $c->add(OcmuniciPeer::CODEDO,$ocmunici->getCodedo());
+    $c->add(OcmuniciPeer::CODCIU,$ocmunici->getCodciu());
+    $c->add(OcmuniciPeer::CODMUN,$ocmunici->getCodmun());
+    $data= OcmuniciPeer::doSelectOne($c);
+    if (!$data)
+    {
+      $ocmunici->save();
+      $this->coderror=-1;
+      return $this->coderror;
+    }
+    else
+    {
+    	$this->coderror=1026;
+    	return $this->coderror;
+    }
+
   }
 
   /**
@@ -133,6 +160,10 @@ $this->Bitacora('Guardo');
 		{
 			$this->estados = $this->Cargarestados($this->getRequestParameter('pais'));
 			$this->tipo='P';
+		}else if ($this->getRequestParameter('par')=='2')
+		{
+			$this->ciudades = $this->Cargarciudades($this->getRequestParameter('pais'),$this->getRequestParameter('estado'));
+			$this->tipo='E';
 		}
 	}
 
@@ -154,10 +185,20 @@ $this->Bitacora('Guardo');
 		return $estado= Herramientas::Cargarcombo($tablas,$filtros_tablas,$filtros_variales,$campos_retornados);
 	}
 
+        public function Cargarciudades($codpais,$codestado)
+	{
+		$tablas=array('occiudad');//areglo de los joins de las tablas
+		$filtros_tablas=array('codpai','codedo');//arreglo donde mando los filtros de las clases
+		$filtros_variales=array($codpais,$codestado);//arreglo donde mando los parametros de la funcion
+		$campos_retornados=array('codciu','nomciu');// arreglos donde me traigo el nombre y el codigo
+		return $ciudad= Herramientas::Cargarcombo($tablas,$filtros_tablas,$filtros_variales,$campos_retornados);
+	}
+
 	public function funciones_combos()
 	{
 		$this->pais = $this->Cargarpais();
 		$this->estados = $this->Cargarestados($this->ocmunici->getCodpai());//colocar lo q viene de bd
+                $this->ciudades = $this->Cargarciudades($this->ocmunici->getCodpai(),$this->ocmunici->getCodedo());//colocar lo q viene de bd
 
 	}
 

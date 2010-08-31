@@ -18,7 +18,7 @@
   'form' => 'sf_admin_edit_form',
   'class' => 'sf_admin_action_save',
 )) ?></li>
-      <li><?php echo button_to(__('create'), 'oycdefdivest/create?id='.$ocestado->getId(), array (
+      <li><?php echo button_to(__('create'), 'oycdefdivest/create', array (
   'class' => 'sf_admin_action_create',
 )) ?></li>
 </ul>

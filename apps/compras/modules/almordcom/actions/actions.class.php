@@ -764,6 +764,23 @@ class almordcomActions extends autoalmordcomActions
         $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
         return sfView::HEADER_ONLY;
       }
+      else  if ($this->getRequestParameter('ajax')=='19')
+      {
+        $q= new Criteria();
+        $q->add(CadefcenacoPeer::CODCENACO,$this->getRequestParameter('codigo'));
+        $reg= CadefcenacoPeer::doSelectOne($q);
+        if ($reg)
+        {
+           $dato=$reg->getDescenaco(); $javascript="";
+        }else {
+            $dato="";
+            $javascript="alert('El Centro de Acopio no existe'); $('$cajtexcom').value=''; $('$cajtexcom').focus();";
+        }
+
+        $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""]]';
+        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+        return sfView::HEADER_ONLY;
+      }
   }
 
 
@@ -2278,6 +2295,10 @@ class almordcomActions extends autoalmordcomActions
     if (isset($caordcom['manorddon']))
     {
       $this->caordcom->setManorddon($caordcom['manorddon']);
+    }
+    if (isset($caordcom['codcenaco']))
+    {
+      $this->caordcom->setCodcenaco($caordcom['codcenaco']);
     }
 
   }

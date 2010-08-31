@@ -27,7 +27,7 @@ class oycdefdivparActions extends autooycdefdivparActions
     {
       $this->updateOcparroqFromRequest();
 
-      $this->saveOcparroq($this->ocparroq);
+      if ($this->saveOcparroq($this->ocparroq)==-1) {
 
       $this->setFlash('notice', 'Your modifications have been saved');
 $this->Bitacora('Guardo');
@@ -43,6 +43,13 @@ $this->Bitacora('Guardo');
       else
       {
         return $this->redirect('oycdefdivpar/edit?id='.$this->ocparroq->getId());
+      }
+      }else
+      {
+         $this->labels = $this->getLabels();
+         $err = Herramientas::obtenerMensajeError($this->coderror);
+         $this->getRequest()->setError('',$err);
+         return sfView::SUCCESS;
       }
     }
     else
@@ -161,6 +168,29 @@ $this->Bitacora('Guardo');
     }
 
     return $this->redirect('oycdefdivpar/list');
+  }
+
+  protected function saveOcparroq($ocparroq)
+  {
+
+    $c= new Criteria();
+    $c->add(OcparroqPeer::CODPAI,$ocparroq->getCodpai());
+    $c->add(OcparroqPeer::CODEDO,$ocparroq->getCodedo());
+    $c->add(OcparroqPeer::CODMUN,$ocparroq->getCodmun());
+    $c->add(OcparroqPeer::CODPAR,$ocparroq->getCodpar());
+    $data= OcparroqPeer::doSelectOne($c);
+    if (!$data)
+    {
+      $ocparroq->save();
+      $this->coderror=-1;
+      return $this->coderror;
+    }
+    else
+    {
+    	$this->coderror=1027;
+    	return $this->coderror;
+    }
+
   }
 
 }

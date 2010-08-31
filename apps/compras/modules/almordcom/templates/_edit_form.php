@@ -671,6 +671,7 @@ echo grid_tag($obj_recargos);
   'control_name' => 'caordcom[codcen]',
   'onBlur'=> remote_function(array(
               'url' => 'almordcom/ajax',
+        'condition' => "$('caordcom_codcen').value!=''",
         'complete' => 'AjaxJSON(request, json)',
           'with' => "'ajax=17&cajtexmos=caordcom_descen&cajtexcom=caordcom_codcen&codigo='+this.value",
         )),
@@ -685,7 +686,34 @@ echo grid_tag($obj_recargos);
 'control_name' => 'caordcom[descen]',
 )); echo $value ? $value : '&nbsp;' ?>
 <div class="sf_admin_edit_help"><?php echo __('Máximo 4 caracteres') ?></div></div>
+<br>
+<?php echo label_for('caordcom[codcenaco]', __($labels['caordcom{codcenaco}']), 'class="required"') ?>
+<div
+  class="content<?php if ($sf_request->hasError('caordcom{codcenaco}')): ?> form-error<?php endif; ?>">
+<?php if ($sf_request->hasError('caordcom{codcenaco}')): ?> <?php echo form_error('caordcom{codcenaco}', array('class' => 'form-error-msg')) ?>
+<?php endif; ?>
 
+  <?php $value = object_input_tag($caordcom, 'getCodcenaco', array (
+  'size' => 10,
+  'maxlength' => 4,
+  'control_name' => 'caordcom[codcenaco]',
+  'onBlur'=> remote_function(array(
+              'url' => 'almordcom/ajax',
+        'condition' => "$('caordcom_codcenaco').value!=''",
+        'complete' => 'AjaxJSON(request, json)',
+          'with' => "'ajax=19&cajtexmos=caordcom_descenaco&cajtexcom=caordcom_codcenaco&codigo='+this.value",
+        )),
+)); echo $value ? $value : '&nbsp;' ?>
+
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Cadefcenaco_Almsolegr/clase/Cadefcenaco/frame/sf_admin_edit_form/obj1/caordcom_codcenaco/obj2/caordcom_descenaco/campo1/codcenaco/campo2/descenaco')?>
+
+<?php $value = object_input_tag($caordcom, 'getDescenaco', array (
+'size' => 50,
+'maxlength' => 50,
+'disabled' => true,
+'control_name' => 'caordcom[descenaco]',
+)); echo $value ? $value : '&nbsp;' ?>
+<div class="sf_admin_edit_help"><?php echo __('Máximo 4 caracteres') ?></div></div>
 </div>
 </fieldset>
 

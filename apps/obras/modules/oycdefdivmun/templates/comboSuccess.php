@@ -14,4 +14,6 @@
  'url'      => 'oycdefdivmun/combo?par=2',
  'with' => "'pais='+document.getElementById('ocmunici_codpai').value+'&estado='+this.value"
   ))));
-}
+}else if ($tipo=='E') {
+echo select_tag('ocmunici[codciu]', options_for_select($ciudades,'','include_custom=Seleccione'),array());
+}?>

@@ -1,0 +1,61 @@
+methods:
+  post:
+   - "cadefcenaco{codcenaco}"
+   - "cadefcenaco{descenaco}"
+   - "cadefcenaco{codpai}"
+   - "cadefcenaco{codedo}"
+   - "cadefcenaco{codciu}"
+   - "cadefcenaco{codmun}"
+
+names:
+  cadefcenaco{codcenaco}:
+    required:  Yes
+    required_msg: El CÃ³digo del Centro de Acopio no puedo estar en Blanco
+    validators: UniqueValidator
+
+  cadefcenaco{descenaco}:
+    required:  Yes
+    required_msg: La DescripciÃ³n del Centro de Acopio no puedo estar en Blanco
+    validators: DescripcionValidator
+
+  cadefcenaco{codpai}:
+    required:  No    
+
+  cadefcenaco{codedo}:
+    required:  No
+
+  cadefcenaco{codciu}:
+    required:  No
+
+  cadefcenaco{codmun}:
+    required:  No
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Cadefcenaco
+        column:   codcenaco
+        unique_error:   El CÃ³digo del Centro de Acopio ya existe. Por Favor, CambiÃ©lo por otro.
+
+DescripcionValidator:
+    class: sfStringValidator
+    param:
+        min:       5
+        min_error: La DescripciÃ³n del Centro de Acopio no puede tener menos de 5 caracteres
+        max:       250
+        max_error: La DescripciÃ³n del Centro de Acopio no puede tener mÃ¡s de 250 caracteres
+
+DireccionValidator:
+    class: sfStringValidator
+    param:
+        min:       5
+        min_error: La DirecciÃ³n asociada al Centro de Acopio no puede tener menos de 5 caracteres
+        max:       500
+        max_error: La DirecciÃ³n asociada al Centro de Acopio no puede tener mÃ¡s de 500 caracteres
+
+EstadoValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Nppais
+        column:   codpai
+        unique_error:   El Estado no existe.

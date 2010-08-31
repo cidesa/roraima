@@ -93,7 +93,7 @@ class oycdefdivsecActions extends autooycdefdivsecActions
     {
       $this->updateOcsectorFromRequest();
 
-      $this->saveOcsector($this->ocsector);
+      if ($this->saveOcsector($this->ocsector)==-1) {
 
       $this->setFlash('notice', 'Your modifications have been saved');
 $this->Bitacora('Guardo');
@@ -109,6 +109,13 @@ $this->Bitacora('Guardo');
       else
       {
         return $this->redirect('oycdefdivsec/edit?id='.$this->ocsector->getId());
+      }
+      }else
+      {
+         $this->labels = $this->getLabels();
+         $err = Herramientas::obtenerMensajeError($this->coderror);
+         $this->getRequest()->setError('',$err);
+         return sfView::SUCCESS;
       }
     }
     else
@@ -196,6 +203,29 @@ $this->Bitacora('Guardo');
       return $this->forward('oycdefdivsec', 'list');
     }
     return $this->redirect('oycdefdivsec/list');
+  }
+
+    protected function saveOcsector($ocsector)
+  {
+    $c= new Criteria();
+    $c->add(OcsectorPeer::CODPAI,$ocsector->getCodpai());
+    $c->add(OcsectorPeer::CODEDO,$ocsector->getCodedo());
+    $c->add(OcsectorPeer::CODMUN,$ocsector->getCodmun());
+    $c->add(OcsectorPeer::CODPAR,$ocsector->getCodpar());
+    $c->add(OcsectorPeer::CODSEC,$ocsector->getCodsec());
+    $data= OcsectorPeer::doSelectOne($c);
+    if (!$data)
+    {
+      $ocsector->save();
+      $this->coderror=-1;
+      return $this->coderror;
+    }
+    else
+    {
+    	$this->coderror=1028;
+    	return $this->coderror;
+    }
+
   }
 
 }
