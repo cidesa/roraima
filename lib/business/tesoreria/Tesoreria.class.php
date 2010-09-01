@@ -2445,7 +2445,7 @@ public static function validarCuentasGrid($grid)
                 }else if ($regis->getForfec()=='yyyy-mm-dd') {
                     $fec1=$fecha;
                 }
-
+                $signomonto=substr(substr($cuenta,$regis->getInimon(),$regis->getFinmon()),0,1);
                 $mes=substr($fec1,5,2);
                 $sql="select refban from tsmovban where numcue='".$numcue."' and refban='".$ref."'and to_char(fecban,'MM')='".$mes."'";
                 if (Herramientas::BuscarDatos($sql,&$resul))
@@ -2482,10 +2482,12 @@ public static function validarCuentasGrid($grid)
                      eval('$reg->save();');
                      
                     }
-                }else $referencia=$ref;
-
-
-                $signomonto=substr(substr($cuenta,$regis->getInimon(),$regis->getFinmon()),0,1);
+                }else
+                {
+                    if ($signomonto=='+')
+                      $referencia=substr($ref,($regis->getDigsigp()*-1));
+                    else $referencia=substr($ref,($regis->getDigsign()*-1));
+                }                
                 if ($regis->getFintip()!=0)
                 {
                    $tipo= substr($cuenta,$regis->getInitip(),$regis->getFintip());
@@ -2765,5 +2767,188 @@ public static function reversarMovSegLib($clasemodelo)
   }
   return -1;
 }
+
+	public static function hacer_ConciliablesMig($nro, $mes, $ano, $fechas) {
+    $sql = "Select A.RefLib as reflib, B.RefBan as refban, A.FecLib as feclib, B.FecBan as fecban,
+            A.TipMov as tipmov1, B.TipMov as tipmov2, A.DesLib as deslib, B.DesBan as desban,
+            A.MonMov as monmov1, B.MonMov as monmov2
+                   From TsMovLib A, TsMovBan B
+                  Where A.RefLib = B.RefBan And
+                    A.MonMov = B.MonMov And
+                    A.NumCue = '" . $nro . "' And
+            B.NumCue = '" . $nro . "' And
+                     A.FecLib <= To_Date('" . $fechas . "','DD/MM/YYYY') And
+                     B.FecBan <= To_Date('" . $fechas . "','DD/MM/YYYY') And
+                     A.StaCon='N' And B.StaCon='N' AND
+                     A.Status='C' And B.Status='C'";
+  //A.tipmov=b.tipmov and
+    if (Herramientas :: BuscarDatos($sql, & $result)) {
+      foreach ($result as $tstemigu) {
+        $tsconcil = new Tsconcil();
+        $tsconcil->setNumcue($nro);
+        $tsconcil->setMescon($mes);
+        $tsconcil->setAnocon($ano);
+        $tsconcil->setRefere($tstemigu["reflib"]);
+        $tsconcil->setMovlib($tstemigu["tipmov1"]);
+        $tsconcil->setMovban($tstemigu["tipmov2"]);
+        $tsconcil->setFeclib($tstemigu["feclib"]);
+        $tsconcil->setFecban($tstemigu["fecban"]);
+        $tsconcil->setDesref($tstemigu["deslib"]);
+        $tsconcil->setMonlib($tstemigu["monmov1"]);
+        $tsconcil->setMonban($tstemigu["monmov2"]);
+        $tsconcil->setResult('CONCILIADO');
+        $tsconcil->save();
+
+        Tesoreria :: actualizar_Status($nro, $tstemigu["reflib"], 'C',$tstemigu["tipmov1"]);
+}
+    }
+
+  }
+
+   public static function hacer_Libro_No_BancoMig($nro, $mes, $ano, $fechas) {
+    $sql = "Select reflib,tipmov,feclib,deslib,monmov From TsMovLib
+                  Where NumCue = '" . $nro . "' And
+                    FecLib<= To_Date('" . $fechas . "','DD/MM/YYYY') And Status = 'C' And StaCon='N' ";
+
+    if (Herramientas :: BuscarDatos($sql, & $result)) {
+      foreach ($result as $tsmovlib) {
+        $sql2 = "SELECT REFBAN From TSMOVBAN
+                         WHERE NUMCUE= '" . $nro . "' And
+                            RefBan ='" . $tsmovlib["reflib"] . "' And
+                            FecBan <= To_Date('" . $fechas . "','DD/MM/YYYY')";
+        //Tipmov ='" . $tsmovlib["tipmov"] . "' And
+        if  (!Herramientas :: BuscarDatos($sql2, & $result2)) {
+          $tsconcil = new Tsconcil();
+          $tsconcil->setNumcue($nro);
+          $tsconcil->setMescon($mes);
+          $tsconcil->setAnocon($ano);
+          $tsconcil->setRefere($tsmovlib["reflib"]);
+          $tsconcil->setMovlib($tsmovlib["tipmov"]);
+          $tsconcil->setMovban(null);
+          $tsconcil->setFeclib($tsmovlib["feclib"]);
+          $tsconcil->setFecban(null);
+          $tsconcil->setDesref($tsmovlib["deslib"]);
+          $tsconcil->setMonlib($tsmovlib["monmov"]);
+          $tsconcil->setMonban(0);
+          $tsconcil->setResult('MOVIMIENTO EN TRANSITO');
+          $tsconcil->save();
+
+          $fec=explode('/',$fechas);
+          $fecfin=$fec[2]."-".$fec[1]."-".$fec[0];
+
+          $c = new Criteria();
+          $c->add(TsmovlibPeer :: NUMCUE, $nro);
+          $c->add(TsmovlibPeer :: FECLIB, $fecfin);
+          $c->add(TsmovlibPeer :: STATUS, 'C');
+          $c->add(TsmovlibPeer :: STACON, 'N');
+          $tsmovlib2 = TsmovlibPeer :: doSelectOne($c);
+          if ($tsmovlib2) {
+          	//foreach ($tsmovlib2 as $lib2) {
+            $tsmovlib2->setStacon('N');
+            $tsmovlib2->save();
+          	//}
+          }
+        }
+
+      }
+    }
+  }
+
+  public static function hacer_Banco_No_LibroMig($nro, $mes, $ano, $fechas) {
+    $sql = "Select refban, tipmov, fecban, desban, monmov
+                    From TsMovBan
+                  Where NumCue = '" . $nro . "' And
+                    FecBan<= To_Date('" . $fechas . "','DD/MM/YYYY') And STATUS='C' And StaCon='N'";
+    if (Herramientas :: BuscarDatos($sql, & $result)) {
+      foreach ($result as $tsmovban) {
+        $sql2 = "SELECT * From TSMOVLIB
+                             WHERE NUMCUE = '" . $nro . "' And
+                             RefLib = '" . $tsmovban["refban"] . "' And
+                             FecLib <= To_Date('" . $fechas . "','DD/MM/YYYY')";
+         //Tipmov = '" . $tsmovban["tipmov"] . "' And
+        if (!Herramientas :: BuscarDatos($sql2, & $result2)) {
+          $tsconcil = new Tsconcil();
+          $tsconcil->setNumcue($nro);
+          $tsconcil->setMescon($mes);
+          $tsconcil->setAnocon($ano);
+          $tsconcil->setRefere($tsmovban["refban"]);
+          $tsconcil->setMovlib(null);
+          $tsconcil->setMovban($tsmovban["tipmov"]);
+          $tsconcil->setFeclib(null);
+          $tsconcil->setFecban($tsmovban["fecban"]);
+          $tsconcil->setDesref($tsmovban["desban"]);
+          $tsconcil->setMonlib(0);
+          $tsconcil->setMonban($tsmovban["monmov"]);
+          $tsconcil->setResult('MOVIMIENTO NO REGISTRADO EN LIBROS');
+          $tsconcil->save();
+
+          //$dateFormat = new sfDateFormat($this->getUser()->getCulture());
+          //$fechas = $dateFormat->format($fechas, 'i', $dateFormat->getInputPattern('d'));
+
+          $fec=explode('/',$fechas);
+          $fecfin=$fec[2]."-".$fec[1]."-".$fec[0];
+
+          $c = new Criteria();
+          $c->add(TsmovbanPeer :: NUMCUE, $nro);
+          $c->add(TsmovbanPeer :: FECBAN, $fecfin);
+          $c->add(TsmovbanPeer :: STATUS, 'C');
+          $c->add(TsmovbanPeer :: STACON, 'N');
+          $tsmovban2 = TsmovbanPeer :: doSelectOne($c);
+          if ($tsmovban2) {
+          	//foreach ($tsmovban2 as $ban2) {
+            $tsmovban2->setStacon('N');
+            $tsmovban2->save();
+          	//}
+          }
+        }
+
+      }
+    }
+  }
+
+  public static function hacer_No_ConciliablesMig($nro, $mes, $ano, $fechas) {
+	$sql = "Select A.RefLib as reflib, B.RefBan as refban, A.FecLib as feclib, B.FecBan as fecban,
+          A.TipMov as movlib, B.TipMov as movban, A.DesLib as deslib, B.DesBan as desban,
+          A.MonMov as monmov1, B.MonMov as monmov2
+                From TsMovLib A, TsMovBan B
+                Where
+                A.NumCue = '" . $nro . "' And
+                B.NumCue = '" . $nro . "' And
+          A.RefLib = B.RefBan And
+                A.FecLib <= To_Date('" . $fechas . "','DD/MM/YYYY') And
+                B.FecBan <= To_Date('" . $fechas . "','DD/MM/YYYY') And
+                A.MonMov <> B.MonMov and A.stacon='N'";
+  //A.TipMov=B.TipMov And
+    if (Herramientas :: BuscarDatos($sql, & $result)) {
+      foreach ($result as $tstemigu) {
+        $sql2 = "Select * From TSconcil Where
+                        NumCue = '" . $nro . "' And
+                        Refere = '" . $tstemigu["reflib"] . "' And
+                        Refere = '" . $tstemigu["refban"] . "' And
+                        FecLib <= To_Date('" . $fechas . "','DD/MM/YYYY') And
+                        FecBan <= To_Date('" . $fechas . "','DD/MM/YYYY') And
+                        movlib='" . $tstemigu["movlib"] . "'  and
+                        Result like 'CONCILIADO%'";
+
+        if (!Herramientas :: BuscarDatos($sql2, & $result2)) {
+          $tsconcil = new Tsconcil();
+          $tsconcil->setNumcue($nro);
+          $tsconcil->setMescon($mes);
+          $tsconcil->setAnocon($ano);
+          $tsconcil->setRefere($tstemigu["reflib"]);
+          $tsconcil->setMovlib($tstemigu["movlib"]);
+          $tsconcil->setMovban($tstemigu["movban"]);
+          $tsconcil->setFeclib($tstemigu["feclib"]);
+          $tsconcil->setFecban($tstemigu["fecban"]);
+          $tsconcil->setDesref($tstemigu["deslib"]);
+          $tsconcil->setMonlib($tstemigu["monmov1"]);
+          $tsconcil->setMonban($tstemigu["monmov2"]);
+          $tsconcil->setResult('ERROR EN CONCILIACION (MONTOS DIFERENTES)');
+          $tsconcil->save();
+        }
+
+      }
+    }
+  }
 
 }

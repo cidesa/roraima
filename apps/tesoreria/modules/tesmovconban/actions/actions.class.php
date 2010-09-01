@@ -85,17 +85,33 @@ class tesmovconbanActions extends autotesmovconbanActions
 	   if (!Tesoreria::el_Banco_Esta_Cerrado($nro,$mes,$ano))
 	   {
 
+               $conmigban=H::getConfApp('conmigban', 'tesoreria', 'tesmovconban');
+               if ($conmigban=='S') {
+
 			if (!Tesoreria::hay_Conciliacion('Tsconcil',$nro,$mes,$ano))
+			{
+				Tesoreria::elimina_Conciliaciones_Anteriores($nro);
+				Tesoreria::hacer_Conciliables_Anulados($nro,$mes,$ano,$fechas);
+				Tesoreria::hacer_ConciliablesMig($nro,$mes,$ano,$fechas);
+				Tesoreria::hacer_Conciliables_Inconciliables($nro,$mes,$ano,$fechas);
+				Tesoreria::hacer_Libro_No_BancoMig($nro,$mes,$ano,$fechas); // Graba Tsconcil
+				Tesoreria::hacer_Banco_No_LibroMig($nro,$mes,$ano,$fechas); // Graba Tsconcil
+				Tesoreria::hacer_No_ConciliablesMig($nro,$mes,$ano,$fechas); // Graba Tsconcil
+				$this->setFlash('notice', 'La Conciliación fué Realizada Exitosamente');
+			}else $this->setFlash('notice', 'La Conciliación ya fue realizada');
+               }else {
+                   	if (!Tesoreria::hay_Conciliacion('Tsconcil',$nro,$mes,$ano))
 			{
 				Tesoreria::elimina_Conciliaciones_Anteriores($nro);
 				Tesoreria::hacer_Conciliables_Anulados($nro,$mes,$ano,$fechas);
 				Tesoreria::hacer_Conciliables($nro,$mes,$ano,$fechas);
 				Tesoreria::hacer_Conciliables_Inconciliables($nro,$mes,$ano,$fechas);
-				Tesoreria::hacer_Libro_No_Banco($nro,$mes,$ano,$fechas);
-				Tesoreria::hacer_Banco_No_Libro($nro,$mes,$ano,$fechas);
-				Tesoreria::hacer_No_Conciliables($nro,$mes,$ano,$fechas);
+				Tesoreria::hacer_Libro_No_Banco($nro,$mes,$ano,$fechas); // Graba Tsconcil
+				Tesoreria::hacer_Banco_No_Libro($nro,$mes,$ano,$fechas); // Graba Tsconcil
+				Tesoreria::hacer_No_Conciliables($nro,$mes,$ano,$fechas); // Graba Tsconcil
 				$this->setFlash('notice', 'La Conciliación fué Realizada Exitosamente');
 			}else $this->setFlash('notice', 'La Conciliación ya fue realizada');
+	   }
 	   }
 	   else
 	   {
