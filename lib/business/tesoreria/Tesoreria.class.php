@@ -2484,17 +2484,17 @@ public static function validarCuentasGrid($grid)
                     }
                 }else
                 {
-                    if ($signomonto=='+')
-                      $referencia=substr($ref,($regis->getDigsigp()*-1));
-                    else $referencia=substr($ref,($regis->getDigsign()*-1));
+                    if ($signomonto=='-')
+                      $referencia=substr($ref,($regis->getDigsign()*-1));
+                    else $referencia=substr($ref,($regis->getDigsigp()*-1));
                 }                
                 if ($regis->getFintip()!=0)
                 {
                    $tipo= substr($cuenta,$regis->getInitip(),$regis->getFintip());
                 }else {
-                    if ($signomonto=='+')
-                      $tipo=$regis->getValdefp();
-                    else $tipo=$regis->getValdefn();
+                    if ($signomonto=='-')
+                      $tipo=$regis->getValdefn();
+                    else $tipo=$regis->getValdefp();
                 }
 
                 if ($regis->getFindes()!=0)
