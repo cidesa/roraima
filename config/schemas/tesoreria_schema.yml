@@ -2800,3 +2800,104 @@ propel:
       type: INTEGER
       required: true
       autoIncrement: true
+
+  tsuniadm:
+    coduniadm:
+      type: VARCHAR
+      size: 30
+      description: Código Unidad Administradora
+    desuniadm:
+      type: VARCHAR
+      size: 250
+      description: Descripcion Unidad Administradora
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+
+  tsdeffonant:
+    codfon:
+      type: VARCHAR
+      size: 3
+      required: true
+      description: Código del fondo de anticipo
+    desfon:
+      type: VARCHAR
+      size: 250
+      required: true
+      description: Descripcion del fondo de anticipo
+    unieje:
+      type: VARCHAR
+      size: 15
+      required: true
+      foreignTable: bnubica
+      foreignReference: codubi
+      description: Unidad Ejecutora del fondo de anticipo
+    coduniadm:
+      type: VARCHAR
+      size: 30
+      required: true
+      foreignTable: tsuniadm
+      foreignReference: coduniadm
+      description: Código de la unidad Administradora
+    cedrif:
+      type: VARCHAR
+      size: 15
+      required: true
+      foreignTable: opbenefi
+      foreignReference: cedrif
+      description: Responsable de fonde de anticipo
+    codcat:
+      type: VARCHAR
+      size: 32
+      required: true
+      foreignTable: npcatpre
+      foreignReference: codcat
+      description: Código de la categoria programatica
+    numcue:
+      type: VARCHAR
+      size: 20
+      required: true
+      foreignTable: tsdefban
+      foreignReference: numcue
+      description: Numero de la cuenta de Bancaria
+    tipmovsal:
+      type: VARCHAR
+      size: 4
+      required: true
+      description: Tipo de Movimiento de Salida
+    tipmovren:
+      type: VARCHAR
+      size: 4
+      required: true
+      description: Tipo de movimiento de Rendición
+    monmincon:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      description: Monto mínimo de Constitución (en U.T.)
+    monmaxcon:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      description: Monto máximo de Constitución (en U.T.)
+    porrep:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      description: Porcentaje de Reposición
+    numini:
+      type: VARCHAR
+      size: 8
+      description: Numero Incial
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+    _uniques:
+      unique_tsdeffonant_codfon:
+        - codfon
