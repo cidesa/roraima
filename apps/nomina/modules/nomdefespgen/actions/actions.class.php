@@ -74,4 +74,32 @@ class nomdefespgenActions extends autonomdefespgenActions
     else { $this->esta3='0';}
   }
 
+  protected function saveNpdefgen($npdefgen)
+  {
+
+    if(!$npdefgen->getId()){
+      $npdefgen->setCodemp('001');
+    }else{
+      $this->setVars();
+      $opc = NpdefgenPeer::doSelectOne(new Criteria());
+
+      if($this->esta=='1'){
+        $npdefgen->setForcar($opc->getForcar());
+      }
+      if($this->esta1=='1'){
+        $npdefgen->setForemp($opc->getForemp());
+      }
+      if($this->esta2=='1'){
+        $npdefgen->setFororg($opc->getFororg());
+      }
+      if($this->esta3=='1'){
+        $npdefgen->setForuni($opc->getForuni());
+      }
+
+    }
+
+    $npdefgen->save();
+  }
+
+
 }
