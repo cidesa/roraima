@@ -22,6 +22,7 @@ class ApliUser extends BaseApliUser
   public $pasuse='';
   private $nomfor = '';
   protected $nomyml = '';
+  protected $administrador = '';
 
   public function hydrate(ResultSet $rs, $startcol = 1)
   {
