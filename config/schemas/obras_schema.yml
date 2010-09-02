@@ -380,6 +380,8 @@ propel:
       type: VARCHAR
       size: 4
       required: true
+      foreignTable: ocpais
+      foreignReference: codpai
     nomedo:
       type: VARCHAR
       size: 30
@@ -387,7 +389,13 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
+    _uniques:
+      unique_ocestado_codedo:
+        - codpai
+        - codedo
   ocinginsobr:
     #_attributes:
       #idMethod: native
@@ -497,10 +505,20 @@ propel:
       type: VARCHAR
       size: 4
       required: true
+      foreignTable: ocpais
+      foreignReference: codpai
     codedo:
       type: VARCHAR
       size: 4
       required: true
+      foreignTable: ocestado
+      foreignReference: codedo
+    codciu:
+      type: VARCHAR
+      size: 4
+      required: true
+      foreignTable: occiudad
+      foreignReference: codciu
     codmun:
       type: VARCHAR
       size: 4
@@ -512,7 +530,15 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
+    _uniques:
+      unique_ocmunici_codmun:
+        - codpai
+        - codedo
+        - codciu
+        - codmun
   ocobrfot:
     #_attributes:
       #idMethod: native
@@ -628,7 +654,12 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
+    _uniques:
+      unique_ocpais_codpai:
+        - codpai
   ocparcon:
     #_attributes:
       #idMethod: native
@@ -1087,6 +1118,8 @@ propel:
       type: VARCHAR
       size: 250
       required: true
+    fecreg:
+      type: DATE
     fecini:
       type: DATE
     fecfin:
@@ -2060,3 +2093,35 @@ propel:
       type: INTEGER
       required: true
       autoIncrement: true
+  occiudad:
+    codpai:
+      type: VARCHAR
+      size: 4
+      required: true
+      foreignTable: ocpais
+      foreignReference: codpai
+    codedo:
+      type: VARCHAR
+      size: 4
+      required: true
+      foreignTable: ocestado
+      foreignReference: codedo
+    codciu:
+      type: VARCHAR
+      size: 4
+      required: true
+    nomciu:
+      type: VARCHAR
+      size: 50
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+    _uniques:
+      unique_occiudad_codciu:
+        - codpai
+        - codedo
+        - codciu
