@@ -2607,6 +2607,28 @@ public static function obtenerDiaMesOAno($fecha,$formato,$dmoa)
 
 }
 
+  public static function getObtener_FormatoCategoria_Formulacion()
+  {
+    $result=array();
+    $sql = "Select rupcat, ruppar, forpre From ForDefNiv";
+    $i=1;
+    if (Herramientas::BuscarDatos($sql,&$result))
+    {
+      $categoria = $result[0]['rupcat'];
+      $partidas = $result[0]['ruppar'];
+      $codpre = $result[0]['forpre'];
+      $posicion=0;
+      while ($i<=$categoria)
+      {
+        $posicion=Herramientas::instr($codpre,'-',$posicion,1)+$posicion;
+        $i++;
+}
+      $formatocategoria = substr($codpre, 0, $posicion - 1);
+      return $formatocategoria;
+    }
+    else return '#';
+  }
+
 }
 
 class H extends Herramientas
