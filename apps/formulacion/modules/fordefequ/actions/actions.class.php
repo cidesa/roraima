@@ -38,6 +38,18 @@ class fordefequActions extends autofordefequActions
   public function executeEdit()
   {
     $this->fordefequ = $this->getFordefequOrCreate();
+    $this->etiqueta="";
+    $varemp = $this->getUser()->getAttribute('configemp');
+    if ($varemp)
+    if(array_key_exists('aplicacion',$varemp))
+     if(array_key_exists('formulacion',$varemp['aplicacion']))
+       if(array_key_exists('modulos',$varemp['aplicacion']['formulacion']))
+         if(array_key_exists('fordefequ',$varemp['aplicacion']['formulacion']['modulos'])){
+           if(array_key_exists('etiqueta',$varemp['aplicacion']['formulacion']['modulos']['fordefequ']))
+           {
+            $this->etiqueta=$varemp['aplicacion']['formulacion']['modulos']['fordefequ']['etiqueta'];
+           }
+         }
 
     if ($this->getRequest()->getMethod() == sfRequest::POST)
     {
@@ -68,6 +80,70 @@ $this->Bitacora('Guardo');
       $this->labels = $this->getLabels();
     }
   }
+
+  public function executeList()
+  {
+    $this->etiqueta="";
+    $varemp = $this->getUser()->getAttribute('configemp');
+    if ($varemp)
+    if(array_key_exists('aplicacion',$varemp))
+     if(array_key_exists('formulacion',$varemp['aplicacion']))
+       if(array_key_exists('modulos',$varemp['aplicacion']['formulacion']))
+         if(array_key_exists('fordefequ',$varemp['aplicacion']['formulacion']['modulos'])){
+           if(array_key_exists('etiqueta',$varemp['aplicacion']['formulacion']['modulos']['fordefequ']))
+           {
+            $this->etiqueta=$varemp['aplicacion']['formulacion']['modulos']['fordefequ']['etiqueta'];
+           }
+         }
+         
+    $this->processSort();
+
+    $this->processFilters();
+
+    $this->filters = $this->getUser()->getAttributeHolder()->getAll('sf_admin/fordefequ/filters');
+
+
+     // 15    // pager
+    $this->pager = new sfPropelPager('Fordefequ', 15);
+    $c = new Criteria();
+    $this->addSortCriteria($c);
+    $this->addFiltersCriteria($c);
+    $this->pager->setCriteria($c);
+    $this->pager->setPage($this->getRequestParameter('page', 1));
+    $this->pager->init();
+  }
+
+  protected function updateFordefequFromRequest()
+  {
+    $fordefequ = $this->getRequestParameter('fordefequ');
+
+    $this->etiqueta="";
+    $varemp = $this->getUser()->getAttribute('configemp');
+    if ($varemp)
+    if(array_key_exists('aplicacion',$varemp))
+     if(array_key_exists('formulacion',$varemp['aplicacion']))
+       if(array_key_exists('modulos',$varemp['aplicacion']['formulacion']))
+         if(array_key_exists('fordefequ',$varemp['aplicacion']['formulacion']['modulos'])){
+           if(array_key_exists('etiqueta',$varemp['aplicacion']['formulacion']['modulos']['fordefequ']))
+           {
+            $this->etiqueta=$varemp['aplicacion']['formulacion']['modulos']['fordefequ']['etiqueta'];
+           }
+         }
+
+    if (isset($fordefequ['codequ']))
+    {
+      $this->fordefequ->setCodequ($fordefequ['codequ']);
+    }
+    if (isset($fordefequ['desequ']))
+    {
+      $this->fordefequ->setDesequ($fordefequ['desequ']);
+    }
+    if (isset($fordefequ['desobj']))
+    {
+      $this->fordefequ->setDesobj($fordefequ['desobj']);
+    }
+  }
+
 
  public function executeEliminar()
   {

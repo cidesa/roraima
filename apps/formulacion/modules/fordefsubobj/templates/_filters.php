@@ -36,7 +36,7 @@
 
 <br>
 
-      <label for="codequ"><?php echo __('Directriz:') ?></label>
+      <label for="codequ"><?php if ($etiq!="") $et=$etiq; else $et='Directriz'; echo  __($et.':')  ?></label>
     <div class="content">
     <?php echo select_tag('filters[codequ]', objects_for_select(FordefequPeer::doSelect(new Criteria()),'getCodequ','getDesequ',isset($filters['codequ']) ? $filters['codequ'] : null,'include_custom=Seleccione')) ?>
     </div>

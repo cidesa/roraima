@@ -21,4 +21,9 @@ class Foringdisfuefin extends BaseForingdisfuefin
   return Herramientas::getX('codfin','Fortipfin','Nomext',self::getCodfin());
   }
 
+ public function getNomcat()
+  {
+  return Herramientas::getX('codcat','Fordefcatpre','Nomcat',self::getCodcat());
+  }
+
 }

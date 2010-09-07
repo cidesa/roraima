@@ -27,7 +27,7 @@
 
 
 <fieldset id="sf_fieldset_none" class="">
-<legend><?php echo __('Datos de la Directriz') ?></legend>
+<legend><?php echo __('Datos') ?></legend>
 
 <div class="form-row">
   <?php echo label_for('fordefequ[codequ]', __($labels['fordefequ{codequ}']), 'class="required" ') ?>

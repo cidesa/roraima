@@ -15,8 +15,15 @@
 
 <div id="sf_admin_container">
 
-<h1><?php echo __('Edición de Políticas', 
-array()) ?></h1>
+<h1>
+<?php if ($etiqueta!="") { ?>
+<?php echo __('Edición de '.$etiqueta,
+array()) ?>
+<?php }else { ?>
+<?php echo __('Edición de Políticas',
+array()) ?>
+<?php } ?>
+</h1>
 
 <div id="sf_admin_header">
 <?php include_partial('fordefsubsubobj/edit_header', array('fordefsubsubobj' => $fordefsubsubobj)) ?>
@@ -24,7 +31,7 @@ array()) ?></h1>
 
 <div id="sf_admin_content">
 <?php include_partial('fordefsubsubobj/edit_messages', array('fordefsubsubobj' => $fordefsubsubobj, 'labels' => $labels)) ?>
-<?php include_partial('fordefsubsubobj/edit_form', array('fordefsubsubobj' => $fordefsubsubobj, 'equilibrio' => $equilibrio, 'subobjetivo' => $subobjetivo, 'labels' => $labels)) ?>
+<?php include_partial('fordefsubsubobj/edit_form', array('fordefsubsubobj' => $fordefsubsubobj, 'equilibrio' => $equilibrio, 'subobjetivo' => $subobjetivo, 'etiqueta' => $etiqueta, 'etiq' => $etiq, 'etiq2' => $etiq2, 'labels' => $labels)) ?>
 </div>
 
 <div id="sf_admin_footer">

@@ -21,6 +21,30 @@ class fordefunimedActions extends autofordefunimedActions
   public function executeEdit()
   {
     $this->fordefunimed = $this->getFordefunimedOrCreate();
+    $this->mancorrel="";
+    $varemp = $this->getUser()->getAttribute('configemp');
+    if ($varemp)
+    if(array_key_exists('aplicacion',$varemp))
+     if(array_key_exists('formulacion',$varemp['aplicacion']))
+       if(array_key_exists('modulos',$varemp['aplicacion']['formulacion']))
+         if(array_key_exists('fordefunimed',$varemp['aplicacion']['formulacion']['modulos'])){
+           if(array_key_exists('mancorrel',$varemp['aplicacion']['formulacion']['modulos']['fordefunimed']))
+           {
+            $this->mancorrel=$varemp['aplicacion']['formulacion']['modulos']['fordefunimed']['mancorrel'];
+           }
+         }
+    if ($this->mancorrel=='S'){
+          if (!$this->fordefunimed->getId()) {
+           $t= new Criteria();
+           $t->setLimit(1);
+           $t->addDescendingOrderByColumn(FordefunimedPeer::CODUNIMED);
+           $reg= FordefunimedPeer::doSelectOne($t);
+           if ($reg)
+           {
+               $this->fordefunimed->setCodunimed(str_pad(($reg->getCodunimed()+1),3,'0',STR_PAD_LEFT));
+           }else $this->fordefunimed->setCodunimed('001');
+         }
+    }
 
     if ($this->getRequest()->getMethod() == sfRequest::POST)
     {

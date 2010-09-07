@@ -308,7 +308,7 @@
 
   <?php $value = object_textarea_tag($fordefpry, 'getDesobj', array (
   'disabled' => true,
-  'size' => '1000x2',
+  'size' => '100x2',
   'control_name' => 'fordefpry[desobj]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>

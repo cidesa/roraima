@@ -13,7 +13,7 @@ abstract class BaseForingdisfuefinPeer {
 	const CLASS_DEFAULT = 'lib.model.Foringdisfuefin';
 
 	
-	const NUM_COLUMNS = 4;
+	const NUM_COLUMNS = 5;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -29,6 +29,9 @@ abstract class BaseForingdisfuefinPeer {
 	const MONTOING = 'foringdisfuefin.MONTOING';
 
 	
+	const CODCAT = 'foringdisfuefin.CODCAT';
+
+	
 	const ID = 'foringdisfuefin.ID';
 
 	
@@ -37,18 +40,18 @@ abstract class BaseForingdisfuefinPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codparing', 'Codfin', 'Montoing', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (ForingdisfuefinPeer::CODPARING, ForingdisfuefinPeer::CODFIN, ForingdisfuefinPeer::MONTOING, ForingdisfuefinPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codparing', 'codfin', 'montoing', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
+		BasePeer::TYPE_PHPNAME => array ('Codparing', 'Codfin', 'Montoing', 'Codcat', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (ForingdisfuefinPeer::CODPARING, ForingdisfuefinPeer::CODFIN, ForingdisfuefinPeer::MONTOING, ForingdisfuefinPeer::CODCAT, ForingdisfuefinPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codparing', 'codfin', 'montoing', 'codcat', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codparing' => 0, 'Codfin' => 1, 'Montoing' => 2, 'Id' => 3, ),
-		BasePeer::TYPE_COLNAME => array (ForingdisfuefinPeer::CODPARING => 0, ForingdisfuefinPeer::CODFIN => 1, ForingdisfuefinPeer::MONTOING => 2, ForingdisfuefinPeer::ID => 3, ),
-		BasePeer::TYPE_FIELDNAME => array ('codparing' => 0, 'codfin' => 1, 'montoing' => 2, 'id' => 3, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
+		BasePeer::TYPE_PHPNAME => array ('Codparing' => 0, 'Codfin' => 1, 'Montoing' => 2, 'Codcat' => 3, 'Id' => 4, ),
+		BasePeer::TYPE_COLNAME => array (ForingdisfuefinPeer::CODPARING => 0, ForingdisfuefinPeer::CODFIN => 1, ForingdisfuefinPeer::MONTOING => 2, ForingdisfuefinPeer::CODCAT => 3, ForingdisfuefinPeer::ID => 4, ),
+		BasePeer::TYPE_FIELDNAME => array ('codparing' => 0, 'codfin' => 1, 'montoing' => 2, 'codcat' => 3, 'id' => 4, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
 	);
 
 	
@@ -107,6 +110,8 @@ abstract class BaseForingdisfuefinPeer {
 		$criteria->addSelectColumn(ForingdisfuefinPeer::CODFIN);
 
 		$criteria->addSelectColumn(ForingdisfuefinPeer::MONTOING);
+
+		$criteria->addSelectColumn(ForingdisfuefinPeer::CODCAT);
 
 		$criteria->addSelectColumn(ForingdisfuefinPeer::ID);
 

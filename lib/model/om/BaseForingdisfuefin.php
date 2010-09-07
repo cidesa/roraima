@@ -21,6 +21,10 @@ abstract class BaseForingdisfuefin extends BaseObject  implements Persistent {
 
 
 	
+	protected $codcat;
+
+
+	
 	protected $id;
 
 	
@@ -49,6 +53,13 @@ abstract class BaseForingdisfuefin extends BaseObject  implements Persistent {
 
     if($val) return number_format($this->montoing,2,',','.');
     else return $this->montoing;
+
+  }
+  
+  public function getCodcat()
+  {
+
+    return trim($this->codcat);
 
   }
   
@@ -89,6 +100,16 @@ abstract class BaseForingdisfuefin extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setCodcat($v)
+	{
+
+    if ($this->codcat !== $v) {
+        $this->codcat = $v;
+        $this->modifiedColumns[] = ForingdisfuefinPeer::CODCAT;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -109,7 +130,9 @@ abstract class BaseForingdisfuefin extends BaseObject  implements Persistent {
 
       $this->montoing = $rs->getFloat($startcol + 2);
 
-      $this->id = $rs->getInt($startcol + 3);
+      $this->codcat = $rs->getString($startcol + 3);
+
+      $this->id = $rs->getInt($startcol + 4);
 
       $this->resetModified();
 
@@ -117,7 +140,7 @@ abstract class BaseForingdisfuefin extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 4; 
+            return $startcol + 5; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Foringdisfuefin object", $e);
     }
@@ -274,6 +297,9 @@ abstract class BaseForingdisfuefin extends BaseObject  implements Persistent {
 				return $this->getMontoing();
 				break;
 			case 3:
+				return $this->getCodcat();
+				break;
+			case 4:
 				return $this->getId();
 				break;
 			default:
@@ -289,7 +315,8 @@ abstract class BaseForingdisfuefin extends BaseObject  implements Persistent {
 			$keys[0] => $this->getCodparing(),
 			$keys[1] => $this->getCodfin(),
 			$keys[2] => $this->getMontoing(),
-			$keys[3] => $this->getId(),
+			$keys[3] => $this->getCodcat(),
+			$keys[4] => $this->getId(),
 		);
 		return $result;
 	}
@@ -315,6 +342,9 @@ abstract class BaseForingdisfuefin extends BaseObject  implements Persistent {
 				$this->setMontoing($value);
 				break;
 			case 3:
+				$this->setCodcat($value);
+				break;
+			case 4:
 				$this->setId($value);
 				break;
 		} 	}
@@ -327,7 +357,8 @@ abstract class BaseForingdisfuefin extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[0], $arr)) $this->setCodparing($arr[$keys[0]]);
 		if (array_key_exists($keys[1], $arr)) $this->setCodfin($arr[$keys[1]]);
 		if (array_key_exists($keys[2], $arr)) $this->setMontoing($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setId($arr[$keys[3]]);
+		if (array_key_exists($keys[3], $arr)) $this->setCodcat($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setId($arr[$keys[4]]);
 	}
 
 	
@@ -338,6 +369,7 @@ abstract class BaseForingdisfuefin extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(ForingdisfuefinPeer::CODPARING)) $criteria->add(ForingdisfuefinPeer::CODPARING, $this->codparing);
 		if ($this->isColumnModified(ForingdisfuefinPeer::CODFIN)) $criteria->add(ForingdisfuefinPeer::CODFIN, $this->codfin);
 		if ($this->isColumnModified(ForingdisfuefinPeer::MONTOING)) $criteria->add(ForingdisfuefinPeer::MONTOING, $this->montoing);
+		if ($this->isColumnModified(ForingdisfuefinPeer::CODCAT)) $criteria->add(ForingdisfuefinPeer::CODCAT, $this->codcat);
 		if ($this->isColumnModified(ForingdisfuefinPeer::ID)) $criteria->add(ForingdisfuefinPeer::ID, $this->id);
 
 		return $criteria;
@@ -374,6 +406,8 @@ abstract class BaseForingdisfuefin extends BaseObject  implements Persistent {
 		$copyObj->setCodfin($this->codfin);
 
 		$copyObj->setMontoing($this->montoing);
+
+		$copyObj->setCodcat($this->codcat);
 
 
 		$copyObj->setNew(true);

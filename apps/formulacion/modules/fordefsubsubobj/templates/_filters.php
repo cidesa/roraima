@@ -17,7 +17,7 @@
   <fieldset>
     <h2><?php echo __('filters') ?></h2>
     <div class="form-row">
-    <label for="codequ"><?php echo __('Directriz:') ?></label>
+    <label for="codequ"><?php if ($etiq!="") $et=$etiq; else $et='Directriz'; echo  __($et.':') ?></label>
     <div class="content">
     <?php echo input_tag('filters[codequ]', isset($filters['codequ']) ? $filters['codequ'] : null, array (
   'size' => 2,
@@ -25,7 +25,7 @@
 )) ?>
     </div>
 <br>
-    <label for="codsubobj"><?php echo __('Estrategia:') ?></label>
+    <label for="codsubobj"><?php if ($etiq2!="") $et2=$etiq2; else $et2='Estrategia'; echo  __($et2.':') ?></label>
     <div class="content">
     <?php echo input_tag('filters[codsubobj]', isset($filters['codsubobj']) ? $filters['codsubobj'] : null, array (
   'size' => 3,
@@ -33,7 +33,7 @@
 )) ?>
     </div>
 <br>
-    <label for="codsubsubobj"><?php echo __('Política:') ?></label>
+    <label for="codsubsubobj"><?php if ($etiqueta!="") $et3=$etiqueta; else $et3='Política'; echo  __($et3.':') ?></label>
     <div class="content">
     <?php echo input_tag('filters[codsubsubobj]', isset($filters['codsubsubobj']) ? $filters['codsubsubobj'] : null, array (
   'size' => 3,

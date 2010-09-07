@@ -14,11 +14,11 @@ generator:
     list:
       title:          Políticas
       filters:        [codequ, codsubobj, codsubsubobj]
-      display:        [=codequ, desequ, codsubobj, dessubobj, codsubsubobj, dessubsubobj]
+      display:        [codequ, desequ, codsubobj, dessubobj, =codsubsubobj, dessubsubobj]
       object_actions:
         _edit:        ~     
       max_per_page:   5
-      sort:    codequ
+      sort:    codsubsubobj
     edit:
       title:          Edición de Políticas
       display:      [codequ, codsubobj, codsubsubobj, dessubsubobj] 

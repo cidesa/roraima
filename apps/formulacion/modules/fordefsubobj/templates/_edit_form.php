@@ -20,7 +20,7 @@
 <?php echo object_input_hidden_tag($fordefsubobj, 'getId') ?>
 
 <fieldset id="sf_fieldset_none" class="">
-<legend><?php echo __('Datos de la Estrategia')?></legend>
+<legend><?php echo __('Datos')?></legend>
 <div class="form-row"><?php echo label_for('fordefsubobj[codequ]', __($labels['fordefsubobj{codequ}']), 'class="required" ') ?>
 <div
 	class="content<?php if ($sf_request->hasError('fordefsubobj{codequ}')): ?> form-error<?php endif; ?>">
