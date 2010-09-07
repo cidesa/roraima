@@ -20,7 +20,8 @@ class fordefsubsubobjActions extends autofordefsubsubobjActions
   
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -62,8 +63,47 @@ class fordefsubsubobjActions extends autofordefsubsubobjActions
   {
     $this->equilibrio = $this->cargarEquilibrio();
     $this->subobjetivo = $this->cargarSubObjetivo($this->fordefsubsubobj->getCodequ());//contiene los datos de la bd
+
+    $this->etiqueta="";
+    $varemp = $this->getUser()->getAttribute('configemp');
+    if ($varemp)
+    if(array_key_exists('aplicacion',$varemp))
+     if(array_key_exists('formulacion',$varemp['aplicacion']))
+       if(array_key_exists('modulos',$varemp['aplicacion']['formulacion']))
+         if(array_key_exists('fordefsubsubobj',$varemp['aplicacion']['formulacion']['modulos'])){
+           if(array_key_exists('etiqueta',$varemp['aplicacion']['formulacion']['modulos']['fordefsubsubobj']))
+           {
+            $this->etiqueta=$varemp['aplicacion']['formulacion']['modulos']['fordefsubsubobj']['etiqueta'];
   }
+         }
   
+        $this->etiq="";
+    $varemp = $this->getUser()->getAttribute('configemp');
+    if ($varemp)
+    if(array_key_exists('aplicacion',$varemp))
+     if(array_key_exists('formulacion',$varemp['aplicacion']))
+       if(array_key_exists('modulos',$varemp['aplicacion']['formulacion']))
+         if(array_key_exists('fordefequ',$varemp['aplicacion']['formulacion']['modulos'])){
+           if(array_key_exists('etiqueta',$varemp['aplicacion']['formulacion']['modulos']['fordefequ']))
+           {
+            $this->etiq=$varemp['aplicacion']['formulacion']['modulos']['fordefequ']['etiqueta'];
+           }
+         }
+
+        $this->etiq2="";
+        $varemp = $this->getUser()->getAttribute('configemp');
+        if ($varemp)
+        if(array_key_exists('aplicacion',$varemp))
+         if(array_key_exists('formulacion',$varemp['aplicacion']))
+           if(array_key_exists('modulos',$varemp['aplicacion']['formulacion']))
+             if(array_key_exists('fordefsubobj',$varemp['aplicacion']['formulacion']['modulos'])){
+               if(array_key_exists('etiqueta',$varemp['aplicacion']['formulacion']['modulos']['fordefsubobj']))
+               {
+                $this->etiq2=$varemp['aplicacion']['formulacion']['modulos']['fordefsubobj']['etiqueta'];
+               }
+             }
+}
+
   /**
    * Función principal para el manejo de las acciones create y edit
    * del formulario.
@@ -232,4 +272,106 @@ $this->Bitacora('Guardo');
   	}
   }
  
+  public function executeList()
+  {
+        $this->etiqueta="";
+    $varemp = $this->getUser()->getAttribute('configemp');
+    if ($varemp)
+    if(array_key_exists('aplicacion',$varemp))
+     if(array_key_exists('formulacion',$varemp['aplicacion']))
+       if(array_key_exists('modulos',$varemp['aplicacion']['formulacion']))
+         if(array_key_exists('fordefsubsubobj',$varemp['aplicacion']['formulacion']['modulos'])){
+           if(array_key_exists('etiqueta',$varemp['aplicacion']['formulacion']['modulos']['fordefsubsubobj']))
+           {
+            $this->etiqueta=$varemp['aplicacion']['formulacion']['modulos']['fordefsubsubobj']['etiqueta'];
+}
+         }
+
+        $this->etiq="";
+    $varemp = $this->getUser()->getAttribute('configemp');
+    if ($varemp)
+    if(array_key_exists('aplicacion',$varemp))
+     if(array_key_exists('formulacion',$varemp['aplicacion']))
+       if(array_key_exists('modulos',$varemp['aplicacion']['formulacion']))
+         if(array_key_exists('fordefequ',$varemp['aplicacion']['formulacion']['modulos'])){
+           if(array_key_exists('etiqueta',$varemp['aplicacion']['formulacion']['modulos']['fordefequ']))
+           {
+            $this->etiq=$varemp['aplicacion']['formulacion']['modulos']['fordefequ']['etiqueta'];
+           }
+         }
+
+        $this->etiq2="";
+        $varemp = $this->getUser()->getAttribute('configemp');
+        if ($varemp)
+        if(array_key_exists('aplicacion',$varemp))
+         if(array_key_exists('formulacion',$varemp['aplicacion']))
+           if(array_key_exists('modulos',$varemp['aplicacion']['formulacion']))
+             if(array_key_exists('fordefsubobj',$varemp['aplicacion']['formulacion']['modulos'])){
+               if(array_key_exists('etiqueta',$varemp['aplicacion']['formulacion']['modulos']['fordefsubobj']))
+               {
+                $this->etiq2=$varemp['aplicacion']['formulacion']['modulos']['fordefsubobj']['etiqueta'];
+               }
+             }
+
+    $this->processSort();
+
+    $this->processFilters();
+
+    $this->filters = $this->getUser()->getAttributeHolder()->getAll('sf_admin/fordefsubsubobj/filters');
+
+
+     // 15    // pager
+    $this->pager = new sfPropelPager('Fordefsubsubobj', 15);
+    $c = new Criteria();
+    $this->addSortCriteria($c);
+    $this->addFiltersCriteria($c);
+    $this->pager->setCriteria($c);
+    $this->pager->setPage($this->getRequestParameter('page', 1));
+    $this->pager->init();
+  }
+
+  protected function getLabels()
+  {
+        $this->etiq="";
+    $varemp = $this->getUser()->getAttribute('configemp');
+    if ($varemp)
+    if(array_key_exists('aplicacion',$varemp))
+     if(array_key_exists('formulacion',$varemp['aplicacion']))
+       if(array_key_exists('modulos',$varemp['aplicacion']['formulacion']))
+         if(array_key_exists('fordefequ',$varemp['aplicacion']['formulacion']['modulos'])){
+           if(array_key_exists('etiqueta',$varemp['aplicacion']['formulacion']['modulos']['fordefequ']))
+           {
+            $this->etiq=$varemp['aplicacion']['formulacion']['modulos']['fordefequ']['etiqueta'];
+           }
+         }
+
+        $this->etiq2="";
+        $varemp = $this->getUser()->getAttribute('configemp');
+        if ($varemp)
+        if(array_key_exists('aplicacion',$varemp))
+         if(array_key_exists('formulacion',$varemp['aplicacion']))
+           if(array_key_exists('modulos',$varemp['aplicacion']['formulacion']))
+             if(array_key_exists('fordefsubobj',$varemp['aplicacion']['formulacion']['modulos'])){
+               if(array_key_exists('etiqueta',$varemp['aplicacion']['formulacion']['modulos']['fordefsubobj']))
+               {
+                $this->etiq2=$varemp['aplicacion']['formulacion']['modulos']['fordefsubobj']['etiqueta'];
+               }
+             }
+
+      if ($this->etiq!="") {
+        return array(
+          'fordefsubsubobj{codequ}' => $this->etiq.':',
+          'fordefsubsubobj{codsubobj}' => $this->etiq2.':',
+          'fordefsubsubobj{codsubsubobj}' => 'Código:',
+          'fordefsubsubobj{dessubsubobj}' => 'Descripción:',
+        );
+      }else {
+          return array(
+          'fordefsubsubobj{codequ}' => 'Directriz:',
+          'fordefsubsubobj{codsubobj}' => 'Estrategia:',
+          'fordefsubsubobj{codsubsubobj}' => 'Código:',
+          'fordefsubsubobj{dessubsubobj}' => 'Descripción:',
+        );
+      }
+  }
 }

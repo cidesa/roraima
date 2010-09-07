@@ -19,7 +19,7 @@
 <?php echo javascript_include_tag('tools') ?>
 
 <fieldset id="sf_fieldset_none" class="">
-<legend><?php echo __('Datos del Sub Sub Objetivo')?></legend>
+<legend><?php echo __('Datos')?></legend>
 <div class="form-row">
   <?php echo label_for('fordefsubsubobj[codequ]', __($labels['fordefsubsubobj{codequ}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('fordefsubsubobj{codequ}')): ?> form-error<?php endif; ?>">

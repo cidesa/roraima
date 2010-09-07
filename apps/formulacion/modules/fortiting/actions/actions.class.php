@@ -132,6 +132,7 @@ $this->Bitacora('Guardo');
     $col1->setHTML('type="text" size="10" ');
     $objq= array ('codfin' => '1','nomext' =>'2');
     $col1->setCatalogo('Fortipfin','sf_admin_edit_form',$objq,'Fortipfin_Fortiting');
+    $col1->setAjax('fortiting',2,2);
 
     $col2 = new Columna('Descripcion');
     $col2->setTipo(Columna::TEXTO);
@@ -152,10 +153,34 @@ $this->Bitacora('Guardo');
     $col3->setEsGrabable(true);
     $col3->setHTML('type="text" size="10"');
     //$col3->setEsTotal(true,'suma');
+    
+    $mascaracat=H::getObtener_FormatoCategoria_Formulacion();
+    $loncat=strlen($mascaracat);
+    $col4 = new Columna('Unidad Ejecutora');
+    $col4->setTipo(Columna::TEXTO);
+    $col4->setEsGrabable(true);
+    $col4->setAlineacionObjeto(Columna::CENTRO);
+    $col4->setAlineacionContenido(Columna::CENTRO);
+    $col4->setNombreCampo('codcat');
+    $col4->setHTML('type="text" size="10" maxlength="'.chr(39).$loncat.chr(39).'"');
+    $col4->setJScript('onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascaracat.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}" onBlur="toAjax(\'3\',getUrlModulo()+\'ajax\',this.value,\'\',\'&cajtexcom=\'+this.id)"');
+    $obja= array ('codcat' => '4','nomcat' =>'5');    
+    $params= array('param1' => $loncat, 'val2');
+    $col4->setCatalogo('Fordefcatpre','sf_admin_edit_form',$obja,'Fordefcatpre_Forotrcrepre',$params);
+
+    $col5 = new Columna('Descripcion');
+    $col5->setTipo(Columna::TEXTO);
+    $col5->setAlineacionObjeto(Columna::CENTRO);
+    $col5->setAlineacionContenido(Columna::CENTRO);
+    $col5->setNombreCampo('nomcat');
+    $col5->setEsGrabable(false);
+    $col5->setHTML('type="text" size="20" readOnly="true"');
 
     $opciones->addColumna($col1);
     $opciones->addColumna($col2);
     $opciones->addColumna($col3);
+    $opciones->addColumna($col4);
+    $opciones->addColumna($col5);
 
     $this->objFF = $opciones->getConfig($per);
    }
@@ -246,6 +271,24 @@ $this->Bitacora('Guardo');
 	    {
 	    	$dato=FortipfinPeer::getDesfin($this->getRequestParameter('codigo'));
             $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$cajtexcom.'","4","c"]]';
+	    }
+            else  if ($this->getRequestParameter('ajax')=='3')
+	    {
+              $mascaracat=H::getObtener_FormatoCategoria_Formulacion();
+              $loncat=strlen($mascaracat);
+              $js=""; $dato="";
+
+              $q= new Criteria();
+              $q->add(FordefcatprePeer::CODCAT,$this->getRequestParameter('codigo'));
+              $reg= FordefcatprePeer::doSelectOne($q);
+              if ($reg)
+              {
+                if ($loncat==strlen($this->getRequestParameter('codigo')))
+                {
+                    $dato=$reg->getNomcat();
+                }else $js="alert('La Unidad Ejecutora no es de Ultimo Nivel'); $('$cajtexcom').value=''; $('$cajtexcom').focus();";
+              }else $js="alert('La Unidad Ejecutora no existe'); $('$cajtexcom').value=''; $('$cajtexcom').focus();";
+            $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$js.'",""]]';
 	    }
 
   	    $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');

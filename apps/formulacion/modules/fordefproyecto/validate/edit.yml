@@ -56,9 +56,9 @@ names:
     validators: UniqueValidator
 
   fordefpry{codpryonapre}:
-    required:  Yes
-    required_msg: El Código del Proyecto ONAPRE no puedo estar en Blanco.
-    validators: UniqueValidator
+    required:  No
+    #required_msg: El Código del Proyecto ONAPRE no puedo estar en Blanco.
+    #validators: UniqueValidator
 
   fordefpry{nompro}:
     required:  No

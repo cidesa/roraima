@@ -1509,6 +1509,9 @@ propel:
       type: NUMERIC
       size: 20
       scale: 2
+    codcat:
+      type: VARCHAR
+      size: 20
     id:
       type: INTEGER
       required: true
