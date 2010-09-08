@@ -28,7 +28,7 @@ class faajusteActions extends autofaajusteActions
     {
       $this->updateFaajusteFromRequest();
 
-      $this->saveFaajuste($this->faajuste);
+      if ($this->saveFaajuste($this->faajuste)==-1){
 
       $this->faajuste->setId(Herramientas::getX_vacio('REFAJU','faajuste','id',$this->faajuste->getRefaju()));
 
@@ -46,6 +46,12 @@ $this->Bitacora('Guardo');
       else
       {
         return $this->redirect('faajuste/edit?id='.$this->faajuste->getId());
+      }
+      }else {
+          $this->labels = $this->getLabels();
+          $err = Herramientas::obtenerMensajeError($this->coderror);
+       	  $this->getRequest()->setError('',$err);
+          return sfView::SUCCESS;
       }
 
     }
@@ -901,14 +907,15 @@ $this->Bitacora('Guardo');
     if ($faajuste->getId())
     {
       $faajuste->save();
+      $this->coderror=-1;
 
     }
     else //nuevo
     {
   	  $grid2=Herramientas::CargarDatosGrid($this,$this->obj);
-	  Facturacion::salvarFaajuste($faajuste,$grid2);
+	  $this->coderror=Facturacion::salvarFaajuste($faajuste,$grid2);
     }
-    return -1;
+    return $this->coderror;
   }
 
   /**

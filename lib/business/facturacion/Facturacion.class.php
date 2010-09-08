@@ -433,7 +433,8 @@ class Facturacion {
     public static function salvarFaajuste($faajuste,$grid)
     {
 	    try {
-		  if (Herramientas::getVerCorrelativo('coraju','Facorrelat',&$r))
+
+        	  if (Herramientas::getVerCorrelativo('coraju','Facorrelat',&$r))
 		  {
 		    //Se graba el ajuste
 		    if ($faajuste->getRefaju()=='########')
@@ -460,6 +461,15 @@ class Facturacion {
 
 		    }
 
+                 if ($faajuste->getTipaju() == 'F'){
+
+                            if (self::generarAsientos($faajuste, $grid,&$arrasientos,&$pos,&$msj3))
+                            {
+                              self::grabarComprobanteMaestro($faajuste,$arrasientos,&$pos);
+                            }else {
+                                return $msj3;
+                            }
+                      }
 			$faajuste->setStaaju('A');
 			$faajuste->save();
 
@@ -593,10 +603,10 @@ class Facturacion {
       if ($faajuste->getTipaju() == 'F'){
          self::ajusteDocumentoxCobrar($faajuste,$totalajus,$totalrec);
 
-          if (self::generarAsientos($faajuste, $grid,&$arrasientos,&$pos,&$msj3))
+        /*  if (self::generarAsientos($faajuste, $grid,&$arrasientos,&$pos,&$msj3))
             {
               self::grabarComprobanteMaestro($faajuste,$arrasientos,&$pos);
-            }
+            }*/
       }
 
       $z=$grid[1];
@@ -1704,11 +1714,12 @@ public static function entregas($nroped)
               Factura::guardarAsientos($cta_vta,$descrip,'C',$monto_ingreso,&$arrasientos,&$pos);
             }
           }else{
-              $msj3=1153;
+              $msj3=1159;
       	      return false;
           }
 
           //Recargos
+          if ($x[$j]->getRecaju()>0) {
           $cta_vta2=self::cuentaRecargo($x[$j]->getCodart(),$faajuste->getCodref());
           $monto_ingreso2=$x[$j]->getRecaju();
           if ($cta_vta2!="")
@@ -1719,8 +1730,9 @@ public static function entregas($nroped)
               Factura::guardarAsientos($cta_vta2,$descrip,'C',$monto_ingreso2,&$arrasientos,&$pos);
             }
           }else{
-              $msj3=1153;
+              $msj3=1152;
       	      return false;
+          }
           }
            $j++;
         }
@@ -1742,11 +1754,12 @@ public static function entregas($nroped)
               Factura::guardarAsientos($cta_vta,$descrip,'D',$monto_ingreso,&$arrasientos,&$pos);
             }
           }else{
-              $msj3=1153;
+              $msj3=1159;
       	      return false;
           }
 
           //Recargos
+          if ($x[$j]->getRecaju()>0) {
           $cta_vta2=self::cuentaRecargo($x[$j]->getCodart(),$faajuste->getCodref());
           $monto_ingreso2=$x[$j]->getRecaju();
           if ($cta_vta2!="")
@@ -1757,8 +1770,9 @@ public static function entregas($nroped)
               Factura::guardarAsientos($cta_vta2,$descrip,'D',$monto_ingreso2,&$arrasientos,&$pos);
             }
           }else{
-              $msj3=1153;
+              $msj3=1152;
       	      return false;
+          }
           }
            $j++;
         }
