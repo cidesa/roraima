@@ -17,9 +17,41 @@ class Faajuste extends BaseFaajuste
 {
 	public $obj = array();
 
-	public $codpro = '';
+	protected  $codpro = "";
+        protected  $rifpro = "";
+        protected  $nompro = "";
+        protected  $dirpro = "";
+        protected  $telpro = "";
 
-	public function getCodpro()
+   public function afterHydrate()
+  {
+    if (self::getTipaju() == 'P'){
+            $c1 = new Criteria();
+            $c1->add(FapedidoPeer::NROPED, self::getCodref());
+            $reg1 = FapedidoPeer::doSelectOne($c1);
+            if ($reg1){
+                    $this->codpro = $reg1->getCodcli();
+            }
+    }
+    else if (self::getTipaju() == 'NE'){
+            $c1 = new Criteria();
+            $c1->add(FanotentPeer::NRONOT, self::getCodref());
+            $reg1 = FanotentPeer::doSelectOne($c1);
+            if ($reg1){
+                    $this->codpro = $reg1->getCodcli();
+            }
+    }
+    else if (self::getTipaju() == 'F'){
+            $c1 = new Criteria();
+            $c1->add(FafacturPeer::REFFAC, self::getCodref());
+            $reg1 = FafacturPeer::doSelectOne($c1);
+            if ($reg1){
+                    $this->codpro = $reg1->getCodcli();
+            }
+    }
+  }
+
+/*	public function getCodpro()
     {
     	$codpro = '';
         $c = new Criteria();
@@ -56,7 +88,7 @@ class Faajuste extends BaseFaajuste
   		}
 
         return $codpro;
-    }
+    }*/
 
 	public function getRifpro()
     {

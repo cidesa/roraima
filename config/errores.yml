@@ -1171,6 +1171,9 @@
 1158:
     cod: 1158
     msj: No puede salvar sin introducir el Número del Lote.
+1159:
+    cod: 1159
+    msj: Verifique que los Artículos posean Cuenta de Contable asociada. No se puede generar el Comprobante.
 ########## Licitaciones ########
 901:
     cod: 901

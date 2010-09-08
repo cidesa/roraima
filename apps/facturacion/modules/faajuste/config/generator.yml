@@ -22,7 +22,7 @@ generator:
       nrocon:  { name: Número de Control }
     list:
       title:          Ajustes
-      display:        [=refaju, codpro]
+      display:        [=refaju, fecaju, codref, codpro]
       object_actions:
         _edit:        ~
         _delete:      ~
