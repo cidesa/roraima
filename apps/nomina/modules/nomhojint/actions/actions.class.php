@@ -1612,12 +1612,15 @@ $this->Bitacora('Guardo');
     $opciones->setFilas(15);
     $opciones->setHTMLTotalFilas(' ');
 
+    $this->maskcodemp=='' ? $this->maskcodemp='################' : '';
+
     $col1 = new Columna('C.I');
     $col1->setTipo(Columna::TEXTO);
     $col1->setEsGrabable(true);
     $col1->setAlineacionObjeto(Columna::CENTRO);
     $col1->setAlineacionContenido(Columna::CENTRO);
     $col1->setNombreCampo('cedfam');
+    $col1->setHTML(' onKeyPress =  "javascript : return dFilterv2(event,this,\''.$this->maskcodemp.'\')"');
 
     $col2 = new Columna('Nombre del Familiar');
     $col2->setTipo(Columna::TEXTO);
@@ -1625,7 +1628,7 @@ $this->Bitacora('Guardo');
     $col2->setAlineacionContenido(Columna::IZQUIERDA);
     $col2->setEsGrabable(true);
     $col2->setNombreCampo('nomfam');
-    $col2->setHTML('type="text" size="25"');
+    $col2->setHTML('type="text" size="25" onkeyUp = "javascript: return this.value = this.value.toUpperCase();"');
     if ($inffamnomdes=='S') $col2->setOculta(true);
 
     $col3 = new Columna('Primer Nombre Fam.');
@@ -1634,7 +1637,7 @@ $this->Bitacora('Guardo');
     $col3->setAlineacionContenido(Columna::IZQUIERDA);
     $col3->setEsGrabable(true);
     $col3->setNombreCampo('prinom');
-    $col3->setHTML('type="text" size="25" maxlength="25"');
+    $col3->setHTML('type="text" size="25" maxlength="25"    ');
     if ($inffamnomdes!='S') $col3->setOculta(true);
 
     $col4 = new Columna('Segundo Nombre Fam.');
@@ -1712,7 +1715,7 @@ $this->Bitacora('Guardo');
     $col13->setAlineacionContenido(Columna::IZQUIERDA);
     $col13->setEsGrabable(true);
     $col13->setNombreCampo('nivins');
-    $col13->setHTML('type="text" size="25"');
+    $col13->setHTML('type="text" size="25" onKeyPress="return validaLetra(event);"');
 
     $col14 = new Columna('Trabajo u/o Oficio/Lugar de Trabajo');
     $col14->setTipo(Columna::TEXTO);
@@ -1984,6 +1987,17 @@ $this->Bitacora('Guardo');
   $this->lonnivel2=strlen($this->mascaraubi);
   $this->lonemp=strlen($this->mascaraemp);
   $this->c=null;
+  $maskcodemp = H::getConfApp('maskcodemp','nomina', 'nomhojint');
+  $this->maskcodemp = $maskcodemp;
+  $mayus = H::getConfApp('mayus','nomina', 'nomhojint');
+  $maskrif = H::getConfApp('maskrif','nomina', 'nomhojint');
+  $masktel = H::getConfApp('masktel','nomina', 'nomhojint');  
+  $this->getUser()->setAttribute('mayus',$mayus,'nomhojint');
+  $this->getUser()->setAttribute('maskrif',$maskrif,'nomhojint');
+  $this->getUser()->setAttribute('masktel',$masktel,'nomhojint');
+   $this->getUser()->setAttribute('maskcodemp',$maskcodemp,'nomhojint');
+  
+
   }
 
 

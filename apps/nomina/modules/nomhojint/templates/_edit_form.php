@@ -35,12 +35,13 @@
     <?php echo form_error('nphojint{codemp}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-
+<?php $maskcodemp = $sf_user->getAttribute('maskcodemp','','nomhojint'); $maskcodemp=='' ? $maskcodemp='################' : ''; ?>
 <? if ($nphojint->getId()=='') { ?>
   <?php $value = object_input_tag($nphojint, 'getCodemp', array (
-  'size' => 16,
-  'maxlength' => 16,
-  'control_name' => 'nphojint[codemp]',
+  'size' => strlen($maskcodemp),
+  'maxlength' =>strlen($maskcodemp),
+  'control_name' =>'nphojint[codemp]',
+  'onKeyPress' => "javascript : return dFilterv2(event,this,'$maskcodemp')",
   'onBlur'=> remote_function(array(
   'url'      => 'nomhojint/ajax',
   'condition' => "$('nphojint_codemp').value != '' && $('id').value == ''",
@@ -51,8 +52,8 @@
 
 <? }else{ ?>
     <?php $value = object_input_tag($nphojint, 'getCodemp', array (
-  'size' => 16,
-  'maxlength' => 16,
+  'size' => $maxlen,
+  'maxlength' => $maxlen,
   'readonly' => true,
   'control_name' => 'nphojint[codemp]',
 )); echo $value ? $value : '&nbsp;' ?>
@@ -89,6 +90,7 @@
 		  <?php $value = object_input_tag($nphojint, 'getPrinom', array (
 		  'size' => 25,
   		  'maxlength' => 25,
+                  'onkeyUp' =>  "javascript: return this.value = this.value.toUpperCase();",
 		  'control_name' => 'nphojint[prinom]',
 		)); echo $value ? $value : '&nbsp;' ?>
 		    </div>
@@ -105,6 +107,7 @@
 		  <?php $value = object_input_tag($nphojint, 'getSegnom', array (
 		  'size' => 25,
   		  'maxlength' => 25,
+                  'onkeyUp' =>  "javascript: return this.value = this.value.toUpperCase();",
 		  'control_name' => 'nphojint[segnom]',
 		)); echo $value ? $value : '&nbsp;' ?>
 		    </div>
@@ -126,6 +129,7 @@
 		  <?php $value = object_input_tag($nphojint, 'getPriape', array (
 		  'size' => 25,
   		  'maxlength' => 25,
+                  'onkeyUp' =>  "javascript: return this.value = this.value.toUpperCase();",
 		  'control_name' => 'nphojint[priape]',
 		)); echo $value ? $value : '&nbsp;' ?>
 		    </div>
@@ -142,6 +146,7 @@
 		  <?php $value = object_input_tag($nphojint, 'getSegape', array (
 		  'size' => 25,
   		  'maxlength' => 25,
+                  'onkeyUp' =>  "javascript: return this.value = this.value.toUpperCase();",
 		  'control_name' => 'nphojint[segape]',
 		)); echo $value ? $value : '&nbsp;' ?>
 		    </div>
@@ -167,8 +172,9 @@
   <?php endif; ?>
 
   <?php $value = object_input_tag($nphojint, 'getCedemp', array (
-  'size' => 20,
-  'maxlength' => 10,
+  'size' => strlen($maskcodemp),
+  'maxlength' =>strlen($maskcodemp),
+  'onKeyPress' => "javascript : return dFilterv2(event,this,'$maskcodemp')",
   'control_name' => 'nphojint[cedemp]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div></th>
@@ -181,10 +187,12 @@
     <?php echo form_error('nphojint{rifemp}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
+  <?php $maskrif = $sf_user->getAttribute('maskrif','','nomhojint'); $maskrif=='' ? $maskrif='################' : '' ;?>
   <?php $value = object_input_tag($nphojint, 'getRifemp', array (
-  'size' => 16,
-  'maxlength' => 16,
+  'size' => strlen($maskrif),
+  'maxlength' => strlen($maskrif),
   'control_name' => 'nphojint[rifemp]',
+  'onKeyPress' => "javascript:return validarif(event,this,'$maskrif')",
 )); echo $value ? $value : '&nbsp;' ?>
 
     </div></th>
@@ -562,9 +570,11 @@ $value = object_input_tag($nphojint, 'getPorseghcm', array (
     <?php echo form_error('nphojint{telhab}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
+   <?php $masktel = $sf_user->getAttribute('masktel','nomina','nomhojint'); $masktel=='' ? $masktel='99999999999999999999' : ''?>
   <?php $value = object_input_tag($nphojint, 'getTelhab', array (
-  'size' => 20,
-  'maxlength' => 20,
+  'size' => strlen($masktel),
+  'maxlength' => strlen($masktel),
+  'onKeyPress' => "javascript : return dFilterv2(event,this,'$masktel')",
   'control_name' => 'nphojint[telhab]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div></th>
@@ -576,8 +586,9 @@ $value = object_input_tag($nphojint, 'getPorseghcm', array (
   <?php endif; ?>
 
   <?php $value = object_input_tag($nphojint, 'getTelotr', array (
-  'size' => 20,
-  'maxlength' => 1000,
+   'size' => strlen($masktel),
+  'maxlength' => strlen($masktel),
+  'onKeyPress' => "javascript : return dFilterv2(event,this,'$masktel')",
   'control_name' => 'nphojint[telotr]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div></th>
@@ -589,8 +600,9 @@ $value = object_input_tag($nphojint, 'getPorseghcm', array (
   <?php endif; ?>
 
   <?php $value = object_input_tag($nphojint, 'getCelemp', array (
-  'size' => 20,
-  'maxlength' => 20,
+  'size' => strlen($masktel),
+  'maxlength' => strlen($masktel),
+  'onKeyPress' => "javascript : return dFilterv2(event,this,'$masktel')",
   'control_name' => 'nphojint[celemp]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div></th>
@@ -675,8 +687,9 @@ $value = object_input_tag($nphojint, 'getPorseghcm', array (
   <?php endif; ?>
 
   <?php $value = object_input_tag($nphojint, 'getTelha2', array (
-  'size' => 20,
-  'maxlength' => 20,
+   'size' => strlen($masktel),
+  'maxlength' => strlen($masktel),
+  'onKeyPress' => "javascript : return dFilterv2(event,this,'$masktel')",
   'control_name' => 'nphojint[telha2]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div></th>
@@ -688,8 +701,9 @@ $value = object_input_tag($nphojint, 'getPorseghcm', array (
   <?php endif; ?>
 
   <?php $value = object_input_tag($nphojint, 'getTelot2', array (
-  'size' => 20,
-  'maxlength' => 100,
+ 'size' => strlen($masktel),
+  'maxlength' => strlen($masktel),
+  'onKeyPress' => "javascript : return dFilterv2(event,this,'$masktel')",
   'control_name' => 'nphojint[telot2]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div></th>
@@ -1730,6 +1744,33 @@ function nivel(e,numero)
           alert('Para cambiar el estatus a Retirado debe introducir la Fecha de Egreso');
           $('nphojint_staemp').value='';
       }
+  }
+
+  function validarif(e,t,m)
+  {
+        evt = e ? e : event;
+        tcl = (window.Event) ? evt.which : evt.keyCode;
+
+         if(tcl==8 || tcl==9 || tcl ==13)
+         {
+            return true;
+         }else
+         {
+                if(parseInt(t.value.length)<1)
+                 {
+                     val = String.fromCharCode(tcl);
+                     if(val=='J' || val=='G' || val=='V')
+                     {
+                         return true;
+                     }else
+                      {
+                         return false;
+                      }
+                 }else
+                 {
+                      return   dFilterv2(e,t,m);
+                 }
+         }
   }
 
 </script>
