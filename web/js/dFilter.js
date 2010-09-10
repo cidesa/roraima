@@ -80,6 +80,79 @@ function dFilter(tecla, obj, formato)
 	}
 }
 
+function dFilterv2(e, obj, formato)
+{
+        evt = e ? e : event;
+        tecla = (window.Event) ? evt.which : evt.keyCode;
+	aux = formato.split("-");
+	tamaux = aux.length;
+	valor = obj.value;//+String.fromCharCode(tecla);;
+	id = obj.id;
+
+        if(valor.length>=formato.length)
+            return false;
+        else
+        {
+            if (parseInt(tamaux) > 0)
+            {
+                    if (tecla == (8))
+                    {
+                            return true;
+                    }else if(tecla ==(13) || tecla==(9))
+                    {
+                            return true
+                    }else
+                    {
+                            valornew = valor.split("-");
+                            tamnew = parseInt(valornew.length);
+                            //for (r=0; r < parseInt(valornew.length); r++)
+                            if (tamnew>0)
+                            {	r = tamnew-1;
+                                    //Comienza a validar la mascara
+                                    tamvalor2  = parseInt(valor.length)+1;
+                                    if (formato.substring(tamvalor2-1,tamvalor2)=='-')
+                                    {
+                                            tamvalor2 = tamvalor2  + 1;
+                                    }
+                                    tcl = String.fromCharCode(tecla);
+                                    tcl = tcl.toUpperCase();
+
+                                    if (formato.substring(tamvalor2-1,tamvalor2)=='#')
+                                    {
+                                        if(!((tcl>='A' && tcl<='Z') || (tecla>=48 && tecla<=57)))
+                                            {
+                                                    return false;
+                                            }
+                                    }
+                                    if (formato.substring(tamvalor2-1,tamvalor2)=='A' || aux[r].substring(0,1)=='a')
+                                    {
+                                            if(!((tcl>='A' && tcl<='Z')))
+                                            {
+                                                    return false;
+                                            }
+                                    }
+                                    if (formato.substring(tamvalor2-1,tamvalor2)==9)
+                                    {
+                                            if(!((tecla>=48 && tecla<=57)))
+                                            {
+                                                    return false;
+                                            }
+                                    }
+                                    if(aux.length>valornew.length)
+                                    {
+                                        if (aux[r].length==valornew[r].length)
+                                        {
+                                                $(id).value = $(id).value + '-';
+                                                return true;
+                                        }
+                                    }
+                            }
+                    }
+            }
+       }
+        return true;
+}
+
 
 /*var dFilterStep
 
