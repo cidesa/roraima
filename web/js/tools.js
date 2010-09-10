@@ -1401,3 +1401,13 @@ function convertirMayusculas(id) {
 	else
 		$(id).readOnly=false;
 }
+
+function validaLetra(e){
+     evt = e ? e : event;
+     tcl = (window.Event) ? evt.which : evt.keyCode;
+     
+     if((tcl>=65 && tcl<=90) || (tcl==8) || (tcl==9) || (tcl==13) || (tcl==0)) {
+       return true;
+       }
+     else return false;
+  }
