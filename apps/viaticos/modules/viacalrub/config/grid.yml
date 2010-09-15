@@ -23,7 +23,7 @@ opciones:                  # Opciones generales
   html:                    [ readonly=true]
 3:       # Columna 4
   titulo:                  Cantidad de Unidades Tributarias
-  tipo:                    t
+  tipo:                    m
   nombrecampo:             canunitri
   esgrabable:              true
   html:                    [  ]

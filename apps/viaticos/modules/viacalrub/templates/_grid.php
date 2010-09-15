@@ -21,8 +21,10 @@ function calculamontofinal(id)
     valprox = valprox.replace(',','.');
 
     var valor = $(id).value
-    valor = valor.replace('.','');
-    valor = valor.replace(',','.');    
+    //valor = valor.replace('.','');
+    //valor = valor.replace(',','.');
+    valor = valor.replace(',','.');
+    valor = number_format(parseFloat(valor),2,'.','');
 
     $(idmon).value=number_format(parseFloat(valor)*parseFloat(valprox),2,',','.');
 

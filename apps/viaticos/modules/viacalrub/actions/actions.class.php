@@ -54,7 +54,8 @@ class viacalrubActions extends autoviacalrubActions
      $rs = ViadefgenPeer::doSelectOne($c);
      if($rs)
         $unitri = H::FormatoMonto($rs->getValunitri());
-     $this->obj[1][2]->setHtml(' onBlur="calculamontofinal(this.id);" onkeyPress="return validaEntero(event)"');
+     #$this->obj[1][2]->setHtml(' onBlur="calculamontofinal(this.id);" onkeyPress="return validaEntero(event)"');
+     $this->obj[1][2]->setHtml(' onBlur="calculamontofinal(this.id);ValidarMontoGridv2(this.id);"');
      $this->obj[1][3]->setHtml(' value="'.$unitri.'"');
 
      $this->obj = $this->obj[0]->getConfig($reg);
