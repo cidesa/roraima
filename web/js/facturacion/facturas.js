@@ -3514,7 +3514,7 @@ function aplicarBL(id)
         var j=1;
         while (j<reg)
         {
-          var billindg="ax_"+j+"_27";
+          var billindg="ax_"+j+"_28";
           $(billindg).value=$(id).value;
          j++;
         }
