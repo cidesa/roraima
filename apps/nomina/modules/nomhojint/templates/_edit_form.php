@@ -52,8 +52,8 @@
 
 <? }else{ ?>
     <?php $value = object_input_tag($nphojint, 'getCodemp', array (
-  'size' => $maxlen,
-  'maxlength' => $maxlen,
+  'size' => strlen($maskcodemp),
+  'maxlength' =>strlen($maskcodemp),
   'readonly' => true,
   'control_name' => 'nphojint[codemp]',
 )); echo $value ? $value : '&nbsp;' ?>
