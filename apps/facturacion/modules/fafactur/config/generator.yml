@@ -47,6 +47,7 @@ generator:
       codubi:    { name: Unidad}
       tipoven:    { name: Tipo de Venta}
       obsfac:    { name: Observaciones}
+      codcenaco:    { name: Centro de Acopio}
     list:
       title:          Facturas
       display:        [=reffac, fecfac]
@@ -63,7 +64,7 @@ generator:
         "Detalle": [listaart, _grid_fapeddes, _grid_faartfac, _grid_fadescart, totdesc, _grid_fargoart, totrec, _grid_fafaclib]
         "Forma de Pago": [_codtip, _grid_faforpag, moncan, monres, vuelto]
         "Descripción Detallada/Sucursal": [observ, sucursal, usuarios, password, obsfac]
-      hide: [codcli, reapor, status, valmon, numcom, numcomord, numcominv, incluircliente, tipconpag, tipo, apliclades, docrefiera, esretencion, tottotart, totmonrgo, monedaanterior, trajo, porcentajedescto, totcanpreart, totprecio, ctasociada, ctacli, filgenmov, limitecredito, mancatdes]
+      hide: [codcli, reapor, status, valmon, numcom, numcomord, numcominv, incluircliente, tipconpag, tipo, apliclades, docrefiera, esretencion, tottotart, totmonrgo, monedaanterior, trajo, porcentajedescto, totcanpreart, totprecio, ctasociada, ctacli, filgenmov, limitecredito, mancatdes, codcenaco]
       report:
         url:         facturacion/rfarfacpreimp.php?m=m
         params:      { codfacdes: reffac, codfachas: reffac }

@@ -406,6 +406,36 @@ echo $value ? $value : '&nbsp;'
     </div>
 </div>
 <br/>
+
+<?php echo label_for('fafactur[codcenaco]', __($labels['fafactur{codcenaco}']), 'class="required"') ?>
+<div
+  class="content<?php if ($sf_request->hasError('fafactur{codcenaco}')): ?> form-error<?php endif; ?>">
+<?php if ($sf_request->hasError('fafactur{codcenaco}')): ?> <?php echo form_error('fafactur{codcenaco}', array('class' => 'form-error-msg')) ?>
+<?php endif; ?>
+
+  <?php $value = object_input_tag($fafactur, 'getCodcenaco', array (
+  'size' => 10,
+  'maxlength' => 4,
+  'control_name' => 'fafactur[codcenaco]',
+  'onBlur'=> remote_function(array(
+              'url' => 'fafactur/ajax',
+        'condition' => "$('fafactur_codcenaco').value!=''",
+        'complete' => 'AjaxJSON(request, json)',
+          'with' => "'ajax=26&cajtexmos=fafactur_descenaco&cajtexcom=fafactur_codcenaco&codigo='+this.value",
+        )),
+)); echo $value ? $value : '&nbsp;' ?>
+
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Cadefcenaco_Almsolegr/clase/Cadefcenaco/frame/sf_admin_edit_form/obj1/fafactur_codcenaco/obj2/fafactur_descenaco/campo1/codcenaco/campo2/descenaco')?>
+
+<?php $value = object_input_tag($fafactur, 'getDescenaco', array (
+'size' => 50,
+'maxlength' => 50,
+'disabled' => true,
+'control_name' => 'fafactur[descenaco]',
+)); echo $value ? $value : '&nbsp;' ?>
+<div class="sf_admin_edit_help"><?php echo __('Máximo 4 caracteres') ?></div></div>
+
+<br/>
 <table><tr><th>
 <div id="divmonto">
   <?php echo label_for('fafactur[monto]', __($labels['fafactur{monto}' ]), 'class="required" Style="text-align:left; width:150px"') ?>
@@ -758,7 +788,7 @@ echo $value ? $value : '&nbsp;'
 
 
 
-</div>
+  </div>
   <?php  } ?>
 
 </div>
@@ -969,7 +999,7 @@ if (consul!="")
     {
         $('fafactur_numcontrol').value='##########';
         $('fafactur_numcontrol').readOnly=true;
-}
+    }
     $('marcarrecargos').show();
 }
 

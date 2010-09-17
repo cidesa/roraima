@@ -7,7 +7,7 @@
  * @package    Roraima
  * @subpackage fafactur
  * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id: actions.class.php 39065 2010-06-18 14:30:15Z cramirez $
+ * @version SVN: $Id: actions.class.php 40681 2010-09-17 21:03:38Z cramirez $
  *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -1165,6 +1165,12 @@ class fafacturActions extends autofafacturActions {
             $this->configGridRgoArt($codigo,'PROFORMA');
             $output = '[["","",""],["","",""],["","",""]]';
             $this->getResponse()->setHttpHeader("X-JSON", '(' . $output . ')');
+            break;
+        case '26' :
+            $dato1  = H::getX('Codcenaco','Cadefcenaco','descenaco',$codigo);
+            $output = '[["'.$cajtexmos.'","' . $dato1 . '",""]]';
+            $this->getResponse()->setHttpHeader("X-JSON", '(' . $output . ')');
+            return sfView :: HEADER_ONLY;
             break;
 			default :
 				$output = '[["","",""],["","",""],["","",""]]';
