@@ -52,15 +52,15 @@ class Fafactur extends BaseFafactur
 	protected $trajo="";
 	protected $porcentajedescto="0";
 	protected $totprecio="0,00";
-    protected $lonart="";
-    protected $rgofijos="";
-    protected $listaart="";
-    protected $ctasociada="S";
-    protected $estatus="";
-    protected $despnotent="";
-    protected $codtip="";
-	protected $destip="";
-	protected $filgenmov="";
+        protected $lonart="";
+        protected $rgofijos="";
+        protected $listaart="";
+        protected $ctasociada="S";
+        protected $estatus="";
+        protected $despnotent="";
+        protected $codtip="";
+        protected $destip="";
+        protected $filgenmov="";
         protected $mansolcor="";
         protected $marrec="";
         protected $desrec="";
@@ -111,12 +111,10 @@ class Fafactur extends BaseFafactur
   {
        $c = new Criteria();
        $per = FacorrelatPeer::doSelectOne($c);
-       if($per){
-         if($per->getProform()=='S')
-            return true;
-         else
-            return false;
-       }else return false;
+       if($per->getProform()=='S')
+          return true;
+       else
+          return false;
   }
   public function getNumcom()
   {
@@ -140,7 +138,7 @@ class Fafactur extends BaseFafactur
 	       if(array_key_exists('mansolcor',$varemp['aplicacion']['facturacion']['modulos']['fafactur']))
 	       {
 	       	$dato=$varemp['aplicacion']['facturacion']['modulos']['fafactur']['mansolcor'];
-}
+	       }
          }
      return $dato;
   }
@@ -198,6 +196,11 @@ public function getMancatdes()
   public function getDesubi()
   {
    return Herramientas::getX('CODUBI','Bnubica','Desubi',self::getCodubi());
+  }
+
+  public function getDescenaco()
+  {
+   return Herramientas::getX('Codcenaco','Cadefcenaco','Descenaco',self::getCodcenaco());
   }
 
 }

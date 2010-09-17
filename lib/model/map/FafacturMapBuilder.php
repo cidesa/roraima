@@ -4,25 +4,25 @@
 
 class FafacturMapBuilder {
 
-	
+
 	const CLASS_NAME = 'lib.model.map.FafacturMapBuilder';
 
-	
+
 	private $dbMap;
 
-	
+
 	public function isBuilt()
 	{
 		return ($this->dbMap !== null);
 	}
 
-	
+
 	public function getDatabaseMap()
 	{
 		return $this->dbMap;
 	}
 
-	
+
 	public function doBuild()
 	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
@@ -86,7 +86,9 @@ class FafacturMapBuilder {
 
 		$tMap->addColumn('OBSFAC', 'Obsfac', 'string', CreoleTypes::VARCHAR, false, 500);
 
+		$tMap->addColumn('CODCENACO', 'Codcenaco', 'string', CreoleTypes::VARCHAR, false, 4);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
-	} 
-} 
+	}
+}
