@@ -1,0 +1,59 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Fcesplic
+    theme:            cidesaGenerator
+
+    fields:
+      nrocon:  { name: Numero de Control, params: size=8 maxlength=8 }
+      fecreg:  { name: Fecha de Registro, params: date_format='dd/MM/yyyy' size=10  maxlength=10}
+      rifcon:  { name: C.I. / RIF., params: size=14 maxlength=14 }
+      dircon:  { name: Dirección, params: size=60 maxlength=255 }
+      nacconcon:  { name: Nacionalidad,  params: size=80 maxlength=255 readonly=false }
+      tipconcon:  { name: Tipo de Persona, params: size=80 maxlength=255 readonly=false }
+      rifrep:  { name: C.I. / RIF., params: size=14 maxlength=14 }
+      nacconrep:  { name: Nacionalidad,  params: size=80 maxlength=255 readonly=false }
+      tipconrep:  { name: Tipo de Persona, params: size=80 maxlength=255 readonly=false }
+      dirconrep:  { name: Dirección, params: size=60 maxlength=255 }
+      tipesp:  { name: Codigo, params: size=4 maxlength=4 }
+      grid:  { name: . , params: size=17 maxlength=15 }
+
+      desesp:  { name: Descripcion , type: textarea_tag, params: size=35x2 maxlength=250 }
+      diresp:  { name: Direccion del Aviso , type: textarea_tag, params: size=35x2 maxlength=250 }
+      fecesp:  { name: Fecha, params: date_format='dd/MM/yyyy' size=10  maxlength=10}
+      horespi: { name: Hora Desde, params: size=10 }
+      horespf: { name: Hora Hasta, params: size=10 }
+      nroent: { name: Nro. de Entrada, params: size=10 maxlength=10 }
+      monent: { name: Monto, params: size=10 maxlength=10 }
+      exoesp: { name: Exonerable, params: size=10 maxlength=10 }
+      texexo:  { name: Texto Exonerado, type: textarea_tag, params: size=35x2 maxlength=250 }
+
+      funrec:   { name: Funcionario }
+      fecrec:  { name: Fecha, params: date_format='dd/MM/yyyy' size=10  maxlength=10}
+
+
+    list:
+      title:     Definición de Espectaculo Publico
+      display:   [=nrocon, fecreg, rifcon]
+      sort:      nrocon
+      filters:   [nrocon, fecreg, rifcon]
+      max_per_page: 10
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+
+    edit:
+      title: Edición de Espectaculo Publico
+
+      display:
+        NONE: [ _nrocon, _fecreg, _mensaje ]
+        "Datos Contribuyentes":  [ _rifcon, dircon, _nacconcon, _tipconcon ]
+        "Datos del Representante Legal":  [ _rifrep, dirconrep, _nacconrep, _tipconrep ]
+        "Tipo de Espectaculo Publico":  [ _tipesp, _grid]
+        "Datos de Espectaculo Publico":  [ desesp, diresp, _fecesp, _horespi, _horespf, nroent, monent, _exoesp, texexo]
+        "Datos de Recepcion":  [ funrec, _fecrec ]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

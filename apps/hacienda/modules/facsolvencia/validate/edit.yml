@@ -1,0 +1,100 @@
+methods:
+  post:
+   - "fcsolvencia{codsol}"
+   - "fcsolvencia{fecexp}"
+   - "fcsolvencia{fecven}"
+   - "fcsolvencia{rifcon}"
+   - "fcsolvencia{dircon}"
+   - "fcsolvencia{motivo}"
+   - "fcsolvencia{fecrec}"
+
+names:
+  fcsolvencia{codsol}:
+    required:  Yes
+    required_msg: El Código no puede estar en Blanco
+    validators: Validator_existencia, Validator_MyString
+
+  fcsolvencia{fecexp}:
+    required:  Yes
+    required_msg: La Fecha no puede estar en Blanco
+    validators: FechaValidator, Fecha2Validator
+
+  fcsolvencia{fecven}:
+    required:  Yes
+    required_msg: La Fecha no puede estar en Blanco
+    validators: FechaValidator, Fecha2Validator
+
+  fcsolvencia{rifcon}:
+    required:  Yes
+    required_msg: La C.I. / RIF no puede estar en Blanco
+    validators: RifconValidator, Validator_MyString
+
+  fcsolvencia{dircon}:
+    required:  Yes
+    required_msg: La Dirección no puede estar en Blanco
+    validators: Validator_desing
+
+  fcsolvencia{motivo}:
+    required:  Yes
+    required_msg: El Motivo no puede estar en Blanco
+    validators: Validator_desing
+
+  fcsolvencia{fecrec}:
+    required:  Yes
+    required_msg: La Fecha no puede estar en Blanco
+    validators: FechaValidator, Fecha2Validator
+
+
+Validator_desing:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       250
+        min_error: La descripción no puede tener mas de 250 caracteres
+
+FechaValidator:
+    class: CidesaDateValidator
+    param:
+        class:        Cidefniv
+        columnmin:    fecini
+        columnmax:    feccie
+        min_error:    La Fecha Especificada no puede ser Menor a la Fecha de Inicio del Período
+        max_error:    La Fecha Especificada no puede ser Mayor a la Fecha de Fin del Período
+        date_error:   Fecha Inválida
+
+Validator_existencia:
+    class: sfPropelUniqueValidator
+    param:
+        class:        fcsolvencia
+        column:       codsol
+        unique_error: La referencia ya Existe intente con otra.
+
+Validator_MyString:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La referencia no puede tener menos de 2 caracteres
+        max:       10
+        max_error: La referencia no puede tener mas de 10 caracteres
+
+FinanciamientoValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Fortipfin
+        column:   codfin
+        unique_error:   El Financiamiento no existe.
+
+Fecha2Validator:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha  introducida es invalida
+
+RifconValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Fcconrep
+        column:   rifcon
+        unique_error:   La C.I. / RIF no existe.

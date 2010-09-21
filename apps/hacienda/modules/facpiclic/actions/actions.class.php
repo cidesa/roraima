@@ -7,14 +7,14 @@
  * @subpackage Facpiclic
  * @author     $Author$ <desarrollo@cidesa.com.ve>
  * @version SVN: $Id$
- * 
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
 class FacpiclicActions extends autoFacpiclicActions
 {
   /**
-   * Función para colocar el codigo necesario en  
+   * Función para colocar el codigo necesario en
    * el proceso de edición.
    * Aquí se pueden buscar datos adicionales que necesite la vista
    * Esta función es parte de la acción executeEdit, que maneja tanto
@@ -48,9 +48,10 @@ class FacpiclicActions extends autoFacpiclicActions
     $c = new Criteria();
     $c->add(FcactpicPeer::NUMDOC,$this->fcsollic->getNumsol());
     $per = FcactpicPeer::doSelect($c);
-    $this->columnas = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/facpicsollic/'.sfConfig::get('sf_app_module_config_dir_name').'/grid');
-    $this->columnas[1][0]->setCatalogo('Fcactcom','sf_admin_edit_form', array('codact'=>'1','desact'=>'2'), 'Facpicsollic_Fcactcom');
-	$this->columnas[1][2]->setCombo(Constantes::ListaFcsollic());
+
+    $this->columnas = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/facpiclic/'.sfConfig::get('sf_app_module_config_dir_name').'/grid');
+    //$this->columnas[1][0]->setCatalogo('Fcactcom','sf_admin_edit_form', array('codact'=>'1','desact'=>'2'), 'Facpicsollic_Fcactcom');
+	//$this->columnas[1][2]->setCombo(Constantes::ListaFcsollic());
     $this->grid = $this->columnas[0]->getConfig($per);
     $this->fcsollic->setGrid($this->grid);
   }
@@ -72,48 +73,51 @@ class FacpiclicActions extends autoFacpiclicActions
 	    $dircon="";
 	    $correlativo="";
           $numero = $this->getRequestParameter('numero','');
+
 	      $c= new Criteria();
           $c->addDescendingOrderByColumn(FcmodlicPeer::REFMOD);
 	      //$c->add(FcmodlicPeer::NUMSOL,trim($numero));
 	      $countreg = FcmodlicPeer::doSelectOne($c);
+
 	      if (count($countreg)>0)
 	      {
 			$correlativo=str_pad(trim($countreg->getRefmod()+1),12,'0',STR_PAD_LEFT);
 	      }
 	      else
 	      	$correlativo=str_pad(1,12,'0',STR_PAD_LEFT);
-          $fecha = date("d/m/Y");
-	      $c= new Criteria();
-	      $c->add(FcconrepPeer::RIFCON,trim($codigo));
-	      $fcconrep2 = FcconrepPeer::doSelectOne($c);
-	      if (count($fcconrep2)>0)
-	      {
-  	      	  $javascript = $javascript . "$('autorizacion').show();";
-	          $nomcon=$fcconrep2->getNomcon();
-	          $dircon=$fcconrep2->getDircon();
-	          if ($fcconrep2->getNaccon()=='V')
-	          {
-	          	$javascript = $javascript . "$('fcsollic_nacconcon_V').checked=true; ";
-	          }
-	          else
-	          {
-	          	$javascript = $javascript . "$('fcsollic_nacconcon_E').checked=true; ";
-	          }
-	          if ($fcconrep2->getTipcon()=='N')
-	          {
-	          	$javascript = $javascript . "$('fcsollic_tipconcon_N').checked=true; ";
-	          }
-	          else
-	          {
-	          	$javascript = $javascript . "$('fcsollic_tipconcon_J').checked=true; ";
-	          }
-	      }
-	      else
-	      {
-   	      	$javascript = $javascript . "alert('El Contribuyente no Existe, incluya todos sus Datos Basicos');";
-	      	$javascript = $javascript . "$('autorizacion').show();";
-	      	$javascript = $javascript . "document.getElementById('fcsollic_nomcon').removeAttribute('readonly',1);";
-	      }
+            $fecha = date("d/m/Y");
+ 	        $c= new Criteria();
+ 	        $c->add(FcconrepPeer::RIFCON,trim($codigo));
+ 	        $fcconrep2 = FcconrepPeer::doSelectOne($c);
+
+		      if (count($fcconrep2)>0)
+		      {
+	  	      	  $javascript = $javascript . "$('autorizacion').show();";
+		          $nomcon=$fcconrep2->getNomcon();
+		          $dircon=$fcconrep2->getDircon();
+		          if ($fcconrep2->getNaccon()=='V')
+		          {
+		          	$javascript = $javascript . "$('fcsollic_nacconcon_V').checked=true; ";
+		          }
+		          else
+		          {
+		          	$javascript = $javascript . "$('fcsollic_nacconcon_E').checked=true; ";
+		          }
+		          if ($fcconrep2->getTipcon()=='N')
+		          {
+		          	$javascript = $javascript . "$('fcsollic_tipconcon_N').checked=true; ";
+		          }
+		          else
+		          {
+		          	$javascript = $javascript . "$('fcsollic_tipconcon_J').checked=true; ";
+		          }
+		      }
+		      else
+		      {
+	   	      	$javascript = $javascript . "alert('El Contribuyente no Existe, incluya todos sus Datos Basicos');";
+		      	$javascript = $javascript . "$('autorizacion').show();";
+		      	$javascript = $javascript . "document.getElementById('fcsollic_nomcon').removeAttribute('readonly',1);";
+		      }
 
           $output = '[["fcsollic_licmodificada","I",""],["fcsollic_nomcon","'.$nomcon.'",""],["fcsollic_dircon","'.$dircon.'",""],["fcsollic_idlic","'.$correlativo.'",""],["fcsollic_fechlic","'.$fecha.'",""],["javascript","' . $javascript . '",""]]';
         break;
@@ -292,9 +296,9 @@ class FacpiclicActions extends autoFacpiclicActions
     return sfView::HEADER_ONLY;
   }
 
-   
-  
-  
+
+
+
   /**
    *
    * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
@@ -332,14 +336,14 @@ class FacpiclicActions extends autoFacpiclicActions
   public function updateError()
   {
     $this->configGrid();
-    $grid = Herramientas::CargarDatosGrid($this,$this->grid);
-    $this->configGrid($grid[0],$grid[1]);
+    $grid = Herramientas::CargarDatosGridv2($this,$this->grid);
+   // $this->configGrid($grid[0],$grid[1]);
   }
 
   /**
-   * Función para colocar el codigo necesario para 
+   * Función para colocar el codigo necesario para
    * el proceso de guardar.
-   * Esta función debe retornar un valor igual a -1 si no hubo 
+   * Esta función debe retornar un valor igual a -1 si no hubo
    * Inconvenientes al guardar, y != de -1 si existe algún error.
    * Si es diferente de -1 el valor devuelto debe ser un código de error
    * Válido que exista en el archivo config/errores.yml
@@ -347,25 +351,30 @@ class FacpiclicActions extends autoFacpiclicActions
    */
   public function saving($fcsollic)
   {
-  	//exit(H::printR($fcsollic));
+  	$error=-1;
+
 	if ($fcsollic->getOperacion()!='')
 	{
-		if ($fcsollic->getOperacion()=='A') Hacienda::Grabar_Reactivar($fcsollic);
-		elseif ($fcsollic->getOperacion()=='R') Hacienda::Grabar_Renovar($fcsollic);
-		elseif ($fcsollic->getOperacion()=='S') Hacienda::Grabar_Facpiclic_Suspencion_Cancelacion($fcsollic);
-		elseif ($fcsollic->getOperacion()=='C') Hacienda::Grabar_Facpiclic_Suspencion_Cancelacion($fcsollic);
+		if ($fcsollic->getOperacion()=='A') $error = Hacienda::Grabar_Reactivar($fcsollic);
+		elseif ($fcsollic->getOperacion()=='R') $error = Hacienda::Grabar_Renovar($fcsollic);
+		elseif ($fcsollic->getOperacion()=='S') $error = Hacienda::Grabar_Facpiclic_Suspencion_Cancelacion($fcsollic);
+		elseif ($fcsollic->getOperacion()=='C') $error = Hacienda::Grabar_Facpiclic_Suspencion_Cancelacion($fcsollic);
 	}
-    $fcsollic->save();
-    $grid = Herramientas::CargarDatosGridv2($this,$this->grid);
-    Hacienda::salvar_grid_Fcsollic($fcsollic, $grid);
-    Hacienda::Grabar_Facpiclic($fcsollic);
-    return -1;
+
+	if ($error==-1)
+	{
+	    $fcsollic->save();
+	    $grid = Herramientas::CargarDatosGridv2($this,$this->grid);
+	    $error = Hacienda::salvar_grid_Fcsollic($fcsollic, $grid);
+	    $error = Hacienda::Grabar_Facpiclic($fcsollic);
+	}
+    return $error;
   }
 
   /**
-   * Función para colocar el codigo necesario para 
+   * Función para colocar el codigo necesario para
    * el proceso de eliminar.
-   * Esta función debe retornar un valor igual a -1 si no hubo 
+   * Esta función debe retornar un valor igual a -1 si no hubo
    * Inconvenientes al guardar, y != de -1 si existe algún error.
    * Si es diferente de -1 el valor devuelto debe ser un código de error
    * Válido que exista en el archivo config/errores.yml
@@ -379,7 +388,7 @@ class FacpiclicActions extends autoFacpiclicActions
 
 
   /**
-   * Actualiza la informacion que viene de la vista 
+   * Actualiza la informacion que viene de la vista
    * luego de un get/post en el objeto principal del modelo base del formulario.
    *
    */
@@ -1153,7 +1162,7 @@ class FacpiclicActions extends autoFacpiclicActions
       }
       else
       {
-        $this->fcsollic->set.Fecsus(null);
+        $this->fcsollic->setFecsus(null);
       }
     }
 

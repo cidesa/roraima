@@ -12,28 +12,36 @@ opciones:                  # Opciones generales
   tipo:                    t
   nombrecampo:             codact
   esgrabable:			   true
-  html:                    [size="15", readonly=true]
+  html:                    [size="15"]
 2:       # Columna 2
-  titulo:                  Ingresos Brutos
+  titulo:                  Descripción
   tipo:                    t
+  nombrecampo:             desact
+  esgrabable:              true
+  html:                    [size="40", readonly=true ]
+3:       # Columna 3
+  titulo:                  Ingresos Brutos
+  tipo:                    m
   nombrecampo:             monact
   esgrabable:			   true
-  html:                    [size="20", readonly=true]
-3:       # Columna 3
+  esnumerico:              true
+  html:                    [size="10"]
+4:       # Columna 4
   titulo:                  Exonerable
+  tipo:                    t
+  nombrecampo:             exonerable
+  esgrabable:			   true
+  html:                    [size="6", readonly=true ]
+5:       # Columna 5
+  titulo:                  Exonerada
   tipo:                    c
   nombrecampo:             exoner
   esgrabable:			   true
   html:                    []
-4:       # Columna 4
-  titulo:                  Exonerada
-  tipo:                    t
+6:       # Columna 6
+  titulo:                  % Exoneración
+  tipo:                    m
   nombrecampo:             porexo
   esgrabable:			   true
-  html:                    [size="10", readonly=true]
-5:       # Columna 5
-  titulo:                  Exoneración
-  tipo:                    t
-  nombrecampo:             porexo
-  esgrabable:			   true
-  html:                    [size="10", readonly=true]
+  esnumerico:              true
+  html:                    [size="10", disabled=true]

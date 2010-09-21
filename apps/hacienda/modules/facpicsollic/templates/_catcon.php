@@ -2,8 +2,9 @@
 
 <?php
  $masc=$fcsollic->getMascara();
-$lenmasc=strlen($fcsollic->getMascara());
-$value = object_input_tag($fcsollic, 'getCatcon', array (
+ $lenmasc=strlen($fcsollic->getMascara());
+
+ $value = object_input_tag($fcsollic, 'getCatcon', array (
   'size' => $lenmasc+2,
   'maxlength' => $lenmasc,
   //'readonly'  =>  $fcsollic->getId()!='' ? true : false ,
@@ -13,7 +14,7 @@ $value = object_input_tag($fcsollic, 'getCatcon', array (
         'url'      => 'facpicsollic/ajax',
         'condition' => "$('fcsollic_catcon').value!= ''",
         'complete' => 'AjaxJSON(request, json)',
-        'with' => "'ajax=3&numero='+document.getElementById('fcsollic_numsol').value+'&codcatinm='+this.value"
+        'with' => "'ajax=3&codcatinm='+this.value+'&numero='+$('fcsollic_numsol').value",
         ))
 )); echo $value ? $value : '&nbsp;' ?>
 

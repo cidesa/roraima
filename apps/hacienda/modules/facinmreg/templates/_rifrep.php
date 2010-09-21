@@ -1,11 +1,11 @@
  <?php use_helper('Object', 'Validation', 'ObjectAdmin', 'I18N', 'Date', 'Catalogo') ?>
  <?php
-
-  echo Catalogo($fcreginm,0,array(
+  echo Catalogo($fcreginm,1,array(
   'getprincipal' => 'getRifrep',
   'getsecundario' => 'getNomconrep',
   //cajitas abajo
   'campoprincipal' => 'rifrep',
   'camposecundario' => 'nomconrep',
+  'tamanoprincipal' => '10',
   'campobase' => 'id'
-  ), 'Facpicsollic_Rifrep', 'fcconrep', '','',''); ?>
+  ), 'Facpicsollic_Rifrep', 'Fcconrep', '','',''); ?>

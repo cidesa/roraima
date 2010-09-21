@@ -4,9 +4,9 @@ generator:
     model_class:      Fcsollic
     theme:            cidesaGenerator
     fields:
-      numsol:  { name: Número, params: size=14 maxlength=12 }
+      numsol:  { name: Número, params: size=12 maxlength=12 }
       numlic:  { name: Número Licencia, params: size=14 maxlength=12 }
-      fecsol:  { name: Fecha, params: date_format='dd/MM/yyyy'}
+      fecsol:  { name: Fecha, params: date_format='dd/MM/yyyy'  size=10  }
       rifcon:  { name: C.I. / RIF., params: size=22 maxlength=20 }
       nomcon:  { name: Nombre, params: size=60 maxlength=255 }
       dircon:  { name: Dirección, params: size=80 maxlength=255 }
@@ -33,13 +33,13 @@ generator:
       disest:  { name: Est. de Servicio (mts.), params: size=12 maxlength=10 }
       horini:  { name: Hora de Inicio, params: date_format='dd/MM/yyyy' }
       horcie:  { name: Hora de Terminación, params: date_format='dd/MM/yyyy'}
-      fecini:  { name: Fecha de Inicio, params: date_format='dd/MM/yyyy' }
-      fecfin:  { name: Fecha de Cierre, params: date_format='dd/MM/yyyy' }
+      fecini:  { name: Fecha de Inicio, params: date_format='dd/MM/yyyy' size=10  }
+      fecfin:  { name: Fecha de Cierre, params: date_format='dd/MM/yyyy' size=10  }
       capsoc:  { name: Capital Social, params: size=17 maxlength=15 }
       funres:  { name: Funcionario Receptor, params: size=40 maxlength=60 }
-      fecres:  { name: Fecha de Inicio, params: date_format='dd/MM/yyyy' }
+      fecres:  { name: Fecha de Inicio, params: date_format='dd/MM/yyyy' size=10  }
       idlic:  { name: Referencia, params: size=14 maxlength=12  readonly=true disabled=false }
-      fechlic:  { name: Fecha, type: input_date_tag, params: date_format='dd/MM/yyyy' }
+      fechlic:  { name: Fecha, type: input_date_tag, params: date_format='dd/MM/yyyy' size=10  }
       comnlic:  { name: Motivo de la Modificación,  params: size=35 maxlength=30 readonly=false disabled=false }
       tomo:  { name: Tomo, params: size=10 maxlength=8 readonly=false disabled=false }
       numero:  { name: Numero Documento, params: size=10 maxlength=8 readonly=false disabled=false }
@@ -47,22 +47,23 @@ generator:
       grid:  { name: . , params: size=17 maxlength=15 }
       codtiplic:  { name: Tipo de Licencia }
       implic:  { name: Impuesto a Pagar, params: size=17 maxlength=15  }
-      fecapr:  { name: Fecha Aprobación, type: input_date_tag, params: date_format='dd/MM/yyyy' }
-      fecven:  { name: Fecha Vencimiento, type: input_date_tag, params: date_format='dd/MM/yyyy' }
-      fecinilic:  { name: Fecha Inicio, type: input_date_tag, params: date_format='dd/MM/yyyy' }
+      fecapr:  { name: Fecha Aprobación, type: input_date_tag, params: date_format='dd/MM/yyyy' size=10  }
+      fecven:  { name: Fecha Vencimiento, type: input_date_tag, params: date_format='dd/MM/yyyy' size=10  }
+      fecinilic:  { name: Fecha Inicio, type: input_date_tag, params: date_format='dd/MM/yyyy' size=10  }
       numsus:  { name: Referencia, params: size=14 maxlength=12  readonly=true disabled=false }
-      funsus:  { name: Fecha Aprobación, type: input_date_tag, params: date_format='dd/MM/yyyy' }
+      funsus:  { name: Fecha Aprobación, type: input_date_tag, params: date_format='dd/MM/yyyy' size=10  }
       motsus:  { name: Motivo de Suspención, params: size=10 maxlength=8 readonly=false disabled=false }
-      solsus:  { name: Solvencia, params: size=10 maxlength=8 readonly=false disabled=
+      solsus:  { name: Solvencia, params: size=10 maxlength=8 readonly=false disabled=false }
       folsus:  { name: Folio, params: size=10 maxlength=8 readonly=false disabled=false }
       actsus:  { name: Acta, params: size=10 maxlength=8 readonly=false disabled=false }
       resolsus:  { name: Resolución, params: size=10 maxlength=8 readonly=false disabled=false }
       operacion:  { name: operacion, params: size=1 maxlength=1 readonly=false disabled=false }
+      stalic:    { name: Estado}
     list:
       title:     Solicitud de Otorgamiento de Licencia
-      display:   [ =numsol, =rifcon, nomcon]
+      display:   [ =numsol, =rifcon, nomcon, stalic]
       sort:      nomcon
-      filters:   [numsol, fecsol, nomcon]
+      filters:   [numsol, fecsol, nomcon, stalic]
       fields:
         nomcon:
           params: size=10
@@ -73,14 +74,17 @@ generator:
         _edit:        ~
         _delete:      ~
       sort:  numsol
+      actions:
+        false
+
     edit:
       title:          Edición de Otorgamiento de Licencia - Patente de Industria y Comercio
       display:
-        "Datos de Licencia":  [ _numsol, numlic, fecsol, _estado ]
+        "Datos de Licencia":  [ numsol, numlic, fecsol, _estado ]
         "Operaciones con Licencias":  [ _operaciones ]
         "Datos Contribuyentes":  [ _rifcon, dircon, _nacconcon, _tipconcon ]
         "Datos del Representante Legal":  [ _rifrep, dirconrep, _nacconrep, _tipconrep ]
-        "Datos de la Licencia, Documento y Fechas":  [ _codtiplic, tomo, numero, folio, implic, fecapr, fecven, fecinilic ]
+        "Datos de la Licencia, Documento y Fechas":  [ _codtiplic, tomo, numero, folio, implic, fecapr, fecinilic, fecven ]
         "Actividades Comerciales":  [ _grid ]
       hide: [ operacion ]
       actions:

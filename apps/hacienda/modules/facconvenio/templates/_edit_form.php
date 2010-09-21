@@ -11,7 +11,7 @@
 ?>
 <?php echo form_tag('facconvenio/edit', array(
   'id'        => 'sf_admin_edit_form',
-  'name'      => 'sf_admin_edit_form',
+  'name'      => 'sf_admin_edit_form', 'onsubmit'  => 'return false;',
   'multipart' => true,
 )) ?>
 

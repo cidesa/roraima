@@ -1,0 +1,17 @@
+default:
+  http_metas:
+    content-type: text/html
+
+  metas:
+    title:        Módulo de Hacienda
+    robots:       index, follow
+    description:  Módulo de Hacienda
+    keywords:     Módulo de Hacienda
+    language:     en
+
+  stylesheets:    [main]
+
+  javascripts:    [ %SF_PROTOTYPE_WEB_DIR%/js/prototype, %SF_PROTOTYPE_WEB_DIR%/js/scriptaculous, tools, observe, ajax, dFilter, hacienda/facespdec]
+
+  has_layout:     on
+  layout:         layout

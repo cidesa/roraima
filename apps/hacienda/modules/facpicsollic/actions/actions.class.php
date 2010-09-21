@@ -7,7 +7,7 @@
  * @subpackage Facpicsollic
  * @author     $Author$ <desarrollo@cidesa.com.ve>
  * @version SVN: $Id$
- * 
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -16,7 +16,7 @@ class FacpicsollicActions extends autoFacpicsollicActions
 
   // Para incluir funcionalidades al executeEdit()
   /**
-   * Función para colocar el codigo necesario en  
+   * Función para colocar el codigo necesario en
    * el proceso de edición.
    * Aquí se pueden buscar datos adicionales que necesite la vista
    * Esta función es parte de la acción executeEdit, que maneja tanto
@@ -28,6 +28,15 @@ class FacpicsollicActions extends autoFacpicsollicActions
   public function editing()
   {
         $this->setVars();
+        $d= new Criteria();
+        $d->add(UsuariosPeer::LOGUSE,$this->getUser()->getAttribute('loguse'));
+        $reg= UsuariosPeer::doSelectOne($d);
+        if ($reg)
+        {
+          $this->fcsollic->setFunres($reg->getNomuse());
+        }
+
+
 		$this->fcsollic->setMascara($this->mascara);
 		$this->configGrid();
   }
@@ -35,9 +44,15 @@ class FacpicsollicActions extends autoFacpicsollicActions
   public function setVars()
   {
     $this->mascara = Hacienda::Cargar_mascara();
+    $this->mascarapre = Herramientas :: ObtenerFormato('Fcdefins','Foract');
   }
 
 
+  /**
+   * Actualiza la informacion que viene de la vista
+   * luego de un get/post en el objeto principal del modelo base del formulario.
+   *
+   */
   protected function updateFcsollicFromRequest()
   {
     $fcsollic = $this->getRequestParameter('fcsollic');
@@ -962,6 +977,15 @@ class FacpicsollicActions extends autoFacpicsollicActions
 
 
 
+  /**
+   * Función para colocar el codigo necesario para
+   * el proceso de eliminar.
+   * Esta función debe retornar un valor igual a -1 si no hubo
+   * Inconvenientes al guardar, y != de -1 si existe algún error.
+   * Si es diferente de -1 el valor devuelto debe ser un código de error
+   * Válido que exista en el archivo config/errores.yml
+   *
+   */
   public function deleting($fcsollic)
   {
    if ($fcsollic->getId()!="")
@@ -975,18 +999,40 @@ class FacpicsollicActions extends autoFacpicsollicActions
   }
 
 
+  /**
+   * Esta función permite definir la configuración del grid de datos
+   * que contiene el formulario. Esta función debe ser llamada
+   * en las acciones, create, edit y handleError para recargar en todo momento
+   * los datos del grid.
+   *
+   */
   public function configGrid($reg = array(),$regelim = array())
   {
     $c = new Criteria();
     $c->add(FcactpicPeer::NUMDOC,$this->fcsollic->getNumsol());
     $per = FcactpicPeer::doSelect($c);
     $this->columnas = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/facpicsollic/'.sfConfig::get('sf_app_module_config_dir_name').'/grid');
-    $this->columnas[1][0]->setCatalogo('Fcactcom','sf_admin_edit_form', array('codact'=>'1','desact'=>'2'), 'Facpicsollic_Fcactcom');
-	$this->columnas[1][2]->setCombo(Constantes::ListaFcsollic());
+
+    $mascaraact = $this->mascarapre;
+	$loncodact = strlen($mascaraact);
+
+    //$this->columnas[1][0]->setHTML('type="text" size="17" maxlength="' . chr(39) . $loncodact . chr(39) . '" onKeyDown="javascript:return dFilter (event.keyCode, this,' . chr(39) . $mascaraact . chr(39) . ')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;} perderfocus(event,this.id,5);" onBlur="javascript:event.keyCode=13; validargridAct(event,this.id);"');
+    $this->columnas[1][0]->setCatalogo('Fcactcom','sf_admin_edit_form', array('codact'=>'1','desact'=>'2','exoner'=>'4'), 'Facpicsollic_Fcactcom');
+	$this->columnas[1][4]->setCombo(Constantes::ListaFcsollic());
+	//$this->columnas[1][4]->setHTML('onClick="exonerado(this.id)');
+	$this->columnas[1][4]->setJScript('onChange="exonerado(this.id)"');
+
     $this->grid = $this->columnas[0]->getConfig($per);
+
     $this->fcsollic->setGrid($this->grid);
   }
 
+  /**
+   * Función para procesar _todas_ las funciones Ajax del formulario
+   * Cada función esta identificada con el valor de la vista "ajax"
+   * el cual traerá el indice de lo que se quiere procesar.
+   *
+   */
   public function executeAjax()
   {
     $codigo = $this->getRequestParameter('codigo','');
@@ -997,24 +1043,29 @@ class FacpicsollicActions extends autoFacpicsollicActions
 	    $nomcon="";
 	    $dircon="";
 	    $correlativo="";
-          $numero = $this->getRequestParameter('numero','');
-	      $c= new Criteria();
-          $c->addDescendingOrderByColumn(FcmodlicPeer::REFMOD);
+          //$numero = $this->getRequestParameter('numero','');
+
+	      //$c= new Criteria();
+          //$c->addDescendingOrderByColumn(FcmodlicPeer::REFMOD);
 	      //$c->add(FcmodlicPeer::NUMSOL,trim($numero));
-	      $countreg = FcmodlicPeer::doSelectOne($c);
-	      if (count($countreg)>0)
-	      {
-			$correlativo=str_pad(trim($countreg->getRefmod()+1),12,'0',STR_PAD_LEFT);
-	      }
-	      else
-	      	$correlativo=str_pad(1,12,'0',STR_PAD_LEFT);
+	      //$countreg = FcmodlicPeer::doSelectOne($c);
+	      //if (count($countreg)>0)
+	      //{
+			//$correlativo=str_pad(trim($countreg->getRefmod()+1),12,'0',STR_PAD_LEFT);
+	      //}
+	      //else
+//	     	$correlativo=str_pad(1,12,'0',STR_PAD_LEFT);
+
+		  $nomcon='';
+		  $dircon='';
           $fecha = date("d/m/Y");
 	      $c= new Criteria();
 	      $c->add(FcconrepPeer::RIFCON,trim($codigo));
 	      $fcconrep2 = FcconrepPeer::doSelectOne($c);
+
 	      if (count($fcconrep2)>0)
 	      {
-  	      	  $javascript = $javascript . "$('autorizacion').show();";
+  	      	  $javascript = $javascript . "if ($('autorizacion'))  $('autorizacion').show();";
 	          $nomcon=$fcconrep2->getNomcon();
 	          $dircon=$fcconrep2->getDircon();
 	          if ($fcconrep2->getNaccon()=='V')
@@ -1037,34 +1088,38 @@ class FacpicsollicActions extends autoFacpicsollicActions
 	      else
 	      {
    	      	$javascript = $javascript . "alert('El Contribuyente no Existe, incluya todos sus Datos Basicos');";
-	      	$javascript = $javascript . "$('autorizacion').show();";
+	      	$javascript = $javascript . "if ($('autorizacion'))  $('autorizacion').show();";
 	      	$javascript = $javascript . "document.getElementById('fcsollic_nomcon').removeAttribute('readonly',1);";
 	      }
 
-          $output = '[["fcsollic_licmodificada","I",""],["fcsollic_nomcon","'.$nomcon.'",""],["fcsollic_dircon","'.$dircon.'",""],["fcsollic_idlic","'.$correlativo.'",""],["fcsollic_fechlic","'.$fecha.'",""],["javascript","' . $javascript . '",""]]';
+          $output = '[["fcsollic_licmodificada","I",""],["fcsollic_nomcon","'.$nomcon.'",""],["fcsollic_dircon","'.$dircon.'",""],["fcsollic_fechlic","'.$fecha.'",""],["javascript","' . $javascript . '",""]]';
+
         break;
       case '2':
 	    $nomcon="";
 	    $dircon="";
 	    $correlativo="";
-          $numero = $this->getRequestParameter('numero','');
-	      $c= new Criteria();
-          $c->addDescendingOrderByColumn(FcmodlicPeer::REFMOD);
+        $numero = $this->getRequestParameter('numero','');
+
+	      //$c= new Criteria();
+          //$c->addDescendingOrderByColumn(FcmodlicPeer::REFMOD);
 	      //$c->add(FcmodlicPeer::NUMSOL,trim($numero));
-	      $countreg = FcmodlicPeer::doSelectOne($c);
-	      if (count($countreg)>0)
-	      {
-			$correlativo=str_pad(trim($countreg->getRefmod()+1),12,'0',STR_PAD_LEFT);
-	      }
-	      else
-	      	$correlativo=str_pad(1,12,'0',STR_PAD_LEFT);
+	      //$countreg = FcmodlicPeer::doSelectOne($c);
+
+	      //if (count($countreg)>0)
+	      //{
+//			$correlativo=str_pad(trim($countreg->getRefmod()+1),12,'0',STR_PAD_LEFT);
+	      //}
+	      //else
+//	      	$correlativo=str_pad(1,12,'0',STR_PAD_LEFT);
+
           $fecha = date("d/m/Y");
 	      $c= new Criteria();
 	      $c->add(FcconrepPeer::RIFCON,trim($codigo));
 	      $fcconrep2 = FcconrepPeer::doSelectOne($c);
 	      if (count($fcconrep2)>0)
 	      {
-  	      	  $javascript = $javascript . "$('autorizacion').show();";
+  	      	  $javascript = $javascript . "if ($('autorizacion'))  $('autorizacion').show();";
 	          $nomcon=$fcconrep2->getNomcon();
 	          $dircon=$fcconrep2->getDircon();
 	          if ($fcconrep2->getNaccon()=='V')
@@ -1087,10 +1142,10 @@ class FacpicsollicActions extends autoFacpicsollicActions
 	      else
 	      {
   	      	$javascript = $javascript . "alert('El representante no Existe, incluya todos sus Datos Basicos');";
-      	    $javascript = $javascript . "$('autorizacion').show();";
+      	    $javascript = $javascript . "if ($('autorizacion'))  $('autorizacion').show();";
 	      	$javascript = $javascript . "document.getElementById('fcsollic_nomconrep').removeAttribute('readonly',1);";
 	      }
-          $output = '[["fcsollic_licmodificada","I",""],["fcsollic_nomconrep","'.$nomcon.'",""],["fcsollic_dirconrep","'.$dircon.'",""],["fcsollic_idlic","'.$correlativo.'",""],["fcsollic_fechlic","'.$fecha.'",""],["javascript","' . $javascript . '",""]]';
+          $output = '[["fcsollic_licmodificada","I",""],["fcsollic_nomconrep","'.$nomcon.'",""],["fcsollic_dirconrep","'.$dircon.'",""],["fcsollic_fechlic","'.$fecha.'",""],["javascript","' . $javascript . '",""]]';
         break;
 
       case '3':
@@ -1099,20 +1154,25 @@ class FacpicsollicActions extends autoFacpicsollicActions
         $descatcon = "";
         $fecha = date("d/m/Y");
 	    $correlativo="";
+
           $numero = $this->getRequestParameter('numero','');
-	      $c= new Criteria();
-          $c->addDescendingOrderByColumn(FcmodlicPeer::REFMOD);
+
+	      //$c= new Criteria();
+          //$c->addDescendingOrderByColumn(FcmodlicPeer::REFMOD);
 	      //$c->add(FcmodlicPeer::NUMSOL,trim($numero));
-	      $countreg = FcmodlicPeer::doSelectOne($c);
-	      if (count($countreg)>0)
-	      {
-			$correlativo=str_pad(trim($countreg->getRefmod()+1),12,'0',STR_PAD_LEFT);
-	      }
-	      else
-	      	$correlativo=str_pad(1,12,'0',STR_PAD_LEFT);
+	      //$countreg = FcmodlicPeer::doSelectOne($c);
+
+	      //if (count($countreg)>0)
+//	      {
+	//		$correlativo=str_pad(trim($countreg->getRefmod()+1),12,'0',STR_PAD_LEFT);
+	  //    }
+	      //else
+//	      	$correlativo=str_pad(1,12,'0',STR_PAD_LEFT);
+
 	      $c= new Criteria();
 	      $c->add(FcreginmPeer::CODCATINM,trim($codcatinm));
 	      $countreg = FcreginmPeer::doSelectOne($c);
+
 	      if (count($countreg)>0)
 	      {
 	      	  $catcon=$countreg->getCodcatinm();
@@ -1122,31 +1182,74 @@ class FacpicsollicActions extends autoFacpicsollicActions
 	      {
                $javascript = $javascript . "alert('Categoria de Catastro no Existe.');";
 	      }
-      	  $javascript = $javascript . "$('autorizacion').show();";
-          $output = '[["fcsollic_licmodificada","I",""],["fcsollic_catcon","'.$catcon.'",""],["fcsollic_desubicat","'.$descatcon.'",""],["fcsollic_idlic","'.$correlativo.'",""],["fcsollic_fechlic","'.$fecha.'",""],["javascript","' . $javascript . '",""]]';
+
+      	  $javascript = $javascript . "if ($('autorizacion'))  $('autorizacion').show();";
+          $output = '[["fcsollic_licmodificada","I",""],["fcsollic_catcon","'.$catcon.'",""],["fcsollic_desubicat","'.$descatcon.'",""],["fcsollic_fechlic","'.$fecha.'",""],["javascript","' . $javascript . '",""]]';
       break;
 
       case '4':
           $fecha = date("d/m/Y");
 	      $correlativo="";
           $numero = $this->getRequestParameter('numero','');
-	      $c= new Criteria();
-          $c->addDescendingOrderByColumn(FcmodlicPeer::REFMOD);
+
+	      //$c= new Criteria();
+          //$c->addDescendingOrderByColumn(FcmodlicPeer::REFMOD);
 	      //$c->add(FcmodlicPeer::NUMSOL,trim($numero));
-	      $countreg = FcmodlicPeer::doSelectOne($c);
-	      if (count($countreg)>0)
-	      {
-			$correlativo=str_pad(trim($countreg->getRefmod()+1),12,'0',STR_PAD_LEFT);
-	      }
-	      else
-	      	$correlativo=str_pad(1,12,'0',STR_PAD_LEFT);
-      	  $javascript = $javascript . "$('autorizacion').show();";
-          $output = '[["fcsollic_licmodificada","I",""],["fcsollic_idlic","'.$correlativo.'",""],["fcsollic_fechlic","'.$fecha.'",""],["javascript","' . $javascript . '",""]]';
+	      //$countreg = FcmodlicPeer::doSelectOne($c);
+	      //if (count($countreg)>0)
+	      //{
+//			$correlativo=str_pad(trim($countreg->getRefmod()+1),12,'0',STR_PAD_LEFT);
+	      //}
+	      //else
+//	      	$correlativo=str_pad(1,12,'0',STR_PAD_LEFT);
+
+      	  $javascript = $javascript . "if ($('autorizacion'))  $('autorizacion').show();";
+          $output = '[["fcsollic_licmodificada","I",""],["fcsollic_fechlic","'.$fecha.'",""],["javascript","' . $javascript . '",""]]';
       break;
 
 
       case '5':
 	    $correlativo="";
+          $numero = $this->getRequestParameter('numero','');
+	      $c= new Criteria();
+	      $c->add(FcsolnegPeer::NUMNEG, $numero);
+          $c->addDescendingOrderByColumn(FcsolnegPeer::NUMNEG);
+	      $countreg = FcsolnegPeer::doSelectOne($c);
+	      if (count($countreg)>0)
+	      {
+	      	$javascript = "alert('Numero de la Negacion ya Existente, Intente con otro'); $('fcsollic_numneg').value=''; ";
+//			$correlativo=str_pad(trim($countreg->getNumneg()+1),10,'0',STR_PAD_LEFT);
+	      }
+	      //else
+//	      	$correlativo=str_pad(1,10,'0',STR_PAD_LEFT);
+
+		  $javascript = $javascript . "if ($('autorizacion'))  $('autorizacion').show();";
+          $output = '[["fcsollic_licnegada","I",""],["javascript","' . $javascript . '",""],["fcsollic_operacion","N",""]]';
+      break;
+      case '6':
+        $cajtexmos = $this->getRequestParameter('cajtexmos',''); $cajtexcom = $this->getRequestParameter('cajtexcom'); $exo = $this->getRequestParameter('exo');
+        $exo1 = $this->getRequestParameter('exonerada');
+        $c= new Criteria();
+        $c->add(FcactcomPeer::CODACT,$codigo);
+        $result= FcactcomPeer::doSelectOne($c);
+
+        if ($result)
+        {
+        	 $dato= $result->getDesact();
+         	if ($result->getExoner()=='S')
+        	  	$dato1='SI';
+         	else $dato1='NO';
+        }else
+        {
+          $exo=""; $exo1=""; $cajtexcom=""; $cajtexmos="";
+          $javascript="alert('La Actividad No Existe'); $('$cajtexcom').value='';";
+        }
+        $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$exo.'","'.$dato1.'",""],["'.$exo1.'","NO",""],["javascript","' . $javascript . '",""]]';
+       break;
+
+      case '8':
+	    $correlativo="";
+        $fecha = date("d/m/Y");
           $numero = $this->getRequestParameter('numero','');
 	      $c= new Criteria();
           $c->addDescendingOrderByColumn(FcsolnegPeer::NUMNEG);
@@ -1157,19 +1260,32 @@ class FacpicsollicActions extends autoFacpicsollicActions
 	      }
 	      else
 	      	$correlativo=str_pad(1,10,'0',STR_PAD_LEFT);
-      	  $javascript = $javascript . "$('autorizacion').show();";
-          $output = '[["fcsollic_licnegada","I",""],["fcsollic_numneg","'.$correlativo.'",""],["javascript","' . $javascript . '",""]]';
+
+        $javascript = $javascript . "alert('Se Negara la Solicitud.');";
+      	$javascript = $javascript . "$('suspencion').show();$('reactivar').hide();$('renovar').hide();$('suspender').show();$('cancelar').hide();";
+        $output = '[["fcsollic_operacion","N",""],["fcsollic_fecneg","'.$fecha.'",""],["fcsollic_numneg","'.$correlativo.'",""],["javascript","' . $javascript . '",""]]';
       break;
 
       default:
         $output = '[["","",""],["","",""],["","",""]]';
         break;
     }
+
+
     $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
     return sfView::HEADER_ONLY;
   }
 
 
+
+
+
+  /**
+   *
+   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
+   *
+   */
   public function validateEdit()
   {
     $this->coderr =-1;
@@ -1179,7 +1295,8 @@ class FacpicsollicActions extends autoFacpicsollicActions
     //exit('hola'.$this->getRequestParameter('fcsollic[idlic]'));
     if($this->getRequest()->getMethod() == sfRequest::POST)
     {
-      if ($this->getRequestParameter('fcsollic[idlic]')!="" and $this->getRequestParameter('fcsollic[fechlic]')!="" and $this->getRequestParameter('fcsollic[comnlic]')=="")
+      //if ($this->getRequestParameter('fcsollic[idlic]')!="" and $this->getRequestParameter('fcsollic[fechlic]')!="" and $this->getRequestParameter('fcsollic[comnlic]')=="")
+      if ($this->getRequestParameter('fcsollic[fechlic]')!="" and $this->getRequestParameter('fcsollic[comnlic]')=="")
       {
           $this->coderr=703;
           return false;
@@ -1209,39 +1326,32 @@ class FacpicsollicActions extends autoFacpicsollicActions
 
   }
 
+  /**
+   * Función para colocar el codigo necesario para
+   * el proceso de guardar.
+   * Esta función debe retornar un valor igual a -1 si no hubo
+   * Inconvenientes al guardar, y != de -1 si existe algún error.
+   * Si es diferente de -1 el valor devuelto debe ser un código de error
+   * Válido que exista en el archivo config/errores.yml
+   *
+   */
   public function saving($fcsollic)
   {
-  	$correlativo='';
-  	if ($fcsollic->getId()=='')
-  	{
-          $fcsollic->setNumsol(str_replace('#','0',$fcsollic->getNumsol()));
-          $fcsollic->setNumsol(str_pad(trim($countreg->getNumsol()+1),12,'0',STR_PAD_LEFT));
-  		  $c= new Criteria();
-	      $c->add(FcsollicPeer::NUMSOL,$fcsollic->getNumsol());
-	      $countreg = FcsollicPeer::doSelectOne($c);
-	      if (count($countreg)<=0)
-				$correlativo=$fcsollic->getNumsol();
-	      else
-	      {
-	  		  $c= new Criteria();
-	          $c->addDescendingOrderByColumn(FcsollicPeer::NUMSOL);
-		      $reg = FcsollicPeer::doSelectOne($c);
-		      if (count($reg)>0)
-		      {
-				$correlativo=str_pad(trim($reg->getNumsol()+1),12,'0',STR_PAD_LEFT);
-		      }
-	      }
-	      $fcsollic->setNumsol($correlativo);
-  	}
-  	else
-  	{
-		if ($fcsollic->getLicmodificada()=='I') Hacienda::Grabar_Anteriores($fcsollic);
-	    if ($fcsollic->getLicnegada()=='I') Hacienda::Salvarneg($fcsollic);
-  	}
-    $fcsollic->save();
-    $grid = Herramientas::CargarDatosGridv2($this,$this->grid);
-    Hacienda::salvar_grid_Fcsollic($fcsollic, $grid);
-    return -1;
+	$error=-1;
+	if ($fcsollic->getLicnegada()!='')
+	{
+		//if ($fcsollic->getOperacion()=='A') $error = Hacienda::Grabar_Reactivar($fcsollic);
+		//elseif ($fcsollic->getOperacion()=='R') $error = Hacienda::Grabar_Renovar($fcsollic);
+		if ($fcsollic->getOperacion()=='I') $error = Hacienda::Grabar_Facpicsollic_Negacion($fcsollic);  //NEGACION
+		//elseif ($fcsollic->getOperacion()=='C') $error = Hacienda::Grabar_Facpiclic_Suspencion_Cancelacion($fcsollic);
+	}
+	if ($error==-1)
+	{
+	    $grid = Herramientas::CargarDatosGridv2($this,$this->grid);
+	    $error = Hacienda::SalvarFacpicsollic($fcsollic, $grid);
+	}
+
+	return $error;
   }
 
 }

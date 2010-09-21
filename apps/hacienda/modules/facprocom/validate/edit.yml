@@ -1,0 +1,43 @@
+methods:
+  post:
+   - "fcprolic{nrocon}"
+   - "fcprolic{fecreg}"
+   - "fcprolic{despro}"
+   - "fcprolic{tippro}"
+
+
+names:
+  fcprolic{nrocon}:
+    required:  Yes
+    required_msg: La Placa es un campo requerido
+    validators: Validator_nrocon
+
+  fcprolic{tippro}:
+    required:  Yes
+    required_msg: El Codigo del Uso es un campo requerido
+    validators: Validator_tippro
+
+  fcprolic{despro}:
+    required:  Yes
+    required_msg: La Descripcion es un campo requerido
+
+  fcprolic{fecreg}:
+    required:  Yes
+    required_msg: La Fecha del Registro es un campo requerido
+
+
+
+Validator_nrocon:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Fcprolic
+        column:       nrocon
+        unique_error: El Numero de Control ya Existe intente con otro.
+
+
+Validator_tippro:
+    class: CidesaExistValidator
+    param:
+        class:        Fctippro
+        column:       tippro
+        unique_error: El Codigo de Tipo de Propagando ya Existe intente con otro.

@@ -1,0 +1,44 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Fcotring
+    theme:            default
+    fields:
+      nrocon: { name: Número de Control}
+      codfue: { name: Fuente}
+      fecreg: { name: Fecha del Registro}
+      rifcon: { name: C.I. / RIF}
+      nomcon: { name: Nombre, params: disabled=true}
+      dircon: { name: Dirección, params: disabled=true}
+      naccon: { name: Nacionalidad}
+      tipcon: { name: Tipo}
+      rifrep: { name: C.I. / RIF}
+      nomconr: { name: Nombre}
+      dirconr: { name: Dirección}
+      nacconr: { name: Nacionalidad}
+      tipconr: { name: Tipo}
+      desing: { name: Descripción}
+      monimp: { name: Monto del Impuesto a Pagar}
+      funrec: { name: Funcionario Receptor}
+      fecrec: { name: Fecha}      
+      staapu: { name: Estatusapu}
+      stadec: { name: Estatusdec}      
+      monsal: { name: Monto}
+        
+    list:
+      title:          Otros Ingresos  
+      filters:        [nrocon]
+      display:        [=nrocon, codfue, fecreg]
+      fields:
+        fecreg: { params: date_format='dd/MM/yy' }
+        fecrec: { params: date_format='dd/MM/yy' }           
+      object_actions:
+        _edit:        ~     
+        _delete:      ~ 
+      max_per_page:   5    
+    edit:
+      title:          Registro de Otros Ingresos
+      display:       [=nrocon, codfue, fecreg, rifcon, nomcon, dircon, naccon, tipcon, rifrep, nomconr, dirconr, nacconr, tipconr, desing, monimp, funrec, fecrec, staapu, stadec, monsal]
+      fields:
+        fecreg: { params: date_format='dd/MM/yy' }
+        fecrec: { params: date_format='dd/MM/yy' }        

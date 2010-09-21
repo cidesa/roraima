@@ -3,176 +3,146 @@
 /**
  * facinmdec actions.
  *
- * @package    Roraima
+ * @package    siga
  * @subpackage facinmdec
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
- * @copyright  Copyright 2007, Cide S.A.
- * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
+ * @author     $Auhor$ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id: actions.class.php 32371 2009-09-01 16:06:59Z lhernandez $
+ * @copyright  Copyright 2007, Cidesa C.A.
  */
+
 class facinmdecActions extends autofacinmdecActions
 {
 
-  /**
-   * Función principal para el manejo de las acciones create y edit
-   * del formulario.
-   *
-   */
-  public function executeEdit()
+  // Para incluir funcionalidades al executeEdit()
+  public function editing()
   {
-    $this->fcdeclar = $this->getFcdeclarOrCreate();
-   // $this->configGrid();
+	$this->configGridDeuda();
 
-    if ($this->getRequest()->getMethod() == sfRequest::POST)
-    {
-      $this->updateFcdeclarFromRequest();
+  }
 
-      $this->saveFcdeclar($this->fcdeclar);
 
-      $this->setFlash('notice', 'Your modifications have been saved');
-$this->Bitacora('Guardo');
-
-      if ($this->getRequestParameter('save_and_add'))
-      {
-        return $this->redirect('facinmdec/create');
-      }
-      else if ($this->getRequestParameter('save_and_list'))
-      {
-        return $this->redirect('facinmdec/list');
-      }
-      else
-      {
-        return $this->redirect('facinmdec/edit?id='.$this->fcdeclar->getId());
-      }
-    }
-    else
-    {
-      $this->labels = $this->getLabels();
-    }
-  }    
-	
-    /**
+  /**
    * Esta función permite definir la configuración del grid de datos
    * que contiene el formulario. Esta función debe ser llamada
    * en las acciones, create, edit y handleError para recargar en todo momento
    * los datos del grid.
    *
    */
-  public function configGrid()
-	{
+  public function configGridDeuda($reg = array(),$regelim = array())
+  {
+    $c = new Criteria();
+    $c->add(FcdeclarPeer::NUMDEC,$this->fcdeclar->getNumdec());
+	$c->addAscendingOrderByColumn(FcdeclarPeer :: FECVEN);
+    $per = FcdeclarPeer::doSelect($c);
 
-      $c = new Criteria();
-      $c->add(FcdeclarPeer::NUMDEC,$this->fcdeclar->getnumdec());
-      $per = FcdeclarPeer::doSelect($c);
-	  
-	  
-	  if(false){
-		//////////////////////
-		//GRID
-		
-		$filas=17;
-		$cabeza="Distribución de Deuda";
-		$eliminar=true;
-		$titulos=array("Cod. Almacen","Descripción","Cod. Ubicacion","Ubicación","Exi. Mínima","Exi. Máxima","Exi. Actual","Reorden");
-		$ancho="1100";
-		$alignf=array('center','left','center','left','right','right','right','right');
-		$alignt=array('center','left','center','left','right','right','right','right');
-		$campos=array('Codalm','Nomalm','Codubi','Nomubi','Eximin','Eximax','Exiact','Ptoreo');
-		$catalogos=array('Cadefalm-sf_admin_edit_form-x1-x2','','Cadefubi-sf_admin_edit_form-x3-x4','','','','','');// por todas las columnas, si no tiene, se coloca vacio
-		$ajax=array('2-x2-x1','','3-x4-x3','','','','',''); //parametro-cajitamostrar-autocompletar
-		$tipos=array('t','t','m','m','m','m'); //texto, monto, fecha --solo de los campos a grabar, no de todo el grid
-		$montos=array("5","6","7","8");
-		$totales=array("", "", "caregart_exitot", "");
-		$mascaraubicacion=$this->mascaraubicacion;
-		$html=array('type="text" size="5"','type="text" size="25" disabled=true','type="text" size="5"','type="text" size="25" disabled=true','type="text" size="10"','type="text" size="10"','type="text" size="10"','type="text" size="10"');
-		$js=array('','','onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascaraubicacion.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}"','','onKeypress="entermonto(event,this.id)"','onKeypress="entermonto(event,this.id)"','onKeypress="entermonto(event,this.id)"','onKeypress="entermonto(event,this.id)"');
-		$grabar=array("1","3","5","6","7","8");
-		$filatotal='';
-		 
-		
-		$this->obj=array('cabeza'=>$cabeza, 'filas'=>$filas, 'eliminar'=>$eliminar, 'titulos'=>$titulos, 
-		'ancho'=>$ancho, 'alignf'=>$alignf, 'alignt'=>$alignt, 'campos'=>$campos, 'catalogos' => $catalogos, 
-		'ajax' => $ajax, 'tipos' => $tipos, 'montos'=>$montos, 'filatotal' => $filatotal, 'totales'=>$totales, 
-		'html'=>$html, 'js'=>$js, 'datos'=>$per, 'grabar'=>$grabar, 'tabla' => 'Caartalm');
-		////////////////////// 
+    $this->columnas = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/facinmdec/'.sfConfig::get('sf_app_module_config_dir_name').'/grid_deuda');
+    $this->grid = $this->columnas[0]->getConfig($per);
+    $this->fcdeclar->setGriddeuda($this->grid);
+  }
 
-	  }else {
-	    
-	    //$mascaraubicacion=$this->mascaraubicacion;
-	    // $i18n = $this->getContext()->getI18N();
-	    // Se crea el objeto principal de la clase OpcionesGrid
-	    $opciones = new OpcionesGrid();
-	    // Se configuran las opciones globales del Grid 
-        $opciones->setEliminar(true);
-        $opciones->setTabla('Ocregact');
-        $opciones->setAnchoGrid(1150);
-        $opciones->setTitulo('Distribución de Deuda');
-        $opciones->setHTMLTotalFilas(' ');
-        // Se generan las columnas
-        $col1 = new Columna('Cod. Almacen');
-        $col1->setTipo(Columna::TEXTO);
-        $col1->setEsGrabable(true);
-        $col1->setAlineacionObjeto(Columna::CENTRO);
-        $col1->setAlineacionContenido(Columna::CENTRO);
-        $col1->setNombreCampo('codalm');
-        $col1->setCatalogo('cadefalm','sf_admin_edit_form','2');
-        $col1->setAjax(2,2);
-        
-        $col2 = new Columna('Descripción');
-        $col2->setTipo(Columna::TEXTO);
-        $col2->setAlineacionObjeto(Columna::IZQUIERDA);
-        $col2->setAlineacionContenido(Columna::IZQUIERDA);
-        $col2->setNombreCampo('codalm');
-        $col2->setHTML('type="text" size="25" disabled=true');
-        
-        $col3 = clone $col1;
-        $col3->setTitulo('Cod. Ubicacion');
-        $col3->setNombreCampo('codubi');
-        $col3->setCatalogo('cadefubi','sf_admin_edit_form','4');
-        //$col3->setJScript('onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascaraubicacion.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}"');
-        $col3->setAjax(3,4);
-        
-        $col4 = clone $col2;
-        $col4->setTitulo('Ubicación');
-        $col4->setNombreCampo('Nomubi');
-        
-        $col5 = new Columna('Exi. Mínima');
-        $col5->setTipo(Columna::MONTO);
-        $col5->setEsGrabable(true);
-        $col5->setAlineacionContenido(Columna::IZQUIERDA);
-        $col5->setAlineacionObjeto(Columna::IZQUIERDA);
-        $col5->setNombreCampo('Eximin');
-        $col5->setEsNumerico(true);
-        $col5->setHTML('type="text" size="10"');
-        //$col5->setJScript('onKeypress="entermonto(event,this.id)"');
 
-        $col6 = clone $col5;
-        $col6->setTitulo('Exi. Máxima');
-        $col6->setNombreCampo('Eximax');
-        
-        $col7 = clone $col5;
-        $col7->setTitulo('Exi. Actual');
-        $col7->setNombreCampo('Exiact');
-        $col7->setEsTotal(true,'caregart_exitot');
-        
-        $col8 = clone $col5;
-        $col8->setTitulo('Reorden');
-        $col8->setNombreCampo('Ptoreo');
-        
-        // Se guardan las columnas en el objetos de opciones        
-        $opciones->addColumna($col1);
-        $opciones->addColumna($col2);
-        $opciones->addColumna($col3);
-        $opciones->addColumna($col4);
-        $opciones->addColumna($col5);
-        $opciones->addColumna($col6);
-        $opciones->addColumna($col7);
-        $opciones->addColumna($col8);
-	    // Ee genera el arreglo de opciones necesario para generar el grid
-        $this->obj = $opciones->getConfig($per); 
-	    
-	  }
-	  
-	}	
+  public function executeAjax()
+  {
+
+    $codigo = $this->getRequestParameter('codigo','');
+    // Esta variable ajax debe ser usada en cada llamado para identificar
+    // que objeto hace el llamado y por consiguiente ejecutar el código necesario
+    $ajax = $this->getRequestParameter('ajax','');
+
+    // Se debe enviar en la petición ajax desde el cliente los datos que necesitemos
+    // para generar el código de retorno, esto porque en un llamado Ajax no se devuelven
+    // los datos de los objetos de la vista como pasa en un submit normal.
+
+    switch ($ajax){
+      case '1':
+        // La variable $output es usada para retornar datos en formato de arreglo para actualizar
+        // objetos en la vista. mas informacion en
+        // http://201.210.211.26:8080/www/wiki/index.php/Agregar_Ajax_para_buscar_una_descripcion
+        $output = '[["","",""],["","",""],["","",""]]';
+        break;
+      default:
+        $output = '[["","",""],["","",""],["","",""]]';
+    }
+
+    // Instruccion para escribir en la cabecera los datos a enviar a la vista
+    $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+
+    // Si solo se va usar ajax para actualziar datos en objetos ya existentes se debe
+    // mantener habilitar esta instrucción
+    return sfView::HEADER_ONLY;
+
+    // Si por el contrario se quiere reemplazar un div en la vista, se debe deshabilitar
+    // por supuesto tomando en cuenta que debe existir el archivo ajaxSuccess.php en la carpeta templates.
+
+  }
+
+
+  /**
+   *
+   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
+   *
+   */
+  public function validateEdit()
+  {
+    $this->coderr =-1;
+
+    // Se deben llamar a las funciones necesarias para cargar los
+    // datos de la vista que serán usados en las funciones de validación.
+    // Por ejemplo:
+
+    if($this->getRequest()->getMethod() == sfRequest::POST){
+
+      // $this->configGrid();
+      // $grid = Herramientas::CargarDatosGrid($this,$this->obj);
+
+      // Aqui van los llamados a los métodos de las clases del
+      // negocio para validar los datos.
+      // Los resultados de cada llamado deben ser analizados por ejemplo:
+
+      // $resp = Compras::validarAlmajuoc($this->caajuoc,$grid);
+
+       //$resp=Herramientas::ValidarCodigo($valor,$this->tstipmov,$campo);
+
+      // al final $resp es analizada en base al código que retorna
+      // Todas las funciones de validación y procesos del negocio
+      // deben retornar códigos >= -1. Estos código serám buscados en
+      // el archivo errors.yml en la función handleErrorEdit()
+
+      if($this->coderr!=-1){
+        return false;
+      } else return true;
+
+    }else return true;
+
+
+
+  }
+
+  /**
+   * Función para actualziar el grid en el post si ocurre un error
+   * Se pueden colocar aqui los grids adicionales
+   *
+   */
+  public function updateError()
+  {
+    //$this->configGrid();
+
+    //$grid = Herramientas::CargarDatosGrid($this,$this->obj);
+
+    //$this->configGrid($grid[0],$grid[1]);
+
+  }
+
+  public function saving($clasemodelo)
+  {
+    return parent::saving($clasemodelo);
+  }
+
+  public function deleting($clasemodelo)
+  {
+    return parent::deleting($clasemodelo);
+  }
+
+
 }

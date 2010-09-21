@@ -1,5 +1,6 @@
 propel:
-  _attributes: { noXsd: false, defaultIdMethod: native, package: lib.model }
+  _attributes:
+    package: lib.model.hacienda
   fcabonos:
     _attributes:
       idMethod: native
@@ -54,7 +55,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcacceso:
     _attributes:
       idMethod: native
@@ -76,7 +79,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcactcom:
     _attributes:
       idMethod: native
@@ -128,7 +133,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcactcom_hc:
     _attributes:
       idMethod: native
@@ -180,13 +187,15 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcactpic:
     _attributes:
       idMethod: native
     numdoc:
       type: VARCHAR
-      size: 10
+      size: 12
     codact:
       type: VARCHAR
       size: 16
@@ -243,7 +252,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcajuste:
     _attributes:
       idMethod: native
@@ -280,7 +291,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcaliinm:
     _attributes:
       idMethod: native
@@ -322,7 +335,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcaliuso:
     _attributes:
       idMethod: native
@@ -350,7 +365,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcapulic:
     _attributes:
       idMethod: native
@@ -366,6 +383,8 @@ propel:
       type: VARCHAR
       size: 14
       required: true
+      foreignTable: fcconrep
+      foreignReference: rifcon
     tipapu:
       type: VARCHAR
       size: 10
@@ -391,6 +410,8 @@ propel:
     rifrep:
       type: VARCHAR
       size: 14
+      foreignTable: fcconrep
+      foreignReference: rifcon
     staapu:
       type: VARCHAR
       size: 1
@@ -421,13 +442,14 @@ propel:
     serapuf:
       type: VARCHAR
       size: 20
-    horapu:
-      type: VARCHAR
-      size: 20
+    horaapu:
+      type: TIME
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcapulicdet:
     _attributes:
       idMethod: native
@@ -458,7 +480,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcbanent:
     _attributes:
       idMethod: native
@@ -525,7 +549,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcbansal:
     _attributes:
       idMethod: native
@@ -590,7 +616,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fccajero:
     _attributes:
       idMethod: native
@@ -616,7 +644,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fccarinm:
     _attributes:
       idMethod: native
@@ -636,7 +666,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fccatfis:
     _attributes:
       idMethod: native
@@ -664,7 +696,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcclaesp:
     _attributes:
       idMethod: native
@@ -678,7 +712,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fccobrad:
     _attributes:
       idMethod: native
@@ -704,7 +740,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fccominm:
     _attributes:
       idMethod: native
@@ -732,7 +770,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fccon:
     _attributes:
       idMethod: native
@@ -793,7 +833,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcconpag:
     _attributes:
       idMethod: native
@@ -886,7 +928,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcconrep:
     _attributes:
       idMethod: native
@@ -975,179 +1019,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
-  fcconrep1:
-    _attributes:
-      idMethod: native
-    cedcon:
-      type: VARCHAR
-      size: 11
-    rifcon:
-      type: VARCHAR
-      size: 20
-    nomcon:
-      type: VARCHAR
-      size: 255
-    repcon:
-      type: VARCHAR
-      size: 1
-    dircon:
-      type: VARCHAR
-      size: 255
-    telcon:
-      type: VARCHAR
-      size: 30
-    emacon:
-      type: VARCHAR
-      size: 50
-    codsec:
-      type: VARCHAR
-      size: 4
-    codpar:
-      type: VARCHAR
-      size: 4
-    nitcon:
-      type: VARCHAR
-      size: 14
-    codmun:
-      type: VARCHAR
-      size: 4
-    codedo:
-      type: VARCHAR
-      size: 4
-    codpai:
-      type: VARCHAR
-      size: 4
-    ciucon:
-      type: VARCHAR
-      size: 30
-    cpocon:
-      type: VARCHAR
-      size: 6
-    apocon:
-      type: VARCHAR
-      size: 20
-    urlcon:
-      type: VARCHAR
-      size: 50
-    naccon:
-      type: VARCHAR
-      size: 1
-    tipcon:
-      type: VARCHAR
-      size: 1
-    faxcon:
-      type: VARCHAR
-      size: 15
-    clacon:
-      type: VARCHAR
-      size: 12
-    fecdescon:
-      type: DATE
-    fecactcon:
-      type: DATE
-    stacon:
-      type: VARCHAR
-      size: 1
-    origen:
-      type: VARCHAR
-      size: 1
-    nomneg:
-      type: VARCHAR
-      size: 255
-    reccon:
-      type: VARCHAR
-      size: 100
-    id:
-      type: INTEGER
-      required: true
-      autoIncrement: true
-  fcconrep2:
-    _attributes:
-      idMethod: native
-    cedcon:
-      type: VARCHAR
-      size: 11
-    rifcon:
-      type: VARCHAR
-      size: 20
-    nomcon:
-      type: VARCHAR
-      size: 255
-    repcon:
-      type: VARCHAR
-      size: 1
-    dircon:
-      type: VARCHAR
-      size: 255
-    telcon:
-      type: VARCHAR
-      size: 30
-    emacon:
-      type: VARCHAR
-      size: 50
-    codsec:
-      type: VARCHAR
-      size: 4
-    codpar:
-      type: VARCHAR
-      size: 4
-    nitcon:
-      type: VARCHAR
-      size: 14
-    codmun:
-      type: VARCHAR
-      size: 4
-    codedo:
-      type: VARCHAR
-      size: 4
-    codpai:
-      type: VARCHAR
-      size: 4
-    ciucon:
-      type: VARCHAR
-      size: 30
-    cpocon:
-      type: VARCHAR
-      size: 6
-    apocon:
-      type: VARCHAR
-      size: 20
-    urlcon:
-      type: VARCHAR
-      size: 50
-    naccon:
-      type: VARCHAR
-      size: 1
-    tipcon:
-      type: VARCHAR
-      size: 1
-    faxcon:
-      type: VARCHAR
-      size: 15
-    clacon:
-      type: VARCHAR
-      size: 12
-    fecdescon:
-      type: DATE
-    fecactcon:
-      type: DATE
-    stacon:
-      type: VARCHAR
-      size: 1
-    origen:
-      type: VARCHAR
-      size: 1
-    nomneg:
-      type: VARCHAR
-      size: 255
-    reccon:
-      type: VARCHAR
-      size: 100
-    id:
-      type: INTEGER
-      required: true
-      autoIncrement: true
+      description: Identificador Único del registro
   fcconrepco:
     _attributes:
       idMethod: native
@@ -1227,182 +1101,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
-  fcconrepres1:
-    _attributes:
-      idMethod: native
-    cedcon:
-      type: VARCHAR
-      size: 11
-    rifcon:
-      type: VARCHAR
-      size: 20
-    nomcon:
-      type: VARCHAR
-      size: 255
-    repcon:
-      type: VARCHAR
-      size: 1
-    dircon:
-      type: VARCHAR
-      size: 255
-    telcon:
-      type: VARCHAR
-      size: 30
-    emacon:
-      type: VARCHAR
-      size: 50
-    codsec:
-      type: VARCHAR
-      size: 4
-    codpar:
-      type: VARCHAR
-      size: 4
-    nitcon:
-      type: VARCHAR
-      size: 14
-    codmun:
-      type: VARCHAR
-      size: 4
-    codedo:
-      type: VARCHAR
-      size: 4
-    codpai:
-      type: VARCHAR
-      size: 4
-    ciucon:
-      type: VARCHAR
-      size: 30
-    cpocon:
-      type: VARCHAR
-      size: 6
-    apocon:
-      type: VARCHAR
-      size: 20
-    urlcon:
-      type: VARCHAR
-      size: 50
-    naccon:
-      type: VARCHAR
-      size: 1
-    tipcon:
-      type: VARCHAR
-      size: 1
-    faxcon:
-      type: VARCHAR
-      size: 15
-    clacon:
-      type: VARCHAR
-      size: 12
-    fecdescon:
-      type: DATE
-    fecactcon:
-      type: DATE
-    stacon:
-      type: VARCHAR
-      size: 1
-    origen:
-      type: VARCHAR
-      size: 1
-    nomneg:
-      type: VARCHAR
-      size: 255
-    reccon:
-      type: VARCHAR
-      size: 100
-    id:
-      type: INTEGER
-      required: true
-      autoIncrement: true
-  fcconrepresp:
-    _attributes:
-      idMethod: native
-    cedcon:
-      type: VARCHAR
-      size: 11
-    rifcon:
-      type: VARCHAR
-      size: 20
-    nomcon:
-      type: VARCHAR
-      size: 255
-    repcon:
-      type: VARCHAR
-      size: 1
-    dircon:
-      type: VARCHAR
-      size: 255
-    telcon:
-      type: VARCHAR
-      size: 30
-    emacon:
-      type: VARCHAR
-      size: 50
-    codsec:
-      type: VARCHAR
-      size: 4
-    codpar:
-      type: VARCHAR
-      size: 4
-    nitcon:
-      type: VARCHAR
-      size: 14
-    codmun:
-      type: VARCHAR
-      size: 4
-    codedo:
-      type: VARCHAR
-      size: 4
-    codpai:
-      type: VARCHAR
-      size: 4
-    ciucon:
-      type: VARCHAR
-      size: 30
-    cpocon:
-      type: VARCHAR
-      size: 6
-    apocon:
-      type: VARCHAR
-      size: 20
-    urlcon:
-      type: VARCHAR
-      size: 50
-    naccon:
-      type: VARCHAR
-      size: 1
-    tipcon:
-      type: VARCHAR
-      size: 1
-    faxcon:
-      type: VARCHAR
-      size: 15
-    clacon:
-      type: VARCHAR
-      size: 12
-    fecdescon:
-      type: DATE
-    fecactcon:
-      type: DATE
-    stacon:
-      type: VARCHAR
-      size: 1
-    origen:
-      type: VARCHAR
-      size: 1
-    nomneg:
-      type: VARCHAR
-      size: 255
-    reccon:
-      type: VARCHAR
-      size: 100
-    tem:
-      type: NUMERIC
-      size: 8
-    id:
-      type: INTEGER
-      required: true
-      autoIncrement: true
+      description: Identificador Único del registro
   fcdecatp:
     _attributes:
       idMethod: native
@@ -1413,11 +1114,11 @@ propel:
       #primaryKey: true
     numsol:
       type: VARCHAR
-      size: 10
+      size: 12
       required: true
     numlic:
       type: VARCHAR
-      size: 10
+      size: 12
       required: true
     fecdec:
       type: DATE
@@ -1438,7 +1139,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcdeclar:
     _attributes:
       idMethod: native
@@ -1449,7 +1152,7 @@ propel:
       type: DATE
     fueing:
       type: VARCHAR
-      size: 3
+      size: 2
     fecdec:
       type: DATE
     rifcon:
@@ -1528,7 +1231,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcdeclar2:
     _attributes:
       idMethod: native
@@ -1539,7 +1244,7 @@ propel:
       type: DATE
     fueing:
       type: VARCHAR
-      size: 3
+      size: 2
     fecdec:
       type: DATE
     rifcon:
@@ -1601,7 +1306,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcdecpag:
     _attributes:
       idMethod: native
@@ -1635,7 +1342,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcdefdesc:
     _attributes:
       idMethod: native
@@ -1668,7 +1377,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcdefdetsol:
     _attributes:
       idMethod: native
@@ -1690,7 +1401,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcdefdetsol2:
     _attributes:
       idMethod: native
@@ -1712,7 +1425,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcdefentext:
     _attributes:
       idMethod: native
@@ -1731,7 +1446,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcdeffun:
     _attributes:
       idMethod: native
@@ -1755,7 +1472,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcdefins:
     _attributes:
       idMethod: native
@@ -1861,7 +1580,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcdefnca:
     _attributes:
       idMethod: native
@@ -1986,7 +1707,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcdefpgi:
     _attributes:
       idMethod: native
@@ -2017,7 +1740,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcdefrecdes:
     _attributes:
       idMethod: native
@@ -2030,7 +1755,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcdefrecint:
     _attributes:
       idMethod: native
@@ -2057,7 +1784,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcdeftipdoc:
     _attributes:
       idMethod: native
@@ -2076,7 +1805,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcdefubifis:
     _attributes:
       idMethod: native
@@ -2092,7 +1823,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcdefubimag:
     _attributes:
       idMethod: native
@@ -2108,7 +1841,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcdefuniadm:
     _attributes:
       idMethod: native
@@ -2124,7 +1859,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcdesveh:
     _attributes:
       idMethod: native
@@ -2151,7 +1888,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcdetabo:
     _attributes:
       idMethod: native
@@ -2174,7 +1913,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcdetcon:
     _attributes:
       idMethod: native
@@ -2200,12 +1941,17 @@ propel:
     obscuo:
       type: VARCHAR
       size: 100
+    descuo:
+      type: VARCHAR
+      size: 100
     fecven:
       type: DATE
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcdetconfue:
     _attributes:
       idMethod: native
@@ -2231,6 +1977,9 @@ propel:
     obscuo:
       type: VARCHAR
       size: 100
+    descuo:
+      type: VARCHAR
+      size: 100
     fecven:
       type: DATE
     fuente:
@@ -2239,7 +1988,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcdetinm:
     _attributes:
       idMethod: native
@@ -2284,7 +2035,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcdetpag:
     _attributes:
       idMethod: native
@@ -2317,7 +2070,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcdetreccob:
     _attributes:
       idMethod: native
@@ -2338,7 +2093,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcdetrep:
     _attributes:
       idMethod: native
@@ -2363,7 +2120,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcdetret:
     _attributes:
       idMethod: native
@@ -2393,7 +2152,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcdeucon:
     _attributes:
       idMethod: native
@@ -2412,11 +2173,13 @@ propel:
       type: DATE
     fueing:
       type: VARCHAR
-      size: 3
+      size: 2
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcdprinm:
     _attributes:
       idMethod: native
@@ -2439,7 +2202,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcesplic:
     _attributes:
       idMethod: native
@@ -2502,8 +2267,9 @@ propel:
     fecesp:
       type: DATE
     horespi:
-      type: VARCHAR
-      size: 20
+      type: TIME
+    horespf:
+      type: TIME
     nroent:
       type: NUMERIC
       size: 14
@@ -2515,13 +2281,12 @@ propel:
     exoesp:
       type: VARCHAR
       size: 1
-    horespf:
-      type: VARCHAR
-      size: 20
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcesplicdet:
     _attributes:
       idMethod: native
@@ -2552,7 +2317,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcesppub:
     _attributes:
       idMethod: native
@@ -2626,7 +2393,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcestado:
     _attributes:
       idMethod: native
@@ -2651,7 +2420,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcesting:
     _attributes:
       idMethod: native
@@ -2674,7 +2445,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcestinm:
     _attributes:
       idMethod: native
@@ -2689,7 +2462,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcfuentesmul:
     _attributes:
       idMethod: native
@@ -2705,7 +2480,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcfuentesrec:
     _attributes:
       idMethod: native
@@ -2721,7 +2498,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcfuepre:
     _attributes:
       idMethod: native
@@ -2817,7 +2596,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcinmcam:
     _attributes:
       idMethod: native
@@ -2960,9 +2741,8 @@ propel:
       type: VARCHAR
       size: 1
     numdoc:
-      type: NUMERIC
-      size: 14
-      scale: 2
+      type: VARCHAR
+      size: 12
     fecdoc:
       type: DATE
     usoinm:
@@ -3012,7 +2792,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcinmcom:
     _attributes:
       idMethod: native
@@ -3032,7 +2814,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcinmmod:
     _attributes:
       idMethod: native
@@ -3175,9 +2959,8 @@ propel:
       type: VARCHAR
       size: 1
     numdoc:
-      type: NUMERIC
-      size: 14
-      scale: 2
+      type: VARCHAR
+      size: 12
     fecdoc:
       type: DATE
     usoinm:
@@ -3227,7 +3010,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcmodapu:
     _attributes:
       idMethod: native
@@ -3277,7 +3062,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcmodesp:
     _attributes:
       idMethod: native
@@ -3373,7 +3160,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcmodinm:
     _attributes:
       idMethod: native
@@ -3504,7 +3293,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcmodlic:
     _attributes:
       idMethod: native
@@ -3703,7 +3494,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcmodpro:
     _attributes:
       idMethod: native
@@ -3763,7 +3556,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcmodveh:
     _attributes:
       idMethod: native
@@ -3860,7 +3655,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcmultas:
     _attributes:
       idMethod: native
@@ -3885,7 +3682,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcmunici:
     _attributes:
       idMethod: native
@@ -3915,13 +3714,15 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcnomneg:
     _attributes:
       idMethod: native
     numlic:
       type: VARCHAR
-      size: 10
+      size: 12
     rifcon:
       type: VARCHAR
       size: 14
@@ -3934,7 +3735,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fconrep:
     _attributes:
       idMethod: native
@@ -3970,7 +3773,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcotring:
     _attributes:
       idMethod: native
@@ -4024,7 +3829,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcpaging:
     _attributes:
       idMethod: native
@@ -4049,7 +3856,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcpagos:
     _attributes:
       idMethod: native
@@ -4106,7 +3915,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcpais:
     _attributes:
       idMethod: native
@@ -4122,7 +3933,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcparroq:
     _attributes:
       idMethod: native
@@ -4157,7 +3970,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcpreing:
     _attributes:
       idMethod: native
@@ -4182,7 +3997,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcprolic:
     _attributes:
       idMethod: native
@@ -4248,7 +4065,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcprolicdet:
     _attributes:
       idMethod: native
@@ -4279,7 +4098,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcrangosdes:
     _attributes:
       idMethod: native
@@ -4295,7 +4116,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcrangosmul:
     _attributes:
       idMethod: native
@@ -4314,7 +4137,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcrangosrec:
     _attributes:
       idMethod: native
@@ -4333,7 +4158,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcreccob:
     _attributes:
       idMethod: native
@@ -4351,7 +4178,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcreccon:
     _attributes:
       idMethod: native
@@ -4378,7 +4207,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcrecdes:
     _attributes:
       idMethod: native
@@ -4415,7 +4246,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcrecdesg:
     _attributes:
       idMethod: native
@@ -4433,7 +4266,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcrecdespag:
     _attributes:
       idMethod: native
@@ -4458,7 +4293,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcrecibo:
     _attributes:
       idMethod: native
@@ -4475,7 +4312,7 @@ propel:
       required: true
     numlic:
       type: VARCHAR
-      size: 10
+      size: 12
       required: true
     rifcon:
       type: VARCHAR
@@ -4497,7 +4334,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcrecurso:
     _attributes:
       idMethod: native
@@ -4516,7 +4355,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcreginm:
     _attributes:
       idMethod: native
@@ -4610,9 +4451,8 @@ propel:
       type: VARCHAR
       size: 5
     numdoc:
-      type: NUMERIC
-      size: 20
-      scale: 2
+      type: VARCHAR
+      size: 12
     fecdoc:
       type: DATE
     usoinm:
@@ -4655,516 +4495,15 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
-  fcreginm1:
-    _attributes:
-      idMethod: native
-    serial:
-      type: NUMERIC
-      size: 14
-    tipo_bolet:
-      type: VARCHAR
-      size: 255
-    nombre_pro:
-      type: VARCHAR
-      size: 255
-    ci_rif_pro:
-      type: VARCHAR
-      size: 255
-    dir_inmueb:
-      type: VARCHAR
-      size: 255
-    telefono:
-      type: VARCHAR
-      size: 255
-    telefono2:
-      type: VARCHAR
-      size: 255
-    nomb_ad_ec:
-      type: VARCHAR
-      size: 255
-    dir_adm_en:
-      type: VARCHAR
-      size: 255
-    n_document:
-      type: NUMERIC
-      size: 14
-    fecha_docu:
-      type: DATE
-    uso_inmueb:
-      type: VARCHAR
-      size: 20
-    tenencia:
-      type: VARCHAR
-      size: 10
-    area:
-      type: NUMERIC
-      size: 14
-      scale: 2
-    area2:
-      type: NUMERIC
-      size: 14
-      scale: 2
-    ubicacion:
-      type: NUMERIC
-      size: 14
-    ubicacion2:
-      type: NUMERIC
-      size: 14
-    tipo:
-      type: VARCHAR
-      size: 3
-    tipo2:
-      type: VARCHAR
-      size: 3
-    imp_anual:
-      type: NUMERIC
-      size: 14
-      scale: 2
-    imp_anual2:
-      type: NUMERIC
-      size: 14
-      scale: 2
-    imp_trim:
-      type: NUMERIC
-      size: 14
-      scale: 2
-    imp_trim2:
-      type: NUMERIC
-      size: 14
-      scale: 2
-    mont_imp:
-      type: NUMERIC
-      size: 14
-      scale: 2
-    observacio:
-      type: VARCHAR
-      size: 110
-    cod_catast:
-      type: VARCHAR
-      size: 20
-    fecha_elab:
-      type: DATE
-    ubi_inmueb:
-      type: VARCHAR
-      size: 110
-    norte:
-      type: VARCHAR
-      size: 80
-    sur:
-      type: VARCHAR
-      size: 80
-    este:
-      type: VARCHAR
-      size: 80
-    oeste:
-      type: VARCHAR
-      size: 80
-    adquiere:
-      type: VARCHAR
-      size: 110
-    f_inscripc:
-      type: DATE
-    folios:
-      type: VARCHAR
-      size: 10
-    tomo:
-      type: VARCHAR
-      size: 10
-    trim:
-      type: VARCHAR
-      size: 10
-    prot:
-      type: VARCHAR
-      size: 10
-    frente:
-      type: VARCHAR
-      size: 1
-    fondo:
-      type: VARCHAR
-      size: 1
-    precio:
-      type: NUMERIC
-      size: 14
-      scale: 2
-    dir_propie:
-      type: VARCHAR
-      size: 110
-    id:
-      type: INTEGER
-      required: true
-      autoIncrement: true
-  fcreginm2:
-    _attributes:
-      idMethod: native
-    nroinm:
-      type: VARCHAR
-      size: 15
-      required: true
-    codcatfis:
-      type: VARCHAR
-      size: 30
-      required: true
-    coduso:
-      type: VARCHAR
-      size: 3
-    codcarinm:
-      type: VARCHAR
-      size: 3
-    codsitinm:
-      type: VARCHAR
-      size: 3
-    rifcon:
-      type: VARCHAR
-      size: 14
-    fecpag:
-      type: DATE
-    feccal:
-      type: DATE
-    fecreg:
-      type: DATE
-    dirinm:
-      type: VARCHAR
-      size: 255
-    linnor:
-      type: VARCHAR
-      size: 250
-    linsur:
-      type: VARCHAR
-      size: 250
-    linest:
-      type: VARCHAR
-      size: 250
-    linoes:
-      type: VARCHAR
-      size: 250
-    mtrter:
-      type: NUMERIC
-      size: 14
-      scale: 2
-    mtrcon:
-      type: NUMERIC
-      size: 14
-      scale: 2
-    bster:
-      type: NUMERIC
-      size: 14
-      scale: 2
-    bscon:
-      type: NUMERIC
-      size: 14
-      scale: 2
-    docpro:
-      type: VARCHAR
-      size: 200
-    rifrep:
-      type: VARCHAR
-      size: 14
-    funrec:
-      type: VARCHAR
-      size: 40
-    fecrec:
-      type: DATE
-    estinm:
-      type: VARCHAR
-      size: 1
-    estdec:
-      type: VARCHAR
-      size: 1
-    codcatinm:
-      type: VARCHAR
-      size: 30
-    nomcon:
-      type: VARCHAR
-      size: 120
-    dircon:
-      type: VARCHAR
-      size: 250
-    clacon:
-      type: VARCHAR
-      size: 12
-    fecadq:
-      type: DATE
-    valinm:
-      type: NUMERIC
-      size: 14
-      scale: 2
-    codman:
-      type: VARCHAR
-      size: 4
-    codsec:
-      type: VARCHAR
-      size: 4
-    codpar:
-      type: VARCHAR
-      size: 4
-    nroinmant:
-      type: VARCHAR
-      size: 15
-    totter:
-      type: NUMERIC
-      size: 14
-      scale: 2
-    totcon:
-      type: NUMERIC
-      size: 14
-      scale: 2
-    total:
-      type: NUMERIC
-      size: 14
-      scale: 2
-    id:
-      type: INTEGER
-      required: true
-      autoIncrement: true
-  fcreginm3:
-    _attributes:
-      idMethod: native
-    codcatfis:
-      type: VARCHAR
-      size: 30
-      required: true
-    id:
-      type: INTEGER
-      required: true
-      autoIncrement: true
-  fcregveh:
-    _attributes:
-      idMethod: native
-    plaveh:
-      type: VARCHAR
-      size: 10
-      required: true
-    rifcon:
-      type: VARCHAR
-      size: 14
-      required: true
-    anoveh:
-      type: NUMERIC
-      size: 4
-      required: true
-    fecreg:
-      type: DATE
-    sermot:
-      type: VARCHAR
-      size: 15
-    sercar:
-      type: VARCHAR
-      size: 30
-    marveh:
-      type: VARCHAR
-      size: 30
-    colveh:
-      type: VARCHAR
-      size: 20
-    coduso:
-      type: VARCHAR
-      size: 16
-      required: true
-    impveh:
-      type: NUMERIC
-      size: 14
-      scale: 2
-    salact:
-      type: NUMERIC
-      size: 14
-      scale: 2
-    salant:
-      type: NUMERIC
-      size: 14
-      scale: 2
-    valori:
-      type: NUMERIC
-      size: 14
-      scale: 2
-    aboveh:
-      type: NUMERIC
-      size: 14
-      scale: 2
-    morveh:
-      type: NUMERIC
-      size: 14
-      scale: 2
-    desveh:
-      type: NUMERIC
-      size: 14
-      scale: 2
-    estveh:
-      type: VARCHAR
-      size: 1
-    funrec:
-      type: VARCHAR
-      size: 40
-    obsveh:
-      type: VARCHAR
-      size: 200
-    rifrep:
-      type: VARCHAR
-      size: 14
-    modveh:
-      type: VARCHAR
-      size: 20
-      required: true
-    fecrec:
-      type: DATE
-    dueant:
-      type: VARCHAR
-      size: 50
-    dirant:
-      type: VARCHAR
-      size: 50
-    plaant:
-      type: VARCHAR
-      size: 8
-    estdec:
-      type: VARCHAR
-      size: 1
-      required: true
-    nomcon:
-      type: VARCHAR
-      size: 50
-    dircon:
-      type: VARCHAR
-      size: 50
-    clacon:
-      type: VARCHAR
-      size: 12
-    capveh:
-      type: NUMERIC
-    pesveh:
-      type: NUMERIC
-    tipveh:
-      type: NUMERIC
-    fecact:
-      type: DATE
-    marcod:
-      type: VARCHAR
-      size: 30
-    id:
-      type: INTEGER
-      required: true
-      autoIncrement: true
-  fcregveh1:
-    _attributes:
-      idMethod: native
-    plaveh:
-      type: VARCHAR
-      size: 10
-      required: true
-    rifcon:
-      type: VARCHAR
-      size: 14
-      required: true
-    anoveh:
-      type: NUMERIC
-      size: 4
-      required: true
-    fecreg:
-      type: DATE
-      required: true
-    sermot:
-      type: VARCHAR
-      size: 15
-    sercar:
-      type: VARCHAR
-      size: 30
-    marveh:
-      type: VARCHAR
-      size: 20
-    colveh:
-      type: VARCHAR
-      size: 20
-    coduso:
-      type: VARCHAR
-      size: 16
-      required: true
-    impveh:
-      type: NUMERIC
-      size: 14
-      scale: 2
-    salact:
-      type: NUMERIC
-      size: 14
-      scale: 2
-    salant:
-      type: NUMERIC
-      size: 14
-      scale: 2
-    valori:
-      type: NUMERIC
-      size: 14
-      scale: 2
-    aboveh:
-      type: NUMERIC
-      size: 14
-      scale: 2
-    morveh:
-      type: NUMERIC
-      size: 14
-      scale: 2
-    desveh:
-      type: NUMERIC
-      size: 14
-      scale: 2
-    estveh:
-      type: VARCHAR
-      size: 1
-    funrec:
-      type: VARCHAR
-      size: 40
-    obsveh:
-      type: VARCHAR
-      size: 200
-    rifrep:
-      type: VARCHAR
-      size: 14
-    modveh:
-      type: VARCHAR
-      size: 20
-      required: true
-    fecrec:
-      type: DATE
-      required: true
-    dueant:
-      type: VARCHAR
-      size: 50
-    dirant:
-      type: VARCHAR
-      size: 50
-    plaant:
-      type: VARCHAR
-      size: 8
-    estdec:
-      type: VARCHAR
-      size: 1
-      required: true
-    nomcon:
-      type: VARCHAR
-      size: 50
-    dircon:
-      type: VARCHAR
-      size: 50
-    clacon:
-      type: VARCHAR
-      size: 12
-    capveh:
-      type: NUMERIC
-    pesveh:
-      type: NUMERIC
-    tipveh:
-      type: NUMERIC
-    fecact:
-      type: DATE
-    id:
-      type: INTEGER
-      required: true
-      autoIncrement: true
+      description: Identificador Único del registro
   fcrenlic:
     _attributes:
       idMethod: native
     numlic:
       type: VARCHAR
-      size: 10
+      size: 12
       required: true
     fecven:
       type: DATE
@@ -5175,13 +4514,15 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcrepfis:
     _attributes:
       idMethod: native
     numlic:
       type: VARCHAR
-      size: 10
+      size: 12
       required: true
     funrec:
       type: VARCHAR
@@ -5220,7 +4561,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcrepliq:
     _attributes:
       idMethod: native
@@ -5256,7 +4599,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcretencion:
     _attributes:
       idMethod: native
@@ -5289,7 +4634,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcrutas:
     _attributes:
       idMethod: native
@@ -5305,7 +4652,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcrutcob:
     _attributes:
       idMethod: native
@@ -5330,7 +4679,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcsitjurinm:
     _attributes:
       idMethod: native
@@ -5350,7 +4701,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcsoldet:
     _attributes:
       idMethod: native
@@ -5376,7 +4729,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcsoldet2:
     _attributes:
       idMethod: native
@@ -5405,7 +4760,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcsollic:
     _attributes:
       idMethod: native
@@ -5596,150 +4953,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
-  fcsollic1:
-    _attributes:
-      idMethod: native
-    numsol:
-      type: VARCHAR
-      size: 12
-    numlic:
-      type: VARCHAR
-      size: 10
-    fecsol:
-      type: DATE
-    feclic:
-      type: DATE
-    rifcon:
-      type: VARCHAR
-      size: 14
-    catcon:
-      type: VARCHAR
-      size: 21
-    rifrep:
-      type: VARCHAR
-      size: 14
-    nomneg:
-      type: VARCHAR
-      size: 120
-    tipinm:
-      type: VARCHAR
-      size: 1
-    tipest:
-      type: VARCHAR
-      size: 1
-    dirpri:
-      type: VARCHAR
-      size: 120
-    codrut:
-      type: VARCHAR
-      size: 6
-    capsoc:
-      type: NUMERIC
-      size: 15
-    horini:
-      type: DATE
-    horcie:
-      type: DATE
-    fecini:
-      type: DATE
-    fecfin:
-      type: DATE
-    discli:
-      type: NUMERIC
-      size: 10
-    disbar:
-      type: NUMERIC
-      size: 10
-    disdis:
-      type: NUMERIC
-      size: 10
-    disins:
-      type: NUMERIC
-      size: 10
-    disfun:
-      type: NUMERIC
-      size: 10
-    disest:
-      type: NUMERIC
-      size: 10
-    funres:
-      type: VARCHAR
-      size: 60
-    funrel:
-      type: VARCHAR
-      size: 40
-    fecres:
-      type: DATE
-    fecapr:
-      type: DATE
-    fecven:
-      type: DATE
-    tomo:
-      type: VARCHAR
-      size: 8
-    folio:
-      type: VARCHAR
-      size: 8
-    numero:
-      type: VARCHAR
-      size: 8
-    taslic:
-      type: NUMERIC
-      size: 15
-    deuanl:
-      type: NUMERIC
-      size: 15
-    deuacl:
-      type: NUMERIC
-      size: 15
-    implic:
-      type: NUMERIC
-      size: 15
-    deuanp:
-      type: NUMERIC
-      size: 15
-    deuacp:
-      type: NUMERIC
-      size: 15
-    stasol:
-      type: VARCHAR
-      size: 1
-    stalic:
-      type: VARCHAR
-      size: 1
-    stadec:
-      type: VARCHAR
-      size: 1
-    staliq:
-      type: VARCHAR
-      size: 1
-    nomcon:
-      type: VARCHAR
-      size: 50
-    dircon:
-      type: VARCHAR
-      size: 50
-    tipo:
-      type: VARCHAR
-      size: 1
-    estser:
-      type: VARCHAR
-      size: 1
-      required: true
-    telneg:
-      type: VARCHAR
-      size: 15
-    clacon:
-      type: VARCHAR
-      size: 12
-    capact:
-      type: NUMERIC
-      size: 15
-    id:
-      type: INTEGER
-      required: true
-      autoIncrement: true
+      description: Identificador Único del registro
   fcsolneg:
     _attributes:
       idMethod: native
@@ -5750,7 +4966,7 @@ propel:
       #primaryKey: true
     numsol:
       type: VARCHAR
-      size: 10
+      size: 12
       required: true
     motneg:
       type: VARCHAR
@@ -5776,7 +4992,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcsolvencia:
     _attributes:
       idMethod: native
@@ -5800,7 +5018,7 @@ propel:
       required: true
     numlic:
       type: VARCHAR
-      size: 10
+      size: 12
     rifcon:
       type: VARCHAR
       size: 14
@@ -5823,10 +5041,18 @@ propel:
     motivo:
       type: VARCHAR
       size: 254
+    funrec:
+      type: VARCHAR
+      size: 40
+      required: true
+    fecrec:
+      type: DATE
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcsuscan:
     _attributes:
       idMethod: native
@@ -5837,11 +5063,11 @@ propel:
       #primaryKey: true
     numsol:
       type: VARCHAR
-      size: 10
+      size: 12
       required: true
     numlic:
       type: VARCHAR
-      size: 10
+      size: 12
       required: true
     estlic:
       type: VARCHAR
@@ -5873,7 +5099,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fctasban:
     _attributes:
       idMethod: native
@@ -5890,7 +5118,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fctipapu:
     _attributes:
       idMethod: native
@@ -5933,7 +5163,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fctipapudet:
     _attributes:
       idMethod: native
@@ -5953,7 +5185,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fctipesp:
     _attributes:
       idMethod: native
@@ -5994,7 +5228,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fctipespdet:
     _attributes:
       idMethod: native
@@ -6014,7 +5250,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fctiplic:
     _attributes:
       idMethod: native
@@ -6028,7 +5266,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fctippag:
     _attributes:
       idMethod: native
@@ -6044,7 +5284,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fctippro:
     _attributes:
       idMethod: native
@@ -6082,7 +5324,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fctipprodet:
     _attributes:
       idMethod: native
@@ -6102,7 +5346,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fctipsol:
     _attributes:
       idMethod: native
@@ -6140,7 +5386,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fctrainm:
     _attributes:
       idMethod: native
@@ -6177,7 +5425,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fctralic:
     _attributes:
       idMethod: native
@@ -6212,7 +5462,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fctraveh:
     _attributes:
       idMethod: native
@@ -6249,7 +5501,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcunimon:
     _attributes:
       idMethod: native
@@ -6269,7 +5523,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcusoinm:
     _attributes:
       idMethod: native
@@ -6289,7 +5545,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcusoveh:
     _attributes:
       idMethod: native
@@ -6324,7 +5582,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   fcvalinm:
     _attributes:
       idMethod: native
@@ -6374,68 +5634,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
-  fcvalinm1:
-    _attributes:
-      idMethod: native
-    coduso:
-      type: VARCHAR
-      size: 3
-    valini:
-      type: NUMERIC
-      size: 20
-      scale: 2
-    valfin:
-      type: NUMERIC
-      size: 20
-      scale: 2
-    aliinm:
-      type: NUMERIC
-      size: 5
-      scale: 3
-    anovig:
-      type: VARCHAR
-      size: 4
-    deduc:
-      type: NUMERIC
-      size: 14
-      scale: 2
-    codref:
-      type: VARCHAR
-      size: 3
-    zoni:
-      type: VARCHAR
-      size: 50
-    manz:
-      type: VARCHAR
-      size: 30
-    parmts:
-      type: VARCHAR
-      size: 30
-    valor:
-      type: NUMERIC
-      size: 14
-      scale: 3
-    tipedi:
-      type: VARCHAR
-      size: 3
-    desedi:
-      type: VARCHAR
-      size: 60
-    nivel:
-      type: VARCHAR
-      size: 30
-    tipo:
-      type: VARCHAR
-      size: 3
-    monto:
-      type: NUMERIC
-      size: 14
-      scale: 3
-    id:
-      type: INTEGER
-      required: true
-      autoIncrement: true
+      description: Identificador Único del registro
   fcvalinmold:
     _attributes:
       idMethod: native
@@ -6482,6 +5683,122 @@ propel:
       type: NUMERIC
       size: 22
       scale: 3
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  fcregveh:
+    _attributes:
+      idMethod: native
+    plaveh:
+      type: VARCHAR
+      size: 10
+      required: true
+    rifcon:
+      type: VARCHAR
+      size: 14
+      required: true
+    anoveh:
+      type: NUMERIC
+      size: 4
+      required: true
+    fecreg:
+      type: DATE
+    sermot:
+      type: VARCHAR
+      size: 15
+    sercar:
+      type: VARCHAR
+      size: 30
+    marveh:
+      type: VARCHAR
+      size: 30
+    colveh:
+      type: VARCHAR
+      size: 20
+    coduso:
+      type: VARCHAR
+      size: 16
+      required: true
+    impveh:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    salact:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    salant:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    valori:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    aboveh:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    morveh:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    desveh:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    estveh:
+      type: VARCHAR
+      size: 1
+    funrec:
+      type: VARCHAR
+      size: 40
+    obsveh:
+      type: VARCHAR
+      size: 200
+    rifrep:
+      type: VARCHAR
+      size: 14
+    modveh:
+      type: VARCHAR
+      size: 20
+      required: true
+    fecrec:
+      type: DATE
+    dueant:
+      type: VARCHAR
+      size: 50
+    dirant:
+      type: VARCHAR
+      size: 50
+    plaant:
+      type: VARCHAR
+      size: 8
+    estdec:
+      type: VARCHAR
+      size: 1
+      required: true
+    nomcon:
+      type: VARCHAR
+      size: 50
+    dircon:
+      type: VARCHAR
+      size: 50
+    clacon:
+      type: VARCHAR
+      size: 12
+    capveh:
+      type: NUMERIC
+    pesveh:
+      type: NUMERIC
+    tipveh:
+      type: NUMERIC
+    fecact:
+      type: DATE
+    marcod:
+      type: VARCHAR
+      size: 30
     id:
       type: INTEGER
       required: true

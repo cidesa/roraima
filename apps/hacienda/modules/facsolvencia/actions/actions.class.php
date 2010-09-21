@@ -3,171 +3,213 @@
 /**
  * facsolvencia actions.
  *
- * @package    Roraima
+ * @package    siga
  * @subpackage facsolvencia
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
- * @copyright  Copyright 2007, Cide S.A.
- * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
+ * @author     $Auhor$ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id: actions.class.php 32371 2009-09-01 16:06:59Z lhernandez $
+ * @copyright  Copyright 2007, Cidesa C.A.
  */
+
 class facsolvenciaActions extends autofacsolvenciaActions
 {
-  
-  /**
-   * Función principal para el manejo de las acciones create y edit
-   * del formulario.
-   *
-   */
-  public function executeEdit()
+
+  // Para incluir funcionalidades al executeEdit()
+  public function editing()
   {
-    $this->fcsolvencia = $this->getFcsolvenciaOrCreate();
-    $sta = $this->fcsolvencia->getStasol();
-
-    if($sta=='A') $this->status = 'Estado:  Anulada';
-    else {
-      $fecha = getdate();
-      $f = date($fecha[0]);
-      if(Herramientas::dateDiff('d',$this->fcsolvencia->getFecven(),$f)<0) $this->status = 'Estado:  Vigente';
-      else $this->status = 'Estado:  Vencida';
-    } 
-
-    if ($this->getRequest()->getMethod() == sfRequest::POST)
-    {
-      $this->updateFcsolvenciaFromRequest();
-
-      $this->saveFcsolvencia($this->fcsolvencia);
-
-      $this->setFlash('notice', 'Your modifications have been saved');
-$this->Bitacora('Guardo');
-
-      if ($this->getRequestParameter('save_and_add'))
-      {
-        return $this->redirect('facsolvencia/create');
-      }
-      else if ($this->getRequestParameter('save_and_list'))
-      {
-        return $this->redirect('facsolvencia/list');
-      }
-      else
-      {
-        return $this->redirect('facsolvencia/edit?id='.$this->fcsolvencia->getId());
-      }
-    }
-    else
-    {
-      $this->labels = $this->getLabels();
-    }
+  	$this->setVars();
+        $this->configGridGeneral($this->fcsolvencia->getCodsol());
   }
-  
-  /**
-   * Actualiza la informacion que viene de la vista 
-   * luego de un get/post en el objeto principal del modelo base del formulario.
-   *
-   */
-  protected function updateFcsolvenciaFromRequest()
+
+  public function setVars()
   {
-    $fcsolvencia = $this->getRequestParameter('fcsolvencia');
-
-    if (isset($fcsolvencia['codsol']))
-    {
-      $this->fcsolvencia->setCodsol($fcsolvencia['codsol']);
-    }
-    if (isset($fcsolvencia['fecexp']))
-    {
-      if ($fcsolvencia['fecexp'])
-      {
-        try
-        {
-          $dateFormat = new sfDateFormat($this->getUser()->getCulture());
-                              if (!is_array($fcsolvencia['fecexp']))
-          {
-            $value = $dateFormat->format($fcsolvencia['fecexp'], 'i', $dateFormat->getInputPattern('d'));
-          }
-          else
-          {
-            $value_array = $fcsolvencia['fecexp'];
-            $value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-          }
-          $this->fcsolvencia->setFecexp($value);
-        }
-        catch (sfException $e)
-        {
-          // not a date
-        }
-      }
-      else
-      {
-        $this->fcsolvencia->setFecexp(null);
-      }
-    }
-    if (isset($fcsolvencia['codtip']))
-    {
-    $this->fcsolvencia->setCodtip($fcsolvencia['codtip'] ? $fcsolvencia['codtip'] : null);
-    }
-    if (isset($fcsolvencia['rifcon']))
-    {
-      $this->fcsolvencia->setRifcon($fcsolvencia['rifcon']);
-    }
-    if (isset($fcsolvencia['numlic']))
-    {
-      $this->fcsolvencia->setNumlic($fcsolvencia['numlic']);
-    }
-    if (isset($fcsolvencia['codcat']))
-    {
-      $this->fcsolvencia->setCodcat($fcsolvencia['codcat']);
-    }
-    if (isset($fcsolvencia['nomcon']))
-    {
-      $this->fcsolvencia->setNomcon($fcsolvencia['nomcon']);
-    }
-    if (isset($fcsolvencia['dircon']))
-    {
-      $this->fcsolvencia->setDircon($fcsolvencia['dircon']);
-    }
-    if (isset($fcsolvencia['motivo']))
-    {
-      $this->fcsolvencia->setMotivo($fcsolvencia['motivo']);
-    }
-    if (isset($fcsolvencia['stasol']))
-    {
-      $this->fcsolvencia->setStasol('V');
-    }
+    //$this->params[0] = Herramientas::getX('codemp','fcdefins','forveh','001');
+    $this->fcsolvencia->setFunrec($this->fcsolvencia->getFunrec()=='' ? $this->getUser()->getAttribute('loguse') : $this->fcsolvencia->getFunrec());
   }
-  
+
+
+  public function configGridGeneral($codigo='', $codrif='') {
+
+	if ($codigo != '')
+	{
+            $c = new Criteria();
+            $c->add(Fcsoldet2Peer::CODSOL, $codigo);
+            $reg = Fcsoldet2Peer::doSelect($c);
+
+            if ($reg){
+                $grid = Herramientas::getConfigGrid('grid_general',$reg);
+            }else{
+                $per = array();
+                $grid = Herramientas::getConfigGrid('grid_general',$per);
+            }
+	}else{
+            if ($codrif != ''){
+                $c = new Criteria();
+                $c->addJoin(FcdeclarPeer::FUEING, FcfueprePeer::CODFUE);
+                $c->add(FcdeclarPeer::RIFCON, $codrif);
+                $c->addAscendingOrderByColumn(FcfueprePeer::CODFUE);
+                $c->addAscendingOrderByColumn(FcdeclarPeer::NUMREF);
+                $c->addAscendingOrderByColumn(FcdeclarPeer::FECVEN);
+
+                $per = FcdeclarPeer::doSelect($c);
+
+                if ($per){
+                    $grid = Herramientas::getConfigGrid('grid_general',$per);
+                }else{
+                    $per = array();
+                    $grid = Herramientas::getConfigGrid('grid_general',$per);
+                }
+             }else{
+                $per = array();
+                $grid = Herramientas::getConfigGrid('grid_general',$per);
+             }
+
+        }
+        
+        $this->grid = $grid;
+	$this->fcsolvencia->setGrid($this->grid);
+    }
+
+  public function configGridResumen($codigo='') {
+
+	if ($codigo != '')
+	{
+		$c = new Criteria();
+		$c->addJoin(FcdeclarPeer::FUEING, FcfueprePeer::CODFUE);
+		$c->add(FcdeclarPeer::RIFCON, $codigo."%", Criteria::LIKE);
+		$c->addAscendingOrderByColumn(FcfueprePeer::CODFUE);
+		$c->addAscendingOrderByColumn(FcdeclarPeer::NUMREF);
+		$c->addAscendingOrderByColumn(FcdeclarPeer::FECVEN);
+
+		$per = FcdeclarPeer :: doSelect($c);
+
+                if ($per){
+                    $grid = Herramientas::getConfigGrid('grid_resumen',$per);
+                }else{
+                    $per = array();
+                    $grid = Herramientas::getConfigGrid('grid_resumen',$per);
+                }
+	}else{
+            $per = array();
+	     $grid = Herramientas::getConfigGrid('grid_ge',$per);
+        }
+        $this->grid = $grid;
+	$this->fcsolvencia->setGrid($this->grid);
+    }
+
+  public function executeAjax()
+  {
+
+    $codigo = $this->getRequestParameter('codigo','');
+    $javascript = "";
+    $ajax   = $this->getRequestParameter('ajax','');
+    $cajtexmos = $this->getRequestParameter('cajtexmos','');
+
+
+    switch ($ajax){
+      case '2':
+                $c = new Criteria();
+                $c->add(FcconrepPeer::RIFCON, $codigo);
+                $reg = FcconrepPeer::doSelectOne($c);
+
+                if ($reg){
+                    $nomcon = $reg->getNomcon();
+                    $dircon = $reg->getDircon();
+                    $javascript = "$('fcsolvencia_rifcon').value = '$codigo'; $('fcsolvencia_nomcon').value = '$nomcon'; $('fcsolvencia_dircon').value = '$dircon';";
+                }else{
+                    $javascript = "$('fcsolvencia_rifcon').value = ''; $('fcsolvencia_nomcon').value = ''; $('fcsolvencia_dircon').value = '';";
+                }
+
+                $this->params=array();
+                $this->fcsolvencia = $this->getFcsolvenciaOrCreate();
+		$this->updateFcsolvenciaFromRequest();
+		//$this->setVars();
+		$this->configGridGeneral('', $codigo);
+
+		$output = '[["javascript","'.$javascript.'",""]]';
+                $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+                //return sfView::HEADER_ONLY;
+        break;
+      default:
+        $output = '[["","",""],["","",""],["","",""]]';
+    }
+
+    // Instruccion para escribir en la cabecera los datos a enviar a la vista
+   //// $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+
+    // Si solo se va usar ajax para actualziar datos en objetos ya existentes se debe
+    // mantener habilitar esta instrucción
+//    return sfView::HEADER_ONLY;
+
+    // Si por el contrario se quiere reemplazar un div en la vista, se debe deshabilitar
+    // por supuesto tomando en cuenta que debe existir el archivo ajaxSuccess.php en la carpeta templates.
+
+  }
+
+
   /**
-   * Función para manejar la captura de errores del negocio, tanto que se
-   * produzcan por algún validator y por un valor false retornado por el validateEdit
+   *
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
-  public function handleErrorEdit()
+  public function validateEdit()
   {
-    $this->preExecute();
-    $this->fcsolvencia = $this->getFcsolvenciaOrCreate();
-    $this->updateFcsolvenciaFromRequest();
+    $this->coderr =-1;
 
-    $this->labels = $this->getLabels();
+    // Se deben llamar a las funciones necesarias para cargar los
+    // datos de la vista que serán usados en las funciones de validación.
+    // Por ejemplo:
 
-    return sfView::SUCCESS;
+    if($this->getRequest()->getMethod() == sfRequest::POST){
+
+      // $this->configGrid();
+      // $grid = Herramientas::CargarDatosGrid($this,$this->obj);
+
+      // Aqui van los llamados a los métodos de las clases del
+      // negocio para validar los datos.
+      // Los resultados de cada llamado deben ser analizados por ejemplo:
+
+      // $resp = Compras::validarAlmajuoc($this->caajuoc,$grid);
+
+       //$resp=Herramientas::ValidarCodigo($valor,$this->tstipmov,$campo);
+
+      // al final $resp es analizada en base al código que retorna
+      // Todas las funciones de validación y procesos del negocio
+      // deben retornar códigos >= -1. Estos código serám buscados en
+      // el archivo errors.yml en la función handleErrorEdit()
+
+      if($this->coderr!=-1){
+        return false;
+      } else return true;
+
+    }else return true;
+
+
+
   }
-  
+
   /**
-   * Función para manejar el salvado del formulario.
-   * cabe destacar que en las versiones nuevas del formulario (cidesaPropel)
-   * llama internamente a la función $this->saving
-   * Esta función saving siempre debe retornar un valor >=-1.
-   * En esta funcción se debe realizar el proceso de guardado de informacion
-   * del negocio en la base de datos. Este proceso debe ser realizado llamado
-   * a funciones de las clases del negocio que se encuentran en lib/bussines
-   * todos los procesos de guardado deben estar en la clases del negocio (lib/bussines/"modulo")
+   * Función para actualziar el grid en el post si ocurre un error
+   * Se pueden colocar aqui los grids adicionales
    *
    */
-  protected function saveFcsolvencia($fcsolvencia)
+  public function updateError()
   {
-    $fcsolvencia->save();
-
+  	$this->setVars();
+    $this->configGridGeneral();
   }
-  
-  
+
+  public function saving($fcsolvencia)
+  {
+    $grid = Herramientas::CargarDatosGridv2($this, $this->grid, true);
+    return Hacienda::salvarFacsolvencia($fcsolvencia, $grid, $this->getUser()->getAttribute('loguse'));
+  }
+
+  public function deleting($fcsolvencia)
+  {
+    return Hacienda::eliminarSolvencia($fcsolvencia);
+  }
+
+
 }

@@ -7,7 +7,7 @@
  * @subpackage Facdatcon
  * @author     $Author$ <desarrollo@cidesa.com.ve>
  * @version SVN: $Id$
- * 
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -16,7 +16,7 @@ class FacdatconActions extends autoFacdatconActions
 
   // Para incluir funcionalidades al executeEdit()
   /**
-   * Función para colocar el codigo necesario en  
+   * Función para colocar el codigo necesario en
    * el proceso de edición.
    * Aquí se pueden buscar datos adicionales que necesite la vista
    * Esta función es parte de la acción executeEdit, que maneja tanto
@@ -32,9 +32,9 @@ class FacdatconActions extends autoFacdatconActions
 
 
   /**
-   * Función para colocar el codigo necesario para 
+   * Función para colocar el codigo necesario para
    * el proceso de eliminar.
-   * Esta función debe retornar un valor igual a -1 si no hubo 
+   * Esta función debe retornar un valor igual a -1 si no hubo
    * Inconvenientes al guardar, y != de -1 si existe algún error.
    * Si es diferente de -1 el valor devuelto debe ser un código de error
    * Válido que exista en el archivo config/errores.yml
@@ -113,9 +113,9 @@ class FacdatconActions extends autoFacdatconActions
   }
 
 
-  
-  
-  
+
+
+
   /**
    *
    * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
@@ -171,9 +171,9 @@ class FacdatconActions extends autoFacdatconActions
   }
 
   /**
-   * Función para colocar el codigo necesario para 
+   * Función para colocar el codigo necesario para
    * el proceso de guardar.
-   * Esta función debe retornar un valor igual a -1 si no hubo 
+   * Esta función debe retornar un valor igual a -1 si no hubo
    * Inconvenientes al guardar, y != de -1 si existe algún error.
    * Si es diferente de -1 el valor devuelto debe ser un código de error
    * Válido que exista en el archivo config/errores.yml
@@ -181,14 +181,17 @@ class FacdatconActions extends autoFacdatconActions
    */
   public function saving($fcconrep)
   {
-    $fcconrep->save();
+
     $grid = Herramientas::CargarDatosGridv2($this,$this->grid);
-    Hacienda::salvar_grid_Facdatcon($fcconrep, $grid);
+    if (Hacienda::salvar_grid_Facdatcon($fcconrep, $grid) == -1 )  $fcconrep->save();
+    else   return 0;
+
+
     return -1;
   }
 
  /**
-   * Actualiza la informacion que viene de la vista 
+   * Actualiza la informacion que viene de la vista
    * luego de un get/post en el objeto principal del modelo base del formulario.
    *
    */

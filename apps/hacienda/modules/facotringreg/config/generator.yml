@@ -1,44 +1,110 @@
 generator:
-  class:              sfPropelAdminGenerator
+  class:              cidesaPropelAdminGenerator
   param:
     model_class:      Fcotring
-    theme:            default
+    theme:            cidesaGenerator
     fields:
-      nrocon: { name: Número de Control}
-      codfue: { name: Fuente}
-      fecreg: { name: Fecha del Registro}
-      rifcon: { name: C.I. / RIF}
-      nomcon: { name: Nombre, params: disabled=true}
-      dircon: { name: Dirección, params: disabled=true}
-      naccon: { name: Nacionalidad}
-      tipcon: { name: Tipo}
-      rifrep: { name: C.I. / RIF}
-      nomconr: { name: Nombre}
-      dirconr: { name: Dirección}
-      nacconr: { name: Nacionalidad}
-      tipconr: { name: Tipo}
-      desing: { name: Descripción}
-      monimp: { name: Monto del Impuesto a Pagar}
-      funrec: { name: Funcionario Receptor}
-      fecrec: { name: Fecha}      
-      staapu: { name: Estatusapu}
-      stadec: { name: Estatusdec}      
-      monsal: { name: Monto}
-        
+      nrocon:  { name: Número, params: size=10 maxlength=10 }
+      fecreg:  { name: Fecha de Registro, params: date_format='dd/MM/yyyy' size=10 }
+      rifcon:  { name: C.I. / RIF., params: size=20 maxlength=20 }
+      nomcon:  { name: Nombre, params: size=60 maxlength=255 }
+      dircon:  { name: Dirección, params: size=80 maxlength=255 }
+      nacconcon:  { name: Nacionalidad,  params: size=80 maxlength=255 readonly=false }
+      tipconcon:  { name: Tipo de Persona, params: size=80 maxlength=255 readonly=false }
+      rifrep:  { name: C.I. / RIF. Representante, params: size=22 maxlength=20 }
+      nomconrep:  { name: Nombre, params: size=80 maxlength=255 readonly=false }
+      dirconrep:  { name: Dirección, params: size=80 maxlength=255 readonly=false disabled=false }
+      nacconrep:  { name: Nacionalidad,  params: size=80 maxlength=255 readonly=false }
+      tipconrep:  { name: Tipo de Persona,  params: size=80 maxlength=255 readonly=false }
+      funrec:  { name: Funcionario Receptor, params: size=40 maxlength=60 readonly=true}
+      fecrec:  { name: Fecha de Recepción, params: date_format='dd/MM/yyyy'   size=10 }
+      griddistribucion:  { name: . }
+      direccion:  { name: Direccion, params: size=50  }
+      doctos:  { name: Tipo de Documentos  }
+      numref:  { name: Referencia, params: size=10  maxlength=10 }
+      desing:  { name: Descripcion , type: textarea_tag, params: maxlength=200 cols=58 row=2 }
+      monimp:  { name: Monto del Impuesto a Pagar, params: size=10   }
+      totmondec:  { name: Total, params: size=10  readonly=true }
+      estatus:    { name: . }
+      codfue:    { name: Fuente de Ingresos }
+
+      nomneg:  { name: Nombre del Negocio, params: size=40 maxlength=120 }
+      dirpri:  { name: Dirección Principal, params: size=80 maxlength=255 }
+      tipinm:  { name: Tipo de Inmueble, params: size=3 maxlength=1 }
+      catcon:  { name: Catastro,  params: size=35 maxlength=30 }
+      nomcatrasto:  { name: Nombre Catastro: size=32 maxlength=30 }
+      tipest:  { name: Establecimiento, params: size=3 maxlength=1 }
+      codrut:  { name: Código de Ruta, params: size=8 maxlength=6 }
+      nomruta:  { name: Nombre Ruta}
+      disbar:  { name: Bar (mts.), params: size=12 maxlength=10 }
+      disins:  { name: Inst. Educacional (mts.), params: size=12 maxlength=10 }
+      discli:  { name: Clinica - Hospital (mts.), params: size=12 maxlength=10 }
+      disfun:  { name: Funeraria (mts.), params: size=12 maxlength=10 }
+      disdis:  { name: Dispensario (mts.), params: size=12 maxlength=10 }
+      disest:  { name: Est. de Servicio (mts.), params: size=12 maxlength=10 }
+      horini:  { name: Hora de Inicio, params: date_format='dd/MM/yyyy'  size=10 }
+      horcie:  { name: Hora de Terminación, params: date_format='dd/MM/yyyy'  size=10}
+      fecini:  { name: Fecha de Inicio, params: date_format='dd/MM/yyyy'   size=10}
+      fecfin:  { name: Fecha de Cierre, params: date_format='dd/MM/yyyy'   size=10}
+      capsoc:  { name: Capital Social, params: size=17 maxlength=15 }
+      refmod:  { name: Referencia, params: size=17 maxlength=15 }
+      fecmod:  { name: Fecha, params: date_format='dd/MM/yyyy'  size=10 }
+      motmod:  { name: Motivo de la Modificación, params: size=45 maxlength=15 }
+      idlic:  { name: Referencia, params: size=14 maxlength=12  readonly=true disabled=false }
+      fechlic:  { name: Fecha, type: input_date_tag, params: date_format='dd/MM/yyyy'  size=10 }
+      comnlic:  { name: Motivo de la Modificación,  params: size=35 maxlength=30 readonly=false disabled=false }
+      numneg:  { name: Número Negación, params: size=40 maxlength=10 readonly=true disabled=false }
+      funneg:  { name: Funcionario, params: size=20 maxlength=15 readonly=true disabled=false }
+      tomon:  { name: Tomo, params: size=10 maxlength=8 readonly=false disabled=false }
+      numeron:  { name: Número Documento, params: size=10 maxlength=8 readonly=false disabled=false }
+      folion:  { name: Folio, params: size=10 maxlength=8 readonly=false disabled=false }
+      resolu:  { name: Resolución, params: size=20 maxlength=10 readonly=false disabled=false }
+      motneg:  { name: Motivo de la Negación, params: size=40 maxlength=210 readonly=false disabled=false }
+      fecneg:  { name: Fecha, type: input_date_tag, params: date_format='dd/MM/yyyy' size=10 readonly=false disabled=false }
+      licnegada:  { name: licencianegada, params: size=1 maxlength=1 }
+      licmodificada:  { name: licmodificada, params: size=1 maxlength=1 }
+      grid:  { name: . , params: size=17 maxlength=15 }
+      autorizacion:  { name: . }
+      negacion:  { name: . }
+      imprimir:  { name: . }
     list:
-      title:          Otros Ingresos  
-      filters:        [nrocon]
-      display:        [=nrocon, codfue, fecreg]
+      title:     Otros Ingresos
+      display:   [ =nrocon, =rifcon, nomcon]
+      sort:      nomcon
+      filters:   [nrocon, rifcon, fecreg, nomcon]
       fields:
-        fecreg: { params: date_format='dd/MM/yy' }
-        fecrec: { params: date_format='dd/MM/yy' }           
+        nrocon:
+          params: size=10
+        nomcon:
+          params: size=10
+        feccon:
+          params: size=10
+        rifcon:
+          params: size=10
+
+      max_per_page: 5
       object_actions:
-        _edit:        ~     
-        _delete:      ~ 
-      max_per_page:   5    
+        _edit:        ~
+        _delete:      ~
+      sort:  nrocon
     edit:
-      title:          Registro de Otros Ingresos
-      display:       [=nrocon, codfue, fecreg, rifcon, nomcon, dircon, naccon, tipcon, rifrep, nomconr, dirconr, nacconr, tipconr, desing, monimp, funrec, fecrec, staapu, stadec, monsal]
+      title:          Edición Otros Ingresos
+      display:
+       # "Autorización de Modificacion":  [ _autorizacion ]
+       # "Operaciones con Licencias":  [ _negacion ]
+        "NONE":  [ _nrocon, fecreg, _codfue, _estatus ]
+        "Datos Contribuyentes":  [ _rifcon, dircon, _nacconcon, _tipconcon ]
+        "Datos del Representante Legal":  [ _rifrep, dirconrep, _nacconrep, _tipconrep ]
+        "Datos del Registro":  [ desing, monimp ]
+        "Datos de Recepción":  [ _doctos, _numref ]
+        "Recepción ":  [ funrec, fecrec ]
+        "Distribucion de la Deuda":  [  _griddistribucion, totmondec ]
+        #NONE:  [ _imprimir ]
       fields:
-        fecreg: { params: date_format='dd/MM/yy' }
-        fecrec: { params: date_format='dd/MM/yy' }        
+        fechlic: { type: input_date_tag, params: date_format='dd/MM/yy' }
+      hide: [ licnegada, licmodificada ]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

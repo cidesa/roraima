@@ -1,17 +1,11 @@
 methods:
   post:
-   - "fcconrep{cedcon}"
    - "fcconrep{rifcon}"
    - "fcconrep{nomcon}"
    - "fcconrep{dircon}"
    - "fcconrep{telcon}"
 
 names:
-  fcconrep{cedcon}:
-    required:  Yes
-    required_msg: Código es un campo requerido
-    validators: Validator_cedcon
-
   fcconrep{rifcon}:
     required:  Yes
     required_msg: Código es un campo requerido
@@ -28,13 +22,6 @@ names:
   fcconrep{telcon}:
     required:  Yes
     required_msg: Teléfono es un campo requerido
-
-Validator_cedcon:
-    class: sfPropelUniqueValidator
-    param:
-        class:        Fcconrep
-        column:       cedcon
-        unique_error: El registro ya Existe intente con otro.
 
 Validator_rifcon:
     class: sfPropelUniqueValidator

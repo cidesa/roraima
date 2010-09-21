@@ -4,7 +4,7 @@
 $masc=$fcreginm->getMascara();
 $lenmasc=strlen($fcreginm->getMascara());
 $value = object_input_tag($fcreginm, 'getCodcatinm', array (
-  'size' => $lenmasc+2,
+  'size' => $lenmasc,
   'maxlength' => $lenmasc,
   'control_name' => 'fcreginm[codcatinm]',
   'onKeyDown' => "javascript:return dFilter (event.keyCode, this,'$masc')",

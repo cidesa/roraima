@@ -1,6 +1,7 @@
 <?php if ($fcsollic->getId()!='')
 {
-	$bandera='';
+	$bandera="";
+
 	if ($fcsollic->getStasol()=='A')
 	{
 		$bandera="style=\"display:none;\"";
@@ -18,60 +19,69 @@
 <table>
 <tr>
     <th>
+    <ul  class="sf_admin_actions" >
     <?php echo submit_to_remote('Submit2', 'Reactivar', array(
          'url'      => 'facpiclic/ajax',
          'script'   => true,
          'complete' => 'AjaxJSON(request, json)',
          'with' => "'ajax=6&numero='+this.value"
-         ));?>
+         ), array('class' => 'sf_admin_action_create'));?>
+     </ul>
     </th>
     <th>
       &nbsp;
     </th>
     <th>
+    <ul  class="sf_admin_actions" >
     <?php echo submit_to_remote('Submit2', 'Renovar', array(
          'url'      => 'facpiclic/ajax',
          'script'   => true,
          'complete' => 'AjaxJSON(request, json)',
          'with' => "'ajax=7&numero='+this.value"
-         ));?>
+         ), array('class' => 'sf_admin_action_save_and_add'));?>
+    </ul>
     </th>
     <th>
       &nbsp;
     </th>
     <th>
+    <ul  class="sf_admin_actions" >
     <?php echo submit_to_remote('Submit2', 'Suspender', array(
          'url'      => 'facpiclic/ajax',
          'script'   => true,
          'complete' => 'AjaxJSON(request, json)',
          'with' => "'ajax=8&numero='+this.value"
-         ));?>
+         ), array('class' => 'sf_admin_action_delete'));?>
+	</ul>
     </th>
     <th>
       &nbsp;
     </th>
     <th>
+    <ul  class="sf_admin_actions" >
     <?php echo submit_to_remote('Submit2', 'Cancelar', array(
          'url'      => 'facpiclic/ajax',
          'script'   => true,
          'complete' => 'AjaxJSON(request, json)',
          'with' => "'ajax=9&numero='+this.value"
-         ));?>
+         ), array('class' => 'sf_admin_action_cancel'));?>
+	</ul>
     </th>
     <th>
       &nbsp;
     </th>
 </tr>
 </table>
-<br>
+
 <div id="reactivar" style="color:#009E00; font-weight:bolder; display:none;"><strong>Reactivar Licencia</strong></div>
-<div id="renovar" style="color:#0090FE; font-weight:bolder; display:none;"><strong>Renovar Licencia</strong></div>
-<div id="suspender" style="color:#FF8C1E; font-weight:bolder; display:none;"><strong>Suspender Licencia</strong></div>
-<div id="cancelar" style="color:#E06C6C; font-weight:bolder; display:none;"><strong>Cancelar Licencia</strong></div>
+<div id="renovar" style="color:#0090FE; font-weight:bolder; display:none;"><strong>Renovacion Licencia</strong></div>
+<div id="suspender" style="color:#FF8C1E; font-weight:bolder; display:none;"><strong>Datos para Suspender Licencia</strong></div>
+<div id="cancelar" style="color:#E06C6C; font-weight:bolder; display:none;"><strong>Datos de la Cancelacion de la Licencia</strong></div>
 </div>
 
-<br><br>
+
 <div id="suspencion" <?php echo $bandera; ?>">
+<br><br><br>
 <div id="divnumsus">
   <?php echo label_for('fcsollic[numsus]', __('Numero'), 'class="required" Style="text-align:left; width:50px"') ?>
   <div class="content<?php if ($sf_request->hasError('fcsollic{numsus}')): ?> form-error<?php endif; ?>">
@@ -114,8 +124,6 @@
   </div>
 </div>
 <br>
-
-
 
 
 <div id="divmotsus">
@@ -201,7 +209,7 @@
 </table>
 
 </div>
-<br>
+
 
 <?php }
 ?>

@@ -1,392 +1,323 @@
 <?php
 
+
 /**
  * facrecpag actions.
  *
- * @package    Roraima
+ * @package    siga
  * @subpackage facrecpag
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
- * @copyright  Copyright 2007, Cide S.A.
- * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
+ * @author     $Auhor$ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id: actions.class.php 32371 2009-09-01 16:06:59Z lhernandez $
+ * @copyright  Copyright 2007, Cidesa C.A.
  */
-class facrecpagActions extends autofacrecpagActions
-{
- /**
-   * Actualiza la informacion que viene de la vista 
-   * luego de un get/post en el objeto principal del modelo base del formulario.
-   *
-   */
-  protected function updateFcpagosFromRequest()
-  {
-    $this->configGrid();
-    $this->configGrid2();
-    $this->configGrid3();
-    
-  	$fcpagos = $this->getRequestParameter('fcpagos');
 
-    if (isset($fcpagos['numpag']))
-    {
-      $this->fcpagos->setNumpag($fcpagos['numpag']);
-    }
-    if (isset($fcpagos['fecpag']))
-    {
-      if ($fcpagos['fecpag'])
-      {
-        try
-        {
-          $dateFormat = new sfDateFormat($this->getUser()->getCulture());
-                              if (!is_array($fcpagos['fecpag']))
-          {
-            $value = $dateFormat->format($fcpagos['fecpag'], 'i', $dateFormat->getInputPattern('d'));
-          }
-          else
-          {
-            $value_array = $fcpagos['fecpag'];
-            $value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-          }
-          $this->fcpagos->setFecpag($value);
-        }
-        catch (sfException $e)
-        {
-          // not a date
-        }
-      }
-      else
-      {
-        $this->fcpagos->setFecpag(null);
-      }
-    }
-    if (isset($fcpagos['rifcon']))
-    {
-      $this->fcpagos->setRifcon($fcpagos['rifcon']);
-    }
-    if (isset($fcpagos['despag']))
-    {
-      $this->fcpagos->setDespag($fcpagos['despag']);
-    }
-    if (isset($fcpagos['monpag']))
-    {
-      $this->fcpagos->setMonpag($fcpagos['monpag']);
-    }
-    if (isset($fcpagos['nomcon']))
-    {
-      $this->fcpagos->setNomcon($fcpagos['nomcon']);
-    }
-    if (isset($fcpagos['dircon']))
-    {
-      $this->fcpagos->setDircon($fcpagos['dircon']);
-    }
-    if (isset($fcpagos['naccon']))
-    {
-      $this->fcpagos->setNaccon($fcpagos['naccon']);
-    }
-    if (isset($fcpagos['tipcon']))
-    {
-      $this->fcpagos->setTipcon($fcpagos['tipcon']);
-    }
-    if (isset($fcpagos['funpag']))
-    {
-      $this->fcpagos->setFunpag($fcpagos['funpag']);
-    }    
-  }
-  
-  /**
-   * Función principal para el manejo de las acciones create y edit
-   * del formulario.
-   *
-   */
-  public function executeEdit()
-  {
-    $this->fcpagos = $this->getFcpagosOrCreate();
-    $this->configGrid();
-    $this->configGrid2();
-    $this->configGrid3();
+class facrecpagActions extends autofacrecpagActions {
+	public function setVars() {
+		$this->params = '';
+		$this->params[0] = Herramientas :: getX_vacio('codemp', 'fcdefins', 'codpic', '001');
+	}
 
-    if ($this->getRequest()->getMethod() == sfRequest::POST)
-    {
-      $this->updateFcpagosFromRequest();
+	// Para incluir funcionalidades al executeEdit()
+	public function editing() {
+		$this->configGrid_detalles();
+		$this->configGrid_formpag();
+		$this->configGrid_recargdescto();
+	}
 
-      $this->saveFcpagos($this->fcpagos);
+	public function configGrid_recargdescto($reg = array (), $regelim = array ()) {
+		$c = new Criteria();
+		$c->add(FcrecdespagPeer :: NUMPAG, $this->fcpagos->getNumpag());
+		$per = FcrecdespagPeer :: doSelect($c);
 
-      $this->setFlash('notice', 'Your modifications have been saved');
-$this->Bitacora('Guardo');
+		$this->columnas = Herramientas :: getConfigGrid(sfConfig :: get('sf_app_module_dir') . '/facrecpag/' . sfConfig :: get('sf_app_module_config_dir_name') . '/grid_recargdescto');
 
-      if ($this->getRequestParameter('save_and_add'))
-      {
-        return $this->redirect('facrecpag/create');
-      }
-      else if ($this->getRequestParameter('save_and_list'))
-      {
-        return $this->redirect('facrecpag/list');
-      }
-      else
-      {
-        return $this->redirect('facrecpag/edit?id='.$this->fcpagos->getId());
-      }
-    }
-    else
-    {
-      $this->labels = $this->getLabels();
-    }
-  }
-  
-  /**
-   * Esta función permite definir la configuración del grid de datos
-   * que contiene el formulario. Esta función debe ser llamada
-   * en las acciones, create, edit y handleError para recargar en todo momento
-   * los datos del grid.
-   *
-   */
-  public function configGrid()
-	 {
-	   
-				//////////////////////
-				//GRID
-				//$c = new Criteria();
-				//$c->add(CaartalmPeer::CODART,str_pad($this->caregart->getCodart(),20,' '));
-				$per = array();//CaartalmPeer::doSelect($c);
-				
-	$opciones = new OpcionesGrid();
-	// Se configuran las opciones globales del Grid 
-	$opciones->setEliminar(false);
-	$opciones->setTabla('Fcdeclar');
-	$opciones->setAnchoGrid(1150);
-	$opciones->setTitulo('');
-	$opciones->setHTMLTotalFilas(' ');
-	// Se generan las columnas
-	$col1 = new Columna('Pagar');
-	$col1->setTipo(Columna::TEXTO);
-	$col1->setEsGrabable(true);
-	$col1->setNombreCampo('edodec');
-	$col1->setAlineacionObjeto(Columna::CENTRO);
-	$col1->setAlineacionContenido(Columna::CENTRO);	
-	$col1->setHTML('type="text" size="5" disabled=true');
-	
-	$col2 = new Columna('Nro'); 
-	$col2->setTipo(Columna::TEXTO);	
-	$col2->setAlineacionObjeto(Columna::CENTRO);
-	$col2->setAlineacionContenido(Columna::CENTRO);	
-	$col2->setNombreCampo('numero');
-	$col2->setHTML('type="text" size="5" disabled=true');
-	
-	$col3 = new Columna('Concepto');
-	$col3->setTipo(Columna::TEXTO);
-	$col3->setAlineacionObjeto(Columna::IZQUIERDA);
-	$col3->setAlineacionContenido(Columna::IZQUIERDA);
-	$col2->setNombreCampo('fecing');	
-	$col3->setHTML('type="text" size="25" disabled=true');
-	
-	$col4 = clone $col2; 
-	$col4->setTitulo('Nro. Declaración');
-	$col4->setNombreCampo('numdec');
-	
-	$col5 = clone $col3;
-	$col5->setTitulo('Referencia');
-	$col5->setNombreCampo('numref');
-	
-	$col6 = clone $col2;
-	$col6->setTitulo('Nombre');
-	$col6->setNombreCampo('nombre');
-	
-	$col7 = clone $col2;
-	$col7->setTitulo('Vencimiento');
-	$col7->setNombreCampo('fecven');
-		
-	$col8 = clone $col2;
-	$col8->setTitulo('Frecuencia');
-	$col8->setNombreCampo('tipo');
-	
-	$col9 = new Columna('Monto de la Deuda (A)');
-	$col9->setTipo(Columna::MONTO);	
-	$col9->setAlineacionContenido(Columna::IZQUIERDA);
-	$col9->setAlineacionObjeto(Columna::IZQUIERDA);
-	$col9->setNombreCampo('mondec');
-	$col9->setEsNumerico(true);
-	$col9->setHTML('type="text" size="10" disabled=true');
+		$this->gridscto = $this->columnas[0]->getConfig($per);
 
-	$col10 = clone $col9;
-	$col10->setTitulo('Monto Auto-Liquidación');
-	$col10->setNombreCampo('autliq');
-	
-	$col11 = clone $col9;
-	$col11->setTitulo('Monto de Mora (C)');
-	$col11->setNombreCampo('mora');
-	
-	$col12 = clone $col9;
-	$col12->setTitulo('Descuento Pronto Pago (D)');
-	$col12->setNombreCampo('prontopg');
-	
-	$col13 = new Columna('Monto a Pagar (A+C-D)');	
-	$col13->setTipo(Columna::MONTO);	
-	$col13->setAlineacionContenido(Columna::IZQUIERDA);
-	$col13->setAlineacionObjeto(Columna::IZQUIERDA);
-	$col13->setEsNumerico(true);
-	$col13->setHTML('name="montopg" id="montopg" type="text" size="10" disabled=true');
-	
-	$col14 = clone $col13;
-	$col14->setTitulo('Monto Pagado Contribuyente (E)');	
-	$col14->setHTML('name="montopgc" id="montopgc" type="text" size="10"');
-	
-	$col15 = clone $col13;
-	$col15->setTitulo('Saldo (A+C-D)-E');	
-	$col15->setHTML('name="saldo" id="saldo" type="text" size="10" disabled=true');	
-	
-	// Se guardan las columnas en el objetos de opciones        
-	$opciones->addColumna($col1);
-	$opciones->addColumna($col2);
-	$opciones->addColumna($col3);
-	$opciones->addColumna($col4);
-	$opciones->addColumna($col5);
-	$opciones->addColumna($col6);
-	$opciones->addColumna($col7);
-	$opciones->addColumna($col8);
-	$opciones->addColumna($col9);
-	$opciones->addColumna($col10);
-	$opciones->addColumna($col11);
-	$opciones->addColumna($col12);
-	$opciones->addColumna($col13);
-	$opciones->addColumna($col14);
-	$opciones->addColumna($col15);
-	
-	// Ee genera el arreglo de opciones necesario para generar el grid
-	$this->obj = $opciones->getConfig($per);
-				
-			  
+		$this->fcpagos->setGrid_recargdescto($this->gridscto);
+
+	}
+
+	public function configGrid_detalles($reg = array (), $regelim = array ()) {
+		$c = new Criteria();
+		$c->add(FcdecpagPeer :: NUMPAG, $this->fcpagos->getNumpag());
+		$reg = FcdecpagPeer :: doSelect($c);
+
+		foreach ($reg as $per) {
+			$c = new Criteria();
+			$c->add(FcdeclarPeer :: RIFCON, $this->fcpagos->getRifcon());
+			$c->add(FcdeclarPeer :: NUMDEC, $per->getNumdec());
+			$c->add(FcdeclarPeer :: NUMREF, $per->getNumref());
+			$c->add(FcdeclarPeer :: FECVEN, $per->getFecven());
+			$c->add(FcdeclarPeer :: NUMERO, $per->getNumero());
+			$c->add(FcdeclarPeer :: FUEING, $per->getFueing());
+			$datos = FcdeclarPeer :: doSelectone($c);
+			if ($datos) {
+				$per->setFueing(Herramientas :: getX_vacio('codfue', 'fcfuepre', 'nomabr', $per->getFueing()));
+				$per->setNumdec($datos->getNumdec());
+				$per->setNumref($datos->getNumref());
+				$per->setNombre($datos->getNombre());
+				$per->setFecven($datos->getFecven());
+				$per->setTipo($datos->getTipo());
+				$per->setMondec($datos->getMondec());
+				$per->setAutliq(H :: FormatoMonto($datos->getAutliq()));
+				$per->setMora(H :: FormatoMonto($datos->getMora()));
+				$per->setProntopg(H :: FormatoMonto($datos->getProntopg()));
+				$per->setMontopag(H :: FormatoMonto($datos->getMondec() + $datos->getMora() - $datos->getProntopg()));
+				$per->setMontopagcon(H :: FormatoMonto($datos->getAutliq()));
+				$per->setSaldo(H :: FormatoMonto($datos->getMontopag() - $datos->getMontopagcon()));
+				if ($datos->getEdodec() == 'P') {
+					$per->setCheck('true');
+				}
+
+			} else {
+				$per->setCheck('true');
+				$per->setFueing(Herramientas :: getX_vacio('codfue', 'fcfuepre', 'nomabr', $per->getFueing()));
+				$per->setNombre('REGISTRO ELIMINADO EN OTROS INGRESOS');
+				$per->setTipo('PAG');
+				$per->setMondec($per->getMondec());
+				$per->setAutliq(H :: FormatoMonto($per->getMonpag()));
+				$per->setMora(H :: FormatoMonto('0'));
+				$per->setProntopg(H :: FormatoMonto('0'));
+				$per->setMontopag(H :: FormatoMonto($per->getMondec() + $per->getMora() - $per->getProntopg()));
+				$per->setMontopagcon(H :: FormatoMonto($per->getMontopag()));
+				$per->setSaldo(H :: FormatoMonto($per->getMontopag() - $per->getMontopagcon()));
 			}
+			#$per->setSaldo(H :: FormatoMonto($datos->getMontopag() - $datos->getMontopagcon()));
+		}
 
-   /**
-   * Esta función permite definir la configuración del grid de datos
-   * que contiene el formulario. Esta función debe ser llamada
-   * en las acciones, create, edit y handleError para recargar en todo momento
-   * los datos del grid.
-   *
-   */
-  public function configGrid2()
-	 {
-	   
-				//////////////////////
-				//GRID
-				//$c = new Criteria();
-				//$c->add(CaartalmPeer::CODART,str_pad($this->caregart->getCodart(),20,' '));
-				$per = array();//CaartalmPeer::doSelect($c);
-				
-	$opciones = new OpcionesGrid();
-	// Se configuran las opciones globales del Grid 
-	$opciones->setEliminar(false);
-	$opciones->setTabla('Fcdetcon');
-	$opciones->setAnchoGrid(500);
-	$opciones->setTitulo('');
-	$opciones->setHTMLTotalFilas(' ');
-	// Se generan las columnas
-	$col1 = new Columna('Tipo de Pago');
-	$col1->setTipo(Columna::TEXTO);
-	$col1->setEsGrabable(true);
-	$col1->setNombreCampo('fecven');
-	$col1->setAlineacionObjeto(Columna::IZQUIERDA);
-	$col1->setAlineacionContenido(Columna::IZQUIERDA);	
-	$col1->setHTML('type="text" size="5" value="Efectivo"');
-	
-	$col2 = new Columna('Número'); 
-	$col2->setTipo(Columna::MONTO);	
-	$col2->setAlineacionObjeto(Columna::IZQUIERDA);
-	$col2->setAlineacionContenido(Columna::IZQUIERDA);
-	$col2->setEsGrabable(true);	
-	$col2->setNombreCampo('numcuo');
-	$col2->setEsNumerico(true);
-	$col2->setHTML('type="text" size="5"');
+		$this->columnas = Herramientas :: getConfigGrid(sfConfig :: get('sf_app_module_dir') . '/facrecpag/' . sfConfig :: get('sf_app_module_config_dir_name') . '/grid_detalles');
 
-	
-	$col3 = new Columna('Monto');
-	$col3->setTipo(Columna::MONTO);	
-	$col3->setAlineacionContenido(Columna::IZQUIERDA);
-	$col3->setAlineacionObjeto(Columna::IZQUIERDA);
-	$col3->setEsGrabable(true);
-	$col3->setNombreCampo('moncuo');
-	$col3->setEsNumerico(true);
-	$col3->setHTML('type="text" size="10"');
+		$this->grid = $this->columnas[0]->getConfig($reg);
 
-	// Se guardan las columnas en el objetos de opciones        
-	$opciones->addColumna($col1);
-	$opciones->addColumna($col2);
-	$opciones->addColumna($col3);
+		$this->fcpagos->setGrid_detalles($this->grid);
 
-	
-	// Ee genera el arreglo de opciones necesario para generar el grid
-	$this->obj2 = $opciones->getConfig($per);
-				
-			  
-			}	
+	}
 
-   /**
-   * Esta función permite definir la configuración del grid de datos
-   * que contiene el formulario. Esta función debe ser llamada
-   * en las acciones, create, edit y handleError para recargar en todo momento
-   * los datos del grid.
-   *
-   */
-  public function configGrid3()
-	 {
-	   
-				//////////////////////
-				//GRID
-				//$c = new Criteria();
-				//$c->add(CaartalmPeer::CODART,str_pad($this->caregart->getCodart(),20,' '));
-				$per = array();//CaartalmPeer::doSelect($c);
-				
-	$opciones = new OpcionesGrid();
-	// Se configuran las opciones globales del Grid 
-	$opciones->setEliminar(false);
-	$opciones->setTabla('Fcdetconfue');
-	$opciones->setAnchoGrid(700);
-	$opciones->setTitulo('');
-	$opciones->setHTMLTotalFilas(' ');
-	// Se generan las columnas
-	$col1 = new Columna('Código');
-	$col1->setTipo(Columna::TEXTO);
-	$col1->setEsGrabable(true);
-	$col1->setNombreCampo('fecven');
-	$col1->setAlineacionObjeto(Columna::IZQUIERDA);
-	$col1->setAlineacionContenido(Columna::IZQUIERDA);	
-	$col1->setHTML('type="text" size="10"');
-	
-	$col2 = new Columna('Descripción'); 
-	$col2->setTipo(Columna::TEXTO);	
-	$col2->setAlineacionObjeto(Columna::IZQUIERDA);
-	$col2->setAlineacionContenido(Columna::IZQUIERDA);
-	$col2->setEsGrabable(true);	
-	$col2->setNombreCampo('fuente');
-	$col2->setHTML('type="text" size="25"');
-	
-	$col3 = new Columna('Tipo'); 
-	$col3->setTipo(Columna::TEXTO);	
-	$col3->setAlineacionObjeto(Columna::IZQUIERDA);
-	$col3->setAlineacionContenido(Columna::IZQUIERDA);
-	$col3->setEsGrabable(true);	
-	$col3->setNombreCampo('numcuo');
-	$col3->setHTML('type="text" size="10"');
-	
-	$col4 = new Columna('Monto');
-	$col4->setTipo(Columna::MONTO);	
-	$col4->setAlineacionContenido(Columna::IZQUIERDA);
-	$col4->setAlineacionObjeto(Columna::IZQUIERDA);
-	$col4->setEsGrabable(true);
-	$col4->setNombreCampo('moncuo');
-	$col4->setEsNumerico(true);
-	$col4->setHTML('type="text" size="10"');
+	public function configGrid_formpag($reg = array (), $regelim = array ()) {
+		$datos = array ();
+		$c = new Criteria();
+		$c->add(FcdetpagPeer :: NUMPAG, $this->fcpagos->getNumpag());
+		$reg = FcdetpagPeer :: doSelect($c);
+		//La primera Fila debe contener esto:
+		$datos[0]["id"] = '';
+		$datos[0]["tippag"] = '001';
+		$datos[0]["nrodet"] = '';
+		$datos[0]["monpag"] = H :: FormatoMonto($this->fcpagos->getMonefe());
+		//Union de la primera fila + la Busqueda
+		$reg = array_merge($datos, $reg);
 
-	// Se guardan las columnas en el objetos de opciones        
-	$opciones->addColumna($col1);
-	$opciones->addColumna($col2);
-	$opciones->addColumna($col3);
-	$opciones->addColumna($col4);	
-		
-	// Ee genera el arreglo de opciones necesario para generar el grid
-	$this->obj3 = $opciones->getConfig($per);
-				
-			  
+		$this->columnas = Herramientas :: getConfigGrid(sfConfig :: get('sf_app_module_dir') . '/facrecpag/' . sfConfig :: get('sf_app_module_config_dir_name') . '/grid_formpag');
+		$this->columnas[1][0]->setCombo(Fcdetpag::ListaTipPag());
+
+		$this->gridfp = $this->columnas[0]->getConfig($reg);
+
+		$this->fcpagos->setGrid_formpag($this->gridfp);
+
+	}
+
+	public function executeAjax() {
+
+		$codigo = $this->getRequestParameter('codigo', '');
+		$ajax = $this->getRequestParameter('ajax', '');
+
+		switch ($ajax) {
+			case '1' :
+				$feccor = $this->getRequestParameter('feccor', '');
+				$c = new Criteria();
+				$c->add(FcconrepPeer :: RIFCON, trim($codigo));
+				$fcconrep2 = FcconrepPeer :: doSelectOne($c);
+				$javascript = '';
+				if (count($fcconrep2) > 0) {
+
+					$fcconrep2->setFeccor($feccor);
+					$nomcon = $fcconrep2->getNomcon();
+					$dircon = $fcconrep2->getDircon();
+					if ($fcconrep2->getNaccon() == 'V') {
+						$javascript = $javascript . "$('fcpagos_naccon_V').checked=true; ";
+					} else {
+						$javascript = $javascript . "$('fcpagos_naccon_E').checked=true; ";
+					}
+					if ($fcconrep2->getTipcon() == 'N') {
+						$javascript = $javascript . "$('fcpagos_tipcon_N').checked=true; ";
+					} else {
+						$javascript = $javascript . "$('fcpagos_tipcon_J').checked=true; ";
+					}
+				}
+
+				$this->fcconrep2 = $fcconrep2;
+				$this->fcpagos = $this->getFcpagosOrCreate();
+				//$this->updateFcpagosFromRequest();
+
+				Hacienda :: CalcularMora($this->fcconrep2);
+				self :: configGrid_detalles_nuevo();
+
+//				$javascript = $javascript . "ActualizarSaldosGrid('a',ArrTotales_a);";
+
+				$output = '[["fcpagos_nomcon","' . $nomcon . '",""],["fcpagos_dircon","' . $dircon . '",""],["javascript","' . $javascript . '",""]]';
+				break;
+
+			case '2' :
+				echo $codigo;
+
+				break;
+			default :
+				$output = '[["","",""],["","",""],["","",""]]';
+		}
+
+		// Instruccion para escribir en la cabecera los datos a enviar a la vista
+		$this->getResponse()->setHttpHeader("X-JSON", '(' . $output . ')');
+
+		// Si solo se va usar ajax para actualziar datos en objetos ya existentes se debe
+		// mantener habilitar esta instrucción
+		//return sfView::HEADER_ONLY;
+
+		// Si por el contrario se quiere reemplazar un div en la vista, se debe deshabilitar
+		// por supuesto tomando en cuenta que debe existir el archivo ajaxSuccess.php en la carpeta templates.
+
+	}
+
+	/**
+	 *
+	 * Función que se ejecuta luego los validadores del negocio (validators)
+	 * Para realizar validaciones específicas del negocio del formulario
+	 * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
+	 *
+	 */
+	public function validateEdit() {
+		$this->coderr = -1;
+
+		// Se deben llamar a las funciones necesarias para cargar los
+		// datos de la vista que serán usados en las funciones de validación.
+		// Por ejemplo:
+
+		if ($this->getRequest()->getMethod() == sfRequest :: POST) {
+
+			// $this->configGrid();
+			// $grid = Herramientas::CargarDatosGrid($this,$this->obj);
+
+			// Aqui van los llamados a los métodos de las clases del
+			// negocio para validar los datos.
+			// Los resultados de cada llamado deben ser analizados por ejemplo:
+
+			// $resp = Compras::validarAlmajuoc($this->caajuoc,$grid);
+
+			//$resp=Herramientas::ValidarCodigo($valor,$this->tstipmov,$campo);
+
+			// al final $resp es analizada en base al código que retorna
+			// Todas las funciones de validación y procesos del negocio
+			// deben retornar códigos >= -1. Estos código serám buscados en
+			// el archivo errors.yml en la función handleErrorEdit()
+
+			if ($this->coderr != -1) {
+				return false;
+			} else
+				return true;
+
+		} else
+			return true;
+
+	}
+
+	public function configGrid_detalles_nuevo($reg = array (), $regelim = array ()) {
+		$c = new Criteria();
+		$c->add(FcdeclarPeer :: RIFCON, $this->fcconrep2->getRifcon());
+		$opc1 = $c->getNewCriterion(FcdeclarPeer :: EDODEC, 'P', Criteria :: NOT_EQUAL);
+		$opc2 = $c->getNewCriterion(FcdeclarPeer :: EDODEC, 'X', Criteria :: NOT_EQUAL);
+		$opc1->addAnd($opc2);
+		$c->add($opc1);
+
+		$c->addAscendingOrderByColumn(FcdeclarPeer :: NUMREF);
+		$c->addAscendingOrderByColumn(FcdeclarPeer :: FECVEN);
+		$c->addAscendingOrderByColumn(FcdeclarPeer :: TIPO);
+		$c->addAscendingOrderByColumn(FcdeclarPeer :: NUMERO);
+		$c->addAscendingOrderByColumn(FcdeclarPeer :: NUMDEC);
+
+		$reg = FcdeclarPeer :: doSelect($c);
+
+		foreach ($reg as $per) {
+			$per->setFueing(Herramientas :: getX_vacio('codfue', 'fcfuepre', 'nomabr', $per->getFueing()));
+			$per->setMora(H :: FormatoMonto('0'));
+			$per->setMontopag(H :: FormatoMonto($per->getMondec() + $per->getMora() - $per->getProntopg() - $per->getAutliq()));
+			$per->setMontopagcon(H :: FormatoMonto('0'));
+			$per->setSaldo(H :: FormatoMonto(($per->getMondec() + $per->getMora() - $per->getProntopg() - $per->getAutliq()) - $per->getMontopagcon()));
+			if ($per->getEdodec() == 'P') {
+				$per->setCheck('true');
 			}
-	  
- 	
+		}
+
+		$this->columnas = Herramientas :: getConfigGrid(sfConfig :: get('sf_app_module_dir') . '/facrecpag/' . sfConfig :: get('sf_app_module_config_dir_name') . '/grid_detalles');
+		$signo = "+";
+		$signo2 = "-";
+		$this->columnas[1][0]->setHTML(' onclick="AsignarMonto(this.id)" ');
+		#$this->columnas[1][0]->setHTML(' onBlur="toAjaxUpdater(obtenerColumna(this.id,11,'.chr(39).$signo.chr(39).'),2,getUrlModuloAjax(),this.value+'.chr(39).'!'.chr(39).');" ');
+		//$this->columnas[1][0]->setHTML('readOnly="false" ');
+
+		$this->grid = $this->columnas[0]->getConfig($reg);
+
+		$this->fcpagos->setGrid_detalles($this->grid);
+
+	}
+
+	/**
+	 * Función para actualziar el grid en el post si ocurre un error
+	 * Se pueden colocar aqui los grids adicionales
+	 *
+	 */
+	public function updateError() {
+		$this->configGrid_detalles();
+		$this->configGrid_formpag();
+		$this->configGrid_recargdescto();
+
+		//$grid = Herramientas::CargarDatosGrid($this,$this->Grid_recargdescto);
+
+		//$this->configGrid($grid[0],$grid[1]);
+
+	}
+
+	public function saving($clasemodelo)
+	{
+	    $grid     = Herramientas::CargarDatosGridv2($this,$this->grid);
+	    $gridfp   = Herramientas::CargarDatosGridv2($this,$this->gridfp);
+	    $gridscto = Herramientas::CargarDatosGridv2($this,$this->gridscto);
+
+	    $error = Hacienda::SalvarFacrecpag($clasemodelo, $grid, $gridfp, $gridscto);
+		return $error;
+		//return parent :: saving($clasemodelo);
+	}
+
+	public function deleting($clasemodelo) {
+		return parent :: deleting($clasemodelo);
+	}
+
+	public function executeAjaxfila() {
+		$name = $this->getRequestParameter('grid', 'a');
+		$grid = $this->getRequestParameter('grid' . $name, '');
+
+		$fila = $this->getRequestParameter('fila', '');
+
+		$coddes = $grid[$fila][0];
+
+		if ($coddes != '') {
+			$c = new Criteria();
+			$c->add(FcdefdescPeer :: CODDES, $coddes);
+			$fcdefdesc = FcdefdescPeer :: doSelectOne($c);
+			if ($fcdefdesc) {
+				$grid[$fila][0] = $fcdefdesc->getCoddes();
+				$grid[$fila][1] = $fcdefdesc->getNomdes();
+				$grid[$fila][2] = 'Descuento';
+			} else {
+				$grid[$fila][0] = '';
+				$grid[$fila][1] = '';
+				$grid[$fila][2] = '';
+			}
+		}
+
+		$output = Herramientas :: grid_to_json($grid, $name);
+
+		$this->getResponse()->setHttpHeader("X-JSON", '(' . $output . ')');
+
+		return sfView :: HEADER_ONLY;
+
+	}
+
 }

@@ -22,46 +22,50 @@ opciones:                  # Opciones generales
   html:                    [size="20", readonly=true]
 3:       # Columna 3
   titulo:                  Año de Construcción
-  tipo:                    c
+  tipo:                    t
   nombrecampo:             anocon
   esgrabable:			   true
-  html:                    []
+  html:                    [size="4"]
 4:       # Columna 4
   titulo:                  Bs./M2 Terreno Anual
-  tipo:                    t
+  tipo:                    m
   nombrecampo:             valter
   esgrabable:			   true
   html:                    [size="10", readonly=true]
 5:       # Columna 5
   titulo:                  Bs./M2 Construcción Anual
-  tipo:                    t
+  tipo:                    m
   nombrecampo:             valcon
   esgrabable:			   true
   html:                    [size="10", readonly=true]
 6:       # Columna 6
   titulo:                  M2 Terreno
-  tipo:                    t
+  tipo:                    m
   nombrecampo:             mtrter
   esgrabable:			   true
-  html:                    [size="10", readonly=true]
+  html:                    [size="10", onBlur=STerreno(this.id,this);]
+  estotal:                 [true, 'fcreginm_mtrter']
 8:       # Columna 8
   titulo:                  Bs./M2 Terreno
-  tipo:                    t
+  tipo:                    m
   nombrecampo:             valter
   esgrabable:			   true
   html:                    [size="10", readonly=true]
+  estotal:                 [true, 'fcreginm_bster']
 9:       # Columna 9
   titulo:                  M2 Contrucción
-  tipo:                    t
+  tipo:                    m
   nombrecampo:             mtrcon
   esgrabable:			   true
-  html:                    [size="10", readonly=true]
+  html:                    [size="10", onBlur=SConstruccion(this.id,this);]
+  estotal:                 [true, 'fcreginm_mtrcon']
 10:       # Columna 10
   titulo:                  Bs./M2 Construcción
-  tipo:                    t
+  tipo:                    m
   nombrecampo:             porexo
   esgrabable:			   true
   html:                    [size="10", readonly=true]
+  estotal:                 [true, 'fcreginm_bscon']
 11:       # Columna 11
   titulo:                  Depreciación
   tipo:                    t

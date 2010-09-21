@@ -1,3 +1,14 @@
+/**
+ * Librerías Javascript
+ *
+ * @package    Roraima
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * 
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
+ */
+
 function verificar_formula()
 {
   new Ajax.Request('/hacienda_dev.php/facesptip/ajax', {asynchronous:true, evalScripts:true, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:Form.serialize(document.getElementById('sf_admin_edit_form'))});
