@@ -1,0 +1,62 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Fcdeclar
+    theme:            cidesaGenerator
+
+    fields:
+      numdec:  { name: Numero de Declaracion, params: size=10 maxlength=10 }
+      fecdec:  { name: Fecha de Dec, params: date_format='dd/MM/yyyy' size=10  maxlength=10}
+      numref:  { name: Placa del Vehiculo, params: size=10  }
+      fundec:  { name: Nombre del Funcionario, params: size=50 }
+      rifcon:  { name: C.I. / RIF., params: size=14 maxlength=14 }
+      dircon:  { name: Dirección, params: size=60 maxlength=255 }
+      nacconcon:  { name: Nacionalidad,  params: size=80 maxlength=255 readonly=false }
+      tipconcon:  { name: Tipo de Persona, params: size=80 maxlength=255 readonly=false }
+      rifrep:  { name: C.I. / RIF., params: size=14 maxlength=14 }
+      nacconrep:  { name: Nacionalidad,  params: size=80 maxlength=255 readonly=false }
+      tipconrep:  { name: Tipo de Persona, params: size=80 maxlength=255 readonly=false }
+      dirconrep:  { name: Dirección, params: size=60 maxlength=255 }
+      coduso:  { name: Codigo de Uso, params: size=10  }
+      marveh:  { name: Marca, params: size=30 maxlength=30 }
+      modveh:  { name: Modelo, params: size=20 maxlength=20 }
+      colveh:  { name: Color, params: size=20 maxlength=20 }
+      valori:  { name: Valor, params: size=15 maxlength=15 }
+      anoveh:  { name: Año, params: size=4 maxlength=4 }
+      sermot:  { name: Motor, params: size=15 maxlength=15 }
+      sercar:  { name: Carroceria, params: size=30 maxlength=30 }
+
+      fechainicio:  { name: Inicio del Periodo, params: date_format='dd/MM/yyyy' size=10  maxlength=10}
+      fechafin:     { name: Fin del Periodo, params: date_format='dd/MM/yyyy' size=10  maxlength=10}
+
+      tipesp:  { name: Codigo, params: size=4 maxlength=4 }
+      grid:  { name: . , params: size=17 maxlength=15 }
+      griddeuda:  { name: . , params: size=17 maxlength=15 }
+
+    list:
+      title:     Definición de Declaracion de Vehiculo
+      display:   [=numdec, fecdec, rifcon]
+      sort:      numdec
+      filters:   [numdec, fecdec, rifcon]
+      max_per_page: 10
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+
+    edit:
+      title: Edición de Declaracion del Vehiculo
+
+      display:
+        NONE: [ _numdec, _fecdec, _numref, fundec, _mensaje ]
+        "Datos Contribuyentes":  [ _rifcon, dircon, _nacconcon, _tipconcon ]
+        "Datos del Representante Legal":  [ _rifrep, dirconrep, _nacconrep, _tipconrep ]
+        "Uso de Vehiculos":  [ _coduso, _grid]
+        "Datos del Vehiculos":  [ marveh, modveh, colveh, valori, anoveh, edad, sermot, sercar]
+        "Inf. de Declaracion":  [ fechainicio, fechafin]
+        "Distribucion de la Deuda":  [ _griddeuda]
+
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

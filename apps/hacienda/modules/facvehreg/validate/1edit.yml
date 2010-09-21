@@ -1,0 +1,51 @@
+methods:
+  post:
+   - "fcregveh{plaveh}"
+   - "fcregveh{fecreg}"
+   - "fcregveh{valori}"
+   - "fcregveh{coduso}"
+   - "fcregveh{modveh}"
+
+
+names:
+  fcregveh{plaveh}:
+    required:  Yes
+    required_msg: La Placa es un campo requerido
+    validators: Validator_plaveh
+
+  fcregveh{coduso}:
+    required:  Yes
+    required_msg: El Codigo del Uso es un campo requerido
+    validators: Validator_coduso
+
+  fcregveh{valori}:
+    required:  Yes
+    required_msg: El Valor es un campo requerido
+
+  fcregveh{fecreg}:
+    required:  Yes
+    required_msg: La Fecha del Registro es un campo requerido
+
+  fcregveh{modveh}:
+    required:  Yes
+    required_msg: El Modelo es un campo requerido
+
+  fcregveh{fecreg}:
+    required:  Yes
+    required_msg: La Fecha del Registro es un campo requerido
+
+
+Validator_plaveh:
+    class: sfPropelUniqueValidator
+    param:
+        class:        fcregveh
+        column:       plaveh
+        unique_error: El registro ya Existe intente con otro.
+
+
+Validator_coduso:
+    class: sfPropelUniqueValidator
+    param:
+        class:        fcusoveh
+        column:       coduso
+        unique_error: El Codigo del Uso ya Existe intente con otro.

@@ -8,5 +8,6 @@
   //cajitas abajo
   'campoprincipal' => 'codcarinm',
   'camposecundario' => 'nomcarinm',
+  'tamanoprincipal' => '3',
   'campobase' => 'id'
   ), 'Fcreginm_Fccarinm', 'fccarinm','',''); ?>

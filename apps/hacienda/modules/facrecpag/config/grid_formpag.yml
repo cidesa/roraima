@@ -1,0 +1,28 @@
+opciones:                  # Opciones generales
+  name:                    b
+  eliminar:                false
+  tabla:                   fcdecpag
+  ancho:                   500
+  anchogrid:               600
+  filas:                   1
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Tipo de Pago
+  tipo:                    c
+  nombrecampo:             tippag
+  esgrabable:			   true
+  html:                    []
+2:       # Columna 2
+  titulo:                  Numero
+  tipo:                    t
+  nombrecampo:             nrodet
+  esgrabable:              true
+  html:                    [size="20" ]
+3:       # Columna 3
+  titulo:                  Monto
+  tipo:                    m
+  nombrecampo:             monpag
+  esgrabable:			   true
+  html:                    [size="10" ]
+  estotal:                 [true, 'fcpagos_totalmon']

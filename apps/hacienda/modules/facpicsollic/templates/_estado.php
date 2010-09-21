@@ -4,7 +4,11 @@ $msg='';
 $msg2='';
 if ($fcsollic->getId()!='')
 {
-	if ($fcsollic->getStasol()=='A')
+	if ($fcsollic->getStasol()=='P')
+	{
+		$msg="PROCESO";
+
+	}else if ($fcsollic->getStasol()=='A')
 	{
 		$msg="APROBADA";
 		if ($fcsollic->getStalic()=='V') $msg2="VIGENTE";
@@ -14,8 +18,9 @@ if ($fcsollic->getId()!='')
 		  elseif ($fcsollic->getStalic()=='C') $msg2="CANCELADA";
 		  elseif ($fcsollic->getStalic()=='S') $msg2="SUSPENDIDA";
 		}
-	}
-	else $msg="NEGADA";
+	}else if ($fcsollic->getStasol()=='N')
+	$msg="NEGADA";
+
 ?>
 
 <div id="estado" style="color:#E06C6C;">

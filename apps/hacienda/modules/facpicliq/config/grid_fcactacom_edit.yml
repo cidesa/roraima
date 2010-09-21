@@ -1,0 +1,52 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                true
+  tabla:                   fcactpic
+  anchogrid:               750
+  ancho:                   700
+  filas:                   1
+  titulo:                  'Actividades Comerciales'
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Código
+  tipo:                    t
+  nombrecampo:             codact
+  html:                    [size="15"]
+  oculta:                  false
+  esgrabable:              true
+2:       # Columna 2
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             desact
+  html:                    [size="30"]
+  esgrabable:              false
+3:       # Columna 3
+  titulo:                  Ingresos Brutos
+  tipo:                    m
+  nombrecampo:             monact
+  html:                    [size="10" onBlur=validaMontos(this.id,this);]
+  esgrabable:              true
+4:       # Columna 4
+  titulo:                  Impuesto Bruto
+  tipo:                    m
+  nombrecampo:             monbru
+  html:                    [size="10" onBlur=validaMontos(this.id,this);]
+  esgrabable:              true
+5:       # Columna 5
+  titulo:                  Monto Exonerado
+  tipo:                    m
+  nombrecampo:             monexo
+  html:                    [size="10" onBlur=validaMontos(this.id,this);]
+  esgrabable:              true
+6:       # Columna 6
+  titulo:                  Monto Rebajado
+  tipo:                    m
+  nombrecampo:             monreb
+  html:                    [size="10" onBlur=validaMontos(this.id,this);]
+  esgrabable:              true
+7:       # Columna 7
+  titulo:                  Impuesto a Pagar
+  tipo:                    m
+  nombrecampo:             imppag
+  html:                    [size="10" onBlur=validaMontos(this.id,this);]
+  esgrabable:              true

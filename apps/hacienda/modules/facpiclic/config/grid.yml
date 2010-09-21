@@ -1,39 +1,47 @@
 opciones:                  # Opciones generales
   name:                    a
-  eliminar:                true
+  eliminar:                false
   tabla:                   fcactpic
   ancho:                   800
   anchogrid:               800
-  filas:                   1
+  filas:                   0
   titulo:                  ' '
   htmltotalfilas:          ' '
 1:       # Columna 1
   titulo:                  Código
   tipo:                    t
   nombrecampo:             codact
-  esgrabable:			   true
-  html:                    [size="15", readonly=true]
+  esgrabable:			         true
+  html:                    [size="10", readOnly=true]
 2:       # Columna 2
-  titulo:                  Ingresos Brutos
+  titulo:                  Descripción
   tipo:                    t
-  nombrecampo:             monact
-  esgrabable:			   true
-  html:                    [size="20", readonly=true]
+  nombrecampo:             desact
+  esgrabable:              true
+  html:                    [size="40", readOnly=true ]
 3:       # Columna 3
-  titulo:                  Exonerable
-  tipo:                    c
-  nombrecampo:             exoner
-  esgrabable:			   true
-  html:                    []
+  titulo:                  Ingresos Brutos
+  tipo:                    m
+  nombrecampo:             monact
+  esgrabable:			         true
+  esnumerico:              true
+  html:                    [size="10", readOnly=true]
 4:       # Columna 4
+  titulo:                  Exonerable
+  tipo:                    t
+  nombrecampo:             exonerable
+  esgrabable:			         true
+  html:                    [size="6", readOnly=true ]
+5:       # Columna 5
   titulo:                  Exonerada
   tipo:                    t
+  nombrecampo:             exoner
+  esgrabable:			         true
+  html:                    [size="6", readOnly=true ]
+6:       # Columna 6
+  titulo:                  % Exoneración
+  tipo:                    m
   nombrecampo:             porexo
   esgrabable:			   true
-  html:                    [size="10", readonly=true]
-5:       # Columna 5
-  titulo:                  Exoneración
-  tipo:                    t
-  nombrecampo:             porexo
-  esgrabable:			   true
-  html:                    [size="10", readonly=true]
+  esnumerico:              true
+  html:                    [size="10", readOnly=truee]

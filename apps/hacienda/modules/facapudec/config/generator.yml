@@ -1,0 +1,67 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Fcdeclar
+    theme:            cidesaGenerator
+
+    fields:
+      numdec:     {name: Número de Declaracion, params: size=10 }
+      numref:     {name: Número de Control, params: size=8 maxlength=8 }
+      fecdec:     {name: Fecha de Registro, params: date_format='dd/MM/yyyy' size=10  maxlength=10}
+      rifcon:     { name: C.I. / RIF., params: size=14 maxlength=14 }
+      dircon:     { name: Dirección, params: size=60 maxlength=255 }
+      nacconcon:  { name: Nacionalidad,  params: size=80 maxlength=255 readonly=false }
+      tipconcon:  { name: Tipo de Persona, params: size=80 maxlength=255 readonly=false }
+      rifrep:     { name: C.I. / RIF., params: size=14 maxlength=14 }
+      nacconrep:  { name: Nacionalidad,  params: size=80 maxlength=255 readonly=false }
+      tipconrep:  { name: Tipo de Persona, params: size=80 maxlength=255 readonly=false }
+      dirconrep:  { name: Dirección, params: size=60 maxlength=255 }
+      tipapu:     { name: Codigo, params: size=4 maxlength=4 }
+      grid:       { name: . , params: size=17 maxlength=15 }
+
+      desapu:  { name: Descripcion , type: textarea_tag, params: size=35x2 maxlength=250 }
+      dirapu:  { name: Direccion, type: textarea_tag, params: size=35x2 maxlength=250 }
+      fecapu:  { name: Fecha del Sorteo, params: date_format='dd/MM/yyyy' size=10  maxlength=10}
+      horapu: { name: Hora del Sorteo, params: size=10 }
+
+      serapui: { name: Seriales Desde, params: size=10 maxlength=10 }
+      serapuf: { name: Seriales Hasta, params: size=10 maxlength=10 }
+
+      exoapu:  { name: Exonerable, params: size=10 maxlength=10 }
+      texexo:  { name: Texto Exonerado, type: textarea_tag, params: size=35x2 maxlength=250 }
+
+      fundec:  { name: Funcionario, params: readOnly='true' }
+      fecrec:  { name: Fecha, params: date_format='dd/MM/yyyy' size=10  maxlength=10 readOnly='true'}
+
+      grid:  { name: .}
+      griddeuda:  { name: .}
+
+      fechainicio:  { name: Inicio del Periodo, params: date_format='dd/MM/yyyy' size=10  maxlength=10}
+      fechafin:     { name: Fin del Periodo, params: date_format='dd/MM/yyyy' size=10  maxlength=10}
+
+
+    list:
+      title:     Definición de Declaracion de Apuestas Lícitas
+      display:   [=numdec, numref, fecdec, rifcon]
+      filters:   [numdec, numref, fecdec]
+      sort:      numdec
+      max_per_page: 10
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+
+    edit:
+      title: Registro de Apuestas Lícitas
+      display:
+        NONE: [ _numdec, fecdec, _numref, fundec]
+        "Datos Contribuyentes":  [ _rifcon, dircon, _nacconcon, _tipconcon ]
+        "Datos del Representante Legal":  [ _rifrep, dirconrep, _nacconrep, _tipconrep ]
+        "Tipo de Apuestas Lícitas": [_tipapu, _grid]
+        "Datos de la Apuesta Lícita": [desapu, dirapu, fecapu, _horapu, serapui, serapuf, _exoapu, texexo]
+        "Inf. de Declaración":  [ fechainicio, fechafin]
+        "Distribución de la Deuda":  [ _griddeuda]
+
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

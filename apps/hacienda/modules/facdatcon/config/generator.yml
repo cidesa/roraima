@@ -4,16 +4,15 @@ generator:
     model_class:      Fcconrep
     theme:            cidesaGenerator
     fields:
-      cedcon:  { name: C.I./R.I.F, params: size=13 maxlength=11}
-      rifcon:  { name: N.I.T, params: size=22 maxlength=20}
+      rifcon:  { name: C.I./R.I.F, params: size=13 maxlength=11}
+      nitcon:  { name: N.I.T, params: size=22 maxlength=20}
       nomcon:  { name: Nombre / Razón Social, params: size=40 maxlength=255}
-      #repcon:  { name: . , params: size=40 maxlength=1}
+      repcon:  { name: Tipo , params: size=40 maxlength=1}
       dircon:  { name: Dirección , params: size=40 maxlength=255}
       telcon:  { name: Teléfono, params: size=32 maxlength=30}
       emacon:  { name: Email , params: size=52 maxlength=50}
       codsec:  { name: Código, params: size=8 maxlength=4}
       codpar:  { name: Parroquia , params: size=6 maxlength=4}
-      nitcon:  { name: . , params: size=16 maxlength=14}
       codmun:  { name: Municipio , params: size=6 maxlength=4}
       codedo:  { name: Estado , params: size=6 maxlength=4}
       codpai:  { name: Pais , params: size=6 maxlength=4}
@@ -21,8 +20,8 @@ generator:
       cpocon:  { name: Código Postal, params: size=22 maxlength=6}
       apocon:  { name: Cod. Apartado Postal , params: size=40 maxlength=20}
       urlcon:  { name: URL , params: size=40 maxlength=50}
-      naccon:  { name: . , params: size=40 maxlength=1}
-      tipcon:  { name: . , params: size=32 maxlength=1}
+      naccon:  { name: Nacionalidad , params: size=40 maxlength=1}
+      tipcon:  { name: Tipo de Persona , params: size=32 maxlength=1}
       faxcon:  { name: Porcentaje , params: size=52 maxlength=15}
       clacon:  { name: Código, params: size=8 maxlength=12}
       fecdescon:  { name: . , params: date_format='dd/MM/yyyy' }
@@ -35,9 +34,9 @@ generator:
       grid: { name: . , params: size=10 maxlength=8}
     list:
       title:     Datos del Contribuyente
-      display:   [ =cedcon, =rifcon, nomcon]
+      display:   [ =rifcon, nomcon]
       sort:      nomcon
-      filters:   [cedcon, rifcon, nomcon]
+      filters:   [rifcon, nomcon]
       fields:
         nomcon:
           params: size=10
@@ -51,9 +50,9 @@ generator:
     edit:
       title:          Edición Datos del Contribuyente
       display:
-        "Datos Generales":   [ cedcon, rifcon, nomcon ]
-        "Nacionalidad":   [ _naccon ]
-        "Tipo":   [ _tipcon ]
+        "Datos Generales":   [ rifcon, nitcon, nomcon, _naccon, _tipcon, _repcon ]
+        #"Nacionalidad":   [  ]
+        #"Tipo":   [ _tipcon ]
         "Datos Personales":   [ dircon, _codpar, cpocon, apocon, telcon, emacon, faxcon, urlcon ]
         "Recaudos Consignados":   [ _grid ]
       actions:

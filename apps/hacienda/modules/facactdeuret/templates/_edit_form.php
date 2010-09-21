@@ -11,7 +11,7 @@
 ?>
 <?php echo form_tag('Facactdeuret/edit', array(
   'id'        => 'sf_admin_edit_form',
-  'name'      => 'sf_admin_edit_form',
+  'name'      => 'sf_admin_edit_form', 'onsubmit'  => 'return false;',
   'multipart' => true,
 )) ?>
 <?php use_helper('tabs') ?>

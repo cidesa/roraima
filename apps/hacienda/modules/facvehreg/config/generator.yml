@@ -1,0 +1,72 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Fcregveh
+    theme:            cidesaGenerator
+
+    fields:
+      plaveh:  { name: Placa del Vehiculo, params: size=10 maxlength=10 }
+      fecreg:  { name: Fecha de Registro, params: date_format='dd/MM/yyyy' size=10  maxlength=10}
+      fecrec:  { name: Fecha, params: date_format='dd/MM/yyyy' size=10  maxlength=10}
+      rifcon:  { name: C.I. / RIF., params: size=14 maxlength=14 }
+      dircon:  { name: Dirección, params: size=60 maxlength=255 }
+      nacconcon:  { name: Nacionalidad,  params: size=80 maxlength=255 readonly=false }
+      tipconcon:  { name: Tipo de Persona, params: size=80 maxlength=255 readonly=false }
+      rifrep:  { name: C.I. / RIF., params: size=14 maxlength=14 }
+      nacconrep:  { name: Nacionalidad,  params: size=80 maxlength=255 readonly=false }
+      tipconrep:  { name: Tipo de Persona, params: size=80 maxlength=255 readonly=false }
+      dirconrep:  { name: Dirección, params: size=60 maxlength=255 }
+      coduso:  { name: Codigo de Uso, params: size=16 maxlength=16 }
+      marveh:  { name: Marca, params: size=30 maxlength=30 }
+      modveh:  { name: Modelo, params: size=20 maxlength=20 }
+      colveh:  { name: Color, params: size=20 maxlength=20 }
+      valori:  { name: Valor, params: size=15 maxlength=15 }
+      anoveh:  { name: Año, params: size=4 maxlength=4 }
+      sermot:  { name: Motor, params: size=15 maxlength=15 }
+      sercar:  { name: Carroceria, params: size=30 maxlength=30 }
+      dueant:  { name: Dueno Anterior, params: size=50 maxlength=50 }
+      plaant:  { name: Placa, params: size=8 maxlength=8 }
+      dueant:  { name: Nombre, params: size=50 maxlength=50 }
+      dirant:  { name: Direccion, params: size=50 maxlength=50 }
+      estveh:  { name: Estado, params: size=1 maxlength=1 }
+      edad:  { name: Edad (Años), params: size=4 maxlength=4 readOnly=true }
+      grid:  { name: . , params: size=17 maxlength=15 }
+      operaciones:  { name: .  }
+      funrec:   { name: Funcionario }
+      mensaje:  { name: .  }
+      traspaso: { name: as  } }
+      desincorporar: { name: .  }
+      motdes: { name: .  }
+
+    list:
+      title:     Definición de Registro Vehiculo
+      display:   [=plaveh, fecreg, rifcon, estveh]
+      sort:      plaveh
+      filters:   [plaveh, fecreg, rifcon, estveh]
+#      fields:
+#        nomusoinm:
+#          params: size=18
+      max_per_page: 10
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+
+
+    edit:
+      title: Edición de Vehiculo
+
+      display:
+        NONE: [ plaveh, _fecreg, _mensaje ]
+        "Operaciones con Licencias":  [ _operaciones, _motdes ]
+        "Datos Contribuyentes":  [ _rifcon, dircon, _nacconcon, _tipconcon ]
+        "Datos del Representante Legal":  [ _rifrep, dirconrep, _nacconrep, _tipconrep ]
+        "Uso de Vehiculos":  [ _coduso, _grid]
+        "Datos del Vehiculos":  [ marveh, modveh, colveh, valori, anoveh, edad, sermot, sercar]
+        "Datos de Recepcion":  [ funrec, _fecrec ]
+        "Dueno Anterior":  [ plaant, dueant, dirant ]
+      hide: [ traspaso, desincorporar ]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

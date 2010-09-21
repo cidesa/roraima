@@ -5,8 +5,8 @@ generator:
     theme:            cidesaGenerator
     fields:
       numsol:  { name: Número, params: size=14 maxlength=12 }
-      fecsol:  { name: Fecha, params: date_format='dd/MM/yyyy'}
-      rifcon:  { name: C.I. / RIF., params: size=22 maxlength=20 }
+      fecsol:  { name: Fecha, params: date_format='dd/MM/yyyy' size=10 }
+      rifcon:  { name: C.I. / RIF., params: size=20 maxlength=20 }
       nomcon:  { name: Nombre, params: size=60 maxlength=255 }
       dircon:  { name: Dirección, params: size=80 maxlength=255 }
       nacconcon:  { name: Nacionalidad,  params: size=80 maxlength=255 readonly=false }
@@ -22,7 +22,7 @@ generator:
       catcon:  { name: Catastro,  params: size=35 maxlength=30 }
       nomcatrasto:  { name: Nombre Catastro: size=32 maxlength=30 }
       tipest:  { name: Establecimiento, params: size=3 maxlength=1 }
-      codrut:  { name: Código, params: size=8 maxlength=6 }
+      codrut:  { name: Código de Ruta, params: size=8 maxlength=6 }
       nomruta:  { name: Nombre Ruta}
       disbar:  { name: Bar (mts.), params: size=12 maxlength=10 }
       disins:  { name: Inst. Educacional (mts.), params: size=12 maxlength=10 }
@@ -30,40 +30,48 @@ generator:
       disfun:  { name: Funeraria (mts.), params: size=12 maxlength=10 }
       disdis:  { name: Dispensario (mts.), params: size=12 maxlength=10 }
       disest:  { name: Est. de Servicio (mts.), params: size=12 maxlength=10 }
-      horini:  { name: Hora de Inicio, params: date_format='dd/MM/yyyy' }
-      horcie:  { name: Hora de Terminación, params: date_format='dd/MM/yyyy'}
-      fecini:  { name: Fecha de Inicio, params: date_format='dd/MM/yyyy' }
-      fecfin:  { name: Fecha de Cierre, params: date_format='dd/MM/yyyy' }
+      horini:  { name: Hora de Inicio, params: date_format='dd/MM/yyyy'  size=10 }
+      horcie:  { name: Hora de Terminación, params: date_format='dd/MM/yyyy'  size=10}
+      fecini:  { name: Fecha de Inicio, params: date_format='dd/MM/yyyy'   size=10}
+      fecfin:  { name: Fecha de Cierre, params: date_format='dd/MM/yyyy'   size=10}
       capsoc:  { name: Capital Social, params: size=17 maxlength=15 }
-      funres:  { name: Funcionario Receptor, params: size=40 maxlength=60 }
-      fecres:  { name: Fecha de Inicio, params: date_format='dd/MM/yyyy' }
+      funres:  { name: Funcionario Receptor, params: size=40 maxlength=60 readonly=true}
+      fecres:  { name: Fecha de Recepción, params: date_format='dd/MM/yyyy'   size=10 }
       refmod:  { name: Referencia, params: size=17 maxlength=15 }
-      fecmod:  { name: Fecha, params: date_format='dd/MM/yyyy' }
+      fecmod:  { name: Fecha, params: date_format='dd/MM/yyyy'  size=10 }
       motmod:  { name: Motivo de la Modificación, params: size=45 maxlength=15 }
       idlic:  { name: Referencia, params: size=14 maxlength=12  readonly=true disabled=false }
-      fechlic:  { name: Fecha, type: input_date_tag, params: date_format='dd/MM/yyyy' }
+      fechlic:  { name: Fecha, type: input_date_tag, params: date_format='dd/MM/yyyy'  size=10 }
       comnlic:  { name: Motivo de la Modificación,  params: size=35 maxlength=30 readonly=false disabled=false }
-      numneg:  { name: Numero Negación, params: size=40 maxlength=10 readonly=true disabled=false }
+      numneg:  { name: Número Negación, params: size=40 maxlength=10 readonly=true disabled=false }
       funneg:  { name: Funcionario, params: size=20 maxlength=15 readonly=true disabled=false }
       tomon:  { name: Tomo, params: size=10 maxlength=8 readonly=false disabled=false }
-      numeron:  { name: Numero Documento, params: size=10 maxlength=8 readonly=false disabled=false }
+      numeron:  { name: Número Documento, params: size=10 maxlength=8 readonly=false disabled=false }
       folion:  { name: Folio, params: size=10 maxlength=8 readonly=false disabled=false }
       resolu:  { name: Resolución, params: size=20 maxlength=10 readonly=false disabled=false }
       motneg:  { name: Motivo de la Negación, params: size=40 maxlength=210 readonly=false disabled=false }
-      fecneg:  { name: Fecha, type: input_date_tag, params: date_format='dd/MM/yyyy' readonly=false disabled=false }
+      fecneg:  { name: Fecha, type: input_date_tag, params: date_format='dd/MM/yyyy' size=10 readonly=false disabled=false }
       licnegada:  { name: licencianegada, params: size=1 maxlength=1 }
       licmodificada:  { name: licmodificada, params: size=1 maxlength=1 }
       grid:  { name: . , params: size=17 maxlength=15 }
+      autorizacion:  { name: . }
+      negacion:  { name: . }
+      imprimir:  { name: . }
     list:
       title:     Solicitud de Licencia - Patente de Industria y Comercio
       display:   [ =numsol, =rifcon, nomcon]
       sort:      nomcon
-      filters:   [numsol, fecsol, nomcon]
+      filters:   [numsol, rifcon, fecsol, nomcon]
       fields:
+        numsol:
+          params: size=10
         nomcon:
           params: size=10
         fecsol:
           params: size=10
+        rifcon:
+          params: size=10
+
       max_per_page: 5
       object_actions:
         _edit:        ~
@@ -72,19 +80,21 @@ generator:
     edit:
       title:          Edición Solicitud de Licencia - Patente de Industria y Comercio
       display:
+        "Autorización de Modificacion":  [ _autorizacion ]
+        "Operaciones con Licencias":  [ _negacion ]
+        #"Operaciones con Licencias":  [ _operaciones ]
+        #"Cambiar Estado de Licencia (Datos de la Negacion)":  [ _negacion ]
         "Solicitud de Licencia":  [ _numsol, fecsol, _estado ]
         "Datos Contribuyentes":  [ _rifcon, dircon, _nacconcon, _tipconcon ]
         "Datos del Representante Legal":  [ _rifrep, dirconrep, _nacconrep, _tipconrep ]
         "1.- Datos Establecimiento":  [ nomneg, dirpri, _tipinm, _catcon, _tipest, _codrut ]
-        "2.- Distancias Cercanas":  [ discli, disbar, disdis, disins, disfun, disest ]
+        "2.- Distancias Cercanas":  [ disbar, disins, discli, disfun, disdis, disest ]
         "3.- Horarios de Trabajo":  [ horini, horcie ]
         "4.- Ejercicio Económico":  [ fecini, fecfin, capsoc ]
-        "5.- Act. Comerciales":  [ _grid ]
+        "5.- Actividades Comerciales":  [ _grid ]
         "6.- Recepción Solicitud":  [ funres, fecres ]
         "7.- Observaciones":  [ refmod, fecmod, motmod ]
-        "Autorización de Modificaciòn":  [ _autorizacion ]
-        "Cambiar Estado de Licencia":  [ _negacion ]
-        NONE:  [ _imprimir ]
+        #NONE:  [ _imprimir ]
       fields:
         fechlic: { type: input_date_tag, params: date_format='dd/MM/yy' }
       hide: [ licnegada, licmodificada ]

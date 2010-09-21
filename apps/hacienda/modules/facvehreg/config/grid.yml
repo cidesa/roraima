@@ -1,0 +1,34 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                false
+  tabla:                   fcusoveh
+  ancho:                   500
+  anchogrid:               550
+  filas:                   0
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Ano de Vigencia
+  tipo:                    t
+  nombrecampo:             anovig
+  esgrabable:			   true
+  html:                    [size="4" maxlenght="4" readOnly=true ]
+2:       # Columna 2
+  titulo:                  Monto del Aforo
+  tipo:                    m
+  nombrecampo:             monafo
+  esgrabable:              true
+  html:                    [size="12"  readOnly=true]
+3:       # Columna 3
+  titulo:                  Alicuota (X/1000)
+  tipo:                    m
+  nombrecampo:             porali
+  esgrabable:			   true
+  esnumerico:              true
+  html:                    [size="12" readOnly=true]
+4:       # Columna 4
+  titulo:                  Edad para pagar Aforo
+  tipo:                    t
+  nombrecampo:             anolim
+  esgrabable:			   true
+  html:                    [size="4"  readOnly=true]

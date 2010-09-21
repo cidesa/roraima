@@ -1,14 +1,25 @@
+/**
+ * LibrerÃ­as Javascript
+ *
+ * @package    Roraima
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ *
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
+ */
+
 function Mostrar_Negacion()
 {
-  $('negacion').show();
-  $('mostrar').hide();
-  $('ocultar').show();
+  $('negacion2').show();
+//  $('mostrar').hide();
+//  $('ocultar').show();
   $('fcsollic_licnegada').value='I';
 }
 
 function Ocultar_Negacion()
 {
-  $('negacion').hide();
+  $('negacion2').hide();
   $('ocultar').hide();
   $('mostrar').show();
   $('fcsollic_licnegada').value='';
@@ -31,7 +42,7 @@ function Mostrar_orden_preimpresa()
         }
             f++;
       }
-      if(confirm("¿Desea imprimir la orden Pre-Impresa?"))
+      if(confirm("Desea imprimir la orden Pre-Impresa?"))
       {
             var ordcomdes=$('caordcom_ordcom').value;
             var ordcomhas=$('caordcom_ordcom').value;
@@ -54,12 +65,12 @@ function Mostrar_orden_preimpresa()
  {
    if ($(id).value!="")
    {
-		if (actividad_repetida(id))
-		{
-			alert_('La Actividad esta repetida');
-		}
-		else
-		{
+	if (actividad_repetida(id))
+	{
+		alert_('La Actividad esta repetida');
+	}
+	else
+	{
        ajaxactividad(e,id)
 	}
    }
@@ -122,8 +133,6 @@ function Mostrar_orden_preimpresa()
    }
  }
 
-
-
  function exonerado(id)
  {
    var aux = id.split("_");
@@ -142,3 +151,8 @@ function Mostrar_orden_preimpresa()
  	}
  }
 
+function Ocultar_suspencion()
+{
+  $('suspencion').hide();
+  $('fcsollic_operacion').value='';
+}

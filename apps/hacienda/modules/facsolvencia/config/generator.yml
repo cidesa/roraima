@@ -1,29 +1,61 @@
 generator:
-  class:              sfPropelAdminGenerator
+  class:              cidesaPropelAdminGenerator
   param:
     model_class:      Fcsolvencia
-    theme:            default
+    theme:            cidesaGenerator
+
     fields:
-      codsol: { name: Nro Solvencia }
-      codtip: { name: Uso } # Combo Enlazado con tabla FcTipSol 
-      fecexp: { name: Fecha }
-      fecven: { name: Fecha Vencimiento }
-      numlic: { name: Nro Licitación }
-      rifcon: { name: C.I./RIF }
-      codcat: { name: Código Catastral }
-      nomcon: { name: Nombre }
-      dircon: { name: Dirección }
-      codfue: { name: Código }
-      stasol: { name: Status }
-      motivo: { name: Motivo }
+      codsol: { name: Número Solvencia, params: size=10 maxlength=10 }
+      codtip: { name: Uso, params: size=8 maxlength=8 }
+      fecexp: { name: Fecha Expedición, params: date_format='dd/MM/yyyy' size=10  maxlength=10}
+      fecven: { name: Fecha Vencimiento, params: date_format='dd/MM/yyyy' size=10  maxlength=10}
+      numlic: { name: Nro Licitación, params: size=12 maxlength=12 }
+
+      
+      rifcon:
+        name: C.I./RIF
+        catalogo:
+          catalogoweb: Facpicsollic_Rifrep
+          clase: Fcconrep
+          ajax: 2
+          parametros: getprincipal="getRifcon" getsecundario="getNomcon" campoprincipal="rifcon" camposecundario="nomcon" campobase = "id"
+          #catalogoparams:
+          #ajaxparams:
+          divupdate: divGrid
+          #id:
+      catrasto: { name: Código Catrastro }
+      nomcon: { name: Nombre, params: size=20 maxlength=255 }
+      dircon: { name: Dirección, params: size=60 maxlength=255 }
+      codfue: { name: Código, params: size=2 maxlength=2 }
+      motivo: { name: Motivo, type: textarea_tag, params: size=60x2 maxlength=255 }
+
+      grid: { name: . }
+
+      funrec:   { name: Funcionario }
+      fecrec:  { name: Fecha, params: date_format='dd/MM/yyyy' size=10  maxlength=10}
+
+      etiqueta:  { name: . }
+      
     list:
-      title:          Definición de Rutas  
+      title:          Definición de Solvencias
       filters:        [codsol, fecexp, codtip, rifcon, numlic ]
       display:        [=codsol, fecexp ]
+      max_per_page: 10
       object_actions:
-        _edit:        ~     
-        _delete:      ~     
+        _edit:        ~
+        _delete:      ~
+
     edit:
-      title:          Edición de Definición de Rutas
-      display:       [codsol, fecexp, codtip, rifcon, numlic, codcat, nomcon, dircon, motivo, stasol ]
-    
+      title:          Edición de Definición de Solvencias
+      display:
+        Definición:   [ _etiqueta, _codsol, fecexp, fecven, _codtip, rifcon, dircon ]
+        Detalles:  [ _grid ]
+        Solvencia:  [ motivo, fecven]
+        Recepcion:  [ funrec, fecrec ]
+#        General:  [ ]
+#        Resumen:  [ ]
+
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

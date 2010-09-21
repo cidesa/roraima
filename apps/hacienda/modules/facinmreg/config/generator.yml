@@ -4,7 +4,8 @@ generator:
     model_class:      Fcreginm
     theme:            cidesaGenerator
     fields:
-      nroinm:  { name: Número de Inscripción, params: size=22 maxlength=20 }
+      fecreg:  { name: Fecha, type: input_date_tag, params: date_format='dd/MM/yyyy' size=10   }
+      nroinm:  { name: Número de Inscripción, params: size=15 maxlength=15 }
       nomcon:  { name: Nombre, params: size=22 maxlength=20 }
       rifcon:  { name: C.I. / RIF., params: size=22 maxlength=20 }
       rifrep:  { name: C.I. / RIF. Representante, params: size=22 maxlength=20 }
@@ -15,71 +16,90 @@ generator:
       fcconreprifcon:  { name: C.I. / RIF., params: size=16 maxlength=14 readonly=false }
       fcconrepdircon:  { name: Dirección, params: size=50 maxlength=255 readonly=false }
       fcconrepnomcon:  { name: Nombre, params: size=50 maxlength=255 readonly=false }
-      codcatfis:  { name: Catrasto con Fines Fiscales, params: size=32 maxlength=30 }
-      codcatinm:  { name: Código Catrastal de Inmueble, params: size=5 maxlength=3 }
+      codcatfis:  { name: Catastro con Fines Fiscales, params: size=32 maxlength=30 }
+      codcatinm:  { name: Código Catastral de Inmueble, params: size=5 maxlength=3 }
       codcarinm:  { name: Código Características, params: size=5 maxlength=3 readonly=false }
-      grid:  { name: . , params: size=17 maxlength=15 }
+      grid:  			{ name: . , params: size=17 maxlength=15 }
       desestinm:  { name: Código Características, params: size=5 maxlength=3 readonly=false }
-      anoava:  { name: Año Avaluo, params: size=5 maxlength=3 readonly=false }
-      codzon:  { name: Zona, params: size=5 maxlength=3 readonly=false }
-      mtrter:  { name: M2 Terreno, params: size=10 }
-      bster:  { name: Bolivares Terreno, params: size=10 }
-      mtrcon:  { name: M2 Construcción, params: size=10 }
-      bscon:  { name: Bolivares Metro Construcción, params: size=10 }
-      fecpag:  { name: Fecha Ultimo Pago, type: input_date_tag, params: date_format='dd/MM/yyyy' }
-      feccal:  { name: Fecha Ultimo Avalúo, type: input_date_tag, params: date_format='dd/MM/yyyy' }
+      anoava:  		{ name: Año Avaluo, params: onblur=datosavaluo() size=4 maxlength=4  disabled=false  }
+      codzon:  		{ name: Zona, params: size=5 maxlength=3 readonly=false }
+      mtrter:  		{ name: M2 Terreno, params: size=10 }
+      bster:  		{ name: Bolivares Terreno, params: size=10 }
+      mtrcon:  		{ name: M2 Construcción, params: size=10 }
+      bscon:  		{ name: Bolivares Metro Construcción, params: size=10 }
+      fecpag:  		{ name: Fecha Ultimo Pago, type: input_date_tag, params: date_format='dd/MM/yyyy' size=10}
+      feccal:  		{ name: Fecha Ultimo Avalúo, type: input_date_tag, params: date_format='dd/MM/yyyy' size=10 }
       total_avaluo:  { name: Total Avalúo, params: size=10 }
-      aveinm:  { name: Avenidas,  params: size=1 maxlength=1 }
-      nrociv:  { name: Nro. Civico,  params: size=1 maxlength=1 }
-      urbinm:  { name: Urbanizaciòn,  params: size=1 maxlength=1 }
-      tipope:  { name: Tipo Operación,  params: size=1 maxlength=1 }
-      prodoc:  { name: Protocolo,  params: size=1 maxlength=1 }
+      aveinm:  		{ name: Avenidas, type: textarea_tag, params: size=50x2 maxlength=1000}
+      nrociv:  		{ name: Nro. Civico,  params: size=10 maxlength=100 }
+      urbinm:  		{ name: Urbanizaciòn, type: textarea_tag, params: size=50x2 maxlength=1000}
+      tipope:  		{ name: Tipo Operación,  params: size=20 maxlength=100 }
+      prodoc:  		{ name: Protocolo,  params: size=20 maxlength=100 }
       linnordoc:  { name: Lindero Norte,  params: size=50 maxlength=250 }
       linsurdoc:  { name: Lindero Sur,  params: size=50 maxlength=250 }
       linestdoc:  { name: Lindero Este,  params: size=50 maxlength=250 }
-      lindesdoc:  { name: Lindero Oeste,  params: size=50 maxlength=250 }
-      tipope:  { name: Tipo Operación,  params: size=1 maxlength=1 }
-      fecdoc:  { name: Fecha de Inicio, params: date_format='dd/MM/yyyy' }
-      valinm:  { name: Precio,  params: size=10 }
-      folio:  { name: Folio,  params: size=10 }
-      numdoc:  { name: Numero,  params: size=10 }
-      tomo:  { name: Tomo,  params: size=10 }
-      tridoc:  { name: Trimestre,  params: size=10 }
-      aredoc:  { name: Area,  params: size=10 }
-      dirinm:  { name: Dirección,  params: size=50 maxlength=250 }
-      linnor:  { name: Lindero Norte,  params: size=50 maxlength=250 }
-      linsur:  { name: Lindero Sur,  params: size=50 maxlength=250 }
-      linest:  { name: Lindero Este,  params: size=50 maxlength=250 }
-      linoes:  { name: Lindero Oeste,  params: size=50 maxlength=250 }
+      linoesdoc:  { name: Lindero Oeste,  params: size=50 maxlength=250 }
+      fecdoc:  		{ name: Fecha de Inicio, params: date_format='dd/MM/yyyy' size=10}
+      valinm:  		{ name: Precio,  params: size=10 }
+      folio:  		{ name: Folio,  params: size=10 }
+      numdoc:  		{ name: Numero,  params: size=10 }
+      tomo:  			{ name: Tomo,  params: size=10 }
+      tridoc:  		{ name: Trimestre,  params: size=10 }
+      aredoc:  		{ name: Area,  params: size=10 }
+      dirinm:  		{ name: Dirección, type: textarea_tag, params: size=50x2 maxlength=1000}
+      linnor:  		{ name: Lindero Norte,  params: size=50 maxlength=250 }
+      linsur:  		{ name: Lindero Sur,  params: size=50 maxlength=250 }
+      linest:  		{ name: Lindero Este,  params: size=50 maxlength=250 }
+      linoes:  		{ name: Lindero Oeste,  params: size=50 maxlength=250 }
       codsitinm:  { name: Codigo Situación Juridica,  params: size=50 maxlength=250 }
-      coduso:  { name: Codigo Uso de Inmueble,  params: size=50 maxlength=250 }
+      codusoinm:	{ name: Codigo Uso de Inmueble,  params: size=50 maxlength=250 }
+      codestinm:  { name: Estado del Inmueble,  params: size=4 maxlength=8 }
+      gridcomplemento:  { name: . }
+      funrec:   { name: Funcionario }
+      opciones: { name: . }
+      rifconant:{ name: C.I./R.I.F. }
+      traspaso: { name: traspaso, params: hidden=true }
+      mensaje:  { name: . }
+      estinm:   { name: Estado [A/D] }
+
     list:
       title:     Registro de Inmuebles
-      display:   [ =nroinm, =rifcon, nomcon]
+      display:   [ =nroinm, =rifcon, nomcon, estinm]
       sort:      nomcon
-      filters:   [nroinm, fecsol, nomcon]
+      filters:   [nroinm, fecsol, nomcon, estinm]
       fields:
         nomcon:
           params: size=10
         fecsol:
           params: size=10
-      max_per_page: 5
+      max_per_page: 10
       object_actions:
         _edit:        ~
         _delete:      ~
       sort:  nroinm
     edit:
+      fields:
+        nroinm:  { name: Número de Inscripción, params: size=22 maxlength=20 readonly=true}
       title:          Edición Registro de Inmuebles
       display:
+        "Datos Generales":  [ _nroinm, fecreg, _mensaje ]
+        "Operaciones con el Registro":  [ _opciones ]
         "Datos Contribuyentes":  [ _rifcon, _nacconcon, _tipconcon  ]
         "Datos del Representante Legal":  [ _rifrep, _nacconrep, _tipconrep ]
-        "Datos del Dueño Anterior":  [ fcconreprifcon, fcconrepnomcon, fcconrepdircon ]
-        "Catastro Uso":  [ _codcatfis, _codcatinm, _codcarinm ]
+        "Catastro Uso":  [ _codcatfis, _codcatinm, _codcarinm, _codestinm ]
+        "Datos Actuales del Inmueble":  [ aveinm, nrociv, urbinm, dirinm, linnor, linsur, linest, linoes, _codsitinm, _codusoinm ]
+        "Datos Actuales Segun Documento del Inmueble":  [ tipope, prodoc, fecdoc, valinm, folio, numdoc, tomo, _tridoc, aredoc, linnordoc, linsurdoc, linestdoc, linoesdoc ]
         "Avaluo":  [ anoava, _codzon, _grid, mtrter, bster, mtrcon, bscon, total_avaluo, fecpag, feccal ]
-        "Datos Actuales del Inmueble":  [ aveinm, nrociv, urbinm, dirinm, tipope, linnor, linsur, linest, linoes, _codsitinm, _coduso ]
-        "Datos Actuales Segun Documento del Inmueble":  [ tipope, prodoc, fecdoc, valinm, folio, numdoc, tomo, tridoc, aredoc, linnordoc, linsurdoc, linestdoc, lindesdoc ]
+        "Complementos":  [ _gridcomplemento]
+        "Datos del Dueño Anterior":  [ fcconreprifcon, fcconrepnomcon, fcconrepdircon ]
+        "Modificacion":  [ _funrec ]
       actions:
         _list:        ~
         _save:        ~
         _delete:      ~
         _create:      ~
+        desincorporacion:
+          name:  Desincorporacion
+          action:  desincorporacion
+          only_for:  edit
+          params: class="sf_admin_action_delete" action=desincorporacion confirm=Una vez desincorporado el inmueble no se pueden realizar ningun tipo de operacion sobre el mismo, y este proceso no se puede deshacer. Esta Seguro que desea desincorporar el inmueble?

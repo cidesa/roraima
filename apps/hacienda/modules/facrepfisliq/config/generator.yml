@@ -1,31 +1,91 @@
 generator:
-  class:              sfPropelAdminGenerator
+  class:              cidesaPropelAdminGenerator
   param:
     model_class:      Fcrepfis
-    theme:            default
+    theme:            cidesaGenerator
+
     fields:
       numrep: { name: Número Reparo}
-      fecrep: { name: Fecha Reparo}
-      numlic: { name: Número Licencia}
-      rifcon: { name: C.I/RIF}
-      nomcon: { name: Nombre}
-      dircon: { name: Dirección}
-      naccon: { name: Nacionalidad}
-      tipcon: { name: Tipo}
-      funrec: { name: Funcionario}      
-      monadi: { name: Adición/Disminución(+/-)}
+      fecrep: { name: Fecha Reparo, type: input_date_tag, params: date_format='dd/MM/yyyy' size=10   }
+      numlic:
+        name: Número Licencia
+        catalogo:
+          catalogoweb: Facrepfisliq_Numlic
+          clase: Fcsollic
+          ajax: 1
+          parametros: getprincipal="getNumlic" getsecundario="getNomneg" campoprincipal="numlic" camposecundario="nomneg" campobase = "id"
+          #catalogoparams:
+          #ajaxparams:
+          divupdate: divGrid
+          #id:
+      nomneg: { name: Nombre }
+
+      rifcon:
+        name: C.I./RIF
+        catalogo:
+          catalogoweb: Facpicsollic_Rifcon
+          clase: Fcconrep
+          ajax: 3
+          parametros: getprincipal="getRifcon" getsecundario="getNomcon" campoprincipal="rifcon" camposecundario="nomcon" campobase = "id"
+          #catalogoparams:
+          #ajaxparams:
+          #divupdate: divGrid
+          #id:
+
+      nomcon: { name: Nombre, params: size=22 maxlength=20 }
+      dircon: { name: Dirección, params: size=50 maxlength=255 readonly=false }
+      naccon: { name: Nacionalidad,  params: size=1 maxlength=1 readonly=false }
+      tipcon:  { name: Tipo de Persona,  params: size=1 maxlength=1 readonly=false }
+
+      rifrep:
+        name: C.I./RIF
+        catalogo:
+          catalogoweb: Facpicsollic_Rifrep
+          clase: Fcconrep
+          ajax: 1
+          parametros: getprincipal="getRifcon" getsecundario="getNomcon" campoprincipal="rifrep" camposecundario="nomconrep" campobase = "id"
+          #catalogoparams:
+          #ajaxparams:
+          #divupdate: divGrid
+          #id:
+      nomconprep: { name: Nombre, params: size=22 maxlength=20 }
+      dirconrep: { name: Dirección, params: size=50 maxlength=255 readonly=false }
+      nacconrep: { name: Nacionalidad,  params: size=1 maxlength=1 readonly=false }
+      tipconrep:  { name: Tipo de Persona,  params: size=1 maxlength=1 readonly=false }
+      funrec: { name: Funcionario}
+
+#      monadi: { name: Adición/Disminución(+/-)}
       monrep: { name: Monto Reparo}
-      conrep: { name: Convenio del Reparo}
-      modo: { name: Tipo}      
-        
+      totdec: { name: Monto Declaracion}
+
+#      modo: { name: Tipo}
+
+      fuerep: { name: Fuente de Ingreso (Reparo)}
+      fuesan: { name: Fuente de Ingreso (Sancion)}
+      conrep: { name: Comentario del Reparo, type: textarea_tag, params: size=35x2 maxlength=250 }
+
+      grid:   { name: . }
+      griddistribucion:   { name: . }
+
     list:
-      title:          Reparos Fiscales  
+      title:          Reparos Fiscales
       filters:        [numrep]
-      display:        [=numrep, fecrep]           
+      display:        [=numrep, fecrep]
       object_actions:
-        _edit:        ~     
-        _delete:      ~ 
-      max_per_page:   5    
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   15
     edit:
       title:          Registro de Ajustes y Reparos Fiscales
-      display:       [=numrep, fecrep, numlic, rifcon, nomcon, dircon, naccon, tipcon, funrec, monadi, monrep, conrep, modo]
+      display:
+        Definición:            [ =numrep, fecrep, _numlic, _funrec, monadi, monrep, conrep, modo ]
+        "Datos Contribuyentes":  [ rifcon, _naccon, dircon, _tipcon  ]
+        "Datos del Representante Legal":  [ rifrep, _nacconrep, dirconrep, _tipconrep ]
+        "Datos Reparo":  [ _fuerep, _fuesan, conrep ]
+        "Totales":  [ monrep, totdec ]
+        "Actividades Comerciales":  [  _grid ]
+        "Distribucion de la Deuda":  [  _griddistribucion ]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

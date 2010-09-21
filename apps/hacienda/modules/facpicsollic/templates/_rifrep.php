@@ -8,5 +8,5 @@
   //cajitas abajo
   'campoprincipal' => 'rifrep',
   'camposecundario' => 'nomconrep',
-  'campobase' => 'id'
+  'campobase' => 'id',
   ), 'Facpicsollic_Rifrep', 'fcconrep', '', $id); ?>
