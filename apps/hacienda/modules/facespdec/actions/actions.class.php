@@ -32,6 +32,7 @@ class facespdecActions extends autofacespdecActions
 		$c = new Criteria();
 		$c->add(FcfueprePeer::CODFUE, $this->fcdeclar->getFuente());
 		$reg = FcfueprePeer::doSelectOne($c);
+		if ($reg) {
 
 		if ($reg->getFrecob()=='999')
 		{
@@ -42,6 +43,7 @@ class facespdecActions extends autofacespdecActions
 			$this->fcdeclar->setFrecuencia($reg->getFrecob());
 			$this->fcdeclar->setFechainicio($reg->getInieje());
 			$this->fcdeclar->setFechafin($reg->getFineje());
+		}
 		}
   }
 
