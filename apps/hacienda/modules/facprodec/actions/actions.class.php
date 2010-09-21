@@ -12,7 +12,7 @@
 
 class facprodecActions extends autofacprodecActions
 {
-	public $params=array();
+	//public $params=array();
 
   // Para incluir funcionalidades al executeEdit()
   public function editing()
@@ -27,6 +27,7 @@ class facprodecActions extends autofacprodecActions
 		$c = new Criteria();
 		$c->add(FcfueprePeer::CODFUE, $this->fcdeclar->getFuente());
 		$reg = FcfueprePeer::doSelectOne($c);
+		if ($reg) {
 
 		if ($reg->getFrecob()=='999')
 		{
@@ -37,6 +38,7 @@ class facprodecActions extends autofacprodecActions
 			$this->fcdeclar->setFrecuencia($reg->getFrecob());
 			$this->fcdeclar->setFechainicio($reg->getInieje());
 			$this->fcdeclar->setFechafin($reg->getFineje());
+		}
 		}
 
   }
@@ -58,6 +60,7 @@ class facprodecActions extends autofacprodecActions
 	$reg = FcfueprePeer::doSelectone($c);
 	//H::printR($reg);
 //echo $this->fuente." kkkkkkk";
+   if ($reg) {
 	if ($reg->getFrecob()=='999')
 	{
 		  $this->frecuencia  = '1';
@@ -76,6 +79,7 @@ class facprodecActions extends autofacprodecActions
           $fec=explode('-',$reg->getFineje());
           $this->fechafin=$fec[2]."/".$fec[1]."/".$fec[0];
 	}
+   }
 
   }
 
@@ -107,7 +111,7 @@ class facprodecActions extends autofacprodecActions
 		$per = FcdeclarPeer :: doSelect($c);
    	}else{ $per = $reg;  }
 
-H::printR($per);
+//H::printR($per);
 	    $this->columnas = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/facprodec/'.sfConfig::get('sf_app_module_config_dir_name').'/grid_consulta_deuda');
 	    $this->gridD = $this->columnas[0]->getConfig($per);
 
