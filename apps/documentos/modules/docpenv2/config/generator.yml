@@ -28,7 +28,7 @@ generator:
       dfatendocdet:   { name: . }
     list:
       title:          Revisión de Documentos
-      display:        [=nroexp, =coddoc, desdoc, _fecdoc, staate, anuate, estado, infdoc1, infdoc2 ]
+      display:        [=nroexp, =coddoc, desdoc, _fecdoc, _estado, anuate, estado, infdoc1, infdoc2 ]
       filters:      [nroexp, coddoc, desdoc, _staate, infdoc1, infdoc2 ]
       fields:
         desdoc:         { name : Descripción, params: size=15 }
@@ -42,7 +42,7 @@ generator:
       title:          Atención de Documentos
       display:
         Información del Documento: [_nroexp, id_dftabtip, coddoc, desdoc, fecdoc, mondoc, elestado, infdoc1, infdoc2, infdoc3, infdoc4 ]
-        Información de Atención: [staate, anuate, desate, _diaent, _dfmedtra ]
+        Información de Atención: [_estado, anuate, desate, _diaent, _dfmedtra ]
         Detalle y Observaciones: [_dfatendocdet]
       actions:
         _list:        ~
