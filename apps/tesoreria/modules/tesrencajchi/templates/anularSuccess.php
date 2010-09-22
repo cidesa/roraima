@@ -64,7 +64,7 @@
   'date_format' => 'dd/MM/yy',
   'onkeyup' => "javascript: mascara(this,'/',patron,true)",
   'onBlur'=> remote_function(array(
-        'url'      => 'pagemiord/ajax',
+        'url'      => 'tesrencajchi/ajax',
         'complete' => 'AjaxJSON(request, json), validafec()',
         'condition' => "$('opordpag_fecanu').value != ''",
         'with' => "'ajax=4&numord='+$('numord').value+'&codigo='+this.value"

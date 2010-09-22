@@ -28,4 +28,14 @@ class Cpdoccau extends BaseCpdoccau
     {
         return $this->etadef;
     }
+
+  public function getTipmovren()
+  {
+  	return self::getTipcau();
+  }
+
+  public function getNommovren()
+  {
+  	return self::getNomext();
+  }
 }

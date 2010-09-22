@@ -1,0 +1,89 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Tsdeffonant
+    theme:            cidesaGenerator
+    fields:
+      codfon: { name: Código, params: size=10 maxlength=3}
+      desfon: { name: Descripción, params: maxlength=250}
+      unieje:
+        name: Unidad Ejecutora
+        params: maxlength=30
+        catalogo:
+          catalogoweb: Bnubica_Almordcom
+          clase: Bnubica
+          ajax: 0
+          parametros: getprincipal="getUnieje" getsecundario="getDesunieje" campoprincipal="unieje" camposecundario="desunieje" campobase = "id"
+      coduniadm:
+        name: Unidad Administradora
+        params: maxlength=30
+        catalogo:
+          catalogoweb: Tsuniadm_Tesdeffonant
+          clase: Tsuniadm
+          ajax: 0
+          parametros: getprincipal="getCoduniadm" getsecundario="getDesuniadm" campoprincipal="coduniadm" camposecundario="desuniadm" campobase = "id"
+      cedrif:
+        name: Beneficiario
+        params: maxlength=15
+        catalogo:
+          catalogoweb: Opbenefi_Pagemiord
+          clase: Opbenefi
+          ajax: 0
+          parametros: getprincipal="getCedrif" getsecundario="getNomben" campoprincipal="cedrif" camposecundario="nomben" campobase = "id"
+      codcat:
+        name: Categoría
+        params: maxlength=32
+        catalogo:
+          catalogoweb: Npcatpre_Almsolegr
+          clase: Npcatpre
+          ajax: 0
+          parametros: getprincipal="getCodcat" getsecundario="getNomcat" campoprincipal="codcat" camposecundario="nomcat" campobase = "id"
+          catalogoparams: /param1/'."'+$('tsdeffonant_longitud').value+'".'
+      numcue:
+        name: Cuenta Bancaria
+        params: maxlength=20
+        catalogo:
+          catalogoweb: Opdefemp_tsdefban
+          clase: Tsdefban
+          ajax: 0
+          parametros: getprincipal="getNumcue" getsecundario="getNomcue" campoprincipal="numcue" camposecundario="nomcue" campobase = "id"
+      tipmovsal:
+        name: Movimiento de Salida
+        params: onblur=convertirMayusculas(this.id) maxlength=4
+        catalogo:
+          catalogoweb: Opdefemp_pagdefemp3
+          clase: Tstipmov
+          ajax: 0
+          parametros: getprincipal="getTipmovsal" getsecundario="getDestipmovsal" campoprincipal="tipmovsal" camposecundario="destipmovsal" campobase = "id"
+      tipmovren:
+        name: Movimiento de Reposición
+        params: onblur=convertirMayusculas(this.id) maxlength=4
+        catalogo:
+          catalogoweb: Cpdoccau_Pagemiord
+          clase: Cpdoccau
+          ajax: 0
+          parametros: getprincipal="getTipmovren" getsecundario="getNommovren" campoprincipal="tipmovren" camposecundario="nommovren" campobase = "id"
+      monmincon:  {name: Monto Min. Constitución (en U.T)}
+      monmin:     {name: Monto Mínimo (en Bs. F)}
+      monmaxcon:  {name: Monto Max. Constitución (en U.T)}
+      monmax:     {name: Monto Máximo (en Bs. F)}
+      porrep:  {name: Porcentaje de Reposición}
+      numini: { name: N° Inicial, params: size=10 maxlength=8}
+    list:
+      title:          Constitución de Fondo en Anticipo
+      display:        [=codfon, desfon]
+      filters:        [codfon, desfon, cedrif]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+      sort: codfon
+    edit:
+      title:          Constitución de Fondo en Anticipo
+      display:       [codfon, desfon, unieje, coduniadm, cedrif, codcat, numcue, tipmovsal, tipmovren, monmincon, monmin, monmaxcon, monmax, porrep, numini]
+      hide:          [longitud]
+      actions:
+        _list:                 ~
+        _save:                 ~
+        _create:               ~
+        _delete:               ~

@@ -61,4 +61,14 @@ class Bnubica extends BaseBnubica
   	return $this->tiedatrel;
   }
 
+  public function getUnieje()
+  {
+  	return self::getCodubi();
+  }
+
+  public function getDesunieje()
+  {
+  	return self::getDesubi();
+  }
+
 }

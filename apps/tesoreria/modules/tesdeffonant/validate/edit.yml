@@ -1,0 +1,174 @@
+methods:
+  post:
+   - "tsdeffonant{codfon}"
+   - "tsdeffonant{desfon}"
+   - "tsdeffonant{unieje}"
+   - "tsdeffonant{coduniadm}"
+   - "tsdeffonant{cedrif}"
+   - "tsdeffonant{codcat}"
+   - "tsdeffonant{numcue}"
+   - "tsdeffonant{tipmovsal}"
+   - "tsdeffonant{tipmovren}"
+   - "tsdeffonant{monmincon}"
+   - "tsdeffonant{monmaxcon}"
+   - "tsdeffonant{porrep}"
+   - "tsdeffonant{numini}"
+   
+
+names:
+  tsdeffonant{codfon}:
+    required:  Yes
+    required_msg: El Código del Fondo en Anticipo no puedo estar en Blanco
+    validators: Validator_codfon, CodigoValidator
+
+  tsdeffonant{desfon}:
+    required:  Yes
+    required_msg: La Descripción del Fondo en Anticipo no puedo estar en Blanco
+    validators: Validator_desfon
+
+  tsdeffonant{unieje}:
+    required:  Yes
+    required_msg: La Unidad Ejecutora  del Fondo en Anticipo no puedo estar en Blanco
+    validators: ExistValidator_unieje
+
+  tsdeffonant{coduniadm}:
+    required:  Yes
+    required_msg: La Unidad Administrativa del Fondo en Anticipo no puedo estar en Blanco
+    validators: ExistValidator_coduniadm
+
+  tsdeffonant{cedrif}:
+    required:  Yes
+    required_msg: El Beneficiario del Fondo en Anticipo no puedo estar en Blanco
+    validators: ExistValidator_cedrif
+
+  tsdeffonant{codcat}:
+    required:  Yes
+    required_msg: La Categoria del Fondo en Anticipo no puedo estar en Blanco
+    validators: ExistValidator_codcat
+
+  tsdeffonant{numcue}:
+    required:  Yes
+    required_msg: La Cuenta Bancaria del Fondo en Anticipo no puedo estar en Blanco
+    validators: ExistValidator_numcue
+
+  tsdeffonant{tipmovsal}:
+    required:  Yes
+    required_msg: El Moviento de Salida del Fondo en Anticipo no puedo estar en Blanco
+    validators: ExistValidator_tipmovsal
+
+  tsdeffonant{tipmovren}:
+    required:  Yes
+    required_msg: El Moviento de Reposición del Fondo en Anticipo no puedo estar en Blanco
+    validators: ExistValidator_tipmovren
+
+  tsdeffonant{monmincon}:
+    required:  No
+    validators: MontoValidator
+
+  tsdeffonant{monmaxcon}:
+    required:  No
+    validators: MontoValidator
+
+  tsdeffonant{porrep}:
+    required:  No
+    validators: Num3Validator, Porcen1Validator
+
+  tsdeffonant{numini}:
+    required:  No
+    validators: InicialFonAntValidator
+
+
+Validator_codfon:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Tsdeffonant
+        column:       codfon
+        unique_error: El registro ya Existe intente con otro.
+
+
+ExistValidator_numcue:
+    class: CidesaExistValidator
+    param:
+        class:        Tsdefban
+        column:       numcue
+        unique_error: La cuenta Bancaria del Fondo en Anticipo no Existe.
+
+ExistValidator_tipmovsal:
+    class: CidesaExistValidator
+    param:
+        class:        Tstipmov
+        column:       codtip
+        unique_error: El Movimiento de Salida del Fondo en Anticipo no Existe.
+
+ExistValidator_tipmovren:
+    class: CidesaExistValidator
+    param:
+        class:        Cpdoccau
+        column:       tipcau
+        unique_error: El Movimiento de Reposición del Fondo en Anticipo no Existe.
+
+ExistValidator_cedrif:
+    class: CidesaExistValidator
+    param:
+        class:        Opbenefi
+        column:       cedrif
+        unique_error: El Beneficiario del Fondo en Anticipo no Existe.
+
+ExistValidator_codcat:
+    class: CidesaExistValidator
+    param:
+        class:        Npcatpre
+        column:       codcat
+        unique_error: La Categoría del Fondo en Anticipo no Existe.
+
+CodigoValidator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^[0-9]*$/' ]
+        values_error: El CÃ³digo del Fondo en Anticipo solo puede contener valores nÃºmericos
+
+InicialFonAntValidator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^[0-9]*$/' ]
+        values_error: El Número Inicial del Fondo en Anticipo solo puede contener valores númericos
+
+MontoValidator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^([0-9]*(\.*([0-9]{2,}))*\,?[0-9]+|[0-9]+\,?[0-9]*)?$/' ]
+        values_error: El valor introducido no cumple con el formato para montos
+
+Num3Validator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^([0-9]*(\.*([0-9]{2,}))*\,?[0-9]+|[0-9]+\,?[0-9]*)?$/' ]
+        values_error: El Porcentaje de Reposición del Fondo en Anticipo solo puede contener valores númericos
+
+Porcen1Validator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^(0*100{1,1}\,?((?<=\,)0*)?%?$)|(^0*\d{0,2}\,?((?<=\,)\d*)?%?)$/' ]
+        values_error: El Porcentaje de Reposición del Fondo en Anticipo debe estar entre 0-100
+
+Validator_desfon:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       250
+        max_error: La descripción no puede pasar mas de 250 caracteres
+
+ExistValidator_unieje:
+    class: CidesaExistValidator
+    param:
+        class:        Bnubica
+        column:       codubi
+        unique_error: La Unidad Ejecutora del Fondo en Anticipo no Existe.
+
+ExistValidator_coduniadm:
+    class: CidesaExistValidator
+    param:
+        class:        Tsuniadm
+        column:       coduniadm
+        unique_error: La Unidad Administrativa del Fondo en Anticipo no Existe.

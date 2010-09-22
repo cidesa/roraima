@@ -37,6 +37,10 @@ abstract class BaseOpdetord extends BaseObject  implements Persistent {
 
 
 	
+	protected $reffon;
+
+
+	
 	protected $id;
 
 	
@@ -95,6 +99,13 @@ abstract class BaseOpdetord extends BaseObject  implements Persistent {
   {
 
     return trim($this->refsal);
+
+  }
+  
+  public function getReffon()
+  {
+
+    return trim($this->reffon);
 
   }
   
@@ -175,6 +186,16 @@ abstract class BaseOpdetord extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setReffon($v)
+	{
+
+    if ($this->reffon !== $v) {
+        $this->reffon = $v;
+        $this->modifiedColumns[] = OpdetordPeer::REFFON;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -203,7 +224,9 @@ abstract class BaseOpdetord extends BaseObject  implements Persistent {
 
       $this->refsal = $rs->getString($startcol + 6);
 
-      $this->id = $rs->getInt($startcol + 7);
+      $this->reffon = $rs->getString($startcol + 7);
+
+      $this->id = $rs->getInt($startcol + 8);
 
       $this->resetModified();
 
@@ -211,7 +234,7 @@ abstract class BaseOpdetord extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 8; 
+            return $startcol + 9; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Opdetord object", $e);
     }
@@ -380,6 +403,9 @@ abstract class BaseOpdetord extends BaseObject  implements Persistent {
 				return $this->getRefsal();
 				break;
 			case 7:
+				return $this->getReffon();
+				break;
+			case 8:
 				return $this->getId();
 				break;
 			default:
@@ -399,7 +425,8 @@ abstract class BaseOpdetord extends BaseObject  implements Persistent {
 			$keys[4] => $this->getMondes(),
 			$keys[5] => $this->getMonret(),
 			$keys[6] => $this->getRefsal(),
-			$keys[7] => $this->getId(),
+			$keys[7] => $this->getReffon(),
+			$keys[8] => $this->getId(),
 		);
 		return $result;
 	}
@@ -437,6 +464,9 @@ abstract class BaseOpdetord extends BaseObject  implements Persistent {
 				$this->setRefsal($value);
 				break;
 			case 7:
+				$this->setReffon($value);
+				break;
+			case 8:
 				$this->setId($value);
 				break;
 		} 	}
@@ -453,7 +483,8 @@ abstract class BaseOpdetord extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[4], $arr)) $this->setMondes($arr[$keys[4]]);
 		if (array_key_exists($keys[5], $arr)) $this->setMonret($arr[$keys[5]]);
 		if (array_key_exists($keys[6], $arr)) $this->setRefsal($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setId($arr[$keys[7]]);
+		if (array_key_exists($keys[7], $arr)) $this->setReffon($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setId($arr[$keys[8]]);
 	}
 
 	
@@ -468,6 +499,7 @@ abstract class BaseOpdetord extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(OpdetordPeer::MONDES)) $criteria->add(OpdetordPeer::MONDES, $this->mondes);
 		if ($this->isColumnModified(OpdetordPeer::MONRET)) $criteria->add(OpdetordPeer::MONRET, $this->monret);
 		if ($this->isColumnModified(OpdetordPeer::REFSAL)) $criteria->add(OpdetordPeer::REFSAL, $this->refsal);
+		if ($this->isColumnModified(OpdetordPeer::REFFON)) $criteria->add(OpdetordPeer::REFFON, $this->reffon);
 		if ($this->isColumnModified(OpdetordPeer::ID)) $criteria->add(OpdetordPeer::ID, $this->id);
 
 		return $criteria;
@@ -512,6 +544,8 @@ abstract class BaseOpdetord extends BaseObject  implements Persistent {
 		$copyObj->setMonret($this->monret);
 
 		$copyObj->setRefsal($this->refsal);
+
+		$copyObj->setReffon($this->reffon);
 
 
 		$copyObj->setNew(true);

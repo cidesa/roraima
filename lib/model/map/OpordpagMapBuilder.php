@@ -168,6 +168,8 @@ class OpordpagMapBuilder {
 
 		$tMap->addColumn('LOGUSE', 'Loguse', 'string', CreoleTypes::VARCHAR, false, 50);
 
+		$tMap->addColumn('CODFONANT', 'Codfonant', 'string', CreoleTypes::VARCHAR, false, 3);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

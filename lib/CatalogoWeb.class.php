@@ -6437,6 +6437,14 @@ public function Catdefcatman_Cattramo($params = '') {
                     CadefcenacoPeer :: DESCENACO => 'Descripción'
             );
 	}
+
+	public function Tsuniadm_Tesdeffonant() {
+            $this->c = new Criteria();
+            $this->columnas = array (
+                    TsuniadmPeer :: CODUNIADM => 'Código',
+                    TsuniadmPeer :: DESUNIADM => 'Descripción'
+            );
+	}
         
 }
 
