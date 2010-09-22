@@ -599,6 +599,9 @@ propel:
     refsal:
       type: VARCHAR
       size: 1000
+    reffon:
+      type: VARCHAR
+      size: 1000
     id:
       type: INTEGER
       required: true
@@ -1011,9 +1014,9 @@ propel:
     loguse:
       type: VARCHAR
       size: 50
-    cedrif:
+    codfonant:
       type: VARCHAR
-      size: 15
+      size: 3
     id:
       type: INTEGER
       required: true
@@ -2901,3 +2904,68 @@ propel:
     _uniques:
       unique_tsdeffonant_codfon:
         - codfon
+  tsfonant:
+    reffon:
+      type: VARCHAR
+      size: 8
+      required: true
+    fecfon:
+      type: DATE
+      required: true
+    cedrif:
+      type: VARCHAR
+      size: 15
+    desfon:
+      type: VARCHAR
+      size: 1000
+    monfon:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    stafon:
+      type: VARCHAR
+      size: 1
+    codfon:
+      type: VARCHAR
+      size: 3
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  tsdetfon:
+    reffon:
+      type: VARCHAR
+      size: 8
+      required: true
+    codart:
+      type: VARCHAR
+      size: 20
+      required: true
+    codcat:
+      type: VARCHAR
+      size: 50
+      required: true
+    monfon:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monrec:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    totfon:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    stafon:
+      type: VARCHAR
+      size: 1
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro

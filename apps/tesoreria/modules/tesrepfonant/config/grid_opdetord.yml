@@ -1,0 +1,28 @@
+opciones:                  # Opciones generales
+  eliminar:                false
+  tabla:                   opdetord
+  anchogrid:               700
+  ancho:                   500
+  filas:                   0
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Código Presupuestario
+  tipo:                    t
+  nombrecampo:             codpre
+  esgrabable:              true
+  html:                    [size="50" readonly=true]
+2:       # Columna 2
+  titulo:                  Monto
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             moncau
+  esnumerico:              true
+  html:                    [size="10" readonly=true]
+3:       # Columna 3
+  titulo:                  Referencia Salida
+  tipo:                    t
+  nombrecampo:             reffon
+  esgrabable:              true
+  html:                    [size="50" readonly=true]
+  oculta:                  true

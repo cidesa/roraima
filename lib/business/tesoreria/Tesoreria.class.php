@@ -2951,4 +2951,467 @@ public static function reversarMovSegLib($clasemodelo)
     }
   }
 
+  public static function salvarSalidaFondosAnticipo($tsfonant,$grid)
+  {
+    if (OrdendePago::agregaBenefi($tsfonant)==true)
+    {
+      OrdendePago::grabarBenefi($tsfonant);
+}
+    self::generaSalidaFonAnt($tsfonant,$grid);
+
+    self::Genera_MovLibF($tsfonant,$tsfonant->getDesfon(),$tsfonant->getMonfon(),null,$tsfonant->getReffon(),null);
+    self::Actualiza_BancosCaja($tsfonant,"A","C",$tsfonant->getMonfon(),$tsfonant->getReffon());
+  }
+
+  public static function generaSalidaFonAnt($tsfonant,$grid)
+  {
+     if ($tsfonant->getReffon()=='########')
+     {
+       $r=((H::getX('CODFON', 'Tsdeffonant', 'numini', $tsfonant->getCodfon()))+1);
+        $encontrado=false;
+         while (!$encontrado)
+         {
+          $numero=str_pad($r, 8, '0', STR_PAD_LEFT);
+          $c= new Criteria();
+          $c->add(TsfonantPeer::REFFON,$numero);
+          $resul= TsfonantPeer::doSelectOne($c);
+          if ($resul)
+          {
+          	$r=$r+1;
+          }
+          else
+          {
+            $encontrado=true;
+          }
+         }
+         $tsfonant->setReffon($numero);
+        $t= new Criteria();
+        $t->add(TsdeffonantPeer::CODFON,$tsfonant->getCodfon());
+        $reg= TsdeffonantPeer::doSelectOne($t);
+        if ($reg)
+        {
+            $reg->setNumini($r);
+            $reg->save();
+        }
+    }
+    else
+    {
+      $tsfonant->setReffon(str_replace('#','0',$tsfonant->getReffon()));
+    }
+
+    $tsfonant->setStafon('P');
+    $tsfonant->save();
+    self::generaDetalleSalidaF($tsfonant,$grid);
+  }
+
+  public static function generaDetalleSalidaF($tsfonant,$grid)
+  {
+    $x=$grid[0];
+    $j=0;
+    while ($j<count($x))
+    {
+      if ($x[$j]->getCodart()!='')
+      {
+        $x[$j]->setReffon($tsfonant->getReffon());
+        $x[$j]->setStafon('P');
+        $x[$j]->save();
+      }
+      $j++;
+    }
+
+    $z=$grid[1];
+    $j=0;
+    if (!empty($z[$j]))
+    {
+      while ($j<count($z))
+      {
+        $z[$j]->delete();
+        $j++;
+      }
+    }
+  }
+
+  public static function Genera_MovLibF($tscheemi,$Descrip,$Monto,$Comprobante,$numche,$refpago='')
+  {
+    $result=array();
+    $criterio = "Select * From TSMOVLIB Where NumCue = '".$tscheemi->getNumcue()."' AND RefLib = '".$numche."' And TipMov='".$tscheemi->getTipdoc()."'";
+    if (!Herramientas::BuscarDatos($criterio,&$result))
+    {
+      $tsmovlib = new Tsmovlib();
+      $tsmovlib->setRefpag($refpago);
+      $tsmovlib->setNumcue($tscheemi->getNumcue());
+      $tsmovlib->setReflib($numche);
+      $tsmovlib->setFeclib($tscheemi->getFecfon());
+      $tsmovlib->setTipmov($tscheemi->getTipdoc());
+      $tsmovlib->setDeslib($Descrip);
+      $CtaBan = Herramientas::getX('numcue','Tsdefban','Codcta',$tscheemi->getNumcue());
+      $tsmovlib->setMonmov($Monto);
+      $tsmovlib->setCodcta($CtaBan);
+      $tsmovlib->setNumcom($Comprobante);
+      $tsmovlib->setFeccom($tscheemi->getFecfon());
+      $tsmovlib->setStatus("C");
+      $tsmovlib->setStacon("N");
+      $tsmovlib->setFecing(date("Y-m-d"));
+      $tsmovlib->save();
+    }
+    else
+    {
+      $mensaje="El Movimiento Según Libro ya ha Sido Grabado";
+    }
+  }
+
+  public static function FormarArreImpF($cadenasal)
+  {
+    $arregloimp=array();
+    $j=0;
+    $arre=split('/',$cadenasal);
+    $ind=count($arre)-1;
+    $p=1;
+    while ($p<=$ind)
+    {
+      $sql = "Select A.Codcat||'-'||B.CodPar as codpre,Sum(A.Monfon) as moncau, A.reffon as reffon, '' as id From TSDetfon A,CARegArt B Where A.Reffon='".$arre[$p]."' And A.CodArt=B.CodArt Group By A.Codcat,B.CodPar,A.reffon";
+      if (Herramientas :: BuscarDatos($sql, & $reg)){
+         $i=0;
+         while ($i<count($reg)) {
+          $j=count($arregloimp)+1;
+          $arregloimp[$j-1]["codpre"]=$reg[$i]["codpre"];
+          $arregloimp[$j-1]["moncau"]=number_format($reg[$i]["moncau"],2,',','.');
+          $arregloimp[$j-1]["reffon"]=$reg[$i]["reffon"];
+          $arregloimp[$j-1]["id"]=$reg[$i]["id"];
+          $i++;
+         }
+      }
+      $p++;
+    }
+    return $arregloimp;
+  }
+
+   public static function ArreglodetF($grid)
+  {
+  	$arreglodet=array();
+  	$x=$grid[0];
+    $j=0;
+    while ($j<count($x))
+    {
+  	    $pos=self::posicion_en_el_grid($arreglodet,$x[$j]["codpre"]);
+        if ($pos==0)
+        {
+         $l=count($arreglodet)+1;
+         $arreglodet[$l-1]["codpre"]=$x[$j]["codpre"];
+         $arreglodet[$l-1]["moncau"]=$x[$j]["moncau"];
+         $arreglodet[$l-1]["reffon"]=$x[$j]["reffon"];
+        }
+        else
+        {
+          $valor=H::toFloat($arreglodet[$pos-1]["moncau"]);
+          $arreglodet[$pos-1]["moncau"]=($valor+$x[$j]["moncau"]);
+          $arreglodet[$pos-1]["reffon"]=$x[$j]["reffon"].",".$arreglodet[$pos-1]["reffon"];
+        }
+
+        $j++;
+    }
+
+    return $arreglodet;
+  }
+
+  public static function validarDisponibilidadPresuFonAnt($grid,$afecta,&$codigo)
+  {
+    $validardisponibilidad=true;
+    $arreglo=self::ArreglodetF($grid);
+    $j=0;
+    while ($j<count($arreglo))
+    {
+     $codigo=$arreglo[$j]["codpre"];
+     if (!OrdendePago::montoValido($j,H::toFloat($arreglo[$j]["moncau"]),'N',$codigo,$afecta,&$msj,&$mondis,&$sobregiro))
+     {
+      $validardisponibilidad=false;
+      break;
+     }
+     $j++;
+    }
+    return $validardisponibilidad;
+  }
+
+  public static function grabarComprobanteF($opordpag,$grid,&$msjuno,&$arrcompro)
+  {
+    if ($opordpag->getNumord()=='########')
+    {
+       if (Herramientas::getVerCorrelativo('numini','opdefemp',&$r))
+       {
+       	 $encontrado=false;
+         while (!$encontrado)
+         {
+          $numero=str_pad($r, 8, '0', STR_PAD_LEFT);
+          $c= new Criteria();
+          $c->add(OpordpagPeer::NUMORD,$numero);
+          $resul= OpordpagPeer::doSelectOne($c);
+          if ($resul)
+          {
+          	$r=$r+1;
+          }
+          else
+          {
+            $encontrado=true;
+          }
+         }
+         $numorden=$numero;
+      }
+    }
+    else
+    {
+      $numorden=str_replace('#','0',$opordpag->getNumord());
+    }
+     $confcorcom=sfContext::getInstance()->getUser()->getAttribute('confcorcom');
+    if ($confcorcom=='N')
+    {
+      $numcom= "OP".substr($numorden,2,6);
+    }else $numcom= OrdendePago::Buscar_Correlativo();
+
+    $reftra=$numorden;
+    $codigocuenta="";
+    $tipo="";
+    $des="";
+    $monto="";
+    $codigocuentas="";
+    $tipo1="";
+    $desc="";
+    $monto1="";
+    $codigocuenta2="";
+    $tipo2="";
+    $des2="";
+    $monto2="";
+    $cuentas="";
+    $tipos="";
+    $montos="";
+    $descr="";
+    $msjuno="";
+
+    $x=$grid[0];
+    $j=0;
+    while ($j<count($x))
+    {
+        $c= new Criteria();
+        $c->add(CpdeftitPeer::CODPRE,$x[$j]["codpre"]);
+        $regis = CpdeftitPeer::doSelectOne($c);
+        if ($regis)
+        {
+          if(!is_null($regis->getCodcta()))
+          {
+            $cuenta=$regis->getCodcta();
+          }else {$cuenta='';}
+
+          $b= new Criteria();
+          $b->add(ContabbPeer::CODCTA,$cuenta);
+          $regis2 = ContabbPeer::doSelectOne($b);
+          if ($regis2)
+          {
+            $moncau=$x[$j]["moncau"];
+            if ($moncau>0)
+            {
+              $codigocuenta=$regis2->getCodcta();
+              $tipo='D';
+              $des="";
+              $moncau=$x[$j]["moncau"];
+              $monto=$moncau;
+           }
+          }else { $msjuno='El Código Presupuestario'.$x[$j]["codpre"].' no tiene asociado Codigo Contable válido'; return true;}
+        }
+         if ($j==0)
+         {
+           $codigocuentas=$codigocuenta;
+           $desc=$des;
+           $tipo1=$tipo;
+           $monto1=$monto;
+         }
+         else
+         {
+          $codigocuentas=$codigocuentas.'_'.$codigocuenta;
+          $desc=$desc.'_'.$des;
+          $tipo1=$tipo1.'_'.$tipo;
+          $monto1=$monto1.'_'.$monto;
+          }
+
+      $j++;
+    }
+
+    $t= new Criteria();
+    $t->add(TsdeffonantPeer::CODFON,$opordpag->getCodfonant());
+    $reg= TsdeffonantPeer::doSelectOne($t);
+    if ($reg){
+
+      $n= new Criteria();
+      $n->add(OpbenefiPeer::CEDRIF,$reg->getCedrif());
+      $resul= OpbenefiPeer::doSelectOne($n);
+      if ($resul)
+      {
+        if (!is_null($resul->getCodcta())  && $resul->getCodcta()!='')
+        {
+         $codigocuenta2=$resul->getCodcta();
+         if ($opordpag->getMonord()>0)
+        {
+          $tipo2='C';
+          $des2="";
+          $b=$opordpag->getMonord();
+          $monto2=$b;
+        }
+        }else {$codigocuenta2="";
+             $tipo2="";
+          $des2="";
+          $b="0,00";
+          $monto2=$b;
+        }
+      }
+    }else{
+        $codigocuenta2="";
+             $tipo2="";
+          $des2="";
+          $b="0,00";
+          $monto2=$b;
+    }
+      $cuentas=$codigocuenta2.'_'.$codigocuentas;
+      $descr=$des2.'_'.$desc;
+      $tipos=$tipo2.'_'.$tipo1;
+      $montos=$monto2.'_'.$monto1;
+
+
+      $clscommpro=new Comprobante();
+	  $clscommpro->setGrabar("N");
+	  $clscommpro->setNumcom($numcom);
+	  $clscommpro->setReftra($reftra);
+	  $clscommpro->setFectra(date("d/m/Y",strtotime($opordpag->getFecemi())));
+	  $clscommpro->setDestra($opordpag->getDesord());
+	  $clscommpro->setCtas($cuentas);
+	  $clscommpro->setDesc($descr);
+	  $clscommpro->setMov($tipos);
+	  $clscommpro->setMontos($montos);
+	  $arrcompro[]=$clscommpro;
+  }
+
+public static function salvarReposicionFondosAnticipo($opordpag,$grid,$numerocomp,$grid1)
+  {
+  	self::grabarOrdenF($opordpag,$numerocomp);
+  	self::grabarDetalleOrdenF($opordpag,$grid);
+  	self::grabarCausado($opordpag);
+  	self::grabarImpcauF($opordpag,$grid);
+
+  	$x=$grid1[0];
+        $j=0;
+        while ($j<count($x))
+        {
+          if ($x[$j]->getCheck()=='1'){
+          $a= new Criteria();
+  	  $a->add(TsfonantPeer::REFFON,$x[$j]->getReffon());
+  	  $data= TsfonantPeer::doSelectOne($a);
+  	  if ($data)
+  	  {
+  	   $data->setStafon('R');
+  	   $data->save();
+  	  }
+          }
+          $j++;
+        }
+  }
+
+public static function grabarOrdenF($opordpag,$numerocomp)
+  {
+  	if ($opordpag->getNumord()=='########')
+    {
+       if (Herramientas::getVerCorrelativo('numini','opdefemp',&$r))
+       {
+       	 $encontrado=false;
+         while (!$encontrado)
+         {
+          $numero=str_pad($r, 8, '0', STR_PAD_LEFT);
+          $c= new Criteria();
+          $c->add(OpordpagPeer::NUMORD,$numero);
+          $resul= OpordpagPeer::doSelectOne($c);
+          if ($resul)
+          {
+          	$r=$r+1;
+          }
+          else
+          {
+            $encontrado=true;
+          }
+         }
+         $opordpag->setNumord($numero);
+      }
+     H::getSalvarCorrelativo('numini','opdefemp','Referencia',$r,&$msg);
+    }
+    else
+    {
+      $opordpag->setNumord(str_replace('#','0',$opordpag->getNumord()));
+    }
+
+    $b= new Criteria();
+    $b->add(TsdeffonantPeer::CODFON,$opordpag->getCodfonant());
+    $dat=TsdeffonantPeer::doSelectOne($b);
+    if ($dat)
+    {
+      $opordpag->setTipcau($dat->getTipmovren());
+      $opordpag->setCedrif($dat->getCedrif());
+      $opordpag->setCodcat($dat->getCodcat());
+    }
+
+    $opordpag->setMonret(0);
+    $opordpag->setMondes(0);
+    $opordpag->setNomben(H::getX_vacio('Cedrif','Opbenefi','Nomben',$opordpag->getCedrif()));
+    $opordpag->setNumche(null);
+    $opordpag->setCtaban(null);
+    $opordpag->setCtapag(H::getX_vacio('Cedrif','Opbenefi','Codcta',$opordpag->getCedrif()));
+    $opordpag->setNumcom($numerocomp);
+    $opordpag->setStatus('N');
+    $opordpag->save();
+  }
+
+  public static function grabarDetalleOrdenF($opordpag,$grid)
+  {
+    $referencia=$opordpag->getNumord();
+    $arreglo=self::ArreglodetF($grid);
+    $j=0;
+    while ($j<count($arreglo))
+    {
+      if ($arreglo[$j]["codpre"]!='')
+      {
+        $opdetord= new Opdetord();
+        $opdetord->setNumord($referencia);
+        $opdetord->setRefcom('NULO');
+        $opdetord->setCodpre($arreglo[$j]["codpre"]);
+        $opdetord->setMoncau($arreglo[$j]["moncau"]);
+        $opdetord->setReffon($arreglo[$j]["reffon"]);
+        $opdetord->setMonret(0);
+        $opdetord->setMondes(0);
+        $opdetord->save();
+      }
+      $j++;
+    }
+  }
+
+  public static function grabarImpcauF($opordpag,$grid)
+  {
+  	$referencia=$opordpag->getNumord();
+  	$g= new Criteria();
+  	$g->add(CpimpcauPeer::REFCAU,$referencia);
+  	CpimpcauPeer::doDelete($g);
+
+    $arreglo=self::ArreglodetF($grid);
+    $j=0;
+    while ($j<count($arreglo))
+    {
+      if ($arreglo[$j]["codpre"]!='' && $arreglo[$j]["moncau"]!=0)
+      {
+        $cpimpcau= new Cpimpcau();
+        $cpimpcau->setRefcau($referencia);
+        $cpimpcau->setCodpre($arreglo[$j]["codpre"]);
+        $cpimpcau->setMonimp($arreglo[$j]["moncau"]);
+        $cpimpcau->setMonaju(0);
+        $cpimpcau->setMonpag(0);
+        $cpimpcau->setStaimp('A');
+        $cpimpcau->setRefere('NULO');
+        $cpimpcau->setRefprc('NULO');
+        $cpimpcau->save();
+      }
+      $j++;
+    }
+  }
 }

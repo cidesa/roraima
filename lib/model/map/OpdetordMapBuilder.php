@@ -48,6 +48,8 @@ class OpdetordMapBuilder {
 
 		$tMap->addColumn('REFSAL', 'Refsal', 'string', CreoleTypes::VARCHAR, false, 1000);
 
+		$tMap->addColumn('REFFON', 'Reffon', 'string', CreoleTypes::VARCHAR, false, 1000);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

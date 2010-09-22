@@ -1,0 +1,40 @@
+opciones:                  # Opciones generales
+  eliminar:                false
+  tabla:                   tsfonant
+  anchogrid:               700
+  ancho:                   500
+  filas:                   0
+  name:                    b
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Seleccione
+  tipo:                    k
+  nombrecampo:             check
+  esgrabable:			         true
+  html:                    [ ]
+2:       # Columna 2
+  titulo:                  N° de Recibo
+  tipo:                    t
+  nombrecampo:             reffon
+  esgrabable:              true
+  html:                    [size="10" readonly=true]
+3:       # Columna 3
+  titulo:                  Beneficiario
+  tipo:                    t
+  nombrecampo:             nomben
+  esgrabable:              true
+  html:                    [size="30" readonly=true]
+4:       # Columna 4
+  titulo:                  Concepto
+  tipo:                    t
+  nombrecampo:             desfon
+  esgrabable:              true
+  html:                    [size="20x5" readonly=true]
+5:       # Columna 5
+  titulo:                  Monto
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             monfon
+  esnumerico:              true
+  html:                    [size="10" readonly=true]

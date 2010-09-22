@@ -277,15 +277,18 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 
 
 	
-	protected $id;
+	protected $codfonant;
 
 	
 	protected $collOpdetsolpags;
 
+	protected $id;
 	
 	protected $lastOpdetsolpagCriteria = null;
 
+	protected $aOpbenefi;
 	
+
 	protected $alreadyInSave = false;
 
 	
@@ -990,6 +993,13 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 
   }
   
+  public function getCodfonant()
+  {
+
+    return trim($this->codfonant);
+
+  }
+
   public function getId()
   {
 
@@ -1772,6 +1782,16 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setCodfonant($v)
+	{
+
+    if ($this->codfonant !== $v) {
+        $this->codfonant = $v;
+        $this->modifiedColumns[] = OpordpagPeer::CODFONANT;
+      }
+
+	}
+
 	public function setId($v)
 	{
 
@@ -1920,7 +1940,9 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 
       $this->loguse = $rs->getString($startcol + 66);
 
-      $this->id = $rs->getInt($startcol + 67);
+      $this->codfonant = $rs->getString($startcol + 67);
+
+      $this->id = $rs->getInt($startcol + 68);
 
       $this->resetModified();
 
@@ -1928,7 +1950,7 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 68; 
+            return $startcol + 69;
     } catch (Exception $e) {
       throw new PropelException("Error populating Opordpag object", $e);
     }
@@ -2005,6 +2027,15 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 			$this->alreadyInSave = true;
 
 
+
+			if ($this->aOpbenefi !== null) {
+				if ($this->aOpbenefi->isModified()) {
+					$affectedRows += $this->aOpbenefi->save($con);
+				}
+				$this->setOpbenefi($this->aOpbenefi);
+			}
+
+
 						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = OpordpagPeer::doInsert($this, $con);
@@ -2058,6 +2089,14 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 			$retval = null;
 
 			$failureMap = array();
+
+
+
+			if ($this->aOpbenefi !== null) {
+				if (!$this->aOpbenefi->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aOpbenefi->getValidationFailures());
+				}
+			}
 
 
 			if (($retval = OpordpagPeer::doValidate($this, $columns)) !== true) {
@@ -2293,6 +2332,9 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 				return $this->getLoguse();
 				break;
 			case 67:
+				return $this->getCodfonant();
+				break;
+			case 68:
 				return $this->getId();
 				break;
 			default:
@@ -2372,7 +2414,8 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 			$keys[64] => $this->getNumcta(),
 			$keys[65] => $this->getTipdoc(),
 			$keys[66] => $this->getLoguse(),
-			$keys[67] => $this->getId(),
+			$keys[67] => $this->getCodfonant(),
+			$keys[68] => $this->getId(),
 		);
 		return $result;
 	}
@@ -2590,6 +2633,9 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 				$this->setLoguse($value);
 				break;
 			case 67:
+				$this->setCodfonant($value);
+				break;
+			case 68:
 				$this->setId($value);
 				break;
 		} 	}
@@ -2666,7 +2712,8 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[64], $arr)) $this->setNumcta($arr[$keys[64]]);
 		if (array_key_exists($keys[65], $arr)) $this->setTipdoc($arr[$keys[65]]);
 		if (array_key_exists($keys[66], $arr)) $this->setLoguse($arr[$keys[66]]);
-		if (array_key_exists($keys[67], $arr)) $this->setId($arr[$keys[67]]);
+		if (array_key_exists($keys[67], $arr)) $this->setCodfonant($arr[$keys[67]]);
+		if (array_key_exists($keys[68], $arr)) $this->setId($arr[$keys[68]]);
 	}
 
 	
@@ -2741,6 +2788,7 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(OpordpagPeer::NUMCTA)) $criteria->add(OpordpagPeer::NUMCTA, $this->numcta);
 		if ($this->isColumnModified(OpordpagPeer::TIPDOC)) $criteria->add(OpordpagPeer::TIPDOC, $this->tipdoc);
 		if ($this->isColumnModified(OpordpagPeer::LOGUSE)) $criteria->add(OpordpagPeer::LOGUSE, $this->loguse);
+		if ($this->isColumnModified(OpordpagPeer::CODFONANT)) $criteria->add(OpordpagPeer::CODFONANT, $this->codfonant);
 		if ($this->isColumnModified(OpordpagPeer::ID)) $criteria->add(OpordpagPeer::ID, $this->id);
 
 		return $criteria;
@@ -2906,6 +2954,7 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 
 		$copyObj->setLoguse($this->loguse);
 
+		$copyObj->setCodfonant($this->codfonant);
 
 		if ($deepCopy) {
 									$copyObj->setNew(false);
@@ -3077,6 +3126,37 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 		$this->lastOpdetsolpagCriteria = $criteria;
 
 		return $this->collOpdetsolpags;
+	}
+
+        public function setOpbenefi($v)
+	{
+
+
+		if ($v === null) {
+			$this->setCedrif(NULL);
+		} else {
+			$this->setCedrif($v->getCedrif());
+		}
+
+
+		$this->aOpbenefi = $v;
+	}
+
+
+
+	public function getOpbenefi($con = null)
+	{
+		if ($this->aOpbenefi === null && (($this->cedrif !== "" && $this->cedrif !== null))) {
+						include_once 'lib/model/om/BaseOpbenefiPeer.php';
+
+      $c = new Criteria();
+      $c->add(OpbenefiPeer::CEDRIF,$this->cedrif);
+
+			$this->aOpbenefi = OpbenefiPeer::doSelectOne($c, $con);
+
+
+		}
+		return $this->aOpbenefi;
 	}
 
 } 

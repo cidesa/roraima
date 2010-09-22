@@ -63,4 +63,14 @@ class Tstipmov extends BaseTstipmov
   	return $this->tiedatrel;
   }
 
+  public function getTipmovsal()
+  {
+  	return self::getCodtip();
+  }
+
+  public function getDestipmovsal()
+  {
+  	return self::getDestip();
+  }
+
 }

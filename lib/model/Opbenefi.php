@@ -18,6 +18,11 @@ class Opbenefi extends BaseOpbenefi
 	protected $tiedatrel="";
 	protected $oculsave="";
 
+   public function __toString()
+  {
+    return $this->cedrif;
+  }
+
 	public function getNomcuentacont()
 	{
 		return Herramientas::getX('Codcta','contabb','descta',trim(self::getCodcta()));
