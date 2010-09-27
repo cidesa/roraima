@@ -2,7 +2,7 @@ methods:
   post:
    - "casalalm{codsal}"
    - "casalalm{fecsal}"
-   - "casalalm{rifpro}"
+   - "casalalm{codpro}"
    - "casalalm{dessal}"
    - "casalalm{tipmov}"
    - "casalalm{codcen}"
@@ -19,7 +19,7 @@ names:
     validators: FechaValidator1, FechaValidator
 
 
-  casalalm{rifpro}:
+  casalalm{codpro}:
     required:  Yes
     validators: ProveedorValidator
     required_msg: CI/RIF de Contratistas de Bienes o Servicio y Cooperativas no puede estar en blanco
@@ -72,7 +72,7 @@ ProveedorValidator:
     class: CidesaExistValidator
     param:
         class:    Caprovee
-        column:   rifpro
+        column:   codpro
         unique_error:   El Rif de la Contratistas de Bienes o Servicio y Cooperativas no existe.
 
 TipoValidator:

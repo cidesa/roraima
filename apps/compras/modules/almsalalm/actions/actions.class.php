@@ -157,10 +157,9 @@ $this->Bitacora('Guardo');
     {
       $this->casalalm->setNomalm($casalalm['nomalm']);
     }
-    if (isset($casalalm['rifpro']))
+    if (isset($casalalm['codpro']))
     {
-      $this->casalalm->setRifpro($casalalm['rifpro']);
-      $this->casalalm->setCodpro(Herramientas::getX_vacio('rifpro','caprovee','codpro',$casalalm['rifpro']));
+      $this->casalalm->setCodpro($casalalm['codpro']);
     }
 
     if (isset($casalalm['nompro']))
@@ -269,7 +268,7 @@ $this->Bitacora('Guardo');
    }
    else  if ($this->getRequestParameter('ajax')=='2')
    {
-     $dato=CaproveePeer::getNompro($this->getRequestParameter('codigo'));
+     $dato=eregi_replace("[\n|\r|\n\r]", "", Herramientas::getXx('Caprovee',array('codpro','estpro'),array($this->getRequestParameter('codigo'),'A'),'Nompro'));
      $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
      $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
      return sfView::HEADER_ONLY;
