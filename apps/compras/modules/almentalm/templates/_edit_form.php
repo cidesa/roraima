@@ -80,7 +80,7 @@
 			  ))),
      array('use_style' => 'true'))?>
      &nbsp;
-<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Caprovee_Almentalm/clase/Caprovee/frame/sf_admin_edit_form/obj1/caentalm_codpro/obj2/caentalm_nompro/campo1/rifpro/campo2/nompro','','','botoncat')?>
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Caprovee_Almentalm/clase/Caprovee/frame/sf_admin_edit_form/obj1/caentalm_codpro/obj2/caentalm_nompro/campo1/codpro/campo2/nompro','','','botoncat')?>
 
 <?php echo input_tag('caentalm[nompro]',$caentalm->getNompro(),'size=50,disabled=true'); ?>
     </div>

@@ -61,13 +61,13 @@
   </table>
 
 <br>
- <?php echo label_for('casalalm[rifpro]', __($labels['casalalm{rifpro}']), 'class="required" Style="width:210px"') ?>
-  <div class="content<?php if ($sf_request->hasError('casalalm{rifpro}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('casalalm{rifpro}')): ?>
-    <?php echo form_error('casalalm{rifpro}', array('class' => 'form-error-msg')) ?>
+ <?php echo label_for('casalalm[codpro]', __($labels['casalalm{codpro}']), 'class="required" Style="width:210px"') ?>
+  <div class="content<?php if ($sf_request->hasError('casalalm{codpro}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('casalalm{codpro}')): ?>
+    <?php echo form_error('casalalm{codpro}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 <?php if ($casalalm->getId()=="") { ?>
-  <?php echo input_auto_complete_tag('casalalm[rifpro]', $casalalm->getRifpro(),
+  <?php echo input_auto_complete_tag('casalalm[codpro]', $casalalm->getCodpro(),
     'almsalalm/autocomplete?ajax=2',  array('autocomplete' => 'off','maxlength' => 18, 'onBlur'=> remote_function(array(
 			  'url'      => 'almsalalm/ajax',
 			  'complete' => 'AjaxJSON(request, json)',
@@ -75,11 +75,11 @@
 			  ))),
      array('use_style' => 'true') )?>  &nbsp;
 
-<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Caprovee_Almsalalm/clase/Caprovee/frame/sf_admin_edit_form/obj1/casalalm_rifpro/obj2/casalalm_nompro/campo1/rifpro/campo2/nompro','','','botoncat')?>
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Caprovee_Almsalalm/clase/Caprovee/frame/sf_admin_edit_form/obj1/casalalm_codpro/obj2/casalalm_nompro/campo1/codpro/campo2/nompro','','','botoncat')?>
     <?php } else { ?>
-     <?php $value= object_input_tag($casalalm,'getRifpro',array('maxlength' => 18,
+     <?php $value= object_input_tag($casalalm,'getCodpro',array('maxlength' => 18,
     'readonly'=>true,
-    'control_name'=>'casalalm[rifpro]') ); echo $value ? $value : '&nbsp;' ?>
+    'control_name'=>'casalalm[codpro]') ); echo $value ? $value : '&nbsp;' ?>
     <?php }?>
 
 <?php $value = object_input_tag($casalalm, 'getNompro', array (

@@ -149,8 +149,7 @@ $this->Bitacora('Guardo');
     if (isset($caentalm['codpro']))
     {
       //buscar el codigo del proveedor, ya que lo que el usuario llena es el RIF
-      $codprovee=Herramientas::getX('RIFPRO','Caprovee','Codpro',$caentalm['codpro']);
-      $this->caentalm->setCodpro($codprovee);
+      $this->caentalm->setCodpro($caentalm['codpro']);
     }
     if (isset($caentalm['desrcp']))
     {
@@ -274,7 +273,7 @@ $this->Bitacora('Guardo');
 	    }
 	    else  if ($this->getRequestParameter('ajax')=='2')
 	    {
-	  		$dato=CaproveePeer::getNompro($this->getRequestParameter('codigo'));
+	  		$dato = eregi_replace("[\n|\r|\n\r]", "", Herramientas::getXx('Caprovee',array('codpro','estpro'),array($this->getRequestParameter('codigo'),'A'),'Nompro'));
             $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
 	    }
 	    else  if ($this->getRequestParameter('ajax')=='3')
