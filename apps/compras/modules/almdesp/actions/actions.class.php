@@ -402,10 +402,12 @@ class almdespActions extends autoalmdespActions
    */
   public function configGrid($codigo='')
   {
-	  $c = new Criteria();
+      $c = new Criteria();
+      //$c->add(CareqartPeer::APRREQ,'S');
       $c->add(CaartreqPeer::REQART,$codigo);
       $this->sql = "Caartreq.canrec < Caartreq.canreq ";
       $c->add(CaartreqPeer::CANREQ, $this->sql, Criteria::CUSTOM);
+      //$c->addJoin(CareqartPeer::REQART,CaartreqPeer::REQART);
       $c->addAscendingOrderByColumn(CaartreqPeer::CODART);
 
       $per = CaartreqPeer::doSelect($c);
@@ -783,7 +785,8 @@ class almdespActions extends autoalmdespActions
 	      		$datos = CareqartPeer::doSelectOne($c);
 	      		if ($datos)
 	      		{
-		      		$desreq=$datos->getDesreq();
+		      	    if ($datos->getAprreq()=='S') {
+                            $desreq=$datos->getDesreq();
 			  	    $uniori=$datos->getCodcatreq();
 			  	    $desuniori=BnubibiePeer::getDesubicacion($uniori);
                                     $codcen=$datos->getCodcen();
@@ -792,6 +795,11 @@ class almdespActions extends autoalmdespActions
 		         	$this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
 		            ////
 		            $this->configGrid($codigo);
+                            }else
+                                {//la requisicion no esta aprobada
+                                   $this->configGrid();
+                                   $this->mensaje="La Requisición no está Aprobada.";
+                                }
 	      		}
 	      		else
 	      		{//no existe la requisicion

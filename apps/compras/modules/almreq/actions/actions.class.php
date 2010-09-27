@@ -324,11 +324,15 @@ class almreqActions extends autoalmreqActions
   {
   	// Si en el parametro reqreqapr  de Cadefart, no requiere que la requisicion esta aprobada para despacharla
   	// entonces de una vez grabo la requisicion como aprobada
-
+     if ($careqart->getId() && ($careqart->getAprreq()=='S' || (Herramientas::getHay_Despacho($careqart->getReqart()))))
+     {
+       $careqart->save();
+     }else {
   	 if ($this->autorizareq=="") $careqart->setAprreq('S');
 
-     $grid=Herramientas::CargarDatosGrid($this,$this->obj);
-     Articulos::salvarAlmreqart($careqart,$grid);
+         $grid=Herramientas::CargarDatosGrid($this,$this->obj);
+         Articulos::salvarAlmreqart($careqart,$grid);
+     }
      return -1;
   }
 
