@@ -2433,19 +2433,17 @@ public static function validarCuentasGrid($grid)
 	  while(!feof($file)) {
 	    $cuenta=fgets($file, 255);
             if (trim($cuenta)!='' && trim($cuenta)!='/n'){
-                $numcue=substr($cuenta,$regis->getInicue(),$regis->getFincue());
-                $ref= substr($cuenta,$regis->getIniref(),$regis->getFinref());
+                $numcue=trim(substr($cuenta,$regis->getInicue(),$regis->getFincue()));
+                $ref= trim(substr($cuenta,$regis->getIniref(),$regis->getFinref()));
 
-
-
-                $fecha= substr($cuenta,$regis->getInifec(),$regis->getFinfec());
+                $fecha= trim(substr($cuenta,$regis->getInifec(),$regis->getFinfec()));
                 if ($regis->getForfec()=='dd/mm/yyyy')    {
 		    $dateFormat = new sfDateFormat('es_VE');
                     $fec1 = $dateFormat->format($fecha, 'i', $dateFormat->getInputPattern('d'));
                 }else if ($regis->getForfec()=='yyyy-mm-dd') {
                     $fec1=$fecha;
                 }
-                $signomonto=substr(substr($cuenta,$regis->getInimon(),$regis->getFinmon()),0,1);
+                $signomonto=substr(trim(substr($cuenta,$regis->getInimon(),$regis->getFinmon())),0,1);
                 $mes=substr($fec1,5,2);
                 $sql="select refban from tsmovban where numcue='".$numcue."' and refban='".$ref."'and to_char(fecban,'MM')='".$mes."'";
                 if (Herramientas::BuscarDatos($sql,&$resul))
@@ -2490,7 +2488,7 @@ public static function validarCuentasGrid($grid)
                 }                
                 if ($regis->getFintip()!=0)
                 {
-                   $tipo= substr($cuenta,$regis->getInitip(),$regis->getFintip());
+                   $tipo= trim(substr($cuenta,$regis->getInitip(),$regis->getFintip()));
                 }else {
                     if ($signomonto=='-')
                       $tipo=$regis->getValdefn();
@@ -2498,11 +2496,11 @@ public static function validarCuentasGrid($grid)
                 }
 
                 if ($regis->getFindes()!=0)
-		   $descrip= substr($cuenta,$regis->getInides(),$regis->getFindes());
+		   $descrip= trim(substr($cuenta,$regis->getInides(),$regis->getFindes()));
                 else 
                    $descrip= $regis->getValdefd();
                 
-             $valormon=substr($cuenta,$regis->getInimon(),$regis->getFinmon());
+             $valormon=trim(substr($cuenta,$regis->getInimon(),$regis->getFinmon()));
              $montor=substr($valormon,1,strlen($valormon));
              if (is_numeric(H::toFloat($montor)))
              {

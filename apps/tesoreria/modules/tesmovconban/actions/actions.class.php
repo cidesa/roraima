@@ -57,6 +57,7 @@ class tesmovconbanActions extends autotesmovconbanActions
    $nro=$this->getRequestParameter('nrocuenta');
    $mes=$this->getRequestParameter('combomes');
    $ano=$this->getRequestParameter('ano');
+   $movtxt=$this->getRequestParameter('tsconcil[movtxt]','');
 
       $contaba=array();
  	  $sql= "Select to_char(fecini,'dd/mm/yyyy') as fecini, to_char(feccie,'dd/mm/yyyy') as feccie From contaba Where codemp = '001'";
@@ -86,7 +87,7 @@ class tesmovconbanActions extends autotesmovconbanActions
 	   {
 
                $conmigban=H::getConfApp('conmigban', 'tesoreria', 'tesmovconban');
-               if ($conmigban=='S') {
+               if ($conmigban=='S' && $movtxt==1) {
 
 			if (!Tesoreria::hay_Conciliacion('Tsconcil',$nro,$mes,$ano))
 			{

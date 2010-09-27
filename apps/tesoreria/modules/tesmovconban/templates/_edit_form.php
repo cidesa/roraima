@@ -95,6 +95,19 @@
 
     </div>
 
+<br>
+
+  <?php echo label_for('labeltxt', __('Movimientos TXT'), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('labeltxt')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('labeltxt')): ?>
+    <?php echo form_error('labeltxt', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+      
+  <?php $value = object_checkbox_tag($tsconcil, 'getMovtxt', array (
+  'control_name' => 'tsconcil[movtxt]',
+)); echo $value ? $value : '&nbsp;' ?>
+
+    </div>
 
 <ul  class="sf_admin_actions"  align="center">
 	<input type="button" value="Hacer" onClick="hacer()">

@@ -16,6 +16,7 @@
 class Tsconcil extends BaseTsconcil
 {
     protected $ano="";
+    protected $movtxt="0";
 
    public function getAno()
    {
