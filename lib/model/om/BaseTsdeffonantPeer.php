@@ -239,6 +239,381 @@ abstract class BaseTsdeffonantPeer {
 	}
 
 	
+	public static function doCountJoinBnubica(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(TsdeffonantPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(TsdeffonantPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(TsdeffonantPeer::UNIEJE, BnubicaPeer::CODUBI);
+
+		$rs = TsdeffonantPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doCountJoinTsuniadm(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(TsdeffonantPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(TsdeffonantPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(TsdeffonantPeer::CODUNIADM, TsuniadmPeer::CODUNIADM);
+
+		$rs = TsdeffonantPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doCountJoinOpbenefi(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(TsdeffonantPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(TsdeffonantPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(TsdeffonantPeer::CEDRIF, OpbenefiPeer::CEDRIF);
+
+		$rs = TsdeffonantPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doCountJoinNpcatpre(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(TsdeffonantPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(TsdeffonantPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(TsdeffonantPeer::CODCAT, NpcatprePeer::CODCAT);
+
+		$rs = TsdeffonantPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doCountJoinTsdefban(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(TsdeffonantPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(TsdeffonantPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(TsdeffonantPeer::NUMCUE, TsdefbanPeer::NUMCUE);
+
+		$rs = TsdeffonantPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinBnubica(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		TsdeffonantPeer::addSelectColumns($c);
+		$startcol = (TsdeffonantPeer::NUM_COLUMNS - TsdeffonantPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+		BnubicaPeer::addSelectColumns($c);
+
+		$c->addJoin(TsdeffonantPeer::UNIEJE, BnubicaPeer::CODUBI);
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = TsdeffonantPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = BnubicaPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol);
+
+			$newObject = true;
+			foreach($results as $temp_obj1) {
+				$temp_obj2 = $temp_obj1->getBnubica(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+										$temp_obj2->addTsdeffonant($obj1); 					break;
+				}
+			}
+			if ($newObject) {
+				$obj2->initTsdeffonants();
+				$obj2->addTsdeffonant($obj1); 			}
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doSelectJoinTsuniadm(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		TsdeffonantPeer::addSelectColumns($c);
+		$startcol = (TsdeffonantPeer::NUM_COLUMNS - TsdeffonantPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+		TsuniadmPeer::addSelectColumns($c);
+
+		$c->addJoin(TsdeffonantPeer::CODUNIADM, TsuniadmPeer::CODUNIADM);
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = TsdeffonantPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = TsuniadmPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol);
+
+			$newObject = true;
+			foreach($results as $temp_obj1) {
+				$temp_obj2 = $temp_obj1->getTsuniadm(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+										$temp_obj2->addTsdeffonant($obj1); 					break;
+				}
+			}
+			if ($newObject) {
+				$obj2->initTsdeffonants();
+				$obj2->addTsdeffonant($obj1); 			}
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doSelectJoinOpbenefi(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		TsdeffonantPeer::addSelectColumns($c);
+		$startcol = (TsdeffonantPeer::NUM_COLUMNS - TsdeffonantPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+		OpbenefiPeer::addSelectColumns($c);
+
+		$c->addJoin(TsdeffonantPeer::CEDRIF, OpbenefiPeer::CEDRIF);
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = TsdeffonantPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = OpbenefiPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol);
+
+			$newObject = true;
+			foreach($results as $temp_obj1) {
+				$temp_obj2 = $temp_obj1->getOpbenefi(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+										$temp_obj2->addTsdeffonant($obj1); 					break;
+				}
+			}
+			if ($newObject) {
+				$obj2->initTsdeffonants();
+				$obj2->addTsdeffonant($obj1); 			}
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doSelectJoinNpcatpre(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		TsdeffonantPeer::addSelectColumns($c);
+		$startcol = (TsdeffonantPeer::NUM_COLUMNS - TsdeffonantPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+		NpcatprePeer::addSelectColumns($c);
+
+		$c->addJoin(TsdeffonantPeer::CODCAT, NpcatprePeer::CODCAT);
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = TsdeffonantPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = NpcatprePeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol);
+
+			$newObject = true;
+			foreach($results as $temp_obj1) {
+				$temp_obj2 = $temp_obj1->getNpcatpre(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+										$temp_obj2->addTsdeffonant($obj1); 					break;
+				}
+			}
+			if ($newObject) {
+				$obj2->initTsdeffonants();
+				$obj2->addTsdeffonant($obj1); 			}
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doSelectJoinTsdefban(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		TsdeffonantPeer::addSelectColumns($c);
+		$startcol = (TsdeffonantPeer::NUM_COLUMNS - TsdeffonantPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+		TsdefbanPeer::addSelectColumns($c);
+
+		$c->addJoin(TsdeffonantPeer::NUMCUE, TsdefbanPeer::NUMCUE);
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = TsdeffonantPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = TsdefbanPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol);
+
+			$newObject = true;
+			foreach($results as $temp_obj1) {
+				$temp_obj2 = $temp_obj1->getTsdefban(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+										$temp_obj2->addTsdeffonant($obj1); 					break;
+				}
+			}
+			if ($newObject) {
+				$obj2->initTsdeffonants();
+				$obj2->addTsdeffonant($obj1); 			}
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
 	public static function doCountJoinAll(Criteria $criteria, $distinct = false, $con = null)
 	{
 		$criteria = clone $criteria;
@@ -255,9 +630,13 @@ abstract class BaseTsdeffonantPeer {
 			$criteria->addSelectColumn($column);
 		}
 
+			$criteria->addJoin(TsdeffonantPeer::UNIEJE, BnubicaPeer::CODUBI);
+	
 			$criteria->addJoin(TsdeffonantPeer::CODUNIADM, TsuniadmPeer::CODUNIADM);
 	
 			$criteria->addJoin(TsdeffonantPeer::CEDRIF, OpbenefiPeer::CEDRIF);
+	
+			$criteria->addJoin(TsdeffonantPeer::CODCAT, NpcatprePeer::CODCAT);
 	
 			$criteria->addJoin(TsdeffonantPeer::NUMCUE, TsdefbanPeer::NUMCUE);
 	
@@ -282,18 +661,28 @@ abstract class BaseTsdeffonantPeer {
 		TsdeffonantPeer::addSelectColumns($c);
 		$startcol2 = (TsdeffonantPeer::NUM_COLUMNS - TsdeffonantPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
+			BnubicaPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + BnubicaPeer::NUM_COLUMNS;
+	
 			TsuniadmPeer::addSelectColumns($c);
-			$startcol3 = $startcol2 + TsuniadmPeer::NUM_COLUMNS;
+			$startcol4 = $startcol3 + TsuniadmPeer::NUM_COLUMNS;
 	
 			OpbenefiPeer::addSelectColumns($c);
-			$startcol4 = $startcol3 + OpbenefiPeer::NUM_COLUMNS;
+			$startcol5 = $startcol4 + OpbenefiPeer::NUM_COLUMNS;
+	
+			NpcatprePeer::addSelectColumns($c);
+			$startcol6 = $startcol5 + NpcatprePeer::NUM_COLUMNS;
 	
 			TsdefbanPeer::addSelectColumns($c);
-			$startcol5 = $startcol4 + TsdefbanPeer::NUM_COLUMNS;
+			$startcol7 = $startcol6 + TsdefbanPeer::NUM_COLUMNS;
+	
+			$c->addJoin(TsdeffonantPeer::UNIEJE, BnubicaPeer::CODUBI);
 	
 			$c->addJoin(TsdeffonantPeer::CODUNIADM, TsuniadmPeer::CODUNIADM);
 	
 			$c->addJoin(TsdeffonantPeer::CEDRIF, OpbenefiPeer::CEDRIF);
+	
+			$c->addJoin(TsdeffonantPeer::CODCAT, NpcatprePeer::CODCAT);
 	
 			$c->addJoin(TsdeffonantPeer::NUMCUE, TsdefbanPeer::NUMCUE);
 	
@@ -311,7 +700,7 @@ abstract class BaseTsdeffonantPeer {
 
 
 							
-				$omClass = TsuniadmPeer::getOMClass();
+				$omClass = BnubicaPeer::getOMClass();
 	
 
 				$cls = Propel::import($omClass);
@@ -321,7 +710,7 @@ abstract class BaseTsdeffonantPeer {
 				$newObject = true;
 				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 					$temp_obj1 = $results[$j];
-					$temp_obj2 = $temp_obj1->getTsuniadm(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$temp_obj2 = $temp_obj1->getBnubica(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
 						$newObject = false;
 						$temp_obj2->addTsdeffonant($obj1); 						break;
 					}
@@ -334,7 +723,7 @@ abstract class BaseTsdeffonantPeer {
 	
 
 							
-				$omClass = OpbenefiPeer::getOMClass();
+				$omClass = TsuniadmPeer::getOMClass();
 	
 
 				$cls = Propel::import($omClass);
@@ -344,7 +733,7 @@ abstract class BaseTsdeffonantPeer {
 				$newObject = true;
 				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 					$temp_obj1 = $results[$j];
-					$temp_obj3 = $temp_obj1->getOpbenefi(); 					if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+					$temp_obj3 = $temp_obj1->getTsuniadm(); 					if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
 						$newObject = false;
 						$temp_obj3->addTsdeffonant($obj1); 						break;
 					}
@@ -357,7 +746,7 @@ abstract class BaseTsdeffonantPeer {
 	
 
 							
-				$omClass = TsdefbanPeer::getOMClass();
+				$omClass = OpbenefiPeer::getOMClass();
 	
 
 				$cls = Propel::import($omClass);
@@ -367,7 +756,7 @@ abstract class BaseTsdeffonantPeer {
 				$newObject = true;
 				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 					$temp_obj1 = $results[$j];
-					$temp_obj4 = $temp_obj1->getTsdefban(); 					if ($temp_obj4->getPrimaryKey() === $obj4->getPrimaryKey()) {
+					$temp_obj4 = $temp_obj1->getOpbenefi(); 					if ($temp_obj4->getPrimaryKey() === $obj4->getPrimaryKey()) {
 						$newObject = false;
 						$temp_obj4->addTsdeffonant($obj1); 						break;
 					}
@@ -378,11 +767,91 @@ abstract class BaseTsdeffonantPeer {
 					$obj4->addTsdeffonant($obj1);
 				}
 	
+
+							
+				$omClass = NpcatprePeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj5 = new $cls();
+				$obj5->hydrate($rs, $startcol5);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj5 = $temp_obj1->getNpcatpre(); 					if ($temp_obj5->getPrimaryKey() === $obj5->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj5->addTsdeffonant($obj1); 						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj5->initTsdeffonants();
+					$obj5->addTsdeffonant($obj1);
+				}
+	
+
+							
+				$omClass = TsdefbanPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj6 = new $cls();
+				$obj6->hydrate($rs, $startcol6);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj6 = $temp_obj1->getTsdefban(); 					if ($temp_obj6->getPrimaryKey() === $obj6->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj6->addTsdeffonant($obj1); 						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj6->initTsdeffonants();
+					$obj6->addTsdeffonant($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;
 	}
 
+
+		
+		public static function doCountJoinAllExceptBnubica(Criteria $criteria, $distinct = false, $con = null)
+		{
+						$criteria = clone $criteria;
+
+						$criteria->clearSelectColumns()->clearOrderByColumns();
+			if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+				$criteria->addSelectColumn(TsdeffonantPeer::COUNT_DISTINCT);
+			} else {
+				$criteria->addSelectColumn(TsdeffonantPeer::COUNT);
+			}
+
+						foreach($criteria->getGroupByColumns() as $column)
+			{
+				$criteria->addSelectColumn($column);
+			}
+	
+				$criteria->addJoin(TsdeffonantPeer::CODUNIADM, TsuniadmPeer::CODUNIADM);
+		
+				$criteria->addJoin(TsdeffonantPeer::CEDRIF, OpbenefiPeer::CEDRIF);
+		
+				$criteria->addJoin(TsdeffonantPeer::CODCAT, NpcatprePeer::CODCAT);
+		
+				$criteria->addJoin(TsdeffonantPeer::NUMCUE, TsdefbanPeer::NUMCUE);
+		
+			$rs = TsdeffonantPeer::doSelectRS($criteria, $con);
+			if ($rs->next()) {
+				return $rs->getInt(1);
+			} else {
+								return 0;
+			}
+		}
+	
 
 		
 		public static function doCountJoinAllExceptTsuniadm(Criteria $criteria, $distinct = false, $con = null)
@@ -401,7 +870,11 @@ abstract class BaseTsdeffonantPeer {
 				$criteria->addSelectColumn($column);
 			}
 	
+				$criteria->addJoin(TsdeffonantPeer::UNIEJE, BnubicaPeer::CODUBI);
+		
 				$criteria->addJoin(TsdeffonantPeer::CEDRIF, OpbenefiPeer::CEDRIF);
+		
+				$criteria->addJoin(TsdeffonantPeer::CODCAT, NpcatprePeer::CODCAT);
 		
 				$criteria->addJoin(TsdeffonantPeer::NUMCUE, TsdefbanPeer::NUMCUE);
 		
@@ -431,7 +904,45 @@ abstract class BaseTsdeffonantPeer {
 				$criteria->addSelectColumn($column);
 			}
 	
+				$criteria->addJoin(TsdeffonantPeer::UNIEJE, BnubicaPeer::CODUBI);
+		
 				$criteria->addJoin(TsdeffonantPeer::CODUNIADM, TsuniadmPeer::CODUNIADM);
+		
+				$criteria->addJoin(TsdeffonantPeer::CODCAT, NpcatprePeer::CODCAT);
+		
+				$criteria->addJoin(TsdeffonantPeer::NUMCUE, TsdefbanPeer::NUMCUE);
+		
+			$rs = TsdeffonantPeer::doSelectRS($criteria, $con);
+			if ($rs->next()) {
+				return $rs->getInt(1);
+			} else {
+								return 0;
+			}
+		}
+	
+
+		
+		public static function doCountJoinAllExceptNpcatpre(Criteria $criteria, $distinct = false, $con = null)
+		{
+						$criteria = clone $criteria;
+
+						$criteria->clearSelectColumns()->clearOrderByColumns();
+			if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+				$criteria->addSelectColumn(TsdeffonantPeer::COUNT_DISTINCT);
+			} else {
+				$criteria->addSelectColumn(TsdeffonantPeer::COUNT);
+			}
+
+						foreach($criteria->getGroupByColumns() as $column)
+			{
+				$criteria->addSelectColumn($column);
+			}
+	
+				$criteria->addJoin(TsdeffonantPeer::UNIEJE, BnubicaPeer::CODUBI);
+		
+				$criteria->addJoin(TsdeffonantPeer::CODUNIADM, TsuniadmPeer::CODUNIADM);
+		
+				$criteria->addJoin(TsdeffonantPeer::CEDRIF, OpbenefiPeer::CEDRIF);
 		
 				$criteria->addJoin(TsdeffonantPeer::NUMCUE, TsdefbanPeer::NUMCUE);
 		
@@ -461,9 +972,13 @@ abstract class BaseTsdeffonantPeer {
 				$criteria->addSelectColumn($column);
 			}
 	
+				$criteria->addJoin(TsdeffonantPeer::UNIEJE, BnubicaPeer::CODUBI);
+		
 				$criteria->addJoin(TsdeffonantPeer::CODUNIADM, TsuniadmPeer::CODUNIADM);
 		
 				$criteria->addJoin(TsdeffonantPeer::CEDRIF, OpbenefiPeer::CEDRIF);
+		
+				$criteria->addJoin(TsdeffonantPeer::CODCAT, NpcatprePeer::CODCAT);
 		
 			$rs = TsdeffonantPeer::doSelectRS($criteria, $con);
 			if ($rs->next()) {
@@ -475,175 +990,7 @@ abstract class BaseTsdeffonantPeer {
 	
 
 	
-	public static function doSelectJoinAllExceptTsuniadm(Criteria $c, $con = null)
-	{
-		$c = clone $c;
-
-								if ($c->getDbName() == Propel::getDefaultDB()) {
-			$c->setDbName(self::DATABASE_NAME);
-		}
-
-		TsdeffonantPeer::addSelectColumns($c);
-		$startcol2 = (TsdeffonantPeer::NUM_COLUMNS - TsdeffonantPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
-
-			OpbenefiPeer::addSelectColumns($c);
-			$startcol3 = $startcol2 + OpbenefiPeer::NUM_COLUMNS;
-	
-			TsdefbanPeer::addSelectColumns($c);
-			$startcol4 = $startcol3 + TsdefbanPeer::NUM_COLUMNS;
-	
-			$c->addJoin(TsdeffonantPeer::CEDRIF, OpbenefiPeer::CEDRIF);
-	
-			$c->addJoin(TsdeffonantPeer::NUMCUE, TsdefbanPeer::NUMCUE);
-	
-
-		$rs = BasePeer::doSelect($c, $con);
-		$results = array();
-
-		while($rs->next()) {
-
-			$omClass = TsdeffonantPeer::getOMClass();
-
-			$cls = Propel::import($omClass);
-			$obj1 = new $cls();
-			$obj1->hydrate($rs);
-
-				$omClass = OpbenefiPeer::getOMClass();
-	
-
-				$cls = Propel::import($omClass);
-				$obj2  = new $cls();
-				$obj2->hydrate($rs, $startcol2);
-
-				$newObject = true;
-				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-					$temp_obj1 = $results[$j];
-					$temp_obj2 = $temp_obj1->getOpbenefi(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-						$newObject = false;
-						$temp_obj2->addTsdeffonant($obj1);
-						break;
-					}
-				}
-
-				if ($newObject) {
-					$obj2->initTsdeffonants();
-					$obj2->addTsdeffonant($obj1);
-				}
-	
-				$omClass = TsdefbanPeer::getOMClass();
-	
-
-				$cls = Propel::import($omClass);
-				$obj3  = new $cls();
-				$obj3->hydrate($rs, $startcol3);
-
-				$newObject = true;
-				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-					$temp_obj1 = $results[$j];
-					$temp_obj3 = $temp_obj1->getTsdefban(); 					if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
-						$newObject = false;
-						$temp_obj3->addTsdeffonant($obj1);
-						break;
-					}
-				}
-
-				if ($newObject) {
-					$obj3->initTsdeffonants();
-					$obj3->addTsdeffonant($obj1);
-				}
-	
-			$results[] = $obj1;
-		}
-		return $results;
-	}
-
-
-	
-	public static function doSelectJoinAllExceptOpbenefi(Criteria $c, $con = null)
-	{
-		$c = clone $c;
-
-								if ($c->getDbName() == Propel::getDefaultDB()) {
-			$c->setDbName(self::DATABASE_NAME);
-		}
-
-		TsdeffonantPeer::addSelectColumns($c);
-		$startcol2 = (TsdeffonantPeer::NUM_COLUMNS - TsdeffonantPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
-
-			TsuniadmPeer::addSelectColumns($c);
-			$startcol3 = $startcol2 + TsuniadmPeer::NUM_COLUMNS;
-	
-			TsdefbanPeer::addSelectColumns($c);
-			$startcol4 = $startcol3 + TsdefbanPeer::NUM_COLUMNS;
-	
-			$c->addJoin(TsdeffonantPeer::CODUNIADM, TsuniadmPeer::CODUNIADM);
-	
-			$c->addJoin(TsdeffonantPeer::NUMCUE, TsdefbanPeer::NUMCUE);
-	
-
-		$rs = BasePeer::doSelect($c, $con);
-		$results = array();
-
-		while($rs->next()) {
-
-			$omClass = TsdeffonantPeer::getOMClass();
-
-			$cls = Propel::import($omClass);
-			$obj1 = new $cls();
-			$obj1->hydrate($rs);
-
-				$omClass = TsuniadmPeer::getOMClass();
-	
-
-				$cls = Propel::import($omClass);
-				$obj2  = new $cls();
-				$obj2->hydrate($rs, $startcol2);
-
-				$newObject = true;
-				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-					$temp_obj1 = $results[$j];
-					$temp_obj2 = $temp_obj1->getTsuniadm(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-						$newObject = false;
-						$temp_obj2->addTsdeffonant($obj1);
-						break;
-					}
-				}
-
-				if ($newObject) {
-					$obj2->initTsdeffonants();
-					$obj2->addTsdeffonant($obj1);
-				}
-	
-				$omClass = TsdefbanPeer::getOMClass();
-	
-
-				$cls = Propel::import($omClass);
-				$obj3  = new $cls();
-				$obj3->hydrate($rs, $startcol3);
-
-				$newObject = true;
-				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-					$temp_obj1 = $results[$j];
-					$temp_obj3 = $temp_obj1->getTsdefban(); 					if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
-						$newObject = false;
-						$temp_obj3->addTsdeffonant($obj1);
-						break;
-					}
-				}
-
-				if ($newObject) {
-					$obj3->initTsdeffonants();
-					$obj3->addTsdeffonant($obj1);
-				}
-	
-			$results[] = $obj1;
-		}
-		return $results;
-	}
-
-
-	
-	public static function doSelectJoinAllExceptTsdefban(Criteria $c, $con = null)
+	public static function doSelectJoinAllExceptBnubica(Criteria $c, $con = null)
 	{
 		$c = clone $c;
 
@@ -660,9 +1007,19 @@ abstract class BaseTsdeffonantPeer {
 			OpbenefiPeer::addSelectColumns($c);
 			$startcol4 = $startcol3 + OpbenefiPeer::NUM_COLUMNS;
 	
+			NpcatprePeer::addSelectColumns($c);
+			$startcol5 = $startcol4 + NpcatprePeer::NUM_COLUMNS;
+	
+			TsdefbanPeer::addSelectColumns($c);
+			$startcol6 = $startcol5 + TsdefbanPeer::NUM_COLUMNS;
+	
 			$c->addJoin(TsdeffonantPeer::CODUNIADM, TsuniadmPeer::CODUNIADM);
 	
 			$c->addJoin(TsdeffonantPeer::CEDRIF, OpbenefiPeer::CEDRIF);
+	
+			$c->addJoin(TsdeffonantPeer::CODCAT, NpcatprePeer::CODCAT);
+	
+			$c->addJoin(TsdeffonantPeer::NUMCUE, TsdefbanPeer::NUMCUE);
 	
 
 		$rs = BasePeer::doSelect($c, $con);
@@ -718,6 +1075,602 @@ abstract class BaseTsdeffonantPeer {
 				if ($newObject) {
 					$obj3->initTsdeffonants();
 					$obj3->addTsdeffonant($obj1);
+				}
+	
+				$omClass = NpcatprePeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj4  = new $cls();
+				$obj4->hydrate($rs, $startcol4);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj4 = $temp_obj1->getNpcatpre(); 					if ($temp_obj4->getPrimaryKey() === $obj4->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj4->addTsdeffonant($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj4->initTsdeffonants();
+					$obj4->addTsdeffonant($obj1);
+				}
+	
+				$omClass = TsdefbanPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj5  = new $cls();
+				$obj5->hydrate($rs, $startcol5);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj5 = $temp_obj1->getTsdefban(); 					if ($temp_obj5->getPrimaryKey() === $obj5->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj5->addTsdeffonant($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj5->initTsdeffonants();
+					$obj5->addTsdeffonant($obj1);
+				}
+	
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doSelectJoinAllExceptTsuniadm(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+								if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		TsdeffonantPeer::addSelectColumns($c);
+		$startcol2 = (TsdeffonantPeer::NUM_COLUMNS - TsdeffonantPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+
+			BnubicaPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + BnubicaPeer::NUM_COLUMNS;
+	
+			OpbenefiPeer::addSelectColumns($c);
+			$startcol4 = $startcol3 + OpbenefiPeer::NUM_COLUMNS;
+	
+			NpcatprePeer::addSelectColumns($c);
+			$startcol5 = $startcol4 + NpcatprePeer::NUM_COLUMNS;
+	
+			TsdefbanPeer::addSelectColumns($c);
+			$startcol6 = $startcol5 + TsdefbanPeer::NUM_COLUMNS;
+	
+			$c->addJoin(TsdeffonantPeer::UNIEJE, BnubicaPeer::CODUBI);
+	
+			$c->addJoin(TsdeffonantPeer::CEDRIF, OpbenefiPeer::CEDRIF);
+	
+			$c->addJoin(TsdeffonantPeer::CODCAT, NpcatprePeer::CODCAT);
+	
+			$c->addJoin(TsdeffonantPeer::NUMCUE, TsdefbanPeer::NUMCUE);
+	
+
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = TsdeffonantPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+				$omClass = BnubicaPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj2  = new $cls();
+				$obj2->hydrate($rs, $startcol2);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getBnubica(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addTsdeffonant($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj2->initTsdeffonants();
+					$obj2->addTsdeffonant($obj1);
+				}
+	
+				$omClass = OpbenefiPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj3  = new $cls();
+				$obj3->hydrate($rs, $startcol3);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj3 = $temp_obj1->getOpbenefi(); 					if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj3->addTsdeffonant($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj3->initTsdeffonants();
+					$obj3->addTsdeffonant($obj1);
+				}
+	
+				$omClass = NpcatprePeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj4  = new $cls();
+				$obj4->hydrate($rs, $startcol4);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj4 = $temp_obj1->getNpcatpre(); 					if ($temp_obj4->getPrimaryKey() === $obj4->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj4->addTsdeffonant($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj4->initTsdeffonants();
+					$obj4->addTsdeffonant($obj1);
+				}
+	
+				$omClass = TsdefbanPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj5  = new $cls();
+				$obj5->hydrate($rs, $startcol5);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj5 = $temp_obj1->getTsdefban(); 					if ($temp_obj5->getPrimaryKey() === $obj5->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj5->addTsdeffonant($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj5->initTsdeffonants();
+					$obj5->addTsdeffonant($obj1);
+				}
+	
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doSelectJoinAllExceptOpbenefi(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+								if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		TsdeffonantPeer::addSelectColumns($c);
+		$startcol2 = (TsdeffonantPeer::NUM_COLUMNS - TsdeffonantPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+
+			BnubicaPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + BnubicaPeer::NUM_COLUMNS;
+	
+			TsuniadmPeer::addSelectColumns($c);
+			$startcol4 = $startcol3 + TsuniadmPeer::NUM_COLUMNS;
+	
+			NpcatprePeer::addSelectColumns($c);
+			$startcol5 = $startcol4 + NpcatprePeer::NUM_COLUMNS;
+	
+			TsdefbanPeer::addSelectColumns($c);
+			$startcol6 = $startcol5 + TsdefbanPeer::NUM_COLUMNS;
+	
+			$c->addJoin(TsdeffonantPeer::UNIEJE, BnubicaPeer::CODUBI);
+	
+			$c->addJoin(TsdeffonantPeer::CODUNIADM, TsuniadmPeer::CODUNIADM);
+	
+			$c->addJoin(TsdeffonantPeer::CODCAT, NpcatprePeer::CODCAT);
+	
+			$c->addJoin(TsdeffonantPeer::NUMCUE, TsdefbanPeer::NUMCUE);
+	
+
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = TsdeffonantPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+				$omClass = BnubicaPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj2  = new $cls();
+				$obj2->hydrate($rs, $startcol2);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getBnubica(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addTsdeffonant($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj2->initTsdeffonants();
+					$obj2->addTsdeffonant($obj1);
+				}
+	
+				$omClass = TsuniadmPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj3  = new $cls();
+				$obj3->hydrate($rs, $startcol3);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj3 = $temp_obj1->getTsuniadm(); 					if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj3->addTsdeffonant($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj3->initTsdeffonants();
+					$obj3->addTsdeffonant($obj1);
+				}
+	
+				$omClass = NpcatprePeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj4  = new $cls();
+				$obj4->hydrate($rs, $startcol4);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj4 = $temp_obj1->getNpcatpre(); 					if ($temp_obj4->getPrimaryKey() === $obj4->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj4->addTsdeffonant($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj4->initTsdeffonants();
+					$obj4->addTsdeffonant($obj1);
+				}
+	
+				$omClass = TsdefbanPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj5  = new $cls();
+				$obj5->hydrate($rs, $startcol5);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj5 = $temp_obj1->getTsdefban(); 					if ($temp_obj5->getPrimaryKey() === $obj5->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj5->addTsdeffonant($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj5->initTsdeffonants();
+					$obj5->addTsdeffonant($obj1);
+				}
+	
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doSelectJoinAllExceptNpcatpre(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+								if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		TsdeffonantPeer::addSelectColumns($c);
+		$startcol2 = (TsdeffonantPeer::NUM_COLUMNS - TsdeffonantPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+
+			BnubicaPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + BnubicaPeer::NUM_COLUMNS;
+	
+			TsuniadmPeer::addSelectColumns($c);
+			$startcol4 = $startcol3 + TsuniadmPeer::NUM_COLUMNS;
+	
+			OpbenefiPeer::addSelectColumns($c);
+			$startcol5 = $startcol4 + OpbenefiPeer::NUM_COLUMNS;
+	
+			TsdefbanPeer::addSelectColumns($c);
+			$startcol6 = $startcol5 + TsdefbanPeer::NUM_COLUMNS;
+	
+			$c->addJoin(TsdeffonantPeer::UNIEJE, BnubicaPeer::CODUBI);
+	
+			$c->addJoin(TsdeffonantPeer::CODUNIADM, TsuniadmPeer::CODUNIADM);
+	
+			$c->addJoin(TsdeffonantPeer::CEDRIF, OpbenefiPeer::CEDRIF);
+	
+			$c->addJoin(TsdeffonantPeer::NUMCUE, TsdefbanPeer::NUMCUE);
+	
+
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = TsdeffonantPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+				$omClass = BnubicaPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj2  = new $cls();
+				$obj2->hydrate($rs, $startcol2);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getBnubica(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addTsdeffonant($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj2->initTsdeffonants();
+					$obj2->addTsdeffonant($obj1);
+				}
+	
+				$omClass = TsuniadmPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj3  = new $cls();
+				$obj3->hydrate($rs, $startcol3);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj3 = $temp_obj1->getTsuniadm(); 					if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj3->addTsdeffonant($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj3->initTsdeffonants();
+					$obj3->addTsdeffonant($obj1);
+				}
+	
+				$omClass = OpbenefiPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj4  = new $cls();
+				$obj4->hydrate($rs, $startcol4);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj4 = $temp_obj1->getOpbenefi(); 					if ($temp_obj4->getPrimaryKey() === $obj4->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj4->addTsdeffonant($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj4->initTsdeffonants();
+					$obj4->addTsdeffonant($obj1);
+				}
+	
+				$omClass = TsdefbanPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj5  = new $cls();
+				$obj5->hydrate($rs, $startcol5);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj5 = $temp_obj1->getTsdefban(); 					if ($temp_obj5->getPrimaryKey() === $obj5->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj5->addTsdeffonant($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj5->initTsdeffonants();
+					$obj5->addTsdeffonant($obj1);
+				}
+	
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doSelectJoinAllExceptTsdefban(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+								if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		TsdeffonantPeer::addSelectColumns($c);
+		$startcol2 = (TsdeffonantPeer::NUM_COLUMNS - TsdeffonantPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+
+			BnubicaPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + BnubicaPeer::NUM_COLUMNS;
+	
+			TsuniadmPeer::addSelectColumns($c);
+			$startcol4 = $startcol3 + TsuniadmPeer::NUM_COLUMNS;
+	
+			OpbenefiPeer::addSelectColumns($c);
+			$startcol5 = $startcol4 + OpbenefiPeer::NUM_COLUMNS;
+	
+			NpcatprePeer::addSelectColumns($c);
+			$startcol6 = $startcol5 + NpcatprePeer::NUM_COLUMNS;
+	
+			$c->addJoin(TsdeffonantPeer::UNIEJE, BnubicaPeer::CODUBI);
+	
+			$c->addJoin(TsdeffonantPeer::CODUNIADM, TsuniadmPeer::CODUNIADM);
+	
+			$c->addJoin(TsdeffonantPeer::CEDRIF, OpbenefiPeer::CEDRIF);
+	
+			$c->addJoin(TsdeffonantPeer::CODCAT, NpcatprePeer::CODCAT);
+	
+
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = TsdeffonantPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+				$omClass = BnubicaPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj2  = new $cls();
+				$obj2->hydrate($rs, $startcol2);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getBnubica(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addTsdeffonant($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj2->initTsdeffonants();
+					$obj2->addTsdeffonant($obj1);
+				}
+	
+				$omClass = TsuniadmPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj3  = new $cls();
+				$obj3->hydrate($rs, $startcol3);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj3 = $temp_obj1->getTsuniadm(); 					if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj3->addTsdeffonant($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj3->initTsdeffonants();
+					$obj3->addTsdeffonant($obj1);
+				}
+	
+				$omClass = OpbenefiPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj4  = new $cls();
+				$obj4->hydrate($rs, $startcol4);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj4 = $temp_obj1->getOpbenefi(); 					if ($temp_obj4->getPrimaryKey() === $obj4->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj4->addTsdeffonant($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj4->initTsdeffonants();
+					$obj4->addTsdeffonant($obj1);
+				}
+	
+				$omClass = NpcatprePeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj5  = new $cls();
+				$obj5->hydrate($rs, $startcol5);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj5 = $temp_obj1->getNpcatpre(); 					if ($temp_obj5->getPrimaryKey() === $obj5->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj5->addTsdeffonant($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj5->initTsdeffonants();
+					$obj5->addTsdeffonant($obj1);
 				}
 	
 			$results[] = $obj1;
