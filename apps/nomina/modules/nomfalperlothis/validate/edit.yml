@@ -1,0 +1,31 @@
+methods:
+  post:
+   - "npfalper{fecdes}"
+   - "npfalper{codnom}"
+names:
+  npfalper{codnom}:
+    required:  Yes
+    required_msg: El cÃ³digo Nomina no puede estar en Blanco
+    validators: Validator_codnom
+
+  npfalper{fecdes}:
+    required:  Yes
+    required_msg: La Fecha no puedo estar en Blanco
+    validators: FechaValidator_fecdes
+
+Validator_codnom:
+    class: CidesaExistValidator
+    param:
+        class:        Npnomina
+        column:       codnom
+        unique_error: El CÃ³digo de la Nomina debe Existir.
+
+FechaValidator_fecdes:
+    class: CidesaDateValidator
+    param:
+        class:        Cppereje
+        columnmin:    fecini
+        columnmax:    feccie
+        min_error:    La Fecha Especificada no puede ser Menor a la Fecha de Inicio del PerÃ­odo
+        max_error:    La Fecha Especificada no puede ser Mayor a la Fecha de Fin del PerÃ­odo
+        date_error:   Fecha InvÃ¡lida

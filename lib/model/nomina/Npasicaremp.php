@@ -8,7 +8,7 @@
  * @package    Roraima
  * @subpackage lib.model.nomina
  * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id: Npasicaremp.php 39562 2010-07-21 15:43:08Z cramirez $
+ * @version SVN: $Id: Npasicaremp.php 40791 2010-09-28 17:14:22Z cramirez $
  *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -26,6 +26,9 @@ class Npasicaremp extends BaseNpasicaremp
 	protected $fecing=null;
         protected $codtipcar="";
         protected $mancencos="";
+        protected $check = 0;
+        protected $codmot = '';
+
 
 
 	public function getCodcon()

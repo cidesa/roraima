@@ -16,9 +16,10 @@ class nomdefespclaudetActions extends autonomdefespclaudetActions
   // Para incluir funcionalidades al executeEdit()
   public function editing()
   {
+    $nomsalint = H::getConfAppGen('nomsalint');
     $this->arrsal=array('UD'=>'Ultimo Devengado',
                        'SP'=>'Salario Promedio',
-					   'SI'=>'Salario Integral',
+					   'SI'=> $nomsalint=='S' ? 'Salario Base' : 'Salario Integral',
 					   'SN'=>'Salario Normal');
     $this->configGridClau();
 
@@ -42,11 +43,11 @@ class nomdefespclaudetActions extends autonomdefespclaudetActions
 
     $codigo = $this->getRequestParameter('codigo','');
     // Esta variable ajax debe ser usada en cada llamado para identificar
-    // que objeto hace el llamado y por consiguiente ejecutar el cÃ³digo necesario
+    // que objeto hace el llamado y por consiguiente ejecutar el código necesario
     $ajax = $this->getRequestParameter('ajax','');
 
-    // Se debe enviar en la peticiÃ³n ajax desde el cliente los datos que necesitemos
-    // para generar el cÃ³digo de retorno, esto porque en un llamado Ajax no se devuelven
+    // Se debe enviar en la petición ajax desde el cliente los datos que necesitemos
+    // para generar el código de retorno, esto porque en un llamado Ajax no se devuelven
     // los datos de los objetos de la vista como pasa en un submit normal.
 
     switch ($ajax){
@@ -64,7 +65,7 @@ class nomdefespclaudetActions extends autonomdefespclaudetActions
     $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
 
     // Si solo se va usar ajax para actualziar datos en objetos ya existentes se debe
-    // mantener habilitar esta instrucciÃ³n
+    // mantener habilitar esta instrucción
     return sfView::HEADER_ONLY;
 
     // Si por el contrario se quiere reemplazar un div en la vista, se debe deshabilitar
@@ -75,9 +76,9 @@ class nomdefespclaudetActions extends autonomdefespclaudetActions
 
   /**
    *
-   * FunciÃ³n que se ejecuta luego los validadores del negocio (validators)
-   * Para realizar validaciones especÃ­ficas del negocio del formulario
-   * Para mayor informaciÃ³n vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
+   * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
   public function validateEdit()
@@ -85,7 +86,7 @@ class nomdefespclaudetActions extends autonomdefespclaudetActions
     $this->coderr =-1;
 
     // Se deben llamar a las funciones necesarias para cargar los
-    // datos de la vista que serÃ¡n usados en las funciones de validaciÃ³n.
+    // datos de la vista que serán usados en las funciones de validación.
     // Por ejemplo:
 
     if($this->getRequest()->getMethod() == sfRequest::POST){
@@ -93,7 +94,7 @@ class nomdefespclaudetActions extends autonomdefespclaudetActions
       // $this->configGrid();
       // $grid = Herramientas::CargarDatosGrid($this,$this->obj);
 
-      // Aqui van los llamados a los mÃ©todos de las clases del
+      // Aqui van los llamados a los métodos de las clases del
       // negocio para validar los datos.
       // Los resultados de cada llamado deben ser analizados por ejemplo:
 
@@ -101,10 +102,10 @@ class nomdefespclaudetActions extends autonomdefespclaudetActions
 
        //$resp=Herramientas::ValidarCodigo($valor,$this->tstipmov,$campo);
 
-      // al final $resp es analizada en base al cÃ³digo que retorna
-      // Todas las funciones de validaciÃ³n y procesos del negocio
-      // deben retornar cÃ³digos >= -1. Estos cÃ³digo serÃ¡m buscados en
-      // el archivo errors.yml en la funciÃ³n handleErrorEdit()
+      // al final $resp es analizada en base al código que retorna
+      // Todas las funciones de validación y procesos del negocio
+      // deben retornar códigos >= -1. Estos código serám buscados en
+      // el archivo errors.yml en la función handleErrorEdit()
 
       if($this->coderr!=-1){
         return false;
@@ -117,15 +118,16 @@ class nomdefespclaudetActions extends autonomdefespclaudetActions
   }
 
   /**
-   * FunciÃ³n para actualziar el grid en el post si ocurre un error
+   * Función para actualziar el grid en el post si ocurre un error
    * Se pueden colocar aqui los grids adicionales
    *
    */
   public function updateError()
   {
+    $nomsalint = H::getConfAppGen('nomsalint');
     $this->arrsal=array('UD'=>'Ultimo Devengado',
                        'SP'=>'Salario Promedio',
-					   'SI'=>'Salario Integral',
+					   'SI'=> $nomsalint=='S' ? 'Salario Base' : 'Salario Integral',
 					   'SN'=>'Salario Normal');
     $grid = Herramientas::CargarDatosGridv2($this,$this->obj);
     $this->configGridClau();

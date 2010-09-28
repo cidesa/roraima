@@ -24,6 +24,7 @@ private static $coderror=-1;
    */
   public function executeList()
   {
+    $this->getUser()->setAttribute('nomsalint',H::getConfAppGen('nomsalint'),'vacliquidacion');
     $this->processSort();
 
     $this->processFilters();

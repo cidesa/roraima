@@ -6,8 +6,8 @@
  *
  * @package    Roraima
  * @subpackage lib
- * @author     $Author: jlobaton $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id: Herramientas.class.php 32959 2009-09-10 16:47:51Z jlobaton $
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: Herramientas.class.php 40790 2010-09-28 17:10:35Z cramirez $
  *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -1254,7 +1254,6 @@ public static function CargarDatosGrid(&$form,$obj,$arreglo = false)
     return $json .= '["","",""]]';
   }
 
-
   public function recorrerArreglo($carmodulo=array(),&$mod)
   {
 
@@ -2290,6 +2289,19 @@ public static function obtenerDiaMesOAno($fecha,$formato,$dmoa)
       }else return false;
       return false;
    }
+   public static function getConfAppGen($var)
+   {
+     $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+       if ($varemp && is_array($varemp)){
+        if(array_key_exists('generales',$varemp))
+               if(array_key_exists($var,$varemp['generales']))
+               {
+                 return $varemp['generales'][$var];
+               }
+      }else return false;
+      return false;
+   }
+
 
    public static function ValidarGridVacio($grid,$objvalida,$arr=false)
   {

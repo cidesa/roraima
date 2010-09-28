@@ -60,6 +60,7 @@
 		</th>
 		<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 		<th>
+                        <?php if($sf_user->getAttribute('nomsalint','','presnomliquidacion')=='S') $labels['npliquidacion_det{salarioint}']=str_replace('Integral','Base',$labels['npliquidacion_det{salarioint}']);?>
 			<?php if($labels['npliquidacion_det{salarioint}']!='.:') { ?>
 			  <?php echo label_for('npliquidacion_det[salarioint]', __($labels['npliquidacion_det{salarioint}' ]), 'class="required" Style="text-align:left; width:100px"') ?>
 			  <div class=" ">

@@ -6,7 +6,7 @@
  * @subpackage nomina
  * @author     $Author$ <desarrollo@cidesa.com.ve>
  * @version SVN: $Id$
- * 
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -861,13 +861,13 @@ End Function*/
   	if($grid[4][0]=='V')
 	{
 		if ((self::GrabarEncabezadoAntiguoRegimen($nppresoc,$grid)) !=-1){ return 0;}
-		if ((self::GrabarDetallesAntiguoRegimen($nppresoc,$grid)) !=-1){ return 0;}			
+		if ((self::GrabarDetallesAntiguoRegimen($nppresoc,$grid)) !=-1){ return 0;}
 	}else
 	{
 		if ((self::GrabarEncabezadoNuevoRegimen($nppresoc,$grid)) !=-1){ return 0;}
-		if ((self::GrabarDetallesNuevoRegimen($nppresoc,$grid)) !=-1){ return 0;}			
+		if ((self::GrabarDetallesNuevoRegimen($nppresoc,$grid)) !=-1){ return 0;}
 	}
-	
+
 
 	return -1;
   }
@@ -1058,7 +1058,7 @@ End Function*/
    //   !antacu = dblTotAntAcu (la suma de monant)
 
   }
-  
+
   public static function GrabarEncabezadoAntiguoRegimen($nppresoc,$grid)
   {
   	try
@@ -1120,7 +1120,7 @@ End Function*/
     while ($j<count($x))
     {
       $x[$j]->setCodemp($codemp);
-      $x[$j]->setFeccor($fechacor);      
+      $x[$j]->setFeccor($fechacor);
       $x[$j]->setAntacum($x[$j]->getCapitalact());
 	  $x[$j]->setAdeant($x[$j]->getMonant());
       $x[$j]->setIntacum($x[$j]->getIntacu());
@@ -1146,7 +1146,7 @@ End Function*/
 	   $diasuti=0;
 	   if (!$estaliquidado && $totarr>0)
 	   {  #NO ESTA LIQUIDADO
-	   	  #Primero verificamos cuantos meses cumplidos trabajados tiene el trabajador en el año 
+	   	  #Primero verificamos cuantos meses cumplidos trabajados tiene el trabajador en el año
 	   	  $anoegr=date('Y',strtotime($fecegr));
 		  $fecegrf=date('d/m/Y',strtotime($fecegr));
 		  #PARA CALCULAR LOS MESES DEL AÑO
@@ -1175,8 +1175,8 @@ End Function*/
 		  if (Herramientas::BuscarDatos($sqlmeses,&$result))
 		   	$meses = $result[0]['meses'];
 		  else
-		 	$meses = 0;	
-			
+		 	$meses = 0;
+
 		  #BUSCAMOS SI ESTA DEFINIDO LOS PARAMETROS DE AGUINALDOS Y FACTOR
 		  $agui = 'N';
 		  $factor=0;
@@ -1184,7 +1184,7 @@ End Function*/
 		  if (Herramientas::BuscarDatos($sqldef,&$result))
 		  {
 		  	$agui = $result[0]['aguicom'];
-		  	$mescom = $result[0]['apartirmes'];			
+		  	$mescom = $result[0]['apartirmes'];
 			if($agui=='S' && intval($meses)>=intval($mescom))
 			{
 				$meses=12;
@@ -1192,10 +1192,10 @@ End Function*/
 			if(is_numeric($result[0]['factorbonfinanofra']) && $result[0]['factorbonfinanofra']!=0)
 				if($result[0]['factorbonfinanofra']>1)
 					$factor = $result[0]['factorbonfinanofra'];
-			
-		  }		 	
+
+		  }
 		  #BUSCAMOS SI COBRÓ UTILIDADES EN EL PERÍODO
-          $sqluti = "Select * from NPHisCon where CodEmp='$codemp' and CodCon in (Select CodConUti from NPVacDefGen) and TO_CHAR(FecNom,'YYYY')='$anoegr'";
+                  $sqluti = "Select * from NPHisCon where CodEmp='$codemp' and CodCon in (Select CodConUti from NPVacDefGen) and TO_CHAR(FecNom,'YYYY')='$anoegr'";
 		  if (!Herramientas::BuscarDatos($sqluti,&$result))
 		  { # NO COBRO UTILIDADES
 		  	if($meses>=1)
@@ -1203,31 +1203,27 @@ End Function*/
 				PrestacionesSociales::TraerAlicuota($codemp,'01/01/'.$anoegr,$fecegrf,&$ialiuti,&$ialibono,&$icalinc,&$utilinc);
 				$montouti = ($ialiuti) / 12;
 				$montouti = $montouti * $meses;
+                                #Para definicion Especifica de Bono Fin de Año
+                                $mestra = intval($meses);
+                                empty($mestra) ? $mestra = 0 : '' ;
+                                $sql="select dias from npbonfinano where codnom='$codnom' and desde<=$mestra and hasta>=$mestra limit 1";
+				if(H::BuscarDatos($sql, $rsbon))
+				{
+                                    $montouti = $rsbon[0]['dias'];
+				}
 				#YA NO SE CALCULA LA PARTE DE INCIDENCIA
 				$montoinc = 0;
 				$montoinc = $montoinc * $montouti;
+                                $diasuti = $montouti;
+                                    ($factor!=0 && (!is_null($factor))) ? $montouti = $montouti * ($ultimosueldo*$factor/365) : $montouti = $montouti * ($ultimosueldo/30);
 
-				/*if($utilinc)
-				{
-					$sql = "Select coalesce(max(saltot),0) as Monto from NPImpPresoc where CodEmp='$codemp' And Tipo='P'";
-					if (Herramientas::BuscarDatos($sql,&$result))
-					{
-						$montouti = $montouti * $result[0]['monto'];
-						$diasuti = $montouti / $result[0]['monto'];
-					}else
-					    $diasuti = 0;
-				}else
-				{*/
-				    $diasuti = $montouti;
-					($factor!=0 && (!is_null($factor))) ? $montouti = $montouti * ($ultimosueldo*$factor/365) : $montouti = $montouti * ($ultimosueldo/30);
-					
-				//}
+
 				#ARREGLO DEL GRID
 			    $sql = "Select * from NPDefPreLiq where CODNOM='$codnom' AND CodCon='005' and PerDes<='$anoegr' and PerHas>='$anoegr'";
 				if (Herramientas::BuscarDatos($sql,&$result))
 					$partida = $result[0]['codpar'];
 				else
-				    $partida='';	
+				    $partida='';
 				$arr[$totarr]['orden'] = '5';
 				$arr[$totarr]['dias'] = $diasuti;
 				$arr[$totarr]['monto'] = $montouti + $montoinc;
@@ -1246,18 +1242,25 @@ End Function*/
 
 				$montouti = ($ialiuti) / 12;
 				$montouti = $montouti * (12 - $meses);
+                                #Para definicion Especifica de Bono Fin de Año
+                                $mestra = intval($meses);
+                                empty($mestra) ? $mestra = 0 : '' ;
+                                $sql="select dias from npbonfinano where codnom='$codnom' and desde<=$mestra and hasta>=$mestra limit 1";
+				if(H::BuscarDatos($sql, $rsbon))
+				{
+                                    $montouti = $rsbon[0]['dias'];
+				}
 				#YA NO SE CALCULA LA PARTE DE INCIDENCIA
 				$montoinc = 0;
 				$montoinc = $montoinc * $montouti;
-				
 				if($utilinc)
 				{
 					$sql = "Select coalesce(max(saltot),0) as Monto from NPImpPresoc where CodEmp='$codemp' And Tipo='P'";
 					if (Herramientas::BuscarDatos($sql,&$result))
 					{
 						$diasuti = $montouti;
-						$montouti = $montouti * $result[0]['monto'];						
-					}						
+						$montouti = $montouti * $result[0]['monto'];
+					}
 				}else
 				{
 					$diasuti = $montouti;
@@ -1268,18 +1271,26 @@ End Function*/
 				if (Herramientas::BuscarDatos($sql,&$result))
 					$partida = $result[0]['codpar'];
 				else
-				    $partida='';	
+				    $partida='';
 				$arr[$totarr]['orden'] = '5';
 				$arr[$totarr]['dias'] = $diasuti;
 				$arr[$totarr]['monto'] = ($montouti + $montoinc)*(-1);
 				$arr[$totarr]['descripcion'] = 'BONIFICACIÓN FRACCIONADA DE FIN DE AÑO';
-				$arr[$totarr]['partida'] = $partida;				
+				$arr[$totarr]['partida'] = $partida;
 			}else
 			{
 				PrestacionesSociales::TraerAlicuota($codemp,'01/01/'.$anoegr,$fecegrf,&$ialiuti,&$ialibono,&$icalinc,&$utilinc);
 				$montouti = $ialiuti / 12;
+                                #Para definicion Especifica de Bono Fin de Año
+                                $mestra = intval($meses);
+                                empty($mestra) ? $mestra = 0 : '' ;
+                                $sql="select dias from npbonfinano where codnom='$codnom' and desde<=$mestra and hasta>=$mestra limit 1";
+				if(H::BuscarDatos($sql, $rsbon))
+				{
+                                    $montouti = $rsbon[0]['dias'];
+				}
 				#YA NO SE CALCULA INCIDENCIA
-				$montoinc = 0;				
+				$montoinc = 0;
 				$montoinc = $montoinc * $montouti;
 				$diasuti = $montouti;
 				($factor!=0 && (!is_null($factor))) ? $montouti = $montouti * ($ultimosueldo*$factor/365) : $montouti = $montouti * ($ultimosueldo/30);
@@ -1288,24 +1299,24 @@ End Function*/
 				if (Herramientas::BuscarDatos($sql,&$result))
 					$partida = $result[0]['codpar'];
 				else
-				    $partida='';	
+				    $partida='';
 				$arr[$totarr]['orden'] = '5';
 				$arr[$totarr]['dias'] = $diasuti;
 				$arr[$totarr]['monto'] = ($montouti + $montoinc)*(-1);
 				$arr[$totarr]['descripcion'] = 'BONIFICACIÓN FRACCIONADA DE FIN DE AÑO';
 				$arr[$totarr]['partida'] = $partida;
-			}	
-		  } 
-		  
+			}
+		  }
+
 	   }
 	   else
 	   {
 	   	 #YA ESTA LIQUIDADO
-	   	 #SE CALCULO AL PRINCIPIO	   	 
-	   } 
+	   	 #SE CALCULO AL PRINCIPIO
+	   }
 	   return $arr;
   }
-  
+
   public static function TraerAlicuota($codemp,$fechaini,$fechafin,&$ialiuti,&$ialibono,&$icalinc,&$utilinc)
   {
   	$sql = "Select * from NPAsiEmpCont where CodEmp='$codemp'";
@@ -1313,39 +1324,39 @@ End Function*/
 		$contrato = $result[0]['codtipcon'];
 	else
 		$contrato = '001';
-	
+
 	$sql = "select trunc((to_date('$fechaini','dd/mm/yyyy')-(select fecing from nphojint where codemp='$codemp'))::numeric/365)::numeric as anoser;";
 	if (Herramientas::BuscarDatos($sql,&$result))
-		$anoser = $result[0]['anoser'];		
+		$anoser = $result[0]['anoser'];
 	else
-		$anoser=0;		
+		$anoser=0;
 	$anoser=$anoser+1;
-		
-	$sql = "select * from npbonocont 
-	       where 
-		    anovig<= to_date('$fechaini','dd/mm/yyyy') and 
-			anovighas >= to_date('$fechafin','dd/mm/yyyy') and 
-			$anoser>= desde and $anoser<= hasta and 
+
+	$sql = "select * from npbonocont
+	       where
+		    anovig<= to_date('$fechaini','dd/mm/yyyy') and
+			anovighas >= to_date('$fechafin','dd/mm/yyyy') and
+			$anoser>= desde and $anoser<= hasta and
 			codtipcon = '$contrato'
 			order by anovig desc
-			";	
+			";
     if (Herramientas::BuscarDatos($sql,&$result))
 	{
 		$ialiuti = $result[0]['diauti'];
 		$ialibono = $result[0]['diavac'];
-		$icalinc = $result[0]['calinc'];		
+		$icalinc = $result[0]['calinc'];
 		#UtilInt = (ObtenerValorRegistro(rsTemp!UtilInt) = "S")
-		$icalinc == "S" ? $utilinc=true : $utilinc=false;		
+		$icalinc == "S" ? $utilinc=true : $utilinc=false;
 	}else
 	{
 		$ialiuti = 1;
 		$ialibono = 1;
-		$icalinc = "N";		
-		$utilinc=false;		
-	}			
-  	
+		$icalinc = "N";
+		$utilinc=false;
+	}
+
   }
-  
+
    public static function salvar_liquidacion($clase,$grida,$gridd)
   {
   	  #SALVAR ASIGANCIONES
@@ -1369,7 +1380,7 @@ End Function*/
 		$npliq->setDias($x[$i]['dias']);
     	$npliq->save();
        $i++;
-      }      
+      }
 	  #SALVAR DEDUCCIONES
 	  $x=$gridd[0];
 	  $i=0;
@@ -1389,7 +1400,7 @@ End Function*/
     	$npliq->save();
        $i++;
       }
-	  
+
 	return -1;
   }
   public static function validarNpreghistadeint($codemp, $fecade) {
@@ -1413,7 +1424,7 @@ End Function*/
     }
     return $error;
   }
-  
+
   public static function salvar_nppernom($clase,$grid) {
 
     $error = -1;
@@ -1428,17 +1439,17 @@ End Function*/
 			$nppernom->setFecini($x['fecini']);
 			$nppernom->setFecfin($x['fecfin']);
 			$nppernom->save();
-		}	
+		}
 	}else
 	{
 		$c = new Criteria;
-	    $c->add(NppernomPeer :: CODNOM, $clase->getCodnom());	
+	    $c->add(NppernomPeer :: CODNOM, $clase->getCodnom());
 		$c->addAscendingOrderByColumn(NppernomPeer::MES);
-	    $per = NppernomPeer :: doSelect($c);		
+	    $per = NppernomPeer :: doSelect($c);
 		if($per)
 		{
 			foreach($per as $x)
-			{				
+			{
 			    foreach($grid[0] as $r)
 				{
 					if($x->getMes()==$r['mes'])
@@ -1446,17 +1457,17 @@ End Function*/
 						$x->setFecini($r['fecini']);
 						$x->setFecfin($r['fecfin']);
 						$x->save();
-					}	
+					}
 				}
-			}	
+			}
 		}
-				
+
 	}
-	
+
     return $error;
   }
 
-  
+
   }
 class PS extends PrestacionesSociales
 {}

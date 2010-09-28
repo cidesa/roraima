@@ -4,8 +4,8 @@
  *
  * @package    Roraima
  * @subpackage vistas
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version    SVN: $Id$
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id: editSuccess.php 40770 2010-09-28 16:56:47Z cramirez $
  */
 // date: 2007/08/17 10:18:40
 ?>
@@ -20,7 +20,7 @@
 <?php echo __($npestorg->getCambiareti(),
 array()) ?>
 <?php }else {?>
-<?php echo __('Edición de Niveles Organizacionales',
+<?php echo __('Edición de Ubicaciones Administrativa',
 array()) ?>
 <?php }?>
 </h1>
