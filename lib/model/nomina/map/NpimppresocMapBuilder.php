@@ -4,25 +4,25 @@
 
 class NpimppresocMapBuilder {
 
-	
+
 	const CLASS_NAME = 'lib.model.nomina.map.NpimppresocMapBuilder';
 
-	
+
 	private $dbMap;
 
-	
+
 	public function isBuilt()
 	{
 		return ($this->dbMap !== null);
 	}
 
-	
+
 	public function getDatabaseMap()
 	{
 		return $this->dbMap;
 	}
 
-	
+
 	public function doBuild()
 	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
@@ -49,6 +49,8 @@ class NpimppresocMapBuilder {
 		$tMap->addColumn('ALIUTI', 'Aliuti', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addColumn('ALIBONO', 'Alibono', 'double', CreoleTypes::NUMERIC, false, 14);
+
+		$tMap->addColumn('ALIADI', 'Aliadi', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addColumn('SALTOT', 'Saltot', 'double', CreoleTypes::NUMERIC, true, 14);
 
@@ -82,5 +84,5 @@ class NpimppresocMapBuilder {
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
-	} 
-} 
+	}
+}

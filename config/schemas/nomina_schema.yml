@@ -3742,6 +3742,10 @@ propel:
       type: NUMERIC
       size: 14
       scale: 2
+    aliadi:
+      type: NUMERIC
+      size: 14
+      scale: 2
     saltot:
       type: NUMERIC
       size: 14

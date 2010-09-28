@@ -944,7 +944,10 @@ End Function*/
       $x[$j]->setCodemp($codemp);
       $x[$j]->setFeccor($fechacor);
       $x[$j]->setSalempdia($x[$j]->getMondia());
-	  $x[$j]->setSalemp($x[$j]->getMonto());
+      $x[$j]->setSalemp($x[$j]->getMonto());
+      $x[$j]->setAliuti($x[$j]->getAliuti());
+      $x[$j]->setAlibono($x[$j]->getAlibono());
+      $x[$j]->setAliadi($x[$j]->getAliadi());
       $x[$j]->setDiaart108($x[$j]->getDias());
       $x[$j]->setSaladi($x[$j]->getMondiapro());
       $x[$j]->setCapemp($x[$j]->getCapital());

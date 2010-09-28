@@ -4,119 +4,123 @@
 abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
 
 
-	
+
 	protected static $peer;
 
 
-	
+
 	protected $codemp;
 
 
-	
+
 	protected $feccor;
 
 
-	
+
 	protected $fecini;
 
 
-	
+
 	protected $fecfin;
 
 
-	
+
 	protected $salemp;
 
 
-	
+
 	protected $salempdia;
 
 
-	
+
 	protected $aliuti;
 
 
-	
+
 	protected $alibono;
 
 
-	
+
+	protected $aliadi;
+
+
+
 	protected $saltot;
 
 
-	
+
 	protected $diaart108;
 
 
-	
+
 	protected $capemp;
 
 
-	
+
 	protected $antacum;
 
 
-	
+
 	protected $valart108;
 
 
-	
+
 	protected $tasint;
 
 
-	
+
 	protected $diadif;
 
 
-	
+
 	protected $intdev;
 
 
-	
+
 	protected $intacum;
 
 
-	
+
 	protected $adeant;
 
 
-	
+
 	protected $adepre;
 
 
-	
+
 	protected $regpre;
 
 
-	
+
 	protected $saladi;
 
 
-	
+
 	protected $anoser;
 
 
-	
+
 	protected $tipo;
 
 
-	
+
 	protected $id;
 
-	
+
 	protected $alreadyInSave = false;
 
-	
+
 	protected $alreadyInValidation = false;
 
-  
+
   public function getCodemp()
   {
 
     return trim($this->codemp);
 
   }
-  
+
   public function getFeccor($format = 'Y-m-d')
   {
 
@@ -138,7 +142,7 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
     }
   }
 
-  
+
   public function getFecini($format = 'Y-m-d')
   {
 
@@ -160,7 +164,7 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
     }
   }
 
-  
+
   public function getFecfin($format = 'Y-m-d')
   {
 
@@ -182,7 +186,7 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
     }
   }
 
-  
+
   public function getSalemp($val=false)
   {
 
@@ -190,7 +194,7 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
     else return $this->salemp;
 
   }
-  
+
   public function getSalempdia($val=false)
   {
 
@@ -198,7 +202,7 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
     else return $this->salempdia;
 
   }
-  
+
   public function getAliuti($val=false)
   {
 
@@ -206,7 +210,7 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
     else return $this->aliuti;
 
   }
-  
+
   public function getAlibono($val=false)
   {
 
@@ -214,7 +218,15 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
     else return $this->alibono;
 
   }
-  
+
+  public function getAliadi($val=false)
+  {
+
+    if($val) return number_format($this->aliadi,2,',','.');
+    else return $this->aliadi;
+
+  }
+
   public function getSaltot($val=false)
   {
 
@@ -222,7 +234,7 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
     else return $this->saltot;
 
   }
-  
+
   public function getDiaart108($val=false)
   {
 
@@ -230,7 +242,7 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
     else return $this->diaart108;
 
   }
-  
+
   public function getCapemp($val=false)
   {
 
@@ -238,7 +250,7 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
     else return $this->capemp;
 
   }
-  
+
   public function getAntacum($val=false)
   {
 
@@ -246,7 +258,7 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
     else return $this->antacum;
 
   }
-  
+
   public function getValart108($val=false)
   {
 
@@ -254,7 +266,7 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
     else return $this->valart108;
 
   }
-  
+
   public function getTasint($val=false)
   {
 
@@ -262,7 +274,7 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
     else return $this->tasint;
 
   }
-  
+
   public function getDiadif($val=false)
   {
 
@@ -270,7 +282,7 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
     else return $this->diadif;
 
   }
-  
+
   public function getIntdev($val=false)
   {
 
@@ -278,7 +290,7 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
     else return $this->intdev;
 
   }
-  
+
   public function getIntacum($val=false)
   {
 
@@ -286,7 +298,7 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
     else return $this->intacum;
 
   }
-  
+
   public function getAdeant($val=false)
   {
 
@@ -294,7 +306,7 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
     else return $this->adeant;
 
   }
-  
+
   public function getAdepre($val=false)
   {
 
@@ -302,14 +314,14 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
     else return $this->adepre;
 
   }
-  
+
   public function getRegpre()
   {
 
     return trim($this->regpre);
 
   }
-  
+
   public function getSaladi($val=false)
   {
 
@@ -317,7 +329,7 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
     else return $this->saladi;
 
   }
-  
+
   public function getAnoser($val=false)
   {
 
@@ -325,21 +337,21 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
     else return $this->anoser;
 
   }
-  
+
   public function getTipo()
   {
 
     return trim($this->tipo);
 
   }
-  
+
   public function getId()
   {
 
     return $this->id;
 
   }
-	
+
 	public function setCodemp($v)
 	{
 
@@ -347,9 +359,9 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
         $this->codemp = $v;
         $this->modifiedColumns[] = NpimppresocPeer::CODEMP;
       }
-  
-	} 
-	
+
+	}
+
 	public function setFeccor($v)
 	{
 
@@ -370,8 +382,8 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
       $this->modifiedColumns[] = NpimppresocPeer::FECCOR;
     }
 
-	} 
-	
+	}
+
 	public function setFecini($v)
 	{
 
@@ -392,8 +404,8 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
       $this->modifiedColumns[] = NpimppresocPeer::FECINI;
     }
 
-	} 
-	
+	}
+
 	public function setFecfin($v)
 	{
 
@@ -414,8 +426,8 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
       $this->modifiedColumns[] = NpimppresocPeer::FECFIN;
     }
 
-	} 
-	
+	}
+
 	public function setSalemp($v)
 	{
 
@@ -423,9 +435,9 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
         $this->salemp = Herramientas::toFloat($v);
         $this->modifiedColumns[] = NpimppresocPeer::SALEMP;
       }
-  
-	} 
-	
+
+	}
+
 	public function setSalempdia($v)
 	{
 
@@ -433,9 +445,9 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
         $this->salempdia = Herramientas::toFloat($v);
         $this->modifiedColumns[] = NpimppresocPeer::SALEMPDIA;
       }
-  
-	} 
-	
+
+	}
+
 	public function setAliuti($v)
 	{
 
@@ -443,9 +455,9 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
         $this->aliuti = Herramientas::toFloat($v);
         $this->modifiedColumns[] = NpimppresocPeer::ALIUTI;
       }
-  
-	} 
-	
+
+	}
+
 	public function setAlibono($v)
 	{
 
@@ -453,9 +465,19 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
         $this->alibono = Herramientas::toFloat($v);
         $this->modifiedColumns[] = NpimppresocPeer::ALIBONO;
       }
-  
-	} 
-	
+
+	}
+
+	public function setAliadi($v)
+	{
+
+    if ($this->aliadi !== $v) {
+        $this->aliadi = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpimppresocPeer::ALIADI;
+      }
+
+	}
+
 	public function setSaltot($v)
 	{
 
@@ -463,9 +485,9 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
         $this->saltot = Herramientas::toFloat($v);
         $this->modifiedColumns[] = NpimppresocPeer::SALTOT;
       }
-  
-	} 
-	
+
+	}
+
 	public function setDiaart108($v)
 	{
 
@@ -473,9 +495,9 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
         $this->diaart108 = Herramientas::toFloat($v);
         $this->modifiedColumns[] = NpimppresocPeer::DIAART108;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCapemp($v)
 	{
 
@@ -483,9 +505,9 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
         $this->capemp = Herramientas::toFloat($v);
         $this->modifiedColumns[] = NpimppresocPeer::CAPEMP;
       }
-  
-	} 
-	
+
+	}
+
 	public function setAntacum($v)
 	{
 
@@ -493,9 +515,9 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
         $this->antacum = Herramientas::toFloat($v);
         $this->modifiedColumns[] = NpimppresocPeer::ANTACUM;
       }
-  
-	} 
-	
+
+	}
+
 	public function setValart108($v)
 	{
 
@@ -503,9 +525,9 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
         $this->valart108 = Herramientas::toFloat($v);
         $this->modifiedColumns[] = NpimppresocPeer::VALART108;
       }
-  
-	} 
-	
+
+	}
+
 	public function setTasint($v)
 	{
 
@@ -513,9 +535,9 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
         $this->tasint = Herramientas::toFloat($v);
         $this->modifiedColumns[] = NpimppresocPeer::TASINT;
       }
-  
-	} 
-	
+
+	}
+
 	public function setDiadif($v)
 	{
 
@@ -523,9 +545,9 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
         $this->diadif = Herramientas::toFloat($v);
         $this->modifiedColumns[] = NpimppresocPeer::DIADIF;
       }
-  
-	} 
-	
+
+	}
+
 	public function setIntdev($v)
 	{
 
@@ -533,9 +555,9 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
         $this->intdev = Herramientas::toFloat($v);
         $this->modifiedColumns[] = NpimppresocPeer::INTDEV;
       }
-  
-	} 
-	
+
+	}
+
 	public function setIntacum($v)
 	{
 
@@ -543,9 +565,9 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
         $this->intacum = Herramientas::toFloat($v);
         $this->modifiedColumns[] = NpimppresocPeer::INTACUM;
       }
-  
-	} 
-	
+
+	}
+
 	public function setAdeant($v)
 	{
 
@@ -553,9 +575,9 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
         $this->adeant = Herramientas::toFloat($v);
         $this->modifiedColumns[] = NpimppresocPeer::ADEANT;
       }
-  
-	} 
-	
+
+	}
+
 	public function setAdepre($v)
 	{
 
@@ -563,9 +585,9 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
         $this->adepre = Herramientas::toFloat($v);
         $this->modifiedColumns[] = NpimppresocPeer::ADEPRE;
       }
-  
-	} 
-	
+
+	}
+
 	public function setRegpre($v)
 	{
 
@@ -573,9 +595,9 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
         $this->regpre = $v;
         $this->modifiedColumns[] = NpimppresocPeer::REGPRE;
       }
-  
-	} 
-	
+
+	}
+
 	public function setSaladi($v)
 	{
 
@@ -583,9 +605,9 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
         $this->saladi = Herramientas::toFloat($v);
         $this->modifiedColumns[] = NpimppresocPeer::SALADI;
       }
-  
-	} 
-	
+
+	}
+
 	public function setAnoser($v)
 	{
 
@@ -593,9 +615,9 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
         $this->anoser = Herramientas::toFloat($v);
         $this->modifiedColumns[] = NpimppresocPeer::ANOSER;
       }
-  
-	} 
-	
+
+	}
+
 	public function setTipo($v)
 	{
 
@@ -603,9 +625,9 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
         $this->tipo = $v;
         $this->modifiedColumns[] = NpimppresocPeer::TIPO;
       }
-  
-	} 
-	
+
+	}
+
 	public function setId($v)
 	{
 
@@ -613,9 +635,9 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
         $this->id = $v;
         $this->modifiedColumns[] = NpimppresocPeer::ID;
       }
-  
-	} 
-  
+
+	}
+
   public function hydrate(ResultSet $rs, $startcol = 1)
   {
     try {
@@ -636,37 +658,39 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
 
       $this->alibono = $rs->getFloat($startcol + 7);
 
-      $this->saltot = $rs->getFloat($startcol + 8);
+      $this->aliadi = $rs->getFloat($startcol + 8);
 
-      $this->diaart108 = $rs->getFloat($startcol + 9);
+      $this->saltot = $rs->getFloat($startcol + 9);
 
-      $this->capemp = $rs->getFloat($startcol + 10);
+      $this->diaart108 = $rs->getFloat($startcol + 10);
 
-      $this->antacum = $rs->getFloat($startcol + 11);
+      $this->capemp = $rs->getFloat($startcol + 11);
 
-      $this->valart108 = $rs->getFloat($startcol + 12);
+      $this->antacum = $rs->getFloat($startcol + 12);
 
-      $this->tasint = $rs->getFloat($startcol + 13);
+      $this->valart108 = $rs->getFloat($startcol + 13);
 
-      $this->diadif = $rs->getFloat($startcol + 14);
+      $this->tasint = $rs->getFloat($startcol + 14);
 
-      $this->intdev = $rs->getFloat($startcol + 15);
+      $this->diadif = $rs->getFloat($startcol + 15);
 
-      $this->intacum = $rs->getFloat($startcol + 16);
+      $this->intdev = $rs->getFloat($startcol + 16);
 
-      $this->adeant = $rs->getFloat($startcol + 17);
+      $this->intacum = $rs->getFloat($startcol + 17);
 
-      $this->adepre = $rs->getFloat($startcol + 18);
+      $this->adeant = $rs->getFloat($startcol + 18);
 
-      $this->regpre = $rs->getString($startcol + 19);
+      $this->adepre = $rs->getFloat($startcol + 19);
 
-      $this->saladi = $rs->getFloat($startcol + 20);
+      $this->regpre = $rs->getString($startcol + 20);
 
-      $this->anoser = $rs->getFloat($startcol + 21);
+      $this->saladi = $rs->getFloat($startcol + 21);
 
-      $this->tipo = $rs->getString($startcol + 22);
+      $this->anoser = $rs->getFloat($startcol + 22);
 
-      $this->id = $rs->getInt($startcol + 23);
+      $this->tipo = $rs->getString($startcol + 23);
+
+      $this->id = $rs->getInt($startcol + 24);
 
       $this->resetModified();
 
@@ -674,7 +698,7 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 24; 
+            return $startcol + 25;
     } catch (Exception $e) {
       throw new PropelException("Error populating Npimppresoc object", $e);
     }
@@ -685,8 +709,8 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
   {
 
   }
-    
-  
+
+
   public function __call($m, $a)
     {
       $prefijo = substr($m,0,3);
@@ -700,7 +724,7 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
 
     }
 
-	
+
 	public function delete($con = null)
 	{
 		if ($this->isDeleted()) {
@@ -722,7 +746,7 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	public function save($con = null)
 	{
 		if ($this->isDeleted()) {
@@ -744,7 +768,7 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	protected function doSave($con)
 	{
 		$affectedRows = 0; 		if (!$this->alreadyInSave) {
@@ -754,8 +778,8 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
 						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = NpimppresocPeer::doInsert($this, $con);
-					$affectedRows += 1; 										 										 
-					$this->setId($pk);  
+					$affectedRows += 1;
+					$this->setId($pk);
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpimppresocPeer::doUpdate($this, $con);
@@ -765,17 +789,17 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
-	} 
-	
+	}
+
 	protected $validationFailures = array();
 
-	
+
 	public function getValidationFailures()
 	{
 		return $this->validationFailures;
 	}
 
-	
+
 	public function validate($columns = null)
 	{
 		$res = $this->doValidate($columns);
@@ -788,7 +812,7 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	protected function doValidate($columns = null)
 	{
 		if (!$this->alreadyInValidation) {
@@ -810,14 +834,14 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
 		return (!empty($failureMap) ? $failureMap : true);
 	}
 
-	
+
 	public function getByName($name, $type = BasePeer::TYPE_PHPNAME)
 	{
 		$pos = NpimppresocPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->getByPosition($pos);
 	}
 
-	
+
 	public function getByPosition($pos)
 	{
 		switch($pos) {
@@ -846,51 +870,54 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
 				return $this->getAlibono();
 				break;
 			case 8:
-				return $this->getSaltot();
+				return $this->getAliadi();
 				break;
 			case 9:
-				return $this->getDiaart108();
+				return $this->getSaltot();
 				break;
 			case 10:
-				return $this->getCapemp();
+				return $this->getDiaart108();
 				break;
 			case 11:
-				return $this->getAntacum();
+				return $this->getCapemp();
 				break;
 			case 12:
-				return $this->getValart108();
+				return $this->getAntacum();
 				break;
 			case 13:
-				return $this->getTasint();
+				return $this->getValart108();
 				break;
 			case 14:
-				return $this->getDiadif();
+				return $this->getTasint();
 				break;
 			case 15:
-				return $this->getIntdev();
+				return $this->getDiadif();
 				break;
 			case 16:
-				return $this->getIntacum();
+				return $this->getIntdev();
 				break;
 			case 17:
-				return $this->getAdeant();
+				return $this->getIntacum();
 				break;
 			case 18:
-				return $this->getAdepre();
+				return $this->getAdeant();
 				break;
 			case 19:
-				return $this->getRegpre();
+				return $this->getAdepre();
 				break;
 			case 20:
-				return $this->getSaladi();
+				return $this->getRegpre();
 				break;
 			case 21:
-				return $this->getAnoser();
+				return $this->getSaladi();
 				break;
 			case 22:
-				return $this->getTipo();
+				return $this->getAnoser();
 				break;
 			case 23:
+				return $this->getTipo();
+				break;
+			case 24:
 				return $this->getId();
 				break;
 			default:
@@ -898,7 +925,7 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
 				break;
 		} 	}
 
-	
+
 	public function toArray($keyType = BasePeer::TYPE_PHPNAME)
 	{
 		$keys = NpimppresocPeer::getFieldNames($keyType);
@@ -911,34 +938,35 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
 			$keys[5] => $this->getSalempdia(),
 			$keys[6] => $this->getAliuti(),
 			$keys[7] => $this->getAlibono(),
-			$keys[8] => $this->getSaltot(),
-			$keys[9] => $this->getDiaart108(),
-			$keys[10] => $this->getCapemp(),
-			$keys[11] => $this->getAntacum(),
-			$keys[12] => $this->getValart108(),
-			$keys[13] => $this->getTasint(),
-			$keys[14] => $this->getDiadif(),
-			$keys[15] => $this->getIntdev(),
-			$keys[16] => $this->getIntacum(),
-			$keys[17] => $this->getAdeant(),
-			$keys[18] => $this->getAdepre(),
-			$keys[19] => $this->getRegpre(),
-			$keys[20] => $this->getSaladi(),
-			$keys[21] => $this->getAnoser(),
-			$keys[22] => $this->getTipo(),
-			$keys[23] => $this->getId(),
+			$keys[8] => $this->getAliadi(),
+			$keys[9] => $this->getSaltot(),
+			$keys[10] => $this->getDiaart108(),
+			$keys[11] => $this->getCapemp(),
+			$keys[12] => $this->getAntacum(),
+			$keys[13] => $this->getValart108(),
+			$keys[14] => $this->getTasint(),
+			$keys[15] => $this->getDiadif(),
+			$keys[16] => $this->getIntdev(),
+			$keys[17] => $this->getIntacum(),
+			$keys[18] => $this->getAdeant(),
+			$keys[19] => $this->getAdepre(),
+			$keys[20] => $this->getRegpre(),
+			$keys[21] => $this->getSaladi(),
+			$keys[22] => $this->getAnoser(),
+			$keys[23] => $this->getTipo(),
+			$keys[24] => $this->getId(),
 		);
 		return $result;
 	}
 
-	
+
 	public function setByName($name, $value, $type = BasePeer::TYPE_PHPNAME)
 	{
 		$pos = NpimppresocPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->setByPosition($pos, $value);
 	}
 
-	
+
 	public function setByPosition($pos, $value)
 	{
 		switch($pos) {
@@ -967,56 +995,59 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
 				$this->setAlibono($value);
 				break;
 			case 8:
-				$this->setSaltot($value);
+				$this->setAliadi($value);
 				break;
 			case 9:
-				$this->setDiaart108($value);
+				$this->setSaltot($value);
 				break;
 			case 10:
-				$this->setCapemp($value);
+				$this->setDiaart108($value);
 				break;
 			case 11:
-				$this->setAntacum($value);
+				$this->setCapemp($value);
 				break;
 			case 12:
-				$this->setValart108($value);
+				$this->setAntacum($value);
 				break;
 			case 13:
-				$this->setTasint($value);
+				$this->setValart108($value);
 				break;
 			case 14:
-				$this->setDiadif($value);
+				$this->setTasint($value);
 				break;
 			case 15:
-				$this->setIntdev($value);
+				$this->setDiadif($value);
 				break;
 			case 16:
-				$this->setIntacum($value);
+				$this->setIntdev($value);
 				break;
 			case 17:
-				$this->setAdeant($value);
+				$this->setIntacum($value);
 				break;
 			case 18:
-				$this->setAdepre($value);
+				$this->setAdeant($value);
 				break;
 			case 19:
-				$this->setRegpre($value);
+				$this->setAdepre($value);
 				break;
 			case 20:
-				$this->setSaladi($value);
+				$this->setRegpre($value);
 				break;
 			case 21:
-				$this->setAnoser($value);
+				$this->setSaladi($value);
 				break;
 			case 22:
-				$this->setTipo($value);
+				$this->setAnoser($value);
 				break;
 			case 23:
+				$this->setTipo($value);
+				break;
+			case 24:
 				$this->setId($value);
 				break;
 		} 	}
 
-	
+
 	public function fromArray($arr, $keyType = BasePeer::TYPE_PHPNAME)
 	{
 		$keys = NpimppresocPeer::getFieldNames($keyType);
@@ -1029,25 +1060,26 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[5], $arr)) $this->setSalempdia($arr[$keys[5]]);
 		if (array_key_exists($keys[6], $arr)) $this->setAliuti($arr[$keys[6]]);
 		if (array_key_exists($keys[7], $arr)) $this->setAlibono($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setSaltot($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setDiaart108($arr[$keys[9]]);
-		if (array_key_exists($keys[10], $arr)) $this->setCapemp($arr[$keys[10]]);
-		if (array_key_exists($keys[11], $arr)) $this->setAntacum($arr[$keys[11]]);
-		if (array_key_exists($keys[12], $arr)) $this->setValart108($arr[$keys[12]]);
-		if (array_key_exists($keys[13], $arr)) $this->setTasint($arr[$keys[13]]);
-		if (array_key_exists($keys[14], $arr)) $this->setDiadif($arr[$keys[14]]);
-		if (array_key_exists($keys[15], $arr)) $this->setIntdev($arr[$keys[15]]);
-		if (array_key_exists($keys[16], $arr)) $this->setIntacum($arr[$keys[16]]);
-		if (array_key_exists($keys[17], $arr)) $this->setAdeant($arr[$keys[17]]);
-		if (array_key_exists($keys[18], $arr)) $this->setAdepre($arr[$keys[18]]);
-		if (array_key_exists($keys[19], $arr)) $this->setRegpre($arr[$keys[19]]);
-		if (array_key_exists($keys[20], $arr)) $this->setSaladi($arr[$keys[20]]);
-		if (array_key_exists($keys[21], $arr)) $this->setAnoser($arr[$keys[21]]);
-		if (array_key_exists($keys[22], $arr)) $this->setTipo($arr[$keys[22]]);
-		if (array_key_exists($keys[23], $arr)) $this->setId($arr[$keys[23]]);
+		if (array_key_exists($keys[8], $arr)) $this->setAliadi($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setSaltot($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setDiaart108($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setCapemp($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setAntacum($arr[$keys[12]]);
+		if (array_key_exists($keys[13], $arr)) $this->setValart108($arr[$keys[13]]);
+		if (array_key_exists($keys[14], $arr)) $this->setTasint($arr[$keys[14]]);
+		if (array_key_exists($keys[15], $arr)) $this->setDiadif($arr[$keys[15]]);
+		if (array_key_exists($keys[16], $arr)) $this->setIntdev($arr[$keys[16]]);
+		if (array_key_exists($keys[17], $arr)) $this->setIntacum($arr[$keys[17]]);
+		if (array_key_exists($keys[18], $arr)) $this->setAdeant($arr[$keys[18]]);
+		if (array_key_exists($keys[19], $arr)) $this->setAdepre($arr[$keys[19]]);
+		if (array_key_exists($keys[20], $arr)) $this->setRegpre($arr[$keys[20]]);
+		if (array_key_exists($keys[21], $arr)) $this->setSaladi($arr[$keys[21]]);
+		if (array_key_exists($keys[22], $arr)) $this->setAnoser($arr[$keys[22]]);
+		if (array_key_exists($keys[23], $arr)) $this->setTipo($arr[$keys[23]]);
+		if (array_key_exists($keys[24], $arr)) $this->setId($arr[$keys[24]]);
 	}
 
-	
+
 	public function buildCriteria()
 	{
 		$criteria = new Criteria(NpimppresocPeer::DATABASE_NAME);
@@ -1060,6 +1092,7 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(NpimppresocPeer::SALEMPDIA)) $criteria->add(NpimppresocPeer::SALEMPDIA, $this->salempdia);
 		if ($this->isColumnModified(NpimppresocPeer::ALIUTI)) $criteria->add(NpimppresocPeer::ALIUTI, $this->aliuti);
 		if ($this->isColumnModified(NpimppresocPeer::ALIBONO)) $criteria->add(NpimppresocPeer::ALIBONO, $this->alibono);
+		if ($this->isColumnModified(NpimppresocPeer::ALIADI)) $criteria->add(NpimppresocPeer::ALIADI, $this->aliadi);
 		if ($this->isColumnModified(NpimppresocPeer::SALTOT)) $criteria->add(NpimppresocPeer::SALTOT, $this->saltot);
 		if ($this->isColumnModified(NpimppresocPeer::DIAART108)) $criteria->add(NpimppresocPeer::DIAART108, $this->diaart108);
 		if ($this->isColumnModified(NpimppresocPeer::CAPEMP)) $criteria->add(NpimppresocPeer::CAPEMP, $this->capemp);
@@ -1080,7 +1113,7 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
 		return $criteria;
 	}
 
-	
+
 	public function buildPkeyCriteria()
 	{
 		$criteria = new Criteria(NpimppresocPeer::DATABASE_NAME);
@@ -1090,19 +1123,19 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
 		return $criteria;
 	}
 
-	
+
 	public function getPrimaryKey()
 	{
 		return $this->getId();
 	}
 
-	
+
 	public function setPrimaryKey($key)
 	{
 		$this->setId($key);
 	}
 
-	
+
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
@@ -1121,6 +1154,8 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
 		$copyObj->setAliuti($this->aliuti);
 
 		$copyObj->setAlibono($this->alibono);
+
+		$copyObj->setAliadi($this->aliadi);
 
 		$copyObj->setSaltot($this->saltot);
 
@@ -1155,10 +1190,10 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
 
 		$copyObj->setNew(true);
 
-		$copyObj->setId(NULL); 
+		$copyObj->setId(NULL);
 	}
 
-	
+
 	public function copy($deepCopy = false)
 	{
 				$clazz = get_class($this);
@@ -1167,7 +1202,7 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
 		return $copyObj;
 	}
 
-	
+
 	public function getPeer()
 	{
 		if (self::$peer === null) {
@@ -1176,4 +1211,4 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
 		return self::$peer;
 	}
 
-} 
+}
