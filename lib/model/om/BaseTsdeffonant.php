@@ -64,10 +64,16 @@ abstract class BaseTsdeffonant extends BaseObject  implements Persistent {
 	protected $id;
 
 	
+	protected $aBnubica;
+
+	
 	protected $aTsuniadm;
 
 	
 	protected $aOpbenefi;
+
+	
+	protected $aNpcatpre;
 
 	
 	protected $aTsdefban;
@@ -208,6 +214,10 @@ abstract class BaseTsdeffonant extends BaseObject  implements Persistent {
         $this->modifiedColumns[] = TsdeffonantPeer::UNIEJE;
       }
   
+		if ($this->aBnubica !== null && $this->aBnubica->getCodubi() !== $v) {
+			$this->aBnubica = null;
+		}
+
 	} 
 	
 	public function setCoduniadm($v)
@@ -246,6 +256,10 @@ abstract class BaseTsdeffonant extends BaseObject  implements Persistent {
         $this->modifiedColumns[] = TsdeffonantPeer::CODCAT;
       }
   
+		if ($this->aNpcatpre !== null && $this->aNpcatpre->getCodcat() !== $v) {
+			$this->aNpcatpre = null;
+		}
+
 	} 
 	
 	public function setNumcue($v)
@@ -448,11 +462,11 @@ abstract class BaseTsdeffonant extends BaseObject  implements Persistent {
 
 
 												
-			if ($this->aTableError !== null) {
-				if ($this->aTableError->isModified()) {
-					$affectedRows += $this->aTableError->save($con);
+			if ($this->aBnubica !== null) {
+				if ($this->aBnubica->isModified()) {
+					$affectedRows += $this->aBnubica->save($con);
 				}
-				$this->setTableError($this->aTableError);
+				$this->setBnubica($this->aBnubica);
 			}
 
 			if ($this->aTsuniadm !== null) {
@@ -469,11 +483,11 @@ abstract class BaseTsdeffonant extends BaseObject  implements Persistent {
 				$this->setOpbenefi($this->aOpbenefi);
 			}
 
-			if ($this->aTableError !== null) {
-				if ($this->aTableError->isModified()) {
-					$affectedRows += $this->aTableError->save($con);
+			if ($this->aNpcatpre !== null) {
+				if ($this->aNpcatpre->isModified()) {
+					$affectedRows += $this->aNpcatpre->save($con);
 				}
-				$this->setTableError($this->aTableError);
+				$this->setNpcatpre($this->aNpcatpre);
 			}
 
 			if ($this->aTsdefban !== null) {
@@ -532,9 +546,9 @@ abstract class BaseTsdeffonant extends BaseObject  implements Persistent {
 
 
 												
-			if ($this->aTableError !== null) {
-				if (!$this->aTableError->validate($columns)) {
-					$failureMap = array_merge($failureMap, $this->aTableError->getValidationFailures());
+			if ($this->aBnubica !== null) {
+				if (!$this->aBnubica->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aBnubica->getValidationFailures());
 				}
 			}
 
@@ -550,9 +564,9 @@ abstract class BaseTsdeffonant extends BaseObject  implements Persistent {
 				}
 			}
 
-			if ($this->aTableError !== null) {
-				if (!$this->aTableError->validate($columns)) {
-					$failureMap = array_merge($failureMap, $this->aTableError->getValidationFailures());
+			if ($this->aNpcatpre !== null) {
+				if (!$this->aNpcatpre->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aNpcatpre->getValidationFailures());
 				}
 			}
 
@@ -832,6 +846,38 @@ abstract class BaseTsdeffonant extends BaseObject  implements Persistent {
 	}
 
 	
+	public function setBnubica($v)
+	{
+
+
+		if ($v === null) {
+			$this->setUnieje(NULL);
+		} else {
+			$this->setUnieje($v->getCodubi());
+		}
+
+
+		$this->aBnubica = $v;
+	}
+
+
+	
+	public function getBnubica($con = null)
+	{
+		if ($this->aBnubica === null && (($this->unieje !== "" && $this->unieje !== null))) {
+						include_once 'lib/model/om/BaseBnubicaPeer.php';
+
+      $c = new Criteria();
+      $c->add(BnubicaPeer::CODUBI,$this->unieje);
+      
+			$this->aBnubica = BnubicaPeer::doSelectOne($c, $con);
+
+			
+		}
+		return $this->aBnubica;
+	}
+
+	
 	public function setTsuniadm($v)
 	{
 
@@ -893,6 +939,38 @@ abstract class BaseTsdeffonant extends BaseObject  implements Persistent {
 			
 		}
 		return $this->aOpbenefi;
+	}
+
+	
+	public function setNpcatpre($v)
+	{
+
+
+		if ($v === null) {
+			$this->setCodcat(NULL);
+		} else {
+			$this->setCodcat($v->getCodcat());
+		}
+
+
+		$this->aNpcatpre = $v;
+	}
+
+
+	
+	public function getNpcatpre($con = null)
+	{
+		if ($this->aNpcatpre === null && (($this->codcat !== "" && $this->codcat !== null))) {
+						include_once 'lib/model/nomina/om/BaseNpcatprePeer.php';
+
+      $c = new Criteria();
+      $c->add(NpcatprePeer::CODCAT,$this->codcat);
+      
+			$this->aNpcatpre = NpcatprePeer::doSelectOne($c, $con);
+
+			
+		}
+		return $this->aNpcatpre;
 	}
 
 	

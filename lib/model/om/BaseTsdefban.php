@@ -170,6 +170,12 @@ abstract class BaseTsdefban extends BaseObject  implements Persistent {
 	protected $lastTsmovlibCriteria = null;
 
 	
+	protected $collTsdeffonants;
+
+	
+	protected $lastTsdeffonantCriteria = null;
+
+	
 	protected $alreadyInSave = false;
 
 	
@@ -1122,6 +1128,14 @@ abstract class BaseTsdefban extends BaseObject  implements Persistent {
 				}
 			}
 
+			if ($this->collTsdeffonants !== null) {
+				foreach($this->collTsdeffonants as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
+
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
@@ -1187,6 +1201,14 @@ abstract class BaseTsdefban extends BaseObject  implements Persistent {
 
 				if ($this->collTsmovlibs !== null) {
 					foreach($this->collTsmovlibs as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
+
+				if ($this->collTsdeffonants !== null) {
+					foreach($this->collTsdeffonants as $referrerFK) {
 						if (!$referrerFK->validate($columns)) {
 							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
 						}
@@ -1686,6 +1708,10 @@ abstract class BaseTsdefban extends BaseObject  implements Persistent {
 				$copyObj->addTsmovlib($relObj->copy($deepCopy));
 			}
 
+			foreach($this->getTsdeffonants() as $relObj) {
+				$copyObj->addTsdeffonant($relObj->copy($deepCopy));
+			}
+
 		} 
 
 		$copyObj->setNew(true);
@@ -2018,6 +2044,216 @@ abstract class BaseTsdefban extends BaseObject  implements Persistent {
 		$this->lastTsmovlibCriteria = $criteria;
 
 		return $this->collTsmovlibs;
+	}
+
+	
+	public function initTsdeffonants()
+	{
+		if ($this->collTsdeffonants === null) {
+			$this->collTsdeffonants = array();
+		}
+	}
+
+	
+	public function getTsdeffonants($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseTsdeffonantPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collTsdeffonants === null) {
+			if ($this->isNew()) {
+			   $this->collTsdeffonants = array();
+			} else {
+
+				$criteria->add(TsdeffonantPeer::NUMCUE, $this->getNumcue());
+
+				TsdeffonantPeer::addSelectColumns($criteria);
+				$this->collTsdeffonants = TsdeffonantPeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(TsdeffonantPeer::NUMCUE, $this->getNumcue());
+
+				TsdeffonantPeer::addSelectColumns($criteria);
+				if (!isset($this->lastTsdeffonantCriteria) || !$this->lastTsdeffonantCriteria->equals($criteria)) {
+					$this->collTsdeffonants = TsdeffonantPeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastTsdeffonantCriteria = $criteria;
+		return $this->collTsdeffonants;
+	}
+
+	
+	public function countTsdeffonants($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/om/BaseTsdeffonantPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(TsdeffonantPeer::NUMCUE, $this->getNumcue());
+
+		return TsdeffonantPeer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addTsdeffonant(Tsdeffonant $l)
+	{
+		$this->collTsdeffonants[] = $l;
+		$l->setTsdefban($this);
+	}
+
+
+	
+	public function getTsdeffonantsJoinBnubica($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseTsdeffonantPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collTsdeffonants === null) {
+			if ($this->isNew()) {
+				$this->collTsdeffonants = array();
+			} else {
+
+				$criteria->add(TsdeffonantPeer::NUMCUE, $this->getNumcue());
+
+				$this->collTsdeffonants = TsdeffonantPeer::doSelectJoinBnubica($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(TsdeffonantPeer::NUMCUE, $this->getNumcue());
+
+			if (!isset($this->lastTsdeffonantCriteria) || !$this->lastTsdeffonantCriteria->equals($criteria)) {
+				$this->collTsdeffonants = TsdeffonantPeer::doSelectJoinBnubica($criteria, $con);
+			}
+		}
+		$this->lastTsdeffonantCriteria = $criteria;
+
+		return $this->collTsdeffonants;
+	}
+
+
+	
+	public function getTsdeffonantsJoinTsuniadm($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseTsdeffonantPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collTsdeffonants === null) {
+			if ($this->isNew()) {
+				$this->collTsdeffonants = array();
+			} else {
+
+				$criteria->add(TsdeffonantPeer::NUMCUE, $this->getNumcue());
+
+				$this->collTsdeffonants = TsdeffonantPeer::doSelectJoinTsuniadm($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(TsdeffonantPeer::NUMCUE, $this->getNumcue());
+
+			if (!isset($this->lastTsdeffonantCriteria) || !$this->lastTsdeffonantCriteria->equals($criteria)) {
+				$this->collTsdeffonants = TsdeffonantPeer::doSelectJoinTsuniadm($criteria, $con);
+			}
+		}
+		$this->lastTsdeffonantCriteria = $criteria;
+
+		return $this->collTsdeffonants;
+	}
+
+
+	
+	public function getTsdeffonantsJoinOpbenefi($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseTsdeffonantPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collTsdeffonants === null) {
+			if ($this->isNew()) {
+				$this->collTsdeffonants = array();
+			} else {
+
+				$criteria->add(TsdeffonantPeer::NUMCUE, $this->getNumcue());
+
+				$this->collTsdeffonants = TsdeffonantPeer::doSelectJoinOpbenefi($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(TsdeffonantPeer::NUMCUE, $this->getNumcue());
+
+			if (!isset($this->lastTsdeffonantCriteria) || !$this->lastTsdeffonantCriteria->equals($criteria)) {
+				$this->collTsdeffonants = TsdeffonantPeer::doSelectJoinOpbenefi($criteria, $con);
+			}
+		}
+		$this->lastTsdeffonantCriteria = $criteria;
+
+		return $this->collTsdeffonants;
+	}
+
+
+	
+	public function getTsdeffonantsJoinNpcatpre($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseTsdeffonantPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collTsdeffonants === null) {
+			if ($this->isNew()) {
+				$this->collTsdeffonants = array();
+			} else {
+
+				$criteria->add(TsdeffonantPeer::NUMCUE, $this->getNumcue());
+
+				$this->collTsdeffonants = TsdeffonantPeer::doSelectJoinNpcatpre($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(TsdeffonantPeer::NUMCUE, $this->getNumcue());
+
+			if (!isset($this->lastTsdeffonantCriteria) || !$this->lastTsdeffonantCriteria->equals($criteria)) {
+				$this->collTsdeffonants = TsdeffonantPeer::doSelectJoinNpcatpre($criteria, $con);
+			}
+		}
+		$this->lastTsdeffonantCriteria = $criteria;
+
+		return $this->collTsdeffonants;
 	}
 
 } 
