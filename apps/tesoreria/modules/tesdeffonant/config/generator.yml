@@ -23,7 +23,7 @@ generator:
           ajax: 0
           parametros: getprincipal="getCoduniadm" getsecundario="getDesuniadm" campoprincipal="coduniadm" camposecundario="desuniadm" campobase = "id"
       cedrif:
-        name: Beneficiario
+        name: Responsable
         params: maxlength=15
         catalogo:
           catalogoweb: Opbenefi_Pagemiord
