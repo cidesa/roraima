@@ -206,11 +206,11 @@ class Presupuesto
           else return 0;
 
           if ($adidis=='A'){  //S UNA ADICION DEBE GRABAR EN CPDISFUEFIN
-            $c = new Criteria();
+            /*$c = new Criteria();
             $c->add(CpdisfuefinPeer::	REFDIS,$clasemodelo->getRefmov());
             $c->add(CpdisfuefinPeer::CODPRE,$x[$j]->getCodpre());
             $c->add(CpdisfuefinPeer::CORREL,$x[$j]->getCorrel());
-            CpdisfuefinPeer::doDelete($c);
+            CpdisfuefinPeer::doDelete($c);*/
 
             if ($x[$j]->getMonto() > 0){
               $c = new Cpdisfuefin();
@@ -315,7 +315,7 @@ class Presupuesto
               $c->add(CpmovfuefinPeer::REFMOV,$clasemodelo->getRefmov());
               $c->addJoin(CpmovfuefinPeer::CORREL,CpdisfuefinPeer::CORREL);
               $per = CpmovfuefinPeer::doSelect($c);
-    exit('55');
+    //exit('55');
           }else{
                 $c = new Criteria();
                 $c->addJoin(CpsolmovtraPeer::REFTRA,CpmovfuefinPeer::REFMOV);
@@ -326,7 +326,7 @@ class Presupuesto
               $c->add(CpmovfuefinPeer::REFMOV,$clasemodelo->getRefmov());
               $per = CpmovfuefinPeer::doSelect($c);
               //if ($per) $cant_partidas = count($per);
-H::printR($per);
+//H::printR($per);
           }
 
           $c = new Cpdisfuefin();
@@ -355,12 +355,12 @@ H::printR($per);
           }else{
                $c->setMonasi($x[$j]->getMonto());
           }
-        H::printR($c);
-        exit();
+        //H::printR($c);
+        //exit();
            $c->save();
           }
         }else{
-          exit('1303');
+          //exit('1303');
           return 1303;
         }
         $j++;
