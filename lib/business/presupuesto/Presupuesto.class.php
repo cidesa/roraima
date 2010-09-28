@@ -185,9 +185,9 @@ class Presupuesto
     if ($clasemodelo->getTipmov()=='CA'){  $tipmov="CAUSADO";       }
     if ($clasemodelo->getTipmov()=='PA'){  $tipmov="PAGADO";        }
     if ($clasemodelo->getTipmov()=='A') {  $tipmov="CREDITO";       }
+    if ($clasemodelo->getTipmov()=='ST') {  $tipmov="TRASLADO";      }
     if ($clasemodelo->getTipmov()=='T') {  $tipmov="TRASLADO";      }
     //if ($clasemodelo->getTipmov()=='AJ'){  $tipmov="AJUSTES";        }
-    //return array('P' => 'Precompromiso','C' => 'Compromiso','CA' => 'Causado','PA' => 'Pagado','A' => 'Adicion/Dismunucion','T' => 'Traslado','AJ' => 'Ajuste');
 
     if ($clasemodelo->getTipmov()=='A'){  //CREDITO -> ADICION / DISMINUCION
       $j = 0;
@@ -254,22 +254,20 @@ class Presupuesto
       }
 
 
-    }elseif ($clasemodelo->getTipmov()=='MALO'){  //TRASLADO
+    }elseif ($clasemodelo->getTipmov()=='T'){  //TRASLADO
 
       $j = 0;
-      $i = 1;
+      $codori="";
       while ($j < count($x)){
           if (Herramientas::getVerCorrelativo('correl','cpdisfuefin',&$r))
           {
-              $ref  = str_pad($r, 8, '0', STR_PAD_LEFT);
-              $ref2 = Herramientas::getBuscar_correlativo($ref,'cpdisfuefin','correl','cpdisfuefin','correl');
 
-            $c = new Criteria();
+          /* $c = new Criteria();
           $c->add(CpdisfuefinPeer::	REFDIS,$clasemodelo->getRefmov());
           $c->add(CpdisfuefinPeer::CODPRE,$x[$j]->getCodpre());
           //$c->add(CpdisfuefinPeer::CORREL,$x[$j]->getCorrel());
           $c->add(CpdisfuefinPeer::ORIGEN,'TRASLADO');
-          CpdisfuefinPeer::doDelete($c);
+          CpdisfuefinPeer::doDelete($c);*/
 
           if ($x[$j]->getMonto() > 0){
 
@@ -280,7 +278,6 @@ class Presupuesto
               $c->add(CpmovtraPeer::STAMOV,'A');  //Para tener un grado acertacion
               $per = CpmovtraPeer::doSelectOne($c);
               if ($per) $codori = $per->getCodori();
-            ////
 
             ///////////
             $cant_partidas = 0;
@@ -292,7 +289,7 @@ class Presupuesto
           //////////
             $ftes_diferentes = false;
               $c = new Criteria();
-              $c->add(CpmovfuefinPeer::CORREL,$clasemodelo->getRefmov());
+            $c->add(CpmovfuefinPeer::REFMOV,$clasemodelo->getRefmov());
               $c->add(CpmovfuefinPeer::CORREL,CpdisfuefinPeer::CORREL);
             $c->addGroupByColumn(CpdisfuefinPeer::CORREL);
             $c->addGroupByColumn(CpdisfuefinPeer::ORIGEN);
@@ -309,13 +306,11 @@ class Presupuesto
 
 
           if ($ftes_diferentes){
-
                 $c = new Criteria();
               $c->add(CpmovfuefinPeer::CODPRE,$codori);
               $c->add(CpmovfuefinPeer::REFMOV,$clasemodelo->getRefmov());
               $c->addJoin(CpmovfuefinPeer::CORREL,CpdisfuefinPeer::CORREL);
               $per = CpmovfuefinPeer::doSelect($c);
-    //exit('55');
           }else{
                 $c = new Criteria();
                 $c->addJoin(CpsolmovtraPeer::REFTRA,CpmovfuefinPeer::REFMOV);
@@ -325,9 +320,12 @@ class Presupuesto
                 $c->add(CpsolmovtraPeer::CODDES,$x[$j]->getCodpre());
               $c->add(CpmovfuefinPeer::REFMOV,$clasemodelo->getRefmov());
               $per = CpmovfuefinPeer::doSelect($c);
-              //if ($per) $cant_partidas = count($per);
-//H::printR($per);
           }
+          $i = 1;
+          if ($per) {
+            foreach ($per as $per2) {
+              $ref  = str_pad($r, 8, '0', STR_PAD_LEFT);
+              $ref2 = Herramientas::getBuscar_correlativo($ref,'cpdisfuefin','correl','cpdisfuefin','correl');
 
           $c = new Cpdisfuefin();
           $c->setCorrel($ref2);
@@ -336,17 +334,13 @@ class Presupuesto
           $c->setCodpre($x[$j]->getCodpre());
           $ano = substr(Herramientas::getX('codemp','cpdefniv','fecper','001'),0,4);
           $c->setFecdis($ano.date('-m-d'));
-             $c->setRefdis($clasemodelo->getRefmov());
-             $c->setStatus('A');
 
-//H::printR($x);
-          if (count($x) > 1){
-
-              if ($i <= count($x))
-              { echo $cant_partidas;
-                $c->setMonasi($per->getMonmov()/$cant_partidas);
+              if (count($per) > 1){
+                  if ($i <= count($per))
+                  {
+                    $c->setMonasi($per2->getMonmov()/$cant_partidas);
               }else{
-            $sql = "select coalesce(sum(monasi),0) as monasi from cpdisfuefin where codpre='$x[$j]->getCodpre()' and refdis='$clasemodelo->getRefmov()'";
+                    $sql = "select coalesce(sum(monasi),0) as monasi from cpdisfuefin where codpre='".$x[$j]->getCodpre()."' and refdis='".$clasemodelo->getRefmov()."'";
             if (Herramientas::BuscarDatos($sql,&$result))
             {
                $c->setMonasi($result[0]["monasi"] - $clasemodelo->getMontot());
@@ -355,26 +349,29 @@ class Presupuesto
           }else{
                $c->setMonasi($x[$j]->getMonto());
           }
-        //H::printR($c);
-        //exit();
+             $c->setRefdis($clasemodelo->getRefmov());
+             $c->setStatus('A');
            $c->save();
+
+             $i++;
+          }
+          }
           }
         }else{
-          //exit('1303');
           return 1303;
         }
         $j++;
-        $i++;
+
       }
 
     }else{
       $j = 0;
       while ($j < count($x)){
-        $c = new Criteria();
+        /*$c = new Criteria();
         $c->add(CpmovfuefinPeer::REFMOV,$clasemodelo->getRefmov());
         $c->add(CpmovfuefinPeer::CODPRE,$x[$j]->getCodpre());
         $c->add(CpmovfuefinPeer::CORREL,$x[$j]->getCorrel());
-        CpmovfuefinPeer::doDelete($c);
+        CpmovfuefinPeer::doDelete($c);*/
 
         if ($x[$j]->getMonto() > 0){
         $c = new Cpmovfuefin();
@@ -394,8 +391,6 @@ class Presupuesto
 
       return -1;
     } catch (Exception $ex){
-      //echo $ex;
-      //exit();
       return 0;
     }
   }
