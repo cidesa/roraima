@@ -4,9 +4,14 @@ CREATE TYPE regprestaciones AS (
   "codtipcon" VARCHAR,
   "fecing" DATE,
   "fecini" DATE,
+  "fecinireal" DATE,
+  "fecfinreal" DATE,
   "fecfin" DATE,
   "monto" NUMERIC,
   "mondia" NUMERIC,
+  "aliuti" NUMERIC,
+  "alivac" NUMERIC,
+  "aliadi" NUMERIC,
   "mondiapro" NUMERIC,
   "dias" INTEGER,
   "monpres" NUMERIC,
@@ -23,7 +28,6 @@ CREATE TYPE regprestaciones AS (
   "antmeses" NUMERIC,
   "antdias" NUMERIC
 );
-
 CREATE TYPE regprestacionesant AS (
   "codemp" VARCHAR,
   "nomemp" VARCHAR,
@@ -34,7 +38,7 @@ CREATE TYPE regprestacionesant AS (
   "fecfin" DATE,
   "monto" NUMERIC,
   "mondia" NUMERIC,
-  "diasant" NUMERIC, 
+  "diasant" NUMERIC,
   "monpres" NUMERIC,
   "dias" INTEGER,
   "monant" NUMERIC,

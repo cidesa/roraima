@@ -4,8 +4,8 @@
  *
  * @package    Roraima
  * @subpackage presnomcalintpre
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: actions.class.php 40811 2010-09-28 21:19:50Z cramirez $
  *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -410,7 +410,8 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
 
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -700,13 +701,15 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
   	else
   		$cadena="round((mondia*(dias)),2)";
 
+     $cambiofec = $this->getUser()->getAttribute('cambiofec','','presnomcalintpre');
      $sql = "select ' ' as id, TO_CHAR(fecfin,'MM') as mesactual, antmeses, antdias, antannos, codtipcon, tipo,
-      to_char(fecini,'dd/mm/yyyy') as fecini, fecini as fecini1, to_char(fecfin,'dd/mm/yyyy') as fecfin,
+      case when '$cambiofec'='S' then to_char(fecinireal,'dd/mm/yyyy') else to_char(fecini,'dd/mm/yyyy') end as fecini,case when '$cambiofec'='S' then fecinireal else fecini end  as fecini1,
+      case when '$cambiofec'='S' then to_char(fecfinreal,'dd/mm/yyyy') else to_char(fecfin,'dd/mm/yyyy') end as fecfin,
       round(tasa,2) as tasa, round(mondia,2) as mondia, dias, round(mondiapro,2) as mondiapro,
       round(capital,2) as capital, round(capitalact,2) as capitalact,
       case when dias=5 then round(monpres,2) else $cadena end  as monpres, tasa,
       round(monint,2) as monint, round(intacu,2) as intacu, round(monant,2) as monant,
-      round(monadeint,2) as monadeint, round(monto,2) as monto
+      round(monadeint,2) as monadeint, round(monto,2) as monto,round(aliuti,2) as aliuti,round(alivac,2) as alibono,round(aliadi,2) as aliadi
               from calculopres('$codemp','$fecha','$capital','$salario') order by fecini1";
 
     Herramientas :: BuscarDatos($sql, & $result);
@@ -777,12 +780,29 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
       $col3->setHTML('type="text" size="10" maxlength="10"  readonly=true');
       $col3->setEsGrabable('true');
 
-      //    $col3 = new Columna('Salario');
-      //    $col3->setTipo(Columna::MONTO);f
-      //    $col3->setAlineacionObjeto(Columna::CENTRO);
-      //    $col3->setAlineacionContenido(Columna::CENTRO);
-      //    $col3->setNombreCampo('monpres'); //salemp
-      //    $col3->setHTML('type="text" size="20" maxlength="20"  readonly=true');
+      $col31 = new Columna('Alicuota Utilidad');
+      $col31->setTipo(Columna :: MONTO);
+      $col31->setAlineacionObjeto(Columna :: CENTRO);
+      $col31->setAlineacionContenido(Columna :: CENTRO);
+      $col31->setNombreCampo('aliuti');
+      $col31->setHTML('type="text" size="10" maxlength="10"  readonly=true');
+      $col31->setEsGrabable('true');
+
+      $col32 = new Columna('Alicuota Vacación');
+      $col32->setTipo(Columna :: MONTO);
+      $col32->setAlineacionObjeto(Columna :: CENTRO);
+      $col32->setAlineacionContenido(Columna :: CENTRO);
+      $col32->setNombreCampo('alibono');
+      $col32->setHTML('type="text" size="10" maxlength="10"  readonly=true');
+      $col32->setEsGrabable('true');
+
+      $col33 = new Columna('Alicuota Adicional');
+      $col33->setTipo(Columna :: MONTO);
+      $col33->setAlineacionObjeto(Columna :: CENTRO);
+      $col33->setAlineacionContenido(Columna :: CENTRO);
+      $col33->setNombreCampo('aliadi');
+      $col33->setHTML('type="text" size="10" maxlength="10"  readonly=true');
+      $col33->setEsGrabable('true');
 
       $col4 = new Columna('Dias Art.108');
       $col4->setTipo(Columna :: MONTO);
@@ -966,6 +986,9 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
       $opciones->addColumna($col1);
       $opciones->addColumna($col2);
       $opciones->addColumna($col3);
+      $opciones->addColumna($col31);
+      $opciones->addColumna($col32);
+      $opciones->addColumna($col33);
       $opciones->addColumna($col4);
       $opciones->addColumna($col5);
       $opciones->addColumna($col6);
@@ -998,7 +1021,7 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
    * en las acciones, create, edit y handleError para recargar en todo momento
    * los datos del grid.
    *
-   */
+
   public function configGridConsulta($codigo) {
     /////PARA LA CONSULTA//////
     $c = new Criteria();
@@ -1261,7 +1284,7 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
 
     $this->obj = $opciones->getConfig($per);
   }
-
+*/
 
 
   public function executeAutocomplete() {
@@ -1276,6 +1299,8 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
    *
    */
   public function executeEdit() {
+
+    $this->getUser()->setAttribute('cambiofec',H::getConfApp('cambiofec'),'presnomcalintpre');
 
     $this->nppresoc       = $this->getNppresocOrCreate();
     $this->capitalizacion = Constantes :: Capitalizacion();
@@ -1424,12 +1449,19 @@ $this->Bitacora('Guardo');
     $col5->setNombreCampo('aliuti');
     $col5->setHTML('type="text" size="10" maxlength="10"  readonly=true');
 
-    $col6 = new Columna('Alicuota de Bono Vac.');
+    $col6 = new Columna('Alicuota Vacación');
     $col6->setTipo(Columna :: MONTO);
     $col6->setAlineacionObjeto(Columna :: CENTRO);
     $col6->setAlineacionContenido(Columna :: CENTRO);
     $col6->setNombreCampo('alibono');
     $col6->setHTML('type="text" size="10" maxlength="10"  readonly=true');
+
+    $col61 = new Columna('Alicuota Adicional');
+    $col61->setTipo(Columna :: MONTO);
+    $col61->setAlineacionObjeto(Columna :: CENTRO);
+    $col61->setAlineacionContenido(Columna :: CENTRO);
+    $col61->setNombreCampo('aliadi');
+    $col61->setHTML('type="text" size="10" maxlength="10"  readonly=true');
 
     $col7 = new Columna('Total Diario');
     $col7->setTipo(Columna :: MONTO);
@@ -1535,6 +1567,7 @@ $this->Bitacora('Guardo');
     $opciones->addColumna($col4);
     $opciones->addColumna($col5);
     $opciones->addColumna($col6);
+    $opciones->addColumna($col61);
     $opciones->addColumna($col7);
     #$opciones->addColumna($col8);
     $opciones->addColumna($col9);
