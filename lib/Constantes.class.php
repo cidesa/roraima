@@ -371,7 +371,7 @@ public static function PagoDoble()
 
   public static function TipoMovimiento()
   {
-    return array('P' => 'Precompromiso','C' => 'Compromiso','CA' => 'Causado','PA' => 'Pagado','A' => 'Adicion/Disminucion','T' => 'Solicitud de Traslado','AJ' => 'Ajuste');
+    return array('P' => 'Precompromiso','C' => 'Compromiso','CA' => 'Causado','PA' => 'Pagado','A' => 'Adicion/Disminucion','ST' => 'Solicitud de Traslado', 'T' => 'Traslado','AJ' => 'Ajuste');
   }
 
   public static function Numper_Faccodcatfis()
