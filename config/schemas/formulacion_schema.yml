@@ -1545,3 +1545,81 @@ propel:
       primaryKey: true
       autoIncrement: true
       description: Identificador Único del registro
+  forcormun:
+    codest:
+      type: VARCHAR
+      size: 5
+      required: true
+    cormun:
+      type: NUMERIC
+      size: 3
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  forcorpar:
+    codest:
+      type: VARCHAR
+      size: 5
+      required: true
+    codmun:
+      type: VARCHAR
+      size: 5
+      required: true
+    corpar:
+      type: NUMERIC
+      size: 3
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  forcorsubobj:
+    codequ:
+      type: VARCHAR
+      size: 2
+      required: true
+    corsubobj:
+      type: NUMERIC
+      size: 3
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  forcorsubsec:
+    codsec:
+      type: VARCHAR
+      size: 4
+      required: true
+    corsubsec:
+      type: NUMERIC
+      size: 3
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  forcorsubsubobj:
+    codequ:
+      type: VARCHAR
+      size: 2
+      required: true
+    codsubobj:
+      type: VARCHAR
+      size: 3
+      required: true
+    corsubsubobj:
+      type: NUMERIC
+      size: 3
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identifi
