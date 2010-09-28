@@ -1199,7 +1199,7 @@ class Cheques
 		     }
 		     else
 		     {
-           self::Genera_Comprobante($numche,$tscheemi,$grid,"","S",$DescOp,$DesCtaDeb,
+           self::Genera_Comprobante($numche,$tscheemi,$grid,"","D",$DescOp,$DesCtaDeb,
                                     $desctacre,$CtaPag,$CuentaDes,Herramientas::tofloat($MontDcto),$condto,
                                     $total,0,"pagdir",&$arrcompro,0);
 		     }
@@ -1377,6 +1377,24 @@ class Cheques
              if ($monpagado==0 || is_null($monpagado))
                $montot=$x[$j]->getMontotalGrid()+$x[$j]->getMondes() + $x[$j]->getMonret();
              else $montot=$x[$j]->getMontotalGrid(); //+ $x[$j]->getMonret();
+             if (trim($montos)!="") $montos=$montos."_".$montot; else $montos=$montot;
+          }
+          $j++;
+        }//while
+      }//else if ($tippag=='C')//pagos compuestos
+      else if ($tippag=='D')//pagos Directo
+      {
+        $x=$grid[0];
+        $j=0;
+        while ($j<count($x))
+        {
+          if ($x[$j]->getCodpre()!="")
+          {
+             $CtaPag=Herramientas::getX('CODPRE','Cpdeftit','Codcta',$x[$j]->getCodpre());
+             if (trim($ctas)!="") $ctas=$ctas."_".$CtaPag; else  $ctas = $CtaPag;
+             if (trim($desc)!="") $desc=$desc."_".$DesCtaDeb; else  $desc = $DesCtaDeb;
+             if (trim($movs)!="") $movs=$movs."_"."D"; else  $movs = "D";
+             $montot=$x[$j]->getMonimp(); //+ $x[$j]->getMonret();
              if (trim($montos)!="") $montos=$montos."_".$montot; else $montos=$montot;
           }
           $j++;
