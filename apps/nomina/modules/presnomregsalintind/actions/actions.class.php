@@ -5,9 +5,9 @@
  *
  * @package    Roraima
  * @subpackage presnomregsalintind
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: actions.class.php 40782 2010-09-28 17:02:43Z cramirez $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -21,6 +21,8 @@ class presnomregsalintindActions extends autopresnomregsalintindActions
    */
   public function executeEdit()
   {
+    if(!$this->getUser()->getAttribute('nomsalint','','presnomregsalintind'))
+        $this->getUser()->setAttribute('nomsalint',H::getConfAppGen('nomsalint'),'presnomregsalintind');
     $this->npsalint = $this->getNpsalintOrCreate();
 
     $this->updateNpsalintFromRequest();
@@ -126,18 +128,18 @@ class presnomregsalintindActions extends autopresnomregsalintindActions
                $per[] = $arr_data;
 		    }//if ($con){
 			else
-			{				
-				$data=array();	
+			{
+				$data=array();
 		        $sql="SELECT SUM(CASE WHEN C.OPECON='A' THEN A.MONTO ELSE A.MONTO*-1 END) as monto, B.CODASI as codasi
-						FROM NPHISCON A left outer join nppernom e on 
+						FROM NPHISCON A left outer join nppernom e on
 						(
-						 a.codnom=e.codnom and e.mes=to_char(TO_DATE('$fechainifor','DD/MM/YYYY'),'mm') and 
+						 a.codnom=e.codnom and e.mes=to_char(TO_DATE('$fechainifor','DD/MM/YYYY'),'mm') and
 						 e.anno=to_char(TO_DATE('$fechainifor','DD/MM/YYYY'),'yyyy')::numeric
 						)
 						,NPCONASI B,NPDEFCPT C,NPASINOMCONT D
 						WHERE A.CODEMP='$this->codemp'
-						AND a.FecNom  >= (case when e.fecini is not null then e.fecini else  TO_DATE('$fechainifor','DD/MM/YYYY') end) 
-						AND a.FecNom  <= (case when e.fecfin is not null then e.fecfin else  TO_DATE('$fechafinfor','DD/MM/YYYY') end) 
+						AND a.FecNom  >= (case when e.fecini is not null then e.fecini else  TO_DATE('$fechainifor','DD/MM/YYYY') end)
+						AND a.FecNom  <= (case when e.fecfin is not null then e.fecfin else  TO_DATE('$fechafinfor','DD/MM/YYYY') end)
 						AND A.CODNOM=D.CODNOM
 						AND D.CODTIPCON=B.CODCON
 						AND A.CODCON=B.CODCPT
@@ -182,17 +184,17 @@ class presnomregsalintindActions extends autopresnomregsalintindActions
 	      	$fechafin= $arrfechafin[0]['last_day'];
           	$fechafinfor=date("d/m/Y",strtotime($fechafin));
 			$fechaactual=date("Y-m-d");
-			
+
 			$sqlfec="select max(fecnom) as fecmax from nphiscon where codemp='$this->codemp' and codnom='$this->nomina' and especial='N'";
 			H::BuscarDatos($sqlfec,$datafec);
 			if($datafec)
 				$fechamaxnphiscon = $datafec[0]['fecmax'];
 			else
 				$fechamaxnphiscon = date("Y-m-d");
-			
-			if(strtotime($fechamaxnphiscon)>strtotime($fechaactual))	
-				$fechaactual=$fechamaxnphiscon;			
-			
+
+			if(strtotime($fechamaxnphiscon)>strtotime($fechaactual))
+				$fechaactual=$fechamaxnphiscon;
+
    	        if (strtotime($fechafin)>strtotime($fechaactual))
    	        {
   	           $continuar=false;
@@ -398,12 +400,13 @@ class presnomregsalintindActions extends autopresnomregsalintindActions
 
   }
 
-  
-  
-  
+
+
+
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -428,6 +431,7 @@ class presnomregsalintindActions extends autopresnomregsalintindActions
    */
   public function executeList()
    {
+    $this->getUser()->setAttribute('nomsalint',H::getConfAppGen('nomsalint'),'presnomregsalintind');
     $this->processSort();
 
     $this->processFilters();
@@ -489,7 +493,7 @@ class presnomregsalintindActions extends autopresnomregsalintindActions
   }
 
     /**
-   * Función principal para procesar la eliminación de registros 
+   * Función principal para procesar la eliminación de registros
    * en el formulario.
    *
    */

@@ -4,14 +4,14 @@
  *
  * @package    Roraima
  * @subpackage vistas
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version    SVN: $Id$
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id: _edit_form.php 40777 2010-09-28 17:01:02Z cramirez $
  */
 // date: 2007/06/29 13:30:33
 ?>
 <?php echo form_tag('nomhojint/save', array(
   'id'        => 'sf_admin_edit_form',
-  'name'      => 'sf_admin_edit_form',
+  'name'      => 'sf_admin_edit_form', 'onsubmit'  => 'return false;',
   'multipart' => true,
   'onsubmit'  => 'double_list_submit(); return true;'
 )) ?>
@@ -743,6 +743,7 @@ $value = object_input_tag($nphojint, 'getPorseghcm', array (
 <?php tabPageOpenClose("tp1", "tabPage3", 'Ingresos');?>
 <fieldset id="sf_fieldset_none" class="">
 <?php echo button_to_popup('Ver Historial de Permisos',cross_app_link_to('nomina','/nomfalperper/edit/codigoemp/'.$nphojint->getCodemp()),'','','','1000','800')?>
+<?php echo button_to_popup('Ver Disfrute de Vacaciones',cross_app_link_to('nomina','/vachistorico/edit/id/'.$nphojint->getId()),'','','','1000','800')?>
 <div class="form-row">
 <fieldset id="sf_fieldset_none" class="">
 <legend><h2><?php echo __('Fechas') ?></h2></legend>

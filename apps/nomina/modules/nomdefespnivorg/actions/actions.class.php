@@ -5,9 +5,9 @@
  *
  * @package    Roraima
  * @subpackage nomdefespnivorg
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: actions.class.php 40772 2010-09-28 16:57:18Z cramirez $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -88,7 +88,7 @@ $this->Bitacora('Guardo');
   }
 
   /**
-   * Actualiza la informacion que viene de la vista 
+   * Actualiza la informacion que viene de la vista
    * luego de un get/post en el objeto principal del modelo base del formulario.
    *
    */
@@ -116,9 +116,9 @@ $this->Bitacora('Guardo');
     }
   }
 
-  
-  
-  
+
+
+
   /**
    *
    * Función que se ejecuta luego los validadores del negocio (validators)
@@ -142,7 +142,7 @@ $this->Bitacora('Guardo');
     }
 
   /**
-   * Función principal para procesar la eliminación de registros 
+   * Función principal para procesar la eliminación de registros
    * en el formulario.
    *
    */
@@ -164,13 +164,13 @@ $this->Bitacora('Guardo');
      }
      else
      {
-     	$this->setFlash('notice','El Nivel Organizacional no puede ser eliminado, ya que posee niveles que dependen de el');
+     	$this->setFlash('notice','La Ubicación Administrativa no puede ser eliminado, ya que posee niveles que dependen de el');
         return $this->redirect('nomdefespnivorg/edit?id='.$id);
      }
     }
     else
     {
-      $this->setFlash('notice','El Nivel Organizacional no puede ser eliminado, ya que se encuentra asociado a una Unidad Ejecutora');
+      $this->setFlash('notice','La Ubicación Administrativa no puede ser eliminado, ya que se encuentra asociado a una Unidad Ejecutora');
       return $this->redirect('nomdefespnivorg/edit?id='.$id);
     }
 

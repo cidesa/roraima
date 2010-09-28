@@ -27,9 +27,10 @@ class nomdefespparpreActions extends autonomdefespparpreActions
    */
   public function editing()
   {
+   $nomsalint = H::getConfAppGen('nomsalint');
    $this->arrsal=array('UD'=>'Ultimo Devengado',
                        'SP'=>'Salario Promedio',
-					   'SI'=>'Salario Integral',
+					   'SI'=> $nomsalint=='S' ? 'Salario Base' : 'Salario Integral',
 					   'SN'=>'Salario Normal');
    $this->params=array('arrsal'=>$this->arrsal);
    $this->configGridClau();
@@ -150,9 +151,10 @@ class nomdefespparpreActions extends autonomdefespparpreActions
    */
   public function updateError()
   {
-  	$this->arrsal=array('UD'=>'Ultimo Devengado',
+   $nomsalint = H::getConfAppGen('nomsalint');
+   $this->arrsal=array('UD'=>'Ultimo Devengado',
                        'SP'=>'Salario Promedio',
-					   'SI'=>'Salario Integral',
+					   'SI'=> $nomsalint=='S' ? 'Salario Base' : 'Salario Integral',
 					   'SN'=>'Salario Normal');
    $this->params=array('arrsal'=>$this->arrsal);
    $grid = Herramientas::CargarDatosGridv2($this,$this->obj);

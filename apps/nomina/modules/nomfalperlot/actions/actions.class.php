@@ -5,9 +5,9 @@
  *
  * @package    Roraima
  * @subpackage nomfalperlot
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: actions.class.php 40775 2010-09-28 16:58:41Z cramirez $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -17,6 +17,11 @@ class nomfalperlotActions extends autonomfalperlotActions
   private $coderror = -1;
 
   public function executeIndex()
+  {
+    return $this->forward('nomfalperlot', 'edit');
+  }
+
+  public function executeList()
   {
     return $this->forward('nomfalperlot', 'edit');
   }
@@ -185,27 +190,27 @@ class nomfalperlotActions extends autonomfalperlotActions
    * del formulario.
    *
    */
-  public function executeList()
+
+  /*public function executeList()
   {
     $this->processSort();
 
     $this->processFilters();
 
-    $this->filters = $this->getUser()->getAttributeHolder()->getAll('sf_admin/npfalper/filters');
+    $this->filters = $this->getUser()->getAttributeHolder()->getAll('sf_admin/nomfalperlot/filters');
 
-    // pager
-    $this->pager = new sfPropelPager('Npfalper', 8);
+     // 15    // pager
+    $this->pager = new sfPropelPager('Npfalper', 15);
     $c = new Criteria();
 
-
     $c->addSelectColumn(NpfalperPeer::CODNOM);
-    $c->addSelectColumn("0 AS CODEMP");
-    $c->addSelectColumn("0 AS CODMOT");
+    $c->addSelectColumn("'' AS CODEMP");
+    $c->addSelectColumn("'' AS CODMOT");
     $c->addSelectColumn("0 AS NRODIA");
-    $c->addSelectColumn("0 AS OBSERV");
+    $c->addSelectColumn("'' AS OBSERV");
     $c->addSelectColumn(NpfalperPeer::FECDES);
     $c->addSelectColumn(NpfalperPeer::FECHAS);
-    $c->addSelectColumn("0 AS ID");
+    $c->addSelectColumn("max(id) AS ID");
 
 
    // $c->addSelectColumn(NpconfonPeer::CODNOM." AS ID");
@@ -213,11 +218,14 @@ class nomfalperlotActions extends autonomfalperlotActions
     $c->addGroupByColumn(NpfalperPeer::CODNOM);
     $c->addGroupByColumn(NpfalperPeer::FECDES);
     $c->addGroupByColumn(NpfalperPeer::FECHAS);
+
+
     $this->addSortCriteria($c);
     $this->addFiltersCriteria($c);
     $this->pager->setCriteria($c);
     $this->pager->setPage($this->getRequestParameter('page', 1));
     $this->pager->init();
-  }
+  }*/
+
 
 }

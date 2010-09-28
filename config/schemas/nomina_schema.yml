@@ -7279,7 +7279,7 @@ propel:
       required: true
       primaryKey: true
       autoIncrement: true
-      description: Identificador Ãnico del registro
+      description: Identificador Único del registro
   npinfdoc:
     codemp:
       type: VARCHAR
@@ -7294,7 +7294,7 @@ propel:
       required: true
       primaryKey: true
       autoIncrement: true
-      description: Identificador Ãnico del registro
+      description: Identificador Único del registro
   npporhcm:
     codnom:
       type: VARCHAR
@@ -7328,7 +7328,7 @@ propel:
       required: true
       primaryKey: true
       autoIncrement: true
-      description: Identificador Ãnico del registro
+      description: Identificador Único del registro
   npmotegr:
     codmot:
       type: VARCHAR
@@ -7343,13 +7343,13 @@ propel:
       required: true
       primaryKey: true
       autoIncrement: true
-      description: Identificador Ãnico del registro
+      description: Identificador Único del registro
   npasiconpar:
     codnom:
       type: VARCHAR
       size: 3
       required: true
-      description: NÃ³mina
+      description: Nómina
     codtipcar:
       type: VARCHAR
       size: 3
@@ -7362,15 +7362,15 @@ propel:
     codtip:
       type: VARCHAR
       size: 4
-      description: DedicaciÃ³n
+      description: Dedicación
     codtipcat:
       type: VARCHAR
       size: 4
-      description: CategorÃ­a
+      description: Categoría
     codtie:
       type: VARCHAR
       size: 3
-      description: CondiciÃ³n
+      description: Condición
     codestemp:
       type: VARCHAR
       size: 1
@@ -7390,13 +7390,13 @@ propel:
       required: true
       primaryKey: true
       autoIncrement: true
-      description: Identificador Ãnico del registro
+      description: Identificador Único del registro
   npaumcar:
     codnom:
       type: VARCHAR
       size: 3
       required: true
-      description: NÃ³mina
+      description: Nómina
     cantidad:
       type: NUMERIC
       size: 14
@@ -7488,6 +7488,32 @@ propel:
     descrip:
       type: VARCHAR
       size: 1000
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  npbonfinano:
+    codnom:
+      type: VARCHAR
+      size: 3
+      required: true
+    desde:
+      type: NUMERIC
+      size: 5
+      scale: 2
+      required: true
+    hasta:
+      type: NUMERIC
+      size: 5
+      scale: 2
+      required: true
+    dias:
+      type: NUMERIC
+      size: 5
+      scale: 2
+      required: true
     id:
       type: INTEGER
       required: true

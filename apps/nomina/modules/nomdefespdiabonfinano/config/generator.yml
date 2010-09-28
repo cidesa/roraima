@@ -1,0 +1,39 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Npbonfinano
+    theme:            cidesaGenerator
+    fields:
+      codnom:
+        name: NÃ³mina
+        msj_error: CÃ³digo de NÃ³mina es necesario
+        catalogo:
+          catalogoweb: Npnomina_nomdefespvar
+          clase: Npnomina
+          ajax: 1
+          parametros: getprincipal="getCodnom" getsecundario="getNomnom" campoprincipal="codnom" camposecundario="nomnom" campobase = "id"
+      gridbono:  { name: .}
+
+    list:
+      title:    DefiniciÃ³n Especial de Bono de fin de AÃ±o
+      display:  [ =codnom, nomnom, desde, hasta, dias]
+      filters:  [ codnom, dias]
+      fields:
+        nomnom:    { name: Nombre}
+      max_pers:           10
+      sort:     codnom
+      objects_actions:
+        _edit:            ~
+        _delete:          ~
+      actions:
+        _create:          ~
+
+    edit:
+      title:         EdiciÃ³n Bono de fin de AÃ±o
+      display:
+        Datos NÃ³mina:   [codnom]
+        Datos Dias:     [_gridbono]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

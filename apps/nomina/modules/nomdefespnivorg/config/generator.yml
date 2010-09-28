@@ -9,7 +9,7 @@ generator:
       telext: { name: Teléfono / Extensión }
       email:  { name: Email}
     list:
-      title:          Niveles Organizacionales
+      title:          Ubicaciones Administrativa
       filters:        [codniv, desniv ]
       display:        [=codniv, desniv]
       sort:  codniv
@@ -18,7 +18,7 @@ generator:
         _delete:      ~
       max_per_page:   5
     edit:
-      title:         Edición de Niveles Organizacionales
+      title:         Edición de Ubicaciones Administrativa
       display:       [codniv, desniv, telext, email]
       actions:
         _list:       ~

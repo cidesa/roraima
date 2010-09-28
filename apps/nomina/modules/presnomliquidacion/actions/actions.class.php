@@ -31,6 +31,7 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 	$this->configGridAsigDeduc();
 	$this->arrret = $this->cargar_tiporetiro();
 	$this->params = array('arrret'=>$this->arrret);
+        $this->getUser()->setAttribute('nomsalint',H::getConfAppGen('nomsalint'),'presnomliquidacion');
   }
 
   public function cargar_tiporetiro()
@@ -1338,6 +1339,7 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
   	$this->configGrid($this->npliquidacion_det->getCodemp());
 	$this->configGridAsigDeduc($this->npliquidacion_det->getCodemp(),$codnom,$categoria,$fecegr,$this->npliquidacion_det->getUltimosueldo(),false);
 	*/
+        $this->getUser()->setAttribute('nomsalint',H::getConfAppGen('nomsalint'),'presliquidacion');
 	$this->arrret = $this->cargar_tiporetiro();
 	$this->params = array('arrret'=>$this->arrret);
 	$this->npliquidacion_det = $this->getNpliquidacionDetOrCreate();

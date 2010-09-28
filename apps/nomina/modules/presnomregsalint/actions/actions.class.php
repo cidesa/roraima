@@ -5,9 +5,9 @@
  *
  * @package    Roraima
  * @subpackage presnomregsalint
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: actions.class.php 40780 2010-09-28 17:02:11Z cramirez $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -27,6 +27,7 @@ class presnomregsalintActions extends autopresnomregsalintActions
    */
   public function executeEdit()
   {
+    $this->getUser()->setAttribute('nomsalint',H::getConfAppGen('nomsalint'),'presnomregsalint');
     $this->npsalint = $this->getNpsalintOrCreate();
 
     $this->updateNpsalintFromRequest();
@@ -146,14 +147,14 @@ $this->Bitacora('Guardo');
 
 
 		        $sql="SELECT SUM(CASE WHEN C.OPECON='A' THEN A.MONTO ELSE A.MONTO*-1 END) as monto, B.CODASI as codasi
-						FROM NPHISCON A left outer join nppernom e on 
+						FROM NPHISCON A left outer join nppernom e on
 						(
-						  a.codnom=e.codnom and e.mes=to_char(TO_DATE('$fecini','DD/MM/YYYY'),'mm') and 
+						  a.codnom=e.codnom and e.mes=to_char(TO_DATE('$fecini','DD/MM/YYYY'),'mm') and
 						 e.anno=to_char(TO_DATE('$fecini','DD/MM/YYYY'),'yyyy')::numeric
 						),NPCONASI B,NPDEFCPT C,NPASINOMCONT D
 						WHERE A.CODEMP='$cod'
-						AND a.FecNom  >= (case when e.fecini is not null then e.fecini else  TO_DATE('$fecini','DD/MM/YYYY') end) 
-						AND a.FecNom  <= (case when e.fecfin is not null then e.fecfin else  TO_DATE('$fecfin','DD/MM/YYYY') end) 
+						AND a.FecNom  >= (case when e.fecini is not null then e.fecini else  TO_DATE('$fecini','DD/MM/YYYY') end)
+						AND a.FecNom  <= (case when e.fecfin is not null then e.fecfin else  TO_DATE('$fecfin','DD/MM/YYYY') end)
 						AND B.CODCON='$con'
 						AND D.CODNOM=A.CODNOM
 						AND D.CODTIPCON=B.CODCON
@@ -377,7 +378,7 @@ $this->Bitacora('Guardo');
   }
 
   /**
-   * Actualiza la informacion que viene de la vista 
+   * Actualiza la informacion que viene de la vista
    * luego de un get/post en el objeto principal del modelo base del formulario.
    *
    */
@@ -469,12 +470,13 @@ $this->Bitacora('Guardo');
 
   }
 
-  
-  
-  
+
+
+
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */

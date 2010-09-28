@@ -24,8 +24,8 @@ nomina:
       Institución:                                                   NomDefEspGen
       Tipos Nóminas:                                                 NomDefEspTipNom
       Conceptos:                                                     NomDefEspCon
-      Niveles Organizacionales:                                      NomDefEspNivOrg
-      Ubicaciones Físicas:                                            nomdefubi
+      Ubicaciones Administrativa:                                    NomDefEspNivOrg
+      Ubicaciones Físicas:                                           nomdefubi
       Niveles de Estudio:                                            NomDefEspNivEdu
       Cargos:                                                        NomDefEspCar
       Cargos Colaterales:                                            NomDefEspCargosCol
@@ -66,6 +66,7 @@ nomina:
       Motivos de Cambios de Cargos:                                  NomDefEspMotCamCar      
       Definición de Documentos consignados por el Empleado:          NomDefEspDocEnt            
       Definicion de Reporte - Conceptos:                             nomdefrepcon
+      Porcentajes de Descuentos HCM:                                 nomdefhcmnom
       Embargos:
         Registro de Juzgados:                                        NomDefJuz
         Registro de Beneficiarios por Embargos:                      NomDefBenEmb
@@ -133,6 +134,7 @@ nomina:
       Llegadas:                                                      NomFalPerLle
       Registro de Días Extras:                                       NomDiaExt
       Registro de Faltas y/o Permisos Por Nómina en Lote:            NomFalPerLot
+      Historico de Registro de Faltas y/o Permisos Por Nómina en Lote:            NomFalPerLothis
       Registro de Días Extras Por Nómina en Lote:                    NomDiaExtLabLot
     Vacaciones:
       Parámetros para el Registro y Control de Vacaciones:           VacDefGen
@@ -149,6 +151,7 @@ nomina:
       Definición de Parámetros para las Prestaciones Sociales:
         Tipos de Contratos Colectivos:                               PresNomTipCon
         Registro de Tipos de Asignaciones:                           presNomAsiConPre
+        Definición Especial de Bono de Fin de Año:                   nomdefespdiabonfinano
         Definición Presupuestaria de Liquidación:                    presNomDefPre
         Definiciones Especiales para Prestaciones:                   NomDefEspParPre
         Definiciones de Clausulas para Prestaciones:                 NomDefEspClauDet

@@ -14,7 +14,7 @@ generator:
       object_actions:
         _edit:        ~
         _delete:      ~
-      max_per_page:  8
+      max_per_page:  10
     edit:
       title:          Registro de Faltas y Permisos por Nomina en Lote
       display:        [codnom, nomnom, fecdes ]

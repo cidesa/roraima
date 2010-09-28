@@ -1,0 +1,39 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                false
+  tabla:                   npfalper
+  anchogrid:               900
+  ancho:                   850
+  filas:                   0
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Check
+  tipo:                    k
+  nombrecampo:             check
+  esgrabable:              true
+  html:                    [ ]
+2:       # Columna 2
+  titulo:                  CÃ³digo Empleado
+  tipo:                    t
+  nombrecampo:             codemp
+  esgrabable:              true
+  html:                    [ ]
+3:       # Columna 3
+  titulo:                  EmpÄºeado
+  tipo:                    t
+  nombrecampo:             nomemp
+  esgrabable:              true
+  html:                    [ readonly=true size=40]
+4:       # Columna 4
+  titulo:                  Cargo
+  tipo:                    t
+  nombrecampo:             nomcar
+  esgrabable:              true
+  html:                    [ size=40 readonly=true]
+5:       # Columna 5
+  titulo:                  Motivo
+  tipo:                    c
+  nombrecampo:             codmot
+  esgrabable:              true
+  html:                    [readonly=true]
