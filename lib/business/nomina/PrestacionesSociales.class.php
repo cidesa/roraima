@@ -1203,7 +1203,7 @@ End Function*/
 		  { # NO COBRO UTILIDADES
 		  	if($meses>=1)
 			{
-				PrestacionesSociales::TraerAlicuota($codemp,'01/01/'.$anoegr,$fecegrf,&$ialiuti,&$ialibono,&$icalinc,&$utilinc);
+				PrestacionesSociales::TraerAlicuota($codemp,'01/01/'.$anoegr,$fecegrf,&$ialiuti,&$ialibono,&$ialiadi,&$icalinc,&$utilinc);
 				$montouti = ($ialiuti) / 12;
 				$montouti = $montouti * $meses;
                                 #Para definicion Especifica de Bono Fin de Año
@@ -1222,7 +1222,7 @@ End Function*/
 
 
 				#ARREGLO DEL GRID
-			    $sql = "Select * from NPDefPreLiq where CODNOM='$codnom' AND CodCon='005' and PerDes<='$anoegr' and PerHas>='$anoegr'";
+			        $sql = "Select * from NPDefPreLiq where CODNOM='$codnom' AND CodCon='005' and PerDes<='$anoegr' and PerHas>='$anoegr'";
 				if (Herramientas::BuscarDatos($sql,&$result))
 					$partida = $result[0]['codpar'];
 				else
@@ -1232,6 +1232,27 @@ End Function*/
 				$arr[$totarr]['monto'] = $montouti + $montoinc;
 				$arr[$totarr]['descripcion'] = 'BONIFICACIÓN FRACCIONADA DE FIN DE AÑO';
 				$arr[$totarr]['partida'] = $partida;
+                                #BONO PRODUCTIVIDAD o BONO ADICIONAL
+                                $totarr++;
+                                if(intval($ialiadi)>0)
+                                {
+                                     $montoadi = ($ialiadi) / 12;
+                                     $montoadi = $montoadi * $meses;
+                                     $diasadi = $montoadi;
+                                        ($factor!=0 && (!is_null($factor))) ? $montoadi = $montoadi * ($ultimosueldo*$factor/365) : $montoadi = $montoadi * ($ultimosueldo/30);
+
+                                     #ARREGLO DEL GRID
+                                     $sql = "Select * from NPDefPreLiq where CODNOM='$codnom' AND CodCon='007' and PerDes<='$anoegr' and PerHas>='$anoegr'";
+                                     if (Herramientas::BuscarDatos($sql,&$result))
+                                            $partida = $result[0]['codpar'];
+                                     else
+                                        $partida='';
+                                     $arr[$totarr]['orden'] = '6';
+                                     $arr[$totarr]['dias'] = $diasadi;
+                                     $arr[$totarr]['monto'] = $montoadi;
+                                     $arr[$totarr]['descripcion'] = 'FRACCION DE DIAS DE BONO ADICIONAL';
+                                     $arr[$totarr]['partida'] = $partida;
+                                }
 			}else
 			{
 				#NO SE LE PAGA NADA
@@ -1241,7 +1262,7 @@ End Function*/
 		  	#SI COBRO UTILIDADES EN EL PERIODO
 		  	if($meses>=1)
 			{
-				PrestacionesSociales::TraerAlicuota($codemp,'01/01/'.$anoegr,$fecegrf,&$ialiuti,&$ialibono,&$icalinc,&$utilinc);
+				PrestacionesSociales::TraerAlicuota($codemp,'01/01/'.$anoegr,$fecegrf,&$ialiuti,&$ialibono,&$ialiadi,&$icalinc,&$utilinc);
 
 				$montouti = ($ialiuti) / 12;
 				$montouti = $montouti * (12 - $meses);
@@ -1280,9 +1301,30 @@ End Function*/
 				$arr[$totarr]['monto'] = ($montouti + $montoinc)*(-1);
 				$arr[$totarr]['descripcion'] = 'BONIFICACIÓN FRACCIONADA DE FIN DE AÑO';
 				$arr[$totarr]['partida'] = $partida;
+                                 #BONO PRODUCTIVIDAD o BONO ADICIONAL
+                                $totarr++;
+                                if(intval($ialiadi)>0)
+                                {
+                                     $montoadi = ($ialiadi) / 12;
+                                     $montoadi = $montoadi * (12 - $meses);
+                                     $diasadi = $montoadi;
+                                        ($factor!=0 && (!is_null($factor))) ? $montoadi = $montoadi * ($ultimosueldo*$factor/365) : $montoadi = $montoadi * ($ultimosueldo/30);
+
+                                     #ARREGLO DEL GRID
+                                     $sql = "Select * from NPDefPreLiq where CODNOM='$codnom' AND CodCon='007' and PerDes<='$anoegr' and PerHas>='$anoegr'";
+                                     if (Herramientas::BuscarDatos($sql,&$result))
+                                            $partida = $result[0]['codpar'];
+                                     else
+                                        $partida='';
+                                     $arr[$totarr]['orden'] = '6';
+                                     $arr[$totarr]['dias'] = $diasadi;
+                                     $arr[$totarr]['monto'] = $montoadi;
+                                     $arr[$totarr]['descripcion'] = 'FRACCION DE DIAS DE BONO ADICIONAL';
+                                     $arr[$totarr]['partida'] = $partida;
+                                }
 			}else
 			{
-				PrestacionesSociales::TraerAlicuota($codemp,'01/01/'.$anoegr,$fecegrf,&$ialiuti,&$ialibono,&$icalinc,&$utilinc);
+				PrestacionesSociales::TraerAlicuota($codemp,'01/01/'.$anoegr,$fecegrf,&$ialiuti,&$ialibono,&$ialiadi,&$icalinc,&$utilinc);
 				$montouti = $ialiuti / 12;
                                 #Para definicion Especifica de Bono Fin de Año
                                 $mestra = intval($meses);
@@ -1308,6 +1350,27 @@ End Function*/
 				$arr[$totarr]['monto'] = ($montouti + $montoinc)*(-1);
 				$arr[$totarr]['descripcion'] = 'BONIFICACIÓN FRACCIONADA DE FIN DE AÑO';
 				$arr[$totarr]['partida'] = $partida;
+                                #BONO PRODUCTIVIDAD o BONO ADICIONAL
+                                $totarr++;
+                                if(intval($ialiadi)>0)
+                                {
+                                     $montoadi = ($ialiadi) / 12;
+                                     $diasadi = $montoadi;
+                                        ($factor!=0 && (!is_null($factor))) ? $montoadi = $montoadi * ($ultimosueldo*$factor/365) : $montoadi = $montoadi * ($ultimosueldo/30);
+
+                                     #ARREGLO DEL GRID
+                                     $sql = "Select * from NPDefPreLiq where CODNOM='$codnom' AND CodCon='007' and PerDes<='$anoegr' and PerHas>='$anoegr'";
+                                     if (Herramientas::BuscarDatos($sql,&$result))
+                                            $partida = $result[0]['codpar'];
+                                     else
+                                        $partida='';
+                                     $arr[$totarr]['orden'] = '6';
+                                     $arr[$totarr]['dias'] = $diasadi;
+                                     $arr[$totarr]['monto'] = $montoadi;
+                                     $arr[$totarr]['descripcion'] = 'FRACCION DE DIAS DE BONO ADICIONAL';
+                                     $arr[$totarr]['partida'] = $partida;
+                                }
+
 			}
 		  }
 
@@ -1320,7 +1383,7 @@ End Function*/
 	   return $arr;
   }
 
-  public static function TraerAlicuota($codemp,$fechaini,$fechafin,&$ialiuti,&$ialibono,&$icalinc,&$utilinc)
+  public static function TraerAlicuota($codemp,$fechaini,$fechafin,&$ialiuti,&$ialibono,&$ialiadi,&$icalinc,&$utilinc)
   {
   	$sql = "Select * from NPAsiEmpCont where CodEmp='$codemp'";
 	if (Herramientas::BuscarDatos($sql,&$result))
@@ -1347,6 +1410,7 @@ End Function*/
 	{
 		$ialiuti = $result[0]['diauti'];
 		$ialibono = $result[0]['diavac'];
+                $ialiadi = $result[0]['diapro'];
 		$icalinc = $result[0]['calinc'];
 		#UtilInt = (ObtenerValorRegistro(rsTemp!UtilInt) = "S")
 		$icalinc == "S" ? $utilinc=true : $utilinc=false;
@@ -1354,6 +1418,7 @@ End Function*/
 	{
 		$ialiuti = 1;
 		$ialibono = 1;
+                $ialiadi = 0;
 		$icalinc = "N";
 		$utilinc=false;
 	}

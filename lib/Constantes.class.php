@@ -103,7 +103,7 @@ class Constantes
 
  public static function ListaConceptos()
   {
-   return array('000' => 'Prestaciones Sociales', '001' => 'Intereses Sobre Prestaciones Sociales', '002' => 'Días Adicionas', '003' => 'Vacaciones Fraccionadas', '004' => 'Bono Vacacional Fraccionado', '005' => 'Aguinaldo Fracionados', '006' => 'Anticipo de Prestaciones');
+   return array('000' => 'Prestaciones Sociales', '001' => 'Intereses Sobre Prestaciones Sociales', '002' => 'Días Adicionas', '003' => 'Vacaciones Fraccionadas', '004' => 'Bono Vacacional Fraccionado', '005' => 'Aguinaldo Fracionados', '006' => 'Anticipo de Prestaciones', '007' => 'Bono Adicional');
   }
 
 

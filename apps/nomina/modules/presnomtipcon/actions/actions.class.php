@@ -6,7 +6,7 @@
  * @package    Roraima
  * @subpackage presnomtipcon
  * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id: actions.class.php 38276 2010-05-19 19:30:38Z cramirez $
+ * @version SVN: $Id: actions.class.php 40836 2010-09-29 16:51:11Z cramirez $
  *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -322,7 +322,7 @@ class presnomtipconActions extends autopresnomtipconActions
 		$col6->setNombreCampo('Diavac');
 		$col6->setHTML('type="text" size="10"');
 
-		$col7 = new Columna('Dias Productividad');
+		$col7 = new Columna('Dias Bono Adicional');
 		$col7->setTipo(Columna::TEXTO);
 		$col7->setEsGrabable(true);
 		$col7->setAlineacionObjeto(Columna::CENTRO);

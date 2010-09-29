@@ -5,7 +5,7 @@
  * @package    Roraima
  * @subpackage nomina
  * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id: EmpleadosBanco.class.php 36321 2010-02-04 20:25:58Z cramirez $
+ * @version SVN: $Id: EmpleadosBanco.class.php 40839 2010-09-29 16:52:20Z cramirez $
  *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -112,7 +112,7 @@ public static function ArregloCatEmpleados($codcon, &$arreglodet)
   }
 public static function Grabar_grid_Npasicatconemp($npasicatconemp,$grid,$codigo='')
 {
-		  $x=$grid[0];                  
+		  $x=$grid[0];
 		  $i=0;
 		  while ($i<count($x))
 		  {
@@ -128,7 +128,7 @@ public static function Grabar_grid_Npasicatconemp($npasicatconemp,$grid,$codigo=
                         }
                         else
                           {
-                 
+
                             $npasicatconemp_new = new Npasicatconemp();
                             $npasicatconemp_new->setCodemp($x[$i]["codemp"]);
                             $npasicatconemp_new->setCodcon($codigo);
@@ -139,7 +139,7 @@ public static function Grabar_grid_Npasicatconemp($npasicatconemp,$grid,$codigo=
                     }
 	           $i++;
 	      }
-              
+
 	return -1;
 }
 public static function Grabar_grid_Npasiempcont($grid,$npasiempcont_new)
@@ -358,6 +358,7 @@ public static function Grabar_grid_Vacdiafer($npvacdiafer_new,$grid)
 			            $npvacdiafer_new->setDia($v->getDia());
 			            $npvacdiafer_new->setMes($v->getMes());
 			            $npvacdiafer_new->setDescripcion($v->getDescripcion());
+                                    $npvacdiafer_new->setCodpai($v->getCodpai());
 			            $npvacdiafer_new->save();
                	      }
                	      	else
@@ -694,22 +695,30 @@ public static function Grabar_grid_Vacdiadis($codigo,$grid)
 
 	}
 
-public static function Grabar_grid_Presnomdefpre($codigo,$concepto,$grid)
+        public static function Grabar_grid_Presnomdefpre($codigo,$concepto,$grid)
 	{
-		$val=-1;
-		  $x=$grid[0];
-		  $sql="delete from npdefpreliq where codnom='".$codigo."' and codcon='".$concepto."'";
-		  Herramientas::insertarRegistros($sql);
-		  	  foreach ($x as $v)
-               {
-           	        $npdefpreliq= new npdefpreliq();
-		            $npdefpreliq->setCodnom($codigo);
-		            $npdefpreliq->setCodcon($concepto);
-		            $npdefpreliq->setPerdes($v->getPerdes());
-		            $npdefpreliq->setPerhas($v->getPerhas());
-		            $npdefpreliq->setCodpar($v->getCodpar());
-		            $npdefpreliq->save();
-                }
+	  $val=-1;
+          $x=$grid[0];
+          #$sql="delete from npdefpreliq where codnom='".$codigo."' and codcon='".$concepto."'";
+          #Herramientas::insertarRegistros2($sql);
+          $c = new Criteria();
+          $c->add(NpdefpreliqPeer::CODNOM,$codigo);
+          $c->add(NpdefpreliqPeer::CODCON,$concepto);
+          $per = NpdefpreliqPeer::doSelect($c);
+          foreach($per as $r)
+          {
+            $r->delete();
+          }
+          foreach ($x as $v)
+          {
+            $npdefpreliq= new npdefpreliq();
+            $npdefpreliq->setCodnom($codigo);
+            $npdefpreliq->setCodcon($concepto);
+            $npdefpreliq->setPerdes($v->getPerdes());
+            $npdefpreliq->setPerhas($v->getPerhas());
+            $npdefpreliq->setCodpar($v->getCodpar());
+            $npdefpreliq->save();
+          }
 
         return $val;
 
