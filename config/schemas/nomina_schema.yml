@@ -2087,6 +2087,9 @@ propel:
     diasem:
       type: NUMERIC
       size: 1
+    calesppres:
+      type: VARCHAR
+      size: 1
     id:
       type: INTEGER
       required: true
@@ -6245,6 +6248,9 @@ propel:
       type: VARCHAR
       size: 3
     codconvac:
+      type: VARCHAR
+      size: 3
+    codconadi:
       type: VARCHAR
       size: 3
     pagoad:

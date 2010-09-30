@@ -6,24 +6,25 @@
  * @package    Roraima
  * @subpackage vacdefgen
  * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id: actions.class.php 36314 2010-02-04 20:06:57Z cramirez $
- * 
+ * @version SVN: $Id: actions.class.php 40867 2010-09-30 20:57:16Z cramirez $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
 class vacdefgenActions extends autovacdefgenActions
 {
- // variable donde se debe colocar el código de error generado en el validateEdit 
+ // variable donde se debe colocar el código de error generado en el validateEdit
   // para que sea procesado por el handleErrorEdit.
 private static $coderror=-1;
 
 
-  
-  
-  
+
+
+
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -96,6 +97,7 @@ private static $coderror=-1;
   {
     $params = array("'+$(this.id).up().previous(1).descendants()[0].value+'",'val2');
     $params1 = array("'+$(this.id).up().previous(3).descendants()[0].value+'",'val3');
+    $params2 = array("'+$(this.id).up().previous(5).descendants()[0].value+'",'val4');
 
     $c = new Criteria();
     $per = NpvacdefgenPeer::doSelect($c);
@@ -169,13 +171,39 @@ private static $coderror=-1;
     $col6->setEsGrabable(true);
     $col6->setHTML('type="text" size="20" readonly=true');
 
+    $obj4=array('codcon'=> 7, 'nomcon' => 8);
+    $col61 = new Columna('Concepto Bono Adicional');
+    $col61->setTipo(Columna::TEXTO);
+    $col61->setAlineacionObjeto(Columna::CENTRO);
+    $col61->setAlineacionContenido(Columna::CENTRO);
+    $col61->setNombreCampo('codconadi');
+    $col61->setEsGrabable(true);
+    $col61->setCatalogo('Npdefcpt','sf_admin_edit_form',$obj4,'Npdefcpt_Vacdefgen',$params2);
+    $col61->setHTML('type="text" size="5"');
+    $col61->setAjax('vacdefgen',2,8);
 
-    $col7 = new Columna('Pago Anticipado');
+    $col62 = new Columna('Descripción');
+    $col62->setTipo(Columna::TEXTO);
+    $col62->setAlineacionObjeto(Columna::CENTRO);
+    $col62->setAlineacionContenido(Columna::CENTRO);
+    $col62->setNombreCampo('nomcon3');
+    $col62->setEsGrabable(true);
+    $col62->setHTML('type="text" size="20" readonly=true');
+
+
+    $col7 = new Columna('Vacaciones Anticipadas');
     $col7->setTipo(Columna::COMBO);
     $col7->setEsGrabable(true);
     $col7->setNombreCampo('pagoad');
     $col7->setCombo(Constantes::PagoDoble());
     $col7->setHTML('');
+
+    $col8 = new Columna('Pago de Vacaciones Anticipado');
+    $col8->setTipo(Columna::COMBO);
+    $col8->setEsGrabable(true);
+    $col8->setNombreCampo('vacant');
+    $col8->setCombo(Constantes::PagoDoble());
+    $col8->setHTML('');
 
 
     $opciones->addColumna($col1);
@@ -184,11 +212,12 @@ private static $coderror=-1;
     $opciones->addColumna($col4);
     $opciones->addColumna($col5);
     $opciones->addColumna($col6);
+    $opciones->addColumna($col61);
+    $opciones->addColumna($col62);
     $opciones->addColumna($col7);
+    $opciones->addColumna($col8);
 
     $this->obj = $opciones->getConfig($per);
-
-
 
   }
 

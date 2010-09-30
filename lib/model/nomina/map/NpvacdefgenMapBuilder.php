@@ -4,25 +4,25 @@
 
 class NpvacdefgenMapBuilder {
 
-	
+
 	const CLASS_NAME = 'lib.model.nomina.map.NpvacdefgenMapBuilder';
 
-	
+
 	private $dbMap;
 
-	
+
 	public function isBuilt()
 	{
 		return ($this->dbMap !== null);
 	}
 
-	
+
 	public function getDatabaseMap()
 	{
 		return $this->dbMap;
 	}
 
-	
+
 	public function doBuild()
 	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
@@ -38,6 +38,8 @@ class NpvacdefgenMapBuilder {
 
 		$tMap->addColumn('CODCONVAC', 'Codconvac', 'string', CreoleTypes::VARCHAR, false, 3);
 
+		$tMap->addColumn('CODCONADI', 'Codconadi', 'string', CreoleTypes::VARCHAR, false, 3);
+
 		$tMap->addColumn('PAGOAD', 'Pagoad', 'string', CreoleTypes::VARCHAR, false, 1);
 
 		$tMap->addColumn('CODCONCOM', 'Codconcom', 'string', CreoleTypes::VARCHAR, false, 3);
@@ -48,5 +50,5 @@ class NpvacdefgenMapBuilder {
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
-	} 
-} 
+	}
+}

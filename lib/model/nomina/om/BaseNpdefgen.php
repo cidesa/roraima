@@ -4,159 +4,163 @@
 abstract class BaseNpdefgen extends BaseObject  implements Persistent {
 
 
-	
+
 	protected static $peer;
 
 
-	
+
 	protected $codemp;
 
 
-	
+
 	protected $loncodcar;
 
 
-	
+
 	protected $loncodemp;
 
 
-	
+
 	protected $loncodorg;
 
 
-	
+
 	protected $loncoduni;
 
 
-	
+
 	protected $rupcar;
 
 
-	
+
 	protected $rupemp;
 
 
-	
+
 	protected $ruporg;
 
 
-	
+
 	protected $rupuni;
 
 
-	
+
 	protected $forcar;
 
 
-	
+
 	protected $foremp;
 
 
-	
+
 	protected $fororg;
 
 
-	
+
 	protected $foruni;
 
 
-	
+
 	protected $redmon;
 
 
-	
+
 	protected $codpre;
 
 
-	
+
 	protected $codvac;
 
 
-	
+
 	protected $codvacfra;
 
 
-	
+
 	protected $codvaccol;
 
 
-	
+
 	protected $codislr;
 
 
-	
+
 	protected $codpres;
 
 
-	
+
 	protected $codsso;
 
 
-	
+
 	protected $sueint;
 
 
-	
+
 	protected $asiconnom = 'S';
 
 
-	
+
 	protected $cierac = '';
 
 
-	
+
 	protected $foresc;
 
 
-	
+
 	protected $numrec;
 
 
-	
+
 	protected $forcarrac;
 
 
-	
+
 	protected $forcarocp;
 
 
-	
+
 	protected $correl;
 
 
-	
+
 	protected $porctick;
 
 
-	
+
 	protected $unitrib;
 
 
-	
+
 	protected $numtick;
 
 
-	
+
 	protected $diasem;
 
 
-	
+
+	protected $calesppres;
+
+
+
 	protected $id;
 
-	
+
 	protected $alreadyInSave = false;
 
-	
+
 	protected $alreadyInValidation = false;
 
-  
+
   public function getCodemp()
   {
 
     return trim($this->codemp);
 
   }
-  
+
   public function getLoncodcar($val=false)
   {
 
@@ -164,7 +168,7 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
     else return $this->loncodcar;
 
   }
-  
+
   public function getLoncodemp($val=false)
   {
 
@@ -172,7 +176,7 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
     else return $this->loncodemp;
 
   }
-  
+
   public function getLoncodorg($val=false)
   {
 
@@ -180,7 +184,7 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
     else return $this->loncodorg;
 
   }
-  
+
   public function getLoncoduni($val=false)
   {
 
@@ -188,7 +192,7 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
     else return $this->loncoduni;
 
   }
-  
+
   public function getRupcar($val=false)
   {
 
@@ -196,7 +200,7 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
     else return $this->rupcar;
 
   }
-  
+
   public function getRupemp($val=false)
   {
 
@@ -204,7 +208,7 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
     else return $this->rupemp;
 
   }
-  
+
   public function getRuporg($val=false)
   {
 
@@ -212,7 +216,7 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
     else return $this->ruporg;
 
   }
-  
+
   public function getRupuni($val=false)
   {
 
@@ -220,119 +224,119 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
     else return $this->rupuni;
 
   }
-  
+
   public function getForcar()
   {
 
     return trim($this->forcar);
 
   }
-  
+
   public function getForemp()
   {
 
     return trim($this->foremp);
 
   }
-  
+
   public function getFororg()
   {
 
     return trim($this->fororg);
 
   }
-  
+
   public function getForuni()
   {
 
     return trim($this->foruni);
 
   }
-  
+
   public function getRedmon()
   {
 
     return trim($this->redmon);
 
   }
-  
+
   public function getCodpre()
   {
 
     return trim($this->codpre);
 
   }
-  
+
   public function getCodvac()
   {
 
     return trim($this->codvac);
 
   }
-  
+
   public function getCodvacfra()
   {
 
     return trim($this->codvacfra);
 
   }
-  
+
   public function getCodvaccol()
   {
 
     return trim($this->codvaccol);
 
   }
-  
+
   public function getCodislr()
   {
 
     return trim($this->codislr);
 
   }
-  
+
   public function getCodpres()
   {
 
     return trim($this->codpres);
 
   }
-  
+
   public function getCodsso()
   {
 
     return trim($this->codsso);
 
   }
-  
+
   public function getSueint()
   {
 
     return trim($this->sueint);
 
   }
-  
+
   public function getAsiconnom()
   {
 
     return trim($this->asiconnom);
 
   }
-  
+
   public function getCierac()
   {
 
     return trim($this->cierac);
 
   }
-  
+
   public function getForesc()
   {
 
     return trim($this->foresc);
 
   }
-  
+
   public function getNumrec($val=false)
   {
 
@@ -340,21 +344,21 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
     else return $this->numrec;
 
   }
-  
+
   public function getForcarrac()
   {
 
     return trim($this->forcarrac);
 
   }
-  
+
   public function getForcarocp()
   {
 
     return trim($this->forcarocp);
 
   }
-  
+
   public function getCorrel($val=false)
   {
 
@@ -362,7 +366,7 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
     else return $this->correl;
 
   }
-  
+
   public function getPorctick($val=false)
   {
 
@@ -370,7 +374,7 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
     else return $this->porctick;
 
   }
-  
+
   public function getUnitrib($val=false)
   {
 
@@ -378,7 +382,7 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
     else return $this->unitrib;
 
   }
-  
+
   public function getNumtick($val=false)
   {
 
@@ -386,7 +390,7 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
     else return $this->numtick;
 
   }
-  
+
   public function getDiasem($val=false)
   {
 
@@ -394,14 +398,21 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
     else return $this->diasem;
 
   }
-  
+
+  public function getCalesppres()
+  {
+
+    return trim($this->calesppres);
+
+  }
+
   public function getId()
   {
 
     return $this->id;
 
   }
-	
+
 	public function setCodemp($v)
 	{
 
@@ -409,9 +420,9 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
         $this->codemp = $v;
         $this->modifiedColumns[] = NpdefgenPeer::CODEMP;
       }
-  
-	} 
-	
+
+	}
+
 	public function setLoncodcar($v)
 	{
 
@@ -419,9 +430,9 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
         $this->loncodcar = Herramientas::toFloat($v);
         $this->modifiedColumns[] = NpdefgenPeer::LONCODCAR;
       }
-  
-	} 
-	
+
+	}
+
 	public function setLoncodemp($v)
 	{
 
@@ -429,9 +440,9 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
         $this->loncodemp = Herramientas::toFloat($v);
         $this->modifiedColumns[] = NpdefgenPeer::LONCODEMP;
       }
-  
-	} 
-	
+
+	}
+
 	public function setLoncodorg($v)
 	{
 
@@ -439,9 +450,9 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
         $this->loncodorg = Herramientas::toFloat($v);
         $this->modifiedColumns[] = NpdefgenPeer::LONCODORG;
       }
-  
-	} 
-	
+
+	}
+
 	public function setLoncoduni($v)
 	{
 
@@ -449,9 +460,9 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
         $this->loncoduni = Herramientas::toFloat($v);
         $this->modifiedColumns[] = NpdefgenPeer::LONCODUNI;
       }
-  
-	} 
-	
+
+	}
+
 	public function setRupcar($v)
 	{
 
@@ -459,9 +470,9 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
         $this->rupcar = Herramientas::toFloat($v);
         $this->modifiedColumns[] = NpdefgenPeer::RUPCAR;
       }
-  
-	} 
-	
+
+	}
+
 	public function setRupemp($v)
 	{
 
@@ -469,9 +480,9 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
         $this->rupemp = Herramientas::toFloat($v);
         $this->modifiedColumns[] = NpdefgenPeer::RUPEMP;
       }
-  
-	} 
-	
+
+	}
+
 	public function setRuporg($v)
 	{
 
@@ -479,9 +490,9 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
         $this->ruporg = Herramientas::toFloat($v);
         $this->modifiedColumns[] = NpdefgenPeer::RUPORG;
       }
-  
-	} 
-	
+
+	}
+
 	public function setRupuni($v)
 	{
 
@@ -489,9 +500,9 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
         $this->rupuni = Herramientas::toFloat($v);
         $this->modifiedColumns[] = NpdefgenPeer::RUPUNI;
       }
-  
-	} 
-	
+
+	}
+
 	public function setForcar($v)
 	{
 
@@ -499,9 +510,9 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
         $this->forcar = $v;
         $this->modifiedColumns[] = NpdefgenPeer::FORCAR;
       }
-  
-	} 
-	
+
+	}
+
 	public function setForemp($v)
 	{
 
@@ -509,9 +520,9 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
         $this->foremp = $v;
         $this->modifiedColumns[] = NpdefgenPeer::FOREMP;
       }
-  
-	} 
-	
+
+	}
+
 	public function setFororg($v)
 	{
 
@@ -519,9 +530,9 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
         $this->fororg = $v;
         $this->modifiedColumns[] = NpdefgenPeer::FORORG;
       }
-  
-	} 
-	
+
+	}
+
 	public function setForuni($v)
 	{
 
@@ -529,9 +540,9 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
         $this->foruni = $v;
         $this->modifiedColumns[] = NpdefgenPeer::FORUNI;
       }
-  
-	} 
-	
+
+	}
+
 	public function setRedmon($v)
 	{
 
@@ -539,9 +550,9 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
         $this->redmon = $v;
         $this->modifiedColumns[] = NpdefgenPeer::REDMON;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCodpre($v)
 	{
 
@@ -549,9 +560,9 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
         $this->codpre = $v;
         $this->modifiedColumns[] = NpdefgenPeer::CODPRE;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCodvac($v)
 	{
 
@@ -559,9 +570,9 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
         $this->codvac = $v;
         $this->modifiedColumns[] = NpdefgenPeer::CODVAC;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCodvacfra($v)
 	{
 
@@ -569,9 +580,9 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
         $this->codvacfra = $v;
         $this->modifiedColumns[] = NpdefgenPeer::CODVACFRA;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCodvaccol($v)
 	{
 
@@ -579,9 +590,9 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
         $this->codvaccol = $v;
         $this->modifiedColumns[] = NpdefgenPeer::CODVACCOL;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCodislr($v)
 	{
 
@@ -589,9 +600,9 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
         $this->codislr = $v;
         $this->modifiedColumns[] = NpdefgenPeer::CODISLR;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCodpres($v)
 	{
 
@@ -599,9 +610,9 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
         $this->codpres = $v;
         $this->modifiedColumns[] = NpdefgenPeer::CODPRES;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCodsso($v)
 	{
 
@@ -609,9 +620,9 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
         $this->codsso = $v;
         $this->modifiedColumns[] = NpdefgenPeer::CODSSO;
       }
-  
-	} 
-	
+
+	}
+
 	public function setSueint($v)
 	{
 
@@ -619,9 +630,9 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
         $this->sueint = $v;
         $this->modifiedColumns[] = NpdefgenPeer::SUEINT;
       }
-  
-	} 
-	
+
+	}
+
 	public function setAsiconnom($v)
 	{
 
@@ -629,9 +640,9 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
         $this->asiconnom = $v;
         $this->modifiedColumns[] = NpdefgenPeer::ASICONNOM;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCierac($v)
 	{
 
@@ -639,9 +650,9 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
         $this->cierac = $v;
         $this->modifiedColumns[] = NpdefgenPeer::CIERAC;
       }
-  
-	} 
-	
+
+	}
+
 	public function setForesc($v)
 	{
 
@@ -649,9 +660,9 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
         $this->foresc = $v;
         $this->modifiedColumns[] = NpdefgenPeer::FORESC;
       }
-  
-	} 
-	
+
+	}
+
 	public function setNumrec($v)
 	{
 
@@ -659,9 +670,9 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
         $this->numrec = Herramientas::toFloat($v);
         $this->modifiedColumns[] = NpdefgenPeer::NUMREC;
       }
-  
-	} 
-	
+
+	}
+
 	public function setForcarrac($v)
 	{
 
@@ -669,9 +680,9 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
         $this->forcarrac = $v;
         $this->modifiedColumns[] = NpdefgenPeer::FORCARRAC;
       }
-  
-	} 
-	
+
+	}
+
 	public function setForcarocp($v)
 	{
 
@@ -679,9 +690,9 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
         $this->forcarocp = $v;
         $this->modifiedColumns[] = NpdefgenPeer::FORCAROCP;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCorrel($v)
 	{
 
@@ -689,9 +700,9 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
         $this->correl = Herramientas::toFloat($v);
         $this->modifiedColumns[] = NpdefgenPeer::CORREL;
       }
-  
-	} 
-	
+
+	}
+
 	public function setPorctick($v)
 	{
 
@@ -699,9 +710,9 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
         $this->porctick = Herramientas::toFloat($v);
         $this->modifiedColumns[] = NpdefgenPeer::PORCTICK;
       }
-  
-	} 
-	
+
+	}
+
 	public function setUnitrib($v)
 	{
 
@@ -709,9 +720,9 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
         $this->unitrib = Herramientas::toFloat($v);
         $this->modifiedColumns[] = NpdefgenPeer::UNITRIB;
       }
-  
-	} 
-	
+
+	}
+
 	public function setNumtick($v)
 	{
 
@@ -719,9 +730,9 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
         $this->numtick = Herramientas::toFloat($v);
         $this->modifiedColumns[] = NpdefgenPeer::NUMTICK;
       }
-  
-	} 
-	
+
+	}
+
 	public function setDiasem($v)
 	{
 
@@ -729,9 +740,19 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
         $this->diasem = Herramientas::toFloat($v);
         $this->modifiedColumns[] = NpdefgenPeer::DIASEM;
       }
-  
-	} 
-	
+
+	}
+
+	public function setCalesppres($v)
+	{
+
+    if ($this->calesppres !== $v) {
+        $this->calesppres = $v;
+        $this->modifiedColumns[] = NpdefgenPeer::CALESPPRES;
+      }
+
+	}
+
 	public function setId($v)
 	{
 
@@ -739,9 +760,9 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
         $this->id = $v;
         $this->modifiedColumns[] = NpdefgenPeer::ID;
       }
-  
-	} 
-  
+
+	}
+
   public function hydrate(ResultSet $rs, $startcol = 1)
   {
     try {
@@ -812,7 +833,9 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
 
       $this->diasem = $rs->getFloat($startcol + 32);
 
-      $this->id = $rs->getInt($startcol + 33);
+      $this->calesppres = $rs->getString($startcol + 33);
+
+      $this->id = $rs->getInt($startcol + 34);
 
       $this->resetModified();
 
@@ -820,7 +843,7 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 34; 
+            return $startcol + 35;
     } catch (Exception $e) {
       throw new PropelException("Error populating Npdefgen object", $e);
     }
@@ -831,8 +854,8 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
   {
 
   }
-    
-  
+
+
   public function __call($m, $a)
     {
       $prefijo = substr($m,0,3);
@@ -846,7 +869,7 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
 
     }
 
-	
+
 	public function delete($con = null)
 	{
 		if ($this->isDeleted()) {
@@ -868,7 +891,7 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	public function save($con = null)
 	{
 		if ($this->isDeleted()) {
@@ -890,7 +913,7 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	protected function doSave($con)
 	{
 		$affectedRows = 0; 		if (!$this->alreadyInSave) {
@@ -900,8 +923,8 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
 						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = NpdefgenPeer::doInsert($this, $con);
-					$affectedRows += 1; 										 										 
-					$this->setId($pk);  
+					$affectedRows += 1;
+					$this->setId($pk);
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpdefgenPeer::doUpdate($this, $con);
@@ -911,17 +934,17 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
-	} 
-	
+	}
+
 	protected $validationFailures = array();
 
-	
+
 	public function getValidationFailures()
 	{
 		return $this->validationFailures;
 	}
 
-	
+
 	public function validate($columns = null)
 	{
 		$res = $this->doValidate($columns);
@@ -934,7 +957,7 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	protected function doValidate($columns = null)
 	{
 		if (!$this->alreadyInValidation) {
@@ -956,14 +979,14 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
 		return (!empty($failureMap) ? $failureMap : true);
 	}
 
-	
+
 	public function getByName($name, $type = BasePeer::TYPE_PHPNAME)
 	{
 		$pos = NpdefgenPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->getByPosition($pos);
 	}
 
-	
+
 	public function getByPosition($pos)
 	{
 		switch($pos) {
@@ -1067,6 +1090,9 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
 				return $this->getDiasem();
 				break;
 			case 33:
+				return $this->getCalesppres();
+				break;
+			case 34:
 				return $this->getId();
 				break;
 			default:
@@ -1074,7 +1100,7 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
 				break;
 		} 	}
 
-	
+
 	public function toArray($keyType = BasePeer::TYPE_PHPNAME)
 	{
 		$keys = NpdefgenPeer::getFieldNames($keyType);
@@ -1112,19 +1138,20 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
 			$keys[30] => $this->getUnitrib(),
 			$keys[31] => $this->getNumtick(),
 			$keys[32] => $this->getDiasem(),
-			$keys[33] => $this->getId(),
+			$keys[33] => $this->getCalesppres(),
+			$keys[34] => $this->getId(),
 		);
 		return $result;
 	}
 
-	
+
 	public function setByName($name, $value, $type = BasePeer::TYPE_PHPNAME)
 	{
 		$pos = NpdefgenPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->setByPosition($pos, $value);
 	}
 
-	
+
 	public function setByPosition($pos, $value)
 	{
 		switch($pos) {
@@ -1228,11 +1255,14 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
 				$this->setDiasem($value);
 				break;
 			case 33:
+				$this->setCalesppres($value);
+				break;
+			case 34:
 				$this->setId($value);
 				break;
 		} 	}
 
-	
+
 	public function fromArray($arr, $keyType = BasePeer::TYPE_PHPNAME)
 	{
 		$keys = NpdefgenPeer::getFieldNames($keyType);
@@ -1270,10 +1300,11 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[30], $arr)) $this->setUnitrib($arr[$keys[30]]);
 		if (array_key_exists($keys[31], $arr)) $this->setNumtick($arr[$keys[31]]);
 		if (array_key_exists($keys[32], $arr)) $this->setDiasem($arr[$keys[32]]);
-		if (array_key_exists($keys[33], $arr)) $this->setId($arr[$keys[33]]);
+		if (array_key_exists($keys[33], $arr)) $this->setCalesppres($arr[$keys[33]]);
+		if (array_key_exists($keys[34], $arr)) $this->setId($arr[$keys[34]]);
 	}
 
-	
+
 	public function buildCriteria()
 	{
 		$criteria = new Criteria(NpdefgenPeer::DATABASE_NAME);
@@ -1311,12 +1342,13 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(NpdefgenPeer::UNITRIB)) $criteria->add(NpdefgenPeer::UNITRIB, $this->unitrib);
 		if ($this->isColumnModified(NpdefgenPeer::NUMTICK)) $criteria->add(NpdefgenPeer::NUMTICK, $this->numtick);
 		if ($this->isColumnModified(NpdefgenPeer::DIASEM)) $criteria->add(NpdefgenPeer::DIASEM, $this->diasem);
+		if ($this->isColumnModified(NpdefgenPeer::CALESPPRES)) $criteria->add(NpdefgenPeer::CALESPPRES, $this->calesppres);
 		if ($this->isColumnModified(NpdefgenPeer::ID)) $criteria->add(NpdefgenPeer::ID, $this->id);
 
 		return $criteria;
 	}
 
-	
+
 	public function buildPkeyCriteria()
 	{
 		$criteria = new Criteria(NpdefgenPeer::DATABASE_NAME);
@@ -1326,19 +1358,19 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
 		return $criteria;
 	}
 
-	
+
 	public function getPrimaryKey()
 	{
 		return $this->getId();
 	}
 
-	
+
 	public function setPrimaryKey($key)
 	{
 		$this->setId($key);
 	}
 
-	
+
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
@@ -1408,13 +1440,15 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
 
 		$copyObj->setDiasem($this->diasem);
 
+		$copyObj->setCalesppres($this->calesppres);
+
 
 		$copyObj->setNew(true);
 
-		$copyObj->setId(NULL); 
+		$copyObj->setId(NULL);
 	}
 
-	
+
 	public function copy($deepCopy = false)
 	{
 				$clazz = get_class($this);
@@ -1423,7 +1457,7 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
 		return $copyObj;
 	}
 
-	
+
 	public function getPeer()
 	{
 		if (self::$peer === null) {
@@ -1432,4 +1466,4 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
 		return self::$peer;
 	}
 
-} 
+}
