@@ -1066,19 +1066,33 @@ SELECT A.CODEMP::VARCHAR,A.NOMEMP::VARCHAR,
 A.CODTIPCON::VARCHAR,A.FECING::DATE,A.FECINI::DATE,A.FECFIN::DATE,A.FECINIREAL::DATE,A.FECFINREAL::DATE,
 A.MONTO::NUMERIC,A.MONDIA::NUMERIC,A.ALIUTI::NUMERIC,A.ALIVAC::NUMERIC,A.ALIADI::NUMERIC,
 (CASE WHEN A.DIAS<>5 THEN
-   (SELECT ROUND(AVG(MONDIA),2) FROM NPPRESTACIONES
-   WHERE CODEMP='''||codigo||'''
-   AND ID<=A.ID
-   AND ID>=A.ID-11)
+   (CASE WHEN COALESCE(B.CALESPPRES,''N'')=''N'' THEN
+      (SELECT ROUND(AVG(MONDIA),2) FROM NPPRESTACIONES
+       WHERE CODEMP='''||codigo||'''
+       AND ID<=A.ID
+       AND ID>=A.ID-11)
+    ELSE
+      (SELECT ROUND(AVG(SALNOR+BONOUTI+BONOVAC+BONOADI)/30,2) FROM NPPRESTACIONES
+       WHERE CODEMP='''||codigo||'''
+       AND ID<=A.ID
+       AND ID>=A.ID-11)
+    END)
 ELSE
    0
 END)::NUMERIC AS MONDIAPRO,
 A.DIAS::INTEGER,A.MONPRES+((CASE WHEN A.DIAS<>5 THEN
                      (CASE WHEN '''||salpro||'''=''P'' THEN
-                  	(SELECT ROUND(AVG(MONDIA),2) FROM NPPRESTACIONES
-                   	WHERE CODEMP='''||codigo||'''
-                   	AND ID<=A.ID
-                   	AND ID>=A.ID-11)
+                  	(CASE WHEN COALESCE(B.CALESPPRES,''N'')=''N'' THEN
+			      (SELECT ROUND(AVG(MONDIA),2) FROM NPPRESTACIONES
+			       WHERE CODEMP='''||codigo||'''
+			       AND ID<=A.ID
+			       AND ID>=A.ID-11)
+			 ELSE
+			      (SELECT ROUND(AVG(SALNOR+BONOUTI+BONOVAC+BONOADI)/30,2) FROM NPPRESTACIONES
+			       WHERE CODEMP='''||codigo||'''
+			       AND ID<=A.ID
+			       AND ID>=A.ID-11)
+			 END)
                      ELSE
                         A.MONDIA
                      END)
@@ -1094,7 +1108,7 @@ A.ID::INTEGER,''DEPOSITADOS''::VARCHAR AS TIPO,0::NUMERIC AS CAPITAL,
  WHERE CODEMP='''||codigo||'''
  AND TO_CHAR(FECADE,''MM/YYYY'')=TO_CHAR(A.FECFIN,''MM/YYYY''))::NUMERIC AS MONADEINT,A.ANNOANTIG::NUMERIC AS ANTANNOS,
 A.MESANTIG::NUMERIC AS ANTMESES,A.DIAANTIG::NUMERIC AS ANTDIAS
-FROM NPPRESTACIONES A
+FROM NPPRESTACIONES A,NPDEFGEN B
 where A.CODEMP='''||codigo||'''
 AND A.FECFIN <= TO_DATE('''||fechareal||''',''DD/MM/YYYY'')
 UNION ALL
@@ -1258,17 +1272,31 @@ UNION ALL
 SELECT A.CODEMP::VARCHAR,A.NOMEMP::VARCHAR,A.CODTIPCON::VARCHAR,
 A.FECING::DATE,A.FECINI::DATE,A.FECFIN::DATE,A.FECINIREAL::DATE,A.FECFINREAL::DATE,
 A.MONTO::NUMERIC,A.MONDIA::NUMERIC,A.ALIUTI::NUMERIC,A.ALIVAC::NUMERIC,A.ALIADI::NUMERIC,
-COALESCE((SELECT ROUND(AVG(MONDIA),2) FROM NPPRESTACIONES
- WHERE CODEMP='''||codigo||'''
- AND FECINI > (CASE WHEN TO_DATE(TO_CHAR(FECING,''DD/MM/'')||
-                                  SUBSTR('''||fechareal||''',7),''DD/MM/YYYY'')<=
-                          TO_DATE('''||fechareal||''',''DD/MM/YYYY'')
-                THEN TO_DATE(TO_CHAR(FECING,''DD/MM/'')||
-                             SUBSTR('''||fechareal||''',7),''DD/MM/YYYY'')
-                ELSE TO_DATE(TO_CHAR(FECING,''DD/MM/'')||
-                             TO_CHAR(TO_NUMBER(SUBSTR('''||fechareal||''',7),''9999'')-1,''9999''),''DD/MM/YYYY'')
-                END)
-AND FECFIN <= TO_DATE('''||fechareal||''',''DD/MM/YYYY'')),0)::NUMERIC AS MONDIAPRO,
+(CASE WHEN COALESCE(B.CALESPPRES,''N'')=''N'' THEN
+	COALESCE((SELECT ROUND(AVG(MONDIA),2) FROM NPPRESTACIONES
+		  WHERE CODEMP='''||codigo||'''
+		  AND FECINI > (CASE WHEN TO_DATE(TO_CHAR(FECING,''DD/MM/'')||
+		                          SUBSTR('''||fechareal||''',7),''DD/MM/YYYY'')<=
+		                          TO_DATE('''||fechareal||''',''DD/MM/YYYY'')
+		                THEN TO_DATE(TO_CHAR(FECING,''DD/MM/'')||
+		                     SUBSTR('''||fechareal||''',7),''DD/MM/YYYY'')
+		                ELSE TO_DATE(TO_CHAR(FECING,''DD/MM/'')||
+		                     TO_CHAR(TO_NUMBER(SUBSTR('''||fechareal||''',7),''9999'')-1,''9999''),''DD/MM/YYYY'')
+		                END)
+		  AND FECFIN <= TO_DATE('''||fechareal||''',''DD/MM/YYYY'')),0)
+ ELSE
+       COALESCE((SELECT ROUND(AVG(SALNOR+BONOUTI+BONOVAC+BONOADI)/30,2) FROM NPPRESTACIONES
+		  WHERE CODEMP='''||codigo||'''
+		  AND FECINI > (CASE WHEN TO_DATE(TO_CHAR(FECING,''DD/MM/'')||
+		                          SUBSTR('''||fechareal||''',7),''DD/MM/YYYY'')<=
+		                          TO_DATE('''||fechareal||''',''DD/MM/YYYY'')
+		                THEN TO_DATE(TO_CHAR(FECING,''DD/MM/'')||
+		                     SUBSTR('''||fechareal||''',7),''DD/MM/YYYY'')
+		                ELSE TO_DATE(TO_CHAR(FECING,''DD/MM/'')||
+		                     TO_CHAR(TO_NUMBER(SUBSTR('''||fechareal||''',7),''9999'')-1,''9999''),''DD/MM/YYYY'')
+		                END)
+		  AND FECFIN <= TO_DATE('''||fechareal||''',''DD/MM/YYYY'')),0)
+ END)::NUMERIC AS MONDIAPRO,
 (CASE WHEN (A.ANNOANTIGTOT>=1 AND A.MESANTIGTOT=6 AND A.DIAANTIGTOT>0) OR
            (A.ANNOANTIGTOT>=1 AND A.MESANTIGTOT>6) THEN
      A.ANNOANTIGTOT*2
@@ -1276,17 +1304,31 @@ AND FECFIN <= TO_DATE('''||fechareal||''',''DD/MM/YYYY'')),0)::NUMERIC AS MONDIA
     0
  END)::INTEGER AS DIAS,
 COALESCE((CASE WHEN '''||salpro||'''=''P'' THEN
-	(SELECT ROUND(AVG(MONDIA),2) FROM NPPRESTACIONES
- 	WHERE CODEMP='''||codigo||'''
- 	AND FECINI > (CASE WHEN TO_DATE(TO_CHAR(FECING,''DD/MM/'')||
-                                  	SUBSTR('''||fechareal||''',7),''DD/MM/YYYY'')<=
-                          	TO_DATE('''||fechareal||''',''DD/MM/YYYY'')
-                	THEN TO_DATE(TO_CHAR(FECING,''DD/MM/'')||
-                             	SUBSTR('''||fechareal||''',7),''DD/MM/YYYY'')
-                	ELSE TO_DATE(TO_CHAR(FECING,''DD/MM/'')||
-                             	TO_CHAR(TO_NUMBER(SUBSTR('''||fechareal||''',7),''9999'')-1,''9999''),''DD/MM/YYYY'')
-                	END)
-	AND FECFIN <= TO_DATE('''||fechareal||''',''DD/MM/YYYY''))
+	(CASE WHEN COALESCE(B.CALESPPRES,''N'')=''N'' THEN
+		COALESCE((SELECT ROUND(AVG(MONDIA),2) FROM NPPRESTACIONES
+			  WHERE CODEMP='''||codigo||'''
+			  AND FECINI > (CASE WHEN TO_DATE(TO_CHAR(FECING,''DD/MM/'')||
+				                  SUBSTR('''||fechareal||''',7),''DD/MM/YYYY'')<=
+				                  TO_DATE('''||fechareal||''',''DD/MM/YYYY'')
+				        THEN TO_DATE(TO_CHAR(FECING,''DD/MM/'')||
+				             SUBSTR('''||fechareal||''',7),''DD/MM/YYYY'')
+				        ELSE TO_DATE(TO_CHAR(FECING,''DD/MM/'')||
+				             TO_CHAR(TO_NUMBER(SUBSTR('''||fechareal||''',7),''9999'')-1,''9999''),''DD/MM/YYYY'')
+				        END)
+			  AND FECFIN <= TO_DATE('''||fechareal||''',''DD/MM/YYYY'')),0)
+	 ELSE
+	       COALESCE((SELECT ROUND(AVG(SALNOR+BONOUTI+BONOVAC+BONOADI)/30,2) FROM NPPRESTACIONES
+			  WHERE CODEMP='''||codigo||'''
+			  AND FECINI > (CASE WHEN TO_DATE(TO_CHAR(FECING,''DD/MM/'')||
+				                  SUBSTR('''||fechareal||''',7),''DD/MM/YYYY'')<=
+				                  TO_DATE('''||fechareal||''',''DD/MM/YYYY'')
+				        THEN TO_DATE(TO_CHAR(FECING,''DD/MM/'')||
+				             SUBSTR('''||fechareal||''',7),''DD/MM/YYYY'')
+				        ELSE TO_DATE(TO_CHAR(FECING,''DD/MM/'')||
+				             TO_CHAR(TO_NUMBER(SUBSTR('''||fechareal||''',7),''9999'')-1,''9999''),''DD/MM/YYYY'')
+				        END)
+			  AND FECFIN <= TO_DATE('''||fechareal||''',''DD/MM/YYYY'')),0)
+	 END)
 ELSE A.MONDIA END) *
 (CASE WHEN (A.ANNOANTIGTOT>=1 AND A.MESANTIGTOT=6 AND A.DIAANTIGTOT>0) OR
            (A.ANNOANTIGTOT>=1 AND A.MESANTIGTOT>6) THEN
@@ -1300,7 +1342,7 @@ A.ID+2::INTEGER AS ID,''AJUSTE DIAS ADICIONALES NO DEPOSITADOS''::VARCHAR AS TIP
 0::NUMERIC AS TASA,0::NUMERIC AS MONINT,0::NUMERIC AS INTACU,
 0::NUMERIC AS MONADEINT,A.ANNOANTIGTOT::NUMERIC AS ANTANNOS,
 A.MESANTIGTOT::NUMERIC AS ANTMESES,A.DIAANTIGTOT::NUMERIC AS ANTDIAS
-FROM NPPRESTACIONES A
+FROM NPPRESTACIONES A,NPDEFGEN B
 where A.CODEMP='''||codigo||'''
 AND A.ID = (SELECT MAX(ID) FROM NPPRESTACIONES
           WHERE CODEMP='''||codigo||'''
