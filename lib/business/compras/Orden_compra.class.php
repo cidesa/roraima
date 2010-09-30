@@ -1408,6 +1408,52 @@ class Orden_compra
               	  $longitud='8';
               	  $nroorden=0;
               	  $formato='';
+                  $noformatcont="";
+                    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+                    if ($varemp)
+                    if(array_key_exists('generales',$varemp)) {
+                       if(array_key_exists('noformatcont',$varemp['generales']))
+                       {
+                        $noformatcont=$varemp['generales']['noformatcont'];
+                       }
+                 }
+
+                  if ($noformatcont=='S')
+                  {
+                    $encontrado=false;
+	            while (!$encontrado)
+	            {
+	              $numero=str_pad($r, 8, '0', STR_PAD_LEFT);
+	                  if (($caordcom->getTipord()=='S') || ($caordcom->getTipord()=='M') || ($caordcom->getTipord()=='T'))
+	                  $numero='OS'.(substr($numero,2,strlen($numero)));
+	                else
+	                    $numero='OC'.(substr($numero,2,strlen($numero)));
+	                $sql="select ordcom from caordcom where ordcom='".$numero."'";
+	                if (Herramientas::BuscarDatos($sql,&$result))
+	                {
+	                  $r=$r+1;
+	                }
+	                else
+	                {
+	                  $encontrado=true;
+	                }
+	            }//while (!$encontrado)
+                    $caordcom->setOrdcom(str_pad($r, 8, '0', STR_PAD_LEFT));
+                    Herramientas::getSalvarCorrelativo($tipord,'cacorrel','cacorrel',$r,&$msg);
+                
+
+                    if (($caordcom->getTipord()=='S') || ($caordcom->getTipord()=='M') || ($caordcom->getTipord()=='T'))
+                     {
+                       if ($prefijomixto!="" && $caordcom->getTipord()=='M')
+                          $caordcom->setOrdcom($prefijomixto.substr($caordcom->getOrdcom(), 2, 6));
+                       else $caordcom->setOrdcom('OS'.substr($caordcom->getOrdcom(), 2, 6));
+                     }
+                     else
+                     {
+                       $caordcom->setOrdcom('OC'.substr($caordcom->getOrdcom(), 2, 6));
+                     }
+                  }
+                  else {
 			      $c = new Criteria();
 			      $c->add(ContabaPeer::CODEMP,'001');
 			      $per = ContabaPeer::doSelectOne($c);
@@ -1488,6 +1534,7 @@ class Orden_compra
                 else {
                  $caordcom->setOrdcom('OC'.substr($caordcom->getOrdcom(), 2, 6)); }
               }
+                }
               }
               else
               {

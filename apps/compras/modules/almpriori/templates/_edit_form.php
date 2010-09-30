@@ -223,6 +223,20 @@
 </div>
 </fieldset>
 
+    <br>
+  <?php echo label_for('casolart[observaciones]', __($labels['casolart{observaciones}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('casolart{observaciones}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('casolart{observaciones}')): ?>
+    <?php echo form_error('casolart{observaciones}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_textarea_tag($casolart, 'getObservaciones', array (
+  'control_name' => 'casolart[observaciones]',
+  'maxlength' => 1000,
+  'size' => '90x5',
+  'onkeyup' => "javascript:return ismaxlength(this)",
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
 </div>
 </fieldset>
 

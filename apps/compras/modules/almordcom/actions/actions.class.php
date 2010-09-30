@@ -1791,6 +1791,7 @@ class almordcomActions extends autoalmordcomActions
     $this->oculeli="";
     $this->oculsave="";
     $this->fechaanuserv="";
+    $this->etiqtipord="Licitación";
     $varemp = $this->getUser()->getAttribute('configemp');
     if ($varemp)
 	if(array_key_exists('aplicacion',$varemp))
@@ -1825,6 +1826,10 @@ class almordcomActions extends autoalmordcomActions
 	       {
 	       	$this->fechaanuserv=$varemp['aplicacion']['compras']['modulos']['almordcom']['fechaanuserv'];
 	       }	       
+                if(array_key_exists('etiqtipord',$varemp['aplicacion']['compras']['modulos']['almordcom']))
+	       {
+	       	$this->etiqtipord=$varemp['aplicacion']['compras']['modulos']['almordcom']['etiqtipord'];
+	       }
          }
 
   }
