@@ -273,6 +273,10 @@ $this->Bitacora('Guardo');
     {
       $this->casolart->setPorprovee($casolart['porprovee']);
     }
+    if (isset($casolart['observaciones']))
+    {
+      $this->casolart->setObservaciones($casolart['observaciones']);
+    }
   }
 
   /**

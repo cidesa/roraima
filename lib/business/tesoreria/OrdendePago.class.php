@@ -35,6 +35,37 @@ class OrdendePago
       	  $longitud='8';
       	  $nroorden=0;
       	  $formato='';
+        $noformatcont="";
+        $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+        if ($varemp)
+        if(array_key_exists('generales',$varemp)) {
+           if(array_key_exists('noformatcont',$varemp['generales']))
+           {
+            $noformatcont=$varemp['generales']['noformatcont'];
+           }
+     }
+          if ($noformatcont=='S')
+          {
+	      	$tienecorrelativo=true;
+	        $encontrado=false;
+	        while (!$encontrado)
+	        {
+	          $numero=str_pad($r, 8, '0', STR_PAD_LEFT);
+
+	          $sql="select numord from opordpag where numord='".$numero."'";
+	          if (Herramientas::BuscarDatos($sql,&$result))
+	          {
+	            $r=$r+1;
+	          }
+	          else
+	          {
+	            $encontrado=true;
+	          }
+	        }
+
+	        $fondos->setNumord(str_pad($r, 8, '0', STR_PAD_LEFT));
+          }
+          else {
 	      $c = new Criteria();
 	      $c->add(ContabaPeer::CODEMP,'001');
 	      $per = ContabaPeer::doSelectOne($c);
@@ -103,6 +134,7 @@ class OrdendePago
 
 	        $fondos->setNumord(str_pad($r, 8, '0', STR_PAD_LEFT));
          }
+       }
       }
       else
       {
@@ -374,6 +406,35 @@ class OrdendePago
       	  $longitud='8';
       	  $nroorden=0;
       	  $formato='';
+          $noformatcont="";
+            $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+            if ($varemp)
+            if(array_key_exists('generales',$varemp)) {
+               if(array_key_exists('noformatcont',$varemp['generales']))
+               {
+                $noformatcont=$varemp['generales']['noformatcont'];
+               }
+         }
+          if ($noformatcont=='S')
+          {
+	      	$tienecorrelativo=true;
+	        $encontrado=false;
+	        while (!$encontrado)
+	        {
+	          $numero=str_pad($r, 8, '0', STR_PAD_LEFT);
+
+	          $sql="select numord from opordpag where numord='".$numero."'";
+	          if (Herramientas::BuscarDatos($sql,&$result))
+	          {
+	            $r=$r+1;
+	          }
+	          else
+	          {
+	            $encontrado=true;
+	          }
+	        }
+	        $orden->setNumord(str_pad($r, 8, '0', STR_PAD_LEFT));
+          }else {
 	      $c = new Criteria();
 	      $c->add(ContabaPeer::CODEMP,'001');
 	      $per = ContabaPeer::doSelectOne($c);
@@ -441,6 +502,7 @@ class OrdendePago
 	        }
 	        $orden->setNumord(str_pad($r, 8, '0', STR_PAD_LEFT));
         }
+      }
       }
       else
       {

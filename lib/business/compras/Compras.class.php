@@ -425,14 +425,14 @@ class Compras {
     $gridnuevorec = array ();
     if ($casolart->getPorcostart()=='1')
     {
-      self::asignarPrioridadCostArt($reqart);
+      self::asignarPrioridadCostArt($reqart,$casolart);
     }else if ($casolart->getPormoncot()=='1')
     {
-      self::asignarPrioridadMonCot($reqart);
+      self::asignarPrioridadMonCot($reqart,$casolart);
     }
     else if ($casolart->getPortimeent()=='1')
     {
-      self::asignarPrioridadTimEnt($reqart);
+      self::asignarPrioridadTimEnt($reqart,$casolart);
     }
     else if ($casolart->getPorprovee()=='1')
     {
@@ -449,7 +449,10 @@ class Compras {
 	      	{
 	      		$dat->setPriori($x[$j]->getPriori2());
 	      		$dat->setJustifica($x[$j]->getJustifica());
-                        $dat->setObservaciones($x[$j]->getObservaciones());
+                        if ($x[$j]->getPriori2()==1 && $casolart->getObservaciones()!="")
+                          $dat->setObservaciones($casolart->getObservaciones());
+                        else 
+                          $dat->setObservaciones($x[$j]->getObservaciones());
 	      		$dat->save();
 	      	}
 	      }
@@ -461,6 +464,8 @@ class Compras {
 	    $j = 0;
 	    while ($j < count($x)) {
               if ($x[$j]->getPriori()!='') {
+               if ($x[$j]->getPriori()==1 && $casolart->getObservaciones()!="")
+                  $x[$j]->setObservaciones($casolart->getObservaciones());
 	      $x[$j]->save();
               }
 	      $j++;
@@ -2423,7 +2428,7 @@ class Compras {
       return $tipdoc;
   }
 
-  public static function asignarPrioridadCostArt($reqart)
+  public static function asignarPrioridadCostArt($reqart,$casolart)
   {
      $sql="select a.refcot,a.codart,a.canord,a.costo,a.totdet,b.codpro,
         (case when a.costo>0 then a.costo else 1000000000000000000000000 end) as orden,
@@ -2463,6 +2468,8 @@ class Compras {
             if ($detcot)
             {
                 $detcot->setPriori($priori);
+                if ($priori==1 && $casolart->getObservaciones()!="")
+                  $detcot->setObservaciones($casolart->getObservaciones());
                 $detcot->save();
             }
             $codartori=$arr[$con]['codart'];
@@ -2471,7 +2478,7 @@ class Compras {
        }//if ($arr)
   }
 
-  public static function asignarPrioridadMonCot($reqart)
+  public static function asignarPrioridadMonCot($reqart,$casolart)
   {
       $c = new Criteria();
       $c->add(CacotizaPeer :: REFSOL, $reqart);
@@ -2491,6 +2498,8 @@ class Compras {
 	          foreach ($data as $obj)
 	          {
 	          	$obj->setPriori($priori);
+                        if ($priori==1 && $casolart->getObservaciones()!="")
+                           $obj->setObservaciones($casolart->getObservaciones());
 	          	$obj->setJustifica(null);
 	          	$obj->save();
 	          }
@@ -2802,7 +2811,7 @@ class Compras {
      return -1;
   }
 
-  public static function asignarPrioridadTimEnt($reqart)
+  public static function asignarPrioridadTimEnt($reqart,$casolart)
   {
       $c = new Criteria();
       $c->add(CacotizaPeer :: REFSOL, $reqart);
@@ -2827,6 +2836,8 @@ class Compras {
              $priori=1;
             }
 		  	$datos->setPriori($priori);
+                        if ($priori==1 && $casolart->getObservaciones()!="")
+                          $datos->setObservaciones($casolart->getObservaciones());
 		  	$datos->setJustifica(null);
 		  	$datos->save();
 

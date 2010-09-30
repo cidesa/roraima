@@ -29,6 +29,7 @@ class Casolart extends BaseCasolart
   protected $nometifor="";
   protected $portimeent='';
   protected $porprovee="";
+  protected $observaciones="";
 
   public function getMonreq($val=false)
   {

@@ -290,7 +290,7 @@ else
 }
 
 ?> <?php echo __(" Adjudicación Directa ").radiobutton_tag('caordcom[tipo]', 'A', $v1) ?>&nbsp;
-<?php echo __(" Licitación ").radiobutton_tag('caordcom[tipo]', 'L', $v2) ?>&nbsp;
+<?php echo __(" $etiqtipord ").radiobutton_tag('caordcom[tipo]', 'L', $v2) ?>&nbsp;
 <?php echo __(" Compra ").radiobutton_tag('caordcom[tipo]', 'C', $v3) ?>&nbsp;
 <?php echo __(" Compra Eventual ").radiobutton_tag('caordcom[tipo]', 'E', $v4) ?>
 <?php echo __(" Contratación ").radiobutton_tag('caordcom[tipo]', 'T', $v5) ?>

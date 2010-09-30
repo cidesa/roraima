@@ -128,16 +128,16 @@ if ($caprovee->getNitpro()=='J')  {
     <div class="form-row"  align="left">
     <?  if ($caprovee->getNacpro()=='N'){
 
-        echo radiobutton_tag('caprovee[nacpro]','N', true) .'&nbsp;&nbsp;'. "Nacional"."<br>";
-        echo radiobutton_tag('caprovee[nacpro]','P', false) .'&nbsp;&nbsp;'. "Internacional"."<br>";
+        echo radiobutton_tag('caprovee[nacpro]','N', true, array('onClick' => 'colocaletra2(this.value);')) .'&nbsp;&nbsp;'. "Nacional"."<br>";
+        echo radiobutton_tag('caprovee[nacpro]','P', false, array('onClick' => 'colocaletra2(this.value);')) .'&nbsp;&nbsp;'. "Internacional"."<br>";
 
       }elseif ($caprovee->getNacpro()=='P'){
-        echo radiobutton_tag('caprovee[nacpro]','N', false) .'&nbsp;&nbsp;'. "Nacional".'&nbsp;&nbsp;'."<br>";
-        echo radiobutton_tag('caprovee[nacpro]','P', true) .'&nbsp;&nbsp;'. "Internacional"."<br>";
+        echo radiobutton_tag('caprovee[nacpro]','N', false, array('onClick' => 'colocaletra2(this.value);')) .'&nbsp;&nbsp;'. "Nacional".'&nbsp;&nbsp;'."<br>";
+        echo radiobutton_tag('caprovee[nacpro]','P', true, array('onClick' => 'colocaletra2(this.value);')) .'&nbsp;&nbsp;'. "Internacional"."<br>";
 
       }else{
-        echo radiobutton_tag('caprovee[nacpro]','N', true) .'&nbsp;&nbsp;'. "Nacional".'&nbsp;&nbsp;'."<br>";
-        echo radiobutton_tag('caprovee[nacpro]','P', false) .'&nbsp;&nbsp;'. "Internacional"."<br>";
+        echo radiobutton_tag('caprovee[nacpro]','N', true, array('onClick' => 'colocaletra2(this.value);')) .'&nbsp;&nbsp;'. "Nacional".'&nbsp;&nbsp;'."<br>";
+        echo radiobutton_tag('caprovee[nacpro]','P', false, array('onClick' => 'colocaletra2(this.value);')) .'&nbsp;&nbsp;'. "Internacional"."<br>";
       }?>
  </div> </fieldset></th>
  <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
@@ -1008,6 +1008,20 @@ function colocaletra(valor)
   var idpro='<?php echo $caprovee->getId() ?>';
   if (idpro==''){
   $('caprovee_rifpro').value=valor;
+  }
+}
+
+function colocaletra2(valor)
+{
+  var idpro='<?php echo $caprovee->getId() ?>';
+  if (idpro==''){
+    if ($('caprovee_nitpro_N').checked)
+    {
+      if (valor=='N') valnew='V';
+      else valnew='E';
+      $('caprovee_rifpro').value=valnew;
+    }
+  
   }
 }
 

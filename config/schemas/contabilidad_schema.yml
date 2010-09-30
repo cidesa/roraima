@@ -284,7 +284,7 @@ propel:
       required: true
     descom:
       type: VARCHAR
-      size: 250
+      size: 1000
     moncom:
       type: NUMERIC
       size: 14
@@ -300,6 +300,9 @@ propel:
       type: VARCHAR
       size: 8
     loguse:
+      type: VARCHAR
+      size: 50
+    usuanu:
       type: VARCHAR
       size: 50
     id:
