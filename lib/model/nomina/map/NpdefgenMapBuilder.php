@@ -4,25 +4,25 @@
 
 class NpdefgenMapBuilder {
 
-	
+
 	const CLASS_NAME = 'lib.model.nomina.map.NpdefgenMapBuilder';
 
-	
+
 	private $dbMap;
 
-	
+
 	public function isBuilt()
 	{
 		return ($this->dbMap !== null);
 	}
 
-	
+
 	public function getDatabaseMap()
 	{
 		return $this->dbMap;
 	}
 
-	
+
 	public function doBuild()
 	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
@@ -100,7 +100,9 @@ class NpdefgenMapBuilder {
 
 		$tMap->addColumn('DIASEM', 'Diasem', 'double', CreoleTypes::NUMERIC, false, 1);
 
+		$tMap->addColumn('CALESPPRES', 'Calesppres', 'string', CreoleTypes::VARCHAR, false, 1);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
-	} 
-} 
+	}
+}

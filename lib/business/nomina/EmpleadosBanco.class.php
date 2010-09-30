@@ -5,7 +5,7 @@
  * @package    Roraima
  * @subpackage nomina
  * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id: EmpleadosBanco.class.php 40839 2010-09-29 16:52:20Z cramirez $
+ * @version SVN: $Id: EmpleadosBanco.class.php 40868 2010-09-30 20:57:47Z cramirez $
  *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -250,6 +250,7 @@ public static function Grabar_grid_Vacdefgen($npvacdefgen_new,$grid)
                     $npvacdefgen_new->setCodnomvac($v->getCodnomvac());
                     $npvacdefgen_new->setCodconvac($v->getCodconvac());
                     $npvacdefgen_new->setCodconuti($v->getCodconuti());
+                    $npvacdefgen_new->setCodconadi($v->getCodconadi());
                     if ($v->getPagoad()!='')
                         $npvacdefgen_new->setPagoad($v->getPagoad());
                     else

@@ -3,70 +3,73 @@
 
 abstract class BaseNpvacdefgenPeer {
 
-	
+
 	const DATABASE_NAME = 'propel';
 
-	
+
 	const TABLE_NAME = 'npvacdefgen';
 
-	
+
 	const CLASS_DEFAULT = 'lib.model.nomina.Npvacdefgen';
 
-	
-	const NUM_COLUMNS = 7;
 
-	
+	const NUM_COLUMNS = 8;
+
+
 	const NUM_LAZY_LOAD_COLUMNS = 0;
 
 
-	
+
 	const CODNOMVAC = 'npvacdefgen.CODNOMVAC';
 
-	
+
 	const CODCONVAC = 'npvacdefgen.CODCONVAC';
 
-	
+
+	const CODCONADI = 'npvacdefgen.CODCONADI';
+
+
 	const PAGOAD = 'npvacdefgen.PAGOAD';
 
-	
+
 	const CODCONCOM = 'npvacdefgen.CODCONCOM';
 
-	
+
 	const CODCONUTI = 'npvacdefgen.CODCONUTI';
 
-	
+
 	const VACANT = 'npvacdefgen.VACANT';
 
-	
+
 	const ID = 'npvacdefgen.ID';
 
-	
+
 	private static $phpNameMap = null;
 
 
-	
+
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codnomvac', 'Codconvac', 'Pagoad', 'Codconcom', 'Codconuti', 'Vacant', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (NpvacdefgenPeer::CODNOMVAC, NpvacdefgenPeer::CODCONVAC, NpvacdefgenPeer::PAGOAD, NpvacdefgenPeer::CODCONCOM, NpvacdefgenPeer::CODCONUTI, NpvacdefgenPeer::VACANT, NpvacdefgenPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codnomvac', 'codconvac', 'pagoad', 'codconcom', 'codconuti', 'vacant', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
+		BasePeer::TYPE_PHPNAME => array ('Codnomvac', 'Codconvac', 'Codconadi', 'Pagoad', 'Codconcom', 'Codconuti', 'Vacant', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (NpvacdefgenPeer::CODNOMVAC, NpvacdefgenPeer::CODCONVAC, NpvacdefgenPeer::CODCONADI, NpvacdefgenPeer::PAGOAD, NpvacdefgenPeer::CODCONCOM, NpvacdefgenPeer::CODCONUTI, NpvacdefgenPeer::VACANT, NpvacdefgenPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codnomvac', 'codconvac', 'codconadi', 'pagoad', 'codconcom', 'codconuti', 'vacant', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
 	);
 
-	
+
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codnomvac' => 0, 'Codconvac' => 1, 'Pagoad' => 2, 'Codconcom' => 3, 'Codconuti' => 4, 'Vacant' => 5, 'Id' => 6, ),
-		BasePeer::TYPE_COLNAME => array (NpvacdefgenPeer::CODNOMVAC => 0, NpvacdefgenPeer::CODCONVAC => 1, NpvacdefgenPeer::PAGOAD => 2, NpvacdefgenPeer::CODCONCOM => 3, NpvacdefgenPeer::CODCONUTI => 4, NpvacdefgenPeer::VACANT => 5, NpvacdefgenPeer::ID => 6, ),
-		BasePeer::TYPE_FIELDNAME => array ('codnomvac' => 0, 'codconvac' => 1, 'pagoad' => 2, 'codconcom' => 3, 'codconuti' => 4, 'vacant' => 5, 'id' => 6, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
+		BasePeer::TYPE_PHPNAME => array ('Codnomvac' => 0, 'Codconvac' => 1, 'Codconadi' => 2, 'Pagoad' => 3, 'Codconcom' => 4, 'Codconuti' => 5, 'Vacant' => 6, 'Id' => 7, ),
+		BasePeer::TYPE_COLNAME => array (NpvacdefgenPeer::CODNOMVAC => 0, NpvacdefgenPeer::CODCONVAC => 1, NpvacdefgenPeer::CODCONADI => 2, NpvacdefgenPeer::PAGOAD => 3, NpvacdefgenPeer::CODCONCOM => 4, NpvacdefgenPeer::CODCONUTI => 5, NpvacdefgenPeer::VACANT => 6, NpvacdefgenPeer::ID => 7, ),
+		BasePeer::TYPE_FIELDNAME => array ('codnomvac' => 0, 'codconvac' => 1, 'codconadi' => 2, 'pagoad' => 3, 'codconcom' => 4, 'codconuti' => 5, 'vacant' => 6, 'id' => 7, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
 	);
 
-	
+
 	public static function getMapBuilder()
 	{
 		include_once 'lib/model/nomina/map/NpvacdefgenMapBuilder.php';
 		return BasePeer::getMapBuilder('lib.model.nomina.map.NpvacdefgenMapBuilder');
 	}
-	
+
 	public static function getPhpNameMap()
 	{
 		if (self::$phpNameMap === null) {
@@ -80,7 +83,7 @@ abstract class BaseNpvacdefgenPeer {
 		}
 		return self::$phpNameMap;
 	}
-	
+
 	static public function translateFieldName($name, $fromType, $toType)
 	{
 		$toNames = self::getFieldNames($toType);
@@ -91,7 +94,7 @@ abstract class BaseNpvacdefgenPeer {
 		return $toNames[$key];
 	}
 
-	
+
 
 	static public function getFieldNames($type = BasePeer::TYPE_PHPNAME)
 	{
@@ -101,19 +104,21 @@ abstract class BaseNpvacdefgenPeer {
 		return self::$fieldNames[$type];
 	}
 
-	
+
 	public static function alias($alias, $column)
 	{
 		return str_replace(NpvacdefgenPeer::TABLE_NAME.'.', $alias.'.', $column);
 	}
 
-	
+
 	public static function addSelectColumns(Criteria $criteria)
 	{
 
 		$criteria->addSelectColumn(NpvacdefgenPeer::CODNOMVAC);
 
 		$criteria->addSelectColumn(NpvacdefgenPeer::CODCONVAC);
+
+		$criteria->addSelectColumn(NpvacdefgenPeer::CODCONADI);
 
 		$criteria->addSelectColumn(NpvacdefgenPeer::PAGOAD);
 
@@ -130,7 +135,7 @@ abstract class BaseNpvacdefgenPeer {
 	const COUNT = 'COUNT(npvacdefgen.ID)';
 	const COUNT_DISTINCT = 'COUNT(DISTINCT npvacdefgen.ID)';
 
-	
+
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
 	{
 				$criteria = clone $criteria;
@@ -154,7 +159,7 @@ abstract class BaseNpvacdefgenPeer {
 						return 0;
 		}
 	}
-	
+
 	public static function doSelectOne(Criteria $criteria, $con = null)
 	{
 		$critcopy = clone $criteria;
@@ -165,12 +170,12 @@ abstract class BaseNpvacdefgenPeer {
 		}
 		return null;
 	}
-	
+
 	public static function doSelect(Criteria $criteria, $con = null)
 	{
 		return NpvacdefgenPeer::populateObjects(NpvacdefgenPeer::doSelectRS($criteria, $con));
 	}
-	
+
 	public static function doSelectRS(Criteria $criteria, $con = null)
 	{
 		if ($con === null) {
@@ -186,35 +191,35 @@ abstract class BaseNpvacdefgenPeer {
 
 						return BasePeer::doSelect($criteria, $con);
 	}
-	
+
 	public static function populateObjects(ResultSet $rs)
 	{
 		$results = array();
-	
+
 				$cls = NpvacdefgenPeer::getOMClass();
 		$cls = Propel::import($cls);
 				while($rs->next()) {
-		
+
 			$obj = new $cls();
 			$obj->hydrate($rs);
 			$results[] = $obj;
-			
+
 		}
 		return $results;
 	}
-	
+
 	public static function getTableMap()
 	{
 		return Propel::getDatabaseMap(self::DATABASE_NAME)->getTable(self::TABLE_NAME);
 	}
 
-	
+
 	public static function getOMClass()
 	{
 		return NpvacdefgenPeer::CLASS_DEFAULT;
 	}
 
-	
+
 	public static function doInsert($values, $con = null)
 	{
 		if ($con === null) {
@@ -225,7 +230,7 @@ abstract class BaseNpvacdefgenPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
-		$criteria->remove(NpvacdefgenPeer::ID); 
+		$criteria->remove(NpvacdefgenPeer::ID);
 
 				$criteria->setDbName(self::DATABASE_NAME);
 
@@ -241,7 +246,7 @@ abstract class BaseNpvacdefgenPeer {
 		return $pk;
 	}
 
-	
+
 	public static function doUpdate($values, $con = null)
 	{
 		if ($con === null) {
@@ -251,7 +256,7 @@ abstract class BaseNpvacdefgenPeer {
 		$selectCriteria = new Criteria(self::DATABASE_NAME);
 
 		if ($values instanceof Criteria) {
-			$criteria = clone $values; 
+			$criteria = clone $values;
 			$comparison = $criteria->getComparison(NpvacdefgenPeer::ID);
 			$selectCriteria->add(NpvacdefgenPeer::ID, $criteria->remove(NpvacdefgenPeer::ID), $comparison);
 
@@ -262,7 +267,7 @@ abstract class BaseNpvacdefgenPeer {
 		return BasePeer::doUpdate($selectCriteria, $criteria, $con);
 	}
 
-	
+
 	public static function doDeleteAll($con = null)
 	{
 		if ($con === null) {
@@ -279,7 +284,7 @@ abstract class BaseNpvacdefgenPeer {
 		}
 	}
 
-	
+
 	 public static function doDelete($values, $con = null)
 	 {
 		if ($con === null) {
@@ -297,10 +302,10 @@ abstract class BaseNpvacdefgenPeer {
 
 				$criteria->setDbName(self::DATABASE_NAME);
 
-		$affectedRows = 0; 
+		$affectedRows = 0;
 		try {
 									$con->begin();
-			
+
 			$affectedRows += BasePeer::doDelete($criteria, $con);
 			$con->commit();
 			return $affectedRows;
@@ -310,7 +315,7 @@ abstract class BaseNpvacdefgenPeer {
 		}
 	}
 
-	
+
 	public static function doValidate(Npvacdefgen $obj, $cols = null)
 	{
 		$columns = array();
@@ -345,7 +350,7 @@ abstract class BaseNpvacdefgenPeer {
     return $res;
 	}
 
-	
+
 	public static function retrieveByPK($pk, $con = null)
 	{
 		if ($con === null) {
@@ -362,7 +367,7 @@ abstract class BaseNpvacdefgenPeer {
 		return !empty($v) > 0 ? $v[0] : null;
 	}
 
-	
+
 	public static function retrieveByPKs($pks, $con = null)
 	{
 		if ($con === null) {
@@ -380,7 +385,7 @@ abstract class BaseNpvacdefgenPeer {
 		return $objs;
 	}
 
-} 
+}
 if (Propel::isInit()) {
 			try {
 		BaseNpvacdefgenPeer::getMapBuilder();
