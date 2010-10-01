@@ -2234,14 +2234,43 @@ class Cheques
         $opsolpag = $opdetsolpag->getOpsolpag();
         // Entero al GeBos mediante el servicio web
         $urlws = H::getConfApp('urlwsdlgebos', 'tesoreria', 'tesmovemiche');
-        if($urlws){
+        $usugebos = H::getConfApp('usugebos', 'tesoreria', 'tesmovemiche');
+        $pasgebos = H::getConfApp('pasgebos', 'tesoreria', 'tesmovemiche');
+
+        if($urlws && $usugebos && $pasgebos){
           try{
             $client = new SoapClient($urlws);
-            $det = array(array($opsolpag->getNomben(),$tscheemi->getNomcue(),$tscheemi->getNumche(),$tscheemi->getFecemi(),$tscheemi->getMonche()));
-            $result = $client->__call('notificarPago', array('',$opsolpag->getNumsolcre(),$opsolpag->getNumcre(),$opdetsolpag->getReford(),$det));
-            return 'Pago Enterado Satisfactoriamente al GeBos';
+            
+            $ticket = $client->__call('autenticar',array($usugebos, md5($pasgebos)));
+
+            $det = array(array($opsolpag->getNomben(),$tscheemi->getNomcue(),$tscheemi->getNumche(),$tscheemi->getFecemi(),$g->getMonord(true)));
+            $result = $client->__call('notificar_pago', array($ticket,$opsolpag->getNumsolcre(),$opsolpag->getNumcre(),$opdetsolpag->getReford(),$det));
+
+            if(is_array($result)){
+              if($result[0][1]=='0'){
+                $opsolpag->setStasol('C');
+                $opsolpag->save();
+                $opdetsolpag->setStaimp('C');
+                $opdetsolpag->save();
+                return 'NO se pudo enterar el pago al GeBos, intente mas tarde. ('.$result[1][1].')';
+              }
+              else {
+                $opsolpag->setStasol('G');
+                $opsolpag->save();
+                $opdetsolpag->setStaimp('G');
+                $opdetsolpag->save();
+                return 'Pago Enterado Satisfactoriamente al GeBos';
+              }
+            }else {
+              $opsolpag->setStasol('C');
+              $opsolpag->save();
+              $opdetsolpag->setStaimp('C');
+              $opdetsolpag->save();
+              return 'NO se pudo enterar el pago al GeBos. (Error la respuesta del servicio web)';
+            }
+            
           }catch(Exception $ex){
-            return 'NO se pudo enterar el pago al GeBos';
+            return 'NO se pudo enterar el pago al GeBos. ('.$ex->__toString().')';
           }
         }
       }
