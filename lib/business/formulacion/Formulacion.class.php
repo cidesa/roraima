@@ -1540,7 +1540,12 @@ public static function salvarFordefest($estado)
     }
     else
     {
-      $correl=1;
+      $sql = "SELECT max(codmun) as max FROM fordefmun";
+      if(H::BuscarDatos($sql, $output)){
+        $max = $output[0]['max'];
+        $correl = intval($max);
+      }else $correl=1;
+      
     }
     return true;
   }
@@ -1649,7 +1654,11 @@ public static function salvarFordefest($estado)
     }
     else
     {
-      $correl=1;
+      $sql = "SELECT max(codpar) as max FROM fordefpar";
+      if(H::BuscarDatos($sql, $output)){
+        $max = $output[0]['max'];
+        $correl = intval($max);
+      }else $correl=1;
     }
     return true;
   }
