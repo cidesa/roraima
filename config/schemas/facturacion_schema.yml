@@ -774,6 +774,9 @@ propel:
     obsfac:
       type: VARCHAR
       size: 500
+    codcenaco:
+      type: VARCHAR
+      size: 4
     id:
       type: INTEGER
       required: true
