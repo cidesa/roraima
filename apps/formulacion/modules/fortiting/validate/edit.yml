@@ -8,7 +8,7 @@ names:
   forparing{codparing}:
     required:  Yes
     required_msg: El Código de la Partida de Ingreso no puede estar en Blanco
-    validators: CodparingExistValidator
+    validators: CodparingExistValidator, Validator_codparing
 
   forparing{montoing}:
     required:  Yes
@@ -21,3 +21,9 @@ CodparingExistValidator:
         column:       codparing
         unique_error: El Código de la partida debe Existir.
 
+Validator_codparing:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Forparing
+        column:       codparing
+        unique_error: El registro ya Existe intente con otro.
