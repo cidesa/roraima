@@ -1622,4 +1622,42 @@ propel:
       required: true
       primaryKey: true
       autoIncrement: true
-      description: Identifi
+      description: Identificador Único del registro
+  fordismonprepryaccmetuea:
+    codpro:
+      type: VARCHAR
+      size: 20
+      required: true
+    codaccesp:
+      type: VARCHAR
+      size: 20
+      required: true
+    codmet:
+      type: VARCHAR
+      size: 5
+      required: true
+    codact:
+      type: VARCHAR
+      size: 5
+      required: true
+    codpre:
+      type: VARCHAR
+      size: 50
+      required: true
+    perpre:
+      type: VARCHAR
+      size: 2
+      required: true
+    monper:
+      type: NUMERIC
+      size: 20
+      scale: 2
+    codpar:
+      type: VARCHAR
+      size: 32
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
