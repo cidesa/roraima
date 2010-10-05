@@ -154,22 +154,24 @@ class ingasiiniActions extends autoingasiiniActions
         $monasi=$monto/$numper;
 
         $per = new Ciasiini();
-        $this->per1 = array();
+        $per1 = array();
         while ($i<=$numper){
 
           if ($i<10){
               $p="0".(string)$i;
           }else{ $p=(string)$i;}
 
-          $this->per1[$j]["perpre"]=$p;
-          $this->per1[$j]["monasi"]=H::FormatoMonto($monasi);
-          $this->per1[$j]["id"]='';
-          $this->per1[$j]["codpre"]='';
+          $per1[$j]["perpre"]=$p;
+          $per1[$j]["monasi"]=H::FormatoMonto($monasi);
+          $per1[$j]["id"]='';
+          $per1[$j]["codpre"]='';
 
         $i++;
         $j++;
 
         }
+        $this->per1 = $per1;
+        //print $numper;
         //H::printR($this->per1);
         $genera='S';
             $this->configGrid($genera,$this->per1);
