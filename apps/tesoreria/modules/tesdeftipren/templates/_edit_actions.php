@@ -24,6 +24,6 @@
 )) ?></li>
   </ul>
   <script language="JavaScript" type="text/javascript">
- var tieregrel='<?php echo $tstipren->getTiedatrel(); ?>';
+ var tieregrel='<?php if($tstipren->getId()) echo $tstipren->getTiedatrel(); else echo "N"; ?>';
   if (tieregrel=='S') $('save').hide();
 </script>
