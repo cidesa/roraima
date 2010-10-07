@@ -45,6 +45,10 @@ abstract class BaseFormetotrcre extends BaseObject  implements Persistent {
 
 
 	
+	protected $codfin;
+
+
+	
 	protected $id;
 
 	
@@ -116,6 +120,13 @@ abstract class BaseFormetotrcre extends BaseObject  implements Persistent {
   {
 
     return trim($this->observ);
+
+  }
+  
+  public function getCodfin()
+  {
+
+    return trim($this->codfin);
 
   }
   
@@ -216,6 +227,16 @@ abstract class BaseFormetotrcre extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setCodfin($v)
+	{
+
+    if ($this->codfin !== $v) {
+        $this->codfin = $v;
+        $this->modifiedColumns[] = FormetotrcrePeer::CODFIN;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -248,7 +269,9 @@ abstract class BaseFormetotrcre extends BaseObject  implements Persistent {
 
       $this->observ = $rs->getString($startcol + 8);
 
-      $this->id = $rs->getInt($startcol + 9);
+      $this->codfin = $rs->getString($startcol + 9);
+
+      $this->id = $rs->getInt($startcol + 10);
 
       $this->resetModified();
 
@@ -256,7 +279,7 @@ abstract class BaseFormetotrcre extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 10; 
+            return $startcol + 11; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Formetotrcre object", $e);
     }
@@ -337,6 +360,7 @@ abstract class BaseFormetotrcre extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FormetotrcrePeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FormetotrcrePeer::doUpdate($this, $con);
@@ -430,6 +454,9 @@ abstract class BaseFormetotrcre extends BaseObject  implements Persistent {
 				return $this->getObserv();
 				break;
 			case 9:
+				return $this->getCodfin();
+				break;
+			case 10:
 				return $this->getId();
 				break;
 			default:
@@ -451,7 +478,8 @@ abstract class BaseFormetotrcre extends BaseObject  implements Persistent {
 			$keys[6] => $this->getCodorg(),
 			$keys[7] => $this->getCodtip(),
 			$keys[8] => $this->getObserv(),
-			$keys[9] => $this->getId(),
+			$keys[9] => $this->getCodfin(),
+			$keys[10] => $this->getId(),
 		);
 		return $result;
 	}
@@ -495,6 +523,9 @@ abstract class BaseFormetotrcre extends BaseObject  implements Persistent {
 				$this->setObserv($value);
 				break;
 			case 9:
+				$this->setCodfin($value);
+				break;
+			case 10:
 				$this->setId($value);
 				break;
 		} 	}
@@ -513,7 +544,8 @@ abstract class BaseFormetotrcre extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[6], $arr)) $this->setCodorg($arr[$keys[6]]);
 		if (array_key_exists($keys[7], $arr)) $this->setCodtip($arr[$keys[7]]);
 		if (array_key_exists($keys[8], $arr)) $this->setObserv($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setId($arr[$keys[9]]);
+		if (array_key_exists($keys[9], $arr)) $this->setCodfin($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setId($arr[$keys[10]]);
 	}
 
 	
@@ -530,6 +562,7 @@ abstract class BaseFormetotrcre extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(FormetotrcrePeer::CODORG)) $criteria->add(FormetotrcrePeer::CODORG, $this->codorg);
 		if ($this->isColumnModified(FormetotrcrePeer::CODTIP)) $criteria->add(FormetotrcrePeer::CODTIP, $this->codtip);
 		if ($this->isColumnModified(FormetotrcrePeer::OBSERV)) $criteria->add(FormetotrcrePeer::OBSERV, $this->observ);
+		if ($this->isColumnModified(FormetotrcrePeer::CODFIN)) $criteria->add(FormetotrcrePeer::CODFIN, $this->codfin);
 		if ($this->isColumnModified(FormetotrcrePeer::ID)) $criteria->add(FormetotrcrePeer::ID, $this->id);
 
 		return $criteria;
@@ -578,6 +611,8 @@ abstract class BaseFormetotrcre extends BaseObject  implements Persistent {
 		$copyObj->setCodtip($this->codtip);
 
 		$copyObj->setObserv($this->observ);
+
+		$copyObj->setCodfin($this->codfin);
 
 
 		$copyObj->setNew(true);

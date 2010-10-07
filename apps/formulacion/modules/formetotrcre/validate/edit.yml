@@ -1,15 +1,15 @@
 methods:
   post:
-   - "forestcos{codmet}"
-   - "forestcos{codpro}"
+   - "formetotrcre{codmet}"
+   - "formetotrcre{codpro}"
 
 names:
-  forestcos{codmet}:
+  formetotrcre{codmet}:
     required:  Yes
     required_msg: No puede salvar sin Introducir la Acción
     validators: metaValidator
 
-  forestcos{codpro}:
+  formetotrcre{codpro}:
     required:  Yes
     required_msg: No puede salvar sin Introducir la Unidad de Medida
     validators: productoValidator

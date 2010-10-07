@@ -11,7 +11,7 @@ function mostrarperiodos(id)
 
     var codact=name+"_"+fil+"_1";
     var codart=name+"_"+fil+"_4";
-    var cadper=name+"_"+fil+"_17";
+    var cadper=name+"_"+fil+"_18";
     var colmon=name+"_"+fil+"_9";
 
     var codmet=$('forestcos_codmet').value;
@@ -47,9 +47,9 @@ function ocultarPeriodos()
   }
 
   var canart="ax_"+$('forestcos_filper').value+"_9";
-  var cadper="ax_"+$('forestcos_filper').value+"_17";
-  var monart="ax_"+$('forestcos_filper').value+"_10";
-  var totpre="ax_"+$('forestcos_filper').value+"_11";
+  var cadper="ax_"+$('forestcos_filper').value+"_18";
+  var monart="ax_"+$('forestcos_filper').value+"_11";
+  var totpre="ax_"+$('forestcos_filper').value+"_12";
 
   var num2=toFloat(monart);
   var cal=acumu*num2;
@@ -72,7 +72,7 @@ function mostrarfinanciamientos(id)
 
     var codact=name+"_"+fil+"_1";
     var codart=name+"_"+fil+"_4";
-    var cadfin=name+"_"+fil+"_18";
+    var cadfin=name+"_"+fil+"_19";
     var colmon=name+"_"+fil+"_9";
 
     var codmet=$('forestcos_codmet').value;
@@ -110,7 +110,7 @@ function ocultarFuentes()
 {
     var filafin=parseInt($('forestcos_filfin').value);
 
-    var montopre=toFloat("ax_"+filafin+"_11");
+    var montopre=toFloat("ax_"+filafin+"_12");
     var montofin=totalfinanciamiento();
     /*if (montofin!=montopre)
     {
@@ -120,9 +120,9 @@ function ocultarFuentes()
           alert('Falta una fuente de financiamiento por : '+resta+' Bs.');
       }
     }else {*/
-        var codfin="ax_"+$('forestcos_filfin').value+"_12";
-        var nomext="ax_"+$('forestcos_filfin').value+"_13";
-        var cadfin="ax_"+$('forestcos_filfin').value+"_18";
+        var codfin="ax_"+$('forestcos_filfin').value+"_13";
+        var nomext="ax_"+$('forestcos_filfin').value+"_14";
+        var cadfin="ax_"+$('forestcos_filfin').value+"_19";
 
          var filas=parseInt($('forestcos_totfil').value);
           var l=0;
@@ -169,7 +169,7 @@ function validarDisponibilidad(id)
    var idmonfin=name+"_"+fil+"_3";
 
    var filafin=$('forestcos_filfin').value;
-   var montopre=toFloat("ax_"+filafin+"_11");
+   var montopre=toFloat("ax_"+filafin+"_12");
    var totfin=totalfinanciamiento();
    var monfin=toFloat(idmonfin);
    var codfin=$(idcodfin).value;
@@ -189,7 +189,7 @@ function validararticulorepetida(id)
    var coluni= col + 2;
    var colpar= col + 3;
    var colnom= col + 4;
-   var colmon= col + 7;
+   var colmon= col + 8;
    var descripcion=name+"_"+fila+"_"+coldes;
    var unidad=name+"_"+fila+"_"+coluni;
    var part=name+"_"+fila+"_"+colpar;
@@ -251,7 +251,34 @@ function Calcular(id)
    var fila=aux[1];
    var col=parseInt(aux[2]);
 
-   var colcant= col - 1;
+   if (col==10)
+   {
+     if ($(id).value=='A')
+     {
+       var colcant= col - 1;
+       var colult= col + 10;
+       var colrel= col + 11;
+       var colmon= col + 1;
+       var coltot= col + 2;
+       var cantart=name+"_"+fila+"_"+colcant;
+       var costou=name+"_"+fila+"_"+colult;
+       var relac=name+"_"+fila+"_"+colrel;
+       var monp=name+"_"+fila+"_"+colmon;
+       var totp=name+"_"+fila+"_"+coltot;
+
+       var num4=toFloat(costou);
+       var num5=toFloat(relac);
+       var num6=toFloat(cantart);
+
+       cosunit=num4/num5;
+       
+       calculo= num6*cosunit;
+       
+       $(monp).value=format(cosunit.toFixed(2),'.',',','.');
+       $(totp).value=format(calculo.toFixed(2),'.',',','.');
+     }
+   }else {        
+   var colcant= col - 2;
    var coltot= col + 1;
    var cantart=name+"_"+fila+"_"+colcant;
    var totalpre=name+"_"+fila+"_"+coltot;
@@ -262,6 +289,5 @@ function Calcular(id)
    var cal=num1*num2;
 
    $(totalpre).value=format(cal.toFixed(2),'.',',','.');
-
-
+}
 }

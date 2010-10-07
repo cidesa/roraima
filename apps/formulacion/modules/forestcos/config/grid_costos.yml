@@ -62,62 +62,84 @@ opciones:                  # Opciones generales
   nombrecampo:             canart
   esnumerico:              true
   html:                    ["size=10 onBlur='mostrarperiodos(this.id)' readOnly=true"]
-10:       # Columna 10
+10:     # Columna 10
+  titulo:                  Formula por
+  tipo:                    c
+  nombrecampo:             tipuni
+  html:                    [ ]
+  esgrabable:              true
+11:       # Columna 11
   titulo:                  Monto
   tipo:                    m
   esgrabable:              true
   nombrecampo:             monart
   esnumerico:              true
   html:                    ["size=10 onBlur='ValidarMontoGridv2(this); Calcular(this.id);'"]
-11:       # Columna 11
+12:       # Columna 12
   titulo:                  Total Presupuestado
   tipo:                    m
   esgrabable:              true
   nombrecampo:             totpre
   esnumerico:              true
   html:                    ["size=10 readOnly=true"]
-12:       # Columna 12
+13:       # Columna 13
   titulo:                  Fuente de Financiamiento
   tipo:                    t
   nombrecampo:             codfin
   html:                    ["size=10 onBlur='mostrarfinanciamientos(this.id)' readonly=true"]
   esgrabable:              true
-13:       # Columna 13
+14:       # Columna 14
   titulo:                  Descripción
   tipo:                    t
   nombrecampo:             nomparing
   html:                    ["size=40 readonly=true"]
   esgrabable:              true
-14:       # Columna 14
+15:       # Columna 15
   titulo:                  Tipo de Gasto
   tipo:                    t
   nombrecampo:             codtip
   html:                    ["size=10 maxlength=4 onBlur='toAjax(4,getUrlModuloAjax(),this.value,0,'&cajtxtmos='+$(this.id).up().next(0).descendants()[0].id+'&cajtxtcom='+this.id)'"]
   esgrabable:              true
-  catalogo:                [fortiptit, sf_admin_edit_form, {Codtip: 14, Destip: 15}, Fortiptit_Forpoa ]
-15:       # Columna 15
+  catalogo:                [fortiptit, sf_admin_edit_form, {Codtip: 15, Destip: 16}, Fortiptit_Forpoa ]
+16:       # Columna 16
   titulo:                  Descripción
   tipo:                    t
   nombrecampo:             destip
   html:                    ["size=40 readonly=true"]
   esgrabable:              true
-16:       # Columna 16
+17:       # Columna 17
   titulo:                  Observaciones
   tipo:                    t
   nombrecampo:             observ
   html:                    ["size=40 maxlength=250 "]
   esgrabable:              true
-17:       # Columna 17
+18:       # Columna 18
   titulo:                  cadenaperiodos
   tipo:                    t
   nombrecampo:             cadenaper
   html:                    ["size=40"]
   esgrabable:              true
   oculta:                  true
-18:       # Columna 18
+19:       # Columna 19
   titulo:                  Cadena Fuente Financiamiento
   tipo:                    t
   nombrecampo:             cadenafin
   html:                    ["size=40"]
   esgrabable:              true
   oculta:                  true
+20:       # Columna 20
+  titulo:                  Costo Ultimo
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             cosult
+  esnumerico:              true
+  #oculta:                  true
+  html:                    ["size=10 "]
+21:       # Columna 21
+  titulo:                  Relacion
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             relart
+  esnumerico:              true
+  #oculta:                  true
+  html:                    ["size=10 "]
