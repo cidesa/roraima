@@ -2011,6 +2011,7 @@ public static function obtenerDiaMesOAno($fecha,$formato,$dmoa)
   }
   public static function FormatoMonto($value,$dec='2')
   {
+    $value = floatval($value);
     $for='VE';
     if ($value==' ')
       $value=0;

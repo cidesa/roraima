@@ -1,0 +1,123 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                false
+  tabla:                   forestcos
+  anchogrid:               1000
+  ancho:                   1000
+  filas:                   
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Cod. Meta
+  tipo:                    t
+  nombrecampo:             codact
+  html:                    ["size=15 readonly=true"]
+  esgrabable:              true  
+2:       # Columna 2
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             desact
+  html:                    ["size=40 readonly=true"]
+  esgrabable:              true
+3:       # Columna 3
+  titulo:                  Cantidad
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             canuni
+  esnumerico:              true
+  html:                    ["size=10"]
+4:       # Columna 4
+  titulo:                  Cod. Artículo
+  tipo:                    t
+  nombrecampo:             codart
+  html:                    ["size=10 maxlength=20 "]
+  esgrabable:              true
+5:       # Columna 5
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             desart
+  html:                    ["size=40 readonly=true"]
+  esgrabable:              true
+6:       # Columna 6
+  titulo:                  Unid. Medida
+  tipo:                    t
+  nombrecampo:             unimed
+  html:                    ["size=40 readonly=true"]
+  esgrabable:              true
+7:       # Columna 7
+  titulo:                  Cod. Partida
+  tipo:                    t
+  nombrecampo:             codpar
+  html:                    ["size=15 readonly=true"]
+  esgrabable:              true  
+8:       # Columna 8
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             nompar
+  html:                    ["size=40 readonly=true"]
+9:       # Columna 9
+  titulo:                  Cantidad
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             canart
+  esnumerico:              true
+  html:                    ["size=10 onBlur='mostrarperiodos(this.id)' readOnly=true"]
+10:       # Columna 10
+  titulo:                  Monto
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             monart
+  esnumerico:              true
+  html:                    ["size=10 onBlur='ValidarMontoGridv2(this); Calcular(this.id);'"]
+11:       # Columna 11
+  titulo:                  Total Presupuestado
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             totpre
+  esnumerico:              true
+  html:                    ["size=10 readOnly=true"]
+12:       # Columna 12
+  titulo:                  Fuente de Financiamiento
+  tipo:                    t
+  nombrecampo:             codfin
+  html:                    ["size=10 onBlur='mostrarfinanciamientos(this.id)' readonly=true"]
+  esgrabable:              true
+13:       # Columna 13
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             nomparing
+  html:                    ["size=40 readonly=true"]
+  esgrabable:              true
+14:       # Columna 14
+  titulo:                  Tipo de Gasto
+  tipo:                    t
+  nombrecampo:             codtip
+  html:                    ["size=10 maxlength=4 onBlur='toAjax(4,getUrlModuloAjax(),this.value,0,'&cajtxtmos='+$(this.id).up().next(0).descendants()[0].id+'&cajtxtcom='+this.id)'"]
+  esgrabable:              true
+  catalogo:                [fortiptit, sf_admin_edit_form, {Codtip: 14, Destip: 15}, Fortiptit_Forpoa ]
+15:       # Columna 15
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             destip
+  html:                    ["size=40 readonly=true"]
+  esgrabable:              true
+16:       # Columna 16
+  titulo:                  Observaciones
+  tipo:                    t
+  nombrecampo:             observ
+  html:                    ["size=40 maxlength=250 "]
+  esgrabable:              true
+17:       # Columna 17
+  titulo:                  cadenaperiodos
+  tipo:                    t
+  nombrecampo:             cadenaper
+  html:                    ["size=40"]
+  esgrabable:              true
+  oculta:                  true
+18:       # Columna 18
+  titulo:                  Cadena Fuente Financiamiento
+  tipo:                    t
+  nombrecampo:             cadenafin
+  html:                    ["size=40"]
+  esgrabable:              true
+  oculta:                  true

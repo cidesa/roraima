@@ -1,0 +1,50 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Forasoactpro
+    theme:            cidesaGenerator
+    fields:
+      codmet:
+        name: Código
+        params: size=5 maxlength=5  onFocus=readonly(this.id) onBlur="this.value=this.value.pad(5, '0',0);"
+        catalogo:
+          catalogoweb: Fordefmet_Forasometobj
+          clase: Fordefmet
+          ajax: 1
+          parametros: getprincipal="getCodmet" getsecundario="getDesmet" campoprincipal="codmet" camposecundario="desmet" campobase = "id"
+      codpro:
+        name: Código
+        params: size=20  maxlength=5  onFocus=readonly(this.id) onBlur="this.value=this.value.pad(5, '0',0);"
+        catalogo:
+          catalogoweb: Fordefpro_Forasoactmet
+          clase: Fordefpro
+          ajax: 2
+          parametros: getprincipal="getCodpro" getsecundario="getDespro" campoprincipal="codpro" camposecundario="despro" campobase = "id"
+          catalogoparams: /param1/'."'+$('forasoactpro_codmet').value+'".'
+          ajaxparams: +'."'".'&meta='."'+$('forasoactpro_codmet').value".'
+      grid:  { name: .}
+    list:
+      title:          Asociación de Metas a Unidades de Medida
+      filters:        [codmet, codpro]
+      fields:
+        codmet:  { name: Acción}
+        desmet:  { name: Descripción}
+        codpro:  { name: Unidad de Medida}
+        despro:  { name: Descripción}
+      display:        [=codmet, desmet, codpro, despro]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   10
+      sort:      codmet
+    edit:
+      title:          Asociación de Metas a Unidades de Medida
+      display:
+        "Acción":   [codmet]
+        "Unidad de Medida":   [codpro]
+        "Metas":   [_grid]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

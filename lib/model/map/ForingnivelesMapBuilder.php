@@ -30,7 +30,9 @@ class ForingnivelesMapBuilder {
 		$tMap = $this->dbMap->addTable('foringniveles');
 		$tMap->setPhpName('Foringniveles');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('foringniveles_SEQ');
 
 		$tMap->addColumn('CATPAR', 'Catpar', 'string', CreoleTypes::VARCHAR, true, 1);
 

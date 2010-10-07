@@ -1,0 +1,40 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Forasometcre
+    theme:            cidesaGenerator
+    fields:
+      codcat:
+        name: Código
+        params: size=20  onkeyDown=dFilter(event.keyCode, this,$('forasometcre_mascara').value) onFocus="$(this.id).maxLength=$('forasometcre_longitud').value; if($('id').value!='') $(this.id).readOnly=true ;"
+        catalogo:
+          catalogoweb: Fordefcatpre_Forotrcrepre
+          clase: Fordefcatpre
+          ajax: 1
+          parametros: getprincipal="getCodcat" getsecundario="getNomcat" campoprincipal="codcat" camposecundario="nomcat" campobase = "id"
+          catalogoparams: /param1/'."'+$('forasometcre_longitud').value+'".'
+          ajaxparams: +'."'".'&longitud='."'+$('forasometcre_longitud').value".'
+      grid:  { name: .}
+    list:
+      title:          Asociación de Acciones a Categorias Programáticas
+      filters:        [codcat]
+      fields:
+        codcat:  { name: Categoria Programática}
+        nomcat:  { name: Descripción}
+      display:        [=codcat, nomcat]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   10
+      sort:      codcat
+    edit:
+      title:          Asociación de Acciones a Categorias Programáticas
+      display:
+        "Categoria Programática":   [codcat]
+        "Acciones":   [_grid]
+      hide:      [longitud, mascara]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

@@ -197,6 +197,7 @@ abstract class BaseForasoactpro extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = ForasoactproPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += ForasoactproPeer::doUpdate($this, $con);

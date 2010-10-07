@@ -1,0 +1,35 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Fordefproble
+    theme:            cidesaGenerator
+    fields:
+      codpro: { name: Código, params : size=5 maxlength=4  onFocus=readonly(this.id) onBlur="this.value=this.value.pad(4, '0',0);"}
+      nompro: { name: Descripción, type: textarea_tag, params : size=80x5 maxlength=4000 onkeyup="ismaxlength(this)" }
+      plaeco: { name: ., type: textarea_tag, params : size=80x5 maxlength=4000 onkeyup="ismaxlength(this)" }
+      objest: { name: ., type: textarea_tag, params : size=80x5 maxlength=4000 onkeyup="ismaxlength(this)" }
+      plagob: { name: ., type: textarea_tag, params : size=80x5 maxlength=4000 onkeyup="ismaxlength(this)" }
+      progra: { name: ., type: textarea_tag, params : size=80x5 maxlength=4000 onkeyup="ismaxlength(this)" }
+      
+    list:
+      title:          Definiciones de Programa
+      filters:        [codpro]
+      display:        [=codpro, nompro]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   10
+      sort:      codpro
+    edit:
+      title:          Edición  de Programa
+      display:
+        "Definición de Programas":   [codpro, nompro]
+        "Plan Económico":   [plaeco]
+        "Objetivos Estratégicos":   [objest]
+        "Plan de Gobierno":   [plagob]
+        "Problema":   [progra]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

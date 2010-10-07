@@ -268,6 +268,7 @@ abstract class BaseForingniveles extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = ForingnivelesPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += ForingnivelesPeer::doUpdate($this, $con);

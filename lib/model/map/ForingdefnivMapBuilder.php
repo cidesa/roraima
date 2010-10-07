@@ -30,7 +30,9 @@ class ForingdefnivMapBuilder {
 		$tMap = $this->dbMap->addTable('foringdefniv');
 		$tMap->setPhpName('Foringdefniv');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('foringdefniv_SEQ');
 
 		$tMap->addColumn('CODEMP', 'Codemp', 'string', CreoleTypes::VARCHAR, true, 3);
 

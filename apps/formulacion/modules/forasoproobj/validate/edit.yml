@@ -1,0 +1,42 @@
+methods:
+  post:
+   - "forasoproobj{codpro}"
+   - "forasoproobj{codcat}"
+   - "forasoproobj{codobj}"
+
+names:
+  forasoproobj{codpro}:
+    required:  Yes
+    required_msg: No puede salvar sin Introducir el Programa
+    validators: programaValidator
+
+  forasoproobj{codcat}:
+    required:  Yes
+    required_msg: No puede salvar sin Introducir la Categoria Programática
+    validators: categoriaValidator
+
+  forasoproobj{codobj}:
+    required:  Yes
+    required_msg: No puede salvar sin Introducir el Objetivo
+    validators: objetivoValidator
+
+programaValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Fordefproble
+        column:   codpro
+        unique_error:  El Programa no Existe.
+
+categoriaValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Fordefcatpre
+        column:   codcat
+        unique_error:  La Categoria Programática no Existe.
+
+objetivoValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Fordefobj
+        column:   codobj
+        unique_error:  El Objetivo no Existe.

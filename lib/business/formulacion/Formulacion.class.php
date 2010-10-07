@@ -1812,7 +1812,53 @@ public static function salvarFordefest($estado)
    $result=array();
 
    if ($cadena==''){
-     $sql="select a.codfin as codigo,b.nomext as nombre , sum(a.montoing)as monto from foringdisfuefin a, fortipfin b where a.codfin = b.codfin group by a.codfin,b.nomext order by a.codfin";
+       $c = new Criteria();
+       $c->add(ForfinotrcrePeer::CODCAT,$codcat);
+       $c->add(ForfinotrcrePeer::CODPAREGR,$codpar);
+       $reg= ForfinotrcrePeer::doSelect($c);
+       if ($reg)
+       {
+           $i=0;
+           foreach ($reg as $obj)
+           {
+             $fuentes[$i]["codparing"]=$obj->getCodparing();
+             $fuentes[$i]["nomext"]=H::getX('CODFIN','Fortipfin','Nomext',$obj->getCodparing());
+             $fuentes[$i]["monfin"]=number_format($obj->getMonfin(),2,',','.');
+             // Buscar lo asignado a la fuente de financiamiento
+            $asignado=0;
+            $sql1="select sum(montoing) as  asignado From ForIngDisfuefin Where Codfin  = '".$obj->getCodparing()."'";
+            if (Herramientas::BuscarDatos($sql1,&$resul))
+            {
+              $asignado=$resul[0]["asignado"];
+            }
+
+            //Calcular lo gastado
+            $gastadootr=0;
+            $sql2="select sum(b.monfin) as gastado from forfinotrcre b where b.codparing='".$obj->getCodparing()."' and (b.codcat||b.codparegr) in (select (codcat||codparegr) from forotrcrepre) group by b.codparing";
+            if (Herramientas::BuscarDatos($sql2,&$resul))
+            {
+              $gastadootr=$resul[0]["gastado"];
+            }
+
+            $gastadoobras=0;
+            $sql3="select sum(b.monfin) as gastado from forfinobr b Where b.codparing='".$obj->getCodparing()."' and (b.codcat||b.codparegr) in (select (codcat||codparegr) from forpreobr) group by b.codparing";
+            if (Herramientas::BuscarDatos($sql3,&$resul))
+            {
+              $gastadoobras=$resul[0]["gastado"];
+            }
+
+            $disponible=$asignado - ($gastadootr + $gastadoobras);
+
+            $fuentes[$i]["mondis"]=number_format($disponible,2,',','.');
+            $fuentes[$i]["monasi"]=number_format($asignado,2,',','.');
+
+            $fuentes[$i]["id"]=8;
+            $i++;
+
+           }
+       }
+     else {
+     $sql="select a.codfin as codigo,b.nomext as nombre , sum(a.montoing) as monto from foringdisfuefin a, fortipfin b where a.codfin = b.codfin group by a.codfin,b.nomext order by a.codfin";
      if (Herramientas::BuscarDatos($sql,&$result))
      {
        $i=0;
@@ -1834,14 +1880,14 @@ public static function salvarFordefest($estado)
 
             //Calcular lo gastado
             $gastadootr=0;
-            $sql2="select sum(b.monfin) as gastado from forfinotrcre b where b.codparing='".$result[$i]["codigo"]."' and concat(b.codcat,b.codparegr) in (select concat(codcat,codparegr) from forotrcrepre) group by b.codparing";
+            $sql2="select sum(b.monfin) as gastado from forfinotrcre b where b.codparing='".$result[$i]["codigo"]."' and (b.codcat||b.codparegr) in (select (codcat||codparegr) from forotrcrepre) group by b.codparing";
             if (Herramientas::BuscarDatos($sql2,&$resul))
             {
               $gastadootr=$resul[0]["gastado"];
             }
 
             $gastadoobras=0;
-            $sql3="select sum(b.monfin) as gastado from forfinobr b Where b.codparing='".$result[$i]["codigo"]."' and concat(b.codcat,b.codparegr) in (select concat(codcat,codparegr) from forpreobr) group by b.codparing";
+            $sql3="select sum(b.monfin) as gastado from forfinobr b Where b.codparing='".$result[$i]["codigo"]."' and (b.codcat||b.codparegr) in (select (codcat||codparegr) from forpreobr) group by b.codparing";
             if (Herramientas::BuscarDatos($sql3,&$resul))
             {
               $gastadoobras=$resul[0]["gastado"];
@@ -1856,6 +1902,7 @@ public static function salvarFordefest($estado)
             $i++;
           }
      }
+   }
    }else {
       $cadenafue=split('!',$cadena);
       $r=0;
@@ -1891,21 +1938,21 @@ public static function salvarFordefest($estado)
       }
 
       $gastado=0;
-      $sql1="select sum(b.monfin) as gastado from forfinotrcre b where b.codparing='".$codfin."' and concat(b.codcat,b.codparegr) in (select concat(codcat,codparegr) from forotrcrepre) group by b.codparing";
+      $sql1="select sum(b.monfin) as gastado from forfinotrcre b where b.codparing='".$codfin."' and (b.codcat||b.codparegr) in (select (codcat||codparegr) from forotrcrepre) group by b.codparing";
       if (Herramientas::BuscarDatos($sql1,&$resul))
       {
         $gastado=$resul[0]["gastado"];
       }
 
       $gastadootr=0;
-      $sql2="select sum(b.monfin) as gastado from forfinotrcre b Where b.CodParIng = '".$codfin."' and b.codcat='".$codcat."' and concat(b.codcat,b.codparegr) not in (select concat(codcat,codparegr) from forotrcrepre) group by b.codparing";
+      $sql2="select sum(b.monfin) as gastado from forfinotrcre b Where b.CodParIng = '".$codfin."' and b.codcat='".$codcat."' and (b.codcat||b.codparegr) not in (select (codcat||codparegr) from forotrcrepre) group by b.codparing";
       if (Herramientas::BuscarDatos($sql2,&$resul))
       {
         $gastadotmpotr=$resul[0]["gastado"];
       }
 
       $gastadoobras=0;
-      $sql3="select sum(b.monfin) as gastado from forfinobr b Where b.codparing='".$codfin."' and concat(b.codcat,b.codparegr) in (select concat(codcat,codparegr) from forpreobr) group by b.codparing";
+      $sql3="select sum(b.monfin) as gastado from forfinobr b Where b.codparing='".$codfin."' and (b.codcat||b.codparegr) in (select (codcat||codparegr) from forpreobr) group by b.codparing";
       if (Herramientas::BuscarDatos($sql3,&$resul))
       {
         $gastadoobras=$resul[0]["gastado"];
@@ -2266,7 +2313,7 @@ public static function cargarPeriodosMet($codmet,$codpro,$cadena,&$acum)
              $fuentes[$i]["codparing"]=$obj->getCodparing();
              $fuentes[$i]["nomparing"]=H::getX('CODPARING','Fordefparing','Nomparing',$obj->getCodparing());
              $fuentes[$i]["monfin"]=number_format($obj->getMonfin(),2,',','.');
-             $periodos[$i]["id"]=9;
+             $fuentes[$i]["id"]=9;
              $i++;
 
            }
@@ -2506,11 +2553,14 @@ public static function chequearDispIngresosCos($monfin,$codfin)
 
       $z=$grid[1];
       $j=0;
+      if (!empty($z[$j]))
+    {
       while ($j<count($z))
       {
         $z[$j]->delete();
         $j++;
       }
+    }
 
   }
 
@@ -2657,6 +2707,1077 @@ public static function chequearDispIngresosCos($monfin,$codfin)
                         $tablaforpereje->save();
         }
   	}
+
+public static function evalEcua(& $cadena, & $resecu, & $error, $vars = '') {
+    $ident = array ();
+    $pila = array ();
+
+    $error = false;
+
+    while ($cadena != '' && !$error) {
+      Nomina :: separaToken(& $cadena, & $token, & $tipo);
+      switch ($tipo) {
+        ///////////////////////////////////
+        case (Nomina :: IDENTIFICADOR) :
+          self :: evalIdent(& $token, & $pila, & $error, & $ident, & $empleado, & $cargo, & $concepto, & $nomina, & $liscon, & $lismov, & $lisvar, & $lisfun, & $lisemp, & $lishis, & $fecnom, & $fechanac, & $fechaing, & $sexo, & $vars, & $especial);
+          break;
+
+          ///////////////////////////////////
+        case (Nomina :: OPERANDO) :
+          $token = H :: toFloatdecimal($token, 4);
+          array_push($pila, $token);
+          break;
+
+          ///////////////////////////////////
+        case (Nomina :: OPERADOR) :
+          Nomina :: evalOperad($token, $pila, $error);
+          break;
+      } // end switch
+    } // end while
+    if (count($pila) < 1 || $error) // if pila.tope <> 1
+      {
+      $error = true;
+    } else {
+      $resecu = floatval((array_pop($pila)));
+}
+  }
+
+  public static function evalIdent(& $token, & $pila, & $error, & $ident, & $empleado, & $cargo, & $concepto, & $nomina, & $liscon, & $lismov, & $lisvar, & $lisfun, & $lisemp, & $lishis, & $fecnom, & $fechanac, & $fechaing, & $sexo, & $vars, & $especial) {
+    $valor = array_pop($pila);
+    $error = false;
+    switch ($token) {
+      case "SIN" :
+        if (!$error) {
+          array_push($pila, strval(sin(floatval($valor))));
+        }
+        break;
+      case "COS" :
+        if (!$error) {
+          array_push($pila, strval(cos(floatval($valor))));
+        }
+        break;
+      case "INT" :
+        if (!$error) {
+          array_push($pila, strval(intval(floatval($valor))));
+        }
+        break;
+      case "LOG" :
+        if (!$error) {
+          array_push($pila, strval(log(floatval($valor))));
+        }
+        break;
+      case "LN" :
+        if (!$error) {
+          array_push($pila, strval(log(floatval($valor))));
+        }
+        break;
+      case "SGN" :
+        if (!$error) {
+          array_push($pila, strval(self :: sgn(floatval($valor))));
+        }
+        break;
+      case "SQR" :
+        if (!$error) {
+          array_push($pila, strval(sqrt(floatval($valor))));
+        }
+        break;
+      case "RND" :
+        if (!$error) {
+          array_push($pila, strval(round(floatval($valor))));
+        }
+        break;
+      case "FFRAC" :
+        if (!$error) {
+          array_push($pila, strval(floatval($valor) - (int) (floatval($valor))));
+        }
+        break;
+      case "FINT" :
+        if (!$error) {
+          array_push($pila, strval((int) (floatval($valor))));
+        }
+        break;
+
+      default :
+        if (!$error) {
+          array_push($pila, $valor);
+        }
+
+        $valor = "";
+
+        if (count($ident) != 0) {
+          //$valor=$ident[$token];
+        } //else
+        //{
+        //   $valor="";
+        //}
+
+        $guardar = ($valor == '');
+
+        if ($valor == '' && $empleado == '') {
+          self :: evaluaToken(& $token, & $valor, & $pila, & $guardar, & $liscon, & $lismov, & $lisvar, & $lisfun, & $lisemp, & $lishis);
+        } else
+          if ($valor == "" && $empleado != "") {
+            self :: calculaToken(& $token, & $valor, & $pila, & $guardar, & $empleado, & $cargo, & $concepto, & $nomina, & $fecnom, & $fechanac, & $fechaing, & $sexo, & $especial);
+          }
+        if ($guardar && $valor != "") {
+          //$ident[$token]=$valor;
+          $vars = $vars . chr(13) . $token . "=" . $valor; // no se que hacen con esto.
+        }
+        if ($valor != '' || $valor==0) {
+          $error = false;
+          array_push($pila, $valor);
+        } else {
+          $error = true;
+        }
+    } // end switch
+
+  }
+
+public static function grabarModificarMontos($grid)
+{
+  $x=$grid[0];
+  $j=0;
+  while ($j<count($x))
+  {
+    if ($x[$j]->getCheck()=="1")
+    {
+      $x[$j]->save();
+    }
+
+   $j++;
+  }
+}
+
+public static function grabarOtrosCreditos($clasemodelo,$gridpar)
+{
+       $x=$gridpar[0];
+       $j=0;
+       while ($j<count($x))
+       {
+           if ($x[$j]->getCodparegr()!='')
+           {
+                $x[$j]->setCodcat($clasemodelo->getCodcat());
+                if ($x[$j]->getCadenaper()!='')
+               {
+                  $f= new Criteria();
+                  $f->add(ForperotrcrePeer::CODCAT,$clasemodelo->getCodcat());
+                  $f->add(ForperotrcrePeer::CODPAREGR,$x[$j]->getCodparegr());
+                  ForperotrcrePeer::doDelete($f);
+
+                  $cadenaper=split('!',$x[$j]->getCadenaper());
+                  $r=0;
+                  while ($r<(count($cadenaper)-1))
+                  {
+                    $aux=$cadenaper[$r];
+                    $aux2=split('_',$aux);
+
+                    $forperotrcre= new Forperotrcre();
+                    $forperotrcre->setCodcat($clasemodelo->getCodcat());
+                    $forperotrcre->setCodparegr($x[$j]->getCodparegr());
+                    $forperotrcre->setPerpre($aux2[0]);
+                    $forperotrcre->setMonper(H::toFloat($aux2[1]));
+                    $forperotrcre->save();
+
+                    $r++;
+                  }
+               }
+
+               if ($x[$j]->getCadenafin()!='')
+               {
+                  $f= new Criteria();
+                  $f->add(ForfinotrcrePeer::CODCAT,$clasemodelo->getCodcat());
+                  $f->add(ForfinotrcrePeer::CODPAREGR,$x[$j]->getCodparegr());
+                  ForfinotrcrePeer::doDelete($f);
+
+                  $cadenafin=split('!',$x[$j]->getCadenafin());
+                  $r=0;
+                  while ($r<(count($cadenafin)-1))
+                  {
+                    $aux=$cadenafin[$r];
+                    $aux2=split('_',$aux);
+
+                    $forfinotrcre= new Forfinotrcre();
+                    $forfinotrcre->setCodcat($clasemodelo->getCodcat());
+                    $forfinotrcre->setCodparegr($x[$j]->getCodparegr());
+                    $forfinotrcre->setCodparing($aux2[0]);
+                    $forfinotrcre->setMonfin(H::toFloat($aux2[2]));
+                    $forfinotrcre->save();
+
+                    $r++;
+                  }
+               }
+
+               if ($x[$j]->getCadenaorg()!='')
+               {
+                  $f= new Criteria();
+                  $f->add(ForotrdistraPeer::CODCAT,$clasemodelo->getCodcat());
+                  $f->add(ForotrdistraPeer::CODPAREGR,$x[$j]->getCodparegr());
+                  ForotrdistraPeer::doDelete($f);
+
+                  $cadenaorg=split('!',$x[$j]->getCadenaorg());
+                  $r=0;
+                  while ($r<(count($cadenaorg)-1))
+                  {
+                    $aux=$cadenaorg[$r];
+                    $aux2=split('_',$aux);
+
+                    $forotrdistra= new Forotrdistra();
+                    $forotrdistra->setCodcat($clasemodelo->getCodcat());
+                    $forotrdistra->setCodparegr($x[$j]->getCodparegr());
+                    $forotrdistra->setCodorg($aux2[0]);
+                    $forotrdistra->setMonto(H::toFloat($aux2[2]));
+                    $forotrdistra->save();
+                    $r++;
+                  }
+               }
+               $x[$j]->save();
+           }
+
+          $j++;
+        }
+
+    $z=$gridpar[1];
+    $j=0;
+    if (!empty($z[$j]))
+    {
+      while ($j<count($z))
+      {
+       $a= new Criteria();
+       $a->add(ForperotrcrePeer::CODCAT,$clasemodelo->getCodcat());
+       $a->add(ForperotrcrePeer::CODPAREGR,$z[$j]->getCodparegr());
+       ForperotrcrePeer::doDelete($a);
+
+       $b= new Criteria();
+       $b->add(ForfinotrcrePeer::CODCAT,$clasemodelo->getCodcat());
+       $b->add(ForfinotrcrePeer::CODPAREGR,$z[$j]->getCodparegr());
+       ForfinotrcrePeer::doDelete($b);
+
+        $c= new Criteria();
+        $c->add(ForotrdistraPeer::CODCAT,$clasemodelo->getCodcat());
+        $c->add(ForotrdistraPeer::CODPAREGR,$z[$j]->getCodparegr());
+        ForotrdistraPeer::doDelete($c);
+
+        $z[$j]->delete();
+        $j++;
+      }
+    }
+}
+
+ public static function cargarPeriodosObras($codcat,$codobr,$codpar,$cadena,&$acum)
+ {
+   $periodos=array();
+   $acum=0;
+
+   if ($cadena==''){
+       $c = new Criteria();
+       $c->add(ForperobrPeer::CODCAT,$codcat);
+       $c->add(ForperobrPeer::CODOBR,$codobr);
+       $c->add(ForperobrPeer::CODPAREGR,$codpar);
+       $reg= ForperobrPeer::doSelect($c);
+       if ($reg)
+       {
+           $i=0;
+           foreach ($reg as $obj)
+           {
+             $periodos[$i]["perpre"]=$obj->getPerpre();
+             $periodos[$i]["monper"]=number_format($obj->getMonper(),2,',','.');
+             $periodos[$i]["id"]=9;
+
+             $acum=$acum+ $obj->getMonper();
+             $i++;
+
+           }
+       }else {
+           $i=0;
+           while ($i<12)
+           {
+             $periodos[$i]["perpre"]=str_pad($i+1,2,'0',STR_PAD_LEFT);
+             $periodos[$i]["monper"]="0,00";
+             $periodos[$i]["id"]=9;
+             $i++;
+           }
+       }
+   }else {
+      $cadenaubi=split('!',$cadena);
+      $r=0;
+      while ($r<(count($cadenaubi)-1))
+      {
+        $aux=$cadenaubi[$r];
+        $aux2=split('_',$aux);
+
+        $periodos[$r]["perpre"]=$aux2[0];
+        $periodos[$r]["monper"]=$aux2[1];
+        $periodos[$r]["id"]=9;
+
+        $acum=$acum + H::toFloat($aux2[1]);
+        $r++;
+      }
+   }
+
+   return $periodos;
+ }
+
+ public static function cargarFuentesObras($codcat,$codobr,$codpar,$cadena)
+ {
+   $fuentes=array();
+   $result=array();
+
+   if ($cadena==''){
+       $c = new Criteria();
+       $c->add(ForfinobrPeer::CODCAT,$codcat);
+       $c->add(ForfinobrPeer::CODOBR,$codobr);
+       $c->add(ForfinobrPeer::CODPAREGR,$codpar);
+       $reg= ForfinobrPeer::doSelect($c);
+       if ($reg)
+       {
+           $i=0;
+           foreach ($reg as $obj)
+           {
+             $fuentes[$i]["codparing"]=$obj->getCodparing();
+             $fuentes[$i]["nomext"]=H::getX('CODFIN','Fortipfin','Nomext',$obj->getCodparing());
+             $fuentes[$i]["monfin"]=number_format($obj->getMonfin(),2,',','.');
+              // Buscar lo asignado a la fuente de financiamiento
+            $asignado=0;
+            $sql1="select sum(montoing) as  asignado From ForIngDisfuefin Where Codfin  = '".$obj->getCodparing()."'";
+            if (Herramientas::BuscarDatos($sql1,&$resul))
+            {
+              $asignado=$resul[0]["asignado"];
+            }
+
+            //Calcular lo gastado
+            $gastadootr=0;
+            $sql2="select sum(b.monfin) as gastado from forfinotrcre b where b.codparing='".$obj->getCodparing()."' and (b.codcat||b.codparegr) in (select (codcat||codparegr) from forotrcrepre) group by b.codparing";
+            if (Herramientas::BuscarDatos($sql2,&$resul))
+            {
+              $gastadootr=$resul[0]["gastado"];
+            }
+
+            $gastadoobras=0;
+            $sql3="select sum(b.monfin) as gastado from forfinobr b Where b.codparing='".$obj->getCodparing()."' and (b.codcat||b.codparegr) in (select (codcat||codparegr) from forpreobr) group by b.codparing";
+            if (Herramientas::BuscarDatos($sql3,&$resul))
+            {
+              $gastadoobras=$resul[0]["gastado"];
+            }
+
+            $disponible=$asignado - ($gastadootr + $gastadoobras);
+
+            $fuentes[$i]["mondis"]=number_format($disponible,2,',','.');
+            $fuentes[$i]["monasi"]=number_format($asignado,2,',','.');
+            $fuentes[$i]["id"]=8;
+            $i++;
+
+           }
+       }
+     else {
+     $sql="select a.codfin as codigo,b.nomext as nombre , sum(a.montoing) as monto from foringdisfuefin a, fortipfin b where a.codfin = b.codfin group by a.codfin,b.nomext order by a.codfin";
+     if (Herramientas::BuscarDatos($sql,&$result))
+     {
+       $i=0;
+       $resul=array();
+          while ($i<count($result))
+          {
+            //Codigo y descripcion de la fuente de financiamiento
+            $fuentes[$i]["codparing"]=$result[$i]["codigo"];
+            $fuentes[$i]["nomext"]=$result[$i]["nombre"];
+            $fuentes[$i]["monfin"]="0,00";
+
+            // Buscar lo asignado a la fuente de financiamiento
+            $asignado=0;
+            $sql1="select sum(montoing) as  asignado From ForIngDisfuefin Where Codfin  = '".$result[$i]["codigo"]."'";
+            if (Herramientas::BuscarDatos($sql1,&$resul))
+            {
+              $asignado=$resul[0]["asignado"];
+            }
+
+            //Calcular lo gastado
+            $gastadootr=0;
+            $sql2="select sum(b.monfin) as gastado from forfinotrcre b where b.codparing='".$result[$i]["codigo"]."' and (b.codcat||b.codparegr) in (select (codcat||codparegr) from forotrcrepre) group by b.codparing";
+            if (Herramientas::BuscarDatos($sql2,&$resul))
+            {
+              $gastadootr=$resul[0]["gastado"];
+            }
+
+            $gastadoobras=0;
+            $sql3="select sum(b.monfin) as gastado from forfinobr b Where b.codparing='".$result[$i]["codigo"]."' and (b.codcat||b.codparegr) in (select (codcat||codparegr) from forpreobr) group by b.codparing";
+            if (Herramientas::BuscarDatos($sql3,&$resul))
+            {
+              $gastadoobras=$resul[0]["gastado"];
+            }
+
+            $disponible=$asignado - ($gastadootr + $gastadoobras);
+
+            $fuentes[$i]["mondis"]=number_format($disponible,2,',','.');
+            $fuentes[$i]["monasi"]=number_format($asignado,2,',','.');
+
+            $fuentes[$i]["id"]=8;
+            $i++;
+          }
+     }
+   }
+   }else {
+      $cadenafue=split('!',$cadena);
+      $r=0;
+      while ($r<(count($cadenafue)-1))
+      {
+        $aux=$cadenafue[$r];
+        $aux2=split('_',$aux);
+
+        $fuentes[$r]["codparing"]=$aux2[0];
+        $fuentes[$r]["nomext"]=$aux2[1];
+        $fuentes[$r]["monfin"]=$aux2[2];
+        $fuentes[$r]["mondis"]=$aux2[3];
+        $fuentes[$r]["monasi"]=$aux2[4];
+        $fuentes[$r]["id"]=8;
+
+        $r++;
+      }
+   }
+
+   return $fuentes;
+ }
+
+ public static function grabarForObras($clasemodelo,$gridobr)
+ {
+       $x=$gridobr[0];
+       $j=0;
+       while ($j<count($x))
+       {
+           if ($x[$j]->getCodobr()!='')
+           {
+                $x[$j]->setCodcat($clasemodelo->getCodcat());
+                if ($x[$j]->getCadenaper()!='')
+               {
+                  $f= new Criteria();
+                  $f->add(ForperobrPeer::CODCAT,$clasemodelo->getCodcat());
+                  $f->add(ForperobrPeer::CODOBR,$x[$j]->getCodobr());
+                  $f->add(ForperobrPeer::CODPAREGR,$x[$j]->getCodparegr());
+                  ForperobrPeer::doDelete($f);
+
+                  $cadenaper=split('!',$x[$j]->getCadenaper());
+                  $r=0;
+                  while ($r<(count($cadenaper)-1))
+                  {
+                    $aux=$cadenaper[$r];
+                    $aux2=split('_',$aux);
+
+                    $forperobr= new Forperobr();
+                    $forperobr->setCodcat($clasemodelo->getCodcat());
+                    $forperobr->setCodobr($x[$j]->getCodobr());
+                    $forperobr->setCodparegr($x[$j]->getCodparegr());
+                    $forperobr->setPerpre($aux2[0]);
+                    $forperobr->setMonper(H::toFloat($aux2[1]));
+                    $forperobr->save();
+
+                    $r++;
+                  }
+               }
+
+               if ($x[$j]->getCadenafin()!='')
+               {
+                  $f= new Criteria();
+                  $f->add(ForfinobrPeer::CODCAT,$clasemodelo->getCodcat());
+                  $f->add(ForfinobrPeer::CODOBR,$x[$j]->getCodobr());
+                  $f->add(ForfinobrPeer::CODPAREGR,$x[$j]->getCodparegr());
+                  ForfinobrPeer::doDelete($f);
+
+                  $cadenafin=split('!',$x[$j]->getCadenafin());
+                  $r=0;
+                  while ($r<(count($cadenafin)-1))
+                  {
+                    $aux=$cadenafin[$r];
+                    $aux2=split('_',$aux);
+
+                    $forfinobr= new Forfinobr();
+                    $forfinobr->setCodcat($clasemodelo->getCodcat());
+                    $forfinobr->setCodobr($x[$j]->getCodobr());
+                    $forfinobr->setCodparegr($x[$j]->getCodparegr());
+                    $forfinobr->setCodparing($aux2[0]);
+                    $forfinobr->setMonfin(H::toFloat($aux2[2]));
+                    $forfinobr->save();
+
+                    $r++;
+                  }
+               }
+
+               if ($x[$j]->getCadenaorg()!='')
+               {
+                  $f= new Criteria();
+                  $f->add(ForobrdistraPeer::CODCAT,$clasemodelo->getCodcat());
+                  $f->add(ForobrdistraPeer::CODOBR,$x[$j]->getCodobr());
+                  $f->add(ForobrdistraPeer::CODPAREGR,$x[$j]->getCodparegr());
+                  ForobrdistraPeer::doDelete($f);
+
+                  $cadenaorg=split('!',$x[$j]->getCadenaorg());
+                  $r=0;
+                  while ($r<(count($cadenaorg)-1))
+                  {
+                    $aux=$cadenaorg[$r];
+                    $aux2=split('_',$aux);
+
+                    $forobrdistra= new Forobrdistra();
+                    $forobrdistra->setCodcat($clasemodelo->getCodcat());
+                    $forobrdistra->setCodobr($x[$j]->getCodobr());
+                    $forobrdistra->setCodparegr($x[$j]->getCodparegr());
+                    $forobrdistra->setCodorg($aux2[0]);
+                    $forobrdistra->setMonto(H::toFloat($aux2[2]));
+                    $forobrdistra->save();
+                    $r++;
+                  }
+               }
+               $x[$j]->save();
+           }
+
+          $j++;
+        }
+
+    $z=$gridobr[1];
+    $j=0;
+    if (!empty($z[$j]))
+    {
+      while ($j<count($z))
+      {
+          $a= new Criteria();
+          $a->add(ForperobrPeer::CODCAT,$clasemodelo->getCodcat());
+          $a->add(ForperobrPeer::CODOBR,$z[$j]->getCodobr());
+          $a->add(ForperobrPeer::CODPAREGR,$z[$j]->getCodparegr());
+          ForperobrPeer::doDelete($a);
+
+          $b= new Criteria();
+          $b->add(ForfinobrPeer::CODCAT,$clasemodelo->getCodcat());
+          $b->add(ForfinobrPeer::CODOBR,$z[$j]->getCodobr());
+          $b->add(ForfinobrPeer::CODPAREGR,$z[$j]->getCodparegr());
+          ForfinobrPeer::doDelete($b);
+
+          $c= new Criteria();
+          $c->add(ForobrdistraPeer::CODCAT,$clasemodelo->getCodcat());
+          $c->add(ForobrdistraPeer::CODOBR,$z[$j]->getCodobr());
+          $c->add(ForobrdistraPeer::CODPAREGR,$z[$j]->getCodparegr());
+          ForobrdistraPeer::doDelete($c);
+
+        $z[$j]->delete();
+        $j++;
+      }
+    }
+ }
+
+
+ public static function CalPorEmpleado($codemp,$codnom,$codcar,$codcon,$desde,$hasta,$opsi,$msem,&$cont)
+{
+    $montocalculadoconcepto=0;
+    if (Herramientas::BuscarDatos("Select * from npdefgen Where CodEmp='001'",&$resuladi))
+            $redondeo = $resuladi[0]["redmon"];
+     else
+            $redondeo = '';
+
+    // NPNOMINA
+    $sql="select codnom, nomnom, numsem, ultfec, profec, frecal,
+             to_char(profec,'dd/mm/yyyy') as profec2, to_char(ultfec,'dd/mm/yyyy') as ultfec2
+             from npnomina where codnom='".$codnom."' ";
+    if (Herramientas::BuscarDatos($sql,&$npnomina))
+    {
+            $nomnom=$npnomina[0]["nomnom"];
+            $ultfec=$npnomina[0]["ultfec"];
+            $profec=$npnomina[0]["profec"];
+            $frecal=$npnomina[0]["frecal"];
+    }
+
+    $codemp=$codemp;
+    $cargo=$codcar;
+    $fecnac=H::getX_vacio('CODEMP','Nphojint','Fecnac',$codemp);
+    if ($fecnac=='')
+      $fechanac='1969-01-01';
+    else
+      $fechanac=$fecnac;
+
+    $fecing=H::getX_vacio('CODEMP','Nphojint','Fecing',$codemp);
+    if ($fecing=='')
+      $fechaing='2002-01-01';
+    else
+      $fechaing=$fecing;
+
+    $sexemp=H::getX_vacio('CODEMP','Nphojint','Sexemp',$codemp);
+    if ($sexemp=='')
+      $sexo='M';
+    else
+      $sexo=$sexemp;
+
+     self::CalculoPorEmpleado($codemp,$cargo,$codnom,$nomnom,$profec,$frecal,$opsi,$msem,$desde,$hasta,$redondeo,$ultfec,$fechanac,$fechaing,$sexo,$codcon,&$cont,&$montocalculadoconcepto);
+
+     return $montocalculadoconcepto;
+}
+
+public static function CalculoPorEmpleado($codemp,$cargo,$codnom,$nomnom,$profec,$frecal,$opsi,$msem,$desde,$hasta,$redondeo,$ultfec,$fechanac,$fechaing,$sexo,$codcon,&$cont,&$montocalculadoconcepto)
+{
+    $sqlfrecuencia = CalculoNomina::Buscar_frecuencia($frecal,$msem,$opsi,$profec);
+    $periodos = Nomina::buscar_Periodos($codnom,$codemp,$cargo,&$i_periodos_adicionales);
+    if ($periodos!=0)
+    {
+        $sql2=" select distinct p.*, CASE WHEN q.codcon is null THEN 'N' else 'S' END as prestamo from (
+                select distinct x.*, CASE WHEN Y.CODCONVAC IS NULL THEN 'N' ELSE 'S' END AS vacacion from (
+                Select distinct a.codemp,a.codcar,a.codcon,a.nomcon,a.cantidad,a.monto,a.acumulado,a.frecon,a.asided,a.acucon
+                from npdefcpt c, npasiconemp a left outer join npnomespconnomtip b
+                 on (a.codcon = b.codcon and b.codnom = '".$codnom."' and b.especial='S')
+                where a.activo='S'
+                and b.codcon is null
+                and a.codcon=c.codcon and C.CONACT='S'
+                and a.codemp='".$codemp."' $sqlfrecuencia
+                and a.codcar='".$cargo."' and calcon='S' and a.codcon='".$codcon."'
+                ) X left outer join NPVACDEFGEN Y on x.codcon = y.codconvac and y.codnomvac = '".$codnom."')
+                p left outer join nptippre q  on (p.codcon = q.codcon ) oRDER bY asided,p.cODcON ";
+
+        if (Herramientas::BuscarDatos($sql2,&$tconceptos))
+        {
+                self::ValidacionPorConceptos($tconceptos,$codnom,$nomnom,$profec,$frecal,$periodos,$i_periodos_adicionales,$opsi,$msem,$codemp,$cargo,$desde,$hasta,$fechanac,$fechaing,$sexo,$nomnom,$redondeo,$ultfec,&$cont,&$montocalculadoconcepto);
+        }// if buscardatos tconceptos
+    } // if periodos!=0
+}
+
+public static function ValidacionPorConceptos($tconceptos,$codnom,$nomnom,$profec,$frecal,$periodos,$i_periodos_adicionales,$opsi,$msem,$codemp,$cargo,$desde,$hasta,$fechanac,$fechaing,$sexo,$nomnom,$redondeo,$ultfec,&$cont,&$montocalculadoconcepto)
+{
+	$acumuladeb=0;
+	$acumulacre=0;
+	foreach ($tconceptos as $conceptos)
+	{
+		self::CalculoPorConceptos($conceptos,$codnom,$profec,$frecal,$periodos,$i_periodos_adicionales,$opsi,$msem,$codemp,$cargo,$desde,$hasta,$fechanac,$fechaing,$sexo,$nomnom,$redondeo,$ultfec,$acumulacre,$acumuladeb,&$cont,&$montocalculadoconcepto);
+	}// foreach conceptos
+}
+
+public static function CalculoPorConceptos($conceptos,$codnom,$profec,$frecal,$periodos,$i_periodos_adicionales,$opsi,$msem,$codemp,$cargo,$desde,$hasta,$fechanac,$fechaing,$sexo,$nomnom,$redondeo,$ultfec,$acumulacre,$acumuladeb,&$cont,&$montocalculadoconcepto)
+{
+    if (Herramientas::BuscarDatos("SELECT * FROM NPCESTATICKETS WHERE CODCON='".$conceptos["codcon"]."' AND CODNOM='".$codnom."'",&$tcesta))
+            $conceptotickets=true;
+    else
+            $conceptotickets=false;
+
+    // CALCULAR LA CANTIDAD DE PERIODOS EFECTIVOS POR CONCEPTOS SEGUN SU FRECUENCIA
+    $periodosefectivos=Nomina::buscar_Periodos_Efectivos($profec,$frecal,$periodos,$conceptos["frecon"],$i_periodos_adicionales,$opsi,$msem);
+     try{
+        Herramientas::BuscarDatos("SELECT calculaedad(date(now()),to_date('2000-01-01','yyyy-mm-dd'))",&$rsedad);
+     }catch(Exception $e){
+         $sqledad="CREATE OR REPLACE FUNCTION calculaedad(date, date)
+                      RETURNS numeric AS
+                      \$BODY$
+                      DECLARE
+                        fechahas ALIAS FOR $1;
+                        fechades ALIAS FOR $2;
+                        edad  NUMERIC;
+                      BEGIN
+                        select (case when to_char(fechahas,'mm')::numeric<to_char(fechades,'mm')::numeric
+                              then (to_char(fechahas,'yyyy')::numeric-to_char(fechades,'yyyy')::numeric)-1
+                              when to_char(fechahas,'mm')::numeric=to_char(fechades,'mm')::numeric
+                              then case when to_char(fechahas,'dd')::numeric<to_char(fechades,'dd')::numeric
+                              then (to_char(fechahas,'yyyy')::numeric-to_char(fechades,'yyyy')::numeric)-1
+                              else (to_char(fechahas,'yyyy')::numeric-to_char(fechades,'yyyy')::numeric) end
+                              else (to_char(fechahas,'yyyy')::numeric-to_char(fechades,'yyyy')::numeric) end) into edad;
+
+                        RETURN edad;
+                      END;
+                      \$BODY$
+                      LANGUAGE 'plpgsql' VOLATILE;
+                      ALTER FUNCTION calculaedad(date, date) OWNER TO postgres;";
+        Herramientas::BuscarDatos($sqledad, $rsedad);
+     }
+
+
+    if ($conceptos["codcon"]!='')
+    {
+        if ($conceptos["vacacion"]=='S')
+        {
+                $periodosefectivos=1;
+        }
+
+        $cuotas="";
+
+        //condicion o formula para cada concepto
+        $nroope=0;
+        if (Herramientas::BuscarDatos("Select distinct(valor),campo,operador,confor,tipcal, TO_NUMBER(NUMCON,'999') from npcalcon where codcon='".$conceptos["codcon"]."' and codnom='".$codnom."' ORDER BY TO_NUMBER(NUMCON,'999')",&$tgrid)) // ES UNA FORMULA O CONDICION
+        {
+            self::ValidacionFormula($tgrid,$codemp,$cargo,$conceptos,$codnom,$desde,$hasta,$fechanac,$fechaing,$sexo,$nomnom,$conceptotickets,$periodosefectivos,$cuotas,$redondeo,$ultfec,$profec,$nroope,$acumulacre,$acumuladeb,&$cont,&$montocalculadoconcepto);
+        }
+    } // fin ($conceptos["codcon"]!='')
+}
+
+public static function ValidacionFormula($tgrid,$codemp,$cargo,$conceptos,$codnom,$desde,$hasta,$fechanac,$fechaing,$sexo,$nomnom,$conceptotickets,$periodosefectivos,$cuotas,$redondeo,$ultfec,$profec,$nroope,$acumulacre,$acumuladeb,&$cont,&$montocalculadoconcepto)
+{
+    if ($tgrid[0]["tipcal"]=='F') // EVALUAMOS UNA FORMULA
+    {
+        // EJECUTAR FORMULA
+        $cadena=trim(strtoupper($tgrid[0]["confor"]));
+        $ecuacion=Nomina::posfix($cadena);
+        Nomina::evalEcua(&$ecuacion,&$resecu,&$error,$codemp,$cargo,$conceptos["codcon"],$codnom,'btnCalcular','nrosem','datosins(2)','datosins(2)','datosins(2)','datosins(2)',$hasta,$fechanac,$fechaing,$sexo,&$vars,$especial='NO');
+        self::ValidacionSalvar($vars,$error,$resecu,$codnom,$codemp,$cargo,$conceptos,$hasta,$desde,$nomnom,$conceptotickets,$periodosefectivos,$cuotas,$redondeo,$acumuladeb,$acumulacre,&$cont,&$montocalculadoconcepto);
+    }
+    else
+    {
+        foreach ($tgrid as $grid)
+        {
+            self::CalculoPorFormula($grid,$codemp,$cargo,$conceptos,$codnom,$fechanac,$fechaing,$sexo,$desde,$hasta,$ultfec,$profec,&$booleanos,&$opelog,&$nroope,$nomnom,$conceptotickets,$periodosefectivos,$cuotas,$redondeo,$acumuladeb,$acumulacre,&$cont,&$montocalculadoconcepto);
+        }
+    } //fin tipo calculo formula "F"
+}
+
+
+public static function ValidacionSalvar($vars,$error,$resecu,$codnom,$codemp,$cargo,$conceptos,$hasta,$desde,$nomnom,$conceptotickets,$periodosefectivos,$cuotas,$redondeo,$acumuladeb,$acumulacre,&$cont,&$montocalculadoconcepto)
+{
+    if (!$error && $resecu!=0)
+    {
+        $resecu=$resecu*$periodosefectivos;
+        if (($conceptos["prestamo"]=='S') && ($resecu>floatval($conceptos["acumulado"])))
+        {
+            $montocalculadoconcepto=$conceptos["acumulado"];
+        }
+        else
+        {
+            $montocalculadoconcepto=$resecu;
+        }
+        if ($redondeo=='S')
+        {
+            if ( ($resecu-(int)($resecu)) > 0.5 )
+            {
+                $montocalculadoconcepto=(int)($resecu)+1;
+            }
+            else
+            {
+                $montocalculadoconcepto=(int)($resecu);
+            }
+        }
+    }
+}
+
+public static function CalculoPorFormula($grid,$codemp,$cargo,$conceptos,$codnom,$fechanac,$fechaing,$sexo,$desde,$hasta,$ultfec,$profec,&$booleanos,&$opelog,&$nroope,$nomnom,$conceptotickets,$periodosefectivos,$cuotas,$redondeo,$acumuladeb,$acumulacre,&$cont)
+{
+	$especial='NO';
+	$valor1=Nomina::evaluar_Campo($grid["campo"],&$resecu,&$error,&$guardar,$codemp,$cargo,$conceptos["codcon"],$codnom,&$fecnom,$fechanac,$fechaing,$sexo,$especial,$desde,$hasta,$ultfec,$profec);
+        $valor2=$grid["valor"];
+
+        if(strtoupper(substr($valor2,0,1))>='A' && strtoupper(substr($valor2,0,1))<='Z' && intval(strlen($valor2))>1)
+            $valor2=Nomina::evaluar_Campo($valor2,&$resecu,&$error,&$guardar,$codemp,$cargo,$conceptos["codcon"],$codnom,&$fecnom,$fechanac,$fechaing,$sexo,$especial,$desde,$hasta,$ultfec,$profec);
+
+        if($valor2==0 || $valor2=='')
+            $valor2=$grid["valor"];
+
+	if ($nroope==0)
+	{
+		$booleanos[0]=Nomina::evaluar_Cond($valor1,$grid["operador"],$valor2);
+	}
+	else
+	{
+		$booleanos[1]=Nomina::evaluar_Cond($valor1,$grid["operador"],$valor2);
+		$booleanos[0]=Nomina::evaluar_Opelog($booleanos[0],$booleanos[1],$opelog);
+
+		$nroope=0;
+	}
+
+	if (Herramientas::StringPos(strtoupper($grid["confor"]),"AND",0)!=-1 || Herramientas::StringPos(strtoupper($grid["confor"]),"OR",0)!=-1)
+	{
+		$opelog=$grid["confor"];
+		$nroope+=1;
+	}
+	else // es la formula
+	{
+		if ($booleanos[0])
+		{
+			// ejecuta y pasa a otro concepto
+			$cadena= trim(strtoupper($grid["confor"]));
+			$ecuacion=Nomina::posfix($cadena);
+			Nomina::evalEcua(&$ecuacion,&$resecu,&$error,$codemp,$cargo,$conceptos["codcon"],$codnom,'btnCalcular','nrosem','datosins(2)','datosins(2)','datosins(2)','datosins(2)',$hasta,$fechanac,$fechaing,$sexo,&$vars,$especial='NO');
+			self::ValidacionSalvar($vars,$error,$resecu,$codnom,$codemp,$cargo,$conceptos,$hasta,$desde,$nomnom,$conceptotickets,$periodosefectivos,$cuotas,$redondeo,$acumuladeb,$acumulacre,&$cont,&$montocalculadoconcepto);
+
+		}
+		else
+		{
+			$nroope=0;
+		} // fin $booleanos[0]
+	}// fin else formula
+}
+
+public static function salvarConceptosCargos($clasemodelo,$grid)
+{
+   $c = new Criteria();
+   $c->add(ForconcarPeer :: CODCAR, $clasemodelo->getCodcar());
+   ForconcarPeer :: doDelete($c);
+
+   $x = $grid[0];
+   $j = 0;
+   while ($j < count($x)) {
+      if ($x[$j]['check'] == '1') {
+        $forconcar = new Forconcar();
+        $forconcar->setCodcar($clasemodelo->getCodcar());
+        $forconcar->setCodcon($x[$j]['codcon']);
+        $forconcar->save();
+      }
+      $j++;
+    }
+}
+
+ public static function cargarPeriodosOtrCre($meta,$producto,$actividad,$partida,$cadena,&$acum)
+ {
+   $periodos=array();
+   $acum=0;
+
+   if ($cadena==''){
+       $c = new Criteria();
+       $c->add(FormetperotrPeer::CODMET,$meta);
+       $c->add(FormetperotrPeer::CODPRO,$producto);
+       $c->add(FormetperotrPeer::CODACT,$actividad);
+       $c->add(FormetperotrPeer::CODPAREGR,$partida);
+       $reg= FormetperotrPeer::doSelect($c);
+       if ($reg)
+       {
+           $i=0;
+           foreach ($reg as $obj)
+           {
+             $periodos[$i]["perpre"]=$obj->getPerpre();
+             $periodos[$i]["monper"]=number_format($obj->getMonper(),2,',','.');
+             $periodos[$i]["id"]=9;
+
+             $acum=$acum+ $obj->getMonper();
+             $i++;
+
+           }
+       }else {
+           $i=0;
+           while ($i<12)
+           {
+             $periodos[$i]["perpre"]=str_pad($i+1,2,'0',STR_PAD_LEFT);
+             $periodos[$i]["monper"]="0,00";
+             $periodos[$i]["id"]=9;
+             $i++;
+           }
+       }
+   }else {
+      $cadenaper=split('!',$cadena);
+      $r=0;
+      while ($r<(count($cadenaper)-1))
+      {
+        $aux=$cadenaper[$r];
+        $aux2=split('_',$aux);
+
+        $periodos[$r]["perpre"]=$aux2[0];
+        $periodos[$r]["monper"]=$aux2[1];
+        $periodos[$r]["id"]=9;
+
+        $acum=$acum + H::toFloat($aux2[1]);
+        $r++;
+      }
+   }
+
+   return $periodos;
+ }
+
+ public static function cargarFuentesOtrCre($meta, $producto, $actividad, $partida, $cadena)
+{
+   $fuentes=array();
+   $result=array();
+
+   if ($cadena==''){
+       $c = new Criteria();
+       $c->add(FormetfinotrPeer::CODMET,$meta);
+       $c->add(FormetfinotrPeer::CODPRO,$producto);
+       $c->add(FormetfinotrPeer::CODACT,$actividad);
+       $c->add(FormetfinotrPeer::CODPAREGR,$partida);
+       $reg= FormetfinotrPeer::doSelect($c);
+       if ($reg)
+       {
+           $i=0;
+           foreach ($reg as $obj)
+           {
+             $fuentes[$i]["codparing"]=$obj->getCodparing();
+             $fuentes[$i]["nomparing"]=H::getX('CODFIN','Fortipfin','Nomext',$obj->getCodparing());
+             $fuentes[$i]["monfin"]=number_format($obj->getMonfin(),2,',','.');
+             $fuentes[$i]["id"]=9;
+             $i++;
+
+           }
+       }else {
+
+         $sql="select a.codfin as codparing,b.nomext as nomparing , sum(a.montoing) as monto from foringdisfuefin a, fortipfin b where
+          a.codfin = b.codfin group by a.codfin,b.nomext order by a.codfin ";
+         //$sql="Select a.codparing as codparing,b.nomparing as nomparing from forparing a, fordefparing b where a.codparing = b.codparing order by a.codparing";
+         if (Herramientas::BuscarDatos($sql,&$result))
+         {
+           $i=0;
+              while ($i<count($result))
+              {
+                //Codigo y descripcion de la fuente de financiamiento
+                $fuentes[$i]["codparing"]=$result[$i]["codparing"];
+                $fuentes[$i]["nomparing"]=$result[$i]["nomparing"];
+                $fuentes[$i]["monfin"]="0,00";
+                $fuentes[$i]["id"]=8;
+                $i++;
+              }
+         }
+       }
+   }else {
+      $cadenafue=split('!',$cadena);
+      $r=0;
+      while ($r<(count($cadenafue)-1))
+      {
+        $aux=$cadenafue[$r];
+        $aux2=split('_',$aux);
+
+        $fuentes[$r]["codparing"]=$aux2[0];
+        $fuentes[$r]["nomparing"]=$aux2[1];
+        $fuentes[$r]["monfin"]=$aux2[2];
+        $fuentes[$r]["id"]=8;
+
+        $r++;
+      }
+   }
+
+   return $fuentes;
+}
+
+public static function chequearDispIngresosOtrCre($monfin,$codfin)
+ {
+   $chequeardispingresos=false;
+   if ($monfin!='')
+   {
+      $sql="select a.codfin as codigo,sum(a.montoing) as monto from foringdisfuefin a, fortipfin b where a.codfin = b.codfin and a.codfin = '".$codfin."'  group by a.codfin,b.nomext order by a.codfin";
+      if (Herramientas::BuscarDatos($sql,&$result))
+      {
+          if ($monfin>$result[0]["monto"])
+             $chequeardispingresos=false;
+          else $chequeardispingresos=true;
+      }else  $chequeardispingresos=false;
+   }else  $chequeardispingresos=false;
+
+   return $chequeardispingresos;
+ }
+
+public static function grabarOtrosCreditosPresupuestarios($clasemodelo,$gridpar)
+{
+       $x=$gridpar[0];
+       $j=0;
+       while ($j<count($x))
+       {
+           if ($x[$j]->getCodparegr()!='')
+           {
+                $x[$j]->setCodmet($clasemodelo->getCodmet());
+                $x[$j]->setCodpro($clasemodelo->getCodpro());
+                if ($x[$j]->getCadenaper()!='')
+               {
+                  $f= new Criteria();
+                  $f->add(FormetperotrPeer::CODMET,$clasemodelo->getCodmet());
+                  $f->add(FormetperotrPeer::CODPRO,$clasemodelo->getCodpro());
+                  $f->add(FormetperotrPeer::CODACT,$x[$j]->getCodact());
+                  $f->add(FormetperotrPeer::CODPAREGR,$x[$j]->getCodparegr());
+                  FormetperotrPeer::doDelete($f);
+
+                  $cadenaper=split('!',$x[$j]->getCadenaper());
+                  $r=0;
+                  while ($r<(count($cadenaper)-1))
+                  {
+                    $aux=$cadenaper[$r];
+                    $aux2=split('_',$aux);
+
+                    $formetperotr= new Formetperotr();
+                    $formetperotr->setCodmet($clasemodelo->getCodmet());
+                    $formetperotr->setCodpro($clasemodelo->getCodpro());
+                    $formetperotr->setCodact($x[$j]->getCodact());
+                    $formetperotr->setCodparegr($x[$j]->getCodparegr());
+                    $formetperotr->setPerpre($aux2[0]);
+                    $formetperotr->setMonper(H::toFloat($aux2[1]));
+                    $formetperotr->save();
+
+                    $r++;
+                  }
+               }
+
+               if ($x[$j]->getCadenafin()!='')
+               {
+                  $f= new Criteria();
+                  $f->add(FormetfinotrPeer::CODMET,$clasemodelo->getCodmet());
+                  $f->add(FormetfinotrPeer::CODPRO,$clasemodelo->getCodpro());
+                  $f->add(FormetfinotrPeer::CODACT,$x[$j]->getCodact());
+                  $f->add(FormetfinotrPeer::CODPAREGR,$x[$j]->getCodparegr());
+                  FormetfinotrPeer::doDelete($f);
+
+                  $cadenafin=split('!',$x[$j]->getCadenafin());
+                  $r=0;
+                  while ($r<(count($cadenafin)-1))
+                  {
+                    $aux=$cadenafin[$r];
+                    $aux2=split('_',$aux);
+
+                    $formetfinotr= new Formetfinotr();
+                    $formetfinotr->setCodmet($clasemodelo->getCodmet());
+                    $formetfinotr->setCodpro($clasemodelo->getCodpro());
+                    $formetfinotr->setCodact($x[$j]->getCodact());
+                    $formetfinotr->setCodparegr($x[$j]->getCodparegr());
+                    $formetfinotr->setCodparing($aux2[0]);
+                    $formetfinotr->setMonfin(H::toFloat($aux2[2]));
+                    $formetfinotr->save();
+
+                    $r++;
+                  }
+               }
+
+               if ($x[$j]->getCadenaorg()!='')
+               {
+                  $f= new Criteria();
+                  $f->add(FormetdistraPeer::CODMET,$clasemodelo->getCodmet());
+                  $f->add(FormetdistraPeer::CODPRO,$clasemodelo->getCodpro());
+                  $f->add(FormetdistraPeer::CODACT,$x[$j]->getCodact());
+                  $f->add(FormetdistraPeer::CODPAREGR,$x[$j]->getCodparegr());
+                  FormetdistraPeer::doDelete($f);
+
+                  $cadenaorg=split('!',$x[$j]->getCadenaorg());
+                  $r=0;
+                  while ($r<(count($cadenaorg)-1))
+                  {
+                    $aux=$cadenaorg[$r];
+                    $aux2=split('_',$aux);
+
+                    $formetdistra= new Formetdistra();
+                    $formetdistra->setCodmet($clasemodelo->getCodmet());
+                    $formetdistra->setCodpro($clasemodelo->getCodpro());
+                    $formetdistra->setCodact($x[$j]->getCodact());
+                    $formetdistra->setCodparegr($x[$j]->getCodparegr());
+                    $formetdistra->setCodorg($aux2[0]);
+                    $formetdistra->setMonto(H::toFloat($aux2[2]));
+                    $formetdistra->save();
+                    $r++;
+                  }
+               }
+               $x[$j]->save();
+           }
+
+          $j++;
+        }
+
+    $z=$gridpar[1];
+    $j=0;
+    if (!empty($z[$j]))
+    {
+      while ($j<count($z))
+      {
+       $a= new Criteria();
+       $a->add(FormetperotrPeer::CODMET,$clasemodelo->getCodmet());
+       $a->add(FormetperotrPeer::CODPRO,$clasemodelo->getCodpro());
+       $a->add(FormetperotrPeer::CODACT,$z[$j]->getCodact());
+       $a->add(FormetperotrPeer::CODPAREGR,$z[$j]->getCodparegr());
+       FormetperotrPeer::doDelete($a);
+
+       $b= new Criteria();
+       $b->add(FormetfinotrPeer::CODMET,$clasemodelo->getCodmet());
+       $b->add(FormetfinotrPeer::CODPRO,$clasemodelo->getCodpro());
+       $b->add(FormetfinotrPeer::CODACT,$z[$j]->getCodact());
+       $b->add(FormetfinotrPeer::CODPAREGR,$z[$j]->getCodparegr());
+       FormetfinotrPeer::doDelete($b);
+
+        $c= new Criteria();
+        $c->add(FormetdistraPeer::CODMET,$clasemodelo->getCodmet());
+        $c->add(FormetdistraPeer::CODPRO,$clasemodelo->getCodpro());
+        $c->add(FormetdistraPeer::CODACT,$z[$j]->getCodact());
+        $c->add(FormetdistraPeer::CODPAREGR,$z[$j]->getCodparegr());
+        FormetdistraPeer::doDelete($c);
+
+        $z[$j]->delete();
+        $j++;
+      }
+    }
+}
 
 }
 ?>

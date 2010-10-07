@@ -235,6 +235,7 @@ abstract class BaseForasoprometPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(ForasoprometPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

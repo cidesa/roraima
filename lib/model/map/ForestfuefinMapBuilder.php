@@ -30,7 +30,9 @@ class ForestfuefinMapBuilder {
 		$tMap = $this->dbMap->addTable('forestfuefin');
 		$tMap->setPhpName('Forestfuefin');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('forestfuefin_SEQ');
 
 		$tMap->addColumn('CODMET', 'Codmet', 'string', CreoleTypes::VARCHAR, true, 5);
 

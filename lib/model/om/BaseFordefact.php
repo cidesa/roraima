@@ -197,6 +197,7 @@ abstract class BaseFordefact extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FordefactPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FordefactPeer::doUpdate($this, $con);

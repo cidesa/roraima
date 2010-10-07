@@ -1,0 +1,33 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                true
+  tabla:                   foringniveles
+  ancho:                   300
+  anchogrid:               650
+  filas:                   1
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Tipo
+  tipo:                    c
+  nombrecampo:             catpar
+  esgrabable:			   true
+  html:                    []
+2:       # Columna 2
+  titulo:                  Longitud
+  tipo:                    t
+  nombrecampo:             lonniv
+  esgrabable:			   true
+  html:                    [ size=5 ]
+3:       # Columna 3
+  titulo:                  Nombre Abreviado
+  tipo:                    t
+  nombrecampo:             nomabr
+  esgrabable:			   true
+  html:                    [ size=5 ]
+4:       # Columna 4
+  titulo:                  Nombre Extendido
+  tipo:                    t
+  nombrecampo:             nomext
+  esgrabable:			   true
+  html:                    []

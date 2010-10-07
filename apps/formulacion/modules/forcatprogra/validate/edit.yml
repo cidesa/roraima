@@ -1,0 +1,42 @@
+methods:
+  post:
+   - "fordefcatpre{codcat}"
+   - "fordefcatpre{nomcat}"
+   - "fordefcatpre{coduni}"
+
+names:
+  fordefcatpre{codcat}:
+    required:  Yes
+    required_msg: El Código de la Categoria Programática no puede estar en Blanco
+    validators: Validator_codcat
+
+  fordefcatpre{nomcat}:
+    required:  Yes
+    required_msg: El Nombre de la Categoria Programática no puede estar en Blanco
+    validators: Validator_nomcat
+
+  fordefcatpre{coduni}:
+    required:  No
+    validators: Validator_coduni
+
+Validator_codcat:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Fordefcatpre
+        column:       codcat
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_nomcat:
+    class: sfStringValidator
+    param:
+        min:       5
+        min_error: El Nombre de la Categoria Programática no puede tener menos de 5 caracteres
+        max:       250
+        max_error: El Nombre de la Categoria Programática no puede pasar más de 250 caracteres
+
+Validator_coduni:
+    class: CidesaExistValidator
+    param:
+        class:    Fordefunieje
+        column:   coduni
+        unique_error:   El Código de la Unidad Ejecutora no existe
