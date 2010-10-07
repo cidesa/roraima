@@ -583,7 +583,45 @@
 318:
   cod: 318
   msj: El Monto Total de la Formulación realizada al Proyecto debe ser Menor o Igual al Monto del Proyecto .
-
+319:
+  cod: 319
+  msj: La Meta y el Producto se encuentran asociados a una Actividad.
+320:
+  cod: 320
+  msj: No puede salvar sin introducir al menos una Unidad Ejecutora.
+321:
+  cod: 321
+  msj: No puede salvar la Categoria Programática ya tiene Unidades Ejecutoras Asignadas.
+322:
+  cod: 322
+  msj: No puede salvar ya se ha realizado una asociación igual.
+323:
+  cod: 323
+  msj: No puede salvar sin introducir al menos una Acción.
+324:
+  cod: 324
+  msj: No puede salvar El Objetivo ya tiene Acciones Asignadas.
+325:
+  cod: 325
+  msj: No puede salvar La Categoria Programática ya tiene Acciones Asignadas.
+326:
+  cod: 326
+  msj: No puede salvar sin introducir al menos una Meta.
+327:
+  cod: 327
+  msj: No puede salvar La Acción y Unidad de Medida ya posee metas asignadas.
+328:
+  cod: 328
+  msj: No puede salvar sin introducir la Cantidad solicitada del Articulo correspondiente a la Actividad
+329:
+  cod: 329
+  msj: No puede salvar sin introducir el Monto del Articulo correspondiente a la Actividad
+330:
+  cod: 330
+  msj: No puede salvar sin introducir la Fuente de Financiamiento de la Actividad
+331:
+  cod: 331
+  msj: No puede salvar sin introducir el Tipo de Gasto de la Actividad
 ################# Control de Documentos #################
 # docpen
 1210:

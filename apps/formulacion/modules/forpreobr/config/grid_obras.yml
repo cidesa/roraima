@@ -1,0 +1,161 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                true
+  tabla:                   forpreobr
+  anchogrid:               1000
+  ancho:                   1000
+  filas:                   1
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  CÃ³digo Obra
+  tipo:                    t
+  nombrecampo:             codobr
+  html:                    ["size=10 maxlength=5 onBlur='toAjax(2,getUrlModuloAjax(),this.value,0,'&cajtxtmos='+$(this.id).up().next(0).descendants()[0].id+'&partida='+$(this.id).up().next(9).descendants()[0].id+'&cajtxtcom='+this.id)'"]
+  esgrabable:              true  
+  catalogo:                [fordefobr, sf_admin_edit_form, {Codobr: 1, Nomobr: 2, Codparegr: 11}, Fordefobr_Forpreobr ]
+2:       # Columna 2
+  titulo:                  DescripciÃ³n
+  tipo:                    t
+  nombrecampo:             nomobr
+  html:                    ["size=40 readonly=true"]
+  esgrabable:              true
+3:       # Columna 3
+  titulo:                  Monto
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             monpre
+  esnumerico:              true
+  html:                    ["size=10 onBlur='mostrarperiodos(this.id)' readOnly=true"]
+4:       # Columna 4
+  titulo:                  Fuente de Financiamiento
+  tipo:                    t
+  nombrecampo:             codfin
+  html:                    ["size=10 onBlur='mostrarfinanciamientos(this.id)' readonly=true"]
+  esgrabable:              true
+5:       # Columna 5
+  titulo:                  DescripciÃ³n
+  tipo:                    t
+  nombrecampo:             nomext
+  html:                    ["size=40 readonly=true"]
+  esgrabable:              true
+6:       # Columna 6
+  titulo:                  Tipo de Gasto
+  tipo:                    t
+  nombrecampo:             codtip
+  html:                    ["size=10 maxlength=4 onBlur='toAjax(3,getUrlModuloAjax(),this.value,0,'&cajtxtmos='+$(this.id).up().next(0).descendants()[0].id+'&cajtxtcom='+this.id)'"]
+  esgrabable:              true
+  catalogo:                [fortiptit, sf_admin_edit_form, {Codtip: 6, Destip: 7}, Fortiptit_Forpoa ]
+7:       # Columna 7
+  titulo:                  DescripciÃ³n
+  tipo:                    t
+  nombrecampo:             destip
+  html:                    ["size=40 readonly=true"]
+  esgrabable:              true
+8:       # Columna 8
+  titulo:                  Cod. Org
+  tipo:                    t
+  nombrecampo:             codorg
+  html:                    ["size=10 onBlur='mostrarorganismos(this.id)' readonly=true"]
+  esgrabable:              true
+9:       # Columna 9
+  titulo:                  Nombre Organismo
+  tipo:                    t
+  nombrecampo:             nomorg
+  html:                    ["size=40 readonly=true"]
+  esgrabable:              true
+10:       # Columna 10
+  titulo:                  Observaciones
+  tipo:                    t
+  nombrecampo:             observ
+  html:                    ["size=40 maxlength=250 "]
+  esgrabable:              true
+11:       # Columna 11
+  titulo:                  Partida
+  tipo:                    t
+  nombrecampo:             codparegr
+  html:                    ["size=40 maxlength=250 "]
+  esgrabable:              true
+  #oculta:                  true
+12:       # Columna 12
+  titulo:                  Funcionario
+  tipo:                    t
+  nombrecampo:             funcionario
+  html:                    ["size=40 maxlength=50"]
+  esgrabable:              true
+13:       # Columna 13
+  titulo:                  Fecha Inicio
+  tipo:                    f
+  esgrabable:              true
+  nombrecampo:             fecini
+  vacia:                   true
+  html:                    [size="10"]
+14:       # Columna 14
+  titulo:                  Fecha Fin
+  tipo:                    f
+  esgrabable:              true
+  nombrecampo:             fecfin
+  vacia:                   true
+  html:                    [size="10"]
+15:       # Columna 15
+  titulo:                  SituaciÃ³n
+  tipo:                    t
+  nombrecampo:             situacion
+  html:                    ["size=5 maxlength=1"]
+  esgrabable:              true
+16:       # Columna 16
+  titulo:                  Comprom. AÃ±o Ant.
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             comproanoant
+  esnumerico:              true
+  html:                    ["size=10"]
+17:       # Columna 17
+  titulo:                  Comprom. AÃ±o Vig.
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             comprovig
+  esnumerico:              true
+  html:                    ["size=10"]
+18:       # Columna 18
+  titulo:                  Ejecut. AÃ±o Ant.
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             ejecanoant
+  esnumerico:              true
+  html:                    ["size=10"]
+19:       # Columna 19
+  titulo:                  Ejecut. AÃ±o Vig.
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             ejecanovig
+  esnumerico:              true
+  html:                    ["size=10"]
+20:       # Columna 20
+  titulo:                  Ejecut. AÃ±o Post.
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             estanopost
+  esnumerico:              true
+  html:                    ["size=10"]
+21:       # Columna 21
+  titulo:                  cadenaperiodos
+  tipo:                    t
+  nombrecampo:             cadenaper
+  html:                    ["size=40"]
+  esgrabable:              true
+  oculta:                  true
+22:       # Columna 22
+  titulo:                  Cadena Fuente Financiamiento
+  tipo:                    t
+  nombrecampo:             cadenafin
+  html:                    ["size=40"]
+  esgrabable:              true
+  oculta:                  true
+23:       # Columna 23
+  titulo:                  Cadena Organismos
+  tipo:                    t
+  nombrecampo:             cadenaorg
+  html:                    ["size=40"]
+  esgrabable:              true
+  oculta:                  true

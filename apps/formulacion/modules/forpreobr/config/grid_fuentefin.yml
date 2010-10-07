@@ -1,0 +1,42 @@
+opciones:                  # Opciones generales
+  name:                    c
+  eliminar:                false
+  tabla:                   forfinobr
+  anchogrid:               750
+  ancho:                   750
+  filas:                   0
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Fuente
+  tipo:                    t
+  nombrecampo:             codparing
+  html:                    ["size=10 readonly=true"]
+  esgrabable:              true
+2:       # Columna 2
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             nomext
+  html:                    ["size=40 readonly=true"]
+  esgrabable:              true
+3:       # Columna 3
+  titulo:                  Monto
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             monfin
+  esnumerico:              true
+  html:                    ["size=10 onBlur='ValidarMontoGridv2(this); validarDisponibilidad(this.id)'"]
+4:       # Columna 4
+  titulo:                  Disponible
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             mondis
+  esnumerico:              true
+  html:                    ["size=10 readOnly=true"]
+5:       # Columna 5
+  titulo:                  Asignado
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             monasi
+  esnumerico:              true
+  html:                    ["size=10 readOnly=true"]

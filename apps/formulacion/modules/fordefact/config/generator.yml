@@ -1,0 +1,27 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Fordefact
+    theme:            cidesaGenerator
+    fields:
+      codact: { name: Código, params : size=5 maxlength=5  onFocus=readonly(this.id) onBlur="this.value=this.value.pad(5, '0',0);"  }
+      desact: { name: Descripción, type: textarea_tag, params : size=40x5 maxlength=1000 onkeyup="ismaxlength(this)" }
+      nomabr: { name: Nombre Abreviado, params : size=20 maxlength=50}
+    list:
+      title:          Definiciones de Metas
+      filters:        [codact]
+      display:        [=codact, nomabr]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   10
+      sort:      codact
+    edit:
+      title:          Edición  de Metas
+      display:
+        "Definición de la Meta":   [codact, desact, nomabr]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

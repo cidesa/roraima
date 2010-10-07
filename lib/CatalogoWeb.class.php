@@ -6446,6 +6446,17 @@ public function Catdefcatman_Cattramo($params = '') {
             );
 	}
         
+	public function Npcargos_Forasoconcar($params = array ()) {
+		$longitud = $params[0];
+		$this->c = new Criteria();
+		$this->sql = "length(Codcar) = '" . $longitud . "'";
+		$this->c->add(NpcargosPeer :: CODCAR, $this->sql, Criteria :: CUSTOM);
+
+		$this->columnas = array (
+			NpcargosPeer :: CODCAR => 'Código',
+			NpcargosPeer :: NOMCAR => 'Nombre'
+		);
 }
 
+}
 ?>

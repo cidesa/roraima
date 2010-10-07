@@ -1,0 +1,62 @@
+methods:
+  post:
+   - "fordefobj{codobj}"
+   - "fordefobj{desobj}"
+   - "fordefobj{areest}"
+   - "fordefobj{direst}"
+
+names:
+  fordefobj{codobj}:
+    required:  Yes
+    required_msg: El Código del Objetivo no puede estar en Blanco
+    validators: CorrelValidator, Validator_codobj
+
+  fordefobj{desobj}:
+    required:  Yes
+    required_msg: La Descripción del Objetivo no puede estar en Blanco
+    validators: Validator_desobj
+
+  fordefobj{areest}:
+    required:  No
+    validators: Validator_areest
+
+  fordefobj{direst}:
+    required:  No
+    validators: Validator_direst
+
+Validator_codobj:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Fordefobj
+        column:       codobj
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_desobj:
+    class: sfStringValidator
+    param:
+        min:       5
+        min_error: La descripción no puede tener menos de 5 caracteres
+        max:       1000
+        max_error: La descripción no puede pasar más de 1000 caracteres
+
+CorrelValidator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^[0-9]*$/' ]
+        values_error: Los Correlativos solo puede contener valores númericos
+
+Validator_areest:
+    class: sfStringValidator
+    param:
+        min:       5
+        min_error: El Área Estratégica no puede tener menos de 5 caracteres
+        max:       1500
+        max_error: El Área Estratégica no puede pasar más de 1500 caracteres
+
+Validator_direst:
+    class: sfStringValidator
+    param:
+        min:       5
+        min_error: La Dirección Estratégica no puede tener menos de 5 caracteres
+        max:       1500
+        max_error: La Dirección Estratégica no puede pasar más de 1500 caracteres

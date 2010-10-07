@@ -215,6 +215,7 @@ abstract class BaseFordisperproPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FordisperproPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

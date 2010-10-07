@@ -30,7 +30,9 @@ class ForingperejeMapBuilder {
 		$tMap = $this->dbMap->addTable('foringpereje');
 		$tMap->setPhpName('Foringpereje');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('foringpereje_SEQ');
 
 		$tMap->addColumn('FECINI', 'Fecini', 'int', CreoleTypes::DATE, true, null);
 

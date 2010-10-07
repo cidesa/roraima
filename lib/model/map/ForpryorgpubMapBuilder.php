@@ -42,7 +42,7 @@ class ForpryorgpubMapBuilder {
 
 		$tMap->addColumn('RESEJE', 'Reseje', 'string', CreoleTypes::VARCHAR, false, 1);
 
-		$tMap->addColumn('TIPCNX', 'Tipcnx', 'string', CreoleTypes::VARCHAR, false, 3);
+		$tMap->addColumn('TIPCNX', 'Tipcnx', 'string', CreoleTypes::VARCHAR, true, 3);
 
 		$tMap->addColumn('DETOBS', 'Detobs', 'string', CreoleTypes::VARCHAR, false, 250);
 

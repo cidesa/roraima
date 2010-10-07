@@ -1,0 +1,16 @@
+methods:
+  post:
+   - "forasometobj{codobj}"
+
+names:
+  forasometobj{codobj}:
+    required:  Yes
+    required_msg: No puede salvar sin Introducir el Objetivo
+    validators: objetivoValidator
+
+objetivoValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Fordefobj
+        column:   codobj
+        unique_error:  El Objetivo no se encuentra registrado.

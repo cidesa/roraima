@@ -197,6 +197,7 @@ abstract class BaseFordefunieje extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FordefuniejePeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FordefuniejePeer::doUpdate($this, $con);

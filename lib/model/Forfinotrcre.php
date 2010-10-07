@@ -15,4 +15,17 @@
  */ 
 class Forfinotrcre extends BaseForfinotrcre
 {
+    protected $mondis=0.00;
+    protected $monasi=0.00;
+    protected $nomext="";
+
+    public function getNomext()
+    {
+       return Herramientas::getX('CODFIN','Fortipfin','Nomext',self::getCodparing());
+    }
+
+   public function setNomext()
+   {
+     return $this->nomext;
+   }
 }

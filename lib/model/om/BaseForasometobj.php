@@ -174,6 +174,7 @@ abstract class BaseForasometobj extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = ForasometobjPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += ForasometobjPeer::doUpdate($this, $con);

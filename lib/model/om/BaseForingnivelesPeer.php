@@ -225,6 +225,7 @@ abstract class BaseForingnivelesPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(ForingnivelesPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

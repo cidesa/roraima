@@ -1,0 +1,40 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                false
+  tabla:                   forregart
+  anchogrid:               750
+  ancho:                   750
+  filas:                   0
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Marcar
+  tipo:                    k
+  nombrecampo:             check
+  html:                    ["size=3"]
+  esgrabable:              true
+2:       # Columna 2
+  titulo:                  Cod. Artículo
+  tipo:                    t
+  nombrecampo:             codart
+  html:                    ["size=20 readonly=true"]
+  esgrabable:              true
+3:       # Columna 3
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             desart
+  html:                    ["size=50 readonly=true"]
+  esgrabable:              true
+4:       # Columna 4
+  titulo:                  Partida
+  tipo:                    t
+  nombrecampo:             codpar
+  html:                    ["size=20 readonly=true"]
+  esgrabable:              true
+5:       # Columna 5
+  titulo:                  Costo
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             cosult
+  esnumerico:              true
+  html:                    ["size=10 readonly=true"]

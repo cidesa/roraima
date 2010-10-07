@@ -1,0 +1,38 @@
+methods:
+  post:
+   - "foringdefniv{ruppar}"
+   - "foringdefniv{fecini}"
+   - "foringdefniv{feccie}"
+   - "foringdefniv{fecper}"
+   - "foringdefniv{numper}"
+
+names:
+  foringdefniv{ruppar}:
+    required:  Yes
+    required_msg: No puede salvar sin introducir el Número de Rupturas de la Partida
+
+  foringdefniv{fecini}:
+    required:  Yes
+    required_msg: No puede salvar sin introducir la Fecha de Inicio del Ejercicio
+    validators: FechaValidator
+
+  foringdefniv{feccie}:
+    required:  Yes
+    required_msg: No puede salvar sin introducir la Fecha de Fin del Ejercicio
+    validators: FechaValidator
+
+  foringdefniv{fecper}:
+    required:  Yes
+    required_msg: No puede salvar sin introducir la Fecha del Período
+    validators: FechaValidator
+
+  foringdefniv{numper}:
+    required:  Yes
+    required_msg: No puede salvar sin introducir el Número de Períodos
+
+FechaValidator:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha  introducida es inválida

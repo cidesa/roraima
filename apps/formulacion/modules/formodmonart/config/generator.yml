@@ -1,0 +1,20 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Forregart
+    theme:            cidesaGenerator
+    fields:
+      tipo: { name: Tipo}
+      monto:  { name: Valor}
+      grid:  { name: .}
+      calcular:  { name: .}
+    edit:
+      title:          Modificar Precio de los Artículos
+      display:
+        "Datos para el Cálculo":         [_tipo, _monto]
+        "NONE":    [_grid, _calcular]
+      actions:
+        _list:          NONE
+        _save:          ~
+        _delete:        NONE
+        _create:        NONE

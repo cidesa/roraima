@@ -30,11 +30,13 @@ class FordefuniejeMapBuilder {
 		$tMap = $this->dbMap->addTable('fordefunieje');
 		$tMap->setPhpName('Fordefunieje');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('fordefunieje_SEQ');
 
 		$tMap->addColumn('CODUNI', 'Coduni', 'string', CreoleTypes::VARCHAR, true, 3);
 
-		$tMap->addColumn('NOMUNI', 'Nomuni', 'string', CreoleTypes::VARCHAR, false, 250);
+		$tMap->addColumn('NOMUNI', 'Nomuni', 'string', CreoleTypes::VARCHAR, true, 250);
 
 		$tMap->addColumn('CODEMP', 'Codemp', 'string', CreoleTypes::VARCHAR, false, 16);
 

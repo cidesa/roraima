@@ -1,0 +1,29 @@
+methods:
+  post:
+   - "fordefobr{codobr}"
+   - "fordefobr{codparegr}"
+
+names:
+  fordefobr{codobr}:
+    required:  Yes
+    required_msg: No puede salvar sin Introducir el Código de la Obra
+    validators: UniqueValidator
+
+  fordefobr{codparegr}:
+    required:  Yes
+    required_msg: No puede salvar sin Introducir el Código de la Partida
+    validators: PartidaValidator
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Fordefobr
+        column:   codobr
+        unique_error:   EL Código de la Obra ya existe. Por Favor, Cambiélo por otro.
+
+PartidaValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Fordefparegr
+        column:   codparegr
+        unique_error:  La Partida no Existe.

@@ -1,0 +1,40 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Forestcos
+    theme:            cidesaGenerator
+    fields:
+      codmet:
+        name: Código
+        params: size=5 maxlength=5  onFocus=readonly(this.id) onBlur="this.value=this.value.pad(5, '0',0);"
+        catalogo:
+          catalogoweb: Fordefmet_Forasometobj
+          clase: Fordefmet
+          ajax: 1
+          parametros: getprincipal="getCodmet" getsecundario="getDesmet" campoprincipal="codmet" camposecundario="desmet" campobase = "id"
+      codpro:
+        name: Código
+        params: size=20  maxlength=5  onFocus=readonly(this.id) onBlur="this.value=this.value.pad(5, '0',0);"
+        catalogo:
+          catalogoweb: Fordefpro_Forasoactmet
+          clase: Fordefpro
+          ajax: 2
+          parametros: getprincipal="getCodpro" getsecundario="getDespro" campoprincipal="codpro" camposecundario="despro" campobase = "id"
+          catalogoparams: /param1/'."'+$('forestcos_codmet').value+'".'
+          divupdate: divgrid
+          ajaxparams: +'."'".'&meta='."'+$('forestcos_codmet').value".'
+      grid:  { name: .}
+      gridper:   { name: .}
+      gridfue:   { name: .}
+    edit:
+      title:          Definición de Estructura de Costos
+      display:
+        "Acción":         [codmet]
+        "Unidad de Medida":  [codpro]
+        "Estructura Costo":    [_grid, _gridper, _gridfue]
+      hide:             [mascarart, longitud, filper, filfin, totfil]
+      actions:
+        _list:          NONE
+        _save:          ~
+        _delete:        ~
+        _create:        NONE

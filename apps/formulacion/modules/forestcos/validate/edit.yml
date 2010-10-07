@@ -1,0 +1,29 @@
+methods:
+  post:
+   - "forestcos{codmet}"
+   - "forestcos{codpro}"
+
+names:
+  forestcos{codmet}:
+    required:  Yes
+    required_msg: No puede salvar sin Introducir la Meta
+    validators: metaValidator
+
+  forestcos{codpro}:
+    required:  Yes
+    required_msg: No puede salvar sin Introducir el Producto o Servicio
+    validators: productoValidator
+
+metaValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Fordefmet
+        column:   codmet
+        unique_error:  La Meta no Existe.
+
+productoValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Fordefpro
+        column:   codpro
+        unique_error:  El Producto o Servicio no Existe.

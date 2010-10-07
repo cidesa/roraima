@@ -29,11 +29,15 @@ abstract class BaseForotrcrepre extends BaseObject  implements Persistent {
 
 
 	
-	protected $nomparegr;
+	protected $codfin;
 
 
 	
 	protected $codpre;
+
+
+	
+	protected $nomparegr;
 
 
 	
@@ -82,10 +86,10 @@ abstract class BaseForotrcrepre extends BaseObject  implements Persistent {
 
   }
   
-  public function getNomparegr()
+  public function getCodfin()
   {
 
-    return trim($this->nomparegr);
+    return trim($this->codfin);
 
   }
   
@@ -93,6 +97,13 @@ abstract class BaseForotrcrepre extends BaseObject  implements Persistent {
   {
 
     return trim($this->codpre);
+
+  }
+  
+  public function getNomparegr()
+  {
+
+    return trim($this->nomparegr);
 
   }
   
@@ -153,12 +164,12 @@ abstract class BaseForotrcrepre extends BaseObject  implements Persistent {
   
 	} 
 	
-	public function setNomparegr($v)
+	public function setCodfin($v)
 	{
 
-    if ($this->nomparegr !== $v) {
-        $this->nomparegr = $v;
-        $this->modifiedColumns[] = ForotrcreprePeer::NOMPAREGR;
+    if ($this->codfin !== $v) {
+        $this->codfin = $v;
+        $this->modifiedColumns[] = ForotrcreprePeer::CODFIN;
       }
   
 	} 
@@ -169,6 +180,16 @@ abstract class BaseForotrcrepre extends BaseObject  implements Persistent {
     if ($this->codpre !== $v) {
         $this->codpre = $v;
         $this->modifiedColumns[] = ForotrcreprePeer::CODPRE;
+      }
+  
+	} 
+	
+	public function setNomparegr($v)
+	{
+
+    if ($this->nomparegr !== $v) {
+        $this->nomparegr = $v;
+        $this->modifiedColumns[] = ForotrcreprePeer::NOMPAREGR;
       }
   
 	} 
@@ -197,11 +218,13 @@ abstract class BaseForotrcrepre extends BaseObject  implements Persistent {
 
       $this->observ = $rs->getString($startcol + 4);
 
-      $this->nomparegr = $rs->getString($startcol + 5);
+      $this->codfin = $rs->getString($startcol + 5);
 
       $this->codpre = $rs->getString($startcol + 6);
 
-      $this->id = $rs->getInt($startcol + 7);
+      $this->nomparegr = $rs->getString($startcol + 7);
+
+      $this->id = $rs->getInt($startcol + 8);
 
       $this->resetModified();
 
@@ -209,7 +232,7 @@ abstract class BaseForotrcrepre extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 8; 
+            return $startcol + 9; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Forotrcrepre object", $e);
     }
@@ -290,6 +313,7 @@ abstract class BaseForotrcrepre extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = ForotrcreprePeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += ForotrcreprePeer::doUpdate($this, $con);
@@ -371,12 +395,15 @@ abstract class BaseForotrcrepre extends BaseObject  implements Persistent {
 				return $this->getObserv();
 				break;
 			case 5:
-				return $this->getNomparegr();
+				return $this->getCodfin();
 				break;
 			case 6:
 				return $this->getCodpre();
 				break;
 			case 7:
+				return $this->getNomparegr();
+				break;
+			case 8:
 				return $this->getId();
 				break;
 			default:
@@ -394,9 +421,10 @@ abstract class BaseForotrcrepre extends BaseObject  implements Persistent {
 			$keys[2] => $this->getMonpre(),
 			$keys[3] => $this->getCodtip(),
 			$keys[4] => $this->getObserv(),
-			$keys[5] => $this->getNomparegr(),
+			$keys[5] => $this->getCodfin(),
 			$keys[6] => $this->getCodpre(),
-			$keys[7] => $this->getId(),
+			$keys[7] => $this->getNomparegr(),
+			$keys[8] => $this->getId(),
 		);
 		return $result;
 	}
@@ -428,12 +456,15 @@ abstract class BaseForotrcrepre extends BaseObject  implements Persistent {
 				$this->setObserv($value);
 				break;
 			case 5:
-				$this->setNomparegr($value);
+				$this->setCodfin($value);
 				break;
 			case 6:
 				$this->setCodpre($value);
 				break;
 			case 7:
+				$this->setNomparegr($value);
+				break;
+			case 8:
 				$this->setId($value);
 				break;
 		} 	}
@@ -448,9 +479,10 @@ abstract class BaseForotrcrepre extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[2], $arr)) $this->setMonpre($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setCodtip($arr[$keys[3]]);
 		if (array_key_exists($keys[4], $arr)) $this->setObserv($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setNomparegr($arr[$keys[5]]);
+		if (array_key_exists($keys[5], $arr)) $this->setCodfin($arr[$keys[5]]);
 		if (array_key_exists($keys[6], $arr)) $this->setCodpre($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setId($arr[$keys[7]]);
+		if (array_key_exists($keys[7], $arr)) $this->setNomparegr($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setId($arr[$keys[8]]);
 	}
 
 	
@@ -463,8 +495,9 @@ abstract class BaseForotrcrepre extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(ForotrcreprePeer::MONPRE)) $criteria->add(ForotrcreprePeer::MONPRE, $this->monpre);
 		if ($this->isColumnModified(ForotrcreprePeer::CODTIP)) $criteria->add(ForotrcreprePeer::CODTIP, $this->codtip);
 		if ($this->isColumnModified(ForotrcreprePeer::OBSERV)) $criteria->add(ForotrcreprePeer::OBSERV, $this->observ);
-		if ($this->isColumnModified(ForotrcreprePeer::NOMPAREGR)) $criteria->add(ForotrcreprePeer::NOMPAREGR, $this->nomparegr);
+		if ($this->isColumnModified(ForotrcreprePeer::CODFIN)) $criteria->add(ForotrcreprePeer::CODFIN, $this->codfin);
 		if ($this->isColumnModified(ForotrcreprePeer::CODPRE)) $criteria->add(ForotrcreprePeer::CODPRE, $this->codpre);
+		if ($this->isColumnModified(ForotrcreprePeer::NOMPAREGR)) $criteria->add(ForotrcreprePeer::NOMPAREGR, $this->nomparegr);
 		if ($this->isColumnModified(ForotrcreprePeer::ID)) $criteria->add(ForotrcreprePeer::ID, $this->id);
 
 		return $criteria;
@@ -506,9 +539,11 @@ abstract class BaseForotrcrepre extends BaseObject  implements Persistent {
 
 		$copyObj->setObserv($this->observ);
 
-		$copyObj->setNomparegr($this->nomparegr);
+		$copyObj->setCodfin($this->codfin);
 
 		$copyObj->setCodpre($this->codpre);
+
+		$copyObj->setNomparegr($this->nomparegr);
 
 
 		$copyObj->setNew(true);

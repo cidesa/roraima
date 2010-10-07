@@ -1,0 +1,38 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Fordefobr
+    theme:            cidesaGenerator
+    fields:
+      codobr: { name: Código, params : size=5 maxlength=5  onFocus=readonly(this.id) onBlur="this.value=this.value.pad(5, '0',0);" }
+      nomobr: { name: Nombre, type: textarea_tag, params : size=40x5 maxlength=1000 onkeyup="ismaxlength(this)" }
+      obsobr: { name: Observaciones, type: textarea_tag, params : size=40x5 maxlength=4000 onkeyup="ismaxlength(this)" }
+      codparegr:
+        name: Partida
+        params: maxlength='."'+$('fordefobr_longitud').value".' onkeyDown=dFilter(event.keyCode, this,'."'+$('fordefobr_mascara').value".')
+        catalogo:
+          catalogoweb: Fordefparegr_Codparegr
+          clase: Fordefparegr
+          ajax: 1
+          parametros: getprincipal="getCodparegr" getsecundario="getNomparegr" campoprincipal="codparegr" camposecundario="nomparegr" campobase = "id"
+          catalogoparams: /param1/'."'+$('fordefobr_longitud').value+'".'
+          ajaxparams: +'."'".'&longitud='."'+$('fordefobr_longitud').value".'
+    list:
+      title:          Definición de Obras
+      filters:        [codobr, codparegr]
+      display:        [=codobr, nomobr]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   10
+      sort:      codobr
+    edit:
+      title:          Edición  de Obras
+      display:
+        "Datos de la Obra":   [codobr, nomobr, obsobr, codparegr]
+      hide:    [longitud, mascara]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

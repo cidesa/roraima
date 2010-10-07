@@ -30,9 +30,11 @@ class ForasometcreMapBuilder {
 		$tMap = $this->dbMap->addTable('forasometcre');
 		$tMap->setPhpName('Forasometcre');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
 
-		$tMap->addColumn('CODCAT', 'Codcat', 'string', CreoleTypes::VARCHAR, true, 16);
+		$tMap->setPrimaryKeyMethodInfo('forasometcre_SEQ');
+
+		$tMap->addColumn('CODCAT', 'Codcat', 'string', CreoleTypes::VARCHAR, true, 32);
 
 		$tMap->addColumn('CODMET', 'Codmet', 'string', CreoleTypes::VARCHAR, true, 5);
 
