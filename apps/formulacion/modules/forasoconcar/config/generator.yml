@@ -1,0 +1,25 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Forconcar
+    theme:            cidesaGenerator
+    fields:
+      codcar:
+        name: Código
+        params: size=10 maxlength=16
+        catalogo:
+          catalogoweb: Npcargos_Forasoconcar
+          clase: Npcargos
+          ajax: 1
+          parametros: getprincipal="getCodcar" getsecundario="getNomcar" campoprincipal="codcar" camposecundario="nomcar" campobase = "id"
+          divupdate: divgrid
+          catalogoparams: /param1/'."'+$('forconcar_longitud').value+'".'
+      grid:  { name: .}
+    edit:
+      title:          Asignación de Conceptos a Cargos
+      display:
+        "Cargo":   [codcar]
+        "Conceptos":   [_grid]
+      hide:  [longitud]
+      actions:        
+        _save:        ~

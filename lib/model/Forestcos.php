@@ -25,6 +25,8 @@ class Forestcos extends BaseForestcos
     protected $totfil="0,00";
     protected $mascaraart="";
     protected $longitud="";
+    protected $desact="";
+    protected $tipuni="";
 
    public function getLongitud()
    {
@@ -62,6 +64,11 @@ class Forestcos extends BaseForestcos
       return Herramientas::getX('CODACT','Fordefact','Desact',self::getCodact());
     }
     
+    public function setDesact()
+   {
+     return $this->desact;
+   }
+
     public function getDesart()
     {
       return Herramientas::getX('CODART','Caregart','Desart',self::getCodart());

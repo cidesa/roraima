@@ -55,8 +55,10 @@ class forestcosActions extends autoforestcosActions
 
     $obj= array('codart' => 4, 'desart' => 5, 'unimed' => 6, 'codpar' => 7, 'cosult' => 10);
     $params= array('param1' => $lonart, 'val2');                                                                                                                                                                                                                                                //           toAjax(2,getUrlModuloAjax(),this.value,0,'&cajtxtmos='+$(this.id).up().next(0).descendants()[0].id+'&unimed='+$(this.id).up().next(1).descendants()[1].id+'&partida='+$(this.id).up().next(2).descendants()[2].id+'&nompar='+$(this.id).up().next(3).descendants()[3].id+'&monto='+$(this.id).up().next(4).descendants()[4].id+'&cajtxtcom='+this.id)'
-    $this->columnas[1][3]->setHTML('type="text" size="17" maxlength="'.chr(39).$lonart.chr(39).'" onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascaraart.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}" onBlur="toAjax(\'3\',getUrlModulo()+\'ajax\',this.value,\'\',\'&cajtexmos=\'+$(this.id).up().next(0).descendants()[0].id+\'&unimed=\'+$(this.id).up().next(1).descendants()[0].id+\'&partida=\'+$(this.id).up().next(2).descendants()[0].id+\'&nompar=\'+$(this.id).up().next(3).descendants()[0].id+\'&monto=\'+$(this.id).up().next(5).descendants()[0].id+\'&longitud=\'+$(\'forestcos_longitud\').value+\'&cajtexcom=\'+this.id)"');
+    $this->columnas[1][3]->setHTML('type="text" size="17" maxlength="'.chr(39).$lonart.chr(39).'" onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascaraart.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}" onBlur="toAjax(\'3\',getUrlModulo()+\'ajax\',this.value,\'\',\'&cajtexmos=\'+$(this.id).up().next(0).descendants()[0].id+\'&unimed=\'+$(this.id).up().next(1).descendants()[0].id+\'&partida=\'+$(this.id).up().next(2).descendants()[0].id+\'&nompar=\'+$(this.id).up().next(3).descendants()[0].id+\'&monto=\'+$(this.id).up().next(5).descendants()[0].id+\'&ultimo=\'+$(this.id).up().next(15).descendants()[0].id+\'&relacion=\'+$(this.id).up().next(16).descendants()[0].id+\'&longitud=\'+$(\'forestcos_longitud\').value+\'&cajtexcom=\'+this.id)"');
     $this->columnas[1][3]->setCatalogo('caregart','sf_admin_edit_form',$obj,'Caregart_Forestcos',$params);
+    $this->columnas[1][9]->setCombo(array('U'=>'Unidad de Medida','A'=>'Unidad Alterna'));
+    $this->columnas[1][9]->setHTML('onChange=Calcular(this.id);');
 
     $this->obj =$this->columnas[0]->getConfig($costo);
 
@@ -153,7 +155,9 @@ class forestcosActions extends autoforestcosActions
          $partida = $this->getRequestParameter('partida');
          $nompar = $this->getRequestParameter('nompar');
          $monto = $this->getRequestParameter('monto');
-         $dato1="";$dato2="";$dato3="";$dato4="";
+         $ultimo = $this->getRequestParameter('ultimo');
+         $relacion = $this->getRequestParameter('relacion');
+         $dato1="";$dato2="";$dato3="0,00";$dato4="";$dato5="0,00";
          $u= new Criteria();
          $u->add(CaregartPeer::CODART,$codigo);
          $result= CaregartPeer::doSelectOne($u);
@@ -165,13 +169,14 @@ class forestcosActions extends autoforestcosActions
                  $dato2=$result->getCodpar();
                  $dato3=number_format($result->getCosult(),2,',','.');
                  $dato4=H::getX('CODPAR','Nppartidas','Nompar',$dato2);
+                 $dato5=number_format($result->getRelart(),2,',','.');
                  $javascript="validararticulorepetida('".$cajtexcom."')";
              }else {
                $javascript="alert_('El Articulo no es de Ultimo Nivel'); $('$cajtexcom').value=''; $('$cajtexcom').focus();";
              }
          }else $javascript="alert_('El Articulo no Existe'); $('$cajtexcom').value=''; $('$cajtexcom').focus();";
 
-        $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$unimed.'","'.$dato1.'",""],["'.$partida.'","'.$dato2.'",""],["'.$nompar.'","'.$dato4.'",""],["'.$monto.'","'.$dato3.'",""],["javascript","'.$javascript.'",""],["","",""]]';
+        $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$unimed.'","'.$dato1.'",""],["'.$partida.'","'.$dato2.'",""],["'.$nompar.'","'.$dato4.'",""],["'.$monto.'","'.$dato3.'",""],["'.$ultimo.'","'.$dato3.'",""],["'.$relacion.'","'.$dato5.'",""],["javascript","'.$javascript.'",""],["","",""]]';
           $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
           return sfView::HEADER_ONLY;
           break;

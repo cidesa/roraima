@@ -1,7 +1,7 @@
 <?php
 
 
-abstract class BaseFormetfinotr extends BaseObject  implements Persistent {
+abstract class BaseFormetdistra extends BaseObject  implements Persistent {
 
 
 	
@@ -25,11 +25,11 @@ abstract class BaseFormetfinotr extends BaseObject  implements Persistent {
 
 
 	
-	protected $codparing;
+	protected $codorg;
 
 
 	
-	protected $monfin;
+	protected $monto;
 
 
 	
@@ -70,18 +70,18 @@ abstract class BaseFormetfinotr extends BaseObject  implements Persistent {
 
   }
   
-  public function getCodparing()
+  public function getCodorg()
   {
 
-    return trim($this->codparing);
+    return trim($this->codorg);
 
   }
   
-  public function getMonfin($val=false)
+  public function getMonto($val=false)
   {
 
-    if($val) return number_format($this->monfin,2,',','.');
-    else return $this->monfin;
+    if($val) return number_format($this->monto,2,',','.');
+    else return $this->monto;
 
   }
   
@@ -97,7 +97,7 @@ abstract class BaseFormetfinotr extends BaseObject  implements Persistent {
 
     if ($this->codmet !== $v) {
         $this->codmet = $v;
-        $this->modifiedColumns[] = FormetfinotrPeer::CODMET;
+        $this->modifiedColumns[] = FormetdistraPeer::CODMET;
       }
   
 	} 
@@ -107,7 +107,7 @@ abstract class BaseFormetfinotr extends BaseObject  implements Persistent {
 
     if ($this->codpro !== $v) {
         $this->codpro = $v;
-        $this->modifiedColumns[] = FormetfinotrPeer::CODPRO;
+        $this->modifiedColumns[] = FormetdistraPeer::CODPRO;
       }
   
 	} 
@@ -117,7 +117,7 @@ abstract class BaseFormetfinotr extends BaseObject  implements Persistent {
 
     if ($this->codact !== $v) {
         $this->codact = $v;
-        $this->modifiedColumns[] = FormetfinotrPeer::CODACT;
+        $this->modifiedColumns[] = FormetdistraPeer::CODACT;
       }
   
 	} 
@@ -127,27 +127,27 @@ abstract class BaseFormetfinotr extends BaseObject  implements Persistent {
 
     if ($this->codparegr !== $v) {
         $this->codparegr = $v;
-        $this->modifiedColumns[] = FormetfinotrPeer::CODPAREGR;
+        $this->modifiedColumns[] = FormetdistraPeer::CODPAREGR;
       }
   
 	} 
 	
-	public function setCodparing($v)
+	public function setCodorg($v)
 	{
 
-    if ($this->codparing !== $v) {
-        $this->codparing = $v;
-        $this->modifiedColumns[] = FormetfinotrPeer::CODPARING;
+    if ($this->codorg !== $v) {
+        $this->codorg = $v;
+        $this->modifiedColumns[] = FormetdistraPeer::CODORG;
       }
   
 	} 
 	
-	public function setMonfin($v)
+	public function setMonto($v)
 	{
 
-    if ($this->monfin !== $v) {
-        $this->monfin = Herramientas::toFloat($v);
-        $this->modifiedColumns[] = FormetfinotrPeer::MONFIN;
+    if ($this->monto !== $v) {
+        $this->monto = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FormetdistraPeer::MONTO;
       }
   
 	} 
@@ -157,7 +157,7 @@ abstract class BaseFormetfinotr extends BaseObject  implements Persistent {
 
     if ($this->id !== $v) {
         $this->id = $v;
-        $this->modifiedColumns[] = FormetfinotrPeer::ID;
+        $this->modifiedColumns[] = FormetdistraPeer::ID;
       }
   
 	} 
@@ -174,9 +174,9 @@ abstract class BaseFormetfinotr extends BaseObject  implements Persistent {
 
       $this->codparegr = $rs->getString($startcol + 3);
 
-      $this->codparing = $rs->getString($startcol + 4);
+      $this->codorg = $rs->getString($startcol + 4);
 
-      $this->monfin = $rs->getFloat($startcol + 5);
+      $this->monto = $rs->getFloat($startcol + 5);
 
       $this->id = $rs->getInt($startcol + 6);
 
@@ -188,7 +188,7 @@ abstract class BaseFormetfinotr extends BaseObject  implements Persistent {
 
             return $startcol + 7; 
     } catch (Exception $e) {
-      throw new PropelException("Error populating Formetfinotr object", $e);
+      throw new PropelException("Error populating Formetdistra object", $e);
     }
   }
 
@@ -220,12 +220,12 @@ abstract class BaseFormetfinotr extends BaseObject  implements Persistent {
 		}
 
 		if ($con === null) {
-			$con = Propel::getConnection(FormetfinotrPeer::DATABASE_NAME);
+			$con = Propel::getConnection(FormetdistraPeer::DATABASE_NAME);
 		}
 
 		try {
 			$con->begin();
-			FormetfinotrPeer::doDelete($this, $con);
+			FormetdistraPeer::doDelete($this, $con);
 			$this->setDeleted(true);
 			$con->commit();
 		} catch (PropelException $e) {
@@ -242,7 +242,7 @@ abstract class BaseFormetfinotr extends BaseObject  implements Persistent {
 		}
 
 		if ($con === null) {
-			$con = Propel::getConnection(FormetfinotrPeer::DATABASE_NAME);
+			$con = Propel::getConnection(FormetdistraPeer::DATABASE_NAME);
 		}
 
 		try {
@@ -265,12 +265,12 @@ abstract class BaseFormetfinotr extends BaseObject  implements Persistent {
 
 						if ($this->isModified()) {
 				if ($this->isNew()) {
-					$pk = FormetfinotrPeer::doInsert($this, $con);
+					$pk = FormetdistraPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
 					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
-					$affectedRows += FormetfinotrPeer::doUpdate($this, $con);
+					$affectedRows += FormetdistraPeer::doUpdate($this, $con);
 				}
 				$this->resetModified(); 			}
 
@@ -310,7 +310,7 @@ abstract class BaseFormetfinotr extends BaseObject  implements Persistent {
 			$failureMap = array();
 
 
-			if (($retval = FormetfinotrPeer::doValidate($this, $columns)) !== true) {
+			if (($retval = FormetdistraPeer::doValidate($this, $columns)) !== true) {
 				$failureMap = array_merge($failureMap, $retval);
 			}
 
@@ -325,7 +325,7 @@ abstract class BaseFormetfinotr extends BaseObject  implements Persistent {
 	
 	public function getByName($name, $type = BasePeer::TYPE_PHPNAME)
 	{
-		$pos = FormetfinotrPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
+		$pos = FormetdistraPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->getByPosition($pos);
 	}
 
@@ -346,10 +346,10 @@ abstract class BaseFormetfinotr extends BaseObject  implements Persistent {
 				return $this->getCodparegr();
 				break;
 			case 4:
-				return $this->getCodparing();
+				return $this->getCodorg();
 				break;
 			case 5:
-				return $this->getMonfin();
+				return $this->getMonto();
 				break;
 			case 6:
 				return $this->getId();
@@ -362,14 +362,14 @@ abstract class BaseFormetfinotr extends BaseObject  implements Persistent {
 	
 	public function toArray($keyType = BasePeer::TYPE_PHPNAME)
 	{
-		$keys = FormetfinotrPeer::getFieldNames($keyType);
+		$keys = FormetdistraPeer::getFieldNames($keyType);
 		$result = array(
 			$keys[0] => $this->getCodmet(),
 			$keys[1] => $this->getCodpro(),
 			$keys[2] => $this->getCodact(),
 			$keys[3] => $this->getCodparegr(),
-			$keys[4] => $this->getCodparing(),
-			$keys[5] => $this->getMonfin(),
+			$keys[4] => $this->getCodorg(),
+			$keys[5] => $this->getMonto(),
 			$keys[6] => $this->getId(),
 		);
 		return $result;
@@ -378,7 +378,7 @@ abstract class BaseFormetfinotr extends BaseObject  implements Persistent {
 	
 	public function setByName($name, $value, $type = BasePeer::TYPE_PHPNAME)
 	{
-		$pos = FormetfinotrPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
+		$pos = FormetdistraPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->setByPosition($pos, $value);
 	}
 
@@ -399,10 +399,10 @@ abstract class BaseFormetfinotr extends BaseObject  implements Persistent {
 				$this->setCodparegr($value);
 				break;
 			case 4:
-				$this->setCodparing($value);
+				$this->setCodorg($value);
 				break;
 			case 5:
-				$this->setMonfin($value);
+				$this->setMonto($value);
 				break;
 			case 6:
 				$this->setId($value);
@@ -412,29 +412,29 @@ abstract class BaseFormetfinotr extends BaseObject  implements Persistent {
 	
 	public function fromArray($arr, $keyType = BasePeer::TYPE_PHPNAME)
 	{
-		$keys = FormetfinotrPeer::getFieldNames($keyType);
+		$keys = FormetdistraPeer::getFieldNames($keyType);
 
 		if (array_key_exists($keys[0], $arr)) $this->setCodmet($arr[$keys[0]]);
 		if (array_key_exists($keys[1], $arr)) $this->setCodpro($arr[$keys[1]]);
 		if (array_key_exists($keys[2], $arr)) $this->setCodact($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setCodparegr($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setCodparing($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setMonfin($arr[$keys[5]]);
+		if (array_key_exists($keys[4], $arr)) $this->setCodorg($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setMonto($arr[$keys[5]]);
 		if (array_key_exists($keys[6], $arr)) $this->setId($arr[$keys[6]]);
 	}
 
 	
 	public function buildCriteria()
 	{
-		$criteria = new Criteria(FormetfinotrPeer::DATABASE_NAME);
+		$criteria = new Criteria(FormetdistraPeer::DATABASE_NAME);
 
-		if ($this->isColumnModified(FormetfinotrPeer::CODMET)) $criteria->add(FormetfinotrPeer::CODMET, $this->codmet);
-		if ($this->isColumnModified(FormetfinotrPeer::CODPRO)) $criteria->add(FormetfinotrPeer::CODPRO, $this->codpro);
-		if ($this->isColumnModified(FormetfinotrPeer::CODACT)) $criteria->add(FormetfinotrPeer::CODACT, $this->codact);
-		if ($this->isColumnModified(FormetfinotrPeer::CODPAREGR)) $criteria->add(FormetfinotrPeer::CODPAREGR, $this->codparegr);
-		if ($this->isColumnModified(FormetfinotrPeer::CODPARING)) $criteria->add(FormetfinotrPeer::CODPARING, $this->codparing);
-		if ($this->isColumnModified(FormetfinotrPeer::MONFIN)) $criteria->add(FormetfinotrPeer::MONFIN, $this->monfin);
-		if ($this->isColumnModified(FormetfinotrPeer::ID)) $criteria->add(FormetfinotrPeer::ID, $this->id);
+		if ($this->isColumnModified(FormetdistraPeer::CODMET)) $criteria->add(FormetdistraPeer::CODMET, $this->codmet);
+		if ($this->isColumnModified(FormetdistraPeer::CODPRO)) $criteria->add(FormetdistraPeer::CODPRO, $this->codpro);
+		if ($this->isColumnModified(FormetdistraPeer::CODACT)) $criteria->add(FormetdistraPeer::CODACT, $this->codact);
+		if ($this->isColumnModified(FormetdistraPeer::CODPAREGR)) $criteria->add(FormetdistraPeer::CODPAREGR, $this->codparegr);
+		if ($this->isColumnModified(FormetdistraPeer::CODORG)) $criteria->add(FormetdistraPeer::CODORG, $this->codorg);
+		if ($this->isColumnModified(FormetdistraPeer::MONTO)) $criteria->add(FormetdistraPeer::MONTO, $this->monto);
+		if ($this->isColumnModified(FormetdistraPeer::ID)) $criteria->add(FormetdistraPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -442,9 +442,9 @@ abstract class BaseFormetfinotr extends BaseObject  implements Persistent {
 	
 	public function buildPkeyCriteria()
 	{
-		$criteria = new Criteria(FormetfinotrPeer::DATABASE_NAME);
+		$criteria = new Criteria(FormetdistraPeer::DATABASE_NAME);
 
-		$criteria->add(FormetfinotrPeer::ID, $this->id);
+		$criteria->add(FormetdistraPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -473,9 +473,9 @@ abstract class BaseFormetfinotr extends BaseObject  implements Persistent {
 
 		$copyObj->setCodparegr($this->codparegr);
 
-		$copyObj->setCodparing($this->codparing);
+		$copyObj->setCodorg($this->codorg);
 
-		$copyObj->setMonfin($this->monfin);
+		$copyObj->setMonto($this->monto);
 
 
 		$copyObj->setNew(true);
@@ -496,7 +496,7 @@ abstract class BaseFormetfinotr extends BaseObject  implements Persistent {
 	public function getPeer()
 	{
 		if (self::$peer === null) {
-			self::$peer = new FormetfinotrPeer();
+			self::$peer = new FormetdistraPeer();
 		}
 		return self::$peer;
 	}

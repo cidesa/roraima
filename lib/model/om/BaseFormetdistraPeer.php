@@ -1,16 +1,16 @@
 <?php
 
 
-abstract class BaseFormetfinotrPeer {
+abstract class BaseFormetdistraPeer {
 
 	
 	const DATABASE_NAME = 'propel';
 
 	
-	const TABLE_NAME = 'formetfinotr';
+	const TABLE_NAME = 'formetdistra';
 
 	
-	const CLASS_DEFAULT = 'lib.model.Formetfinotr';
+	const CLASS_DEFAULT = 'lib.model.Formetdistra';
 
 	
 	const NUM_COLUMNS = 7;
@@ -20,25 +20,25 @@ abstract class BaseFormetfinotrPeer {
 
 
 	
-	const CODMET = 'formetfinotr.CODMET';
+	const CODMET = 'formetdistra.CODMET';
 
 	
-	const CODPRO = 'formetfinotr.CODPRO';
+	const CODPRO = 'formetdistra.CODPRO';
 
 	
-	const CODACT = 'formetfinotr.CODACT';
+	const CODACT = 'formetdistra.CODACT';
 
 	
-	const CODPAREGR = 'formetfinotr.CODPAREGR';
+	const CODPAREGR = 'formetdistra.CODPAREGR';
 
 	
-	const CODPARING = 'formetfinotr.CODPARING';
+	const CODORG = 'formetdistra.CODORG';
 
 	
-	const MONFIN = 'formetfinotr.MONFIN';
+	const MONTO = 'formetdistra.MONTO';
 
 	
-	const ID = 'formetfinotr.ID';
+	const ID = 'formetdistra.ID';
 
 	
 	private static $phpNameMap = null;
@@ -46,31 +46,31 @@ abstract class BaseFormetfinotrPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codmet', 'Codpro', 'Codact', 'Codparegr', 'Codparing', 'Monfin', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (FormetfinotrPeer::CODMET, FormetfinotrPeer::CODPRO, FormetfinotrPeer::CODACT, FormetfinotrPeer::CODPAREGR, FormetfinotrPeer::CODPARING, FormetfinotrPeer::MONFIN, FormetfinotrPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codmet', 'codpro', 'codact', 'codparegr', 'codparing', 'monfin', 'id', ),
+		BasePeer::TYPE_PHPNAME => array ('Codmet', 'Codpro', 'Codact', 'Codparegr', 'Codorg', 'Monto', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (FormetdistraPeer::CODMET, FormetdistraPeer::CODPRO, FormetdistraPeer::CODACT, FormetdistraPeer::CODPAREGR, FormetdistraPeer::CODORG, FormetdistraPeer::MONTO, FormetdistraPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codmet', 'codpro', 'codact', 'codparegr', 'codorg', 'monto', 'id', ),
 		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codmet' => 0, 'Codpro' => 1, 'Codact' => 2, 'Codparegr' => 3, 'Codparing' => 4, 'Monfin' => 5, 'Id' => 6, ),
-		BasePeer::TYPE_COLNAME => array (FormetfinotrPeer::CODMET => 0, FormetfinotrPeer::CODPRO => 1, FormetfinotrPeer::CODACT => 2, FormetfinotrPeer::CODPAREGR => 3, FormetfinotrPeer::CODPARING => 4, FormetfinotrPeer::MONFIN => 5, FormetfinotrPeer::ID => 6, ),
-		BasePeer::TYPE_FIELDNAME => array ('codmet' => 0, 'codpro' => 1, 'codact' => 2, 'codparegr' => 3, 'codparing' => 4, 'monfin' => 5, 'id' => 6, ),
+		BasePeer::TYPE_PHPNAME => array ('Codmet' => 0, 'Codpro' => 1, 'Codact' => 2, 'Codparegr' => 3, 'Codorg' => 4, 'Monto' => 5, 'Id' => 6, ),
+		BasePeer::TYPE_COLNAME => array (FormetdistraPeer::CODMET => 0, FormetdistraPeer::CODPRO => 1, FormetdistraPeer::CODACT => 2, FormetdistraPeer::CODPAREGR => 3, FormetdistraPeer::CODORG => 4, FormetdistraPeer::MONTO => 5, FormetdistraPeer::ID => 6, ),
+		BasePeer::TYPE_FIELDNAME => array ('codmet' => 0, 'codpro' => 1, 'codact' => 2, 'codparegr' => 3, 'codorg' => 4, 'monto' => 5, 'id' => 6, ),
 		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
 	);
 
 	
 	public static function getMapBuilder()
 	{
-		include_once 'lib/model/map/FormetfinotrMapBuilder.php';
-		return BasePeer::getMapBuilder('lib.model.map.FormetfinotrMapBuilder');
+		include_once 'lib/model/map/FormetdistraMapBuilder.php';
+		return BasePeer::getMapBuilder('lib.model.map.FormetdistraMapBuilder');
 	}
 	
 	public static function getPhpNameMap()
 	{
 		if (self::$phpNameMap === null) {
-			$map = FormetfinotrPeer::getTableMap();
+			$map = FormetdistraPeer::getTableMap();
 			$columns = $map->getColumns();
 			$nameMap = array();
 			foreach ($columns as $column) {
@@ -104,31 +104,31 @@ abstract class BaseFormetfinotrPeer {
 	
 	public static function alias($alias, $column)
 	{
-		return str_replace(FormetfinotrPeer::TABLE_NAME.'.', $alias.'.', $column);
+		return str_replace(FormetdistraPeer::TABLE_NAME.'.', $alias.'.', $column);
 	}
 
 	
 	public static function addSelectColumns(Criteria $criteria)
 	{
 
-		$criteria->addSelectColumn(FormetfinotrPeer::CODMET);
+		$criteria->addSelectColumn(FormetdistraPeer::CODMET);
 
-		$criteria->addSelectColumn(FormetfinotrPeer::CODPRO);
+		$criteria->addSelectColumn(FormetdistraPeer::CODPRO);
 
-		$criteria->addSelectColumn(FormetfinotrPeer::CODACT);
+		$criteria->addSelectColumn(FormetdistraPeer::CODACT);
 
-		$criteria->addSelectColumn(FormetfinotrPeer::CODPAREGR);
+		$criteria->addSelectColumn(FormetdistraPeer::CODPAREGR);
 
-		$criteria->addSelectColumn(FormetfinotrPeer::CODPARING);
+		$criteria->addSelectColumn(FormetdistraPeer::CODORG);
 
-		$criteria->addSelectColumn(FormetfinotrPeer::MONFIN);
+		$criteria->addSelectColumn(FormetdistraPeer::MONTO);
 
-		$criteria->addSelectColumn(FormetfinotrPeer::ID);
+		$criteria->addSelectColumn(FormetdistraPeer::ID);
 
 	}
 
-	const COUNT = 'COUNT(formetfinotr.ID)';
-	const COUNT_DISTINCT = 'COUNT(DISTINCT formetfinotr.ID)';
+	const COUNT = 'COUNT(formetdistra.ID)';
+	const COUNT_DISTINCT = 'COUNT(DISTINCT formetdistra.ID)';
 
 	
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
@@ -137,9 +137,9 @@ abstract class BaseFormetfinotrPeer {
 
 				$criteria->clearSelectColumns()->clearOrderByColumns();
 		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(FormetfinotrPeer::COUNT_DISTINCT);
+			$criteria->addSelectColumn(FormetdistraPeer::COUNT_DISTINCT);
 		} else {
-			$criteria->addSelectColumn(FormetfinotrPeer::COUNT);
+			$criteria->addSelectColumn(FormetdistraPeer::COUNT);
 		}
 
 				foreach($criteria->getGroupByColumns() as $column)
@@ -147,7 +147,7 @@ abstract class BaseFormetfinotrPeer {
 			$criteria->addSelectColumn($column);
 		}
 
-		$rs = FormetfinotrPeer::doSelectRS($criteria, $con);
+		$rs = FormetdistraPeer::doSelectRS($criteria, $con);
 		if ($rs->next()) {
 			return $rs->getInt(1);
 		} else {
@@ -159,7 +159,7 @@ abstract class BaseFormetfinotrPeer {
 	{
 		$critcopy = clone $criteria;
 		$critcopy->setLimit(1);
-		$objects = FormetfinotrPeer::doSelect($critcopy, $con);
+		$objects = FormetdistraPeer::doSelect($critcopy, $con);
 		if ($objects) {
 			return $objects[0];
 		}
@@ -168,7 +168,7 @@ abstract class BaseFormetfinotrPeer {
 	
 	public static function doSelect(Criteria $criteria, $con = null)
 	{
-		return FormetfinotrPeer::populateObjects(FormetfinotrPeer::doSelectRS($criteria, $con));
+		return FormetdistraPeer::populateObjects(FormetdistraPeer::doSelectRS($criteria, $con));
 	}
 	
 	public static function doSelectRS(Criteria $criteria, $con = null)
@@ -179,7 +179,7 @@ abstract class BaseFormetfinotrPeer {
 
 		if (!$criteria->getSelectColumns()) {
 			$criteria = clone $criteria;
-			FormetfinotrPeer::addSelectColumns($criteria);
+			FormetdistraPeer::addSelectColumns($criteria);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -191,7 +191,7 @@ abstract class BaseFormetfinotrPeer {
 	{
 		$results = array();
 	
-				$cls = FormetfinotrPeer::getOMClass();
+				$cls = FormetdistraPeer::getOMClass();
 		$cls = Propel::import($cls);
 				while($rs->next()) {
 		
@@ -211,7 +211,7 @@ abstract class BaseFormetfinotrPeer {
 	
 	public static function getOMClass()
 	{
-		return FormetfinotrPeer::CLASS_DEFAULT;
+		return FormetdistraPeer::CLASS_DEFAULT;
 	}
 
 	
@@ -225,7 +225,7 @@ abstract class BaseFormetfinotrPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
-		$criteria->remove(FormetfinotrPeer::ID); 
+		$criteria->remove(FormetdistraPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 
@@ -252,8 +252,8 @@ abstract class BaseFormetfinotrPeer {
 
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; 
-			$comparison = $criteria->getComparison(FormetfinotrPeer::ID);
-			$selectCriteria->add(FormetfinotrPeer::ID, $criteria->remove(FormetfinotrPeer::ID), $comparison);
+			$comparison = $criteria->getComparison(FormetdistraPeer::ID);
+			$selectCriteria->add(FormetdistraPeer::ID, $criteria->remove(FormetdistraPeer::ID), $comparison);
 
 		} else { 			$criteria = $values->buildCriteria(); 			$selectCriteria = $values->buildPkeyCriteria(); 		}
 
@@ -270,7 +270,7 @@ abstract class BaseFormetfinotrPeer {
 		}
 		$affectedRows = 0; 		try {
 									$con->begin();
-			$affectedRows += BasePeer::doDeleteAll(FormetfinotrPeer::TABLE_NAME, $con);
+			$affectedRows += BasePeer::doDeleteAll(FormetdistraPeer::TABLE_NAME, $con);
 			$con->commit();
 			return $affectedRows;
 		} catch (PropelException $e) {
@@ -283,16 +283,16 @@ abstract class BaseFormetfinotrPeer {
 	 public static function doDelete($values, $con = null)
 	 {
 		if ($con === null) {
-			$con = Propel::getConnection(FormetfinotrPeer::DATABASE_NAME);
+			$con = Propel::getConnection(FormetdistraPeer::DATABASE_NAME);
 		}
 
 		if ($values instanceof Criteria) {
-			$criteria = clone $values; 		} elseif ($values instanceof Formetfinotr) {
+			$criteria = clone $values; 		} elseif ($values instanceof Formetdistra) {
 
 			$criteria = $values->buildPkeyCriteria();
 		} else {
 						$criteria = new Criteria(self::DATABASE_NAME);
-			$criteria->add(FormetfinotrPeer::ID, (array) $values, Criteria::IN);
+			$criteria->add(FormetdistraPeer::ID, (array) $values, Criteria::IN);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -311,13 +311,13 @@ abstract class BaseFormetfinotrPeer {
 	}
 
 	
-	public static function doValidate(Formetfinotr $obj, $cols = null)
+	public static function doValidate(Formetdistra $obj, $cols = null)
 	{
 		$columns = array();
 
 		if ($cols) {
-			$dbMap = Propel::getDatabaseMap(FormetfinotrPeer::DATABASE_NAME);
-			$tableMap = $dbMap->getTable(FormetfinotrPeer::TABLE_NAME);
+			$dbMap = Propel::getDatabaseMap(FormetdistraPeer::DATABASE_NAME);
+			$tableMap = $dbMap->getTable(FormetdistraPeer::TABLE_NAME);
 
 			if (! is_array($cols)) {
 				$cols = array($cols);
@@ -333,11 +333,11 @@ abstract class BaseFormetfinotrPeer {
 
 		}
 
-		$res =  BasePeer::doValidate(FormetfinotrPeer::DATABASE_NAME, FormetfinotrPeer::TABLE_NAME, $columns);
+		$res =  BasePeer::doValidate(FormetdistraPeer::DATABASE_NAME, FormetdistraPeer::TABLE_NAME, $columns);
     if ($res !== true) {
         $request = sfContext::getInstance()->getRequest();
         foreach ($res as $failed) {
-            $col = FormetfinotrPeer::translateFieldname($failed->getColumn(), BasePeer::TYPE_COLNAME, BasePeer::TYPE_PHPNAME);
+            $col = FormetdistraPeer::translateFieldname($failed->getColumn(), BasePeer::TYPE_COLNAME, BasePeer::TYPE_PHPNAME);
             $request->setError($col, $failed->getMessage());
         }
     }
@@ -352,12 +352,12 @@ abstract class BaseFormetfinotrPeer {
 			$con = Propel::getConnection(self::DATABASE_NAME);
 		}
 
-		$criteria = new Criteria(FormetfinotrPeer::DATABASE_NAME);
+		$criteria = new Criteria(FormetdistraPeer::DATABASE_NAME);
 
-		$criteria->add(FormetfinotrPeer::ID, $pk);
+		$criteria->add(FormetdistraPeer::ID, $pk);
 
 
-		$v = FormetfinotrPeer::doSelect($criteria, $con);
+		$v = FormetdistraPeer::doSelect($criteria, $con);
 
 		return !empty($v) > 0 ? $v[0] : null;
 	}
@@ -374,8 +374,8 @@ abstract class BaseFormetfinotrPeer {
 			$objs = array();
 		} else {
 			$criteria = new Criteria();
-			$criteria->add(FormetfinotrPeer::ID, $pks, Criteria::IN);
-			$objs = FormetfinotrPeer::doSelect($criteria, $con);
+			$criteria->add(FormetdistraPeer::ID, $pks, Criteria::IN);
+			$objs = FormetdistraPeer::doSelect($criteria, $con);
 		}
 		return $objs;
 	}
@@ -383,11 +383,11 @@ abstract class BaseFormetfinotrPeer {
 } 
 if (Propel::isInit()) {
 			try {
-		BaseFormetfinotrPeer::getMapBuilder();
+		BaseFormetdistraPeer::getMapBuilder();
 	} catch (Exception $e) {
 		Propel::log('Could not initialize Peer: ' . $e->getMessage(), Propel::LOG_ERR);
 	}
 } else {
-			require_once 'lib/model/map/FormetfinotrMapBuilder.php';
-	Propel::registerMapBuilder('lib.model.map.FormetfinotrMapBuilder');
+			require_once 'lib/model/map/FormetdistraMapBuilder.php';
+	Propel::registerMapBuilder('lib.model.map.FormetdistraMapBuilder');
 }

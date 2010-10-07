@@ -1,0 +1,22 @@
+opciones:                  # Opciones generales
+  name:                    b
+  eliminar:                false
+  tabla:                   formetperotr
+  anchogrid:               400
+  ancho:                   350
+  filas:                   0
+  titulo:                  ' Distribución Mensual '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Período
+  tipo:                    t
+  nombrecampo:             perpre
+  esgrabable:              true
+  html:                    ["size=5 readOnly=true"]
+2:       # Columna 2
+  titulo:                  Monto
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             monper
+  esnumerico:              true
+  html:                    ["size=10"]

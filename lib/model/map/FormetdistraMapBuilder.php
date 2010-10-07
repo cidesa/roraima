@@ -2,10 +2,10 @@
 
 
 
-class FormetfinotrMapBuilder {
+class FormetdistraMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.FormetfinotrMapBuilder';
+	const CLASS_NAME = 'lib.model.map.FormetdistraMapBuilder';
 
 	
 	private $dbMap;
@@ -27,12 +27,12 @@ class FormetfinotrMapBuilder {
 	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
 
-		$tMap = $this->dbMap->addTable('formetfinotr');
-		$tMap->setPhpName('Formetfinotr');
+		$tMap = $this->dbMap->addTable('formetdistra');
+		$tMap->setPhpName('Formetdistra');
 
 		$tMap->setUseIdGenerator(true);
 
-		$tMap->setPrimaryKeyMethodInfo('formetfinotr_SEQ');
+		$tMap->setPrimaryKeyMethodInfo('formetdistra_SEQ');
 
 		$tMap->addColumn('CODMET', 'Codmet', 'string', CreoleTypes::VARCHAR, true, 5);
 
@@ -42,9 +42,9 @@ class FormetfinotrMapBuilder {
 
 		$tMap->addColumn('CODPAREGR', 'Codparegr', 'string', CreoleTypes::VARCHAR, true, 32);
 
-		$tMap->addColumn('CODPARING', 'Codparing', 'string', CreoleTypes::VARCHAR, true, 32);
+		$tMap->addColumn('CODORG', 'Codorg', 'string', CreoleTypes::VARCHAR, true, 4);
 
-		$tMap->addColumn('MONFIN', 'Monfin', 'double', CreoleTypes::NUMERIC, true, 14);
+		$tMap->addColumn('MONTO', 'Monto', 'double', CreoleTypes::NUMERIC, false, 32);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
