@@ -7,9 +7,9 @@
  *
  * @package    Roraima
  * @subpackage lib.model.nomina
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: Nppresoc.php 40980 2010-10-11 19:44:04Z cramirez $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -22,7 +22,8 @@ class Nppresoc extends BaseNppresoc
 	protected $desniv='';
 	protected $codcar='';
 	protected $nomcar='';
-	
+        protected $obj=array();
+
 
 
   public function getNomemp()
@@ -82,7 +83,7 @@ class Nppresoc extends BaseNppresoc
   public function getAnoserra()
   {
    	return Herramientas::getX_vacio('CODEMP','Nppresocant','anoser',self::getCodemp());
-  }  
+  }
 
 }
 

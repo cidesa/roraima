@@ -7,8 +7,8 @@
  *
  * @package    Roraima
  * @subpackage lib.model.nomina
- * @author     $Author: dmartinez $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id: Nphojint.php 38370 2010-05-24 19:54:25Z dmartinez $
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: Nphojint.php 40981 2010-10-11 19:44:30Z cramirez $
  *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -26,6 +26,8 @@ class Nphojint extends BaseNphojint
   protected $grid=array();
   protected $etiqueta="";
   protected $statusegr="";
+  protected $monpre="";
+  protected $rescal="";
 
   public function getCodnom()
   {
@@ -366,4 +368,8 @@ class Nphojint extends BaseNphojint
   {
 	return Herramientas::getX('CODMOT','Npmotegr','Desmot',self::getCodmot());
   }
+  public function getFecingfor()
+  {
+	return self::getFecing('d/m/Y');
+}
 }
