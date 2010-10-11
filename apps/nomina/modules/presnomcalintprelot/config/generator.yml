@@ -1,0 +1,34 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Nppresoc
+    theme:            cidesaGenerator
+    fields:
+      codtipcon:
+        name: CÃ³digo Contrato
+        msj_error: El Numero de Contrato es necesario
+        catalogo:
+          catalogoweb: Nptipcon_Presnomasitrabcont
+          clase: Nptipcon
+          ajax: 0
+          parametros: getprincipal="getCodtipcon" getsecundario="getDestipcon" campoprincipal="codtipcon" camposecundario="destipcon" campobase = "id"
+          #divupdate: divgrid
+          #catalogoparams:
+          #ajaxparams:
+          #
+          #id:
+      grid:    { name: .}
+      feccor:  { name: Fecha Corte, type: input_date_tag}
+      otros:   { name: .}
+      capit:   { name: CapitalizaciÃ³n}
+      anno:    { name: AÃ±o}
+      calcular: {name: .}
+    edit:
+      title:     Calculo de Antiguedad en Lotes
+      display:
+        Datos Prestaciones:   [codtipcon, feccor, _otros, _calcular]
+        Empleados:            [_grid]
+      actions:
+        _list:        none
+        _save:        none
+        _delete:      none
