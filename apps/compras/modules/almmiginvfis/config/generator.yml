@@ -1,0 +1,36 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Cainvfis
+    theme:            cidesaGenerator
+    fields:
+      archixls:
+        name:  Seleccione el archivo XLS a adjuntar
+        type:  admin_input_file_tag
+        params:  include_link=assets include_text="Descargar BD" include_remove=true
+        upload_dir:  assets
+        help:       Favor cargar solo archivos .xls
+      js:          { name: .}
+      grid:        { name: .}
+
+    edit:
+      title:          Migrar Inventario FÃ­sico
+      display:
+        Archivo a Cargar:        [archixls, _js]
+        Datos del Archivo leido: [_grid]
+      actions:
+        _list:        none
+        _delete:      none
+        _save:        none
+        _salvar:      ~
+         name:       Guardar
+         only_for:   create
+         params: id="salvar" class="sf_admin_action_save" onClick="document.sf_admin_edit_form.submit();" style="display:none"
+        _cargar:      ~
+         name:       Cargar Archivo
+         only_for:   create
+         params: id="cargar" class="sf_admin_action_save" onClick="cargararchivo('cainvfis_archixls')"
+        _leer:      ~
+         name:       Leer Archivo
+         only_for:   create
+         params: id="leer" class="sf_admin_action_save" onClick="leerarchivo('cainvfis_archixls')"

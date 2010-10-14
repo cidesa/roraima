@@ -118,6 +118,7 @@ compras:
       Clasificador de Partidas Presupuestarias:               NomManClaPre.php
       Traspaso de Inventario Fisico a Lógico:                 almtrainv
       Cambiar Contraseña:                                     cambiopasswd
+      Migrar Inventario Fisico :                              almmiginvfis
       #Importar Productos:                                    ImportarProductos.php
       #Actualizar Precios y Existencias:                      ActualizarProductos.php
       #Cambiar Password de Usuario:                           PreCamPwd.php
