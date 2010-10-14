@@ -2433,17 +2433,20 @@ public static function validarCuentasGrid($grid)
 	  while(!feof($file)) {
 	    $cuenta=fgets($file, 255);
             if (trim($cuenta)!='' && trim($cuenta)!='/n'){
-                $numcue=trim(substr($cuenta,$regis->getInicue(),$regis->getFincue()));
-                $ref= trim(substr($cuenta,$regis->getIniref(),$regis->getFinref()));
+                if ($regis->getInicue()>0)
+                $numcue= trim(substr($cuenta,$regis->getInicue()-1,$regis->getFincue()));
+                else $numcue= $regis->getNumcue();
 
-                $fecha= trim(substr($cuenta,$regis->getInifec(),$regis->getFinfec()));
-                if ($regis->getForfec()=='dd/mm/yyyy')    {
+                $ref= trim(substr($cuenta,$regis->getIniref()-1,$regis->getFinref()));
+
+                $fecha= trim(substr($cuenta,$regis->getInifec()-1,$regis->getFinfec()));
+                if ($regis->getForfec()=='dd/mm/yyyy' || $regis->getForfec()=='DD/MM/YYYY')    {
 		    $dateFormat = new sfDateFormat('es_VE');
                     $fec1 = $dateFormat->format($fecha, 'i', $dateFormat->getInputPattern('d'));
-                }else if ($regis->getForfec()=='yyyy-mm-dd') {
+                }else if ($regis->getForfec()=='yyyy-mm-dd' || $regis->getForfec()=='YYYY-MM-DD') {
                     $fec1=$fecha;
                 }
-                $signomonto=substr(trim(substr($cuenta,$regis->getInimon(),$regis->getFinmon())),0,1);
+                $signomonto=substr(trim(substr($cuenta,$regis->getInimon()-1,$regis->getFinmon())),0,1);
                 $mes=substr($fec1,5,2);
                 $sql="select refban from tsmovban where numcue='".$numcue."' and refban='".$ref."'and to_char(fecban,'MM')='".$mes."'";
                 if (Herramientas::BuscarDatos($sql,&$resul))
@@ -2486,22 +2489,24 @@ public static function validarCuentasGrid($grid)
                       $referencia=substr($ref,($regis->getDigsign()*-1));
                     else $referencia=substr($ref,($regis->getDigsigp()*-1));
                 }                
-                if ($regis->getFintip()!=0)
+                if ($regis->getFintip()>0)
                 {
-                   $tipo= trim(substr($cuenta,$regis->getInitip(),$regis->getFintip()));
+                   $tipo= trim(substr($cuenta,$regis->getInitip()-1,$regis->getFintip()));
                 }else {
                     if ($signomonto=='-')
                       $tipo=$regis->getValdefn();
                     else $tipo=$regis->getValdefp();
                 }
 
-                if ($regis->getFindes()!=0)
-		   $descrip= trim(substr($cuenta,$regis->getInides(),$regis->getFindes()));
+                if ($regis->getFindes()>0)
+		   $descrip= trim(substr($cuenta,$regis->getInides()-1,$regis->getFindes()));
                 else 
                    $descrip= $regis->getValdefd();
                 
-             $valormon=trim(substr($cuenta,$regis->getInimon(),$regis->getFinmon()));
-             $montor=substr($valormon,1,strlen($valormon));
+             $valormon=trim(substr($cuenta,$regis->getInimon()-1,$regis->getFinmon()));
+             if ($signomonto=='-')
+               $montor=substr($valormon,1,strlen($valormon));
+             else $montor=$valormon;
              if (is_numeric(H::toFloat($montor)))
              {
                $monto=H::toFloat($montor);
