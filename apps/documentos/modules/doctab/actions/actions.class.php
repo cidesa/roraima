@@ -63,9 +63,12 @@ class doctabActions extends autodoctabActions
     $nomtab = $this->dftabtip->getNomtab();
     $nomtabfk = $this->dftabtip->getNomtabfk();
 
-    $this->params['campos'] = $this->getCampos($nomtab);
-    $this->params['camposfk'] = $this->getCampos($nomtabfk);
-    $this->params['tablas'] = $this->tablas;
+    $params = array();
+    $params['campos'] = $this->getCampos($nomtab);
+    $params['camposfk'] = $this->getCampos($nomtabfk);
+    $params['tablas'] = $this->tablas;
+
+    $this->params = $params;
 
   }
 
