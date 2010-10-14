@@ -18,6 +18,7 @@ class Cainvfis extends BaseCainvfis
   private $unialter ='';
   protected $ubicacion = '';
   protected $totalm="0,00";
+  protected $obj=array();
 
   public function getDesart()
   {

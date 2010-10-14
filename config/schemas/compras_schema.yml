@@ -2978,4 +2978,25 @@ propel:
       primaryKey: true
       autoIncrement: true
       description: Identificador Único del registro
-
+  carelartsiga:
+    codart:
+      type: VARCHAR
+      size: 20
+      required: true
+      foreignTable: caregart
+      foreignReference: codart
+      description: Código del articulo del siga
+    codartq:
+      type: VARCHAR
+      size: 100
+      required: true
+    desartq:
+      type: VARCHAR
+      size: 1500
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
