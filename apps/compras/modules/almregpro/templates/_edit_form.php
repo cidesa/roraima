@@ -88,6 +88,10 @@ if ($caprovee->getNitpro()=='J')  {
   <?php echo radiobutton_tag('caprovee[nitpro]', 'J', false, array('onClick' => 'colocaletra(this.value);', 'readonly'  =>  $caprovee->getId()!='' ? true : false))." Jurídica".'<br>';
   echo radiobutton_tag('caprovee[nitpro]', 'N', true, array('onClick' => 'colocaletra(this.value);', 'readonly'  =>  $caprovee->getId()!='' ? true : false))." Natural".'<br>';
   echo radiobutton_tag('caprovee[nitpro]', 'G', false, array('onClick' => 'colocaletra(this.value);', 'readonly'  =>  $caprovee->getId()!='' ? true : false))." Gubernamental".'<br>';?>
+<? }else if ($caprovee->getNitpro()=='G'){?>
+  <?php echo radiobutton_tag('caprovee[nitpro]', 'J', false, array('onClick' => 'colocaletra(this.value);', 'readonly'  =>  $caprovee->getId()!='' ? true : false))." Jurídica".'<br>';
+  echo radiobutton_tag('caprovee[nitpro]', 'N', false, array('onClick' => 'colocaletra(this.value);', 'readonly'  =>  $caprovee->getId()!='' ? true : false))." Natural".'<br>';
+  echo radiobutton_tag('caprovee[nitpro]', 'G', true, array('onClick' => 'colocaletra(this.value);', 'readonly'  =>  $caprovee->getId()!='' ? true : false))." Gubernamental".'<br>';?>
 
 <? } else { ?>
     <?php echo radiobutton_tag('caprovee[nitpro]', 'J', false, array('onClick' => 'colocaletra(this.value);', 'readonly'  =>  $caprovee->getId()!='' ? true : false))." Jurídica".'<br>';
