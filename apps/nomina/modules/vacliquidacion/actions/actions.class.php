@@ -126,7 +126,8 @@ private static $coderror=-1;
 
 	   }
            if($this->ex){
-                $javascript.="alert('".$this->ex->getNativeError().", Vista Npliqvacacion')";
+                #$javascript.="alert('".$this->ex->getNativeError().", Vista Npliqvacacion')";
+                $javascript.="alert('Posible Error en la Vista Npliqvacacion, o funciones obtenerjornada(),dcontinuos()')";
            }
 	   $output = '[["'.$cajnomemp.'","'.$nomemp.'",""], ["'.$cajfecing.'","'.$fecing.'",""], ["'.$cajfecret.'","'.$fecret.'",""],["'.$cajultsue.'","'.$sueldonormal.'",""],["'.$cajsuenor.'","'.$ultimosueldo.'",""],["nphojint_sueult","'.$sueult.'",""],["nphojint_suepro","'.$suepro.'",""],["nphojint_suedia","'.$suedia.'",""],["nphojint_suediario","'.$suediario.'",""],["javascript","'.$javascript.'",""] ]';
     }
