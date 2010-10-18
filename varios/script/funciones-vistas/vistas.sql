@@ -540,7 +540,7 @@ group by
   a.antacu,
   b.intacu,
   a.intacu,
-  coalesce(A.ADEPRE,0))
+  coalesce(A.ADEPRE,0));
 
  CREATE OR REPLACE VIEW NPPRESREGANT AS
 (SELECT A.CODEMP,A.NOMEMP,A.FECING,A.FECRET AS FECEGR,
