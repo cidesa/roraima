@@ -960,7 +960,7 @@ class Orden_compra
         {
            $codigo_presupuestario =  $grid_detalle_orden_arreglos[$fila]['codcat']."-".$grid_detalle_orden_arreglos[$fila]['codpar'];
            $mondis=Herramientas::Monto_disponible($codigo_presupuestario);
-           if (H::FormatoMonto($mitotal)<=H::FormatoMonto($mondis))
+           if (H::toFloat($mitotal)<=H::toFloat($mondis))
            {
                $chequear_disponibilidad=true;
                $sobregiro=false;
