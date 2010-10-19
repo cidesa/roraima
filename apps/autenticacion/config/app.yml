@@ -2,6 +2,47 @@ all:
    .apps:
      autenticacion:    autenticacion
      max_per_page:     15
-     contabilidadpresupuesto: /var/www/cidesa/CLIENTE_CP/
-     reportes:         /var/www/cidesa/CLIENTE_REPORTES/
+     contabilidadpresupuesto: /home/desiree/www/siga_cp/
+     reportes:         /home/desiree/www/reportes_pdval/
+     reportes_web:                     reportes/reportes
      this: autenticacion
+     configemp:
+       generales:
+         impcpt: X            # Se creo para configurar si los conceptos de nomina en la orden de pago de nomina deben ser imprimibles por defecto son imprimibles 'S' para si o 'X' para no
+       aplicacion:
+         compras:
+           modulos:
+             almordrec:               #Recepcion de Ordenes de Compras
+               recmer: S              # Muestra el campo de Nombre del Cliente, Cantidad de Cajas , Cantidad de Jaulas
+         nomina:
+           modulos:
+             nomnomcienom:           #Cierre de Nomina
+               intpre: N             #Integracion con Presupuesto
+             nomhojint:
+               valifecing:  S   # Si el valor es S no valida que la fecha de ingreso no se mayor a la actual
+         compras:
+           modulos:
+             almordrec:               #Recepcion de Ordenes de Compras
+               recmer: S              # Muestra el campo de Nombre del Cliente, Cantidad de Cajas , Cantidad de Jaulas
+             almentalm:
+               recmer: S                  # Muestra el campo de  Tamaño Metrico , Cantidad de Jaulas
+             almsalalm:
+               recmer: S                  # Muestra el campo de  Tamaño Metricoo , Cantidad de Jaulas
+         contabilidad:
+           modulos:
+             confincue:
+               camnomcatcta: S         #Cambia el nombre de la descripcion cuando la cta este en CONTABC1
+             confincom:
+               camnomcatcta: S         #Cambia el comprobante cuando el comprobante sea de otro modulo
+         facturacion:
+           modulos:
+             fafactur:               # Formulario de Factura
+               cambiolog: S      # Se creo para el cliente logicasa el cual maneja los cambios adicionales despues de n° de entrega
+               mancatdes: S      # Se creo para los clientes que manejen catalogos de descripcion
+               gridfaclib: S     #Para que muestra grid de libro de ventas en la factura
+             fafacturpro:               # Formulario de Facturas
+               mancatdes: S      # Se creo para los clientes que manejen catalogos de descripcion
+         cuentasxcobrar:
+           modulos:
+             cobtransa:       # Formulario de Transacciones
+               nogenlc:  S    # Para que no genere comprobante, ni movimientos según Libros
