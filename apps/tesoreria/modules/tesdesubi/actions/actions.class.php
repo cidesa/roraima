@@ -5,9 +5,9 @@
  *
  * @package    Roraima
  * @subpackage tesdesubi
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: actions.class.php 41046 2010-10-19 15:09:27Z cramirez $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -54,7 +54,7 @@ $this->Bitacora('Guardo');
   }
 
   /**
-   * Actualiza la informacion que viene de la vista 
+   * Actualiza la informacion que viene de la vista
    * luego de un get/post en el objeto principal del modelo base del formulario.
    *
    */
@@ -71,6 +71,14 @@ $this->Bitacora('Guardo');
     {
       $this->bnubica->setDesubi($bnubica['desubi']);
     }
+    if (isset($bnubica['nomemp']))
+    {
+      $this->bnubica->setNomemp($bnubica['nomemp']);
+    }
+    if (isset($bnubica['nomcar']))
+    {
+      $this->bnubica->setNomcar($bnubica['nomcar']);
+    }
 
       $this->bnubica->setStacod('A');
 
@@ -80,6 +88,8 @@ $this->Bitacora('Guardo');
   {
    $this->mascaraubi = Herramientas::ObtenerFormato('Opdefemp','Forubi');
    $this->lonubi=strlen($this->mascaraubi);
+   $respon = H::getConfApp('respon', 'tesoreria', 'tesdesubi');
+   $this->getUser()->setAttribute('respon',$respon,'tesdesubi');
   }
 
     public function executeDelete()

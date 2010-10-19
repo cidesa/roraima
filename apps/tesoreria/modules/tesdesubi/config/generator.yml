@@ -1,12 +1,14 @@
 generator:
-  class:              sfPropelAdminGenerator
+  class:              cidesaPropelAdminGenerator
   param:
     model_class:      Bnubica
-    theme:            default
+    theme:            cidesaGenerator
     fields:
       codubi: { name: Código}
       desubi: { name: Descripción}
       stacod: { name: Estatus}
+      nomemp: { name: Responsable}
+      nomcar: { name: Cargo}
 
     list:
       title:          Lista de Ubicación
@@ -20,7 +22,7 @@ generator:
     edit:
       title:          Edición de Ubicación
       display:
-        Editable:     [codubi, desubi, stacod]
+        Editable:     [codubi, desubi, stacod, nomemp, nomcar]
       actions:
         _list:        ~
         _save:        ~

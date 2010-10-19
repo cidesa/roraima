@@ -4,8 +4,8 @@
  *
  * @package    Roraima
  * @subpackage vistas
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version    SVN: $Id$
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id: _edit_actions.php 41044 2010-10-19 15:09:02Z cramirez $
  */
 // date: 2007/11/27 14:43:57
 ?>
@@ -22,7 +22,9 @@
   'class' => 'sf_admin_action_create',
 )) ?></li>
   </ul>
+<?php if($sf_user->getAttribute('respon','','tesdesubi')!='S') { ?>
   <script language="JavaScript" type="text/javascript">
  var tieregrel='<?php echo $bnubica->getTiedatrel(); ?>';
   if (tieregrel=='S') $('save').hide();
 </script>
+<?php } ?>
