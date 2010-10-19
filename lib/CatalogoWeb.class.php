@@ -693,6 +693,7 @@ class CatalogoWeb extends BaseCatalogoWeb {
 
   public function Bnubibie_Almreq() {
     $longitudUbic = Herramientas :: getX_vacio('codins', 'bndefins', 'lonubi', '001');
+    if ($longitudUbic=='') $longitudUbic=0;
     $this->c = new Criteria();
     $this->sql = "length(Codubi) = '" . $longitudUbic . "'";
     $this->c->add(BnubibiePeer :: CODUBI, $this->sql, Criteria :: CUSTOM);
@@ -1223,6 +1224,7 @@ class CatalogoWeb extends BaseCatalogoWeb {
 
   public function Bndefact_Biedefconlotm() {
             $longitudact = Herramientas :: getX_vacio('codins', 'bndefins', 'lonact', '001');
+            if ($longitudact=='') $longitudact=0;
 		$this->c = new Criteria();
 		$this->sql = "length(Codact) = '" . $longitudact . "'";
 		$this->c->add(BndefactPeer :: CODACT, $this->sql, Criteria :: CUSTOM);
@@ -2001,6 +2003,7 @@ class CatalogoWeb extends BaseCatalogoWeb {
 
   public function Bnubibie_Almdes() {
     $longitudUbic = Herramientas :: getX_vacio('codins', 'bndefins', 'lonubi', '001');
+    if ($longitudUbic=='') $longitudUbic=0;
     $this->c = new Criteria();
     $this->sql = "length(Codubi) = '" . $longitudUbic . "'";
     $this->c->add(BnubibiePeer :: CODUBI, $this->sql, Criteria :: CUSTOM);
