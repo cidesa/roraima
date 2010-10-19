@@ -1310,6 +1310,12 @@ propel:
     stacod:
       type: VARCHAR
       size: 1
+    nomemp:
+      type: VARCHAR
+      size: 250
+    nomcar:
+      type: VARCHAR
+      size: 250
     id:
       type: INTEGER
       required: true

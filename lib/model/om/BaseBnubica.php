@@ -4,66 +4,82 @@
 abstract class BaseBnubica extends BaseObject  implements Persistent {
 
 
-	
+
 	protected static $peer;
 
 
-	
+
 	protected $codubi;
 
 
-	
+
 	protected $desubi;
 
 
-	
+
 	protected $stacod;
 
 
-	
+
+	protected $nomemp;
+
+
+
+	protected $nomcar;
+
+
+
 	protected $id;
 
-	
-	protected $collTsdeffonants;
 
-	
-	protected $lastTsdeffonantCriteria = null;
-
-	
 	protected $alreadyInSave = false;
 
-	
+
 	protected $alreadyInValidation = false;
 
-  
+
   public function getCodubi()
   {
 
     return trim($this->codubi);
 
   }
-  
+
   public function getDesubi()
   {
 
     return trim($this->desubi);
 
   }
-  
+
   public function getStacod()
   {
 
     return trim($this->stacod);
 
   }
-  
+
+  public function getNomemp()
+  {
+
+    return trim($this->nomemp);
+
+  }
+
+  public function getNomcar()
+  {
+
+    return trim($this->nomcar);
+
+  }
+
   public function getId()
   {
 
     return $this->id;
 
   }
-	
+
 	public function setCodubi($v)
 	{
 
@@ -71,9 +87,9 @@ abstract class BaseBnubica extends BaseObject  implements Persistent {
         $this->codubi = $v;
         $this->modifiedColumns[] = BnubicaPeer::CODUBI;
       }
-  
-	} 
-	
+
+	}
+
 	public function setDesubi($v)
 	{
 
@@ -81,9 +97,9 @@ abstract class BaseBnubica extends BaseObject  implements Persistent {
         $this->desubi = $v;
         $this->modifiedColumns[] = BnubicaPeer::DESUBI;
       }
-  
-	} 
-	
+
+	}
+
 	public function setStacod($v)
 	{
 
@@ -91,9 +107,29 @@ abstract class BaseBnubica extends BaseObject  implements Persistent {
         $this->stacod = $v;
         $this->modifiedColumns[] = BnubicaPeer::STACOD;
       }
-  
-	} 
-	
+
+	}
+
+	public function setNomemp($v)
+	{
+
+    if ($this->nomemp !== $v) {
+        $this->nomemp = $v;
+        $this->modifiedColumns[] = BnubicaPeer::NOMEMP;
+      }
+
+	}
+
+	public function setNomcar($v)
+	{
+
+    if ($this->nomcar !== $v) {
+        $this->nomcar = $v;
+        $this->modifiedColumns[] = BnubicaPeer::NOMCAR;
+      }
+
+	}
+
 	public function setId($v)
 	{
 
@@ -101,9 +137,9 @@ abstract class BaseBnubica extends BaseObject  implements Persistent {
         $this->id = $v;
         $this->modifiedColumns[] = BnubicaPeer::ID;
       }
-  
-	} 
-  
+
+	}
+
   public function hydrate(ResultSet $rs, $startcol = 1)
   {
     try {
@@ -114,7 +150,11 @@ abstract class BaseBnubica extends BaseObject  implements Persistent {
 
       $this->stacod = $rs->getString($startcol + 2);
 
-      $this->id = $rs->getInt($startcol + 3);
+      $this->nomemp = $rs->getString($startcol + 3);
+
+      $this->nomcar = $rs->getString($startcol + 4);
+
+      $this->id = $rs->getInt($startcol + 5);
 
       $this->resetModified();
 
@@ -122,7 +162,7 @@ abstract class BaseBnubica extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 4; 
+            return $startcol + 6;
     } catch (Exception $e) {
       throw new PropelException("Error populating Bnubica object", $e);
     }
@@ -133,8 +173,8 @@ abstract class BaseBnubica extends BaseObject  implements Persistent {
   {
 
   }
-    
-  
+
+
   public function __call($m, $a)
     {
       $prefijo = substr($m,0,3);
@@ -148,7 +188,7 @@ abstract class BaseBnubica extends BaseObject  implements Persistent {
 
     }
 
-	
+
 	public function delete($con = null)
 	{
 		if ($this->isDeleted()) {
@@ -170,7 +210,7 @@ abstract class BaseBnubica extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	public function save($con = null)
 	{
 		if ($this->isDeleted()) {
@@ -192,7 +232,7 @@ abstract class BaseBnubica extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	protected function doSave($con)
 	{
 		$affectedRows = 0; 		if (!$this->alreadyInSave) {
@@ -202,36 +242,28 @@ abstract class BaseBnubica extends BaseObject  implements Persistent {
 						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = BnubicaPeer::doInsert($this, $con);
-					$affectedRows += 1; 										 										 
-					$this->setId($pk);  
+					$affectedRows += 1;
+					$this->setId($pk);
 					$this->setNew(false);
 				} else {
 					$affectedRows += BnubicaPeer::doUpdate($this, $con);
 				}
 				$this->resetModified(); 			}
 
-			if ($this->collTsdeffonants !== null) {
-				foreach($this->collTsdeffonants as $referrerFK) {
-					if (!$referrerFK->isDeleted()) {
-						$affectedRows += $referrerFK->save($con);
-					}
-				}
-			}
-
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
-	} 
-	
+	}
+
 	protected $validationFailures = array();
 
-	
+
 	public function getValidationFailures()
 	{
 		return $this->validationFailures;
 	}
 
-	
+
 	public function validate($columns = null)
 	{
 		$res = $this->doValidate($columns);
@@ -244,7 +276,7 @@ abstract class BaseBnubica extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	protected function doValidate($columns = null)
 	{
 		if (!$this->alreadyInValidation) {
@@ -259,14 +291,6 @@ abstract class BaseBnubica extends BaseObject  implements Persistent {
 			}
 
 
-				if ($this->collTsdeffonants !== null) {
-					foreach($this->collTsdeffonants as $referrerFK) {
-						if (!$referrerFK->validate($columns)) {
-							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
-						}
-					}
-				}
-
 
 			$this->alreadyInValidation = false;
 		}
@@ -274,14 +298,14 @@ abstract class BaseBnubica extends BaseObject  implements Persistent {
 		return (!empty($failureMap) ? $failureMap : true);
 	}
 
-	
+
 	public function getByName($name, $type = BasePeer::TYPE_PHPNAME)
 	{
 		$pos = BnubicaPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->getByPosition($pos);
 	}
 
-	
+
 	public function getByPosition($pos)
 	{
 		switch($pos) {
@@ -295,6 +319,12 @@ abstract class BaseBnubica extends BaseObject  implements Persistent {
 				return $this->getStacod();
 				break;
 			case 3:
+				return $this->getNomemp();
+				break;
+			case 4:
+				return $this->getNomcar();
+				break;
+			case 5:
 				return $this->getId();
 				break;
 			default:
@@ -302,7 +332,7 @@ abstract class BaseBnubica extends BaseObject  implements Persistent {
 				break;
 		} 	}
 
-	
+
 	public function toArray($keyType = BasePeer::TYPE_PHPNAME)
 	{
 		$keys = BnubicaPeer::getFieldNames($keyType);
@@ -310,19 +340,21 @@ abstract class BaseBnubica extends BaseObject  implements Persistent {
 			$keys[0] => $this->getCodubi(),
 			$keys[1] => $this->getDesubi(),
 			$keys[2] => $this->getStacod(),
-			$keys[3] => $this->getId(),
+			$keys[3] => $this->getNomemp(),
+			$keys[4] => $this->getNomcar(),
+			$keys[5] => $this->getId(),
 		);
 		return $result;
 	}
 
-	
+
 	public function setByName($name, $value, $type = BasePeer::TYPE_PHPNAME)
 	{
 		$pos = BnubicaPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->setByPosition($pos, $value);
 	}
 
-	
+
 	public function setByPosition($pos, $value)
 	{
 		switch($pos) {
@@ -336,11 +368,17 @@ abstract class BaseBnubica extends BaseObject  implements Persistent {
 				$this->setStacod($value);
 				break;
 			case 3:
+				$this->setNomemp($value);
+				break;
+			case 4:
+				$this->setNomcar($value);
+				break;
+			case 5:
 				$this->setId($value);
 				break;
 		} 	}
 
-	
+
 	public function fromArray($arr, $keyType = BasePeer::TYPE_PHPNAME)
 	{
 		$keys = BnubicaPeer::getFieldNames($keyType);
@@ -348,10 +386,12 @@ abstract class BaseBnubica extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[0], $arr)) $this->setCodubi($arr[$keys[0]]);
 		if (array_key_exists($keys[1], $arr)) $this->setDesubi($arr[$keys[1]]);
 		if (array_key_exists($keys[2], $arr)) $this->setStacod($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setId($arr[$keys[3]]);
+		if (array_key_exists($keys[3], $arr)) $this->setNomemp($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setNomcar($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setId($arr[$keys[5]]);
 	}
 
-	
+
 	public function buildCriteria()
 	{
 		$criteria = new Criteria(BnubicaPeer::DATABASE_NAME);
@@ -359,12 +399,14 @@ abstract class BaseBnubica extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(BnubicaPeer::CODUBI)) $criteria->add(BnubicaPeer::CODUBI, $this->codubi);
 		if ($this->isColumnModified(BnubicaPeer::DESUBI)) $criteria->add(BnubicaPeer::DESUBI, $this->desubi);
 		if ($this->isColumnModified(BnubicaPeer::STACOD)) $criteria->add(BnubicaPeer::STACOD, $this->stacod);
+		if ($this->isColumnModified(BnubicaPeer::NOMEMP)) $criteria->add(BnubicaPeer::NOMEMP, $this->nomemp);
+		if ($this->isColumnModified(BnubicaPeer::NOMCAR)) $criteria->add(BnubicaPeer::NOMCAR, $this->nomcar);
 		if ($this->isColumnModified(BnubicaPeer::ID)) $criteria->add(BnubicaPeer::ID, $this->id);
 
 		return $criteria;
 	}
 
-	
+
 	public function buildPkeyCriteria()
 	{
 		$criteria = new Criteria(BnubicaPeer::DATABASE_NAME);
@@ -374,19 +416,19 @@ abstract class BaseBnubica extends BaseObject  implements Persistent {
 		return $criteria;
 	}
 
-	
+
 	public function getPrimaryKey()
 	{
 		return $this->getId();
 	}
 
-	
+
 	public function setPrimaryKey($key)
 	{
 		$this->setId($key);
 	}
 
-	
+
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
@@ -396,22 +438,17 @@ abstract class BaseBnubica extends BaseObject  implements Persistent {
 
 		$copyObj->setStacod($this->stacod);
 
+		$copyObj->setNomemp($this->nomemp);
 
-		if ($deepCopy) {
-									$copyObj->setNew(false);
+		$copyObj->setNomcar($this->nomcar);
 
-			foreach($this->getTsdeffonants() as $relObj) {
-				$copyObj->addTsdeffonant($relObj->copy($deepCopy));
-			}
-
-		} 
 
 		$copyObj->setNew(true);
 
-		$copyObj->setId(NULL); 
+		$copyObj->setId(NULL);
 	}
 
-	
+
 	public function copy($deepCopy = false)
 	{
 				$clazz = get_class($this);
@@ -420,7 +457,7 @@ abstract class BaseBnubica extends BaseObject  implements Persistent {
 		return $copyObj;
 	}
 
-	
+
 	public function getPeer()
 	{
 		if (self::$peer === null) {
@@ -429,214 +466,4 @@ abstract class BaseBnubica extends BaseObject  implements Persistent {
 		return self::$peer;
 	}
 
-	
-	public function initTsdeffonants()
-	{
-		if ($this->collTsdeffonants === null) {
-			$this->collTsdeffonants = array();
-		}
-	}
-
-	
-	public function getTsdeffonants($criteria = null, $con = null)
-	{
-				include_once 'lib/model/om/BaseTsdeffonantPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		if ($this->collTsdeffonants === null) {
-			if ($this->isNew()) {
-			   $this->collTsdeffonants = array();
-			} else {
-
-				$criteria->add(TsdeffonantPeer::UNIEJE, $this->getCodubi());
-
-				TsdeffonantPeer::addSelectColumns($criteria);
-				$this->collTsdeffonants = TsdeffonantPeer::doSelect($criteria, $con);
-			}
-		} else {
-						if (!$this->isNew()) {
-												
-
-				$criteria->add(TsdeffonantPeer::UNIEJE, $this->getCodubi());
-
-				TsdeffonantPeer::addSelectColumns($criteria);
-				if (!isset($this->lastTsdeffonantCriteria) || !$this->lastTsdeffonantCriteria->equals($criteria)) {
-					$this->collTsdeffonants = TsdeffonantPeer::doSelect($criteria, $con);
-				}
-			}
-		}
-		$this->lastTsdeffonantCriteria = $criteria;
-		return $this->collTsdeffonants;
-	}
-
-	
-	public function countTsdeffonants($criteria = null, $distinct = false, $con = null)
-	{
-				include_once 'lib/model/om/BaseTsdeffonantPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		$criteria->add(TsdeffonantPeer::UNIEJE, $this->getCodubi());
-
-		return TsdeffonantPeer::doCount($criteria, $distinct, $con);
-	}
-
-	
-	public function addTsdeffonant(Tsdeffonant $l)
-	{
-		$this->collTsdeffonants[] = $l;
-		$l->setBnubica($this);
-	}
-
-
-	
-	public function getTsdeffonantsJoinTsuniadm($criteria = null, $con = null)
-	{
-				include_once 'lib/model/om/BaseTsdeffonantPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		if ($this->collTsdeffonants === null) {
-			if ($this->isNew()) {
-				$this->collTsdeffonants = array();
-			} else {
-
-				$criteria->add(TsdeffonantPeer::UNIEJE, $this->getCodubi());
-
-				$this->collTsdeffonants = TsdeffonantPeer::doSelectJoinTsuniadm($criteria, $con);
-			}
-		} else {
-									
-			$criteria->add(TsdeffonantPeer::UNIEJE, $this->getCodubi());
-
-			if (!isset($this->lastTsdeffonantCriteria) || !$this->lastTsdeffonantCriteria->equals($criteria)) {
-				$this->collTsdeffonants = TsdeffonantPeer::doSelectJoinTsuniadm($criteria, $con);
-			}
-		}
-		$this->lastTsdeffonantCriteria = $criteria;
-
-		return $this->collTsdeffonants;
-	}
-
-
-	
-	public function getTsdeffonantsJoinOpbenefi($criteria = null, $con = null)
-	{
-				include_once 'lib/model/om/BaseTsdeffonantPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		if ($this->collTsdeffonants === null) {
-			if ($this->isNew()) {
-				$this->collTsdeffonants = array();
-			} else {
-
-				$criteria->add(TsdeffonantPeer::UNIEJE, $this->getCodubi());
-
-				$this->collTsdeffonants = TsdeffonantPeer::doSelectJoinOpbenefi($criteria, $con);
-			}
-		} else {
-									
-			$criteria->add(TsdeffonantPeer::UNIEJE, $this->getCodubi());
-
-			if (!isset($this->lastTsdeffonantCriteria) || !$this->lastTsdeffonantCriteria->equals($criteria)) {
-				$this->collTsdeffonants = TsdeffonantPeer::doSelectJoinOpbenefi($criteria, $con);
-			}
-		}
-		$this->lastTsdeffonantCriteria = $criteria;
-
-		return $this->collTsdeffonants;
-	}
-
-
-	
-	public function getTsdeffonantsJoinNpcatpre($criteria = null, $con = null)
-	{
-				include_once 'lib/model/om/BaseTsdeffonantPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		if ($this->collTsdeffonants === null) {
-			if ($this->isNew()) {
-				$this->collTsdeffonants = array();
-			} else {
-
-				$criteria->add(TsdeffonantPeer::UNIEJE, $this->getCodubi());
-
-				$this->collTsdeffonants = TsdeffonantPeer::doSelectJoinNpcatpre($criteria, $con);
-			}
-		} else {
-									
-			$criteria->add(TsdeffonantPeer::UNIEJE, $this->getCodubi());
-
-			if (!isset($this->lastTsdeffonantCriteria) || !$this->lastTsdeffonantCriteria->equals($criteria)) {
-				$this->collTsdeffonants = TsdeffonantPeer::doSelectJoinNpcatpre($criteria, $con);
-			}
-		}
-		$this->lastTsdeffonantCriteria = $criteria;
-
-		return $this->collTsdeffonants;
-	}
-
-
-	
-	public function getTsdeffonantsJoinTsdefban($criteria = null, $con = null)
-	{
-				include_once 'lib/model/om/BaseTsdeffonantPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		if ($this->collTsdeffonants === null) {
-			if ($this->isNew()) {
-				$this->collTsdeffonants = array();
-			} else {
-
-				$criteria->add(TsdeffonantPeer::UNIEJE, $this->getCodubi());
-
-				$this->collTsdeffonants = TsdeffonantPeer::doSelectJoinTsdefban($criteria, $con);
-			}
-		} else {
-									
-			$criteria->add(TsdeffonantPeer::UNIEJE, $this->getCodubi());
-
-			if (!isset($this->lastTsdeffonantCriteria) || !$this->lastTsdeffonantCriteria->equals($criteria)) {
-				$this->collTsdeffonants = TsdeffonantPeer::doSelectJoinTsdefban($criteria, $con);
-			}
-		}
-		$this->lastTsdeffonantCriteria = $criteria;
-
-		return $this->collTsdeffonants;
-	}
-
-} 
+}
