@@ -1639,6 +1639,18 @@ class Orden_compra
       $caordcom_mod= CaordcomPeer::doSelectOne($c);
       if (count($caordcom_mod)>0)
       {
+          $moddesord=H::getConfApp('moddesord', 'almordcom', 'compras');
+          if ($moddesord=='S')
+          {
+              $t= new Criteria();
+              $t->add(CpimpcauPeer::REFERE,$caordcom->getOrdcom());
+              $registro= CpimpcauPeer::doSelect($t);
+              if (!$registro)
+              {
+                 $caordcom_mod->setDesord($caordcom->getDesord());
+              }
+          }
+
 		  $caordcom_mod->setCodmedcom($caordcom->getCodmedcom());
 		  $caordcom_mod->setCodprocom($caordcom->getCodprocom());
 		  $caordcom_mod->setCodpai($caordcom->getCodpai());
