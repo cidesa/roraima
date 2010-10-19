@@ -1143,6 +1143,7 @@ class CatalogoWeb extends BaseCatalogoWeb {
 
   public function Bnubibie_Bieregactmued($params = array ()) {
     $longitudUbic = Herramientas :: getX_vacio('codins', 'bndefins', 'lonubi', '001');
+    if ($longitudUbic=='') $longitudUbic=0;
     $this->c = new Criteria();
     $this->sql = "length(Codubi) = '" . $longitudUbic . "'";
     $this->c->add(BnubibiePeer :: CODUBI, $this->sql, Criteria :: CUSTOM);
