@@ -44,6 +44,8 @@ class BnubicaMapBuilder {
 
 		$tMap->addColumn('NOMCAR', 'Nomcar', 'string', CreoleTypes::VARCHAR, false, 250);
 
+		$tMap->addColumn('NOMGER', 'Nomger', 'string', CreoleTypes::VARCHAR, false, 250);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	}

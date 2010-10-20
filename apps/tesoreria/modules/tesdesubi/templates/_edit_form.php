@@ -73,7 +73,7 @@
 
 
 
-</div>
+  </div>
   <?php  } ?>
 
 <br>
@@ -94,6 +94,30 @@
 
 
   <?php if($labels['bnubica{nomcar}']!='.:') { ?>
+
+
+
+  </div>
+  <?php  } ?>
+
+<br>
+
+  <?php if($labels['bnubica{nomger}']!='.:') { ?>
+  <?php echo label_for('bnubica[nomger]', __($labels['bnubica{nomger}' ]), 'class="required" Style="text-align:left; width:150px"') ?>
+  <div class="content<?php if ($sf_request->hasError('bnubica{nomger}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('bnubica{nomger}')): ?>
+    <?php echo form_error('bnubica{nomger}', array('class' => 'form-error-msg')) ?>
+  <?php endif; }?>
+
+
+
+  <?php $value = object_input_tag($bnubica, 'getNomger', array (
+  'size' => 80,
+  'control_name' => 'bnubica[nomger]',
+)); echo $value ? $value : '&nbsp;' ?>
+
+
+  <?php if($labels['bnubica{nomger}']!='.:') { ?>
 
 
 
