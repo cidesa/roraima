@@ -3021,3 +3021,118 @@ propel:
       primaryKey: true
       autoIncrement: true
       description: Identificador Único del registro
+  cacontxtalm:
+    codalm:
+      type: VARCHAR
+      size: 6
+      required: true
+    iniart:
+      type: NUMERIC
+      size: 3
+      required: true
+    finart:
+      type: NUMERIC
+      size: 3
+      required: true
+    inides:
+      type: NUMERIC
+      size: 3
+      required: true
+    findes:
+      type: NUMERIC
+      size: 3
+      required: true
+    inican:
+      type: NUMERIC
+      size: 3
+      required: true
+    fincan:
+      type: NUMERIC
+      size: 3
+      required: true
+    inisub:
+      type: NUMERIC
+      size: 3
+      required: true
+    finsub:
+      type: NUMERIC
+      size: 3
+      required: true
+    iniiva:
+      type: NUMERIC
+      size: 3
+      required: true
+    finiva:
+      type: NUMERIC
+      size: 3
+      required: true
+    inipre:
+      type: NUMERIC
+      size: 3
+      required: true
+    finpre:
+      type: NUMERIC
+      size: 3
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  caequiart:
+    codqpr:     #codigo del sistema QPROG
+      type: VARCHAR
+      size: 20
+      required: true
+    codart:          #codigo del SIGA
+      type: VARCHAR
+      size: 20
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  camigtxtven:
+    codalm:
+      type: VARCHAR
+      size: 6
+      required: true
+    fecven:
+      type: DATE
+    codart:
+      type: VARCHAR
+      size: 20
+      required: true
+    desart:
+      type: VARCHAR
+      size: 1500
+      required: true
+    cantidad:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    subtot:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    iva:
+      type: VARCHAR
+      size: 1
+    precio:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    fecmig:
+      type: DATE
+    usumig:
+      type: VARCHAR
+      size: 250
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
