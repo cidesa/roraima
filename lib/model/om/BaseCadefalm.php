@@ -4,74 +4,121 @@
 abstract class BaseCadefalm extends BaseObject  implements Persistent {
 
 
-	
+
 	protected static $peer;
 
 
-	
+
 	protected $codalm;
 
 
-	
+
 	protected $nomalm;
 
 
-	
+
 	protected $codcat;
 
 
-	
+
+	protected $codtip;
+
+
+
 	protected $catipalm_id;
 
 
-	
+
+	protected $diralm;
+
+
+
+	protected $codalt;
+
+
+
+	protected $codedo;
+
+
+
 	protected $id;
 
-	
-	protected $aCatipalm;
 
-	
+	protected $aCatipalmRelatedByCodtip;
+
+
+	protected $aCatipalmRelatedByCatipalmId;
+
+
 	protected $alreadyInSave = false;
 
-	
+
 	protected $alreadyInValidation = false;
 
-  
+
   public function getCodalm()
   {
 
     return trim($this->codalm);
 
   }
-  
+
   public function getNomalm()
   {
 
     return trim($this->nomalm);
 
   }
-  
+
   public function getCodcat()
   {
 
     return trim($this->codcat);
 
   }
-  
+
+  public function getCodtip()
+  {
+
+    return $this->codtip;
+
+  }
+
   public function getCatipalmId()
   {
 
     return $this->catipalm_id;
 
   }
-  
+
+  public function getDiralm()
+  {
+
+    return trim($this->diralm);
+
+  }
+
+  public function getCodalt()
+  {
+
+    return trim($this->codalt);
+
+  }
+
+  public function getCodedo()
+  {
+
+    return trim($this->codedo);
+
+  }
+
   public function getId()
   {
 
     return $this->id;
 
   }
-	
+
 	public function setCodalm($v)
 	{
 
@@ -79,9 +126,9 @@ abstract class BaseCadefalm extends BaseObject  implements Persistent {
         $this->codalm = $v;
         $this->modifiedColumns[] = CadefalmPeer::CODALM;
       }
-  
-	} 
-	
+
+	}
+
 	public function setNomalm($v)
 	{
 
@@ -89,9 +136,9 @@ abstract class BaseCadefalm extends BaseObject  implements Persistent {
         $this->nomalm = $v;
         $this->modifiedColumns[] = CadefalmPeer::NOMALM;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCodcat($v)
 	{
 
@@ -99,9 +146,23 @@ abstract class BaseCadefalm extends BaseObject  implements Persistent {
         $this->codcat = $v;
         $this->modifiedColumns[] = CadefalmPeer::CODCAT;
       }
-  
-	} 
-	
+
+	}
+
+	public function setCodtip($v)
+	{
+
+    if ($this->codtip !== $v) {
+        $this->codtip = $v;
+        $this->modifiedColumns[] = CadefalmPeer::CODTIP;
+      }
+
+		if ($this->aCatipalmRelatedByCodtip !== null && $this->aCatipalmRelatedByCodtip->getId() !== $v) {
+			$this->aCatipalmRelatedByCodtip = null;
+		}
+
+	}
+
 	public function setCatipalmId($v)
 	{
 
@@ -109,13 +170,43 @@ abstract class BaseCadefalm extends BaseObject  implements Persistent {
         $this->catipalm_id = $v;
         $this->modifiedColumns[] = CadefalmPeer::CATIPALM_ID;
       }
-  
-		if ($this->aCatipalm !== null && $this->aCatipalm->getId() !== $v) {
-			$this->aCatipalm = null;
+
+		if ($this->aCatipalmRelatedByCatipalmId !== null && $this->aCatipalmRelatedByCatipalmId->getId() !== $v) {
+			$this->aCatipalmRelatedByCatipalmId = null;
 		}
 
-	} 
-	
+	}
+
+	public function setDiralm($v)
+	{
+
+    if ($this->diralm !== $v) {
+        $this->diralm = $v;
+        $this->modifiedColumns[] = CadefalmPeer::DIRALM;
+      }
+
+	}
+
+	public function setCodalt($v)
+	{
+
+    if ($this->codalt !== $v) {
+        $this->codalt = $v;
+        $this->modifiedColumns[] = CadefalmPeer::CODALT;
+      }
+
+	}
+
+	public function setCodedo($v)
+	{
+
+    if ($this->codedo !== $v) {
+        $this->codedo = $v;
+        $this->modifiedColumns[] = CadefalmPeer::CODEDO;
+      }
+
+	}
+
 	public function setId($v)
 	{
 
@@ -123,9 +214,9 @@ abstract class BaseCadefalm extends BaseObject  implements Persistent {
         $this->id = $v;
         $this->modifiedColumns[] = CadefalmPeer::ID;
       }
-  
-	} 
-  
+
+	}
+
   public function hydrate(ResultSet $rs, $startcol = 1)
   {
     try {
@@ -136,9 +227,17 @@ abstract class BaseCadefalm extends BaseObject  implements Persistent {
 
       $this->codcat = $rs->getString($startcol + 2);
 
-      $this->catipalm_id = $rs->getInt($startcol + 3);
+      $this->codtip = $rs->getInt($startcol + 3);
 
-      $this->id = $rs->getInt($startcol + 4);
+      $this->catipalm_id = $rs->getInt($startcol + 4);
+
+      $this->diralm = $rs->getString($startcol + 5);
+
+      $this->codalt = $rs->getString($startcol + 6);
+
+      $this->codedo = $rs->getString($startcol + 7);
+
+      $this->id = $rs->getInt($startcol + 8);
 
       $this->resetModified();
 
@@ -146,7 +245,7 @@ abstract class BaseCadefalm extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 5; 
+            return $startcol + 9;
     } catch (Exception $e) {
       throw new PropelException("Error populating Cadefalm object", $e);
     }
@@ -157,8 +256,8 @@ abstract class BaseCadefalm extends BaseObject  implements Persistent {
   {
 
   }
-    
-  
+
+
   public function __call($m, $a)
     {
       $prefijo = substr($m,0,3);
@@ -172,7 +271,7 @@ abstract class BaseCadefalm extends BaseObject  implements Persistent {
 
     }
 
-	
+
 	public function delete($con = null)
 	{
 		if ($this->isDeleted()) {
@@ -194,7 +293,7 @@ abstract class BaseCadefalm extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	public function save($con = null)
 	{
 		if ($this->isDeleted()) {
@@ -216,27 +315,34 @@ abstract class BaseCadefalm extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	protected function doSave($con)
 	{
 		$affectedRows = 0; 		if (!$this->alreadyInSave) {
 			$this->alreadyInSave = true;
 
 
-												
-			if ($this->aCatipalm !== null) {
-				if ($this->aCatipalm->isModified()) {
-					$affectedRows += $this->aCatipalm->save($con);
+
+			if ($this->aCatipalmRelatedByCodtip !== null) {
+				if ($this->aCatipalmRelatedByCodtip->isModified()) {
+					$affectedRows += $this->aCatipalmRelatedByCodtip->save($con);
 				}
-				$this->setCatipalm($this->aCatipalm);
+				$this->setCatipalmRelatedByCodtip($this->aCatipalmRelatedByCodtip);
+			}
+
+			if ($this->aCatipalmRelatedByCatipalmId !== null) {
+				if ($this->aCatipalmRelatedByCatipalmId->isModified()) {
+					$affectedRows += $this->aCatipalmRelatedByCatipalmId->save($con);
+				}
+				$this->setCatipalmRelatedByCatipalmId($this->aCatipalmRelatedByCatipalmId);
 			}
 
 
 						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = CadefalmPeer::doInsert($this, $con);
-					$affectedRows += 1; 										 										 
-					$this->setId($pk);  
+					$affectedRows += 1;
+					$this->setId($pk);
 					$this->setNew(false);
 				} else {
 					$affectedRows += CadefalmPeer::doUpdate($this, $con);
@@ -246,17 +352,17 @@ abstract class BaseCadefalm extends BaseObject  implements Persistent {
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
-	} 
-	
+	}
+
 	protected $validationFailures = array();
 
-	
+
 	public function getValidationFailures()
 	{
 		return $this->validationFailures;
 	}
 
-	
+
 	public function validate($columns = null)
 	{
 		$res = $this->doValidate($columns);
@@ -269,7 +375,7 @@ abstract class BaseCadefalm extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	protected function doValidate($columns = null)
 	{
 		if (!$this->alreadyInValidation) {
@@ -279,10 +385,16 @@ abstract class BaseCadefalm extends BaseObject  implements Persistent {
 			$failureMap = array();
 
 
-												
-			if ($this->aCatipalm !== null) {
-				if (!$this->aCatipalm->validate($columns)) {
-					$failureMap = array_merge($failureMap, $this->aCatipalm->getValidationFailures());
+
+			if ($this->aCatipalmRelatedByCodtip !== null) {
+				if (!$this->aCatipalmRelatedByCodtip->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aCatipalmRelatedByCodtip->getValidationFailures());
+				}
+			}
+
+			if ($this->aCatipalmRelatedByCatipalmId !== null) {
+				if (!$this->aCatipalmRelatedByCatipalmId->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aCatipalmRelatedByCatipalmId->getValidationFailures());
 				}
 			}
 
@@ -299,14 +411,14 @@ abstract class BaseCadefalm extends BaseObject  implements Persistent {
 		return (!empty($failureMap) ? $failureMap : true);
 	}
 
-	
+
 	public function getByName($name, $type = BasePeer::TYPE_PHPNAME)
 	{
 		$pos = CadefalmPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->getByPosition($pos);
 	}
 
-	
+
 	public function getByPosition($pos)
 	{
 		switch($pos) {
@@ -320,9 +432,21 @@ abstract class BaseCadefalm extends BaseObject  implements Persistent {
 				return $this->getCodcat();
 				break;
 			case 3:
-				return $this->getCatipalmId();
+				return $this->getCodtip();
 				break;
 			case 4:
+				return $this->getCatipalmId();
+				break;
+			case 5:
+				return $this->getDiralm();
+				break;
+			case 6:
+				return $this->getCodalt();
+				break;
+			case 7:
+				return $this->getCodedo();
+				break;
+			case 8:
 				return $this->getId();
 				break;
 			default:
@@ -330,7 +454,7 @@ abstract class BaseCadefalm extends BaseObject  implements Persistent {
 				break;
 		} 	}
 
-	
+
 	public function toArray($keyType = BasePeer::TYPE_PHPNAME)
 	{
 		$keys = CadefalmPeer::getFieldNames($keyType);
@@ -338,20 +462,24 @@ abstract class BaseCadefalm extends BaseObject  implements Persistent {
 			$keys[0] => $this->getCodalm(),
 			$keys[1] => $this->getNomalm(),
 			$keys[2] => $this->getCodcat(),
-			$keys[3] => $this->getCatipalmId(),
-			$keys[4] => $this->getId(),
+			$keys[3] => $this->getCodtip(),
+			$keys[4] => $this->getCatipalmId(),
+			$keys[5] => $this->getDiralm(),
+			$keys[6] => $this->getCodalt(),
+			$keys[7] => $this->getCodedo(),
+			$keys[8] => $this->getId(),
 		);
 		return $result;
 	}
 
-	
+
 	public function setByName($name, $value, $type = BasePeer::TYPE_PHPNAME)
 	{
 		$pos = CadefalmPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->setByPosition($pos, $value);
 	}
 
-	
+
 	public function setByPosition($pos, $value)
 	{
 		switch($pos) {
@@ -365,14 +493,26 @@ abstract class BaseCadefalm extends BaseObject  implements Persistent {
 				$this->setCodcat($value);
 				break;
 			case 3:
-				$this->setCatipalmId($value);
+				$this->setCodtip($value);
 				break;
 			case 4:
+				$this->setCatipalmId($value);
+				break;
+			case 5:
+				$this->setDiralm($value);
+				break;
+			case 6:
+				$this->setCodalt($value);
+				break;
+			case 7:
+				$this->setCodedo($value);
+				break;
+			case 8:
 				$this->setId($value);
 				break;
 		} 	}
 
-	
+
 	public function fromArray($arr, $keyType = BasePeer::TYPE_PHPNAME)
 	{
 		$keys = CadefalmPeer::getFieldNames($keyType);
@@ -380,11 +520,15 @@ abstract class BaseCadefalm extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[0], $arr)) $this->setCodalm($arr[$keys[0]]);
 		if (array_key_exists($keys[1], $arr)) $this->setNomalm($arr[$keys[1]]);
 		if (array_key_exists($keys[2], $arr)) $this->setCodcat($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setCatipalmId($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setId($arr[$keys[4]]);
+		if (array_key_exists($keys[3], $arr)) $this->setCodtip($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setCatipalmId($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setDiralm($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setCodalt($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setCodedo($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setId($arr[$keys[8]]);
 	}
 
-	
+
 	public function buildCriteria()
 	{
 		$criteria = new Criteria(CadefalmPeer::DATABASE_NAME);
@@ -392,13 +536,17 @@ abstract class BaseCadefalm extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CadefalmPeer::CODALM)) $criteria->add(CadefalmPeer::CODALM, $this->codalm);
 		if ($this->isColumnModified(CadefalmPeer::NOMALM)) $criteria->add(CadefalmPeer::NOMALM, $this->nomalm);
 		if ($this->isColumnModified(CadefalmPeer::CODCAT)) $criteria->add(CadefalmPeer::CODCAT, $this->codcat);
+		if ($this->isColumnModified(CadefalmPeer::CODTIP)) $criteria->add(CadefalmPeer::CODTIP, $this->codtip);
 		if ($this->isColumnModified(CadefalmPeer::CATIPALM_ID)) $criteria->add(CadefalmPeer::CATIPALM_ID, $this->catipalm_id);
+		if ($this->isColumnModified(CadefalmPeer::DIRALM)) $criteria->add(CadefalmPeer::DIRALM, $this->diralm);
+		if ($this->isColumnModified(CadefalmPeer::CODALT)) $criteria->add(CadefalmPeer::CODALT, $this->codalt);
+		if ($this->isColumnModified(CadefalmPeer::CODEDO)) $criteria->add(CadefalmPeer::CODEDO, $this->codedo);
 		if ($this->isColumnModified(CadefalmPeer::ID)) $criteria->add(CadefalmPeer::ID, $this->id);
 
 		return $criteria;
 	}
 
-	
+
 	public function buildPkeyCriteria()
 	{
 		$criteria = new Criteria(CadefalmPeer::DATABASE_NAME);
@@ -408,19 +556,19 @@ abstract class BaseCadefalm extends BaseObject  implements Persistent {
 		return $criteria;
 	}
 
-	
+
 	public function getPrimaryKey()
 	{
 		return $this->getId();
 	}
 
-	
+
 	public function setPrimaryKey($key)
 	{
 		$this->setId($key);
 	}
 
-	
+
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
@@ -430,15 +578,23 @@ abstract class BaseCadefalm extends BaseObject  implements Persistent {
 
 		$copyObj->setCodcat($this->codcat);
 
+		$copyObj->setCodtip($this->codtip);
+
 		$copyObj->setCatipalmId($this->catipalm_id);
+
+		$copyObj->setDiralm($this->diralm);
+
+		$copyObj->setCodalt($this->codalt);
+
+		$copyObj->setCodedo($this->codedo);
 
 
 		$copyObj->setNew(true);
 
-		$copyObj->setId(NULL); 
+		$copyObj->setId(NULL);
 	}
 
-	
+
 	public function copy($deepCopy = false)
 	{
 				$clazz = get_class($this);
@@ -447,7 +603,7 @@ abstract class BaseCadefalm extends BaseObject  implements Persistent {
 		return $copyObj;
 	}
 
-	
+
 	public function getPeer()
 	{
 		if (self::$peer === null) {
@@ -456,8 +612,40 @@ abstract class BaseCadefalm extends BaseObject  implements Persistent {
 		return self::$peer;
 	}
 
-	
-	public function setCatipalm($v)
+
+	public function setCatipalmRelatedByCodtip($v)
+	{
+
+
+		if ($v === null) {
+			$this->setCodtip(NULL);
+		} else {
+			$this->setCodtip($v->getId());
+		}
+
+
+		$this->aCatipalmRelatedByCodtip = $v;
+	}
+
+
+
+	public function getCatipalmRelatedByCodtip($con = null)
+	{
+		if ($this->aCatipalmRelatedByCodtip === null && ($this->codtip !== null)) {
+						include_once 'lib/model/om/BaseCatipalmPeer.php';
+
+      $c = new Criteria();
+      $c->add(CatipalmPeer::ID,$this->codtip);
+
+			$this->aCatipalmRelatedByCodtip = CatipalmPeer::doSelectOne($c, $con);
+
+
+		}
+		return $this->aCatipalmRelatedByCodtip;
+	}
+
+
+	public function setCatipalmRelatedByCatipalmId($v)
 	{
 
 
@@ -468,21 +656,24 @@ abstract class BaseCadefalm extends BaseObject  implements Persistent {
 		}
 
 
-		$this->aCatipalm = $v;
+		$this->aCatipalmRelatedByCatipalmId = $v;
 	}
 
 
-	
-	public function getCatipalm($con = null)
+
+	public function getCatipalmRelatedByCatipalmId($con = null)
 	{
-		if ($this->aCatipalm === null && ($this->catipalm_id !== null)) {
+		if ($this->aCatipalmRelatedByCatipalmId === null && ($this->catipalm_id !== null)) {
 						include_once 'lib/model/om/BaseCatipalmPeer.php';
 
-			$this->aCatipalm = CatipalmPeer::retrieveByPK($this->catipalm_id, $con);
+      $c = new Criteria();
+      $c->add(CatipalmPeer::ID,$this->catipalm_id);
 
-			
+			$this->aCatipalmRelatedByCatipalmId = CatipalmPeer::doSelectOne($c, $con);
+
+
 		}
-		return $this->aCatipalm;
+		return $this->aCatipalmRelatedByCatipalmId;
 	}
 
-} 
+}

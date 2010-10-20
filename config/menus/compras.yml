@@ -51,6 +51,7 @@ compras:
       Ajuste a Ordenes de Compra:                             AlmAjuOC
     Almacen:
       Definiciones Generales:                                 AlmDefAlm
+      Definición de Tipo:                                     AlmDefTipAlm
       Requisiciones:                                          AlmReq
       Aprobación de Requisiciones en Lote:                    AlmAprReq
       Recepción de Ordenes de Compra:                         AlmOrdRec

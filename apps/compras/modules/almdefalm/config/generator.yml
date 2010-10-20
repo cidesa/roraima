@@ -8,6 +8,9 @@ generator:
       codalm:      { name : Código }
       nomalm:      { name : Descripción }
       codcat:      { name : Cod. Unidad Asociada }
+      codtip:      { name : Tipo }
+      codedo:      { name : Estado }
+      diralm:      { name : Direccion de Localidad }
       nomcat:      { name : Unidad Asociada }
 
     list:
@@ -22,7 +25,7 @@ generator:
 
     edit:
       title:          Edición de Almacen
-      display:        [codalm, nomalm, codcat]
+      display:        [codalm, nomalm, codcat, codtip, diralm, codedo]
       fields:
         codalm:       { params : maxlength=6}
       actions:
