@@ -8,13 +8,13 @@ opciones:                  # Opciones generales
   titulo:                  ' '
   htmltotalfilas:          ' '
 1:       # Columna 1
-  titulo:                  CÃ³digo Articulo
+  titulo:                  Código Articulo
   tipo:                    t
   nombrecampo:             codart
   esgrabable:              true
   html:                    [ readonly=true ]
 2:       # Columna 2
-  titulo:                  DescripciÃ³n
+  titulo:                  Descripción
   tipo:                    t
   nombrecampo:             desart
   esgrabable:              false
@@ -26,30 +26,42 @@ opciones:                  # Opciones generales
   esgrabable:              true
   html:                    [readonly=true size=10]
 4:       # Columna 4
-  titulo:                  CÃ³digo Almacen
+  titulo:                  Código Almacen
   tipo:                    t
   nombrecampo:             codalm
   esgrabable:              true
   html:                    [ readonly=true size=10 ]
 5:       # Columna 5
-  titulo:                  DescripciÃ³n
+  titulo:                  Descripción
   tipo:                    t
   nombrecampo:             desalm
   esgrabable:              false
   html:                    [ readonly=true size=40 ]
-6:       # Columna 6
-  titulo:                  PresentaciÃ³n
+4:       # Columna 4
+  titulo:                  Código Ubicación
+  tipo:                    t
+  nombrecampo:             codubi
+  esgrabable:              true
+  html:                    [ readonly=true size=10 ]
+6:       # Columna 5
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             desubi
+  esgrabable:              false
+  html:                    [ readonly=true size=40 ]
+7:       # Columna 6
+  titulo:                  Presentación
   tipo:                    t
   nombrecampo:             presen
   esgrabable:              true
   html:                    [ readonly=true size=10]
-7:       # Columna 1
-  titulo:                  RelaciÃ³n por Unidad
+8:       # Columna 1
+  titulo:                  Relación por Unidad
   tipo:                    m
   nombrecampo:             reluni
   esgrabable:              true
   html:                    [ readonly=true size=10]
-8:       # Columna 2
+9:       # Columna 2
   titulo:                  Total Unidades
   tipo:                    m
   nombrecampo:             exiact
