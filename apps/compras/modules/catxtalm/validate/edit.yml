@@ -1,0 +1,23 @@
+methods:
+  post:
+   - "cacontxtalm{codalm}"
+
+names:
+  cacontxtalm{codalm}:
+    required:  Yes
+    required_msg: El Código del Almacén no puedo estar en Blanco
+    validators: UniqueValidator, ExistValidator
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Cacontxtalm
+        column:   codalm
+        unique_error:   El Código del Almacén ya esta registrado. Por Favor, Cambiélo por otro.
+
+ExistValidator:
+    class: CidesaExistValidator
+    param:
+        class:        Cadefalm
+        column:       codalm
+        unique_error: El Código del Almacén no existe

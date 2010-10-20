@@ -1,0 +1,26 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Camigtxtven
+    theme:            cidesaGenerator
+    fields:
+      codalm:
+        name: Código de Almacén
+        params: maxlength=20
+        catalogo:
+          catalogoweb: Cadefalm_Alminvfis
+          clase: Cadefalm
+          ajax: 0
+          parametros: getprincipal="getCodalm" getsecundario="getNomalm" campoprincipal="codalm" camposecundario="nomalm" campobase = "id"
+      nomalm: { name: Descripción }
+      fecven: { name: Fecha de Venta }
+      archivo: { name: Archivo Venta, type: admin_input_file_tag }
+    edit:
+      title:          Migración de Ventas
+      display:  [codalm, fecven, archivo]
+      actions:
+        _list:        NONE
+        _save:
+          name:  Migrar Ventas
+        _create:      NONE
+        _delete:      NONE

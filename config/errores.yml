@@ -437,7 +437,7 @@
   msj: Su migración fue un exito Total
 541:
   cod: 541
-  msj: Debe Indicar el Archivo a Migrar.
+  msj: Debe Introducir el Archivo a Migrar.
 542:
   cod: 542
   msj: Se Rechazaron tantos registros de un total de tanto registros.
@@ -477,6 +477,12 @@
 554:
   cod: 554
   msj: Faltan datos en el grid de Experiencia Laboral Fuera de la Institución.
+555:
+  cod: 555
+  msj: La Condicion de Pago de la Orden no puedo estar en Blanco.
+556:
+  cod: 556
+  msj: El Código de Almacén no posee definición de configuración del TXT.
 3:
   cod: 3
   msj: La contraseña es diferente.

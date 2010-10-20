@@ -2872,4 +2872,128 @@ class Compras {
     }
   }
 
+  public static function MigrarVentas($clase,&$cadena)
+  {
+    $err=-1;
+    $cadena="";
+    $file = fopen(sfConfig::get('sf_upload_dir')."//".$clase->getArchivo(),  "r");
+    if ($file)
+    {
+        $cont=0;
+        $t= new Criteria();
+        $t->add(CacontxtalmPeer::CODALM,$clase->getCodalm());
+        $regis= CacontxtalmPeer::doSelectOne($t);
+        if ($regis)
+        {
+          while(!feof($file))
+          {
+            $almacen=fgets($file, 255);
+            if ($cont>=4)
+            {             
+               $codalm=$clase->getCodalm();
+               $fecven=$clase->getFecven();
+
+               $codartqprg= trim(substr($almacen,$regis->getIniart()-1,$regis->getFinart()));
+               if ($codartqprg!='') {
+               $desartqprg= trim(substr($almacen,$regis->getInides()-1,$regis->getFindes()));
+               $cantidad=trim(substr($almacen,$regis->getInican()-1,$regis->getFincan()));
+               if (is_numeric(H::toFloat($cantidad)))
+                 {
+                   $canart=H::toFloat($cantidad);
+                 }else $canart=0;
+
+               $subtot=trim(substr($almacen,$regis->getInisub()-1,$regis->getFinsub()));
+               if (is_numeric(H::toFloat($subtot)))
+                 {
+                   $subart=H::toFloat($subtot);
+                 }else $subart=0;
+               $iva=trim(substr($almacen,$regis->getIniiva()-1,$regis->getFiniva()));
+               $precio=trim(substr($almacen,$regis->getInipre()-1,$regis->getFinpre()));
+               if (is_numeric(H::toFloat($precio)))
+                 {
+                   $preart=H::toFloat($precio);
+                 }else $preart=0;
+
+               $y= new Criteria();
+               $y->add(CaequiartPeer::CODQPR,$codartqprg);
+               $resul= CaequiartPeer::doSelectOne($y);
+               if ($resul)
+               {                 
+                 //Actualizo el Articulo y el Inventario
+                   $u= new Criteria();
+                   $u->add(CaregartPeer::CODART,$resul->getCodart());
+                   $resg= CaregartPeer::doSelectOne($u);
+                   if ($resg)
+                   {
+                     $tipoart=$resg->getTipo();
+                     if ($tipoart=='A')
+                     {
+                         $act1=$resg->getExitot() - $canart;
+                         $dis1=$resg->getDistot() - $canart;
+                         $resg->setExitot($act1);
+                         $resg->setDistot($dis1);
+                         $resg->save();
+
+                         $c = new Criteria();
+                         $c->add(CaartalmubiPeer::CODART,$resul->getCodart());
+                         $c->add(CaartalmubiPeer::CODALM,$codalm);
+                         //$c->add(CaartalmubiPeer::CODUBI,$cubicacion);
+                         $alm = CaartalmubiPeer::doSelectOne($c);
+                         if ($alm)
+                         {
+                            if($alm->getExiact()>=$canart)
+                             {
+                                 $act2=$alm->getExiact() - $canart;
+                                 $alm->setExiact($act2);
+                                 $alm->save();
+                             }
+                         }// if ($alm)
+                         $c = new Criteria();
+                         $c->add(CaartalmPeer::CODART,$resul->getCodart());
+                         $c->add(CaartalmPeer::CODALM,$codalm);
+                         $reg = CaartalmPeer::doSelectOne($c);
+                         if ($reg)
+                         {
+                            if($reg->getExiact()>=$canart)
+                             {
+                                 $act2=$reg->getExiact() - $canart;
+                                 $reg->setExiact($act2);
+                                 $reg->save();
+                             }
+                         }// if ($alm)
+                       }//   if ($tipoart='A')
+                   }
+               }else {
+                 $cadena=$cadena.$codartqprg."-";
+               }
+
+               //Grabo todos los movimientos de ventas
+               $camigtxtven = new Camigtxtven();
+               $camigtxtven->setCodalm($codalm);
+               $camigtxtven->setFecven($fecven);
+               $camigtxtven->setCodart($codartqprg);
+               $camigtxtven->setDesart($desartqprg);
+               $camigtxtven->setFecmig(date('Y-m-d'));
+               $camigtxtven->setCantidad($canart);
+               $camigtxtven->setSubtot($subart);
+               $camigtxtven->setIva($iva);
+               $camigtxtven->setPrecio($preart);
+               $camigtxtven->setUsumig(sfContext::getInstance()->getUser()->getAttribute('loguse'));
+               $camigtxtven->save();
+              }
+            }
+            $cont++;
+          }
+        }else {
+          $err=556;
+        }   
+    }else {
+        $err=541;
+    }
+    fclose ($file);
+    unlink(sfConfig::get('sf_upload_dir')."//".$clase->getArchivo());
+
+    return $err;
+  }
+
 }
