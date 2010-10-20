@@ -6463,5 +6463,21 @@ public function Catdefcatman_Cattramo($params = '') {
 		);
 }
 
+        public function Catipalm_id() {
+            $this->c = new Criteria();
+            $this->columnas = array (
+                    #CatipalmPeer :: ID=> 'Código',
+                    CatipalmPeer :: NOMTIP => 'Descripción'
+            );
+	}
+
+        public function Catipalm_codedo() {
+            $this->c = new Criteria();
+            $this->columnas = array (
+                    OcestadoPeer :: CODEDO=> 'Código',
+                    OcestadoPeer :: NOMEDO => 'Estado'
+            );
+	}
+
 }
 ?>

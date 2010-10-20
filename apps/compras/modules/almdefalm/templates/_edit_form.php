@@ -4,14 +4,14 @@
  *
  * @package    Roraima
  * @subpackage vistas
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version    SVN: $Id$
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id: _edit_form.php 41068 2010-10-20 17:12:48Z cramirez $
  */
 // date: 2007/05/17 08:22:33
 ?>
 <?php echo form_tag('almdefalm/edit', array(
   'id'        => 'sf_admin_edit_form',
-  'name'      => 'sf_admin_edit_form',
+  'name'      => 'sf_admin_edit_form', 'onsubmit'  => 'return false;',
   'multipart' => true,
 )) ?>
 
@@ -74,6 +74,68 @@
   <?php echo input_tag('cadefalm[nomcat]',$cadefalm->getNomcat(),'disabled=true; size=52'); ?>
 
     </div>
+<br>
+  <?php echo label_for('cadefalm[codtip]', __($labels['cadefalm{codtip}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('cadefalm{codtip}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('cadefalm{codtip}')): ?>
+    <?php echo form_error('cadefalm{codtip}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($cadefalm, 'getCodtip', array (
+  'size' => 20,
+  'control_name' => 'cadefalm[codtip]',
+  'onBlur' => remote_function(array(
+			  'url'      => 'almdefalm/ajax',
+			  'complete' => 'AjaxJSON(request, json)',
+  			  'with' => "'ajax=2&cajtexmos=cadefalm_nomtip&codigo='+this.value"
+			  ))
+)); echo $value ? $value : '&nbsp;' ?>
+
+  <?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Catipalm_id/clase/Catipalm/frame/sf_admin_edit_form/obj1/cadefalm_codtip/obj2/cadefalm_nomtip/campo1/id/campo2/nomtip');?>
+
+  <?php echo input_tag('cadefalm[nomtip]',$cadefalm->getNomtip(),'disabled=true; size=52'); ?>
+
+
+    </div>
+<br>
+  <?php echo label_for('cadefalm[codedo]', __($labels['cadefalm{codedo}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('cadefalm{codedo}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('cadefalm{codedo}')): ?>
+    <?php echo form_error('cadefalm{codedo}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($cadefalm, 'getCodedo', array (
+  'size' => 20,
+  'control_name' => 'cadefalm[codedo]',
+  'onBlur' => remote_function(array(
+			  'url'      => 'almdefalm/ajax',
+			  'complete' => 'AjaxJSON(request, json)',
+  			  'with' => "'ajax=3&cajtexmos=cadefalm_nomedo&codigo='+this.value"
+			  ))
+)); echo $value ? $value : '&nbsp;' ?>
+
+  <?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Catipalm_codedo/clase/Ocestado/frame/sf_admin_edit_form/obj1/cadefalm_codedo/obj2/cadefalm_nomedo/campo1/codedo/campo2/nomedo');?>
+
+  <?php echo input_tag('cadefalm[nomedo]',$cadefalm->getNomedo(),'disabled=true; size=52'); ?>
+
+
+    </div>
+<br>
+  <?php echo label_for('cadefalm[diralm]', __($labels['cadefalm{diralm}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('cadefalm{diralm}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('cadefalm{diralm}')): ?>
+    <?php echo form_error('cadefalm{diralm}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_textarea_tag($cadefalm, 'getDiralm', array (
+  'size' => '77x4',
+  'maxlength' => 500,
+  'control_name' => 'cadefalm[diralm]',
+  'onKeyUp'=>"javascript:cadena=this.value;cadena=cadena.toUpperCase();this.value=cadena;",
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+
+
     <br>
 </div>
 

@@ -501,12 +501,27 @@ propel:
     codcat:
       type: VARCHAR
       size: 16
+    codtip:
+      type: INTEGER
+      foreignTable: catipalm
+      foreignReference: id
+      onDelete:
+      onUpdate:
     catipalm_id:
       type: INTEGER
       foreignTable: catipalm
       foreignReference: id
       onDelete:
       onUpdate:
+    diralm:
+      type: VARCHAR
+      size: 500
+    codalt:
+      type: VARCHAR
+      size: 20
+    codedo:
+      type: VARCHAR
+      size: 20
     id:
       type: INTEGER
       required: true
