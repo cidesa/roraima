@@ -6,7 +6,7 @@
  * @package    Roraima
  * @subpackage tesdesubi
  * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id: actions.class.php 41046 2010-10-19 15:09:27Z cramirez $
+ * @version SVN: $Id: actions.class.php 41077 2010-10-20 17:59:18Z cramirez $
  *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -78,6 +78,10 @@ $this->Bitacora('Guardo');
     if (isset($bnubica['nomcar']))
     {
       $this->bnubica->setNomcar($bnubica['nomcar']);
+    }
+    if (isset($bnubica['nomger']))
+    {
+      $this->bnubica->setNomger($bnubica['nomger']);
     }
 
       $this->bnubica->setStacod('A');
