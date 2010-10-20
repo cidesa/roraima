@@ -24,7 +24,7 @@ class almmiginvfisActions extends autoalmmiginvfisActions
     $currentFile = sfConfig::get('sf_upload_dir')."/assets/archivo_excel.xls";
     $arc='N';
     if (is_file($currentFile))
-            $arc='S';	
+            $arc='S';
     $this->params=array('archivo'=>$arc);
 
   }
@@ -44,9 +44,9 @@ class almmiginvfisActions extends autoalmmiginvfisActions
 
     if(!count($reg)>0)
     {
-      // AquÃ­ va el cÃ³digo para traernos los registros que contendrÃ¡ el grid
+      // Aquí va el código para traernos los registros que contendrá el grid
       $reg = array();
-      // AquÃ­ va el cÃ³digo para generar arreglo de configuraciÃ³n del grid
+      // Aquí va el código para generar arreglo de configuración del grid
 
     $this->obj = array();
     }
@@ -58,12 +58,12 @@ class almmiginvfisActions extends autoalmmiginvfisActions
     // $c->add(CaartaocPeer::AJUOC ,$this->caajuoc->getAjuoc());
     // $reg = CaartaocPeer::doSelect($c);
 
-    // De esta forma se carga la configuraciÃ³n del grid de un archivo yml
-    // y se le pasa el parÃ¡metro de los registros encontrados ($reg)
+    // De esta forma se carga la configuración del grid de un archivo yml
+    // y se le pasa el parámetro de los registros encontrados ($reg)
     //                                                                            /nombreformulario/
     // $this->obj = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/formulario/'.sfConfig::get('sf_app_module_config_dir_name').'/grid_caartaoc',$reg);
 
-    // Si no se quiere cargar la configuraciÃ³n del grid de un .yml, sedebe hacer a pie.
+    // Si no se quiere cargar la configuración del grid de un .yml, sedebe hacer a pie.
 
     // Se genera el arreglo de opciones necesario para generar el grid
 
@@ -81,11 +81,11 @@ class almmiginvfisActions extends autoalmmiginvfisActions
 
     $codigo = $this->getRequestParameter('codigo','');
     // Esta variable ajax debe ser usada en cada llamado para identificar
-    // que objeto hace el llamado y por consiguiente ejecutar el cÃ³digo necesario
+    // que objeto hace el llamado y por consiguiente ejecutar el código necesario
     $ajax = $this->getRequestParameter('ajax','');
 
-    // Se debe enviar en la peticiÃ³n ajax desde el cliente los datos que necesitemos
-    // para generar el cÃ³digo de retorno, esto porque en un llamado Ajax no se devuelven
+    // Se debe enviar en la petición ajax desde el cliente los datos que necesitemos
+    // para generar el código de retorno, esto porque en un llamado Ajax no se devuelven
     // los datos de los objetos de la vista como pasa en un submit normal.
 
     switch ($ajax){
@@ -108,62 +108,78 @@ class almmiginvfisActions extends autoalmmiginvfisActions
             $r=0;
             $codalm='';
             $nomalm='';
+            $codubi='';
+            $nomubi='';
             $codart='';
             $fecha=date('d/m/Y');
-            foreach($data->sheets[0]['cells'] as $dat){ 
-              if(array_key_exists('1', $dat))
-              {
-                $c = new Criteria();
-                $obj = CadefartPeer::doSelectone($c);
-                if($obj)
-                {
-                    if(strlen($obj->getForart())==strlen($dat[1]))
+            for($i=0;$i<count($data->sheets);$i++)
+            {
+                foreach($data->sheets[$i]['cells'] as $dat){
+                  if(array_key_exists('1', $dat))
+                  {
+                    $c = new Criteria();
+                    $obj = CadefartPeer::doSelectone($c);
+                    if($obj)
                     {
-                        $aux1=split('-',$obj->getForart());
-                        $aux2=split('-',$dat[1]);
-                        if(count($aux1)==count($aux2))
+                        if(strlen($obj->getForart())==strlen($dat[1]))
                         {
-                            $codart=$dat[1];
-                            $c = new Criteria();
-                            $c->add(CaregartPeer::CODART,$codart);
-                            $reg = CaregartPeer::doSelect($c);
-                            if($reg)
+                            $aux1=split('-',$obj->getForart());
+                            $aux2=split('-',$dat[1]);
+                            if(count($aux1)==count($aux2))
                             {
-                                $per[$r]['codart']=$codart;
-                                $per[$r]['desart']=H::GetX('Codart','Caregart','desart',$codart);
-                                $per[$r]['fecinv']=$fecha;
-                                $per[$r]['codalm']=$codalm;
-                                $per[$r]['desalm']=$nomalm;
-                                $per[$r]['presen']= array_key_exists('3', $dat) ? $dat[3] : '';
-                                $per[$r]['reluni']= array_key_exists('4', $dat) ? $dat[4] : 0;
-                                $per[$r]['exiact']= array_key_exists('11', $dat) ? $dat[11] : 0;
-                                $per[$r]['id']=9;
-                                $r++;
+                                $codart=$dat[1];
+                                $c = new Criteria();
+                                $c->add(CaregartPeer::CODART,$codart);
+                                $reg = CaregartPeer::doSelect($c);
+                                if($reg)
+                                {
+                                    $per[$r]['codart']=$codart;
+                                    $per[$r]['desart']=H::GetX('Codart','Caregart','desart',$codart);
+                                    $per[$r]['fecinv']=$fecha;
+                                    $per[$r]['codalm']=$codalm;
+                                    $per[$r]['desalm']=$nomalm;
+                                    $per[$r]['codubi']=$codubi;
+                                    $per[$r]['desubi']=$nomubi;
+                                    $per[$r]['presen']= array_key_exists('3', $dat) ? $dat[3] : '';
+                                    $per[$r]['reluni']= array_key_exists('4', $dat) ? $dat[4] : 0;
+                                    $per[$r]['exiact']= array_key_exists('11', $dat) ? $dat[11] : 0;
+                                    $per[$r]['id']=9;
+                                    $r++;
+                                }
                             }
                         }
                     }
-                }
-                else
-                    $mensaje="No hay definiciÃ³n Previa de Articulos";
-              }elseif(array_key_exists('6', $dat))
-              {
-                if(count($dat)==1)
-                {
-                    if(strrpos(strtolower($dat[6]),"fecha")!==false)
+                    else
+                        $mensaje="No hay definición Previa de Articulos";
+                  }elseif(array_key_exists('6', $dat))
+                  {
+                    if(count($dat)==1)
                     {
-                        $fecha = trim(substr($dat[6],strrpos($dat[6],":")+1));
-                    }                    
-                    if(strrpos(strtolower($dat[6]),"digo:")!==false)
-                    {
-                        $codalm = trim(substr($dat[6],strrpos($dat[6],":")+1));                                                
-                        $nomalm=H::GetX('Codalm','Cadefalm','nomalm',$codalm);
+                        if(strrpos(strtolower($dat[6]),"fecha")!==false)
+                        {
+                            $fecha = trim(substr($dat[6],strrpos($dat[6],":")+1));
+                        }
+                        if(strrpos(strtolower($dat[6]),"instalaci")!==false)
+                        {
+                            $alm = trim(substr($dat[6],strrpos($dat[6],":")+1));
+                            $auxalm = split("/",$alm);
+                            count($auxalm)>0 ? $codalm = trim($auxalm[0]) : $codalm = '';
+                            $nomalm=H::GetX('Codalm','Cadefalm','nomalm',$codalm);
+                        }
+                        if(strrpos(strtolower($dat[6]),"ubicaci")!==false)
+                        {
+                            $ubi = trim(substr($dat[6],strrpos($dat[6],":")+1));
+                            $auxubi = split("/",$ubi);
+                            count($auxubi)>0 ? $codubi = trim($auxubi[0]) : $codubi = '';
+                            $nomubi=H::GetX('Codubi','Cadefubi','nomubi',$codubi);
+                        }
                     }
+                  }else
+                      $mensaje="No se pudo leer la Información del Archivo, revisar archivo xls";
                 }
-              }else
-                  $mensaje="No se pudo leer la InformaciÃ³n del Archivo, revisar archivo xls";
             }
             if(!$per)
-                $mensaje="Los Articulos en el archivo xls no existen en la definiciÃ³n de Articulos del Sistema";
+                $mensaje="Los Articulos en el archivo xls no existen en la definición de Articulos del Sistema";
             unlink($currentFile);
         }else
         {
@@ -180,12 +196,12 @@ class almmiginvfisActions extends autoalmmiginvfisActions
         $output = '[["","",""],["","",""],["","",""]]';
         break;
     }
-    $this->datos=$per;    
+    $this->datos=$per;
     $this->mensaje=$mensaje;
     // Instruccion para escribir en la cabecera los datos a enviar a la vista
     $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
     // Si solo se va usar ajax para actualziar datos en objetos ya existentes se debe
-    // mantener habilitar esta instrucciÃ³n
+    // mantener habilitar esta instrucción
     #return sfView::HEADER_ONLY;
 
     // Si por el contrario se quiere reemplazar un div en la vista, se debe deshabilitar
@@ -196,9 +212,9 @@ class almmiginvfisActions extends autoalmmiginvfisActions
 
   /**
    *
-   * FunciÃ³n que se ejecuta luego los validadores del negocio (validators)
-   * Para realizar validaciones especÃ­ficas del negocio del formulario
-   * Para mayor informaciÃ³n vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
+   * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
   public function validateEdit()
@@ -206,7 +222,7 @@ class almmiginvfisActions extends autoalmmiginvfisActions
     $this->coderr =-1;
 
     // Se deben llamar a las funciones necesarias para cargar los
-    // datos de la vista que serÃ¡n usados en las funciones de validaciÃ³n.
+    // datos de la vista que serán usados en las funciones de validación.
     // Por ejemplo:
 
     if($this->getRequest()->getMethod() == sfRequest::POST){
@@ -214,7 +230,7 @@ class almmiginvfisActions extends autoalmmiginvfisActions
       // $this->configGrid();
       // $grid = Herramientas::CargarDatosGrid($this,$this->obj);
 
-      // Aqui van los llamados a los mÃ©todos de las clases del
+      // Aqui van los llamados a los métodos de las clases del
       // negocio para validar los datos.
       // Los resultados de cada llamado deben ser analizados por ejemplo:
 
@@ -222,10 +238,10 @@ class almmiginvfisActions extends autoalmmiginvfisActions
 
        //$resp=Herramientas::ValidarCodigo($valor,$this->tstipmov,$campo);
 
-      // al final $resp es analizada en base al cÃ³digo que retorna
-      // Todas las funciones de validaciÃ³n y procesos del negocio
-      // deben retornar cÃ³digos >= -1. Estos cÃ³digo serÃ¡m buscados en
-      // el archivo errors.yml en la funciÃ³n handleErrorEdit()
+      // al final $resp es analizada en base al código que retorna
+      // Todas las funciones de validación y procesos del negocio
+      // deben retornar códigos >= -1. Estos código serám buscados en
+      // el archivo errors.yml en la función handleErrorEdit()
 
       if($this->coderr!=-1){
         return false;
@@ -238,7 +254,7 @@ class almmiginvfisActions extends autoalmmiginvfisActions
   }
 
   /**
-   * FunciÃ³n para actualziar el grid en el post si ocurre un error
+   * Función para actualziar el grid en el post si ocurre un error
    * Se pueden colocar aqui los grids adicionales
    *
    */
@@ -262,6 +278,7 @@ class almmiginvfisActions extends autoalmmiginvfisActions
             $c = new Criteria();
             $c->add(CainvfisPeer::CODART,$reg['codart']);
             $c->add(CainvfisPeer::CODALM,$reg['codalm']);
+            $c->add(CainvfisPeer::CODUBI,$reg['codubi']);
             $obj = CainvfisPeer::doSelectOne($c);
             if($obj)
             {
@@ -273,6 +290,7 @@ class almmiginvfisActions extends autoalmmiginvfisActions
                 $objinv = new Cainvfis();
                 $objinv->setCodart($reg['codart']);
                 $objinv->setCodalm($reg['codalm']);
+                $objinv->setCodubi($reg['codubi']);
                 $auxfec = split("/",$reg['fecinv']);
                 $objinv->setFecinv(date('Y-m-d',strtotime($auxfec[2].'-'.$auxfec[1].'-'.$auxfec[0])));
                 $objinv->setExiact($reg['exiact']);
