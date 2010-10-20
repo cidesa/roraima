@@ -1316,9 +1316,6 @@ propel:
     nomcar:
       type: VARCHAR
       size: 250
-    nomger:
-      type: VARCHAR
-      size: 250
     id:
       type: INTEGER
       required: true

@@ -79,10 +79,6 @@ $this->Bitacora('Guardo');
     {
       $this->bnubica->setNomcar($bnubica['nomcar']);
     }
-    if (isset($bnubica['nomger']))
-    {
-      $this->bnubica->setNomger($bnubica['nomger']);
-    }
 
       $this->bnubica->setStacod('A');
 
