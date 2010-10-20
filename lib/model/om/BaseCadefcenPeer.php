@@ -3,64 +3,70 @@
 
 abstract class BaseCadefcenPeer {
 
-	
+
 	const DATABASE_NAME = 'propel';
 
-	
+
 	const TABLE_NAME = 'cadefcen';
 
-	
+
 	const CLASS_DEFAULT = 'lib.model.Cadefcen';
 
-	
-	const NUM_COLUMNS = 5;
 
-	
+	const NUM_COLUMNS = 7;
+
+
 	const NUM_LAZY_LOAD_COLUMNS = 0;
 
 
-	
+
 	const CODCEN = 'cadefcen.CODCEN';
 
-	
+
 	const DESCEN = 'cadefcen.DESCEN';
 
-	
+
 	const DIRCEN = 'cadefcen.DIRCEN';
 
-	
+
 	const CODPAI = 'cadefcen.CODPAI';
 
-	
+
+	const NOMEMP = 'cadefcen.NOMEMP';
+
+
+	const NOMCAR = 'cadefcen.NOMCAR';
+
+
 	const ID = 'cadefcen.ID';
 
-	
+
 	private static $phpNameMap = null;
 
 
-	
+
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codcen', 'Descen', 'Dircen', 'Codpai', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (CadefcenPeer::CODCEN, CadefcenPeer::DESCEN, CadefcenPeer::DIRCEN, CadefcenPeer::CODPAI, CadefcenPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codcen', 'descen', 'dircen', 'codpai', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
+		BasePeer::TYPE_PHPNAME => array ('Codcen', 'Descen', 'Dircen', 'Codpai', 'Nomemp', 'Nomcar', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (CadefcenPeer::CODCEN, CadefcenPeer::DESCEN, CadefcenPeer::DIRCEN, CadefcenPeer::CODPAI, CadefcenPeer::NOMEMP, CadefcenPeer::NOMCAR, CadefcenPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codcen', 'descen', 'dircen', 'codpai', 'nomemp', 'nomcar', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
 	);
 
-	
+
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codcen' => 0, 'Descen' => 1, 'Dircen' => 2, 'Codpai' => 3, 'Id' => 4, ),
-		BasePeer::TYPE_COLNAME => array (CadefcenPeer::CODCEN => 0, CadefcenPeer::DESCEN => 1, CadefcenPeer::DIRCEN => 2, CadefcenPeer::CODPAI => 3, CadefcenPeer::ID => 4, ),
-		BasePeer::TYPE_FIELDNAME => array ('codcen' => 0, 'descen' => 1, 'dircen' => 2, 'codpai' => 3, 'id' => 4, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
+		BasePeer::TYPE_PHPNAME => array ('Codcen' => 0, 'Descen' => 1, 'Dircen' => 2, 'Codpai' => 3, 'Nomemp' => 4, 'Nomcar' => 5, 'Id' => 6, ),
+		BasePeer::TYPE_COLNAME => array (CadefcenPeer::CODCEN => 0, CadefcenPeer::DESCEN => 1, CadefcenPeer::DIRCEN => 2, CadefcenPeer::CODPAI => 3, CadefcenPeer::NOMEMP => 4, CadefcenPeer::NOMCAR => 5, CadefcenPeer::ID => 6, ),
+		BasePeer::TYPE_FIELDNAME => array ('codcen' => 0, 'descen' => 1, 'dircen' => 2, 'codpai' => 3, 'nomemp' => 4, 'nomcar' => 5, 'id' => 6, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
 	);
 
-	
+
 	public static function getMapBuilder()
 	{
 		include_once 'lib/model/map/CadefcenMapBuilder.php';
 		return BasePeer::getMapBuilder('lib.model.map.CadefcenMapBuilder');
 	}
-	
+
 	public static function getPhpNameMap()
 	{
 		if (self::$phpNameMap === null) {
@@ -74,7 +80,7 @@ abstract class BaseCadefcenPeer {
 		}
 		return self::$phpNameMap;
 	}
-	
+
 	static public function translateFieldName($name, $fromType, $toType)
 	{
 		$toNames = self::getFieldNames($toType);
@@ -85,7 +91,7 @@ abstract class BaseCadefcenPeer {
 		return $toNames[$key];
 	}
 
-	
+
 
 	static public function getFieldNames($type = BasePeer::TYPE_PHPNAME)
 	{
@@ -95,13 +101,13 @@ abstract class BaseCadefcenPeer {
 		return self::$fieldNames[$type];
 	}
 
-	
+
 	public static function alias($alias, $column)
 	{
 		return str_replace(CadefcenPeer::TABLE_NAME.'.', $alias.'.', $column);
 	}
 
-	
+
 	public static function addSelectColumns(Criteria $criteria)
 	{
 
@@ -113,6 +119,10 @@ abstract class BaseCadefcenPeer {
 
 		$criteria->addSelectColumn(CadefcenPeer::CODPAI);
 
+		$criteria->addSelectColumn(CadefcenPeer::NOMEMP);
+
+		$criteria->addSelectColumn(CadefcenPeer::NOMCAR);
+
 		$criteria->addSelectColumn(CadefcenPeer::ID);
 
 	}
@@ -120,7 +130,7 @@ abstract class BaseCadefcenPeer {
 	const COUNT = 'COUNT(cadefcen.ID)';
 	const COUNT_DISTINCT = 'COUNT(DISTINCT cadefcen.ID)';
 
-	
+
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
 	{
 				$criteria = clone $criteria;
@@ -144,7 +154,7 @@ abstract class BaseCadefcenPeer {
 						return 0;
 		}
 	}
-	
+
 	public static function doSelectOne(Criteria $criteria, $con = null)
 	{
 		$critcopy = clone $criteria;
@@ -155,12 +165,12 @@ abstract class BaseCadefcenPeer {
 		}
 		return null;
 	}
-	
+
 	public static function doSelect(Criteria $criteria, $con = null)
 	{
 		return CadefcenPeer::populateObjects(CadefcenPeer::doSelectRS($criteria, $con));
 	}
-	
+
 	public static function doSelectRS(Criteria $criteria, $con = null)
 	{
 		if ($con === null) {
@@ -176,35 +186,35 @@ abstract class BaseCadefcenPeer {
 
 						return BasePeer::doSelect($criteria, $con);
 	}
-	
+
 	public static function populateObjects(ResultSet $rs)
 	{
 		$results = array();
-	
+
 				$cls = CadefcenPeer::getOMClass();
 		$cls = Propel::import($cls);
 				while($rs->next()) {
-		
+
 			$obj = new $cls();
 			$obj->hydrate($rs);
 			$results[] = $obj;
-			
+
 		}
 		return $results;
 	}
-	
+
 	public static function getTableMap()
 	{
 		return Propel::getDatabaseMap(self::DATABASE_NAME)->getTable(self::TABLE_NAME);
 	}
 
-	
+
 	public static function getOMClass()
 	{
 		return CadefcenPeer::CLASS_DEFAULT;
 	}
 
-	
+
 	public static function doInsert($values, $con = null)
 	{
 		if ($con === null) {
@@ -215,7 +225,7 @@ abstract class BaseCadefcenPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
-		$criteria->remove(CadefcenPeer::ID); 
+		$criteria->remove(CadefcenPeer::ID);
 
 				$criteria->setDbName(self::DATABASE_NAME);
 
@@ -231,7 +241,7 @@ abstract class BaseCadefcenPeer {
 		return $pk;
 	}
 
-	
+
 	public static function doUpdate($values, $con = null)
 	{
 		if ($con === null) {
@@ -241,7 +251,7 @@ abstract class BaseCadefcenPeer {
 		$selectCriteria = new Criteria(self::DATABASE_NAME);
 
 		if ($values instanceof Criteria) {
-			$criteria = clone $values; 
+			$criteria = clone $values;
 			$comparison = $criteria->getComparison(CadefcenPeer::ID);
 			$selectCriteria->add(CadefcenPeer::ID, $criteria->remove(CadefcenPeer::ID), $comparison);
 
@@ -252,7 +262,7 @@ abstract class BaseCadefcenPeer {
 		return BasePeer::doUpdate($selectCriteria, $criteria, $con);
 	}
 
-	
+
 	public static function doDeleteAll($con = null)
 	{
 		if ($con === null) {
@@ -269,7 +279,7 @@ abstract class BaseCadefcenPeer {
 		}
 	}
 
-	
+
 	 public static function doDelete($values, $con = null)
 	 {
 		if ($con === null) {
@@ -287,10 +297,10 @@ abstract class BaseCadefcenPeer {
 
 				$criteria->setDbName(self::DATABASE_NAME);
 
-		$affectedRows = 0; 
+		$affectedRows = 0;
 		try {
 									$con->begin();
-			
+
 			$affectedRows += BasePeer::doDelete($criteria, $con);
 			$con->commit();
 			return $affectedRows;
@@ -300,7 +310,7 @@ abstract class BaseCadefcenPeer {
 		}
 	}
 
-	
+
 	public static function doValidate(Cadefcen $obj, $cols = null)
 	{
 		$columns = array();
@@ -335,7 +345,7 @@ abstract class BaseCadefcenPeer {
     return $res;
 	}
 
-	
+
 	public static function retrieveByPK($pk, $con = null)
 	{
 		if ($con === null) {
@@ -352,7 +362,7 @@ abstract class BaseCadefcenPeer {
 		return !empty($v) > 0 ? $v[0] : null;
 	}
 
-	
+
 	public static function retrieveByPKs($pks, $con = null)
 	{
 		if ($con === null) {
@@ -370,7 +380,7 @@ abstract class BaseCadefcenPeer {
 		return $objs;
 	}
 
-} 
+}
 if (Propel::isInit()) {
 			try {
 		BaseCadefcenPeer::getMapBuilder();
