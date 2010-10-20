@@ -2948,6 +2948,12 @@ propel:
     codpai:
       type: VARCHAR
       size: 4
+    nomemp:
+      type: VARCHAR
+      size: 250
+    nomcar:
+      type: VARCHAR
+      size: 250
     id:
       type: INTEGER
       required: true

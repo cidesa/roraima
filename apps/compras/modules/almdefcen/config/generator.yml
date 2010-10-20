@@ -7,6 +7,8 @@ generator:
       codcen: { name: Código, params: size=10 maxlength=4 }
       descen: { name: Descripción, params: maxlength=250  }
       dircen: { name: Dirección, params: maxlength=500  }
+      nomemp: { name: Responsable, params: maxlength=250  }
+      nomcar: { name: Cargo, params: maxlength=250  }
       codpai:
         name: Estado
         params: maxlength=4
@@ -26,7 +28,7 @@ generator:
       sort: codcen
     edit:
       title:          Edición de Centro de Costo
-      display:        [=codcen, descen, dircen, codpai]
+      display:        [=codcen, descen, dircen, codpai, nomemp, nomcar]
       actions:
         _list:        ~
         _save:        ~
