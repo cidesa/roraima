@@ -363,6 +363,7 @@ class almordcomActions extends autoalmordcomActions
 	       }
 	     }
 
+       $this->Bitacora('Guardo');
 
         if ($this->getRequestParameter('save_and_add'))
           return $this->redirect('almordcom/create');
