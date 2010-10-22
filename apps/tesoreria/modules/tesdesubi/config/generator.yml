@@ -9,6 +9,7 @@ generator:
       stacod: { name: Estatus}
       nomemp: { name: Responsable}
       nomcar: { name: Cargo}
+      nomjef: { name: Jefe Compras}
 
     list:
       title:          Lista de Ubicación
@@ -22,7 +23,7 @@ generator:
     edit:
       title:          Edición de Ubicación
       display:
-        Editable:     [codubi, desubi, stacod, nomemp, nomcar]
+        Editable:     [codubi, desubi, stacod, nomemp, nomcar, nomjef]
       actions:
         _list:        ~
         _save:        ~

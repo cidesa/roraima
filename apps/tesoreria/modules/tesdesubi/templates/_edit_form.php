@@ -5,7 +5,7 @@
  * @package    Roraima
  * @subpackage vistas
  * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
- * @version    SVN: $Id: _edit_form.php 41078 2010-10-20 18:01:28Z cramirez $
+ * @version    SVN: $Id: _edit_form.php 41093 2010-10-20 18:45:49Z cramirez $
  */
 // date: 2007/03/15 17:11:15
 ?>
@@ -99,6 +99,31 @@
 
   </div>
   <?php  } ?>
+
+<br>
+
+  <?php if($labels['bnubica{nomjef}']!='.:') { ?>
+  <?php echo label_for('bnubica[nomjef]', __($labels['bnubica{nomjef}' ]), 'class="required" Style="text-align:left; width:150px"') ?>
+  <div class="content<?php if ($sf_request->hasError('bnubica{nomjef}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('bnubica{nomjef}')): ?>
+    <?php echo form_error('bnubica{nomjef}', array('class' => 'form-error-msg')) ?>
+  <?php endif; }?>
+
+
+
+  <?php $value = object_input_tag($bnubica, 'getNomjef', array (
+  'size' => 80,
+  'control_name' => 'bnubica[nomjef]',
+)); echo $value ? $value : '&nbsp;' ?>
+
+
+  <?php if($labels['bnubica{nomjef}']!='.:') { ?>
+
+
+
+  </div>
+  <?php  } ?>
+
 
 
 <?php } ?>
