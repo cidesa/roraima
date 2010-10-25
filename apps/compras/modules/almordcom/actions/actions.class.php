@@ -1612,7 +1612,7 @@ class almordcomActions extends autoalmordcomActions
   	$escodpre='N';
     $sql="select 9 as id, '' as nompar, codpar, sum(totarti) as totart, recargo from (select 9 as id, '' as nompar,  a.codpar as codpar, sum((a.totart-a.rgoart)) as totarti, 'N' as recargo from caartord a
           where a.ordcom='".$ordcom."'  group by  a.codpar,a.totart,a.rgoart
-          union
+          union all
           select 9 as id, '' as nompar, c.codpre as codpar,sum(b.monrgo) as totarti, 'S' as recargo from cargosol b, carecarg c
           where reqart='".$ordcom."' and b.codrgo=c.codrgo group by c.codpre) as nueva group by codpar, recargo";
     $resp = Herramientas::BuscarDatos($sql,&$reg);
