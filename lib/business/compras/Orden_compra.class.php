@@ -34,9 +34,33 @@ class Orden_compra
  */
   public static function Salvar($caordcom,$arreglo_arreglo,$arreglo_objetos,$arreglo_campos,&$coderror)
   {
+       $refere1="";
+       $t= new Criteria();
+       $t->add(CpimppagPeer::REFERE,$caordcom->getOrdcom());
+       $result=CpimppagPeer::doSelectOne($t);
+       if ($result)
+       {
+           if ($result->getStaimp()!='N')
+           {
+             $refere1=$result->getRefere();
+           }
+       }
 
-	$refere1 = Herramientas::getX_vacio('refere','cpimppag','refere',$caordcom->getOrdcom());
-	$refere2 = Herramientas::getX_vacio('refere','cpimpcau','refere',$caordcom->getOrdcom());
+	//$refere1 = Herramientas::getX_vacio('refere','cpimppag','refere',$caordcom->getOrdcom());
+
+       $refere2="";
+       $t2= new Criteria();
+       $t2->add(CpimpcauPeer::REFERE,$caordcom->getOrdcom());
+       $result2=CpimpcauPeer::doSelectOne($t2);
+       if ($result2)
+       {
+           if ($result2->getStaimp()!='N')
+           {
+             $refere2=$result->getRefere();
+           }
+       }
+        
+	//$refere2 = Herramientas::getX_vacio('refere','cpimpcau','refere',$caordcom->getOrdcom());
 	$refere0 = Herramientas::getX_vacio('refcom','cpimpcom','refcom',$caordcom->getOrdcom());
 
 	if (((!empty($refere1)) or (!empty($refere2)) or (!empty($refere0))) and ($caordcom->getId()))
