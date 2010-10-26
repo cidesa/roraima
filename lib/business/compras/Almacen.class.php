@@ -455,6 +455,8 @@ class Almacen
                   $newcaartalm->setEximax(0);
                   $newcaartalm->setPtoreo(0);
                   $newcaartalm->save();
+
+                  
                 }//$caartalm
             }
 
