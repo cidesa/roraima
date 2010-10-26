@@ -2437,7 +2437,7 @@ class almordcomActions extends autoalmordcomActions
         }else { $provee=''; $codigopro=""; $tippro=""; $rifpro="";}
 
           $dato   = Herramientas::getX('reqart','Casolart','monreq',trim($this->getRequestParameter('ordcom')));
-          $desreq = Herramientas::getX('reqart','Casolart','desreq',trim($this->getRequestParameter('ordcom')));
+          $desreq = eregi_replace("[\n|\r|\n\r]", "", Herramientas::getX('reqart','Casolart','desreq',trim($this->getRequestParameter('ordcom'))));
           $desfin = Herramientas::getX('codfin','Fortipfin','nomext',$filas[0]->getTipfin());
           $codcen = Herramientas::getX('reqart','Casolart','codcen',trim($this->getRequestParameter('ordcom')));
           $descen = Herramientas::getX('codcen','Cadefcen','descen',$codcen);
