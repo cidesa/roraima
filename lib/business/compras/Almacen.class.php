@@ -4,9 +4,9 @@
  *
  * @package    Roraima
  * @subpackage compras
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: Almacen.class.php 41188 2010-10-26 16:45:11Z cramirez $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -360,7 +360,9 @@ class Almacen
     $resinvfis=CainvfisPeer::doSelect($c);
     foreach ($resinvfis as $datinvfis)
    	{
-		$c = new Criteria();
+          #TODO ESTO SE COMENTO PORQUE ASI LO DECIDIO LEOBARDO, YA QUE SOLO DEBE
+          //GUARDAR Y BUSCAR EN  EN CAALMART Y CAINVIFS
+		/*$c = new Criteria();
 		$c->add(CainvfisubiPeer::FECINV,$fecinv);
     	$c->add(CainvfisubiPeer::CODART,$datinvfis->getCodart());
     	$c->add(CainvfisubiPeer::CODALM,$datinvfis->getCodalm());
@@ -386,40 +388,87 @@ class Almacen
 		          $newcaartalmubi->setExiact($datinvfisubi->getExiact());
 		          $newcaartalmubi->save();
     		}//$caartalmubi
-   	    }//foreach ($resinfisubi as $datinvfisubi)
+   	    }//foreach ($resinfisubi as $datinvfisubi)*/
 
-    	$c = new Criteria();
-		$c->add(CaartalmPeer::CODART,$datinvfis->getCodart());
-		$c->add(CaartalmPeer::CODALM,$datinvfis->getCodalm());
-		$caartalm=CaartalmPeer::doSelectOne($c);
-		if ($caartalm)//existe solo se actualiza la existencia actual
-		{
-			$caartalm->setExiact($datinvfis->getExiact());
-			$caartalm->save();
-		}
-		else//no existe esa existencia por articulo y almacen entonces se incluye
-		{
-	          $newcaartalm= new Caartalmubi();
-	          $newcaartalm->setCodart($datinvfis->getCodart());
-	          $newcaartalm->setCodalm($datinvfis->getCodalm());
-	          $newcaartalm->setExiact($datinvfis->getExiact());
-	          $newcaartalm->setEximin(0);
-	          $newcaartalm->setEximax(0);
-	          $newcaartalm->setPtoreo(0);
-	          $newcaartalm->save();
-		}//$caartalm
+            if($datinvfis->getCodubi()!='')
+            {
+                $c = new Criteria();
+                $c->add(CaartalmPeer::CODART,$datinvfis->getCodart());
+                $c->add(CaartalmPeer::CODALM,$datinvfis->getCodalm());
+                $c->add(CaartalmPeer::CODUBI,$datinvfis->getCodubi());
+                $caartalm=CaartalmPeer::doSelectOne($c);
+                if ($caartalm)//existe solo se actualiza la existencia actual
+                {
+                        $caartalm->setExiact($datinvfis->getExiact());
+                        $caartalm->save();
+                }
+                else//no existe esa existencia por articulo y almacen entonces se incluye
+                {
+                  $newcaartalm= new Caartalm();
+                  $newcaartalm->setCodart($datinvfis->getCodart());
+                  $newcaartalm->setCodalm($datinvfis->getCodalm());
+                  $newcaartalm->setCodubi($datinvfis->getCodubi());
+                  $newcaartalm->setExiact($datinvfis->getExiact());
+                  $newcaartalm->setEximin(0);
+                  $newcaartalm->setEximax(0);
+                  $newcaartalm->setPtoreo(0);
+                  $newcaartalm->save();
+                }//$caartalm
+                $c = new Criteria();
+    		$c->add(CaartalmubiPeer::CODART,$datinvfis->getCodart());
+    		$c->add(CaartalmubiPeer::CODALM,$datinvfis->getCodalm());
+    		$c->add(CaartalmubiPeer::CODUBI,$datinvfis->getCodubi());
+    		$caartalmubi=CaartalmubiPeer::doSelectOne($c);
+    		if ($caartalmubi)//existe solo se actualiza la existencia actual
+    		{
+    			$caartalmubi->setExiact($datinvfis->getExiact());
+    			$caartalmubi->save();
+    		}
+    		else//no existe esa existencia por articulo, almacen y ubicacion entonces se incluye
+    		{
+		          $newcaartalmubi= new Caartalmubi();
+		          $newcaartalmubi->setCodart($datinvfis->getCodart());
+		          $newcaartalmubi->setCodalm($datinvfis->getCodalm());
+		          $newcaartalmubi->setCodubi($datinvfis->getCodubi());
+		          $newcaartalmubi->setExiact($datinvfis->getExiact());
+		          $newcaartalmubi->save();
+    		}//$caartalmubi
+
+            }else
+            {
+                $c = new Criteria();
+                $c->add(CaartalmPeer::CODART,$datinvfis->getCodart());
+                $c->add(CaartalmPeer::CODALM,$datinvfis->getCodalm());
+                $caartalm=CaartalmPeer::doSelectOne($c);
+                if ($caartalm)//existe solo se actualiza la existencia actual
+                {
+                        $caartalm->setExiact($datinvfis->getExiact());
+                        $caartalm->save();
+                }
+                else//no existe esa existencia por articulo y almacen entonces se incluye
+                {
+                  $newcaartalm= new Caartalm();
+                  $newcaartalm->setCodart($datinvfis->getCodart());
+                  $newcaartalm->setCodalm($datinvfis->getCodalm());
+                  $newcaartalm->setExiact($datinvfis->getExiact());
+                  $newcaartalm->setEximin(0);
+                  $newcaartalm->setEximax(0);
+                  $newcaartalm->setPtoreo(0);
+                  $newcaartalm->save();
+                }//$caartalm
+            }
 
 	  $c = new Criteria();
 	  $c->add(CaregartPeer::CODART,$datinvfis->getCodart());
 	  $arti = CaregartPeer::doSelectOne($c);
 	  if ($arti)
 	  {
-	   	     $arti->setInvini($datinvfis->getExiact());
+                 $arti->setInvini($datinvfis->getExiact());
 	         $arti->save();
 	   }
 	  //Actualizar el montotal por por articulo
-	  $sql = "UPDATE CAREGART SET EXITOT=(SELECT SUM(EXIACT) FROM CAARTALM WHERE CODART='".$datinvfis->getCodart()."') WHERE CODART='".$datinvfis->getCodart()."'";
-      Herramientas::insertarRegistros($sql);
+	  $sql = "UPDATE CAREGART SET EXITOT=(SELECT coalesce(SUM(EXIACT),0) FROM CAARTALM WHERE CODART='".$datinvfis->getCodart()."') WHERE CODART='".$datinvfis->getCodart()."'";
+          Herramientas::BuscarDatos($sql, $output);
 
    	}// foreach ($resinvfis as $datinvfis)
 
