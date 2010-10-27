@@ -236,7 +236,7 @@ class fafacturActions extends autofafacturActions {
         $this->columnas[1][0]->setHTML('onClick="marcardesc(this.id)"');
 		$this->columnas[1][9]->setCombo(FaartpvpPeer :: getPrecios());
 		$this->columnas[1][9]->setHTML('onChange=Precio3(this.id);');
-		$this->columnas[1][10]->setHTML('size="10" readonly=true onKeyPress=Precio2(event,this.id);');
+		$this->columnas[1][10]->setHTML('size="10" onKeyPress=Precio2(event,this.id);');
 		$this->columnas[1][11]->setHTML(' size="10" onKeyPress=montorecargo(event,this.id);');
 		#$this->columnas[1][11]->setEsTotal(true, 'fafactur_totmonrgo');
 		#$this->columnas[1][12]->setEsTotal(true, 'fafactur_tottotart');
@@ -568,13 +568,20 @@ class fafacturActions extends autofafacturActions {
 				$c = new Criteria();
 				$c->add(FadefcajPeer :: ID, $this->getRequestParameter('codigocaja'));
 				$reg = FadefcajPeer :: doSelectOne($c);
-				if ($reg) {
-					//$tipo=$reg->getTipo();
-					$correl = str_pad($reg->getCorcaj(), 8, '0', STR_PAD_LEFT);
-					/*if ($tipo=='F')
-					{
-						$javascript=$javascript."$('fafactur_reffac').readOnly=true;";
-					}*/
+				if ($reg) {					
+					$r = $reg->getCorcaj();
+                                        $enc=false;
+                                        while (!$enc)
+                                        {
+                                            $correl = str_pad($r, 8, '0', STR_PAD_LEFT);
+                                            $t= new Criteria();
+                                            $t->add(FafacturPeer::REFFAC,$correl);
+                                            $res=FafacturPeer::doSelectOne($t);
+                                            if ($res)
+                                            {
+                                              $r=$r+1;
+                                            }else $enc=true;
+                                        }
 				} else {
 					$tipo = "";
 					$correl = "";
@@ -1409,6 +1416,13 @@ class fafacturActions extends autofafacturActions {
                                 $result->save();
                             }
                           $j++;
+                        }
+
+                        $usalib=H::getConfApp('gridfaclib', 'facturacion', 'fafactur');
+                        $grid6 = Herramientas :: CargarDatosGridv2($this, $this->obj6);
+                        if ($usalib=='S')
+                        {
+                            Factura::grabarFacturaLibro($fafactur,$grid6);
                         }
 
 	    return -1;

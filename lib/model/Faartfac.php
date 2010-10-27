@@ -30,7 +30,7 @@ class Faartfac extends BaseFaartfac
   protected $blanco2="0,00";
   protected $recarg="";
   protected $desc="";
-  protected $precioe="0,00";
+  protected $precioe=0.00;
   protected $canentregar="0,00";
   protected $canajustada="0,00";
   protected $montot="0,00";
@@ -123,7 +123,9 @@ class Faartfac extends BaseFaartfac
   {
     if (self::getPrecio()!=0)
     {
-      $this->precioe=self::getPrecio();
+      $this->precioe=number_format(self::getPrecio(), 2, ',', '.');
+    }else {
+        $this->precioe=number_format($this->precioe, 2, ',', '.');
     }
     if (self::getId())
     {
@@ -175,5 +177,25 @@ class Faartfac extends BaseFaartfac
     public function getDesprod()
     {
       return Herramientas::getX('CODPROD','Fadefpro','Desprod',self::getCodprod());
+    }
+
+   public function getPrecioe($va=false)
+  {
+    if (self::getId()!="")
+    {
+     $var = parent::getPrecio($va);
+    }
+    else
+    {
+      if($va) $var = number_format($this->precioe,2,',','.');
+    else $var = $this->precioe;
+    }
+    return $var;
+  }
+
+  public function setPrecioe($val)
+    {
+       //$this->precioe = $val;
+       $this->precioe = Herramientas::toFloat($val);
     }
 }

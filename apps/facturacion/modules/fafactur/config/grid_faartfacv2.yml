@@ -80,7 +80,7 @@ opciones:                  # Opciones generales
   nombrecampo:             precioe
   esnumerico:              true
   oculta:                  false
-  html:                    [size="10" readonly=true]
+  html:                    [size="10"]
 12:     # Columna 12
   titulo:                  Monto Recargo
   tipo:                    m
