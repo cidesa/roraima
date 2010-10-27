@@ -37,14 +37,14 @@ class Factura {
       {
       	return true;
       }
-    }
-
-    self::grabarFactura($fafactur,$grid1,$grid2,$grid3,$grid4,$tipocaja);
+    }    
 
     if (!self::generarAsientos(&$fafactur,$grid1,$grid2,$grid3,$grid4,&$arrasientos,&$pos,&$msj3))
     {
       return true;
     }
+
+    self::grabarFactura($fafactur,$grid1,$grid2,$grid3,$grid4,$tipocaja);
 
     self::grabarComprobanteMaestro(&$fafactur,$arrasientos,&$pos);
 
@@ -67,6 +67,8 @@ class Factura {
     //  self::grabarImpIng($fafactur);
     }
 
+    $fafactur->save();
+    
     return true;
 
   }
@@ -328,7 +330,7 @@ class Factura {
   	$msj3=-1;
   	$salactual=H::toFloat($fafactur->getTottotart()) - H::toFloat($fafactur->getMondesc());
   	$numcomord="FA".substr($fafactur->getReffac(),2,6);
-  	$correl=OrdendePago::Buscar_Correlativo();
+  	//$correl=OrdendePago::Buscar_Correlativo();
   	//$fafactur->setNumcom($correl);
   	$arrasientos=array();
   	$pos=0;
@@ -513,7 +515,10 @@ class Factura {
              eval('$cant = $x[$j]->get'.ucfirst(strtolower($col)).'();');
              if ($x[$j]->getPrecio()!="") { $precio=$x[$j]->getPrecio(); }
              else { $precio=$x[$j]->getPrecioe();}
-             $monto_ingreso=round(($cant * $precio),2);
+             //$monto_ingreso=round(($cant * $precio),2);
+             $calculo=$cant * $precio;
+             $monto_ingreso=$calculo;
+
           }
           else
           {
@@ -537,8 +542,11 @@ class Factura {
           	  eval('$cant = $x[$j]->get'.ucfirst(strtolower($col)).'();');
           	  if ($x[$j]->getPrecio()!="") { $precio=$x[$j]->getPrecio(); }
              else { $precio=$x[$j]->getPrecioe();}
-              $monaux=round((($cant* $precio*$porcentaje)/100),2);
-              $monto_ingreso=round((($cant*$precio)-$monaux),2);
+              //$monaux=round((($cant* $precio*$porcentaje)/100),2);
+             $monaux=(($cant* $precio*$porcentaje)/100);
+              //$monto_ingreso=round((($cant*$precio)-$monaux),2);
+             $monto_ingreso=(($cant*$precio)-$monaux);
+
           }
 
           $cta_vta=H::getX('Codart','Caregart','Ctavta',$x[$j]->getCodart());
@@ -559,7 +567,8 @@ class Factura {
           	eval('$cant = $x[$j]->get'.ucfirst(strtolower($col)).'();');
           	if ($x[$j]->getPrecio()!="") { $precio=$x[$j]->getPrecio(); }
              else { $precio=$x[$j]->getPrecioe();}
-          	$monto_provee=round((($cant* $precio*$porcentaje)/100),2);
+          	//$monto_provee=round((($cant* $precio*$porcentaje)/100),2);
+                $monto_provee=(($cant* $precio*$porcentaje)/100);
           	if ($fafactur->getTipref()!='VC')
           	{
               $f= new Criteria();
@@ -586,6 +595,32 @@ class Factura {
         }
       	$j++;
       }
+
+      $i=0;
+      $acumdeb=0;
+      $acumcre=0;
+      while ($i<=($pos-1))
+      {
+            if ($arrasientos[$i]["2"]!="")
+            {
+              if ($arrasientos[$i]["2"]=='D')
+              {
+                  $acumdeb= $acumdeb + $arrasientos[$i]["3"];
+              }
+              else
+              {
+                    $acumcre= $acumcre + $arrasientos[$i]["3"];
+              }             
+            }
+            $i++;
+      }
+      if ($acumdeb!=$acumcre || ($acumdeb==0 || $acumcre==0))
+      {
+         $msj3=519;
+          return false;
+      }
+
+      
      return true;
   }
 
@@ -660,25 +695,25 @@ class Factura {
 	  {
 	  	if ($arrasientos[$i]["2"]!="")
 	  	{
-          $contabc1= new Contabc1();
-          $contabc1->setNumcom($correl3);
-          $contabc1->setFeccom($fafactur->getFecfac());
-          $contabc1->setCodcta($arrasientos[$i]["0"]);
-          $numasi= $i +1;
-          $contabc1->setNumasi($numasi);
-          $contabc1->setRefasi($fafactur->getReffac());
-          $contabc1->setDesasi($arrasientos[$i]["1"]);
-          if ($arrasientos[$i]["2"]=='D')
-          {
-          	$contabc1->setDebcre('D');
-          	$contabc1->setMonasi($arrasientos[$i]["3"]);
-          }
-          else
-          {
-          	$contabc1->setDebcre('C');
-          	$contabc1->setMonasi($arrasientos[$i]["3"]);
-          }
-          $contabc1->save();
+                  $contabc1= new Contabc1();
+                  $contabc1->setNumcom($correl3);
+                  $contabc1->setFeccom($fafactur->getFecfac());
+                  $contabc1->setCodcta($arrasientos[$i]["0"]);
+                  $numasi= $i +1;
+                  $contabc1->setNumasi($numasi);
+                  $contabc1->setRefasi($fafactur->getReffac());
+                  $contabc1->setDesasi($arrasientos[$i]["1"]);
+                  if ($arrasientos[$i]["2"]=='D')
+                  {
+                        $contabc1->setDebcre('D');
+                        $contabc1->setMonasi($arrasientos[$i]["3"]);
+                  }
+                  else
+                  {
+                        $contabc1->setDebcre('C');
+                        $contabc1->setMonasi($arrasientos[$i]["3"]);
+                  }
+                  $contabc1->save();
 	  	}
 	  	$i++;
 	  }
@@ -1245,12 +1280,12 @@ class Factura {
       $cobdocume->setFecven($fecven);
       $cobdocume->setOridoc('FAC');
       $cobdocume->setDesdoc($fafactur->getDesfac());
-      $mondoc=(H::convnume($fafactur->getTottotart()) - H::convnume($fafactur->getTotmonrgo()));
+      $mondoc=(H::toFloat($fafactur->getTottotart()) - H::toFloat($fafactur->getTotmonrgo()));
       $cobdocume->setMondoc($mondoc);
-      $cobdocume->setRecdoc(H::convnume($fafactur->getTotmonrgo()));
-      $cobdocume->setDscdoc(H::convnume($fafactur->getMondesc()));
-      $cobdocume->setAbodoc(H::convnume($fafactur->getMoncan()));
-      $salact=H::convnume($fafactur->getTottotart()) - H::convnume($fafactur->getMondesc()) - H::convnume($fafactur->getMoncan());
+      $cobdocume->setRecdoc(H::toFloat($fafactur->getTotmonrgo()));
+      $cobdocume->setDscdoc(H::toFloat($fafactur->getMondesc()));
+      $cobdocume->setAbodoc(H::toFloat($fafactur->getMoncan()));
+      $salact=H::toFloat($fafactur->getTottotart()) - H::toFloat($fafactur->getMondesc()) - H::toFloat($fafactur->getMoncan());
       $cobdocume->setSaldoc($salact);
       $cobdocume->setStadoc('A');
       $cobdocume->setReffac($fafactur->getReffac());

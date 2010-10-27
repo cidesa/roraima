@@ -4,6 +4,7 @@ methods:
    - "fafactur{fecfac}"
    - "fafactur{rifpro}"
    - "fafactur{codconpag}"
+   - "fafactur{desfac}"
 
 names:
   fafactur{reffac}:
@@ -24,6 +25,11 @@ names:
     required:  Yes
     required_msg: La Condicion de Pago no puede estar en blanco
     validators: Condpago_Validator
+
+  fafactur{desfac}:
+    required:  Yes
+    required_msg: La Descripción de la Factura no puede estar en blanco
+    validators: DescripcionValidator
 
 Validator_reffac:
     class: sfPropelUniqueValidator
@@ -52,3 +58,11 @@ CorrelValidator:
     param:
         values:    [ '/^[0-9]*$/' ]
         values_error: Los Correlativos solo puede contener valores númericos
+
+DescripcionValidator:
+    class: sfStringValidator
+    param:
+        min:       5
+        min_error: La Descripición no puede tener menos de 5 caracteres
+        max:       1500
+        max_error: La Descripición no puede tener más de 1500 caracteres

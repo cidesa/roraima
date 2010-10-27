@@ -92,22 +92,22 @@ class Faajuste extends BaseFaajuste
 
 	public function getRifpro()
     {
-        return Herramientas::getX('CODPRO','Facliente','Rifpro',self::getCodpro());
+        return Herramientas::getX('CODPRO','Facliente','Rifpro',$this->codpro);
     }
 
     public function getNompro()
     {
-  	    return Herramientas::getX('CODPRO','Facliente','Nompro',self::getCodpro());
+  	    return Herramientas::getX('CODPRO','Facliente','Nompro',$this->codpro);
     }
 
     public function getDirpro()
     {
-  	    return Herramientas::getX('CODPRO','Facliente','Dirpro',self::getCodpro());
+  	    return Herramientas::getX('CODPRO','Facliente','Dirpro',$this->codpro);
     }
 
     public function getTelpro()
     {
-  	    return Herramientas::getX('CODPRO','Facliente','Telpro',self::getCodpro());
+  	    return Herramientas::getX('CODPRO','Facliente','Telpro',$this->codpro);
     }
 
 }
