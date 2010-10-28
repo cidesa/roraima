@@ -1004,7 +1004,7 @@ if (consul!="")
 }
 
 var gridfaclib='<?php echo $fafactur->getGridfaclib()?>';
-if (gridfaclib=='S')
+if (gridfaclib=='S' && consul!="")
 {
     $('divgrid_fafaclib').show();
 }else { $('divgrid_fafaclib').hide(); }
