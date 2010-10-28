@@ -14,6 +14,7 @@ class Factura {
 
   public static function salvarFactura($fafactur,$grid1,$grid2,$grid3,$grid4,$tipocaja,&$msj,&$msj2,&$msj3,$grid6)
   {
+     $nuevo=$fafactur->getId();
     if ($fafactur->getIncluircliente()=='S')
     {
       $facliente= new Facliente();
@@ -48,9 +49,13 @@ class Factura {
 
     self::grabarComprobanteMaestro(&$fafactur,$arrasientos,&$pos);
 
-    $usalib=H::getConfApp('gridfaclib', 'facturacion', 'fafactur');
+    $usalib=H::getConfApp2('gridfaclib', 'facturacion', 'fafactur');
     if ($usalib=='S')
     {
+        if ($nuevo=="")
+        {
+            self::generaFacturaLibro($fafactur,$grid1,$grid4);
+        }
         self::grabarFacturaLibro($fafactur,$grid6);
     }
 
@@ -2177,6 +2182,71 @@ class Factura {
           $j++;
         }
     }
+  }
+  public static function generaFacturaLibro($fafactur,$grid1,$grid4)
+  {
+    $col=self::determinarReferenciaDoc($fafactur->getTipref());
+    $x=$grid1[0];
+    $j=0;
+    $cantot=0;
+    if ($x[$j]->getCodart()!="")
+    {
+      $monto=0;
+      $acum=0;
+      while ($j<count($x))
+      {
+            eval('$cantot = $x[$j]->get'.ucfirst(strtolower($col)).'();');
+	    if ($x[$j]->getCodart()!="" && $cantot>0)
+	    {
+	     if ($x[$j]->getPrecio()=="")
+	     {
+	     	$precio=$x[$j]->getPrecioe();
+	     }else $precio=$x[$j]->getPrecio();
+
+             $calculo=$cantot*$precio;
+
+             if($x[$j]->getMonrgo()==0 || $x[$j]->getMonrgo()=='')
+             {
+                $monto+=$calculo;
+             }else {
+                 $acum+=$calculo;
+             }
+	    }            
+	    $j++;
+     }
+    }
+
+    $z=$grid4[0];
+    $j=0;
+    $acumrec=0;
+    if ($z[$j]->getCodrgo()!="")
+    {
+        $valrec=$z[$j]->getCodrgo();
+    }
+    while ($j<count($z))
+    {
+      if ($z[$j]->getCodrgo()!="")
+      {
+        $acumrec+=$z[$j]->getMonrgo();
+      }
+      $j++;
+    }
+
+
+      $fafaclib= new Fafaclib();
+      $fafaclib->setFecfac($fafactur->getFecfac());
+      $fafaclib->setReffac($fafactur->getReffac());
+      $fafaclib->setNumfac($fafactur->getReffac());
+      $fafaclib->setNumctr($fafactur->getNumcontrol());
+      $fafaclib->setCodcli($fafactur->getCodcli());
+      $fafaclib->setTotfac($fafactur->getMonfac());
+      if ($fafactur->getTipoven()=='E')
+        $fafaclib->setValfob($fafactur->getMonfac());
+      $fafaclib->setVenexec($monto);
+      $fafaclib->setBasimp($acum);
+      $fafaclib->setPoriva(H::getX('Codrgo','Farecarg','Monrgo',$valrec));
+      $fafaclib->setMoniva($acumrec);      
+      $fafaclib->save();
   }
 
 }
