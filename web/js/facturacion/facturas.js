@@ -3577,7 +3577,7 @@ function aplicarBL(id)
         $(dc).value=format(resta1.toFixed(2),'.',',','.');
     }
 
-    if (col==51 || col==52)
+    /*if (col==51 || col==52)
     {
         var to=name+"_"+fil+"_51";
         var te=name+"_"+fil+"_52";
@@ -3607,7 +3607,7 @@ function aplicarBL(id)
 
         $(dk).value=format(resta.toFixed(2),'.',',','.'); //diferencia kilogramos
         $(dt).value=format(resta2.toFixed(2),'.',',','.'); //diferencia Toneladas
-    }
+    }*/
   }else {
       alert("El Valor introducido debe ser mayor a cero");
       $(id).value="0,00";
