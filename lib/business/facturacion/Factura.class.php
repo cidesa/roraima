@@ -2219,14 +2219,11 @@ class Factura {
     $z=$grid4[0];
     $j=0;
     $acumrec=0;
-    if ($z[$j]->getCodrgo()!="")
-    {
-        $valrec=$z[$j]->getCodrgo();
-    }
     while ($j<count($z))
     {
       if ($z[$j]->getCodrgo()!="")
       {
+        $valrec=$z[$j]->getCodrgo();
         $acumrec+=$z[$j]->getMonrgo();
       }
       $j++;
