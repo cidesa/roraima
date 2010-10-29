@@ -660,7 +660,7 @@ class Tesoreria {
       $contabc1 = Contabc1Peer::doSelectOne($c);
       if (count($contabc1) == 0) {
         while ($i < count($grid[0])) {
-        if ($arreglo[$i]['codcta']!="")
+        if ($arreglo[$i]['codcta']!="" && ($arreglo[$i]['mondebito'] > 0 || $arreglo[$i]['moncredito'] > 0))
         {
           $reg = new Contabc1();
           $reg->setNumcom($numcom);
