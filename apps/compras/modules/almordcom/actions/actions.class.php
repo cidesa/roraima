@@ -816,10 +816,10 @@ class almordcomActions extends autoalmordcomActions
         $refcom=H::getX_vacio('REFCOM','Cpcompro','REFCOM',$ordcom);
         if ($refcom!="")
         $filas_arreglo=0;
-        else $filas_arreglo=10;
+        else $filas_arreglo=150;
         }
       else
-        $filas_arreglo=10;
+        $filas_arreglo=150;
     }
     elseif ($referencia==1)
     {
@@ -1248,7 +1248,7 @@ class almordcomActions extends autoalmordcomActions
         $c->add(CadisrgoPeer::REQART,$ordcom);
       $per3 = CadisrgoPeer::doSelect($c);
 
-      $filas_arreglo=10;
+      $filas_arreglo=150;
 
       // Se crea el objeto principal de la clase OpcionesGrid
       $opciones = new OpcionesGrid();
@@ -1507,7 +1507,7 @@ class almordcomActions extends autoalmordcomActions
     $c = new Criteria();
     $c->add(CaresordcomPeer::ORDCOM,$ordcom);
     $per4 = CaresordcomPeer::doSelect($c);
-    $filas_arreglo=10;
+    $filas_arreglo=150;
 
     $mascaraarticulo=$this->mascaraarticulo;
     $formatocategoria=$this->formatocategoria;
@@ -1719,7 +1719,7 @@ class almordcomActions extends autoalmordcomActions
     $c = new Criteria();
     $c->add(CaartfecPeer::ORDCOM,$ordcom);
     $per5 = CaartfecPeer::doSelect($c);
-    $filas_arreglo=10;
+    $filas_arreglo=150;
 
     $mascaraarticulo=$this->mascaraarticulo;
     $formatocategoria=$this->formatocategoria;
