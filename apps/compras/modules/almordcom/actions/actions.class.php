@@ -1654,7 +1654,7 @@ class almordcomActions extends autoalmordcomActions
     $opciones = new OpcionesGrid();
     // Se configuran las opciones globales del Grid
     $opciones->setEliminar(false);
-    $opciones->setFilas(10);
+    $opciones->setFilas(150);
     $opciones->setTabla('Caartord');
     $opciones->setName('z');
     $opciones->setAncho(600);
