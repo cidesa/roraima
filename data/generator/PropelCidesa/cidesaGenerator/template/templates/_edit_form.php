@@ -16,6 +16,7 @@
   'id'        => 'sf_admin_edit_form',
   'name'      => 'sf_admin_edit_form',
   'multipart' => true,
+  'onsubmit'  => 'return false;',
 <?php foreach ($this->getColumnCategories('edit.display') as $category): ?>
 <?php foreach ($this->getColumns('edit.display', $category) as $name => $column): ?>
 <?php if (false !== strpos($this->getParameterValue('edit.fields.'.$column->getName().'.type'), 'admin_double_list')): ?>

@@ -72,6 +72,8 @@
 		  salir=true;
         }
       }
+      obj.returnEvent = false;
+      return false;
       /*
       var indexSig = parseInt(obj.tabindex);
       indexSig++;
@@ -79,5 +81,6 @@
       if(objSig) objSig.focus();
       */
     }
+    return true;
 
   })
