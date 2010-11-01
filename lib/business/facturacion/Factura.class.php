@@ -619,7 +619,7 @@ class Factura {
             }
             $i++;
       }
-      if ($acumdeb!=$acumcre || ($acumdeb==0 || $acumcre==0))
+      if (H::toFloat($acumdeb)!=H::toFloat($acumcre))
       {
          $msj3=519;
           return false;
