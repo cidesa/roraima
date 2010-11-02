@@ -33,7 +33,7 @@ class almordrecActions extends autoalmordrecActions
 	  	$cajtexmos=$datos[2];
 	    $codubi="";
 	  	$output = '[["","",""]]';
-
+            $manartlot=H::getConfApp2('manartlot', 'compras', 'almregart');
 	  if ($codalm!="")
 	  {
 		$aux = split('_',$cajtexmos);
@@ -42,7 +42,9 @@ class almordrecActions extends autoalmordrecActions
 		$cajtexcom=$name."_".$fil."_20";
 		$cajcodubi=$name."_".$fil."_21";
 		$cajnomubi=$name."_".$fil."_22";
-		$codalm=str_pad($codalm,6,'0',STR_PAD_LEFT);
+                if ($manartlot=='S')
+                    $cajnumlot=$name."_".$fil."_23";
+		//$codalm=str_pad($codalm,6,'0',STR_PAD_LEFT);
 		$c=new Criteria();
 	    $c->add(CadefalmPeer::CODALM,$codalm);
 	    $datos=CadefalmPeer::doSelectOne($c);
@@ -59,12 +61,22 @@ class almordrecActions extends autoalmordrecActions
 	           {
 	             	$codubi=$alm->getCodubi();
 	             	$nomubi=CadefubiPeer::getDesubicacion($codubi);
+                        if ($manartlot=='S')
+                            $numlot=$alm->getNumlot();
+
+                        if ($manartlot=='S')
+	             	   $output = '[["'.$cajtexmos.'","'.$nomalm.'",""],["'.$cajtexcom.'","6","c"],["'.$cajcodubi.'","'.$codubi.'",""],["'.$cajnomubi.'","'.$nomubi.'",""],["'.$cajnumlot.'","'.$numlot.'",""]]';
+                        else
 	             	$output = '[["'.$cajtexmos.'","'.$nomalm.'",""],["'.$cajtexcom.'","6","c"],["'.$cajcodubi.'","'.$codubi.'",""],["'.$cajnomubi.'","'.$nomubi.'",""]]';
 	           }
 	           else//el almacen seleccionado no existe para el articulo introducido por el usuario
 	           {
 		    	$javascript="alert('El articulo : ".$codart.", no existe en el Almacen seleccionado: ".$codalm." ');$('".$cajtexmos."').focus()";
+		    	if ($manartlot=='S')
+                            $output = '[["'.$cajtexmos.'","",""],["'.$cajcodubi.'","",""],["'.$cajnomubi.'","",""],["'.$cajtexcom.'","",""],["'.$cajnumlot.'","",""],["javascript","'.$javascript.'",""]]';
+                        else
 		    	$output = '[["'.$cajtexmos.'","",""],["'.$cajcodubi.'","",""],["'.$cajnomubi.'","",""],["'.$cajtexcom.'","",""],["javascript","'.$javascript.'",""]]';
+
 	           }
 
 		}
@@ -72,6 +84,9 @@ class almordrecActions extends autoalmordrecActions
 		{
 		    	$nomalm="";
 		    	$javascript="alert('Codigo del Almacen no existe...')";
+                        if ($manartlot=='S')
+                            $output = '[["'.$cajtexmos.'","",""],["'.$cajcodubi.'","",""],["'.$cajnomubi.'","",""],["'.$cajtexcom.'","",""],["'.$cajnumlot.'","",""],["javascript","'.$javascript.'",""]]';
+                        else
 		    	$output = '[["'.$cajtexmos.'","'.$nomalm.'",""],["'.$cajcodubi.'","",""],["'.$cajnomubi.'","",""],["'.$cajtexcom.'","",""],["javascript","'.$javascript.'",""]]';
 		}// if ($datos)
 	    }// if ($codalm)
@@ -96,6 +111,7 @@ class almordrecActions extends autoalmordrecActions
 		  	$cajtexmos=$datos[3];
 		  	$javascript="";
 		  	$output = '[["","",""]]';
+                    $manartlot=H::getConfApp2('manartlot', 'compras', 'almregart');
 		  	if ($codart=="")
 		  	{
 		     $javascript="alert('Debe primero seleccionar el artículo');";
@@ -108,6 +124,8 @@ class almordrecActions extends autoalmordrecActions
 				$fil=$aux[1];
 				$cajcodubi=$name."_".$fil."_21";
 				$cajnomubi=$name."_".$fil."_22";
+                            if ($manartlot=='S')
+                                $cajnumlot=$name."_".$fil."_23";
 				if (trim($codalm)!="")
 		        {
 	               $c = new Criteria();
@@ -118,6 +136,8 @@ class almordrecActions extends autoalmordrecActions
 	           	   if ($alm)
 	           	   {
 	           	   		$dato=CadefubiPeer::getDesubicacion($codubi);
+                                        if ($manartlot=='S')
+                                            $numlot=$alm->getNumlot();
 	           	   		$javascript="";
 	           	   }
 	              else
@@ -125,7 +145,12 @@ class almordrecActions extends autoalmordrecActions
 	                  $javascript="alert('La ubicacion : ".$codubi.", no existe para el almacen seleccionado: ".$codalm." y el articulo ".$codart." ')";
 	                  $dato="";
 	                  $codubi="";
+                              if ($manartlot=='S')
+                                $numlot="";
 	              }
+                         if ($manartlot=='S')
+                             $output = '[["'.$cajnomubi.'","'.$dato.'",""],["'.$cajcodubi.'","'.$codubi.'",""],["'.$cajnumlot.'","'.$numlot.'",""],["javascript","'.$javascript.'",""]]';
+                         else
 	            $output = '[["'.$cajnomubi.'","'.$dato.'",""],["'.$cajcodubi.'","'.$codubi.'",""],["javascript","'.$javascript.'",""]]';
 		      }
 		      else
@@ -133,6 +158,11 @@ class almordrecActions extends autoalmordrecActions
 		      	$javascript="alert('Primero debe seleccionar un Almacen...');";
 		      	$dato="";
 		      	$codubi="";
+                        if ($manartlot=='S')
+                          $numlot="";
+                        if ($manartlot=='S')
+                            $output = '[["'.$cajnomubi.'","'.$dato.'",""],["'.$cajcodubi.'","'.$codubi.'",""],["'.$cajnumlot.'","'.$numlot.'",""],["javascript","'.$javascript.'",""]]';
+                        else
 	  			$output = '[["'.$cajnomubi.'","'.$dato.'",""],["'.$cajcodubi.'","'.$codubi.'",""],["javascript","'.$javascript.'",""]]';
 		      }
 		  	}
@@ -437,7 +467,7 @@ class almordrecActions extends autoalmordrecActions
     $col19->setAlineacionContenido(Columna::CENTRO);
     $col19->setEsGrabable(true);
     $col19->setNombreCampo('codalm');
-    $col19->setHTML('type="text" size="8" maxlength="6"');
+    $col19->setHTML('type="text" size="8" ');
     $col19->setCatalogo('Cadefalm','sf_admin_edit_form',$objalm,'Cadelfalm_Almordrec');
     $signo="-";
    	$signomas="+";
@@ -471,6 +501,17 @@ class almordrecActions extends autoalmordrecActions
 	$col22->setAlineacionContenido(Columna::CENTRO);
     $col22->setHTML('type="text" size="30x1" readonly=true');
 
+   $manartlot=H::getConfApp2('manartlot', 'compras', 'almregart');
+   if ($manartlot=='S')
+    {
+      $col23 = new Columna('Número de Lote');
+      $col23->setTipo(Columna::TEXTO);
+      $col23->setEsGrabable(true);
+      $col23->setAlineacionObjeto(Columna::CENTRO);
+      $col23->setAlineacionContenido(Columna::CENTRO);
+      $col23->setNombreCampo('numlot');
+      $col23->setHTML('type="text" size="15" maxlength="100"');
+    }
 
 	// Se guardan las columnas en el objetos de opciones
 	$opciones->addColumna($col1);
@@ -495,6 +536,8 @@ class almordrecActions extends autoalmordrecActions
 	$opciones->addColumna($col20);
     $opciones->addColumna($col21);
 	$opciones->addColumna($col22);
+        if ($manartlot=='S')
+            $opciones->addColumna($col23);
 
 	// Se genera el arreglo de opciones necesario para generar el grid
 	$this->grid = $opciones->getConfig($per);
@@ -647,6 +690,19 @@ class almordrecActions extends autoalmordrecActions
 	$col17->setAlineacionContenido(Columna::CENTRO);
     $col17->setHTML('type="text" size="30x1" readonly=true');
 
+     $manartlot=H::getConfApp2('manartlot', 'compras', 'almregart');
+    if ($manartlot=='S')
+    {
+          $col18 = new Columna('Número de Lote');
+	  $col18->setTipo(Columna::TEXTO);
+	  $col18->setEsGrabable(true);
+	  $col18->setAlineacionObjeto(Columna::CENTRO);
+	  $col18->setAlineacionContenido(Columna::CENTRO);
+	  $col18->setNombreCampo('numlot');
+	  $col18->setHTML('type="text" size="15" readonly=true');
+
+    }
+
 
 	// Se guardan las columnas en el objetos de opciones
 	$opciones->addColumna($col1);
@@ -666,6 +722,8 @@ class almordrecActions extends autoalmordrecActions
 	$opciones->addColumna($col15);
 	$opciones->addColumna($col16);
 	$opciones->addColumna($col17);
+        if ($manartlot=='S')
+            $opciones->addColumna($col18);
 	// Ee genera el arreglo de opciones necesario para generar el grid
 	$this->grid = $opciones->getConfig($per);
 	}
@@ -952,6 +1010,7 @@ $this->Bitacora('Guardo');
 			    	//verificar en el grid de articulos que todos los articulos pertenezcan al almacen y ubicacion indicada
 			    	//y verificar que al menos un articulo del grid tenga cantidad mayo que cero.
 			    	  $grid=Herramientas::CargarDatosGrid($this,$this->grid);
+                                  $manartlot=H::getConfApp2('manartlot', 'compras', 'almregart');
 			    	  $x=$grid[0];
 				      $j=0;
 				      $msg="";
@@ -964,12 +1023,22 @@ $this->Bitacora('Guardo');
 				         if ($x[$j]->getCanrecgri()>0)
 				      	 {
 				      	 $encontro=true;
+                                         if ($manartlot=='S')
+                                         {
+                                             if ($x[$j]->getCodalm()=="" or  $x[$j]->getCodubi()=="" or  $x[$j]->getNumlot()=="")
+                                             {
+                                                    $msg="Debe indicar el Código del Almacén, la Ubicación y el Nro. del Lote de todos los Artículos del Detalle de la Recepción";
+                                                    $this->getRequest()->setError('',$msg);
+                                                            return false;
+                                             }// if ($x[$j]->getCodalm()=="" or  $x[$j]->getCodubi()=="")
+                                         }else {
 				      	 if ($x[$j]->getCodalm()=="" or  $x[$j]->getCodubi()=="")
 				      	 {
 				      	 	$msg="Debe indicar el Código del Almacén y la Ubicación de todos los Artículos del Detalle de la Recepción";
 				      	 	$this->getRequest()->setError('',$msg);
 			 				return false;
 				      	 }// if ($x[$j]->getCodalm()=="" or  $x[$j]->getCodubi()=="")
+                                         }
 				         if (!Recepcion::verificaexiartalmubi($x[$j]->getCodart(),$x[$j]->getCodalm(),$x[$j]->getCodubi(),&$msg))
 		                 {
 							$msg=$msg." Coloque cantidad a recibir en cero (0) a este articulo si desea continuar con la recepcion del resto de los articulos...";

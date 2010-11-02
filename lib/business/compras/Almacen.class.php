@@ -117,6 +117,7 @@ class Almacen
   public static function Actualizar_Articulos($salida,$grid,&$msjerr)
     {
 	      $x=$grid[0];
+              $manartlot=H::getConfApp2('manartlot', 'compras', 'almregart');
 		  $j=0;
 		  $msjerr=-1;
 		  while ($j<count($x))
@@ -127,12 +128,16 @@ class Almacen
 		    $costo=$x[$j]->getCosart();
             $calmacen=$x[$j]->getCodalm();
             $cubicacion=$x[$j]->getCodubi();
+            if ($manartlot=='S')
+                $numlot=$x[$j]->getNumlot();
 		     if (($codarti!="") and ($cantd>0))
 		     {
 		         $c = new Criteria();
 	  	         $c->add(CaartalmubiPeer::CODART,$codarti);
 	  	         $c->add(CaartalmubiPeer::CODALM,$calmacen);
 	  	         $c->add(CaartalmubiPeer::CODUBI,$cubicacion);
+                         if ($manartlot=='S')
+                             $c->add(CaartalmubiPeer::NUMLOT,$numlot);
 	             $alm = CaartalmubiPeer::doSelectOne($c);
 	              if ($alm)
 	              {
@@ -180,6 +185,7 @@ class Almacen
 
     public static function Devolver_Articulos($salida)
     {
+        $manartlot=H::getConfApp2('manartlot', 'compras', 'almregart');
 		  $c = new Criteria();
           $c->add(CadetsalPeer::CODSAL,$salida->getCodsal());
           $detalle = CadetsalPeer::doSelect($c);
@@ -192,12 +198,16 @@ class Almacen
 		    $costo=$arreglo->getCosart();
 		    $calmacen=$arreglo->getCodalm();
 		    $codubicacion=$arreglo->getCodubi();
+                    if ($manartlot=='S')
+                        $numlot=$arreglo->getNumlot();
 		    if (($codarti!="") and ($cantd>0))
 		     {
 		         $c = new Criteria();
 	  	         $c->add(CaartalmubiPeer::CODART,$codarti);
 	  	         $c->add(CaartalmubiPeer::CODALM,$calmacen);
 	  	         $c->add(CaartalmubiPeer::CODUBI,$codubicacion);
+                         if ($manartlot=='S')
+                             $c->add(CaartalmubiPeer::NUMLOT,$numlot);
 	             $alm = CaartalmubiPeer::doSelectOne($c);
 	              if ($alm)
 	              {
@@ -333,8 +343,10 @@ class Almacen
 	     }//else
      }
 
-     public static function ExistenciayObtenerDisponibilidadAlmArt($codart,$codalm,$codubi,&$exiact)
+     public static function ExistenciayObtenerDisponibilidadAlmArt($codart,$codalm,$codubi,&$exiact,&$numlot="")
      {
+        $manartlot=H::getConfApp2('manartlot', 'compras', 'almregart');
+
          $c = new Criteria();
          $c->add(CaartalmubiPeer::CODART,$codart);
          $c->add(CaartalmubiPeer::CODALM,$codalm);
@@ -343,6 +355,8 @@ class Almacen
          if ($alm)
          {
            $exiact=$alm->getExiact(true);
+           if ($manartlot=='S')
+               $numlot=$alm->getNumlot();
            return true;
          }
          else

@@ -275,8 +275,8 @@ abstract class BaseCaalmubiPeer {
 			$criteria->addSelectColumn($column);
 		}
 
-		$criteria->addJoin(CaalmubiPeer::CODUBI, CadefubiPeer::CODUBI);
-
+			$criteria->addJoin(CaalmubiPeer::CODUBI, CadefubiPeer::CODUBI);
+	
 		$rs = CaalmubiPeer::doSelectRS($criteria, $con);
 		if ($rs->next()) {
 			return $rs->getInt(1);
@@ -298,11 +298,11 @@ abstract class BaseCaalmubiPeer {
 		CaalmubiPeer::addSelectColumns($c);
 		$startcol2 = (CaalmubiPeer::NUM_COLUMNS - CaalmubiPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		CadefubiPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + CadefubiPeer::NUM_COLUMNS;
-
-		$c->addJoin(CaalmubiPeer::CODUBI, CadefubiPeer::CODUBI);
-
+			CadefubiPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + CadefubiPeer::NUM_COLUMNS;
+	
+			$c->addJoin(CaalmubiPeer::CODUBI, CadefubiPeer::CODUBI);
+	
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
 
@@ -316,28 +316,28 @@ abstract class BaseCaalmubiPeer {
 			$obj1->hydrate($rs);
 
 
-					
-			$omClass = CadefubiPeer::getOMClass();
+							
+				$omClass = CadefubiPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2 = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2 = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getCadefubi(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addCaalmubi($obj1); 					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getCadefubi(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addCaalmubi($obj1); 						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initCaalmubis();
-				$obj2->addCaalmubi($obj1);
-			}
-
+				if ($newObject) {
+					$obj2->initCaalmubis();
+					$obj2->addCaalmubi($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;

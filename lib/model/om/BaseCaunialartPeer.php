@@ -1,59 +1,35 @@
 <?php
 
 
-abstract class BaseCadetentPeer {
+abstract class BaseCaunialartPeer {
 
 	
 	const DATABASE_NAME = 'propel';
 
 	
-	const TABLE_NAME = 'cadetent';
+	const TABLE_NAME = 'caunialart';
 
 	
-	const CLASS_DEFAULT = 'lib.model.Cadetent';
+	const CLASS_DEFAULT = 'lib.model.Caunialart';
 
 	
-	const NUM_COLUMNS = 12;
+	const NUM_COLUMNS = 4;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
 
 
 	
-	const RCPART = 'cadetent.RCPART';
+	const CODART = 'caunialart.CODART';
 
 	
-	const CODART = 'cadetent.CODART';
+	const UNIALT = 'caunialart.UNIALT';
 
 	
-	const CANREC = 'cadetent.CANREC';
+	const RELART = 'caunialart.RELART';
 
 	
-	const MONTOT = 'cadetent.MONTOT';
-
-	
-	const COSART = 'cadetent.COSART';
-
-	
-	const CODALM = 'cadetent.CODALM';
-
-	
-	const CODUBI = 'cadetent.CODUBI';
-
-	
-	const FECVEN = 'cadetent.FECVEN';
-
-	
-	const NUMJAU = 'cadetent.NUMJAU';
-
-	
-	const TAMMET = 'cadetent.TAMMET';
-
-	
-	const NUMLOT = 'cadetent.NUMLOT';
-
-	
-	const ID = 'cadetent.ID';
+	const ID = 'caunialart.ID';
 
 	
 	private static $phpNameMap = null;
@@ -61,31 +37,31 @@ abstract class BaseCadetentPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Rcpart', 'Codart', 'Canrec', 'Montot', 'Cosart', 'Codalm', 'Codubi', 'Fecven', 'Numjau', 'Tammet', 'Numlot', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (CadetentPeer::RCPART, CadetentPeer::CODART, CadetentPeer::CANREC, CadetentPeer::MONTOT, CadetentPeer::COSART, CadetentPeer::CODALM, CadetentPeer::CODUBI, CadetentPeer::FECVEN, CadetentPeer::NUMJAU, CadetentPeer::TAMMET, CadetentPeer::NUMLOT, CadetentPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('rcpart', 'codart', 'canrec', 'montot', 'cosart', 'codalm', 'codubi', 'fecven', 'numjau', 'tammet', 'numlot', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
+		BasePeer::TYPE_PHPNAME => array ('Codart', 'Unialt', 'Relart', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (CaunialartPeer::CODART, CaunialartPeer::UNIALT, CaunialartPeer::RELART, CaunialartPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codart', 'unialt', 'relart', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Rcpart' => 0, 'Codart' => 1, 'Canrec' => 2, 'Montot' => 3, 'Cosart' => 4, 'Codalm' => 5, 'Codubi' => 6, 'Fecven' => 7, 'Numjau' => 8, 'Tammet' => 9, 'Numlot' => 10, 'Id' => 11, ),
-		BasePeer::TYPE_COLNAME => array (CadetentPeer::RCPART => 0, CadetentPeer::CODART => 1, CadetentPeer::CANREC => 2, CadetentPeer::MONTOT => 3, CadetentPeer::COSART => 4, CadetentPeer::CODALM => 5, CadetentPeer::CODUBI => 6, CadetentPeer::FECVEN => 7, CadetentPeer::NUMJAU => 8, CadetentPeer::TAMMET => 9, CadetentPeer::NUMLOT => 10, CadetentPeer::ID => 11, ),
-		BasePeer::TYPE_FIELDNAME => array ('rcpart' => 0, 'codart' => 1, 'canrec' => 2, 'montot' => 3, 'cosart' => 4, 'codalm' => 5, 'codubi' => 6, 'fecven' => 7, 'numjau' => 8, 'tammet' => 9, 'numlot' => 10, 'id' => 11, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
+		BasePeer::TYPE_PHPNAME => array ('Codart' => 0, 'Unialt' => 1, 'Relart' => 2, 'Id' => 3, ),
+		BasePeer::TYPE_COLNAME => array (CaunialartPeer::CODART => 0, CaunialartPeer::UNIALT => 1, CaunialartPeer::RELART => 2, CaunialartPeer::ID => 3, ),
+		BasePeer::TYPE_FIELDNAME => array ('codart' => 0, 'unialt' => 1, 'relart' => 2, 'id' => 3, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
 	);
 
 	
 	public static function getMapBuilder()
 	{
-		include_once 'lib/model/map/CadetentMapBuilder.php';
-		return BasePeer::getMapBuilder('lib.model.map.CadetentMapBuilder');
+		include_once 'lib/model/map/CaunialartMapBuilder.php';
+		return BasePeer::getMapBuilder('lib.model.map.CaunialartMapBuilder');
 	}
 	
 	public static function getPhpNameMap()
 	{
 		if (self::$phpNameMap === null) {
-			$map = CadetentPeer::getTableMap();
+			$map = CaunialartPeer::getTableMap();
 			$columns = $map->getColumns();
 			$nameMap = array();
 			foreach ($columns as $column) {
@@ -119,41 +95,25 @@ abstract class BaseCadetentPeer {
 	
 	public static function alias($alias, $column)
 	{
-		return str_replace(CadetentPeer::TABLE_NAME.'.', $alias.'.', $column);
+		return str_replace(CaunialartPeer::TABLE_NAME.'.', $alias.'.', $column);
 	}
 
 	
 	public static function addSelectColumns(Criteria $criteria)
 	{
 
-		$criteria->addSelectColumn(CadetentPeer::RCPART);
+		$criteria->addSelectColumn(CaunialartPeer::CODART);
 
-		$criteria->addSelectColumn(CadetentPeer::CODART);
+		$criteria->addSelectColumn(CaunialartPeer::UNIALT);
 
-		$criteria->addSelectColumn(CadetentPeer::CANREC);
+		$criteria->addSelectColumn(CaunialartPeer::RELART);
 
-		$criteria->addSelectColumn(CadetentPeer::MONTOT);
-
-		$criteria->addSelectColumn(CadetentPeer::COSART);
-
-		$criteria->addSelectColumn(CadetentPeer::CODALM);
-
-		$criteria->addSelectColumn(CadetentPeer::CODUBI);
-
-		$criteria->addSelectColumn(CadetentPeer::FECVEN);
-
-		$criteria->addSelectColumn(CadetentPeer::NUMJAU);
-
-		$criteria->addSelectColumn(CadetentPeer::TAMMET);
-
-		$criteria->addSelectColumn(CadetentPeer::NUMLOT);
-
-		$criteria->addSelectColumn(CadetentPeer::ID);
+		$criteria->addSelectColumn(CaunialartPeer::ID);
 
 	}
 
-	const COUNT = 'COUNT(cadetent.ID)';
-	const COUNT_DISTINCT = 'COUNT(DISTINCT cadetent.ID)';
+	const COUNT = 'COUNT(caunialart.ID)';
+	const COUNT_DISTINCT = 'COUNT(DISTINCT caunialart.ID)';
 
 	
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
@@ -162,9 +122,9 @@ abstract class BaseCadetentPeer {
 
 				$criteria->clearSelectColumns()->clearOrderByColumns();
 		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(CadetentPeer::COUNT_DISTINCT);
+			$criteria->addSelectColumn(CaunialartPeer::COUNT_DISTINCT);
 		} else {
-			$criteria->addSelectColumn(CadetentPeer::COUNT);
+			$criteria->addSelectColumn(CaunialartPeer::COUNT);
 		}
 
 				foreach($criteria->getGroupByColumns() as $column)
@@ -172,7 +132,7 @@ abstract class BaseCadetentPeer {
 			$criteria->addSelectColumn($column);
 		}
 
-		$rs = CadetentPeer::doSelectRS($criteria, $con);
+		$rs = CaunialartPeer::doSelectRS($criteria, $con);
 		if ($rs->next()) {
 			return $rs->getInt(1);
 		} else {
@@ -184,7 +144,7 @@ abstract class BaseCadetentPeer {
 	{
 		$critcopy = clone $criteria;
 		$critcopy->setLimit(1);
-		$objects = CadetentPeer::doSelect($critcopy, $con);
+		$objects = CaunialartPeer::doSelect($critcopy, $con);
 		if ($objects) {
 			return $objects[0];
 		}
@@ -193,7 +153,7 @@ abstract class BaseCadetentPeer {
 	
 	public static function doSelect(Criteria $criteria, $con = null)
 	{
-		return CadetentPeer::populateObjects(CadetentPeer::doSelectRS($criteria, $con));
+		return CaunialartPeer::populateObjects(CaunialartPeer::doSelectRS($criteria, $con));
 	}
 	
 	public static function doSelectRS(Criteria $criteria, $con = null)
@@ -204,7 +164,7 @@ abstract class BaseCadetentPeer {
 
 		if (!$criteria->getSelectColumns()) {
 			$criteria = clone $criteria;
-			CadetentPeer::addSelectColumns($criteria);
+			CaunialartPeer::addSelectColumns($criteria);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -216,7 +176,7 @@ abstract class BaseCadetentPeer {
 	{
 		$results = array();
 	
-				$cls = CadetentPeer::getOMClass();
+				$cls = CaunialartPeer::getOMClass();
 		$cls = Propel::import($cls);
 				while($rs->next()) {
 		
@@ -236,7 +196,7 @@ abstract class BaseCadetentPeer {
 	
 	public static function getOMClass()
 	{
-		return CadetentPeer::CLASS_DEFAULT;
+		return CaunialartPeer::CLASS_DEFAULT;
 	}
 
 	
@@ -250,7 +210,7 @@ abstract class BaseCadetentPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
-		$criteria->remove(CadetentPeer::ID); 
+		$criteria->remove(CaunialartPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 
@@ -277,8 +237,8 @@ abstract class BaseCadetentPeer {
 
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; 
-			$comparison = $criteria->getComparison(CadetentPeer::ID);
-			$selectCriteria->add(CadetentPeer::ID, $criteria->remove(CadetentPeer::ID), $comparison);
+			$comparison = $criteria->getComparison(CaunialartPeer::ID);
+			$selectCriteria->add(CaunialartPeer::ID, $criteria->remove(CaunialartPeer::ID), $comparison);
 
 		} else { 			$criteria = $values->buildCriteria(); 			$selectCriteria = $values->buildPkeyCriteria(); 		}
 
@@ -295,7 +255,7 @@ abstract class BaseCadetentPeer {
 		}
 		$affectedRows = 0; 		try {
 									$con->begin();
-			$affectedRows += BasePeer::doDeleteAll(CadetentPeer::TABLE_NAME, $con);
+			$affectedRows += BasePeer::doDeleteAll(CaunialartPeer::TABLE_NAME, $con);
 			$con->commit();
 			return $affectedRows;
 		} catch (PropelException $e) {
@@ -308,16 +268,16 @@ abstract class BaseCadetentPeer {
 	 public static function doDelete($values, $con = null)
 	 {
 		if ($con === null) {
-			$con = Propel::getConnection(CadetentPeer::DATABASE_NAME);
+			$con = Propel::getConnection(CaunialartPeer::DATABASE_NAME);
 		}
 
 		if ($values instanceof Criteria) {
-			$criteria = clone $values; 		} elseif ($values instanceof Cadetent) {
+			$criteria = clone $values; 		} elseif ($values instanceof Caunialart) {
 
 			$criteria = $values->buildPkeyCriteria();
 		} else {
 						$criteria = new Criteria(self::DATABASE_NAME);
-			$criteria->add(CadetentPeer::ID, (array) $values, Criteria::IN);
+			$criteria->add(CaunialartPeer::ID, (array) $values, Criteria::IN);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -336,13 +296,13 @@ abstract class BaseCadetentPeer {
 	}
 
 	
-	public static function doValidate(Cadetent $obj, $cols = null)
+	public static function doValidate(Caunialart $obj, $cols = null)
 	{
 		$columns = array();
 
 		if ($cols) {
-			$dbMap = Propel::getDatabaseMap(CadetentPeer::DATABASE_NAME);
-			$tableMap = $dbMap->getTable(CadetentPeer::TABLE_NAME);
+			$dbMap = Propel::getDatabaseMap(CaunialartPeer::DATABASE_NAME);
+			$tableMap = $dbMap->getTable(CaunialartPeer::TABLE_NAME);
 
 			if (! is_array($cols)) {
 				$cols = array($cols);
@@ -358,11 +318,11 @@ abstract class BaseCadetentPeer {
 
 		}
 
-		$res =  BasePeer::doValidate(CadetentPeer::DATABASE_NAME, CadetentPeer::TABLE_NAME, $columns);
+		$res =  BasePeer::doValidate(CaunialartPeer::DATABASE_NAME, CaunialartPeer::TABLE_NAME, $columns);
     if ($res !== true) {
         $request = sfContext::getInstance()->getRequest();
         foreach ($res as $failed) {
-            $col = CadetentPeer::translateFieldname($failed->getColumn(), BasePeer::TYPE_COLNAME, BasePeer::TYPE_PHPNAME);
+            $col = CaunialartPeer::translateFieldname($failed->getColumn(), BasePeer::TYPE_COLNAME, BasePeer::TYPE_PHPNAME);
             $request->setError($col, $failed->getMessage());
         }
     }
@@ -377,12 +337,12 @@ abstract class BaseCadetentPeer {
 			$con = Propel::getConnection(self::DATABASE_NAME);
 		}
 
-		$criteria = new Criteria(CadetentPeer::DATABASE_NAME);
+		$criteria = new Criteria(CaunialartPeer::DATABASE_NAME);
 
-		$criteria->add(CadetentPeer::ID, $pk);
+		$criteria->add(CaunialartPeer::ID, $pk);
 
 
-		$v = CadetentPeer::doSelect($criteria, $con);
+		$v = CaunialartPeer::doSelect($criteria, $con);
 
 		return !empty($v) > 0 ? $v[0] : null;
 	}
@@ -399,8 +359,8 @@ abstract class BaseCadetentPeer {
 			$objs = array();
 		} else {
 			$criteria = new Criteria();
-			$criteria->add(CadetentPeer::ID, $pks, Criteria::IN);
-			$objs = CadetentPeer::doSelect($criteria, $con);
+			$criteria->add(CaunialartPeer::ID, $pks, Criteria::IN);
+			$objs = CaunialartPeer::doSelect($criteria, $con);
 		}
 		return $objs;
 	}
@@ -408,11 +368,11 @@ abstract class BaseCadetentPeer {
 } 
 if (Propel::isInit()) {
 			try {
-		BaseCadetentPeer::getMapBuilder();
+		BaseCaunialartPeer::getMapBuilder();
 	} catch (Exception $e) {
 		Propel::log('Could not initialize Peer: ' . $e->getMessage(), Propel::LOG_ERR);
 	}
 } else {
-			require_once 'lib/model/map/CadetentMapBuilder.php';
-	Propel::registerMapBuilder('lib.model.map.CadetentMapBuilder');
+			require_once 'lib/model/map/CaunialartMapBuilder.php';
+	Propel::registerMapBuilder('lib.model.map.CaunialartMapBuilder');
 }

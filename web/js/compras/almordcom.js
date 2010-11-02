@@ -277,6 +277,12 @@
        if ($(id).value!="")
        {
         new Ajax.Request('/compras_dev.php/almordcom/ajax', {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=3&cajtexmos='+descripcion+'&cajtexcom='+id+'&unidad='+unidad+'&costo='+costo+'&partida='+partida+'&codigo='+cod+'&tipord='+$('caordcom_tipord').value})
+
+        if ($('caordcom_manunialt').value=='S')
+        {
+            new Ajax.Updater(unidad, getUrlModulo()+'ajax', {asynchronous:true, evalScripts:true, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=20&id='+$('id').value+'&codigo='+cod});
+        }
+
        }
     }
  }
@@ -540,6 +546,7 @@
       {
         col_fila_art_1 = "ax_"+f+"_2";
         col_fila_art_2 = "ax_"+(f+1)+"_2";
+        col_fila_unidad = "ax_"+f+"_14";
         if($(col_fila_art_1).value=="" && $(col_fila_art_1).value=="") break;
          c=2;
          c2=1;
@@ -560,6 +567,12 @@
 
              $(col_fila_cantidad_recargo_grid_b).value=$(col_fila_cantidad_recargo_grid_a).value;
              $(col_fila_cantidad_total_grid_b).value=$(col_fila_cantidad_total_grid_a).value;
+
+            if ($('caordcom_manunialt').value=='S')
+            {
+                var cod=$(col_fila_art_1).value;
+                new Ajax.Updater(col_fila_unidad, getUrlModulo()+'ajax', {asynchronous:true, evalScripts:true, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=20&codigo='+cod});
+            }
       f++;
     }
 

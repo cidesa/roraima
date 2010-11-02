@@ -34,7 +34,7 @@ class CadefalmMapBuilder {
 
 		$tMap->setPrimaryKeyMethodInfo('cadefalm_SEQ');
 
-		$tMap->addColumn('CODALM', 'Codalm', 'string', CreoleTypes::VARCHAR, true, 6);
+		$tMap->addColumn('CODALM', 'Codalm', 'string', CreoleTypes::VARCHAR, true, 20);
 
 		$tMap->addColumn('NOMALM', 'Nomalm', 'string', CreoleTypes::VARCHAR, true, 100);
 

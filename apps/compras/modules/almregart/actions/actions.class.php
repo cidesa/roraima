@@ -35,6 +35,7 @@ private static $coderror=-1;
         $this->updateCaregartFromRequest();
 
         $grid=Herramientas::CargarDatosGrid($this,$this->obj);
+        $gridunid=Herramientas::CargarDatosGridv2($this,$this->obj2);
 
         self::$coderror=Articulos::validarAlmregart($this->caregart,$grid);
         if (self::$coderror<>-1){
@@ -76,6 +77,7 @@ private static $coderror=-1;
       $this->caregart = $this->getCaregartOrCreate();
       $this->setVars();
       $this->configGrid();
+      $this->configGridUnidades();
 
 
       if ($this->getRequest()->getMethod() == sfRequest::POST)
@@ -145,6 +147,7 @@ $this->Bitacora('Guardo');
     $caregart = $this->getRequestParameter('caregart');
     $this->setVars();
     $this->configGrid();
+    $this->configGridUnidades();
 
     if (isset($caregart['codart']))
     {
@@ -381,13 +384,22 @@ $this->Bitacora('Guardo');
    */
   public function configGridAlmUbi($codart='',$codalm='',&$filas)
    {
+      $manartlot=H::getConfApp2('manartlot', 'compras', 'almregart');
       $c = new Criteria();
-
+      if ($manartlot=='S')
+      {
+          $sql="select a.codubi, b.nomubi, a.exiact, a.numlot, a.fecela, a.fecven, a.codalm, a.id
+            FROM  caartalmubi a, cadefubi b
+              where a.codubi=b.codubi
+            and a.codalm='".$codalm."'and a.codart='".$codart."'
+            order by a.codubi";
+      }else {
       $sql="select a.codubi, b.nomubi, a.exiact, a.codalm, a.id
             FROM  caartalmubi a, cadefubi b
       where a.codubi=b.codubi
             and a.codalm='".$codalm."'and a.codart='".$codart."'
             order by a.codubi";
+      }
     $resp = Herramientas::BuscarDatos($sql,&$per);
     $filas=count($per);
       $this->setVars();
@@ -435,9 +447,41 @@ $this->Bitacora('Guardo');
       $col3->setJScript('onKeypress="entermonto_c(event,this.id)"');
       $col3->setEsTotal(true,'totalubi');
 
+      
+      if ($manartlot=='S')
+      {
+          $col4 = new Columna('NÃºmero de Lote');
+          $col4->setTipo(Columna::TEXTO);
+          $col4->setEsGrabable(true);
+          $col4->setAlineacionObjeto(Columna::CENTRO);
+          $col4->setAlineacionContenido(Columna::CENTRO);
+          $col4->setNombreCampo('numlot');
+          $col4->setJScript('onBlur="javascript: Verifica_ubinumlote_repetido(this.id);"');
+          $col4->setHTML('type="text" size="15" maxlength="100"');
+
+	  $col5 = new Columna('Fecha de Elaboracion');
+	  $col5->setTipo(Columna::FECHA);
+	  $col5->setAlineacionObjeto(Columna::CENTRO);
+	  $col5->setAlineacionContenido(Columna::CENTRO);
+	  $col5->setEsGrabable(true);
+          $col5->setHTML(' ');
+	  $col5->setVacia(true);
+	  $col5->setNombreCampo('fecela');
+
+	  $col6 = clone $col5;
+	  $col6->setTitulo('Fecha Vencimiento');
+	  $col6->setNombreCampo('fecven');
+      }
+
       $opciones->addColumna($col1);
       $opciones->addColumna($col2);
       $opciones->addColumna($col3);
+      if ($manartlot=='S')
+      {
+         $opciones->addColumna($col4);
+         $opciones->addColumna($col5);
+         $opciones->addColumna($col6);
+      }
 
       $this->objAlmUbi = $opciones->getConfig($per);
   }
@@ -483,9 +527,10 @@ $this->Bitacora('Guardo');
     else
     {*/
      $grid=Herramientas::CargarDatosGrid($this,$this->obj);
+     $gridunid=Herramientas::CargarDatosGridv2($this,$this->obj5);
       /*try
       {*/
-       Articulos::salvarAlmregart($caregart,$grid);
+       Articulos::salvarAlmregart($caregart,$grid,$gridunid);
      /* }
        catch (Exception $ex)
       {*/
@@ -823,6 +868,24 @@ $this->Bitacora('Guardo');
       $opciones->addColumna($col2);
       $opciones->addColumna($col3);
       $this->obj2 = $opciones->getConfig($per);
+  }
+
+  /**
+   * Esta funciÃ³n permite definir la configuraciÃ³n del grid de datos
+   * que contiene el formulario. Esta funciÃ³n debe ser llamada
+   * en las acciones, create, edit y handleError para recargar en todo momento
+   * los datos del grid.
+   *
+   */
+  public function configGridUnidades()
+  {
+      $c = new Criteria();
+      $c->add(CaunialartPeer::CODART,$this->caregart->getCodart());
+      $per = CaunialartPeer::doSelect($c);
+
+     $this->columnas = Herramientas :: getConfigGrid(sfConfig :: get('sf_app_module_dir') . '/almregart/' . sfConfig :: get('sf_app_module_config_dir_name') . '/grid_unidades');
+
+     $this->obj5 = $this->columnas[0]->getConfig($per);
   }
 
 }

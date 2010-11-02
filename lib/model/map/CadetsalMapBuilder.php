@@ -44,13 +44,15 @@ class CadetsalMapBuilder {
 
 		$tMap->addColumn('COSART', 'Cosart', 'double', CreoleTypes::NUMERIC, false, 14);
 
-		$tMap->addColumn('CODALM', 'Codalm', 'string', CreoleTypes::VARCHAR, true, null);
+		$tMap->addColumn('CODALM', 'Codalm', 'string', CreoleTypes::VARCHAR, true, 20);
 
-		$tMap->addColumn('CODUBI', 'Codubi', 'string', CreoleTypes::VARCHAR, true, null);
+		$tMap->addColumn('CODUBI', 'Codubi', 'string', CreoleTypes::VARCHAR, true, 20);
 
 		$tMap->addColumn('NUMJAU', 'Numjau', 'double', CreoleTypes::NUMERIC, false, 10);
 
 		$tMap->addColumn('TAMMET', 'Tammet', 'double', CreoleTypes::NUMERIC, false, 10);
+
+		$tMap->addColumn('NUMLOT', 'Numlot', 'string', CreoleTypes::VARCHAR, false, null);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 

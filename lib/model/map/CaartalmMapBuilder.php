@@ -34,7 +34,7 @@ class CaartalmMapBuilder {
 
 		$tMap->setPrimaryKeyMethodInfo('caartalm_SEQ');
 
-		$tMap->addColumn('CODALM', 'Codalm', 'string', CreoleTypes::VARCHAR, true, 6);
+		$tMap->addColumn('CODALM', 'Codalm', 'string', CreoleTypes::VARCHAR, true, 20);
 
 		$tMap->addColumn('CODART', 'Codart', 'string', CreoleTypes::VARCHAR, true, 20);
 

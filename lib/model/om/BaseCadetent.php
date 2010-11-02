@@ -49,6 +49,10 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
 
 
 	
+	protected $numlot;
+
+
+	
 	protected $id;
 
 	
@@ -145,6 +149,13 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
 
     if($val) return number_format($this->tammet,2,',','.');
     else return $this->tammet;
+
+  }
+  
+  public function getNumlot()
+  {
+
+    return trim($this->numlot);
 
   }
   
@@ -267,6 +278,16 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setNumlot($v)
+	{
+
+    if ($this->numlot !== $v) {
+        $this->numlot = $v;
+        $this->modifiedColumns[] = CadetentPeer::NUMLOT;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -301,7 +322,9 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
 
       $this->tammet = $rs->getFloat($startcol + 9);
 
-      $this->id = $rs->getInt($startcol + 10);
+      $this->numlot = $rs->getString($startcol + 10);
+
+      $this->id = $rs->getInt($startcol + 11);
 
       $this->resetModified();
 
@@ -309,7 +332,7 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 11; 
+            return $startcol + 12; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Cadetent object", $e);
     }
@@ -487,6 +510,9 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
 				return $this->getTammet();
 				break;
 			case 10:
+				return $this->getNumlot();
+				break;
+			case 11:
 				return $this->getId();
 				break;
 			default:
@@ -509,7 +535,8 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
 			$keys[7] => $this->getFecven(),
 			$keys[8] => $this->getNumjau(),
 			$keys[9] => $this->getTammet(),
-			$keys[10] => $this->getId(),
+			$keys[10] => $this->getNumlot(),
+			$keys[11] => $this->getId(),
 		);
 		return $result;
 	}
@@ -556,6 +583,9 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
 				$this->setTammet($value);
 				break;
 			case 10:
+				$this->setNumlot($value);
+				break;
+			case 11:
 				$this->setId($value);
 				break;
 		} 	}
@@ -575,7 +605,8 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[7], $arr)) $this->setFecven($arr[$keys[7]]);
 		if (array_key_exists($keys[8], $arr)) $this->setNumjau($arr[$keys[8]]);
 		if (array_key_exists($keys[9], $arr)) $this->setTammet($arr[$keys[9]]);
-		if (array_key_exists($keys[10], $arr)) $this->setId($arr[$keys[10]]);
+		if (array_key_exists($keys[10], $arr)) $this->setNumlot($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setId($arr[$keys[11]]);
 	}
 
 	
@@ -593,6 +624,7 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CadetentPeer::FECVEN)) $criteria->add(CadetentPeer::FECVEN, $this->fecven);
 		if ($this->isColumnModified(CadetentPeer::NUMJAU)) $criteria->add(CadetentPeer::NUMJAU, $this->numjau);
 		if ($this->isColumnModified(CadetentPeer::TAMMET)) $criteria->add(CadetentPeer::TAMMET, $this->tammet);
+		if ($this->isColumnModified(CadetentPeer::NUMLOT)) $criteria->add(CadetentPeer::NUMLOT, $this->numlot);
 		if ($this->isColumnModified(CadetentPeer::ID)) $criteria->add(CadetentPeer::ID, $this->id);
 
 		return $criteria;
@@ -643,6 +675,8 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
 		$copyObj->setNumjau($this->numjau);
 
 		$copyObj->setTammet($this->tammet);
+
+		$copyObj->setNumlot($this->numlot);
 
 
 		$copyObj->setNew(true);

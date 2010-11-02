@@ -13,7 +13,7 @@ abstract class BaseCadettraPeer {
 	const CLASS_DEFAULT = 'lib.model.Cadettra';
 
 	
-	const NUM_COLUMNS = 4;
+	const NUM_COLUMNS = 5;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -29,6 +29,9 @@ abstract class BaseCadettraPeer {
 	const CANART = 'cadettra.CANART';
 
 	
+	const NUMLOT = 'cadettra.NUMLOT';
+
+	
 	const ID = 'cadettra.ID';
 
 	
@@ -37,18 +40,18 @@ abstract class BaseCadettraPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codtra', 'Codart', 'Canart', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (CadettraPeer::CODTRA, CadettraPeer::CODART, CadettraPeer::CANART, CadettraPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codtra', 'codart', 'canart', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
+		BasePeer::TYPE_PHPNAME => array ('Codtra', 'Codart', 'Canart', 'Numlot', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (CadettraPeer::CODTRA, CadettraPeer::CODART, CadettraPeer::CANART, CadettraPeer::NUMLOT, CadettraPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codtra', 'codart', 'canart', 'numlot', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codtra' => 0, 'Codart' => 1, 'Canart' => 2, 'Id' => 3, ),
-		BasePeer::TYPE_COLNAME => array (CadettraPeer::CODTRA => 0, CadettraPeer::CODART => 1, CadettraPeer::CANART => 2, CadettraPeer::ID => 3, ),
-		BasePeer::TYPE_FIELDNAME => array ('codtra' => 0, 'codart' => 1, 'canart' => 2, 'id' => 3, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
+		BasePeer::TYPE_PHPNAME => array ('Codtra' => 0, 'Codart' => 1, 'Canart' => 2, 'Numlot' => 3, 'Id' => 4, ),
+		BasePeer::TYPE_COLNAME => array (CadettraPeer::CODTRA => 0, CadettraPeer::CODART => 1, CadettraPeer::CANART => 2, CadettraPeer::NUMLOT => 3, CadettraPeer::ID => 4, ),
+		BasePeer::TYPE_FIELDNAME => array ('codtra' => 0, 'codart' => 1, 'canart' => 2, 'numlot' => 3, 'id' => 4, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
 	);
 
 	
@@ -107,6 +110,8 @@ abstract class BaseCadettraPeer {
 		$criteria->addSelectColumn(CadettraPeer::CODART);
 
 		$criteria->addSelectColumn(CadettraPeer::CANART);
+
+		$criteria->addSelectColumn(CadettraPeer::NUMLOT);
 
 		$criteria->addSelectColumn(CadettraPeer::ID);
 

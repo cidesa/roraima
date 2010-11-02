@@ -43,4 +43,9 @@ class Cadefalm extends BaseCadefalm
      return Herramientas::getX('id','Catipalm','Nomtip',self::getCodtip());
   }
 
+  public function getCodlongveinte()
+  {
+     return H::getConfApp('codlongveinte', 'compras', 'almdefalm');
+  }
+
 }

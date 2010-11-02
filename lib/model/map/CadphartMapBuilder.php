@@ -50,7 +50,7 @@ class CadphartMapBuilder {
 
 		$tMap->addColumn('REFPAG', 'Refpag', 'string', CreoleTypes::VARCHAR, false, 8);
 
-		$tMap->addColumn('CODALM', 'Codalm', 'string', CreoleTypes::VARCHAR, false, 6);
+		$tMap->addColumn('CODALM', 'Codalm', 'string', CreoleTypes::VARCHAR, false, 20);
 
 		$tMap->addColumn('TIPDPH', 'Tipdph', 'string', CreoleTypes::VARCHAR, false, 2);
 

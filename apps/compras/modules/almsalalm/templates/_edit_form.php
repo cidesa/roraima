@@ -160,7 +160,7 @@
   'maxlength' => 4,
   'readonly'  =>  $casalalm->getId()!='' ? true : false,
   'onBlur'=> remote_function(array(
-       'url'      => 'almdesp/ajax',
+       'url'      => 'almsalalm/ajax',
        'script'   => true,
        'condition' => "$('casalalm_codcen').value != '' && $('id').value == ''",
        'complete' => 'AjaxJSON(request, json)',
@@ -188,7 +188,7 @@
   'control_name' => 'casalalm[observ]',
   'size' => '100x3',
   'maxlength' => 1000,
-  'onkeyup' => '"ismaxlength(this)',
+  'onkeyup' => '"ismaxlength(this)"',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>

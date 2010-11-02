@@ -21,6 +21,7 @@
 <?php echo input_hidden_tag('verificaexisydisp', '') ?>
 <?php echo input_hidden_tag('mensaje', '') ?>
 <?php echo input_hidden_tag('existeubicacion', '') ?>
+<?php echo input_hidden_tag('cadphart[manartlot]', $cadphart->getManartlot()) ?>
 <fieldset id="sf_fieldset_none" class="">
 
 <div class="form-row">

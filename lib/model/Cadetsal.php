@@ -28,4 +28,30 @@ class Cadetsal extends BaseCadetsal
 		return Herramientas::getX('CODUBI','Cadefubi','Nomubi',self::getCodubi());
 	}
 
+public function getNumlotxart()
+  {
+    $c = new Criteria();
+    $c->add(CaartalmubiPeer::CODALM,self::getCodalm());
+    $c->add(CaartalmubiPeer::CODUBI,self::getCodubi());
+    $c->add(CaartalmubiPeer::CODART,self::getCodart());
+    $c->add(CaartalmubiPeer::EXIACT,0,Criteria::GREATER_THAN);
+    $c->addAscendingOrderByColumn(CaartalmubiPeer::FECVEN);
+
+    $datos = CaartalmubiPeer::doSelect($c);
+
+    $lotes = array();
+
+    foreach($datos as $obj_datos)
+    {
+     if ($obj_datos->getFecven()!="")
+     {
+        $fecven=date("d/m/Y",strtotime($obj_datos->getFecven()));
+      	$lotes += array($obj_datos->getNumlot() => $obj_datos->getNumlot()." - ".$fecven);
+     }
+      else
+      	$lotes += array($obj_datos->getNumlot() => $obj_datos->getNumlot());
+
+    }
+    return $lotes;
+  }
  }

@@ -41,6 +41,7 @@ function grid_tag($obj,$objelim = array())
   $default = $obj["default"];
   $funcionajax = $obj["funcionajax"];
   $jseliminar = $obj["jseliminar"];
+  $camposcombo=$obj["camposcombo"];
 
   $modulo = sfContext::getInstance()->getModuleName();
 
@@ -332,6 +333,14 @@ function grid_tag($obj,$objelim = array())
              $tagw .= select_tag($name.'x_'.$i.'_'.$jmasuno, options_for_select($combo[$j],$get,'include_custom=Seleccione...'), 'style="border:none" '.$taghtml.' '.$js[$j].' '.$blur);
              $tagw .= $catobj.$btnobj.$tagId.'</td>';
              break;
+           case 'cc':
+             $campocombo=$camposcombo[$j];
+             $metodocombo = 'get'.$campocombo;
+             $getcombo = $datos[$i]->$metodocombo();
+             $tagw = '     <td class="grid_fila" >';
+             $tagw .= select_tag($name.'x_'.$i.'_'.$jmasuno, options_for_select($getcombo,$get,'include_custom=Seleccione...'), 'style="border:none" '.$taghtml.' '.$js[$j].' '.$blur);
+             $tagw .= $catobj.$btnobj.$tagId.'</td>';
+             break;
            case 'k':
              $tagw = '     <td class="grid_fila" align="center" height="15">';
              $tagw .= checkbox_tag($name.'x_'.$i.'_'.$jmasuno, 1,(bool)$get, 'style="border:none" class="grid_txtcenter" '.$taghtml.' '.$js[$j].' '.$blur);
@@ -494,6 +503,11 @@ function grid_tag($obj,$objelim = array())
            case 'c':
              $tagw = '     <td class="grid_fila" >';
              $tagw .= select_tag($name.'x_'.$i.'_'.$jmasuno, options_for_select($combo[$j],'','include_custom=Seleccione...'), 'style="border:none" '.$taghtml.' '.$js[$j].' '.$blur);
+             $tagw .= $catobj.$btnobj.$tagId.'</td>';
+             break;
+           case 'cc':
+             $tagw = '     <td class="grid_fila" >';
+             $tagw .= select_tag($name.'x_'.$i.'_'.$jmasuno, options_for_select(array(),'','include_custom=Seleccione...'), 'style="border:none" '.$taghtml.' '.$js[$j].' '.$blur);
              $tagw .= $catobj.$btnobj.$tagId.'</td>';
              break;
            case 'k':
