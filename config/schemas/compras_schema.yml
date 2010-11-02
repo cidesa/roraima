@@ -33,7 +33,7 @@ propel:
   caartalm:
     codalm:
       type: VARCHAR
-      size: 6
+      size: 20
       required: true
     codart:
       type: VARCHAR
@@ -160,12 +160,15 @@ propel:
       size: 3
     codalm:
       type: VARCHAR
-      syze: 6
+      size: 20
       required: true
     codubi:
       type: VARCHAR
-      syze: 20
+      size: 20
       required: true
+    numlot:
+      type: VARCHAR
+      size: 100
     id:
       type: INTEGER
       required: true
@@ -492,7 +495,7 @@ propel:
   cadefalm:
     codalm:
       type: VARCHAR
-      size: 6
+      size: 20
       required: true
     nomalm:
       type: VARCHAR
@@ -660,6 +663,9 @@ propel:
       type: NUMERIC
       size: 14
       scale: 2
+    numlot:
+      type: VARCHAR
+      syze: 100
     id:
       type: INTEGER
       required: true
@@ -731,7 +737,7 @@ propel:
       size: 8
     codalm:
       type: VARCHAR
-      size: 6
+      size: 20
     tipdph:
       type: VARCHAR
       size: 2
@@ -1014,7 +1020,7 @@ propel:
       size: 8
     codalm:
       type: VARCHAR
-      size: 6
+      size: 20
     ctrper:
       type: VARCHAR
       size: 50
@@ -2114,7 +2120,7 @@ propel:
       size: 20
     codalmven:
       type: VARCHAR
-      size: 6
+      size: 20
     recart:
       type: NUMERIC
       size: 8
@@ -2280,7 +2286,7 @@ propel:
   caartalmubi:
     codalm:
       type: VARCHAR
-      size: 6
+      size: 20
       required: true
     codart:
       type: VARCHAR
@@ -2296,6 +2302,13 @@ propel:
       type: NUMERIC
       size: 14
       scale: 2
+    numlot:
+      type: VARCHAR
+      size: 100
+    fecela:
+      type: DATE
+    fecven:
+      type: DATE
     id:
       type: INTEGER
       required: true
@@ -2305,7 +2318,7 @@ propel:
   caalmubi:
     codalm:
       type: VARCHAR
-      size: 6
+      size: 20
       required: true
     codubi:
       type: VARCHAR
@@ -2342,7 +2355,7 @@ propel:
       size: 1
     codalm:
       type: VARCHAR
-      size: 6
+      size: 20
     codubi:
       type: VARCHAR
       size: 20
@@ -2384,7 +2397,7 @@ propel:
       size: 1
     codalm:
       type: VARCHAR
-      size: 6
+      size: 20
     codubi:
       type: VARCHAR
       size: 20
@@ -2412,7 +2425,7 @@ propel:
       required: true
     codalm:
       type: VARCHAR
-      size: 6
+      size: 20
       required: true
     codart:
       type: VARCHAR
@@ -2538,10 +2551,13 @@ propel:
       size: 50
     codalm:
       type: VARCHAR
-      size: 6
+      size: 20
     codubi:
       type: VARCHAR
       size: 20
+    numlot:
+      type: VARCHAR
+      size: 100
     id:
       type: INTEGER
       required: true
@@ -2592,11 +2608,11 @@ propel:
       scale: 2
     codalm:
       type: VARCHAR
-      syze: 6
+      size: 20
       required: true
     codubi:
       type: VARCHAR
-      syze: 20
+      size: 20
       required: true
     fecven:
       type: DATE
@@ -2608,6 +2624,9 @@ propel:
       type: NUMERIC
       size: 10
       scale: 2    
+    numlot:
+      type: VARCHAR
+      syze: 100
     id:
       type: INTEGER
       required: true
@@ -2637,11 +2656,11 @@ propel:
       scale: 2
     codalm:
       type: VARCHAR
-      syze: 6
+      size: 20
       required: true
     codubi:
       type: VARCHAR
-      syze: 20
+      size: 20
       required: true
     numjau:
       type: NUMERIC
@@ -2651,6 +2670,9 @@ propel:
       type: NUMERIC
       size: 10
       scale: 2 
+    numlot:
+      type: VARCHAR
+      syze: 100
     id:
       type: INTEGER
       required: true
@@ -2663,7 +2685,7 @@ propel:
       required: true
     codalm:
       type: VARCHAR
-      size: 6
+      size: 20
       required: true
     codart:
       type: VARCHAR
@@ -2730,7 +2752,7 @@ propel:
       required: true
     codalm:
       type: VARCHAR
-      size: 6
+      size: 20
       required: true
     numcom:
       type: VARCHAR
@@ -3024,7 +3046,7 @@ propel:
   cacontxtalm:
     codalm:
       type: VARCHAR
-      size: 6
+      size: 20
       required: true
     iniart:
       type: NUMERIC
@@ -3098,7 +3120,7 @@ propel:
   camigtxtven:
     codalm:
       type: VARCHAR
-      size: 6
+      size: 20
       required: true
     fecven:
       type: DATE
@@ -3130,6 +3152,23 @@ propel:
     usumig:
       type: VARCHAR
       size: 250
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  caunialart:
+    codart:
+      type: VARCHAR
+      size: 20
+      required: true
+    unialt:
+      type: VARCHAR
+      size: 15
+    relart:
+      type: VARCHAR
+      size: 25
     id:
       type: INTEGER
       required: true

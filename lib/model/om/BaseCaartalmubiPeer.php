@@ -13,7 +13,7 @@ abstract class BaseCaartalmubiPeer {
 	const CLASS_DEFAULT = 'lib.model.Caartalmubi';
 
 	
-	const NUM_COLUMNS = 5;
+	const NUM_COLUMNS = 8;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -32,6 +32,15 @@ abstract class BaseCaartalmubiPeer {
 	const EXIACT = 'caartalmubi.EXIACT';
 
 	
+	const NUMLOT = 'caartalmubi.NUMLOT';
+
+	
+	const FECELA = 'caartalmubi.FECELA';
+
+	
+	const FECVEN = 'caartalmubi.FECVEN';
+
+	
 	const ID = 'caartalmubi.ID';
 
 	
@@ -40,18 +49,18 @@ abstract class BaseCaartalmubiPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codalm', 'Codart', 'Codubi', 'Exiact', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (CaartalmubiPeer::CODALM, CaartalmubiPeer::CODART, CaartalmubiPeer::CODUBI, CaartalmubiPeer::EXIACT, CaartalmubiPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codalm', 'codart', 'codubi', 'exiact', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
+		BasePeer::TYPE_PHPNAME => array ('Codalm', 'Codart', 'Codubi', 'Exiact', 'Numlot', 'Fecela', 'Fecven', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (CaartalmubiPeer::CODALM, CaartalmubiPeer::CODART, CaartalmubiPeer::CODUBI, CaartalmubiPeer::EXIACT, CaartalmubiPeer::NUMLOT, CaartalmubiPeer::FECELA, CaartalmubiPeer::FECVEN, CaartalmubiPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codalm', 'codart', 'codubi', 'exiact', 'numlot', 'fecela', 'fecven', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codalm' => 0, 'Codart' => 1, 'Codubi' => 2, 'Exiact' => 3, 'Id' => 4, ),
-		BasePeer::TYPE_COLNAME => array (CaartalmubiPeer::CODALM => 0, CaartalmubiPeer::CODART => 1, CaartalmubiPeer::CODUBI => 2, CaartalmubiPeer::EXIACT => 3, CaartalmubiPeer::ID => 4, ),
-		BasePeer::TYPE_FIELDNAME => array ('codalm' => 0, 'codart' => 1, 'codubi' => 2, 'exiact' => 3, 'id' => 4, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
+		BasePeer::TYPE_PHPNAME => array ('Codalm' => 0, 'Codart' => 1, 'Codubi' => 2, 'Exiact' => 3, 'Numlot' => 4, 'Fecela' => 5, 'Fecven' => 6, 'Id' => 7, ),
+		BasePeer::TYPE_COLNAME => array (CaartalmubiPeer::CODALM => 0, CaartalmubiPeer::CODART => 1, CaartalmubiPeer::CODUBI => 2, CaartalmubiPeer::EXIACT => 3, CaartalmubiPeer::NUMLOT => 4, CaartalmubiPeer::FECELA => 5, CaartalmubiPeer::FECVEN => 6, CaartalmubiPeer::ID => 7, ),
+		BasePeer::TYPE_FIELDNAME => array ('codalm' => 0, 'codart' => 1, 'codubi' => 2, 'exiact' => 3, 'numlot' => 4, 'fecela' => 5, 'fecven' => 6, 'id' => 7, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
 	);
 
 	
@@ -112,6 +121,12 @@ abstract class BaseCaartalmubiPeer {
 		$criteria->addSelectColumn(CaartalmubiPeer::CODUBI);
 
 		$criteria->addSelectColumn(CaartalmubiPeer::EXIACT);
+
+		$criteria->addSelectColumn(CaartalmubiPeer::NUMLOT);
+
+		$criteria->addSelectColumn(CaartalmubiPeer::FECELA);
+
+		$criteria->addSelectColumn(CaartalmubiPeer::FECVEN);
 
 		$criteria->addSelectColumn(CaartalmubiPeer::ID);
 
@@ -285,8 +300,8 @@ abstract class BaseCaartalmubiPeer {
 			$criteria->addSelectColumn($column);
 		}
 
-		$criteria->addJoin(CaartalmubiPeer::CODUBI, CadefubiPeer::CODUBI);
-
+			$criteria->addJoin(CaartalmubiPeer::CODUBI, CadefubiPeer::CODUBI);
+	
 		$rs = CaartalmubiPeer::doSelectRS($criteria, $con);
 		if ($rs->next()) {
 			return $rs->getInt(1);
@@ -308,11 +323,11 @@ abstract class BaseCaartalmubiPeer {
 		CaartalmubiPeer::addSelectColumns($c);
 		$startcol2 = (CaartalmubiPeer::NUM_COLUMNS - CaartalmubiPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		CadefubiPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + CadefubiPeer::NUM_COLUMNS;
-
-		$c->addJoin(CaartalmubiPeer::CODUBI, CadefubiPeer::CODUBI);
-
+			CadefubiPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + CadefubiPeer::NUM_COLUMNS;
+	
+			$c->addJoin(CaartalmubiPeer::CODUBI, CadefubiPeer::CODUBI);
+	
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
 
@@ -326,28 +341,28 @@ abstract class BaseCaartalmubiPeer {
 			$obj1->hydrate($rs);
 
 
-					
-			$omClass = CadefubiPeer::getOMClass();
+							
+				$omClass = CadefubiPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2 = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2 = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getCadefubi(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addCaartalmubi($obj1); 					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getCadefubi(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addCaartalmubi($obj1); 						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initCaartalmubis();
-				$obj2->addCaartalmubi($obj1);
-			}
-
+				if ($newObject) {
+					$obj2->initCaartalmubis();
+					$obj2->addCaartalmubi($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;

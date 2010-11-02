@@ -18,6 +18,7 @@
 <?php use_helper('tabs') ?>
 <?php echo javascript_include_tag('dFilter', 'ajax', 'compras/almregart', 'tools','observe') ?>
 <?php echo input_hidden_tag('totalfilas', '') ?>
+<?php echo input_hidden_tag('caregart[manartlot]', $caregart->getManartlot()) ?>
 
 <?php echo object_input_hidden_tag($caregart, 'getId') ?>
 
@@ -384,7 +385,12 @@
 echo grid_tag($obj);
 ?>
 
+<div id="divGridUni" style="display:none">
 
+<?php
+echo grid_tag_v2($obj5);
+?>
+</div>
 </form>
 
 <?php include_partial('edit_actions', array('caregart' => $caregart)) ?>
@@ -397,3 +403,8 @@ echo grid_tag($obj);
 )) ?><?php endif; ?></li>
   </ul>
 
+<script type="">
+var manunialt='<?php echo $caregart->getManunialt(); ?>';
+if (manunialt=='S')
+  $('divGridUni').show();
+</script>

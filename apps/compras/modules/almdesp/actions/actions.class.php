@@ -78,6 +78,7 @@ class almdespActions extends autoalmdespActions
 			    	//verificar en el grid de articulos que todos los articulos pertenezcan al almacen y ubicacion indicada
 			    	//y verificar que al menos un articulo del grid tenga cantidad mayo que cero.
 			    	  $grid=Herramientas::CargarDatosGrid($this,$this->obj);
+                                  $manartlot=H::getConfApp2('manartlot', 'compras', 'almregart');
 			    	  $x=$grid[0];
 				      $j=0;
 				      $msg="";
@@ -87,6 +88,22 @@ class almdespActions extends autoalmdespActions
 				      {
 				      	if ($x[$j]->getCandes()>0)
 				      	{
+                                          if ($manartlot=='S')
+                                          {
+                                             if ($x[$j]->getCodalm()=="" or  $x[$j]->getCodubi()=="" or  $x[$j]->getNrolot()=="")
+                                             {
+                                                            $msg="Debe indicar el Código del Almacén, la Ubicación y el Nro. del Lote a despachar por cada artículo del detalle";
+                                                            $this->getRequest()->setError('',$msg);
+                                                            return false;
+                                             }
+                                             $encontro=true;
+                                             if (!Despachos::verificaexisydisp($x[$j]->getCodart(),$x[$j]->getCodalm(),$x[$j]->getCodubi(),$x[$j]->getCandes(),&$msg,$x[$j]->getNrolot()))
+                                             {
+                                                    $msg=$msg.". Coloque la cantidad a despachar disponible en cero (0) a este articulo si desea continuar con el despacho del resto de los articulos...";
+                                                                    $this->getRequest()->setError('',$msg);
+                                                                    return false;
+                                             }
+                                          }else {
 				      	 if ($x[$j]->getCodalm()=="" or  $x[$j]->getCodubi()=="")
 				      	 {
 							$msg="Debe indicar el Código del Almacén, la Ubicación a despachar por cada artículo del detalle";
@@ -100,6 +117,8 @@ class almdespActions extends autoalmdespActions
 							$this->getRequest()->setError('',$msg);
 			 				return false;
 		                 }
+
+				      	}
 				      	}
 				         $j++;
 				      } //while ($j<count($x))
@@ -403,11 +422,9 @@ class almdespActions extends autoalmdespActions
   public function configGrid($codigo='')
   {
       $c = new Criteria();
-      //$c->add(CareqartPeer::APRREQ,'S');
       $c->add(CaartreqPeer::REQART,$codigo);
       $this->sql = "Caartreq.canrec < Caartreq.canreq ";
       $c->add(CaartreqPeer::CANREQ, $this->sql, Criteria::CUSTOM);
-      //$c->addJoin(CareqartPeer::REQART,CaartreqPeer::REQART);
       $c->addAscendingOrderByColumn(CaartreqPeer::CODART);
 
       $per = CaartreqPeer::doSelect($c);
@@ -510,6 +527,8 @@ class almdespActions extends autoalmdespActions
         $col12->setTitulo('candesp');
         $col12->setNombreCampo('candesreal');
 
+        $manartlot=H::getConfApp2('manartlot', 'compras', 'almregart');
+
 	    $objalm= array ('codalm' => '13','nomalm' =>'14');
 		$col13 = new Columna('Codigo del Almacen');
 	    $col13->setTipo(Columna::TEXTO);
@@ -517,10 +536,13 @@ class almdespActions extends autoalmdespActions
 	    $col13->setAlineacionContenido(Columna::CENTRO);
 	    $col13->setEsGrabable(true);
 	    $col13->setNombreCampo('codalm');
-	    $col13->setHTML('type="text" size="8" maxlength="6"');
+	    $col13->setHTML('type="text" size="8"');
 	    $col13->setCatalogo('Cadefalm','sf_admin_edit_form',$objalm,'Cadelfalm_Almordrec');
 	    $signo="-";
     	$signomas="+";
+            if ($manartlot=='S')
+                $col13->setJScript('onBlur="toAjaxUpdater(obtenerColumna(this.id,4,'.chr(39).$signomas.chr(39).'),1,getUrlModuloAjax(),this.value+'.chr(39).'!'.chr(39).'+$(obtenerColumna(this.id,12,'.chr(39).$signo.chr(39).')).value+'.chr(39).'!'.chr(39).'+obtenerColumna(this.id,1,'.chr(39).$signomas.chr(39).'),devuelveParVacios(),devuelveParVacios());"');
+            else
 	    $col13->setJScript('onBlur="toAjax(1,getUrlModuloAjax(),this.value+'.chr(39).'!'.chr(39).'+$(obtenerColumna(this.id,12,'.chr(39).$signo.chr(39).')).value+'.chr(39).'!'.chr(39).'+obtenerColumna(this.id,1,'.chr(39).$signomas.chr(39).'),devuelveParVacios(),devuelveParVacios());"');
 
 
@@ -544,6 +566,9 @@ class almdespActions extends autoalmdespActions
 		$signomas="+";
 	    $col15->setHTML('type="text" size="8" maxlength="'.chr(39).$this->lonubialm.chr(39).'"');
 	    $col15->setCatalogo('Cadefubi','sf_admin_edit_form',$objubi,'Cadefubi_Almdes',$params);
+            if ($manartlot=='S')
+                $col15->setJScript('onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$this->mascaraubicacionalm.chr(39).')"  onBlur="toAjaxUpdater(obtenerColumna(this.id,2,'.chr(39).$signomas.chr(39).'),6,getUrlModuloAjax(),this.value+'.chr(39).'!'.chr(39).'+$(obtenerColumna(this.id,2,'.chr(39).$signo.chr(39).')).value+'.chr(39).'!'.chr(39).'+$(obtenerColumna(this.id,14,'.chr(39).$signo.chr(39).')).value+'.chr(39).'!'.chr(39).'+obtenerColumna(this.id,1,'.chr(39).$signomas.chr(39).'),devuelveParVacios(),devuelveParVacios());"');
+            else
 	    $col15->setJScript('onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$this->mascaraubicacionalm.chr(39).')"  onBlur="toAjax(6,getUrlModuloAjax(),this.value+'.chr(39).'!'.chr(39).'+$(obtenerColumna(this.id,2,'.chr(39).$signo.chr(39).')).value+'.chr(39).'!'.chr(39).'+$(obtenerColumna(this.id,14,'.chr(39).$signo.chr(39).')).value+'.chr(39).'!'.chr(39).'+obtenerColumna(this.id,1,'.chr(39).$signomas.chr(39).'),devuelveParVacios(),devuelveParVacios());"');
 
         $col16 = new Columna('Nombre Ubicación');
@@ -553,6 +578,16 @@ class almdespActions extends autoalmdespActions
 		$col16->setAlineacionObjeto(Columna::CENTRO);
 		$col16->setAlineacionContenido(Columna::CENTRO);
 	    $col16->setHTML('type="text" size="8x1" readonly=true');
+
+            if ($manartlot=='S')
+            {
+	    $col17 = new Columna('Nro. de Lote');
+	    $col17->setTipo(Columna::COMBOCLASE);
+	    $col17->setEsGrabable(true);
+	    $col17->setNombreCampo('nrolot');
+	    $col17->setCombosclase('Numlotxart');
+	    $col17->setHTML(' ');
+            }
 
 
 
@@ -573,6 +608,8 @@ class almdespActions extends autoalmdespActions
         $opciones->addColumna($col14);
         $opciones->addColumna($col15);
         $opciones->addColumna($col16);
+        if ($manartlot=='S')
+            $opciones->addColumna($col17);
 	    // se genera el arreglo de opciones necesario para generar el grid
         $this->obj = $opciones->getConfig($per);
 	}
@@ -587,6 +624,7 @@ class almdespActions extends autoalmdespActions
 	{
 	 $cajtexmos=$this->getRequestParameter('cajtexmos');
      $cajtexcom=$this->getRequestParameter('cajtexcom');
+         $manartlot=H::getConfApp2('manartlot', 'compras', 'almregart');
  	if ($this->getRequestParameter('ajax')=='1')
   	{
      ////////////////////////////////////
@@ -595,6 +633,8 @@ class almdespActions extends autoalmdespActions
   	$codart=$datos[1];
   	$cajtexmos=$datos[2];
     $codubi="";
+        if ($manartlot=='S')
+            $numlot="";
   	$output = '[["","",""]]';
 
   if ($codalm!="")
@@ -622,6 +662,8 @@ class almdespActions extends autoalmdespActions
            {
              	$codubi=$alm->getCodubi();
              	$nomubi=CadefubiPeer::getDesubicacion($codubi);
+                if ($manartlot=='S')
+                    $numlot=$alm->getNumlot();
              	$output = '[["'.$cajtexmos.'","'.$nomalm.'",""],["'.$cajtexcom.'","6","c"],["'.$cajcodubi.'","'.$codubi.'",""],["'.$cajnomubi.'","'.$nomubi.'",""]]';
            }
            else//el almacen seleccionado no existe para el articulo introducido por el usuario
@@ -638,9 +680,15 @@ class almdespActions extends autoalmdespActions
 	    	$output = '[["'.$cajtexmos.'","'.$nomalm.'",""],["'.$cajcodubi.'","",""],["'.$cajnomubi.'","",""],["'.$cajtexcom.'","",""],["javascript","'.$javascript.'",""]]';
 	    }// if ($datos)
     }// if ($codalm)
-
+    if ($manartlot=='S')
+    {
+        $this->numlot=$numlot;
+  	$this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+  	$this->lotes=$this->ObtenerNumlotxart($codart,$codalm,$codubi);
+    }else {
   	$this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
     return sfView::HEADER_ONLY;
+   }
    }
 		else  if ($this->getRequestParameter('ajax')=='3')
 	    {
@@ -659,13 +707,30 @@ class almdespActions extends autoalmdespActions
 		else  if ($this->getRequestParameter('ajax')=='5')
 	    {
 	  	    $msg="";
+
             $codart=$this->getRequestParameter('codart');
             $codalm=$this->getRequestParameter('codalm');
 	  		$codubi=$this->getRequestParameter('codubi');
 	  		$cantd=$this->getRequestParameter('candes');
+                        if ($manartlot=='S')
+                        {
+                            $numlot=$this->getRequestParameter('numlot');
+                        }else $numlot="";
 	  		$dato="";
 	  	    if ($cantd>0)
 			{
+                          if ($manartlot=='S')
+                          {
+                            if (Despachos::verificaexisydisp($codart,$codalm,$codubi,$cantd,&$msg,$numlot))
+                            {
+                                   $dato="S";
+                            }
+                            else
+                            {
+                                   $dato="N";
+                                   $msg=$msg.". Coloque la cantidad a despachar disponible o en cero (0) a este articulo si desea continuar con el despacho del resto de los articulos...";
+                            }
+                          }else {
 	            if (Despachos::verificaexisydisp($codart,$codalm,$codubi,$cantd,&$msg))
 	            {
 	                   $dato="S";
@@ -675,6 +740,7 @@ class almdespActions extends autoalmdespActions
 	                   $dato="N";
 	                   $msg=$msg.". Coloque la cantidad a despachar disponible o en cero (0) a este articulo si desea continuar con el despacho del resto de los articulos...";
 	            }
+			}
 			}
 
             $output = '[["verificaexisydisp","'.$dato.'",""],["mensaje","'.$msg.'",""]]';
@@ -688,6 +754,8 @@ class almdespActions extends autoalmdespActions
 	  	$codalm=$datos[1];
 	  	$codart=$datos[2];
 	  	$cajtexmos=$datos[3];
+                if ($manartlot=='S')
+                    $numlot="";
 	  	$output = '[["","",""]]';
 	  	if ($codart=="")
 	  	{
@@ -711,6 +779,8 @@ class almdespActions extends autoalmdespActions
            	   if ($alm)
            	   {
            	   		$dato=CadefubiPeer::getDesubicacion($codubi);
+                                if ($manartlot=='S')
+                                    $numlot=$alm->getNumlot();
            	   		$javascript="";
            	   }
               else
@@ -730,8 +800,15 @@ class almdespActions extends autoalmdespActions
 	      }
 
 	  	}
+            if ($manartlot=='S')
+            {
+               $this->numlot=$numlot;
+  		$this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+  		$this->lotes=$this->ObtenerNumlotxart($codart,$codalm,$codubi);
+            }else {
   		$this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
   		return sfView::HEADER_ONLY;
+   }
    }
    else  if ($this->getRequestParameter('ajax')=='7')
       {
@@ -929,6 +1006,18 @@ class almdespActions extends autoalmdespActions
 		$col13->setAlineacionContenido(Columna::CENTRO);
 	    $col13->setHTML('type="text" size="8x1" readonly=true');
 
+            $manartlot=H::getConfApp2('manartlot', 'compras', 'almregart');
+            if ($manartlot=='S')
+            {
+                $col14 = new Columna('Nro. de Lote');
+                $col14->setTipo(Columna::TEXTO);
+                $col14->setEsGrabable(true);
+                $col14->setAlineacionObjeto(Columna::CENTRO);
+                $col14->setAlineacionContenido(Columna::CENTRO);
+                $col14->setNombreCampo('numlot');
+                $col14->setHTML('type="text" size="15" readonly=true');
+            }
+
 
         // Se guardan las columnas en el objetos de opciones
         $opciones->addColumna($col1);
@@ -944,6 +1033,8 @@ class almdespActions extends autoalmdespActions
         $opciones->addColumna($col11);
         $opciones->addColumna($col12);
         $opciones->addColumna($col13);
+        if ($manartlot=='S')
+            $opciones->addColumna($col14);
 
 
 
@@ -987,6 +1078,33 @@ class almdespActions extends autoalmdespActions
 	       }
 	     }
 
+  }
+
+   public function ObtenerNumlotxart($codart="",$codalm="",$codubi="")
+  {
+    $c = new Criteria();
+    $c->add(CaartalmubiPeer::CODALM,$codalm);
+    $c->add(CaartalmubiPeer::CODUBI,$codubi);
+    $c->add(CaartalmubiPeer::CODART,$codart);
+    $c->add(CaartalmubiPeer::EXIACT,0,Criteria::GREATER_THAN);
+    $c->addAscendingOrderByColumn(CaartalmubiPeer::FECVEN);
+
+    $datos = CaartalmubiPeer::doSelect($c);
+
+    $lotes = array();
+
+    foreach($datos as $obj_datos)
+    {
+     if ($obj_datos->getFecven()!="")
+     {
+        $fecven=date("d/m/Y",strtotime($obj_datos->getFecven()));
+      	$lotes += array($obj_datos->getNumlot() => $obj_datos->getNumlot()." - ".$fecven);
+}
+      else
+      	$lotes += array($obj_datos->getNumlot() => $obj_datos->getNumlot());
+
+    }
+    return $lotes;
   }
 
 

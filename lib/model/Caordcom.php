@@ -334,4 +334,9 @@ class Caordcom extends BaseCaordcom
   	return $this->traemot;
   }
 
+  public function getManunialt()
+  {
+    return H::getConfApp2('manunialt', 'compras', 'almregart');
+  }
+
 }

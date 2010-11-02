@@ -44,6 +44,7 @@
 <?php echo input_hidden_tag('caordcom[compro]', $caordcom->getCompro()) ?>
 <?php echo input_hidden_tag('fechaanuserv', $fechaanuserv) ?>
 <?php echo input_hidden_tag('caordcom[manorddon]', $caordcom->getManorddon()) ?>
+<?php echo input_hidden_tag('caordcom[manunialt]', $caordcom->getManunialt()) ?>
 
 <input id="codigo_presupuestario_sin_disponibilidad" name="codigo_presupuestario_sin_disponibilidad" type="hidden">
 <script language="JavaScript" type="text/javascript">

@@ -23,6 +23,7 @@ class Columna
   CONST COMBO = 'c';
   CONST TEXTAREA = 'a';
   CONST CHECK = 'k';
+  CONST COMBOCLASE = 'cc';
 
 
   private $titulo='';
@@ -60,6 +61,7 @@ class Columna
   private $ajaxadicionales = array();
   private $anchogrid='900';
   private $valida='';
+  private $cc='';
 
   /**
    * Estable el nombre de la cabecera de la columna
@@ -679,6 +681,34 @@ class Columna
 
     $this->valida = $val;
 
+  }
+
+     /**
+   * Estable el nombre del metodo en la clase que
+   * contiene los datos para cargar el combo.
+   *
+   * @param $val (string) Nombre del metodo
+   * @return void
+   */
+  public function setCombosclase($val){
+    $x = array();
+    $x=split('_',$val);
+    $i=0;
+    $this->cc="";
+    while ($i<count($x)){
+    	$y= $this->cc;
+        $this->cc = $y.ucfirst(strtolower($x[$i]));
+       $i++;
+    }
+  }
+
+    /**
+   * Obtiene el nombre del campo en la tabla a la que hace referencia
+   *
+   * @return string
+   */
+  public function getCombosclase(){ // $campos
+    return $this->cc;
   }
 
 }

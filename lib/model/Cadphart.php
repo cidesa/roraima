@@ -73,6 +73,9 @@ class Cadphart extends BaseCadphart
 	return Herramientas::getX('CODCEN','Cadefcen','Descen',self::getCodcen());
   }
 
-
+    public function getManartlot()
+    {
+            return H::getConfApp2('manartlot', 'compras', 'almregart');
+    }
 }
 

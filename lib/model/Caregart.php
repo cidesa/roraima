@@ -107,4 +107,14 @@ public function getNompar()
   {
   	return $this->oculsave;
   }
+
+    public function getManunialt()
+    {
+            return H::getConfApp('manunialt', 'compras', 'almregart');
+    }
+
+    public function getManartlot()
+    {
+            return H::getConfApp('manartlot', 'compras', 'almregart');
+    }
 }

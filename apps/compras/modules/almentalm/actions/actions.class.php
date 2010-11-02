@@ -226,6 +226,7 @@ $this->Bitacora('Guardo');
 	{
 	 $cajtexmos=$this->getRequestParameter('cajtexmos');
      $cajtexcom=$this->getRequestParameter('cajtexcom');
+     $manaartlot=H::getConfApp2('manartlot', 'compras', 'almregart');
 	 if ($this->getRequestParameter('ajax')=='1')
 	 {
 		$aux = split('_',$cajtexmos);
@@ -234,7 +235,8 @@ $this->Bitacora('Guardo');
 		$cajtexcom=$name."_".$fil."_6";
 		$cajcodubi=$name."_".$fil."_8";
 		$cajnomubi=$name."_".$fil."_9";
-		$cajnumlot=$name."_".$fil."_10";
+		if ($manaartlot=='S')
+                  $cajnumlot=$name."_".$fil."_13";
 	    $codalm=$this->getRequestParameter('codalm');
 	  	$codart=$this->getRequestParameter('codart');
 
@@ -254,11 +256,20 @@ $this->Bitacora('Guardo');
            {
              	$codubi=$alm->getCodubi();
              	$nomubi=CadefubiPeer::getDesubicacion($codubi);
+                if ($manaartlot=='S')
+                   $numlot=$alm->getNumlot();
+
+                if ($manaartlot=='S')
+                    $output = '[["'.$cajtexmos.'","'.$nomalm.'",""],["'.$cajtexcom.'","6","c"],["'.$cajcodubi.'","'.$codubi.'",""],["'.$cajnomubi.'","'.$nomubi.'",""],["'.$cajnumlot.'","'.$numlot.'",""]]';
+                else
              	$output = '[["'.$cajtexmos.'","'.$nomalm.'",""],["'.$cajtexcom.'","6","c"],["'.$cajcodubi.'","'.$codubi.'",""],["'.$cajnomubi.'","'.$nomubi.'",""]]';
            }
            else//el almacen seleccionado no existe para el articulo introducido por el usuario
            {
 	    	$javascript="alert('El articulo : ".$codart.", no existe en el Almacen seleccionado: ".$codalm." ')";
+                if ($manaartlot=='S')
+                    $output = '[["'.$cajtexmos.'","",""],["'.$cajcodubi.'","",""],["'.$cajnomubi.'","",""],["'.$cajtexcom.'","",""],["'.$cajnumlot.'","",""],["javascript","'.$javascript.'",""]]';
+                else
 	    	$output = '[["'.$cajtexmos.'","",""],["'.$cajcodubi.'","",""],["'.$cajnomubi.'","",""],["'.$cajtexcom.'","",""],["javascript","'.$javascript.'",""]]';
            }
 
@@ -267,6 +278,9 @@ $this->Bitacora('Guardo');
 	    {
 	    	$nomalm="";
 	    	$javascript="alert('Codigo del Almacen no existe...')";
+                if ($manaartlot=='S')
+                    $output = '[["'.$cajtexmos.'","'.$nomalm.'",""],["'.$cajcodubi.'","",""],["'.$cajnomubi.'","",""],["'.$cajtexcom.'","",""],["'.$cajnumlot.'","",""],["javascript","'.$javascript.'",""]]';
+                else
 	    	$output = '[["'.$cajtexmos.'","'.$nomalm.'",""],["'.$cajcodubi.'","",""],["'.$cajnomubi.'","",""],["'.$cajtexcom.'","",""],["javascript","'.$javascript.'",""]]';
 	    }// if ($datos)
 
@@ -293,7 +307,8 @@ $this->Bitacora('Guardo');
 			$fil=$aux[1];
 			$cajcodubi=$name."_".$fil."_8";
 			$cajnomubi=$name."_".$fil."_9";
-		    $cajnumlot=$name."_".$fil."_10";
+                        if ($manaartlot=='S')
+                            $cajnumlot=$name."_".$fil."_13";
 			$codalm=$this->getRequestParameter('codalm');
 	  	    $codubi=$this->getRequestParameter('codigo');
 	  	    $codart=$this->getRequestParameter('codart');
@@ -307,6 +322,8 @@ $this->Bitacora('Guardo');
            	   if ($alm)
            	   {
            	   		$dato=CadefubiPeer::getDesubicacion($codubi);
+                                if ($manaartlot=='S')
+                                   $numlot=$alm->getNumlot();
            	   		$javascript="";
            	   }
               else
@@ -314,8 +331,12 @@ $this->Bitacora('Guardo');
                   $javascript="alert('La ubicacion : ".$codubi.", no existe para el almacen seleccionado: ".$codalm." y el articulo ".$codart." ')";
                   $dato="";
                   $codubi="";
+                  if ($manartlot=='S')
                   $numlot="";
               }
+              if ($manartlot=='S')
+                  $output = '[["'.$cajnomubi.'","'.$dato.'",""],["'.$cajcodubi.'","'.$codubi.'",""],["'.$cajnumlot.'","'.$numlot.'",""],["javascript","'.$javascript.'",""]]';
+              else
             $output = '[["'.$cajnomubi.'","'.$dato.'",""],["'.$cajcodubi.'","'.$codubi.'",""],["javascript","'.$javascript.'",""]]';
 	      }
 	      else
@@ -323,7 +344,11 @@ $this->Bitacora('Guardo');
 	      	$javascript="alert('Primero debe seleccionar un Almacen...');";
 	      	$dato="";
 	      	$codubi="";
+                if ($manartlot=='S')
 	      	$numlot="";
+               if ($manartlot=='S')
+  	           $output = '[["'.$cajnomubi.'","'.$dato.'",""],["'.$cajcodubi.'","'.$codubi.'",""],["'.$cajnumlot.'","'.$numlot.'",""],["javascript","'.$javascript.'",""]]';
+               else
   			$output = '[["'.$cajnomubi.'","'.$dato.'",""],["'.$cajcodubi.'","'.$codubi.'",""],["javascript","'.$javascript.'",""]]';
 	      }
 
@@ -491,7 +516,7 @@ $this->Bitacora('Guardo');
    	}
    	else
    	{
-		$col6->setHTML('type="text" size="8" maxlength="6"');
+		$col6->setHTML('type="text" size="8" ');
 		$col6->setCatalogo('Cadefalm','sf_admin_edit_form',$objalm,'Cadelfalm_Almordrec');
 		$col6->setJScript('onBlur="ejecutaajaxalm(this.id)"');
    	}
@@ -562,6 +587,25 @@ $this->Bitacora('Guardo');
 	    	$col12->setOculta(false);
 	    }
 	    
+            $manartlot=H::getConfApp2('manartlot', 'compras', 'almregart');
+            if ($manartlot=='S')
+            {
+                $col13 = new Columna('Número de Lote');
+                $col13->setTipo(Columna::TEXTO);
+                $col13->setEsGrabable(true);
+                $col13->setAlineacionObjeto(Columna::CENTRO);
+                $col13->setAlineacionContenido(Columna::CENTRO);
+                $col13->setNombreCampo('numlot');
+                if ($this->caentalm->getId())
+                {
+                   $col13->setHTML('type="text" size="15" readonly=true');
+                }
+                else
+                {
+                   $col13->setHTML('type="text" size="15" maxlength="100"');
+                }
+            }
+
         // Se guardan las columnas en el objetos de opciones
         $opciones->addColumna($col1);
         $opciones->addColumna($col2);
@@ -575,6 +619,8 @@ $this->Bitacora('Guardo');
         $opciones->addColumna($col10);
         $opciones->addColumna($col11);
         $opciones->addColumna($col12);
+        if ($manartlot=='S')
+            $opciones->addColumna($col13);
 	    // Ee genera el arreglo de opciones necesario para generar el grid
         $this->obj = $opciones->getConfig($per);
 
@@ -614,6 +660,7 @@ $this->Bitacora('Guardo');
 			    	//verificar en el grid de articulos que todos los articulos pertenezcan al almacen y ubicacion indicada
 			    	//y verificar que al menos un articulo del grid tenga cantidad mayo que cero.
 			    	  $grid = Herramientas::CargarDatosGrid($this,$this->obj);
+                                  $manartlot=H::getConfApp2('manartlot', 'compras', 'almregart');
 				      $msg  = "";
 				      $x    = $grid[0];
 				      $j    = 0;
@@ -624,12 +671,22 @@ $this->Bitacora('Guardo');
 				         if ($x[$j]->getCanrec()>0)
 				      	 {
 					      	 $encontro=true;
-					      	 if ($x[$j]->getCodalm()=="" or  $x[$j]->getCodubi()=="" )
+                                            if ($manartlot=='S')
+					      	 {
+                                                if ($x[$j]->getCodalm()=="" or  $x[$j]->getCodubi()=="" or $x[$j]->getNumlot()=="" )
 					      	 {
 					      	 	$msg="Debe indicar el Código del Almacén, la Ubicación y el Nro. del Lote de todos los Artículos de la Entradas en el Almacen";
 					      	 	$this->getRequest()->setError('',$msg);
 				 				return false;
 					      	 }// if ($x[$j]->getCodalm()=="" or  $x[$j]->getCodubi()=="")
+                                            }else {
+					      	 if ($x[$j]->getCodalm()=="" or  $x[$j]->getCodubi()=="" )
+					      	 {
+					      	 	$msg="Debe indicar el Código del Almacén y la Ubicación todos los Artículos de la Entradas en el Almacen";
+					      	 	$this->getRequest()->setError('',$msg);
+				 				return false;
+					      	 }// if ($x[$j]->getCodalm()=="" or  $x[$j]->getCodubi()=="")
+                                            }
 				      	 }//if ($x[$j]->getCanrecgri()>0)
 				         $j++;
 				      }//while ($j<count($x))

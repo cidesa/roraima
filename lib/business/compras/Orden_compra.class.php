@@ -1621,6 +1621,7 @@ class Orden_compra
               $caordcom_new->setCodmun($caordcom->getCodmun());
               $caordcom_new->setAplart($caordcom->getAplart());
               $caordcom_new->setAplart6($caordcom->getAplart6());
+              $caordcom_new->setUnimed($caordcom->getUnimed());
 
               $caordcom_new->setNumsigecof($caordcom->getNumsigecof());
               $caordcom_new->setFecsigecof($caordcom->getFecsigecof());
@@ -1689,6 +1690,7 @@ class Orden_compra
                   $caordcom_mod->setCodcenaco($caordcom->getCodcenaco());
                   $caordcom_mod->setDesord($caordcom->getDesord());
                   $caordcom_mod->setNotord($caordcom->getNotord());
+                  $caordcom_mod->setUnimed($caordcom->getUnimed());
 
                   if ($caordcom->getManorddon()=='S') // En Caso de una OC de Donación
                   {

@@ -1,7 +1,7 @@
 <?php
 
 
-abstract class BaseCaalmubi extends BaseObject  implements Persistent {
+abstract class BaseCaunialart extends BaseObject  implements Persistent {
 
 
 	
@@ -9,18 +9,19 @@ abstract class BaseCaalmubi extends BaseObject  implements Persistent {
 
 
 	
-	protected $codalm;
+	protected $codart;
 
 
 	
-	protected $codubi;
+	protected $unialt;
+
+
+	
+	protected $relart;
 
 
 	
 	protected $id;
-
-	
-	protected $aCadefubi;
 
 	
 	protected $alreadyInSave = false;
@@ -29,17 +30,24 @@ abstract class BaseCaalmubi extends BaseObject  implements Persistent {
 	protected $alreadyInValidation = false;
 
   
-  public function getCodalm()
+  public function getCodart()
   {
 
-    return trim($this->codalm);
+    return trim($this->codart);
 
   }
   
-  public function getCodubi()
+  public function getUnialt()
   {
 
-    return trim($this->codubi);
+    return trim($this->unialt);
+
+  }
+  
+  public function getRelart()
+  {
+
+    return trim($this->relart);
 
   }
   
@@ -50,28 +58,34 @@ abstract class BaseCaalmubi extends BaseObject  implements Persistent {
 
   }
 	
-	public function setCodalm($v)
+	public function setCodart($v)
 	{
 
-    if ($this->codalm !== $v) {
-        $this->codalm = $v;
-        $this->modifiedColumns[] = CaalmubiPeer::CODALM;
+    if ($this->codart !== $v) {
+        $this->codart = $v;
+        $this->modifiedColumns[] = CaunialartPeer::CODART;
       }
   
 	} 
 	
-	public function setCodubi($v)
+	public function setUnialt($v)
 	{
 
-    if ($this->codubi !== $v) {
-        $this->codubi = $v;
-        $this->modifiedColumns[] = CaalmubiPeer::CODUBI;
+    if ($this->unialt !== $v) {
+        $this->unialt = $v;
+        $this->modifiedColumns[] = CaunialartPeer::UNIALT;
       }
   
-		if ($this->aCadefubi !== null && $this->aCadefubi->getCodubi() !== $v) {
-			$this->aCadefubi = null;
-		}
+	} 
+	
+	public function setRelart($v)
+	{
 
+    if ($this->relart !== $v) {
+        $this->relart = $v;
+        $this->modifiedColumns[] = CaunialartPeer::RELART;
+      }
+  
 	} 
 	
 	public function setId($v)
@@ -79,7 +93,7 @@ abstract class BaseCaalmubi extends BaseObject  implements Persistent {
 
     if ($this->id !== $v) {
         $this->id = $v;
-        $this->modifiedColumns[] = CaalmubiPeer::ID;
+        $this->modifiedColumns[] = CaunialartPeer::ID;
       }
   
 	} 
@@ -88,11 +102,13 @@ abstract class BaseCaalmubi extends BaseObject  implements Persistent {
   {
     try {
 
-      $this->codalm = $rs->getString($startcol + 0);
+      $this->codart = $rs->getString($startcol + 0);
 
-      $this->codubi = $rs->getString($startcol + 1);
+      $this->unialt = $rs->getString($startcol + 1);
 
-      $this->id = $rs->getInt($startcol + 2);
+      $this->relart = $rs->getString($startcol + 2);
+
+      $this->id = $rs->getInt($startcol + 3);
 
       $this->resetModified();
 
@@ -100,9 +116,9 @@ abstract class BaseCaalmubi extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 3; 
+            return $startcol + 4; 
     } catch (Exception $e) {
-      throw new PropelException("Error populating Caalmubi object", $e);
+      throw new PropelException("Error populating Caunialart object", $e);
     }
   }
 
@@ -134,12 +150,12 @@ abstract class BaseCaalmubi extends BaseObject  implements Persistent {
 		}
 
 		if ($con === null) {
-			$con = Propel::getConnection(CaalmubiPeer::DATABASE_NAME);
+			$con = Propel::getConnection(CaunialartPeer::DATABASE_NAME);
 		}
 
 		try {
 			$con->begin();
-			CaalmubiPeer::doDelete($this, $con);
+			CaunialartPeer::doDelete($this, $con);
 			$this->setDeleted(true);
 			$con->commit();
 		} catch (PropelException $e) {
@@ -156,7 +172,7 @@ abstract class BaseCaalmubi extends BaseObject  implements Persistent {
 		}
 
 		if ($con === null) {
-			$con = Propel::getConnection(CaalmubiPeer::DATABASE_NAME);
+			$con = Propel::getConnection(CaunialartPeer::DATABASE_NAME);
 		}
 
 		try {
@@ -177,23 +193,14 @@ abstract class BaseCaalmubi extends BaseObject  implements Persistent {
 			$this->alreadyInSave = true;
 
 
-												
-			if ($this->aCadefubi !== null) {
-				if ($this->aCadefubi->isModified()) {
-					$affectedRows += $this->aCadefubi->save($con);
-				}
-				$this->setCadefubi($this->aCadefubi);
-			}
-
-
 						if ($this->isModified()) {
 				if ($this->isNew()) {
-					$pk = CaalmubiPeer::doInsert($this, $con);
+					$pk = CaunialartPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
 					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
-					$affectedRows += CaalmubiPeer::doUpdate($this, $con);
+					$affectedRows += CaunialartPeer::doUpdate($this, $con);
 				}
 				$this->resetModified(); 			}
 
@@ -233,15 +240,7 @@ abstract class BaseCaalmubi extends BaseObject  implements Persistent {
 			$failureMap = array();
 
 
-												
-			if ($this->aCadefubi !== null) {
-				if (!$this->aCadefubi->validate($columns)) {
-					$failureMap = array_merge($failureMap, $this->aCadefubi->getValidationFailures());
-				}
-			}
-
-
-			if (($retval = CaalmubiPeer::doValidate($this, $columns)) !== true) {
+			if (($retval = CaunialartPeer::doValidate($this, $columns)) !== true) {
 				$failureMap = array_merge($failureMap, $retval);
 			}
 
@@ -256,7 +255,7 @@ abstract class BaseCaalmubi extends BaseObject  implements Persistent {
 	
 	public function getByName($name, $type = BasePeer::TYPE_PHPNAME)
 	{
-		$pos = CaalmubiPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
+		$pos = CaunialartPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->getByPosition($pos);
 	}
 
@@ -265,12 +264,15 @@ abstract class BaseCaalmubi extends BaseObject  implements Persistent {
 	{
 		switch($pos) {
 			case 0:
-				return $this->getCodalm();
+				return $this->getCodart();
 				break;
 			case 1:
-				return $this->getCodubi();
+				return $this->getUnialt();
 				break;
 			case 2:
+				return $this->getRelart();
+				break;
+			case 3:
 				return $this->getId();
 				break;
 			default:
@@ -281,11 +283,12 @@ abstract class BaseCaalmubi extends BaseObject  implements Persistent {
 	
 	public function toArray($keyType = BasePeer::TYPE_PHPNAME)
 	{
-		$keys = CaalmubiPeer::getFieldNames($keyType);
+		$keys = CaunialartPeer::getFieldNames($keyType);
 		$result = array(
-			$keys[0] => $this->getCodalm(),
-			$keys[1] => $this->getCodubi(),
-			$keys[2] => $this->getId(),
+			$keys[0] => $this->getCodart(),
+			$keys[1] => $this->getUnialt(),
+			$keys[2] => $this->getRelart(),
+			$keys[3] => $this->getId(),
 		);
 		return $result;
 	}
@@ -293,7 +296,7 @@ abstract class BaseCaalmubi extends BaseObject  implements Persistent {
 	
 	public function setByName($name, $value, $type = BasePeer::TYPE_PHPNAME)
 	{
-		$pos = CaalmubiPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
+		$pos = CaunialartPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->setByPosition($pos, $value);
 	}
 
@@ -302,12 +305,15 @@ abstract class BaseCaalmubi extends BaseObject  implements Persistent {
 	{
 		switch($pos) {
 			case 0:
-				$this->setCodalm($value);
+				$this->setCodart($value);
 				break;
 			case 1:
-				$this->setCodubi($value);
+				$this->setUnialt($value);
 				break;
 			case 2:
+				$this->setRelart($value);
+				break;
+			case 3:
 				$this->setId($value);
 				break;
 		} 	}
@@ -315,21 +321,23 @@ abstract class BaseCaalmubi extends BaseObject  implements Persistent {
 	
 	public function fromArray($arr, $keyType = BasePeer::TYPE_PHPNAME)
 	{
-		$keys = CaalmubiPeer::getFieldNames($keyType);
+		$keys = CaunialartPeer::getFieldNames($keyType);
 
-		if (array_key_exists($keys[0], $arr)) $this->setCodalm($arr[$keys[0]]);
-		if (array_key_exists($keys[1], $arr)) $this->setCodubi($arr[$keys[1]]);
-		if (array_key_exists($keys[2], $arr)) $this->setId($arr[$keys[2]]);
+		if (array_key_exists($keys[0], $arr)) $this->setCodart($arr[$keys[0]]);
+		if (array_key_exists($keys[1], $arr)) $this->setUnialt($arr[$keys[1]]);
+		if (array_key_exists($keys[2], $arr)) $this->setRelart($arr[$keys[2]]);
+		if (array_key_exists($keys[3], $arr)) $this->setId($arr[$keys[3]]);
 	}
 
 	
 	public function buildCriteria()
 	{
-		$criteria = new Criteria(CaalmubiPeer::DATABASE_NAME);
+		$criteria = new Criteria(CaunialartPeer::DATABASE_NAME);
 
-		if ($this->isColumnModified(CaalmubiPeer::CODALM)) $criteria->add(CaalmubiPeer::CODALM, $this->codalm);
-		if ($this->isColumnModified(CaalmubiPeer::CODUBI)) $criteria->add(CaalmubiPeer::CODUBI, $this->codubi);
-		if ($this->isColumnModified(CaalmubiPeer::ID)) $criteria->add(CaalmubiPeer::ID, $this->id);
+		if ($this->isColumnModified(CaunialartPeer::CODART)) $criteria->add(CaunialartPeer::CODART, $this->codart);
+		if ($this->isColumnModified(CaunialartPeer::UNIALT)) $criteria->add(CaunialartPeer::UNIALT, $this->unialt);
+		if ($this->isColumnModified(CaunialartPeer::RELART)) $criteria->add(CaunialartPeer::RELART, $this->relart);
+		if ($this->isColumnModified(CaunialartPeer::ID)) $criteria->add(CaunialartPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -337,9 +345,9 @@ abstract class BaseCaalmubi extends BaseObject  implements Persistent {
 	
 	public function buildPkeyCriteria()
 	{
-		$criteria = new Criteria(CaalmubiPeer::DATABASE_NAME);
+		$criteria = new Criteria(CaunialartPeer::DATABASE_NAME);
 
-		$criteria->add(CaalmubiPeer::ID, $this->id);
+		$criteria->add(CaunialartPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -360,9 +368,11 @@ abstract class BaseCaalmubi extends BaseObject  implements Persistent {
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
-		$copyObj->setCodalm($this->codalm);
+		$copyObj->setCodart($this->codart);
 
-		$copyObj->setCodubi($this->codubi);
+		$copyObj->setUnialt($this->unialt);
+
+		$copyObj->setRelart($this->relart);
 
 
 		$copyObj->setNew(true);
@@ -383,41 +393,9 @@ abstract class BaseCaalmubi extends BaseObject  implements Persistent {
 	public function getPeer()
 	{
 		if (self::$peer === null) {
-			self::$peer = new CaalmubiPeer();
+			self::$peer = new CaunialartPeer();
 		}
 		return self::$peer;
-	}
-
-	
-	public function setCadefubi($v)
-	{
-
-
-		if ($v === null) {
-			$this->setCodubi(NULL);
-		} else {
-			$this->setCodubi($v->getCodubi());
-		}
-
-
-		$this->aCadefubi = $v;
-	}
-
-
-	
-	public function getCadefubi($con = null)
-	{
-		if ($this->aCadefubi === null && (($this->codubi !== "" && $this->codubi !== null))) {
-						include_once 'lib/model/om/BaseCadefubiPeer.php';
-
-      $c = new Criteria();
-      $c->add(CadefubiPeer::CODUBI,$this->codubi);
-      
-			$this->aCadefubi = CadefubiPeer::doSelectOne($c, $con);
-
-			
-		}
-		return $this->aCadefubi;
 	}
 
 } 

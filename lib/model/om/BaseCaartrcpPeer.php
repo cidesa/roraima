@@ -13,7 +13,7 @@ abstract class BaseCaartrcpPeer {
 	const CLASS_DEFAULT = 'lib.model.Caartrcp';
 
 	
-	const NUM_COLUMNS = 17;
+	const NUM_COLUMNS = 18;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -68,6 +68,9 @@ abstract class BaseCaartrcpPeer {
 	const CODUBI = 'caartrcp.CODUBI';
 
 	
+	const NUMLOT = 'caartrcp.NUMLOT';
+
+	
 	const ID = 'caartrcp.ID';
 
 	
@@ -76,18 +79,18 @@ abstract class BaseCaartrcpPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Rcpart', 'Codart', 'Ordcom', 'Codcat', 'Canrec', 'Candev', 'Cantot', 'Montot', 'Monrgo', 'Mondes', 'Canasilot', 'Codfal', 'Fecest', 'Serial', 'Codalm', 'Codubi', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (CaartrcpPeer::RCPART, CaartrcpPeer::CODART, CaartrcpPeer::ORDCOM, CaartrcpPeer::CODCAT, CaartrcpPeer::CANREC, CaartrcpPeer::CANDEV, CaartrcpPeer::CANTOT, CaartrcpPeer::MONTOT, CaartrcpPeer::MONRGO, CaartrcpPeer::MONDES, CaartrcpPeer::CANASILOT, CaartrcpPeer::CODFAL, CaartrcpPeer::FECEST, CaartrcpPeer::SERIAL, CaartrcpPeer::CODALM, CaartrcpPeer::CODUBI, CaartrcpPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('rcpart', 'codart', 'ordcom', 'codcat', 'canrec', 'candev', 'cantot', 'montot', 'monrgo', 'mondes', 'canasilot', 'codfal', 'fecest', 'serial', 'codalm', 'codubi', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, )
+		BasePeer::TYPE_PHPNAME => array ('Rcpart', 'Codart', 'Ordcom', 'Codcat', 'Canrec', 'Candev', 'Cantot', 'Montot', 'Monrgo', 'Mondes', 'Canasilot', 'Codfal', 'Fecest', 'Serial', 'Codalm', 'Codubi', 'Numlot', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (CaartrcpPeer::RCPART, CaartrcpPeer::CODART, CaartrcpPeer::ORDCOM, CaartrcpPeer::CODCAT, CaartrcpPeer::CANREC, CaartrcpPeer::CANDEV, CaartrcpPeer::CANTOT, CaartrcpPeer::MONTOT, CaartrcpPeer::MONRGO, CaartrcpPeer::MONDES, CaartrcpPeer::CANASILOT, CaartrcpPeer::CODFAL, CaartrcpPeer::FECEST, CaartrcpPeer::SERIAL, CaartrcpPeer::CODALM, CaartrcpPeer::CODUBI, CaartrcpPeer::NUMLOT, CaartrcpPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('rcpart', 'codart', 'ordcom', 'codcat', 'canrec', 'candev', 'cantot', 'montot', 'monrgo', 'mondes', 'canasilot', 'codfal', 'fecest', 'serial', 'codalm', 'codubi', 'numlot', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Rcpart' => 0, 'Codart' => 1, 'Ordcom' => 2, 'Codcat' => 3, 'Canrec' => 4, 'Candev' => 5, 'Cantot' => 6, 'Montot' => 7, 'Monrgo' => 8, 'Mondes' => 9, 'Canasilot' => 10, 'Codfal' => 11, 'Fecest' => 12, 'Serial' => 13, 'Codalm' => 14, 'Codubi' => 15, 'Id' => 16, ),
-		BasePeer::TYPE_COLNAME => array (CaartrcpPeer::RCPART => 0, CaartrcpPeer::CODART => 1, CaartrcpPeer::ORDCOM => 2, CaartrcpPeer::CODCAT => 3, CaartrcpPeer::CANREC => 4, CaartrcpPeer::CANDEV => 5, CaartrcpPeer::CANTOT => 6, CaartrcpPeer::MONTOT => 7, CaartrcpPeer::MONRGO => 8, CaartrcpPeer::MONDES => 9, CaartrcpPeer::CANASILOT => 10, CaartrcpPeer::CODFAL => 11, CaartrcpPeer::FECEST => 12, CaartrcpPeer::SERIAL => 13, CaartrcpPeer::CODALM => 14, CaartrcpPeer::CODUBI => 15, CaartrcpPeer::ID => 16, ),
-		BasePeer::TYPE_FIELDNAME => array ('rcpart' => 0, 'codart' => 1, 'ordcom' => 2, 'codcat' => 3, 'canrec' => 4, 'candev' => 5, 'cantot' => 6, 'montot' => 7, 'monrgo' => 8, 'mondes' => 9, 'canasilot' => 10, 'codfal' => 11, 'fecest' => 12, 'serial' => 13, 'codalm' => 14, 'codubi' => 15, 'id' => 16, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, )
+		BasePeer::TYPE_PHPNAME => array ('Rcpart' => 0, 'Codart' => 1, 'Ordcom' => 2, 'Codcat' => 3, 'Canrec' => 4, 'Candev' => 5, 'Cantot' => 6, 'Montot' => 7, 'Monrgo' => 8, 'Mondes' => 9, 'Canasilot' => 10, 'Codfal' => 11, 'Fecest' => 12, 'Serial' => 13, 'Codalm' => 14, 'Codubi' => 15, 'Numlot' => 16, 'Id' => 17, ),
+		BasePeer::TYPE_COLNAME => array (CaartrcpPeer::RCPART => 0, CaartrcpPeer::CODART => 1, CaartrcpPeer::ORDCOM => 2, CaartrcpPeer::CODCAT => 3, CaartrcpPeer::CANREC => 4, CaartrcpPeer::CANDEV => 5, CaartrcpPeer::CANTOT => 6, CaartrcpPeer::MONTOT => 7, CaartrcpPeer::MONRGO => 8, CaartrcpPeer::MONDES => 9, CaartrcpPeer::CANASILOT => 10, CaartrcpPeer::CODFAL => 11, CaartrcpPeer::FECEST => 12, CaartrcpPeer::SERIAL => 13, CaartrcpPeer::CODALM => 14, CaartrcpPeer::CODUBI => 15, CaartrcpPeer::NUMLOT => 16, CaartrcpPeer::ID => 17, ),
+		BasePeer::TYPE_FIELDNAME => array ('rcpart' => 0, 'codart' => 1, 'ordcom' => 2, 'codcat' => 3, 'canrec' => 4, 'candev' => 5, 'cantot' => 6, 'montot' => 7, 'monrgo' => 8, 'mondes' => 9, 'canasilot' => 10, 'codfal' => 11, 'fecest' => 12, 'serial' => 13, 'codalm' => 14, 'codubi' => 15, 'numlot' => 16, 'id' => 17, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, )
 	);
 
 	
@@ -172,6 +175,8 @@ abstract class BaseCaartrcpPeer {
 		$criteria->addSelectColumn(CaartrcpPeer::CODALM);
 
 		$criteria->addSelectColumn(CaartrcpPeer::CODUBI);
+
+		$criteria->addSelectColumn(CaartrcpPeer::NUMLOT);
 
 		$criteria->addSelectColumn(CaartrcpPeer::ID);
 
@@ -345,8 +350,8 @@ abstract class BaseCaartrcpPeer {
 			$criteria->addSelectColumn($column);
 		}
 
-		$criteria->addJoin(CaartrcpPeer::CODFAL, CamotfalPeer::CODFAL);
-
+			$criteria->addJoin(CaartrcpPeer::CODFAL, CamotfalPeer::CODFAL);
+	
 		$rs = CaartrcpPeer::doSelectRS($criteria, $con);
 		if ($rs->next()) {
 			return $rs->getInt(1);
@@ -368,11 +373,11 @@ abstract class BaseCaartrcpPeer {
 		CaartrcpPeer::addSelectColumns($c);
 		$startcol2 = (CaartrcpPeer::NUM_COLUMNS - CaartrcpPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		CamotfalPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + CamotfalPeer::NUM_COLUMNS;
-
-		$c->addJoin(CaartrcpPeer::CODFAL, CamotfalPeer::CODFAL);
-
+			CamotfalPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + CamotfalPeer::NUM_COLUMNS;
+	
+			$c->addJoin(CaartrcpPeer::CODFAL, CamotfalPeer::CODFAL);
+	
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
 
@@ -386,28 +391,28 @@ abstract class BaseCaartrcpPeer {
 			$obj1->hydrate($rs);
 
 
-					
-			$omClass = CamotfalPeer::getOMClass();
+							
+				$omClass = CamotfalPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2 = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2 = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getCamotfal(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addCaartrcp($obj1); 					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getCamotfal(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addCaartrcp($obj1); 						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initCaartrcps();
-				$obj2->addCaartrcp($obj1);
-			}
-
+				if ($newObject) {
+					$obj2->initCaartrcps();
+					$obj2->addCaartrcp($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;

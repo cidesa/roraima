@@ -73,6 +73,10 @@ abstract class BaseCaartrcp extends BaseObject  implements Persistent {
 
 
 	
+	protected $numlot;
+
+
+	
 	protected $id;
 
 	
@@ -216,6 +220,13 @@ abstract class BaseCaartrcp extends BaseObject  implements Persistent {
   {
 
     return trim($this->codubi);
+
+  }
+  
+  public function getNumlot()
+  {
+
+    return trim($this->numlot);
 
   }
   
@@ -402,6 +413,16 @@ abstract class BaseCaartrcp extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setNumlot($v)
+	{
+
+    if ($this->numlot !== $v) {
+        $this->numlot = $v;
+        $this->modifiedColumns[] = CaartrcpPeer::NUMLOT;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -448,7 +469,9 @@ abstract class BaseCaartrcp extends BaseObject  implements Persistent {
 
       $this->codubi = $rs->getString($startcol + 15);
 
-      $this->id = $rs->getInt($startcol + 16);
+      $this->numlot = $rs->getString($startcol + 16);
+
+      $this->id = $rs->getInt($startcol + 17);
 
       $this->resetModified();
 
@@ -456,7 +479,7 @@ abstract class BaseCaartrcp extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 17; 
+            return $startcol + 18; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Caartrcp object", $e);
     }
@@ -669,6 +692,9 @@ abstract class BaseCaartrcp extends BaseObject  implements Persistent {
 				return $this->getCodubi();
 				break;
 			case 16:
+				return $this->getNumlot();
+				break;
+			case 17:
 				return $this->getId();
 				break;
 			default:
@@ -697,7 +723,8 @@ abstract class BaseCaartrcp extends BaseObject  implements Persistent {
 			$keys[13] => $this->getSerial(),
 			$keys[14] => $this->getCodalm(),
 			$keys[15] => $this->getCodubi(),
-			$keys[16] => $this->getId(),
+			$keys[16] => $this->getNumlot(),
+			$keys[17] => $this->getId(),
 		);
 		return $result;
 	}
@@ -762,6 +789,9 @@ abstract class BaseCaartrcp extends BaseObject  implements Persistent {
 				$this->setCodubi($value);
 				break;
 			case 16:
+				$this->setNumlot($value);
+				break;
+			case 17:
 				$this->setId($value);
 				break;
 		} 	}
@@ -787,7 +817,8 @@ abstract class BaseCaartrcp extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[13], $arr)) $this->setSerial($arr[$keys[13]]);
 		if (array_key_exists($keys[14], $arr)) $this->setCodalm($arr[$keys[14]]);
 		if (array_key_exists($keys[15], $arr)) $this->setCodubi($arr[$keys[15]]);
-		if (array_key_exists($keys[16], $arr)) $this->setId($arr[$keys[16]]);
+		if (array_key_exists($keys[16], $arr)) $this->setNumlot($arr[$keys[16]]);
+		if (array_key_exists($keys[17], $arr)) $this->setId($arr[$keys[17]]);
 	}
 
 	
@@ -811,6 +842,7 @@ abstract class BaseCaartrcp extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CaartrcpPeer::SERIAL)) $criteria->add(CaartrcpPeer::SERIAL, $this->serial);
 		if ($this->isColumnModified(CaartrcpPeer::CODALM)) $criteria->add(CaartrcpPeer::CODALM, $this->codalm);
 		if ($this->isColumnModified(CaartrcpPeer::CODUBI)) $criteria->add(CaartrcpPeer::CODUBI, $this->codubi);
+		if ($this->isColumnModified(CaartrcpPeer::NUMLOT)) $criteria->add(CaartrcpPeer::NUMLOT, $this->numlot);
 		if ($this->isColumnModified(CaartrcpPeer::ID)) $criteria->add(CaartrcpPeer::ID, $this->id);
 
 		return $criteria;
@@ -874,6 +906,8 @@ abstract class BaseCaartrcp extends BaseObject  implements Persistent {
 
 		$copyObj->setCodubi($this->codubi);
 
+		$copyObj->setNumlot($this->numlot);
+
 
 		$copyObj->setNew(true);
 
@@ -920,7 +954,10 @@ abstract class BaseCaartrcp extends BaseObject  implements Persistent {
 		if ($this->aCamotfal === null && (($this->codfal !== "" && $this->codfal !== null))) {
 						include_once 'lib/model/om/BaseCamotfalPeer.php';
 
-			$this->aCamotfal = CamotfalPeer::retrieveByPK($this->codfal, $con);
+      $c = new Criteria();
+      $c->add(CamotfalPeer::CODFAL,$this->codfal);
+      
+			$this->aCamotfal = CamotfalPeer::doSelectOne($c, $con);
 
 			
 		}

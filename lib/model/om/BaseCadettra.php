@@ -21,6 +21,10 @@ abstract class BaseCadettra extends BaseObject  implements Persistent {
 
 
 	
+	protected $numlot;
+
+
+	
 	protected $id;
 
 	
@@ -49,6 +53,13 @@ abstract class BaseCadettra extends BaseObject  implements Persistent {
 
     if($val) return number_format($this->canart,2,',','.');
     else return $this->canart;
+
+  }
+  
+  public function getNumlot()
+  {
+
+    return trim($this->numlot);
 
   }
   
@@ -89,6 +100,16 @@ abstract class BaseCadettra extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setNumlot($v)
+	{
+
+    if ($this->numlot !== $v) {
+        $this->numlot = $v;
+        $this->modifiedColumns[] = CadettraPeer::NUMLOT;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -109,7 +130,9 @@ abstract class BaseCadettra extends BaseObject  implements Persistent {
 
       $this->canart = $rs->getFloat($startcol + 2);
 
-      $this->id = $rs->getInt($startcol + 3);
+      $this->numlot = $rs->getString($startcol + 3);
+
+      $this->id = $rs->getInt($startcol + 4);
 
       $this->resetModified();
 
@@ -117,7 +140,7 @@ abstract class BaseCadettra extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 4; 
+            return $startcol + 5; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Cadettra object", $e);
     }
@@ -274,6 +297,9 @@ abstract class BaseCadettra extends BaseObject  implements Persistent {
 				return $this->getCanart();
 				break;
 			case 3:
+				return $this->getNumlot();
+				break;
+			case 4:
 				return $this->getId();
 				break;
 			default:
@@ -289,7 +315,8 @@ abstract class BaseCadettra extends BaseObject  implements Persistent {
 			$keys[0] => $this->getCodtra(),
 			$keys[1] => $this->getCodart(),
 			$keys[2] => $this->getCanart(),
-			$keys[3] => $this->getId(),
+			$keys[3] => $this->getNumlot(),
+			$keys[4] => $this->getId(),
 		);
 		return $result;
 	}
@@ -315,6 +342,9 @@ abstract class BaseCadettra extends BaseObject  implements Persistent {
 				$this->setCanart($value);
 				break;
 			case 3:
+				$this->setNumlot($value);
+				break;
+			case 4:
 				$this->setId($value);
 				break;
 		} 	}
@@ -327,7 +357,8 @@ abstract class BaseCadettra extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[0], $arr)) $this->setCodtra($arr[$keys[0]]);
 		if (array_key_exists($keys[1], $arr)) $this->setCodart($arr[$keys[1]]);
 		if (array_key_exists($keys[2], $arr)) $this->setCanart($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setId($arr[$keys[3]]);
+		if (array_key_exists($keys[3], $arr)) $this->setNumlot($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setId($arr[$keys[4]]);
 	}
 
 	
@@ -338,6 +369,7 @@ abstract class BaseCadettra extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CadettraPeer::CODTRA)) $criteria->add(CadettraPeer::CODTRA, $this->codtra);
 		if ($this->isColumnModified(CadettraPeer::CODART)) $criteria->add(CadettraPeer::CODART, $this->codart);
 		if ($this->isColumnModified(CadettraPeer::CANART)) $criteria->add(CadettraPeer::CANART, $this->canart);
+		if ($this->isColumnModified(CadettraPeer::NUMLOT)) $criteria->add(CadettraPeer::NUMLOT, $this->numlot);
 		if ($this->isColumnModified(CadettraPeer::ID)) $criteria->add(CadettraPeer::ID, $this->id);
 
 		return $criteria;
@@ -374,6 +406,8 @@ abstract class BaseCadettra extends BaseObject  implements Persistent {
 		$copyObj->setCodart($this->codart);
 
 		$copyObj->setCanart($this->canart);
+
+		$copyObj->setNumlot($this->numlot);
 
 
 		$copyObj->setNew(true);

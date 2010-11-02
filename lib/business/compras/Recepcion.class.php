@@ -65,7 +65,7 @@ class Recepcion
 	  // Se graban los articulos dela recepcion
 	  self::Grabar_RecepcionArticulos($recepcion,$grid);
 	  if ($tiecorr) Herramientas::getSalvarCorrelativo('correc','cacorrel','Recepcion',$r,&$msg);
-	  if (self::Actualizar_articulos($recepcion,$grid,&$msj))
+	  if (self::Actualizar_Articulos($recepcion,$grid,&$msj))
 	  {
     	self::Actualizar_ArticulosOrden($recepcion,$grid);
 	  }
@@ -84,6 +84,7 @@ class Recepcion
     {
 	  $codrec=$recepcion->getRcpart();
 	  $ordcom=$recepcion->getOrdcom();
+          $manartlot=H::getConfApp2('manartlot', 'compras', 'almregart');
 	  $x=$grid[0];
 	  $j=0;
 
@@ -106,6 +107,8 @@ class Recepcion
 			  	  $detalle->setCodcat($x[$j]->getCodcat());
 			  	  $detalle->setCodalm($x[$j]->getCodalm());
 			  	  $detalle->setCodubi($x[$j]->getCodubi());
+                                  if ($manartlot=='S')
+                                      $detalle->setNumlot($x[$j]->getNumlot());
 				  if (trim($x[$j]->getFecest())!='') $detalle->setFecest($x[$j]->getFecest());
 			  	  if (trim($x[$j]->getCodfal())!='') $detalle->setCodfal($x[$j]->getCodfal());
 				  $detalle->save();
@@ -141,6 +144,7 @@ class Recepcion
     {
          // $calmacen=$recepcion->getCodalm();
          // $cubicacion=$recepcion->getCodubi();
+         $manartlot=H::getConfApp2('manartlot', 'compras', 'almregart');
 	      $x=$grid[0];
 		  $j=0;
 		  while ($j<count($x))
@@ -152,6 +156,8 @@ class Recepcion
 		    $marcado= $x[$j]->getCerart();
 		    $calmacen=$x[$j]->getCodalm();
 		    $cubicacion=$x[$j]->getCodubi();
+                    if ($manartlot=='S')
+                        $numlot=$x[$j]->getNumlot();
 		    if (($codarti!="") and ($cantd>0) and ($marcado!=1))
 		     {
 		  	   $c = new Criteria();
@@ -160,43 +166,85 @@ class Recepcion
 		        if ($arti)
 		        {
 		    	  $tipoart=$arti->getTipo();
-		    	   if ($tipoart='A')
+                          $manunialt=H::getConfApp2('manunialt', 'compras', 'almregart');
+                          if ($manunialt=='S')
+                          {
+                             $r= new Criteria();
+                             $r->add(CaartordPeer::ORDCOM,$recepcion->getOrdcom());
+                             $r->add(CaartordPeer::CODART,$codarti);
+                             $result= CaartordPeer::doSelectOne($r);
+                             if ($result)
+                             {
+                                 if ($result->getUnimed()!=$arti->getUnimed())
+                                 {
+                                     if ($arti->getUnialt()!="" && $arti->getRelart()!="" && $result->getUnimed()==$arti->getUnialt())
+                                     {
+                                        $cantd=$cantd*$arti->getRelart();
+                                     }
+                                     $k= new Criteria();                                     
+                                     $k->add(CaunialartPeer::CODART,$codarti);
+                                     $k->add(CaunialartPeer::UNIALT,$result->getUnimed());
+                                     $result3= CaunialartPeer::doSelectOne($k);
+                                     if ($result3)
+                                     {
+                                         $cantd=$cantd*$result3->getRelart();
+                                     }
+                                 }
+                             }
+                          }
+
+
+		    	   if ($tipoart=='A')
 		    	   {
 		    	     $act1=$arti->getExitot() + $cantd;
 		       	     $arti->setExitot($act1);
-                     $c = new Criteria();
-	                 $c->add(CaartalmubiPeer::CODART,$codarti);
-	                 $c->add(CaartalmubiPeer::CODALM,$calmacen);
-	                 $c->add(CaartalmubiPeer::CODUBI,$cubicacion);
-	                 $alm = CaartalmubiPeer::doSelectOne($c);
-	                 if ($alm)
-	                 {
-				     	  $act2=$alm->getExiact() + $cantd;
-		         	      $alm->setExiact($act2);
-		         	      $alm->save();
-		         	      $c = new Criteria();
-					  	  $c->add(CaregartPeer::CODART,$codarti);
-					      $arti = CaregartPeer::doSelectOne($c);
-					      if ($arti)
-					      {
-					    	     $act1=$arti->getExitot() + $cantd;
-					    	     $dis1=$arti->getDistot() + $cantd;
-					       	     $arti->setExitot($act1);
-					       	     $arti->setDistot($dis1);
-					       	     $arti->setCosult($costo);
-					             $arti->save();
-					       }
-		             }// if ($alm)
-		       	     $c = new Criteria();
+                             $c = new Criteria();
+                             $c->add(CaartalmubiPeer::CODART,$codarti);
+                             $c->add(CaartalmubiPeer::CODALM,$calmacen);
+                             $c->add(CaartalmubiPeer::CODUBI,$cubicacion);
+                             if ($manartlot=='S')
+                                 $c->add(CaartalmubiPeer::NUMLOT,$numlot);
+                             $alm = CaartalmubiPeer::doSelectOne($c);
+                             if ($alm)
+                             {
+                                  $act2=$alm->getExiact() + $cantd;
+                                  $alm->setExiact($act2);
+                                  $alm->save();
+                                  $c = new Criteria();
+                                  $c->add(CaregartPeer::CODART,$codarti);
+                                  $arti = CaregartPeer::doSelectOne($c);
+                                  if ($arti)
+                                  {
+                                         $act1=$arti->getExitot() + $cantd;
+                                         $dis1=$arti->getDistot() + $cantd;
+                                         $arti->setExitot($act1);
+                                         $arti->setDistot($dis1);
+                                         $arti->setCosult($costo);
+                                         $arti->save();
+                                   }
+                            }// if ($alm)
+                            else {
+                                if ($manartlot=='S')
+                                {
+                                      $caartalmubi= new Caartalmubi();
+                                      $caartalmubi->setCodart($codarti);
+                                      $caartalmubi->setCodalm($calmacen);
+                                      $caartalmubi->setCodubi($cubicacion);
+                                      $caartalmubi->setExiact($cantd);
+                                      $caartalmubi->setNumlot($numlot);
+                                      $caartalmubi->save();
+                                }
+                            }
+                                 $c = new Criteria();
 		  	         $c->add(CaartalmPeer::CODART,$codarti);
 		  	         $c->add(CaartalmPeer::CODALM,$calmacen);
-		             $reg = CaartalmPeer::doSelectOne($c);
-		              if ($reg)
-		              {
-		    		      $act2=$reg->getExiact() + $cantd;
-		         	      $reg->setExiact($act2);
-		         	      $reg->save();
-		               }
+                                 $reg = CaartalmPeer::doSelectOne($c);
+                                  if ($reg)
+                                  {
+                                          $act2=$reg->getExiact() + $cantd;
+                                          $reg->setExiact($act2);
+                                          $reg->save();
+                                   }
 		            }// if ($tipoart='A')
 		       	      $arti->setCosult($costo);
 
@@ -286,6 +334,7 @@ class Recepcion
     {
       $msg="";
       $codrec=$recepcion->getRcpart();
+      $manartlot=H::getConfApp2('manartlot', 'compras', 'almregart');
       //$codalmacen=$recepcion->getCodalm();
       //$codubicacion=$recepcion->getCodubi();
 	  $c= new Criteria();
@@ -297,6 +346,8 @@ class Recepcion
 	  	$cantrec=$arreglo->getCanrec();
 	  	$codalmacen=$arreglo->getCodalm();
         $codubicacion=$arreglo->getCodubi();
+        if ($manartlot=='S')
+            $numlot=$arreglo->getNumlot();
 	  	if ($codarticulo!="" and $cantrec>0)
 	  	{
 	  		$c = new Criteria();
@@ -306,8 +357,14 @@ class Recepcion
 		    {
 		    	if($articulo->getTipo()=='A')
 		    	{
+                            if ($manartlot=='S')
+                            {
+                                 	if (!Despachos::verificaexisydisp($codarticulo,$codalmacen,$codubicacion,$cantrec,&$msg,$numlot))
+				 	    return false;
+                            }else {
 				 	if (!Despachos::verificaexisydisp($codarticulo,$codalmacen,$codubicacion,$cantrec,&$msg))
 				 	    return false;
+                            }
 		    	  }//  if($articulo->getTipo()=='A')
 		    	}//if ($articulo)
 		    }// 	if ($codarticulo!="" and $cantrec>0)
@@ -319,6 +376,7 @@ class Recepcion
    public static function devolverArticulos($recepcion)
     {
       $codrec=$recepcion->getRcpart();
+      $manartlot=H::getConfApp2('manartlot', 'compras', 'almregart');
       //$codalmacen=$recepcion->getCodalm();
       //$codubicacion=$recepcion->getCodubi();
 	  $c= new Criteria();
@@ -330,6 +388,8 @@ class Recepcion
 	  	$cantrec=$arreglo->getCanrec();
 	  	$codalmacen=$arreglo->getCodalm();
         $codubicacion=$arreglo->getCodubi();
+        if ($manartlot=='S')
+            $numlot=$arreglo->getNumlot();
 	  	if ($codarticulo!="" and $cantrec>0)
 	  	{
 	  		$c = new Criteria();
@@ -350,6 +410,8 @@ class Recepcion
 	                 $c->add(CaartalmubiPeer::CODART,$codarticulo);
 	                 $c->add(CaartalmubiPeer::CODALM,$codalmacen);
 	                 $c->add(CaartalmubiPeer::CODUBI,$codubicacion);
+                         if ($manartlot=='S')
+                             $c->add(CaartalmubiPeer::NUMLOT,$numlot);
 	                 $alm = CaartalmubiPeer::doSelectOne($c);
 	                 if ($alm)
 	                 {

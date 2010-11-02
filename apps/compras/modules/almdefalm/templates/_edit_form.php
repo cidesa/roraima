@@ -18,7 +18,7 @@
 <?php echo object_input_hidden_tag($cadefalm, 'getId') ?>
 <?php use_helper('PopUp') ?>
 <?php echo javascript_include_tag('ajax','dFilter','tools', 'observe') ?>
-
+<?php echo input_hidden_tag('cadefalm[codlongveinte]', $cadefalm->getCodlongveinte()) ?>
 <fieldset id="sf_fieldset_none" class="">
 
 <div class="form-row">
@@ -29,11 +29,11 @@
   <?php endif; ?>
 
   <?php $value = object_input_tag($cadefalm, 'getCodalm', array (
-  'size' => 10,
+  'size' => $cadefalm->getCodlongveinte()=='S' ? 25 : 10 ,
   'control_name' => 'cadefalm[codalm]',
   'readonly'  =>  $cadefalm->getId()!='' ? true : false ,
   'onBlur'  => "javascript:event.keyCode=13; enter(event,this.value);",
-  'maxlength' => 6,
+  'maxlength' => $cadefalm->getCodlongveinte()=='S' ? 20 : 6 ,
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 <br>
@@ -164,7 +164,11 @@ function enter(e,valor)
    if (e.keyCode==13 || e.keyCode==9)
    {
      if (valor!='')
-     { valor=valor.pad(6, '0',0);}
+     {
+         var longveinte='<?php echo $cadefalm->getCodlongveinte(); ?>';
+         if (longveinte!='S')
+           valor=valor.pad(6, '0',0);
+     }
 
      $('cadefalm_codalm').value=valor;
    }

@@ -31,9 +31,18 @@ function salvarmontos()
     var codubi="cx"+"_"+fil+"_1";
     var desubi="cx"+"_"+fil+"_2";
     var monact="cx"+"_"+fil+"_3";
+    if ($('caregart_manartlot').value=='S')
+    {
+        var numlot="cx"+"_"+fil+"_4";
+        var fecela="cx"+"_"+fil+"_5";
+        var fecven="cx"+"_"+fil+"_6";
+    }
     var num1=toFloat(monact);
 
     if ($(codubi).value!="" && num1>=0) {
+         if ($('caregart_manartlot').value=='S')
+           var cadena=cadena + $(codubi).value+'_' + $(desubi).value+'_' + $(monact).value +'_' + $(numlot).value +'_' + $(fecela).value +'_' + $(fecven).value + '!';
+         else
     var cadena=cadena + $(codubi).value+'_' + $(desubi).value+'_' + $(monact).value + '!';
     }
     fil++;
@@ -71,14 +80,26 @@ function distribuirExistencia()
 		      var ccodubi=aux3[0];
 		      var cdesubi=aux3[1];
 		      var cnomubi=aux3[2];
+                      if ($('caregart_manartlot').value=='S')
+                      {
+                        var cnumlot=aux3[3];
+                        var cfecela=aux3[4];
+                        var cfecven=aux3[5];
+                      }
 
 		      var codubi="cx"+"_"+z+"_1";
 		      var desubi="cx"+"_"+z+"_2";
 		      var nomubi="cx"+"_"+z+"_3";
+                      var numlot="cx"+"_"+z+"_4";
+                      var fecela="cx"+"_"+z+"_5";
+                      var fecven="cx"+"_"+z+"_6";
 
 		      $(codubi).value=ccodubi;
 		      $(desubi).value=cdesubi;
 		      $(nomubi).value=cnomubi;
+                      $(numlot).value=cnumlot;
+                      $(fecela).value=cfecela;
+                      $(fecven).value=cfecven;
 		      z++;
 		    }
 		  }
@@ -192,6 +213,12 @@ function ajax(e,id)
     {
     if ($(id).value!='')
     {
+
+     if ($('caregart_manartlot').value=='S')
+     {
+         new Ajax.Request(getUrlModuloAjax(), {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json),Verifica_ubinumlote_repetido(id)}, parameters:'ajax=3&cajtexmos='+cajtexmos+'&codalm='+codalm+'&cajtexcom='+id+'&codigo='+cod})
+
+     }else {
      if (!ubicacion_repetida(id))
      {
        new Ajax.Request(getUrlModuloAjax(), {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=3&cajtexmos='+cajtexmos+'&codalm='+codalm+'&cajtexcom='+id+'&codigo='+cod})
@@ -202,6 +229,7 @@ function ajax(e,id)
      }
     }
   }
+ }
  }
 
  function ubicacion_repetida(id)
@@ -233,4 +261,66 @@ function ajax(e,id)
    i++;
    }
    return ubicacionrepetido;
+ }
+
+
+ function Verifica_ubinumlote_repetido(id)
+ {
+   var aux = id.split("_");
+   var name=aux[0];
+   var fila=aux[1];
+   var col=parseInt(aux[2]);
+
+
+   var codubi=name+"_"+fila+"_1";
+   var numlot=name+"_"+fila+"_3";
+
+   var ubicacion=$(codubi).value;
+   var lote=$(numlot).value;
+
+   var repetido=false;
+   var i=0;
+   while (i<50)
+   {
+ 	var filcodubi="cx"+"_"+i+"_1";
+   	if ($(filcodubi).value!="")
+   	{
+            var filnumlot="cx"+"_"+i+"_3";
+
+            var filubicacion=$(filcodubi).value;
+            var fillote=$(filnumlot).value;
+
+	    if (i!=fila)
+	    {
+	      if (ubicacion==filubicacion && lote==fillote)
+	      {
+	        repetido=true;
+	        i=50;
+	        break;
+	      }
+	     }
+    i++;
+    }// if ($(filcodubi).value!="")
+    else
+    {
+     i=50;
+    }
+   }//while
+   if (repetido)
+   {
+      alert_("Este N&uacute;mero de Lote ya ha sido asignado a la Ubicaci&oacute;n: "+ubicacion);
+      var desubi=name+"_"+fila+"_2";
+ 	  var fecela=name+"_"+fila+"_4";
+	  var fecven=name+"_"+fila+"_5";
+      var monact=name+"_"+fila+"_6";
+
+      $(codubi).value="";
+      $(desubi).value="";
+      $(numlot).value="";
+      $(fecela).value="";
+      $(fecven).value="";
+      $(monact).value="0,00";
+      $(codubi).focus();
+   }//  if (repetido)
+
  }

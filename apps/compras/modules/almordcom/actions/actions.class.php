@@ -782,6 +782,14 @@ class almordcomActions extends autoalmordcomActions
         $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
         return sfView::HEADER_ONLY;
       }
+      else  if ($this->getRequestParameter('ajax')=='20')
+      {
+        $this->unidades = array ();
+        $javascript = "";        
+        $this->unidades = CaunialartPeer :: getUnidades($this->getRequestParameter('codigo'));
+        $output = '[["javascript","' . $javascript . '",""]]';
+        $this->getResponse()->setHttpHeader("X-JSON", '(' . $output . ')');
+      }
   }
 
 
@@ -973,6 +981,16 @@ class almordcomActions extends autoalmordcomActions
     $col13->setHTML('type="text" size="10" readonly=true');
     $col13->setEsTotal(true,'caordcom_monord');
 
+    $manunialt=H::getConfApp2('manunialt','compras','almregart');
+    if ($manunialt=='S')
+    {
+    $col14 = new Columna('Unidad Medida');
+    $col14->setTipo(Columna::COMBO);
+    $col14->setEsGrabable(true);
+    $col14->setCombo(CaunialartPeer::getUnidades());
+    $col14->setNombreCampo($campo_col14);
+    $col14->setHTML('');
+    }else {
     $col14 = new Columna('Unidad Medida');
     $col14->setTipo(Columna::TEXTO);
     $col14->setEsGrabable(true);
@@ -980,6 +998,7 @@ class almordcomActions extends autoalmordcomActions
     $col14->setAlineacionContenido(Columna::CENTRO);
     $col14->setNombreCampo($campo_col14);
     $col14->setHTML('type="text" size="10"');
+    }
 
     $col15 = new Columna('Codigo Presupuestario');
     $col15->setEsGrabable(true);
@@ -1162,6 +1181,16 @@ class almordcomActions extends autoalmordcomActions
     $col13->setJScript('onKeypress="entermonto(event,this.id);actualizar_sumatoria_total_cuando_esta_referida();actualizar_grid_dependientes()"');
     $col13->setEsTotal(true,'caordcom_monord');
 
+    $manunialt=H::getConfApp2('manunialt', 'compras', 'almregart');
+    if ($manunialt=='S')
+    {
+    $col14 = new Columna('Unidad Medida');
+    $col14->setTipo(Columna::COMBO);
+    $col14->setEsGrabable(true);
+    $col14->setCombo(CaunialartPeer::getUnidades());
+    $col14->setNombreCampo($campo_col14);
+    $col14->setHTML('');
+    }else {
     $col14 = new Columna('Unidad Medida');
     $col14->setTipo(Columna::TEXTO);
     $col14->setEsGrabable(true);
@@ -1169,6 +1198,7 @@ class almordcomActions extends autoalmordcomActions
     $col14->setAlineacionContenido(Columna::CENTRO);
     $col14->setNombreCampo('Unimed');
     $col14->setHTML('type="text" size="10"');
+    }
 
     $col15 = new Columna('Codigo Presupuestario');
     $col15->setEsGrabable(true);

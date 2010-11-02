@@ -25,7 +25,7 @@ class Articulos
    * @param $grid Array de Objects Almacen.
    * @return void
    */
-    public static function Grabar_Articulo($articulo,$grid)
+    public static function Grabar_Articulo($articulo,$grid,$grid2)
     {
       // si el articulo es nuevo se iguala distot a exitot
       if($articulo->getId()=='')
@@ -66,6 +66,7 @@ class Articulos
       }
       // Se graban los almacenes del articulo
       self::Grabar_ArticulosAlmacen($articulo,$grid);
+      self::Grabar_Unidades_Articulos($articulo,$grid2);
     }
 
      /**
@@ -79,6 +80,7 @@ class Articulos
   public static function Grabar_ArticulosAlmacen($articulo,$grid)
   {
   $codart=$articulo->getCodart();
+  $dateFormat = new sfDateFormat('es_VE');
   $x=$grid[0];
   $j=0;
   while ($j<count($x))
@@ -97,6 +99,7 @@ class Articulos
         CaartalmubiPeer::doDelete($c);
 
           $cadenaubi=split('!',$x[$j]->getUbicacion());
+          $manartlot=H::getConfApp2('manartlot', 'compras', 'almregart');
           $r=0;
           while ($r<(count($cadenaubi)-1))
           {
@@ -110,6 +113,26 @@ class Articulos
               $caartalmubi->setCodalm($x[$j]->getCodalm());
               $caartalmubi->setCodubi($aux2[0]);
               $caartalmubi->setExiact($aux2[2]);
+              if ($manartlot=='S')
+              {
+                  $caartalmubi->setNumlot($aux2[3]);
+                  if ($aux2[4]!="")
+                  {
+                        $fecela_aux=split("/",$aux2[4]);
+                        $fecela = $dateFormat->format($aux2[4], 'i', $dateFormat->getInputPattern('d'));
+                        if (checkdate(intval($fecela_aux[1]),intval($fecela_aux[0]),intval($fecela_aux[2])))
+                         $caartalmubi->setFecela($fecela);
+                  }
+
+                  if ($aux2[5]!="")
+                  {
+                        $fecven_aux=split("/",$aux2[5]);
+                        $fecven = $dateFormat->format($aux2[5], 'i', $dateFormat->getInputPattern('d'));
+                        if (checkdate(intval($fecven_aux[1]),intval($fecven_aux[0]),intval($fecven_aux[2])))
+                         $caartalmubi->setFecven($fecven);
+                  }
+              }
+
               $caartalmubi->save();
             }
             $r++;
@@ -144,8 +167,8 @@ class Articulos
    * @param $grid Array de Objects Almacen.
    * @return void
    */
-    public static function salvarAlmregart($articulo,$grid){
-      self::Grabar_Articulo($articulo,$grid);
+    public static function salvarAlmregart($articulo,$grid,$grid2){
+      self::Grabar_Articulo($articulo,$grid,$grid2);
     }
 
 
@@ -546,6 +569,7 @@ public static function Grabar_DetallesRetenciones($caretser,$grid)
     public static function Actualizar_Articulos($recepcion,$grid,&$msjerr)
     {
 	      $x=$grid[0];
+              $manartlot=H::getConfApp2('manartlot', 'compras', 'almregart');
 		  $j=0;
 		  $msjerr=-1;
 		  while ($j<count($x))
@@ -558,6 +582,8 @@ public static function Grabar_DetallesRetenciones($caretser,$grid)
 		    $cubicacion = $x[$j]->getCodubi();
 		    $cnumjau   = $x[$j]->getNumjau();
 		    $ctammet = $x[$j]->getTammet();
+                    if ($manartlot=='S')
+                        $numlot     = $x[$j]->getNumlot();
 
 		     if (($codarti!="") and ($cantd>0))
 		     {
@@ -565,6 +591,8 @@ public static function Grabar_DetallesRetenciones($caretser,$grid)
 	  	         $c->add(CaartalmubiPeer::CODART,$codarti);
 	  	         $c->add(CaartalmubiPeer::CODALM,$calmacen);
 	  	         $c->add(CaartalmubiPeer::CODUBI,$cubicacion);
+                         if ($manartlot=='S')
+                             $c->add(CaartalmubiPeer::NUMLOT,$numlot);
 	             $alm = CaartalmubiPeer::doSelectOne($c);
 	              if ($alm)
 	              {
@@ -582,6 +610,8 @@ public static function Grabar_DetallesRetenciones($caretser,$grid)
 			       	  $caartalmubi->setCodalm($calmacen);
 			       	  $caartalmubi->setCodubi($cubicacion);
 			       	  $caartalmubi->setExiact($cantd);
+                                  if ($manartlot=='S')
+                                      $caartalmubi->setNumlot($numlot);
 			       	  $caartalmubi->save();
 		     		}
 		     		 $c = new Criteria();
@@ -623,7 +653,7 @@ public static function Grabar_DetallesRetenciones($caretser,$grid)
 
   public static function Devolver_Articulos($recepcion)
     {
-
+       $manartlot=H::getConfApp2('manartlot', 'compras', 'almregart');
 	      $c = new Criteria();
           $c->add(CadetentPeer::RCPART,$recepcion->getRcpart());
           $detalle = CadetentPeer::doSelect($c);
@@ -636,12 +666,16 @@ public static function Grabar_DetallesRetenciones($caretser,$grid)
         $costo=$arreglo->getCosart();
         $calmacen=$arreglo->getCodalm();
         $cubicacion=$arreglo->getCodubi();
+        if ($manartlot=='S')
+            $numlot=$arreglo->getNumlot();
         if (($codarti!="") and ($cantd>0))
         {
             $c = new Criteria();
               $c->add(CaartalmubiPeer::CODART,$codarti);
               $c->add(CaartalmubiPeer::CODALM,$calmacen);
               $c->add(CaartalmubiPeer::CODUBI,$cubicacion);
+              if ($manartlot=='S')
+                  $c->add(CaartalmubiPeer::NUMLOT,$numlot);
               $alm = CaartalmubiPeer::doSelectOne($c);
                 if ($alm)
                 {
@@ -860,6 +894,20 @@ public static function Grabar_DetallesRetenciones($caretser,$grid)
 
      }//if (Herramientas::getVerCorrelativo('almcorre','cadefart',&$r))
 
+     $manartlot=H::getConfApp2('manartlot', 'compras', 'almregart');
+     if ($manartlot=='S')
+     {
+        $x=$grid[0];
+        $i=0;
+        $grid_arreglo=array();
+        while ($i<count($x))
+        {
+         $grid_arreglo[$i]['codart'] = $x[$i]->getCodart();
+         $grid_arreglo[$i]['canart'] = $x[$i]->getCanart();
+         $grid_arreglo[$i]['numlot'] = $x[$i]->getNumlot();
+         $i++;
+        }
+     }
 
     if (self::Actualizar_Artículos($catraalm,'D','Salvar',$grid_arreglo,&$error,&$articulo))
     {
@@ -884,6 +932,8 @@ public static function Grabar_DetallesRetenciones($caretser,$grid)
                     $cadettra_new->setCodtra($catraalm->getCodtra());
                     $cadettra_new->setCodart($grid_arreglo[$i]['codart']);
                     $cadettra_new->setCanart($grid_arreglo[$i]['canart']);
+                    if ($manartlot=='S')
+                        $cadettra_new->setNumlot($grid_arreglo[$i]['numlot']);
                     $cadettra_new->save();
             }
             $i++;
@@ -936,6 +986,7 @@ public static function Grabar_DetallesRetenciones($caretser,$grid)
       }
     }
     $i=0;
+    $manartlot=H::getConfApp2('manartlot', 'compras', 'almregart');
     while ($i<count($grid_arreglo))
     {
         if ($grid_arreglo[$i]['codart']!='')
@@ -944,6 +995,8 @@ public static function Grabar_DetallesRetenciones($caretser,$grid)
           $c->add(CaartalmubiPeer::CODALM,$almacen);
           $c->add(CaartalmubiPeer::CODUBI,$ubicacion);
           $c->add(CaartalmubiPeer::CODART,$grid_arreglo[$i]['codart']);
+          if ($manartlot=='S')
+              $c->add(CaartalmubiPeer::NUMLOT,$grid_arreglo[$i]['numlot']);
           $caartalm_up = CaartalmubiPeer::doSelectOne($c);
           if ($caartalm_up)
           {
@@ -976,6 +1029,8 @@ public static function Grabar_DetallesRetenciones($caretser,$grid)
               $c->add(CaartalmubiPeer::CODALM,$otralmacen);
               $c->add(CaartalmubiPeer::CODUBI,$otrubicacion);
               $c->add(CaartalmubiPeer::CODART,$grid_arreglo[$i]['codart']);
+              if ($manartlot=='S')
+                  $c->add(CaartalmubiPeer::NUMLOT,$grid_arreglo[$i]['numlot']);
               $caartalm = CaartalmubiPeer::doSelectOne($c);
               if ($caartalm)
               {
@@ -984,6 +1039,8 @@ public static function Grabar_DetallesRetenciones($caretser,$grid)
                     $caartalm_new->setCodart($grid_arreglo[$i]['codart']);
                     $caartalm_new->setCodubi($ubicacion);
                     $caartalm_new->setExiact($grid_arreglo[$i]['canart']);
+                    if ($manartlot=='S')
+                       $caartalm_new->setNumlot($grid_arreglo[$i]['numlot']);
                     $caartalm_new->save();
                   }
             }//if ($bandera=='S')
@@ -1049,6 +1106,7 @@ public static function Grabar_DetallesRetenciones($caretser,$grid)
   public static function eliminar_Transferencia($catraalm,&$error)
   {
         $error=-1;
+        $manartlot=H::getConfApp2('manartlot', 'compras', 'almregart');
         $grid_arreglo=array();
         $c = new Criteria();
         $c->add(CadettraPeer::CODTRA,$catraalm->getCodtra());
@@ -1059,6 +1117,8 @@ public static function Grabar_DetallesRetenciones($caretser,$grid)
       {
         $grid_arreglo[$i]['codart'] = $arreglo->getCodart();
         $grid_arreglo[$i]['canart'] = $arreglo->getCanart();
+        if ($manartlot=='S')
+            $grid_arreglo[$i]['numlot'] = $arreglo->getNumlot();
         $i++;
       }
 
@@ -1318,6 +1378,32 @@ public static function Grabar_DetallesRetenciones($caretser,$grid)
     }
 
 	return -1;
+  }
+
+  public static function Grabar_Unidades_Articulos($caregart,$grid2)
+  {
+    $codart=$caregart->getCodart();
+    $x=$grid2[0];
+    $j=0;
+    while ($j<count($x))
+     {
+      if ($x[$j]->getUnialt()!="" && $x[$j]->getRelart()!="")
+      {
+          $x[$j]->setCodart($codart);
+          $x[$j]->save();
+      }
+      $j++;
+    }
+    $z=$grid2[1];
+    $j=0;
+    if (!empty($z[$j]))
+    {
+      while ($j<count($z))
+       {
+        $z[$j]->delete();
+        $j++;
+      }
+    }
   }
 
 
