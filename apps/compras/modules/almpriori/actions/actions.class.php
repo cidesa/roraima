@@ -94,7 +94,13 @@ class almprioriActions extends autoalmprioriActions
     $resul= CadetcotPeer::doSelect($c);
     if ($resul)
     {
-    	$this->elimina='S';
+        $t= new Criteria();
+        $t->add(CaordcomPeer::REFSOL,$this->casolart->getReqart());
+        $reg=CaordcomPeer::doSelectOne($t);
+        if ($reg)
+        {
+          $this->elimina='N';
+        }else { $this->elimina='S'; }
     }else $this->elimina='N';
 
 
@@ -182,7 +188,13 @@ $this->Bitacora('Guardo');
     $resul= CadetcotPeer::doSelect($c);
     if ($resul)
     {
-    	$this->elimina='S';
+    	$t= new Criteria();
+        $t->add(CaordcomPeer::REFSOL,$this->casolart->getReqart());
+        $reg=CaordcomPeer::doSelectOne($t);
+        if ($reg)
+        {
+          $this->elimina='N';
+        }else { $this->elimina='S'; }
     }else $this->elimina='N';
     /*$sql="select codart as codart from caartsol where reqart='".$this->casolart->getReqart()."' group by codart";
     if (Herramientas::BuscarDatos($sql,&$result))
