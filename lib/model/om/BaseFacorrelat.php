@@ -45,6 +45,10 @@ abstract class BaseFacorrelat extends BaseObject  implements Persistent {
 
 
 
+	protected $corfaccont;
+
+
+	
 	protected $id;
 
 
@@ -125,6 +129,14 @@ abstract class BaseFacorrelat extends BaseObject  implements Persistent {
 
   }
 
+  public function getCorfaccont($val=false)
+  {
+
+    if($val) return number_format($this->corfaccont,2,',','.');
+    else return $this->corfaccont;
+
+  }
+  
   public function getId()
   {
 
@@ -222,6 +234,16 @@ abstract class BaseFacorrelat extends BaseObject  implements Persistent {
 
 	}
 
+	public function setCorfaccont($v)
+	{
+
+    if ($this->corfaccont !== $v) {
+        $this->corfaccont = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FacorrelatPeer::CORFACCONT;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -254,7 +276,9 @@ abstract class BaseFacorrelat extends BaseObject  implements Persistent {
 
       $this->proform = $rs->getString($startcol + 8);
 
-      $this->id = $rs->getInt($startcol + 9);
+      $this->corfaccont = $rs->getFloat($startcol + 9);
+
+      $this->id = $rs->getInt($startcol + 10);
 
       $this->resetModified();
 
@@ -262,7 +286,7 @@ abstract class BaseFacorrelat extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 10;
+            return $startcol + 11; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Facorrelat object", $e);
     }
@@ -437,6 +461,9 @@ abstract class BaseFacorrelat extends BaseObject  implements Persistent {
 				return $this->getProform();
 				break;
 			case 9:
+				return $this->getCorfaccont();
+				break;
+			case 10:
 				return $this->getId();
 				break;
 			default:
@@ -458,7 +485,8 @@ abstract class BaseFacorrelat extends BaseObject  implements Persistent {
 			$keys[6] => $this->getCoraju(),
 			$keys[7] => $this->getCodpro(),
 			$keys[8] => $this->getProform(),
-			$keys[9] => $this->getId(),
+			$keys[9] => $this->getCorfaccont(),
+			$keys[10] => $this->getId(),
 		);
 		return $result;
 	}
@@ -502,6 +530,9 @@ abstract class BaseFacorrelat extends BaseObject  implements Persistent {
 				$this->setProform($value);
 				break;
 			case 9:
+				$this->setCorfaccont($value);
+				break;
+			case 10:
 				$this->setId($value);
 				break;
 		} 	}
@@ -520,7 +551,8 @@ abstract class BaseFacorrelat extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[6], $arr)) $this->setCoraju($arr[$keys[6]]);
 		if (array_key_exists($keys[7], $arr)) $this->setCodpro($arr[$keys[7]]);
 		if (array_key_exists($keys[8], $arr)) $this->setProform($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setId($arr[$keys[9]]);
+		if (array_key_exists($keys[9], $arr)) $this->setCorfaccont($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setId($arr[$keys[10]]);
 	}
 
 
@@ -537,6 +569,7 @@ abstract class BaseFacorrelat extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(FacorrelatPeer::CORAJU)) $criteria->add(FacorrelatPeer::CORAJU, $this->coraju);
 		if ($this->isColumnModified(FacorrelatPeer::CODPRO)) $criteria->add(FacorrelatPeer::CODPRO, $this->codpro);
 		if ($this->isColumnModified(FacorrelatPeer::PROFORM)) $criteria->add(FacorrelatPeer::PROFORM, $this->proform);
+		if ($this->isColumnModified(FacorrelatPeer::CORFACCONT)) $criteria->add(FacorrelatPeer::CORFACCONT, $this->corfaccont);
 		if ($this->isColumnModified(FacorrelatPeer::ID)) $criteria->add(FacorrelatPeer::ID, $this->id);
 
 		return $criteria;
@@ -585,6 +618,8 @@ abstract class BaseFacorrelat extends BaseObject  implements Persistent {
 		$copyObj->setCodpro($this->codpro);
 
 		$copyObj->setProform($this->proform);
+
+		$copyObj->setCorfaccont($this->corfaccont);
 
 
 		$copyObj->setNew(true);

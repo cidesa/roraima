@@ -125,6 +125,10 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
 
 
 	
+	protected $tipreg;
+
+
+	
 	protected $id;
 
 	
@@ -356,6 +360,13 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
   {
 
     return trim($this->codartsnc);
+
+  }
+  
+  public function getTipreg()
+  {
+
+    return trim($this->tipreg);
 
   }
   
@@ -668,6 +679,16 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setTipreg($v)
+	{
+
+    if ($this->tipreg !== $v) {
+        $this->tipreg = $v;
+        $this->modifiedColumns[] = CaregartPeer::TIPREG;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -740,7 +761,9 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
 
       $this->codartsnc = $rs->getString($startcol + 28);
 
-      $this->id = $rs->getInt($startcol + 29);
+      $this->tipreg = $rs->getString($startcol + 29);
+
+      $this->id = $rs->getInt($startcol + 30);
 
       $this->resetModified();
 
@@ -748,7 +771,7 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 30; 
+            return $startcol + 31; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Caregart object", $e);
     }
@@ -983,6 +1006,9 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
 				return $this->getCodartsnc();
 				break;
 			case 29:
+				return $this->getTipreg();
+				break;
+			case 30:
 				return $this->getId();
 				break;
 			default:
@@ -1024,7 +1050,8 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
 			$keys[26] => $this->getCoding(),
 			$keys[27] => $this->getMercon(),
 			$keys[28] => $this->getCodartsnc(),
-			$keys[29] => $this->getId(),
+			$keys[29] => $this->getTipreg(),
+			$keys[30] => $this->getId(),
 		);
 		return $result;
 	}
@@ -1128,6 +1155,9 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
 				$this->setCodartsnc($value);
 				break;
 			case 29:
+				$this->setTipreg($value);
+				break;
+			case 30:
 				$this->setId($value);
 				break;
 		} 	}
@@ -1166,7 +1196,8 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[26], $arr)) $this->setCoding($arr[$keys[26]]);
 		if (array_key_exists($keys[27], $arr)) $this->setMercon($arr[$keys[27]]);
 		if (array_key_exists($keys[28], $arr)) $this->setCodartsnc($arr[$keys[28]]);
-		if (array_key_exists($keys[29], $arr)) $this->setId($arr[$keys[29]]);
+		if (array_key_exists($keys[29], $arr)) $this->setTipreg($arr[$keys[29]]);
+		if (array_key_exists($keys[30], $arr)) $this->setId($arr[$keys[30]]);
 	}
 
 	
@@ -1203,6 +1234,7 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CaregartPeer::CODING)) $criteria->add(CaregartPeer::CODING, $this->coding);
 		if ($this->isColumnModified(CaregartPeer::MERCON)) $criteria->add(CaregartPeer::MERCON, $this->mercon);
 		if ($this->isColumnModified(CaregartPeer::CODARTSNC)) $criteria->add(CaregartPeer::CODARTSNC, $this->codartsnc);
+		if ($this->isColumnModified(CaregartPeer::TIPREG)) $criteria->add(CaregartPeer::TIPREG, $this->tipreg);
 		if ($this->isColumnModified(CaregartPeer::ID)) $criteria->add(CaregartPeer::ID, $this->id);
 
 		return $criteria;
@@ -1291,6 +1323,8 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
 		$copyObj->setMercon($this->mercon);
 
 		$copyObj->setCodartsnc($this->codartsnc);
+
+		$copyObj->setTipreg($this->tipreg);
 
 
 		$copyObj->setNew(true);

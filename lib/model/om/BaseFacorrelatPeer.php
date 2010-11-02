@@ -13,7 +13,7 @@ abstract class BaseFacorrelatPeer {
 	const CLASS_DEFAULT = 'lib.model.Facorrelat';
 
 	
-	const NUM_COLUMNS = 10;
+	const NUM_COLUMNS = 11;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -47,6 +47,9 @@ abstract class BaseFacorrelatPeer {
 	const PROFORM = 'facorrelat.PROFORM';
 
 	
+	const CORFACCONT = 'facorrelat.CORFACCONT';
+
+	
 	const ID = 'facorrelat.ID';
 
 	
@@ -55,18 +58,18 @@ abstract class BaseFacorrelatPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Corpre', 'Corped', 'Corfac', 'Cornot', 'Cordph', 'Cordev', 'Coraju', 'Codpro', 'Proform', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (FacorrelatPeer::CORPRE, FacorrelatPeer::CORPED, FacorrelatPeer::CORFAC, FacorrelatPeer::CORNOT, FacorrelatPeer::CORDPH, FacorrelatPeer::CORDEV, FacorrelatPeer::CORAJU, FacorrelatPeer::CODPRO, FacorrelatPeer::PROFORM, FacorrelatPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('corpre', 'corped', 'corfac', 'cornot', 'cordph', 'cordev', 'coraju', 'codpro', 'proform', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
+		BasePeer::TYPE_PHPNAME => array ('Corpre', 'Corped', 'Corfac', 'Cornot', 'Cordph', 'Cordev', 'Coraju', 'Codpro', 'Proform', 'Corfaccont', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (FacorrelatPeer::CORPRE, FacorrelatPeer::CORPED, FacorrelatPeer::CORFAC, FacorrelatPeer::CORNOT, FacorrelatPeer::CORDPH, FacorrelatPeer::CORDEV, FacorrelatPeer::CORAJU, FacorrelatPeer::CODPRO, FacorrelatPeer::PROFORM, FacorrelatPeer::CORFACCONT, FacorrelatPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('corpre', 'corped', 'corfac', 'cornot', 'cordph', 'cordev', 'coraju', 'codpro', 'proform', 'corfaccont', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Corpre' => 0, 'Corped' => 1, 'Corfac' => 2, 'Cornot' => 3, 'Cordph' => 4, 'Cordev' => 5, 'Coraju' => 6, 'Codpro' => 7, 'Proform' => 8, 'Id' => 9, ),
-		BasePeer::TYPE_COLNAME => array (FacorrelatPeer::CORPRE => 0, FacorrelatPeer::CORPED => 1, FacorrelatPeer::CORFAC => 2, FacorrelatPeer::CORNOT => 3, FacorrelatPeer::CORDPH => 4, FacorrelatPeer::CORDEV => 5, FacorrelatPeer::CORAJU => 6, FacorrelatPeer::CODPRO => 7, FacorrelatPeer::PROFORM => 8, FacorrelatPeer::ID => 9, ),
-		BasePeer::TYPE_FIELDNAME => array ('corpre' => 0, 'corped' => 1, 'corfac' => 2, 'cornot' => 3, 'cordph' => 4, 'cordev' => 5, 'coraju' => 6, 'codpro' => 7, 'proform' => 8, 'id' => 9, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
+		BasePeer::TYPE_PHPNAME => array ('Corpre' => 0, 'Corped' => 1, 'Corfac' => 2, 'Cornot' => 3, 'Cordph' => 4, 'Cordev' => 5, 'Coraju' => 6, 'Codpro' => 7, 'Proform' => 8, 'Corfaccont' => 9, 'Id' => 10, ),
+		BasePeer::TYPE_COLNAME => array (FacorrelatPeer::CORPRE => 0, FacorrelatPeer::CORPED => 1, FacorrelatPeer::CORFAC => 2, FacorrelatPeer::CORNOT => 3, FacorrelatPeer::CORDPH => 4, FacorrelatPeer::CORDEV => 5, FacorrelatPeer::CORAJU => 6, FacorrelatPeer::CODPRO => 7, FacorrelatPeer::PROFORM => 8, FacorrelatPeer::CORFACCONT => 9, FacorrelatPeer::ID => 10, ),
+		BasePeer::TYPE_FIELDNAME => array ('corpre' => 0, 'corped' => 1, 'corfac' => 2, 'cornot' => 3, 'cordph' => 4, 'cordev' => 5, 'coraju' => 6, 'codpro' => 7, 'proform' => 8, 'corfaccont' => 9, 'id' => 10, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
 	);
 
 	
@@ -137,6 +140,8 @@ abstract class BaseFacorrelatPeer {
 		$criteria->addSelectColumn(FacorrelatPeer::CODPRO);
 
 		$criteria->addSelectColumn(FacorrelatPeer::PROFORM);
+
+		$criteria->addSelectColumn(FacorrelatPeer::CORFACCONT);
 
 		$criteria->addSelectColumn(FacorrelatPeer::ID);
 

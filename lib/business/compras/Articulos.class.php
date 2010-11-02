@@ -28,7 +28,14 @@ class Articulos
     public static function Grabar_Articulo($articulo,$grid)
     {
       // si el articulo es nuevo se iguala distot a exitot
-      if($articulo->getId()=='') $articulo->setDistot($articulo->getExitot());
+      if($articulo->getId()=='')
+      {
+       $articulo->setDistot($articulo->getExitot());
+       $modulo=sfContext::getInstance()->getUser()->getAttribute('menu','','autenticacion');
+       if ($modulo=='facturacion')
+         $articulo->setTipreg('F'); // para identificar si el articulo se registro por facturacion
+      }
+
       //Se graba el Artículo      
       if ($articulo->getGencorart()!="S")
       { $articulo->save();

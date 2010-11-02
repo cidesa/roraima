@@ -3448,6 +3448,88 @@
         actualizarRecargos();
         recalcularRecargos();
         montoTotal();
+	   
+   }// if (distrib!="")
+   else
+   {
+    alert_("No han sido aplicados Recargos al primer Art&iacute;culo del Detalle, C&oacute;digo: "+ valorarticulo+". Deben ser definidos estos Recargos para poder replicarlos al resto de los Art&iacute;culo del Detalle de la Factura ")
+   }
+  }
+  }
+
+  function desmarcarTodo()
+  {
+     $('fafactur_desrec').checked=false;
+     var fil=1;
+     var facart=totalregistros2('ax',3,25);
+     var colum=determinarReferenciaDoc($('fafactur_tipref').value);
+     while (fil<facart)
+     {
+      var codart="ax"+"_"+fil+"_3";
+      if ($(codart).value!="")
+      {
+       var id="ax"+"_"+fil+"_1";
+       var precio="ax_"+fil+"_10";
+       var precioe="ax_"+fil+"_11";
+       var cant="ax_"+fil+"_"+colum;
+       var dest="ax"+"_"+fil+"_18";
+       var recargo="ax_"+fil+"_12";
+       var total="ax"+"_"+fil+"_13";
+
+         if ($(precio)){
+	     if ($(precio).value!="") {var col9=toFloat(precio);}else {var col9=toFloat(precioe);}
+         }
+         var colcant=toFloat(cant);
+
+         var monuni= colcant * col9;
+	 var mondto=toFloat(dest);
+
+	 var monrgotot=0;
+
+         $(recargo).value=format(monrgotot.toFixed(2),'.',',','.');
+         montottot=monuni-mondto;
+	 $(total).value=format(montottot.toFixed(2),'.',',','.');
+	 $(id).checked=false;
+
+      }//if ($(codart).value!="")
+      else
+      {
+       fil=facart;
+      }
+      fil++;
+    }//while (fil<facart)
+    montoTotal();
+
+  }
+  
+
+ function marcarTodo()
+  {
+   $('fafactur_marrec').checked=false;
+   var infrecargos="ax"+"_0_12";
+   var distrib=toFloat(infrecargos);
+   var articulo="ax"+"_0_3";
+   var valorarticulo=$(articulo).value;
+   if (valorarticulo!="")
+   {
+    if (distrib>0)
+    {
+        var fil=0;
+        var facart=totalregistros2('ax',3,25);
+        while (fil<facart)
+        {
+	     var codart="ax_"+fil+"_3";
+             var check="ax_"+fil+"_1";
+
+             if ($(codart).value!="")
+             {
+               $(check).checked=true;
+	     }
+	   fil++;
+	}
+        actualizarRecargos();
+        recalcularRecargos();
+        montoTotal();
 
    }// if (distrib!="")
    else
