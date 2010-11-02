@@ -396,6 +396,21 @@ if ($facorrelat->getAsiparrec()=='P')  {
 </div>
 </div>
 <br/>
+<div id="divcorfaccont">
+  <?php echo label_for('facorrelat[corfaccont]', __($labels['facorrelat{corfaccont}' ]), 'class="required" Style="text-align:left; width:150px"') ?>
+  <div class="content<?php if ($sf_request->hasError('facorrelat{corfaccont}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('facorrelat{corfaccont}')): ?>
+    <?php echo form_error('facorrelat{corfaccont}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($facorrelat, 'getCorfaccont', array (
+  'size' => 7,
+  'maxlength' => 10,
+  'control_name' => 'facorrelat[corfaccont]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+</div>
+<br/>
 </div>
 </fieldset>
 

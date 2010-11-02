@@ -92,6 +92,8 @@ class CaregartMapBuilder {
 
 		$tMap->addColumn('CODARTSNC', 'Codartsnc', 'string', CreoleTypes::VARCHAR, false, 20);
 
+		$tMap->addColumn('TIPREG', 'Tipreg', 'string', CreoleTypes::VARCHAR, false, 1);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

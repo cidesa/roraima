@@ -52,6 +52,8 @@ class FacorrelatMapBuilder {
 
 		$tMap->addColumn('PROFORM', 'Proform', 'string', CreoleTypes::VARCHAR, false, 1);
 
+		$tMap->addColumn('CORFACCONT', 'Corfaccont', 'double', CreoleTypes::NUMERIC, true, 10);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

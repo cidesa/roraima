@@ -1808,26 +1808,28 @@ class CatalogoWeb extends BaseCatalogoWeb {
   }
 
   public function Caregart_Almsolegr($params = array ()) {
-    $tipo="";
-    $longitud = $params[0];
-    if ($params[1]!="") $tipo=$params[1];
-      if ($tipo=="C") $tipo="A";
-    $this->c = new Criteria();
-    if ($tipo!="" and $tipo!='M') $this->c->add(CaregartPeer::TIPO, $tipo);
-    $this->sql = "length(Codart) = '" . $longitud . "'";
-    $this->c->add(CaregartPeer :: CODART, $this->sql, Criteria :: CUSTOM);
+		$tipo = "";
+		$longitud = $params[0];
+		if ($params[1] != "")
+			$tipo = $params[1];
+		if ($tipo == "C")
+			$tipo = "A";
+		$this->c = new Criteria();
+		if ($tipo != "" and $tipo != 'M')
+			$this->c->add(CaregartPeer :: TIPO, $tipo);
+		$this->sql = "length(Codart) = '" . $longitud . "' and (tipreg is null)";
+		$this->c->add(CaregartPeer :: CODART, $this->sql, Criteria :: CUSTOM);
 
+		$this->columnas = array (
+			CaregartPeer :: CODART => 'Código',
+			CaregartPeer :: DESART => 'Descripción',
+			CaregartPeer :: UNIMED => 'Unidad de Medida',
+			CaregartPeer :: COSULT => 'Costo',
+			CaregartPeer :: EXITOT => 'Existencia',
+			CaregartPeer :: CODPAR => 'Codigo Partida'
+		);
 
-    $this->columnas = array (
-      CaregartPeer :: CODART => 'Código',
-      CaregartPeer :: DESART => 'Descripción',
-      CaregartPeer :: UNIMED => 'Unidad de Medida',
-      CaregartPeer :: COSULT => 'Costo',
-      CaregartPeer :: EXITOT => 'Existencia',
-      CaregartPeer :: CODPAR => 'Codigo Partida'
-    );
-
-  }
+	}
 
   ////////////////////////////////////////////////NOMCALCON////////////////////////////////////////
 
@@ -4606,16 +4608,20 @@ public function Tsmovlib_tesmovdeglib2()
     );
   }
 
-  public function Caregart_Fapedido($params=array())
-  {
-    $longitud=$params[0];
-    $this->c= new Criteria();
-    $this->sql = "length(Codart) = '".$longitud."'";
-    $this->c->add(CaregartPeer::CODART, $this->sql, Criteria::CUSTOM);
+  public function Caregart_Fapedido($params = array ()) {
+		$longitud = $params[0];
+		$this->c = new Criteria();
+		$this->sql = "length(Codart) = '" . $longitud . "' and tipreg='F'";
+		$this->c->add(CaregartPeer :: CODART, $this->sql, Criteria :: CUSTOM);
 
-    $this->columnas = array (CaregartPeer::CODART => 'Código', CaregartPeer::DESART => 'Descripción', CaregartPeer::COSULT => 'Costo', CaregartPeer::CODPAR => 'Partida');
+		$this->columnas = array (
+			CaregartPeer :: CODART => 'Código',
+			CaregartPeer :: DESART => 'Descripción',
+			CaregartPeer :: COSULT => 'Costo',
+			CaregartPeer :: CODPAR => 'Partida'
+		);
 
-  }
+	}
 
   public function Fadefcom_Fapedido()
   {
