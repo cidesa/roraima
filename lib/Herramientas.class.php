@@ -2638,6 +2638,26 @@ public static function obtenerDiaMesOAno($fecha,$formato,$dmoa)
     else return '#';
   }
 
+   public static function getConfApp2($var,$aplicacion='',$modulo='')
+   {
+     $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+     if ($varemp && is_array($varemp)){
+        if(array_key_exists('aplicacion',$varemp))
+         if(is_array($varemp['aplicacion']))
+         if(array_key_exists($aplicacion,$varemp['aplicacion']))
+           if(is_array($varemp['aplicacion'][$aplicacion]))
+           if(array_key_exists('modulos',$varemp['aplicacion'][$aplicacion]))
+             if(is_array($varemp['aplicacion'][$aplicacion]['modulos']))
+             if(array_key_exists($modulo,$varemp['aplicacion'][$aplicacion]['modulos']))
+               if(is_array($varemp['aplicacion'][$aplicacion]['modulos'][$modulo]))
+               if(array_key_exists($var,$varemp['aplicacion'][$aplicacion]['modulos'][$modulo]))
+               {
+                 return $varemp['aplicacion'][$aplicacion]['modulos'][$modulo][$var];
+               }
+      }else return false;
+      return false;
+   }
+
 }
 
 class H extends Herramientas
