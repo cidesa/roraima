@@ -264,8 +264,12 @@ $this->Bitacora('Guardo');
      $cajtexcom=$this->getRequestParameter('cajtexcom');
 	  if ($this->getRequestParameter('ajax')=='1')
 	    {
+              $dato=""; $js="";
+              $longitud = strlen(Herramientas::getObtener_FormatoPartida_Formulacion());
+              if ($longitud==strlen($this->getRequestParameter('codigo')))
 			$dato=FordefparingPeer::getDesparing($this->getRequestParameter('codigo'));
-            $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
+              else  $js="alert('La Partida de Ingreso no es de Ultimo Nivel'); $('forparing_codparing').value=''; $('forparing_codparing').focus();";
+            $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$js.'",""]]';
 	    }
 	    else  if ($this->getRequestParameter('ajax')=='2')
 	    {

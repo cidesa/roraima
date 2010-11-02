@@ -175,6 +175,7 @@ class formetotrcreActions extends autoformetotrcreActions
           {
             if (strlen($codigo)==strlen(H::getObtener_FormatoPartida_Formulacion())){
              $dato=$result->getNomparegr();
+             $javascript="validarpartidarepetida('".$cajtexcom."')";
             }else {
                 $javascript="alert('La Partida no es de Ultimo Nivel'); $('$cajtexcom').value=''; $('$cajtexcom').focus(); ";
             }
@@ -304,6 +305,19 @@ class formetotrcreActions extends autoformetotrcreActions
           $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
 
           break;
+      case '10':
+         $u= new Criteria();
+         $u->add(FordefactPeer::CODACT,$codigo);
+         $result= FordefactPeer::doSelectOne($u);
+         if ($result)
+         {
+             $dato=$result->getDesact();
+         }else $javascript="alert_('La Meta no Existe'); $('$cajtexcom').value=''; $('$cajtexcom').focus();";
+
+        $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""],["","",""]]';
+        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+         return sfView::HEADER_ONLY;
+        break;
       default:
         $output = '[["","",""],["","",""],["","",""]]';
         $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');

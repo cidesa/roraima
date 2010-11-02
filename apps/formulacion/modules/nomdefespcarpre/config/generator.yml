@@ -13,6 +13,7 @@ generator:
           clase: Fordefcatpre
           ajax: 1
           parametros: getprincipal="getCodcat" getsecundario="getNomcat" campoprincipal="codcat" camposecundario="nomcat" campobase = "id"
+          catalogoparams: param1/'."'+$('npcarpre_longitud').value+'".'
       codcar:
         name: Cargo
         params: size=20  maxlength=5  onFocus=readonly(this.id) onBlur="this.value=this.value.pad(5, '0',0);"
@@ -60,6 +61,7 @@ generator:
         #Cargos Asignados:      [_canasig ]
         #Cargos Vacantes:       [_canvaca ]
         #Montos de los Cargos:  [_montos ]
+      hide:             [longitud]
       actions:
         _list:        ~
         _save:        ~

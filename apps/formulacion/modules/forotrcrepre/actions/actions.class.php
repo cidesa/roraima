@@ -164,6 +164,7 @@ class forotrcrepreActions extends autoforotrcrepreActions
           {
             if (strlen($codigo)==strlen(H::getObtener_FormatoPartida_Formulacion())){
              $dato=$result->getNomparegr();
+             $javascript="validarpartidarepetida('".$cajtexcom."')";
             }else {
                 $javascript="alert('La Partida no es de Ultimo Nivel'); $('$cajtexcom').value=''; $('$cajtexcom').focus(); ";
             }

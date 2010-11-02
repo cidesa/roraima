@@ -12,7 +12,7 @@
 <?php
   $hay=Formulacion::movimientos();
 echo select_tag('foringdefniv[numper]', options_for_select(Constantes::ListaNumPeriodos(),$foringdefniv->getNumper()),array(
-   'onchange' => "javascript: cargargridper()",
-   'disabled' => $hay == 1 ? true : false ,
+   'onchange' => $hay == 1 ? "" : "javascript: cargargridper()" ,
+   //'disabled' => $hay == 1 ? true : false ,
 )); ?>
 

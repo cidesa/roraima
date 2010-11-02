@@ -265,6 +265,19 @@ class forestcosActions extends autoforestcosActions
           $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
           return sfView::HEADER_ONLY;
           break;
+      case '8':
+         $u= new Criteria();
+         $u->add(FordefactPeer::CODACT,$codigo);
+         $result= FordefactPeer::doSelectOne($u);
+         if ($result)
+         {
+             $dato=$result->getDesact();
+         }else $javascript="alert_('La Meta no Existe'); $('$cajtexcom').value=''; $('$cajtexcom').focus();";
+
+        $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""],["","",""]]';
+        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+         return sfView::HEADER_ONLY;
+        break;
       default:
         $output = '[["","",""],["","",""],["","",""]]';
         break;

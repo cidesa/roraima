@@ -17,6 +17,7 @@ class Npcarpre extends BaseNpcarpre
 {
     protected $dispo='0,00';
     protected $objasig=array();
+    protected $longitud="";
 
     public function getNomcat()
     {
@@ -30,4 +31,14 @@ class Npcarpre extends BaseNpcarpre
     {
         return H::FormatoMonto($this->monpre-$this->monasi);
     }
+
+   public function getLongitud()
+   {
+     return strlen(H::getObtener_FormatoCategoria_Formulacion());
+   }
+
+   public function setLongitud()
+   {
+     return $this->longitud;
+   }
 }

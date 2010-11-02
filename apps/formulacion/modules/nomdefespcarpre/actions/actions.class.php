@@ -142,8 +142,14 @@ class nomdefespcarpreActions extends autonomdefespcarpreActions
             $js.= "alert('El Codigo de Categoria No Existe');
                    $('npcarpre_codcat').value='';
                    $('npcarpre_codcat').focus();";
-        else        
-            $dato = H::getX_vacio('Codcat','Fordefcatpre','Nomcat',$codcat);
+        else {
+            if (strlen(H::getObtener_FormatoCategoria_Formulacion())==strlen($codigo))
+                $dato = H::getX_vacio('Codcat','Fordefcatpre','Nomcat',$codcat);
+            else
+              $js.= "alert('El Codigo de Categoria No es de Ultimo Nivel');
+                   $('npcarpre_codcat').value='';
+                   $('npcarpre_codcat').focus();";
+        }
 
         $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$js.'",""],["","",""]]';
         break;
