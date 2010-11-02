@@ -2164,11 +2164,11 @@ public static function cargarPeriodosMet($codmet,$codpro,$cadena,&$acum)
     {
         while ($j<count($z))
         {
-          $y= new Criteria();
+          /*$y= new Criteria();
           $y->add(ForasometobjPeer::CODOBJ,$clasemodelo->getCodobj());
           $y->add(ForasometobjPeer::CODMET,$z[$j]->getCodmet());
-          ForasometobjPeer::doDelete($y);
-            //$z[$j]->delete();
+          ForasometobjPeer::doDelete($y);*/
+          $z[$j]->delete();
           $j++;
         }
     }
@@ -3655,6 +3655,8 @@ public static function grabarOtrosCreditosPresupuestarios($clasemodelo,$gridpar)
            {
                 $x[$j]->setCodmet($clasemodelo->getCodmet());
                 $x[$j]->setCodpro($clasemodelo->getCodpro());
+                $x[$j]->setCodact($x[$j]->getCodact());
+                $x[$j]->setCodparegr($x[$j]->getCodparegr());
                 if ($x[$j]->getCadenaper()!='')
                {
                   $f= new Criteria();

@@ -144,6 +144,13 @@ class prenivpreingActions extends autoprenivpreingActions
   {
     $this->coderr =-1;
     if($this->getRequest()->getMethod() == sfRequest::POST){
+        $hay=Formulacion::movimientos();
+        if ($hay==1)
+        {
+          $this->coderr=332;
+        }
+
+
      if($this->coderr!=-1){
         return false;
       } else return true;

@@ -10,5 +10,5 @@
 <?php
 $hay=Formulacion::movimientos();
 echo select_tag('foringdefniv[ruppar]', options_for_select(Array(' ','1','2','3','4','5','6','7'),$foringdefniv->getRuppar()),array(
-  'disabled' => $hay == 1 ? true : false ,
+  //'disabled' => $hay == 1 ? true : false ,
 )); ?>

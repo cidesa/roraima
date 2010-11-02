@@ -1,18 +1,19 @@
 opciones:                  # Opciones generales
   name:                    a
-  eliminar:                false
+  eliminar:                true
   tabla:                   forestcos
   anchogrid:               1000
   ancho:                   1000
-  filas:                   
+  filas:                   1
   titulo:                  ' '
   htmltotalfilas:          ' '
 1:       # Columna 1
   titulo:                  Cod. Meta
   tipo:                    t
   nombrecampo:             codact
-  html:                    ["size=15 readonly=true"]
+  html:                    ["size=15 maxlength=5 onBlur='toAjax(8,getUrlModuloAjax(),this.value,0,'&cajtexmos='+$(this.id).up().next(0).descendants()[0].id+'&cajtexcom='+this.id)'"]
   esgrabable:              true  
+  catalogo:                [fordefact, sf_admin_edit_form, {Codact: 1, Desact: 2}, Fordefact_Forasoactmet ]
 2:       # Columna 2
   titulo:                  Descripción
   tipo:                    t

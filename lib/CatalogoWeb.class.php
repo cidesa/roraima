@@ -5927,9 +5927,10 @@ public function Catdefcatman_Cattramo($params = '') {
 
 	}
 
-	public function Fordefcatpre_Codcat() {
+	public function Fordefcatpre_Codcat($params=array()) {
 		$this->c = new Criteria();
-		// $this->c->addAscendingOrderByColumn(CaramartPeer::RAMART);
+		$this->sql="length(codcat)='".$params[0]."'";
+		$this->c->add(FordefcatprePeer::CODCAT,$this->sql,Criteria::CUSTOM);
 
 		$this->columnas = array (
 			FordefcatprePeer :: CODCAT => 'Código',

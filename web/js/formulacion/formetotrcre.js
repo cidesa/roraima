@@ -172,7 +172,7 @@ function validarDisponibilidad(id)
 
 }
 
-function validararticulorepetida(id)
+function validarpartidarepetida(id)
 {
    var aux = id.split("_");
    var name=aux[0];
@@ -180,25 +180,25 @@ function validararticulorepetida(id)
    var col=parseInt(aux[2]);
 
    var coldes= col + 1;
-   var coluni= col + 2;
+   /*var coluni= col + 2;
    var colpar= col + 3;
    var colnom= col + 4;
-   var colmon= col + 7;
+   var colmon= col + 7;*/
    var descripcion=name+"_"+fila+"_"+coldes;
-   var unidad=name+"_"+fila+"_"+coluni;
+   /*var unidad=name+"_"+fila+"_"+coluni;
    var part=name+"_"+fila+"_"+colpar;
    var nompar=name+"_"+fila+"_"+colnom;
-   var mont=name+"_"+fila+"_"+colmon;
+   var mont=name+"_"+fila+"_"+colmon;*/
 
    if (articulo_repetida(id))
    {
-      alert_('El Articulo ya se encuentra Asociado a esa Actividad');
+      alert_('El Partida ya se encuentra Asociado a esa Actividad');
       $(id).value="";
       $(descripcion).value="";
-      $(unidad).value="";
+      /*$(unidad).value="";
       $(part).value="";
       $(nompar).value="";
-      $(mont).value="0,00";
+      $(mont).value="0,00";*/
       $(id).focus();
    }
 

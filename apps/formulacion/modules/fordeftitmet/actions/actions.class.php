@@ -177,5 +177,51 @@ public function editing()
     return -1;
   }
 
+/**
+   * FunciÃ³n principal para el manejo de las acciones create y edit
+   * del formulario.
+   *
+   */
+  public function executeEdit()
+  {
+    $this->params=array();
+    $this->forasometcre = $this->getForasometcreOrCreate();
+
+    $this->editing();
+
+    if ($this->getRequest()->getMethod() == sfRequest::POST)
+    {
+      $this->updateForasometcreFromRequest();
+
+      if($this->saveForasometcre($this->forasometcre) ==-1){
+        {$this->setFlash('notice', 'Your modifications have been saved');
+
+         $id= $this->forasometcre->getId();
+         $this->SalvarBitacora($id ,'Guardo');}
+
+        if ($this->getRequestParameter('save_and_add'))
+        {
+          return $this->redirect('fordeftitmet/create');
+        }
+        else if ($this->getRequestParameter('save_and_list'))
+        {
+          return $this->redirect('fordeftitmet/list');
+        }
+        else
+        {
+            return $this->redirect('fordeftitmet/edit');
+        }
+
+      }else{
+        $this->labels = $this->getLabels();
+      }
+
+    }
+    else
+    {
+      $this->labels = $this->getLabels();
+    }
+  }
+
 
 }
