@@ -1,3 +1,11 @@
+modules/*/config/security.yml:
+  class:    cidesaSecurityConfigHandler
+modules/generales/config/security.yml:
+  class:    sfSecurityConfigHandler
+modules/login/config/security.yml:
+  class:    sfSecurityConfigHandler
+modules/principal/config/security.yml:
+  class:    sfSecurityConfigHandler
 config/app.yml:
   class:    cidesaDefineEnvironmentConfigHandler
   param:
