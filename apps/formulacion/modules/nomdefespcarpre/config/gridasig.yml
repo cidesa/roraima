@@ -8,7 +8,7 @@ opciones:                  # Opciones generales
   titulo:                  ' Conceptos '
   htmltotalfilas:          ' '
 1:       # Columna 1
-  titulo:                  CÃ³digo Concepto
+  titulo:                  Código Concepto
   tipo:                    t
   nombrecampo:             codcon
   html:                    [size=5 ]
@@ -24,7 +24,7 @@ opciones:                  # Opciones generales
   oculta:                  false
   esgrabable:              true
 3:       # Columna 3
-  titulo:                  CÃ³digo PÃ¡rtida
+  titulo:                  Código Pártida
   tipo:                    t
   nombrecampo:             codpar
   html:                    [size=10 readonly=true]

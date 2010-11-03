@@ -253,7 +253,7 @@ class forotrcrepreActions extends autoforotrcrepreActions
           $codfin=$this->getRequestParameter('codfin');
           $codcat=$this->getRequestParameter('categoria');
 
-          if (Formulacion::chequearDispIngresos($monfin,$codfin,$codcat))
+          if (!Formulacion::chequearDispIngresos($monfin,$codfin,$codcat))
           {
             if ($montopre!=$totfin)
             {
