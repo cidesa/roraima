@@ -21,6 +21,10 @@ abstract class BaseNpmotfal extends BaseObject  implements Persistent {
 
 
 	
+	protected $esremun;
+
+
+	
 	protected $id;
 
 	
@@ -48,6 +52,13 @@ abstract class BaseNpmotfal extends BaseObject  implements Persistent {
   {
 
     return trim($this->causa);
+
+  }
+  
+  public function getEsremun()
+  {
+
+    return $this->esremun;
 
   }
   
@@ -88,6 +99,16 @@ abstract class BaseNpmotfal extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setEsremun($v)
+	{
+
+    if ($this->esremun !== $v) {
+        $this->esremun = $v;
+        $this->modifiedColumns[] = NpmotfalPeer::ESREMUN;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -108,7 +129,9 @@ abstract class BaseNpmotfal extends BaseObject  implements Persistent {
 
       $this->causa = $rs->getString($startcol + 2);
 
-      $this->id = $rs->getInt($startcol + 3);
+      $this->esremun = $rs->getBoolean($startcol + 3);
+
+      $this->id = $rs->getInt($startcol + 4);
 
       $this->resetModified();
 
@@ -116,7 +139,7 @@ abstract class BaseNpmotfal extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 4; 
+            return $startcol + 5; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Npmotfal object", $e);
     }
@@ -273,6 +296,9 @@ abstract class BaseNpmotfal extends BaseObject  implements Persistent {
 				return $this->getCausa();
 				break;
 			case 3:
+				return $this->getEsremun();
+				break;
+			case 4:
 				return $this->getId();
 				break;
 			default:
@@ -288,7 +314,8 @@ abstract class BaseNpmotfal extends BaseObject  implements Persistent {
 			$keys[0] => $this->getCodmotfal(),
 			$keys[1] => $this->getDesmotfal(),
 			$keys[2] => $this->getCausa(),
-			$keys[3] => $this->getId(),
+			$keys[3] => $this->getEsremun(),
+			$keys[4] => $this->getId(),
 		);
 		return $result;
 	}
@@ -314,6 +341,9 @@ abstract class BaseNpmotfal extends BaseObject  implements Persistent {
 				$this->setCausa($value);
 				break;
 			case 3:
+				$this->setEsremun($value);
+				break;
+			case 4:
 				$this->setId($value);
 				break;
 		} 	}
@@ -326,7 +356,8 @@ abstract class BaseNpmotfal extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[0], $arr)) $this->setCodmotfal($arr[$keys[0]]);
 		if (array_key_exists($keys[1], $arr)) $this->setDesmotfal($arr[$keys[1]]);
 		if (array_key_exists($keys[2], $arr)) $this->setCausa($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setId($arr[$keys[3]]);
+		if (array_key_exists($keys[3], $arr)) $this->setEsremun($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setId($arr[$keys[4]]);
 	}
 
 	
@@ -337,6 +368,7 @@ abstract class BaseNpmotfal extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(NpmotfalPeer::CODMOTFAL)) $criteria->add(NpmotfalPeer::CODMOTFAL, $this->codmotfal);
 		if ($this->isColumnModified(NpmotfalPeer::DESMOTFAL)) $criteria->add(NpmotfalPeer::DESMOTFAL, $this->desmotfal);
 		if ($this->isColumnModified(NpmotfalPeer::CAUSA)) $criteria->add(NpmotfalPeer::CAUSA, $this->causa);
+		if ($this->isColumnModified(NpmotfalPeer::ESREMUN)) $criteria->add(NpmotfalPeer::ESREMUN, $this->esremun);
 		if ($this->isColumnModified(NpmotfalPeer::ID)) $criteria->add(NpmotfalPeer::ID, $this->id);
 
 		return $criteria;
@@ -373,6 +405,8 @@ abstract class BaseNpmotfal extends BaseObject  implements Persistent {
 		$copyObj->setDesmotfal($this->desmotfal);
 
 		$copyObj->setCausa($this->causa);
+
+		$copyObj->setEsremun($this->esremun);
 
 
 		$copyObj->setNew(true);

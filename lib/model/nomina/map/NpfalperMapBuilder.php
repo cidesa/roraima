@@ -48,6 +48,10 @@ class NpfalperMapBuilder {
 
 		$tMap->addColumn('FECHAS', 'Fechas', 'int', CreoleTypes::DATE, true, null);
 
+		$tMap->addColumn('NROHORAS', 'Nrohoras', 'double', CreoleTypes::NUMERIC, false, 14);
+
+		$tMap->addColumn('NUMCTR', 'Numctr', 'string', CreoleTypes::VARCHAR, false, 8);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

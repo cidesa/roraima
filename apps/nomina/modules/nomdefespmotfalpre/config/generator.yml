@@ -5,9 +5,10 @@ generator:
     theme:            default
 
     fields:
-      codmotfal :    { name: Código, params: maxlength=4 size=5}
+      codmotfal :    { name: Código, params: maxlength=4,size=5}
       desmotfal :    { name: Descripción, params: size=20}
       causa		:    { name: Causa }
+      esremun:    { name: ¿Es Remunerado? }
 
     list:
       title:          Motivos de Faltas y/o Permisos
@@ -20,7 +21,7 @@ generator:
       sort: codmotfal
     edit:
       title:          Edición de los Motivos de Faltas y/o Permisos
-      display:        [codmotfal, desmotfal, causa]
+      display:        [codmotfal, desmotfal, causa, esremun]
       actions:
         _list:     ~
         _save:     ~

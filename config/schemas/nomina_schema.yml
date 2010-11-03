@@ -2750,6 +2750,13 @@ propel:
     fechas:
       type: DATE
       required: true
+    nrohoras:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    numctr:
+      type: VARCHAR
+      size: 8
     id:
       type: INTEGER
       required: true
@@ -2933,6 +2940,14 @@ propel:
     nomcon:
       type: VARCHAR
       size: 250
+    rifgua:
+      type: VARCHAR
+      size: 15
+    ninsme:
+      type: VARCHAR
+      size: 30
+    solmevig:
+      type: BOOLEAN
     id:
       type: INTEGER
       required: true
@@ -4579,6 +4594,8 @@ propel:
       type: VARCHAR
       size: 1
       required: true
+    esremun:
+      type: BOOLEAN
     id:
       type: INTEGER
       required: true

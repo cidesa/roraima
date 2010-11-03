@@ -13,7 +13,7 @@ abstract class BaseNpguardePeer {
 	const CLASS_DEFAULT = 'lib.model.nomina.Npguarde';
 
 	
-	const NUM_COLUMNS = 4;
+	const NUM_COLUMNS = 7;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -29,6 +29,15 @@ abstract class BaseNpguardePeer {
 	const NOMCON = 'npguarde.NOMCON';
 
 	
+	const RIFGUA = 'npguarde.RIFGUA';
+
+	
+	const NINSME = 'npguarde.NINSME';
+
+	
+	const SOLMEVIG = 'npguarde.SOLMEVIG';
+
+	
 	const ID = 'npguarde.ID';
 
 	
@@ -37,18 +46,18 @@ abstract class BaseNpguardePeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codcon', 'Nomgua', 'Nomcon', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (NpguardePeer::CODCON, NpguardePeer::NOMGUA, NpguardePeer::NOMCON, NpguardePeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codcon', 'nomgua', 'nomcon', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
+		BasePeer::TYPE_PHPNAME => array ('Codcon', 'Nomgua', 'Nomcon', 'Rifgua', 'Ninsme', 'Solmevig', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (NpguardePeer::CODCON, NpguardePeer::NOMGUA, NpguardePeer::NOMCON, NpguardePeer::RIFGUA, NpguardePeer::NINSME, NpguardePeer::SOLMEVIG, NpguardePeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codcon', 'nomgua', 'nomcon', 'rifgua', 'ninsme', 'solmevig', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codcon' => 0, 'Nomgua' => 1, 'Nomcon' => 2, 'Id' => 3, ),
-		BasePeer::TYPE_COLNAME => array (NpguardePeer::CODCON => 0, NpguardePeer::NOMGUA => 1, NpguardePeer::NOMCON => 2, NpguardePeer::ID => 3, ),
-		BasePeer::TYPE_FIELDNAME => array ('codcon' => 0, 'nomgua' => 1, 'nomcon' => 2, 'id' => 3, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
+		BasePeer::TYPE_PHPNAME => array ('Codcon' => 0, 'Nomgua' => 1, 'Nomcon' => 2, 'Rifgua' => 3, 'Ninsme' => 4, 'Solmevig' => 5, 'Id' => 6, ),
+		BasePeer::TYPE_COLNAME => array (NpguardePeer::CODCON => 0, NpguardePeer::NOMGUA => 1, NpguardePeer::NOMCON => 2, NpguardePeer::RIFGUA => 3, NpguardePeer::NINSME => 4, NpguardePeer::SOLMEVIG => 5, NpguardePeer::ID => 6, ),
+		BasePeer::TYPE_FIELDNAME => array ('codcon' => 0, 'nomgua' => 1, 'nomcon' => 2, 'rifgua' => 3, 'ninsme' => 4, 'solmevig' => 5, 'id' => 6, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
 	);
 
 	
@@ -107,6 +116,12 @@ abstract class BaseNpguardePeer {
 		$criteria->addSelectColumn(NpguardePeer::NOMGUA);
 
 		$criteria->addSelectColumn(NpguardePeer::NOMCON);
+
+		$criteria->addSelectColumn(NpguardePeer::RIFGUA);
+
+		$criteria->addSelectColumn(NpguardePeer::NINSME);
+
+		$criteria->addSelectColumn(NpguardePeer::SOLMEVIG);
 
 		$criteria->addSelectColumn(NpguardePeer::ID);
 

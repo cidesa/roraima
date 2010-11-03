@@ -107,13 +107,29 @@
     <?php echo form_error('npfalper{observ}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_input_tag($npfalper, 'getObserv', array (
-  'size' => 50,
+  <?php $value = object_textarea_tag($npfalper, 'getObserv', array (
+  'size' => '80x3',
   'control_name' => 'npfalper[observ]',
+  'maxlength'=> 250,
+  'onkeyup' => "javascript:return ismaxlength(this)",
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
-<div class="form-row"  style= "display:none">
+<div class="form-row">
+  <?php echo label_for('npfalper[numctr]', __($labels['npfalper{numctr}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('npfalper{numctr}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npfalper{numctr}')): ?>
+    <?php echo form_error('npfalper{numctr}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($npfalper, 'getNumctr', array (
+  'size' => 10,
+  'control_name' => 'npfalper[numctr]',
+  'maxlength' => 8,
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+</div>
+    <div class="form-row" id="desde" style= "display:none">
   <?php echo label_for('npfalper[fecdes]', __($labels['npfalper{fecdes}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('npfalper{fecdes}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('npfalper{fecdes}')): ?>
@@ -143,6 +159,33 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
+    <div class="form-row" >
+  <?php echo label_for('npfalper[nrodia]', __($labels['npfalper{nrodia}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('npfalper{nrodia}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npfalper{nrodia}')): ?>
+    <?php echo form_error('npfalper{nrodia}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($npfalper, 'getNrodia', array (
+  'size' => 7,
+  'control_name' => 'npfalper[nrodia]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+</div>
+<div class="form-row">
+  <?php echo label_for('npfalper[nrohoras]', __($labels['npfalper{nrohoras}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('npfalper{nrohoras}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npfalper{nrohoras}')): ?>
+    <?php echo form_error('npfalper{nrohoras}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($npfalper, array('getNrohoras',true), array (
+  'size' => 7,
+  'control_name' => 'npfalper[nrohoras]',
+  'onBlur'  => "javascript:event.keyCode=13; return entermontootro(event, this.id)",
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+</div>
 
 </fieldset>
 
@@ -159,3 +202,11 @@
 )) ?><?php endif; ?>
 </li>
   </ul>
+<script language="JavaScript" type="text/javascript">
+
+if ($('id').value!="")
+{
+    $('desde').show();
+}
+
+</script>

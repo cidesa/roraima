@@ -71,6 +71,46 @@
   'control_name' => 'npguarde[nomgua]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
+
+<br>
+
+  <?php echo label_for('npguarde[rifgua]', __($labels['npguarde{rifgua}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('npguarde{rifgua}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npguarde{rifgua}')): ?>
+    <?php echo form_error('npguarde{rifgua}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($npguarde, 'getRifgua', array (
+  'size' => 20,
+  'control_name' => 'npguarde[rifgua]',
+  'maxlength' => 15,
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+    <br>
+  <?php echo label_for('npguarde[ninsme]', __($labels['npguarde{ninsme}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('npguarde{ninsme}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npguarde{ninsme}')): ?>
+    <?php echo form_error('npguarde{ninsme}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($npguarde, 'getNinsme', array (
+  'size' => 20,
+  'control_name' => 'npguarde[ninsme]',
+  'maxlength' => 15,
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+    <br>
+  <?php echo label_for('npguarde[solmevig]', __($labels['npguarde{solmevig}']), 'class="required" Style="width:100px"') ?>
+  <div class="content<?php if ($sf_request->hasError('npguarde{solmevig}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npguarde{solmevig}')): ?>
+    <?php echo form_error('npguarde{solmevig}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_checkbox_tag($npguarde, 'getSolmevig', array (
+  'control_name' => 'npguarde[solmevig]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+    <br>
 </div>
 </fieldset>
 

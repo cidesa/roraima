@@ -13,7 +13,7 @@ abstract class BaseNpmotfalPeer {
 	const CLASS_DEFAULT = 'lib.model.nomina.Npmotfal';
 
 	
-	const NUM_COLUMNS = 4;
+	const NUM_COLUMNS = 5;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -29,6 +29,9 @@ abstract class BaseNpmotfalPeer {
 	const CAUSA = 'npmotfal.CAUSA';
 
 	
+	const ESREMUN = 'npmotfal.ESREMUN';
+
+	
 	const ID = 'npmotfal.ID';
 
 	
@@ -37,18 +40,18 @@ abstract class BaseNpmotfalPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codmotfal', 'Desmotfal', 'Causa', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (NpmotfalPeer::CODMOTFAL, NpmotfalPeer::DESMOTFAL, NpmotfalPeer::CAUSA, NpmotfalPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codmotfal', 'desmotfal', 'causa', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
+		BasePeer::TYPE_PHPNAME => array ('Codmotfal', 'Desmotfal', 'Causa', 'Esremun', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (NpmotfalPeer::CODMOTFAL, NpmotfalPeer::DESMOTFAL, NpmotfalPeer::CAUSA, NpmotfalPeer::ESREMUN, NpmotfalPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codmotfal', 'desmotfal', 'causa', 'esremun', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codmotfal' => 0, 'Desmotfal' => 1, 'Causa' => 2, 'Id' => 3, ),
-		BasePeer::TYPE_COLNAME => array (NpmotfalPeer::CODMOTFAL => 0, NpmotfalPeer::DESMOTFAL => 1, NpmotfalPeer::CAUSA => 2, NpmotfalPeer::ID => 3, ),
-		BasePeer::TYPE_FIELDNAME => array ('codmotfal' => 0, 'desmotfal' => 1, 'causa' => 2, 'id' => 3, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
+		BasePeer::TYPE_PHPNAME => array ('Codmotfal' => 0, 'Desmotfal' => 1, 'Causa' => 2, 'Esremun' => 3, 'Id' => 4, ),
+		BasePeer::TYPE_COLNAME => array (NpmotfalPeer::CODMOTFAL => 0, NpmotfalPeer::DESMOTFAL => 1, NpmotfalPeer::CAUSA => 2, NpmotfalPeer::ESREMUN => 3, NpmotfalPeer::ID => 4, ),
+		BasePeer::TYPE_FIELDNAME => array ('codmotfal' => 0, 'desmotfal' => 1, 'causa' => 2, 'esremun' => 3, 'id' => 4, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
 	);
 
 	
@@ -107,6 +110,8 @@ abstract class BaseNpmotfalPeer {
 		$criteria->addSelectColumn(NpmotfalPeer::DESMOTFAL);
 
 		$criteria->addSelectColumn(NpmotfalPeer::CAUSA);
+
+		$criteria->addSelectColumn(NpmotfalPeer::ESREMUN);
 
 		$criteria->addSelectColumn(NpmotfalPeer::ID);
 
