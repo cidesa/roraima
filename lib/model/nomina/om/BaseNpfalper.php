@@ -37,6 +37,14 @@ abstract class BaseNpfalper extends BaseObject  implements Persistent {
 
 
 	
+	protected $nrohoras;
+
+
+	
+	protected $numctr;
+
+
+	
 	protected $id;
 
 	
@@ -125,6 +133,21 @@ abstract class BaseNpfalper extends BaseObject  implements Persistent {
     }
   }
 
+  
+  public function getNrohoras($val=false)
+  {
+
+    if($val) return number_format($this->nrohoras,2,',','.');
+    else return $this->nrohoras;
+
+  }
+  
+  public function getNumctr()
+  {
+
+    return trim($this->numctr);
+
+  }
   
   public function getId()
   {
@@ -227,6 +250,26 @@ abstract class BaseNpfalper extends BaseObject  implements Persistent {
 
 	} 
 	
+	public function setNrohoras($v)
+	{
+
+    if ($this->nrohoras !== $v) {
+        $this->nrohoras = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpfalperPeer::NROHORAS;
+      }
+  
+	} 
+	
+	public function setNumctr($v)
+	{
+
+    if ($this->numctr !== $v) {
+        $this->numctr = $v;
+        $this->modifiedColumns[] = NpfalperPeer::NUMCTR;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -255,7 +298,11 @@ abstract class BaseNpfalper extends BaseObject  implements Persistent {
 
       $this->fechas = $rs->getDate($startcol + 6, null);
 
-      $this->id = $rs->getInt($startcol + 7);
+      $this->nrohoras = $rs->getFloat($startcol + 7);
+
+      $this->numctr = $rs->getString($startcol + 8);
+
+      $this->id = $rs->getInt($startcol + 9);
 
       $this->resetModified();
 
@@ -263,7 +310,7 @@ abstract class BaseNpfalper extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 8; 
+            return $startcol + 10; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Npfalper object", $e);
     }
@@ -432,6 +479,12 @@ abstract class BaseNpfalper extends BaseObject  implements Persistent {
 				return $this->getFechas();
 				break;
 			case 7:
+				return $this->getNrohoras();
+				break;
+			case 8:
+				return $this->getNumctr();
+				break;
+			case 9:
 				return $this->getId();
 				break;
 			default:
@@ -451,7 +504,9 @@ abstract class BaseNpfalper extends BaseObject  implements Persistent {
 			$keys[4] => $this->getObserv(),
 			$keys[5] => $this->getFecdes(),
 			$keys[6] => $this->getFechas(),
-			$keys[7] => $this->getId(),
+			$keys[7] => $this->getNrohoras(),
+			$keys[8] => $this->getNumctr(),
+			$keys[9] => $this->getId(),
 		);
 		return $result;
 	}
@@ -489,6 +544,12 @@ abstract class BaseNpfalper extends BaseObject  implements Persistent {
 				$this->setFechas($value);
 				break;
 			case 7:
+				$this->setNrohoras($value);
+				break;
+			case 8:
+				$this->setNumctr($value);
+				break;
+			case 9:
 				$this->setId($value);
 				break;
 		} 	}
@@ -505,7 +566,9 @@ abstract class BaseNpfalper extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[4], $arr)) $this->setObserv($arr[$keys[4]]);
 		if (array_key_exists($keys[5], $arr)) $this->setFecdes($arr[$keys[5]]);
 		if (array_key_exists($keys[6], $arr)) $this->setFechas($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setId($arr[$keys[7]]);
+		if (array_key_exists($keys[7], $arr)) $this->setNrohoras($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setNumctr($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setId($arr[$keys[9]]);
 	}
 
 	
@@ -520,6 +583,8 @@ abstract class BaseNpfalper extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(NpfalperPeer::OBSERV)) $criteria->add(NpfalperPeer::OBSERV, $this->observ);
 		if ($this->isColumnModified(NpfalperPeer::FECDES)) $criteria->add(NpfalperPeer::FECDES, $this->fecdes);
 		if ($this->isColumnModified(NpfalperPeer::FECHAS)) $criteria->add(NpfalperPeer::FECHAS, $this->fechas);
+		if ($this->isColumnModified(NpfalperPeer::NROHORAS)) $criteria->add(NpfalperPeer::NROHORAS, $this->nrohoras);
+		if ($this->isColumnModified(NpfalperPeer::NUMCTR)) $criteria->add(NpfalperPeer::NUMCTR, $this->numctr);
 		if ($this->isColumnModified(NpfalperPeer::ID)) $criteria->add(NpfalperPeer::ID, $this->id);
 
 		return $criteria;
@@ -564,6 +629,10 @@ abstract class BaseNpfalper extends BaseObject  implements Persistent {
 		$copyObj->setFecdes($this->fecdes);
 
 		$copyObj->setFechas($this->fechas);
+
+		$copyObj->setNrohoras($this->nrohoras);
+
+		$copyObj->setNumctr($this->numctr);
 
 
 		$copyObj->setNew(true);

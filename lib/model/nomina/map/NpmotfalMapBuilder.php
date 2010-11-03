@@ -40,6 +40,8 @@ class NpmotfalMapBuilder {
 
 		$tMap->addColumn('CAUSA', 'Causa', 'string', CreoleTypes::VARCHAR, true, 1);
 
+		$tMap->addColumn('ESREMUN', 'Esremun', 'boolean', CreoleTypes::BOOLEAN, false, null);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

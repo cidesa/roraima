@@ -8,10 +8,13 @@ generator:
       codcon:    { name: Concepto, params: maxlength=3 size=5 }
       nomcon:    { name: Descripción de Concepto}
       nomgua:    { name: Nombre de Guardería}
+      rifgua:    { name: RIF. Guardería, params: maxlength=15 size=20 }
+      ninsme:    { name: N° Inscripción ME, params: maxlength=15 size=20 }
+      solmevig:    { name: ¿Solvencia ME Vigente? }
 
     list:
       title:          Definición de Guarderías
-      filters:		  [codcon, nomgua]
+      filters:		  [codcon, nomgua, rifgua]
       display:        [=codcon, nomcon, nomgua]
       max_per_page:	  10
       object_actions:
@@ -21,7 +24,7 @@ generator:
 
     edit:
       title:          Edición de Guarderías
-      display:        [codcon, nomcon, nomgua]
+      display:        [codcon, nomcon, nomgua, rifgua, ninsme, solmevig]
       actions:
         _list:         ~
         _save:         ~

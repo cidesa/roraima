@@ -625,4 +625,111 @@ class ingregingActions extends autoingregingActions
     }
   }
 
+  /**
+   * FunciÃ³n para retornar las etiquetas del formulario
+   *
+   */
+  protected function getLabels()
+  {
+   $cameti=H::getConfApp2('cametiq', 'ingresos', 'ingreging');
+   if ($cameti!="")
+   {
+    $arreglo=array(
+                  'cireging{estatus}' => '.:',
+              'cireging{refing}' => 'Referencia:',
+              'cireging{fecing}' => 'Fecha:',
+              'cireging{desing}' => 'DescripciÃ³n:',
+              'cireging{codtip}' => 'Tipo:',
+              'cireging{rifcon}' => 'C.I/R.I.F Contribuyente:',
+              'cireging{ctaban}' => 'Cuenta Bancaria Nro.:',
+              'cireging{tipmov}' => 'Tipo de Movimiento:',
+              'cireging{numdep}' => 'NÃºmero de DepÃ³sito:',
+              'cireging{fecdep}' => 'Fecha del Deposito:',
+              'cireging{numofi}' => 'NÃºmero de Oficio:',
+              'cireging{previs}' => 'Previsto:',
+                      'cireging{grid}' => '.:',
+              'cireging{moning}' => 'Ingreso:',
+              'cireging{monrec}' => 'Recargo:',
+              'cireging{mondes}' => 'Descuento:',
+              'cireging{montot}' => 'Neto:',
+              'cireging{comprobante}' => 'Comprobante:',
+                          'cireging{refing}' => 'Referencia:',
+              'cireging{fecing}' => 'Fecha:',
+              'cireging{desing}' => 'DescripciÃ³n:',
+              'cireging{codtip}' => 'Tipo:',
+              'cireging{rifcon}' => $cameti.':',
+              'cireging{moning}' => 'Ingreso:',
+              'cireging{monrec}' => 'Recargo:',
+              'cireging{mondes}' => 'Descuento:',
+              'cireging{montot}' => 'Neto:',
+              'cireging{desanu}' => 'Desanu:',
+              'cireging{fecanu}' => 'Fecanu:',
+              'cireging{staing}' => 'Status del Ingreso:',
+              'cireging{ctaban}' => 'Cuenta Bancaria Nro.:',
+              'cireging{tipmov}' => 'Tipo de Movimiento:',
+              'cireging{previs}' => 'Previsto:',
+              'cireging{anoing}' => 'Anoing:',
+              'cireging{numdep}' => 'NÃºmero de DepÃ³sito:',
+              'cireging{numofi}' => 'NÃºmero de Oficio:',
+              'cireging{numcom}' => 'numero del comprobante:',
+              'cireging{reflib}' => 'Reflib:',
+              'cireging{staliq}' => 'Staliq:',
+              'cireging{fecliq}' => 'Fecliq:',
+              'cireging{refliq}' => 'Refliq:',
+              'cireging{desliq}' => 'Desliq:',
+              'cireging{fecdep}' => 'Fecha del Deposito:',
+              'cireging{id}' => 'Id:',
+            );
+   }else {
+
+    $arreglo=array(
+                  'cireging{estatus}' => '.:',
+              'cireging{refing}' => 'Referencia:',
+              'cireging{fecing}' => 'Fecha:',
+              'cireging{desing}' => 'DescripciÃ³n:',
+              'cireging{codtip}' => 'Tipo:',
+              'cireging{rifcon}' => 'C.I/R.I.F Contribuyente:',
+              'cireging{ctaban}' => 'Cuenta Bancaria Nro.:',
+              'cireging{tipmov}' => 'Tipo de Movimiento:',
+              'cireging{numdep}' => 'NÃºmero de DepÃ³sito:',
+              'cireging{fecdep}' => 'Fecha del Deposito:',
+              'cireging{numofi}' => 'NÃºmero de Oficio:',
+              'cireging{previs}' => 'Previsto:',
+                      'cireging{grid}' => '.:',
+              'cireging{moning}' => 'Ingreso:',
+              'cireging{monrec}' => 'Recargo:',
+              'cireging{mondes}' => 'Descuento:',
+              'cireging{montot}' => 'Neto:',
+              'cireging{comprobante}' => 'Comprobante:',
+                          'cireging{refing}' => 'Referencia:',
+              'cireging{fecing}' => 'Fecha:',
+              'cireging{desing}' => 'DescripciÃ³n:',
+              'cireging{codtip}' => 'Tipo:',
+              'cireging{rifcon}' => 'C.I/R.I.F Contribuyente:',
+              'cireging{moning}' => 'Ingreso:',
+              'cireging{monrec}' => 'Recargo:',
+              'cireging{mondes}' => 'Descuento:',
+              'cireging{montot}' => 'Neto:',
+              'cireging{desanu}' => 'Desanu:',
+              'cireging{fecanu}' => 'Fecanu:',
+              'cireging{staing}' => 'Status del Ingreso:',
+              'cireging{ctaban}' => 'Cuenta Bancaria Nro.:',
+              'cireging{tipmov}' => 'Tipo de Movimiento:',
+              'cireging{previs}' => 'Previsto:',
+              'cireging{anoing}' => 'Anoing:',
+              'cireging{numdep}' => 'NÃºmero de DepÃ³sito:',
+              'cireging{numofi}' => 'NÃºmero de Oficio:',
+              'cireging{numcom}' => 'numero del comprobante:',
+              'cireging{reflib}' => 'Reflib:',
+              'cireging{staliq}' => 'Staliq:',
+              'cireging{fecliq}' => 'Fecliq:',
+              'cireging{refliq}' => 'Refliq:',
+              'cireging{desliq}' => 'Desliq:',
+              'cireging{fecdep}' => 'Fecha del Deposito:',
+              'cireging{id}' => 'Id:',
+            );
+   }
+   return $arreglo;
+  }
+
 }
