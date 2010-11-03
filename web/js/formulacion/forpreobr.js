@@ -239,7 +239,7 @@ function ocultarOrganismos()
 
   if (montopre!=acumu && acumu!=0)
    {
-       alert('El Monto de la DistribuciÃ³n no coincide con el Monto Total de la Partida que es: '+$("ax_"+filaorg+"_3").value);
+       alert('El Monto de la Distribución no coincide con el Monto Total de la Partida que es: '+$("ax_"+filaorg+"_3").value);
    }else{
       $(cadorg).value=cadena;
       $(codorg).value=codigos;
@@ -291,7 +291,7 @@ function distribuirOrganismos()
 
 function eliminar()
 {
-  if (confirm("Â¿Esta seguro de eliminar?"))
+  if (confirm("¿Esta seguro de eliminar?"))
   {
     var codcat=$('forpreobr_codcat').value;
 

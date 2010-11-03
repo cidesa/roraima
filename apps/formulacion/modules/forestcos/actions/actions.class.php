@@ -45,10 +45,21 @@ class forestcosActions extends autoforestcosActions
         $c = new Criteria();
         $c->add(ForasoactproPeer::CODMET,$codmet);
         $c->add(ForasoactproPeer::CODPRO,$codpro);
-        $costo = ForasoactproPeer::doSelect($c);
+        $cos = ForasoactproPeer::doSelect($c);
+        if ($cos)
+        {
+            foreach ($cos as $obj)
+            {
+              $forestcos2= new Forestcos();
+              $forestcos2->setCodact($obj->getCodact());
+              $forestcos2->setDesact(H::getX('CODACT','Fordefact','Desact',$obj->getCodact()));
+              $costo[]=$forestcos2;
+            }
 
-        $this->columnas[0]->setTabla('Forasoactpro');
-    }else $this->columnas[0]->setTabla('Forestcos');
+        }
+
+        //$this->columnas[0]->setTabla('Forasoactpro');
+    }//else $this->columnas[0]->setTabla('Forestcos');
 
     $mascaraart=$this->forestcos->getMascaraart();
     $lonart=strlen($mascaraart);
@@ -289,9 +300,9 @@ class forestcosActions extends autoforestcosActions
 
   /**
    *
-   * FunciÃ³n que se ejecuta luego los validadores del negocio (validators)
-   * Para realizar validaciones especÃ­ficas del negocio del formulario
-   * Para mayor informaciÃ³n vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
+   * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
   public function validateEdit()
@@ -301,7 +312,7 @@ class forestcosActions extends autoforestcosActions
     if($this->getRequest()->getMethod() == sfRequest::POST){
         $this->forestcos = $this->getForestcosOrCreate();
         $this->updateForestcosFromRequest();
-        $this->configGridCostos();        
+        $this->configGridCostos($this->forestcos->getCodmet(),$this->forestcos->getCodpro());
         $grid = Herramientas::CargarDatosGridv2($this,$this->obj);       
 
         $x=$grid[0];
@@ -343,7 +354,7 @@ class forestcosActions extends autoforestcosActions
   }
 
   /**
-   * FunciÃ³n para actualziar el grid en el post si ocurre un error
+   * Función para actualziar el grid en el post si ocurre un error
    * Se pueden colocar aqui los grids adicionales
    *
    */
@@ -362,8 +373,8 @@ class forestcosActions extends autoforestcosActions
   }
 
   /**
-   * FunciÃ³n para manejar la captura de errores del negocio, tanto que se
-   * produzcan por algÃºn validator y por un valor false retornado por el validateEdit
+   * Función para manejar la captura de errores del negocio, tanto que se
+   * produzcan por algún validator y por un valor false retornado por el validateEdit
    *
    */
   public function handleErrorEdit()

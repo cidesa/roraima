@@ -265,7 +265,7 @@ class formetotrcreActions extends autoformetotrcreActions
           $totfin=H::toFloat($this->getRequestParameter('totfin'));
           $monfin=H::toFloat($this->getRequestParameter('monfin'));
           $codfin=$this->getRequestParameter('codfin');
-          if (Formulacion::chequearDispIngresosOtrCre($monfin,$codfin))
+          if (!Formulacion::chequearDispIngresosOtrCre($monfin,$codfin))
           {
             if ($montopre!=$totfin)
             {
@@ -329,9 +329,9 @@ class formetotrcreActions extends autoformetotrcreActions
 
   /**
    *
-   * FunciÃ³n que se ejecuta luego los validadores del negocio (validators)
-   * Para realizar validaciones especÃ­ficas del negocio del formulario
-   * Para mayor informaciÃ³n vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
+   * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
   public function validateEdit()
@@ -374,7 +374,7 @@ class formetotrcreActions extends autoformetotrcreActions
   }
 
   /**
-   * FunciÃ³n para actualziar el grid en el post si ocurre un error
+   * Función para actualziar el grid en el post si ocurre un error
    * Se pueden colocar aqui los grids adicionales
    *
    */
@@ -396,8 +396,8 @@ class formetotrcreActions extends autoformetotrcreActions
   }
 
   /**
-   * FunciÃ³n para manejar la captura de errores del negocio, tanto que se
-   * produzcan por algÃºn validator y por un valor false retornado por el validateEdit
+   * Función para manejar la captura de errores del negocio, tanto que se
+   * produzcan por algún validator y por un valor false retornado por el validateEdit
    *
    */
   public function handleErrorEdit()

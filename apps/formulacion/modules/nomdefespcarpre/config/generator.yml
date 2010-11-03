@@ -53,7 +53,7 @@ generator:
         _delete:      ~
 
     edit:
-      title: FormulaciÃ³n de Cargos Presupuestados
+      title: Formulación de Cargos Presupuestados
       display:
         Categoria y Cargo:     [codcat, codcar]
         Cantidad de Cargos:    [_cancar ]
@@ -65,4 +65,5 @@ generator:
       actions:
         _list:        ~
         _save:        ~
+        _create:        ~
         _delete:      ~

@@ -7,12 +7,12 @@ names:
 
   npcarpre{codcat}:
     required:  Yes
-    required_msg: El CÃ³digo de la Categoria no puede estar en Blanco
+    required_msg: El Código de la Categoria no puede estar en Blanco
     validators: codcatExistValidator
 
   npcarpre{codcar}:
     required:  Yes
-    required_msg: EL Codigo del Cargo puede estar en blanco
+    required_msg: EL Código del Cargo puede estar en blanco
     validators: codcarExistValidator, UniqueValidator2
 
 codcatExistValidator:
@@ -20,14 +20,14 @@ codcatExistValidator:
     param:
         class:        Fordefcatpre
         column:       codcat
-        unique_error: El CÃ³digo de la categoria debe Existir.
+        unique_error: El Código de la categoria debe Existir.
 
 codcarExistValidator:
     class: CidesaExistValidator
     param:
         class:        Npcargos
         column:       codcar
-        unique_error: El CÃ³digo del Cargo debe Existir.
+        unique_error: El Código del Cargo debe Existir.
 
 UniqueValidator2:
     class: UniqueValidator2

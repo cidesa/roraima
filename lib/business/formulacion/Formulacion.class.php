@@ -4,8 +4,8 @@
  *
  * @package    Roraima
  * @subpackage facturacion
- * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id: Formulacion.class.php 39726 2010-07-27 16:34:04Z cramirez $
+ * @author     $Author: dmartinez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: Formulacion.class.php 41258 2010-11-02 21:21:34Z dmartinez $
  *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -1962,9 +1962,9 @@ public static function salvarFordefest($estado)
 
       if ($diferencia>=$monfin)
       {
-        $chequeardispingresos=true;
-      }else {
         $chequeardispingresos=false;
+      }else {
+        $chequeardispingresos=true;
       }
    }
 
@@ -3631,14 +3631,14 @@ public static function salvarConceptosCargos($clasemodelo,$grid)
 public static function chequearDispIngresosOtrCre($monfin,$codfin)
  {
    $chequeardispingresos=false;
-   if ($monfin!='')
+   if ($monfin>0)
    {
       $sql="select a.codfin as codigo,sum(a.montoing) as monto from foringdisfuefin a, fortipfin b where a.codfin = b.codfin and a.codfin = '".$codfin."'  group by a.codfin,b.nomext order by a.codfin";
       if (Herramientas::BuscarDatos($sql,&$result))
       {
           if ($monfin>$result[0]["monto"])
-             $chequeardispingresos=false;
-          else $chequeardispingresos=true;
+             $chequeardispingresos=true;
+          else $chequeardispingresos=false;
       }else  $chequeardispingresos=false;
    }else  $chequeardispingresos=false;
 

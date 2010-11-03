@@ -5934,15 +5934,17 @@ public function Catdefcatman_Cattramo($params = '') {
 
 		$this->columnas = array (
 			FordefcatprePeer :: CODCAT => 'Código',
-			FordefcatprePeer :: DESCAT => 'Descripción',
+			FordefcatprePeer :: NOMCAT => 'Descripción',
 
 
 		);
 	}
 
-	public function Fordefparegr_Codparegr() {
-		$this->c = new Criteria();
-		// $this->c->addAscendingOrderByColumn(CaramartPeer::RAMART);
+	public function Fordefparegr_Codparegr($params=array()) {
+
+            $this->c = new Criteria();
+                $this->sql="length(codparegr)='".$params[0]."'";
+		$this->c->add(FordefparegrPeer::CODPAREGR,$this->sql,Criteria::CUSTOM);
 
 		$this->columnas = array (
 			FordefparegrPeer :: CODPAREGR => 'Código',
