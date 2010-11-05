@@ -536,14 +536,14 @@ class pagemiordActions extends autopagemiordActions {
           $c = new Criteria();
           $c->add(OpsolpagPeer::REFSOL,$refsolpag);
           $solpag = OpsolpagPeer::doSelectOne($c);
-          if($solpag) $solpag->setStasol('P');
+          if($solpag) $solpag->setStasol('C');
           $solpag->save();
 
           $c_select = new Criteria();
           $c_select->add(OpdetsolpagPeer::REFSOL,$refsolpag);
 
           $c_update = new Criteria();
-          $c_update->add(OpdetsolpagPeer::STAIMP,'P');
+          $c_update->add(OpdetsolpagPeer::STAIMP,'C');
           $c_update->add(OpdetsolpagPeer::REFORD,$opordpag->getNumord());
 
           $con = Propel::getConnection(EmpresaPeer::DATABASE_NAME);

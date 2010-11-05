@@ -2258,23 +2258,23 @@ class Cheques
 
             if(is_array($result)){
               if($result[0][1]=='0'){
-                $opsolpag->setStasol('C');
+                $opsolpag->setStasol('D');
                 $opsolpag->save();
-                $opdetsolpag->setStaimp('C');
+                $opdetsolpag->setStaimp('D');
                 $opdetsolpag->save();
                 return 'NO se pudo enterar el pago al GeBos, intente mas tarde. ('.$result[1][1].')';
               }
               else {
-                $opsolpag->setStasol('G');
+                $opsolpag->setStasol('P');
                 $opsolpag->save();
-                $opdetsolpag->setStaimp('G');
+                $opdetsolpag->setStaimp('P');
                 $opdetsolpag->save();
                 return 'Pago Enterado Satisfactoriamente al GeBos';
               }
             }else {
-              $opsolpag->setStasol('C');
+              $opsolpag->setStasol('D');
               $opsolpag->save();
-              $opdetsolpag->setStaimp('C');
+              $opdetsolpag->setStaimp('D');
               $opdetsolpag->save();
               return 'NO se pudo enterar el pago al GeBos. (Error la respuesta del servicio web)';
             }
