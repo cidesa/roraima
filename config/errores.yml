@@ -527,6 +527,9 @@
 208:
   cod: 208
   msj: El Valor Inicial del Mueble debe ser mayor a cero.
+209:
+  cod: 209
+  msj: La Cédula del empleado no puedo estar en Blanco.
 ################### FORMULACION ####################
 # Definiciones Generales (Fordefgen)
 300:

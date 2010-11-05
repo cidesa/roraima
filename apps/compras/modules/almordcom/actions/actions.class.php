@@ -65,6 +65,13 @@ class almordcomActions extends autoalmordcomActions
           $this->caordcom->setOrdcom($numord);
           return false;
         }
+        if(H::getConfApp2('valresp', 'compras', 'almordcom')=='S'){
+          if ($this->getRequestParameter('caordcom[codemp]')=="")
+          {
+            $this->coderror4 = 209;
+            return false;
+          }
+        }
 
         $this->mannivelapr="";
 	    $varemp = $this->getUser()->getAttribute('configemp');
