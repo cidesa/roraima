@@ -58,6 +58,8 @@ class CacorrelMapBuilder {
 
 		$tMap->addColumn('CORPAG', 'Corpag', 'int', CreoleTypes::INTEGER, false, 8);
 
+		$tMap->addColumn('CORCONT', 'Corcont', 'int', CreoleTypes::INTEGER, false, 8);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

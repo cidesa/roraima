@@ -57,6 +57,10 @@ abstract class BaseCacorrel extends BaseObject  implements Persistent {
 
 
 	
+	protected $corcont;
+
+
+	
 	protected $id;
 
 	
@@ -158,6 +162,13 @@ abstract class BaseCacorrel extends BaseObject  implements Persistent {
   {
 
     return $this->corpag;
+
+  }
+  
+  public function getCorcont()
+  {
+
+    return $this->corcont;
 
   }
   
@@ -288,6 +299,16 @@ abstract class BaseCacorrel extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setCorcont($v)
+	{
+
+    if ($this->corcont !== $v) {
+        $this->corcont = $v;
+        $this->modifiedColumns[] = CacorrelPeer::CORCONT;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -326,7 +347,9 @@ abstract class BaseCacorrel extends BaseObject  implements Persistent {
 
       $this->corpag = $rs->getInt($startcol + 11);
 
-      $this->id = $rs->getInt($startcol + 12);
+      $this->corcont = $rs->getInt($startcol + 12);
+
+      $this->id = $rs->getInt($startcol + 13);
 
       $this->resetModified();
 
@@ -334,7 +357,7 @@ abstract class BaseCacorrel extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 13; 
+            return $startcol + 14; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Cacorrel object", $e);
     }
@@ -518,6 +541,9 @@ abstract class BaseCacorrel extends BaseObject  implements Persistent {
 				return $this->getCorpag();
 				break;
 			case 12:
+				return $this->getCorcont();
+				break;
+			case 13:
 				return $this->getId();
 				break;
 			default:
@@ -542,7 +568,8 @@ abstract class BaseCacorrel extends BaseObject  implements Persistent {
 			$keys[9] => $this->getCorsal(),
 			$keys[10] => $this->getCorpro(),
 			$keys[11] => $this->getCorpag(),
-			$keys[12] => $this->getId(),
+			$keys[12] => $this->getCorcont(),
+			$keys[13] => $this->getId(),
 		);
 		return $result;
 	}
@@ -595,6 +622,9 @@ abstract class BaseCacorrel extends BaseObject  implements Persistent {
 				$this->setCorpag($value);
 				break;
 			case 12:
+				$this->setCorcont($value);
+				break;
+			case 13:
 				$this->setId($value);
 				break;
 		} 	}
@@ -616,7 +646,8 @@ abstract class BaseCacorrel extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[9], $arr)) $this->setCorsal($arr[$keys[9]]);
 		if (array_key_exists($keys[10], $arr)) $this->setCorpro($arr[$keys[10]]);
 		if (array_key_exists($keys[11], $arr)) $this->setCorpag($arr[$keys[11]]);
-		if (array_key_exists($keys[12], $arr)) $this->setId($arr[$keys[12]]);
+		if (array_key_exists($keys[12], $arr)) $this->setCorcont($arr[$keys[12]]);
+		if (array_key_exists($keys[13], $arr)) $this->setId($arr[$keys[13]]);
 	}
 
 	
@@ -636,6 +667,7 @@ abstract class BaseCacorrel extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CacorrelPeer::CORSAL)) $criteria->add(CacorrelPeer::CORSAL, $this->corsal);
 		if ($this->isColumnModified(CacorrelPeer::CORPRO)) $criteria->add(CacorrelPeer::CORPRO, $this->corpro);
 		if ($this->isColumnModified(CacorrelPeer::CORPAG)) $criteria->add(CacorrelPeer::CORPAG, $this->corpag);
+		if ($this->isColumnModified(CacorrelPeer::CORCONT)) $criteria->add(CacorrelPeer::CORCONT, $this->corcont);
 		if ($this->isColumnModified(CacorrelPeer::ID)) $criteria->add(CacorrelPeer::ID, $this->id);
 
 		return $criteria;
@@ -690,6 +722,8 @@ abstract class BaseCacorrel extends BaseObject  implements Persistent {
 		$copyObj->setCorpro($this->corpro);
 
 		$copyObj->setCorpag($this->corpag);
+
+		$copyObj->setCorcont($this->corcont);
 
 
 		$copyObj->setNew(true);
