@@ -647,8 +647,10 @@ class Orden_compra
         {
           if ($caordcom->getTipord()=='C')
             $numerocomprob='OC'.substr($caordcom->getOrdcom(), 2, 6);
-          elseif($caordcom->getTipord()=='S' || $caordcom->getTipord()=='T')
+          elseif($caordcom->getTipord()=='S')
             $numerocomprob='OS'.substr($caordcom->getOrdcom(), 2, 6);
+          else if ($caordcom->getTipord()=='T')
+            $numerocomprob='CO'.substr($caordcom->getOrdcom(), 2, 6);
           else
             $numerocomprob='OC'.substr($caordcom->getOrdcom(), 2, 6);
 
@@ -1419,10 +1421,12 @@ class Orden_compra
     $prefijomixto=H::getConfApp('prefijomixto', 'compras', 'almordcom');
     if (Herramientas::getX_vacio('ordcom','caordcom','ordcom',$caordcom->getOrdcom())=='')
     {
-        if (($caordcom->getTipord()=='S') || ($caordcom->getTipord()=='M') || ($caordcom->getTipord()=='T'))
+        if (($caordcom->getTipord()=='S') || ($caordcom->getTipord()=='M'))
               $tipord='corser';
-           else
-              $tipord='corcom';
+        else if ($caordcom->getTipord()=='T')
+            $tipord='corcont';
+        else
+            $tipord='corcom';
 
           if (Herramientas::getVerCorrelativo($tipord,'cacorrel',&$r))
           {
@@ -1448,9 +1452,11 @@ class Orden_compra
 	            while (!$encontrado)
 	            {
 	              $numero=str_pad($r, 8, '0', STR_PAD_LEFT);
-	                  if (($caordcom->getTipord()=='S') || ($caordcom->getTipord()=='M') || ($caordcom->getTipord()=='T'))
+	                  if (($caordcom->getTipord()=='S') || ($caordcom->getTipord()=='M'))
 	                  $numero='OS'.(substr($numero,2,strlen($numero)));
-	                else
+                          else if ($caordcom->getTipord()=='T')
+                            $numero='CO'.(substr($numero,2,strlen($numero)));
+	                  else
 	                    $numero='OC'.(substr($numero,2,strlen($numero)));
 	                $sql="select ordcom from caordcom where ordcom='".$numero."'";
 	                if (Herramientas::BuscarDatos($sql,&$result))
@@ -1470,6 +1476,8 @@ class Orden_compra
                      {
                        if ($prefijomixto!="" && $caordcom->getTipord()=='M')
                           $caordcom->setOrdcom($prefijomixto.substr($caordcom->getOrdcom(), 2, 6));
+                       else if ($caordcom->getTipord()=='T')
+                          $caordcom->setOrdcom('CO'.substr($caordcom->getOrdcom(), 2, 6));
                        else $caordcom->setOrdcom('OS'.substr($caordcom->getOrdcom(), 2, 6));
                      }
                      else
@@ -1531,10 +1539,12 @@ class Orden_compra
 	            while (!$encontrado)
 	            {
 	              $numero=str_pad($r, 8, '0', STR_PAD_LEFT);
-	                  if (($caordcom->getTipord()=='S') || ($caordcom->getTipord()=='M') || ($caordcom->getTipord()=='T'))
-	                  $numero='OS'.(substr($numero,2,strlen($numero)));
-	                else
-	                    $numero='OC'.(substr($numero,2,strlen($numero)));
+	                  if (($caordcom->getTipord()=='S') || ($caordcom->getTipord()=='M'))
+                              $numero='OS'.(substr($numero,2,strlen($numero)));
+                          else if ($caordcom->getTipord()=='T')
+                              $numero='CO'.(substr($numero,2,strlen($numero)));
+                          else
+                              $numero='OC'.(substr($numero,2,strlen($numero)));
 	                $sql="select ordcom from caordcom where ordcom='".$numero."'";
 	                if (Herramientas::BuscarDatos($sql,&$result))
 	                {
@@ -1553,6 +1563,8 @@ class Orden_compra
                  {
                    if ($prefijomixto!="" && $caordcom->getTipord()=='M')
                       $caordcom->setOrdcom($prefijomixto.substr($caordcom->getOrdcom(), 2, 6));
+                   else if ($caordcom->getTipord()=='T')
+                      $caordcom->setOrdcom('CO'.substr($caordcom->getOrdcom(), 2, 6));
                    else $caordcom->setOrdcom('OS'.substr($caordcom->getOrdcom(), 2, 6));
               }
                 else {
@@ -1570,6 +1582,8 @@ class Orden_compra
 		 {
                      if ($prefijomixto!="" && $caordcom->getTipord()=='M')
                         $caordcom->setOrdcom($prefijomixto.substr($caordcom->getOrdcom(), 2, 6));
+                     else if ($caordcom->getTipord()=='T')
+                        $caordcom->setOrdcom('CO'.substr($caordcom->getOrdcom(), 2, 6));
                      else $caordcom->setOrdcom('OS'.substr($caordcom->getOrdcom(), 2, 6));
 
               }
@@ -2160,8 +2174,10 @@ class Orden_compra
                       $genctaord = $result[0]['genctaord'];
                     if ($caordcom->getTipord()=='C')
                       $numerocomprobante='OC'.substr($caordcom->getOrdcom(), 2, 6);
-                    elseif   ($caordcom->getTipord()=='S' || $caordcom->getTipord()=='T')
+                    elseif   ($caordcom->getTipord()=='S')
                       $numerocomprobante='OS'.substr($caordcom->getOrdcom(), 2, 6);
+                    elseif ($caordcom->getTipord()=='T')
+                      $numerocomprobante='CO'.substr($caordcom->getOrdcom(), 2, 6);
                     else
                       $numerocomprobante='OC'.substr($caordcom->getOrdcom(), 2, 6);
 
@@ -2188,7 +2204,7 @@ class Orden_compra
 
                   Herramientas::EliminarRegistro("Caartfec", "Ordcom", $caordcom->getOrdcom());
 
-                  if ($afectacompro='S')
+                  if ($afectacompro=='S')
                     self::Eliminar_compromiso($caordcom);
                   self::Eliminar_recargos($caordcom);
                   //Actualizamos la Solicitud de Egresos
@@ -2841,8 +2857,10 @@ class Orden_compra
     $numerocomprob= '########'; $codigocuenta=""; $codigocuenta2="";
     $tipo2=""; $tipo=""; $des2=""; $des=""; $monto2=""; $monto="";
 
-    if (($caordcom->getTipord()=='S') || ($caordcom->getTipord()=='T'))
+    if (($caordcom->getTipord()=='S'))
       $tipord='corser';
+    else if ($caordcom->getTipord()=='T')
+            $tipord='corcont';
     else
       $tipord='corcom';
 
@@ -2854,8 +2872,10 @@ class Orden_compra
         while (!$encontrado)
         {
           $numero=str_pad($r, 8, '0', STR_PAD_LEFT);
-          if (($caordcom->getTipord()=='S') || ($caordcom->getTipord()=='T'))
+          if (($caordcom->getTipord()=='S'))
             $numero='OS'.(substr($numero,2,strlen($numero)));
+          else if ($caordcom->getTipord()=='T')
+            $numero='CO'.(substr($numero,2,strlen($numero)));
           else
             $numero='OC'.(substr($numero,2,strlen($numero)));
           $sql="select ordcom from caordcom where ordcom='".$numero."'";
@@ -2877,8 +2897,10 @@ class Orden_compra
       }
     }
 
-    if (($caordcom->getTipord()=='S') || ($caordcom->getTipord()=='T'))
+    if (($caordcom->getTipord()=='S'))
       $reftra='OS'.substr($reftra, 2, 6);
+    else if ($caordcom->getTipord()=='T')
+      $reftra='CO'.substr($reftra, 2, 6);
     else
       $reftra='OC'.substr($reftra, 2, 6);
 

@@ -1814,6 +1814,8 @@ class CatalogoWeb extends BaseCatalogoWeb {
 			$tipo = $params[1];
 		if ($tipo == "C")
 			$tipo = "A";
+                else if ($tipo == "T")
+                    $tipo = "S";
 		$this->c = new Criteria();
 		if ($tipo != "" and $tipo != 'M')
 			$this->c->add(CaregartPeer :: TIPO, $tipo);

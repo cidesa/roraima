@@ -15,10 +15,11 @@ generator:
       corpro:  { name: Proveedor, params: size=4 maxlength=8}
       corsol:  { name: Requisiciones por Departamento (Solicitud/Egreso), params: size=4 maxlength=8}
       corpag:  { name: Solicitud de Pago, params: size=4 maxlength=8}
+      corcont:  { name: Contrato, params: size=4 maxlength=8}
 
     edit:
       title: Configuración General
       display:
-        Correlativos: [corcom, corser, correq, correc, cordes, corcot, corent, corsal, corpro, corpag, corsol]
+        Correlativos: [corcom, corser, correq, correc, cordes, corcot, corent, corsal, corpro, corpag, corcont, corsol]
       actions:
         _save:        ~

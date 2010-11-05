@@ -53,6 +53,8 @@ class almordcomActions extends autoalmordcomActions
         {
           if ($prefijomixto!="" && $this->caordcom->getTipord()=='M')
             $numord = $prefijomixto.substr($numord, 2, 6);
+          elseif ($this->caordcom->getTipord()=='T')
+              $numord = 'CO'.substr($numord, 2, 6);
           else $numord = 'OS'.substr($numord, 2, 6);
         }else{
           $numord = 'OC'.substr($numord, 2, 6);
@@ -563,7 +565,8 @@ class almordcomActions extends autoalmordcomActions
   	//print $tipord;
     $c= new Criteria();
     $c->add(CaregartPeer::CODART,$this->getRequestParameter('codigo'));
-    if($tipord=='S' || $tipord=='A') $c->add(CaregartPeer::TIPO,$this->getRequestParameter('tipord'));
+    if ($tipord=='T') $tipord='S';
+    if($tipord=='S' || $tipord=='A' || $this->getRequestParameter('tipord')=='T') $c->add(CaregartPeer::TIPO,$tipord);
     $reg=CaregartPeer::doSelectOne($c);
     if ($reg)
     {
@@ -708,7 +711,6 @@ class almordcomActions extends autoalmordcomActions
         {
           if ($recargosreg->getCodpre()!="")
           {
-
 	        $desrgo=$recargosreg->getNomrgo();
 	        $montorgotab=$recargosreg->getMonrgo();
 	        $monrgo=number_format($montorgotab,2,',','.');
