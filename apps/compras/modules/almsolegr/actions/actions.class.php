@@ -760,8 +760,8 @@ class almsolegrActions extends autoalmsolegrActions
 
        $mascaraarticulo=$this->mascaraarticulo;
        $lonart=strlen($this->mascaraarticulo);
-       $mascaracategoria=$this->mascaracategoria;
-       $loncat=strlen($this->mascaracategoria);
+       $mascaracategoria= Herramientas::getObtener_FormatoCategoria();;
+       $loncat=strlen($mascaracategoria);
        $mascarapresupuesto=$this->mascarapresupuesto;
        $lonpre=strlen($this->mascarapresupuesto);
        $precom=$this->precompromete;
