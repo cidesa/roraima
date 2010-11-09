@@ -22,7 +22,8 @@ private $coderror =-1;
   
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -191,6 +192,8 @@ private $coderror =-1;
      // 15    // pager
     $this->pager = new sfPropelPager('Cadphart', 15);
     $c = new Criteria();
+    $c->add(CadphartPeer::TIPDPH,'F');
+    $c->addOr(CadphartPeer::TIPDPH,'P');
     $this->addSortCriteria($c);
     $this->addFiltersCriteria($c);
     $this->pager->setCriteria($c);
