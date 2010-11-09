@@ -141,8 +141,8 @@ class almmiginvfisActions extends autoalmmiginvfisActions
                                     $per[$r]['codubi']=$codubi;
                                     $per[$r]['desubi']=$nomubi;
                                     $per[$r]['presen']= array_key_exists('3', $dat) ? $dat[3] : '';
-                                    $per[$r]['reluni']= array_key_exists('4', $dat) ? $dat[4] : 0;
-                                    $per[$r]['exiact']= array_key_exists('11', $dat) ? $dat[11] : 0;
+                                    $per[$r]['reluni']= array_key_exists('4', $dat) ? H::FormatoMonto($dat[4]) : 0;
+                                    $per[$r]['exiact']= array_key_exists('11', $dat) ? H::FormatoMonto($dat[11]) : 0;
                                     $per[$r]['id']=9;
                                     $r++;
                                 }
