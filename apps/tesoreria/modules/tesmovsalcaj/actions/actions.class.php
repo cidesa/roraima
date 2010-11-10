@@ -70,7 +70,7 @@ class tesmovsalcajActions extends autotesmovsalcajActions
       $params2= array('param1' => $loncat);
 
       $this->columnas[1][0]->setHTML('type="text" size="17" maxlength="'.chr(39).$lonarti.chr(39).'" onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascara.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;} perderfocus(event,this.id,7);" onBlur="javascript:event.keyCode=13; ajaxarticulos(event,this.id);"');
-      $this->columnas[1][0]->setCatalogo('caregart','sf_admin_edit_form',$obj,'Caregart_Fapedido',$params);
+      $this->columnas[1][0]->setCatalogo('caregart','sf_admin_edit_form',$obj,'Caregart_Forestcos',$params);
       $this->columnas[1][2]->setHTML('type="text" size="17" maxlength="'.chr(39).$loncat.chr(39).'" onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascaracategoria.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;} perderfocus(event,this.id,7);" onBlur="javascript:event.keyCode=13; ajaxcategoria(event,this.id);"');
       $this->columnas[1][2]->setCatalogo('npcatpre','sf_admin_edit_form',$obj2,'Npcatpre_Almsolegr',$params2);
       $this->columnas[1][3]->setHTML(' size="10" onKeyPress=totalizarMonto(event);');
