@@ -8,7 +8,7 @@
  * @package    Roraima
  * @subpackage lib.model.nomina
  * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id: Npcargos.php 39456 2010-07-14 17:18:57Z cramirez $
+ * @version SVN: $Id: Npcargos.php 41364 2010-11-11 20:23:53Z cramirez $
  *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -94,24 +94,24 @@ class Npcargos extends BaseNpcargos
 	}
         public function getCanvmuj($va=false)
 	{
-            if(self::getCanpmuj()!=0)
-            {
+           # if(self::getCanpmuj()!=0)
+            #{
                 $sum= self::getCanpmuj()-self::getCanmuj();
 
                 return H::FormatoMonto($sum);
-            }else
-                return $this->canvmuj=='' ? '0,00' : $this->canvmuj;
+            #}else
+             #   return $this->canvmuj=='' ? '0,00' : $this->canvmuj;
 	}
 
 	public function getCanvhom($va=false)
 	{
-            if(self::getCanphom()!=0)
-            {
+            #if(self::getCanphom()!=0)
+            #{
                 $sum= self::getCanphom()-self::getCanhom();
 
                 return H::FormatoMonto($sum);
-            }else
-                return $this->canvhom=='' ? '0,00' : $this->canvhom;
+            #}else
+             #   return $this->canvhom=='' ? '0,00' : $this->canvhom;
 	}
 
 
