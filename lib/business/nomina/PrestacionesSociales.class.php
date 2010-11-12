@@ -1066,38 +1066,41 @@ End Function*/
   {
   	try
   	{
-	  $c = new Criteria();
-	  $c->add(NppresocPeer::CODEMP,$nppresoc->getCodemp());
-	  $c->add(NppresocPeer::REGPRE,'V');
-	  NppresocPeer::doDelete($c);
+      
+      $nppresocant = new Nppresocant();
+      $nppresoc->copyInto($nppresocant);
+      $c = new Criteria();
+      $c->add(NppresocantPeer::CODEMP,$nppresocant->getCodemp());
+      $c->add(NppresocantPeer::REGPRE,'V');
+      NppresocantPeer::doDelete($c);
 
-	  $x  = $grid[0];
-	  $x2 = $grid[2];
-	  $x3 = $grid[3];   //Tiempo de Servicio
+      $x  = $grid[0];
+      $x2 = $grid[2];
+      $x3 = $grid[3];   //Tiempo de Servicio
 
-      $nppresoc->setCodcon($x[0]->getCodtipcon());   //!CodCon = strCodCon
-      $nppresoc->setFeccal($nppresoc->getFeccalpres());      //!FecCal = lblFecCalculo
+      $nppresocant->setCodcon($x[0]->getCodtipcon());   //!CodCon = strCodCon
+      $nppresocant->setFeccal($nppresoc->getFeccalpres());      //!FecCal = lblFecCalculo
 
-      $nppresoc->setDiaser($x3[2][0]);     //!DiaSer = lblDiasServ
-      $nppresoc->setMesser($x3[2][1]);    //!MesSer = lblMesesServ
-      $nppresoc->setAnoser($x3[2][2]);    //!AnoSer = lblAnnosServ
+      $nppresocant->setDiaser($x3[2][0]);     //!DiaSer = lblDiasServ
+      $nppresocant->setMesser($x3[2][1]);    //!MesSer = lblMesesServ
+      $nppresocant->setAnoser($x3[2][2]);    //!AnoSer = lblAnnosServ
 
-      $nppresoc->setDiatra($x3[2][0]);     //!DiaTra = lblDiasTrab
-      $nppresoc->setMestra($x3[2][1]);    //!Mestra = lblMesesTrab
-      $nppresoc->setAnotra($x3[2][2]);    //!AnoTra = lblAnnosTrab
+      $nppresocant->setDiatra($x3[2][0]);     //!DiaTra = lblDiasTrab
+      $nppresocant->setMestra($x3[2][1]);    //!Mestra = lblMesesTrab
+      $nppresocant->setAnotra($x3[2][2]);    //!AnoTra = lblAnnosTrab
 
-      $nppresoc->setRegpre('V');
-      $nppresoc->setStapre('C');
+      $nppresocant->setRegpre('V');
+      $nppresocant->setStapre('C');
 
       //totales
-      $nppresoc->setIntacu($x2[0]);  //getTotintacu   --> !IntAcu = dblTotIntAcu
-      $nppresoc->setAdeint($x2[1]);  //getTotmonadeint --> !adeint = dblTotAdeInt
-      $nppresoc->setAntacu($x2[4]);  //getTotmonant  --> !antacu = dblTotAntAcu
-      $nppresoc->setAdepre($x2[3]);  //getTotcapitalact   --> !AdePre = dblTotAdePre
-	  $nppresoc->setMonpre(H::formatonum($x2[4])+H::Formatonum($x2[0]));  //getTotintacu + getTotmonant
-      $nppresoc->save();
+      $nppresocant->setIntacu($x2[0]);  //getTotintacu   --> !IntAcu = dblTotIntAcu
+      $nppresocant->setAdeint($x2[1]);  //getTotmonadeint --> !adeint = dblTotAdeInt
+      $nppresocant->setAntacu($x2[4]);  //getTotmonant  --> !antacu = dblTotAntAcu
+      $nppresocant->setAdepre($x2[3]);  //getTotcapitalact   --> !AdePre = dblTotAdePre
+  	  $nppresocant->setMonpre(H::formatonum($x2[4])+H::Formatonum($x2[0]));  //getTotintacu + getTotmonant
+      $nppresocant->save();
 
-	return -1;
+    return -1;
 
 	}catch (Exception $ex){
 		return 0;
