@@ -17,7 +17,7 @@ generator:
       redmon:     { name: Redondeo para los Calculos }
       codpre:     { name: Presupuestar Cargos }
       asiconnom:  { name: Asignar Conceptos a la Nómina }
-
+      redondeo:   { name: Convertir Capital de Prestaciones a Bsf. a Partir del 2008 }
     list:
       title:          Institución
       display:        [=codemp, nomemp, forcar, foremp, fororg, foruni ]
@@ -29,6 +29,6 @@ generator:
 
     edit:
       title:          Definición de Institución
-      display:        [codemp, nomemp, forcar, foremp, fororg, foruni, foresc, numrec, unitrib, redmon, codpre, asiconnom]
+      display:        [codemp, nomemp, forcar, foremp, fororg, foruni, foresc, numrec, unitrib, redmon, codpre, asiconnom, redondeo]
       actions:
         _save:        ~

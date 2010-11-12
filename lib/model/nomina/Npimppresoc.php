@@ -34,4 +34,11 @@ class Npimppresoc extends BaseNpimppresoc
 	protected $antdias=0;
 	protected $antmeses=0;
 	protected $antannos=0;
+  protected $salint=0;
+
+  public function getSalint()
+  {
+    return $this->salemp+$this->aliuti+$this->alibono+$this->aliadi;
+  }
+
 }
