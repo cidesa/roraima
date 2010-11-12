@@ -45,7 +45,7 @@ class fafacturActions extends autofafacturActions {
                                     }else $enc=true;
                                 }
                                 $reg->setCorcaj($r+1);
-                                $reg->save();
+                                //$reg->save();
 				$this->fafactur->setReffac($correl);
 			}
 	        }
@@ -585,7 +585,7 @@ class fafacturActions extends autofafacturActions {
                                             }else $enc=true;
                                         }
                                         $reg->setCorcaj($r+1);
-                                        $reg->save();
+                                        //$reg->save();
 				} else {
 					$tipo = "";
 					$correl = "";
