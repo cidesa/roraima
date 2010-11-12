@@ -2090,6 +2090,10 @@ propel:
     calesppres:
       type: VARCHAR
       size: 1
+    redondeo:
+      type: VARCHAR
+      size: 1
+      default: N
     id:
       type: INTEGER
       required: true
