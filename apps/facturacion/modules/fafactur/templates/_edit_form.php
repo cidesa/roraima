@@ -195,8 +195,9 @@ echo $value ? $value : '&nbsp;'
   <?php $value = object_input_tag($fafactur, 'getNumcontrol', array (
 	'size' => 20,
 	'control_name' => 'fafactur[numcontrol]',
-	'maxlength' => 8,
+	'maxlength' => 10,
 	'readonly'  =>  $fafactur->getId()!='' ? true : false ,
+  'onBlur'  => "if(this.value=='') this.value='##########';",
 ));
 echo $value ? $value : '&nbsp;'
 ?>
