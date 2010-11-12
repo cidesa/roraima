@@ -6490,5 +6490,16 @@ public function Catdefcatman_Cattramo($params = '') {
             );
 	}
 
+       public function Cadefalm_Camigtxt() {
+		$this->c = new Criteria();
+		$this->c->add( CadefalmPeer::ESPTOVEN,true);
+
+		$this->columnas = array (
+			CadefalmPeer :: CODALM => 'Codigo',
+			CadefalmPeer :: NOMALM => 'Descripcion'
+		);
+
+}
+
 }
 ?>

@@ -50,6 +50,10 @@ class CadefalmMapBuilder {
 
 		$tMap->addColumn('CODEDO', 'Codedo', 'string', CreoleTypes::VARCHAR, false, 20);
 
+		$tMap->addColumn('ESPTOVEN', 'Esptoven', 'boolean', CreoleTypes::BOOLEAN, false, null);
+
+		$tMap->addColumn('CODTIPPV', 'Codtippv', 'string', CreoleTypes::VARCHAR, false, 3);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	}

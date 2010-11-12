@@ -13,7 +13,7 @@ abstract class BaseCadefalmPeer {
 	const CLASS_DEFAULT = 'lib.model.Cadefalm';
 
 
-	const NUM_COLUMNS = 9;
+	const NUM_COLUMNS = 11;
 
 
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -44,6 +44,12 @@ abstract class BaseCadefalmPeer {
 	const CODEDO = 'cadefalm.CODEDO';
 
 
+	const ESPTOVEN = 'cadefalm.ESPTOVEN';
+
+	
+	const CODTIPPV = 'cadefalm.CODTIPPV';
+
+	
 	const ID = 'cadefalm.ID';
 
 
@@ -52,18 +58,18 @@ abstract class BaseCadefalmPeer {
 
 
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codalm', 'Nomalm', 'Codcat', 'Codtip', 'CatipalmId', 'Diralm', 'Codalt', 'Codedo', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (CadefalmPeer::CODALM, CadefalmPeer::NOMALM, CadefalmPeer::CODCAT, CadefalmPeer::CODTIP, CadefalmPeer::CATIPALM_ID, CadefalmPeer::DIRALM, CadefalmPeer::CODALT, CadefalmPeer::CODEDO, CadefalmPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codalm', 'nomalm', 'codcat', 'codtip', 'catipalm_id', 'diralm', 'codalt', 'codedo', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
+		BasePeer::TYPE_PHPNAME => array ('Codalm', 'Nomalm', 'Codcat', 'Codtip', 'CatipalmId', 'Diralm', 'Codalt', 'Codedo', 'Esptoven', 'Codtippv', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (CadefalmPeer::CODALM, CadefalmPeer::NOMALM, CadefalmPeer::CODCAT, CadefalmPeer::CODTIP, CadefalmPeer::CATIPALM_ID, CadefalmPeer::DIRALM, CadefalmPeer::CODALT, CadefalmPeer::CODEDO, CadefalmPeer::ESPTOVEN, CadefalmPeer::CODTIPPV, CadefalmPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codalm', 'nomalm', 'codcat', 'codtip', 'catipalm_id', 'diralm', 'codalt', 'codedo', 'esptoven', 'codtippv', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
 	);
 
 
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codalm' => 0, 'Nomalm' => 1, 'Codcat' => 2, 'Codtip' => 3, 'CatipalmId' => 4, 'Diralm' => 5, 'Codalt' => 6, 'Codedo' => 7, 'Id' => 8, ),
-		BasePeer::TYPE_COLNAME => array (CadefalmPeer::CODALM => 0, CadefalmPeer::NOMALM => 1, CadefalmPeer::CODCAT => 2, CadefalmPeer::CODTIP => 3, CadefalmPeer::CATIPALM_ID => 4, CadefalmPeer::DIRALM => 5, CadefalmPeer::CODALT => 6, CadefalmPeer::CODEDO => 7, CadefalmPeer::ID => 8, ),
-		BasePeer::TYPE_FIELDNAME => array ('codalm' => 0, 'nomalm' => 1, 'codcat' => 2, 'codtip' => 3, 'catipalm_id' => 4, 'diralm' => 5, 'codalt' => 6, 'codedo' => 7, 'id' => 8, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
+		BasePeer::TYPE_PHPNAME => array ('Codalm' => 0, 'Nomalm' => 1, 'Codcat' => 2, 'Codtip' => 3, 'CatipalmId' => 4, 'Diralm' => 5, 'Codalt' => 6, 'Codedo' => 7, 'Esptoven' => 8, 'Codtippv' => 9, 'Id' => 10, ),
+		BasePeer::TYPE_COLNAME => array (CadefalmPeer::CODALM => 0, CadefalmPeer::NOMALM => 1, CadefalmPeer::CODCAT => 2, CadefalmPeer::CODTIP => 3, CadefalmPeer::CATIPALM_ID => 4, CadefalmPeer::DIRALM => 5, CadefalmPeer::CODALT => 6, CadefalmPeer::CODEDO => 7, CadefalmPeer::ESPTOVEN => 8, CadefalmPeer::CODTIPPV => 9, CadefalmPeer::ID => 10, ),
+		BasePeer::TYPE_FIELDNAME => array ('codalm' => 0, 'nomalm' => 1, 'codcat' => 2, 'codtip' => 3, 'catipalm_id' => 4, 'diralm' => 5, 'codalt' => 6, 'codedo' => 7, 'esptoven' => 8, 'codtippv' => 9, 'id' => 10, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
 	);
 
 
@@ -132,6 +138,10 @@ abstract class BaseCadefalmPeer {
 		$criteria->addSelectColumn(CadefalmPeer::CODALT);
 
 		$criteria->addSelectColumn(CadefalmPeer::CODEDO);
+
+		$criteria->addSelectColumn(CadefalmPeer::ESPTOVEN);
+
+		$criteria->addSelectColumn(CadefalmPeer::CODTIPPV);
 
 		$criteria->addSelectColumn(CadefalmPeer::ID);
 

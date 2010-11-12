@@ -529,6 +529,11 @@ propel:
     codedo:
       type: VARCHAR
       size: 20
+    esptoven:
+      type: BOOLEAN
+    codtippv:
+      type: VARCHAR
+      size: 3
     id:
       type: INTEGER
       required: true
@@ -3173,6 +3178,29 @@ propel:
     relart:
       type: VARCHAR
       size: 25
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  catipalmpv:
+    codtippv:
+      type: VARCHAR
+      size: 3
+      required: true
+    nomtippv:
+      type: VARCHAR
+      size: 100
+      required: true
+    metdes:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    methas:
+      type: NUMERIC
+      size: 14
+      scale: 2
     id:
       type: INTEGER
       required: true
