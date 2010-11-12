@@ -965,7 +965,7 @@ class CatalogoWeb extends BaseCatalogoWeb {
   public function Fordefpryaccmet_Forpoa($params = array()) {
     $this->c = new Criteria();
     $this->c->add(FordefpryaccmetPeer :: CODPRO, $params[0]);
-    $this->c->add(FordefpryaccmetPeer :: CODPRO, $params[0]);
+    //$this->c->add(FordefpryaccmetPeer :: CODPRO, $params[0]);
     $this->c->add(FordefpryaccmetPeer :: CODACCESP, $params[1]);
     //   $this->c->addAscendingOrderByColumn(FordefpryaccmetPeer::CODACCESP);
     $this->columnas = array (
@@ -1026,7 +1026,7 @@ class CatalogoWeb extends BaseCatalogoWeb {
       //$Longitud = $params[0];
       $formatouae = strlen(Herramientas :: ObtenerFormato('Fordefegrgen', 'Foruae'));
       $this->c = new Criteria();
-      $this->sql = "length(Codcat) = '" . $formatouae . "' and codcat like '" . $params[0] . "%'";
+      $this->sql = "length(Codcat) = '" . $formatouae . "'";
       $this->c->add(FordefcatprePeer :: CODCAT, $this->sql, Criteria :: CUSTOM);
       $this->c->addAscendingOrderByColumn(FordefcatprePeer::CODCAT);
     } else {
