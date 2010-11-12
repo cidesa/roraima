@@ -76,9 +76,24 @@ class camigtxtvenalmActions extends autocamigtxtvenalmActions
   {
     $codigo = $this->getRequestParameter('codigo','');
     $ajax = $this->getRequestParameter('ajax','');
+    $js=""; $dato="";
     switch ($ajax){
       case '1':
-        $output = '[["","",""],["","",""],["","",""]]';
+        $c= new Criteria();
+        $c->add(CadefalmPeer::CODALM,$codigo);
+        $reg= CadefalmPeer::doSelectOne($c);
+        if ($reg)
+        {
+          if ($reg->getEsptoven())
+            $dato=$reg->getNomalm();
+          else
+            $js="alert('El Almacen no esta clasificado como un Punto de Venta'); $('camigtxtven_codalm').value=''; $('camigtxtven_codalm').focus();";
+        }else {
+            $js="alert('El Almacen no existe'); $('camigtxtven_codalm').value=''; $('camigtxtven_codalm').focus();";
+        }
+
+
+        $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$js.'",""],["","",""]]';
         break;
       default:
         $output = '[["","",""],["","",""],["","",""]]';

@@ -41,6 +41,14 @@ abstract class BaseCadefalm extends BaseObject  implements Persistent {
 
 
 
+	protected $esptoven;
+
+
+	
+	protected $codtippv;
+
+
+	
 	protected $id;
 
 
@@ -112,6 +120,20 @@ abstract class BaseCadefalm extends BaseObject  implements Persistent {
 
   }
 
+  public function getEsptoven()
+  {
+
+    return $this->esptoven;
+
+  }
+  
+  public function getCodtippv()
+  {
+
+    return trim($this->codtippv);
+
+  }
+  
   public function getId()
   {
 
@@ -207,6 +229,26 @@ abstract class BaseCadefalm extends BaseObject  implements Persistent {
 
 	}
 
+	public function setEsptoven($v)
+	{
+
+    if ($this->esptoven !== $v) {
+        $this->esptoven = $v;
+        $this->modifiedColumns[] = CadefalmPeer::ESPTOVEN;
+      }
+  
+	} 
+	
+	public function setCodtippv($v)
+	{
+
+    if ($this->codtippv !== $v) {
+        $this->codtippv = $v;
+        $this->modifiedColumns[] = CadefalmPeer::CODTIPPV;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -237,7 +279,11 @@ abstract class BaseCadefalm extends BaseObject  implements Persistent {
 
       $this->codedo = $rs->getString($startcol + 7);
 
-      $this->id = $rs->getInt($startcol + 8);
+      $this->esptoven = $rs->getBoolean($startcol + 8);
+
+      $this->codtippv = $rs->getString($startcol + 9);
+
+      $this->id = $rs->getInt($startcol + 10);
 
       $this->resetModified();
 
@@ -245,7 +291,7 @@ abstract class BaseCadefalm extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 9;
+            return $startcol + 11; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Cadefalm object", $e);
     }
@@ -447,6 +493,12 @@ abstract class BaseCadefalm extends BaseObject  implements Persistent {
 				return $this->getCodedo();
 				break;
 			case 8:
+				return $this->getEsptoven();
+				break;
+			case 9:
+				return $this->getCodtippv();
+				break;
+			case 10:
 				return $this->getId();
 				break;
 			default:
@@ -467,7 +519,9 @@ abstract class BaseCadefalm extends BaseObject  implements Persistent {
 			$keys[5] => $this->getDiralm(),
 			$keys[6] => $this->getCodalt(),
 			$keys[7] => $this->getCodedo(),
-			$keys[8] => $this->getId(),
+			$keys[8] => $this->getEsptoven(),
+			$keys[9] => $this->getCodtippv(),
+			$keys[10] => $this->getId(),
 		);
 		return $result;
 	}
@@ -508,6 +562,12 @@ abstract class BaseCadefalm extends BaseObject  implements Persistent {
 				$this->setCodedo($value);
 				break;
 			case 8:
+				$this->setEsptoven($value);
+				break;
+			case 9:
+				$this->setCodtippv($value);
+				break;
+			case 10:
 				$this->setId($value);
 				break;
 		} 	}
@@ -525,7 +585,9 @@ abstract class BaseCadefalm extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[5], $arr)) $this->setDiralm($arr[$keys[5]]);
 		if (array_key_exists($keys[6], $arr)) $this->setCodalt($arr[$keys[6]]);
 		if (array_key_exists($keys[7], $arr)) $this->setCodedo($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setId($arr[$keys[8]]);
+		if (array_key_exists($keys[8], $arr)) $this->setEsptoven($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setCodtippv($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setId($arr[$keys[10]]);
 	}
 
 
@@ -541,6 +603,8 @@ abstract class BaseCadefalm extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CadefalmPeer::DIRALM)) $criteria->add(CadefalmPeer::DIRALM, $this->diralm);
 		if ($this->isColumnModified(CadefalmPeer::CODALT)) $criteria->add(CadefalmPeer::CODALT, $this->codalt);
 		if ($this->isColumnModified(CadefalmPeer::CODEDO)) $criteria->add(CadefalmPeer::CODEDO, $this->codedo);
+		if ($this->isColumnModified(CadefalmPeer::ESPTOVEN)) $criteria->add(CadefalmPeer::ESPTOVEN, $this->esptoven);
+		if ($this->isColumnModified(CadefalmPeer::CODTIPPV)) $criteria->add(CadefalmPeer::CODTIPPV, $this->codtippv);
 		if ($this->isColumnModified(CadefalmPeer::ID)) $criteria->add(CadefalmPeer::ID, $this->id);
 
 		return $criteria;
@@ -587,6 +651,10 @@ abstract class BaseCadefalm extends BaseObject  implements Persistent {
 		$copyObj->setCodalt($this->codalt);
 
 		$copyObj->setCodedo($this->codedo);
+
+		$copyObj->setEsptoven($this->esptoven);
+
+		$copyObj->setCodtippv($this->codtippv);
 
 
 		$copyObj->setNew(true);

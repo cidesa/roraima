@@ -1,0 +1,31 @@
+methods:
+  post:
+   - "catipalmpv{codtippv}"
+   - "catipalmpv{nomtippv}"
+
+
+names:
+  catipalmpv{codtippv}:
+    required:  Yes
+    required_msg: El CÃ³digo  no puedo estar en Blanco
+    validators: UniqueValidator
+
+  catipalmpv{nomtippv}:
+    required:  Yes
+    required_msg: El Nombre no puedo estar en Blanco
+    validators: NombreValidator
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Catipalmpv
+        column:   codtippv
+        unique_error:   El CÃ³digo  ya existe. Por Favor, CambiÃ©lo por otro.
+
+NombreValidator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El Nombre no puede tener menos de 2 caracteres
+        max:       100
+        max_error: El Nombre no puede tener mÃ¡s de 100 caracteres

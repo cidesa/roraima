@@ -8,9 +8,9 @@ generator:
         name: Código de Almacén
         params: maxlength=20
         catalogo:
-          catalogoweb: Cadefalm_Alminvfis
+          catalogoweb: Cadefalm_Camigtxt
           clase: Cadefalm
-          ajax: 0
+          ajax: 1
           parametros: getprincipal="getCodalm" getsecundario="getNomalm" campoprincipal="codalm" camposecundario="nomalm" campobase = "id"
       nomalm: { name: Descripción }
       fecven: { name: Fecha de Venta }

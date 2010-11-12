@@ -135,8 +135,31 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 
+   <br>
 
-    <br>
+  <?php echo label_for('cadefalm[esptoven]', __($labels['cadefalm{esptoven}']), 'class="required" Style="width:120px"') ?>
+  <div class="content<?php if ($sf_request->hasError('cadefalm{esptoven}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('cadefalm{esptoven}')): ?>
+    <?php echo form_error('cadefalm{esptoven}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_checkbox_tag($cadefalm, 'getEsptoven', array (
+  'control_name' => 'cadefalm[esptoven]',
+  'onClick'  => 'mostrar();',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+   <br>
+
+    <div id="tipventa" style="display:none">
+  <?php echo label_for('cadefalm[codtippv]', __($labels['cadefalm{codtippv}']), 'class="required" Style="width:120px"') ?>
+  <div class="content<?php if ($sf_request->hasError('cadefalm{codtippv}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('cadefalm{codtippv}')): ?>
+    <?php echo form_error('cadefalm{codtippv}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+ <?php echo select_tag('cadefalm[codtippv]', options_for_select(CatipalmpvPeer::getTipos(),$cadefalm->getCodtippv(),'include_custom=Seleccione uno...'),array()) ?>
+    </div>
+</div>
 </div>
 
 </fieldset>
@@ -157,7 +180,13 @@
 
 
 <script type="text/javascript">
-
+if ($('id').value!="")
+{
+    if ($('cadefalm_esptoven').checked==true)
+    {
+       $('tipventa').show();
+    }
+}
 function enter(e,valor)
  {
 
@@ -174,4 +203,14 @@ function enter(e,valor)
    }
  }
 
+function mostrar()
+{
+    if ($('cadefalm_esptoven').checked==true)
+    {
+       $('tipventa').show();
+    }else {
+        $('cadefalm_codtippv').value='';
+        $('tipventa').hide();
+    }
+}
 </script>

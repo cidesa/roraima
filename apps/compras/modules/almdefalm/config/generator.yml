@@ -12,6 +12,8 @@ generator:
       codedo:      { name : Estado }
       diralm:      { name : Direccion de Localidad }
       nomcat:      { name : Unidad Asociada }
+      esptoven:    { name : ¿Es Punto de Venta?}
+      codtippv:    { name : Tipo de Punto de Venta}
 
     list:
       title:          Almacenes
@@ -25,7 +27,7 @@ generator:
 
     edit:
       title:          Edición de Almacen
-      display:        [codalm, nomalm, codcat, codtip, diralm, codedo]
+      display:        [codalm, nomalm, codcat, codtip, diralm, codedo, esptoven, codtippv]
       fields:
         codalm:       { params : maxlength=6}
       actions:
