@@ -1083,7 +1083,7 @@ class pagemiordActions extends autopagemiordActions {
     $col9->setHTML('type="text" size="15" maxlength="21"');
     $col9->setEsNumerico(true);
     $col9->setJScript('onKeypress="entermonto_b(event,this.id); totalizar(event,this.id);" onBlur="javascript:event.keyCode=13; validacau(this.id)"');
-    $col9->setEsTotal(true,'totfac');
+    //$col9->setEsTotal(true,'totfac');
 
     $col10 = new Columna('Exento Iva');
     $col10->setTipo(Columna::MONTO);
@@ -1094,7 +1094,7 @@ class pagemiordActions extends autopagemiordActions {
     $col10->setHTML('type="text" size="15" maxlength="21"');
     $col10->setEsNumerico(true);
     $col10->setJScript('onKeypress="entermonto_b(event,this.id); totalizar(event,this.id);"');
-    $col10->setEsTotal(true,'totexen');
+    //$col10->setEsTotal(true,'totexen');
 
     $col11 = new Columna('Base Imponible');
     $col11->setTipo(Columna::MONTO);
@@ -1105,7 +1105,7 @@ class pagemiordActions extends autopagemiordActions {
     $col11->setEsNumerico(true);
     $col11->setJScript('onKeypress="entermonto_b(event,this.id); totalizar(event,this.id);"');
     $col11->setHTML('size="15"');
-    $col11->setEsTotal(true,'totbas');
+    //$col11->setEsTotal(true,'totbas');
 
     $col12 = new Columna('Impuesto');
     $col12->setTipo(Columna::MONTO);
@@ -1114,9 +1114,9 @@ class pagemiordActions extends autopagemiordActions {
     $col12->setAlineacionObjeto(Columna::DERECHA);
     $col12->setNombreCampo('moniva');
     $col12->setEsNumerico(true);
-    $col12->setJScript('onKeypress="entermonto_b(event,this.id)"');
+    $col12->setJScript('onKeypress="entermonto_b(event,this.id); actualizarTotfac();"');
     $col12->setHTML('size="15"');
-    $col12->setEsTotal(true,'totimp');
+    //$col12->setEsTotal(true,'totimp');
 
     $col13 = new Columna('IVA Retenido');
     $col13->setTipo(Columna::MONTO);
@@ -1125,16 +1125,16 @@ class pagemiordActions extends autopagemiordActions {
     $col13->setAlineacionObjeto(Columna::DERECHA);
     $col13->setNombreCampo('monret');
     $col13->setEsNumerico(true);
-    $col13->setJScript('onKeypress="entermonto_b(event,this.id)"');
+    $col13->setJScript('onKeypress="entermonto_b(event,this.id); actualizarTotfac();"');
     $col13->setHTML(' size="15"');
-    $col13->setEsTotal(true,'totiva');
+    //$col13->setEsTotal(true,'totiva');
 
     $col14 = new Columna('1x100');
     $col14->setTipo(Columna::CHECK);
     $col14->setNombreCampo('unocien');
     $col14->setEsGrabable(true);
     $col14->setHTML(' ');
-    $col14->setJScript('onClick="unoxmil(this.id)"');
+    $col14->setJScript('onClick="unoxmil(this.id); actualizarTotfac();"');
 
     $col15 = new Columna('Base Imponible 1xMil');
     $col15->setTipo(Columna::MONTO);
@@ -1143,9 +1143,9 @@ class pagemiordActions extends autopagemiordActions {
     $col15->setAlineacionObjeto(Columna::DERECHA);
     $col15->setNombreCampo('basltf');
     $col15->setEsNumerico(true);
-    $col15->setJScript(' onblur="javascript:recalunoxmil(this.id);" ');
+    $col15->setJScript(' onblur="javascript:recalunoxmil(this.id); actualizarTotfac();"');
     $col15->setHTML('size="15"');
-    $col15->setEsTotal(true,'totbasmil');
+    //$col15->setEsTotal(true,'totbasmil');
 
     $col16 = new Columna('% 1xMil');
     $col16->setTipo(Columna::MONTO);
@@ -1166,14 +1166,14 @@ class pagemiordActions extends autopagemiordActions {
     $col17->setEsNumerico(true);
     $col17->setJScript(' ');
     $col17->setHTML('readonly="true" size="15"');
-    $col17->setEsTotal(true,'totmontmil');
+    //$col17->setEsTotal(true,'totmontmil');
 
     $col18 = new Columna('I.S.L.R');
     $col18->setTipo(Columna::CHECK);
     $col18->setNombreCampo('impusob');
     $col18->setEsGrabable(true);
     $col18->setHTML(' ');
-    $col18->setJScript('onClick="islr(this.id)"');
+    $col18->setJScript('onClick="islr(this.id); actualizarTotfac();"');
 
     $col19 = new Columna('Base Imponible I.S.L.R');
     $col19->setTipo(Columna::MONTO);
@@ -1182,9 +1182,9 @@ class pagemiordActions extends autopagemiordActions {
     $col19->setAlineacionObjeto(Columna::DERECHA);
     $col19->setNombreCampo('basislr');
     $col19->setEsNumerico(true);
-    $col19->setJScript(' onblur="javascript:recalislr(this.id);"');
+    $col19->setJScript(' onblur="javascript:recalislr(this.id); actualizarTotfac();"');
     $col19->setHTML('size="15"');
-    $col19->setEsTotal(true,'totbasislr');
+    //$col19->setEsTotal(true,'totbasislr');
 
     $col20 = new Columna('% I.S.L.R');
     $col20->setTipo(Columna::COMBO);
@@ -1202,7 +1202,7 @@ class pagemiordActions extends autopagemiordActions {
     $col21->setEsNumerico(true);
     $col21->setJScript(' ');
     $col21->setHTML('readonly="true" size="15"');
-    $col21->setEsTotal(true,'totmontislr');
+    //$col21->setEsTotal(true,'totmontislr');
 
     $col22 = new Columna('islr');
     $col22->setTipo(Columna::TEXTO);
@@ -1236,7 +1236,7 @@ class pagemiordActions extends autopagemiordActions {
     $col25->setNombreCampo('imprs');
     $col25->setEsGrabable(true);
     $col25->setHTML(' ');
-    $col25->setJScript('onClick="irs(this.id)"');
+    $col25->setJScript('onClick="irs(this.id); actualizarTotfac();"');
 
     $col26 = new Columna('Base Imponible I.R.S');
     $col26->setTipo(Columna::MONTO);
@@ -1245,9 +1245,9 @@ class pagemiordActions extends autopagemiordActions {
     $col26->setAlineacionObjeto(Columna::DERECHA);
     $col26->setNombreCampo('basirs');
     $col26->setEsNumerico(true);
-    $col26->setJScript(' onblur="javascript:recalirs(this.id);"');
+    $col26->setJScript(' onblur="javascript:recalirs(this.id); actualizarTotfac();"');
     $col26->setHTML('size="15"');
-    $col26->setEsTotal(true,'totbasirs');
+    //$col26->setEsTotal(true,'totbasirs');
 
     $col27 = new Columna('% I.R.S');
     $col27->setTipo(Columna::COMBO);
@@ -1265,7 +1265,7 @@ class pagemiordActions extends autopagemiordActions {
     $col28->setEsNumerico(true);
     $col28->setJScript(' ');
     $col28->setHTML('readonly="true" size="15"');
-    $col28->setEsTotal(true,'totmontirs');
+    //$col28->setEsTotal(true,'totmontirs');
 
     $col29 = new Columna('irs');
     $col29->setTipo(Columna::TEXTO);

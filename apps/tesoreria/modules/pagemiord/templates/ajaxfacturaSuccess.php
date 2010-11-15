@@ -72,7 +72,8 @@ else
 	$('divFac').show();
 	$('botonfac').hide();
 	var totalfac="bx"+"_0_9";
-   	actualizarsaldos_b();
+   	//actualizarsaldos_b();
+        actualizarTotfac();
    	var am=totalregistros('ex',1,10);
     var cm=totalregistros('bx',2,150);
     if (cm==0)
