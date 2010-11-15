@@ -2383,7 +2383,91 @@ function totalizar(e,id)
    }else{
 
    }
+   actualizarTotfac();
   }
+ }
+
+ function actualizarTotfac()
+ {
+     var am=totalregistros('bx',3,150);
+   var i=0;
+   var acum=0;
+   var acume=0;
+   var acumb=0;
+   var acumi=0;
+   var acumv=0;
+   var acumm=0;
+   var acuml=0;
+   var acums=0;
+   var acumr=0;
+   var acuma=0;
+   var acumh=0;
+   while (i<am)
+   {
+    var montot="bx"+"_"+i+"_9";
+    var monexe="bx"+"_"+i+"_10";
+    var monbas="bx"+"_"+i+"_11";
+    var monimp="bx"+"_"+i+"_12";
+    var moniva="bx"+"_"+i+"_13";
+    var monbm="bx"+"_"+i+"_15";
+    var monmm="bx"+"_"+i+"_17";
+    var monbr="bx"+"_"+i+"_19";
+    var monir="bx"+"_"+i+"_21";
+    var monibr="bx"+"_"+i+"_26";
+    var monisr="bx"+"_"+i+"_28";
+    var numcre="bx"+"_"+i+"_5";
+
+    var num1=toFloat(montot);
+    var num2=toFloat(monexe);
+    var num3=toFloat(monbas);
+    var num4=toFloat(monimp);
+    var num5=toFloat(moniva);
+    var num6=toFloat(monbm);
+    var num7=toFloat(monmm);
+    var num8=toFloat(monbr);
+    var num9=toFloat(monir);
+    var num10=toFloat(monibr);
+    var num11=toFloat(monisr);
+
+    if ($(numcre).value!="")
+    {
+        acum=acum-num1;
+        acume=acume-num2;
+        acumb=acumb-num3;
+        acumi=acumi-num4;
+        acumv=acumv-num5;
+        acumm=acumm-num6;
+        acuml=acuml-num7;
+        acums=acums-num8;
+        acumr=acumr-num9;
+        acuma=acuma-num10;
+        acumh=acumh-num11;
+    }else {
+       acum=acum+num1;
+       acume=acume+num2;
+       acumb=acumb+num3;
+       acumi=acumi+num4;
+       acumv=acumv+num5;
+       acumm=acumm+num6;
+       acuml=acuml+num7;
+       acums=acums+num8;
+       acumr=acumr+num9;
+       acuma=acuma+num10;
+       acumh=acumh+num11;
+    }
+   i++;
+   }
+   $('totfac').value=format(acum.toFixed(2),'.',',','.');
+   $('totexen').value=format(acume.toFixed(2),'.',',','.');
+   $('totbas').value=format(acumb.toFixed(2),'.',',','.');
+   $('totimp').value=format(acumi.toFixed(2),'.',',','.');
+   $('totiva').value=format(acumv.toFixed(2),'.',',','.');
+   $('totbasmil').value=format(acumm.toFixed(2),'.',',','.');
+   $('totmontmil').value=format(acuml.toFixed(2),'.',',','.');
+   $('totbasislr').value=format(acums.toFixed(2),'.',',','.');
+   $('totmontislr').value=format(acumr.toFixed(2),'.',',','.');
+   $('totbasirs').value=format(acuma.toFixed(2),'.',',','.');
+   $('totmontirs').value=format(acumh.toFixed(2),'.',',','.');
  }
 
  function validacau(id)
@@ -3103,7 +3187,8 @@ function monto1XMILN()
       var cod=$(porcentirs).options[index].text;
       var codigo=cod.split("_");
       $(codirs).value=codigo[0];
-      actualizarsaldos_b();
+      //actualizarsaldos_b();
+      actualizarTotfac();
    }
    }
    else
@@ -3148,5 +3233,6 @@ function monto1XMILN()
 
    $(montoirs).value = format(cal.toFixed(2),'.',',','.');
 
-   actualizarsaldos_b();
+   //actualizarsaldos_b();
+   actualizarTotfac();
   }
