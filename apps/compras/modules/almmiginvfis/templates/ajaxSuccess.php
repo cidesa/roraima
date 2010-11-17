@@ -2,6 +2,7 @@
 
 <?php if($datos) {?>
 <div id="divgriddatos">
+    <br></br>    
 	<?php echo grid_tag_v2($cainvfis->getObj()); ?>
 </div>
 <script language="Javascript">
