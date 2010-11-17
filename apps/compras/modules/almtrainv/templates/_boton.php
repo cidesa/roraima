@@ -3,7 +3,7 @@
 			   'url'      => 'almtrainv/traspasar',
 			   'script'   => true,
 			   'complete' => 'AjaxJSON(request, json)',
-			   'with' => "'fecinv='+$('cainvfis_fecinv').value"
+			   'with' => "'fecinv='+$('cainvfis_fecinv').value+'&codalm='+$(cainvfis_codalm).value+'&codubi='+$('cainvfis_codubi').value"
 ));
 
  ?>

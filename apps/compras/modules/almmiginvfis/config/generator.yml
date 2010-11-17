@@ -12,12 +12,13 @@ generator:
         help:       Favor cargar solo archivos .xls
       js:          { name: .}
       grid:        { name: .}
+      iniinv:      { name: Reemplazar Inventario para Instalación y Ubicación, type: checkbox_tag, params: onClick='iniinv()' }
 
     edit:
-      title:          Migrar Inventario FÃ­sico
+      title:          Migrar Inventario Físico
       display:
         Archivo a Cargar:        [archixls, _js]
-        Datos del Archivo leido: [_grid]
+        Datos del Archivo leido: [iniinv, _grid]
       actions:
         _list:        none
         _delete:      none
