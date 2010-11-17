@@ -2876,6 +2876,7 @@ class Compras {
   {
     $err=-1;
     $cadena="";
+    $arreglo=array();
     $file = fopen(sfConfig::get('sf_upload_dir')."//".$clase->getArchivo(),  "r");
     if ($file)
     {
@@ -2919,74 +2920,49 @@ class Compras {
                $resul= CaequiartPeer::doSelectOne($y);
                if ($resul)
                {                 
-                 //Actualizo el Articulo y el Inventario
-                   $u= new Criteria();
-                   $u->add(CaregartPeer::CODART,$resul->getCodart());
-                   $resg= CaregartPeer::doSelectOne($u);
-                   if ($resg)
-                   {
-                     $tipoart=$resg->getTipo();
-                     if ($tipoart=='A')
-                     {
-                         $act1=$resg->getExitot() - $canart;
-                         $dis1=$resg->getDistot() - $canart;
-                         $resg->setExitot($act1);
-                         $resg->setDistot($dis1);
-                         $resg->save();
-
-                         $c = new Criteria();
-                         $c->add(CaartalmubiPeer::CODART,$resul->getCodart());
-                         $c->add(CaartalmubiPeer::CODALM,$codalm);
-                         //$c->add(CaartalmubiPeer::CODUBI,$cubicacion);
-                         $alm = CaartalmubiPeer::doSelectOne($c);
-                         if ($alm)
-                         {
-                            if($alm->getExiact()>=$canart)
-                             {
-                                 $act2=$alm->getExiact() - $canart;
-                                 $alm->setExiact($act2);
-                                 $alm->save();
-                             }
-                         }// if ($alm)
-                         $c = new Criteria();
-                         $c->add(CaartalmPeer::CODART,$resul->getCodart());
-                         $c->add(CaartalmPeer::CODALM,$codalm);
-                         $reg = CaartalmPeer::doSelectOne($c);
-                         if ($reg)
-                         {
-                            if($reg->getExiact()>=$canart)
-                             {
-                                 $act2=$reg->getExiact() - $canart;
-                                 $reg->setExiact($act2);
-                                 $reg->save();
-                             }
-                         }// if ($alm)
-                       }//   if ($tipoart='A')
-                   }
-               }else {
+                   $arreglo[$cont]["codalm"]=$codalm;
+                   $arreglo[$cont]["fecven"]=$fecven;
+                   $arreglo[$cont]["codart"]=$codartqprg;
+                   $arreglo[$cont]["desart"]=$desartqprg;
+                   $arreglo[$cont]["fecmig"]=date('Y-m-d');
+                   $arreglo[$cont]["cantidad"]=$canart;
+                   $arreglo[$cont]["subtot"]=$subart;
+                   $arreglo[$cont]["iva"]=$iva;
+                   $arreglo[$cont]["precio"]=$preart;
+                   $arreglo[$cont]["usumig"]=sfContext::getInstance()->getUser()->getAttribute('loguse');
+                   $arreglo[$cont]["codart2"]=$resul->getCodart();
+                   $arreglo[$cont]["coding"]=H::getX_vacio('codart', 'caregart', 'coding', $resul->getCodart());
+               }
+               else {
                  $cadena=$cadena.$codartqprg."-";
                }
-
-               //Grabo todos los movimientos de ventas
-               $camigtxtven = new Camigtxtven();
-               $camigtxtven->setCodalm($codalm);
-               $camigtxtven->setFecven($fecven);
-               $camigtxtven->setCodart($codartqprg);
-               $camigtxtven->setDesart($desartqprg);
-               $camigtxtven->setFecmig(date('Y-m-d'));
-               $camigtxtven->setCantidad($canart);
-               $camigtxtven->setSubtot($subart);
-               $camigtxtven->setIva($iva);
-               $camigtxtven->setPrecio($preart);
-               $camigtxtven->setUsumig(sfContext::getInstance()->getUser()->getAttribute('loguse'));
-               $camigtxtven->save();
-              }
+               }
             }
             $cont++;
           }
+            $arrasientos=array();
+            $pos=0;
+            $i=0;
+            while ($i<count($arreglo))
+            {
+                if ($arreglo[$i]["codart"]!="")
+                {
+                  if ($arreglo[$i]["coding"]!="")
+                    {
+                      self::guardarAsientos($arreglo[$i]["coding"],$arreglo[$i]["subtot"],$arreglo[$i]["iva"],&$arrasientos,&$pos);
+                    }else {
+                        return 557;
+                    }
+                }
+                $i++;
+            }
+
+          self::grabarMigracion($arreglo);
+          self::grabarIngreso($codalm,$arreglo,&$cireging);
+          self::grabarImpIng($cireging,$arrasientos);
         }else {
           $err=556;
-        }   
+        }
     }else {
         $err=541;
     }
@@ -2994,6 +2970,178 @@ class Compras {
     unlink(sfConfig::get('sf_upload_dir')."//".$clase->getArchivo());
 
     return $err;
+  }
+
+  public static function grabarMigracion($arreglo)
+  {
+    $i=0;
+    while ($i<count($arreglo))
+    {
+                 //Actualizo el Articulo y el Inventario
+                   $u= new Criteria();
+       $u->add(CaregartPeer::CODART,$arreglo[$i]["codart2"]);
+                   $resg= CaregartPeer::doSelectOne($u);
+                   if ($resg)
+                   {
+                     $tipoart=$resg->getTipo();
+                     if ($tipoart=='A')
+                     {
+             $act1=$resg->getExitot() - H::toFloat($arreglo[$i]["cantidad"]);
+             $dis1=$resg->getDistot() - H::toFloat($arreglo[$i]["cantidad"]);
+                         $resg->setExitot($act1);
+                         $resg->setDistot($dis1);
+                         $resg->save();
+
+                         $c = new Criteria();
+             $c->add(CaartalmubiPeer::CODART,$arreglo[$i]["codart2"]);
+             $c->add(CaartalmubiPeer::CODALM,$arreglo[$i]["codalm"]);
+                         $alm = CaartalmubiPeer::doSelectOne($c);
+                         if ($alm)
+                         {
+                if($alm->getExiact()>=H::toFloat($arreglo[$i]["cantidad"]))
+                             {
+                     $act2=$alm->getExiact() - H::toFloat($arreglo[$i]["cantidad"]);
+                                 $alm->setExiact($act2);
+                                 $alm->save();
+                             }
+                         }// if ($alm)
+                         $c = new Criteria();
+             $c->add(CaartalmPeer::CODART,$arreglo[$i]["codart2"]);
+             $c->add(CaartalmPeer::CODALM,$arreglo[$i]["codalm"]);
+                         $reg = CaartalmPeer::doSelectOne($c);
+                         if ($reg)
+                         {
+                if($reg->getExiact()>=H::toFloat($arreglo[$i]["cantidad"]))
+                             {
+                     $act2=$reg->getExiact() - H::toFloat($arreglo[$i]["cantidad"]);
+                                 $reg->setExiact($act2);
+                                 $reg->save();
+                             }
+                         }// if ($alm)
+                       }//   if ($tipoart='A')
+                   }
+
+               //Grabo todos los movimientos de ventas
+               $camigtxtven = new Camigtxtven();
+       $camigtxtven->setCodalm($arreglo[$i]["codalm"]);
+       $camigtxtven->setFecven($arreglo[$i]["fecven"]);
+       $camigtxtven->setCodart($arreglo[$i]["codart"]);
+       $camigtxtven->setDesart($arreglo[$i]["desart"]);
+       $camigtxtven->setFecmig($arreglo[$i]["fecmig"]);
+       $camigtxtven->setCantidad($arreglo[$i]["cantidad"]);
+       $camigtxtven->setSubtot($arreglo[$i]["subtot"]);
+       $camigtxtven->setIva($arreglo[$i]["iva"]);
+       $camigtxtven->setPrecio($arreglo[$i]["precio"]);
+       $camigtxtven->setUsumig($arreglo[$i]["usumig"]);
+               $camigtxtven->save();
+
+        $i++;
+              }
+            }
+
+
+  public static function guardarAsientos($coding,$subtot,$iva,&$arrasientos,&$pos)
+  {
+    $i=0;
+	while ($i<=($pos-1))
+	{
+          if ($arrasientos[$i]["0"]==$coding)
+          {
+            $arrasientos[$i]["1"]=($arrasientos[$i]["1"] + $subtot);
+            $arrasientos[$i]["2"]=($arrasientos[$i]["2"] + $iva);
+            return true;
+          }
+	   $i++;
+        }   
+	$arrasientos[$pos]["0"]=$coding;
+        $arrasientos[$pos]["1"]=$subtot;
+        $arrasientos[$pos]["2"]=$iva;
+        $pos= $pos +1;
+    return true;
+    }
+
+  public static function grabarIngreso($codalm,$arreglo,&$cireging)
+  {
+    if (Herramientas::getVerCorrelativo('coring','cidefniv',&$r))
+    {
+        $encontrado=false;
+        while (!$encontrado)
+        {
+          $numero=str_pad($r, 8, '0', STR_PAD_LEFT);
+          $sql="select refing from cireging where refing='".$numero."'";
+          if (Herramientas::BuscarDatos($sql,&$result))
+          {
+            $r=$r+1;
+  }
+          else
+          {
+            $encontrado=true;
+          }
+        }
+    }
+
+    $acumnet=0;
+    $acumrec=0;
+    $i=0;
+    while ($i<count($arreglo))
+    {
+        if ($arreglo[$i]["codart"]!="")
+        {
+          $acumnet=$acumnet+$arreglo[$i]["subtot"];  //Acumulador del Neto
+          $acumrec=$acumrec+$arreglo[$i]["iva"];     //Acumulador del Recargo
+}
+        $i++;
+    }
+
+     $sql="select codtip, rifcon from cidefniv";
+     if (Herramientas::BuscarDatos($sql,&$result2))
+     {
+  	$cireging= new Cireging();
+  	$cireging->setRefing($numero);
+  	$cireging->setCodtip($result2[0]["codtip"]);
+  	$cireging->setFecing(date('Y-m-d'));
+  	$cireging->setAnoing(date('Y'));
+  	$cireging->setDesing('INGRESO GENERADO POR MIGRACIÓN DE PUNTO DE VENTA DEL ALMACÉN '.$codalm);
+  	$cireging->setRifcon($result2[0]["codtip"]);
+  	$cireging->setDesanu(null);
+  	$moning= $acumnet;
+  	$cireging->setMoning($moning);
+  	$cireging->setMonrec($acumrec);
+  	$cireging->setMondes(0);
+  	$cireging->setMontot($moning);
+  	$cireging->setPrevis('S');
+  	$cireging->setStaing('A');
+        $cireging->save();
+
+        Herramientas::getSalvarCorrelativo('coring','cidefniv','Referencia',$r,$msg);
+    }
+  }
+
+  public static function grabarImpIng($cireging,$arrasientos)
+  {
+    $c= new Criteria();
+    $c->add(CiimpingPeer::REFING,$cireging->getRefing());
+    $c->add(CiimpingPeer::FECING,$cireging->getFecing());
+    CiimpingPeer::doDelete($c);
+
+      $i=0;
+      while ($i<count($arrasientos))
+      {
+        $ciimping= new Ciimping();
+        $ciimping->setRefing($cireging->getRefing());
+        $ciimping->setFecing($cireging->getFecing());
+        $ciimping->setCodpre($arrasientos[$i]["0"]);
+        $ciimping->setMoning($arrasientos[$i]["1"]);
+        $ciimping->setMonrec($arrasientos[$i]["2"]);
+        $ciimping->setMondes(0);
+        $ciimping->setMontot($arrasientos[$i]["1"]);
+        $ciimping->setMonaju(0);
+        $ciimping->setStaimp('A');
+        $ciimping->save();
+        $i++;
+      }
+
+    return true;
   }
 
 }
