@@ -8,12 +8,14 @@
     $('leer').hide();
     $('cargar').hide();
     $('salvar').show();
+    $('diviniinv').show();
 </script>
 <?php }else { ?>
 <script>
     $('leer').show();
     $('cargar').show();
     $('salvar').hide();
+    $('diviniinv').hide();
 </script>
 <div id="divgriddatos">
 <table width="100%" >

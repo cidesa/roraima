@@ -31,11 +31,17 @@ class almmiginvfisActions extends autoalmmiginvfisActions
 
   protected function updateCainvfisFromRequest()
   {
+        $cainvfis = $this->getRequestParameter('cainvfis');
+
         if (!$this->getRequest()->hasErrors() && $this->getRequest()->getFileSize('cainvfis[archixls]'))
 	    {
 	        $fileName = "archivo_excel.xls";
 	        $this->getRequest()->moveFile('cainvfis[archixls]', sfConfig::get('sf_upload_dir')."/assets/".$fileName);
 	    }
+        if (isset($cainvfis['iniinv']))
+            {
+              $this->cainvfis->setIniinv($cainvfis['iniinv']);
+            }
   }
 
   public function configGrid($reg = array(),$regelim = array())
@@ -98,7 +104,7 @@ class almmiginvfisActions extends autoalmmiginvfisActions
         $mensaje='';
       	$this->cainvfis = $this->getCainvfisOrCreate();
         $this->updateCainvfisFromRequest();
-
+        $this->labels = $this->getLabels();
         $data = new Spreadsheet_Excel_Reader();
         $data->setOutputEncoding('CP1251');
         $currentFile = sfConfig::get('sf_upload_dir')."/assets/archivo_excel.xls";
@@ -114,6 +120,7 @@ class almmiginvfisActions extends autoalmmiginvfisActions
             $fecha=date('d/m/Y');
             for($i=0;$i<count($data->sheets);$i++)
             {
+                if(array_key_exists('cells',$data->sheets[$i]))
                 foreach($data->sheets[$i]['cells'] as $dat){
                   if(array_key_exists('1', $dat))
                   {
@@ -282,8 +289,10 @@ class almmiginvfisActions extends autoalmmiginvfisActions
             $obj = CainvfisPeer::doSelectOne($c);
             if($obj)
             {
-
-                $obj->setExiact(intval($obj->getExiact())+intval($reg['exiact']));
+                if($clasemodelo->getIniinv()==1)
+                    $obj->setExiact(floatval($reg['exiact']));
+                else
+                    $obj->setExiact(floatval($obj->getExiact())+floatval($reg['exiact']));
                 $obj->save();
             }else
             {

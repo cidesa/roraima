@@ -5,13 +5,17 @@ generator:
     theme:            cidesaGenerator
     fields:
       fecinv: { name: Fecha Inventario, params: date_format='dd/MM/yyyy' }
-      codalm: { name: Almacen, params : maxlength=8 }
+      codalm: { name: Almacen, params : maxlength=8 style="border:none" }
+      desalm: { name: Descripción, params : maxlength=8 style="border:none" }
+      codubi: { name: Ubicación, params : maxlength=8 style="border:none" }
+      desubi: { name: Descripción, params : maxlength=8 style="border:none"}
       boton: { name: "" }
+
 
     list:
       title:          Traspaso de Inventario Fisico a Lógico
-      display:        [=fecinv]
-      filters:		  [fecinv]
+      display:        [=fecinv, codalm, desalm, codubi, desubi]
+      filters:		  [fecinv, codalm, codubi]
       max_per_page:	  10
       object_actions:
         _edit:        ~
@@ -21,6 +25,6 @@ generator:
     edit:
       title:          Traspaso de Inventario Fisico a Lógico
       display:
-        "Realiza la Actualización de las Cantidades Lógicas de los Artículos":        [fecinv, _boton]
+        "Realiza la Actualización de las Cantidades Lógicas de los Artículos":        [fecinv, codalm, desalm, codubi, desubi, _boton]
       actions:
         _list:        ~

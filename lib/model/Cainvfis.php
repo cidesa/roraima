@@ -7,9 +7,9 @@
  *
  * @package    Roraima
  * @subpackage lib.model
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: Cainvfis.php 41404 2010-11-17 16:18:23Z cramirez $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -17,6 +17,7 @@ class Cainvfis extends BaseCainvfis
 {
   private $unialter ='';
   protected $ubicacion = '';
+  protected $iniinv = '';
   protected $totalm="0,00";
   protected $obj=array();
 
@@ -57,7 +58,7 @@ class Cainvfis extends BaseCainvfis
 
   public function getDesalm()
   {
-  	  return Herramientas::getX('codalm','cadefalm','nomalm',self::getCodalm());
+  	  return Herramientas::getX('codalm','cadefalm','nomalm',$this->codalm);
   }
 
   public function getArtdesde()///
@@ -125,5 +126,10 @@ class Cainvfis extends BaseCainvfis
   public function setTotalm(){
 
     return $this->totalm;
+  }
+
+  public function getDesubi()
+  {
+         return H::getX('Codubi','Cadefubi','Nomubi',$this->codubi);
   }
 }

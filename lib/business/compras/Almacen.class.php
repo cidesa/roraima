@@ -5,7 +5,7 @@
  * @package    Roraima
  * @subpackage compras
  * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id: Almacen.class.php 41188 2010-10-26 16:45:11Z cramirez $
+ * @version SVN: $Id: Almacen.class.php 41409 2010-11-17 16:21:30Z cramirez $
  *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -366,12 +366,28 @@ class Almacen
          }
      }
 
-    public static function TraspasarInventario($fecinv)
+    public static function TraspasarInventario($fecinv,$codalm='',$codubi='')
     {
    //Datos Inventario fisico
-    $c = new Criteria();
-    $c->add(CainvfisPeer::FECINV,$fecinv);
-    $resinvfis=CainvfisPeer::doSelect($c);
+    if($codubi!='' && $codalm!='')
+    {
+        $c = new Criteria();
+        $c->add(CainvfisPeer::FECINV,$fecinv);
+        $c->add(CainvfisPeer::CODALM,$codalm);
+        $c->add(CainvfisPeer::CODUBI,$codubi);
+        $resinvfis=CainvfisPeer::doSelect($c);
+    }elseif($codalm!='')
+    {
+	$c = new Criteria();
+        $c->add(CainvfisPeer::FECINV,$fecinv);
+        $c->add(CainvfisPeer::CODALM,$codalm);
+        $resinvfis=CainvfisPeer::doSelect($c);
+    }else
+    {
+        $c = new Criteria();
+        $c->add(CainvfisPeer::FECINV,$fecinv);
+        $resinvfis=CainvfisPeer::doSelect($c);
+    }
     foreach ($resinvfis as $datinvfis)
    	{
           #TODO ESTO SE COMENTO PORQUE ASI LO DECIDIO LEOBARDO, YA QUE SOLO DEBE
@@ -470,7 +486,7 @@ class Almacen
                   $newcaartalm->setPtoreo(0);
                   $newcaartalm->save();
 
-                  
+
                 }//$caartalm
             }
 

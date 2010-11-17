@@ -4,7 +4,7 @@
 <div id="divgriddatos" >
 <table width="100%" >
   <tr>
-    <th><strong><font color="#CC0000" size="4" face="Verdana, Arial, Helvetica, sans-serif"> <?php echo "Existe un Archivo Cargado haga click en Leer Archivo";?></font></strong></th>  
+    <th><strong><font color="#CC0000" size="4" face="Verdana, Arial, Helvetica, sans-serif"> <?php echo "Existe un Archivo Cargado haga click en Leer Archivo";?></font></strong></th>
   </tr>
 </table>
 </div>
@@ -18,3 +18,17 @@
 </table>
 </div>
 <?php }  ?>
+<script>
+$('diviniinv').hide();
+function iniinv()
+  {
+    if (!$('cainvfis_iniinv').checked)
+    {
+        $('cainvfis_iniinv').checked=false;
+
+    }else
+    {
+        $('cainvfis_iniinv').checked=true;
+    }
+  }
+</script>
