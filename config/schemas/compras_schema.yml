@@ -485,10 +485,10 @@ propel:
       type: NUMERIC
       size: 8
     corpag:
-      type: INTEGER
+      type: NUMERIC
       size: 8
     corcont:
-      type: INTEGER
+      type: NUMERIC
       size: 8
     id:
       type: INTEGER
