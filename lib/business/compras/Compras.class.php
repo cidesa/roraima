@@ -2880,7 +2880,92 @@ class Compras {
     $file = fopen(sfConfig::get('sf_upload_dir')."//".$clase->getArchivo(),  "r");
     if ($file)
     {
+        if('SI'=='SI')
+        {
+            $delimiter=";";
         $cont=0;
+            $rr=0;
+            $valor='';
+            $codqpr='';#CODIGO ARTICULO QPR
+            $nomqpr='';#NOMBRE ARTICULO QPR
+            $canqpr=0;#CANTIDAD
+            $preqpr=0;#TOTAL SIN IVA
+            $depiva='';#DEPARTAMENTO IVA
+            $preuni=0;#PRECIO UNITARIO
+            $col_codqpr=5;#COLUMNA CODIGO ARTICULO QPR DEL CSV
+            $col_nomqpr=6;#COLUMNA NOMBRE ARTICULO QPR DEL CSV
+            $col_canqpr=8;#COLUMNA CANTIDAD DEL CSV
+            $col_preqpr=9;#COLUMNA TOTAL SIN IVA DEL CSV
+            $col_depiva=15;#COLUMNA DEPARTAMENTO IVA DEL CSV
+            $col_preuni=17;#COLUMNA PRECIO UNITARIO DEL CSV
+
+            while(!feof($file))
+            {
+                $line=fgets($file, 255);
+                if ($cont>=4)
+                {
+                    $codalm=$clase->getCodalm();
+                    $fecven=$clase->getFecven();
+                    $auxline=split(";",$line);
+                    array_key_exists($col_codqpr-1,$auxline) ? $codqpr=$auxline[$col_codqpr-1] : '';
+                    array_key_exists($col_nomqpr-1,$auxline) ? $nomqpr=$auxline[$col_nomqpr-1] : '';
+                    array_key_exists($col_canqpr-1,$auxline) ? $canqpr=H::FormatoNum($auxline[$col_canqpr-1]) : '';
+                    array_key_exists($col_preqpr-1,$auxline) ? $preqpr=H::FormatoNum($auxline[$col_preqpr-1]) : '';
+                    array_key_exists($col_depiva-1,$auxline) ? $depiva=$auxline[$col_depiva-1] : '';
+                    array_key_exists($col_preuni-1,$auxline) ? $preuni=H::FormatoNum($auxline[$col_preuni-1]) : '';
+
+                   $y= new Criteria();
+                   $y->add(CaequiartPeer::CODQPR,$codqpr);
+                   $resul= CaequiartPeer::doSelectOne($y);
+                   if ($resul)
+                   {
+                       $arreglo[$rr]["codalm"]=$codalm;
+                       $arreglo[$rr]["fecven"]=$fecven;
+                       $arreglo[$rr]["codart"]=$codqpr;
+                       $arreglo[$rr]["desart"]=$nomqpr;
+                       $arreglo[$rr]["fecmig"]=date('Y-m-d');
+                       $arreglo[$rr]["cantidad"]=floatval($canqpr);
+                       $arreglo[$rr]["subtot"]=floatval($preqpr);
+                       $sql = "select moniva from caivaqpro where depto='$depiva'";
+                       if(H::BuscarDatos($sql, $rs))
+                          $moniva = $rs[0]['moniva'];
+                       else
+                          $moniva = 0;
+                       $iva = ($preqpr * $moniva)/100;
+                       $arreglo[$rr]["iva"]=$iva;
+                       $arreglo[$rr]["precio"]=floatval($preuni);
+                       $arreglo[$rr]["usumig"]=sfContext::getInstance()->getUser()->getAttribute('loguse');
+                       $arreglo[$rr]["codart2"]=$resul->getCodart();
+                       $arreglo[$rr]["coding"]=H::getX_vacio('codart', 'caregart', 'coding', $resul->getCodart());
+                       $rr++;
+                   }else {
+                     strlen($codqpr)==13 ? $cadena.=$codqpr."-" : '';
+                   }
+                }
+                $cont++;
+            }
+            $arrasientos=array();
+            $pos=0;
+            $i=0;
+            while ($i<count($arreglo))
+            {
+                if ($arreglo[$i]["codart"]!="")
+                {
+                  if ($arreglo[$i]["coding"]!="")
+                    {
+                      self::guardarAsientos($arreglo[$i]["coding"],$arreglo[$i]["subtot"],$arreglo[$i]["iva"],&$arrasientos,&$pos);
+                    }else {
+                        return 557;
+                    }
+                }
+                $i++;
+            }
+          self::grabarMigracion($arreglo);
+          self::grabarIngreso($codalm,$arreglo,&$cireging);
+          self::grabarImpIng($cireging,$arrasientos);
+        }else
+        {
+            $cont=0;
         $t= new Criteria();
         $t->add(CacontxtalmPeer::CODALM,$clase->getCodalm());
         $regis= CacontxtalmPeer::doSelectOne($t);
@@ -2962,6 +3047,7 @@ class Compras {
           self::grabarImpIng($cireging,$arrasientos);
         }else {
           $err=556;
+        }
         }
     }else {
         $err=541;
