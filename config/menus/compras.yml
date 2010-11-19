@@ -120,6 +120,8 @@ compras:
       Traspaso de Inventario Fisico a Lógico:                 almtrainv
       Cambiar Contraseña:                                     cambiopasswd
       Migrar Inventario Fisico :                              almmiginvfis
+      Configuración para Archivos TXT de Ventas:              catxtalm
+      Migración de Ventas:                                    camigtxtvenalm
       #Importar Productos:                                    ImportarProductos.php
       #Actualizar Precios y Existencias:                      ActualizarProductos.php
       #Cambiar Password de Usuario:                           PreCamPwd.php
