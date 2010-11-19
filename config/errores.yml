@@ -483,6 +483,9 @@
 556:
   cod: 556
   msj: El Código de Almacén no posee definición de configuración del TXT.
+557:
+  cod: 557
+  msj: No se puede realizar la Migración existe un artículo que no posee Cuenta de Ingreso.
 3:
   cod: 3
   msj: La contraseña es diferente.
@@ -530,6 +533,18 @@
 209:
   cod: 209
   msj: La Cédula del empleado no puedo estar en Blanco.
+210:
+  cod: 210
+  msj: Por favor, cheque que todos los articulos poseean Cuenta Contable Definitiva.
+211:
+  cod: 211
+  msj: Por favor, cheque que todos los articulos poseean Cuenta Contable Transitoria.
+212:
+  cod: 212
+  msj: Por favor, cheque que todos los articulos poseean Cuenta Contable de Gastos.
+213:
+  cod: 213
+  msj: El Monto de la Requisición debe se mayor a cero, debido a que se genera un Comprobante al momento del Despacho.
 ################### FORMULACION ####################
 # Definiciones Generales (Fordefgen)
 300:
@@ -633,7 +648,7 @@
   msj: No puede salvar sin introducir el Tipo de Gasto de la Actividad
 332:
   cod: 332
-  msj: No se puede Modificar la DefiniciÃ³n de Niveles de Ingresos debido a que ya existen Movimientos
+  msj: No se puede Modificar la Definición de Niveles de Ingresos debido a que ya existen Movimientos
 ################# Control de Documentos #################
 # docpen
 1210:
@@ -657,6 +672,12 @@
 1402:
   cod: 1402
   msj: Los precios o cantidades aprobadas en los items no pueden ser cero (0.0)
+1403:
+  cod: 1403
+  msj: Debe ingresar todos los datos de la fila para agregar una ruta.
+1404:
+  cod: 1404
+  msj: Debe seleccionar el documento.
 
 ###############NOMINA################
 400:
@@ -1300,6 +1321,9 @@
 1511:
     cod: 1511
     msj: EL Movimiento Según Libro no está Anulado
+1512:
+    cod: 1512
+    msj: La Fecha del Deposito no puede ser mayor a la Fecha del Ingreso
 
 ########## Atencion al Ciudadano ########
 1400:
@@ -1495,8 +1519,15 @@
 1352:
   cod: 1352
   msj: El Codigo introducido no cumple con el Formato Presupuestario.
-
-
+1353:
+  cod: 1353
+  msj: La referencia no existe
+1354:
+  cod: 1354
+  msj: La Fecha del Traslado debe ser mayor o igual a la Fecha de la Solicitud
+1355:
+  cod: 1355
+  msj: La Fecha de la Adición/Disminución debe ser mayor o igual a la Fecha de la Solicitud
 
 ########### Hacienda ##############
 
@@ -1648,8 +1679,24 @@
 626:
   cod: 626
   msj: El Total de Monto Centro de Costo sobrepasa el Monto asignado a la cuenta contable.
-
-
+627:
+  cod: 627
+  msj: Existen Cuentas hijas para esta Cuenta.
+628:
+  cod: 628
+  msj: La cuenta a crear no puede tener Tipo de Saldo Distinto a la cuenta madre.
+629:
+  cod: 629
+  msj: Período no Definido.
+630:
+  cod: 630
+  msj: El Período se encuenta cerrado en Contabilidad.
+631:
+  cod: 631
+  msj: La Fecha debe estar entre la Fecha de Inicio y la Fecha Final del Ejercicio.
+632:
+  cod: 632
+  msj: La Nómina no puede ser Cerrada.
  #MODULO DE GESTION DE INDICADORES
 11101:
   cod: 11101
