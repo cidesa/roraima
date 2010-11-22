@@ -163,7 +163,7 @@ class nomfalperlleActions extends autonomfalperlleActions
    */
   protected function saveNpfalper($npfalper)
   {
-    $npfalper->save();
+
 	$c= new Criteria();
 	$c->add(NphojintPeer::CODEMP,$npfalper->getCodemp());
 	$nphojint_up = NphojintPeer::doSelectOne($c);
@@ -172,6 +172,8 @@ class nomfalperlleActions extends autonomfalperlleActions
 		$nphojint_up->setStaemp('A');
   	    $nphojint_up->save();
 	}
+        $npfalper->setCodnom(H::getX_vacio('Codemp', 'Npasicaremp', 'Codnom', $npfalper->getCodemp()));
+        $npfalper->save();
   }
     /**
    * Función principal para el manejo de la accion list
