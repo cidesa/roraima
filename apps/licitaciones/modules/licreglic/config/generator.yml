@@ -57,7 +57,7 @@ generator:
     edit:
       title: Registro de Licitaciones
       display:
-        "Datos de Licitación": [_codlic, litiplic_id, fecreg, fecedi, lisicact_id, deslic, decretos]
+        "Datos Generales": [_codlic, litiplic_id, fecreg, fecedi, lisicact_id, deslic, decretos]
         "Solicitud Servicios/Obras/Bienes":  [_liregsol_id, _coduniste ]
         "Datos Plazos/Limites de Días":  [plamodifi, plaaclara, plaprorro ]
         "Disponibilidad de Pliegos": [fecdisdes, fecdishas, costo, forpag, horaret, dirret, percontac]
