@@ -14,6 +14,34 @@
 
 
 <script type="text/javascript">
+function validar(id)
+{
+var aux = id.split("_");
+var name=aux[0];
+var fil=parseInt(aux[1]);
+var col=parseInt(aux[2]);
+
+  var q=0;
+  var enc=false;
+  var am=obtener_filas_grid('compromiso',2);
+  while (q<am && (!enc))
+  {
+      var act="compromisox_"+q+"_1";
+      if (fil!=q)
+      {
+          if ($(act).checked==true)
+          {
+           enc=true;
+          }
+      }
+      q++;
+  }
+  if (enc)
+  {
+      alert('Marque solo uno...');
+      $(id).checked=false;
+  }
+}
 
 function ajaxmostrardetalle(e,id)
 {
@@ -24,7 +52,7 @@ function ajaxmostrardetalle(e,id)
 
     var codigo=$(id).value;
 
-  if(confirm("Â¿Desea visualizar el detalle de la Solicitud de Egresos?"))
+  if(confirm("¿Desea visualizar el detalle de la Solicitud de Egresos?"))
   {
 
     if (e.keyCode==13 || e.keyCode==9)
