@@ -11,7 +11,7 @@ opciones:                  # Opciones generales
   titulo:                  Actualizar
   tipo:                    k
   nombrecampo:             check
-  html:                    [size="3"]
+  html:                    ["size=3 onClick=validar(this.id)"]
   esgrabable:              true
 2:       # Columna 2
   titulo:                  Referencia
