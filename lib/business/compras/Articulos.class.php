@@ -1308,7 +1308,7 @@ public static function Grabar_DetallesRetenciones($caretser,$grid)
         $detalle->setExiact2($x[$j]["exiact2"]);
         $detalle->setCodalm($codalm);
         $detalle->setFecinv($fecinv);
-        $detalle->save();
+
         //grabar Articulos por almacen y ubicación Cainvfisubi
 
         if ($x[$j]["ubicacion"]!='')
@@ -1336,13 +1336,16 @@ public static function Grabar_DetallesRetenciones($caretser,$grid)
               $caartalmubi->setExiact($aux2[2]);
               $caartalmubi->setExiact2($aux2[3]);
               $caartalmubi->save();
+              $detalle->setCodubi($aux2[0]);
             }
             $r++;
           }
        }// if ($x[$j]->getUbicacion()!='')
 
+       $detalle->save();
         $j++;
       }
+
 
       $z=$grid[1];
       $j=0;

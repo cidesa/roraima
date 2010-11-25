@@ -145,10 +145,12 @@ $this->Bitacora('Guardo');
   	else
   	   $col1->setHTML('type="text" size="15"  readonly=true');
 	if (!$this->catraalm->getId()) $col1->setCatalogo('caregart','sf_admin_edit_form', array('codart' => 1, 'desart' => 2, 'unimed' => 3),'Caregart_Almtraalm',$params);
-  	if ($manartlot=='S')
+  	if ($manartlot=='S') {
            if (!$this->catraalm->getId()) $col1->setJScript('onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascaraarticulo.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}" onBlur="toAjaxUpdater(obtenerColumna(this.id,5,'.chr(39).$signomas.chr(39).'),3,getUrlModuloAjax(),this.value+'.chr(39).'!'.chr(39).'+$F("catraalm_codubiori")+'.chr(39).'!'.chr(39).'+$F("catraalm_almori")+'.chr(39).'!'.chr(39).'+obtenerColumna(this.id,1,'.chr(39).$signomas.chr(39).'),devuelveParVacios(),devuelveParVacios());"');
-        else
+        }
+        else {
   	if (!$this->catraalm->getId()) $col1->setJScript('onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascaraarticulo.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}" onBlur="javascript:event.keyCode=13; ajaxdetalle(event,this.id);"');
+        }
 
   	$col2 = new Columna('Descripción');
   	$col2->setTipo(Columna::TEXTAREA);

@@ -97,7 +97,8 @@ function distribuirExistencia()
 		      $(codubi).value=ccodubi;
 		      $(desubi).value=cdesubi;
 		      $(nomubi).value=cnomubi;
-                      $(numlot).value=cnumlot;
+                      if ($('caregart_manartlot').value=='S')  $(numlot).value=cnumlot;
+
                       $(fecela).value=cfecela;
                       $(fecven).value=cfecven;
 		      z++;
