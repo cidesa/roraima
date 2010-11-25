@@ -3,7 +3,7 @@ methods:
    - "carcpart{rcpart}"
    - "carcpart{fecrcp}"
    - "carcpart{ordcom}"
-   - "carcpart{numfac}"
+   #- "carcpart{numfac}"
    - "carcpart{monrcp}"
    - "carcpart{fecord}"
    - "carcpart{desrcp}"
@@ -27,9 +27,9 @@ names:
     required:  Yes
     required_msg: No puede salvar sin el Monto de la Recepción
 
-  carcpart{numfac}:
-    required:  Yes
-    required_msg: No puede salvar sin introducir el Número de la Factura
+  #carcpart{numfac}:
+   # required:  Yes
+   # required_msg: No puede salvar sin introducir el Número de la Factura
 
   carcpart{fecord}:
     required:  Yes
