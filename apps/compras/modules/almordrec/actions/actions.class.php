@@ -1009,6 +1009,17 @@ $this->Bitacora('Guardo');
 			   // {
 			    	//verificar en el grid de articulos que todos los articulos pertenezcan al almacen y ubicacion indicada
 			    	//y verificar que al menos un articulo del grid tenga cantidad mayo que cero.
+                                 $novalnumfac=H::getConfApp2('novalnumfac', 'compras', 'almordrec');
+                                 if ($novalnumfac!='S')
+                                 {
+                                     if ($carcpart['numfac']=="")
+                                     {
+                                        $msg="No puede salvar sin introducir el Número de la Factura";
+                                        $this->getRequest()->setError('',$msg);
+                                        return false;
+                                     }
+                                 }
+
 			    	  $grid=Herramientas::CargarDatosGrid($this,$this->grid);
                                   $manartlot=H::getConfApp2('manartlot', 'compras', 'almregart');
 			    	  $x=$grid[0];
