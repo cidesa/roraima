@@ -79,7 +79,7 @@ class Cliente
         $opbenefi->setCodctasec($facliente->getCodctasec());
         $opbenefi->setCodordadi($facliente->getCodordadi());
         $opbenefi->setCodperconadi($facliente->getCodperconadi());
-        $opbenefi->setCodpercontra($facliente->getCodordcontra());
+        $opbenefi->setCodordcontra($facliente->getCodordcontra());
         $opbenefi->setCodpercontra($facliente->getCodpercontra());
 
       $opbenefi->save();
