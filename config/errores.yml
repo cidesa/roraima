@@ -486,6 +486,33 @@
 557:
   cod: 557
   msj: No se puede realizar la Migración existe un artículo que no posee Cuenta de Ingreso.
+558:
+  cod: 558
+  msj: No puede Eliminar el Semoviente debido a que existen Disposiciones asociadas.
+559:
+  cod: 559
+  msj: No puede Eliminar el Semoviente debido a que existen Seguros asociados.
+560:
+  cod: 560
+  msj: No puede Eliminar el Semoviente debido a que existen Cuentas Contables asociadas.
+561:
+  cod: 561
+  msj: El Activo Semoviente ya esta registrado. Por Favor, Cambiélo por otro.
+562:
+  cod: 562
+  msj: No puede salvar sin introducir el Código de Ubicación Destino.
+563:
+  cod: 563
+  msj: El Activo Semoviente no esta registrado.
+564:
+  cod: 564
+  msj: La Fecha de Emisión no puede ser mayor a la fecha de hoy.
+565:
+  cod: 565
+  msj: La Fecha de Anulación del Movimiento no puede ser mayor a la fecha de hoy.
+566:
+  cod: 566
+  msj: La Fecha del Movimiento según Libro no puede ser mayor a la fecha de hoy.
 3:
   cod: 3
   msj: La contraseña es diferente.

@@ -1516,6 +1516,12 @@ class tesmovemicheActions extends autotesmovemicheActions
       $this->tscheemi = $this->getTscheemiOrCreate();
       try{ $this->updateTscheemiFromRequest();}catch(Exception $ex){}
 
+      if ($this->tscheemi->getFecemi()>date('Y-m-d'))
+      {
+            $this->coderror6=564;
+            return false;
+      }
+
   	  if (!Herramientas::validarPeriodoPresuesto($this->getRequestParameter('tscheemi[fecemi]')))
       {
         $this->coderror5=142;

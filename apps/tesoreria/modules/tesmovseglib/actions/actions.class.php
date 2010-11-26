@@ -1210,7 +1210,9 @@ $this->Bitacora('Guardo');
     $aux=split("-",$feclib_m);
     $feclib=$aux[2].'/'.$aux[1].'/'.$aux[0];
     $fecanu=$this->getRequestParameter('fecanu');
-    //$fecanu=date('d/m/Y');
+    $dateFormat = new sfDateFormat('es_VE');
+    $fecanu_m= $dateFormat->format($this->getRequestParameter('fecanu'), 'i', $dateFormat->getInputPattern('d'));
+
     $tipmov=$this->getRequestParameter('tipmov');
     $numcom=$this->getRequestParameter('numcom');
     $desanu=$this->getRequestParameter('desanu');
@@ -1231,6 +1233,11 @@ $this->Bitacora('Guardo');
 
     $anoactual=date('Y');
     $anofeclib=substr($feclib_m,0,4);
+   if ($fecanu_m>date('Y-m-d'))
+   {
+       $coderror=565;
+     $this->msgpercer = Herramientas::obtenerMensajeError($coderror);
+   }else {
   if ($anofeclib==$anoactual)
   {
    if (Tesoreria::validaPeriodoCerrado($fecanu)==true)
@@ -1490,6 +1497,7 @@ $this->Bitacora('Guardo');
     }
     }
   }
+   }
     return sfView::SUCCESS;
   }
 
