@@ -44,7 +44,9 @@ group by substr(a.codpre,1,b.longitud::integer),a.id);
 
 
 CREATE OR REPLACE VIEW NPPRESTACIONES AS
-(SELECT A.CODEMP,A.NOMEMP,A.FECING,A.FECINI,A.FECFIN,
+(SELECT A.CODEMP,A.NOMEMP,(CASE WHEN A.FECING>=A.FECINIREG
+                           THEN A.FECING
+                           ELSE A.FECINIREG END) AS FECING,A.FECINI,A.FECFIN,
 (CASE WHEN A.FECING<TO_DATE('19/06/1997','DD/MM/YYYY') THEN
  TO_DATE(TO_CHAR(A.FECING,'19/')||TO_CHAR(A.FECFIN,'MM/YYYY'),'DD/MM/YYYY')
  ELSE
@@ -324,10 +326,20 @@ ROUND(A.SALNOR,2) +
                  END)
            END),0) as ALIADI,
 A.CODTIPCON,
-(CASE WHEN TO_CHAR(A.FECING,'MM')=TO_CHAR(A.FECFIN,'MM')
- AND (CASE WHEN B.ANTAP='N' THEN A.ANNOANTIG ELSE A.ANNOANTIGPUB END) >=2
- THEN 5+(CASE WHEN (((CASE WHEN COALESCE(B.ANTAP,'N')='N' THEN A.ANNOANTIG ELSE A.ANNOANTIGPUB END)-1)*2)<=30
-         THEN (((CASE WHEN COALESCE(B.ANTAP,'N')='N' THEN A.ANNOANTIG ELSE A.ANNOANTIGPUB END)-1)*2)
+(CASE WHEN TO_CHAR((CASE WHEN A.FECING>=A.FECINIREG
+                    THEN A.FECING
+                    ELSE A.FECINIREG END),'MM')=TO_CHAR(A.FECFIN,'MM')
+ AND (CASE WHEN A.FECING >=A.FECINIREG
+      THEN (CASE WHEN B.ANTAP='N' THEN A.ANNOANTIG ELSE A.ANNOANTIGPUB END)
+      ELSE  A.ANNOSNUEVOREGIMEN END)>=(CASE WHEN A.FECING >=A.FECINIREG
+                                       THEN 2
+                                       ELSE  0 END)
+ THEN 5+(CASE WHEN (((CASE WHEN A.FECING >=A.FECINIREG
+                      THEN (CASE WHEN B.ANTAP='N' THEN A.ANNOANTIG ELSE A.ANNOANTIGPUB END)
+                      ELSE  A.ANNOSNUEVOREGIMEN+1 END)-1)*2)<=30
+         THEN (((CASE WHEN A.FECING >=A.FECINIREG
+                 THEN (CASE WHEN B.ANTAP='N' THEN A.ANNOANTIG ELSE A.ANNOANTIGPUB END)
+                 ELSE  A.ANNOSNUEVOREGIMEN+1 END)-1)*2)
          ELSE
          30
          END)
@@ -435,6 +447,10 @@ A.CODTIPCON,
 (CASE WHEN COALESCE(B.ANTAP,'N')='N' THEN A.ANNOANTIGTOT ELSE A.ANNOANTIGPUBTOT END) AS ANNOANTIGTOT,
 (CASE WHEN COALESCE(B.ANTAP,'N')='N' THEN A.MESANTIGTOT ELSE A.MESANTIGPUBTOT END) AS MESANTIGTOT,
 (CASE WHEN COALESCE(B.ANTAP,'N')='N' THEN A.DIAANTIGTOT ELSE A.DIAANTIGPUBTOT END) AS DIAANTIGTOT,
+A.ANNOSNUEVOREGIMEN,
+A.MESESNUEVOREGIMEN,
+A.DIASNUEVOREGIMEN,
+A.FECINIREG,
 A.ID
 FROM
 (SELECT A.CODEMP,A.NOMEMP,
@@ -450,6 +466,10 @@ antpub('M',A.CODEMP,COALESCE(A.FECRET,B.FECFIN),'S') AS MESANTIGPUBTOT,
 antpub('M',A.CODEMP,COALESCE(A.FECRET,B.FECFIN),'N') AS MESANTIGTOT,
 antpub('D',A.CODEMP,COALESCE(A.FECRET,B.FECFIN),'S') AS DIAANTIGPUBTOT,
 antpub('D',A.CODEMP,COALESCE(A.FECRET,B.FECFIN),'N') AS DIAANTIGTOT,
+EXTRACT (YEAR FROM AGE(B.FECFIN,D.FECINIREG)) AS ANNOSNUEVOREGIMEN,
+EXTRACT (MONTH FROM AGE(B.FECFIN,D.FECINIREG)) AS MESESNUEVOREGIMEN,
+EXTRACT (DAY FROM AGE(B.FECFIN,D.FECINIREG)) AS DIASNUEVOREGIMEN,
+D.FECINIREG,
 A.FECING,
 B.FECINI,
 B.FECFIN,
@@ -600,11 +620,30 @@ FROM NPHOJINT A,
 			   FROM npanos a,
 			  (select '01/'||lpad(trim(to_char(fecdes,'99')),2,'0') as fecdes
 			  from generate_series(1,12) as fecdes) b)) as id
-   order by id) B
- WHERE  B.FECFIN>=(CASE WHEN TO_CHAR(A.FECING,'DD')>'01' THEN ADD_MONTHS(A.FECING,4)
-                  ELSE ADD_MONTHS(A.FECING,4)-1 END)
- AND B.FECINI>COALESCE(A.FECCORACU,A.FECING)
- AND B.FECFIN<=(SELECT COALESCE(MAX(FECFINCON),NOW()) FROM NPSALINT WHERE CODEMP=A.CODEMP)) A LEFT OUTER JOIN
+   order by id) B,NPTIPCON D
+ WHERE  B.FECINI>COALESCE(A.FECCORACU,A.FECING)
+ AND B.FECFIN<=(SELECT COALESCE(MAX(FECFINCON),NOW()) FROM NPSALINT WHERE CODEMP=A.CODEMP)
+ AND (CASE WHEN (( SELECT SUM(MONASI)
+                   FROM NPSALINT
+                   WHERE CODEMP = A.CODEMP
+                   AND CODASI = '001'
+                   AND FECINICON = (CASE WHEN COALESCE(A.FECRET,NOW()::DATE) > B.FECINI THEN B.FECINI
+                                    ELSE TO_DATE('01/'||TO_CHAR(A.FECRET,'MM/YYYY'),'DD/MM/YYYY') END)
+                   AND FECFINCON = (CASE WHEN COALESCE(A.FECRET,NOW()::DATE) > B.FECFIN THEN B.FECFIN
+                                    ELSE LAST_DAY(A.FECRET) END))) IS NOT NULL THEN
+                (( SELECT NPSALINT.CODCON
+                   FROM NPSALINT
+                   WHERE CODEMP = A.CODEMP
+                   AND FECINICON >= (CASE WHEN COALESCE(A.FECRET,NOW()::DATE) > B.FECINI THEN B.FECINI
+                                     ELSE TO_DATE('01/'||TO_CHAR(A.FECRET,'MM/YYYY'),'DD/MM/YYYY') END)
+                   AND FECFINCON <= (CASE WHEN COALESCE(A.FECRET,NOW()::DATE) > B.FECFIN THEN B.FECFIN
+                                     ELSE LAST_DAY(A.FECRET) END)
+                  AND CODASI = '001'))
+      ELSE ( SELECT MAX(Y.CODTIPCON) AS MAX
+             FROM NPHISCON X, NPASIEMPCONT Y
+             WHERE X.CODEMP = A.CODEMP
+             AND Y.CODEMP = X.CODEMP
+             AND Y.CODNOM = X.CODNOM) END)=D.CODTIPCON) A LEFT OUTER JOIN
                        (SELECT ANOVIG,ANOVIGHAS,CODTIPCON,MAX(ANTAP) AS ANTAP,
                         MAX(ANTAPVAC) AS ANTAPVAC
                         FROM NPBONOCONT B
@@ -615,6 +654,8 @@ FROM NPHOJINT A,
 WHERE A.CODTIPCON=C.CODTIPCON
 AND A.FECINI>=C.FECINIREG)
 ORDER BY A.CODEMP,A.FECFIN,A.ID;
+
+
 
 
 
@@ -832,133 +873,214 @@ group by
   a.intacu,
   coalesce(A.ADEPRE,0));
 
- CREATE OR REPLACE VIEW nppresregant AS
- SELECT a.codemp, a.nomemp, a.fecing, a.fecret AS fecegr,
- CASE WHEN to_char(a.fecfin, 'MM') = to_char(a.fecing, 'MM') THEN to_date(to_char(a.fecing, 'DD/') || to_char(a.fecini, 'MM/YYYY'), 'DD/MM/YYYY') ELSE a.fecini END AS fecini,
- a.fecfin,
- a.monto,
- round(a.monto / 30, 2) +
- COALESCE((CASE WHEN c.alicuocon = 0 THEN 0
-           ELSE ( SELECT COALESCE(diauti, 0)
-                  FROM npbonocont
-                  WHERE anovig <= a.fecini
-                  AND anovighas >= a.fecfin
-                  AND codtipcon = a.codtipcon
-                  AND desde <= (CASE WHEN COALESCE(b.antap, 'N') = 'N' THEN a.annoantig
-                                ELSE a.annoantigpub END)
-                  AND hasta >= (CASE WHEN COALESCE(b.antap, 'N') = 'N' THEN a.annoantig
-                                ELSE a.annoantigpub END))
-           END), 0) / 30 / 12 * round(a.monto / 30, 2) +
- COALESCE((CASE WHEN c.alicuocon = 0 THEN 0
-           ELSE ( SELECT COALESCE(diavac, 0) AS "coalesce"
-                  FROM npbonocont
-                  WHERE anovig <= a.fecini
-                  AND anovighas >= a.fecfin
-                  AND codtipcon = a.codtipcon
-                  AND desde <= (CASE WHEN COALESCE(b.antapvac, 'N') = 'N' THEN a.annoantig
-                                           ELSE a.annoantigpub END)
-                  AND hasta >= (CASE WHEN COALESCE(b.antapvac, 'N') = 'N' THEN a.annoantig
-                                           ELSE a.annoantigpub END))
-          END), 0) / 30 / 12 * round(a.monto / 30, 2) AS mondia,
- a.codtipcon,
- d.tiptas,
- COALESCE((CASE WHEN d.tiptas = 'P' THEN e.tasintpro
-           WHEN d.tiptas = 'A' THEN e.tasintact
-           WHEN d.tiptas = 'S' THEN e.tasintpas
-           ELSE 0 END), 0) AS tasint,
- b.antap,
- b.antapvac,
- c.alicuocon,
- a.annoantig AS annosdentro,
- (CASE WHEN COALESCE(b.antap, 'N') = 'N' THEN a.annoantig ELSE a.annoantigpub END) AS annoantig,
- (CASE WHEN COALESCE(b.antap, 'N') = 'N' THEN a.mesantig ELSE a.mesantigpub END) AS mesantig,
- (CASE WHEN COALESCE(b.antap, 'N') = 'N' THEN a.diaantig ELSE a.diaantigpub END) AS diaantig,
- (CASE WHEN to_char(a.fecfin, 'MM') = to_char(a.fecing, 'MM')
-  THEN to_date(to_char(a.fecing, 'DD/') || to_char(a.fecini, 'MM/YYYY'), 'DD/MM/YYYY')
-  ELSE NULL END) AS annoini,
- (CASE WHEN to_char(a.fecfin, 'MM') = to_char(a.fecing, 'MM')
-  THEN add_months(to_date(to_char(a.fecing, 'DD/') || to_char(a.fecini, 'MM/YYYY'), 'DD/MM/YYYY'), 12) - 1
-  ELSE NULL END) AS annofin,
- a.id
+ CREATE OR REPLACE VIEW NPPRESREGANT AS
+ SELECT A.CODEMP, A.NOMEMP, A.FECING,
+ (CASE WHEN COALESCE(A.FECRET,NOW()::DATE) > C.FECINIREG THEN C.FECINIREG
+  ELSE A.FECRET END) AS FECEGR,
+ CASE WHEN TO_CHAR(A.FECFIN, 'MM') = TO_CHAR(A.FECING, 'MM') THEN TO_DATE(TO_CHAR(A.FECING, 'DD/') || TO_CHAR(A.FECINI, 'MM/YYYY'), 'DD/MM/YYYY') ELSE A.FECINI END AS FECINI,
+ A.FECFIN,
+ A.MONTO,
+ ROUND(A.MONTO / 30, 2) +
+ COALESCE((CASE WHEN C.ALICUOCON = 0 THEN 0
+           ELSE ( SELECT COALESCE(DIAUTI, 0)
+                  FROM NPBONOCONT
+                  WHERE ANOVIG <= A.FECINI
+                  AND ANOVIGHAS >= A.FECFIN
+                  AND CODTIPCON = A.CODTIPCON
+                  AND DESDE <= (CASE WHEN COALESCE(B.ANTAP, 'N') = 'N' THEN A.ANNOANTIG
+                                ELSE A.ANNOANTIGPUB END)
+                  AND HASTA >= (CASE WHEN COALESCE(B.ANTAP, 'N') = 'N' THEN A.ANNOANTIG
+                                ELSE A.ANNOANTIGPUB END))
+           END), 0) / 30 / 12 * ROUND(A.MONTO / 30, 2) +
+ COALESCE((CASE WHEN C.ALICUOCON = 0 THEN 0
+           ELSE ( SELECT COALESCE(DIAVAC, 0) AS "COALESCE"
+                  FROM NPBONOCONT
+                  WHERE ANOVIG <= A.FECINI
+                  AND ANOVIGHAS >= A.FECFIN
+                  AND CODTIPCON = A.CODTIPCON
+                  AND DESDE <= (CASE WHEN COALESCE(B.ANTAPVAC, 'N') = 'N' THEN A.ANNOANTIG
+                                           ELSE A.ANNOANTIGPUB END)
+                  AND HASTA >= (CASE WHEN COALESCE(B.ANTAPVAC, 'N') = 'N' THEN A.ANNOANTIG
+                                           ELSE A.ANNOANTIGPUB END))
+          END), 0) / 30 / 12 * ROUND(A.MONTO / 30, 2) AS MONDIA,
+ A.CODTIPCON,
+ D.TIPTAS,
+ COALESCE((CASE WHEN D.TIPTAS = 'P' THEN E.TASINTPRO
+           WHEN D.TIPTAS = 'A' THEN E.TASINTACT
+           WHEN D.TIPTAS = 'S' THEN E.TASINTPAS
+           ELSE 0 END), 0) AS TASINT,
+ B.ANTAP,
+ B.ANTAPVAC,
+ C.ALICUOCON,
+ A.ANNOANTIG AS ANNOSDENTRO,
+ (CASE WHEN COALESCE(B.ANTAP, 'N') = 'N' THEN A.ANNOANTIG ELSE A.ANNOANTIGPUB END) AS ANNOANTIG,
+ (CASE WHEN COALESCE(B.ANTAP, 'N') = 'N' THEN A.MESANTIG ELSE A.MESANTIGPUB END) AS MESANTIG,
+ (CASE WHEN COALESCE(B.ANTAP, 'N') = 'N' THEN A.DIAANTIG ELSE A.DIAANTIGPUB END) AS DIAANTIG,
+ (CASE WHEN TO_CHAR(A.FECFIN, 'MM') = TO_CHAR(A.FECING, 'MM')
+  THEN TO_DATE(TO_CHAR(A.FECING, 'DD/') || TO_CHAR(A.FECINI, 'MM/YYYY'), 'DD/MM/YYYY')
+  ELSE NULL END) AS ANNOINI,
+ (CASE WHEN TO_CHAR(A.FECFIN, 'MM') = TO_CHAR(A.FECING, 'MM')
+  THEN ADD_MONTHS(TO_DATE(TO_CHAR(A.FECING, 'DD/') || TO_CHAR(A.FECINI, 'MM/YYYY'), 'DD/MM/YYYY'), 12) - 1
+  ELSE NULL END) AS ANNOFIN,
+ A.ID
 FROM
-(SELECT a.codemp, a.nomemp,
- COALESCE(c.annos, 0) + antpub('A', a.codemp, b.fecfin, 'N') AS annoantigpub,
- antpub('A', a.codemp, b.fecfin, 'N') AS annoantig,
- antpub('M', a.codemp, b.fecfin, 'N') AS mesantigpub,
- antpub('M', a.codemp, b.fecfin, 'N') AS mesantig,
- antpub('D', a.codemp, b.fecfin, 'N') AS diaantigpub,
- antpub('D', a.codemp, b.fecfin, 'N') AS diaantig,
- a.fecing,
- a.fecret,
- b.fecini,
- b.fecfin,
- (CASE WHEN (( SELECT sum(monasi)
-               FROM npsalint
-               WHERE codemp = a.codemp
-               AND fecinicon = b.fecini
-               AND fecfincon = b.fecfin)) IS NOT NULL THEN
-             ( SELECT sum(monasi)
-               FROM npsalint
-               WHERE codemp = a.codemp
-               AND fecinicon = b.fecini
-               AND fecfincon = b.fecfin)
-  ELSE ( SELECT sum((CASE WHEN w.opecon = 'A' THEN x.monto
-                     ELSE x.monto * (-1) END))
-         FROM nphiscon x, npasiempcont y, npconasi z, npdefcpt w
-         WHERE x.codemp = a.codemp
-         AND x.fecnom >= b.fecini
-         AND x.fecnom <= b.fecfin
-         AND y.codemp = x.codemp
-         AND y.codnom = x.codnom
-         AND z.codcon = y.codtipcon
-         AND x.codcon = z.codcpt
-         AND x.codcon = w.codcon) END) AS monto,
- (CASE WHEN (( SELECT sum(monasi)
-               FROM npsalint
-               WHERE codemp = a.codemp
-               AND codasi = '001'
-               AND fecinicon = b.fecini
-               AND fecfincon = b.fecfin)) IS NOT NULL THEN
-            (( SELECT npsalint.codcon
-               FROM npsalint
-               WHERE codemp = a.codemp
-               AND fecinicon >= b.fecini
-               AND fecfincon <= b.fecfin
-               AND codasi = '001'))
-  ELSE ( SELECT max(y.codtipcon) AS max
-         FROM nphiscon x, npasiempcont y
-         WHERE x.codemp = a.codemp
-         AND x.fecnom >= b.fecini
-         AND x.fecnom <= b.fecfin
-         AND y.codemp = x.codemp
-         AND y.codnom = x.codnom) END) AS codtipcon,
- b.id
- FROM nphojint a
+(SELECT A.CODEMP, A.NOMEMP,
+ COALESCE(C.ANNOS, 0) + ANTPUB('A', A.CODEMP, (CASE WHEN B.FECFIN<= (CASE WHEN COALESCE(A.FECRET,NOW()::DATE) > D.FECINIREG
+                                                                     THEN D.FECINIREG
+                                                                     ELSE A.FECRET END) THEN B.FECFIN
+                                               ELSE (CASE WHEN COALESCE(A.FECRET,NOW()::DATE) > D.FECINIREG
+                                                     THEN D.FECINIREG
+                                                     ELSE A.FECRET END) END), 'N') AS ANNOANTIGPUB,
+ ANTPUB('A', A.CODEMP, (CASE WHEN B.FECFIN<= (CASE WHEN COALESCE(A.FECRET,NOW()::DATE) > D.FECINIREG
+                                              THEN D.FECINIREG
+                                              ELSE A.FECRET END) THEN B.FECFIN
+                        ELSE (CASE WHEN COALESCE(A.FECRET,NOW()::DATE) > D.FECINIREG
+                              THEN D.FECINIREG
+                              ELSE A.FECRET END) END), 'N') AS ANNOANTIG,
+ ANTPUB('M', A.CODEMP, (CASE WHEN B.FECFIN<= (CASE WHEN COALESCE(A.FECRET,NOW()::DATE) > D.FECINIREG
+                                              THEN D.FECINIREG
+                                              ELSE A.FECRET END) THEN B.FECFIN
+                        ELSE (CASE WHEN COALESCE(A.FECRET,NOW()::DATE) > D.FECINIREG
+                              THEN D.FECINIREG
+                              ELSE A.FECRET END) END), 'N') AS MESANTIGPUB,
+ ANTPUB('M', A.CODEMP, (CASE WHEN B.FECFIN<= (CASE WHEN COALESCE(A.FECRET,NOW()::DATE) > D.FECINIREG
+                                              THEN D.FECINIREG
+                                              ELSE A.FECRET END) THEN B.FECFIN
+                        ELSE (CASE WHEN COALESCE(A.FECRET,NOW()::DATE) > D.FECINIREG
+                              THEN D.FECINIREG
+                              ELSE A.FECRET END) END), 'N') AS MESANTIG,
+ ANTPUB('D', A.CODEMP, (CASE WHEN B.FECFIN<= (CASE WHEN COALESCE(A.FECRET,NOW()::DATE) > D.FECINIREG
+                                              THEN D.FECINIREG
+                                              ELSE A.FECRET END) THEN B.FECFIN
+                        ELSE (CASE WHEN COALESCE(A.FECRET,NOW()::DATE) > D.FECINIREG
+                              THEN D.FECINIREG
+                              ELSE A.FECRET END) END), 'N') AS DIAANTIGPUB,
+ ANTPUB('D', A.CODEMP, (CASE WHEN B.FECFIN<= (CASE WHEN COALESCE(A.FECRET,NOW()::DATE) > D.FECINIREG
+                                              THEN D.FECINIREG
+                                              ELSE A.FECRET END) THEN B.FECFIN
+                        ELSE (CASE WHEN COALESCE(A.FECRET,NOW()::DATE) > D.FECINIREG
+                              THEN D.FECINIREG
+                              ELSE A.FECRET END) END), 'N') AS DIAANTIG,
+ A.FECING,
+ A.FECRET,
+ B.FECINI,
+ B.FECFIN,
+ (CASE WHEN (( SELECT SUM(MONASI)
+               FROM NPSALINT
+               WHERE CODEMP = A.CODEMP
+               AND FECINICON = (CASE WHEN COALESCE(A.FECRET,NOW()::DATE) > D.FECINIREG THEN TO_DATE('01/'||TO_CHAR(D.FECINIREG,'MM/YYYY'),'DD/MM/YYYY')
+                                ELSE (CASE WHEN COALESCE(A.FECRET,NOW()::DATE) > B.FECINI THEN B.FECINI
+                                      ELSE TO_DATE('01/'||TO_CHAR(A.FECRET,'MM/YYYY'),'DD/MM/YYYY') END)  END)
+               AND FECFINCON = (CASE WHEN COALESCE(A.FECRET,NOW()::DATE) > D.FECINIREG THEN LAST_DAY(TO_DATE('01/'||TO_CHAR(D.FECINIREG,'MM/YYYY'),'DD/MM/YYYY'))
+                                ELSE (CASE WHEN COALESCE(A.FECRET,NOW()::DATE) > B.FECFIN THEN B.FECFIN
+                                      ELSE LAST_DAY(A.FECRET) END) END) )) IS NOT NULL THEN
+             ( SELECT SUM(MONASI)
+               FROM NPSALINT
+               WHERE CODEMP = A.CODEMP
+               AND FECINICON = (CASE WHEN COALESCE(A.FECRET,NOW()::DATE) > D.FECINIREG THEN TO_DATE('01/'||TO_CHAR(D.FECINIREG,'MM/YYYY'),'DD/MM/YYYY')
+                                ELSE (CASE WHEN COALESCE(A.FECRET,NOW()::DATE) > B.FECINI THEN B.FECINI
+                                      ELSE TO_DATE('01/'||TO_CHAR(A.FECRET,'MM/YYYY'),'DD/MM/YYYY') END) END)
+               AND FECFINCON = (CASE WHEN COALESCE(A.FECRET,NOW()::DATE) > D.FECINIREG THEN LAST_DAY(TO_DATE('01/'||TO_CHAR(D.FECINIREG,'MM/YYYY'),'DD/MM/YYYY'))
+                                ELSE (CASE WHEN COALESCE(A.FECRET,NOW()::DATE) > B.FECFIN THEN B.FECFIN
+                                      ELSE LAST_DAY(A.FECRET) END) END))
+  ELSE ( SELECT SUM((CASE WHEN W.OPECON = 'A' THEN X.MONTO
+                     ELSE X.MONTO * (-1) END))
+         FROM NPHISCON X, NPASIEMPCONT Y, NPCONASI Z, NPDEFCPT W
+         WHERE X.CODEMP = A.CODEMP
+         AND X.FECNOM >= (CASE WHEN COALESCE(A.FECRET,NOW()::DATE) > D.FECINIREG THEN TO_DATE('01/'||TO_CHAR(D.FECINIREG,'MM/YYYY'),'DD/MM/YYYY')
+                          ELSE (CASE WHEN COALESCE(A.FECRET,NOW()::DATE) > B.FECINI THEN B.FECINI
+                                ELSE TO_DATE('01/'||TO_CHAR(A.FECRET,'MM/YYYY'),'DD/MM/YYYY') END) END)
+         AND X.FECNOM <= (CASE WHEN COALESCE(A.FECRET,NOW()::DATE) > D.FECINIREG THEN LAST_DAY(TO_DATE('01/'||TO_CHAR(D.FECINIREG,'MM/YYYY'),'DD/MM/YYYY'))
+                          ELSE (CASE WHEN COALESCE(A.FECRET,NOW()::DATE) > B.FECFIN THEN B.FECFIN
+                                ELSE LAST_DAY(A.FECRET) END) END)
+         AND Y.CODEMP = X.CODEMP
+         AND Y.CODNOM = X.CODNOM
+         AND Z.CODCON = Y.CODTIPCON
+         AND X.CODCON = Z.CODCPT
+         AND X.CODCON = W.CODCON) END) AS MONTO,
+ (CASE WHEN (( SELECT SUM(MONASI)
+               FROM NPSALINT
+               WHERE CODEMP = A.CODEMP
+               AND CODASI = '001'
+               AND FECINICON = (CASE WHEN COALESCE(A.FECRET,NOW()::DATE) > D.FECINIREG THEN TO_DATE('01/'||TO_CHAR(D.FECINIREG,'MM/YYYY'),'DD/MM/YYYY')
+                                ELSE (CASE WHEN COALESCE(A.FECRET,NOW()::DATE) > B.FECINI THEN B.FECINI
+                                      ELSE TO_DATE('01/'||TO_CHAR(A.FECRET,'MM/YYYY'),'DD/MM/YYYY') END) END)
+               AND FECFINCON = (CASE WHEN COALESCE(A.FECRET,NOW()::DATE) > D.FECINIREG THEN LAST_DAY(TO_DATE('01/'||TO_CHAR(D.FECINIREG,'MM/YYYY'),'DD/MM/YYYY'))
+                                ELSE (CASE WHEN COALESCE(A.FECRET,NOW()::DATE) > B.FECFIN THEN B.FECFIN
+                                      ELSE LAST_DAY(A.FECRET) END) END))) IS NOT NULL THEN
+            (( SELECT NPSALINT.CODCON
+               FROM NPSALINT
+               WHERE CODEMP = A.CODEMP
+               AND FECINICON >= (CASE WHEN COALESCE(A.FECRET,NOW()::DATE) > D.FECINIREG THEN TO_DATE('01/'||TO_CHAR(D.FECINIREG,'MM/YYYY'),'DD/MM/YYYY')
+                                 ELSE (CASE WHEN COALESCE(A.FECRET,NOW()::DATE) > B.FECINI THEN B.FECINI
+                                       ELSE TO_DATE('01/'||TO_CHAR(A.FECRET,'MM/YYYY'),'DD/MM/YYYY') END) END)
+               AND FECFINCON <= (CASE WHEN COALESCE(A.FECRET,NOW()::DATE) > D.FECINIREG THEN LAST_DAY(TO_DATE('01/'||TO_CHAR(D.FECINIREG,'MM/YYYY'),'DD/MM/YYYY'))
+                                 ELSE (CASE WHEN COALESCE(A.FECRET,NOW()::DATE) > B.FECFIN THEN B.FECFIN
+                                       ELSE LAST_DAY(A.FECRET) END)  END)
+               AND CODASI = '001'))
+  ELSE ( SELECT MAX(Y.CODTIPCON) AS MAX
+         FROM NPHISCON X, NPASIEMPCONT Y
+         WHERE X.CODEMP = A.CODEMP
+         AND X.FECNOM >= (CASE WHEN COALESCE(A.FECRET,NOW()::DATE) > D.FECINIREG THEN TO_DATE('01/'||TO_CHAR(D.FECINIREG,'MM/YYYY'),'DD/MM/YYYY')
+                          ELSE (CASE WHEN COALESCE(A.FECRET,NOW()::DATE) > B.FECINI THEN B.FECINI
+                                ELSE TO_DATE('01/'||TO_CHAR(A.FECRET,'MM/YYYY'),'DD/MM/YYYY') END) END)
+         AND X.FECNOM <= (CASE WHEN COALESCE(A.FECRET,NOW()::DATE) > D.FECINIREG THEN LAST_DAY(TO_DATE('01/'||TO_CHAR(D.FECINIREG,'MM/YYYY'),'DD/MM/YYYY'))
+                          ELSE (CASE WHEN COALESCE(A.FECRET,NOW()::DATE) > B.FECFIN THEN B.FECFIN
+                                ELSE LAST_DAY(A.FECRET) END)  END)
+         AND Y.CODEMP = X.CODEMP
+         AND Y.CODNOM = X.CODNOM) END) AS CODTIPCON,
+ B.ID
+ FROM NPHOJINT A
  LEFT OUTER JOIN
- (SELECT npexplab.codemp,
-         COALESCE(CASE WHEN to_number(replace(to_char(sum(age(fecini, (fecter + 1))), 'mm'), '-', ''), '99') < 6
-         THEN to_number(replace(to_char(sum(age(fecini, (fecter + 1))), 'yy'), '-', ''), '99')
-         ELSE CASE WHEN to_number(replace(to_char(sum(age(fecini, (fecter + 1))), 'mm'), '-', ''), '99') = 6
-              THEN CASE WHEN to_number(replace(to_char(sum(age(fecini, (fecter + 1))), 'dd'), '-', ''), '99') > 0
-                   THEN to_number(replace(to_char(sum(age(fecini, (fecter + 1))), 'yy'), '-', ''), '99') + 1
-                   ELSE to_number(replace(to_char(sum(age(fecini, (fecter + 1))), 'yy'), '-', ''), '99') END
-              ELSE to_number(replace(to_char(sum(age(fecini, (fecter + 1))), 'yy'), '-', ''), '99') + 1 END END, 0) AS annos
-  FROM npexplab
-  WHERE tiporg = 'Publico'
-  GROUP BY codemp) c ON a.codemp = c.codemp,
- (SELECT add_months((SELECT to_date('01/01/' || to_char(min(ano), '9999'), 'dd/mm/yyyy')
-                     FROM npanos),(id - 1)) AS fecini,
-         last_day(add_months(( SELECT to_date('01/01/' || to_char(min(npanos.ano), '9999'), 'dd/mm/yyyy')
-                               FROM npanos), (id - 1))) AS fecfin,
-         id, NULL AS codemp
-  FROM generate_series(1, ( SELECT count(*) AS count
-                            FROM npanos a, ( SELECT '01/' || lpad(btrim(to_char(fecdes, '99')), 2, '0') AS fecdes
-                                             FROM generate_series(1, 12) as fecdes) b)) as id
-  ORDER BY id) b
- WHERE b.fecfin <= now()) a LEFT JOIN npintcon d ON d.fecdes <= a.fecfin AND d.fechas >= a.fecfin AND d.codcon = a.codtipcon
-                            LEFT JOIN ( SELECT b.anovig, b.anovighas, b.codtipcon, max(b.antap) AS antap, max(b.antapvac) AS antapvac
-                                        FROM npbonocont b
-                                        GROUP BY b.anovig, b.anovighas, b.codtipcon) b ON a.fecini >= b.anovig AND a.fecfin <= b.anovighas AND a.codtipcon = b.codtipcon
-                            LEFT JOIN npintfecref e ON a.fecfin >= e.feciniref AND a.fecfin <= e.fecfinref, nptipcon c
-WHERE a.codtipcon = c.codtipcon AND a.fecini < c.fecinireg
-ORDER BY a.codemp, a.fecfin, a.id;
+ (SELECT NPEXPLAB.CODEMP,
+         COALESCE(CASE WHEN TO_NUMBER(REPLACE(TO_CHAR(SUM(AGE(FECINI, (FECTER + 1))), 'MM'), '-', ''), '99') < 6
+         THEN TO_NUMBER(REPLACE(TO_CHAR(SUM(AGE(FECINI, (FECTER + 1))), 'YY'), '-', ''), '99')
+         ELSE CASE WHEN TO_NUMBER(REPLACE(TO_CHAR(SUM(AGE(FECINI, (FECTER + 1))), 'MM'), '-', ''), '99') = 6
+              THEN CASE WHEN TO_NUMBER(REPLACE(TO_CHAR(SUM(AGE(FECINI, (FECTER + 1))), 'DD'), '-', ''), '99') > 0
+                   THEN TO_NUMBER(REPLACE(TO_CHAR(SUM(AGE(FECINI, (FECTER + 1))), 'YY'), '-', ''), '99') + 1
+                   ELSE TO_NUMBER(REPLACE(TO_CHAR(SUM(AGE(FECINI, (FECTER + 1))), 'YY'), '-', ''), '99') END
+              ELSE TO_NUMBER(REPLACE(TO_CHAR(SUM(AGE(FECINI, (FECTER + 1))), 'YY'), '-', ''), '99') + 1 END END, 0) AS ANNOS
+  FROM NPEXPLAB
+  WHERE TIPORG = 'PUBLICO'
+  GROUP BY CODEMP) C ON A.CODEMP = C.CODEMP,
+ (SELECT ADD_MONTHS((SELECT TO_DATE('01/01/' || TO_CHAR(MIN(ANO), '9999'), 'DD/MM/YYYY')
+                     FROM NPANOS),(ID - 1)) AS FECINI,
+         LAST_DAY(ADD_MONTHS(( SELECT TO_DATE('01/01/' || TO_CHAR(MIN(NPANOS.ANO), '9999'), 'DD/MM/YYYY')
+                               FROM NPANOS), (ID - 1))) AS FECFIN,
+         ID, NULL AS CODEMP
+  FROM GENERATE_SERIES(1, ( SELECT COUNT(*) AS COUNT
+                            FROM NPANOS A, ( SELECT '01/' || LPAD(BTRIM(TO_CHAR(FECDES, '99')), 2, '0') AS FECDES
+                                             FROM GENERATE_SERIES(1, 12) AS FECDES) B)) AS ID
+  ORDER BY ID) B,NPTIPCON D
+ WHERE B.FECFIN <= NOW()
+ AND (CASE WHEN (( SELECT SUM(MONASI)
+                   FROM NPSALINT
+                   WHERE CODEMP = A.CODEMP
+                   AND CODASI = '001'
+                   AND FECINICON = (CASE WHEN COALESCE(A.FECRET,NOW()::DATE) > B.FECINI THEN B.FECINI
+                                    ELSE TO_DATE('01/'||TO_CHAR(A.FECRET,'MM/YYYY'),'DD/MM/YYYY') END)
+                   AND FECFINCON = (CASE WHEN COALESCE(A.FECRET,NOW()::DATE) > B.FECFIN THEN B.FECFIN
+                                    ELSE LAST_DAY(A.FECRET) END))) IS NOT NULL THEN
+                (( SELECT NPSALINT.CODCON
+                   FROM NPSALINT
+                   WHERE CODEMP = A.CODEMP
+                   AND FECINICON >= (CASE WHEN COALESCE(A.FECRET,NOW()::DATE) > B.FECINI THEN B.FECINI
+                                     ELSE TO_DATE('01/'||TO_CHAR(A.FECRET,'MM/YYYY'),'DD/MM/YYYY') END)
+                   AND FECFINCON <= (CASE WHEN COALESCE(A.FECRET,NOW()::DATE) > B.FECFIN THEN B.FECFIN
+                                     ELSE LAST_DAY(A.FECRET) END)
+                  AND CODASI = '001'))
+      ELSE ( SELECT MAX(Y.CODTIPCON) AS MAX
+             FROM NPHISCON X, NPASIEMPCONT Y
+             WHERE X.CODEMP = A.CODEMP
+             AND Y.CODEMP = X.CODEMP
+             AND Y.CODNOM = X.CODNOM) END)=D.CODTIPCON) A LEFT JOIN NPINTCON D ON D.FECDES <= A.FECFIN AND D.FECHAS >= A.FECFIN AND D.CODCON = A.CODTIPCON
+                            LEFT JOIN ( SELECT B.ANOVIG, B.ANOVIGHAS, B.CODTIPCON, MAX(B.ANTAP) AS ANTAP, MAX(B.ANTAPVAC) AS ANTAPVAC
+                                        FROM NPBONOCONT B
+                                        GROUP BY B.ANOVIG, B.ANOVIGHAS, B.CODTIPCON) B ON A.FECINI >= B.ANOVIG AND A.FECFIN <= B.ANOVIGHAS AND A.CODTIPCON = B.CODTIPCON
+                            LEFT JOIN NPINTFECREF E ON A.FECFIN >= E.FECINIREF AND A.FECFIN <= E.FECFINREF
+                            LEFT JOIN NPTIPCON C ON A.CODTIPCON = C.CODTIPCON
+WHERE A.FECFIN>A.FECING
+ORDER BY A.CODEMP, A.FECFIN, A.ID;
+
+
+
