@@ -1819,7 +1819,12 @@ class CatalogoWeb extends BaseCatalogoWeb {
 		$this->c = new Criteria();
 		if ($tipo != "" and $tipo != 'M')
 			$this->c->add(CaregartPeer :: TIPO, $tipo);
-		$this->sql = "length(Codart) = '" . $longitud . "' and (tipreg is null)";
+
+                $mostodart=H::getConfAppGen('mostodart');
+                if ($mostodart=='S') {
+                    $this->sql = "length(Codart) = '" . $longitud . "'"; }
+                else {
+                    $this->sql = "length(Codart) = '" . $longitud . "' and (tipreg is null)"; }
 		$this->c->add(CaregartPeer :: CODART, $this->sql, Criteria :: CUSTOM);
 
 		$this->columnas = array (
@@ -4613,7 +4618,12 @@ public function Tsmovlib_tesmovdeglib2()
   public function Caregart_Fapedido($params = array ()) {
 		$longitud = $params[0];
 		$this->c = new Criteria();
-		$this->sql = "length(Codart) = '" . $longitud . "' and tipreg='F'";
+                $mostodart=H::getConfAppGen('mostodart');
+                if ($mostodart=='S') {
+                    $this->sql = "length(Codart) = '" . $longitud . "'";
+                }else  {
+                    $this->sql = "length(Codart) = '" . $longitud . "' and tipreg='F'";
+                }
 		$this->c->add(CaregartPeer :: CODART, $this->sql, Criteria :: CUSTOM);
 
 		$this->columnas = array (
