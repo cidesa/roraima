@@ -3037,6 +3037,20 @@ class Nomina {
         }
 
         return $valor;
+      case "5FIDE" :
+        $valor = 0;
+        $sql = "select (salempdia*5) as cincodias from npimppresoc
+                where
+                codemp='$empleado' and tipo is null and
+                fecini<=to_date('$fecnom','yyyy-mm-dd') and
+                fecfin>=to_date('$fecnom','yyyy-mm-dd')
+                limit 1";
+        if (Herramientas :: BuscarDatos($sql, & $res))
+        {
+            $valor = $res[0]['cincodias'];
+        }
+
+        return $valor;
       default :
         $aux = 0;
 
@@ -5388,6 +5402,20 @@ class Nomina {
         if (Herramientas :: BuscarDatos($sql, & $res))
         {
             $valor = $res[0]['cuantas'];
+        }
+
+        return $valor;
+      case "5FIDE" :
+        $valor = 0;
+        $sql = "select (salempdia*5) as cincodias from npimppresoc
+                where
+                codemp='$empleado' and tipo is null and
+                fecini<=to_date('$hasta','dd/mm/yyyy') and
+                fecfin>=to_date('$hasta','dd/mm/yyyy')
+                limit 1";
+        if (Herramientas :: BuscarDatos($sql, & $res))
+        {
+            $valor = $res[0]['cincodias'];
         }
 
         return $valor;
