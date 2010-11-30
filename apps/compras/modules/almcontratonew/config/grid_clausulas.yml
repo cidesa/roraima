@@ -1,0 +1,16 @@
+opciones:                  # Opciones generales
+  name:                    c
+  eliminar:                true
+  tabla:                   caconcla
+  anchogrid:               800
+  ancho:                   500
+  filas:                   1
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Descripción
+  tipo:                    a
+  nombrecampo:             descla
+  html:                    ["size=40x1 maxlength=3000 onkeyup='return ismaxlength(this)'"]
+  esgrabable:              true
+  catalogo:                [cadefcla, sf_admin_edit_form, {Descla: 1}, Cadefcla_almcontrato ]

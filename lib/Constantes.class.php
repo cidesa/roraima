@@ -575,5 +575,10 @@ public static function PagoDoble()
     return array('A' => 'Activo', 'N' => 'Inactivo');
 }
 
+    public static function ListatipoFianza()
+  {
+    return array('Fiel Cumplimiento' => 'Fiel Cumplimiento', 'Anticipo' => 'Anticipo', 'Laboral' => 'Laboral', 'GarantÃ­a' => 'GarantÃ­a');
+  }
+
 
 }

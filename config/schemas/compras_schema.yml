@@ -898,6 +898,40 @@ propel:
     cancuo:
       type: NUMERIC
       size: 3
+    fecpto:
+      type: DATE
+    numcon:
+      type: VARCHAR
+      size: 25
+    numpto:
+      type: VARCHAR
+      size: 50
+    numres:
+      type: VARCHAR
+      size: 50
+    otorga:
+      type: VARCHAR
+      size: 1
+    fecfir:
+      type: DATE
+    otoant:
+      type: BOOLEAN
+    monoto:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    pamopag:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    cumresp:
+      type: BOOLEAN
+    otoesp:
+      type: BOOLEAN
+    monaes:
+      type: NUMERIC
+      size: 14
+      scale: 2
     id:
       type: INTEGER
       required: true
@@ -3198,6 +3232,121 @@ propel:
       size: 14
       scale: 2
     methas:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  caconcla:
+    ordcon:
+      type: VARCHAR
+      size: 8
+      required: true
+    descla:
+      type: VARCHAR
+      size: 3000
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  cadefcla:
+    codcla:
+      type: VARCHAR
+      size: 4
+      required: true
+    descla:
+      type: VARCHAR
+      size: 2500
+    tipcla:
+      type: VARCHAR
+      size: 1
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  cagrucla:
+    codgru:
+      type: VARCHAR
+      size: 4
+      required: true
+    desgru:
+      type: VARCHAR
+      size: 100
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  caclagru:
+    codgru:
+      type: VARCHAR
+      size: 4
+    codcla:
+      type: VARCHAR
+      size: 4
+    codins:
+      type: VARCHAR
+      size: 4
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  cafiacon:
+    ordcon:
+      type: VARCHAR
+      size: 8
+      required: true
+    fecfia:
+      type: DATE
+    insfin:
+      type: VARCHAR
+      size: 50
+    tipfia:
+      type: VARCHAR
+      size: 50
+    numfia:
+      type: VARCHAR
+      size: 50
+    monfia:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  cacrocon:
+    ordcon:
+      type: VARCHAR
+      size: 8
+      required: true
+    fecpag:
+      type: DATE
+    nropag:
+      type: VARCHAR
+      size: 10
+    monpag:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    pormon:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    poramo:
       type: NUMERIC
       size: 14
       scale: 2

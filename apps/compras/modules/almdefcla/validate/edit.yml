@@ -1,0 +1,30 @@
+methods:
+  post:
+   - "cadefcla{codcla}"
+   - "cadefcla{descla}"
+
+names:
+  cadefcla{codcla}:
+    required:  Yes
+    required_msg: El Código de la Claúsula no puedo estar en Blanco
+    validators: UniqueValidator
+
+  cadefcla{descla}:
+    required:  Yes
+    required_msg: La Descripción de la Claúsula no puedo estar en Blanco
+    validators: DescripcionValidator
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Cadefcla
+        column:   codcla
+        unique_error:   El Código de la Claúsula ya existe. Por Favor, Cambiélo por otro.
+
+DescripcionValidator:
+    class: sfStringValidator
+    param:
+        min:       5
+        min_error: La Descripción de la Claúsula no puede tener menos de 5 caracteres
+        max:       2500
+        max_error: La Descripción de la Claúsula no puede tener más de 2500 caracteres

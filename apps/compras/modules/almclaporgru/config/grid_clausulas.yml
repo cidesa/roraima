@@ -1,0 +1,22 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                true
+  tabla:                   caclagru
+  anchogrid:               700
+  ancho:                   500
+  filas:                   1
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Código
+  tipo:                    t
+  nombrecampo:             codcla
+  html:                    ["size=10 maxlength=4 onBlur='toAjax(1,getUrlModuloAjax(),this.value,0,'&cajtexmos='+$(this.id).up().next(0).descendants()[0].id+'&cajtexcom='+this.id)'"]
+  esgrabable:              true
+  catalogo:                [cadefcla, sf_admin_edit_form, {Codcla: 1, Descla: 2}, Cadefcla_almcontrato ]
+2:       # Columna 2
+  titulo:                  Descripción
+  tipo:                    a
+  nombrecampo:             descla
+  html:                    ["size=40x1 readOnly=true"]
+  esgrabable:              true

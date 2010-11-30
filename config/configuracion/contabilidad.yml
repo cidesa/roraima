@@ -1,0 +1,4 @@
+#PARA LOS COMPROBANTES CONTABLES
+comprobantes:
+  confcorcom: N   #genera los correlativos comprobantes contables
+

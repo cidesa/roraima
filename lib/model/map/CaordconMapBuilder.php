@@ -64,6 +64,30 @@ class CaordconMapBuilder {
 
 		$tMap->addColumn('CANCUO', 'Cancuo', 'double', CreoleTypes::NUMERIC, false, 3);
 
+		$tMap->addColumn('FECPTO', 'Fecpto', 'int', CreoleTypes::DATE, false, null);
+
+		$tMap->addColumn('NUMCON', 'Numcon', 'string', CreoleTypes::VARCHAR, false, 25);
+
+		$tMap->addColumn('NUMPTO', 'Numpto', 'string', CreoleTypes::VARCHAR, false, 50);
+
+		$tMap->addColumn('NUMRES', 'Numres', 'string', CreoleTypes::VARCHAR, false, 50);
+
+		$tMap->addColumn('OTORGA', 'Otorga', 'string', CreoleTypes::VARCHAR, false, 1);
+
+		$tMap->addColumn('FECFIR', 'Fecfir', 'int', CreoleTypes::DATE, false, null);
+
+		$tMap->addColumn('OTOANT', 'Otoant', 'boolean', CreoleTypes::BOOLEAN, false, null);
+
+		$tMap->addColumn('MONOTO', 'Monoto', 'double', CreoleTypes::NUMERIC, false, 14);
+
+		$tMap->addColumn('PAMOPAG', 'Pamopag', 'double', CreoleTypes::NUMERIC, false, 14);
+
+		$tMap->addColumn('CUMRESP', 'Cumresp', 'boolean', CreoleTypes::BOOLEAN, false, null);
+
+		$tMap->addColumn('OTOESP', 'Otoesp', 'boolean', CreoleTypes::BOOLEAN, false, null);
+
+		$tMap->addColumn('MONAES', 'Monaes', 'double', CreoleTypes::NUMERIC, false, 14);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 
