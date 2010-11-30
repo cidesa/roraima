@@ -61,8 +61,9 @@ private static $coderror=-1;
       $this->pager = new sfPropelPager('Caregart',15);
       $c = new Criteria();
       $modulo=sfContext::getInstance()->getUser()->getAttribute('menu','','autenticacion');
-      if ($modulo=='facturacion')
-       $c->add(CaregartPeer::TIPREG,'F');
+      $mostodart=H::getConfAppGen('mostodart');
+      if ($modulo=='facturacion' && $mostodart!='S')
+         $c->add(CaregartPeer::TIPREG,'F');
       $this->addSortCriteria($c);
       $this->addFiltersCriteria($c);
       $this->pager->setCriteria($c);
