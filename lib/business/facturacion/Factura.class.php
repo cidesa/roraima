@@ -43,11 +43,11 @@ class Factura {
     if (!self::generarAsientos(&$fafactur,$grid1,$grid2,$grid3,$grid4,&$arrasientos,&$pos,&$msj3))
     {
       return true;
-    }
-
-    self::grabarFactura($fafactur,$grid1,$grid2,$grid3,$grid4,$tipocaja);
+    }    
 
     self::grabarComprobanteMaestro(&$fafactur,$arrasientos,&$pos);
+
+    self::grabarFactura($fafactur,$grid1,$grid2,$grid3,$grid4,$tipocaja);
 
     $usalib=H::getConfApp2('gridfaclib', 'facturacion', 'fafactur');
     if ($usalib=='S')
