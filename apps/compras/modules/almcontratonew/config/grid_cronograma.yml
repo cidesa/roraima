@@ -1,0 +1,42 @@
+opciones:                  # Opciones generales
+  name:                    d
+  eliminar:                true
+  tabla:                   cacrocon
+  anchogrid:               800
+  ancho:                   750
+  filas:                   1
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Nro. del Pago
+  tipo:                    t
+  nombrecampo:             nropag
+  html:                    ["size=20 maxlength=10 "]
+  esgrabable:              true
+2:       # Columna 2
+  titulo:                  Fecha Estimada
+  tipo:                    f
+  nombrecampo:             fecpag
+  esgrabable:              true
+  html:                    [size="15" maxlength=10]
+3:       # Columna 3
+  titulo:                  Monto
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             monpag
+  esnumerico:              true
+  html:                    ["size=10"]
+4:       # Columna 4
+  titulo:                  % del Monto Total
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             pormon
+  esnumerico:              true
+  html:                    ["size=10"]
+5:       # Columna 5
+  titulo:                  % Amortización del Anticipo
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             poramo
+  esnumerico:              true
+  html:                    ["size=10"]

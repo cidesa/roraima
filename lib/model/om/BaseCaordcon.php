@@ -69,6 +69,54 @@ abstract class BaseCaordcon extends BaseObject  implements Persistent {
 
 
 	
+	protected $fecpto;
+
+
+	
+	protected $numcon;
+
+
+	
+	protected $numpto;
+
+
+	
+	protected $numres;
+
+
+	
+	protected $otorga;
+
+
+	
+	protected $fecfir;
+
+
+	
+	protected $otoant;
+
+
+	
+	protected $monoto;
+
+
+	
+	protected $pamopag;
+
+
+	
+	protected $cumresp;
+
+
+	
+	protected $otoesp;
+
+
+	
+	protected $monaes;
+
+
+	
 	protected $id;
 
 	
@@ -245,6 +293,123 @@ abstract class BaseCaordcon extends BaseObject  implements Persistent {
 
     if($val) return number_format($this->cancuo,2,',','.');
     else return $this->cancuo;
+
+  }
+  
+  public function getFecpto($format = 'Y-m-d')
+  {
+
+    if ($this->fecpto === null || $this->fecpto === '') {
+      return null;
+    } elseif (!is_int($this->fecpto)) {
+            $ts = adodb_strtotime($this->fecpto);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecpto] as date/time value: " . var_export($this->fecpto, true));
+      }
+    } else {
+      $ts = $this->fecpto;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getNumcon()
+  {
+
+    return trim($this->numcon);
+
+  }
+  
+  public function getNumpto()
+  {
+
+    return trim($this->numpto);
+
+  }
+  
+  public function getNumres()
+  {
+
+    return trim($this->numres);
+
+  }
+  
+  public function getOtorga()
+  {
+
+    return trim($this->otorga);
+
+  }
+  
+  public function getFecfir($format = 'Y-m-d')
+  {
+
+    if ($this->fecfir === null || $this->fecfir === '') {
+      return null;
+    } elseif (!is_int($this->fecfir)) {
+            $ts = adodb_strtotime($this->fecfir);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecfir] as date/time value: " . var_export($this->fecfir, true));
+      }
+    } else {
+      $ts = $this->fecfir;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getOtoant()
+  {
+
+    return $this->otoant;
+
+  }
+  
+  public function getMonoto($val=false)
+  {
+
+    if($val) return number_format($this->monoto,2,',','.');
+    else return $this->monoto;
+
+  }
+  
+  public function getPamopag($val=false)
+  {
+
+    if($val) return number_format($this->pamopag,2,',','.');
+    else return $this->pamopag;
+
+  }
+  
+  public function getCumresp()
+  {
+
+    return $this->cumresp;
+
+  }
+  
+  public function getOtoesp()
+  {
+
+    return $this->otoesp;
+
+  }
+  
+  public function getMonaes($val=false)
+  {
+
+    if($val) return number_format($this->monaes,2,',','.');
+    else return $this->monaes;
 
   }
   
@@ -453,6 +618,150 @@ abstract class BaseCaordcon extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setFecpto($v)
+	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecpto] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecpto !== $ts) {
+      $this->fecpto = $ts;
+      $this->modifiedColumns[] = CaordconPeer::FECPTO;
+    }
+
+	} 
+	
+	public function setNumcon($v)
+	{
+
+    if ($this->numcon !== $v) {
+        $this->numcon = $v;
+        $this->modifiedColumns[] = CaordconPeer::NUMCON;
+      }
+  
+	} 
+	
+	public function setNumpto($v)
+	{
+
+    if ($this->numpto !== $v) {
+        $this->numpto = $v;
+        $this->modifiedColumns[] = CaordconPeer::NUMPTO;
+      }
+  
+	} 
+	
+	public function setNumres($v)
+	{
+
+    if ($this->numres !== $v) {
+        $this->numres = $v;
+        $this->modifiedColumns[] = CaordconPeer::NUMRES;
+      }
+  
+	} 
+	
+	public function setOtorga($v)
+	{
+
+    if ($this->otorga !== $v) {
+        $this->otorga = $v;
+        $this->modifiedColumns[] = CaordconPeer::OTORGA;
+      }
+  
+	} 
+	
+	public function setFecfir($v)
+	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecfir] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecfir !== $ts) {
+      $this->fecfir = $ts;
+      $this->modifiedColumns[] = CaordconPeer::FECFIR;
+    }
+
+	} 
+	
+	public function setOtoant($v)
+	{
+
+    if ($this->otoant !== $v) {
+        $this->otoant = $v;
+        $this->modifiedColumns[] = CaordconPeer::OTOANT;
+      }
+  
+	} 
+	
+	public function setMonoto($v)
+	{
+
+    if ($this->monoto !== $v) {
+        $this->monoto = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaordconPeer::MONOTO;
+      }
+  
+	} 
+	
+	public function setPamopag($v)
+	{
+
+    if ($this->pamopag !== $v) {
+        $this->pamopag = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaordconPeer::PAMOPAG;
+      }
+  
+	} 
+	
+	public function setCumresp($v)
+	{
+
+    if ($this->cumresp !== $v) {
+        $this->cumresp = $v;
+        $this->modifiedColumns[] = CaordconPeer::CUMRESP;
+      }
+  
+	} 
+	
+	public function setOtoesp($v)
+	{
+
+    if ($this->otoesp !== $v) {
+        $this->otoesp = $v;
+        $this->modifiedColumns[] = CaordconPeer::OTOESP;
+      }
+  
+	} 
+	
+	public function setMonaes($v)
+	{
+
+    if ($this->monaes !== $v) {
+        $this->monaes = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaordconPeer::MONAES;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -497,7 +806,31 @@ abstract class BaseCaordcon extends BaseObject  implements Persistent {
 
       $this->cancuo = $rs->getFloat($startcol + 14);
 
-      $this->id = $rs->getInt($startcol + 15);
+      $this->fecpto = $rs->getDate($startcol + 15, null);
+
+      $this->numcon = $rs->getString($startcol + 16);
+
+      $this->numpto = $rs->getString($startcol + 17);
+
+      $this->numres = $rs->getString($startcol + 18);
+
+      $this->otorga = $rs->getString($startcol + 19);
+
+      $this->fecfir = $rs->getDate($startcol + 20, null);
+
+      $this->otoant = $rs->getBoolean($startcol + 21);
+
+      $this->monoto = $rs->getFloat($startcol + 22);
+
+      $this->pamopag = $rs->getFloat($startcol + 23);
+
+      $this->cumresp = $rs->getBoolean($startcol + 24);
+
+      $this->otoesp = $rs->getBoolean($startcol + 25);
+
+      $this->monaes = $rs->getFloat($startcol + 26);
+
+      $this->id = $rs->getInt($startcol + 27);
 
       $this->resetModified();
 
@@ -505,7 +838,7 @@ abstract class BaseCaordcon extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 16; 
+            return $startcol + 28; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Caordcon object", $e);
     }
@@ -698,6 +1031,42 @@ abstract class BaseCaordcon extends BaseObject  implements Persistent {
 				return $this->getCancuo();
 				break;
 			case 15:
+				return $this->getFecpto();
+				break;
+			case 16:
+				return $this->getNumcon();
+				break;
+			case 17:
+				return $this->getNumpto();
+				break;
+			case 18:
+				return $this->getNumres();
+				break;
+			case 19:
+				return $this->getOtorga();
+				break;
+			case 20:
+				return $this->getFecfir();
+				break;
+			case 21:
+				return $this->getOtoant();
+				break;
+			case 22:
+				return $this->getMonoto();
+				break;
+			case 23:
+				return $this->getPamopag();
+				break;
+			case 24:
+				return $this->getCumresp();
+				break;
+			case 25:
+				return $this->getOtoesp();
+				break;
+			case 26:
+				return $this->getMonaes();
+				break;
+			case 27:
 				return $this->getId();
 				break;
 			default:
@@ -725,7 +1094,19 @@ abstract class BaseCaordcon extends BaseObject  implements Persistent {
 			$keys[12] => $this->getMoncon(),
 			$keys[13] => $this->getFecanu(),
 			$keys[14] => $this->getCancuo(),
-			$keys[15] => $this->getId(),
+			$keys[15] => $this->getFecpto(),
+			$keys[16] => $this->getNumcon(),
+			$keys[17] => $this->getNumpto(),
+			$keys[18] => $this->getNumres(),
+			$keys[19] => $this->getOtorga(),
+			$keys[20] => $this->getFecfir(),
+			$keys[21] => $this->getOtoant(),
+			$keys[22] => $this->getMonoto(),
+			$keys[23] => $this->getPamopag(),
+			$keys[24] => $this->getCumresp(),
+			$keys[25] => $this->getOtoesp(),
+			$keys[26] => $this->getMonaes(),
+			$keys[27] => $this->getId(),
 		);
 		return $result;
 	}
@@ -787,6 +1168,42 @@ abstract class BaseCaordcon extends BaseObject  implements Persistent {
 				$this->setCancuo($value);
 				break;
 			case 15:
+				$this->setFecpto($value);
+				break;
+			case 16:
+				$this->setNumcon($value);
+				break;
+			case 17:
+				$this->setNumpto($value);
+				break;
+			case 18:
+				$this->setNumres($value);
+				break;
+			case 19:
+				$this->setOtorga($value);
+				break;
+			case 20:
+				$this->setFecfir($value);
+				break;
+			case 21:
+				$this->setOtoant($value);
+				break;
+			case 22:
+				$this->setMonoto($value);
+				break;
+			case 23:
+				$this->setPamopag($value);
+				break;
+			case 24:
+				$this->setCumresp($value);
+				break;
+			case 25:
+				$this->setOtoesp($value);
+				break;
+			case 26:
+				$this->setMonaes($value);
+				break;
+			case 27:
 				$this->setId($value);
 				break;
 		} 	}
@@ -811,7 +1228,19 @@ abstract class BaseCaordcon extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[12], $arr)) $this->setMoncon($arr[$keys[12]]);
 		if (array_key_exists($keys[13], $arr)) $this->setFecanu($arr[$keys[13]]);
 		if (array_key_exists($keys[14], $arr)) $this->setCancuo($arr[$keys[14]]);
-		if (array_key_exists($keys[15], $arr)) $this->setId($arr[$keys[15]]);
+		if (array_key_exists($keys[15], $arr)) $this->setFecpto($arr[$keys[15]]);
+		if (array_key_exists($keys[16], $arr)) $this->setNumcon($arr[$keys[16]]);
+		if (array_key_exists($keys[17], $arr)) $this->setNumpto($arr[$keys[17]]);
+		if (array_key_exists($keys[18], $arr)) $this->setNumres($arr[$keys[18]]);
+		if (array_key_exists($keys[19], $arr)) $this->setOtorga($arr[$keys[19]]);
+		if (array_key_exists($keys[20], $arr)) $this->setFecfir($arr[$keys[20]]);
+		if (array_key_exists($keys[21], $arr)) $this->setOtoant($arr[$keys[21]]);
+		if (array_key_exists($keys[22], $arr)) $this->setMonoto($arr[$keys[22]]);
+		if (array_key_exists($keys[23], $arr)) $this->setPamopag($arr[$keys[23]]);
+		if (array_key_exists($keys[24], $arr)) $this->setCumresp($arr[$keys[24]]);
+		if (array_key_exists($keys[25], $arr)) $this->setOtoesp($arr[$keys[25]]);
+		if (array_key_exists($keys[26], $arr)) $this->setMonaes($arr[$keys[26]]);
+		if (array_key_exists($keys[27], $arr)) $this->setId($arr[$keys[27]]);
 	}
 
 	
@@ -834,6 +1263,18 @@ abstract class BaseCaordcon extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CaordconPeer::MONCON)) $criteria->add(CaordconPeer::MONCON, $this->moncon);
 		if ($this->isColumnModified(CaordconPeer::FECANU)) $criteria->add(CaordconPeer::FECANU, $this->fecanu);
 		if ($this->isColumnModified(CaordconPeer::CANCUO)) $criteria->add(CaordconPeer::CANCUO, $this->cancuo);
+		if ($this->isColumnModified(CaordconPeer::FECPTO)) $criteria->add(CaordconPeer::FECPTO, $this->fecpto);
+		if ($this->isColumnModified(CaordconPeer::NUMCON)) $criteria->add(CaordconPeer::NUMCON, $this->numcon);
+		if ($this->isColumnModified(CaordconPeer::NUMPTO)) $criteria->add(CaordconPeer::NUMPTO, $this->numpto);
+		if ($this->isColumnModified(CaordconPeer::NUMRES)) $criteria->add(CaordconPeer::NUMRES, $this->numres);
+		if ($this->isColumnModified(CaordconPeer::OTORGA)) $criteria->add(CaordconPeer::OTORGA, $this->otorga);
+		if ($this->isColumnModified(CaordconPeer::FECFIR)) $criteria->add(CaordconPeer::FECFIR, $this->fecfir);
+		if ($this->isColumnModified(CaordconPeer::OTOANT)) $criteria->add(CaordconPeer::OTOANT, $this->otoant);
+		if ($this->isColumnModified(CaordconPeer::MONOTO)) $criteria->add(CaordconPeer::MONOTO, $this->monoto);
+		if ($this->isColumnModified(CaordconPeer::PAMOPAG)) $criteria->add(CaordconPeer::PAMOPAG, $this->pamopag);
+		if ($this->isColumnModified(CaordconPeer::CUMRESP)) $criteria->add(CaordconPeer::CUMRESP, $this->cumresp);
+		if ($this->isColumnModified(CaordconPeer::OTOESP)) $criteria->add(CaordconPeer::OTOESP, $this->otoesp);
+		if ($this->isColumnModified(CaordconPeer::MONAES)) $criteria->add(CaordconPeer::MONAES, $this->monaes);
 		if ($this->isColumnModified(CaordconPeer::ID)) $criteria->add(CaordconPeer::ID, $this->id);
 
 		return $criteria;
@@ -894,6 +1335,30 @@ abstract class BaseCaordcon extends BaseObject  implements Persistent {
 		$copyObj->setFecanu($this->fecanu);
 
 		$copyObj->setCancuo($this->cancuo);
+
+		$copyObj->setFecpto($this->fecpto);
+
+		$copyObj->setNumcon($this->numcon);
+
+		$copyObj->setNumpto($this->numpto);
+
+		$copyObj->setNumres($this->numres);
+
+		$copyObj->setOtorga($this->otorga);
+
+		$copyObj->setFecfir($this->fecfir);
+
+		$copyObj->setOtoant($this->otoant);
+
+		$copyObj->setMonoto($this->monoto);
+
+		$copyObj->setPamopag($this->pamopag);
+
+		$copyObj->setCumresp($this->cumresp);
+
+		$copyObj->setOtoesp($this->otoesp);
+
+		$copyObj->setMonaes($this->monaes);
 
 
 		$copyObj->setNew(true);

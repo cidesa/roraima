@@ -6511,5 +6511,37 @@ public function Catdefcatman_Cattramo($params = '') {
 
 }
 
+	public function Bnregsem_Biedisactsem() {
+		$this->c = new Criteria();
+
+		$this->columnas = array (
+			BnregsemPeer :: CODACT => 'Activo',
+			BnregsemPeer :: CODSEM => 'Semoviente',
+			BnregsemPeer :: DESSEM => 'Nombre',
+                        BnregsemPeer :: VALINI => 'Valor',
+                        BnregsemPeer :: STASEM => 'Estatus',
+		);
+	}
+
+       public function Cagrucla_almcontrato() {
+		$this->c = new Criteria();
+
+                $this->columnas = array (
+			CagruclaPeer :: CODGRU => 'Codigo',
+			CagruclaPeer :: DESGRU => 'Descripcion'
+		);
+
+	}
+
+       public function Cadefcla_almcontrato() {
+		$this->c = new Criteria();
+
+                $this->columnas = array (
+			CadefclaPeer :: CODCLA => 'Codigo',
+			CadefclaPeer :: DESCLA => 'Descripcion'
+		);
+
+	}
+
 }
 ?>

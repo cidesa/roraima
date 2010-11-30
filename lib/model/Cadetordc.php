@@ -15,4 +15,12 @@
  */ 
 class Cadetordc extends BaseCadetordc
 {
+    protected $montot="0,00";
+
+  public function afterHydrate()
+  {
+     $calc=$this->cancon*$this->moncon;
+
+     $this->montot=number_format($calc,2,',','.');
+  }
 }

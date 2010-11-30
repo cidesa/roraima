@@ -1,0 +1,95 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Caordcon
+    theme:            cidesaGenerator
+    fields:
+      numcon: { name: Número, params: size=25 maxlength=25}
+      ordcon: { name: Orden de Contrato, params: style="border:none"}
+      feccon: { name: Fecha, params: date_format='dd/MM/yyyy' size=10 maxlength=10}
+      tipcon: { name: Tipo}
+      #tipprc:
+        #name: Tipo
+        #params: maxlength=4 disabled=false
+        #catalogo:
+         # catalogoweb: Cpdocprc_Predocpre
+         # clase: Cpdocprc
+         # ajax: 1
+         # parametros: getprincipal="getTipprc" getsecundario="getNomext" campoprincipal="tipprc" camposecundario="nomext" campobase = "id"
+      rifpro:
+        name: Empresa
+        params: maxlength=15
+        catalogo:
+          catalogoweb: Cotizaciones
+          clase: Caprovee
+          ajax: 2
+          parametros: getprincipal="getRifpro" getsecundario="getNompro" campoprincipal="rifpro" camposecundario="nompro" campobase = "id"
+      descon:  { name: Descripción, type: textarea_tag, params: size=80x5 maxlength=1000 onkeyup=" return ismaxlength(this)"}
+      objcon: { name: Objeto, params: size=80 maxlength=1000}
+      numpto: { name: Número de Punto de Cuenta, params: size=20 maxlength=50}
+      fecpto: { name: Fecha de Punto de Cuenta, params: date_format='dd/MM/yyyy' size=10 maxlength=50}
+      numres: { name: Número de Resolución, params: size=20 maxlength=50}
+      fecini: { name: Fecha Inicio, params: date_format='dd/MM/yyyy' size=10 maxlength=10}
+      mulatrini: { name: Multa por Atraso de Inicio}
+      feccul: { name: Fecha de Culminación, params: date_format='dd/MM/yyyy' size=10 maxlength=10}
+      mulatrcul: { name: Multa por Atraso de Culminación}
+      durdia: { name: Duración en días, params: size=5 disabled=false}
+      lapgar: { name: Lapso de Garantía(en días) }
+      cancuo: { name: Nro. Cuotas}
+      grid: { name: .}
+      moncon: { name: Monto Total, params: size=25 maxlength=25 readOnly=true}
+      grid2: { name: .}
+      codgru:
+        name: Grupo
+        params: maxlength=4 disabled=false
+        catalogo:
+          catalogoweb: Cagrucla_almcontrato
+          clase: Cagrucla
+          ajax: 3
+          parametros: getprincipal="getCodgru" getsecundario="getDesgru" campoprincipal="codgru" camposecundario="desgru" campobase = "id"
+          divupdate: divgrid3
+      grid3: { name: .}
+      stacon: { name: Estatus}
+      stacon2: { name: Situación Actual, params: style="border:none"}
+      grid4: { name: .}
+      fecfir: { name: Fecha de Firma, params: date_format='dd/MM/yyyy' size=10 maxlength=50}
+      otoant: { name: Otorgamiento del anticipo}
+      monoto: { name: Monto de Otorgamiento del anticipo}
+      pamopag: { name: % de amortización en función del n° de pagos}
+      cumresp: { name: Cumplimiento Resp. Soc. }
+      otoesp: { name: Otorgamiento Antic. Esp.}
+      monaes: { name: Monto de Otorgamiento de anticipo Especials}
+    list:
+      title:  Registro de Contratos
+      fields:
+        numcon: { name: Número de Contrato, params: size=15 maxlength=25}
+        ordcon: { name: Orden de Contrato, params: size=10 maxlength=8}
+      display: [=numcon, ordcon, descon]
+      filters: [numcon, ordcon, feccon, stacon]
+      object_actions:
+       _edit:        ~
+       _delete:      NONE
+      max_per_page:	  10
+      sort:    numcon
+    edit:
+      title:          Edición de Contratos
+      display:
+        "Contrato":  [numcon, ordcon, feccon, _tipcon, rifpro, descon, objcon, fecfir, stacon2]
+        "Punto de Cuenta": [numpto, fecpto]
+        "Resolución": [numres]
+        "Inicio y Culminación de la Obra o Suministro de Bienes y Servicios": [fecini, mulatrini, feccul, mulatrcul]
+        "NONE": [durdia, lapgar, cancuo, otoant, monoto, pamopag, cumresp, otoesp, monaes]
+        "Detalle": [_grid, moncon]
+        "Fianzas": [_grid2]
+        "Claúsulas": [codgru, _grid3]
+        "Cronograma de Pago": [_grid4]
+      hide:       [codpro, longitud, mascara, stacon]
+      actions:
+        _list:        ~
+        _save:        ~
+        _create:        ~
+        _delete:        NONE
+        _anular:
+          name: Anular
+          only_for: edit
+          params: class="sf_admin_action_delete" id="anula" onClick="anular()"

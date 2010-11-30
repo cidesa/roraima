@@ -1,0 +1,50 @@
+methods:
+  post:
+   - "caordcon{numcon}"
+   - "caordcon{feccon}"
+   - "caordcon{rifpro}"
+names:
+  caordcon{numcon}:
+    required:  Yes
+    required_msg: El Número de Contrato no puede estar en Blanco.
+    validators: UniqueValidator
+
+  caordcon{feccon}:
+    required:  Yes
+    required_msg: La Fecha no puede estar en Blanco
+    validators: FechaValidator2, FechaValidator
+
+  caordcon{rifpro}:
+    required:  Yes
+    required_msg: El Rif de la Contratistas de Bienes o Servicio y Cooperativas no puede estar en Blanco.
+    validators: ExistValidator
+
+ExistValidator:
+    class: CidesaExistValidator
+    param:
+        class:        Caprovee
+        column:       rifpro
+        unique_error: El Código de la Contratistas de Bienes o Servicio y Cooperativas debe Existir.
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Caordcon
+        column:       numcon
+        unique_error: El Número del Contrato ya existe. Por Favor, CambiÃ©lo por otro.
+
+
+FechaValidator:
+    class:         CidesaDateNow
+    param:
+        compare: 'now'
+        compare_error: La Fecha no puede ser mayor a la Fecha Actual
+        operator: '<='
+        date_error:  Fecha Inválida
+
+FechaValidator2:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha  introducida es inválida

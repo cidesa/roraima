@@ -1,0 +1,26 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Cadefcla
+    theme:            cidesaGenerator
+    fields:
+      codcla: { name: Código, params: size=10 maxlength=4 onFocus=readonly(this.id) onBlur="this.value=this.value.pad(4, '0',0);"}
+      descla: { name: Descripción, params: size=80 maxlength=2500  }
+      tipcla: { name: Tipo}
+    list:
+      title:          Claúsulas
+      filters:        [codcla, descla ]
+      display:        [=codcla, descla]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:  8
+      sort: codcla
+    edit:
+      title:          Edición de Claúsulas
+      display:        [codcla, descla, _tipcla]
+      actions:
+        _list:        ~
+        _save:        ~
+        _create:      ~
+        _delete:      ~
