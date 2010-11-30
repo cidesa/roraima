@@ -328,7 +328,8 @@ class CierredeNominaEspecial
 			     codnomesp, nomnomesp, codban, nomban, cuenta_banco, nomemp, cedemp, nomcar, desniv, nomcat, numsem)
 			     (SELECT A.CodNom,A.CodEmp,A.CodCar,A.CodCon,A.FecNom,A.Saldo,categoriaemp(A.CodNom,A.CodEmp,A.CodCar,A.CodCon),partidaconcepto(A.CodCon,A.CodNom,A.CodCar),' ',D.CodNiv,B.CODTIPGAS,C.NOMCON,A.NUMREC,
 					A.CANTIDAD,A.FECNOMDES,A.ESPECIAL,A.FECNOMESPDES,A.FECNOMESPHAS,A.CODNOMESP,A.NOMNOMESP,
-					D.CODBAN,E.NOMBAN,G.CUENTA_BANCO,D.NOMEMP,D.CEDEMP,F.NOMCAR,H.DESNIV,B.NOMCAT,'".$numsem."'
+					(CASE when D.CodTipPag='01' then D.Codban else D.Codemp end),
+                                        E.NOMBAN,G.CUENTA_BANCO,D.NOMEMP,D.CEDEMP,F.NOMCAR,H.DESNIV,B.NOMCAT,'".$numsem."'
 					FROM NPNOMCAL A ,NPHOJINT D left outer join NPEMPLEADOS_BANCO G on D.CODEMP=G.CODEMP AND
 					D.CODBAN=G.CODBAN and G.CodNom='".$codnomina."' left outer join NPESTORG H on D.CODNIV=H.CODNIV
 					,NPASICAREMP B,NPDEFCPT C,NPBANCOS E,NPCARGOS F
