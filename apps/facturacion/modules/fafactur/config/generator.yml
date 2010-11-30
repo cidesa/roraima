@@ -66,7 +66,7 @@ generator:
         "Descripción Detallada/Sucursal": [observ, sucursal, usuarios, password, obsfac]
       hide: [codcli, reapor, status, valmon, numcom, numcomord, numcominv, incluircliente, tipconpag, tipo, apliclades, docrefiera, esretencion, tottotart, totmonrgo, monedaanterior, trajo, porcentajedescto, totcanpreart, totprecio, ctasociada, ctacli, filgenmov, limitecredito, mancatdes, codcenaco]
       report:
-        url:         facturacion/rfarfacpreimp.php?m=m
+        url:         facturacion/r.php?r=farfacpreimp.php&m=m
         params:      { codfacdes: reffac, codfachas: reffac }
       actions:
         _list:        ~

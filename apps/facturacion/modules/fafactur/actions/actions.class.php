@@ -1230,6 +1230,32 @@ class fafacturActions extends autofafacturActions {
           return false;
         }
 
+        $valrgoven = H::getConfApp('valrgoven', 'facturacion', 'fafactur');
+
+        if($valrgoven=='S'){
+          if($this->getRequestParameter('fafactur[tipref]')=='V'){
+            $recargo = $grid4[0];
+            if(count($recargo)==0){
+              $this->coderr=1160;
+              return false;
+            }
+            foreach($recargo as $index => $rgo){
+              if($rgo->getCodrgo()){
+                $c = new Criteria();
+                $c->add(FargoartPeer::CODRGO,$rgo->getCodrgo());
+                $rec = FargoartPeer::doSelectOne($c);
+                if(!$rec){
+                  $this->coderr=1161;
+                  return false;
+                }
+              }else{
+                $this->coderr=1161;
+                return false;
+              }
+            }
+          }
+        }
+
           $x=$grid[0];
           $i=0;
 	      while ($i<count($x))
@@ -1436,7 +1462,7 @@ class fafacturActions extends autofafacturActions {
 			$grid2 = Herramientas :: CargarDatosGridv2($this, $this->obj2);
 			$grid3 = Herramientas :: CargarDatosGridv2($this, $this->obj3);
 			$grid4 = Herramientas :: CargarDatosGridv2($this, $this->obj4);
-                        $grid6 = Herramientas :: CargarDatosGridv2($this, $this->obj6);
+      $grid6 = Herramientas :: CargarDatosGridv2($this, $this->obj6);
 			Factura :: salvarFactura($fafactur, $grid, $grid2, $grid3, $grid4, $tipocaja,&$msj,&$msj2,&$msj3,$grid6);
 
 			if ($msj!=-1) return $msj;

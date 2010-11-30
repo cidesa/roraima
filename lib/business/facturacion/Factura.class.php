@@ -1033,14 +1033,14 @@ class Factura {
       $j=0;
       while ($j<count($z))
       {
-        if ($z[$j]->getCodart()!="" && $z[$j]->getDesc()!="0")
+        if ($z[$j]->getCodart()!="" && $z[$j]->getMontdesc()<>'0.0')
         {
            $acumart=0;
            $x=$grid2[0];
            $i=0;
            while ($i<count($x))
            {
-             if ($x[$i]->getCoddesc()!="" && $x[$i]->getMondesc()!="0.00")
+             if ($x[$i]->getCoddesc()!="" && $x[$i]->getMondesc()<>'0.0')
              {
                if ($x[$i]->getTipdesc()=="M")
                {
@@ -1137,10 +1137,10 @@ class Factura {
   {
     $marcados=0;
     $marca="";
-    if ($tipo=='R') //Recargo
+//    if ($tipo=='R') //Recargo
     $indice='check';
-    else
-    $indice='desc';
+//    else
+//    $indice='desc';
 
     $z=$grid[0];
     $j=0;
@@ -2241,6 +2241,7 @@ class Factura {
         $fafaclib->setValfob($fafactur->getMonfac());
       $fafaclib->setVenexec($monto);
       $fafaclib->setBasimp($acum);
+      $fafaclib->setCrefis($fafactur->getMondesc());
       $fafaclib->setPoriva(H::getX('Codrgo','Farecarg','Monrgo',$valrec));
       $fafaclib->setMoniva($acumrec);      
       $fafaclib->save();
