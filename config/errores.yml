@@ -513,6 +513,12 @@
 566:
   cod: 566
   msj: La Fecha del Movimiento según Libro no puede ser mayor a la fecha de hoy.
+567:
+  cod: 567
+  msj: El Tipo de Unidad no puedo estar en Blanco
+568:
+  cod: 568
+  msj: El Tipo de Unidad debe Existir.
 3:
   cod: 3
   msj: La contraseña es diferente.

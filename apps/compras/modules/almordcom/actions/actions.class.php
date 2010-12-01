@@ -73,6 +73,23 @@ class almordcomActions extends autoalmordcomActions
           }
         }
 
+        if(H::getConfApp2('valunidad', 'compras', 'almordcom')=='S'){
+          if ($this->getRequestParameter('caordcom[coduni]')=="")
+          {
+            $this->coderror4 = 567;
+            return false;
+          }else {
+              $r= new Criteria();
+              $r->add(BnubicaPeer::CODUBI,$this->getRequestParameter('caordcom[coduni]'));
+              $reg= BnubicaPeer::doSelectOne($r);
+              if (!$reg)
+              {
+                $this->coderror4 = 568;
+                return false;
+              }
+          }
+        }
+
         $this->mannivelapr="";
 	    $varemp = $this->getUser()->getAttribute('configemp');
 	    if ($varemp)
