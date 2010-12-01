@@ -74,13 +74,20 @@ class Cliente
         $opbenefi->setDirben($facliente->getDirpro());
         $opbenefi->setTelben($facliente->getTelpro());
         $opbenefi->setCodcta($facliente->getCodcta());
-        $opbenefi->setCodord($facliente->getCodord());
-        $opbenefi->setCodpercon($facliente->getCodpercon());
-        $opbenefi->setCodctasec($facliente->getCodctasec());
-        $opbenefi->setCodordadi($facliente->getCodordadi());
-        $opbenefi->setCodperconadi($facliente->getCodperconadi());
-        $opbenefi->setCodordcontra($facliente->getCodordcontra());
-        $opbenefi->setCodpercontra($facliente->getCodpercontra());
+        if ($facliente->getCodord()!="")
+        { $opbenefi->setCodord($facliente->getCodord());}
+        if ($facliente->getCodpercon()!="")
+        { $opbenefi->setCodpercon($facliente->getCodpercon());}
+        if ($facliente->getCodctasec()!="")
+        { $opbenefi->setCodctasec($facliente->getCodctasec());}
+        if ($facliente->getCodordadi()!="")
+        { $opbenefi->setCodordadi($facliente->getCodordadi());}
+        if ($facliente->getCodperconadi()!="")
+        { $opbenefi->setCodperconadi($facliente->getCodperconadi());}
+        if ($facliente->getCodordcontra()!="")
+        { $opbenefi->setCodordcontra($facliente->getCodordcontra()); }
+        if ($facliente->getCodpercontra()!="")
+        { $opbenefi->setCodpercontra($facliente->getCodpercontra());}
 
       $opbenefi->save();
 
