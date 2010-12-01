@@ -1791,163 +1791,8 @@ class Compras {
           return true;
         }
 
-  public static function grabarContrato($caordcon,$grid,$grid2,$grid3,$grid4)
-  {
-      if (!$caordcon->getId()) {
-
-           $t= new Criteria();
-           $t->setLimit(1);
-           $t->addDescendingOrderByColumn(CaordconPeer::ORDCON);
-           $reg= CaordconPeer::doSelectOne($t);
-           if ($reg)
-           {
-               $caordcon->setOrdcon(str_pad(($reg->getOrdcon()+1),8,'0',STR_PAD_LEFT));
-           }else $caordcon->setOrdcon('00000001');
          }
-      $caordcon->setStacon('A');
-      if ($caordcon->getFeccon()=="")
-      {
-          $caordcon->setFeccon(date('Y-m-d'));
       }
-      $caordcon->save();
-      self::grabarDetalleContrato($caordcon, $grid);
-      self::grabarFianzasContrato($caordcon, $grid2);
-      self::grabarClausulasContrato($caordcon, $grid3);
-      self::grabarCronogramaContrato($caordcon, $grid4);
-  }
-
-  public static function grabarDetalleContrato($clasemodelo,$grid)
-  {
-    $x=$grid[0];
-    $j=0;
-    while ($j<count($x))
-    {
-      if ($x[$j]->getCodpre()!='')
-      {
-      	$x[$j]->setOrdcon($clasemodelo->getOrdcon());
-        $x[$j]->save();
-      }
-      $j++;
-    }
-
-    $z=$grid[1];
-    $j=0;
-    if (!empty($z[$j]))
-    {
-      while ($j<count($z))
-      {
-        $z[$j]->delete();
-        $j++;
-      }
-    }
-  }
-
-  public static function grabarFianzasContrato($clasemodelo,$grid)
-  {
-    $x=$grid[0];
-    $j=0;
-    while ($j<count($x))
-    {
-      if ($x[$j]->getNumfia()!='' && $x[$j]->getMonfia()>0)
-      {
-      	$x[$j]->setOrdcon($clasemodelo->getOrdcon());
-        $x[$j]->save();
-      }
-      $j++;
-    }
-
-    $z=$grid[1];
-    $j=0;
-    if (!empty($z[$j]))
-    {
-      while ($j<count($z))
-      {
-        $z[$j]->delete();
-        $j++;
-      }
-    }
-  }
-
-  public static function grabarClausulasContrato($clasemodelo,$grid)
-  {
-    $x=$grid[0];
-    $j=0;
-    while ($j<count($x))
-    {
-      if ($x[$j]->getDescla()!='')
-      {
-      	$x[$j]->setOrdcon($clasemodelo->getOrdcon());
-        $x[$j]->save();
-      }
-      $j++;
-    }
-
-    $z=$grid[1];
-    $j=0;
-    if (!empty($z[$j]))
-    {
-      while ($j<count($z))
-      {
-        $z[$j]->delete();
-        $j++;
-      }
-    }
-  }
-
-  public static function grabarCronogramaContrato($clasemodelo,$grid)
-  {
-    $x=$grid[0];
-    $j=0;
-    while ($j<count($x))
-    {
-      if ($x[$j]->getNropag()!='')
-      {
-      	$x[$j]->setOrdcon($clasemodelo->getOrdcon());
-        $x[$j]->save();
-      }
-      $j++;
-    }
-
-    $z=$grid[1];
-    $j=0;
-    if (!empty($z[$j]))
-    {
-      while ($j<count($z))
-      {
-        $z[$j]->delete();
-        $j++;
-      }
-    }
-  }
-
-  public static function grabarClausulasGrupo($clasemodelo,$grid)
-  {
-    $x=$grid[0];
-    $j=0;
-    while ($j<count($x))
-    {
-      if ($x[$j]->getCodcla()!='')
-      {
-      	$x[$j]->setCodgru($clasemodelo->getCodgru());
-        $x[$j]->save();
-      }
-      $j++;
-    }
-
-    $z=$grid[1];
-    $j=0;
-    if (!empty($z[$j]))
-    {
-      while ($j<count($z))
-      {
-        $z[$j]->delete();
-        $j++;
-      }
-    }
-  }
-
-      }
-    }
     return false;
 
   }
@@ -3383,6 +3228,161 @@ class Compras {
       }
 
     return true;
+  }
+
+  public static function grabarContrato($caordcon,$grid,$grid2,$grid3,$grid4)
+  {
+      if (!$caordcon->getId()) {
+
+           $t= new Criteria();
+           $t->setLimit(1);
+           $t->addDescendingOrderByColumn(CaordconPeer::ORDCON);
+           $reg= CaordconPeer::doSelectOne($t);
+           if ($reg)
+           {
+               $caordcon->setOrdcon(str_pad(($reg->getOrdcon()+1),8,'0',STR_PAD_LEFT));
+           }else $caordcon->setOrdcon('00000001');
+}
+      $caordcon->setStacon('A');
+      if ($caordcon->getFeccon()=="")
+      {
+          $caordcon->setFeccon(date('Y-m-d'));
+      }
+      $caordcon->save();
+      self::grabarDetalleContrato($caordcon, $grid);
+      self::grabarFianzasContrato($caordcon, $grid2);
+      self::grabarClausulasContrato($caordcon, $grid3);
+      self::grabarCronogramaContrato($caordcon, $grid4);
+  }
+
+  public static function grabarDetalleContrato($clasemodelo,$grid)
+  {
+    $x=$grid[0];
+    $j=0;
+    while ($j<count($x))
+    {
+      if ($x[$j]->getCodpre()!='')
+      {
+      	$x[$j]->setOrdcon($clasemodelo->getOrdcon());
+        $x[$j]->save();
+      }
+      $j++;
+    }
+
+    $z=$grid[1];
+    $j=0;
+    if (!empty($z[$j]))
+    {
+      while ($j<count($z))
+      {
+        $z[$j]->delete();
+        $j++;
+      }
+    }
+  }
+
+  public static function grabarFianzasContrato($clasemodelo,$grid)
+  {
+    $x=$grid[0];
+    $j=0;
+    while ($j<count($x))
+    {
+      if ($x[$j]->getNumfia()!='' && $x[$j]->getMonfia()>0)
+      {
+      	$x[$j]->setOrdcon($clasemodelo->getOrdcon());
+        $x[$j]->save();
+      }
+      $j++;
+    }
+
+    $z=$grid[1];
+    $j=0;
+    if (!empty($z[$j]))
+    {
+      while ($j<count($z))
+      {
+        $z[$j]->delete();
+        $j++;
+      }
+    }
+  }
+
+  public static function grabarClausulasContrato($clasemodelo,$grid)
+  {
+    $x=$grid[0];
+    $j=0;
+    while ($j<count($x))
+    {
+      if ($x[$j]->getDescla()!='')
+      {
+      	$x[$j]->setOrdcon($clasemodelo->getOrdcon());
+        $x[$j]->save();
+      }
+      $j++;
+    }
+
+    $z=$grid[1];
+    $j=0;
+    if (!empty($z[$j]))
+    {
+      while ($j<count($z))
+      {
+        $z[$j]->delete();
+        $j++;
+      }
+    }
+  }
+
+  public static function grabarCronogramaContrato($clasemodelo,$grid)
+  {
+    $x=$grid[0];
+    $j=0;
+    while ($j<count($x))
+    {
+      if ($x[$j]->getNropag()!='')
+      {
+      	$x[$j]->setOrdcon($clasemodelo->getOrdcon());
+        $x[$j]->save();
+      }
+      $j++;
+    }
+
+    $z=$grid[1];
+    $j=0;
+    if (!empty($z[$j]))
+    {
+      while ($j<count($z))
+      {
+        $z[$j]->delete();
+        $j++;
+      }
+    }
+  }
+
+  public static function grabarClausulasGrupo($clasemodelo,$grid)
+  {
+    $x=$grid[0];
+    $j=0;
+    while ($j<count($x))
+    {
+      if ($x[$j]->getCodcla()!='')
+      {
+      	$x[$j]->setCodgru($clasemodelo->getCodgru());
+        $x[$j]->save();
+      }
+      $j++;
+    }
+
+    $z=$grid[1];
+    $j=0;
+    if (!empty($z[$j]))
+    {
+      while ($j<count($z))
+      {
+        $z[$j]->delete();
+        $j++;
+      }
+    }
   }
 
 }
