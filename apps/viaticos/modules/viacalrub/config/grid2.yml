@@ -38,4 +38,4 @@ opciones:                  # Opciones generales
   tipo:                    m
   nombrecampo:             monto
   esgrabable:              true
-  html:                    [ readonly=true ]
+  html:                    [  ]
