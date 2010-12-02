@@ -6543,5 +6543,35 @@ public function Catdefcatman_Cattramo($params = '') {
 
 	}
 
+	public function CaOrdCom_Almordrec2($params=array()) {
+		//Este es el SQL Original
+		// $sql="Select a.OrdCom as Codigo,a.FecOrd as Fecha, a.DesOrd as Descripcion from CaOrdCom a,CPCompro b,CPDocCom c where a.StaOrd<>'N' and a.OrdCom=b.RefCom and b.TipCom=C.TipCom and (c.refprc<>'N' or  c.afeprc<>'N' or c.afecom<>'N' or c.afedis<>'N') order by a.OrdCom";
+		$this->c = new Criteria();
+		$this->c->addJoin(CaordcomPeer :: ORDCOM, CpcomproPeer :: REFCOM);
+		$this->c->addJoin(CpcomproPeer :: TIPCOM, CpdoccomPeer :: TIPCOM);
+                $this->c->addJoin(CaordcomPeer :: ORDCOM, CaentordPeer ::ORDCOM);
+		$this->c->add(CaordcomPeer :: STAORD, "N", Criteria :: NOT_EQUAL);
+                $this->c->add(CaentordPeer :: CODALM, $params[0]);
+		$sub = $this->c->getNewCriterion(CpdoccomPeer :: REFPRC, "N", Criteria :: NOT_EQUAL);
+		$sub->addOr($this->c->getNewCriterion(CpdoccomPeer :: AFEPRC, "N", Criteria :: NOT_EQUAL));
+		$sub->addOr($this->c->getNewCriterion(CpdoccomPeer :: AFECOM, "N", Criteria :: NOT_EQUAL));
+		$sub->addOr($this->c->getNewCriterion(CpdoccomPeer :: AFEDIS, "N", Criteria :: NOT_EQUAL));
+		$this->c->add($sub);
+
+		$this->c->addJoin(CaordcomPeer :: ORDCOM, CaartordPeer :: ORDCOM);
+		$this->c->add(CaartordPeer :: CERART, null);
+		$this->sql = "Caartord.canord - Caartord.canaju > Caartord.canrec ";
+		$this->c->add(CaartordPeer :: CANORD, $this->sql, Criteria :: CUSTOM);
+		$this->c->setDistinct();
+
+		$this->c->addAscendingOrderByColumn(CaordcomPeer :: ORDCOM);
+
+		$this->columnas = array (
+			CaordcomPeer :: ORDCOM => 'Código',
+			CaordcomPeer :: FECORD => 'Fecha',
+			CaordcomPeer :: DESORD => 'Descripción'
+		);
+	}
+
 }
 ?>

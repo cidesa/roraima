@@ -22,6 +22,7 @@ generator:
       cancaj:      { name: Cantidad de Cajas, params: maxlenght=14}
       canjau:      { name: Cantidad de Jaulas, params: maxlenght=14}
       codcen: { name : Centro de Costo}
+      codalm: { name : Almacén}
 
     list:
       title:          Recepción de Articulos por Orden de Compra
@@ -34,7 +35,7 @@ generator:
       max_per_page:   10
     edit:
       title:          Recepción de Articulos por Orden de Compra
-      display:        [rcpart, fecrcp, codalm, nomalm, ordcom, fecord, desrcp, codpro, nompro, desconpag, desforent, numfac, nroent, monrcp, _nomcli, _cancaj, _canjau, codubi, nomubi, codcen]
+      display:        [rcpart, fecrcp, codalm, nomalm, ordcom, fecord, desrcp, codpro, nompro, desconpag, desforent, numfac, nroent, monrcp, _nomcli, _cancaj, _canjau, codubi, nomubi, codcen, codalm]
       #display:        [_nomcli]
       actions:
         _list:        ~

@@ -15,6 +15,7 @@
  */
 class Carcpart extends BaseCarcpart
 {
+    protected $codalm="";
   public function getNompro()
   {
   	return Herramientas::getX('CODPRO','Caprovee','Nompro',self::getCodpro());

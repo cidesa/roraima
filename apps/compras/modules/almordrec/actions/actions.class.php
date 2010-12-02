@@ -185,6 +185,20 @@ class almordrecActions extends autoalmordrecActions
 			}//if ($canrec>0)
             $output = '[["verificaexisydisp","'.$dato.'",""],["mensaje","'.$msg.'",""]]';
 	    }
+          else  if ($this->getRequestParameter('ajax')=='6')
+          {
+            $q= new Criteria();
+            $q->add(CadefalmPeer::CODALM,$this->getRequestParameter('codigo'));
+            $reg= CadefalmPeer::doSelectOne($q);
+            if ($reg)
+            {
+               $dato=$reg->getNomalm(); $javascript="";
+            }else {
+                $dato="";
+                $javascript="alert_('El Almac&eacute;n no existe'); $('$cajtexcom').value=''; $('$cajtexcom').focus();";
+            }
+            $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""]]';
+          }
 
   	    $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
 	    return sfView::HEADER_ONLY;
@@ -247,7 +261,8 @@ class almordrecActions extends autoalmordrecActions
 			            $output = '[["carcpart_fecord","'.$fecha.'",""],["carcpart_codpro","'.$codpro.'",""],["carcpart_nompro","'.$nompro.'",""],["carcpart_desconpag","'.$conpag.'",""],["carcpart_desforent","'.$forent.'",""],["carcpart_desrcp","'.$des.'",""],["carcpart_monrcp","'.$monord.'",""],["carcpart_codcen","'.$codcen.'",""],["carcpart_descen","'.$descen.'",""],["'.$cajtexcom.'","8","c"]]';
 			            $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
 			            ////
-			            $this->configGrid($this->getRequestParameter('codigo'));
+
+			            $this->configGrid($this->getRequestParameter('codigo'),$this->getRequestParameter('codalm'));
                     }// if (Herramientas::BuscarDatos($sql,&$result))
                    else
 	               {
@@ -276,7 +291,7 @@ class almordrecActions extends autoalmordrecActions
     if (!$this->getRequestParameter($id))
     {
       $carcpart = new Carcpart();
-      $this->configGrid($this->getRequestParameter('carcpart[ordcom]'));
+      $this->configGrid($this->getRequestParameter('carcpart[ordcom]'),$this->getRequestParameter('carcpart[codalm]'));
     }
     else
     {
@@ -295,13 +310,22 @@ class almordrecActions extends autoalmordrecActions
    * los datos del grid.
    *
    */
-  public function configGrid($codigo='')
+  public function configGrid($codigo='',$codalm='')
 	 {
 	//////////////////////
 	//GRID
 
     $this->setVars();
 	$c = new Criteria();
+        $manforent=H::getConfApp2('manforent', 'compras', 'almordcom');
+        if ($manforent=='S')
+        {
+            $c->addJoin(CaartordPeer::ORDCOM,CaordcomPeer::ORDCOM);
+            $c->addJoin(CaordcomPeer::ORDCOM,CaentordPeer::ORDCOM);
+            $c->addJoin(CaartordPeer::CODART,CaentordPeer::CODART);
+            $c->add(CaentordPeer::ORDCOM,$codigo);
+            $c->add(CaentordPeer::CODALM,$codalm);
+        }
 	$c->add(CaartordPeer::ORDCOM,$codigo);
 	$c->add(CaartordPeer::CERART,null);
 	$this->sql = "Caartord.canord - Caartord.canaju > Caartord.canrec ";
@@ -885,6 +909,10 @@ $this->Bitacora('Guardo');
     if (isset($carcpart['codcen']))
     {
       $this->carcpart->setCodcen($carcpart['codcen']);
+    }
+    if (isset($carcpart['codalm']))
+    {
+      $this->carcpart->setCodalm($carcpart['codalm']);
     }
 
   }

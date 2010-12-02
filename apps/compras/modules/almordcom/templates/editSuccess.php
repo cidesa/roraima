@@ -25,7 +25,7 @@ array()) ?></h1>
 
 <div id="sf_admin_content">
 <?php include_partial('almordcom/edit_messages', array('caordcom' => $caordcom, 'labels' => $labels)) ?>
-<?php include_partial('almordcom/edit_form', array('readonly' => $readonly, 'caordcom' => $caordcom, 'labels' => $labels, 'listatipocompra' => $listatipocompra, 'obj' => $obj, 'obj_resumen' => $obj_resumen, 'obj_entregas' => $obj_entregas, 'obj_recargos' => $obj_recargos, 'aprobacion' => $aprobacion, 'pais' => $pais, 'estados' => $estados, 'municipio' => $municipio, 'parroquia' => $parroquia, 'imp' => $imp, 'obj_respartidas' => $obj_respartidas, 'deshabmonrec' => $deshabmonrec, 'ordcomdesh' => $ordcomdesh, 'mansolocor' => $mansolocor, 'bloqfec' => $bloqfec, 'oculeli' => $oculeli, 'fechaanuserv' => $fechaanuserv, 'etiqtipord' => $etiqtipord)) ?>
+<?php include_partial('almordcom/edit_form', array('readonly' => $readonly, 'caordcom' => $caordcom, 'labels' => $labels, 'listatipocompra' => $listatipocompra, 'obj' => $obj, 'obj_resumen' => $obj_resumen, 'obj_entregas' => $obj_entregas, 'obj_recargos' => $obj_recargos, 'aprobacion' => $aprobacion, 'pais' => $pais, 'estados' => $estados, 'municipio' => $municipio, 'parroquia' => $parroquia, 'imp' => $imp, 'obj_respartidas' => $obj_respartidas, 'deshabmonrec' => $deshabmonrec, 'ordcomdesh' => $ordcomdesh, 'mansolocor' => $mansolocor, 'bloqfec' => $bloqfec, 'oculeli' => $oculeli, 'fechaanuserv' => $fechaanuserv, 'etiqtipord' => $etiqtipord, 'obj_formas' => $obj_formas)) ?>
 <?php //include_partial('almordcom/edit_form', array('caordcom' => $caordcom, 'labels' => $labels, 'listatipocompra' => $listatipocompra, 'obj' => $obj)) ?>
 </div>
 

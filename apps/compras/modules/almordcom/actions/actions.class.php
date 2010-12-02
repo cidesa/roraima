@@ -40,6 +40,7 @@ class almordcomActions extends autoalmordcomActions
       {
         $grid_detalle=Herramientas::CargarDatosGrid($this,$this->obj,true);//0
         $grid_entregas=Herramientas::CargarDatosGrid($this,$this->obj_entregas,true);//0
+        $grid_formas_entregas=Herramientas::CargarDatosGrid($this,$this->obj_formas);//0
         $grid_detalle_detallado=$grid_detalle[0];
 
         $grid_resumen=Herramientas::CargarDatosGrid($this,$this->obj_resumen,true);//0
@@ -85,6 +86,21 @@ class almordcomActions extends autoalmordcomActions
               if (!$reg)
               {
                 $this->coderror4 = 568;
+                return false;
+              }
+          }
+
+          if ($this->getRequestParameter('caordcom[codcen]')=="")
+          {
+            $this->coderror4 = 569;
+            return false;
+          }else {
+              $r= new Criteria();
+              $r->add(CadefcenPeer::CODCEN,$this->getRequestParameter('caordcom[codcen]'));
+              $reg= CadefcenPeer::doSelectOne($r);
+              if (!$reg)
+              {
+                $this->coderror4 = 570;
                 return false;
               }
           }
@@ -312,6 +328,7 @@ class almordcomActions extends autoalmordcomActions
         $this->configGrid_Resumen($this->getRequestParameter('caordcom[ordcom]'));
         $this->configGrid_ResumenPartidas($this->getRequestParameter('caordcom[ordcom]'));
         $this->configGrid_Entregas($this->getRequestParameter('caordcom[ordcom]'));
+        $this->configGrid_FormasEntrega($this->getRequestParameter('caordcom[ordcom]'));
       }
       else
       {
@@ -340,6 +357,7 @@ class almordcomActions extends autoalmordcomActions
         $this->configGrid_Resumen($caordcom->getOrdcom());
         $this->configGrid_ResumenPartidas($caordcom->getOrdcom());
         $this->configGrid_Entregas($caordcom->getOrdcom());
+        $this->configGrid_FormasEntrega($caordcom->getOrdcom());
         $this->forward404Unless($caordcom);
       }
 
@@ -815,6 +833,49 @@ class almordcomActions extends autoalmordcomActions
         $this->unidades = CaunialartPeer :: getUnidades($this->getRequestParameter('codigo'));
         $output = '[["javascript","' . $javascript . '",""]]';
         $this->getResponse()->setHttpHeader("X-JSON", '(' . $output . ')');
+      }
+      else  if ($this->getRequestParameter('ajax')=='21')
+      {
+        $q= new Criteria();
+        $q->add(CadefalmPeer::CODALM,$this->getRequestParameter('codigo'));
+        $reg= CadefalmPeer::doSelectOne($q);
+        if ($reg)
+        {
+           $dato=$reg->getNomalm(); $javascript="";
+        }else {
+            $dato="";
+            $javascript="alert_('El Almac&eacute;n no existe'); $('$cajtexcom').value=''; $('$cajtexcom').focus();";
+        }
+
+        $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""]]';
+        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+        return sfView::HEADER_ONLY;
+      }
+      else  if ($this->getRequestParameter('ajax')=='22')
+      {
+        $longitudart=strlen(Herramientas::getMascaraArticulo());
+        $c= new Criteria();
+        $c->add(CaregartPeer::CODART,$this->getRequestParameter('codigo'));
+        $reg=CaregartPeer::doSelectOne($c);
+        if ($reg)
+        {
+          if ($longitudart==strlen($this->getRequestParameter('codigo')))
+          {
+              $dato=eregi_replace("[\n|\r|\n\r]", "", $reg->getDesart());
+              $javascript="verificardetalle('". $cajtexcom ."');";
+              $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""]]';
+          }else {
+            $javascript="alert('El Codigo del Articulo no es de Ultimo Nivel'); $('". $cajtexmos ."').value=''; $('". $cajtexcom ."').value=''; $('". $cajtexcom ."').focus();";
+            $output = '[["javascript","'.$javascript.'",""]]';
+          }
+        }
+        else
+        {
+          $javascript="alert('Articulo no existe, o no es un Articulo/Servicio');$('". $cajtexmos ."').value='';$('". $cajtexcom ."').value=''; $('". $cajtexcom ."').focus();";
+          $output = '[["javascript","'.$javascript.'",""]]';
+        }
+        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+        return sfView::HEADER_ONLY;
       }
   }
 
@@ -1764,6 +1825,111 @@ class almordcomActions extends autoalmordcomActions
    * los datos del grid.
    *
    */
+  public function configGrid_FormasEntrega($ordcom='')
+  {
+    $c = new Criteria();
+    $c->add(CaentordPeer::ORDCOM,$ordcom);
+    $reg= CaentordPeer::doSelect($c);
+
+    $opciones = new OpcionesGrid();
+    $opciones->setEliminar(true);
+    $opciones->setFilas(150);
+    $opciones->setTabla('Caentord');
+    $opciones->setName('t');
+    $opciones->setAncho(600);
+    $opciones->setAnchoGrid(800);
+    $opciones->setTitulo(' ');
+    $opciones->setHTMLTotalFilas(' ');
+
+     $mascaraarticulo=$this->mascaraarticulo;
+     $lonart=strlen($mascaraarticulo);
+
+    $params= array('param1' => $lonart, 'param2' => "'+$('caordcom_tipord').value+'", 'val2');
+
+    $col1 = new Columna('CÃ³digo  ArtÃ­culo');
+    $col1->setTipo(Columna::TEXTO);
+    $col1->setEsGrabable(true);
+    $col1->setAlineacionObjeto(Columna::CENTRO);
+    $col1->setAlineacionContenido(Columna::CENTRO);
+    $col1->setNombreCampo('codart');
+    $col1->setHTML('type="text" size="15"  maxlength="'.chr(39).$lonart.chr(39).'"');
+    $col1->setCatalogo('caregart','sf_admin_edit_form',array('codart' => 1,'desart' => 2), 'Caregart_Almsolegr',$params);
+    $col1->setJScript('onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascaraarticulo.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}"');
+    $col1->setAjax('almordcom',22,2);
+
+    $col2 = new Columna('DescripciÃ³n');
+    $col2->setTipo(Columna::TEXTAREA);
+    $col2->setAlineacionObjeto(Columna::IZQUIERDA);
+    $col2->setAlineacionContenido(Columna::IZQUIERDA);
+    $col2->setNombreCampo('desart');
+    $col2->setEsGrabable(true);
+    $col2->setHTML('type="text" size="30x1" readonly=true');
+
+    $col3 = new Columna('CÃ³digo  AlmacÃ©n');
+    $col3->setTipo(Columna::TEXTO);
+    $col3->setEsGrabable(true);
+    $col3->setAlineacionObjeto(Columna::CENTRO);
+    $col3->setAlineacionContenido(Columna::CENTRO);
+    $col3->setNombreCampo('codalm');
+    $col3->setHTML('type="text" size="10" maxlength="20"');
+    $col3->setCatalogo('Cadefalm','sf_admin_edit_form', array('codalm' => 3,'nomalm' => 4),'Cadefalm_Alminvfis');
+    $col3->setAjax('almordcom',21,4);
+
+    $col4 = new Columna('DescripciÃ³n');
+    $col4->setTipo(Columna::TEXTO);
+    $col4->setEsGrabable(true);
+    $col4->setAlineacionObjeto(Columna::IZQUIERDA);
+    $col4->setAlineacionContenido(Columna::IZQUIERDA);
+    $col4->setNombreCampo('nomalm');
+    $col4->setHTML('type="text" size="30" readonly="true"');
+
+    $col5 = new Columna('Cant. Entregar');
+    $col5->setTipo(Columna::MONTO);
+    $col5->setEsGrabable(true);
+    $col5->setAlineacionContenido(Columna::DERECHA);
+    $col5->setAlineacionObjeto(Columna::DERECHA);
+    $col5->setNombreCampo('canent');
+    $col5->setEsNumerico(true);
+    $col5->setHTML('type="text" size="10"');
+    $col5->setJScript('onKeyPress="entermonto_t(event,this.id); verificarcantidad(this.id)"');
+
+    $col6 = new Columna('Cant. Recibida');
+    $col6->setTipo(Columna::MONTO);
+    $col6->setEsGrabable(true);
+    $col6->setAlineacionContenido(Columna::DERECHA);
+    $col6->setAlineacionObjeto(Columna::DERECHA);
+    $col6->setNombreCampo('canrec');
+    $col6->setEsNumerico(true);
+    $col6->setHTML('type="text" size="10" readonly="true"');
+
+    $col7 = new Columna('Fecha de Entrega');
+    $col7->setNombreCampo('fecent');
+    $col7->setTipo(Columna::FECHA);
+    $col7->setHTML('');
+    $col7->setEsGrabable(true);
+
+    // Se guardan las columnas en el objetos de opciones
+    $opciones->addColumna($col1);
+    $opciones->addColumna($col2);
+    $opciones->addColumna($col3);
+    $opciones->addColumna($col4);
+    $opciones->addColumna($col5);
+    $opciones->addColumna($col6);
+    $opciones->addColumna($col7);
+
+    // Ee genera el arreglo de opciones necesario para generar el grid
+    $this->obj_formas = $opciones->getConfig($reg);
+
+  }
+
+
+  /**
+   * Esta funciÃ³n permite definir la configuraciÃ³n del grid de datos
+   * que contiene el formulario. Esta funciÃ³n debe ser llamada
+   * en las acciones, create, edit y handleError para recargar en todo momento
+   * los datos del grid.
+   *
+   */
   public function configGrid_Entregas($ordcom='')
   {
     /*************************************************************************
@@ -1935,6 +2101,7 @@ class almordcomActions extends autoalmordcomActions
   //<!-----------------------------Grid Objetos---------------------->
   $grid_detalle_resumen_objetos=Herramientas::CargarDatosGrid($this,$this->obj_resumen);//0
   $grid_detalle_entrega_objetos=Herramientas::CargarDatosGrid($this,$this->obj_entregas);//1
+  $grid_detalle_formas_entrega=Herramientas::CargarDatosGrid($this,$this->obj_formas);//1
   $arreglo_objetos = array($grid_detalle_resumen_objetos,$grid_detalle_entrega_objetos);
 
   //<!-----------------------------campos ocultos---------------------->
@@ -1954,7 +2121,7 @@ class almordcomActions extends autoalmordcomActions
 
 
   //<!-----------------------------funciones clase Orden de Compra---------------------->
-  if (Orden_compra::Salvar($caordcom,$arreglo_arreglo,$arreglo_objetos,$arreglo_campos,&$coderror))
+  if (Orden_compra::Salvar($caordcom,$arreglo_arreglo,$arreglo_objetos,$arreglo_campos,$grid_detalle_formas_entrega,&$coderror))
   {
   //<!-----------------------------guardo comprobante---------------------->
       if ($this->getUser()->getAttribute('grabo',null,$this->getUser()->getAttribute('formulario'))=='S')

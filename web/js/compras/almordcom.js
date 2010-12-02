@@ -1637,3 +1637,55 @@ function salvarmontorecargos()
 
 
   }
+
+  function verificarcantidad(id)
+  {
+   var aux = id.split("_");
+   var name=aux[0];
+   var fil=parseInt(aux[1]);
+   var col=parseInt(aux[2]);
+
+   var colart= col -4;
+   var art=name+"_"+fil+"_"+colart;
+
+     var f=0;
+      var can=0;
+      var am=totalregistros('ax',2,150);
+      while (f < am)
+      {
+        var campo="ax_"+f+"_2";
+        var campo2="ax_"+f+"_5";
+        var num1=toFloat(campo2);
+        if($(campo))
+        {
+          if ($(art).value==$(campo).value)
+          {
+             can=can + num1;
+          }
+        }
+            f++;
+      }
+
+      var acum=0;
+      var fa=0;
+      var ama=totalregistros('tx',1,150);
+      while (fa < ama)
+      {
+        var campo1="tx_"+fa+"_1";
+        var campo3="tx_"+fa+"_5";
+        var num2=toFloat(campo3);
+        if($(campo1))
+        {
+          if ($(art).value==$(campo1).value)
+          {
+             acum=acum +num2;
+          }
+        }
+            fa++;
+      }
+      if (acum>can)
+      {
+          alert_('El Cantidad a Entregar no corresponde Con la Cantidad Ordenada');
+          $(id).value='0,00';
+      }
+  }
