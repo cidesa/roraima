@@ -32,8 +32,9 @@ class Orden_compra
  * aqui se hacen todos los procesos
  * de validacion y gfuardar del formulariop almordcom
  */
-  public static function Salvar($caordcom,$arreglo_arreglo,$arreglo_objetos,$arreglo_campos,&$coderror)
+  public static function Salvar($caordcom,$arreglo_arreglo,$arreglo_objetos,$arreglo_campos,$grid_detalle_formas_entrega,&$coderror)
   {
+
        $refere1="";
        $t= new Criteria();
        $t->add(CpimppagPeer::REFERE,$caordcom->getOrdcom());
@@ -261,7 +262,7 @@ class Orden_compra
 		          }    // si grabo orden_de_compra
 		     }  //REFSOL
 		      //exit($caordcom->getOrdcom());
-          //}
+          self::grabarFormasEntrega($caordcom,$grid_detalle_formas_entrega);
   	}
    return true;
   }
@@ -3352,6 +3353,33 @@ class Orden_compra
 
      return $grid_total_unidad;
   }  
+
+  public static function grabarFormasEntrega($caordcom,$grid)
+  {
+    $x=$grid[0];
+    $j=0;
+    while ($j<count($x))
+    {
+      if ($x[$j]->getCodart()!='' && $x[$j]->getCodalm()!='' && $x[$j]->getCanent()>0)
+      {
+      	$x[$j]->setOrdcom($caordcom->getOrdcom());
+        $x[$j]->save();
+      }
+      $j++;
+    }
+
+    $z=$grid[1];
+    $j=0;
+    if (!empty($z[$j]))
+    {
+      while ($j<count($z))
+      {
+        $z[$j]->delete();
+        $j++;
+      }
+    }
+  }
+
 
 
 }// fin

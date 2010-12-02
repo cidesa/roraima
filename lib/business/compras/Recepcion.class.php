@@ -147,6 +147,7 @@ class Recepcion
          $manartlot=H::getConfApp2('manartlot', 'compras', 'almregart');
 	      $x=$grid[0];
 		  $j=0;
+                  $acumcanrec=0;
 		  while ($j<count($x))
 		  {
 		    $codarti=$x[$j]->getCodart();
@@ -249,6 +250,7 @@ class Recepcion
 		       	      $arti->setCosult($costo);
 
 
+
 		              if ($arti->getExitot()== 0)
 		              {
 		                   $arti->setCospro($costo);
@@ -259,10 +261,27 @@ class Recepcion
                            $arti->setCospro($costocal);
 		              }
 		              $arti->save();
+
+                              $manforent=H::getConfApp2('manforent', 'compras', 'almordcom');
+                              if ($manforent=='S')
+                              {
+                                  $t= new Criteria();
+                                  $t->add(CaentordPeer::ORDCOM,$recepcion->getOrdcom());
+                                  $t->add(CaentordPeer::CODART,$codarti);
+                                  $t->add(CaentordPeer::CODALM,$recepcion->getCodalm());
+                                  $dat= CaentordPeer::doSelectOne($t);
+                                  if ($dat)
+                                  {
+                                      $dat->setCanrec($dat->getCanrec()+$cantd);
+                                      $dat->save();
+                                  }
+                              }
 		         }
 		      }//  if (($codarti!="") and ($cantd>0) and ($marcado!=1))
 		    $j++;
 		  }
+
+                  
      return true;
    }
 

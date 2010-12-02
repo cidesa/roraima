@@ -61,6 +61,36 @@
 </tr>
 </table>
 <br>
+
+<div id="almacen" style="display: none">
+<?php echo label_for('carcpart[codalm]', __($labels['carcpart{codalm}']), 'class="required"') ?>
+<div
+  class="content<?php if ($sf_request->hasError('carcpart{codalm}')): ?> form-error<?php endif; ?>">
+<?php if ($sf_request->hasError('carcpart{codalm}')): ?> <?php echo form_error('carcpart{codalm}', array('class' => 'form-error-msg')) ?>
+<?php endif; ?>
+
+  <?php $value = object_input_tag($carcpart, 'getCodalm', array (
+  'size' => 10,
+  'maxlength' => 20,
+  'control_name' => 'carcpart[codalm]',
+  'onBlur'=> remote_function(array(
+              'url' => 'almordrec/ajax',
+        'condition' => "$('carcpart_codalm').value!=''",
+        'complete' => 'AjaxJSON(request, json)',
+          'with' => "'ajax=6&cajtexmos=carcpart_nomalm&cajtexcom=carcpart_codalm&codigo='+this.value",
+        )),
+)); echo $value ? $value : '&nbsp;' ?>
+
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Cadefalm_Alminvfis/clase/Cadefalm/frame/sf_admin_edit_form/obj1/carcpart_codalm/obj2/carcpart_nomalm/campo1/codalm/campo2/nomalm')?>
+
+<?php $value = object_input_tag($carcpart, 'getNomalm', array (
+'size' => 50,
+'maxlength' => 50,
+'disabled' => true,
+'control_name' => 'carcpart[nomalm]',
+        )); echo $value ? $value : '&nbsp;' ?> </div>
+</div>
+<br>
 <table>
 <tr>
 <th>&nbsp;</th>
@@ -81,11 +111,16 @@
 		   'condition' => "$('carcpart_ordcom').value != '' && $('id').value == ''",
 		   'script'   => true,
 		   'complete' => 'AjaxJSON(request, json),actualizarsaldos();',
-		   'with' => "'ajax=2&cajtexcom=carcpart_ordcom&codigo='+this.value+'&fecrec='+$('carcpart_fecrcp').value+'&numero='+$('carcpart_rcpart').value"
+		   'with' => "'ajax=2&cajtexcom=carcpart_ordcom&codigo='+this.value+'&fecrec='+$('carcpart_fecrcp').value+'&codalm='+$('carcpart_codalm').value+'&numero='+$('carcpart_rcpart').value"
 			  ))),
      array('use_style' => 'true')
   ) ?>&nbsp;
-<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo')."/metodo/CaOrdCom_Almordrec/clase/CaOrdCom/frame/sf_admin_edit_form/obj1/carcpart_ordcom/campo1/ordcom/",'','','botoncat')?>
+<?php if (H::getConfApp2('manforent', 'compras', 'almordcom')=='S') 
+{  
+   echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo')."/metodo/CaOrdCom_Almordrec2/clase/caordcom/frame/sf_admin_edit_form/obj1/carcpart_ordcom/campo1/ordcom/param1/'+$('carcpart_codalm').value+'",'','','botoncat');
+}else {
+    echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo')."/metodo/CaOrdCom_Almordrec/clase/carcpart/frame/sf_admin_edit_form/obj1/carcpart_ordcom/campo1/ordcom",'','','botoncat');
+}?>
 
     </div>
 </th>
@@ -330,4 +365,10 @@ if (nuevo=="")
   	$('trigger_carcpart_fecrcp').hide();
   	$('carcpart_fecrcp').readOnly=true;
   }
+
+    var manforent='<?php echo H::getConfApp2('manforent', 'compras', 'almordcom'); ?>';
+    if (manforent=='S')
+    {
+        $('almacen').show();
+    }
 </script>

@@ -519,6 +519,12 @@
 568:
   cod: 568
   msj: El Tipo de Unidad debe Existir.
+569:
+  cod: 569
+  msj: La Unidad Ejecutora Local no puedo estar en Blanco
+570:
+  cod: 570
+  msj: La Unidad Ejecutora Local debe Existir.
 3:
   cod: 3
   msj: La contraseña es diferente.

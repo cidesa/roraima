@@ -56,7 +56,6 @@
   </tr>
 </table>
 
-
 <fieldset id="sf_fieldset_none" class="">
 <legend><?php echo __('Datos de la Orden')?></legend>
 <div class="form-row">
@@ -929,7 +928,14 @@ echo grid_tag($obj_recargos);
 </div>
 </fieldset>
 
-<?php if ($caordcom->getManorddon()=='S') tabPageOpenClose("tp1", "tabPage11", 'Datos del Beneficiario de la Donación');?>
+<?php tabPageOpenClose("tp1", "tabPage11", 'Forma de Entrega o Despacho de la Orden');?>
+<fieldset>
+<div class="form-row">
+<?php echo grid_tag($obj_formas);?>
+</div>
+</fieldset>
+
+<?php if ($caordcom->getManorddon()=='S') tabPageOpenClose("tp1", "tabPage12", 'Datos del Beneficiario de la Donación');?>
 <div id="datbendon" style="display:none">
 <fieldset>
 <div class="form-row">
@@ -1166,6 +1172,42 @@ function enter(e,valor)
           window.open(pagina,1,"menubar=yes,toolbar=yes,scrollbars=yes,width=1200,height=800,resizable=yes,left=1000,top=80")
       }
   }
+
+  function verificardetalle(id)
+  {
+
+   var aux = id.split("_");
+   var name=aux[0];
+   var fil=parseInt(aux[1]);
+   var col=parseInt(aux[2]);
+
+   var coldes= col +1;
+   var descrip=name+"_"+fil+"_"+coldes;
+
+      var f=0;
+      var am=totalregistros('ax',2,150);
+      var enc=false
+      while (f < am && !enc)
+      {
+        var campo="ax_"+f+"_2";
+        if($(campo))
+        {
+          if ($(id).value==$(campo).value)
+          {
+             enc=true;
+          }
+        }
+            f++;
+      }
+      if (!enc)
+      {
+          alert_('El Art&iacute;culo no se encuentra en detalle de la orden');
+          $(id).value='';
+          $(id).focus();
+          $(descrip).value='';
+      }
+  }
+
 
 </script>
 

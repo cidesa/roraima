@@ -22,6 +22,22 @@
             alert(mens);
         </script>
 <?php
-}
+}else {
 ?>
+      <script type="text/javascript">
+           var am=totalregistros('ax',1,150);
+           var fil=0;
+           while (fil<am)
+           {
+            var codalm="ax_"+fil+"_19";
+            if ($(codalm))
+            {
+             $(codalm).value=$('carcpart_codalm').value;
+             $(codalm).focus();
+            }else {break;}
+           fil++;
+           }
+        </script>
+<?php
+}?>
 </form>

@@ -3356,3 +3356,34 @@ propel:
       primaryKey: true
       autoIncrement: true
       description: Identificador Único del registro
+  caentord:
+    ordcom:
+      type: VARCHAR
+      size: 8
+      required: true
+    codart:
+      type: VARCHAR
+      size: 20
+      required: true
+    codalm:
+      type: VARCHAR
+      size: 20
+      required: true
+    canent:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    canrec:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    fecent:
+      type: DATE
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
