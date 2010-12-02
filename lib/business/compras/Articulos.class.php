@@ -194,13 +194,13 @@ class Articulos
         if($almacen->getId()=='' && $almacen->getUbicacion()=='') return 190;
       }
 
-      foreach($x as $almacen){
+      /*foreach($x as $almacen){
         $cantalm = 0;
         foreach($x as $alm){
           if($almacen->getCodalm() == $alm->getCodalm()) $cantalm++;
         }
         if($cantalm>1) return 191;
-      }
+      }*/
 
       return -1;
     }
