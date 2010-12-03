@@ -23,7 +23,8 @@ generator:
       dessnc: { name: Descripción SNC}
       ctavta: { name: Cuenta Venta Contado}
       ctacos: { name: Cuenta Costo}
-      ctapro: { name: Cuenta Ingresos por Venta}
+      ctapro: { name: Cuenta Ingresos por Venta}      
+      cosunipri: { name: Unidad Primaria}
     list:
       title:          Artículos y Servicios
       filters:        [codart, desart, tipo, ramart]
@@ -37,7 +38,7 @@ generator:
       sort:  codart
     edit:
       title:         Registro de Artículos ó Servicios
-      display:        [=codart, tipo, codcta, desart, ramart, nomram, codpar, unimed, unialt, relart, exitot, fecult, cosult, cospro, invini, codartsnc, dessnc, ctavta, ctacos, ctapro]
+      display:        [=codart, tipo, codcta, desart, ramart, nomram, codpar, unimed, unialt, relart, exitot, fecult, cosult, cospro, invini, codartsnc, dessnc, ctavta, ctacos, ctapro, cosunipri]
       fields:
         fecult: { params: date_format='dd/MM/yy' }
         ramart: { help: Máximo 6 caracteres}

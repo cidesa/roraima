@@ -3,142 +3,154 @@
 
 abstract class BaseCaregartPeer {
 
-	
+
 	const DATABASE_NAME = 'propel';
 
-	
+
 	const TABLE_NAME = 'caregart';
 
-	
+
 	const CLASS_DEFAULT = 'lib.model.Caregart';
 
-	
-	const NUM_COLUMNS = 31;
 
-	
+	const NUM_COLUMNS = 35;
+
+
 	const NUM_LAZY_LOAD_COLUMNS = 0;
 
 
-	
+
 	const CODART = 'caregart.CODART';
 
-	
+
 	const DESART = 'caregart.DESART';
 
-	
+
 	const CODCTA = 'caregart.CODCTA';
 
-	
+
 	const CODPAR = 'caregart.CODPAR';
 
-	
+
 	const RAMART = 'caregart.RAMART';
 
-	
+
 	const COSULT = 'caregart.COSULT';
 
-	
+
 	const COSPRO = 'caregart.COSPRO';
 
-	
+
 	const EXITOT = 'caregart.EXITOT';
 
-	
+
 	const UNIMED = 'caregart.UNIMED';
 
-	
+
 	const UNIALT = 'caregart.UNIALT';
 
-	
+
 	const RELART = 'caregart.RELART';
 
-	
+
 	const FECULT = 'caregart.FECULT';
 
-	
+
 	const INVINI = 'caregart.INVINI';
 
-	
+
 	const CODMAR = 'caregart.CODMAR';
 
-	
+
 	const CODREF = 'caregart.CODREF';
 
-	
+
 	const COSTOT = 'caregart.COSTOT';
 
-	
+
 	const SIGECOF = 'caregart.SIGECOF';
 
-	
+
 	const CODCLAART = 'caregart.CODCLAART';
 
-	
+
 	const LOTUNI = 'caregart.LOTUNI';
 
-	
+
 	const CTAVTA = 'caregart.CTAVTA';
 
-	
+
 	const CTACOS = 'caregart.CTACOS';
 
-	
+
 	const CTAPRO = 'caregart.CTAPRO';
 
-	
+
 	const PREART = 'caregart.PREART';
 
-	
+
 	const DISTOT = 'caregart.DISTOT';
 
-	
+
 	const TIPO = 'caregart.TIPO';
 
-	
+
 	const TIP0 = 'caregart.TIP0';
 
-	
+
 	const CODING = 'caregart.CODING';
 
-	
+
 	const MERCON = 'caregart.MERCON';
 
-	
+
 	const CODARTSNC = 'caregart.CODARTSNC';
 
-	
+
 	const TIPREG = 'caregart.TIPREG';
 
-	
+
+	const PERBIENES = 'caregart.PERBIENES';
+
+
+	const CTATRA = 'caregart.CTATRA';
+
+
+	const COSUNIPRI = 'caregart.COSUNIPRI';
+
+
+	const CTADEF = 'caregart.CTADEF';
+
+
 	const ID = 'caregart.ID';
 
-	
+
 	private static $phpNameMap = null;
 
 
-	
+
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codart', 'Desart', 'Codcta', 'Codpar', 'Ramart', 'Cosult', 'Cospro', 'Exitot', 'Unimed', 'Unialt', 'Relart', 'Fecult', 'Invini', 'Codmar', 'Codref', 'Costot', 'Sigecof', 'Codclaart', 'Lotuni', 'Ctavta', 'Ctacos', 'Ctapro', 'Preart', 'Distot', 'Tipo', 'Tip0', 'Coding', 'Mercon', 'Codartsnc', 'Tipreg', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (CaregartPeer::CODART, CaregartPeer::DESART, CaregartPeer::CODCTA, CaregartPeer::CODPAR, CaregartPeer::RAMART, CaregartPeer::COSULT, CaregartPeer::COSPRO, CaregartPeer::EXITOT, CaregartPeer::UNIMED, CaregartPeer::UNIALT, CaregartPeer::RELART, CaregartPeer::FECULT, CaregartPeer::INVINI, CaregartPeer::CODMAR, CaregartPeer::CODREF, CaregartPeer::COSTOT, CaregartPeer::SIGECOF, CaregartPeer::CODCLAART, CaregartPeer::LOTUNI, CaregartPeer::CTAVTA, CaregartPeer::CTACOS, CaregartPeer::CTAPRO, CaregartPeer::PREART, CaregartPeer::DISTOT, CaregartPeer::TIPO, CaregartPeer::TIP0, CaregartPeer::CODING, CaregartPeer::MERCON, CaregartPeer::CODARTSNC, CaregartPeer::TIPREG, CaregartPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codart', 'desart', 'codcta', 'codpar', 'ramart', 'cosult', 'cospro', 'exitot', 'unimed', 'unialt', 'relart', 'fecult', 'invini', 'codmar', 'codref', 'costot', 'sigecof', 'codclaart', 'lotuni', 'ctavta', 'ctacos', 'ctapro', 'preart', 'distot', 'tipo', 'tip0', 'coding', 'mercon', 'codartsnc', 'tipreg', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, )
+		BasePeer::TYPE_PHPNAME => array ('Codart', 'Desart', 'Codcta', 'Codpar', 'Ramart', 'Cosult', 'Cospro', 'Exitot', 'Unimed', 'Unialt', 'Relart', 'Fecult', 'Invini', 'Codmar', 'Codref', 'Costot', 'Sigecof', 'Codclaart', 'Lotuni', 'Ctavta', 'Ctacos', 'Ctapro', 'Preart', 'Distot', 'Tipo', 'Tip0', 'Coding', 'Mercon', 'Codartsnc', 'Tipreg', 'Perbienes', 'Ctatra', 'Cosunipri', 'Ctadef', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (CaregartPeer::CODART, CaregartPeer::DESART, CaregartPeer::CODCTA, CaregartPeer::CODPAR, CaregartPeer::RAMART, CaregartPeer::COSULT, CaregartPeer::COSPRO, CaregartPeer::EXITOT, CaregartPeer::UNIMED, CaregartPeer::UNIALT, CaregartPeer::RELART, CaregartPeer::FECULT, CaregartPeer::INVINI, CaregartPeer::CODMAR, CaregartPeer::CODREF, CaregartPeer::COSTOT, CaregartPeer::SIGECOF, CaregartPeer::CODCLAART, CaregartPeer::LOTUNI, CaregartPeer::CTAVTA, CaregartPeer::CTACOS, CaregartPeer::CTAPRO, CaregartPeer::PREART, CaregartPeer::DISTOT, CaregartPeer::TIPO, CaregartPeer::TIP0, CaregartPeer::CODING, CaregartPeer::MERCON, CaregartPeer::CODARTSNC, CaregartPeer::TIPREG, CaregartPeer::PERBIENES, CaregartPeer::CTATRA, CaregartPeer::COSUNIPRI, CaregartPeer::CTADEF, CaregartPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codart', 'desart', 'codcta', 'codpar', 'ramart', 'cosult', 'cospro', 'exitot', 'unimed', 'unialt', 'relart', 'fecult', 'invini', 'codmar', 'codref', 'costot', 'sigecof', 'codclaart', 'lotuni', 'ctavta', 'ctacos', 'ctapro', 'preart', 'distot', 'tipo', 'tip0', 'coding', 'mercon', 'codartsnc', 'tipreg', 'perbienes', 'ctatra', 'cosunipri', 'ctadef', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, )
 	);
 
-	
+
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codart' => 0, 'Desart' => 1, 'Codcta' => 2, 'Codpar' => 3, 'Ramart' => 4, 'Cosult' => 5, 'Cospro' => 6, 'Exitot' => 7, 'Unimed' => 8, 'Unialt' => 9, 'Relart' => 10, 'Fecult' => 11, 'Invini' => 12, 'Codmar' => 13, 'Codref' => 14, 'Costot' => 15, 'Sigecof' => 16, 'Codclaart' => 17, 'Lotuni' => 18, 'Ctavta' => 19, 'Ctacos' => 20, 'Ctapro' => 21, 'Preart' => 22, 'Distot' => 23, 'Tipo' => 24, 'Tip0' => 25, 'Coding' => 26, 'Mercon' => 27, 'Codartsnc' => 28, 'Tipreg' => 29, 'Id' => 30, ),
-		BasePeer::TYPE_COLNAME => array (CaregartPeer::CODART => 0, CaregartPeer::DESART => 1, CaregartPeer::CODCTA => 2, CaregartPeer::CODPAR => 3, CaregartPeer::RAMART => 4, CaregartPeer::COSULT => 5, CaregartPeer::COSPRO => 6, CaregartPeer::EXITOT => 7, CaregartPeer::UNIMED => 8, CaregartPeer::UNIALT => 9, CaregartPeer::RELART => 10, CaregartPeer::FECULT => 11, CaregartPeer::INVINI => 12, CaregartPeer::CODMAR => 13, CaregartPeer::CODREF => 14, CaregartPeer::COSTOT => 15, CaregartPeer::SIGECOF => 16, CaregartPeer::CODCLAART => 17, CaregartPeer::LOTUNI => 18, CaregartPeer::CTAVTA => 19, CaregartPeer::CTACOS => 20, CaregartPeer::CTAPRO => 21, CaregartPeer::PREART => 22, CaregartPeer::DISTOT => 23, CaregartPeer::TIPO => 24, CaregartPeer::TIP0 => 25, CaregartPeer::CODING => 26, CaregartPeer::MERCON => 27, CaregartPeer::CODARTSNC => 28, CaregartPeer::TIPREG => 29, CaregartPeer::ID => 30, ),
-		BasePeer::TYPE_FIELDNAME => array ('codart' => 0, 'desart' => 1, 'codcta' => 2, 'codpar' => 3, 'ramart' => 4, 'cosult' => 5, 'cospro' => 6, 'exitot' => 7, 'unimed' => 8, 'unialt' => 9, 'relart' => 10, 'fecult' => 11, 'invini' => 12, 'codmar' => 13, 'codref' => 14, 'costot' => 15, 'sigecof' => 16, 'codclaart' => 17, 'lotuni' => 18, 'ctavta' => 19, 'ctacos' => 20, 'ctapro' => 21, 'preart' => 22, 'distot' => 23, 'tipo' => 24, 'tip0' => 25, 'coding' => 26, 'mercon' => 27, 'codartsnc' => 28, 'tipreg' => 29, 'id' => 30, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, )
+		BasePeer::TYPE_PHPNAME => array ('Codart' => 0, 'Desart' => 1, 'Codcta' => 2, 'Codpar' => 3, 'Ramart' => 4, 'Cosult' => 5, 'Cospro' => 6, 'Exitot' => 7, 'Unimed' => 8, 'Unialt' => 9, 'Relart' => 10, 'Fecult' => 11, 'Invini' => 12, 'Codmar' => 13, 'Codref' => 14, 'Costot' => 15, 'Sigecof' => 16, 'Codclaart' => 17, 'Lotuni' => 18, 'Ctavta' => 19, 'Ctacos' => 20, 'Ctapro' => 21, 'Preart' => 22, 'Distot' => 23, 'Tipo' => 24, 'Tip0' => 25, 'Coding' => 26, 'Mercon' => 27, 'Codartsnc' => 28, 'Tipreg' => 29, 'Perbienes' => 30, 'Ctatra' => 31, 'Cosunipri' => 32, 'Ctadef' => 33, 'Id' => 34, ),
+		BasePeer::TYPE_COLNAME => array (CaregartPeer::CODART => 0, CaregartPeer::DESART => 1, CaregartPeer::CODCTA => 2, CaregartPeer::CODPAR => 3, CaregartPeer::RAMART => 4, CaregartPeer::COSULT => 5, CaregartPeer::COSPRO => 6, CaregartPeer::EXITOT => 7, CaregartPeer::UNIMED => 8, CaregartPeer::UNIALT => 9, CaregartPeer::RELART => 10, CaregartPeer::FECULT => 11, CaregartPeer::INVINI => 12, CaregartPeer::CODMAR => 13, CaregartPeer::CODREF => 14, CaregartPeer::COSTOT => 15, CaregartPeer::SIGECOF => 16, CaregartPeer::CODCLAART => 17, CaregartPeer::LOTUNI => 18, CaregartPeer::CTAVTA => 19, CaregartPeer::CTACOS => 20, CaregartPeer::CTAPRO => 21, CaregartPeer::PREART => 22, CaregartPeer::DISTOT => 23, CaregartPeer::TIPO => 24, CaregartPeer::TIP0 => 25, CaregartPeer::CODING => 26, CaregartPeer::MERCON => 27, CaregartPeer::CODARTSNC => 28, CaregartPeer::TIPREG => 29, CaregartPeer::PERBIENES => 30, CaregartPeer::CTATRA => 31, CaregartPeer::COSUNIPRI => 32, CaregartPeer::CTADEF => 33, CaregartPeer::ID => 34, ),
+		BasePeer::TYPE_FIELDNAME => array ('codart' => 0, 'desart' => 1, 'codcta' => 2, 'codpar' => 3, 'ramart' => 4, 'cosult' => 5, 'cospro' => 6, 'exitot' => 7, 'unimed' => 8, 'unialt' => 9, 'relart' => 10, 'fecult' => 11, 'invini' => 12, 'codmar' => 13, 'codref' => 14, 'costot' => 15, 'sigecof' => 16, 'codclaart' => 17, 'lotuni' => 18, 'ctavta' => 19, 'ctacos' => 20, 'ctapro' => 21, 'preart' => 22, 'distot' => 23, 'tipo' => 24, 'tip0' => 25, 'coding' => 26, 'mercon' => 27, 'codartsnc' => 28, 'tipreg' => 29, 'perbienes' => 30, 'ctatra' => 31, 'cosunipri' => 32, 'ctadef' => 33, 'id' => 34, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, )
 	);
 
-	
+
 	public static function getMapBuilder()
 	{
 		include_once 'lib/model/map/CaregartMapBuilder.php';
 		return BasePeer::getMapBuilder('lib.model.map.CaregartMapBuilder');
 	}
-	
+
 	public static function getPhpNameMap()
 	{
 		if (self::$phpNameMap === null) {
@@ -152,7 +164,7 @@ abstract class BaseCaregartPeer {
 		}
 		return self::$phpNameMap;
 	}
-	
+
 	static public function translateFieldName($name, $fromType, $toType)
 	{
 		$toNames = self::getFieldNames($toType);
@@ -163,7 +175,7 @@ abstract class BaseCaregartPeer {
 		return $toNames[$key];
 	}
 
-	
+
 
 	static public function getFieldNames($type = BasePeer::TYPE_PHPNAME)
 	{
@@ -173,13 +185,13 @@ abstract class BaseCaregartPeer {
 		return self::$fieldNames[$type];
 	}
 
-	
+
 	public static function alias($alias, $column)
 	{
 		return str_replace(CaregartPeer::TABLE_NAME.'.', $alias.'.', $column);
 	}
 
-	
+
 	public static function addSelectColumns(Criteria $criteria)
 	{
 
@@ -243,6 +255,14 @@ abstract class BaseCaregartPeer {
 
 		$criteria->addSelectColumn(CaregartPeer::TIPREG);
 
+		$criteria->addSelectColumn(CaregartPeer::PERBIENES);
+
+		$criteria->addSelectColumn(CaregartPeer::CTATRA);
+
+		$criteria->addSelectColumn(CaregartPeer::COSUNIPRI);
+
+		$criteria->addSelectColumn(CaregartPeer::CTADEF);
+
 		$criteria->addSelectColumn(CaregartPeer::ID);
 
 	}
@@ -250,7 +270,7 @@ abstract class BaseCaregartPeer {
 	const COUNT = 'COUNT(caregart.ID)';
 	const COUNT_DISTINCT = 'COUNT(DISTINCT caregart.ID)';
 
-	
+
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
 	{
 				$criteria = clone $criteria;
@@ -274,7 +294,7 @@ abstract class BaseCaregartPeer {
 						return 0;
 		}
 	}
-	
+
 	public static function doSelectOne(Criteria $criteria, $con = null)
 	{
 		$critcopy = clone $criteria;
@@ -285,12 +305,12 @@ abstract class BaseCaregartPeer {
 		}
 		return null;
 	}
-	
+
 	public static function doSelect(Criteria $criteria, $con = null)
 	{
 		return CaregartPeer::populateObjects(CaregartPeer::doSelectRS($criteria, $con));
 	}
-	
+
 	public static function doSelectRS(Criteria $criteria, $con = null)
 	{
 		if ($con === null) {
@@ -306,35 +326,35 @@ abstract class BaseCaregartPeer {
 
 						return BasePeer::doSelect($criteria, $con);
 	}
-	
+
 	public static function populateObjects(ResultSet $rs)
 	{
 		$results = array();
-	
+
 				$cls = CaregartPeer::getOMClass();
 		$cls = Propel::import($cls);
 				while($rs->next()) {
-		
+
 			$obj = new $cls();
 			$obj->hydrate($rs);
 			$results[] = $obj;
-			
+
 		}
 		return $results;
 	}
-	
+
 	public static function getTableMap()
 	{
 		return Propel::getDatabaseMap(self::DATABASE_NAME)->getTable(self::TABLE_NAME);
 	}
 
-	
+
 	public static function getOMClass()
 	{
 		return CaregartPeer::CLASS_DEFAULT;
 	}
 
-	
+
 	public static function doInsert($values, $con = null)
 	{
 		if ($con === null) {
@@ -345,7 +365,7 @@ abstract class BaseCaregartPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
-		$criteria->remove(CaregartPeer::ID); 
+		$criteria->remove(CaregartPeer::ID);
 
 				$criteria->setDbName(self::DATABASE_NAME);
 
@@ -361,7 +381,7 @@ abstract class BaseCaregartPeer {
 		return $pk;
 	}
 
-	
+
 	public static function doUpdate($values, $con = null)
 	{
 		if ($con === null) {
@@ -371,7 +391,7 @@ abstract class BaseCaregartPeer {
 		$selectCriteria = new Criteria(self::DATABASE_NAME);
 
 		if ($values instanceof Criteria) {
-			$criteria = clone $values; 
+			$criteria = clone $values;
 			$comparison = $criteria->getComparison(CaregartPeer::ID);
 			$selectCriteria->add(CaregartPeer::ID, $criteria->remove(CaregartPeer::ID), $comparison);
 
@@ -382,7 +402,7 @@ abstract class BaseCaregartPeer {
 		return BasePeer::doUpdate($selectCriteria, $criteria, $con);
 	}
 
-	
+
 	public static function doDeleteAll($con = null)
 	{
 		if ($con === null) {
@@ -399,7 +419,7 @@ abstract class BaseCaregartPeer {
 		}
 	}
 
-	
+
 	 public static function doDelete($values, $con = null)
 	 {
 		if ($con === null) {
@@ -417,10 +437,10 @@ abstract class BaseCaregartPeer {
 
 				$criteria->setDbName(self::DATABASE_NAME);
 
-		$affectedRows = 0; 
+		$affectedRows = 0;
 		try {
 									$con->begin();
-			
+
 			$affectedRows += BasePeer::doDelete($criteria, $con);
 			$con->commit();
 			return $affectedRows;
@@ -430,7 +450,7 @@ abstract class BaseCaregartPeer {
 		}
 	}
 
-	
+
 	public static function doValidate(Caregart $obj, $cols = null)
 	{
 		$columns = array();
@@ -465,7 +485,7 @@ abstract class BaseCaregartPeer {
     return $res;
 	}
 
-	
+
 	public static function retrieveByPK($pk, $con = null)
 	{
 		if ($con === null) {
@@ -482,7 +502,7 @@ abstract class BaseCaregartPeer {
 		return !empty($v) > 0 ? $v[0] : null;
 	}
 
-	
+
 	public static function retrieveByPKs($pks, $con = null)
 	{
 		if ($con === null) {
@@ -500,7 +520,7 @@ abstract class BaseCaregartPeer {
 		return $objs;
 	}
 
-} 
+}
 if (Propel::isInit()) {
 			try {
 		BaseCaregartPeer::getMapBuilder();

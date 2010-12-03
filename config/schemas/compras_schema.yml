@@ -1656,6 +1656,18 @@ propel:
     tipreg:
       type: VARCHAR
       size: 1
+    perbienes:
+      type: BOOLEAN
+    ctatra:
+      type: VARCHAR
+      size: 32
+    cosunipri:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    ctadef:
+      type: VARCHAR
+      size: 32
     id:
       type: INTEGER
       required: true
