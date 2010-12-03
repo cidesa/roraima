@@ -5,21 +5,21 @@
  *
  * @package    Roraima
  * @subpackage almregart
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: actions.class.php 41626 2010-12-03 15:28:54Z cramirez $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
 class almregartActions extends autoalmregartActions
 {
-    // variable donde se debe colocar el código de error generado en el validateEdit 
+    // variable donde se debe colocar el código de error generado en el validateEdit
   // para que sea procesado por el handleErrorEdit.
 private static $coderror=-1;
 
-    
-  
-  
+
+
+
   /**
    *
    * Función que se ejecuta luego los validadores del negocio (validators)
@@ -63,7 +63,7 @@ private static $coderror=-1;
       $modulo=sfContext::getInstance()->getUser()->getAttribute('menu','','autenticacion');
       $mostodart=H::getConfAppGen('mostodart');
       if ($modulo=='facturacion' && $mostodart!='S')
-         $c->add(CaregartPeer::TIPREG,'F');
+       $c->add(CaregartPeer::TIPREG,'F');
       $this->addSortCriteria($c);
       $this->addFiltersCriteria($c);
       $this->pager->setCriteria($c);
@@ -142,7 +142,7 @@ $this->Bitacora('Guardo');
   }
 
   /**
-   * Actualiza la informacion que viene de la vista 
+   * Actualiza la informacion que viene de la vista
    * luego de un get/post en el objeto principal del modelo base del formulario.
    *
    */
@@ -249,7 +249,11 @@ $this->Bitacora('Guardo');
     {
       $this->caregart->setCtapro($caregart['ctapro']);
     }
-  }
+    if (isset($caregart['cosunipri']))
+    {
+      $this->caregart->setCosunipri($caregart['cosunipri']);
+    }
+    }
 
     /**
    * Esta función permite definir la configuración del grid de datos
@@ -404,8 +408,8 @@ $this->Bitacora('Guardo');
             and a.codalm='".$codalm."'and a.codart='".$codart."'
             order by a.codubi";
       }
-    $resp = Herramientas::BuscarDatos($sql,&$per);
-    $filas=count($per);
+      $resp = Herramientas::BuscarDatos($sql,&$per);
+      $filas=count($per);
       $this->setVars();
 
       $mascaraubicacion=$this->mascaraubicacion;
@@ -451,10 +455,10 @@ $this->Bitacora('Guardo');
       $col3->setJScript('onKeypress="entermonto_c(event,this.id)"');
       $col3->setEsTotal(true,'totalubi');
 
-      
+
       if ($manartlot=='S')
       {
-          $col4 = new Columna('NÃºmero de Lote');
+          $col4 = new Columna('Número de Lote');
           $col4->setTipo(Columna::TEXTO);
           $col4->setEsGrabable(true);
           $col4->setAlineacionObjeto(Columna::CENTRO);
@@ -609,7 +613,7 @@ $this->Bitacora('Guardo');
          }else $javascript="alert('La Ubicación no se encuentra asociada al almacen'); $('$cajtexcom').value=''; $('$cajtexcom').focus();";
 
          $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""]]';
-            $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+         $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
           return sfView::HEADER_ONLY;
       }
       else  if ($this->getRequestParameter('ajax')=='4')
@@ -710,8 +714,8 @@ $this->Bitacora('Guardo');
     {
       $articulo=$this->getRequestParameter('articulo');
       $almacen=$this->getRequestParameter('almacen');
-          $fila=$this->getRequestParameter('fil');
-         $javascript="";
+      $fila=$this->getRequestParameter('fil');
+      $javascript="";
 
       $this->configGridAlmUbi($articulo,$almacen,$totalfilas);
 
@@ -770,7 +774,7 @@ $this->Bitacora('Guardo');
 
 
   /**
-   * Función principal para procesar la eliminación de registros 
+   * Función principal para procesar la eliminación de registros
    * en el formulario.
    *
    */
@@ -875,8 +879,8 @@ $this->Bitacora('Guardo');
   }
 
   /**
-   * Esta funciÃ³n permite definir la configuraciÃ³n del grid de datos
-   * que contiene el formulario. Esta funciÃ³n debe ser llamada
+   * Esta función permite definir la configuración del grid de datos
+   * que contiene el formulario. Esta función debe ser llamada
    * en las acciones, create, edit y handleError para recargar en todo momento
    * los datos del grid.
    *

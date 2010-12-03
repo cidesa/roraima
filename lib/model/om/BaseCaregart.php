@@ -4,175 +4,197 @@
 abstract class BaseCaregart extends BaseObject  implements Persistent {
 
 
-	
+
 	protected static $peer;
 
 
-	
+
 	protected $codart;
 
 
-	
+
 	protected $desart;
 
 
-	
+
 	protected $codcta;
 
 
-	
+
 	protected $codpar;
 
 
-	
+
 	protected $ramart;
 
 
-	
+
 	protected $cosult;
 
 
-	
+
 	protected $cospro;
 
 
-	
+
 	protected $exitot;
 
 
-	
+
 	protected $unimed;
 
 
-	
+
 	protected $unialt;
 
 
-	
+
 	protected $relart;
 
 
-	
+
 	protected $fecult;
 
 
-	
+
 	protected $invini;
 
 
-	
+
 	protected $codmar;
 
 
-	
+
 	protected $codref;
 
 
-	
+
 	protected $costot;
 
 
-	
+
 	protected $sigecof;
 
 
-	
+
 	protected $codclaart;
 
 
-	
+
 	protected $lotuni;
 
 
-	
+
 	protected $ctavta;
 
 
-	
+
 	protected $ctacos;
 
 
-	
+
 	protected $ctapro;
 
 
-	
+
 	protected $preart;
 
 
-	
+
 	protected $distot;
 
 
-	
+
 	protected $tipo;
 
 
-	
+
 	protected $tip0;
 
 
-	
+
 	protected $coding;
 
 
-	
+
 	protected $mercon;
 
 
-	
+
 	protected $codartsnc;
 
 
-	
+
 	protected $tipreg;
 
 
-	
+
+	protected $perbienes;
+
+
+
+	protected $ctatra;
+
+
+
+	protected $cosunipri;
+
+
+
+	protected $ctadef;
+
+
+
 	protected $id;
 
-	
+
+	protected $collCarelartsigas;
+
+
+	protected $lastCarelartsigaCriteria = null;
+
+
 	protected $alreadyInSave = false;
 
-	
+
 	protected $alreadyInValidation = false;
 
-  
+
   public function getCodart()
   {
 
     return trim($this->codart);
 
   }
-  
+
   public function getDesart()
   {
 
     return trim($this->desart);
 
   }
-  
+
   public function getCodcta()
   {
 
     return trim($this->codcta);
 
   }
-  
+
   public function getCodpar()
   {
 
     return trim($this->codpar);
 
   }
-  
+
   public function getRamart()
   {
 
     return trim($this->ramart);
 
   }
-  
+
   public function getCosult($val=false)
   {
 
@@ -180,7 +202,7 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
     else return $this->cosult;
 
   }
-  
+
   public function getCospro($val=false)
   {
 
@@ -188,7 +210,7 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
     else return $this->cospro;
 
   }
-  
+
   public function getExitot($val=false)
   {
 
@@ -196,28 +218,28 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
     else return $this->exitot;
 
   }
-  
+
   public function getUnimed()
   {
 
     return trim($this->unimed);
 
   }
-  
+
   public function getUnialt()
   {
 
     return trim($this->unialt);
 
   }
-  
+
   public function getRelart()
   {
 
     return trim($this->relart);
 
   }
-  
+
   public function getFecult($format = 'Y-m-d')
   {
 
@@ -239,7 +261,7 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
     }
   }
 
-  
+
   public function getInvini($val=false)
   {
 
@@ -247,21 +269,21 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
     else return $this->invini;
 
   }
-  
+
   public function getCodmar()
   {
 
     return trim($this->codmar);
 
   }
-  
+
   public function getCodref()
   {
 
     return trim($this->codref);
 
   }
-  
+
   public function getCostot($val=false)
   {
 
@@ -269,14 +291,14 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
     else return $this->costot;
 
   }
-  
+
   public function getSigecof()
   {
 
     return trim($this->sigecof);
 
   }
-  
+
   public function getCodclaart($val=false)
   {
 
@@ -284,42 +306,42 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
     else return $this->codclaart;
 
   }
-  
+
   public function getLotuni()
   {
 
     return trim($this->lotuni);
 
   }
-  
+
   public function getCtavta()
   {
 
     return trim($this->ctavta);
 
   }
-  
+
   public function getCtacos()
   {
 
     return trim($this->ctacos);
 
   }
-  
+
   public function getCtapro()
   {
 
     return trim($this->ctapro);
 
   }
-  
+
   public function getPreart()
   {
 
     return trim($this->preart);
 
   }
-  
+
   public function getDistot($val=false)
   {
 
@@ -327,56 +349,85 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
     else return $this->distot;
 
   }
-  
+
   public function getTipo()
   {
 
     return trim($this->tipo);
 
   }
-  
+
   public function getTip0()
   {
 
     return trim($this->tip0);
 
   }
-  
+
   public function getCoding()
   {
 
     return trim($this->coding);
 
   }
-  
+
   public function getMercon()
   {
 
     return trim($this->mercon);
 
   }
-  
+
   public function getCodartsnc()
   {
 
     return trim($this->codartsnc);
 
   }
-  
+
   public function getTipreg()
   {
 
     return trim($this->tipreg);
 
   }
-  
+
+  public function getPerbienes()
+  {
+
+    return $this->perbienes;
+
+  }
+
+  public function getCtatra()
+  {
+
+    return trim($this->ctatra);
+
+  }
+
+  public function getCosunipri($val=false)
+  {
+
+    if($val) return number_format($this->cosunipri,2,',','.');
+    else return $this->cosunipri;
+
+  }
+
+  public function getCtadef()
+  {
+
+    return trim($this->ctadef);
+
+  }
+
   public function getId()
   {
 
     return $this->id;
 
   }
-	
+
 	public function setCodart($v)
 	{
 
@@ -384,9 +435,9 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
         $this->codart = $v;
         $this->modifiedColumns[] = CaregartPeer::CODART;
       }
-  
-	} 
-	
+
+	}
+
 	public function setDesart($v)
 	{
 
@@ -394,9 +445,9 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
         $this->desart = $v;
         $this->modifiedColumns[] = CaregartPeer::DESART;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCodcta($v)
 	{
 
@@ -404,9 +455,9 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
         $this->codcta = $v;
         $this->modifiedColumns[] = CaregartPeer::CODCTA;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCodpar($v)
 	{
 
@@ -414,9 +465,9 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
         $this->codpar = $v;
         $this->modifiedColumns[] = CaregartPeer::CODPAR;
       }
-  
-	} 
-	
+
+	}
+
 	public function setRamart($v)
 	{
 
@@ -424,9 +475,9 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
         $this->ramart = $v;
         $this->modifiedColumns[] = CaregartPeer::RAMART;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCosult($v)
 	{
 
@@ -434,9 +485,9 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
         $this->cosult = Herramientas::toFloat($v);
         $this->modifiedColumns[] = CaregartPeer::COSULT;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCospro($v)
 	{
 
@@ -444,9 +495,9 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
         $this->cospro = Herramientas::toFloat($v);
         $this->modifiedColumns[] = CaregartPeer::COSPRO;
       }
-  
-	} 
-	
+
+	}
+
 	public function setExitot($v)
 	{
 
@@ -454,9 +505,9 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
         $this->exitot = Herramientas::toFloat($v);
         $this->modifiedColumns[] = CaregartPeer::EXITOT;
       }
-  
-	} 
-	
+
+	}
+
 	public function setUnimed($v)
 	{
 
@@ -464,9 +515,9 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
         $this->unimed = $v;
         $this->modifiedColumns[] = CaregartPeer::UNIMED;
       }
-  
-	} 
-	
+
+	}
+
 	public function setUnialt($v)
 	{
 
@@ -474,9 +525,9 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
         $this->unialt = $v;
         $this->modifiedColumns[] = CaregartPeer::UNIALT;
       }
-  
-	} 
-	
+
+	}
+
 	public function setRelart($v)
 	{
 
@@ -484,9 +535,9 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
         $this->relart = $v;
         $this->modifiedColumns[] = CaregartPeer::RELART;
       }
-  
-	} 
-	
+
+	}
+
 	public function setFecult($v)
 	{
 
@@ -507,8 +558,8 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
       $this->modifiedColumns[] = CaregartPeer::FECULT;
     }
 
-	} 
-	
+	}
+
 	public function setInvini($v)
 	{
 
@@ -516,9 +567,9 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
         $this->invini = Herramientas::toFloat($v);
         $this->modifiedColumns[] = CaregartPeer::INVINI;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCodmar($v)
 	{
 
@@ -526,9 +577,9 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
         $this->codmar = $v;
         $this->modifiedColumns[] = CaregartPeer::CODMAR;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCodref($v)
 	{
 
@@ -536,9 +587,9 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
         $this->codref = $v;
         $this->modifiedColumns[] = CaregartPeer::CODREF;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCostot($v)
 	{
 
@@ -546,9 +597,9 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
         $this->costot = Herramientas::toFloat($v);
         $this->modifiedColumns[] = CaregartPeer::COSTOT;
       }
-  
-	} 
-	
+
+	}
+
 	public function setSigecof($v)
 	{
 
@@ -556,9 +607,9 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
         $this->sigecof = $v;
         $this->modifiedColumns[] = CaregartPeer::SIGECOF;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCodclaart($v)
 	{
 
@@ -566,9 +617,9 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
         $this->codclaart = Herramientas::toFloat($v);
         $this->modifiedColumns[] = CaregartPeer::CODCLAART;
       }
-  
-	} 
-	
+
+	}
+
 	public function setLotuni($v)
 	{
 
@@ -576,9 +627,9 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
         $this->lotuni = $v;
         $this->modifiedColumns[] = CaregartPeer::LOTUNI;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCtavta($v)
 	{
 
@@ -586,9 +637,9 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
         $this->ctavta = $v;
         $this->modifiedColumns[] = CaregartPeer::CTAVTA;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCtacos($v)
 	{
 
@@ -596,9 +647,9 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
         $this->ctacos = $v;
         $this->modifiedColumns[] = CaregartPeer::CTACOS;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCtapro($v)
 	{
 
@@ -606,9 +657,9 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
         $this->ctapro = $v;
         $this->modifiedColumns[] = CaregartPeer::CTAPRO;
       }
-  
-	} 
-	
+
+	}
+
 	public function setPreart($v)
 	{
 
@@ -616,9 +667,9 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
         $this->preart = $v;
         $this->modifiedColumns[] = CaregartPeer::PREART;
       }
-  
-	} 
-	
+
+	}
+
 	public function setDistot($v)
 	{
 
@@ -626,9 +677,9 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
         $this->distot = Herramientas::toFloat($v);
         $this->modifiedColumns[] = CaregartPeer::DISTOT;
       }
-  
-	} 
-	
+
+	}
+
 	public function setTipo($v)
 	{
 
@@ -636,9 +687,9 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
         $this->tipo = $v;
         $this->modifiedColumns[] = CaregartPeer::TIPO;
       }
-  
-	} 
-	
+
+	}
+
 	public function setTip0($v)
 	{
 
@@ -646,9 +697,9 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
         $this->tip0 = $v;
         $this->modifiedColumns[] = CaregartPeer::TIP0;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCoding($v)
 	{
 
@@ -656,9 +707,9 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
         $this->coding = $v;
         $this->modifiedColumns[] = CaregartPeer::CODING;
       }
-  
-	} 
-	
+
+	}
+
 	public function setMercon($v)
 	{
 
@@ -666,9 +717,9 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
         $this->mercon = $v;
         $this->modifiedColumns[] = CaregartPeer::MERCON;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCodartsnc($v)
 	{
 
@@ -676,9 +727,9 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
         $this->codartsnc = $v;
         $this->modifiedColumns[] = CaregartPeer::CODARTSNC;
       }
-  
-	} 
-	
+
+	}
+
 	public function setTipreg($v)
 	{
 
@@ -686,9 +737,49 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
         $this->tipreg = $v;
         $this->modifiedColumns[] = CaregartPeer::TIPREG;
       }
-  
-	} 
-	
+
+	}
+
+	public function setPerbienes($v)
+	{
+
+    if ($this->perbienes !== $v) {
+        $this->perbienes = $v;
+        $this->modifiedColumns[] = CaregartPeer::PERBIENES;
+      }
+
+	}
+
+	public function setCtatra($v)
+	{
+
+    if ($this->ctatra !== $v) {
+        $this->ctatra = $v;
+        $this->modifiedColumns[] = CaregartPeer::CTATRA;
+      }
+
+	}
+
+	public function setCosunipri($v)
+	{
+
+    if ($this->cosunipri !== $v) {
+        $this->cosunipri = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaregartPeer::COSUNIPRI;
+      }
+
+	}
+
+	public function setCtadef($v)
+	{
+
+    if ($this->ctadef !== $v) {
+        $this->ctadef = $v;
+        $this->modifiedColumns[] = CaregartPeer::CTADEF;
+      }
+
+	}
+
 	public function setId($v)
 	{
 
@@ -696,9 +787,9 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
         $this->id = $v;
         $this->modifiedColumns[] = CaregartPeer::ID;
       }
-  
-	} 
-  
+
+	}
+
   public function hydrate(ResultSet $rs, $startcol = 1)
   {
     try {
@@ -763,7 +854,15 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
 
       $this->tipreg = $rs->getString($startcol + 29);
 
-      $this->id = $rs->getInt($startcol + 30);
+      $this->perbienes = $rs->getBoolean($startcol + 30);
+
+      $this->ctatra = $rs->getString($startcol + 31);
+
+      $this->cosunipri = $rs->getFloat($startcol + 32);
+
+      $this->ctadef = $rs->getString($startcol + 33);
+
+      $this->id = $rs->getInt($startcol + 34);
 
       $this->resetModified();
 
@@ -771,7 +870,7 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 31; 
+            return $startcol + 35;
     } catch (Exception $e) {
       throw new PropelException("Error populating Caregart object", $e);
     }
@@ -782,8 +881,8 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
   {
 
   }
-    
-  
+
+
   public function __call($m, $a)
     {
       $prefijo = substr($m,0,3);
@@ -797,7 +896,7 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
 
     }
 
-	
+
 	public function delete($con = null)
 	{
 		if ($this->isDeleted()) {
@@ -819,7 +918,7 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	public function save($con = null)
 	{
 		if ($this->isDeleted()) {
@@ -841,7 +940,7 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	protected function doSave($con)
 	{
 		$affectedRows = 0; 		if (!$this->alreadyInSave) {
@@ -851,28 +950,36 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
 						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = CaregartPeer::doInsert($this, $con);
-					$affectedRows += 1; 										 										 
-					$this->setId($pk);  
+					$affectedRows += 1;
+					$this->setId($pk);
 					$this->setNew(false);
 				} else {
 					$affectedRows += CaregartPeer::doUpdate($this, $con);
 				}
 				$this->resetModified(); 			}
 
+			if ($this->collCarelartsigas !== null) {
+				foreach($this->collCarelartsigas as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
+
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
-	} 
-	
+	}
+
 	protected $validationFailures = array();
 
-	
+
 	public function getValidationFailures()
 	{
 		return $this->validationFailures;
 	}
 
-	
+
 	public function validate($columns = null)
 	{
 		$res = $this->doValidate($columns);
@@ -885,7 +992,7 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	protected function doValidate($columns = null)
 	{
 		if (!$this->alreadyInValidation) {
@@ -900,6 +1007,14 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
 			}
 
 
+				if ($this->collCarelartsigas !== null) {
+					foreach($this->collCarelartsigas as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
+
 
 			$this->alreadyInValidation = false;
 		}
@@ -907,14 +1022,14 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
 		return (!empty($failureMap) ? $failureMap : true);
 	}
 
-	
+
 	public function getByName($name, $type = BasePeer::TYPE_PHPNAME)
 	{
 		$pos = CaregartPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->getByPosition($pos);
 	}
 
-	
+
 	public function getByPosition($pos)
 	{
 		switch($pos) {
@@ -1009,6 +1124,18 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
 				return $this->getTipreg();
 				break;
 			case 30:
+				return $this->getPerbienes();
+				break;
+			case 31:
+				return $this->getCtatra();
+				break;
+			case 32:
+				return $this->getCosunipri();
+				break;
+			case 33:
+				return $this->getCtadef();
+				break;
+			case 34:
 				return $this->getId();
 				break;
 			default:
@@ -1016,7 +1143,7 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
 				break;
 		} 	}
 
-	
+
 	public function toArray($keyType = BasePeer::TYPE_PHPNAME)
 	{
 		$keys = CaregartPeer::getFieldNames($keyType);
@@ -1051,19 +1178,23 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
 			$keys[27] => $this->getMercon(),
 			$keys[28] => $this->getCodartsnc(),
 			$keys[29] => $this->getTipreg(),
-			$keys[30] => $this->getId(),
+			$keys[30] => $this->getPerbienes(),
+			$keys[31] => $this->getCtatra(),
+			$keys[32] => $this->getCosunipri(),
+			$keys[33] => $this->getCtadef(),
+			$keys[34] => $this->getId(),
 		);
 		return $result;
 	}
 
-	
+
 	public function setByName($name, $value, $type = BasePeer::TYPE_PHPNAME)
 	{
 		$pos = CaregartPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->setByPosition($pos, $value);
 	}
 
-	
+
 	public function setByPosition($pos, $value)
 	{
 		switch($pos) {
@@ -1158,11 +1289,23 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
 				$this->setTipreg($value);
 				break;
 			case 30:
+				$this->setPerbienes($value);
+				break;
+			case 31:
+				$this->setCtatra($value);
+				break;
+			case 32:
+				$this->setCosunipri($value);
+				break;
+			case 33:
+				$this->setCtadef($value);
+				break;
+			case 34:
 				$this->setId($value);
 				break;
 		} 	}
 
-	
+
 	public function fromArray($arr, $keyType = BasePeer::TYPE_PHPNAME)
 	{
 		$keys = CaregartPeer::getFieldNames($keyType);
@@ -1197,10 +1340,14 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[27], $arr)) $this->setMercon($arr[$keys[27]]);
 		if (array_key_exists($keys[28], $arr)) $this->setCodartsnc($arr[$keys[28]]);
 		if (array_key_exists($keys[29], $arr)) $this->setTipreg($arr[$keys[29]]);
-		if (array_key_exists($keys[30], $arr)) $this->setId($arr[$keys[30]]);
+		if (array_key_exists($keys[30], $arr)) $this->setPerbienes($arr[$keys[30]]);
+		if (array_key_exists($keys[31], $arr)) $this->setCtatra($arr[$keys[31]]);
+		if (array_key_exists($keys[32], $arr)) $this->setCosunipri($arr[$keys[32]]);
+		if (array_key_exists($keys[33], $arr)) $this->setCtadef($arr[$keys[33]]);
+		if (array_key_exists($keys[34], $arr)) $this->setId($arr[$keys[34]]);
 	}
 
-	
+
 	public function buildCriteria()
 	{
 		$criteria = new Criteria(CaregartPeer::DATABASE_NAME);
@@ -1235,12 +1382,16 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CaregartPeer::MERCON)) $criteria->add(CaregartPeer::MERCON, $this->mercon);
 		if ($this->isColumnModified(CaregartPeer::CODARTSNC)) $criteria->add(CaregartPeer::CODARTSNC, $this->codartsnc);
 		if ($this->isColumnModified(CaregartPeer::TIPREG)) $criteria->add(CaregartPeer::TIPREG, $this->tipreg);
+		if ($this->isColumnModified(CaregartPeer::PERBIENES)) $criteria->add(CaregartPeer::PERBIENES, $this->perbienes);
+		if ($this->isColumnModified(CaregartPeer::CTATRA)) $criteria->add(CaregartPeer::CTATRA, $this->ctatra);
+		if ($this->isColumnModified(CaregartPeer::COSUNIPRI)) $criteria->add(CaregartPeer::COSUNIPRI, $this->cosunipri);
+		if ($this->isColumnModified(CaregartPeer::CTADEF)) $criteria->add(CaregartPeer::CTADEF, $this->ctadef);
 		if ($this->isColumnModified(CaregartPeer::ID)) $criteria->add(CaregartPeer::ID, $this->id);
 
 		return $criteria;
 	}
 
-	
+
 	public function buildPkeyCriteria()
 	{
 		$criteria = new Criteria(CaregartPeer::DATABASE_NAME);
@@ -1250,19 +1401,19 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
 		return $criteria;
 	}
 
-	
+
 	public function getPrimaryKey()
 	{
 		return $this->getId();
 	}
 
-	
+
 	public function setPrimaryKey($key)
 	{
 		$this->setId($key);
 	}
 
-	
+
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
@@ -1326,13 +1477,30 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
 
 		$copyObj->setTipreg($this->tipreg);
 
+		$copyObj->setPerbienes($this->perbienes);
+
+		$copyObj->setCtatra($this->ctatra);
+
+		$copyObj->setCosunipri($this->cosunipri);
+
+		$copyObj->setCtadef($this->ctadef);
+
+
+		if ($deepCopy) {
+									$copyObj->setNew(false);
+
+			foreach($this->getCarelartsigas() as $relObj) {
+				$copyObj->addCarelartsiga($relObj->copy($deepCopy));
+			}
+
+		}
 
 		$copyObj->setNew(true);
 
-		$copyObj->setId(NULL); 
+		$copyObj->setId(NULL);
 	}
 
-	
+
 	public function copy($deepCopy = false)
 	{
 				$clazz = get_class($this);
@@ -1341,7 +1509,7 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
 		return $copyObj;
 	}
 
-	
+
 	public function getPeer()
 	{
 		if (self::$peer === null) {
@@ -1350,4 +1518,74 @@ abstract class BaseCaregart extends BaseObject  implements Persistent {
 		return self::$peer;
 	}
 
-} 
+
+	public function initCarelartsigas()
+	{
+		if ($this->collCarelartsigas === null) {
+			$this->collCarelartsigas = array();
+		}
+	}
+
+
+	public function getCarelartsigas($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseCarelartsigaPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCarelartsigas === null) {
+			if ($this->isNew()) {
+			   $this->collCarelartsigas = array();
+			} else {
+
+				$criteria->add(CarelartsigaPeer::CODART, $this->getCodart());
+
+				CarelartsigaPeer::addSelectColumns($criteria);
+				$this->collCarelartsigas = CarelartsigaPeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+
+
+				$criteria->add(CarelartsigaPeer::CODART, $this->getCodart());
+
+				CarelartsigaPeer::addSelectColumns($criteria);
+				if (!isset($this->lastCarelartsigaCriteria) || !$this->lastCarelartsigaCriteria->equals($criteria)) {
+					$this->collCarelartsigas = CarelartsigaPeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastCarelartsigaCriteria = $criteria;
+		return $this->collCarelartsigas;
+	}
+
+
+	public function countCarelartsigas($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/om/BaseCarelartsigaPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(CarelartsigaPeer::CODART, $this->getCodart());
+
+		return CarelartsigaPeer::doCount($criteria, $distinct, $con);
+	}
+
+
+	public function addCarelartsiga(Carelartsiga $l)
+	{
+		$this->collCarelartsigas[] = $l;
+		$l->setCaregart($this);
+	}
+
+}

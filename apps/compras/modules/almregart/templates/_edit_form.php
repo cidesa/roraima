@@ -4,15 +4,15 @@
  *
  * @package    Roraima
  * @subpackage vistas
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version    SVN: $Id$
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id: _edit_form.php 41628 2010-12-03 15:30:36Z cramirez $
  */
 // date: 2007/03/20 10:29:35
 ?>
 
 <?php echo form_tag('almregart/edit', array(
   'id'        => 'sf_admin_edit_form',
-  'name'      => 'sf_admin_edit_form',
+  'name'      => 'sf_admin_edit_form', 'onsubmit'  => 'return false;',
   'multipart' => true,
 )) ?>
 <?php use_helper('tabs') ?>
@@ -342,6 +342,19 @@
   'onBlur' => "javascript:event.keyCode=13;return entermontootro(event, this.id)",
 )); echo $value ? $value : '&nbsp;' ?>
     </div></th>
+    <th>&nbsp;</th>
+      <th><?php echo label_for('caregart[cosunipri]', __($labels['caregart{cosunipri}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('caregart{cosunipri}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('caregart{cosunipri}')): ?>
+    <?php echo form_error('caregart{cosunipri}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($caregart, array('getCosunipri',true), array (
+  'size' => 15,
+  'control_name' => 'caregart[cosunipri]',
+  'onBlur' => "javascript:event.keyCode=13;return entermontootro(event, this.id)",
+)); echo $value ? $value : '&nbsp;' ?>
+    </div></th>
       </tr>
      </table>
      </div>
@@ -366,7 +379,7 @@
 </div></fieldset></th>
    </tr>
   </table>
-  </div>
+    </div>
 </fieldset>
 
 
