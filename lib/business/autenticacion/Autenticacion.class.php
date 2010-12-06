@@ -37,6 +37,42 @@ class Autenticacion {
 
      $usuario->setPasuse('md5'.md5(strtoupper($usuario->getLoguse()).$usuario->getPasuse()));
 
+     $permiporgrupo="";
+      $varemp =sfContext::getInstance()->getUser()->getAttribute('configemp');
+      if ($varemp)
+	if(array_key_exists('generales',$varemp))
+	   if(array_key_exists('permiporgrupo',$varemp['generales']))
+	   {
+              $permiporgrupo=$varemp['generales']['permiporgrupo'];
+	   }
+
+     if ($permiporgrupo=='S' && $usuario->getCodgru()!='')
+     {
+         $empresa=sfContext::getInstance()->getUser()->getAttribute('empresa');
+
+         $t= new Criteria();
+         $t->add(SeggruaplPeer::CODGRU,$usuario->getCodgru());
+         $t->add(SeggruaplPeer::CODEMP,$empresa);
+         $result= SeggruaplPeer::doSelect($t);
+         if ($result)
+         {
+            $c= new Criteria();
+            $c->add(ApliUserPeer::LOGUSE,$usuario->getLoguse());
+            $c->add(ApliUserPeer::CODEMP,$empresa);
+            ApliUserPeer::doDelete($c);
+            foreach ($result as $obj)
+            {
+                $apliuser= new ApliUser();
+                $apliuser->setLoguse($usuario->getLoguse());
+                $apliuser->setCodemp($empresa);
+                $apliuser->setCodapl($obj->getCodapl());
+                $apliuser->setNomopc($obj->getNomopc());
+                $apliuser->setPriuse($obj->getPriuse());
+                $apliuser->save();
+            }
+         }
+     }
+
      $usuario->save();
 
   }
@@ -355,20 +391,21 @@ class Autenticacion {
 		        $userbd   = $confbd['all']['propel']['param']['username'];
 		        $verpostg = $confbd['all']['propel']['param']['postgres8.1'];
 		      }
-			//para 8.2
-			//pg_dump --username postgres --format custom --verbose --file "/home/jlobaton/www/siga-dev/web/uploads/logicasa_migracion_sima002.backup" --schema '"SIMA002"' "LOGICASA" -h 192.168.0.1 -p 5432
 
 		      $esquema = sfContext::getInstance()->getUser()->getAttribute('schema');
 		      $ruta    = $_SERVER['DOCUMENT_ROOT'].'/uploads/'.strtolower($nombd).'_migracion_'.strtolower($simaori).'.backup';
 
 		    // Nuevo Esquema
 		        // Creamos el backup del esquema viejo
-		      $simaorir='"'.$simaori.'"';
+		   /*   $simaorir='"'.$simaori.'"';
 		      if ($verpostg=='S'){  //8.1
 		      	$comando = 'pg_dump --username '.$userbd.' -h '.$host.' --format custom --verbose --file "'.$ruta.'" --schema '.$simaori.' '.$nombd.'';
-		      }else{   //8.2
+		      }elseif ($verpostg=='L'){   //8.2
 		      	$comando = 'pg_dump --username '.$userbd.' -h '.$host.' --format custom --verbose --file "'.$ruta.'" --schema \''.$simaorir.'\' "'.$nombd.'"';
+		      }else {  //8.3
+                          $comando='pg_dump --host '.$host.' --port 5432 --username '.$userbd.' --format custom --verbose --file "'.$ruta.'" --schema \''.$simaorir.'\' "'.$nombd.'"';
 		      }
+
 		      $salida=shell_exec($comando);
 
 		    //Al esquema viejo le colocamos un nombre X para poder restaurar el otro.
@@ -378,7 +415,11 @@ class Autenticacion {
 
 
 		    // Creamos el nuevo esquema
+                      //if ($verpostg=='S' || $verpostg=='L'){  //8.1 || 8.2
 		      $comando2='pg_restore --username '.$userbd.' -h '.$host.'  --dbname "'.$nombd.'" --format custom --verbose "'.$ruta.'"';
+                      }else {
+                      $comando2='pg_restore --host '.$host.' --port 5432 --username '.$userbd.' --dbname "'.$nombd.'" --verbose "'.$ruta.'"';
+                      }
 		       $salida=shell_exec($comando2);
 
 		    // Le colocamos el nombre destino al esquema nuevo
@@ -389,9 +430,9 @@ class Autenticacion {
 		      //Al esquema origen le colocamos el nombre original
 
 		      $sql='ALTER SCHEMA "'.$esqvie.'" RENAME TO "'.$simaori.'"';
-		      Herramientas::insertarRegistros2($sql);
+		      Herramientas::insertarRegistros2($sql);*/
 
-		//exit('555');
+
 		      $sql1='Insert Into "SIMA_USER".Empresa Values (\''.$empresa->getCodempdes().'\',\''.$empresa->getDescripcion().'\',\'\',\'\',\''.$simades.'\')';
 		      Herramientas::insertarRegistros($sql1);
 
@@ -759,6 +800,103 @@ class Autenticacion {
       }
    }
    return $arreglores;
+  }
+
+  public static function salvarPerfilGrupo($clasemodelo,$grid,$empresa)
+  {
+    $grupo=$clasemodelo->getCodgru();
+    $codigoapli=explode('_',$clasemodelo->getCodapl());
+
+    $c= new Criteria();
+    $c->add(SeggruaplPeer::CODGRU,$grupo);
+    $c->add(SeggruaplPeer::CODEMP,$empresa);
+    $c->add(SeggruaplPeer::CODAPL,$codigoapli[1]);
+    SeggruaplPeer::doDelete($c);
+
+    $priv=false;
+    $x=$grid[0];
+    $j=0;
+    while ($j<count($x))
+    {
+      if ($x[$j]['priuse']!='')
+      {
+       $seggruapl= new Seggruapl();
+       $seggruapl->setCodgru($grupo);
+       $seggruapl->setCodemp($empresa);
+       $seggruapl->setCodapl($codigoapli[1]);
+       $seggruapl->setNomopc($x[$j]['nomopc']);
+       $seggruapl->setPriuse($x[$j]['priuse']);
+       $seggruapl->save();
+       $priv=true;
+}
+      $j++;
+    }
+
+   // Agregando los privilegios minimos
+
+    if ($clasemodelo->getAdmin()=='')
+    {
+      if ($priv==true)
+      {
+        $seggruapl= new Seggruapl();
+        $seggruapl->setCodgru($grupo);
+        $seggruapl->setCodemp($empresa);
+        $seggruapl->setCodapl($codigoapli[1]);
+        $seggruapl->setNomopc('menu');
+        $seggruapl->setPriuse('15');
+        $seggruapl->save();
+
+        $seggruapl= new Seggruapl();
+        $seggruapl->setCodgru($grupo);
+        $seggruapl->setCodemp($empresa);
+        $seggruapl->setCodapl($codigoapli[1]);
+        $seggruapl->setNomopc('catalogo');
+        $seggruapl->setPriuse('15');
+        $seggruapl->save();
+
+        $seggruapl= new Seggruapl();
+        $seggruapl->setCodgru($grupo);
+        $seggruapl->setCodemp($empresa);
+        $seggruapl->setCodapl($codigoapli[1]);
+        $seggruapl->setNomopc('confincomgen');
+        $seggruapl->setPriuse('15');
+        $seggruapl->save();
+      }
+    }
+   else
+   {
+        $seggruapl= new Seggruapl();
+        $seggruapl->setCodgru($grupo);
+        $seggruapl->setCodemp($empresa);
+        $seggruapl->setCodapl($codigoapli[1]);
+        $seggruapl->setNomopc('admin');
+        $seggruapl->setPriuse('15');
+        $seggruapl->save();
+
+        $seggruapl= new Seggruapl();
+        $seggruapl->setCodgru($grupo);
+        $seggruapl->setCodemp($empresa);
+        $seggruapl->setCodapl($codigoapli[1]);
+        $seggruapl->setNomopc('menu');
+        $seggruapl->setPriuse('15');
+        $seggruapl->save();
+
+        $seggruapl= new Seggruapl();
+        $seggruapl->setCodgru($grupo);
+        $seggruapl->setCodemp($empresa);
+        $seggruapl->setCodapl($codigoapli[1]);
+        $seggruapl->setNomopc('catalogo');
+        $seggruapl->setPriuse('15');
+        $seggruapl->save();
+
+        $seggruapl= new Seggruapl();
+        $seggruapl->setCodgru($grupo);
+        $seggruapl->setCodemp($empresa);
+        $seggruapl->setCodapl($codigoapli[1]);
+        $seggruapl->setNomopc('confincomgen');
+        $seggruapl->setPriuse('15');
+        $seggruapl->save();
+    }
   }
 
 }
