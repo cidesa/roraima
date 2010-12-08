@@ -692,7 +692,7 @@ class almdespActions extends autoalmdespActions
    }
 		else  if ($this->getRequestParameter('ajax')=='3')
 	    {
-	  	    $dato=BnubibiePeer::getDesubicacion($this->getRequestParameter('codigo'));
+	  	    $dato=BnubicaPeer::getDesubi($this->getRequestParameter('codigo'));
             $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
             $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
    			return sfView::HEADER_ONLY;
@@ -865,7 +865,7 @@ class almdespActions extends autoalmdespActions
 		      	    if ($datos->getAprreq()=='S') {
                             $desreq=$datos->getDesreq();
 			  	    $uniori=$datos->getCodcatreq();
-			  	    $desuniori=BnubibiePeer::getDesubicacion($uniori);
+			  	    $desuniori=BnubicaPeer::getDesubi($uniori);
                                     $codcen=$datos->getCodcen();
                                     $descen=H::getX_vacio('CODCEN', 'Cadefcen', 'Descen', $codcen);
 		            $output = '[["'.$cajtexmos.'","'.$desreq.'",""],["cadphart_codori","'.$uniori.'",""],["cadphart_nomcat","'.$desuniori.'",""],["cadphart_codcen","'.$codcen.'",""],["cadphart_descen","'.$descen.'",""],["'.$cajtexcom.'","8","c"]]';
@@ -1046,8 +1046,8 @@ class almdespActions extends autoalmdespActions
   {
 	$this->mascaraarticulo = Herramientas::ObtenerFormato('Cadefart','Forart');
 	$this->mascarapartida = Herramientas::getMascaraPartida();
-	$this->forubi = Herramientas::ObtenerFormato('Bndefins','forubi');
-    $this->lonubi= Herramientas::ObtenerFormato('Bndefins','lonubi');
+	$this->forubi = Herramientas::ObtenerFormato('Opdefemp','Forubi');//Herramientas::ObtenerFormato('Bndefins','forubi');
+    $this->lonubi= strlen($this->forubi);//Herramientas::ObtenerFormato('Bndefins','lonubi');
     $this->mascaraubicacionalm = Herramientas::ObtenerFormato('Cadefart','Forubi');
     $this->lonubialm=strlen($this->mascaraubicacionalm);
     $this->dphdesh="";

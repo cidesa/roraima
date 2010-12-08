@@ -175,7 +175,26 @@ class almordrecActions extends autoalmordrecActions
             $codalm=$this->getRequestParameter('codalm');
 	  		$codubi=$this->getRequestParameter('codubi');
 	  		$canrec=$this->getRequestParameter('canrec');
+                        $orden=$this->getRequestParameter('orden');
+                        $idcanrec=$this->getRequestParameter('idcanrec');
 	  		$dato="";
+                $manforent=H::getConfApp2('manforent', 'compras', 'almordcom');
+                if ($manforent=='S')
+                {
+                    $t= new Criteria();
+                    $t->add(CaentordPeer::ORDCOM,$orden);
+                    $t->add(CaentordPeer::CODART,$codart);
+                    $t->add(CaentordPeer::CODALM,$codalm);
+                    $reg=CaentordPeer::doSelectOne($t);
+                    if ($reg)
+                    {
+                      if ($canrec>$reg->getCanent())
+                      {
+                        $canrec=$reg->getCanent();
+                      }
+                    }
+                }
+
 	  	    if ($canrec>0)
 			{
 	  	        if (Recepcion::verificaexiartalmubi($codart,$codalm,$codubi,&$msg))
@@ -183,7 +202,8 @@ class almordrecActions extends autoalmordrecActions
 	            else
 	                   $dato="N";
 			}//if ($canrec>0)
-            $output = '[["verificaexisydisp","'.$dato.'",""],["mensaje","'.$msg.'",""]]';
+                        $canrec=number_format($canrec,2,',','.');
+            $output = '[["'.$idcanrec.'","'.$canrec.'",""],["verificaexisydisp","'.$dato.'",""],["mensaje","'.$msg.'",""]]';
 	    }
           else  if ($this->getRequestParameter('ajax')=='6')
           {
@@ -199,6 +219,33 @@ class almordrecActions extends autoalmordrecActions
             }
             $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""]]';
           }
+          else  if ($this->getRequestParameter('ajax')=='7')
+	    {
+            $codart=$this->getRequestParameter('art');
+            $codalm=$this->getRequestParameter('almacen');
+            $cangri=$this->getRequestParameter('cangri');
+            $orden=$this->getRequestParameter('orden');
+            $descuento=$this->getRequestParameter('descuento');
+            $recargo=$this->getRequestParameter('recargo');
+            $costo=$this->getRequestParameter('costo');
+            $tot=$this->getRequestParameter('total');
+
+            $t= new Criteria();
+            $t->add(CaentordPeer::ORDCOM,$orden);
+            $t->add(CaentordPeer::CODART,$codart);
+            $t->add(CaentordPeer::CODALM,$codalm);
+            $reg=CaentordPeer::doSelectOne($t);
+            if ($reg)
+            {
+               $canrec=$reg->getCanent();
+               $total=($canrec*$costo)+$recargo-$descuento;
+               $canrec=number_format($canrec,2,',','.');
+               $total=number_format($total,2,',','.');
+               $javascript="actualizarsaldos();";
+            }
+                        
+            $output = '[["'.$cangri.'","'.$canrec.'",""],["'.$tot.'","'.$total.'",""],["javascript","'.$javascript.'",""]]';
+	    }
 
   	    $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
 	    return sfView::HEADER_ONLY;
@@ -220,6 +267,7 @@ class almordrecActions extends autoalmordrecActions
 	{
         $cajtexcom=$this->getRequestParameter('cajtexcom');
         $this->mensaje="";
+        $this->manforent=H::getConfApp2('manforent', 'compras', 'almordcom');
         if (trim($this->getRequestParameter('codigo'))!="")
 	    {
 		 if ($this->getRequestParameter('ajax')=='2')
@@ -332,6 +380,7 @@ class almordrecActions extends autoalmordrecActions
     $c->add(CaartordPeer::CANORD, $this->sql, Criteria::CUSTOM);
 
 	$per = CaartordPeer::doSelect($c);
+        
 	$i=0;
 	 //si no existen datos quiere decir que no hay articulos pendientes por recibir, la orden de compra ha sido recibida en su totalidad
       if ($codigo!="" && !$per)

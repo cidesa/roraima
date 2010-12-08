@@ -124,7 +124,7 @@
 )); echo $value ? $value : '&nbsp;' ?>
 
 &nbsp;
-<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Bnubibie_Almdes/clase/Bnubibie/frame/sf_admin_edit_form/obj1/cadphart_codori/obj2/cadphart_nomcat/campo1/codubi/campo2/desubi','','','botoncat')?></th>
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo')."/metodo/Bnubica_Pagemiord/clase/Bnubica/frame/sf_admin_edit_form/obj1/cadphart_codori/obj2/cadphart_nomcat/campo1/codubi/campo2/desubi/param1/".$lonubi,'','','botoncat')?></th>
 &nbsp;&nbsp;
  <?php $value = object_input_tag($cadphart, 'getNomcat', array (
   'size' => 60,
