@@ -309,7 +309,7 @@ class viacalviatraActions extends autoviacalviatraActions
 
      $this->obj = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/viacalviatra/'.sfConfig::get('sf_app_module_config_dir_name').'/grid');
      #$this->obj[1][1]->setHtml('size=40 maxlength=250 onBlur="if($(id).value!=\'\')cambiardescripcion(this.id)"');
-     $this->obj[1][3]->setHtml('size=10 readonly=true onBlur="calculamontofinal(this.id,3);" onkeyPress="return validaEntero(event)"');
+     $this->obj[1][3]->setHtml('size=10 onBlur="calculamontofinal(this.id,3);" onkeyPress="return validaEntero(event)"');
      $this->obj[1][4]->setHtml('size=10 readonly=true onBlur="ValidarMontoGridv2(this.id);calculamontofinal(this.id,4);"');
      $this->obj[1][0]->setHtml('size=5 onclick="Calculartotal();"');
      if($this->tipvia=='NACIONAL' || substr($this->viacalviatra->getNumcal(),0,2)=='VN')
