@@ -6573,5 +6573,51 @@ public function Catdefcatman_Cattramo($params = '') {
 		);
 	}
 
+	public function Nppartidas_Precontra2() {
+
+          $sql2="SELECT (SUM(LONNIV)+COUNT(CATPAR)+1) as inipartida FROM CPNIVELES WHERE CATPAR='C'";
+          if (Herramientas::BuscarDatos($sql2,&$results))
+          {
+            $inicio=$results[0]["inipartida"];
+}
+
+          $consec=H::getX_vacio('CODEMP', 'Cpdefniv', 'Conpar', '001');
+          $sql="SELECT (SUM(LONNIV)+COUNT(CATPAR)-1) as lonpartida FROM CPNIVELES WHERE CATPAR='P' AND CONSEC<=".$consec.";";
+          if (Herramientas::BuscarDatos($sql,&$result))
+          {
+            $fin=$result[0]["lonpartida"];
+          }
+
+        $this->c = new Criteria();
+        $this->c->addSelectColumn(' SUBSTR(' . CpdeftitPeer :: CODPRE . ',' . $inicio . ',' . $fin . ') as CODPRE');
+        $this->c->addSelectColumn(CpdeftitPeer :: NOMPRE);
+        $this->c->addSelectColumn(CpdeftitPeer :: CODCTA);
+        $this->c->addSelectColumn(CpdeftitPeer :: STACOD);
+        $this->c->addSelectColumn(CpdeftitPeer :: CODUNI);
+        $this->c->addSelectColumn(CpdeftitPeer :: ESTATUS);
+        $this->c->addSelectColumn(CpdeftitPeer :: CODTIP);
+        $this->c->addSelectColumn(CpdeftitPeer :: ID);
+        $this->sql = "trim(substr(codpre,$inicio,$fin))!=''";
+        $this->c->add(CpdeftitPeer :: CODPRE, $this->sql, Criteria :: CUSTOM);
+        $this->c->setDistinct();
+
+        $this->columnas = array (
+                CpdeftitPeer :: CODPRE => 'Codigo Partida',
+                CpdeftitPeer :: NOMPRE => 'Nombre Partida',
+
+
+        );
+	}
+
+        public function Nppartidas_Precontra() {
+
+        $this->c = new Criteria();
+
+        $this->columnas = array (
+                PrepartidasPeer :: CODPAR => 'Codigo Partida',
+                PrepartidasPeer :: NOMPAR => 'Nombre Partida',
+
+        );
+	}
 }
 ?>

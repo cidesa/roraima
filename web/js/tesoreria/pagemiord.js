@@ -37,10 +37,11 @@
    var cal=montos+diferencia;
 
    $('opordpag_monret').value=format(cal.toFixed(2),'.',',','.');
-   var y=totalregistros('ax',2,150);
+   var nfil=parseInt($('opordpag_numfilas').value);
+   var y=totalregistros('ax',2,nfil);
    if (($('opordpag_presiono').value=='S') && (verificarmarcas('ax',1)))
    {
-     var y=verificarultimomarcado('ax',2,150,1);
+     var y=verificarultimomarcado('ax',2,nfil,1);
      var otro="ax"+"_"+y+"_4";
 
      var monto3=toFloat(otro);
@@ -103,12 +104,13 @@
 
     var cal=montos+diferencia;
     $('opordpag_monret').value=format(cal.toFixed(2),'.',',','.');
-    var y=totalregistros('ax',2,150);
+    var nfil=parseInt($('opordpag_numfilas').value);
+    var y=totalregistros('ax',2,nfil);
     if (y!=0)
     {
     if (($('opordpag_presiono').value=='S') && (verificarmarcas('ax',1)))
     {
-      var y=verificarultimomarcado('ax',2,150,1);
+      var y=verificarultimomarcado('ax',2,nfil,1);
       var otro="ax"+"_"+y+"_4";
 
       var monto3=toFloat(otro);
@@ -156,6 +158,7 @@
   {
     var fil=0;
     var numfil=parseInt($('fila').value);
+    var nfil=parseInt($('opordpag_numfilas').value);
     while (fil<numfil)
     {
       var id1="cx"+"_"+fil+"_1";
@@ -165,13 +168,13 @@
       {
        var fil2=0;
        var cuentafil=0;
-       while (fil2<150)
+       while (fil2<nfil)
        {
         var ida="ax"+"_"+fil2+"_2";
         if ($(ida).value=="")
         {
          cuentafil=fil2;
-         fil2=150;
+         fil2=nfil;
         }
        fil2++;
        }
@@ -324,7 +327,8 @@
 
   function verificarmarcas(letra,posicion)
   {
-   var am=totalregistros('ax',2,150);
+   var nfil=parseInt($('opordpag_numfilas').value);
+   var am=totalregistros('ax',2,nfil);
    var fil=0;
    while (fil<am)
    {
@@ -355,6 +359,7 @@
   {
     var ind=0;
     var enc=false;
+    var nfil=parseInt($('opordpag_numfilas').value);
     while ((ind<tot) && (!enc)) // grid retenciones
     {
       var id1="fx"+"_"+ind+"_1";
@@ -362,7 +367,7 @@
       var id4="fx"+"_"+ind+"_4";
       if (referencia!="")
       {
-       var tot2=totalregistros('ax',2,150);
+       var tot2=totalregistros('ax',2,nfil);
        if (ind<tot2)//grid imputaciones
        { i=ind;}
        else { i=1;}
@@ -462,6 +467,7 @@
 
   function sumarbase(marcasinmarca)
   {
+    var nfil=parseInt($('opordpag_numfilas').value);
     if (marcasinmarca)
     {
      if (verificarmarcas('ax',1))
@@ -475,7 +481,7 @@
    else
    {
     var montbase=0;
-    var ac=totalregistros('ax',2,150);
+    var ac=totalregistros('ax',2,nfil);
   var fil=0;
   while (fil<ac)
   {
@@ -553,6 +559,7 @@
     var basimp=toFloat(aux1);
     var unitri=toFloat(aux16);
     var factor=toFloat(aux17);
+    var nfil=parseInt($('opordpag_numfilas').value);
 
     if (porcen!=0)
     {
@@ -561,7 +568,7 @@
         var cal=((porcen/100)*(basimp/100)*base);
         $(aux4).value=format(cal.toFixed(2),'.',',','.');
       }
-      var totalfilas=totalregistros('ax',2,150);
+      var totalfilas=totalregistros('ax',2,nfil);
       var i=0;
       while (i<totalfilas) //Grid Detalle
       {
@@ -618,7 +625,7 @@
       var monto=0;
       var otromonto=0;
       var marcas=0;
-      var totreg=totalregistros('ax',2,150);
+      var totreg=totalregistros('ax',2,nfil);
       var l=0;
       while (l<totreg)
       {
@@ -667,7 +674,7 @@
        $(aux4).value=format(cal4.toFixed(2),'.',',','.');
      }
      else { $(aux4).value=format(sustraendo.toFixed(2),'.',',','.');}
-     var total=totalregistros('ax',2,150);
+     var total=totalregistros('ax',2,nfil);
      var posenc=0;
      var i=0;
       while (i<total)
@@ -738,12 +745,13 @@
     var monbasmin=name+"_"+fil+"_"+colmonbasmin;
     var descrip=name+"_"+fil+"_"+coldescrip;
     var sigue=true;
+    var nfil=parseInt($('opordpag_numfilas').value);
 
   if ($('opordpag_afectapre').value==1)
   {
     if ($(esta).value!="N")
     {
-      var tota=totalregistros('ax',2,150);
+      var tota=totalregistros('ax',2,nfil);
       var monbase=0;
       var fila=0;
       while (fila<tota)
@@ -930,9 +938,10 @@
 
     cienxcien=xcien;
    }
+   var nfil=parseInt($('opordpag_numfilas').value);
 
   var ww=totalregistros('ex',1,30);
-  var ab=totalregistros('ax',2,150);
+  var ab=totalregistros('ax',2,nfil);
   var fil=0;
   while (fil<ww)
   {
@@ -1258,7 +1267,8 @@
 
  function sumarretenciones()
  {
-  var aw=totalregistros('ax',2,150);
+  var nfil=parseInt($('opordpag_numfilas').value);
+  var aw=totalregistros('ax',2,nfil);
   var ind=0;
   while (ind<aw)
   {
@@ -2610,9 +2620,10 @@ function totalizar(e,id)
    var col=parseInt(aux[2]);
 
    var codpre=$(id).value;
+   var nfil=parseInt($('opordpag_numfilas').value);
 
    var codprerepetido=false;
-   var am=totalregistros('ax',2,150);
+   var am=totalregistros('ax',2,nfil);
    var i=0;
    while (i<am)
    {

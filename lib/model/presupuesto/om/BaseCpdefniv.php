@@ -157,6 +157,10 @@ abstract class BaseCpdefniv extends BaseObject  implements Persistent {
 
 
 	
+	protected $conpar;
+
+
+	
 	protected $id;
 
 	
@@ -472,6 +476,14 @@ abstract class BaseCpdefniv extends BaseObject  implements Persistent {
   {
 
     return $this->btneli;
+
+  }
+  
+  public function getConpar($val=false)
+  {
+
+    if($val) return number_format($this->conpar,2,',','.');
+    else return $this->conpar;
 
   }
   
@@ -873,6 +885,16 @@ abstract class BaseCpdefniv extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setConpar($v)
+	{
+
+    if ($this->conpar !== $v) {
+        $this->conpar = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpdefnivPeer::CONPAR;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -961,7 +983,9 @@ abstract class BaseCpdefniv extends BaseObject  implements Persistent {
 
       $this->btneli = $rs->getBoolean($startcol + 36);
 
-      $this->id = $rs->getInt($startcol + 37);
+      $this->conpar = $rs->getFloat($startcol + 37);
+
+      $this->id = $rs->getInt($startcol + 38);
 
       $this->resetModified();
 
@@ -969,7 +993,7 @@ abstract class BaseCpdefniv extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 38; 
+            return $startcol + 39; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Cpdefniv object", $e);
     }
@@ -1228,6 +1252,9 @@ abstract class BaseCpdefniv extends BaseObject  implements Persistent {
 				return $this->getBtneli();
 				break;
 			case 37:
+				return $this->getConpar();
+				break;
+			case 38:
 				return $this->getId();
 				break;
 			default:
@@ -1277,7 +1304,8 @@ abstract class BaseCpdefniv extends BaseObject  implements Persistent {
 			$keys[34] => $this->getCorfue(),
 			$keys[35] => $this->getBtnanu(),
 			$keys[36] => $this->getBtneli(),
-			$keys[37] => $this->getId(),
+			$keys[37] => $this->getConpar(),
+			$keys[38] => $this->getId(),
 		);
 		return $result;
 	}
@@ -1405,6 +1433,9 @@ abstract class BaseCpdefniv extends BaseObject  implements Persistent {
 				$this->setBtneli($value);
 				break;
 			case 37:
+				$this->setConpar($value);
+				break;
+			case 38:
 				$this->setId($value);
 				break;
 		} 	}
@@ -1451,7 +1482,8 @@ abstract class BaseCpdefniv extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[34], $arr)) $this->setCorfue($arr[$keys[34]]);
 		if (array_key_exists($keys[35], $arr)) $this->setBtnanu($arr[$keys[35]]);
 		if (array_key_exists($keys[36], $arr)) $this->setBtneli($arr[$keys[36]]);
-		if (array_key_exists($keys[37], $arr)) $this->setId($arr[$keys[37]]);
+		if (array_key_exists($keys[37], $arr)) $this->setConpar($arr[$keys[37]]);
+		if (array_key_exists($keys[38], $arr)) $this->setId($arr[$keys[38]]);
 	}
 
 	
@@ -1496,6 +1528,7 @@ abstract class BaseCpdefniv extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CpdefnivPeer::CORFUE)) $criteria->add(CpdefnivPeer::CORFUE, $this->corfue);
 		if ($this->isColumnModified(CpdefnivPeer::BTNANU)) $criteria->add(CpdefnivPeer::BTNANU, $this->btnanu);
 		if ($this->isColumnModified(CpdefnivPeer::BTNELI)) $criteria->add(CpdefnivPeer::BTNELI, $this->btneli);
+		if ($this->isColumnModified(CpdefnivPeer::CONPAR)) $criteria->add(CpdefnivPeer::CONPAR, $this->conpar);
 		if ($this->isColumnModified(CpdefnivPeer::ID)) $criteria->add(CpdefnivPeer::ID, $this->id);
 
 		return $criteria;
@@ -1600,6 +1633,8 @@ abstract class BaseCpdefniv extends BaseObject  implements Persistent {
 		$copyObj->setBtnanu($this->btnanu);
 
 		$copyObj->setBtneli($this->btneli);
+
+		$copyObj->setConpar($this->conpar);
 
 
 		$copyObj->setNew(true);

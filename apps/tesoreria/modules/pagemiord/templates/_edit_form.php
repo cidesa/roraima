@@ -39,6 +39,7 @@
 <?php echo input_hidden_tag('opordpag[observe]', $opordpag->getObserve()) ?>
 <?php echo input_hidden_tag('opordpag[modbasimpiva]', $opordpag->getModbasimpiva()) ?>
 <?php echo input_hidden_tag('opordpag[limbaseret]', $opordpag->getLimbaseret()) ?>
+<?php echo input_hidden_tag('opordpag[numfilas]', $opordpag->getNumfilas()) ?>
 <?php echo input_hidden_tag('opordpag[refcre]', $opordpag->getRefcre()) ?>
 <?php echo input_hidden_tag('opordpag[refsolpag]', $opordpag->getRefsolpag()) ?>
 <table width="100%">
@@ -944,7 +945,8 @@ function num(e) {
 
  function generar()
  {
-   var y=totalregistros('ax',2,150);
+   var nfil=parseInt($('opordpag_numfilas').value);
+   var y=totalregistros('ax',2,nfil);
   if ($('opordpag_cedrif').value=="" || $('opordpag_ctapag').value=="" || y<=0)
   {
     alert('Verique si introdujo los Datos del Beneficiario, el Código Contable y las Imputaciones Presupuestarias, para luego generar el comprobante');

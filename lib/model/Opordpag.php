@@ -77,6 +77,7 @@ class Opordpag extends BaseOpordpag
   protected $filassal=0;
   protected $filordcbtp="";
   protected $limbaseret="";
+  protected $numfilas=0;
   protected $refcre='';
   protected $refsolpag='';
 
@@ -454,4 +455,26 @@ class Opordpag extends BaseOpordpag
   	return $this->limbaseret;
   }
 
+
+  public function getNumfilas()
+  {
+    $dato=150;
+    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('tesoreria',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['tesoreria']))
+	     if(array_key_exists('pagemiord',$varemp['aplicacion']['tesoreria']['modulos'])){
+	       if(array_key_exists('numfilas',$varemp['aplicacion']['tesoreria']['modulos']['pagemiord']))
+	       {
+	       	$dato=$varemp['aplicacion']['tesoreria']['modulos']['pagemiord']['numfilas'];
+	       }
+         }
+     return $dato;
+  }
+
+  public function setNumfilas()
+  {
+  	return $this->numfilas;
+  }
 }

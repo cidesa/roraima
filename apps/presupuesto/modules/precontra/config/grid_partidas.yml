@@ -1,0 +1,21 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                true
+  tabla:                   cpcontra
+  anchogrid:               750
+  ancho:                   700
+  filas:                   1
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Partida
+  tipo:                    t
+  nombrecampo:             codparde
+  html:                    ["size=15 maxlength=16"]
+  esgrabable:              true  
+2:       # Columna 2
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             nomparde
+  html:                    ["size=50 readonly=true"]
+  esgrabable:              true

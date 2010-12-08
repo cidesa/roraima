@@ -1,0 +1,15 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Cpcontra
+    theme:            cidesaGenerator
+    fields:
+      codparma:    {name: Partida Maestra}
+      grid:    {name: .}
+
+    edit:
+      title: Configuración de Partidas para Traslados
+      display:        
+        "NONE":  [_codparma, _grid]
+      actions:
+        _save:        ~
