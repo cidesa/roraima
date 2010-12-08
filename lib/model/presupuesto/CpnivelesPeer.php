@@ -15,4 +15,18 @@
  */
 class CpnivelesPeer extends BaseCpnivelesPeer
 {
+  public static function getNivelesPartidas()
+  {
+    $resp = array();
+    $c = new Criteria();
+    $c->add(CpnivelesPeer::CATPAR,'P');
+    $c->addAscendingOrderByColumn(CpnivelesPeer::CONSEC);
+    $m = CpnivelesPeer::doSelect($c);
+    if($m){
+      foreach($m as $mon){
+        $resp[$mon->getConsec()] = $mon->getNomext();
+      }
+    }
+    return $resp;
+  }
 }

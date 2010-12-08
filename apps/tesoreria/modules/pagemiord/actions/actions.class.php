@@ -764,7 +764,10 @@ class pagemiordActions extends autopagemiordActions {
     $opciones->setTabla('Opdetord');
     $opciones->setAnchoGrid(850);
     $opciones->setAncho(850);
-    $opciones->setFilas(150);
+    $nfil=H::getConfApp2('numfilas', 'tesoreria', 'pagemiord');
+    if ($nfil!="")
+        $opciones->setFilas($nfil);
+    else $opciones->setFilas(150);
     $opciones->setTitulo('Imputaciones Presupuestarias');
     $opciones->setHTMLTotalFilas(' ');
 
@@ -847,7 +850,10 @@ class pagemiordActions extends autopagemiordActions {
     $opciones->setTabla('Opdetord');
     $opciones->setAnchoGrid(850);
     $opciones->setAncho(850);
-    $opciones->setFilas(150);
+    $nfil=H::getConfApp2('numfilas', 'tesoreria', 'pagemiord');
+    if ($nfil!="")
+        $opciones->setFilas($nfil);
+    else $opciones->setFilas(150);
     $opciones->setTitulo('Imputaciones Presupuestarias');
     $opciones->setHTMLTotalFilas(' ');
 

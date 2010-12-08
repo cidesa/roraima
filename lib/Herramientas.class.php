@@ -2674,6 +2674,39 @@ public static function restaFechas($dFecIni, $dFecFin)
     return round(($date2 - $date1) / (60 * 60 * 24));
 }
 
+  public static function getMascaraPartidaGenerica()
+  {
+    $result=array();
+    $consec=H::getX_vacio('CODEMP', 'Cpdefniv', 'Conpar', '001');
+    $i=0;
+    $formato="";
+    $ruptura="";
+      $sql = "SELECT lonniv FROM CPNIVELES where catpar='P' and consec<='".$consec."' ORDER BY CONSEC";
+      if (Herramientas::BuscarDatos($sql,&$result))
+      {
+        while ($i<count($result))
+        {
+          $lon= $result[$i]['lonniv'];
+          $num='';
+          $j=0;
+          while ($j<$lon)
+          {
+            $num=$num.'#';
+            $j++;
+          }
+
+          if ($i!=(count($result)-1))
+          {
+            $num=$num.'-';
+          }
+
+          $ruptura=$ruptura.$num;
+          $i++;
+        }
+      }//if (Herramientas::BuscarDatos($sql,&$result))
+    return $ruptura;
+  }
+
 }
 
 class H extends Herramientas

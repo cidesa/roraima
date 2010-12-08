@@ -39,15 +39,15 @@ if ($msg=="1") {
      f=opener.document.sf_admin_edit_form;
      if (msgpercer!='')
      {
-         	alert(msgpercer);
+            alert(msgpercer);
             self.close();
      }
      else
      {
-		if (msg!='')
-		{
-		 	alert(msg);
-		}
+            if (msg!='')
+            {
+                    alert(msg);
+            }
 	    self.close();
 	    f.action='/tesoreria_dev.php/tesmovseglib/list';
 	    f.submit();

@@ -52,4 +52,30 @@ $this->Bitacora('Guardo');
     }
   }
 
+  public function executeDelete()
+  {
+    $this->optipben = OptipbenPeer::retrieveByPk($this->getRequestParameter('id'));
+    $this->forward404Unless($this->optipben);
+
+    try
+    {
+      $trae=H::getX_vacio('CODTIPBEN', 'Opbenefi', 'Codtipben', $this->optipben->getCodtipben());
+      if ($trae=="")
+      {
+      $this->deleteOptipben($this->optipben);
+      $this->Bitacora('Elimino');
+      }else {
+        $this->getRequest()->setError('delete', 'No se pudo borrar el registro Seleccioado. Porque tiene Beneficiarios asociados.');
+      return $this->forward('pagtipben', 'list');
+      }
+    }
+    catch (PropelException $e)
+    {
+      $this->getRequest()->setError('delete', 'No se pudo borrar la registro seleccionado. AsegÃºrese de que no tiene ningÃºn tipo de registros asociados.');
+      return $this->forward('pagtipben', 'list');
+    }
+
+    return $this->redirect('pagtipben/list');
+  }
+
 }

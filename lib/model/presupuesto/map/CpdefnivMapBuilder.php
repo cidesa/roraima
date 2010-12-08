@@ -108,6 +108,8 @@ class CpdefnivMapBuilder {
 
 		$tMap->addColumn('BTNELI', 'Btneli', 'boolean', CreoleTypes::BOOLEAN, false, null);
 
+		$tMap->addColumn('CONPAR', 'Conpar', 'double', CreoleTypes::NUMERIC, false, 2);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

@@ -525,6 +525,9 @@
 570:
   cod: 570
   msj: La Unidad Ejecutora Local debe Existir.
+571:
+  cod: 571
+  msj: La Fecha de Anulación del Movimiento no puede ser menor a la fecha del Movimiento.
 3:
   cod: 3
   msj: La contraseña es diferente.
@@ -1554,7 +1557,7 @@
   msj: El Monto a Asignar no puede ser menor al monto ejecutado.
 1351:
   cod: 1351
-  msj: Solo puede grabar la asignación con monto igual a cero.
+  msj: Solo puede grabar la asignación con monto igual a cero, debido a que la Etapa de Definición esta Cerrada.
 1352:
   cod: 1352
   msj: El Codigo introducido no cumple con el Formato Presupuestario.

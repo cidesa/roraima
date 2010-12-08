@@ -378,6 +378,9 @@ propel:
     btneli:
       type: BOOLEAN
       default: true
+    conpar:        #Consecutivo de partidas genericas
+      type: NUMERIC
+      size: 2
     id:
       type: INTEGER
       required: true
@@ -1119,6 +1122,15 @@ propel:
     stapre:
       type: VARCHAR
       size: 1
+    staniv4:
+      type: VARCHAR
+      size: 1
+    staniv5:
+      type: VARCHAR
+      size: 1
+    staniv6:
+      type: VARCHAR
+      size: 1
     portra:
       type: NUMERIC
       size: 14
@@ -1288,24 +1300,51 @@ propel:
     stacon:
       type: VARCHAR
       size: 1
+    stagob:
+      type: VARCHAR
+      size: 1
+    stapre:
+      type: VARCHAR
+      size: 1
+    staniv4:
+      type: VARCHAR
+      size: 1
+    staniv5:
+      type: VARCHAR
+      size: 1
+    staniv6:
+      type: VARCHAR
+      size: 1
+    fecpre:
+      type: DATE
+    despre:
+      type: VARCHAR
+      size: 250
     feccon:
       type: DATE
     descon:
       type: VARCHAR
       size: 250
-    stagob:
-      type: VARCHAR
-      size: 1
     fecgob:
       type: DATE
     desgob:
       type: VARCHAR
       size: 250
-    stapre:
-      type: VARCHAR
-      size: 1
-    fecpre:
+    fecniv4:
       type: DATE
+    desniv4:
+      type: VARCHAR
+      size: 250
+    fecniv5:
+      type: DATE
+    desniv5:
+      type: VARCHAR
+      size: 250
+    fecniv6:
+      type: DATE
+    desniv6:
+      type: VARCHAR
+      size: 250
     id:
       type: INTEGER
       required: true
@@ -1790,4 +1829,28 @@ propel:
       primaryKey: true
       autoIncrement: true
       description: Identificador Único del registro
-
+  cpcontra:
+    codparma:
+      type: VARCHAR
+      size: 16
+      required: true
+    codparde:
+      type: VARCHAR
+      size: 16
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  prepartidas:
+    _attributes:
+      readOnly: true
+      skipSql: true
+    codpar:
+      type: VARCHAR
+      size: 16
+    nompar:
+      type: VARCHAR
+      size: 500

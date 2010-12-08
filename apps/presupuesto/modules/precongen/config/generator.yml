@@ -16,12 +16,13 @@ generator:
       coraju:    {name: Ajuste}
       btnanu:    {name: Anular}
       btneli:    {name: Eliminar}
+      conpar:    {name: Nivel de Partidas}
 
     edit:
       title: Configuracion Generales
       display:
         Correlativos:  [coraep, corprc, corcom, corcau, corpag, corsoltra, cortrasla, corsoladidis, coradidis, coraju]
-        Generales:  [btnanu, btneli]
+        Generales:  [btnanu, btneli, _conpar]
 
       actions:
         _save:        ~
