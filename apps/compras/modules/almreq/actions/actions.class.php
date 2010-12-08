@@ -172,7 +172,7 @@ class almreqActions extends autoalmreqActions
     $cajtexcom=$this->getRequestParameter('cajtexcom');
     if ($this->getRequestParameter('ajax')=='1')
     {
-      $dato=BnubibiePeer::getDesubicacion($this->getRequestParameter('codigo'));
+      $dato=BnubicaPeer::getDesubi($this->getRequestParameter('codigo'));
       $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
     }
     else  if ($this->getRequestParameter('ajax')=='2')
@@ -373,8 +373,8 @@ class almreqActions extends autoalmreqActions
     $this->longmasart=strlen($this->mascaraarticulo);
     $this->formatocategoria = Herramientas::getObtener_FormatoCategoria();
     $this->longcat=strlen($this->formatocategoria);
-    $this->forubi = Herramientas::ObtenerFormato('Bndefins','forubi');
-    $this->lonubi= Herramientas::ObtenerFormato('Bndefins','lonubi');
+    $this->forubi = Herramientas::ObtenerFormato('Opdefemp','Forubi');//Herramientas::ObtenerFormato('Bndefins','forubi');
+    $this->lonubi= strlen($this->forubi);//Herramientas::ObtenerFormato('Bndefins','lonubi');
     $this->autorizareq= Herramientas::ObtenerFormato('Cadefart','reqreqapr');
     $varemp = $this->getUser()->getAttribute('configemp');
     $this->numdesh="";

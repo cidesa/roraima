@@ -23,7 +23,7 @@ class Careqart extends BaseCareqart
 
 	public function getDesubi()
 	{
-		return  Herramientas::getX('codubi','bnubibie','desubi',self::getCodcatreq());
+		return  Herramientas::getX('codubi','bnubica','desubi',self::getCodcatreq());
 	}
 
   public function getDescen()
