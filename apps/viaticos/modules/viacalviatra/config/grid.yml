@@ -31,7 +31,7 @@ opciones:                  # Opciones generales
   tipo:                    t
   nombrecampo:             numdia
   esgrabable:              true
-  html:                    [" size=10 onBlur='ValidarMontoGridv2(this); Calculartotal();'"]
+  html:                    [" size=10 "]
 5:       # Columna 5
   titulo:                  Monto Diario a Pagar
   tipo:                    m
