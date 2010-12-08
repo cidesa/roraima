@@ -556,7 +556,7 @@ public static function PagoDoble()
 
   public static function ListaModulos()
   {
-    return array('cont' => 'Contabilidad','cp' => 'Presupuesto','ci' => 'Presupuesto Ingresos','op' => 'Tesoreria','ts' => 'Bancos','ca' => 'Compras y Almacén');
+    return array('cont' => 'Contabilidad','cp' => 'Presupuesto','ci' => 'Presupuesto Ingresos','op' => 'Tesoreria','ts' => 'Bancos','ca' => 'Compras y Almacén', 'for' => 'Formulacion de Presupuesto');
   }
 
   public static function TipoDocumento()   //Hacienda
