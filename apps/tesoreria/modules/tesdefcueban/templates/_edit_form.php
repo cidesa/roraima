@@ -298,7 +298,7 @@
 
     <br>
 
-    <table>
+   <table>
      <tr>
      <th>
       <?php echo label_for('tsdefban[tipren]', __($labels['tsdefban{tipren}']), 'class="required" Style="width:100px"') ?>
@@ -331,6 +331,23 @@
  'size' => 60,
   'control_name' => 'tsdefban[destipren]',
 )); echo $value ? $value : '&nbsp;' ?>
+    
+      <br>
+      <br>
+          <?php echo label_for('tsdefban[nomrep]', __($labels['tsdefban{nomrep}']), 'class="required" Style="width:100px"') ?>
+  <div class="content<?php if ($sf_request->hasError('tsdefban{nomrep}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('tsdefban{nomrep}')): ?>
+    <?php echo form_error('tsdefban{nomrep}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($tsdefban, 'getNomrep', array (
+  'size' => 30,
+   'maxlength' => 50,
+  'control_name' => 'tsdefban[nomrep]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+      <br><br>
+
 </div>
 </fieldset>
   </th>

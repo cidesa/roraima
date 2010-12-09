@@ -565,6 +565,9 @@ propel:
       type: NUMERIC
       size: 20
       scale: 2
+    nomrep:
+      type: VARCHAR
+      size: 50
     id:
       type: INTEGER
       required: true

@@ -467,6 +467,10 @@ $this->Bitacora('Guardo');
     {
       $this->tsdefban->setSalmin($tsdefban['salmin']);
   }
+    if (isset($tsdefban['nomrep']))
+    {
+      $this->tsdefban->setNomrep($tsdefban['nomrep']);
+    }
   }
    public function setVars()
   {

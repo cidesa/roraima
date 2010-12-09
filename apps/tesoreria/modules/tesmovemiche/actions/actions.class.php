@@ -324,7 +324,7 @@ class tesmovemicheActions extends autotesmovemicheActions
 
       else if ($this->getRequestParameter('ajax')=='3')//NRO CUENTA BANCARIA
       {
-      	$javascript="";
+      	$javascript=""; $nomrep="";
       	$bloqueado=$this->getRequestParameter('bloq');
           if (trim($this->getRequestParameter('codigo'))!='')
           {
@@ -342,6 +342,7 @@ class tesmovemicheActions extends autotesmovemicheActions
                      if ($bloqueado=="")
                      {
                       $dato=TsdefbanPeer::getNomcue($this->getRequestParameter('codigo'));
+                      $nomrep=H::getX_vacio('NUMCUE', 'Tsdefban', 'Nomrep', $this->getRequestParameter('codigo'));
 		              $numche=TsdefbanPeer::getNumche($this->getRequestParameter('codigo'));
 		              $numche=str_pad($numche,8,"0",STR_PAD_LEFT);
 		              $c = new Criteria();
@@ -363,6 +364,7 @@ class tesmovemicheActions extends autotesmovemicheActions
                         TsbloqbanPeer::doDelete($t1);
 
                         $dato=TsdefbanPeer::getNomcue($this->getRequestParameter('codigo'));
+                        $nomrep=H::getX_vacio('NUMCUE', 'Tsdefban', 'Nomrep', $this->getRequestParameter('codigo'));
 		                $numche=TsdefbanPeer::getNumche($this->getRequestParameter('codigo'));
 		                $numche=str_pad($numche,8,"0",STR_PAD_LEFT);
 		                $c = new Criteria();
@@ -389,6 +391,7 @@ class tesmovemicheActions extends autotesmovemicheActions
                   	else
                   	{
                   		$dato=TsdefbanPeer::getNomcue($this->getRequestParameter('codigo'));
+                                $nomrep=H::getX_vacio('NUMCUE', 'Tsdefban', 'Nomrep', $this->getRequestParameter('codigo'));
 		                $numche=TsdefbanPeer::getNumche($this->getRequestParameter('codigo'));
 		                $numche=str_pad($numche,8,"0",STR_PAD_LEFT);
 		                $c = new Criteria();
@@ -402,6 +405,7 @@ class tesmovemicheActions extends autotesmovemicheActions
               }else
               {
 	              $dato=TsdefbanPeer::getNomcue($this->getRequestParameter('codigo'));
+                      $nomrep=H::getX_vacio('NUMCUE', 'Tsdefban', 'Nomrep', $this->getRequestParameter('codigo'));
 	              $numche=TsdefbanPeer::getNumche($this->getRequestParameter('codigo'));
 	              $numche=str_pad($numche,8,"0",STR_PAD_LEFT);
 	              $c = new Criteria();
@@ -414,6 +418,7 @@ class tesmovemicheActions extends autotesmovemicheActions
           	else
           	{
           	  $dato=TsdefbanPeer::getNomcue($this->getRequestParameter('codigo'));
+                  $nomrep=H::getX_vacio('NUMCUE', 'Tsdefban', 'Nomrep', $this->getRequestParameter('codigo'));
               $numche=TsdefbanPeer::getNumche($this->getRequestParameter('codigo'));
               $numche=str_pad($numche,8,"0",STR_PAD_LEFT);
               $c = new Criteria();
@@ -441,7 +446,7 @@ class tesmovemicheActions extends autotesmovemicheActions
 
 
 
-              $output = '[["'.$cajtexmos.'","'.$dato.'",""],["tscheemi_numche","'.$numche.'",""],["tscheemi_bloqueado","'.$bloqueado.'",""],["javascript","'.$javascript.'",""]]';
+              $output = '[["'.$cajtexmos.'","'.$dato.'",""],["tscheemi_numche","'.$numche.'",""],["tscheemi_bloqueado","'.$bloqueado.'",""],["javascript","'.$javascript.'",""],["tscheemi_nomrep","'.$nomrep.'",""]]';
               $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
               return sfView::HEADER_ONLY;
           }//if ($this->getRequestParameter('codigo')!='')

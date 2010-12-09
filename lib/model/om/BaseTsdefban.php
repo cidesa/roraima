@@ -149,6 +149,10 @@ abstract class BaseTsdefban extends BaseObject  implements Persistent {
 
 
 	
+	protected $nomrep;
+
+
+	
 	protected $id;
 
 	
@@ -513,6 +517,13 @@ abstract class BaseTsdefban extends BaseObject  implements Persistent {
 
     if($val) return number_format($this->salmin,2,',','.');
     else return $this->salmin;
+
+  }
+  
+  public function getNomrep()
+  {
+
+    return trim($this->nomrep);
 
   }
   
@@ -916,6 +927,16 @@ abstract class BaseTsdefban extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setNomrep($v)
+	{
+
+    if ($this->nomrep !== $v) {
+        $this->nomrep = $v;
+        $this->modifiedColumns[] = TsdefbanPeer::NOMREP;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -1000,7 +1021,9 @@ abstract class BaseTsdefban extends BaseObject  implements Persistent {
 
       $this->salmin = $rs->getFloat($startcol + 34);
 
-      $this->id = $rs->getInt($startcol + 35);
+      $this->nomrep = $rs->getString($startcol + 35);
+
+      $this->id = $rs->getInt($startcol + 36);
 
       $this->resetModified();
 
@@ -1008,7 +1031,7 @@ abstract class BaseTsdefban extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 36; 
+            return $startcol + 37; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Tsdefban object", $e);
     }
@@ -1339,6 +1362,9 @@ abstract class BaseTsdefban extends BaseObject  implements Persistent {
 				return $this->getSalmin();
 				break;
 			case 35:
+				return $this->getNomrep();
+				break;
+			case 36:
 				return $this->getId();
 				break;
 			default:
@@ -1386,7 +1412,8 @@ abstract class BaseTsdefban extends BaseObject  implements Persistent {
 			$keys[32] => $this->getCantdig(),
 			$keys[33] => $this->getEndosable(),
 			$keys[34] => $this->getSalmin(),
-			$keys[35] => $this->getId(),
+			$keys[35] => $this->getNomrep(),
+			$keys[36] => $this->getId(),
 		);
 		return $result;
 	}
@@ -1508,6 +1535,9 @@ abstract class BaseTsdefban extends BaseObject  implements Persistent {
 				$this->setSalmin($value);
 				break;
 			case 35:
+				$this->setNomrep($value);
+				break;
+			case 36:
 				$this->setId($value);
 				break;
 		} 	}
@@ -1552,7 +1582,8 @@ abstract class BaseTsdefban extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[32], $arr)) $this->setCantdig($arr[$keys[32]]);
 		if (array_key_exists($keys[33], $arr)) $this->setEndosable($arr[$keys[33]]);
 		if (array_key_exists($keys[34], $arr)) $this->setSalmin($arr[$keys[34]]);
-		if (array_key_exists($keys[35], $arr)) $this->setId($arr[$keys[35]]);
+		if (array_key_exists($keys[35], $arr)) $this->setNomrep($arr[$keys[35]]);
+		if (array_key_exists($keys[36], $arr)) $this->setId($arr[$keys[36]]);
 	}
 
 	
@@ -1595,6 +1626,7 @@ abstract class BaseTsdefban extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(TsdefbanPeer::CANTDIG)) $criteria->add(TsdefbanPeer::CANTDIG, $this->cantdig);
 		if ($this->isColumnModified(TsdefbanPeer::ENDOSABLE)) $criteria->add(TsdefbanPeer::ENDOSABLE, $this->endosable);
 		if ($this->isColumnModified(TsdefbanPeer::SALMIN)) $criteria->add(TsdefbanPeer::SALMIN, $this->salmin);
+		if ($this->isColumnModified(TsdefbanPeer::NOMREP)) $criteria->add(TsdefbanPeer::NOMREP, $this->nomrep);
 		if ($this->isColumnModified(TsdefbanPeer::ID)) $criteria->add(TsdefbanPeer::ID, $this->id);
 
 		return $criteria;
@@ -1695,6 +1727,8 @@ abstract class BaseTsdefban extends BaseObject  implements Persistent {
 		$copyObj->setEndosable($this->endosable);
 
 		$copyObj->setSalmin($this->salmin);
+
+		$copyObj->setNomrep($this->nomrep);
 
 
 		if ($deepCopy) {

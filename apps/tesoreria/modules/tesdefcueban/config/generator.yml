@@ -35,6 +35,7 @@ generator:
       destipren:  { name: Tipo de Rendimiento}
       endosable:  { name: Endosable}
       salmin:  { name: Saldo Mínimo}
+      nomrep:  { name: Nombre del Reporte PreImpreso}
     list:
       title:         Definición de Bancos
       display:       [=numcue, nomcue, tipcue, codcta, fecreg, fecven]
@@ -46,7 +47,7 @@ generator:
         _delete:      ~
     edit:
       title:         Edición de Bancos
-      display:       [numcue, nomcue, tipcue, destip, codcta, fecreg, fecven, fecper, fecape, renaut, porint, tipint, usocue, numche, antban, debban, creban, antlib, deblib, crelib, valche, concil, plazo, tipren, destipren, cantdig, saltotlib, saltotban, deblibdis, crelibdis, debbandis, crebandis, endosable, salmin]
+      display:       [numcue, nomcue, tipcue, destip, codcta, fecreg, fecven, fecper, fecape, renaut, porint, tipint, usocue, numche, antban, debban, creban, antlib, deblib, crelib, valche, concil, plazo, tipren, destipren, cantdig, saltotlib, saltotban, deblibdis, crelibdis, debbandis, crebandis, endosable, salmin, nomrep]
       actions:
         _list:        ~
         _save:        ~
