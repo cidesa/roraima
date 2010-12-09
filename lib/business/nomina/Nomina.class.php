@@ -280,6 +280,11 @@ class Nomina {
         {
             $x[$j]->setFecing(date('Y-m-d'));
         }
+        if ($x[$j]->getDocgua() == "1") {
+          $x[$j]->setDocgua('S');
+        } else {
+          $x[$j]->setDocgua('N');
+        }
         $x[$j]->save();
       }
       $j++;

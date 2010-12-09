@@ -45,6 +45,14 @@ abstract class BaseNpfalper extends BaseObject  implements Persistent {
 
 
 	
+	protected $hordes;
+
+
+	
+	protected $horhas;
+
+
+	
 	protected $id;
 
 	
@@ -146,6 +154,20 @@ abstract class BaseNpfalper extends BaseObject  implements Persistent {
   {
 
     return trim($this->numctr);
+
+  }
+  
+  public function getHordes()
+  {
+
+    return trim($this->hordes);
+
+  }
+  
+  public function getHorhas()
+  {
+
+    return trim($this->horhas);
 
   }
   
@@ -270,6 +292,26 @@ abstract class BaseNpfalper extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setHordes($v)
+	{
+
+    if ($this->hordes !== $v) {
+        $this->hordes = $v;
+        $this->modifiedColumns[] = NpfalperPeer::HORDES;
+      }
+  
+	} 
+	
+	public function setHorhas($v)
+	{
+
+    if ($this->horhas !== $v) {
+        $this->horhas = $v;
+        $this->modifiedColumns[] = NpfalperPeer::HORHAS;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -302,7 +344,11 @@ abstract class BaseNpfalper extends BaseObject  implements Persistent {
 
       $this->numctr = $rs->getString($startcol + 8);
 
-      $this->id = $rs->getInt($startcol + 9);
+      $this->hordes = $rs->getString($startcol + 9);
+
+      $this->horhas = $rs->getString($startcol + 10);
+
+      $this->id = $rs->getInt($startcol + 11);
 
       $this->resetModified();
 
@@ -310,7 +356,7 @@ abstract class BaseNpfalper extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 10; 
+            return $startcol + 12; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Npfalper object", $e);
     }
@@ -485,6 +531,12 @@ abstract class BaseNpfalper extends BaseObject  implements Persistent {
 				return $this->getNumctr();
 				break;
 			case 9:
+				return $this->getHordes();
+				break;
+			case 10:
+				return $this->getHorhas();
+				break;
+			case 11:
 				return $this->getId();
 				break;
 			default:
@@ -506,7 +558,9 @@ abstract class BaseNpfalper extends BaseObject  implements Persistent {
 			$keys[6] => $this->getFechas(),
 			$keys[7] => $this->getNrohoras(),
 			$keys[8] => $this->getNumctr(),
-			$keys[9] => $this->getId(),
+			$keys[9] => $this->getHordes(),
+			$keys[10] => $this->getHorhas(),
+			$keys[11] => $this->getId(),
 		);
 		return $result;
 	}
@@ -550,6 +604,12 @@ abstract class BaseNpfalper extends BaseObject  implements Persistent {
 				$this->setNumctr($value);
 				break;
 			case 9:
+				$this->setHordes($value);
+				break;
+			case 10:
+				$this->setHorhas($value);
+				break;
+			case 11:
 				$this->setId($value);
 				break;
 		} 	}
@@ -568,7 +628,9 @@ abstract class BaseNpfalper extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[6], $arr)) $this->setFechas($arr[$keys[6]]);
 		if (array_key_exists($keys[7], $arr)) $this->setNrohoras($arr[$keys[7]]);
 		if (array_key_exists($keys[8], $arr)) $this->setNumctr($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setId($arr[$keys[9]]);
+		if (array_key_exists($keys[9], $arr)) $this->setHordes($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setHorhas($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setId($arr[$keys[11]]);
 	}
 
 	
@@ -585,6 +647,8 @@ abstract class BaseNpfalper extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(NpfalperPeer::FECHAS)) $criteria->add(NpfalperPeer::FECHAS, $this->fechas);
 		if ($this->isColumnModified(NpfalperPeer::NROHORAS)) $criteria->add(NpfalperPeer::NROHORAS, $this->nrohoras);
 		if ($this->isColumnModified(NpfalperPeer::NUMCTR)) $criteria->add(NpfalperPeer::NUMCTR, $this->numctr);
+		if ($this->isColumnModified(NpfalperPeer::HORDES)) $criteria->add(NpfalperPeer::HORDES, $this->hordes);
+		if ($this->isColumnModified(NpfalperPeer::HORHAS)) $criteria->add(NpfalperPeer::HORHAS, $this->horhas);
 		if ($this->isColumnModified(NpfalperPeer::ID)) $criteria->add(NpfalperPeer::ID, $this->id);
 
 		return $criteria;
@@ -633,6 +697,10 @@ abstract class BaseNpfalper extends BaseObject  implements Persistent {
 		$copyObj->setNrohoras($this->nrohoras);
 
 		$copyObj->setNumctr($this->numctr);
+
+		$copyObj->setHordes($this->hordes);
+
+		$copyObj->setHorhas($this->horhas);
 
 
 		$copyObj->setNew(true);

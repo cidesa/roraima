@@ -2761,6 +2761,12 @@ propel:
     numctr:
       type: VARCHAR
       size: 8
+    hordes:
+      type: VARCHAR
+      size: 10
+    horhas:
+      type: VARCHAR
+      size: 10
     id:
       type: INTEGER
       required: true
@@ -4191,6 +4197,9 @@ propel:
       size: 1
     fecing:
       type: DATE
+    docgua:
+      type: VARCHAR
+      size: 1
     id:
       type: INTEGER
       required: true

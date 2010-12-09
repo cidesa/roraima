@@ -13,7 +13,7 @@ abstract class BaseNpfalperPeer {
 	const CLASS_DEFAULT = 'lib.model.nomina.Npfalper';
 
 	
-	const NUM_COLUMNS = 10;
+	const NUM_COLUMNS = 12;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -47,6 +47,12 @@ abstract class BaseNpfalperPeer {
 	const NUMCTR = 'npfalper.NUMCTR';
 
 	
+	const HORDES = 'npfalper.HORDES';
+
+	
+	const HORHAS = 'npfalper.HORHAS';
+
+	
 	const ID = 'npfalper.ID';
 
 	
@@ -55,18 +61,18 @@ abstract class BaseNpfalperPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codemp', 'Codmot', 'Codnom', 'Nrodia', 'Observ', 'Fecdes', 'Fechas', 'Nrohoras', 'Numctr', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (NpfalperPeer::CODEMP, NpfalperPeer::CODMOT, NpfalperPeer::CODNOM, NpfalperPeer::NRODIA, NpfalperPeer::OBSERV, NpfalperPeer::FECDES, NpfalperPeer::FECHAS, NpfalperPeer::NROHORAS, NpfalperPeer::NUMCTR, NpfalperPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codemp', 'codmot', 'codnom', 'nrodia', 'observ', 'fecdes', 'fechas', 'nrohoras', 'numctr', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
+		BasePeer::TYPE_PHPNAME => array ('Codemp', 'Codmot', 'Codnom', 'Nrodia', 'Observ', 'Fecdes', 'Fechas', 'Nrohoras', 'Numctr', 'Hordes', 'Horhas', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (NpfalperPeer::CODEMP, NpfalperPeer::CODMOT, NpfalperPeer::CODNOM, NpfalperPeer::NRODIA, NpfalperPeer::OBSERV, NpfalperPeer::FECDES, NpfalperPeer::FECHAS, NpfalperPeer::NROHORAS, NpfalperPeer::NUMCTR, NpfalperPeer::HORDES, NpfalperPeer::HORHAS, NpfalperPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codemp', 'codmot', 'codnom', 'nrodia', 'observ', 'fecdes', 'fechas', 'nrohoras', 'numctr', 'hordes', 'horhas', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codemp' => 0, 'Codmot' => 1, 'Codnom' => 2, 'Nrodia' => 3, 'Observ' => 4, 'Fecdes' => 5, 'Fechas' => 6, 'Nrohoras' => 7, 'Numctr' => 8, 'Id' => 9, ),
-		BasePeer::TYPE_COLNAME => array (NpfalperPeer::CODEMP => 0, NpfalperPeer::CODMOT => 1, NpfalperPeer::CODNOM => 2, NpfalperPeer::NRODIA => 3, NpfalperPeer::OBSERV => 4, NpfalperPeer::FECDES => 5, NpfalperPeer::FECHAS => 6, NpfalperPeer::NROHORAS => 7, NpfalperPeer::NUMCTR => 8, NpfalperPeer::ID => 9, ),
-		BasePeer::TYPE_FIELDNAME => array ('codemp' => 0, 'codmot' => 1, 'codnom' => 2, 'nrodia' => 3, 'observ' => 4, 'fecdes' => 5, 'fechas' => 6, 'nrohoras' => 7, 'numctr' => 8, 'id' => 9, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
+		BasePeer::TYPE_PHPNAME => array ('Codemp' => 0, 'Codmot' => 1, 'Codnom' => 2, 'Nrodia' => 3, 'Observ' => 4, 'Fecdes' => 5, 'Fechas' => 6, 'Nrohoras' => 7, 'Numctr' => 8, 'Hordes' => 9, 'Horhas' => 10, 'Id' => 11, ),
+		BasePeer::TYPE_COLNAME => array (NpfalperPeer::CODEMP => 0, NpfalperPeer::CODMOT => 1, NpfalperPeer::CODNOM => 2, NpfalperPeer::NRODIA => 3, NpfalperPeer::OBSERV => 4, NpfalperPeer::FECDES => 5, NpfalperPeer::FECHAS => 6, NpfalperPeer::NROHORAS => 7, NpfalperPeer::NUMCTR => 8, NpfalperPeer::HORDES => 9, NpfalperPeer::HORHAS => 10, NpfalperPeer::ID => 11, ),
+		BasePeer::TYPE_FIELDNAME => array ('codemp' => 0, 'codmot' => 1, 'codnom' => 2, 'nrodia' => 3, 'observ' => 4, 'fecdes' => 5, 'fechas' => 6, 'nrohoras' => 7, 'numctr' => 8, 'hordes' => 9, 'horhas' => 10, 'id' => 11, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
 	);
 
 	
@@ -137,6 +143,10 @@ abstract class BaseNpfalperPeer {
 		$criteria->addSelectColumn(NpfalperPeer::NROHORAS);
 
 		$criteria->addSelectColumn(NpfalperPeer::NUMCTR);
+
+		$criteria->addSelectColumn(NpfalperPeer::HORDES);
+
+		$criteria->addSelectColumn(NpfalperPeer::HORHAS);
 
 		$criteria->addSelectColumn(NpfalperPeer::ID);
 

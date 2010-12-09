@@ -52,6 +52,10 @@ class NpfalperMapBuilder {
 
 		$tMap->addColumn('NUMCTR', 'Numctr', 'string', CreoleTypes::VARCHAR, false, 8);
 
+		$tMap->addColumn('HORDES', 'Hordes', 'string', CreoleTypes::VARCHAR, false, 10);
+
+		$tMap->addColumn('HORHAS', 'Horhas', 'string', CreoleTypes::VARCHAR, false, 10);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

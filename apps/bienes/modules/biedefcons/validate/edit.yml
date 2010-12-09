@@ -14,46 +14,46 @@ names:
   bndefcons{codact}:
     required:  Yes
     required_msg: El Código no puede estar en Blanco.
-    validators: ExistValidator
+    #validators: ExistValidator
 
   bndefcons{ctadepcar}:
-    required:  Yes
-    required_msg: El Código no puede estar en Blanco.
+    required:  No
+    #required_msg: El Código no puede estar en Blanco.
     validators: ExistValidatorr
 
   bndefcons{ctadepabo}:
-    required:  Yes
-    required_msg: El Código no puede estar en Blanco.
+    required:  No
+    #required_msg: El Código no puede estar en Blanco.
     validators: ExistValidatorr
     
   bndefcons{ctaajucar}:
-    required:  Yes
-    required_msg: El Código no puede estar en Blanco.
+    required:  No
+    #required_msg: El Código no puede estar en Blanco.
     validators: ExistValidatorr
 
   bndefcons{ctaajuabo}:
-    required:  Yes
-    required_msg: El Código no puede estar en Blanco.
+    required:  No
+    #required_msg: El Código no puede estar en Blanco.
     validators: ExistValidatorr
 
   bndefcons{ctarevcar}:
-    required:  Yes
-    required_msg: El Código no puede estar en Blanco.
+    required:  No
+    #required_msg: El Código no puede estar en Blanco.
     validators: ExistValidatorr
 
   bndefcons{ctarevabo}:
-    required:  Yes
-    required_msg: El Código no puede estar en Blanco.
+    required:  No
+    #required_msg: El Código no puede estar en Blanco.
     validators: ExistValidatorr
 
   bndefcons{ctapercar}:
-    required:  Yes
-    required_msg: El Código no puede estar en Blanco.
+    required:  No
+    #required_msg: El Código no puede estar en Blanco.
     validators: ExistValidatorr
 
   bndefcons{ctaperabo}:
-    required:  Yes
-    required_msg: El Código no puede estar en Blanco.
+    required:  No
+    #required_msg: El Código no puede estar en Blanco.
     validators: ExistValidatorr
 
 

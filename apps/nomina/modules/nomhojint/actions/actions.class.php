@@ -1783,6 +1783,12 @@ $this->Bitacora('Guardo');
     $col22->setVacia(true);
     $col22->setOculta(true);
 
+    $col23 = new Columna('Consignó Doc. Guarderia');
+    $col23->setTipo(Columna::CHECK);
+    $col23->setEsGrabable(true);
+    $col23->setNombreCampo('docgua');
+    $col23->setHTML(' ');
+
     $opciones->addColumna($col1);
     $opciones->addColumna($col2);
     $opciones->addColumna($col3);
@@ -1805,6 +1811,7 @@ $this->Bitacora('Guardo');
     $opciones->addColumna($col20);
     $opciones->addColumna($col21);
     $opciones->addColumna($col22);
+    $opciones->addColumna($col23);
 
 
     $this->obj5 = $opciones->getConfig($per);

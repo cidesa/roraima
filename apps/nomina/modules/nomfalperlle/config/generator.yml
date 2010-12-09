@@ -12,6 +12,9 @@ generator:
       observ:    { name: Observacion}
       fecdes:    { name: Fecha Salida, params: date_format='dd/MM/yyyy'  }
       fechas:    { name: Fecha Llegada, params: date_format='dd/MM/yyyy'  }
+      nrohoras:  { name: N° de Horas}
+      hordes:  { name: Hora Salida}
+      horhas:  { name: Hora Llegada}
 
     list:
       title:          Llegadas y faltas y/o permisos
@@ -23,4 +26,4 @@ generator:
       max_per_page:   5
     edit:
       title:          Llegadas y faltas y/o permisos
-      display:        [codemp, nomemp, codmot, desmotfal, nrodia, observ, fecdes, fechas]
+      display:        [codemp, nomemp, codmot, desmotfal, nrodia, observ, fecdes, fechas, nrohoras, hordes, horhas]
