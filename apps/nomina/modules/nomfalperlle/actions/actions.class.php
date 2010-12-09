@@ -34,6 +34,18 @@ class nomfalperlleActions extends autonomfalperlleActions
     {
       $this->npfalper->setNrodia($npfalper['nrodia']);
     }
+     if (isset($npfalper['nrohoras']))
+    {
+      $this->npfalper->setNrohoras($npfalper['nrohoras']);
+    }
+     if (isset($npfalper['hordes']))
+    {
+      $this->npfalper->setHordes($npfalper['hordes']);
+    }
+     if (isset($npfalper['horhas']))
+    {
+      $this->npfalper->setHorhas($npfalper['horhas']);
+    }
     if (isset($npfalper['observ']))
     {
       $this->npfalper->setObserv($npfalper['observ']);

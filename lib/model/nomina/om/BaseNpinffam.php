@@ -81,6 +81,10 @@ abstract class BaseNpinffam extends BaseObject  implements Persistent {
 
 
 	
+	protected $docgua;
+
+
+	
 	protected $id;
 
 
@@ -248,6 +252,13 @@ abstract class BaseNpinffam extends BaseObject  implements Persistent {
     }
   }
 
+  
+  public function getDocgua()
+  {
+
+    return trim($this->docgua);
+
+  }
   
   public function getId()
   {
@@ -460,6 +471,16 @@ abstract class BaseNpinffam extends BaseObject  implements Persistent {
 
 	} 
 	
+	public function setDocgua($v)
+	{
+
+    if ($this->docgua !== $v) {
+        $this->docgua = $v;
+        $this->modifiedColumns[] = NpinffamPeer::DOCGUA;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -510,7 +531,9 @@ abstract class BaseNpinffam extends BaseObject  implements Persistent {
 
       $this->fecing = $rs->getDate($startcol + 17, null);
 
-      $this->id = $rs->getInt($startcol + 18);
+      $this->docgua = $rs->getString($startcol + 18);
+
+      $this->id = $rs->getInt($startcol + 19);
 
       $this->resetModified();
 
@@ -518,7 +541,7 @@ abstract class BaseNpinffam extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 19; 
+            return $startcol + 20; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Npinffam object", $e);
     }
@@ -720,6 +743,9 @@ abstract class BaseNpinffam extends BaseObject  implements Persistent {
 				return $this->getFecing();
 				break;
 			case 18:
+				return $this->getDocgua();
+				break;
+			case 19:
 				return $this->getId();
 				break;
 			default:
@@ -750,7 +776,8 @@ abstract class BaseNpinffam extends BaseObject  implements Persistent {
 			$keys[15] => $this->getCarben(),
 			$keys[16] => $this->getDissus(),
 			$keys[17] => $this->getFecing(),
-			$keys[18] => $this->getId(),
+			$keys[18] => $this->getDocgua(),
+			$keys[19] => $this->getId(),
 		);
 		return $result;
 	}
@@ -821,6 +848,9 @@ abstract class BaseNpinffam extends BaseObject  implements Persistent {
 				$this->setFecing($value);
 				break;
 			case 18:
+				$this->setDocgua($value);
+				break;
+			case 19:
 				$this->setId($value);
 				break;
 		} 	}
@@ -848,7 +878,8 @@ abstract class BaseNpinffam extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[15], $arr)) $this->setCarben($arr[$keys[15]]);
 		if (array_key_exists($keys[16], $arr)) $this->setDissus($arr[$keys[16]]);
 		if (array_key_exists($keys[17], $arr)) $this->setFecing($arr[$keys[17]]);
-		if (array_key_exists($keys[18], $arr)) $this->setId($arr[$keys[18]]);
+		if (array_key_exists($keys[18], $arr)) $this->setDocgua($arr[$keys[18]]);
+		if (array_key_exists($keys[19], $arr)) $this->setId($arr[$keys[19]]);
 	}
 
 
@@ -874,6 +905,7 @@ abstract class BaseNpinffam extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(NpinffamPeer::CARBEN)) $criteria->add(NpinffamPeer::CARBEN, $this->carben);
 		if ($this->isColumnModified(NpinffamPeer::DISSUS)) $criteria->add(NpinffamPeer::DISSUS, $this->dissus);
 		if ($this->isColumnModified(NpinffamPeer::FECING)) $criteria->add(NpinffamPeer::FECING, $this->fecing);
+		if ($this->isColumnModified(NpinffamPeer::DOCGUA)) $criteria->add(NpinffamPeer::DOCGUA, $this->docgua);
 		if ($this->isColumnModified(NpinffamPeer::ID)) $criteria->add(NpinffamPeer::ID, $this->id);
 
 		return $criteria;
@@ -940,6 +972,8 @@ abstract class BaseNpinffam extends BaseObject  implements Persistent {
 		$copyObj->setDissus($this->dissus);
 
 		$copyObj->setFecing($this->fecing);
+
+		$copyObj->setDocgua($this->docgua);
 
 
 		$copyObj->setNew(true);

@@ -21,6 +21,7 @@ class Npinffam extends BaseNpinffam
         protected $segnom="";
         protected $priape="";
         protected $segape="";
+        protected $docgua=0;
 
  public function hydrate(ResultSet $rs, $startcol = 1)
    {
@@ -29,6 +30,11 @@ class Npinffam extends BaseNpinffam
 	    $this->seghcm='S';
 	  else
 	  	$this->seghcm=0;
+
+           if($this->docgua == 'S' || $this->docgua == 1)
+	    $this->docgua='S';
+	  else
+	    $this->docgua=0;
 
       if (self::getFecNac())
       {

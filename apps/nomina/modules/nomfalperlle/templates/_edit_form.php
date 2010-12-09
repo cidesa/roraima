@@ -113,6 +113,19 @@
   'control_name' => 'npfalper[nrodia]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
+
+    <br>
+      <?php echo label_for('npfalper[nrohoras]', __($labels['npfalper{nrohoras}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('npfalper{nrohoras}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npfalper{nrohoras}')): ?>
+    <?php echo form_error('npfalper{nrohoras}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($npfalper, 'getNrohoras', array (
+  'size' => 7,
+  'control_name' => 'npfalper[nrohoras]',  
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
 </div>
 
 <div class="form-row">
@@ -142,6 +155,18 @@
   'control_name' => 'npfalper[fecdes]',
   'date_format' => 'dd/MM/yyyy',
 )); echo $value ? $value : '&nbsp;' ?>
+  </div>
+
+  <?php echo label_for('npfalper[hordes]', __($labels['npfalper{hordes}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('npfalper{hordes}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npfalper{hordes}')): ?>
+    <?php echo form_error('npfalper{hordes}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($npfalper, 'getHordes', array (
+  'size' => 7,
+  'control_name' => 'npfalper[hordes]',  
+)); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
 
@@ -157,6 +182,17 @@
   'calendar_button_img' => '/sf/sf_admin/images/date.png',
   'control_name' => 'npfalper[fechas]',
   'date_format' => 'dd/MM/yyyy',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+  <?php echo label_for('npfalper[horhas]', __($labels['npfalper{horhas}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('npfalper{horhas}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npfalper{horhas}')): ?>
+    <?php echo form_error('npfalper{horhas}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($npfalper, 'getHorhas', array (
+  'size' => 7,
+  'control_name' => 'npfalper[horhas]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
