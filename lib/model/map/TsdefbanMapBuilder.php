@@ -104,6 +104,8 @@ class TsdefbanMapBuilder {
 
 		$tMap->addColumn('SALMIN', 'Salmin', 'double', CreoleTypes::NUMERIC, false, 20);
 
+		$tMap->addColumn('NOMREP', 'Nomrep', 'string', CreoleTypes::VARCHAR, false, 50);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

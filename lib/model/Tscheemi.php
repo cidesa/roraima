@@ -47,6 +47,7 @@ class Tscheemi extends BaseTscheemi
 	protected $fecord="";
 	protected $filnumordfec="";
         protected $aprmonche="";
+        protected $nomrep="";
 
 
     public function getNomben()
@@ -230,5 +231,15 @@ class Tscheemi extends BaseTscheemi
 
         return $montoche;
     }
+
+        public function getNomrep()
+	{
+		return Herramientas::getX_vacio('NUMCUE','Tsdefban','Nomrep',$this->getNumcue());
+	}
+
+  public function setNomrep()
+  {
+  	return $this->nomrep;
+  }
 
 }
