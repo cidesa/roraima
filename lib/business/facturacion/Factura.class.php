@@ -2219,6 +2219,7 @@ class Factura {
     $z=$grid4[0];
     $j=0;
     $acumrec=0;
+    $valrec="";
     while ($j<count($z))
     {
       if ($z[$j]->getCodrgo()!="")
@@ -2242,8 +2243,10 @@ class Factura {
       $fafaclib->setVenexec($monto);
       $fafaclib->setBasimp($acum);
       $fafaclib->setCrefis($fafactur->getMondesc());
+      if ($valrec!="") {
       $fafaclib->setPoriva(H::getX('Codrgo','Farecarg','Monrgo',$valrec));
       $fafaclib->setMoniva($acumrec);      
+      }
       $fafaclib->save();
   }
 
