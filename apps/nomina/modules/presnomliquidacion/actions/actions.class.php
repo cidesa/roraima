@@ -67,7 +67,31 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 	if(!$estaliquidado)
 	{
     	$sql="
-		select 1 as orden,
+                        SELECT A.* FROM
+                        (select 0 as orden,
+                        0 as DIAS,
+                        A.CAPEMP AS MONTO,
+                        'PRESTACIONES DE ANTIGUEDAD RÉGIMEN ANTIGUO'::TEXT AS DESCRIPCION,
+                        B.CODPAR AS PARTIDA
+                        From NPIMPPRESOCANT A,(SELECT * FROM NPDEFPRELIQ WHERE CODCON='000' AND CODNOM='$codnom' ORDER BY PERHAS DESC LIMIT 1) B
+                        where
+                        A.codemp='$codemp'
+                        ORDER BY FECFIN DESC LIMIT 1) A
+
+                        UNION ALL
+                        SELECT A.* FROM
+                        (select 0 as orden,
+                        0 as DIAS,
+                        (A.ANTACUM-A.CAPEMP)+A.INTACUM AS MONTO,
+                        'INTERESES SOBRE PRESTACIONES DE ANTIGUEDAD RÉGIMEN ANTIGUO'::TEXT AS DESCRIPCION,
+                        B.CODPAR AS PARTIDA
+                        From NPIMPPRESOCANT A,(SELECT * FROM NPDEFPRELIQ WHERE CODCON='001' AND CODNOM='$codnom' ORDER BY PERHAS DESC LIMIT 1) B
+                        where
+                        A.codemp='$codemp'
+                        ORDER BY FECFIN DESC LIMIT 1) A
+
+		        UNION ALL
+                        select 1 as orden,
 			SUM(A.DIAART108) as DIAS,
 			SUM(A.VALART108) AS MONTO,
 			(case when B.PERDES=B.PERDES then 'PRESTACIONES DE ANTIGUEDAD ' else 'PRESTACIONES DE ANTIGUEDAD '||B.PERDES||' - '||B.PERHAS end ) AS DESCRIPCION,
@@ -250,11 +274,14 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 			SUM(A.MONANT)*-1 AS MONTO,
 			CASE WHEN SUM(A.MONANT)>0 THEN 'ANTICIPO DE PRESTACIONES SOCIALES EN FECHA ' ELSE 'PAGO RETROACTIVO EN FECHA ' END||TO_CHAR(A.FECANT,'DD/MM/YYYY') AS DESCRIPCION,
 			B.CODPAR AS PARTIDA
-			From NpAntPre A,NPDEFPRELIQ B
+			From NpAntPre A,NPDEFPRELIQ B,NPASINOMCONT C,NPTIPCON D
 			WHERE
 			A.CODEMP='$codemp' AND
 			B.CODNOM='$codnom' AND
 			B.CODCON='000' AND
+                        C.CODNOM=B.CODNOM AND
+			D.CODTIPCON=C.CODTIPCON AND
+			A.FECANT>=D.FECINIREG AND
 			TO_CHAR(A.FECANT,'YYYY')>=B.PERDES AND
 			TO_CHAR(A.FECANT,'YYYY')<=B.PERHAS
 			GROUP BY A.FECANT,B.CODPAR
@@ -986,7 +1013,7 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 					$sue311296= 0.00;
 
 				#Sueldo al 30/06/1997
-				$sql =  "select avg(salemp) as sue180697 from (
+				$sql =  "select COALESCE(avg(salemp),0) as sue180697 from (
 							select distinct salemp,fecini from npimppresoc where codemp='$codemp'
 							order by fecini desc limit 12
 							)a";
