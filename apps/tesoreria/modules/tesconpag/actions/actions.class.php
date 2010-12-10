@@ -149,7 +149,8 @@ class tesconpagActions extends autotesconpagActions
   
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -232,7 +233,11 @@ class tesconpagActions extends autotesconpagActions
     $c= new Criteria();
     $c->add(OpordpagPeer::CODCONCEPTO,$clasemodelo->getCodconcepto());
     $reg= OpordpagPeer::doSelectOne($c);
-    if (!$reg) return -1;
+    if (!$reg) 
+    {    
+     $clasemodelo->delete();   
+        return -1;
+    }
     else return 6;
   }
 
