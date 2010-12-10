@@ -15,8 +15,16 @@
 
 <div id="sf_admin_container">
 
-<h1><?php echo __('Edición de Despachos',
-array()) ?></h1>
+<h1><?php
+$eti=H::getConfApp2('etidesp', 'compras', 'almdesp');
+if ($eti!="")
+{
+echo __('Edición de '.$eti,
+array());
+}else {
+echo __('Edición de Despachos',
+array());
+}?></h1>
 
 <div id="sf_admin_header">
 <?php include_partial('almdesp/edit_header', array('cadphart' => $cadphart)) ?>

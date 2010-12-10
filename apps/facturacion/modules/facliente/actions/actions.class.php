@@ -272,6 +272,10 @@ $this->Bitacora('Guardo');
     {
       $this->facliente->setDirpro($facliente['dirpro']);
     }
+    if (isset($facliente['codedo']))
+    {
+      $this->facliente->setCodedo($facliente['codedo']);
+    }
     if (isset($facliente['telpro']))
     {
       $this->facliente->setTelpro($facliente['telpro']);

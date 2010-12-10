@@ -31,6 +31,7 @@ class Cobdocume extends BaseCobdocume
 	protected $codctacli="";
 	protected $totalcomprobantes=0;
     protected $refcomcon="";
+    protected $antdeu="";
 
   public function afterHydrate()
   {
@@ -166,6 +167,22 @@ class Cobdocume extends BaseCobdocume
    public function setMontotalformato($val)
    {
      $this->montotalformato = $val;
-   }    
+   }
+
+   public function getAntdeu()
+    {
+       if (self::getId()) {
+           $fecha=date('d/m/Y',strtotime(self::getFecven()));
+           $cad=Nomina::obtenerAntiguedad($fecha);
+       }
+       else
+           $cad="0 AÃ±os, 0 Meses, 0 DÃ­as";
+    return $cad;
+    }
+
+  public function setAntdeu()
+  {
+  	return $this->antdeu;
+  }
 
 }

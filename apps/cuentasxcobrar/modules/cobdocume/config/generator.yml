@@ -22,6 +22,7 @@ generator:
       comprobante: { name: . }
       desanu: { name: Descripción}
       fecanu: { name: Fecha de Anulación}
+      antdeu: { name: Antiguedad de la Deuda, params: style="border:none" size=50}
 
     list:
       title: Cobranzas-Documentos
@@ -40,7 +41,7 @@ generator:
       title:  Cobranzas-Documentos
       display:
         "Datos del Cliente": [_codcli, rifpro]
-        "Datos del Documento": [refdoc, _fatipmov_id, fecemi, fecven, desdoc]
+        "Datos del Documento": [refdoc, _fatipmov_id, fecemi, fecven, antdeu, desdoc]
         "Saldos": [mondoc, recdoc, dscdoc, abodoc, saldoc, _comprobante ]
         "Recargos": [ _grid_recargos ]
         "Descuentos": [ _grid_descuentos ]

@@ -67,6 +67,7 @@ generator:
       fatipcte_id:        { name : Tipo de Cliente}
       tipper:             { name : Tipo de Persona}
       escontrib:             { name : Es Contribuyente}
+      codedo:             { name : Estado}
 
     list:
       title:          Registro de Cliente
@@ -82,7 +83,7 @@ generator:
 
     edit:
       title:          Edición de Cliente
-      display:        [codpro, nompro, rifpro, fatipcte_id, nitpro, dirpro, telpro, nrocei, email, pagweb, codram, nomram, limcre, codcta, descta, codord, desctacodord, codpercon, desctacodpercon, fecinscir, faxpro, numinscir, regmer, tomreg, capsus, fecreg, folreg, cappag, fecven, rifpercon, nompercon, dirpercon, telpercon, corpercon, rifrepleg, nomrepleg, dirrepleg, telrepleg, correpleg, codtiprec, destiprec, nacpro, tipo, codctasec, desctacodctasec, codordadi, desctacodordadi, codperconadi, desctacodperconadi, codordmercon, desctacodordmercon, codpermercon, desctacodpermercon, codordcontra, desctacodordcontra, codpercontra, desctacodpercontra, recargo, codtipemp, destip, escontrib]
+      display:        [codpro, nompro, rifpro, fatipcte_id, nitpro, dirpro, telpro, nrocei, email, pagweb, codram, nomram, limcre, codcta, descta, codord, desctacodord, codpercon, desctacodpercon, fecinscir, faxpro, numinscir, regmer, tomreg, capsus, fecreg, folreg, cappag, fecven, rifpercon, nompercon, dirpercon, telpercon, corpercon, rifrepleg, nomrepleg, dirrepleg, telrepleg, correpleg, codtiprec, destiprec, nacpro, tipo, codctasec, desctacodctasec, codordadi, desctacodordadi, codperconadi, desctacodperconadi, codordmercon, desctacodordmercon, codpermercon, desctacodpermercon, codordcontra, desctacodordcontra, codpercontra, desctacodpercontra, recargo, codtipemp, destip, escontrib, codedo]
       fields:
         recargo:    { type: admin_double_list, params: through_class=Farecpro}
       actions:
