@@ -178,6 +178,15 @@
   'control_name' => 'facliente[dirpro]',
 )); echo $value ? $value : '&nbsp;' ?></div>
 
+ <br>
+  <?php echo label_for('facliente[codedo]', __($labels['facliente{codedo}']), 'class="required" ') ?>
+<div
+  class="content<?php if ($sf_request->hasError('facliente{codedo}')): ?> form-error<?php endif; ?>">
+<?php if ($sf_request->hasError('facliente{codedo}')): ?> <?php echo form_error('facliente{codedo}', array('class' => 'form-error-msg')) ?>
+<?php endif; ?>
+ <?php echo select_tag('facliente[codedo]', options_for_select(OcestadoPeer::getEstados(),$facliente->getCodedo(),'include_custom= Selecciones uno...'),array(
+  )) ?></div>
+
 <br>
 <table>
 <tr>

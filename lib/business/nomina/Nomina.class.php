@@ -2504,7 +2504,7 @@ class Nomina {
 
         $valor = 0;
         $fecha = date('d/m/Y',strtotime($fecnom));
-        $criterio = "select sum(coalesce(a.diasbonovac,0)-coalesce(a.diasbonovacpag,0)) as valor
+        $criterio = "select sum(coalesce(a.diasbonovacpag,0)) as valor
 				from npvacsalidas_det a, npvacsalidas b
 				where
 				b.fecpagbonvac=to_date('$fecha','dd/mm/yyyy')
@@ -3833,7 +3833,7 @@ class Nomina {
 	          }
 		  }else
 		  {
-		  	if ($campo == "SC") {
+		  	if ($campo = "SC") {
 	            $sql = "Select A.* from NPCOMOCP A,NPCARGOS B WHERE B.CODCAR='" . $tabla[0]["codcar"] . "' AND A.CODTIPCAR=B.CODTIP AND A.GRACAR=B.GRAOCP AND A.PASCAR=coalesce('".$tabla[0]["pascar"]."','001') AND FECDES<=TO_DATE('" . $movconvar . "','DD/MM/YYYY') ORDER BY FECDES DESC";
 	          } else {
 	            $sql = "Select ABS(SUM(case when a.pascar=coalesce('".$tabla[0]["pascar"]."','001') then a.suecar else a.suecar*-1)) as suecar from NPCOMOCP A,NPCARGOS B WHERE B.CODCAR='" . $tabla[0]["codcar"] . "' AND A.CODTIPCAR=B.CODTIP AND A.GRACAR=B.GRAOCP AND (A.PASCAR=coalesce('".$tabla[0]["pascar"]."','001') ) AND FECDES<=TO_DATE('" . $movconvar . "','DD/MM/YYYY') ORDER BY FECDES DESC";
@@ -4865,7 +4865,7 @@ class Nomina {
 
         $valor = 0;
         $fecha = $hasta;
-        $criterio = "select sum(coalesce(a.diasbonovac,0)-coalesce(a.diasbonovacpag,0)) as valor
+        $criterio = "select sum(coalesce(a.diasbonovacpag,0)) as valor
 				from npvacsalidas_det a, npvacsalidas b
 				where
 				b.fecpagbonvac=to_date('$fecha','dd/mm/yyyy')
@@ -10067,6 +10067,174 @@ exit();
         }
 
       $j++;
+    }
+  }
+
+public static function grabarAsignacionConceptosCargos($clasemodelo,$grid)
+{
+    $cargo = $clasemodelo->getCodcar();
+    $l = $grid[0];
+    $j = 0;
+    while ($j < count($l)) {
+      if ($l[$j]->getCodcon() != "") {
+        $l[$j]->setCodcar($cargo);
+        $l[$j]->save();
+      }
+      $j++;
+    }
+
+    $z = $grid[1];
+    $j = 0;
+    if (!empty ($z[$j])) {
+      while ($j < count($z)) {
+        $z[$j]->delete();
+        $j++;
+      }
+    }
+}
+
+public static function arregloConceptosCal($codcat,$codnom,$codemp,$codcar,$cadena)
+{
+    $arreglo=array();
+
+    if ($cadena==''){
+        $c = new Criteria();
+        $c->add(NpcatnomempconPeer::CODCAT,$codcat);
+        $c->add(NpcatnomempconPeer::CODNOM,$codnom);
+        $c->add(NpcatnomempconPeer::CODEMP,$codemp);
+        $c->add(NpcatnomempconPeer::CODCAR,$codcar);
+        $result=NpcatnomempconPeer::doSelect($c);
+        if ($result)
+        {
+            $i=0;
+            foreach ($result as $objcon)
+            {
+              $arreglo[$i]["codcon"]=$objcon->getCodcon();
+              $arreglo[$i]["nomcon"]=H::getX('CODCON','Npdefcpt','Nomcon',$objcon->getCodcon());
+              $arreglo[$i]["monto"]=number_format($objcon->getMonto(),2,',','.');
+              $arreglo[$i]["id"]=9;
+              $i++;
+            }
+        }else {
+           $opsi="false";
+            $msem="";
+            $sql="select codnom, nomnom, numsem, ultfec, profec, frecal,
+              to_char(profec,'dd/mm/yyyy') as profec2, to_char(ultfec,'dd/mm/yyyy') as ultfec2
+              from npnomina where codnom='".$codnom."' ";
+            if (Herramientas::BuscarDatos($sql,&$npnomina))
+            {
+              $numsem=$npnomina[0]["numsem"];
+              $desde=$npnomina[0]["ultfec2"];
+              $hasta=$npnomina[0]["profec2"];
+
+              if ($npnomina[0]["frecal"]=='S')
+              {
+                if (!(is_null($numsem)))
+                {
+                  $msem=$numsem;
+                }
+                else
+                {
+                  $msem="__";
+                }
+                $opsi="true";
+              }
+            }
+
+            $i=0;
+            $t= new Criteria();
+            $t->add(NpasiconcarPeer::CODCAR,$codcar);
+            $registros= NpasiconcarPeer::doSelect($t);
+            if ($registros)
+            {
+                foreach ($registros as $objcon)
+                {
+                  $arreglo[$i]["codcon"]=$objcon->getCodcon();
+                  $arreglo[$i]["nomcon"]=H::getX('CODCON','Npdefcpt','Nomcon',$objcon->getCodcon());
+                  $moncon=Formulacion::CalPorEmpleado($codemp,$codnom,$codcar,$objcon->getCodcon(),$desde,$hasta,$opsi,$msem,&$cont);
+                  $arreglo[$i]["monto"]=number_format($moncon,2,',','.');
+                  $arreglo[$i]["id"]=9;
+                  $i++;
+                }
+            }
+        }
+
+    }else {
+          $cadenacon=split('!',$cadena);
+          $r=0;
+          while ($r<(count($cadenacon)-1))
+          {
+            $aux=$cadenacon[$r];
+            $aux2=split('_',$aux);
+            $arreglo[$r]["codcon"]=$aux2[0];
+            $arreglo[$r]["nomcon"]=$aux2[1];
+            $arreglo[$r]["monto"]=$aux2[2];
+            $arreglo[$r]["id"]=9;
+            $r++;
+          }
+    }
+
+    return $arreglo;
+}
+
+public static function grabarFormulacionCargosEmp($clasemodelo,$grid2)
+{
+  $codcat=$clasemodelo->getCodcat();
+  $codnom=$clasemodelo->getCodnom();
+  $x=$grid2[0];
+  $j=0;
+  while ($j<count($x))
+  {
+    if ($x[$j]->getCodemp()!="" && $x[$j]->getCodcar()!="")
+    {
+        $x[$j]->setCodcat($codcat);
+        $x[$j]->setCodnom($codnom);
+        $x[$j]->save();
+    //grabar Conceptos por Empleado y Cargo
+
+     if ($x[$j]->getConceptos()!='')
+     {
+        $c = new Criteria();
+        $c->add(NpcatnomempconPeer::CODCAT,$codcat);
+        $c->add(NpcatnomempconPeer::CODNOM,$codnom);
+        $c->add(NpcatnomempconPeer::CODEMP,$x[$j]->getCodemp());
+        $c->add(NpcatnomempconPeer::CODCAR,$x[$j]->getCodcar());
+        NpcatnomempconPeer::doDelete($c);
+
+          $cadenacon=split('!',$x[$j]->getConceptos());
+          $r=0;
+          while ($r<(count($cadenacon)-1))
+          {
+            $aux=$cadenacon[$r];
+            $aux2=split('_',$aux);
+            if ($aux2[0]!="")
+            {
+              $npcatnomempcon= new Npcatnomempcon();
+              $npcatnomempcon->setCodcat($codcat);
+              $npcatnomempcon->setCodnom($codnom);
+              $npcatnomempcon->setCodemp($x[$j]->getCodemp());
+              $npcatnomempcon->setCodcar($x[$j]->getCodcar());
+              $npcatnomempcon->setCodcon($aux2[0]);
+              $npcatnomempcon->setMonto($aux2[2]);
+              $npcatnomempcon->save();
+            }
+            $r++;
+          }
+      }
+    }
+  $j++;
+  }
+
+
+}
+
+  public static function obtenerAntiguedad($fecha) {
+    $fecha = split('/', $fecha);
+    $fechanueva = $fecha[2] . "-" . $fecha[1] . "-" . $fecha[0];
+
+    $sql = "select  Extract(year from age(now(),'" . $fechanueva . "')) as ano, Extract(month from age(now(),'" . $fechanueva . "')) as mes, Extract(day from age(now(),'" . $fechanueva . "')) as dia";
+    if (Herramientas :: BuscarDatos($sql, & $result)) {
+      return $result[0]['ano']." Años, ".$result[0]['mes']." Meses, ".$result[0]['dia']." Días";
     }
   }
 

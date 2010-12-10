@@ -1444,6 +1444,9 @@ propel:
       size: 100
     escontrib:
       type: BOOLEAN
+    codedo:
+      type: VARCHAR
+      size: 4
     fatipcte_id:
     id:
       type: integer

@@ -134,6 +134,8 @@ class FaclienteMapBuilder {
 
 		$tMap->addColumn('ESCONTRIB', 'Escontrib', 'boolean', CreoleTypes::BOOLEAN, false, null);
 
+		$tMap->addColumn('CODEDO', 'Codedo', 'string', CreoleTypes::VARCHAR, false, 4);
+
 		$tMap->addForeignKey('FATIPCTE_ID', 'FatipcteId', 'int', CreoleTypes::INTEGER, 'fatipcte', 'ID', false, null);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);

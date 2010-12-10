@@ -209,6 +209,10 @@ abstract class BaseFacliente extends BaseObject  implements Persistent {
 
 
 	
+	protected $codedo;
+
+
+	
 	protected $fatipcte_id;
 
 
@@ -626,6 +630,13 @@ abstract class BaseFacliente extends BaseObject  implements Persistent {
   {
 
     return $this->escontrib;
+
+  }
+  
+  public function getCodedo()
+  {
+
+    return trim($this->codedo);
 
   }
   
@@ -1179,6 +1190,16 @@ abstract class BaseFacliente extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setCodedo($v)
+	{
+
+    if ($this->codedo !== $v) {
+        $this->codedo = $v;
+        $this->modifiedColumns[] = FaclientePeer::CODEDO;
+      }
+  
+	} 
+	
 	public function setFatipcteId($v)
 	{
 
@@ -1307,9 +1328,11 @@ abstract class BaseFacliente extends BaseObject  implements Persistent {
 
       $this->escontrib = $rs->getBoolean($startcol + 49);
 
-      $this->fatipcte_id = $rs->getInt($startcol + 50);
+      $this->codedo = $rs->getString($startcol + 50);
 
-      $this->id = $rs->getInt($startcol + 51);
+      $this->fatipcte_id = $rs->getInt($startcol + 51);
+
+      $this->id = $rs->getInt($startcol + 52);
 
       $this->resetModified();
 
@@ -1317,7 +1340,7 @@ abstract class BaseFacliente extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 52; 
+            return $startcol + 53; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Facliente object", $e);
     }
@@ -1648,9 +1671,12 @@ abstract class BaseFacliente extends BaseObject  implements Persistent {
 				return $this->getEscontrib();
 				break;
 			case 50:
-				return $this->getFatipcteId();
+				return $this->getCodedo();
 				break;
 			case 51:
+				return $this->getFatipcteId();
+				break;
+			case 52:
 				return $this->getId();
 				break;
 			default:
@@ -1713,8 +1739,9 @@ abstract class BaseFacliente extends BaseObject  implements Persistent {
 			$keys[47] => $this->getTelpercon(),
 			$keys[48] => $this->getCorpercon(),
 			$keys[49] => $this->getEscontrib(),
-			$keys[50] => $this->getFatipcteId(),
-			$keys[51] => $this->getId(),
+			$keys[50] => $this->getCodedo(),
+			$keys[51] => $this->getFatipcteId(),
+			$keys[52] => $this->getId(),
 		);
 		return $result;
 	}
@@ -1881,9 +1908,12 @@ abstract class BaseFacliente extends BaseObject  implements Persistent {
 				$this->setEscontrib($value);
 				break;
 			case 50:
-				$this->setFatipcteId($value);
+				$this->setCodedo($value);
 				break;
 			case 51:
+				$this->setFatipcteId($value);
+				break;
+			case 52:
 				$this->setId($value);
 				break;
 		} 	}
@@ -1943,8 +1973,9 @@ abstract class BaseFacliente extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[47], $arr)) $this->setTelpercon($arr[$keys[47]]);
 		if (array_key_exists($keys[48], $arr)) $this->setCorpercon($arr[$keys[48]]);
 		if (array_key_exists($keys[49], $arr)) $this->setEscontrib($arr[$keys[49]]);
-		if (array_key_exists($keys[50], $arr)) $this->setFatipcteId($arr[$keys[50]]);
-		if (array_key_exists($keys[51], $arr)) $this->setId($arr[$keys[51]]);
+		if (array_key_exists($keys[50], $arr)) $this->setCodedo($arr[$keys[50]]);
+		if (array_key_exists($keys[51], $arr)) $this->setFatipcteId($arr[$keys[51]]);
+		if (array_key_exists($keys[52], $arr)) $this->setId($arr[$keys[52]]);
 	}
 
 	
@@ -2002,6 +2033,7 @@ abstract class BaseFacliente extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(FaclientePeer::TELPERCON)) $criteria->add(FaclientePeer::TELPERCON, $this->telpercon);
 		if ($this->isColumnModified(FaclientePeer::CORPERCON)) $criteria->add(FaclientePeer::CORPERCON, $this->corpercon);
 		if ($this->isColumnModified(FaclientePeer::ESCONTRIB)) $criteria->add(FaclientePeer::ESCONTRIB, $this->escontrib);
+		if ($this->isColumnModified(FaclientePeer::CODEDO)) $criteria->add(FaclientePeer::CODEDO, $this->codedo);
 		if ($this->isColumnModified(FaclientePeer::FATIPCTE_ID)) $criteria->add(FaclientePeer::FATIPCTE_ID, $this->fatipcte_id);
 		if ($this->isColumnModified(FaclientePeer::ID)) $criteria->add(FaclientePeer::ID, $this->id);
 
@@ -2133,6 +2165,8 @@ abstract class BaseFacliente extends BaseObject  implements Persistent {
 		$copyObj->setCorpercon($this->corpercon);
 
 		$copyObj->setEscontrib($this->escontrib);
+
+		$copyObj->setCodedo($this->codedo);
 
 		$copyObj->setFatipcteId($this->fatipcte_id);
 
@@ -2269,6 +2303,41 @@ abstract class BaseFacliente extends BaseObject  implements Persistent {
 	{
 		$this->collFarecpros[] = $l;
 		$l->setFacliente($this);
+	}
+
+
+	
+	public function getFarecprosJoinCarecaud($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseFarecproPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collFarecpros === null) {
+			if ($this->isNew()) {
+				$this->collFarecpros = array();
+			} else {
+
+				$criteria->add(FarecproPeer::CODPRO, $this->getCodpro());
+
+				$this->collFarecpros = FarecproPeer::doSelectJoinCarecaud($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(FarecproPeer::CODPRO, $this->getCodpro());
+
+			if (!isset($this->lastFarecproCriteria) || !$this->lastFarecproCriteria->equals($criteria)) {
+				$this->collFarecpros = FarecproPeer::doSelectJoinCarecaud($criteria, $con);
+			}
+		}
+		$this->lastFarecproCriteria = $criteria;
+
+		return $this->collFarecpros;
 	}
 
 } 
