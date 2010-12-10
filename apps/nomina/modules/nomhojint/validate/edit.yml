@@ -85,7 +85,8 @@ names:
     validators: fotoValidator
 
   nphojint{fecnac}:
-    required:  No
+    required:  Yes
+    required_msg: Datos Personales- La Fecha de Nacimiento no puede estar en Blanco
     validators: FechaValidator, FechaValidatorNowNac
 
   nphojint{fecing}:
