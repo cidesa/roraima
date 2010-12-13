@@ -1009,7 +1009,13 @@ class almordcomActions extends autoalmordcomActions
     $col5->setEsNumerico(true);
     if ($referencia==0 and $filas_arreglo>0) $col5->setHTML('type="text" size="10"');
     if ($referencia==1 or $filas_arreglo==0) $col5->setHTML('type="text" size="10" readonly=true');
+    $novalgriddis=H::getConfApp2('novalgriddis', 'compras', 'almordcom');
+    if ($novalgriddis=='S'){
+       if ($referencia==0 and $filas_arreglo>0) $col5->setJScript('onKeypress="entermonto(event,this.id); if (verificar_datos(this.id)){actualizar_total_grid_detalle_datos(event,this.id,"N");recalcularecargos(event,this.id);actualizar_grid_dependientes();}"');
+    }else {
     if ($referencia==0 and $filas_arreglo>0) $col5->setJScript('onKeypress="entermonto(event,this.id); if (verificar_datos(this.id)){actualizar_total_grid_detalle_datos(event,this.id,"N");recalcularecargos(event,this.id);actualizar_grid_dependientes();verifica_presupuesto(event,this.id);}"');
+    }
+
 
     $col6 = clone $col5;
     $col6->setTitulo('Cant. Ajustada');
@@ -1031,7 +1037,12 @@ class almordcomActions extends autoalmordcomActions
     $col9->setTitulo('Costo');
     $col9->setHTML('type="text" size="10"');
     $col9->setNombreCampo($campo_col9);
+    $novalgriddis=H::getConfApp2('novalgriddis', 'compras', 'almordcom');
+    if ($novalgriddis=='S'){
+      $col9->setJScript('onKeypress="entermonto(event,this.id); actualizar_total_grid_detalle_datos(event,this.id,"N");recalcularecargos(event,this.id);actualizar_grid_dependientes();"');
+    }else {
     $col9->setJScript('onKeypress="entermonto(event,this.id); actualizar_total_grid_detalle_datos(event,this.id,"N");recalcularecargos(event,this.id);actualizar_grid_dependientes();verifica_presupuesto(event,this.id);"');
+    }
 
     $col10 = clone $col6;
     $col10->setTitulo('Cant x Costo');
@@ -1846,7 +1857,7 @@ class almordcomActions extends autoalmordcomActions
 
     $params= array('param1' => $lonart, 'param2' => "'+$('caordcom_tipord').value+'", 'val2');
 
-    $col1 = new Columna('CÃ³digo  ArtÃ­culo');
+    $col1 = new Columna('Código  Artículo');
     $col1->setTipo(Columna::TEXTO);
     $col1->setEsGrabable(true);
     $col1->setAlineacionObjeto(Columna::CENTRO);
@@ -1857,7 +1868,7 @@ class almordcomActions extends autoalmordcomActions
     $col1->setJScript('onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascaraarticulo.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}"');
     $col1->setAjax('almordcom',22,2);
 
-    $col2 = new Columna('DescripciÃ³n');
+    $col2 = new Columna('Descripción');
     $col2->setTipo(Columna::TEXTAREA);
     $col2->setAlineacionObjeto(Columna::IZQUIERDA);
     $col2->setAlineacionContenido(Columna::IZQUIERDA);
@@ -1865,7 +1876,7 @@ class almordcomActions extends autoalmordcomActions
     $col2->setEsGrabable(true);
     $col2->setHTML('type="text" size="30x1" readonly=true');
 
-    $col3 = new Columna('CÃ³digo  AlmacÃ©n');
+    $col3 = new Columna('Código  Almacén');
     $col3->setTipo(Columna::TEXTO);
     $col3->setEsGrabable(true);
     $col3->setAlineacionObjeto(Columna::CENTRO);
@@ -1875,7 +1886,7 @@ class almordcomActions extends autoalmordcomActions
     $col3->setCatalogo('Cadefalm','sf_admin_edit_form', array('codalm' => 3,'nomalm' => 4),'Cadefalm_Alminvfis');
     $col3->setAjax('almordcom',21,4);
 
-    $col4 = new Columna('DescripciÃ³n');
+    $col4 = new Columna('Descripción');
     $col4->setTipo(Columna::TEXTO);
     $col4->setEsGrabable(true);
     $col4->setAlineacionObjeto(Columna::IZQUIERDA);
@@ -1924,8 +1935,8 @@ class almordcomActions extends autoalmordcomActions
 
 
   /**
-   * Esta funciÃ³n permite definir la configuraciÃ³n del grid de datos
-   * que contiene el formulario. Esta funciÃ³n debe ser llamada
+   * Esta función permite definir la configuración del grid de datos
+   * que contiene el formulario. Esta función debe ser llamada
    * en las acciones, create, edit y handleError para recargar en todo momento
    * los datos del grid.
    *
