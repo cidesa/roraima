@@ -10238,29 +10238,6 @@ public static function grabarFormulacionCargosEmp($clasemodelo,$grid2)
     }
   }
 
-public static function grabarAsignacionConceptosCargos($clasemodelo,$grid)
-{
-    $cargo = $clasemodelo->getCodcar();
-    $l = $grid[0];
-    $j = 0;
-    while ($j < count($l)) {
-      if ($l[$j]->getCodcon() != "") {
-        $l[$j]->setCodcar($cargo);
-        $l[$j]->save();
-      }
-      $j++;
-    }
-
-    $z = $grid[1];
-    $j = 0;
-    if (!empty ($z[$j])) {
-      while ($j < count($z)) {
-        $z[$j]->delete();
-        $j++;
-      }
-    }
-}
-
 public static function arregloConceptosCal($codcat,$codnom,$codemp,$codcar,$cadena)
 {
     $arreglo=array();
