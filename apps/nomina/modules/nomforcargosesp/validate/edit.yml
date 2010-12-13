@@ -1,0 +1,30 @@
+methods:
+  post:
+   - "npcatnomemp{codcat}"
+   - "npcatnomemp{codnom}"
+   
+names:
+  npcatnomemp{codcat}:
+    required:  Yes
+    required_msg: El código del Categoría no puede estar en Blanco
+    validators: Validator_codcat
+
+  npcatnomemp{codnom}:
+    required:  Yes
+    required_msg: El código de la Nómina no puede estar en Blanco
+    validators: Validator_codnom
+
+Validator_codcat:
+    class: CidesaExistValidator
+    param:
+        class:    Fordefcatpre
+        column:   codcat
+        unique_error:   El Código del Categoría no existe
+
+Validator_codnom:
+    class: CidesaExistValidator
+    param:
+        class:    Npnomina
+        column:   codnom
+        unique_error:   El Código de la Nómina no existe
+        
