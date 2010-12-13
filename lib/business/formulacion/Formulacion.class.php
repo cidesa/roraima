@@ -3781,5 +3781,22 @@ public static function grabarOtrosCreditosPresupuestarios($clasemodelo,$gridpar)
     }
 }
 
+public static function salvarforpoa_uae($forencpryaccespmet,$grid)
+  {
+  try{
+	//self::Grabar_ForEncPryAccEspMet($forencpryaccespmet,$grid);
+  	if (self::Grabar_ForEncPryAccEspMet($forencpryaccespmet,$grid)!=-1){ return 302; }
+  	if (self::Grabardismonper($forencpryaccespmet,$grid)!=-1){ return 0; }
+	if (self::Grabar_ForDetPryAccEspMet($forencpryaccespmet,$grid)!=-1){ return 0; }  	  //Graba Detalle de la Formulacion por Metas
+	if (self::GrabarDisFueFinPryAccMet($forencpryaccespmet,$grid)!=-1) { return 302; }  	      //Montos de Financiamientos
+
+	if (self::Actualiza_Fuentes_de_Financiamiento_Real($forencpryaccespmet,$grid)!=-1) { exit('4'); return 302; }  	      //Montos de Financiamientos
+      return -1;
+
+  } catch (Exception $ex){
+     return 0;
+}
+  }
+
 }
 ?>

@@ -1,0 +1,53 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                false
+  tabla:                   npcatnomemp
+  anchogrid:               950
+  ancho:                   900
+  filas:                   0
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Empleado
+  tipo:                    t
+  nombrecampo:             codemp
+  html:                    ["size=10 readonly=true"]
+  esgrabable:              true  
+2:       # Columna 2
+  titulo:                  Nombre
+  tipo:                    t
+  nombrecampo:             nomemp
+  html:                    ["size=40 readonly=true"]
+  esgrabable:              true
+3:       # Columna 3
+  titulo:                  Cargo
+  tipo:                    t
+  nombrecampo:             codcar
+  html:                    ["size=10 readonly=true"]
+  esgrabable:              true  
+4:       # Columna 4
+  titulo:                  Nombre
+  tipo:                    t
+  nombrecampo:             nomcar
+  html:                    ["size=40 readonly=true"]
+  esgrabable:              true
+5:       # Columna 5
+  titulo:                  Monto Total Formulado
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             monto
+  esnumerico:              true
+  html:                    ["size=10 "]
+6:       # Columna 6
+  titulo:                  Conceptos
+  tipo:                    t
+  nombrecampo:             anadir
+  html:                    ["size=1 style='border:none' class=imagenalmacen onClick='mostrar(this.id)' readonly=true"]
+  esgrabable:              true
+7:       # Columna 7
+  titulo:                  Conceptos Asociados
+  tipo:                    t
+  nombrecampo:             conceptos
+  html:                    ["size=10 readonly=true"]
+  esgrabable:              true
+  oculta:                  true
