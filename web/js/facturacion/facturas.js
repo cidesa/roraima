@@ -642,6 +642,33 @@
 	 j++;
 	}
     $('fafactur_totrec').value=format(mitot.toFixed(2),'.',',','.');
+
+//Ajustar decimas
+      var regart=totalregistros2('ax',3,25);
+      var fil=0;
+      var acum=0;
+      while (fil<regart)
+      {
+        var montotrgo="ax_"+fil+"_12";
+        if ($(montotrgo)){
+        var num1=toFloat(montotrgo);
+          acum=acum+num1;
+          var fila=fil;
+  }
+        fil++;
+      }
+
+      var diferencia=acum-mitot;
+      if (diferencia!=0)
+      {
+          var ultfilrec="ax_"+fila+"_12";
+          var valor=toFloat(ultfilrec);
+
+          var cal=valor-diferencia;
+
+          $(ultfilrec).value=format(cal.toFixed(2),'.',',','.');
+      }
+
   }
 
   function recalcularRecargos()
