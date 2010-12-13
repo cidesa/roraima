@@ -43,7 +43,7 @@ class nomhojintActions extends autonomhojintActions
      $nphojint = $this->getRequestParameter('nphojint');
      $nomemp='';
      $valifecing = H::getConfApp('valifecing','nomina','nomhojint');
-     if(isset($nphojint['fecing']))
+     if($nphojint['fecing']!="")
      {
         if($valifecing!='S')
         {
