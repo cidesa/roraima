@@ -382,8 +382,15 @@ class viacalviatraActions extends autoviacalviatraActions
                 $obj= ViadeffortraPeer::doSelectOne($c);
                 if($obj)
                     $desfortra = $obj->getDesfortra();
-                $cedempaut = NphojintPeer::getCedemp($per->getCodempaut());
-                $nomempaut = NphojintPeer::getNomemp($per->getCodempaut());
+                $respon=H::getConfApp2('respon', 'tesoreria', 'tesdesubi');
+                if ($respon=="S")
+                {
+                    $cedempaut = $per->getCodempaut();
+                    $nomempaut = $per->getNomempe();
+                }else {
+                    $cedempaut = NphojintPeer::getCedemp($per->getCodempaut());
+                    $nomempaut = NphojintPeer::getNomemp($per->getCodempaut());
+                }
                 $c = new Criteria();
                 $c->add(NpcatprePeer::CODCAT,$per->getCodcat());
                 $obj= NpcatprePeer::doSelectOne($c);
@@ -403,6 +410,9 @@ class viacalviatraActions extends autoviacalviatraActions
                 $ciudad = $codciu.'  -  '.H::getX('Codciu','Viaciudad','Nomciu',$codciu);
                 $estado = $codest.'  -  '.H::getX('Codest','Viaestado','Nomest',$codest);
                 $pais= $codpai.'  -  '.H::getX('Codpai','Viapais','Nompai',$codpai);
+
+                $unisol = $per->getCodubi().' - '. H::getX_vacio('Codubi', 'Bnubica', 'Desubi', $per->getCodubi());
+                $unieje = $per->getCodcen().' - '. H::getX_vacio('Codcen', 'Cadefcen', 'Descen', $per->getCodcen());
             }else
             {
                 $js.="$('viacalviatra_refsol').value='';
@@ -411,6 +421,8 @@ class viacalviatraActions extends autoviacalviatraActions
                 $pais='';
                 $estado='';
                 $ciudad='';
+                $unisol='';
+                $unieje='';
             }
         }else
         {
@@ -420,6 +432,8 @@ class viacalviatraActions extends autoviacalviatraActions
             $pais='';
             $estado='';
             $ciudad='';
+            $unisol='';
+            $unieje='';
         }
         $this->viacalviatra = $this->getViacalviatraOrCreate();
         $this->updateViacalviatraFromRequest();
@@ -440,7 +454,7 @@ class viacalviatraActions extends autoviacalviatraActions
                        ["viacalviatra_proced","'.$per->getCodproced().'  -  '.$desproced.'",""],["viacalviatra_fortra","'.$per->getCodfortra().'  -  '.$desfortra.'",""],
                        ["viacalviatra_fecdes","'.date('d/m/Y',strtotime($per->getFecdes())).'",""],["viacalviatra_fechas","'.date('d/m/Y',strtotime($per->getFechas())).'",""],["viacalviatra_numdia","'.$per->getNumdia().'",""],
                        ["viacalviatra_empleadoaut","'.$cedempaut.'  -  '.$nomempaut.'",""],["viacalviatra_diaconper","'.($per->getNumdia()-1).'",""],["viacalviatra_diasinper","1",""],
-                       ["viacalviatra_codcat","'.$per->getCodcat().'",""],["viacalviatra_nomcat","'.$nomcat.'",""],["viacalviatra_ciudad","'.$ciudad.'",""],["viacalviatra_estado","'.$estado.'",""],["viacalviatra_pais","'.$pais.'",""]]';
+                       ["viacalviatra_codcat","'.$per->getCodcat().'",""],["viacalviatra_nomcat","'.$nomcat.'",""],["viacalviatra_ciudad","'.$ciudad.'",""],["viacalviatra_estado","'.$estado.'",""],["viacalviatra_pais","'.$pais.'",""],["viacalviatra_unidadsol","'.$unisol.'",""],["viacalviatra_unidadeje","'.$unieje.'",""]]';
         else
             $output = '[["javascript","'.$js.'",""],["","",""],["","",""]]';
         break;

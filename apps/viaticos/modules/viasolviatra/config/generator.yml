@@ -113,8 +113,20 @@ generator:
           catalogoparams: /param1/'."'+$('viasolviatra_codest').value+'".'/param2/'."'+$('viasolviatra_codpai').value+'".'
       status2:   { name: Status}
       tipvia2:   { name: Tipo}
-
-
+      codubi:
+        name: Unidad Solicitante
+        catalogo:
+          catalogoweb: Bnubica_Almordcom
+          clase: Bnubica
+          ajax: 8
+          parametros: getprincipal="getCodubi" getsecundario="getDesubi" campoprincipal="codubi" camposecundario="desubi" campobase = "id"
+      codcen:
+        name: Unidad Ejecutora
+        catalogo:
+          catalogoweb: Cadefcen_Almsolegr
+          clase: Cadefcen
+          ajax: 9
+          parametros: getprincipal="getCodcen" getsecundario="getDescen" campoprincipal="codcen" camposecundario="descen" campobase = "id"
     list:
       title:        Listado de Solicitudes de Viaticos
       display:      [=numsol, fecsol, codemp, nomemp, nivel, status2, tipvia2]
@@ -126,8 +138,10 @@ generator:
       display:
         Datos Generales de la Solicitud:      [numsol, fecsol, _ptipvia, dessol]
         Datos Empleado Solicitante:           [codemp, cedemp, cargo, nivel, codcat, codniv, codempaco, cedempaco, cargoaco, nivelaco, codnivaco]
-        Detalle de la Solicitd:               [codpai, codest, codciu, codproced, fecdes, fechas, numdia, codfortra, codempaut, cedempaut, nivelaut, _js]
+        Detalle de la Solicitd:               [codpai, codest, codciu, codproced, fecdes, fechas, numdia, codfortra, codubi, codcen, codempaut, cedempaut, nivelaut, _js]
+      hide:  [nomempe]
       actions:
         _list:        ~
         _save:        ~
+        _create:        ~
         _delete:      ~

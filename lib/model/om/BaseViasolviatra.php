@@ -81,6 +81,18 @@ abstract class BaseViasolviatra extends BaseObject  implements Persistent {
 
 
 	
+	protected $codcen;
+
+
+	
+	protected $codubi;
+
+
+	
+	protected $nomempe;
+
+
+	
 	protected $id;
 
 	
@@ -258,6 +270,27 @@ abstract class BaseViasolviatra extends BaseObject  implements Persistent {
   {
 
     return trim($this->codempaut);
+
+  }
+  
+  public function getCodcen()
+  {
+
+    return trim($this->codcen);
+
+  }
+  
+  public function getCodubi()
+  {
+
+    return trim($this->codubi);
+
+  }
+  
+  public function getNomempe()
+  {
+
+    return trim($this->nomempe);
 
   }
   
@@ -484,6 +517,36 @@ abstract class BaseViasolviatra extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setCodcen($v)
+	{
+
+    if ($this->codcen !== $v) {
+        $this->codcen = $v;
+        $this->modifiedColumns[] = ViasolviatraPeer::CODCEN;
+      }
+  
+	} 
+	
+	public function setCodubi($v)
+	{
+
+    if ($this->codubi !== $v) {
+        $this->codubi = $v;
+        $this->modifiedColumns[] = ViasolviatraPeer::CODUBI;
+      }
+  
+	} 
+	
+	public function setNomempe($v)
+	{
+
+    if ($this->nomempe !== $v) {
+        $this->nomempe = $v;
+        $this->modifiedColumns[] = ViasolviatraPeer::NOMEMPE;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -534,7 +597,13 @@ abstract class BaseViasolviatra extends BaseObject  implements Persistent {
 
       $this->codempaut = $rs->getString($startcol + 17);
 
-      $this->id = $rs->getInt($startcol + 18);
+      $this->codcen = $rs->getString($startcol + 18);
+
+      $this->codubi = $rs->getString($startcol + 19);
+
+      $this->nomempe = $rs->getString($startcol + 20);
+
+      $this->id = $rs->getInt($startcol + 21);
 
       $this->resetModified();
 
@@ -542,7 +611,7 @@ abstract class BaseViasolviatra extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 19; 
+            return $startcol + 22; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Viasolviatra object", $e);
     }
@@ -744,6 +813,15 @@ abstract class BaseViasolviatra extends BaseObject  implements Persistent {
 				return $this->getCodempaut();
 				break;
 			case 18:
+				return $this->getCodcen();
+				break;
+			case 19:
+				return $this->getCodubi();
+				break;
+			case 20:
+				return $this->getNomempe();
+				break;
+			case 21:
 				return $this->getId();
 				break;
 			default:
@@ -774,7 +852,10 @@ abstract class BaseViasolviatra extends BaseObject  implements Persistent {
 			$keys[15] => $this->getNumdia(),
 			$keys[16] => $this->getCodfortra(),
 			$keys[17] => $this->getCodempaut(),
-			$keys[18] => $this->getId(),
+			$keys[18] => $this->getCodcen(),
+			$keys[19] => $this->getCodubi(),
+			$keys[20] => $this->getNomempe(),
+			$keys[21] => $this->getId(),
 		);
 		return $result;
 	}
@@ -845,6 +926,15 @@ abstract class BaseViasolviatra extends BaseObject  implements Persistent {
 				$this->setCodempaut($value);
 				break;
 			case 18:
+				$this->setCodcen($value);
+				break;
+			case 19:
+				$this->setCodubi($value);
+				break;
+			case 20:
+				$this->setNomempe($value);
+				break;
+			case 21:
 				$this->setId($value);
 				break;
 		} 	}
@@ -872,7 +962,10 @@ abstract class BaseViasolviatra extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[15], $arr)) $this->setNumdia($arr[$keys[15]]);
 		if (array_key_exists($keys[16], $arr)) $this->setCodfortra($arr[$keys[16]]);
 		if (array_key_exists($keys[17], $arr)) $this->setCodempaut($arr[$keys[17]]);
-		if (array_key_exists($keys[18], $arr)) $this->setId($arr[$keys[18]]);
+		if (array_key_exists($keys[18], $arr)) $this->setCodcen($arr[$keys[18]]);
+		if (array_key_exists($keys[19], $arr)) $this->setCodubi($arr[$keys[19]]);
+		if (array_key_exists($keys[20], $arr)) $this->setNomempe($arr[$keys[20]]);
+		if (array_key_exists($keys[21], $arr)) $this->setId($arr[$keys[21]]);
 	}
 
 	
@@ -898,6 +991,9 @@ abstract class BaseViasolviatra extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(ViasolviatraPeer::NUMDIA)) $criteria->add(ViasolviatraPeer::NUMDIA, $this->numdia);
 		if ($this->isColumnModified(ViasolviatraPeer::CODFORTRA)) $criteria->add(ViasolviatraPeer::CODFORTRA, $this->codfortra);
 		if ($this->isColumnModified(ViasolviatraPeer::CODEMPAUT)) $criteria->add(ViasolviatraPeer::CODEMPAUT, $this->codempaut);
+		if ($this->isColumnModified(ViasolviatraPeer::CODCEN)) $criteria->add(ViasolviatraPeer::CODCEN, $this->codcen);
+		if ($this->isColumnModified(ViasolviatraPeer::CODUBI)) $criteria->add(ViasolviatraPeer::CODUBI, $this->codubi);
+		if ($this->isColumnModified(ViasolviatraPeer::NOMEMPE)) $criteria->add(ViasolviatraPeer::NOMEMPE, $this->nomempe);
 		if ($this->isColumnModified(ViasolviatraPeer::ID)) $criteria->add(ViasolviatraPeer::ID, $this->id);
 
 		return $criteria;
@@ -964,6 +1060,12 @@ abstract class BaseViasolviatra extends BaseObject  implements Persistent {
 		$copyObj->setCodfortra($this->codfortra);
 
 		$copyObj->setCodempaut($this->codempaut);
+
+		$copyObj->setCodcen($this->codcen);
+
+		$copyObj->setCodubi($this->codubi);
+
+		$copyObj->setNomempe($this->nomempe);
 
 
 		$copyObj->setNew(true);

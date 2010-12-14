@@ -1,4 +1,11 @@
-<script language="Javascript">
+<script type="text/javascript"language="Javascript">
+    var respon='<?php echo H::getConfApp2('respon', 'tesoreria', 'tesdesubi'); ?>';
+    if (respon!='S')
+    {
+        $('divcodubi').hide();
+        $('divcodcen').hide();
+    }
+
     if($('viasolviatra_tipvia').value=='N')
         $('divcodpai').hide();
     else

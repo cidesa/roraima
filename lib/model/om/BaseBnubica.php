@@ -21,6 +21,10 @@ abstract class BaseBnubica extends BaseObject  implements Persistent {
 
 
 
+	protected $cedemp;
+
+
+	
 	protected $nomemp;
 
 
@@ -63,6 +67,13 @@ abstract class BaseBnubica extends BaseObject  implements Persistent {
 
   }
 
+  public function getCedemp()
+  {
+
+    return trim($this->cedemp);
+
+  }
+  
   public function getNomemp()
   {
 
@@ -121,6 +132,16 @@ abstract class BaseBnubica extends BaseObject  implements Persistent {
 
 	}
 
+	public function setCedemp($v)
+	{
+
+    if ($this->cedemp !== $v) {
+        $this->cedemp = $v;
+        $this->modifiedColumns[] = BnubicaPeer::CEDEMP;
+      }
+  
+	} 
+	
 	public function setNomemp($v)
 	{
 
@@ -171,13 +192,15 @@ abstract class BaseBnubica extends BaseObject  implements Persistent {
 
       $this->stacod = $rs->getString($startcol + 2);
 
-      $this->nomemp = $rs->getString($startcol + 3);
+      $this->cedemp = $rs->getString($startcol + 3);
 
-      $this->nomcar = $rs->getString($startcol + 4);
+      $this->nomemp = $rs->getString($startcol + 4);
 
-      $this->nomjef = $rs->getString($startcol + 5);
+      $this->nomcar = $rs->getString($startcol + 5);
 
-      $this->id = $rs->getInt($startcol + 6);
+      $this->nomjef = $rs->getString($startcol + 6);
+
+      $this->id = $rs->getInt($startcol + 7);
 
       $this->resetModified();
 
@@ -185,7 +208,7 @@ abstract class BaseBnubica extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 7;
+            return $startcol + 8; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Bnubica object", $e);
     }
@@ -342,15 +365,18 @@ abstract class BaseBnubica extends BaseObject  implements Persistent {
 				return $this->getStacod();
 				break;
 			case 3:
-				return $this->getNomemp();
+				return $this->getCedemp();
 				break;
 			case 4:
-				return $this->getNomcar();
+				return $this->getNomemp();
 				break;
 			case 5:
-				return $this->getNomjef();
+				return $this->getNomcar();
 				break;
 			case 6:
+				return $this->getNomjef();
+				break;
+			case 7:
 				return $this->getId();
 				break;
 			default:
@@ -366,10 +392,11 @@ abstract class BaseBnubica extends BaseObject  implements Persistent {
 			$keys[0] => $this->getCodubi(),
 			$keys[1] => $this->getDesubi(),
 			$keys[2] => $this->getStacod(),
-			$keys[3] => $this->getNomemp(),
-			$keys[4] => $this->getNomcar(),
-			$keys[5] => $this->getNomjef(),
-			$keys[6] => $this->getId(),
+			$keys[3] => $this->getCedemp(),
+			$keys[4] => $this->getNomemp(),
+			$keys[5] => $this->getNomcar(),
+			$keys[6] => $this->getNomjef(),
+			$keys[7] => $this->getId(),
 		);
 		return $result;
 	}
@@ -395,15 +422,18 @@ abstract class BaseBnubica extends BaseObject  implements Persistent {
 				$this->setStacod($value);
 				break;
 			case 3:
-				$this->setNomemp($value);
+				$this->setCedemp($value);
 				break;
 			case 4:
-				$this->setNomcar($value);
+				$this->setNomemp($value);
 				break;
 			case 5:
-				$this->setNomjef($value);
+				$this->setNomcar($value);
 				break;
 			case 6:
+				$this->setNomjef($value);
+				break;
+			case 7:
 				$this->setId($value);
 				break;
 		} 	}
@@ -416,10 +446,11 @@ abstract class BaseBnubica extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[0], $arr)) $this->setCodubi($arr[$keys[0]]);
 		if (array_key_exists($keys[1], $arr)) $this->setDesubi($arr[$keys[1]]);
 		if (array_key_exists($keys[2], $arr)) $this->setStacod($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setNomemp($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setNomcar($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setNomjef($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setId($arr[$keys[6]]);
+		if (array_key_exists($keys[3], $arr)) $this->setCedemp($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setNomemp($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setNomcar($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setNomjef($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setId($arr[$keys[7]]);
 	}
 
 
@@ -430,6 +461,7 @@ abstract class BaseBnubica extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(BnubicaPeer::CODUBI)) $criteria->add(BnubicaPeer::CODUBI, $this->codubi);
 		if ($this->isColumnModified(BnubicaPeer::DESUBI)) $criteria->add(BnubicaPeer::DESUBI, $this->desubi);
 		if ($this->isColumnModified(BnubicaPeer::STACOD)) $criteria->add(BnubicaPeer::STACOD, $this->stacod);
+		if ($this->isColumnModified(BnubicaPeer::CEDEMP)) $criteria->add(BnubicaPeer::CEDEMP, $this->cedemp);
 		if ($this->isColumnModified(BnubicaPeer::NOMEMP)) $criteria->add(BnubicaPeer::NOMEMP, $this->nomemp);
 		if ($this->isColumnModified(BnubicaPeer::NOMCAR)) $criteria->add(BnubicaPeer::NOMCAR, $this->nomcar);
 		if ($this->isColumnModified(BnubicaPeer::NOMJEF)) $criteria->add(BnubicaPeer::NOMJEF, $this->nomjef);
@@ -469,6 +501,8 @@ abstract class BaseBnubica extends BaseObject  implements Persistent {
 		$copyObj->setDesubi($this->desubi);
 
 		$copyObj->setStacod($this->stacod);
+
+		$copyObj->setCedemp($this->cedemp);
 
 		$copyObj->setNomemp($this->nomemp);
 

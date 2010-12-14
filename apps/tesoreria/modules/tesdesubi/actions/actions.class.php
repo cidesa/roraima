@@ -71,6 +71,10 @@ $this->Bitacora('Guardo');
     {
       $this->bnubica->setDesubi($bnubica['desubi']);
     }
+    if (isset($bnubica['cedemp']))
+    {
+      $this->bnubica->setCedemp($bnubica['cedemp']);
+    }
     if (isset($bnubica['nomemp']))
     {
       $this->bnubica->setNomemp($bnubica['nomemp']);

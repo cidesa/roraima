@@ -225,6 +225,36 @@ class viasolviatraActions extends autoviasolviatraActions
           $dato=H::GetX('Codpai','Viapais','Nompai',$codigo);
           $output = '[["javascript","'.$js.'",""],["viasolviatra_nompai","'.$dato.'",""],["","",""]]';
         break;
+      case '8':
+          $t= new Criteria();
+          $t->add(BnubicaPeer::CODUBI,$codigo);
+          $reg=BnubicaPeer::doSelectOne($t);
+          if ($reg)
+          {
+              $dato=$reg->getDesubi();
+              $dato2=$reg->getCedemp();
+              $dato3=$reg->getNomemp();
+              $js="";
+          }else {
+            $js="alert('La Unidad Solicitante no existe;'); $('viasolviatra_codubi').focus();";
+            $dato2=""; $dato3=""; $dato="";
+          }
+          $output = '[["javascript","'.$js.'",""],["viasolviatra_desubi","'.$dato.'",""],["viasolviatra_codempaut","'.$dato2.'",""],["viasolviatra_nomempaut","'.$dato3.'",""],["viasolviatra_nomempe","'.$dato3.'",""]]';
+        break;
+     case '9':
+          $c= new Criteria();
+          $c->add(CadefcenPeer::CODCEN,$codigo);
+          $reg= CadefcenPeer::doSelectOne($c);
+          if ($reg)
+          {
+            $dato=$reg->getDescen();
+            $js="";
+          }else {
+              $js="alert('La Unidad Ejecutora no existe'); $('viasolviatra_codcen').focus();";
+              $dato="";
+          }
+          $output = '[["javascript","'.$js.'",""],["viasolviatra_descen","'.$dato.'",""],["","",""]]';
+        break;
       default:
         $output = '[["","",""],["","",""],["","",""]]';
     }
@@ -253,27 +283,7 @@ class viasolviatraActions extends autoviasolviatraActions
   {
     $this->coderr =-1;
 
-    // Se deben llamar a las funciones necesarias para cargar los
-    // datos de la vista que serán usados en las funciones de validación.
-    // Por ejemplo:
-
     if($this->getRequest()->getMethod() == sfRequest::POST){
-
-      // $this->configGrid();
-      // $grid = Herramientas::CargarDatosGrid($this,$this->obj);
-
-      // Aqui van los llamados a los métodos de las clases del
-      // negocio para validar los datos.
-      // Los resultados de cada llamado deben ser analizados por ejemplo:
-
-      // $resp = Compras::validarAlmajuoc($this->caajuoc,$grid);
-
-       //$resp=Herramientas::ValidarCodigo($valor,$this->tstipmov,$campo);
-
-      // al final $resp es analizada en base al código que retorna
-      // Todas las funciones de validación y procesos del negocio
-      // deben retornar códigos >= -1. Estos código serám buscados en
-      // el archivo errors.yml en la función handleErrorEdit()
 
       if($this->coderr!=-1){
         return false;

@@ -83,7 +83,13 @@ class Viasolviatra extends BaseViasolviatra
     }
     public function getNomempaut()
     {
-        return H::GetX('Codemp','Nphojint','Nomemp',$this->codempaut);
+        $respon=H::getConfApp2('respon', 'tesoreria', 'tesdesubi');
+        if ($respon=='S')
+        {
+         return  self::getNomempe();
+        }else {
+            return H::GetX('Codemp','Nphojint','Nomemp',$this->codempaut);
+        }
     }
     public function getCedempaut()
     {
@@ -187,5 +193,15 @@ class Viasolviatra extends BaseViasolviatra
     public function getTipvia2()
     {
         return $this->getTipvia()=='N' ? 'NACIONAL' : ($this->getTipvia()=='I' ? 'INTERNACIONAL' : '');
+    }
+
+     public function getDesubi()
+    {
+        return H::getX_vacio('Codubi','Bnubica','Desubi',$this->codubi);
+    }
+
+     public function getDescen()
+    {
+        return H::getX_vacio('Codcen','Cadefcen','Descen',$this->codcen);
     }
 }

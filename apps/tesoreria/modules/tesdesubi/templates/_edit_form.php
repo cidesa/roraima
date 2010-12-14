@@ -54,6 +54,23 @@
 
 <?php if($sf_user->getAttribute('respon','','tesdesubi')=='S') { ?>
 <br>
+  <?php if($labels['bnubica{cedemp}']!='.:') { ?>
+  <?php echo label_for('bnubica[cedemp]', __($labels['bnubica{cedemp}' ]), 'class="required" Style="text-align:left; width:150px"') ?>
+  <div class="content<?php if ($sf_request->hasError('bnubica{cedemp}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('bnubica{cedemp}')): ?>
+    <?php echo form_error('bnubica{cedemp}', array('class' => 'form-error-msg')) ?>
+  <?php endif; }?>
+
+  <?php $value = object_input_tag($bnubica, 'getCedemp', array (
+  'size' => 15,
+  'maxlength' => 10,
+  'control_name' => 'bnubica[cedemp]',
+)); echo $value ? $value : '&nbsp;' ?>
+
+  <?php if($labels['bnubica{cedemp}']!='.:') { ?>
+  </div>
+  <?php  } ?>
+<br>
   <?php if($labels['bnubica{nomemp}']!='.:') { ?>
   <?php echo label_for('bnubica[nomemp]', __($labels['bnubica{nomemp}' ]), 'class="required" Style="text-align:left; width:150px"') ?>
   <div class="content<?php if ($sf_request->hasError('bnubica{nomemp}')): ?> form-error<?php endif; ?>">
