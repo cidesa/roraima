@@ -12,13 +12,14 @@ opciones:                  # Opciones generales
   tipo:                    t
   nombrecampo:             perpre
   esgrabable:			   true
-  html:                    [ size=2 ]
+  html:                    [ size=2 readonly=true]
 2:       # Columna 2
   titulo:                  Monto
   tipo:                    m
   nombrecampo:             monasi
   esgrabable:			   true
-  html:                    [ size=10 ]
+  html:                    [ size=10 onBlur='ValidarMontoGridv2(this)']
+  estotal:                 [true, ciasiini_monasi]
 3:       # Columna 3
   titulo:                  codpre
   tipo:                    t
