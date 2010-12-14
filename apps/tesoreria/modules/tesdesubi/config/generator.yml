@@ -7,6 +7,7 @@ generator:
       codubi: { name: Código}
       desubi: { name: Descripción}
       stacod: { name: Estatus}
+      cedemp: { name: Cédula del Responsable}
       nomemp: { name: Responsable}
       nomcar: { name: Cargo}
       nomjef: { name: Jefe Compras}
@@ -23,7 +24,7 @@ generator:
     edit:
       title:          Edición de Ubicación
       display:
-        Editable:     [codubi, desubi, stacod, nomemp, nomcar, nomjef]
+        Editable:     [codubi, desubi, stacod, cedemp, nomemp, nomcar, nomjef]
       actions:
         _list:        ~
         _save:        ~

@@ -13,7 +13,7 @@ abstract class BaseBnubicaPeer {
 	const CLASS_DEFAULT = 'lib.model.Bnubica';
 
 
-	const NUM_COLUMNS = 7;
+	const NUM_COLUMNS = 8;
 
 
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -29,6 +29,9 @@ abstract class BaseBnubicaPeer {
 	const STACOD = 'bnubica.STACOD';
 
 
+	const CEDEMP = 'bnubica.CEDEMP';
+
+	
 	const NOMEMP = 'bnubica.NOMEMP';
 
 
@@ -46,18 +49,18 @@ abstract class BaseBnubicaPeer {
 
 
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codubi', 'Desubi', 'Stacod', 'Nomemp', 'Nomcar', 'Nomjef', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (BnubicaPeer::CODUBI, BnubicaPeer::DESUBI, BnubicaPeer::STACOD, BnubicaPeer::NOMEMP, BnubicaPeer::NOMCAR, BnubicaPeer::NOMJEF, BnubicaPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codubi', 'desubi', 'stacod', 'nomemp', 'nomcar', 'nomjef', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
+		BasePeer::TYPE_PHPNAME => array ('Codubi', 'Desubi', 'Stacod', 'Cedemp', 'Nomemp', 'Nomcar', 'Nomjef', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (BnubicaPeer::CODUBI, BnubicaPeer::DESUBI, BnubicaPeer::STACOD, BnubicaPeer::CEDEMP, BnubicaPeer::NOMEMP, BnubicaPeer::NOMCAR, BnubicaPeer::NOMJEF, BnubicaPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codubi', 'desubi', 'stacod', 'cedemp', 'nomemp', 'nomcar', 'nomjef', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
 	);
 
 
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codubi' => 0, 'Desubi' => 1, 'Stacod' => 2, 'Nomemp' => 3, 'Nomcar' => 4, 'Nomjef' => 5, 'Id' => 6, ),
-		BasePeer::TYPE_COLNAME => array (BnubicaPeer::CODUBI => 0, BnubicaPeer::DESUBI => 1, BnubicaPeer::STACOD => 2, BnubicaPeer::NOMEMP => 3, BnubicaPeer::NOMCAR => 4, BnubicaPeer::NOMJEF => 5, BnubicaPeer::ID => 6, ),
-		BasePeer::TYPE_FIELDNAME => array ('codubi' => 0, 'desubi' => 1, 'stacod' => 2, 'nomemp' => 3, 'nomcar' => 4, 'nomjef' => 5, 'id' => 6, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
+		BasePeer::TYPE_PHPNAME => array ('Codubi' => 0, 'Desubi' => 1, 'Stacod' => 2, 'Cedemp' => 3, 'Nomemp' => 4, 'Nomcar' => 5, 'Nomjef' => 6, 'Id' => 7, ),
+		BasePeer::TYPE_COLNAME => array (BnubicaPeer::CODUBI => 0, BnubicaPeer::DESUBI => 1, BnubicaPeer::STACOD => 2, BnubicaPeer::CEDEMP => 3, BnubicaPeer::NOMEMP => 4, BnubicaPeer::NOMCAR => 5, BnubicaPeer::NOMJEF => 6, BnubicaPeer::ID => 7, ),
+		BasePeer::TYPE_FIELDNAME => array ('codubi' => 0, 'desubi' => 1, 'stacod' => 2, 'cedemp' => 3, 'nomemp' => 4, 'nomcar' => 5, 'nomjef' => 6, 'id' => 7, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
 	);
 
 
@@ -116,6 +119,8 @@ abstract class BaseBnubicaPeer {
 		$criteria->addSelectColumn(BnubicaPeer::DESUBI);
 
 		$criteria->addSelectColumn(BnubicaPeer::STACOD);
+
+		$criteria->addSelectColumn(BnubicaPeer::CEDEMP);
 
 		$criteria->addSelectColumn(BnubicaPeer::NOMEMP);
 

@@ -13,7 +13,7 @@ abstract class BaseViasolviatraPeer {
 	const CLASS_DEFAULT = 'lib.model.Viasolviatra';
 
 	
-	const NUM_COLUMNS = 19;
+	const NUM_COLUMNS = 22;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -74,6 +74,15 @@ abstract class BaseViasolviatraPeer {
 	const CODEMPAUT = 'viasolviatra.CODEMPAUT';
 
 	
+	const CODCEN = 'viasolviatra.CODCEN';
+
+	
+	const CODUBI = 'viasolviatra.CODUBI';
+
+	
+	const NOMEMPE = 'viasolviatra.NOMEMPE';
+
+	
 	const ID = 'viasolviatra.ID';
 
 	
@@ -82,18 +91,18 @@ abstract class BaseViasolviatraPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Numsol', 'Fecsol', 'Tipvia', 'Codemp', 'Codcat', 'Codniv', 'Codempaco', 'Codnivaco', 'Dessol', 'Codciu', 'Codnivapr', 'Codproced', 'Status', 'Fecdes', 'Fechas', 'Numdia', 'Codfortra', 'Codempaut', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (ViasolviatraPeer::NUMSOL, ViasolviatraPeer::FECSOL, ViasolviatraPeer::TIPVIA, ViasolviatraPeer::CODEMP, ViasolviatraPeer::CODCAT, ViasolviatraPeer::CODNIV, ViasolviatraPeer::CODEMPACO, ViasolviatraPeer::CODNIVACO, ViasolviatraPeer::DESSOL, ViasolviatraPeer::CODCIU, ViasolviatraPeer::CODNIVAPR, ViasolviatraPeer::CODPROCED, ViasolviatraPeer::STATUS, ViasolviatraPeer::FECDES, ViasolviatraPeer::FECHAS, ViasolviatraPeer::NUMDIA, ViasolviatraPeer::CODFORTRA, ViasolviatraPeer::CODEMPAUT, ViasolviatraPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('numsol', 'fecsol', 'tipvia', 'codemp', 'codcat', 'codniv', 'codempaco', 'codnivaco', 'dessol', 'codciu', 'codnivapr', 'codproced', 'status', 'fecdes', 'fechas', 'numdia', 'codfortra', 'codempaut', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, )
+		BasePeer::TYPE_PHPNAME => array ('Numsol', 'Fecsol', 'Tipvia', 'Codemp', 'Codcat', 'Codniv', 'Codempaco', 'Codnivaco', 'Dessol', 'Codciu', 'Codnivapr', 'Codproced', 'Status', 'Fecdes', 'Fechas', 'Numdia', 'Codfortra', 'Codempaut', 'Codcen', 'Codubi', 'Nomempe', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (ViasolviatraPeer::NUMSOL, ViasolviatraPeer::FECSOL, ViasolviatraPeer::TIPVIA, ViasolviatraPeer::CODEMP, ViasolviatraPeer::CODCAT, ViasolviatraPeer::CODNIV, ViasolviatraPeer::CODEMPACO, ViasolviatraPeer::CODNIVACO, ViasolviatraPeer::DESSOL, ViasolviatraPeer::CODCIU, ViasolviatraPeer::CODNIVAPR, ViasolviatraPeer::CODPROCED, ViasolviatraPeer::STATUS, ViasolviatraPeer::FECDES, ViasolviatraPeer::FECHAS, ViasolviatraPeer::NUMDIA, ViasolviatraPeer::CODFORTRA, ViasolviatraPeer::CODEMPAUT, ViasolviatraPeer::CODCEN, ViasolviatraPeer::CODUBI, ViasolviatraPeer::NOMEMPE, ViasolviatraPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('numsol', 'fecsol', 'tipvia', 'codemp', 'codcat', 'codniv', 'codempaco', 'codnivaco', 'dessol', 'codciu', 'codnivapr', 'codproced', 'status', 'fecdes', 'fechas', 'numdia', 'codfortra', 'codempaut', 'codcen', 'codubi', 'nomempe', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Numsol' => 0, 'Fecsol' => 1, 'Tipvia' => 2, 'Codemp' => 3, 'Codcat' => 4, 'Codniv' => 5, 'Codempaco' => 6, 'Codnivaco' => 7, 'Dessol' => 8, 'Codciu' => 9, 'Codnivapr' => 10, 'Codproced' => 11, 'Status' => 12, 'Fecdes' => 13, 'Fechas' => 14, 'Numdia' => 15, 'Codfortra' => 16, 'Codempaut' => 17, 'Id' => 18, ),
-		BasePeer::TYPE_COLNAME => array (ViasolviatraPeer::NUMSOL => 0, ViasolviatraPeer::FECSOL => 1, ViasolviatraPeer::TIPVIA => 2, ViasolviatraPeer::CODEMP => 3, ViasolviatraPeer::CODCAT => 4, ViasolviatraPeer::CODNIV => 5, ViasolviatraPeer::CODEMPACO => 6, ViasolviatraPeer::CODNIVACO => 7, ViasolviatraPeer::DESSOL => 8, ViasolviatraPeer::CODCIU => 9, ViasolviatraPeer::CODNIVAPR => 10, ViasolviatraPeer::CODPROCED => 11, ViasolviatraPeer::STATUS => 12, ViasolviatraPeer::FECDES => 13, ViasolviatraPeer::FECHAS => 14, ViasolviatraPeer::NUMDIA => 15, ViasolviatraPeer::CODFORTRA => 16, ViasolviatraPeer::CODEMPAUT => 17, ViasolviatraPeer::ID => 18, ),
-		BasePeer::TYPE_FIELDNAME => array ('numsol' => 0, 'fecsol' => 1, 'tipvia' => 2, 'codemp' => 3, 'codcat' => 4, 'codniv' => 5, 'codempaco' => 6, 'codnivaco' => 7, 'dessol' => 8, 'codciu' => 9, 'codnivapr' => 10, 'codproced' => 11, 'status' => 12, 'fecdes' => 13, 'fechas' => 14, 'numdia' => 15, 'codfortra' => 16, 'codempaut' => 17, 'id' => 18, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, )
+		BasePeer::TYPE_PHPNAME => array ('Numsol' => 0, 'Fecsol' => 1, 'Tipvia' => 2, 'Codemp' => 3, 'Codcat' => 4, 'Codniv' => 5, 'Codempaco' => 6, 'Codnivaco' => 7, 'Dessol' => 8, 'Codciu' => 9, 'Codnivapr' => 10, 'Codproced' => 11, 'Status' => 12, 'Fecdes' => 13, 'Fechas' => 14, 'Numdia' => 15, 'Codfortra' => 16, 'Codempaut' => 17, 'Codcen' => 18, 'Codubi' => 19, 'Nomempe' => 20, 'Id' => 21, ),
+		BasePeer::TYPE_COLNAME => array (ViasolviatraPeer::NUMSOL => 0, ViasolviatraPeer::FECSOL => 1, ViasolviatraPeer::TIPVIA => 2, ViasolviatraPeer::CODEMP => 3, ViasolviatraPeer::CODCAT => 4, ViasolviatraPeer::CODNIV => 5, ViasolviatraPeer::CODEMPACO => 6, ViasolviatraPeer::CODNIVACO => 7, ViasolviatraPeer::DESSOL => 8, ViasolviatraPeer::CODCIU => 9, ViasolviatraPeer::CODNIVAPR => 10, ViasolviatraPeer::CODPROCED => 11, ViasolviatraPeer::STATUS => 12, ViasolviatraPeer::FECDES => 13, ViasolviatraPeer::FECHAS => 14, ViasolviatraPeer::NUMDIA => 15, ViasolviatraPeer::CODFORTRA => 16, ViasolviatraPeer::CODEMPAUT => 17, ViasolviatraPeer::CODCEN => 18, ViasolviatraPeer::CODUBI => 19, ViasolviatraPeer::NOMEMPE => 20, ViasolviatraPeer::ID => 21, ),
+		BasePeer::TYPE_FIELDNAME => array ('numsol' => 0, 'fecsol' => 1, 'tipvia' => 2, 'codemp' => 3, 'codcat' => 4, 'codniv' => 5, 'codempaco' => 6, 'codnivaco' => 7, 'dessol' => 8, 'codciu' => 9, 'codnivapr' => 10, 'codproced' => 11, 'status' => 12, 'fecdes' => 13, 'fechas' => 14, 'numdia' => 15, 'codfortra' => 16, 'codempaut' => 17, 'codcen' => 18, 'codubi' => 19, 'nomempe' => 20, 'id' => 21, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, )
 	);
 
 	
@@ -182,6 +191,12 @@ abstract class BaseViasolviatraPeer {
 		$criteria->addSelectColumn(ViasolviatraPeer::CODFORTRA);
 
 		$criteria->addSelectColumn(ViasolviatraPeer::CODEMPAUT);
+
+		$criteria->addSelectColumn(ViasolviatraPeer::CODCEN);
+
+		$criteria->addSelectColumn(ViasolviatraPeer::CODUBI);
+
+		$criteria->addSelectColumn(ViasolviatraPeer::NOMEMPE);
 
 		$criteria->addSelectColumn(ViasolviatraPeer::ID);
 

@@ -70,6 +70,12 @@ class ViasolviatraMapBuilder {
 
 		$tMap->addColumn('CODEMPAUT', 'Codempaut', 'string', CreoleTypes::VARCHAR, false, 16);
 
+		$tMap->addColumn('CODCEN', 'Codcen', 'string', CreoleTypes::VARCHAR, false, 4);
+
+		$tMap->addColumn('CODUBI', 'Codubi', 'string', CreoleTypes::VARCHAR, false, 30);
+
+		$tMap->addColumn('NOMEMPE', 'Nomempe', 'string', CreoleTypes::VARCHAR, false, 250);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

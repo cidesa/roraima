@@ -222,6 +222,17 @@ propel:
     codempaut:
       type: VARCHAR
       size: 16
+    codcen:
+      type: VARCHAR
+      size: 4
+      description: Código de la Unidad Ejecutora
+    codubi:
+      type: VARCHAR
+      size: 30
+      description: Código de la Unidad Solicitante
+    nomempe:
+      type: VARCHAR
+      size: 250
     id:
       type: INTEGER
       required: true

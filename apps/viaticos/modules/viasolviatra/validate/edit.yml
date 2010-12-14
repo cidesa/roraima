@@ -79,7 +79,7 @@ names:
   viasolviatra{codempaut}:
     required:  Yes
     required_msg: Este campo no puede estar en Blanco
-    validators: Validator_codemp
+    #validators: Validator_codemp
 
   viasolviatra{numdia}:
     required:  Yes

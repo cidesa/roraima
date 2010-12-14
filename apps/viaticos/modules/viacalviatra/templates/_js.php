@@ -1,5 +1,10 @@
 <script language="Javascript">
-
+    var respon='<?php echo H::getConfApp2('respon', 'tesoreria', 'tesdesubi'); ?>';
+    if (respon!='S')
+    {
+        $('divunidadsol').hide();
+        $('divunidadeje').hide();
+    }
     $('viacalviatra_fecha').hide();
     Calculartotal();
     function rellenarcorr(id)

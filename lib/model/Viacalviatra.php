@@ -95,8 +95,15 @@ class Viacalviatra extends BaseViacalviatra
     }
     public function getEmpleadoaut()
     {
-        $codemp=H::getX('Numsol','Viasolviatra','Codempaut',$this->refsol);
-        $nomemp=H::getX('Codemp','Nphojint','Nomemp',$codemp);
+        $respon=H::getConfApp2('respon', 'tesoreria', 'tesdesubi');
+        if ($respon=='S')
+        {
+            $codemp=H::getX('Numsol','Viasolviatra','Codempaut',$this->refsol);
+            $nomemp=H::getX('Numsol','Viasolviatra','Nomempe',$this->refsol);
+        }else {
+            $codemp=H::getX('Numsol','Viasolviatra','Codempaut',$this->refsol);
+            $nomemp=H::getX('Codemp','Nphojint','Nomemp',$codemp);
+        }
         return  $codemp!='' ? $codemp.'  -  '.$nomemp : '';
     }
     public function getDessol()
@@ -169,6 +176,20 @@ class Viacalviatra extends BaseViacalviatra
         $nomcat=H::getX('Codcat','Npcatpre','Nomcat',$this->codcat);
         return  $this->codcat!='' ? $this->codcat.'  -  '.$nomcat : '';
 
+    }
+
+    public function getUnidadsol()
+    {
+        $codubi=H::getX_vacio('Numsol','Viasolviatra','codubi',$this->refsol);
+        $desubi=H::getX_vacio('Codubi','Bnubica','Desubi',$codubi);
+        return  $codubi!='' ? $codubi.'  -  '.$desubi : '';
+    }
+
+    public function getUnidadeje()
+    {
+        $codcen=H::getX_vacio('Numsol','Viasolviatra','Codcen',$this->refsol);
+        $descen=H::getX_vacio('Codcen','Cadefcen','Descen',$codcen);
+        return  $codcen!='' ? $codcen.'  -  '.$descen : '';
     }
 
 }

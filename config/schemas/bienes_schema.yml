@@ -1310,6 +1310,9 @@ propel:
     stacod:
       type: VARCHAR
       size: 1
+    cedemp:
+      type: VARCHAR
+      size: 10
     nomemp:
       type: VARCHAR
       size: 250
