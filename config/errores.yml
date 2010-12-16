@@ -528,6 +528,9 @@
 571:
   cod: 571
   msj: La Fecha de Anulación del Movimiento no puede ser menor a la fecha del Movimiento.
+572:
+  cod: 572
+  msj: No se puede modificar la moneda porque tiene movimientos asociados
 3:
   cod: 3
   msj: La contraseña es diferente.
