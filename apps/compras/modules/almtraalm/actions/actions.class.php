@@ -122,7 +122,8 @@ $this->Bitacora('Guardo');
   	    $opciones->setEliminar(true);
   	else
   	    $opciones->setEliminar(false);
-  	if ($this->catraalm->getId()) $opciones->setFilas(0);
+  	if ($this->catraalm->getId()) { $opciones->setFilas(0); }
+        else { $opciones->setFilas(250); }
   	$opciones->setTabla('Cadettra');
   	$opciones->setName('a');
   	$opciones->setAnchoGrid(850);
