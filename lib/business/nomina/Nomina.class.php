@@ -1471,6 +1471,13 @@ class Nomina {
         }
         break;
 
+      case "CCAR" :
+        $criterio = "Select comcar as campo from npcargos where  codcar='" . $cargo . "'";
+        if (Herramientas :: BuscarDatos($criterio, & $tabla)) {
+          $valor = $tabla[0]["campo"];
+        }
+        break;
+
       case "SIM" :
         $criterio = "Select coalesce(SUM(Monto),0) as campo from npAsiConEmp A,NPCONSALINT B where  A.CODCON=B.CODCON  and a.codemp='" . $empleado . "' and a.codcar='" . $cargo . "'";
         if (Herramientas :: BuscarDatos($criterio, & $tabla)) {
@@ -3853,6 +3860,12 @@ class Nomina {
           return $tabla[0]["campo"];
         }
 
+        break;
+      case "CCAR" :
+        $criterio = "Select comcar as campo from npcargos where  codcar='" . $cargo . "'";
+        if (Herramientas :: BuscarDatos($criterio, & $tabla)) {
+          $valor = $tabla[0]["campo"];
+        }
         break;
       case "TAF" :
         $criterio = "Select coalesce(SUM(a.saldo),0) as campo from npNomCal A,NPDEFCPT B where  A.CODCON=B.CODCON AND  a.codnom='" . $nomina . "' and a.codemp='" . $empleado . "' and a.codcar='" . $cargo . "' AND b.OPECON='A' AND b.IMPCPT='S' ";
