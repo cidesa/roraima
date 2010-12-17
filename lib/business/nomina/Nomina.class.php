@@ -1975,10 +1975,9 @@ class Nomina {
         break;
 
       case "CATRAB" :
-        $sql = "Select ultfec from NPNomina where CodNom='" . $nomina . "'";
-        if (Herramientas :: BuscarDatos($sql, & $tabla)) {
-          $fecnom1 = $tabla[0]["ultfec"];
-          $valor = 0;
+        $valor = 0;
+        $hasta_mod = split('/', $hasta);
+        $desde_mod = split('/', $desde);
         $t= new Criteria();
         $t->add(NphojintPeer::CODEMP,$empleado);
         $result= NphojintPeer::doSelectOne($t);
@@ -1986,26 +1985,25 @@ class Nomina {
         {
           $fecharein=$result->getFecrei();
         }else $fecharein="";
-
         if ($fecharein!="")
         {
-           if (intval(date('m', strtotime($fecharein))) == intval(date('m', strtotime($fecnom)))) {
-            if (intval(date('d', strtotime($fecharein))) >= intval(date('d', strtotime($fecnom1))) && intval(date('d', strtotime($fecharein))) <= intval(date('d', strtotime($fecnom)))) {
-              if (intval(date('Y', strtotime($fecharein))) < intval(date('Y', strtotime($fecnom)))) {
-                $valor = 1;
-              }
+          if (intval(date('m', strtotime($fecharein))) == intval(date('m', strtotime($hasta_mod[1] . '/' . $hasta_mod[0] . '/' . $hasta_mod[2])))) {
+          if (intval(date('d', strtotime($fecharein))) >= intval(date('d', strtotime($desde_mod[1] . '/' . $desde_mod[0] . '/' . $desde_mod[2]))) && intval(date('d', strtotime($fecharein))) <= intval(date('d', strtotime($hasta_mod[1] . '/' . $hasta_mod[0] . '/' . $hasta_mod[2])))) {
+            if (intval(date('Y', strtotime($fecharein))) < intval(date('Y', strtotime($hasta_mod[1] . '/' . $hasta_mod[0] . '/' . $hasta_mod[2])))) {
+              $valor = 1;
             }
           }
+        }
         }else{
-           if (intval(date('m', strtotime($fechaing))) == intval(date('m', strtotime($fecnom)))) {
-            if (intval(date('d', strtotime($fechaing))) >= intval(date('d', strtotime($fecnom1))) && intval(date('d', strtotime($fechaing))) <= intval(date('d', strtotime($fecnom)))) {
-              if (intval(date('Y', strtotime($fechaing))) < intval(date('Y', strtotime($fecnom)))) {
-                $valor = 1;
-              }
+        if (intval(date('m', strtotime($fechaing))) == intval(date('m', strtotime($hasta_mod[1] . '/' . $hasta_mod[0] . '/' . $hasta_mod[2])))) {
+          if (intval(date('d', strtotime($fechaing))) >= intval(date('d', strtotime($desde_mod[1] . '/' . $desde_mod[0] . '/' . $desde_mod[2]))) && intval(date('d', strtotime($fechaing))) <= intval(date('d', strtotime($hasta_mod[1] . '/' . $hasta_mod[0] . '/' . $hasta_mod[2])))) {
+            if (intval(date('Y', strtotime($fechaing))) < intval(date('Y', strtotime($hasta_mod[1] . '/' . $hasta_mod[0] . '/' . $hasta_mod[2])))) {
+              $valor = 1;
             }
           }
         }
         }
+        return $valor;
         break;
 
       case "CC" :
