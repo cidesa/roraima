@@ -7534,6 +7534,79 @@ propel:
       primaryKey: true
       autoIncrement: true
       description: Identificador Único del registro
+  npasiconcar:
+    codcar:
+      type: VARCHAR
+      size: 16
+      required: true
+    codcon:
+      type: VARCHAR
+      size: 3
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  npcatnomemp:
+    codcat:
+      type: VARCHAR
+      size: 32
+      required: true
+    codnom:
+      type: VARCHAR
+      size: 3
+      required: true
+    codemp:
+      type: VARCHAR
+      size: 16
+      required: true
+    codcar:
+      type: VARCHAR
+      size: 16
+      required: true
+    monto:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  npcatnomempcon:
+    codcat:
+      type: VARCHAR
+      size: 32
+      required: true
+    codnom:
+      type: VARCHAR
+      size: 3
+      required: true
+    codemp:
+      type: VARCHAR
+      size: 16
+      required: true
+    codcar:
+      type: VARCHAR
+      size: 16
+      required: true
+    codcon:
+      type: VARCHAR
+      size: 3
+      required: true
+    monto:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
   npbonfinano:
     codnom:
       type: VARCHAR
