@@ -777,6 +777,66 @@ propel:
     codcen:
       type: VARCHAR
       size: 4
+    fecemiov:
+      type: DATE
+    feccarov:
+      type: DATE
+    locori:
+      type: VARCHAR
+      size: 250
+    direccion:
+      type: VARCHAR
+      size: 1000
+    rubro:
+      type: VARCHAR
+      size: 100
+    cankg:
+      type: NUMERIC
+      size: 10
+      scale: 2
+    totpasreal:
+      type: NUMERIC
+      size: 10
+      scale: 2
+    locrec:
+      type: VARCHAR
+      size: 250
+    emptra:
+      type: VARCHAR
+      size: 500
+    nomrep:
+      type: VARCHAR
+      size: 250
+    telemp:
+      type: VARCHAR
+      size: 100
+    choveh:
+      type: VARCHAR
+      size: 250
+    cedcho:
+      type: VARCHAR
+      size: 20
+    telcho:
+      type: VARCHAR
+      size: 100
+    nomconfordes:
+      type: VARCHAR
+      size: 250
+    cedconfordes:
+      type: VARCHAR
+      size: 20
+    horsalconfordes:
+      type: VARCHAR
+      size: 20
+    nomconforrec:
+      type: VARCHAR
+      size: 250
+    cedconforrec:
+      type: VARCHAR
+      size: 20
+    horlleconforrec:
+      type: VARCHAR
+      size: 20
     id:
       type: INTEGER
       required: true

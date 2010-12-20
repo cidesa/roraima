@@ -4,103 +4,183 @@
 abstract class BaseCadphart extends BaseObject  implements Persistent {
 
 
-	
+
 	protected static $peer;
 
 
-	
+
 	protected $dphart;
 
 
-	
+
 	protected $fecdph;
 
 
-	
+
 	protected $reqart;
 
 
-	
+
 	protected $desdph;
 
 
-	
+
 	protected $codori;
 
 
-	
+
 	protected $stadph;
 
 
-	
+
 	protected $numcom;
 
 
-	
+
 	protected $refpag;
 
 
-	
+
 	protected $codalm;
 
 
-	
+
 	protected $tipdph;
 
 
-	
+
 	protected $codcli;
 
 
-	
+
 	protected $mondph;
 
 
-	
+
 	protected $obsdph;
 
 
-	
+
 	protected $fordesp;
 
 
-	
+
 	protected $reapor;
 
 
-	
+
 	protected $fecanu;
 
 
-	
+
 	protected $codubi;
 
 
-	
+
 	protected $tipref;
 
 
-	
+
 	protected $codcen;
 
 
-	
+
+	protected $fecemiov;
+
+
+
+	protected $feccarov;
+
+
+
+	protected $locori;
+
+
+
+	protected $direccion;
+
+
+
+	protected $rubro;
+
+
+
+	protected $cankg;
+
+
+
+	protected $totpasreal;
+
+
+
+	protected $locrec;
+
+
+
+	protected $emptra;
+
+
+
+	protected $nomrep;
+
+
+
+	protected $telemp;
+
+
+
+	protected $choveh;
+
+
+
+	protected $cedcho;
+
+
+
+	protected $telcho;
+
+
+
+	protected $nomconfordes;
+
+
+
+	protected $cedconfordes;
+
+
+
+	protected $horsalconfordes;
+
+
+
+	protected $nomconforrec;
+
+
+
+	protected $cedconforrec;
+
+
+
+	protected $horlleconforrec;
+
+
+
 	protected $id;
 
-	
+
 	protected $alreadyInSave = false;
 
-	
+
 	protected $alreadyInValidation = false;
 
-  
+
   public function getDphart()
   {
 
     return trim($this->dphart);
 
   }
-  
+
   public function getFecdph($format = 'Y-m-d')
   {
 
@@ -122,70 +202,70 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
     }
   }
 
-  
+
   public function getReqart()
   {
 
     return trim($this->reqart);
 
   }
-  
+
   public function getDesdph()
   {
 
     return trim($this->desdph);
 
   }
-  
+
   public function getCodori()
   {
 
     return trim($this->codori);
 
   }
-  
+
   public function getStadph()
   {
 
     return trim($this->stadph);
 
   }
-  
+
   public function getNumcom()
   {
 
     return trim($this->numcom);
 
   }
-  
+
   public function getRefpag()
   {
 
     return trim($this->refpag);
 
   }
-  
+
   public function getCodalm()
   {
 
     return trim($this->codalm);
 
   }
-  
+
   public function getTipdph()
   {
 
     return trim($this->tipdph);
 
   }
-  
+
   public function getCodcli()
   {
 
     return trim($this->codcli);
 
   }
-  
+
   public function getMondph($val=false)
   {
 
@@ -193,28 +273,28 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
     else return $this->mondph;
 
   }
-  
+
   public function getObsdph()
   {
 
     return trim($this->obsdph);
 
   }
-  
+
   public function getFordesp()
   {
 
     return trim($this->fordesp);
 
   }
-  
+
   public function getReapor()
   {
 
     return trim($this->reapor);
 
   }
-  
+
   public function getFecanu($format = 'Y-m-d')
   {
 
@@ -236,35 +316,207 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
     }
   }
 
-  
+
   public function getCodubi()
   {
 
     return trim($this->codubi);
 
   }
-  
+
   public function getTipref()
   {
 
     return trim($this->tipref);
 
   }
-  
+
   public function getCodcen()
   {
 
     return trim($this->codcen);
 
   }
-  
+
+  public function getFecemiov($format = 'Y-m-d')
+  {
+
+    if ($this->fecemiov === null || $this->fecemiov === '') {
+      return null;
+    } elseif (!is_int($this->fecemiov)) {
+            $ts = adodb_strtotime($this->fecemiov);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecemiov] as date/time value: " . var_export($this->fecemiov, true));
+      }
+    } else {
+      $ts = $this->fecemiov;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+
+  public function getFeccarov($format = 'Y-m-d')
+  {
+
+    if ($this->feccarov === null || $this->feccarov === '') {
+      return null;
+    } elseif (!is_int($this->feccarov)) {
+            $ts = adodb_strtotime($this->feccarov);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [feccarov] as date/time value: " . var_export($this->feccarov, true));
+      }
+    } else {
+      $ts = $this->feccarov;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+
+  public function getLocori()
+  {
+
+    return trim($this->locori);
+
+  }
+
+  public function getDireccion()
+  {
+
+    return trim($this->direccion);
+
+  }
+
+  public function getRubro()
+  {
+
+    return trim($this->rubro);
+
+  }
+
+  public function getCankg($val=false)
+  {
+
+    if($val) return number_format($this->cankg,2,',','.');
+    else return $this->cankg;
+
+  }
+
+  public function getTotpasreal($val=false)
+  {
+
+    if($val) return number_format($this->totpasreal,2,',','.');
+    else return $this->totpasreal;
+
+  }
+
+  public function getLocrec()
+  {
+
+    return trim($this->locrec);
+
+  }
+
+  public function getEmptra()
+  {
+
+    return trim($this->emptra);
+
+  }
+
+  public function getNomrep()
+  {
+
+    return trim($this->nomrep);
+
+  }
+
+  public function getTelemp()
+  {
+
+    return trim($this->telemp);
+
+  }
+
+  public function getChoveh()
+  {
+
+    return trim($this->choveh);
+
+  }
+
+  public function getCedcho()
+  {
+
+    return trim($this->cedcho);
+
+  }
+
+  public function getTelcho()
+  {
+
+    return trim($this->telcho);
+
+  }
+
+  public function getNomconfordes()
+  {
+
+    return trim($this->nomconfordes);
+
+  }
+
+  public function getCedconfordes()
+  {
+
+    return trim($this->cedconfordes);
+
+  }
+
+  public function getHorsalconfordes()
+  {
+
+    return trim($this->horsalconfordes);
+
+  }
+
+  public function getNomconforrec()
+  {
+
+    return trim($this->nomconforrec);
+
+  }
+
+  public function getCedconforrec()
+  {
+
+    return trim($this->cedconforrec);
+
+  }
+
+  public function getHorlleconforrec()
+  {
+
+    return trim($this->horlleconforrec);
+
+  }
+
   public function getId()
   {
 
     return $this->id;
 
   }
-	
+
 	public function setDphart($v)
 	{
 
@@ -272,9 +524,9 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
         $this->dphart = $v;
         $this->modifiedColumns[] = CadphartPeer::DPHART;
       }
-  
-	} 
-	
+
+	}
+
 	public function setFecdph($v)
 	{
 
@@ -295,8 +547,8 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
       $this->modifiedColumns[] = CadphartPeer::FECDPH;
     }
 
-	} 
-	
+	}
+
 	public function setReqart($v)
 	{
 
@@ -304,9 +556,9 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
         $this->reqart = $v;
         $this->modifiedColumns[] = CadphartPeer::REQART;
       }
-  
-	} 
-	
+
+	}
+
 	public function setDesdph($v)
 	{
 
@@ -314,9 +566,9 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
         $this->desdph = $v;
         $this->modifiedColumns[] = CadphartPeer::DESDPH;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCodori($v)
 	{
 
@@ -324,9 +576,9 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
         $this->codori = $v;
         $this->modifiedColumns[] = CadphartPeer::CODORI;
       }
-  
-	} 
-	
+
+	}
+
 	public function setStadph($v)
 	{
 
@@ -334,9 +586,9 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
         $this->stadph = $v;
         $this->modifiedColumns[] = CadphartPeer::STADPH;
       }
-  
-	} 
-	
+
+	}
+
 	public function setNumcom($v)
 	{
 
@@ -344,9 +596,9 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
         $this->numcom = $v;
         $this->modifiedColumns[] = CadphartPeer::NUMCOM;
       }
-  
-	} 
-	
+
+	}
+
 	public function setRefpag($v)
 	{
 
@@ -354,9 +606,9 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
         $this->refpag = $v;
         $this->modifiedColumns[] = CadphartPeer::REFPAG;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCodalm($v)
 	{
 
@@ -364,9 +616,9 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
         $this->codalm = $v;
         $this->modifiedColumns[] = CadphartPeer::CODALM;
       }
-  
-	} 
-	
+
+	}
+
 	public function setTipdph($v)
 	{
 
@@ -374,9 +626,9 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
         $this->tipdph = $v;
         $this->modifiedColumns[] = CadphartPeer::TIPDPH;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCodcli($v)
 	{
 
@@ -384,9 +636,9 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
         $this->codcli = $v;
         $this->modifiedColumns[] = CadphartPeer::CODCLI;
       }
-  
-	} 
-	
+
+	}
+
 	public function setMondph($v)
 	{
 
@@ -394,9 +646,9 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
         $this->mondph = Herramientas::toFloat($v);
         $this->modifiedColumns[] = CadphartPeer::MONDPH;
       }
-  
-	} 
-	
+
+	}
+
 	public function setObsdph($v)
 	{
 
@@ -404,9 +656,9 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
         $this->obsdph = $v;
         $this->modifiedColumns[] = CadphartPeer::OBSDPH;
       }
-  
-	} 
-	
+
+	}
+
 	public function setFordesp($v)
 	{
 
@@ -414,9 +666,9 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
         $this->fordesp = $v;
         $this->modifiedColumns[] = CadphartPeer::FORDESP;
       }
-  
-	} 
-	
+
+	}
+
 	public function setReapor($v)
 	{
 
@@ -424,9 +676,9 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
         $this->reapor = $v;
         $this->modifiedColumns[] = CadphartPeer::REAPOR;
       }
-  
-	} 
-	
+
+	}
+
 	public function setFecanu($v)
 	{
 
@@ -447,8 +699,8 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
       $this->modifiedColumns[] = CadphartPeer::FECANU;
     }
 
-	} 
-	
+	}
+
 	public function setCodubi($v)
 	{
 
@@ -456,9 +708,9 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
         $this->codubi = $v;
         $this->modifiedColumns[] = CadphartPeer::CODUBI;
       }
-  
-	} 
-	
+
+	}
+
 	public function setTipref($v)
 	{
 
@@ -466,9 +718,9 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
         $this->tipref = $v;
         $this->modifiedColumns[] = CadphartPeer::TIPREF;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCodcen($v)
 	{
 
@@ -476,9 +728,233 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
         $this->codcen = $v;
         $this->modifiedColumns[] = CadphartPeer::CODCEN;
       }
-  
-	} 
-	
+
+	}
+
+	public function setFecemiov($v)
+	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecemiov] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecemiov !== $ts) {
+      $this->fecemiov = $ts;
+      $this->modifiedColumns[] = CadphartPeer::FECEMIOV;
+    }
+
+	}
+
+	public function setFeccarov($v)
+	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [feccarov] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->feccarov !== $ts) {
+      $this->feccarov = $ts;
+      $this->modifiedColumns[] = CadphartPeer::FECCAROV;
+    }
+
+	}
+
+	public function setLocori($v)
+	{
+
+    if ($this->locori !== $v) {
+        $this->locori = $v;
+        $this->modifiedColumns[] = CadphartPeer::LOCORI;
+      }
+
+	}
+
+	public function setDireccion($v)
+	{
+
+    if ($this->direccion !== $v) {
+        $this->direccion = $v;
+        $this->modifiedColumns[] = CadphartPeer::DIRECCION;
+      }
+
+	}
+
+	public function setRubro($v)
+	{
+
+    if ($this->rubro !== $v) {
+        $this->rubro = $v;
+        $this->modifiedColumns[] = CadphartPeer::RUBRO;
+      }
+
+	}
+
+	public function setCankg($v)
+	{
+
+    if ($this->cankg !== $v) {
+        $this->cankg = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CadphartPeer::CANKG;
+      }
+
+	}
+
+	public function setTotpasreal($v)
+	{
+
+    if ($this->totpasreal !== $v) {
+        $this->totpasreal = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CadphartPeer::TOTPASREAL;
+      }
+
+	}
+
+	public function setLocrec($v)
+	{
+
+    if ($this->locrec !== $v) {
+        $this->locrec = $v;
+        $this->modifiedColumns[] = CadphartPeer::LOCREC;
+      }
+
+	}
+
+	public function setEmptra($v)
+	{
+
+    if ($this->emptra !== $v) {
+        $this->emptra = $v;
+        $this->modifiedColumns[] = CadphartPeer::EMPTRA;
+      }
+
+	}
+
+	public function setNomrep($v)
+	{
+
+    if ($this->nomrep !== $v) {
+        $this->nomrep = $v;
+        $this->modifiedColumns[] = CadphartPeer::NOMREP;
+      }
+
+	}
+
+	public function setTelemp($v)
+	{
+
+    if ($this->telemp !== $v) {
+        $this->telemp = $v;
+        $this->modifiedColumns[] = CadphartPeer::TELEMP;
+      }
+
+	}
+
+	public function setChoveh($v)
+	{
+
+    if ($this->choveh !== $v) {
+        $this->choveh = $v;
+        $this->modifiedColumns[] = CadphartPeer::CHOVEH;
+      }
+
+	}
+
+	public function setCedcho($v)
+	{
+
+    if ($this->cedcho !== $v) {
+        $this->cedcho = $v;
+        $this->modifiedColumns[] = CadphartPeer::CEDCHO;
+      }
+
+	}
+
+	public function setTelcho($v)
+	{
+
+    if ($this->telcho !== $v) {
+        $this->telcho = $v;
+        $this->modifiedColumns[] = CadphartPeer::TELCHO;
+      }
+
+	}
+
+	public function setNomconfordes($v)
+	{
+
+    if ($this->nomconfordes !== $v) {
+        $this->nomconfordes = $v;
+        $this->modifiedColumns[] = CadphartPeer::NOMCONFORDES;
+      }
+
+	}
+
+	public function setCedconfordes($v)
+	{
+
+    if ($this->cedconfordes !== $v) {
+        $this->cedconfordes = $v;
+        $this->modifiedColumns[] = CadphartPeer::CEDCONFORDES;
+      }
+
+	}
+
+	public function setHorsalconfordes($v)
+	{
+
+    if ($this->horsalconfordes !== $v) {
+        $this->horsalconfordes = $v;
+        $this->modifiedColumns[] = CadphartPeer::HORSALCONFORDES;
+      }
+
+	}
+
+	public function setNomconforrec($v)
+	{
+
+    if ($this->nomconforrec !== $v) {
+        $this->nomconforrec = $v;
+        $this->modifiedColumns[] = CadphartPeer::NOMCONFORREC;
+      }
+
+	}
+
+	public function setCedconforrec($v)
+	{
+
+    if ($this->cedconforrec !== $v) {
+        $this->cedconforrec = $v;
+        $this->modifiedColumns[] = CadphartPeer::CEDCONFORREC;
+      }
+
+	}
+
+	public function setHorlleconforrec($v)
+	{
+
+    if ($this->horlleconforrec !== $v) {
+        $this->horlleconforrec = $v;
+        $this->modifiedColumns[] = CadphartPeer::HORLLECONFORREC;
+      }
+
+	}
+
 	public function setId($v)
 	{
 
@@ -486,9 +962,9 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
         $this->id = $v;
         $this->modifiedColumns[] = CadphartPeer::ID;
       }
-  
-	} 
-  
+
+	}
+
   public function hydrate(ResultSet $rs, $startcol = 1)
   {
     try {
@@ -531,7 +1007,47 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
 
       $this->codcen = $rs->getString($startcol + 18);
 
-      $this->id = $rs->getInt($startcol + 19);
+      $this->fecemiov = $rs->getDate($startcol + 19, null);
+
+      $this->feccarov = $rs->getDate($startcol + 20, null);
+
+      $this->locori = $rs->getString($startcol + 21);
+
+      $this->direccion = $rs->getString($startcol + 22);
+
+      $this->rubro = $rs->getString($startcol + 23);
+
+      $this->cankg = $rs->getFloat($startcol + 24);
+
+      $this->totpasreal = $rs->getFloat($startcol + 25);
+
+      $this->locrec = $rs->getString($startcol + 26);
+
+      $this->emptra = $rs->getString($startcol + 27);
+
+      $this->nomrep = $rs->getString($startcol + 28);
+
+      $this->telemp = $rs->getString($startcol + 29);
+
+      $this->choveh = $rs->getString($startcol + 30);
+
+      $this->cedcho = $rs->getString($startcol + 31);
+
+      $this->telcho = $rs->getString($startcol + 32);
+
+      $this->nomconfordes = $rs->getString($startcol + 33);
+
+      $this->cedconfordes = $rs->getString($startcol + 34);
+
+      $this->horsalconfordes = $rs->getString($startcol + 35);
+
+      $this->nomconforrec = $rs->getString($startcol + 36);
+
+      $this->cedconforrec = $rs->getString($startcol + 37);
+
+      $this->horlleconforrec = $rs->getString($startcol + 38);
+
+      $this->id = $rs->getInt($startcol + 39);
 
       $this->resetModified();
 
@@ -539,7 +1055,7 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 20; 
+            return $startcol + 40;
     } catch (Exception $e) {
       throw new PropelException("Error populating Cadphart object", $e);
     }
@@ -550,8 +1066,8 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
   {
 
   }
-    
-  
+
+
   public function __call($m, $a)
     {
       $prefijo = substr($m,0,3);
@@ -565,7 +1081,7 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
 
     }
 
-	
+
 	public function delete($con = null)
 	{
 		if ($this->isDeleted()) {
@@ -587,7 +1103,7 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	public function save($con = null)
 	{
 		if ($this->isDeleted()) {
@@ -609,7 +1125,7 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	protected function doSave($con)
 	{
 		$affectedRows = 0; 		if (!$this->alreadyInSave) {
@@ -619,8 +1135,8 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
 						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = CadphartPeer::doInsert($this, $con);
-					$affectedRows += 1; 										 										 
-					$this->setId($pk);  
+					$affectedRows += 1;
+					$this->setId($pk);
 					$this->setNew(false);
 				} else {
 					$affectedRows += CadphartPeer::doUpdate($this, $con);
@@ -630,17 +1146,17 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
-	} 
-	
+	}
+
 	protected $validationFailures = array();
 
-	
+
 	public function getValidationFailures()
 	{
 		return $this->validationFailures;
 	}
 
-	
+
 	public function validate($columns = null)
 	{
 		$res = $this->doValidate($columns);
@@ -653,7 +1169,7 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	protected function doValidate($columns = null)
 	{
 		if (!$this->alreadyInValidation) {
@@ -675,14 +1191,14 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
 		return (!empty($failureMap) ? $failureMap : true);
 	}
 
-	
+
 	public function getByName($name, $type = BasePeer::TYPE_PHPNAME)
 	{
 		$pos = CadphartPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->getByPosition($pos);
 	}
 
-	
+
 	public function getByPosition($pos)
 	{
 		switch($pos) {
@@ -744,6 +1260,66 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
 				return $this->getCodcen();
 				break;
 			case 19:
+				return $this->getFecemiov();
+				break;
+			case 20:
+				return $this->getFeccarov();
+				break;
+			case 21:
+				return $this->getLocori();
+				break;
+			case 22:
+				return $this->getDireccion();
+				break;
+			case 23:
+				return $this->getRubro();
+				break;
+			case 24:
+				return $this->getCankg();
+				break;
+			case 25:
+				return $this->getTotpasreal();
+				break;
+			case 26:
+				return $this->getLocrec();
+				break;
+			case 27:
+				return $this->getEmptra();
+				break;
+			case 28:
+				return $this->getNomrep();
+				break;
+			case 29:
+				return $this->getTelemp();
+				break;
+			case 30:
+				return $this->getChoveh();
+				break;
+			case 31:
+				return $this->getCedcho();
+				break;
+			case 32:
+				return $this->getTelcho();
+				break;
+			case 33:
+				return $this->getNomconfordes();
+				break;
+			case 34:
+				return $this->getCedconfordes();
+				break;
+			case 35:
+				return $this->getHorsalconfordes();
+				break;
+			case 36:
+				return $this->getNomconforrec();
+				break;
+			case 37:
+				return $this->getCedconforrec();
+				break;
+			case 38:
+				return $this->getHorlleconforrec();
+				break;
+			case 39:
 				return $this->getId();
 				break;
 			default:
@@ -751,7 +1327,7 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
 				break;
 		} 	}
 
-	
+
 	public function toArray($keyType = BasePeer::TYPE_PHPNAME)
 	{
 		$keys = CadphartPeer::getFieldNames($keyType);
@@ -775,19 +1351,39 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
 			$keys[16] => $this->getCodubi(),
 			$keys[17] => $this->getTipref(),
 			$keys[18] => $this->getCodcen(),
-			$keys[19] => $this->getId(),
+			$keys[19] => $this->getFecemiov(),
+			$keys[20] => $this->getFeccarov(),
+			$keys[21] => $this->getLocori(),
+			$keys[22] => $this->getDireccion(),
+			$keys[23] => $this->getRubro(),
+			$keys[24] => $this->getCankg(),
+			$keys[25] => $this->getTotpasreal(),
+			$keys[26] => $this->getLocrec(),
+			$keys[27] => $this->getEmptra(),
+			$keys[28] => $this->getNomrep(),
+			$keys[29] => $this->getTelemp(),
+			$keys[30] => $this->getChoveh(),
+			$keys[31] => $this->getCedcho(),
+			$keys[32] => $this->getTelcho(),
+			$keys[33] => $this->getNomconfordes(),
+			$keys[34] => $this->getCedconfordes(),
+			$keys[35] => $this->getHorsalconfordes(),
+			$keys[36] => $this->getNomconforrec(),
+			$keys[37] => $this->getCedconforrec(),
+			$keys[38] => $this->getHorlleconforrec(),
+			$keys[39] => $this->getId(),
 		);
 		return $result;
 	}
 
-	
+
 	public function setByName($name, $value, $type = BasePeer::TYPE_PHPNAME)
 	{
 		$pos = CadphartPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->setByPosition($pos, $value);
 	}
 
-	
+
 	public function setByPosition($pos, $value)
 	{
 		switch($pos) {
@@ -849,11 +1445,71 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
 				$this->setCodcen($value);
 				break;
 			case 19:
+				$this->setFecemiov($value);
+				break;
+			case 20:
+				$this->setFeccarov($value);
+				break;
+			case 21:
+				$this->setLocori($value);
+				break;
+			case 22:
+				$this->setDireccion($value);
+				break;
+			case 23:
+				$this->setRubro($value);
+				break;
+			case 24:
+				$this->setCankg($value);
+				break;
+			case 25:
+				$this->setTotpasreal($value);
+				break;
+			case 26:
+				$this->setLocrec($value);
+				break;
+			case 27:
+				$this->setEmptra($value);
+				break;
+			case 28:
+				$this->setNomrep($value);
+				break;
+			case 29:
+				$this->setTelemp($value);
+				break;
+			case 30:
+				$this->setChoveh($value);
+				break;
+			case 31:
+				$this->setCedcho($value);
+				break;
+			case 32:
+				$this->setTelcho($value);
+				break;
+			case 33:
+				$this->setNomconfordes($value);
+				break;
+			case 34:
+				$this->setCedconfordes($value);
+				break;
+			case 35:
+				$this->setHorsalconfordes($value);
+				break;
+			case 36:
+				$this->setNomconforrec($value);
+				break;
+			case 37:
+				$this->setCedconforrec($value);
+				break;
+			case 38:
+				$this->setHorlleconforrec($value);
+				break;
+			case 39:
 				$this->setId($value);
 				break;
 		} 	}
 
-	
+
 	public function fromArray($arr, $keyType = BasePeer::TYPE_PHPNAME)
 	{
 		$keys = CadphartPeer::getFieldNames($keyType);
@@ -877,10 +1533,30 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[16], $arr)) $this->setCodubi($arr[$keys[16]]);
 		if (array_key_exists($keys[17], $arr)) $this->setTipref($arr[$keys[17]]);
 		if (array_key_exists($keys[18], $arr)) $this->setCodcen($arr[$keys[18]]);
-		if (array_key_exists($keys[19], $arr)) $this->setId($arr[$keys[19]]);
+		if (array_key_exists($keys[19], $arr)) $this->setFecemiov($arr[$keys[19]]);
+		if (array_key_exists($keys[20], $arr)) $this->setFeccarov($arr[$keys[20]]);
+		if (array_key_exists($keys[21], $arr)) $this->setLocori($arr[$keys[21]]);
+		if (array_key_exists($keys[22], $arr)) $this->setDireccion($arr[$keys[22]]);
+		if (array_key_exists($keys[23], $arr)) $this->setRubro($arr[$keys[23]]);
+		if (array_key_exists($keys[24], $arr)) $this->setCankg($arr[$keys[24]]);
+		if (array_key_exists($keys[25], $arr)) $this->setTotpasreal($arr[$keys[25]]);
+		if (array_key_exists($keys[26], $arr)) $this->setLocrec($arr[$keys[26]]);
+		if (array_key_exists($keys[27], $arr)) $this->setEmptra($arr[$keys[27]]);
+		if (array_key_exists($keys[28], $arr)) $this->setNomrep($arr[$keys[28]]);
+		if (array_key_exists($keys[29], $arr)) $this->setTelemp($arr[$keys[29]]);
+		if (array_key_exists($keys[30], $arr)) $this->setChoveh($arr[$keys[30]]);
+		if (array_key_exists($keys[31], $arr)) $this->setCedcho($arr[$keys[31]]);
+		if (array_key_exists($keys[32], $arr)) $this->setTelcho($arr[$keys[32]]);
+		if (array_key_exists($keys[33], $arr)) $this->setNomconfordes($arr[$keys[33]]);
+		if (array_key_exists($keys[34], $arr)) $this->setCedconfordes($arr[$keys[34]]);
+		if (array_key_exists($keys[35], $arr)) $this->setHorsalconfordes($arr[$keys[35]]);
+		if (array_key_exists($keys[36], $arr)) $this->setNomconforrec($arr[$keys[36]]);
+		if (array_key_exists($keys[37], $arr)) $this->setCedconforrec($arr[$keys[37]]);
+		if (array_key_exists($keys[38], $arr)) $this->setHorlleconforrec($arr[$keys[38]]);
+		if (array_key_exists($keys[39], $arr)) $this->setId($arr[$keys[39]]);
 	}
 
-	
+
 	public function buildCriteria()
 	{
 		$criteria = new Criteria(CadphartPeer::DATABASE_NAME);
@@ -904,12 +1580,32 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CadphartPeer::CODUBI)) $criteria->add(CadphartPeer::CODUBI, $this->codubi);
 		if ($this->isColumnModified(CadphartPeer::TIPREF)) $criteria->add(CadphartPeer::TIPREF, $this->tipref);
 		if ($this->isColumnModified(CadphartPeer::CODCEN)) $criteria->add(CadphartPeer::CODCEN, $this->codcen);
+		if ($this->isColumnModified(CadphartPeer::FECEMIOV)) $criteria->add(CadphartPeer::FECEMIOV, $this->fecemiov);
+		if ($this->isColumnModified(CadphartPeer::FECCAROV)) $criteria->add(CadphartPeer::FECCAROV, $this->feccarov);
+		if ($this->isColumnModified(CadphartPeer::LOCORI)) $criteria->add(CadphartPeer::LOCORI, $this->locori);
+		if ($this->isColumnModified(CadphartPeer::DIRECCION)) $criteria->add(CadphartPeer::DIRECCION, $this->direccion);
+		if ($this->isColumnModified(CadphartPeer::RUBRO)) $criteria->add(CadphartPeer::RUBRO, $this->rubro);
+		if ($this->isColumnModified(CadphartPeer::CANKG)) $criteria->add(CadphartPeer::CANKG, $this->cankg);
+		if ($this->isColumnModified(CadphartPeer::TOTPASREAL)) $criteria->add(CadphartPeer::TOTPASREAL, $this->totpasreal);
+		if ($this->isColumnModified(CadphartPeer::LOCREC)) $criteria->add(CadphartPeer::LOCREC, $this->locrec);
+		if ($this->isColumnModified(CadphartPeer::EMPTRA)) $criteria->add(CadphartPeer::EMPTRA, $this->emptra);
+		if ($this->isColumnModified(CadphartPeer::NOMREP)) $criteria->add(CadphartPeer::NOMREP, $this->nomrep);
+		if ($this->isColumnModified(CadphartPeer::TELEMP)) $criteria->add(CadphartPeer::TELEMP, $this->telemp);
+		if ($this->isColumnModified(CadphartPeer::CHOVEH)) $criteria->add(CadphartPeer::CHOVEH, $this->choveh);
+		if ($this->isColumnModified(CadphartPeer::CEDCHO)) $criteria->add(CadphartPeer::CEDCHO, $this->cedcho);
+		if ($this->isColumnModified(CadphartPeer::TELCHO)) $criteria->add(CadphartPeer::TELCHO, $this->telcho);
+		if ($this->isColumnModified(CadphartPeer::NOMCONFORDES)) $criteria->add(CadphartPeer::NOMCONFORDES, $this->nomconfordes);
+		if ($this->isColumnModified(CadphartPeer::CEDCONFORDES)) $criteria->add(CadphartPeer::CEDCONFORDES, $this->cedconfordes);
+		if ($this->isColumnModified(CadphartPeer::HORSALCONFORDES)) $criteria->add(CadphartPeer::HORSALCONFORDES, $this->horsalconfordes);
+		if ($this->isColumnModified(CadphartPeer::NOMCONFORREC)) $criteria->add(CadphartPeer::NOMCONFORREC, $this->nomconforrec);
+		if ($this->isColumnModified(CadphartPeer::CEDCONFORREC)) $criteria->add(CadphartPeer::CEDCONFORREC, $this->cedconforrec);
+		if ($this->isColumnModified(CadphartPeer::HORLLECONFORREC)) $criteria->add(CadphartPeer::HORLLECONFORREC, $this->horlleconforrec);
 		if ($this->isColumnModified(CadphartPeer::ID)) $criteria->add(CadphartPeer::ID, $this->id);
 
 		return $criteria;
 	}
 
-	
+
 	public function buildPkeyCriteria()
 	{
 		$criteria = new Criteria(CadphartPeer::DATABASE_NAME);
@@ -919,19 +1615,19 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
 		return $criteria;
 	}
 
-	
+
 	public function getPrimaryKey()
 	{
 		return $this->getId();
 	}
 
-	
+
 	public function setPrimaryKey($key)
 	{
 		$this->setId($key);
 	}
 
-	
+
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
@@ -973,13 +1669,53 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
 
 		$copyObj->setCodcen($this->codcen);
 
+		$copyObj->setFecemiov($this->fecemiov);
+
+		$copyObj->setFeccarov($this->feccarov);
+
+		$copyObj->setLocori($this->locori);
+
+		$copyObj->setDireccion($this->direccion);
+
+		$copyObj->setRubro($this->rubro);
+
+		$copyObj->setCankg($this->cankg);
+
+		$copyObj->setTotpasreal($this->totpasreal);
+
+		$copyObj->setLocrec($this->locrec);
+
+		$copyObj->setEmptra($this->emptra);
+
+		$copyObj->setNomrep($this->nomrep);
+
+		$copyObj->setTelemp($this->telemp);
+
+		$copyObj->setChoveh($this->choveh);
+
+		$copyObj->setCedcho($this->cedcho);
+
+		$copyObj->setTelcho($this->telcho);
+
+		$copyObj->setNomconfordes($this->nomconfordes);
+
+		$copyObj->setCedconfordes($this->cedconfordes);
+
+		$copyObj->setHorsalconfordes($this->horsalconfordes);
+
+		$copyObj->setNomconforrec($this->nomconforrec);
+
+		$copyObj->setCedconforrec($this->cedconforrec);
+
+		$copyObj->setHorlleconforrec($this->horlleconforrec);
+
 
 		$copyObj->setNew(true);
 
-		$copyObj->setId(NULL); 
+		$copyObj->setId(NULL);
 	}
 
-	
+
 	public function copy($deepCopy = false)
 	{
 				$clazz = get_class($this);
@@ -988,7 +1724,7 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
 		return $copyObj;
 	}
 
-	
+
 	public function getPeer()
 	{
 		if (self::$peer === null) {
@@ -997,4 +1733,4 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
 		return self::$peer;
 	}
 
-} 
+}

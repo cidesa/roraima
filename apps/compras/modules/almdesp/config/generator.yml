@@ -27,6 +27,26 @@ generator:
       codubi: { name: Código de la Ubicación}
       nomubi: { name: Nombre Ubicación}
       codcen: { name : Centro de Costo}
+      fecemiov: { name: Fecha Emisión}
+      feccarov: { name: Fecha de Carga}
+      locori:   { name: Localidad Despachadora de la Mercancia en Origen }
+      direccion: { name: Dirección}
+      rubro:     { name: Rubro}
+      cankg:     { name: Cantidad Total en KG/UNID}
+      totpasreal: { name: Totales Paso Real 397RL.}
+      locrec:    { name: Localidad Receptora de la Mercancia en Destino}
+      emptra:    { name: Empresa Transportista}
+      nomrep:    { name: Nombre del Representante}
+      telemp:    { name: Telefonos}
+      choveh:    { name: Chofer del Vehículo}
+      cedcho:    { name: C.I}
+      telcho:    { name: Telefono}
+      nomconfordes: { name: Apellidos  y Nombres}
+      cedconfordes: { name: C.I}
+      horsalconfordes: { name: Hora Salida}
+      nomconforrec: { name: Apellidos y Nombres}
+      cedconforrec: { name: C.I}
+      horlleconforrec: { name: Hora Llegada}
     list:
       title:          Despachos
       filters:        [dphart, codcen]
@@ -40,7 +60,10 @@ generator:
       sort:    dphart
     edit:
       title:          Edicion de Despachos
-      display:       [=dphart, fecdph, reqart, desreq, fecreq, desdph, codori, nomcat, mondph, stadph, numcom, refpag, tipdph, codcli, obsdph, fordesp, reapor, fecanu, codubi, nomubi, codcen]
+      display:
+        NONE:           [=dphart, fecdph, reqart, desreq, fecreq, desdph, codori, nomcat, mondph, stadph, numcom, refpag, tipdph, codcli, obsdph, fordesp, reapor, fecanu, codubi, nomubi, codcen]
+        Datos Orden de Despacho Vehicular: [fecemiov, feccarov, locori, direccion, rubro, cankg, totpasreal, locrec, emptra, nomrep, telemp, choveh, cedcho, telcho, nomconfordes, cedconfordes, horsalconfordes, nomconforrec, cedconforrec, horlleconforrec]
+
       fields:
         fecdph: { params: date_format='dd/MM/yy' }
       actions:

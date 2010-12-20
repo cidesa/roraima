@@ -32,6 +32,26 @@ generator:
       nompro: { name: Nombre}
       dirpro: { name: Dirección}
       telpro: { name: Teléfono}
+      fecemiov: { name: Fecha Emisión}
+      feccarov: { name: Fecha de Carga}
+      locori:   { name: Localidad Despachadora de la Mercancia en Origen }
+      direccion: { name: Dirección}
+      rubro:     { name: Rubro}
+      cankg:     { name: Cantidad Total en KG/UNID}
+      totpasreal: { name: Totales Paso Real 397RL.}
+      locrec:    { name: Localidad Receptora de la Mercancia en Destino}
+      emptra:    { name: Empresa Transportista}
+      nomrep:    { name: Nombre del Representante}
+      telemp:    { name: Telefonos}
+      choveh:    { name: Chofer del Vehículo}
+      cedcho:    { name: C.I}
+      telcho:    { name: Telefono}
+      nomconfordes: { name: Apellidos  y Nombres}
+      cedconfordes: { name: C.I}
+      horsalconfordes: { name: Hora Salida}
+      nomconforrec: { name: Apellidos y Nombres}
+      cedconforrec: { name: C.I}
+      horlleconforrec: { name: Hora Llegada}
 
     list:
       title:          Despachos
@@ -48,6 +68,7 @@ generator:
       title:          Edicion de Despachos
       display:
         "Datos del Despacho": [dphart, fecdph, codpro, rifpro, dirpro, telpro, codalm, nomalm, tipref, reqart, desreq, fecreq, desdph, codori, nomcat, mondph, stadph, numcom, refpag, tipdph, codcli, obsdph, fordesp, reapor, fecanu, codubi, nomubi]
+        Datos Orden de Despacho Vehicular: [fecemiov, feccarov, locori, direccion, rubro, cankg, totpasreal, locrec, emptra, nomrep, telemp, choveh, cedcho, telcho, nomconfordes, cedconfordes, horsalconfordes, nomconforrec, cedconforrec, horlleconforrec]
       fields:
         fecdph: { params: date_format='dd/MM/yy' }
       actions:
