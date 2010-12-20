@@ -416,6 +416,134 @@ private $coderror =-1;
     {
       $this->cadphart->setTipref($cadphart['tipref']);
     }
+    if (isset($cadphart['fecemiov']))
+    {
+      if ($cadphart['fecemiov'])
+      {
+        try
+        {
+          $dateFormat = new sfDateFormat($this->getUser()->getCulture());
+                              if (!is_array($cadphart['fecemiov']))
+          {
+            $value = $dateFormat->format($cadphart['fecemiov'], 'i', $dateFormat->getInputPattern('d'));
+  }
+          else
+          {
+            $value_array = $cadphart['fecemiov'];
+            $value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+          }
+          $this->cadphart->setFecemiov($value);
+        }
+        catch (sfException $e)
+        {
+          // not a date
+        }
+      }
+      else
+      {
+        $this->cadphart->setFecemiov(null);
+      }
+    }
+    if (isset($cadphart['feccarov']))
+    {
+      if ($cadphart['feccarov'])
+      {
+        try
+        {
+          $dateFormat = new sfDateFormat($this->getUser()->getCulture());
+                              if (!is_array($cadphart['feccarov']))
+          {
+            $value = $dateFormat->format($cadphart['feccarov'], 'i', $dateFormat->getInputPattern('d'));
+          }
+          else
+          {
+            $value_array = $cadphart['feccarov'];
+            $value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+          }
+          $this->cadphart->setFeccarov($value);
+        }
+        catch (sfException $e)
+        {
+          // not a date
+        }
+      }
+      else
+      {
+        $this->cadphart->setFeccarov(null);
+      }
+    }
+    if (isset($cadphart['locori']))
+    {
+      $this->cadphart->setLocori($cadphart['locori']);
+    }
+    if (isset($cadphart['direccion']))
+    {
+      $this->cadphart->setDireccion($cadphart['direccion']);
+    }
+    if (isset($cadphart['rubro']))
+    {
+      $this->cadphart->setRubro($cadphart['rubro']);
+    }
+    if (isset($cadphart['cankg']))
+    {
+      $this->cadphart->setCankg($cadphart['cankg']);
+    }
+    if (isset($cadphart['totpasreal']))
+    {
+      $this->cadphart->setTotpasreal($cadphart['totpasreal']);
+    }
+    if (isset($cadphart['locrec']))
+    {
+      $this->cadphart->setLocrec($cadphart['locrec']);
+    }
+    if (isset($cadphart['emptra']))
+    {
+      $this->cadphart->setEmptra($cadphart['emptra']);
+    }
+    if (isset($cadphart['nomrep']))
+    {
+      $this->cadphart->setNomrep($cadphart['nomrep']);
+    }
+    if (isset($cadphart['telemp']))
+    {
+      $this->cadphart->setTelemp($cadphart['telemp']);
+    }
+    if (isset($cadphart['choveh']))
+    {
+      $this->cadphart->setChoveh($cadphart['choveh']);
+    }
+    if (isset($cadphart['cedcho']))
+    {
+      $this->cadphart->setCedcho($cadphart['cedcho']);
+    }
+    if (isset($cadphart['telcho']))
+    {
+      $this->cadphart->setTelcho($cadphart['telcho']);
+    }
+    if (isset($cadphart['nomconfordes']))
+    {
+      $this->cadphart->setNomconfordes($cadphart['nomconfordes']);
+    }
+    if (isset($cadphart['cedconfordes']))
+    {
+      $this->cadphart->setCedconfordes($cadphart['cedconfordes']);
+    }
+    if (isset($cadphart['horsalconfordes']))
+    {
+      $this->cadphart->setHorsalconfordes($cadphart['horsalconfordes']);
+    }
+    if (isset($cadphart['nomconforrec']))
+    {
+      $this->cadphart->setNomconforrec($cadphart['nomconforrec']);
+    }
+    if (isset($cadphart['cedconforrec']))
+    {
+      $this->cadphart->setCedconforrec($cadphart['cedconforrec']);
+    }
+    if (isset($cadphart['horlleconforrec']))
+    {
+      $this->cadphart->setHorlleconforrec($cadphart['horlleconforrec']);
+    }
   }
 
   protected function saveCadphart($cadphart)
@@ -1037,6 +1165,8 @@ private $coderror =-1;
 	       {
 	       	$this->despnotent=$varemp['aplicacion']['facturacion']['modulos']['fadesp']['despnotent'];
 	       }
+    $this->orddesveh = H::getConfApp('orddesveh','facturacion','fadesp');
+    $this->getUser()->setAttribute('orddesveh',$this->orddesveh,'fadesp');
   }
 
 }

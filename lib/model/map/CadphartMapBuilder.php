@@ -72,6 +72,46 @@ class CadphartMapBuilder {
 
 		$tMap->addColumn('CODCEN', 'Codcen', 'string', CreoleTypes::VARCHAR, false, 4);
 
+		$tMap->addColumn('FECEMIOV', 'Fecemiov', 'int', CreoleTypes::DATE, false, null);
+
+		$tMap->addColumn('FECCAROV', 'Feccarov', 'int', CreoleTypes::DATE, false, null);
+
+		$tMap->addColumn('LOCORI', 'Locori', 'string', CreoleTypes::VARCHAR, false, 250);
+
+		$tMap->addColumn('DIRECCION', 'Direccion', 'string', CreoleTypes::VARCHAR, false, 1000);
+
+		$tMap->addColumn('RUBRO', 'Rubro', 'string', CreoleTypes::VARCHAR, false, 100);
+
+		$tMap->addColumn('CANKG', 'Cankg', 'double', CreoleTypes::NUMERIC, false, 10);
+
+		$tMap->addColumn('TOTPASREAL', 'Totpasreal', 'double', CreoleTypes::NUMERIC, false, 10);
+
+		$tMap->addColumn('LOCREC', 'Locrec', 'string', CreoleTypes::VARCHAR, false, 250);
+
+		$tMap->addColumn('EMPTRA', 'Emptra', 'string', CreoleTypes::VARCHAR, false, 500);
+
+		$tMap->addColumn('NOMREP', 'Nomrep', 'string', CreoleTypes::VARCHAR, false, 250);
+
+		$tMap->addColumn('TELEMP', 'Telemp', 'string', CreoleTypes::VARCHAR, false, 100);
+
+		$tMap->addColumn('CHOVEH', 'Choveh', 'string', CreoleTypes::VARCHAR, false, 250);
+
+		$tMap->addColumn('CEDCHO', 'Cedcho', 'string', CreoleTypes::VARCHAR, false, 20);
+
+		$tMap->addColumn('TELCHO', 'Telcho', 'string', CreoleTypes::VARCHAR, false, 100);
+
+		$tMap->addColumn('NOMCONFORDES', 'Nomconfordes', 'string', CreoleTypes::VARCHAR, false, 250);
+
+		$tMap->addColumn('CEDCONFORDES', 'Cedconfordes', 'string', CreoleTypes::VARCHAR, false, 20);
+
+		$tMap->addColumn('HORSALCONFORDES', 'Horsalconfordes', 'string', CreoleTypes::VARCHAR, false, 20);
+
+		$tMap->addColumn('NOMCONFORREC', 'Nomconforrec', 'string', CreoleTypes::VARCHAR, false, 250);
+
+		$tMap->addColumn('CEDCONFORREC', 'Cedconforrec', 'string', CreoleTypes::VARCHAR, false, 20);
+
+		$tMap->addColumn('HORLLECONFORREC', 'Horlleconforrec', 'string', CreoleTypes::VARCHAR, false, 20);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 
