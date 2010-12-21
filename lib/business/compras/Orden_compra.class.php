@@ -1672,7 +1672,7 @@ class Orden_compra
               $caordcom_new->save();
               self::Grabar_detalles_orden_compra($caordcom,$grid_detalle_orden_objetos,$grid_detalle_recargo,$total_recargo,$referencia,$codconpag,$codforent);//grabo en el grid general de detalle de la orden
               //self::Grabar_grid_resumen($caordcom,$grid_detalle_resumen_objetos);//grabo en el grid resumen
-              self::Grabar_recargos($caordcom,$grid_detalle_recargo);//grabo recargo general
+              //self::Grabar_recargos($caordcom,$grid_detalle_recargo);//grabo recargo general
               //self::Grabar_grid_entregas($caordcom,$grid_detalle_entrega_objetos);//grabo en el grid entrega
               //self::Grabar_distribucion_recargo($caordcom,$grid_detalle_orden_arreglos,$grid_detalle_recargo,$referencia);
               self::grabarDistribucionRgo($caordcom,$grid_detalle_orden_arreglos);
@@ -1815,8 +1815,7 @@ class Orden_compra
       while ($j<count($x)) {
       if ($x[$j]->getCodart()!="")
       {
-        $x[$j]->setOrdcom($caordcom->getOrdcom());        
-        $x[$j]->setDesres(str_replace("'","",$x[$j]->getDesres()));
+        $x[$j]->setOrdcom($caordcom->getOrdcom());                
         $x[$j]->save();
       }
         $j++;
