@@ -158,6 +158,11 @@ class Orden_compra
 		                if ($sigo)
 		                {
 		                  $sigo=self::Grabar_orden_compra($caordcom,$grid_detalle_orden_arreglos,$grid_detalle_recargo,$arreglo_objetos,$arreglo_campos,$moneda,$codigomoneda,$codigo_proveedor,$referencia,$codconpag,$codforent);
+                                  if ($sigo)
+                                  {
+                                      self::Grabar_grid_resumen2($caordcom, $grid_detalle_resumen);
+                                      self::Grabar_grid_entregas2($caordcom, $grid_detalle_entregas);
+                                  }
 		                  if (($afectadis=='R') and ($sigo))
 		                  {
 		                    if (!self::chequear_disponibilidad_incremento_recargo($caordcom,&$detalle_arreglo_recargos_obtenido,&$total_ajuste))
@@ -209,6 +214,9 @@ class Orden_compra
 		            else  // $tasacambio==$monedasol
 		            {
 		              self::Grabar_orden_compra($caordcom,$grid_detalle_orden_arreglos,$grid_detalle_recargo,$arreglo_objetos,$arreglo_campos,$moneda,$codigomoneda,$codigo_proveedor,$referencia,$codconpag,$codforent);
+                              self::Grabar_grid_resumen2($caordcom, $grid_detalle_resumen);
+                              self::Grabar_grid_entregas2($caordcom, $grid_detalle_entregas);
+
 		            if ($afectacompro=='S')
 		            {
 		                  // grabo imputacion
@@ -233,6 +241,8 @@ class Orden_compra
 		        {
 		          if (self::Grabar_orden_compra($caordcom,$grid_detalle_orden_arreglos,$grid_detalle_recargo,$arreglo_objetos,$arreglo_campos,$moneda,$codigomoneda,$codigo_proveedor,$referencia,$codconpag,$codforent))
 		          {
+                             self::Grabar_grid_resumen2($caordcom, $grid_detalle_resumen);
+                             self::Grabar_grid_entregas2($caordcom, $grid_detalle_entregas);
 		            if ($afectacompro=='S')
 		            {
 		              // grabo imputacion
@@ -1661,9 +1671,9 @@ class Orden_compra
 
               $caordcom_new->save();
               self::Grabar_detalles_orden_compra($caordcom,$grid_detalle_orden_objetos,$grid_detalle_recargo,$total_recargo,$referencia,$codconpag,$codforent);//grabo en el grid general de detalle de la orden
-              self::Grabar_grid_resumen($caordcom,$grid_detalle_resumen_objetos);//grabo en el grid resumen
-              //self::Grabar_recargos($caordcom,$grid_detalle_recargo);//grabo recargo general
-              self::Grabar_grid_entregas($caordcom,$grid_detalle_entrega_objetos);//grabo en el grid entrega
+              //self::Grabar_grid_resumen($caordcom,$grid_detalle_resumen_objetos);//grabo en el grid resumen
+              self::Grabar_recargos($caordcom,$grid_detalle_recargo);//grabo recargo general
+              //self::Grabar_grid_entregas($caordcom,$grid_detalle_entrega_objetos);//grabo en el grid entrega
               //self::Grabar_distribucion_recargo($caordcom,$grid_detalle_orden_arreglos,$grid_detalle_recargo,$referencia);
               self::grabarDistribucionRgo($caordcom,$grid_detalle_orden_arreglos);
               self::grabarRecargo($caordcom);
@@ -1732,8 +1742,8 @@ class Orden_compra
         $grid_detalle_entrega_objetos=$arreglo_objetos[1];
 
         self::Grabar_detalles_orden_compra($caordcom,$grid_detalle_orden_objetos,$grid_detalle_recargo,$total_recargo,$referencia,$codconpag,$codforent);//grabo en el grid general de detalle de la orden
-        self::Grabar_grid_resumen($caordcom,$grid_detalle_resumen_objetos);//grabo en el grid resumen
-        self::Grabar_grid_entregas($caordcom,$grid_detalle_entrega_objetos);//grabo en el grid entrega
+        //self::Grabar_grid_resumen($caordcom,$grid_detalle_resumen_objetos);//grabo en el grid resumen
+        //self::Grabar_grid_entregas($caordcom,$grid_detalle_entrega_objetos);//grabo en el grid entrega
         self::grabarDistribucionRgo($caordcom,$grid_detalle_orden_arreglos);
         self::grabarRecargo($caordcom);
         }else  { $caordcom_mod->save(); }
@@ -1805,7 +1815,8 @@ class Orden_compra
       while ($j<count($x)) {
       if ($x[$j]->getCodart()!="")
       {
-        $x[$j]->setOrdcom($caordcom->getOrdcom());
+        $x[$j]->setOrdcom($caordcom->getOrdcom());        
+        $x[$j]->setDesres(str_replace("'","",$x[$j]->getDesres()));
         $x[$j]->save();
       }
         $j++;
@@ -1820,6 +1831,56 @@ class Orden_compra
 
       }
     }
+
+      public static function Grabar_grid_resumen2($caordcom,$grid_resumen)
+  {
+      if ($caordcom->getId()){
+    		Herramientas::EliminarRegistro("Caresordcom", "Ordcom", $caordcom->getOrdcom());
+    	}
+
+      $i=0;
+      while ($i<count($grid_resumen)) {
+      if ($grid_resumen[$i]['codart']!="")
+      {
+        $caresordcom_new = new Caresordcom();
+        $caresordcom_new->setOrdcom($caordcom->getOrdcom());
+        $caresordcom_new->setCodart(str_replace("'","",$grid_resumen[$i]['codart']));
+        $caresordcom_new->setDesres($grid_resumen[$i]['desres']);
+        $caresordcom_new->setCodartpro(str_replace("'","",$grid_resumen[$i]['codartpro']));
+        $caresordcom_new->setCanord(str_replace("'","",$grid_resumen[$i]['canord']));
+        $caresordcom_new->setCanaju(str_replace("'","",$grid_resumen[$i]['canaju']));
+        $caresordcom_new->setCanrec(str_replace("'","",$grid_resumen[$i]['canrec']));
+        $caresordcom_new->setCantot(str_replace("'","",$grid_resumen[$i]['cantot']));
+        $caresordcom_new->setCosto(str_replace("'","",$grid_resumen[$i]['costo']));
+        $caresordcom_new->setRgoart(str_replace("'","",$grid_resumen[$i]['rgoart']));
+        $caresordcom_new->setTotart(str_replace("'","",$grid_resumen[$i]['totart']));
+        $caresordcom_new->save();
+      }
+        $i++;
+      }
+    }
+
+      public static function Grabar_grid_entregas2($caordcom,$grid_entregas)
+  {
+      if ($caordcom->getId()){
+    		Herramientas::EliminarRegistro("Caartfec", "Ordcom", $caordcom->getOrdcom());
+    	}
+
+      $i=0;
+      while ($i<count($grid_entregas)) {
+      if ($grid_entregas[$i]['codart']!="")
+      {
+        $caartfec_new = new Caartfec();
+        $caartfec_new->setOrdcom($caordcom->getOrdcom());
+        $caartfec_new->setCodart(str_replace("'","",$grid_entregas[$i]['codart']));
+        $caartfec_new->setDesart($grid_entregas[$i]['desart']);
+        $caartfec_new->setCanart(str_replace("'","",$grid_entregas[$i]['canart']));
+        $caartfec_new->setFecent(str_replace("'","",$grid_entregas[$i]['fecent']));        
+        $caartfec_new->save();
+      }
+        $i++;
+      }
+  }
 
 
   public static function Grabar_detalles_orden_compra($caordcom,$grid_detalle,$grid_detalle_recargo,$total_recargo,$referencia,$codconpag,$codforent)
