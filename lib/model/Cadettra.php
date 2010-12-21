@@ -18,6 +18,7 @@ class Cadettra extends BaseCadettra
    protected $codalm="";
    protected $codubi="";
    protected $exitot=0;
+   protected $numlotxart=array();
    
 	public function getDesart()
 	{
@@ -30,8 +31,8 @@ class Cadettra extends BaseCadettra
 
    public function getNumlotxart()
    {
-    $codalm=$this->getCodalm();
-    $codubi=$this->getCodubi();
+    $codalm=self::getCodalm();
+    $codubi=self::getCodubi();
     $codart=self::getCodart();
 
     $c = new Criteria();
@@ -44,19 +45,26 @@ class Cadettra extends BaseCadettra
     $datos = CaartalmubiPeer::doSelect($c);
 
     $lotes = array();
-
-    foreach($datos as $obj_datos)
+    if ($datos)
     {
-     if ($obj_datos->getFecven()!="")
-     {
-        $fecven=date("d/m/Y",strtotime($obj_datos->getFecven()));
-      	$lotes += array($obj_datos->getNumlot() => $obj_datos->getNumlot()." - ".$fecven);
-     }
-      else
-      	$lotes += array($obj_datos->getNumlot() => $obj_datos->getNumlot());
+        foreach($datos as $obj_datos)
+        {
+         if ($obj_datos->getFecven()!="")
+         {
+            $fecven=date("d/m/Y",strtotime($obj_datos->getFecven()));
+            $lotes += array($obj_datos->getNumlot() => $obj_datos->getNumlot()." - ".$fecven);
+         }
+          else
+            $lotes += array($obj_datos->getNumlot() => $obj_datos->getNumlot());
 
+        }
     }
     return $lotes;
   }
+
+  public function setNumlotxart()
+   {
+     return $this->numlotxart;
+   }
 
 }

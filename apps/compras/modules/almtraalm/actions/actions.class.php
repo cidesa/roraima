@@ -51,7 +51,7 @@ $this->Bitacora('Guardo');
 	      }
       }
       else
-      {
+      {           $grid=Herramientas::CargarDatosGrid($this,$this->obj);
 	          $this->labels = $this->getLabels();
 	          $err = Herramientas::obtenerMensajeError($this->coderror);
          	  $this->getRequest()->setError('',$err);
@@ -272,6 +272,34 @@ $this->Bitacora('Guardo');
   	$grid=Herramientas::CargarDatosGrid($this,$this->obj);
   	$grid_arreglo=Herramientas::CargarDatosGrid($this,$this->obj,true);
   	$grid_detallado=$grid_arreglo[0];
+        $manartlot=H::getConfApp2('manartlot', 'compras', 'almregart');
+          $x    = $grid[0];
+          $j    = 0;
+          $encontro = false;
+          while ($j<count($x))
+          {
+             if ($x[$j]->getCanart()>0)
+             {
+                $encontro=true;
+                if ($manartlot=='S')
+                {
+                    if ($x[$j]->getNumlot()=="")
+                     {
+                             $this->coderror=577;
+                             return $this->coderror;
+                     }
+                }
+             }
+             $j++;
+          }
+       if (!$encontro)
+       {
+            $this->coderror=576;
+            return $this->coderror;
+       }
+
+
+
     if (!$catraalm->getId()) //REGISTRO NUEVO
     {
 	  	if (Articulos::salvarGrabar_Transferencia($catraalm,$grid,$grid_detallado,&$error_obtenido,&$codigo_articulo))

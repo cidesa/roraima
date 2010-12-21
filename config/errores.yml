@@ -531,6 +531,21 @@
 572:
   cod: 572
   msj: No se puede modificar la moneda porque tiene movimientos asociados
+573:
+  cod: 573
+  msj: La Entrada no puede ser eliminada ya que existe una Devolución, se recomienda borrar en primer lugar la Devolución y luego ejecutar la operación.
+574:
+  cod: 574
+  msj:  Debe indicar el Código del Almacén, la Ubicación y el Nro. del Lote de todos los Artículos de la Entradas en el Almacen
+575:
+  cod: 575
+  msj:  Debe indicar el Código del Almacén y la Ubicación todos los Artículos de la Entradas en el Almacen
+576:
+  cod: 576
+  msj: Existe un artículo del detalle con cantidad a transferir menor o igual a cero (0).
+577:
+  cod: 577
+  msj: Existe un artículo del detalle que no posee Número de Lote.
 3:
   cod: 3
   msj: La contraseña es diferente.
