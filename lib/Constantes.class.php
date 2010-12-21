@@ -577,7 +577,7 @@ public static function PagoDoble()
 
     public static function ListatipoFianza()
   {
-    return array('Fiel Cumplimiento' => 'Fiel Cumplimiento', 'Anticipo' => 'Anticipo', 'Laboral' => 'Laboral', 'GarantÃ­a' => 'GarantÃ­a');
+    return array('Fiel Cumplimiento' => 'Fiel Cumplimiento', 'Anticipo' => 'Anticipo', 'Laboral' => 'Laboral', 'Garantía' => 'Garantía', 'Sostenimiento de Oferta' => 'Sostenimiento de Oferta');
   }
 
 
