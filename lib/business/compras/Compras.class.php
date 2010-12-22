@@ -3385,4 +3385,67 @@ class Compras {
     }
   }
 
+  public static function GenerarCompromisov2($clasemodelo,$monto,&$refcom)
+  {
+  try{
+       $refcom='';
+       if (Herramientas::getVerCorrelativo('corcom','cpdefniv',&$r))
+          {
+            $ref = str_pad($r, 8, '0', STR_PAD_LEFT);
+            $refcom = Herramientas::getBuscar_correlativoV2($ref,'cpdefniv','corcom','cpcompro','refcom');
+
+            H::getSalvarCorrelativo('corcom','cpdefniv','Registo Contrato',$refcom,&$msg);
+
+            if($clasemodelo->getTipcon()=='O')
+                $tipcom='001';
+            else#if($clasemodelo->getTipcon()=='S')
+                $tipcom='CS';
+
+            $cpcompro_new = new Cpcompro();
+            $cpcompro_new->setRefcom($refcom);
+            $cpcompro_new->setTipcom($tipcom);
+            $cpcompro_new->setFeccom($clasemodelo->getFeccon());
+            $cpcompro_new->setAnocom(substr($clasemodelo->getFeccon(),0,4));
+            $cpcompro_new->setStacom('A');
+            $cpcompro_new->setRefprc('NULO');
+            $cpcompro_new->setDescom($clasemodelo->getDescon());
+            $cpcompro_new->setMoncom($monto);
+            $cpcompro_new->setSalcau(0);
+            $cpcompro_new->setSalpag(0);
+            $cpcompro_new->setSalaju(0);
+            $cpcompro_new->setCedrif($clasemodelo->getCodpro());
+            $cpcompro_new->save();
+
+        //Imputaciones
+            $c = new Criteria();
+            $c->add(CadetordcPeer::ORDCON,$clasemodelo->getOrdcon());
+            $per = CadetordcPeer::doSelect($c);
+            if($per)
+            {
+                foreach($per as $r)
+                {
+                    $cpimpcom_new = new Cpimpcom();
+                    $cpimpcom_new->setRefcom($refcom);
+                    $cpimpcom_new->setCodpre($r->getCodpre());
+                    $cpimpcom_new->setMonimp($r->getMoncon());
+                    $cpimpcom_new->setMoncau(0);
+                    $cpimpcom_new->setMonpag(0);
+                    $cpimpcom_new->setMonaju(0);
+                    $cpimpcom_new->setRefere('NULO');
+                    $cpimpcom_new->setStaimp('A');
+                    $cpimpcom_new->save();
+}
+
+            }
+          }else{
+            return 2;  //El numero inicial del Correlativo no ha sido definido
+          }
+      return -1;
+  } catch (Exception $ex){
+    //exit($ex);
+    return 0;
+  }
+
+  }
+
 }
