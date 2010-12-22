@@ -1,0 +1,52 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                true
+  tabla:                   contabc1
+  anchogrid:               1000
+  ancho:                   900
+  filas:                   2
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  CÃ³digo de la cuenta
+  tipo:                    t
+  nombrecampo:             codcta
+  html:                    [size="15"]
+  esgrabable:              true
+  catalogo:                [ contabb, sf_admin_edit_form, { codcta : 1 , descta : 2 }, Contabb_Confincom ]
+  #ajaxfila:                true
+2:       # Columna 2
+  titulo:                  DescripciÃ³n del asiento
+  tipo:                    t
+  nombrecampo:             desasi
+  html:                    ["size=30 readonly=true"]
+  oculta:                  false
+  esgrabable:              true
+3:       # Columna 3
+  titulo:                  Referencia
+  tipo:                    t
+  nombrecampo:             refasi
+  html:                    ["size=10 maxlength=8"]
+  esgrabable:              true
+4:       # Columna 4
+  titulo:                  Debito/Credito
+  tipo:                    t
+  nombrecampo:             debcre
+  html:                    [size="10"]
+  oculta:                  true
+  esgrabable:              true  
+5:       # Columna 5
+  titulo:                  DÃ©bitos
+  tipo:                    m
+  nombrecampo:             mondebito
+  html:                    ["size=10  onBlur='toAjax(3,getUrlModuloAjax(),this.value,0,'&ides='+this.id)'" ]
+  esgrabable:              true
+  estotal:                 [true, contabc_totdeb]
+6:       # Columna 6
+  titulo:                  CrÃ©ditos
+  tipo:                    m
+  nombrecampo:             moncredito
+  html:                    ["size=10 onBlur='toAjax(3,getUrlModuloAjax(),this.value,0,'&ides='+this.id)'" ]
+  esgrabable:              true
+  estotal:                 [true, contabc_totcre]
+

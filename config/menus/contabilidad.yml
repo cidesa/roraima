@@ -29,6 +29,9 @@ contabilidad:
       Comprobantes:
         modulo: contabilidad.php
         modulo_dev: contabilidad_dev.php
+      Comprobantes de Ajustes Años Anteriores:
+        modulo: contabilidad.php
+        modulo_dev: contabilidad_dev.php
       Cierre de Período:
         modulo: contabilidad.php
         modulo_dev: contabilidad_dev.php
@@ -61,6 +64,7 @@ contabilidad:
     Tipos de Cuentas:                                         confintipcuecon
     Tipos de Cuentas - v:                                     ConFinTipCueCon.php
     Comprobantes:                                             confincom
+    Comprobantes de Ajustes Años Anteriores:                  confincomaj
     Comprobantes-v:                                           ConFinCom.php
     Actualizar Comprobantes:                                  confinactcom
     Actualizar Comprobantes - v:                              ConFinActCom.php
