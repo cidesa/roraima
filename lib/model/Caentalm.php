@@ -15,6 +15,8 @@
  */
 class Caentalm extends BaseCaentalm
 {
+    protected $obj=array();
+
     public function getMonrcp($val=false)
 	{
 		return parent::getMonrcp(true);
@@ -47,5 +49,25 @@ class Caentalm extends BaseCaentalm
   {
 	return Herramientas::getX('CODCEN','Cadefcen','Descen',self::getCodcen());
   }
+
+  public function getDesdph()
+    {
+            return Herramientas::getX('DPHART','Cadphart','Desdph',self::getDphart());
+    }
+
+	public function getDestipent()
+	{
+		return Herramientas::getX('CODTIPENT','Catipent','Destipent',self::getTipmov());
+	}
+
+        public function getMansolocor()
+	{
+		return H::getConfApp2('mansolocor', 'compras', 'almentalm');
+	}
+        public function getBloqfec()
+	{
+		return H::getConfApp2('bloqfec', 'compras', 'almentalm');
+	}
+
 
 }

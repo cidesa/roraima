@@ -2483,6 +2483,9 @@ propel:
     codcen:
       type: VARCHAR
       size: 4
+    dphart:
+      type: VARCHAR
+      size: 15
     id:
       type: INTEGER
       required: true
@@ -2528,6 +2531,9 @@ propel:
     codcen:
       type: VARCHAR
       size: 4
+    reqart:
+      type: VARCHAR
+      size: 8
     id:
       type: INTEGER
       required: true

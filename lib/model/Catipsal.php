@@ -15,4 +15,8 @@
  */ 
 class Catipsal extends BaseCatipsal
 {
+  public function getTipmov()
+  {
+    return self::getCodtipsal();
+  }
 }

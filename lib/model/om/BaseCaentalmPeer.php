@@ -13,7 +13,7 @@ abstract class BaseCaentalmPeer {
 	const CLASS_DEFAULT = 'lib.model.Caentalm';
 
 	
-	const NUM_COLUMNS = 11;
+	const NUM_COLUMNS = 12;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -50,6 +50,9 @@ abstract class BaseCaentalmPeer {
 	const CODCEN = 'caentalm.CODCEN';
 
 	
+	const DPHART = 'caentalm.DPHART';
+
+	
 	const ID = 'caentalm.ID';
 
 	
@@ -58,18 +61,18 @@ abstract class BaseCaentalmPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Rcpart', 'Fecrcp', 'Desrcp', 'Codpro', 'Monrcp', 'Starcp', 'Codalm', 'Codubi', 'Tipmov', 'Codcen', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (CaentalmPeer::RCPART, CaentalmPeer::FECRCP, CaentalmPeer::DESRCP, CaentalmPeer::CODPRO, CaentalmPeer::MONRCP, CaentalmPeer::STARCP, CaentalmPeer::CODALM, CaentalmPeer::CODUBI, CaentalmPeer::TIPMOV, CaentalmPeer::CODCEN, CaentalmPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('rcpart', 'fecrcp', 'desrcp', 'codpro', 'monrcp', 'starcp', 'codalm', 'codubi', 'tipmov', 'codcen', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
+		BasePeer::TYPE_PHPNAME => array ('Rcpart', 'Fecrcp', 'Desrcp', 'Codpro', 'Monrcp', 'Starcp', 'Codalm', 'Codubi', 'Tipmov', 'Codcen', 'Dphart', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (CaentalmPeer::RCPART, CaentalmPeer::FECRCP, CaentalmPeer::DESRCP, CaentalmPeer::CODPRO, CaentalmPeer::MONRCP, CaentalmPeer::STARCP, CaentalmPeer::CODALM, CaentalmPeer::CODUBI, CaentalmPeer::TIPMOV, CaentalmPeer::CODCEN, CaentalmPeer::DPHART, CaentalmPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('rcpart', 'fecrcp', 'desrcp', 'codpro', 'monrcp', 'starcp', 'codalm', 'codubi', 'tipmov', 'codcen', 'dphart', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Rcpart' => 0, 'Fecrcp' => 1, 'Desrcp' => 2, 'Codpro' => 3, 'Monrcp' => 4, 'Starcp' => 5, 'Codalm' => 6, 'Codubi' => 7, 'Tipmov' => 8, 'Codcen' => 9, 'Id' => 10, ),
-		BasePeer::TYPE_COLNAME => array (CaentalmPeer::RCPART => 0, CaentalmPeer::FECRCP => 1, CaentalmPeer::DESRCP => 2, CaentalmPeer::CODPRO => 3, CaentalmPeer::MONRCP => 4, CaentalmPeer::STARCP => 5, CaentalmPeer::CODALM => 6, CaentalmPeer::CODUBI => 7, CaentalmPeer::TIPMOV => 8, CaentalmPeer::CODCEN => 9, CaentalmPeer::ID => 10, ),
-		BasePeer::TYPE_FIELDNAME => array ('rcpart' => 0, 'fecrcp' => 1, 'desrcp' => 2, 'codpro' => 3, 'monrcp' => 4, 'starcp' => 5, 'codalm' => 6, 'codubi' => 7, 'tipmov' => 8, 'codcen' => 9, 'id' => 10, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
+		BasePeer::TYPE_PHPNAME => array ('Rcpart' => 0, 'Fecrcp' => 1, 'Desrcp' => 2, 'Codpro' => 3, 'Monrcp' => 4, 'Starcp' => 5, 'Codalm' => 6, 'Codubi' => 7, 'Tipmov' => 8, 'Codcen' => 9, 'Dphart' => 10, 'Id' => 11, ),
+		BasePeer::TYPE_COLNAME => array (CaentalmPeer::RCPART => 0, CaentalmPeer::FECRCP => 1, CaentalmPeer::DESRCP => 2, CaentalmPeer::CODPRO => 3, CaentalmPeer::MONRCP => 4, CaentalmPeer::STARCP => 5, CaentalmPeer::CODALM => 6, CaentalmPeer::CODUBI => 7, CaentalmPeer::TIPMOV => 8, CaentalmPeer::CODCEN => 9, CaentalmPeer::DPHART => 10, CaentalmPeer::ID => 11, ),
+		BasePeer::TYPE_FIELDNAME => array ('rcpart' => 0, 'fecrcp' => 1, 'desrcp' => 2, 'codpro' => 3, 'monrcp' => 4, 'starcp' => 5, 'codalm' => 6, 'codubi' => 7, 'tipmov' => 8, 'codcen' => 9, 'dphart' => 10, 'id' => 11, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
 	);
 
 	
@@ -142,6 +145,8 @@ abstract class BaseCaentalmPeer {
 		$criteria->addSelectColumn(CaentalmPeer::TIPMOV);
 
 		$criteria->addSelectColumn(CaentalmPeer::CODCEN);
+
+		$criteria->addSelectColumn(CaentalmPeer::DPHART);
 
 		$criteria->addSelectColumn(CaentalmPeer::ID);
 

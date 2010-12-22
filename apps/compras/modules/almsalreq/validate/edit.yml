@@ -6,6 +6,7 @@ methods:
    - "casalalm{dessal}"
    - "casalalm{tipmov}"
    - "casalalm{codcen}"
+   - "casalalm{reqart}"
 
 names:
   casalalm{codsal}:
@@ -38,6 +39,10 @@ names:
     required:  No
     validators: CentroValidator
 
+  casalalm{reqart}:
+    required:  No
+    validators: RequisicionValidator
+
 FechaValidator1:
     class:         CidesaDateNow
     param:
@@ -59,14 +64,14 @@ DescripcionValidator:
         min:       5
         min_error: La Descripción de la Salida no puede tener menos de 5 caracteres
         max:       100
-        max_error: La Descripción de la Salida no puede tener más de 100 caracteres
+        max_error: La Descripción de la Salida no puede tener mÃ¡s de 100 caracteres
 
 UniqueValidator:
     class: sfPropelUniqueValidator
     param:
         class:    Casalalm
         column:   codsal
-        unique_error:   El Código de la Solicitud ya existe. Por Favor, Cambiélo por otro.
+        unique_error:   El Código de la Solicitud ya existe. Por Favor, CambiÃ©lo por otro.
 
 ProveedorValidator:
     class: CidesaExistValidator
@@ -88,3 +93,10 @@ CentroValidator:
         class:    Cadefcen
         column:   codcen
         unique_error:   El Centro de Costo no existe.
+
+RequisicionValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Careqart
+        column:   reqart
+        unique_error:   La Requisición no existe.
