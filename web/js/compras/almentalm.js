@@ -78,3 +78,14 @@ function costoenter(e,id)
     		new Ajax.Request(getUrlModulo()+'ajax', {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=1&cajtexmos='+desalm+'&codalm='+codalm+'&codart='+codart})
     	}
  }
+
+ function cambiar(id)
+ {
+     valor=$(id).value;
+     if (valor!=''){
+      valor=valor.pad(8, '0',0);
+     }else{
+         valor=valor.pad(8, '#',0);
+     }
+     $('caentalm_rcpart').value=valor;
+ }

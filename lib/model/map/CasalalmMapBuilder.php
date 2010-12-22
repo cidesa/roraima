@@ -56,6 +56,8 @@ class CasalalmMapBuilder {
 
 		$tMap->addColumn('CODCEN', 'Codcen', 'string', CreoleTypes::VARCHAR, false, 4);
 
+		$tMap->addColumn('REQART', 'Reqart', 'string', CreoleTypes::VARCHAR, false, 8);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

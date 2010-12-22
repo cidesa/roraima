@@ -13,7 +13,7 @@ abstract class BaseCasalalmPeer {
 	const CLASS_DEFAULT = 'lib.model.Casalalm';
 
 	
-	const NUM_COLUMNS = 12;
+	const NUM_COLUMNS = 13;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -53,6 +53,9 @@ abstract class BaseCasalalmPeer {
 	const CODCEN = 'casalalm.CODCEN';
 
 	
+	const REQART = 'casalalm.REQART';
+
+	
 	const ID = 'casalalm.ID';
 
 	
@@ -61,18 +64,18 @@ abstract class BaseCasalalmPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codsal', 'Fecsal', 'Dessal', 'Codpro', 'Monsal', 'Stasal', 'Codalm', 'Codubi', 'Tipmov', 'Observ', 'Codcen', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (CasalalmPeer::CODSAL, CasalalmPeer::FECSAL, CasalalmPeer::DESSAL, CasalalmPeer::CODPRO, CasalalmPeer::MONSAL, CasalalmPeer::STASAL, CasalalmPeer::CODALM, CasalalmPeer::CODUBI, CasalalmPeer::TIPMOV, CasalalmPeer::OBSERV, CasalalmPeer::CODCEN, CasalalmPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codsal', 'fecsal', 'dessal', 'codpro', 'monsal', 'stasal', 'codalm', 'codubi', 'tipmov', 'observ', 'codcen', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
+		BasePeer::TYPE_PHPNAME => array ('Codsal', 'Fecsal', 'Dessal', 'Codpro', 'Monsal', 'Stasal', 'Codalm', 'Codubi', 'Tipmov', 'Observ', 'Codcen', 'Reqart', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (CasalalmPeer::CODSAL, CasalalmPeer::FECSAL, CasalalmPeer::DESSAL, CasalalmPeer::CODPRO, CasalalmPeer::MONSAL, CasalalmPeer::STASAL, CasalalmPeer::CODALM, CasalalmPeer::CODUBI, CasalalmPeer::TIPMOV, CasalalmPeer::OBSERV, CasalalmPeer::CODCEN, CasalalmPeer::REQART, CasalalmPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codsal', 'fecsal', 'dessal', 'codpro', 'monsal', 'stasal', 'codalm', 'codubi', 'tipmov', 'observ', 'codcen', 'reqart', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codsal' => 0, 'Fecsal' => 1, 'Dessal' => 2, 'Codpro' => 3, 'Monsal' => 4, 'Stasal' => 5, 'Codalm' => 6, 'Codubi' => 7, 'Tipmov' => 8, 'Observ' => 9, 'Codcen' => 10, 'Id' => 11, ),
-		BasePeer::TYPE_COLNAME => array (CasalalmPeer::CODSAL => 0, CasalalmPeer::FECSAL => 1, CasalalmPeer::DESSAL => 2, CasalalmPeer::CODPRO => 3, CasalalmPeer::MONSAL => 4, CasalalmPeer::STASAL => 5, CasalalmPeer::CODALM => 6, CasalalmPeer::CODUBI => 7, CasalalmPeer::TIPMOV => 8, CasalalmPeer::OBSERV => 9, CasalalmPeer::CODCEN => 10, CasalalmPeer::ID => 11, ),
-		BasePeer::TYPE_FIELDNAME => array ('codsal' => 0, 'fecsal' => 1, 'dessal' => 2, 'codpro' => 3, 'monsal' => 4, 'stasal' => 5, 'codalm' => 6, 'codubi' => 7, 'tipmov' => 8, 'observ' => 9, 'codcen' => 10, 'id' => 11, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
+		BasePeer::TYPE_PHPNAME => array ('Codsal' => 0, 'Fecsal' => 1, 'Dessal' => 2, 'Codpro' => 3, 'Monsal' => 4, 'Stasal' => 5, 'Codalm' => 6, 'Codubi' => 7, 'Tipmov' => 8, 'Observ' => 9, 'Codcen' => 10, 'Reqart' => 11, 'Id' => 12, ),
+		BasePeer::TYPE_COLNAME => array (CasalalmPeer::CODSAL => 0, CasalalmPeer::FECSAL => 1, CasalalmPeer::DESSAL => 2, CasalalmPeer::CODPRO => 3, CasalalmPeer::MONSAL => 4, CasalalmPeer::STASAL => 5, CasalalmPeer::CODALM => 6, CasalalmPeer::CODUBI => 7, CasalalmPeer::TIPMOV => 8, CasalalmPeer::OBSERV => 9, CasalalmPeer::CODCEN => 10, CasalalmPeer::REQART => 11, CasalalmPeer::ID => 12, ),
+		BasePeer::TYPE_FIELDNAME => array ('codsal' => 0, 'fecsal' => 1, 'dessal' => 2, 'codpro' => 3, 'monsal' => 4, 'stasal' => 5, 'codalm' => 6, 'codubi' => 7, 'tipmov' => 8, 'observ' => 9, 'codcen' => 10, 'reqart' => 11, 'id' => 12, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, )
 	);
 
 	
@@ -147,6 +150,8 @@ abstract class BaseCasalalmPeer {
 		$criteria->addSelectColumn(CasalalmPeer::OBSERV);
 
 		$criteria->addSelectColumn(CasalalmPeer::CODCEN);
+
+		$criteria->addSelectColumn(CasalalmPeer::REQART);
 
 		$criteria->addSelectColumn(CasalalmPeer::ID);
 

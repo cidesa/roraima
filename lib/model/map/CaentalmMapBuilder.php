@@ -54,6 +54,8 @@ class CaentalmMapBuilder {
 
 		$tMap->addColumn('CODCEN', 'Codcen', 'string', CreoleTypes::VARCHAR, false, 4);
 
+		$tMap->addColumn('DPHART', 'Dphart', 'string', CreoleTypes::VARCHAR, false, 15);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

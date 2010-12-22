@@ -15,4 +15,8 @@
  */ 
 class Catipent extends BaseCatipent
 {
+  public function getTipmov()
+  {
+    return self::getCodtipent();
+  }
 }

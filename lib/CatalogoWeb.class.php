@@ -6619,5 +6619,18 @@ public function Catdefcatman_Cattramo($params = '') {
 
         );
 	}
+
+                public function Almentdes_Cadphart() {
+        $this->c = new Criteria();
+
+
+        $this->columnas = array (
+                CadphartPeer :: DPHART => 'Número',
+                CadphartPeer :: DESDPH => 'Descripción',
+                CadphartPeer :: FECDPH => 'Fecha',
+
+
+        );
+	}
 }
 ?>

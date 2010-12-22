@@ -546,6 +546,15 @@
 577:
   cod: 577
   msj: Existe un artículo del detalle que no posee Número de Lote.
+578:
+  cod: 578
+  msj: Debe indicar el Código del Almacén, la Ubicación y el Nro. del Lote de todos los Artículos del Detalle de la Salida.
+579:
+  cod: 579
+  msj:  Debe indicar el Código del Almacén, la Ubicación de todos los Artículos del Detalle de la Salida.
+580:
+  cod: 580
+  msj:  La cantidad a registrar para la salida del artículo debe ser mayor que cero...
 3:
   cod: 3
   msj: La contraseña es diferente.

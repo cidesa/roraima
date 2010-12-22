@@ -49,6 +49,10 @@ abstract class BaseCaentalm extends BaseObject  implements Persistent {
 
 
 	
+	protected $dphart;
+
+
+	
 	protected $id;
 
 	
@@ -144,6 +148,13 @@ abstract class BaseCaentalm extends BaseObject  implements Persistent {
   {
 
     return trim($this->codcen);
+
+  }
+  
+  public function getDphart()
+  {
+
+    return trim($this->dphart);
 
   }
   
@@ -270,6 +281,16 @@ abstract class BaseCaentalm extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setDphart($v)
+	{
+
+    if ($this->dphart !== $v) {
+        $this->dphart = $v;
+        $this->modifiedColumns[] = CaentalmPeer::DPHART;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -304,7 +325,9 @@ abstract class BaseCaentalm extends BaseObject  implements Persistent {
 
       $this->codcen = $rs->getString($startcol + 9);
 
-      $this->id = $rs->getInt($startcol + 10);
+      $this->dphart = $rs->getString($startcol + 10);
+
+      $this->id = $rs->getInt($startcol + 11);
 
       $this->resetModified();
 
@@ -312,7 +335,7 @@ abstract class BaseCaentalm extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 11; 
+            return $startcol + 12; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Caentalm object", $e);
     }
@@ -507,6 +530,9 @@ abstract class BaseCaentalm extends BaseObject  implements Persistent {
 				return $this->getCodcen();
 				break;
 			case 10:
+				return $this->getDphart();
+				break;
+			case 11:
 				return $this->getId();
 				break;
 			default:
@@ -529,7 +555,8 @@ abstract class BaseCaentalm extends BaseObject  implements Persistent {
 			$keys[7] => $this->getCodubi(),
 			$keys[8] => $this->getTipmov(),
 			$keys[9] => $this->getCodcen(),
-			$keys[10] => $this->getId(),
+			$keys[10] => $this->getDphart(),
+			$keys[11] => $this->getId(),
 		);
 		return $result;
 	}
@@ -576,6 +603,9 @@ abstract class BaseCaentalm extends BaseObject  implements Persistent {
 				$this->setCodcen($value);
 				break;
 			case 10:
+				$this->setDphart($value);
+				break;
+			case 11:
 				$this->setId($value);
 				break;
 		} 	}
@@ -595,7 +625,8 @@ abstract class BaseCaentalm extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[7], $arr)) $this->setCodubi($arr[$keys[7]]);
 		if (array_key_exists($keys[8], $arr)) $this->setTipmov($arr[$keys[8]]);
 		if (array_key_exists($keys[9], $arr)) $this->setCodcen($arr[$keys[9]]);
-		if (array_key_exists($keys[10], $arr)) $this->setId($arr[$keys[10]]);
+		if (array_key_exists($keys[10], $arr)) $this->setDphart($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setId($arr[$keys[11]]);
 	}
 
 	
@@ -613,6 +644,7 @@ abstract class BaseCaentalm extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CaentalmPeer::CODUBI)) $criteria->add(CaentalmPeer::CODUBI, $this->codubi);
 		if ($this->isColumnModified(CaentalmPeer::TIPMOV)) $criteria->add(CaentalmPeer::TIPMOV, $this->tipmov);
 		if ($this->isColumnModified(CaentalmPeer::CODCEN)) $criteria->add(CaentalmPeer::CODCEN, $this->codcen);
+		if ($this->isColumnModified(CaentalmPeer::DPHART)) $criteria->add(CaentalmPeer::DPHART, $this->dphart);
 		if ($this->isColumnModified(CaentalmPeer::ID)) $criteria->add(CaentalmPeer::ID, $this->id);
 
 		return $criteria;
@@ -663,6 +695,8 @@ abstract class BaseCaentalm extends BaseObject  implements Persistent {
 		$copyObj->setTipmov($this->tipmov);
 
 		$copyObj->setCodcen($this->codcen);
+
+		$copyObj->setDphart($this->dphart);
 
 
 		$copyObj->setNew(true);

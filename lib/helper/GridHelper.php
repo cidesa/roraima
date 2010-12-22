@@ -821,6 +821,7 @@ function grid_tag_v2($obj,$objelim = array())
   $ajaxgrid   = $obj["ajaxgrid"];
   $ajaxadicionales = $obj["ajaxadicionales"];
   $tabla      = $obj["tabla"];
+  $camposcombo=$obj["camposcombo"];
 
   $jsfilas = array();
   $jsobjs = array();
@@ -1140,6 +1141,14 @@ function grid_tag_v2($obj,$objelim = array())
              $tagw .= select_tag($name.'x_'.$i.'_'.$jmasuno, options_for_select( (is_array($combo[$j]) && $combo[$j]!='') ? $combo[$j] : call_user_func(array(ucfirst($tabla).'Peer',$combo[$j])) ,$get,'include_custom=Seleccione...'), 'name="grid'.$name.'['.$i.']['.$j.']" style="border:none" onBlur=" '.$blur.' '.$js[$j].' " '.$taghtml.' '.$js[$j].' '.$blur);
              $tagw .= $catobj.$btnobj.$tagId.'</td>';
              break;
+           case 'cc': //Otro Tipo de Combo
+             $campocombo=$camposcombo[$j];
+             $metodocombo = 'get'.$campocombo;
+             $getcombo = $datos[$i]->$metodocombo();
+             $tagw = '     <td class="grid_fila" >';
+             $tagw .= select_tag($name.'x_'.$i.'_'.$jmasuno, options_for_select($getcombo,$get,'include_custom=Seleccione...'), 'style="border:none" '.$taghtml.' '.$js[$j].' '.$blur);
+             $tagw .= $catobj.$btnobj.$tagId.'</td>';
+             break;
            case 'k':   //check
              $tagw = '     <td class="grid_fila g_'.$name.'_k '.$name.'c'.$j.'" align="center" height="15">';
              if ($get==""){
@@ -1321,6 +1330,11 @@ function grid_tag_v2($obj,$objelim = array())
            case 'c':
              $tagw = '     <td class="grid_fila g_'.$name.'_c '.$name.'c'.$j.'" >';
              $tagw .= select_tag($name.'x_'.$i.'?'.'_'.$jmasuno, options_for_select((is_array($combo[$j]) && $combo[$j]!='') ? $combo[$j] : call_user_func(array(ucfirst($tabla).'Peer', $combo[$j])),$default[$j],'include_custom=Seleccione...'), 'name="grid'.$name.'['.$i.'?'.']['.$j.']" style="border:none" onBlur=" '.$blur.' '.$js[$j].' " '.$taghtml.' '.$js[$j].' '.$blur);
+             $tagw .= $catobj.$btnobj.$tagId.'</td>';
+             break;
+           case 'cc':
+             $tagw = '     <td class="grid_fila" >';
+             $tagw .= select_tag($name.'x_'.$i.'_'.$jmasuno, options_for_select(array(),'','include_custom=Seleccione...'), 'style="border:none" '.$taghtml.' '.$js[$j].' '.$blur);
              $tagw .= $catobj.$btnobj.$tagId.'</td>';
              break;
            case 'k':
