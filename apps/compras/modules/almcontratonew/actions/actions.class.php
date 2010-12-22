@@ -28,8 +28,8 @@ class almcontratonewActions extends autoalmcontratonewActions
   }
 
     /**
-    * Esta funciÃ³n permite definir la configuraciÃ³n del grid de datos
-    * que contiene el formulario. Esta funciÃ³n debe ser llamada
+    * Esta función permite definir la configuración del grid de datos
+    * que contiene el formulario. Esta función debe ser llamada
     * en las acciones, create, edit y handleError para recargar en todo momento
     * los datos del grid.
     *
@@ -47,8 +47,8 @@ class almcontratonewActions extends autoalmcontratonewActions
     }
 
     /**
-    * Esta funciÃ³n permite definir la configuraciÃ³n del grid de datos
-    * que contiene el formulario. Esta funciÃ³n debe ser llamada
+    * Esta función permite definir la configuración del grid de datos
+    * que contiene el formulario. Esta función debe ser llamada
     * en las acciones, create, edit y handleError para recargar en todo momento
     * los datos del grid.
     *
@@ -66,8 +66,8 @@ class almcontratonewActions extends autoalmcontratonewActions
     }
 
 	/**
-   * Esta funciÃ³n permite definir la configuraciÃ³n del grid de datos
-   * que contiene el formulario. Esta funciÃ³n debe ser llamada
+   * Esta función permite definir la configuración del grid de datos
+   * que contiene el formulario. Esta función debe ser llamada
    * en las acciones, create, edit y handleError para recargar en todo momento
    * los datos del grid.
    *
@@ -103,8 +103,8 @@ class almcontratonewActions extends autoalmcontratonewActions
     }
 
     /**
-    * Esta funciÃ³n permite definir la configuraciÃ³n del grid de datos
-    * que contiene el formulario. Esta funciÃ³n debe ser llamada
+    * Esta función permite definir la configuración del grid de datos
+    * que contiene el formulario. Esta función debe ser llamada
     * en las acciones, create, edit y handleError para recargar en todo momento
     * los datos del grid.
     *
@@ -120,7 +120,7 @@ class almcontratonewActions extends autoalmcontratonewActions
 
         $this->caordcon->setObj4($this->obj4);
     }
-    
+
   public function executeAjax()
   {
     $codigo = $this->getRequestParameter('codigo','');
@@ -146,7 +146,7 @@ class almcontratonewActions extends autoalmcontratonewActions
         $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
         return sfView::HEADER_ONLY;
         break;
-      case '2':        
+      case '2':
         $t= new Criteria();
         $t->add(CaproveePeer::RIFPRO,$codigo);
         $reg= CaproveePeer::doSelectOne($t);
@@ -201,17 +201,17 @@ class almcontratonewActions extends autoalmcontratonewActions
         $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
         return sfView::HEADER_ONLY;
         break;
-      case '5':          
+      case '5':
           $anno=substr($this->getRequestParameter('fecha'),6,10);
           $idtot=$this->getRequestParameter('idtot');
           if (Herramientas::Monto_disponible_ejecucion($anno,$this->getRequestParameter('codpre'),&$mondis))
           {
             if (H::toFloat($this->getRequestParameter('montotal')) > $mondis)
             {
-              $js="alert('No Existe disponibilidad de dinero para efectuar la operaciÃ³n se le recomienda disminuir la cantidad solicitada');  $('$codigo').value='0,00'; $('$codigo').focus(); $('$idtot').value='0,00';";
-            }            
+              $js="alert('No Existe disponibilidad de dinero para efectuar la operación se le recomienda disminuir la cantidad solicitada');  $('$codigo').value='0,00'; $('$codigo').focus(); $('$idtot').value='0,00';";
+            }
           }
-          
+
         $output = '[["javascript","'.$js.'",""],["","",""],["","",""]]';
         $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
         return sfView::HEADER_ONLY;
@@ -227,8 +227,8 @@ class almcontratonewActions extends autoalmcontratonewActions
           if ($fecha<$data->getFeccon())
           {
             $js="alert('La Fecha de Anulacion no puede ser menor a la fecha del Contrato'); $('caordcon_fecanu').value=''";
-          }          
-        }        
+          }
+        }
         $output = '[["javascript","'.$js.'",""]]';
         $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
         return sfView::HEADER_ONLY;
@@ -244,9 +244,9 @@ class almcontratonewActions extends autoalmcontratonewActions
 
   /**
    *
-   * FunciÃ³n que se ejecuta luego los validadores del negocio (validators)
-   * Para realizar validaciones especÃ­ficas del negocio del formulario
-   * Para mayor informaciÃ³n vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
+   * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
   public function validateEdit()
@@ -266,7 +266,7 @@ class almcontratonewActions extends autoalmcontratonewActions
   }
 
   /**
-   * FunciÃ³n para actualziar el grid en el post si ocurre un error
+   * Función para actualziar el grid en el post si ocurre un error
    * Se pueden colocar aqui los grids adicionales
    *
    */
@@ -289,6 +289,8 @@ class almcontratonewActions extends autoalmcontratonewActions
     $grid4 = Herramientas::CargarDatosGridv2($this,$this->obj4);
 
     Compras::grabarContrato($clasemodelo,$grid,$grid2,$grid3,$grid4);
+
+    Compras::GenerarCompromisov2($clasemodelo,$clasemodelo->getMoncon(),&$refcom);
 
     return parent::saving($clasemodelo);
   }
@@ -320,7 +322,7 @@ class almcontratonewActions extends autoalmcontratonewActions
     $fecanu=$this->getRequestParameter('fecanu');
     $this->msg='';
     $this->mensaje2="";
-   
+
     $fecha_aux=split("/",$fecanu);
     $dateFormat = new sfDateFormat('es_VE');
     $fec = $dateFormat->format($fecanu, 'i', $dateFormat->getInputPattern('d'));
