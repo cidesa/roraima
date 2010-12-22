@@ -8,7 +8,7 @@ generator:
       codmotfal :    { name: Código, params: maxlength=4,size=5}
       desmotfal :    { name: Descripción, params: size=20}
       causa		:    { name: Causa }
-      esremun:    { name: ¿Es Remunerado? }
+      esremun:    { name: Es Remunerado }
 
     list:
       title:          Motivos de Faltas y/o Permisos

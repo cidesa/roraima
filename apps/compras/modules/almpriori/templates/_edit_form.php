@@ -4,14 +4,14 @@
  *
  * @package    Roraima
  * @subpackage vistas
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version    SVN: $Id$
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id: _edit_form.php 41824 2010-12-22 21:50:52Z cramirez $
  */
 // date: 2007/06/12 13:02:49
 ?>
 <?php echo form_tag('almpriori/edit', array(
   'id'        => 'sf_admin_edit_form',
-  'name'      => 'sf_admin_edit_form',
+  'name'      => 'sf_admin_edit_form', 'onsubmit'  => 'return false;',
   'multipart' => true,
 )) ?>
 <?php use_helper('Javascript','PopUp','Grid','Date','SubmitClick','tabs') ?>
@@ -232,7 +232,7 @@
 
   <?php $value = object_textarea_tag($casolart, 'getObservaciones', array (
   'control_name' => 'casolart[observaciones]',
-  'maxlength' => 1000,
+  'maxlength' => 5000,
   'size' => '90x5',
   'onkeyup' => "javascript:return ismaxlength(this)",
 )); echo $value ? $value : '&nbsp;' ?>
@@ -255,7 +255,6 @@
   </ul>
 
 <script language="JavaScript" type="text/javascript">
-
  function colocar_prioridad()
  {
 		var filas=obtener_filas_grid('a','3');
