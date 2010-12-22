@@ -1444,7 +1444,7 @@ propel:
       scale: 2
     obsreq:
       type: VARCHAR
-      size: 1000
+      size: 5000
     unires:
       type: VARCHAR
       size: 32
