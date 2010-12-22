@@ -5,16 +5,16 @@
  *
  * @package    Roraima
  * @subpackage nomfalperlle
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
+ * @author     $Author: dmartinez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: actions.class.php 41682 2010-12-09 19:30:41Z dmartinez $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
 class nomfalperlleActions extends autonomfalperlleActions
 {
   /**
-   * Actualiza la informacion que viene de la vista 
+   * Actualiza la informacion que viene de la vista
    * luego de un get/post en el objeto principal del modelo base del formulario.
    *
    */
@@ -157,6 +157,19 @@ class nomfalperlleActions extends autonomfalperlleActions
 	 {
 	 	$dato=NpmotfalPeer::getDesmotfal_text(trim($this->getRequestParameter('codigo')));
 	 	$output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
+	 	$this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+	 	return sfView::HEADER_ONLY;
+	 }
+         if ($this->getRequestParameter('ajax')=='3')
+	 {
+                $fecdes=$this->getRequestParameter('fecdes');
+                $fechas=$this->getRequestParameter('fechas');
+	 	$sql="select to_date('$fechas','dd/mm/yyyy')-to_date('$fecdes','dd/mm/yyyy') as dias";
+                if(H::BuscarDatos($sql, $rs))
+                    $dias = $rs[0]['dias'];
+                else
+                    $dias=null;
+	 	$output = '[["npfalper_nrodia","'.$dias.'",""]]';
 	 	$this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
 	 	return sfView::HEADER_ONLY;
 	 }

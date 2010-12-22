@@ -4,25 +4,25 @@
 
 class CasolartMapBuilder {
 
-	
+
 	const CLASS_NAME = 'lib.model.map.CasolartMapBuilder';
 
-	
+
 	private $dbMap;
 
-	
+
 	public function isBuilt()
 	{
 		return ($this->dbMap !== null);
 	}
 
-	
+
 	public function getDatabaseMap()
 	{
 		return $this->dbMap;
 	}
 
-	
+
 	public function doBuild()
 	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
@@ -50,7 +50,7 @@ class CasolartMapBuilder {
 
 		$tMap->addColumn('MONDES', 'Mondes', 'double', CreoleTypes::NUMERIC, false, 14);
 
-		$tMap->addColumn('OBSREQ', 'Obsreq', 'string', CreoleTypes::VARCHAR, false, 1000);
+		$tMap->addColumn('OBSREQ', 'Obsreq', 'string', CreoleTypes::VARCHAR, false, 5000);
 
 		$tMap->addColumn('UNIRES', 'Unires', 'string', CreoleTypes::VARCHAR, false, 32);
 
@@ -80,5 +80,5 @@ class CasolartMapBuilder {
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
-	} 
-} 
+	}
+}

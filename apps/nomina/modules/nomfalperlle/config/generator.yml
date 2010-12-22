@@ -15,6 +15,7 @@ generator:
       nrohoras:  { name: N° de Horas}
       hordes:  { name: Hora Salida}
       horhas:  { name: Hora Llegada}
+      numctr:  { name: N° de Control, params: maxlength=8 size=10  }
 
     list:
       title:          Llegadas y faltas y/o permisos
@@ -26,4 +27,4 @@ generator:
       max_per_page:   5
     edit:
       title:          Llegadas y faltas y/o permisos
-      display:        [codemp, nomemp, codmot, desmotfal, nrodia, observ, fecdes, fechas, nrohoras, hordes, horhas]
+      display:        [codemp, nomemp, codmot, desmotfal, nrodia, observ, fecdes, fechas, nrohoras, hordes, horhas, numctr]

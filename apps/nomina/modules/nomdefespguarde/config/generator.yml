@@ -10,7 +10,7 @@ generator:
       nomgua:    { name: Nombre de Guardería}
       rifgua:    { name: RIF. Guardería, params: maxlength=15 size=20 }
       ninsme:    { name: N° Inscripción ME, params: maxlength=15 size=20 }
-      solmevig:    { name: ¿Solvencia ME Vigente? }
+      solmevig:    { name: Solvencia ME Vigente }
 
     list:
       title:          Definición de Guarderías
