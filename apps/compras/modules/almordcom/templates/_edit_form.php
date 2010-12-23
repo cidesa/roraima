@@ -4,14 +4,14 @@
  *
  * @package    Roraima
  * @subpackage vistas
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version    SVN: $Id$
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id: _edit_form.php 41832 2010-12-23 16:58:10Z cramirez $
  */
 // date: 2007/06/04 16:53:16
 ?>
 <?php echo form_tag('almordcom/edit', array(
   'id'        => 'sf_admin_edit_form',
-  'name'      => 'sf_admin_edit_form',
+  'name'      => 'sf_admin_edit_form', 'onsubmit'  => 'return false;',
   'multipart' => true,
 )) ?>
 
@@ -284,6 +284,10 @@ elseif ($caordcom->getTipo()=='T')
 {
   $v1=false; $v2=false; $v3=false; $v4=false; $v5=true;
 }
+elseif ($caordcom->getTipo()=='P')
+{
+  $v1=false; $v2=true; $v3=false; $v4=false; $v5=false;
+}
 else
 {
   $v1=false; $v2=false; $v3=true; $v4=false; $v5=false;
@@ -294,6 +298,7 @@ else
 <?php echo __(" Compra ").radiobutton_tag('caordcom[tipo]', 'C', $v3) ?>&nbsp;
 <?php echo __(" Compra Eventual ").radiobutton_tag('caordcom[tipo]', 'E', $v4) ?>
 <?php echo __(" Contratación ").radiobutton_tag('caordcom[tipo]', 'T', $v5) ?>
+<?php echo __(" Consulta de Precio ").radiobutton_tag('caordcom[tipo]', 'P', $v2) ?>
 <div class="sf_admin_edit_help"><?php echo __('Seleccione una Opción') ?></div>  </div>
 <br>
   <?php echo label_for('caordcom[tipo]', __('Descuento:'), 'class="required" ') ?>
