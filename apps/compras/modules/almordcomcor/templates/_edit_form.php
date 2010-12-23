@@ -72,7 +72,7 @@
 'control_name' => 'caordcom[ordcom]',
 'onBlur'  => "javascript:event.keyCode=13; enter(event,this.value);",
 )); echo $value ? $value : '&nbsp;' ?>
-<div class="sf_admin_edit_help"><?php echo __('MÃ¡ximo 8 caracteres') ?></div>
+<div class="sf_admin_edit_help"><?php echo __('Máximo 8 caracteres') ?></div>
 </div>
   </th>
   <th>
@@ -144,7 +144,7 @@
 'size' => 60,
 'control_name' => 'caordcom[nomext]',
 )); echo $value ? $value : '&nbsp;' ?>
-<div class="sf_admin_edit_help"><?php echo __('MÃ¡ximo 4 caracteres') ?></div></div>
+<div class="sf_admin_edit_help"><?php echo __('Máximo 4 caracteres') ?></div></div>
 <br>
 
   <?php echo label_for('caordcom[refprc]', __($labels['caordcom{refprc}']), 'class="required" ') ?>
@@ -157,7 +157,7 @@
     <?php echo "Si ".radiobutton_tag('caordcom[refprc]', 'S',  $val, array('id'=>'caordcom_refprc_s' , 'onClick'=> "$('div_solicitud').show();")); ?>&nbsp;
   <?php echo "No ".radiobutton_tag('caordcom[refprc]', 'N', !$val, array('id'=>'caordcom_refprc_n', 'onClick'=> "$('div_solicitud').hide();")) ?>
 
-<div class="sf_admin_edit_help"><?php echo __('Seleccione una OpciÃ³n') ?></div>
+<div class="sf_admin_edit_help"><?php echo __('Seleccione una Opción') ?></div>
     </div>
     <br>
 <?php //if (($caordcom->getId()!='') and ($caordcom->getRefsol()!='')) {?>
@@ -183,7 +183,7 @@ echo input_tag('caordcom[refsol]', $caordcom->getRefsol(), array (
         ))))
  . '&nbsp;'. button_to_popup('...',cross_app_link_to('herramientas','catalogo')."/metodo/Casolart_Almcotiza/clase/Casolart/frame/sf_admin_edit_form/obj1/caordcom_refsol/campo1/reqart",'','','botoncat')
 ?>
-<div class="sf_admin_edit_help"><?php echo __('MÃ¡ximo 8 caracteres') ?></div>
+<div class="sf_admin_edit_help"><?php echo __('Máximo 8 caracteres') ?></div>
 </div>
 </div>
 <?php //}?>
@@ -228,7 +228,7 @@ echo input_tag('caordcom[refsol]', $caordcom->getRefsol(), array (
   'size' => 80,
   'control_name' => 'caordcom[nompro]',
   )); echo $value ? $value : '&nbsp;' ?>
-<div class="sf_admin_edit_help"><?php echo __('MÃ¡ximo 15 caracteres') ?></div>
+<div class="sf_admin_edit_help"><?php echo __('Máximo 15 caracteres') ?></div>
   </div>
 
 <br>
@@ -243,7 +243,7 @@ echo input_tag('caordcom[refsol]', $caordcom->getRefsol(), array (
   'maxlength'=> 1000,
   'onkeyup' => "javascript:return ismaxlength(this)",
 )); echo $value ? $value : '&nbsp;' ?>
-<div class="sf_admin_edit_help"><?php echo __('Introduzca una DescripciÃ³n Valida') ?></div></div>
+<div class="sf_admin_edit_help"><?php echo __('Introduzca una Descripción Valida') ?></div></div>
 
 
 <br>
@@ -254,7 +254,7 @@ echo input_tag('caordcom[refsol]', $caordcom->getRefsol(), array (
 <?php if ($sf_request->hasError('caordcom{tipord}')): ?> <?php echo form_error('caordcom{tipord}', array('class' => 'form-error-msg')) ?>
 <?php endif; ?>
 <?php echo select_tag('caordcom[tipord]', options_for_select($listatipocompra,$caordcom->getTipord(),'include_custom=Seleccione'),array('onChange' => 'actualizar_grid_dependientes()'));?>
-<div class="sf_admin_edit_help"><?php echo __('Seleccione una OpciÃ³n') ?></div>  </div>
+<div class="sf_admin_edit_help"><?php echo __('Seleccione una Opción') ?></div>  </div>
 </div>
 
 <br>
@@ -284,17 +284,22 @@ elseif ($caordcom->getTipo()=='T')
 {
   $v1=false; $v2=false; $v3=false; $v4=false; $v5=true;
 }
+elseif ($caordcom->getTipo()=='P')
+{
+  $v1=false; $v2=true; $v3=false; $v4=false; $v5=false;
+}
 else
 {
   $v1=false; $v2=false; $v3=true; $v4=false; $v5=false;
 }
 
-?> <?php echo __(" AdjudicaciÃ³n Directa ").radiobutton_tag('caordcom[tipo]', 'A', $v1) ?>&nbsp;
+?> <?php echo __(" Adjudicación Directa ").radiobutton_tag('caordcom[tipo]', 'A', $v1) ?>&nbsp;
 <?php echo __(" $etiqtipord ").radiobutton_tag('caordcom[tipo]', 'L', $v2) ?>&nbsp;
 <?php echo __(" Compra ").radiobutton_tag('caordcom[tipo]', 'C', $v3) ?>&nbsp;
 <?php echo __(" Compra Eventual ").radiobutton_tag('caordcom[tipo]', 'E', $v4) ?>
-<?php echo __(" ContrataciÃ³n ").radiobutton_tag('caordcom[tipo]', 'T', $v5) ?>
-<div class="sf_admin_edit_help"><?php echo __('Seleccione una OpciÃ³n') ?></div>  </div>
+<?php echo __(" Contratación ").radiobutton_tag('caordcom[tipo]', 'T', $v5) ?>
+<?php echo __(" Consulta de Precio ").radiobutton_tag('caordcom[tipo]', 'P', $v2) ?>
+<div class="sf_admin_edit_help"><?php echo __('Seleccione una Opción') ?></div>  </div>
 <br>
   <?php echo label_for('caordcom[tipo]', __('Descuento:'), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('caordcom{tipo}')): ?> form-error<?php endif; ?>">
@@ -305,7 +310,7 @@ else
     <?php echo __("Tipo Porcentaje ").radiobutton_tag('descuenta', 'p', 'true', array('onClick'=> "inizializo_descuentos();")) ?>
     <?php echo __("Tipo Monto ").radiobutton_tag('descuenta', 'm', 'false', array('onClick'=> "inizializo_descuentos();")) ?>
     <?php echo __("Tipo Total ").radiobutton_tag('descuenta', 't', 'false', array('onClick'=> "inizializo_descuentos();")) ?>
-<div class="sf_admin_edit_help"><?php echo __('Seleccione una OpciÃ³n') ?></div>
+<div class="sf_admin_edit_help"><?php echo __('Seleccione una Opción') ?></div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 <? if ($caordcom->getId()=='' && ($caordcom->getGenctaord()=='S')) { ?>
@@ -449,7 +454,7 @@ echo grid_tag($obj_recargos);
 </div>
 </fieldset>
 <?php tabPageOpenClose("tp1", "tabPage2", 'Condiciones de Pago/Proyecto');?>
-<fieldset><legend><?php echo __('CondiciÃ³n de Pago') ?></legend>
+<fieldset><legend><?php echo __('Condición de Pago') ?></legend>
 <div class="form-row">
 <?php echo label_for('caordcom[codconpag]', __($labels['caordcom{codconpag}']), 'class="required"') ?>
 <div class="content<?php if ($sf_request->hasError('caordcom{codconpag}')): ?> form-error<?php endif; ?>">
@@ -475,7 +480,7 @@ echo grid_tag($obj_recargos);
 'disabled' => true,
 'control_name' => 'caordcom[desconpag]',
 )); echo $value ? $value : '&nbsp;' ?>
-<div class="sf_admin_edit_help"><?php echo __('MÃ¡ximo 4 caracteres') ?></div></div>
+<div class="sf_admin_edit_help"><?php echo __('Máximo 4 caracteres') ?></div></div>
 </div>
 </fieldset>
 <br>
@@ -505,7 +510,7 @@ echo grid_tag($obj_recargos);
 'disabled' => true,
 'control_name' => 'caordcom[despro]',
 )); echo $value ? $value : '&nbsp;' ?>
-<div class="sf_admin_edit_help"><?php echo __('MÃ¡ximo 4 caracteres') ?></div></div>
+<div class="sf_admin_edit_help"><?php echo __('Máximo 4 caracteres') ?></div></div>
 </div>
 </fieldset>
 
@@ -536,11 +541,11 @@ echo grid_tag($obj_recargos);
 'disabled' => true,
 'control_name' => 'caordcom[desforent]',
 )); echo $value ? $value : '&nbsp;' ?>
-<div class="sf_admin_edit_help"><?php echo __('MÃ¡ximo 4 caracteres') ?></div></div>
+<div class="sf_admin_edit_help"><?php echo __('Máximo 4 caracteres') ?></div></div>
 </div>
 </fieldset>
 <br>
-<fieldset><legend><?php echo __('JustificaciÃ³n') ?></strong></legend>
+<fieldset><legend><?php echo __('Justificación') ?></strong></legend>
 <div class="form-row">
 <?php echo label_for('caordcom[justif]', __($labels['caordcom{justif}']), 'class="required"') ?>
 <div class="content<?php if ($sf_request->hasError('caordcom{justif}')): ?> form-error<?php endif; ?>">
@@ -550,7 +555,7 @@ echo grid_tag($obj_recargos);
   'size' => '106x3',
   'control_name' => 'caordcom[justif]',
 )); echo $value ? $value : '&nbsp;' ?>
-<div class="sf_admin_edit_help"><?php echo __('Introduzca una DescripciÃ³n Valida') ?></div></div>
+<div class="sf_admin_edit_help"><?php echo __('Introduzca una Descripción Valida') ?></div></div>
 </div>
 </fieldset>
 <br>
@@ -581,7 +586,7 @@ echo grid_tag($obj_recargos);
 'disabled' => true,
 'control_name' => 'caordcom[nomfin]',
 )); echo $value ? $value : '&nbsp;' ?>
-<div class="sf_admin_edit_help"><?php echo __('MÃ¡ximo 4 caracteres') ?></div></div>
+<div class="sf_admin_edit_help"><?php echo __('Máximo 4 caracteres') ?></div></div>
 </div>
 </fieldset>
 
@@ -628,7 +633,7 @@ echo grid_tag($obj_recargos);
 'disabled' => true,
 'control_name' => 'caordcom[desubi]',
 )); echo $value ? $value : '&nbsp;' ?>
-<div class="sf_admin_edit_help"><?php echo __('MÃ¡ximo 3 caracteres') ?></div></div>
+<div class="sf_admin_edit_help"><?php echo __('Máximo 3 caracteres') ?></div></div>
 
 <br>
 <?php echo label_for('caordcom[codemp]', __($labels['caordcom{codemp}']), 'class="required"') ?>
@@ -656,7 +661,7 @@ echo grid_tag($obj_recargos);
 'disabled' => true,
 'control_name' => 'caordcom[nomemp]',
 )); echo $value ? $value : '&nbsp;' ?>
-<div class="sf_admin_edit_help"><?php echo __('MÃ¡ximo 16 caracteres') ?></div></div>
+<div class="sf_admin_edit_help"><?php echo __('Máximo 16 caracteres') ?></div></div>
 
 <br>
 <?php echo label_for('caordcom[codcen]', __($labels['caordcom{codcen}']), 'class="required"') ?>
@@ -685,7 +690,7 @@ echo grid_tag($obj_recargos);
 'disabled' => true,
 'control_name' => 'caordcom[descen]',
 )); echo $value ? $value : '&nbsp;' ?>
-<div class="sf_admin_edit_help"><?php echo __('MÃ¡ximo 4 caracteres') ?></div></div>
+<div class="sf_admin_edit_help"><?php echo __('Máximo 4 caracteres') ?></div></div>
 <br>
 <?php echo label_for('caordcom[codcenaco]', __($labels['caordcom{codcenaco}']), 'class="required"') ?>
 <div
@@ -713,7 +718,7 @@ echo grid_tag($obj_recargos);
 'disabled' => true,
 'control_name' => 'caordcom[descenaco]',
 )); echo $value ? $value : '&nbsp;' ?>
-<div class="sf_admin_edit_help"><?php echo __('MÃ¡ximo 4 caracteres') ?></div></div>
+<div class="sf_admin_edit_help"><?php echo __('Máximo 4 caracteres') ?></div></div>
 </div>
 </fieldset>
 
@@ -836,7 +841,7 @@ echo grid_tag($obj_recargos);
   }
 ?> <?php echo "Si ".radiobutton_tag('caordcom[aplart]', 'S', $v) ?>&nbsp;
 <?php echo "No ".radiobutton_tag('caordcom[aplart]', 'N', !$v) ?>&nbsp;
-<div class="sf_admin_edit_help"><?php echo __('Seleccione una OpciÃ³n') ?></div>
+<div class="sf_admin_edit_help"><?php echo __('Seleccione una Opción') ?></div>
     </div>
 </div>
 </fieldset>
@@ -861,7 +866,7 @@ echo grid_tag($obj_recargos);
   }
 ?> <?php echo "Si ".radiobutton_tag('caordcom[aplart6]', 'S', $v) ?>&nbsp;
 <?php echo "No ".radiobutton_tag('caordcom[aplart6]', 'N', !$v) ?>&nbsp;
-<div class="sf_admin_edit_help"><?php echo __('Seleccione una OpciÃ³n') ?></div>
+<div class="sf_admin_edit_help"><?php echo __('Seleccione una Opción') ?></div>
     </div>
 </div>
 </fieldset>
@@ -935,7 +940,7 @@ echo grid_tag($obj_recargos);
 </div>
 </fieldset>
 
-<?php if ($caordcom->getManorddon()=='S') tabPageOpenClose("tp1", "tabPage12", 'Datos del Beneficiario de la DonaciÃ³n');?>
+<?php if ($caordcom->getManorddon()=='S') tabPageOpenClose("tp1", "tabPage12", 'Datos del Beneficiario de la Donación');?>
 <div id="datbendon" style="display:none">
 <fieldset>
 <div class="form-row">
@@ -1154,7 +1159,7 @@ function enter(e,valor)
         }
             f++;
       }
-      if(confirm("Â¿Desea imprimir la orden Pre-Impresa?"))
+      if(confirm("¿Desea imprimir la orden Pre-Impresa?"))
       {
             var ordcomdes=$('caordcom_ordcom').value;
             var ordcomhas=$('caordcom_ordcom').value;
@@ -1191,7 +1196,7 @@ function enter(e,valor)
       {
         var campo="ax_"+f+"_2";
         if($(campo))
-        {               
+        {
           if ($(id).value==$(campo).value)
           {
              enc=true;
