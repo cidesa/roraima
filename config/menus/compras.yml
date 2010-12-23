@@ -46,6 +46,7 @@ compras:
       Cotizaciones:                                           AlmCotiza
       Asignación de Prioridades a Cotizaciones:               AlmPriori
       Ordenes de Compra  y+o Servicio:                        AlmOrdCom
+      Ordenes de Compra  y+o Servicio(Corta 30 item):         AlmOrdComCor
       #Ordenes de Servicio:                                   AlmOrdSer
       #Registro de Contratos:                                 AlmContrato
       Ajuste a Ordenes de Compra:                             AlmAjuOC
