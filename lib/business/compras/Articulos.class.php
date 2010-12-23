@@ -5,8 +5,8 @@
  *
  * @package    Roraima
  * @subpackage compras
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: Articulos.class.php 41835 2010-12-23 21:38:05Z cramirez $
  * 
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -1045,12 +1045,38 @@ public static function Grabar_DetallesRetenciones($caretser,$grid)
                   }
             }//if ($bandera=='S')
           }
+
+          /******
+           *
+           * Esta funcion se creo porque en registro de articulos no graba en caartalm solo graba en caartalmubi
+           * por lo tanto aqui actualizamos la tabla almacen con lo que tiene caartalmubi que la que esta correcta
+           *
+           * */
+          $exiact2 = 0;
+          $c= new Criteria();
+          $c->add(CaartalmubiPeer::CODALM,$almacen);
+          $c->add(CaartalmubiPeer::CODART,$grid_arreglo[$i]['codart']);
+          $caartalmubi2 = CaartalmubiPeer::doSelect($c);
+          foreach($caartalmubi2 as $rs)
+          {
+              $exiact2 += $rs->getExiact();
+          }
+
+          #FIN FUNCION NUEVA
+
+
+
         //Actualizar la tabla Caartalm
           $c= new Criteria();
           $c->add(CaartalmPeer::CODALM,$almacen);
           $c->add(CaartalmPeer::CODART,$grid_arreglo[$i]['codart']);
           $caartalm_up = CaartalmPeer::doSelectOne($c);
-          if ($caartalm_up)
+          if($caartalm_up)
+          {
+              $caartalm_up->setExiact($exiact2);
+              $caartalm_up->save();
+          }
+          /*if ($caartalm_up)
           {
             if ($bandera=='S')
             {
@@ -1096,6 +1122,7 @@ public static function Grabar_DetallesRetenciones($caretser,$grid)
               }//if (count($caartalm)>0)
             }//if ($bandera=='S')
           }//else*/
+
       }//if ($grid_arreglo[$i]['codart']!='')
         $i++;
     }
