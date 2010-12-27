@@ -12,7 +12,7 @@
 
 class nomaumsuecarActions extends autonomaumsuecarActions
 {
-	
+
   public function executeList()
   {
      $this->redirect('nomaumsuecar/edit');
@@ -23,15 +23,15 @@ class nomaumsuecarActions extends autonomaumsuecarActions
   {
 	$this->configGridCargos();
 	$arrnom=$this->CargarNomina();
-    $this->params=array('arrnom'=>$arrnom);	
+    $this->params=array('arrnom'=>$arrnom);
   }
-  
+
   public function CargarNomina()
   {
   	  $c = new Criteria();
    	  $c->addAscendingOrderByColumn(NpasicarempPeer :: CODNOM);
 	  $obj = NpasicarempPeer::doSelect($c);
-	  
+
 	  $r=array(''=>'Todos los Cargos....');
 
 	  foreach($obj  as  $i)
@@ -40,16 +40,16 @@ class nomaumsuecarActions extends autonomaumsuecarActions
 	  }
 	  return $r;
   }
-  
+
   public function configGridCargos($codigo='')
   {
     $c = new Criteria();
     if ($codigo)
-	{
-		$c->add(NpasicarnomPeer::CODNOM,$codigo);
-		$c->addJoin(NpcargosPeer::CODCAR,NpasicarnomPeer::CODCAR);
-	}
-    $c->addAscendingOrderByColumn(NpcargosPeer :: CODCAR);    	
+    {
+            $c->add(NpasicarnomPeer::CODNOM,$codigo);
+            $c->addJoin(NpcargosPeer::CODCAR,NpasicarnomPeer::CODCAR);
+    }
+    $c->addAscendingOrderByColumn(NpcargosPeer :: CODCAR);
     $per = NpcargosPeer::doSelect($c);
 
     // Se crea el objeto principal de la clase OpcionesGrid
@@ -79,8 +79,8 @@ class nomaumsuecarActions extends autonomaumsuecarActions
     $col2->setAlineacionObjeto(Columna::IZQUIERDA);
     $col2->setAlineacionContenido(Columna::IZQUIERDA);
     $col2->setNombreCampo('nomcar');
-    $col2->setHTML('type="text" size="100" readonly="true"');
-	
+    $col2->setHTML('type="text" size="60" readonly="true"');
+
 	$col3 = new Columna('Sueldo');
     $col3->setTipo(Columna::MONTO);
     $col3->setEsGrabable(true);
@@ -99,13 +99,13 @@ class nomaumsuecarActions extends autonomaumsuecarActions
     // Se guardan las columnas en el objetos de opciones
     $opciones->addColumna($col1);
     $opciones->addColumna($col2);
-	$opciones->addColumna($col3);
+    $opciones->addColumna($col3);
     $opciones->addColumna($col4);
 
     // Ee genera el arreglo de opciones necesario para generar el grid
     $this->obj = $opciones->getConfig($per);
     $this->npcargos->setObjcar($this->obj);
-	
+
   }
 
   public function configGrid($reg = array(),$regelim = array())
@@ -192,7 +192,7 @@ class nomaumsuecarActions extends autonomaumsuecarActions
 		$this->val=1;
 		$this->npcargos = $this->getNpcargosOrCreate();
 		$this->configGridCargos($codigo);
-		
+
         $output = '[["","",""],["","",""],["","",""]]';
         break;
       default:
@@ -264,7 +264,7 @@ class nomaumsuecarActions extends autonomaumsuecarActions
   {
     $this->configGridCargos();
 	$arrnom=$this->CargarNomina();
-    $this->params=array('arrnom'=>$arrnom);	
+    $this->params=array('arrnom'=>$arrnom);
     $grid = Herramientas::CargarDatosGridv2($this,$this->obj);
 
     //$this->configGrid($grid[0],$grid[1]);
@@ -273,9 +273,9 @@ class nomaumsuecarActions extends autonomaumsuecarActions
 
   public function saving($clasemodelo)
   {
-  	$grid = Herramientas::CargarDatosGridv2($this,$this->obj);
-  	
-	foreach($grid[0] as $g)
+    $grid = Herramientas::CargarDatosGridv2($this,$this->obj);
+
+    foreach($grid[0] as $g)
     {
       if ($g->getCheck()=='1')
       {
@@ -292,7 +292,7 @@ class nomaumsuecarActions extends autonomaumsuecarActions
         $npaumcargos->setMotaum($clasemodelo->getMotaum());
         $npaumcargos->save();
 
-		$g->save();
+        $g->save();
       }
     }
     return '-1';

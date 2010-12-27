@@ -50,4 +50,23 @@
       $(id).value = elnum;
    
   } //end function
+
+  function MarcarTodos()
+  {
+	  var totfil = obtener_filas_grid('a',1);
+
+          if ($('npcargos_todos').checked==true) {
+              for(i=0;i<totfil;i++)
+              {
+                  $('ax_'+i+'_4').checked=true;
+              }
+          }else
+          {
+              for(i=0;i<totfil;i++)
+              {
+                  $('ax_'+i+'_4').checked=false;
+              }
+          }
+
+  }
 </script>
