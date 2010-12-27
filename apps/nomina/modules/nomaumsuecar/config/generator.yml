@@ -12,15 +12,16 @@ generator:
       porcentaje:     { name: Aumentar por Porcentaje}
       fecaum:     { name: Fecha}
       motaum:     { name: Motivo, params: size=80 maxlength=250 disabled=false}
+      todos:      { name: Marcar Todos, type: checkbox_tag, params: onClick="MarcarTodos()" disabled=false}
     edit:
       title:      Aumento de Sueldos por Cargos
       fields:
         cantidad:                    {params: disabled=false onBlur="mientermontootro(event,this.id);aumentosuecar(this.value,1);"}
         porcentaje:                  {params: disabled=false onBlur="aumentosuecar(this.value,2);" maxlength=3 size=5}
       display:
-        Datos para el Aumento:       [_tipnom, cantidad, porcentaje, _fecaum, motaum]
+        Datos para el Aumento:       [_tipnom, cantidad, porcentaje, _fecaum, motaum, todos]
         Listado de Cargos:           [_gridcargos]
-        
+
       actions:
         _list:        ~
         _save:        ~
