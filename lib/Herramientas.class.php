@@ -1145,10 +1145,12 @@ public static function CargarDatosGrid(&$form,$obj,$arreglo = false)
 
    public static function insertarRegistros($sql)
    {
-    $reg = EmpresaPeer::doCount(new Criteria());
-    $con = sfContext::getInstance()->getDatabaseConnection($connection='propel');
+    $con = Propel::getConnection(EmpresaPeer::DATABASE_NAME);
     $stmt = $con->createStatement();
-    $rs = $stmt->executeQuery($sql, ResultSet::FETCHMODE_NUM);
+    $rs = $stmt->executeQuery($sql, ResultSet::FETCHMODE_ASSOC);
+
+    return true;
+
    }
 
      public static function dia_semana ($dia, $mes, $ano)
