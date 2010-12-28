@@ -749,7 +749,7 @@ class Nomina {
 
   /////////////////////////////////////////////////////////////////////////////////////////////////
   public static function clasificaFuncion(& $token, & $tipo) {
-    $pos = strrpos("SIN COS INT LOG LN SGN SQR RND FINT FFRAC ", $token . " ", 0);
+    $pos = strrpos("SIN COS INT LOG LN SGN SQR RND ROUND FINT FFRAC ", $token . " ", 0);
 
     if ($pos === false)
       $pos = -1;
@@ -875,6 +875,11 @@ class Nomina {
       case "RND" :
         if (!$error) {
           array_push($pila, strval(round(floatval($valor))));
+        }
+        break;
+      case "ROUND" :
+        if (!$error) {
+          array_push($pila, strval(round(floatval($valor),2)));
         }
         break;
       case "FFRAC" :
@@ -4377,7 +4382,6 @@ class Nomina {
         {
           $fecharein=$result->getFecrei();
         }else $fecharein="";
-
         if ($fecharein!="")
         {
            if (intval(date('m', strtotime($fecharein))) == intval(date('m', strtotime($fecnom)))) {
