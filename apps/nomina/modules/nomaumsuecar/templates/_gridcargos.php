@@ -27,7 +27,7 @@
 		{
 			if(parseInt(val))
 			{
-				$('ax_'+i+'_3').value=number_format(parseFloat(celda)+((parseFloat(celda)*parseInt(val))/100),2,',','.');	
+				$('ax_'+i+'_3').value=number_format(parseFloat(celda)+((parseFloat(celda)*parseFloat(val))/100),2,',','.');
 			}				
 			else
 			    break;	
