@@ -29,10 +29,10 @@ class nomaumsuecarActions extends autonomaumsuecarActions
   public function CargarNomina()
   {
   	  $c = new Criteria();
-   	  $c->addAscendingOrderByColumn(NpasicarempPeer :: CODNOM);
-	  $obj = NpasicarempPeer::doSelect($c);
+   	  $c->addAscendingOrderByColumn(NpnominaPeer :: CODNOM);
+	  $obj = NpnominaPeer::doSelect($c);
 
-	  $r=array(''=>'Todos los Cargos....');
+	  $r=array(''=>'Todos las Nominas....');
 
 	  foreach($obj  as  $i)
 	  {
