@@ -1,12 +1,12 @@
 <?php
 
 /**
- * almordcom actions.
+ * almordcomv2 actions.
  *
  * @package    Roraima
- * @subpackage almordcom
+ * @subpackage almordcomv2
  * @author     $Author: dmartinez $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id: actions.class.php 39222 2010-06-28 20:17:31Z dmartinez $
+ * @version SVN: $Id: actions.class.php 41715 2010-12-13 19:41:51Z dmartinez $
  *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -31,11 +31,67 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
 
     if ($this->getRequest()->getMethod() == sfRequest::POST) {
       if ($this->getRequestParameter('id') == "") {
-        $grid_detalle = Herramientas::CargarDatosGrid($this, $this->obj, true); //0
-        $grid_entregas = Herramientas::CargarDatosGrid($this, $this->obj_entregas, true); //0
+        $grid_detalle = Herramientas::CargarDatosGridv2($this, $this->obj, true); //0
+        $grid_entregas = Herramientas::CargarDatosGridv2($this, $this->obj_entregas, true); //0
+        $grid_formas_entregas = Herramientas::CargarDatosGridv2($this, $this->obj_formas); //0
         $grid_detalle_detallado = $grid_detalle[0];
 
-        $grid_resumen = Herramientas::CargarDatosGrid($this, $this->obj_resumen, true); //0
+        $grid_resumen = Herramientas::CargarDatosGridv2($this, $this->obj_resumen, true); //0
+        // Validacion del nro de la orden de compra
+        $numord = str_replace('#', '0', $this->caordcom->getOrdcom());
+        $numord = str_pad($numord, 8, '0', STR_PAD_LEFT);
+
+        $prefijomixto = H::getConfApp('prefijomixto', 'compras', 'almordcom');
+        if (($this->caordcom->getTipord() == 'S') || ($this->caordcom->getTipord() == 'M') || ($this->caordcom->getTipord() == 'T')) {
+          if ($prefijomixto != "" && $this->caordcom->getTipord() == 'M')
+            $numord = $prefijomixto . substr($numord, 2, 6);
+          elseif ($this->caordcom->getTipord() == 'T')
+            $numord = 'CO' . substr($numord, 2, 6);
+          else
+            $numord = 'OS' . substr($numord, 2, 6);
+        }else {
+          $numord = 'OC' . substr($numord, 2, 6);
+        }
+
+        if (Herramientas::getX_vacio('ordcom', 'caordcom', 'ordcom', $numord) != '') {
+          $this->coderror1 = 102;
+          $this->caordcom->setOrdcom($numord);
+          return false;
+        }
+        if (H::getConfApp2('valresp', 'compras', 'almordcom') == 'S') {
+          if ($this->getRequestParameter('caordcom[codemp]') == "") {
+            $this->coderror4 = 209;
+            return false;
+          }
+        }
+
+        if (H::getConfApp2('valunidad', 'compras', 'almordcom') == 'S') {
+          if ($this->getRequestParameter('caordcom[coduni]') == "") {
+            $this->coderror4 = 567;
+            return false;
+          } else {
+            $r = new Criteria();
+            $r->add(BnubicaPeer::CODUBI, $this->getRequestParameter('caordcom[coduni]'));
+            $reg = BnubicaPeer::doSelectOne($r);
+            if (!$reg) {
+              $this->coderror4 = 568;
+              return false;
+            }
+          }
+
+          if ($this->getRequestParameter('caordcom[codcen]') == "") {
+            $this->coderror4 = 569;
+            return false;
+          } else {
+            $r = new Criteria();
+            $r->add(CadefcenPeer::CODCEN, $this->getRequestParameter('caordcom[codcen]'));
+            $reg = CadefcenPeer::doSelectOne($r);
+            if (!$reg) {
+              $this->coderror4 = 570;
+              return false;
+            }
+          }
+        }
 
         $this->mannivelapr = "";
         $varemp = $this->getUser()->getAttribute('configemp');
@@ -226,6 +282,7 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
       $this->configGrid_Resumen($this->getRequestParameter('caordcom[ordcom]'));
       $this->configGrid_ResumenPartidas($this->getRequestParameter('caordcom[ordcom]'));
       $this->configGrid_Entregas($this->getRequestParameter('caordcom[ordcom]'));
+      $this->configGrid_FormasEntrega($this->getRequestParameter('caordcom[ordcom]'));
     }
     else {
       $this->aprobacion = 'N';
@@ -252,6 +309,7 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
       $this->configGrid_Resumen($caordcom->getOrdcom());
       $this->configGrid_ResumenPartidas($caordcom->getOrdcom());
       $this->configGrid_Entregas($caordcom->getOrdcom());
+      $this->configGrid_FormasEntrega($caordcom->getOrdcom());
       $this->forward404Unless($caordcom);
     }
 
@@ -382,7 +440,7 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
     $this->formulario = array();
     $referencia = $this->getUser()->getAttribute('referencia');
     $total = 0;
-    $detalle = Herramientas::CargarDatosGrid($this, $this->obj, true);
+    $detalle = Herramientas::CargarDatosGridv2($this, $this->obj, true);
 
     $x = $detalle[0];
     $j = 0;
@@ -410,7 +468,7 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
       //}
 
       if ($msjuno == "") {
-        $form = "sf_admin/almordcom/confincomgen";
+        $form = "sf_admin/almordcomv2/confincomgen";
         $i = 0;
         $f[$i] = $form . $i;
         $this->getUser()->setAttribute('grabar', $comprobante[0]->getGrabar(), $f[$i]);
@@ -466,8 +524,10 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
       //print $tipord;
       $c = new Criteria();
       $c->add(CaregartPeer::CODART, $this->getRequestParameter('codigo'));
-      if ($tipord == 'S' || $tipord == 'A')
-        $c->add(CaregartPeer::TIPO, $this->getRequestParameter('tipord'));
+      if ($tipord == 'T')
+        $tipord = 'S';
+      if ($tipord == 'S' || $tipord == 'A' || $this->getRequestParameter('tipord') == 'T')
+        $c->add(CaregartPeer::TIPO, $tipord);
       $reg = CaregartPeer::doSelectOne($c);
       if ($reg) {
         if ($longitudart == strlen($this->getRequestParameter('codigo'))) {
@@ -580,7 +640,6 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
       $recargosreg = CarecargPeer::doSelectOne($d);
       if ($recargosreg) {
         if ($recargosreg->getCodpre() != "") {
-
           $desrgo = $recargosreg->getNomrgo();
           $montorgotab = $recargosreg->getMonrgo();
           $monrgo = number_format($montorgotab, 2, ',', '.');
@@ -637,6 +696,62 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
       $output = '[["' . $cajtexmos . '","' . $edad . '",""]]';
       $this->getResponse()->setHttpHeader("X-JSON", '(' . $output . ')');
       return sfView::HEADER_ONLY;
+    } else if ($this->getRequestParameter('ajax') == '19') {
+      $q = new Criteria();
+      $q->add(CadefcenacoPeer::CODCENACO, $this->getRequestParameter('codigo'));
+      $reg = CadefcenacoPeer::doSelectOne($q);
+      if ($reg) {
+        $dato = $reg->getDescenaco();
+        $javascript = "";
+      } else {
+        $dato = "";
+        $javascript = "alert('El Centro de Acopio no existe'); $('$cajtexcom').value=''; $('$cajtexcom').focus();";
+      }
+
+      $output = '[["' . $cajtexmos . '","' . $dato . '",""],["javascript","' . $javascript . '",""]]';
+      $this->getResponse()->setHttpHeader("X-JSON", '(' . $output . ')');
+      return sfView::HEADER_ONLY;
+    } else if ($this->getRequestParameter('ajax') == '20') {
+      $this->unidades = array();
+      $javascript = "";
+      $this->unidades = CaunialartPeer :: getUnidades($this->getRequestParameter('codigo'));
+      $output = '[["javascript","' . $javascript . '",""]]';
+      $this->getResponse()->setHttpHeader("X-JSON", '(' . $output . ')');
+    } else if ($this->getRequestParameter('ajax') == '21') {
+      $q = new Criteria();
+      $q->add(CadefalmPeer::CODALM, $this->getRequestParameter('codigo'));
+      $reg = CadefalmPeer::doSelectOne($q);
+      if ($reg) {
+        $dato = $reg->getNomalm();
+        $javascript = "";
+      } else {
+        $dato = "";
+        $javascript = "alert_('El Almac&eacute;n no existe'); $('$cajtexcom').value=''; $('$cajtexcom').focus();";
+      }
+
+      $output = '[["' . $cajtexmos . '","' . $dato . '",""],["javascript","' . $javascript . '",""]]';
+      $this->getResponse()->setHttpHeader("X-JSON", '(' . $output . ')');
+      return sfView::HEADER_ONLY;
+    } else if ($this->getRequestParameter('ajax') == '22') {
+      $longitudart = strlen(Herramientas::getMascaraArticulo());
+      $c = new Criteria();
+      $c->add(CaregartPeer::CODART, $this->getRequestParameter('codigo'));
+      $reg = CaregartPeer::doSelectOne($c);
+      if ($reg) {
+        if ($longitudart == strlen($this->getRequestParameter('codigo'))) {
+          $dato = eregi_replace("[\n|\r|\n\r]", "", $reg->getDesart());
+          $javascript = "verificardetalle('" . $cajtexcom . "');";
+          $output = '[["' . $cajtexmos . '","' . $dato . '",""],["javascript","' . $javascript . '",""]]';
+        } else {
+          $javascript = "alert('El Codigo del Articulo no es de Ultimo Nivel'); $('" . $cajtexmos . "').value=''; $('" . $cajtexcom . "').value=''; $('" . $cajtexcom . "').focus();";
+          $output = '[["javascript","' . $javascript . '",""]]';
+        }
+      } else {
+        $javascript = "alert('Articulo no existe, o no es un Articulo/Servicio');$('" . $cajtexmos . "').value='';$('" . $cajtexcom . "').value=''; $('" . $cajtexcom . "').focus();";
+        $output = '[["javascript","' . $javascript . '",""]]';
+      }
+      $this->getResponse()->setHttpHeader("X-JSON", '(' . $output . ')');
+      return sfView::HEADER_ONLY;
     }
   }
 
@@ -670,10 +785,10 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
         if ($refcom != "")
           $filas_arreglo = 0;
         else
-          $filas_arreglo=50;
+          $filas_arreglo=30;
       }
       else
-        $filas_arreglo=50;
+        $filas_arreglo=30;
     }
     elseif ($referencia == 1) {
       $c = new Criteria();
@@ -711,10 +826,12 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
     else
       $opciones->setTabla('Caartsol');
     $opciones->setName('a');
-    $opciones->setAncho(2100);
+    $opciones->setAncho(2300);
     $opciones->setAnchoGrid(1000);
     $opciones->setTitulo('Detalle de la Orden de Requisición');
     $opciones->setHTMLTotalFilas(' ');
+    $opciones->setTabindex(true);
+    $opciones->setTabindexstart(1000);
 
     $col1 = new Columna('Marque');
     $col1->setTipo(Columna::CHECK);
@@ -748,6 +865,7 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
 
     //onBlur="actualizo_cod_presupuestario(this.id);ajax_detalle_codigo_pre(event,this.id);ajaxdetalle(event,this.id);"
     $col2->setAjaxfila(true);
+    $col2->setAjaxonchange(true);
     $col2->setAjaxadicionales(array('caordcom_tipord'));
 
 
@@ -767,13 +885,14 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
     $col4->setNombreCampo('Codcat');
     $jscol4 = 'onKeyDown="javascript:return dFilter (event.keyCode, this,' . chr(39) . $formatocategoria . chr(39) . ')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}"';
     if ($referencia == 0 and $filas_arreglo > 0)
-      $col4->setHTML('type="text" size="15"  maxlength="' . chr(39) . $loncat . chr(39) . '" '.$jscol4);
+      $col4->setHTML('type="text" size="15"  maxlength="' . chr(39) . $loncat . chr(39) . '" ' . $jscol4);
     if ($referencia == 1 or $filas_arreglo == 0)
       $col4->setHTML('type="text" size="15" readonly=true');
     if ($referencia == 0 and $filas_arreglo > 0)
       $col4->setCatalogo('Npcatpre', 'sf_admin_edit_form', array('codcat' => 4), 'Npcatpre_Almsolegr', $params2);
 
     $col4->setAjaxfila(true);
+    $col4->setAjaxonchange(true);
     $col4->setAjaxadicionales(array('caordcom_tipord'));
 
 
@@ -790,6 +909,7 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
       $col5->setHTML('type="text" size="10" readonly=true');
     // TODO: EL observer para recalcularecargos(event,this.id);
     $col5->setAjaxfila(true);
+    $col5->setAjaxonchange(true);
     $col5->setAjaxadicionales(array('caordcom_fecord'));
 
     $col6 = clone $col5;
@@ -817,6 +937,7 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
     $col9->setNombreCampo($campo_col9);
     //$col9->setJScript('onKeypress="entermonto(event,this.id); ');
     $col9->setAjaxfila(true);
+    $col9->setAjaxonchange(true);
     $col9->setAjaxadicionales(array('caordcom_fecord'));
 
 
@@ -834,6 +955,7 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
     $col11->setEsTotal(true, 'sumatoria_descuentos');
 
     $col11->setAjaxfila(true);
+    $col11->setAjaxonchange(true);
     $col11->setAjaxadicionales(array('caordcom_fecord'));
 
 
@@ -854,7 +976,7 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
     $col13 = clone $col6;
     $col13->setTitulo('Total');
     $col13->setNombreCampo($campo_col13);
-    $col13->setHTML('type="text" size="10" readonly=true');
+    $col13->setHTML('type="text" size="10"');
     $col13->setEsTotal(true, 'caordcom_monord');
 
     $col14 = new Columna('Unidad Medida');
@@ -875,11 +997,12 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
       $col15->setHTML('type="text" size="32"');
     if ($referencia == 1)
       $col15->setHTML('type="text" size="32" readonly=true');
-    if ($referencia == 0){
+    if ($referencia == 0) {
       $col15->setAjaxfila(true);
+      $col15->setAjaxonchange(true);
       $col15->setAjaxadicionales(array('caordcom_fecord'));
     }
-      
+
 
     $col16 = new Columna('Codigo Partida');
     $col16->setTipo(Columna::TEXTO);
@@ -1036,7 +1159,7 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
     $col11 = clone $col6;
     $col11->setTitulo('Descuento');
     $col11->setNombreCampo('Mondes');
-    $col11->setJScript('onKeypress="entermonto(event,this.id);actualizar_sumatoria_total_cuando_esta_referida();actualizar_grid_dependientes()"');
+    $col11->setHTML('onKeypress="entermonto(event,this.id);"');
     $col11->setEsTotal(true, 'sumatoria_descuentos');
 
     $col12 = clone $col6;
@@ -1049,7 +1172,7 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
     $col13 = clone $col6;
     $col13->setTitulo('Total');
     $col13->setNombreCampo('Montot');
-    $col13->setJScript('onKeypress="entermonto(event,this.id);actualizar_sumatoria_total_cuando_esta_referida();actualizar_grid_dependientes()"');
+    $col13->setHTML('onKeypress="entermonto(event,this.id);"');
     $col13->setEsTotal(true, 'caordcom_monord');
 
     $col14 = new Columna('Unidad Medida');
@@ -1088,8 +1211,7 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
     $col17->setNombreCampo('anadir');
     if ($tipo == 'P')
       $col17->setOculta(true);
-    $col17->setHTML('type="text" size="1" style="border:none" class="imagenalmacen"');
-    $col17->setJScript('onClick="mostrargridrecargos(this.id)"');
+    $col17->setHTML('type="text" size="1" style="border:none" class="imagenalmacen" onClick="mostrargridrecargos(this.id)"');
 
     $col18 = new Columna('cadena_datos_recargo');
     $col18->setTipo(Columna::TEXTO);
@@ -1181,7 +1303,7 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
       $col3->setNombreCampo('recargototal');
       $col3->setEsNumerico(true);
       $col3->setHTML('type="text" size="10"');
-      $col3->setJScript('onKeypress="entermonto_r(event,this.id);actualizar_calculo_grid_recargo_por_fila();"');
+      //$col3->setJScript('onKeypress="entermonto_r(event,this.id);actualizar_calculo_grid_recargo_por_fila();"');
       $col3->setEsTotal(true, 'sumatoria_recargos');
 
       $col4 = new Columna('Cant. Total');
@@ -1193,7 +1315,7 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
       $col4->setNombreCampo('por_monrgo');
       $col4->setEsNumerico(true);
       $col4->setHTML('type="text" size="10"');
-      $col4->setJScript('onKeypress="entermonto(event,this.id);actualizar_calculo_grid_recargo_por_fila();"');
+      //$col4->setJScript('onKeypress="entermonto(event,this.id);actualizar_calculo_grid_recargo_por_fila();"');
 
       $col5 = new Columna('Tipo Recargo');
       $col5->setTipo(Columna::TEXTO);
@@ -1266,7 +1388,7 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
       $col4->setNombreCampo('por_monrgo');
       $col4->setEsNumerico(true);
       $col4->setHTML('type="text" size="10"');
-      $col4->setJScript('onKeypress="entermonto(event,this.id);actualizar_calculo_grid_recargo_por_fila();"');
+      //$col4->setJScript('onKeypress="entermonto(event,this.id);actualizar_calculo_grid_recargo_por_fila();"');
 
       $col5 = new Columna('Tipo Recargo');
       $col5->setTipo(Columna::TEXTO);
@@ -1353,8 +1475,7 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
     $col4->setAlineacionObjeto(Columna::DERECHA);
     $col4->setNombreCampo('por_monrgo');
     $col4->setEsNumerico(true);
-    $col4->setHTML('type="text" size="10"');
-    $col4->setJScript('onKeypress="entermonto(event,this.id);actualizar_calculo_grid_recargo_por_fila();"');
+    $col4->setHTML('type="text" size="10" onKeypress="entermonto(event,this.id)');
 
     $col5 = new Columna('Tipo Recargo');
     $col5->setTipo(Columna::TEXTO);
@@ -1385,12 +1506,37 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
    * los datos del grid.
    *
    */
-  public function configGrid_Resumen($ordcom='') {
-    $c = new Criteria();
-    $c->add(CaresordcomPeer::ORDCOM, $ordcom);
-    $per4 = CaresordcomPeer::doSelect($c);
-    $filas_arreglo = 50;
+  public function configGrid_Resumen($ordcom='', $articulos=array()) {
 
+    if (count($articulos) > 0) {
+
+      // TODO: llenar los objetos de tipo Caresordcom con los registro del arreglo $articulos
+      $per4 = array();
+      foreach ($articulos as $key => $value) {
+
+        $caresordcom = new Caresordcom();
+        $caresordcom->setCodart($value[0]);
+        $caresordcom->setDesres($value[1]);
+        $caresordcom->setCodartpro($value[2]);
+        $caresordcom->setCanord($value[3]);
+        $caresordcom->setCanaju($value[4]);
+        $caresordcom->setCanrec($value[5]);
+        $caresordcom->setCantot($value[6]);
+        $caresordcom->setCosto($value[7]);
+        $caresordcom->setRgoart($value[8]);
+        $caresordcom->setTotart($value[9]);
+
+
+
+        $per4[] = $caresordcom;
+      }
+    } else {
+      $c = new Criteria();
+      $c->add(CaresordcomPeer::ORDCOM, $ordcom);
+      $per4 = CaresordcomPeer::doSelect($c);
+    }
+
+    $filas_arreglo = 0;
     $mascaraarticulo = $this->mascaraarticulo;
     $formatocategoria = $this->formatocategoria;
     // Se crea el objeto principal de la clase OpcionesGrid
@@ -1400,8 +1546,8 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
     $opciones->setFilas($filas_arreglo);
     $opciones->setTabla('Caresordcom');
     $opciones->setName('b');
-    $opciones->setAncho(1200);
-    $opciones->setAnchoGrid(1200);
+    $opciones->setAncho(1000);
+    $opciones->setAnchoGrid(1020);
     $opciones->setTitulo('Detalle de la Orden de Requisición');
     $opciones->setHTMLTotalFilas(' ');
 
@@ -1437,32 +1583,37 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
     $col4->setAlineacionObjeto(Columna::DERECHA);
     $col4->setNombreCampo('Canord');
     $col4->setEsNumerico(true);
-    $col4->setHTML('type="text" size="10"');
-    $col4->setJScript('onKeypress="entermonto(event,this.id)"');
+    $col4->setHTML('type="text" size="5"');
 
     $col5 = clone $col4;
     $col5->setTitulo('Cant. Ajustada');
     $col5->setNombreCampo('Canaju');
+    $col5->setHTML('type="text" size="5"');
 
     $col6 = clone $col5;
     $col6->setTitulo('Cant.  Recibida');
     $col6->setNombreCampo('Canrec');
+    $col6->setHTML('type="text" size="5"');
 
     $col7 = clone $col5;
     $col7->setTitulo('Cant. Total');
     $col7->setNombreCampo('Cantot');
+    $col7->setHTML('type="text" size="5"');
 
     $col8 = clone $col5;
     $col8->setTitulo('Costo');
     $col8->setNombreCampo('Costo');
+    $col8->setHTML('type="text" size="8"');
 
     $col9 = clone $col5;
     $col9->setTitulo('Monto Recargo');
     $col9->setNombreCampo('Rgoart');
+    $col9->setHTML('type="text" size="8"');
 
     $col10 = clone $col5;
     $col10->setTitulo('Total');
     $col10->setNombreCampo('Totart');
+    $col10->setHTML('type="text" size="8"');
 
 
     // Se guardan las columnas en el objetos de opciones
@@ -1488,14 +1639,20 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
    * los datos del grid.
    *
    */
-  public function configGrid_ResumenPartidas($ordcom='') {
+  public function configGrid_ResumenPartidas($ordcom='', $articulos=array()) {
     $escodpre = 'N';
-    $sql = "select 9 as id, '' as nompar, codpar, sum(totarti) as totart, recargo from (select 9 as id, '' as nompar,  a.codpar as codpar, sum((a.totart-a.rgoart)) as totarti, 'N' as recargo from caartord a
-          where a.ordcom='" . $ordcom . "'  group by  a.codpar,a.totart,a.rgoart
-          union
-          select 9 as id, '' as nompar, c.codpre as codpar,sum(b.monrgo) as totarti, 'S' as recargo from cargosol b, carecarg c
-          where reqart='" . $ordcom . "' and b.codrgo=c.codrgo group by c.codpre) as nueva group by codpar, recargo";
-    $resp = Herramientas::BuscarDatos($sql, &$reg);
+
+    if (count($articulos) > 0) {
+      $reg = $articulos;
+      $resp = count($articulos);
+    } else {
+      $sql = "select 9 as id, '' as nompar, codpar, sum(totarti) as totart, recargo from (select 9 as id, '' as nompar,  a.codpar as codpar, sum((a.totart-a.rgoart)) as totarti, 'N' as recargo from caartord a
+            where a.ordcom='" . $ordcom . "'  group by  a.codpar,a.totart,a.rgoart
+            union
+            select 9 as id, '' as nompar, c.codpre as codpar,sum(b.monrgo) as totarti, 'S' as recargo from cargosol b, carecarg c
+            where reqart='" . $ordcom . "' and b.codrgo=c.codrgo group by c.codpre) as nueva group by codpar, recargo";
+      $resp = Herramientas::BuscarDatos($sql, &$reg);
+    }
 
     //verificar si la imputacion presupuestaria asociada al recargo es una partida o un codigo presupuestario
     $c = new Criteria();
@@ -1531,12 +1688,12 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
     $opciones = new OpcionesGrid();
     // Se configuran las opciones globales del Grid
     $opciones->setEliminar(false);
-    $opciones->setFilas(50);
+    $opciones->setFilas(0);
     $opciones->setTabla('Caartord');
     $opciones->setName('z');
     $opciones->setAncho(600);
     $opciones->setAnchoGrid(800);
-    $opciones->setTitulo('Resumen por Partida Presupuestaria');
+    $opciones->setTitulo('');
     $opciones->setHTMLTotalFilas(' ');
 
     // Se generan las columnas
@@ -1551,9 +1708,8 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
     $col2 = new Columna('Nombre');
     $col2->setTipo(Columna::TEXTAREA);
     $col2->setEsGrabable(true);
-    if ($ordcom == ""
-
-      )$col2->setOculta(true);
+    if ($ordcom == "")
+      $col2->setOculta(true);
     $col2->setAlineacionObjeto(Columna::IZQUIERDA);
     $col2->setAlineacionContenido(Columna::IZQUIERDA);
     $col2->setNombreCampo('nompar');
@@ -1586,17 +1742,153 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
    * los datos del grid.
    *
    */
-  public function configGrid_Entregas($ordcom='') {
+  public function configGrid_FormasEntrega($ordcom='', $articulos=array()) {
+
+    if (count($articulos) > 0) {
+
+      $reg = array();
+      foreach ($articulos as $key => $value) {
+
+        $caentord = new Caentord();
+        $caentord->setCodart($value[0]);
+        $caentord->setDesres($value[1]);
+        $caentord->setCodartpro($value[2]);
+        $caentord->setCanord($value[3]);
+        $caentord->setCanaju($value[4]);
+        $caentord->setCanrec($value[5]);
+
+        $reg[] = $caentord;
+      }
+    } else {
+      $c = new Criteria();
+      $c->add(CaentordPeer::ORDCOM, $ordcom);
+      $reg = CaentordPeer::doSelect($c);
+    }
+
+    $opciones = new OpcionesGrid();
+    $opciones->setEliminar(true);
+    $opciones->setFilas(30);
+    $opciones->setTabla('Caentord');
+    $opciones->setName('t');
+    $opciones->setAncho(950);
+    $opciones->setAnchoGrid(980);
+    $opciones->setTitulo(' ');
+    $opciones->setHTMLTotalFilas(' ');
+
+    $mascaraarticulo = $this->mascaraarticulo;
+    $lonart = strlen($mascaraarticulo);
+
+    $params = array('param1' => $lonart, 'param2' => "'+$('caordcom_tipord').value+'", 'val2');
+
+    $col1 = new Columna('Código  Artículo');
+    $col1->setTipo(Columna::TEXTO);
+    $col1->setEsGrabable(true);
+    $col1->setAlineacionObjeto(Columna::CENTRO);
+    $col1->setAlineacionContenido(Columna::CENTRO);
+    $col1->setNombreCampo('codart');
+    $col1->setHTML('type="text" size="10"  maxlength="' . chr(39) . $lonart . chr(39) . '" onKeyDown="javascript:return dFilter (event.keyCode, this,' . chr(39) . $mascaraarticulo . chr(39) . ')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}"');
+    $col1->setCatalogo('caregart', 'sf_admin_edit_form', array('codart' => 1, 'desart' => 2), 'Caregart_Almsolegr', $params);
+    $col1->setAjax('almordcomv2', 22, 2);
+
+    $col2 = new Columna('Descripción');
+    $col2->setTipo(Columna::TEXTAREA);
+    $col2->setAlineacionObjeto(Columna::IZQUIERDA);
+    $col2->setAlineacionContenido(Columna::IZQUIERDA);
+    $col2->setNombreCampo('desart');
+    $col2->setEsGrabable(true);
+    $col2->setHTML('type="text" size="15x1" readonly=true');
+
+    $col3 = new Columna('Código  Almacén');
+    $col3->setTipo(Columna::TEXTO);
+    $col3->setEsGrabable(true);
+    $col3->setAlineacionObjeto(Columna::CENTRO);
+    $col3->setAlineacionContenido(Columna::CENTRO);
+    $col3->setNombreCampo('codalm');
+    $col3->setHTML('type="text" size="8" maxlength="20"');
+    $col3->setCatalogo('Cadefalm', 'sf_admin_edit_form', array('codalm' => 3, 'nomalm' => 4), 'Cadefalm_Alminvfis');
+    $col3->setAjax('almordcomv2', 21, 4);
+
+    $col4 = new Columna('Descripción');
+    $col4->setTipo(Columna::TEXTO);
+    $col4->setEsGrabable(true);
+    $col4->setAlineacionObjeto(Columna::IZQUIERDA);
+    $col4->setAlineacionContenido(Columna::IZQUIERDA);
+    $col4->setNombreCampo('nomalm');
+    $col4->setHTML('type="text" size="20" readonly="true"');
+
+    $col5 = new Columna('Cant. Entregar');
+    $col5->setTipo(Columna::MONTO);
+    $col5->setEsGrabable(true);
+    $col5->setAlineacionContenido(Columna::DERECHA);
+    $col5->setAlineacionObjeto(Columna::DERECHA);
+    $col5->setNombreCampo('canent');
+    $col5->setEsNumerico(true);
+    $col5->setHTML('type="text" size="8" onKeyPress="entermonto_t(event,this.id); verificarcantidad(this.id)"');
+
+    $col6 = new Columna('Cant. Recibida');
+    $col6->setTipo(Columna::MONTO);
+    $col6->setEsGrabable(true);
+    $col6->setAlineacionContenido(Columna::DERECHA);
+    $col6->setAlineacionObjeto(Columna::DERECHA);
+    $col6->setNombreCampo('canrec');
+    $col6->setEsNumerico(true);
+    $col6->setHTML('type="text" size="8" readonly="true"');
+
+    $col7 = new Columna('Fecha de Entrega');
+    $col7->setNombreCampo('fecent');
+    $col7->setTipo(Columna::FECHA);
+    $col7->setHTML('');
+    $col7->setEsGrabable(true);
+
+    // Se guardan las columnas en el objetos de opciones
+    $opciones->addColumna($col1);
+    $opciones->addColumna($col2);
+    $opciones->addColumna($col3);
+    $opciones->addColumna($col4);
+    $opciones->addColumna($col5);
+    $opciones->addColumna($col6);
+    $opciones->addColumna($col7);
+
+    // Ee genera el arreglo de opciones necesario para generar el grid
+    $this->obj_formas = $opciones->getConfig($reg);
+  }
+
+  /**
+   * Esta función permite definir la configuración del grid de datos
+   * que contiene el formulario. Esta función debe ser llamada
+   * en las acciones, create, edit y handleError para recargar en todo momento
+   * los datos del grid.
+   *
+   */
+  public function configGrid_Entregas($ordcom='', $articulos=array()) {
     /*     * ***********************************************************************
      * *         Grid de Entregas de la Orden de Compra Formulario Amlordcom  **
      * *                                                                      **
      * ************************************************************************ */
 
 
-    $c = new Criteria();
-    $c->add(CaartfecPeer::ORDCOM, $ordcom);
-    $per5 = CaartfecPeer::doSelect($c);
-    $filas_arreglo = 50;
+    if (count($articulos) > 0) {
+      // TODO: generar objetos de tipo Caartfec por cada registro del arreglo
+
+      $per5 = array();
+
+      $filas_arreglo = 0;
+      foreach ($articulos as $art) {
+        $caartfec = new Caartfec();
+
+        $caartfec->setCodart($art[0]);
+        $caartfec->setDesart($art[1]);
+        $caartfec->setCanart($art[2]);
+        $caartfec->setFecent($art[3]);
+
+        $per5[] = $caartfec;
+      }
+    } else {
+      $c = new Criteria();
+      $c->add(CaartfecPeer::ORDCOM, $ordcom);
+      $per5 = CaartfecPeer::doSelect($c);
+      $filas_arreglo = 0;
+    }
 
     $mascaraarticulo = $this->mascaraarticulo;
     $formatocategoria = $this->formatocategoria;
@@ -1606,8 +1898,8 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
     $opciones2->setEliminar(false);
     $opciones2->setFilas($filas_arreglo);
     $opciones2->setTabla('Caartfec');
-    $opciones2->setAncho(650);
-    $opciones2->setAnchoGrid(600);
+    $opciones2->setAncho(675);
+    $opciones2->setAnchoGrid(700);
     $opciones2->setName('c');
     $opciones2->setTitulo('Detalle de la Orden de Requisición');
     $opciones2->setHTMLTotalFilas(' ');
@@ -1619,8 +1911,7 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
     $col1->setAlineacionObjeto(Columna::DERECHA);
     $col1->setAlineacionContenido(Columna::DERECHA);
     $col1->setNombreCampo('Codart');
-    $col1->setHTML('type="text" size="15" readonly="readonly"');
-    $col1->setJScript('onKeyDown="javascript:return dFilter (event.keyCode, this,' . chr(39) . $mascaraarticulo . chr(39) . ')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}"');
+    $col1->setHTML('type="text" size="15" readonly="readonly" onKeyDown="javascript:return dFilter (event.keyCode, this,' . chr(39) . $mascaraarticulo . chr(39) . ')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}"');
 
     $col2 = new Columna('Descripción');
     $col2->setTipo(Columna::TEXTAREA);
@@ -1628,7 +1919,7 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
     $col2->setAlineacionObjeto(Columna::IZQUIERDA);
     $col2->setAlineacionContenido(Columna::IZQUIERDA);
     $col2->setNombreCampo('Desart');
-    $col2->setHTML('type="text" size="30x1"');
+    $col2->setHTML('type="text" size="35x1"');
 
     $col3 = new Columna('Cantidad');
     $col3->setTipo(Columna::MONTO);
@@ -1637,7 +1928,7 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
     $col3->setAlineacionObjeto(Columna::DERECHA);
     $col3->setNombreCampo('Canart');
     $col3->setEsNumerico(true);
-    $col3->setHTML('type="text" size="10" readonly="readonly"');
+    $col3->setHTML('type="text" size="8" readonly="readonly"');
 
 
     $col4 = new Columna('Fecha de Entrega');
@@ -1645,6 +1936,7 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
     $col4->setTipo(Columna::FECHA);
     $col4->setHTML('');
     $col4->setEsGrabable(true);
+    $col4->setHTML('type="text" size="8"');
 
 
     // Se guardan las columnas en el objetos de opciones
@@ -1667,34 +1959,16 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
     $this->oculeli = "";
     $this->oculsave = "";
     $this->fechaanuserv = "";
-    $varemp = $this->getUser()->getAttribute('configemp');
-    if ($varemp)
-      if (array_key_exists('aplicacion', $varemp))
-        if (array_key_exists('compras', $varemp['aplicacion']))
-          if (array_key_exists('modulos', $varemp['aplicacion']['compras']))
-            if (array_key_exists('almordcom', $varemp['aplicacion']['compras']['modulos'])) {
-              if (array_key_exists('deshabilmonrec', $varemp['aplicacion']['compras']['modulos']['almordcom'])) {
-                $this->deshabmonrec = $varemp['aplicacion']['compras']['modulos']['almordcom']['deshabilmonrec'];
-              }
-              if (array_key_exists('ordcomdesh', $varemp['aplicacion']['compras']['modulos']['almordcom'])) {
-                $this->ordcomdesh = $varemp['aplicacion']['compras']['modulos']['almordcom']['ordcomdesh'];
-              }
-              if (array_key_exists('mansolocor', $varemp['aplicacion']['compras']['modulos']['almordcom'])) {
-                $this->mansolocor = $varemp['aplicacion']['compras']['modulos']['almordcom']['mansolocor'];
-              }
-              if (array_key_exists('bloqfec', $varemp['aplicacion']['compras']['modulos']['almordcom'])) {
-                $this->bloqfec = $varemp['aplicacion']['compras']['modulos']['almordcom']['bloqfec'];
-              }
-              if (array_key_exists('oculeli', $varemp['aplicacion']['compras']['modulos']['almordcom'])) {
-                $this->oculeli = $varemp['aplicacion']['compras']['modulos']['almordcom']['oculeli'];
-              }
-              if (array_key_exists('oculsave', $varemp['aplicacion']['compras']['modulos']['almordcom'])) {
-                $this->oculsave = $varemp['aplicacion']['compras']['modulos']['almordcom']['oculsave'];
-              }
-              if (array_key_exists('fechaanuserv', $varemp['aplicacion']['compras']['modulos']['almordcom'])) {
-                $this->fechaanuserv = $varemp['aplicacion']['compras']['modulos']['almordcom']['fechaanuserv'];
-              }
-            }
+    $this->etiqtipord = "Licitación";
+
+    $this->deshabmonrec = H::getConfApp2('deshabilmonrec', 'compras', 'almordcom');
+    $this->ordcomdesh = H::getConfApp2('ordcomdesh', 'compras', 'almordcom');
+    $this->mansolocor = H::getConfApp2('mansolocor', 'compras', 'almordcom');
+    $this->bloqfec = H::getConfApp2('bloqfec', 'compras', 'almordcom');
+    $this->oculeli = H::getConfApp2('oculeli', 'compras', 'almordcom');
+    $this->oculsave = H::getConfApp2('oculsave', 'compras', 'almordcom');
+    $this->fechaanuserv = H::getConfApp2('fechaanuserv', 'compras', 'almordcom');
+    $this->etiqtipord = H::getConfApp2('etiqtipord', 'compras', 'almordcom');
   }
 
   public function executeAutocomplete() {
@@ -1727,16 +2001,17 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
    */
   protected function saveCaordcom($caordcom) {
     //<!-----------------------------Grid Arreglos---------------------->
-    $grid_detalle_orden_arreglos = Herramientas::CargarDatosGrid($this, $this->obj, true); //0
-    $grid_detalle_resumen_arreglos = Herramientas::CargarDatosGrid($this, $this->obj_resumen, true); //1
-    $grid_detalle_entrega_arreglos = Herramientas::CargarDatosGrid($this, $this->obj_entregas, true); //2
-    $grid_detalle_recargo_arreglos = Herramientas::CargarDatosGrid($this, $this->obj_recargos, true); //3
+    $grid_detalle_orden_arreglos = Herramientas::CargarDatosGridv2($this, $this->obj, true); //0
+    $grid_detalle_resumen_arreglos = Herramientas::CargarDatosGridv2($this, $this->obj_resumen, true); //1
+    $grid_detalle_entrega_arreglos = Herramientas::CargarDatosGridv2($this, $this->obj_entregas, true); //2
+    $grid_detalle_recargo_arreglos = Herramientas::CargarDatosGridv2($this, $this->obj_recargos, true); //3
     $arreglo_arreglo = array($grid_detalle_orden_arreglos, $grid_detalle_resumen_arreglos, $grid_detalle_entrega_arreglos, $grid_detalle_recargo_arreglos);
 
     //<!-----------------------------Grid Objetos---------------------->
-    $grid_detalle_resumen_objetos = Herramientas::CargarDatosGrid($this, $this->obj_resumen); //0
-    $grid_detalle_entrega_objetos = Herramientas::CargarDatosGrid($this, $this->obj_entregas); //1
-    $arreglo_objetos = array($grid_detalle_resumen_objetos, $grid_detalle_entrega_objetos);
+    $grid_detalle_resumen_objetos = Herramientas::CargarDatosGridv2($this, $this->obj_resumen); //0
+    $grid_detalle_entrega_objetos = Herramientas::CargarDatosGridv2($this, $this->obj_entregas); //1
+    $grid_detalle_formas_entrega = Herramientas::CargarDatosGridv2($this, $this->obj_formas); //2
+    $arreglo_objetos = array($grid_detalle_resumen_objetos, $grid_detalle_entrega_objetos, $grid_detalle_formas_entrega);
 
     //<!-----------------------------campos ocultos---------------------->
     $total = $this->getRequestParameter('sumatoria_detalle_orden'); //0
@@ -1753,9 +2028,10 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
     $arreglo_campos = array($total, $total_descuento, $total_recargo, $codigo_proveedor, $tasacambio, $referencia, $codconpag_dos, $codforent_dos, $genero_compromiso);
 
 
+    $this->verificarResumenes($arreglo_arreglo, $arreglo_objetos);
 
     //<!-----------------------------funciones clase Orden de Compra---------------------->
-    if (Orden_compra::Salvar($caordcom, $arreglo_arreglo, $arreglo_objetos, $arreglo_campos, &$coderror)) {
+    if (Orden_compra::Salvar($caordcom, $arreglo_arreglo, $arreglo_objetos, $arreglo_campos, $grid_detalle_formas_entrega, &$coderror)) {
       //<!-----------------------------guardo comprobante---------------------->
       if ($this->getUser()->getAttribute('grabo', null, $this->getUser()->getAttribute('formulario')) == 'S') {
         $numcom = $this->getUser()->getAttribute('contabc[numcom]', null, $this->getUser()->getAttribute('formulario'));
@@ -2062,6 +2338,9 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
     if (isset($caordcom['manorddon'])) {
       $this->caordcom->setManorddon($caordcom['manorddon']);
     }
+    if (isset($caordcom['codcenaco'])) {
+      $this->caordcom->setCodcenaco($caordcom['codcenaco']);
+    }
   }
 
   public function AfectaProyecto() {
@@ -2179,7 +2458,7 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
             }
 
             $dato = Herramientas::getX('reqart', 'Casolart', 'monreq', trim($this->getRequestParameter('ordcom')));
-            $desreq = Herramientas::getX('reqart', 'Casolart', 'desreq', trim($this->getRequestParameter('ordcom')));
+            $desreq = eregi_replace("[\n|\r|\n\r]", "", Herramientas::getX('reqart', 'Casolart', 'desreq', trim($this->getRequestParameter('ordcom'))));
             $desfin = Herramientas::getX('codfin', 'Fortipfin', 'nomext', $filas[0]->getTipfin());
             $codcen = Herramientas::getX('reqart', 'Casolart', 'codcen', trim($this->getRequestParameter('ordcom')));
             $descen = Herramientas::getX('codcen', 'Cadefcen', 'descen', $codcen);
@@ -2412,12 +2691,14 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
     $opciones = new OpcionesGrid();
     $opciones->setEliminar(true);
     $opciones->setTabla('Cadisrgo');
-    $opciones->setAncho(700);
+    $opciones->setAncho(670);
     $opciones->setAnchoGrid(700);
     $opciones->setTitulo('Recargos');
     $opciones->setName('r');
-    $opciones->setFilas(20);
+    $opciones->setFilas(6);
     $opciones->setHTMLTotalFilas(' ');
+    $opciones->setTabindex(true);
+    $opciones->setTabindexstart(5000);
 
     $col1 = new Columna('Código Recargo');
     $col1->setTipo(Columna::TEXTO);
@@ -2429,6 +2710,7 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
     $col1->setCatalogo('carecarg', 'sf_admin_edit_form', array('codrgo' => 1, 'nomrgo' => 2, 'monrgo' => 3, 'tiprgo' => 4));
     //$col1->setJScript(' onBlur="javascript:event.keyCode=13; ajaxrecargo(event,this.id);"');
     $col1->setAjaxfila(true);
+    $col1->setAjaxadicionales(array('totartsinrec'));
 
     $col2 = new Columna('Descripción');
     $col2->setTipo(Columna::TEXTO);
@@ -2640,7 +2922,7 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
     $doccom = CpdoccomPeer::doSelectOne($q);
     if (!$doccom) {
       $this->getRequest()->setError('valida', 'Debe definir al menos un Tipo de Compromiso.');
-      return $this->forward('almordcom', 'list');
+      return $this->forward('almordcomv2', 'list');
     }
 
     $l = new Criteria();
@@ -2682,7 +2964,7 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
       case "a":
         $this->ajaxFilaGridA($name, $fila, $columna, $grid, $jsonextra);
         break;
-      case "R":
+      case "r":
         $this->ajaxFilaGridR($name, $fila, $columna, $grid, $jsonextra);
         break;
 
@@ -2697,50 +2979,51 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
     return sfView::HEADER_ONLY;
   }
 
+  private function ajaxFilaGridR($name, $fila, $columna, &$grid, &$jsonextra='') {
 
-  private function ajaxFilaGridR($name, $fila, $columna, &$grid, &$jsonextra=''){
+    $g = $grid[$fila];
 
     //Calcular Recargos
     if (true) {
       $d = new Criteria();
-      $d->add(CarecargPeer::CODRGO, $this->getRequestParameter('codigo'));
+      $d->add(CarecargPeer::CODRGO, $g[0]);
       $recargosreg = CarecargPeer::doSelectOne($d);
       if ($recargosreg) {
         if ($recargosreg->getCodpre() != "") {
 
           $desrgo = $recargosreg->getNomrgo();
+          $g[1] = $desrgo;
           $montorgotab = $recargosreg->getMonrgo();
           $monrgo = number_format($montorgotab, 2, ',', '.');
+          $g[2] = $monrgo;
           $tiprgo = $recargosreg->getTiprgo();
-          $reccal = SolicituddeEgresos::CalcularRecargos($tiprgo, $montorgotab, $this->getRequestParameter('monart'));
+          $g[3] = $tiprgo;
+          $reccal = SolicituddeEgresos::CalcularRecargos($tiprgo, $montorgotab, H::toFloat($this->getRequestParameter('totartsinrec')));
           $reccalformat = $reccal; //number_format($reccal,2,',','.');
+          $g[4] = $reccal;
           $codpar = $recargosreg->getCodpre();
-          if ($tiprgo == 'M')//Tipo recargo puntual (monto)
-            $javascript = "$('" . $this->getRequestParameter('moncal') . "').readOnly=false;actualizarsaldos_r();";
-          else //Tipo de recargo por porcentaje
-            $javascript="actualizarsaldos_r();";
-        }else {
-          $desrgo = "";
-          $monrgo = "0,00";
-          $tiprgo = "";
-          $reccalformat = "0,00";
-          $codpar = "";
-          $javascript = "alert('Debe asociarle al Recargo el Código Presupuestario'); $('$cajtexcom').value='';";
+          $g[5] = $codpar;
+          if ($tiprgo == 'M') {//Tipo recargo puntual (monto)
+            $javascript = "$('rx_" . $fila . "_5').readOnly=false; ActualizarSaldosGrid('r',ArrTotales_r);";
+            $jsonextra = ',["javascript","' . $javascript . '",""]';
+          } else {
+            $javascript = "ActualizarSaldosGrid('r',ArrTotales_r);";
+            $jsonextra = ',["javascript","' . $javascript . '",""]';
+          }
+        } else {
+          $this->limpiarFilaGridR($g);
+          $javascript = "alert('Debe asociarle al Recargo el Código Presupuestario');";
+          $jsonextra = ',["javascript","' . $javascript . '",""]';
         }
       } else {
-        $desrgo = "";
-        $monrgo = "0,00";
-        $tiprgo = "";
-        $reccalformat = "0,00";
-        $codpar = "";
-        $javascript = "alert('El Recargo no existe'); $('$cajtexcom').value='';";
+        $this->limpiarFilaGridR($g);
+        $javascript = "alert('El Recargo no existe');";
+        $jsonextra = ',["javascript","' . $javascript . '",""]';
       }
-      $output = '[["' . $cajtexmos . '","' . $desrgo . '",""],["' . $cajtexcom . '","4","c"],["' . $this->getRequestParameter('monto') . '","' . $monrgo . '",""],["' . $this->getRequestParameter('tipo') . '","' . $tiprgo . '",""],["' . $this->getRequestParameter('moncal') . '","' . $reccalformat . '",""],["' . $this->getRequestParameter('codpar') . '","' . $codpar . '",""],["javascript","' . $javascript . '",""]]';
-      $this->getResponse()->setHttpHeader("X-JSON", '(' . $output . ')');
-      return sfView::HEADER_ONLY;
     }
-  }
 
+    $grid[$fila] = $g;
+  }
 
   private function ajaxFilaGridA($name, $fila, $columna, &$grid, &$jsonextra='') {
 
@@ -2750,7 +3033,7 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
     if ($columna == '2' || $columna == '4') {
 
       // Verificación del codigo del artículo  (Ajax 3)
-      if ($g[1]!='') {
+      if ($g[1] != '') {
         $tipord = $this->getRequestParameter('caordcom_tipord');
         $longitudart = strlen(Herramientas::getMascaraArticulo());
         //print $tipord;
@@ -2776,47 +3059,45 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
           $jsonextra = ',["javascript","' . $javascript . '",""]';
         }
       }
-      
+
       // Verificación del código presupuestario (Ajax 12)
-      if($g[3]!='' && $g[15]!=''){
-        $dato = CpasiiniPeer::getExiste_pre(trim($g[3].'-'.$g[15]));
-        if ($dato == ''){
+      if ($g[3] != '' && $g[15] != '') {
+        $dato = CpasiiniPeer::getExiste_pre(trim($g[3] . '-' . $g[15]));
+        if ($dato == '') {
           // TODO: limpiar campos
-          $javascript = "alert('El Código Presupuestario ".$g[3].'-'.$g[15]." no Existe');";
+          $javascript = "alert('El Código Presupuestario " . $g[3] . '-' . $g[15] . " no Existe');";
           $jsonextra = ',["javascript","' . $javascript . '",""]';
-        }else{
-          $g[14] = $g[3].'-'.$g[15];
+        } else {
+          $g[14] = $g[3] . '-' . $g[15];
         }
       }
-
     }
 
     if ($columna == '5' || $columna == '9' || $columna == '11') {
 
       $cantxcost = round(H::toFloat($g[4]) * H::toFloat($g[8]));
       $g[9] = H::FormatoMonto($cantxcost);
-      $totalgeneral = $cantxcost-H::toFloat($g[10])+H::toFloat($g[11]);
+      $totalgeneral = $cantxcost - H::toFloat($g[10]) + H::toFloat($g[11]);
       $g[12] = H::FormatoMonto($totalgeneral);
       $fecha = $this->getRequestParameter('caordcom_fecord');
       $fecha = explode('/', $fecha);
 
-      if($totalgeneral>0.0 && $g[14]!=''){
+      if ($totalgeneral > 0.0 && $g[14] != '') {
         $info = $this->disponibilidad($g[14], $totalgeneral, $fecha[2]);
-        if($info!=''){
+        if ($info != '') {
           $javascript = "alert('$info');";
           $jsonextra = ',["javascript","' . $javascript . '",""]';
         }
       }
-
     }
 
     if ($columna == '15') {
       $fecha = $this->getRequestParameter('caordcom_fecord');
       $fecha = explode('/', $fecha);
       $totalgeneral = H::toFloat($g[12]);
-      if($totalgeneral>0.0 && $g[14]!=''){
+      if ($totalgeneral > 0.0 && $g[14] != '') {
         $info = $this->disponibilidad($g[14], $totalgeneral, $fecha[2]);
-        if($info!=''){
+        if ($info != '') {
           $javascript = "alert('$info');";
           $jsonextra = ',["javascript","' . $javascript . '",""]';
         }
@@ -2825,10 +3106,9 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
 
 
     $grid[$fila] = $g;
-
   }
 
-  private function disponibilidad($codigo, $monto, $ano){
+  private function disponibilidad($codigo, $monto, $ano) {
 
     // Ajax 13
     $result = array();
@@ -2837,21 +3117,311 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
     if (Herramientas::BuscarDatos($sql, &$result)) {
       $mondis = SolicituddeEgresos::montoDisponible($codigo);
       if ($monto > $mondis) {
-        return "alert_('El C&oacute;digo " . $codigo . " no tiene disponibilidad');";
-      }else return '';
+        return "El C&oacute;digo " . $codigo . " no tiene disponibilidad";
+      }else
+        return '';
     } else {
-      return "alert_('El C&oacute;digo Presupuestario no existe');";
+      return "El C&oacute;digo Presupuestario no existe";
     }
-
   }
 
-  private function limpiarFilaGridA(&$g)
-  {
+  private function limpiarFilaGridA(&$g) {
     $g[1] = "";
     $g[2] = "";
     $g[13] = "";
     $g[8] = "";
     $g[15] = "";
+  }
+
+  private function limpiarFilaGridR(&$g) {
+    $g[0] = "";
+    $g[1] = "";
+    $g[2] = "0,00";
+    $g[3] = "";
+    $g[4] = "";
+    $g[5] = "";
+  }
+
+  public function executeResumen() {
+
+    $grida = $this->getRequestParameter('grida', '');
+    $gridr = $this->getRequestParameter('gridr', array());
+
+    $resumen = $this->generarResumen($grida, $gridr);
+
+    $this->configGrid_Resumen('', $resumen);
+  }
+
+  public function executeEntregas() {
+
+    $grida = $this->getRequestParameter('grida', '');
+    $gridc = $this->getRequestParameter('gridc', array());
+
+    $entregas = $this->generarEntregas($grida, $gridc);
+
+    $this->configGrid_Entregas('', $entregas);
+  }
+
+  public function executeResumenpartidas() {
+
+    $grida = $this->getRequestParameter('grida', '');
+
+    $resumenpartidas = $this->generarResumenPartidas($grida);
+
+    $this->configGrid_ResumenPartidas('', $resumenpartidas);
+  }
+
+  public function executeDespachos() {
+
+    $grida = $this->getRequestParameter('grida', '');
+
+    $despachos = $this->generarDespachos($grida);
+
+    $this->configGrid_ResumenPartidas('', $despachos);
+  }
+
+  public function generarResumen($grida, $gridr) {
+
+    $articulos = array();
+
+
+    foreach ($grida as $cicloA) {
+      $encontrado = false;
+
+      foreach ($articulos as $i => $cicloR) {
+
+        if ($cicloA[1] != '' && $cicloA[1] == $cicloR[0]) {
+          $encontrado = true;
+          $indice = $i;
+        }
+      }
+
+      if (!$encontrado) {
+        if ($cicloA[1] != '')
+          $articulos[] = array($cicloA[1], $cicloA[2], $cicloA[3], H::toFloat($cicloA[4]), H::toFloat($cicloA[5]), H::toFloat($cicloA[6]), H::toFloat($cicloA[7]), H::toFloat($cicloA[8]), H::toFloat($cicloA[11]), H::toFloat($cicloA[12]));
+      }else {
+        $articulos[$indice][3] += $cicloA[4];
+        $articulos[$indice][4] += $cicloA[5];
+        $articulos[$indice][5] += $cicloA[6];
+        $articulos[$indice][6] += $cicloA[7];
+        $articulos[$indice][7] += $cicloA[8];
+        $articulos[$indice][8] += $cicloA[11];
+        $articulos[$indice][9] += $cicloA[12];
+      }
+    }
+
+    foreach ($articulos as $art) {
+
+      foreach ($gridr as $res) {
+        if ($art[0] == $res[0]) {
+          $art[1] == $res[1];
+          break;
+        }
+      }
+    }
+
+
+    return $articulos;
+  }
+
+  public function generarEntregas($grida, $gridc) {
+
+    $articulos = array();
+
+
+    foreach ($grida as $cicloA) {
+      $encontrado = false;
+
+      foreach ($articulos as $i => $cicloR) {
+
+        if ($cicloA[1] != '' && $cicloA[1] == $cicloR[0]) {
+          $encontrado = true;
+          $indice = $i;
+        }
+      }
+
+      if (!$encontrado) {
+        if ($cicloA[1] != '')
+          $articulos[] = array($cicloA[1], $cicloA[2], H::toFloat($cicloA[4]), date('Y-m-d'));
+      }else {
+        $articulos[$indice][2] += $cicloA[4];
+      }
+    }
+
+    foreach ($articulos as $art) {
+
+      foreach ($gridc as $ent) {
+        if ($art[0] == $ent[0]) {
+          $art[3] == $ent[3];
+          break;
+        }
+      }
+    }
+
+    return $articulos;
+  }
+
+  public function generarResumenPartidas($grida) {
+
+    $articulos = array();
+
+    foreach ($grida as $cicloA) {
+      $encontrado = false;
+
+      foreach ($articulos as $i => $cicloR) {
+
+        if ($cicloA[15] != '' && $cicloA[15] == $cicloR['codpar']) {
+          $encontrado = true;
+          $indice = $i;
+        }
+      }
+
+      if (!$encontrado) {
+        if ($cicloA[15] != '')
+          $articulos[] = array('id' => '9', 'codpar' => $cicloA[15], 'totart' => H::toFloat($cicloA[12]), 'totarti' => H::toFloat($cicloA[10]), 'recargo' => 'N');
+      }else {
+        $articulos[$indice]['totart'] += H::toFloat($cicloA[12]);
+        $articulos[$indice]['totarti'] += H::toFloat($cicloA[10]);
+      }
+    }
+
+    return $articulos;
+  }
+
+  public function generarDespachos($grida) {
+
+    $articulos = array();
+
+    foreach ($grida as $cicloA) {
+      $encontrado = false;
+
+      foreach ($articulos as $i => $cicloR) {
+
+        if ($cicloA[1] != '' && $cicloA[1] == $cicloR[0]) {
+          $encontrado = true;
+          $indice = $i;
+        }
+      }
+
+      if (!$encontrado) {
+        if ($cicloA[1] != '')
+          $articulos[] = array($cicloA[1], $cicloA[2], H::toFloat($cicloA[4]), date('Y-m-d'));
+      }else {
+        $articulos[$indice][2] += $cicloA[4];
+      }
+    }
+
+    return $articulos;
+  }
+
+  private function verificarResumenes(&$arreglo_arreglo, &$arreglo_objetos) {
+
+    $grid_detalle_orden_arreglos = $arreglo_arreglo[0][0];
+    $grid_detalle_resumen_arreglos = $arreglo_arreglo[1][0];
+    $grid_detalle_entrega_arreglos = array();
+
+    $grid_detalle_resumen_objetos = $arreglo_objetos[0][0];
+    $grid_detalle_entrega_objetos = $arreglo_objetos[1][0];
+    $grid_detalle_formas_entrega = $arreglo_objetos[2][0];
+
+    // Verifico que el resumen este completo
+    // Se blaquean las cantidades para recalcularlas
+    foreach ($grid_detalle_resumen_objetos as $cicloR) {
+      $cicloR->setCanord(0);
+      $cicloR->setCanaju(0);
+      $cicloR->setCanrec(0);
+      $cicloR->setCantot(0);
+      $cicloR->setCosto(0);
+      $cicloR->setRgoart(0);
+      $cicloR->setTotart(0);
+    }
+
+    foreach ($grid_detalle_entrega_objetos as $cicloR) {
+      $cicloR->setCanart(0);
+    }
+
+
+    foreach ($grid_detalle_orden_arreglos as $cicloA) {
+      $encontrado = false;
+
+      foreach ($grid_detalle_resumen_objetos as $i => $cicloR) {
+
+        if ($cicloA['codart'] != '' && $cicloA['codart'] == $cicloR->getCodart()) {
+          $encontrado = true;
+          $indice = $i;
+        }
+      }
+
+      if (!$encontrado) {
+        if ($cicloA['codart'] != '') {
+
+          $caresordcom = new Caresordcom();
+          $caresordcom->setCodart($cicloA['codart']);
+          $caresordcom->setDesres($cicloA['desart']);
+          $caresordcom->setCodartpro($cicloA['codartpro']);
+          $caresordcom->setCanord($cicloA['canord']);
+          $caresordcom->setCanaju($cicloA['canaju']);
+          $caresordcom->setCanrec($cicloA['canrec']);
+          $caresordcom->setCantot($cicloA['cantot']);
+          $caresordcom->setCosto($cicloA['costo']);
+          $caresordcom->setRgoart($cicloA['rgoart']);
+          $caresordcom->setTotart($cicloA['totart']);
+
+          $grid_detalle_resumen_arreglos[] = $caresordcom->toArray(BasePeer::TYPE_FIELDNAME);
+          $grid_detalle_resumen_objetos[] = $caresordcom;
+        }
+      } else {
+        $grid_detalle_resumen_objetos[$indice]->setCanord($grid_detalle_resumen_objetos[$indice]->getCanord() + $cicloA['canord']);
+        $grid_detalle_resumen_objetos[$indice]->setCanaju($grid_detalle_resumen_objetos[$indice]->getCanaju() + $cicloA['canaju']);
+        $grid_detalle_resumen_objetos[$indice]->setCanrec($grid_detalle_resumen_objetos[$indice]->getCanrec() + $cicloA['canrec']);
+        $grid_detalle_resumen_objetos[$indice]->setCantot($grid_detalle_resumen_objetos[$indice]->getCantot() + $cicloA['cantot']);
+        $grid_detalle_resumen_objetos[$indice]->setCosto($grid_detalle_resumen_objetos[$indice]->getCosto() + $cicloA['preart']);
+        $grid_detalle_resumen_objetos[$indice]->setRgoart($grid_detalle_resumen_objetos[$indice]->getRgoart() + $cicloA['rgoart']);
+        $grid_detalle_resumen_objetos[$indice]->setTotart($grid_detalle_resumen_objetos[$indice]->getTotart() + $cicloA['totart']);
+
+        $grid_detalle_resumen_arreglos[$indice] = $grid_detalle_resumen_objetos[$indice]->toArray(BasePeer::TYPE_FIELDNAME);
+
+      }
+    }
+
+    // Verifico que las entregas esten completas
+
+    foreach ($grid_detalle_orden_arreglos as $cicloA) {
+      $encontrado = false;
+
+      foreach ($grid_detalle_entrega_objetos as $i => $cicloR) {
+
+        if ($cicloA['codart'] != '' && $cicloA['codart'] == $cicloR->getCodart()) {
+          $encontrado = true;
+          $indice = $i;
+        }
+      }
+
+      if (!$encontrado) {
+        if ($cicloA['codart'] != '') {
+
+          $caartfec = new Caartfec();
+
+          $caartfec->setCodart($cicloA['codart']);
+          $caartfec->setDesart($cicloA['desart']);
+          $caartfec->setCanart($cicloA['canord']);
+          $caartfec->setFecent(date('Y-m-d'));
+
+          $grid_detalle_entrega_objetos[] = $caartfec;
+          $grid_detalle_entrega_arreglos[] = $caartfec->toArray(BasePeer::TYPE_FIELDNAME);
+        }
+      }else{
+        $grid_detalle_entrega_objetos[$indice]->setCanart($grid_detalle_entrega_objetos[$indice]->getCanart() + $cicloA['canord']);
+        $grid_detalle_entrega_arreglos[] = $grid_detalle_entrega_objetos[$indice]->toArray(BasePeer::TYPE_FIELDNAME);
+      }
+    }
+
+    $arreglo_arreglo[1][0] = $grid_detalle_resumen_arreglos;
+    $arreglo_arreglo[2][0] = $grid_detalle_entrega_arreglos;
+
+    $arreglo_objetos[0][0] = $grid_detalle_resumen_objetos;
+    $arreglo_objetos[1][0] = $grid_detalle_entrega_objetos;
+
   }
 
 }

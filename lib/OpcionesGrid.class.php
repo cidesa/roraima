@@ -22,6 +22,8 @@ class OpcionesGrid
   private $htmltotalfilas = '';
   private $tabla ='';
   private $jseliminar ='';
+  private $tabindex = false;
+  private $tabindexstart = 100;
 
   /**
    * Crea una nueva columna dentro del objeto de opciones
@@ -151,7 +153,29 @@ class OpcionesGrid
 
   }
 
+  /**
+   * Indica si el grid se configura con sus tabindex incrementales
+   *
+   * @param $val (bool) si esta activo la generacion de tabindex
+   * @return bool
+   */
+  public function setTabindex($val){
 
+    $this->tabindex = (bool)$val;
+
+  }
+
+  /**
+   * Indica si el grid se configura con sus tabindex incrementales
+   *
+   * @param $val (bool) si esta activo la generacion de tabindex
+   * @return bool
+   */
+  public function setTabindexstart($val){
+
+    $this->tabindexstart = (int)$val;
+
+  }
   /**
    * Genera el arreglo de configuracion que será enviado al GridHelper
    *
@@ -189,6 +213,7 @@ class OpcionesGrid
     $anchogrid =    (string)$this->anchogrid;
     $valida=array();
     $camposcombo=array();
+    $onchange=array();
 
     foreach ($this->colums as $key => $col){
 
@@ -261,6 +286,7 @@ class OpcionesGrid
       $combo[]    =    $col->getCombo();
       $checkbox[] =    $col->getCheckbox();
       $default[]  =    $col->getDefault();
+      $onchange[] =  $col->getAjaxonchange();      
 
     $htmlfilatotal[] = '<input class="grid_txtright" type="text" id="total'.($key+1).'" name="total" size="25">';
 
@@ -282,7 +308,8 @@ class OpcionesGrid
   'ajax' => $ajax, 'tipos' => $tipos, 'montos'=> $montos, 'filatotal' => $filatotal, 'totales'=> $totales,
   'html'=> $html, 'js'=> $js, 'datos'=> $per, 'grabar'=> $grabar, 'tabla' => $this->tabla, 'vacia' => $vacia, 'oculta' => $oculta,
   'tiposobj' => $tiposobj, 'combo' => $combo, 'checkbox' => $checkbox, 'boton' => $boton, 'default' => $default, 'funcionajax' => $funcionajax,
-  'jseliminar' => $this->jseliminar, 'ajaxfila' => $ajaxfila, 'ajaxcolumna' => $ajaxcolumna, 'ajaxgrid' => $ajaxgrid, 'ajaxadicionales' => $ajaxadicionales, 'anchogrid' => $anchogrid, 'valida' => $valida, 'camposcombo'=> $camposcombo);
+  'jseliminar' => $this->jseliminar, 'ajaxfila' => $ajaxfila, 'ajaxcolumna' => $ajaxcolumna, 'ajaxgrid' => $ajaxgrid, 'ajaxadicionales' => $ajaxadicionales,
+  'anchogrid' => $anchogrid, 'valida' => $valida, 'camposcombo'=> $camposcombo, 'onchange' => $onchange, 'tabindex' => $this->tabindex, 'tabindexstart' => $this->tabindexstart);
 
     return $obj;
 

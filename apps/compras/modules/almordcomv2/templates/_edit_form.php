@@ -16,7 +16,7 @@
 )) ?>
 
 <?php use_helper('Javascript','PopUp','Grid','Date','SubmitClick','tabs') ?>
-<?php echo javascript_include_tag('dFilter','compras/almordcomv2','ajax','tools', 'observe') ?>
+<?php echo javascript_include_tag('dFilter','compras/almordcomv2','ajax','tools', 'observe', 'event.simulate') ?>
 <?php echo object_input_hidden_tag($caordcom, 'getId') ?>
   <?php $value = object_input_hidden_tag($caordcom, 'getStaord', array (
   'control_name' => 'caordcom[staord]',
@@ -48,6 +48,7 @@
 <input id="codigo_presupuestario_sin_disponibilidad" name="codigo_presupuestario_sin_disponibilidad" type="hidden">
 <script language="JavaScript" type="text/javascript">
     entrar();
+    noActualizarInputs = true;
 </script>
 <table width="100%">
   <tr>
@@ -55,8 +56,9 @@
   </tr>
 </table>
 
-<fieldset id="sf_fieldset_none" class="">
-<legend><?php echo __('Datos de la Orden')?></legend>
+<fieldset id="sf_fieldset_datos_de_la_orden" class="">
+<h2><?php echo __('Datos de la Orden') ?></h2>
+
 <div class="form-row">
 <table>
  <tr>
@@ -70,6 +72,7 @@
 'maxlength' => 8,
 'control_name' => 'caordcom[ordcom]',
 'onBlur'  => "javascript:event.keyCode=13; enter(event,this.value);",
+'tabindex' => 100,
 )); echo $value ? $value : '&nbsp;' ?>
 <div class="sf_admin_edit_help"><?php echo __('Máximo 8 caracteres') ?></div>
 </div>
@@ -92,6 +95,7 @@
   'control_name' => 'caordcom[fecord]',
   'date_format' => 'dd/MM/yyyy',
   'onkeyup' => "javascript: mascara(this,'/',patron,true)",
+  'tabindex' => 101,
   'onBlur'=> remote_function(array(
         'url'      => 'almordcomv2/ajax',
         'complete' => 'AjaxJSON(request, json), Mostrar_mensaje_periodo()',
@@ -110,7 +114,7 @@
 <?php echo label_for('caordcom[tipmon]', __($labels['caordcom{tipmon}']), 'class="required" ') ?>
 <div class="content<?php if ($sf_request->hasError('caordcom{tipmon}')): ?> form-error<?php endif; ?>">
 <?php if ($sf_request->hasError('caordcom{tipmon}')): ?> <?php echo form_error('caordcom{tipmon}', array('class' => 'form-error-msg')) ?>
-<?php endif; ?> <?php echo select_tag('caordcom[tipmon]', objects_for_select(TsdesmonPeer::doSelect(new Criteria()),'getCodmon','getNommon',$var,'include_custom=Seleccione')) ?>
+<?php endif; ?> <?php echo select_tag('caordcom[tipmon]', objects_for_select(TsdesmonPeer::doSelect(new Criteria()),'getCodmon','getNommon',$var,'include_custom=Seleccione'), array('tabindex' => 102,)) ?>
 <div class="sf_admin_edit_help"><?php echo __('Escoja un Tipo de Moneda') ?></div></div>
   </th>
  </tr>
@@ -127,6 +131,7 @@
   'size' => 6,
   'maxlength' => 4,
   'control_name' => 'caordcom[doccom]',
+  'tabindex' => 103,
   'onBlur'=> remote_function(array(
               'url' => 'almordcomv2/ajax',
               'condition' => "$('caordcom_doccom').value != '' && $('id').value == ''",
@@ -142,6 +147,7 @@
 <?php $value = object_input_tag($caordcom, 'getNomext', array (
 'size' => 60,
 'control_name' => 'caordcom[nomext]',
+'readonly' => true,
 )); echo $value ? $value : '&nbsp;' ?>
 <div class="sf_admin_edit_help"><?php echo __('Máximo 4 caracteres') ?></div></div>
 <br>
@@ -153,8 +159,8 @@
   <?php endif; ?>
 
 <?php if($caordcom->getRefprc()=='S') $val = true; else $val=false; ?>
-    <?php echo "Si ".radiobutton_tag('caordcom[refprc]', 'S',  $val, array('id'=>'caordcom_refprc_s' , 'onClick'=> "$('div_solicitud').show();")); ?>&nbsp;
-  <?php echo "No ".radiobutton_tag('caordcom[refprc]', 'N', !$val, array('id'=>'caordcom_refprc_n', 'onClick'=> "$('div_solicitud').hide();")) ?>
+    <?php echo "Si ".radiobutton_tag('caordcom[refprc]', 'S',  $val, array('id'=>'caordcom_refprc_s' , 'onClick'=> "$('div_solicitud').show();", 'tabindex' => 104,)); ?>&nbsp;
+  <?php echo "No ".radiobutton_tag('caordcom[refprc]', 'N', !$val, array('id'=>'caordcom_refprc_n', 'onClick'=> "$('div_solicitud').hide();",'tabindex' => 104,)) ?>
 
 <div class="sf_admin_edit_help"><?php echo __('Seleccione una Opción') ?></div>
     </div>
@@ -172,6 +178,7 @@ echo input_tag('caordcom[refsol]', $caordcom->getRefsol(), array (
  'size' => 9,
  'maxlength' => 8,
  'control_name' => 'caordcom[refsol]',
+ 'tabindex' => 105,
  'onBlur'=> remote_function(array(
           'update'   => 'grid',
           'script' => true,
@@ -211,6 +218,7 @@ echo input_tag('caordcom[refsol]', $caordcom->getRefsol(), array (
   'size' => 16,
   'maxlength' => 15,
   'control_name' => 'caordcom[rifpro]',
+  'tabindex' => 106,
   'onBlur'=> remote_function(array(
             //  'update'   => 'div_recargo',
           'script' => true,
@@ -241,6 +249,7 @@ echo input_tag('caordcom[refsol]', $caordcom->getRefsol(), array (
   'control_name' => 'caordcom[desord]',
   'maxlength'=> 1000,
   'onkeyup' => "javascript:return ismaxlength(this)",
+  'tabindex' => 107,
 )); echo $value ? $value : '&nbsp;' ?>
 <div class="sf_admin_edit_help"><?php echo __('Introduzca una Descripción Valida') ?></div></div>
 
@@ -252,7 +261,7 @@ echo input_tag('caordcom[refsol]', $caordcom->getRefsol(), array (
 <div class="content<?php if ($sf_request->hasError('caordcom{tipord}')): ?> form-error<?php endif; ?>">
 <?php if ($sf_request->hasError('caordcom{tipord}')): ?> <?php echo form_error('caordcom{tipord}', array('class' => 'form-error-msg')) ?>
 <?php endif; ?>
-<?php echo select_tag('caordcom[tipord]', options_for_select($listatipocompra,$caordcom->getTipord(),'include_custom=Seleccione'),array('onChange' => 'actualizar_grid_dependientes()'));?>
+<?php echo select_tag('caordcom[tipord]', options_for_select($listatipocompra,$caordcom->getTipord(),'include_custom=Seleccione'),array('onChange' => 'actualizar_grid_dependientes()',   'tabindex' => 108,));?>
 <div class="sf_admin_edit_help"><?php echo __('Seleccione una Opción') ?></div>  </div>
 </div>
 
@@ -332,122 +341,19 @@ else
 <br>
 
 <div id="div_fechas_entregas" class="form-row" style="display:none">
-<?php echo grid_tag_v2($obj_fechas);?>
+<?php //echo grid_tag_v2($obj_fechas);?>
 </div>
 
 </div>
 </fieldset>
 <br>
-<?php tabMainJS("tp1","tabPane1", "tabPage1", 'Detalle');?>
-<fieldset>
-<div class="form-row">
 
-<div id="recargos" style="display:none">
-<fieldset id="sf_fieldset_none" class="">
-<div class="form-row">
-<?
- echo input_hidden_tag('totartsinrec', '0');
- echo input_hidden_tag('actualfila', '0');
-?>
-<div id="grid_recargo">
-<?
-echo grid_tag_v2($obj_recargos);
-?>
-</div>
-<div align="center">
-<table>
-<tr>
-<th>
-<?php echo label_for('',__('Total') , 'class="required" Style="width:40px"') ?>
-<?php echo input_tag('totrecar','0,00', 'size=14 class=grid_txtright readonly=true') ?>
-
-</th>
-<th>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</th>
-<th>
-  <div align="right">
-    <?php if ($caordcom->getOrdcom()==''){ ?>
-      <?php echo link_to_function(image_tag('/images/salir.gif'), "salvarmontorecargos()")?>
-    <?php } else if ($caordcom->getOrdcom()!='' && $caordcom->getCompro()=='N') {?>
-    	<?php echo link_to_function(image_tag('/images/salir.gif'), "salvarmontorecargos()")?>
-    	<?php }else {?>
-      <?php echo link_to_function(image_tag('/images/salir.gif'), "$('recargos').hide();")?>
-    <?php }?>
-  </div>
-</th>
-</tr>
-</table>
-</div>
-
-
-</div>
+<fieldset id="sf_fieldset_detalle" class="">
+<h2><?php echo __('Detalle') ?></h2>
+  <?php echo include_partial('detalle', array('caordcom' => $caordcom, 'obj'=>$obj, 'labels' => $labels, 'obj_recargos' => $obj_recargos)); ?>
 </fieldset>
-</div>
 
-<? if ($caordcom->getOrdcom()=='' || ($caordcom->getOrdcom()!='' && $caordcom->getCompro()=='N')) { ?>
-<div align="left" id="botonesmarcar">
-
-<table>
-<tr>
-  <fieldset> <legend><?php echo __('Aplicar recargo en lote a articulos seleccionados') ?></legend>
-    <th>
-      <input type="button" name="Submit" value="Marcar" onClick="marcarTodo();"/>
-    </th>
-    <th>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    </th>
-    <th>
-      <input type="button" name="Submit" value="Desmarcar" onClick="desmarcarTodo();"/>
-    </th>
-  </fieldset>
-</tr>
-</table>
-</div>
-<?php } else {?>
-<div align="left" id="botonesmarcar">
-</div>
-  <?php } ?>
-<div id="grid">
-<?php echo grid_tag_v2($obj);?>
-</div>
-<table>
-    <tr>
-    <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-      <th><?php echo label_for('Totales', __('TOTALES'), 'class="required" ') ?></th>
-      <th>&nbsp;&nbsp;</th>
-      <th>
-      <?php echo label_for('caordcom[totrecargo]', __($labels['caordcom{totrecargo}']), 'class="required"') ?>
-		<div class="content<?php if ($sf_request->hasError('caordcom{totrecargo}')): ?> form-error<?php endif; ?>">
-		<?php if ($sf_request->hasError('caordcom{totrecargo}')): ?> <?php echo form_error('caordcom{totrecargo}', array('class' => 'form-error-msg')) ?>
-		<?php endif; ?>
-
-      <?php $value = object_input_tag($caordcom, array('getTotrecargo',true), array (
-    'size' => 15,
-    'readonly' => true,
-    'class' => 'grid_txtright',
-    'control_name' => 'caordcom[totrecargo]',
-  )); echo $value ? $value : '&nbsp;' ?></th>
-      <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-      <th>
-        <?php echo label_for('caordcom[totorden]', __($labels['caordcom{totorden}']), 'class="required"') ?>
-		<div class="content<?php if ($sf_request->hasError('caordcom{totorden}')): ?> form-error<?php endif; ?>">
-		<?php if ($sf_request->hasError('caordcom{totorden}')): ?> <?php echo form_error('caordcom{totorden}', array('class' => 'form-error-msg')) ?>
-		<?php endif; ?>
-
-       <?php $value = object_input_tag($caordcom, array('getTotorden',true), array (
-    'size' => 15,
-    'readonly' => true,
-    'class' => 'grid_txtright',
-    'control_name' => 'caordcom[totorden]',
-  )); echo $value ? $value : '&nbsp;' ?></th>
-   </tr>
-  </table>
-<div id="div_recargo">
-</div>
-</div>
-</fieldset>
-<?php tabPageOpenClose("tp1", "tabPage2", 'Condiciones de Pago/Proyecto');?>
+<?php tabMainJS("tp1","tabPane1", "tabPage1", 'Condiciones de Pago/Proyecto');?>
 <fieldset><legend><?php echo __('Condición de Pago') ?></legend>
 <div class="form-row">
 <?php echo label_for('caordcom[codconpag]', __($labels['caordcom{codconpag}']), 'class="required"') ?>
@@ -587,14 +493,22 @@ echo grid_tag_v2($obj_recargos);
 <?php tabPageOpenClose("tp1", "tabPage4", 'Resumen');?>
 <fieldset>
 <div class="form-row">
-<?php //echo grid_tag_v2($obj_resumen);?>
+  <?php if(!$caordcom->getId() ||  $aprobacion=='S') : ?>
+    <?php echo button_to_function('Generar Resumen', "generarResumen()"); ?>
+  <?php endif; ?>
+  <br>  <br>
+  <?php echo include_partial('resumen', array('obj_resumen' => $obj_resumen)); ?>
 </div>
 </fieldset>
 
 <?php tabPageOpenClose("tp1", "tabPage5", 'Entregas');?>
 <fieldset>
 <div class="form-row">
-<?php echo grid_tag_v2($obj_entregas);?>
+  <?php if(!$caordcom->getId() ||  $aprobacion=='S') : ?>
+    <?php echo button_to_function('Generar Entregas', "generarEntregas()"); ?>
+  <?php endif; ?>
+  <br>  <br>  
+  <?php echo include_partial('entregas', array('obj_entregas' => $obj_entregas)); ?>
 </div>
 </fieldset>
 
@@ -895,11 +809,22 @@ echo grid_tag_v2($obj_recargos);
 <?php tabPageOpenClose("tp1", "tabPage10", 'Resumen por Partida Presupuestaria');?>
 <fieldset>
 <div class="form-row">
-<?php //echo grid_tag_v2($obj_respartidas);?>
+  <?php if(!$caordcom->getId() || $aprobacion=='S') : ?>
+    <?php echo button_to_function('Generar Resumen', "generarResumenPartidas()"); ?>
+  <?php endif; ?>
+  <br>  <br>
+  <?php echo include_partial('resumenpartidas', array('obj_respartidas' => $obj_respartidas)); ?>
 </div>
 </fieldset>
 
-<?php if ($caordcom->getManorddon()=='S') tabPageOpenClose("tp1", "tabPage11", 'Datos del Beneficiario de la Donación');?>
+<?php tabPageOpenClose("tp1", "tabPage11", 'Forma de Entrega o Despacho de la Orden');?>
+<fieldset>
+<div class="form-row">
+  <?php echo include_partial('despachos', array('obj_formas' => $obj_formas)); ?>
+</div>
+</fieldset>
+
+<?php if ($caordcom->getManorddon()=='S') tabPageOpenClose("tp1", "tabPage12", 'Datos del Beneficiario de la Donación');?>
 <div id="datbendon" style="display:none">
 <fieldset>
 <div class="form-row">

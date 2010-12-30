@@ -1746,6 +1746,7 @@ class Orden_compra
         //self::Grabar_grid_entregas($caordcom,$grid_detalle_entrega_objetos);//grabo en el grid entrega
         self::grabarDistribucionRgo($caordcom,$grid_detalle_orden_arreglos);
         self::grabarRecargo($caordcom);
+        return true;
         }else  { $caordcom_mod->save(); }
 
       }

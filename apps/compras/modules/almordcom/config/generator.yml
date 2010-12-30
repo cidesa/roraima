@@ -63,7 +63,7 @@ generator:
       display:        [=ordcom, fecord, desord, codpro, nompro, monord]
       fields:
         codpro:      { name : Código de la Contratistas}
-      filters:        [ordcom, desord, fecord, staord, codpro, codcen]
+      filters:        [ordcom, desord, fecord, staord, _codpro, codcen]
       sort:            ordcom
       object_actions:
         _edit:        ~
