@@ -3441,6 +3441,27 @@ class Orden_compra
     }
   }
 
+  public static function VerificarDuplicidadArticulosDetalleOrden($grid_detalle_detallado, $codart){
+
+
+    foreach($grid_detalle_detallado as $det){
+      $count = 0;
+      foreach ($grid_detalle_detallado as $detdet){
+        if($det['codart']==$detdet['codart'] && $det['codart']==$detdet['codart']){
+          $count++;
+          $codart = $det['codart'];
+        }
+      }
+
+      if($count>1) return false;
+
+    }
+    return true;
+
+
+  }
+
+
 
 
 }// fin

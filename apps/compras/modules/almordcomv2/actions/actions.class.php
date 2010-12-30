@@ -30,11 +30,14 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
     $this->updateCaordcomFromRequest();
 
     if ($this->getRequest()->getMethod() == sfRequest::POST) {
-      if ($this->getRequestParameter('id') == "") {
+      //if ($this->getRequestParameter('id') == "") {
         $grid_detalle = Herramientas::CargarDatosGridv2($this, $this->obj, true); //0
         $grid_entregas = Herramientas::CargarDatosGridv2($this, $this->obj_entregas, true); //0
         $grid_formas_entregas = Herramientas::CargarDatosGridv2($this, $this->obj_formas); //0
         $grid_detalle_detallado = $grid_detalle[0];
+
+        $c= new Criteria();
+        $cadefart_search = CadefartPeer::doSelectOne($c);
 
         $grid_resumen = Herramientas::CargarDatosGridv2($this, $this->obj_resumen, true); //0
         // Validacion del nro de la orden de compra
@@ -53,7 +56,7 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
           $numord = 'OC' . substr($numord, 2, 6);
         }
 
-        if (Herramientas::getX_vacio('ordcom', 'caordcom', 'ordcom', $numord) != '') {
+        if (Herramientas::getX_vacio('ordcom', 'caordcom', 'ordcom', $numord) != '' && !($cadefart_search->getComasopre()=='S') and !($cadefart_search->getComreqapr()=='S')) {
           $this->coderror1 = 102;
           $this->caordcom->setOrdcom($numord);
           return false;
@@ -135,12 +138,20 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
           return false;
         }
 
+        $codart='';
+        if(!Orden_compra::VerificarDuplicidadArticulosDetalleOrden($grid_detalle_detallado, &$codart)){
+          $this->coderror1 = 2101;
+          $this->codart = $codart;
+          return false;
+        }
+
         Orden_compra::armarArregloTotalesRecargo($this->caordcom, $grid_detalle_detallado, &$grid_recargos_detalle);
         $i = 0;
         $hay_disponibilidad = false;
         $verificardisponibilidad = $this->caordcom->AfectaDisponibilidad();
 
-        if ($verificardisponibilidad) {
+
+        if ($verificardisponibilidad && !($cadefart_search->getComasopre()=='S') and !($cadefart_search->getComreqapr()=='S')) {
 
           while ($i < count($grid_detalle[0])) {
             $hay_disponibilidad = true;
@@ -184,15 +195,16 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
           }
         }
 
-        return true;
-      } else {
+      // return true;
+      //} else {
         if (Herramientas::getX_vacio('ordcom', 'caordcom', 'staord', $this->caordcom->getOrdcom()) == 'N') {
           $this->coderror1 = 159;
           return false;
         } else {
           return true;
         }
-      }
+      //}
+      return true;
     }else
       return false;
   }
@@ -222,6 +234,8 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
         $err = Herramientas::obtenerMensajeError($this->coderror1);
         if ($this->coderror1 == 118)
           $this->getRequest()->setError('', $err . '  ->  ' . $this->codigo_presupuestario);
+        if ($this->coderror1 == 2101)
+          $this->getRequest()->setError('', $err . '  ->  ' . $this->codart);
         else
           $this->getRequest()->setError('', $err);
       }
@@ -3278,10 +3292,39 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
 
       if (!$encontrado) {
         if ($cicloA[15] != '')
-          $articulos[] = array('id' => '9', 'codpar' => $cicloA[15], 'totart' => H::toFloat($cicloA[12]), 'totarti' => H::toFloat($cicloA[10]), 'recargo' => 'N');
+          $articulos[] = array('id' => '9', 'codpar' => $cicloA[15], 'totart' => (H::toFloat($cicloA[9])-H::toFloat($cicloA[10])), 'totarti' => H::toFloat($cicloA[11]), 'recargo' => 'N');
       }else {
-        $articulos[$indice]['totart'] += H::toFloat($cicloA[12]);
-        $articulos[$indice]['totarti'] += H::toFloat($cicloA[10]);
+        $articulos[$indice]['totart'] += (H::toFloat($cicloA[9])-H::toFloat($cicloA[10]));
+        $articulos[$indice]['totarti'] += H::toFloat($cicloA[11]);
+      }
+    }
+
+
+    foreach ($grida as $cicloA) {
+      $encontrado = false;
+
+      $recarg = explode('_',$cicloA[17]);
+      if(count($recarg)>1) $recarg[5] = substr ($recarg[5], 0, -1);
+
+      foreach ($articulos as $i => $cicloR) {
+
+        if(count($recarg)>1){
+          if ($recarg[5] != '' && $recarg[5] == $cicloR['codpar']) {
+            $encontrado = true;
+            $indice = $i;
+          }
+        }
+
+      }
+
+      if (!$encontrado) {
+        if(count($recarg)>1)
+          if ($recarg[5] != '')
+            $articulos[] = array('id' => '9', 'codpar' => $recarg[5], 'totart' => H::toFloat($cicloA[11]), 'totarti' => H::toFloat($cicloA[11]), 'recargo' => 'S');
+      }else {
+        $articulos[$indice]['totart'] += H::toFloat($cicloA[11]);
+        $articulos[$indice]['totarti'] += H::toFloat($cicloA[11]);
+        $articulos[$indice]['recargo'] = 'S';
       }
     }
 
@@ -3358,14 +3401,14 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
           $caresordcom = new Caresordcom();
           $caresordcom->setCodart($cicloA['codart']);
           $caresordcom->setDesres($cicloA['desart']);
-          $caresordcom->setCodartpro($cicloA['codartpro']);
-          $caresordcom->setCanord($cicloA['canord']);
+          $caresordcom->setCodartpro($cicloA['codcat']);
+          $caresordcom->setCanord(isset($cicloA['canord']) ? $cicloA['canord'] : $cicloA['canreq']);
           $caresordcom->setCanaju($cicloA['canaju']);
           $caresordcom->setCanrec($cicloA['canrec']);
           $caresordcom->setCantot($cicloA['cantot']);
-          $caresordcom->setCosto($cicloA['costo']);
-          $caresordcom->setRgoart($cicloA['rgoart']);
-          $caresordcom->setTotart($cicloA['totart']);
+          $caresordcom->setCosto(isset ($cicloA['costo']) ? $cicloA['costo'] : $cicloA['preart']);
+          $caresordcom->setRgoart(isset ($cicloA['rgoart']) ? $cicloA['rgoart'] : $cicloA['monrgo']);
+          $caresordcom->setTotart(isset ($cicloA['totart']) ? $cicloA['totart'] : $cicloA['montot']);
 
           $grid_detalle_resumen_arreglos[] = $caresordcom->toArray(BasePeer::TYPE_FIELDNAME);
           $grid_detalle_resumen_objetos[] = $caresordcom;
