@@ -300,6 +300,9 @@
 2100:
   cod: 2100
   msj: No se puede eliminar la Requisición debido a que existe un despacho (compra o servicio)
+2101:
+  cod: 2101
+  msj: Existen artículos repetidos con la misma categoria
 ################### NOMINA ####################
 4400:
   cod: 4400
