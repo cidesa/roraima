@@ -1224,7 +1224,7 @@ public static function CargarDatosGrid(&$form,$obj,$arreglo = false)
     return $json .= '["","",""]]';
   }
 
-  public static function grid_to_json($arra = array(), $grid='a')
+  public static function grid_to_json($arra = array(), $grid='a', $extra='')
   {
     $json = '[';
     foreach($arra as $key0 => $value0){
@@ -1233,7 +1233,7 @@ public static function CargarDatosGrid(&$form,$obj,$arreglo = false)
         $json .= '["'.$grid.'x_'.$key0.'_'.($key1+1).'","'.$value1.'",""], ';
       }
     }
-    return $json .= '["","",""]]';
+    return $json .= '["","",""]'.$extra.']';
   }
 
   public static function array_to_json($arra = array())
