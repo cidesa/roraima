@@ -62,6 +62,7 @@ class Columna
   private $anchogrid='900';
   private $valida='';
   private $cc='';
+  private $onchange=false;
 
   /**
    * Estable el nombre de la cabecera de la columna
@@ -362,6 +363,17 @@ class Columna
 
   }
 
+  /**
+   * Establece si el ajax se ejecutara por el onchange en vez del onblur
+   *
+   * @param $val string con el valor por defecto
+   * @return void
+   */
+  public function setAjaxonchange($val){
+
+    $this->onchange = $val;
+
+  }
 
   /**
    * Constructor de la columna
@@ -709,6 +721,15 @@ class Columna
    */
   public function getCombosclase(){ // $campos
     return $this->cc;
+  }
+
+    /**
+   * Obtiene el valor que identifica si el ajax es por el onblur o por onchange
+   *
+   * @return bool
+   */
+  public function getAjaxonchange(){ // $campos
+    return $this->onchange;
   }
 
 }

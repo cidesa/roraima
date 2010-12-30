@@ -29,11 +29,11 @@
 
   Ajax.Responders.register({
     onCreate: function() {
-      if($('cargando') && Ajax.activeRequestCount > 0)
-      Effect.Appear('cargando',{duration: 0.25, queue: 'end'});
+      //if($('cargando') && Ajax.activeRequestCount > 0)
+      //Effect.Appear('cargando',{duration: 0.25, queue: 'end'});
     },
     onComplete: function() {
-      OcultarCargando()
+      //OcultarCargando()
     },
 
   });
@@ -80,7 +80,7 @@
       }//if($(json[i][0]))
      } // else if (json[i][0]=="javascript")
     }//for
-    OcultarCargando();
+    //OcultarCargando();
   }
 
   function AjaxJSONv2(request, json)
@@ -92,7 +92,7 @@
         $(json[i][0]).value=json[i][1];
       }
     }
-    OcultarCargando();
+    //OcultarCargando();
   }
 
   function toAjax(indiceAjax,accion,valor,funcion,params)
