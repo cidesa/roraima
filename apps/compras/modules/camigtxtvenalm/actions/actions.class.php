@@ -135,4 +135,112 @@ class camigtxtvenalmActions extends autocamigtxtvenalmActions
   }
 
 
+  public function executeAuto(){
+
+    // Se busca la direccion base de las carpetas con la informacion a migrar
+    $dirbase = sfConfig::get('app_dirbasemig');
+    $nomarch = sfConfig::get('app_nomarchbase');
+    $email = sfConfig::get('app_emailinfo');
+    $urlbaseinfo = sfConfig::get('app_urlbaseinfo');
+
+    $log = array();
+    $caderr = array();
+    $archlog = date('dmyhi');
+
+    // Notas:
+    // - El usuario www-data debe tener acceso de lectura y escritura en la carpeta $dirbase.
+    // - Se buscaran en la direccion base por cada carpeta nombrada.
+    // - La fecha de venta de la tabla Camigtxtven, será la fecha de creación del archivo a migrar.
+    // - Se debe configurar en el archivo database.yml (configuration) el esquema correcto al cual se conectara la funcionalidad
+    // - 
+
+    if($dirbase && $nomarch && file_exists($dirbase)){
+
+      if(mkdir($dirbase.'/test')){
+
+        rmdir($dirbase.'/test');
+        $c = new Criteria();
+        $almacenes = CadefalmPeer::doSelect($c);
+        foreach($almacenes as $alm){
+
+          $log[] = "";
+          $log[] = "Procesando el almacen ".$alm->getCodalm().'-'.$alm->getNomalm();
+          $codalm = $alm->getCodalm();
+          $dir = $dirbase.'/'.$codalm;
+          if(file_exists($dir)){
+            $archmig = $dir.'/'.$nomarch;
+            if(file_exists($archmig)){
+              $camigtxtven = new Camigtxtven();
+
+              $camigtxtven->setCodalm($codalm);
+              $camigtxtven->setFecven(filemtime($archmig));
+
+              // Renombramos el archivo procesado
+              copy($archmig, $dir.'/'.$archlog.'.csv');
+
+              $error=Compras::MigrarVentas($camigtxtven,&$cadena, $caderr, $archmig);
+
+              if($error==-1){
+                if(count($caderr)>0){
+                  // Migrado con errores
+                  // Se genera el archivo .log
+                  $log[] = "Migrado con errores. Verifique el Archivo  <a href='$urlbaseinfo/$codalm/$archlog.log'> $archlog.log </a> para mayor detalle";
+                  $this->generarLog($dir.'/'.$archlog.'.log',$caderr);
+
+                }else{
+                  // Migrado Sin Errores. No se genera el archivo .log
+                  $log[] = "Migrado sin errores.";
+                }
+              }else{
+                // No se pudo migrar
+                // Se genera el archivo .log
+                $log[] = "Error al Migrar un articulo. Verifique el Archivo <a href='$urlbaseinfo/$codalm/$archlog.log'> $archlog.log </a> para mayor detalle";
+                $this->generarLog($dir.'/'.$archlog.'.log', array(H::obtenerMensajeError($error)));
+              }
+
+              $log[] = "Almacen $codalm procesado.";
+
+            }else {
+              $log[] = "No existe información en la carpeta $dir que migrar para el almacen $codalm.";
+              $log[] = "Almacen $codalm procesado.";
+            }
+          }else{
+            $log[] = "No existe información en la carpeta $dir que migrar para el almacen $codalm.";
+            $log[] = "Almacen $codalm procesado.";
+            mkdir ($dir);
+          }
+        }
+      }else{
+        $log[] = 'El usuario de apache (www-data) no tiene permiso para escribir en la carpeta base ('.$dirbase.')';
+        $log[] = 'Se aborto el proceso de migración.';
+      }
+
+
+    }
+    else{
+      $log[] = 'No se encontro la dirección/nombre base para procesar la migración';
+      $log[] = 'Se aborto el proceso de migración.';
+    }
+
+    // Creamos el archivo .html
+    
+    // Se verifica la carpeta de informenes
+    if(!file_exists($dirbase.'/informes')) mkdir ($dirbase.'/informes');
+
+    $respuesta = $this->getResponse();
+
+    $respuesta->setHttpHeader('Content-Disposition', 'attachment; filename='.$archlog.'.html');
+
+    $this->log = $log;
+
+  }
+
+  private function generarLog($archivo, $info){
+    $ddf = fopen($archivo,'a');
+    foreach ($info as $inf){
+      fwrite($ddf,$inf);
+    }
+    fclose($ddf);
+  }
+
 }

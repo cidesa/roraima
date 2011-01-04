@@ -3262,8 +3262,9 @@ propel:
       size: 14
       scale: 2
     iva:
-      type: VARCHAR
-      size: 1
+      type: NUMERIC
+      size: 14
+      scale: 2
     precio:
       type: NUMERIC
       size: 14

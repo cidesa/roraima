@@ -117,10 +117,11 @@ abstract class BaseCamigtxtven extends BaseObject  implements Persistent {
 
   }
   
-  public function getIva()
+  public function getIva($val=false)
   {
 
-    return trim($this->iva);
+    if($val) return number_format($this->iva,2,',','.');
+    else return $this->iva;
 
   }
   
@@ -244,7 +245,7 @@ abstract class BaseCamigtxtven extends BaseObject  implements Persistent {
 	{
 
     if ($this->iva !== $v) {
-        $this->iva = $v;
+        $this->iva = Herramientas::toFloat($v);
         $this->modifiedColumns[] = CamigtxtvenPeer::IVA;
       }
   
@@ -318,7 +319,7 @@ abstract class BaseCamigtxtven extends BaseObject  implements Persistent {
 
       $this->subtot = $rs->getFloat($startcol + 5);
 
-      $this->iva = $rs->getString($startcol + 6);
+      $this->iva = $rs->getFloat($startcol + 6);
 
       $this->precio = $rs->getFloat($startcol + 7);
 

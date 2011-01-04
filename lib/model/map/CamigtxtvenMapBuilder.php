@@ -34,7 +34,7 @@ class CamigtxtvenMapBuilder {
 
 		$tMap->setPrimaryKeyMethodInfo('camigtxtven_SEQ');
 
-		$tMap->addColumn('CODALM', 'Codalm', 'string', CreoleTypes::VARCHAR, true, 6);
+		$tMap->addColumn('CODALM', 'Codalm', 'string', CreoleTypes::VARCHAR, true, 20);
 
 		$tMap->addColumn('FECVEN', 'Fecven', 'int', CreoleTypes::DATE, false, null);
 
@@ -46,7 +46,7 @@ class CamigtxtvenMapBuilder {
 
 		$tMap->addColumn('SUBTOT', 'Subtot', 'double', CreoleTypes::NUMERIC, false, 14);
 
-		$tMap->addColumn('IVA', 'Iva', 'string', CreoleTypes::VARCHAR, false, 1);
+		$tMap->addColumn('IVA', 'Iva', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addColumn('PRECIO', 'Precio', 'double', CreoleTypes::NUMERIC, false, 14);
 
