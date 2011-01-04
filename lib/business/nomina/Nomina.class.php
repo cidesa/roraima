@@ -7337,6 +7337,14 @@ class Nomina {
           $antiguedad = $antiguedad + $Iano;
         }
 
+        $sql = "SELECT A.ANTAPVAC,A.DIAVAC FROM NPBONOCONT A, NPASIEMPCONT B WHERE A.CODTIPCON=B.CODTIPCON AND B.CODEMP='" . $codemp . "' AND '" . $anohasta . "' BETWEEN TO_CHAR(ANOVIG,'YYYY') AND TO_CHAR(ANOVIGHAS,'YYYY') and '".$antiguedad."'::numeric between DESDE and HASTA";
+
+        if(Herramientas :: BuscarDatos($sql, & $per2))
+        {
+          $arreglo[$i]["diasbonovac"] = $per2[0]['diavac'];
+        }
+
+
         $c1 = new Criteria();
         $c1->add(NpasicarempPeer :: CODEMP, $codemp);
         $c1->addJoin(NpasicarempPeer :: CODEMP, NpasiempcontPeer :: CODEMP);
