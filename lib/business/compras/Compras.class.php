@@ -2872,15 +2872,17 @@ class Compras {
     }
   }
 
-  public static function MigrarVentas($clase,&$cadena)
+  public static function MigrarVentas($clase,&$cadena, &$caderr=array(), $urlauto='')
   {
     $err=-1;
     $cadena="";
     $arreglo=array();
-    $file = fopen(sfConfig::get('sf_upload_dir')."//".$clase->getArchivo(),  "r");
+    if($urlauto) $url = $urlauto;
+    else $url = sfConfig::get('sf_upload_dir')."//".$clase->getArchivo();
+    $file = fopen($url,  "r");
     if ($file)
     {
-        if('SI'=='SI')
+        if(true)
         {
             $delimiter=";";
         $cont=0;
@@ -2906,7 +2908,7 @@ class Compras {
                 {
                     $codalm=$clase->getCodalm();
                     $fecven=$clase->getFecven();
-                    $auxline=split(";",$line);
+                    $auxline=explode(";",$line);
                     array_key_exists($col_codqpr-1,$auxline) ? $codqpr=$auxline[$col_codqpr-1] : '';
                     array_key_exists($col_nomqpr-1,$auxline) ? $nomqpr=$auxline[$col_nomqpr-1] : '';
                     array_key_exists($col_canqpr-1,$auxline) ? $canqpr=H::FormatoNum($auxline[$col_canqpr-1]) : '';
@@ -2939,7 +2941,10 @@ class Compras {
                        $arreglo[$rr]["coding"]=H::getX_vacio('codart', 'caregart', 'coding', $resul->getCodart());
                        $rr++;
                    }else {
-                     strlen($codqpr)==13 ? $cadena.=$codqpr."-" : '';
+                     if(strlen($codqpr)==13){
+                       $cadena.=$codqpr."-";
+                       $caderr[] = $line;
+                     } else $cadena = '';
                    }
                 }
                 $cont++;
@@ -2955,7 +2960,7 @@ class Compras {
                     {
                       self::guardarAsientos($arreglo[$i]["coding"],$arreglo[$i]["subtot"],$arreglo[$i]["iva"],&$arrasientos,&$pos);
                     }else {
-                        return 557;
+                      return 557;
                     }
                 }
                 $i++;
@@ -3050,10 +3055,10 @@ class Compras {
         }
         }
     }else {
-        $err=541;
+      $err=541;
     }
     fclose ($file);
-    unlink(sfConfig::get('sf_upload_dir')."//".$clase->getArchivo());
+    unlink($url);
 
     return $err;
   }
@@ -3112,7 +3117,7 @@ class Compras {
        $camigtxtven->setCodalm($arreglo[$i]["codalm"]);
        $camigtxtven->setFecven($arreglo[$i]["fecven"]);
        $camigtxtven->setCodart($arreglo[$i]["codart"]);
-       $camigtxtven->setDesart($arreglo[$i]["desart"]);
+       $camigtxtven->setDesart(utf8_encode($arreglo[$i]["desart"]));
        $camigtxtven->setFecmig($arreglo[$i]["fecmig"]);
        $camigtxtven->setCantidad($arreglo[$i]["cantidad"]);
        $camigtxtven->setSubtot($arreglo[$i]["subtot"]);
