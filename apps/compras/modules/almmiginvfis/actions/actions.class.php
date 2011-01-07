@@ -283,6 +283,9 @@ class almmiginvfisActions extends autoalmmiginvfisActions
         foreach($grid[0] as $reg)
         {
             $c = new Criteria();
+            $auxfec = split("/",$reg['fecinv']);
+            $fechainv = date('Y-m-d',strtotime($auxfec[2].'-'.$auxfec[1].'-'.$auxfec[0]));
+            $c->add(CainvfisPeer::FECINV,$fechainv);
             $c->add(CainvfisPeer::CODART,$reg['codart']);
             $c->add(CainvfisPeer::CODALM,$reg['codalm']);
             $c->add(CainvfisPeer::CODUBI,$reg['codubi']);
