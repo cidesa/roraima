@@ -1,0 +1,18 @@
+indexSuccess:
+  http_metas:
+    content-type: text/html
+
+  metas:
+    title:        Cidesa - Login
+    robots:       index, follow
+    description:  Modulo de Autenticacion de Cidesa
+    keywords:     cidesa, autenticacion, login
+    language:     es_VE
+
+  stylesheets:    [siga]
+
+  javascripts:    [ ]
+  
+  has_layout:     on
+  layout:         layout
+
