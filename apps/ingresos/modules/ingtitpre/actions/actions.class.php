@@ -147,7 +147,8 @@ class ingtitpreActions extends autoingtitpreActions
   
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -160,7 +161,16 @@ class ingtitpreActions extends autoingtitpreActions
     // Por ejemplo:
 
     if($this->getRequest()->getMethod() == sfRequest::POST){
+      $this->cideftit = $this->getCideftitOrCreate();
+      $this->updateCideftitFromRequest();
 
+
+      $mascarapresupuesto = Herramientas::getX('Codemp','Cidefniv','Forpre','001');
+      $longpre=strlen($mascarapresupuesto);
+      if (strlen($this->getRequestParameter('cideftit[codpre]'))!=$longpre  && $this->getRequestParameter('cideftit[codcta]')!="")
+      {
+         $this->coderr=581;
+      }
 
       if($this->coderr!=-1){
         return false;
