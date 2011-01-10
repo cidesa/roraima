@@ -558,6 +558,9 @@
 580:
   cod: 580
   msj:  La cantidad a registrar para la salida del artículo debe ser mayor que cero...
+581:
+  cod: 581
+  msj:  Solo debe asociar Cuenta Contable cuando el Código Presupuestario sea de Último Nivel.
 3:
   cod: 3
   msj: La contraseña es diferente.
