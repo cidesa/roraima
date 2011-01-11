@@ -36,6 +36,7 @@ compras:
       Definición de Ubicaciones:                              AlmDefUbi
       Ramos de Artículos:                                     AlmRamArt
       Registro de Artículos y+o Servicios:                    AlmRegArt
+      Registro de Artículos y+o Servicios (Version 2.0):      AlmRegArtv2
       Registro de Recargos:                                   AlmRegRgo
      # Asociación  de Retenciones a Servicios:                 AlmRetSer
       Configuración de Unidad Solicitante:                    almconfuni
