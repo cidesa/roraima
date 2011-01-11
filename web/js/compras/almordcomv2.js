@@ -1210,8 +1210,8 @@ function desmarcarTodo()
     }
     fil++;
   }//while (fil<150)
-  actualizarsaldos();
-  actualizar_grid_dependientes();
+  ActualizarSaldosGrid('a', ArrTotales_a);
+  
 }
 
 function desmarcarfila(id)
@@ -1250,8 +1250,7 @@ function desmarcarfila(id)
       $(recargo).value=format(monrgotot.toFixed(2),'.',',','.');
       montottot=monuni-mondto;
       $(total).value=format(montottot.toFixed(2),'.',',','.');
-      actualizarsaldos();
-      actualizar_grid_dependientes();
+      ActualizarSaldosGrid('a', ArrTotales_a)
     }//if ($(codart).value!="")
   }else
   {
@@ -1358,7 +1357,7 @@ function recalcularecargos(e,id)
 
       }//  if ($(haydist).value!="")
     }//if ($(id1).checked==true)
-    actualizarsaldos();
+    ActualizarSaldosGrid('a', ArrTotales_a);
   }
 }
 
@@ -1598,8 +1597,7 @@ function aplicarAnteriores(ida)
         $(id).checked=true;
       }//if ($(codart).value!="")
 
-      actualizarsaldos();
-      actualizar_grid_dependientes();
+      ActualizarSaldosGrid('a', ArrTotales_a);
     }// if (distrib!="")
     else
     {
@@ -1632,7 +1630,7 @@ function limpiardatos()
       f++;
     }
 
-    actualizarsaldos();
+    ActualizarSaldosGrid('a', ArrTotales_a);
   }
 
 

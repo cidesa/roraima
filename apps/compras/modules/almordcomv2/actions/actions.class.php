@@ -851,10 +851,9 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
     $col1->setTipo(Columna::CHECK);
     $col1->setNombreCampo('check');
     $col1->setEsGrabable(true);
-    $col1->setHTML(' ');
+    $col1->setHTML(' onClick="desmarcarfila(this.id)" ');
     if ($tipo == 'P')
       $col1->setOculta(true);
-    $col1->setJScript('onClick="desmarcarfila(this.id)"');
 
     $lonart = strlen($this->mascaraarticulo);
     //$params= array('param1' => $lonart);
@@ -3014,7 +3013,7 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
           $g[3] = $tiprgo;
           $reccal = SolicituddeEgresos::CalcularRecargos($tiprgo, $montorgotab, H::toFloat($this->getRequestParameter('totartsinrec')));
           $reccalformat = $reccal; //number_format($reccal,2,',','.');
-          $g[4] = $reccal;
+          $g[4] = number_format(round($reccal,2),2,',','.');
           $codpar = $recargosreg->getCodpre();
           $g[5] = $codpar;
           if ($tiprgo == 'M') {//Tipo recargo puntual (monto)
@@ -3089,7 +3088,7 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
 
     if ($columna == '5' || $columna == '9' || $columna == '11') {
 
-      $cantxcost = round(H::toFloat($g[4]) * H::toFloat($g[8]));
+      $cantxcost = round(H::toFloat($g[4]) * H::toFloat($g[8]),2);
       $g[9] = H::FormatoMonto($cantxcost);
       $totalgeneral = $cantxcost - H::toFloat($g[10]) + H::toFloat($g[11]);
       $g[12] = H::FormatoMonto($totalgeneral);
@@ -3103,6 +3102,8 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
           $jsonextra = ',["javascript","' . $javascript . '",""]';
         }
       }
+      $g[4] = H::FormatoMonto($g[4]);
+      $g[8] = H::FormatoMonto($g[8]);
     }
 
     if ($columna == '15') {
