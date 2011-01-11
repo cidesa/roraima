@@ -71,4 +71,15 @@ class Bnubica extends BaseBnubica
   	return self::getDesubi();
   }
 
+  public function getCoduniadm()
+  {
+  	return self::getCodubi();
+  }
+
+  public function getDesuniadm()
+  {
+  	return self::getDesubi();
+  }
+
+
 }

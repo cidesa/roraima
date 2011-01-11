@@ -19,4 +19,14 @@ class Cadefcen extends BaseCadefcen
     {
       return Herramientas::getX('CODPAI','Nppais','Nompai',self::getCodpai());
     }
+
+      public function getUnieje()
+      {
+            return self::getCodcen();
+      }
+
+      public function getDesunieje()
+      {
+            return self::getDescen();
+      }
 }
