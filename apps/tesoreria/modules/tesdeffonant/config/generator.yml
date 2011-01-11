@@ -6,22 +6,24 @@ generator:
     fields:
       codfon: { name: Código, params: size=10 maxlength=3}
       desfon: { name: Descripción, params: maxlength=250}
-      unieje:
-        name: Unidad Ejecutora
-        params: maxlength=30
-        catalogo:
-          catalogoweb: Bnubica_Almordcom
-          clase: Bnubica
-          ajax: 0
-          parametros: getprincipal="getUnieje" getsecundario="getDesunieje" campoprincipal="unieje" camposecundario="desunieje" campobase = "id"
-      coduniadm:
-        name: Unidad Administradora
-        params: maxlength=30
-        catalogo:
-          catalogoweb: Tsuniadm_Tesdeffonant
-          clase: Tsuniadm
-          ajax: 0
-          parametros: getprincipal="getCoduniadm" getsecundario="getDesuniadm" campoprincipal="coduniadm" camposecundario="desuniadm" campobase = "id"
+      unieje: { name: Unidad Ejecutora}
+      coduniadm: { name: Unidad Administradora}
+      #unieje:
+      #  name: Unidad Ejecutora
+      #  params: maxlength=30
+       # catalogo:
+        #  catalogoweb: Bnubica_Almordcom
+        #  clase: Bnubica
+         # ajax: 1
+          #parametros: getprincipal="getUnieje" getsecundario="getDesunieje" campoprincipal="unieje" camposecundario="desunieje" campobase = "id"
+     # coduniadm:
+     #   name: Unidad Administradora
+     #   params: maxlength=30
+      #  catalogo:
+       #   catalogoweb: Tsuniadm_Tesdeffonant
+        #  clase: Tsuniadm
+        #  ajax: 2
+         # parametros: getprincipal="getCoduniadm" getsecundario="getDesuniadm" campoprincipal="coduniadm" camposecundario="desuniadm" campobase = "id"
       cedrif:
         name: Responsable
         params: maxlength=15
@@ -80,7 +82,7 @@ generator:
       sort: codfon
     edit:
       title:          Constitución de Fondo en Anticipo
-      display:       [codfon, desfon, unieje, coduniadm, cedrif, codcat, numcue, tipmovsal, tipmovren, monmincon, monmin, monmaxcon, monmax, porrep, numini]
+      display:       [codfon, desfon, _unieje, _coduniadm, cedrif, codcat, numcue, tipmovsal, tipmovren, monmincon, monmin, monmaxcon, monmax, porrep, numini]
       hide:          [longitud]
       actions:
         _list:                 ~

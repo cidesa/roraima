@@ -29,12 +29,12 @@ names:
   tsdeffonant{unieje}:
     required:  Yes
     required_msg: La Unidad Ejecutora  del Fondo en Anticipo no puedo estar en Blanco
-    validators: ExistValidator_unieje
+   # validators: ExistValidator_unieje
 
   tsdeffonant{coduniadm}:
     required:  Yes
     required_msg: La Unidad Administrativa del Fondo en Anticipo no puedo estar en Blanco
-    validators: ExistValidator_coduniadm
+   # validators: ExistValidator_coduniadm
 
   tsdeffonant{cedrif}:
     required:  Yes

@@ -561,6 +561,12 @@
 581:
   cod: 581
   msj:  Solo debe asociar Cuenta Contable cuando el Código Presupuestario sea de Último Nivel.
+582:
+  cod: 582
+  msj:  La Unidad Ejecutora del Fondo en Anticipo no Existe.
+583:
+  cod: 583
+  msj:  La Unidad Administrativa del Fondo en Anticipo no Existe.
 3:
   cod: 3
   msj: La contraseña es diferente.

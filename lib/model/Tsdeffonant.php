@@ -53,11 +53,19 @@ class Tsdeffonant extends BaseTsdeffonant
     }
     public function getDesuniadm()
     {
+       $camcatejeadm=H::getConfApp2('camcatejeadm', 'tesoreria', 'tesdeffonant');
+      if ($camcatejeadm=='S')
+        return Herramientas::getX('codubi','Bnubica','desubi',self::getCoduniadm());
+      else
         return Herramientas::getX('coduniadm','Tsuniadm','desuniadm',self::getCoduniadm());
     }
 
     public function getDesunieje()
     {
+      $camcatejeadm=H::getConfApp2('camcatejeadm', 'tesoreria', 'tesdeffonant');
+      if ($camcatejeadm=='S')
+        return Herramientas::getX('codcen','Cadefcen','descen',self::getUnieje());
+      else
         return Herramientas::getX('codubi','Bnubica','desubi',self::getUnieje());
     }
 

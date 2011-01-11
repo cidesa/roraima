@@ -1939,14 +1939,24 @@ class CatalogoWeb extends BaseCatalogoWeb {
   }
 
   public function Bnubica_Almordcom() {
-    $this->c = new Criteria();
-    $this->c->addAscendingOrderByColumn(BnubicaPeer :: CODUBI);
+    $camcatejeadm=H::getConfApp2('camcatejeadm', 'tesoreria', 'tesdeffonant');
 
-    $this->columnas = array (
-      BnubicaPeer :: CODUBI => 'Código',
-      BnubicaPeer :: DESUBI => 'Descripción',
+		$this->c = new Criteria();
 
-    );
+                if ($camcatejeadm=='S')
+                {
+                  $this->columnas = array (
+                    CadefcenPeer :: CODCEN => 'Código',
+                    CadefcenPeer :: DESCEN => 'Descripción'
+                    );
+                }else {
+                    $this->c->addAscendingOrderByColumn(BnubicaPeer :: CODUBI);
+
+                    $this->columnas = array (
+                            BnubicaPeer :: CODUBI => 'Código',
+                            BnubicaPeer :: DESUBI => 'Descripción',
+                    );
+                }
   }
 
   public function Nphojint_Almordcom() {
@@ -6465,11 +6475,26 @@ public function Catdefcatman_Cattramo($params = '') {
 	}
 
 	public function Tsuniadm_Tesdeffonant() {
+            $camcatejeadm=H::getConfApp2('camcatejeadm', 'tesoreria', 'tesdeffonant');
+
+
+
             $this->c = new Criteria();
-            $this->columnas = array (
+
+            if ($camcatejeadm=='S')
+            {
+              $this->columnas = array (
+			BnubicaPeer :: CODUBI => 'Código',
+			BnubicaPeer :: DESUBI => 'Descripción',
+
+
+		);
+            }else {
+              $this->columnas = array (
                     TsuniadmPeer :: CODUNIADM => 'Código',
                     TsuniadmPeer :: DESUNIADM => 'Descripción'
-            );
+                );
+            }
 	}
         
 	public function Npcargos_Forasoconcar($params = array ()) {
