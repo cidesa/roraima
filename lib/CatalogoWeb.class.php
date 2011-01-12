@@ -268,8 +268,11 @@ class CatalogoWeb extends BaseCatalogoWeb {
          if ($filretpro=='S' && count($proveedor)>0) {
 			$provee=$proveedor[0];
 	        $codpro=H::getX_vacio('RIFPRO','Caprovee','CODPRO',$provee);
+                if ($codpro!="")
+                {
 			$this->sql = "optipret.codtip in (select codret from caproret where codpro='".$codpro."')";
 			$this->c->add(OptipretPeer :: CODTIP, $this->sql, Criteria :: CUSTOM);
+                }
          }
 
     $this->c->addAscendingOrderByColumn(OptipretPeer::CODTIP);
